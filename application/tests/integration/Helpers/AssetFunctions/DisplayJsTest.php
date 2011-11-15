@@ -110,4 +110,23 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
 
         $this->_assertScriptsIncluded($this->_getJsOutput(), $scripts);
     }
+
+    public function testQueueJsString()
+    {
+        $script = 'Inline JS script.';
+        queue_js_string($script);
+
+        $matcher = array(
+            'tag' => 'script',
+            'attributes' => array(
+                'type' => 'text/javascript'
+            )
+        );
+
+        $output = $this->_getJsOutput(false);
+
+        $this->assertTag($matcher, $output,
+            "Script tag for inline script not found.");
+        $this->assertContains($script, $output);
+    }
 }

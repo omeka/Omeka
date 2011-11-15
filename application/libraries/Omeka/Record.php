@@ -626,8 +626,8 @@ abstract class Omeka_Record implements ArrayAccess
         $query = "DELETE FROM $table WHERE {$table}.id = ? LIMIT 1";
         $this->getDb()->delete($table, 'id = '  . (int) $this->id);
         
-        $this->id = null;
         $this->runCallbacks('afterDelete');
+        $this->id = null;
     }
     
     /**
@@ -887,12 +887,26 @@ abstract class Omeka_Record implements ArrayAccess
     protected function fieldIsUnique($field, $value = null)
     {
         $value = $value ? $value : $this->$field;
+
         if ($value === null) {
             throw new Omeka_Record_Exception("Cannot check uniqueness of NULL value.");
         }
-        $validator = new Zend_Validate_Db_NoRecordExists($this->getTable()->getTableName(),
-            $field, array('field' => $field, 'value' => $this->$field), 
-            $this->getDb()->getAdapter());
-        return $validator->isValid($value ? $value : $this->$field);    
+
+        $validatorOptions = array(
+            'table'   => $this->getTable()->getTableName(),
+            'field'   => $field,
+            'adapter' => $this->getDb()->getAdapter()
+        );
+
+        // If this record already exists, exclude it from the validation
+        if ($this->exists()) {
+            $validatorOptions['exclude'] = array(
+                'field' => 'id',
+                'value' => $this->id
+            );
+        }
+
+        $validator = new Zend_Validate_Db_NoRecordExists($validatorOptions);
+        return $validator->isValid($value);
     }
 }

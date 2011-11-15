@@ -125,7 +125,17 @@ class Omeka_Controller_Plugin_Debug extends Zend_Controller_Plugin_Abstract
         $html = "<h2>Request Data</h2>\n\n<div>Request URI: <em>$requestUri</em>"
               . "</div>\n<div>Params:";
               
-        $html .= '<pre>' . print_r($request->getParams(), true) . '</pre>';
+        $reqParams = $request->getParams();
+        // Rendering the whole error_handler ArrayObject is annoying and causes
+        // errors when request params are later used to assemble routes.
+        if (array_key_exists('error_handler', $reqParams)) {
+            $errHandler = $reqParams['error_handler'];
+            $reqParams['exception'] = 
+                (string)$errHandler['exception'];
+            $reqParams['exception_type'] = $errHandler['type'];
+            unset($reqParams['error_handler']);
+        }
+        $html .= '<pre>' . print_r($reqParams, true) . '</pre>';
         
         $html .= "</div>";
         
@@ -150,7 +160,7 @@ class Omeka_Controller_Plugin_Debug extends Zend_Controller_Plugin_Abstract
         $html .= "<table><tr><th>Route Name</th><th>Matches Current Request</th><th>Assembled with current params</th></tr>";
         foreach ($routes as $routeName => $route) {
             try {
-                $assembledRoute = $route->assemble($request->getParams(), true, true);
+                $assembledRoute = $route->assemble($reqParams, true, true);
             } catch (Exception $e) {
                 $assembledRoute = "Could not assemble: " . $e->getMessage();
             }
