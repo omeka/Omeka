@@ -17,7 +17,7 @@
  * @subpackage PHP
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Class.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Class.php 24457 2011-09-11 13:34:44Z padraic $
  */
 
 /**
@@ -156,7 +156,7 @@ class Zend_CodeGenerator_Php_Class extends Zend_CodeGenerator_Php_Abstract
 
         if (is_array($docblock)) {
             $docblock = new Zend_CodeGenerator_Php_Docblock($docblock);
-        } elseif (!$docblock instanceof Zend_CodeGenerator_Php_Docblock) {
+        } elseif ((!is_null($docblock)) && (!$docblock instanceof Zend_CodeGenerator_Php_Docblock)) {
             require_once 'Zend/CodeGenerator/Php/Exception.php';
             throw new Zend_CodeGenerator_Php_Exception('setDocblock() is expecting either a string, array or an instance of Zend_CodeGenerator_Php_Docblock');
         }

@@ -17,7 +17,7 @@
  * @subpackage Client
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Client.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Client.php 24274 2011-07-28 09:25:31Z mcleod@spaceweb.nl $
  */
 
 
@@ -98,7 +98,7 @@ class Zend_Rest_Client extends Zend_Service_Abstract
      * @throws Zend_Rest_Client_Exception
      * @return void
      */
-    final private function _prepareRest($path)
+    private function _prepareRest($path)
     {
         // Get the URI object and configure it
         if (!$this->_uri instanceof Zend_Uri_Http) {
@@ -129,7 +129,7 @@ class Zend_Rest_Client extends Zend_Service_Abstract
      * @throws Zend_Http_Client_Exception
      * @return Zend_Http_Response
      */
-    final public function restGet($path, array $query = null)
+    public function restGet($path, array $query = null)
     {
         $this->_prepareRest($path);
         $client = self::getHttpClient();
@@ -167,7 +167,7 @@ class Zend_Rest_Client extends Zend_Service_Abstract
      * @throws Zend_Http_Client_Exception
      * @return Zend_Http_Response
      */
-    final public function restPost($path, $data = null)
+    public function restPost($path, $data = null)
     {
         $this->_prepareRest($path);
         return $this->_performPost('POST', $data);
@@ -181,7 +181,7 @@ class Zend_Rest_Client extends Zend_Service_Abstract
      * @throws Zend_Http_Client_Exception
      * @return Zend_Http_Response
      */
-    final public function restPut($path, $data = null)
+    public function restPut($path, $data = null)
     {
         $this->_prepareRest($path);
         return $this->_performPost('PUT', $data);
@@ -194,10 +194,10 @@ class Zend_Rest_Client extends Zend_Service_Abstract
      * @throws Zend_Http_Client_Exception
      * @return Zend_Http_Response
      */
-    final public function restDelete($path)
+    public function restDelete($path, $data = null)
     {
         $this->_prepareRest($path);
-        return self::getHttpClient()->request('DELETE');
+        return $this->_performPost('DELETE', $data);
     }
 
     /**

@@ -16,7 +16,7 @@
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Param.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Param.php 24405 2011-08-26 17:33:02Z ralph $
  */
 
 /** Zend_Reflection_Docblock_Tag */
@@ -49,7 +49,7 @@ class Zend_Reflection_Docblock_Tag_Param extends Zend_Reflection_Docblock_Tag
     {
         $matches = array();
 
-        if (!preg_match('#^@(\w+)\s+([\w|\\\]+)(?:\s+(\$\S+))?(?:\s+(.*))?#s', $tagDocblockLine, $matches)) {
+        if (!preg_match('#^@(\w+)\s+([^\s]+)(?:\s+(\$\S+))?(?:\s+(.*))?#s', $tagDocblockLine, $matches)) {
             require_once 'Zend/Reflection/Exception.php';
             throw new Zend_Reflection_Exception('Provided docblock line is does not contain a valid tag');
         }

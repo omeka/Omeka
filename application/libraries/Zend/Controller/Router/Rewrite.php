@@ -16,7 +16,7 @@
  * @package    Zend_Controller
  * @subpackage Router
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id: Rewrite.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Rewrite.php 24182 2011-07-03 13:43:05Z adamlundrigan $
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -450,6 +450,11 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
      */
     public function assemble($userParams, $name = null, $reset = false, $encode = true)
     {
+        if (!is_array($userParams)) {
+            require_once 'Zend/Controller/Router/Exception.php';
+            throw new Zend_Controller_Router_Exception('userParams must be an array');
+        }
+        
         if ($name == null) {
             try {
                 $name = $this->getCurrentRouteName();
@@ -465,7 +470,7 @@ class Zend_Controller_Router_Rewrite extends Zend_Controller_Router_Abstract
         $url   = $route->assemble($params, $reset, $encode);
 
         if (!preg_match('|^[a-z]+://|', $url)) {
-            $url = rtrim($this->getFrontController()->getBaseUrl(), '/') . '/' . $url;
+            $url = rtrim($this->getFrontController()->getBaseUrl(), self::URI_DELIMITER) . self::URI_DELIMITER . $url;
         }
 
         return $url;

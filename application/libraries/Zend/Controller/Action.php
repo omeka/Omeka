@@ -16,7 +16,7 @@
  * @package    Zend_Controller
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Action.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Action.php 24253 2011-07-22 00:15:05Z adamlundrigan $
  */
 
 /**
@@ -505,14 +505,18 @@ abstract class Zend_Controller_Action implements Zend_Controller_Action_Interfac
                 $this->_classMethods = get_class_methods($this);
             }
 
-            // preDispatch() didn't change the action, so we can continue
-            if ($this->getInvokeArg('useCaseSensitiveActions') || in_array($action, $this->_classMethods)) {
-                if ($this->getInvokeArg('useCaseSensitiveActions')) {
-                    trigger_error('Using case sensitive actions without word separators is deprecated; please do not rely on this "feature"');
+            // If pre-dispatch hooks introduced a redirect then stop dispatch
+            // @see ZF-7496
+            if (!($this->getResponse()->isRedirect())) {
+                // preDispatch() didn't change the action, so we can continue
+                if ($this->getInvokeArg('useCaseSensitiveActions') || in_array($action, $this->_classMethods)) {
+                    if ($this->getInvokeArg('useCaseSensitiveActions')) {
+                        trigger_error('Using case sensitive actions without word separators is deprecated; please do not rely on this "feature"');
+                    }
+                    $this->$action();
+                } else {
+                    $this->__call($action, array());
                 }
-                $this->$action();
-            } else {
-                $this->__call($action, array());
             }
             $this->postDispatch();
         }

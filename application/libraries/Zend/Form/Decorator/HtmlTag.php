@@ -45,7 +45,7 @@ require_once 'Zend/Form/Decorator/Abstract.php';
  * @subpackage Decorator
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: HtmlTag.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: HtmlTag.php 24428 2011-09-02 14:10:03Z matthew $
  */
 class Zend_Form_Decorator_HtmlTag extends Zend_Form_Decorator_Abstract
 {
@@ -85,8 +85,9 @@ class Zend_Form_Decorator_HtmlTag extends Zend_Form_Decorator_Abstract
             $key = htmlspecialchars($key, ENT_COMPAT, $enc);
             if (is_array($val)) {
                 if (array_key_exists('callback', $val)
-                    && is_callable($val['callback'])) {
-                    $val = $val['callback']($this);
+                    && is_callable($val['callback'])
+                ) {
+                    $val = call_user_func($val['callback'], $this);
                 } else {
                     $val = implode(' ', $val);
                 }

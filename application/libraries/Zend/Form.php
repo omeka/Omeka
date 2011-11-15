@@ -28,7 +28,7 @@ require_once 'Zend/Validate/Interface.php';
  * @package    Zend_Form
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Form.php 23950 2011-05-03 03:46:42Z ralph $
+ * @version    $Id: Form.php 24156 2011-06-27 14:57:44Z ezimuel $
  */
 class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
 {
@@ -1641,12 +1641,8 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      */
     public function addSubForms(array $subForms)
     {
-        foreach ($subForms as $key => $spec) {
-            $name = null;
-            if (!is_numeric($key)) {
-                $name = $key;
-            }
-
+        foreach ($subForms as $key => $spec) {          
+            $name= (string) $key;
             if ($spec instanceof Zend_Form) {
                 $this->addSubForm($spec, $name);
                 continue;

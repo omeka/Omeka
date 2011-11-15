@@ -16,7 +16,7 @@
  * @package    Zend_Test
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: ControllerTestCase.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: ControllerTestCase.php 24213 2011-07-08 21:16:45Z rdohms $
  */
 
 /** @see PHPUnit_Runner_Version */
@@ -1120,7 +1120,7 @@ abstract class Zend_Test_PHPUnit_ControllerTestCase extends PHPUnit_Framework_Te
     /**
      * Retrieve test case request object
      *
-     * @return Zend_Controller_Request_Abstract
+     * @return Zend_Controller_Request_HttpTestCase
      */
     public function getRequest()
     {
@@ -1134,7 +1134,7 @@ abstract class Zend_Test_PHPUnit_ControllerTestCase extends PHPUnit_Framework_Te
     /**
      * Retrieve test case response object
      *
-     * @return Zend_Controller_Response_Abstract
+     * @return Zend_Controller_Response_HttpTestCase
      */
     public function getResponse()
     {

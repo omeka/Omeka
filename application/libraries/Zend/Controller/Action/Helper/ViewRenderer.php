@@ -17,7 +17,7 @@
  * @subpackage Zend_Controller_Action_Helper
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: ViewRenderer.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: ViewRenderer.php 24282 2011-07-28 18:59:26Z matthew $
  */
 
 /**
@@ -626,6 +626,9 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
         } elseif (null !== $action) {
             $vars['action'] = $action;
         }
+        
+        $replacePattern = array('/[^a-z0-9]+$/i', '/^[^a-z0-9]+/i');
+        $vars['action'] = preg_replace($replacePattern, '', $vars['action']);
 
         $inflector = $this->getInflector();
         if ($this->getNoController() || $this->getNeverController()) {

@@ -17,7 +17,7 @@
  * @subpackage Zend_Controller_Action_Helper
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: AjaxContext.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: AjaxContext.php 24131 2011-06-09 08:37:20Z freak $
  */
 
 /**
@@ -68,7 +68,10 @@ class Zend_Controller_Action_Helper_AjaxContext extends Zend_Controller_Action_H
     {
         $this->_currentContext = null;
 
-        if (!$this->getRequest()->isXmlHttpRequest()) {
+        $request = $this->getRequest();
+        if (!method_exists($request, 'isXmlHttpRequest') ||
+            !$this->getRequest()->isXmlHttpRequest())
+        {
             return;
         }
 

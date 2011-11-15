@@ -17,7 +17,7 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: View.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: View.php 24068 2011-05-28 19:56:54Z ralph $
  */
 
 /**
@@ -90,7 +90,7 @@ class Zend_Tool_Project_Provider_View extends Zend_Tool_Project_Provider_Abstrac
      * @param string $controllerName
      * @param string $actionNameOrSimpleName
      */
-    public function create($controllerName, $actionNameOrSimpleName)
+    public function create($controllerName, $actionNameOrSimpleName, $module = null)
     {
 
         if ($controllerName == '' || $actionNameOrSimpleName == '') {
@@ -100,7 +100,7 @@ class Zend_Tool_Project_Provider_View extends Zend_Tool_Project_Provider_Abstrac
 
         $profile = $this->_loadProfile();
 
-        $view = self::createResource($profile, $actionNameOrSimpleName, $controllerName);
+        $view = self::createResource($profile, $actionNameOrSimpleName, $controllerName, $module);
 
         if ($this->_registry->getRequest()->isPretend()) {
             $this->_registry->getResponse(

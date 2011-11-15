@@ -17,7 +17,7 @@
  * @subpackage Element
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Captcha.php 23871 2011-04-23 22:40:16Z ramon $
+ * @version    $Id: Captcha.php 24294 2011-07-28 21:34:50Z matthew $
  */
 
 /** @see Zend_Form_Element_Xhtml */
@@ -178,17 +178,24 @@ class Zend_Form_Element_Captcha extends Zend_Form_Element_Xhtml
         $captcha    = $this->getCaptcha();
         $captcha->setName($this->getFullyQualifiedName());
 
-        $decorators = $this->getDecorators();
+        if (!$this->loadDefaultDecoratorsIsDisabled()) {
+            $decorators = $this->getDecorators();
+            $decorator  = $captcha->getDecorator();
+            $key        = get_class($this->_getDecorator($decorator, null));
 
-        $decorator  = $captcha->getDecorator();
-        if (!empty($decorator)) {
-            array_unshift($decorators, $decorator);
+            if (!empty($decorator) && !array_key_exists($key, $decorators)) {
+                array_unshift($decorators, $decorator);
+            }
+
+            $decorator = array('Captcha', array('captcha' => $captcha));
+            $key       = get_class($this->_getDecorator($decorator[0], $decorator[1]));
+
+            if ($captcha instanceof Zend_Captcha_Word && !array_key_exists($key, $decorators)) {
+                array_unshift($decorators, $decorator);
+            }
+
+            $this->setDecorators($decorators);
         }
-
-        $decorator = array('Captcha', array('captcha' => $captcha));
-        array_unshift($decorators, $decorator);
-
-        $this->setDecorators($decorators);
 
         $this->setValue($this->getCaptcha()->generate());
 

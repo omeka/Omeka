@@ -32,7 +32,7 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
  * @subpackage Plugins
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: ErrorHandler.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: ErrorHandler.php 24241 2011-07-14 08:09:41Z bate $
  */
 class Zend_Controller_Plugin_ErrorHandler extends Zend_Controller_Plugin_Abstract
 {
@@ -201,6 +201,17 @@ class Zend_Controller_Plugin_ErrorHandler extends Zend_Controller_Plugin_Abstrac
         $this->_handleError($request);
     }
 
+    /**
+     * Pre dispatch hook -- check for exceptions and dispatch error handler if
+     * necessary
+     *
+     * @param Zend_Controller_Request_Abstract $request
+     */
+    public function preDispatch(Zend_Controller_Request_Abstract $request)
+    {
+        $this->_handleError($request);
+    }
+	
     /**
      * Post dispatch hook -- check for exceptions and dispatch error handler if
      * necessary

@@ -17,8 +17,13 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: ModelFile.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: ModelFile.php 24060 2011-05-28 17:18:04Z adamlundrigan $
  */
+
+/**
+ * Zend_Tool_Project_Context_Zf_AbstractClassFile
+ */
+require_once 'Zend/Tool/Project/Context/Zf/AbstractClassFile.php';
 
 /**
  * This class is the front most class for utilizing Zend_Tool_Project

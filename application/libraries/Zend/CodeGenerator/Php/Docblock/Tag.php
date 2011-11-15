@@ -17,23 +17,13 @@
  * @subpackage PHP
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Tag.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Tag.php 24099 2011-05-31 16:29:21Z adamlundrigan $
  */
 
 /**
- * @see Zend_CodeGenerator_Abstract
+ * @see Zend_CodeGenerator_Php_Abstract
  */
 require_once 'Zend/CodeGenerator/Php/Abstract.php';
-
-/**
- * @see Zend_CodeGenerator_Php_Docblock_Tag_Param
- */
-require_once 'Zend/CodeGenerator/Php/Docblock/Tag/Param.php';
-
-/**
- * @see Zend_CodeGenerator_Php_Docblock_Tag_Return
- */
-require_once 'Zend/CodeGenerator/Php/Docblock/Tag/Return.php';
 
 /**
  * @category   Zend

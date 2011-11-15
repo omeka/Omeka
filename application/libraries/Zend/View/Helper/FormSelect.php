@@ -17,7 +17,7 @@
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: FormSelect.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: FormSelect.php 24158 2011-06-27 15:31:54Z ezimuel $
  */
 
 
@@ -123,8 +123,11 @@ class Zend_View_Helper_FormSelect extends Zend_View_Helper_FormElement
                 if (null !== $translator) {
                     $opt_value = $translator->translate($opt_value);
                 }
+                $opt_id = ' id="' . $this->view->escape($id) . '-optgroup-'
+                        . $this->view->escape($opt_value) . '"';
                 $list[] = '<optgroup'
                         . $opt_disable
+                        . $opt_id
                         . ' label="' . $this->view->escape($opt_value) .'">';
                 foreach ($opt_label as $val => $lab) {
                     $list[] = $this->_build($val, $lab, $value, $disable);

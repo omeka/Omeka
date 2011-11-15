@@ -16,7 +16,7 @@
  * @package    Zend_Amf
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Server.php 23897 2011-04-30 02:07:57Z yoshida@zend.co.jp $
+ * @version    $Id: Server.php 24206 2011-07-06 13:52:02Z matthew $
  */
 
 /** @see Zend_Server_Interface */
@@ -142,12 +142,18 @@ class Zend_Amf_Server implements Zend_Server_Interface
     /**
      * Set authentication adapter
      *
+     * If the authentication adapter implements a "getAcl()" method, populate 
+     * the ACL of this instance with it (if none exists already).
+     *
      * @param  Zend_Amf_Auth_Abstract $auth
      * @return Zend_Amf_Server
      */
     public function setAuth(Zend_Amf_Auth_Abstract $auth)
     {
         $this->_auth = $auth;
+        if ((null === $this->getAcl()) && method_exists($auth, 'getAcl')) {
+            $this->setAcl($auth->getAcl());
+        }
         return $this;
     }
    /**
@@ -494,67 +500,60 @@ class Zend_Amf_Server implements Zend_Server_Interface
         // set response encoding
         $response->setObjectEncoding($objectEncoding);
 
-        $responseBody = $request->getAmfBodies();
-
-        $handleAuth = false;
-        if ($this->_auth) {
-            $headers = $request->getAmfHeaders();
-            if (isset($headers[Zend_Amf_Constants::CREDENTIALS_HEADER]) &&
-                isset($headers[Zend_Amf_Constants::CREDENTIALS_HEADER]->userid)) {
-                $handleAuth = true;
+        // Authenticate, if we have credential headers
+        $error   = false;
+        $headers = $request->getAmfHeaders();
+        if (isset($headers[Zend_Amf_Constants::CREDENTIALS_HEADER]) 
+            && isset($headers[Zend_Amf_Constants::CREDENTIALS_HEADER]->userid)
+            && isset($headers[Zend_Amf_Constants::CREDENTIALS_HEADER]->password)
+        ) {
+            try {
+                if ($this->_handleAuth(
+                        $headers[Zend_Amf_Constants::CREDENTIALS_HEADER]->userid,
+                        $headers[Zend_Amf_Constants::CREDENTIALS_HEADER]->password
+                )) {
+                    // use RequestPersistentHeader to clear credentials
+                    $response->addAmfHeader(
+                        new Zend_Amf_Value_MessageHeader(
+                            Zend_Amf_Constants::PERSISTENT_HEADER,
+                            false,
+                            new Zend_Amf_Value_MessageHeader(
+                                Zend_Amf_Constants::CREDENTIALS_HEADER,
+                                false, null
+                            )
+                        )
+                    );
+                }
+            } catch (Exception $e) {
+                // Error during authentication; report it
+                $error = $this->_errorMessage(
+                    $objectEncoding, 
+                    '', 
+                    $e->getMessage(),
+                    $e->getTraceAsString(),
+                    $e->getCode(),
+                    $e->getLine()
+                );
+                $responseType = Zend_AMF_Constants::STATUS_METHOD;
             }
         }
 
         // Iterate through each of the service calls in the AMF request
-        foreach($responseBody as $body)
+        foreach($request->getAmfBodies() as $body)
         {
+            if ($error) {
+                // Error during authentication; just report it and be done
+                $responseURI = $body->getResponseURI() . $responseType;
+                $newBody     = new Zend_Amf_Value_MessageBody($responseURI, null, $error);
+                $response->addAmfBody($newBody);
+                continue;
+            }
             try {
-                if ($handleAuth) {
-                    $message = '';
-                    if ($this->_handleAuth(
-                        $headers[Zend_Amf_Constants::CREDENTIALS_HEADER]->userid,
-                        $headers[Zend_Amf_Constants::CREDENTIALS_HEADER]->password)) {
-                        // use RequestPersistentHeader to clear credentials
-                        $response->addAmfHeader(
-                            new Zend_Amf_Value_MessageHeader(
-                                Zend_Amf_Constants::PERSISTENT_HEADER,
-                                false,
-                                new Zend_Amf_Value_MessageHeader(
-                                    Zend_Amf_Constants::CREDENTIALS_HEADER,
-                                    false, null)));
-                        $handleAuth = false;
-                    }
-                }
-
-                if ($objectEncoding == Zend_Amf_Constants::AMF0_OBJECT_ENCODING) {
-                    // AMF0 Object Encoding
-                    $targetURI = $body->getTargetURI();
-                    $message = '';
-
-                    // Split the target string into its values.
-                    $source = substr($targetURI, 0, strrpos($targetURI, '.'));
-
-                    if ($source) {
-                        // Break off method name from namespace into source
-                        $method = substr(strrchr($targetURI, '.'), 1);
-                        $return = $this->_dispatch($method, $body->getData(), $source);
-                    } else {
-                        // Just have a method name.
-                        $return = $this->_dispatch($targetURI, $body->getData());
-                    }
-                } else {
-                    // AMF3 read message type
-                    $message = $body->getData();
-                    if ($message instanceof Zend_Amf_Value_Messaging_CommandMessage) {
-                        // async call with command message
-                        $return = $this->_loadCommandMessage($message);
-                    } elseif ($message instanceof Zend_Amf_Value_Messaging_RemotingMessage) {
-                        require_once 'Zend/Amf/Value/Messaging/AcknowledgeMessage.php';
-                        $return = new Zend_Amf_Value_Messaging_AcknowledgeMessage($message);
-                        $return->body = $this->_dispatch($message->operation, $message->body, $message->source);
-                    } else {
-                        // Amf3 message sent with netConnection
+                switch ($objectEncoding) {
+                    case Zend_Amf_Constants::AMF0_OBJECT_ENCODING:
+                        // AMF0 Object Encoding
                         $targetURI = $body->getTargetURI();
+                        $message = '';
 
                         // Split the target string into its values.
                         $source = substr($targetURI, 0, strrpos($targetURI, '.'));
@@ -567,7 +566,35 @@ class Zend_Amf_Server implements Zend_Server_Interface
                             // Just have a method name.
                             $return = $this->_dispatch($targetURI, $body->getData());
                         }
-                    }
+                        break;
+                    case Zend_Amf_Constants::AMF3_OBJECT_ENCODING:
+                    default:
+                        // AMF3 read message type
+                        $message = $body->getData();
+                        if ($message instanceof Zend_Amf_Value_Messaging_CommandMessage) {
+                            // async call with command message
+                            $return = $this->_loadCommandMessage($message);
+                        } elseif ($message instanceof Zend_Amf_Value_Messaging_RemotingMessage) {
+                            require_once 'Zend/Amf/Value/Messaging/AcknowledgeMessage.php';
+                            $return = new Zend_Amf_Value_Messaging_AcknowledgeMessage($message);
+                            $return->body = $this->_dispatch($message->operation, $message->body, $message->source);
+                        } else {
+                            // Amf3 message sent with netConnection
+                            $targetURI = $body->getTargetURI();
+
+                            // Split the target string into its values.
+                            $source = substr($targetURI, 0, strrpos($targetURI, '.'));
+
+                            if ($source) {
+                                // Break off method name from namespace into source
+                                $method = substr(strrchr($targetURI, '.'), 1);
+                                $return = $this->_dispatch($method, $body->getData(), $source);
+                            } else {
+                                // Just have a method name.
+                                $return = $this->_dispatch($targetURI, $body->getData());
+                            }
+                        }
+                        break;
                 }
                 $responseType = Zend_AMF_Constants::RESULT_METHOD;
             } catch (Exception $e) {

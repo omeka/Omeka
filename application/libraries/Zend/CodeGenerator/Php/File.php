@@ -17,7 +17,7 @@
  * @subpackage PHP
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: File.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: File.php 24457 2011-09-11 13:34:44Z padraic $
  */
 
 /**
@@ -394,7 +394,7 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
 
         // if there are markers, put the body into the output
         $body = $this->getBody();
-        if (preg_match('#/\* Zend_CodeGenerator_Php_File-(.*?)Marker:#', $body)) {
+        if (preg_match('#/\* Zend_CodeGenerator_Php_File-(.*?)Marker#', $body)) {
             $output .= $body;
             $body    = '';
         }
@@ -428,6 +428,9 @@ class Zend_CodeGenerator_Php_File extends Zend_CodeGenerator_Php_Abstract
         $classes = $this->getClasses();
         if (!empty($classes)) {
             foreach ($classes as $class) {
+                if($this->getDocblock() == $class->getDocblock()) {
+                    $class->setDocblock(null);
+                }                   
                 $regex = str_replace('?', $class->getName(), self::$_markerClass);
                 $regex = preg_quote($regex, '#');
                 if (preg_match('#'.$regex.'#', $output)) {

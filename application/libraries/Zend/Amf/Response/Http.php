@@ -17,7 +17,7 @@
  * @subpackage Response
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Http.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Http.php 24482 2011-09-29 14:19:21Z matthew $
  */
 
 /** Zend_Amf_Response */
@@ -41,11 +41,33 @@ class Zend_Amf_Response_Http extends Zend_Amf_Response
     public function getResponse()
     {
         if (!headers_sent()) {
-            header('Cache-Control: no-cache, must-revalidate');
+            if ($this->isIeOverSsl()) {
+                header('Cache-Control: cache, must-revalidate');
+                header('Pragma: public');
+            } else {
+                header('Cache-Control: no-cache, must-revalidate');
+                header('Pragma: no-cache');
+            }
             header('Expires: Thu, 19 Nov 1981 08:52:00 GMT');
-            header('Pragma: no-cache');
             header('Content-Type: application/x-amf');
         }
         return parent::getResponse();
+    }
+
+    protected function isIeOverSsl()
+    {
+        $ssl = $_SERVER['HTTPS'];
+        if (!$ssl || ($ssl == 'off')) {
+            // IIS reports "off", whereas other browsers simply don't populate
+            return false;
+        }
+
+        $ua  = $_SERVER['HTTP_USER_AGENT'];
+        if (!preg_match('/; MSIE \d+\.\d+;/', $ua)) {
+            // Not MicroSoft Internet Explorer
+            return false;
+        }
+
+        return true;
     }
 }

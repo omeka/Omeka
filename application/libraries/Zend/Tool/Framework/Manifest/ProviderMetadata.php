@@ -13,23 +13,19 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Amf
- * @subpackage Value
+ * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: ArrayCollection.php 24473 2011-09-26 19:33:55Z matthew $
+ * @version    $Id: ProviderMetadata.php 24331 2011-07-31 14:24:14Z adamlundrigan $
  */
 
 /**
- * Type encapsulating Flex ArrayCollection
- *
- * Corresponds to flex.messaging.io.ArrayCollection
- *
- * @package    Zend_Amf
- * @subpackage Value
+ * @category   Zend
+ * @package    Zend_Tool
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Amf_Value_Messaging_ArrayCollection extends ArrayObject
+class Zend_Tool_Framework_Manifest_ProviderMetadata
 {
+
 }

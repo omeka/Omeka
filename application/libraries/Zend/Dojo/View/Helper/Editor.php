@@ -17,7 +17,7 @@
  * @subpackage View
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Editor.php 23938 2011-05-02 20:13:50Z matthew $
+ * @version    $Id: Editor.php 24191 2011-07-05 15:33:16Z matthew $
  */
 
 /** Zend_Dojo_View_Helper_Dijit */
@@ -71,7 +71,7 @@ class Zend_Dojo_View_Helper_Editor extends Zend_Dojo_View_Helper_Dijit
      * JSON-encoded parameters
      * @var array
      */
-    protected $_jsonParams = array('captureEvents', 'events', 'plugins');
+    protected $_jsonParams = array('captureEvents', 'events', 'plugins', 'extraPlugins');
 
     /**
      * dijit.Editor

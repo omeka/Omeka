@@ -16,7 +16,7 @@
  * @package    Zend_Controller
  * @subpackage Router
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id: Module.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Module.php 24182 2011-07-03 13:43:05Z adamlundrigan $
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -36,11 +36,6 @@ require_once 'Zend/Controller/Router/Route/Abstract.php';
  */
 class Zend_Controller_Router_Route_Module extends Zend_Controller_Router_Route_Abstract
 {
-    /**
-     * URI delimiter
-     */
-    const URI_DELIMITER = '/';
-
     /**
      * Default values for the route (ie. module, controller, action, params)
      * @var array
@@ -237,29 +232,29 @@ class Zend_Controller_Router_Route_Module extends Zend_Controller_Router_Route_A
             if (is_array($value)) {
                 foreach ($value as $arrayValue) {
                     $arrayValue = ($encode) ? urlencode($arrayValue) : $arrayValue;
-                    $url .= '/' . $key;
-                    $url .= '/' . $arrayValue;
+                    $url .= self::URI_DELIMITER . $key;
+                    $url .= self::URI_DELIMITER . $arrayValue;
                 }
             } else {
                 if ($encode) $value = urlencode($value);
-                $url .= '/' . $key;
-                $url .= '/' . $value;
+                $url .= self::URI_DELIMITER . $key;
+                $url .= self::URI_DELIMITER . $value;
             }
         }
 
         if (!empty($url) || $action !== $this->_defaults[$this->_actionKey]) {
             if ($encode) $action = urlencode($action);
-            $url = '/' . $action . $url;
+            $url = self::URI_DELIMITER . $action . $url;
         }
 
         if (!empty($url) || $controller !== $this->_defaults[$this->_controllerKey]) {
             if ($encode) $controller = urlencode($controller);
-            $url = '/' . $controller . $url;
+            $url = self::URI_DELIMITER . $controller . $url;
         }
 
         if (isset($module)) {
             if ($encode) $module = urlencode($module);
-            $url = '/' . $module . $url;
+            $url = self::URI_DELIMITER . $module . $url;
         }
 
         return ltrim($url, self::URI_DELIMITER);

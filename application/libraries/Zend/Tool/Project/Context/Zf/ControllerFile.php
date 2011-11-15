@@ -17,7 +17,7 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: ControllerFile.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: ControllerFile.php 24161 2011-06-28 16:41:59Z adamlundrigan $
  */
 
 /**
@@ -100,7 +100,9 @@ class Zend_Tool_Project_Context_Zf_ControllerFile extends Zend_Tool_Project_Cont
      */
     public function getContents()
     {
-        $className = ($this->_moduleName) ? ucfirst($this->_moduleName) . '_' : '';
+        $filter = new Zend_Filter_Word_DashToCamelCase();
+        
+        $className = ($this->_moduleName) ? $filter->filter(ucfirst($this->_moduleName)) . '_' : '';
         $className .= ucfirst($this->_controllerName) . 'Controller';
 
         $codeGenFile = new Zend_CodeGenerator_Php_File(array(

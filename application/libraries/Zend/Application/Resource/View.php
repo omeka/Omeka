@@ -17,7 +17,7 @@
  * @subpackage Resource
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: View.php 23992 2011-05-04 03:32:01Z ralph $
+ * @version    $Id: View.php 24288 2011-07-28 20:37:43Z matthew $
  */
 
 /**
@@ -52,9 +52,8 @@ class Zend_Application_Resource_View extends Zend_Application_Resource_ResourceA
     {
         $view = $this->getView();
 
-        $viewRenderer = new Zend_Controller_Action_Helper_ViewRenderer();
+        $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
         $viewRenderer->setView($view);
-        Zend_Controller_Action_HelperBroker::addHelper($viewRenderer);
         return $view;
     }
 

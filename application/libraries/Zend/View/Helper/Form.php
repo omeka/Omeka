@@ -16,7 +16,7 @@
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id: Form.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Form.php 24478 2011-09-26 19:52:58Z adamlundrigan $
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -55,16 +55,28 @@ class Zend_View_Helper_Form extends Zend_View_Helper_FormElement
         if (array_key_exists('id', $attribs) && empty($attribs['id'])) {
             unset($attribs['id']);
         }
+        
+        if (!empty($name) && !($this->_isXhtml() && $this->_isStrictDoctype())) {
+            $name = ' name="' . $this->view->escape($name) . '"';
+        } else {
+            $name = '';
+        }
+        
+        if ( array_key_exists('name', $attribs) && empty($attribs['id'])) {
+            unset($attribs['id']);
+        }
 
         $xhtml = '<form'
                . $id
+               . $name
                . $this->_htmlAttribs($attribs)
                . '>';
 
         if (false !== $content) {
-            $xhtml .= $content
-                   .  '</form>';
+            $xhtml .= $content;
         }
+
+        $xhtml .= '</form>';
 
         return $xhtml;
     }

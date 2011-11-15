@@ -17,7 +17,7 @@
  * @subpackage Client
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Client.php 23969 2011-05-03 14:48:31Z ralph $
+ * @version    $Id: Client.php 24159 2011-06-28 12:30:56Z adamlundrigan $
  */
 
 
@@ -294,7 +294,7 @@ class Zend_XmlRpc_Client
             $response = new Zend_XmlRpc_Response();
         }
         $this->_lastResponse = $response;
-        $this->_lastResponse->loadXml($httpResponse->getBody());
+        $this->_lastResponse->loadXml(trim($httpResponse->getBody()));
     }
 
     /**

@@ -17,7 +17,7 @@
  * @subpackage Resource
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Modules.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Modules.php 24227 2011-07-12 19:41:46Z matthew $
  */
 
 /**
@@ -62,6 +62,7 @@ class Zend_Application_Resource_Modules extends Zend_Application_Resource_Resour
      */
     public function init()
     {
+        $bootstraps = array();
         $bootstrap = $this->getBootstrap();
         $bootstrap->bootstrap('FrontController');
         $front = $bootstrap->getResource('FrontController');
@@ -103,12 +104,28 @@ class Zend_Application_Resource_Modules extends Zend_Application_Resource_Resour
                 continue;
             }
 
-            $moduleBootstrap = new $bootstrapClass($bootstrap);
-            $moduleBootstrap->bootstrap();
-            $this->_bootstraps[$module] = $moduleBootstrap;
+            $bootstraps[$module] = $bootstrapClass;
         }
 
-        return $this->_bootstraps;
+        return $this->_bootstraps = $this->bootstrapBootstraps($bootstraps);
+    }
+
+    /*
+     * Bootstraps the bootstraps found. Allows for easy extension.
+     * @param array $bootstraps Array containing the bootstraps to instantiate
+     */
+    protected function bootstrapBootstraps($bootstraps)
+    {
+        $bootstrap = $this->getBootstrap();
+        $out = new ArrayObject(array(), ArrayObject::ARRAY_AS_PROPS);
+
+        foreach($bootstraps as $module => $bootstrapClass) {
+            $moduleBootstrap = new $bootstrapClass($bootstrap);
+            $moduleBootstrap->bootstrap();
+            $out[$module] = $moduleBootstrap;
+        }
+
+        return $out;
     }
 
     /**

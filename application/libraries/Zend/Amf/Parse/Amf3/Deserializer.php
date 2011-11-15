@@ -17,7 +17,7 @@
  * @subpackage Parse_Amf3
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Deserializer.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Deserializer.php 24386 2011-08-15 18:24:49Z padraic $
  */
 
 /** Zend_Amf_Parse_Deserializer */
@@ -225,7 +225,7 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
         $timestamp = floor($this->_stream->readDouble() / 1000);
 
         require_once 'Zend/Date.php';
-        $dateTime  = new Zend_Date((int) $timestamp);
+        $dateTime  = new Zend_Date($timestamp);
         $this->_referenceObjects[] = $dateTime;
         return $dateTime;
     }
@@ -385,6 +385,7 @@ class Zend_Amf_Parse_Amf3_Deserializer extends Zend_Amf_Parse_Deserializer
             }
 
             // Add properties back to the return object.
+            if (!is_array($properties)) $properties = array();
             foreach($properties as $key=>$value) {
                 if($key) {
                     $returnObject->$key = $value;

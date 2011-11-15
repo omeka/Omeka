@@ -16,7 +16,7 @@
  * @package    Zend_Filter
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: StripTags.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: StripTags.php 24278 2011-07-28 18:32:21Z adamlundrigan $
  */
 
 
@@ -319,7 +319,7 @@ class Zend_Filter_StripTags implements Zend_Filter_Interface
         // If there are non-whitespace characters in the attribute string
         if (strlen($tagAttributes)) {
             // Parse iteratively for well-formed attributes
-            preg_match_all('/(\w+)\s*=\s*(?:(")(.*?)"|(\')(.*?)\')/s', $tagAttributes, $matches);
+            preg_match_all('/([\w-]+)\s*=\s*(?:(")(.*?)"|(\')(.*?)\')/s', $tagAttributes, $matches);
 
             // Initialize valid attribute accumulator
             $tagAttributes = '';

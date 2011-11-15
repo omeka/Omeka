@@ -17,7 +17,7 @@
  * @subpackage Framework
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Controller.php 23818 2011-03-25 21:11:23Z ralph $
+ * @version    $Id: Controller.php 24466 2011-09-25 02:19:39Z jaguarnet7 $
  */
 
 /**
@@ -70,7 +70,7 @@ class Zend_Tool_Project_Provider_Controller
      * @param Zend_Tool_Project_Profile $profile
      * @param string $controllerName
      * @param string $moduleName
-     * @return Zend_Tool_Project_Profile_Resource
+     * @return boolean
      */
     public static function hasResource(Zend_Tool_Project_Profile $profile, $controllerName, $moduleName = null)
     {
@@ -79,7 +79,7 @@ class Zend_Tool_Project_Provider_Controller
         }
 
         $controllersDirectory = self::_getControllersDirectoryResource($profile, $moduleName);
-        return (($controllersDirectory->search(array('controllerFile' => array('controllerName' => $controllerName)))) instanceof Zend_Tool_Project_Profile_Resource);
+        return ($controllersDirectory &&($controllersDirectory->search(array('controllerFile' => array('controllerName' => $controllerName)))) instanceof Zend_Tool_Project_Profile_Resource);
     }
 
     /**
@@ -128,6 +128,9 @@ class Zend_Tool_Project_Provider_Controller
                 );
         }
         
+        $originalName = $name;
+        $name = ucfirst($name);
+        
         if (self::hasResource($this->_loadedProfile, $name, $module)) {
             throw new Zend_Tool_Project_Provider_Exception('This project already has a controller named ' . $name);
         }
@@ -136,9 +139,6 @@ class Zend_Tool_Project_Provider_Controller
         if (preg_match('#[_-]#', $name)) {
             throw new Zend_Tool_Project_Provider_Exception('Controller names should be camel cased.');
         }
-
-        $originalName = $name;
-        $name = ucfirst($name);
 
         try {
             $controllerResource = self::createResource($this->_loadedProfile, $name, $module);

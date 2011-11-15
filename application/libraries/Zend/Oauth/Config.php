@@ -16,7 +16,7 @@
  * @package    Zend_Oauth
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Config.php 23983 2011-05-03 19:27:35Z ralph $
+ * @version    $Id: Config.php 24364 2011-08-13 14:45:17Z padraic $
  */
 
 /** Zend_Oauth */
@@ -390,7 +390,7 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
      */
     public function setCallbackUrl($url)
     {
-        if (!Zend_Uri::check($url)) {
+        if (!Zend_Uri::check($url) && $url !== 'oob') {
             require_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception(
                 '\'' . $url . '\' is not a valid URI'

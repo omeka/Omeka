@@ -17,7 +17,7 @@
  * @subpackage Router
  * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Abstract.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Abstract.php 24182 2011-07-03 13:43:05Z adamlundrigan $
  */
 
 
@@ -36,6 +36,11 @@ require_once 'Zend/Controller/Router/Interface.php';
  */
 abstract class Zend_Controller_Router_Abstract implements Zend_Controller_Router_Interface
 {
+    /**
+     * URI delimiter
+     */
+    const URI_DELIMITER = '/';
+    
     /**
      * Front controller instance
      * @var Zend_Controller_Front
