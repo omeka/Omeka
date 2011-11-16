@@ -499,6 +499,7 @@ function select_data_types($props = array(), $value = null, $label = null)
 function _select_from_table($tableClass, $props = array(), $value = null, $label = null, $searchParams = array())
 {
     $options = get_db()->getTable($tableClass)->findPairsForSelectForm($searchParams);
+    $options = apply_filters(Inflector::underscore($tableClass) . '_select_options', $options);
     return select($props, $options, $value, $label);
 }
 
