@@ -63,6 +63,7 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
     {
         try {
             $client = $this->_getHttpClient($source);
+            $client->setHeaders('Accept-encoding', 'identity');
             $client->setStream($destination);
             $response = $client->request('GET');
         } catch (Zend_Http_Client_Exception $e) {
