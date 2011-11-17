@@ -29,7 +29,8 @@ $application->getBootstrap()->registerPluginResource('Zend_Application_Resource_
 // instead of Zend_Application_Resource_FrontController).
 $plugins = $application->getBootstrap()->getPluginResources();
 
-$application->getBootstrap()->bootstrap(array('FrontController', 'Layout'));
+$application->getBootstrap()->bootstrap();
+
 if (APPLICATION_ENV === 'testing') {
     return;
 }
