@@ -803,6 +803,11 @@ function __($string)
     return $string;
 }
 
+/**
+ * Get the correct HTML "lang" attribute for the current locale.
+ *
+ * @return string
+ */
 function get_html_lang()
 {
     try {
@@ -812,4 +817,28 @@ function get_html_lang()
     }
 
     return str_replace('_', '-', $locale->toString());
+}
+
+
+/**
+ * Format a date for output according to the current locale.
+ *
+ * @param mixed $date Date to format. If an integer, the date is intepreted
+ *  as a Unix timestamp. If a string, the date is interpreted as an ISO 8601
+ *  date.
+ * @param string $format Format to apply. See Zend_Date for possible formats.
+ *  The default format is the current locale's "medium" format.
+ *
+ * @return string
+ */
+function format_date($date, $format = Zend_Date::DATE_MEDIUM)
+{
+    if (is_int($date)) {
+        $sourceFormat = Zend_Date::TIMESTAMP;
+    } else {
+        $sourceFormat = Zend_Date::ISO_8601;
+    }
+    
+    $dateObj = new Zend_Date($date, $sourceFormat);
+    return $dateObj->toString($format);
 }
