@@ -51,8 +51,7 @@ function custom_show_item_metadata(array $options = array(), $item = null)
             $otherElementSets[] = $set->name;
         }
 
-        $html = '';
-        $html .= '<h2>Dublin Core</h2>';
+        $html = '<h2>' . __('Dublin Core') . '</h2>';
         $dcFields = explode(',', $dcFieldsList);
         foreach ($dcFields as $field) {
             $field = trim($field);
