@@ -1,6 +1,6 @@
-# LANGUAGE translation for Omeka.
+# SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Roy Rosenzweig Center for History and New Media
-# This file is distributed under the same license as the Omeka package.
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Omeka 1.5-dev\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
-"POT-Creation-Date: 2011-11-16 13:26-0500\n"
+"POT-Creation-Date: 2011-11-21 12:55-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,7 @@ msgstr ""
 #: admin/themes/default/collections/browse.php:2
 #: application/views/scripts/collections/browse.php:2
 #: application/views/scripts/common/footer.php:6
-#: application/views/scripts/functions.php:99
+#: application/views/scripts/functions.php:98
 msgid "Browse Collections"
 msgstr ""
 
@@ -139,6 +139,7 @@ msgstr ""
 
 #: admin/themes/default/collections/form.php:4
 #: admin/themes/default/item-types/form.php:17
+#: install/views/scripts/index/index.phtml:14
 msgid "Required Fields"
 msgstr ""
 
@@ -402,6 +403,7 @@ msgid "Delete this File"
 msgstr ""
 
 #: admin/themes/default/files/edit.php:27
+#: application/views/scripts/functions.php:54
 msgid "Dublin Core"
 msgstr ""
 
@@ -750,7 +752,7 @@ msgstr ""
 
 #: admin/themes/default/items/browse.php:2
 #: application/views/scripts/common/footer.php:6
-#: application/views/scripts/functions.php:99
+#: application/views/scripts/functions.php:98
 #: application/views/scripts/items/browse.php:2
 #: application/views/scripts/items/tags.php:2
 msgid "Browse Items"
@@ -1435,6 +1437,7 @@ msgid "The general settings have been updated."
 msgstr ""
 
 #: application/controllers/SettingsController.php:46
+#: install/views/scripts/index/index.phtml:17
 msgid "There were errors found in your form. Please edit and resubmit."
 msgstr ""
 
@@ -2298,11 +2301,11 @@ msgid ""
 "Retrieving_error_messages\">information on retrieving error messages</a>."
 msgstr ""
 
-#: application/views/scripts/functions.php:132
+#: application/views/scripts/functions.php:131
 msgid "Browse All"
 msgstr ""
 
-#: application/views/scripts/functions.php:132
+#: application/views/scripts/functions.php:131
 msgid "Browse by Tag"
 msgstr ""
 
@@ -2490,4 +2493,53 @@ msgstr ""
 
 #: application/views/scripts/users/login.php:8
 msgid "Lost your password?"
+msgstr ""
+
+#: install/views/scripts/index/errors.phtml:1
+msgid "Installation Error"
+msgstr ""
+
+#: install/views/scripts/index/errors.phtml:2
+msgid ""
+"Before installation can continue, the following errors must be resolved:"
+msgstr ""
+
+#: install/views/scripts/index/fatal-error.phtml:1
+msgid "Fatal Error"
+msgstr ""
+
+#: install/views/scripts/index/index.phtml:2
+msgid "Installation Warning"
+msgstr ""
+
+#: install/views/scripts/index/index.phtml:3
+msgid ""
+"The following issues will not affect installation, but they may \n"
+"    negatively affect the behavior of Omeka:"
+msgstr ""
+
+#: install/views/scripts/index/index.phtml:14
+msgid "Configure Your Site"
+msgstr ""
+
+#: install/views/scripts/index/index.phtml:16
+msgid "Form Validation Errors"
+msgstr ""
+
+#: install/views/scripts/index/installed.phtml:2
+msgid ""
+"Omeka is installed. You may remove the \"install\" directory for security "
+"reasons."
+msgstr ""
+
+#: install/views/scripts/index/installed.phtml:3
+msgid "Admin Panel"
+msgstr ""
+
+#: install/views/scripts/index/installed.phtml:3
+msgid "Public Site"
+msgstr ""
+
+#: install/views/scripts/layout.phtml:5 install/views/scripts/layout.phtml:9
+msgid "Omeka Installation"
 msgstr ""
