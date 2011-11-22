@@ -8,13 +8,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Omeka 1.5-dev\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
-"POT-Creation-Date: 2011-11-21 12:55-0500\n"
+"POT-Creation-Date: 2011-11-22 16:18-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: admin/themes/default/collections/add.php:2
@@ -99,16 +99,11 @@ msgid "View All Collections"
 msgstr ""
 
 #: admin/themes/default/collections/browse.php:71
+msgid "Add a collection."
+msgstr ""
+
+#: admin/themes/default/collections/browse.php:71
 msgid "There are no collections in your archive."
-msgstr ""
-
-#: admin/themes/default/collections/browse.php:71
-#, php-format
-msgid "Why don&#8217;t you %s"
-msgstr ""
-
-#: admin/themes/default/collections/browse.php:71
-msgid "add one"
 msgstr ""
 
 #: admin/themes/default/collections/edit.php:8
@@ -139,7 +134,7 @@ msgstr ""
 
 #: admin/themes/default/collections/form.php:4
 #: admin/themes/default/item-types/form.php:17
-#: install/views/scripts/index/index.phtml:14
+#: install/views/scripts/index/index.phtml:13
 msgid "Required Fields"
 msgstr ""
 
@@ -795,7 +790,7 @@ msgid "There are no items in the archive yet."
 msgstr ""
 
 #: admin/themes/default/items/browse.php:206
-msgid "Add an Item."
+msgid "Add an item."
 msgstr ""
 
 #: admin/themes/default/items/browse.php:211
@@ -963,7 +958,7 @@ msgstr ""
 
 #: admin/themes/default/plugins/plugin-info.php:24
 #, php-format
-msgid "This version of %1$s requires at least Omeka $minVersion."
+msgid "This version of %1$s requires at least Omeka %2$s."
 msgstr ""
 
 #: admin/themes/default/plugins/plugin-info.php:27
@@ -1264,7 +1259,7 @@ msgstr ""
 msgid "Page not found."
 msgstr ""
 
-#: application/controllers/ErrorController.php:84
+#: application/controllers/ErrorController.php:85
 msgid "Access denied."
 msgstr ""
 
@@ -1437,7 +1432,7 @@ msgid "The general settings have been updated."
 msgstr ""
 
 #: application/controllers/SettingsController.php:46
-#: install/views/scripts/index/index.phtml:17
+#: install/views/scripts/index/index.phtml:16
 msgid "There were errors found in your form. Please edit and resubmit."
 msgstr ""
 
@@ -1500,7 +1495,7 @@ msgstr ""
 
 #: application/controllers/UsersController.php:131
 #: application/controllers/UsersController.php:134
-#: application/controllers/UsersController.php:299
+#: application/controllers/UsersController.php:298
 #, php-format
 msgid "%s Administrator"
 msgstr ""
@@ -1560,13 +1555,9 @@ msgid ""
 "link to activate your account:"
 msgstr ""
 
-#: application/controllers/UsersController.php:298
-msgid "(or use any other page on the site)."
-msgstr ""
-
-#: application/controllers/UsersController.php:300
+#: application/controllers/UsersController.php:299
 #, php-format
-msgid "Activate your account with the %s Archive"
+msgid "Activate your account with the %s archive"
 msgstr ""
 
 #: application/forms/ChangePassword.php:35
@@ -1838,7 +1829,7 @@ msgstr ""
 
 #: application/helpers/FileMetadata.php:98
 #, php-format
-msgid "%sis an invalid special value."
+msgid "%s is an invalid special value."
 msgstr ""
 
 #: application/helpers/FormFunctions.php:135
@@ -2283,22 +2274,15 @@ msgstr ""
 msgid "The method used to access this URL (%s) is not valid."
 msgstr ""
 
-#: application/views/scripts/error/debug.php:5
-#: application/views/scripts/error/debug.php:10
-#: application/views/scripts/error/index.php:5
-#: application/views/scripts/error/index.php:10
-msgid "Omeka Has Encountered an Error"
+#: application/views/scripts/error/index.php:4
+msgid "Omeka has encountered an error"
 msgstr ""
 
-#: application/views/scripts/error/debug.php:18
-msgid "Backtrace"
-msgstr ""
-
-#: application/views/scripts/error/index.php:11
+#: application/views/scripts/error/index.php:29
 msgid ""
-"To track the contents of this error, please enable error logging. Consult "
-"the Omeka codex for <a href=\"http://omeka.org/codex/"
-"Retrieving_error_messages\">information on retrieving error messages</a>."
+"To learn how to see more detailed information about this error, see the "
+"Omeka Codex page on <a href=\"http://omeka.org/codex/"
+"Retrieving_error_messages\">retrieving error messages</a>."
 msgstr ""
 
 #: application/views/scripts/functions.php:131
@@ -2397,14 +2381,6 @@ msgstr ""
 msgid "Citation"
 msgstr ""
 
-#: application/views/scripts/items/show.php:40
-msgid "Previous Item"
-msgstr ""
-
-#: application/views/scripts/items/show.php:41
-msgid "Next Item"
-msgstr ""
-
 #: application/views/scripts/upgrade/completed.php:5
 #: application/views/scripts/upgrade/index.php:5
 #: application/views/scripts/upgrade/migrate.php:5
@@ -2436,18 +2412,17 @@ msgstr ""
 msgid "Upgrade Your Omeka Database"
 msgstr ""
 
-#: application/views/scripts/upgrade/index.php:11
-msgid ""
-"Your Omeka database is not compatible with your current\n"
-"        version of Omeka."
-msgstr ""
-
 #: application/views/scripts/upgrade/index.php:12
 msgid ""
-"Please backup your existing database and then click the button to upgrade."
+"Your Omeka database is not compatible with your current version of Omeka."
 msgstr ""
 
 #: application/views/scripts/upgrade/index.php:13
+msgid ""
+"Please back up your existing database and then click the button to upgrade."
+msgstr ""
+
+#: application/views/scripts/upgrade/index.php:15
 msgid "Upgrade Database"
 msgstr ""
 
@@ -2514,29 +2489,29 @@ msgstr ""
 
 #: install/views/scripts/index/index.phtml:3
 msgid ""
-"The following issues will not affect installation, but they may \n"
-"    negatively affect the behavior of Omeka:"
+"The following issues will not affect installation, but they may negatively "
+"affect the behavior of Omeka:"
 msgstr ""
 
-#: install/views/scripts/index/index.phtml:14
+#: install/views/scripts/index/index.phtml:13
 msgid "Configure Your Site"
 msgstr ""
 
-#: install/views/scripts/index/index.phtml:16
+#: install/views/scripts/index/index.phtml:15
 msgid "Form Validation Errors"
 msgstr ""
 
-#: install/views/scripts/index/installed.phtml:2
+#: install/views/scripts/index/installed.phtml:1
 msgid ""
 "Omeka is installed. You may remove the \"install\" directory for security "
 "reasons."
 msgstr ""
 
-#: install/views/scripts/index/installed.phtml:3
+#: install/views/scripts/index/installed.phtml:2
 msgid "Admin Panel"
 msgstr ""
 
-#: install/views/scripts/index/installed.phtml:3
+#: install/views/scripts/index/installed.phtml:2
 msgid "Public Site"
 msgstr ""
 
