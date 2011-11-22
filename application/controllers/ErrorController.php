@@ -70,7 +70,8 @@ class ErrorController extends Omeka_Controller_Action
         
         // Render the error script that displays debugging info.
         if ($this->isInDebugMode()) {
-            $this->render('debug');
+            $this->view->displayError = true;
+            $this->render('index');
         } else {
             $this->render('404');
         }
@@ -87,7 +88,8 @@ class ErrorController extends Omeka_Controller_Action
         
         // Render the error script that displays debugging info.
         if ($this->isInDebugMode()) {
-            $this->render('debug');
+            $this->view->displayError = true;
+            $this->render('index');
         } else {
             $this->render('403');
         }
@@ -128,12 +130,9 @@ class ErrorController extends Omeka_Controller_Action
     
     protected function renderException(Exception $e)
     {
-        $this->view->assign(compact('e'));
-        if ($this->isInDebugMode()) {
-            $this->render('debug');
-        } else {
-            $this->render('index');
-        }
+        $this->view->e = $e;
+        $this->view->displayError = $this->isInDebugMode();
+        $this->render('index');
     }
     
     protected function isInDebugMode()
