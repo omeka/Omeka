@@ -95,7 +95,7 @@ class Omeka_View_Helper_FileMetadata extends Omeka_View_Helper_RecordMetadata
                 return abs_uri(array('controller'=>'files', 'action'=>'show', 'id'=>$record->id));
                 break;
             default:
-                throw new Exception(__("%sis an invalid special value.", $specialValue));
+                throw new Exception(__("%s is an invalid special value.", $specialValue));
                 break;
         }
     }

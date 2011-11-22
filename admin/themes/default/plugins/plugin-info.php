@@ -21,7 +21,7 @@
     $loadErrors = array();
     if (!$plugin->meetsOmekaMinimumVersion()):
         $minVersion = $plugin->getMinimumOmekaVersion();
-        $loadErrors[] = __('This version of %1$s requires at least Omeka $minVersion.', $displayName, $minVersion);
+        $loadErrors[] = __('This version of %1$s requires at least Omeka %2$s.', $displayName, $minVersion);
     endif;
     if ($missingPluginNames):
         $loadErrors[] = __('%1$s requires the following plugins to be installed, activated, and loaded: %2$s', html_escape($displayName), implode(', ', $missingPluginNames));

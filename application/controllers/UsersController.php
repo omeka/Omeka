@@ -277,7 +277,7 @@ class UsersController extends Omeka_Controller_Action
     protected function _getDeleteConfirmMessage($record)
     {
         $user = $record;
-        return __("%s will be deleted from the system. Items, "
+        return __('%s will be deleted from the system. Items, '
              . 'collections, and tags created by this user will remain in the '
              . 'archive, but will no longer be associated with this user.', $user->username);
     }
@@ -291,13 +291,12 @@ class UsersController extends Omeka_Controller_Action
         // send the user an email telling them about their new user account
         $siteTitle  = get_option('site_title');
         $from       = get_option('administrator_email');
-        $body       = __("Welcome!") 
+        $body       = __('Welcome!')
                     ."\n\n"
-                    . __("Your account for the %s archive has been created. Please click the following link to activate your account:",$siteTitle)."\n\n"
+                    . __('Your account for the %s archive has been created. Please click the following link to activate your account:',$siteTitle)."\n\n"
                     . WEB_ROOT . "/admin/users/activate?u={$ua->url}\n\n"
-                    . __("(or use any other page on the site).")."\n\n"
-                    . __("%s Administrator", $siteTitle);
-        $subject    = __("Activate your account with the %s Archive", $siteTitle);
+                    . __('%s Administrator', $siteTitle);
+        $subject    = __('Activate your account with the %s archive', $siteTitle);
         
         $entity = $user->Entity;
         

@@ -37,8 +37,8 @@
 	<?php echo plugin_append_to_items_show(); ?>
 
 	<ul class="item-pagination navigation">
-	    <li id="previous-item" class="previous"><?php echo link_to_previous_item(__('Previous Item')); ?></li>
-	    <li id="next-item" class="next"><?php echo link_to_next_item(__('Next Item')); ?></li>
+	    <li id="previous-item" class="previous"><?php echo link_to_previous_item(); ?></li>
+	    <li id="next-item" class="next"><?php echo link_to_next_item(); ?></li>
 	</ul>
 	
 </div><!-- end primary -->

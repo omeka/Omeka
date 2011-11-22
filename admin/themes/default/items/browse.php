@@ -203,7 +203,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
     <p><?php echo __('There are no items in the archive yet.'); ?>
     
     <?php if(has_permission('Items','add')): ?>
-          <?php echo link_to('items', 'add', __('Add an Item.')); ?></p>
+          <?php echo link_to('items', 'add', __('Add an item.')); ?></p>
     <?php endif; ?>
 </div>
     
