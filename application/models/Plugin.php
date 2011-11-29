@@ -451,7 +451,7 @@ class Plugin extends Omeka_Record
      */
     public function setRequireOnce($flag)
     {
-        $this->_requireOnce = (boolean)$flag;
+        $this->_requireOnce = $flag;
     }
 
     /**
