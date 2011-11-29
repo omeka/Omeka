@@ -456,7 +456,7 @@ class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
      */
     public function setRequireOnce($flag)
     {
-        $this->_requireOnce = (boolean)$flag;
+        $this->_requireOnce = $flag;
     }
 
     /**
