@@ -239,8 +239,12 @@ function checkbox($attributes, $checked = FALSE, $value=null, $label = null, $la
  * @param string $value Optional Defaults to 'Submit'.
  * @return string
  */	
-function submit($attributes, $value="Submit")
+function submit($attributes, $value = null)
 {
+    if (!$value) {
+        $value = __('Submit');
+    }
+    
     // This is a hack that makes this work.
     $otherAttribs = array();
     if (is_array($attributes)) {
