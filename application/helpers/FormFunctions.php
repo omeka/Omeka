@@ -261,8 +261,12 @@ function submit($attributes, $value="Submit")
  * @param string $uri Optional Action for the form.  Defaults to 'items/browse'.
  * @return string
  */	
-function simple_search($buttonText = "Search", $formProperties=array('id'=>'simple-search'), $uri = null) 
-{ 
+function simple_search($buttonText = null, $formProperties=array('id'=>'simple-search'), $uri = null)
+{
+    if (!$buttonText) {
+        $buttonText = __('Search');
+    }
+
     // Always post the 'items/browse' page by default (though can be overridden).
     if (!$uri) {
         $uri = apply_filters('simple_search_default_uri', uri('items/browse'));
@@ -273,7 +277,7 @@ function simple_search($buttonText = "Search", $formProperties=array('id'=>'simp
     $formProperties['method'] = 'get';
     $html  = '<form ' . _tag_attributes($formProperties) . '>' . "\n";
     $html .= '<fieldset>' . "\n\n";
-    $html .= __v()->formText('search', $searchQuery, array('name'=>'textinput','class'=>'textinput'));
+    $html .= __v()->formText('search', $searchQuery, array('name'=>'search','class'=>'textinput'));
     $html .= __v()->formSubmit('submit_search', $buttonText);
     $html .= '</fieldset>' . "\n\n";
     
