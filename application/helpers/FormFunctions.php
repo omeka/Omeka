@@ -527,8 +527,12 @@ function _select_from_table($tableClass, $props = array(), $value = null, $label
  * @param array $formAttribs Other HTML attributes for button.
  * @return string HTML form.
  */
-function button_to($action, $name = null, $value = 'Submit', $attribs = array(), $formName = null, $formAttribs = array())
+function button_to($action, $name = null, $value = null, $attribs = array(), $formName = null, $formAttribs = array())
 {
+    if (!$value) {
+        $value = __('Submit');
+    }
+
     $view = __v();
     if (!array_key_exists('action', $formAttribs)) {
         $formAttribs['action'] = $action;
@@ -564,8 +568,12 @@ function button_to($action, $name = null, $value = 'Submit', $attribs = array(),
  * @param array $formAttribs Other HTML attributes for button.
  * @return string HTML form.
  */
-function delete_button($action = null, $name = null, $value = 'Delete', $attribs = array(), $formName = null, $formAttribs = array())
+function delete_button($action = null, $name = null, $value = null, $attribs = array(), $formName = null, $formAttribs = array())
 {
+    if (!$value) {
+        $value = __('Delete');
+    }
+
     if (!isset($action)) {
         // If nothing is set at all, use the current route's delete action.
         $action = uri(array('action' => 'delete-confirm'));
