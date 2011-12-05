@@ -151,6 +151,7 @@ $formAttributes['method'] = 'GET';
                           '0' => __('Only Non-Public Items'))); ?>
             </div>
         </div>
+        <?php endif; ?>
 
         <div class="field">
             <?php echo label('featured', __('Featured/Non-Featured')); ?>
@@ -160,7 +161,6 @@ $formAttributes['method'] = 'GET';
                           '0' => __('Only Non-Featured Items'))); ?>
             </div>
         </div>
-        <?php endif; ?>
 
         <?php is_admin_theme() ? fire_plugin_hook('admin_append_to_advanced_search') : fire_plugin_hook('public_append_to_advanced_search'); ?>
         <div>
