@@ -1,7 +1,8 @@
-<?php queue_js('login'); ?>
 <?php
+queue_js('login');
 $pageTitle = __('Log In');
-head(array('bodyclass' => 'login', 'title' => $pageTitle), $header); ?>
+head(array('bodyclass' => 'login', 'title' => $pageTitle), $header);
+?>
 <h1><?php echo $pageTitle; ?></h1>
 
 <p id="login-links">

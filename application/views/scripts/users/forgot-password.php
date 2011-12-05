@@ -1,6 +1,7 @@
 <?php
 $pageTitle = __('Forgot Password');
-head(array('title' => $pageTitle, 'bodyclass' => 'login'), $header); ?>
+head(array('title' => $pageTitle, 'bodyclass' => 'login'), $header);
+?>
 <h1><?php echo $pageTitle; ?></h1>
 <p id="login-links">
 <span id="backtologin"><?php echo link_to('users', 'login', __('Back to Log In')); ?></span>

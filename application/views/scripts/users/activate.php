@@ -1,6 +1,7 @@
 <?php
 $pageTitle = __('User Activation');
-head(array('title' => $pageTitle), $header); ?>
+head(array('title' => $pageTitle), $header);
+?>
 <h1><?php echo $pageTitle; ?></h1>
 
 <?php echo flash(); ?>
