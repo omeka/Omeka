@@ -1,0 +1,214 @@
+# LANGUAGE translation for Omeka.
+# Copyright (C) YEAR Roy Rosenzweig Center for History and New Media
+# This file is distributed under the same license as the Omeka package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Omeka 1.5\n"
+"Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
+"POT-Creation-Date: 2011-11-22 16:18-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# Dublin Core description
+msgid "The Dublin Core metadata element set. These elements are common to all Omeka resources, including items, files, collections, exhibits, and entities. See http://dublincore.org/documents/dces/."
+msgstr ""
+
+# Dublin Core: Title element
+msgid "Title"
+msgstr ""
+
+# Dublin Core: Creator element
+msgid "Creator"
+msgstr ""
+
+# Dublin Core: Subject element
+msgid "Subject"
+msgstr ""
+
+# Dublin Core: Description element
+msgid "Description"
+msgstr ""
+
+# Dublin Core: Publisher element
+msgid "Publisher"
+msgstr ""
+
+# Dublin Core: Contributor element
+msgid "Contributor"
+msgstr ""
+
+# Dublin Core: Date element
+msgid "Date"
+msgstr ""
+
+# Dublin Core: Type element
+msgid "Type"
+msgstr ""
+
+# Dublin Core: Format element
+msgid "Format"
+msgstr ""
+
+# Dublin Core: Identifier element
+msgid "Identifier"
+msgstr ""
+
+# Dublin Core: Source element
+msgid "Source"
+msgstr ""
+
+# Dublin Core: Language element
+msgid "Language"
+msgstr ""
+
+# Dublin Core: Relation element
+msgid "Relation"
+msgstr ""
+
+# Dublin Core: Coverage element
+msgid "Coverage"
+msgstr ""
+
+# Dublin Core: Rights element
+msgid "Rights"
+msgstr ""
+
+# Item Type Metadata
+msgid "Item Type Metadata"
+msgstr ""
+
+# Item Type Metadata description
+msgid "The item type metadata element set, consisting of all item type elements bundled with Omeka and all item type elements created by an administrator."
+msgstr ""
+
+# Omeka Legacy File
+msgid "Omeka Legacy File"
+msgstr ""
+
+# Omeka Legacy File description
+msgid "The metadata element set that, in addition to the Dublin Core element set, was included in the `files` table in previous versions of Omeka. These elements are common to all Omeka files. This set may be deprecated in future versions."
+msgstr ""
+
+# Omeka Legacy File: Additional Creator element
+msgid "Additional Creator"
+msgstr ""
+
+# Omeka Legacy File: Transcriber element
+msgid "Transcriber"
+msgstr ""
+
+# Omeka Legacy File: Producer element
+msgid "Producer"
+msgstr ""
+
+# Omeka Legacy File: Render Device element
+msgid "Render Device"
+msgstr ""
+
+# Omeka Legacy File: Render Details element
+msgid "Render Details"
+msgstr ""
+
+# Omeka Legacy File: Capture Date element
+msgid "Capture Date"
+msgstr ""
+
+# Omeka Legacy File: Capture Device element
+msgid "Capture Device"
+msgstr ""
+
+# Omeka Legacy File: Capture Details element
+msgid "Capture Details"
+msgstr ""
+
+# Omeka Legacy File: Change History element
+msgid "Change History"
+msgstr ""
+
+# Omeka Legacy File: Watermark element
+msgid "Watermark"
+msgstr ""
+
+# Omeka Legacy File: Encryption element
+msgid "Encryption"
+msgstr ""
+
+# Omeka Legacy File: Compression element
+msgid "Compression"
+msgstr ""
+
+# Omeka Legacy File: Post Processing element
+msgid "Post Processing"
+msgstr ""
+
+# Omeka Image File
+msgid "Omeka Image File"
+msgstr ""
+
+# Omeka Image File description
+msgid "The metadata element set that was included in the `files_images` table in previous versions of Omeka. These elements are common to all image files."
+msgstr ""
+
+# Omeka Image File: Width element
+msgid "Width"
+msgstr ""
+
+# Omeka Image File: Height element
+msgid "Height"
+msgstr ""
+
+# Omeka Image File: Bit Depth element
+msgid "Bit Depth"
+msgstr ""
+
+# Omeka Image File: Channels element
+msgid "Channels"
+msgstr ""
+
+# Omeka Image File: Exif String element
+msgid "Exif String"
+msgstr ""
+
+# Omeka Image File: Exif Array element
+msgid "Exif Array"
+msgstr ""
+
+# Omeka Image File: IPTC String element
+msgid "IPTC String"
+msgstr ""
+
+# Omeka Image File: IPTC Array element
+msgid "IPTC Array"
+msgstr ""
+
+# Omeka Video File
+msgid "Omeka Image File"
+msgstr ""
+
+# Omeka Video File description
+msgid "The metadata element set that was included in the `files_videos` table in previous versions of Omeka. These elements are common to all video files."
+msgstr ""
+
+# Omeka Video File: Bitrate element
+msgid "Bitrate"
+msgstr ""
+
+# Omeka Video File: Duration element
+msgid "Duration"
+msgstr ""
+
+# Omeka Video File: Sample Rate element
+msgid "Sample Rate"
+msgstr ""
+
+# Omeka Video File: Codec element
+msgid "Codec"
+msgstr ""

@@ -1,12 +1,12 @@
-# SOME DESCRIPTIVE TITLE.
+# LANGUAGE translation for Omeka.
 # Copyright (C) YEAR Roy Rosenzweig Center for History and New Media
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the Omeka package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Omeka 1.5-dev\n"
+"Project-Id-Version: Omeka 1.5\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2011-11-22 16:18-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -16,6 +16,208 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+# Dublin Core description
+msgid ""
+"The Dublin Core metadata element set. These elements are common to all Omeka "
+"resources, including items, files, collections, exhibits, and entities. See "
+"http://dublincore.org/documents/dces/."
+msgstr ""
+
+# Dublin Core: Title element
+msgid "Title"
+msgstr ""
+
+# Dublin Core: Creator element
+msgid "Creator"
+msgstr ""
+
+# Dublin Core: Subject element
+msgid "Subject"
+msgstr ""
+
+# Dublin Core: Publisher element
+msgid "Publisher"
+msgstr ""
+
+# Dublin Core: Contributor element
+msgid "Contributor"
+msgstr ""
+
+# Dublin Core: Date element
+msgid "Date"
+msgstr ""
+
+# Dublin Core: Type element
+msgid "Type"
+msgstr ""
+
+# Dublin Core: Format element
+msgid "Format"
+msgstr ""
+
+# Dublin Core: Identifier element
+msgid "Identifier"
+msgstr ""
+
+# Dublin Core: Source element
+msgid "Source"
+msgstr ""
+
+# Dublin Core: Language element
+msgid "Language"
+msgstr ""
+
+# Dublin Core: Relation element
+msgid "Relation"
+msgstr ""
+
+# Dublin Core: Coverage element
+msgid "Coverage"
+msgstr ""
+
+# Dublin Core: Rights element
+msgid "Rights"
+msgstr ""
+
+# Item Type Metadata
+msgid "Item Type Metadata"
+msgstr ""
+
+# Item Type Metadata description
+msgid ""
+"The item type metadata element set, consisting of all item type elements "
+"bundled with Omeka and all item type elements created by an administrator."
+msgstr ""
+
+# Omeka Legacy File
+msgid "Omeka Legacy File"
+msgstr ""
+
+# Omeka Legacy File description
+msgid ""
+"The metadata element set that, in addition to the Dublin Core element set, "
+"was included in the `files` table in previous versions of Omeka. These "
+"elements are common to all Omeka files. This set may be deprecated in future "
+"versions."
+msgstr ""
+
+# Omeka Legacy File: Additional Creator element
+msgid "Additional Creator"
+msgstr ""
+
+# Omeka Legacy File: Transcriber element
+msgid "Transcriber"
+msgstr ""
+
+# Omeka Legacy File: Producer element
+msgid "Producer"
+msgstr ""
+
+# Omeka Legacy File: Render Device element
+msgid "Render Device"
+msgstr ""
+
+# Omeka Legacy File: Render Details element
+msgid "Render Details"
+msgstr ""
+
+# Omeka Legacy File: Capture Date element
+msgid "Capture Date"
+msgstr ""
+
+# Omeka Legacy File: Capture Device element
+msgid "Capture Device"
+msgstr ""
+
+# Omeka Legacy File: Capture Details element
+msgid "Capture Details"
+msgstr ""
+
+# Omeka Legacy File: Change History element
+msgid "Change History"
+msgstr ""
+
+# Omeka Legacy File: Watermark element
+msgid "Watermark"
+msgstr ""
+
+# Omeka Legacy File: Encryption element
+msgid "Encryption"
+msgstr ""
+
+# Omeka Legacy File: Compression element
+msgid "Compression"
+msgstr ""
+
+# Omeka Legacy File: Post Processing element
+msgid "Post Processing"
+msgstr ""
+
+# Omeka Image File
+# Omeka Video File
+msgid "Omeka Image File"
+msgstr ""
+
+# Omeka Image File description
+msgid ""
+"The metadata element set that was included in the `files_images` table in "
+"previous versions of Omeka. These elements are common to all image files."
+msgstr ""
+
+# Omeka Image File: Width element
+msgid "Width"
+msgstr ""
+
+# Omeka Image File: Height element
+msgid "Height"
+msgstr ""
+
+# Omeka Image File: Bit Depth element
+msgid "Bit Depth"
+msgstr ""
+
+# Omeka Image File: Channels element
+msgid "Channels"
+msgstr ""
+
+# Omeka Image File: Exif String element
+msgid "Exif String"
+msgstr ""
+
+# Omeka Image File: Exif Array element
+msgid "Exif Array"
+msgstr ""
+
+# Omeka Image File: IPTC String element
+msgid "IPTC String"
+msgstr ""
+
+# Omeka Image File: IPTC Array element
+msgid "IPTC Array"
+msgstr ""
+
+# Omeka Video File description
+msgid ""
+"The metadata element set that was included in the `files_videos` table in "
+"previous versions of Omeka. These elements are common to all video files."
+msgstr ""
+
+# Omeka Video File: Bitrate element
+msgid "Bitrate"
+msgstr ""
+
+# Omeka Video File: Duration element
+msgid "Duration"
+msgstr ""
+
+# Omeka Video File: Sample Rate element
+msgid "Sample Rate"
+msgstr ""
+
+# Omeka Video File: Codec element
+msgid "Codec"
+msgstr ""
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:6
@@ -41,7 +243,7 @@ msgstr ""
 #: admin/themes/default/tags/browse.php:4
 #: admin/themes/default/themes/browse.php:4
 #: admin/themes/default/users/browse.php:4
-#: application/views/scripts/items/browse.php:7
+#: application/views/scripts/items/browse.php:8
 #, php-format
 msgid "(%s total)"
 msgstr ""
@@ -188,6 +390,7 @@ msgstr ""
 msgid "Edit this Collection"
 msgstr ""
 
+# Dublin Core: Description element
 #: admin/themes/default/collections/show.php:19
 #: admin/themes/default/element-sets/browse.php:13
 #: admin/themes/default/item-types/browse.php:14
@@ -196,7 +399,7 @@ msgstr ""
 #: admin/themes/default/item-types/form.php:26
 #: admin/themes/default/item-types/show.php:18
 #: admin/themes/default/themes/browse.php:19
-#: application/views/scripts/collections/browse.php:13
+#: application/views/scripts/collections/browse.php:15
 #: application/views/scripts/collections/show.php:7
 msgid "Description"
 msgstr ""
@@ -207,7 +410,7 @@ msgstr ""
 
 #: admin/themes/default/collections/show.php:33
 #: admin/themes/default/item-types/show.php:30
-#: application/views/scripts/index.php:34
+#: application/views/scripts/index.php:35
 msgid "Recently Added Items"
 msgstr ""
 
@@ -277,7 +480,7 @@ msgstr ""
 #: admin/themes/default/common/primary-nav.php:8
 #: admin/themes/default/items/browse.php:162
 #: admin/themes/default/items/show.php:69
-#: application/views/scripts/items/browse.php:38
+#: application/views/scripts/items/browse.php:39
 #: application/views/scripts/items/show.php:26
 msgid "Tags"
 msgstr ""
@@ -332,6 +535,7 @@ msgstr ""
 #: admin/themes/default/items/browse.php:149
 #: admin/themes/default/items/files-form.php:14
 #: admin/themes/default/users/browse.php:46
+#: application/helpers/FormFunctions.php:574
 msgid "Delete"
 msgstr ""
 
@@ -563,7 +767,7 @@ msgstr ""
 msgid "There are no items to display."
 msgstr ""
 
-#: admin/themes/default/index.php:102 application/views/scripts/index.php:70
+#: admin/themes/default/index.php:102 application/views/scripts/index.php:71
 msgid "View All Items"
 msgstr ""
 
@@ -1010,7 +1214,7 @@ msgid "Upgrade"
 msgstr ""
 
 #: admin/themes/default/plugins/plugin-info.php:100
-#: application/views/scripts/users/activate.php:25
+#: application/views/scripts/users/activate.php:26
 msgid "Activate"
 msgstr ""
 
@@ -1193,7 +1397,8 @@ msgid "Descending"
 msgstr ""
 
 #: admin/themes/default/users/browse.php:29
-#: application/views/scripts/items/advanced-search.php:161
+#: application/helpers/FormFunctions.php:271
+#: application/views/scripts/items/advanced-search.php:167
 msgid "Search"
 msgstr ""
 
@@ -1205,7 +1410,7 @@ msgstr ""
 #: admin/themes/default/users/browse.php:40
 #: admin/themes/default/users/show.php:26 application/forms/Install.php:79
 #: application/forms/RecoverPassword.php:32
-#: application/views/scripts/users/forgot-password.php:13
+#: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
 msgstr ""
 
@@ -1724,7 +1929,7 @@ msgid "Invalid email address"
 msgstr ""
 
 #: application/forms/ResetPassword.php:28
-#: application/views/scripts/users/activate.php:12
+#: application/views/scripts/users/activate.php:13
 msgid "Create a Password"
 msgstr ""
 
@@ -1737,7 +1942,7 @@ msgid "Typed passwords do not match."
 msgstr ""
 
 #: application/forms/ResetPassword.php:49
-#: application/views/scripts/users/activate.php:18
+#: application/views/scripts/users/activate.php:19
 msgid "Re-type the Password"
 msgstr ""
 
@@ -1834,6 +2039,12 @@ msgstr ""
 
 #: application/helpers/FormFunctions.php:135
 msgid "Select Below "
+msgstr ""
+
+#: application/helpers/FormFunctions.php:245
+#: application/helpers/FormFunctions.php:533
+#: application/views/scripts/users/forgot-password.php:18
+msgid "Submit"
 msgstr ""
 
 #: application/helpers/Functions.php:52
@@ -2193,12 +2404,12 @@ msgstr ""
 msgid "Cannot create a user activation for non-existent user."
 msgstr ""
 
-#: application/views/scripts/collections/browse.php:19
+#: application/views/scripts/collections/browse.php:21
 #: application/views/scripts/collections/show.php:13
 msgid "Collector(s)"
 msgstr ""
 
-#: application/views/scripts/collections/browse.php:26
+#: application/views/scripts/collections/browse.php:28
 #: application/views/scripts/collections/show.php:22
 #, php-format
 msgid "View the items in %s"
@@ -2222,7 +2433,7 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: application/views/scripts/common/footer.php:15
+#: application/views/scripts/common/footer.php:14
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
 msgstr ""
 
@@ -2246,7 +2457,7 @@ msgstr ""
 msgid "403 Page Forbidden"
 msgstr ""
 
-#: application/views/scripts/error/403.php:7
+#: application/views/scripts/error/403.php:8
 msgid "You do not have permission to access this page."
 msgstr ""
 
@@ -2256,7 +2467,7 @@ msgstr ""
 msgid "404 Page Not Found"
 msgstr ""
 
-#: application/views/scripts/error/404.php:6
+#: application/views/scripts/error/404.php:7
 #, php-format
 msgid "%s is not a valid URL."
 msgstr ""
@@ -2269,7 +2480,7 @@ msgstr ""
 msgid "405 Method Not Allowed"
 msgstr ""
 
-#: application/views/scripts/error/405.php:5
+#: application/views/scripts/error/405.php:7
 #, php-format
 msgid "The method used to access this URL (%s) is not valid."
 msgstr ""
@@ -2293,83 +2504,83 @@ msgstr ""
 msgid "Browse by Tag"
 msgstr ""
 
-#: application/views/scripts/index.php:66
+#: application/views/scripts/index.php:67
 msgid "No recent items available."
 msgstr ""
 
-#: application/views/scripts/items/advanced-search.php:29
+#: application/views/scripts/items/advanced-search.php:32
 msgid "Search for Keywords"
 msgstr ""
 
-#: application/views/scripts/items/advanced-search.php:39
+#: application/views/scripts/items/advanced-search.php:42
 msgid "Narrow by Specific Fields"
 msgstr ""
 
-#: application/views/scripts/items/advanced-search.php:68
+#: application/views/scripts/items/advanced-search.php:71
 msgid "contains"
 msgstr ""
 
-#: application/views/scripts/items/advanced-search.php:69
+#: application/views/scripts/items/advanced-search.php:72
 msgid "does not contain"
 msgstr ""
 
-#: application/views/scripts/items/advanced-search.php:70
+#: application/views/scripts/items/advanced-search.php:73
 msgid "is exactly"
 msgstr ""
 
-#: application/views/scripts/items/advanced-search.php:71
+#: application/views/scripts/items/advanced-search.php:74
 msgid "is empty"
 msgstr ""
 
-#: application/views/scripts/items/advanced-search.php:72
+#: application/views/scripts/items/advanced-search.php:75
 msgid "is not empty"
 msgstr ""
 
-#: application/views/scripts/items/advanced-search.php:83
+#: application/views/scripts/items/advanced-search.php:86
 msgid "Add a Field"
 msgstr ""
 
-#: application/views/scripts/items/advanced-search.php:87
+#: application/views/scripts/items/advanced-search.php:90
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
 msgstr ""
 
-#: application/views/scripts/items/advanced-search.php:99
+#: application/views/scripts/items/advanced-search.php:102
 msgid "Search By Collection"
 msgstr ""
 
-#: application/views/scripts/items/advanced-search.php:108
+#: application/views/scripts/items/advanced-search.php:112
 msgid "Search By Type"
 msgstr ""
 
-#: application/views/scripts/items/advanced-search.php:118
+#: application/views/scripts/items/advanced-search.php:122
 msgid "Search By User"
 msgstr ""
 
-#: application/views/scripts/items/advanced-search.php:128
+#: application/views/scripts/items/advanced-search.php:133
 msgid "Search By Tags"
 msgstr ""
 
-#: application/views/scripts/items/advanced-search.php:141
+#: application/views/scripts/items/advanced-search.php:147
 msgid "Public/Non-Public"
 msgstr ""
 
-#: application/views/scripts/items/advanced-search.php:144
+#: application/views/scripts/items/advanced-search.php:150
 msgid "Only Public Items"
 msgstr ""
 
-#: application/views/scripts/items/advanced-search.php:145
+#: application/views/scripts/items/advanced-search.php:151
 msgid "Only Non-Public Items"
 msgstr ""
 
-#: application/views/scripts/items/advanced-search.php:150
+#: application/views/scripts/items/advanced-search.php:157
 msgid "Featured/Non-Featured"
 msgstr ""
 
-#: application/views/scripts/items/advanced-search.php:153
+#: application/views/scripts/items/advanced-search.php:160
 msgid "Only Featured Items"
 msgstr ""
 
-#: application/views/scripts/items/advanced-search.php:154
+#: application/views/scripts/items/advanced-search.php:161
 msgid "Only Non-Featured Items"
 msgstr ""
 
@@ -2450,23 +2661,19 @@ msgstr ""
 msgid "Forgot Password"
 msgstr ""
 
-#: application/views/scripts/users/forgot-password.php:6
+#: application/views/scripts/users/forgot-password.php:7
 msgid "Back to Log In"
 msgstr ""
 
-#: application/views/scripts/users/forgot-password.php:9
+#: application/views/scripts/users/forgot-password.php:10
 msgid "Enter your email address to retrieve your password."
 msgstr ""
 
-#: application/views/scripts/users/forgot-password.php:17
-msgid "Submit"
-msgstr ""
-
-#: application/views/scripts/users/login.php:8
+#: application/views/scripts/users/login.php:9
 msgid "Go to Home Page"
 msgstr ""
 
-#: application/views/scripts/users/login.php:8
+#: application/views/scripts/users/login.php:9
 msgid "Lost your password?"
 msgstr ""
 
