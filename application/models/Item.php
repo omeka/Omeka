@@ -206,8 +206,8 @@ class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
     {        
         // Delete files that have been designated by passing an array of IDs 
         // through the form.
-        if ($post['delete_files']) {
-            $this->_deleteFiles($post['delete_files']);
+        if (isset($post['delete_files']) && ($files = $post['delete_files'])) {
+            $this->_deleteFiles($files);
         }
         
         $this->_modifyTagsByForm($post);
