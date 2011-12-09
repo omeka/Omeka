@@ -274,7 +274,7 @@ class Omeka_View_Helper_Media
             // against.  Can also modify alt text via an option.
             $imgClass = $imgClasses[$imageSize];
             
-            $imgAttributes = array_merge(array('class'=>$imgClass, 'alt'=>$alt),
+            $imgAttributes = array_merge(array('class' => $imgClass),
                                 (array)$options['imgAttributes']);
             
             // Luckily, helper function names correspond to the name of the 
