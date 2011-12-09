@@ -719,7 +719,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
         // $textValue = the string value that needs to be validated
         // $record = the Item or File or whatever record that the element text needs to apply to.
         // $element = the Element record that the text belongs to.
-        $isValid = apply_filters($filterName, $isValid, $textValue, $this->_record, $element);
+        $isValid = apply_filters($filterName, $isValid, $textValue, $this->_record, $elementRecord);
 
         return $isValid;
     }
