@@ -24,8 +24,8 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
     public function setUp()
     { 
         $this->externalDefaults = array(
-            'https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js',
-            'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js'
+            'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js',
+            'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'
         );
         $this->internalDefaults = array(
             self::ASSET_PATH_ROOT . '/javascripts/jquery.js',
