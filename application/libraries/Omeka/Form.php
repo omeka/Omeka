@@ -35,6 +35,9 @@ class Omeka_Form extends Zend_Form
      */
     public function init()
     {
+        // We handle form translations manually.
+        $this->setDisableTranslator(true);
+
         $this->addElementPrefixPath('Omeka_', 'Omeka/');
         $this->addPrefixPath('Omeka_Form_Element', 'Omeka/Form/Element/', 'element');
         
