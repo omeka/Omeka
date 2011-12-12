@@ -183,15 +183,8 @@ class PluginsController extends Omeka_Controller_Action
         $allPlugins = apply_filters('browse_plugins', $allPlugins);
         
         $config = Omeka_Context::getInstance()->getConfig('basic');
-        if (isset($config->plugin->versionCheck)) {
-            $versionCheck = (boolean) $config->plugin->versionCheck;
-        } else {
-            $versionCheck = true;
-        }
 
-
-
-        $this->view->assign(array('plugins'=>$allPlugins, 'loader'=>$this->_pluginLoader, 'versionCheck'=>$versionCheck));
+        $this->view->assign(array('plugins'=>$allPlugins, 'loader'=>$this->_pluginLoader));
     }
     
     /**

@@ -75,9 +75,6 @@
         <?php if($pluginDescription = $plugin->getDescription()): ?>
         <p class="plugin-description"><?php echo html_escape($pluginDescription); ?></p>
 	    <?php endif; ?>
-	    <?php if ($versionCheck && !$plugin->meetsOmekaTestedUpToVersion()): ?>
-            <p class="notice omeka-tested-up-to"><strong><?php echo __('Notice:'); ?></strong> <?php echo __('This version of %1$s has only been tested up to Omeka %2$s. You are using Omeka version %3$s', html_escape($displayName), html_escape($plugin->getTestedUpToOmekaVersion()), OMEKA_VERSION); ?>.</p>
-        <?php endif; ?>
         </div>
     </td>
     
