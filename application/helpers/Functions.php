@@ -22,6 +22,7 @@ function __v()
 /**
  * Simple math for determining whether a number is odd or even
  *
+ * @deprecated since 1.5
  * @return bool
  */
 function is_odd($num)

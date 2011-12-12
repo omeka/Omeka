@@ -195,7 +195,8 @@ function get_current_collection()
 
 /**
  * Determine whether or not there are any collections in the database.
- * 
+ *
+ * @deprecated since 1.5
  * @since 0.10
  * @return boolean
  */

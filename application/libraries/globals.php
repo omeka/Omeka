@@ -642,7 +642,8 @@ function release_object(&$var)
 
 /**
  * Return either the value passed or, if it's empty, return a default value.
- * 
+ *
+ * @deprecated since 1.5
  * @param mixed $value
  * @param mixed $default
  * @return mixed

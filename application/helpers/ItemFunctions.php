@@ -156,7 +156,8 @@
   
  /**
   * Determine whether or not there are any items in the database.
-  * 
+  *
+  * @deprecated since 1.5
   * @since 0.10
   * @return boolean
   */

@@ -515,7 +515,8 @@ function public_nav_items(array $navArray, $maxDepth = 0)
 
 /**
  * Creates a link to the Items Atom view.
- * 
+ *
+ * @deprecated since 1.5
  * @param string $text The text of the link.
  * @param array $params A set of query string parameters to merge in to the href
  * of the link.  E.g., if this link was clicked on the items/browse?collection=1

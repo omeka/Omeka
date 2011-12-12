@@ -156,7 +156,8 @@
 
  /**
  * Determine whether or not there are any files in the database.
- * 
+ *
+ * @deprecated since 1.5
  * @since 1.1
  * @return boolean
  */
