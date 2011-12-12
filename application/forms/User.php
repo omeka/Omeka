@@ -11,25 +11,7 @@
  * @package Omeka
  */
 class Omeka_Form_User extends Omeka_Form
-{    
-    const ERROR_USERNAME_TAKEN = "This username is already in use.  Please choose another.";
-    const ERROR_USERNAME_REQUIRED = "Username is required.";
-    const ERROR_USERNAME_ALNUM = "Username must consist only of letters and numbers (alphanumeric).";
-    const ERROR_USERNAME_TOO_SHORT = "Username must be more than %min% characters long.";
-    const ERROR_USERNAME_TOO_LONG = "Username must be shorter than %max% characters.";
-    const ERROR_EMAIL_REQUIRED = "Email is required.";
-    const ERROR_EMAIL_TAKEN = "This email address is already in use.  Please choose another.";
-    const ERROR_EMAIL_NOT_MATCH = "Emails do not match.";
-    const ERROR_EMAIL_INVALID = "This email address is not valid.  Please provide a valid email address.";
-    const ERROR_PASSWORD_NOT_MATCH = "Passwords do not match.";
-    const ERROR_PASSWORD_TOO_SHORT = "Passwords must be at least %min% characters long.";
-    const ERROR_PASSWORD_CONFIRM_REQUIRED = "Please re-type your password to confirm.";
-    const ERROR_PASSWORD_REQUIRED = "Please enter a password.";
-    const ERROR_TERMS_OF_SERVICE = 'New users must agree to the Terms of Service.';
-    const ERROR_FIRST_NAME_REQUIRED = "First name is required.";
-    const ERROR_LAST_NAME_REQUIRED = "Last name is required.";     
-    
-    
+{
     private $_hasRoleElement;
     
     private $_hasActiveElement;
@@ -43,22 +25,22 @@ class Omeka_Form_User extends Omeka_Form
         parent::init();
         
         $this->addElement('text', 'username', array(
-            'label'         => 'Username',
+            'label'         => __('Username'),
             'required'      => true,
             'size'          => '30',
             'validators' => array(
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' => 
                     array(
                         'messages' => array(
-                            'isEmpty' => self::ERROR_USERNAME_REQUIRED
+                            Zend_Validate_NotEmpty::IS_EMPTY => __('Username is required.')
                         )
                     )
                 ),
                 array('validator' => 'Alnum', 'breakChainOnFailure' => true, 'options' =>
                     array(
                         'messages' => array(
-                            Zend_Validate_Alnum::INVALID => self::ERROR_USERNAME_ALNUM,
-                            Zend_Validate_Alnum::NOT_ALNUM => self::ERROR_USERNAME_ALNUM
+                            Zend_Validate_Alnum::NOT_ALNUM =>
+                                __('Username must contain only letters and numbers.')
                         )
                     )
                 ),
@@ -67,8 +49,10 @@ class Omeka_Form_User extends Omeka_Form
                         'min' => User::USERNAME_MIN_LENGTH,
                         'max' => User::USERNAME_MAX_LENGTH,
                         'messages' => array(
-                            Zend_Validate_StringLength::TOO_SHORT => self::ERROR_USERNAME_TOO_SHORT,
-                            Zend_Validate_StringLength::TOO_LONG => self::ERROR_USERNAME_TOO_LONG
+                            Zend_Validate_StringLength::TOO_SHORT =>
+                                __('Username must be at least %min% characters long.'),
+                            Zend_Validate_StringLength::TOO_LONG =>
+                                __('Username must be at most %max% characters long.')
                         )
                     )
                 ),
@@ -82,7 +66,7 @@ class Omeka_Form_User extends Omeka_Form
                         ),
                         'adapter'   =>  $this->_user->getDb()->getAdapter(), 
                         'messages'  =>  array(
-                            'recordFound' => self::ERROR_USERNAME_TAKEN
+                            'recordFound' => __('This username is already in use.')
                         )
                     )
                 )    
@@ -91,49 +75,47 @@ class Omeka_Form_User extends Omeka_Form
         ));
         
         $this->addElement('text', 'first_name', array(
-            'label' => 'First Name',
+            'label' => __('First Name'),
             'size' => '30',
             'required' => true,
             'validators' => array(
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' => array(
                     'messages' => array(
-                        Zend_Validate_NotEmpty::IS_EMPTY => self::ERROR_FIRST_NAME_REQUIRED,
-                        Zend_Validate_NotEmpty::INVALID => self::ERROR_FIRST_NAME_REQUIRED
+                        Zend_Validate_NotEmpty::IS_EMPTY => __('First name is required.')
                     )
                 ))
             )
         ));
         
         $this->addElement('text', 'last_name', array(
-            'label' => 'Last Name',
+            'label' => __('Last Name'),
             'size'  => '30',
             'required' => true,
             'validators' => array(
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' => array(
                     'messages' => array(
-                        Zend_Validate_NotEmpty::IS_EMPTY => self::ERROR_LAST_NAME_REQUIRED,
-                        Zend_Validate_NotEmpty::INVALID => self::ERROR_LAST_NAME_REQUIRED
+                        Zend_Validate_NotEmpty::IS_EMPTY => __('Last name is required.')
                     )
                 ))
             )
         ));
-        
+
+        $invalidEmailMessage = __('This email address is invalid.');
         $this->addElement('text', 'email', array(
-            'label' => 'Email',
+            'label' => __('Email'),
             'size' => '30',
             'required' => true,
             'validators' => array(
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' => array(
                     'messages' => array(
-                        Zend_Validate_NotEmpty::IS_EMPTY => self::ERROR_EMAIL_REQUIRED,
-                        Zend_Validate_NotEmpty::INVALID => self::ERROR_EMAIL_REQUIRED
+                        Zend_Validate_NotEmpty::IS_EMPTY => __('Email is required.')
                     )
                 )),
                 array('validator' => 'EmailAddress', 'options' => array(
                     'messages' => array(
-                        Zend_Validate_EmailAddress::INVALID  => self::ERROR_EMAIL_INVALID,
-                        Zend_Validate_EmailAddress::INVALID_FORMAT => self::ERROR_EMAIL_INVALID,
-                        Zend_Validate_EmailAddress::INVALID_HOSTNAME => self::ERROR_EMAIL_INVALID
+                        Zend_Validate_EmailAddress::INVALID  => $invalidEmailMessage,
+                        Zend_Validate_EmailAddress::INVALID_FORMAT => $invalidEmailMessage,
+                        Zend_Validate_EmailAddress::INVALID_HOSTNAME => $invalidEmailMessage
                     )
                 )),
                 array('validator' => 'Db_NoRecordExists', 'options' => array(
@@ -145,31 +127,28 @@ class Omeka_Form_User extends Omeka_Form
                     ),
                     'adapter'   =>  $this->_user->getDb()->getAdapter(), 
                     'messages'  =>  array(
-                        'recordFound' => self::ERROR_EMAIL_TAKEN
+                        'recordFound' => __('This email address is already in use.')
                     )
                 )),
             )
         ));
         
         $this->addElement('text', 'institution', array(
-            'label' => 'Institution',
+            'label' => __('Institution'),
             'size' => '30'
         ));
         
         if ($this->_hasRoleElement) {
             $this->addElement('select', 'role', array(
-                'label' => 'Role',
+                'label' => __('Role'),
                 'multiOptions' => get_user_roles(),
                 'required' => true
             ));
         }
         
         if ($this->_hasActiveElement) {
-            $this->addElement('radio', 'active', array( // Radioactive, get it? HARR
-                'label' => 'Status',
-                'multiOptions' => array('0'=>'Inactive','1'=>'Active'),
-                'required' => true,
-                'value' => '0'
+            $this->addElement('checkbox', 'active', array(
+                'label' => __('Active?')
             ));
         }
         

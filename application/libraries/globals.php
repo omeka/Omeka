@@ -714,7 +714,7 @@ function get_user_roles()
 {
 	$roles = Omeka_Context::getInstance()->getAcl()->getRoleNames();
 	foreach($roles as $key => $val) {
-		$roles[$val] = Inflector::humanize($val);
+		$roles[$val] = __(Inflector::humanize($val));
 		unset($roles[$key]);
 	}
 	return $roles;

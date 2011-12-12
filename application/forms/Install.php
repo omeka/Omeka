@@ -63,8 +63,8 @@ class Omeka_Form_Install extends Omeka_Form
         ));
         
         $this->addElement('password', 'password_confirm', array(
-            'label' => 'Re-type the Password',
-            'description' => 'Confirm your password',
+            'label' => __('Re-type the Password'),
+            'description' => __('Confirm your password.'),
             'required' => true,
             'validators' => array(
                 array('validator' => 'NotEmpty', 'options' => array(
@@ -105,8 +105,8 @@ class Omeka_Form_Install extends Omeka_Form
         ));
         
         $this->addElement('text', 'tag_delimiter', array(
-            'label' => 'Tag Delimiter', 
-            'description' => 'Separate tags using this character(s).', 
+            'label' => __('Tag Delimiter'),
+            'description' => __('Separate tags using this character or string.'),
             'value' => self::DEFAULT_TAG_DELIMITER, 
         ));
         

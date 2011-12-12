@@ -176,7 +176,7 @@ class UsersController extends Omeka_Controller_Action
         $user = new User();
         
         $form = $this->_getUserForm($user);
-        $form->setSubmitButtonText('Add User');
+        $form->setSubmitButtonText(__('Add User'));
         $this->view->form = $form;
         
         if (!$this->getRequest()->isPost() || !$form->isValid($_POST)) {
@@ -221,7 +221,7 @@ class UsersController extends Omeka_Controller_Action
         $this->view->user = $user;        
 
         $form = $this->_getUserForm($user);
-        $form->setSubmitButtonText('Save Changes');
+        $form->setSubmitButtonText(__('Save Changes'));
         $form->setDefaults(array(
             'username' => $user->username,
             'first_name' => $user->first_name,

@@ -1,5 +1,5 @@
-# LANGUAGE translation for Omeka.
-# Copyright (C) YEAR Roy Rosenzweig Center for History and New Media
+# Translation template for Omeka.
+# Copyright (C) 2011 Roy Rosenzweig Center for History and New Media
 # This file is distributed under the same license as the Omeka package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -41,6 +41,7 @@ msgid "Publisher"
 msgstr ""
 
 # Dublin Core: Contributor element
+# User role: Contributor
 msgid "Contributor"
 msgstr ""
 
@@ -219,6 +220,18 @@ msgstr ""
 msgid "Codec"
 msgstr ""
 
+# User role: Super
+msgid "Super"
+msgstr ""
+
+# User role: Admin
+msgid "Admin"
+msgstr ""
+
+# User role: Researcher
+msgid "Researcher"
+msgstr ""
+
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:6
 msgid "Add a Collection"
@@ -325,6 +338,7 @@ msgstr ""
 #: admin/themes/default/items/edit.php:20
 #: admin/themes/default/plugins/config.php:9
 #: admin/themes/default/tags/edit.php:28
+#: application/controllers/UsersController.php:224
 #: application/forms/SecuritySettings.php:70
 #: application/forms/ThemeConfiguration.php:67
 msgid "Save Changes"
@@ -1360,11 +1374,11 @@ msgstr ""
 msgid "Sort By"
 msgstr ""
 
-#: admin/themes/default/users/browse.php:20
+#: admin/themes/default/users/browse.php:20 application/forms/User.php:78
 msgid "First Name"
 msgstr ""
 
-#: admin/themes/default/users/browse.php:21
+#: admin/themes/default/users/browse.php:21 application/forms/User.php:91
 msgid "Last Name"
 msgstr ""
 
@@ -1373,14 +1387,14 @@ msgid "Institution Name"
 msgstr ""
 
 #: admin/themes/default/users/browse.php:23
-#: admin/themes/default/users/browse.php:41
+#: admin/themes/default/users/browse.php:41 application/forms/User.php:143
 msgid "Role"
 msgstr ""
 
 #: admin/themes/default/users/browse.php:24
 #: admin/themes/default/users/browse.php:38
 #: admin/themes/default/users/show.php:22 application/forms/Install.php:35
-#: application/forms/Login.php:25
+#: application/forms/Login.php:25 application/forms/User.php:28
 msgid "Username"
 msgstr ""
 
@@ -1409,7 +1423,7 @@ msgstr ""
 
 #: admin/themes/default/users/browse.php:40
 #: admin/themes/default/users/show.php:26 application/forms/Install.php:79
-#: application/forms/RecoverPassword.php:32
+#: application/forms/RecoverPassword.php:32 application/forms/User.php:105
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
 msgstr ""
@@ -1428,7 +1442,7 @@ msgstr ""
 msgid "Edit this User"
 msgstr ""
 
-#: admin/themes/default/users/show.php:28
+#: admin/themes/default/users/show.php:28 application/forms/User.php:137
 msgid "Institution"
 msgstr ""
 
@@ -1722,6 +1736,10 @@ msgstr ""
 msgid "You may now log in to Omeka."
 msgstr ""
 
+#: application/controllers/UsersController.php:179
+msgid "Add User"
+msgstr ""
+
 #: application/controllers/UsersController.php:189
 #, php-format
 msgid "The user \"%s\" was successfully added!"
@@ -1805,6 +1823,16 @@ msgstr ""
 msgid "Site Author Information"
 msgstr ""
 
+#: application/forms/GeneralSettings.php:50 application/forms/Install.php:108
+msgid "Tag Delimiter"
+msgstr ""
+
+#: application/forms/GeneralSettings.php:51
+msgid ""
+"Separate tags using this character. Be careful when changing this setting. "
+"You run the risk of splitting tags that contain the old delimiter."
+msgstr ""
+
 #: application/forms/GeneralSettings.php:64 application/forms/Install.php:123
 msgid "Fullsize Image Size"
 msgstr ""
@@ -1880,6 +1908,19 @@ msgstr ""
 msgid "Must be at least 6 characters."
 msgstr ""
 
+#: application/forms/Install.php:66 application/forms/ResetPassword.php:49
+#: application/views/scripts/users/activate.php:19
+msgid "Re-type the Password"
+msgstr ""
+
+#: application/forms/Install.php:67
+msgid "Confirm your password."
+msgstr ""
+
+#: application/forms/Install.php:109
+msgid "Separate tags using this character or string."
+msgstr ""
+
 #: application/forms/Install.php:165
 msgid "Whether metadata elements with no text will be displayed."
 msgstr ""
@@ -1941,11 +1982,6 @@ msgstr ""
 msgid "Typed passwords do not match."
 msgstr ""
 
-#: application/forms/ResetPassword.php:49
-#: application/views/scripts/users/activate.php:19
-msgid "Re-type the Password"
-msgstr ""
-
 #: application/forms/SecuritySettings.php:27
 msgid "Disable File Upload Validation"
 msgstr ""
@@ -1989,6 +2025,50 @@ msgstr ""
 msgid ""
 "Private key from recaptcha.net. Both this and the public key must be filled "
 "in to secure public forms."
+msgstr ""
+
+#: application/forms/User.php:35
+msgid "Username is required."
+msgstr ""
+
+#: application/forms/User.php:43
+msgid "Username must contain only letters and numbers."
+msgstr ""
+
+#: application/forms/User.php:53
+msgid "Username must be at least %min% characters long."
+msgstr ""
+
+#: application/forms/User.php:55
+msgid "Username must be at most %max% characters long."
+msgstr ""
+
+#: application/forms/User.php:69
+msgid "This username is already in use."
+msgstr ""
+
+#: application/forms/User.php:84
+msgid "First name is required."
+msgstr ""
+
+#: application/forms/User.php:97
+msgid "Last name is required."
+msgstr ""
+
+#: application/forms/User.php:103
+msgid "This email address is invalid."
+msgstr ""
+
+#: application/forms/User.php:111
+msgid "Email is required."
+msgstr ""
+
+#: application/forms/User.php:130
+msgid "This email address is already in use."
+msgstr ""
+
+#: application/forms/User.php:151
+msgid "Active?"
 msgstr ""
 
 #: application/helpers/AssetFunctions.php:270
@@ -2047,15 +2127,15 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: application/helpers/Functions.php:52
+#: application/helpers/Functions.php:53
 msgid "Omeka RSS Feed"
 msgstr ""
 
-#: application/helpers/Functions.php:53
+#: application/helpers/Functions.php:54
 msgid "Omeka Atom Feed"
 msgstr ""
 
-#: application/helpers/Functions.php:199
+#: application/helpers/Functions.php:200
 msgid "Error: Invalid callback was provided for the loop."
 msgstr ""
 
@@ -2069,7 +2149,7 @@ msgid ""
 "Omeka documentation for details."
 msgstr ""
 
-#: application/helpers/ItemFunctions.php:570
+#: application/helpers/ItemFunctions.php:571
 msgid "No featured items are available."
 msgstr ""
 
@@ -2094,7 +2174,7 @@ msgstr ""
 msgid "&larr; Previous Item"
 msgstr ""
 
-#: application/helpers/LinkFunctions.php:529
+#: application/helpers/LinkFunctions.php:530
 msgid "Atom"
 msgstr ""
 

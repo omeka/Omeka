@@ -1,5 +1,5 @@
-# LANGUAGE translation for Omeka.
-# Copyright (C) YEAR Roy Rosenzweig Center for History and New Media
+# Translation template for Omeka.
+# Copyright (C) 2011 Roy Rosenzweig Center for History and New Media
 # This file is distributed under the same license as the Omeka package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -211,4 +211,20 @@ msgstr ""
 
 # Omeka Video File: Codec element
 msgid "Codec"
+msgstr ""
+
+# User role: Super
+msgid "Super"
+msgstr ""
+
+# User role: Admin
+msgid "Admin"
+msgstr ""
+
+# User role: Contributor
+msgid "Contributor"
+msgstr ""
+
+# User role: Researcher
+msgid "Researcher"
 msgstr ""

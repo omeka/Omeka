@@ -47,8 +47,8 @@ class Omeka_Form_GeneralSettings extends Omeka_Form
         ));
         
         $this->addElement('text', 'tag_delimiter', array(
-            'label' => 'Tag Delimiter', 
-            'description' => 'Separate tags using this character(s). Be careful when changing this setting. You run the risk of splitting tags that contain the old delimiter.', 
+            'label' => __('Tag Delimiter'),
+            'description' => __('Separate tags using this character or string. Be careful when changing this setting. You run the risk of splitting tags that contain the old delimiter.'),
         ));
         
         // Allow the tag delimiter to be a whitespace character(s) (except for 
