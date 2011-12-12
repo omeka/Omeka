@@ -669,7 +669,8 @@ function is_true($value)
 
 /**
  * Gets a theme option
- * 
+ *
+ * @since 1.3
  * @param string $optionName The name of the option to get.
  * @param string $themeName The name of the theme.  If null, it will use the 
  * current public theme.
@@ -685,7 +686,8 @@ function get_theme_option($optionName, $themeName = null)
 
 /**
  * Sets a theme option
- * 
+ *
+ * @since 1.3
  * @param string $optionName The name of the option to set.
  * @param string $optionValue The value of the option.
  * @param string $themeName The name of the theme.  If null, it will use the 
@@ -753,6 +755,7 @@ function element_exists($elementSetName, $elementName) {
  * if (plugin_is_active('ExhibitBuilder', '2.0', '<')): 
  * </code>
  *
+ * @since 1.4
  * @param string $name Directory name of the plugin.
  * @param string $version Optional Version of the plugin to check.  
  * @param string $compOperator Optional Comparison operator to use when 
@@ -777,10 +780,13 @@ function plugin_is_active($name, $version = null, $compOperator = '>=')
 }
 
 /**
- * Wrapper for Zend_Translate
+ * Translate a string.
  *
- * @since 1.4
- * @param string The string to be translated.
+ * @since 1.5
+ * @param string $string The string to be translated.
+ * @param mixed $args Optional string formatting args. If any extra args are
+ *  passed, the args and the translated string will be formatted with
+ *  sprintf().
  * @return string The translated string.
  */
 function __($string)
@@ -806,6 +812,7 @@ function __($string)
 /**
  * Get the correct HTML "lang" attribute for the current locale.
  *
+ * @since 1.5
  * @return string
  */
 function get_html_lang()
@@ -829,6 +836,7 @@ function get_html_lang()
  * @param string $format Format to apply. See Zend_Date for possible formats.
  *  The default format is the current locale's "medium" format.
  *
+ * @since 1.5
  * @return string
  */
 function format_date($date, $format = Zend_Date::DATE_MEDIUM)
