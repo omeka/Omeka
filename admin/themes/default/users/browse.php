@@ -53,7 +53,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
             <td><?php echo html_escape($user->username);?></td>
             <td><?php echo html_escape($user->first_name); ?> <?php echo html_escape($user->last_name); ?></td>
             <td><?php echo html_escape($user->email); ?></td>
-            <td><span class="<?php echo html_escape($user->role); ?>"><?php echo html_escape($user->role); ?></span></td>
+            <td><span class="<?php echo html_escape($user->role); ?>"><?php echo html_escape(__(Inflector::humanize($user->role))); ?></span></td>
             <?php if (has_permission($user, 'edit')): ?>
             <td><?php echo link_to($user, 'edit', __('Edit'), array('class'=>'edit')); ?></td>
             <?php endif; ?>     
