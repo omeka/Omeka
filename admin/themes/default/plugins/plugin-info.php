@@ -62,11 +62,11 @@
         <?php 
             $pluginMetadata = array();
             if ($plugin->getIniVersion()):
-                $pluginMetadata[] = __('Version') . ' ' . html_escape(trim($plugin->getIniVersion()));
+                $pluginMetadata[] = __('Version %s', html_escape(trim($plugin->getIniVersion())));
             endif;
         
             if ($plugin->getAuthor()):
-                $pluginMetadata[] = __('By') . ' ' . html_escape(trim($plugin->getAuthor()));
+                $pluginMetadata[] = __('By %s', html_escape(trim($plugin->getAuthor())));
             endif;
             if (!empty($pluginMetadata)): ?>
                 <p class="plugin-meta"><?php echo implode(' | ', $pluginMetadata); ?></p>
