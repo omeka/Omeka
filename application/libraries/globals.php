@@ -145,6 +145,7 @@ function debug($msg)
  *
  * Enabled via config.ini: log.errors.
  *
+ * @since 1.4
  * @param mixed $msg
  * @param integer $priority Optional Defaults to Zend_Log::INFO.  See Zend_Log 
  * for a list of available priorities.
@@ -366,6 +367,7 @@ function add_filter($filterName, $callback, $priority = 10)
 /**
  * Clear all implementations for a filter (or all filters).
  *
+ * @since 1.4
  * @uses Omeka_Plugin_Filters::clearFilters()
  * @param string|null $name The name of the filter to clear.  If
  *  null or omitted, all filters will be cleared.
