@@ -443,6 +443,7 @@ msgstr ""
 
 #: admin/themes/default/common/footer.php:6
 #: admin/themes/default/common/login-footer.php:4
+#: admin/themes/default/plugins/plugin-info.php:65
 #, php-format
 msgid "Version %s"
 msgstr ""
@@ -1166,7 +1167,7 @@ msgid "Cancel"
 msgstr ""
 
 #: admin/themes/default/plugins/confirm-uninstall.php:16
-#: admin/themes/default/plugins/plugin-info.php:110
+#: admin/themes/default/plugins/plugin-info.php:107
 msgid "Uninstall"
 msgstr ""
 
@@ -1204,39 +1205,25 @@ msgstr ""
 msgid "Configure"
 msgstr ""
 
-#: admin/themes/default/plugins/plugin-info.php:65
-msgid "Version"
-msgstr ""
-
 #: admin/themes/default/plugins/plugin-info.php:69
-msgid "By"
-msgstr ""
-
-#: admin/themes/default/plugins/plugin-info.php:79
-msgid "Notice:"
-msgstr ""
-
-#: admin/themes/default/plugins/plugin-info.php:79
 #, php-format
-msgid ""
-"This version of %1$s has only been tested up to Omeka %2$s. You are using "
-"Omeka version %3$s"
+msgid "By %s"
 msgstr ""
 
-#: admin/themes/default/plugins/plugin-info.php:90
+#: admin/themes/default/plugins/plugin-info.php:87
 msgid "Upgrade"
 msgstr ""
 
-#: admin/themes/default/plugins/plugin-info.php:100
+#: admin/themes/default/plugins/plugin-info.php:97
 #: application/views/scripts/users/activate.php:26
 msgid "Activate"
 msgstr ""
 
-#: admin/themes/default/plugins/plugin-info.php:100
+#: admin/themes/default/plugins/plugin-info.php:97
 msgid "Deactivate"
 msgstr ""
 
-#: admin/themes/default/plugins/plugin-info.php:120
+#: admin/themes/default/plugins/plugin-info.php:117
 #: application/forms/Install.php:173
 msgid "Install"
 msgstr ""
@@ -1619,25 +1606,25 @@ msgstr ""
 msgid "The following error occurred while upgrading the %s plugin: "
 msgstr ""
 
-#: application/controllers/PluginsController.php:219
+#: application/controllers/PluginsController.php:212
 msgid "You must confirm the uninstall before proceeding."
 msgstr ""
 
-#: application/controllers/PluginsController.php:234
+#: application/controllers/PluginsController.php:227
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
 msgstr ""
 
-#: application/controllers/PluginsController.php:236
+#: application/controllers/PluginsController.php:229
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
 msgstr ""
 
-#: application/controllers/PluginsController.php:263
+#: application/controllers/PluginsController.php:256
 msgid "No plugin name given."
 msgstr ""
 
-#: application/controllers/PluginsController.php:276
+#: application/controllers/PluginsController.php:269
 #, php-format
 msgid "The plugin %s must be installed."
 msgstr ""
@@ -1829,8 +1816,8 @@ msgstr ""
 
 #: application/forms/GeneralSettings.php:51
 msgid ""
-"Separate tags using this character. Be careful when changing this setting. "
-"You run the risk of splitting tags that contain the old delimiter."
+"Separate tags using this character or string. Be careful when changing this "
+"setting. You run the risk of splitting tags that contain the old delimiter."
 msgstr ""
 
 #: application/forms/GeneralSettings.php:64 application/forms/Install.php:123
