@@ -142,8 +142,9 @@ class TagsController extends Omeka_Controller_Action
                                     $params, 
                                     $perms, 
                                     array('type' => $for));
-                
-        $tags = $this->_table->findBy($findByParams, $params['limit']);
+
+        $limit = isset($params['limit']) ? $params['limit'] : null;
+        $tags = $this->_table->findBy($findByParams, $limit);
         $total_results = count($tags);
         
         Zend_Registry::set('total_tags', $total_tags);
@@ -153,8 +154,9 @@ class TagsController extends Omeka_Controller_Action
         fire_plugin_hook('browse_tags',  $tags, $for);
         
         $browse_for = $for;
+        $sort = $findByParams['sort'];
         
-        $this->view->assign(compact('tags', 'total_tags', 'browse_for'));
+        $this->view->assign(compact('tags', 'total_tags', 'browse_for', 'sort'));
     }
     
     public function autocompleteAction()

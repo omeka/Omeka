@@ -6,10 +6,21 @@ head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodyclass'=
 <div id="primary">
 <?php if ( total_results() ): ?>
     <p id="tags-nav">Sort by:
-        <a href="<?php echo html_escape(current_uri(array('sort'=>'most'))); ?>"<?php if($_GET['sort'] == 'most') echo ' class="current"'; ?>><?php echo __('Most'); ?></a>
-        <a href="<?php echo html_escape(current_uri(array('sort'=>'least'))); ?>"<?php if($_GET['sort'] == 'least') echo ' class="current"'; ?>><?php echo __('Least'); ?></a> 
-        <a href="<?php echo html_escape(current_uri(array('sort'=>'alpha'))); ?>"<?php if($_GET['sort'] == 'alpha') echo ' class="current"'; ?>><?php echo __('Alphabetical'); ?></a>
-        <a href="<?php echo html_escape(current_uri(array('sort'=>'recent'))); ?>"<?php if($_GET['sort'] == 'recent') echo ' class="current"'; ?>><?php echo __('Recent'); ?></a>
+        <?php
+        $sortOptions = array(
+            'most' => __('Most'),
+            'least' => __('Least'),
+            'alpha' => __('Alphabetical'),
+            'recent' => __('Recent')
+        );
+
+        foreach ($sortOptions as $key => $label) {
+            $uri = html_escape(current_uri(array('sort' => $key)));
+            $class = ($sort == $key) ? ' class="current"' : '';
+
+            echo "<a href=\"$uri\"$class>$label</a>";
+        }
+        ?>
     </p>
     <?php echo tag_cloud($tags, ($browse_for == 'Item') ? uri('items/browse/'): uri('exhibits/browse/')); ?>
 <?php else: ?>
