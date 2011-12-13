@@ -3,7 +3,12 @@
          convertWarningsToExceptions="true"
          convertNoticesToExceptions="true"
          backupGlobals="true">
-    <testsuite name="AllTests">
-        <file>AllTests.php</file>
-    </testsuite>    
+    <testsuites>
+        <testsuite name="Integration">
+            <file>integration/TestSuite.php</file>
+        </testsuite>
+        <testsuite name="Unit">
+            <directory>unit</directory>
+        </testsuite>
+    </testsuites>
 </phpunit>

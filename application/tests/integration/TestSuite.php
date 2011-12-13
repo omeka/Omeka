@@ -11,7 +11,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Integration_AllTests extends PHPUnit_Framework_TestSuite
+class Integration_TestSuite extends PHPUnit_Framework_TestSuite
 {
     /**
      * Drop all database tables prior to running integration tests.
@@ -35,11 +35,11 @@ class Integration_AllTests extends PHPUnit_Framework_TestSuite
 
     public static function suite()
     {
-        $suite = new Integration_AllTests('Integration Tests');
-        $testCollector = new PHPUnit_Runner_IncludePathTestCollector(
-          array(dirname(__FILE__))
-        );
-        $suite->addTestFiles($testCollector->collectTests());
+        $suite = new Integration_TestSuite('Integration Tests');
+        $facade = new File_Iterator_Facade;
+        $suite->addTestFiles($facade->getFilesAsArray(
+            dirname(__FILE__), array('Test.php')));
         return $suite;
     }
 }
+
