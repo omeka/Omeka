@@ -12,7 +12,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
         <table id="plugin-info">
             <tbody>
             <?php foreach($plugins as $pluginDirName => $plugin): ?>
-                <?php echo $this->partial('plugins/plugin-info.php', array('pluginDirName' => $pluginDirName, 'plugin' => $plugin, 'loader'=>$loader, 'versionCheck'=>$versionCheck)); ?>
+                <?php echo $this->partial('plugins/plugin-info.php', array('pluginDirName' => $pluginDirName, 'plugin' => $plugin, 'loader'=>$loader)); ?>
             <?php endforeach; ?>
             </tbody>
         </table>
