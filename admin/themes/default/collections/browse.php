@@ -47,7 +47,7 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
                 
                 </td>   
                 <td><?php if($time = collection('Date Added')):?>
-                    <?php echo format_date(strtotime($time)); ?>
+                    <?php echo format_date($time); ?>
                 <?php endif; ?>
                 </td>
                 <td><?php echo link_to_items_in_collection(); ?></td>

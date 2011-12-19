@@ -182,7 +182,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
         <img src="<?php echo img('silk-icons/star.png'); ?>" alt="<?php echo __('Featured'); ?>"/>
         <?php endif; ?>
         </td>
-        <td><?php echo format_date(strtotime(item('Date Added'))); ?></td>
+        <td><?php echo format_date(item('Date Added')); ?></td>
     </tr>
     <?php endwhile; ?>
     </tbody>
