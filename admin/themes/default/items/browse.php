@@ -10,8 +10,12 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
     <?php if ( total_results() ): ?>
     <script type="text/javascript">
         jQuery(window).load(function() {
+            var toggleText = <?php echo js_escape(__('Toggle')); ?>;
+            var detailsText = <?php echo js_escape(__('Details')); ?>;
+            var showDetailsText = <?php echo js_escape(__('Show Details')); ?>;
+            var hideDetailsText = <?php echo js_escape(__('Hide Details')); ?>;
             jQuery('.item-details').hide();
-            jQuery('.action-links').prepend('<li class="details">Details</li>');
+            jQuery('.action-links').prepend('<li class="details">' + detailsText + '</li>');
 
             jQuery('tr.item').each(function() {
                 var itemDetails = jQuery(this).find('.item-details');
@@ -23,8 +27,8 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
             });
 
             var toggleList = '<ul id="browse-toggles">'
-                           + '<li><strong>Toggle</strong></li>'
-                           + '<li><a href="#" id="toggle-all-details">Show Details</a></li>'
+                           + '<li><strong>' + toggleText + '</strong></li>'
+                           + '<li><a href="#" id="toggle-all-details">' + showDetailsText + '</a></li>'
                            + '</ul>';
 
             jQuery('#items-sort').after(toggleList);
@@ -32,11 +36,11 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
             // Toggle item details.
             jQuery('#toggle-all-details').toggle(function(e) {
                 e.preventDefault();
-                jQuery(this).text('Hide Details');
+                jQuery(this).text(hideDetailsText);
                 jQuery('.item-details').slideDown('fast');
             }, function(e) {
                 e.preventDefault();
-                jQuery(this).text('Show Details');
+                jQuery(this).text(showDetailsText);
                 jQuery('.item-details').slideUp('fast');
             });
             
@@ -89,7 +93,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
     <div id="browse-meta" class="group">
         <div id="browse-meta-lists">
             <ul id="items-sort" class="navigation">
-                <li><strong>Quick Filter</strong></li>
+                <li><strong><?php echo __('Quick Filter'); ?></strong></li>
             <?php
                 echo nav(array(
                     __('All') => uri('items'),

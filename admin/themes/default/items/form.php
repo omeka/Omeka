@@ -18,7 +18,7 @@ jQuery(window).load(function () {
     // Must run the element form scripts AFTER reseting textarea ids.
     jQuery(document).trigger('omeka:elementformload');
 
-    Omeka.Items.enableAddFiles();
+    Omeka.Items.enableAddFiles(<?php echo js_escape(__('Add Another File')); ?>);
     Omeka.Items.changeItemType(<?php echo js_escape(uri("items/change-type")) ?><?php if ($id = item('id')) echo ', '.$id; ?>);
 });
 
@@ -50,7 +50,7 @@ jQuery(document).bind('omeka:elementformload', function () {
     <?php if (!empty($tabContent)): ?>
         <div id="<?php echo text_to_id(html_escape($tabName)); ?>-metadata">
         <fieldset class="set">
-            <legend><?php echo html_escape($tabName); ?></legend>
+            <legend><?php echo html_escape(__($tabName)); ?></legend>
             <?php echo $tabContent; ?>        
         </fieldset>
         </div>     

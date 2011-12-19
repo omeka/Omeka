@@ -5,7 +5,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodyclass'=
 <?php common('tags-nav'); ?>
 <div id="primary">
 <?php if ( total_results() ): ?>
-    <p id="tags-nav">Sort by:
+    <p id="tags-nav"><?php echo __('Sort by'); ?>:
         <?php
         $sortOptions = array(
             'most' => __('Most'),

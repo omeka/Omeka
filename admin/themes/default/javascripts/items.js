@@ -383,12 +383,14 @@ Omeka.Items.makeElementControls = function (elementFormPartialUrl, itemId) {
 /**
  * Allow adding an arbitrary number of file input elements to the items form so that
  * more than one file can be uploaded at once.
+ *
+ * @param {string} label
  */
-Omeka.Items.enableAddFiles = function () {
+Omeka.Items.enableAddFiles = function (label) {
     var filesDiv = jQuery('#file-inputs .files').first();
     var filesDivWrap = jQuery('#file-inputs');
 
-    var link = jQuery('<a href="#" id="add-file" class="add-file">Add Another File</a>');
+    var link = jQuery('<a href="#" id="add-file" class="add-file">' + label + '</a>');
     link.click(function (event) {
         event.preventDefault();
         var inputs = filesDiv.find('input');

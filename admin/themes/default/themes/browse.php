@@ -7,7 +7,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
 
 <div id="primary">
     <?php echo flash(); ?>
-    <h2 id="current-theme-title"><?php echo __('Current Theme'); ?>: &quot;<?php echo html_escape($current->title); ?>&quot; <?php if($current->hasConfig): ?><a href="<?php echo html_escape(uri('themes/config?name='.$current->directory)); ?>" class="configure-button button">Configure</a><?php endif; ?></h2>            
+    <h2 id="current-theme-title"><?php echo __('Current Theme'); ?>: &quot;<?php echo html_escape($current->title); ?>&quot; <?php if($current->hasConfig): ?><a href="<?php echo html_escape(uri('themes/config?name='.$current->directory)); ?>" class="configure-button button"><?php echo __('Configure'); ?></a><?php endif; ?></h2>            
 
 <div id="current-theme">
     <img src="<?php echo html_escape($current->image); ?>" width="342px" alt="<?php echo __('Screenshot for %s Theme', html_escape($current->title)); ?>" />
