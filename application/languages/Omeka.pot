@@ -298,7 +298,7 @@ msgid "No collectors"
 msgstr ""
 
 #: admin/themes/default/collections/browse.php:57
-#: admin/themes/default/items/browse.php:146
+#: admin/themes/default/items/browse.php:150
 #: admin/themes/default/items/files-form.php:22
 #: admin/themes/default/users/browse.php:43
 #: admin/themes/default/users/browse.php:58
@@ -370,8 +370,8 @@ msgstr ""
 #: admin/themes/default/collections/form.php:35
 #: admin/themes/default/collections/form.php:37
 #: admin/themes/default/items/batch-edit.php:42
-#: admin/themes/default/items/browse.php:96
-#: admin/themes/default/items/browse.php:173
+#: admin/themes/default/items/browse.php:100
+#: admin/themes/default/items/browse.php:177
 #: admin/themes/default/items/form.php:37
 msgid "Public"
 msgstr ""
@@ -384,8 +384,8 @@ msgstr ""
 #: admin/themes/default/collections/form.php:42
 #: admin/themes/default/collections/form.php:44
 #: admin/themes/default/items/batch-edit.php:54
-#: admin/themes/default/items/browse.php:98
-#: admin/themes/default/items/browse.php:178
+#: admin/themes/default/items/browse.php:102
+#: admin/themes/default/items/browse.php:182
 #: admin/themes/default/items/form.php:43
 msgid "Featured"
 msgstr ""
@@ -493,7 +493,7 @@ msgid "Item Types"
 msgstr ""
 
 #: admin/themes/default/common/primary-nav.php:8
-#: admin/themes/default/items/browse.php:162
+#: admin/themes/default/items/browse.php:166
 #: admin/themes/default/items/show.php:69
 #: application/views/scripts/items/browse.php:39
 #: application/views/scripts/items/show.php:26
@@ -547,7 +547,7 @@ msgstr ""
 
 #: admin/themes/default/element-sets/browse.php:14
 #: admin/themes/default/items/batch-edit.php:101
-#: admin/themes/default/items/browse.php:149
+#: admin/themes/default/items/browse.php:153
 #: admin/themes/default/items/files-form.php:14
 #: admin/themes/default/users/browse.php:46
 #: application/helpers/FormFunctions.php:574
@@ -691,7 +691,7 @@ msgid "File Type / OS"
 msgstr ""
 
 #: admin/themes/default/files/show.php:54
-#: admin/themes/default/items/browse.php:197
+#: admin/themes/default/items/browse.php:201
 #: admin/themes/default/items/show.php:110
 msgid "Output Formats"
 msgstr ""
@@ -938,7 +938,7 @@ msgid "Remove?"
 msgstr ""
 
 #: admin/themes/default/items/batch-edit.php:75
-#: admin/themes/default/items/browse.php:161
+#: admin/themes/default/items/browse.php:165
 #: admin/themes/default/items/collection-form.php:2
 #: admin/themes/default/items/show.php:62
 #: application/views/scripts/items/show.php:18
@@ -972,57 +972,77 @@ msgstr ""
 msgid "Browse Items"
 msgstr ""
 
-#: admin/themes/default/items/browse.php:95
+#: admin/themes/default/items/browse.php:13
+msgid "Toggle"
+msgstr ""
+
+#: admin/themes/default/items/browse.php:14
+msgid "Details"
+msgstr ""
+
+#: admin/themes/default/items/browse.php:15
+msgid "Show Details"
+msgstr ""
+
+#: admin/themes/default/items/browse.php:16
+msgid "Hide Details"
+msgstr ""
+
+#: admin/themes/default/items/browse.php:96
+msgid "Quick Filter"
+msgstr ""
+
+#: admin/themes/default/items/browse.php:99
 msgid "All"
 msgstr ""
 
-#: admin/themes/default/items/browse.php:97
+#: admin/themes/default/items/browse.php:101
 msgid "Private"
 msgstr ""
 
-#: admin/themes/default/items/browse.php:105
+#: admin/themes/default/items/browse.php:109
 #: application/helpers/LinkFunctions.php:63
 #: application/views/scripts/items/advanced-search.php:2
 msgid "Advanced Search"
 msgstr ""
 
-#: admin/themes/default/items/browse.php:113
-#: admin/themes/default/items/browse.php:189
+#: admin/themes/default/items/browse.php:117
+#: admin/themes/default/items/browse.php:193
 msgid "Edit Selected Items"
 msgstr ""
 
-#: admin/themes/default/items/browse.php:122
+#: admin/themes/default/items/browse.php:126
 msgid "Select"
 msgstr ""
 
-#: admin/themes/default/items/browse.php:161
+#: admin/themes/default/items/browse.php:165
 #: admin/themes/default/items/show.php:64
 msgid "No Collection"
 msgstr ""
 
-#: admin/themes/default/items/browse.php:162
+#: admin/themes/default/items/browse.php:166
 msgid "No Tags"
 msgstr ""
 
-#: admin/themes/default/items/browse.php:203
+#: admin/themes/default/items/browse.php:207
 msgid "There are no items in the archive yet."
 msgstr ""
 
-#: admin/themes/default/items/browse.php:206
+#: admin/themes/default/items/browse.php:210
 msgid "Add an item."
 msgstr ""
 
-#: admin/themes/default/items/browse.php:211
+#: admin/themes/default/items/browse.php:215
 #, php-format
 msgid "The query searched %s items and returned no results."
 msgstr ""
 
-#: admin/themes/default/items/browse.php:211
+#: admin/themes/default/items/browse.php:215
 #, php-format
 msgid "Would you like to %s?"
 msgstr ""
 
-#: admin/themes/default/items/browse.php:211
+#: admin/themes/default/items/browse.php:215
 msgid "refine your search"
 msgstr ""
 
@@ -1067,6 +1087,10 @@ msgstr ""
 #: admin/themes/default/items/files-form.php:37
 #: admin/themes/default/items/files-form.php:48
 msgid "Find a File"
+msgstr ""
+
+#: admin/themes/default/items/form.php:21
+msgid "Add Another File"
 msgstr ""
 
 #: admin/themes/default/items/item-type-form.php:8
@@ -1123,7 +1147,7 @@ msgid "Browse Items by Tag"
 msgstr ""
 
 #: admin/themes/default/items/tags.php:9
-#: admin/themes/default/tags/browse.php:16
+#: admin/themes/default/tags/browse.php:27
 msgid "There are no tags to display. You must first tag some items."
 msgstr ""
 
@@ -1202,6 +1226,7 @@ msgid "You have a new version of %s. Please upgrade!"
 msgstr ""
 
 #: admin/themes/default/plugins/plugin-info.php:58
+#: admin/themes/default/themes/browse.php:10
 msgid "Configure"
 msgstr ""
 
@@ -1240,23 +1265,31 @@ msgstr ""
 msgid "Restore Default File Mime Types"
 msgstr ""
 
+#: admin/themes/default/settings/edit.php:10
+msgid "Test"
+msgstr ""
+
 #: admin/themes/default/system-info/index.php:2
 msgid "System Information"
 msgstr ""
 
-#: admin/themes/default/tags/browse.php:9
-msgid "Most"
-msgstr ""
-
-#: admin/themes/default/tags/browse.php:10
-msgid "Least"
+#: admin/themes/default/tags/browse.php:8
+msgid "Sort by"
 msgstr ""
 
 #: admin/themes/default/tags/browse.php:11
-msgid "Alphabetical"
+msgid "Most"
 msgstr ""
 
 #: admin/themes/default/tags/browse.php:12
+msgid "Least"
+msgstr ""
+
+#: admin/themes/default/tags/browse.php:13
+msgid "Alphabetical"
+msgstr ""
+
+#: admin/themes/default/tags/browse.php:14
 msgid "Recent"
 msgstr ""
 
