@@ -178,6 +178,7 @@ class Omeka_Core extends Zend_Application
      */
     private function _displayErrorPage($e, $title = null)
     {
+        error_log("Omeka fatal error: $e");
         $displayError = (bool) ini_get('display_errors');
         header("HTTP/1.0 500 Internal Server Error");
         require VIEW_SCRIPTS_DIR . '/error/index.php';
