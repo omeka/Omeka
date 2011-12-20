@@ -42,6 +42,7 @@ msgid "Publisher"
 msgstr ""
 
 # Dublin Core: Contributor element
+# User role: contributor
 msgid "Contributor"
 msgstr ""
 
@@ -190,7 +191,7 @@ msgid "IPTC Array"
 msgstr ""
 
 # Omeka Video File
-msgid "Omeka Image File"
+msgid "Omeka Video File"
 msgstr ""
 
 # Omeka Video File description
@@ -219,10 +220,6 @@ msgstr ""
 
 # User role: Admin
 msgid "Admin"
-msgstr ""
-
-# User role: Contributor
-msgid "Contributor"
 msgstr ""
 
 # User role: Researcher
