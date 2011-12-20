@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Omeka" basedir=".">
+    <property name="lang.dir" location="application/languages" />
+    <target name="update-pot" description="Update the translation template.">
+        <property name="pot.file" location="${lang.dir}/Omeka.pot"/>
+        <property name="pot.base" location="${lang.dir}/Omeka.base.pot"/>
+        <tempfile property="pot.temp" suffix=".pot"/>
+        <apply executable="xgettext" relative="true" parallel="true">
+            <arg value="-L"/>
+            <arg value="php"/>
+            <arg value="--from-code=utf-8"/>
+            <arg value="-k__"/>
+            <arg value="--flag=__:1:pass-php-format"/>
+            <arg value="--omit-header"/>
+            <arg value="-F"/>
+            <arg value="-o"/>
+            <arg file="${pot.temp}"/>
+            <fileset dir="." includes="**/*.php **/*.phtml" excludes="themes/ plugins/">
+            </fileset>
+        </apply>
+        <exec executable="msgcat">
+            <arg value="-o"/>
+            <arg file="${pot.file}"/>
+            <arg file="${pot.base}"/>
+            <arg file="${pot.temp}"/>
+        </exec>
+        <delete file="${pot.temp}" quiet="true"/>
+    </target>
+</project>
