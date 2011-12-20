@@ -24,11 +24,15 @@ msgid ""
 "http://dublincore.org/documents/dces/."
 msgstr ""
 
+# #-#-#-#-#  Omeka.base.pot (Omeka 1.5)  #-#-#-#-#
 # Dublin Core: Title element
+#: admin/themes/default/items/browse.php:129
 msgid "Title"
 msgstr ""
 
+# #-#-#-#-#  Omeka.base.pot (Omeka 1.5)  #-#-#-#-#
 # Dublin Core: Creator element
+#: admin/themes/default/items/browse.php:130
 msgid "Creator"
 msgstr ""
 
@@ -36,12 +40,27 @@ msgstr ""
 msgid "Subject"
 msgstr ""
 
+# #-#-#-#-#  Omeka.base.pot (Omeka 1.5)  #-#-#-#-#
+# Dublin Core: Description element
+#: admin/themes/default/collections/show.php:19
+#: admin/themes/default/element-sets/browse.php:13
+#: admin/themes/default/item-types/browse.php:14
+#: admin/themes/default/item-types/element-form.php:23
+#: admin/themes/default/item-types/element-list.php:6
+#: admin/themes/default/item-types/form.php:26
+#: admin/themes/default/item-types/show.php:18
+#: admin/themes/default/themes/browse.php:19
+#: application/views/scripts/collections/browse.php:15
+#: application/views/scripts/collections/show.php:7
+msgid "Description"
+msgstr ""
+
 # Dublin Core: Publisher element
 msgid "Publisher"
 msgstr ""
 
 # Dublin Core: Contributor element
-# User role: Contributor
+# User role: contributor
 msgid "Contributor"
 msgstr ""
 
@@ -49,7 +68,9 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
+# #-#-#-#-#  Omeka.base.pot (Omeka 1.5)  #-#-#-#-#
 # Dublin Core: Type element
+#: admin/themes/default/items/browse.php:131
 msgid "Type"
 msgstr ""
 
@@ -156,7 +177,6 @@ msgid "Post Processing"
 msgstr ""
 
 # Omeka Image File
-# Omeka Video File
 msgid "Omeka Image File"
 msgstr ""
 
@@ -196,6 +216,10 @@ msgstr ""
 
 # Omeka Image File: IPTC Array element
 msgid "IPTC Array"
+msgstr ""
+
+# Omeka Video File
+msgid "Omeka Video File"
 msgstr ""
 
 # Omeka Video File description
@@ -278,6 +302,7 @@ msgstr ""
 
 #: admin/themes/default/collections/browse.php:21
 #: admin/themes/default/files/show.php:24
+#: admin/themes/default/items/browse.php:134
 #: application/views/scripts/files/show.php:57
 msgid "Date Added"
 msgstr ""
@@ -371,6 +396,7 @@ msgstr ""
 #: admin/themes/default/collections/form.php:37
 #: admin/themes/default/items/batch-edit.php:42
 #: admin/themes/default/items/browse.php:100
+#: admin/themes/default/items/browse.php:132
 #: admin/themes/default/items/browse.php:177
 #: admin/themes/default/items/form.php:37
 msgid "Public"
@@ -385,6 +411,7 @@ msgstr ""
 #: admin/themes/default/collections/form.php:44
 #: admin/themes/default/items/batch-edit.php:54
 #: admin/themes/default/items/browse.php:102
+#: admin/themes/default/items/browse.php:133
 #: admin/themes/default/items/browse.php:182
 #: admin/themes/default/items/form.php:43
 msgid "Featured"
@@ -402,20 +429,6 @@ msgstr ""
 
 #: admin/themes/default/collections/show.php:13
 msgid "Edit this Collection"
-msgstr ""
-
-# Dublin Core: Description element
-#: admin/themes/default/collections/show.php:19
-#: admin/themes/default/element-sets/browse.php:13
-#: admin/themes/default/item-types/browse.php:14
-#: admin/themes/default/item-types/element-form.php:23
-#: admin/themes/default/item-types/element-list.php:6
-#: admin/themes/default/item-types/form.php:26
-#: admin/themes/default/item-types/show.php:18
-#: admin/themes/default/themes/browse.php:19
-#: application/views/scripts/collections/browse.php:15
-#: application/views/scripts/collections/show.php:7
-msgid "Description"
 msgstr ""
 
 #: admin/themes/default/collections/show.php:27
