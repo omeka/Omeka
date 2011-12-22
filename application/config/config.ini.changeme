@@ -10,6 +10,26 @@
 
 [site]
 
+;;;;;;;;;;;;;;;;
+; Localization ;
+;;;;;;;;;;;;;;;;
+
+; locale
+; The locale identifier used for translating and displaying Omeka.
+; default: none
+;
+; The locale controls what language Omeka will be displayed in, and
+; also how dates and other locale-sensitive data will be displayed.
+;
+; The locale identifier should be a valid ISO 639 language code,
+; and optionally a valid ISO 3166-1 locale code.
+; (Examples: "es" for Spanish, "en_US" for US English.)
+;
+; To enable translations, the identifier must also have a
+; corresponding .mo file in the application/languages directory.
+
+locale = ""
+
 ;;;;;;;;;;;;;
 ; Debugging ;
 ;;;;;;;;;;;;;
@@ -209,22 +229,3 @@ mail.transport.type = "Sendmail"
 ;   Force SSL on across the entire site.
 ;
 ; ssl = "always"
-
-
-;;;;;;;;;;;;;;;;
-; Localization ;
-;;;;;;;;;;;;;;;;
-
-; locale
-; The locale identifier used for translating and displaying Omeka.
-; default: none
-;
-; The locale controls what language Omeka will be displayed in, and
-; also how dates and other locale-sensitive data will be displayed.
-;
-; The locale identifier be a valid ISO 639 language code, and optionally
-; a valid ISO 3166-1 locale code. (example: en_US for US English.)
-; The identifier must also have a corresponding .mo file in
-; the application/languages directory.
-;
-; locale = ""
