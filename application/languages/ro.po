@@ -3,21 +3,20 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-#   <john@zerocrates.org>, 2011.
-# Roberto Sanchez <rsanc77@yahoo.com>, 2011.
+# Nicolaie Constantinescu <kosson@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2011-11-22 16:18-0500\n"
-"PO-Revision-Date: 2011-12-21 20:54+0000\n"
-"Last-Translator: Roberto Sanchez <rsanc77@yahoo.com>\n"
-"Language-Team: Spanish (Castilian) (http://www.transifex.net/projects/p/omeka/team/es/)\n"
+"PO-Revision-Date: 2011-12-28 14:45+0000\n"
+"Last-Translator: Nicolaie Constantinescu <kosson@gmail.com>\n"
+"Language-Team: Romanian (http://www.transifex.net/projects/p/omeka/team/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1))\n"
 
 # Dublin Core description
 msgid ""
@@ -25,26 +24,25 @@ msgid ""
 " resources, including items, files, collections, exhibits, and entities. See"
 " http://dublincore.org/documents/dces/."
 msgstr ""
-"El set de elementos de meta-dato Dublin Core. Estos elementos son comunes a "
-"todos los recursos de Omeka, Incluyendo ítem, archivos, colecciones, "
-"exposiciones, y entidades. Para mas información vea "
-"http://dublincore.org/documents/dces/."
+"Setul de metadate Dublin Core. Aceste elemente sunt aceleași pentru toate "
+"resursele Omeka, incluzând fișierele, colecțiile, expozițiile și entitățile."
+" Vezi http://dublincore.org/documents/dces/."
 
 # #-#-#-#-#  Omeka.base.pot (Omeka 1.5)  #-#-#-#-#
 # Dublin Core: Title element
 #: admin/themes/default/items/browse.php:129
 msgid "Title"
-msgstr "Titulo"
+msgstr "Titlu"
 
 # #-#-#-#-#  Omeka.base.pot (Omeka 1.5)  #-#-#-#-#
 # Dublin Core: Creator element
 #: admin/themes/default/items/browse.php:130
 msgid "Creator"
-msgstr "Creador"
+msgstr "Creator"
 
 # Dublin Core: Subject element
 msgid "Subject"
-msgstr "Sujeto"
+msgstr "Subiect"
 
 # #-#-#-#-#  Omeka.base.pot (Omeka 1.5)  #-#-#-#-#
 # Dublin Core: Description element
@@ -59,68 +57,71 @@ msgstr "Sujeto"
 #: application/views/scripts/collections/browse.php:15
 #: application/views/scripts/collections/show.php:7
 msgid "Description"
-msgstr "Descripción"
+msgstr "Descriere"
 
 # Dublin Core: Publisher element
 msgid "Publisher"
-msgstr "Publicador"
+msgstr "Editor"
 
 # Dublin Core: Contributor element
 # User role: contributor
 msgid "Contributor"
-msgstr "Contribuidor"
+msgstr "Contributor"
 
 # Dublin Core: Date element
 msgid "Date"
-msgstr "Fecha"
+msgstr "Dată"
 
 # #-#-#-#-#  Omeka.base.pot (Omeka 1.5)  #-#-#-#-#
 # Dublin Core: Type element
 #: admin/themes/default/items/browse.php:131
 msgid "Type"
-msgstr "Tipo"
+msgstr "Tip"
 
 # Dublin Core: Format element
 msgid "Format"
-msgstr "Formato"
+msgstr "Format"
 
 # Dublin Core: Identifier element
 msgid "Identifier"
-msgstr "Identificador"
+msgstr "Identificator"
 
 # Dublin Core: Source element
 msgid "Source"
-msgstr "Origen"
+msgstr "Sursă"
 
 # Dublin Core: Language element
 msgid "Language"
-msgstr "Idioma"
+msgstr "Limbă"
 
 # Dublin Core: Relation element
 msgid "Relation"
-msgstr "Relación"
+msgstr "Relație"
 
 # Dublin Core: Coverage element
 msgid "Coverage"
-msgstr "Cobertura"
+msgstr "Domeniu"
 
 # Dublin Core: Rights element
 msgid "Rights"
-msgstr "Derechos"
+msgstr "Drepturi"
 
 # Item Type Metadata
 msgid "Item Type Metadata"
-msgstr "Meta-datos de Tipo de Elemento"
+msgstr "Metadate corespunzătoare înregistrării"
 
 # Item Type Metadata description
 msgid ""
 "The item type metadata element set, consisting of all item type elements "
 "bundled with Omeka and all item type elements created by an administrator."
 msgstr ""
+"Setul de elemente de metadate al înregistrării care constă din toate "
+"elementele corespunzătoare unui anumit tip de înregistrare ce vin cu Omeka "
+"și toate elementele unui tip de înregistrare creată de un administrator."
 
 # Omeka Legacy File
 msgid "Omeka Legacy File"
-msgstr ""
+msgstr "Fișier compatibil Omeka"
 
 # Omeka Legacy File description
 msgid ""
@@ -129,126 +130,136 @@ msgid ""
 "elements are common to all Omeka files. This set may be deprecated in future"
 " versions."
 msgstr ""
+"Setul de elemente de metadate care suplimentar setului Dublin Core, a fost "
+"inclus în tabela „files” în versiunile anterioare Omeka. Aceste elemente "
+"sunt comune tuturor fișierelor Omeka. Acest set poate să fie abandonat în "
+"viitor."
 
 # Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
-msgstr "Creadores Adicionales"
+msgstr "Adaugă creator"
 
 # Omeka Legacy File: Transcriber element
 msgid "Transcriber"
-msgstr "Transcriptor"
+msgstr "Copist"
 
 # Omeka Legacy File: Producer element
 msgid "Producer"
-msgstr "Productor"
+msgstr "Producător"
 
 # Omeka Legacy File: Render Device element
 msgid "Render Device"
-msgstr ""
+msgstr "Dispozitiv de vizualizare"
 
 # Omeka Legacy File: Render Details element
 msgid "Render Details"
-msgstr ""
+msgstr "Detalii de vizualizare"
 
 # Omeka Legacy File: Capture Date element
 msgid "Capture Date"
-msgstr "Capturar la Fecha"
+msgstr "Data fixării"
 
 # Omeka Legacy File: Capture Device element
 msgid "Capture Device"
-msgstr "Capturar el dispositivo"
+msgstr "Dispozitiv de fixare"
 
 # Omeka Legacy File: Capture Details element
 msgid "Capture Details"
-msgstr "Capturar los detalles"
+msgstr "Detalii de fixare"
 
 # Omeka Legacy File: Change History element
 msgid "Change History"
-msgstr "Cambiar la historia"
+msgstr "Modifică istoricul"
 
 # Omeka Legacy File: Watermark element
 msgid "Watermark"
-msgstr "Filigrana"
+msgstr "Filigran"
 
 # Omeka Legacy File: Encryption element
 msgid "Encryption"
-msgstr "Cifrado"
+msgstr "Criptare"
 
 # Omeka Legacy File: Compression element
 msgid "Compression"
-msgstr "Compresion"
+msgstr "Compresie"
 
 # Omeka Legacy File: Post Processing element
 msgid "Post Processing"
-msgstr "Post-procesamiento"
+msgstr "Post procesare"
 
 # Omeka Image File
 msgid "Omeka Image File"
-msgstr "Archivo de Imagen Omeka"
+msgstr "Fișier de imagine Omeka"
 
 # Omeka Image File description
 msgid ""
 "The metadata element set that was included in the `files_images` table in "
 "previous versions of Omeka. These elements are common to all image files."
 msgstr ""
+"Setul de elemente de metadate care a fost inclus în tabelul „files_images” "
+"în versiunile anterioare ale Omeka. Aceste elemente sunt comune tuturor "
+"fișierelor de imagine."
 
 # Omeka Image File: Width element
 msgid "Width"
-msgstr "Ancho"
+msgstr "Lățime"
 
 # Omeka Image File: Height element
 msgid "Height"
-msgstr "Altura"
+msgstr "Înălțime"
 
 # Omeka Image File: Bit Depth element
 msgid "Bit Depth"
-msgstr ""
+msgstr "Adâncime de biți"
 
 # Omeka Image File: Channels element
 msgid "Channels"
-msgstr "Canales"
+msgstr "Canale"
 
 # Omeka Image File: Exif String element
 msgid "Exif String"
-msgstr ""
+msgstr "Fragment Exif"
 
 # Omeka Image File: Exif Array element
 msgid "Exif Array"
-msgstr ""
+msgstr "Tablou Exif"
 
 # Omeka Image File: IPTC String element
 msgid "IPTC String"
-msgstr ""
+msgstr "Fragment IPTC"
 
 # Omeka Image File: IPTC Array element
 msgid "IPTC Array"
-msgstr ""
+msgstr "Tablou IPTC"
 
 # Omeka Video File
 msgid "Omeka Video File"
-msgstr "Archivo de Video Omeka"
+msgstr "Fișier video Omeka"
 
 # Omeka Video File description
 msgid ""
 "The metadata element set that was included in the `files_videos` table in "
 "previous versions of Omeka. These elements are common to all video files."
 msgstr ""
+"Setul de elemente de metadate a fost inclus în tabelul „files_videos” al "
+"versiunilor precendente ale Omeka. Aceste elemente sunt comune tuturor "
+"fișierelor video."
 
 # Omeka Video File: Bitrate element
 msgid "Bitrate"
-msgstr ""
+msgstr "Bitrate"
 
 # Omeka Video File: Duration element
 msgid "Duration"
-msgstr "Duración"
+msgstr "Durată"
 
 # Omeka Video File: Sample Rate element
 msgid "Sample Rate"
-msgstr "Frecuencia de Muestreo"
+msgstr "Sample Rate"
 
 # Omeka Video File: Codec element
 msgid "Codec"
-msgstr ""
+msgstr "Codec"
 
 # User role: Super
 msgid "Super"
@@ -260,23 +271,23 @@ msgstr "Admin"
 
 # User role: Researcher
 msgid "Researcher"
-msgstr "investigador"
+msgstr "Cercetător"
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:6
 msgid "Add a Collection"
-msgstr "Agregue una Coleccion"
+msgstr "Adaugă o colecție"
 
 #: admin/themes/default/collections/add.php:9
 msgid "Save Collection"
-msgstr "Guardar la Coleccion"
+msgstr "Salveză colecția"
 
 #: admin/themes/default/collections/browse.php:2
 #: application/views/scripts/collections/browse.php:2
 #: application/views/scripts/common/footer.php:6
 #: application/views/scripts/functions.php:98
 msgid "Browse Collections"
-msgstr "Navegar las Colecciones"
+msgstr "Vezi colecțiile"
 
 #: admin/themes/default/collections/browse.php:4
 #: admin/themes/default/element-sets/browse.php:4
@@ -299,34 +310,34 @@ msgstr "ID"
 #: admin/themes/default/element-sets/browse.php:12
 #: admin/themes/default/item-types/form.php:20
 msgid "Name"
-msgstr "Nombre"
+msgstr "Nume"
 
 #: admin/themes/default/collections/browse.php:20
 #: admin/themes/default/collections/show.php:22
 msgid "Collectors"
-msgstr "Colectores"
+msgstr "Culegătorii"
 
 #: admin/themes/default/collections/browse.php:21
 #: admin/themes/default/files/show.php:24
 #: admin/themes/default/items/browse.php:134
 #: application/views/scripts/files/show.php:57
 msgid "Date Added"
-msgstr "Fecha de agregadación"
+msgstr "Dată adăugată"
 
 #: admin/themes/default/collections/browse.php:22
 #: admin/themes/default/collections/show.php:39
 #: admin/themes/default/item-types/show.php:42
 msgid "Total Number of Items"
-msgstr "Numero total de Elementos"
+msgstr "Suma înregistrărilor"
 
 #: admin/themes/default/collections/browse.php:25
 #: admin/themes/default/item-types/browse.php:17
 msgid "Edit?"
-msgstr "¿Corregir?"
+msgstr "Editezi?"
 
 #: admin/themes/default/collections/browse.php:44
 msgid "No collectors"
-msgstr "Sin colecctores"
+msgstr "Niciun culegător"
 
 #: admin/themes/default/collections/browse.php:57
 #: admin/themes/default/items/browse.php:150
@@ -334,33 +345,33 @@ msgstr "Sin colecctores"
 #: admin/themes/default/users/browse.php:43
 #: admin/themes/default/users/browse.php:58
 msgid "Edit"
-msgstr "Corregir"
+msgstr "Editează"
 
 #: admin/themes/default/collections/browse.php:68
 msgid "There are no collections on this page."
-msgstr "No existen colecciones en esta pagina."
+msgstr "Nu sunt colecții în această pagină."
 
 #: admin/themes/default/collections/browse.php:68
 msgid "View All Collections"
-msgstr "Vea todas las Colecciones"
+msgstr "Vezi toate colecțiile"
 
 #: admin/themes/default/collections/browse.php:71
 msgid "Add a collection."
-msgstr "Agregar una colección"
+msgstr "Adaugă o colecție."
 
 #: admin/themes/default/collections/browse.php:71
 msgid "There are no collections in your archive."
-msgstr "No existen colecciones en su archivo."
+msgstr "Nu există colecții în arhivă."
 
 #: admin/themes/default/collections/edit.php:8
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Edit Collection #%s"
-msgstr "Corrija Coleccion #%s"
+msgstr "Editează colecția #%s"
 
 #: admin/themes/default/collections/edit.php:14
 msgid "Delete this Collection"
-msgstr "Elimine esta Colección"
+msgstr "Șterge această colecție"
 
 #: admin/themes/default/collections/edit.php:20
 #: admin/themes/default/files/edit.php:41
@@ -373,32 +384,32 @@ msgstr "Elimine esta Colección"
 #: application/forms/SecuritySettings.php:70
 #: application/forms/ThemeConfiguration.php:67
 msgid "Save Changes"
-msgstr "Guardar los Cambios"
+msgstr "Salvează modificările"
 
 #: admin/themes/default/collections/form.php:4
 msgid "Collection Details"
-msgstr "Detalles de esta colección"
+msgstr "Detaliile colecției"
 
 #: admin/themes/default/collections/form.php:4
 #: admin/themes/default/item-types/form.php:17
 #: install/views/scripts/index/index.phtml:13
 msgid "Required Fields"
-msgstr "Informacion Requiridas"
+msgstr "Câmpuri obligatorii"
 
 #: admin/themes/default/collections/form.php:7
 msgid "Collection Name"
-msgstr "Nombre de la Colección"
+msgstr "Numele colecției"
 
 #: admin/themes/default/collections/form.php:15
 msgid "Collection Description"
-msgstr "Descripcion de la Coleccion"
+msgstr "Descrierea colecției"
 
 #: admin/themes/default/collections/form.php:25
 msgid ""
 "List collectors for this collection (optional - enter one name per line)"
 msgstr ""
-"Haga una lista de los colectores de esta coleccion (opcional - entre un "
-"nombre por linea)"
+"Lista culegătorilor pentru această colecție (opțional - un singur nume per "
+"linie)"
 
 #: admin/themes/default/collections/form.php:35
 #: admin/themes/default/collections/form.php:37
@@ -408,12 +419,12 @@ msgstr ""
 #: admin/themes/default/items/browse.php:177
 #: admin/themes/default/items/form.php:37
 msgid "Public"
-msgstr "Publico"
+msgstr "Public"
 
 #: admin/themes/default/collections/form.php:37
 #: admin/themes/default/items/batch-edit.php:43
 msgid "Not Public"
-msgstr "No publico"
+msgstr "Privat"
 
 #: admin/themes/default/collections/form.php:42
 #: admin/themes/default/collections/form.php:44
@@ -423,95 +434,95 @@ msgstr "No publico"
 #: admin/themes/default/items/browse.php:182
 #: admin/themes/default/items/form.php:43
 msgid "Featured"
-msgstr "Destacado"
+msgstr "Constituit"
 
 #: admin/themes/default/collections/form.php:44
 #: admin/themes/default/items/batch-edit.php:55
 msgid "Not Featured"
-msgstr "No Destacado"
+msgstr "Neconstituit"
 
 #: admin/themes/default/collections/show.php:11
 #: admin/themes/default/items/show.php:14
 msgid "View Public Page"
-msgstr "Vea la pagina publica"
+msgstr "Vizualizează pagina publică"
 
 #: admin/themes/default/collections/show.php:13
 msgid "Edit this Collection"
-msgstr "Corrija esta Colección"
+msgstr "Editează această colecție"
 
 #: admin/themes/default/collections/show.php:27
 msgid "No collectors."
-msgstr "No hay coleccionistas."
+msgstr "Nu sunt culegători."
 
 #: admin/themes/default/collections/show.php:33
 #: admin/themes/default/item-types/show.php:30
 #: application/views/scripts/index.php:35
 msgid "Recently Added Items"
-msgstr "Elementos Recientemente Añadidos"
+msgstr "Înregistrări adăugate recent"
 
 #: admin/themes/default/common/footer.php:4
 msgid "Documentation"
-msgstr "Documentación"
+msgstr "Documentație"
 
 #: admin/themes/default/common/footer.php:4
 #: admin/themes/default/common/login-footer.php:4
 msgid "Powered by Omeka"
-msgstr ""
+msgstr "Motorizat de Omeka"
 
 #: admin/themes/default/common/footer.php:4
 msgid "Support Forums"
-msgstr "Foros de Soporte"
+msgstr "Forumuri de sprijin"
 
 #: admin/themes/default/common/footer.php:6
 #: admin/themes/default/common/login-footer.php:4
 #: admin/themes/default/plugins/plugin-info.php:65
 #, php-format
 msgid "Version %s"
-msgstr "Version %s"
+msgstr "Versiunea %s"
 
 #: admin/themes/default/common/footer.php:9
 msgid "More information about your system"
-msgstr "Mas información de el sistema"
+msgstr "Mai multe informații despre sistem"
 
 #: admin/themes/default/common/header.php:5
 msgid "Omeka Admin"
-msgstr "Administrador de Omeka"
+msgstr "Administratorul Omeka"
 
 #: admin/themes/default/common/header.php:24
 msgid "Skip Navigation"
-msgstr "Saltar la Navegación"
+msgstr "Sari navigarea"
 
 #: admin/themes/default/common/header.php:33
 msgid "Log Out"
-msgstr "Cierre la sesión"
+msgstr "Log out"
 
 #: admin/themes/default/common/header.php:33
 #, php-format
 msgid "Welcome, %s"
-msgstr "Bienvenido, %s"
+msgstr "Bine ai venit %s"
 
 #: admin/themes/default/common/header.php:36 admin/themes/default/index.php:58
 msgid "Settings"
-msgstr "Configuración"
+msgstr "Setări"
 
 #: admin/themes/default/common/header.php:38
 msgid "View Public Site"
-msgstr "Vea la pagina de web publica"
+msgstr "Vizualizează siteul public"
 
 #: admin/themes/default/common/primary-nav.php:5
 #: admin/themes/default/index.php:21
 #: admin/themes/default/items/batch-edit.php:14
 msgid "Items"
-msgstr "Elementos"
+msgstr "Înregistrări"
 
 #: admin/themes/default/common/primary-nav.php:6
 #: admin/themes/default/index.php:32
 msgid "Collections"
-msgstr "Colecciones"
+msgstr "Colecții"
 
 #: admin/themes/default/common/primary-nav.php:7
 msgid "Item Types"
-msgstr "Tipo de Elemento"
+msgstr "Tipuri de înregistrări"
 
 #: admin/themes/default/common/primary-nav.php:8
 #: admin/themes/default/items/browse.php:166
@@ -519,52 +530,52 @@ msgstr "Tipo de Elemento"
 #: application/views/scripts/items/browse.php:39
 #: application/views/scripts/items/show.php:26
 msgid "Tags"
-msgstr "Etiquetas"
+msgstr "Etichete"
 
 #: admin/themes/default/common/settings-nav.php:6
 msgid "General Settings"
-msgstr "Configuración General"
+msgstr "Setări generale"
 
 #: admin/themes/default/common/settings-nav.php:8
 msgid "Plugins"
-msgstr ""
+msgstr "Pluginuri"
 
 #: admin/themes/default/common/settings-nav.php:11
 msgid "Themes"
-msgstr "Duración"
+msgstr "Teme"
 
 #: admin/themes/default/common/settings-nav.php:14
 #: admin/themes/default/index.php:45
 msgid "Users"
-msgstr "Usuarios"
+msgstr "Utilizatori"
 
 #: admin/themes/default/common/settings-nav.php:17
 msgid "Element Sets"
-msgstr "Set de Elementos"
+msgstr "Seturi de elemente"
 
 #: admin/themes/default/common/settings-nav.php:20
 msgid "Security Settings"
-msgstr "Configuración de seguridad"
+msgstr "Setări de securitate"
 
 #: admin/themes/default/common/tags-nav.php:3
 #: admin/themes/default/tags/browse.php:2
 msgid "Browse Tags"
-msgstr "Navegar las Etiquetas"
+msgstr "Vezi etichetele"
 
 #: admin/themes/default/common/tags-nav.php:5
 #: admin/themes/default/tags/edit.php:2
 msgid "Edit Tag"
-msgstr "Redactar las Etiquetas"
+msgstr "Editează eticheta"
 
 #: admin/themes/default/common/tags-nav.php:8
 #: admin/themes/default/tags/delete.php:2
 #: admin/themes/default/tags/delete.php:21
 msgid "Delete Tag"
-msgstr "Elimine la Etiqueta"
+msgstr "Șterge eticheta"
 
 #: admin/themes/default/element-sets/browse.php:2
 msgid "Browse Element Sets"
-msgstr "Navegue los Sets de Elementos"
+msgstr "Treci prin setul de elemente"
 
 #: admin/themes/default/element-sets/browse.php:14
 #: admin/themes/default/items/batch-edit.php:101
@@ -573,30 +584,29 @@ msgstr "Navegue los Sets de Elementos"
 #: admin/themes/default/users/browse.php:46
 #: application/helpers/FormFunctions.php:574
 msgid "Delete"
-msgstr "Elimine"
+msgstr "Șterge"
 
 #: admin/themes/default/error/403.php:2
 msgid "403: Forbidden"
-msgstr "403: Prohibido"
+msgstr "403: Interzis"
 
 #: admin/themes/default/error/403.php:9
 msgid "Sorry, you do not have permission to access this page."
-msgstr "Perdon, usted no tiene permiso para acceder a esta página."
+msgstr "Nu ai permisunea de a accesa această pagină"
 
 #: admin/themes/default/error/403.php:12 admin/themes/default/error/404.php:12
 #: admin/themes/default/error/405.php:10
 msgid "site administrator"
-msgstr "administrador de el site"
+msgstr "administratorul siteului"
 
 #: admin/themes/default/error/403.php:13
 #, php-format
 msgid "If you think you should have permission, try contacting the %s."
-msgstr ""
-"Si cree que usted debe tener permiso, intente ponerse en contacto con el %s."
+msgstr "Dacă crezi că ar trebui să ai permisiunea, contactează %s."
 
 #: admin/themes/default/error/404.php:2
 msgid "404: Page Not Found"
-msgstr "404: Página no Encontrada"
+msgstr "404: Pagină inexistentă"
 
 #: admin/themes/default/error/404.php:9
 msgid ""
@@ -604,26 +614,26 @@ msgid ""
 "this happens. Below is a quick break-down of the items, collections, and "
 "exhibits on this site."
 msgstr ""
-"Usted trato the acceder una pagina que parece no existir. A veces esto "
-"occure. A continuacion se muestra una sinopsis de los elementos, colecciónes"
-" y exhibiciones en esta pagina de página web."
+"Ai încercat să accesezi o pagină care pare să nu existe. Uneori acest lucru "
+"se mai întâmplă. Mai jos sunt detaliate înregistrările, colecțiile și "
+"expozițiile acestui site."
 
 #: admin/themes/default/error/404.php:13
 #, php-format
 msgid "If this does not help, try contacting the %s."
-msgstr "Si esto no le ayuda, trate de contactar al %s."
+msgstr "Dacă nu e clar, contactează %s."
 
 #: admin/themes/default/error/404.php:15 admin/themes/default/index.php:88
 msgid "Recent Items"
-msgstr "Elementos Recientes"
+msgstr "Înregistrări recente"
 
 #: admin/themes/default/error/404.php:25
 msgid "Recent Collections"
-msgstr "Colecciones Recientes"
+msgstr "Colecții recente"
 
 #: admin/themes/default/error/405.php:2
 msgid "405: Method Not Allowed"
-msgstr "405: Metodo no permitido"
+msgstr "405: Metodă nepermisă"
 
 #: admin/themes/default/error/405.php:11
 #, php-format
@@ -631,172 +641,176 @@ msgid ""
 "You must use a different method to access this URL. If you reached this page"
 " by following a link or clicking a button in Omeka, please contact the %s."
 msgstr ""
+"Folosește o altă metodă de acces pentru acest URL. Dacă ai ajuns pe această "
+"pagină urmârind un link sau ai apăsat pe un buton în Omeka, contactează %s."
 
 #: admin/themes/default/files/edit.php:8
 #, php-format
 msgid "Edit File #%s"
-msgstr "Redactar el Archivo #%s"
+msgstr "Editează fișierul #%s"
 
 #: admin/themes/default/files/edit.php:17
 msgid "Delete this File"
-msgstr "Elimine este Archivo"
+msgstr "Șterge acest fișier"
 
 #: admin/themes/default/files/edit.php:27
 #: application/views/scripts/functions.php:54
 msgid "Dublin Core"
-msgstr ""
+msgstr "Dublin Core"
 
 #: admin/themes/default/files/edit.php:32
 msgid "Format (Legacy) Metadata"
-msgstr "Formato (dejado) de Metadatos"
+msgstr "Format de metadate (compatibil)"
 
 #: admin/themes/default/files/show.php:9
 #: application/views/scripts/files/show.php:9
 #, php-format
 msgid "File #%s"
-msgstr "Archivo #%s"
+msgstr "Fișierul #$%s"
 
 #: admin/themes/default/files/show.php:15
 msgid "Edit this File"
-msgstr "Redacte este Archivo"
+msgstr "Editează acest fișier"
 
 #: admin/themes/default/files/show.php:23
 #: application/views/scripts/files/show.php:55
 msgid "File History"
-msgstr "Historia del Archivo"
+msgstr "Istoricul fișierului"
 
 #: admin/themes/default/files/show.php:26
 #: application/views/scripts/files/show.php:61
 msgid "Date Modified"
-msgstr "Fecha de modificacion"
+msgstr "Data modificării"
 
 #: admin/themes/default/files/show.php:28
 #: application/views/scripts/files/show.php:65
 msgid "Authentication"
-msgstr "Autenticación"
+msgstr "Autentificare"
 
 #: admin/themes/default/files/show.php:36
 msgid "Format Metadata"
-msgstr "Formatear Metadatos"
+msgstr "Formatare metadate"
 
 #: admin/themes/default/files/show.php:38
 #: application/views/scripts/files/show.php:23
 msgid "Archive Filename"
-msgstr "Nombre de Archivo"
+msgstr "Numele fișierului de arhivă"
 
 #: admin/themes/default/files/show.php:39
 #: application/views/scripts/files/show.php:28
 msgid "Original Filename"
-msgstr "Nombre de archivo original"
+msgstr "Numele original al fișierului"
 
 #: admin/themes/default/files/show.php:40
 #: application/views/scripts/files/show.php:33
 msgid "File Size"
-msgstr "Tamaño de archivo"
+msgstr "Dimensiune fișier"
 
 #: admin/themes/default/files/show.php:45
 #: admin/themes/default/item-types/show.php:20
 #: application/views/scripts/files/show.php:39
 msgid "Type Metadata"
-msgstr "Tipo de Metadato"
+msgstr "Metadate aferente tip"
 
 #: admin/themes/default/files/show.php:47
 #: application/views/scripts/files/show.php:41
 msgid "Mime Type / Browser"
-msgstr "Tipo de Mime / Navegador"
+msgstr "Mime Type / Browser"
 
 #: admin/themes/default/files/show.php:48
 #: application/views/scripts/files/show.php:45
 msgid "Mime Type / OS"
-msgstr "Tipo de Mime / Sistema de Operación"
+msgstr "Mime Type / OS"
 
 #: admin/themes/default/files/show.php:49
 #: application/views/scripts/files/show.php:49
 msgid "File Type / OS"
-msgstr "Tipo de Archivo / Sistema de Operación"
+msgstr "Tip fișier / OS"
 
 #: admin/themes/default/files/show.php:54
 #: admin/themes/default/items/browse.php:201
 #: admin/themes/default/items/show.php:110
 msgid "Output Formats"
-msgstr "Formatos de Rendimiento"
+msgstr "Formate de ieșire"
 
 #: admin/themes/default/index.php:2
 msgid "Dashboard"
-msgstr "Tablero de Instrumentos"
+msgstr "Tablou operator"
 
 #: admin/themes/default/index.php:12
 msgid "A new version of Omeka is available for download."
-msgstr "Una nueva version de Omeka esta disponible para descargar."
+msgstr "O nouă versiune Omeka este gata pentru descărcare."
 
 #: admin/themes/default/index.php:13
 #, php-format
 msgid "Upgrade to %s"
-msgstr "Actualize a %s"
+msgstr "Actualizare la %s"
 
 #: admin/themes/default/index.php:19
 msgid "Getting Started with Omeka"
-msgstr "Primeros pasos con Omeka"
+msgstr "La start cu Omeka"
 
 #: admin/themes/default/index.php:24
 msgid "Add a new item to your archive"
-msgstr "Agregue un nuevo elemento a su archivo"
+msgstr "Adaugă o înregistrare nouă în arhivă"
 
 #: admin/themes/default/index.php:25
 msgid "Browse your items"
-msgstr "Navege sus elementos"
+msgstr "Răsfoiește prin înregistrări"
 
 #: admin/themes/default/index.php:28
 msgid "Manage items in your archive: add, edit, and delete items."
-msgstr "Administre elementos en su archivo: añadir, y eliminar elementos."
+msgstr "Gestionează-ți înregistrările: adaugă, editează și șterge."
 
 #: admin/themes/default/index.php:35
 msgid "Add a collection to group items"
-msgstr "Agregue una colección para agrupar elementos"
+msgstr "Adaugă o colecție pentru a grupa înregistrări"
 
 #: admin/themes/default/index.php:36
 msgid "Browse your collections"
-msgstr "Navegue sus colecciónes"
+msgstr "Treci prin colecții"
 
 #: admin/themes/default/index.php:39
 msgid "Manage collections in your archive: add, edit, and delete collections."
-msgstr "Administre colecciones en su archivo: agregue, o elimine colecciones."
+msgstr ""
+"Gestionează colecțiile arhivei: adaugă, editează și șterge colecțiile."
 
 #: admin/themes/default/index.php:48 admin/themes/default/users/browse.php:2
 msgid "Browse Users"
-msgstr "Navegue los Usuarios"
+msgstr "Vezi utilizatorii"
 
 #: admin/themes/default/index.php:50 admin/themes/default/users/browse.php:6
 msgid "Add a User"
-msgstr "Agregue un Usuario"
+msgstr "Adaugă un utilizator"
 
 #: admin/themes/default/index.php:53
 msgid "Manage users of various levels: from researcher to super."
-msgstr "Administre usuarios de diferentes niveles: investigador a super."
+msgstr ""
+"Gestionează utilizatorii la diferite niveluri: de la cercetător, la super."
 
 #: admin/themes/default/index.php:61 admin/themes/default/settings/edit.php:2
 msgid "Edit General Settings"
-msgstr "Redacte la configuración general"
+msgstr "Modifică setările generale"
 
 #: admin/themes/default/index.php:62
 msgid "Manage Themes"
-msgstr "Administre los Temas"
+msgstr "Gestionează temele"
 
 #: admin/themes/default/index.php:63
 msgid "Manage Plugins"
-msgstr "Administre los Plugins"
+msgstr "Gestionează pluginuri"
 
 #: admin/themes/default/index.php:65
 msgid ""
 "Manage your general settings for the site, including title, description, and"
 " themes."
 msgstr ""
-"Administre su configuración general para la pagina de web, incluyendo el "
-"titulo, la descripción, y los temas."
+"Aranjează setările generale pentru site, incluzând titlul, descrierea și "
+"temele."
 
 #: admin/themes/default/index.php:75
 msgid "Site Overview"
-msgstr "Resumen del sitio de web"
+msgstr "Privire generală asupra siteului"
 
 #: admin/themes/default/index.php:85
 #, php-format
@@ -804,20 +818,20 @@ msgid ""
 "<em>%1$s</em> contains %2$s items, in %3$s collections, tagged with %4$s "
 "keywords. There are %5$s users."
 msgstr ""
-"<em>%1$s</em> contiene %2$s elementos, en %3$s colecciones, etiquetadas con "
-"%4$s palabras clave. Existen %5$s usuarios."
+"<em>%1$s</em> cuprinzând %2$s înregistrări în %3$s colecții, etichetate prin"
+" %4$s cuvinte cheie. Sunt %5$s utilizatori."
 
 #: admin/themes/default/index.php:91
 msgid "There are no items to display."
-msgstr "No hay elementos para mostrar."
+msgstr "Nu există înregistrări pentru a fi afișate."
 
 #: admin/themes/default/index.php:102 application/views/scripts/index.php:71
 msgid "View All Items"
-msgstr "Navegue todos lo elementos"
+msgstr "Vezi toate înregistrările"
 
 #: admin/themes/default/index.php:107
 msgid "Recent Tags"
-msgstr "Etiquetas Recientes"
+msgstr "Etichetele noi"
 
 #: admin/themes/default/item-types/add-existing-element.php:7
 #: admin/themes/default/item-types/add-new-element.php:7
@@ -825,146 +839,146 @@ msgstr "Etiquetas Recientes"
 #: admin/themes/default/item-types/element-list.php:24
 #: application/helpers/ElementForm.php:406
 msgid "Remove"
-msgstr "Elimine"
+msgstr "Elimină"
 
 #: admin/themes/default/item-types/add.php:2
 #: admin/themes/default/item-types/add.php:10
 msgid "Add Item Type"
-msgstr "Agregue tipo de elemento"
+msgstr "Adaugă tip de înregistrare"
 
 #: admin/themes/default/item-types/browse.php:2
 msgid "Browse Item Types"
-msgstr "Navegue Tipo de elementos"
+msgstr "Vezi tipurile de înregistrări"
 
 #: admin/themes/default/item-types/browse.php:6
 msgid "Add an Item Type"
-msgstr "Agregue un tipo de elementos"
+msgstr "Adaugă un tip de înregistrare"
 
 #: admin/themes/default/item-types/browse.php:13
 msgid "Type Name"
-msgstr "Nombre de el tipo"
+msgstr "Numele tipului"
 
 #: admin/themes/default/item-types/browse.php:15
 msgid "Total Items"
-msgstr "Numero total de elementos"
+msgstr "Toate înregistrările"
 
 #: admin/themes/default/item-types/edit.php:8
 #, php-format
 msgid "Edit Item Type #%s"
-msgstr "Redacte tipo de elemento #%s"
+msgstr "Editează tipul de înregistrare #%s"
 
 #: admin/themes/default/item-types/edit.php:14
 msgid "Delete this Item Type"
-msgstr "Elimine este tipo de elemento"
+msgstr "Șterge acest tip de înregistrare"
 
 #: admin/themes/default/item-types/element-form.php:3
 msgid "Add an Element to this Item Type"
-msgstr "Agruege un elemento de este tipo de elementos"
+msgstr "Adaugă un element la acest tip de înregistrare"
 
 #: admin/themes/default/item-types/element-form.php:6
 msgid "Choose an existing element"
-msgstr "Elija un elemento existente"
+msgstr "Alege un element existent"
 
 #: admin/themes/default/item-types/element-form.php:14
 msgid "Or Create a new Element"
-msgstr "O cree un Elemento nuevo"
+msgstr "Sau scrie un element nou"
 
 #: admin/themes/default/item-types/element-form.php:31
 #: admin/themes/default/item-types/element-list.php:7
 msgid "Data Type"
-msgstr "Tipo de Datos"
+msgstr "Tip de date"
 
 #: admin/themes/default/item-types/element-form.php:40
 #: admin/themes/default/item-types/element-list.php:61
 msgid "Add Element"
-msgstr "Agregue el elemento"
+msgstr "Adaugă element"
 
 #: admin/themes/default/item-types/element-list.php:1
 msgid "Edit Current Elements"
-msgstr "Redacte el elemento actual"
+msgstr "Editează elementele existente"
 
 #: admin/themes/default/item-types/element-list.php:5
 msgid "Element Name"
-msgstr "Nombre de el elemento"
+msgstr "Nume element"
 
 #: admin/themes/default/item-types/element-list.php:8
 msgid "Order"
-msgstr "Orden"
+msgstr "Ordinea"
 
 #: admin/themes/default/item-types/element-list.php:59
 msgid "Existing"
-msgstr "Existentes"
+msgstr "Existente"
 
 #: admin/themes/default/item-types/element-list.php:60
 msgid "New"
-msgstr "Nuevo"
+msgstr "Nou"
 
 #: admin/themes/default/item-types/form.php:17
 msgid "Item Type Information"
-msgstr "Información del tip de elemento"
+msgstr " Informații despre tipul înregistrării"
 
 #: admin/themes/default/item-types/form.php:35
 msgid "Elements"
-msgstr "Elementos"
+msgstr "Elemente"
 
 #: admin/themes/default/item-types/show.php:8
 #, php-format
 msgid "Item Type #%s"
-msgstr "Tipo de Elemento #%s"
+msgstr "Tip de înregistrare #%s"
 
 #: admin/themes/default/item-types/show.php:13
 msgid "Edit this Item Type"
-msgstr "Redacte este tipo de elemento"
+msgstr "Editează acest tip de înregistrare"
 
 #: admin/themes/default/item-types/show.php:39
 msgid "There are no recently added items."
-msgstr "No hay elementos añadidos recientemente."
+msgstr "Nu există înregistrări adăugate recent."
 
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:6
 msgid "Add an Item"
-msgstr "Agregue un elemento"
+msgstr "Adaugă o înregistrare"
 
 #: admin/themes/default/items/add.php:12
 msgid "Add Item"
-msgstr "Agregue el elemento"
+msgstr "Adaugă înregistrare"
 
 #: admin/themes/default/items/batch-edit.php:2
 msgid "Batch Edit Items"
-msgstr ""
+msgstr "Editează grupe de înregistrări"
 
 #: admin/themes/default/items/batch-edit.php:15
 msgid "Changes will be applied to checked items."
-msgstr ""
+msgstr "Modificările vor fi aplicate înregistrărilor bifate."
 
 #: admin/themes/default/items/batch-edit.php:36
 msgid "Item Metadata"
-msgstr "Meta-datos del elemento"
+msgstr "Metadatele înregistrării"
 
 #: admin/themes/default/items/batch-edit.php:39
 msgid "Public?"
-msgstr "Publico"
+msgstr "Public?"
 
 #: admin/themes/default/items/batch-edit.php:41
 #: admin/themes/default/items/batch-edit.php:53
 #: admin/themes/default/items/batch-edit.php:65
 #: admin/themes/default/items/batch-edit.php:78
 msgid "Select Below"
-msgstr "Seleccione Debajo"
+msgstr "Selectează de mai jos"
 
 #: admin/themes/default/items/batch-edit.php:51
 msgid "Featured?"
-msgstr "Destacado"
+msgstr "Constituit?"
 
 #: admin/themes/default/items/batch-edit.php:62
 #: admin/themes/default/items/item-type-form.php:2
 msgid "Item Type"
-msgstr "Tipo de Elemento"
+msgstr "Tipul înregistrării"
 
 #: admin/themes/default/items/batch-edit.php:70
 #: admin/themes/default/items/batch-edit.php:83
 msgid "Remove?"
-msgstr "Elimine"
+msgstr "Scoți?"
 
 #: admin/themes/default/items/batch-edit.php:75
 #: admin/themes/default/items/browse.php:165
@@ -972,28 +986,28 @@ msgstr "Elimine"
 #: admin/themes/default/items/show.php:62
 #: application/views/scripts/items/show.php:18
 msgid "Collection"
-msgstr "Colección"
+msgstr "Colecție"
 
 #: admin/themes/default/items/batch-edit.php:88
 #: admin/themes/default/items/tag-form.php:11
 #: admin/themes/default/items/tag-form.php:13
 msgid "Add Tags"
-msgstr "Agregue Etiquetas"
+msgstr "Adaugă etichete"
 
 #: admin/themes/default/items/batch-edit.php:90
 #, php-format
 msgid "List of tags to add to all checked items, separated by %s."
 msgstr ""
-"Lista de etiquetas para añadir a todos lo elementos seleccionados, separados"
-" por %s."
+"Lista etichetelor pentru a fi adăugate înregistrărilor bifate separate prin "
+"%s."
 
 #: admin/themes/default/items/batch-edit.php:98
 msgid "Delete Items"
-msgstr "Borre los Elementos"
+msgstr "Șterge înregistrări"
 
 #: admin/themes/default/items/batch-edit.php:99
 msgid "Check if you wish to delete selected items."
-msgstr "Verifique si quiere borrar los elementos seleccionados."
+msgstr "Bifează dacă dorești să ștergi înregistrările selectate."
 
 #: admin/themes/default/items/browse.php:2
 #: application/views/scripts/common/footer.php:6
@@ -1001,96 +1015,96 @@ msgstr "Verifique si quiere borrar los elementos seleccionados."
 #: application/views/scripts/items/browse.php:2
 #: application/views/scripts/items/tags.php:2
 msgid "Browse Items"
-msgstr "Navegue los elementos"
+msgstr "Vezi înregistrările"
 
 #: admin/themes/default/items/browse.php:13
 msgid "Toggle"
-msgstr ""
+msgstr "Comută"
 
 #: admin/themes/default/items/browse.php:14
 msgid "Details"
-msgstr "Detalles"
+msgstr "Detalii"
 
 #: admin/themes/default/items/browse.php:15
 msgid "Show Details"
-msgstr "Mostrar Detalles"
+msgstr "Arată detaliile"
 
 #: admin/themes/default/items/browse.php:16
 msgid "Hide Details"
-msgstr "Ocultar Detalles"
+msgstr "Ascunde detaliile"
 
 #: admin/themes/default/items/browse.php:96
 msgid "Quick Filter"
-msgstr "Filtro Rapido"
+msgstr "Filtru rapid"
 
 #: admin/themes/default/items/browse.php:99
 msgid "All"
-msgstr "Todo"
+msgstr "Toate"
 
 #: admin/themes/default/items/browse.php:101
 msgid "Private"
-msgstr "Privado"
+msgstr "Privat"
 
 #: admin/themes/default/items/browse.php:109
 #: application/helpers/LinkFunctions.php:63
 #: application/views/scripts/items/advanced-search.php:2
 msgid "Advanced Search"
-msgstr "Busqueda Avanzada"
+msgstr "Căutare avansată"
 
 #: admin/themes/default/items/browse.php:117
 #: admin/themes/default/items/browse.php:193
 msgid "Edit Selected Items"
-msgstr ""
+msgstr "Editează înregistrările selectate"
 
 #: admin/themes/default/items/browse.php:126
 msgid "Select"
-msgstr "Seleccione "
+msgstr "Selectează"
 
 #: admin/themes/default/items/browse.php:165
 #: admin/themes/default/items/show.php:64
 msgid "No Collection"
-msgstr "Sin Coleccion"
+msgstr "Nicio colecție"
 
 #: admin/themes/default/items/browse.php:166
 msgid "No Tags"
-msgstr "Sin Etiquetas"
+msgstr "Nicio etichetă"
 
 #: admin/themes/default/items/browse.php:207
 msgid "There are no items in the archive yet."
-msgstr "Todavía no hay elmentos en el archivo."
+msgstr "Încă nu există înregistrări în arhivă."
 
 #: admin/themes/default/items/browse.php:210
 msgid "Add an item."
-msgstr "Agregue un Elemento"
+msgstr "Adaugă o înregistrare"
 
 #: admin/themes/default/items/browse.php:215
 #, php-format
 msgid "The query searched %s items and returned no results."
-msgstr "La consulta busco por %s elementos y regreso sin resultados."
+msgstr "Căutarea s-a făcut pe %s înregistrări fără rezultat."
 
 #: admin/themes/default/items/browse.php:215
 #, php-format
 msgid "Would you like to %s?"
-msgstr "Le gustaría %s"
+msgstr "Dorești să %s?"
 
 #: admin/themes/default/items/browse.php:215
 msgid "refine your search"
-msgstr "Refina tu búsqueda"
+msgstr "detaliază căutarea"
 
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
 #: application/helpers/LinkFunctions.php:271
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
-msgstr "[Sin título]"
+msgstr "[Fără titlu]"
 
 #: admin/themes/default/items/edit.php:8
 #, php-format
 msgid "Edit Item #%s"
-msgstr "Redacte el elemento #%s"
+msgstr "Editează înregistrarea #%s"
 
 #: admin/themes/default/items/edit.php:12
 msgid "Delete this Item"
-msgstr "Elimine este elemento"
+msgstr "Șterge această înregistrare"
 
 #: admin/themes/default/items/files-form.php:4
 msgid ""
@@ -1098,106 +1112,106 @@ msgid ""
 "created. If you would like Omeka to create derivative images, please add the"
 " path to your settings form."
 msgstr ""
-"La ruta para el acceso a ImageMagick no se ha definido. La imagen derivada "
-"no se creará. Si quiere que Omeka cree imagenes derivativas, por favor, "
-"agruegue la ruta de acceso al formulario de configuración."
+"Nu a fost setată calea către Image Magick. Nu vor fi create imagini "
+"derivate. Dacă dorești ca Omeka să genereze imagini, adaugă calea în "
+"formularul setărilor. "
 
 #: admin/themes/default/items/files-form.php:7
 msgid "Current Files"
-msgstr "Archivos actuales"
+msgstr "Fișierele existente"
 
 #: admin/themes/default/items/files-form.php:12
 msgid "File Name"
-msgstr "Nombre de Archivo"
+msgstr "Nume fișier"
 
 #: admin/themes/default/items/files-form.php:13
 msgid "Edit File Metadata"
-msgstr "Redacte los metadatos del archivo"
+msgstr "Editează metadatele fișierului"
 
 #: admin/themes/default/items/files-form.php:34
 msgid "Add New Files"
-msgstr "Agregue Nuevos Archivos"
+msgstr "Adaugă alte fișiere"
 
 #: admin/themes/default/items/files-form.php:37
 #: admin/themes/default/items/files-form.php:48
 msgid "Find a File"
-msgstr "Busqué un Archivo"
+msgstr "Caută un fișier"
 
 #: admin/themes/default/items/form.php:21
 msgid "Add Another File"
-msgstr "Agregue Otro Archivo"
+msgstr "Adaugă alt fișier"
 
 #: admin/themes/default/items/item-type-form.php:8
 msgid "Pick this type"
-msgstr "Elija este tipo"
+msgstr "Alege acest tip"
 
 #: admin/themes/default/items/show.php:8
 #, php-format
 msgid "Item #%s"
-msgstr "Elemento #%s"
+msgstr "Înregistrarea #%s"
 
 #: admin/themes/default/items/show.php:18
 msgid "Edit this Item"
-msgstr "Agregue este Elemento"
+msgstr "Editează această înregistrare"
 
 #: admin/themes/default/items/show.php:55
 msgid "Bibliographic Citation"
-msgstr "Citación Bibliografíca"
+msgstr "Referințe bibliografice"
 
 #: admin/themes/default/items/show.php:76
 #: admin/themes/default/items/tag-form.php:18
 msgid "My Tags"
-msgstr "Mis Etiquetas"
+msgstr "Etichetele mele"
 
 #: admin/themes/default/items/show.php:85
 msgid "Save Tags"
-msgstr "Guardar las Etiquetas"
+msgstr "Salvează etichetele"
 
 #: admin/themes/default/items/show.php:95
 #: admin/themes/default/items/show.php:102
 msgid "View File Metadata"
-msgstr "Vea los Metadatos del Archivo"
+msgstr "Vezi metadatele fișierului"
 
 #: admin/themes/default/items/show.php:98
 msgid "Add a File"
-msgstr "Agregue un Archivo"
+msgstr "Adaugă un fișier"
 
 #: admin/themes/default/items/show.php:98
 msgid "There are no files for this item yet."
-msgstr "Aún, no hay archivos para este elementos."
+msgstr "Deocamdată nu sunt fișiere pentru această înregistrare"
 
 #: admin/themes/default/items/tag-form.php:14
 #, php-format
 msgid "Separate tags with %s"
-msgstr "Separe etiquetas con %s"
+msgstr "Separă etichetele prin %s"
 
 #: admin/themes/default/items/tag-form.php:42
 #: admin/themes/default/items/tag-list.php:2
 msgid "All Tags"
-msgstr "Todas las Etiquetas"
+msgstr "Toate etichetele"
 
 #: admin/themes/default/items/tags.php:2
 msgid "Browse Items by Tag"
-msgstr "Navegue Elementos por Etiqueta"
+msgstr "Răsfoiește înregistrările după etichete"
 
 #: admin/themes/default/items/tags.php:9
 #: admin/themes/default/tags/browse.php:27
 msgid "There are no tags to display. You must first tag some items."
 msgstr ""
-"No hay etiquetas para mostrar. En primer lugar, debe etiquetar algunos "
-"elemntos."
+"Nu există etichete care să fie afișate. Mai întâi trebuie să etichetezi "
+"câteva înregistrări."
 
 #: admin/themes/default/plugins/browse.php:2
 msgid "Browse Plugins"
-msgstr "Navegue los Plugins"
+msgstr "Vezi pluginurile"
 
 #: admin/themes/default/plugins/browse.php:21
 msgid ""
 "You do not have any plugins installed. Add them to the plugins directory to "
 "see them listed here."
 msgstr ""
-"Usted no tiene ningun plugin instalado. Agregarlos al directorio de plugins "
-"para verlos en esta lista."
+"Nu ai niciun plugin instalat. Adaugă-le în directorul plugins pentru a le "
+"vedea aici"
 
 #: admin/themes/default/plugins/browse.php:24
 msgid ""
@@ -1206,46 +1220,46 @@ msgid ""
 "href=\"http://omeka.org/codex/Plugin_Writing_Best_Practices\">write your "
 "own</a>!"
 msgstr ""
-"Para agregar nuevos plugins descargue de <a href=\"http://omeka.org/add-"
-"ons/plugins/\">Directorio de Plugins Omeka</a>, or <a "
-"href=\"http://omeka.org/codex/Plugin_Writing_Best_Practices\">crea to propio"
-" plugin</a>!"
+"Adaugă noi pluginuri descărcându-le de la <a href=\"http://omeka.org/add-"
+"ons/plugins/\">Omeka Plugins Directory</a> sau <a "
+"href=\"http://omeka.org/codex/Plugin_Writing_Best_Practices\">scrie tu "
+"altele urmând</a>!"
 
 #: admin/themes/default/plugins/config.php:2
 #, php-format
 msgid "Configure the &#8220;%s&#8221; Plugin"
-msgstr "Configurar el &#8220;%s&#8221; Plugin"
+msgstr "Configurează pluginul &#8220;%s&#8221;"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:2
 #, php-format
 msgid "Confirm %s Uninstall"
-msgstr "Confirmar %s Desinstalar"
+msgstr "Confirmă dezinstalarea lui %s"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:8
 msgid "Are you sure you want to uninstall this plugin?"
-msgstr "¿Esta seguro que deseas desinstalar el plugin?"
+msgstr "Ești sigur că vrei să dezinstalezi pluginul?"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:13
 msgid "Yes, I want to uninstall this plugin."
-msgstr "Si, quiero desinstalar este plugin."
+msgstr "Da, vreau să dezinstalez pluginul"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:16
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr "Anulează"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:16
 #: admin/themes/default/plugins/plugin-info.php:107
 msgid "Uninstall"
-msgstr "Desinstalar"
+msgstr "Dezinstalează"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:16
 msgid "or"
-msgstr "o"
+msgstr "sau"
 
 #: admin/themes/default/plugins/plugin-info.php:24
 #, php-format
 msgid "This version of %1$s requires at least Omeka %2$s."
-msgstr "Esta version de %1$s requiere como minimo Omeka %2$s."
+msgstr "Această versiune de %1$s necesită ca Omeka să fie cel puțin %2$s."
 
 #: admin/themes/default/plugins/plugin-info.php:27
 #, php-format
@@ -1253,126 +1267,128 @@ msgid ""
 "%1$s requires the following plugins to be installed, activated, and loaded: "
 "%2$s"
 msgstr ""
+"%1$s necesită ca următoarele pluginuri să fie instalate, activate și "
+"încărcate: %2$s"
 
 #: admin/themes/default/plugins/plugin-info.php:30
 msgid "The plugin.php file is missing."
-msgstr "El archivo plugin.php no se encuentra."
+msgstr "Fișierul plugin.php lipsește."
 
 #: admin/themes/default/plugins/plugin-info.php:39
 #, php-format
 msgid "The %s plugin cannot be loaded for the following reasons:"
-msgstr "El %s plugin no puede ser cargado por las siguientes razones."
+msgstr "Pluginul %s nu poate fi încărcate din următoarele motive:"
 
 #: admin/themes/default/plugins/plugin-info.php:48
 #, php-format
 msgid "You have a new version of %s. Please upgrade!"
-msgstr "Used tiene una nueva version de %s. ¡Por favor, actualice!"
+msgstr "Există o versiune nouă a lui %s. Actualizează!"
 
 #: admin/themes/default/plugins/plugin-info.php:58
 #: admin/themes/default/themes/browse.php:10
 msgid "Configure"
-msgstr "Configure"
+msgstr "Configurează"
 
 #: admin/themes/default/plugins/plugin-info.php:69
 #, php-format
 msgid "By %s"
-msgstr "Por %s"
+msgstr "De %s"
 
 #: admin/themes/default/plugins/plugin-info.php:87
 msgid "Upgrade"
-msgstr "Actualize"
+msgstr "Actualizează"
 
 #: admin/themes/default/plugins/plugin-info.php:97
 #: application/views/scripts/users/activate.php:26
 msgid "Activate"
-msgstr "Activar"
+msgstr "Activează"
 
 #: admin/themes/default/plugins/plugin-info.php:97
 msgid "Deactivate"
-msgstr "Desactivar"
+msgstr "Dezactivează"
 
 #: admin/themes/default/plugins/plugin-info.php:117
 #: application/forms/Install.php:173
 msgid "Install"
-msgstr "Instalar"
+msgstr "Instalează"
 
 #: admin/themes/default/security/edit.php:2
 msgid "Edit Security Settings"
-msgstr "Redactar la configuracion de seguridad"
+msgstr "Editează setările de securitate"
 
 #: admin/themes/default/security/edit.php:10
 msgid "Restore Default File Extensions"
-msgstr "Restaurar la extensión de archivo predeterminada"
+msgstr "Restaurează extensiile la valoarea implicită"
 
 #: admin/themes/default/security/edit.php:15
 msgid "Restore Default File Mime Types"
-msgstr "Restaurar el Tipo de Mime del Archivo predeterminada"
+msgstr "Restaurează Mime Type-urile implicite"
 
 #: admin/themes/default/settings/edit.php:10
 msgid "Test"
-msgstr "Ensayo"
+msgstr "Test"
 
 #: admin/themes/default/system-info/index.php:2
 msgid "System Information"
-msgstr "Información De sistema"
+msgstr "Informații de sistem"
 
 #: admin/themes/default/tags/browse.php:8
 msgid "Sort by"
-msgstr "Ordenar por"
+msgstr "Sortează după"
 
 #: admin/themes/default/tags/browse.php:11
 msgid "Most"
-msgstr "Mas"
+msgstr "Frecvent"
 
 #: admin/themes/default/tags/browse.php:12
 msgid "Least"
-msgstr "Menos"
+msgstr "Rar"
 
 #: admin/themes/default/tags/browse.php:13
 msgid "Alphabetical"
-msgstr "Alfabético"
+msgstr "Alfabetic"
 
 #: admin/themes/default/tags/browse.php:14
 msgid "Recent"
-msgstr "Reciente"
+msgstr "Recent"
 
 #: admin/themes/default/tags/delete.php:11
 msgid "Select a tag to delete:"
-msgstr "Elija una etiqueta para eliminar:"
+msgstr "Alege o etichetă pentru ștergere"
 
 #: admin/themes/default/tags/delete.php:25
 msgid "There are no tags to delete. You must first tag some items."
 msgstr ""
-"No hay etiquetas para eliminar. En primer lugar, debe etiquetar algunos "
-"elementos."
+"Nu sunt etichete pentru a fi șterse. Mai întâi etichetează câteva "
+"înregistrări."
 
 #: admin/themes/default/tags/edit.php:12
 msgid "Choose a tag to rename"
-msgstr "Elija una etiqueta para cambiar el nombre"
+msgstr "Alege o etichetă pentru a o redenumi"
 
 #: admin/themes/default/tags/edit.php:22
 msgid "Enter a new tag name"
-msgstr "Entrar un nuevo nombre para la etiqueta"
+msgstr "Introdu noul nume"
 
 #: admin/themes/default/tags/edit.php:32
 msgid "There are no tags to edit. You must first tag some items."
 msgstr ""
-"No hay etiquetas para redactar. En primer lugar, debe etiquetar unos "
-"elementos."
+"Nu există etichete pentru a fi editate. Mai întâi etichetează câteva "
+"înregistrări."
 
 #: admin/themes/default/themes/browse.php:2
 msgid "Browse Themes"
-msgstr "Navegue los temas"
+msgstr "Vezi temele"
 
 #: admin/themes/default/themes/browse.php:10
 msgid "Current Theme"
-msgstr "Tema Actual"
+msgstr "Tema utilizată"
 
 #: admin/themes/default/themes/browse.php:13
 #: admin/themes/default/themes/browse.php:38
 #, php-format
 msgid "Screenshot for %s Theme"
-msgstr "Captura de pantalla para %s Tema"
+msgstr "Captură de ecran pentru tema %s"
 
 #: admin/themes/default/themes/browse.php:16
 #: admin/themes/default/themes/browse.php:32
@@ -1382,20 +1398,20 @@ msgstr "Autor"
 #: admin/themes/default/themes/browse.php:17
 #: admin/themes/default/themes/browse.php:33
 msgid "License"
-msgstr "Licencia"
+msgstr "Licență"
 
 #: admin/themes/default/themes/browse.php:18
 #: admin/themes/default/themes/browse.php:34
 msgid "Website"
-msgstr "Sitio Web"
+msgstr "Site"
 
 #: admin/themes/default/themes/browse.php:23
 msgid "Change Theme"
-msgstr "Modifique el Tema"
+msgstr "Modifică tema"
 
 #: admin/themes/default/themes/browse.php:44
 msgid "Switch Theme"
-msgstr "Cambie de Tema"
+msgstr "Schimbă tema"
 
 #: admin/themes/default/themes/browse.php:48
 msgid ""
@@ -1404,134 +1420,134 @@ msgid ""
 "href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">design your "
 "own</a>!"
 msgstr ""
-"Para agregar nuevos temas decargándolos de <a href=\"http://omeka.org/add-"
-"ons/themes/\">Omeka Theme Directory</a>, or <a "
-"href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">diseñe su "
-"propio tema</a>!"
+"Adaugă noi teme descărcându-le de la <a href=\"http://omeka.org/add-"
+"ons/themes/\">Omeka Theme Directory</a> sau <a "
+"href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">scrieți "
+"propriile teme</a>!"
 
 #: admin/themes/default/themes/config.php:2
 #, php-format
 msgid "Configure the &#8220;%s&#8221; Theme"
-msgstr "Configurar el &#8220;%s&#8221; Tema"
+msgstr "Configurează tema &#8220;%s&#8221;"
 
 #: admin/themes/default/themes/config.php:9
 msgid "Configurations apply to this theme only."
-msgstr "Configuraciones se aplican solamente a este tema."
+msgstr "Configurările se aplică doar acestei teme"
 
 #: admin/themes/default/users/add.php:2
 msgid "Add New User"
-msgstr "Agregue un Nuevo Usuario"
+msgstr "Adaugă un utilizator nou"
 
 #: admin/themes/default/users/browse.php:13
 msgid "Search Users"
-msgstr "Busque por Usuarios"
+msgstr "Caută utilizator"
 
 #: admin/themes/default/users/browse.php:15
 msgid "Select Role"
-msgstr "Seleccione un papel"
+msgstr "Selectează rolul"
 
 #: admin/themes/default/users/browse.php:17
 msgid "Active"
-msgstr "Activo"
+msgstr "Activ"
 
 #: admin/themes/default/users/browse.php:17
 msgid "Inactive"
-msgstr "Inactivo"
+msgstr "Inactiv"
 
 #: admin/themes/default/users/browse.php:17
 msgid "Select Status"
-msgstr "Seleccione Estado"
+msgstr "Selectează starea"
 
 #: admin/themes/default/users/browse.php:19
 msgid "Sort By"
-msgstr "Ordene Por"
+msgstr "Sortează după"
 
 #: admin/themes/default/users/browse.php:20 application/forms/User.php:78
 msgid "First Name"
-msgstr "Nombre"
+msgstr "Nume"
 
 #: admin/themes/default/users/browse.php:21 application/forms/User.php:91
 msgid "Last Name"
-msgstr "Apellido"
+msgstr "Prenume"
 
 #: admin/themes/default/users/browse.php:22
 msgid "Institution Name"
-msgstr "Nombre de institution"
+msgstr "Numele Instituției"
 
 #: admin/themes/default/users/browse.php:23
 #: admin/themes/default/users/browse.php:41 application/forms/User.php:143
 msgid "Role"
-msgstr "Papel"
+msgstr "Rol"
 
 #: admin/themes/default/users/browse.php:24
 #: admin/themes/default/users/browse.php:38
 #: admin/themes/default/users/show.php:22 application/forms/Install.php:35
 #: application/forms/Login.php:25 application/forms/User.php:28
 msgid "Username"
-msgstr "Nombre de Usuario"
+msgstr "Nume de utilizator"
 
 #: admin/themes/default/users/browse.php:26
 msgid "Sort Order"
-msgstr "Orden de classificación"
+msgstr "Ordinea de sortare"
 
 #: admin/themes/default/users/browse.php:27
 msgid "Ascending"
-msgstr "Ascendente"
+msgstr "Ascendent"
 
 #: admin/themes/default/users/browse.php:28
 msgid "Descending"
-msgstr "Descendente"
+msgstr "Descendent"
 
 #: admin/themes/default/users/browse.php:29
 #: application/helpers/FormFunctions.php:271
 #: application/views/scripts/items/advanced-search.php:167
 msgid "Search"
-msgstr "Buscar"
+msgstr "Caută"
 
 #: admin/themes/default/users/browse.php:39
 #: admin/themes/default/users/show.php:24
 msgid "Real Name"
-msgstr "Nombre Real"
+msgstr "Nume real"
 
 #: admin/themes/default/users/browse.php:40
 #: admin/themes/default/users/show.php:26 application/forms/Install.php:79
 #: application/forms/RecoverPassword.php:32 application/forms/User.php:105
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
-msgstr "e-mail"
+msgstr "Email"
 
 #: admin/themes/default/users/edit.php:8
 #, php-format
 msgid "Edit User #%s"
-msgstr "Redacte el Usuario #%s"
+msgstr "Editează utilizatorul #%s"
 
 #: admin/themes/default/users/show.php:8
 #, php-format
 msgid "User #%s"
-msgstr "Usuario #%s"
+msgstr "Utilizatorul #%s"
 
 #: admin/themes/default/users/show.php:15
 msgid "Edit this User"
-msgstr "Redacte este Usuario"
+msgstr "Editează acest utilizator"
 
 #: admin/themes/default/users/show.php:28 application/forms/User.php:137
 msgid "Institution"
-msgstr "Institución"
+msgstr "Instituție"
 
 #: application/controllers/CollectionsController.php:31
 #, php-format
 msgid "The collection \"%s\" was successfully added!"
-msgstr "¡La colección \"%s\" fue agregada con éxito!"
+msgstr "Colecția \"%s\" a fost adăugată cu succes!"
 
 #: application/controllers/CollectionsController.php:37
 #, php-format
 msgid "The collection \"%s\" was successfully changed!"
-msgstr "¡La colección \"%s\" fue cambiada con éxito!"
+msgstr "Colecția \"%s\" a fost modificată cu succes!"
 
 #: application/controllers/CollectionsController.php:43
 #, php-format
 msgid "The collection \"%s\" was successfully deleted!"
-msgstr "¡La colección \"%s\" fue eliminada con éxito!"
+msgstr "Colecția \"%s\" a fost ștearsă fără probleme!"
 
 #: application/controllers/CollectionsController.php:48
 msgid ""
@@ -1539,20 +1555,26 @@ msgid ""
 "delete any items in this collection, but will delete the reference to this "
 "collection in each item."
 msgstr ""
+"Acest lucru va șterge colecția și metadatele asociate. Aceasta nu va șterge "
+"nicio înregistrare din colecție, dar va șterge referința către această "
+"colecție în fiecare dintre ele."
 
 #: application/controllers/ElementSetsController.php:26
 msgid ""
 "This will delete the element set and all elements assigned to the element "
 "set. Items will lose all metadata that is specific to this element set."
 msgstr ""
+"Aceasta va șterge setul de elemente și toate elementele atribuite acestuia. "
+"Înregistrările vor pierde toate metadatele care sunt specifice acestui set "
+"de elemente."
 
 #: application/controllers/ErrorController.php:66
 msgid "Page not found."
-msgstr "Página no encotrada."
+msgstr "Pagină inexistentă."
 
 #: application/controllers/ErrorController.php:85
 msgid "Access denied."
-msgstr "Acceso denegado."
+msgstr "Acces interzis."
 
 #: application/controllers/ItemTypesController.php:38
 msgid ""
@@ -1560,6 +1582,9 @@ msgid ""
 "the item type. Items that are assigned to this item type will lose all "
 "metadata that is specific to the item type."
 msgstr ""
+"Aceasta va șterge tipul de înregistrare dar nu va șterge elementele "
+"atribuite lui. Înregistrările care sunt asignate acestui tip vor pierde și "
+"ele metadatele specifice tipului în cauză."
 
 #: application/controllers/ItemTypesController.php:58
 #, php-format
@@ -1567,73 +1592,75 @@ msgid ""
 "The item type \"%s\" was successfully added!  You may now add elements to "
 "your new item type."
 msgstr ""
-"¡El tipo de el elemento \"%s\" fue agregada con éxito! Ahora puede agregar "
-"elementos a su nuevo tipo de elemento."
+"Tipul de înregistrare \"%s\" a fost adăugată cu succes! În acest moment poți"
+" adăuga elemente noi la noul tău tip de înregistrare."
 
 #: application/controllers/ItemTypesController.php:94
 #, php-format
 msgid "The item type \"%s\" was successfully changed!"
-msgstr "¡El tipo de elemento \"%s\" fue cambiado con éxito!"
+msgstr "Tipul de înregistrare \"%s\" a fost modificat cu succes! "
 
 #: application/controllers/ItemTypesController.php:115
 #: application/controllers/ItemTypesController.php:123
 #, php-format
 msgid "The item type cannot have more than one \"%s\" element."
-msgstr "El tipo de el elemento no puede tener mas de un \"%s\" objeto."
+msgstr "Tipul de înregistrare nu poate avea mai mult de o înregistrare „%s”. "
 
 #: application/controllers/ItemsController.php:108
 msgid "The item was successfully added!"
-msgstr "¡El elemento fue agregado con exito!"
+msgstr "Înregistrarea a fost adăugată cu succes!"
 
 #: application/controllers/ItemsController.php:113
 msgid "The item was successfully changed!"
-msgstr "¡El elemento fue cambiado con exito!"
+msgstr "Înregistrarea a fost modificată cu succes!"
 
 #: application/controllers/ItemsController.php:118
 msgid "The item was successfully deleted!"
-msgstr "¡El elemento fue eliminado con exito!"
+msgstr "Înregistrarea a fost ștearsă cu succes!"
 
 #: application/controllers/ItemsController.php:123
 msgid ""
 "This will delete the item and its associated metadata. It will also delete "
 "all files and file metadata associated with this item."
 msgstr ""
+"Aceasta ca șterge înregistrarea și metadatele asociate. Va șterge și toate "
+"fișierele, precum și metadatele asociate."
 
 #: application/controllers/ItemsController.php:266
 msgid "User does not have permission to add tags."
-msgstr "El usuario no tiene permiso para agregar etiquetas."
+msgstr "Utilizatorul nu are permisiunea de a adăuga etichete."
 
 #: application/controllers/ItemsController.php:299
 msgid "You must choose some items to batch edit."
-msgstr ""
+msgstr "Trebuie să alegi câteva înregistrări pentru a le edita în grup."
 
 #: application/controllers/ItemsController.php:338
 msgid "User is not allowed to modify visibility of items."
 msgstr ""
-"El usuario no está autorizado para modificar la visibilidad de los "
-"elementos."
+"Utilizatorului nu îi este permisă modificarea vizibilității înregistrărilor"
 
 #: application/controllers/ItemsController.php:343
 msgid "User is not allowed to modify featured status of items."
 msgstr ""
-"El usuario no está autorizado para modificar el estado de los elementos "
-"destacados."
+"Utilizatorului nu îi este permisă modificarea stării de constituit a unei "
+"înregistrări."
 
 #: application/controllers/ItemsController.php:350
 msgid "User is not allowed to delete selected items."
-msgstr ""
+msgstr "Utilizatorului nu îi este permisă ștergerea elementelor selectate."
 
 #: application/controllers/ItemsController.php:356
 msgid "User is not allowed to edit selected items."
-msgstr ""
+msgstr "Utilizatorului nu îi este permisă editarea înregistrărilor selectate."
 
 #: application/controllers/ItemsController.php:361
 msgid "User is not allowed to tag selected items."
-msgstr "El Usuario no tiene permiso para etiquetar el elemento seleccionado."
+msgstr ""
+"Utilizatorului nu îi este permisă etichetarea înregistrărilor selectate."
 
 #: application/controllers/ItemsController.php:384
 msgid "The items were successfully changed!"
-msgstr "¡El elemento fue cambiado con éxito!"
+msgstr "Înregistrările au fost modificate cu succes!"
 
 #: application/controllers/PluginsController.php:49
 #, php-format
@@ -1641,148 +1668,146 @@ msgid ""
 "Error in configuring plugin named \"%s\". Missing config and/or config_form "
 "hook(s)."
 msgstr ""
-"Error en la configuracion de el plugin llamado \"%s\". Falta el config y/o "
-"config_form hook(s)."
+"A apărut o eroare la configurarea pluginului numit \"%s\". Configurări lipsă"
+" sau cuplă(e) config_form."
 
 #: application/controllers/PluginsController.php:55
 #, php-format
 msgid "The %s plugin was successfully configured!"
-msgstr "¡El %s plugin fue configurado con éxito!"
+msgstr "Pluginul %s a fost configurat cu succes!"
 
 #: application/controllers/PluginsController.php:70
 #, php-format
 msgid "The %s plugin has already been installed."
-msgstr "El %s plugin lla se ha instalado."
+msgstr "Pluginul %s a fost deja instalat."
 
 #: application/controllers/PluginsController.php:76
 #, php-format
 msgid "The %s plugin was successfully installed!"
-msgstr "¡El %s plugin fue instalado con éxito!"
+msgstr "Pluginul %s a fost instalat cu succes!"
 
 #: application/controllers/PluginsController.php:86
 #, php-format
 msgid "The following error occurred while installing the %s plugin: "
-msgstr "El siguiente error ocurrio al instalar el plugin %s: "
+msgstr "La instalarea pluginului %s au apărut următoarele erori:"
 
 #: application/controllers/PluginsController.php:111
 #, php-format
 msgid "The %s plugin was successfully activated!"
-msgstr "¡El %s plugin fue activado con éxito!"
+msgstr "Pluginul %s a fost activat cu succes!"
 
 #: application/controllers/PluginsController.php:113
 #, php-format
 msgid "The %s plugin was activated, but could not be loaded: "
-msgstr "El %s plugin fue activado, pero no pudo ser cargado: "
+msgstr "Pluginul %s a fost activat, dar nu a putut fi încărcat:"
 
 #: application/controllers/PluginsController.php:116
 #, php-format
 msgid "The following error occurred while activating the %s plugin: "
-msgstr "El siguiente error occurrio al activar el plugin %s: "
+msgstr "A apărut următoarea eroare la activarea pluginului %s:"
 
 #: application/controllers/PluginsController.php:137
 #, php-format
 msgid "The %s plugin was successfully deactivated!"
-msgstr "¡El %s plugin fue desactivado con éxito!"
+msgstr "Pluginul %s a fost dezactivat fără probleme!"
 
 #: application/controllers/PluginsController.php:139
 #, php-format
 msgid "The following error occurred while deactivating the %s plugin: "
-msgstr "El siguiente error occurrio al desactivar el plugin %s: "
+msgstr "În timp ce pluginul %s era dezactivat, a apărut următoarea problemă:"
 
 #: application/controllers/PluginsController.php:156
 #, php-format
 msgid "The %s plugin was successfully upgraded!"
-msgstr "¡El %s plugin fue actualizado con éxito!"
+msgstr "Pluginul %s a fost actualizat cu succes!"
 
 #: application/controllers/PluginsController.php:161
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
-msgstr "El siguiente error occurrio al actualizar el plugin %s: "
+msgstr "La actualizarea pluginului %s a apărut următoarea eroare:"
 
 #: application/controllers/PluginsController.php:212
 msgid "You must confirm the uninstall before proceeding."
-msgstr "Debe confirmar el proceso de desinstalación antes de proceder."
+msgstr "Trebuie să confirmi dezinstalarea înainte de a proceda."
 
 #: application/controllers/PluginsController.php:227
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
-msgstr "¡El %s plugin fue desinstalado con éxito!"
+msgstr "Pluginul %s a fost dezinstalat fără probleme!"
 
 #: application/controllers/PluginsController.php:229
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
-msgstr "El sigiente error occurrio al desinstallar el plugin %s: "
+msgstr "A apărut următoarea eroare la momentul dezinstalării pluginului %s:"
 
 #: application/controllers/PluginsController.php:256
 msgid "No plugin name given."
-msgstr "No le a dado un numbre al plugin."
+msgstr "Nu a fost dat niciun nume pentru plugin."
 
 #: application/controllers/PluginsController.php:269
 #, php-format
 msgid "The plugin %s must be installed."
-msgstr "El plugin %s debe ser instalado."
+msgstr "Pluginul %s trebuie instalat."
 
 #: application/controllers/SecurityController.php:46
 msgid "The security settings have been updated."
-msgstr "La configuración de seguridad a sido actualizada."
+msgstr "Setările de securitate au fost actualizate."
 
 #: application/controllers/SettingsController.php:44
 msgid "The general settings have been updated."
-msgstr "La configuracion general a sido actualizada."
+msgstr "Setările generale au fost actualizate."
 
 #: application/controllers/SettingsController.php:46
 #: install/views/scripts/index/index.phtml:16
 msgid "There were errors found in your form. Please edit and resubmit."
-msgstr ""
-"Hubo errores detectados en el formulario. Por favor, editar y reenvie."
+msgstr "Au fost descoperite erori în formular. Editează și trimite din nou."
 
 #: application/controllers/SettingsController.php:70
 msgid "Works"
-msgstr "Trabaja"
+msgstr "Lucrează"
 
 #: application/controllers/SettingsController.php:71
 msgid "Fails"
-msgstr "Fallo"
+msgstr "A eșuat"
 
 #: application/controllers/TagsController.php:51
 #, php-format
 msgid "Tag named '%s' was successfully deleted."
-msgstr "Etiqueta de nombre '%s' fue eliminada con éxito."
+msgstr "Eticheta '%s' a fost ștearsă fără probleme."
 
 #: application/controllers/TagsController.php:64
 msgid "You have to be logged in to edit tags!"
-msgstr "¡Tiene que estar registrado para editar las etiquetas!"
+msgstr "Trebuie să fii logat pentru a edita etichetele!"
 
 #: application/controllers/TagsController.php:101
 #, php-format
 msgid "Tag named \"%1$s\" was successfully renamed to \"%2$s\"."
-msgstr "Etiqueta de nombre \"%1$s\" fue renombrada \"%2$s\"."
+msgstr "Eticheta numită \"%1$s\" s fost redenumită în \"%2$s\" fără probleme."
 
 #: application/controllers/TagsController.php:128
 msgid "Invalid tagType given"
-msgstr "TagType invalido"
+msgstr "tagType invalid"
 
 #: application/controllers/ThemesController.php:30
 msgid "Invalid form submission."
-msgstr "Sumisión de formulario invalido."
+msgstr "A fost trimis un formular nevalid."
 
 #: application/controllers/ThemesController.php:38
 msgid "You have chosen an illegal theme name. Please select another theme."
 msgstr ""
-"Ha escojido un nombre de tema ilegal. Por favor elija otro nombre para su "
-"tema."
+"Ai ales o denumire nevalidă pentru numele temei. Selectează o altă temă."
 
 #: application/controllers/ThemesController.php:51
 msgid "The theme has been successfully changed."
-msgstr "El tema ha sido cambiado con éxito."
+msgstr "Tema a fost modificată fără probleme."
 
 #: application/controllers/ThemesController.php:77
 msgid "The theme settings were successfully saved!"
-msgstr "¡La configuración del tema fueron salvadas con éxito!"
+msgstr "Setările temei au fost salvate fără probleme!"
 
 #: application/controllers/UpgradeController.php:57
 msgid "SQL error in migration: "
-msgstr "Error de SQL en la migración: "
+msgstr "Eroare SQL la migrare:"
 
 #: application/controllers/UsersController.php:97
 #: application/controllers/UsersController.php:103
@@ -1790,61 +1815,59 @@ msgid ""
 "Unable to reset password. Please verify that the information is correct and "
 "contact an administrator if necessary."
 msgstr ""
-"No puede restablecer la contraseña. Por favor, compruebe que la información "
-"es correcta y está en contacto con un administrador si es necesario."
+"Nu se poate reseta parola. verifică dacă informația este corectă sau dacă "
+"este necesar un contact sau administratorul."
 
 #: application/controllers/UsersController.php:129
 msgid "Please follow this link to reset your password:"
-msgstr "Por favor siga este vinculo para restablecer su contraseña:"
+msgstr "Urmează acest link pentru a reseta parola:"
 
 #: application/controllers/UsersController.php:131
 #: application/controllers/UsersController.php:134
 #: application/controllers/UsersController.php:298
 #, php-format
 msgid "%s Administrator"
-msgstr "%s Administrador"
+msgstr "%s Administrator"
 
 #: application/controllers/UsersController.php:135
 #, php-format
 msgid "[%s] Reset Your Password"
-msgstr "[%s] restablecer su contraseña"
+msgstr "[%s] Resetează parola"
 
 #: application/controllers/UsersController.php:138
 msgid "Please check your email for a link to reset your password."
-msgstr ""
-"Por favor revise su correo electrónico por un vinculo para restablecer su "
-"contraseña."
+msgstr "Verifică mailul pentru linkul de resetare a parolei."
 
 #: application/controllers/UsersController.php:154
 msgid "Password: The passwords do not match."
-msgstr "Contraseña: La contraseñas no coinciden."
+msgstr "Parolă: această parolă nu se potrivește."
 
 #: application/controllers/UsersController.php:160
 msgid "You may now log in to Omeka."
-msgstr ""
+msgstr "Acum te poți loga la Omeka."
 
 #: application/controllers/UsersController.php:179
 msgid "Add User"
-msgstr "Agregue un Usuario"
+msgstr "Adaugă utilizator"
 
 #: application/controllers/UsersController.php:189
 #, php-format
 msgid "The user \"%s\" was successfully added!"
-msgstr "¡El usuario \"%s\" fue agregado con éxito!"
+msgstr "Utilizatorul \"%s\" a fost adăugat cu succes!"
 
 #: application/controllers/UsersController.php:245
 msgid "Password changed!"
-msgstr "¡Contraseña cambiada!"
+msgstr "Parola a fost modificată!"
 
 #: application/controllers/UsersController.php:254
 #, php-format
 msgid "The user %s was successfully changed!"
-msgstr ""
+msgstr "Utilizatorul %s a fost modificat fără probleme!"
 
 #: application/controllers/UsersController.php:274
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
-msgstr "¡El usuario \"%s\" ha sido eliminado con exito!"
+msgstr "Utilizatorul \"%s\" a fost șters fără probleme!"
 
 #: application/controllers/UsersController.php:280
 #, php-format
@@ -1853,10 +1876,12 @@ msgid ""
 "this user will remain in the archive, but will no longer be associated with "
 "this user."
 msgstr ""
+"%s va fi șters din sistem. Înregistrările, colecțiile și etichetele create "
+"de el vor rămâne în arhivă dar nu vor mai fi asociate cu acest utilizator. "
 
 #: application/controllers/UsersController.php:294
 msgid "Welcome!"
-msgstr "Bienvenido "
+msgstr "Bine ai venit!"
 
 #: application/controllers/UsersController.php:296
 #, php-format
@@ -1864,409 +1889,410 @@ msgid ""
 "Your account for the %s archive has been created. Please click the following"
 " link to activate your account:"
 msgstr ""
-"Su cuenta para el %s archivo ha sido creado. Por favor haga click en el "
-"siguiente vinculo para activar su cuenta:"
+"Contul tău pentru arhiva %s a fost creat. Urmează următorul link pentru a-ți"
+" activa contul:"
 
 #: application/controllers/UsersController.php:299
 #, php-format
 msgid "Activate your account with the %s archive"
-msgstr ""
+msgstr "Activează-și contul la arhiva %s"
 
 #: application/forms/ChangePassword.php:35
 msgid "Current Password"
-msgstr "Contraseña Actual"
+msgstr "Parola existentă"
 
 #: application/forms/ChangePassword.php:44
 msgid "New Password"
-msgstr "Nueva Contraseña"
+msgstr "Parola nouă"
 
 #: application/forms/ChangePassword.php:78
 msgid "Repeat New Password"
-msgstr "Repita la nueva contraseña"
+msgstr "Repetă parola nouă"
 
 #: application/forms/ChangePassword.php:86
 msgid "Save Password"
-msgstr "Guarde la contraseña"
+msgstr "Salvează parola"
 
 #: application/forms/ChangePassword.php:95
 msgid "Change Password"
-msgstr "Cambie la contraseña"
+msgstr "Modifică parola"
 
 #: application/forms/GeneralSettings.php:28 application/forms/Install.php:85
 msgid "Site Title"
-msgstr "Titulo del sito de web"
+msgstr "Titlul siteului"
 
 #: application/forms/GeneralSettings.php:32 application/forms/Install.php:90
 msgid "Site Description"
-msgstr "Descripcion del sitio de web"
+msgstr "Descrierea siteului"
 
 #: application/forms/GeneralSettings.php:36 application/forms/Install.php:94
 msgid "Administrator Email"
-msgstr "Correo electronicó de Administrador"
+msgstr "Emailul administratorului"
 
 #: application/forms/GeneralSettings.php:42 application/forms/Install.php:100
 msgid "Site Copyright Information"
-msgstr "Derechos de autor del sitio web"
+msgstr "Informații privind drepturile de autor pentru acest site"
 
 #: application/forms/GeneralSettings.php:46 application/forms/Install.php:104
 msgid "Site Author Information"
-msgstr "Información de autor del sitio web"
+msgstr "Informații privind autorul siteului"
 
 #: application/forms/GeneralSettings.php:50 application/forms/Install.php:108
 msgid "Tag Delimiter"
-msgstr "Delimitador de etiquetas"
+msgstr "Delimitator între etichete"
 
 #: application/forms/GeneralSettings.php:51
 msgid ""
 "Separate tags using this character or string. Be careful when changing this "
 "setting. You run the risk of splitting tags that contain the old delimiter."
 msgstr ""
+"Separă etichetele folosind acest caracter sau șir. Fii atent atunci câns "
+"schimbi această setare. Riști să rupi etichete care pot conține vechiul "
+"caracter existent."
 
 #: application/forms/GeneralSettings.php:64 application/forms/Install.php:123
 msgid "Fullsize Image Size"
-msgstr "Imagenes de tamaño completo"
+msgstr "Imaginea la dimensiune sa reală"
 
 #: application/forms/GeneralSettings.php:65 application/forms/Install.php:124
 msgid "Maximum fullsize image size constraint (in pixels)."
-msgstr "Restricción de tamaño de imagen completo (en píxeles)."
+msgstr "Limitarea dimensiunii imaginii la expunere integrală (în pixeli)."
 
 #: application/forms/GeneralSettings.php:71 application/forms/Install.php:131
 msgid "Thumbnail Size"
-msgstr "Tamaño de imagenes miniatura"
+msgstr "Imagine timbru"
 
 #: application/forms/GeneralSettings.php:72 application/forms/Install.php:132
 msgid "Maximum thumbnail size constraint (in pixels)."
-msgstr "Restricción de tamaño para imagenes miniatura (en píxeles)."
+msgstr "Limitarea dimensiunii maxime a imaginii timbru (în pixeli)."
 
 #: application/forms/GeneralSettings.php:78 application/forms/Install.php:139
 msgid "Square Thumbnail Size"
-msgstr "Tamaño de imagenes miniatura cuadradas"
+msgstr "Imagine timbru în pătrat"
 
 #: application/forms/GeneralSettings.php:79 application/forms/Install.php:140
 msgid "Maximum square thumbnail size constraint (in pixels)."
-msgstr "Restricción de tamaño para imagenes miniatura cuadradas (en píxeles)."
+msgstr "Limitarea dimensiunilor imaginii timbru în pătrat (în pixeli)."
 
 #: application/forms/GeneralSettings.php:85 application/forms/Install.php:147
 msgid "Items Per Page (admin)"
-msgstr "Elementos Por Pagina (administrador)"
+msgstr "Înregistrări per pagină (administrator)"
 
 #: application/forms/GeneralSettings.php:86 application/forms/Install.php:148
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
 msgstr ""
-"Limite el número de elementos mostrados por página de interfaz "
-"administrativo."
+"Limitarea numărului de înregistrări afișate pe o pagină în interfața de "
+"administrare."
 
 #: application/forms/GeneralSettings.php:92 application/forms/Install.php:155
 msgid "Items Per Page (public)"
-msgstr "Elementos Por Pagina (publico)"
+msgstr "Înregistrări per pagină (public)"
 
 #: application/forms/GeneralSettings.php:93 application/forms/Install.php:156
 msgid "Limit the number of items displayed per page in the public interface."
 msgstr ""
-"Limite el número de elementos mostrados por página en el interfaz publico."
+"Limitarea numărului de înregistrări afișate per pagină în interfața publică."
 
 #: application/forms/GeneralSettings.php:99 application/forms/Install.php:163
 msgid "Show Empty Elements"
-msgstr "Mostrar los elementos vacíos"
+msgstr "Arată elementele goale"
 
 #: application/forms/GeneralSettings.php:104
 msgid "Enable Prototype"
-msgstr "Habilitar el Prototipo"
+msgstr "Activează Prototype"
 
 #: application/forms/GeneralSettings.php:106
 msgid ""
 "Enable the Prototype JavaScript library. This may be required for some older"
 " plugins."
 msgstr ""
-"Habilitar la bilblioteca de Prototipo JavaScript. Pueden resultar necesarias"
-" para algunos plugins anticuados."
+"Activarea bibliotecii JavaScript intitulată Prototype. Aceasta poate fi "
+"necesară pentru câteva pluginuri mai vechi."
 
 #: application/forms/GeneralSettings.php:110 application/forms/Install.php:169
 msgid "Imagemagick Directory Path"
-msgstr "Ruta de el Directorio ImageMagick"
+msgstr "Calea către directorul ImageMagick"
 
 #: application/forms/GeneralSettings.php:114
 msgid "Save Settings"
-msgstr "Guarde la configuración"
+msgstr "Salvează setările"
 
 #: application/forms/Install.php:37
 msgid "Only alphanumeric characters are allowed."
-msgstr "Sólo se permiten caracteres alfanuméricos."
+msgstr "Sunt permise doar caractere alfanumerice"
 
 #: application/forms/Install.php:43 application/forms/Login.php:34
 msgid "Password"
-msgstr "Contraseña"
+msgstr "Parolă"
 
 #: application/forms/Install.php:44
 msgid "Must be at least 6 characters."
-msgstr "Debe ser de por lo menos 6 caracteres."
+msgstr "Cel puțin 6 caractere."
 
 #: application/forms/Install.php:66 application/forms/ResetPassword.php:49
 #: application/views/scripts/users/activate.php:19
 msgid "Re-type the Password"
-msgstr "Vuelva a escribir la contraseña"
+msgstr "Reintrodu parola!"
 
 #: application/forms/Install.php:67
 msgid "Confirm your password."
-msgstr "Verifique su contraseña."
+msgstr "Confirmă parola."
 
 #: application/forms/Install.php:109
 msgid "Separate tags using this character or string."
-msgstr ""
+msgstr "Separă etichetele utilizând acest caracter sau șir."
 
 #: application/forms/Install.php:165
 msgid "Whether metadata elements with no text will be displayed."
-msgstr "Si los elementos de metadato sin texto van a ser demostrados."
+msgstr "Afișarea elementelor de metadate fără text"
 
 #: application/forms/Install.php:180
 msgid "Default Superuser Account"
-msgstr "Cuenta Predeterminada de Superusuario"
+msgstr "Contul Superuser implicit"
 
 #: application/forms/Install.php:190
 msgid "Site Settings"
-msgstr "Configuración del Sitio web"
+msgstr "Setările siteului"
 
 #: application/forms/Login.php:32
 msgid "Username cannot be empty."
-msgstr "Nombre de Usuario no puede estar vacío."
+msgstr "Numele de utilizator nu poate fi gol."
 
 #: application/forms/Login.php:41
 msgid "Password cannot be empty."
-msgstr "Contraseña no puede estar vacía."
+msgstr "Introdu o parolă!"
 
 #: application/forms/Login.php:42
 msgid "Remember Me?"
-msgstr "¿Acuerdate de mi?"
+msgstr "Ține-mă minte!"
 
 #: application/forms/Login.php:44 application/views/scripts/users/login.php:3
 msgid "Log In"
-msgstr "Entrar al sistema"
+msgstr "Login"
 
 #: application/forms/RecoverPassword.php:41
 msgid "Email address is required."
-msgstr "Se reuiere el correo electrónico."
+msgstr "Este necesară o adresă de email"
 
 #: application/forms/RecoverPassword.php:51
 msgid "Invalid email address given."
-msgstr "Dirección de correo electrónico inválida."
+msgstr "Ai introdus o adresă email greșită."
 
 #: application/forms/RecoverPassword.php:53
 msgid "Invalid format given for email address."
-msgstr "Formato de dirección de correo electronico no es valida."
+msgstr "Format nepermis pentru email"
 
 #: application/forms/RecoverPassword.php:55
 msgid "Invalid hostname given for email address."
-msgstr ""
-"Nombre de host dado para la dirección de correo electrónico es inválida."
+msgstr "Nume de host nepermis pentru email."
 
 #: application/forms/RecoverPassword.php:73
 msgid "Invalid email address"
-msgstr "Dirección de correo electronico inválida"
+msgstr "Adresă email nepermisă ca și combinație"
 
 #: application/forms/ResetPassword.php:28
 #: application/views/scripts/users/activate.php:13
 msgid "Create a Password"
-msgstr "Crear una Contraseña"
+msgstr "Pune o parolă!"
 
 #: application/forms/ResetPassword.php:32
 msgid "Password is required."
-msgstr "Contraseña requerida."
+msgstr "Este nevoie de o parolă."
 
 #: application/forms/ResetPassword.php:38
 msgid "Typed passwords do not match."
-msgstr "Contraseñas escritas no coinciden."
+msgstr "Parolele introduse nu se potrivesc."
 
 #: application/forms/SecuritySettings.php:27
 msgid "Disable File Upload Validation"
-msgstr "Desactivar la validación de carga de archivo"
+msgstr "Dezactivează validarea la momentul încărcării fișierelor"
 
 #: application/forms/SecuritySettings.php:29
 msgid ""
 "Check this field if you would like to allow any file to be uploaded to "
 "Omeka."
 msgstr ""
-"Marque este campo si desea permitir que cualquier archivo sea cargado a "
-"Omeka."
+"Bifează acest câmp dacă dorești să permiți orice fel de fișier să fie "
+"încărcat."
 
 #: application/forms/SecuritySettings.php:35
 msgid "Allowed File Extensions"
-msgstr "Extensiones de Archivo Permitidas"
+msgstr "Extensii de fișier care sunt permise"
 
 #: application/forms/SecuritySettings.php:36
 msgid "List of allowed extensions for file uploads."
-msgstr "Lista de extensiones para cargo de archivo permitidas."
+msgstr "Lista extensiilor permise"
 
 #: application/forms/SecuritySettings.php:45
 msgid "Allowed File Types"
-msgstr "Tipo de archivos permitidos"
+msgstr "Tipuri de fișiere permise"
 
 #: application/forms/SecuritySettings.php:46
 msgid "List of allowed MIME types for file uploads"
-msgstr "Lista de typos MIME para cargo permitidas"
+msgstr "Lista de MIME types permise la încărcare"
 
 #: application/forms/SecuritySettings.php:55
 msgid "ReCaptcha Public Key"
-msgstr "Clave Publica ReCaptcha"
+msgstr "Cheie Publică ReCaptcha"
 
 #: application/forms/SecuritySettings.php:56
 msgid ""
 "Public key from recaptcha.net. Both this and the private key must be filled "
 "in to secure public forms."
 msgstr ""
-"Clave publica de recaptcha.net. Esta y la clave privada deben ser completada"
-" para proteger los formularios publicos."
+"Cheie publică de la recaptcha.net. Împreună cu, cheia privată trebuie "
+"introduse pentru a securiza formularele din zona publică."
 
 #: application/forms/SecuritySettings.php:63
 msgid "ReCaptcha Private Key"
-msgstr "Clave Privada ReCaptcha"
+msgstr "Cheia privată ReCaptcha"
 
 #: application/forms/SecuritySettings.php:64
 msgid ""
 "Private key from recaptcha.net. Both this and the public key must be filled "
 "in to secure public forms."
 msgstr ""
-"Clave privada de recaptcha.net. Esta y la clave publica deben ser "
-"completadas para proteger los formularios publicos."
+"Cheie privată de la recaptcha.net. Aceasta împreună cu, cheia publică "
+"trebuie introduse în formulare publice securizate."
 
 #: application/forms/User.php:35
 msgid "Username is required."
-msgstr "Nombre de usuario es necesario."
+msgstr "Este necesar numele utilizatorului."
 
 #: application/forms/User.php:43
 msgid "Username must contain only letters and numbers."
-msgstr "Nombre de usuario solo puede contener letras y numeros."
+msgstr "Numele utilizatorului trebuie să conțină doar litere și cifre."
 
 #: application/forms/User.php:53
 msgid "Username must be at least %min% characters long."
-msgstr "El nombre de usuario debe tener por lo menos %min% caracteres."
+msgstr "Numele utilizatorului trebuie să fie de cel puțin %min% caractere."
 
 #: application/forms/User.php:55
 msgid "Username must be at most %max% characters long."
-msgstr "El nombre de usuario no debe exceder %max% caracteres"
+msgstr "Numele utilizatorului trebuie să fie de maxim %max% caractere."
 
 #: application/forms/User.php:69
 msgid "This username is already in use."
-msgstr "Este nombre de usuario esta en uso."
+msgstr "Acest nume de utilizator este deja în uz."
 
 #: application/forms/User.php:84
 msgid "First name is required."
-msgstr "Nombre de pila esta requerido."
+msgstr "Este necesar numele."
 
 #: application/forms/User.php:97
 msgid "Last name is required."
-msgstr "apellido es requerido."
+msgstr "Este necesar prenumele."
 
 #: application/forms/User.php:103
 msgid "This email address is invalid."
-msgstr "El correo electrónico no es valido."
+msgstr "Această adresă de email este nevalidă."
 
 #: application/forms/User.php:111
 msgid "Email is required."
-msgstr "Se requiere el corre electrónico"
+msgstr "Este necesară o adresă de email."
 
 #: application/forms/User.php:130
 msgid "This email address is already in use."
-msgstr "El correo electrónico esta en uso."
+msgstr "Acest email este deja folosit."
 
 #: application/forms/User.php:151
 msgid "Active?"
-msgstr "Activo?"
+msgstr "Activ?"
 
 #: application/helpers/AssetFunctions.php:270
 #: application/helpers/AssetFunctions.php:289
 #, php-format
 msgid "Could not find file %s!"
-msgstr "¡No pude encontrar el archivo %s!"
+msgstr "Nu pot găsi fișierul %s!"
 
 #: application/helpers/CollectionFunctions.php:58
 #, php-format
 msgid "%s does not exist for collections!"
-msgstr "¡%s no existe para colecciones!"
+msgstr "%s nu există pentru colecții!"
 
 #: application/helpers/CollectionFunctions.php:123
 msgid "Featured Collection"
-msgstr "Colección Destacada"
+msgstr "Colecții constituite"
 
 #: application/helpers/CollectionFunctions.php:131
 msgid "No featured collections are available."
-msgstr "No hay colecciones destacadas."
+msgstr "Nu există colecții constituite."
 
 #: application/helpers/ElementForm.php:50
 msgid "Add Input"
-msgstr "Añadir Entrada"
+msgstr "Adaugă date"
 
 #: application/helpers/ElementForm.php:286
 #, php-format
 msgid "Cannot display a form input for \"%s\" if element type name is not given!"
 msgstr ""
-"¡No se puede mostrar un formulario de entrada para \"%s\" si el nombre de "
-"tipo de elemento no se da!"
+"Nu pot datele din formular pentru \"%s\" dacă tipul de element nu este dat!"
 
 #: application/helpers/ElementForm.php:346
 msgid "From"
-msgstr "De"
+msgstr "De la"
 
 #: application/helpers/ElementForm.php:349
 msgid "To"
-msgstr "Para"
+msgstr "Lui"
 
 #: application/helpers/ElementForm.php:369
 msgid "Use HTML"
-msgstr "Use HTML"
+msgstr "Folosește HTML-ul"
 
 #: application/helpers/FileMetadata.php:98
 #, php-format
 msgid "%s is an invalid special value."
-msgstr ""
+msgstr "%s este o valoare specială nevalidă."
 
 #: application/helpers/FormFunctions.php:135
 msgid "Select Below "
-msgstr "Seleccione Debajo"
+msgstr "Selectează de mai jos"
 
 #: application/helpers/FormFunctions.php:245
 #: application/helpers/FormFunctions.php:533
 #: application/views/scripts/users/forgot-password.php:18
 msgid "Submit"
-msgstr "Entregar"
+msgstr "Trimite"
 
 #: application/helpers/Functions.php:53
 msgid "Omeka RSS Feed"
-msgstr ""
+msgstr "Flux RSS Omeka"
 
 #: application/helpers/Functions.php:54
 msgid "Omeka Atom Feed"
-msgstr ""
+msgstr "Flux Atom Omeka"
 
 #: application/helpers/Functions.php:200
 msgid "Error: Invalid callback was provided for the loop."
-msgstr "Error: Callback dado para el bucle es invalido."
+msgstr "Eroare: Invalid callback was provided for the loop."
 
 #: application/helpers/ItemFunctions.php:58
 msgid "Featured Item"
-msgstr "Elemento Destacado"
+msgstr "Înregistrări constituite"
 
 #: application/helpers/ItemFunctions.php:73
 msgid ""
 "An item has not been set to be displayed on this theme page! Please see "
 "Omeka documentation for details."
 msgstr ""
-"¡Un elemento no ha sido establecido para aparecer en esta pagina de temas! "
-"Por favor ver la documentación Omeka para mas detalles."
+"O anumită înregistrare nu a fost setată pentru a fi afișată pe această "
+"pagină de temă. Vezi documentația Omeka pentru mai multe detalii."
 
 #: application/helpers/ItemFunctions.php:571
 msgid "No featured items are available."
-msgstr "No hay elementos destacados."
+msgstr "Nu sunt disponibile înregistrări constituite."
 
 #: application/helpers/ItemMetadata.php:86
 #, php-format
 msgid "'%s' is an invalid special value."
-msgstr "'%s' es un valor especial invalido."
+msgstr "'%s' este o valoare specială nevalidă"
 
 #: application/helpers/LinkFunctions.php:43
 msgid "View"
-msgstr "Vista"
+msgstr "Vezi"
 
 #: application/helpers/LinkFunctions.php:208
 msgid "RSS"
@@ -2274,24 +2300,24 @@ msgstr "RSS"
 
 #: application/helpers/LinkFunctions.php:225
 msgid "Next Item &rarr;"
-msgstr "Próximo elemento &rarr;"
+msgstr "Următoarea înregistrare &rarr;"
 
 #: application/helpers/LinkFunctions.php:241
 msgid "&larr; Previous Item"
-msgstr "&larr; Elemento Anterior"
+msgstr "&larr; Înregistrarea anterioară"
 
 #: application/helpers/LinkFunctions.php:530
 msgid "Atom"
-msgstr ""
+msgstr "Atom"
 
 #: application/helpers/TagFunctions.php:133
 msgid "No tags are available."
-msgstr ""
+msgstr "Nu există etichete."
 
 #: application/models/ActsAsElementText.php:257
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
-msgstr "¡No pude encontrar un elemento con el ID de '%s'!"
+msgstr "Nu pot găsi un element cu un ID de „%s”!"
 
 #: application/models/ActsAsElementText.php:314
 #, php-format
@@ -2299,161 +2325,159 @@ msgid ""
 "Element name is ambiguous! There is more than one element set containing an "
 "element named \"%s\"!"
 msgstr ""
-"¡El nombre de elemento es ambiguo! ¡Existe mas de un set de elemnto que "
-"contiene un elemento de nombre \"%s\"!"
+"Numele elementului este ambiguu! Există mai multe seturi care conțin un "
+"element denumit „%s”!"
 
 #: application/models/ActsAsElementText.php:317
 #: application/models/ActsAsElementText.php:324
 #, php-format
 msgid "There is no element named \"%s\"!"
-msgstr "¡No existe el elemento de nombre \"%s\"!"
+msgstr "Nu există niciun element intitulat \"%s\"!"
 
 #: application/models/ActsAsElementText.php:328
 #, php-format
 msgid "There is no element named \"%1$s\" in the set named \"%2$s\"!"
-msgstr "¡No hay elemento de nombre \"%1$s\" en el set de nombre \"%2$s\"!"
+msgstr "Nu există niciun element intitulat \"%1$s\" în setul denumit \"%2$s\"!"
 
 #: application/models/ActsAsElementText.php:484
 msgid "Element texts are not formatted correctly!"
-msgstr "!Textos de elemento no tienen el formato correcto!"
+msgstr "Textele cuprinse în elemente nu sunt formatate corepunzător!"
 
 #: application/models/ActsAsElementText.php:647
 #, php-format
 msgid "Cannot process form input for element with data type \"%s\"!"
 msgstr ""
-"¡No se puede processar la entrada del formulario para elemento de typo de "
-"data \"%s\"!"
+"Nu pot procesa datele introduse pentru elementul cu tipul de date „%s”!"
 
 #: application/models/ActsAsElementText.php:662
 #, php-format
 msgid "The \"%s\" field has at least one invalid value!"
-msgstr "¡El \"%s\" tiene por lo menos un valor inválido!"
+msgstr "Câmpul \"%s\" are cel puțin o valoare nevalidă!"
 
 #: application/models/ActsAsElementText.php:695
 #, php-format
 msgid "Cannot validate an element of data type \"%s\"!"
-msgstr "¡No se puede validar el elemento de typo de datos \"%s\"!"
+msgstr "Nu pot valida un element cu un tip de date \"%s\"!"
 
 #: application/models/ActsAsElementText.php:735
 msgid "Cannot save element text for records that are not yet persistent!"
 msgstr ""
-"¡No se puede guardar el texto de elemento para récords que aun no son "
-"persistentes!"
+"Nu pot salva textul elementului pentru înregistrările care nu sunt încă "
+"fixate!"
 
 #: application/models/Collection.php:107
 msgid "Collectors must be either a string or an array."
-msgstr "Colectores tiene que ser una cadena o una matriz."
+msgstr "Culegătorii trebuie să fie ori un string, ori un tablou."
 
 #: application/models/Collection.php:148
 #, php-format
 msgid "The collection name must have between %1$s and %2$s characters."
-msgstr ""
-"El nombre de la colección tiene que ser entre %1$s and %2$s caracteres."
+msgstr "Numele colecției trebuie să fie între %1$s și %2$s caractere."
 
 #: application/models/Collection.php:198
 msgid ""
 "Argument passed to addCollector() must be a string or an instance of Entity."
 msgstr ""
-"Argumento pasado a addCollector() debe ser una cadena o una instancia de "
-"Entidad."
+"Argumentul pasat lui addCollector() trebuie să fie un string sau o instanță "
+"a lui Entity."
 
 #: application/models/Collection.php:230
 msgid "Cannot associate the collection with an unsaved user."
-msgstr ""
-"No se puede associar una coleccion con un usuario que no ha sido guardado."
+msgstr "Nu pot asocia colecția cu un utilizator nesalvat."
 
 #: application/models/CollectionPermissions.php:37
 msgid "Invalid query provided to CollectionPermissions check"
-msgstr "Consulta invalida proveído al cuequeo de CollectionPermissions"
+msgstr "Interogare nevalidă trimisă lui CollectionPermission check"
 
 #: application/models/DataTypeTable.php:31
 #, php-format
 msgid "Cannot find id from DataType name: %s"
-msgstr "No se puede encontrar identificación del nombre de tipo de datos: %s"
+msgstr "Nu pot găsi id de la DataType name: %s"
 
 #: application/models/Element.php:180
 msgid "Name must not be empty!"
-msgstr "¡Nombre no puede estar bacio!"
+msgstr "Numele nu trebuie să fie gol!"
 
 #: application/models/Element.php:184
 msgid "Element must have a valid data type!"
-msgstr "¡El elemento debe tener un typo de dato valido!"
+msgstr "Elementul trebuie să aibe un tip de date valid!"
 
 #: application/models/Element.php:188
 msgid "Element must have a valid record type!"
-msgstr "¡El elemento debe tener un tipo de record valido!"
+msgstr "Elementul trebuie să aibe un tip de înregistrare valid!"
 
 #: application/models/Element.php:193
 #, php-format
 msgid "%1$s already exists for element set #%2$s"
-msgstr "%1$s existe para el set the elemento #%2$s"
+msgstr "%1$s deja există pentru setul de elemente #%2$s"
 
 #: application/models/Element.php:252
 #, php-format
 msgid "Cannot set element set ID: set named \"%s\" does not exist."
-msgstr ""
-"No se puede establecer el ID del set de elemento: Nombre del set \"%s\" no "
-"existe."
+msgstr "Nu pot seta ID-ul setului de elemente: setul denumit \"%s\" nu există."
 
 #: application/models/ElementSet.php:119
 msgid "Name of element set must be unique."
-msgstr "El nombre del set de elemento debe ser único."
+msgstr "Numele elementului trebuie să fie unic."
 
 #: application/models/ElementSet.php:123
 msgid "Name of element set must not be empty."
-msgstr "El nombre del set de elemento no debe estar vacio."
+msgstr "Numele elementului nu trebuie să fie gol."
 
 #: application/models/EntitiesRelations.php:29
 msgid "Joins in the EntitiesRelations table must be given a polymorphic type"
-msgstr "Joins en la tabla EntitiesRelations se debe dar un tipy polimórfico"
+msgstr ""
+"Joinurile din tabelul EntitiesRelations trebuie să primească un tip "
+"polimorfic"
 
 #: application/models/EntitiesRelations.php:33
 msgid "Joins in the EntitiesRelations table must be filled out entirely"
-msgstr "Joins en la tabla EntitiesRelations se debe completar en su totalidad"
+msgstr ""
+"Joinurile din tabelul EntitiesRelations trebuie să fie completate integral"
 
 #: application/models/Entity.php:37
 msgid "The email address provided is not valid."
-msgstr "El correo electrónico proporcionado no es válido."
+msgstr "Adresa de email introdusă nu este validă."
 
 #: application/models/Entity.php:41
 msgid "The name for a person may not be completely blank."
-msgstr "El nombre de una persona no puede estar vacio."
+msgstr "Numele persoanei nu trebuie să fie gol."
 
 #: application/models/Entity.php:134
 msgid "Both of these Entities must be persistent in order to merge them."
-msgstr "Ambas Entidades deben ser persistentes para poder juntarlas."
+msgstr "Aceste Entities trebuie să fie fixate pentru a le fuziona."
 
 #: application/models/File.php:109
 msgid "Cannot get the local path for a stored file."
-msgstr "No se puede obtener la ruta de acceso para un archivo almacenado."
+msgstr "Nu pot obține calea locală pentru un fișier introdus."
 
 #: application/models/Item.php:284
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
 msgstr ""
-"¡Los archivos no pueden ser unidos a un elemento que no es persistente in la"
-" base de datos!"
+"Fișierele nu pot fi atașate unei înregistrări care nu este fixată în baza de"
+" date!"
 
 #: application/models/Item.php:398
 msgid "Cannot add an existing file to an item!"
-msgstr "¡No puede añadir un archivo existente a un elemento!"
+msgstr "Nu pot adăuga un fișier existent unei înregistrări!"
 
 #: application/models/Item.php:402
 msgid "File must be valid before it can be associated with an item!"
 msgstr ""
-"¡Archivo debe ser valido antes de que pueda estar associado con un elemento!"
+"Fișierul trebuie să fie valid înainte de a-l asocia unei înregistrări!"
 
 #: application/models/ItemBuilder.php:141
 msgid "Cannot add tags to an item if no Entity is available to tag."
 msgstr ""
-"No se puede añadir una etiqueta a un elemento si no tiene ninguna entidad "
-"disponible."
+"Nu pot adăuga etichete unei înregistrări dacă nu este disponibil niciun "
+"Entity pentru a-l eticheta."
 
 #: application/models/ItemBuilder.php:265
 msgid "Must specify a file transfer type when attaching files to an item!"
 msgstr ""
-"¡Debe especificar un tipo de transferencia de archivo cuando adjuntando "
-"archivos a un elemento!"
+"Trebuie specificat un transfer de fișiere atunci când atașăm fișiere unei "
+"înregistrări!"
 
 #: application/models/ItemPermissions.php:34
 #, php-format
@@ -2461,251 +2485,254 @@ msgid ""
 "This SQL statement needs a FROM or JOIN clause equivalent to '%s i' in order"
 " to have permissions checked!"
 msgstr ""
-"¡Esta declaración de SQL necesita una cláusula FROM o JOIN equivalente a '%s"
-" i' con el fin de tener los permisos comprobados!"
+"Această declarație SQL are nevoie de clauzele FROM sau JOIN echivalente lui "
+"„%s” pentru ca să aibe permisiunea bifată!"
 
 #: application/models/ItemSearch.php:98
 msgid "Invalid search type given!"
-msgstr "¡Tipo de busqueda dada es invalida!"
+msgstr "A fost introdus un tip nevalid pentru căutare!"
 
 #: application/models/ItemType.php:83
 #, php-format
 msgid "The item type name must have between %1$s and %2$s characters."
-msgstr ""
-"El nombre de tipo de elemento debe tener entre %1$s y %2$s caracteres."
+msgstr "Tipul de înregistrare trebuie să aibe între %1$s și %2$s caractere."
 
 #: application/models/ItemType.php:87
 msgid "The item type name must be unique."
-msgstr "El nombre de tipo de elemento debe ser único."
+msgstr "Tipul de înregistrare trebuie să fie unic."
 
 #: application/models/ItemType.php:175
 msgid "There are too many values in the element ordering array."
-msgstr "Hay demasiados valores en la matriz de calificación de elemento."
+msgstr "Sunt prea multe valori în tabloul de ordonare a elementelor."
 
 #: application/models/ItemType.php:177
 msgid "There are too few values in the element ordering array."
-msgstr "No hay suficientes valores en la matriz de calificación de elemento."
+msgstr "Sunt prea puține valori în tabloul de ordonare al elementelor."
 
 #: application/models/ItemType.php:221
 msgid ""
 "Invalid element data. To add elements, you must either pass an element "
 "objects or an array of element metadata."
 msgstr ""
-"Dato de elemento invalido. Para añadir elementos, Usted debe pasar un objeto"
-" de elemento o una matriz de metadatos de elemento."
+"Date ale elementului nevalide. Pentru a adăuga elemente, trebuie fie să "
+"pasezi obiectele unui element sau un tablou cuprinzând metadatele "
+"elementului."
 
 #: application/models/ItemType.php:285
 msgid ""
 "Cannot remove elements from an item type that is not persistent in the "
 "database!"
 msgstr ""
-"¡No se puede remover elementos de un tipo de elemnto que no esta persistente"
-" en la base de datos!"
+"Nu pot elimina elementele dintr-un tip de înregistrări care nu sunt fixate "
+"în baza de date!"
 
 #: application/models/ItemType.php:294
 #, php-format
 msgid "Cannot find element with ID %s!"
-msgstr "¡No puede encontrar elemento con ID %s!"
+msgstr "Nu pot găsi elementul cu ID-ul %s!"
 
 #: application/models/ItemType.php:337
 #, php-format
 msgid "Item type does not contain an element with the ID %s!"
-msgstr "¡El tipo de elemento no contiene ningun elemento con el ID %s!"
+msgstr "Tipul de element nu conține un element care are ID-ul %s!"
 
 #: application/models/ItemType.php:362
 msgid ""
 "Invalid parameter. The hasElement function requires either an element object"
 " or an element id to determine if an item type has an element."
 msgstr ""
-"Parámetro invalido. La función hasElement requiere un objeto de elemento o "
-"un id de elemento para determinar si un tipo de elemento tiene objetos."
+"Parametru nevalid. Funcția hasElement necesită, fie un element obiect sau in"
+" id de element pentru a determina dacă o înregistrare are un element."
 
 #: application/models/Option.php:28 application/models/Option.php:32
 msgid "Each option must have a unique name."
-msgstr "Cada opción debe tener un nombre único."
+msgstr "Fiecare opțiune trebui să aibe un nume unic."
 
 #: application/models/Orderable.php:101
 msgid "Cannot add a child to a record that does not exist yet!"
-msgstr "¡No puede aggregar un niño a un record que aún no existe!"
+msgstr "Nu poți adăuga un copil la o înregistrare care nu există încă!"
 
 #: application/models/Orderable.php:105
 #, php-format
 msgid "Child must be an instance of \"%s\""
-msgstr "El niño debe ser una instancia de \"%s\""
+msgstr "Copilul trebuie să fie o instanță a lui \"%s\""
 
 #: application/models/Plugin.php:94
 msgid "Names of plugins must not be blank"
-msgstr "Nombres de plugins no debe estar vacio"
+msgstr "Numele pluginurilor nu trebuie să fie goale"
 
 #: application/models/Relatable.php:158
 msgid "Invalid entity provided!"
-msgstr "¡Entidad proveida no es valida!"
+msgstr "Entitate nevalidă!"
 
 #: application/models/Relatable.php:169
 #, php-format
 msgid "Relationship called %s does not exist."
-msgstr "Relación llamada %s no existe."
+msgstr "Relația %s apelată nu poate fi setată."
 
 #: application/models/Relatable.php:222
 msgid "Record must exist before relations can be set."
-msgstr "El record debe existir antes que relacion puedan ser establecidas."
+msgstr "Înregistrarea trebuie să existe înainte de a seta relațiile."
 
 #: application/models/Tag.php:58
 msgid "Tags must be given a name."
-msgstr "Etiquetas deben tener un nombre."
+msgstr "Etichetele au nevoie de un nume."
 
 #: application/models/Tag.php:62
 msgid "That name is already taken for this tag."
-msgstr "El nombre ya está en uso para esta etiqueta."
+msgstr "Acest nume este deja pus."
 
 #: application/models/Taggable.php:195
 msgid "A valid record ID # must be provided when tagging."
-msgstr "Un numero de ID de record debe ser dado cuando esta etiquetando."
+msgstr "Un ID valid # trebuie introdus la momentul etichetării."
 
 #: application/models/Taggable.php:199
 msgid "A valid entity or user must be provided when tagging."
-msgstr "Una entidad valida o usuario debe ser dado cuando esta etiquetando."
+msgstr ""
+"Trebuie introdusă o entitate validă sau un utilizator când etichetezi."
 
 #: application/models/User.php:63
 msgid "No Entity record available."
-msgstr "No hay record de entidad disponible."
+msgstr "Nicio informație despre entitate."
 
 #: application/models/User.php:75
 msgid "No Entity record is available when saving this User."
 msgstr ""
-"No hay record de entidad disponible cuando se esta guardando este usuario."
+"Nicio informație despre entitate nu a existat la salvarea acestui "
+"utilizator."
 
 #: application/models/User.php:92
 msgid "User may not change permissions to super-user"
-msgstr "El usuario no puede cambiar permisos a super-user"
+msgstr ""
+"Utilizatorul nu poate modifica permisiunile pentru a deveni super-user"
 
 #: application/models/User.php:95
 msgid "User may not change roles."
-msgstr "El usuario no puede cambiar roles."
+msgstr "Utilizatorul nu poate schimba rolurile."
 
 #: application/models/User.php:153
 msgid ""
 "If a first name and last name are not provided, then an institution name is "
 "required."
 msgstr ""
-"Si un nombre de pila o apellido no es dado, entonces el nombre de la "
-"institucion es requerido."
+"Dacă nu sunt introduse numele și prenumele, atunci numele instituției este "
+"necesar."
 
 #: application/models/User.php:156
 msgid "A first name is required."
-msgstr "Se requiere un nombre de pila."
+msgstr "Este necesar numele."
 
 #: application/models/User.php:159
 msgid "A last name is required."
-msgstr "Se requiere un apellido."
+msgstr "Este necesar prenumele."
 
 #: application/models/User.php:175
 msgid "The user must be assigned a role."
-msgstr "Sele debe asignar una rol al usuario."
+msgstr "Utilizatorului trebuie să i se dea un rol."
 
 #: application/models/User.php:180
 #, php-format
 msgid "The username \"%1$s\" must be between %2$s and %3$s characters."
-msgstr "El nombre de usuario \"%1$s\" debe tener entre %2$s y %3$s caracteres."
+msgstr ""
+"Numele utilizatorului \"%1$s\" trebuie să fie între %2$s și %3$s caractere."
 
 #: application/models/User.php:182
 msgid "The username must be alphanumeric."
-msgstr "El nombre de el usuario de be alfanumerico."
+msgstr "Numele utilizatorului trebuie să fie alfanumeric."
 
 #: application/models/User.php:184
 #, php-format
 msgid "'%s' is already in use. Please choose another username."
-msgstr "'%s' ya esta en uso. Por favor escoja otro nombre de usuario."
+msgstr "„%s” este deja utilizat. Alege alt nume de utilizator."
 
 #: application/models/UsersActivations.php:31
 msgid "Cannot create a user activation for non-existent user."
-msgstr ""
-"No se puede crear una activacion de usuario para un usuario que no existe."
+msgstr "Nu pot crea o activare de utilizator pentru unul care nu există."
 
 #: application/views/scripts/collections/browse.php:21
 #: application/views/scripts/collections/show.php:13
 msgid "Collector(s)"
-msgstr "Colector(es)"
+msgstr "Culegător(i)"
 
 #: application/views/scripts/collections/browse.php:28
 #: application/views/scripts/collections/show.php:22
 #, php-format
 msgid "View the items in %s"
-msgstr "Ver el emenento en %s"
+msgstr "Vezi înregistrările din %s"
 
 #: application/views/scripts/collections/show.php:25
 #, php-format
 msgid "Items in the %s Collection"
-msgstr "Elementos en la %s colección"
+msgstr "Înregistrările din colecția %s"
 
 #: application/views/scripts/common/delete-confirm.php:3
 #, php-format
 msgid "Delete %s"
-msgstr "Elimine %s"
+msgstr "Șterge %s"
 
 #: application/views/scripts/common/delete-confirm.php:12
 msgid "Are you sure?"
-msgstr "Esta Seguro?"
+msgstr "Ești sigur?"
 
 #: application/views/scripts/common/footer.php:6
 msgid "Home"
-msgstr ""
+msgstr "Acasă"
 
 #: application/views/scripts/common/footer.php:14
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
-msgstr ""
+msgstr "Motorizat de <a href=\"http://omeka.org\">Omeka</a>."
 
 #: application/views/scripts/common/pagination_control.php:7
 msgid "First"
-msgstr "Primero"
+msgstr "Primul"
 
 #: application/views/scripts/common/pagination_control.php:14
 msgid "Previous"
-msgstr "Previo"
+msgstr "Anterioară"
 
 #: application/views/scripts/common/pagination_control.php:30
 msgid "Next"
-msgstr "Siguiente"
+msgstr "Următoarea"
 
 #: application/views/scripts/common/pagination_control.php:37
 msgid "Last"
-msgstr "Ultimo"
+msgstr "Ultima"
 
 #: application/views/scripts/error/403.php:2
 msgid "403 Page Forbidden"
-msgstr "403 Pagina Prohibida"
+msgstr "403 Pagină interzisă"
 
 #: application/views/scripts/error/403.php:8
 msgid "You do not have permission to access this page."
-msgstr "Usted no tiene permiso para acceder a esta pagina."
+msgstr "Nu ai permisiunea de a accesa această pagină."
 
 #: application/views/scripts/error/404.dc.php:1
 #: application/views/scripts/error/404.php:2
 #: application/views/scripts/error/404.xml.php:1
 msgid "404 Page Not Found"
-msgstr "404 Página no encontrada"
+msgstr "404 Pagină inexistentă"
 
 #: application/views/scripts/error/404.php:7
 #, php-format
 msgid "%s is not a valid URL."
-msgstr "%s no es un URL valido."
+msgstr "%s nu este un URL valid."
 
 #: application/views/scripts/error/404.rss2.php:1
 msgid "Rss2.0 Feed Not Found!"
-msgstr "¡Rss2.0 Feed noe encontrada!"
+msgstr "Flux RSS2.0 inexistent!"
 
 #: application/views/scripts/error/405.php:2
 msgid "405 Method Not Allowed"
-msgstr "405 Método no permitido"
+msgstr "405 Metodă nepermisă"
 
 #: application/views/scripts/error/405.php:7
 #, php-format
 msgid "The method used to access this URL (%s) is not valid."
-msgstr "El metodo usado para acceder a este URL (%s) es invalido."
+msgstr "Metoda utilizată pentru a accesa acest URL (%s) nu este validă."
 
 #: application/views/scripts/error/index.php:4
 msgid "Omeka has encountered an error"
-msgstr ""
+msgstr "A apărut o eroare"
 
 #: application/views/scripts/error/index.php:29
 msgid ""
@@ -2714,121 +2741,124 @@ msgid ""
 "href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error "
 "messages</a>."
 msgstr ""
+"Pentru a vedea mai multe despre această eroare, vezi pagina Omeka Codex la "
+"<a href=\"http://omeka.org/codex/Retrieving_error_messages\">găsirea "
+"mesajelor de eroare</a>"
 
 #: application/views/scripts/functions.php:131
 msgid "Browse All"
-msgstr "Navegar todo"
+msgstr "Treci prin toate"
 
 #: application/views/scripts/functions.php:131
 msgid "Browse by Tag"
-msgstr "Navegar por Etiqueta"
+msgstr "Răsfoiește după etichetă"
 
 #: application/views/scripts/index.php:67
 msgid "No recent items available."
-msgstr "No hay elementos recientes disponibles."
+msgstr "Nu sunt disponibile înregistrări recente."
 
 #: application/views/scripts/items/advanced-search.php:32
 msgid "Search for Keywords"
-msgstr "Búsqueda de palabras clave"
+msgstr "Caută cuvinte cheie"
 
 #: application/views/scripts/items/advanced-search.php:42
 msgid "Narrow by Specific Fields"
-msgstr "Reducir por un campo específico"
+msgstr "Filtrează după anumite câmpuri"
 
 #: application/views/scripts/items/advanced-search.php:71
 msgid "contains"
-msgstr "contiene"
+msgstr "conține"
 
 #: application/views/scripts/items/advanced-search.php:72
 msgid "does not contain"
-msgstr "no contiene"
+msgstr "nu conține"
 
 #: application/views/scripts/items/advanced-search.php:73
 msgid "is exactly"
-msgstr "es exacto"
+msgstr "este exact"
 
 #: application/views/scripts/items/advanced-search.php:74
 msgid "is empty"
-msgstr "está vacío"
+msgstr "este gol"
 
 #: application/views/scripts/items/advanced-search.php:75
 msgid "is not empty"
-msgstr "no está vacío"
+msgstr "nu este gol"
 
 #: application/views/scripts/items/advanced-search.php:86
 msgid "Add a Field"
-msgstr "Agrega un campo"
+msgstr "Adaugă un câmp"
 
 #: application/views/scripts/items/advanced-search.php:90
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
-msgstr "Busque por intervalo de numberos de ID (ejemplo: 1-4, 156, 79)"
+msgstr "Caută după o gamă de ID#uri (exemplu: 1-4, 156, 79)"
 
 #: application/views/scripts/items/advanced-search.php:102
 msgid "Search By Collection"
-msgstr "Busque Por coleccion"
+msgstr "Caută după colecție"
 
 #: application/views/scripts/items/advanced-search.php:112
 msgid "Search By Type"
-msgstr "Busque Por Tipo"
+msgstr "Caută după tip"
 
 #: application/views/scripts/items/advanced-search.php:122
 msgid "Search By User"
-msgstr "Busque Por Etiqueta"
+msgstr "Caută după utilizator"
 
 #: application/views/scripts/items/advanced-search.php:133
 msgid "Search By Tags"
-msgstr "Busque Por Etiquetas"
+msgstr "Caută după etichete"
 
 #: application/views/scripts/items/advanced-search.php:147
 msgid "Public/Non-Public"
-msgstr "Publico/No-Publico"
+msgstr "Public/Privat"
 
 #: application/views/scripts/items/advanced-search.php:150
 msgid "Only Public Items"
-msgstr "Solo Elementos Publicos"
+msgstr "Doar înregistrări publice"
 
 #: application/views/scripts/items/advanced-search.php:151
 msgid "Only Non-Public Items"
-msgstr "Solo Elementos No-Publicos"
+msgstr "Doar înregistrări private"
 
 #: application/views/scripts/items/advanced-search.php:157
 msgid "Featured/Non-Featured"
-msgstr "Destacados/No-Destacados"
+msgstr "Constituite/Neconstituite"
 
 #: application/views/scripts/items/advanced-search.php:160
 msgid "Only Featured Items"
-msgstr "Solo Elementos Destacados"
+msgstr "Doar înregistrări constituite"
 
 #: application/views/scripts/items/advanced-search.php:161
 msgid "Only Non-Featured Items"
-msgstr "Solo Elementos No-Destacados"
+msgstr "Doar înregistrări neconstituite"
 
 #: application/views/scripts/items/show.php:11
 msgid "Files"
-msgstr "Archivos"
+msgstr "Fișiere"
 
 #: application/views/scripts/items/show.php:33
 msgid "Citation"
-msgstr "Citación"
+msgstr "Citat"
 
 #: application/views/scripts/upgrade/completed.php:5
 #: application/views/scripts/upgrade/index.php:5
 #: application/views/scripts/upgrade/migrate.php:5
 msgid "Upgrade Omeka"
-msgstr "Actualice Omeka"
+msgstr "Actualizează Omeka"
 
 #: application/views/scripts/upgrade/completed.php:10
 msgid "Omeka Upgrade Completed"
-msgstr "Actualización de Omeka completa"
+msgstr "Actualizare încheiată"
 
 #: application/views/scripts/upgrade/completed.php:11
 #, php-format
 msgid "Please return to the %1$s or your site&#8217;s %2$s"
-msgstr "Por favor, regrese al %1$s o a su sitio web &#8217;s %2$s"
+msgstr "Întoarce-te la %1$s sau la siteul tău&#8217;s %2$s"
 
 #: application/views/scripts/upgrade/completed.php:11
 msgid "Your Omeka database is completely up-to-date."
-msgstr "Su base de datos de Omeka esta completamente al dia."
+msgstr "Baza de date Omeka este actualizată"
 
 #: application/views/scripts/upgrade/completed.php:13
 #: application/views/scripts/upgrade/migrate.php:18
@@ -2837,119 +2867,121 @@ msgid ""
 "href=\"http://omeka.org/codex\">Omeka documentation</a> or post a message on"
 " the <a href=\"http://omeka.org/forums\">Omeka forums</a>."
 msgstr ""
-"Si usted tiene alguna pregunta por favor, vaya a <a "
-"href=\"http://omeka.org/codex\">Documentación de Omeka</a> o agrege su "
-"pregunta al <a href=\"http://omeka.org/forums\">Foro de Omeka</a>."
+"Dacă ai întrebări întreabă pe <a href=\"http://omeka.org/codex\">Omeka "
+"documentation</a> sau pune un mesaj la <a "
+"href=\"http://omeka.org/forums\">Omeka forums</a>."
 
 #: application/views/scripts/upgrade/index.php:10
 msgid "Upgrade Your Omeka Database"
-msgstr "Actualize su base de datos Omeka"
+msgstr "Actualizează baza de date Omeka"
 
 #: application/views/scripts/upgrade/index.php:12
 msgid ""
 "Your Omeka database is not compatible with your current version of Omeka."
-msgstr ""
+msgstr "Baza ta Omeka nu este compatibilă cu versiunea curentă de Omeka."
 
 #: application/views/scripts/upgrade/index.php:13
 msgid ""
 "Please back up your existing database and then click the button to upgrade."
 msgstr ""
+"Fă o copie de siguranță la baza de date și apoi dă click pe actualizare"
 
 #: application/views/scripts/upgrade/index.php:15
 msgid "Upgrade Database"
-msgstr "Actualize su Base de Datos"
+msgstr "Actualizează baza de date"
 
 #: application/views/scripts/upgrade/migrate.php:11
 msgid "Omeka encountered an error when upgrading your installation."
-msgstr "Omeka ha detectado un error al actualizar la instalación."
+msgstr "Omeka a raportat o eroare la actualizarea instalării."
 
 #: application/views/scripts/upgrade/migrate.php:16
 msgid "Please restore from your database backup and try again."
-msgstr ""
-"Por restaurar su base de datos con la copia de seguridad y vuelva a "
-"intentarlo."
+msgstr "Restaurează baza de date din copia de siguranță și încearcă din nou."
 
 #: application/views/scripts/upgrade/migrate.php:21
 msgid "Omeka has upgraded successfully."
-msgstr "Omeka se a actualizado con exito."
+msgstr "Omeka s-a actualizat cu succes."
 
 #: application/views/scripts/upgrade/migrate.php:22
 msgid "Return to Dashboard"
-msgstr "Volver al Tablero de Instrumentos"
+msgstr "Înapoi la Panoul de operare"
 
 #: application/views/scripts/users/activate.php:2
 msgid "User Activation"
-msgstr "Activacion de Usuario"
+msgstr "Activarea utilizatorilor"
 
 #: application/views/scripts/users/forgot-password.php:2
 msgid "Forgot Password"
-msgstr "Olvidó su Contrseña"
+msgstr "Am uitat parola"
 
 #: application/views/scripts/users/forgot-password.php:7
 msgid "Back to Log In"
-msgstr "Volver al inicio de sesión"
+msgstr "Înapoi la login"
 
 #: application/views/scripts/users/forgot-password.php:10
 msgid "Enter your email address to retrieve your password."
-msgstr "Entre su dirección de e-mail para recapturar su contraseña."
+msgstr "Introdu adresa email pentru a recupera parola."
 
 #: application/views/scripts/users/login.php:9
 msgid "Go to Home Page"
-msgstr ""
+msgstr "Mergi la pagina principală"
 
 #: application/views/scripts/users/login.php:9
 msgid "Lost your password?"
-msgstr "¿Perdio su contraseña?"
+msgstr "Ți-ai pierdut parola?"
 
 #: install/views/scripts/index/errors.phtml:1
 msgid "Installation Error"
-msgstr ""
+msgstr "Eroare de instalare"
 
 #: install/views/scripts/index/errors.phtml:2
 msgid ""
 "Before installation can continue, the following errors must be resolved:"
-msgstr "Para continuar la instalación, debe resolver los siguientes errores:"
+msgstr ""
+"Înainte de a continua instalarea, trebuie rezolvate următoarele erori:"
 
 #: install/views/scripts/index/fatal-error.phtml:1
 msgid "Fatal Error"
-msgstr "Error Fatal"
+msgstr "Eroare capitală"
 
 #: install/views/scripts/index/index.phtml:2
 msgid "Installation Warning"
-msgstr ""
+msgstr "Avertisment la instalare"
 
 #: install/views/scripts/index/index.phtml:3
 msgid ""
 "The following issues will not affect installation, but they may negatively "
 "affect the behavior of Omeka:"
 msgstr ""
-"Los siguientes problemas no afectan la instalación, pero puede afectar "
-"negativamente el comportamiento de Omeka: "
+"Următoarele probleme nu vor afecta instalarea, dar vor putea afecta negativ "
+"comportamentul softwareului"
 
 #: install/views/scripts/index/index.phtml:13
 msgid "Configure Your Site"
-msgstr "Configure su sitio de web."
+msgstr "Configurează siteul"
 
 #: install/views/scripts/index/index.phtml:15
 msgid "Form Validation Errors"
-msgstr "Error de validacion de formulario"
+msgstr "Erori de validare a datelor din formular"
 
 #: install/views/scripts/index/installed.phtml:1
 msgid ""
 "Omeka is installed. You may remove the \"install\" directory for security "
 "reasons."
 msgstr ""
+"Omeka s-a instalat. Poți șterge directorul \"install\" din motive de "
+"securitate."
 
 #: install/views/scripts/index/installed.phtml:2
 msgid "Admin Panel"
-msgstr "Panel de Administración"
+msgstr "Panoul de administrare"
 
 #: install/views/scripts/index/installed.phtml:2
 msgid "Public Site"
-msgstr "Sitio Publico"
+msgstr "Site public"
 
 #: install/views/scripts/layout.phtml:5 install/views/scripts/layout.phtml:9
 msgid "Omeka Installation"
-msgstr "Instalacion de Omeka"
+msgstr "Instalare Omeka"
 
 
