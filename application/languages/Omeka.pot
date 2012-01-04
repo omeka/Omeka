@@ -2215,6 +2215,10 @@ msgstr ""
 msgid "No tags are available."
 msgstr ""
 
+#: application/libraries/Omeka/View/Helper/RecordMetadataList.php:91
+msgid "[no text]"
+msgstr ""
+
 #: application/models/ActsAsElementText.php:257
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"

@@ -40,7 +40,7 @@ abstract class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abs
      * @see self::$_showEmptyElements
      * @var string
      */
-    protected $_emptyElementString = '[no text]';
+    protected $_emptyElementString;
     
     /**
      * Element sets to list.
@@ -88,6 +88,7 @@ abstract class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abs
     {
         // Set a default for show_empty_elements based on site setting
         $this->_showEmptyElements = (bool) get_option('show_empty_elements');
+        $this->_emptyElementString = __('[no text]');
         
         // Handle show_empty_elements option
         if (array_key_exists('show_empty_elements', $options)) {
