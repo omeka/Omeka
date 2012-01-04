@@ -84,8 +84,18 @@ class Omeka_View_Helper_Media
         'video/avi'         => 'wmv',
         'video/msvideo'     => 'wmv',
         'video/x-msvideo'   => 'wmv',
-        'video/x-ms-wmv'    => 'wmv'
-        );
+        'video/x-ms-wmv'    => 'wmv', 
+    );
+    
+    /**
+     * @var array Array of file extensions and the callbacks that can process 
+     * them.
+     */
+    static private $_fileExtensionCallbacks = array(
+        'mov' => 'mov',
+        'mp4' => 'mov',
+        'mp3' => 'audio',
+    );
 
     /**
      * The array consists of the default options
@@ -148,7 +158,8 @@ class Omeka_View_Helper_Media
         );
       
     /**
-     * Add MIME types and associated callbacks to the list.
+     * Add MIME types and/or file extensions and associated callbacks to the 
+     * list.
      * 
      * This allows plugins to override/define ways of displaying specific
      * files.  The most obvious example of where this would come in handy is
@@ -162,24 +173,71 @@ class Omeka_View_Helper_Media
      * helpers into the view object, this helper object cannot be instantiated
      * and registered for use by the add_mime_display_type() function.
      * 
-     * @param array|string $mimeTypes Set of MIME types that this specific
-     * callback will respond to.
-     * @param callback Any valid callback.  This function should return a
-     * string containing valid XHTML, which will be used to display the file.
+     * @param array|string $fileIdentifiers Set of MIME types and/or file 
+     * extensions that this specific callback will respond to. Accepts the 
+     * following:
+     * <ul>
+     *     <li>A string containing one MIME type: 
+     *     <code>'application/msword'</code></li>
+     *     <li>A simple array containing MIME types: 
+     *     <code>array('application/msword', 'application/doc')</code></li>
+     *     <li>A keyed array containing MIME types: 
+     *     <code>array('mimeTypes' => array('application/msword', 'application/doc'))</code></li>
+     *     <li>A keyed array containing file extensions: 
+     *     <code>array('fileExtensions' => array('doc', 'docx''DOC', 'DOCX'))</code></li>
+     *     <li>A keyed array containing MIME types and file extensions: <code>
+     *     array(
+     *         'mimeTypes' => array(
+     *             'application/msword', 
+     *             'application/doc', 
+     *             'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 
+     *         ), 
+     *         'fileExtensions' => array('doc', 'docx', 'DOC', 'DOCX'), 
+     *     )
+     *     </code></li>
+     * </ul>
+     * Note that file extensions are case sensitive.
+     * @param callback Any valid callback.  This function should return a string 
+     * containing valid XHTML, which will be used to display the file.
+     * @param array $defaultOptions
+     * @param array $fileExtensions
      * @return void
      */
-    public static function addMimeTypes($mimeTypes, $callback, array $defaultOptions = array())
+    public static function addMimeTypes($fileIdentifiers, $callback, array $defaultOptions = array())
     {
-        //Create the keyed list of mimeType=>callback format, and merge it
-        //with the current list.
-        $mimeTypes = (array) $mimeTypes;
-        $fillArray = array_fill(0, count($mimeTypes), $callback);    
-        $callbackList = array_combine($mimeTypes, $fillArray);
+        // Create the keyed list of mimeType => callback and fileExtension => 
+        // callback format, and merge them with the current lists.
+        $callbackListMimeTypes = array();
+        $callbackListFileExtensions = array();
         
-        self::$_callbacks = array_merge(self::$_callbacks, $callbackList);
-
-        //Create the keyed list of callback=>options format, and add it 
-        //to the current list
+        // Intrepret string as MIME type.
+        if (is_string($fileIdentifiers)) {
+            $fileIdentifiers = (array) $fileIdentifiers;
+            $fillArray = array_fill(0, count($fileIdentifiers), $callback);
+            $callbackListMimeTypes = array_combine($fileIdentifiers, $fillArray);
+        } else if (is_array($fileIdentifiers)) {
+            // Intrepret unkeyed array as MIME types.
+            if (array_key_exists(0, $fileIdentifiers)) {
+                $fillArray = array_fill(0, count($fileIdentifiers), $callback);
+                $callbackListMimeTypes = array_combine($fileIdentifiers, $fillArray);
+            // Intrepret keyed array as MIME types and/or file extensions.
+            } else {
+                if (array_key_exists('mimeTypes', $fileIdentifiers)) {
+                    $fillArray = array_fill(0, count($fileIdentifiers['mimeTypes']), $callback);
+                    $callbackListMimeTypes = array_combine($fileIdentifiers['mimeTypes'], $fillArray);
+                }
+                if (array_key_exists('fileExtensions', $fileIdentifiers)) {
+                    $fillArray = array_fill(0, count($fileIdentifiers['fileExtensions']), $callback);
+                    $callbackListFileExtensions = array_combine($fileIdentifiers['fileExtensions'], $fillArray);
+                }
+            }
+        }
+        
+        self::$_callbacks = array_merge(self::$_callbacks, $callbackListMimeTypes);
+        self::$_fileExtensionCallbacks = array_merge(self::$_fileExtensionCallbacks, $callbackListFileExtensions);
+        
+        // Create the keyed list of callback=>options format, and add it to the 
+        // current list
         
         //The key for the array might be the serialized callback (if necessary)
         $callbackKey = !is_string($callback) ? serialize($callback) : $callback;
@@ -442,7 +500,7 @@ class Omeka_View_Helper_Media
         return $file->getMimeType();
     }
 
-    protected function getCallback($mimeType, $options)
+    protected function getCallback($mimeType, $options, $fileExtension)
     {
         // Displaying icons overrides the default lookup mechanism.
         if (array_key_exists('icons', $options) and
@@ -452,6 +510,8 @@ class Omeka_View_Helper_Media
         
         if (array_key_exists($mimeType, self::$_callbacks)) {
             $name = self::$_callbacks[$mimeType];
+        } else if (array_key_exists($fileExtension, self::$_fileExtensionCallbacks)) {
+            $name = self::$_fileExtensionCallbacks[$fileExtension];
         } else {
             $name = 'defaultDisplay';
         }
@@ -506,10 +566,12 @@ class Omeka_View_Helper_Media
     public function media($file, array $props=array(), $wrapperAttributes = array())
     {
         $mimeType = $this->getMimeFromFile($file);
+        $fileExtension = $this->_getFileExtension($file);
+        
         // There is a chance that $props passed in could modify the callback
         // that is used.  Currently used to determine whether or not to display
         // an icon.
-        $callback = $this->getCallback($mimeType, $props);   
+        $callback = $this->getCallback($mimeType, $props, $fileExtension);   
         
         $options = array_merge($this->getDefaultOptions($callback), $props);
         
@@ -532,6 +594,12 @@ class Omeka_View_Helper_Media
         
         return $html;
     }
+    
+    private function _getFileExtension($file)
+    {
+        return pathinfo($file->original_filename, PATHINFO_EXTENSION);
+    }
+
     /**
      * Return a valid img tag for a thumbnail image.
      */
