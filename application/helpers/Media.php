@@ -89,12 +89,69 @@ class Omeka_View_Helper_Media
     
     /**
      * @var array Array of file extensions and the callbacks that can process 
-     * them.
+     * them. Taken from http://svn.apache.org/repos/asf/httpd/httpd/trunk/docs/conf/mime.types
      */
     static private $_fileExtensionCallbacks = array(
-        'mov' => 'mov',
-        'mp4' => 'mov',
-        'mp3' => 'audio',
+        // application/ogg
+        'ogx' => 'audio', 
+        // audio/x-aac
+        'aac' => 'audio', 
+        // audio/x-aiff
+        'aif' => 'audio', 
+        'aiff' => 'audio', 
+        'aifc' => 'audio', 
+        // audio/midi
+        'mid' => 'audio', 
+        'midi' => 'audio', 
+        'kar' => 'audio', 
+        'rmi' => 'audio', 
+        // audio/mpeg
+        'mpga' => 'audio', 
+        'mp2' => 'audio', 
+        'mp2a' => 'audio', 
+        'mp3' => 'audio', 
+        'm2a' => 'audio', 
+        'm3a' => 'audio', 
+        // audio/mp4
+        'mp4a' => 'audio', 
+        // audio/ogg
+        'oga' => 'audio', 
+        'ogg' => 'audio', 
+        'spx' => 'audio', 
+        // audio/x-wav
+        'wav' => 'audio', 
+        // image/bmp
+        'bmp' => 'image', 
+        // image/gif
+        'gif' => 'image', 
+        // image/jpeg
+        'jpeg' => 'image', 
+        'jpg' => 'image', 
+        'jpe' => 'image', 
+        // image/png
+        'png' => 'image', 
+        // image/tiff
+        'tif' => 'image', 
+        'tiff' => 'image', 
+        // video/mp4
+        'mp4' => 'mov', 
+        'mp4v' => 'mov',  
+        'mpg4'  => 'mov', 
+        // video/mpeg
+        'mpeg' => 'mov', 
+        'mpg' => 'mov', 
+        'mpe' => 'mov', 
+        'm1v' => 'mov', 
+        'm2v'  => 'mov', 
+        // video/ogg
+        'ogv' => 'mov', 
+        // video/quicktime
+        'qt' => 'mov', 
+        'mov' => 'mov', 
+        // audio/x-ms-wma
+        'wma' => 'wma', 
+        // video/x-msvideo
+        'avi' => 'wmv', 
     );
 
     /**
@@ -210,17 +267,17 @@ class Omeka_View_Helper_Media
         $callbackListMimeTypes = array();
         $callbackListFileExtensions = array();
         
-        // Intrepret string as MIME type.
+        // Interpret string as MIME type.
         if (is_string($fileIdentifiers)) {
             $fileIdentifiers = (array) $fileIdentifiers;
             $fillArray = array_fill(0, count($fileIdentifiers), $callback);
             $callbackListMimeTypes = array_combine($fileIdentifiers, $fillArray);
         } else if (is_array($fileIdentifiers)) {
-            // Intrepret unkeyed array as MIME types.
+            // Interpret unkeyed array as MIME types.
             if (array_key_exists(0, $fileIdentifiers)) {
                 $fillArray = array_fill(0, count($fileIdentifiers), $callback);
                 $callbackListMimeTypes = array_combine($fileIdentifiers, $fillArray);
-            // Intrepret keyed array as MIME types and/or file extensions.
+            // Interpret keyed array as MIME types and/or file extensions.
             } else {
                 if (array_key_exists('mimeTypes', $fileIdentifiers)) {
                     $fillArray = array_fill(0, count($fileIdentifiers['mimeTypes']), $callback);
