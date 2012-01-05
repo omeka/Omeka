@@ -36,36 +36,29 @@ class Omeka_View_Helper_Media
      * @var array
      */
     static protected $_callbacks = array(
-        'application/ogg'   => 'audio',
-        'audio/aac'         => 'audio',
-        'audio/aiff'        => 'audio',
-        'audio/midi'        => 'audio',
-        'audio/mp3'         => 'audio',
-        'audio/mp4'         => 'audio',
-        'audio/mpeg'        => 'audio',
-        'audio/mpeg3'       => 'audio',
-        'audio/mpegaudio'   => 'audio',
-        'audio/mpg'         => 'audio',
-        'audio/ogg'         => 'audio',
-        'audio/wav'         => 'audio',
-        'audio/x-mp3'       => 'audio',
-        'audio/x-mp4'       => 'audio',
-        'audio/x-mpeg'      => 'audio',
-        'audio/x-mpeg3'     => 'audio',
-        'audio/x-midi'      => 'audio',
-        'audio/x-mpegaudio' => 'audio',
-        'audio/x-mpg'       => 'audio',
-        'audio/x-ogg'       => 'audio',
-        'audio/x-wav'       => 'audio',
-        'audio/x-aac'       => 'audio',
-        'audio/x-aiff'      => 'audio',
-        'audio/x-midi'      => 'audio',
-        'audio/x-mp3'       => 'audio',
-        'audio/x-mp4'       => 'audio',
-        'audio/x-mpeg'      => 'audio',
-        'audio/x-mpeg3'     => 'audio',
-        'audio/x-mpegaudio' => 'audio',
-        'audio/x-mpg'       => 'audio',
+        'application/ogg'   => 'ogg',
+        'audio/ogg'         => 'ogg',
+        'audio/x-ogg'       => 'ogg',
+        'audio/aac'         => 'aac',
+        'audio/x-aac'       => 'aac',
+        'audio/aiff'        => 'aiff',
+        'audio/x-aiff'      => 'aiff',
+        'audio/midi'        => 'midi',
+        'audio/x-midi'      => 'midi',
+        'audio/mp3'         => 'mp3',
+        'audio/mpeg'        => 'mp3',
+        'audio/mpeg3'       => 'mp3',
+        'audio/mpegaudio'   => 'mp3',
+        'audio/mpg'         => 'mp3',
+        'audio/x-mp3'       => 'mp3',
+        'audio/x-mpeg'      => 'mp3',
+        'audio/x-mpeg3'     => 'mp3',
+        'audio/x-mpegaudio' => 'mp3',
+        'audio/x-mpg'       => 'mp3',
+        'audio/mp4'         => 'mp4',
+        'audio/x-mp4'       => 'mp4',
+        'audio/wav'         => 'wav',
+        'audio/x-wav'       => 'wav',
         'image/bmp'         => 'image',
         'image/gif'         => 'image',
         'image/jpeg'        => 'image',
@@ -93,33 +86,33 @@ class Omeka_View_Helper_Media
      */
     static private $_fileExtensionCallbacks = array(
         // application/ogg
-        'ogx' => 'audio', 
+        'ogx' => 'ogg', 
         // audio/x-aac
-        'aac' => 'audio', 
+        'aac' => 'aac', 
         // audio/x-aiff
-        'aif' => 'audio', 
-        'aiff' => 'audio', 
-        'aifc' => 'audio', 
+        'aif' => 'aiff', 
+        'aiff' => 'aiff', 
+        'aifc' => 'aiff', 
         // audio/midi
-        'mid' => 'audio', 
-        'midi' => 'audio', 
-        'kar' => 'audio', 
-        'rmi' => 'audio', 
+        'mid' => 'midi', 
+        'midi' => 'midi', 
+        'kar' => 'midi', 
+        'rmi' => 'midi', 
         // audio/mpeg
-        'mpga' => 'audio', 
-        'mp2' => 'audio', 
-        'mp2a' => 'audio', 
-        'mp3' => 'audio', 
-        'm2a' => 'audio', 
-        'm3a' => 'audio', 
+        'mpga' => 'mp3', 
+        'mp2' => 'mp3', 
+        'mp2a' => 'mp3', 
+        'mp3' => 'mp3', 
+        'm2a' => 'mp3', 
+        'm3a' => 'mp3', 
         // audio/mp4
-        'mp4a' => 'audio', 
+        'mp4a' => 'mp4', 
         // audio/ogg
-        'oga' => 'audio', 
-        'ogg' => 'audio', 
-        'spx' => 'audio', 
+        'oga' => 'ogg', 
+        'ogg' => 'ogg', 
+        'spx' => 'ogg', 
         // audio/x-wav
-        'wav' => 'audio', 
+        'wav' => 'wav', 
         // image/bmp
         'bmp' => 'image', 
         // image/gif
@@ -196,7 +189,49 @@ class Omeka_View_Helper_Media
             'loop'=> false,
             'scale' => 'aspect'
             ),
-        'audio'=>array(
+        'ogg'=>array(
+            'width' => '200',
+            'height' => '20',
+            'autoplay' => false,
+            'controller' => true,
+            'loop' => false
+            ),
+        'mp3'=>array(
+            'width' => '200',
+            'height' => '20',
+            'autoplay' => false,
+            'controller' => true,
+            'loop' => false
+            ),
+        'aac'=>array(
+            'width' => '200',
+            'height' => '20',
+            'autoplay' => false,
+            'controller' => true,
+            'loop' => false
+            ),
+        'aiff'=>array(
+            'width' => '200',
+            'height' => '20',
+            'autoplay' => false,
+            'controller' => true,
+            'loop' => false
+            ),
+        'midi'=>array(
+            'width' => '200',
+            'height' => '20',
+            'autoplay' => false,
+            'controller' => true,
+            'loop' => false
+            ),
+        'mp4'=>array(
+            'width' => '200',
+            'height' => '20',
+            'autoplay' => false,
+            'controller' => true,
+            'loop' => false
+            ),
+        'wav'=>array(
             'width' => '200',
             'height' => '20',
             'autoplay' => false,
@@ -455,7 +490,7 @@ class Omeka_View_Helper_Media
 
         return $html;
     }
-
+    
     /**
      * Retrieve valid XHTML for displaying Quicktime video files
      * 
@@ -479,25 +514,25 @@ class Omeka_View_Helper_Media
 
         return $html;
     }
-
+    
     /**
      * Default display of audio files via <object> tags.
      * 
      * @param File $file
      * @param array $options The set of default options for this includes:
      *  width, height, autoplay, controller, loop
+     * @param string $type The Internet media type of the file
      * @return string
      */
-    public function audio($file, array $options=array())
+    private function _audio($file, array $options, $type)
     {
         $path = html_escape($file->getWebPath('archive'));
-
         $html = '<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab" width="'.$options['width'].'" height="'.$options['height'].'">'
               . '<param name="src" value="'.$path.'" />'
               . '<param name="controller" value="'.($options['controller'] ? 'true' : 'false').'" />'
               . '<param name="autoplay" value="'.($options['autoplay'] ? 'true' : 'false').'" />'
               . '<param name="loop" value="'.($options['loop'] ? 'true' : 'false').'" />'
-              . '<object type="' . $file->mime_browser . '" data="' . $path . '" width="'.$options['width'].'" height="'.$options['height'].'" autoplay="'.($options['autoplay'] ? 'true' : 'false').'">'
+              . '<object type="' . $type . '" data="' . $path . '" width="'.$options['width'].'" height="'.$options['height'].'" autoplay="'.($options['autoplay'] ? 'true' : 'false').'">'
               . '<param name="src" value="'.$path.'" />'
               . '<param name="controller" value="'.($options['controller'] ? 'true' : 'false').'" />'
               . '<param name="autoplay" value="'.($options['autoplay'] ? 'true' : 'false').'" />'
@@ -505,10 +540,93 @@ class Omeka_View_Helper_Media
               . '<param name="loop" value="'.($options['loop'] ? 'true' : 'false').'" />'
               . '</object>'
               . '</object>';
-
         return $html;
     }
-
+    
+    /**
+     * Display OGG audio files.
+     * 
+     * @param File $file
+     * @param array $options
+     * @return string
+     */
+    public function ogg($file, array $options = array())
+    {
+        return $this->_audio($file, $options, 'audio/ogg');
+    }
+    
+    /**
+     * Display MP3/MPEG audio files.
+     * 
+     * @param File $file
+     * @param array $options
+     * @return string
+     */
+    public function mp3($file, array $options = array())
+    {
+        return $this->_audio($file, $options, 'audio/mpeg');
+    }
+    
+    /**
+     * Display AAC audio files.
+     * 
+     * @param File $file
+     * @param array $options
+     * @return string
+     */
+    public function aac($file, array $options = array())
+    {
+        return $this->_audio($file, $options, 'audio/x-aac');
+    }
+    
+    /**
+     * Display AIFF audio files.
+     * 
+     * @param File $file
+     * @param array $options
+     * @return string
+     */
+    public function aiff($file, array $options = array())
+    {
+        return $this->_audio($file, $options, 'audio/x-aiff');
+    }
+    
+    /**
+     * Display MIDI audio files.
+     * 
+     * @param File $file
+     * @param array $options
+     * @return string
+     */
+    public function midi($file, array $options = array())
+    {
+        return $this->_audio($file, $options, 'audio/midi');
+    }
+    
+    /**
+     * Display MP4 audio files.
+     * 
+     * @param File $file
+     * @param array $options
+     * @return string
+     */
+    public function mp4($file, array $options = array())
+    {
+        return $this->_audio($file, $options, 'audio/mp4');
+    }
+    
+    /**
+     * Display WAV audio files.
+     * 
+     * @param File $file
+     * @param array $options
+     * @return string
+     */
+    public function wav($file, array $options = array())
+    {
+        return $this->_audio($file, $options, 'audio/x-wav');
+    }
+    
     /**
      * Default display of an icon to represent a file.
      * 
