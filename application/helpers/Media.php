@@ -480,7 +480,7 @@ class Omeka_View_Helper_Media
     public function wma($file, array $options=array())
     {
         $path = html_escape($file->getWebPath('archive'));
-        $html = '<object type="'.$file->mime_browser.'" width="'.$options['width'].'" height="'.$options['height'].'" data="'.$path.'" autoStart="'.$options['autostart'].'">'
+        $html = '<object type="audio/x-ms-wma" width="'.$options['width'].'" height="'.$options['height'].'" data="'.$path.'" autoStart="'.$options['autostart'].'">'
               . '<param name="FileName" value="'.$path.'" />'
               . '<param name="autoStart" value="'.($options['autostart'] ? 'true' : 'false').'" />'
               . '<param name="ShowControls" value="'.($options['ShowControls'] ? 'true' : 'false').'" />'
