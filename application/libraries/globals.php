@@ -306,20 +306,27 @@ function get_plugin_ini($pluginDirName, $iniKeyName)
 }
 
 /**
- * Declare a function that will be used to display files with a given MIME type 
- * and/or file extension.
+ * Declare a callback function that will be used to display files with a given 
+ * MIME type and/or file extension.
  * 
- * @uses Omeka_View_Helper_Media::addMimeTypes() See for info on arguments and
- * usage.
+ * @uses Omeka_View_Helper_Media::addMimeTypes() See for info on usage.
  * @param array|string $fileIdentifiers Set of MIME types and/or file extensions 
- * that the provided callback will respond to.
+ * to which the provided callback will respond.
  * @param callback $callback Any valid callback.
  * @param array $options
  */
+function add_file_display_callback($fileIdentifiers, $callback, array $options=array())
+{
+    require_once HELPER_DIR . '/Media.php';
+    Omeka_View_Helper_Media::addMimeTypes($fileIdentifiers, $callback, $options);
+}
+
+/**
+ * @deprecated Deprecated since version 1.5.
+ */
 function add_mime_display_type($fileIdentifiers, $callback, array $options=array())
 {
-    require_once HELPER_DIR . '/' . 'Media.php';
-    Omeka_View_Helper_Media::addMimeTypes($fileIdentifiers, $callback, $options);
+    add_file_display_callback($fileIdentifiers, $callback, $options);
 }
 
 /**
