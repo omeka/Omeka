@@ -820,6 +820,38 @@ function __($string)
 }
 
 /**
+ * Add an translation source directory.
+ *
+ * The directory's contents should be .mo files following the naming
+ * scheme of Omeka's application/languages directory. If a .mo for the
+ * current locale exists, the translations will be loaded.
+ *
+ * @since 1.5
+ * @param string $dir Directory to load translations from.
+ */
+function add_translation_source($dir)
+{
+    try {
+        $translate = Zend_Registry::get('Zend_Translate');
+        $locale = Zend_Registry::get('Zend_Locale');
+    } catch (Zend_Exception $e) {
+        return;
+    }
+
+    $locale = $locale->toString();
+
+    try {
+        $translate->addTranslation(array(
+            'content' => "$dir/$locale.mo",
+            'locale' => $locale
+        ));
+    } catch (Zend_Translate_Exception $e) {
+        // Do nothing, allow the user to set a locale or dir without a
+        // translation.
+    }
+}
+
+/**
  * Get the correct HTML "lang" attribute for the current locale.
  *
  * @since 1.5
