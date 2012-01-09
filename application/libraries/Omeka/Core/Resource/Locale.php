@@ -39,19 +39,30 @@ class Omeka_Core_Resource_Locale extends Zend_Application_Resource_Locale {
      */
     private function _setTranslate($locale)
     {
-        try {
-            $translate = new Zend_Translate(array(
-                'locale' => $locale,
-                'adapter' => 'gettext',
-                'disableNotices' => true,
-                'content' => LANGUAGES_DIR . "/$locale.mo"
-            ));
-            Zend_Registry::set(
-                Zend_Application_Resource_Translate::DEFAULT_REGISTRY_KEY,
-                $translate);
-        } catch (Zend_Translate_Exception $e) {
-            // Do nothing, allow the user to set a locale without a
-            // translation.
+        $translate = new Zend_Translate(array(
+            'adapter' => 'gettext',
+            'disableNotices' => true,
+        ));
+
+        $translationSources = array(LANGUAGES_DIR);
+        if ($pluginBroker = $this->getBootstrap()->getResource('PluginBroker')) {
+            $translationSources = $pluginBroker->applyFilters('translation_sources', $translationSources);
         }
+
+        foreach ($translationSources as $dir) {
+            try {
+                $translate->addTranslation(array(
+                    'content' => $dir . "/$locale.mo",
+                    'locale' => $locale
+                ));
+            } catch (Zend_Translate_Exception $e) {
+                // Do nothing, allow the user to set a locale without a
+                // translation.
+            }
+        }
+
+        Zend_Registry::set(
+            Zend_Application_Resource_Translate::DEFAULT_REGISTRY_KEY,
+            $translate);
     }
 }
