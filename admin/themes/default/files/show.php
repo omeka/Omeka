@@ -6,7 +6,7 @@
     } else {
         $fileTitle = '';
     }
-    $fileTitle = __('File #%s', collection('id')) . $fileTitle;
+    $fileTitle = __('File #%s', item_file('id')) . $fileTitle;
 ?>
 <?php head(array('title' => $fileTitle, 'bodyclass'=>'files show primary-secondary')); ?>
 
