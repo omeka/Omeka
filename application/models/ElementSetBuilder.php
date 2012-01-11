@@ -16,7 +16,7 @@
  */
 class ElementSetBuilder extends Omeka_Record_Builder
 {
-    protected $_settableProperties = array('name', 'description');
+    protected $_settableProperties = array('name', 'description', 'record_type_id');
     protected $_recordClass = 'ElementSet';
     
     private $_elementInfo = array();
@@ -39,9 +39,23 @@ class ElementSetBuilder extends Omeka_Record_Builder
      */
     public function setRecordMetadata($metadata)
     {
+        // Set the element set name if a string is provided.
         if (is_string($metadata)) {
-            $metadata = array('name'=>$metadata);
+            $metadata = array('name' => $metadata);
         }
+        
+        // Determine the record type ID from the name.
+        if (array_key_exists('record_type', $metadata)) {
+            $recordType = $this->_db->getTable('RecordType')
+                                    ->findBySql('name = ?', 
+                                                array($metadata['record_type']),
+                                                true);
+            if (!$recordType) {
+                throw new Omeka_Record_Builder_Exception( "Invalid record type named {$metadata[record_type]} provided!");
+            }
+            $metadata['record_type_id'] = $recordType->id;
+        }
+        
         return parent::setRecordMetadata($metadata);
     }
     

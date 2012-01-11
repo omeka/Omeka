@@ -594,8 +594,10 @@ function insert_collection($metadata = array())
  *     [(string) element set name]
  *     -OR-
  *     array(
- *         'name'        => [(string) element set name, required, unique], 
- *         'description' => [(string) element set description, optional]
+ *         'name'           => [(string) element set name, required, unique], 
+ *         'description'    => [(string) element set description, optional], 
+ *         'record_type'    => [(string) record type name, optional], 
+ *         'record_type_id' => [(int) record type id, optional]
  *     );
  * </code>
  * @param array $elements An array containing element data. Follows one of more
