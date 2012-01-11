@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Omeka" basedir=".">
     <property name="lang.dir" location="application/languages" />
+
+    <target name="test" description="Run automated tests.">
+        <exec executable="phpunit" dir="application/tests" failonerror="true"/>
+    </target>
+
+    <target name="test-plugins" description="Run automated tests for plugins.">
+        <apply executable="phpunit" failonerror="true">
+            <arg value="-c" />
+            <fileset dir="plugins" includes="*/tests/phpunit.xml" />
+        </apply>
+    </target>
+
+    <target name="test-all" depends="test,test-plugins" description="Run all automated tests." />
+
     <target name="update-pot" description="Update the translation template.">
         <property name="pot.file" location="${lang.dir}/Omeka.pot"/>
         <property name="pot.base" location="${lang.dir}/Omeka.base.pot"/>
