@@ -1,4 +1,5 @@
 <?php
+var_dump(count($elementSets));
     $fileTitle = strip_formatting(item_file('original filename'));
     if ($fileTitle != '') {
         $fileTitle = ': &quot;' . $fileTitle . '&quot; ';
@@ -23,17 +24,12 @@
     
 <form method="post" id="editfile" action="<?php echo html_escape(uri('files/edit/'.$file->id)); ?>" name="editFile">
 
+<?php foreach ($elementSets as $elementSet): ?>
 <fieldset>
-<legend><?php echo __('Dublin Core'); ?></legend>    
-
-<?php echo display_element_set_form($file, 'Dublin Core'); ?>
+<legend><?php echo __($elementSet->name); ?></legend>    
+<?php echo display_element_set_form($file, $elementSet->name); ?>
 </fieldset>
-<fieldset>
-<legend><?php echo __('Format (Legacy) Metadata'); ?></legend>   
-
-<?php echo display_element_set_form($file, 'Omeka Legacy File'); ?>
-
-</fieldset>
+<?php endforeach; ?>
 
 <?php fire_plugin_hook('admin_append_to_files_form', $file); ?>
 

@@ -56,6 +56,23 @@ class FilesController extends Omeka_Controller_Action
     
     public function addAction() {}
     
+    public function editAction()
+    {
+        // Get element sets assigned to "All" and "File" record types.
+        $elementSets = $this->getTable('ElementSet')->findByRecordType('File');
+        
+        // Remove legacy file element sets that will most likely be phased out 
+        // in later versions.
+        foreach ($elementSets as $key => $elementSet) {
+            if (in_array($elementSet->name, array('Omeka Image File', 'Omeka Video File'))) {
+                unset($elementSets[$key]);
+            }
+        }
+        
+        $this->view->assign(compact('elementSets'));
+        parent::editAction();
+    }
+    
     public function showAction()
     {
         $file = $this->findById();
