@@ -78,7 +78,7 @@ class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
      */
     public function getFiles()
     {
-        return $this->getTable('File')->findByItem($this->id);
+        return $this->getTable('File')->findByItem($this->id, null, 'order');
     }
     
     /**
@@ -204,6 +204,13 @@ class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
      */
     protected function afterSaveForm($post)
     {        
+        // Update file order for this item.
+        foreach ($post['order'] as $fileId => $fileOrder) {
+            $file = $this->getTable('File')->find($fileId);
+            $file->order = $fileOrder;
+            $file->save();
+        }
+        
         // Delete files that have been designated by passing an array of IDs 
         // through the form.
         if (isset($post['delete_files']) && ($files = $post['delete_files'])) {

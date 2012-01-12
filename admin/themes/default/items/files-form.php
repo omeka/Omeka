@@ -11,6 +11,7 @@ if (empty($pathToConvert) && has_permission('Settings', 'edit')): ?>
             <tr>
                 <th><?php echo __('File Name'); ?></th>
                 <th><?php echo __('Edit File Metadata'); ?></th>
+                <th><?php echo __('Order'); ?></th>
                 <th><?php echo __('Delete'); ?></th>
             </tr>
         </thead>
@@ -21,6 +22,7 @@ if (empty($pathToConvert) && has_permission('Settings', 'edit')): ?>
             <td class="file-link">
                 <?php echo link_to($file, 'edit', __('Edit'), array('class'=>'edit')); ?>
             </td>
+            <td><?php echo $this->formText("order[{$file->id}]", $file->order, array('size' => 3)); ?></td>
             <td class="delete-link">
                 <?php echo checkbox(array('name'=>'delete_files[]'),false,$file->id); ?>
             </td>   

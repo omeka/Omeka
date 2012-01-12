@@ -112,7 +112,10 @@ class FileTable extends Omeka_Db_Table
 	{
 	    // order the files
 		switch($sort) {  
-		    case 'filename':
+		    case 'order':
+                $select->order('f.order ASC');
+            break;
+            case 'filename':
 		       $select->order('f.original_filename ASC');
 		    break;
 		    
