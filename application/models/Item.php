@@ -206,6 +206,13 @@ class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
     {        
         // Update file order for this item.
         foreach ($post['order'] as $fileId => $fileOrder) {
+            
+            // File order must be an integer or NULL.
+            $fileOrder = (int) $fileOrder;
+            if (!$fileOrder) {
+                $fileOrder = null;
+            }
+            
             $file = $this->getTable('File')->find($fileId);
             $file->order = $fileOrder;
             $file->save();
