@@ -28,6 +28,7 @@ class File extends Omeka_Record
     const DISABLE_DEFAULT_VALIDATION_OPTION = 'disable_default_file_validation';
 
     public $item_id;
+    public $order;
     public $archive_filename;
     public $original_filename;
     public $size = '0';
