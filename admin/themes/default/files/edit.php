@@ -1,5 +1,4 @@
 <?php
-var_dump(count($elementSets));
     $fileTitle = strip_formatting(item_file('original filename'));
     if ($fileTitle != '') {
         $fileTitle = ': &quot;' . $fileTitle . '&quot; ';
