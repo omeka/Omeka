@@ -14,9 +14,9 @@
 <?php echo delete_button(null, 'delete-collection', __('Delete this Collection'), array(), 'delete-record-form'); ?>
 
 <div id="primary">
-	
+
 <form method="post">
-<?php include 'form.php';?>	
+<?php include 'form.php';?>
 <input type="submit" name="submit" class="submit" id="save-changes" value="<?php echo __('Save Changes'); ?>" />
 </form>
 

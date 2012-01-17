@@ -11,7 +11,7 @@
  * Helper used to retrieve metadata for an item.
  *
  * @internal This implements Omeka internals and is not part of the public API.
- * @access private 
+ * @access private
  * @see item()
  * @package Omeka_ThemeHelpers
  * @subpackage Omeka_View_Helper
@@ -19,20 +19,20 @@
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Omeka_View_Helper_ItemMetadata extends Omeka_View_Helper_RecordMetadata
-{    
-    public function itemMetadata(Item $item, 
-                         $elementSetName, 
-                         $elementName = null, 
+{
+    public function itemMetadata(Item $item,
+                         $elementSetName,
+                         $elementName = null,
                          $options     = array())
     {
         return $this->_get($item, $elementSetName, $elementName, $options);
     }
-    
+
     /**
-     * Retrieve a special value of an item that does not correspond to an 
+     * Retrieve a special value of an item that does not correspond to an
      * Element record. Examples include the database ID of the item, the
      * name of the item type, the name of the collection, etc.
-     * 
+     *
      * Available fields include:
      *      <ul>
      *          <li>id</li>
@@ -69,7 +69,7 @@ class Omeka_View_Helper_ItemMetadata extends Omeka_View_Helper_RecordMetadata
                 break;
             case 'collection name':
                 if ($collection = $item->Collection) {
-                    return $collection->name;   
+                    return $collection->name;
                 } else {
                     return null;
                 }

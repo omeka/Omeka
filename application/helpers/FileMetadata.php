@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
@@ -17,31 +17,31 @@
 class Omeka_View_Helper_FileMetadata extends Omeka_View_Helper_RecordMetadata
 {
     /**
-     * Returns the metadata of a file.  
+     * Returns the metadata of a file.
      * You can use this function in the view by calling $this->fileMetadata(...)
-     * 
+     *
      * @param File $file
      * @param string $elementSetName The element set name for the item metadata. Example: 'Dublin Core'
      * For internal file metadata,the $elementSetName is the same as the $fieldName in _getRecordMetadata. Example: 'archive filename'
      * @param string $elementName The element name for the item metadata. Example: 'Title'
-     * For internal file metadata, you do not supply an $elementName 
+     * For internal file metadata, you do not supply an $elementName
      * @param array $options
      * @return mixed
      */
-    public function fileMetadata(File $file, 
-                         $elementSetName, 
-                         $elementName = null, 
+    public function fileMetadata(File $file,
+                         $elementSetName,
+                         $elementName = null,
                          $options     = array())
     {
         return $this->_get($file, $elementSetName, $elementName, $options);
     }
-    
+
     /**
      * @todo What other file metadata should be retrievable?  Presumably we
-     * shouldn't display the physical path to the filename, but maybe the web 
+     * shouldn't display the physical path to the filename, but maybe the web
      * path?  Do we want to display all the various MIME types we pulled in, or
      * just 'MIME type' and plan to make a definitive one of those?
-     * 
+     *
      * @param string
      * @return mixed
      */
@@ -99,7 +99,7 @@ class Omeka_View_Helper_FileMetadata extends Omeka_View_Helper_RecordMetadata
                 break;
         }
     }
-    
+
     protected function _getUri($file, $sizeFormat)
     {
         return $file->getWebPath($sizeFormat);

@@ -1,13 +1,13 @@
 <?php
 /**
  * All Plugin helper functions
- * 
+ *
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_ThemeHelpers
  * @subpackage PluginHelpers
  */
- 
+
 /**
  * @since 0.10
  * @access private
@@ -19,7 +19,7 @@ function admin_plugin_footer()
     $request = Zend_Controller_Front::getInstance()->getRequest();
     fire_plugin_hook('admin_theme_footer', $request);
 }
- 
+
 /**
  * Plugins should be able to hook into the header script for either admin or
  * public themes. The hooks involved are 'admin_theme_header',
@@ -33,8 +33,8 @@ function admin_plugin_footer()
  * function myplugin_admin_header($request)
  * {
  *      if ($request->get('controller') == 'items') {
- *          // Load a stylesheet that you only want on the items pages 
- *      }  
+ *          // Load a stylesheet that you only want on the items pages
+ *      }
  * }
  *
  * @since 0.10
@@ -49,7 +49,7 @@ function admin_plugin_header()
 
 /**
  * Hook is fired on the public advanced search form.
- * 
+ *
  * @since 0.10
  * @return string
  */
@@ -61,7 +61,7 @@ function plugin_append_to_advanced_search()
 /**
  * Retrieve the HTML that is output by the 'public_append_to_items_browse_each'
  * hook.  This hook is fired on the public theme, inside the items/browse loop.
- * 
+ *
  * @since 0.10
  * @return string
  */
@@ -72,7 +72,7 @@ function plugin_append_to_items_browse_each()
 
 /**
  * Hook is fired at the end of the items/browse page, after the loop.
- * 
+ *
  * @since 0.10
  * @see plugin_append_to_items_browse_each()
  */
@@ -83,7 +83,7 @@ function plugin_append_to_items_browse()
 
  /**
   * Hook is fired at the end of the items/show page.
-  * 
+  *
   * @since 0.10
   * @see plugin_append_to_items_browse_each()
   */
@@ -103,7 +103,7 @@ function plugin_append_to_collections_browse_each()
 
 /**
  * Hook is fired on the public collections/browse page.
- * 
+ *
  * @since 0.10
  * @return string
  */
@@ -114,7 +114,7 @@ function plugin_append_to_collections_browse()
 
 /**
  * Hook is fired on the public collections/show page.
- * 
+ *
  * @since 0.10
  * @return string
  */
@@ -125,86 +125,86 @@ function plugin_append_to_collections_show()
 
 /**
  * Allow plugins to hook in to the footer of public themes.
- * 
+ *
  * Uses the 'public_theme_footer' hook, which receives the request object as
  * the first argument.
- * 
+ *
  * @since 0.9
  * @see plugin_header()
  * @return void
  */
-function plugin_footer() 
+function plugin_footer()
 {
     $request = Zend_Controller_Front::getInstance()->getRequest();
-	fire_plugin_hook('public_theme_footer', $request);
+    fire_plugin_hook('public_theme_footer', $request);
 }
 
 /**
  * Allows plugins to hook in to the <head> of public themes.
  *
  * Uses the 'public_theme_header' hook to inject content into the theme.  This
- * hook receives the request object as the first argument, which allows the 
+ * hook receives the request object as the first argument, which allows the
  * plugin writer to tailor the header output to a specific request (specific
  * controller, action, etc.).
- * 
+ *
  * @since 0.9
  * @return void
  */
-function plugin_header() 
+function plugin_header()
 {
     $request = Zend_Controller_Front::getInstance()->getRequest();
-	fire_plugin_hook('public_theme_header', $request);
+    fire_plugin_hook('public_theme_header', $request);
 }
 
 /**
  * Allows plugins to hook in to the top of the <body> of public themes.
  *
  * Uses the 'public_theme_header' hook to inject content into the theme.  This
- * hook receives the request object as the first argument, which allows the 
+ * hook receives the request object as the first argument, which allows the
  * plugin writer to tailor the header output to a specific request (specific
  * controller, action, etc.).
- * 
+ *
  * @since 1.4
  * @return void
  */
-function plugin_body() 
+function plugin_body()
 {
     $request = Zend_Controller_Front::getInstance()->getRequest();
-	fire_plugin_hook('public_theme_body', $request);
+    fire_plugin_hook('public_theme_body', $request);
 }
 
 /**
  * Allows plugins to hook in to the top of the page's header of public themes.
  *
  * Uses the 'public_theme_header' hook to inject content into the theme.  This
- * hook receives the request object as the first argument, which allows the 
+ * hook receives the request object as the first argument, which allows the
  * plugin writer to tailor the header output to a specific request (specific
  * controller, action, etc.).
- * 
+ *
  * @since 1.4
  * @return void
  */
-function plugin_page_header() 
+function plugin_page_header()
 {
     $request = Zend_Controller_Front::getInstance()->getRequest();
-	fire_plugin_hook('public_theme_page_header', $request);
+    fire_plugin_hook('public_theme_page_header', $request);
 }
 
 /**
  * Allows plugins to hook in to the top of the page's content of public themes.
  *
  * Uses the 'public_theme_header' hook to inject content into the theme.  This
- * hook receives the request object as the first argument, which allows the 
+ * hook receives the request object as the first argument, which allows the
  * plugin writer to tailor the header output to a specific request (specific
  * controller, action, etc.).
- * 
+ *
  * @since 1.4
  * @return void
  */
-function plugin_page_content() 
+function plugin_page_content()
 {
     $request = Zend_Controller_Front::getInstance()->getRequest();
-	fire_plugin_hook('public_theme_page_content', $request);
+    fire_plugin_hook('public_theme_page_content', $request);
 }
 
 /**

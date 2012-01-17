@@ -4,7 +4,7 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  */
- 
+
 /**
  * @package Omeka
  * @subpackage Models
@@ -22,7 +22,7 @@ class Element extends Omeka_Record
 
     const DEFAULT_RECORD_TYPE = 'Item';
     const DEFAULT_DATA_TYPE = 'Text';
-    
+
     /**
      * Set the record type for the element (Item, File, All, etc.).
      * @param string $recordTypeName
@@ -32,7 +32,7 @@ class Element extends Omeka_Record
     {
         $this->record_type_id = $this->_getRecordTypeId($recordTypeName);
     }
-    
+
     /**
      * Set the data type for the element (Text, Tiny Text, etc.).
      * @param DataType|string $dataType
@@ -40,25 +40,25 @@ class Element extends Omeka_Record
      */
     public function setDataType($dataType)
     {
-    	if ($dataType instanceof DataType) {
-    		$this->data_type_id = $dataType->id;
-    	} else if (is_string($dataType)) {
-			$dataTypeName = $dataType;
-        	$this->data_type_id = $this->_getDataTypeId($dataTypeName);
-    	}
+        if ($dataType instanceof DataType) {
+            $this->data_type_id = $dataType->id;
+        } else if (is_string($dataType)) {
+            $dataTypeName = $dataType;
+            $this->data_type_id = $this->_getDataTypeId($dataTypeName);
+        }
     }
-    
+
     /**
      * Get the data type object of the element
      * @return DataType
      */
     public function getDataType()
     {
-    	return $this->getDb()->getTable('DataType')->find($this->data_type_id);
+        return $this->getDb()->getTable('DataType')->find($this->data_type_id);
     }
-    
+
     /**
-     * Set the element set for the element. 
+     * Set the element set for the element.
      * @param string $elementSetName
      * @return void
      */
@@ -66,10 +66,10 @@ class Element extends Omeka_Record
     {
         $this->element_set_id = $this->_getElementSetId($elementSetName);
     }
-    
+
     /**
      * Return the ElementSet objection for this element.
-     * 
+     *
      * @return ElementSet
      */
     public function getElementSet()
@@ -81,7 +81,7 @@ class Element extends Omeka_Record
             return null;
         }
     }
-    
+
     /**
      * Set the order of the element within its element set.
      * @param integer $order
@@ -91,7 +91,7 @@ class Element extends Omeka_Record
     {
         $this->order = (int)$order;
     }
-        
+
     /**
      * Set the name of the element.
      * @param string $name
@@ -101,7 +101,7 @@ class Element extends Omeka_Record
     {
         $this->name = trim($name);
     }
-    
+
     /**
      * Set the description for the element.
      * @param string $description
@@ -111,9 +111,9 @@ class Element extends Omeka_Record
     {
         $this->description = (string)trim($description);
     }
-    
+
     /**
-     * @param array|string $data If string, it's the name of the element.  
+     * @param array|string $data If string, it's the name of the element.
      * Otherwise, array of metadata for the element.  May contain the following
      * keys in the array:
      * <ul>
@@ -158,13 +158,13 @@ class Element extends Omeka_Record
                         $this->$key = $value;
                         break;
                 }
-            } 
+            }
         }
     }
-    
+
     /**
-     * Validate the element prior to being saved.  
-     * 
+     * Validate the element prior to being saved.
+     *
      * Checks the following criteria:
      * <ul>
      *  <li>Name is not empty.</li>
@@ -179,23 +179,23 @@ class Element extends Omeka_Record
         if (empty($this->name)) {
             $this->addError('name', __('Name must not be empty!'));
         }
-        
+
         if (empty($this->data_type_id)) {
             $this->addError('data_type_id', __('Element must have a valid data type!'));
         }
-        
+
         if (empty($this->record_type_id)) {
             $this->addError('record_type_id', __('Element must have a valid record type!'));
         }
-        
+
         // Check if the element set / element name combination already exists.
         if ($this->_nameIsInSet($this->name, $this->element_set_id)) {
             $this->addError('name', __('%1$s already exists for element set #%2$s', $this->name, $this->element_set_id) );
         }
     }
-    
+
     /**
-     * When deleting this element, delete all ElementText records associated 
+     * When deleting this element, delete all ElementText records associated
      * with this element.
      * @return void
      */
@@ -207,7 +207,7 @@ class Element extends Omeka_Record
             $elementText->delete();
         }
     }
-    
+
     /**
      * Set the default record & data type for the element (if necessary).
      * @return void
@@ -217,12 +217,12 @@ class Element extends Omeka_Record
         if (empty($this->data_type_id)) {
             $this->data_type_id = $this->_getDataTypeId(self::DEFAULT_DATA_TYPE);
         }
-        
+
         if (empty($this->record_type_id)) {
             $this->record_type_id = $this->_getRecordTypeId(self::DEFAULT_RECORD_TYPE);
         }
     }
-        
+
     /**
      * Retrieve the record type ID from the name.
      * @return RecordType
@@ -231,7 +231,7 @@ class Element extends Omeka_Record
     {
         return $this->getDb()->getTable('RecordType')->findIdFromName($recordTypeName);
     }
-    
+
     /**
      * Retrieve the data type ID from the name.
      * @return int
@@ -240,7 +240,7 @@ class Element extends Omeka_Record
     {
         return $this->getDb()->getTable('DataType')->findIdFromName($dataTypeName);
     }
-    
+
     /**
      * Retrieve the element set ID from the name.
      * @return int
@@ -253,7 +253,7 @@ class Element extends Omeka_Record
         }
         return $elementSet->id;
     }
-    
+
     /**
      * Calculate whether the element's name already belongs to the current set.
      * @return boolean

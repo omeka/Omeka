@@ -28,9 +28,9 @@ function items_output_uri($output="rss2", $otherParams = array()) {
     // Page should always be the first so that accurate results are retrieved
     // for the RSS.  Does it make sense to get an RSS feed of the 2nd page?
     unset($queryParams['page']);
-    
+
     $queryParams = array_merge($queryParams, $otherParams);
-    
+
     $queryParams['output'] = $output;
     // Use the 'default' route as opposed to the current route.
     return uri(array('controller'=>'items', 'action'=>'browse'), 'default', $queryParams);
@@ -62,21 +62,21 @@ function uri($options=array(), $route=null, $queryParams=array(), $reset = false
  */
 function current_uri($params=array())
 {
-	//Grab everything before the ? of the query
-	$request = Zend_Controller_Front::getInstance()->getRequest();
+    //Grab everything before the ? of the query
+    $request = Zend_Controller_Front::getInstance()->getRequest();
     $uriParts = explode('?', $request->getRequestUri());
     $uri = array_shift($uriParts);
-	
-	if(!empty($params)) {
-		
-		//The query should be a combination of $_GET and passed parameters
-		$query = array_merge($_GET, $params);
-				
-		$query_string = http_build_query($query);
-		$uri .= '?' . $query_string;
-	}
-	
-	return $uri;
+
+    if(!empty($params)) {
+
+        //The query should be a combination of $_GET and passed parameters
+        $query = array_merge($_GET, $params);
+
+        $query_string = http_build_query($query);
+        $uri .= '?' . $query_string;
+    }
+
+    return $uri;
 }
 
 /**
@@ -88,20 +88,20 @@ function current_uri($params=array())
  * @return boolean
  */
 function is_current_uri($link, $req = null) {
-		
-	if(!$req) {
-		$req = Zend_Controller_Front::getInstance()->getRequest();
-	}
-	$current = $req->getRequestUri();
-	$base = $req->getBaseUrl();
 
-	//Strip out the protocol, host, base URI, rightmost slash before comparing the link to the current one
-	$strip_out = array(WEB_DIR, @$_SERVER['HTTP_HOST'], $base);
-	$current = rtrim( str_replace($strip_out, '', $current), '/');
-	$link = rtrim( str_replace($strip_out, '', $link), '/');
-	
-	if(strlen($link) == 0) return (strlen($current) == 0);
-	return ($link == $current) or (strpos($current, $link) === 0);
+    if(!$req) {
+        $req = Zend_Controller_Front::getInstance()->getRequest();
+    }
+    $current = $req->getRequestUri();
+    $base = $req->getBaseUrl();
+
+    //Strip out the protocol, host, base URI, rightmost slash before comparing the link to the current one
+    $strip_out = array(WEB_DIR, @$_SERVER['HTTP_HOST'], $base);
+    $current = rtrim( str_replace($strip_out, '', $current), '/');
+    $link = rtrim( str_replace($strip_out, '', $link), '/');
+
+    if(strlen($link) == 0) return (strlen($current) == 0);
+    return ($link == $current) or (strpos($current, $link) === 0);
 }
 
 /**
@@ -110,15 +110,15 @@ function is_current_uri($link, $req = null) {
  */
 function file_download_uri(File $file, $format='archive')
 {
-	return file_display_uri($file, $format);
+    return file_display_uri($file, $format);
 }
 
 function file_display_uri(File $file, $format='fullsize')
 {
-	if (!$file->exists()) {
-	    return false;
-	}
-	return $file->getWebPath($format);
+    if (!$file->exists()) {
+        return false;
+    }
+    return $file->getWebPath($format);
 }
 
 /**
@@ -148,7 +148,7 @@ function record_uri(Omeka_Record $record, $action, $controller = null)
     $options['controller'] = $controller;
     $options['id'] = $record->id;
     $options['action'] = $action;
-    
+
     // Use the 'id' route for all urls pointing to records
     return uri($options, 'id');
 }
@@ -232,7 +232,7 @@ function abs_item_uri($item = null)
     if (!$item) {
         $item = get_current_item();
     }
-    
+
     return abs_uri(array('controller'=>'items', 'action'=>'show', 'id'=>$item->id), 'id');
 }
 

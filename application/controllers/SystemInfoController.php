@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * @copyright Roy Rosenzweig Center for History and New Media, 2011
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
@@ -8,7 +8,7 @@
 
 /**
  * @internal This implements Omeka internals and is not part of the public API.
- * @access private 
+ * @access private
  * @package Omeka
  * @subpackage Controllers
  * @author CHNM
@@ -19,7 +19,7 @@ class SystemInfoController extends Omeka_Controller_Action
     public function preDispatch()
     {
         if (!get_option('display_system_info')) {
-            // Requires forward in addition to redirect because of ZF bug: 
+            // Requires forward in addition to redirect because of ZF bug:
             // http://framework.zend.com/issues/browse/ZF-7496
             $request = $this->getRequest();
             $request->setActionName('index');
@@ -29,7 +29,7 @@ class SystemInfoController extends Omeka_Controller_Action
         }
     }
 
-	public function indexAction()
+    public function indexAction()
     {
         $this->_db = $this->getDb();
         $this->view->info = $this->_getInfoArray();
@@ -65,7 +65,7 @@ class SystemInfoController extends Omeka_Controller_Action
     {
         $phpExtensions = get_loaded_extensions();
         $zendExtensions = get_loaded_extensions(true);
-        
+
         natcasesort($phpExtensions);
         $info['PHP Extensions']['Regular'] = implode(', ', $phpExtensions);
 
@@ -106,7 +106,7 @@ class SystemInfoController extends Omeka_Controller_Action
             if ($name == $currentTheme) {
                 $themeInfo .= ' (current)';
             }
-            
+
             $info['Themes'][$theme->title] = $themeInfo;
         }
 

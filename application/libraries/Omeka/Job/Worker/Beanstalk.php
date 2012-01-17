@@ -40,9 +40,9 @@ class Omeka_Job_Worker_Beanstalk
             }
 
             $omekaJob->perform();
-	        $this->_pheanstalk->delete($pJob);
+            $this->_pheanstalk->delete($pJob);
         } catch (Zend_Db_Exception $e) {
-            // Bury any jobs with database problems aside from stale 
+            // Bury any jobs with database problems aside from stale
             // connections, which should indicate to try the job a second time.
             if (strpos($e->getMessage(), 'MySQL server has gone away') === false) {
                 $this->_pheanstalk->bury($pJob);

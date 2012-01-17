@@ -1,7 +1,7 @@
 <?php
 /**
  * All theme Collection helper functions
- * 
+ *
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_ThemeHelpers
@@ -10,11 +10,11 @@
 
 /**
  * This is a similar interface to item(), except for accessing metadata about collections.
- * 
- * As of the date of writing, it is greatly simplified in comparison to item(), 
+ *
+ * As of the date of writing, it is greatly simplified in comparison to item(),
  * mostly because collections do not (and may not ever) utilize the 'elements'
  * metadata schema.
- * 
+ *
  * @since 0.10
  * @see item()
  * @param string
@@ -27,8 +27,8 @@ function collection($fieldName, $options=array(), $collection=null)
     if (!$collection) {
         $collection = get_current_collection();
     }
-    
-    // Retrieve the data to display.  
+
+    // Retrieve the data to display.
     switch (strtolower($fieldName)) {
         case 'id':
             $text = $collection->id;
@@ -58,19 +58,19 @@ function collection($fieldName, $options=array(), $collection=null)
             throw new Exception(__('%s does not exist for collections!', $fieldName));
             break;
     }
-    
+
     // Apply any options to it.
     if (isset($options['snippet'])) {
         $text = snippet($text, 0, (int)$options['snippet']);
     }
-    
+
     // Escape it for display as HTML.
     if (!is_array($text)) {
         $text = html_escape($text);
     } else {
         $text = array_map('html_escape', $text);
     }
-    
+
     // Return the join'd text
     if (isset($options['delimiter'])) {
         $text = join((string) $options['delimiter'], (array) $text);
@@ -80,7 +80,7 @@ function collection($fieldName, $options=array(), $collection=null)
 
 /**
  * Determine whether or not the collection has any collectors associated with it.
- * 
+ *
  * @since 0.10
  * @return boolean
  */
@@ -91,7 +91,7 @@ function collection_has_collectors()
 
 /**
  * Determine whether or not the current collection is featured.
- * 
+ *
  * @since 0.10
  * @return boolean
  */
@@ -102,7 +102,7 @@ function collection_is_featured()
 
 /**
  * Determine whether or not the current collection is public.
- * 
+ *
  * @since 0.10
  * @return boolean
  */
@@ -112,8 +112,8 @@ function collection_is_public()
 }
 
 /**
- * Returns the HTML markup for displaying a random featured collection.  
- * 
+ * Returns the HTML markup for displaying a random featured collection.
+ *
  * @since 0.10
  * @return string
  */
@@ -126,7 +126,7 @@ function display_random_featured_collection()
         if ($collectionDescription = collection('Description', array('snippet'=>150), $featuredCollection)) {
             $html .= '<p class="collection-description">' . $collectionDescription . '</p>';
         }
-        
+
     } else {
         $html .= '<p>' . __('No featured collections are available.') . '</p>';
     }
@@ -146,10 +146,10 @@ function get_collection_by_id($collectionId)
 
 /**
  * Retrieve the Collection object for the current item.
- * 
+ *
  * @since 0.10
  * @param Item|null Check for this specific item record (current item if null).
- * @internal This is meant to be a simple facade for access to the Collection 
+ * @internal This is meant to be a simple facade for access to the Collection
  * record.  Ideally theme writers won't have to interact with the actual object.
  * @access private
  * @return Collection
@@ -175,7 +175,7 @@ function get_collections($params = array(), $limit = 10)
 
 /**
  * Retrieve the set of collections that are being looped.
- * 
+ *
  * @since 0.10
  * @return array
  */
@@ -207,7 +207,7 @@ function has_collections()
 
 /**
  * Determine whether there are any collections to loop through.
- * 
+ *
  * @since 1.0
  * @see has_items_for_loop()
  * @return boolean
@@ -220,7 +220,7 @@ function has_collections_for_loop()
 
 /**
  * Loops through collections assigned to the current view.
- * 
+ *
  * @since 0.10
  * @return mixed The current collection in the loop.
  */
@@ -231,7 +231,7 @@ function loop_collections()
 
 /**
  * Retrieve and loop through a subset of items in the collection.
- * 
+ *
  * @since 0.10
  * @param integer $num
  * @param array $options Optional
@@ -242,14 +242,14 @@ function loop_items_in_collection($num = 10, $options = array())
     // Cache this so we don't end up calling the DB query over and over again
     // inside the loop.
     static $loopIsRun = false;
-    
+
     if (!$loopIsRun) {
         // Retrieve a limited # of items based on the collection given.
         $items = get_items(array('collection'=>get_current_collection()->id), $num);
         set_items_for_loop($items);
         $loopIsRun = true;
     }
-    
+
     $item = loop_items();
     if (!$item) {
         $loopIsRun = false;
@@ -279,7 +279,7 @@ function set_current_collection($collection)
 
 /**
  * Retrieve the total number of items in the current collection.
- * 
+ *
  * @since 0.10
  * @return integer
  */
@@ -290,18 +290,18 @@ function total_items_in_collection()
 
 /**
  * Returns the most recent collections
- * 
+ *
  * @param integer $num The maximum number of recent collections to return
  * @return array
  */
-function recent_collections($num = 10) 
+function recent_collections($num = 10)
 {
-	return get_collections(array('recent'=>true), $num);
+    return get_collections(array('recent'=>true), $num);
 }
 
 /**
  * Returns a random featured collection.
- * 
+ *
  * @return Collection
  */
 function random_featured_collection()
@@ -311,10 +311,10 @@ function random_featured_collection()
 
 /**
  * Returns the total number of collection
- * 
+ *
  * @return integer
  */
-function total_collections() 
+function total_collections()
 {
-	return get_db()->getTable('Collection')->count();
+    return get_db()->getTable('Collection')->count();
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * All String helper functions
- * 
+ *
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_ThemeHelpers
@@ -10,9 +10,9 @@
 
 /**
  * Escape the value to display properly as HTML.
- * 
+ *
  * This uses the 'html_escape' filter for escaping.
- * 
+ *
  * @param string
  * @return string
  */
@@ -23,10 +23,10 @@ function html_escape($value)
 
 /**
  * Escape the value for use in javascript.
- * 
- * This is a convenience function for encoding a value using JSON notation.  
+ *
+ * This is a convenience function for encoding a value using JSON notation.
  * Must be used when interpolating PHP output in javascript.
- * 
+ *
  * Note on usage: do not wrap the resulting output of this function in quotes,
  * as proper JSON encoding will take care of that.
  */
@@ -37,23 +37,23 @@ function js_escape($value)
 
 /**
  * Escape the value for use in XML.
- * 
+ *
  * @param string $value
  * @return string
  */
 function xml_escape($value)
 {
-    return htmlspecialchars(preg_replace('#[\x00-\x08\x0B\x0C\x0E-\x1F]+#', '', 
+    return htmlspecialchars(preg_replace('#[\x00-\x08\x0B\x0C\x0E-\x1F]+#', '',
         $value), ENT_QUOTES);
-} 
+}
 
 /**
  * Replace new lines in a block of text with paragraph tags.
- * 
+ *
  * Looks for 2 consecutive line breaks resembling a paragraph break and wraps
  * each of the paragraphs with a <p> tag.  If no paragraphs are found, then the
  * original text will be wrapped with line breaks.
- * 
+ *
  * @link http://us.php.net/manual/en/function.nl2br.php#73479
  * @param string $str
  * @return string
@@ -66,11 +66,11 @@ function nls2p($str)
 }
 
 /**
- * Retrieve a substring of a given piece of text. 
- * 
+ * Retrieve a substring of a given piece of text.
+ *
  * Note: this will only split strings on the space character.
- * this will also strip html tags from the text before getting a snippet 
- * 
+ * this will also strip html tags from the text before getting a snippet
+ *
  * @param string $text Text to take snippet of
  * @param int $startPos Starting position of snippet in string
  * @param int $endPos Maximum length of snippet
@@ -81,7 +81,7 @@ function snippet($text, $startPos, $endPos, $append = '…')
 {
     // strip html tags from the text
     $text = strip_formatting($text);
-    
+
     $textLength = strlen($text);
 
     // Calculate the start position. Set to zero if the start position is
@@ -117,7 +117,7 @@ function snippet($text, $startPos, $endPos, $append = '…')
 /**
  * Retrieve a substring of the text by limiting the word count.
  * Note: it strips the HTML tags from the text before getting the snippet
- * 
+ *
  * @since 0.10
  * @param string $text
  * @param integer $maxWords
@@ -128,11 +128,11 @@ function snippet_by_word_count($text, $maxWords = 20, $ellipsis = '...')
 {
     // strip html tags from the text
     $text = strip_formatting($text);
-    
+
     if ($maxWords > 0) {
         $textArray = explode(' ', $text);
         if (count($textArray) > $maxWords) {
-            $text = implode(' ', array_slice($textArray, 0, $maxWords)) . $ellipsis;            
+            $text = implode(' ', array_slice($textArray, 0, $maxWords)) . $ellipsis;
         }
     } else {
         return '';
@@ -143,10 +143,10 @@ function snippet_by_word_count($text, $maxWords = 20, $ellipsis = '...')
 /**
  * Strip HTML formatting (i.e. tags) from the provided string.
  *
- * This is essentially a wrapper around PHP's strip_tags() function, with the 
- * added benefit of returning a fallback string in case the resulting stripped 
+ * This is essentially a wrapper around PHP's strip_tags() function, with the
+ * added benefit of returning a fallback string in case the resulting stripped
  * string is empty or contains only whitespace.
- * 
+ *
  * @since 0.10
  * @uses strip_tags()
  * @param string $str The string to be stripped of HTML formatting.
@@ -174,8 +174,8 @@ function strip_formatting($str, $allowableTags = '', $fallbackStr = '')
  * This is primarily for easy creation of HTML ids within Omeka
  *
  * 1) convert to lowercase
- * 2) Replace whitespace with -, 
- * 3) remove all non-alphanumerics, 
+ * 2) Replace whitespace with -,
+ * 3) remove all non-alphanumerics,
  * 4) remove leading/trailing delimiters
  * 5) optionally prepend a piece of text
  *
@@ -186,12 +186,12 @@ function strip_formatting($str, $allowableTags = '', $fallbackStr = '')
  */
 function text_to_id($text, $prepend=null, $delimiter='-')
 {
-	$text = strtolower($text);
-	$id = preg_replace('/\s/', $delimiter, $text);
-	$id = preg_replace('/[^\w\-]/', '', $id);
-	$id = trim($id, $delimiter);
-	$prepend = (string) $prepend;
-	return !empty($prepend) ? join($delimiter, array($prepend, $id)) : $id;
+    $text = strtolower($text);
+    $id = preg_replace('/\s/', $delimiter, $text);
+    $id = preg_replace('/[^\w\-]/', '', $id);
+    $id = trim($id, $delimiter);
+    $prepend = (string) $prepend;
+    return !empty($prepend) ? join($delimiter, array($prepend, $id)) : $id;
 }
 
 /**

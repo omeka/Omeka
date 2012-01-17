@@ -1,4 +1,4 @@
-<?php 
+<?php
 $pageTitle = __('Browse Items');
 head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=>'items primary browse-items')); ?>
 <h1><?php echo $pageTitle; ?> <?php echo __('(%s total)', total_results()); ?></h1>
@@ -32,7 +32,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                            + '</ul>';
 
             jQuery('#items-sort').after(toggleList);
-            
+
             // Toggle item details.
             jQuery('#toggle-all-details').toggle(function(e) {
                 e.preventDefault();
@@ -43,7 +43,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                 jQuery(this).text(showDetailsText);
                 jQuery('.item-details').slideUp('fast');
             });
-            
+
             var itemCheckboxes = jQuery("table#items tbody input[type=checkbox]");
             var globalCheckbox = jQuery('th#batch-edit-heading').html('<input type="checkbox">').find('input');
             var batchEditSubmit = jQuery('.batch-edit-option input');
@@ -52,7 +52,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
              * checkboxes are checked.
              */
             batchEditSubmit.prop('disabled', true);
-            
+
             /**
              * Check all the itemCheckboxes if the globalCheckbox is checked.
              */
@@ -71,7 +71,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                 }
                 checkBatchEditSubmitButton();
             });
-            
+
             /**
              * Function to check whether the batchEditSubmit button should be
              * enabled. If any of the itemCheckboxes is checked, the
@@ -85,7 +85,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                         return false;
                     }
                 });
-                
+
                 batchEditSubmit.prop('disabled', !checked);
             }
         });
@@ -106,10 +106,10 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
         </div>
         <div id="simple-search-form">
             <?php echo simple_search(); ?>
-    		<?php echo link_to_advanced_search(__('Advanced Search'), array('id' => 'advanced-search-link')); ?>
+            <?php echo link_to_advanced_search(__('Advanced Search'), array('id' => 'advanced-search-link')); ?>
         </div>
     </div>
-    
+
 <form id="items-browse" action="<?php echo html_escape(uri('items/batch-edit')); ?>" method="post" accept-charset="utf-8">
     <div class="group">
     <?php if (has_permission('Items', 'edit')): ?>
@@ -205,15 +205,15 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
 <?php elseif(!total_items()): ?>
     <div id="no-items">
     <p><?php echo __('There are no items in the archive yet.'); ?>
-    
+
     <?php if(has_permission('Items','add')): ?>
           <?php echo link_to('items', 'add', __('Add an item.')); ?></p>
     <?php endif; ?>
 </div>
-    
+
 <?php else: ?>
     <p><?php echo __('The query searched %s items and returned no results.', total_items()); ?> <?php echo __('Would you like to %s?', link_to_advanced_search(__('refine your search'))); ?></p>
-    
+
 <?php endif; ?>
 
 

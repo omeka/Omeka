@@ -11,32 +11,31 @@
  *
  * @since 0.9
  * @access private
- * @param array|string $attributes Attributes for the tag.  If this is a 
+ * @param array|string $attributes Attributes for the tag.  If this is a
  * string, it will assign both 'name' and 'id' attributes that value for
  * the tag.
  * @param string $value
  * @return string
  */
-function _tag_attributes($attributes, $value=null) 
+function _tag_attributes($attributes, $value=null)
 {
+    if (is_string($attributes)) {
+        $toProcess['name'] = $attributes;
+        $toProcess['id'] = $attributes;
+    } else {
+        //don't allow 'value' to be set specifically as an attribute (why = consistency)
+        unset($attributes['value']);
+        $toProcess = $attributes;
+    }
 
-	if (is_string($attributes)) {
-		$toProcess['name'] = $attributes;
-		$toProcess['id'] = $attributes;
-	} else {
-		//don't allow 'value' to be set specifically as an attribute (why = consistency)
-		unset($attributes['value']);
-		$toProcess = $attributes;
-	}
-	
-	$attr = array();
-	foreach ($toProcess as $key => $attribute) {
-	    // Only include the attribute if its value is a string.
-	    if (is_string($attribute)) {
-	        $attr[$key] = $key . '="' . html_escape( $attribute ) . '"';
-	    }
-	}
-	return join(' ',$attr);
+    $attr = array();
+    foreach ($toProcess as $key => $attribute) {
+        // Only include the attribute if its value is a string.
+        if (is_string($attribute)) {
+            $attr[$key] = $key . '="' . html_escape( $attribute ) . '"';
+        }
+    }
+    return join(' ',$attr);
 }
 
 /**
@@ -48,22 +47,22 @@ function _tag_attributes($attributes, $value=null)
  * @param string $text Text of the form label
  * @return string
  */
-function label($attributes, $text) 
+function label($attributes, $text)
 {
     if (is_string($attributes)) {
         $name = $attributes;
         $attributes = array();
     } else if (is_array($attributes)) {
-       $name = $attributes['name']; 
+       $name = $attributes['name'];
     } else if (!$attributes) {
         $attributes = array();
     }
-	return __v()->formLabel($name, $text, $attributes);
+    return __v()->formLabel($name, $text, $attributes);
 }
 
 /**
  * Make a text form input.
- * 
+ *
  * @internal Facade for Zend_View_Helper_FormText.  This maintains the
  * signature from prior versions for backward compatibility.
  * @since 0.9
@@ -73,24 +72,24 @@ function label($attributes, $text)
  * @param string|null $label
  * @param array $labelAttributes Since 1.2. Optional XHTML attributes for the label.
  * @return string HTML for the form element
- */	
+ */
 function text($attributes, $default=null, $label = null, $labelAttributes = array())
 {
     $html = '';
-	if($label) {
-	    // This is a hack to only apply the 'class' attribute to the input
-	    // and not to the label 
-	    $labelAttributes['for'] = $attributes['name'];
-	    $html .= __v()->formLabel($attributes['name'], $label, $labelAttributes);
-	}
-	
-	$html .= __v()->formText($attributes['name'], $default, $attributes);
+    if($label) {
+        // This is a hack to only apply the 'class' attribute to the input
+        // and not to the label
+        $labelAttributes['for'] = $attributes['name'];
+        $html .= __v()->formLabel($attributes['name'], $label, $labelAttributes);
+    }
+
+    $html .= __v()->formText($attributes['name'], $default, $attributes);
     return $html;
 }
 
 /**
  * Make a password form input.
- * 
+ *
  * @internal Facade for Zend_View_Helper_FormPassword.
  * @since 0.9
  * @deprecated deprecated since 1.2
@@ -99,24 +98,24 @@ function text($attributes, $default=null, $label = null, $labelAttributes = arra
  * @param string|null $label Optional
  * @param array $labelAttributes Since 1.2. Optional XHTML attributes for the label
  * @return string
- */	
+ */
 function password($attributes, $default=null, $label = null, $labelAttributes = array())
 {
     $html = '';
-	if ($label) {
-	    $labelAttributes['for'] = $attributes['name'];
-	    $html .= __v()->formLabel($attributes['name'], $label, $attributes);
-	}
+    if ($label) {
+        $labelAttributes['for'] = $attributes['name'];
+        $html .= __v()->formLabel($attributes['name'], $label, $attributes);
+    }
     $html .= __v()->formPassword($attributes['name'], $default, $attributes);
     return $html;
 }
 
 /**
  * Make a select form input.
- * 
- * This will add 'Select Below' as the first (empty) element in the list of 
+ *
+ * This will add 'Select Below' as the first (empty) element in the list of
  * values.
- * 
+ *
  * @internal Facade for Zend_View_Helper_FormSelect.
  * @since 0.9
  * @deprecated deprecated since 1.2
@@ -128,23 +127,23 @@ function password($attributes, $default=null, $label = null, $labelAttributes = 
  * @return string
  */
 function select($attributes, $values = null, $default = null, $label=null, $labelAttributes = array())
-{   
+{
     $html = '';
     //First option is always the "Select Below" empty entry
     $values = (array) $values;
     $values = array('' => __('Select Below ')) + $values;
     //Duplication
-	if ($label) {
-	    $labelAttributes['for'] = $attributes['name'];
-	    $html .= __v()->formLabel($attributes['name'], $label, $labelAttributes);
-	}
+    if ($label) {
+        $labelAttributes['for'] = $attributes['name'];
+        $html .= __v()->formLabel($attributes['name'], $label, $labelAttributes);
+    }
     $html .= __v()->formSelect($attributes['name'], $default, $attributes, $values);
     return $html;
 }
-	
+
 /**
  * Make a textarea form input.
- * 
+ *
  * @internal Facade for Zend_View_Helper_FormTextarea.
  * @since 0.9
  * @deprecated deprecated since 1.2
@@ -155,58 +154,58 @@ function select($attributes, $values = null, $default = null, $label=null, $labe
  * @return string
  */
 function textarea($attributes, $default = null, $label = null, $labelAttributes = array())
-{		
-	$html = '';
-	if ($label) {
-	    $labelAttributes['for'] = $attributes['name'];
-	    $html .= __v()->formLabel($attributes['name'], $label, $labelAttributes);
-	}
-	$html .= __v()->formTextarea($attributes['name'], $default, $attributes);
-	return $html;
+{
+    $html = '';
+    if ($label) {
+        $labelAttributes['for'] = $attributes['name'];
+        $html .= __v()->formLabel($attributes['name'], $label, $labelAttributes);
+    }
+    $html .= __v()->formTextarea($attributes['name'], $default, $attributes);
+    return $html;
 }
 
 /**
  * Make a form input that is a set of radio buttons.
- * 
- * @internal Facade for Zend_View_Helper_FormRadio.  
+ *
+ * @internal Facade for Zend_View_Helper_FormRadio.
  * @since 0.9
  * @deprecated deprecated since 1.2
  * @param array $attributes Set of XHTML attributes for the inputs.
- * @param array $values Key => value of the radio button, Value => label for the 
+ * @param array $values Key => value of the radio button, Value => label for the
  * radio button.
  * @param string|null $default Optional
  * @param string $label_class Optional Defaults to 'radiolabel'.
  * @return string HTML
- */	
+ */
 function radio($attributes, array $values, $default = null, $label_class = 'radiolabel')
 {
     $attributes['label_class'] = $label_class;
-	return __v()->formRadio($attributes['name'], $default, $attributes, $values, null);
+    return __v()->formRadio($attributes['name'], $default, $attributes, $values, null);
 }
 
 /**
  * Make a hidden form input.
- * 
+ *
  * @since 0.9
  * @deprecated deprecated since 1.2
  * @param array $attributes Set of XHTML attributes for the form input.
  * @param string $value
  * @return string
- */	
+ */
 function hidden($attributes, $value)
 {
-	$input = '<input type="hidden"';
-	if (!empty($attributes)) {
-		$input .= ' '._tag_attributes($attributes);
-	}
-	$input .= ' value="'.html_escape($value).'"';
-	$input .= ' />' . "\n";
-	return $input;
+    $input = '<input type="hidden"';
+    if (!empty($attributes)) {
+        $input .= ' '._tag_attributes($attributes);
+    }
+    $input .= ' value="'.html_escape($value).'"';
+    $input .= ' />' . "\n";
+    return $input;
 }
 
 /**
  * Make a checkbox form input.
- * 
+ *
  * @internal Facade for Zend_View_Helper_FormCheckbox.
  * @since 0.9
  * @deprecated deprecated since 1.2
@@ -216,35 +215,35 @@ function hidden($attributes, $value)
  * @param string|null $label Optional
  * @param array $labelAttributes Since 1.2. Optional XHTML attributes for the label.
  * @return string
- */	
+ */
 function checkbox($attributes, $checked = FALSE, $value=null, $label = null, $labelAttributes = array())
 {
     if ($checked !== null) {
         $attributes['checked'] = $checked;
     }
     $html = __v()->formCheckbox($attributes['name'], $value, $attributes);
-	if ($label) {
-	    $labelAttributes['for'] = $attributes['name'];
-	    $html .= __v()->formLabel($attributes['name'], $label, $labelAttributes);
-	}
-	return $html;
+    if ($label) {
+        $labelAttributes['for'] = $attributes['name'];
+        $html .= __v()->formLabel($attributes['name'], $label, $labelAttributes);
+    }
+    return $html;
 }
 
 /**
  * Make a submit form input.
- * 
+ *
  * @since 0.9
  * @deprecated deprecated since 1.2
  * @param array $attributes XHTML attributes.
  * @param string $value Optional Defaults to 'Submit'.
  * @return string
- */	
+ */
 function submit($attributes, $value = null)
 {
     if (!$value) {
         $value = __('Submit');
     }
-    
+
     // This is a hack that makes this work.
     $otherAttribs = array();
     if (is_array($attributes)) {
@@ -255,16 +254,16 @@ function submit($attributes, $value = null)
 
 /**
  * Make a simple search form for the items.
- * 
+ *
  * Contains a single fieldset with a text input and submit button.
- * 
+ *
  * @since 0.9
  * @param string $buttonText Optional Defaults to 'Search'.
  * @param array $formProperties Optional XHTML attributes for the form.  Defaults
  * to setting id="simple-search".
  * @param string $uri Optional Action for the form.  Defaults to 'items/browse'.
  * @return string
- */	
+ */
 function simple_search($buttonText = null, $formProperties=array('id'=>'simple-search'), $uri = null)
 {
     if (!$buttonText) {
@@ -275,8 +274,8 @@ function simple_search($buttonText = null, $formProperties=array('id'=>'simple-s
     if (!$uri) {
         $uri = apply_filters('simple_search_default_uri', uri('items/browse'));
     }
-    
-    $searchQuery = array_key_exists('search', $_GET) ? $_GET['search'] : '';    
+
+    $searchQuery = array_key_exists('search', $_GET) ? $_GET['search'] : '';
     $formProperties['action'] = $uri;
     $formProperties['method'] = 'get';
     $html  = '<form ' . _tag_attributes($formProperties) . '>' . "\n";
@@ -284,30 +283,30 @@ function simple_search($buttonText = null, $formProperties=array('id'=>'simple-s
     $html .= __v()->formText('search', $searchQuery, array('name'=>'search','class'=>'textinput'));
     $html .= __v()->formSubmit('submit_search', $buttonText);
     $html .= '</fieldset>' . "\n\n";
-    
+
     // add hidden fields for the get parameters passed in uri
     $parsedUri = parse_url($uri);
     if (array_key_exists('query', $parsedUri)) {
         parse_str($parsedUri['query'], $getParams);
-        foreach($getParams as $getParamName => $getParamValue) {    
-            $html .= __v()->formHidden($getParamName, $getParamValue); 
+        foreach($getParams as $getParamName => $getParamValue) {
+            $html .= __v()->formHidden($getParamName, $getParamValue);
         }
     }
-    
+
     $html .= '</form>';
     return $html;
 }
 
 /**
  * Retrieve the proper HTML for a form input for a given Element record.
- * 
+ *
  * Assume that the given element has access to all of its values (for example,
  * all values of a Title element for a given Item).
  *
  * This will output as many form inputs as there are values for a given
  * element.  In addition to that, it will give each set of inputs a label and
  * a span with class="tooltip" containing the description for the element.
- * This span can either be displayed, hidden with CSS or converted into a 
+ * This span can either be displayed, hidden with CSS or converted into a
  * tooltip with javascript.
  *
  * All sets of form inputs for elements will be wrapped in a div with
@@ -330,16 +329,16 @@ function display_form_input_for_element($element, $record, $options = array())
     } else {
         $html = __v()->elementForm($element, $record, $options);
     }
-	return $html;
+    return $html;
 }
 
 /**
  * Used within the admin theme (and potentially within plugins) to display a form
- * for a record for a given element set.  
- * 
+ * for a record for a given element set.
+ *
  * @since 0.10
  * @uses display_form_input_for_element()
- * @param Omeka_Record $record 
+ * @param Omeka_Record $record
  * @param string $elementSetName The name of the element set.
  * @return string
  */
@@ -355,18 +354,18 @@ function display_element_set_form($record, $elementSetName)
 
 /**
  * Retrieve validation errors for specific fields on the form.
- * 
+ *
  * @deprecated deprecated since 1.2
  * @param string $field The name of the field to retrieve the error message for
  * @return string The error message wrapped in a div with class="error"
  */
 function form_error($field)
 {
-	$flash = new Omeka_Controller_Flash;
-	if ($flash->getStatus() != Omeka_Controller_Flash::VALIDATION_ERROR) return;
-	if (($msg = $flash->getError($field))) {
-		return '<div class="error">'.$msg.'</div>';
-	}
+    $flash = new Omeka_Controller_Flash;
+    if ($flash->getStatus() != Omeka_Controller_Flash::VALIDATION_ERROR) return;
+    if (($msg = $flash->getError($field))) {
+        return '<div class="error">'.$msg.'</div>';
+    }
 }
 
 /**
@@ -384,11 +383,11 @@ function select_user($props = array(), $value=null, $label=null, $search = array
 }
 
 /**
- * Select the Item Type for the current Item.  
- * 
- * This probably won't be used by theme writers because it only applies to the 
+ * Select the Item Type for the current Item.
+ *
+ * This probably won't be used by theme writers because it only applies to the
  * items form.
- * 
+ *
  * @since 0.10
  * @param array
  * @param Item|null Check for this specific item record (current item if null).
@@ -444,7 +443,7 @@ function select_entity($props = array(), $value = null, $label=null, $search = a
 
 /**
  * Use this to choose an item type from a <select>.
- * 
+ *
  * @since 0.10
  * @uses ItemTypeTable::findAllForSelectForm()
  * @param array
@@ -453,17 +452,17 @@ function select_entity($props = array(), $value = null, $label=null, $search = a
  */
 function select_item_type($props=array(), $value=null, $label=null)
 {
-    return _select_from_table('ItemType', $props, $value, $label);	
+    return _select_from_table('ItemType', $props, $value, $label);
 }
 
 /**
  * Used primarily within the admin theme to build a <select> form input containing
  * the names and IDs of all elements that belong to the Item Type element set.
- * 
+ *
  * Not meant to used by theme writers, possibly useful for plugin writers.
- * 
+ *
  * @since 0.10
- * @param array 
+ * @param array
  * @param string|integer Optional value of the selected option.
  * @param string|null Optional Label for the form input.
  * @return string HTML
@@ -473,13 +472,13 @@ function select_item_type_elements($props = array(), $value = null, $label = nul
     $searchParams = array(
         'element_set_name'=>ELEMENT_SET_ITEM_TYPE,
         'sort'=>'alpha');
-    return _select_from_table('Element', $props, $value, $label, $searchParams);    
+    return _select_from_table('Element', $props, $value, $label, $searchParams);
 }
 
 /*
  * Used primarily in edit item type form to build a select form input containing
  * the names and IDs of all the data types.
- * 
+ *
  * @since 1.2
  * @param array $props Optional
  * @param string $value Optional
@@ -488,8 +487,8 @@ function select_item_type_elements($props = array(), $value = null, $label = nul
  */
 function select_data_types($props = array(), $value = null, $label = null)
 {
-	$searchParams = array();
-    return _select_from_table('DataType', $props, $value, $label, $searchParams); 
+    $searchParams = array();
+    return _select_from_table('DataType', $props, $value, $label, $searchParams);
 }
 
 /**

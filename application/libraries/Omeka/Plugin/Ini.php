@@ -18,18 +18,18 @@ class Omeka_Plugin_Ini
 {
     /**
      * Plugins directory.
-     * 
+     *
      * @var string
      */
     protected $_pluginsRootDir;
-        
+
     /**
      * Set of Zend_Config_Ini objects corresponding to each plugin.
      *
      * @var array
      */
     protected $_configs = array();
-    
+
     /**
      * @param string $pluginsRootDir Plugins directory.
      */
@@ -37,13 +37,13 @@ class Omeka_Plugin_Ini
     {
         $this->_pluginsRootDir = $pluginsRootDir;
     }
-    
+
     /**
      * Retrieve a value in plugin.ini for a given key.
      *
      * Will return a null value if no value can be found in the ini file for the
      * key.
-     * 
+     *
      * @param string $pluginDirName Plugin name.
      * @param string $iniKeyName INI key to retrieve.
      * @return string|null Retrieved INI value (null if not found).
@@ -54,7 +54,7 @@ class Omeka_Plugin_Ini
         if ($pluginDirName instanceof Plugin) {
             $pluginDirName = $pluginDirName->getDirectoryName();
         }
-        
+
         $pluginIniPath = $this->getPluginIniFilePath($pluginDirName);
         if (file_exists($pluginIniPath)) {
             if (array_key_exists($pluginDirName, $this->_configs)) {
@@ -63,27 +63,27 @@ class Omeka_Plugin_Ini
                 $config = new Zend_Config_Ini($pluginIniPath, 'info');
                 $this->_configs[$pluginDirName] = $config;
             }
-            
+
         } else {
-    		throw new Exception("Path to plugin.ini for '$pluginDirName' is not correct.");
-    	}
-    	return $config->$iniKeyName;
-    } 
-                
+            throw new Exception("Path to plugin.ini for '$pluginDirName' is not correct.");
+        }
+        return $config->$iniKeyName;
+    }
+
     /**
      * Return whether a plugin has a plugin.ini file
-     * 
+     *
      * @param string $pluginDirName Plugin name.
      * @return boolean
      */
     public function hasPluginIniFile($pluginDirName)
     {
-        return file_exists($this->getPluginIniFilePath($pluginDirName));        
+        return file_exists($this->getPluginIniFilePath($pluginDirName));
     }
-    
+
     /**
      * Return the path to the plugin.ini file
-     * 
+     *
      * @param string $pluginDirName Plugin name.
      * @return string
      */
@@ -94,7 +94,7 @@ class Omeka_Plugin_Ini
         }
         return $this->_pluginsRootDir . '/' . $pluginDirName . '/' . 'plugin.ini';
     }
-    
+
     /**
      * Initialize a Plugin model object with the values from the INI file.
      *
@@ -107,7 +107,7 @@ class Omeka_Plugin_Ini
         if (!$this->hasPluginIniFile($plugin)) {
             return;
         }
-        
+
         $setters = array(
             'setDisplayName'            => 'name',
             'setAuthor'                 => 'author',
@@ -121,7 +121,7 @@ class Omeka_Plugin_Ini
             'setIniTags'                => 'tags',
             'setRequireOnce'            => 'require_once',
         );
-                
+
         foreach ($setters as $method => $iniField) {
             $plugin->$method($this->getPluginIniValue($plugin, $iniField));
         }

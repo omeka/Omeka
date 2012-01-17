@@ -19,7 +19,7 @@
                 <td><?php echo html_escape($element->description); ?></td>
                 <td><?php echo html_escape($element->getDataType()->name); ?></td>
                 <td class="element-order"><?php echo __v()->formText("element-order-". $element->id, $elementsOrder[$orderIndex], array('size'=>2)); ?></td>
-                
+
                 <?php if (has_permission('ItemTypes', 'delete-element')): ?>
                 <td><a id="remove-element-link-<?php echo html_escape($element->id); ?>" href="" class="delete-element"><?php echo __('Remove'); ?></a></td>
                 <?php endif; ?>
@@ -29,26 +29,26 @@
         <?php $elementToAddIndex = 0; ?>
         <?php foreach ($elementsToAdd as $elementToAdd): ?>
         <?php if ($elementsToAddIsNew[$elementToAddIndex] == true):  ?>
-        <?php echo $this->action('add-new-element', 
-                                 'item-types', 
-                                  null, 
+        <?php echo $this->action('add-new-element',
+                                 'item-types',
+                                  null,
                                   array('from_post' => true,
-                                        'elementTempId' => $elementsToAddTempIds[$elementToAddIndex], 
-						                'elementName' => $elementToAdd->name,
-						                'elementDescription' => $elementToAdd->description, 
-						                'elementDataTypeId' => $elementToAdd->data_type_id, 
-						                'elementOrder' => $elementsOrder[$orderIndex])); 
+                                        'elementTempId' => $elementsToAddTempIds[$elementToAddIndex],
+                                        'elementName' => $elementToAdd->name,
+                                        'elementDescription' => $elementToAdd->description,
+                                        'elementDataTypeId' => $elementToAdd->data_type_id,
+                                        'elementOrder' => $elementsOrder[$orderIndex]));
          ?>
          <?php else: ?>
-         <?php echo $this->action('add-existing-element', 
-                                 'item-types', 
-                                  null, 
+         <?php echo $this->action('add-existing-element',
+                                 'item-types',
+                                  null,
                                   array('from_post' => true,
-                                        'elementTempId' => $elementsToAddTempIds[$elementToAddIndex], 
+                                        'elementTempId' => $elementsToAddTempIds[$elementToAddIndex],
                                         'elementId' => $elementToAdd->id,
-                                        'elementOrder' => $elementsOrder[$orderIndex])); 
-         ?>         
-         <?php endif; ?>   
+                                        'elementOrder' => $elementsOrder[$orderIndex]));
+         ?>
+         <?php endif; ?>
          <?php $elementToAddIndex++; ?>
          <?php $orderIndex++; ?>
          <?php endforeach;?>

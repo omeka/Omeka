@@ -85,21 +85,21 @@ form:after,
 div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
     label, div.label {font-size:1.2em; color:#444;font-weight:bold;text-align:left;display:block;width: 198px; float:left;}
     label.required:after {content: " *"; color:#777; font-size:14px;font-weight:normal;}
-        
+
     input.textinput, select, textarea {border:1px solid #DDDAD3;padding:3px;background-color:#fff !important; font-family:"Lucida Grande", sans-serif; font-size:1.2em;}
-    
+
     .inputs textarea {
         max-width:98%;
     }
-    
-    button, 
-    .submit, 
+
+    button,
+    .submit,
     input[type="submit"],
     .button {
         font-family:sans-serif;
         text-align:center;
         text-decoration:none;
-        clear:both; 
+        clear:both;
         margin:9px 0;
         background-color: #6d8e1d;
         background-image: -webkit-gradient(linear,0% 0%, 0% 100%, color-stop(0, rgba(255, 255, 255, .05)), color-stop(0.5, rgba(255, 255, 255, .2)), color-stop(0.501, rgba(255, 255, 255, 0)), color-stop(1, rgba(255, 255, 255, 0))
@@ -110,7 +110,7 @@ div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
         background-image: -ms-linear-gradient(rgba(255,255,255,0.05),rgba(255,255,255,0.25) 50%,rgba(255,255,255,0) 50.01%,rgba(255,255,255,0));
         background-image: linear-gradient(rgba(255,255,255,0.05),rgba(255,255,255,0.25) 50%,rgba(255,255,255,0) 50.01%,rgba(255,255,255,0));
         text-shadow:-1px -1px 1px rgba(0,0,0,0.2);
-        float:right; 
+        float:right;
         color:#fff;
         padding: 4px 8px;
         border: none;
@@ -136,7 +136,7 @@ div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
     .delete-button, input.delete-confirm, input.delete {background-color: #800 !important; float: none !important;}
 
     input[type="submit"].add-element, input.remove-element, .checkbox input {border:0; background-color:transparent !important;text-shadow:none;}
-    
+
     input.add-element,
     input.remove-element {
         border:none;
@@ -145,12 +145,12 @@ div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
         -moz-border-radius:0;
         background-repeat:no-repeat;
     }
-    
+
     input.add-element {background-image:url("../../../../application/views/scripts/images/silk-icons/add.png");}
     input.remove-element {background-image:url("../../../../application/views/scripts/images/silk-icons/delete.png");}
-    
+
     .dateinput input {margin-right: 3px;}
-    
+
     #required-note {font-size: 0.6em; color: #777; display: block;}
 
     /* Configure button */
@@ -163,8 +163,8 @@ div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
     /* Plugins */
     .uninstall {background-color: #800 !important;}
     .deactivate {background-color:#c60 !important;}
-        
-    .uninstall:hover, 
+
+    .uninstall:hover,
     .deactivate:hover {}
 
     [disabled] {
@@ -173,22 +173,22 @@ div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
 
     .field .explanation, .hint {font-size:11px; margin-bottom:0;color: #999; clear:both;}
     #item-form .field .explanation, #editfile .field .explanation, .hint, .theme-configuration .field .explanation {margin-left:216px; clear:right;}
-    
+
     /* Changes the width of inputs depending on the layout */
         .vertical-nav .inputs {}
         .vertical-nav .field label, .vertical-nav .field div.label {float:left;width: 116px;}
-        .vertical-nav #item-form .field .explanation, 
+        .vertical-nav #item-form .field .explanation,
         .vertical-nav .field .hint,
         .vertical-nav .field .explanation,
         .vertical-nav .field .error {margin-left: 172px;}
             .vertical-nav .field .dateinput .hint {margin:0;}
-        
+
         /* .input used to wrap input fields in items/add form */
         .field .inputs {float:right; width: 594px;}
         .vertical-nav .field .inputs {width: 440px;}
 
 .action-links {
-    font-size:0.9em;   
+    font-size:0.9em;
 }
 .action-links li {
     display:inline-block;
@@ -205,7 +205,7 @@ div.field {position:relative; border-bottom:1px dotted #eee; padding: 18px 0;}
     text-decoration:none;
     font-weight:bold;
 }
-         
+
 /* -- Layout -- */
 
 #primary { background:#fff; padding:18px;border:1px solid #d7d5c4; border-width: 3px 0;}
@@ -337,16 +337,16 @@ th.asc {
 
 /* == Global Styles == */
 body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; background:#eae9db;color: #333;min-width:882px;}
-    
+
     /* Headings */
     h1,#site-title {font-weight:normal; font-size:2.4em; margin-bottom:1em; line-height:1.5em;margin-right:12em;}
     h2, legend {font-size:1.8em; font-weight:normal; line-height:1.2em; margin-bottom:1.2em;color:#467;}
     h3 {font-size:1.4em; line-height:1.2em; margin-bottom:0.4em;}
     h4 {font-size:1.2em; line-height:1.5em; font-weight:bold;}
     h5 {font-size:1.2em; line-height:1.5em; font-style:italic;}
-    
+
     h1 {color:#a74c29;}
-    
+
     h1, #site-title, h2,dt,legend {font-family:Georgia, Times, "Times New Roman", serif;}
 
     /* Links */
@@ -357,7 +357,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 
     h1 a, h2 a, h3 a {text-decoration:none;}
     a img {border:none;}
-    
+
     /* Misc elements */
     p,ul,ol,dl,address {font-size:1.2em; line-height:1.5em; margin-bottom:1.5em;}
     ul ul {font-size:1em; margin-left:1.5em;}
@@ -367,14 +367,14 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 
     em,i {font-style:italic;}
     strong,b {font-weight:bold;}
-    
+
     h1 span {color: #444;}
-    
+
     /* Tables */
     table {width:100%;font-size:1.2em;margin-bottom:1.5em; line-height:1.5em;border-bottom:1px solid #d7d5c4;}
         thead th { font-weight:bold;color:#c50;border:1px solid #d7d5c4; border-width: 0 0 2px; white-space:nowrap;}
         tbody th { font-weight:bold;}
-        
+
         th,td {padding:0.75em; word-wrap: break-word;}
         tbody tr {padding:0.75em 0;}
         tr.even {}
@@ -386,7 +386,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     /* Form Buttons */
     #add-item, #save-changes, #edit-item {float:right; text-decoration:none;}
     #add-item:hover, #save-changes:hover {background-position:0 0 !important;cursor:pointer;}
-    
+
     button.remove_search {
         float:none;
         display:inline;
@@ -396,22 +396,22 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
         margin-left:220px;
         float:none;
     }
-             
+
     /* Pagination */
     .pagination li {display:inline;padding: 3px 6px; }
-    .pagination li.pagination_current {display:inline;background:#389; color:#fff;border:1px solid #389;border-radius:4px; 
-    -webkit-border-radius:4px; 
+    .pagination li.pagination_current {display:inline;background:#389; color:#fff;border:1px solid #389;border-radius:4px;
+    -webkit-border-radius:4px;
     -moz-border-radius:4px;}
-    .pagination li.pagination_range, 
-    .pagination li.pagination_previous, 
-    .pagination li.pagination_first, 
-    .pagination li.pagination_next, 
+    .pagination li.pagination_range,
+    .pagination li.pagination_previous,
+    .pagination li.pagination_first,
+    .pagination li.pagination_next,
     .pagination li.pagination_last {padding:0;display:inline;}
-        .pagination a {text-decoration:none; color:#333;background: #FAFAF7; border:1px solid #d7d5c4;border-radius:6px; 
-        -webkit-border-radius:6px; 
+        .pagination a {text-decoration:none; color:#333;background: #FAFAF7; border:1px solid #d7d5c4;border-radius:6px;
+        -webkit-border-radius:6px;
         -moz-border-radius:6px;padding: 3px 6px;}
         .pagination a:hover {background: #c60; color: #fff;}
-    
+
     /* Tagclouds */
     .hTagcloud ul {list-style:none; margin-left:0; padding-left:0; line-height: 1.3;}
         .hTagcloud li {display:inline;}
@@ -426,16 +426,16 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
         .vvvvvv-popular {font-size:320%;}
         .vvvvvvv-popular {font-size:340%;}
         .vvvvvvvv-popular {font-size:360%;}
-        
+
     /* Misc Classes */
     .add-button {position:absolute; top:20px; right:0; text-align:right;}
     .add-button a {background-color: #F4F3EB; color: #c50;padding-top:10px; padding-bottom:10px;padding-right: 10px;}
     .add-button a:hover {background-color: #FAFAF7;color: #333;}
-    
+
     .edit-button {position:absolute; top:20px; right:0; text-align:right;}
     .edit-button a {background-color: #F4F3EB; color: #c50;padding-top:10px; padding-bottom:10px;padding-right: 10px;}
     .edit-button a:hover {background-color: #FAFAF7;color: #333;}
-    
+
     .view-public-page {font-size:11px; font-family:"Lucida Grande", Verdana, Arial, sans-serif;}
 /* == Wrap == */
 #wrap {}
@@ -452,18 +452,18 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 
     #site-title {margin:18px 0;margin-left:36px;float:left; width: 20em;}
     #site-title a {text-decoration:none; color:#fff;}
-    
+
     #site-info {float:right; text-align:right; padding:10px 0;margin-right: 3px;}
     #site-info a {color:#fff; text-decoration:none;}
-    
+
         #welcome {display:inline; padding: 8px 12px;color: #999; font-size:1.1em;}
-        
+
         #settings-link {display:inline; font-size:1.1em; text-align:right; padding: 8px 12px; background: #a74c29;}
         #settings-link:hover {background: #c60;}
-        
+
         #public-link {display:inline;padding: 8px 12px; font-size:1.1em;background: #467;}
         #public-link:hover {background: #389;}
-    
+
     /* Primary Nav */
     #primary-nav-container {background:#382e22;padding-left:36px;clear:both;border-top:1px solid #777;}
     .primary-nav {border-left:1px solid #d7d5c4;margin-bottom:0;font-size:1.1em;font-weight:normal;}
@@ -472,14 +472,14 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
         .primary-nav a:visited {color:#fafafa;}
         .primary-nav a:hover {background:#382E22; color: #fafafa;}
         .primary-nav li.current a, .primary-nav li.current a:visited,
-        .themes .primary-nav li.nav-settings a, 
+        .themes .primary-nav li.nav-settings a,
         .plugins .primary-nav li.nav-settings a,
         .users .primary-nav li.nav-settings a {background:#eae9db; color: #333; font-weight:bold;}
-        
+
 /* == Content == */
 #content { z-index:1000;position:relative;margin:0 0 0 36px; padding:18px 0 0;width:846px;float:left; clear:both;}
     #content h1 {margin:-18px 0 18px; padding:18px 0 0; margin-right:8em;}
-    
+
     /* Homepage */
         #getting-started dl {margin-bottom:18px; margin-left:0;display:block;}
         #getting-started dl * {font-size:1em;}
@@ -491,26 +491,26 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
             #getting-started dd p {float:right; width: 252px;padding:0; margin:0 0 18px;}
                 #getting-started p.help {clear:both; padding: 1em 0 0; border-top:1px dotted #ccc;}
 
-        /* Info Panels - styles that enhance or override the component library styles */    
+        /* Info Panels - styles that enhance or override the component library styles */
         #tag-cloud li, #tag-cloud li a {padding:0; border:none;background-image:none; display:inline;}
         #recent-items ul {margin-bottom:0;}
         #recent-items #view-all-items a {display:block; text-decoration:none; background:url("../../../../application/views/scripts/images/silk-icons/bullet_go.png") 100% 6px no-repeat; width: 8em;float:right;padding:6px 18px; text-align:right;}
-    
+
     /* Item Browse styles */
     .browse-items .simple li.nav-list-view a {background:#d7d5c4;font-weight:bold;color: #333;border:1px solid #d7d5c4;border-width:0 0 1px;}
-    
+
     form#items-browse {margin-top:1em;}
     .browse-items .pagination {float:right; width: 48%; clear:right; text-align:right !important;}
     .browse-items .pagination ul {text-align:right; margin:0; padding:0; line-height:2;}
-    table#items {width:100%; border-top:2px solid #d7d5c4; margin-top: 1em;clear:both;} 
+    table#items {width:100%; border-top:2px solid #d7d5c4; margin-top: 1em;clear:both;}
     .items #primary {clear:right;}
-    
+
     .batch-edit-option {float:left; width: 48%;margin:0; display:block; line-height:2;}
     .batch-edit-option input {float:none !important; display:inline;margin:0;}
 
     .batch-edit-remove {margin-left:200px;}
     .batch-edit-remove label {display:inline; float:none; width:auto;}
-    
+
     td.batch-edit-check {
         width: 12px;
     }
@@ -548,7 +548,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     tr.item .square-thumbnail img {
         max-width: 100%;
     }
-    
+
     /* Simple Search */
     #simple-search-form {
         padding:0;
@@ -558,163 +558,163 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
         clear:right;
     }
 
-	#simple-search-form fieldset {
-		text-align:right !important;
-	}
+    #simple-search-form fieldset {
+        text-align:right !important;
+    }
         #simple-search-form #search {
-            border-radius:6px; 
-            -webkit-border-radius:6px; 
-            -moz-border-radius:6px; 
+            border-radius:6px;
+            -webkit-border-radius:6px;
+            -moz-border-radius:6px;
             margin:0 4px 0 0 !important;
-            display:inline !important;  
+            display:inline !important;
         }
         #simple-search-form #submit_search {
             display:inline !important;
-			float:none;
-			margin:0;
+            float:none;
+            margin:0;
         }
 
     #browse-meta ul,
-	#advanced-search-link {
-		font-size:1.1em;
-		margin:0;
-		padding:0;
-	}
+    #advanced-search-link {
+        font-size:1.1em;
+        margin:0;
+        padding:0;
+    }
 
     #browse-meta-lists {
-		float:left;
-	}
+        float:left;
+    }
 
     #browse-meta-lists ul{
         line-height:2;
     }
-	
-	#browse-meta a {
-		text-decoration:none;
-		font-weight:bold;
-	}
-	
-	#advanced-search-link {
-		display:block;
-		text-align:right;
-		margin-top: 6px;
-	}
-	
-	#browse-meta li {
-	    display:inline;
-	}
-	
-	#browse-meta li:not(:last-child):after {
-		content: " · ";
-		color: #bbb;
-		padding:0 2px;
-	}
-	
-	#browse-meta li:first-child:after {
-		content: ": ";
-		padding:0;
-	}
-	
-	#output-formats {
-	    clear:both;
-	    margin-top:2em;
-	}
-	
-	#output-formats h2 {
-	    display:inline;
-	    font-weight:bold;
-	    color: #666;
-	    font-size:1.2em;
-	    line-height: 1.5em;
-	    font-family:"Lucida Grande", Verdana, sans-serif;
-	}
-	
-	#output-formats h2:after {
-	    content:": ";
-	}
-	
-	#output-formats p {
-	    display:inline;
-	}
+
+    #browse-meta a {
+        text-decoration:none;
+        font-weight:bold;
+    }
+
+    #advanced-search-link {
+        display:block;
+        text-align:right;
+        margin-top: 6px;
+    }
+
+    #browse-meta li {
+        display:inline;
+    }
+
+    #browse-meta li:not(:last-child):after {
+        content: " · ";
+        color: #bbb;
+        padding:0 2px;
+    }
+
+    #browse-meta li:first-child:after {
+        content: ": ";
+        padding:0;
+    }
+
+    #output-formats {
+        clear:both;
+        margin-top:2em;
+    }
+
+    #output-formats h2 {
+        display:inline;
+        font-weight:bold;
+        color: #666;
+        font-size:1.2em;
+        line-height: 1.5em;
+        font-family:"Lucida Grande", Verdana, sans-serif;
+    }
+
+    #output-formats h2:after {
+        content:": ";
+    }
+
+    #output-formats p {
+        display:inline;
+    }
     /* Item show styles */
-    
+
     .element-text, .element-text-empty {margin-bottom:1.5em; margin-left:18px;font-size:1.2em; line-height:1.5em;}
         .element-text *, .element-text-empty * {font-size:1em;}
-    
+
     .item-pagination {margin:10px 0;}
     .item-pagination a {text-decoration: none;}
-    
+
     /* Item add-edit styles */
     #delete-record-form {position:absolute; top:16px; right:0;}
     .items #delete-record-form {top: 4px;}
     #public-featured {position:absolute; top:50px; right:0; text-align:right;}
         #public-featured .checkbox {text-align:right;float:none; display:inline;}
         #public-featured label, #public-featured input {display:inline; text-align:right;float:none; width: auto;}
-        
+
             /* Elements specific to items-add form */
             .controls {float:right; width: 300px; text-align:left;}
 
             label.use-html { position:relative;float:left;padding-left: 16px;width: 8em;text-align:left; font-size:1.1em;margin:0;}
-        
+
             .input-block {clear:both;position:relative;}
-            
+
             label.use-html input {position:absolute; top:0; left:0; margin:0;float:none;padding:0;}
 
-            
+
             input.remove-element {background-color: transparent !important; color: #900;padding-left:18px; display:none;}
-            
+
             input.add-element {color: #359; font-weight:bold; color:#76bb5f !important;text-align:left;margin-left:0; float:none;padding-left:18px;padding-top:8px;}
-            
+
             input.add-element, input.remove-element {cursor:pointer;font-size:1.1em;padding-top:0; background-position: 0 50%;padding-bottom:0px;}
-        
+
         #file-list td.file-link {width: 25%;}
         #file-list td.delete-link {width: 10%;}
         #file-inputs a {float:left;display:block; font-size:1.2em; margin-left: 132px;margin-top:6px;}
         #file-inputs input {margin-bottom:6px;}
-        
+
         #delete_item_link {padding: 18px 8px 8px 0;}
         #delete_item_link .delete {font-weight:bold;background-position:0 50%;padding-left:36px; color: #900;}
-    
+
         #my-tags {float:right; width: 288px;}
         #other-tags {float:right; width: 288px; clear:both;}
             #my-tags-list, #other-tags-list {line-height: 2em;}
             #my-tags li, #other-tags li {display:block; float:left; position:relative; border:1px solid #ccc;padding: 2px 8px 2px 24px; margin-bottom: 12px; margin-right: 4px;}
             #my-tags input, #other-tags input {border-width: 0;padding:0 !important; position:absolute; top: 6px; left:4px;margin:0 !important;}
-        
+
         #add-tags {float:left; width: 252px; padding:18px 18px 0; background: #F2F1E8;}
           #tags {border-color: #bbb; margin-bottom:5px;}
           #add-tags-explanation {font-size:1.1em; color: #777;margin-top:0; margin-left:0px;}
-          
+
         #api, #resources { display:none; }
-    
+
     /* Files Show Page */
-    
+
     #mime-type-metadata-exif-array .element-text {overflow-x:scroll; border:1px solid #d7d6e5;padding:12px;}
-    
+
     /* Files Edit Page */
-        
+
     #delete-file-link {float:left; position:absolute; bottom:20px; left: 18px;width: 200px;}
     /* Advanced Search Form */
     .search-entry {margin-bottom:5px;}
     .search-entry button {margin:0;}
     .add_search {margin:0;}
-    
+
     /* Tags Browse */
     .browse-tags #section-nav .nav-browse-tags a {background:#d7d5c4;font-weight:bold;color: #333;border:1px solid #d7d5c4;border-width:0 0 1px;}
     #tags-nav {font-size:1.1em;margin-bottom:3em;}
     #tags-nav a {display:inline;color:#fff; text-decoration:none; text-align:right; padding: 6px 9px; background: #c60;}
     #tags-nav a:hover {background: #a74c29;}
     #tags-nav a.current {background: #467;}
-    
+
     /* Collection Browse styles */
-    
-    
+
+
     /* Collection Show styles */
     .collections h1 {display:inline;}
     .collections #primary {margin-top:18px;}
-    
+
     /* Collection Edit */
-    
+
     /* Item Types */
     #add-element-form {background:#fff;padding:0;}
     #add-element-form h3 {background:#fff;margin:0;padding-bottom:18px;}
@@ -724,54 +724,54 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
         #element-choice li {display:inline;}
         #element-choice a {text-decoration:none;background: #77B0BB; color: #fff;padding: 8px 12px;border-bottom:3px solid #fff;}
         #element-choice a.active {background: #389;border-bottom-color: #389;}
-        
+
         #add-element-form input, #add-element-form textarea, #add-element-form select {border-color: #99C4CC;}
 
     td.itemtype-name { width: 20%;}
     td.itemtype-description { width: 60%;}
 
-    
+
     /* Settings */
     #settings-form .submit {float:right;}
     #im-result {margin-left:200px; font-size:11px;}
     .im-success {color: green;font-style: italic;}
     .im-failure {color: red;font-style: italic; }
-    
+
     #test-button {display:inline; float:none; margin-left: 4px; margin-top:0;background-color: #389; border:1px solid #389;}
-    
+
     #settings-form .textinput {display:inline; width: 400px;}
     #settings-form #path_to_convert {width: 350px;}
-    
+
     /* Element Sets */
     td.element-set-name {width: 30%; }
-    
+
     /* Security */
     #security-form .inputs button {float:none;background-color: #389; margin-right: 6px; border-color: #389;}
-    
+
     /* Users */
     .users .nav-users a {background:#fff !important; font-weight:bold;color: #c60 !important;border:1px solid #d7d5c4;border-width:1px 0 0 3px;}
     #new-user-form .submit {float:right;}
-    
+
     #sort-users-form {padding:12px 18px 8px; display:block;margin:-18px -18px 18px; background: #FAFAF7;}
     #sort-users-form fieldset, #sort-users-form fieldset p {display:inline; margin:0; padding: 0;}
     #sort-users-form fieldset p {font-weight:bold; font-size: 13px; padding-right: 6px;}
     #sort-users-form fieldset select {margin:0;display:inline; border:1px solid #d7d5c4;}
     #sort-users-form .submit-form {display:inline;margin:0 0 0 6px; float:none;}
-    
+
     /* Plugins */
     .plugin-info .plugin-meta {font-size:11px; color: #999; font-style:normal;display:block;margin-bottom:0px;}
     .plugin-info p, .plugin-info .plugin-meta {margin-bottom:12px;}
     .plugin-info .plugin-title {margin-bottom:0px; font-size:14px; margin-top:0;font-weight:bold;}
-    
+
     #plugin-info tbody td {border:none;}
     #plugin-info tbody tr {border-top: none; border-bottom:1px solid #d7d7c4;}
     #plugin-info tbody tr.related-plugin-info, #plugin-info tbody tr.upgrade-plugin-notice {border:none;}
     #plugin-info button, #plugin-info .submit, #plugin-info .button {font-size:11px; width: 80px; margin:0 0 6px 0 !important; padding: 4px 8px;}
     #plugin-info form {margin:0 !important; padding:0 !important;}
-    
+
     #uninstall-confirm {margin-bottom:0;}
     #uninstall-confirm .submit {margin:-3px 0 0 !important; float:none !important;}
-    
+
     .plugin-upgrade {color: #369; font-weight:bold; font-size: 1.2em;}
 
     .warnings {padding-bottom: 18px; color: #900;}
@@ -781,7 +781,7 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
     /* -- Upgradable Plugins -- */
     tr.upgrade-plugin {background: #fff09e;background: rgba(255,240,150, 0.25);}
     .upgrade-plugin .upgrade {background-color: #369; border-color: #369;}
-    
+
     /* Themes */
     #themeswitch .themes {margin-right:-18px; margin-bottom:-18px;}
     #themeswitch .theme {margin-right:18px;border-bottom: 1px solid #d7d5c4;margin-bottom:20px; padding-bottom:18px;float:left; width: 296px;}
@@ -790,12 +790,12 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
 
         #current-theme {background: #F2F1E8;clear:both; padding: 18px; margin-bottom:18px;}
         #current-theme img {border:6px solid #fff; float:right; margin-left:18px;}
-        
+
         #current-theme .type {font-weight:bold;}
-        
+
         #current-theme .value {display:block; margin-bottom:18px;}
         body.themes .configure-button {font-size:.67em; margin:0;}
-        
+
         .theme-configuration .field .submit {float:none !important; line-height:2em; margin-bottom:1em;}
         .theme-configuration img {display:block;margin-top:1em; max-width: 80%; max-height: 300px;}
     /* System Information */
@@ -849,7 +849,7 @@ body#login #footer {padding:18px; margin:0 auto;width: 414px;}
 
 * + html label.use-html {padding:4px 0 0 20px;}
 
-* + html a.add, 
+* + html a.add,
 * + html .edit-button a {display:block; padding: 8px 8px 8px 36px;}
 
 * + html #footer {padding-bottom:18px;}

@@ -11,15 +11,15 @@
 
 /**
  * Retrieve an option from the Omeka database.
- * 
+ *
  * If the returned value represents an object or array, it must be unserialized
- * by the caller before use.  For example, 
+ * by the caller before use.  For example,
  * <code>$object = unserialize(get_option('plugin_object'))</code>.
- * 
+ *
  * @param string $name
  * @return string
- */ 
-function get_option($name) 
+ */
+function get_option($name)
 {
     $options = Omeka_Context::getInstance()->getOptions();
     if (isset($options[$name])) {
@@ -29,9 +29,9 @@ function get_option($name)
 
 /**
  * Set an option in the Omeka database.
- * 
+ *
  * Note that objects and arrays must be serialized before being saved.
- * 
+ *
  * @see get_option()
  * @param string $name
  * @param string $value
@@ -41,17 +41,17 @@ function set_option($name, $value)
 {
     $db = get_db();
     $db->exec("REPLACE INTO $db->Option (name, value) VALUES (?, ?)", array($name, $value));
-    
+
     //Now update the options hash so that any subsequent requests have it available
     $options = Omeka_Context::getInstance()->getOptions();
     $options[$name] = $value;
-    
+
     Omeka_Context::getInstance()->setOptions($options);
 }
 
 /**
- * Delete an option from the database.  
- * 
+ * Delete an option from the database.
+ *
  * @param string $name
  * @return void
  */
@@ -59,11 +59,11 @@ function delete_option($name)
 {
     $db = get_db();
     $sql = "
-    DELETE 
-    FROM $db->Option 
+    DELETE
+    FROM $db->Option
     WHERE `name` = ?";
     $db->query($sql, array($name));
-    
+
     $options = Omeka_Context::getInstance()->getOptions();
     if (isset($options[$name])) {
         unset($options[$name]);
@@ -73,10 +73,10 @@ function delete_option($name)
 
 /**
  * Generate a URL slug from a piece of text.
- * 
+ *
  * Trims whitespace, replaces disallowed characters with hyphens,
  * converts the resulting string to lowercase, and trims at 30 characters.
- * 
+ *
  * @param string $text
  * @return string
  */
@@ -90,7 +90,7 @@ function generate_slug($text)
 
 /**
  * Retrieve one column of a multidimensional array as an array.
- * 
+ *
  * @param string|integer $col
  * @param array $array
  * @return array
@@ -101,12 +101,12 @@ function pluck($col, $array)
     foreach ($array as $k => $row) {
         $res[$k] = $row[$col];
     }
-    return $res;    
-} 
+    return $res;
+}
 
 /**
  * Retrieve the User record associated with the currently logged in user.
- * 
+ *
  * @return User|null Null if no user is logged in.
  */
 function current_user()
@@ -116,7 +116,7 @@ function current_user()
 
 /**
  * Retrieve the database object.
- * 
+ *
  * @return Omeka_Db
  */
 function get_db()
@@ -130,8 +130,8 @@ function get_db()
 
 /**
  * Log a message with 'DEBUG' priority.
- * 
- * @uses _log() 
+ *
+ * @uses _log()
  * @param string $msg
  * @return void
  */
@@ -147,7 +147,7 @@ function debug($msg)
  *
  * @since 1.4
  * @param mixed $msg
- * @param integer $priority Optional Defaults to Zend_Log::INFO.  See Zend_Log 
+ * @param integer $priority Optional Defaults to Zend_Log::INFO.  See Zend_Log
  * for a list of available priorities.
  * @return void
  */
@@ -161,11 +161,11 @@ function _log($msg, $priority = Zend_Log::INFO)
 }
 
 /**
- * Called during startup to strip out slashes from the request superglobals in 
+ * Called during startup to strip out slashes from the request superglobals in
  * order to avoid problems with PHP's magic_quotes setting.
- * 
+ *
  * Does not need to be called elsewhere in the application.
- * 
+ *
  * @access private
  * @param mixed $value
  * @return mixed
@@ -179,7 +179,7 @@ function stripslashes_deep($value)
 
 /**
  * Declare a plugin hook implementation within a plugin.
- * 
+ *
  * @param string $hook Name of hook being implemented.
  * @param mixed $callback Any valid PHP callback.
  * @return void
@@ -187,23 +187,23 @@ function stripslashes_deep($value)
 function add_plugin_hook($hook, $callback)
 {
     get_plugin_broker()->addHook($hook, $callback);
-} 
+}
 
 /**
- * Declare the point of execution for a specific plugin hook.  
- * 
+ * Declare the point of execution for a specific plugin hook.
+ *
  * All plugin implementations of a given hook will be executed when this is called.
- * 
+ *
  * The first argument corresponds to the string name of the hook.  Subsequent
  * arguments will be passed to the plugin hook implementations.
- * 
+ *
  * <code>
  * // Calls the hook 'after_save_item' with the arguments '$item' and '$arg2'
  * fire_plugin_hook('after_save_item', $item, $arg2);
  * </code>
  *
  * @param string $hookName
- * @param mixed $args,... (optional) Any arguments to be passed to hook 
+ * @param mixed $args,... (optional) Any arguments to be passed to hook
  * implementations.
  * @return mixed
  */
@@ -217,17 +217,17 @@ function fire_plugin_hook()
 }
 
 /**
- * Retrieve the output of fire_plugin_hook() as a string.  
- * 
+ * Retrieve the output of fire_plugin_hook() as a string.
+ *
  * This is invoked in the same way as fire_plugin_hook().
- * 
+ *
  * @uses fire_plugin_hook()
  * @param string $hookName
- * @param mixed $args,... (optional) Any arguments to be passed to hook 
+ * @param mixed $args,... (optional) Any arguments to be passed to hook
  * implementations.
  * @return string
  */
-function get_plugin_hook_output() 
+function get_plugin_hook_output()
 {
     $args = func_get_args();
     ob_start();
@@ -238,41 +238,41 @@ function get_plugin_hook_output()
 }
 
 /**
- * Retrieve the output of a specific plugin's hook as a string. 
- * 
- * This is like get_plugin_hook_output() but only calls the hook within the 
+ * Retrieve the output of a specific plugin's hook as a string.
+ *
+ * This is like get_plugin_hook_output() but only calls the hook within the
  * provided plugin.
- * 
+ *
  * @see get_plugin_hook_output()
  * @param string $pluginName
  * @param string $hookName
- * @param mixed $args,... (optional) Any arguments to be passed to the hook 
+ * @param mixed $args,... (optional) Any arguments to be passed to the hook
  * implementation.
  * @return string
  */
 function get_specific_plugin_hook_output()
 {
     $args = func_get_args();
-    
+
     // Get the plugin name (1st arg) and hook name (2nd arg).
     $pluginName = array_shift($args);
     $hookName = array_shift($args);
-    
+
     // Get the specific hook.
     $pluginBroker = get_plugin_broker();
     $hookNameSpecific = $pluginBroker->getHook($pluginName, $hookName);
-    
+
     // Return null if the specific hook doesn't exist.
     if (!$hookNameSpecific) {
         return null;
     }
-    
+
     // Buffer and return any output originating from the hook.
     ob_start();
     call_user_func_array($hookNameSpecific, $args);
     $content = ob_get_contents();
     ob_end_clean();
-    
+
     return $content;
 }
 
@@ -294,11 +294,11 @@ function get_plugin_broker()
  *
  * @param string $pluginDirName The directory name of the plugin.
  * @param string $iniKeyName The name of the key in the ini file.
- * @return string|null The value of the specified plugin key. If the key does 
+ * @return string|null The value of the specified plugin key. If the key does
  * not exist, it returns null.
  */
 function get_plugin_ini($pluginDirName, $iniKeyName)
-{         
+{
    $pluginIniReader = Zend_Registry::get('plugin_ini_reader');
    if ($pluginIniReader->hasPluginIniFile($pluginDirName)) {
        return $pluginIniReader->getPluginIniValue($pluginDirName, $iniKeyName);
@@ -306,11 +306,11 @@ function get_plugin_ini($pluginDirName, $iniKeyName)
 }
 
 /**
- * Declare a callback function that will be used to display files with a given 
+ * Declare a callback function that will be used to display files with a given
  * MIME type and/or file extension.
- * 
+ *
  * @uses Omeka_View_Helper_Media::addMimeTypes() See for info on usage.
- * @param array|string $fileIdentifiers Set of MIME types and/or file extensions 
+ * @param array|string $fileIdentifiers Set of MIME types and/or file extensions
  * to which the provided callback will respond.
  * @param callback $callback Any valid callback.
  * @param array $options
@@ -330,12 +330,12 @@ function add_mime_display_type($fileIdentifiers, $callback, array $options=array
 }
 
 /**
- * Apply a set of plugin filters to a given value.  
- * 
- * The first two arguments represent the name of the filter and the value to 
- * filter, and all subsequent arguments are passed to the individual filter 
+ * Apply a set of plugin filters to a given value.
+ *
+ * The first two arguments represent the name of the filter and the value to
+ * filter, and all subsequent arguments are passed to the individual filter
  * implementations.
- * 
+ *
  * @since 0.10
  * @uses Omeka_Plugin_Filters::applyFilters()
  * @param string|array $filterName
@@ -350,14 +350,14 @@ function apply_filters($filterName, $valueToFilter)
         $extraOptions = array_slice(func_get_args(), 2);
         return $pluginBroker->applyFilters($filterName, $valueToFilter, $extraOptions);
     }
-    
+
     // If the plugin broker is not enabled for this request (possibly for testing), return the original value.
     return $valueToFilter;
 }
 
 /**
  * Declare a filter implementation.
- * 
+ *
  * @since 0.10
  * @param string|array $filterName
  * @param callback $callback
@@ -389,7 +389,7 @@ function clear_filters($filterName = null)
 
 /**
  * Retrieve the ACL object.
- * 
+ *
  * @return Omeka_Acl
  */
 function get_acl()
@@ -398,13 +398,13 @@ function get_acl()
 }
 
 /**
- * Determine whether or not the script is being executed through the 
+ * Determine whether or not the script is being executed through the
  * administrative interface.
- * 
- * Can be used to branch behavior based on whether or not the admin theme is 
+ *
+ * Can be used to branch behavior based on whether or not the admin theme is
  * being accessed, but should not be relied upon in place of using the ACL for
  * controlling access to scripts.
- * 
+ *
  * @return boolean
  */
 function is_admin_theme()
@@ -430,44 +430,44 @@ function is_admin_theme()
  *  element texts provided in $elementTexts, and it will update existing
  *  records where possible.  All texts that are not yet in the DB will be
  *  added in the usual manner.  False by default.</li>
- *  </ul> 
- * 
- * @param array $elementTexts Optional, Array of element texts to assign to the item. 
- *  This follows the format: 
+ *  </ul>
+ *
+ * @param array $elementTexts Optional, Array of element texts to assign to the item.
+ *  This follows the format:
  * <code>
  * array(
  *     [element set name] => array(
  *         [element name] => array(
- *             array('text' => [string], 'html' => [false|true]), 
+ *             array('text' => [string], 'html' => [false|true]),
  *             array('text' => [string], 'html' => [false|true])
- *         ), 
+ *         ),
  *         [element name] => array(
- *             array('text' => [string], 'html' => [false|true]), 
+ *             array('text' => [string], 'html' => [false|true]),
  *             array('text' => [string], 'html' => [false|true])
  *         )
- *     ), 
+ *     ),
  *     [element set name] => array(
  *         [element name] => array(
- *             array('text' => [string], 'html' => [false|true]), 
+ *             array('text' => [string], 'html' => [false|true]),
  *             array('text' => [string], 'html' => [false|true])
- *         ), 
+ *         ),
  *         [element name] => array(
- *             array('text' => [string], 'html' => [false|true]), 
+ *             array('text' => [string], 'html' => [false|true]),
  *             array('text' => [string], 'html' => [false|true])
  *         )
  *     )
  * );
  * </code>
  *  See ActsAsElementText::addElementTextsByArray() for more info.
- * 
+ *
  * @param array $fileMetadata Optional, Set of metadata options that allow one or more
  * files to be associated with the item.  Includes the following options:
- *  <ul>    
- *      <li>'file_transfer_type' (string = 'Url|Filesystem|Upload' or 
- * Omeka_File_Transfer_Adapter_Interface).  Corresponds to the 
+ *  <ul>
+ *      <li>'file_transfer_type' (string = 'Url|Filesystem|Upload' or
+ * Omeka_File_Transfer_Adapter_Interface).  Corresponds to the
  * $transferStrategy argument for addFiles().</li>
  *      <li>'file_ingest_options' OPTIONAL (array of possible options to pass
- * modify the behavior of the ingest script).  Corresponds to the $options 
+ * modify the behavior of the ingest script).  Corresponds to the $options
  * argument for addFiles().</li>
  *      <li>'files' (array or string) Represents information indicating the file
  * to ingest.  Corresponds to the $files argument for addFiles().</li>
@@ -477,7 +477,7 @@ function is_admin_theme()
  * @return Item
  */
 function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata = array())
-{    
+{
     $builder = new ItemBuilder(get_db());
     $builder->setRecordMetadata($metadata);
     $builder->setElementTexts($elementTexts);
@@ -487,7 +487,7 @@ function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata
 
 /**
  * Add files to an item.
- * 
+ *
  * @uses ItemBuilder::addFiles() See for information on arguments and notes
  * on usage.
  * @param Item|integer $item
@@ -530,7 +530,7 @@ function update_item($item, $metadata = array(), $elementTexts = array(), $fileM
  * @param array $metadata Follows the format:
  * <code>
  * array(
- *     'name'        => [string], 
+ *     'name'        => [string],
  *     'description' => [string]
  * );
  * </code>
@@ -540,43 +540,43 @@ function update_item($item, $metadata = array(), $elementTexts = array(), $fileM
  * <li>An array containing element metadata</li>
  * <li>An Element object</li>
  * </ol>
- * <code> 
+ * <code>
  *    array(
  *         array(
- *             'name'           => [(string) name, required], 
- *             'description'    => [(string) description, optional], 
- *             'record_type'    => [(string) record type name, optional], 
- *             'data_type'      => [(string) data type name, optional], 
+ *             'name'           => [(string) name, required],
+ *             'description'    => [(string) description, optional],
+ *             'record_type'    => [(string) record type name, optional],
+ *             'data_type'      => [(string) data type name, optional],
  *             'order'          => [(int) order, optional],
  *             'record_type_id' => [(int) record type id, optional],
  *             'data_type_id'   => [(int) data type id, optional]
- *         ), 
- *         [(Element)], 
+ *         ),
+ *         [(Element)],
  *     );
  * </code>
  * @return ItemType
  * @throws Exception
  */
-function insert_item_type($metadata = array(), $elementInfos = array()) 
+function insert_item_type($metadata = array(), $elementInfos = array())
 {
     $builder = new ItemTypeBuilder(get_db());
     $builder->setRecordMetadata($metadata);
-    $builder->setElements($elementInfos);    
+    $builder->setElements($elementInfos);
     return $builder->build();
 }
 
 /**
  * Insert a collection
- * 
+ *
  * @param array $metadata Follows the format:
  * <code> array(
- *     'name'        => [string], 
- *     'description' => [string], 
- *     'public'      => [true|false], 
+ *     'name'        => [string],
+ *     'description' => [string],
+ *     'public'      => [true|false],
  *     'featured'    => [true|false]
  *     'collectors'  => [array of string names]
  * )</code>
- * 
+ *
  * @return Collection
  */
 function insert_collection($metadata = array())
@@ -588,15 +588,15 @@ function insert_collection($metadata = array())
 
 /**
  * Insert an element set and its elements into the database.
- * 
+ *
  * @param string|array $elementSetMetadata Element set information.
  * <code>
  *     [(string) element set name]
  *     -OR-
  *     array(
- *         'name'           => [(string) element set name, required, unique], 
- *         'description'    => [(string) element set description, optional], 
- *         'record_type'    => [(string) record type name, optional], 
+ *         'name'           => [(string) element set name, required, unique],
+ *         'description'    => [(string) element set description, optional],
+ *         'record_type'    => [(string) record type name, optional],
  *         'record_type_id' => [(int) record type id, optional]
  *     );
  * </code>
@@ -606,16 +606,16 @@ function insert_collection($metadata = array())
  * <li>An array containing element metadata</li>
  * <li>A string of the element name</li>
  * </ol>
- * <code> 
+ * <code>
  *    array(
  *         array(
- *             'name'           => [(string) name, required], 
- *             'description'    => [(string) description, optional], 
- *             'record_type'    => [(string) record type name, optional], 
- *             'data_type'      => [(string) data type name, optional], 
+ *             'name'           => [(string) name, required],
+ *             'description'    => [(string) description, optional],
+ *             'record_type'    => [(string) record type name, optional],
+ *             'data_type'      => [(string) data type name, optional],
  *             'record_type_id' => [(int) record type id, optional],
  *             'data_type_id'   => [(int) data type id, optional]
- *         ), 
+ *         ),
  *         [(string) element name]
  *     );
  * </code>
@@ -631,15 +631,15 @@ function insert_element_set($elementSetMetadata = array(), array $elements = arr
 
 /**
  * Release an object from memory.
- * 
- * Use this fuction after you are done using an Omeka model object to prevent 
- * memory leaks.  Required because PHP 5.2 does not do garbage collection on 
+ *
+ * Use this fuction after you are done using an Omeka model object to prevent
+ * memory leaks.  Required because PHP 5.2 does not do garbage collection on
  * circular references.
  *
  * @param mixed &$var The object to be released, or an array of such objects.
  * @return void
  */
-function release_object(&$var) 
+function release_object(&$var)
 {
     if (is_array($var)) {
         array_walk($var, 'release_object');
@@ -657,20 +657,20 @@ function release_object(&$var)
  * @param mixed $default
  * @return mixed
  */
-function not_empty_or($value, $default) 
+function not_empty_or($value, $default)
 {
     return !empty($value) ? $value : $default;
 }
 
 /**
- * Returns whether a value is true or not.  
+ * Returns whether a value is true or not.
  * If the value is a string and its lowercased value is 'true' or '1', it returns true.
  * If the value is an integer and equal to 1, then it returns true.
  * Otherwise it returns false.
  * @param string $value
  * @return boolean
  */
-function is_true($value) 
+function is_true($value)
 {
     if ($value === null) {
         return false;
@@ -684,7 +684,7 @@ function is_true($value)
  *
  * @since 1.3
  * @param string $optionName The name of the option to get.
- * @param string $themeName The name of the theme.  If null, it will use the 
+ * @param string $themeName The name of the theme.  If null, it will use the
  * current public theme.
  * @return string The value of the theme option.
  */
@@ -702,7 +702,7 @@ function get_theme_option($optionName, $themeName = null)
  * @since 1.3
  * @param string $optionName The name of the option to set.
  * @param string $optionValue The value of the option.
- * @param string $themeName The name of the theme.  If null, it will use the 
+ * @param string $themeName The name of the theme.  If null, it will use the
  * current public theme.
  * @return void
  */
@@ -716,17 +716,17 @@ function set_theme_option($optionName, $optionValue, $themeName = null)
 
 /**
  * Returns an array of all user role names.
- * 
+ *
  * @return array
  */
 function get_user_roles()
 {
-	$roles = Omeka_Context::getInstance()->getAcl()->getRoleNames();
-	foreach($roles as $key => $val) {
-		$roles[$val] = __(Inflector::humanize($val));
-		unset($roles[$key]);
-	}
-	return $roles;
+    $roles = Omeka_Context::getInstance()->getAcl()->getRoleNames();
+    foreach($roles as $key => $val) {
+        $roles[$val] = __(Inflector::humanize($val));
+        unset($roles[$key]);
+    }
+    return $roles;
 }
 
 /**
@@ -740,11 +740,11 @@ function get_user_roles()
 function element_exists($elementSetName, $elementName) {
     $element = get_db()->getTable('Element')->findByElementSetNameAndElementName($elementSetName, $elementName);
     return (bool)$element;
-} 
+}
 
 
 /**
- * Determine whether or not a plugin is installed and active.  
+ * Determine whether or not a plugin is installed and active.
  *
  * May be used by theme/plugin writers to customize behavior based on the
  * existence of certain plugins.
@@ -756,22 +756,22 @@ function element_exists($elementSetName, $elementName) {
  * if (plugin_is_active('ExhibitBuilder')):
  * </code>
  *
- * Check if installed version of ExhibitBuilder is at least version 1.0 or 
+ * Check if installed version of ExhibitBuilder is at least version 1.0 or
  * higher.
- * <code> 
- * if (plugin_is_active('ExhibitBuilder', '1.0')): 
+ * <code>
+ * if (plugin_is_active('ExhibitBuilder', '1.0')):
  * </code>
  *
  * Check if installed version of ExhibitBuilder is anything less than 2.0.
  * <code>
- * if (plugin_is_active('ExhibitBuilder', '2.0', '<')): 
+ * if (plugin_is_active('ExhibitBuilder', '2.0', '<')):
  * </code>
  *
  * @since 1.4
  * @param string $name Directory name of the plugin.
- * @param string $version Optional Version of the plugin to check.  
- * @param string $compOperator Optional Comparison operator to use when 
- * checking the installed version of ExhibitBuilder.  Defaults to '>=' (to 
+ * @param string $version Optional Version of the plugin to check.
+ * @param string $compOperator Optional Comparison operator to use when
+ * checking the installed version of ExhibitBuilder.  Defaults to '>=' (to
  * check verify installed version).
  * @return boolean
  */
@@ -788,7 +788,7 @@ function plugin_is_active($name, $version = null, $compOperator = '>=')
         return version_compare($plugin->getDbVersion(), $version, $compOperator);
     } else {
         return true;
-    } 
+    }
 }
 
 /**
@@ -809,15 +809,15 @@ function __($string)
     } catch (Zend_Exception $e) {
         // Skip translation if we can't load Zend_Translate object.
     }
-    
+
     $args = func_get_args();
-    
+
     array_shift($args);
-    
+
     if (!empty($args)) {
         return vsprintf($string, $args);
     }
-    
+
     return $string;
 }
 
@@ -890,7 +890,7 @@ function format_date($date, $format = Zend_Date::DATE_MEDIUM)
     } else {
         $sourceFormat = Zend_Date::ISO_8601;
     }
-    
+
     $dateObj = new Zend_Date($date, $sourceFormat);
     return $dateObj->toString($format);
 }

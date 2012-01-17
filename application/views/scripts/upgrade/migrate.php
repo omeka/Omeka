@@ -9,7 +9,7 @@
     <div id="content">
 <?php if(!$success): ?>
     <h1><?php echo __('Omeka encountered an error when upgrading your installation.'); ?></h1>
-	<p class="error_text"><?php echo html_escape($error); ?></p>
+    <p class="error_text"><?php echo html_escape($error); ?></p>
     <?php if ($debugMode): ?>
         <pre id="debug"><?php echo html_escape($trace); ?></pre>
     <?php endif; ?>
@@ -20,7 +20,7 @@
 <?php else: ?>
     <h1><?php echo __('Omeka has upgraded successfully.'); ?></h1>
     <p><?php echo link_to_admin_home_page(__('Return to Dashboard')); ?></p>    
-<?php endif; ?>	
+<?php endif; ?>
 </div>
 </body>
 </html>

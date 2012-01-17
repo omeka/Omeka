@@ -74,7 +74,7 @@
         
         <?php if($pluginDescription = $plugin->getDescription()): ?>
         <p class="plugin-description"><?php echo html_escape($pluginDescription); ?></p>
-	    <?php endif; ?>
+        <?php endif; ?>
         </div>
     </td>
     

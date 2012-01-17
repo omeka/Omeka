@@ -8,14 +8,14 @@
 
 /**
  * Uses uri() to generate <a> tags for a given link.
- * 
+ *
  * @since 0.10 No longer escapes the text for the link.  This text must be valid
  * HTML.
  * @since 0.10 No longer prepends the word 'View' to the text of the link.  Instead
  * 'View' is the default text.
  *
  * @param Omeka_Record|string $record The name of the controller to use for the
- * link.  If a record instance is passed, then it inflects the name of the 
+ * link.  If a record instance is passed, then it inflects the name of the
  * controller from the record class.
  * @param string $action The action to use for the link (optional)
  * @param string $text The text to put in the link.  Default is 'View'.
@@ -38,19 +38,19 @@ function link_to($record, $action=null, $text=null, $props = array(), $queryPara
         if($action) $urlOptions['action'] = (string) $action;
         $url = uri($urlOptions, $route, $queryParams, true);
     }
-    
+
     if (!$text) {
         $text = __('View');
     }
-    
-	$attr = !empty($props) ? ' ' . _tag_attributes($props) : '';
-    
-	return '<a href="'. html_escape($url) . '"' . $attr . '>' . $text . '</a>';
+
+    $attr = !empty($props) ? ' ' . _tag_attributes($props) : '';
+
+    return '<a href="'. html_escape($url) . '"' . $attr . '>' . $text . '</a>';
 }
 
 /**
  * Retrieve HTML for a link to the advanced search form.
- * 
+ *
  * @since 0.10
  * @param string $text Optional Text of the link. Default is 'Advanced Search'.
  * @param array $props Optional XHTML attributes for the link.
@@ -62,7 +62,7 @@ function link_to_advanced_search($text = null, $props = array(), $uri=null)
     if (!$text) {
         $text = __('Advanced Search');
     }
-    
+
     if (!$uri) {
         $uri = apply_filters('advanced_search_link_default_uri', uri('items/advanced-search'));
     }
@@ -74,7 +74,7 @@ function link_to_advanced_search($text = null, $props = array(), $uri=null)
 /**
  * Get the proper HTML for a link to the browse page for items, with any appropriate
  * filtering parameters passed to the URL.
- * 
+ *
  * @since 0.10
  * @param string $text Text to display in the link.
  * @param array $browseParams Optional Any parameters to use to build the browse page URL, e.g.
@@ -89,10 +89,10 @@ function link_to_browse_items($text, $browseParams = array(), $linkProperties = 
 
 /**
  * Link to the collection that the current item belongs to.
- * 
+ *
  * The default text displayed for this link will be the name of the collection,
  * but that can be changed by passing a string argument.
- * 
+ *
  * @since 0.10
  * @param string|null $text Optional Text for the link.
  * @param array $props Optional XHTML attributes for the <a> tag.
@@ -112,7 +112,7 @@ function link_to_items_in_collection($text = null, $props = array(), $action = '
 
     $queryParams = array();
     $queryParams['collection'] = $collectionObj->id;
-    
+
     if ($text === null) {
         $text = $collectionObj->totalItems();
     }
@@ -128,7 +128,7 @@ function link_to_items_with_item_type($text = null, $props = array(), $action = 
 
     $queryParams = array();
     $queryParams['type'] = $itemTypeObj->id;
-    
+
     if ($text === null) {
         $text = $itemTypeObj->totalItems();
     }
@@ -138,13 +138,13 @@ function link_to_items_with_item_type($text = null, $props = array(), $action = 
 
 /**
  * Retrieve the HTML for a link to the file metadata page for a particular file.
- * 
+ *
  * If no File object is specified, this will determine the file to use through
  * context.
- * 
+ *
  * The text of the link defaults to the original filename of the file unless
  * otherwise specified.
- * 
+ *
  * @since 1.0
  * @uses get_current_file()
  * @uses item_file()
@@ -158,12 +158,12 @@ function link_to_file_metadata($attributes = array(), $text = null, $file = null
     if (!$file) {
         $file = get_current_file();
     }
-    
+
     if (!$text) {
         // By default we should just display the original filename of the file.
         $text = item_file('Original Filename', null, array(), $file);
     }
-    
+
     return link_to($file, 'show', $text, $attributes);
 }
 
@@ -172,7 +172,7 @@ function link_to_file_metadata($attributes = array(), $text = null, $file = null
  * determined by the context of the function call.  Also, text passed to the link
  * must be valid HTML (will not be automatically escaped because any HTML can be
  * passed in, e.g. an <img /> or the like).
- * 
+ *
  * @param string HTML for the text of the link.
  * @param array Properties for the <a> tag. (optional)
  * @param string The page to link to (this will be the 'show' page almost always
@@ -187,15 +187,15 @@ function link_to_item($text = null, $props = array(), $action = 'show', $item=nu
         $item = get_current_item();
     }
 
-	$text = (!empty($text) ? $text : strip_formatting(item('Dublin Core', 'Title', array(), $item)));
-	
-	return link_to($item, $action, $text, $props);
+    $text = (!empty($text) ? $text : strip_formatting(item('Dublin Core', 'Title', array(), $item)));
+
+    return link_to($item, $action, $text, $props);
 }
 
 /**
- * @since 0.10 First argument is now the text of the link, 2nd argument are the 
+ * @since 0.10 First argument is now the text of the link, 2nd argument are the
  * query parameters to merge in to the href for the link.
- * 
+ *
  * @param string $text The text of the link.
  * @param array $params A set of query string parameters to merge in to the href
  * of the link.  E.g., if this link was clicked on the items/browse?collection=1
@@ -203,16 +203,16 @@ function link_to_item($text = null, $props = array(), $action = 'show', $item=nu
  * items/browse?collection=1&foo=bar.
  */
 function link_to_items_rss($text = null, $params=array())
-{	
+{
     if (!$text) {
         $text = __('RSS');
     }
-	return '<a href="' . html_escape(items_output_uri('rss2', $params)) . '" class="rss">' . $text . '</a>';
+    return '<a href="' . html_escape(items_output_uri('rss2', $params)) . '" class="rss">' . $text . '</a>';
 }
 
 /**
  * Link to the item immediately following the current one.
- * 
+ *
  * @since 0.10 Signature has changed to reflect the use of get_current_item()
  * instead of passing the $item object as the first argument.
  * @uses get_current_item()
@@ -224,11 +224,11 @@ function link_to_next_item($text=null, $props=array())
     if (!$text) {
         $text = __("Next Item &rarr;");
     }
-    
+
     $item = get_current_item();
-	if($next = $item->next()) {
-		return link_to($next, 'show', $text, $props);
-	}
+    if($next = $item->next()) {
+        return link_to($next, 'show', $text, $props);
+    }
 }
 
 /**
@@ -240,17 +240,17 @@ function link_to_previous_item($text=null, $props=array())
     if (!$text) {
         $text = __('&larr; Previous Item');
     }
-    
+
     $item = get_current_item();
-	if($previous = $item->previous()) {
-		return link_to($previous, 'show', $text, $props);
-	}
+    if($previous = $item->previous()) {
+        return link_to($previous, 'show', $text, $props);
+    }
 }
 
 /**
- * 
+ *
  * @since 0.10 Signature has changed so that $text is the first argument.  Uses
- * get_current_collection() to determine what collection to link to.  Or you can 
+ * get_current_collection() to determine what collection to link to.  Or you can
  * pass it the Collection record as the last argument.
  * @param string $text Optional text to use for the title of the collection.  Default
  * behavior is to use the name of the collection.
@@ -265,16 +265,16 @@ function link_to_collection($text=null, $props=array(), $action='show', $collect
     if (!$collectionObj) {
         $collectionObj = get_current_collection();
     }
-    
+
     $collectionName = collection('name', array(), $collectionObj);
-    
-	$text = (!empty($text) ? $text : (!empty($collectionName) ? $collectionName : __('[Untitled]')));
-		
-	return link_to($collectionObj, $action, $text, $props);
+
+    $text = (!empty($text) ? $text : (!empty($collectionName) ? $collectionName : __('[Untitled]')));
+
+    return link_to($collectionObj, $action, $text, $props);
 }
 
 /**
- * 
+ *
  * @since 0.10 All arguments to this function are optional.  If no text is given,
  * it will automatically use the text for the 'site_title' option.
  * @since 0.10 The text passed to this function will not be automatically escaped
@@ -286,12 +286,12 @@ function link_to_home_page($text = null, $props = array())
     if (!$text) {
         $text = settings('site_title');
     }
-	$uri = WEB_ROOT;
-	return '<a href="' . html_escape($uri) . '" '._tag_attributes($props).'>' . $text . "</a>\n";
+    $uri = WEB_ROOT;
+    return '<a href="' . html_escape($uri) . '" '._tag_attributes($props).'>' . $text . "</a>\n";
 }
 
 /**
- * 
+ *
  * @since 0.10 Arguments follow the same pattern as link_to_home_page().
  * @see link_to_home_page()
  * @return string
@@ -301,29 +301,29 @@ function link_to_admin_home_page($text = null, $props = array())
     if (!$text) {
         $text = settings('site_title');
     }
-	return '<a href="' . html_escape(admin_uri('')) . '" ' . _tag_attributes($props) 
-	     . '>' . $text . "</a>\n";
+    return '<a href="' . html_escape(admin_uri('')) . '" ' . _tag_attributes($props)
+         . '>' . $text . "</a>\n";
 }
 
 /**
- * Generate an unordered list of navigation links (and subnavigation links), 
+ * Generate an unordered list of navigation links (and subnavigation links),
  * with class "current" for any links corresponding to the current page
  *
  * For example:
  * <code>nav(array('Themes' => uri('themes/browse')));</code>
- * generates 
+ * generates
  * <code><li class="nav-themes"><a href="themes/browse">Themes</a></li></code>
- * 
+ *
  * @uses is_current_uri()
- * @param array A keyed array, where key = text of the link, and value = uri of the link, 
- * or value = another ordered array $a with the following recursive structure: 
+ * @param array A keyed array, where key = text of the link, and value = uri of the link,
+ * or value = another ordered array $a with the following recursive structure:
  * $a['uri'] = URI of the link
  * $a['subnav_links'] = array of $sublinks for the sub navigation (this can be recursively structured like $links)
  * $a['subnav_attributes'] = associative array of attributes for the sub navigation
  *
  * For example:
- * $links = array('Browse' => 'http://yoursite.com/browse', 
- *                'Categories' => array('uri' => 'http://yoursite.com/categories', 
+ * $links = array('Browse' => 'http://yoursite.com/browse',
+ *                'Categories' => array('uri' => 'http://yoursite.com/categories',
  *                                      'subnav_links' => array('Dogs' => 'http://yoursite.com/dogs',
  *                                                              'Cats' => 'http://yoursite.com/cats'),
  *                                      'subnav_attributes' => array('class' => 'subnav')),
@@ -340,23 +340,23 @@ function link_to_admin_home_page($text = null, $props = array())
  * </li>
  * <li><a href="http://yoursite.com/contact-us">Contact Us</a><li>
  *
- * @param integer|null $maxDepth The maximum number of sub navigation levels to display.  
- * By default it is 0, which means it will only display the top level of links.  
+ * @param integer|null $maxDepth The maximum number of sub navigation levels to display.
+ * By default it is 0, which means it will only display the top level of links.
  * If null, it will display all the levels.
- *          
+ *
  * @return string HTML for the unordered list
  */
-function nav(array $links, $maxDepth = 0) 
-{	
-	// Get the current uri from the request
-	$current = Zend_Controller_Front::getInstance()->getRequest()->getRequestUri();
-	
-	$nav = '';
-	foreach( $links as $text => $uri ) {
-	    
-	    // Get the subnavigation attributes and links
-	    $subNavLinks = null;
-	    if (is_array($uri)) {
+function nav(array $links, $maxDepth = 0)
+{
+    // Get the current uri from the request
+    $current = Zend_Controller_Front::getInstance()->getRequest()->getRequestUri();
+
+    $nav = '';
+    foreach( $links as $text => $uri ) {
+
+        // Get the subnavigation attributes and links
+        $subNavLinks = null;
+        if (is_array($uri)) {
             $subNavLinks = $uri['subnav_links'];
             if (!is_array($subNavLinks)) {
                 $subNavLinks = array();
@@ -365,44 +365,44 @@ function nav(array $links, $maxDepth = 0)
             if (!is_array($subNavAttributes)) {
                 $subNavAttributes = array();
             }
-	        $uri = (string) $uri['uri'];
-	    }
-	    
-	    // Build a link if the uri is available, otherwise simply list the text without a hyperlink
-	    $nav .= '<li class="' . text_to_id($text, 'nav');
-	    if ($uri == '') {
-	        $nav .= '">' . html_escape($text);
-	    } else {
-	        // If the uri is the current uri, then give it the 'current' class
-	        $nav .= (is_current_uri($uri) ? ' current':'') . '">' . '<a href="' . html_escape($uri) . '">' . html_escape($text) . '</a>';
-	    }
-	    
-	    // Display the subnavigation links if they exist and if the max depth has not been reached
-	    if ($subNavLinks !== null && ($maxDepth === null || $maxDepth > 0)) {
-	        $subNavAttributes = !empty($subNavAttributes) ? ' ' . _tag_attributes($subNavAttributes) : '';
-	        $nav .= "\n" . '<ul' . $subNavAttributes . '>' . "\n";
-	        if ($maxDepth === null) {
-	            $nav .= nav($subNavLinks, null);
-	        } else {
-	            $nav .= nav($subNavLinks, $maxDepth - 1);
-	        }
-	        $nav .= '</ul>' . "\n"; 
-	    }
-	    
-	    $nav .= '</li>' . "\n";   		
-	}
-	
-	return $nav;
+            $uri = (string) $uri['uri'];
+        }
+
+        // Build a link if the uri is available, otherwise simply list the text without a hyperlink
+        $nav .= '<li class="' . text_to_id($text, 'nav');
+        if ($uri == '') {
+            $nav .= '">' . html_escape($text);
+        } else {
+            // If the uri is the current uri, then give it the 'current' class
+            $nav .= (is_current_uri($uri) ? ' current':'') . '">' . '<a href="' . html_escape($uri) . '">' . html_escape($text) . '</a>';
+        }
+
+        // Display the subnavigation links if they exist and if the max depth has not been reached
+        if ($subNavLinks !== null && ($maxDepth === null || $maxDepth > 0)) {
+            $subNavAttributes = !empty($subNavAttributes) ? ' ' . _tag_attributes($subNavAttributes) : '';
+            $nav .= "\n" . '<ul' . $subNavAttributes . '>' . "\n";
+            if ($maxDepth === null) {
+                $nav .= nav($subNavLinks, null);
+            } else {
+                $nav .= nav($subNavLinks, $maxDepth - 1);
+            }
+            $nav .= '</ul>' . "\n";
+        }
+
+        $nav .= '</li>' . "\n";
+    }
+
+    return $nav;
 }
 
 /**
  * Retrieve HTML for the set of pagination links.
- * 
+ *
  * @since 0.10
- * @param array $options Optional Configurable parameters for the pagination 
+ * @param array $options Optional Configurable parameters for the pagination
  * links.  The following options are available:
  *      'scrolling_style' (string) See Zend_View_Helper_PaginationControl
-  * for more details.  Default 'Sliding'.  
+  * for more details.  Default 'Sliding'.
  *      'partial_file' (string) View script to use to render the pagination HTML.
  * Default is 'common/pagination_control.php'.
  *      'page_range' (integer) See Zend_Paginator::setPageRange() for details.
@@ -416,24 +416,24 @@ function nav(array $links, $maxDepth = 0)
  * the 'per_page' key of the 'pagination' array.
  * @return string HTML for the pagination links.
  */
-function pagination_links($options = array('scrolling_style' => null, 
-                                     'partial_file'    => null, 
-                                     'page_range'      => null, 
-                                     'total_results'   => null, 
-                                     'page'            => null, 
+function pagination_links($options = array('scrolling_style' => null,
+                                     'partial_file'    => null,
+                                     'page_range'      => null,
+                                     'total_results'   => null,
+                                     'page'            => null,
                                      'per_page'        => null))
 {
     if (Zend_Registry::isRegistered('pagination')) {
         // If the pagination variables are registered, set them for local use.
         $p = Zend_Registry::get('pagination');
-	} else {
-        // If the pagination variables are not registered, set required defaults 
+    } else {
+        // If the pagination variables are not registered, set required defaults
         // arbitrarily to avoid errors.
-        $p = array('total_results'   => 1, 
-                   'page'            => 1, 
+        $p = array('total_results'   => 1,
+                   'page'            => 1,
                    'per_page'        => 1);
     }
-    
+
     // Set preferred settings.
     $scrollingStyle   = $options['scrolling_style'] ? $options['scrolling_style']     : 'Sliding';
     $partial          = $options['partial_file']    ? $options['partial_file']        : 'common/pagination_control.php';
@@ -441,17 +441,17 @@ function pagination_links($options = array('scrolling_style' => null,
     $totalCount       = $options['total_results']   ? (int) $options['total_results'] : (int) $p['total_results'];
     $pageNumber       = $options['page']            ? (int) $options['page']          : (int) $p['page'];
     $itemCountPerPage = $options['per_page']        ? (int) $options['per_page']      : (int) $p['per_page'];
-    
+
     // Create an instance of Zend_Paginator.
     $paginator = Zend_Paginator::factory($totalCount);
-    
+
     // Configure the instance.
     $paginator->setCurrentPageNumber($pageNumber)
               ->setItemCountPerPage($itemCountPerPage)
               ->setPageRange($pageRange);
-    
-    return __v()->paginationControl($paginator, 
-                                    $scrollingStyle, 
+
+    return __v()->paginationControl($paginator,
+                                    $scrollingStyle,
                                     $partial);
 }
 
@@ -486,7 +486,7 @@ function public_nav(array $navArray, $navType=null, $maxDepth = 0)
  * Alias for public_nav($array, 'main'). This is to avoid potential typos so
  *  that all plugins can count on having at least a 'main' navigation filter in
  *  the public themes.
- * 
+ *
  * @since 0.10
  * @param array $navArray
  * @param integer|null $maxDepth
@@ -499,9 +499,9 @@ function public_nav_main(array $navArray, $maxDepth = 0)
 }
 
 /**
- * Alias for public_nav($array, 'items'). Provides a navigation and filter for 
+ * Alias for public_nav($array, 'items'). Provides a navigation and filter for
  * the items/browse page.
- * 
+ *
  * @since 1.3
  * @param array $navArray
  * @param integer|null $maxDepth
@@ -525,10 +525,10 @@ function public_nav_items(array $navArray, $maxDepth = 0)
  * @param array $tagAttributes An array of tag attributes for the link.
  */
 function link_to_items_atom($text = null, $params=array(), $tagAttributes=array('class' => 'atom'))
-{	
+{
     if (!$text) {
         $text = __('Atom');
     }
-	$tagAttributes['href'] = html_escape(items_output_uri('atom', $params));
-	return '<a ' . _tag_attributes($tagAttributes) . '>' . $text . '</a>';
+    $tagAttributes['href'] = html_escape(items_output_uri('atom', $params));
+    return '<a ' . _tag_attributes($tagAttributes) . '>' . $text . '</a>';
 }
