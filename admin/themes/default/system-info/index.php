@@ -5,16 +5,20 @@ head(array('title' => $title, 'bodyclass' => 'system-info')); ?>
 <h1><?php echo $title; ?></h1>
 
 <div id="primary">
-    <?php echo flash(); ?>
+<?php echo flash(); ?>
+
 <pre id="info-field">
-<?php foreach ($info as $category => $entries): ?>
-<?php echo html_escape(__($category)) . ':'; ?>
+<?php
+foreach ($info as $category => $entries) {
+    echo html_escape(__($category)) . "\n";
 
-<?php foreach ($entries as $name => $value): ?>
-<?php printf("    %-20s%s", html_escape($name) . ':', html_escape($value)); ?>
-<?php endforeach; ?>
+    foreach ($entries as $name => $value) {
+        printf("    %-20s%s\n", html_escape($name) . ':', html_escape($value));
+    }
 
-<?php endforeach; ?>
+    echo "\n";
+}
+?>
 </pre>
 </div>
 
