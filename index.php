@@ -25,5 +25,4 @@ $app->getBootstrap()->setOptions(array(
         )
     )
 ));
-// var_dump($app->getBootstrap());exit;
 $app->initialize()->run();

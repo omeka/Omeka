@@ -357,8 +357,6 @@ class ItemType extends Omeka_Record
         } else if (is_string($element) || is_integer($element)) {
             $elementId = (string) $element;
         } else {
-            var_dump($element);
-
             throw new Omeka_Record_Exception(__('Invalid parameter. The hasElement function requires either an element object or an element id to determine if an item type has an element.'));
         }
         $db = $this->getDb();
