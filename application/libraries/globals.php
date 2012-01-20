@@ -805,11 +805,19 @@ function plugin_is_active($name, $version = null, $compOperator = '>=')
  */
 function __($string)
 {
-    try {
-        $translate = Zend_Registry::get('Zend_Translate');
+    // Avoid getting the translate object more than once.
+    static $translate;
+
+    if (!isset($translate)) {
+        try {
+            $translate = Zend_Registry::get('Zend_Translate');
+        } catch (Zend_Exception $e) {
+            $translate = false;
+        }
+    }
+
+    if ($translate) {
         $string = $translate->translate($string);
-    } catch (Zend_Exception $e) {
-        // Skip translation if we can't load Zend_Translate object.
     }
 
     $args = func_get_args();
