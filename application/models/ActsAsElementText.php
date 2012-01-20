@@ -172,13 +172,11 @@ class ActsAsElementText extends Omeka_Record_Mixin
     private function _loadElements($reload = false)
     {
         $recordType = $this->_getRecordType();
-        assert('is_string($recordType)');
         if (!array_key_exists($recordType, self::$_elementsByRecordType) || $reload) {
             $elements = $this->getElements();
             self::$_elementsByRecordType[$recordType] = $elements;
         } else {
             $elements = self::$_elementsByRecordType[$recordType];
-            assert('is_array($elements) && !empty($elements)');
         }
         
         $this->_elementsByNaturalOrder = $elements;

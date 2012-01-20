@@ -245,7 +245,6 @@ abstract class Omeka_Record implements ArrayAccess
         }
         
         foreach ($this->_mixins as $k => $mixin) {
-            assert('$mixin instanceof Omeka_Record_Mixin');            
             if (method_exists($mixin, $method)) {
                 $methodFound = true;
                 $res = call_user_func_array(array($mixin, $method), $args);
