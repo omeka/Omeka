@@ -284,8 +284,10 @@ function get_specific_plugin_hook_output()
  */
 function get_plugin_broker()
 {
-    if (Zend_Registry::isRegistered('pluginbroker')) {
+    try {
         return Zend_Registry::get('pluginbroker');
+    } catch (Exception $e) {
+        return null;
     }
 }
 
