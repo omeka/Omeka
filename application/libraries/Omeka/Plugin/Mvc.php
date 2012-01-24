@@ -83,7 +83,11 @@ class Omeka_Plugin_Mvc
     public function getModuleViewScriptDirs($moduleName=null)
     {
         if ($moduleName) {
-            return $this->_pluginViewDirs[$moduleName];
+            if (array_key_exists($moduleName, $this->_pluginViewDirs)) {
+                return $this->_pluginViewDirs[$moduleName];
+            } else {
+                return null;
+            }
         }
         return $this->_pluginViewDirs;
     }
