@@ -760,7 +760,10 @@ class Omeka_View_Helper_Media
         $wrapper = !empty($wrapperAttributes) ? '<div ' . _tag_attributes($wrapperAttributes) . '>' : ''; 
         $html = !empty($wrapper) ? $wrapper . $html . "</div>" : $html;
         
-        return $html;
+        $filterName = 'file_' . Inflector::underscore($callback) . '_display';
+        $filterName = str_replace('display_display', 'display', $filterName); // Avoid creating a 'file_default_display_display' filter name. 
+
+        return apply_filters($filterName, $html, $file, $options, $wrapperAttributes);
     }
     
     private function _getFileExtension($file)
