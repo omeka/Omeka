@@ -158,7 +158,8 @@ class Omeka_View_Helper_Media
     static protected $_callbackOptions = array(
         'defaultDisplay'=>array(
             'linkToFile'=>true,
-            'linkToMetadata'=>false
+            'linkToMetadata'=>false,
+            'linkText' => null, 
             ),
         'image'=>array(
             'imageSize'=>'square_thumbnail',
@@ -352,7 +353,11 @@ class Omeka_View_Helper_Media
      */
     public function defaultDisplay($file, array $options=array())
     {
-        return $this->_linkToFile(null, $file, $options);   
+        $html = null;
+        if ($options['linkText']) {
+            $html = $options['linkText'];
+        }
+        return $this->_linkToFile($html, $file, $options);
     }
     
     /**
