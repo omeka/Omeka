@@ -224,11 +224,8 @@ abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstrac
     {
         // Build the name of the filter to use. This will end up looking like: 
         // array('Display', 'Item', 'Dublin Core', 'Title') or something similar.
-        $filterName = array('Display', get_class($record));
-        if (null === $elementName) {
-            $filterName[] = $elementSetName;
-        } else {
-            $filterName[] = $elementSetName;
+        $filterName = array('Display', get_class($record), $elementSetName);
+        if ($elementName !== null) {
             $filterName[] = $elementName;
         }
 
