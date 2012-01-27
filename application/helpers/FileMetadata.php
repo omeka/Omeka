@@ -50,53 +50,37 @@ class Omeka_View_Helper_FileMetadata extends Omeka_View_Helper_RecordMetadata
         switch (strtolower($fieldName)) {
             case 'id':
                 return $record->id;
-                break;
             case 'archive filename':
                 return $record->archive_filename;
-                break;
             case 'original filename':
                 return $record->original_filename;
-                break;
             case 'size':
                 return $record->size;
-                break;
             case 'mime type':
                 return $record->getMimeType();
-                break;
             case 'date added':
                 return $record->added;
-                break;
             case 'date modified':
                 return $record->modified;
-                break;
             case 'authentication':
                 return $record->authentication;
-                break;
             // 'MIME Type OS' and 'File Type OS' to be deprecated?
             case 'mime type os':
                 return $record->mime_os;
-                break;
             case 'file type os':
                 return $record->type_os;
-                break;
             case 'uri':
                 return $this->_getUri($record, 'archive');
-                break;
             case 'fullsize uri':
                 return $this->_getUri($record, 'fullsize');
-                break;
             case 'thumbnail uri':
                 return $this->_getUri($record, 'thumbnail');
-                break;
             case 'square thumbnail uri':
                 return $this->_getUri($record, 'square_thumbnail');
-                break;
             case 'permalink':
                 return abs_uri(array('controller'=>'files', 'action'=>'show', 'id'=>$record->id));
-                break;
             default:
                 throw new Exception(__("%s is an invalid special value.", $specialValue));
-                break;
         }
     }
 
