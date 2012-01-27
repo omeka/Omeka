@@ -416,12 +416,7 @@ function nav(array $links, $maxDepth = 0)
  * the 'per_page' key of the 'pagination' array.
  * @return string HTML for the pagination links.
  */
-function pagination_links($options = array('scrolling_style' => null,
-                                     'partial_file'    => null,
-                                     'page_range'      => null,
-                                     'total_results'   => null,
-                                     'page'            => null,
-                                     'per_page'        => null))
+function pagination_links($options = array())
 {
     if (Zend_Registry::isRegistered('pagination')) {
         // If the pagination variables are registered, set them for local use.
@@ -435,12 +430,12 @@ function pagination_links($options = array('scrolling_style' => null,
     }
 
     // Set preferred settings.
-    $scrollingStyle   = $options['scrolling_style'] ? $options['scrolling_style']     : 'Sliding';
-    $partial          = $options['partial_file']    ? $options['partial_file']        : 'common/pagination_control.php';
-    $pageRange        = $options['page_range']      ? (int) $options['page_range']    : 5;
-    $totalCount       = $options['total_results']   ? (int) $options['total_results'] : (int) $p['total_results'];
-    $pageNumber       = $options['page']            ? (int) $options['page']          : (int) $p['page'];
-    $itemCountPerPage = $options['per_page']        ? (int) $options['per_page']      : (int) $p['per_page'];
+    $scrollingStyle   = isset($options['scrolling_style']) ? $options['scrolling_style']     : 'Sliding';
+    $partial          = isset($options['partial_file'])    ? $options['partial_file']        : 'common/pagination_control.php';
+    $pageRange        = isset($options['page_range'])      ? (int) $options['page_range']    : 5;
+    $totalCount       = isset($options['total_results'])   ? (int) $options['total_results'] : (int) $p['total_results'];
+    $pageNumber       = isset($options['page'])            ? (int) $options['page']          : (int) $p['page'];
+    $itemCountPerPage = isset($options['per_page'])        ? (int) $options['per_page']      : (int) $p['per_page'];
 
     // Create an instance of Zend_Paginator.
     $paginator = Zend_Paginator::factory($totalCount);
