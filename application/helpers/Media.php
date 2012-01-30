@@ -765,7 +765,7 @@ class Omeka_View_Helper_Media
         $wrapper = !empty($wrapperAttributes) ? '<div ' . _tag_attributes($wrapperAttributes) . '>' : ''; 
         $html = !empty($wrapper) ? $wrapper . $html . "</div>" : $html;
         
-        return $html;
+        return apply_filters('display_file', $html, $file, $callback, $options, $wrapperAttributes);
     }
     
     private function _getFileExtension($file)
