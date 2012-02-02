@@ -214,6 +214,10 @@ msgstr ""
 msgid "Codec"
 msgstr ""
 
+# Format (Legacy) Metadata element set
+msgid "Format (Legacy) Metadata"
+msgstr ""
+
 # User role: Super
 msgid "Super"
 msgstr ""
