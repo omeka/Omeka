@@ -24,6 +24,9 @@ class Omeka_Output_Xml_File extends Omeka_Output_Xml_Abstract
     protected function _buildNode()
     {
         $fileElement = $this->_createElement('file', null, $this->_record->id);
+        if ($this->_record->order) {
+            $fileElement->setAttribute('order', $this->_record->order);
+        }
         $srcElement = $this->_createElement('src', $this->_record->getWebPath(), 
             null, $fileElement);
         $authenticationElement = $this->_createElement('authentication', 

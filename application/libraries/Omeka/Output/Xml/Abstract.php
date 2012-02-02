@@ -29,7 +29,7 @@ abstract class Omeka_Output_Xml_Abstract extends Omeka_Output_Xml
     /**
      * Omeka-XML XML Schema URI.
      */
-    const XMLNS_SCHEMALOCATION = 'http://omeka.org/schemas/omeka-xml/v4/omeka-xml-4-0.xsd';
+    const XMLNS_SCHEMALOCATION = 'http://omeka.org/schemas/omeka-xml/v4/omeka-xml-4-1.xsd';
     
     /**
      * This class' contextual record(s).
