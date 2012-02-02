@@ -3,19 +3,21 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-#   <martin.sauter@gmx.ch>, 2011, 2012.
+# Alexios Dimitropoulos <alexios.dimitropoulos@gmail.com>, 2012.
+# stauros gkinis <gkista@yahoo.gr>, 2012.
+# Stoitsis Giannis <>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2011-11-22 16:18-0500\n"
-"PO-Revision-Date: 2012-01-10 19:49+0000\n"
-"Last-Translator: msauter <martin.sauter@gmx.ch>\n"
-"Language-Team: German (Germany) (http://www.transifex.net/projects/p/omeka/team/de_DE/)\n"
+"PO-Revision-Date: 2012-02-01 12:48+0000\n"
+"Last-Translator: Stoitsis Giannis <>\n"
+"Language-Team: Greek (Greece) (http://www.transifex.net/projects/p/omeka/team/el_GR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de_DE\n"
+"Language: el_GR\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 # Dublin Core description
@@ -24,25 +26,26 @@ msgid ""
 " resources, including items, files, collections, exhibits, and entities. See"
 " http://dublincore.org/documents/dces/."
 msgstr ""
-"Der Satz der Dublin Core Metadaten-Elemente. Diese Elemente sind allen "
-"Omeka-Ressourcen gemeinsam, also Objekten, Dateien, Sammlungen, "
-"Ausstellungen und Entitäten. Siehe http://dublincore.org/documents/dces/."
+"Το σύνολο στοιχείων μεταδεδομένων Dublin Core. Τα συγκεκριμένα στοιχεία "
+"μεταδεδομένων είναι κοινά για όλα τα αντικείμενα του OMEKA, "
+"συμπεριλαμβανομένου αρχείων, συλλογών, εκθεμάτων και οντοτήτων.Δείτε "
+"http://dublincore.org/documents/dces/."
 
 # #-#-#-#-#  Omeka.base.pot (Omeka 1.5)  #-#-#-#-#
 # Dublin Core: Title element
 #: admin/themes/default/items/browse.php:129
 msgid "Title"
-msgstr "Titel"
+msgstr "Τίτλος"
 
 # #-#-#-#-#  Omeka.base.pot (Omeka 1.5)  #-#-#-#-#
 # Dublin Core: Creator element
 #: admin/themes/default/items/browse.php:130
 msgid "Creator"
-msgstr "Ersteller"
+msgstr "Δημιουργός"
 
 # Dublin Core: Subject element
 msgid "Subject"
-msgstr "Thema"
+msgstr "Θέμα"
 
 # #-#-#-#-#  Omeka.base.pot (Omeka 1.5)  #-#-#-#-#
 # Dublin Core: Description element
@@ -57,71 +60,71 @@ msgstr "Thema"
 #: application/views/scripts/collections/browse.php:15
 #: application/views/scripts/collections/show.php:7
 msgid "Description"
-msgstr "Beschreibung"
+msgstr "Περιγραφή"
 
 # Dublin Core: Publisher element
 msgid "Publisher"
-msgstr "Herausgeber"
+msgstr "Εκδότης"
 
 # Dublin Core: Contributor element
 # User role: contributor
 msgid "Contributor"
-msgstr "Mitarbeiter"
+msgstr "Συνεισφέρων"
 
 # Dublin Core: Date element
 msgid "Date"
-msgstr "Datum"
+msgstr "Ημερομηνία"
 
 # #-#-#-#-#  Omeka.base.pot (Omeka 1.5)  #-#-#-#-#
 # Dublin Core: Type element
 #: admin/themes/default/items/browse.php:131
 msgid "Type"
-msgstr "Typ"
+msgstr "Τύπος"
 
 # Dublin Core: Format element
 msgid "Format"
-msgstr "Format"
+msgstr "Μορφή"
 
 # Dublin Core: Identifier element
 msgid "Identifier"
-msgstr "Identifikator"
+msgstr "Αναγνωριστικό"
 
 # Dublin Core: Source element
 msgid "Source"
-msgstr "Quelle"
+msgstr "Πηγή"
 
 # Dublin Core: Language element
 msgid "Language"
-msgstr "Sprache"
+msgstr "Γλώσσα"
 
 # Dublin Core: Relation element
 msgid "Relation"
-msgstr "Beziehung"
+msgstr "Σχέση"
 
 # Dublin Core: Coverage element
 msgid "Coverage"
-msgstr "Abdeckung"
+msgstr "Κάλυψη"
 
 # Dublin Core: Rights element
 msgid "Rights"
-msgstr "Rechte"
+msgstr "Δικαιώματα"
 
 # Item Type Metadata
 msgid "Item Type Metadata"
-msgstr "Metadaten des Objekttyps"
+msgstr "Τύπος Μεταδεδομένων Αντικειμένου"
 
 # Item Type Metadata description
 msgid ""
 "The item type metadata element set, consisting of all item type elements "
 "bundled with Omeka and all item type elements created by an administrator."
 msgstr ""
-"Der Satz der Metadaten-Elemente für Objekte, bestehend aus allen Elementen "
-"für Objekte, welche entweder mit Omeka ausgeliefert oder durch einen "
-"Administrator angelegt wurden."
+"Το σύνολο στοιχείων μεταδεδομένων τύπος αντικειμένου, αποτελείται από όλα τα"
+" στοιχεία τύπου αντικειμένου που περιέχονται στο Omeka και όλα τα στοιχεία "
+"τύπου αντικειμένου που έχουν δημιουργηθεί από τον διαχειριστή."
 
 # Omeka Legacy File
 msgid "Omeka Legacy File"
-msgstr "Omeka Legacy File"
+msgstr "Αρχείο Omeka Legacy"
 
 # Omeka Legacy File description
 msgid ""
@@ -130,22 +133,22 @@ msgid ""
 "elements are common to all Omeka files. This set may be deprecated in future"
 " versions."
 msgstr ""
-"Das Set der Metadaten-Elemente, welches in früheren Omeka-Versionen "
-"zusätzlich zum Set der Dublin-Core-Elemente in der Tabelle `files` enthalten"
-" war. Diese Elemente sind allen Omeka-Dateien gemeinsam. Dieses Set kann in "
-"zukünftigen Omeka-Versionen entfallen."
+"Το σύνολο των στοιχείων μεταδεδομένων που μαζί με το Dublin Core σύνολο "
+"στοιχείων συμπεριλήφθηκε στον πίνακα `files` σε προηγούμενες εκδόσεις του "
+"Omeka. Αυτά τα στοιχεία είναι κοινά σε όλους τους φακέλους του Omeka. Αυτό "
+"το σύνολο μπορεί να είναι παρωχημένο σε μελλοντικές εκδόσεις."
 
 # Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
-msgstr "Weiterer Urheber"
+msgstr "Επιπλέον δημιουργός"
 
 # Omeka Legacy File: Transcriber element
 msgid "Transcriber"
-msgstr "Transkribierer"
+msgstr "Αντιγραφέας"
 
 # Omeka Legacy File: Producer element
 msgid "Producer"
-msgstr "Produzent"
+msgstr "Παραγωγός"
 
 # Omeka Legacy File: Render Device element
 msgid "Render Device"
@@ -157,64 +160,64 @@ msgstr "Render Details"
 
 # Omeka Legacy File: Capture Date element
 msgid "Capture Date"
-msgstr "Aufnahmedatum"
+msgstr "Ημερομηνία καταγραφής"
 
 # Omeka Legacy File: Capture Device element
 msgid "Capture Device"
-msgstr "Aufnahmegerät"
+msgstr "Συσκευή καταγραφής"
 
 # Omeka Legacy File: Capture Details element
 msgid "Capture Details"
-msgstr "Aufnahmedetails"
+msgstr "Λεπτομέρειες καταγραφής"
 
 # Omeka Legacy File: Change History element
 msgid "Change History"
-msgstr "Änderungsverlauf"
+msgstr "Ιστορικό αλλαγών"
 
 # Omeka Legacy File: Watermark element
 msgid "Watermark"
-msgstr "Wasserzeichen"
+msgstr "Watermark"
 
 # Omeka Legacy File: Encryption element
 msgid "Encryption"
-msgstr "Verschlüsselung"
+msgstr "Κρυπτογράφηση"
 
 # Omeka Legacy File: Compression element
 msgid "Compression"
-msgstr "Kompression"
+msgstr "Συμπίεση"
 
 # Omeka Legacy File: Post Processing element
 msgid "Post Processing"
-msgstr "Nachbearbeitung"
+msgstr "Post Processing"
 
 # Omeka Image File
 msgid "Omeka Image File"
-msgstr "Omeka Bilddatei"
+msgstr "Αρχείο εικόνας του OMEKA"
 
 # Omeka Image File description
 msgid ""
 "The metadata element set that was included in the `files_images` table in "
 "previous versions of Omeka. These elements are common to all image files."
 msgstr ""
-"Der Satz der Metadatenelemente war in früheren Omeka-Versionen in der "
-"Tabelle `files_images` integriert. Diese Elemente sind allen Bilddateien "
-"gemeinsam."
+"Το σύνολο των στοιχείων μεταδεδομένων που συμπεριλήφθηκε στον πίνακα "
+"`files_images` σε προηγούμενες εκδόσεις του Omeka. Αυτά τα στοιχεία είναι "
+"κοινά σε όλα τα αρχεία εικόνων."
 
 # Omeka Image File: Width element
 msgid "Width"
-msgstr "Breite"
+msgstr "Πλάτος"
 
 # Omeka Image File: Height element
 msgid "Height"
-msgstr "Höhe"
+msgstr "Ύψος"
 
 # Omeka Image File: Bit Depth element
 msgid "Bit Depth"
-msgstr "Bit-Tiefe"
+msgstr "Bit Depth"
 
 # Omeka Image File: Channels element
 msgid "Channels"
-msgstr "Kanäle"
+msgstr "Κανάλια"
 
 # Omeka Image File: Exif String element
 msgid "Exif String"
@@ -234,60 +237,60 @@ msgstr "IPTC Array"
 
 # Omeka Video File
 msgid "Omeka Video File"
-msgstr "Omeka Video-Datei"
+msgstr "Omeka αρχείο βίντεο"
 
 # Omeka Video File description
 msgid ""
 "The metadata element set that was included in the `files_videos` table in "
 "previous versions of Omeka. These elements are common to all video files."
 msgstr ""
-"Der Satz der Metadatenelemente war in früheren Omeka-Versionen in der "
-"Tabelle `files_videos` integriert. Diese Elemente sind allen Videodateien "
-"gemeinsam."
+"Τα στοιχείων μεταδεδομένων που περιλαμβάνονται στον πίνακα `files_videos` σε"
+" προηγούμενες εκδόσεις του Omeka. Αυτά τα στοιχεία είναι κοινά σε όλα τα "
+"αρχεία βίντεο"
 
 # Omeka Video File: Bitrate element
 msgid "Bitrate"
-msgstr "Bit-Rate"
+msgstr "Bitrate"
 
 # Omeka Video File: Duration element
 msgid "Duration"
-msgstr "Dauer"
+msgstr "Διάρκεια"
 
 # Omeka Video File: Sample Rate element
 msgid "Sample Rate"
-msgstr "Sample-Rate"
+msgstr "Ρυθμός Δείγματος"
 
 # Omeka Video File: Codec element
 msgid "Codec"
-msgstr "Codec"
+msgstr "Κωδικοποιητής"
 
 # User role: Super
 msgid "Super"
-msgstr "Super-User"
+msgstr "Super"
 
 # User role: Admin
 msgid "Admin"
-msgstr "Administrationsbereich"
+msgstr "Διαχειριστής"
 
 # User role: Researcher
 msgid "Researcher"
-msgstr "Forscher"
+msgstr "Researcher"
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:6
 msgid "Add a Collection"
-msgstr "Sammlung hinzufügen"
+msgstr "Προσθήκη συλλογής"
 
 #: admin/themes/default/collections/add.php:9
 msgid "Save Collection"
-msgstr "Sammlung speichern"
+msgstr "Αποθήκευση συλλογής"
 
 #: admin/themes/default/collections/browse.php:2
 #: application/views/scripts/collections/browse.php:2
 #: application/views/scripts/common/footer.php:6
 #: application/views/scripts/functions.php:98
 msgid "Browse Collections"
-msgstr "Sammlungen durchsuchen"
+msgstr "Περιήγηση συλλογών"
 
 #: admin/themes/default/collections/browse.php:4
 #: admin/themes/default/element-sets/browse.php:4
@@ -310,34 +313,34 @@ msgstr "ID"
 #: admin/themes/default/element-sets/browse.php:12
 #: admin/themes/default/item-types/form.php:20
 msgid "Name"
-msgstr "Name"
+msgstr "Όνομα"
 
 #: admin/themes/default/collections/browse.php:20
 #: admin/themes/default/collections/show.php:22
 msgid "Collectors"
-msgstr "Sammler"
+msgstr "Συλλογές"
 
 #: admin/themes/default/collections/browse.php:21
 #: admin/themes/default/files/show.php:24
 #: admin/themes/default/items/browse.php:134
 #: application/views/scripts/files/show.php:57
 msgid "Date Added"
-msgstr "hinzugefügt am"
+msgstr "Ημερομηνία προσθήκης"
 
 #: admin/themes/default/collections/browse.php:22
 #: admin/themes/default/collections/show.php:39
 #: admin/themes/default/item-types/show.php:42
 msgid "Total Number of Items"
-msgstr "Anzahl Objekte total"
+msgstr "Συνολικός αριθμός αντικειμένων"
 
 #: admin/themes/default/collections/browse.php:25
 #: admin/themes/default/item-types/browse.php:17
 msgid "Edit?"
-msgstr "Bearbeiten?"
+msgstr "Επεξεργασία?"
 
 #: admin/themes/default/collections/browse.php:44
 msgid "No collectors"
-msgstr "Keine Sammler"
+msgstr "Χωρίς συλλέκτες"
 
 #: admin/themes/default/collections/browse.php:57
 #: admin/themes/default/items/browse.php:150
@@ -345,33 +348,33 @@ msgstr "Keine Sammler"
 #: admin/themes/default/users/browse.php:43
 #: admin/themes/default/users/browse.php:58
 msgid "Edit"
-msgstr "Bearbeiten"
+msgstr "Επεξεργασία"
 
 #: admin/themes/default/collections/browse.php:68
 msgid "There are no collections on this page."
-msgstr "Es existieren keine Sammlungen auf dieser Seite."
+msgstr "Δεν υπάρχουν συλλογές σε αυτή τη σελίδα"
 
 #: admin/themes/default/collections/browse.php:68
 msgid "View All Collections"
-msgstr "Alle Sammlungen anzeigen"
+msgstr "Προβολή όλων των συλλογών"
 
 #: admin/themes/default/collections/browse.php:71
 msgid "Add a collection."
-msgstr "Sammlung hinzufügen."
+msgstr "Προσθήκη συλλογής"
 
 #: admin/themes/default/collections/browse.php:71
 msgid "There are no collections in your archive."
-msgstr "Es existieren keine Sammlungen in Ihrem Archiv."
+msgstr "Δεν υπάρχουν συλλογές στο αρχείο σου."
 
 #: admin/themes/default/collections/edit.php:8
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Edit Collection #%s"
-msgstr "Sammlung #%s bearbeiten"
+msgstr "Επεξεργασία Συλλογής #%s"
 
 #: admin/themes/default/collections/edit.php:14
 msgid "Delete this Collection"
-msgstr "Diese Sammlung löschen"
+msgstr "Διαγραφή συλλογής"
 
 #: admin/themes/default/collections/edit.php:20
 #: admin/themes/default/files/edit.php:41
@@ -384,30 +387,32 @@ msgstr "Diese Sammlung löschen"
 #: application/forms/SecuritySettings.php:70
 #: application/forms/ThemeConfiguration.php:67
 msgid "Save Changes"
-msgstr "Änderungen übernehmen"
+msgstr "Αποθήκευση αλλαγών"
 
 #: admin/themes/default/collections/form.php:4
 msgid "Collection Details"
-msgstr "Sammlungsdetails"
+msgstr "Λεπτομέρειες Συλλογής"
 
 #: admin/themes/default/collections/form.php:4
 #: admin/themes/default/item-types/form.php:17
 #: install/views/scripts/index/index.phtml:13
 msgid "Required Fields"
-msgstr "Pflichtfelder"
+msgstr "Υποχρεωτικά πεδία"
 
 #: admin/themes/default/collections/form.php:7
 msgid "Collection Name"
-msgstr "Sammlungsname"
+msgstr "Όνομα Συλλογής"
 
 #: admin/themes/default/collections/form.php:15
 msgid "Collection Description"
-msgstr "Sammlungsbeschreibung"
+msgstr "Περιγραφή Συλλογής"
 
 #: admin/themes/default/collections/form.php:25
 msgid ""
 "List collectors for this collection (optional - enter one name per line)"
-msgstr "Sammler für diese Sammlung auflisten (optional - ein Name pro Zeile)"
+msgstr ""
+"Καταχωρήστε συλλέκτες για αυτή τη συλλογή (προαιρετικό - εισάγετε ένα όνομα "
+"ανά γραμμή)"
 
 #: admin/themes/default/collections/form.php:35
 #: admin/themes/default/collections/form.php:37
@@ -417,12 +422,12 @@ msgstr "Sammler für diese Sammlung auflisten (optional - ein Name pro Zeile)"
 #: admin/themes/default/items/browse.php:177
 #: admin/themes/default/items/form.php:37
 msgid "Public"
-msgstr "Öffentlich"
+msgstr "Δημόσιο"
 
 #: admin/themes/default/collections/form.php:37
 #: admin/themes/default/items/batch-edit.php:43
 msgid "Not Public"
-msgstr "Nicht öffentlich"
+msgstr "Ιδιωτικό"
 
 #: admin/themes/default/collections/form.php:42
 #: admin/themes/default/collections/form.php:44
@@ -432,55 +437,55 @@ msgstr "Nicht öffentlich"
 #: admin/themes/default/items/browse.php:182
 #: admin/themes/default/items/form.php:43
 msgid "Featured"
-msgstr "Hervorgehoben"
+msgstr "Προτεινόμενη"
 
 #: admin/themes/default/collections/form.php:44
 #: admin/themes/default/items/batch-edit.php:55
 msgid "Not Featured"
-msgstr "Nicht hervorgehoben"
+msgstr "Μη προτεινόμενη"
 
 #: admin/themes/default/collections/show.php:11
 #: admin/themes/default/items/show.php:14
 msgid "View Public Page"
-msgstr "Öffentliche Seite anzeigen"
+msgstr "Δείτε τη Δημόσια Σελίδα"
 
 #: admin/themes/default/collections/show.php:13
 msgid "Edit this Collection"
-msgstr "Diese Sammlung bearbeiten"
+msgstr "Επεξεργασία Συλλογής"
 
 #: admin/themes/default/collections/show.php:27
 msgid "No collectors."
-msgstr "Keine Sammler."
+msgstr "Χωρίς συλλέκτες"
 
 #: admin/themes/default/collections/show.php:33
 #: admin/themes/default/item-types/show.php:30
 #: application/views/scripts/index.php:35
 msgid "Recently Added Items"
-msgstr "Kürzlich hinzugefügte Objekte"
+msgstr "Αντικείμενα που έχουν προστεθεί πρόσφατα"
 
 #: admin/themes/default/common/footer.php:4
 msgid "Documentation"
-msgstr "Dokumentation"
+msgstr "Τεκμηρίωση"
 
 #: admin/themes/default/common/footer.php:4
 #: admin/themes/default/common/login-footer.php:4
 msgid "Powered by Omeka"
-msgstr "Erstellt mit Omeka"
+msgstr "Powered by Omeka"
 
 #: admin/themes/default/common/footer.php:4
 msgid "Support Forums"
-msgstr "Support-Forum"
+msgstr "Forums Υποστήριξης"
 
 #: admin/themes/default/common/footer.php:6
 #: admin/themes/default/common/login-footer.php:4
 #: admin/themes/default/plugins/plugin-info.php:65
 #, php-format
 msgid "Version %s"
-msgstr "Version %s"
+msgstr "Έκδοση %s"
 
 #: admin/themes/default/common/footer.php:9
 msgid "More information about your system"
-msgstr "Mehr Informationen über Ihr System"
+msgstr "Περισσότερες πληροφορίες για το σύστημά σου"
 
 #: admin/themes/default/common/header.php:5
 msgid "Omeka Admin"
@@ -488,39 +493,39 @@ msgstr "Omeka Admin"
 
 #: admin/themes/default/common/header.php:24
 msgid "Skip Navigation"
-msgstr "Navigation überspringen"
+msgstr "Παράβλεψη"
 
 #: admin/themes/default/common/header.php:33
 msgid "Log Out"
-msgstr "Abmelden"
+msgstr "Αποσύνδεση"
 
 #: admin/themes/default/common/header.php:33
 #, php-format
 msgid "Welcome, %s"
-msgstr "Willkommen, %s"
+msgstr "Καλώς ήλθατε, %s"
 
 #: admin/themes/default/common/header.php:36 admin/themes/default/index.php:58
 msgid "Settings"
-msgstr "Einstellungen"
+msgstr "Ρυθμίσεις"
 
 #: admin/themes/default/common/header.php:38
 msgid "View Public Site"
-msgstr "Öffentliche Website anzeigen"
+msgstr "Δείτε το Δημόσιο Διαδικτυακό Τόπο"
 
 #: admin/themes/default/common/primary-nav.php:5
 #: admin/themes/default/index.php:21
 #: admin/themes/default/items/batch-edit.php:14
 msgid "Items"
-msgstr "Objekte"
+msgstr "Αντικείμενα"
 
 #: admin/themes/default/common/primary-nav.php:6
 #: admin/themes/default/index.php:32
 msgid "Collections"
-msgstr "Sammlungen"
+msgstr "Συλλογές"
 
 #: admin/themes/default/common/primary-nav.php:7
 msgid "Item Types"
-msgstr "Objekttypen"
+msgstr "Τύποι αντικειμένων"
 
 #: admin/themes/default/common/primary-nav.php:8
 #: admin/themes/default/items/browse.php:166
@@ -528,11 +533,11 @@ msgstr "Objekttypen"
 #: application/views/scripts/items/browse.php:39
 #: application/views/scripts/items/show.php:26
 msgid "Tags"
-msgstr "Schlagwörter"
+msgstr "Tags"
 
 #: admin/themes/default/common/settings-nav.php:6
 msgid "General Settings"
-msgstr "Einstellungen &rsaquo; Allgemein"
+msgstr "Γενικές Ρυθμίσεις"
 
 #: admin/themes/default/common/settings-nav.php:8
 msgid "Plugins"
@@ -540,40 +545,40 @@ msgstr "Plugins"
 
 #: admin/themes/default/common/settings-nav.php:11
 msgid "Themes"
-msgstr "Themes"
+msgstr "Θέματα"
 
 #: admin/themes/default/common/settings-nav.php:14
 #: admin/themes/default/index.php:45
 msgid "Users"
-msgstr "Benutzer"
+msgstr "Χρήστες"
 
 #: admin/themes/default/common/settings-nav.php:17
 msgid "Element Sets"
-msgstr "Elementsätze"
+msgstr "Σύνολο στοιχείων"
 
 #: admin/themes/default/common/settings-nav.php:20
 msgid "Security Settings"
-msgstr "Sicherheitseinstellungen"
+msgstr "Ρυθμίσεις Ασφαλείας"
 
 #: admin/themes/default/common/tags-nav.php:3
 #: admin/themes/default/tags/browse.php:2
 msgid "Browse Tags"
-msgstr "Schlagwörter durchsuchen"
+msgstr "Πλοήγηση σε Tags"
 
 #: admin/themes/default/common/tags-nav.php:5
 #: admin/themes/default/tags/edit.php:2
 msgid "Edit Tag"
-msgstr "Schlagwort bearbeiten"
+msgstr "Επεξεργασία Tag"
 
 #: admin/themes/default/common/tags-nav.php:8
 #: admin/themes/default/tags/delete.php:2
 #: admin/themes/default/tags/delete.php:21
 msgid "Delete Tag"
-msgstr "Schlagwort löschen"
+msgstr "Διαγραφή Tag"
 
 #: admin/themes/default/element-sets/browse.php:2
 msgid "Browse Element Sets"
-msgstr "Element-Sets durchsuchen"
+msgstr "Πλοήγηση σε σύνολα στοιχείων"
 
 #: admin/themes/default/element-sets/browse.php:14
 #: admin/themes/default/items/batch-edit.php:101
@@ -582,32 +587,32 @@ msgstr "Element-Sets durchsuchen"
 #: admin/themes/default/users/browse.php:46
 #: application/helpers/FormFunctions.php:574
 msgid "Delete"
-msgstr "Löschen"
+msgstr "Διαγραφή"
 
 #: admin/themes/default/error/403.php:2
 msgid "403: Forbidden"
-msgstr "403: Verboten"
+msgstr "403: Δεν έχετε δικαίωμα πρόσβασης"
 
 #: admin/themes/default/error/403.php:9
 msgid "Sorry, you do not have permission to access this page."
 msgstr ""
-"Entschuldigung, aber Sie sind nicht berechtigt, auf diese Seite zuzugreifen."
+"Συγνώμη, αλλά δεν έχετε τα σωστά δικαιώματα για να έχετε πρόσβαση σε αυτή "
+"την σελίδα."
 
 #: admin/themes/default/error/403.php:12 admin/themes/default/error/404.php:12
 #: admin/themes/default/error/405.php:10
 msgid "site administrator"
-msgstr "Website-Administrator"
+msgstr "Διαχειριστής ιστοσελίδας"
 
 #: admin/themes/default/error/403.php:13
 #, php-format
 msgid "If you think you should have permission, try contacting the %s."
 msgstr ""
-"Falls Sie der Meinung sind, dass Sie diese Berechtigung haben sollten, "
-"kontaktieren Sie bitte den %s."
+"Αν πιστεύετε ότι θα πρέπει να έχετε πρόσβαση, επικοινωνήστε με τον %s."
 
 #: admin/themes/default/error/404.php:2
 msgid "404: Page Not Found"
-msgstr "404: Seite nicht gefunden"
+msgstr "404: Δεν Βρέθηκε η Σελίδα"
 
 #: admin/themes/default/error/404.php:9
 msgid ""
@@ -615,26 +620,26 @@ msgid ""
 "this happens. Below is a quick break-down of the items, collections, and "
 "exhibits on this site."
 msgstr ""
-"Sie haben versucht, eine Seite aufzurufen, die offenbar nicht existiert. "
-"Dies kann vorkommen. Nachstehend finden Sie eine Aufstellung der Objekte, "
-"Sammlungen und Ausstellungen auf dieser Website."
+"Προσπαθήσατε να επισκεφθείτε μια σελίδα που δεν υπάρχει. Μερικές φορές αυτό "
+"μπορεί να συμβεί. Παρακάτω μπορείτε να δείτε μια σύντομη παρουσίαση "
+"αντικειμένων, συλλογών και εκθέσεων σε αυτή τη σελίδα."
 
 #: admin/themes/default/error/404.php:13
 #, php-format
 msgid "If this does not help, try contacting the %s."
-msgstr "Falls dies nicht hilft kontaktieren Sie bitte den %s."
+msgstr "Αν αυτό δεν βοηθήσει επικοινωνήστε με τον %s."
 
 #: admin/themes/default/error/404.php:15 admin/themes/default/index.php:88
 msgid "Recent Items"
-msgstr "Neuste Objekte"
+msgstr "Πρόσφατα Αντικείμενα"
 
 #: admin/themes/default/error/404.php:25
 msgid "Recent Collections"
-msgstr "Neuste Sammlungen"
+msgstr "Πρόσφατες Συλλογές"
 
 #: admin/themes/default/error/405.php:2
 msgid "405: Method Not Allowed"
-msgstr "405: Nicht zulässige Methode"
+msgstr "405: Method Not Allowed"
 
 #: admin/themes/default/error/405.php:11
 #, php-format
@@ -642,18 +647,18 @@ msgid ""
 "You must use a different method to access this URL. If you reached this page"
 " by following a link or clicking a button in Omeka, please contact the %s."
 msgstr ""
-"Sie müssen eine andere Methode benutzen, um diese URL aufzurufen. Falls Sie "
-"über einen Link oder einen Button in Omeka auf diese Seite gelangt sind, "
-"dann kontaktieren Sie bitte den %s."
+"Η πρόσβαση σε αυτό το URL γίνεται με άλλο τρόπο. Σε περίπτωση που ήρθατε σε "
+"αυτή τη σελίδα ακολουθώντας κάποιον σύνδεσμο ή πατώντας κάποιο κουμπί στο "
+"Omeka παρακαλούμε επικοινωνήστε με τον %s."
 
 #: admin/themes/default/files/edit.php:8
 #, php-format
 msgid "Edit File #%s"
-msgstr "Datei #%s bearbeiten"
+msgstr "Επεξεργασία Αρχείου #%s"
 
 #: admin/themes/default/files/edit.php:17
 msgid "Delete this File"
-msgstr "Diese Datei löschen"
+msgstr "Διαγραφή Αρχείου"
 
 #: admin/themes/default/files/edit.php:27
 #: application/views/scripts/functions.php:54
@@ -662,160 +667,160 @@ msgstr "Dublin Core"
 
 #: admin/themes/default/files/edit.php:32
 msgid "Format (Legacy) Metadata"
-msgstr "Format-Metadaten (Legacy)"
+msgstr "Μορφοποίηση (legacy) μεταδεδομένων"
 
 #: admin/themes/default/files/show.php:9
 #: application/views/scripts/files/show.php:9
 #, php-format
 msgid "File #%s"
-msgstr "Datei #%s"
+msgstr "Αρχείο #%s"
 
 #: admin/themes/default/files/show.php:15
 msgid "Edit this File"
-msgstr "Diese Datei bearbeiten"
+msgstr "Επεξεργασία αρχείου"
 
 #: admin/themes/default/files/show.php:23
 #: application/views/scripts/files/show.php:55
 msgid "File History"
-msgstr "Dateihistorie"
+msgstr "Ιστορικό Αρχείου"
 
 #: admin/themes/default/files/show.php:26
 #: application/views/scripts/files/show.php:61
 msgid "Date Modified"
-msgstr "Änderungsdatum"
+msgstr "Ημερομηνία τροποποίησης"
 
 #: admin/themes/default/files/show.php:28
 #: application/views/scripts/files/show.php:65
 msgid "Authentication"
-msgstr "Authentifizierung"
+msgstr "Πιστοποίηση"
 
 #: admin/themes/default/files/show.php:36
 msgid "Format Metadata"
-msgstr "Format-Metadaten"
+msgstr "Μορφοποίηση μεταδεδομένων"
 
 #: admin/themes/default/files/show.php:38
 #: application/views/scripts/files/show.php:23
 msgid "Archive Filename"
-msgstr "Dateiname des Archivs"
+msgstr "Archive όνομα αρχείου"
 
 #: admin/themes/default/files/show.php:39
 #: application/views/scripts/files/show.php:28
 msgid "Original Filename"
-msgstr "Original-Dateiname"
+msgstr "Αρχικό όνομα αρχείου"
 
 #: admin/themes/default/files/show.php:40
 #: application/views/scripts/files/show.php:33
 msgid "File Size"
-msgstr "Dateigröße"
+msgstr "Μέγεθος Αρχείου"
 
 #: admin/themes/default/files/show.php:45
 #: admin/themes/default/item-types/show.php:20
 #: application/views/scripts/files/show.php:39
 msgid "Type Metadata"
-msgstr "Typ-Metadaten"
+msgstr "Τύπος Μεταδεδεομένων"
 
 #: admin/themes/default/files/show.php:47
 #: application/views/scripts/files/show.php:41
 msgid "Mime Type / Browser"
-msgstr "MIME Type / Browser"
+msgstr "Mime Type / Browser"
 
 #: admin/themes/default/files/show.php:48
 #: application/views/scripts/files/show.php:45
 msgid "Mime Type / OS"
-msgstr "MIME Type / OS"
+msgstr "Mime Type / OS"
 
 #: admin/themes/default/files/show.php:49
 #: application/views/scripts/files/show.php:49
 msgid "File Type / OS"
-msgstr "Dateityp / OS"
+msgstr "Είδος φακέλου / Λειτουργικού συστήματος"
 
 #: admin/themes/default/files/show.php:54
 #: admin/themes/default/items/browse.php:201
 #: admin/themes/default/items/show.php:110
 msgid "Output Formats"
-msgstr "Ausgabeformate"
+msgstr "Μορφή εξαγόμενων"
 
 #: admin/themes/default/index.php:2
 msgid "Dashboard"
-msgstr "Dashboard"
+msgstr "Πίνακας"
 
 #: admin/themes/default/index.php:12
 msgid "A new version of Omeka is available for download."
-msgstr "Eine neue Version von Omeka steht zum Download bereit."
+msgstr "Μία νέα έκδοση του Omeka είναι διαθέσιμη για να την κατεβάσετε"
 
 #: admin/themes/default/index.php:13
 #, php-format
 msgid "Upgrade to %s"
-msgstr "Aktualisieren auf %s"
+msgstr "Αναβάθμιση σε %s"
 
 #: admin/themes/default/index.php:19
 msgid "Getting Started with Omeka"
-msgstr "Der Einstieg in Omeka"
+msgstr "Τα πρώτα σας βήματα στο Omeka"
 
 #: admin/themes/default/index.php:24
 msgid "Add a new item to your archive"
-msgstr "Ein neues Objekt zu Ihrem Archiv hinzufügen"
+msgstr "Πρόσθεσε ένα νέο αντικείμενο στο αρχείο σου"
 
 #: admin/themes/default/index.php:25
 msgid "Browse your items"
-msgstr "Ihre Objekte durchsuchen"
+msgstr "Περιήγηση στα αντικείμενα"
 
 #: admin/themes/default/index.php:28
 msgid "Manage items in your archive: add, edit, and delete items."
 msgstr ""
-"Objekte in Ihrem Archiv verwalten: Objekte hinzufügen, bearbeiten und "
-"löschen."
+"Διαχειρίσου τα αντικείμενα του αρχείου σου: προσθήκη, επεξεργασία και "
+"διαγραφή αντικείμενων."
 
 #: admin/themes/default/index.php:35
 msgid "Add a collection to group items"
-msgstr "Sammlungen hinzufügen, um Objekte zu gruppieren"
+msgstr "Προσθέστε μια συλλογή για να ομαδοποιήσετε αντικείμενα "
 
 #: admin/themes/default/index.php:36
 msgid "Browse your collections"
-msgstr "Ihre Sammlungen durchsuchen"
+msgstr "Περιήγηση στις συλλογές"
 
 #: admin/themes/default/index.php:39
 msgid "Manage collections in your archive: add, edit, and delete collections."
 msgstr ""
-"Sammlungen in Ihrem Archiv verwalten: Sammlungen hinzufügen, bearbeiten und "
-"löschen."
+"Διαχειρίσου τις συλλογές του αρχείου σου: προσθήκη, επεξεργασία και διαγραφή"
+" συλλογών."
 
 #: admin/themes/default/index.php:48 admin/themes/default/users/browse.php:2
 msgid "Browse Users"
-msgstr "Benutzer durchsuchen"
+msgstr "Περιήγηση στους Χρήστες"
 
 #: admin/themes/default/index.php:50 admin/themes/default/users/browse.php:6
 msgid "Add a User"
-msgstr "Benutzer hinzufügen"
+msgstr "Προσθήκη Χρήστη"
 
 #: admin/themes/default/index.php:53
 msgid "Manage users of various levels: from researcher to super."
 msgstr ""
-"Benutzer unterschiedlicher Stufen verwalten: vom Forscher zum Super-User."
+"Διαχειριστείτε τους χρήστες των διαφόρων επιπέδων: από researcher σε super."
 
 #: admin/themes/default/index.php:61 admin/themes/default/settings/edit.php:2
 msgid "Edit General Settings"
-msgstr "Allgemeine Einstellungen bearbeiten"
+msgstr "Επεξεργασία γενικών ρυθμίσεων"
 
 #: admin/themes/default/index.php:62
 msgid "Manage Themes"
-msgstr "Themes verwalten"
+msgstr "Διαχείριση θεμάτων"
 
 #: admin/themes/default/index.php:63
 msgid "Manage Plugins"
-msgstr "Plugins verwalten"
+msgstr "Διαχείριση των Plugins"
 
 #: admin/themes/default/index.php:65
 msgid ""
 "Manage your general settings for the site, including title, description, and"
 " themes."
 msgstr ""
-"Bearbeiten Sie allgemeine Einstellungen für Ihre Website wie z.B. Titel, "
-"Beschreibung und Themes."
+"Διαχείριση των γενικών ρυθμίσεων για το διαδικτυακό τόπο, "
+"συμπεριλαμβανομένου τίτλου, περιγραφής και θεμάτων."
 
 #: admin/themes/default/index.php:75
 msgid "Site Overview"
-msgstr "Website-Übersicht"
+msgstr "Σύντομη περιγραφή διαδικτυακού τόπου"
 
 #: admin/themes/default/index.php:85
 #, php-format
@@ -823,20 +828,20 @@ msgid ""
 "<em>%1$s</em> contains %2$s items, in %3$s collections, tagged with %4$s "
 "keywords. There are %5$s users."
 msgstr ""
-"<em>%1$s</em> enthält %2$s Objekte in %3$s Sammlungen, die mit %4$s "
-"Schlagwörtern versehen sind. Es gibt %5$s Benutzer."
+"<em>%1$s</em> περιέχει %2$s αντικείμενο, σε %3$s συλλογές, tagged με %4$s "
+"λέξεις κλειδιά. Υπάρχουν %5$s χρήστες."
 
 #: admin/themes/default/index.php:91
 msgid "There are no items to display."
-msgstr "Es existieren keine Objekte, die angezeigt werden können."
+msgstr "Δεν υπάρχουν αντικείμενα προς προβολή"
 
 #: admin/themes/default/index.php:102 application/views/scripts/index.php:71
 msgid "View All Items"
-msgstr "Alle Objekte anzeigen"
+msgstr "Προβολή όλων των αντικειμένων"
 
 #: admin/themes/default/index.php:107
 msgid "Recent Tags"
-msgstr "Neuste Schlagwörter"
+msgstr "Πρόσφατα Tags"
 
 #: admin/themes/default/item-types/add-existing-element.php:7
 #: admin/themes/default/item-types/add-new-element.php:7
@@ -844,146 +849,146 @@ msgstr "Neuste Schlagwörter"
 #: admin/themes/default/item-types/element-list.php:24
 #: application/helpers/ElementForm.php:406
 msgid "Remove"
-msgstr "Entfernen"
+msgstr "Αφαίρεση"
 
 #: admin/themes/default/item-types/add.php:2
 #: admin/themes/default/item-types/add.php:10
 msgid "Add Item Type"
-msgstr "Objekttyp hinzufügen"
+msgstr "Προσθήκη τύπου αντικειμένου"
 
 #: admin/themes/default/item-types/browse.php:2
 msgid "Browse Item Types"
-msgstr "Objekttypen durchsuchen"
+msgstr "Περιήγηση τύπων αντικειμένων"
 
 #: admin/themes/default/item-types/browse.php:6
 msgid "Add an Item Type"
-msgstr "Einen Objekttyp hinzufügen"
+msgstr "Προσθήκη τύπου αντικειμένων"
 
 #: admin/themes/default/item-types/browse.php:13
 msgid "Type Name"
-msgstr "Typname"
+msgstr "Είδος Ονόματος"
 
 #: admin/themes/default/item-types/browse.php:15
 msgid "Total Items"
-msgstr "Total Objekte"
+msgstr "Συνολικά αντικείμενα"
 
 #: admin/themes/default/item-types/edit.php:8
 #, php-format
 msgid "Edit Item Type #%s"
-msgstr "Objekttyp #%s bearbeiten"
+msgstr "Επεξεργασία τύπου αντικειμένου #%s"
 
 #: admin/themes/default/item-types/edit.php:14
 msgid "Delete this Item Type"
-msgstr "Diesen Objekttyp löschen"
+msgstr "Διαγραφή αυτού του τύπου αντικειμένου"
 
 #: admin/themes/default/item-types/element-form.php:3
 msgid "Add an Element to this Item Type"
-msgstr "Element zu diesem Objekttyp hinzufügen"
+msgstr "Προσθέστε ένα πεδίο στους τύπους αντικειμένων"
 
 #: admin/themes/default/item-types/element-form.php:6
 msgid "Choose an existing element"
-msgstr "Bestehendes Element auswählen"
+msgstr "Επιλέξτε ένα υπάρχον πεδίο"
 
 #: admin/themes/default/item-types/element-form.php:14
 msgid "Or Create a new Element"
-msgstr "Oder ein neues Element erzeugen"
+msgstr "Αλλιώς, δημιούργησε ένα νέο πεδίο"
 
 #: admin/themes/default/item-types/element-form.php:31
 #: admin/themes/default/item-types/element-list.php:7
 msgid "Data Type"
-msgstr "Datentyp"
+msgstr "Είδος δεδομένων"
 
 #: admin/themes/default/item-types/element-form.php:40
 #: admin/themes/default/item-types/element-list.php:61
 msgid "Add Element"
-msgstr "Element hinzufügen"
+msgstr "Προσθήκη πεδίου"
 
 #: admin/themes/default/item-types/element-list.php:1
 msgid "Edit Current Elements"
-msgstr "Bestehende Elemente bearbeiten"
+msgstr "Επεξεργασία τρέχοντος πεδίου"
 
 #: admin/themes/default/item-types/element-list.php:5
 msgid "Element Name"
-msgstr "Elementname"
+msgstr "Όνομα πεδίου"
 
 #: admin/themes/default/item-types/element-list.php:8
 msgid "Order"
-msgstr "Reihenfolge"
+msgstr "Σειρά"
 
 #: admin/themes/default/item-types/element-list.php:59
 msgid "Existing"
-msgstr "Bestehend"
+msgstr "Υπάρχον"
 
 #: admin/themes/default/item-types/element-list.php:60
 msgid "New"
-msgstr "Neu"
+msgstr "Νέο"
 
 #: admin/themes/default/item-types/form.php:17
 msgid "Item Type Information"
-msgstr "Objekttyp-Information"
+msgstr "Πληροφορίες τύπου αντικειμένου"
 
 #: admin/themes/default/item-types/form.php:35
 msgid "Elements"
-msgstr "Elemente"
+msgstr "Πεδία"
 
 #: admin/themes/default/item-types/show.php:8
 #, php-format
 msgid "Item Type #%s"
-msgstr "Objekttyp #%s"
+msgstr "Τύπος αντικειμένου #%s"
 
 #: admin/themes/default/item-types/show.php:13
 msgid "Edit this Item Type"
-msgstr "Diesen Objekttyp bearbeiten"
+msgstr "Επεξεργασία αυτού του τύπου αντικειμένου"
 
 #: admin/themes/default/item-types/show.php:39
 msgid "There are no recently added items."
-msgstr "Es gibt keine kürzlich hinzugefügten Objekte."
+msgstr "Δεν υπάρχουν αντικείμενα που έχουν προστεθεί πρόσφατα"
 
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:6
 msgid "Add an Item"
-msgstr "Ein Objekt hinzufügen"
+msgstr "Προσθήκη ενός αντικειμένου"
 
 #: admin/themes/default/items/add.php:12
 msgid "Add Item"
-msgstr "Objekt hinzufügen"
+msgstr "Πρόσθεσε ένα Αντικέιμενο"
 
 #: admin/themes/default/items/batch-edit.php:2
 msgid "Batch Edit Items"
-msgstr "Objekte im Bacht-Verfahren bearbeiten"
+msgstr "Μαζική Επεξεργασία Αντικειμένων"
 
 #: admin/themes/default/items/batch-edit.php:15
 msgid "Changes will be applied to checked items."
-msgstr "Änderungen werden auf die markierten Objekte angewendet."
+msgstr "Οι αλλαγές θα εφαρμοστούν στα επιλεγμένα αντικείμενα"
 
 #: admin/themes/default/items/batch-edit.php:36
 msgid "Item Metadata"
-msgstr "Objekt-Metadaten"
+msgstr "Μεταδεδομένα Αντικειμένου"
 
 #: admin/themes/default/items/batch-edit.php:39
 msgid "Public?"
-msgstr "Öffentlich?"
+msgstr "Δημόσιο?"
 
 #: admin/themes/default/items/batch-edit.php:41
 #: admin/themes/default/items/batch-edit.php:53
 #: admin/themes/default/items/batch-edit.php:65
 #: admin/themes/default/items/batch-edit.php:78
 msgid "Select Below"
-msgstr "Unten auswählen"
+msgstr "Επιλέξτε το παρακάτω"
 
 #: admin/themes/default/items/batch-edit.php:51
 msgid "Featured?"
-msgstr "Hervorgehoben?"
+msgstr "Προτεινόμενο?"
 
 #: admin/themes/default/items/batch-edit.php:62
 #: admin/themes/default/items/item-type-form.php:2
 msgid "Item Type"
-msgstr "Objekttyp"
+msgstr "Τύπος Αντικειμένου"
 
 #: admin/themes/default/items/batch-edit.php:70
 #: admin/themes/default/items/batch-edit.php:83
 msgid "Remove?"
-msgstr "Entfernen?"
+msgstr "Αφαίρεση?"
 
 #: admin/themes/default/items/batch-edit.php:75
 #: admin/themes/default/items/browse.php:165
@@ -991,28 +996,28 @@ msgstr "Entfernen?"
 #: admin/themes/default/items/show.php:62
 #: application/views/scripts/items/show.php:18
 msgid "Collection"
-msgstr "Sammlung"
+msgstr "Συλλογή"
 
 #: admin/themes/default/items/batch-edit.php:88
 #: admin/themes/default/items/tag-form.php:11
 #: admin/themes/default/items/tag-form.php:13
 msgid "Add Tags"
-msgstr "Schlagwort hinzufügen"
+msgstr "Προσθήκη Tags"
 
 #: admin/themes/default/items/batch-edit.php:90
 #, php-format
 msgid "List of tags to add to all checked items, separated by %s."
 msgstr ""
-"Liste der Schlagwörter, welche allen markierten Objekten hinzugefügt werden,"
-" getrennt durch %s."
+"Λίστα tags που θα προστεθούν σε όλα τα επιλεγμένα αντικείμενα, διαχωρισμένα "
+"με %s."
 
 #: admin/themes/default/items/batch-edit.php:98
 msgid "Delete Items"
-msgstr "Objekte löschen"
+msgstr "Διαγραφή Αντικειμένων"
 
 #: admin/themes/default/items/batch-edit.php:99
 msgid "Check if you wish to delete selected items."
-msgstr "Auswählen um markierte Objekte zu löschen."
+msgstr "Ελέγξτε αν επιθυμείτε να διαγράψετε τα επιλεγμένα αντικείμενα"
 
 #: admin/themes/default/items/browse.php:2
 #: application/views/scripts/common/footer.php:6
@@ -1020,96 +1025,96 @@ msgstr "Auswählen um markierte Objekte zu löschen."
 #: application/views/scripts/items/browse.php:2
 #: application/views/scripts/items/tags.php:2
 msgid "Browse Items"
-msgstr "Objekte durchsuchen"
+msgstr "Περιήγηση αντικείμενων"
 
 #: admin/themes/default/items/browse.php:13
 msgid "Toggle"
-msgstr "Umschalten"
+msgstr "Εναλλαγή"
 
 #: admin/themes/default/items/browse.php:14
 msgid "Details"
-msgstr "Details"
+msgstr "Λεπτομέρειες"
 
 #: admin/themes/default/items/browse.php:15
 msgid "Show Details"
-msgstr "Details anzeigen"
+msgstr "Εμφάνιση λεπτομερειών"
 
 #: admin/themes/default/items/browse.php:16
 msgid "Hide Details"
-msgstr "Verberge Details"
+msgstr "Απόκρυψη λεπτομερειών"
 
 #: admin/themes/default/items/browse.php:96
 msgid "Quick Filter"
-msgstr "Schnellfilter"
+msgstr "Γρήγορο φιλτράρισμα"
 
 #: admin/themes/default/items/browse.php:99
 msgid "All"
-msgstr "Alle"
+msgstr "Όλα"
 
 #: admin/themes/default/items/browse.php:101
 msgid "Private"
-msgstr "Privat"
+msgstr "Ιδιωτικό"
 
 #: admin/themes/default/items/browse.php:109
 #: application/helpers/LinkFunctions.php:63
 #: application/views/scripts/items/advanced-search.php:2
 msgid "Advanced Search"
-msgstr "Erweiterte Suche"
+msgstr "Σύνθετη Αναζήτηση"
 
 #: admin/themes/default/items/browse.php:117
 #: admin/themes/default/items/browse.php:193
 msgid "Edit Selected Items"
-msgstr "Ausgewählte Objekte bearbeiten"
+msgstr "Επεξεργασία επιλεγμένων αντικειμένων"
 
 #: admin/themes/default/items/browse.php:126
 msgid "Select"
-msgstr "- Wähle -"
+msgstr "Επιλέξτε"
 
 #: admin/themes/default/items/browse.php:165
 #: admin/themes/default/items/show.php:64
 msgid "No Collection"
-msgstr "Keine Sammlung"
+msgstr "Καμμία συλλογή"
 
 #: admin/themes/default/items/browse.php:166
 msgid "No Tags"
-msgstr "Keine Schlagwörter"
+msgstr "Χωρίς Tags"
 
 #: admin/themes/default/items/browse.php:207
 msgid "There are no items in the archive yet."
-msgstr "Es existieren noch keine Objekte in diesem Archiv."
+msgstr "Δεν υπάρχουν ακόμα αντικείμενα σε αυτό τον φάκελο."
 
 #: admin/themes/default/items/browse.php:210
 msgid "Add an item."
-msgstr "Objekt hinzufügen."
+msgstr "Προσθήκη αντικειμένου"
 
 #: admin/themes/default/items/browse.php:215
 #, php-format
 msgid "The query searched %s items and returned no results."
-msgstr "Die Anfrage hat %s Objekte durchsucht, aber keine Treffer gefunden."
+msgstr "Το ερώτημα αναζήτησε %s αντικείμενα και δεν επέστρεψε αποτέλεσματα."
 
 #: admin/themes/default/items/browse.php:215
 #, php-format
 msgid "Would you like to %s?"
-msgstr "Möchten Sie %s?"
+msgstr "Θα θέλατε να %s?"
 
 #: admin/themes/default/items/browse.php:215
 msgid "refine your search"
-msgstr "Suche verfeinern"
+msgstr "βελτιώστε την αναζήτησή σας"
 
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
 #: application/helpers/LinkFunctions.php:271
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
-msgstr "[Unbenannt]"
+msgstr "[Χωρίς Τίτλο]"
 
 #: admin/themes/default/items/edit.php:8
 #, php-format
 msgid "Edit Item #%s"
-msgstr "Objekt #%s bearbeiten"
+msgstr "Επεξεργασία αντικειμένου #%s"
 
 #: admin/themes/default/items/edit.php:12
 msgid "Delete this Item"
-msgstr "Dieses Objekt löschen"
+msgstr "Διαγραφή αντικειμένου"
 
 #: admin/themes/default/items/files-form.php:4
 msgid ""
@@ -1117,107 +1122,106 @@ msgid ""
 "created. If you would like Omeka to create derivative images, please add the"
 " path to your settings form."
 msgstr ""
-"Der Pfad zu ImageMagick ist nicht definiert. Deshalb können keine "
-"abgeleiteten Bilder erzeugt werden. Wenn Sie möchten, dass Omika abgeleitete"
-" Bilder erzeugt, dann tragen Sie den Pfad im Formular mit den Einstellungen "
-"ein."
+"Το μονοπάτι για το Image Magick δεν έχει καθοριστεί. Καμία παράγωγος εικόνα "
+"δεν θα δημιουργηθεί. Αν επιθυμείτε το Omeka να δημιουργήσει παράγωγες "
+"εικόνες, παρακαλούμε προσθέστε το μονοπάτι στη φόρμα ρυθμίσεων."
 
 #: admin/themes/default/items/files-form.php:7
 msgid "Current Files"
-msgstr "Aktuelle Dateien"
+msgstr "Τρέχων αρχεία"
 
 #: admin/themes/default/items/files-form.php:12
 msgid "File Name"
-msgstr "Dateiname"
+msgstr "Όνομα αρχείου"
 
 #: admin/themes/default/items/files-form.php:13
 msgid "Edit File Metadata"
-msgstr "Datei-Metadaten bearbeiten"
+msgstr "Επεξεργασία μεταδεδομένων αρχείου"
 
 #: admin/themes/default/items/files-form.php:34
 msgid "Add New Files"
-msgstr "Neue Dateien hinzufügen"
+msgstr "Προσθήκη νέων αρχείων"
 
 #: admin/themes/default/items/files-form.php:37
 #: admin/themes/default/items/files-form.php:48
 msgid "Find a File"
-msgstr "Datei finden"
+msgstr "Βρείτε ένα αρχείο"
 
 #: admin/themes/default/items/form.php:21
 msgid "Add Another File"
-msgstr "Weitere Datei hinzufügen"
+msgstr "Προσθήκη άλλου αρχείου"
 
 #: admin/themes/default/items/item-type-form.php:8
 msgid "Pick this type"
-msgstr "Diesen Typ auswählen"
+msgstr "Διαλέξτε αυτόν τον τύπο"
 
 #: admin/themes/default/items/show.php:8
 #, php-format
 msgid "Item #%s"
-msgstr "Objekt #%s"
+msgstr "Αντικείμενο #%s"
 
 #: admin/themes/default/items/show.php:18
 msgid "Edit this Item"
-msgstr "Dieses Objekt bearbeiten"
+msgstr "Επεξεργασία αυτού του αντικειμένου"
 
 #: admin/themes/default/items/show.php:55
 msgid "Bibliographic Citation"
-msgstr "Bibliografische Zitierform"
+msgstr "Βιβιογραφική αναφορά"
 
 #: admin/themes/default/items/show.php:76
 #: admin/themes/default/items/tag-form.php:18
 msgid "My Tags"
-msgstr "Meine Schlagwörter"
+msgstr "Τα tags μου"
 
 #: admin/themes/default/items/show.php:85
 msgid "Save Tags"
-msgstr "Schlagwörter speichern"
+msgstr "Αποθήκευση Tags"
 
 #: admin/themes/default/items/show.php:95
 #: admin/themes/default/items/show.php:102
 msgid "View File Metadata"
-msgstr "Datei-Metadaten anzeigen"
+msgstr "Προβολή των μεταδεδομένων του αρχείου"
 
 #: admin/themes/default/items/show.php:98
 msgid "Add a File"
-msgstr "Datei hinzufügen"
+msgstr "Προσθήκη αρχείου"
 
 #: admin/themes/default/items/show.php:98
 msgid "There are no files for this item yet."
-msgstr "Für dieses Objekt existieren noch keine Dateien."
+msgstr "Δεν υπάρχουν αρχεία για αυτό το αντικείμενο ακόμα."
 
 #: admin/themes/default/items/tag-form.php:14
 #, php-format
 msgid "Separate tags with %s"
-msgstr "Schlagwörter mit %s trennen"
+msgstr "Διαχωρισμός tags με %s"
 
 #: admin/themes/default/items/tag-form.php:42
 #: admin/themes/default/items/tag-list.php:2
 msgid "All Tags"
-msgstr "Alle Schlagwörter"
+msgstr "Όλα τα tags"
 
 #: admin/themes/default/items/tags.php:2
 msgid "Browse Items by Tag"
-msgstr "Objekte nach Schlagwörtern durchsuchen"
+msgstr "Πλοηγηση στα αντικείμενα με βάση τα Tags"
 
 #: admin/themes/default/items/tags.php:9
 #: admin/themes/default/tags/browse.php:27
 msgid "There are no tags to display. You must first tag some items."
 msgstr ""
-"Es können keine Schlagwörter angezeigt werden. Sie müssen zuerst einige "
-"Objekte verschlagworten."
+"Δεν υπάρχουν tags προς εμφάνιση. Πρέπει πρώτα να παρέχετε tag για κάποια "
+"αντικείμενα"
 
 #: admin/themes/default/plugins/browse.php:2
 msgid "Browse Plugins"
-msgstr "Plugins durchsuchen"
+msgstr "Περιήγηση των Plugins"
 
 #: admin/themes/default/plugins/browse.php:21
 msgid ""
 "You do not have any plugins installed. Add them to the plugins directory to "
 "see them listed here."
 msgstr ""
-"Sie haben keine Plugins installiert. Fügen Sie sie dem Verzeichnis plugins "
-"hinzu, damit sie hier aufgeführt werden."
+"Δεν έχετε κανένα plugin εγκατεστημένo. Προσθέστε τα στον κατάλογο plugins "
+"για να τα δείτε να αναφέρονται εδώ."
 
 #: admin/themes/default/plugins/browse.php:24
 msgid ""
@@ -1226,46 +1230,46 @@ msgid ""
 "href=\"http://omeka.org/codex/Plugin_Writing_Best_Practices\">write your "
 "own</a>!"
 msgstr ""
-"Fügen Sie neue Plugins hinzu, indem Sie sie vom <a href=\"http://omeka.org"
-"/add-ons/plugins/\">Omeka Plugin-Verzeichnis</a> herunterladen, oder <a "
-"href=\"http://omeka.org/codex/Plugin_Writing_Best_Practices\">schreiben Sie "
-"Ihr eigenes Plugin</a>!"
+"Προσθήκη νέων plugins από τη λήψη τους από το<a href=\"http://omeka.org/add-"
+"ons/plugins/\"> Omeka Directory Plugins </ a>, ή <a "
+"href=\"http://omeka.org/codex/Plugin_Writing_Best_Practices\"> γράψτε το "
+"δικό σας </ a>!"
 
 #: admin/themes/default/plugins/config.php:2
 #, php-format
 msgid "Configure the &#8220;%s&#8221; Plugin"
-msgstr "Konfigurieren Sie das Plugin &#8220;%s&#8221;"
+msgstr "Ρυθμίστε το&#8220;%s&#8221; Plugin"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:2
 #, php-format
 msgid "Confirm %s Uninstall"
-msgstr "Bestätigen Sie die Deinstallation von %s"
+msgstr "Επιβεβαίωση %s Απεγκατάστασης"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:8
 msgid "Are you sure you want to uninstall this plugin?"
-msgstr "Sind Sie sicher, dass Sie dieses Plugin deinstallieren wollen?"
+msgstr "Είστε βέβαιοι ότι θέλετε να απεγκαταστήσετε αυτό το plugin;"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:13
 msgid "Yes, I want to uninstall this plugin."
-msgstr "Ja, ich möchte dieses Plugin deinstallieren."
+msgstr "Ναι, θέλω να απεγκαταστήσω αυτό το plugin."
 
 #: admin/themes/default/plugins/confirm-uninstall.php:16
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr "Άκυρο"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:16
 #: admin/themes/default/plugins/plugin-info.php:107
 msgid "Uninstall"
-msgstr "Deinstallieren"
+msgstr "Απεγκατάσταση"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:16
 msgid "or"
-msgstr "oder"
+msgstr "ή"
 
 #: admin/themes/default/plugins/plugin-info.php:24
 #, php-format
 msgid "This version of %1$s requires at least Omeka %2$s."
-msgstr "Diese Version von %1$s erfordert mindestens Omeka %2$s."
+msgstr "Αυτή η έκδοση του %1$s απαιτεί τουλάχιστον το Omeka %2$s."
 
 #: admin/themes/default/plugins/plugin-info.php:27
 #, php-format
@@ -1273,151 +1277,151 @@ msgid ""
 "%1$s requires the following plugins to be installed, activated, and loaded: "
 "%2$s"
 msgstr ""
-"%1$s erfordert es, dass die folgenden Plugins installiert, aktiviert und "
-"geladen werden: %2$s"
+"Το %1$s απαιτεί τα παρακάτω plugins να είναι εγκατεστημένα, ενεργοποιημένα "
+"και να έχουν φορτωθεί:%2$s"
 
 #: admin/themes/default/plugins/plugin-info.php:30
 msgid "The plugin.php file is missing."
-msgstr "Die Datei plugin.php fehlt."
+msgstr "Το αρχείο plugin.php λείπει."
 
 #: admin/themes/default/plugins/plugin-info.php:39
 #, php-format
 msgid "The %s plugin cannot be loaded for the following reasons:"
-msgstr "Das Plugin %s kann aus folgenden Gründen nicht geladen werden:"
+msgstr "To %s plugin δεν μπορεί να φορτωθεί για τους ακόλουθους λόγους"
 
 #: admin/themes/default/plugins/plugin-info.php:48
 #, php-format
 msgid "You have a new version of %s. Please upgrade!"
-msgstr "Es gibt eine neue Version von %s. Bitte aktualisieren Sie!"
+msgstr "Έχετε μια νέα έκδοση του %s. Παρακαλούμε αναβαθμίστε!"
 
 #: admin/themes/default/plugins/plugin-info.php:58
 #: admin/themes/default/themes/browse.php:10
 msgid "Configure"
-msgstr "Konfigurieren"
+msgstr "Ρύθμιστε"
 
 #: admin/themes/default/plugins/plugin-info.php:69
 #, php-format
 msgid "By %s"
-msgstr "Von %s"
+msgstr "Από %s"
 
 #: admin/themes/default/plugins/plugin-info.php:87
 msgid "Upgrade"
-msgstr "Upgrade"
+msgstr "Αναβάθμιση"
 
 #: admin/themes/default/plugins/plugin-info.php:97
 #: application/views/scripts/users/activate.php:26
 msgid "Activate"
-msgstr "Aktivieren"
+msgstr "Ενεργοποίηση"
 
 #: admin/themes/default/plugins/plugin-info.php:97
 msgid "Deactivate"
-msgstr "Deaktivieren"
+msgstr "Απενεργοποίηση"
 
 #: admin/themes/default/plugins/plugin-info.php:117
 #: application/forms/Install.php:173
 msgid "Install"
-msgstr "Jetzt installieren"
+msgstr "Εγκατάσταση"
 
 #: admin/themes/default/security/edit.php:2
 msgid "Edit Security Settings"
-msgstr "Sicherheitseinstellungen bearbeiten"
+msgstr "Επεξεργασία ρυθμίσεων ασφαλείας"
 
 #: admin/themes/default/security/edit.php:10
 msgid "Restore Default File Extensions"
-msgstr "Standard-Dateierweiterungen wiederherstellen"
+msgstr "Αποκατάσταση προεπιλεγμένων επεκτάσεων αρχείων"
 
 #: admin/themes/default/security/edit.php:15
 msgid "Restore Default File Mime Types"
-msgstr "Standard-Datei-MIME-Types wiederherstellen"
+msgstr "Αποκατάσταση προεπιλεγμένων Mime types αρχείων"
 
 #: admin/themes/default/settings/edit.php:10
 msgid "Test"
-msgstr "Test"
+msgstr "Τεστ"
 
 #: admin/themes/default/system-info/index.php:2
 msgid "System Information"
-msgstr "Systeminformation"
+msgstr "Πληροφορίες συστήματος"
 
 #: admin/themes/default/tags/browse.php:8
 msgid "Sort by"
-msgstr "Sortieren nach"
+msgstr "Ταξινόμηση"
 
 #: admin/themes/default/tags/browse.php:11
 msgid "Most"
-msgstr "Häufigste"
+msgstr "Περισσότερα"
 
 #: admin/themes/default/tags/browse.php:12
 msgid "Least"
-msgstr "Seltenste"
+msgstr "Λιγότερα"
 
 #: admin/themes/default/tags/browse.php:13
 msgid "Alphabetical"
-msgstr "Alphabetisch"
+msgstr "Αλφαβητικά"
 
 #: admin/themes/default/tags/browse.php:14
 msgid "Recent"
-msgstr "Neuste"
+msgstr "Πρόσφατα"
 
 #: admin/themes/default/tags/delete.php:11
 msgid "Select a tag to delete:"
-msgstr "Wählen Sie ein Schlagwort, das gelöscht werden soll:"
+msgstr "Επιλέξτε ένα tag για να διαγράψετε:"
 
 #: admin/themes/default/tags/delete.php:25
 msgid "There are no tags to delete. You must first tag some items."
 msgstr ""
-"Es gibt keine Schlagwörter zu löschen. Sie müssen zuerst einige Objekte "
-"verschlagworten."
+"Δεν υπάρχουν tags για να διαγράψετε. Θα πρέπει πρώτα να προσθέσετε tag σε "
+"κάποιο αντικειμενο."
 
 #: admin/themes/default/tags/edit.php:12
 msgid "Choose a tag to rename"
-msgstr "Wählen Sie ein Schlagwort, das umbenannt werden soll:"
+msgstr "Διαλέξτε ένα tag για να το μετονομάσετε"
 
 #: admin/themes/default/tags/edit.php:22
 msgid "Enter a new tag name"
-msgstr "Geben Sie eine neue Bezeichnung für dieses Schlagwort ein"
+msgstr "Προσθέστε ένα νέο όνομα tag"
 
 #: admin/themes/default/tags/edit.php:32
 msgid "There are no tags to edit. You must first tag some items."
 msgstr ""
-"Es gibt keine Schlagwörter zu bearbeiten. Sie müssen zuerst einige Objekte "
-"verschlagworten."
+"Δεν υπάρχουν tags για να επεξεργαστείτε. Θα πρέπει πρώτα να προσθέσετε tag "
+"σε κάποιο αντικειμενο."
 
 #: admin/themes/default/themes/browse.php:2
 msgid "Browse Themes"
-msgstr "Themes durchsuchen"
+msgstr "Περιήγηση σε θέματα"
 
 #: admin/themes/default/themes/browse.php:10
 msgid "Current Theme"
-msgstr "Aktuelles Theme"
+msgstr "Τρέχων θέμα"
 
 #: admin/themes/default/themes/browse.php:13
 #: admin/themes/default/themes/browse.php:38
 #, php-format
 msgid "Screenshot for %s Theme"
-msgstr "Screenshot für das Theme %s"
+msgstr "Εικόνα για το %s θέμα"
 
 #: admin/themes/default/themes/browse.php:16
 #: admin/themes/default/themes/browse.php:32
 msgid "Author"
-msgstr "Autor"
+msgstr "Συγγραφέας"
 
 #: admin/themes/default/themes/browse.php:17
 #: admin/themes/default/themes/browse.php:33
 msgid "License"
-msgstr "Lizenz"
+msgstr "Άδεια"
 
 #: admin/themes/default/themes/browse.php:18
 #: admin/themes/default/themes/browse.php:34
 msgid "Website"
-msgstr "Webseite"
+msgstr "Δικτυακός τόπος"
 
 #: admin/themes/default/themes/browse.php:23
 msgid "Change Theme"
-msgstr "Theme ändern"
+msgstr "Αλλαγή θέματος"
 
 #: admin/themes/default/themes/browse.php:44
 msgid "Switch Theme"
-msgstr "Theme wechseln"
+msgstr "Αλλαγή θέματος"
 
 #: admin/themes/default/themes/browse.php:48
 msgid ""
@@ -1426,134 +1430,134 @@ msgid ""
 "href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">design your "
 "own</a>!"
 msgstr ""
-"Fügen Sie neue Themes hinzu indem Sie sie vom <a href=\"http://omeka.org"
-"/add-ons/themes/\">Omeka Theme Directory</a> herunterladen, oder <a "
-"href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">gestalten Sie "
-"Ihr eigenes Theme</a>!"
+"Προσθήκη νέων θεμάτων από τη λήψη τους από το <a href=\"http://omeka.org"
+"/add-ons/themes/\">Omeka Theme Directory</a>, ή <a "
+"href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">σχεδιάσετε το "
+"δικό σας</a>!"
 
 #: admin/themes/default/themes/config.php:2
 #, php-format
 msgid "Configure the &#8220;%s&#8221; Theme"
-msgstr "Theme &#8220;%s&#8221; konfigurieren"
+msgstr "Ρυθμίστε το &#8220;%s&#8221; Θέμα"
 
 #: admin/themes/default/themes/config.php:9
 msgid "Configurations apply to this theme only."
-msgstr "Konfigurationen gelten nur für dieses Theme."
+msgstr "Αποδοχή ρυθμίσεων για αυτό το θέμα μόνο."
 
 #: admin/themes/default/users/add.php:2
 msgid "Add New User"
-msgstr "Neuen Benutzer hinzufügen"
+msgstr "Προσθήκη νέου Χρήστη"
 
 #: admin/themes/default/users/browse.php:13
 msgid "Search Users"
-msgstr "Benutzer suchen"
+msgstr "Αναζήτηση Χρηστών"
 
 #: admin/themes/default/users/browse.php:15
 msgid "Select Role"
-msgstr "Rolle wählen"
+msgstr "Διάλεξε ρόλο"
 
 #: admin/themes/default/users/browse.php:17
 msgid "Active"
-msgstr "Aktiv"
+msgstr "Ενεργό"
 
 #: admin/themes/default/users/browse.php:17
 msgid "Inactive"
-msgstr "Inaktiv"
+msgstr "Αδρανές"
 
 #: admin/themes/default/users/browse.php:17
 msgid "Select Status"
-msgstr "Status wählen"
+msgstr "Επιλέξτε Κατάσταση"
 
 #: admin/themes/default/users/browse.php:19
 msgid "Sort By"
-msgstr "Sortieren nach"
+msgstr "Ταξινόμηση"
 
 #: admin/themes/default/users/browse.php:20 application/forms/User.php:78
 msgid "First Name"
-msgstr "Vorname"
+msgstr "Όνομα"
 
 #: admin/themes/default/users/browse.php:21 application/forms/User.php:91
 msgid "Last Name"
-msgstr "Nachname"
+msgstr "Επώνυμο"
 
 #: admin/themes/default/users/browse.php:22
 msgid "Institution Name"
-msgstr "Name der Institution"
+msgstr "Όνομα ιδρύματος"
 
 #: admin/themes/default/users/browse.php:23
 #: admin/themes/default/users/browse.php:41 application/forms/User.php:143
 msgid "Role"
-msgstr "Rolle"
+msgstr "Ρόλος"
 
 #: admin/themes/default/users/browse.php:24
 #: admin/themes/default/users/browse.php:38
 #: admin/themes/default/users/show.php:22 application/forms/Install.php:35
 #: application/forms/Login.php:25 application/forms/User.php:28
 msgid "Username"
-msgstr "Benutzername"
+msgstr "Όνομα Χρήστη"
 
 #: admin/themes/default/users/browse.php:26
 msgid "Sort Order"
-msgstr "Sortierreihenfolge"
+msgstr "Σειρά Ταξινόμησης"
 
 #: admin/themes/default/users/browse.php:27
 msgid "Ascending"
-msgstr "Aufsteigend"
+msgstr "Αύξουσα"
 
 #: admin/themes/default/users/browse.php:28
 msgid "Descending"
-msgstr "Absteigend"
+msgstr "Φθίνουσα"
 
 #: admin/themes/default/users/browse.php:29
 #: application/helpers/FormFunctions.php:271
 #: application/views/scripts/items/advanced-search.php:167
 msgid "Search"
-msgstr "Suchen"
+msgstr "Αναζήτηση"
 
 #: admin/themes/default/users/browse.php:39
 #: admin/themes/default/users/show.php:24
 msgid "Real Name"
-msgstr "Echter Name"
+msgstr "Πραγματικό Όνομα"
 
 #: admin/themes/default/users/browse.php:40
 #: admin/themes/default/users/show.php:26 application/forms/Install.php:79
 #: application/forms/RecoverPassword.php:32 application/forms/User.php:105
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
-msgstr "E-Mail-Adresse"
+msgstr "Email"
 
 #: admin/themes/default/users/edit.php:8
 #, php-format
 msgid "Edit User #%s"
-msgstr "Benutzer #%s bearbeiten"
+msgstr "Επεξεργασία Χρήστη #%s"
 
 #: admin/themes/default/users/show.php:8
 #, php-format
 msgid "User #%s"
-msgstr "Benutzer #%s"
+msgstr "Χρήστης #%s"
 
 #: admin/themes/default/users/show.php:15
 msgid "Edit this User"
-msgstr "Diesen Benutzer bearbeiten"
+msgstr "Επεξεργασία αυτού του Χρήστη"
 
 #: admin/themes/default/users/show.php:28 application/forms/User.php:137
 msgid "Institution"
-msgstr "Institution"
+msgstr "Ίδρυμα"
 
 #: application/controllers/CollectionsController.php:31
 #, php-format
 msgid "The collection \"%s\" was successfully added!"
-msgstr "Die Sammlung \"%s\" wurde erfolgreich hinzugefügt!"
+msgstr "Η συλλογή \"%s\" προστέθηκε με επιτυχία!"
 
 #: application/controllers/CollectionsController.php:37
 #, php-format
 msgid "The collection \"%s\" was successfully changed!"
-msgstr "Die Sammlung \"%s\" wurde erfolgreich geändert!"
+msgstr "Η συλλογή \"%s\" άλλαξε με επιτυχία!"
 
 #: application/controllers/CollectionsController.php:43
 #, php-format
 msgid "The collection \"%s\" was successfully deleted!"
-msgstr "Die Sammlung \"%s\" wurde erfolgreich gelöscht!"
+msgstr "Η συλλογή \"%s\" έχει διαγραφεί επιτυχώς!"
 
 #: application/controllers/CollectionsController.php:48
 msgid ""
@@ -1561,26 +1565,26 @@ msgid ""
 "delete any items in this collection, but will delete the reference to this "
 "collection in each item."
 msgstr ""
-"Dadurch wird die Sammlung und ihre zugehörigen Metadaten gelöscht. Die "
-"Objekte in dieser Sammlung werden nicht gelöscht, jedoch die Zuordnung der "
-"Objekte zu dieser Sammlung."
+"Αυτό θα διαγράψει τη συλλογή και τα σχετικά μεταδεδομένα του. Αυτό δεν θα "
+"διαγράψει οποιαδήποτε αντικείμενο σε αυτή τη συλλογή, αλλά θα απαλειφθεί η "
+"αναφορά σε αυτή τη συλλογή σε κάθε αντικείμενο.."
 
 #: application/controllers/ElementSetsController.php:26
 msgid ""
 "This will delete the element set and all elements assigned to the element "
 "set. Items will lose all metadata that is specific to this element set."
 msgstr ""
-"Dadurch wird der Elementsatz gelöscht sowie alle Elemente, welche diesem "
-"Satz zugewiesen sind. Objekte werden alle Metadaten verlieren, welche mit "
-"diesem Elementsatz verbunden sind."
+"Αυτό θα διαγράψει το σύνολο των στοιχείων και όλα τα στοιχεία που "
+"περιέχονται σε αυτό. Τα αντικείμενα θα χάσουν όλα τα μεταδεδομένα που "
+"αντιστοιχούν σε αυτό το σύνολο δεδομένων."
 
 #: application/controllers/ErrorController.php:66
 msgid "Page not found."
-msgstr "Seite nicht gefunden."
+msgstr "Δεν βρέθηκε αυτή η σελίδα."
 
 #: application/controllers/ErrorController.php:85
 msgid "Access denied."
-msgstr "Zugriff verweigert."
+msgstr "Δεν επιτρέπεται η πρόσβαση."
 
 #: application/controllers/ItemTypesController.php:38
 msgid ""
@@ -1588,9 +1592,10 @@ msgid ""
 "the item type. Items that are assigned to this item type will lose all "
 "metadata that is specific to the item type."
 msgstr ""
-"Dadurch wird der Objekttyp gelöscht, nicht aber die Elemente, welche diesem "
-"Objekttyp zugeordnet sind. Objekte, welche diesem Objekttyp zugeordnet sind,"
-" werden all jene Metadaten verlieren, welche diesem Objekttyp entsprechen."
+"Αυτό θα διαγράψει τον τύπο αντικειμένου αλλά δεν θα διαγράψει τα στοιχεία "
+"που έχουν ανατεθεί σε αυτόν τον τύπο αντικειμένων. Τα αντικείμενα που έχουν "
+"ανατεθεί σε αυτό τον τύπο αντικειμένου θα χάσουν τα μεταδεδομένα που "
+"αντιστοιχούν σε αυτόν τον τύπο αντικειμένων."
 
 #: application/controllers/ItemTypesController.php:58
 #, php-format
@@ -1598,74 +1603,75 @@ msgid ""
 "The item type \"%s\" was successfully added!  You may now add elements to "
 "your new item type."
 msgstr ""
-"Der Objekttyp \"%s\" wurde erfolgreich hinzugefügt!  Sie können nun Elemente"
-" zu Ihrem neuen Objekttyp hinzufügen."
+"Ο τύπος αντικειμένου \"%s\" προστέθηκε με επιτυχία! Μπορείτε τώρα να "
+"προσθέσετε πεδία στον νέο τύπο αντικειμένου σας."
 
 #: application/controllers/ItemTypesController.php:94
 #, php-format
 msgid "The item type \"%s\" was successfully changed!"
-msgstr "Der Objekttyp \"%s\" wurde erfolgreich geändert!"
+msgstr "Ο τύπος αντικειμένου \"%s\" άλλαξε με επιτυχία!"
 
 #: application/controllers/ItemTypesController.php:115
 #: application/controllers/ItemTypesController.php:123
 #, php-format
 msgid "The item type cannot have more than one \"%s\" element."
-msgstr "Der Objekttyp kann nicht mehr als ein \"%s\"-Element besitzen."
+msgstr "Ο τύπος αντικειμένου δεν μπορεί να έχει περσισσοτερα από \"%s\" πεδία."
 
 #: application/controllers/ItemsController.php:108
 msgid "The item was successfully added!"
-msgstr "Das Objekt wurde erfolgreich hinzugefügt!"
+msgstr "Το αντικείμενο προστέθηκε με επιτυχία!"
 
 #: application/controllers/ItemsController.php:113
 msgid "The item was successfully changed!"
-msgstr "Das Objekt wurde erfolgreich geändert!"
+msgstr "Το αντικείμενο άλλαξε με επιτυχία!"
 
 #: application/controllers/ItemsController.php:118
 msgid "The item was successfully deleted!"
-msgstr "Das Objekt wurde erfolgreich gelöscht!"
+msgstr "Το αντικείμενο έχει διαγραφεί επιτυχώς!"
 
 #: application/controllers/ItemsController.php:123
 msgid ""
 "This will delete the item and its associated metadata. It will also delete "
 "all files and file metadata associated with this item."
 msgstr ""
-"Dadurch wird das Objekt mit seinen zugeordneten Metadaten gelöscht. Auch "
-"alle Dateien und die zugeordneten Datei-Metadaten werden gelöscht."
+"Αυτό θα διαγράψει το αντικείμενο και τα σχετικά μεταδεδομένα. Επίσης θα "
+"διαγράψει όλα τα αρχεία μεταδεδομένων που σχετίζονται με το αντικείμενο"
 
 #: application/controllers/ItemsController.php:266
 msgid "User does not have permission to add tags."
-msgstr "Der Benutzer ist nicht berechtigt, Schlagwörter hinzuzufügen."
+msgstr "Ο Χρήστης δεν έχει δικαίωμα να προσθέσει tags."
 
 #: application/controllers/ItemsController.php:299
 msgid "You must choose some items to batch edit."
 msgstr ""
-"Sie müssen einige Objekte auswählen für die Bearbeitung im Batchverfahren."
+"Πρέπει να επιλέξετε κάποια στοιχεία για να τα επεξεργαστείτε συνολικά."
 
 #: application/controllers/ItemsController.php:338
 msgid "User is not allowed to modify visibility of items."
-msgstr "Der Benutzer darf die Sichtbarkeit von Objekten nicht verändern."
+msgstr ""
+"Ο χρήστης δεν επιτρέπεται να τροποποιήσει την προβολή των αντικειμένων."
 
 #: application/controllers/ItemsController.php:343
 msgid "User is not allowed to modify featured status of items."
 msgstr ""
-"Der Benutzer ist nicht berechtigt, den Status \"Hervorgehoben\" von Objekten"
-" zu verändern."
+"Ο χρήστης δεν επιτρέπεται να τροποποιήσει το προτεινόμενο status των "
+"αντικειμένων."
 
 #: application/controllers/ItemsController.php:350
 msgid "User is not allowed to delete selected items."
-msgstr "Der Benutzer darf die markierten Objekte nicht löschen."
+msgstr "Ο χρήστης δεν επιτρέπεται να διαγράψει τα επιλεγμένα αντικείμενα."
 
 #: application/controllers/ItemsController.php:356
 msgid "User is not allowed to edit selected items."
-msgstr "Der Benutzer darf die markierten Objekte nicht bearbeiten."
+msgstr "Ο χρήστης δεν επιτρέπεται να επεξεργαστεί τα επιλεγμένα αντικείμενα."
 
 #: application/controllers/ItemsController.php:361
 msgid "User is not allowed to tag selected items."
-msgstr "Der Benutzer ist nicht berechtigt, Objekte zu verschlagworten."
+msgstr "Ο χρήστης δεν επιτρέπεται να κάνει tag τα επιλεγμένα αντικείμενα."
 
 #: application/controllers/ItemsController.php:384
 msgid "The items were successfully changed!"
-msgstr "Die Objekte wurden erfolgreich geändert!"
+msgstr "Τα αντικείμενα έχουν αλλάξει με επιτυχία!"
 
 #: application/controllers/PluginsController.php:49
 #, php-format
@@ -1673,152 +1679,149 @@ msgid ""
 "Error in configuring plugin named \"%s\". Missing config and/or config_form "
 "hook(s)."
 msgstr ""
-"Fehler beim Konfigurieren des Plugins \"%s\". Fehlende config und/oder "
-"config_form Hook(s)."
+"Σφάλμα κατά τη ρύθμιση του plugin \"%s\".Λείπουν τα config και/ή config_form"
+" hook(s)."
 
 #: application/controllers/PluginsController.php:55
 #, php-format
 msgid "The %s plugin was successfully configured!"
-msgstr "Das Plugin %s wurde erfolgreich konfiguriert!"
+msgstr "Το plugin %s ρυθμίστηκε με επιτυχία!"
 
 #: application/controllers/PluginsController.php:70
 #, php-format
 msgid "The %s plugin has already been installed."
-msgstr "Das Plugin %s wurde bereits installiert."
+msgstr "Το %s plugin έχει ήδη εγκατασταθεί."
 
 #: application/controllers/PluginsController.php:76
 #, php-format
 msgid "The %s plugin was successfully installed!"
-msgstr "Das Plugin %s wurde erfolgreich installiert!"
+msgstr "Το %s plugin εγκαταστάθηκε επιτυχώς!"
 
 #: application/controllers/PluginsController.php:86
 #, php-format
 msgid "The following error occurred while installing the %s plugin: "
-msgstr "Folgender Fehler ist bei der Installation des Plugins %s aufgetreten:"
+msgstr "Το ακόλουθο σφάλμα παρουσιάστηκε κατά την εγκατάσταση του %s plugin:"
 
 #: application/controllers/PluginsController.php:111
 #, php-format
 msgid "The %s plugin was successfully activated!"
-msgstr "Das Plugin %s wurde erfolgreich aktiviert!"
+msgstr "Το %s plugin εγκαταστάθηκε επιτυχώς!"
 
 #: application/controllers/PluginsController.php:113
 #, php-format
 msgid "The %s plugin was activated, but could not be loaded: "
-msgstr "Das Plugin %s wurde aktiviert, konnte aber nicht geladen werden:"
+msgstr "Το %s plugin ενεργοποιήθηκε αλλά δεν μπορούσε να φορτωθεί."
 
 #: application/controllers/PluginsController.php:116
 #, php-format
 msgid "The following error occurred while activating the %s plugin: "
-msgstr "Folgender Fehler ist bei der Aktivierung des Plugins %s aufgetreten:"
+msgstr "Το ακόλουθο σφάλμα παρουσιάστηκε κατά την ενεργοποίηση του %s plugin:"
 
 #: application/controllers/PluginsController.php:137
 #, php-format
 msgid "The %s plugin was successfully deactivated!"
-msgstr "Das Plugin %s wurde erfolgreich deaktiviert!"
+msgstr "Το plugin %s έχει απενεργοποιηθεί επιτυχώς!"
 
 #: application/controllers/PluginsController.php:139
 #, php-format
 msgid "The following error occurred while deactivating the %s plugin: "
-msgstr ""
-"Folgender Fehler ist bei der Deaktivierung des Plugins %s aufgetreten:"
+msgstr "Το ακόλουθο σφάλμα προήλθε κατά την απενεργοποίηση του plugin %s:"
 
 #: application/controllers/PluginsController.php:156
 #, php-format
 msgid "The %s plugin was successfully upgraded!"
-msgstr "Das Plugin %s wurde erfolgreich aktualisiert!"
+msgstr "Το %s plugin αναβαθμίστικε επιτυχώς!"
 
 #: application/controllers/PluginsController.php:161
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
-msgstr ""
-"Folgender Fehler ist bei der Aktualisierung des Plugins %s aufgetreten:"
+msgstr "Το ακόλουθο σφάλμα προήλθε κατά την αναβάθμιση του plugin %s:"
 
 #: application/controllers/PluginsController.php:212
 msgid "You must confirm the uninstall before proceeding."
-msgstr "Sie müssen die Deinstallation bestätigen, bevor Sie fortfahren."
+msgstr "Πρέπει να επιβεβαιώσετε την απεγκατάσταση πριν προχωρήσετε."
 
 #: application/controllers/PluginsController.php:227
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
-msgstr "Das Plugin %s wurde erfolgreich deinstalliert!"
+msgstr "To %s plugin απεγκαταστάθηκε με επιτυχία!"
 
 #: application/controllers/PluginsController.php:229
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
-msgstr ""
-"Folgender Fehler ist bei der Deinstallation des Plugins %s aufgetreten:"
+msgstr "Το ακόλουθο σφάλμα προήλθε κατά την απεγκατάσταση του plugin %s:"
 
 #: application/controllers/PluginsController.php:256
 msgid "No plugin name given."
-msgstr "Kein Plugin-Name vergeben."
+msgstr "Δεν έχεο δοθεί κάποιο όνομα για το plugin."
 
 #: application/controllers/PluginsController.php:269
 #, php-format
 msgid "The plugin %s must be installed."
-msgstr "Das Plugin %s muss installiert sein."
+msgstr "Το plugin %s πρέπει να εγκατασταθεί."
 
 #: application/controllers/SecurityController.php:46
 msgid "The security settings have been updated."
-msgstr "Die Sicherheitseinstellungen wurden aktualisiert."
+msgstr "Οι ρυθμίσεις ασφαλείας αναβαθμίστηκαν."
 
 #: application/controllers/SettingsController.php:44
 msgid "The general settings have been updated."
-msgstr "Die allgemeinen Einstellungen wurden aktualisiert."
+msgstr "Οι γενικές ρυθμίσεις αναβαθμίστηκαν."
 
 #: application/controllers/SettingsController.php:46
 #: install/views/scripts/index/index.phtml:16
 msgid "There were errors found in your form. Please edit and resubmit."
 msgstr ""
-"In Ihrem Formular wurden Fehler gefunden. Bitte bearbeiten und erneut "
-"senden."
+"Υπήρξαν σφάλματα που διαπιστώθηκαν στη φόρμα σας. Παρακαλούμε να την "
+"επεξεργαστείτε και υποβάλετε την εκ νέου."
 
 #: application/controllers/SettingsController.php:70
 msgid "Works"
-msgstr "Werke"
+msgstr "Λειτουργεί"
 
 #: application/controllers/SettingsController.php:71
 msgid "Fails"
-msgstr "Misserfolge"
+msgstr "Αποτυγχάνει"
 
 #: application/controllers/TagsController.php:51
 #, php-format
 msgid "Tag named '%s' was successfully deleted."
-msgstr "Das Schlagwort '%s' wurde erfolgreich gelöscht."
+msgstr "Το tag '%s' διαγράφηκε επιτυχώς"
 
 #: application/controllers/TagsController.php:64
 msgid "You have to be logged in to edit tags!"
-msgstr "Sie müssen angemeldet sein, um Schlagwörter zu bearbeiten!"
+msgstr "Θα πρέπει να συνδεθείτε για να διαχειριστείτε τα tags!"
 
 #: application/controllers/TagsController.php:101
 #, php-format
 msgid "Tag named \"%1$s\" was successfully renamed to \"%2$s\"."
-msgstr "Das Schlagwort \"%1$s\" wurde erfolgreich in \"%2$s\" umbenannt."
+msgstr "To tag με το όνομα \"%1$s\" μετονομάστηκε επιτυχώς σε \"%2$s\"."
 
 #: application/controllers/TagsController.php:128
 msgid "Invalid tagType given"
-msgstr "Ungültiger tagType"
+msgstr "Μη έγκυρο tagType"
 
 #: application/controllers/ThemesController.php:30
 msgid "Invalid form submission."
-msgstr "Fehlerhafte Formulareingabe."
+msgstr "Μη έγκυρη καταχώριση φόρμας"
 
 #: application/controllers/ThemesController.php:38
 msgid "You have chosen an illegal theme name. Please select another theme."
 msgstr ""
-"Sie haben einen ungültigen Theme-Namen ausgewählt. Bitte wählen Sie ein "
-"anderes Theme."
+"Έχετε επιλέξει ένα μη έγκυρο όνομα θέματος. Παρακαλούμε επιλέξτε ένα άλλο "
+"θέμα."
 
 #: application/controllers/ThemesController.php:51
 msgid "The theme has been successfully changed."
-msgstr "Das Theme wurde erfolgreich geändert."
+msgstr "Το θέμα έχει αλλάξει επιτυχώς"
 
 #: application/controllers/ThemesController.php:77
 msgid "The theme settings were successfully saved!"
-msgstr "Die Theme-Einstellungen wurden erfolgreich gespeichert!"
+msgstr "Οι ρυθμίσεις θέματος έχουν σωθεί επιτυχώς"
 
 #: application/controllers/UpgradeController.php:57
 msgid "SQL error in migration: "
-msgstr "SQL-Fehler bei der Migration:"
+msgstr "Σφάλμα SQL κατά το migration"
 
 #: application/controllers/UsersController.php:97
 #: application/controllers/UsersController.php:103
@@ -1826,62 +1829,64 @@ msgid ""
 "Unable to reset password. Please verify that the information is correct and "
 "contact an administrator if necessary."
 msgstr ""
-"Das Passwort kann nicht zurückgesetzt werden. Bitte überprüfen Sie, ob die "
-"Information korrekt ist, und kontaktieren Sie bei Bedarf einen "
-"Administrator."
+"Η επαναφορά του συνθηματικού σας δεν ήταν δυνατή. Παρακαλούμε επιβεβαιώστε "
+"ότι τα στοιχεία είναι σωστά και αν χρειαστεί επικοινωνήστε με τον "
+"διαχειριστή."
 
 #: application/controllers/UsersController.php:129
 msgid "Please follow this link to reset your password:"
-msgstr "Bitte folgen Sie diesem Link, um Ihr Passwort zurückzusetzen:"
+msgstr ""
+"Παρακαλώ ακολουθήστε αυτό το σύνδεσμο για να επαναφέρετε τον κωδικό "
+"πρόσβασής σας:"
 
 #: application/controllers/UsersController.php:131
 #: application/controllers/UsersController.php:134
 #: application/controllers/UsersController.php:298
 #, php-format
 msgid "%s Administrator"
-msgstr "%s Administrator"
+msgstr "%s Διαχειριστής"
 
 #: application/controllers/UsersController.php:135
 #, php-format
 msgid "[%s] Reset Your Password"
-msgstr "[%s] Passwort zurücksetzen"
+msgstr "[%s] Επαναφορά κωδικού πρόσβασης"
 
 #: application/controllers/UsersController.php:138
 msgid "Please check your email for a link to reset your password."
 msgstr ""
-"Bitte rufen Sie Ihre E-Mails ab, um den Link zum Zurücksetzen Ihres "
-"Passworts zu erhalten."
+"Παρακαλούμε βρείτε στο mail σας ένα σύνδεσμο για να επαναφέρετε το "
+"συνθηματικό σας."
 
 #: application/controllers/UsersController.php:154
 msgid "Password: The passwords do not match."
-msgstr "Passwort: Die Passwörter stimmen nicht überein."
+msgstr "Κωδικός πρόσβασης: Οι κωδικοί πρόσβασης δεν ταιριάζουν."
 
 #: application/controllers/UsersController.php:160
 msgid "You may now log in to Omeka."
-msgstr "Sie können sich nun bei Omeka anmelden."
+msgstr "Μπορείτε πλέον να συνδεθείτε στο Omeka."
 
 #: application/controllers/UsersController.php:179
 msgid "Add User"
-msgstr "Benutzer hinzufügen"
+msgstr "Προσθήκη Χρήστη"
 
 #: application/controllers/UsersController.php:189
 #, php-format
 msgid "The user \"%s\" was successfully added!"
-msgstr "Der Benutzer \"%s\" wurde erfolgreich hinzugefügt!"
+msgstr "Ο Χρήστης \"%s\" προστέθηκε με επιτυχία!"
 
 #: application/controllers/UsersController.php:245
 msgid "Password changed!"
-msgstr "Passwort geändert!"
+msgstr "Ο κωδικός πρόσβασης άλλαξε!"
 
 #: application/controllers/UsersController.php:254
 #, php-format
 msgid "The user %s was successfully changed!"
-msgstr "Der Benutzer %s wurde erfolgreich geändert!"
+msgstr "Ο χρήστης \"%s\" άλλαξε με επιτυχία!"
 
 #: application/controllers/UsersController.php:274
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
-msgstr "Der Benutzer \"%s\" wurde erfolgreich gelöscht!"
+msgstr "Ο χρήστης \"%s\" έχει διαγραφεί επιτυχώς!"
 
 #: application/controllers/UsersController.php:280
 #, php-format
@@ -1890,13 +1895,13 @@ msgid ""
 "this user will remain in the archive, but will no longer be associated with "
 "this user."
 msgstr ""
-"%s wird aus dem System gelöscht. Objekte, Sammlungen und Schlagwörter, "
-"welche von diesem Benutzer angelegt wurden, verbleiben im Archiv, aber sind "
-"nicht mehr länger diesem Benutzer zugeordnet."
+"Ο %s θα διαγραφεί από το σύστημα. Αντικείμενα, συλλογές και tags τα οποία "
+"έχουν δημιουργηθεί από αυτό τον χρήστη θα παραμείνουν στους φακέλους αλλά "
+"δεν θα συσχετίζονται πλέον μαζί του."
 
 #: application/controllers/UsersController.php:294
 msgid "Welcome!"
-msgstr "Willkommen!"
+msgstr "Καλώς ήρθατε!"
 
 #: application/controllers/UsersController.php:296
 #, php-format
@@ -1904,378 +1909,373 @@ msgid ""
 "Your account for the %s archive has been created. Please click the following"
 " link to activate your account:"
 msgstr ""
-"Ihr Konto für das Archiv %s wurde angelegt. Bitte klicken Sie folgenden "
-"Link, um Ihr Konto zu aktivieren:"
+"Ο λογαριασμός για το %s αρχείο έχει δημιουργηθεί. Παρακαλούμε πατήστε τον "
+"ακόλουθω σύνδεσμο για να ενεργοποιήσετε τον λογαριασμό σας:"
 
 #: application/controllers/UsersController.php:299
 #, php-format
 msgid "Activate your account with the %s archive"
-msgstr "Aktivieren Sie Ihr Konto für das Archiv %s"
+msgstr "Ενεργοποιήστε το λογαριασμό σας με το %s αρχείο"
 
 #: application/forms/ChangePassword.php:35
 msgid "Current Password"
-msgstr "Aktuelles Passwort"
+msgstr "Τρέχοντας κωδικός πρόσβασης"
 
 #: application/forms/ChangePassword.php:44
 msgid "New Password"
-msgstr "Neues Passwort"
+msgstr "Νέος κωδικός πρόσβασης"
 
 #: application/forms/ChangePassword.php:78
 msgid "Repeat New Password"
-msgstr "Neues Passwort wiederholen"
+msgstr "Επανάληψη νέου κωδικού πρόσβασης"
 
 #: application/forms/ChangePassword.php:86
 msgid "Save Password"
-msgstr "Passwort speichern"
+msgstr "Αποθήκευση κωδικού πρόσβασης"
 
 #: application/forms/ChangePassword.php:95
 msgid "Change Password"
-msgstr "Passwort ändern"
+msgstr "Αλλαγή κωδικού πρόσβασης"
 
 #: application/forms/GeneralSettings.php:28 application/forms/Install.php:85
 msgid "Site Title"
-msgstr "Blogtitel"
+msgstr "Τίτλος Σελίδας"
 
 #: application/forms/GeneralSettings.php:32 application/forms/Install.php:90
 msgid "Site Description"
-msgstr "Beschreibung der Website"
+msgstr "Περιγραφή σελίδας"
 
 #: application/forms/GeneralSettings.php:36 application/forms/Install.php:94
 msgid "Administrator Email"
-msgstr "E-Mail-Adresse des Administrators"
+msgstr "Ηλεκτρονική διεύθυνση διαχειριστή"
 
 #: application/forms/GeneralSettings.php:42 application/forms/Install.php:100
 msgid "Site Copyright Information"
-msgstr "Urheberrechtsinformationen der Website"
+msgstr "Πληροφορίες Πνευματικών Δικαιωμάτων Ιστοσελίδας"
 
 #: application/forms/GeneralSettings.php:46 application/forms/Install.php:104
 msgid "Site Author Information"
-msgstr "Informationen über den Website-Autor"
+msgstr "Πληροφορίες Συγγραφέα Ιστοσελίδας"
 
 #: application/forms/GeneralSettings.php:50 application/forms/Install.php:108
 msgid "Tag Delimiter"
-msgstr "Schlagwortbegrenzer"
+msgstr "Οριοθέτηση Τag"
 
 #: application/forms/GeneralSettings.php:51
 msgid ""
 "Separate tags using this character or string. Be careful when changing this "
 "setting. You run the risk of splitting tags that contain the old delimiter."
 msgstr ""
-"Trennen Sie Schlagwörter mit diesem Zeichen oder dieser Zeichenfolge. "
-"Vorsicht beim Ändern dieser Einstellung: Sie riskieren, dass Schlagwörter "
-"getrennt werden, die das bisherige Trennzeichen enthalten."
+"Διαχωρίσετε τα tags, χρησιμοποιώντας αυτόν το χαρακτήρα ή string. Να είστε "
+"προσεκτικοί κατά την αλλαγή αυτής της ρύθμισης. Μπορείτε να διατρέξετε τον "
+"κίνδυνο της διάσπασης των tags που περιέχουν τις παλιές οριοθετίσεις."
 
 #: application/forms/GeneralSettings.php:64 application/forms/Install.php:123
 msgid "Fullsize Image Size"
-msgstr "Grösse der Bilder-Detailansicht"
+msgstr "Πραγματικό μέγεθος εικόνας"
 
 #: application/forms/GeneralSettings.php:65 application/forms/Install.php:124
 msgid "Maximum fullsize image size constraint (in pixels)."
-msgstr "Maximale Grösse der Bilder-Detailansicht (in Pixel)."
+msgstr "Περιορισμός μέγιστου πραγματικού μεγέθους εικόνας (σε pixels)"
 
 #: application/forms/GeneralSettings.php:71 application/forms/Install.php:131
 msgid "Thumbnail Size"
-msgstr "Grösse der Vorschaubilder"
+msgstr "Μέγεθος εικονιδίου"
 
 #: application/forms/GeneralSettings.php:72 application/forms/Install.php:132
 msgid "Maximum thumbnail size constraint (in pixels)."
-msgstr "Maximale Grösse der Vorschaubilder (in Pixel)."
+msgstr "Περιορισμός μέγιστου μεγέθους εικόνιδίου (σε pixels)"
 
 #: application/forms/GeneralSettings.php:78 application/forms/Install.php:139
 msgid "Square Thumbnail Size"
-msgstr "Grösse der quadratischen Vorschaubilder"
+msgstr "Square μέγεθος μικρογραφιών"
 
 #: application/forms/GeneralSettings.php:79 application/forms/Install.php:140
 msgid "Maximum square thumbnail size constraint (in pixels)."
-msgstr "Maximale Grösse der quadratischen Vorschaubilder (in Pixel)."
+msgstr "Περιορισμός μέγιστου square μεγέθους μικρογραφιών (σε pixels)"
 
 #: application/forms/GeneralSettings.php:85 application/forms/Install.php:147
 msgid "Items Per Page (admin)"
-msgstr "Objekte pro Seite (Administrationsbereich)"
+msgstr "Αντικείμενα ανα σελίδα (admin)"
 
 #: application/forms/GeneralSettings.php:86 application/forms/Install.php:148
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
 msgstr ""
-"Beschränken Sie die Anzahl der Objekte pro Seite, welche im "
-"Administrationsbereich angezeigt werden."
+"Περιορισμός του αριθμού των αντικειμένων που εμφανίζονται ανα σελίδα στη "
+"διεπαφή του διαχειριστή"
 
 #: application/forms/GeneralSettings.php:92 application/forms/Install.php:155
 msgid "Items Per Page (public)"
-msgstr "Objekte pro Seite (Öffentlicher Bereich)"
+msgstr "Αντικείμενα ανά σελίδα (public)"
 
 #: application/forms/GeneralSettings.php:93 application/forms/Install.php:156
 msgid "Limit the number of items displayed per page in the public interface."
 msgstr ""
-"Beschränken Sie die Anzahl der Objekte pro Seite, welche im öffentlichen "
-"Bereich der Website angezeigt werden."
+"Περιορίσμός του αριθμού των αντικειμένων που εμφανίζονται ανα σελίδα στη "
+"δημόσια διεπαφή"
 
 #: application/forms/GeneralSettings.php:99 application/forms/Install.php:163
 msgid "Show Empty Elements"
-msgstr "Leere Elemente anzeigen"
+msgstr "Εμφάνιση κενών στοιχείων"
 
 #: application/forms/GeneralSettings.php:104
 msgid "Enable Prototype"
-msgstr "Prototype aktivieren"
+msgstr "Ενεργοποίηση πρωτότυπου"
 
 #: application/forms/GeneralSettings.php:106
 msgid ""
 "Enable the Prototype JavaScript library. This may be required for some older"
 " plugins."
 msgstr ""
-"Aktivieren Sie die JavaSript-Bibliothek \"Prototype\". Dies kann für einige "
-"ältere Plugins erforderlich sein."
+"Ενεργοποίηση της βιβλιοθήκης Prototype JavaScript. Αυτό μπορεί να απαιτείται"
+" για κάποια παλιότερα plugins. "
 
 #: application/forms/GeneralSettings.php:110 application/forms/Install.php:169
 msgid "Imagemagick Directory Path"
-msgstr "Pfad zum ImageMagick-Verzeichnis"
+msgstr "Διαδρομή καταλόγου Imagemagick"
 
 #: application/forms/GeneralSettings.php:114
 msgid "Save Settings"
-msgstr "Einstellungen speichern"
+msgstr "Αποθήκευση ρυθμίσεων"
 
 #: application/forms/Install.php:37
 msgid "Only alphanumeric characters are allowed."
-msgstr "Es sind nur alphanumerische Zeichen erlaubt."
+msgstr "Επιτρέπονται μόνο αλφαριθμητικοί χαρακτήρες."
 
 #: application/forms/Install.php:43 application/forms/Login.php:34
 msgid "Password"
-msgstr "Passwort"
+msgstr "Κωδικός πρόσβασης"
 
 #: application/forms/Install.php:44
 msgid "Must be at least 6 characters."
-msgstr "Min. 6 Zeichen."
+msgstr "Πρέπει να είναι τουλάχιστον 6 χαρακτήρες."
 
 #: application/forms/Install.php:66 application/forms/ResetPassword.php:49
 #: application/views/scripts/users/activate.php:19
 msgid "Re-type the Password"
-msgstr "Passwort nochmals eingeben"
+msgstr "Πληκτρολογήστε ξανά τον κωδικό πρόσβασης"
 
 #: application/forms/Install.php:67
 msgid "Confirm your password."
-msgstr "Bestätigen Sie Ihr Passwort."
+msgstr "Επιβεβαιώστε τον κωδικό πρόσβασής σας."
 
 #: application/forms/Install.php:109
 msgid "Separate tags using this character or string."
-msgstr ""
-"Trennen Sie Schlagwörter mit diesem Zeichen bzw. mit dieser Zeichenfolge."
+msgstr "Διαχωρίστε τα tags χρησιμοπιώντας αυτόν τον χαρακτήτα ή string."
 
 #: application/forms/Install.php:165
 msgid "Whether metadata elements with no text will be displayed."
-msgstr "Legt fest, ob Metadaten-Elemente ohne Text angezeigt werden."
+msgstr "Αν τα στοιχεία μεταδεδομένων χωρίς κείμενο θα εμφανίζονται"
 
 #: application/forms/Install.php:180
 msgid "Default Superuser Account"
-msgstr "Standardkonto für Super-User"
+msgstr "Προεπιλεγμένος λογαριασμός Superuser"
 
 #: application/forms/Install.php:190
 msgid "Site Settings"
-msgstr "Website-Einstellungen"
+msgstr "Ρυθμίσεις σελίδας"
 
 #: application/forms/Login.php:32
 msgid "Username cannot be empty."
-msgstr "Der Benutzername darf nicht leer sein."
+msgstr "Το όνομα χρήστη δεν μπορεί να είναι κενό."
 
 #: application/forms/Login.php:41
 msgid "Password cannot be empty."
-msgstr "Das Passwort darf nicht leer sein."
+msgstr "Ο κωδικός πρόσβασης δεν μπορεί να είναι κενός."
 
 #: application/forms/Login.php:42
 msgid "Remember Me?"
-msgstr "Dauerhaft angemeldet bleiben?"
+msgstr "Να με θυμάσαι;"
 
 #: application/forms/Login.php:44 application/views/scripts/users/login.php:3
 msgid "Log In"
-msgstr "Anmelden"
+msgstr "Σύνδεση"
 
 #: application/forms/RecoverPassword.php:41
 msgid "Email address is required."
-msgstr "Es ist eine E-Mail-Adresse erforderlich."
+msgstr "Απαιτείται διεύθυνση email"
 
 #: application/forms/RecoverPassword.php:51
 msgid "Invalid email address given."
-msgstr "Ungültige E-Mail-Adresse."
+msgstr "Μη έγκυρη διεύθυνση email"
 
 #: application/forms/RecoverPassword.php:53
 msgid "Invalid format given for email address."
-msgstr "Die angegebene E-Mail-Adresse hat ein ungültiges Format."
+msgstr "Μη έγκυρη μορφή διεύθυνσης email"
 
 #: application/forms/RecoverPassword.php:55
 msgid "Invalid hostname given for email address."
-msgstr "Die angegebene E-Mail-Adresse hat eine ungültige Domain."
+msgstr "Μη έγκυρος παροχέας διεύθυνσης email"
 
 #: application/forms/RecoverPassword.php:73
 msgid "Invalid email address"
-msgstr "Ungültige E-Mail-Adresse"
+msgstr "Μη έγκυρη διεύθυνση e-mail"
 
 #: application/forms/ResetPassword.php:28
 #: application/views/scripts/users/activate.php:13
 msgid "Create a Password"
-msgstr "Passwort wählen"
+msgstr "Δημιουργία ενός κωδικού πρόσβασης"
 
 #: application/forms/ResetPassword.php:32
 msgid "Password is required."
-msgstr "Es ist ein Passwort erforderlich."
+msgstr "Ο κωδικός πρόσβασης είναι υποχρεωτικός."
 
 #: application/forms/ResetPassword.php:38
 msgid "Typed passwords do not match."
-msgstr "Die eingegebenen Passwörter stimmen nicht überein."
+msgstr "Τα συνθηματικά που πληκτρολογήθηκαν δεν είναι ίδια"
 
 #: application/forms/SecuritySettings.php:27
 msgid "Disable File Upload Validation"
-msgstr "Validierung von Datei-Uploads deaktivieren"
+msgstr "Απενεργοποίηση επικύρωσης μεταφόρτωσης αρχείου"
 
 #: application/forms/SecuritySettings.php:29
 msgid ""
 "Check this field if you would like to allow any file to be uploaded to "
 "Omeka."
-msgstr ""
-"Wählen Sie diese Option, wenn Sie möchten, dass jegliche Dateien in Omeka "
-"hochgeladen werden können."
+msgstr "Επιλέξτε αυτό το πεδίο αν θέλετε να ανεβάσετε κάποιο αρχείο στο Omeka"
 
 #: application/forms/SecuritySettings.php:35
 msgid "Allowed File Extensions"
-msgstr "Zulässige Dateierweiterungen"
+msgstr "Επιτρεπόμενες επεκτάσεις αρχείων"
 
 #: application/forms/SecuritySettings.php:36
 msgid "List of allowed extensions for file uploads."
-msgstr "Liste der für Datei-Uploads zulässigen Dateierweiterungen."
+msgstr "Λίστα επιτρεπόμενων επεκτάσεων αρχείων προς μεταφόρτωση"
 
 #: application/forms/SecuritySettings.php:45
 msgid "Allowed File Types"
-msgstr "Zulässige Dateitypen"
+msgstr "Επιτρεπόμενοι τύποι αρχείων"
 
 #: application/forms/SecuritySettings.php:46
 msgid "List of allowed MIME types for file uploads"
-msgstr "Liste der für Datei-Uploads zulässigen MIME Types"
+msgstr "Λίστα επιτρεπτών τύπων MIME για ανέβασμα αρχείων"
 
 #: application/forms/SecuritySettings.php:55
 msgid "ReCaptcha Public Key"
-msgstr "ReCaptcha: Öffentlicher Schlüssel"
+msgstr "Δημόσιο κλειδί ReCaptcha"
 
 #: application/forms/SecuritySettings.php:56
 msgid ""
 "Public key from recaptcha.net. Both this and the private key must be filled "
 "in to secure public forms."
 msgstr ""
-"Öffentlicher Schlüssel von recaptcha.net. Sowohl der öffentliche als auch "
-"der private Schlüssel muss eingetragen werden, um öffentliche Formulare zu "
-"sichern."
+"Δημόσιο κλειδί από το recaptcha.net. Αυτό μαζί με το ιδιωτικό κλειδί πρέπει "
+"να συμπληρωθούν για την ασφάλιση δημόσιων φορμων."
 
 #: application/forms/SecuritySettings.php:63
 msgid "ReCaptcha Private Key"
-msgstr "ReCaptcha: Privater Schlüssel"
+msgstr "Ιδιωτικό κλειδί ReCaptcha"
 
 #: application/forms/SecuritySettings.php:64
 msgid ""
 "Private key from recaptcha.net. Both this and the public key must be filled "
 "in to secure public forms."
 msgstr ""
-"Privater Schlüssel von recaptcha.net. Sowohl der öffentliche als auch der "
-"private Schlüssel muss eingetragen werden, um öffentliche Formulare zu "
-"sichern."
+"Ιδιωτικό κλειδί από το recaptcha.net. Αυτό μαζί με το δημόσιο κλειδί πρέπει "
+"να συμπληρωθούν για την ασφάλιση δημόσιων φορμων."
 
 #: application/forms/User.php:35
 msgid "Username is required."
-msgstr "Es ist ein Benutzername erforderlich."
+msgstr "Το όνομα χρήστη είναι υποχρεωτικό."
 
 #: application/forms/User.php:43
 msgid "Username must contain only letters and numbers."
-msgstr "Benutzernamen dürfen nur aus Buchstaben und Ziffern bestehen."
+msgstr "Το όνομα χρήστη πρέπει να περιέχει μόνο γράμματα και αριθμούς."
 
 #: application/forms/User.php:53
 msgid "Username must be at least %min% characters long."
-msgstr "Benutzernamen müssen mindestens %min% Zeichen lang sein."
+msgstr "Το όνομα Χρήστη πρέπει να είναι το λιγότερο %min% χαρακτήρες."
 
 #: application/forms/User.php:55
 msgid "Username must be at most %max% characters long."
-msgstr "Benutzernamen dürfen höchstens %min% Zeichen lang sein."
+msgstr "Το όνομα Χρήστη πρέπει να είναι το πολύ %max% χαρακτήρες."
 
 #: application/forms/User.php:69
 msgid "This username is already in use."
-msgstr "Dieser Benutzername ist bereits vergeben."
+msgstr "Αυτό το όνομα χρήστη είναι ήδη σε χρήση."
 
 #: application/forms/User.php:84
 msgid "First name is required."
-msgstr "Der Vorname ist zwingend erforderlich."
+msgstr "Το όνομα είναι απαραίτητο."
 
 #: application/forms/User.php:97
 msgid "Last name is required."
-msgstr "Der Nachname ist zwingend erforderlich."
+msgstr "Το επώνυμο είναι απαραίτητο."
 
 #: application/forms/User.php:103
 msgid "This email address is invalid."
-msgstr "Diese E-Mail-Adresse ist ungültig."
+msgstr "Αυτή η διεύθυνση email δεν είναι έγκυρη."
 
 #: application/forms/User.php:111
 msgid "Email is required."
-msgstr "Die E-Mail-Adresse ist zwingend erforderlich."
+msgstr "Το Email είναι υποχρεωτικό."
 
 #: application/forms/User.php:130
 msgid "This email address is already in use."
-msgstr "Diese E-Mail-Adresse ist bereits in Gebrauch."
+msgstr "Αυτό το email είναι ήδη σε χρήση."
 
 #: application/forms/User.php:151
 msgid "Active?"
-msgstr "Aktiv?"
+msgstr "Ενεργό;"
 
 #: application/helpers/AssetFunctions.php:270
 #: application/helpers/AssetFunctions.php:289
 #, php-format
 msgid "Could not find file %s!"
-msgstr "Die Datei %s wurde nicht gefunden!"
+msgstr "Δεν βρέθηκε το αρχείο %s!"
 
 #: application/helpers/CollectionFunctions.php:58
 #, php-format
 msgid "%s does not exist for collections!"
-msgstr "%s existiert nicht für Sammlungen!"
+msgstr "%s δεν υπάρχει στις συλλογές"
 
 #: application/helpers/CollectionFunctions.php:123
 msgid "Featured Collection"
-msgstr "Hervorgehobene Sammlung"
+msgstr "Προτεινόμενη συλλογή"
 
 #: application/helpers/CollectionFunctions.php:131
 msgid "No featured collections are available."
-msgstr "Es sind keine hervorgehobenen Sammlungen vorhanden."
+msgstr "Δεν υπάρχουν προτεινόμενες συλλογές"
 
 #: application/helpers/ElementForm.php:50
 msgid "Add Input"
-msgstr "Eingabe hinzufügen"
+msgstr "Προσθήκη συμβολής"
 
 #: application/helpers/ElementForm.php:286
 #, php-format
 msgid "Cannot display a form input for \"%s\" if element type name is not given!"
 msgstr ""
-"Formularfeld für \"%s\" kann nicht angezeigt werden, weil der Elementtyp "
-"nicht angegeben wurde!"
+"Η εμφάνιση της φόρμας συμβολής για \"%s\"  δεν είναι δυνατή αν δεν δοθεί το "
+"όνομα του τύπου στοιχείου"
 
 #: application/helpers/ElementForm.php:346
 msgid "From"
-msgstr "Von"
+msgstr "Από"
 
 #: application/helpers/ElementForm.php:349
 msgid "To"
-msgstr "An"
+msgstr "Μέχρι"
 
 #: application/helpers/ElementForm.php:369
 msgid "Use HTML"
-msgstr "HTML benutzen"
+msgstr "Χρήση HTML"
 
 #: application/helpers/FileMetadata.php:98
 #, php-format
 msgid "%s is an invalid special value."
-msgstr "%s ist ein ungültiger Spezialwert."
+msgstr "%s δεν είναι έγκυρη ειδική αξία"
 
 #: application/helpers/FormFunctions.php:135
 msgid "Select Below "
-msgstr "Unten auswählen"
+msgstr "Επιλέξτε παρακάτω"
 
 #: application/helpers/FormFunctions.php:245
 #: application/helpers/FormFunctions.php:533
 #: application/views/scripts/users/forgot-password.php:18
 msgid "Submit"
-msgstr "Senden"
+msgstr "Υποβολή"
 
 #: application/helpers/Functions.php:53
 msgid "Omeka RSS Feed"
@@ -2287,32 +2287,32 @@ msgstr "Omeka Atom Feed"
 
 #: application/helpers/Functions.php:200
 msgid "Error: Invalid callback was provided for the loop."
-msgstr "Fehler: Ungültiger Callback in der Schleife."
+msgstr "Σφάλμα: μη έγκυρο ανάκληση δόθηκε για τον βρόγχο"
 
 #: application/helpers/ItemFunctions.php:58
 msgid "Featured Item"
-msgstr "Hervorgehobenes Objekt"
+msgstr "Προτεινόμενο αντικείμενο"
 
 #: application/helpers/ItemFunctions.php:73
 msgid ""
 "An item has not been set to be displayed on this theme page! Please see "
 "Omeka documentation for details."
 msgstr ""
-"Ein Objekt wurde nicht zur Anzeige auf dieser Theme-Seite definiert! Für "
-"Details schlagen Sie bitte in der Omeka-Dokumentation nach."
+"Δεν έχει καθοριστεί κάποιο αντικείμενο για προβολή σε αυτή τη σελίδα! "
+"Παρακαλούμε δείτε την τεκμηρίωση του Omeka για λεπτομέριες"
 
 #: application/helpers/ItemFunctions.php:571
 msgid "No featured items are available."
-msgstr "Es sind keine hervorgehobenen Sammlungen vorhanden."
+msgstr "Δεν υπάρχουν προτεινόμενα χαρακτηριστικά διαθέσιμα"
 
 #: application/helpers/ItemMetadata.php:86
 #, php-format
 msgid "'%s' is an invalid special value."
-msgstr "'%s' ist ein ungültiger Spezialwert."
+msgstr "'%s' δεν είναι έγκυρη ειδική αξία"
 
 #: application/helpers/LinkFunctions.php:43
 msgid "View"
-msgstr "Ansehen"
+msgstr "Προοβολή"
 
 #: application/helpers/LinkFunctions.php:208
 msgid "RSS"
@@ -2320,11 +2320,11 @@ msgstr "RSS"
 
 #: application/helpers/LinkFunctions.php:225
 msgid "Next Item &rarr;"
-msgstr "Nächstes Objekt &rarr;"
+msgstr "Επόμενο αντικείμενο &rarr;"
 
 #: application/helpers/LinkFunctions.php:241
 msgid "&larr; Previous Item"
-msgstr "&larr; Vorangehendes Objekt"
+msgstr "&larr; Προηγούμενο αντικείμενο"
 
 #: application/helpers/LinkFunctions.php:530
 msgid "Atom"
@@ -2332,16 +2332,16 @@ msgstr "Atom"
 
 #: application/helpers/TagFunctions.php:133
 msgid "No tags are available."
-msgstr "Es sind keine Schlagwörter vorhanden."
+msgstr "Δεν υπάρχουν διαθέσιμα tags"
 
 #: application/libraries/Omeka/View/Helper/RecordMetadataList.php:91
 msgid "[no text]"
-msgstr "[kein Text]"
+msgstr "[χωρίς κείμενο]"
 
 #: application/models/ActsAsElementText.php:257
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
-msgstr "Kein Element mit der ID '%s' gefunden!"
+msgstr "Δεν βρέθηκε στοιχείο με ID '%s'!"
 
 #: application/models/ActsAsElementText.php:314
 #, php-format
@@ -2349,166 +2349,163 @@ msgid ""
 "Element name is ambiguous! There is more than one element set containing an "
 "element named \"%s\"!"
 msgstr ""
-"Der Elementname ist nicht eindeutig! Es gibt mehr als einen Elementensatz, "
-"der ein Element mit Namen \"%s\" enthält!"
+"Το όνομα του στοιχείου είναι διφορούμενο. Περισσότερα από ένα στοιχεία "
+"περιέχουν ένα στοιχείο με το όνομα \"%s\"!"
 
 #: application/models/ActsAsElementText.php:317
 #: application/models/ActsAsElementText.php:324
 #, php-format
 msgid "There is no element named \"%s\"!"
-msgstr "Es gibt kein Element mit dem Namen \"%s\"!"
+msgstr "Δεν υπάρχει στοιχείο με ID '%s'!"
 
 #: application/models/ActsAsElementText.php:328
 #, php-format
 msgid "There is no element named \"%1$s\" in the set named \"%2$s\"!"
-msgstr "Es gibt kein Element mit Namen \"%1$s\" im Set mit Namen \"%2$s\"!"
+msgstr "Δεν υπάρχει στοιχείο \"%1$s\" στο σύνολο \"%2$s\"!"
 
 #: application/models/ActsAsElementText.php:484
 msgid "Element texts are not formatted correctly!"
-msgstr "Die Elementtexte sind nicht korrekt formatiert!"
+msgstr "Το κείμενο των στοιχείων δεν είναι μορφοποιημένο σωστά."
 
 #: application/models/ActsAsElementText.php:647
 #, php-format
 msgid "Cannot process form input for element with data type \"%s\"!"
 msgstr ""
-"Die Formulareingabe für das Element mit dem Datentyp \"%s\" kann nicht "
-"verarbeitet werden!"
+"Δεν μπορεί να γίνει επεξεργασία των παρεχόμενων στοιχείων στη φόρμα για "
+"στοιχεία με τύπο δεδομένων \"%s\"!"
 
 #: application/models/ActsAsElementText.php:662
 #, php-format
 msgid "The \"%s\" field has at least one invalid value!"
-msgstr "Das Feld \"%s\" enthält mindestens einen ungültigen Wert!"
+msgstr "Το \"%s\" πεδίο έχει τουλάχιστον μία έγκυρη τιμή!"
 
 #: application/models/ActsAsElementText.php:695
 #, php-format
 msgid "Cannot validate an element of data type \"%s\"!"
-msgstr "Ein Element mit dem Datentyp \"%s\" kann nicht validiert werden!"
+msgstr "Δεν μπορείτε να επικυρώσετε ένα πεδίο δεδομένων τύπου \"%s\"!"
 
 #: application/models/ActsAsElementText.php:735
 msgid "Cannot save element text for records that are not yet persistent!"
 msgstr ""
-"Elementtexte für Datensätze, die noch nicht persistent sind, können nicht "
-"gespeichert werden."
+"Δεν είναι δυνατή η αποθήκευση κειμένου στοιχείων για εγγραφές που δεν "
+"συνεχίζουν να υτπάρχουν!"
 
 #: application/models/Collection.php:107
 msgid "Collectors must be either a string or an array."
-msgstr "Sammler müssen entweder ein String oder ein Array sein. "
+msgstr "Οι συλλέκτες πρέπει να είναι είτε ένα string ή ένα array."
 
 #: application/models/Collection.php:148
 #, php-format
 msgid "The collection name must have between %1$s and %2$s characters."
-msgstr "Der Sammlungsname muss zwischen %1$s und %2$s Zeichen haben."
+msgstr ""
+"Το όνομα της συλλογής πρέπει να είναι μεταξύ %1$s και %2$s χαρακτήρων."
 
 #: application/models/Collection.php:198
 msgid ""
 "Argument passed to addCollector() must be a string or an instance of Entity."
 msgstr ""
-"Das Argument, das an addCollector() übergeben wird, muss ein String oder "
-"eine Instanz einer Entität sein."
+"Η δήλωση για το addCollector() πρέπει να είναι string η στιγμιότυπο μιας "
+"Οντότητας."
 
 #: application/models/Collection.php:230
 msgid "Cannot associate the collection with an unsaved user."
-msgstr ""
-"Die Sammlung kann nicht mit einem ungespeicherten Benutzer verbunden werden."
+msgstr "Δεν μπορείτε να συνδέσετε την συλλογή με έναν μη αποθηκευμένο χρήστη."
 
 #: application/models/CollectionPermissions.php:37
 msgid "Invalid query provided to CollectionPermissions check"
-msgstr "Ungültige Anfrage für den CollectionPermissions Check"
+msgstr "Μη έγκυρος όρος για έλεγχο του CollectionPermissions "
 
 #: application/models/DataTypeTable.php:31
 #, php-format
 msgid "Cannot find id from DataType name: %s"
-msgstr "Die ID des Datentyps %s wurde nicht gefunden."
+msgstr "Δεν μπόρεσε να βρεθεί id από τον τύππο δεδομένων με το όνομα: %s"
 
 #: application/models/Element.php:180
 msgid "Name must not be empty!"
-msgstr "Der Name darf nicht leer sein!"
+msgstr "Το όνομα δεν πρέπει να είναι κενό!"
 
 #: application/models/Element.php:184
 msgid "Element must have a valid data type!"
-msgstr "Das Element muss einen gültigen Datentyp haben!"
+msgstr "Το πεδίο πρέπει να έχοει ένα έγκυρο τύπο δεδομένων!"
 
 #: application/models/Element.php:188
 msgid "Element must have a valid record type!"
-msgstr "Das Element muss einen gültigen Datensatztyp haben!"
+msgstr "Το πεδίο πρέπει να έχοει ένα έγκυρο τύπο εγγραφής!"
 
 #: application/models/Element.php:193
 #, php-format
 msgid "%1$s already exists for element set #%2$s"
-msgstr "%1$s existiert bereits im Elementsatz #%2$s"
+msgstr "%1$s υπάρχει ήδη για το πεδίο #%2$s"
 
 #: application/models/Element.php:252
 #, php-format
 msgid "Cannot set element set ID: set named \"%s\" does not exist."
 msgstr ""
-"Die Elementsatz-ID kann nicht erstellt werden: Der Satz mit Namen \"%s\" "
-"existiert nicht."
+"Δεν μπορείτε να ορίσετε το πεδίο με ID: που με το όνομα \"%s\" δεν υπάρχει."
 
 #: application/models/ElementSet.php:119
 msgid "Name of element set must be unique."
-msgstr "Der Name des Elementsatz muss eindeutig sein."
+msgstr "Το όνομα του πεδίου πρέπει να είναι μοναδικό."
 
 #: application/models/ElementSet.php:123
 msgid "Name of element set must not be empty."
-msgstr "Der Name des Elementsatz darf nicht leer sein."
+msgstr "Το όνομα του πεδίου δεν πρέπει να είναι κενό."
 
 #: application/models/EntitiesRelations.php:29
 msgid "Joins in the EntitiesRelations table must be given a polymorphic type"
 msgstr ""
-"Joins in der Tabelle EntitiesRelations müssen einen polymorphen Typ haben."
+"Οι ενώσεις στον πίνακα EntitiesRelations πρέπει να έχουν πολυμορφικό τύπο"
 
 #: application/models/EntitiesRelations.php:33
 msgid "Joins in the EntitiesRelations table must be filled out entirely"
 msgstr ""
-"Joins in der Tabelle EntitiesRelations müssen vollständig ausgefüllt werden"
+"Οι ενώσεις στον πίνακα EntitiesRelations πρέπει να συμπληρωθούν ολόκληρες"
 
 #: application/models/Entity.php:37
 msgid "The email address provided is not valid."
-msgstr "Die angegebene E-Mail-Adresse ist ungültig."
+msgstr "Η διεύθυνση email δεν είναι έγκυρη."
 
 #: application/models/Entity.php:41
 msgid "The name for a person may not be completely blank."
-msgstr "Der Name einer Person darf nicht leer sein."
+msgstr "Το όνομα για ένα άτομο μπορεί να μην είναι εντελώς κενό."
 
 #: application/models/Entity.php:134
 msgid "Both of these Entities must be persistent in order to merge them."
 msgstr ""
-"Beide Entitäten müssen persistent sein, damit sie zusammengeführt werden "
-"können."
+"Και οι δύο Οντότητες πρέπει να είναι persistent για να μπορέσουν να ενωθούν."
 
 #: application/models/File.php:109
 msgid "Cannot get the local path for a stored file."
-msgstr ""
-"Der lokale Pfad für eine gespeicherte Datei konnte nicht gefunden werden."
+msgstr "Δεν μπορεί να βρεθεί το μονοπάτι για ένα αποθηκευμένο αρχείο."
 
 #: application/models/Item.php:284
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
 msgstr ""
-"Es können keine Dateien zu Objekten hinzugefügt werden, welche nicht "
-"persistent in der Datenbank sind!"
+"Τα αρχεία δεν μπορούν να είαι συνημμένα σε ένα αντικείμενο που δεν είναι "
+"υφιστάμενο στη βάση δεδομένων!"
 
 #: application/models/Item.php:398
 msgid "Cannot add an existing file to an item!"
-msgstr "Einem Objekt konnte eine existierende Datei nicht hinzugefügt werden."
+msgstr "Δεν μπορρεί να προστεθεί ένα υπάρχον αρχείο στο αντικείμενο!"
 
 #: application/models/Item.php:402
 msgid "File must be valid before it can be associated with an item!"
 msgstr ""
-"Eine Datei muss gültig sein bevor sie mit einem Objekt zugewiesen werden "
-"kann."
+"Το αρχείο πρέπει να είναι έγκυρο πρωτού να μπορεί να συσχετιστεί με ένα "
+"αντικείμενο!"
 
 #: application/models/ItemBuilder.php:141
 msgid "Cannot add tags to an item if no Entity is available to tag."
 msgstr ""
-"Einem Objekt können keine Schlagwörter hinzugefügt werden, wenn keine "
-"Entität für die Verschlagwortung verfügbar ist."
+"Δεν μπορούν να προστεθούν tags σε ένα αντικείμενο εάν δεν υπάρχει διαθέσιμη "
+"οντότητα να κάνει tag."
 
 #: application/models/ItemBuilder.php:265
 msgid "Must specify a file transfer type when attaching files to an item!"
 msgstr ""
-"Wenn Dateien zu einem Objekt hinzugefügt werden muss ein Dateitransfertyp "
-"angegeben werden!"
+"Πρέπει να καθοριστεί ο τύπος μεταφοράς αρχείου κατά την επισύναψει αρχείων "
+"σε ένα αντικείμενο!"
 
 #: application/models/ItemPermissions.php:34
 #, php-format
@@ -2516,261 +2513,254 @@ msgid ""
 "This SQL statement needs a FROM or JOIN clause equivalent to '%s i' in order"
 " to have permissions checked!"
 msgstr ""
-"Dieser SQL-Ausdruck benötigt ein FROM- oder JOIN-Element equivalent zu '%s "
-"i', damit die Berechtigungen überprüft werden können!"
+"Η SQL δήλωση χρειάζεται μια συνθήκη FROM ή JOIN αντίστοιχη του '%s i' "
+"προκειμένου να γίνει έλεγχος των αδειών!"
 
 #: application/models/ItemSearch.php:98
 msgid "Invalid search type given!"
-msgstr "Ungültiger Suchtyp!"
+msgstr "Μή έγκυρος τύπος αναζήτησης δόθηκε!"
 
 #: application/models/ItemType.php:83
 #, php-format
 msgid "The item type name must have between %1$s and %2$s characters."
 msgstr ""
-"Der Name des Objekttyps muss zwischen %1$s und %2$s Zeichen lang sein."
+"Το όνομα τύπου αντικείμενου πρέπει να έχει από %1$s μέχρι %2$s χαρακτήρες."
 
 #: application/models/ItemType.php:87
 msgid "The item type name must be unique."
-msgstr "Der Name des Objekttyps muss eindeutig sein."
+msgstr "Το όνομα του τύπου δεδομένων πρέπει να είναι μοναδικός."
 
 #: application/models/ItemType.php:175
 msgid "There are too many values in the element ordering array."
-msgstr "Es gibt zu viele Werte im Elementsortierungs-Array."
+msgstr "Υπάρχουν πάρα πολλές τιμές στο πεδίο πίνακας ταξινόμησης."
 
 #: application/models/ItemType.php:177
 msgid "There are too few values in the element ordering array."
-msgstr "Es gibt zu wenig Werte im Elementsortierungs-Array."
+msgstr "Υπάρχουν πολύ λίγες τιμές στο πεδίο πίνακας ταξινόμησης."
 
 #: application/models/ItemType.php:221
 msgid ""
 "Invalid element data. To add elements, you must either pass an element "
 "objects or an array of element metadata."
 msgstr ""
-"Ungültige Elementdaten. Um Elemente hinzuzufügen müssen entweder "
-"Elementobjekte oder ein Array mit Element-Metadaten übergeben werden."
+"Μη έγκυρα δεδομένα στοιχείου. Για να προσθέσετε στοιχεία θα πρέπει είτε να "
+"περάσετε ένα στοιχείο ή μια σειρά από στοιχεία μεταδεδομένων."
 
 #: application/models/ItemType.php:285
 msgid ""
 "Cannot remove elements from an item type that is not persistent in the "
 "database!"
 msgstr ""
-"Von einem Objekttyp, der nicht persistent in der Datenbank ist, können keine"
-" Elemente entfernt werden!"
+"Δεν μπορείτε να αφαιρέσετε στοιχεία από ένα τύπο αντικειμένου που δεν είναι "
+"επίμονο στη βάση δεδομένων!"
 
 #: application/models/ItemType.php:294
 #, php-format
 msgid "Cannot find element with ID %s!"
-msgstr "Das Element mit der ID %s wurde nicht gefunden!"
+msgstr "Δεν μπορεί να βρεθεί πεδίο με το ID %s!"
 
 #: application/models/ItemType.php:337
 #, php-format
 msgid "Item type does not contain an element with the ID %s!"
-msgstr "Der Objekttyp enthält kein Element mit der ID %s!"
+msgstr "Ο τύπος αντικειμένου δεν περιέχει κάποιο στοιχείο με ID %s!"
 
 #: application/models/ItemType.php:362
 msgid ""
 "Invalid parameter. The hasElement function requires either an element object"
 " or an element id to determine if an item type has an element."
-msgstr ""
-"Ungültiger Parameter. Die Funktion hasElement verlangt entweder ein "
-"Elementobjekt oder eine Element-ID um entscheiden zu können, ob ein "
-"Objekttyp ein Element besetzt."
+msgstr "Μη έγκυρη παράμετρος. Η λειτουργία hasElement απαιτεί είτε ένα "
 
 #: application/models/Option.php:28 application/models/Option.php:32
 msgid "Each option must have a unique name."
-msgstr "Jede Option muss einen eindeutigen Namen haben."
+msgstr "Κάθε επιλογή πρέπει να έχει ένα μοναδικό όνομα."
 
 #: application/models/Orderable.php:101
 msgid "Cannot add a child to a record that does not exist yet!"
 msgstr ""
-"Einem Datensatz, der noch nicht existiert, kann kein untergeordneter "
-"Datensatz hinzugefügt werden."
+"Δεν μπορεί να προστεθεί απόγονος σε μια καταγραφή που δεν υπάρχει ακόμα"
 
 #: application/models/Orderable.php:105
 #, php-format
 msgid "Child must be an instance of \"%s\""
-msgstr "Ein untergeordneter Datensatz muss eine Instanz von \"%s\" sein"
+msgstr "Ο απόγονος πρέπει να είνα ένα στιγμιότυπο του \"%s\""
 
 #: application/models/Plugin.php:94
 msgid "Names of plugins must not be blank"
-msgstr "Namen von Plugins dürfen nicht leer sein"
+msgstr "Τα ονόματα των plugins δεν μπορούν να είναι κενά"
 
 #: application/models/Relatable.php:158
 msgid "Invalid entity provided!"
-msgstr "Ungültige Entität!"
+msgstr "Μη έγκυρη οντότητα!"
 
 #: application/models/Relatable.php:169
 #, php-format
 msgid "Relationship called %s does not exist."
-msgstr "Eine Beziehung namens %s existiert nicht."
+msgstr "Σχέση που να ονομάζεται %s δεν υπάρχει."
 
 #: application/models/Relatable.php:222
 msgid "Record must exist before relations can be set."
-msgstr ""
-"Ein Datensatz muss existieren bevor Beziehungen definiert werden können."
+msgstr "Η εγγραφή πρέπει να υφίσταται πριν ρυθμίσετε κάποια σχέση."
 
 #: application/models/Tag.php:58
 msgid "Tags must be given a name."
-msgstr "Schlagwörter müssen eine Bezeichnung erhalten."
+msgstr "Τα Tags πρέπει να έχουν ένα όνομα."
 
 #: application/models/Tag.php:62
 msgid "That name is already taken for this tag."
-msgstr "Diese Bezeichnung ist für dieses Schlagwort bereits vergeben."
+msgstr "Αυτό το όνομα έχει ήδη ληφθεί για αυτό το tag."
 
 #: application/models/Taggable.php:195
 msgid "A valid record ID # must be provided when tagging."
-msgstr "Beim Verschlagworten muss eine gültige Datensatz-ID übergeben werden."
+msgstr "Μία έγκυρη εγγραφή ID # πρέπει να παρέχεται όταν γίνετε tagging."
 
 #: application/models/Taggable.php:199
 msgid "A valid entity or user must be provided when tagging."
 msgstr ""
-"Beim Verschlagworten muss eine gültige Entität oder ein gültiger Benutzer "
-"übergeben werden."
+"Μια έγκυρη οντότητα ή ο χρήστης πρέπει να παρέχονται όταν γίνετε tagging."
 
 #: application/models/User.php:63
 msgid "No Entity record available."
-msgstr "Kein Entitäts-Datensatz vorhanden."
+msgstr "Δεν υπάρχει διαθέσιμη εγγραφή Οντότητας."
 
 #: application/models/User.php:75
 msgid "No Entity record is available when saving this User."
-msgstr ""
-"Beim Speichern dieses Benutzers ist kein Entitäts-Datensatz vorhanden."
+msgstr "Δεν υπάρχει διαθέσιμη εγγραφή οντότητας ενώ αποθηκεύεις τον Χρήστη."
 
 #: application/models/User.php:92
 msgid "User may not change permissions to super-user"
-msgstr "Der Benutzer darf die Berechtigungsstufe nicht auf Super-User setzen."
+msgstr "Ο χρήστης δεν μπορεί να αλλάξει τα δικαιώματα σε super-χρήστη"
 
 #: application/models/User.php:95
 msgid "User may not change roles."
-msgstr "Der Benutzer darf keine Rollen bearbeiten."
+msgstr "Ο χρήστης δεν μπορεί να αλλάξει τους ρόλους."
 
 #: application/models/User.php:153
 msgid ""
 "If a first name and last name are not provided, then an institution name is "
 "required."
 msgstr ""
-"Wenn kein Vor- und Nachname eingegeben wird, dann ist der Name einer "
-"Institution erforderlich."
+"Εάν το όνομα και το επώνυμο δεν παρέχονται, τότε το όνομα ιδρύματος είναι "
+"υποχρεωτικό."
 
 #: application/models/User.php:156
 msgid "A first name is required."
-msgstr "Ein Vorname ist erforderlich."
+msgstr "Το όνομα είναι απαραίτητο."
 
 #: application/models/User.php:159
 msgid "A last name is required."
-msgstr "Ein Nachname ist erforderlich."
+msgstr "Το επώνυμο είναι απαραίτητο."
 
 #: application/models/User.php:175
 msgid "The user must be assigned a role."
-msgstr "Dem Benutzer muss eine Rolle zugewiesen werden."
+msgstr "Στον χρήστη πρέπει να ανατεθεί ένας ρόλος."
 
 #: application/models/User.php:180
 #, php-format
 msgid "The username \"%1$s\" must be between %2$s and %3$s characters."
-msgstr "Der Benutzername \"%1$s\" muss zwischen %2$s und %3$s Zeichen lang sein."
+msgstr "Το όνομα χρήστη \"%1$s\" πρέπει να είναι μεταξύ %2$s και %3$s χαρακτήρων."
 
 #: application/models/User.php:182
 msgid "The username must be alphanumeric."
-msgstr "Der Benutzername muss alphanumerisch sein."
+msgstr "Το όνομα χρήστη πρέπει να είναι αλφαριθμητικό."
 
 #: application/models/User.php:184
 #, php-format
 msgid "'%s' is already in use. Please choose another username."
-msgstr ""
-"'%s' wird bereits benutzt. Bitte wählen Sie einen anderen Benutzernamen."
+msgstr "'%s' είναι ήδη σε χρήση. Παρακαλώ διαλέξτε ένα άλλο όνομα χρήστη."
 
 #: application/models/UsersActivations.php:31
 msgid "Cannot create a user activation for non-existent user."
 msgstr ""
-"Für einen nicht-existierenden Benutzer kann keine Benutzeraktivierung "
-"erzeugt werden."
+"Δεν μπορείτε να δημιουργήσετε μια ενεργοποίηση χρήστη για έναν χρήστη που "
+"δεν υπάρχει."
 
 #: application/views/scripts/collections/browse.php:21
 #: application/views/scripts/collections/show.php:13
 msgid "Collector(s)"
-msgstr "Sammler"
+msgstr "Συλλέκτης (ες)"
 
 #: application/views/scripts/collections/browse.php:28
 #: application/views/scripts/collections/show.php:22
 #, php-format
 msgid "View the items in %s"
-msgstr "Objekte in %s anzeigen"
+msgstr "Δείτε τα αντικείμενα σε %s"
 
 #: application/views/scripts/collections/show.php:25
 #, php-format
 msgid "Items in the %s Collection"
-msgstr "Objekte in der Sammlung %s"
+msgstr "Αντικείμενα μέσα σε %s Συλλογή"
 
 #: application/views/scripts/common/delete-confirm.php:3
 #, php-format
 msgid "Delete %s"
-msgstr "%s löschen"
+msgstr "Διαγραφή %s"
 
 #: application/views/scripts/common/delete-confirm.php:12
 msgid "Are you sure?"
-msgstr "Sind Sie sicher?"
+msgstr "Είστε βέβαιοι;"
 
 #: application/views/scripts/common/footer.php:6
 msgid "Home"
-msgstr "Home"
+msgstr "Αρχική"
 
 #: application/views/scripts/common/footer.php:14
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
-msgstr "Erstellt mit <a href=\"http://omeka.org\">Omeka</a>."
+msgstr "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
 
 #: application/views/scripts/common/pagination_control.php:7
 msgid "First"
-msgstr "Erste"
+msgstr "Πρώτη"
 
 #: application/views/scripts/common/pagination_control.php:14
 msgid "Previous"
-msgstr "Vorangehende"
+msgstr "Προηγούμενη"
 
 #: application/views/scripts/common/pagination_control.php:30
 msgid "Next"
-msgstr "Nächste"
+msgstr ""
+"Και οι δύο Οντότητες πρέπει να είναι persistent για να μπορέσουν να ενωθούν."
 
 #: application/views/scripts/common/pagination_control.php:37
 msgid "Last"
-msgstr "Letzte"
+msgstr "Τελευταία"
 
 #: application/views/scripts/error/403.php:2
 msgid "403 Page Forbidden"
-msgstr "403 Seite verboten"
+msgstr "403 Δεν έχετε δικαίωμα πρόσβασης"
 
 #: application/views/scripts/error/403.php:8
 msgid "You do not have permission to access this page."
-msgstr "Sie sind nicht berechtigt, auf diese Seite zuzugreifen."
+msgstr "Δεν έχετε δικαίωμα πρόσβασης σε αυτή τη σελίδα."
 
 #: application/views/scripts/error/404.dc.php:1
 #: application/views/scripts/error/404.php:2
 #: application/views/scripts/error/404.xml.php:1
 msgid "404 Page Not Found"
-msgstr "404 Seite nicht gefunden"
+msgstr "404 Δεν βρέθηκε σελίδα"
 
 #: application/views/scripts/error/404.php:7
 #, php-format
 msgid "%s is not a valid URL."
-msgstr "%s ist keine gültige URL."
+msgstr "%s δεν είναι έγκυρο URL."
 
 #: application/views/scripts/error/404.rss2.php:1
 msgid "Rss2.0 Feed Not Found!"
-msgstr "Rss2.0 Feed nicht gefunden!"
+msgstr "Rss2.0 Feed Δεν βρέθηκε!"
 
 #: application/views/scripts/error/405.php:2
 msgid "405 Method Not Allowed"
-msgstr "405 Methode nicht erlaubt"
+msgstr "405 Δεν επιτρέπεται η μέθοδος"
 
 #: application/views/scripts/error/405.php:7
 #, php-format
 msgid "The method used to access this URL (%s) is not valid."
 msgstr ""
-"Die Methode, welche für den Zugriff auf diese URL (%s) benutzt wurde, ist "
-"ungültig."
+"Η μέθοδος που χρησιμοποιείται για πρόσβαση σε αυτή τη διεύθυνση URL (%s) δεν"
+" είναι έγκυρη."
 
 #: application/views/scripts/error/index.php:4
 msgid "Omeka has encountered an error"
-msgstr "Es ist ein Fehler in Omeka aufgetreten."
+msgstr "Το Omeka αντιμετώπισε ένα σφάλμα"
 
 #: application/views/scripts/error/index.php:29
 msgid ""
@@ -2779,125 +2769,125 @@ msgid ""
 "href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error "
 "messages</a>."
 msgstr ""
-"Um zu erfahren, wie Sie detailliertere Informationen über diesen Fehler "
-"erhalten, lesen Sie bitte im Omeka Codex die Seite <a "
-"href=\"http://omeka.org/codex/Retrieving_error_messages\">Retrieving Error "
-"Messages</a>."
+"Για να μάθετε πώς μπορείτε να δείτε πιο λεπτομερείς πληροφορίες σχετικά με "
+"αυτό το σφάλμα, ανατρέξτε στην Omeka Codex σελίδα <a "
+"href=\"http://omeka.org/codex/Retrieving_error_messages\">ανάκτηση των "
+"μηνυμάτων λάθους</a>."
 
 #: application/views/scripts/functions.php:131
 msgid "Browse All"
-msgstr "Alle durchsuchen"
+msgstr "Περιήγηση Όλων"
 
 #: application/views/scripts/functions.php:131
 msgid "Browse by Tag"
-msgstr "Nach Schlagwörtern durchsuchen"
+msgstr "Περιήγηση με βάση το Tag"
 
 #: application/views/scripts/index.php:67
 msgid "No recent items available."
-msgstr " Es sind keine neuen Objekte vorhanden."
+msgstr "Δεν υπάρχουν πρόσφατα αντικείμενα διαθέσιμα."
 
 #: application/views/scripts/items/advanced-search.php:32
 msgid "Search for Keywords"
-msgstr "Nach Stichwörtern suchen"
+msgstr "Αναζήτηση για Λέξεις-κλειδιά"
 
 #: application/views/scripts/items/advanced-search.php:42
 msgid "Narrow by Specific Fields"
-msgstr "Über bestimmte Felder eingrenzen"
+msgstr "Περιορισμός με βάση Συγκεκριμένα Πεδία"
 
 #: application/views/scripts/items/advanced-search.php:71
 msgid "contains"
-msgstr "enthält"
+msgstr "περιέχει"
 
 #: application/views/scripts/items/advanced-search.php:72
 msgid "does not contain"
-msgstr "enthält nicht"
+msgstr "δεν περιέχει"
 
 #: application/views/scripts/items/advanced-search.php:73
 msgid "is exactly"
-msgstr "ist genau"
+msgstr "είναι ακριβώς"
 
 #: application/views/scripts/items/advanced-search.php:74
 msgid "is empty"
-msgstr "ist leer"
+msgstr "είναι άδειο"
 
 #: application/views/scripts/items/advanced-search.php:75
 msgid "is not empty"
-msgstr "ist nicht leer"
+msgstr "δεν είναι άδειο"
 
 #: application/views/scripts/items/advanced-search.php:86
 msgid "Add a Field"
-msgstr "Feld hinzufügen"
+msgstr "Προσθήκη πεδίου"
 
 #: application/views/scripts/items/advanced-search.php:90
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
-msgstr "Nach einer Reihe von IDs suchen (Beispiel: 1-4, 156, 79)"
+msgstr "Αναζήτηση σε ένα εύρος ID#s (παράδειιγμα: 1-4, 156, 79)"
 
 #: application/views/scripts/items/advanced-search.php:102
 msgid "Search By Collection"
-msgstr "Nach Sammlungen suchen"
+msgstr "Αναζήτηση με βάση την Συλλογή"
 
 #: application/views/scripts/items/advanced-search.php:112
 msgid "Search By Type"
-msgstr "Nach Typen suchen"
+msgstr "Αναζήτηση με βάση τον Τύπο"
 
 #: application/views/scripts/items/advanced-search.php:122
 msgid "Search By User"
-msgstr "Nach Benutzern suchen"
+msgstr "Αναζήτηση με τον χρήστη"
 
 #: application/views/scripts/items/advanced-search.php:133
 msgid "Search By Tags"
-msgstr "Nach Schlagwörtern durchsuchen"
+msgstr "Αναζήτηση με Tags"
 
 #: application/views/scripts/items/advanced-search.php:147
 msgid "Public/Non-Public"
-msgstr "Öffentlich / Nicht-öffentlich"
+msgstr "Δημόσιευμένο/Μή-Δημοσιευμένο"
 
 #: application/views/scripts/items/advanced-search.php:150
 msgid "Only Public Items"
-msgstr "Nur öffentliche Objekte"
+msgstr "Μόνο δημοσιευμένα Αντικείμενα"
 
 #: application/views/scripts/items/advanced-search.php:151
 msgid "Only Non-Public Items"
-msgstr "Nur nicht-öffentliche Objekte"
+msgstr "Μόνο Μη-Δημοσιευμένα Αντικείμενα"
 
 #: application/views/scripts/items/advanced-search.php:157
 msgid "Featured/Non-Featured"
-msgstr "Hervorgehoben / nicht hervorgehoben"
+msgstr "Προτεινόμενα/Μη Προτεινόμενα "
 
 #: application/views/scripts/items/advanced-search.php:160
 msgid "Only Featured Items"
-msgstr "Nur hervorgehobene Objekte"
+msgstr "Μόνο Προτεινόμενα Αντικείμενα"
 
 #: application/views/scripts/items/advanced-search.php:161
 msgid "Only Non-Featured Items"
-msgstr "Nur nicht-hervorgehobene Objekte"
+msgstr "Μόνο Μη-Προτεινόμενα Αντικείμενα"
 
 #: application/views/scripts/items/show.php:11
 msgid "Files"
-msgstr "Dateien"
+msgstr "Αρχεία"
 
 #: application/views/scripts/items/show.php:33
 msgid "Citation"
-msgstr "Zitat"
+msgstr "Aναφορά"
 
 #: application/views/scripts/upgrade/completed.php:5
 #: application/views/scripts/upgrade/index.php:5
 #: application/views/scripts/upgrade/migrate.php:5
 msgid "Upgrade Omeka"
-msgstr "Omeka aktualisieren"
+msgstr "Αναβάθμιση Omeka"
 
 #: application/views/scripts/upgrade/completed.php:10
 msgid "Omeka Upgrade Completed"
-msgstr "Die Aktualisierung von Omeka ist abgeschlossen"
+msgstr "H αναβάθμιση του Omeka ολοκληρώθηκε"
 
 #: application/views/scripts/upgrade/completed.php:11
 #, php-format
 msgid "Please return to the %1$s or your site&#8217;s %2$s"
-msgstr "Bitte kehren Sie zum %1$s oder zum %2$s Ihrer Website zurück"
+msgstr "Παρακαλώ επιστρέψτε στο %1$s της ιστοσελίδας σας&#8217;s %2$s"
 
 #: application/views/scripts/upgrade/completed.php:11
 msgid "Your Omeka database is completely up-to-date."
-msgstr "Ihre Omeka-Datenbank ist auf dem neusten Stand."
+msgstr "Η βάση δεδομένων του Omeka σας είναι πλήρως ενημερωμένη."
 
 #: application/views/scripts/upgrade/completed.php:13
 #: application/views/scripts/upgrade/migrate.php:18
@@ -2906,128 +2896,128 @@ msgid ""
 "href=\"http://omeka.org/codex\">Omeka documentation</a> or post a message on"
 " the <a href=\"http://omeka.org/forums\">Omeka forums</a>."
 msgstr ""
-"Wenn Sie Fragen haben, dann benutzen Sie bitte die <a "
-"href=\"http://omeka.org/codex\">Omeka-Dokumentation</a> oder veröffentlichen"
-" eine Nachricht im <a href=\"http://omeka.org/forums\">Omeka-Forum</a>."
+"Εάν έχετε κάποια ερώτηση παρακαλώ να αναφερθείτε στο <a "
+"href=\"http://omeka.org/codex\">Omeka documentation</a>ή να στείλετε ένα "
+"μήνυμα στο <a href=\"http://omeka.org/forums\">Omeka φόρουμ</a>."
 
 #: application/views/scripts/upgrade/index.php:10
 msgid "Upgrade Your Omeka Database"
-msgstr "Omeka-Datenbank aktualisieren"
+msgstr "Αναβαθμίστε την  βάση δεδομένων του Omeka σας"
 
 #: application/views/scripts/upgrade/index.php:12
 msgid ""
 "Your Omeka database is not compatible with your current version of Omeka."
 msgstr ""
-"Ihre Omeka-Datenbank ist nicht kompatibel mit Ihrer aktuellen Omeka-Version."
+"Η βάση δεδομένων του Omeka  σας δεν είναι συμβατή με την τρέχουσα έκδοση του"
+" Omeka."
 
 #: application/views/scripts/upgrade/index.php:13
 msgid ""
 "Please back up your existing database and then click the button to upgrade."
 msgstr ""
-"Bitte erstellen Sie eine Sicherheitskopie Ihrer bestehenden Datenbank und "
-"klicken Sie anschliessend den Button für die Aktualisierung."
+"Παρακαλούμε να δημιουργήσετε αντίγραφο ασφαλείας της υπάρχουσας βάσης "
+"δεδομένων σας και στη συνέχεια κάντε κλικ στο κουμπί για να αναβαθμίσετε."
 
 #: application/views/scripts/upgrade/index.php:15
 msgid "Upgrade Database"
-msgstr "Datenbank aktualisieren"
+msgstr "Αναβάθμιση Βάσης δεδομένων"
 
 #: application/views/scripts/upgrade/migrate.php:11
 msgid "Omeka encountered an error when upgrading your installation."
 msgstr ""
-"Bei der Aktualisierung Ihrer Omeka-Installation ist ein Fehler aufgetreten."
+"Το Omeka αντιμετώπισε ένα σφάλμα κατά την αναβάθμιση της εγκατάστασή σας."
 
 #: application/views/scripts/upgrade/migrate.php:16
 msgid "Please restore from your database backup and try again."
 msgstr ""
-"Bitte spielen Sie die Sicherheitskopie Ihrer Datenbank ein und versuchen Sie"
-" es erneut."
+"Παρακαλούμε να επαναφέρετε από το αντίγραφο ασφαλείας της βάσης δεδομένων "
+"σας και προσπαθήστε ξανά."
 
 #: application/views/scripts/upgrade/migrate.php:21
 msgid "Omeka has upgraded successfully."
-msgstr "Omeka wurde erfolgreich aktualisiert."
+msgstr "Το Omeka έχει αναβαθμιστεί με επιτυχία."
 
 #: application/views/scripts/upgrade/migrate.php:22
 msgid "Return to Dashboard"
-msgstr "Zurück zum Dashboard"
+msgstr "Επιστροφή στο ταμπλό"
 
 #: application/views/scripts/users/activate.php:2
 msgid "User Activation"
-msgstr "Benutzeraktivierung"
+msgstr "Ενεργοποίηση Χρήστη"
 
 #: application/views/scripts/users/forgot-password.php:2
 msgid "Forgot Password"
-msgstr "Passwort vergessen"
+msgstr "Ξεχάσατε τον κωδικό πρόσβασης"
 
 #: application/views/scripts/users/forgot-password.php:7
 msgid "Back to Log In"
-msgstr "Zurück zum Login"
+msgstr "Επιστροφή στην Σύνδεση"
 
 #: application/views/scripts/users/forgot-password.php:10
 msgid "Enter your email address to retrieve your password."
 msgstr ""
-"Geben Sie Ihre E-Mail-Adresse ein, um Ihr Passwort wiederherzustellen."
+"Πληκτρολογήστε το email σας για να ανακτήσετε τον κωδικό πρόσβασής σας."
 
 #: application/views/scripts/users/login.php:9
 msgid "Go to Home Page"
-msgstr "Gehe zur Startseite"
+msgstr "Μετάβαση στην Αρχική Σελίδα"
 
 #: application/views/scripts/users/login.php:9
 msgid "Lost your password?"
-msgstr "Passwort vergessen?"
+msgstr "Ξεχάσατε τον κωδικό σας;"
 
 #: install/views/scripts/index/errors.phtml:1
 msgid "Installation Error"
-msgstr "Installationsfehler"
+msgstr "Σφάλμα εγκατάστασης"
 
 #: install/views/scripts/index/errors.phtml:2
 msgid ""
 "Before installation can continue, the following errors must be resolved:"
 msgstr ""
-"Folgende Fehler müssen behoben werden, damit die Installation fortgesetzt "
-"werden kann: "
+"Πριν η εγκατάσταση να συνεχιστεί, τα ακόλουθα σφάλματα πρέπει να επιλυθούν:"
 
 #: install/views/scripts/index/fatal-error.phtml:1
 msgid "Fatal Error"
-msgstr "Kritischer Fehler"
+msgstr "Fatal Error"
 
 #: install/views/scripts/index/index.phtml:2
 msgid "Installation Warning"
-msgstr "Installationswarnung"
+msgstr "Προειδοποίηση εγκατάστασης"
 
 #: install/views/scripts/index/index.phtml:3
 msgid ""
 "The following issues will not affect installation, but they may negatively "
 "affect the behavior of Omeka:"
 msgstr ""
-"Folgende Punkte beeinflussen die Installation nicht, aber sie können das "
-"Verhalten von Omeka negativ beeinflussen:"
+"Τα ακόλουθα ζητήματα δεν θα επηρεάσουν την εγκατάσταση, αλλά μπορούν να "
+"επηρεάσουν αρνητικά τη συμπεριφορά του Omeka:"
 
 #: install/views/scripts/index/index.phtml:13
 msgid "Configure Your Site"
-msgstr "Konfigurieren Sie Ihre Website"
+msgstr "Διαμορφώστε την ιστοσελίδα σας"
 
 #: install/views/scripts/index/index.phtml:15
 msgid "Form Validation Errors"
-msgstr "Validierungsfehler im Formular"
+msgstr "Σφάλμα επικύρωσης φόρμας"
 
 #: install/views/scripts/index/installed.phtml:1
 msgid ""
 "Omeka is installed. You may remove the \"install\" directory for security "
 "reasons."
 msgstr ""
-"Omeka ist installiert. Aus Sicherheitsgründen können Sie das Verzeichnis "
-"\"install\" löschen."
+"Το Omeka είναι εγκατεστημένο. Μπορείτε να αφαιρέσετε τον φάκελο \"install\" "
+"για λόγους ασφαλείας."
 
 #: install/views/scripts/index/installed.phtml:2
 msgid "Admin Panel"
-msgstr "Administrationsbereich"
+msgstr "Admin Panel"
 
 #: install/views/scripts/index/installed.phtml:2
 msgid "Public Site"
-msgstr "Öffentliche Website"
+msgstr "Δημόσια Ιστοσελίδα"
 
 #: install/views/scripts/layout.phtml:5 install/views/scripts/layout.phtml:9
 msgid "Omeka Installation"
-msgstr "Omeka Installation"
+msgstr "Εγκατάσταση Omeka"
 
 
