@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Peter Baan <exnihilo@xs4all.nl>, 2011.
+# Peter Baan <exnihilo@xs4all.nl>, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2011-11-22 16:18-0500\n"
-"PO-Revision-Date: 2011-12-28 21:33+0000\n"
+"PO-Revision-Date: 2012-01-31 10:35+0000\n"
 "Last-Translator: Peter Baan <exnihilo@xs4all.nl>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.net/projects/p/omeka/team/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -800,7 +800,7 @@ msgstr "Bewerk algemene instellingen"
 
 #: admin/themes/default/index.php:62
 msgid "Manage Themes"
-msgstr "Beheer thema's"
+msgstr "Thema's beheren"
 
 #: admin/themes/default/index.php:63
 msgid "Manage Plugins"
@@ -875,7 +875,7 @@ msgstr "Itemtype #%s bewerken"
 
 #: admin/themes/default/item-types/edit.php:14
 msgid "Delete this Item Type"
-msgstr "Verwijderd dit itemtype"
+msgstr "Verwijder dit itemtype"
 
 #: admin/themes/default/item-types/element-form.php:3
 msgid "Add an Element to this Item Type"
@@ -909,7 +909,7 @@ msgstr "Elementnaam"
 
 #: admin/themes/default/item-types/element-list.php:8
 msgid "Order"
-msgstr "Bestellen"
+msgstr "Volgorde"
 
 #: admin/themes/default/item-types/element-list.php:59
 msgid "Existing"
@@ -1041,7 +1041,7 @@ msgstr "Details verbergen"
 
 #: admin/themes/default/items/browse.php:96
 msgid "Quick Filter"
-msgstr "Snelle filter"
+msgstr "Snelfilter"
 
 #: admin/themes/default/items/browse.php:99
 msgid "All"
@@ -1189,7 +1189,7 @@ msgstr "Er zijn voor dit item nog geen bestanden."
 #: admin/themes/default/items/tag-form.php:14
 #, php-format
 msgid "Separate tags with %s"
-msgstr "Scheid tags van elkaar met %s"
+msgstr "Scheid tags van elkaar met een %s"
 
 #: admin/themes/default/items/tag-form.php:42
 #: admin/themes/default/items/tag-list.php:2
@@ -1478,7 +1478,7 @@ msgstr "Achternaam"
 
 #: admin/themes/default/users/browse.php:22
 msgid "Institution Name"
-msgstr "Naam instituut"
+msgstr "Naam instelling"
 
 #: admin/themes/default/users/browse.php:23
 #: admin/themes/default/users/browse.php:41 application/forms/User.php:143
@@ -1538,7 +1538,7 @@ msgstr "Bewerk deze gebruiker"
 
 #: admin/themes/default/users/show.php:28 application/forms/User.php:137
 msgid "Institution"
-msgstr "Instituut"
+msgstr "Instelling"
 
 #: application/controllers/CollectionsController.php:31
 #, php-format
@@ -1959,33 +1959,33 @@ msgid ""
 "Separate tags using this character or string. Be careful when changing this "
 "setting. You run the risk of splitting tags that contain the old delimiter."
 msgstr ""
-"Verschillende tags gebruiken dit teken of deze tekenreeks. Wees voorzichtig "
+"Scheid tags met behulp van dit teken of deze tekenreeks. Wees voorzichtig "
 "bij het wijzigen van deze instelling. U loopt het risico tags te splitsen "
 "die het oude scheidingsteken bevatten."
 
 #: application/forms/GeneralSettings.php:64 application/forms/Install.php:123
 msgid "Fullsize Image Size"
-msgstr "Volledige afbeeldingsgrootte"
+msgstr "Afmeting volledige afbeelding"
 
 #: application/forms/GeneralSettings.php:65 application/forms/Install.php:124
 msgid "Maximum fullsize image size constraint (in pixels)."
-msgstr "Beperking maximale volledige afbeeldingsgrootte (in pixels)."
+msgstr "Maximale grootte volledige afbeelding (in pixels)."
 
 #: application/forms/GeneralSettings.php:71 application/forms/Install.php:131
 msgid "Thumbnail Size"
-msgstr "Miniatuurvoorbeeld grootte"
+msgstr "Afmeting miniatuurvoorbeeld"
 
 #: application/forms/GeneralSettings.php:72 application/forms/Install.php:132
 msgid "Maximum thumbnail size constraint (in pixels)."
-msgstr "Beperking maximale miniatuurvoorbeeld grootte (in pixels)."
+msgstr "Maximale grootte miniatuurvoorbeeld (in pixels)."
 
 #: application/forms/GeneralSettings.php:78 application/forms/Install.php:139
 msgid "Square Thumbnail Size"
-msgstr "Vierkant miniatuurvoorbeeld grootte"
+msgstr "Afmeting vierkant miniatuurvoorbeeld"
 
 #: application/forms/GeneralSettings.php:79 application/forms/Install.php:140
 msgid "Maximum square thumbnail size constraint (in pixels)."
-msgstr "Beperking maximale vierkante miniatuurvoorbeeld grootte (in pixels)."
+msgstr "Maximale grootte vierkant miniatuurvoorbeeld (in pixels)."
 
 #: application/forms/GeneralSettings.php:85 application/forms/Install.php:147
 msgid "Items Per Page (admin)"
@@ -2024,7 +2024,7 @@ msgstr ""
 
 #: application/forms/GeneralSettings.php:110 application/forms/Install.php:169
 msgid "Imagemagick Directory Path"
-msgstr "ImageMagick Directory Pad"
+msgstr "ImageMagick directory pad"
 
 #: application/forms/GeneralSettings.php:114
 msgid "Save Settings"
@@ -2053,7 +2053,7 @@ msgstr "Bevestig uw wachtwoord."
 
 #: application/forms/Install.php:109
 msgid "Separate tags using this character or string."
-msgstr "Verschillende tags die dit teken of deze tekenreeks gebruiken."
+msgstr "Scheid tags met behulp van dit teken of deze tekenreeks."
 
 #: application/forms/Install.php:165
 msgid "Whether metadata elements with no text will be displayed."
@@ -2295,7 +2295,7 @@ msgstr ""
 
 #: application/helpers/ItemFunctions.php:571
 msgid "No featured items are available."
-msgstr "Er zijn geen aanbevolen item beschikbaar."
+msgstr "Er zijn geen aanbevolen items beschikbaar."
 
 #: application/helpers/ItemMetadata.php:86
 #, php-format
@@ -2325,6 +2325,10 @@ msgstr "Atom"
 #: application/helpers/TagFunctions.php:133
 msgid "No tags are available."
 msgstr "Er zijn geen tags beschikbaar."
+
+#: application/libraries/Omeka/View/Helper/RecordMetadataList.php:91
+msgid "[no text]"
+msgstr "[geen tekst]"
 
 #: application/models/ActsAsElementText.php:257
 #, php-format
@@ -2459,7 +2463,7 @@ msgstr "Beide entititeiten moeten constant zijn, om ze te kunnen samenvoegen."
 
 #: application/models/File.php:109
 msgid "Cannot get the local path for a stored file."
-msgstr "Kan het lokale pad voor een opgeslagen bestanden niet vinden."
+msgstr "Kan het lokale pad voor een opgeslagen bestand niet vinden."
 
 #: application/models/Item.php:284
 msgid ""
@@ -2470,7 +2474,7 @@ msgstr ""
 
 #: application/models/Item.php:398
 msgid "Cannot add an existing file to an item!"
-msgstr "Kan geen bestaand bestand toevoegen een een item!"
+msgstr "Kan geen bestaand bestand toevoegen een item!"
 
 #: application/models/Item.php:402
 msgid "File must be valid before it can be associated with an item!"
@@ -2494,7 +2498,7 @@ msgid ""
 "This SQL statement needs a FROM or JOIN clause equivalent to '%s i' in order"
 " to have permissions checked!"
 msgstr ""
-"Dit SQL statement heeft een FROM of JOIN clause equivalent nodig bij '%s i' "
+"Dit SQL-statement heeft een FROM of JOIN clause equivalent nodig bij '%s i' "
 "om rechten te kunnen controleren!"
 
 #: application/models/ItemSearch.php:98
@@ -2625,7 +2629,7 @@ msgid ""
 "If a first name and last name are not provided, then an institution name is "
 "required."
 msgstr ""
-"Als geen voornaam en achternaam zijn geleverd, is er een instituutsnaam "
+"Als er geen voornaam en achternaam voorhanden zijn, is een instellingsnaam "
 "vereist."
 
 #: application/models/User.php:156
@@ -2694,7 +2698,7 @@ msgstr "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
 
 #: application/views/scripts/common/pagination_control.php:7
 msgid "First"
-msgstr "Eerst"
+msgstr "Eerste"
 
 #: application/views/scripts/common/pagination_control.php:14
 msgid "Previous"
@@ -2774,7 +2778,7 @@ msgstr "Zoek op trefwoorden"
 
 #: application/views/scripts/items/advanced-search.php:42
 msgid "Narrow by Specific Fields"
-msgstr "Versmallen op specifieke velden"
+msgstr "Beperken tot specifieke velden"
 
 #: application/views/scripts/items/advanced-search.php:71
 msgid "contains"
@@ -2895,8 +2899,8 @@ msgstr "Uw Omeka database is niet compatibel met uw huidige versie van Omeka."
 msgid ""
 "Please back up your existing database and then click the button to upgrade."
 msgstr ""
-"Gelieve eerst een backup te maken van uw bestaande database en dan op de "
-"knop de klikken om op te waarderen. "
+"Maak a.u.b. eerst een <em>backup</em> van uw bestaande database en klik dan "
+"pas op de knop om op te waarderen."
 
 #: application/views/scripts/upgrade/index.php:15
 msgid "Upgrade Database"
@@ -2908,7 +2912,7 @@ msgstr "Omeka stuitte op een fout bij het opwaarderen van uw installatie."
 
 #: application/views/scripts/upgrade/migrate.php:16
 msgid "Please restore from your database backup and try again."
-msgstr "Herstel met behulp van uw database backup en probeer opnieuw."
+msgstr "Herstel met behulp van uw database-backup en probeer opnieuw."
 
 #: application/views/scripts/upgrade/migrate.php:21
 msgid "Omeka has upgraded successfully."
@@ -2940,7 +2944,7 @@ msgstr "Ga naar pagina Home"
 
 #: application/views/scripts/users/login.php:9
 msgid "Lost your password?"
-msgstr "Uw wachtwoord kwijt?"
+msgstr "Wachtwoord kwijt?"
 
 #: install/views/scripts/index/errors.phtml:1
 msgid "Installation Error"

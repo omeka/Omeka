@@ -4,13 +4,13 @@
 # 
 # Translators:
 # Dana Léw <lew.dana@gmail.com>, 2011.
-# Jan Černý <cernyhonza@gmail.com>, 2011.
+# Jan Černý <cernyhonza@gmail.com>, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2011-11-22 16:18-0500\n"
-"PO-Revision-Date: 2011-12-30 13:43+0000\n"
+"PO-Revision-Date: 2012-01-08 11:38+0000\n"
 "Last-Translator: Jan Černý <cernyhonza@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.net/projects/p/omeka/team/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -2297,6 +2297,10 @@ msgstr "Atom"
 #: application/helpers/TagFunctions.php:133
 msgid "No tags are available."
 msgstr "Žádné štítky."
+
+#: application/libraries/Omeka/View/Helper/RecordMetadataList.php:91
+msgid "[no text]"
+msgstr "[žádný text]"
 
 #: application/models/ActsAsElementText.php:257
 #, php-format
