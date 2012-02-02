@@ -178,15 +178,28 @@ abstract class Omeka_Output_Xml_Abstract extends Omeka_Output_Xml
             // Differenciate between the element sets and the "Item Type 
             // Metadata" pseudo element set.
             if (ELEMENT_SET_ITEM_TYPE == $elementSet->name) {
-                $itemType->elements[$element->id]->name = $element->name;
-                $itemType->elements[$element->id]->description = $element->description;
-                $itemType->elements[$element->id]->elementTexts[$elementText->id]->text = $elementText->text;
+                $elementObj = new stdClass;
+                $elementObj->name = $element->name;
+                $elementObj->description = $element->description;
+                $itemType->elements[$element->id] = $elementObj;
+                
+                $elementTextObj = new stdClass;
+                $elementTextObj->text = $elementText->text;
+                $itemType->elements[$element->id]->elementTexts[$elementText->id] = $elementTextObj;
             } else {
-                $elementSets->elementSets[$elementSet->id]->name = $elementSet->name;
-                $elementSets->elementSets[$elementSet->id]->description = $elementSet->description;
-                $elementSets->elementSets[$elementSet->id]->elements[$element->id]->name = $element->name;
-                $elementSets->elementSets[$elementSet->id]->elements[$element->id]->description = $element->description;
-                $elementSets->elementSets[$elementSet->id]->elements[$element->id]->elementTexts[$elementText->id]->text = $elementText->text;
+                $elementSetObj = new stdClass;
+                $elementSetObj->name = $elementSet->name;
+                $elementSetObj->description = $elementSet->description;
+                $elementSets->elementSets[$elementSet->id] = $elementSetObj;
+                
+                $elementObj = new stdClass;
+                $elementObj->name = $element->name;
+                $elementObj->description = $element->description;
+                $elementSets->elementSets[$elementSet->id]->elements[$element->id] = $elementObj;
+                
+                $elementTextObj = new stdClass;
+                $elementTextObj->text = $elementText->text;
+                $elementSets->elementSets[$elementSet->id]->elements[$element->id]->elementTexts[$elementText->id] = $elementTextObj;
             }
         }
         
