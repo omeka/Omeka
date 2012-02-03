@@ -18,6 +18,8 @@
  */
 class CollectionsController extends Omeka_Controller_Action
 {
+    public $contexts = array('show' => array('omeka-xml', 'omeka-json'));
+    
     protected $_browseRecordsPerPage = 10;
         
     public function init()

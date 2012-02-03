@@ -392,6 +392,39 @@ abstract class Omeka_Output_Xml_Abstract extends Omeka_Output_Xml
         $parentElement->appendChild($tagContainerElement);
    }
    
+    /**
+    * Build an itemContainer element in a collection context.
+    * 
+    * @param Collection $collection The collection from which to build the item 
+    * container.
+    * @param DOMElement $parentElement The item container will append to this 
+    * element.
+    * @return void|null
+    */
+    protected function _buildItemContainerForCollection(Collection $collection, DOMElement $parentElement)
+    {
+        $nameElement = $this->_createElement('name', $collection->name, null, $parentElement);
+        $descriptionElement = $this->_createElement('description', $collection->description, null, $parentElement);
+        $collectorContainerElement = $this->_createElement('collectorContainer');
+        foreach ($collection->getCollectors() as $collector) {
+            $collectorElement = $this->_createElement('collector', $collector, null, $collectorContainerElement);
+        }
+        $parentElement->appendChild($collectorContainerElement );
+        
+        // Get items belonging to this collection.
+        $items = get_db()->getTable('Item')->findBy(array('collection' => $collection->id));
+        
+        // Return if the collection has no items.
+        if (!$items) {
+            return null;
+        }
+        
+        // itemContainer
+        $collectionOmekaXml = new Omeka_Output_Xml_ItemContainer($items, 'collection');
+        $itemContainerElement = $this->_doc->importNode($collectionOmekaXml->_node, true);
+        $parentElement->appendChild($itemContainerElement);
+    }
+   
    /**
     * Create a Tag URI to uniquely identify this Omeka XML instance.
     *
