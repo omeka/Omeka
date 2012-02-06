@@ -30,7 +30,7 @@
                 <?php
                     $name = html_escape($user->first_name);
                     if (has_permission($user, 'edit')) {
-                        $userLink = '<a href="' . html_escape(uri('users/edit/' . $user->id) . '">' . $name . '</a>';
+                        $userLink = '<a href="' . html_escape(uri('users/edit/' . $user->id)) . '">' . $name . '</a>';
                     } else {
                         $userLink = $name;
                     }

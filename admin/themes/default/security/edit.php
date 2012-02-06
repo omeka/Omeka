@@ -17,7 +17,7 @@ jQuery(document).ready(function () {
                       
     Omeka.Security.buildRestoreButton('#html_purifier_allowed_html_elements', 
         <?php echo js_escape(uri(array('controller'=>'security','action'=>'get-html-purifier-allowed-html-elements'))); ?>,
-        <?php echo js_escape(__('Restore Default Allowed Html Elements'_)); ?>
+        <?php echo js_escape(__('Restore Default Allowed Html Elements')); ?>
     );
 
     Omeka.Security.buildRestoreButton('#html_purifier_allowed_html_attributes', 
