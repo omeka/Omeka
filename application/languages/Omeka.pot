@@ -244,6 +244,10 @@ msgstr ""
 msgid "Codec"
 msgstr ""
 
+# Format (Legacy) Metadata element set
+msgid "Format (Legacy) Metadata"
+msgstr ""
+
 # User role: Super
 msgid "Super"
 msgstr ""
@@ -324,7 +328,7 @@ msgstr ""
 
 #: admin/themes/default/collections/browse.php:57
 #: admin/themes/default/items/browse.php:150
-#: admin/themes/default/items/files-form.php:22
+#: admin/themes/default/items/files-form.php:23
 #: admin/themes/default/users/browse.php:43
 #: admin/themes/default/users/browse.php:58
 msgid "Edit"
@@ -357,7 +361,7 @@ msgid "Delete this Collection"
 msgstr ""
 
 #: admin/themes/default/collections/edit.php:20
-#: admin/themes/default/files/edit.php:41
+#: admin/themes/default/files/edit.php:36
 #: admin/themes/default/item-types/edit.php:20
 #: admin/themes/default/items/batch-edit.php:113
 #: admin/themes/default/items/edit.php:20
@@ -561,9 +565,9 @@ msgstr ""
 #: admin/themes/default/element-sets/browse.php:14
 #: admin/themes/default/items/batch-edit.php:101
 #: admin/themes/default/items/browse.php:153
-#: admin/themes/default/items/files-form.php:14
+#: admin/themes/default/items/files-form.php:15
 #: admin/themes/default/users/browse.php:46
-#: application/helpers/FormFunctions.php:574
+#: application/helpers/FormFunctions.php:573
 msgid "Delete"
 msgstr ""
 
@@ -627,15 +631,6 @@ msgstr ""
 
 #: admin/themes/default/files/edit.php:17
 msgid "Delete this File"
-msgstr ""
-
-#: admin/themes/default/files/edit.php:27
-#: application/views/scripts/functions.php:54
-msgid "Dublin Core"
-msgstr ""
-
-#: admin/themes/default/files/edit.php:32
-msgid "Format (Legacy) Metadata"
 msgstr ""
 
 #: admin/themes/default/files/show.php:9
@@ -872,6 +867,7 @@ msgid "Element Name"
 msgstr ""
 
 #: admin/themes/default/item-types/element-list.php:8
+#: admin/themes/default/items/files-form.php:14
 msgid "Order"
 msgstr ""
 
@@ -1093,12 +1089,12 @@ msgstr ""
 msgid "Edit File Metadata"
 msgstr ""
 
-#: admin/themes/default/items/files-form.php:34
+#: admin/themes/default/items/files-form.php:36
 msgid "Add New Files"
 msgstr ""
 
-#: admin/themes/default/items/files-form.php:37
-#: admin/themes/default/items/files-form.php:48
+#: admin/themes/default/items/files-form.php:39
+#: admin/themes/default/items/files-form.php:50
 msgid "Find a File"
 msgstr ""
 
@@ -1444,7 +1440,7 @@ msgid "Descending"
 msgstr ""
 
 #: admin/themes/default/users/browse.php:29
-#: application/helpers/FormFunctions.php:271
+#: application/helpers/FormFunctions.php:270
 #: application/views/scripts/items/advanced-search.php:167
 msgid "Search"
 msgstr ""
@@ -2145,17 +2141,17 @@ msgstr ""
 msgid "Use HTML"
 msgstr ""
 
-#: application/helpers/FileMetadata.php:98
+#: application/helpers/FileMetadata.php:83
 #, php-format
 msgid "%s is an invalid special value."
 msgstr ""
 
-#: application/helpers/FormFunctions.php:135
+#: application/helpers/FormFunctions.php:134
 msgid "Select Below "
 msgstr ""
 
-#: application/helpers/FormFunctions.php:245
-#: application/helpers/FormFunctions.php:533
+#: application/helpers/FormFunctions.php:244
+#: application/helpers/FormFunctions.php:532
 #: application/views/scripts/users/forgot-password.php:18
 msgid "Submit"
 msgstr ""
@@ -2186,7 +2182,7 @@ msgstr ""
 msgid "No featured items are available."
 msgstr ""
 
-#: application/helpers/ItemMetadata.php:86
+#: application/helpers/ItemMetadata.php:79
 #, php-format
 msgid "'%s' is an invalid special value."
 msgstr ""
@@ -2207,7 +2203,7 @@ msgstr ""
 msgid "&larr; Previous Item"
 msgstr ""
 
-#: application/helpers/LinkFunctions.php:530
+#: application/helpers/LinkFunctions.php:525
 msgid "Atom"
 msgstr ""
 
@@ -2219,49 +2215,49 @@ msgstr ""
 msgid "[no text]"
 msgstr ""
 
-#: application/models/ActsAsElementText.php:257
+#: application/models/ActsAsElementText.php:255
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
 msgstr ""
 
-#: application/models/ActsAsElementText.php:314
+#: application/models/ActsAsElementText.php:312
 #, php-format
 msgid ""
 "Element name is ambiguous! There is more than one element set containing an "
 "element named \"%s\"!"
 msgstr ""
 
-#: application/models/ActsAsElementText.php:317
-#: application/models/ActsAsElementText.php:324
+#: application/models/ActsAsElementText.php:315
+#: application/models/ActsAsElementText.php:322
 #, php-format
 msgid "There is no element named \"%s\"!"
 msgstr ""
 
-#: application/models/ActsAsElementText.php:328
+#: application/models/ActsAsElementText.php:326
 #, php-format
 msgid "There is no element named \"%1$s\" in the set named \"%2$s\"!"
 msgstr ""
 
-#: application/models/ActsAsElementText.php:484
+#: application/models/ActsAsElementText.php:482
 msgid "Element texts are not formatted correctly!"
 msgstr ""
 
-#: application/models/ActsAsElementText.php:647
+#: application/models/ActsAsElementText.php:645
 #, php-format
 msgid "Cannot process form input for element with data type \"%s\"!"
 msgstr ""
 
-#: application/models/ActsAsElementText.php:662
+#: application/models/ActsAsElementText.php:660
 #, php-format
 msgid "The \"%s\" field has at least one invalid value!"
 msgstr ""
 
-#: application/models/ActsAsElementText.php:695
+#: application/models/ActsAsElementText.php:693
 #, php-format
 msgid "Cannot validate an element of data type \"%s\"!"
 msgstr ""
 
-#: application/models/ActsAsElementText.php:735
+#: application/models/ActsAsElementText.php:733
 msgid "Cannot save element text for records that are not yet persistent!"
 msgstr ""
 
@@ -2342,20 +2338,20 @@ msgstr ""
 msgid "Both of these Entities must be persistent in order to merge them."
 msgstr ""
 
-#: application/models/File.php:109
+#: application/models/File.php:110
 msgid "Cannot get the local path for a stored file."
 msgstr ""
 
-#: application/models/Item.php:284
+#: application/models/Item.php:298
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
 msgstr ""
 
-#: application/models/Item.php:398
+#: application/models/Item.php:412
 msgid "Cannot add an existing file to an item!"
 msgstr ""
 
-#: application/models/Item.php:402
+#: application/models/Item.php:416
 msgid "File must be valid before it can be associated with an item!"
 msgstr ""
 
@@ -2417,7 +2413,7 @@ msgstr ""
 msgid "Item type does not contain an element with the ID %s!"
 msgstr ""
 
-#: application/models/ItemType.php:362
+#: application/models/ItemType.php:360
 msgid ""
 "Invalid parameter. The hasElement function requires either an element object "
 "or an element id to determine if an item type has an element."
@@ -2611,6 +2607,10 @@ msgid ""
 "To learn how to see more detailed information about this error, see the "
 "Omeka Codex page on <a href=\"http://omeka.org/codex/"
 "Retrieving_error_messages\">retrieving error messages</a>."
+msgstr ""
+
+#: application/views/scripts/functions.php:54
+msgid "Dublin Core"
 msgstr ""
 
 #: application/views/scripts/functions.php:131

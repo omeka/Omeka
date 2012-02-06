@@ -73,61 +73,61 @@ abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstrac
                          $elementSetName, 
                          $elementName = null, 
                          $options     = array())
-    {        
+    {
         // Convert the shortcuts for the options into a proper array.
         $options = $this->_getOptions($options);
 
         // Set the initial text value, which is either an array of ElementText 
         // records, or a special value string.
         $text = $this->_getText($record, $elementSetName, $elementName);
-        
+
         // Apply the snippet option before escaping text HTML. If applied after
         // escaping the HTML, this may result in invalid markup.
         if (array_key_exists(self::SNIPPET, $options)) {
             $text = $this->_snippetText($text, (int)$options[self::SNIPPET]);
         }
-        
+
         // Escape the non-HTML text if necessary.
-        $escapedText = (array_key_exists(self::NO_ESCAPE, $options) && $options[self::NO_ESCAPE])
-                     ? $text : $this->_escapeTextHtml($text);
-        
+        if (!(array_key_exists(self::NO_ESCAPE, $options) && $options[self::NO_ESCAPE])) {
+            $text = $this->_escapeTextHtml($text);
+        }
+
         // Apply plugin filters.
-        $filteredText = !array_key_exists(self::NO_FILTER, $options) 
-                        ? $this->_filterText($escapedText, $elementSetName, $elementName, $record) 
-                        : $escapedText;
-        
-        // Extract the text from the records into an array. This has to happen 
-        // after escaping text HTML because the html flag is located within the 
-        // ElementText record.
-        $extractedText = is_array($filteredText) 
-                         ? $this->_extractText($filteredText)
-                         : $filteredText;
-        
-        // Apply additional formatting options on that array, including 
-        // 'delimiter' and 'index'.
-        
-        // Return the join'd text
-        if (isset($options[self::DELIMITER])) {
-            return join((string) $options[self::DELIMITER], $extractedText);
+        if (!(array_key_exists(self::NO_FILTER, $options) && $options[self::NO_FILTER])) {
+            $text = $this->_filterText($text, $elementSetName, $elementName, $record);
         }
-        
-        // Return the text at that index.
-        if (is_array($extractedText) && isset($options[self::INDEX])) {
-            // Return null if the index doesn't exist for the record.
-            if (!isset($text[$options[self::INDEX]])) {
-                return null;
+
+        if (is_array($text)) {
+            // Extract the text from the records into an array.
+            // This has to happen after escaping HTML because the html
+            // flag is located within the ElementText record.
+            $text = $this->_extractText($text);
+
+            // Return the joined text
+            if (isset($options[self::DELIMITER])) {
+                return join((string) $options[self::DELIMITER], $text);
             }
-            return $extractedText[$options[self::INDEX]];
+
+            // Return the text at that index.
+            if (isset($options[self::INDEX])) {
+                // Return null if the index doesn't exist for the record.
+                if (!isset($text[$options[self::INDEX]])) {
+                    return null;
+                }
+                return $text[$options[self::INDEX]];
+            }
+
+            // If the all option is set, return the entire array of escaped data
+            if (isset($options[self::ALL])) {
+                return $text;
+            }
+
+            // Otherwise, return the first entry in the array.
+            return reset($text);
         }
-        
-        // If the all option is set, return the entire array of escaped data
-        if (is_array($extractedText) && isset($options[self::ALL])) {
-            return $extractedText;
-        }
-        
-        // Return the first entry in the array or the whole thing if it's a 
-        // string.
-        return is_array($extractedText) ? reset($extractedText) : $extractedText;
+
+        // Or, if we're dealing with a string, return the whole thing.
+        return $text;
     }
     
     /**
@@ -224,11 +224,8 @@ abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstrac
     {
         // Build the name of the filter to use. This will end up looking like: 
         // array('Display', 'Item', 'Dublin Core', 'Title') or something similar.
-        $filterName = array('Display', get_class($record));
-        if (null === $elementName) {
-            $filterName[] = $elementSetName;
-        } else {
-            $filterName[] = $elementSetName;
+        $filterName = array('Display', get_class($record), $elementSetName);
+        if ($elementName !== null) {
             $filterName[] = $elementName;
         }
 

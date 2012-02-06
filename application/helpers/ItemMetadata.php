@@ -53,38 +53,30 @@ class Omeka_View_Helper_ItemMetadata extends Omeka_View_Helper_RecordMetadata
         switch (strtolower($specialValue)) {
             case 'id':
                 return $item->id;
-                break;
             case 'item type name':
                 if ($type = $item->Type) {
                     return $type->name;
                 } else {
                     return null;
                 }
-                break;
             case 'date added':
                 return $item->added;
-                break;
             case 'date modified':
                 return $item->modified;
-                break;
             case 'collection name':
                 if ($collection = $item->Collection) {
                     return $collection->name;
                 } else {
                     return null;
                 }
-                break;
             case 'featured':
                 return $item->featured;
-                break;
             case 'public':
                 return $item->public;
-                break;
             case 'permalink':
                 return abs_item_uri($item);
             default:
                 throw new Exception(__("'%s' is an invalid special value.", $specialValue));
-                break;
         }
     }
 }

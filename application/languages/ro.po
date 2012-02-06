@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Nicolaie Constantinescu <kosson@gmail.com>, 2011.
+# Nicolaie Constantinescu <kosson@gmail.com>, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2011-11-22 16:18-0500\n"
-"PO-Revision-Date: 2011-12-28 14:45+0000\n"
+"PO-Revision-Date: 2012-01-25 20:31+0000\n"
 "Last-Translator: Nicolaie Constantinescu <kosson@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.net/projects/p/omeka/team/ro/)\n"
 "MIME-Version: 1.0\n"
@@ -2313,6 +2313,10 @@ msgstr "Atom"
 #: application/helpers/TagFunctions.php:133
 msgid "No tags are available."
 msgstr "Nu există etichete."
+
+#: application/libraries/Omeka/View/Helper/RecordMetadataList.php:91
+msgid "[no text]"
+msgstr "[nu este text]"
 
 #: application/models/ActsAsElementText.php:257
 #, php-format

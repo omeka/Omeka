@@ -3,16 +3,16 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Peter Baan <exnihilo@xs4all.nl>, 2011.
+# Peter Baan <exnihilo@xs4all.nl>, 2011, 2012.
 # Sam Alloing <>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2011-11-22 16:18-0500\n"
-"PO-Revision-Date: 2011-12-28 20:42+0000\n"
+"PO-Revision-Date: 2012-01-31 10:33+0000\n"
 "Last-Translator: Peter Baan <exnihilo@xs4all.nl>\n"
-"Language-Team: Dutch (Belgium/Flemish) (http://www.transifex.net/projects/p/omeka/team/nl_BE/)\n"
+"Language-Team: Dutch (Belgium) (http://www.transifex.net/projects/p/omeka/team/nl_BE/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -876,7 +876,7 @@ msgstr "Itemtype #%s bewerken"
 
 #: admin/themes/default/item-types/edit.php:14
 msgid "Delete this Item Type"
-msgstr "Verwijderd dit itemtype"
+msgstr "Verwijder dit itemtype"
 
 #: admin/themes/default/item-types/element-form.php:3
 msgid "Add an Element to this Item Type"
@@ -910,7 +910,7 @@ msgstr "Elementnaam"
 
 #: admin/themes/default/item-types/element-list.php:8
 msgid "Order"
-msgstr "Bestellen"
+msgstr "Volgorde"
 
 #: admin/themes/default/item-types/element-list.php:59
 msgid "Existing"
@@ -1042,7 +1042,7 @@ msgstr "Details verbergen"
 
 #: admin/themes/default/items/browse.php:96
 msgid "Quick Filter"
-msgstr "Snelle filter"
+msgstr "Snelfilter"
 
 #: admin/themes/default/items/browse.php:99
 msgid "All"
@@ -1479,7 +1479,7 @@ msgstr "Achternaam"
 
 #: admin/themes/default/users/browse.php:22
 msgid "Institution Name"
-msgstr "Naam instituut"
+msgstr "Naam instelling"
 
 #: admin/themes/default/users/browse.php:23
 #: admin/themes/default/users/browse.php:41 application/forms/User.php:143
@@ -1539,7 +1539,7 @@ msgstr "Bewerk deze gebruiker"
 
 #: admin/themes/default/users/show.php:28 application/forms/User.php:137
 msgid "Institution"
-msgstr "Instituut"
+msgstr "Instelling"
 
 #: application/controllers/CollectionsController.php:31
 #, php-format
@@ -1960,33 +1960,33 @@ msgid ""
 "Separate tags using this character or string. Be careful when changing this "
 "setting. You run the risk of splitting tags that contain the old delimiter."
 msgstr ""
-"Verschillende tags gebruiken dit teken of deze tekenreeks. Wees voorzichtig "
+"Scheid tags met behulp van dit teken of deze tekenreeks. Wees voorzichtig "
 "bij het wijzigen van deze instelling. U loopt het risico tags te splitsen "
 "die het oude scheidingsteken bevatten."
 
 #: application/forms/GeneralSettings.php:64 application/forms/Install.php:123
 msgid "Fullsize Image Size"
-msgstr "Volledige afbeeldingsgrootte"
+msgstr "Afmeting volledige afbeelding"
 
 #: application/forms/GeneralSettings.php:65 application/forms/Install.php:124
 msgid "Maximum fullsize image size constraint (in pixels)."
-msgstr "Beperking maximale volledige afbeeldingsgrootte (in pixels)."
+msgstr "Maximale grootte volledige afbeelding (in pixels)."
 
 #: application/forms/GeneralSettings.php:71 application/forms/Install.php:131
 msgid "Thumbnail Size"
-msgstr "Miniatuurvoorbeeld grootte"
+msgstr "Afmeting miniatuurvoorbeeld"
 
 #: application/forms/GeneralSettings.php:72 application/forms/Install.php:132
 msgid "Maximum thumbnail size constraint (in pixels)."
-msgstr "Beperking maximale miniatuurvoorbeeld grootte (in pixels)."
+msgstr "Maximale grootte miniatuurvoorbeeld (in pixels)."
 
 #: application/forms/GeneralSettings.php:78 application/forms/Install.php:139
 msgid "Square Thumbnail Size"
-msgstr "Vierkant miniatuurvoorbeeld grootte"
+msgstr "Afmeting vierkant miniatuurvoorbeeld"
 
 #: application/forms/GeneralSettings.php:79 application/forms/Install.php:140
 msgid "Maximum square thumbnail size constraint (in pixels)."
-msgstr "Beperking maximale vierkante miniatuurvoorbeeld grootte (in pixels)."
+msgstr "Maximale grootte vierkant miniatuurvoorbeeld (in pixels)."
 
 #: application/forms/GeneralSettings.php:85 application/forms/Install.php:147
 msgid "Items Per Page (admin)"
@@ -2025,7 +2025,7 @@ msgstr ""
 
 #: application/forms/GeneralSettings.php:110 application/forms/Install.php:169
 msgid "Imagemagick Directory Path"
-msgstr "ImageMagick Directory Pad"
+msgstr "ImageMagick directory pad"
 
 #: application/forms/GeneralSettings.php:114
 msgid "Save Settings"
@@ -2054,7 +2054,7 @@ msgstr "Bevestig uw wachtwoord."
 
 #: application/forms/Install.php:109
 msgid "Separate tags using this character or string."
-msgstr "Verschillende tags die dit teken of deze tekenreeks gebruiken."
+msgstr "Scheid tags met behulp van dit teken of deze tekenreeks."
 
 #: application/forms/Install.php:165
 msgid "Whether metadata elements with no text will be displayed."
@@ -2327,6 +2327,10 @@ msgstr "Atom"
 msgid "No tags are available."
 msgstr "Er zijn geen tags beschikbaar."
 
+#: application/libraries/Omeka/View/Helper/RecordMetadataList.php:91
+msgid "[no text]"
+msgstr "[geen tekst]"
+
 #: application/models/ActsAsElementText.php:257
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
@@ -2495,7 +2499,7 @@ msgid ""
 "This SQL statement needs a FROM or JOIN clause equivalent to '%s i' in order"
 " to have permissions checked!"
 msgstr ""
-"Dit SQL statement heeft een FROM of JOIN clause equivalent nodig bij '%s i' "
+"Dit SQL-statement heeft een FROM of JOIN clause equivalent nodig bij '%s i' "
 "om rechten te kunnen controleren!"
 
 #: application/models/ItemSearch.php:98
@@ -2626,7 +2630,7 @@ msgid ""
 "If a first name and last name are not provided, then an institution name is "
 "required."
 msgstr ""
-"Als geen voornaam en achternaam zijn geleverd, is er een instituutsnaam "
+"Als er geen voornaam en achternaam voorhanden zijn, is een instellingsnaam "
 "vereist."
 
 #: application/models/User.php:156

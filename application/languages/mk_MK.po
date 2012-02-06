@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Dimitar Poposki <poposkidimitar@gmail.com>, 2011.
+# Dimitar Poposki <poposkidimitar@gmail.com>, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2011-11-22 16:18-0500\n"
-"PO-Revision-Date: 2011-12-28 14:57+0000\n"
+"PO-Revision-Date: 2012-01-09 13:15+0000\n"
 "Last-Translator: Dimitar Poposki <poposkidimitar@gmail.com>\n"
 "Language-Team: Macedonian (Macedonia) (http://www.transifex.net/projects/p/omeka/team/mk_MK/)\n"
 "MIME-Version: 1.0\n"
@@ -57,7 +57,7 @@ msgstr "Subject"
 #: application/views/scripts/collections/browse.php:15
 #: application/views/scripts/collections/show.php:7
 msgid "Description"
-msgstr ""
+msgstr "Опис"
 
 # Dublin Core: Publisher element
 msgid "Publisher"
@@ -88,7 +88,7 @@ msgstr "Идентификатор"
 
 # Dublin Core: Source element
 msgid "Source"
-msgstr ""
+msgstr "Source"
 
 # Dublin Core: Language element
 msgid "Language"
@@ -96,11 +96,11 @@ msgstr "Јазик"
 
 # Dublin Core: Relation element
 msgid "Relation"
-msgstr ""
+msgstr "Relation"
 
 # Dublin Core: Coverage element
 msgid "Coverage"
-msgstr ""
+msgstr "Покриеност"
 
 # Dublin Core: Rights element
 msgid "Rights"
@@ -108,17 +108,19 @@ msgstr "Права"
 
 # Item Type Metadata
 msgid "Item Type Metadata"
-msgstr ""
+msgstr "Item Type Metadata"
 
 # Item Type Metadata description
 msgid ""
 "The item type metadata element set, consisting of all item type elements "
 "bundled with Omeka and all item type elements created by an administrator."
 msgstr ""
+"The item type metadata element set, consisting of all item type elements "
+"bundled with Omeka and all item type elements created by an administrator."
 
 # Omeka Legacy File
 msgid "Omeka Legacy File"
-msgstr ""
+msgstr "Omeka Legacy File"
 
 # Omeka Legacy File description
 msgid ""
@@ -127,38 +129,42 @@ msgid ""
 "elements are common to all Omeka files. This set may be deprecated in future"
 " versions."
 msgstr ""
+"The metadata element set that, in addition to the Dublin Core element set, "
+"was included in the `files` table in previous versions of Omeka. These "
+"elements are common to all Omeka files. This set may be deprecated in future"
+" versions."
 
 # Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
-msgstr ""
+msgstr "Additional Creator"
 
 # Omeka Legacy File: Transcriber element
 msgid "Transcriber"
-msgstr ""
+msgstr "Transcriber"
 
 # Omeka Legacy File: Producer element
 msgid "Producer"
-msgstr ""
+msgstr "Producer"
 
 # Omeka Legacy File: Render Device element
 msgid "Render Device"
-msgstr ""
+msgstr "Render Device"
 
 # Omeka Legacy File: Render Details element
 msgid "Render Details"
-msgstr ""
+msgstr "Render Details"
 
 # Omeka Legacy File: Capture Date element
 msgid "Capture Date"
-msgstr ""
+msgstr "Capture Date"
 
 # Omeka Legacy File: Capture Device element
 msgid "Capture Device"
-msgstr ""
+msgstr "Capture Device"
 
 # Omeka Legacy File: Capture Details element
 msgid "Capture Details"
-msgstr ""
+msgstr "Capture Details"
 
 # Omeka Legacy File: Change History element
 msgid "Change History"
@@ -195,15 +201,15 @@ msgstr ""
 
 # Omeka Image File: Width element
 msgid "Width"
-msgstr ""
+msgstr "Ширина"
 
 # Omeka Image File: Height element
 msgid "Height"
-msgstr ""
+msgstr "Висина"
 
 # Omeka Image File: Bit Depth element
 msgid "Bit Depth"
-msgstr ""
+msgstr "Bit Depth"
 
 # Omeka Image File: Channels element
 msgid "Channels"
@@ -211,19 +217,19 @@ msgstr "Канали"
 
 # Omeka Image File: Exif String element
 msgid "Exif String"
-msgstr ""
+msgstr "Exif String"
 
 # Omeka Image File: Exif Array element
 msgid "Exif Array"
-msgstr ""
+msgstr "Exif Array"
 
 # Omeka Image File: IPTC String element
 msgid "IPTC String"
-msgstr ""
+msgstr "IPTC String"
 
 # Omeka Image File: IPTC Array element
 msgid "IPTC Array"
-msgstr ""
+msgstr "IPTC Array"
 
 # Omeka Video File
 msgid "Omeka Video File"
@@ -240,7 +246,7 @@ msgstr ""
 
 # Omeka Video File: Bitrate element
 msgid "Bitrate"
-msgstr ""
+msgstr "Bitrate"
 
 # Omeka Video File: Duration element
 msgid "Duration"
@@ -248,7 +254,7 @@ msgstr "Времетраење"
 
 # Omeka Video File: Sample Rate element
 msgid "Sample Rate"
-msgstr ""
+msgstr "Sample Rate"
 
 # Omeka Video File: Codec element
 msgid "Codec"
@@ -280,7 +286,7 @@ msgstr "Зачувај"
 #: application/views/scripts/common/footer.php:6
 #: application/views/scripts/functions.php:98
 msgid "Browse Collections"
-msgstr ""
+msgstr "Прелистајте колекции"
 
 #: admin/themes/default/collections/browse.php:4
 #: admin/themes/default/element-sets/browse.php:4
@@ -293,11 +299,11 @@ msgstr ""
 #: application/views/scripts/items/browse.php:8
 #, php-format
 msgid "(%s total)"
-msgstr ""
+msgstr "(%s total)"
 
 #: admin/themes/default/collections/browse.php:18
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: admin/themes/default/collections/browse.php:19
 #: admin/themes/default/element-sets/browse.php:12
@@ -308,29 +314,29 @@ msgstr "Име"
 #: admin/themes/default/collections/browse.php:20
 #: admin/themes/default/collections/show.php:22
 msgid "Collectors"
-msgstr ""
+msgstr "Колекционери"
 
 #: admin/themes/default/collections/browse.php:21
 #: admin/themes/default/files/show.php:24
 #: admin/themes/default/items/browse.php:134
 #: application/views/scripts/files/show.php:57
 msgid "Date Added"
-msgstr ""
+msgstr "Датум на вметнување"
 
 #: admin/themes/default/collections/browse.php:22
 #: admin/themes/default/collections/show.php:39
 #: admin/themes/default/item-types/show.php:42
 msgid "Total Number of Items"
-msgstr ""
+msgstr "Total Number of Items"
 
 #: admin/themes/default/collections/browse.php:25
 #: admin/themes/default/item-types/browse.php:17
 msgid "Edit?"
-msgstr ""
+msgstr "Измени?"
 
 #: admin/themes/default/collections/browse.php:44
 msgid "No collectors"
-msgstr ""
+msgstr "Нема колекционери"
 
 #: admin/themes/default/collections/browse.php:57
 #: admin/themes/default/items/browse.php:150
@@ -346,25 +352,25 @@ msgstr "Нема колекции на оваа страна."
 
 #: admin/themes/default/collections/browse.php:68
 msgid "View All Collections"
-msgstr ""
+msgstr "Види ги сите колекции"
 
 #: admin/themes/default/collections/browse.php:71
 msgid "Add a collection."
-msgstr ""
+msgstr "Додади колекција"
 
 #: admin/themes/default/collections/browse.php:71
 msgid "There are no collections in your archive."
-msgstr ""
+msgstr "Нема колекции во вашата архива."
 
 #: admin/themes/default/collections/edit.php:8
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Edit Collection #%s"
-msgstr ""
+msgstr "Измени колекција #%s"
 
 #: admin/themes/default/collections/edit.php:14
 msgid "Delete this Collection"
-msgstr ""
+msgstr "Избриши ја оваа колекција"
 
 #: admin/themes/default/collections/edit.php:20
 #: admin/themes/default/files/edit.php:41
@@ -377,30 +383,32 @@ msgstr ""
 #: application/forms/SecuritySettings.php:70
 #: application/forms/ThemeConfiguration.php:67
 msgid "Save Changes"
-msgstr ""
+msgstr "Зачувај ги измените"
 
 #: admin/themes/default/collections/form.php:4
 msgid "Collection Details"
-msgstr ""
+msgstr "Детали за колецијата"
 
 #: admin/themes/default/collections/form.php:4
 #: admin/themes/default/item-types/form.php:17
 #: install/views/scripts/index/index.phtml:13
 msgid "Required Fields"
-msgstr ""
+msgstr "Задолжителни полиња"
 
 #: admin/themes/default/collections/form.php:7
 msgid "Collection Name"
-msgstr ""
+msgstr "Име на колекцијата"
 
 #: admin/themes/default/collections/form.php:15
 msgid "Collection Description"
-msgstr ""
+msgstr "Опис на колекцијата"
 
 #: admin/themes/default/collections/form.php:25
 msgid ""
 "List collectors for this collection (optional - enter one name per line)"
 msgstr ""
+"Листа колекционери за оваа колекција (опционално - Внесете едно име на "
+"секоја линија)"
 
 #: admin/themes/default/collections/form.php:35
 #: admin/themes/default/collections/form.php:37
@@ -410,12 +418,12 @@ msgstr ""
 #: admin/themes/default/items/browse.php:177
 #: admin/themes/default/items/form.php:37
 msgid "Public"
-msgstr ""
+msgstr "Јавно"
 
 #: admin/themes/default/collections/form.php:37
 #: admin/themes/default/items/batch-edit.php:43
 msgid "Not Public"
-msgstr ""
+msgstr "Не-јавно"
 
 #: admin/themes/default/collections/form.php:42
 #: admin/themes/default/collections/form.php:44
@@ -425,7 +433,7 @@ msgstr ""
 #: admin/themes/default/items/browse.php:182
 #: admin/themes/default/items/form.php:43
 msgid "Featured"
-msgstr ""
+msgstr "вклучени"
 
 #: admin/themes/default/collections/form.php:44
 #: admin/themes/default/items/batch-edit.php:55
@@ -435,11 +443,11 @@ msgstr ""
 #: admin/themes/default/collections/show.php:11
 #: admin/themes/default/items/show.php:14
 msgid "View Public Page"
-msgstr ""
+msgstr "Види ја јавната страна"
 
 #: admin/themes/default/collections/show.php:13
 msgid "Edit this Collection"
-msgstr ""
+msgstr "Измени ја оваа колекција"
 
 #: admin/themes/default/collections/show.php:27
 msgid "No collectors."
@@ -449,7 +457,7 @@ msgstr ""
 #: admin/themes/default/item-types/show.php:30
 #: application/views/scripts/index.php:35
 msgid "Recently Added Items"
-msgstr ""
+msgstr "Неодамна додадени ставки"
 
 #: admin/themes/default/common/footer.php:4
 msgid "Documentation"
@@ -494,7 +502,7 @@ msgstr "Добредојдовте, %s"
 
 #: admin/themes/default/common/header.php:36 admin/themes/default/index.php:58
 msgid "Settings"
-msgstr ""
+msgstr "Settings"
 
 #: admin/themes/default/common/header.php:38
 msgid "View Public Site"
@@ -556,13 +564,13 @@ msgstr ""
 #: admin/themes/default/common/tags-nav.php:5
 #: admin/themes/default/tags/edit.php:2
 msgid "Edit Tag"
-msgstr ""
+msgstr "Измени таг"
 
 #: admin/themes/default/common/tags-nav.php:8
 #: admin/themes/default/tags/delete.php:2
 #: admin/themes/default/tags/delete.php:21
 msgid "Delete Tag"
-msgstr ""
+msgstr "Избриши таг"
 
 #: admin/themes/default/element-sets/browse.php:2
 msgid "Browse Element Sets"
@@ -588,12 +596,12 @@ msgstr "Извинете, Вие немате дозвола да пристап
 #: admin/themes/default/error/403.php:12 admin/themes/default/error/404.php:12
 #: admin/themes/default/error/405.php:10
 msgid "site administrator"
-msgstr ""
+msgstr "Администратор на сајтот"
 
 #: admin/themes/default/error/403.php:13
 #, php-format
 msgid "If you think you should have permission, try contacting the %s."
-msgstr ""
+msgstr "If you think you should have permission, try contacting the %s."
 
 #: admin/themes/default/error/404.php:2
 msgid "404: Page Not Found"
@@ -685,7 +693,7 @@ msgstr ""
 #: admin/themes/default/files/show.php:39
 #: application/views/scripts/files/show.php:28
 msgid "Original Filename"
-msgstr ""
+msgstr "Оригинално име на фајлот"
 
 #: admin/themes/default/files/show.php:40
 #: application/views/scripts/files/show.php:33
@@ -696,22 +704,22 @@ msgstr "Големина на фајлот"
 #: admin/themes/default/item-types/show.php:20
 #: application/views/scripts/files/show.php:39
 msgid "Type Metadata"
-msgstr ""
+msgstr "Тип на метаподаток"
 
 #: admin/themes/default/files/show.php:47
 #: application/views/scripts/files/show.php:41
 msgid "Mime Type / Browser"
-msgstr ""
+msgstr "Mime Type / Browser"
 
 #: admin/themes/default/files/show.php:48
 #: application/views/scripts/files/show.php:45
 msgid "Mime Type / OS"
-msgstr ""
+msgstr "Mime Type / Оперативен систем"
 
 #: admin/themes/default/files/show.php:49
 #: application/views/scripts/files/show.php:49
 msgid "File Type / OS"
-msgstr ""
+msgstr "File Type / Оперативен систем"
 
 #: admin/themes/default/files/show.php:54
 #: admin/themes/default/items/browse.php:201
@@ -725,7 +733,7 @@ msgstr ""
 
 #: admin/themes/default/index.php:12
 msgid "A new version of Omeka is available for download."
-msgstr ""
+msgstr "Нова везија на Омека е достапна за симнување"
 
 #: admin/themes/default/index.php:13
 #, php-format
@@ -766,7 +774,7 @@ msgstr ""
 
 #: admin/themes/default/index.php:50 admin/themes/default/users/browse.php:6
 msgid "Add a User"
-msgstr ""
+msgstr "Додади корисник"
 
 #: admin/themes/default/index.php:53
 msgid "Manage users of various levels: from researcher to super."
@@ -778,7 +786,7 @@ msgstr ""
 
 #: admin/themes/default/index.php:62
 msgid "Manage Themes"
-msgstr ""
+msgstr "Менаџирај теми"
 
 #: admin/themes/default/index.php:63
 msgid "Manage Plugins"
@@ -819,7 +827,7 @@ msgstr ""
 #: admin/themes/default/item-types/element-list.php:24
 #: application/helpers/ElementForm.php:406
 msgid "Remove"
-msgstr ""
+msgstr "одстрани"
 
 #: admin/themes/default/item-types/add.php:2
 #: admin/themes/default/item-types/add.php:10
@@ -857,11 +865,11 @@ msgstr ""
 
 #: admin/themes/default/item-types/element-form.php:6
 msgid "Choose an existing element"
-msgstr ""
+msgstr "одбери постоечки елемент"
 
 #: admin/themes/default/item-types/element-form.php:14
 msgid "Or Create a new Element"
-msgstr ""
+msgstr "или креирај нов елемент"
 
 #: admin/themes/default/item-types/element-form.php:31
 #: admin/themes/default/item-types/element-list.php:7
@@ -891,7 +899,7 @@ msgstr ""
 
 #: admin/themes/default/item-types/element-list.php:60
 msgid "New"
-msgstr ""
+msgstr "Нов"
 
 #: admin/themes/default/item-types/form.php:17
 msgid "Item Type Information"
@@ -899,7 +907,7 @@ msgstr ""
 
 #: admin/themes/default/item-types/form.php:35
 msgid "Elements"
-msgstr ""
+msgstr "Елементи"
 
 #: admin/themes/default/item-types/show.php:8
 #, php-format
@@ -1343,7 +1351,7 @@ msgstr ""
 
 #: admin/themes/default/themes/browse.php:10
 msgid "Current Theme"
-msgstr ""
+msgstr "Актуелна тема"
 
 #: admin/themes/default/themes/browse.php:13
 #: admin/themes/default/themes/browse.php:38
@@ -1359,7 +1367,7 @@ msgstr "Автор"
 #: admin/themes/default/themes/browse.php:17
 #: admin/themes/default/themes/browse.php:33
 msgid "License"
-msgstr ""
+msgstr "Лиценца"
 
 #: admin/themes/default/themes/browse.php:18
 #: admin/themes/default/themes/browse.php:34
@@ -1372,7 +1380,7 @@ msgstr "Промени тема"
 
 #: admin/themes/default/themes/browse.php:44
 msgid "Switch Theme"
-msgstr ""
+msgstr "Промени тема"
 
 #: admin/themes/default/themes/browse.php:48
 msgid ""
@@ -1434,7 +1442,7 @@ msgstr "Име на институцијата"
 #: admin/themes/default/users/browse.php:23
 #: admin/themes/default/users/browse.php:41 application/forms/User.php:143
 msgid "Role"
-msgstr ""
+msgstr "Улога"
 
 #: admin/themes/default/users/browse.php:24
 #: admin/themes/default/users/browse.php:38
@@ -1702,11 +1710,11 @@ msgstr ""
 
 #: application/controllers/SettingsController.php:70
 msgid "Works"
-msgstr ""
+msgstr "Works"
 
 #: application/controllers/SettingsController.php:71
 msgid "Fails"
-msgstr ""
+msgstr "Fails"
 
 #: application/controllers/TagsController.php:51
 #, php-format
@@ -1736,7 +1744,7 @@ msgstr ""
 
 #: application/controllers/ThemesController.php:51
 msgid "The theme has been successfully changed."
-msgstr ""
+msgstr "Темата беше успешно променета."
 
 #: application/controllers/ThemesController.php:77
 msgid "The theme settings were successfully saved!"
@@ -1762,12 +1770,12 @@ msgstr ""
 #: application/controllers/UsersController.php:298
 #, php-format
 msgid "%s Administrator"
-msgstr ""
+msgstr "%s Администратор"
 
 #: application/controllers/UsersController.php:135
 #, php-format
 msgid "[%s] Reset Your Password"
-msgstr ""
+msgstr "[%s] Изменија лозинката"
 
 #: application/controllers/UsersController.php:138
 msgid "Please check your email for a link to reset your password."
@@ -1775,15 +1783,15 @@ msgstr ""
 
 #: application/controllers/UsersController.php:154
 msgid "Password: The passwords do not match."
-msgstr ""
+msgstr "Лозинка: лозинките не се совпаѓаат"
 
 #: application/controllers/UsersController.php:160
 msgid "You may now log in to Omeka."
-msgstr ""
+msgstr "Сега можете да се логирате во Омека."
 
 #: application/controllers/UsersController.php:179
 msgid "Add User"
-msgstr ""
+msgstr "Додади корисник"
 
 #: application/controllers/UsersController.php:189
 #, php-format
@@ -1792,7 +1800,7 @@ msgstr ""
 
 #: application/controllers/UsersController.php:245
 msgid "Password changed!"
-msgstr ""
+msgstr "Лозинката е променета!"
 
 #: application/controllers/UsersController.php:254
 #, php-format
@@ -1830,31 +1838,31 @@ msgstr ""
 
 #: application/forms/ChangePassword.php:35
 msgid "Current Password"
-msgstr ""
+msgstr "Актуелна лозинка"
 
 #: application/forms/ChangePassword.php:44
 msgid "New Password"
-msgstr ""
+msgstr "Нова лозинка"
 
 #: application/forms/ChangePassword.php:78
 msgid "Repeat New Password"
-msgstr ""
+msgstr "Повтори ја новата лозинка"
 
 #: application/forms/ChangePassword.php:86
 msgid "Save Password"
-msgstr ""
+msgstr "Зачувај лозинка"
 
 #: application/forms/ChangePassword.php:95
 msgid "Change Password"
-msgstr ""
+msgstr "Промени лозинка"
 
 #: application/forms/GeneralSettings.php:28 application/forms/Install.php:85
 msgid "Site Title"
-msgstr ""
+msgstr "Наслов на сајтот"
 
 #: application/forms/GeneralSettings.php:32 application/forms/Install.php:90
 msgid "Site Description"
-msgstr ""
+msgstr "Опис на сајтот"
 
 #: application/forms/GeneralSettings.php:36 application/forms/Install.php:94
 msgid "Administrator Email"
@@ -1948,11 +1956,11 @@ msgstr ""
 
 #: application/forms/Install.php:43 application/forms/Login.php:34
 msgid "Password"
-msgstr ""
+msgstr "Лозинка"
 
 #: application/forms/Install.php:44
 msgid "Must be at least 6 characters."
-msgstr ""
+msgstr "Мора да биде најмалку 6 знаци."
 
 #: application/forms/Install.php:66 application/forms/ResetPassword.php:49
 #: application/views/scripts/users/activate.php:19
@@ -2013,20 +2021,20 @@ msgstr ""
 
 #: application/forms/RecoverPassword.php:73
 msgid "Invalid email address"
-msgstr ""
+msgstr "Невалидна мејл адреса"
 
 #: application/forms/ResetPassword.php:28
 #: application/views/scripts/users/activate.php:13
 msgid "Create a Password"
-msgstr ""
+msgstr "Креирај лозинка"
 
 #: application/forms/ResetPassword.php:32
 msgid "Password is required."
-msgstr ""
+msgstr "Лозинката е задожителна."
 
 #: application/forms/ResetPassword.php:38
 msgid "Typed passwords do not match."
-msgstr ""
+msgstr "Впишаните лозинки не се идентични."
 
 #: application/forms/SecuritySettings.php:27
 msgid "Disable File Upload Validation"
@@ -2175,11 +2183,11 @@ msgstr ""
 
 #: application/helpers/Functions.php:53
 msgid "Omeka RSS Feed"
-msgstr ""
+msgstr "Omeka RSS Feed"
 
 #: application/helpers/Functions.php:54
 msgid "Omeka Atom Feed"
-msgstr ""
+msgstr "Omeka Atom Feed"
 
 #: application/helpers/Functions.php:200
 msgid "Error: Invalid callback was provided for the loop."
@@ -2222,10 +2230,14 @@ msgstr ""
 
 #: application/helpers/LinkFunctions.php:530
 msgid "Atom"
-msgstr ""
+msgstr "Atom"
 
 #: application/helpers/TagFunctions.php:133
 msgid "No tags are available."
+msgstr ""
+
+#: application/libraries/Omeka/View/Helper/RecordMetadataList.php:91
+msgid "[no text]"
 msgstr ""
 
 #: application/models/ActsAsElementText.php:257
@@ -2434,7 +2446,7 @@ msgstr ""
 
 #: application/models/Option.php:28 application/models/Option.php:32
 msgid "Each option must have a unique name."
-msgstr ""
+msgstr "Секоја опција мора да има уникатно име."
 
 #: application/models/Orderable.php:101
 msgid "Cannot add a child to a record that does not exist yet!"
@@ -2649,23 +2661,23 @@ msgstr "содржи"
 
 #: application/views/scripts/items/advanced-search.php:72
 msgid "does not contain"
-msgstr ""
+msgstr "не содржи"
 
 #: application/views/scripts/items/advanced-search.php:73
 msgid "is exactly"
-msgstr ""
+msgstr "е точно"
 
 #: application/views/scripts/items/advanced-search.php:74
 msgid "is empty"
-msgstr ""
+msgstr "е празно"
 
 #: application/views/scripts/items/advanced-search.php:75
 msgid "is not empty"
-msgstr ""
+msgstr "не е празно"
 
 #: application/views/scripts/items/advanced-search.php:86
 msgid "Add a Field"
-msgstr ""
+msgstr "Додади поле"
 
 #: application/views/scripts/items/advanced-search.php:90
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
@@ -2673,31 +2685,31 @@ msgstr ""
 
 #: application/views/scripts/items/advanced-search.php:102
 msgid "Search By Collection"
-msgstr ""
+msgstr "Пребарај според колекција"
 
 #: application/views/scripts/items/advanced-search.php:112
 msgid "Search By Type"
-msgstr ""
+msgstr "Пребарај според тип"
 
 #: application/views/scripts/items/advanced-search.php:122
 msgid "Search By User"
-msgstr ""
+msgstr "Пребарај според корисник"
 
 #: application/views/scripts/items/advanced-search.php:133
 msgid "Search By Tags"
-msgstr ""
+msgstr "Пребарај според тагови"
 
 #: application/views/scripts/items/advanced-search.php:147
 msgid "Public/Non-Public"
-msgstr ""
+msgstr "Јавно/Не-јавно"
 
 #: application/views/scripts/items/advanced-search.php:150
 msgid "Only Public Items"
-msgstr ""
+msgstr "Само јавни ајтеми"
 
 #: application/views/scripts/items/advanced-search.php:151
 msgid "Only Non-Public Items"
-msgstr ""
+msgstr "Само не-јавни ајтеми"
 
 #: application/views/scripts/items/advanced-search.php:157
 msgid "Featured/Non-Featured"
@@ -2806,20 +2818,21 @@ msgstr ""
 
 #: install/views/scripts/index/errors.phtml:1
 msgid "Installation Error"
-msgstr ""
+msgstr "Грешка при инсталација"
 
 #: install/views/scripts/index/errors.phtml:2
 msgid ""
 "Before installation can continue, the following errors must be resolved:"
 msgstr ""
+"Пред да продолжи инсталацијата, следниве грешки мора да бидат поправени"
 
 #: install/views/scripts/index/fatal-error.phtml:1
 msgid "Fatal Error"
-msgstr ""
+msgstr "Фатална грешка"
 
 #: install/views/scripts/index/index.phtml:2
 msgid "Installation Warning"
-msgstr ""
+msgstr "Предупредување при инсталација"
 
 #: install/views/scripts/index/index.phtml:3
 msgid ""
@@ -2829,7 +2842,7 @@ msgstr ""
 
 #: install/views/scripts/index/index.phtml:13
 msgid "Configure Your Site"
-msgstr ""
+msgstr "Конфигурирај го сајтот"
 
 #: install/views/scripts/index/index.phtml:15
 msgid "Form Validation Errors"

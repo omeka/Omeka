@@ -40,6 +40,11 @@
     <p><?php echo link_to_items_in_collection(); ?></p>
 </div>
 
+<div id="output-formats">
+    <h2><?php echo __('Output Formats'); ?></h2>
+    <?php echo output_format_list(false, ' · '); ?>
+</div>
+
 <?php fire_plugin_hook('admin_append_to_collections_show_primary', $collection); ?>
 </div>
 <?php foot(); ?>

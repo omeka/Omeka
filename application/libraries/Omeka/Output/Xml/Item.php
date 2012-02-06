@@ -29,13 +29,15 @@ class Omeka_Output_Xml_Item extends Omeka_Output_Xml_Abstract
         $itemElement->setAttribute('public', $this->_record->public);
         $itemElement->setAttribute('featured', $this->_record->featured);
         
-        if (in_array($this->_context, array('item', 'itemContainer'))) {
+        if (!in_array($this->_context, array('file'))) {
             // fileContainer
             $this->_buildFileContainerForItem($this->_record, $itemElement);
         }
         
-        // collection
-        $this->_buildCollectionForItem($this->_record, $itemElement);
+        if (!in_array($this->_context, array('collection'))) {
+            // collection
+            $this->_buildCollectionForItem($this->_record, $itemElement);
+        }
         
         // itemType
         $this->_buildItemTypeForItem($this->_record, $itemElement);

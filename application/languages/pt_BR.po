@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Carlos Eduardo Maciel <carlosmaciel1@gmail.com>, 2011.
+# Carlos Eduardo Maciel <carlosmaciel1@gmail.com>, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2011-11-22 16:18-0500\n"
-"PO-Revision-Date: 2011-12-22 23:06+0000\n"
+"PO-Revision-Date: 2012-01-09 10:11+0000\n"
 "Last-Translator: Carlos Eduardo Maciel <carlosmaciel1@gmail.com>\n"
-"Language-Team: Portuguese (Brazilian) (http://www.transifex.net/projects/p/omeka/team/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.net/projects/p/omeka/team/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2307,6 +2307,10 @@ msgstr "Atom"
 #: application/helpers/TagFunctions.php:133
 msgid "No tags are available."
 msgstr "Sem tags disponíveis."
+
+#: application/libraries/Omeka/View/Helper/RecordMetadataList.php:91
+msgid "[no text]"
+msgstr "[no text]"
 
 #: application/models/ActsAsElementText.php:257
 #, php-format
