@@ -131,9 +131,14 @@ class File extends Omeka_Record
     
     public function getDerivativeFilename()
     {
-        list($base, $ext) = explode('.', $this->archive_filename);
-        $fn = $base . '.' . Omeka_File_Derivative_Image::DERIVATIVE_EXT;
-        return $fn;        
+        $filename = basename($this->archive_filename);
+        $parts = explode('.', $filename);
+        // One or more . in the filename, pop the last section to be replaced.
+        if (count($parts) > 1) {
+            $ext = array_pop($parts);
+        }
+        array_push($parts, Omeka_File_Derivative_Image_Creator::DERIVATIVE_EXT);
+        return join('.', $parts);        
     }
     
     public function hasThumbnail()
@@ -240,15 +245,35 @@ class File extends Omeka_Record
     }
     
     public function createDerivatives()
-    {
-        $pathToOriginalFile = $this->getPath('archive');
+    {        
+        if (!($convertDir = get_option('path_to_convert'))) {
+            return;
+        }
+        $creator = new Omeka_File_Derivative_Image_Creator($convertDir);
         
-        // Create derivative images if possible.
-        if (Omeka_File_Derivative_Image::createAll($pathToOriginalFile, 
-                                                   $this->getMimeType())) {
+        $creator->addDerivative('fullsize', get_option('fullsize_constraint'));
+        $creator->addDerivative('thumbnail', get_option('thumbnail_constraint'));
+        $this->_makeSquareThumbnails($creator);
+        
+        if ($creator->create($this->getPath('archive'), 
+                             $this->getDerivativeFilename(),
+                             $this->getMimeType())) {
             $this->has_derivative_image = 1;
             $this->save();
         }
+    }
+    
+    private function _makeSquareThumbnails($creator)
+    {
+        $constraint = get_option('square_thumbnail_constraint');
+        $args = join(' ', array(
+                    '-thumbnail ' . escapeshellarg('x' . $constraint*2),
+                    '-resize ' . escapeshellarg($constraint*2 . 'x<'),
+                    '-resize 50%',
+                    '-gravity center',
+                    '-crop ' . escapeshellarg($constraint . 'x' . $constraint . '+0+0'),
+                    '+repage'));
+        $creator->addDerivative('square_thumbnail', $args);
     }
     
     /**

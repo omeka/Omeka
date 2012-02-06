@@ -80,7 +80,7 @@ class Omeka_Test_Helper_Plugin
 
         $contexts->setContextParam('output');
 
-        $contextArray = Omeka_Core_Resource_Frontcontroller::getDefaultResponseContexts();
+        $contextArray = Omeka_Core_Resource_Helpers::getDefaultResponseContexts();
         $contextArray = $this->pluginBroker->applyFilters('define_response_contexts', $contextArray);
 
         $contexts->addContexts($contextArray);

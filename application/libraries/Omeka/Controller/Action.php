@@ -19,6 +19,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      * 
      * Initialized optionally within the init() method.
      *
+     * @deprecated
      * @var Omeka_Db_Table
      */
     protected $_table;
@@ -26,8 +27,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
     /**
      * Allows for built-in CRUD scaffolding in the controllers.
      *
-     * Must be initialized within the init() method.
-     *
+     * @deprecated
      * @var string
      */
     protected $_modelClass;
@@ -78,11 +78,6 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
         $response->setHeader('Content-Type', 'text/html; charset=utf-8', true);
                 
         $this->redirect = $this->_helper->redirector;
-                
-        // Get the table obj by automatic
-        if (!$this->_table && $this->_modelClass) {
-            $this->_table = $this->getTable($this->_modelClass); 
-        }
         
         $this->setActionContexts();
         
@@ -160,6 +155,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      * table.  Otherwise, the desired model class name must be passed to this 
      * function.
      *
+     * @deprecated
      * @see Zend_Controller_Action::init()
      * @see Omeka_Controller_Action::__construct()
      * @param string $table Name of the model for the table to be retrieved.
@@ -167,22 +163,19 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      */
     public function getTable($table = null)
     {
-        if(!$table and $this->_table) {
-            return $this->_table;
-        } else {
-            return $this->getDb()->getTable($table);
-        }
+        return $this->_helper->db->getTable($table);
     }
     
     /**
      * Retrieve the database object.
      * 
+     * @deprecated
      * @uses Omeka_Context
      * @return Omeka_Db
      */
     public function getDb()
     {
-        return Omeka_Context::getInstance()->getDb();
+        return $this->_helper->db->getDb();
     }
     
     /**
@@ -313,11 +306,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      * @return void
      */
     public function browseAction()
-    {        
-        if (empty($this->_modelClass)) {
-            throw new Exception( 'Scaffolding class has not been specified' );
-        }
-        
+    {                
         $pluralName = $this->getPluralized();
         
         $params = $this->_getAllParams();
@@ -325,11 +314,9 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
         $recordsPerPage = $this->_getBrowseRecordsPerPage();
         $currentPage = $this->_getBrowseRecordsPage();
         
-        $table = $this->getTable($this->_modelClass);
-        
-        $records = $table->findBy($params, $recordsPerPage, $currentPage);
-        
-        $totalRecords = $table->count($params);
+        $records = $this->_helper->db->findBy($params, $recordsPerPage, $currentPage);
+                
+        $totalRecords = $this->_helper->db->count($params);
         
         Zend_Registry::set($pluralName, $records);
         
@@ -385,7 +372,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      */
     public function showAction()
     {
-        $varName = strtolower($this->_modelClass);
+        $varName = strtolower($this->_helper->db->getDefaultModelName());
                 
         $record = $this->findById();        
         
@@ -409,9 +396,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      */
     public function addAction()
     {
-        //Maybe this recurring bit should be abstracted out
-        $varName = strtolower($this->_modelClass);
-        $class = $this->_modelClass;
+        $class = $this->_helper->db->getDefaultModelName();
         
         $record = new $class();
         
@@ -426,7 +411,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
         } catch (Omeka_Validator_Exception $e) {
             $this->flashValidationErrors($e);
         } 
-        $this->view->assign(array($varName=>$record));            
+        $this->view->assign(array(strtolower($class)=>$record));            
     }
     
     /**
@@ -474,7 +459,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      */
     public function editAction()
     {
-        $varName = strtolower($this->_modelClass);
+        $varName = strtolower($this->_helper->db->getDefaultModelName());
         
         $record = $this->findById();
         
@@ -558,7 +543,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      */
     protected function getPluralized($lower = true)
     {
-        $plural = Inflector::pluralize($this->_modelClass);
+        $plural = Inflector::pluralize($this->_helper->db->getDefaultModelName());
         return $lower ? strtolower($plural) : $plural;
     }
     
@@ -566,6 +551,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      * Find a particular record given its unique ID # and (optionally) its 
      * class name.  
      * 
+     * @deprecated
      * @uses Omeka_Db_Table::find()
      * @uses Omeka_Db_Table::checkExists()
      * @param int $id (optional) ID of the record to find.
@@ -577,32 +563,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      */
     public function findById($id = null, $table = null)
     {
-        $id = (!$id) ? $this->getRequest()->getParam('id') : $id;
-        
-        if (!$id) {
-            throw new Omeka_Controller_Exception_404(get_class($this) . ': No ID passed to this request' );
-        }
-
-        $table = !$table ? $this->_table : $this->getTable($table);            
-        
-        if (!$table) {
-            throw new Exception('A table must be defined in order to use findById()!');
-        }
-        
-        $record = $table->find($id);
-        
-        if (!$record) {
-            
-            //Check to see whether to record exists at all
-            if (!$table->checkExists($id)) {
-                throw new Omeka_Controller_Exception_404(get_class($this) . ": No record with ID # $id exists" );
-            } else {
-                throw new Omeka_Controller_Exception_403('You do not have permission to access this page.');
-            }
-            
-        }
-        
-        return $record;
+        return $this->_helper->db->findById($id, $table);
     }
     /**
      *

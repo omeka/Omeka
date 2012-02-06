@@ -18,7 +18,7 @@ class ElementSetsController extends Omeka_Controller_Action
 {
     public function init()
     {
-        $this->_modelClass = 'ElementSet';
+        $this->_helper->db->setDefaultModelName('ElementSet');
     }
     
     protected function _getDeleteConfirmMessage($record)

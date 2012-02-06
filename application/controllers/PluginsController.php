@@ -18,7 +18,7 @@ class PluginsController extends Omeka_Controller_Action
 {
     public function init()
     {
-        $this->_modelClass   = 'Plugin';
+        $this->_helper->db->setDefaultModelName('Plugin');
         $this->_pluginBroker = $this->getInvokeArg('bootstrap')->getResource('Pluginbroker');
         $this->_pluginLoader = Zend_Registry::get('pluginloader');
         $this->_pluginIniReader = Zend_Registry::get('plugin_ini_reader');

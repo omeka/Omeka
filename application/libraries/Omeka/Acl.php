@@ -66,7 +66,7 @@ class Omeka_Acl extends Zend_Acl
          }            
          $this->_roles = $roles;        
     }
-    
+        
     /**
      * Load an array of resources and privileges into the ACL.
      * 
@@ -134,23 +134,5 @@ class Omeka_Acl extends Zend_Acl
     public function getResourceList()
     {
         return $this->_resourceList;
-    }
-    
-    /**
-     * Verify that the currently logged in user has permission for a certain
-     * resource/privilege combination.
-     * 
-     * @uses Omeka_Context::getCurrentUser()
-     * @param string $resource Name of the resource.
-     * @param string $privilege Name of the privilege.
-     * @return boolean
-     */    
-    public function checkUserPermission($resource, $privilege)
-    {
-        $user = Omeka_Context::getInstance()->getCurrentUser();
-            
-        $role = $user ? $user->role : null;
-        
-        return $this->isAllowed($role, $resource, $privilege);
     }
 }

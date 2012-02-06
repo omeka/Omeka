@@ -56,12 +56,4 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
         
         return $front;
     }
-
-    /**
-     * Convenience method for backwards-compatibility with Omeka 1.x.
-     */
-    public static function getDefaultResponseContexts()
-    {
-        return Omeka_Core_Resource_Helpers::getDefaultResponseContexts();
-    }
 }

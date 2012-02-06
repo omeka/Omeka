@@ -24,7 +24,7 @@ class FilesController extends Omeka_Controller_Action
     
     public function init()
     {
-        $this->_modelClass = 'File';
+        $this->_helper->db->setDefaultModelName('File');
         $this->checkUserPermissions();
     }
     

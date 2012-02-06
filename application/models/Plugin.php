@@ -15,7 +15,7 @@
  * @subpackage Models
  * @author CHNM
  */
-class Plugin extends Omeka_Record
+class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
 {
     public $name;
     public $active = '0';
@@ -432,6 +432,11 @@ class Plugin extends Omeka_Record
         // This means that the check will succeed for all sub-versions
         // of the declared version in plugin.ini.
         return !$this->getTestedUpToOmekaVersion() || version_compare($this->getTestedUpToOmekaVersion() . 'p', OMEKA_VERSION, '>=');
+    }
+    
+    public function getResourceId()
+    {
+        return 'Plugins';
     }
 
     /**

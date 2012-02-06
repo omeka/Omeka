@@ -38,7 +38,7 @@ class ItemsController extends Omeka_Controller_Action
 
     public function init() 
     {
-        $this->_modelClass = 'Item';
+        $this->_helper->db->setDefaultModelName('Item');
     }
 
     public function preDispatch()

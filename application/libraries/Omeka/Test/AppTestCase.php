@@ -177,9 +177,8 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         $bs->auth->getStorage()->write($user->id);
         $bs->currentUser = $user;
         $bs->getContainer()->currentuser = $user;
-        $aclHelper = Zend_Controller_Action_HelperBroker::getHelper('Acl'); 
-        $aclHelper->setCurrentUser($user); 
-        
+        $aclHelper = Zend_Controller_Action_HelperBroker::getHelper('Acl');
+        $aclHelper->setCurrentUser($user);
     }
     
     /**

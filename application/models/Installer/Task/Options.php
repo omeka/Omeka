@@ -36,6 +36,9 @@ class Installer_Task_Options implements Installer_TaskInterface
         File::DISABLE_DEFAULT_VALIDATION_OPTION,
         Omeka_Db_Migration_Manager::VERSION_OPTION_NAME,
         'display_system_info',
+        'html_purifier_is_enabled',
+        'html_purifier_allowed_html_elements',
+        'html_purifier_allowed_html_attributes',
         'tag_delimiter',
     );
     

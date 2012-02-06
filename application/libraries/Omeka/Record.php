@@ -908,24 +908,4 @@ abstract class Omeka_Record implements ArrayAccess
         $validator = new Zend_Validate_Db_NoRecordExists($validatorOptions);
         return $validator->isValid($value);
     }
-        
-    /**
-     * Determine whether or not the ACL grants permission for the specific 
-     * privilege.
-     * 
-     * Note that this is deprecated and may fail or throw exceptions if
-     * the ACL definition does not include a resource with a name corresponding
-     * to the pluralized form of this record's class name.
-     * 
-     * @deprecated
-     * @param string $rule
-     * @return boolean
-     */
-    protected function userHasPermission($rule) 
-    {
-        $resource = Inflector::pluralize(get_class($this));        
-        if ($acl = Omeka_Context::getInstance()->getAcl()) {
-            return $acl->checkUserPermission($resource, $rule);
-        }
-    }    
 }

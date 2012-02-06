@@ -107,18 +107,6 @@ class Omeka_Db
     }
     
     /**
-     * Compatibility alias for getAdapter().
-     *
-     * @deprecated
-     * @see Omeka_Db::getAdapter().
-     * @return Zend_Db_Adapter
-     */
-    public function getConnection()
-    {
-        return $this->getAdapter();
-    }
-    
-    /**
      * Retrieve the database adapter.
      *
      * @return Zend_Db_Adapter

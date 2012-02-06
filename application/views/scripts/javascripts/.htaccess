@@ -1,0 +1,5 @@
+# TinyMCE needs access to the .htm files that it uses for themes.
+<FilesMatch "\.htm$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>

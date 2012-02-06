@@ -9,6 +9,7 @@
  * Extension of Zend_Acl_Resource, adds the concept of privileges within
  * resources.
  *
+ * @deprecated
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */

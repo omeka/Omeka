@@ -28,8 +28,7 @@ class UsersController extends Omeka_Controller_Action
     protected $_browseRecordsPerPage = 10;
         
     public function init() {
-        $this->_modelClass = 'User';
-        $this->_table = $this->getTable('User');
+        $this->_helper->db->setDefaultModelName('User');
         $this->_getUserAcl();
         $this->_auth = $this->getInvokeArg('bootstrap')->getResource('Auth');
 
@@ -74,10 +73,11 @@ class UsersController extends Omeka_Controller_Action
     private function _getUserAcl()
     {
         try {
-            $user = $this->findById();
+            $user = $this->_helper->db->findById();
         } catch (Omeka_Controller_Exception_404 $e) {
             return;
         }
+
         $this->aclResource = $user;
         $this->aclRequest = clone $this->getRequest();
     }
@@ -97,7 +97,7 @@ class UsersController extends Omeka_Controller_Action
             return $this->flashError(__('Unable to reset password. Please verify that the information is correct and contact an administrator if necessary.'));
         }
         
-        $user = $this->_table->findByEmail($email);
+        $user = $this->_helper->db->findByEmail($email);
         
         if (!$user || $user->active != 1) {
             $this->flashError(__('Unable to reset password. Please verify that the information is correct and contact an administrator if necessary.'));

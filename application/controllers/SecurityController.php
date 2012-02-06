@@ -32,6 +32,9 @@ class SecurityController extends Omeka_Controller_Action
         $options = array(Omeka_Validate_File_Extension::WHITELIST_OPTION,
                          Omeka_Validate_File_MimeType::WHITELIST_OPTION,
                          File::DISABLE_DEFAULT_VALIDATION_OPTION,
+                         'html_purifier_is_enabled',
+                         'html_purifier_allowed_html_elements',
+                         'html_purifier_allowed_html_attributes',
                          Omeka_Captcha::PUBLIC_KEY_OPTION,
                          Omeka_Captcha::PRIVATE_KEY_OPTION
         );
@@ -65,6 +68,28 @@ class SecurityController extends Omeka_Controller_Action
             $body = Omeka_Validate_File_MimeType::DEFAULT_WHITELIST;
         } else {
             $body = get_option(Omeka_Validate_File_MimeType::WHITELIST_OPTION);
+        }
+        $this->getResponse()->setBody($body);
+    }
+    
+    public function getHtmlPurifierAllowedHtmlElementsAction()
+    {
+        $this->_helper->viewRenderer->setNoRender(true);
+        if ($this->_getParam('default')) {
+            $body = implode(',', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlElements());
+        } else {
+            $body = get_option('html_purifier_allowed_html_elements');
+        }
+        $this->getResponse()->setBody($body);
+    }
+    
+    public function getHtmlPurifierAllowedHtmlAttributesAction()
+    {
+        $this->_helper->viewRenderer->setNoRender(true);
+        if ($this->_getParam('default')) {
+            $body = implode(',', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlAttributes());
+        } else {
+            $body = get_option('html_purifier_allowed_html_attributes');
         }
         $this->getResponse()->setBody($body);
     }

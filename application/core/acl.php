@@ -6,37 +6,35 @@
  * @access private
  */
  
-//Define our resources/privileges in a flat list here
 $resources = array(
-    'Items'         =>  array('add', 'batch-edit', 'batch-edit-save', 'edit', 'editSelf', 'editAll', 'delete', 'deleteSelf', 'deleteAll', 'tag', 'showNotPublic', 'showSelfNotPublic', 'untagOthers', 'makePublic', 'makeFeatured', 'modifyPerPage', 'browse'),
-    'Collections'   =>  array('add','edit','delete', 'showNotPublic', 'browse'),
-    'ElementSets'   =>  array('browse', 'delete'),
-    'Files'         =>  array('edit','delete'),
-    'Plugins'       =>  array('browse','config', 'install', 'uninstall', 'upgrade', 'activate'),
-    'Settings'      =>  array('edit', 'check-imagemagick'),
-    'Security'      =>  array('edit'),
-    'Upgrade'       =>  array('migrate', 'completed'),
-    'Tags'          =>  array('rename','remove', 'browse'),
-    'Themes'        =>  array('browse','switch', 'config'),
-    'SystemInfo'    =>  array('index'),
-    // 'delete-element' and 'add-element' are actions that allow AJAX requests to manipulate the elements for an item type.
-    'ItemTypes'     =>  array('add','edit','delete', 'browse', 'delete-element', 'add-element'),
-    // 'makeSuperUser' should be deprecated, since it can only be called if non-super users can choose the roles for user accounts.
-    // 'changeRole' determines whether the role of a user account can be changed.  only super users can do this.
-    'Users'         =>  array('browse','show','add','edit','delete','makeSuperUser', 'changeRole')
+    'Items', 
+    'Collections', 
+    'ElementSets', 
+    'Files', 
+    'Plugins', 
+    'Settings', 
+    'Security', 
+    'Upgrade', 
+    'Tags', 
+    'Themes', 
+    'SystemInfo',
+    'ItemTypes', 
+    'Users',
 );
 
 //Each entry in this array is the set of the values passed to $acl->allow()
 $allowList = array(
-    //Anyone can browse Items, Item Types, Tags and Collections
-    array(null, array('Items', 'ItemTypes', 'Tags', 'Collections'), array('browse')),
-    //Super user can do anything
+    // Anyone can browse Items, Item Types, Tags and Collections
+    array(null, array('Items', 'ItemTypes', 'Tags', 'Collections'), array('index','browse', 'show')),
+    // Anyone can browse items by tags or use advanced search for items
+    array(null, array('Items'), array('tags', 'advanced-search')),
+    // Super user can do anything
     array('super'),
-    //Researchers can view items and collections that are not yet public
+    // Researchers can view items and collections that are not yet public
     array('researcher',array('Items', 'Collections'),array('showNotPublic')),
-    //Contributors can add and tag items, edit or delete their own items, and see their items that are not public
+    // Contributors can add and tag items, edit or delete their own items, and see their items that are not public
     array('contributor', 'Items', array('tag', 'add', 'batch-edit', 'batch-edit-save', 'editSelf', 'deleteSelf', 'showSelfNotPublic')),
-    //Non-authenticated users can access the upgrade script (for logistical reasons).
+    // Non-authenticated users can access the upgrade script (for logistical reasons).
     array(null, 'Upgrade')
 ); 
 
@@ -44,7 +42,9 @@ $allowList = array(
 
 $acl = new Omeka_Acl;
 
-$acl->loadResourceList($resources);
+foreach ($resources as $resourceName) {
+    $acl->addResource($resourceName);
+}
 
 $acl->addRole(new Zend_Acl_Role('super'));
 
@@ -75,4 +75,9 @@ $acl->allow(array('contributor', 'researcher', 'admin', 'super'), 'Users', null,
 $acl->allow(array('contributor', 'researcher', 'admin', 'super'),
     'Items', array('edit', 'delete'), new Item_OwnershipAclAssertion());
 $acl->deny('admin', 'ItemTypes', array('delete', 'delete-element'));
+
+// Because Users resource was denied to admins, it must be explicitly allowed here.
+$acl->allow(array(null, 'admin'), 'Users', array('edit', 'show', 'change-password', 'delete'), new User_AclAssertion());
+// Always allow users to login, logout and send forgot-password notifications.
+$acl->allow(array(null, 'admin'), 'Users', array('login', 'logout', 'forgot-password', 'activate'));
 ?>

@@ -12,7 +12,6 @@
 
 <!-- Plugin Stuff -->
 <?php admin_plugin_header(); ?>
-
 <!-- Stylesheets -->
 <?php display_css(); ?>
 
@@ -27,11 +26,20 @@
             <div id="site-title"><?php echo link_to_admin_home_page(settings('site_title')); ?></div>
             
             <div id="site-info">
-                <?php if (current_user()): ?>
-                    <p id="welcome">
-                        <?php $userLink = '<a href="'.html_escape(uri('users/edit/'.current_user()->id)) .'">'.html_escape(current_user()->first_name) .'</a>'; ?>
-                        <?php echo __('Welcome, %s', $userLink); ?> | <a href="<?php echo html_escape(uri('users/logout'));?>" id="logout"><?php echo __('Log Out'); ?></a></p>
-                <?php endif; ?>
+            <?php if ($user = current_user()): ?>
+                <?php
+                    $name = html_escape($user->first_name);
+                    if (has_permission($user, 'edit')) {
+                        $userLink = '<a href="' . html_escape(uri('users/edit/' . $user->id) . '">' . $name . '</a>';
+                    } else {
+                        $userLink = $name;
+                    }
+                ?>
+                <p id="welcome">
+                    <?php echo __('Welcome, %s', $userLink); ?> |
+                    <a href="<?php echo html_escape(uri('users/logout'));?>" id="logout"><?php echo __('Log Out'); ?></a>
+                </p>
+            <?php endif; ?>
                 <?php if (has_permission('Settings', 'edit')): ?>
                     <a href="<?php echo html_escape(uri('settings')); ?>" id="settings-link"><?php echo __('Settings'); ?></a>
                 <?php endif; ?>

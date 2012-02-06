@@ -186,10 +186,11 @@ class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
         // Change the tags (remove some, add some)
         if (array_key_exists('my-tags-to-add', $post)) {
             $user = Omeka_Context::getInstance()->getCurrentUser();
+            $acl = Omeka_Context::getInstance()->getAcl();
             if ($user) {
                 $this->addTags($post['my-tags-to-add'], $user);
                 $this->deleteTags($post['my-tags-to-delete'], $user);                
-                $this->deleteTags($post['other-tags-to-delete'], $user, $this->userHasPermission('untagOthers'));
+                $this->deleteTags($post['other-tags-to-delete'], $user, $acl->isAllowed($user, 'Items', 'untagOthers'));
             }
         }        
     }
@@ -326,11 +327,13 @@ class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
         $filter = new Zend_Filter_Input($filters, null, $post, $options);
         $post = $filter->getUnescaped();
         
+        $acl = Omeka_Context::getInstance()->getAcl();
+        $currentUser = Omeka_Context::getInstance()->getCurrentUser();
         // check permissions to make public and make featured
-        if (!$this->userHasPermission('makePublic')) {
+        if (!$acl->isAllowed($currentUser, 'Items', 'makePublic')) {
             unset($post['public']);
         }
-        if (!$this->userHasPermission('makeFeatured')) {
+        if (!$acl->isAllowed($currentUser, 'Items', 'makeFeatured')) {
             unset($post['featured']);
         }
         

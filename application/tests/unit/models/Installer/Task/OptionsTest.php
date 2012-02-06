@@ -64,6 +64,9 @@ class Installer_Task_OptionsTest extends PHPUnit_Framework_TestCase
             File::DISABLE_DEFAULT_VALIDATION_OPTION         => (string)!extension_loaded('fileinfo'),
             Omeka_Db_Migration_Manager::VERSION_OPTION_NAME => OMEKA_VERSION,
             'display_system_info'           => true,
+            'html_purifier_is_enabled'      => '1',
+            'html_purifier_allowed_html_elements'   => 'foo',
+            'html_purifier_allowed_html_attributes' => 'bar',
             'tag_delimiter'                 => ',',
         ));
         try {
@@ -99,6 +102,9 @@ class Installer_Task_OptionsTest extends PHPUnit_Framework_TestCase
             File::DISABLE_DEFAULT_VALIDATION_OPTION         => (string)!extension_loaded('fileinfo'),
             Omeka_Db_Migration_Manager::VERSION_OPTION_NAME => OMEKA_VERSION,
             'display_system_info'           => true,
+            'html_purifier_is_enabled'      => '1',
+            'html_purifier_allowed_html_elements'   => 'foo',
+            'html_purifier_allowed_html_attributes' => 'bar',
             'tag_delimiter'                 => ',',
         ));
         $task->install($this->db);
