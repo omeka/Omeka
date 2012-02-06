@@ -23,7 +23,7 @@ class ItemTypeTable extends Omeka_Db_Table
     public function findByName($itemTypeName) 
     {
         $select = $this->getSelect();
-        $select->where($this->_alias . '.name = ?', $itemTypeName);        
-        return $this->fetchObject($select);   	
+        $select->where($this->_alias . '.name = ?', $itemTypeName);
+        return $this->fetchObject($select);
     }
 }
