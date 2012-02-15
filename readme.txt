@@ -20,8 +20,6 @@ Omeka includes:
 - jQuery <http://jquery.com>
 - jQuery UI <http://jqueryui.com>
 - TinyMCE <http://tinymce.moxiecode.com>
-- Prototype <http://prototypejs.org>
-- script.aculo.us <http://script.aculo.us>
 - Silk Icons <http://www.famfamfam.com/lab/icons/silk/>
 
 Use and modifications of these libraries must comply with their respective licenses.

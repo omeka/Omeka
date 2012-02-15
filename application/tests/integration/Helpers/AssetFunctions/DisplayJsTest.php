@@ -19,7 +19,6 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
 
     public $externalDefaults;
     public $internalDefaults;
-    public $prototypeScripts;
 
     public function setUp()
     { 
@@ -30,12 +29,6 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
         $this->internalDefaults = array(
             self::ASSET_PATH_ROOT . '/javascripts/jquery.js',
             self::ASSET_PATH_ROOT . '/javascripts/jquery-ui.js',
-        );
-
-        $this->prototypeScripts = array(
-            self::ASSET_PATH_ROOT . '/javascripts/prototype.js',
-            self::ASSET_PATH_ROOT . '/javascripts/prototype-extensions.js',
-            self::ASSET_PATH_ROOT . '/javascripts/scriptaculous.js?load=effects,dragdrop'
         );
         
         // Load a view object to allow __v() to work.
@@ -87,15 +80,6 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
         Omeka_Context::getInstance()->setConfig('basic', new Zend_Config($configArray));
 
         $this->_assertScriptsIncluded($this->_getJsOutput(), $this->internalDefaults);
-        Omeka_Context::resetInstance();
-    }
-
-    public function testPrototype()
-    {
-        Omeka_Context::getInstance()->setOptions(array('enable_prototype' => '1'));
-        $this->assertEquals('', $this->_getJsOutput(false));
-
-        $this->_assertScriptsIncluded($this->_getJsOutput(), $this->prototypeScripts);
         Omeka_Context::resetInstance();
     }
 

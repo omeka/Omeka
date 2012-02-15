@@ -100,12 +100,6 @@ class Omeka_Form_GeneralSettings extends Omeka_Form
             'class' => 'checkbox'
         ));
 
-        $this->addElement('checkbox', 'enable_prototype', array(
-            'label' => __('Enable Prototype'),
-            'class' => 'checkbox',
-            'description' => __('Enable the Prototype JavaScript library. This may be required for some older plugins.')
-        ));
-
         $this->addElement('text', 'path_to_convert', array(
             'label' => __('Imagemagick Directory Path')
         ));
@@ -119,7 +113,7 @@ class Omeka_Form_GeneralSettings extends Omeka_Form
                   'copyright', 'author', 'tag_delimiter', 'fullsize_constraint', 
                   'thumbnail_constraint', 'square_thumbnail_constraint', 
                   'per_page_admin', 'per_page_public', 'show_empty_elements',
-                  'enable_prototype', 'path_to_convert'),
+                  'path_to_convert'),
             'site_settings');
         
         $this->addDisplayGroup(

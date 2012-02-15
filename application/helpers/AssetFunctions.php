@@ -126,14 +126,6 @@ function display_js($includeDefaults = true)
                 ? (bool) $config->theme->useInternalJavascripts
                 : false;
 
-        // For backwards compatibility: include Prototype and friends only
-        // when specifically requested in the admin interface.
-        if (get_option('enable_prototype') == '1') {
-            $headScript->prependFile(src('scriptaculous', $dir, 'js').'?load=effects,dragdrop')
-                       ->prependFile(src('prototype-extensions', $dir, 'js'))
-                       ->prependFile(src('prototype', $dir, 'js'));
-        }
-
         $headScript->prependScript('jQuery.noConflict();');
         if ($useInternalJs) {
             $headScript->prependFile(src('jquery-ui', $dir, 'js'))
@@ -195,35 +187,12 @@ function img($file, $dir = 'images')
  * $dir defaults to 'javascripts'
  * $file should not include the .js extension
  *
- * @param string $file The name of the file, without .js extension.  Specifying 'default' will load
- * the default javascript files, such as prototype/scriptaculous
+ * @param string $file The name of the file, without .js extension.
  * @param string $dir The directory in which to look for javascript files.  Recommended to leave the default value.
- * @param array $scriptaculousLibraries An array of Scriptaculous libraries, by file name. Default is 'effects' and 'dragdrop'. Works only if 'default' is passed for the first parameter.
  */
-function js($file, $dir = 'javascripts', $scriptaculousLibraries = array('effects', 'dragdrop'))
+function js($file, $dir = 'javascripts')
 {
-    if ($file == 'default') {
-        $output = '';
-        // For backwards compatibility: include Prototype and friends only
-        // when specifically requested in the admin interface.
-        if (get_option('enable_prototype') == '1') {
-            $output .= js('prototype', $dir);
-            $output .= js('prototype-extensions', $dir);
-            $output .= js('scriptaculous', $dir, $scriptaculousLibraries);
-        }
-        $output .= js('jquery', $dir);
-        $output .= js('jquery-noconflict', $dir);
-        $output .= js('jquery-ui', $dir);
-
-        //Do not try to load 'default.js'
-        return $output;
-    }
-
-    if ('scriptaculous' == $file) {
-        $href = src($file, $dir, 'js') . ($scriptaculousLibraries ? '?load=' . implode(',', $scriptaculousLibraries) : '');
-    } else {
-        $href = src($file, $dir, 'js');
-    }
+    $href = src($file, $dir, 'js');
 
     return '<script type="text/javascript" src="' . html_escape($href) . '" charset="utf-8"></script>'."\n";
 }
