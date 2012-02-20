@@ -28,7 +28,7 @@
             <div id="site-info">
             <?php if ($user = current_user()): ?>
                 <?php
-                    $name = html_escape($user->first_name);
+                    $name = html_escape($user->name);
                     if (has_permission($user, 'edit')) {
                         $userLink = '<a href="' . html_escape(uri('users/edit/' . $user->id)) . '">' . $name . '</a>';
                     } else {

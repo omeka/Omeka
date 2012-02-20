@@ -13,30 +13,6 @@
  */
 class UserTable extends Omeka_Db_Table
 {
-    public function getSelect()
-    {
-        $select = new Omeka_Db_Select($this->_db->getAdapter());
-        
-        $db = $this->getDb();
-        
-        $select->from(array('u'=>$db->User), 
-                      array( 'u.id',
-                             'u.username',
-                             'u.password',
-                             'u.salt',
-                             'u.active',
-                             'u.role',
-                             'u.entity_id', 
-                             'e.first_name', 
-                             'e.middle_name', 
-                             'e.last_name', 
-                             'e.email',
-                             'e.institution'))
-                      ->joinInner(array('e'=>$db->Entity), 
-                                  "e.id = u.entity_id", array());
-        return $select;
-    }
-
     /**
      * Find an active User given that user's ID.
      *
@@ -55,23 +31,13 @@ class UserTable extends Omeka_Db_Table
     {
         return array(
             'u.id', 
-            'u.name' => new Zend_db_Expr( 
-                'CONCAT_WS(" ", e.first_name, e.middle_name, e.last_name)')
-            );
-    }
-    
-    public function findByEntity($entity_id)
-    {
-        $select = $this->getSelect();
-        $select->where("e.id = ?")->limit(1);
-                
-        return $this->fetchObject($select, array((int) $entity_id));        
+            'u.name');
     }
     
     public function findByEmail($email)
     {
         $select = $this->getSelect();
-        $select->where("e.email = ?")->limit(1);
+        $select->where("u.email = ?")->limit(1);
         return $this->fetchObject($select, array($email));
     }
     
@@ -98,14 +64,8 @@ class UserTable extends Omeka_Db_Table
                 case 'role':
                     $orderClause = 'u.role ' . $sortOrder;
                     break;
-                case 'institution':
-                    $orderClause = 'e.institution ' . $sortOrder;
-                    break;
-                case 'first_name':
-                    $orderClause = 'e.first_name ' . $sortOrder;
-                    break;
-                case 'last_name':
-                    $orderClause = 'e.last_name ' . $sortOrder;
+                case 'name':
+                    $orderClause = 'u.name ' . $sortOrder;
                     break;
                 case 'username':
                     $orderClause = 'u.username ' . $sortOrder;

@@ -41,12 +41,9 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
                 "There should be a 'username' element on this form with a default "
                 . "value."),
             array(
-                '//input[@id="first_name"][@value="Admin"]',
-                "There should be a 'first_name' element on this form with a default "
+                '//input[@id="name"][@value="Admin User"]',
+                "There should be a 'name' element on this form with a default "
                 . "value."),
-            array(
-                '//input[@id="last_name"][@value="User"]',
-                "There should be a 'last_name' element on this form with a default value."),
             array(
                 '//input[@id="email"][@value="admin@example.com"]',
                 "There should be a 'email' element on this form with a default value."),
@@ -95,10 +92,8 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
         $this->_authenticateUser($this->superUser);
         $this->request->setPost(array(
             'username' => $expectedUsername,
-            'first_name' => 'foobar',
-            'last_name' => 'foobar',
+            'name' => 'foobar',
             'email' => 'admin' . mt_rand() . '@example.com',
-            'institution' => 'School of Hard Knocks',
             'role' => 'admin',
             'active' => '1'
         ));
@@ -115,10 +110,8 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
         $this->_authenticateUser($user);
         $this->request->setPost(array(
             'username' => 'newusername',
-            'first_name' => 'foobar',
-            'last_name' => 'foobar',
+            'name' => 'foobar foobar',
             'email' => 'foobar' . mt_rand() . '@example.com',
-            'institution' => 'School of Hard Knocks',
             'active' => '1',
         ));
         $this->request->setMethod('post');
@@ -133,10 +126,8 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
         $this->_authenticateUser($this->superUser);
         $this->request->setPost(array(
             'username' => 'newusername',
-            'first_name' => 'foobar',
-            'last_name' => 'foobar',
+            'first_name' => 'foobar foobar',
             'email' => 'invalid.email',
-            'institution' => 'School of Hard Knocks',
             'role' => 'super',
             'active' => '1'
         ));
@@ -152,10 +143,8 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
         $this->_authenticateUser($this->adminUser);        
         $this->request->setPost(array(
             'username' => 'newusername',
-            'first_name' => 'foobar',
-            'last_name' => 'foobar',
+            'name' => 'foobar foobar',
             'email' => 'foobar@example.com',
-            'institution' => 'School of Hard Knocks',
             'role' => 'super',
             'active' => '0'
         ));
@@ -172,10 +161,8 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
         $this->_authenticateUser($user);
         $this->request->setPost(array(
             'username' => 'newusername',
-            'first_name' => 'foobar',
-            'last_name' => 'foobar',
+            'name' => 'foobar foobar',
             'email' => 'foobar@example.com',
-            'institution' => 'School of Hard Knocks',
             'role' => 'super',
             'active' => '1',
             'entity_id' => '5000',
@@ -206,10 +193,8 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
         $newUser->setPassword('foobar');
         $newUser->role = $role;
         $newUser->active = 1;
-        $newUser->Entity = new Entity;
-        $newUser->Entity->first_name = ucwords($role);
-        $newUser->Entity->last_name = 'User';
-        $newUser->Entity->email = $role . '@example.com';
+        $newUser->name = ucwords($role) . ' User';
+        $newUser->email = $role . '@example.com';
         $newUser->forceSave();
         return $newUser;
     }

@@ -74,27 +74,14 @@ class Omeka_Form_User extends Omeka_Form
             
         ));
         
-        $this->addElement('text', 'first_name', array(
-            'label' => __('First Name'),
+        $this->addElement('text', 'name', array(
+            'label' => __('Real Name'),
             'size' => '30',
             'required' => true,
             'validators' => array(
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' => array(
                     'messages' => array(
-                        Zend_Validate_NotEmpty::IS_EMPTY => __('First name is required.')
-                    )
-                ))
-            )
-        ));
-        
-        $this->addElement('text', 'last_name', array(
-            'label' => __('Last Name'),
-            'size'  => '30',
-            'required' => true,
-            'validators' => array(
-                array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' => array(
-                    'messages' => array(
-                        Zend_Validate_NotEmpty::IS_EMPTY => __('Last name is required.')
+                        Zend_Validate_NotEmpty::IS_EMPTY => __('Real Name is required.')
                     )
                 ))
             )

@@ -22,10 +22,8 @@ echo link_to($user, 'edit', __('Edit this User'), array('class'=>'edit')); ?></p
     <h2><?php echo __('Username'); ?></h2>
     <p><?php echo html_escape($user->username); ?></p>
     <h2><?php echo __('Real Name'); ?></h2>
-    <p><?php echo html_escape($user->first_name . ' ' . $user->last_name); ?></p>
+    <p><?php echo html_escape($user->name); ?></p>
     <h2><?php echo __('Email'); ?></h2>
     <p><?php echo html_escape($user->email); ?></p>
-    <h2><?php echo __('Institution'); ?></h2>
-    <p><?php echo html_escape($user->institution); ?></p>
 </div>
 <?php foot();?>

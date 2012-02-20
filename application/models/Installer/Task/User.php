@@ -19,7 +19,7 @@ class Installer_Task_User implements Installer_TaskInterface
     private $_username;
     private $_password;
     private $_email;
-    private $_firstName;
+    private $_name;
     private $_lastName;
     private $_active;
     private $_role;
@@ -39,14 +39,9 @@ class Installer_Task_User implements Installer_TaskInterface
         $this->_email = $email;
     }
     
-    public function setFirstName($firstname)
+    public function setName($name)
     {
-        $this->_firstName = $firstname;
-    }
-    
-    public function setLastName($lastname)
-    {
-        $this->_lastName = $lastname;
+        $this->_name = $name;
     }
     
     public function setIsActive($active)
@@ -65,8 +60,7 @@ class Installer_Task_User implements Installer_TaskInterface
             '_username' => 'username',
             '_password' => 'password',
             '_email'    => 'email',
-            '_firstName' => 'first name',
-            '_lastName' => 'last name',
+            '_name'     => 'name',
             '_active'   => 'active',
             '_role'     => 'role'
         );
@@ -77,10 +71,8 @@ class Installer_Task_User implements Installer_TaskInterface
         }
         
         $user = new User($db);
-        $user->Entity = new Entity($db);
-        $user->Entity->email = $this->_email;
-        $user->Entity->first_name = $this->_firstName;
-        $user->Entity->last_name = $this->_lastName;
+        $user->email = $this->_email;
+        $user->name = $this->_name;
         $user->username = $this->_username;
         $user->setPassword($this->_password);
         $user->active = $this->_active;

@@ -27,9 +27,7 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
     {
         $this->_authenticateUser($this->_getDefaultUser());
         $post = array('username'    => 'foobar',
-                      'first_name'  => 'foobar',
-                      'last_name'   => 'foobar',
-                      'institution' => 'foobar',
+                      'name'        => 'foobar',
                       'email'       => $this->email,
                       'role'        => 'admin',
                       'active'      => '1');
@@ -100,8 +98,7 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
     {
         $this->_authenticateUser($this->_getDefaultUser());
         $userInfo = array(
-            'first_name' => 'New',
-            'last_name' => 'User',
+            'name' => 'New User',
             'email' => $this->email,
             'role' => 'super',
             'username' => 'newuser'

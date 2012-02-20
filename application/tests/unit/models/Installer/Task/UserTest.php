@@ -42,8 +42,7 @@ class Installer_Task_UserTest extends PHPUnit_Framework_TestCase
         $task->setUsername('foobar');
         $task->setPassword('foobar');
         $task->setEmail('invalid.email');
-        $task->setFirstName('Foobar');
-        $task->setLastName('Foobar');
+        $task->setName('Foobar Foobar');
         $task->setIsActive(true);
         $task->setRole('admin');
         try {
@@ -66,8 +65,7 @@ class Installer_Task_UserTest extends PHPUnit_Framework_TestCase
         $task->setUsername('foobar');
         $task->setPassword('foobar');
         $task->setEmail('foobar@example.com');
-        $task->setFirstName('Foobar');
-        $task->setLastName('Foobar');
+        $task->setName('Foobar Foobar');
         $task->setIsActive(true);
         $task->setRole('admin');
         $task->install($this->db);

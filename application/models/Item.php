@@ -22,7 +22,7 @@ class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
     public $public = 0;    
     public $added;
     public $modified;
-    
+    public $owner_id;
         
     protected $_related = array('Collection'=>'getCollection', 
                                 'TypeMetadata'=>'getTypeMetadata', 
@@ -42,7 +42,7 @@ class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
     protected function _initializeMixins()
     {
         $this->_mixins[] = new Taggable($this);
-        $this->_mixins[] = new Relatable($this);
+        $this->_mixins[] = new Ownable($this);
         $this->_mixins[] = new ActsAsElementText($this);
         $this->_mixins[] = new PublicFeatured($this);
     }
@@ -107,22 +107,6 @@ class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
         $elements = $this->getTable('Element')->findByItemType($this->item_type_id);
         
         return $elements;
-    }
-    
-    /**
-     * Retrieve the User record that represents the creator of this Item.
-     * 
-     * @return User
-     */
-    public function getUserWhoCreated()
-    {
-        $creator = $this->getRelatedEntities('added');
-        
-        if (is_array($creator)) {
-            $creator = current($creator);
-        }
-        
-        return $creator->User;
     }
         
     // End accessor methods

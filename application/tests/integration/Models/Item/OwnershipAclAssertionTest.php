@@ -103,12 +103,12 @@ class Item_OwnershipAclAssertionTest extends Omeka_Test_AppTestCase
      */
     private function _getMockItem($addedBySelf)
     {
-        $item = $this->getMock('Item', array('getResourceId', 'wasAddedBy'));
+        $item = $this->getMock('Item', array('getResourceId', 'isOwnedBy'));
         $item->expects($this->any())
              ->method('getResourceId')
              ->will($this->returnValue('Items'));
         $item->expects($this->any())
-             ->method('wasAddedBy')
+             ->method('isOwnedBy')
              ->will($this->returnValue($addedBySelf));
         return $item;
     }

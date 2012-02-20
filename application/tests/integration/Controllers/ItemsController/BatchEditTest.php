@@ -29,8 +29,7 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
             $userData = array(
                 'role'          => $role,
                 'username'      => $role,
-                'first_name'    => 'User',
-                'last_name'     => $role,
+                'name'          => "User $role",
                 'email'         => $role .'@example.com'
             );
 

@@ -155,10 +155,8 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
         $newUser->setPassword('foobar');
         $newUser->role = 'admin';
         $newUser->active = 1;
-        $newUser->Entity = new Entity;
-        $newUser->Entity->first_name = 'New';
-        $newUser->Entity->last_name = 'Admin User';
-        $newUser->Entity->email = 'bananabananabanana@example.com';
+        $newUser->name = 'New Admin User';
+        $newUser->email = 'bananabananabanana@example.com';
         $newUser->forceSave();
         $this->assertTrue($newUser->exists());
         return $newUser;

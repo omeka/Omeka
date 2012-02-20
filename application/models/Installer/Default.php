@@ -81,8 +81,7 @@ class Installer_Default implements InstallerInterface
         $userTask->setUsername($this->_getValue('username'));
         $userTask->setPassword($this->_getValue('password'));
         $userTask->setEmail($this->_getValue('super_email'));
-        $userTask->setFirstName(Omeka_Form_Install::DEFAULT_USER_FIRST_NAME);
-        $userTask->setLastName(Omeka_Form_Install::DEFAULT_USER_LAST_NAME);
+        $userTask->setName(Omeka_Form_Install::DEFAULT_USER_NAME);
         $userTask->setIsActive(Installer_Default::DEFAULT_USER_ACTIVE);
         $userTask->setRole(Installer_Default::DEFAULT_USER_ROLE);
         $userTask->install($this->_db);

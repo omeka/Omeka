@@ -20,9 +20,9 @@ class UserTest extends PHPUnit_Framework_TestCase
         $this->user = new User($this->db);
     }
     
-    public function testGetSetEntityProperties()
+    public function testGetSetFormerEntityProperties()
     {
-        $this->user->getEntity()->email = 'foobar@example.com';
+        $this->user->email = 'foobar@example.com';
         $this->assertEquals('foobar@example.com', $this->user->email);
     }
 }

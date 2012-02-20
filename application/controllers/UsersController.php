@@ -224,10 +224,8 @@ class UsersController extends Omeka_Controller_Action
         $form->setSubmitButtonText(__('Save Changes'));
         $form->setDefaults(array(
             'username' => $user->username,
-            'first_name' => $user->first_name,
-            'last_name' => $user->last_name,
+            'name' => $user->name,
             'email' => $user->email,
-            'institution' => $user->institution,
             'role' => $user->role,
             'active' => $user->active
         ));

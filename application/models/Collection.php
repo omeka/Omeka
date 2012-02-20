@@ -62,6 +62,7 @@ class Collection extends Omeka_Record
     protected function _initializeMixins()
     {
         $this->_mixins[] = new PublicFeatured($this);
+        $this->_mixins[] = new Ownable($this);
     }
     
     /**
@@ -240,9 +241,6 @@ class Collection extends Omeka_Record
         $now = Zend_Date::now()->toString(self::DATE_FORMAT);
         $this->added = $now;
         $this->modified = $now;
-        if (!$this->owner_id && ($user = Omeka_Context::getInstance()->getCurrentUser())) {
-            $this->setAddedBy($user);
-        }
     }
     
     /**

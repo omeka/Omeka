@@ -26,9 +26,8 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
     public $salt;
     public $active = '0';
     public $role;
-    public $entity_id;
-    
-    private $_entity;
+    public $name;
+    public $email;
     
     const USERNAME_MIN_LENGTH = 1;
     const USERNAME_MAX_LENGTH = 30;
@@ -36,54 +35,9 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
     
     const INVALID_EMAIL_ERROR_MSG = "That email address is not valid.  A valid email address is required.";
     const CLAIMED_EMAIL_ERROR_MSG = "That email address has already been claimed by a different user. Please notify an administrator if you feel this has been done in error.";
-        
-    protected $_related = array('Entity'=>'getEntity');
-    
-    public function getEntity()
-    {
-        if (!$this->_entity) {
-            if (!$this->exists() || empty($this->entity_id)) {
-                $entity =  new Entity($this->getDb());
-            } else {
-                $entity = $this->getTable('Entity')->find((int) $this->entity_id);
-            } 
-            $this->_entity = $entity;
-        }
-        return $this->_entity;
-    }
-    
-    /**
-     * Overrides parent::__get() to transparently get properties from the Entity
-     * associated with this user.
-     */
-    public function __get($property)
-    {
-        $entity = $this->getEntity();
-        if (!($entity instanceof Entity)) {
-            throw new Omeka_Record_Exception(__("No Entity record available."));
-        }
-        if (isset($entity->$property)) {
-            return $entity->$property;
-        } else {
-            return parent::__get($property);
-        }
-    }
-    
-    protected function beforeSave()
-    {
-        if (!$this->Entity) {
-            throw new Omeka_Record_Exception(__("No Entity record is available when saving this User."));
-        }
-        $this->Entity->save();
-        $this->entity_id = $this->Entity->id;
-    }
     
     protected function beforeSaveForm($post)
     {
-        if (!$this->processEntity($post)) {
-            return false;
-        }
-        
         // Permissions check to see if whoever is trying to change role to a super-user
         if (!empty($post['role'])) {
             $acl = Omeka_Context::getInstance()->getAcl();
@@ -142,33 +96,17 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
     
     protected function _validate()
     {
-        // Validate the entity of the user. This requires special validation 
-        // within this class b/c the entities themselves have no particular 
-        // validation.
-        if ($entity = $this->Entity) {
+        if (!trim($this->name)) {
+            $this->addError('name', __('Real Name is required.'));
+        }
             
-            // Either need first and last name (or institution name) to validate.
-            if (trim($entity->institution) == '') {
-                if (trim($entity->first_name) == '' && trim($entity->last_name) == '') {
-                    $this->addError('institution', __('If a first name and last name are not provided, then an institution name is required.'));
-                } else {
-                    if (trim($entity->first_name) == '') {
-                        $this->addError('first_name', __('A first name is required.'));
-                    }
-                    if (trim($entity->last_name) == '') {
-                        $this->addError('last_name', __('A last name is required.')); 
-                    }
-                }
-            }
+        if (!Zend_Validate::is($this->email, 'EmailAddress')) {
+            $this->addError('email', __(self::INVALID_EMAIL_ERROR_MSG));
+        }
             
-            if (!Zend_Validate::is($entity->email, 'EmailAddress')) {
-                $this->addError('email', __(self::INVALID_EMAIL_ERROR_MSG));
-            }
-            
-            if (!$this->emailIsUnique($entity->email)) {
-                $this->addError('email', __(self::CLAIMED_EMAIL_ERROR_MSG));            
-            }                 
-        }    
+        if (!$this->fieldIsUnique('email')) {
+            $this->addError('email', __(self::CLAIMED_EMAIL_ERROR_MSG));            
+        }
         
         //Validate the role
         if (trim($this->role) == '') {
@@ -183,29 +121,6 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
         } else if (!$this->fieldIsUnique('username')) {
             $this->addError('username', __("'%s' is already in use. Please choose another username.", $this->username));
         }
-    }
-    
-    /**
-     * This will check the set of IDs for users that have a specific email address.  
-     * If it is greater than 1, or if the 
-     *
-     * @return bool
-     */
-    private function emailIsUnique($email)
-    {
-        $db = $this->getDb();
-        $sql = "
-        SELECT u.id 
-        FROM $db->User u 
-        INNER JOIN $db->Entity e 
-        ON e.id = u.entity_id 
-        WHERE e.email = ?";
-        
-        $id = $db->query($sql, array($email))->fetchAll();
-        
-        // Either there is nothing stored in the DB yet, or there is only one 
-        // and it belongs to this one
-        return (!count($id) or ((count($id) == 1) && ($id[0]['id'] == $this->id)));
     }
             
     /**
@@ -229,37 +144,6 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
         $user->setPassword($password);
         $user->forceSave();
         return true;
-    }
-    
-    protected function processEntity(&$post)
-    {    
-        $entity = $this->Entity;
-        
-        //If the entity is new, then determine whether it is an institution or a person
-        if (empty($entity)) {
-            $entity = new Entity;
-        }
-        
-        //The new email address is fully legit, so set the entity to the new info                
-        $entityKeys = array('first_name', 'last_name', 'institution', 'email');
-
-        foreach ($entityKeys as $key) {
-            if (array_key_exists($key, $post)) {
-                $entity[$key] = $post[$key];
-                unset($post[$key]);
-            }
-        }
-        
-        $this->Entity = $entity;
-                        
-        return true;
-    }
-    
-    protected function afterDelete()
-    {
-        if ($this->entity_id) {
-            $this->Entity->delete();
-        }
     }
     
     /* Generate password. (i.e. jachudru, cupheki) */

@@ -51,7 +51,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
     <?php foreach( $users as $key => $user ): ?>
         <tr class="<?php if (current_user()->id == $user->id) echo 'current-user '; ?><?php if($key%2==1) echo 'even'; else echo 'odd'; ?>">
             <td><?php echo html_escape($user->username);?></td>
-            <td><?php echo html_escape($user->first_name); ?> <?php echo html_escape($user->last_name); ?></td>
+            <td><?php echo html_escape($user->name); ?></td>
             <td><?php echo html_escape($user->email); ?></td>
             <td><span class="<?php echo html_escape($user->role); ?>"><?php echo html_escape(__(Inflector::humanize($user->role))); ?></span></td>
             <?php if (has_permission($user, 'edit')): ?>

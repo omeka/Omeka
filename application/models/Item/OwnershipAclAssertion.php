@@ -43,6 +43,6 @@ class Item_OwnershipAclAssertion implements Zend_Acl_Assert_Interface
 
     private function _userOwnsItem($user, $item)
     {
-        return $item->wasAddedBy($user);
+        return $item->isOwnedBy($user);
     }
 }
