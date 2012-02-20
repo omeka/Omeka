@@ -252,7 +252,7 @@ class Omeka_Db
         
         // prepare and execute the statement
         $params = array_merge($insert_params, $update_params);
-        $this->exec($query, $params);
+        $this->query($query, $params);
         
         return (int) $this->_conn->lastInsertId();
     }
@@ -286,8 +286,28 @@ class Omeka_Db
     }
 
     /**
-     * Execute more than one SQL query at once.  
+     * Execute more than one SQL query at once.
      *
+     * @since 2.0 Renamed from execBlock() to queryBlock()
+     * @param string $sql String containing SQL queries.
+     * @param string $delimiter Character that delimits each SQL query.
+     *  Defaults to semicolon (';').
+     * @return void
+     */
+    public function queryBlock($sql, $delimiter = ';')
+    {
+        $queries = explode($delimiter, $sql);
+        foreach ($queries as $query) {
+            if (strlen(trim($query))) {
+                $this->query($query);
+            }
+        }
+    }
+
+    /**
+     * Execute more than one SQL query at once.
+     *
+     * @deprecated
      * @param string $sql String containing SQL queries.
      * @param string $delimiter Character that delimits each SQL query.  Defaults
      * to semicolon ';'.
@@ -295,12 +315,7 @@ class Omeka_Db
      */
     public function execBlock($sql, $delimiter = ';')
     {
-        $queries = explode($delimiter, $sql);
-        foreach ($queries as $query) {
-            if (strlen(trim($query))) {
-                $this->exec($query);
-            }
-        }
+        $this->queryBlock($sql, $delimiter);
     }
 
     /**
@@ -321,7 +336,6 @@ class Omeka_Db
         }
         $loadSql = file_get_contents($filePath);
         $subbedSql = str_replace('%PREFIX%', $this->prefix, $loadSql);
-        $this->execBlock($subbedSql, ";\n");
+        $this->queryBlock($subbedSql, ";\n");
     }
-   
 }
