@@ -198,39 +198,15 @@ class ItemTable extends Omeka_Db_Table
     }
     
     /**
-     * Filter the SELECT based on users or entities associated with the item
+     * Filter the SELECT based on the user who owns the item
      * 
      * @param Zend_Db_Select
-     * @param integer $entityId  ID of the User or Entity to filter by
-     * @param boolean $isUser Whether or not the ID From the previous argument is for a user or entity
+     * @param integer $userId  ID of the User to filter by
      * @return void
      */
-    public function filterByUserOrEntity($select, $entityId, $isUser=true)
+    public function filterByUser($select, $userId, $isUser=true)
     {
-        $db = $this->getDb();
-        
-        $select->joinLeft(array('ie' => "$db->EntitiesRelations"), 
-                          'ie.relation_id = i.id', 
-                          array());
-        $select->joinLeft(array('e' => "$db->Entity"), 
-                          'e.id = ie.entity_id', 
-                          array());
-        
-        // Only retrieve items that were added by a specific user/entity.
-        $select->joinLeft(array('ier' => $db->EntityRelationships), 
-                          'ier.id = ie.relationship_id',
-                          array());
-        $select->where('ier.name = "added"');
-        
-        
-        if ($isUser) {
-            $select->joinLeft(array('u' => "$db->User"), 
-                              'u.entity_id = e.id', 
-                              array());
-            $select->where('(u.id = ? AND ie.type = "Item")', $entityId);            
-        } else {
-            $select->where('(e.id = ? AND ie.type = "Item")', $entityId);
-        }                                
+        $select->where('i.owner_id = ?', $userId);
     }
     
     /**
@@ -309,12 +285,9 @@ class ItemTable extends Omeka_Db_Table
      * @return void
      */
     public function applySearchFilters($select, $params)
-    {   
-        // Show items associated somehow with a specific user or entity
-        if (isset($params['user']) || isset($params['entity'])) {
-            $filterByUser = isset($params['user']);
-            $paramToFilter = (int) ($filterByUser ? $params['user'] : $params['entity']);
-            $this->filterByUserOrEntity($select, $paramToFilter, $filterByUser);
+    {
+        if (isset($params['user'])) {
+            $this->filterByUser($select, $params['user']);
         }
         
         if(isset($params['public'])) {
