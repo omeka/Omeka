@@ -28,18 +28,13 @@ class Helpers_TagFunctions_GetTagsTest extends Omeka_Test_AppTestCase
     }
     
     // adds tags to an item from the user
-    // by default it adds tags to the default item from the super-user
-    private function _addTags($tagStrings, $item=null, $user=null)
+    private function _addTags($tagStrings, $item=null)
     {
-        if (!$user) {
-            $user = get_user_by_id(1);
-        }
-        
         if(!$item) {
             $item = $this->_itemToTag;
         }
                 
-        $item->addTags($tagStrings, $user);
+        $item->addTags($tagStrings);
     }
     
     public function testGetTagsByDefaultAndWithNoTags()

@@ -1,6 +1,6 @@
 <?php
 /**
- * Add order field to file table.
+ * Remove Entity dependence from Item and User.
  *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2011

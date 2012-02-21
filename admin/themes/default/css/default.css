@@ -675,11 +675,10 @@ body {font:62.5% "Lucida Grande",Verdana, Arial, Helvetica, sans-serif; backgrou
         #delete_item_link {padding: 18px 8px 8px 0;}
         #delete_item_link .delete {font-weight:bold;background-position:0 50%;padding-left:36px; color: #900;}
 
-        #my-tags {float:right; width: 288px;}
-        #other-tags {float:right; width: 288px; clear:both;}
-            #my-tags-list, #other-tags-list {line-height: 2em;}
-            #my-tags li, #other-tags li {display:block; float:left; position:relative; border:1px solid #ccc;padding: 2px 8px 2px 24px; margin-bottom: 12px; margin-right: 4px;}
-            #my-tags input, #other-tags input {border-width: 0;padding:0 !important; position:absolute; top: 6px; left:4px;margin:0 !important;}
+        #all-tags {float:right; width: 288px;}
+            #all-tags-list {line-height: 2em;}
+            #all-tags li {display:block; float:left; position:relative; border:1px solid #ccc;padding: 2px 8px 2px 24px; margin-bottom: 12px; margin-right: 4px;}
+            #all-tags input {border-width: 0;padding:0 !important; position:absolute; top: 6px; left:4px;margin:0 !important;}
 
         #add-tags {float:left; width: 252px; padding:18px 18px 0; background: #F2F1E8;}
           #tags {border-color: #bbb; margin-bottom:5px;}

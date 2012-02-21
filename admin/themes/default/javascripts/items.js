@@ -91,11 +91,11 @@ Omeka.Items.changeItemType = function (changeItemTypeUrl, itemId) {
 /**
  * Add container for tag remove buttons.
  */
-Omeka.Items.createMyTagsHeaderAndList = function () {
-    if (!jQuery('#my-tags-list').length) {
-        var myTags = jQuery('#my-tags');
-        myTags.append('<h3>My Tags</h3>');
-        myTags.append('<ul id="my-tags-list"/>');
+Omeka.Items.createTagsHeaderAndList = function () {
+    if (!jQuery('#all-tags-list').length) {
+        var allTags = jQuery('#all-tags');
+        allTags.append('<h3>All Tags</h3>');
+        allTags.append('<ul id="all-tags-list"/>');
     }
 };
 
@@ -107,7 +107,7 @@ Omeka.Items.createMyTagsHeaderAndList = function () {
  * @param {string} deleteImage URL for delete button image.
  */
 Omeka.Items.addTagElement = function (tag, addImage, deleteImage) {
-    Omeka.Items.createMyTagsHeaderAndList();
+    Omeka.Items.createTagsHeaderAndList();
     var tagLi = jQuery('<li class="tag-delete"/>');
 
     var undoButton = jQuery('<input type="image" class="undo_remove_tag" />').appendTo(tagLi);
@@ -126,7 +126,7 @@ Omeka.Items.addTagElement = function (tag, addImage, deleteImage) {
 
     tagLi.append(tag);
 
-    jQuery('#my-tags-list').append(tagLi);
+    jQuery('#all-tags-list').append(tagLi);
 
     Omeka.Items.updateTagsField();
     return false;
@@ -143,7 +143,7 @@ Omeka.Items.addTags = function (tags, addImage, deleteImage) {
     var newTags = tags.split(Omeka.Items.tagDelimiter);
 
     // only add tags from the input box that are new
-    var oldTags = jQuery('#my-tags-list input.remove_tag').map(function () {
+    var oldTags = jQuery('#all-tags-list input.remove_tag').map(function () {
         return jQuery.trim(this.value);
     });
 
@@ -181,30 +181,21 @@ Omeka.Items.undoRemoveTag = function (button) {
  * Update the hidden tags fields to only include the tags that have not been removed.
  */
 Omeka.Items.updateTagsField = function () {
-    var myTagsToAdd = [];
-    var myTagsToDelete = [];
-    var otherTagsToDelete = [];
+    var tagsToAdd = [];
+    var tagsToDelete = [];
 
-    jQuery('#my-tags-list input.remove_tag').each(function () {
+    jQuery('#all-tags-list input.remove_tag').each(function () {
         var button = jQuery(this);
         var tag = jQuery.trim(button.val());
         if (button.parent().css('opacity') == 1) {
-            myTagsToAdd.push(tag);
+            tagsToAdd.push(tag);
         } else {
-            myTagsToDelete.push(tag);
-        }
-    });
-    jQuery('#other-tags-list input.remove_tag').each(function () {
-        var button = jQuery(this);
-        var tag = jQuery.trim(button.val());
-        if (button.parent().css('opacity') != 1) {
-            otherTagsToDelete.push(tag);
+            tagsToDelete.push(tag);
         }
     });
 
-    jQuery('#my-tags-to-add').val(myTagsToAdd.join(Omeka.Items.tagDelimiter));
-    jQuery('#my-tags-to-delete').val(myTagsToDelete.join(Omeka.Items.tagDelimiter));
-    jQuery('#other-tags-to-delete').val(otherTagsToDelete.join(Omeka.Items.tagDelimiter));
+    jQuery('#tags-to-add').val(tagsToAdd.join(Omeka.Items.tagDelimiter));
+    jQuery('#tags-to-delete').val(tagsToDelete.join(Omeka.Items.tagDelimiter));
 };
 
 /**

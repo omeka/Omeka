@@ -24,7 +24,6 @@ class ItemsController extends Omeka_Controller_Action
 
     private $_ajaxRequiredActions = array(
         'element-form',
-        'tag-form',
         'change-type',
     );
 
@@ -230,52 +229,6 @@ class ItemsController extends Omeka_Controller_Action
         
         $item->item_type_id = (int) $_POST['type_id'];
         $this->view->assign(compact('item'));
-    }
-    
-    /**
-     * Display the form for tags for a given item.
-     * 
-     * @return void
-     */
-    public function tagFormAction()
-    {
-        $item = $this->findById();
-        $this->view->assign(compact('item'));
-    }
-    
-    /**
-     * Modify the tags for an item (add or remove).  If this is an AJAX request, it will
-     * render the 'tag-list' partial, otherwise it will redirect to the
-     * 'show' action.
-     * 
-     * @return void
-     */
-    public function modifyTagsAction()
-    {
-        $item = $this->findById();
-
-        //Add the tags
-         
-        if (array_key_exists('modify_tags', $_POST) || !empty($_POST['tags'])) {
-            if ($this->isAllowed('tag')) {
-                $currentUser = $this->getInvokeArg('bootstrap')->getResource('Currentuser');
-                $tagsAdded = $item->applyTagString($_POST['tags'], $currentUser->Entity);
-                // Refresh the item.
-                $item = $this->findById();
-            } else {
-                $this->flashError(__('User does not have permission to add tags.'));
-            }
-        }
-        
-        if (!$this->getRequest()->isXmlHttpRequest()) {
-            $itemId = $this->_getParam('id');
-            return $this->redirect->gotoRoute(array('controller' => 'items', 
-                                                    'action'     => 'show', 
-                                                    'id'         => $itemId), 'id');
-        }
-        
-        $this->view->assign(compact('item'));
-        $this->render('tag-list');
     }
     
     ///// END AJAX ACTIONS /////

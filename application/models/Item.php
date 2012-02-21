@@ -161,22 +161,16 @@ class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
      * Checks the 'tags' field from the post and applies all the differences in
      * the list of tags for the current user.
      * 
-     * @uses Taggable::applyTagString()
      * @param ArrayObject
      * @return void
      */
     protected function _modifyTagsByForm($post)
     {
         // Change the tags (remove some, add some)
-        if (array_key_exists('my-tags-to-add', $post)) {
-            $user = Omeka_Context::getInstance()->getCurrentUser();
-            $acl = Omeka_Context::getInstance()->getAcl();
-            if ($user) {
-                $this->addTags($post['my-tags-to-add'], $user);
-                $this->deleteTags($post['my-tags-to-delete'], $user);                
-                $this->deleteTags($post['other-tags-to-delete'], $user, $acl->isAllowed($user, 'Items', 'untagOthers'));
-            }
-        }        
+        if (array_key_exists('tags-to-add', $post)) {
+            $this->addTags($post['tags-to-add']);
+            $this->deleteTags($post['tags-to-delete']);
+        }
     }
         
     /**

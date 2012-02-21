@@ -42,17 +42,7 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
             array('/items/add', 'items', 'add'),
             array('/items/edit/1', 'items', 'edit'),
             array('/items/advanced-search', 'items', 'advanced-search'),
-            array('/items/modify-tags/1', 
-                  'items', 
-                  'modify-tags', 
-                  array('_makePost')
-            ),
-            array('/items/tags', 'items', 'tags'),
-            array('/items/tag-form?id=1', 
-                  'items', 
-                  'tag-form', 
-                  array('_makeXmlHttpRequest')
-            )
+            array('/items/tags', 'items', 'tags')
         );
     }
 
@@ -90,8 +80,7 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
     {
         return array(
             array('/items/element-form'),
-            array('/items/change-type'),
-            array('/items/tag-form'),
+            array('/items/change-type')
         );
     }
 
@@ -183,16 +172,6 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
         $this->assertQueryContentContains("table .title", Installer_Test::TEST_ITEM_TITLE);
     }
 
-    public function testModifyTags()
-    {
-        $this->request->setPost(array('tags' => 'foobar',
-                                      'id' => 1));
-        $this->request->setMethod('POST');
-        $this->dispatch('/items/modify-tags');
-        $item = $this->db->getTable('Item')->find(1);
-        $this->assertEquals("foobar", $item->Tags[0]->name);
-    }
-
     public function testElementFormXmlHttpRequest()
     {
         $this->_makeXmlHttpRequest();
@@ -243,13 +222,6 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
             'type_id' => 1,
         ));
         $this->dispatch('/items/change-type');
-        $this->assertNotRedirect();
-    }
-
-    public function testTagFormXmlHttpRequest()
-    {
-        $this->_makeXmlHttpRequest();
-        $this->dispatch('/items/tag-form?id=1');
         $this->assertNotRedirect();
     }
 

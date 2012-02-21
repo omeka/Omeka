@@ -15,7 +15,6 @@
 class ItemBuilder extends Omeka_Record_Builder
 {
     const TAGS = 'tags';
-    const TAG_ENTITY = 'tag_entity';
     const FILES = 'files';
     const FILE_TRANSFER_TYPE = 'file_transfer_type';
     const FILE_INGEST_OPTIONS = 'file_ingest_options';
@@ -130,17 +129,8 @@ class ItemBuilder extends Omeka_Record_Builder
      */
     private function _addTags()
     {
-        // As of 0.10 we still need to tag for a specific entity.
-        // This may change in future versions.
         $metadata = $this->getRecordMetadata();
-        if (array_key_exists(self::TAG_ENTITY, $metadata)) {
-            $entity = $metadata[self::TAG_ENTITY];
-        } else if ($currentUser = Omeka_Context::getInstance()->getCurrentUser()){
-            $entity = $currentUser->Entity;
-        } else {
-            throw new Omeka_Record_Builder_Exception(__("Cannot add tags to an item if no Entity is available to tag."));
-        }
-        $this->_record->addTags($metadata[self::TAGS], $entity);
+        $this->_record->addTags($metadata[self::TAGS]);
     }
     
     /**

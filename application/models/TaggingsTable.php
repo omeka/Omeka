@@ -13,25 +13,12 @@
  */
 class TaggingsTable extends Omeka_Db_Table
 {
-    /**
-     * Current options
-     *
-     * @return void
-     */
-    public function findBy($options=array(), $for=null, $returnCount=false) 
+    protected $_alias = 'tg';
+
+    public function applySearchFilters($select, $params = array())
     {
-        $select = new Omeka_Db_Select;
-        $db = $this->getDb();
-        
-        if ($returnCount) {
-            $select->from(array('tg'=>$db->Taggings), "COUNT(DISTINCT(tg.id))");
-        } else {
-            $select->from(array('tg'=>$db->Taggings), "tg.*");
-        }
-                
-        if(isset($options['tag'])) {
-            
-            $tag = $options['tag'];
+        if(isset($params['tag'])) {
+            $tag = $params['tag'];
             $select->joinInner(array('t'=>$db->Tag), "t.id = tg.tag_id", array());
             
             if (is_array($tag)) {
@@ -48,40 +35,13 @@ class TaggingsTable extends Omeka_Db_Table
             }
         }
         
-        if (isset($options['entity']) || isset($options['user'])) {
-            
-            $select->joinInner(array('e'=>$db->Entity), "e.id = tg.entity_id", array());
-            
-            if (array_key_exists('entity', $options)) {
-                $entity_id = (int) is_numeric($options['entity']) ? $options['entity'] : $options['entity']->id;
-                $select->where("e.id = ?", $entity_id);
-                
-            } else if ($user = $options['user']) {
-                
-                $select->joinInner(array('u'=>$db->User), "u.entity_id = e.id", array());
-
-                if (is_numeric($user)) {
-                    $select->where("u.id = ?", $user);
-                } elseif($user instanceof User and !empty($user->id)) {
-                    $select->where("u.id = ?", $user->id);
-                }
-            }
-        }
-        
-        if (isset($options['record'])) {
-            $record = $options['record'];
+        if (isset($params['record'])) {
+            $record = $params['record'];
             $select->where("tg.relation_id = ?", $record->id);
             $select->where("tg.type = ?", get_class($record) );
-        }
-        
-        if ($for and !isset($options['record'])) {
-            $select->where("tg.type = ?", $for );
-        }
-                                
-        if ($returnCount) {
-            return $db->fetchOne($select);
-        } else {
-            return $this->fetchObjects($select);
+        } else if (isset($params['type'])) {
+            $type = $params['type'];
+            $select->where('tg.type = ?', $type);
         }
     }
 }
