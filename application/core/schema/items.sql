@@ -11,5 +11,6 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%items` (
   KEY `item_type_id` (`item_type_id`),
   KEY `collection_id` (`collection_id`),
   KEY `public` (`public`),
-  KEY `featured` (`featured`)
+  KEY `featured` (`featured`),
+  KEY `owner_id` (`owner_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

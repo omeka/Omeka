@@ -24,7 +24,7 @@ ADD `email` TEXT COLLATE utf8_unicode_ci AFTER `name`;
 
 ALTER TABLE `{$this->db->Item}`
 ADD `owner_id` INT UNSIGNED DEFAULT NULL,
-ADD INDEX (`owner_id`);
+ADD INDEX `owner_id` (`owner_id`);
 SQL
 );
     }
