@@ -57,9 +57,9 @@ class User_AclAssertion implements Zend_Acl_Assert_Interface
         }
 
         $allowed = false;
-        // $resource will either be an instance of Omeka_Acl_Resource, 
-        // Zend_Acl_Resource, or User. If the latter, verify whether or not the 
-        // resource and role represent the same user and branch accordingly.
+        // $resource will either be an instance of Zend_Acl_Resource or
+        // User. If the latter, verify whether or not the resource and
+        // role represent the same user and branch accordingly.
         if ($resource instanceof User) {
             if ($this->_isSuperUser($role)) {
                 $allowed = !($this->_isSelf($role, $resource) 

@@ -392,7 +392,7 @@ function clear_filters($filterName = null)
 /**
  * Retrieve the ACL object.
  *
- * @return Omeka_Acl
+ * @return Zend_Acl
  */
 function get_acl()
 {
@@ -723,7 +723,7 @@ function set_theme_option($optionName, $optionValue, $themeName = null)
  */
 function get_user_roles()
 {
-    $roles = Omeka_Context::getInstance()->getAcl()->getRoleNames();
+    $roles = Omeka_Context::getInstance()->getAcl()->getRoles();
     foreach($roles as $key => $val) {
         $roles[$val] = __(Inflector::humanize($val));
         unset($roles[$key]);

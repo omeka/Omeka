@@ -12,7 +12,7 @@
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private
  * @since 0.10 Plugins must use the 'define_acl' hook to modify ACL definitions.
- * @uses Omeka_Acl
+ * @uses Zend_Acl
  * @todo ACL settings should be stored in the database.  When ACL settings
  * are properly stored in a normalized database configuration, then this
  * method should populate a new Acl instance with those settings and store
@@ -25,14 +25,14 @@ class Omeka_Core_Resource_Acl extends Zend_Application_Resource_ResourceAbstract
     /**
      * Access control list object.
      *
-     * @var Omeka_Acl
+     * @var Zend_Acl
      */
     protected $_acl;
     
     /**
      * Load the hardcoded ACL definitions, then apply definitions from plugins.
      *
-     * @return Omeka_Acl
+     * @return Zend_Acl
      */
     public function init()
     {

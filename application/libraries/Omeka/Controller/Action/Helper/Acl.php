@@ -9,7 +9,6 @@
  * Leverages the ACL to automatically check permissions for the current
  * controller/action combo.
  *
- * @uses Omeka_Acl
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
@@ -18,7 +17,7 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
     /**
      * ACL object.
      *
-     * @var Omeka_Acl
+     * @var Zend_Acl
      */
     protected $_acl;
 
@@ -40,7 +39,7 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
      * Instantiated with the ACL permissions which will be used to verify
      * permission levels.
      *
-     * @param Omeka_Acl $acl
+     * @param Zend_Acl $acl
      */
     public function __construct($acl, $currentUser)
     {

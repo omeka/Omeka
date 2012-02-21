@@ -33,7 +33,7 @@ class Omeka_Models_ItemTableTest extends PHPUnit_Framework_TestCase
                             (string)$this->table->getSelect());
 
         // Test ItemTable::getSelect() when the ACL is available.
-        $acl = new Omeka_Acl;
+        $acl = new Zend_Acl;
         $acl->add(new Zend_Acl_Resource('Items'));
         $acl->deny(null, 'Items', 'showNotPublic');
         Omeka_Context::getInstance()->setAcl($acl);

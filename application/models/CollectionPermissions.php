@@ -20,7 +20,7 @@
  */
 class CollectionPermissions
 {
-    public function __construct(Omeka_Db_Select $sql, Omeka_Acl $acl)
+    public function __construct(Omeka_Db_Select $sql, Zend_Acl $acl)
     {
         if (!$acl->has('Collections')) {
             return;

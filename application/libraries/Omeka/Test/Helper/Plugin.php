@@ -119,7 +119,7 @@ class Omeka_Test_Helper_Plugin
     /**
      * Set the ACL for the helper to use.
      *
-     * @param Omeka_Acl $acl
+     * @param Zend_Acl $acl
      */
     public function setAcl($acl)
     {

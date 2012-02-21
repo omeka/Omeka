@@ -28,7 +28,7 @@ class Omeka_Models_CollectionTableTest extends PHPUnit_Framework_TestCase
                             (string)$this->table->getSelect());
 
         // Test CollectionTable::getSelect() when the ACL is available.
-        $acl = new Omeka_Acl;
+        $acl = new Zend_Acl;
         $acl->add(new Zend_Acl_Resource('Collections'));
         $acl->deny(null, 'Collections', 'showNotPublic');
         Omeka_Context::getInstance()->setAcl($acl);

@@ -22,7 +22,7 @@ class ItemPermissions
      *
      * @return Omeka_Db_Select
      */
-    public function __construct(Omeka_Db_Select $sql, Omeka_Acl $acl)
+    public function __construct(Omeka_Db_Select $sql, Zend_Acl $acl)
     {
         if (!$acl->has('Items')) {
             return;
