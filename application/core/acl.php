@@ -34,6 +34,7 @@ $allowList = array(
     array('researcher',array('Items', 'Collections'),array('showNotPublic')),
     // Contributors can add and tag items, edit or delete their own items, and see their items that are not public
     array('contributor', 'Items', array('tag', 'add', 'batch-edit', 'batch-edit-save', 'editSelf', 'deleteSelf', 'showSelfNotPublic')),
+    array('contributor', 'Tags', array('autocomplete')),
     // Non-authenticated users can access the upgrade script (for logistical reasons).
     array(null, 'Upgrade')
 ); 
