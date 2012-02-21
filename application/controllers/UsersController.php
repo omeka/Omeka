@@ -296,12 +296,10 @@ class UsersController extends Omeka_Controller_Action
                     . __('%s Administrator', $siteTitle);
         $subject    = __('Activate your account with the %s archive', $siteTitle);
         
-        $entity = $user->Entity;
-        
         $mail = new Zend_Mail();
         $mail->setBodyText($body);
         $mail->setFrom($from, "$siteTitle Administrator");
-        $mail->addTo($entity->email, $entity->getName());
+        $mail->addTo($user->email, $user->name);
         $mail->setSubject($subject);
         $mail->addHeader('X-Mailer', 'PHP/' . phpversion());
         $mail->send();
