@@ -82,7 +82,7 @@ class Taggable extends Omeka_Record_Mixin
      */
     public function getTags($order=array('alpha'))
     {
-        return $this->tagTable->findBy(array('record'=>$this->record, 'for'=>$this->type, 'sort'=>$order));
+        return $this->tagTable->findBy(array('record'=>$this->record, 'sort'=>$order));
     }
     
     /**

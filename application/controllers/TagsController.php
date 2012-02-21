@@ -23,37 +23,27 @@ class TagsController extends Omeka_Controller_Action
     
     public function editAction()
     {
-        if ($user = $this->getCurrentUser()) {
-            
-            if (!empty($_POST)) {
-                $this->editTags($user);
-            }
-            
-            $tags = $this->getTagsForAdministration();
-            
-            $this->view->assign(compact('tags'));
+        if (!empty($_POST)) {
+            $this->editTags();
         }
+        
+        $tags = $this->getTagsForAdministration();
+        
+        $this->view->assign(compact('tags'));
     }
     
     public function deleteAction()
     {
-        if ($user = $this->getCurrentUser()) {
-            if (!empty($_POST)) {
-                
-                $tag_id = $_POST['delete_tag'];
-                $tag = $this->_helper->db->find($tag_id);
-                
-                if ($this->isAllowed('remove')) {
-                    $tag->delete();
-                } else {
-                    $tag->deleteForEntity($user->Entity);
-                }
-                $this->flashSuccess(__("Tag named '%s' was successfully deleted.", $tag->name));
-            }
+        if (!empty($_POST)) {
             
-            $tags = $this->getTagsForAdministration();
-            $this->view->assign(compact('tags'));
+            $tag_id = $_POST['delete_tag'];
+            $tag = $this->_helper->db->find($tag_id);
+            $tag->delete();
+            $this->flashSuccess(__("Tag named '%s' was successfully deleted.", $tag->name));
         }
+        
+        $tags = $this->getTagsForAdministration();
+        $this->view->assign(compact('tags'));
     }
     
     protected function getTagsForAdministration()
@@ -66,17 +56,12 @@ class TagsController extends Omeka_Controller_Action
         
         $criteria = array('sort' => 'alpha');
         
-        //Having 'rename' permissions really means that user can rename everyone's tags
-        if(!$this->isAllowed('rename')) {
-            $criteria['user'] = $user->id;
-        }
-        
         $tags = $this->_helper->db->findBy($criteria);
         
         return $tags;    
     }
     
-    protected function editTags($user)
+    protected function editTags()
     {
         $oldTagId = $_POST['old_tag'];
         
@@ -93,11 +78,7 @@ class TagsController extends Omeka_Controller_Action
         $newNames = $_POST['new_tag'];
         
         try {
-            if ($this->isAllowed('edit')) {
-                $oldTag->rename($newTags);
-            } else {
-                $oldTag->rename($newTags, $user->id);
-            }
+            $oldTag->rename($newTags);
             $this->flashSuccess(__('Tag named "%1$s" was successfully renamed to "%2$s".', $oldName, $newNames));
         } catch (Omeka_Validator_Exception $e) {
             $this->flashValidationErrors($e);

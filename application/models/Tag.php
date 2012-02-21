@@ -35,23 +35,6 @@ class Tag extends Omeka_Record {
         }
     }
     
-    /**
-     * Delete only the taggings entries for this specific tag/entity combination
-     *
-     * @return void
-     */
-    protected function deleteForEntity(Entity $entity)
-    {
-        $taggings = $this->getDb()
-                         ->getTable('Taggings')
-                         ->findBySql('entity_id = ? AND tag_id = ?', 
-                                     array( (int)$entity->id, (int) $this->id));
-        
-        foreach ($taggings as $tagging) {
-            $tagging->delete();
-        }
-    }
-    
     protected function _validate()
     {
         if (trim($this->name) == '') {
@@ -91,15 +74,11 @@ class Tag extends Omeka_Record {
      * 3) Loop through the new tags, loop through the joins and create a new one for each new tag
      * @return void
      */
-    public function rename($new_names, $user_id = null) 
+    public function rename($new_names) 
     {
         $joins = array();
         
         $find_criteria = array('tag'=>$this->name);
-        
-        if ($user_id) {
-            $find_criteria['user'] = (int) $user_id;
-        }
         
         $taggings = $this->getTable('Taggings')->findBy($find_criteria);
 
