@@ -10,22 +10,6 @@
 
 /**
  * @since 0.10
- * @uses current_user_tags()
- * @uses get_current_item()
- * @param Item|null $item Check for this specific item record (current item if null).
- * @return array
- */
-function current_user_tags_for_item($item=null)
-{
-    if (!$item) {
-        $item = get_current_item();
-    }
-    // eventually, we need to not use current_user_tags because it is deprecated
-    return current_user_tags($item);
-}
-
-/**
- * @since 0.10
  * @uses display_files()
  * @uses get_current_item()
  * @param array $options

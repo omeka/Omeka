@@ -40,21 +40,6 @@ function recent_tags($limit = 10)
 }
 
 /**
- * Return the tags belonging to a particular user.
- *
- * @param Item $item
- * @return array An array of tag objects.
- */
-function current_user_tags(Item $item)
-{
-    $user = current_user();
-    if (!$item->exists()) {
-        return false;
-    }
-    return get_tags(array('user'=>$user->id, 'record'=>$item, 'sort'=>array('alpha')));
-}
-
-/**
  * Retrieve a tag cloud of all the tags for the current item.
  *
  * @since 0.10
