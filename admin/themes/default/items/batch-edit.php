@@ -5,9 +5,17 @@ if (!$isPartial):
                'bodyclass' => 'advanced-search', 
                'bodyid' => 'advanced-search-page'));
 ?>
-<h1><?php echo $title; ?></h1>
-<div id="primary">
+
+<h1 class="section-title"><?php echo $title; ?></h1>
 <?php endif; ?>
+	<section id="content" class="container">
+	
+		<div class="two columns">
+			&nbsp;
+		</div>
+		
+		<div class="ten columns">
+		
 <div title="<?php echo $title; ?>">
 <form id="batch-edit-form" action="<?php echo html_escape(uri('items/batch-edit-save')); ?>" method="post" accept-charset="utf-8">
     <fieldset id="item-list" style="float:right; width: 28%;">

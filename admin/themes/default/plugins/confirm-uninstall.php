@@ -1,10 +1,18 @@
 <?php 
 $pageTitle = __('Confirm %s Uninstall', $plugin->getDirectoryName());
 head(array('title'=>$pageTitle, 'bodyclass'=>'plugins')); ?>
+	<h1 class="section-title"><?php echo $pageTitle; ?></h1>
 
-<div id="primary">
+	<section id="content" class="container">
+	
+		<div class="two columns">
+			&nbsp;
+		</div>
+		
+		<div class="ten columns">
+		
+			<div class="six columns alpha">
     <?php echo flash(); ?>
-    <h2><?php echo $pageTitle; ?></h2>
     <p><strong><?php echo __('Are you sure you want to uninstall this plugin?'); ?></strong></p>
     <?php if ($message): ?>
     <?php echo __($message); ?>
@@ -13,7 +21,7 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'plugins')); ?>
         <p><input type="checkbox" name="confirm" /> <?php echo __('Yes, I want to uninstall this plugin.'); ?></p>
         <input type="hidden" name="name" value="<?php echo html_escape($plugin->getDirectoryName()); ?>" />
 
-        <p id="uninstall-confirm"><input type="submit" class="uninstall submit" name="uninstall-confirm" class="foo" value="<?php echo __('Uninstall'); ?>" /> <span><?php echo __('or'); ?> <?php echo link_to('plugins', 'browse', __('Cancel')); ?></span></p>
+        <p id="uninstall-confirm"><input type="submit" class="uninstall small red button" name="uninstall-confirm" class="foo" value="<?php echo __('Uninstall'); ?>" /> <span><?php echo __('or'); ?> <?php echo link_to('plugins', 'browse', __('Cancel')); ?></span></p>
     </form>
 </div>
 

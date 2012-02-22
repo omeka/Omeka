@@ -32,11 +32,9 @@
         
     $cannotLoad = !empty($loadErrors);
 ?>
-<tr <?php if ($trClassName) { echo "class=\"$trClassName\""; } ?>>
-    <td>
     <?php if ($cannotLoad): ?>
         <div class="warnings">
-            <strong><?php echo __('The %s plugin cannot be loaded for the following reasons:', html_escape($displayName)); ?></strong>
+            <?php echo __('The %s plugin cannot be loaded for the following reasons:', html_escape($displayName)); ?>
             <ul>
             <?php foreach ($loadErrors as $error): ?>
                 <li><?php echo html_escape($error); ?></li>
@@ -47,17 +45,15 @@
     <?php if ($plugin->hasNewVersion()): ?>    
         <p class="notice plugin-upgrade"><?php echo __('You have a new version of %s. Please upgrade!', html_escape($displayName)); ?></p>
     <?php endif; ?>
-        <div class="plugin-info">
-        <p class="plugin-title"><?php
-            if ($plugin->getLinkUrl()):
-                echo '<a href="' . html_escape($plugin->getLinkUrl()) . '">' . html_escape($displayName) . '</a>';
-            else:
-                echo html_escape($displayName);
-            endif; 
-            if (has_permission($plugin, 'config') && $plugin->hasConfig() ): ?>
-                <a href="<?php echo html_escape(uri('plugins/config', array('name'=>$plugin->getDirectoryName()))); ?>" class="configure-button button"><?php echo __('Configure'); ?></a>
-            <?php endif; ?>
-        </p>
+    <div class="plugin-row">
+        <div class="plugin-info six columns alpha">	
+	        <h3 class="plugin-title"><?php
+	            if ($plugin->getLinkUrl()):
+	                echo '<a href="' . html_escape($plugin->getLinkUrl()) . '">' . html_escape($displayName) . '</a>';
+	            else:
+	                echo html_escape($displayName);
+	            endif; ?>
+	        </h3>
         
         <?php 
             $pluginMetadata = array();
@@ -76,37 +72,34 @@
         <p class="plugin-description"><?php echo html_escape($pluginDescription); ?></p>
         <?php endif; ?>
         </div>
-    </td>
-    
-    <td>
+
     <?php if ($plugin->isInstalled()): ?>
         <?php if ($plugin->hasNewVersion()): ?>
             <?php if (has_permission($plugin, 'upgrade')): ?>
                 <form action="<?php echo html_escape(uri('plugins/upgrade')); ?>" method="post" accept-charset="utf-8">     
-                    <div>
                         <button name="upgrade" type="submit" class="upgrade"<?php if ($cannotLoad): ?> disabled="disabled"<?php endif; ?>><?php echo __('Upgrade'); ?></button>
                         <input type="hidden" name="name" value="<?php echo html_escape($pluginDirName); ?>" />
-                    </div>
                 </form>
             <?php endif; ?>
         <?php else: ?>
             <?php $activateOrDeactivate = ($plugin->isActive()) ? 'deactivate' : 'activate'; ?>
+            <?php $activateClass = ($plugin->isActive()) ? 'small red button' : 'small green button'; ?>
             <?php if (has_permission($plugin, 'activate')): ?>
                 <form action="<?php echo html_escape(uri('plugins/' . $activateOrDeactivate)); ?>" method="post" accept-charset="utf-8">
-                    <div>
-                        <button name="<?php echo $activateOrDeactivate; ?>" type="submit" class="<?php echo $activateOrDeactivate; ?>"<?php if ($cannotLoad): ?> disabled="disabled"<?php endif; ?>><?php echo ($plugin->isActive()) ? __('Deactivate') : __('Activate'); ?></button>
+			            <?php if (has_permission($plugin, 'config') && $plugin->hasConfig() ): ?>
+			                <a href="<?php echo html_escape(uri('plugins/config', array('name'=>$plugin->getDirectoryName()))); ?>" class="small blue button"><?php echo __('Configure'); ?></a>
+			            <?php endif; ?>
+                        
+                        <button name="<?php echo $activateOrDeactivate; ?>" type="submit" class="<?php echo $activateClass; ?>"<?php if ($cannotLoad): ?> disabled="disabled"<?php endif; ?>><?php echo ($plugin->isActive()) ? __('Deactivate') : __('Activate'); ?></button>
                         <input type="hidden" name="name" value="<?php echo html_escape($pluginDirName); ?>" />
-                    </div>
                 </form>                
             <?php endif; ?>
             <?php if (has_permission($plugin, 'uninstall')): ?>
                 <form action="<?php echo html_escape(uri(array(
                     'controller'=>'plugins',
                     'action'=>'uninstall'), 'default')); ?>" method="post" accept-charset="utf-8">
-                    <div>
-                        <button name="uninstall" type="submit" class="uninstall"<?php if ($cannotLoad): ?> disabled="disabled"<?php endif; ?>><?php echo __('Uninstall'); ?></button>
+                        <button name="uninstall" type="submit" class="uninstall small red button"<?php if ($cannotLoad): ?> disabled="disabled"<?php endif; ?>><?php echo __('Uninstall'); ?></button>
                         <input type="hidden" name="name" value="<?php echo html_escape($pluginDirName); ?>" />
-                    </div>
                 </form>
             <?php endif; ?>
         <?php endif; ?>
@@ -120,6 +113,4 @@
         </form> 
     <?php endif; ?>
 <?php endif; ?>
-
-</td>
-</tr>
+	</div>

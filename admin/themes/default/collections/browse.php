@@ -1,12 +1,20 @@
 <?php 
 $pageTitle = __('Browse Collections');
 head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
-<h1><?php echo $pageTitle; ?> <?php echo __('(%s total)', $total_records); ?></h1>
+<h1 class="section-title"><?php echo $pageTitle; ?> <?php echo __('(%s total)', $total_records); ?></h1>
+
+	<section id="content" class="container">
+	
+		<div class="two columns">
+			&nbsp;
+		</div>
+		
+		<div class="ten columns">
+
 <?php if (has_permission('Collections', 'add')): ?>
-    <p id="add-collection" class="add-button"><a href="<?php echo html_escape(uri('collections/add')); ?>" class="add add-collection"><?php echo __('Add a Collection'); ?></a></p>
+    <a href="<?php echo html_escape(uri('collections/add')); ?>" class="small green button"><?php echo __('Add a Collection'); ?></a>
 <?php endif; ?>
 
-<div id="primary">
     <?php echo flash(); ?>
     <?php if (has_collections()): ?>
         <div class="pagination"><?php echo pagination_links(); ?></div>
@@ -36,13 +44,9 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
                 <td class="title"><?php echo link_to_collection(); ?></td>
                 <td>
                 <?php if (collection_has_collectors()): ?> 
-                    <ul>
-                        <li><?php echo collection('Collectors', array('delimiter'=>'</li><li>')); ?></li>
-                    </ul>
+                    <?php echo collection('Collectors', array('delimiter'=>'<br>')); ?>
                 <?php else: ?>
-                    <ul>
-                        <li><?php echo __('No collectors'); ?></li>
-                    </ul>
+                    <?php echo __('No collectors'); ?>
                 <?php endif; ?>
                 
                 </td>   
