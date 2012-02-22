@@ -60,7 +60,7 @@ class Taggable extends Omeka_Record_Mixin
         WHERE $model_table.id = $id 
         AND $db->Taggings.type = '$record_type'";
         
-        $db->exec($delete);
+        $db->query($delete);
     }
     
     /**
