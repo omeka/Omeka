@@ -25,10 +25,19 @@ abstract class Omeka_Plugin_Abstract
     /**
      * Plugin hooks.
      *
-     * Plugin authors should give an array containing hook names as values.
-     * Each hook should have a corresponding hookCamelCased() method defined 
-     * in the child class. E.g: the after_save_form_record hook should 
-     * have a corresponding hookAfterSaveFormRecord() method.
+     * In the child class plugin authors should set an array containing hook 
+     * names as values and, optionally, callback names as keys. If a callback 
+     * name is given, the child class should contain an identically named 
+     * method. If no callback key is given, the child class should contain a 
+     * corresponding hookCamelCased() method. E.g: the after_save_form_record 
+     * filter should have a corresponding hookAfterSaveFormRecord() method.
+     * 
+     * For example:
+     * <code>
+     * array('install', 
+     *       'uninstall', 
+     *       'doSomething' => 'after_save_item')
+     * </code>
      *
      * @var array
      */
@@ -37,10 +46,20 @@ abstract class Omeka_Plugin_Abstract
     /**
      * Plugin filters.
      *
-     * Plugin authors should give an array containing filter names as values.
-     * Each filter should have a corresponding filterCamelCased() method 
-     * defined in the child class. E.g: the admin_navigation_main filter should 
-     * have a corresponding filterAdminNavigationMain() method. 
+     * In the child class plugin authors should set an array containing filter 
+     * names as values and, optionally, callback names as keys. If a callback 
+     * name is given, the child class should contain an identically named 
+     * method. If no callback key is given, the child class should contain a 
+     * corresponding filterCamelCased() method. E.g: the admin_navigation_main 
+     * filter should have a corresponding filterAdminNavigationMain() method.
+     * 
+     * For example:
+     * <code>
+     * array('admin_navigation_main', 
+     *       'public_navigation_main', 
+     *       'changeSomething' => 'display_setting_site_title', 
+     *       'displayItemDublinCoreTitle' => array('Display', 'Item', 'Dublin Core', 'Title'))
+     * </code>
      *
      * @var array
      */
@@ -50,7 +69,9 @@ abstract class Omeka_Plugin_Abstract
      * Plugin options.
      *
      * Plugin authors should give an array containing option names as keys and
-     * their default values as values, if any. For example:
+     * their default values as values, if any.
+     * 
+     * For example:
      * <code>
      * array('option_name1' => 'option_default_value1',
      *       'option_name2' => 'option_default_value2',
@@ -93,11 +114,10 @@ abstract class Omeka_Plugin_Abstract
      */
     protected function _installOptions()
     {
-        $options = $this->_options;
-        if (!is_array($options)) {
+        if (!is_array($this->_options)) {
             return;
         }
-        foreach ($options as $name => $value) {
+        foreach ($this->_options as $name => $value) {
             // Don't set options without default values.
             if (!is_string($name)) {
                 continue;
@@ -114,11 +134,10 @@ abstract class Omeka_Plugin_Abstract
      */
     protected function _uninstallOptions()
     {
-        $options = self::$_options;
-        if (!is_array($options)) {
+        if (!is_array($this->_options)) {
             return;
         }
-        foreach ($options as $name => $value) {
+        foreach ($this->_options as $name => $value) {
             delete_option($name);
         }
     }
@@ -128,16 +147,17 @@ abstract class Omeka_Plugin_Abstract
      */
     private function _addHooks()
     {
-        $hookNames = $this->_hooks;
-        if (!is_array($hookNames)) {
+        if (!is_array($this->_hooks)) {
             return;
         }
-        foreach ($hookNames as $hookName) {
-            $functionName = 'hook' . Inflector::camelize($hookName);
-            if (!is_callable(array($this, $functionName))) {
-                throw new Omeka_Plugin_Exception('Hook callback "' . $functionName . '" does not exist.');
+        foreach ($this->_hooks as $callback => $hook) {
+            if (!is_string($callback)) {
+                $callback = 'hook' . Inflector::camelize($hook);
             }
-            add_plugin_hook($hookName, array($this, $functionName));
+            if (!is_callable(array($this, $callback))) {
+                throw new Omeka_Plugin_Exception('Hook callback "' . $callback . '" does not exist.');
+            }
+            add_plugin_hook($hook, array($this, $callback));
         }
     }
     
@@ -146,16 +166,17 @@ abstract class Omeka_Plugin_Abstract
      */
     private function _addFilters()
     {
-        $filterNames = $this->_filters;
-        if (!is_array($filterNames)) {
+        if (!is_array($this->_filters)) {
             return;
         }
-        foreach ($filterNames as $filterName) {
-            $functionName = 'filter' . Inflector::camelize($filterName);
-            if (!is_callable(array($this, $functionName))) {
-                throw new Omeka_Plugin_Exception('Filter callback "' . $functionName . '" does not exist.');
+        foreach ($this->_filters as $callback => $filter) {
+            if (!is_string($callback)) {
+                $callback = 'filter' . Inflector::camelize($filter);
             }
-            add_filter($filterName, array($this, $functionName));
+            if (!is_callable(array($this, $callback))) {
+                throw new Omeka_Plugin_Exception('Filter callback "' . $callback . '" does not exist.');
+            }
+            add_filter($filter, array($this, $callback));
         }
     }
 }
