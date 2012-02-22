@@ -79,8 +79,6 @@ $acl->deny('admin', array(
 $acl->deny(null, 'Users');
 $acl->allow(array('super', 'admin', 'contributor', 'researcher'),
     'Users', null, new Omeka_Acl_Assert_User);
-//$acl->allow(array('super', 'admin'), 'Users',
-//s    array('edit', 'show', 'change-password', 'delete'), new Omeka_Acl_Assert_User);
 
 $acl->allow(null, 'Items', array('edit', 'delete'),
     new Omeka_Acl_Assert_Ownership);
