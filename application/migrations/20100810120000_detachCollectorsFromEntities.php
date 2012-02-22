@@ -26,7 +26,7 @@ class detachCollectorsFromEntities extends Omeka_Db_Migration
     
     private function _migrateCollections($db)
     {
-        $db->execBlock(<<<COL
+        $db->queryBlock(<<<COL
 ALTER TABLE `$db->Collection` ADD `added` TIMESTAMP NOT NULL default '0000-00-00 00:00:00';
 ALTER TABLE `$db->Collection` ADD `modified` TIMESTAMP NOT NULL;   
 ALTER TABLE `$db->Collection` ADD `owner_id` INT( 10 ) UNSIGNED NOT NULL;
