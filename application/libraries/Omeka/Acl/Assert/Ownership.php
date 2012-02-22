@@ -6,15 +6,15 @@
  */
 
 /**
- * Assertion for the "edit" and "delete" permissions for Items.
+ * Assertion to take account of "All" and "Self" sub-permissions for
+ * records.
  *
- * For backwards-compatibility reasons, the "edit" permission more or
- * less simply builds on the "editAll" and "editSelf" permissions, and
- * on "deleteAll" and "deleteSelf".
+ * A common use is the "edit" and "delete" permissions for Items and
+ * other "ownable" records.
  *
  * @package Omeka
  */
-class Item_OwnershipAclAssertion implements Zend_Acl_Assert_Interface
+class Omeka_Acl_Assert_Ownership implements Zend_Acl_Assert_Interface
 {
     /**
      * Assert whether or not the ACL should allow access.
@@ -28,21 +28,24 @@ class Item_OwnershipAclAssertion implements Zend_Acl_Assert_Interface
         $selfPriv = $privilege . 'Self';
         if (!($role instanceof User)) {
             $allowed = false;
-        } else if ($resource instanceof Item) {
+        } else if ($resource instanceof Omeka_Record) {
             $allowed = $acl->isAllowed($role, $resource, $allPriv)
                    || ($acl->isAllowed($role, $resource, $selfPriv)
-                       && $this->_userOwnsItem($role, $resource));
+                       && $this->_userOwnsRecord($role, $resource));
         } else {
             // The "generic" privilege is allowed if the user can
-            // edit any items whatsoever.
+            // edit any of the given record type whatsoever.
             $allowed = $acl->isAllowed($role, $resource, $allPriv)
                     || $acl->isAllowed($role, $resource, $selfPriv);
         }
         return $allowed;
     }
 
-    private function _userOwnsItem($user, $item)
+    /**
+     * Check whether the user owns this specific record.
+     */
+    private function _userOwnsRecord($user, $record)
     {
-        return $item->isOwnedBy($user);
+        return $record->isOwnedBy($user);
     }
 }

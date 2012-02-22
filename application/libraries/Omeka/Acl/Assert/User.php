@@ -12,7 +12,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
  */
-class User_AclAssertion implements Zend_Acl_Assert_Interface
+class Omeka_Acl_Assert_User implements Zend_Acl_Assert_Interface
 {    
     private $_allowSelf = array(
         'show',
@@ -91,7 +91,7 @@ class User_AclAssertion implements Zend_Acl_Assert_Interface
 
     private function _isSuperUser($user)
     {
-        $roleId = $user->getRoleId();        
+        $roleId = $user->getRoleId();
         return ('super' == $roleId);
     }
 }
