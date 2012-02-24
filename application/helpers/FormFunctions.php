@@ -429,19 +429,6 @@ function select_element($props = array(), $value = null, $label=null, $search = 
 }
 
 /**
- * @since 0.10
- * @param array $props Optional
- * @param mixed $value Optional
- * @param string|null $label Optional
- * @param array $search Optional
- * @uses _select_from_table()
- */
-function select_entity($props = array(), $value = null, $label=null, $search = array())
-{
-    return _select_from_table('Entity', $props, $value, $label, $search);
-}
-
-/**
  * Use this to choose an item type from a <select>.
  *
  * @since 0.10

@@ -14,9 +14,6 @@
 class CollectionTest extends PHPUnit_Framework_TestCase
 {
     const COLLECTION_ID = 1;
-    const ENTITY_ID = 2;
-    const RELATIONSHIP_ID = 3;
-    const ENTITY_RELATION_ID = 4;
     const USER_ID = 5;
     
     public function setUp()
@@ -150,22 +147,6 @@ class CollectionTest extends PHPUnit_Framework_TestCase
     {
         $this->collection->name = str_repeat('b', 150);
         $this->assertTrue($this->collection->isValid());
-    }
-            
-    public function testRemoveCollectorWhenHasNoCollectors()
-    {
-        $this->collection->id = self::COLLECTION_ID;
-        $entity = new Entity($this->db);
-        $entity->first_name = 'Foobar';
-        $entity->last_name = 'LastName';
-        $entity->id = self::ENTITY_ID;
-        $this->dbAdapter->appendStatementToStack(Zend_Test_DbStatement::createDeleteStatement(0));
-        $this->dbAdapter->appendStatementToStack(Zend_Test_DbStatement::createSelectStatement(
-            array(
-                array(self::RELATIONSHIP_ID)
-            )
-        ));
-        $this->assertFalse($this->collection->removeCollector($entity));
     }
     
     public function testInsertSetsAddedDate()

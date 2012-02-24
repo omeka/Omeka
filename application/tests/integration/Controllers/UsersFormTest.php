@@ -155,7 +155,7 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
         $this->assertEquals($newAdminUser->active, 1, "User status should not have been changed from active to inactive.");
     }
         
-    public function testCannotEverChangeSaltPasswordOrEntityIdFields()
+    public function testCannotEverChangeSaltOrPasswordFields()
     {
         $user = $this->adminUser;
         $this->_authenticateUser($user);
@@ -165,15 +165,12 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
             'email' => 'foobar@example.com',
             'role' => 'super',
             'active' => '1',
-            'entity_id' => '5000',
             'salt' => 'foobar',
             'password' => 'some-arbitrary-hash'
         ));
         $this->request->setMethod('post');
         $this->dispatch('/users/edit/' . $this->currentuser->id);
         $changedUser = $this->db->getTable('User')->find($user->id);
-        $this->assertEquals($user->entity_id, $changedUser->entity_id, 
-            "Entity ID should not have changed.");
         $this->assertEquals($user->salt, $changedUser->salt, 
             "Salt should not have changed.");
         $this->assertEquals($user->password, $changedUser->password, 

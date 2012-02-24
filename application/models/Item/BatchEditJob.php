@@ -21,9 +21,6 @@ class Item_BatchEditJob extends Omeka_JobAbstract {
         $metadata = $this->_options['metadata'];
         $custom = $this->_options['custom'];
 
-        if ($user = $this->getUser()) {
-            $metadata['tag_entity'] = $user->getEntity();
-        }
         foreach ($itemIds as $id) {
             $item = $this->_getItem($id);
             if ($delete == '1') {

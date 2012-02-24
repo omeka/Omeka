@@ -186,17 +186,15 @@ class Collection extends Omeka_Record
      * Omeka >= 1.3.  Please use the new syntax, which is simply the string name
      * for the collector.
      * 
-     * @param string|Entity $collector
+     * @param string $collector
      * @return void
      */
     public function addCollector($collector)
     {
         if (is_string($collector)) {
             $collectorName = $collector;
-        } else if ($collector instanceof Entity) {
-            $collectorName = $collector->getName();
         } else {
-            throw new InvalidArgumentException(__("Argument passed to addCollector() must be a string or an instance of Entity."));
+            throw new InvalidArgumentException(__("Argument passed to addCollector() must be a string."));
         }
         $collectorName = trim($collectorName);
         if ($collectorName != '') {

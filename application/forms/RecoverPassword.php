@@ -64,10 +64,8 @@ class Omeka_Form_RecoverPassword extends Omeka_Form
                 array(
                     'validator' => 'Db_RecordExists', 
                     'options' => array(
-                        'table' => $this->_db->Entity,
+                        'table' => $this->_db->User,
                         'field' => 'email',
-                        // Exclude the email addresses that don't correspond with user accounts.
-                        'exclude' => $this->_getExcludeClause(),
                         'adapter' => $this->_db->getAdapter(),
                         'messages' => array(
                             'noRecordFound' => __("Invalid email address")
@@ -83,10 +81,5 @@ class Omeka_Form_RecoverPassword extends Omeka_Form
     public function setDb(Omeka_Db $db)
     {
         $this->_db = $db;
-    }
-    
-    private function _getExcludeClause()
-    {
-        return "{$this->_db->Entity}.email IN (SELECT e.email FROM {$this->_db->Entity} e INNER JOIN {$this->_db->User} u ON u.entity_id = e.id)";
     }
 }
