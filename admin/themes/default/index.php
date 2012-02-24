@@ -49,7 +49,7 @@ head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?>
                         $items = recent_items(5); 
                         set_items_for_loop($items);
                      
-                        while($item == loop_items()):
+                        while($item = loop_items()):
                             echo '<div class="recent-row">';
                             echo '<p class="recent">'.link_to_item().'</p>';
                             if (has_permission($item, 'edit')):
