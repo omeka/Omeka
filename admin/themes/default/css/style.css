@@ -945,16 +945,16 @@ header nav {
 		padding: 3px 0;
 		}	
 
-	#current-image {
-		float: left;
-		margin: 0 20px 0 0;
-		}
+		
+		#current-image .crop {
+			border: 10px solid transparent;
+			box-shadow: 0 0 5px rgba(0,0,0,.1);
+			height: 200px;
+			overflow: hidden;
+			}
 		
 		#current-image img {
-			width: 96%;
-			border: 1px solid rgba(0,0,0,.05);
-			box-shadow: 0 0 5px rgba(0,0,0,.1);
-			padding: 2%;
+			width: 100%;
 			}
 	
 	#current-theme {
@@ -978,7 +978,7 @@ header nav {
 		font-weight: normal;
 		font-size: 1em;
 		line-height: 40px;
-		margin: 0 0 0 -2px;
+		margin: 0 0 1em -2px;
 		text-shadow: -1px -1px 0px #f7f7f7;
 		}
 		
@@ -996,30 +996,46 @@ header nav {
 			background-image: url('../images/beige-banner_right.jpg');
 			}
 	
-	.theme {
+	.themes .theme {
 		height: 300px;
 		}
-			
-		.theme .crop {
-	    	height: 120px;
-	    	margin: 0 0 10px 0;
-	    	overflow: hidden;
-	    	}
-	    
-	    .theme img {
-	    	width: 100%;
-	    	}
 	    	
-	    .theme ul {
-	    	list-style-type: none;
+	    .themes .theme .author {
+	    	font-style: italic;
+	    	margin: 0;
 	    	padding: 0;
 	    	}
 			
-	.theme-description {
-		font-style: italic;
-		margin: 0;
-		}
+		.themes .theme .crop {
+	    	height: 120px;
+	    	border: 1px solid #e7e7e7;
+	    	margin: 0 0 10px 0;
+	    	overflow: hidden;
+	    	}
+	    	
+	    .theme .current-theme {
+	    	display: none;
+	    	}
+	    
+	    .themes .theme h3 {
+	    	font-family: "Arvo", sans-serif;
+	    	margin: 0;
+	    	}
+	    
+	    .themes .theme img {
+	    	width: 100%;
+	    	}
+	    	
+	    .themes .theme input[type=radio] {
+	    	display: none;
+	    	}
 		
 	.type {
 		font-weight: bold;
+		}
+		
+	.use-theme {
+		width: 100%;
+		margin: 0;
+		padding: 0 !important;
 		}

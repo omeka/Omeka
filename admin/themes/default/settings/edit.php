@@ -13,12 +13,20 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
 //]]>    
 </script>
 
-<h1><?php echo $pageTitle; ?></h1>
+<h1 class="section-title"><?php echo $pageTitle; ?></h1>
 
-<?php common('settings-nav'); ?>
+	<section id="content" class="container">
+	
+		<div class="two columns">
+			&nbsp;
+		</div>
+		
+		<div class="ten columns">
 
-<div id="primary">
-<?php echo flash(); ?>
-<?php echo $this->form; ?>
-</div>
+			<?php common('settings-nav'); ?>
+			<?php echo flash(); ?>
+			<?php echo $this->form; ?>
+	
+		</div>
+		
 <?php foot();

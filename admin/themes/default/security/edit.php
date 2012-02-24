@@ -27,12 +27,19 @@ jQuery(document).ready(function () {
 });
 //]]>
 </script>
-<h1><?php echo $pageTitle; ?></h1>
-<?php common('settings-nav'); ?>
+<h1 class="section-title"><?php echo $pageTitle; ?></h1>
 
-<div id="primary">
-<?php echo flash(); ?>
-<?php echo $this->form; ?>
+	<section id="content" class="container">
+	
+		<div class="two columns">
+			&nbsp;
+		</div>
+		
+		<div class="ten columns">
 
-</div>
+			<?php common('settings-nav'); ?>
+			<?php echo flash(); ?>
+			<?php echo $this->form; ?>
+		
+		</div>
 <?php foot(); ?>

@@ -1,10 +1,19 @@
 <?php 
 $pageTitle = __('Browse Element Sets');
 head(array('title'=> $pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'element-sets primary'));?>
-<h1><?php echo $pageTitle; ?> <?php echo __('(%s total)', $total_records); ?></h1>
-<?php common('settings-nav'); ?>
 
-<div id="primary">
+<h1 class="section-title"><?php echo $pageTitle; ?> <?php echo __('(%s total)', $total_records); ?></h1>
+
+	<section id="content" class="container">
+	
+		<div class="two columns">
+			&nbsp;
+		</div>
+		
+		<div class="ten columns">
+
+
+<?php common('settings-nav'); ?>
 
 <table>
     <thead>

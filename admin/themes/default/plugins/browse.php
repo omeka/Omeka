@@ -13,6 +13,8 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
 		<div class="ten columns">
 
     <?php if ($plugins): ?>
+    
+   			<?php echo flash(); ?>    		
 
             <?php foreach($plugins as $pluginDirName => $plugin): ?>
                 <?php echo $this->partial('plugins/plugin-info.php', array('pluginDirName' => $pluginDirName, 'plugin' => $plugin, 'loader'=>$loader)); ?>
