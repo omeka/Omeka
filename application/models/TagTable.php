@@ -54,29 +54,6 @@ class TagTable extends Omeka_Db_Table
     }
     
     /**
-     * Filter SELECT statement based on a user or entity ID
-     * 
-     * @param Omeka_Db_Select $select
-     * @param Entity|User|integer $userOrEntity The entity or user object, or the id of an entity or user object
-     * @param boolean $isUser
-     * @return void
-     */
-    public function filterByUserOrEntity($select, $userOrEntity, $isUser) 
-    {
-        $userOrEntityId = (int) is_numeric($userOrEntity) ? $userOrEntity : $userOrEntity->id;
-        
-        $db = $this->getDb();
-        $select->joinInner( array('e'=>$db->Entity), "e.id = tg.entity_id", array());
-        
-        if ($isUser) {
-            $select->joinInner( array('u'=>$db->User), "u.entity_id = e.id", array());
-            $select->where("u.id = ?", $userOrEntityId);
-        } else {
-            $select->where("e.id = ?", $userOrEntityId);
-        }
-    }
-    
-    /**
      * Adds an ORDER BY clause to the SELECT statment based on the given criteria
      * 
      * @param string|array
@@ -189,13 +166,6 @@ class TagTable extends Omeka_Db_Table
         
         if (array_key_exists('record', $params) && $params['record'] instanceof Omeka_Record) {
             $this->filterByRecord($select, $params['record']);
-        }
-        
-        $userOrEntity = array_key_exists('user', $params) ? $params['user']
-                      : (array_key_exists('entity', $params) ? $params['entity']
-                      : false); 
-        if($userOrEntity) {
-            $this->filterByUserOrEntity($select, $userOrEntity, array_key_exists('user', $params));
         }
 
         if (array_key_exists('like', $params)) {
