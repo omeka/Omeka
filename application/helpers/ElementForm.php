@@ -39,18 +39,20 @@ class Omeka_View_Helper_ElementForm
         $html = $divWrap ? '<div class="field" id="element-' . html_escape($element->id) . '">' : '';
 
         // Put out the label for the field
+        $html .= '<div class="two columns alpha">';
         $html .= $this->_displayFieldLabel();
+        $html .= $this->view->formButton('add_element_' . $this->_element['id'], __('Add Input'),
+            array('class'=>'add-element'));
+        $html .= '</div>';
+        
 
         $html .= $this->_displayValidationErrors();
 
-        $html .= '<div class="inputs">';
+        $html .= '<div class="inputs five columns omega">';
         $html .= $this->_displayFormFields($extraFieldCount);
-        $html .= '</div>'; // Close 'inputs' div
-
-        $html .= $this->view->formSubmit('add_element_' . $this->_element['id'], __('Add Input'),
-            array('class'=>'add-element'));
-
         $html .= $this->_displayTooltip();
+
+        $html .= '</div>'; // Close 'inputs' div
 
 
         $html .= $divWrap ? '</div>' : ''; // Close 'field' div
@@ -403,8 +405,8 @@ class Omeka_View_Helper_ElementForm
         // Used by Javascript.
         $html = '<div class="controls">';
 
-        $html .= $this->view->formSubmit('remove_element_' . $this->_element['id'], __('Remove'),
-            array('class'=>'remove-element'));
+        $html .= $this->view->formButton('remove_element_' . $this->_element['id'], __('Remove'),
+            array('class'=>'remove-element red'));
 
         $html .= '</div>'; // Close 'controls' div
 

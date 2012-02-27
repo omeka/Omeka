@@ -97,12 +97,8 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
 			<?php endif; ?>
 			
 			<div id="simple-search-form">
-				<form id="simple-search" action="/~knguyen/omeka/admin/items/browse" method="get">
-					<fieldset>
-						<input type="text" name="search" id="search" value="" class="textinput small"><input type="submit" name="submit_search" id="submit_search" class="blue small" value="Search">
-					</fieldset>
-				</form>            
-				<a id="advanced-search-link" href="/~knguyen/omeka/admin/items/advanced-search">Advanced Search</a>
+				<?php echo simple_search(); ?>         
+				<?php echo link_to_advanced_search(__('Advanced Search'), array('id' => 'advanced-search-link')); ?>
 			</div>
 			
 			<form class="items-browse top" action="<?php echo html_escape(uri('items/batch-edit')); ?>" method="post" accept-charset="utf-8">

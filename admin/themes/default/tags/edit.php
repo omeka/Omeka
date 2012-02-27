@@ -2,9 +2,17 @@
 $pageTitle = __('Edit Tag');
 head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodyclass'=>'tags')); ?>
 
-<h1><?php echo $pageTitle; ?></h1>
+<h1 class="section-title"><?php echo $pageTitle; ?></h1>
+
+	<section id="content" class="container">
+	
+		<div class="two columns">
+			&nbsp;
+		</div>
+		
+		<div class="ten columns">
+
 <?php common('tags-nav'); ?>
-<div id="primary">
 <?php echo flash(); ?>
 <?php if (count($tags)): ?>    
 <form method="post" action="">

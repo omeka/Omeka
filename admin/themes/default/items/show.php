@@ -62,7 +62,7 @@
 		    
 		    <div class="panel">
 			    <div id="tags" class="info-panel">
-			        <h2><?php echo __('Tags'); ?></h2>
+			        <h4><?php echo __('Tags'); ?></h4>
 			        <div id="tag-cloud">
 			            <?php common('tag-list', compact('item'), 'items'); ?>
 			        </div>
@@ -96,7 +96,8 @@
 			</div>
 
 			<div class="seven columns alpha">
-			<?php echo show_item_metadata(array('show_empty_elements' => true)); ?>
+				<?php echo flash(); ?>			
+				<?php echo show_item_metadata(array('show_empty_elements' => true)); ?>
 			</div>
 			
 		<?php fire_plugin_hook('admin_append_to_items_show_secondary', $item); ?>

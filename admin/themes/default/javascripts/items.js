@@ -94,7 +94,7 @@ Omeka.Items.changeItemType = function (changeItemTypeUrl, itemId) {
 Omeka.Items.createTagsHeaderAndList = function () {
     if (!jQuery('#all-tags-list').length) {
         var allTags = jQuery('#all-tags');
-        allTags.append('<h3>All Tags</h3>');
+        allTags.append('<h4>All Tags</h4>');
         allTags.append('<ul id="all-tags-list"/>');
     }
 };

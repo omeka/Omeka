@@ -2,9 +2,16 @@
 $title = __('System Information');
 head(array('title' => $title, 'bodyclass' => 'system-info')); ?>
 
-<h1><?php echo $title; ?></h1>
+<h1 class="section-title"><?php echo $title; ?></h1>
 
-<div id="primary">
+    <section id="content" class="container">
+    
+    <div class="two columns">
+	    &nbsp;
+    </div>
+    
+    <div class="ten columns">
+
 <?php echo flash(); ?>
 
 <pre id="info-field">

@@ -32,7 +32,7 @@
 	<div class="container">
 	
 		<div id="site-title" class="one-third column">
-			<?php echo link_to_home_page(settings('site_title')); ?>
+			<?php echo link_to_home_page(settings('site_title'), array('target' => '_blank')); ?>
 		</div>
 	
 		<nav>
