@@ -36,6 +36,13 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
     protected $_allowed = array();
 
     /**
+     * Whether we should automatically try to set the resource object.
+     *
+     * @var boolean
+     */
+    protected $_autoloadResourceObject = true;
+
+    /**
      * Instantiated with the ACL permissions which will be used to verify
      * permission levels.
      *
@@ -64,13 +71,19 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
             }
         }
 
+        if (!$resource && $this->_autoloadResourceObject) {
+            $resource = $this->_getResourceObjectFromRequest();
+        }
+
         if ($this->isAllowed($this->getRequest()->getActionName(), $resource)) {
             return;
         }
+
         if ($this->_currentUser) {
             $this->getRequest()->setControllerName('error')
                                ->setActionName('forbidden')
                                ->setModuleName('default')
+                               ->setParams(array())
                                ->setDispatched(false);
         } else if (!$this->_isLoginRequest()) {
             $this->getRequest()->setControllerName('users')
@@ -179,6 +192,45 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
     public function setAllowed($rule, $isAllowed = true)
     {
         $this->_allowed[$rule] = $isAllowed;
+    }
+
+    /**
+     * Set whether the ACL helper should try to automatically load
+     * a resource object from the request.
+     *
+     * @param boolean $autoload
+     */
+    public function setAutoloadResourceObject($autoload)
+    {
+        $this->_autoloadResourceObject = $autoload;
+    }
+
+    /**
+     * Try to get the current resource object for the request.
+     *
+     * @return Zend_Acl_Resource_Interface|null
+     */
+    private function _getResourceObjectFromRequest()
+    {
+        try {
+            $dbHelper = Zend_Controller_Action_HelperBroker::getExistingHelper('Db');
+        } catch (Zend_Controller_Action_Exception $e) {
+            return null;
+        }
+
+        try {
+            $record = $dbHelper->findById();
+        } catch (Omeka_Controller_Exception_404 $e) {
+            return null;
+        } catch (InvalidArgumentException $e) {
+            return null;
+        }
+
+        if ($record instanceof Zend_Acl_Resource_Interface) {
+            return $record;
+        } else {
+            return null;
+        }
     }
 
     private function _isLoginRequest()

@@ -39,6 +39,12 @@ class Omeka_Controller_Action_Helper_Db extends Zend_Controller_Action_Helper_Ab
     {
         $this->_db = $db;
     }
+
+    public function init()
+    {
+        $this->_defaultTable = null;
+        $this->_defaultModel = null;
+    }
     
     /**
      * Delegate to the default table object for all other method calls.
