@@ -57,7 +57,7 @@ $acl->allow('researcher',
 // Contributors can add and tag items, edit or delete their own items, and see their items that are not public
 $acl->allow('contributor',
             'Items',
-            array('tag', 'add', 'batch-edit', 'batch-edit-save',
+            array('tag', 'add', 'batch-edit', 'batch-edit-save', 'delete-confirm',
                   'editSelf', 'deleteSelf', 'showSelfNotPublic')
 );
 $acl->allow('contributor', 'Tags', array('autocomplete'));
