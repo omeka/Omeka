@@ -23,16 +23,6 @@ class CollectionTable extends Omeka_Db_Table
         if(array_key_exists('featured', $params)) {
             $this->filterByFeatured($select, $params['featured']);
         }
-        
-        /****************************
-         * FIND RECENT COLLECTIONS
-         *
-         * ORDER BY id DESC works because MyISAM tables always increment IDs for new rows,
-         * would not work with InnoDB because it assigns IDs of deleted records
-         ***************************/
-         if (array_key_exists('recent', $params) && $params['recent'] === true) {             
-             $select->order('c.id DESC');
-         }        
     }
     
     protected function _getColumnPairs()

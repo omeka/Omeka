@@ -112,8 +112,7 @@ class TagsController extends Omeka_Controller_Action
         }
         
         //For the count, we only need to check based on permission levels
-        $count_params = array_merge($perms, array('recent' => false, 
-                                                  'type' => $for));
+        $count_params = array_merge($perms, array('type' => $for));
         
         $total_tags = $this->_helper->db->count($count_params);
            

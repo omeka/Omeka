@@ -119,11 +119,8 @@ class TagTable extends Omeka_Db_Table
      *
      * @param Omeka_Db_Select 
      * @param array $params
-     *        'sort' => 'recent', 'least', 'most', 'alpha', 'reverse_alpha'
      *        'limit' => integer
      *        'record' => instanceof Omeka_Record
-     *        'entity' => entity_id
-     *        'user' => user_id
      *        'like' => partial_tag_name
      *        'type' => tag_type
      * @return void

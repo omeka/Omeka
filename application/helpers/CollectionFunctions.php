@@ -296,7 +296,7 @@ function total_items_in_collection()
  */
 function recent_collections($num = 10)
 {
-    return get_collections(array('recent'=>true), $num);
+    return get_collections(array('sort_field' => 'added', 'sort_dir' => 'd'), $num);
 }
 
 /**
