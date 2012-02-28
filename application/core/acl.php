@@ -61,6 +61,10 @@ $acl->allow('contributor',
                   'editSelf', 'deleteSelf', 'showSelfNotPublic')
 );
 $acl->allow('contributor', 'Tags', array('autocomplete'));
+// Contributors can add collections, edit or delete their own collections, and see their own non-public collections.
+$acl->allow('contributor',
+            'Collections',
+            array('add', 'delete-confirm', 'editSelf', 'deleteSelf', 'showSelfNotPublic'));
 // Non-authenticated users can access the upgrade script (for logistical reasons).
 $acl->allow(null, 'Upgrade');
 
@@ -81,6 +85,9 @@ $acl->allow(array('super', 'admin', 'contributor', 'researcher'),
     'Users', null, new Omeka_Acl_Assert_User);
 
 $acl->allow(null, 'Items', array('edit', 'delete'),
+    new Omeka_Acl_Assert_Ownership);
+
+$acl->allow(null, 'Collections', array('edit', 'delete'),
     new Omeka_Acl_Assert_Ownership);
 
 $acl->deny('admin', 'ItemTypes', array('delete', 'delete-element'));
