@@ -106,11 +106,11 @@ class Omeka_Form_User extends Omeka_Form
                     )
                 )),
                 array('validator' => 'Db_NoRecordExists', 'options' => array(
-                    'table'     =>  $this->_user->getDb()->Entity, 
+                    'table'     =>  $this->_user->getTable()->getTableName(), 
                     'field'     =>  'email',
                     'exclude'   =>  array(
-                        'field' => 'email',
-                        'value' => (string)$this->_user->email
+                        'field' => 'id',
+                        'value' => (int)$this->_user->id
                     ),
                     'adapter'   =>  $this->_user->getDb()->getAdapter(), 
                     'messages'  =>  array(

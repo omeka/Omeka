@@ -12,7 +12,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Collection extends Omeka_Record
+class Collection extends Omeka_Record implements Zend_Acl_Resource_Interface
 {        
     const COLLECTION_NAME_MIN_CHARACTERS = 1;
     const COLLECTION_NAME_MAX_CHARACTERS = 255;
@@ -186,17 +186,15 @@ class Collection extends Omeka_Record
      * Omeka >= 1.3.  Please use the new syntax, which is simply the string name
      * for the collector.
      * 
-     * @param string|Entity $collector
+     * @param string $collector
      * @return void
      */
     public function addCollector($collector)
     {
         if (is_string($collector)) {
             $collectorName = $collector;
-        } else if ($collector instanceof Entity) {
-            $collectorName = $collector->getName();
         } else {
-            throw new InvalidArgumentException(__("Argument passed to addCollector() must be a string or an instance of Entity."));
+            throw new InvalidArgumentException(__("Argument passed to addCollector() must be a string."));
         }
         $collectorName = trim($collectorName);
         if ($collectorName != '') {
@@ -256,5 +254,18 @@ class Collection extends Omeka_Record
         $boolFilter = new Omeka_Filter_Boolean();
         $this->featured = $boolFilter->filter($this->featured);
         $this->public = $boolFilter->filter($this->public);
+    }
+
+    /**
+     * Required by Zend_Acl_Resource_Interface.
+     *
+     * Identifies Collection records as relating to the Collections ACL
+     * resource.
+     *
+     * @return string
+     */
+    public function getResourceId()
+    {
+        return 'Collections';
     }
 }

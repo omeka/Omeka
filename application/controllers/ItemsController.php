@@ -87,19 +87,8 @@ class ItemsController extends Omeka_Controller_Action
     {
         // Get all the element sets that apply to the item.
         $this->view->elementSets = $this->_getItemElementSets();
-        
-        if ($user = $this->getCurrentUser()) {
-            
-            $item = $this->findById();
-            
-            // If the user cannot edit any given item. Check if they can edit 
-            // this specific item
-            if ($this->isAllowed('edit', $item)) {
-                return parent::editAction();    
-            }
-        }
-        
-        $this->forbiddenAction();
+
+        parent::editAction();
     }
     
     protected function _getAddSuccessMessage($record)
@@ -131,26 +120,7 @@ class ItemsController extends Omeka_Controller_Action
         
         return parent::addAction();
     }
-    
-    /**
-     * Delete an item.
-     *
-     * Wraps the standard deleteAction in permission checks.
-     */
-    public function deleteAction()
-    {
-        if (($user = $this->getCurrentUser())) {
-            $item = $this->findById();
-            
-            // Permission check
-            if ($this->isAllowed('delete', $item)) {
-                return parent::deleteAction();
-            }
-        }
-        
-        $this->_forward('forbidden');
-    }
-    
+
     /**
      * Finds all tags associated with items (used for tag cloud)
      * 

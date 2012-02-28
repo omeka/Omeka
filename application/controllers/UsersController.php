@@ -29,7 +29,6 @@ class UsersController extends Omeka_Controller_Action
         
     public function init() {
         $this->_helper->db->setDefaultModelName('User');
-        $this->_getUserAcl();
         $this->_auth = $this->getInvokeArg('bootstrap')->getResource('Auth');
 
         $this->_handlePublicActions();
@@ -64,22 +63,6 @@ class UsersController extends Omeka_Controller_Action
         }
         $this->view->header = $header;
         $this->view->footer = $footer;
-    }
-
-    /** 
-     * Retrieve the record associated with the user so that it can be checked directly
-     * by the Acl action helper.
-     */
-    private function _getUserAcl()
-    {
-        try {
-            $user = $this->_helper->db->findById();
-        } catch (Omeka_Controller_Exception_404 $e) {
-            return;
-        }
-
-        $this->aclResource = $user;
-        $this->aclRequest = clone $this->getRequest();
     }
     
     /**

@@ -15,7 +15,7 @@ class addSessionsTable extends Omeka_Db_Migration
 {
     public function up()
     {
-        $this->db->execBlock(<<<SQL
+        $this->db->queryBlock(<<<SQL
 CREATE TABLE IF NOT EXISTS `{$this->db->prefix}sessions` (
 `id` char(32),
 `modified` int,

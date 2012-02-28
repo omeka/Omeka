@@ -42,25 +42,13 @@ class Taggable extends Omeka_Record_Mixin
     
     public function deleteTaggings()
     {
-        $id = (int) $this->record->id;
-        
         $db = $this->getDb();
         
-        //What table should we be deleting taggings for
-        $record_type = $this->type;
-        $model_table = $db->$record_type;
-
-        //Delete everything from the taggings table
-        
-        $delete = "
-        DELETE $db->Taggings 
-        FROM $db->Taggings
-        LEFT JOIN $model_table 
-        ON $db->Taggings.relation_id = $model_table.id
-        WHERE $model_table.id = $id 
-        AND $db->Taggings.type = '$record_type'";
-        
-        $db->exec($delete);
+        $db->delete($db->Taggings, array(
+            'relation_id = ?' => (int) $this->record->id,
+            'type = ?' => $this->type
+            )
+        );
     }
     
     /**

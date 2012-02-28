@@ -40,7 +40,7 @@ function get_option($name)
 function set_option($name, $value)
 {
     $db = get_db();
-    $db->exec("REPLACE INTO $db->Option (name, value) VALUES (?, ?)", array($name, $value));
+    $db->query("REPLACE INTO $db->Option (name, value) VALUES (?, ?)", array($name, $value));
 
     //Now update the options hash so that any subsequent requests have it available
     $options = Omeka_Context::getInstance()->getOptions();

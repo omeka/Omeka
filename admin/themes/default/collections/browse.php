@@ -55,12 +55,10 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
                 <?php endif; ?>
                 </td>
                 <td><?php echo link_to_items_in_collection(); ?></td>
-                
-                <?php if (has_permission('Collections', 'edit')): ?>
-                <td>
+                <td><?php if (has_permission(get_current_collection(), 'edit')): ?>
                     <?php echo link_to_collection(__('Edit'), array('class'=>'edit'), 'edit'); ?>
-                </td>
                 <?php endif; ?>
+                </td>
             </tr>
         
             
