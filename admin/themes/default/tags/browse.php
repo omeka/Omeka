@@ -8,15 +8,15 @@ head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodyclass'=
     <p id="tags-nav"><?php echo __('Sort by'); ?>:
         <?php
         $sortOptions = array(
-            'most' => __('Most'),
-            'least' => __('Least'),
-            'alpha' => __('Alphabetical'),
-            'recent' => __('Recent')
+            __('Most') => array('sort_field' => 'count', 'sort_dir' => 'd'),
+            __('Least') => array('sort_field' => 'count'),
+            __('Alphabetical') => array('sort_field' => 'name'),
+            __('Recent') => array('sort_field' => 'time', 'sort_dir' => 'd')
         );
 
-        foreach ($sortOptions as $key => $label) {
-            $uri = html_escape(current_uri(array('sort' => $key)));
-            $class = ($sort == $key) ? ' class="current"' : '';
+        foreach ($sortOptions as $label => $params) {
+            $uri = html_escape(current_uri($params));
+            $class = ($sort == $params) ? ' class="current"' : '';
 
             echo "<a href=\"$uri\"$class>$label</a>";
         }

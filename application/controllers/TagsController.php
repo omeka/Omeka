@@ -117,7 +117,7 @@ class TagsController extends Omeka_Controller_Action
         
         $total_tags = $this->_helper->db->count($count_params);
            
-        $findByParams = array_merge(array('sort' => 'alpha'), 
+        $findByParams = array_merge(array('sort_field' => 'name'), 
                                     $params, 
                                     $perms, 
                                     array('type' => $for));
@@ -133,7 +133,7 @@ class TagsController extends Omeka_Controller_Action
         fire_plugin_hook('browse_tags',  $tags, $for);
         
         $browse_for = $for;
-        $sort = $findByParams['sort'];
+        $sort = array_intersect_key($findByParams, array('sort_field' => '', 'sort_dir' => ''));
         
         $this->view->assign(compact('tags', 'total_tags', 'browse_for', 'sort'));
     }

@@ -15,17 +15,15 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
             array(''=>__('Select Role')) + get_user_roles()); ?>
         <?php echo $this->formSelect('active', @$_GET['active'], array(),
             array(''=>__('Select Status'),  '1'=>__('Active'), '0'=>__('Inactive'))); ?>
-        <?php echo $this->formSelect('sort', @$_GET['sort'], array(),
+        <?php echo $this->formSelect('sort_field', @$_GET['sort_field'], array(),
             array(  ''=>__('Sort By'), 
-                    'first_name'=>__('First Name'),
-                    'last_name'=>__('Last Name'),
-                    'institution'=>__('Institution Name'),
+                    'name'=>__('Real Name'),
                     'role'=>__('Role'),
                     'username'=>__('Username'))); ?>
-        <?php echo $this->formSelect('sortOrder', @$_GET['sortOrder'], array(),
+        <?php echo $this->formSelect('sort_dir', @$_GET['sort_dir'], array(),
             array( ''=>__('Sort Order'),
-                   'asc'=>__('Ascending'),
-                   'desc'=>__('Descending'))); ?>
+                   'a'=>__('Ascending'),
+                   'd'=>__('Descending'))); ?>
                    <input type="submit" class="submit-form" name="submit" value="<?php echo __('Search'); ?>" />
                    
     </fieldset>
