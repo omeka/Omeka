@@ -39,7 +39,7 @@ function link_to($record, $action=null, $text=null, $props = array(), $queryPara
         $url = uri($urlOptions, $route, $queryParams, true);
     }
 
-    if (!$text) {
+    if ($text === null) {
         $text = __('View');
     }
 
