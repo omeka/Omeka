@@ -821,10 +821,10 @@ header nav {
 			margin: 0 0 5px 0;
 			}
 			
-		#search {
-			height: 20px;
-			margin: 0;
-			}
+	.items #search {
+	    height: 20px;
+	    margin: 0;
+	    }
 		
 	#advanced-search-link {
 		float: right;

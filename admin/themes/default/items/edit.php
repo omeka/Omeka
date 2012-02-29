@@ -8,14 +8,6 @@
     $itemTitle = __('Edit Item #%s', item('id')) . $itemTitle;
 ?>
 <?php head(array('title'=> $itemTitle, 'bodyclass'=>'items primary','content_class' => 'vertical-nav'));?>
-<h1 class="section-title"><?php echo $itemTitle; ?></h1>
-	<section id="content" class="container">
-	
-		<div class="two columns">
-			&nbsp;
-		</div>
-		
-		<div class="ten columns">
 
 		<?php include 'form-tabs.php'; // Definitions for all the tabs for the form. ?>
 		
@@ -85,7 +77,5 @@
         </div>
         
     </form>
-
-</div>
 
 <?php foot();?>

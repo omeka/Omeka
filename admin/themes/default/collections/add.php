@@ -2,14 +2,6 @@
 $pageTitle = __('Add a Collection');
 head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
 <h1 class="section-title"><?php echo $pageTitle; ?></h1>
-
-	<section id="content" class="container">
-	
-		<div class="two columns">
-			&nbsp;
-		</div>
-		
-		<div class="ten columns">
 		
 			<form method="post">
 				<?php include 'form.php';?>
@@ -19,5 +11,4 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
 					</div>
 				</div>
 			</form>
-		</div>
 <?php foot(); ?>

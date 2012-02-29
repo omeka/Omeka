@@ -27,19 +27,9 @@ jQuery(document).ready(function () {
 });
 //]]>
 </script>
-<h1 class="section-title"><?php echo $pageTitle; ?></h1>
 
-	<section id="content" class="container">
-	
-		<div class="two columns">
-			&nbsp;
-		</div>
+<?php common('settings-nav'); ?>
+<?php echo flash(); ?>
+<?php echo $this->form; ?>
 		
-		<div class="ten columns">
-
-			<?php common('settings-nav'); ?>
-			<?php echo flash(); ?>
-			<?php echo $this->form; ?>
-		
-		</div>
 <?php foot(); ?>

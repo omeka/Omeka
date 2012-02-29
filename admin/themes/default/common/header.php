@@ -63,3 +63,13 @@
 <section class="container container-twelve">
 
 	<?php echo common('content-nav'); ?>
+	
+	<?php if (isset($title)) : ?>
+	<h1 class="section-title"><?php echo $title ?></h1>
+	<?php endif; ?>
+    
+    <section id="content" class="container">
+    
+    <div class="two columns">&nbsp;</div>
+    
+    <div class="ten columns">

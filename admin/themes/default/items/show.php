@@ -11,16 +11,6 @@
 <?php head(array('title' => $itemTitle, 'bodyclass'=>'items show')); ?>
 
 <?php echo js('items'); ?>
-
-<h1 class="section-title"><?php echo $itemTitle; ?></h1>
-
-	<section id="content" class="container">
-	
-		<div class="two columns">
-			&nbsp;
-		</div>
-		
-		<div class="ten columns">
 		
 			<div id="save" class="three columns omega">
 				
@@ -102,7 +92,5 @@
 			
 		<?php fire_plugin_hook('admin_append_to_items_show_secondary', $item); ?>
 		    </div>
-		
-		</div>
 		
 	<?php foot();?>

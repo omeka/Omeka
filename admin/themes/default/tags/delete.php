@@ -1,15 +1,6 @@
 <?php
 $pageTitle = __('Delete Tag');
 head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodyclass'=>'tags')); ?>
-<h1 class="section-title"><?php echo $pageTitle; ?></h1>
-
-	<section id="content" class="container">
-	
-		<div class="two columns">
-			&nbsp;
-		</div>
-		
-		<div class="ten columns">
 		
 <?php common('tags-nav'); ?>
 <?php echo flash(); ?>
@@ -32,5 +23,5 @@ head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodyclass'=
 <?php else: ?>
     <p><?php echo __('There are no tags to delete. You must first tag some items.'); ?></p>
 <?php endif; ?>
-</div>
+
 <?php foot(); ?>

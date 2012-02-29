@@ -1,15 +1,6 @@
 <?php 
 $pageTitle = __('Browse Collections');
 head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
-<h1 class="section-title"><?php echo $pageTitle; ?> <?php echo __('(%s total)', $total_records); ?></h1>
-
-	<section id="content" class="container">
-	
-		<div class="two columns">
-			&nbsp;
-		</div>
-		
-		<div class="ten columns">
 
 <?php if (has_permission('Collections', 'add')): ?>
     <a href="<?php echo html_escape(uri('collections/add')); ?>" class="small green button"><?php echo __('Add a Collection'); ?></a>

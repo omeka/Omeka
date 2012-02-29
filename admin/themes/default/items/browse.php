@@ -1,16 +1,6 @@
 <?php
 $pageTitle = __('Browse Items');
 head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=>'items primary browse-items')); ?>
-
-<h1 class="section-title"><?php echo $pageTitle; ?> <?php echo __('(%s total)', total_results()); ?></h1>
-
-	<section id="content" class="container">
-	
-		<div class="two columns">
-			&nbsp;
-		</div>
-		
-		<div class="ten columns">
 		
  		   <?php echo flash(); ?>
  		   <?php if ( total_results() ): ?>
@@ -211,8 +201,5 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
 			
 			
 			<?php fire_plugin_hook('admin_append_to_items_browse_primary', $items); ?>
-
-			
-		</div>
 		
 		<?php foot(); ?>

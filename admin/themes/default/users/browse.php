@@ -1,15 +1,7 @@
 <?php
 $pageTitle = __('Browse Users');
 head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'users primary'));?>
-	<h1 class="section-title"><?php echo $pageTitle; ?> <?php echo __('(%s total)', $total_records); ?></h1>
 
-	<section id="content" class="container">
-	
-		<div class="two columns">
-			&nbsp;
-		</div>
-		
-		<div class="ten columns">
 <?php if (has_permission('Users', 'add')): ?>
     <?php echo link_to('users', 'add', __('Add a User'), array('class'=>'small green button')); ?>
 <?php endif; ?>
@@ -93,5 +85,4 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
 			</table>
 			<div class="pagination"><?php echo pagination_links(); ?></div>
 		</form>
-</div>
 <?php foot();?>

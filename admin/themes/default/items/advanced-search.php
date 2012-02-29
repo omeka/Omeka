@@ -5,20 +5,8 @@ if (!$isPartial):
                'bodyclass' => 'advanced-search',
                'bodyid' => 'advanced-search-page'));
 ?>
-<?php if(!is_admin_theme()): ?>
-<?php endif; ?>
-
-<h1 class="section-title"><?php echo $pageTitle; ?></h1>
 
 <?php endif; ?>
-
-	<section id="content" class="container">
-	
-		<div class="two columns">
-			&nbsp;
-		</div>
-		
-		<div class="ten columns">
 
 <?php
 if ($formActionUri):
@@ -179,6 +167,5 @@ $formAttributes['method'] = 'GET';
 </script>
 
 <?php if (!$isPartial): ?>
-</div> <!-- Close 'primary' div. -->
 <?php foot(); ?>
 <?php endif; ?>

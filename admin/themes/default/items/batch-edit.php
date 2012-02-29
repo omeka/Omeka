@@ -6,15 +6,7 @@ if (!$isPartial):
                'bodyid' => 'advanced-search-page'));
 ?>
 
-<h1 class="section-title"><?php echo $title; ?></h1>
 <?php endif; ?>
-	<section id="content" class="container">
-	
-		<div class="two columns">
-			&nbsp;
-		</div>
-		
-		<div class="ten columns">
 		
 <div title="<?php echo $title; ?>">
 <form id="batch-edit-form" action="<?php echo html_escape(uri('items/batch-edit-save')); ?>" method="post" accept-charset="utf-8">
@@ -140,6 +132,5 @@ if (!$isPartial):
     });
 </script>
 <?php if (!$isPartial): ?>
-</div>
 <?php foot(); ?>
 <?php endif; ?>

@@ -1,15 +1,6 @@
 <?php
 $pageTitle = __('Browse Themes');
 head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'themes primary'));?>
-<h1 class="section-title"><?php echo $pageTitle; ?> <?php echo __('(%s total)', count($themes)); ?></h1>
-
-	<section id="content" class="container">
-	
-		<div class="two columns">
-			&nbsp;
-		</div>
-		
-		<div class="ten columns">
 
    			<?php echo flash(); ?>
               
@@ -58,5 +49,4 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
 			    </div>
 			</form>
 
-</div>
 <?php foot(); ?>

@@ -9,15 +9,6 @@
 ?>
 
 <?php head(array('title'=> $collectionTitle, 'bodyclass'=>'collections')); ?>
-<h1 class="section-title"><?php echo $collectionTitle; ?></h1>
-
-	<section id="content" class="container">
-	
-		<div class="two columns">
-			&nbsp;
-		</div>
-		
-		<div class="ten columns">
 		
 		<form method="post">
 			
@@ -46,6 +37,5 @@
 			</div>			
 			
 		</form>
-			
-		</div>
+
 <?php foot(); ?>

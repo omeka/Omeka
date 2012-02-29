@@ -1,15 +1,6 @@
 <?php
 $pageTitle = __('Browse Tags');
 head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodyclass'=>'tags browse-tags primary')); ?>
-<h1 class="section-title"><?php echo $pageTitle; ?> <?php echo __('(%s total)', count($tags)); ?></h1>
-
-	<section id="content" class="container">
-	
-		<div class="two columns">
-			&nbsp;
-		</div>
-		
-		<div class="ten columns">
 			<?php common('tags-nav'); ?>
 			<div id="primary">
 			<?php if ( total_results() ): ?>
@@ -34,5 +25,4 @@ head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodyclass'=
 			<?php else: ?>
 			    <p><?php echo __('There are no tags to display. You must first tag some items.'); ?></p>
 			<?php endif; ?>
-		</div>
 <?php foot(); ?>

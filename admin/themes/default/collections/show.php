@@ -8,15 +8,6 @@
     $collectionTitle = __('Edit Collection #%s', collection('id')) . $collectionTitle;
 ?>
 <?php head(array('title'=> $collectionTitle, 'bodyclass'=>'collections show')); ?>
-<h1 class="section-title"><?php echo $collectionTitle; ?></h1>
-
-	<section id="content" class="container">
-	
-		<div class="two columns">
-			&nbsp;
-		</div>
-		
-		<div class="ten columns">
 
 			<div id="save" class="three columns omega">
 			
@@ -60,7 +51,5 @@
 				<?php fire_plugin_hook('admin_append_to_collections_show_primary', $collection); ?>
 			
 			</div>
-	
-		</div>
 		
 <?php foot(); ?>

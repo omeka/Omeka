@@ -1,21 +1,11 @@
 <?php
 $pageTitle = __('Dashboard');
 head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?>
-
-    <h1 class="section-title">Admin Area</h1>
-    
-    <section id="content" class="container">
-    
-    <div class="two columns">
-    &nbsp;
-    </div>
-    
-    <div class="ten columns">
     
             <section id="stats">
                 <p><?php echo link_to('items', null, __(total_items())); ?></a><br>items</p>
                 <p><?php echo link_to('collections', null, __(total_collections())); ?><br>collections</p>
-                <p><a href="#" >3</a><br>plugins</p>
+                <p><?php echo link_to('plugins', null, __('3')); ?><br>active plugins</p>
                 <p><?php echo link_to('tags', null, __(total_tags())); ?><br>tags</p>
                 <p><?php echo link_to('users', null, __(total_users())); ?><br>users</p>
                 <p><a href="<?php echo html_escape(uri('system-info')); ?>" ><?php echo __('%s', OMEKA_VERSION); ?></a><br>Omeka version</p>
@@ -61,7 +51,5 @@ head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?>
                     ?>
                 <div class="add-new"><p><a class="add-new" href="<?php echo html_escape(uri('items/add')); ?>">Add new item</a></p></div>
             </section>
-
-    </div>
     
 <?php foot(); ?>
