@@ -5,7 +5,7 @@
  * @package Omeka
  */
 
-require_once HELPER_DIR . '/Url.php';
+require_once VIEW_HELPERS_DIR . '/Url.php';
 
 /**
  * 
