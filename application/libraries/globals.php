@@ -319,16 +319,8 @@ function get_plugin_ini($pluginDirName, $iniKeyName)
  */
 function add_file_display_callback($fileIdentifiers, $callback, array $options=array())
 {
-    require_once HELPER_DIR . '/Media.php';
+    require_once VIEW_HELPERS_DIR . '/Media.php';
     Omeka_View_Helper_Media::addMimeTypes($fileIdentifiers, $callback, $options);
-}
-
-/**
- * @deprecated Deprecated since version 1.5.
- */
-function add_mime_display_type($fileIdentifiers, $callback, array $options=array())
-{
-    add_file_display_callback($fileIdentifiers, $callback, $options);
 }
 
 /**
@@ -649,19 +641,6 @@ function release_object(&$var)
         $var->__destruct();
     }
     $var = null;
-}
-
-/**
- * Return either the value passed or, if it's empty, return a default value.
- *
- * @deprecated since 1.5
- * @param mixed $value
- * @param mixed $default
- * @return mixed
- */
-function not_empty_or($value, $default)
-{
-    return !empty($value) ? $value : $default;
 }
 
 /**

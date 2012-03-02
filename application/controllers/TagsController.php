@@ -112,12 +112,11 @@ class TagsController extends Omeka_Controller_Action
         }
         
         //For the count, we only need to check based on permission levels
-        $count_params = array_merge($perms, array('recent' => false, 
-                                                  'type' => $for));
+        $count_params = array_merge($perms, array('type' => $for));
         
         $total_tags = $this->_helper->db->count($count_params);
            
-        $findByParams = array_merge(array('sort' => 'alpha'), 
+        $findByParams = array_merge(array('sort_field' => 'name'), 
                                     $params, 
                                     $perms, 
                                     array('type' => $for));
@@ -133,7 +132,7 @@ class TagsController extends Omeka_Controller_Action
         fire_plugin_hook('browse_tags',  $tags, $for);
         
         $browse_for = $for;
-        $sort = $findByParams['sort'];
+        $sort = array_intersect_key($findByParams, array('sort_field' => '', 'sort_dir' => ''));
         
         $this->view->assign(compact('tags', 'total_tags', 'browse_for', 'sort'));
     }

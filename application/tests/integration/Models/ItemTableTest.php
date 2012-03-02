@@ -53,11 +53,6 @@ class Omeka_Models_ItemTableTest extends PHPUnit_Framework_TestCase
         $this->table->applySearchFilters($featuredSelect, array('featured' => true));
         $this->assertContains("(i.featured = 1)", $featuredSelect->getPart('where'));
 
-		// Test recent filter
-        $recentSelect = $this->table->getSelect();
-        $this->table->applySearchFilters($recentSelect, array('recent' => true));
-        $this->assertContains("i.id DESC", (string)$recentSelect);
-
 		// Test type filter
 		$typeSelect = $this->table->getSelect();
 		$this->table->applySearchFilters($typeSelect, array('type' => '4'));
@@ -77,8 +72,7 @@ class Omeka_Models_ItemTableTest extends PHPUnit_Framework_TestCase
 		$this->assertContains("f.has_derivative_image = '1'", (string)$hasDerivativeImageSelect);
 
 		// Tests random filter
-		$randomSelect = $this->table->getSelect();
-		$this->table->applySearchFilters($randomSelect, array('random' => true));
+		$randomSelect = $this->table->getSelectForFindBy(array('sort_field' => 'random'));
 		$this->assertContains("RAND()", (string)$randomSelect);
     }
 	

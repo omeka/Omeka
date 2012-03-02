@@ -48,7 +48,7 @@ function items_output_uri($output="rss2", $otherParams = array()) {
  */
 function uri($options=array(), $route=null, $queryParams=array(), $reset = false, $encode = true)
 {
-    require_once HELPER_DIR . '/Url.php';
+    require_once VIEW_HELPERS_DIR . '/Url.php';
     $urlHelper = new Omeka_View_Helper_Url;
     return $urlHelper->url($options, $route, $queryParams, $reset, $encode);
 }
@@ -102,15 +102,6 @@ function is_current_uri($link, $req = null) {
 
     if(strlen($link) == 0) return (strlen($current) == 0);
     return ($link == $current) or (strpos($current, $link) === 0);
-}
-
-/**
- * @deprecated Since 1.3
- * @return string
- */
-function file_download_uri(File $file, $format='archive')
-{
-    return file_display_uri($file, $format);
 }
 
 function file_display_uri(File $file, $format='fullsize')

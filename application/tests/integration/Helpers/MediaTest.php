@@ -5,7 +5,7 @@
  * @package Omeka
  */
 
-require_once HELPER_DIR . '/Media.php';
+require_once VIEW_HELPERS_DIR . '/Media.php';
 
 /**
  * 
@@ -26,7 +26,7 @@ class Omeka_View_Helper_MediaTest extends PHPUnit_Framework_TestCase
     
     public function testAddMimeTypes()
     {
-        add_mime_display_type(array('image/jpeg'), 
+        add_file_display_callback(array('image/jpeg'), 
                               array($this, 'mimeTypeCallback'), 
                               array('foo' => 'bar'));
                               

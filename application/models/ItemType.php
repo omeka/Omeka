@@ -63,7 +63,8 @@ class ItemType extends Omeka_Record
     {
         $params = array('type'=>$this->id);
         if ($recent) {
-            $params['recent'] = true;
+            $params['sort_field'] = 'added';
+            $params['sort_dir'] = 'd';
         }
         return $this->getTable('Item')->findBy($params, $count);
     }

@@ -194,18 +194,6 @@ function get_current_collection()
 }
 
 /**
- * Determine whether or not there are any collections in the database.
- *
- * @deprecated since 1.5
- * @since 0.10
- * @return boolean
- */
-function has_collections()
-{
-    return (total_collections() > 0);
-}
-
-/**
  * Determine whether there are any collections to loop through.
  *
  * @since 1.0
@@ -296,7 +284,7 @@ function total_items_in_collection()
  */
 function recent_collections($num = 10)
 {
-    return get_collections(array('recent'=>true), $num);
+    return get_collections(array('sort_field' => 'added', 'sort_dir' => 'd'), $num);
 }
 
 /**

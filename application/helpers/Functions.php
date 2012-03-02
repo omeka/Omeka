@@ -20,29 +20,6 @@ function __v()
 }
 
 /**
- * Simple math for determining whether a number is odd or even
- *
- * @deprecated since 1.5
- * @return bool
- */
-function is_odd($num)
-{
-    return $num & 1;
-}
-
-/**
- * Wrapper for the auto_discovery_link_tags() helper.
- *
- * @since 0.9
- * @uses auto_discovery_link_tags()
- * @return string HTML
- * @deprecated since 1.4
- */
-function auto_discovery_link_tag(){
-    return auto_discovery_link_tags();
-}
-
-/**
  * Output a <link> tag for the RSS feed so the browser can auto-discover the field.
  *
  * @since 1.4

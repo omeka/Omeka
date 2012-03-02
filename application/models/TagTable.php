@@ -52,54 +52,31 @@ class TagTable extends Omeka_Db_Table
             $select->where('t.id = 0');
         }        
     }
-    
+
     /**
-     * Adds an ORDER BY clause to the SELECT statment based on the given criteria
-     * 
-     * @param string|array
-     * @see applySearchFilters()
-     * @return void
+     * Apply custom sorting for tags.
+     *
+     * This also applies the normal, built-in sorting.
+     *
+     * @param Omeka_Db_Select $select
+     * @param string $sortField Sorting field.
+     * @param string $sortDir Sorting direction, suitable for direct
+     *  inclusion in SQL (ASC or DESC).
      */
-    public function sortBy($select, $sortCriteria)
+    public function applySorting($select, $sortField, $sortDir)
     {
-        
-        // make an array of sortCriteria
-        $sortCriteria = (array) $sortCriteria;
-        
-        // if the tags are only sorted by most or least, they need a secondary alphabetical sort
-        if (count($sortCriteria) == 1) {
-            if ($sortCriteria[0] == 'most') {
-                $sortCriteria = array('most', 'alpha');
-            } else if ($sortCriteria[0] == 'least') {
-                $sortCriteria = array('least', 'alpha');
-            } 
+        parent::applySorting($select, $sortField, $sortDir);
+
+        switch ($sortField) {
+            case 'time':
+                $select->order(array("tg.time $sortDir", 't.name ASC'));
+                break;
+            case 'count':
+                $select->order("tagCount $sortDir");
+                break;
+            default:
+                break;
         }
-        
-        // convert sortCriteria into an array of order strings
-        $orderStrings = array();
-        foreach($sortCriteria as $sortCrit) {
-            switch ($sortCrit) {
-                case 'recent':
-                    $orderStrings[] = 'tg.time DESC';
-                    break;
-                case 'alpha':
-                    $orderStrings[] = 't.name ASC';
-                    break;
-                case 'reverse_alpha':
-                    $orderStrings[] = 't.name DESC';
-                    break;
-                case 'most':
-                    $orderStrings[] = 'tagCount DESC';
-                    break;
-                case 'least':
-                    $orderStrings[] = 'tagCount ASC';
-                    break;
-                default:
-                    break;
-            }
-        }
-        
-        $select->order($orderStrings);
     }
     
     /**
@@ -142,11 +119,8 @@ class TagTable extends Omeka_Db_Table
      *
      * @param Omeka_Db_Select 
      * @param array $params
-     *        'sort' => 'recent', 'least', 'most', 'alpha', 'reverse_alpha'
      *        'limit' => integer
      *        'record' => instanceof Omeka_Record
-     *        'entity' => entity_id
-     *        'user' => user_id
      *        'like' => partial_tag_name
      *        'type' => tag_type
      * @return void
@@ -170,10 +144,6 @@ class TagTable extends Omeka_Db_Table
 
         if (array_key_exists('like', $params)) {
             $this->filterByTagNameLike($select, $params['like']);
-        }
-        
-        if (array_key_exists('sort', $params)) {
-            $this->sortBy($select, $params['sort']);
         }
                         
         $select->group("t.id");

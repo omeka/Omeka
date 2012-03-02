@@ -47,10 +47,6 @@ class Omeka_Models_CollectionTableTest extends PHPUnit_Framework_TestCase
         $featuredSelect = new Zend_Db_Select($this->dbAdapter);
         $this->table->applySearchFilters($featuredSelect, array('featured' => true));
         $this->assertContains("(c.featured = 1)", $featuredSelect->getPart('where'));
-        
-        $recentSelect = new Zend_Db_Select($this->dbAdapter);
-        $this->table->applySearchFilters($recentSelect, array('recent' => true));
-        $this->assertContains("c.id DESC", (string)$recentSelect);
     }
     
     public function testFindRandomFeatured()
