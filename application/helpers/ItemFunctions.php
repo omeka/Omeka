@@ -139,18 +139,6 @@ function get_previous_item($item=null)
 }
 
 /**
- * Determine whether or not there are any items in the database.
- *
- * @deprecated since 1.5
- * @since 0.10
- * @return boolean
- */
-function has_items()
-{
-    return (total_items() > 0);
-}
-
-/**
  * @since 0.10
  * @return boolean
  */

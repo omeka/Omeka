@@ -104,15 +104,6 @@ function is_current_uri($link, $req = null) {
     return ($link == $current) or (strpos($current, $link) === 0);
 }
 
-/**
- * @deprecated Since 1.3
- * @return string
- */
-function file_download_uri(File $file, $format='archive')
-{
-    return file_display_uri($file, $format);
-}
-
 function file_display_uri(File $file, $format='fullsize')
 {
     if (!$file->exists()) {

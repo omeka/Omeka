@@ -155,18 +155,6 @@ function loop_files()
 }
 
 /**
- * Determine whether or not there are any files in the database.
- *
- * @deprecated since 1.5
- * @since 1.1
- * @return boolean
- */
-function has_files()
-{
-    return (total_files() > 0);
-}
-
-/**
  * @since 1.1
  * @return boolean
  */

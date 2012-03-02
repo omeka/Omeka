@@ -324,14 +324,6 @@ function add_file_display_callback($fileIdentifiers, $callback, array $options=a
 }
 
 /**
- * @deprecated Deprecated since version 1.5.
- */
-function add_mime_display_type($fileIdentifiers, $callback, array $options=array())
-{
-    add_file_display_callback($fileIdentifiers, $callback, $options);
-}
-
-/**
  * Apply a set of plugin filters to a given value.
  *
  * The first two arguments represent the name of the filter and the value to
@@ -649,19 +641,6 @@ function release_object(&$var)
         $var->__destruct();
     }
     $var = null;
-}
-
-/**
- * Return either the value passed or, if it's empty, return a default value.
- *
- * @deprecated since 1.5
- * @param mixed $value
- * @param mixed $default
- * @return mixed
- */
-function not_empty_or($value, $default)
-{
-    return !empty($value) ? $value : $default;
 }
 
 /**

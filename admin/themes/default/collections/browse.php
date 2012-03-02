@@ -8,7 +8,7 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
 
 <div id="primary">
     <?php echo flash(); ?>
-    <?php if (has_collections()): ?>
+    <?php if (total_collections() > 0): ?>
         <div class="pagination"><?php echo pagination_links(); ?></div>
       <?php if (has_collections_for_loop()): ?>
         <table id="collections" class="simple" cellspacing="0" cellpadding="0">

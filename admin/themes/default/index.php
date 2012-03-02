@@ -93,7 +93,7 @@ head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?>
                 <ul>
                     <?php $key = 0; ?>
                     <?php while(loop_items()): ?>
-                        <li class="<?php echo is_odd($key++) ? 'even' : 'odd'; ?>">
+                        <li class="<?php echo $key++ & 1 ? 'even' : 'odd'; ?>">
                             <?php echo link_to_item();?>
                         </li>   
                     <?php endwhile; ?>
