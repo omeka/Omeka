@@ -270,20 +270,6 @@ class Omeka_Db
             $this->_logger->debug((string) $sql);
         }
     }
-    
-    /**
-     * Compatibility alias for query().
-     *
-     * @see Zend_Db_Adapter::query()
-     * @deprecated Since 4/30/08
-     * @param string|Zend_Db_Select $sql SQL query.
-     * @param array Parameters to bind to query.
-     * @return Zend_Db_Statement
-     */
-    public function exec($sql, $params=array())
-    {    
-        return $this->query($sql, $params);
-    }
 
     /**
      * Execute more than one SQL query at once.
@@ -302,20 +288,6 @@ class Omeka_Db
                 $this->query($query);
             }
         }
-    }
-
-    /**
-     * Execute more than one SQL query at once.
-     *
-     * @deprecated
-     * @param string $sql String containing SQL queries.
-     * @param string $delimiter Character that delimits each SQL query.  Defaults
-     * to semicolon ';'.
-     * @return void
-     */
-    public function execBlock($sql, $delimiter = ';')
-    {
-        $this->queryBlock($sql, $delimiter);
     }
 
     /**
