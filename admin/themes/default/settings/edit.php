@@ -16,5 +16,5 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
 <?php common('settings-nav'); ?>
 <?php echo flash(); ?>
 <?php echo $this->form; ?>
-		
+
 <?php foot();

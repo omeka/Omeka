@@ -31,19 +31,19 @@ jQuery(document).bind('omeka:elementformload', function () {
 
 <div class="seven columns alpha">
 
-	<?php echo flash(); ?>
-	
-	<div id="item-metadata">
-	<?php foreach ($tabs as $tabName => $tabContent): ?>
-	    <?php if (!empty($tabContent)): ?>
-	        <div id="<?php echo text_to_id(html_escape($tabName)); ?>-metadata">
-	        <fieldset class="set">
-	            <h2><?php echo html_escape(__($tabName)); ?></h2>
-	            <?php echo $tabContent; ?>        
-	        </fieldset>
-	        </div>     
-	    <?php endif; ?>
-	<?php endforeach; ?>
-	</div>
+    <?php echo flash(); ?>
+    
+    <div id="item-metadata">
+    <?php foreach ($tabs as $tabName => $tabContent): ?>
+        <?php if (!empty($tabContent)): ?>
+            <div id="<?php echo text_to_id(html_escape($tabName)); ?>-metadata">
+            <fieldset class="set">
+                <h2><?php echo html_escape(__($tabName)); ?></h2>
+                <?php echo $tabContent; ?>        
+            </fieldset>
+            </div>     
+        <?php endif; ?>
+    <?php endforeach; ?>
+    </div>
 
 </div>

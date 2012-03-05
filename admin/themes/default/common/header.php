@@ -29,44 +29,44 @@
 
 <header>
 
-	<div class="container">
-	
-		<div id="site-title" class="one-third column">
-			<?php echo link_to_home_page(settings('site_title'), array('target' => '_blank')); ?>
-		</div>
-	
-		<nav>
-			
-			<?php echo common('global-nav'); ?>
-			
-			<ul id="user-nav">
-			<?php if ($user = current_user()): ?>
-				<?php
-					$name = html_escape($user->name);
-					if (has_permission($user, 'edit')) {
-						$userLink = '<a href="' . html_escape(uri('users/edit/' . $user->id)) . '">' . $name . '</a>';
-					} else {
-						$userLink = $name;
-					}
-				?>
-				<li><?php echo __('Welcome, %s', $userLink); ?></li>
-			    <li><a href="<?php echo html_escape(uri('users/logout'));?>" id="logout"><?php echo __('Log Out'); ?></a></li>
-			<?php endif; ?>
-			</ul>
+    <div class="container">
+    
+        <div id="site-title" class="one-third column">
+            <?php echo link_to_home_page(settings('site_title'), array('target' => '_blank')); ?>
+        </div>
+    
+        <nav>
+            
+            <?php echo common('global-nav'); ?>
+            
+            <ul id="user-nav">
+            <?php if ($user = current_user()): ?>
+                <?php
+                    $name = html_escape($user->name);
+                    if (has_permission($user, 'edit')) {
+                        $userLink = '<a href="' . html_escape(uri('users/edit/' . $user->id)) . '">' . $name . '</a>';
+                    } else {
+                        $userLink = $name;
+                    }
+                ?>
+                <li><?php echo __('Welcome, %s', $userLink); ?></li>
+                <li><a href="<?php echo html_escape(uri('users/logout'));?>" id="logout"><?php echo __('Log Out'); ?></a></li>
+            <?php endif; ?>
+            </ul>
 
-		</nav>
-	
-	</div>
-	
+        </nav>
+    
+    </div>
+    
 </header>
 
 <section class="container container-twelve">
 
-	<?php echo common('content-nav'); ?>
-	
-	<?php if (isset($title)) : ?>
-	<h1 class="section-title"><?php echo $title ?></h1>
-	<?php endif; ?>
+    <?php echo common('content-nav'); ?>
+    
+    <?php if (isset($title)) : ?>
+    <h1 class="section-title"><?php echo $title ?></h1>
+    <?php endif; ?>
     
     <section id="content" class="container">
     

@@ -1,8 +1,8 @@
 <?php 
 $pageTitle = __('Confirm %s Uninstall', $plugin->getDirectoryName());
 head(array('title'=>$pageTitle, 'bodyclass'=>'plugins')); ?>
-		
-	<div class="six columns alpha">
+        
+    <div class="six columns alpha">
     <?php echo flash(); ?>
     <p><strong><?php echo __('Are you sure you want to uninstall this plugin?'); ?></strong></p>
     <?php if ($message): ?>
