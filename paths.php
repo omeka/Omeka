@@ -85,6 +85,7 @@ define('HELPER_DIR',       APP_DIR . '/' . $site['helpers']);
 define('CONFIG_DIR',       APP_DIR . '/' . $site['config']);
 define('LOGS_DIR',         APP_DIR . '/' . $site['logs']);
 define('VIEW_SCRIPTS_DIR', APP_DIR . '/' . $site['views'] . '/' . $site['scripts']);
+define('VIEW_HELPERS_DIR', APP_DIR . '/' . $site['views'] . '/' . $site['helpers']);
 define('UPGRADE_DIR',      APP_DIR . '/' . $site['migrations']);
 define('LANGUAGES_DIR',    APP_DIR . '/' . $site['languages']);
 define('THUMBNAIL_DIR',        ARCHIVE_DIR . '/' . $site['thumbnails']);

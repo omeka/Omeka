@@ -83,7 +83,7 @@ function get_item_by_id($itemId)
  *
  * This could be used on the public theme like so:
  *
- * set_items_for_loop(get_items('tags'=>'foo, bar', 'recent'=>true), 10);
+ * set_items_for_loop(get_items('tags'=>'foo, bar'), 10);
  * while (loop_items()): ....
  *
  * @since 0.10
@@ -136,18 +136,6 @@ function get_previous_item($item=null)
         $item = get_current_item();
     }
     return $item->previous();
-}
-
-/**
- * Determine whether or not there are any items in the database.
- *
- * @deprecated since 1.5
- * @since 0.10
- * @return boolean
- */
-function has_items()
-{
-    return (total_items() > 0);
 }
 
 /**
@@ -492,7 +480,7 @@ function show_item_metadata(array $options = array(), $item=null)
  */
 function recent_items($num = 10)
 {
-    return get_db()->getTable('Item')->findBy(array('recent'=>true), $num);
+    return get_db()->getTable('Item')->findBy(array('sort_field' => 'added', 'sort_dir' => 'd'), $num);
 }
 
 /**
@@ -530,7 +518,7 @@ function total_items()
  */
 function random_featured_items($num = 5, $hasImage = null)
 {
-    return get_items(array('featured'=>1, 'random' => 1, 'hasImage' => $hasImage), $num);
+    return get_items(array('featured'=>1, 'sort_field' => 'random', 'hasImage' => $hasImage), $num);
 }
 
 function display_random_featured_items($num = 5, $hasImage = null)

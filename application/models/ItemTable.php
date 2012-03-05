@@ -258,27 +258,10 @@ class ItemTable extends Omeka_Db_Table
         $select->joinLeft(array('f'=>"$db->File"), 'f.item_id = i.id', array());
         $select->where('f.has_derivative_image = ?', $hasDerivativeImage);
     }
-    
-    public function orderSelectByRecent($select)
-    {
-        $select->order('i.id DESC');
-    }
-    
-    /**
-     * Order SELECT results randomly.
-     *
-     * @param Zend_Db_Select
-     * @return void
-     */
-    public function orderSelectByRandom($select)
-    {
-        $select->order('RAND()');
-    }
 
     /**
      * Possible options: 'public','user','featured','collection','type','tag',
-     * 'excludeTags', 'search', 'recent', 'range', 'advanced', 'hasImage',
-     * 'random'
+     * 'excludeTags', 'search', 'range', 'advanced', 'hasImage',
      * 
      * @param Omeka_Db_Select
      * @param array
@@ -327,16 +310,6 @@ class ItemTable extends Omeka_Db_Table
             $this->filterByRange($select, $params['range']);
         }
         
-        // Order items by recent. @since 11/7/07  ORDER BY must not be in the 
-        // COUNT() query b/c it slows down
-        if (isset($params['recent'])) {
-            $this->orderSelectByRecent($select);
-        }
-
-        if (isset($params['random'])) {
-            $this->orderSelectByRandom($select);
-        }
-        
         //If we returning the data itself, we need to group by the item ID
         $select->group("i.id");
                 
@@ -365,6 +338,10 @@ class ItemTable extends Omeka_Db_Table
                        ->group('i.id')
                        ->order(array("IF(ISNULL(et_sort.text), 1, 0) $sortDir",
                                      "et_sort.text $sortDir"));
+            }
+        } else {
+            if ($sortField == 'random') {
+                $select->order('RAND()');
             }
         }
     }
@@ -463,18 +440,13 @@ class ItemTable extends Omeka_Db_Table
      * @return Item
      */
     public function findRandomFeatured($withImage=true)
-    {        
-        $select = $this->getSelect();
-        
-        $select->limit(1);
-        
-        $params = array('featured' => 1, 'random' => 1);
-
+    {
+        $params = array('featured' => 1, 'sort_field' => 'random');
         if ($withImage) {
             $params['hasImage'] = 1;
         }
-
-        $this->applySearchFilters($select, $params);
+        $select = $this->getSelectForFindBy($params);
+        $select->limit(1);
 
         $item = $this->fetchObject($select);
     

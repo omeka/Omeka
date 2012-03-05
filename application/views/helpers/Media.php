@@ -389,7 +389,7 @@ class Omeka_View_Helper_Media
             // Wrap in a link that will download the file directly.
             $defaultLinkAttributes = array(
                 'class'=>'download-file', 
-                'href'=>file_download_uri($file)
+                'href'=>$file->getWebPath('archive')
                 );
             $linkAttributes = array_key_exists('linkAttributes', $options)
                             ? $options['linkAttributes'] : array();

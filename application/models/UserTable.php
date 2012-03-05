@@ -52,30 +52,5 @@ class UserTable extends Omeka_Db_Table
         if (array_key_exists('active', $params) and $params['active'] !== '') {
             $select->where('u.active = ?', (int)$params['active']);
         }
-        
-        // Sort by role, institution name, first/last name, username.
-        // Order can be ASC or DESC
-        if (array_key_exists('sort', $params)) {
-            $sortOrder = (array_key_exists('sortOrder', $params) 
-                and strtolower($params['sortOrder']) == 'desc') ? 
-                'DESC' : 'ASC';
-            
-            switch ($params['sort']) {
-                case 'role':
-                    $orderClause = 'u.role ' . $sortOrder;
-                    break;
-                case 'name':
-                    $orderClause = 'u.name ' . $sortOrder;
-                    break;
-                case 'username':
-                    $orderClause = 'u.username ' . $sortOrder;
-                    break;
-                default:
-                    # code...
-                    break;
-            }
-            
-            $select->order($orderClause);
-        }
     }
 }

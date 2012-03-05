@@ -48,7 +48,7 @@ class Omeka_View extends Zend_View_Abstract
         // Setting the XHTML1_STRICT doctype fixes validation errors for ZF's form elements
         $this->doctype()->setDoctype('HTML5');
         
-        $this->addHelperPath(HELPER_DIR, 'Omeka_View_Helper');
+        $this->addHelperPath(VIEW_HELPERS_DIR, 'Omeka_View_Helper');
     }
     
     /**

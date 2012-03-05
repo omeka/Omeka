@@ -52,9 +52,13 @@ class Omeka_Controller_Action_Helper_SearchItems extends Zend_Controller_Action_
         
         // set default params
         $params = array();
-        $params['recent'] = true;
         
         $requestParams = $request->getParams();
+
+        if (!array_key_exists('sort_field', $requestParams)) {
+            $params['sort_field'] = 'added';
+            $params['sort_dir'] = 'd';
+        }
         try {            
             foreach($requestParams as $requestParamName => $requestParamValue) {
                 if (is_string($requestParamValue) && trim($requestParamValue) == '') {
@@ -96,16 +100,8 @@ class Omeka_Controller_Action_Helper_SearchItems extends Zend_Controller_Action_
                         $params['excludeTags'] = $requestParamValue;
                     break;
                 
-                    case 'recent':
-                        if (!is_true($requestParamValue)) {
-                            $params['recent'] = false;
-                        }
-                    break;
-                
                     case 'search':
                         $params['search'] = $requestParamValue;
-                        //Don't order by recent-ness if we're doing a search
-                        unset($params['recent']);
                     break;
                 
                     case 'advanced':                    
@@ -130,10 +126,6 @@ class Omeka_Controller_Action_Helper_SearchItems extends Zend_Controller_Action_
 
                     case 'sort_dir':
                         $params['sort_dir'] = $requestParamValue;
-                    break;
-
-                    case 'random':
-                        $params['random'] = is_true($requestParamValue);
                     break;
 
                     case 'hasImage':

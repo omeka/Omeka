@@ -36,7 +36,7 @@ function total_tags()
  */
 function recent_tags($limit = 10)
 {
-    return get_tags(array('recent'=>true), $limit);
+    return get_tags(array('sort_field' => 'time', 'sort_dir' => 'd'), $limit);
 }
 
 /**
@@ -44,7 +44,7 @@ function recent_tags($limit = 10)
  *
  * @since 0.10
  * @see item_tags_as_string()
- * @param string|null $order Options include 'recent', 'most', 'least', 'alpha'.
+ * @param array $params Options for sorting or filtering tags.
  * If null, the tags will display in the order they were added to the database.
  * @param boolean $tagsAreLinked Optional Whether or not to make each tag a link
  * to browse all the items with that tag.  True by default.
@@ -52,12 +52,13 @@ function recent_tags($limit = 10)
  * @param int|null $limit The maximum number of tags to return (get all of the tags if null)
  * @return string
  */
-function item_tags_as_cloud($order = 'alpha', $tagsAreLinked = true, $item=null, $limit=null)
+function item_tags_as_cloud($params = array('sort_field' => 'name'), $tagsAreLinked = true, $item=null, $limit=null)
 {
     if (!$item) {
         $item = get_current_item();
     }
-    $tags = get_tags(array('sort'=>$order, 'record'=>$item), $limit);
+    $params['record'] = $item;
+    $tags = get_tags($params, $limit);
     $urlToLinkTo = ($tagsAreLinked) ? uri('items/browse/tag/') : null;
     return tag_cloud($tags, $urlToLinkTo);
 }
@@ -65,13 +66,11 @@ function item_tags_as_cloud($order = 'alpha', $tagsAreLinked = true, $item=null,
 /**
  * Output the tags for the current item as a string.
  *
- * @todo Should this take a set of parameters instead of $order?  That would be
- * good for limiting the # of tags returned by the query.
  * @since 0.10
  * @see item_tags_as_cloud()
  * @param string $delimiter String that separates each tag.  Default is a comma
  * and space.
- * @param string|null $order Options include 'recent', 'most', 'least', 'alpha'.
+ * @param array $params Options for sorting or filtering tags.
  * If null, the tags will display in the order they were added to the database.
  * @param boolean $tagsAreLinked If tags should be linked or just represented as
  * text.  Default is true.
@@ -79,7 +78,7 @@ function item_tags_as_cloud($order = 'alpha', $tagsAreLinked = true, $item=null,
  * @param int|null $limit The maximum number of tags to return (get all of the tags if null)
  * @return string HTML
  */
-function item_tags_as_string($delimiter = null, $order = 'alpha',  $tagsAreLinked = true, $item=null, $limit=null)
+function item_tags_as_string($delimiter = null, $params = array('sort_field' => 'name'),  $tagsAreLinked = true, $item=null, $limit=null)
 {
     // Set the tag_delimiter option if no delimiter was passed.
     if (is_null($delimiter)) {
@@ -89,7 +88,8 @@ function item_tags_as_string($delimiter = null, $order = 'alpha',  $tagsAreLinke
     if (!$item) {
         $item = get_current_item();
     }
-    $tags = get_tags(array('sort'=>$order, 'record'=>$item), $limit);
+    $params['record'] = $item;
+    $tags = get_tags($params, $limit);
     $urlToLinkTo = ($tagsAreLinked) ? uri('items/browse/tag/') : null;
     return tag_string($tags, $urlToLinkTo, $delimiter);
 }
