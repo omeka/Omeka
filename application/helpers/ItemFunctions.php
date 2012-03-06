@@ -357,7 +357,7 @@ function item_image($imageType, $props = array(), $index = 0, $item = null)
     $width = @$props['width'];
     $height = @$props['height'];
 
-    require_once 'Media.php';
+    require_once VIEW_HELPERS_DIR .  '/Media.php';
     $media = new Omeka_View_Helper_Media;
     return $media->archive_image($imageFile, $props, $width, $height, $imageType);
 }
