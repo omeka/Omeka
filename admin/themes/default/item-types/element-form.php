@@ -5,7 +5,7 @@
 <div class="field" id="existing-element">
     <label for="element-id"><?php echo __('Choose an existing element'); ?></label>
     <div class="inputs">
-    <?php echo select_item_type_elements(array('name'=>'element-id')); ?>
+    <?php echo $this->formSelect('element-id', null, array(), get_table_options('Element', null, array('element_set_name'=>ELEMENT_SET_ITEM_TYPE,'sort'=>'alpha'))); ?>
     </div>
 </div>
 

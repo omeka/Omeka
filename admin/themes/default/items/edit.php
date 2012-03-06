@@ -17,7 +17,7 @@
     <form method="post" enctype="multipart/form-data" id="item-form" action="">
         <?php include 'form.php'; ?>
         <div>
-            <?php echo submit(array('name'=>'submit', 'id'=>'save-changes', 'class'=>'submit'), __('Save Changes')); ?>
+            <?php echo $this->formSubmit('submit', __('Save Changes'), array('id'=>'save-changes', 'class'=>'submit')); ?>
         </div>
     </form>
 

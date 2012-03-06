@@ -24,7 +24,7 @@ if (empty($pathToConvert) && has_permission('Settings', 'edit')): ?>
             </td>
             <td><?php echo $this->formText("order[{$file->id}]", $file->order, array('size' => 3)); ?></td>
             <td class="delete-link">
-                <?php echo checkbox(array('name'=>'delete_files[]'),false,$file->id); ?>
+                <?php echo $this->formCheckbox('delete_files[]', $file->id, array('checked' => false)); ?>
             </td>   
         </tr>
 
@@ -40,8 +40,8 @@ if (empty($pathToConvert) && has_permission('Settings', 'edit')): ?>
     <div class="files">
     <?php $numFiles = (int)@$_REQUEST['add_num_files'] or $numFiles = 1; ?>
     <?php 
-    echo text(array('name'=>'add_num_files','size'=>2),$numFiles);
-    echo submit('add_more_files', 'Add this many files'); 
+    echo $this->formText('add_num_files', $numFiles, array('size' => 2));
+    echo $this->formSubmit('add_more_files', 'Add this many files'); 
     ?>
     </div>
 </div>

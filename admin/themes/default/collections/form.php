@@ -6,7 +6,7 @@
 <div class="field">
     <?php echo $this->formLabel('name', __('Collection Name'), array('class' => 'required')); ?>
     <div class="inputs">
-        <?php echo text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name', 'size'=>'40'),$collection->name); ?>
+        <?php echo $this->formText('name', $collection->name, array('class'=>'textinput', 'size'=>'40')); ?>
     </div>
 <?php echo form_error('name'); ?>
 </div>
@@ -16,7 +16,7 @@
     
 <?php echo form_error('description'); ?>
 <div class="inputs">
-<?php echo textarea(array('name'=>'description', 'class'=>'textinput', 'id'=>'description','rows'=>'10','cols'=>'60'),$collection->description); ?>
+<?php echo $this->formTextarea('description', $collection->description, array('class'=>'textinput', 'rows'=>'10', 'cols'=>'60')); ?>
 </div>
 </div>
 
@@ -34,14 +34,14 @@
 <div class="field">
     <?php echo $this->formLabel('public', __('Public')); ?>
 <?php 
-    echo radio(array('name'=>'public'),array('0'=>__('Not Public'),'1'=>__('Public')), $collection->isPublic());
+    echo $this->formCheckbox('public', $collection->public, array(), array('1', '0'));
 ?>
 </div>
 
 <div class="field">
     <?php echo $this->formLabel('featured', __('Featured')); ?>
 <?php 
-    echo radio(array('name'=>'featured'),array('0'=>__('Not Featured'),'1'=>__('Featured')), $collection->isFeatured()); 
+    echo $this->formCheckbox('featured', $collection->featured, array(), array('1', '0')); 
 ?>
 </div>  
 

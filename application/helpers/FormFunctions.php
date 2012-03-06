@@ -497,6 +497,21 @@ function _select_from_table($tableClass, $props = array(), $value = null, $label
     return select($props, $options, $value, $label);
 }
 
+function label_options($options, $labelOption = null)
+{
+    if ($labelOption === null) {
+        $labelOption = __('Select Below ');
+    }
+    return array('' => $labelOption) + $options;
+}
+
+function get_table_options($tableClass, $labelOption = null, $searchParams = array())
+{
+    $options = get_db()->getTable($tableClass)->findPairsForSelectForm($searchParams);
+    $options = apply_filters(Inflector::underscore($tableClass) . '_select_options', $options);
+    return label_options($options, $labelOption);
+}
+
 /**
  * Creates a form containing a single button.
  *

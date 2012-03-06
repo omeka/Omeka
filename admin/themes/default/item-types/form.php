@@ -17,9 +17,9 @@ jQuery(document).ready(function () {
     <legend><?php echo __('Item Type Information'); ?> <span id="required-note">* <?php echo __('Required Fields'); ?></span></legend>
     
     <div class="field">
-        <?php echo label(array('name'=>'name', 'class' => 'required'), __('Name')); ?>
+        <?php echo $this->formLabel('name', __('Name'), array('class' => 'required')); ?>
         <div class="inputs">
-        <?php echo text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name'),$itemtype->name); ?>
+        <?php echo $this->formText('name', $itemtype->name, array('class'=>'textinput')); ?>
         </div>
     </div>
     <div class="field">

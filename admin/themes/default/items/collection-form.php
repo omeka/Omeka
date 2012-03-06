@@ -1,7 +1,14 @@
 <div class="field">
-<?php echo label('collection-id', __('Collection'));?>
+<?php echo $this->formLabel('collection-id', __('Collection'));?>
 <div class="inputs">
-    <?php echo select_collection(array('name'=>'collection_id', 'id'=>'collection-id'),$item->collection_id); ?>
+    <?php
+        echo $this->formSelect(
+            'collection_id',
+            $item->collection_id,
+            array('id' => 'collection-id'),
+            get_table_options('Collection')
+        );
+    ?>
 </div>
 </div>
 
