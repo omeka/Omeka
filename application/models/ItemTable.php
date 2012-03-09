@@ -428,28 +428,4 @@ class ItemTable extends Omeka_Db_Table
         
         return $this->fetchObject($select);
     }
-    
-    /**
-     * Finds a random featured item.
-     *
-     * @deprecated Since 1.4.
-     * @see findBy There are parameters for returning items randomly and with
-     * derivative images as of version 1.4.
-     *
-     * @param bool $withImage Whether to find an item with a derivative image.
-     * @return Item
-     */
-    public function findRandomFeatured($withImage=true)
-    {
-        $params = array('featured' => 1, 'sort_field' => 'random');
-        if ($withImage) {
-            $params['hasImage'] = 1;
-        }
-        $select = $this->getSelectForFindBy($params);
-        $select->limit(1);
-
-        $item = $this->fetchObject($select);
-    
-        return $item;
-    }
 }

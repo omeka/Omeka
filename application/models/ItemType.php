@@ -20,27 +20,10 @@ class ItemType extends Omeka_Record
     public $description = '';
 
     protected $_related = array('Elements' => 'getElements',
-                                'Items'=>'getItems',
-                                'ItemTypesElements'=>'loadOrderedChildren');
+                                'Items'=>'getItems');
 
     private $_elementsToSave = array();
     private $_elementsToRemove = array();
-
-    protected function _initializeMixins()
-    {
-        // For future reference, these arguments mean:
-        // 1) the current object
-        // 2) the name of the model that represents the 'child' objects, otherwise
-        // known as the ordered set belonging to this object.
-        // 3) the foreign key in that model that corresponds to the primary key in this model
-        // 4) The name for the part of the form that contains info about how
-        // these child objects are ordered. The post for this model's form should
-        // always contain the 'Elements' key with a subkey called 'order', so that
-        // the array looks something like this: $_POST['Elements'][0]['order'] = 1, etc.
-        // NOTE: this has been changed to 'fooobar' in order to circumvent using
-        // Orderable::afterSaveForm() in favor of ItemType::_reorderElementsFromPost().
-        $this->_mixins[] = new Orderable($this, 'ItemTypesElements', 'item_type_id', 'fooobar');
-    }
 
     /**
      * Returns an array of element objects associated with this item type.
@@ -170,7 +153,12 @@ class ItemType extends Omeka_Record
      */
     public function reorderElements($elementOrderingArray)
     {
-        $joinRecordArray = $this->loadOrderedChildren();
+        $table = $this->getDb()->getTable('ItemTypesElements');
+        $select = $table->getSelect()
+                ->where('ite.item_type_id = ?')
+                ->order('ite.order ASC');
+
+        $joinRecordArray = $table->fetchObjects($select, $this->id);
 
         if (count($elementOrderingArray) > count($joinRecordArray)) {
             throw new Omeka_Record_Exception(__('There are too many values in the element ordering array.'));
@@ -253,7 +241,10 @@ class ItemType extends Omeka_Record
             $iteJoin->element_id = $elementId;
             $iteJoin->item_type_id = $this->id;
             // 'order' should be last by default.
-            $iteJoin->order = $this->getChildCount() + 1;
+            $table = $this->getDb()->getTable('ItemTypesElements');
+            $select = $table->getSelectForCount()
+                    ->where('ite.item_type_id = ?');
+            $iteJoin->order = (int) $table->fetchOne($select, array($this->id)) + 1;
             $iteJoin->forceSave();
         }
     }
@@ -338,9 +329,6 @@ class ItemType extends Omeka_Record
             throw new Omeka_Record_Exception(__('Item type does not contain an element with the ID %s!', $elementId));
         }
         $iteJoin->delete();
-
-        // Deleting one of the joins throws the whole thing out of whack, so we need to reset the ordering.
-        $this->reorderChildren();
     }
 
      /**

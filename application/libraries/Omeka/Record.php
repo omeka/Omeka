@@ -306,20 +306,6 @@ abstract class Omeka_Record implements ArrayAccess
     }
     
     /**
-     * Fire a plugin hook associated with the given event.
-     * 
-     * @deprecated
-     * @see Omeka_Record::runCallbacks()
-     * @param string $event Underscore-separated event name.
-     * @return void
-     */
-    protected function firePlugin($event)
-    {
-        $hook = $event . '_' . strtolower(get_class($this));
-        fire_plugin_hook($hook, $this);
-    }
-    
-    /**
      * Add a value to the record-specific cache.
      * 
      * @param mixed $value
