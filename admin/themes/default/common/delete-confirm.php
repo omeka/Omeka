@@ -5,15 +5,6 @@ $pageTitle = __('Delete %s', Inflector::titleize($class));
 if (!$isPartial):
 head(array('title' => $pageTitle));
 ?>
-<h1 class="section-title"><?php echo $pageTitle; ?></h1>
-
-    <section id="content" class="container">
-    
-        <div class="two columns">
-            &nbsp;
-        </div>
-        
-        <div class="ten columns">
 
 <?php endif; ?>
 
