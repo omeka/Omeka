@@ -75,21 +75,4 @@ class Omeka_Models_ItemTableTest extends PHPUnit_Framework_TestCase
 		$randomSelect = $this->table->getSelectForFindBy(array('sort_field' => 'random'));
 		$this->assertContains("RAND()", (string)$randomSelect);
     }
-	
-    public function testFindRandomFeaturedDefault()
-    {
-        $featuredItem = $this->table->findRandomFeatured();
-        $query = $this->dbAdapter->getProfiler()->getLastQueryProfile()->getQuery();
-		$this->assertContains("LEFT JOIN omeka_files AS f ON f.item_id = i.id", $query);
-    	$this->assertContains("(i.featured = 1)", $query);
-    	$this->assertContains("(f.has_derivative_image = '1')", $query);
-    	
-    }
-    
-    public function testFindRandomFeaturedWithoutImage()
-    {
-        $featuredItem = $this->table->findRandomFeatured(false);
-        $query = $this->dbAdapter->getProfiler()->getLastQueryProfile()->getQuery();
-    	$this->assertContains("(i.featured = 1)", $query);
-    }
 }
