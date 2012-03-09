@@ -6,7 +6,7 @@
  */
 
 /**
- *
+ * Initializes controller action helpers.
  *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
@@ -15,33 +15,23 @@ class Omeka_Core_Resource_Helpers extends Zend_Application_Resource_ResourceAbst
 {
     public function init()
     {
-        $this->getBootstrap()->bootstrap('Db');
         $this->_initDbHelper();
-        $this->initializeActionHelpers();
+        $this->_initViewRenderer();
+        $this->_initResponseContexts();
         $this->_initAclHelper();
+
+        Zend_Controller_Action_HelperBroker::addPrefix('Omeka_Controller_Action_Helper');
     }
 
     private function _initDbHelper()
     {
+        $this->getBootstrap()->bootstrap('Db');
         $dbHelper = new Omeka_Controller_Action_Helper_Db(
             $this->getBootstrap()->getResource('Db'));
         Zend_Controller_Action_HelperBroker::addHelper($dbHelper);
     }
 
-    private function initializeActionHelpers()
-    {
-        $this->initViewRenderer();
-        $this->initResponseContexts();
-        $this->initSearchHelper();
-    }
-
-    private function initSearchHelper()
-    {
-        $searchHelper = new Omeka_Controller_Action_Helper_SearchItems;
-        Zend_Controller_Action_HelperBroker::addHelper($searchHelper);
-    }
-
-    private function initViewRenderer()
+    private function _initViewRenderer()
     {
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
         $view = new Omeka_View();
@@ -73,7 +63,7 @@ class Omeka_Core_Resource_Helpers extends Zend_Application_Resource_ResourceAbst
      *
      * @return void
      */
-    private function initResponseContexts()
+    private function _initResponseContexts()
     {
         Zend_Controller_Action_HelperBroker::addHelper(new Omeka_Controller_Action_Helper_ContextSwitch);
         $contexts = Zend_Controller_Action_HelperBroker::getStaticHelper('contextSwitch');

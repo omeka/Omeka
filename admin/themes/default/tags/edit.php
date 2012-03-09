@@ -7,7 +7,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodyclass'=
 <?php if (count($tags)): ?>    
 <form method="post" action="">
     <div class="field">
-    <?php echo label('old_tag',__('Choose a tag to rename')); ?>
+    <?php echo $this->formLabel('old_tag',__('Choose a tag to rename')); ?>
     <div class="inputs">
         <select name="old_tag" id="old_tag">
         <?php foreach($tags as $key => $tag): ?>

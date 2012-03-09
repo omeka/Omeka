@@ -16,25 +16,32 @@
                 
                 <div id="save" class="three columns omega panel">
                     
-                    <?php echo submit(array('name'=>'submit', 'id'=>'save-changes', 'class'=>'big green button'), __('Save Changes')); ?>
+                    <?php echo $this->formSubmit('submit', __('Save Changes'), array('id'=>'save-changes', 'class'=>'submit big green button')); ?>
                     <a href="<?php echo html_escape(public_uri('items/show/'.item('id'))); ?>" class="big blue button" target="_blank">View Public Page</a>
                     <?php echo link_to_item(__('Delete Item'), array('class' => 'big red button'), 'delete-confirm'); ?>
         
                     <div id="public-featured">
                         <?php if ( has_permission('Items', 'makePublic') ): ?>
                                 <label for="public"><?php echo __('Public'); ?>:</label> 
-                                <?php echo checkbox(array('name'=>'public', 'id'=>'public'), $item->public); ?>
+                                <?php echo $this->formCheckbox('public', $item->public, array(), array('1', '0')); ?>
                         <?php endif; ?>
                         <?php if ( has_permission('Items', 'makeFeatured') ): ?>
                                 <label for="featured"><?php echo __('Featured'); ?>:</label> 
-                                <?php echo checkbox(array('name'=>'featured', 'id'=>'featured'), $item->featured); ?>
+                                <?php echo $this->formCheckbox('featured', $item->featured, array(), array('1', '0')); ?>
                         <?php endif; ?>
                     </div>
                     
                         <div id="collection-form" class="field">
-                            <?php echo label('collection-id', __('Collection'));?>
+                            <?php echo $this->formLabel('collection-id', __('Collection'));?>
                             <div class="inputs">
-                                <?php echo select_collection(array('name'=>'collection_id', 'id'=>'collection-id'),$item->collection_id); ?>
+                                <?php
+                                    echo $this->formSelect(
+                                        'collection_id',
+                                        $item->collection_id,
+                                        array('id' => 'collection-id'),
+                                        get_table_options('Collection')
+                                    );
+                                ?>
                             </div>
                         </div>
                         
@@ -73,9 +80,5 @@
                         </div>                    
             
                     </div>
-        
-        </div>
-        
-    </form>
 
 <?php foot();?>

@@ -39,220 +39,6 @@ function _tag_attributes($attributes, $value=null)
 }
 
 /**
- * Make a label for a form element.
- *
- * @since 0.9
- * @deprecated deprecated since 1.2
- * @param mixed $attributes An array of attributes, or just the string id to be used in the 'for' attribute
- * @param string $text Text of the form label
- * @return string
- */
-function label($attributes, $text)
-{
-    if (is_string($attributes)) {
-        $name = $attributes;
-        $attributes = array();
-    } else if (is_array($attributes)) {
-       $name = $attributes['name'];
-    } else if (!$attributes) {
-        $attributes = array();
-    }
-    return __v()->formLabel($name, $text, $attributes);
-}
-
-/**
- * Make a text form input.
- *
- * @internal Facade for Zend_View_Helper_FormText.  This maintains the
- * signature from prior versions for backward compatibility.
- * @since 0.9
- * @deprecated deprecated since 1.2
- * @param array $attributes Set of XHTML attributes for the form input.
- * @param string|null $default
- * @param string|null $label
- * @param array $labelAttributes Since 1.2. Optional XHTML attributes for the label.
- * @return string HTML for the form element
- */
-function text($attributes, $default=null, $label = null, $labelAttributes = array())
-{
-    $html = '';
-    if($label) {
-        // This is a hack to only apply the 'class' attribute to the input
-        // and not to the label
-        $labelAttributes['for'] = $attributes['name'];
-        $html .= __v()->formLabel($attributes['name'], $label, $labelAttributes);
-    }
-
-    $html .= __v()->formText($attributes['name'], $default, $attributes);
-    return $html;
-}
-
-/**
- * Make a password form input.
- *
- * @internal Facade for Zend_View_Helper_FormPassword.
- * @since 0.9
- * @deprecated deprecated since 1.2
- * @param array $attributes XHTML attributes for the password input.
- * @param string|null $default Optional
- * @param string|null $label Optional
- * @param array $labelAttributes Since 1.2. Optional XHTML attributes for the label
- * @return string
- */
-function password($attributes, $default=null, $label = null, $labelAttributes = array())
-{
-    $html = '';
-    if ($label) {
-        $labelAttributes['for'] = $attributes['name'];
-        $html .= __v()->formLabel($attributes['name'], $label, $attributes);
-    }
-    $html .= __v()->formPassword($attributes['name'], $default, $attributes);
-    return $html;
-}
-
-/**
- * Make a select form input.
- *
- * This will add 'Select Below' as the first (empty) element in the list of
- * values.
- *
- * @internal Facade for Zend_View_Helper_FormSelect.
- * @since 0.9
- * @deprecated deprecated since 1.2
- * @param array $attributes Set of XHTML attributes for the form input.
- * @param array|null $values Optional
- * @param string|null $default Optional
- * @param string|null $label Optional
- * @param array $labelAttributes Since 1.2. Optional XHTML attributes for the label
- * @return string
- */
-function select($attributes, $values = null, $default = null, $label=null, $labelAttributes = array())
-{
-    $html = '';
-    //First option is always the "Select Below" empty entry
-    $values = (array) $values;
-    $values = array('' => __('Select Below ')) + $values;
-    //Duplication
-    if ($label) {
-        $labelAttributes['for'] = $attributes['name'];
-        $html .= __v()->formLabel($attributes['name'], $label, $labelAttributes);
-    }
-    $html .= __v()->formSelect($attributes['name'], $default, $attributes, $values);
-    return $html;
-}
-
-/**
- * Make a textarea form input.
- *
- * @internal Facade for Zend_View_Helper_FormTextarea.
- * @since 0.9
- * @deprecated deprecated since 1.2
- * @param array $attributes Set of XHTML attributes for the form input.
- * @param string|null $default Optional
- * @param string|null $label Optional
- * @param array $labelAttributes Since 1.2. Optional XHTML attributes for the label.
- * @return string
- */
-function textarea($attributes, $default = null, $label = null, $labelAttributes = array())
-{
-    $html = '';
-    if ($label) {
-        $labelAttributes['for'] = $attributes['name'];
-        $html .= __v()->formLabel($attributes['name'], $label, $labelAttributes);
-    }
-    $html .= __v()->formTextarea($attributes['name'], $default, $attributes);
-    return $html;
-}
-
-/**
- * Make a form input that is a set of radio buttons.
- *
- * @internal Facade for Zend_View_Helper_FormRadio.
- * @since 0.9
- * @deprecated deprecated since 1.2
- * @param array $attributes Set of XHTML attributes for the inputs.
- * @param array $values Key => value of the radio button, Value => label for the
- * radio button.
- * @param string|null $default Optional
- * @param string $label_class Optional Defaults to 'radiolabel'.
- * @return string HTML
- */
-function radio($attributes, array $values, $default = null, $label_class = 'radiolabel')
-{
-    $attributes['label_class'] = $label_class;
-    return __v()->formRadio($attributes['name'], $default, $attributes, $values, null);
-}
-
-/**
- * Make a hidden form input.
- *
- * @since 0.9
- * @deprecated deprecated since 1.2
- * @param array $attributes Set of XHTML attributes for the form input.
- * @param string $value
- * @return string
- */
-function hidden($attributes, $value)
-{
-    $input = '<input type="hidden"';
-    if (!empty($attributes)) {
-        $input .= ' '._tag_attributes($attributes);
-    }
-    $input .= ' value="'.html_escape($value).'"';
-    $input .= ' />' . "\n";
-    return $input;
-}
-
-/**
- * Make a checkbox form input.
- *
- * @internal Facade for Zend_View_Helper_FormCheckbox.
- * @since 0.9
- * @deprecated deprecated since 1.2
- * @param array $attributes XHTML attributes for the input.
- * @param boolean|null $checked Whether or not it should be checked by default.
- * @param string|null $value Optional Defaults to 1.
- * @param string|null $label Optional
- * @param array $labelAttributes Since 1.2. Optional XHTML attributes for the label.
- * @return string
- */
-function checkbox($attributes, $checked = FALSE, $value=null, $label = null, $labelAttributes = array())
-{
-    if ($checked !== null) {
-        $attributes['checked'] = $checked;
-    }
-    $html = __v()->formCheckbox($attributes['name'], $value, $attributes);
-    if ($label) {
-        $labelAttributes['for'] = $attributes['name'];
-        $html .= __v()->formLabel($attributes['name'], $label, $labelAttributes);
-    }
-    return $html;
-}
-
-/**
- * Make a submit form input.
- *
- * @since 0.9
- * @deprecated deprecated since 1.2
- * @param array $attributes XHTML attributes.
- * @param string $value Optional Defaults to 'Submit'.
- * @return string
- */
-function submit($attributes, $value = null)
-{
-    if (!$value) {
-        $value = __('Submit');
-    }
-
-    // This is a hack that makes this work.
-    $otherAttribs = array();
-    if (is_array($attributes)) {
-        $otherAttribs = $attributes;
-    }
-    return __v()->formSubmit($attributes, $value, $otherAttribs);
-}
-
-/**
  * Make a simple search form for the items.
  *
  * Contains a single fieldset with a text input and submit button.
@@ -369,132 +155,33 @@ function form_error($field)
 }
 
 /**
- * @since 0.10
- * @param array $props Optional
- * @param mixed $value Optional
- * @param string|null $label Optional
- * @param array $search Optional
- * @uses _select_from_table()
- * @return string
- */
-function select_user($props = array(), $value=null, $label=null, $search = array())
-{
-    return _select_from_table('User', $props, $value, $label, $search);
-}
-
-/**
- * Select the Item Type for the current Item.
+ * Adds the "Select Below" or other label option to a set of select
+ * options.
  *
- * This probably won't be used by theme writers because it only applies to the
- * items form.
- *
- * @since 0.10
- * @param array
- * @param Item|null Check for this specific item record (current item if null).
- * @return string HTML for the form input.
+ * @param array $options
+ * @param string|null $labelOption
+ * @return array
  */
-function select_item_type_for_item($props=array(), $item=null)
+function label_options($options, $labelOption = null)
 {
-    if (!$item) {
-        $item = get_current_item();
+    if ($labelOption === null) {
+        $labelOption = __('Select Below ');
     }
-    return select_item_type($props, $item->item_type_id);
+    return array('' => $labelOption) + $options;
 }
 
 /**
- * @since 0.10
- * @param array $props Optional
- * @param string|null $value Optional
- * @param string|null $label Optional
- * @param array $search Optional
- * @return string
- */
-function select_collection($props = array(), $value=null, $label=null, $search = array())
-{
-    return _select_from_table('Collection', $props, $value, $label, $search);
-}
-
-/**
- * @since 0.10
- * @param array $props Optional XHTML attributes for the select.
- * @param mixed $value Optional Default value of the select.
- * @param string|null $label Optional Label for the select.
- * @param array $search Optional Search parameters for the data being displayed.
- * @see ElementTable::applySearchFilters()
- * @return string HTML
- */
-function select_element($props = array(), $value = null, $label=null, $search = array('record_types'=>array('All')))
-{
-    return _select_from_table('Element', $props, $value, $label, $search);
-}
-
-/**
- * Use this to choose an item type from a <select>.
+ * Get the options array for a given table.
  *
- * @since 0.10
- * @uses ItemTypeTable::findAllForSelectForm()
- * @param array
- * @param string Selected value
- * @return string HTML
+ * @param string $tableClass
+ * @param string $labelOption
+ * @param array $searchParams Optional search parameters on table.
  */
-function select_item_type($props=array(), $value=null, $label=null)
-{
-    return _select_from_table('ItemType', $props, $value, $label);
-}
-
-/**
- * Used primarily within the admin theme to build a <select> form input containing
- * the names and IDs of all elements that belong to the Item Type element set.
- *
- * Not meant to used by theme writers, possibly useful for plugin writers.
- *
- * @since 0.10
- * @param array
- * @param string|integer Optional value of the selected option.
- * @param string|null Optional Label for the form input.
- * @return string HTML
- */
-function select_item_type_elements($props = array(), $value = null, $label = null)
-{
-    $searchParams = array(
-        'element_set_name'=>ELEMENT_SET_ITEM_TYPE,
-        'sort'=>'alpha');
-    return _select_from_table('Element', $props, $value, $label, $searchParams);
-}
-
-/*
- * Used primarily in edit item type form to build a select form input containing
- * the names and IDs of all the data types.
- *
- * @since 1.2
- * @param array $props Optional
- * @param string $value Optional
- * @param string $label Optional
- * @return string HTML for selecting a data type.
- */
-function select_data_types($props = array(), $value = null, $label = null)
-{
-    $searchParams = array();
-    return _select_from_table('DataType', $props, $value, $label, $searchParams);
-}
-
-/**
- * @since 0.10
- * @internal Since select() is deprecated as of version 1.2, we will need to update
- * this function to use Zend Form.
- * @param string $tableClass Name of the table class to pull from.
- * @param array $props Optional XHTML attributes for the select input.
- * @param mixed $value Optional Value of the select input.
- * @param string|null $label Optional Label for the select input.
- * @param array $searchParams Optional Search parameters to filter the list of
- * parameters that are displayed.
- * @return string HTML for a <select> input.
- */
-function _select_from_table($tableClass, $props = array(), $value = null, $label = null, $searchParams = array())
+function get_table_options($tableClass, $labelOption = null, $searchParams = array())
 {
     $options = get_db()->getTable($tableClass)->findPairsForSelectForm($searchParams);
     $options = apply_filters(Inflector::underscore($tableClass) . '_select_options', $options);
-    return select($props, $options, $value, $label);
+    return label_options($options, $labelOption);
 }
 
 /**

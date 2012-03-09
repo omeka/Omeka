@@ -29,13 +29,16 @@ $formAttributes['method'] = 'GET';
 
     <form <?php echo _tag_attributes($formAttributes); ?>>
         <div id="search-keywords" class="field">
-            <?php echo label('keyword-search', __('Search for Keywords')); ?>
+            <?php echo $this->formLabel('keyword-search', __('Search for Keywords')); ?>
             <div class="inputs">
-            <?php echo text(array(
-                    'name' => 'search',
-                    'size' => '40',
-                    'id' => 'keyword-search',
-                    'class' => 'textinput'), @$_REQUEST['search']); ?>
+            <?php
+                echo $this->formText(
+                    'search',
+                    @$_REQUEST['search'],
+                    array('id' => 'keyword-search', 'size' => '40',
+                        'class' => 'textinput')
+                );
+            ?>
             </div>
         </div>
         <div id="search-narrow-by-fields" class="field">
@@ -60,25 +63,33 @@ $formAttributes['method'] = 'GET';
                     //[type] = 'contains'
                     //[terms] = 'foobar'
                     //etc
-                    echo select_element(
-                        array('name' => "advanced[$i][element_id]"),
+                    echo $this->formSelect(
+                        "advanced[$i][element_id]",
                         @$rows['element_id'],
-                        null,
-                        array('record_types' => array('Item', 'All'),
-                              'sort' => 'alphaBySet'));
-                    echo select(
-                        array('name' => "advanced[$i][type]"),
-                        array('contains' => __('contains'),
-                              'does not contain' => __('does not contain'),
-                              'is exactly' => __('is exactly'),
-                              'is empty' => __('is empty'),
-                              'is not empty' => __('is not empty')),
-                        @$rows['type']
+                        array(),
+                        get_table_options('Element', null, array(
+                            'record_types' => array('Item', 'All'),
+                            'sort' => 'alphaBySet')
+                        )
                     );
-                    echo text(
-                        array('name' => "advanced[$i][terms]",
-                              'size' => 20),
-                        @$rows['terms']); ?>
+                    echo $this->formSelect(
+                        "advanced[$i][type]",
+                        @$rows['type'],
+                        array(),
+                        label_options(array(
+                            'contains' => __('contains'),
+                            'does not contain' => __('does not contain'),
+                            'is exactly' => __('is exactly'),
+                            'is empty' => __('is empty'),
+                            'is not empty' => __('is not empty'))
+                        )
+                    );
+                    echo $this->formText(
+                        "advanced[$i][terms]",
+                        @$rows['terms'],
+                        array('size' => '20')
+                    );
+                    ?>
                     <button type="button" class="remove_search" disabled="disabled" style="display: none;">-</button>
                 </div>
             <?php endforeach; ?>
@@ -87,78 +98,108 @@ $formAttributes['method'] = 'GET';
         </div>
 
         <div id="search-by-range" class="field">
-            <label for="range"><?php echo __('Search by a range of ID#s (example: 1-4, 156, 79)'); ?></label>
+            <?php echo $this->formLabel('range', __('Search by a range of ID#s (example: 1-4, 156, 79)')); ?>
             <div class="inputs">
-            <?php echo text(
-                    array('name' => 'range',
-                          'size' => '40',
-                          'class' => 'textinput'),
-                    @$_GET['range']); ?>
+            <?php
+                echo $this->formText('range', @$_GET['range'],
+                    array('size' => '40', 'class' => 'textinput')
+                );
+            ?>
             </div>
         </div>
 
         <div id="search-selects">
             <div class="field">
-                <?php echo label('collection-search', __('Search By Collection')); ?>
-                <div class="inputs"><?php
-                    echo select_collection(array(
-                        'name' => 'collection',
-                        'id' => 'collection-search'
-                    ), @$_REQUEST['collection']); ?>
+                <?php echo $this->formLabel('collection-search', __('Search By Collection')); ?>
+                <div class="inputs">
+                <?php
+                    echo $this->formSelect(
+                        'collection',
+                        @$_REQUEST['collection'],
+                        array('id' => 'collection-search'),
+                        get_table_options('Collection')
+                    );
+                ?>
                 </div>
             </div>
 
             <div class="field">
-                <?php echo label('item-type-search', __('Search By Type')); ?>
-                <div class="inputs"><?php
-                    echo select_item_type(array('name'=>'type', 'id'=>'item-type-search'),
-                        @$_REQUEST['type']); ?>
+                <?php echo $this->formLabel('item-type-search', __('Search By Type')); ?>
+                <div class="inputs">
+                <?php
+                    echo $this->formSelect(
+                        'type',
+                        @$_REQUEST['item-type-search'],
+                        array('id' => 'item-type-search'),
+                        get_table_options('ItemType')
+                    );
+                ?>
                 </div>
             </div>
 
             <?php if(has_permission('Users', 'browse')): ?>
             <div class="field">
             <?php
-                echo label('user-search', __('Search By User'));?>
-                <div class="inputs"><?php
-                    echo select_user(array(
-                            'name' => 'user',
-                            'id' => 'user-search'),
-                        @$_REQUEST['user']);?>
+                echo $this->formLabel('user-search', __('Search By User'));?>
+                <div class="inputs">
+                <?php
+                    echo $this->formSelect(
+                        'user',
+                        @$_REQUEST['user'],
+                        array('id' => 'user-search'),
+                        get_table_options('User')
+                    );
+                ?>
                 </div>
             </div>
             <?php endif; ?>
 
             <div class="field">
-                <?php echo label('tag-search', __('Search By Tags')); ?>
-                <div class="inputs"><?php
-                    echo text(array(
-                        'name' => 'tags',
-                        'size' => '40',
-                        'id' => 'tag-search',
-                        'class'=>'textinput'),
-                    @$_REQUEST['tags']); ?>
+                <?php echo $this->formLabel('tag-search', __('Search By Tags')); ?>
+                <div class="inputs">
+                <?php
+                    echo $this->formText('tags', @$_REQUEST['tags'],
+                        array('size' => '40', 'id' => 'tag-search',
+                            'class' => 'textinput')
+                    );
+                ?>
                 </div>
             </div>
         </div>
 
         <?php if (has_permission('Items','showNotPublic')): ?>
         <div class="field">
-            <?php echo label('public', __('Public/Non-Public')); ?>
+            <?php echo $this->formLabel('public', __('Public/Non-Public')); ?>
             <div class="inputs">
-                <?php echo select(array('name' => 'public', 'id' => 'public'),
-                    array('1' => __('Only Public Items'),
-                          '0' => __('Only Non-Public Items'))); ?>
+            <?php
+                echo $this->formSelect(
+                    'public',
+                    @$_REQUEST['public'],
+                    array(),
+                    label_options(array(
+                        '1' => __('Only Public Items'),
+                        '0' => __('Only Non-Public Items')
+                    ))
+                );
+            ?>
             </div>
         </div>
         <?php endif; ?>
 
         <div class="field">
-            <?php echo label('featured', __('Featured/Non-Featured')); ?>
+            <?php echo $this->formLabel('featured', __('Featured/Non-Featured')); ?>
             <div class="inputs">
-                <?php echo select(array('name' => 'featured', 'id' => 'featured'),
-                    array('1' => __('Only Featured Items'),
-                          '0' => __('Only Non-Featured Items'))); ?>
+            <?php
+                echo $this->formSelect(
+                    'featured',
+                    @$_REQUEST['featured'],
+                    array(),
+                    label_options(array(
+                        '1' => __('Only Featured Items'),
+                        '0' => __('Only Non-Featured Items')
+                    ))
+                );
+            ?>
             </div>
         </div>
 

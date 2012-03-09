@@ -7,7 +7,7 @@
         <div class="element">
             <h3 class="two columns alpha">Name</h3>
             <div class="five columns omega inputs">
-                <?php echo text(array('name'=>'name', 'class'=>'textinput', 'id'=>'name', 'size'=>'40'),$collection->name); ?>
+                <?php echo $this->formText('name', $collection->name, array('class'=>'textinput', 'size'=>'40')); ?>
                 <?php echo form_error('name'); ?>
             </div>
         </div>
@@ -16,7 +16,7 @@
             <h3 class="two columns alpha">Description</h3>        
             <div class="five columns omega inputs">
                 <?php echo form_error('description'); ?>
-                <?php echo textarea(array('name'=>'description', 'class'=>'textinput', 'id'=>'description','rows'=>'10'),$collection->description); ?>
+                <?php echo $this->formTextarea('description', $collection->description, array('class'=>'textinput', 'rows'=>'10', 'cols'=>'60')); ?>
             </div>
         </div>
         
@@ -30,7 +30,8 @@
         </div>
         
     </fieldset>
-
+    
 </div>
+
 
 <?php fire_plugin_hook('admin_append_to_collections_form', $collection); ?>

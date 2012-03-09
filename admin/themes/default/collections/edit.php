@@ -24,12 +24,12 @@
                     
                         <?php echo $this->formLabel('public', __('Public')); ?>
                     <?php 
-                        echo checkbox(array('name'=>'public', 'id'=>'public'), $collection->public);
+                        echo $this->formCheckbox('public', $collection->public, array(), array('1', '0'));
                     ?>
                     
                         <?php echo $this->formLabel('featured', __('Featured')); ?>
                     <?php 
-                        echo checkbox(array('name'=>'featured', 'id'=>'featured'), $collection->featured); 
+                        echo $this->formCheckbox('featured', $collection->featured, array(), array('1', '0')); 
                     ?>
 
                 </div>            
