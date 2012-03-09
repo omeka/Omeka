@@ -23,7 +23,7 @@ jQuery(document).ready(function () {
         </div>
     </div>
     <div class="field">
-    <?php echo label('description', __('Description')); ?>
+    <?php echo $this->formLabel('description', __('Description')); ?>
         <div class="inputs">
         <?php echo $this->formTextarea('description', $itemtype->description, array('class'=>'textinput', 'rows'=>'10', 'cols'=>'40')); ?>
         </div>
