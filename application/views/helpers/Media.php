@@ -829,6 +829,7 @@ class Omeka_View_Helper_Media
         }
         
         if ($width || $height) {
+            $path = html_escape($file->getWebPath('archive'));
             list($oWidth, $oHeight) = getimagesize( $path );
             
             if ($oWidth > $width && !$height) {
