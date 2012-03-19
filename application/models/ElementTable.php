@@ -218,7 +218,7 @@ class ElementTable extends Omeka_Db_Table
         $elements = $this->fetchAll($select);
         $options = array();
         foreach ($elements as $element) {
-            $options[$element['set_name']][$element['id']] = $element['name']; 
+            $options[__($element['set_name'])][$element['id']] = __($element['name']);
         }
         return $options;
     }
