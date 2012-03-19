@@ -172,29 +172,21 @@ abstract class Omeka_Output_Xml_Abstract extends Omeka_Output_Xml
         foreach ($elementTexts as $elementText) {
             
             // Get associated element and element set records.
-            $element    = get_db()->getTable('Element')->find($elementText->element_id);
+            $element = get_db()->getTable('Element')->find($elementText->element_id);
             $elementSet = get_db()->getTable('ElementSet')->find($element->element_set_id);
             
             // Differenciate between the element sets and the "Item Type 
             // Metadata" pseudo element set.
             if (ELEMENT_SET_ITEM_TYPE == $elementSet->name) {
-                $itemType['elements'][$element->id] = array(
-                    'name' => $element->name, 
-                    'description' => $element->description, 
-                );
-                $itemType['elements'][$element->id]['elementTexts'][$elementText->id] = array(
-                    'text' => $elementText->text, 
-                );
+                $itemType['elements'][$element->id]['name'] = $element->name;
+                $itemType['elements'][$element->id]['description'] = $element->description;
+                $itemType['elements'][$element->id]['elementTexts'][$elementText->id]['text'] = $elementText->text;
             } else {
                 $elementSets[$elementSet->id]['name'] = $elementSet->name;
                 $elementSets[$elementSet->id]['description'] = $elementSet->description;
-                $elementSets[$elementSet->id]['elements'][$element->id] = array(
-                    'name' => $element->name, 
-                    'description' => $element->description, 
-                );
-                $elementSets[$elementSet->id]['elements'][$element->id]['elementTexts'][$elementText->id] = array(
-                    'text' => $elementText->text, 
-                );
+                $elementSets[$elementSet->id]['elements'][$element->id]['name'] = $element->name;
+                $elementSets[$elementSet->id]['elements'][$element->id]['description'] = $element->description;
+                $elementSets[$elementSet->id]['elements'][$element->id]['elementTexts'][$elementText->id]['text'] = $elementText->text;
             }
         }
         
