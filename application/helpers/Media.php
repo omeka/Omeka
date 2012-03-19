@@ -822,27 +822,6 @@ class Omeka_View_Helper_Media
         
         $uri = html_escape(file_display_uri($file, $format));
         
-        if (isset($props['height']) && !isset($props['width'])) {
-            $height = $props['height'];
-        } else if (isset($props['width']) && !isset($props['height'])) {
-            $width = $props['width'];
-        }
-        
-        if ($width || $height) {
-            list($oWidth, $oHeight) = getimagesize( $path );
-            
-            if ($oWidth > $width && !$height) {
-                $ratio = $width / $oWidth;
-                $height = $oHeight * $ratio;
-            } else if (!$width && $oHeight > $height) {
-                $ratio = $height / $oHeight;
-                $width = $oWidth * $ratio;
-            }
-            
-            $props['width'] = $width;
-            $props['height'] = $height;
-        }
-        
         /** 
          * Determine alt attribute for images
          * Should use the following in this order:
