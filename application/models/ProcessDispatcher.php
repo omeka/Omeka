@@ -32,7 +32,7 @@ class ProcessDispatcher
         }
 
         if($user) {
-            $user_id = $user_id;
+            $user_id = $user->id;
         } else {
             $user_id = 0;
         }
