@@ -4,7 +4,6 @@
         <tr>
             <th><?php echo __('Element Name'); ?></th>
             <th><?php echo __('Description'); ?></th>
-            <th><?php echo __('Data Type'); ?></th>
             <th><?php echo __('Order'); ?></th>
             <?php if (has_permission('ItemTypes', 'delete-element')): ?>
                 <th><?php echo __('Remove'); ?></th>
@@ -17,7 +16,6 @@
             <tr class="element">
                 <td class="element-name"><strong><?php echo html_escape($element->name); ?></strong></td>
                 <td><?php echo html_escape($element->description); ?></td>
-                <td><?php echo html_escape($element->getDataType()->name); ?></td>
                 <td class="element-order"><?php echo __v()->formText("element-order-". $element->id, $elementsOrder[$orderIndex], array('size'=>2)); ?></td>
 
                 <?php if (has_permission('ItemTypes', 'delete-element')): ?>
@@ -36,7 +34,6 @@
                                         'elementTempId' => $elementsToAddTempIds[$elementToAddIndex],
                                         'elementName' => $elementToAdd->name,
                                         'elementDescription' => $elementToAdd->description,
-                                        'elementDataTypeId' => $elementToAdd->data_type_id,
                                         'elementOrder' => $elementsOrder[$orderIndex]));
          ?>
          <?php else: ?>

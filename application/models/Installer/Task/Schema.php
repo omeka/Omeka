@@ -25,7 +25,6 @@ class Installer_Task_Schema implements Installer_TaskInterface
         'mime_element_set_lookup',
         'processes',
         'tags',
-        'data_types',
         'elements',
         'item_types_elements',
         'options',

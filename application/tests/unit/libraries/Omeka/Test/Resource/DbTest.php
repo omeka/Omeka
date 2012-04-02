@@ -77,7 +77,6 @@ class Omeka_Test_Resource_DbTest extends PHPUnit_Framework_TestCase
         }
         $expectedTables = array(
           'omeka_collections',
-          'omeka_data_types',
           'omeka_element_sets',
           'omeka_element_texts',
           'omeka_elements',

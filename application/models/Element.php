@@ -14,14 +14,12 @@
 class Element extends Omeka_Record
 {
     public $record_type_id;
-    public $data_type_id;
     public $element_set_id;
     public $order;
     public $name = '';
     public $description = '';
 
     const DEFAULT_RECORD_TYPE = 'Item';
-    const DEFAULT_DATA_TYPE = 'Text';
 
     /**
      * Set the record type for the element (Item, File, All, etc.).
@@ -31,30 +29,6 @@ class Element extends Omeka_Record
     public function setRecordType($recordTypeName)
     {
         $this->record_type_id = $this->_getRecordTypeId($recordTypeName);
-    }
-
-    /**
-     * Set the data type for the element (Text, Tiny Text, etc.).
-     * @param DataType|string $dataType
-     * @return void
-     */
-    public function setDataType($dataType)
-    {
-        if ($dataType instanceof DataType) {
-            $this->data_type_id = $dataType->id;
-        } else if (is_string($dataType)) {
-            $dataTypeName = $dataType;
-            $this->data_type_id = $this->_getDataTypeId($dataTypeName);
-        }
-    }
-
-    /**
-     * Get the data type object of the element
-     * @return DataType
-     */
-    public function getDataType()
-    {
-        return $this->getDb()->getTable('DataType')->find($this->data_type_id);
     }
 
     /**
@@ -121,10 +95,8 @@ class Element extends Omeka_Record
      *  <li>description</li>
      *  <li>order</li>
      *  <li>record_type_id</li>
-     *  <li>data_type_id</li>
      *  <li>element_set_id</li>
      *  <li>record_type</li>
-     *  <li>data_type</li>
      *  <li>element_set</li>
      * </ul>
      * @return void
@@ -138,9 +110,6 @@ class Element extends Omeka_Record
                 switch ($key) {
                     case 'record_type':
                         $this->setRecordType($value);
-                        break;
-                    case 'data_type':
-                        $this->setDataType($value);
                         break;
                     case 'order':
                         $this->setOrder($value);
@@ -180,10 +149,6 @@ class Element extends Omeka_Record
             $this->addError('name', __('Name must not be empty!'));
         }
 
-        if (empty($this->data_type_id)) {
-            $this->addError('data_type_id', __('Element must have a valid data type!'));
-        }
-
         if (empty($this->record_type_id)) {
             $this->addError('record_type_id', __('Element must have a valid record type!'));
         }
@@ -209,15 +174,11 @@ class Element extends Omeka_Record
     }
 
     /**
-     * Set the default record & data type for the element (if necessary).
+     * Set the default record type for the element (if necessary).
      * @return void
      */
     protected function beforeValidate()
     {
-        if (empty($this->data_type_id)) {
-            $this->data_type_id = $this->_getDataTypeId(self::DEFAULT_DATA_TYPE);
-        }
-
         if (empty($this->record_type_id)) {
             $this->record_type_id = $this->_getRecordTypeId(self::DEFAULT_RECORD_TYPE);
         }
@@ -230,15 +191,6 @@ class Element extends Omeka_Record
     private function _getRecordTypeId($recordTypeName)
     {
         return $this->getDb()->getTable('RecordType')->findIdFromName($recordTypeName);
-    }
-
-    /**
-     * Retrieve the data type ID from the name.
-     * @return int
-     */
-    private function _getDataTypeId($dataTypeName)
-    {
-        return $this->getDb()->getTable('DataType')->findIdFromName($dataTypeName);
     }
 
     /**

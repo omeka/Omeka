@@ -540,10 +540,8 @@ function update_item($item, $metadata = array(), $elementTexts = array(), $fileM
  *             'name'           => [(string) name, required],
  *             'description'    => [(string) description, optional],
  *             'record_type'    => [(string) record type name, optional],
- *             'data_type'      => [(string) data type name, optional],
  *             'order'          => [(int) order, optional],
- *             'record_type_id' => [(int) record type id, optional],
- *             'data_type_id'   => [(int) data type id, optional]
+ *             'record_type_id' => [(int) record type id, optional]
  *         ),
  *         [(Element)],
  *     );
@@ -606,9 +604,7 @@ function insert_collection($metadata = array())
  *             'name'           => [(string) name, required],
  *             'description'    => [(string) description, optional],
  *             'record_type'    => [(string) record type name, optional],
- *             'data_type'      => [(string) data type name, optional],
- *             'record_type_id' => [(int) record type id, optional],
- *             'data_type_id'   => [(int) data type id, optional]
+ *             'record_type_id' => [(int) record type id, optional]
  *         ),
  *         [(string) element name]
  *     );

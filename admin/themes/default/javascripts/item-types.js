@@ -30,8 +30,6 @@ Omeka.ItemTypes.manageItemTypes = function (addNewRequestUrl, addExistingRequest
                     success: function (response) {
                         var elementDescriptionCol = dropDown.parent().next();
                         elementDescriptionCol.html(response.elementDescription);
-                        var elementDataTypeNameCol = elementDescriptionCol.next();
-                        elementDataTypeNameCol.html(response.elementDataTypeName);
                     },
                     error: function () {
                         alert('Unable to get selected element data.');

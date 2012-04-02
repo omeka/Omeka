@@ -21,7 +21,6 @@ class ItemTypesController extends Omeka_Controller_Action
     const CURRENT_ELEMENT_ORDER_PREFIX = 'element-order-';
 
     const ADD_NEW_ELEMENT_NAME_PREFIX = 'add-new-element-name-';
-    const ADD_NEW_ELEMENT_DATA_TYPE_ID_PREFIX = 'add-new-element-data-type-id-';
     const ADD_NEW_ELEMENT_DESCRIPTION_PREFIX = 'add-new-element-description-';
     const ADD_NEW_ELEMENT_ORDER_PREFIX = 'add-new-element-order-';
 
@@ -158,19 +157,16 @@ class ItemTypesController extends Omeka_Controller_Action
                 $elementTempId = array_pop(explode('-', $key));
                 $elementName =  $value;
                 $elementDescription = $post[self::ADD_NEW_ELEMENT_DESCRIPTION_PREFIX. $elementTempId];
-                $elementDataTypeId = $post[self::ADD_NEW_ELEMENT_DATA_TYPE_ID_PREFIX . $elementTempId];
 
                 $element = new Element;
                 $element->setElementSet(ELEMENT_SET_ITEM_TYPE);
                 $element->setRecordType('Item');
                 $element->setName($elementName);
                 $element->setDescription($elementDescription);
-                $element->data_type_id = $elementDataTypeId;
                 $element->order = null;
 
                 $clearKeysFromPost[] = $key;
                 $clearKeysFromPost[] = self::ADD_NEW_ELEMENT_DESCRIPTION_PREFIX . $elementTempId;
-                $clearKeysFromPost[] = self::ADD_NEW_ELEMENT_DATA_TYPE_ID_PREFIX . $elementTempId;
                 $clearKeysFromPost[] = self::ADD_NEW_ELEMENT_ORDER_PREFIX . $elementTempId;
 
                 $elementsToAdd[] = $element;
@@ -253,23 +249,19 @@ class ItemTypesController extends Omeka_Controller_Action
             $elementTempId = $this->_getParam('elementTempId');
             $elementName = $this->_getParam('elementName');
             $elementDescription = $this->_getParam('elementDescription');
-            $elementDataTypeId = $this->_getParam('elementDataTypeId');
             $elementOrder = $this->_getParam('elementOrder');
         } else {
             $elementTempId = '' . time();
             $elementName = '';
             $elementDescription = '';
-            $elementDataTypeId = '0';
             $elementOrder = $elementCount + 1;
         }
 
         $this->view->assign(array('elementTempId' => $elementTempId,
                                   'elementName' => $elementName,
                                   'elementDescription' => $elementDescription,
-                                  'elementDataTypeId' => $elementDataTypeId,
                                   'elementOrder' => $elementOrder,
                                   'addNewElementNamePrefix' => self::ADD_NEW_ELEMENT_NAME_PREFIX,
-                                  'addNewElementDataTypeIdPrefix' => self::ADD_NEW_ELEMENT_DATA_TYPE_ID_PREFIX,
                                   'addNewElementDescriptionPrefix' => self::ADD_NEW_ELEMENT_DESCRIPTION_PREFIX,
                                   'addNewElementOrderPrefix' => self::ADD_NEW_ELEMENT_ORDER_PREFIX
                                    ));
@@ -285,21 +277,18 @@ class ItemTypesController extends Omeka_Controller_Action
             $element = $this->getDb()->getTable('Element')->find($elementId);
             if ($element) {
                 $elementDescription = $element->description;
-                $elementDataTypeName = $element->getDataType()->name;
             }
             $elementOrder = $this->_getParam('elementOrder');
         } else {
             $elementTempId = '' . time();
             $elementId = '';
             $elementDescription = '';
-            $elementDataTypeName = '';
             $elementOrder = $elementCount + 1;
         }
 
         $this->view->assign(array('elementTempId' => $elementTempId,
                                   'elementId' => $elementId,
                                   'elementDescription' => $elementDescription,
-                                  'elementDataTypeName' => $elementDataTypeName,
                                   'elementOrder' => $elementOrder,
                                   'addExistingElementIdPrefix' => self::ADD_EXISTING_ELEMENT_ID_PREFIX,
                                   'addExistingElementOrderPrefix' => self::ADD_EXISTING_ELEMENT_ORDER_PREFIX
@@ -315,15 +304,12 @@ class ItemTypesController extends Omeka_Controller_Action
 
 
         $elementDescription = '';
-        $elementDataTypeName = '';
         if ($element) {
             $elementDescription = $element->description;
-            $elementDataTypeName = $element->getDataType()->name;
         }
 
         $data = array();
         $data['elementDescription'] = $elementDescription;
-        $data['elementDataTypeName'] = $elementDataTypeName;
 
         $this->_helper->json($data);
     }

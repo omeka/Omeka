@@ -20,7 +20,6 @@ class ElementSet extends Omeka_Record
     protected $_elementsToSave = array();
     
     const DEFAULT_RECORD_TYPE = 'Item';
-    const DEFAULT_DATA_TYPE = 'Text';
     
     public function getElements()
     {
@@ -30,11 +29,6 @@ class ElementSet extends Omeka_Record
     private function _getDefaultRecordTypeId()
     {
         return $this->getTable('RecordType')->findIdFromName(self::DEFAULT_RECORD_TYPE);
-    }
-    
-    private function _getDefaultDataTypeId()
-    {
-        return $this->getTable('DataType')->findIdFromName(self::DEFAULT_DATA_TYPE);
     }
     
     /**
@@ -66,10 +60,6 @@ class ElementSet extends Omeka_Record
     {
         if (empty($this->record_type_id)) {
             $this->record_type_id = $this->_getDefaultRecordTypeId();
-        }
-        
-        if (empty($this->data_type_id)) {
-            $this->data_type_id = $this->_getDefaultDataTypeId();
         }
     }
     

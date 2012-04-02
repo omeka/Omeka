@@ -57,7 +57,6 @@ class Installer_Task_SchemaTest extends PHPUnit_Framework_TestCase
             'mime_element_set_lookup' => CORE_DIR . '/schema/mime_element_set_lookup.sql',
             'processes' => CORE_DIR . '/schema/processes.sql',
             'tags' => CORE_DIR . '/schema/tags.sql',
-            'data_types' => CORE_DIR . '/schema/data_types.sql',
             'elements' => CORE_DIR . '/schema/elements.sql',
             'item_types_elements' => CORE_DIR . '/schema/item_types_elements.sql',
             'options' => CORE_DIR . '/schema/options.sql',
@@ -133,7 +132,6 @@ class Installer_Task_SchemaTest extends PHPUnit_Framework_TestCase
         $task->install($this->db);
         $expectedTables = array(
             'test_collections',
-            'test_data_types',
             'test_elements',
             'test_element_sets',
             'test_element_texts',

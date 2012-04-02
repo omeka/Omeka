@@ -7,8 +7,8 @@ class Tickets_759Test extends Omeka_Test_AppTestCase
         $itemType = insert_item_type(
             array('name'=>'Foobar', 'description'=>'Changed description.'),
             array(
-                array('name'=>'Wonder', 'data_type_name'=>'Text'), 
-                array('name'=>'Years',  'data_type_name'=>'Tiny Text')
+                array('name'=>'Wonder'), 
+                array('name'=>'Years')
             ));
             
         $elementSet = insert_element_set(
