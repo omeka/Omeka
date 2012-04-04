@@ -3,15 +3,16 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
+# Gjergj Sheldija <gjergj.sheldija@gmail.com>, 2012.
 #   <gjergj.sheldija@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2011-11-22 16:18-0500\n"
-"PO-Revision-Date: 2011-12-27 12:23+0000\n"
-"Last-Translator: Gjergj Sheldija <gjergj.sheldija@gmail.com>\n"
-"Language-Team: Albanian (Albania) (http://www.transifex.net/projects/p/omeka/team/sq_AL/)\n"
+"PO-Revision-Date: 2012-01-04 22:02+0000\n"
+"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"Language-Team: Albanian (Albania) (http://www.transifex.net/projects/p/omeka/language/sq_AL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,7 +24,7 @@ msgid ""
 "The Dublin Core metadata element set. These elements are common to all Omeka"
 " resources, including items, files, collections, exhibits, and entities. See"
 " http://dublincore.org/documents/dces/."
-msgstr ""
+msgstr "Seti i elementeve Dublin Core metadata. Keto elemente jane te perbashket per te gjitha resurset e Omeka, duke perfshire materialet, files, koleksionet, prezantimet, dhe entitetet. Shiko http://dublincore.org/documents/dces/."
 
 # #-#-#-#-#  Omeka.base.pot (Omeka 1.5)  #-#-#-#-#
 # Dublin Core: Title element
@@ -54,7 +55,7 @@ msgstr "Subjekti"
 #: application/views/scripts/collections/browse.php:15
 #: application/views/scripts/collections/show.php:7
 msgid "Description"
-msgstr ""
+msgstr "Pershkrimi"
 
 # Dublin Core: Publisher element
 msgid "Publisher"
@@ -63,7 +64,7 @@ msgstr "Botuesi"
 # Dublin Core: Contributor element
 # User role: contributor
 msgid "Contributor"
-msgstr ""
+msgstr "Kontribues"
 
 # Dublin Core: Date element
 msgid "Date"
@@ -97,7 +98,7 @@ msgstr "Relacioni"
 
 # Dublin Core: Coverage element
 msgid "Coverage"
-msgstr ""
+msgstr "Trajtim"
 
 # Dublin Core: Rights element
 msgid "Rights"
@@ -111,7 +112,7 @@ msgstr "Lloji i metadata per materialin"
 msgid ""
 "The item type metadata element set, consisting of all item type elements "
 "bundled with Omeka and all item type elements created by an administrator."
-msgstr ""
+msgstr "Lloji i elementit metadata perfshin te gjithe llojet e elementeve ter perfshire ne Omeka dhe te gjitha llojet e elementeve te krijuar nga administratori."
 
 # Omeka Legacy File
 msgid "Omeka Legacy File"
@@ -131,7 +132,7 @@ msgstr "Krijues shtese"
 
 # Omeka Legacy File: Transcriber element
 msgid "Transcriber"
-msgstr ""
+msgstr "Transkriptues"
 
 # Omeka Legacy File: Producer element
 msgid "Producer"
@@ -139,23 +140,23 @@ msgstr "Prodhuesi"
 
 # Omeka Legacy File: Render Device element
 msgid "Render Device"
-msgstr ""
+msgstr "Pajisja e renderizimit"
 
 # Omeka Legacy File: Render Details element
 msgid "Render Details"
-msgstr ""
+msgstr "Detajet e renderizimit"
 
 # Omeka Legacy File: Capture Date element
 msgid "Capture Date"
-msgstr ""
+msgstr "Data e marrjes"
 
 # Omeka Legacy File: Capture Device element
 msgid "Capture Device"
-msgstr ""
+msgstr "Pajisja e marrjes"
 
 # Omeka Legacy File: Capture Details element
 msgid "Capture Details"
-msgstr ""
+msgstr "Detajet e marrjes"
 
 # Omeka Legacy File: Change History element
 msgid "Change History"
@@ -163,7 +164,7 @@ msgstr "Historiku i ndryshimeve"
 
 # Omeka Legacy File: Watermark element
 msgid "Watermark"
-msgstr ""
+msgstr "Pulle sigurie"
 
 # Omeka Legacy File: Encryption element
 msgid "Encryption"
@@ -288,40 +289,40 @@ msgstr ""
 
 #: admin/themes/default/collections/browse.php:18
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: admin/themes/default/collections/browse.php:19
 #: admin/themes/default/element-sets/browse.php:12
 #: admin/themes/default/item-types/form.php:20
 msgid "Name"
-msgstr ""
+msgstr "Emri"
 
 #: admin/themes/default/collections/browse.php:20
 #: admin/themes/default/collections/show.php:22
 msgid "Collectors"
-msgstr ""
+msgstr "Mbledhësit"
 
 #: admin/themes/default/collections/browse.php:21
 #: admin/themes/default/files/show.php:24
 #: admin/themes/default/items/browse.php:134
 #: application/views/scripts/files/show.php:57
 msgid "Date Added"
-msgstr ""
+msgstr "Data e shtimit"
 
 #: admin/themes/default/collections/browse.php:22
 #: admin/themes/default/collections/show.php:39
 #: admin/themes/default/item-types/show.php:42
 msgid "Total Number of Items"
-msgstr ""
+msgstr "Numri totali i elementeve"
 
 #: admin/themes/default/collections/browse.php:25
 #: admin/themes/default/item-types/browse.php:17
 msgid "Edit?"
-msgstr ""
+msgstr "Ndrysho?"
 
 #: admin/themes/default/collections/browse.php:44
 msgid "No collectors"
-msgstr ""
+msgstr "Asnje mbledhës"
 
 #: admin/themes/default/collections/browse.php:57
 #: admin/themes/default/items/browse.php:150
@@ -329,33 +330,33 @@ msgstr ""
 #: admin/themes/default/users/browse.php:43
 #: admin/themes/default/users/browse.php:58
 msgid "Edit"
-msgstr ""
+msgstr "Ndrysho"
 
 #: admin/themes/default/collections/browse.php:68
 msgid "There are no collections on this page."
-msgstr ""
+msgstr "Nuk ka asnje koleksion ne kete faqe"
 
 #: admin/themes/default/collections/browse.php:68
 msgid "View All Collections"
-msgstr ""
+msgstr "Shfaq te gjitha koleksionet"
 
 #: admin/themes/default/collections/browse.php:71
 msgid "Add a collection."
-msgstr ""
+msgstr "Shto nje koleksion"
 
 #: admin/themes/default/collections/browse.php:71
 msgid "There are no collections in your archive."
-msgstr ""
+msgstr "Nuk ka asnje koleksion ne arkivin tuaj."
 
 #: admin/themes/default/collections/edit.php:8
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Edit Collection #%s"
-msgstr ""
+msgstr "Ndrysho koleksionin #%s"
 
 #: admin/themes/default/collections/edit.php:14
 msgid "Delete this Collection"
-msgstr ""
+msgstr "Fshij kete koleksion"
 
 #: admin/themes/default/collections/edit.php:20
 #: admin/themes/default/files/edit.php:41
@@ -368,30 +369,30 @@ msgstr ""
 #: application/forms/SecuritySettings.php:70
 #: application/forms/ThemeConfiguration.php:67
 msgid "Save Changes"
-msgstr ""
+msgstr "Ruaj ndryshimet"
 
 #: admin/themes/default/collections/form.php:4
 msgid "Collection Details"
-msgstr ""
+msgstr "Detajet e koleksionit"
 
 #: admin/themes/default/collections/form.php:4
 #: admin/themes/default/item-types/form.php:17
 #: install/views/scripts/index/index.phtml:13
 msgid "Required Fields"
-msgstr ""
+msgstr "Fushe e kerkuar"
 
 #: admin/themes/default/collections/form.php:7
 msgid "Collection Name"
-msgstr ""
+msgstr "Emri i koleksionit"
 
 #: admin/themes/default/collections/form.php:15
 msgid "Collection Description"
-msgstr ""
+msgstr "Pershkrimi i koleksionit"
 
 #: admin/themes/default/collections/form.php:25
 msgid ""
 "List collectors for this collection (optional - enter one name per line)"
-msgstr ""
+msgstr "Listo mbledhesit per kete koleksion ( opsional  - shkruani nje per rresht )"
 
 #: admin/themes/default/collections/form.php:35
 #: admin/themes/default/collections/form.php:37
@@ -401,12 +402,12 @@ msgstr ""
 #: admin/themes/default/items/browse.php:177
 #: admin/themes/default/items/form.php:37
 msgid "Public"
-msgstr ""
+msgstr "Publik"
 
 #: admin/themes/default/collections/form.php:37
 #: admin/themes/default/items/batch-edit.php:43
 msgid "Not Public"
-msgstr ""
+msgstr "Jo publik"
 
 #: admin/themes/default/collections/form.php:42
 #: admin/themes/default/collections/form.php:44
@@ -426,49 +427,49 @@ msgstr ""
 #: admin/themes/default/collections/show.php:11
 #: admin/themes/default/items/show.php:14
 msgid "View Public Page"
-msgstr ""
+msgstr "Shfaq faqen publike"
 
 #: admin/themes/default/collections/show.php:13
 msgid "Edit this Collection"
-msgstr ""
+msgstr "Ndrysho kete koleksion"
 
 #: admin/themes/default/collections/show.php:27
 msgid "No collectors."
-msgstr ""
+msgstr "Asnje mbledhes"
 
 #: admin/themes/default/collections/show.php:33
 #: admin/themes/default/item-types/show.php:30
 #: application/views/scripts/index.php:35
 msgid "Recently Added Items"
-msgstr ""
+msgstr "Elementet e fundit"
 
 #: admin/themes/default/common/footer.php:4
 msgid "Documentation"
-msgstr ""
+msgstr "Dokumentacioni"
 
 #: admin/themes/default/common/footer.php:4
 #: admin/themes/default/common/login-footer.php:4
 msgid "Powered by Omeka"
-msgstr ""
+msgstr "Nga Omeka"
 
 #: admin/themes/default/common/footer.php:4
 msgid "Support Forums"
-msgstr ""
+msgstr "Forumi i suportit"
 
 #: admin/themes/default/common/footer.php:6
 #: admin/themes/default/common/login-footer.php:4
 #: admin/themes/default/plugins/plugin-info.php:65
 #, php-format
 msgid "Version %s"
-msgstr ""
+msgstr "Versioni %s"
 
 #: admin/themes/default/common/footer.php:9
 msgid "More information about your system"
-msgstr ""
+msgstr "Me shume informacion rreth sistemit"
 
 #: admin/themes/default/common/header.php:5
 msgid "Omeka Admin"
-msgstr ""
+msgstr "Administrimi i Omeka"
 
 #: admin/themes/default/common/header.php:24
 msgid "Skip Navigation"
@@ -584,9 +585,7 @@ msgstr "administratori i sitit"
 #: admin/themes/default/error/403.php:13
 #, php-format
 msgid "If you think you should have permission, try contacting the %s."
-msgstr ""
-"Nqs mendoni se duhet te keni te drejte te aksesoni kete faqe, Ju lutemi "
-"kontaktoni %s."
+msgstr "Nqs mendoni se duhet te keni te drejte te aksesoni kete faqe, Ju lutemi kontaktoni %s."
 
 #: admin/themes/default/error/404.php:2
 msgid "404: Page Not Found"
@@ -2221,6 +2220,10 @@ msgstr ""
 msgid "No tags are available."
 msgstr ""
 
+#: application/libraries/Omeka/View/Helper/RecordMetadataList.php:91
+msgid "[no text]"
+msgstr ""
+
 #: application/models/ActsAsElementText.php:257
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
@@ -2845,5 +2848,3 @@ msgstr ""
 #: install/views/scripts/layout.phtml:5 install/views/scripts/layout.phtml:9
 msgid "Omeka Installation"
 msgstr ""
-
-
