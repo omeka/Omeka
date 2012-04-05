@@ -164,50 +164,37 @@ abstract class Omeka_Output_Xml_Abstract extends Omeka_Output_Xml
      */
     protected function _getElemetSetsByElementTexts(Omeka_Record $record, $getItemType = false)
     {
-        $elementSets = new stdClass;
-        $itemType    = new stdClass;
+        $elementSets = array();
+        $itemType = array();
         
         // Get all element texts associated with the provided record.
         $elementTexts = $record->getElementTextRecords();
         foreach ($elementTexts as $elementText) {
             
             // Get associated element and element set records.
-            $element    = get_db()->getTable('Element')->find($elementText->element_id);
+            $element = get_db()->getTable('Element')->find($elementText->element_id);
             $elementSet = get_db()->getTable('ElementSet')->find($element->element_set_id);
             
             // Differenciate between the element sets and the "Item Type 
             // Metadata" pseudo element set.
             if (ELEMENT_SET_ITEM_TYPE == $elementSet->name) {
-                $elementObj = new stdClass;
-                $elementObj->name = $element->name;
-                $elementObj->description = $element->description;
-                $itemType->elements[$element->id] = $elementObj;
-                
-                $elementTextObj = new stdClass;
-                $elementTextObj->text = $elementText->text;
-                $itemType->elements[$element->id]->elementTexts[$elementText->id] = $elementTextObj;
+                $itemType['elements'][$element->id]['name'] = $element->name;
+                $itemType['elements'][$element->id]['description'] = $element->description;
+                $itemType['elements'][$element->id]['elementTexts'][$elementText->id]['text'] = $elementText->text;
             } else {
-                $elementSetObj = new stdClass;
-                $elementSetObj->name = $elementSet->name;
-                $elementSetObj->description = $elementSet->description;
-                $elementSets->elementSets[$elementSet->id] = $elementSetObj;
-                
-                $elementObj = new stdClass;
-                $elementObj->name = $element->name;
-                $elementObj->description = $element->description;
-                $elementSets->elementSets[$elementSet->id]->elements[$element->id] = $elementObj;
-                
-                $elementTextObj = new stdClass;
-                $elementTextObj->text = $elementText->text;
-                $elementSets->elementSets[$elementSet->id]->elements[$element->id]->elementTexts[$elementText->id] = $elementTextObj;
+                $elementSets[$elementSet->id]['name'] = $elementSet->name;
+                $elementSets[$elementSet->id]['description'] = $elementSet->description;
+                $elementSets[$elementSet->id]['elements'][$element->id]['name'] = $element->name;
+                $elementSets[$elementSet->id]['elements'][$element->id]['description'] = $element->description;
+                $elementSets[$elementSet->id]['elements'][$element->id]['elementTexts'][$elementText->id]['text'] = $elementText->text;
             }
         }
         
         // Return the item type metadata.
         if ($getItemType) {
-            $itemType->id          = $record->Type->id;
-            $itemType->name        = $record->Type->name;
-            $itemType->description = $record->Type->description;
+            $itemType['id'] = $record->Type->id;
+            $itemType['name'] = $record->Type->name;
+            $itemType['description'] = $record->Type->description;
             return $itemType;
         }
         
@@ -228,35 +215,35 @@ abstract class Omeka_Output_Xml_Abstract extends Omeka_Output_Xml
         $elementSets = $this->_getElemetSetsByElementTexts($record);
         
         // Return if there are no element sets.
-        if (!isset($elementSets->elementSets) || !count($elementSets->elementSets)) {
+        if (!$elementSets) {
             return null;
         }
         
         // elementSetContainer
         $elementSetContainerElement = $this->_createElement('elementSetContainer');
-        foreach ($elementSets->elementSets as $elementSetId => $elementSet) {
+        foreach ($elementSets as $elementSetId => $elementSet) {
              // elementSet
             $elementSetElement = $this->_createElement('elementSet', null, $elementSetId);
-            $nameElement = $this->_createElement('name', $elementSet->name, null, $elementSetElement);
-            $descriptionElement = $this->_createElement('description', $elementSet->description, null, $elementSetElement);
+            $nameElement = $this->_createElement('name', $elementSet['name'], null, $elementSetElement);
+            $descriptionElement = $this->_createElement('description', $elementSet['description'], null, $elementSetElement);
             // elementContainer
             $elementContainerElement = $this->_createElement('elementContainer');
-            foreach ($elementSet->elements as $elementId => $element) {
+            foreach ($elementSet['elements'] as $elementId => $element) {
                 // Exif data may contain invalid XML characters. Avoid encoding 
                 // errors by skipping relevent elements.
-                if ('Omeka Image File' == $elementSet->name && ('Exif Array' == $element->name || 'Exif String' == $element->name)) {
+                if ('Omeka Image File' == $elementSet['name'] && ('Exif Array' == $element['name'] || 'Exif String' == $element['name'])) {
                     continue;
                 }
                 // element
                 $elementElement = $this->_createElement('element', null, $elementId);
-                $nameElement = $this->_createElement('name', $element->name, null, $elementElement);
-                $descriptionElement = $this->_createElement('description', $element->description, null, $elementElement);
+                $nameElement = $this->_createElement('name', $element['name'], null, $elementElement);
+                $descriptionElement = $this->_createElement('description', $element['description'], null, $elementElement);
                 // elementTextContainer
                 $elementTextContainerElement = $this->_createElement('elementTextContainer');
-                foreach ($element->elementTexts as $elementTextId => $elementText) {
+                foreach ($element['elementTexts'] as $elementTextId => $elementText) {
                     // elementText
                     $elementTextElement = $this->_createElement('elementText', null, $elementTextId);
-                    $textElement = $this->_createElement('text', $elementText->text, null, $elementTextElement);
+                    $textElement = $this->_createElement('text', $elementText['text'], null, $elementTextElement);
                     $elementTextContainerElement->appendChild($elementTextElement);
                 }
                 $elementElement->appendChild($elementTextContainerElement);
@@ -285,25 +272,25 @@ abstract class Omeka_Output_Xml_Abstract extends Omeka_Output_Xml
         $itemType = $this->_getElemetSetsByElementTexts($item, true);
         
         // itemType
-        $itemTypeElement = $this->_createElement('itemType', null, $itemType->id);
-        $nameElement = $this->_createElement('name', $itemType->name, null, $itemTypeElement);
-        $descriptionElement = $this->_createElement('description', $itemType->description, null, $itemTypeElement);
+        $itemTypeElement = $this->_createElement('itemType', null, $itemType['id']);
+        $nameElement = $this->_createElement('name', $itemType['name'], null, $itemTypeElement);
+        $descriptionElement = $this->_createElement('description', $itemType['description'], null, $itemTypeElement);
         
         // Do not append elements if no element texts exist for this item type.
-        if (count($itemType->elements)) {
+        if (isset($itemType['elements'])) {
             // elementContainer
             $elementContainerElement = $this->_createElement('elementContainer');
-            foreach ($itemType->elements as $elementId => $element) {
+            foreach ($itemType['elements'] as $elementId => $element) {
                 // element
                 $elementElement = $this->_createElement('element', null, $elementId);
-                $nameElement = $this->_createElement('name', $element->name, null, $elementElement);
-                $descriptionElement = $this->_createElement('description', $element->description, null, $elementElement);
+                $nameElement = $this->_createElement('name', $element['name'], null, $elementElement);
+                $descriptionElement = $this->_createElement('description', $element['description'], null, $elementElement);
                 // elementTextContainer
                 $elementTextContainerElement = $this->_createElement('elementTextContainer');
-                foreach ($element->elementTexts as $elementTextId => $elementText) {
+                foreach ($element['elementTexts'] as $elementTextId => $elementText) {
                     // elementText
                     $elementTextElement = $this->_createElement('elementText', null, $elementTextId);
-                    $textElement = $this->_createElement('text', $elementText->text, null, $elementTextElement);
+                    $textElement = $this->_createElement('text', $elementText['text'], null, $elementTextElement);
                     $elementTextContainerElement->appendChild($elementTextElement);
                 }
                 $elementElement->appendChild($elementTextContainerElement);
