@@ -599,52 +599,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
             return $flatText;
         }
         
-        $elementDataType = $element->data_type_name;        
-        switch ($elementDataType) {
-            case 'Tiny Text':
-            case 'Text':
-            case 'Integer':
-                return $postArray['text'];
-                break;
-            case 'Date':
-                // Almost forgot that I had already created this awhile back.
-                $dateFilter = new Omeka_Filter_Date;
-                return $dateFilter->filter($postArray['year'], 
-                                        $postArray['month'], 
-                                        $postArray['day']);
-            case 'Date Range':
-                $dateFilter = new Omeka_Filter_Date;
-                $startDate = $dateFilter->filter($postArray['start']['year'], 
-                                        $postArray['start']['month'], 
-                                        $postArray['start']['day']);
-                $endDate = $dateFilter->filter($postArray['end']['year'], 
-                                        $postArray['end']['month'], 
-                                        $postArray['end']['day']);
-                // Should come out to be start date and end date separated by a space.
-                // Or if we don't have either a start or end date, it should not store anything.
-                if (!$startDate && !$endDate) {
-                    return null;
-                }
-                return $startDate . ' ' . $endDate;
-            case 'Date Time':
-                $dateFilter = new Omeka_Filter_Date;
-                $date = $dateFilter->filter($postArray['year'], 
-                                            $postArray['month'], 
-                                            $postArray['day']);
-                $timeFilter = new Omeka_Filter_Time;
-                $time = $timeFilter->filter($postArray['hour'], 
-                                            $postArray['minute'], 
-                                            $postArray['second']);
-                if (!$date && !$time) {
-                    return null;
-                }
-                return "$date $time";
-            default:
-                // Elements should always have a default data type in the 
-                // database, even if plugins override the default behavior.
-                throw new Omeka_Record_Exception(__('Cannot process form input for element with data type "%s"!', $elementDataType));
-                break;
-        }
+        return $postArray['text'];
     }
         
     /**
@@ -673,32 +628,8 @@ class ActsAsElementText extends Omeka_Record_Mixin
     {
         $elementRecord = $this->getElementById($elementTextRecord->element_id);
         $textValue = $elementTextRecord->text;
-        $elementDataType = $elementRecord->data_type_name;
         // Start out as valid by default.
         $isValid = true;
-        $validators = array(
-            'Tiny Text' => null,
-            'Text'      => null,
-            'Integer'   => 'Zend_Validate_Int',
-            'Date'      => 'Omeka_Validate_PartialDate',
-            'Date Range'=> 'Omeka_Validate_PartialDateRange',
-            'Date Time' => 'Omeka_Validate_DateTime');
-        
-        // Empty values validate by default b/c it just means they won't
-        // be saved to the database.    
-        if (!empty($textValue)) {
-            // Even for plugins hooking into the validation, each element must
-            // have one of these default data types.
-            if (!array_key_exists($elementDataType, $validators)) {
-                throw new Omeka_Record_Exception(__('Cannot validate an element of data type "%s"!', $elementDataType));
-            }
-            $validatorClass = $validators[$elementDataType];
-            // Text and Tiny Text have no default validation so skip those.
-            if ($validatorClass) {
-                $validator = new $validatorClass;
-                $isValid = $validator->isValid($textValue);
-            }
-        }
 
         // Hook into this for plugins.
         // array('Validate', 'Item', 'Title', 'Dublin Core')

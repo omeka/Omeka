@@ -103,16 +103,6 @@ class Omeka_View_Helper_ElementForm
     }
 
     /**
-     * The name of the data type for this element (relates to how the element is displayed).
-     *
-     * @return string
-     */
-    protected function _getElementDataType()
-    {
-        return $this->_element['data_type_name'];
-    }
-
-    /**
      * @uses ActsAsElementText::getTextStringFromFormPost()
      * @param integer
      * @return mixed
@@ -232,8 +222,6 @@ class Omeka_View_Helper_ElementForm
 
     protected function _displayFormInput($inputNameStem, $value, $options=array())
     {
-        $fieldDataType = $this->_getElementDataType();
-
         // Plugins should apply a filter to this blank HTML in order to display it in a certain way.
         $html = '';
 
@@ -246,125 +234,14 @@ class Omeka_View_Helper_ElementForm
             return $html;
         }
 
-        //Create a form input based on the element type name
-        switch ($fieldDataType) {
-
-            //Tiny Text => input type="text"
-            case 'Tiny Text':
-                return $this->view->formTextarea(
-                    $inputNameStem . '[text]',
-                    $value,
-                    array('class'=>'textinput', 'rows'=>2, 'cols'=>50));
-                break;
-            //Text => textarea
-            case 'Text':
-                return $this->view->formTextarea(
-                    $inputNameStem . '[text]',
-                    $value,
-                    array('class'=>'textinput', 'rows'=>15, 'cols'=>50));
-                break;
-            case 'Date':
-                return $this->_dateField(
-                    $inputNameStem,
-                    $value,
-                    array());
-                break;
-            case 'Date Range':
-                return $this->_dateRangeField(
-                    $inputNameStem,
-                    $value,
-                    array());
-            case 'Integer':
-                return $this->view->formText(
-                    $inputNameStem . '[text]',
-                    $value,
-                    array('class' => 'textinput', 'size' => 40));
-            case 'Date Time':
-                return $this->_dateTimeField(
-                    $inputNameStem,
-                    $value,
-                    array());
-            default:
-                throw new Exception(__('Cannot display a form input for "%s" if element type name is not given!', $element['name']));
-                break;
-        }
-
-    }
-
-    // yyyy-mm-dd hh:mm:ss
-    protected function _dateTimeField($inputNameStem, $value, $options = array())
-    {
-        list($date, $time) = explode(' ', $value);
-        list($year, $month, $day) = explode('-', $date);
-        list($hour, $minute, $second) = explode(':', $time);
-
-        $html = '<div class="dateinput">';
-
-        $html .= $this->view->formText($inputNameStem . '[year]', $year, array('class'=>'textinput', 'size'=>'4')) . '/';
-        $html .= $this->view->formText($inputNameStem . '[month]', $month, array('class'=>'textinput', 'size'=>'2')) . '/';
-        $html .= $this->view->formText($inputNameStem . '[day]', $day, array('class'=>'textinput', 'size'=>'2'));
-
-        $html .= $this->view->formText($inputNameStem . '[hour]', $hour, array('class'=>'textinput', 'size'=>'2')) . ':';
-        $html .= $this->view->formText($inputNameStem . '[minute]', $minute, array('class'=>'textinput', 'size'=>'2')) . ':';
-        $html .= $this->view->formText($inputNameStem . '[second]', $second, array('class'=>'textinput', 'size'=>'2'));
-
-        $html .= '<p class="hint">yyyy/mm/dd:hour:minute</p>';
-
-
-        $html .= '</div>';
-
-        return $html;
-    }
-
-    protected function _dateField($inputNameStem, $value, $options = array())
-    {
-        list($year, $month, $day) = explode('-', $value);
-
-        $html = '<div class="dateinput">';
-
-        $html .= $this->view->formText($inputNameStem . '[year]', $year, array('class'=>'textinput', 'size'=>'4'));
-        $html .= $this->view->formText($inputNameStem . '[month]', $month, array('class'=>'textinput', 'size'=>'2'));
-        $html .= $this->view->formText($inputNameStem . '[day]', $day, array('class'=>'textinput', 'size'=>'2'));
-
-        $html .= '<p class="hint">yyyy-mm-dd</p>';
-
-        $html .= '</div>';
-
-        return $html;
-    }
-
-    protected function _dateRangeField($inputNameStem, $dateValue, $options = array())
-    {
-        list($startDate, $endDate) = explode(' ', $dateValue);
-
-        $html = '<div class="dates">';
-
-        // The name of the form elements for date ranges should eventually look like:
-        // Elements[##][0][start][year], where ## is the element_id
-        // Elements[##][0][end][month], etc.
-        $startStem = $inputNameStem . '[start]';
-        $endStem = $inputNameStem . '[end]';
-
-        $html .= '<span>'. __('From') . '</span>';
-        $html .= $this->_dateField($startStem, $startDate, $options);
-
-        $html .= '<span>' . __('To') . '</span>';
-        $html .= $this->_dateField($endStem, $endDate, $options);
-
-        $html .= '</div>';
-
-        return $html;
+        return $this->view->formTextarea(
+            $inputNameStem . '[text]',
+            $value,
+            array('class' => 'textinput', 'rows' => 3, 'cols' => 50));
     }
 
     protected function _displayHtmlFlag($inputNameStem, $index)
     {
-        $fieldDataType = $this->_getElementDataType();
-        $noFlagTypes = array('Date', 'Date Range', 'Date Time', 'Integer');
-
-        if (in_array($fieldDataType, $noFlagTypes)) {
-            return '';
-        }
-
         $isHtml = $this->_getHtmlFlagForField($index);
 
         // Add a checkbox for the 'html' flag (always for any field)

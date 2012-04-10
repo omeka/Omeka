@@ -9,9 +9,9 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2011-11-22 16:18-0500\n"
-"PO-Revision-Date: 2011-12-29 13:33+0000\n"
-"Last-Translator: Daniel Alves <daniel_r_alves@hotmail.com>\n"
-"Language-Team: Portuguese (Portugal) (http://www.transifex.net/projects/p/omeka/team/pt_PT/)\n"
+"PO-Revision-Date: 2012-01-04 22:02+0000\n"
+"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"Language-Team: Portuguese (Portugal) (http://www.transifex.net/projects/p/omeka/language/pt_PT/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,10 +23,7 @@ msgid ""
 "The Dublin Core metadata element set. These elements are common to all Omeka"
 " resources, including items, files, collections, exhibits, and entities. See"
 " http://dublincore.org/documents/dces/."
-msgstr ""
-"O conjunto de elementos dos metadados do Dublin Core. Estes elementos são "
-"comuns a todos os recursos do Omeka, incluindo itens, arquivos, exibições e "
-"entidades. Consulte http://dublincore.org/documents/dces/."
+msgstr "O conjunto de elementos dos metadados do Dublin Core. Estes elementos são comuns a todos os recursos do Omeka, incluindo itens, arquivos, exibições e entidades. Consulte http://dublincore.org/documents/dces/."
 
 # #-#-#-#-#  Omeka.base.pot (Omeka 1.5)  #-#-#-#-#
 # Dublin Core: Title element
@@ -114,10 +111,7 @@ msgstr "Metadados do Tipo de Item"
 msgid ""
 "The item type metadata element set, consisting of all item type elements "
 "bundled with Omeka and all item type elements created by an administrator."
-msgstr ""
-"O conjunto de metadados do tipo de item, composto por todos os elementos do "
-"tipo de item associados por defeito ao Omeka bem como todos os elementos do "
-"tipo de item criados por um administrador."
+msgstr "O conjunto de metadados do tipo de item, composto por todos os elementos do tipo de item associados por defeito ao Omeka bem como todos os elementos do tipo de item criados por um administrador."
 
 # Omeka Legacy File
 msgid "Omeka Legacy File"
@@ -129,11 +123,7 @@ msgid ""
 "was included in the `files` table in previous versions of Omeka. These "
 "elements are common to all Omeka files. This set may be deprecated in future"
 " versions."
-msgstr ""
-"O conjunto dos elementos dos metadados que, para além do conjunto de "
-"elementos do Dublin Core, estava incluído na tabela `files` das versões "
-"anteriores do Omeka. Estes elementos são comuns a todos os ficheiros do "
-"Omeka. Este conjunto pode tornar-se obsoleto em futuras versões."
+msgstr "O conjunto dos elementos dos metadados que, para além do conjunto de elementos do Dublin Core, estava incluído na tabela `files` das versões anteriores do Omeka. Estes elementos são comuns a todos os ficheiros do Omeka. Este conjunto pode tornar-se obsoleto em futuras versões."
 
 # Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
@@ -195,10 +185,7 @@ msgstr "Ficheiro de imagem do Omeka"
 msgid ""
 "The metadata element set that was included in the `files_images` table in "
 "previous versions of Omeka. These elements are common to all image files."
-msgstr ""
-"O conjunto de elementos de meta-dados que estava incluído na tabela "
-"`files_images` nas versões anteriores de Omeka. Estes elementos são comuns a"
-" todos os ficheiros de imagem."
+msgstr "O conjunto de elementos de meta-dados que estava incluído na tabela `files_images` nas versões anteriores de Omeka. Estes elementos são comuns a todos os ficheiros de imagem."
 
 # Omeka Image File: Width element
 msgid "Width"
@@ -240,10 +227,7 @@ msgstr ""
 msgid ""
 "The metadata element set that was included in the `files_videos` table in "
 "previous versions of Omeka. These elements are common to all video files."
-msgstr ""
-"O conjunto de elementos de metadados que estava incluído na tabela "
-"`files_videos` nas versões anteriores do Omeka. Estes elementos são comuns a"
-" todos os ficheiros de vídeo."
+msgstr "O conjunto de elementos de metadados que estava incluído na tabela `files_videos` nas versões anteriores do Omeka. Estes elementos são comuns a todos os ficheiros de vídeo."
 
 # Omeka Video File: Bitrate element
 msgid "Bitrate"
@@ -765,8 +749,7 @@ msgstr "Explorar as suas colecções"
 
 #: admin/themes/default/index.php:39
 msgid "Manage collections in your archive: add, edit, and delete collections."
-msgstr ""
-"Gerir colecções no seu arquivo: adicionar, editar e eliminar colecções."
+msgstr "Gerir colecções no seu arquivo: adicionar, editar e eliminar colecções."
 
 #: admin/themes/default/index.php:48 admin/themes/default/users/browse.php:2
 msgid "Browse Users"
@@ -796,9 +779,7 @@ msgstr "Gerir Suplementos"
 msgid ""
 "Manage your general settings for the site, including title, description, and"
 " themes."
-msgstr ""
-"Gerir as suas definições gerais para o site, incluindo o título, a descrição"
-" e os temas."
+msgstr "Gerir as suas definições gerais para o site, incluindo o título, a descrição e os temas."
 
 #: admin/themes/default/index.php:75
 msgid "Site Overview"
@@ -809,9 +790,7 @@ msgstr "Visão Geral do Site"
 msgid ""
 "<em>%1$s</em> contains %2$s items, in %3$s collections, tagged with %4$s "
 "keywords. There are %5$s users."
-msgstr ""
-"<em>%1$s</em> contém %2$s itens, em %3$s colecções, etiquetadas com %4$s "
-"palavras-chave. Existem %5$s utilizadores."
+msgstr "<em>%1$s</em> contém %2$s itens, em %3$s colecções, etiquetadas com %4$s palavras-chave. Existem %5$s utilizadores."
 
 #: admin/themes/default/index.php:91
 msgid "There are no items to display."
@@ -1184,9 +1163,7 @@ msgstr "Explorar Itens por Etiquetas"
 #: admin/themes/default/items/tags.php:9
 #: admin/themes/default/tags/browse.php:27
 msgid "There are no tags to display. You must first tag some items."
-msgstr ""
-"Não existem etiquetas para visualizar. Primeiro tem de atribuir etiquetas a "
-"alguns itens."
+msgstr "Não existem etiquetas para visualizar. Primeiro tem de atribuir etiquetas a alguns itens."
 
 #: admin/themes/default/plugins/browse.php:2
 msgid "Browse Plugins"
@@ -1196,9 +1173,7 @@ msgstr "Explorar Suplementos"
 msgid ""
 "You do not have any plugins installed. Add them to the plugins directory to "
 "see them listed here."
-msgstr ""
-"Não tem suplementos instalados. Adicione-os à pasta de suplementos para os "
-"visualizar aqui."
+msgstr "Não tem suplementos instalados. Adicione-os à pasta de suplementos para os visualizar aqui."
 
 #: admin/themes/default/plugins/browse.php:24
 msgid ""
@@ -1206,11 +1181,7 @@ msgid ""
 "ons/plugins/\">Omeka Plugins Directory</a>, or <a "
 "href=\"http://omeka.org/codex/Plugin_Writing_Best_Practices\">write your "
 "own</a>!"
-msgstr ""
-"Adicione novos suplementos descarregando-os da <a href=\"http://omeka.org"
-"/add-ons/plugins/\">Lista de Suplementos do Omeka</a>, ou <a "
-"href=\"http://omeka.org/codex/Plugin_Writing_Best_Practices\">escreva o "
-"seu</a>!"
+msgstr "Adicione novos suplementos descarregando-os da <a href=\"http://omeka.org/add-ons/plugins/\">Lista de Suplementos do Omeka</a>, ou <a href=\"http://omeka.org/codex/Plugin_Writing_Best_Practices\">escreva o seu</a>!"
 
 #: admin/themes/default/plugins/config.php:2
 #, php-format
@@ -1253,9 +1224,7 @@ msgstr "Esta versão do %1$s requer pelo menos o Omeka %2$s."
 msgid ""
 "%1$s requires the following plugins to be installed, activated, and loaded: "
 "%2$s"
-msgstr ""
-"%1$s requer que os seguintes suplementos sejam instalados, activados e "
-"carregados: %2$s"
+msgstr "%1$s requer que os seguintes suplementos sejam instalados, activados e carregados: %2$s"
 
 #: admin/themes/default/plugins/plugin-info.php:30
 msgid "The plugin.php file is missing."
@@ -1345,9 +1314,7 @@ msgstr "Seleccione uma etiqueta para eliminar:"
 
 #: admin/themes/default/tags/delete.php:25
 msgid "There are no tags to delete. You must first tag some items."
-msgstr ""
-"Não existem etiquetas para eliminar. Primeiro tem de atribuir etiquetas a "
-"alguns itens."
+msgstr "Não existem etiquetas para eliminar. Primeiro tem de atribuir etiquetas a alguns itens."
 
 #: admin/themes/default/tags/edit.php:12
 msgid "Choose a tag to rename"
@@ -1359,9 +1326,7 @@ msgstr "Registe um novo nome para a etiqueta"
 
 #: admin/themes/default/tags/edit.php:32
 msgid "There are no tags to edit. You must first tag some items."
-msgstr ""
-"Não existem etiquetas para editar. Primeiro tem de atribuir etiquetas a "
-"alguns itens."
+msgstr "Não existem etiquetas para editar. Primeiro tem de atribuir etiquetas a alguns itens."
 
 #: admin/themes/default/themes/browse.php:2
 msgid "Browse Themes"
@@ -1406,11 +1371,7 @@ msgid ""
 "ons/themes/\">Omeka Theme Directory</a>, or <a "
 "href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">design your "
 "own</a>!"
-msgstr ""
-"Adicione novos temas descarregando-os da <a href=\"http://omeka.org/add-"
-"ons/themes/\">Lista de Temas do Omeka</a>, ou <a "
-"href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">desenhe o "
-"seu</a>!"
+msgstr "Adicione novos temas descarregando-os da <a href=\"http://omeka.org/add-ons/themes/\">Lista de Temas do Omeka</a>, ou <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">desenhe o seu</a>!"
 
 #: admin/themes/default/themes/config.php:2
 #, php-format
@@ -2258,6 +2219,10 @@ msgstr ""
 msgid "No tags are available."
 msgstr ""
 
+#: application/libraries/Omeka/View/Helper/RecordMetadataList.php:91
+msgid "[no text]"
+msgstr ""
+
 #: application/models/ActsAsElementText.php:257
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
@@ -2882,5 +2847,3 @@ msgstr ""
 #: install/views/scripts/layout.phtml:5 install/views/scripts/layout.phtml:9
 msgid "Omeka Installation"
 msgstr ""
-
-

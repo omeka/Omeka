@@ -13,9 +13,9 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2011-11-22 16:18-0500\n"
-"PO-Revision-Date: 2012-01-30 19:59+0000\n"
+"PO-Revision-Date: 2012-03-23 10:56+0000\n"
 "Last-Translator: Fran Pérez <fperezrodri@gmail.com>\n"
-"Language-Team: Spanish (Castilian) (http://www.transifex.net/projects/p/omeka/team/es/)\n"
+"Language-Team: Spanish (Castilian) (http://www.transifex.net/projects/p/omeka/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -27,11 +27,7 @@ msgid ""
 "The Dublin Core metadata element set. These elements are common to all Omeka"
 " resources, including items, files, collections, exhibits, and entities. See"
 " http://dublincore.org/documents/dces/."
-msgstr ""
-"El set de elementos de meta-dato Dublin Core. Estos elementos son comunes a "
-"todos los recursos de Omeka, Incluyendo ítem, archivos, colecciones, "
-"exposiciones, y entidades. Para mas información vea "
-"http://dublincore.org/documents/dces/."
+msgstr "El set de elementos de meta-dato Dublin Core. Estos elementos son comunes a todos los recursos de Omeka, Incluyendo ítem, archivos, colecciones, exposiciones, y entidades. Para mas información vea http://dublincore.org/documents/dces/."
 
 # #-#-#-#-#  Omeka.base.pot (Omeka 1.5)  #-#-#-#-#
 # Dublin Core: Title element
@@ -43,11 +39,11 @@ msgstr "Titulo"
 # Dublin Core: Creator element
 #: admin/themes/default/items/browse.php:130
 msgid "Creator"
-msgstr "Creador"
+msgstr "Autor"
 
 # Dublin Core: Subject element
 msgid "Subject"
-msgstr "Sujeto"
+msgstr "Tema"
 
 # #-#-#-#-#  Omeka.base.pot (Omeka 1.5)  #-#-#-#-#
 # Dublin Core: Description element
@@ -66,12 +62,12 @@ msgstr "Descripción"
 
 # Dublin Core: Publisher element
 msgid "Publisher"
-msgstr "Publicador"
+msgstr "Editor"
 
 # Dublin Core: Contributor element
 # User role: contributor
 msgid "Contributor"
-msgstr "Contribuidor"
+msgstr "Colaborador"
 
 # Dublin Core: Date element
 msgid "Date"
@@ -93,7 +89,7 @@ msgstr "Identificador"
 
 # Dublin Core: Source element
 msgid "Source"
-msgstr "Origen"
+msgstr "Fuente"
 
 # Dublin Core: Language element
 msgid "Language"
@@ -119,10 +115,7 @@ msgstr "Meta-datos de Tipo de Elemento"
 msgid ""
 "The item type metadata element set, consisting of all item type elements "
 "bundled with Omeka and all item type elements created by an administrator."
-msgstr ""
-"El set de metadatos del tipo de elemento, consistente en todos los tipos de "
-"elementos que vienen por defecto con la instalación de Omeka y por todos los"
-" tipos de elementos creados por el administrador."
+msgstr "El set de metadatos del tipo de elemento, consistente en todos los tipos de elementos que vienen por defecto con la instalación de Omeka y por todos los tipos de elementos creados por el administrador."
 
 # Omeka Legacy File
 msgid "Omeka Legacy File"
@@ -134,11 +127,7 @@ msgid ""
 "was included in the `files` table in previous versions of Omeka. These "
 "elements are common to all Omeka files. This set may be deprecated in future"
 " versions."
-msgstr ""
-"El set de metadatos que junto al set de metadatos Dublin Core, estaban "
-"incluidos en la tabla 'files' en versiones previas de Omeka. Estos elementos"
-" son comunes a todos los archivos de Omeka. Este set podría ser abandonado "
-"en versiones futuras de Omeka."
+msgstr "El set de metadatos que junto al set de metadatos Dublin Core, estaban incluidos en la tabla 'files' en versiones previas de Omeka. Estos elementos son comunes a todos los archivos de Omeka. Este set podría ser abandonado en versiones futuras de Omeka."
 
 # Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
@@ -200,10 +189,7 @@ msgstr "Archivo de Imagen Omeka"
 msgid ""
 "The metadata element set that was included in the `files_images` table in "
 "previous versions of Omeka. These elements are common to all image files."
-msgstr ""
-"El set de metadatos que estaba incluido en la tabla 'files_images' en "
-"versiones previas de Omeka. Estos elementos son comunes a todos archivos de "
-"imágenes."
+msgstr "El set de metadatos que estaba incluido en la tabla 'files_images' en versiones previas de Omeka. Estos elementos son comunes a todos archivos de imágenes."
 
 # Omeka Image File: Width element
 msgid "Width"
@@ -245,10 +231,7 @@ msgstr "Archivo de Video Omeka"
 msgid ""
 "The metadata element set that was included in the `files_videos` table in "
 "previous versions of Omeka. These elements are common to all video files."
-msgstr ""
-"El set de metadatos que estaba incluido en la tabla 'files_videos' en "
-"versiones previas de Omeka. Estos elementos son comunes a todos archivos de "
-"video."
+msgstr "El set de metadatos que estaba incluido en la tabla 'files_videos' en versiones previas de Omeka. Estos elementos son comunes a todos archivos de video."
 
 # Omeka Video File: Bitrate element
 msgid "Bitrate"
@@ -333,12 +316,12 @@ msgstr "Fecha de agregación"
 #: admin/themes/default/collections/show.php:39
 #: admin/themes/default/item-types/show.php:42
 msgid "Total Number of Items"
-msgstr "Numero total de Elementos"
+msgstr "Número total de Elementos"
 
 #: admin/themes/default/collections/browse.php:25
 #: admin/themes/default/item-types/browse.php:17
 msgid "Edit?"
-msgstr "¿Corregir?"
+msgstr "¿Editar?"
 
 #: admin/themes/default/collections/browse.php:44
 msgid "No collectors"
@@ -350,11 +333,11 @@ msgstr "Sin colectores"
 #: admin/themes/default/users/browse.php:43
 #: admin/themes/default/users/browse.php:58
 msgid "Edit"
-msgstr "Corregir"
+msgstr "Editar"
 
 #: admin/themes/default/collections/browse.php:68
 msgid "There are no collections on this page."
-msgstr "No existen colecciones en esta pagina."
+msgstr "No existen colecciones en esta página."
 
 #: admin/themes/default/collections/browse.php:68
 msgid "View All Collections"
@@ -372,7 +355,7 @@ msgstr "No existen colecciones en su archivo."
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Edit Collection #%s"
-msgstr "Corregir Coleccion #%s"
+msgstr "Editar Colección #%s"
 
 #: admin/themes/default/collections/edit.php:14
 msgid "Delete this Collection"
@@ -412,9 +395,7 @@ msgstr "Descripcion de la Coleccion"
 #: admin/themes/default/collections/form.php:25
 msgid ""
 "List collectors for this collection (optional - enter one name per line)"
-msgstr ""
-"Haga una lista de los colectores de esta coleccion (opcional - entre un "
-"nombre por linea)"
+msgstr "Haga una lista de los colectores de esta coleccion (opcional - entre un nombre por linea)"
 
 #: admin/themes/default/collections/form.php:35
 #: admin/themes/default/collections/form.php:37
@@ -453,7 +434,7 @@ msgstr "Vea la página pública"
 
 #: admin/themes/default/collections/show.php:13
 msgid "Edit this Collection"
-msgstr "Corregir esta Colección"
+msgstr "Editar esta Colección"
 
 #: admin/themes/default/collections/show.php:27
 msgid "No collectors."
@@ -597,7 +578,7 @@ msgstr "403: Prohibido"
 
 #: admin/themes/default/error/403.php:9
 msgid "Sorry, you do not have permission to access this page."
-msgstr "Perdon, usted no tiene permiso para acceder a esta página."
+msgstr "Perdón, usted no tiene permiso para acceder a esta página."
 
 #: admin/themes/default/error/403.php:12 admin/themes/default/error/404.php:12
 #: admin/themes/default/error/405.php:10
@@ -607,8 +588,7 @@ msgstr "administrador del sitio"
 #: admin/themes/default/error/403.php:13
 #, php-format
 msgid "If you think you should have permission, try contacting the %s."
-msgstr ""
-"Si cree que usted debe tener permiso, intente ponerse en contacto con el %s."
+msgstr "Si cree que usted debe tener permiso, intente ponerse en contacto con el %s."
 
 #: admin/themes/default/error/404.php:2
 msgid "404: Page Not Found"
@@ -619,10 +599,7 @@ msgid ""
 "You&#8217;ve tried to access a page that does not seem to exist. Sometimes "
 "this happens. Below is a quick break-down of the items, collections, and "
 "exhibits on this site."
-msgstr ""
-"Usted trato the acceder una pagina que parece no existir. A veces esto "
-"occure. A continuacion se muestra una sinopsis de los elementos, colecciones"
-" y exposiciones de este sitio."
+msgstr "Usted trató de acceder una página que parece no existir. A veces esto occure. A continuación se muestra una sinopsis de los elementos, colecciones y exposiciones de este sitio."
 
 #: admin/themes/default/error/404.php:13
 #, php-format
@@ -646,15 +623,12 @@ msgstr "405: Método no permitido"
 msgid ""
 "You must use a different method to access this URL. If you reached this page"
 " by following a link or clicking a button in Omeka, please contact the %s."
-msgstr ""
-"Debe usar un método diferente para acceder a esta URL. Si ha llegado a esta "
-"página siguiendo un enlace externo o interno de Omeka, por favor, contactar "
-"con %s."
+msgstr "Debe usar un método diferente para acceder a esta URL. Si ha llegado a esta página siguiendo un enlace externo o interno de Omeka, por favor, contactar con %s."
 
 #: admin/themes/default/files/edit.php:8
 #, php-format
 msgid "Edit File #%s"
-msgstr "Redactar el Archivo #%s"
+msgstr "Editar Fichero #%s"
 
 #: admin/themes/default/files/edit.php:17
 msgid "Delete this File"
@@ -677,7 +651,7 @@ msgstr "Archivo #%s"
 
 #: admin/themes/default/files/show.php:15
 msgid "Edit this File"
-msgstr "Redacte este Archivo"
+msgstr "Editar este Fichero"
 
 #: admin/themes/default/files/show.php:23
 #: application/views/scripts/files/show.php:55
@@ -746,7 +720,7 @@ msgstr "Panel de Control"
 
 #: admin/themes/default/index.php:12
 msgid "A new version of Omeka is available for download."
-msgstr "Una nueva version de Omeka esta disponible para descargar."
+msgstr "Una nueva versión de Omeka esta disponible para descargar."
 
 #: admin/themes/default/index.php:13
 #, php-format
@@ -767,8 +741,7 @@ msgstr "Navege sus elementos"
 
 #: admin/themes/default/index.php:28
 msgid "Manage items in your archive: add, edit, and delete items."
-msgstr ""
-"Administre elementos en su archivo: añadir, editar y eliminar elementos."
+msgstr "Administre elementos en su archivo: añadir, editar y eliminar elementos."
 
 #: admin/themes/default/index.php:35
 msgid "Add a collection to group items"
@@ -796,7 +769,7 @@ msgstr "Administre usuarios de diferentes niveles: investigador a super."
 
 #: admin/themes/default/index.php:61 admin/themes/default/settings/edit.php:2
 msgid "Edit General Settings"
-msgstr "Redacte la configuración general"
+msgstr "Editar la Configuración General"
 
 #: admin/themes/default/index.php:62
 msgid "Manage Themes"
@@ -810,9 +783,7 @@ msgstr "Administre los Plugins"
 msgid ""
 "Manage your general settings for the site, including title, description, and"
 " themes."
-msgstr ""
-"Administre su configuración general para la pagina de web, incluyendo el "
-"título, la descripción, y los temas."
+msgstr "Administre su configuración general para la pagina de web, incluyendo el título, la descripción, y los temas."
 
 #: admin/themes/default/index.php:75
 msgid "Site Overview"
@@ -823,9 +794,7 @@ msgstr "Resumen del sitio web"
 msgid ""
 "<em>%1$s</em> contains %2$s items, in %3$s collections, tagged with %4$s "
 "keywords. There are %5$s users."
-msgstr ""
-"<em>%1$s</em> contiene %2$s elementos, en %3$s colecciones, etiquetadas con "
-"%4$s palabras clave. Existen %5$s usuarios."
+msgstr "<em>%1$s</em> contiene %2$s elementos, en %3$s colecciones, etiquetadas con %4$s palabras clave. Existen %5$s usuarios."
 
 #: admin/themes/default/index.php:91
 msgid "There are no items to display."
@@ -866,12 +835,12 @@ msgstr "Nombre del tipo"
 
 #: admin/themes/default/item-types/browse.php:15
 msgid "Total Items"
-msgstr "Numero total de elementos"
+msgstr "Número total de elementos"
 
 #: admin/themes/default/item-types/edit.php:8
 #, php-format
 msgid "Edit Item Type #%s"
-msgstr "Redacte tipo de elemento #%s"
+msgstr "Editar Tipo de Elemento #%s"
 
 #: admin/themes/default/item-types/edit.php:14
 msgid "Delete this Item Type"
@@ -901,7 +870,7 @@ msgstr "Agregue el elemento"
 
 #: admin/themes/default/item-types/element-list.php:1
 msgid "Edit Current Elements"
-msgstr "Redacte el elemento actual"
+msgstr "Editar el Elemento Actual"
 
 #: admin/themes/default/item-types/element-list.php:5
 msgid "Element Name"
@@ -934,7 +903,7 @@ msgstr "Tipo de Elemento #%s"
 
 #: admin/themes/default/item-types/show.php:13
 msgid "Edit this Item Type"
-msgstr "Redacte este tipo de elemento"
+msgstr "Editar este Tipo de Elemento"
 
 #: admin/themes/default/item-types/show.php:39
 msgid "There are no recently added items."
@@ -1003,9 +972,7 @@ msgstr "Agregar Etiquetas"
 #: admin/themes/default/items/batch-edit.php:90
 #, php-format
 msgid "List of tags to add to all checked items, separated by %s."
-msgstr ""
-"Lista de etiquetas para añadir a todos lo elementos seleccionados, separados"
-" por %s."
+msgstr "Lista de etiquetas para añadir a todos lo elementos seleccionados, separados por %s."
 
 #: admin/themes/default/items/batch-edit.php:98
 msgid "Delete Items"
@@ -1060,7 +1027,7 @@ msgstr "Búsqueda Avanzada"
 #: admin/themes/default/items/browse.php:117
 #: admin/themes/default/items/browse.php:193
 msgid "Edit Selected Items"
-msgstr "Editar elementos seleccionados"
+msgstr "Editar Elementos Seleccionados"
 
 #: admin/themes/default/items/browse.php:126
 msgid "Select"
@@ -1086,7 +1053,7 @@ msgstr "Agregue un Elemento"
 #: admin/themes/default/items/browse.php:215
 #, php-format
 msgid "The query searched %s items and returned no results."
-msgstr "La consulta busco por %s elementos y no encontró resultados."
+msgstr "La consulta buscó por %s elementos y no encontró resultados."
 
 #: admin/themes/default/items/browse.php:215
 #, php-format
@@ -1106,7 +1073,7 @@ msgstr "[Sin título]"
 #: admin/themes/default/items/edit.php:8
 #, php-format
 msgid "Edit Item #%s"
-msgstr "Redacte el elemento #%s"
+msgstr "Editar el Elemento #%s"
 
 #: admin/themes/default/items/edit.php:12
 msgid "Delete this Item"
@@ -1117,10 +1084,7 @@ msgid ""
 "The path to Image Magick has not been set. No derivative images will be "
 "created. If you would like Omeka to create derivative images, please add the"
 " path to your settings form."
-msgstr ""
-"La ruta para el acceso a ImageMagick no se ha definido. La imagen derivada "
-"no se creará. Si quiere que Omeka cree imagenes derivadas, por favor, "
-"agregue la ruta de acceso al formulario de configuración."
+msgstr "La ruta para el acceso a ImageMagick no se ha definido. La imagen derivada no se creará. Si quiere que Omeka cree imágenes derivadas, por favor, agregue la ruta de acceso al formulario de configuración."
 
 #: admin/themes/default/items/files-form.php:7
 msgid "Current Files"
@@ -1132,7 +1096,7 @@ msgstr "Nombre de Archivo"
 
 #: admin/themes/default/items/files-form.php:13
 msgid "Edit File Metadata"
-msgstr "Redacte los metadatos del archivo"
+msgstr "Editar los Metadatos del Fichero"
 
 #: admin/themes/default/items/files-form.php:34
 msgid "Add New Files"
@@ -1158,7 +1122,7 @@ msgstr "Elemento #%s"
 
 #: admin/themes/default/items/show.php:18
 msgid "Edit this Item"
-msgstr "Agregue este Elemento"
+msgstr "Editar este Elemento"
 
 #: admin/themes/default/items/show.php:55
 msgid "Bibliographic Citation"
@@ -1203,9 +1167,7 @@ msgstr "Navegue Elementos por Etiqueta"
 #: admin/themes/default/items/tags.php:9
 #: admin/themes/default/tags/browse.php:27
 msgid "There are no tags to display. You must first tag some items."
-msgstr ""
-"No hay etiquetas para mostrar. En primer lugar, debe etiquetar algunos "
-"elementos."
+msgstr "No hay etiquetas para mostrar. En primer lugar, debe etiquetar algunos elementos."
 
 #: admin/themes/default/plugins/browse.php:2
 msgid "Browse Plugins"
@@ -1215,9 +1177,7 @@ msgstr "Navegue los Plugins"
 msgid ""
 "You do not have any plugins installed. Add them to the plugins directory to "
 "see them listed here."
-msgstr ""
-"No tiene ningun plugin instalado. Es necesario agregarlos al directorio de "
-"plugins para verlos en esta lista."
+msgstr "No tiene ningún plugin instalado. Es necesario agregarlos al directorio de plugins para verlos en esta lista."
 
 #: admin/themes/default/plugins/browse.php:24
 msgid ""
@@ -1225,11 +1185,7 @@ msgid ""
 "ons/plugins/\">Omeka Plugins Directory</a>, or <a "
 "href=\"http://omeka.org/codex/Plugin_Writing_Best_Practices\">write your "
 "own</a>!"
-msgstr ""
-"Para agregar nuevos plugins descargue de <a href=\"http://omeka.org/add-"
-"ons/plugins/\">Directorio de Plugins Omeka</a>, o <a "
-"href=\"http://omeka.org/codex/Plugin_Writing_Best_Practices\">crea to propio"
-" plugin</a>!"
+msgstr "Para agregar nuevos plugins descargue de <a href=\"http://omeka.org/add-ons/plugins/\">Directorio de Plugins Omeka</a>, o <a href=\"http://omeka.org/codex/Plugin_Writing_Best_Practices\">crea to propio plugin</a>!"
 
 #: admin/themes/default/plugins/config.php:2
 #, php-format
@@ -1243,7 +1199,7 @@ msgstr "Confirmar que desea desinstalar %s"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:8
 msgid "Are you sure you want to uninstall this plugin?"
-msgstr "¿Esta seguro que deseas desinstalar el plugin?"
+msgstr "¿Está seguro que deseas desinstalar el plugin?"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:13
 msgid "Yes, I want to uninstall this plugin."
@@ -1265,16 +1221,14 @@ msgstr "o"
 #: admin/themes/default/plugins/plugin-info.php:24
 #, php-format
 msgid "This version of %1$s requires at least Omeka %2$s."
-msgstr "Esta versión de %1$s requiere como minimo Omeka %2$s."
+msgstr "Esta versión de %1$s requiere como mínimo Omeka %2$s."
 
 #: admin/themes/default/plugins/plugin-info.php:27
 #, php-format
 msgid ""
 "%1$s requires the following plugins to be installed, activated, and loaded: "
 "%2$s"
-msgstr ""
-"El %1$s plugin requiere que los siguientes plugins sean instalados, "
-"activados, y cargados: %2$s"
+msgstr "El %1$s plugin requiere que los siguientes plugins sean instalados, activados, y cargados: %2$s"
 
 #: admin/themes/default/plugins/plugin-info.php:30
 msgid "The plugin.php file is missing."
@@ -1288,7 +1242,7 @@ msgstr "El %s plugin no puede ser cargado por las siguientes razones:"
 #: admin/themes/default/plugins/plugin-info.php:48
 #, php-format
 msgid "You have a new version of %s. Please upgrade!"
-msgstr "Hay una nueva version de %s. ¡Por favor, actualice!"
+msgstr "Hay una nueva versión de %s. ¡Por favor, actualice!"
 
 #: admin/themes/default/plugins/plugin-info.php:58
 #: admin/themes/default/themes/browse.php:10
@@ -1320,7 +1274,7 @@ msgstr "Instalar"
 
 #: admin/themes/default/security/edit.php:2
 msgid "Edit Security Settings"
-msgstr "Redactar la configuración de seguridad"
+msgstr "Editar la Configuración de Seguridad"
 
 #: admin/themes/default/security/edit.php:10
 msgid "Restore Default File Extensions"
@@ -1364,9 +1318,7 @@ msgstr "Elija una etiqueta para eliminar:"
 
 #: admin/themes/default/tags/delete.php:25
 msgid "There are no tags to delete. You must first tag some items."
-msgstr ""
-"No hay etiquetas para eliminar. En primer lugar, debe etiquetar algunos "
-"elementos."
+msgstr "No hay etiquetas para eliminar. En primer lugar, debe etiquetar algunos elementos."
 
 #: admin/themes/default/tags/edit.php:12
 msgid "Choose a tag to rename"
@@ -1378,9 +1330,7 @@ msgstr "Entrar un nuevo nombre para la etiqueta"
 
 #: admin/themes/default/tags/edit.php:32
 msgid "There are no tags to edit. You must first tag some items."
-msgstr ""
-"No hay etiquetas para redactar. En primer lugar, debe etiquetar unos "
-"elementos."
+msgstr "No hay etiquetas para editar. En primer lugar, debe etiquetar algunos elementos."
 
 #: admin/themes/default/themes/browse.php:2
 msgid "Browse Themes"
@@ -1425,11 +1375,7 @@ msgid ""
 "ons/themes/\">Omeka Theme Directory</a>, or <a "
 "href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">design your "
 "own</a>!"
-msgstr ""
-"Para agregar nuevos temas decargándolos de <a href=\"http://omeka.org/add-"
-"ons/themes/\">Omeka Theme Directory</a>, or <a "
-"href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">diseñe su "
-"propio tema</a>!"
+msgstr "Para agregar nuevos temas decargándolos de <a href=\"http://omeka.org/add-ons/themes/\">Omeka Theme Directory</a>, or <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">diseñe su propio tema</a>!"
 
 #: admin/themes/default/themes/config.php:2
 #, php-format
@@ -1438,7 +1384,7 @@ msgstr "Configurar el &#8220;%s&#8221; Tema"
 
 #: admin/themes/default/themes/config.php:9
 msgid "Configurations apply to this theme only."
-msgstr "Configuraciones se aplican solamente a este tema."
+msgstr "Las Configuraciones se aplican solamente a este tema."
 
 #: admin/themes/default/users/add.php:2
 msgid "Add New User"
@@ -1525,7 +1471,7 @@ msgstr "e-mail"
 #: admin/themes/default/users/edit.php:8
 #, php-format
 msgid "Edit User #%s"
-msgstr "Editar el usuario #%s"
+msgstr "Editar el Usuario #%s"
 
 #: admin/themes/default/users/show.php:8
 #, php-format
@@ -1560,19 +1506,13 @@ msgid ""
 "This will delete the collection and its associated metadata. This will not "
 "delete any items in this collection, but will delete the reference to this "
 "collection in each item."
-msgstr ""
-"Esto eliminará la colección y sus metadatos asociados. No se eliminarán "
-"ninguno de los elementos en esta colección, pero se borrará la referencia a "
-"la colección en cada uno de los elementos."
+msgstr "Esto eliminará la colección y sus metadatos asociados. No se eliminarán ninguno de los elementos en esta colección, pero se borrará la referencia a la colección en cada uno de los elementos."
 
 #: application/controllers/ElementSetsController.php:26
 msgid ""
 "This will delete the element set and all elements assigned to the element "
 "set. Items will lose all metadata that is specific to this element set."
-msgstr ""
-"Esto eliminará este set de metadatos y todos los elementos asignados a este "
-"set de metadatos. Los elementos perderan todos los metadatos que son "
-"específicos a este set de metadatos."
+msgstr "Esto eliminará este set de metadatos y todos los elementos asignados a este set de metadatos. Los elementos perderán todos los metadatos que son específicos a este set de metadatos."
 
 #: application/controllers/ErrorController.php:66
 msgid "Page not found."
@@ -1587,19 +1527,14 @@ msgid ""
 "This will delete the item type but will not delete the elements assigned to "
 "the item type. Items that are assigned to this item type will lose all "
 "metadata that is specific to the item type."
-msgstr ""
-"Esto eliminará el tipo de elemento pero no eliminará los elementos asignados"
-" a ese tipo de elemento. Los elementos asignados a este tipo de elemento "
-"perderán todos los metadatos que son específicos de ese tipo de elemento."
+msgstr "Esto eliminará el tipo de elemento pero no eliminará los elementos asignados a ese tipo de elemento. Los elementos asignados a este tipo de elemento perderán todos los metadatos que son específicos de ese tipo de elemento."
 
 #: application/controllers/ItemTypesController.php:58
 #, php-format
 msgid ""
 "The item type \"%s\" was successfully added!  You may now add elements to "
 "your new item type."
-msgstr ""
-"¡El tipo de el elemento \"%s\" fue agregado con éxito! Ahora puede agregar "
-"elementos a su nuevo tipo de elemento."
+msgstr "¡El tipo de el elemento \"%s\" fue agregado con éxito! Ahora puede agregar elementos a su nuevo tipo de elemento."
 
 #: application/controllers/ItemTypesController.php:94
 #, php-format
@@ -1628,9 +1563,7 @@ msgstr "¡El elemento fue eliminado con éxito!"
 msgid ""
 "This will delete the item and its associated metadata. It will also delete "
 "all files and file metadata associated with this item."
-msgstr ""
-"Esto eliminará el elemento y sus metadatos asociados. También eliminará "
-"todos los archivos asociados con este elemento."
+msgstr "Esto eliminará el elemento y sus metadatos asociados. También eliminará todos los archivos asociados con este elemento."
 
 #: application/controllers/ItemsController.php:266
 msgid "User does not have permission to add tags."
@@ -1642,15 +1575,11 @@ msgstr "Debe elegir algunos elementos para editarlos de forma masiva."
 
 #: application/controllers/ItemsController.php:338
 msgid "User is not allowed to modify visibility of items."
-msgstr ""
-"El usuario no está autorizado para modificar la visibilidad de los "
-"elementos."
+msgstr "El usuario no está autorizado para modificar la visibilidad de los elementos."
 
 #: application/controllers/ItemsController.php:343
 msgid "User is not allowed to modify featured status of items."
-msgstr ""
-"El usuario no está autorizado para modificar el estado de los elementos "
-"destacados."
+msgstr "El usuario no está autorizado para modificar el estado de los elementos destacados."
 
 #: application/controllers/ItemsController.php:350
 msgid "User is not allowed to delete selected items."
@@ -1658,12 +1587,11 @@ msgstr "El usuario no tiene permiso para borrar los elementos seleccionados."
 
 #: application/controllers/ItemsController.php:356
 msgid "User is not allowed to edit selected items."
-msgstr "El usuario no tiene permiso para editar los elementos seleccionados"
+msgstr "El usuario no tiene permiso para editar los elementos seleccionados."
 
 #: application/controllers/ItemsController.php:361
 msgid "User is not allowed to tag selected items."
-msgstr ""
-"El Usuario no tiene permiso para etiquetar los elementos seleccionados"
+msgstr "El Usuario no tiene permiso para etiquetar los elementos seleccionados"
 
 #: application/controllers/ItemsController.php:384
 msgid "The items were successfully changed!"
@@ -1674,9 +1602,7 @@ msgstr "¡El elemento fue cambiado con éxito!"
 msgid ""
 "Error in configuring plugin named \"%s\". Missing config and/or config_form "
 "hook(s)."
-msgstr ""
-"Error en la configuración del plugin llamado \"%s\". Falta el config y/o "
-"config_form hook(s)."
+msgstr "Error en la configuración del plugin llamado \"%s\". Falta el config y/o config_form hook(s)."
 
 #: application/controllers/PluginsController.php:55
 #, php-format
@@ -1767,7 +1693,7 @@ msgstr "La configuración general ha sido actualizada."
 #: application/controllers/SettingsController.php:46
 #: install/views/scripts/index/index.phtml:16
 msgid "There were errors found in your form. Please edit and resubmit."
-msgstr "Hubo errores detectados en el formulario. Por favor, edite y reenvie."
+msgstr "Hubo errores detectados en el formulario. Por favor, edite y reenvíe."
 
 #: application/controllers/SettingsController.php:70
 msgid "Works"
@@ -1801,9 +1727,7 @@ msgstr "Envío de formulario no válido"
 
 #: application/controllers/ThemesController.php:38
 msgid "You have chosen an illegal theme name. Please select another theme."
-msgstr ""
-"Ha escogido un nombre de tema no válido. Por favor elija otro nombre para su"
-" tema."
+msgstr "Ha escogido un nombre de tema no válido. Por favor elija otro nombre para su tema."
 
 #: application/controllers/ThemesController.php:51
 msgid "The theme has been successfully changed."
@@ -1822,9 +1746,7 @@ msgstr "Error de SQL en la migración: "
 msgid ""
 "Unable to reset password. Please verify that the information is correct and "
 "contact an administrator if necessary."
-msgstr ""
-"No se puede restablecer la contraseña. Por favor, compruebe que la "
-"información es correcta y contacte con un administrador si es necesario."
+msgstr "No se puede restablecer la contraseña. Por favor, compruebe que la información es correcta y contacte con un administrador si es necesario."
 
 #: application/controllers/UsersController.php:129
 msgid "Please follow this link to reset your password:"
@@ -1840,13 +1762,11 @@ msgstr "%s Administrador"
 #: application/controllers/UsersController.php:135
 #, php-format
 msgid "[%s] Reset Your Password"
-msgstr "[%s] restablecer contraseña"
+msgstr "[%s] Restablecer su Contraseña"
 
 #: application/controllers/UsersController.php:138
 msgid "Please check your email for a link to reset your password."
-msgstr ""
-"Por favor, revise su correo electrónico y haga click en el enlace para "
-"restablecer su contraseña."
+msgstr "Por favor, revise su correo electrónico y haga click en el enlace para restablecer su contraseña."
 
 #: application/controllers/UsersController.php:154
 msgid "Password: The passwords do not match."
@@ -1885,10 +1805,7 @@ msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
 "this user will remain in the archive, but will no longer be associated with "
 "this user."
-msgstr ""
-"%s se eliminarán del sistema. Elementos, colecciones y etiquetas creados por"
-" este usuario permanecerán en el archivo, pero no aparecerán asociados con "
-"este usuario."
+msgstr "%s se eliminarán del sistema. Elementos, colecciones y etiquetas creados por este usuario permanecerán en el archivo, pero no aparecerán asociados con este usuario."
 
 #: application/controllers/UsersController.php:294
 msgid "Welcome!"
@@ -1899,9 +1816,7 @@ msgstr "Bienvenido "
 msgid ""
 "Your account for the %s archive has been created. Please click the following"
 " link to activate your account:"
-msgstr ""
-"Su cuenta para el %s archivo ha sido creado. Por favor haga click en el "
-"siguiente enlace para activar su cuenta:"
+msgstr "Su cuenta para el %s archivo ha sido creado. Por favor haga click en el siguiente enlace para activar su cuenta:"
 
 #: application/controllers/UsersController.php:299
 #, php-format
@@ -1956,10 +1871,7 @@ msgstr "Delimitador de etiquetas"
 msgid ""
 "Separate tags using this character or string. Be careful when changing this "
 "setting. You run the risk of splitting tags that contain the old delimiter."
-msgstr ""
-"Separar etiquetas usando este caracter o secuencia de caracteres. Preste "
-"atención cuando cambie esta configuración pues se corre el riesgo de separar"
-" etiquetas que contengan el viejo caracter delimitador."
+msgstr "Separar etiquetas usando este caracter o secuencia de caracteres. Preste atención cuando cambie esta configuración pues se corre el riesgo de separar etiquetas que contengan el viejo caracter delimitador."
 
 #: application/forms/GeneralSettings.php:64 application/forms/Install.php:123
 msgid "Fullsize Image Size"
@@ -1993,9 +1905,7 @@ msgstr "Elementos Por Página (administrador)"
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
-msgstr ""
-"Limite el número de elementos mostrados por página de interfaz "
-"administrativa."
+msgstr "Limite el número de elementos mostrados por página de interfaz administrativa."
 
 #: application/forms/GeneralSettings.php:92 application/forms/Install.php:155
 msgid "Items Per Page (public)"
@@ -2003,8 +1913,7 @@ msgstr "Elementos Por Página (interfaz pública)"
 
 #: application/forms/GeneralSettings.php:93 application/forms/Install.php:156
 msgid "Limit the number of items displayed per page in the public interface."
-msgstr ""
-"Limite el número de elementos mostrados por página en la interfaz pública."
+msgstr "Limite el número de elementos mostrados por página en la interfaz pública."
 
 #: application/forms/GeneralSettings.php:99 application/forms/Install.php:163
 msgid "Show Empty Elements"
@@ -2018,9 +1927,7 @@ msgstr "Habilitar el Prototipo"
 msgid ""
 "Enable the Prototype JavaScript library. This may be required for some older"
 " plugins."
-msgstr ""
-"Habilitar la bilblioteca de Prototipo JavaScript. Puede resultar necesaria "
-"para algunos plugins anticuados."
+msgstr "Habilitar la bilblioteca de Prototipo JavaScript. Puede resultar necesaria para algunos plugins anticuados."
 
 #: application/forms/GeneralSettings.php:110 application/forms/Install.php:169
 msgid "Imagemagick Directory Path"
@@ -2097,8 +2004,7 @@ msgstr "El formato de dirección de correo electrónico no es válido."
 
 #: application/forms/RecoverPassword.php:55
 msgid "Invalid hostname given for email address."
-msgstr ""
-"El nombre de host dado para la dirección de correo electrónico es inválido."
+msgstr "El nombre de host dado para la dirección de correo electrónico es inválido."
 
 #: application/forms/RecoverPassword.php:73
 msgid "Invalid email address"
@@ -2125,9 +2031,7 @@ msgstr "Desactivar la validación de subida de archivos"
 msgid ""
 "Check this field if you would like to allow any file to be uploaded to "
 "Omeka."
-msgstr ""
-"Marque este campo si desea permitir que cualquier archivo sea subido a "
-"Omeka."
+msgstr "Marque este campo si desea permitir que cualquier archivo sea subido a Omeka."
 
 #: application/forms/SecuritySettings.php:35
 msgid "Allowed File Extensions"
@@ -2153,9 +2057,7 @@ msgstr "Clave pública ReCaptcha"
 msgid ""
 "Public key from recaptcha.net. Both this and the private key must be filled "
 "in to secure public forms."
-msgstr ""
-"Clave publica de recaptcha.net. Esta clave y la privada deben completarse "
-"para proteger los formularios publicos."
+msgstr "Clave publica de recaptcha.net. Esta clave y la privada deben completarse para proteger los formularios publicos."
 
 #: application/forms/SecuritySettings.php:63
 msgid "ReCaptcha Private Key"
@@ -2165,9 +2067,7 @@ msgstr "Clave privada ReCaptcha"
 msgid ""
 "Private key from recaptcha.net. Both this and the public key must be filled "
 "in to secure public forms."
-msgstr ""
-"Clave privada de recaptcha.net. Esta clave y la privada deben completarse "
-"para proteger los formularios publicos."
+msgstr "Clave privada de recaptcha.net. Esta clave y la privada deben completarse para proteger los formularios publicos."
 
 #: application/forms/User.php:35
 msgid "Username is required."
@@ -2239,9 +2139,7 @@ msgstr "Añadir Entrada"
 #: application/helpers/ElementForm.php:286
 #, php-format
 msgid "Cannot display a form input for \"%s\" if element type name is not given!"
-msgstr ""
-"¡No se puede mostrar un formulario de entrada para \"%s\" si no se "
-"proporciona el nombre de tipo de elemento!"
+msgstr "¡No se puede mostrar un formulario de entrada para \"%s\" si no se proporciona el nombre de tipo de elemento!"
 
 #: application/helpers/ElementForm.php:346
 msgid "From"
@@ -2290,9 +2188,7 @@ msgstr "Elemento Destacado"
 msgid ""
 "An item has not been set to be displayed on this theme page! Please see "
 "Omeka documentation for details."
-msgstr ""
-"¡Un elemento no ha sido establecido para aparecer en esta página de temas! "
-"Por favor ver la documentación Omeka para mas detalles."
+msgstr "¡Un elemento no ha sido establecido para aparecer en esta página de temas! Por favor ver la documentación Omeka para mas detalles."
 
 #: application/helpers/ItemFunctions.php:571
 msgid "No featured items are available."
@@ -2341,9 +2237,7 @@ msgstr "¡No pude encontrar un elemento con el ID de '%s'!"
 msgid ""
 "Element name is ambiguous! There is more than one element set containing an "
 "element named \"%s\"!"
-msgstr ""
-"¡El nombre de elemento es ambiguo! ¡Existe mas de un set de elemnto que "
-"contiene un elemento de nombre \"%s\"!"
+msgstr "¡El nombre de elemento es ambiguo! ¡Existe mas de un set de elemnto que contiene un elemento de nombre \"%s\"!"
 
 #: application/models/ActsAsElementText.php:317
 #: application/models/ActsAsElementText.php:324
@@ -2363,9 +2257,7 @@ msgstr "¡Los elementos de texto no tienen el formato correcto!"
 #: application/models/ActsAsElementText.php:647
 #, php-format
 msgid "Cannot process form input for element with data type \"%s\"!"
-msgstr ""
-"¡No se puede procesar el formulario de entrada para el elemento con tipo de "
-"datos \"%s\"!"
+msgstr "¡No se puede procesar el formulario de entrada para el elemento con tipo de datos \"%s\"!"
 
 #: application/models/ActsAsElementText.php:662
 #, php-format
@@ -2379,9 +2271,7 @@ msgstr "¡No se puede validar el elemento con el tipo de datos \"%s\"!"
 
 #: application/models/ActsAsElementText.php:735
 msgid "Cannot save element text for records that are not yet persistent!"
-msgstr ""
-"¡No se puede guardar el elemento de texto para récords que aun no son "
-"persistentes!"
+msgstr "¡No se puede guardar el elemento de texto para récords que aun no son persistentes!"
 
 #: application/models/Collection.php:107
 msgid "Collectors must be either a string or an array."
@@ -2390,25 +2280,20 @@ msgstr "Los colectores tiene que ser una cadena o una matriz."
 #: application/models/Collection.php:148
 #, php-format
 msgid "The collection name must have between %1$s and %2$s characters."
-msgstr ""
-"El nombre de la colección tiene que tener entre %1$s and %2$s caracteres."
+msgstr "El nombre de la colección tiene que tener entre %1$s and %2$s caracteres."
 
 #: application/models/Collection.php:198
 msgid ""
 "Argument passed to addCollector() must be a string or an instance of Entity."
-msgstr ""
-"El argumento pasado a addCollector() debe ser una cadena o una instancia de "
-"Entidad."
+msgstr "El argumento pasado a addCollector() debe ser una cadena o una instancia de Entidad."
 
 #: application/models/Collection.php:230
 msgid "Cannot associate the collection with an unsaved user."
-msgstr ""
-"No se puede associar una colección con un usuario que no ha sido guardado."
+msgstr "No se puede associar una colección con un usuario que no ha sido guardado."
 
 #: application/models/CollectionPermissions.php:37
 msgid "Invalid query provided to CollectionPermissions check"
-msgstr ""
-"Se ha facilitado una consulta inválida al chequeo de CollectionPermissions"
+msgstr "Se ha facilitado una consulta inválida al chequeo de CollectionPermissions"
 
 #: application/models/DataTypeTable.php:31
 #, php-format
@@ -2435,9 +2320,7 @@ msgstr "%1$s ya existe para el set de elementos #%2$s"
 #: application/models/Element.php:252
 #, php-format
 msgid "Cannot set element set ID: set named \"%s\" does not exist."
-msgstr ""
-"No se puede establecer el ID del set de elemento: el set con nombre \"%s\" "
-"no existe."
+msgstr "No se puede establecer el ID del set de elemento: el set con nombre \"%s\" no existe."
 
 #: application/models/ElementSet.php:119
 msgid "Name of element set must be unique."
@@ -2449,14 +2332,11 @@ msgstr "El nombre del set de elemento no debe estar vacío."
 
 #: application/models/EntitiesRelations.php:29
 msgid "Joins in the EntitiesRelations table must be given a polymorphic type"
-msgstr ""
-"Los índices Joins en la tabla EntitiesRelations debe ser de tipo polimórfico"
+msgstr "Los índices Joins en la tabla EntitiesRelations debe ser de tipo polimórfico"
 
 #: application/models/EntitiesRelations.php:33
 msgid "Joins in the EntitiesRelations table must be filled out entirely"
-msgstr ""
-"Los índices Joins en la tabla EntitiesRelations se deben completar en su "
-"totalidad"
+msgstr "Los índices Joins en la tabla EntitiesRelations se deben completar en su totalidad"
 
 #: application/models/Entity.php:37
 msgid "The email address provided is not valid."
@@ -2477,9 +2357,7 @@ msgstr "No se puede obtener la ruta de acceso para un archivo almacenado."
 #: application/models/Item.php:284
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
-msgstr ""
-"¡Los archivos no pueden ser unidos a un elemento que no es persistente en la"
-" base de datos!"
+msgstr "¡Los archivos no pueden ser unidos a un elemento que no es persistente en la base de datos!"
 
 #: application/models/Item.php:398
 msgid "Cannot add an existing file to an item!"
@@ -2487,43 +2365,35 @@ msgstr "¡No puede añadir un archivo existente a un elemento!"
 
 #: application/models/Item.php:402
 msgid "File must be valid before it can be associated with an item!"
-msgstr ""
-"¡El archivo debe ser válido para que pueda estar associado con un elemento!"
+msgstr "¡El archivo debe ser válido para que pueda estar associado con un elemento!"
 
 #: application/models/ItemBuilder.php:141
 msgid "Cannot add tags to an item if no Entity is available to tag."
-msgstr ""
-"No se puede añadir una etiqueta a un elemento si no tiene ninguna entidad "
-"disponible."
+msgstr "No se puede añadir una etiqueta a un elemento si no tiene ninguna entidad disponible."
 
 #: application/models/ItemBuilder.php:265
 msgid "Must specify a file transfer type when attaching files to an item!"
-msgstr ""
-"¡Debe especificar un tipo de transferencia de archivo cuando adjunte "
-"archivos a un elemento!"
+msgstr "¡Debe especificar un tipo de transferencia de archivo cuando adjunte archivos a un elemento!"
 
 #: application/models/ItemPermissions.php:34
 #, php-format
 msgid ""
 "This SQL statement needs a FROM or JOIN clause equivalent to '%s i' in order"
 " to have permissions checked!"
-msgstr ""
-"¡Esta declaración de SQL necesita una cláusula FROM o JOIN equivalente a '%s"
-" i' con el fin de tener los permisos comprobados!"
+msgstr "¡Esta declaración de SQL necesita una cláusula FROM o JOIN equivalente a '%s i' con el fin de tener los permisos comprobados!"
 
 #: application/models/ItemSearch.php:98
 msgid "Invalid search type given!"
-msgstr "¡Tipo de busqueda dada es invalida!"
+msgstr "¡Tipo de búsqueda dada no válido!"
 
 #: application/models/ItemType.php:83
 #, php-format
 msgid "The item type name must have between %1$s and %2$s characters."
-msgstr ""
-"El nombre de tipo de elemento debe tener entre %1$s y %2$s caracteres."
+msgstr "El nombre del tipo de elemento debe tener entre %1$s y %2$s caracteres."
 
 #: application/models/ItemType.php:87
 msgid "The item type name must be unique."
-msgstr "El nombre de tipo de elemento debe ser único."
+msgstr "El nombre del tipo de elemento debe ser único."
 
 #: application/models/ItemType.php:175
 msgid "There are too many values in the element ordering array."
@@ -2537,17 +2407,13 @@ msgstr "No hay suficientes valores en la matriz de calificación de elemento."
 msgid ""
 "Invalid element data. To add elements, you must either pass an element "
 "objects or an array of element metadata."
-msgstr ""
-"Dato de elemento invalido. Para añadir elementos, Usted debe pasar un objeto"
-" de elemento o una matriz de metadatos de elemento."
+msgstr "Dato de elemento invalido. Para añadir elementos, Usted debe pasar un objeto de elemento o una matriz de metadatos de elemento."
 
 #: application/models/ItemType.php:285
 msgid ""
 "Cannot remove elements from an item type that is not persistent in the "
 "database!"
-msgstr ""
-"¡No se puede remover elementos de un tipo de elemento que no está "
-"persistente en la base de datos!"
+msgstr "¡No se puede remover elementos de un tipo de elemento que no está persistente en la base de datos!"
 
 #: application/models/ItemType.php:294
 #, php-format
@@ -2563,9 +2429,7 @@ msgstr "¡El tipo de elemento no contiene ningun elemento con el ID %s!"
 msgid ""
 "Invalid parameter. The hasElement function requires either an element object"
 " or an element id to determine if an item type has an element."
-msgstr ""
-"Parámetro invalido. La función hasElement requiere un objeto de elemento o "
-"un id de elemento para determinar si un tipo de elemento tiene objetos."
+msgstr "Parámetro invalido. La función hasElement requiere un objeto de elemento o un id de elemento para determinar si un tipo de elemento tiene objetos."
 
 #: application/models/Option.php:28 application/models/Option.php:32
 msgid "Each option must have a unique name."
@@ -2619,8 +2483,7 @@ msgstr "No hay record de entidad disponible."
 
 #: application/models/User.php:75
 msgid "No Entity record is available when saving this User."
-msgstr ""
-"No hay record de entidad disponible cuando se está guardando este usuario."
+msgstr "No hay record de entidad disponible cuando se está guardando este usuario."
 
 #: application/models/User.php:92
 msgid "User may not change permissions to super-user"
@@ -2634,9 +2497,7 @@ msgstr "El usuario no puede cambiar roles."
 msgid ""
 "If a first name and last name are not provided, then an institution name is "
 "required."
-msgstr ""
-"Si un nombre de pila o apellido no es dado, entonces el nombre de la "
-"institucion es requerido."
+msgstr "Si un nombre de pila o apellido no es dado, entonces el nombre de la institucion es requerido."
 
 #: application/models/User.php:156
 msgid "A first name is required."
@@ -2666,8 +2527,7 @@ msgstr "'%s' ya esta en uso. Por favor escoja otro nombre de usuario."
 
 #: application/models/UsersActivations.php:31
 msgid "Cannot create a user activation for non-existent user."
-msgstr ""
-"No se puede crear una activacion de usuario para un usuario que no existe."
+msgstr "No se puede crear una activacion de usuario para un usuario que no existe."
 
 #: application/views/scripts/collections/browse.php:21
 #: application/views/scripts/collections/show.php:13
@@ -2760,11 +2620,7 @@ msgid ""
 "Omeka Codex page on <a "
 "href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error "
 "messages</a>."
-msgstr ""
-"Para saber como ver más información detallada sobre este error, ver la "
-"página de documentación de Omeka: <a "
-"href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error "
-"messages</a>."
+msgstr "Para saber como ver más información detallada sobre este error, ver la página de documentación de Omeka: <a href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error messages</a>."
 
 #: application/views/scripts/functions.php:131
 msgid "Browse All"
@@ -2887,10 +2743,7 @@ msgid ""
 "If you have any questions please refer to <a "
 "href=\"http://omeka.org/codex\">Omeka documentation</a> or post a message on"
 " the <a href=\"http://omeka.org/forums\">Omeka forums</a>."
-msgstr ""
-"Si usted tiene alguna pregunta por favor, vaya a <a "
-"href=\"http://omeka.org/codex\">Documentación de Omeka</a> o agrege su "
-"pregunta al <a href=\"http://omeka.org/forums\">Foro de Omeka</a>."
+msgstr "Si usted tiene alguna pregunta por favor, vaya a <a href=\"http://omeka.org/codex\">Documentación de Omeka</a> o agrege su pregunta al <a href=\"http://omeka.org/forums\">Foro de Omeka</a>."
 
 #: application/views/scripts/upgrade/index.php:10
 msgid "Upgrade Your Omeka Database"
@@ -2899,15 +2752,12 @@ msgstr "Actualice su base de datos Omeka"
 #: application/views/scripts/upgrade/index.php:12
 msgid ""
 "Your Omeka database is not compatible with your current version of Omeka."
-msgstr ""
-"Su base de datos de Omeka no es compatible con la versión actual de Omeka."
+msgstr "Su base de datos de Omeka no es compatible con la versión actual de Omeka."
 
 #: application/views/scripts/upgrade/index.php:13
 msgid ""
 "Please back up your existing database and then click the button to upgrade."
-msgstr ""
-"Por favor, haga una copia de seguridad de la base de datos actual y después "
-"haga click en el botón de actualización."
+msgstr "Por favor, haga una copia de seguridad de la base de datos actual y después haga click en el botón de actualización."
 
 #: application/views/scripts/upgrade/index.php:15
 msgid "Upgrade Database"
@@ -2919,9 +2769,7 @@ msgstr "Omeka ha detectado un error al actualizar la instalación."
 
 #: application/views/scripts/upgrade/migrate.php:16
 msgid "Please restore from your database backup and try again."
-msgstr ""
-"Por favor, restaure su base de datos con la copia de seguridad y vuelva a "
-"intentarlo."
+msgstr "Por favor, restaure su base de datos con la copia de seguridad y vuelva a intentarlo."
 
 #: application/views/scripts/upgrade/migrate.php:21
 msgid "Omeka has upgraded successfully."
@@ -2976,9 +2824,7 @@ msgstr "Aviso de instalación"
 msgid ""
 "The following issues will not affect installation, but they may negatively "
 "affect the behavior of Omeka:"
-msgstr ""
-"Los siguientes problemas no afectan la instalación, pero pueden afectar "
-"negativamente el comportamiento de Omeka: "
+msgstr "Los siguientes problemas no afectan la instalación, pero pueden afectar negativamente el comportamiento de Omeka: "
 
 #: install/views/scripts/index/index.phtml:13
 msgid "Configure Your Site"
@@ -2992,9 +2838,7 @@ msgstr "Error de validacion de formulario"
 msgid ""
 "Omeka is installed. You may remove the \"install\" directory for security "
 "reasons."
-msgstr ""
-"Omeka ha sido instalado. Es conveniente eliminar el directorio \"install\" "
-"por razones de seguridad."
+msgstr "Omeka ha sido instalado. Es conveniente eliminar el directorio \"install\" por razones de seguridad."
 
 #: install/views/scripts/index/installed.phtml:2
 msgid "Admin Panel"
@@ -3007,5 +2851,3 @@ msgstr "Sitio Público"
 #: install/views/scripts/layout.phtml:5 install/views/scripts/layout.phtml:9
 msgid "Omeka Installation"
 msgstr "Instalacion de Omeka"
-
-

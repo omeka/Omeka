@@ -172,12 +172,8 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
                 if (!array_key_exists('text', $values)) {
                     break;
                 }
-
-                if (!array_key_exists('html', $values)) {
-                    throw new Exception('What are you talking about?  You need the "html" field if you want HtmlPurifier to work correctly.');
-                }
                 
-                if ((boolean)$values['html']) {
+                if (array_key_exists('html', $values) && (boolean)$values['html']) {
                     $post['Elements'][$elementId][$index]['text'] = $htmlPurifierFilter->filter($values['text']);
                 }
             }
