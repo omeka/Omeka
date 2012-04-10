@@ -70,6 +70,5 @@
     
     <section id="content" class="container">
     
-    <div class="two columns">&nbsp;</div>
     
-    <div class="ten columns">
+    <div class="ten columns offset-by-two omega">

@@ -20,7 +20,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
 
             
 
-<p class="managethemes"><?php echo __('Add new themes by downloading them from the <a href="http://omeka.org/add-ons/themes/">Omeka Theme Directory</a>, or <a href="http://omeka.org/codex/Theme_Writing_Best_Practices">design your own</a>!'); ?></p>            
+<p class="managethemes"><?php echo __('Add new themes by downloading them from the <a href="http://omeka.org/add-ons/themes/" target="_blank">Omeka Theme Directory</a>, or <a href="http://omeka.org/codex/Theme_Writing_Best_Practices" target="_blank">design your own</a>!'); ?></p>            
                 <div class="themes group">
                 <?php 
                 $i = 0;
@@ -39,7 +39,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
                         </div>
                         <input type="submit" name="submit" class="use-theme green button" value="<?php echo __('Use this theme'); ?>" />
                         <div class="meta">
-                            <h3><a href="<?php echo html_escape($theme->website); ?>"><?php echo html_escape($theme->title); ?></a></h3>
+                            <h3><a href="<?php echo html_escape($theme->website); ?>" target="_blank"><?php echo html_escape($theme->title); ?></a></h3>
                             <p class="author">By <?php echo html_escape($theme->author); ?></p>
                         </div>
                     </div>

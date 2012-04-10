@@ -15,9 +15,12 @@ a.button.big, input[type=submit].big, button.big {
 /* Content Navigation
 ==================================================*/
 
-.content-nav { font-size: .75em; }
+#content-nav { 
+    width: 100px;
+    font-size: .75em; 
+    }
 
-    .content-nav .current:after {
+    #content-nav .current:after {
         width: 10px;
         height: 2.375em;
         background: url('../../images/blue-arrow_sm.png') no-repeat;

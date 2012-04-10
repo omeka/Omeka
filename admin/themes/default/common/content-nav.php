@@ -1,4 +1,4 @@
-    <nav class="content-nav two columns">
+    <nav id="content-nav" class="two columns">
     
         <ul>
             <?php

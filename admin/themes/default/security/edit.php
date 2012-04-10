@@ -28,8 +28,12 @@ jQuery(document).ready(function () {
 //]]>
 </script>
 
+<div class="eight columns">
+
 <?php common('settings-nav'); ?>
 <?php echo flash(); ?>
 <?php echo $this->form; ?>
-		
+			
+</div>
+
 <?php foot(); ?>

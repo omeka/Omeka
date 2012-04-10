@@ -20,9 +20,6 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
                     __('Date Added') => 'added',
                     __('Total Number of Items') => null
                 )); ?>
-                <?php if (has_permission('Collections', 'edit')): ?>
-                    <th scope="col"><?php echo __('Edit?'); ?></th>                
-                <?php endif; ?>
                 </tr>
             </thead>
             <tbody>
@@ -30,9 +27,15 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
         <?php while (loop_collections()): ?>
         
             <tr class="collection<?php if(++$key%2==1) echo ' odd'; else echo ' even'; ?>">
-                <td scope="row"><?php echo collection('id');?>
-                </td> 
-                <td class="title"><?php echo link_to_collection(); ?></td>
+                <td scope="row"><?php echo collection('id');?></td> 
+                <td class="title">
+                    <?php echo link_to_collection(); ?>
+                    <?php if (has_permission(get_current_collection(), 'edit')): ?>
+                    <ul class="action-links">
+                        <li><?php echo link_to_collection(__('Edit'), array('class'=>'edit'), 'edit'); ?></li>
+                    </ul>
+                    <?php endif; ?>
+                </td>
                 <td>
                 <?php if (collection_has_collectors()): ?> 
                     <?php echo collection('Collectors', array('delimiter'=>'<br>')); ?>
@@ -46,10 +49,6 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
                 <?php endif; ?>
                 </td>
                 <td><?php echo link_to_items_in_collection(); ?></td>
-                <td><?php if (has_permission(get_current_collection(), 'edit')): ?>
-                    <?php echo link_to_collection(__('Edit'), array('class'=>'edit'), 'edit'); ?>
-                <?php endif; ?>
-                </td>
             </tr>
         
             

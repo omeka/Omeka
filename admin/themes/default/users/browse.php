@@ -72,7 +72,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
                                 <li><?php echo link_to($user, 'edit', __('Edit'), array('class'=>'edit')); ?></li>
                                 <?php endif; ?>     
                                 <?php if (has_permission($user, 'delete')): ?>
-                                <li><?php echo link_to($user, 'delete', __('Delete'), array('class'=>'delete')); ?></li>
+                                <li><?php echo link_to($user, 'delete-confirm', __('Delete'), array('class'=>'delete')); ?></li>
                                 <?php endif; ?>
                             </ul>
                            </td>

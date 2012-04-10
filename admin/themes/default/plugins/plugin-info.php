@@ -49,7 +49,7 @@
         <div class="plugin-info six columns alpha">	
 	        <h3 class="plugin-title"><?php
 	            if ($plugin->getLinkUrl()):
-	                echo '<a href="' . html_escape($plugin->getLinkUrl()) . '">' . html_escape($displayName) . '</a>';
+	                echo '<a href="' . html_escape($plugin->getLinkUrl()) . '" target="_blank">' . html_escape($displayName) . '</a>';
 	            else:
 	                echo html_escape($displayName);
 	            endif; ?>
