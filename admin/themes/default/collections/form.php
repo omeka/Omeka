@@ -5,7 +5,7 @@
     <fieldset id="editcollection">
     
         <div class="element">
-            <h3 class="two columns alpha">Name</h3>
+            <label class="two columns alpha">Name</label>
             <div class="five columns omega inputs">
                 <?php echo $this->formText('name', $collection->name, array('class'=>'textinput', 'size'=>'40')); ?>
                 <?php echo form_error('name'); ?>
@@ -13,7 +13,7 @@
         </div>
         
         <div class="element">
-            <h3 class="two columns alpha">Description</h3>        
+            <label class="two columns alpha">Description</label>        
             <div class="five columns omega inputs">
                 <?php echo form_error('description'); ?>
                 <?php echo $this->formTextarea('description', $collection->description, array('class'=>'textinput', 'rows'=>'10', 'cols'=>'60')); ?>
@@ -21,7 +21,7 @@
         </div>
         
         <div class="element">
-            <h3 class="two columns alpha">Collectors</h2>
+            <label class="two columns alpha">Collectors</label>
             <div class="five columns omega inputs">
                 <?php echo $this->formTextarea('collectors', $collection->collectors, array('class' => 'texinput', 'rows' => '10', 'cols' => '50')); 
             ?>

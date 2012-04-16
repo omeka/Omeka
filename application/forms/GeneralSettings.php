@@ -106,7 +106,8 @@ class Omeka_Form_GeneralSettings extends Omeka_Form
         ));
         
         $this->addElement('submit', 'settings_submit', array(
-            'label' => __('Save Settings')
+            'label' => __('Save Settings'),
+            'class' => 'big green button'
         ));
         
         $this->addDisplayGroup(

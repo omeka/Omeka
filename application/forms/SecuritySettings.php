@@ -89,7 +89,8 @@ class Omeka_Form_SecuritySettings extends Omeka_Form
         ));
         
         $this->addElement('submit', 'security_submit', array(
-            'label' => __('Save Changes')
+            'label' => __('Save Changes'),
+            'class' => 'big green button'
         ));
     }
 }

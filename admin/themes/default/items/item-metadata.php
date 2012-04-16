@@ -5,7 +5,9 @@
         $elementRecord = $info['element'];
         if ($info['isShowable']): ?>
     <div id="<?php echo text_to_id(html_escape("$setName $elementName")); ?>" class="element">
-        <h3 class="two columns alpha"><?php echo html_escape(__($elementName)); ?></h3>
+        <div class="two columns alpha">
+            <h3><?php echo html_escape(__($elementName)); ?></h3>
+        </div>
         <?php if ($info['isEmpty']): ?>
             <div class="element-text-empty">&nbsp;</div>
         <?php else: ?>

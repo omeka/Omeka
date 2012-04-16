@@ -28,7 +28,7 @@ jQuery(document).ready(function () {
 //]]>
 </script>
 
-<div class="eight columns">
+<div class="eight columns alpha">
 
 <?php common('settings-nav'); ?>
 <?php echo flash(); ?>

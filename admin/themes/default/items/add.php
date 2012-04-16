@@ -16,16 +16,21 @@ head(array('title'=>$pageTitle,'content_class' => 'vertical-nav', 'bodyclass'=>'
                     <div id="public-featured">
                         <?php if ( has_permission('Items', 'makePublic') ): ?>
                                 <label for="public"><?php echo __('Public'); ?>:</label> 
-                                <?php echo checkbox(array('name'=>'public', 'id'=>'public'), $item->public); ?>
+                                <?php echo $this->formCheckbox(array('name'=>'public', 'id'=>'public'), $item->public); ?>
                         <?php endif; ?>
                         <?php if ( has_permission('Items', 'makeFeatured') ): ?>
                                 <label for="featured"><?php echo __('Featured'); ?>:</label> 
-                                <?php echo checkbox(array('name'=>'featured', 'id'=>'featured'), $item->featured); ?>
+                                <?php echo $this->formCheckbox(array('name'=>'featured', 'id'=>'featured'), $item->featured); ?>
                         <?php endif; ?>
                         
-                        <?php echo label('collection-id', __('Collection'));?>
+                        <?php echo $this->formLabel('collection-id', __('Collection'));?>
                         <div class="inputs">
-                            <?php echo select_collection(array('name'=>'collection_id', 'id'=>'collection-id'),$item->collection_id); ?>
+                            <?php echo $this->formSelect(
+                                'collection_id',
+                                $item->collection_id,
+                                array('id' => 'collection-id'),
+                                get_table_options('Collection')
+                            );?>
                         </div>
                         
                         <div id="tag-form">

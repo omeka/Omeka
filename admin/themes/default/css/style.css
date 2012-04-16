@@ -174,31 +174,36 @@ p, li {
             -o-border-radius: 0;
         -webkit-appearance: none;
         -moz-appearance: none;
-        box-shadow: 1px 1px 2px rgba(0,0,0,.05);
-            -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.05);
-            -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.05);
-            -o-box-shadow: 1px 1px 2px rgba(0,0,0,.05);
+        box-shadow: 1px 1px 2px rgba(0,0,0,.1);
+            -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
+            -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
+            -o-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
         font-family: "Cabin", sans-serif;
         color: #666666;
         border-radius: 0;
         overflow: hidden;
         font-size: 14px;
-        padding: 0.375em 16px;
+        padding: 5px 16px;
         }
         
     input[type=text], input[type=password] {
-        height: 20px;
+        height: 30px;
         border: 1px solid #d8d8d8;
         border-radius: 0;
         box-shadow: 0 0 .375em #d6d6d6 inset;
             -webkit-box-shadow: 0 0 .375em #d6d6d6 inset;
             -moz-box-shadow: 0 0 .375em #d6d6d6 inset;
             -o-box-shadow: 0 0 .375em #d6d6d6 inset;
+        box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -o-box-sizing: border-box;
         color: #666666;
         font-family: "Cabin", sans-serif;
         font-size: 14px;
         line-height: 20px;
-        padding: 0;
+        margin: 0 0 10px 0;
+        padding: 5px 10px;
         }
         
         input[type=text].big {
@@ -213,14 +218,14 @@ p, li {
     
     .field {
         clear: both;
-        overflow: auto;
         margin-bottom: 20px;
         }
             
         .field label {
             clear: left;
             float: left;
-            margin-bottom: 10px;
+            line-height: 1.5em;
+            margin: 5px 0 10px 0;
             min-width: 120px;
             }
             
@@ -233,12 +238,17 @@ p, li {
         margin-top: 0;
         }
         
-    .input {
-        margin-bottom: 10px;
+    .inputs {
+        margin-bottom: 20px;
         }
         
-        .input input[type=text] {
+        .inputs input[type=text], .inputs textarea {
             width: 99%;
+            margin: 0 0 20px 0;
+            }
+            
+        .inputs inputs a.button, .inputs input[type="submit"], .inputs button {
+            margin-bottom: 10px;
             }
         
     .required:after {
@@ -246,17 +256,20 @@ p, li {
         }
         
     textarea {
-        width:95.75%;
         border: 1px solid #d8d8d8;
         border-radius: 0;
         box-shadow: 0 0 .375em #d6d6d6 inset;
             -webkit-box-shadow: 0 0 .375em #d6d6d6 inset;
             -moz-box-shadow: 0 0 .375em #d6d6d6 inset;
             -o-box-shadow: 0 0 .375em #d6d6d6 inset;
+        box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -o-box-sizing: border-box;
         color: #666666;
         font-family: "Cabin", sans-serif;
         font-size: 14px;
-        padding: 2%;
+        padding: 5px 10px;
         }
                 
         /* Buttons 
@@ -273,13 +286,18 @@ p, li {
             border-left: 1px solid rgba(0,0,0,.3);
             border-right: 1px solid rgba(0,0,0,.3);
             border-bottom: 1px solid rgba(0,0,0,.3);
+            box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                -o-box-sizing: border-box;
             color: #ffffff;
             cursor: pointer;
             font-family: "Cabin", sans-serif;
             font-size: 14px;
             display: inline-block;            
-            line-height: 20px;
             margin: 0 5px 20px 0;
+            line-height: 25px;
+            min-height: 25px;
             padding: 0 10px;            
             text-align: center;
             text-shadow: -1px -1px 1px rgba(0,0,0,.5);
@@ -298,7 +316,6 @@ p, li {
             font-family: "Cabin", sans-serif;
             font-size: 14px;
             display: inline-block;            
-            line-height: 20px;
             margin: 0 5px 20px 0;
             padding: 0 10px;
             }
@@ -809,7 +826,7 @@ header nav {
 .plugins.browse a.button, .plugins.browse input[type=submit], .plugins.browse button {
     width: 90px;
     float: left;
-    padding: 0;
+    padding: 3px inherit;
     }
     
 .plugin-row {
@@ -838,16 +855,21 @@ header nav {
 /* Browse Items  
 ================================================== */
 
+.add-item.button {
+    min-height: inherit;
+    }
+
 #simple-search-form {
     float: right;
     }
     
     #submit_search {
         margin: 0 0 5px 0;
+        vertical-align: top;
         }
         
 #simple-search-form input[type=text] {
-    height: 20px;
+    height: 27px;
     margin: 0;
     }
     
@@ -859,7 +881,11 @@ header nav {
     
 #quick-filter {
     width: 90px;
-    height: 22px;
+    height: 27px;
+    box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -o-box-sizing: border-box;
     font-size: 14px;
     line-height: 19px;
     padding: 0 .5em;
@@ -875,6 +901,8 @@ header nav {
     
     .items-browse input[type=submit], .items-browse a.button, .items-browse button {
         float: left;
+        min-height: 25px;
+        line-height: 25px;
         }
         
     .item-actions {
@@ -895,7 +923,6 @@ header nav {
     }
     
 .pagination {
-    overflow: auto;
     }
     
     .pagination {
@@ -904,7 +931,7 @@ header nav {
         }
     
     .pagination li {
-        height: 20px;
+        height: 25px;
         background: #e2e2e2; /* Fallback */
         background-image: linear-gradient(top, #f8f8f8, #e2e2e2);
             background-image: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#e2e2e2));
@@ -915,18 +942,18 @@ header nav {
         border: 1px solid #D8D8D8;
         -webkit-appearance: none;
         border-radius: 0;
-        box-shadow: 1px 1px 2px rgba(0,0,0,.05);
-            -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.05);
-            -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.05);
-            -o-box-shadow: 1px 1px 2px rgba(0,0,0,.05);
+        box-shadow: 1px 1px 2px rgba(0,0,0,.1);
+            -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
+            -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
+            -o-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
         color: #666666;
         font-family: "Cabin", sans-serif;
         float: left;
         font-size: 14px;
-        line-height: 20px;
+        line-height: 25px;
         list-style-type: none;
         margin: 0 3px;
-        padding: 0 .625em;
+        padding: 0 10px;
         }
         
         .pagination li:last-child {
@@ -942,18 +969,19 @@ header nav {
 ================================================== */
 
 .element {
-    margin: 0 0 16px 0;
+    clear: both;
     overflow: auto;
+    margin: 0 0 16px 0;
     }
     
     .element h3 {
         margin: 0 0 16px 0;
-        line-height: 14px;
+        line-height: 16px;
         }
 
 .element-text {
-    float: right !important;
-    font-size: 14px;
+    font-size: 16px;
+    word-wrap: break-word;
     }
 
 /* Batch Edit Items
@@ -987,6 +1015,7 @@ header nav {
 .explanation {
     clear: both;
     font-style: italic;
+    margin-top: 0;
     }
     
 #public-featured {
@@ -1009,6 +1038,14 @@ header nav {
         display: inline-block;
         }
         
+        #section-nav li:first-child a {
+            padding: 10px 10px 10px 0;
+            }
+            
+        #section-nav li.current:first-child a, #section-nav li:first-child a.active {
+            padding: 10px 10px 10px 10px;
+            }
+        
     #section-nav a {
         display: inline-block;
         padding: 10px;            
@@ -1022,8 +1059,9 @@ header nav {
             -o-box-shadow: 0px 2px 3px #cccccc;
         color: #ffffff !important;
         text-shadow: -1px -1px 1px rgba(0,0,0,.05);
+        padding: 10px;
         }
-        
+                
 #tags {
     width: 96%;
     margin: 10px 0;

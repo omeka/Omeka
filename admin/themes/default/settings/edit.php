@@ -13,7 +13,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
 //]]>    
 </script>
 
-<div class="eight columns">
+<div class="seven columns alpha">
 <?php common('settings-nav'); ?>
 <?php echo flash(); ?>
 <?php echo $this->form; ?>
