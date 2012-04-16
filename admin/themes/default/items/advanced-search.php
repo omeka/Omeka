@@ -42,7 +42,7 @@ $formAttributes['method'] = 'GET';
         </div>
         <div id="search-narrow-by-fields" class="field">
             <div class="two columns alpha label"><label><?php echo __('Narrow by Specific Fields'); ?></label>
-            <button type="button" class="add_search"><?php echo __('Add a field'); ?></button>
+            <button type="button" class="add_search"><?php echo __('Add a Field'); ?></button>
             </div>
             <div class="five columns omega inputs">
             <?php
@@ -91,7 +91,7 @@ $formAttributes['method'] = 'GET';
                         array('size' => '20')
                     );
                     ?>
-                    <button type="button" class="remove_search red button" disabled="disabled" style="display: none;">Remove field</button>
+                    <button type="button" class="remove_search red button" disabled="disabled" style="display: none;">Remove Field</button>
                 </div>
             <?php endforeach; ?>
             </div>
