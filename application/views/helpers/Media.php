@@ -428,10 +428,7 @@ class Omeka_View_Helper_Media
             $imgClass = $imgClasses[$imageSize];
             $imgAttributes = array_merge(array('class' => $imgClass),
                                 (array)$options['imgAttributes']);
-                                
-            // Luckily, helper function names correspond to the name of the 
-            // 'imageSize' option.
-            $imgHtml = $this->$imageSize($file, $imgAttributes);
+            $imgHtml = $this->archive_image($file, $imgAttributes, $imageSize);
         }
         $html .= !empty($imgHtml) ? $imgHtml : html_escape($file->original_filename);   
         $html = $this->_linkToFile($html, $file, $options);
@@ -771,32 +768,14 @@ class Omeka_View_Helper_Media
     }
     
     /**
-     * Return a valid img tag for a thumbnail image.
-     */
-    public function thumbnail($record, $props=array(), $width=null, $height=null) 
-    {
-        return $this->archive_image($record, $props, $width, $height, 'thumbnail');
-    }
-    
-    /**
-     * Return a valid img tag for a fullsize image.
-     */
-    public function fullsize($record, $props=array(), $width=null, $height=null)
-    {
-        return $this->archive_image($record, $props, $width, $height, 'fullsize');
-    }
-    
-    /**
-     * Return a valid img tag for a square_thumbnail image.
-     */
-    public function square_thumbnail($record, $props=array(), $width=null, $height=null)
-    {
-        return $this->archive_image($record, $props, $width, $height, 'square_thumbnail');
-    }
-    /**
      * Return a valid img tag for an image.
+     *
+     * @param File|Item $record
+     * @param array $props
+     * @param string $format
+     * @return string
      */
-    public function archive_image($record, $props, $width, $height, $format) 
+    public function archive_image($record, $props, $format)
     {
         if (!$record) {
             return false;
