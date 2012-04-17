@@ -354,12 +354,9 @@ function item_image($imageType, $props = array(), $index = 0, $item = null)
 
     $imageFile = get_db()->getTable('File')->findWithImages($item->id, $index);
 
-    $width = @$props['width'];
-    $height = @$props['height'];
-
     require_once VIEW_HELPERS_DIR .  '/Media.php';
     $media = new Omeka_View_Helper_Media;
-    return $media->archive_image($imageFile, $props, $width, $height, $imageType);
+    return $media->archive_image($imageFile, $props, $imageType);
 }
 
 /**
