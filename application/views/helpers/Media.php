@@ -331,12 +331,9 @@ class Omeka_View_Helper_Media
         self::$_callbacks = array_merge(self::$_callbacks, $callbackListMimeTypes);
         self::$_fileExtensionCallbacks = array_merge(self::$_fileExtensionCallbacks, $callbackListFileExtensions);
         
-        // Create the keyed list of callback=>options format, and add it to the 
-        // current list
-        
-        //The key for the array might be the serialized callback (if necessary)
-        $callbackKey = !is_string($callback) ? serialize($callback) : $callback;
-        self::$_callbackOptions[$callbackKey] = $defaultOptions;      
+        // Add this callback's default options to the list.
+        $key = self::_getCallbackKey($callback);
+        self::$_callbackOptions[$key] = $defaultOptions;
     }
     
     /**
@@ -699,9 +696,9 @@ class Omeka_View_Helper_Media
      */
     protected function getDefaultOptions($callback)
     {
-        $callbackKey = !is_string($callback) ? serialize($callback) : $callback;
-        if (array_key_exists($callbackKey, self::$_callbackOptions)) {
-            return (array) self::$_callbackOptions[$callbackKey];
+        $key = self::_getCallbackKey($callback);
+        if (array_key_exists($key, self::$_callbackOptions)) {
+            return (array) self::$_callbackOptions[$key];
         } else {
             return array();
         }
@@ -846,5 +843,25 @@ class Omeka_View_Helper_Media
         $html = '<img src="' . $uri . '" '._tag_attributes($props) . '/>' . "\n";
         
         return $html;
+    }
+
+    /**
+     * Get a string key to represent a given callback.
+     *
+     * This key can be used to store and retrieve data about the
+     * callback, like default options.
+     *
+     * @param callback $callback
+     * @return string
+     */
+    protected static function _getCallbackKey($callback)
+    {
+        if (is_string($callback)) {
+            return $callback;
+        } else if (is_callable($callback, false, $name)) {
+            return $name;
+        } else {
+            throw new InvalidArgumentException('Invalid file display callback.');
+        }
     }
 }
