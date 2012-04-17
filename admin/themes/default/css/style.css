@@ -329,27 +329,30 @@ p, li {
             }
             
         a.button.blue, input[type=submit].blue, button.blue {
-            background-image:url('../images/blue-button.jpg');    
-            border-top: 1px solid rgba(0,0,0,.2);
-            border-left: 1px solid rgba(0,0,0,1);
-            border-right: 1px solid rgba(0,0,0,1);
-            border-bottom: 1px solid rgba(0,0,0,1);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#22546b), color-stop(100%,#102d3b));
+            background: -moz-linear-gradient(center top, #22546b 0%, #102d3b 100%);
+            -webkit-box-shadow: 0px 1px 0px 0px #526c80 inset, 0px -1px 0px 0px #142233 inset, 0px 2px 2px 0px #d4d4d4;
+            -moz-box-shadow: 0px 1px 0px 0px #526c80 inset, 0px -1px 0px 0px #142233 inset, 0px 2px 2px 0px #d4d4d4;
+            box-shadow: 0px 1px 0px 0px #526c80 inset, 0px -1px 0px 0px #142233 inset, 0px 2px 2px 0px #d4d4d4;
+            border: 1px solid #11303F;
             }
             
         a.button.red, input[type=submit].red, button.red {
-            background-image:url('../images/red-button.jpg');
-            border-top: 1px solid rgba(0,0,0,.1);
-            border-left: 1px solid rgba(0,0,0,.3);
-            border-right: 1px solid rgba(0,0,0,.3);
-            border-bottom: 1px solid rgba(0,0,0,.3);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ad6345), color-stop(100%,#7d422a));
+            background: -moz-linear-gradient(center top, #ad6345 0%, #7d422a 100%);
+            -webkit-box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 2px 2px 0px #d4d4d4;
+            -moz-box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 2px 2px 0px #d4d4d4;
+            box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 2px 2px 0px #d4d4d4;
+            border: 1px solid #7E432C;
             }
             
         a.button.green, input[type=submit].green, button.green {
-            background-image:url('../images/green-button.jpg');
-            border-top: 1px solid rgba(0,0,0,.1);
-            border-left: 1px solid rgba(0,0,0,.3);
-            border-right: 1px solid rgba(0,0,0,.3);
-            border-bottom: 1px solid rgba(0,0,0,.3);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#A4C637), color-stop(100%,#75940A));
+            background: -moz-linear-gradient(center top, #A4C637 0%, #75940A 100%);
+            -webkit-box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
+            -moz-box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
+            box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
+            border: 1px solid #749308;
             }
             
         /* Checkboxes 
@@ -996,15 +999,15 @@ header nav {
 ================================================== */
 
 #item-list {
-    border: 1px solid #e7e7e7;
-    border-radius: 5px;
-    background-color: rgba(255,255,255,.5);
+    box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -o-box-sizing: border-box;
     margin-bottom: 20px;
-    padding-top: 10px;
     }
     
     #item-list h2 {
-        margin: 0 0 0 10px;
+        margin: 0 -10px 0 0 ;
         }
     
         

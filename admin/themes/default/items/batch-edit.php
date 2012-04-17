@@ -16,7 +16,7 @@ if (!$isPartial):
         <input type="submit" class="big green button" value="<?php echo __('Save Changes'); ?>">
     </div>
 
-        <fieldset id="item-list">
+        <fieldset id="item-list" class="panel">
             <h2 class="two columns alpha"><?php echo __('Items'); ?></h2>
             <div class="four columns omega">
                 <div>
