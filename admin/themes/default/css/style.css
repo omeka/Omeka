@@ -1084,6 +1084,18 @@ header nav {
 /* Tags
 ================================================== */
 
+.count {
+    padding: 0 10px 0 0;
+    border-right: 1px solid #749308;
+    height: 99%;
+    display: inline-block;
+    margin: 0 5px 0 0;
+    box-shadow: -1px 0px 0px 0px rgba(255,255,255,.2) inset,1px 0px -1px 1px rgba(255,255,255,.2);
+        -webkit-box-shadow: -1px 0px 0px 0px rgba(255,255,255,.2) inset,1px 0px -1px 1px rgba(255,255,255,.2);
+        -moz-box-shadow: -1px 0px 0px 0px rgba(255,255,255,.2) inset, 1px 0px 0px 0px rgba(255, 255, 255, 0.2);
+        -o-box-shadow: -1px 0px 0px 0px rgba(255,255,255,.2) inset, 1px 0px -1px 1px rgba(255,255,255,.2);
+    }
+
 .hTagcloud ul {
     list-style-type: none;
     padding: 0;
@@ -1101,7 +1113,6 @@ header nav {
     font-family: "Arvo", serif;
     display:inline-block;
     margin: 0 30px 10px 0;
-    padding: 0 5px 0 10px;
     position: relative;
     z-index: 2;
     }
@@ -1138,9 +1149,67 @@ header nav {
     width: 100%;
     display: block;
     line-height: 30px;
+    padding: 0 0px 0 10px;
     position: relative;
     text-shadow: -1px -1px 1px rgba(0,0,0,.5);
     z-index: 9999;    
+    }
+    
+#tags-nav {
+    margin: 20px 0;
+    }
+
+#tags-nav span {
+        height: 25px;
+        background: #e2e2e2; /* Fallback */
+        background-image: linear-gradient(top, #f8f8f8, #e2e2e2);
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#e2e2e2));
+            background-image: -webkit-linear-gradient(top, #f8f8f8, #e2e2e2);
+            background-image: -moz-linear-gradient(top, #f8f8f8, #e2e2e2);
+            background-image: -o-linear-gradient(top, #f8f8f8, #e2e2e2);
+            background-image: -ms-linear-gradient(top, #f8f8f8, #e2e2e2);
+        border: solid #D8D8D8;
+        border-width: 1px 1px 1px 0;
+        -webkit-appearance: none;
+        border-radius: 0;
+        box-shadow: 1px 1px 2px rgba(0,0,0,.1);
+            -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
+            -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
+            -o-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
+        color: #666666;
+        display: inline-block;
+        font-family: "Cabin", sans-serif;
+        font-size: 16px;
+        line-height: 25px;
+        list-style-type: none;
+        padding: 0 10px;    
+        text-shadow: -1px -1px 1px #ffffff;
+        }
+        
+        #tags-nav span:first-child {
+            border-left: 1px solid #D8D8D8;
+            }
+            
+            
+    #tags-nav span a:link, #tags-nav span a:visited {
+        color: #B86644;
+        }
+        
+    #tags-nav span.current {
+        background-image: linear-gradient(top, #e8e8e8, #e1e1e1);
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#e8e8e8), to(#e1e1e1));
+            background-image: -webkit-linear-gradient(top, #e8e8e8, #e1e1e1);
+            background-image: -moz-linear-gradient(top, #e8e8e8, #e1e1e1);
+            background-image: -o-linear-gradient(top, #e8e8e8, #e1e1e1);
+            background-image: -ms-linear-gradient(top, #e8e8e8, #e1e1e1);
+        box-shadow: 0px 0px 2px rgba(0,0,0,.1) inset, 1px 1px 2px rgba(0,0,0,.1);
+            -webkit-box-shadow: 0px 0px 2px rgba(0,0,0,.1) inset, 1px 1px 2px rgba(0,0,0,.1);
+            -moz-box-shadow: 0px 0px 2px rgba(0,0,0,.1) inset, 1px 1px 2px rgba(0,0,0,.1);
+            -o-box-shadow: 0px 0px 2px rgba(0,0,0,.1) inset, 1px 1px 2px rgba(0,0,0,.1);
+        }
+    
+.tags div.two.columns {
+    clear: both;
     }
 
     
