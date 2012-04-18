@@ -16,6 +16,7 @@
         #Show Item
         #Batch Edit Items
         #Edit Item
+        #Tags
         #Advanced Search
         #Show Collection
         #Browse Item Types
@@ -1077,6 +1078,71 @@ header nav {
     width: 96%;
     margin: 10px 0;
     }
+
+
+
+/* Tags
+================================================== */
+
+.hTagcloud ul {
+    list-style-type: none;
+    padding: 0;
+    }
+
+.hTagcloud li {
+    height: 32px;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#A4C637), color-stop(100%,#75940A));
+    background: -moz-linear-gradient(center top, #A4C637 0%, #75940A 100%);
+    -webkit-box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
+    -moz-box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
+    box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
+    border: solid #749308;
+    border-width: 1px 0 1px 1px;
+    font-family: "Arvo", serif;
+    display:inline-block;
+    margin: 0 30px 10px 0;
+    padding: 0 5px 0 10px;
+    position: relative;
+    z-index: 2;
+    }
+    
+    .hTagcloud li:after {
+        content: "";
+        color: transparent;
+        height: 24px;
+        width: 22px;
+        transform: rotatez(45deg);
+            -webkit-transform: rotatez(45deg);
+            -moz-transform: rotatez(45deg);
+            -o-transform: rotatez(45deg);
+            -ms-transform: rotatez(45deg);
+        background: -moz-linear-gradient(-45deg, #A4C637 0%, #75940A 100%);
+        background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#A4C637), color-stop(100%,#75940A));        
+        border-right: 1px solid #749308;
+        border-top: 1px solid #749308;
+        border-bottom: 0;
+        -webkit-box-shadow: 0px 1px 0px 0 #bdd662 inset, 0 0 0 0 #ffffff inset, 2px -1px 2px 0px #d4d4d4;
+        -moz-box-shadow: 0px 1px 0px 0 #bdd662 inset, 0 0 0 0 #ffffff inset, 2px -1px 2px 0px #d4d4d4;
+        box-shadow: 0px 1px 0px 0 #bdd662 inset, 0 0 0 0 #ffffff inset, 2px -1px 2px 0px #d4d4d4;
+        display: inline-block;
+        margin: 4px 0 0 -12px;
+        position: absolute;
+        left: 100%;
+        top: 0;
+        z-index:1;
+        }
+    
+.hTagcloud li a {
+    height: 100%;
+    color: #ffffff;
+    width: 100%;
+    display: block;
+    line-height: 30px;
+    position: relative;
+    text-shadow: -1px -1px 1px rgba(0,0,0,.5);
+    z-index: 9999;    
+    }
+
     
 /* Advanced Search
 ================================================== */
