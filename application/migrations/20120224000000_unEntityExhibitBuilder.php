@@ -18,8 +18,16 @@ class unEntityExhibitBuilder extends Omeka_Db_Migration
 
     private function _isEbInstalled()
     {
-        $table = $this->db->describeTable($this->db->Exhibit);
-        return !empty($table);
+        try {
+            $table = $this->db->describeTable($this->db->Exhibit);
+            return !empty($table);
+        } catch (Zend_Db_Exception $e) {
+            // Zend's documentation says describeTable should return
+            // an empty array if the table doesn't exist, but at least
+            // for mysqli, it instead throws an exception, so we need
+            // to handle that.
+            return false;
+        }
     }
     
     private function _updateSchema()
