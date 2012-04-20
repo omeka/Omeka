@@ -2,14 +2,6 @@
 Allow from all
 </Files>
 
-<Files mod-rewrite.php>
-Allow from all
-</Files>
-
-<Files check-mod-rewrite.html>
-Allow from all
-</Files>
-
 # This allows us to verify that mod_rewrite is enabled
 <IfModule mod_rewrite.c>
 RewriteEngine On
@@ -18,5 +10,5 @@ RewriteEngine On
 # uncomment the line below and replace "/install/" with your install directory.
 # RewriteBase /install/
 
-RewriteRule ^check-mod-rewrite([^/]*)\.html$ mod-rewrite.php?enabled=true [L]
+RewriteRule ^$ install.php
 </IfModule>

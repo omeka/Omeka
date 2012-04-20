@@ -1,1 +1,0 @@
-<h1>mod_rewrite is <?php echo (bool) $_GET['enabled'] ? "ENABLED" : "DISABLED"; ?></h1>
