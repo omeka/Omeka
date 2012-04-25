@@ -1,6 +1,8 @@
 <div class="field" id="type-select">
-    <?php echo $this->formLabel('item-type', __('Item Type')); ?>
-    <div class="inputs">
+    <div class="two columns alpha">
+        <?php echo $this->formLabel('item-type', __('Item Type')); ?>
+    </div>
+    <div class="inputs five columns omega">
     <?php
         echo $this->formSelect(
             'item_type_id',

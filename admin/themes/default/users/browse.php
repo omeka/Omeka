@@ -42,7 +42,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
 
                 <div class="item-actions">
                     <?php if (has_permission('Users', 'edit')): ?>
-                    <input type="submit" class="edit-items small blue button" name="submit" value="<?php echo __('Edit'); ?>" />
+                    <input type="submit" class="edit-items small blue button" name="submit" value="<?php echo __('Change Role'); ?>" />
                     <?php endif; ?>
                     <?php if (has_permission('Users', 'delete')): ?>
                     <input type="submit" class="red small" name="submit" value="Delete">

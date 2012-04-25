@@ -4,7 +4,7 @@
 
     <fieldset id="editcollection">
     
-        <div class="element">
+        <div class="element field">
             <label class="two columns alpha">Name</label>
             <div class="five columns omega inputs">
                 <?php echo $this->formText('name', $collection->name, array('class'=>'textinput', 'size'=>'40')); ?>
@@ -12,7 +12,7 @@
             </div>
         </div>
         
-        <div class="element">
+        <div class="element field">
             <label class="two columns alpha">Description</label>        
             <div class="five columns omega inputs">
                 <?php echo form_error('description'); ?>
@@ -20,12 +20,12 @@
             </div>
         </div>
         
-        <div class="element">
+        <div class="element field">
             <label class="two columns alpha">Collectors</label>
             <div class="five columns omega inputs">
                 <?php echo $this->formTextarea('collectors', $collection->collectors, array('class' => 'texinput', 'rows' => '10', 'cols' => '50')); 
             ?>
-                <?php echo $this->formLabel('collectors', __('List collectors for this collection (optional - enter one name per line)')); ?>
+                <p class="explanation"><?php echo __('List collectors for this collection (optional - enter one name per line)'); ?></p>
             </div>
         </div>
         
