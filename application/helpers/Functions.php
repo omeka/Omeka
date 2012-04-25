@@ -74,33 +74,12 @@ function foot($vars = array(), $file = 'footer') {
  *
  * @param boolean $wrap Whether or not to wrap the flashed message in a div
  * with an appropriate class ('success','error','alert')
+ * @since 2.0-dev the $wrap parameter is ignored
  * @return string
  */
 function flash($wrap=true)
 {
-    $flash = new Omeka_Controller_Flash;
-
-    switch ($flash->getStatus()) {
-        case Omeka_Controller_Flash::SUCCESS:
-            $wrapClass = 'success';
-            break;
-        case Omeka_Controller_Flash::VALIDATION_ERROR:
-            $wrapClass = 'error';
-            break;
-        case Omeka_Controller_Flash::GENERAL_ERROR:
-            $wrapClass = 'error';
-            break;
-        case Omeka_Controller_Flash::ALERT:
-            $wrapClass = 'alert';
-            break;
-        default:
-            return;
-            break;
-    }
-
-    return $wrap ?
-        '<div class="' . $wrapClass . '">'.nl2br(html_escape($flash->getMsg())).'</div>' :
-        $flash->getMsg();
+    return __v()->flash();
 }
 
 /**

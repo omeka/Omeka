@@ -139,22 +139,6 @@ function display_element_set_form($record, $elementSetName)
 }
 
 /**
- * Retrieve validation errors for specific fields on the form.
- *
- * @deprecated deprecated since 1.2
- * @param string $field The name of the field to retrieve the error message for
- * @return string The error message wrapped in a div with class="error"
- */
-function form_error($field)
-{
-    $flash = new Omeka_Controller_Flash;
-    if ($flash->getStatus() != Omeka_Controller_Flash::VALIDATION_ERROR) return;
-    if (($msg = $flash->getError($field))) {
-        return '<div class="error">'.$msg.'</div>';
-    }
-}
-
-/**
  * Adds the "Select Below" or other label option to a set of select
  * options.
  *

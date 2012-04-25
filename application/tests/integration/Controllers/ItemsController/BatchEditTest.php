@@ -89,8 +89,9 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
     {
         $this->dispatch('/items/batch-edit');
         $this->assertRedirectTo('/items/browse');
-        $flash = new Omeka_Controller_Flash;
-        $this->assertContains("You must choose some items to batch edit.", $flash->getMsg());
+        $flash = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger');
+        $messages = $flash->getCurrentMessages();
+        $this->assertContains("You must choose some items to batch edit.", $messages['error']);
     }
 
     /**
@@ -194,8 +195,9 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
         }
 
         $this->assertRedirectTo('/items/browse');
-        $flash = new Omeka_Controller_Flash;
-        $this->assertContains("The items were successfully changed!", $flash->getMsg());
+        $flash = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger');
+        $messages = $flash->getCurrentMessages();
+        $this->assertContains("The items were successfully changed!", $messages['success']);
     }
 
     public function testBatchEditSaveAdminUser()
@@ -222,8 +224,9 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
         }
 
         $this->assertRedirectTo('/items/browse');
-        $flash = new Omeka_Controller_Flash;
-        $this->assertContains("The items were successfully changed!", $flash->getMsg());
+        $flash = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger');
+        $messages = $flash->getCurrentMessages();
+        $this->assertContains("The items were successfully changed!", $messages['success']);
     }
     
     public function testBatchEditContributorUserSaveAllowedData()
@@ -257,8 +260,9 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
         }
 
         $this->assertRedirectTo('/items/browse');
-        $flash = new Omeka_Controller_Flash;
-        $this->assertContains("The items were successfully changed!", $flash->getMsg());
+        $flash = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger');
+        $messages = $flash->getCurrentMessages();
+        $this->assertContains("The items were successfully changed!", $messages['success']);
     }
 
     public function testBatchEditContributorUserSaveDisallowedData()
@@ -275,8 +279,9 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
 
         $this->dispatch('/items/batch-edit-save');
         $this->assertRedirectTo('/items/browse');
-        $flash = new Omeka_Controller_Flash;
-        $this->assertContains("User is not allowed", $flash->getMsg());
+        $flash = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger');
+        $messages = $flash->getCurrentMessages();
+        $this->assertContains("User is not allowed", $messages['error'][0]);
     }
     
     /**
@@ -303,16 +308,17 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
         $this->_makePost($post);
         $this->dispatch('/items/batch-edit-save');
         $this->assertRedirectTo('/items/browse');
-        $flash = new Omeka_Controller_Flash;
+        $flash = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger');
+        $messages = $flash->getCurrentMessages();
         
         if ($succeeds) {
-            $this->assertContains("The items were successfully changed!", $flash->getMsg());
+            $this->assertContains("The items were successfully changed!", $messages['success']);
             foreach ($itemIds as $id) {
                 $item = $this->db->getTable('Item')->find($id);
                 $this->assertNull($item);
             }
         } else {
-            $this->assertContains("User is not allowed to delete selected items.", $flash->getMsg());
+            $this->assertContains("User is not allowed to delete selected items.", $messages['error']);
             foreach ($itemIds as $id) {
                 $item = $this->db->getTable('Item')->find($id);
                 $this->assertNotNull($item);
@@ -353,8 +359,9 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
         }
 
         $this->assertRedirectTo('/items/browse');
-        $flash = new Omeka_Controller_Flash;
-        $this->assertContains("The items were successfully changed!", $flash->getMsg());
+        $flash = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger');
+        $messages = $flash->getCurrentMessages();
+        $this->assertContains("The items were successfully changed!", $messages['success']);
     }
 
     public function testBatchEditRemoveMetadata()
@@ -394,8 +401,9 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
         }
 
         $this->assertRedirectTo('/items/browse');
-        $flash = new Omeka_Controller_Flash;
-        $this->assertContains("The items were successfully changed!", $flash->getMsg());
+        $flash = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger');
+        $messages = $flash->getCurrentMessages();
+        $this->assertContains("The items were successfully changed!", $messages['success']);
     }
 
     private function _createItem($userRole, $metadata = array())

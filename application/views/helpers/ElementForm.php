@@ -41,8 +41,6 @@ class Omeka_View_Helper_ElementForm
         // Put out the label for the field
         $html .= $this->_displayFieldLabel();
 
-        $html .= $this->_displayValidationErrors();
-
         $html .= '<div class="inputs">';
         $html .= $this->_displayFormFields($extraFieldCount);
         $html .= '</div>'; // Close 'inputs' div
@@ -249,11 +247,6 @@ class Omeka_View_Helper_ElementForm
 
         $html = apply_filters('element_form_display_html_flag', $html, $this->_element);
         return $html;
-    }
-
-    protected function _displayValidationErrors()
-    {
-        return form_error($this->_element['name']);
     }
 
     protected function _displayTooltip()

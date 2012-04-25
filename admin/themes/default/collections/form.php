@@ -8,13 +8,11 @@
     <div class="inputs">
         <?php echo $this->formText('name', $collection->name, array('class'=>'textinput', 'size'=>'40')); ?>
     </div>
-<?php echo form_error('name'); ?>
 </div>
 
 <div class="field">
     <?php echo $this->formLabel('description', __('Collection Description')); ?>
     
-<?php echo form_error('description'); ?>
 <div class="inputs">
 <?php echo $this->formTextarea('description', $collection->description, array('class'=>'textinput', 'rows'=>'10', 'cols'=>'60')); ?>
 </div>

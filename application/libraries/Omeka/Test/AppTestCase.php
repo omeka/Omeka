@@ -132,7 +132,6 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         }
         Zend_Registry::_unsetInstance();
         Omeka_Context::resetInstance();
-        Omeka_Controller_Flash::reset();
         parent::tearDown();
     }
     

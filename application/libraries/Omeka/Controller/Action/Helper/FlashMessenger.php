@@ -1,17 +1,16 @@
 <?php
 /**
- * @version $Id$
- * @copyright Center for History and New Media, 2010
+ * @copyright Roy Rosenzweig Center for History and New Media, 2012
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka-MU
- **/
+ * @package Omeka
+ */
 
 /**
  * FlashMessenger action helper.
  *
- * @package Omeka-MU
- * @copyright Center for History and New Media, 2010
- **/
+ * @package Omeka
+ * @copyright Roy Rosenzweig Center for History and New Media, 2012
+ */
 class Omeka_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Action_Helper_FlashMessenger
 {    
     const MESSAGE_KEY = 'message';
@@ -85,6 +84,27 @@ class Omeka_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Acti
     }
 
     /**
+     * Clear all current messages with specified status
+     *
+     * @param string $status The status to clear
+     * @return boolean True if messages were cleared, false if none existed
+     */
+    public function clearCurrentMessages($status = null)
+    {
+        if (!$status) {
+            return parent::clearCurrentMessages();
+        }
+        $existed = false;
+        foreach (self::$_session->{$this->_namespace} as $key => $message) {
+            if ($message[self::STATUS_KEY] == $status) {
+                unset(self::$_session->{$this->_namespace}[$key]);
+                $existed = true;
+            }
+        }
+        return $existed;
+    }
+
+    /**
      * Whether has messages with a specific status (or any messages, if null).
      */
     public function hasMessages($status = null)
@@ -143,7 +163,7 @@ class Omeka_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Acti
      * @param  string $message
      * @return void
      */
-    public function direct($message, $status)
+    public function direct($message, $status = null)
     {
         return $this->addMessage($message, $status);
     }
