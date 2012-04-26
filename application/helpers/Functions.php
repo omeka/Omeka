@@ -72,12 +72,9 @@ function foot($vars = array(), $file = 'footer') {
 /**
  * Retrieve a flashed message from the controller
  *
- * @param boolean $wrap Whether or not to wrap the flashed message in a div
- * with an appropriate class ('success','error','alert')
- * @since 2.0-dev the $wrap parameter is ignored
  * @return string
  */
-function flash($wrap=true)
+function flash()
 {
     return __v()->flash();
 }

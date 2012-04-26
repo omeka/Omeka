@@ -209,30 +209,27 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      * Set a flash message.
      *
      * @param string $msg Message to set.
-     * @param integer $flash_code Flash message status.
-     * @param integer $priority Message priority.
+     * @param string $status Flash message status.
      * @return void
      */
-    public function flash($msg = null, $flash_code = null)
+    public function flash($msg = null, $status = null)
     {
-        if (!$flash_code) {
-            $flash_code = 'alert';
+        if ($status === null) {
+            $status = 'alert';
         }
 
-        $this->_helper->flashMessenger($msg, $flash_code);
+        $this->_helper->flashMessenger($msg, $status);
     }
     
     /**
      * Set a flash message containing validation error messages.
      *
-     * The message will have status level "VALIDATION_ERROR" and
-     * priority "DISPLAY_NOW".
+     * The message will have status 'error'.
      *
      * @param Omeka_Validator_Exception $e Validator exception.
-     * @param integer $priority (optional) Override message priority.
      * @return void
      */
-    public function flashValidationErrors(Omeka_Validator_Exception $e, $priority = null)
+    public function flashValidationErrors(Omeka_Validator_Exception $e)
     {
         $this->_helper->flashMessenger($e->getErrors(), 'error');
     }
