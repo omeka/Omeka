@@ -15,24 +15,6 @@
 abstract class Omeka_Controller_Action extends Zend_Controller_Action
 {            
     /**
-     * Omeka_Db_Table associated with the controller.
-     * 
-     * Initialized optionally within the init() method.
-     *
-     * @deprecated
-     * @var Omeka_Db_Table
-     */
-    protected $_table;
-    
-    /**
-     * Allows for built-in CRUD scaffolding in the controllers.
-     *
-     * @deprecated
-     * @var string
-     */
-    protected $_modelClass;
-
-    /**
      * Filter functions applied before dispatching to a controller action.
      *
      * @var array
