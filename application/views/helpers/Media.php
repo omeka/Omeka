@@ -796,7 +796,7 @@ class Omeka_View_Helper_Media
             return '';
         }
         
-        $uri = html_escape(file_display_uri($file, $format));
+        $uri = html_escape($file->getWebPath($format));
         
         /** 
          * Determine alt attribute for images
