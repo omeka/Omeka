@@ -27,19 +27,16 @@ class Omeka_Controller_Action_Helper_FlashMessengerTest extends Omeka_Test_AppTe
         $this->messenger->addMessage("Second message to error namespace", 'error');
         $this->messenger->addMessage("Third message to success namespace", 'success');
         
-        // Messages are stored in the session until the next request.
-        $this->messenger->loadFromSession();
-        $this->assertEquals(array("First message to default namespace"), $this->messenger->getMessages('default'));
-        $this->assertEquals(array("Second message to error namespace"), $this->messenger->getMessages('error'));
-        $this->assertEquals(array("Third message to success namespace"), $this->messenger->getMessages('success'));
+        $this->assertEquals(array("First message to default namespace"), $this->messenger->getCurrentMessages('default'));
+        $this->assertEquals(array("Second message to error namespace"), $this->messenger->getCurrentMessages('error'));
+        $this->assertEquals(array("Third message to success namespace"), $this->messenger->getCurrentMessages('success'));
     }
     
     public function testHasMessagesInNamespace()
     {
         $this->assertFalse($this->messenger->hasMessages());
         $this->messenger->addMessage("Random message in foobar namespace", 'foobar');
-        $this->messenger->loadFromSession();
-        $this->assertTrue($this->messenger->hasMessages('foobar'));
+        $this->assertTrue($this->messenger->hasCurrentMessages('foobar'));
     }
     
     public function testHasCurrentMessagesInNamespace()

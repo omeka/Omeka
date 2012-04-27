@@ -139,14 +139,6 @@ class Omeka_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Acti
         return $this->_getMessages(parent::getCurrentMessages(), $status);
     }
     
-    public function loadFromSession()
-    {
-        foreach (self::$_session as $namespace => $messages) {
-            self::$_messages[$namespace] = $messages;
-            unset(self::$_session->{$namespace});
-        }
-    }
-    
     /**
      * For testing purposes, reset all the static properties of this class.
      */
