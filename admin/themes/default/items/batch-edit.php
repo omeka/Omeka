@@ -41,14 +41,14 @@ if (!$isPartial):
             </div>
         </fieldset>
     
-    <fieldset id="item-fields" style="width: 70%; margin-bottom:2em;">
+    <fieldset id="item-fields">
         <h2><?php echo __('Item Metadata'); ?></h2>
 
         <?php if ( has_permission('Items', 'makePublic') ): ?>
     
         <div class="field">
             <label class="two columns alpha" for="metadata[public]"><?php echo __('Public?'); ?></label>
-            <div class="five columns omega">
+            <div class="inputs five columns omega">
                 <?php
                 $publicOptions = array(''  => __('Select Below'),
                                        '1' => __('Public'),
@@ -63,7 +63,7 @@ if (!$isPartial):
         <?php if ( has_permission('Items', 'makeFeatured') ): ?>
         <div class="field">
             <label class="two columns alpha" for="metadata[featured]"><?php echo __('Featured?'); ?></label>
-            <div class="five columns omega">
+            <div class="inputs five columns omega">
                 <?php
                 $featuredOptions = array(''  => __('Select Below'),
                                          '1' => __('Featured'),
@@ -76,7 +76,7 @@ if (!$isPartial):
         
         <div class="field">
             <label class="two columns alpha" for="metadata[item_type_id]"><?php echo __('Item Type'); ?></label>
-            <div class="five columns omega">
+            <div class="inputs five columns omega">
             <?php
             $itemTypeOptions = get_db()->getTable('ItemType')->findPairsForSelectForm();
             $itemTypeOptions = array('' => __('Select Below')) + $itemTypeOptions;
@@ -91,7 +91,7 @@ if (!$isPartial):
         
         <div class="field">
             <label class="two columns alpha" for="metadata[collection_id]"><?php echo __('Collection'); ?></label>
-            <div class="five columns omega">
+            <div class="inputs five columns omega">
                 <?php
                 $collectionOptions = get_db()->getTable('Collection')->findPairsForSelectForm();
                 $collectionOptions = array('' => __('Select Below')) + $collectionOptions;
@@ -106,8 +106,10 @@ if (!$isPartial):
 
         <div class="field">
             <label class="two columns alpha" for="metadata[tags]"><?php echo __('Add Tags'); ?></label>
-            <?php echo $this->formText('metadata[tags]', null, array('size' => 32, 'class' => 'textinput')); ?>
-            <p class="explanation"><?php echo __('List of tags to add to all checked items, separated by %s.', settings('tag_delimiter')); ?></p>
+            <div class="inputs five columns omega">
+                <?php echo $this->formText('metadata[tags]', null, array('size' => 32, 'class' => 'textinput')); ?>
+                <p class="explanation"><?php echo __('List of tags to add to all checked items, separated by %s.', settings('tag_delimiter')); ?></p>
+            </div>
         </div>
     </fieldset>
 
@@ -119,7 +121,9 @@ if (!$isPartial):
         <p class="explanation"><?php echo __('Check if you wish to delete selected items.'); ?></p>
         <div class="field">
             <label class="two columns alpha" for="delete"><?php echo __('Delete'); ?></label>
-            <?php echo $this->formCheckbox('delete'); ?>
+            <div class="inputs five columns omega">
+               <?php echo $this->formCheckbox('delete'); ?>
+            </div>
         </div>
     </fieldset>
     <?php endif; ?>

@@ -240,7 +240,7 @@ p, li {
             }
             
         .field select {
-            min-width: 50%;
+            min-width: 100%;
             margin-bottom: 10px;
             }
             
