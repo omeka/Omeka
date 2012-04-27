@@ -55,7 +55,7 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('post');
         $this->dispatch('users/forgot-password');
         $this->assertNotRedirect();
-        $this->assertQueryContentContains("div.error", "Unable to reset password.", 
+        $this->assertQueryContentContains("li.error", "Unable to reset password.", 
             "The form should have responded with an error message indicating there was a problem.");
         self::dbChanged(false);
     }
@@ -69,7 +69,7 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
         $this->dispatch('users/forgot-password');
         $mail = $this->mailHelper->getMailText();
         $this->assertThat($mail, $this->stringContains("Subject: [Automated Test Installation] Reset Your Password"));
-        $this->assertQueryContentContains("div.success", "Please check your email");
+        $this->assertQueryContentContains("li.success", "Please check your email");
         
         $activationCode = $this->db->fetchOne("SELECT url FROM omeka_users_activations LIMIT 1");
         $this->assertThat($mail, $this->stringContains($activationCode), 
@@ -90,7 +90,7 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('post');
         $this->dispatch('users/forgot-password');
         $this->assertNotRedirect();
-        $this->assertQueryContentContains("div.error", "Unable to reset password.", 
+        $this->assertQueryContentContains("li.error", "Unable to reset password.", 
             "The form should have responded with an error message indicating there was a problem.");
     }
 

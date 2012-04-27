@@ -15,24 +15,6 @@
 abstract class Omeka_Controller_Action extends Zend_Controller_Action
 {            
     /**
-     * Omeka_Db_Table associated with the controller.
-     * 
-     * Initialized optionally within the init() method.
-     *
-     * @deprecated
-     * @var Omeka_Db_Table
-     */
-    protected $_table;
-    
-    /**
-     * Allows for built-in CRUD scaffolding in the controllers.
-     *
-     * @deprecated
-     * @var string
-     */
-    protected $_modelClass;
-
-    /**
      * Filter functions applied before dispatching to a controller action.
      *
      * @var array
@@ -207,78 +189,57 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
     
     /**
      * Set a flash message.
-     * 
-     * See {@link Omeka_Controller_Flash} for status and priority levels.
-     * The default status level is "ALERT".
      *
      * @param string $msg Message to set.
-     * @param integer $flash_code Flash message status.
-     * @param integer $priority Message priority.
+     * @param string $status Flash message status.
      * @return void
      */
-    public function flash($msg = null, $flash_code = null, $priority = null)
+    public function flash($msg = null, $status = null)
     {
-        if (!$flash_code) {
-            $flash_code = Omeka_Controller_Flash::ALERT;
+        if ($status === null) {
+            $status = 'alert';
         }
-        
-        $flash = new Omeka_Controller_Flash();
-        $flash->setFlash($flash_code, $msg, $priority);
+
+        $this->_helper->flashMessenger($msg, $status);
     }
     
     /**
      * Set a flash message containing validation error messages.
      *
-     * The message will have status level "VALIDATION_ERROR" and
-     * priority "DISPLAY_NOW".
+     * The message will have status 'error'.
      *
      * @param Omeka_Validator_Exception $e Validator exception.
-     * @param integer $priority (optional) Override message priority.
      * @return void
      */
-    public function flashValidationErrors(Omeka_Validator_Exception $e, $priority = null)
+    public function flashValidationErrors(Omeka_Validator_Exception $e)
     {
-        if (!$priority) {
-            $priority = Omeka_Controller_Flash::DISPLAY_NOW;
-        }
-        
-        $errors = $e->getErrors();
-        
-        $flash = new Omeka_Controller_Flash();
-        
-        $flash->setFlash(Omeka_Controller_Flash::VALIDATION_ERROR, $errors, $priority);
+        $this->_helper->flashMessenger($e->getErrors(), 'error');
     }
     
     /**
      * Set a flash message indicating a successful operation.
      *
-     * The message will have status level "SUCCESS" and priority "DISPLAY_NEXT".
+     * The message will have status level 'success'.
      *
      * @param string $msg Message to set.
      * @return void
      */
     public function flashSuccess($msg)
     {
-        $flash = new Omeka_Controller_Flash;
-        $flash->setFlash(Omeka_Controller_Flash::SUCCESS, 
-                         $msg, 
-                         Omeka_Controller_Flash::DISPLAY_NEXT);
+        $this->_helper->flashMessenger($msg, 'success');
     }
     
     /**
      * Set a flash message indicating a general error.
      *
-     * The message will have status level "ERROR" and priority "DISPLAY_NEXT".
+     * The message will have status level 'error'.
      *
      * @param string $msg Message to set.
      * @return void
      */
     public function flashError($msg)
     {
-        $flash = new Omeka_Controller_Flash;
-        $flash->setFlash(Omeka_Controller_Flash::GENERAL_ERROR, 
-                         $msg, 
-                         Omeka_Controller_Flash::DISPLAY_NEXT);
+        $this->_helper->flashMessenger($msg, 'error');
     }
 
     /// BASIC CRUD INTERFACE ///

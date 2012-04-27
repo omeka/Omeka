@@ -47,7 +47,6 @@ class Omeka_View_Helper_ElementForm
         
 
         $html .= $this->_displayValidationErrors();
-
         $html .= '<div class="inputs five columns omega">';
         $html .= $this->_displayFormFields($extraFieldCount);
         $html .= $this->_displayTooltip();
@@ -251,11 +250,6 @@ class Omeka_View_Helper_ElementForm
 
         $html = apply_filters('element_form_display_html_flag', $html, $this->_element);
         return $html;
-    }
-
-    protected function _displayValidationErrors()
-    {
-        return form_error($this->_element['name']);
     }
 
     protected function _displayTooltip()
