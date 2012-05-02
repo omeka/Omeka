@@ -32,9 +32,15 @@ class Omeka_Captcha {
            return null;
         }
 
+        $ssl = false;
+        if ($request = Zend_Controller_Front::getInstance()->getRequest()) {
+            $ssl = $request->isSecure();
+        }
+
         $captcha = new Zend_Captcha_ReCaptcha(array(
             'pubKey' => $publicKey,
-            'privKey' => $privateKey));
+            'privKey' => $privateKey,
+            'ssl' => $ssl));
 
         return $captcha;
     }
