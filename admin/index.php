@@ -17,7 +17,7 @@
 define('ADMIN', true);
 
 // Define the directory and web paths.
-include '../paths.php';
+include dirname(dirname(__FILE__)) . '/paths.php';
 
 // Define the admin theme directory path.
 define('THEME_DIR', ADMIN_DIR . '/' . $site['admin_theme']);
