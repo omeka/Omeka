@@ -990,6 +990,9 @@ header nav {
     margin: 0px 3px 20px 0;
     text-shadow: -1px -1px 1px #ffffff;
     }
+    
+#item-metadata .remove-element {
+    display: none;}
 
 #simple-search-form {
     float: right;
