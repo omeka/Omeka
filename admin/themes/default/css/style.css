@@ -942,7 +942,12 @@ header nav {
         margin: 0 30px 0 0;
         background-position-y: 2px;        
         }
-    
+        
+.input-block {
+    overflow: auto;
+    margin: 0 0 20px 0;
+    }   
+     
 .items-browse {
     clear: both;
     width: 100%;
