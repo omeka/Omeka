@@ -369,6 +369,7 @@ p, li {
         
         #flash ul {
             list-style-type: none;
+            margin-top: 0;
             padding: 0;
             }
         
@@ -820,30 +821,6 @@ header nav {
     float: left;
     margin: 6px;
     }
-            
-#submit {
-        height: 30px;
-        background-image:url('../images/green-button.jpg');
-        border-top: 1px solid rgba(0,0,0,.1);
-        border-left: 1px solid rgba(0,0,0,.3);
-        border-right: 1px solid rgba(0,0,0,.3);
-        border-bottom: 1px solid rgba(0,0,0,.3);
-        box-shadow: 1px 1px 2px rgba(0,0,0,.35);
-            -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
-            -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
-            -o-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
-        border-radius: 0;
-        color: #ffffff;
-        cursor: pointer;
-        display: inline-block;
-        font-family: "Arvo", serif;
-        line-height: 100%;
-        font-size: 16px;
-        margin: 10px 5px 20px 0;
-        padding: 0 10px;
-        text-shadow: -1px -1px 1px rgba(0,0,0,.5);        
-    }
-
 
 
 /* Dashboard  
@@ -1317,6 +1294,7 @@ button.remove_search {
     line-height: 1.5em;
     margin: 0 0 20px 0;    
     }
+    
             
 /* Browse Item Types
 ================================================== */
