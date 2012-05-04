@@ -235,22 +235,27 @@ p, li {
             
         .field label {
             clear: left;
+            font-size: 14px;
+            font-weight: bold;
             float: left;
+            margin: 0 0 10px 0;
             min-width: 120px;
+            padding: 7px 0;
             }
             
         .field select {
             min-width: 100%;
             margin-bottom: 10px;
             }
-            
-    .inputs select {
-        margin-top: 0;
-        }
-        
+
     .inputs {
-        margin-bottom: 20px;
+        margin: 0 0 20px 0;
         }
+            
+        .inputs select {
+            margin-top: 0;
+            }
+        
         
         .inputs input[type=text], .inputs textarea {
             width: 100%;
@@ -258,7 +263,6 @@ p, li {
                 -webkit-box-sizing: border-box;
                 -moz-box-sizing: border-box;
                 -o-box-sizing: border-box;
-            margin: 0 0 20px 0;
             }
             
         .inputs inputs a.button, .inputs input[type="submit"], .inputs button {
@@ -367,20 +371,23 @@ p, li {
         /* Alerts
         ================================================== */
         
-        #flash ul {
+        #content #flash ul {
             list-style-type: none;
             margin-top: 0;
             padding: 0;
             }
+            
+            #content #flash li {
+                background-color: rgba(255, 255, 255, .5);
+                border: 1px solid #E7E7E7;
+                border-radius: 3px;
+                font-size: 14px;
+                margin-bottom: 20px;
+                padding: .5em;            
+                }
         
         .success {
-            background-color: rgba(255, 255, 255, .5);
-            border: 1px solid #E7E7E7;
-            border-radius: 3px;
             color: #729108;
-            font-size: 14px;
-            margin-bottom: 20px;
-            padding: .5em;            
             }
 
 
@@ -736,6 +743,14 @@ header nav {
 /* Login  
 ================================================== */
 
+#content.login-content h1 {
+    margin-top: 20px;
+    }
+
+#content.login-content .inputs {
+    margin-bottom: 0;
+    }
+
 .error {
     color: #914E33;
     font-style: italic;
@@ -754,11 +769,6 @@ header nav {
         float: left;
         text-align: right;
         }
-        
-#forgotpassword {
-    font-size: 14px;
-    margin: 10px 0;
-    }
     
 #fieldset-login .inputs {
     overflow: auto;
@@ -771,6 +781,11 @@ header nav {
         line-height: 20px;
         float: right;
         }
+        
+#forgotpassword {
+    font-size: 14px;
+    margin: 10px 0;
+    }
 
 .login-content {
     border-left: 1px solid #000;
@@ -786,7 +801,7 @@ header nav {
         padding: 0;
         height: 53px;
         line-height: 53px;
-        margin-bottom: 0;
+        margin: 20px 0 0 0;
         display: inline-block;
         text-shadow: 0 0 1px #000000;
         }
@@ -819,7 +834,7 @@ header nav {
     
 #remember {
     float: left;
-    margin: 6px;
+    margin: 6px 0;
     }
 
 
@@ -1044,18 +1059,11 @@ header nav {
 #public-featured {
     margin: 10px 0;
     padding: 10px 0;
-    }
-
-.items .field {
-    font-size: 21px;
-    line-height: 1.5em;
-    margin: 5px 0 10px 0;    
+    text-align: center;
     }
     
 .items input[type=text], .items textarea {
-    font-size: 16px;
-    line-height: 1.5em;
-    margin: 0 0 20px 0;    
+    margin: 0 0 0 0;    
     }
     
 .field .use-html {
@@ -1264,18 +1272,18 @@ button.remove_search {
 /* Show Collections
 ================================================== */
 
-#collector-list, #collection-items ul {
+.collections.show #content ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     }
     
-    #collector-list li, #collection-items li {
+    .collections.show #content li {
         border-bottom: 1px solid #cccccc;
         padding: 10px 0;
         }
         
-        #collector-list li:last-child, #collection-items li:last-child {
+        .collections.show #content li:last-child {
             border-bottom: 0;
             }
 
@@ -1283,18 +1291,7 @@ button.remove_search {
 /* Edit Collection
 ================================================== */
 
-.collections .field {
-    font-size: 21px;
-    line-height: 1.5em;
-    margin: 5px 0 10px 0;    
-    }
-    
-.collections input[type=text], .collections textarea {
-    font-size: 16px;
-    line-height: 1.5em;
-    margin: 0 0 20px 0;    
-    }
-    
+
             
 /* Browse Item Types
 ================================================== */

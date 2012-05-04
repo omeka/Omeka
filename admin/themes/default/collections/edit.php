@@ -21,7 +21,7 @@
                     <input type="submit" name="submit" class="big green button" id="save-changes" value="<?php echo __('Save Changes'); ?>" />
                     <a href="<?php echo html_escape(public_uri('collections/show/'.collection('id'))); ?>" class="big blue button" target="_blank"><?php echo __('View Public Page'); ?></a>
                     <?php echo link_to_collection(__('Delete Collection'), array('class' => 'big red button'), 'delete-confirm'); ?>
-                    
+                    <div id="public-featured">
                         <?php echo $this->formLabel('public', __('Public')); ?>
                     <?php 
                         echo $this->formCheckbox('public', $collection->public, array(), array('1', '0'));
@@ -31,6 +31,7 @@
                     <?php 
                         echo $this->formCheckbox('featured', $collection->featured, array(), array('1', '0')); 
                     ?>
+                    </div>
 
                 </div>            
                 
