@@ -367,6 +367,11 @@ p, li {
         /* Alerts
         ================================================== */
         
+        #flash ul {
+            list-style-type: none;
+            padding: 0;
+            }
+        
         .success {
             background-color: rgba(255, 255, 255, .5);
             border: 1px solid #E7E7E7;
@@ -923,6 +928,20 @@ header nav {
     margin: 0 0 5px 0;
     vertical-align: top;
     }
+
+#filter-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0 30px 0;
+    }
+    
+    #filter-list li {
+        display: inline-block;
+        background: url('../images/search.png') no-repeat;
+        padding: 0 0 0 21px;
+        margin: 0 30px 0 0;
+        background-position-y: 2px;        
+        }
     
 .items-browse {
     clear: both;

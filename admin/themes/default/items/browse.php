@@ -1,5 +1,5 @@
 <?php
-$pageTitle = __('Browse Items');
+$pageTitle = __('Browse Items ('.total_results().' items)');
 head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=>'items primary browse-items')); ?>
         
             <?php echo flash(); ?>
@@ -81,7 +81,8 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                         batchEditSubmit.prop('disabled', !checked);
                     }
                 });
-            </script>        
+            </script>
+                                
             <?php if (has_permission('Items', 'add')): ?>
             <a href="<?php echo html_escape(uri('items/add')); ?>" class="add-item button small green">Add New Item</a>
             <?php endif; ?>
@@ -90,6 +91,9 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                 <?php echo simple_search(); ?>         
                 <?php echo link_to_advanced_search(__('Advanced Search'), array('id' => 'advanced-search-link')); ?>
             </div>
+ 
+             <?php display_search_filters(); ?>
+
             
             <form class="items-browse top" action="<?php echo html_escape(uri('items/batch-edit')); ?>" method="post" accept-charset="utf-8">
             
