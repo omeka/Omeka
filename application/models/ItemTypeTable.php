@@ -13,17 +13,15 @@
  */
 class ItemTypeTable extends Omeka_Db_Table
 {
-    protected $_alias = 'it';
-    
     protected function _getColumnPairs()
     {
-        return array($this->_alias . '.id', $this->_alias . '.name');
+        return array($this->_name . '.id', $this->_name . '.name');
     }
     
     public function findByName($itemTypeName) 
     {
         $select = $this->getSelect();
-        $select->where($this->_alias . '.name = ?', $itemTypeName);
+        $select->where($this->_name . '.name = ?', $itemTypeName);
         return $this->fetchObject($select);
     }
 }

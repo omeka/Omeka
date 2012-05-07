@@ -16,13 +16,13 @@ class ProcessTable extends Omeka_Db_Table
     
     public function findByClass($className)
     {
-        $select = $this->getSelect()->where("p.class = ?");
+        $select = $this->getSelect()->where('processes.class = ?');
         return $this->fetchObjects($select, array($className));        
     }
     
     public function findByStatus($status)
     {
-        $select = $this->getSelect()->where("p.status = ?");
+        $select = $this->getSelect()->where('processes.status = ?');
         return $this->fetchObjects($select, array($status));        
     }
 }

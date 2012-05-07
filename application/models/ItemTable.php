@@ -86,9 +86,9 @@ class ItemTable extends Omeka_Db_Table
 
         //Force a preview of the public items
         if ($isPublic) {
-            $select->where('i.public = 1');
+            $select->where('items.public = 1');
         } else {
-            $select->where('i.public = 0');
+            $select->where('items.public = 0');
         }
     }
 
@@ -98,9 +98,9 @@ class ItemTable extends Omeka_Db_Table
 
         //filter items based on featured (only value of 'true' will return featured items)
         if ($isFeatured) {
-            $select->where('i.featured = 1');
+            $select->where('items.featured = 1');
         } else {
-            $select->where('i.featured = 0');
+            $select->where('items.featured = 0');
         }
     }
 
@@ -113,16 +113,16 @@ class ItemTable extends Omeka_Db_Table
      */
     public function filterByCollection($select, $collection)
     {
-        $select->joinInner(array('c' => $this->getDb()->Collection),
-                           'i.collection_id = c.id',
+        $select->joinInner(array('collections' => $this->getDb()->Collection),
+                           'items.collection_id = collections.id',
                            array());
 
         if ($collection instanceof Collection) {
-            $select->where('c.id = ?', $collection->id);
+            $select->where('collections.id = ?', $collection->id);
         } else if (is_numeric($collection)) {
-            $select->where('c.id = ?', $collection);
+            $select->where('collections.id = ?', $collection);
         } else {
-            $select->where('c.name = ?', $collection);
+            $select->where('collections.name = ?', $collection);
         }
     }
 
@@ -135,15 +135,15 @@ class ItemTable extends Omeka_Db_Table
      */
     public function filterByItemType($select, $type)
     {
-        $select->joinInner(array('ty' => $this->getDb()->ItemType),
-                           'i.item_type_id = ty.id',
+        $select->joinInner(array('item_types' => $this->getDb()->ItemType),
+                           'items.item_type_id = item_types.id',
                            array());
         if ($type instanceof Type) {
-            $select->where('ty.id = ?', $type->id);
+            $select->where('item_types.id = ?', $type->id);
         } else if (is_numeric($type)) {
-            $select->where('ty.id = ?', $type);
+            $select->where('item_types.id = ?', $type);
         } else {
-            $select->where('ty.name = ?', $type);
+            $select->where('item_types.name = ?', $type);
         }
     }
 
@@ -189,11 +189,11 @@ class ItemTable extends Omeka_Db_Table
         foreach ($tags as $tagName) {
 
             $subSelect = new Omeka_Db_Select;
-            $subSelect->from(array('tg'=>$db->Taggings), array('id'=>'tg.relation_id'))
-                ->joinInner(array('t'=>$db->Tag), 't.id = tg.tag_id', array())
-                ->where('t.name = ? AND tg.`type` = "Item"', trim($tagName));
+            $subSelect->from(array('taggings'=>$db->Taggings), array('items.id'=>'taggings.relation_id'))
+                ->joinInner(array('tags'=>$db->Tag), 'tags.id = taggings.tag_id', array())
+                ->where('tags.name = ? AND taggings.`type` = "Item"', trim($tagName));
 
-            $select->where('i.id IN (' . (string) $subSelect . ')');
+            $select->where('items.id IN (' . (string) $subSelect . ')');
         }
     }
 
@@ -206,7 +206,7 @@ class ItemTable extends Omeka_Db_Table
      */
     public function filterByUser($select, $userId, $isUser=true)
     {
-        $select->where('i.owner_id = ?', $userId);
+        $select->where('items.owner_id = ?', $userId);
     }
 
     /**
@@ -225,19 +225,19 @@ class ItemTable extends Omeka_Db_Table
             $tags = explode(get_option('tag_delimiter'), $tags);
         }
         $subSelect = new Omeka_Db_Select;
-        $subSelect->from(array('i'=>$db->Item), 'i.id')
-                         ->joinInner(array('tg' => $db->Taggings),
-                                     'tg.relation_id = i.id AND tg.type = "Item"',
+        $subSelect->from(array('items'=>$db->Item), 'items.id')
+                         ->joinInner(array('taggings' => $db->Taggings),
+                                     'taggings.relation_id = items.id AND taggings.type = "Item"',
                                      array())
-                         ->joinInner(array('t' => $db->Tag),
-                                     'tg.tag_id = t.id',
+                         ->joinInner(array('tags' => $db->Tag),
+                                     'taggings.tag_id = tags.id',
                                      array());
 
         foreach ($tags as $key => $tag) {
-            $subSelect->where("t.name LIKE ?", $tag);
+            $subSelect->where('tags.name LIKE ?', $tag);
         }
 
-        $select->where('i.id NOT IN ('.$subSelect->__toString().')');
+        $select->where('items.id NOT IN ('.$subSelect->__toString().')');
     }
 
     /**
@@ -255,8 +255,8 @@ class ItemTable extends Omeka_Db_Table
 
         $db = $this->getDb();
 
-        $select->joinLeft(array('f'=>"$db->File"), 'f.item_id = i.id', array());
-        $select->where('f.has_derivative_image = ?', $hasDerivativeImage);
+        $select->joinLeft(array('files'=>"$db->File"), 'files.item_id = items.id', array());
+        $select->where('files.has_derivative_image = ?', $hasDerivativeImage);
     }
 
     /**
@@ -311,7 +311,7 @@ class ItemTable extends Omeka_Db_Table
         }
 
         //If we returning the data itself, we need to group by the item ID
-        $select->group("i.id");
+        $select->group('items.id');
 
     }
 
@@ -371,7 +371,7 @@ class ItemTable extends Omeka_Db_Table
     public function findFirst()
     {
         $select = $this->getSelect();
-        $select->order('i.id ASC');
+        $select->order('items.id ASC');
         $select->limit(1);
         return $this->fetchObject($select);
     }
@@ -384,7 +384,7 @@ class ItemTable extends Omeka_Db_Table
     public function findLast()
     {
         $select = $this->getSelect();
-        $select->order('i.id DESC');
+        $select->order('items.id DESC');
         $select->limit(1);
         return $this->fetchObject($select);
     }
@@ -408,13 +408,13 @@ class ItemTable extends Omeka_Db_Table
 
         switch ($position) {
             case 'next':
-                $select->where('i.id > ?', (int) $item->id);
-                $select->order('i.id ASC');
+                $select->where('items.id > ?', (int) $item->id);
+                $select->order('items.id ASC');
                 break;
 
             case 'previous':
-                $select->where('i.id < ?', (int) $item->id);
-                $select->order('i.id DESC');
+                $select->where('items.id < ?', (int) $item->id);
+                $select->order('items.id DESC');
                 break;
 
             default:

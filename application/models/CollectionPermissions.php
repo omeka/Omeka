@@ -28,8 +28,8 @@ class CollectionPermissions
 
         $db = Omeka_Context::getInstance()->getDb();
 
-        if (!$sql->hasJoin('c')) {
-            throw new Omeka_Record_Exception( __("Invalid query provided to CollectionPermissions check") );
+        if (!$sql->hasJoin('collections')) {
+            throw new Omeka_Record_Exception( __('CollectionPermissions only works with queries involving Collections.') );
         }
 
         $currentUser = Omeka_Context::getInstance()->getCurrentUser();        
@@ -37,11 +37,11 @@ class CollectionPermissions
         $self_permission = $acl->isAllowed($currentUser, 'Collections', 'showSelfNotPublic');
 
         if (!$has_permission && !$self_permission) {
-            $sql->where('c.public = 1');
+            $sql->where('collections.public = 1');
         } elseif($has_permission) {
             //Do nothing
         } elseif($self_permission) {
-            $sql->where('c.public = 1 OR c.owner_id = ?', $currentUser->id);
+            $sql->where('collections.public = 1 OR collections.owner_id = ?', $currentUser->id);
         }
     }
 }

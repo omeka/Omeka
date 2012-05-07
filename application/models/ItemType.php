@@ -155,8 +155,8 @@ class ItemType extends Omeka_Record
     {
         $table = $this->getDb()->getTable('ItemTypesElements');
         $select = $table->getSelect()
-                ->where('ite.item_type_id = ?')
-                ->order('ite.order ASC');
+                ->where('item_types_elements.item_type_id = ?')
+                ->order('item_types_elements.order ASC');
 
         $joinRecordArray = $table->fetchObjects($select, $this->id);
 
@@ -243,7 +243,7 @@ class ItemType extends Omeka_Record
             // 'order' should be last by default.
             $table = $this->getDb()->getTable('ItemTypesElements');
             $select = $table->getSelectForCount()
-                    ->where('ite.item_type_id = ?');
+                    ->where('item_types_elements.item_type_id = ?');
             $iteJoin->order = (int) $table->fetchOne($select, array($this->id)) + 1;
             $iteJoin->forceSave();
         }
@@ -323,7 +323,7 @@ class ItemType extends Omeka_Record
         $elementId = $element->id;
 
         // Find the join record and delete it.
-        $iteJoin = $this->getTable('ItemTypesElements')->findBySql('ite.element_id = ? AND ite.item_type_id = ?', array($elementId, $this->id), true);
+        $iteJoin = $this->getTable('ItemTypesElements')->findBySql('item_types_elements.element_id = ? AND item_types_elements.item_type_id = ?', array($elementId, $this->id), true);
 
         if (!$iteJoin) {
             throw new Omeka_Record_Exception(__('Item type does not contain an element with the ID %s!', $elementId));
@@ -349,7 +349,7 @@ class ItemType extends Omeka_Record
             throw new Omeka_Record_Exception(__('Invalid parameter. The hasElement function requires either an element object or an element id to determine if an item type has an element.'));
         }
         $db = $this->getDb();
-        $iteJoin = $this->getTable('ItemTypesElements')->findBySql('ite.element_id = ? AND ite.item_type_id = ?',
+        $iteJoin = $this->getTable('ItemTypesElements')->findBySql('item_types_elements.element_id = ? AND item_types_elements.item_type_id = ?',
                                     array($elementId, $this->id),
                                     true);
         return (boolean) $iteJoin;

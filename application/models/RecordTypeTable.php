@@ -16,8 +16,6 @@
  */
 class RecordTypeTable extends Omeka_Db_Table
 {
-    protected $_alias = 'rty';
-    
     public function findIdFromName($recordTypeName)
     {
         $select = $this->getSelect()->reset(Zend_Db_Select::COLUMNS);

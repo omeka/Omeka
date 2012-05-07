@@ -13,8 +13,6 @@
  */
 class ElementSetTable extends Omeka_Db_Table
 {
-    protected $_alias = 'es';
-    
     /**
      * Find all the element sets that correspond to a particular record type.  
      * If the second param is set, this will include all element sets that belong 
@@ -27,10 +25,10 @@ class ElementSetTable extends Omeka_Db_Table
     public function findByRecordType($recordTypeName, $includeAll = true)
     {
         $select = $this->getSelect();
-        $select->joinInner(array('rty'=>$this->getDb()->RecordType), 'rty.id = es.record_type_id', array());
-        $select->where('rty.name = ?', $recordTypeName);
+        $select->joinInner(array('record_types' => $this->getDb()->RecordType), 'record_types.id = element_sets.record_type_id', array());
+        $select->where('record_types.name = ?', $recordTypeName);
         if ($includeAll) {
-            $select->orWhere('rty.name = "All"');
+            $select->orWhere('record_types.name = "All"');
         }
         
         return $this->fetchObjects($select);

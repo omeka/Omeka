@@ -30,14 +30,14 @@ class UserTable extends Omeka_Db_Table
     protected function _getColumnPairs()
     {
         return array(
-            'u.id', 
-            'u.name');
+            'users.id', 
+            'users.name');
     }
     
     public function findByEmail($email)
     {
         $select = $this->getSelect();
-        $select->where("u.email = ?")->limit(1);
+        $select->where('users.email = ?')->limit(1);
         return $this->fetchObject($select, array($email));
     }
     
@@ -45,12 +45,12 @@ class UserTable extends Omeka_Db_Table
     {
         // Show only users with a specific role.
         if (array_key_exists('role', $params) and !empty($params['role'])) {
-            $select->where('u.role = ?', $params['role']);
+            $select->where('users.role = ?', $params['role']);
         }
         
         // Show only users who are active
         if (array_key_exists('active', $params) and $params['active'] !== '') {
-            $select->where('u.active = ?', (int)$params['active']);
+            $select->where('users.active = ?', (int)$params['active']);
         }
     }
 }

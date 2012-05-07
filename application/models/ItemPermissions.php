@@ -30,8 +30,8 @@ class ItemPermissions
 
         $db = Omeka_Context::getInstance()->getDb();
         
-        if (!$sql->hasJoin('i')) {
-            throw new Omeka_Record_Exception( __("This SQL statement needs a FROM or JOIN clause equivalent to '%s i' in order to have permissions checked!", $db->Item) );
+        if (!$sql->hasJoin('items')) {
+            throw new Omeka_Record_Exception( __('ItemPermissions only works with queries involving Items.') );
         }
         
         $currentUser = Omeka_Context::getInstance()->getCurrentUser();
@@ -40,11 +40,11 @@ class ItemPermissions
         $self_permission = $acl->isAllowed($currentUser, 'Items', 'showSelfNotPublic');
         
         if (!$has_permission && !$self_permission) {
-            $sql->where('i.public = 1');
+            $sql->where('items.public = 1');
         } elseif($has_permission) {
             //Do nothing
         } elseif($self_permission) {
-            $sql->where('i.public = 1 OR i.owner_id = ?', $currentUser->id);
+            $sql->where('items.public = 1 OR items.owner_id = ?', $currentUser->id);
         }
     }
 }

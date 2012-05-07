@@ -24,7 +24,7 @@ class Omeka_Models_CollectionTableTest extends PHPUnit_Framework_TestCase
     public function testGetSelectAclIntegration()
     {
         // Test CollectionTable::getSelect() when the ACL is not available.
-        $this->assertEquals("SELECT c.* FROM omeka_collections AS c", 
+        $this->assertEquals("SELECT collections.* FROM omeka_collections AS collections", 
                             (string)$this->table->getSelect());
 
         // Test CollectionTable::getSelect() when the ACL is available.
@@ -33,7 +33,7 @@ class Omeka_Models_CollectionTableTest extends PHPUnit_Framework_TestCase
         $acl->deny(null, 'Collections', 'showNotPublic');
         Omeka_Context::getInstance()->setAcl($acl);
         
-        $this->assertContains("WHERE (c.public = 1)", (string)$this->table->getSelect());
+        $this->assertContains("WHERE (collections.public = 1)", (string)$this->table->getSelect());
 
         Omeka_Context::resetInstance();
     }
@@ -42,19 +42,19 @@ class Omeka_Models_CollectionTableTest extends PHPUnit_Framework_TestCase
     {
         $publicSelect = new Zend_Db_Select($this->dbAdapter);
         $this->table->applySearchFilters($publicSelect, array('public' => true));
-        $this->assertContains("(c.public = 1)", $publicSelect->getPart('where'));
+        $this->assertContains("(collections.public = 1)", $publicSelect->getPart('where'));
         
         $featuredSelect = new Zend_Db_Select($this->dbAdapter);
         $this->table->applySearchFilters($featuredSelect, array('featured' => true));
-        $this->assertContains("(c.featured = 1)", $featuredSelect->getPart('where'));
+        $this->assertContains("(collections.featured = 1)", $featuredSelect->getPart('where'));
     }
     
     public function testFindRandomFeatured()
     {
         $featuredCollection = $this->table->findRandomFeatured();
         $query = $this->dbAdapter->getProfiler()->getLastQueryProfile()->getQuery();
-        $this->assertContains("SELECT c.* FROM omeka_collections AS c", $query);
-        $this->assertContains("(c.featured = 1)", $query);
+        $this->assertContains("SELECT collections.* FROM omeka_collections AS c", $query);
+        $this->assertContains("(collections.featured = 1)", $query);
         $this->assertContains("ORDER BY RAND()", $query);
     }
 }
