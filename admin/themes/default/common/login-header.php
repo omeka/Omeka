@@ -19,4 +19,7 @@
     <?php admin_plugin_header(); ?>
 </head>
 <body id="login">
-    <div id="content" class="login-content">
+
+    <div class="container container-sixteen">
+    
+        <div id="content" class="login-content ten columns offset-by-three">

@@ -173,3 +173,18 @@ table, thead, tbody, th, td, tr {
     #simple-search-form {
         margin-right: 5px;;
         }
+
+/* Content
+==================================================*/
+
+    .login-content h1 {
+        font-size: 24px;
+        }
+        
+    .login-content .inputs {
+        margin: 0 0 20px 0;
+        }
+        
+    #username-label, #password-label {
+        text-align: left;
+        }

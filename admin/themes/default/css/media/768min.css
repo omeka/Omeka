@@ -38,14 +38,6 @@ a.button.big, input[type=submit].big, button.big {
 .section-title { margin: 60px 0 10px 140px; }
 
 
-    .login-content, .login-footer {
-        width: 480px;
-        }
-
-        .login-content {
-            margin-top: 10%;
-            }
-
     /* Dashboard 
     ================================================== */
 

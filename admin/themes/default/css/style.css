@@ -257,7 +257,7 @@ p, li {
             }
         
         
-        .inputs input[type=text], .inputs textarea {
+        .inputs input[type=text], .inputs input[type=password], .inputs textarea {
             width: 100%;
             box-sizing: border-box;
                 -webkit-box-sizing: border-box;
@@ -388,6 +388,10 @@ p, li {
         
         .success {
             color: #729108;
+            }
+            
+        .error, .alert {
+            color: #914E33;
             }
 
 
@@ -743,58 +747,48 @@ header nav {
 /* Login  
 ================================================== */
 
-#content.login-content h1 {
-    margin-top: 20px;
+#content.login-content {
+    padding: 40px 0 20px 0;
     }
 
-#content.login-content .inputs {
-    margin-bottom: 0;
-    }
-
-.error {
-    color: #914E33;
-    font-style: italic;
-    }
-
-#fieldset-login .field {
-    width: 280px;
-    display: block;
-    margin: 10px auto;
-    clear: left;
-    line-height: 23px;
-    overflow: auto;
+.errors {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
     }
     
-    #fieldset-login .field label {
-        float: left;
-        text-align: right;
+    .errors li {
+        background-color: rgba(255, 255, 255, .5);
+        border: 1px solid #E7E7E7;
+        border-radius: 3px;
+        color: #914E33;
+        font-size: 14px;
+        margin: 0;
+        padding: .5em;   
         }
+
+#forgotpassword {
+    clear: both;
+    }
+    
+#fieldset-login .field:last-child .inputs {
+    width: auto;
+    float: none;
+    display: inline-block;
+    margin: 0 0 20px 5px;
+    }
     
 #fieldset-login .inputs {
-    overflow: auto;
-    }
-
-    #fieldset-login .inputs input[type=text], #fieldset-login .inputs input[type=password] {
-        width: 140px;
-        height: 20px;
-        font-size: 16px;
-        line-height: 20px;
-        float: right;
-        }
-        
-#forgotpassword {
-    font-size: 14px;
-    margin: 10px 0;
     }
 
 .login-content {
-    border-left: 1px solid #000;
-    margin: auto;
-    overflow: auto;
+    margin: 10% auto 0 auto;
     text-align: center;
     }
     
-    .login-content h1 {
+.login-content h1 {
+        width: 300px;
         background-image: url('../images/blue-banner.jpg');
         color: #ffffff;
         clear: both;
@@ -807,34 +801,54 @@ header nav {
         }
         
         .login-content h1:before {
+            height: 53px;
+            width: 27px;
             background-image: url('../images/blue-banner_left.jpg');
             content: "";
-            padding: 10px 14px;
-            margin: 0 50px 0 0;
+            display: block;
+            float: left;
             }
             
         .login-content h1:after {
+            height: 53px;
+            width: 27px;
             background-image: url('../images/blue-banner_right.jpg');
             content: "";
-            padding: 10px 14px;
-            margin: 0 0 0 50px;
+            display: block;
+            float: right;
             }
             
-            
-.login-footer {
-    width: 480px;
-    font-size: 14px;
-    margin: auto;
-    text-align: center;
-    }
-            
-.optional {
-    float: left;
+.login-content .submit {
+    clear: both;
     }
     
+.login-content #flash {
+    margin: 0 10px;
+    }
+
+.login-footer {
+    clear: both;
+    padding: 10px 0;
+    text-align: center;
+    }
+
 #remember {
+    display: inline-block;
+    }
+
+#remember-label {
+    display: inline-block;
+    }
+
+#remember-label label {
+    width: auto;
+    min-width: 0;
+    float: none;
+    }
+                
+#email-label, #username-label, #password-label {
     float: left;
-    margin: 6px 0;
+    text-align: right;
     }
 
 
