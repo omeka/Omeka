@@ -167,7 +167,7 @@ function item($elementSetName, $elementName = null, $options = array(), $item = 
     if (!$item) {
         $item = get_current_item();
     }
-    return __v()->itemMetadata($item, $elementSetName, $elementName, $options);
+    return __v()->recordMetadata($item, $elementSetName, $elementName, $options);
 }
 
 /**

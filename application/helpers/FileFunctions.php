@@ -71,7 +71,7 @@ function item_file($elementSetName, $elementName = null, $options = array(), $fi
     if (!$file) {
         $file = get_current_file();
     }
-    return __v()->fileMetadata($file, $elementSetName, $elementName, $options);
+    return __v()->recordMetadata($file, $elementSetName, $elementName, $options);
 }
 
 /**

@@ -18,7 +18,7 @@
  * @subpackage Omeka_View_Helper
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
+class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
 {    
     const SNIPPET = 'snippet';
     const INDEX = 'index';
@@ -69,7 +69,7 @@ abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstrac
      * @return string|array|null Null if field does not exist for item. Array
      * if certain options are passed.  String otherwise.
      */
-    protected function _get(Omeka_Record $record, 
+    public function recordMetadata(Omeka_Record $record, 
                          $elementSetName, 
                          $elementName = null, 
                          $options     = array())
@@ -184,7 +184,10 @@ abstract class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstrac
      * @param string $specialValue Field name.
      * @return mixed
      */
-    abstract protected function _getRecordMetadata($record, $specialValue);
+    protected function _getRecordMetadata($record, $specialValue)
+    {
+        return $record->getProperty(strtolower($specialValue));
+    }
     
     /**
      * Retrieve the set of ElementText records that correspond to a given

@@ -52,6 +52,6 @@ class Omeka_View_Helper_FileMetadataList extends Omeka_View_Helper_RecordMetadat
 
     protected function _getFormattedElementText($record, $elementSetName, $elementName)
     {
-        return $this->view->fileMetadata($record, $elementSetName, $elementName, 'all');
+        return $this->view->recordMetadata($record, $elementSetName, $elementName, 'all');
     }
 }

@@ -329,7 +329,22 @@ abstract class Omeka_Record implements ArrayAccess
             return $this->_cache[$name];
         }
     }
-    
+
+    /**
+     * Get a property about the record for display purposes.
+     *
+     * @param string $property Property to get. Always lowercase.
+     * @return mixed
+     */
+    public function getProperty($property)
+    {
+        if ($property == 'id') {
+            return $this->id;
+        } else {
+            throw new Exception(__("'%s' is an invalid special value.", $property));
+        }
+    }
+
     /**
      * Determine whether or not this record is persistent in the database.  
      * 

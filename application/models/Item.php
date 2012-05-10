@@ -108,6 +108,54 @@ class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
         
         return $elements;
     }
+
+    /**
+     * Get a property for display.
+     *
+     * Available property values:
+     * - id
+     * - item type name
+     * - date added
+     * - date modified
+     * - collection name
+     * - featured
+     * - public
+     * - permalink
+     *
+     * @param string $property
+     * @return mixed
+     */
+    public function getProperty($property)
+    {
+        switch($property) {
+            case 'id':
+                return $this->id;
+            case 'item type name':
+                if ($type = $this->Type) {
+                    return $type->name;
+                } else {
+                    return null;
+                }
+            case 'date added':
+                return $this->added;
+            case 'date modified':
+                return $this->modified;
+            case 'collection name':
+                if ($collection = $this->Collection) {
+                    return $collection->name;
+                } else {
+                    return null;
+                }
+            case 'featured':
+                return $this->featured;
+            case 'public':
+                return $this->public;
+            case 'permalink':
+                return abs_item_uri($this);
+            default:
+                throw new Exception(__("'%s' is an invalid special value.", $property));
+        }
+    }
         
     // End accessor methods
     
