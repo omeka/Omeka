@@ -34,6 +34,10 @@ class Omeka_Core_Resource_Frontcontroller extends Zend_Application_Resource_Fron
         if ($front->getParam('skipOmekaMvc')) {
             return $front;
         }
+
+        if ($front->getParam('admin')) {
+            $front->registerPlugin(new Omeka_Controller_Plugin_Admin);
+        }
         
         // Plugin broker is required to set plugin-defined response contexts
         $bootstrap = $this->getBootstrap();

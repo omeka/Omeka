@@ -38,7 +38,6 @@ function display_file($file, array $props=array(), $wrapperAttributes = array('c
  */
 function display_files($files, array $props = array(), $wrapperAttributes = array('class'=>'item-file'))
 {
-    require_once VIEW_HELPERS_DIR . '/Media.php';
     $helper = new Omeka_View_Helper_Media;
     $output = '';
     foreach ($files as $file) {

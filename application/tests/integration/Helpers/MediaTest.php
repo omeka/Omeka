@@ -5,8 +5,6 @@
  * @package Omeka
  */
 
-require_once VIEW_HELPERS_DIR . '/Media.php';
-
 /**
  * 
  *

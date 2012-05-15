@@ -48,7 +48,6 @@ function items_output_uri($output="rss2", $otherParams = array()) {
  */
 function uri($options=array(), $route=null, $queryParams=array(), $reset = false, $encode = true)
 {
-    require_once VIEW_HELPERS_DIR . '/Url.php';
     $urlHelper = new Omeka_View_Helper_Url;
     return $urlHelper->url($options, $route, $queryParams, $reset, $encode);
 }

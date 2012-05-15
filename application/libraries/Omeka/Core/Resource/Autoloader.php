@@ -38,6 +38,10 @@ class Omeka_Core_Resource_Autoloader extends Zend_Application_Resource_ResourceA
                 'form' => array(
                     'path'      => 'forms/',
                     'namespace' => 'Form',
+                ),
+                'helper' => array(
+                    'path'      => 'views/helpers',
+                    'namespace' => 'View_Helper'
                 )
             )        
         ));
