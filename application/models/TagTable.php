@@ -26,6 +26,7 @@ class TagTable extends Omeka_Db_Table
         if (!$tag) {
             $tag = new Tag;
             $tag->name = $name;
+            $tag->forceSave();
         }
         
         return $tag;

@@ -157,10 +157,6 @@ class Taggable extends Omeka_Record_Mixin
         foreach ($tags as $key => $tagName) {
             $tag = $this->tagTable->findOrNew(trim($tagName));
             
-            if (!$tag->exists()) {
-                $tag->forceSave();
-            }
-            
             $join = new Taggings;
                         
             $join->tag_id = $tag->id;
