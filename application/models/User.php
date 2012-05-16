@@ -142,7 +142,7 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
     public function getRoleId()
     {
         if (!$this->role) {
-            die("Should not be using a non-existent user role.");
+            throw new Exception(__('The user must be assigned a role.'));
         }
         return $this->role;
     }  
@@ -170,7 +170,6 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
     
     public function hashPassword($password)
     {
-        assert('$this->salt !== null');
         return sha1($this->salt . $password);
     }
 }
