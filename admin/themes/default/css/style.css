@@ -1334,6 +1334,7 @@ button.remove_search {
 
     
     #current-image .crop {
+        background-color: rgba(255,255,255,.3);
         border: 10px solid transparent;
         box-shadow: 0 0 5px rgba(0,0,0,.1);
         height: 200px;
