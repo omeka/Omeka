@@ -46,11 +46,7 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
                 . "value."),
             array(
                 '//input[@id="email"][@value="admin@example.com"]',
-                "There should be a 'email' element on this form with a default value."),
-            array(
-                '//input[@id="institution"][@value=""]',
-                "There should be an 'institution' element on this form with no "
-                . "default value."),
+                "There should be a 'email' element on this form with a default value.")
         );
     }
 
