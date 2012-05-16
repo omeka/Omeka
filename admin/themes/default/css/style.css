@@ -698,12 +698,12 @@ header nav {
             }
         
 .panel {
-    background-color: #fafafa;
-    border-top: 5px solid #e1e1e1;
-    box-shadow: 0 1px 5px #cccccc;
-        -webkit-box-shadow: 0 1px 5px #cccccc;
-        -moz-box-shadow: 0 1px 5px #cccccc;
-        -o-box-shadow: 0 1px 5px #cccccc;
+    background-color: rgba(255,255,255,.5);
+    box-shadow: 0 0 1px rgba(0,0,0,.4) inset;
+        -webkit-box-shadow: 0 0 1px rgba(0,0,0,.4) inset;
+        -moz-box-shadow: 0 0 1px rgba(0,0,0,.4) inset;
+        -o-box-shadow: 0 0 1px rgba(0,0,0,.4) inset;
+    border-top: 5px solid #EBEADC;
     display: block;
     margin: 10px 0;
     padding: 10px 10px 0 10px;
