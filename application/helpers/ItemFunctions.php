@@ -167,7 +167,7 @@ function item($elementSetName, $elementName = null, $options = array(), $item = 
     if (!$item) {
         $item = get_current_item();
     }
-    return __v()->itemMetadata($item, $elementSetName, $elementName, $options);
+    return __v()->recordMetadata($item, $elementSetName, $elementName, $options);
 }
 
 /**
@@ -354,7 +354,6 @@ function item_image($imageType, $props = array(), $index = 0, $item = null)
 
     $imageFile = get_db()->getTable('File')->findWithImages($item->id, $index);
 
-    require_once VIEW_HELPERS_DIR .  '/Media.php';
     $media = new Omeka_View_Helper_Media;
     return $media->archive_image($imageFile, $props, $imageType);
 }

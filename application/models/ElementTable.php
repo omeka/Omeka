@@ -28,10 +28,10 @@ class ElementTable extends Omeka_Db_Table
         $db = $this->getDb();
 
         // Join against the record_types table to pull only elements for Items
-         $select->joinInner(array('rty'=> $db->RecordType),
-                             'rty.id = e.record_type_id',
-                             array('record_type_name'=>'rty.name'));
-        $select->where('rty.name = ? OR rty.name = "All"', $recordTypeName);
+         $select->joinInner(array('record_types'=> $db->RecordType),
+                             'record_types.id = elements.record_type_id',
+                             array('record_type_name'=>'record_types.name'));
+        $select->where('record_types.name = ? OR record_types.name = "All"', $recordTypeName);
         
         $this->orderElements($select);
         
@@ -42,8 +42,8 @@ class ElementTable extends Omeka_Db_Table
     {
         $db = $this->getDb(); 
         $sqlMimeTypeElements = $this->getSelect()
-        ->joinInner(array('mesl'=>$db->MimeElementSetLookup), 'mesl.element_set_id = es.id', array())
-        ->where('mesl.mime = ?', $mimeType);
+        ->joinInner(array('mime_element_set_lookup' => $db->MimeElementSetLookup), 'mime_element_set_lookup.element_set_id = element_sets.id', array())
+        ->where('mime_element_set_lookup.mime = ?', $mimeType);
         
         return $this->fetchObjects($sqlMimeTypeElements);        
     }
@@ -60,8 +60,8 @@ class ElementTable extends Omeka_Db_Table
         $db = $this->getDb();
             
         // Join on the element_sets table to retrieve set name
-        $select->joinLeft(array('es'=>$db->ElementSet), 'es.id = e.element_set_id',
-            array('set_name'=>'es.name'));
+        $select->joinLeft(array('element_sets'=>$db->ElementSet), 'element_sets.id = elements.element_set_id',
+            array('set_name'=>'element_sets.name'));
         return $select;
     }
     
@@ -74,7 +74,7 @@ class ElementTable extends Omeka_Db_Table
      */
     protected function _getColumnPairs()
     {
-        return array('e.id', 'e.name');
+        return array('elements.id', 'elements.name');
     }
         
     protected function orderElements($select)
@@ -82,8 +82,8 @@ class ElementTable extends Omeka_Db_Table
         // ORDER BY e.order ASC, es.name ASC
         // This SQL statement will return results ordered each element set,
         // and for each element set these will be in the proper designated order.
-        $select->order($this->getTableAlias() . '.order ASC');
-        $select->order('e.element_set_id ASC');
+        $select->order('elements.order ASC');
+        $select->order('elements.element_set_id ASC');
     }
     
     /**
@@ -99,7 +99,7 @@ class ElementTable extends Omeka_Db_Table
         $select = $this->getSelect();
         $db = $this->getDb();
         
-        $select->where('es.name = ?', (string) $elementSet);
+        $select->where('element_sets.name = ?', (string) $elementSet);
         
         $this->orderElements($select);
         
@@ -117,9 +117,9 @@ class ElementTable extends Omeka_Db_Table
     {
         $select = $this->getSelect();
         $db = $this->getDb();
-        $select->joinInner(array('ite'=>$db->ItemTypesElements), 'ite.element_id = e.id', array());
-        $select->where('ite.item_type_id = ?');
-        $select->order('ite.order ASC');
+        $select->joinInner(array('item_types_elements'=>$db->ItemTypesElements), 'item_types_elements.element_id = elements.id', array());
+        $select->where('item_types_elements.item_type_id = ?');
+        $select->order('item_types_elements.order ASC');
         
         $elements = $this->fetchObjects($select, array($itemTypeId)); 
 
@@ -151,40 +151,40 @@ class ElementTable extends Omeka_Db_Table
         
         // Retrieve only elements matching a specific record type.
         if (array_key_exists('record_types', $params)) {
-            $select->joinInner(array('rty'=> $db->RecordType),
-                                 'rty.id = e.record_type_id',
-                                 array('record_type_name'=>'rty.name'));
+            $select->joinInner(array('record_types'=> $db->RecordType),
+                                 'record_types.id = elements.record_type_id',
+                                 array('record_type_name'=>'record_types.name'));
             $where = array();
             foreach ($params['record_types'] as $recordTypeName) {
-                $where[] = 'rty.name = ' . $db->quote($recordTypeName);
+                $where[] = 'record_types.name = ' . $db->quote($recordTypeName);
             }
             $select->where('(' . join(' OR ', $where) . ')');
         }
         
         if (array_key_exists('sort', $params)) {
             if ($params['sort'] == 'alpha') {
-                $select->order('e.name ASC');
+                $select->order('elements.name ASC');
             } else if ($params['sort'] == 'alphaBySet') {
-                $select->order('es.name ASC')->order('e.name ASC');
+                $select->order('element_sets.name ASC')->order('elements.name ASC');
             }
         }
         
         if (array_key_exists('element_set_name', $params)) {
-            $select->where('es.name = binary ?', (string) $params['element_set_name']);
+            $select->where('element_sets.name = binary ?', (string) $params['element_set_name']);
         }
 
         if (array_key_exists('element_name', $params)) {
-            $select->where('e.name = binary ?', (string) $params['element_name']); 
+            $select->where('elements.name = binary ?', (string) $params['element_name']); 
         }
 
         // Retrive results including, but not limited to, a specific item type.
         if (array_key_exists('item_type_id', $params)) {
-            $select->joinLeft(array('ite' => $db->ItemTypesElements),
-                "ite.element_id = e.id", array());
-            $select->where('ite.item_type_id = ? OR ite.item_type_id IS NULL', 
+            $select->joinLeft(array('item_types_elements' => $db->ItemTypesElements),
+                'item_types_elements.element_id = elements.id', array());
+            $select->where('item_types_elements.item_type_id = ? OR item_types_elements.item_type_id IS NULL', 
                 (int)$params['item_type_id']);
         } else if (array_key_exists('exclude_item_type', $params)) {
-            $select->where('es.name != ?', ELEMENT_SET_ITEM_TYPE);
+            $select->where('element_sets.name != ?', ELEMENT_SET_ITEM_TYPE);
         }
     }
     
@@ -207,9 +207,9 @@ class ElementTable extends Omeka_Db_Table
         $select = $this->getSelectForFindBy($options);
         $select->reset(Zend_Db_Select::COLUMNS);
         $select->from(array(), array(
-            'id' => 'e.id', 
-            'name' => 'e.name',
-            'set_name' => 'es.name',
+            'id' => 'elements.id', 
+            'name' => 'elements.name',
+            'set_name' => 'element_sets.name',
         ));
 
         $elements = $this->fetchAll($select);

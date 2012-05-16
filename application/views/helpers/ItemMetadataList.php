@@ -4,14 +4,11 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka_ThemeHelpers
  * @subpackage Omeka_View_Helper
- * @access private
  */
 
 /**
  * Helper that writes XHTML containing metadata about an item.
  *
- * @internal This implements Omeka internals and is not part of the public API.
- * @access private
  * @see show_item_metadata()
  * @package Omeka_ThemeHelpers
  * @subpackage Omeka_View_Helper
@@ -41,7 +38,7 @@ class Omeka_View_Helper_ItemMetadataList extends Omeka_View_Helper_RecordMetadat
      */
     public function itemMetadataList(Item $item, array $options = array())
     {
-        return $this->_getList($item, $options);
+        return $this->recordMetadataList($item, $options);
     }
 
     /**
@@ -78,23 +75,5 @@ class Omeka_View_Helper_ItemMetadataList extends Omeka_View_Helper_RecordMetadat
          unset($elementsBySet[self::ELEMENT_SET_ITEM_TYPE]);
 
         return $elementsBySet;
-    }
-
-    /**
-     * @todo Could pass the name of the partial in as an argument rather than hard
-     * coding it.  That would allow us to use arbitrary partials for purposes such as
-     * repackaging the data for RSS/XML or other data formats.
-     *
-     * @param array
-     * @return void
-     */
-    protected function _loadViewPartial($vars = array())
-    {
-        return common('item-metadata', $vars, 'items');
-    }
-
-    protected function _getFormattedElementText($record, $elementSetName, $elementName)
-    {
-        return $this->view->itemMetadata($record, $elementSetName, $elementName, 'all');
     }
 }

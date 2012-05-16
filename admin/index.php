@@ -36,9 +36,4 @@ $app->getBootstrap()->setOptions(array(
 // This is used by the global is_admin_theme to detect that this is the admin.
 Zend_Controller_Front::getInstance()->setParam('admin', true);
 
-$app->initialize();
-
-// This plugin allows for all functionality that is specific to the 
-// admin theme.
-$app->getBootstrap()->getResource('FrontController')->registerPlugin(new Omeka_Controller_Plugin_Admin);
-$app->run();
+$app->initialize()->run();

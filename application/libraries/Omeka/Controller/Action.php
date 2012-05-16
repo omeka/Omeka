@@ -267,7 +267,10 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      * @return void
      */
     public function browseAction()
-    {                
+    {
+        // Only respect GET params when browsing.
+        $this->getRequest()->setParamSources(array('_GET'));
+        
         $pluralName = $this->getPluralized();
         
         $params = $this->_getAllParams();

@@ -35,14 +35,6 @@ class Omeka_Db_Table
     protected $_name;
     
     /**
-     * The alias used for this table.  If not given, it will be inflected.
-     * 
-     * @see Omeka_Db_Table::getTableAlias()
-     * @var string
-     */
-    protected $_alias;
-    
-    /**
      * Table prefix.
      * Generally used to differentiate Omeka installations sharing a DB. 
      *
@@ -87,14 +79,16 @@ class Omeka_Db_Table
     }
     
     /**
-     * Retrieve the alias for this table.  
-     * 
-     * @internal HACK But it will do for now.
+     * Retrieve the alias for this table (the name without the prefix).  
      * 
      * @return string
      */
     public function getTableAlias() {
-        return !empty($this->_alias) ? $this->_alias : strtolower($this->_target[0]);
+        if (empty($this->_name)) {
+           $this->setTableName();
+        }
+
+        return $this->_name;
     }
     
     /**

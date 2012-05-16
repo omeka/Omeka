@@ -112,9 +112,9 @@ class ItemSearch
             
             // Each advanced search mini-form represents another subquery
             if ($negate) {
-                $select->where('i.id NOT IN ( ' . (string) $subQuery . ' )');
+                $select->where('items.id NOT IN ( ' . (string) $subQuery . ' )');
             } else {
-                $select->where('i.id IN ( ' . (string) $subQuery . ' )');
+                $select->where('items.id IN ( ' . (string) $subQuery . ' )');
             }
 
         }
@@ -159,7 +159,7 @@ class ItemSearch
         $searchQuery .= (string) $this->_getTagsQuery($terms);
                 
         // INNER JOIN to the main SQL query and then ORDER BY rank DESC
-        $select->joinInner(array('s'=>new Zend_Db_Expr('('. $searchQuery . ')')), 's.item_id = i.id', array())
+        $select->joinInner(array('s'=>new Zend_Db_Expr('('. $searchQuery . ')')), 's.item_id = items.id', array())
             ->order('s.rank DESC'); 
                         
     }

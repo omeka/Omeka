@@ -33,7 +33,7 @@ class PluginTable extends Omeka_Db_Table
     
     public function findByDirectoryName($pluginDirName)
     {
-        $select = $this->getSelect()->where("p.name = ?")->limit(1);        
+        $select = $this->getSelect()->where('plugins.name = ?')->limit(1);        
         return $this->fetchObject($select, array($pluginDirName));        
     }
     

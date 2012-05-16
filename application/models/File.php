@@ -48,6 +48,67 @@ class File extends Omeka_Record
         'square_thumbnail' => 'square_thumbnails'
     );
 
+    /**
+     * Get a file's property for display.
+     *
+     * Available properties:
+     * - id
+     * - archive filename
+     * - original filename
+     * - size
+     * - mime type
+     * - date added
+     * - date modified
+     * - authentication
+     * - mime type os
+     * - file type os
+     * - uri
+     * - fullsize uri
+     * - thumbnail uri
+     * - square thumbnail uri
+     * - permalink
+     *
+     * @param string $property
+     * @return mixed
+     */
+    public function getProperty($property)
+    {
+        switch ($property) {
+            case 'id':
+                return $this->id;
+            case 'archive filename':
+                return $this->archive_filename;
+            case 'original filename':
+                return $this->original_filename;
+            case 'size':
+                return $this->size;
+            case 'mime type':
+                return $this->getMimeType();
+            case 'date added':
+                return $this->added;
+            case 'date modified':
+                return $this->modified;
+            case 'authentication':
+                return $this->authentication;
+            case 'mime type os':
+                return $this->mime_os;
+            case 'file type os':
+                return $this->type_os;
+            case 'uri':
+                return $this->getWebPath('archive');
+            case 'fullsize uri':
+                return $this->getWebPath('fullsize');
+            case 'thumbnail uri':
+                return $this->getWebPath('thumbnail');
+            case 'square thumbnail uri':
+                return $this->getWebPath('square_thumbnail');
+            case 'permalink':
+                return abs_uri(array('controller' => 'files', 'action' => 'show', 'id' => $this->id));
+            default:
+                throw new Exception(__("'%s' is an invalid special value.", $property));
+        }
+    }
+
     protected function _initializeMixins()
     {
         $this->_mixins[] = new ActsAsElementText($this);

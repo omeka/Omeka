@@ -27,7 +27,7 @@ class CollectionTable extends Omeka_Db_Table
     
     protected function _getColumnPairs()
     {
-        return array('c.id', 'c.name');
+        return array('collections.id', 'collections.name');
     }
 
     /**
@@ -50,7 +50,7 @@ class CollectionTable extends Omeka_Db_Table
     
     public function findRandomFeatured()
     {
-        $select = $this->getSelect()->where("c.featured = 1")->order("RAND()")->limit(1);        
+        $select = $this->getSelect()->where('collections.featured = 1')->order('RAND()')->limit(1);        
         return $this->fetchObject($select);
     }    
     
@@ -67,9 +67,9 @@ class CollectionTable extends Omeka_Db_Table
 
         //Force a preview of the public collections
         if ($isPublic) {
-            $select->where('c.public = 1');
+            $select->where('collections.public = 1');
         } else {
-            $select->where('c.public = 0');
+            $select->where('collections.public = 0');
         }
     }
     
@@ -86,9 +86,9 @@ class CollectionTable extends Omeka_Db_Table
         
         //filter items based on featured (only value of 'true' will return featured collections)
         if ($isFeatured) {
-            $select->where('c.featured = 1');
+            $select->where('collections.featured = 1');
         } else {
-            $select->where('c.featured = 0');
+            $select->where('collections.featured = 0');
         }     
     }
 }

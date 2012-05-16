@@ -17,9 +17,9 @@ class TagTable extends Omeka_Db_Table
     {
         $db = $this->getDb();
         $sql = "
-        SELECT t.* 
-        FROM {$db->Tag} t 
-        WHERE t.name COLLATE utf8_bin LIKE ? 
+        SELECT tags.* 
+        FROM {$db->Tag} tags
+        WHERE tags.name COLLATE utf8_bin LIKE ? 
         LIMIT 1";
         $tag = $this->fetchObject($sql, array($name));
         
@@ -42,14 +42,14 @@ class TagTable extends Omeka_Db_Table
     {
         if ($record->exists()) {
             $record_id = $record->id;
-            $select->where("tg.relation_id = ?", $record_id);
+            $select->where('taggings.relation_id = ?', $record_id);
             
             if (empty($for)) {
-                $select->where("tg.type = ?", get_class($record));
+                $select->where('taggings.type = ?', get_class($record));
             }
         //A non-persistent record has no tags, so return emptiness
         } else {
-            $select->where('t.id = 0');
+            $select->where('tags.id = 0');
         }        
     }
 
@@ -69,7 +69,7 @@ class TagTable extends Omeka_Db_Table
 
         switch ($sortField) {
             case 'time':
-                $select->order(array("tg.time $sortDir", 't.name ASC'));
+                $select->order(array("taggings.time $sortDir", 'tags.name ASC'));
                 break;
             case 'count':
                 $select->order("tagCount $sortDir");
@@ -93,12 +93,12 @@ class TagTable extends Omeka_Db_Table
         //Showing tags related to items
         if ($type == 'Item') {
             //Join on the items table, add permissions checks for public
-            $select->joinInner( array('i'=>$db->Item), "i.id = tg.relation_id AND tg.type = 'Item'", array());
+            $select->joinInner( array('items'=>$db->Item), "items.id = taggings.relation_id AND taggings.type = 'Item'", array());
             if($acl = Omeka_Context::getInstance()->getAcl()) {
                 new ItemPermissions($select, $acl);
             }
         } else {
-            $select->where("tg.type = ?", (string) $type);
+            $select->where("taggings.type = ?", (string) $type);
         }
     }
     
@@ -111,7 +111,7 @@ class TagTable extends Omeka_Db_Table
      */
     public function filterByTagNameLike($select, $partialTagName) 
     {
-        $select->where("`t`.`name` LIKE CONCAT('%', ?, '%')", $partialTagName);
+        $select->where("`tags`.`name` LIKE CONCAT('%', ?, '%')", $partialTagName);
     }
          
     /**
@@ -146,7 +146,7 @@ class TagTable extends Omeka_Db_Table
             $this->filterByTagNameLike($select, $params['like']);
         }
                         
-        $select->group("t.id");
+        $select->group("tags.id");
     }
     
         
@@ -162,9 +162,9 @@ class TagTable extends Omeka_Db_Table
         
         $db = $this->getDb();
         
-        $select->from(array('t'=>$db->Tag), array('t.*', 'tagCount'=>'COUNT(t.id)'))
-                ->joinInner( array('tg'=>$db->Taggings), "tg.tag_id = t.id", array())
-                ->group('t.id');
+        $select->from(array('tags'=>$db->Tag), array('tags.*', 'tagCount'=>'COUNT(tags.id)'))
+                ->joinInner( array('taggings'=>$db->Taggings), 'taggings.tag_id = tags.id', array())
+                ->group('tags.id');
                 
         return $select;
     }
@@ -172,7 +172,7 @@ class TagTable extends Omeka_Db_Table
     public function findTagNamesLike($partialName, $limit = 10)
     {
         $db = $this->getDb();
-        $sql = "SELECT t.name FROM $db->Tag t WHERE t.name LIKE ? LIMIT $limit";
+        $sql = "SELECT tags.name FROM $db->Tag tags WHERE tags.name LIKE ? LIMIT $limit";
         $tags = $db->fetchCol($sql, array($partialName . '%'));
         return $tags;
     }

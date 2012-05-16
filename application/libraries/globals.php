@@ -319,7 +319,6 @@ function get_plugin_ini($pluginDirName, $iniKeyName)
  */
 function add_file_display_callback($fileIdentifiers, $callback, array $options=array())
 {
-    require_once VIEW_HELPERS_DIR . '/Media.php';
     Omeka_View_Helper_Media::addMimeTypes($fileIdentifiers, $callback, $options);
 }
 

@@ -71,7 +71,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
     public function testTotalItemsGetsCountFromItemsTable()
     {
         $this->collection->totalItems();
-        $this->profilerHelper->assertDbQuery("SELECT COUNT(DISTINCT(i.id)) FROM items AS i");
+        $this->profilerHelper->assertDbQuery("SELECT COUNT(DISTINCT(items.id)) FROM items");
     }
     
     public function testTotalItems()

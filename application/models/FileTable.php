@@ -25,11 +25,11 @@ class FileTable extends Omeka_Db_Table
     {
         $select = parent::getSelect();
         $db = $this->getDb();
-        $select->joinInner(array('i' => $db->Item), "i.id = f.item_id", array());
+        $select->joinInner(array('items' => $db->Item), 'items.id = files.item_id', array());
         if($acl = Omeka_Context::getInstance()->getAcl()) {
             new ItemPermissions($select, $acl);
         }
-        $select->group('f.id');
+        $select->group('files.id');
         return $select;
     }
 
@@ -42,7 +42,7 @@ class FileTable extends Omeka_Db_Table
     public function getRandomFileWithImage($itemId)
     {
         $select = $this->getSelect()
-                       ->where('f.item_id = ? AND f.has_derivative_image = 1')
+                       ->where('files.item_id = ? AND files.has_derivative_image = 1')
                        ->order('RAND()')
                        ->limit(1);
 
@@ -61,9 +61,9 @@ class FileTable extends Omeka_Db_Table
     public function findByItem($itemId, $fileIds = array(), $sort='id')
     {
         $select = $this->getSelect();
-        $select->where('f.item_id = ?');
+        $select->where('files.item_id = ?');
         if ($fileIds) {
-            $select->where('f.id IN (?)', $fileIds);
+            $select->where('files.id IN (?)', $fileIds);
         }
 
         $this->_orderFilesBy($select, $sort);
@@ -84,7 +84,7 @@ class FileTable extends Omeka_Db_Table
     public function findWithImages($itemId, $index=null, $sort='id')
     {
         $select = $this->getSelect()
-                       ->where('f.item_id = ? AND f.has_derivative_image = 1');
+                       ->where('files.item_id = ? AND files.has_derivative_image = 1');
 
         $this->_orderFilesBy($select, $sort);
 
@@ -113,16 +113,16 @@ class FileTable extends Omeka_Db_Table
         // order the files
         switch($sort) {
             case 'order':
-                $select->order('ISNULL(f.order)')->order('f.order');
+                $select->order('ISNULL(files.order)')->order('files.order');
             break;
 
             case 'filename':
-                $select->order('f.original_filename ASC');
+                $select->order('files.original_filename ASC');
             break;
 
             case 'id':
             default:
-                $select->order('f.id ASC');
+                $select->order('files.id ASC');
             break;
         }
     }
