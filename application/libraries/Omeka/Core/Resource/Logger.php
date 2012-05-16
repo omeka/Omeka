@@ -38,6 +38,13 @@ class Omeka_Core_Resource_Logger extends Zend_Application_Resource_ResourceAbstr
         
         $writer = new Zend_Log_Writer_Stream($logFile);
         $logger = new Zend_Log($writer);
+
+        if (isset($config->log->priority)) {
+            $priority = $config->log->priority;
+            if (defined($priority)) {
+                $writer->addFilter(constant($priority));
+            }
+        }
         
         if (!empty($config->debug->email)) {
             $bootstrap->bootstrap('Mail');            
