@@ -1,5 +1,5 @@
 <?php
-$pageTitle = __('Browse Users');
+$pageTitle = __('Browse Users ('.$total_records.' users)');
 head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'users primary'));?>
 
 <?php if (has_permission('Users', 'add')): ?>

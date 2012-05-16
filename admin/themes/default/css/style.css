@@ -448,6 +448,7 @@ header ul {
 #site-title {
     float: left;
     font-weight: 700;
+    line-height: 1.5em;
     }
     
 header nav {

@@ -84,7 +84,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
             </script>
                                 
             <?php if (has_permission('Items', 'add')): ?>
-            <a href="<?php echo html_escape(uri('items/add')); ?>" class="add-item button small green">Add New Item</a>
+            <a href="<?php echo html_escape(uri('items/add')); ?>" class="add-item button small green">Add an Item</a>
             <?php endif; ?>
             
             <div id="simple-search-form">
@@ -184,7 +184,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                     <input type="submit" class="red small" name="submit" value="Delete">
                     <?php endif; ?>
                     <select id="quick-filter" name="quick-filter">
-                        <option value="quick">Filter</option>
+                        <option value="quick">View All</option>
                         <option value="quick">Public</option>
                         <option value"quick">Private</option>
                         <option value="quick">Featured</option>
