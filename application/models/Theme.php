@@ -33,6 +33,7 @@ class Theme
     public $description;
     public $license;
     public $website;
+    public $omeka_minimum_version;
     
     public function setDirectoryName($dir)
     {
