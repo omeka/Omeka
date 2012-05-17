@@ -168,9 +168,12 @@ class UsersController extends Omeka_Controller_Action
         
         try {
             if ($user->saveForm($_POST)) {                
-                $this->sendActivationEmail($user);
-                $this->flashSuccess(__('The user "%s" was successfully added!',$user->username));
-                                
+                if ($this->sendActivationEmail($user)) {
+                    $this->flashSuccess(__('The user "%s" was successfully added!',$user->username));
+                } else {
+                    $this->flash(__('The user "%s" was added, but the activation email could not be sent.',
+                        $user->username));
+                }
                 //Redirect to the main user browse page
                 $this->redirect->goto('browse');
             }
@@ -262,7 +265,14 @@ class UsersController extends Omeka_Controller_Action
              . 'collections, and tags created by this user will remain in the '
              . 'archive, but will no longer be associated with this user.', $user->username);
     }
-    
+
+    /**
+     * Send an activation email to a new user telling them how to activate
+     * their account.
+     *
+     * @param User $user
+     * @return boolean True if the email was successfully sent, false otherwise.
+     */
     protected function sendActivationEmail($user)
     {
         $ua = new UsersActivations;
@@ -285,7 +295,16 @@ class UsersController extends Omeka_Controller_Action
         $mail->addTo($user->email, $user->name);
         $mail->setSubject($subject);
         $mail->addHeader('X-Mailer', 'PHP/' . phpversion());
-        $mail->send();
+        try {
+            $mail->send();
+            return true;
+        } catch (Zend_Mail_Transport_Exception $e) {
+            $logger = $this->getInvokeArg('bootstrap')->getResource('Logger');
+            if ($logger) {
+                $logger->log($e, Zend_Log::ERR);
+            }
+            return false;
+        }
     }
         
     public function loginAction()
