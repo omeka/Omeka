@@ -1,5 +1,5 @@
 <?php
-$pageTitle = __('Browse Tags ('. total_tags() .' tags)');
+$pageTitle = __('Browse Tags ('. total_tags() .' total)');
 head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodyclass'=>'tags browse-tags primary')); ?>
 <?php common('tags-nav'); ?>
 <?php if ( total_results() ): ?>

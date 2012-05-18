@@ -106,11 +106,23 @@ class ItemsController extends Omeka_Controller_Action
         return __('The item was successfully deleted!');
     }
     
+    protected function  _getBatchDeleteSuccessMessage($record)
+    {
+        return __('The items were successfully deleted!');
+    }
+    
     protected function _getDeleteConfirmMessage($record)
     {
         return __('This will delete the item and its associated metadata. It will '
              . 'also delete all files and file metadata associated with this '
              . 'item.');
+    }
+    
+    protected function _getBatchDeleteConfirmMessage($record)
+    {
+        return __('This will delete the selected items and their associated metadata. It will '
+             . 'also delete all files and file metadata associated with these '
+             . 'items.');
     }
     
     public function addAction()
@@ -310,4 +322,5 @@ class ItemsController extends Omeka_Controller_Action
 
          $this->_helper->redirector->goto('browse', 'items');
     }
+    
 }

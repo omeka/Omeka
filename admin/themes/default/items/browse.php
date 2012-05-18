@@ -1,5 +1,5 @@
 <?php
-$pageTitle = __('Browse Items ('.total_results().' items)');
+$pageTitle = __('Browse Items ('.total_results().' total)');
 head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=>'items primary browse-items')); ?>
         
             <?php echo flash(); ?>
@@ -104,12 +104,21 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                     <?php if (has_permission('Items', 'delete')): ?>
                     <input type="submit" class="red small" name="submit" value="Delete">
                     <?php endif; ?>                    
-                    <select id="quick-filter" name="quick-filter">
-                        <option value="items/">View All</option>
-                        <option value="items/browse?public=1">Public</option>
-                        <option value"items/browse?public=0">Private</option>
-                        <option value="items/browse?featured=1">Featured</option>
-                    </select>
+                    <div class="quick-filter-wrapper">
+                        <div class="quick-filter-content">
+                        <?php
+                            echo nav(array(
+                                __('Quick Filter') => uri('items'),
+                                __('View All') => uri('items'),
+                                __('Public') => uri('items/browse?public=1'),
+                                __('Private') => uri('items/browse?public=0'),
+                                __('Featured') => uri('items/browse?featured=1'),
+                                __('Not Featured') => uri('items/browse?featured=0')
+                            ), array('class' => 'quick-filter-content'));
+                        ?>
+                        </div>
+                        <p class="quick-filter-resting"><?php echo __('Quick Filter'); ?></p>
+                    </div>                    
                 </div>
     
                 <?php echo pagination_links(array('partial_file' => common('pagination_control'))); ?>
@@ -183,12 +192,21 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                     <?php if (has_permission('Items', 'delete')): ?>
                     <input type="submit" class="red small" name="submit" value="Delete">
                     <?php endif; ?>
-                    <select id="quick-filter" name="quick-filter">
-                        <option value="quick">View All</option>
-                        <option value="quick">Public</option>
-                        <option value"quick">Private</option>
-                        <option value="quick">Featured</option>
-                    </select>
+                    <div class="quick-filter-wrapper">
+                        <div class="quick-filter-content">
+                        <?php
+                            echo nav(array(
+                                __('Quick Filter') => uri('items'),
+                                __('View All') => uri('items'),
+                                __('Public') => uri('items/browse?public=1'),
+                                __('Private') => uri('items/browse?public=0'),
+                                __('Featured') => uri('items/browse?featured=1'),
+                                __('Not Featured') => uri('items/browse?featured=0')
+                            ), array('class' => 'quick-filter-content'));
+                        ?>
+                        </div>
+                        <p class="quick-filter-resting"><?php echo __('Quick Filter'); ?></p>
+                    </div>
                 </div>
     
                 <div class="pagination">

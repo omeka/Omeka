@@ -1,5 +1,5 @@
 <?php 
-$pageTitle = __('Browse Item Types ('.$total_records.' types)');
+$pageTitle = __('Browse Item Types ('.$total_records.' total)');
 head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
 
 <?php if (has_permission('ItemTypes', 'add')): ?>

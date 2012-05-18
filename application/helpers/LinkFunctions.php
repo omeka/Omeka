@@ -306,8 +306,7 @@ function link_to_admin_home_page($text = null, $props = array())
 }
 
 /**
- * Generate an unordered list of 
- igation links (and subnavigation links),
+ * Generate an unordered list of navigation links (and subnavigation links),
  * with class "current" for any links corresponding to the current page
  *
  * For example:

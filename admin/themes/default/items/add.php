@@ -21,27 +21,30 @@ head(array('title'=>$pageTitle,'content_class' => 'vertical-nav', 'bodyclass'=>'
                         <?php if ( has_permission('Items', 'makeFeatured') ): ?>
                                 <label for="featured"><?php echo __('Featured'); ?>:</label> 
                                 <?php echo $this->formCheckbox(array('name'=>'featured', 'id'=>'featured'), $item->featured); ?>
-                        <?php endif; ?>
+                        <?php endif; ?>                        
                         
-                        <?php echo $this->formLabel('collection-id', __('Collection'));?>
-                        <div class="inputs">
-                            <?php echo $this->formSelect(
-                                'collection_id',
-                                $item->collection_id,
-                                array('id' => 'collection-id'),
-                                get_table_options('Collection')
-                            );?>
+                    </div>
+                    
+                        <div id="collection-form" class="field">
+                            <?php echo $this->formLabel('collection-id', __('Collection'));?>
+                            <div class="inputs">
+                                <?php echo $this->formSelect(
+                                    'collection_id',
+                                    $item->collection_id,
+                                    array('id' => 'collection-id'),
+                                    get_table_options('Collection')
+                                );?>
+                            </div>                        
                         </div>
                         
-                        <div id="tag-form">
-                            <?php $tags = $item->getTags(); ?>
+                        <div id="tag-form" class="field">
                             <input type="hidden" name="tags-to-add" size="30" id="tags-to-add" value="" />
                             <input type="hidden" name="tags-to-delete" size="30" id="tags-to-delete" value="" />
                             <div id="add-tags">
                                 <label><?php echo __('Add Tags'); ?></label>           
                                 <input type="text" name="tags" size="20" id="tags" class="textinput" value="" />
-                                <input type="button" name="add-tags-button" id="add-tags-button" value="<?php echo __('Add Tags'); ?>" />
-                                <p id="add-tags-explanation"><?php echo __('Separate tags with %s', settings('tag_delimiter')); ?></p>
+                                <p id="add-tags-explanation" class="explanation"><?php echo __('Separate tags with %s', settings('tag_delimiter')); ?></p>
+                                <input type="submit" name="add-tags-button" id="add-tags-button" class="green button" value="<?php echo __('Add Tags'); ?>" />
                             </div>
                             <div id="all-tags">
                             <?php if ($tags): ?>
@@ -66,9 +69,6 @@ head(array('title'=>$pageTitle,'content_class' => 'vertical-nav', 'bodyclass'=>'
                             <?php endif; ?>
                             </div>
                         </div>
-                        
-                        
-                    </div>
             
                     </div>
                                     
