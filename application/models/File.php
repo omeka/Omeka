@@ -380,6 +380,9 @@ class File extends Omeka_Record
             $fn = $this->getDerivativeFilename();
         }
 
+        if (!isset(self::$_pathsByType[$type])) {
+            throw new Exception(__('"%s" is not a valid file derivative.', $type));
+        }
         return $storage->getPathByType($fn, self::$_pathsByType[$type]);
     }
 
