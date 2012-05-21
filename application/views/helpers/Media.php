@@ -360,9 +360,11 @@ class Omeka_View_Helper_Media
     /**
      * Add a link for the file based on the given set of options.
      * 
-     * If the 'linkToMetadata' option is true, then link to the file metadata
-     * page (files/show).  Otherwise if 'linkToFile' is true, link to download
-     * the file.  Otherwise just return the $html without wrapping in a link.
+     * If the 'linkToMetadata' option is true, then link to the file
+     * metadata page (files/show).  If 'linkToFile' is true,
+     * link to the archive file, and if 'linkToFile' is a string, try
+     * to link to that specific derivative. Otherwise just return the
+     * $html without wrapping in a link.
      * 
      * The attributes for the link will be based off the 'linkAttributes' 
      * option, which should be an array.
@@ -379,14 +381,24 @@ class Omeka_View_Helper_Media
         if ($html === null) {
             $html = item_file('Original Filename', null, array(), $file);
         }
+
         if ($options['linkToMetadata']) {
-          $html = link_to_file_metadata((array)$options['linkAttributes'], 
+            $html = link_to_file_metadata((array)$options['linkAttributes'],
                   $html, $file);
-        } else if ($options['linkToFile']) {
+        } else if (($linkToFile = $options['linkToFile'])) {
+            // If you've manually specified a derivative type to link
+            // to, and this file actually has derivatives, we'll use
+            // that, otherwise, the link is to the "archive" file.
+            if (is_string($linkToFile) && $file->hasThumbnail()) {
+                $derivative = $linkToFile;
+            } else {
+                $derivative = 'archive';
+            }
+
             // Wrap in a link that will download the file directly.
             $defaultLinkAttributes = array(
                 'class'=>'download-file', 
-                'href'=>$file->getWebPath('archive')
+                'href'=>$file->getWebPath($derivative)
                 );
             $linkAttributes = array_key_exists('linkAttributes', $options)
                             ? $options['linkAttributes'] : array();
