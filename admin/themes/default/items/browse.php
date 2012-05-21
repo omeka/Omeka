@@ -159,8 +159,8 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                         </ul>
                         <?php fire_plugin_hook('admin_append_to_items_browse_simple_each'); ?>
                         <div class="item-details">
-                            <?php echo snippet_by_word_count(strip_formatting(item('Dublin Core', 'Description')), 40); ?><br>
-                            <strong><?php echo __('Collection'); ?>:</strong> <?php if (item_belongs_to_collection()) echo link_to_collection_for_item(); else echo __('No Collection'); ?><br><strong><?php echo __('Tags'); ?>:</strong> <?php if ($tags = item_tags_as_string()) echo $tags; else echo __('No Tags'); ?>
+                            <?php echo snippet_by_word_count(strip_formatting(item('Dublin Core', 'Description')), 40); ?>
+                            <p><strong><?php echo __('Collection'); ?>:</strong> <?php if (item_belongs_to_collection()) echo link_to_collection_for_item(); else echo __('No Collection'); ?></p><p><strong><?php echo __('Tags'); ?>:</strong> <?php if ($tags = item_tags_as_string()) echo $tags; else echo __('No Tags'); ?></p>
                             </ul>
                             <?php fire_plugin_hook('admin_append_to_items_browse_detailed_each'); ?>
                         </div>

@@ -982,6 +982,10 @@ header nav {
     margin-top: .5em;
     padding: .5em;
     }
+    
+    .item-details p {
+        margin: 0;
+        }
 
 .items-browse .pagination {
     float: right;
