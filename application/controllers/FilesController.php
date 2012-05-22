@@ -25,25 +25,6 @@ class FilesController extends Omeka_Controller_Action
     public function init()
     {
         $this->_helper->db->setDefaultModelName('File');
-        $this->checkUserPermissions();
-    }
-    
-    protected function checkUserPermissions()
-    {
-        if (!$this->_getParam('id')) {
-            $this->_helper->redirector->goto('browse', 'items');
-        }
-        $file = $this->findById(null, 'File');
-        $user = $this->getCurrentUser();
-        
-        $action = $this->_request->getActionName();
-        //Check 'edit' action.
-        if (in_array($action, array('edit'))) {
-            // Allow access for users who originally created the item.
-            if ($file->getItem()->wasAddedBy($user)) {
-                $this->_helper->acl->setAllowed($action);
-            }
-        }
     }
     
     public function indexAction()

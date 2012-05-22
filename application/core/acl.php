@@ -47,6 +47,7 @@ $acl->allow(null,
             array('Items'),
             array('tags', 'advanced-search')
 );
+$acl->allow(null, 'Files', 'show');
 // Super user can do anything
 $acl->allow('super');
 // Researchers can view items and collections that are not yet public
@@ -60,6 +61,7 @@ $acl->allow('contributor',
             array('tag', 'add', 'batch-edit', 'batch-edit-save', 'delete-confirm',
                   'editSelf', 'deleteSelf', 'showSelfNotPublic')
 );
+$acl->allow('contributor', 'Files', 'editSelf');
 $acl->allow('contributor', 'Tags', array('autocomplete'));
 // Contributors can add collections, edit or delete their own collections, and see their own non-public collections.
 $acl->allow('contributor',
@@ -86,6 +88,8 @@ $acl->allow(array('super', 'admin', 'contributor', 'researcher'),
 
 $acl->allow(null, 'Items', array('edit', 'delete'),
     new Omeka_Acl_Assert_Ownership);
+
+$acl->allow(null, 'Files', 'edit', new Omeka_Acl_Assert_Ownership);
 
 $acl->allow(null, 'Collections', array('edit', 'delete'),
     new Omeka_Acl_Assert_Ownership);

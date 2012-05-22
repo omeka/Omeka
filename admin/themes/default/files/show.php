@@ -11,7 +11,7 @@
 <?php head(array('title' => $fileTitle, 'bodyclass'=>'files show primary-secondary')); ?>
 
 <h1><?php echo $fileTitle; ?></h1>
-<?php if (has_permission('Files', 'edit') or $file->getItem()->wasAddedBy(current_user())): ?>
+<?php if (has_permission($file, 'edit')): ?>
     <p id="edit-file" class="edit-button"><?php echo link_to($file, 'edit', __('Edit this File'), array('class'=>'edit')); ?></p>
 <?php endif; ?>
 <div id="primary">
