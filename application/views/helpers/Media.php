@@ -379,7 +379,8 @@ class Omeka_View_Helper_Media
     protected function _linkToFile($html = null, $file, $options)
     {
         if ($html === null) {
-            $html = item_file('Original Filename', null, array(), $file);
+            $fileTitle = strip_formatting(item_file('Dublin Core', 'Title', array(), $file));
+            $html = $fileTitle ? $fileTitle : item_file('Original Filename', null, array(), $file);
         }
 
         if ($options['linkToMetadata']) {
