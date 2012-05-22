@@ -748,18 +748,20 @@ header nav {
 /* Login  
 ================================================== */
 
-#content.login-content {
+#login #content {
+    margin-top: 10%;
     padding: 40px 0 20px 0;
+    text-align: center;
     }
 
-.errors {
+#login .errors {
     list-style-type: none;
     margin: 0;
     padding: 0;
     text-align: left;
     }
     
-    .errors li {
+    #login .errors li {
         background-color: rgba(255, 255, 255, .5);
         border: 1px solid #E7E7E7;
         border-radius: 3px;
@@ -769,26 +771,27 @@ header nav {
         padding: .5em;   
         }
 
-#forgotpassword {
+#login #forgotpassword {
     clear: both;
     }
     
-#fieldset-login .field:last-child .inputs {
+#login #fieldset-login .field:last-child .inputs {
     width: auto;
-    float: none;
+    float: left;
     display: inline-block;
     margin: 0 0 20px 5px;
     }
-    
-#fieldset-login .inputs {
-    }
-
-.login-content {
-    margin: 10% auto 0 auto;
-    text-align: center;
+        
+#login .field label {
+    min-width: 0;
+    padding: 0;
     }
     
-.login-content h1 {
+#login #flash {
+    margin: 0 10px;
+    }
+    
+#login h1 {
         width: 300px;
         background-image: url('../images/blue-banner.jpg');
         color: #ffffff;
@@ -801,7 +804,7 @@ header nav {
         text-shadow: 0 0 1px #000000;
         }
         
-        .login-content h1:before {
+        #login h1:before {
             height: 53px;
             width: 27px;
             background-image: url('../images/blue-banner_left.jpg');
@@ -810,7 +813,7 @@ header nav {
             float: left;
             }
             
-        .login-content h1:after {
+        #login h1:after {
             height: 53px;
             width: 27px;
             background-image: url('../images/blue-banner_right.jpg');
@@ -818,34 +821,32 @@ header nav {
             display: block;
             float: right;
             }
-            
-.login-content .submit {
-    clear: both;
-    }
-    
-.login-content #flash {
-    margin: 0 10px;
-    }
 
-.login-footer {
+#login .login-footer {
     clear: both;
     padding: 10px 0;
     text-align: center;
     }
 
-#remember {
+#login #remember {
     display: inline-block;
     }
 
-#remember-label {
+#login #remember-label {
     display: inline-block;
     }
 
-#remember-label label {
+#login #remember-label label {
     width: auto;
     min-width: 0;
     float: none;
     }
+            
+#login .submit {
+    clear: both;
+    }
+
+
 
 /* Dashboard  
 ================================================== */

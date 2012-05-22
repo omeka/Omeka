@@ -168,7 +168,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                     <td><?php echo strip_formatting(item('Dublin Core', 'Creator')); ?></td>
                     <td><?php echo ($typeName = item('Item Type Name'))
                                 ? $typeName
-                                : '<em>' . item('Dublin Core', 'Type', array('snippet' => 35)) . '</em>'; ?></td>
+                                : item('Dublin Core', 'Type', array('snippet' => 35)); ?></td>
                     <td>
                     <?php if($item->public): ?>
                     <img src="<?php echo img('silk-icons/tick.png'); ?>" alt="<?php echo __('Public'); ?>"/>
