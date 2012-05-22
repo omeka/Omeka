@@ -464,8 +464,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
         if ($form->isValid($_POST)) { 
             $record->delete();
         } else {
-            $this->_forward('error');
-            return;
+            throw new Omeka_Controller_Exception_404;
         }
         
         $successMessage = $this->_getDeleteSuccessMessage($record);
@@ -473,30 +472,6 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
             $this->flashSuccess($successMessage);
         }
         $this->redirect->goto('browse');
-    }
-    
-    /**
-     * Throw a 403 "Forbidden" exception.
-     * Causes Omeka to reroute to the ErrorController.
-     * 
-     * @throws Omeka_Controller_Exception_403
-     * @return void
-     */
-    public function forbiddenAction()
-    {
-        throw new Omeka_Controller_Exception_403();
-    }
-    
-    /**
-     * Throw a 404 "Not Found" exception.
-     * Causes Omeka to reroute to the ErrorController.
-     * 
-     * @throws Omeka_Controller_Exception_404
-     * @return void
-     */
-    public function errorAction()
-    {
-        throw new Omeka_Controller_Exception_404();
     }
     
     /**
