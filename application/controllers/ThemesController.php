@@ -38,6 +38,14 @@ class ThemesController extends Omeka_Controller_Action
             $this->flashError(__('You have chosen an illegal theme name. Please select another theme.'));
             return;
         }
+
+        $theme = Theme::getAvailable($themeName);
+        $minVer = $theme->omeka_minimum_version;
+        if (!empty($minVer) && version_compare(OMEKA_VERSION, $theme->omeka_minimum_version, '<')) {
+            $this->flashError(__('This theme requires a newer version of Omeka (%s).', $minVer));
+            $this->_helper->redirector->goto('browse');
+            return;
+        }
         
         // Set the public theme option according to the form post.
         set_option(Theme::PUBLIC_THEME_OPTION, $themeName);

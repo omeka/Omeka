@@ -120,11 +120,6 @@ class Omeka_Form_User extends Omeka_Form
             )
         ));
         
-        $this->addElement('text', 'institution', array(
-            'label' => __('Institution'),
-            'size' => '30'
-        ));
-        
         if ($this->_hasRoleElement) {
             $this->addElement('select', 'role', array(
                 'label' => __('Role'),

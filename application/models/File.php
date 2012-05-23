@@ -23,7 +23,7 @@ if (!function_exists('mime_content_type')) {
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class File extends Omeka_Record 
+class File extends Omeka_Record implements Zend_Acl_Resource_Interface 
 { 
     const DISABLE_DEFAULT_VALIDATION_OPTION = 'disable_default_file_validation';
 
@@ -380,6 +380,9 @@ class File extends Omeka_Record
             $fn = $this->getDerivativeFilename();
         }
 
+        if (!isset(self::$_pathsByType[$type])) {
+            throw new Exception(__('"%s" is not a valid file derivative.', $type));
+        }
         return $storage->getPathByType($fn, self::$_pathsByType[$type]);
     }
 
@@ -395,5 +398,35 @@ class File extends Omeka_Record
         }
 
         return $this->_storage;
+    }
+
+    /**
+     * Get the ACL resource ID for the record.
+     *
+     * File records are 'Files' resources.
+     *
+     * @return string
+     */
+    public function getResourceId()
+    {
+        return 'Files';
+    }
+
+    /**
+     * Return whether this file is owned by the given user.
+     *
+     * Proxies to the Item's isOwnedBy.
+     *
+     * @uses Ownable::isOwnedBy
+     * @param User $user
+     * @return boolean
+     */
+    public function isOwnedBy($user)
+    {
+        if (($item = $this->getItem())) {
+            return $item->isOwnedBy($user);
+        } else {
+            return false;
+        }
     }
 }

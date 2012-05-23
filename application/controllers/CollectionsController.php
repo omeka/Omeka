@@ -27,25 +27,22 @@ class CollectionsController extends Omeka_Controller_Action
         $this->_helper->db->setDefaultModelName('Collection');     
     }
     
-    protected function _getAddSuccessMessage($record)
+    protected function _getAddSuccessMessage($collection)
     {
-        $collection = $record;
         return __('The collection "%s" was successfully added!', $collection->name);        
     }
     
-    protected function _getEditSuccessMessage($record)
+    protected function _getEditSuccessMessage($collection)
     {
-        $collection = $record;
         return __('The collection "%s" was successfully changed!', $collection->name);        
     }
     
-    protected function _getDeleteSuccessMessage($record)
+    protected function _getDeleteSuccessMessage($collection)
     {
-        $collection = $record;
         return __('The collection "%s" was successfully deleted!', $collection->name);        
     }
 
-    protected function _getDeleteConfirmMessage($record)
+    protected function _getDeleteConfirmMessage($collection)
     {
         return __('This will delete the collection and its associated metadata. '
              . 'This will not delete any items in this collection, but will '

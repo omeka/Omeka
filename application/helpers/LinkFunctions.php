@@ -142,8 +142,8 @@ function link_to_items_with_item_type($text = null, $props = array(), $action = 
  * If no File object is specified, this will determine the file to use through
  * context.
  *
- * The text of the link defaults to the original filename of the file unless
- * otherwise specified.
+ * The text of the link defaults to the DC:Title of the file record, then to
+ * the original filename, unless otherwise specified.
  *
  * @since 1.0
  * @uses get_current_file()
@@ -160,8 +160,8 @@ function link_to_file_metadata($attributes = array(), $text = null, $file = null
     }
 
     if (!$text) {
-        // By default we should just display the original filename of the file.
-        $text = item_file('Original Filename', null, array(), $file);
+        $fileTitle = strip_formatting(item_file('Dublin Core', 'Title', array(), $file));
+        $text = $fileTitle ? $fileTitle : item_file('Original Filename', null, array(), $file);
     }
 
     return link_to($file, 'show', $text, $attributes);

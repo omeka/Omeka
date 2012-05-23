@@ -86,6 +86,11 @@ debug.emailLogPriority = Zend_Log::ERR
 ; server if logging is enabled).
 log.errors = false
 
+; log.priority
+; The minimum priority level of messages that should be logged.
+; default: Zend_Log::WARN (Logs warnings and above)
+log.priority = Zend_Log::WARN
+
 ; log.sql
 ; Log SQL statements.
 ; default: false

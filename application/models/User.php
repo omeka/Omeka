@@ -49,13 +49,6 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
                 throw new Omeka_Validator_Exception(__('User may not change roles.'));
             }
         } 
-                
-        // If the User is not persistent we need to create a placeholder password
-        if (!$this->exists()) {
-            $this->setPassword($this->generatePassword(8));
-        }        
-        
-        return true;
     }
     
     /**
@@ -146,31 +139,10 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
         return true;
     }
     
-    /* Generate password. (i.e. jachudru, cupheki) */
-    // http://www.zend.com/codex.php?id=215&single=1
-    protected function generatePassword($length) 
-    {
-        $vowels = array('a', 'e', 'i', 'o', 'u', '1', '2', '3', '4', '5', '6');
-        $cons = array('b', 'c', 'd', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 
-                      'r', 's', 't', 'u', 'v', 'w', 'tr', 'cr', 'br', 'fr', 
-                      'th', 'dr', 'ch', 'ph', 'wr', 'st', 'sp', 'sw', 'pr', 
-                      'sl', 'cl');
-        
-        $num_vowels = count($vowels);
-        $num_cons   = count($cons);
-        
-        $password = '';
-        while (strlen($password) < $length){
-            $password .= $cons[mt_rand(0, $num_cons - 1)] . $vowels[mt_rand(0, $num_vowels - 1)];
-        }
-        $this->setPassword($password);
-        return $password;
-    }      
-    
     public function getRoleId()
     {
         if (!$this->role) {
-            die("Should not be using a non-existent user role.");
+            throw new Exception(__('The user must be assigned a role.'));
         }
         return $this->role;
     }  
@@ -198,7 +170,6 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
     
     public function hashPassword($password)
     {
-        assert('$this->salt !== null');
         return sha1($this->salt . $password);
     }
 }
