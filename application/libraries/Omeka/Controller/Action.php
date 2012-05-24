@@ -130,37 +130,6 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
     /// CONVENIENCE METHODS ///
     
     /**
-     * Retrieve the controller's DB table.
-     *
-     * If either {@link $_modelClass} or {@link $_table} was set in 
-     * init(), calling this function with no argument will return the configured
-     * table.  Otherwise, the desired model class name must be passed to this 
-     * function.
-     *
-     * @deprecated
-     * @see Zend_Controller_Action::init()
-     * @see Omeka_Controller_Action::__construct()
-     * @param string $table Name of the model for the table to be retrieved.
-     * @return Omeka_Db_Table
-     */
-    public function getTable($table = null)
-    {
-        return $this->_helper->db->getTable($table);
-    }
-    
-    /**
-     * Retrieve the database object.
-     * 
-     * @deprecated
-     * @uses Omeka_Context
-     * @return Omeka_Db
-     */
-    public function getDb()
-    {
-        return $this->_helper->db->getDb();
-    }
-    
-    /**
      * Retrieve the record for the current user.
      * 
      * @return User|bool User object if a user is logged in, false otherwise.
@@ -331,14 +300,15 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      *
      * Every request to this action must pass a record ID in the 'id' parameter.
      *
-     * @uses Omeka_Controller_Action::findById()
+     * @uses Omeka_Controller_Action_Helper_Db::findById()
      * @return void
      */
     public function showAction()
     {
-        $varName = strtolower($this->_helper->db->getDefaultModelName());
+        $dbHelper = $this->_helper->db;
+        $varName = strtolower($dbHelper->getDefaultModelName());
                 
-        $record = $this->findById();        
+        $record = $dbHelper->findById();        
         
         Zend_Registry::set($varName, $record);
         
@@ -355,7 +325,6 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      * Otherwise, if the $_POST exists and is valid, it will save the new 
      * record and redirect to the 'browse' action.
      * 
-     * @uses Omeka_Controller_Action::findById()
      * @return void
      */
     public function addAction()
@@ -418,14 +387,14 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      * 
      * Every request to this action must pass a record ID in the 'id' parameter.
      *
-     * @uses Omeka_Controller_Action::findById()
+     * @uses Omeka_Controller_Action_Helper_Db::findById()
      * @return void
      */
     public function editAction()
     {
         $varName = strtolower($this->_helper->db->getDefaultModelName());
         
-        $record = $this->findById();
+        $record = $this->_helper->db->findById();
         
         try {
             if ($record->saveForm($_POST)) {
@@ -447,7 +416,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      * Every request to this action must pass a record ID in the 'id' parameter.
      * Find a record based on ID, delete it and redirect to 'browse' action.
      * 
-     * @uses Omeka_Controller_Action::findById()
+     * @uses Omeka_Controller_Action_Helper_Db::findById()
      * @return void
      */
     public function deleteAction()
@@ -457,7 +426,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
             return;
         }
         
-        $record = $this->findById();
+        $record = $this->_helper->db->findById();
         
         $form = $this->_getDeleteForm();
         
@@ -487,29 +456,11 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
     }
     
     /**
-     * Find a particular record given its unique ID # and (optionally) its 
-     * class name.  
-     * 
-     * @deprecated
-     * @uses Omeka_Db_Table::find()
-     * @uses Omeka_Db_Table::checkExists()
-     * @param int $id (optional) ID of the record to find.
-     * @param string $table (optional) Model class corresponding to the table
-     * that should be checked.
-     * @throws Omeka_Controller_Exception_404
-     * @throws Omeka_Controller_Exception_403
-     * @return Omeka_Record
-     */
-    public function findById($id = null, $table = null)
-    {
-        return $this->_helper->db->findById($id, $table);
-    }
-    /**
      *
      */
     public function deleteConfirmAction() {
         $isPartial = $this->getRequest()->isXmlHttpRequest();
-        $record = $this->findById();
+        $record = $this->_helper->db->findById();
         $form = $this->_getDeleteForm();
         $confirmMessage = $this->_getDeleteConfirmMessage($record);
         $this->view->assign(compact('confirmMessage','record', 'isPartial', 'form'));

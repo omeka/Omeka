@@ -76,7 +76,7 @@ class ItemsController extends Omeka_Controller_Action
     
     protected function _getItemElementSets()
     {
-        return $this->getTable('ElementSet')->findForItems();
+        return $this->_helper->db->getTable('ElementSet')->findForItems();
     }
     
     /**
@@ -129,7 +129,7 @@ class ItemsController extends Omeka_Controller_Action
     public function tagsAction()
     {
         $params = array_merge($this->_getAllParams(), array('type'=>'Item'));
-        $tags = $this->getTable('Tag')->findBy($params);
+        $tags = $this->_helper->db->getTable('Tag')->findBy($params);
         $this->view->assign(compact('tags'));
     }
     
@@ -173,9 +173,9 @@ class ItemsController extends Omeka_Controller_Action
         // when one is removed.
         $_POST['Elements'][$elementId] = array_merge($_POST['Elements'][$elementId]);
 
-        $element = $this->getTable('Element')->find($elementId);
+        $element = $this->_helper->db->getTable('Element')->find($elementId);
         try {
-            $item = $this->findById($itemId);
+            $item = $this->_helper->db->findById($itemId);
         } catch (Exception $e) {
             $item = new Item;
         }
@@ -192,7 +192,7 @@ class ItemsController extends Omeka_Controller_Action
     public function changeTypeAction()
     {
         if ($id = $_POST['item_id']) {
-            $item = $this->findById($id);
+            $item = $this->_helper->db->findById($id);
         } else {
             $item = new Item;
         }
@@ -268,7 +268,7 @@ class ItemsController extends Omeka_Controller_Action
 
             if (!$errorMessage) {
                 foreach ($itemIds as $id) {
-                    if ($item = $this->getTable('Item')->find($id)) {
+                    if ($item = $this->_helper->db->getTable('Item')->find($id)) {
                         if ($delete && !$this->isAllowed('delete', $item)) {
                             $errorMessage = __('User is not allowed to delete selected items.');
                             break;

@@ -65,7 +65,7 @@ class ItemTypesController extends Omeka_Controller_Action
 
     public function editAction()
     {
-        $itemType = $this->findById();
+        $itemType = $this->_helper->db->findById();
 
 
         $elementsToSave = array(); // set the default elements to save
@@ -143,7 +143,7 @@ class ItemTypesController extends Omeka_Controller_Action
 
                 // get the old element (but do not save it yet)
                 $elementId = array_pop(explode('-', $key));
-                $element = $this->getDb()->getTable('Element')->find($elementId);
+                $element = $this->_helper->db->getTable('Element')->find($elementId);
                 if ($element->order == 0) {
                     $element->order = null;
                 }
@@ -180,7 +180,7 @@ class ItemTypesController extends Omeka_Controller_Action
                 // construct an existing element to add (but do not save it yet)
                 $elementTempId = array_pop(explode('-', $key));
                 $elementId = $post[self::ADD_EXISTING_ELEMENT_ID_PREFIX. $elementTempId];
-                $element = $this->getDb()->getTable('Element')->find($elementId);
+                $element = $this->_helper->db->getTable('Element')->find($elementId);
 
                 if ($element) {
                     if ($element->order == 0) {
@@ -227,7 +227,7 @@ class ItemTypesController extends Omeka_Controller_Action
         foreach($elementIds as $elementId) {
             $elementId = (int)trim($elementId);
             if ($elementId && !in_array($elementId, $elementIdsToRemove)) {
-                $elementToRemove = $this->getDb()->getTable('Element')->find($elementId);
+                $elementToRemove = $this->_helper->db->getTable('Element')->find($elementId);
                 if ($elementToRemove) {
                    $elementsToRemove[] = $elementToRemove;
                    $elementIdsToRemove[] = $elementId;
@@ -274,7 +274,7 @@ class ItemTypesController extends Omeka_Controller_Action
         if ($this->_getParam('from_post') == 'true') {
             $elementTempId = $this->_getParam('elementTempId');
             $elementId = $this->_getParam('elementId');
-            $element = $this->getDb()->getTable('Element')->find($elementId);
+            $element = $this->_helper->db->getTable('Element')->find($elementId);
             if ($element) {
                 $elementDescription = $element->description;
             }
@@ -300,7 +300,7 @@ class ItemTypesController extends Omeka_Controller_Action
         $elementId = $this->_getParam('elementId');
         $elementTempId = $this->_getParam('elementTempId');
 
-        $element = $this->getTable('Element')->find($elementId);
+        $element = $this->_helper->db->getTable('Element')->find($elementId);
 
 
         $elementDescription = '';
@@ -325,7 +325,7 @@ class ItemTypesController extends Omeka_Controller_Action
     public function elementListAction()
     {
         $itemTypeId = $this->_getParam('item-type-id');
-        $itemType = $this->findById($itemTypeId);
+        $itemType = $this->_helper->db->findById($itemTypeId);
         $this->view->itemtype = $itemType;
         $this->view->elements = $itemType->Elements;
     }

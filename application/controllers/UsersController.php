@@ -124,7 +124,7 @@ class UsersController extends Omeka_Controller_Action
     public function activateAction()
     {
         $hash = $this->_getParam('u');
-        $ua = $this->getTable('UsersActivations')->findBySql("url = ?", array($hash), true);
+        $ua = $this->_helper->db->getTable('UsersActivations')->findBySql("url = ?", array($hash), true);
             
         if (!$ua) {
             $this->flashError('Invalid activation code given.');
@@ -192,7 +192,7 @@ class UsersController extends Omeka_Controller_Action
     public function editAction()
     {
         $success = false;
-        $user = $this->findById();        
+        $user = $this->_helper->db->findById();        
         $changePasswordForm = new Omeka_Form_ChangePassword;
         $changePasswordForm->setUser($user);
 
@@ -327,7 +327,7 @@ class UsersController extends Omeka_Controller_Action
         User::upgradeHashedPassword($loginForm->getValue('username'), 
                                     $loginForm->getValue('password'));
         
-        $authAdapter = new Omeka_Auth_Adapter_UserTable($this->getDb());
+        $authAdapter = new Omeka_Auth_Adapter_UserTable($this->_helper->db->getDb());
         $pluginBroker = $this->getInvokeArg('bootstrap')->getResource('Pluginbroker');
         // If there are no plugins filtering the login adapter, set the 
         // credentials for the default adapter.
