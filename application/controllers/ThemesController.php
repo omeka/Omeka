@@ -28,7 +28,7 @@ class ThemesController extends Omeka_Controller_Action
     {
         if (!$this->getRequest()->isPost()) {
             $this->_helper->flashMessenger(__('Invalid form submission.'), 'error');
-            $this->_helper->redirector->goto('browse');
+            $this->_helper->redirector('browse');
             return;
         }
         
@@ -43,7 +43,7 @@ class ThemesController extends Omeka_Controller_Action
         $minVer = $theme->omeka_minimum_version;
         if (!empty($minVer) && version_compare(OMEKA_VERSION, $theme->omeka_minimum_version, '<')) {
             $this->_helper->flashMessenger(__('This theme requires a newer version of Omeka (%s).', $minVer), 'error');
-            $this->_helper->redirector->goto('browse');
+            $this->_helper->redirector('browse');
             return;
         }
         
@@ -57,7 +57,7 @@ class ThemesController extends Omeka_Controller_Action
         }
         
         $this->_helper->flashMessenger(__('The theme has been successfully changed.'), 'success');
-        $this->_helper->redirector->goto('browse');
+        $this->_helper->redirector('browse');
     }
     
     /**
@@ -83,7 +83,7 @@ class ThemesController extends Omeka_Controller_Action
             if (($newOptions = $configHelper->processForm($form, $_POST, $themeOptions))) {
                 Theme::setOptions($themeName, $newOptions);
                 $this->_helper->flashMessenger(__('The theme settings were successfully saved!'), 'success');
-                $this->redirect->goto('browse');
+                $this->_helper->redirector('browse');
             }
         }
         

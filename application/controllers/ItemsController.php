@@ -220,7 +220,7 @@ class ItemsController extends Omeka_Controller_Action
         $itemIds = $this->_getParam('items');
         if (empty($itemIds)) {
             $this->_helper->flashMessenger(__('You must choose some items to batch edit.'), 'error');
-            $this->_helper->redirector->goto('browse', 'items');
+            $this->_helper->redirector('browse', 'items');
             return;
         }
 
@@ -309,6 +309,6 @@ class ItemsController extends Omeka_Controller_Action
             }
          }
 
-         $this->_helper->redirector->goto('browse', 'items');
+         $this->_helper->redirector('browse', 'items');
     }
 }

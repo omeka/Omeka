@@ -39,7 +39,7 @@ class PluginsController extends Omeka_Controller_Action
     {
         $plugin = $this->_getPluginByName();
         if (!$plugin) {
-            return $this->_helper->redirector->goto('browse');
+            return $this->_helper->redirector('browse');
         }
         
         $this->view->pluginBroker = $this->_pluginBroker;
@@ -57,7 +57,7 @@ class PluginsController extends Omeka_Controller_Action
                     __('The %s plugin was successfully configured!', $plugin->getDisplayName()),
                     'success'
                 );
-                $this->redirect->goto('browse'); 
+                $this->_helper->redirector('browse'); 
             } catch (Omeka_Validator_Exception $e) {
                 $this->_helper->flashMessenger($e);
             }
@@ -75,7 +75,7 @@ class PluginsController extends Omeka_Controller_Action
                 __('The %s plugin has already been installed.', $plugin->getDisplayName()),
                 'error'
             );
-            $this->_helper->redirector->goto('browse');
+            $this->_helper->redirector('browse');
         }
              
         try {
@@ -87,7 +87,7 @@ class PluginsController extends Omeka_Controller_Action
             
             // Only redirect to the config form if there is a config hook for this plugin.
             if ($this->_pluginBroker->getHook($plugin, 'config')) {
-                return $this->_helper->redirector->goto('config', 'plugins', 'default', array('name'=>$plugin->getDirectoryName()));
+                return $this->_helper->redirector('config', 'plugins', 'default', array('name'=>$plugin->getDirectoryName()));
             }
         } catch (Exception $e) {
             // Taken from Plugin_Installer::install().  
@@ -99,7 +99,7 @@ class PluginsController extends Omeka_Controller_Action
             );
         }
         
-        $this->_helper->redirector->goto('browse');
+        $this->_helper->redirector('browse');
     }
     
     /**
@@ -109,7 +109,7 @@ class PluginsController extends Omeka_Controller_Action
      */
     public function activateAction()
     {
-        $this->_helper->redirector->goto('browse');
+        $this->_helper->redirector('browse');
         
         $plugin = $this->_getPluginByName();
         if (!$plugin) {
@@ -150,7 +150,7 @@ class PluginsController extends Omeka_Controller_Action
      */
     public function deactivateAction()
     {
-        $this->_helper->redirector->goto('browse');
+        $this->_helper->redirector('browse');
         $plugin = $this->_getPluginByName();
         if (!$plugin) {
             return;
@@ -174,7 +174,7 @@ class PluginsController extends Omeka_Controller_Action
     
     public function upgradeAction()
     {
-        $this->_helper->redirector->goto('browse');
+        $this->_helper->redirector('browse');
         $plugin = $this->_getPluginByName();
         if (!$plugin) {
             return;
@@ -192,7 +192,7 @@ class PluginsController extends Omeka_Controller_Action
                 __("The %s plugin was successfully upgraded!", $name),
                 'success');
             if ($this->_pluginBroker->getHook($plugin, 'config')) {
-                $this->redirect->goto('config', 'plugins', 'default', array('name' => $name));
+                $this->_helper->redirector('config', 'plugins', 'default', array('name' => $name));
             }
         } catch (Exception $e) {
             $this->_helper->flashMessenger(
@@ -231,7 +231,7 @@ class PluginsController extends Omeka_Controller_Action
      */
     public function uninstallAction()
     {
-        $this->_helper->redirector->goto('browse');
+        $this->_helper->redirector('browse');
         $plugin = $this->_getPluginByName();
         if (!$plugin) {
             return;
@@ -281,12 +281,12 @@ class PluginsController extends Omeka_Controller_Action
     
     public function deleteAction()
     {
-        $this->redirect->goto('browse');
+        $this->_helper->redirector('browse');
     }
 
     public function addAction()
     {
-        $this->redirect->goto('browse');
+        $this->_helper->redirector('browse');
     }
     
     /**

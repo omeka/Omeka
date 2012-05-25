@@ -94,7 +94,7 @@ class ItemTypesController extends Omeka_Controller_Action
             if ($itemType->saveForm($_POST)) {
                 $itemType->reorderElements($elementsOrder);
                 $this->_helper->flashMessenger(__('The item type "%s" was successfully changed!', $itemType->name), 'success');
-                $this->redirect->goto('show', null, null, array('id'=>$itemType->id));
+                $this->_helper->redirector('show', null, null, array('id'=>$itemType->id));
             }
         } catch (Omeka_Validator_Exception $e) {
             $this->_helper->flashMessenger($e);

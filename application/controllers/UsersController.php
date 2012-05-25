@@ -51,7 +51,7 @@ class UsersController extends Omeka_Controller_Action
 
         // If a user is already logged in, they should always get redirected back to the dashboard.
         if ($loggedInUser = $this->getInvokeArg('bootstrap')->getResource('Currentuser')) {
-            $this->_helper->redirector->goto('index', 'index');
+            $this->_helper->redirector('index', 'index');
         }
 
         if (is_admin_theme()) {
@@ -131,7 +131,7 @@ class UsersController extends Omeka_Controller_Action
             
         if (!$ua) {
             $this->_helper->flashMessenger('Invalid activation code given.', 'error');
-            return $this->_helper->redirector->goto('forgot-password', 'users');
+            return $this->_helper->redirector('forgot-password', 'users');
         }
         
         if (!empty($_POST)) {
@@ -144,7 +144,7 @@ class UsersController extends Omeka_Controller_Action
                 $ua->User->forceSave();
                 $ua->delete();
                 $this->_helper->flashMessenger(__('You may now log in to Omeka.'), 'success');
-                $this->redirect->goto('login');
+                $this->_helper->redirector('login');
             } catch (Omeka_Validator_Exception $e) {
                 $this->_helper->flashMessenger($e);
             }
@@ -181,7 +181,7 @@ class UsersController extends Omeka_Controller_Action
                         $user->username));
                 }
                 //Redirect to the main user browse page
-                $this->redirect->goto('browse');
+                $this->_helper->redirector('browse');
             }
         } catch (Omeka_Validator_Exception $e) {
             $this->_helper->flashMessenger($e);
@@ -256,7 +256,7 @@ class UsersController extends Omeka_Controller_Action
             if ($user->id == $currentUser->id) {
                 $this->_helper->redirector->gotoUrl('/');
             } else {
-                $this->_helper->redirector->goto('browse');
+                $this->_helper->redirector('browse');
             }
         }
     }
@@ -368,9 +368,9 @@ class UsersController extends Omeka_Controller_Action
         
         $session = new Zend_Session_Namespace;
         if ($session->redirect) {
-            $this->redirect->gotoUrl($session->redirect);
+            $this->_helper->redirector->gotoUrl($session->redirect);
         } else {
-            $this->redirect->gotoUrl('/');
+            $this->_helper->redirector->gotoUrl('/');
         }
     }
         
@@ -412,7 +412,7 @@ class UsersController extends Omeka_Controller_Action
         $auth->clearIdentity();
         $_SESSION = array();
         Zend_Session::destroy();
-        $this->redirect->gotoUrl('');
+        $this->_helper->redirector->gotoUrl('');
     }
     
     private function _getUserForm(User $user)

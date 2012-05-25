@@ -58,8 +58,6 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
         $init = parent::__construct($request, $response, $invokeArgs);
 
         $response->setHeader('Content-Type', 'text/html; charset=utf-8', true);
-                
-        $this->redirect = $this->_helper->redirector;
         
         $this->setActionContexts();
         
@@ -282,7 +280,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
                 if ($successMessage != '') {
                     $this->_helper->flashMessenger($successMessage, 'success');
                 }
-                $this->redirect->goto('browse');
+                $this->_helper->redirector('browse');
             }
         } catch (Omeka_Validator_Exception $e) {
             $this->_helper->flashMessenger($e);
@@ -345,7 +343,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
                 if ($successMessage != '') {
                     $this->_helper->flashMessenger($successMessage, 'success');
                 }
-                $this->redirect->goto('show', null, null, array('id'=>$record->id));
+                $this->_helper->redirector('show', null, null, array('id'=>$record->id));
             }
         } catch (Omeka_Validator_Exception $e) {
             $this->_helper->flashMessenger($e);
@@ -383,7 +381,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
         if ($successMessage != '') {
             $this->_helper->flashMessenger($successMessage, 'success');
         }
-        $this->redirect->goto('browse');
+        $this->_helper->redirector('browse');
     }
     
     /**
