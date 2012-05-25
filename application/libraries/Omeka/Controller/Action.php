@@ -153,63 +153,6 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
     {
         return $this->_helper->acl->isAllowed($rule, $resource);
     }
-    
-    /// FLASH METHODS ///
-    
-    /**
-     * Set a flash message.
-     *
-     * @param string $msg Message to set.
-     * @param string $status Flash message status.
-     * @return void
-     */
-    public function flash($msg = null, $status = null)
-    {
-        if ($status === null) {
-            $status = 'alert';
-        }
-
-        $this->_helper->flashMessenger($msg, $status);
-    }
-    
-    /**
-     * Set a flash message containing validation error messages.
-     *
-     * The message will have status 'error'.
-     *
-     * @param Omeka_Validator_Exception $e Validator exception.
-     * @return void
-     */
-    public function flashValidationErrors(Omeka_Validator_Exception $e)
-    {
-        $this->_helper->flashMessenger($e->getErrors(), 'error');
-    }
-    
-    /**
-     * Set a flash message indicating a successful operation.
-     *
-     * The message will have status level 'success'.
-     *
-     * @param string $msg Message to set.
-     * @return void
-     */
-    public function flashSuccess($msg)
-    {
-        $this->_helper->flashMessenger($msg, 'success');
-    }
-    
-    /**
-     * Set a flash message indicating a general error.
-     *
-     * The message will have status level 'error'.
-     *
-     * @param string $msg Message to set.
-     * @return void
-     */
-    public function flashError($msg)
-    {
-        $this->_helper->flashMessenger($msg, 'error');
-    }
 
     /// BASIC CRUD INTERFACE ///
     
@@ -337,12 +280,12 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
             if ($record->saveForm($_POST)) {
                 $successMessage = $this->_getAddSuccessMessage($record);
                 if ($successMessage != '') {
-                    $this->flashSuccess($successMessage);
+                    $this->_helper->flashMessenger($successMessage, 'success');
                 }
                 $this->redirect->goto('browse');
             }
         } catch (Omeka_Validator_Exception $e) {
-            $this->flashValidationErrors($e);
+            $this->_helper->flashMessenger($e);
         } 
         $this->view->assign(array(strtolower($class)=>$record));            
     }
@@ -400,12 +343,12 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
             if ($record->saveForm($_POST)) {
                 $successMessage = $this->_getEditSuccessMessage($record);
                 if ($successMessage != '') {
-                    $this->flashSuccess($successMessage);
+                    $this->_helper->flashMessenger($successMessage, 'success');
                 }
                 $this->redirect->goto('show', null, null, array('id'=>$record->id));
             }
         } catch (Omeka_Validator_Exception $e) {
-            $this->flashValidationErrors($e);
+            $this->_helper->flashMessenger($e);
         } 
         $this->view->assign(array($varName=>$record));        
     }
@@ -438,7 +381,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
         
         $successMessage = $this->_getDeleteSuccessMessage($record);
         if ($successMessage != '') {
-            $this->flashSuccess($successMessage);
+            $this->_helper->flashMessenger($successMessage, 'success');
         }
         $this->redirect->goto('browse');
     }

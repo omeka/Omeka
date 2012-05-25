@@ -219,8 +219,9 @@ class ItemsController extends Omeka_Controller_Action
         
         $itemIds = $this->_getParam('items');
         if (empty($itemIds)) {
-            $this->flashError(__('You must choose some items to batch edit.'));
-            return $this->_helper->redirector->goto('browse', 'items');
+            $this->_helper->flashMessenger(__('You must choose some items to batch edit.'), 'error');
+            $this->_helper->redirector->goto('browse', 'items');
+            return;
         }
 
         $this->view->assign(compact('itemIds'));
@@ -292,7 +293,7 @@ class ItemsController extends Omeka_Controller_Action
             $errorMessage = apply_filters('items_batch_edit_error', $errorMessage, $metadata, $custom, $itemIds);
 
             if ($errorMessage) {
-                $this->flashError($errorMessage);
+                $this->_helper->flashMessenger($errorMessage, 'error');
             } else {
                 $dispatcher = Zend_Registry::get('job_dispatcher');
                 $dispatcher->send(
@@ -304,7 +305,7 @@ class ItemsController extends Omeka_Controller_Action
                         'custom' => $custom
                     )
                 );
-                $this->flashSuccess(__('The items were successfully changed!'));
+                $this->_helper->flashMessenger(__('The items were successfully changed!'), 'success');
             }
          }
 

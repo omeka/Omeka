@@ -27,7 +27,7 @@ class ThemesController extends Omeka_Controller_Action
     public function switchAction()
     {
         if (!$this->getRequest()->isPost()) {
-            $this->flashError(__("Invalid form submission."));
+            $this->_helper->flashMessenger(__('Invalid form submission.'), 'error');
             $this->_helper->redirector->goto('browse');
             return;
         }
@@ -35,14 +35,14 @@ class ThemesController extends Omeka_Controller_Action
         $themeName = $this->_getParam(Theme::PUBLIC_THEME_OPTION);
         // Theme names should be alphanumeric(-ish) (prevent security flaws).
         if (preg_match('/[^a-z0-9\-_]/i', $themeName)) {
-            $this->flashError(__('You have chosen an illegal theme name. Please select another theme.'));
+            $this->_helper->flashMessenger(__('You have chosen an illegal theme name. Please select another theme.'), 'error');
             return;
         }
 
         $theme = Theme::getAvailable($themeName);
         $minVer = $theme->omeka_minimum_version;
         if (!empty($minVer) && version_compare(OMEKA_VERSION, $theme->omeka_minimum_version, '<')) {
-            $this->flashError(__('This theme requires a newer version of Omeka (%s).', $minVer));
+            $this->_helper->flashMessenger(__('This theme requires a newer version of Omeka (%s).', $minVer), 'error');
             $this->_helper->redirector->goto('browse');
             return;
         }
@@ -56,7 +56,7 @@ class ThemesController extends Omeka_Controller_Action
             Theme::setOptions($themeName, $configForm->getValues());
         }
         
-        $this->flashSuccess(__("The theme has been successfully changed."));
+        $this->_helper->flashMessenger(__('The theme has been successfully changed.'), 'success');
         $this->_helper->redirector->goto('browse');
     }
     
@@ -82,7 +82,7 @@ class ThemesController extends Omeka_Controller_Action
 
             if (($newOptions = $configHelper->processForm($form, $_POST, $themeOptions))) {
                 Theme::setOptions($themeName, $newOptions);
-                $this->flashSuccess(__('The theme settings were successfully saved!'));
+                $this->_helper->flashMessenger(__('The theme settings were successfully saved!'), 'success');
                 $this->redirect->goto('browse');
             }
         }

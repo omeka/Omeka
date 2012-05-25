@@ -54,11 +54,14 @@ class ItemTypesController extends Omeka_Controller_Action
         $itemType = new ItemType();
         try {
             if ($itemType->saveForm($_POST)) {
-                $this->flashSuccess(__('The item type "%s" was successfully added!  You may now add elements to your new item type.', $itemType->name));
+                $this->_helper->flashMessenger(
+                    __('The item type "%s" was successfully added!  You may now add elements to your new item type.', $itemType->name),
+                    'success'
+                );
                 $this->_redirect("item-types/edit/{$itemType->id}");
             }
         } catch (Omeka_Validator_Exception $e) {
-            $this->flashValidationErrors($e);
+            $this->_helper->flashMessenger($e);
         }
         $this->view->assign(array('itemtype' => $itemType));
     }
@@ -90,11 +93,11 @@ class ItemTypesController extends Omeka_Controller_Action
 
             if ($itemType->saveForm($_POST)) {
                 $itemType->reorderElements($elementsOrder);
-                $this->flashSuccess(__('The item type "%s" was successfully changed!', $itemType->name));
+                $this->_helper->flashMessenger(__('The item type "%s" was successfully changed!', $itemType->name), 'success');
                 $this->redirect->goto('show', null, null, array('id'=>$itemType->id));
             }
         } catch (Omeka_Validator_Exception $e) {
-            $this->flashValidationErrors($e);
+            $this->_helper->flashMessenger($e);
         }
         $this->view->assign(array('itemtype' => $itemType,
                                   'elementsToAdd' => $elementsToAdd,
