@@ -260,7 +260,7 @@ class PluginsController extends Omeka_Controller_Action
             
             $this->view->assign(compact('plugin', 'message'));
             // Cancel the redirect here.
-            $this->getResponse()->clearHeader('Location');
+            $this->getResponse()->clearHeader('Location')->setHttpResponseCode(200);
             $this->render('confirm-uninstall');
         } else {
             // Attempt to uninstall the plugin.
