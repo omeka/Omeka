@@ -256,13 +256,14 @@ class ItemsController extends Omeka_Controller_Action
             }
 
             $errorMessage = null;
-                        
-            if ($metadata && array_key_exists('public', $metadata) && !$this->isAllowed('makePublic')) {
+            $aclHelper = $this->_helper->acl;
+            
+            if ($metadata && array_key_exists('public', $metadata) && !$aclHelper->isAllowed('makePublic')) {
                 $errorMessage = 
                     __('User is not allowed to modify visibility of items.');
             }
 
-            if ($metadata && array_key_exists('featured', $metadata) && !$this->isAllowed('makeFeatured')) {
+            if ($metadata && array_key_exists('featured', $metadata) && !$aclHelper->isAllowed('makeFeatured')) {
                 $errorMessage = 
                     __('User is not allowed to modify featured status of items.');
             }
@@ -270,18 +271,18 @@ class ItemsController extends Omeka_Controller_Action
             if (!$errorMessage) {
                 foreach ($itemIds as $id) {
                     if ($item = $this->_helper->db->getTable('Item')->find($id)) {
-                        if ($delete && !$this->isAllowed('delete', $item)) {
+                        if ($delete && !$aclHelper->isAllowed('delete', $item)) {
                             $errorMessage = __('User is not allowed to delete selected items.');
                             break;
                         }
 
                         // Check to see if anything but 'tag'
-                        if ($metadata && array_diff_key($metadata, array('tags' => '')) && !$this->isAllowed('edit', $item)) {
+                        if ($metadata && array_diff_key($metadata, array('tags' => '')) && !$aclHelper->isAllowed('edit', $item)) {
                             $errorMessage = __('User is not allowed to edit selected items.');
                             break;
                         }
 
-                        if ($metadata && array_key_exists('tags', $metadata) && !$this->isAllowed('tag', $item)) {
+                        if ($metadata && array_key_exists('tags', $metadata) && !$aclHelper->isAllowed('tag', $item)) {
                             $errorMessage = __('User is not allowed to tag selected items.');
                             break;
                         }

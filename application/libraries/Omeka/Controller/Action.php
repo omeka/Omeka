@@ -136,21 +136,6 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
     {
         return $this->getInvokeArg('bootstrap')->getResource('Currentuser');
     }
-    
-    /**
-     * Check if an action is allowed for the current user.
-     *
-     * Alias for {@link Omeka_Controller_Action_Helper_Acl::isAllowed()}.
-     * 
-     * @param string $rule Privilege name.
-     * @param string $resource Resource name. If omitted, uses the controller's
-     * default resource name.
-     * @return boolean
-     */
-    public function isAllowed($rule, $resource = null)
-    {
-        return $this->_helper->acl->isAllowed($rule, $resource);
-    }
 
     /// BASIC CRUD INTERFACE ///
     
