@@ -13,14 +13,7 @@
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 abstract class Omeka_Controller_Action extends Zend_Controller_Action
-{            
-    /**
-     * Filter functions applied before dispatching to a controller action.
-     *
-     * @var array
-     */
-    protected $_beforeFilter = array();
-    
+{
     /**
      * The number of records to browse per page.  
      * If this is left null, then results will not paginate.
@@ -92,37 +85,6 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
         $contextSwitcher->setActionContexts($contextArray);
         
         $contextSwitcher->initContext();        
-    }
-    
-    /**
-     * Declare a 'before' filter that will run in preDispatch() for the controller
-     * 
-     * @param string $function Method name within the controller.
-     * @param array $except Array of actions for which this filter will not run.
-     * @return void
-     */    
-    protected function beforeFilter($function, $except = array())
-    {
-        $this->_beforeFilter[$function] = $except;
-    }
-    
-    /**
-     * Run any 'before' filters prior to dispatching the action.
-     * 
-     * @return void
-     */
-    public function preDispatch()
-    {                        
-        $action = $this->_request->getActionName();
-        foreach ($this->_beforeFilter as $func => $exceptThese) {
-            if (!in_array($action, $exceptThese)) {
-                if (!method_exists($this, $func)) {
-                    throw new Zend_Controller_Exception('The before filter '.$func.' was not found.');
-                } else {
-                    $this->$func();
-                }
-            }
-        }
     }
     
     /// CONVENIENCE METHODS ///
