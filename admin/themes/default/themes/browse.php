@@ -35,7 +35,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
                     <?php } ?>                
                         <input type="radio" name="public_theme" value="<?php echo html_escape($theme->directory); ?>" checked="checked" /> 
                         <div class="crop">
-                            <img src="<?php echo html_escape($theme->image); ?>" alt="<?php echo __('Screenshot for %s Theme', html_escape($current->title)); ?>" />
+                            <img src="<?php echo html_escape($theme->image); ?>" alt="<?php echo __('Screenshot for %s Theme', html_escape($theme->title)); ?>" />
                         </div>
                         <input type="submit" name="submit" class="use-theme green button" value="<?php echo __('Use this theme'); ?>" />
                         <div class="meta">
