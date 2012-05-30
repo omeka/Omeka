@@ -54,18 +54,21 @@ class ItemTypesController extends Omeka_Controller_Action
         $itemType = new ItemType();
         try {
             if ($itemType->saveForm($_POST)) {
-                $this->flashSuccess(__('The item type "%s" was successfully added!  You may now add elements to your new item type.', $itemType->name));
+                $this->_helper->flashMessenger(
+                    __('The item type "%s" was successfully added!  You may now add elements to your new item type.', $itemType->name),
+                    'success'
+                );
                 $this->_redirect("item-types/edit/{$itemType->id}");
             }
         } catch (Omeka_Validator_Exception $e) {
-            $this->flashValidationErrors($e);
+            $this->_helper->flashMessenger($e);
         }
         $this->view->assign(array('itemtype' => $itemType));
     }
 
     public function editAction()
     {
-        $itemType = $this->findById();
+        $itemType = $this->_helper->db->findById();
 
 
         $elementsToSave = array(); // set the default elements to save
@@ -90,11 +93,11 @@ class ItemTypesController extends Omeka_Controller_Action
 
             if ($itemType->saveForm($_POST)) {
                 $itemType->reorderElements($elementsOrder);
-                $this->flashSuccess(__('The item type "%s" was successfully changed!', $itemType->name));
-                $this->redirect->goto('show', null, null, array('id'=>$itemType->id));
+                $this->_helper->flashMessenger(__('The item type "%s" was successfully changed!', $itemType->name), 'success');
+                $this->_helper->redirector('show', null, null, array('id'=>$itemType->id));
             }
         } catch (Omeka_Validator_Exception $e) {
-            $this->flashValidationErrors($e);
+            $this->_helper->flashMessenger($e);
         }
         $this->view->assign(array('itemtype' => $itemType,
                                   'elementsToAdd' => $elementsToAdd,
@@ -143,7 +146,7 @@ class ItemTypesController extends Omeka_Controller_Action
 
                 // get the old element (but do not save it yet)
                 $elementId = array_pop(explode('-', $key));
-                $element = $this->getDb()->getTable('Element')->find($elementId);
+                $element = $this->_helper->db->getTable('Element')->find($elementId);
                 if ($element->order == 0) {
                     $element->order = null;
                 }
@@ -180,7 +183,7 @@ class ItemTypesController extends Omeka_Controller_Action
                 // construct an existing element to add (but do not save it yet)
                 $elementTempId = array_pop(explode('-', $key));
                 $elementId = $post[self::ADD_EXISTING_ELEMENT_ID_PREFIX. $elementTempId];
-                $element = $this->getDb()->getTable('Element')->find($elementId);
+                $element = $this->_helper->db->getTable('Element')->find($elementId);
 
                 if ($element) {
                     if ($element->order == 0) {
@@ -227,7 +230,7 @@ class ItemTypesController extends Omeka_Controller_Action
         foreach($elementIds as $elementId) {
             $elementId = (int)trim($elementId);
             if ($elementId && !in_array($elementId, $elementIdsToRemove)) {
-                $elementToRemove = $this->getDb()->getTable('Element')->find($elementId);
+                $elementToRemove = $this->_helper->db->getTable('Element')->find($elementId);
                 if ($elementToRemove) {
                    $elementsToRemove[] = $elementToRemove;
                    $elementIdsToRemove[] = $elementId;
@@ -274,7 +277,7 @@ class ItemTypesController extends Omeka_Controller_Action
         if ($this->_getParam('from_post') == 'true') {
             $elementTempId = $this->_getParam('elementTempId');
             $elementId = $this->_getParam('elementId');
-            $element = $this->getDb()->getTable('Element')->find($elementId);
+            $element = $this->_helper->db->getTable('Element')->find($elementId);
             if ($element) {
                 $elementDescription = $element->description;
             }
@@ -300,7 +303,7 @@ class ItemTypesController extends Omeka_Controller_Action
         $elementId = $this->_getParam('elementId');
         $elementTempId = $this->_getParam('elementTempId');
 
-        $element = $this->getTable('Element')->find($elementId);
+        $element = $this->_helper->db->getTable('Element')->find($elementId);
 
 
         $elementDescription = '';
@@ -325,7 +328,7 @@ class ItemTypesController extends Omeka_Controller_Action
     public function elementListAction()
     {
         $itemTypeId = $this->_getParam('item-type-id');
-        $itemType = $this->findById($itemTypeId);
+        $itemType = $this->_helper->db->findById($itemTypeId);
         $this->view->itemtype = $itemType;
         $this->view->elements = $itemType->Elements;
     }

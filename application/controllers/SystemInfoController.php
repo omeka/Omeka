@@ -31,7 +31,7 @@ class SystemInfoController extends Omeka_Controller_Action
 
     public function indexAction()
     {
-        $this->_db = $this->getDb();
+        $this->_db = $this->_helper->db->getDb();
         $this->view->info = $this->_getInfoArray();
     }
 

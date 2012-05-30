@@ -39,7 +39,7 @@ class TagsController extends Omeka_Controller_Action
             $tag_id = $_POST['delete_tag'];
             $tag = $this->_helper->db->find($tag_id);
             $tag->delete();
-            $this->flashSuccess(__("Tag named '%s' was successfully deleted.", $tag->name));
+            $this->_helper->flashMessenger(__("Tag named '%s' was successfully deleted.", $tag->name), 'success');
         }
         
         $tags = $this->getTagsForAdministration();
@@ -79,9 +79,12 @@ class TagsController extends Omeka_Controller_Action
         
         try {
             $oldTag->rename($newTags);
-            $this->flashSuccess(__('Tag named "%1$s" was successfully renamed to "%2$s".', $oldName, $newNames));
+            $this->_helper->flashMessenger(
+                __('Tag named "%1$s" was successfully renamed to "%2$s".', $oldName, $newNames),
+                'success'
+            );
         } catch (Omeka_Validator_Exception $e) {
-            $this->flashValidationErrors($e);
+            $this->_helper->flashMessenger($e);
         }
     }
     

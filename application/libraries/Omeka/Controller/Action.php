@@ -13,14 +13,7 @@
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 abstract class Omeka_Controller_Action extends Zend_Controller_Action
-{            
-    /**
-     * Filter functions applied before dispatching to a controller action.
-     *
-     * @var array
-     */
-    protected $_beforeFilter = array();
-    
+{
     /**
      * The number of records to browse per page.  
      * If this is left null, then results will not paginate.
@@ -58,8 +51,6 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
         $init = parent::__construct($request, $response, $invokeArgs);
 
         $response->setHeader('Content-Type', 'text/html; charset=utf-8', true);
-                
-        $this->redirect = $this->_helper->redirector;
         
         $this->setActionContexts();
         
@@ -96,69 +87,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
         $contextSwitcher->initContext();        
     }
     
-    /**
-     * Declare a 'before' filter that will run in preDispatch() for the controller
-     * 
-     * @param string $function Method name within the controller.
-     * @param array $except Array of actions for which this filter will not run.
-     * @return void
-     */    
-    protected function beforeFilter($function, $except = array())
-    {
-        $this->_beforeFilter[$function] = $except;
-    }
-    
-    /**
-     * Run any 'before' filters prior to dispatching the action.
-     * 
-     * @return void
-     */
-    public function preDispatch()
-    {                        
-        $action = $this->_request->getActionName();
-        foreach ($this->_beforeFilter as $func => $exceptThese) {
-            if (!in_array($action, $exceptThese)) {
-                if (!method_exists($this, $func)) {
-                    throw new Zend_Controller_Exception('The before filter '.$func.' was not found.');
-                } else {
-                    $this->$func();
-                }
-            }
-        }
-    }
-    
     /// CONVENIENCE METHODS ///
-    
-    /**
-     * Retrieve the controller's DB table.
-     *
-     * If either {@link $_modelClass} or {@link $_table} was set in 
-     * init(), calling this function with no argument will return the configured
-     * table.  Otherwise, the desired model class name must be passed to this 
-     * function.
-     *
-     * @deprecated
-     * @see Zend_Controller_Action::init()
-     * @see Omeka_Controller_Action::__construct()
-     * @param string $table Name of the model for the table to be retrieved.
-     * @return Omeka_Db_Table
-     */
-    public function getTable($table = null)
-    {
-        return $this->_helper->db->getTable($table);
-    }
-    
-    /**
-     * Retrieve the database object.
-     * 
-     * @deprecated
-     * @uses Omeka_Context
-     * @return Omeka_Db
-     */
-    public function getDb()
-    {
-        return $this->_helper->db->getDb();
-    }
     
     /**
      * Retrieve the record for the current user.
@@ -168,78 +97,6 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
     public function getCurrentUser()
     {
         return $this->getInvokeArg('bootstrap')->getResource('Currentuser');
-    }
-    
-    /**
-     * Check if an action is allowed for the current user.
-     *
-     * Alias for {@link Omeka_Controller_Action_Helper_Acl::isAllowed()}.
-     * 
-     * @param string $rule Privilege name.
-     * @param string $resource Resource name. If omitted, uses the controller's
-     * default resource name.
-     * @return boolean
-     */
-    public function isAllowed($rule, $resource = null)
-    {
-        return $this->_helper->acl->isAllowed($rule, $resource);
-    }
-    
-    /// FLASH METHODS ///
-    
-    /**
-     * Set a flash message.
-     *
-     * @param string $msg Message to set.
-     * @param string $status Flash message status.
-     * @return void
-     */
-    public function flash($msg = null, $status = null)
-    {
-        if ($status === null) {
-            $status = 'alert';
-        }
-
-        $this->_helper->flashMessenger($msg, $status);
-    }
-    
-    /**
-     * Set a flash message containing validation error messages.
-     *
-     * The message will have status 'error'.
-     *
-     * @param Omeka_Validator_Exception $e Validator exception.
-     * @return void
-     */
-    public function flashValidationErrors(Omeka_Validator_Exception $e)
-    {
-        $this->_helper->flashMessenger($e->getErrors(), 'error');
-    }
-    
-    /**
-     * Set a flash message indicating a successful operation.
-     *
-     * The message will have status level 'success'.
-     *
-     * @param string $msg Message to set.
-     * @return void
-     */
-    public function flashSuccess($msg)
-    {
-        $this->_helper->flashMessenger($msg, 'success');
-    }
-    
-    /**
-     * Set a flash message indicating a general error.
-     *
-     * The message will have status level 'error'.
-     *
-     * @param string $msg Message to set.
-     * @return void
-     */
-    public function flashError($msg)
-    {
-        $this->_helper->flashMessenger($msg, 'error');
     }
 
     /// BASIC CRUD INTERFACE ///
@@ -331,14 +188,15 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      *
      * Every request to this action must pass a record ID in the 'id' parameter.
      *
-     * @uses Omeka_Controller_Action::findById()
+     * @uses Omeka_Controller_Action_Helper_Db::findById()
      * @return void
      */
     public function showAction()
     {
-        $varName = strtolower($this->_helper->db->getDefaultModelName());
+        $dbHelper = $this->_helper->db;
+        $varName = strtolower($dbHelper->getDefaultModelName());
                 
-        $record = $this->findById();        
+        $record = $dbHelper->findById();        
         
         Zend_Registry::set($varName, $record);
         
@@ -355,7 +213,6 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      * Otherwise, if the $_POST exists and is valid, it will save the new 
      * record and redirect to the 'browse' action.
      * 
-     * @uses Omeka_Controller_Action::findById()
      * @return void
      */
     public function addAction()
@@ -368,12 +225,12 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
             if ($record->saveForm($_POST)) {
                 $successMessage = $this->_getAddSuccessMessage($record);
                 if ($successMessage != '') {
-                    $this->flashSuccess($successMessage);
+                    $this->_helper->flashMessenger($successMessage, 'success');
                 }
-                $this->redirect->goto('browse');
+                $this->_helper->redirector('browse');
             }
         } catch (Omeka_Validator_Exception $e) {
-            $this->flashValidationErrors($e);
+            $this->_helper->flashMessenger($e);
         } 
         $this->view->assign(array(strtolower($class)=>$record));            
     }
@@ -418,25 +275,25 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      * 
      * Every request to this action must pass a record ID in the 'id' parameter.
      *
-     * @uses Omeka_Controller_Action::findById()
+     * @uses Omeka_Controller_Action_Helper_Db::findById()
      * @return void
      */
     public function editAction()
     {
         $varName = strtolower($this->_helper->db->getDefaultModelName());
         
-        $record = $this->findById();
+        $record = $this->_helper->db->findById();
         
         try {
             if ($record->saveForm($_POST)) {
                 $successMessage = $this->_getEditSuccessMessage($record);
                 if ($successMessage != '') {
-                    $this->flashSuccess($successMessage);
+                    $this->_helper->flashMessenger($successMessage, 'success');
                 }
-                $this->redirect->goto('show', null, null, array('id'=>$record->id));
+                $this->_helper->redirector('show', null, null, array('id'=>$record->id));
             }
         } catch (Omeka_Validator_Exception $e) {
-            $this->flashValidationErrors($e);
+            $this->_helper->flashMessenger($e);
         } 
         $this->view->assign(array($varName=>$record));        
     }
@@ -447,7 +304,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      * Every request to this action must pass a record ID in the 'id' parameter.
      * Find a record based on ID, delete it and redirect to 'browse' action.
      * 
-     * @uses Omeka_Controller_Action::findById()
+     * @uses Omeka_Controller_Action_Helper_Db::findById()
      * @return void
      */
     public function deleteAction()
@@ -457,7 +314,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
             return;
         }
         
-        $record = $this->findById();
+        $record = $this->_helper->db->findById();
         
         $form = $this->_getDeleteForm();
         
@@ -469,9 +326,9 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
         
         $successMessage = $this->_getDeleteSuccessMessage($record);
         if ($successMessage != '') {
-            $this->flashSuccess($successMessage);
+            $this->_helper->flashMessenger($successMessage, 'success');
         }
-        $this->redirect->goto('browse');
+        $this->_helper->redirector('browse');
     }
     
     /**
@@ -487,29 +344,11 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
     }
     
     /**
-     * Find a particular record given its unique ID # and (optionally) its 
-     * class name.  
-     * 
-     * @deprecated
-     * @uses Omeka_Db_Table::find()
-     * @uses Omeka_Db_Table::checkExists()
-     * @param int $id (optional) ID of the record to find.
-     * @param string $table (optional) Model class corresponding to the table
-     * that should be checked.
-     * @throws Omeka_Controller_Exception_404
-     * @throws Omeka_Controller_Exception_403
-     * @return Omeka_Record
-     */
-    public function findById($id = null, $table = null)
-    {
-        return $this->_helper->db->findById($id, $table);
-    }
-    /**
      *
      */
     public function deleteConfirmAction() {
         $isPartial = $this->getRequest()->isXmlHttpRequest();
-        $record = $this->findById();
+        $record = $this->_helper->db->findById();
         $form = $this->_getDeleteForm();
         $confirmMessage = $this->_getDeleteConfirmMessage($record);
         $this->view->assign(compact('confirmMessage','record', 'isPartial', 'form'));

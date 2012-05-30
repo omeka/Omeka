@@ -66,8 +66,9 @@ class Omeka_Controller_Action_Helper_SearchItems extends Zend_Controller_Action_
                 }
                 switch($requestParamName) {
                     case 'user':
+                        $aclHelper = Zend_Controller_Action_HelperBroker::getStaticHelper('Acl');
                         //Must be logged in to view items specific to certain users
-                        if (!$controller->isAllowed('browse', 'Users')) {
+                        if (!$aclHelper->isAllowed('browse', 'Users')) {
                             throw new Exception( 'May not browse by specific users.' );
                         }
                         if (is_numeric($requestParamValue)) {
@@ -179,8 +180,9 @@ class Omeka_Controller_Action_Helper_SearchItems extends Zend_Controller_Action_
         }
         
         // If users are allowed to modify the # of items displayed per page, 
-        // then they can pass the 'per_page' query parameter to change that.        
-        if ($this->_actionController->isAllowed('modifyPerPage', 'Items') && ($queryPerPage = $this->getRequest()->get('per_page'))) {
+        // then they can pass the 'per_page' query parameter to change that.
+        $aclHelper = Zend_Controller_Action_HelperBroker::getStaticHelper('Acl');        
+        if ($aclHelper->isAllowed('modifyPerPage', 'Items') && ($queryPerPage = $this->getRequest()->get('per_page'))) {
             $perPage = $queryPerPage;
         }     
         

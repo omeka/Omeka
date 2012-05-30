@@ -76,7 +76,7 @@ class ItemsController extends Omeka_Controller_Action
     
     protected function _getItemElementSets()
     {
-        return $this->getTable('ElementSet')->findForItems();
+        return $this->_helper->db->getTable('ElementSet')->findForItems();
     }
     
     /**
@@ -129,7 +129,7 @@ class ItemsController extends Omeka_Controller_Action
     public function tagsAction()
     {
         $params = array_merge($this->_getAllParams(), array('type'=>'Item'));
-        $tags = $this->getTable('Tag')->findBy($params);
+        $tags = $this->_helper->db->getTable('Tag')->findBy($params);
         $this->view->assign(compact('tags'));
     }
     
@@ -173,9 +173,9 @@ class ItemsController extends Omeka_Controller_Action
         // when one is removed.
         $_POST['Elements'][$elementId] = array_merge($_POST['Elements'][$elementId]);
 
-        $element = $this->getTable('Element')->find($elementId);
+        $element = $this->_helper->db->getTable('Element')->find($elementId);
         try {
-            $item = $this->findById($itemId);
+            $item = $this->_helper->db->findById($itemId);
         } catch (Exception $e) {
             $item = new Item;
         }
@@ -192,7 +192,7 @@ class ItemsController extends Omeka_Controller_Action
     public function changeTypeAction()
     {
         if ($id = $_POST['item_id']) {
-            $item = $this->findById($id);
+            $item = $this->_helper->db->findById($id);
         } else {
             $item = new Item;
         }
@@ -219,8 +219,9 @@ class ItemsController extends Omeka_Controller_Action
         
         $itemIds = $this->_getParam('items');
         if (empty($itemIds)) {
-            $this->flashError(__('You must choose some items to batch edit.'));
-            return $this->_helper->redirector->goto('browse', 'items');
+            $this->_helper->flashMessenger(__('You must choose some items to batch edit.'), 'error');
+            $this->_helper->redirector('browse', 'items');
+            return;
         }
 
         $this->view->assign(compact('itemIds'));
@@ -255,32 +256,33 @@ class ItemsController extends Omeka_Controller_Action
             }
 
             $errorMessage = null;
-                        
-            if ($metadata && array_key_exists('public', $metadata) && !$this->isAllowed('makePublic')) {
+            $aclHelper = $this->_helper->acl;
+            
+            if ($metadata && array_key_exists('public', $metadata) && !$aclHelper->isAllowed('makePublic')) {
                 $errorMessage = 
                     __('User is not allowed to modify visibility of items.');
             }
 
-            if ($metadata && array_key_exists('featured', $metadata) && !$this->isAllowed('makeFeatured')) {
+            if ($metadata && array_key_exists('featured', $metadata) && !$aclHelper->isAllowed('makeFeatured')) {
                 $errorMessage = 
                     __('User is not allowed to modify featured status of items.');
             }
 
             if (!$errorMessage) {
                 foreach ($itemIds as $id) {
-                    if ($item = $this->getTable('Item')->find($id)) {
-                        if ($delete && !$this->isAllowed('delete', $item)) {
+                    if ($item = $this->_helper->db->getTable('Item')->find($id)) {
+                        if ($delete && !$aclHelper->isAllowed('delete', $item)) {
                             $errorMessage = __('User is not allowed to delete selected items.');
                             break;
                         }
 
                         // Check to see if anything but 'tag'
-                        if ($metadata && array_diff_key($metadata, array('tags' => '')) && !$this->isAllowed('edit', $item)) {
+                        if ($metadata && array_diff_key($metadata, array('tags' => '')) && !$aclHelper->isAllowed('edit', $item)) {
                             $errorMessage = __('User is not allowed to edit selected items.');
                             break;
                         }
 
-                        if ($metadata && array_key_exists('tags', $metadata) && !$this->isAllowed('tag', $item)) {
+                        if ($metadata && array_key_exists('tags', $metadata) && !$aclHelper->isAllowed('tag', $item)) {
                             $errorMessage = __('User is not allowed to tag selected items.');
                             break;
                         }
@@ -292,7 +294,7 @@ class ItemsController extends Omeka_Controller_Action
             $errorMessage = apply_filters('items_batch_edit_error', $errorMessage, $metadata, $custom, $itemIds);
 
             if ($errorMessage) {
-                $this->flashError($errorMessage);
+                $this->_helper->flashMessenger($errorMessage, 'error');
             } else {
                 $dispatcher = Zend_Registry::get('job_dispatcher');
                 $dispatcher->send(
@@ -304,11 +306,11 @@ class ItemsController extends Omeka_Controller_Action
                         'custom' => $custom
                     )
                 );
-                $this->flashSuccess(__('The items were successfully changed!'));
+                $this->_helper->flashMessenger(__('The items were successfully changed!'), 'success');
             }
          }
 
-         $this->_helper->redirector->goto('browse', 'items');
+         $this->_helper->redirector('browse', 'items');
     }
     
     /**

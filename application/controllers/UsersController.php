@@ -51,7 +51,7 @@ class UsersController extends Omeka_Controller_Action
 
         // If a user is already logged in, they should always get redirected back to the dashboard.
         if ($loggedInUser = $this->getInvokeArg('bootstrap')->getResource('Currentuser')) {
-            $this->_helper->redirector->goto('index', 'index');
+            $this->_helper->redirector('index', 'index');
         }
 
         if (is_admin_theme()) {
@@ -73,17 +73,20 @@ class UsersController extends Omeka_Controller_Action
         if (empty($_POST)) {
             return;
         }
+
+        $errorMessage = __('Unable to reset password. Please verify that the information is correct and contact an administrator if necessary.');
         
         $email = $_POST['email'];
         
         if (!Zend_Validate::is($email, 'EmailAddress')) {
-            return $this->flashError(__('Unable to reset password. Please verify that the information is correct and contact an administrator if necessary.'));
+            $this->_helper->flashMessenger($errorMessage, 'error');
+            return;
         }
         
         $user = $this->_helper->db->findByEmail($email);
         
         if (!$user || $user->active != 1) {
-            $this->flashError(__('Unable to reset password. Please verify that the information is correct and contact an administrator if necessary.'));
+            $this->_helper->flashMessenger($errorMessage, 'error');
             return;
         }
 
@@ -118,17 +121,17 @@ class UsersController extends Omeka_Controller_Action
         $mail->setSubject(__("[%s] Reset Your Password", $siteTitle));
 
         $mail->send();
-        $this->flashSuccess(__('Please check your email for a link to reset your password.'));
+        $this->_helper->flashMessenger(__('Please check your email for a link to reset your password.'), 'success');
     }
     
     public function activateAction()
     {
         $hash = $this->_getParam('u');
-        $ua = $this->getTable('UsersActivations')->findBySql("url = ?", array($hash), true);
+        $ua = $this->_helper->db->getTable('UsersActivations')->findBySql("url = ?", array($hash), true);
             
         if (!$ua) {
-            $this->flashError('Invalid activation code given.');
-            return $this->_helper->redirector->goto('forgot-password', 'users');
+            $this->_helper->flashMessenger('Invalid activation code given.', 'error');
+            return $this->_helper->redirector('forgot-password', 'users');
         }
         
         if (!empty($_POST)) {
@@ -140,10 +143,10 @@ class UsersController extends Omeka_Controller_Action
                 $ua->User->active = 1;
                 $ua->User->forceSave();
                 $ua->delete();
-                $this->flashSuccess(__('You may now log in to Omeka.'));
-                $this->redirect->goto('login');
+                $this->_helper->flashMessenger(__('You may now log in to Omeka.'), 'success');
+                $this->_helper->redirector('login');
             } catch (Omeka_Validator_Exception $e) {
-                $this->flashValidationErrors($e);
+                $this->_helper->flashMessenger($e);
             }
         }
         $user = $ua->User;
@@ -169,16 +172,19 @@ class UsersController extends Omeka_Controller_Action
         try {
             if ($user->saveForm($_POST)) {                
                 if ($this->sendActivationEmail($user)) {
-                    $this->flashSuccess(__('The user "%s" was successfully added!',$user->username));
+                    $this->_helper->flashMessenger(
+                        __('The user "%s" was successfully added!', $user->username),
+                        'success'
+                    );
                 } else {
-                    $this->flash(__('The user "%s" was added, but the activation email could not be sent.',
+                    $this->_helper->flashMessenger(__('The user "%s" was added, but the activation email could not be sent.',
                         $user->username));
                 }
                 //Redirect to the main user browse page
-                $this->redirect->goto('browse');
+                $this->_helper->redirector('browse');
             }
         } catch (Omeka_Validator_Exception $e) {
-            $this->flashValidationErrors($e);
+            $this->_helper->flashMessenger($e);
         }
     }
 
@@ -192,7 +198,7 @@ class UsersController extends Omeka_Controller_Action
     public function editAction()
     {
         $success = false;
-        $user = $this->findById();        
+        $user = $this->_helper->db->findById();        
         $changePasswordForm = new Omeka_Form_ChangePassword;
         $changePasswordForm->setUser($user);
 
@@ -226,7 +232,7 @@ class UsersController extends Omeka_Controller_Action
                 $values = $changePasswordForm->getValues();
                 $user->setPassword($values['new_password']);
                 $user->forceSave();
-                $this->flashSuccess(__("Password changed!"));
+                $this->_helper->flashMessenger(__('Password changed!'), 'success');
                 $success = true;
             }
         } else {
@@ -235,11 +241,14 @@ class UsersController extends Omeka_Controller_Action
             }        
             try {
                 if ($user->saveForm($form->getValues())) {
-                    $this->flashSuccess(__('The user %s was successfully changed!', $user->username));
+                    $this->_helper->flashMessenger(
+                        __('The user %s was successfully changed!', $user->username),
+                        'success'
+                    );
                     $success = true;
                 }
             } catch (Omeka_Validator_Exception $e) {
-                $this->flashValidationErrors($e);
+                $this->_helper->flashMessenger($e);
             }
         }
 
@@ -247,7 +256,7 @@ class UsersController extends Omeka_Controller_Action
             if ($user->id == $currentUser->id) {
                 $this->_helper->redirector->gotoUrl('/');
             } else {
-                $this->_helper->redirector->goto('browse');
+                $this->_helper->redirector('browse');
             }
         }
     }
@@ -327,7 +336,7 @@ class UsersController extends Omeka_Controller_Action
         User::upgradeHashedPassword($loginForm->getValue('username'), 
                                     $loginForm->getValue('password'));
         
-        $authAdapter = new Omeka_Auth_Adapter_UserTable($this->getDb());
+        $authAdapter = new Omeka_Auth_Adapter_UserTable($this->_helper->db->getDb());
         $pluginBroker = $this->getInvokeArg('bootstrap')->getResource('Pluginbroker');
         // If there are no plugins filtering the login adapter, set the 
         // credentials for the default adapter.
@@ -343,7 +352,7 @@ class UsersController extends Omeka_Controller_Action
                 $ip = $this->getRequest()->getClientIp();
                 $log->info("Failed login attempt from '$ip'.");
             }
-            $this->flashError($this->getLoginErrorMessages($authResult));
+            $this->_helper->flashMessenger($this->getLoginErrorMessages($authResult), 'error');
             return;   
         }
         
@@ -359,9 +368,9 @@ class UsersController extends Omeka_Controller_Action
         
         $session = new Zend_Session_Namespace;
         if ($session->redirect) {
-            $this->redirect->gotoUrl($session->redirect);
+            $this->_helper->redirector->gotoUrl($session->redirect);
         } else {
-            $this->redirect->gotoUrl('/');
+            $this->_helper->redirector->gotoUrl('/');
         }
     }
         
@@ -403,7 +412,7 @@ class UsersController extends Omeka_Controller_Action
         $auth->clearIdentity();
         $_SESSION = array();
         Zend_Session::destroy();
-        $this->redirect->gotoUrl('');
+        $this->_helper->redirector->gotoUrl('');
     }
     
     private function _getUserForm(User $user)
