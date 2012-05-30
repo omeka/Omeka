@@ -14,13 +14,15 @@
     
     <li class="page-input">
     <form action="" method="get" accept-charset="utf-8">
-    <?php foreach($getParams as $key => $value) {
+    <?php
+    $entries = explode('&', http_build_query($getParams));
+    foreach ($entries as $entry) {
+        list($key, $value) = explode('=', $entry);
+        $hiddenParams[urldecode($key)] = urldecode($value);
+    } ?>
+    <?php foreach($hiddenParams as $key => $value) {
         if($key != 'page') {
-            if(is_array($value)) {
-                print_r($value);
-            } else {
-                echo $this->formHidden($key,$value);
-            }
+            echo $this->formHidden($key,$value);
         }
     } ?>
     <?php echo $this->formText('page', $this->current, array('class'=>'textinput')); ?> of <?php echo $this->last; ?></li>
