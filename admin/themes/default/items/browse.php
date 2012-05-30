@@ -80,6 +80,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
          
                         batchEditSubmit.prop('disabled', !checked);
                     }
+
                 });
             </script>
                                 
@@ -94,6 +95,10 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
  
              <?php display_search_filters(); ?>
 
+
+                <?php echo pagination_links(array('partial_file' => common('pagination_control'))); ?>
+
+
             
             <form class="items-browse top" action="<?php echo html_escape(uri('items/batch-edit')); ?>" method="post" accept-charset="utf-8">
             
@@ -104,25 +109,15 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                     <?php if (has_permission('Items', 'delete')): ?>
                     <input type="submit" class="red small" name="submit" value="Delete">
                     <?php endif; ?>                    
-                    <div class="quick-filter-wrapper">
-                        <div class="quick-filter-content">
-                        <?php
-                            echo nav(array(
-                                __('Quick Filter') => uri('items'),
-                                __('View All') => uri('items'),
-                                __('Public') => uri('items/browse?public=1'),
-                                __('Private') => uri('items/browse?public=0'),
-                                __('Featured') => uri('items/browse?featured=1'),
-                                __('Not Featured') => uri('items/browse?featured=0')
-                            ), array('class' => 'quick-filter-content'));
-                        ?>
-                        </div>
-                        <p class="quick-filter-resting"><?php echo __('Quick Filter'); ?></p>
-                    </div>                    
+                    <select id="quick-filter" name="quick-filter">
+                        <option value="items/">View All</option>
+                        <option value="items/browse?public=1">Public</option>
+                        <option value"items/browse?public=0">Private</option>
+                        <option value="items/browse?featured=1">Featured</option>
+                    </select>
+                    <input type="submit" value="Apply" class="filter-submit">             
                 </div>
-    
-                <?php echo pagination_links(array('partial_file' => common('pagination_control'))); ?>
-            
+                
             <table id="items" class="simple" cellspacing="0" cellpadding="0">
                  <thead>
                     <tr>
@@ -192,28 +187,19 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                     <?php if (has_permission('Items', 'delete')): ?>
                     <input type="submit" class="red small" name="submit" value="Delete">
                     <?php endif; ?>
-                    <div class="quick-filter-wrapper">
-                        <div class="quick-filter-content">
-                        <?php
-                            echo nav(array(
-                                __('Quick Filter') => uri('items'),
-                                __('View All') => uri('items'),
-                                __('Public') => uri('items/browse?public=1'),
-                                __('Private') => uri('items/browse?public=0'),
-                                __('Featured') => uri('items/browse?featured=1'),
-                                __('Not Featured') => uri('items/browse?featured=0')
-                            ), array('class' => 'quick-filter-content'));
-                        ?>
-                        </div>
-                        <p class="quick-filter-resting"><?php echo __('Quick Filter'); ?></p>
-                    </div>
-                </div>
-    
-                <div class="pagination">
-                    <div class="pagination"><?php echo pagination_links(); ?></div>
+                    <select id="quick-filter" name="quick-filter">
+                        <option value="items/">View All</option>
+                        <option value="items/browse?public=1">Public</option>
+                        <option value"items/browse?public=0">Private</option>
+                        <option value="items/browse?featured=1">Featured</option>
+                    </select>
                 </div>
     
             </form>
+    
+                <div class="pagination">
+                    <div class="pagination"><?php echo pagination_links(); ?></div>
+                </div>            
 
             <?php else: ?>
                 <p><?php echo __('The query searched %s items and returned no results.', total_items()); ?> <?php echo __('Would you like to %s?', link_to_advanced_search(__('refine your search'))); ?></p>

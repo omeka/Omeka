@@ -106,23 +106,11 @@ class ItemsController extends Omeka_Controller_Action
         return __('The item was successfully deleted!');
     }
     
-    protected function  _getBatchDeleteSuccessMessage($record)
-    {
-        return __('The items were successfully deleted!');
-    }
-    
     protected function _getDeleteConfirmMessage($record)
     {
         return __('This will delete the item and its associated metadata. It will '
              . 'also delete all files and file metadata associated with this '
              . 'item.');
-    }
-    
-    protected function _getBatchDeleteConfirmMessage($record)
-    {
-        return __('This will delete the selected items and their associated metadata. It will '
-             . 'also delete all files and file metadata associated with these '
-             . 'items.');
     }
     
     public function addAction()
@@ -323,4 +311,22 @@ class ItemsController extends Omeka_Controller_Action
          $this->_helper->redirector->goto('browse', 'items');
     }
     
+    /**
+     * Goes to results page based off value in text input.
+     */
+     
+    public function paginationAction()
+    {
+        $pageNumber = (int)$_POST['page'];
+        $baseUrl = $this->getRequest()->getBaseUrl().'/items/browse/';
+    	$request = Zend_Controller_Front::getInstance()->getRequest(); 
+    	$requestArray = $request->getParams();        
+        if($currentPage = $this->current) {
+            $paginationUrl = $baseUrl.$currentPage;
+        } else {
+            $paginationUrl = $baseUrl;
+        }
+
+    }
+
 }

@@ -63,7 +63,7 @@ table, thead, tbody, th, td, tr {
         position: absolute;
         top: .5em;
         left: .5em;
-        width: 50%;
+        width: 25%;
         font-weight: 700;
         padding-right: .625em;
         text-align: left;
@@ -134,36 +134,16 @@ table, thead, tbody, th, td, tr {
             float: none;
             margin: 0 2px 1em 2px;
             }
-        
-    .pagination {        
-        background-image: linear-gradient(top, #f8f8f8, #e2e2e2);
-            background-image: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#e2e2e2));
-            background-image: -webkit-linear-gradient(top, #f8f8f8, #e2e2e2);
-            background-image: -moz-linear-gradient(top, #f8f8f8, #e2e2e2);
-            background-image: -o-linear-gradient(top, #f8f8f8, #e2e2e2);
-            background-image: -ms-linear-gradient(top, #f8f8f8, #e2e2e2);
-        border: solid #ccc;
-        border-width: 1px 0;
-        float: right;
-        display: block;
-        overflow: auto;
-        margin: 0;
-        width: 100%;
-        }
-        
-        .pagination li {
-            margin: 0;
-            border: solid #ccc;
-            border-width: 0 1px 0 0;
-            box-shadow: 0 0 0 transparent;
-            }
             
     #quick-filter {
         width: 100%;
-        border-width: .125em 0 0 0;
         font-size: 1em;
         margin: 0;
         padding: 0 .5em;
+        }
+        
+    .pagination {
+        float: left;
         }
         
     #search {
@@ -171,7 +151,7 @@ table, thead, tbody, th, td, tr {
         }        
     
     #simple-search-form {
-        margin-right: 5px;;
+        margin-right: 5px;
         }
 
 /* Content
