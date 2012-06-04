@@ -64,6 +64,35 @@ class Collection extends Omeka_Record implements Zend_Acl_Resource_Interface
         $this->_mixins[] = new PublicFeatured($this);
         $this->_mixins[] = new Ownable($this);
     }
+
+    /**
+     * Get a property about this collection.
+     *
+     * @param string $property The property to get, always lowercase.
+     */
+    public function getProperty($property)
+    {
+        switch ($property) {
+            case 'id':
+                return $this->id;
+            case 'name':
+                return $this->name;
+            case 'description':
+                return $this->description;
+            case 'public':
+                return $this->public;
+            case 'featured':
+                return $this->featured;
+            case 'date added':
+                return $this->added;
+            case 'date modified':
+                return $this->modified;
+            case 'collectors': // The names of collectors
+                return $this->getCollectors();
+            default:
+                throw new Exception(__('%s does not exist for collections!', $property));
+        }
+    }
     
     /**
      * Determine whether or not the collection has collectors associated with it.
