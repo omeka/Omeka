@@ -22,6 +22,16 @@ class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
     const NO_ESCAPE = 'no_escape';
     const NO_FILTER = 'no_filter';
     const DELIMITER = 'delimiter';
+
+    /**
+     * @var Omeka_Record
+     */
+    protected $_record;
+
+    /**
+     * @var string|array
+     */
+    protected $_metadata;
     
     /**
      * Retrieve a specific piece of an item's metadata.
@@ -66,60 +76,48 @@ class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
      */
     public function recordMetadata(Omeka_Record $record, $metadata, $options = array())
     {
+        $this->_record = $record;
+        $this->_metadata = $metadata;
+        
         // Convert the shortcuts for the options into a proper array.
         $options = $this->_getOptions($options);
+
+        $snippet = isset($options[self::SNIPPET]) ? (int) $options[self::SNIPPET] : false;
+        $escape = empty($options[self::NO_ESCAPE]);
+        $filter = empty($options[self::NO_FILTER]);
+        $all = isset($options[self::ALL]) && $options[self::ALL];
+        $delimiter = isset($options[self::DELIMITER]) ? (string) $options[self::DELIMITER] : false;
+        $index = isset($options[self::INDEX]) ? (int) $options[self::INDEX] : 0;
 
         // Set the initial text value, which is either an array of ElementText 
         // records, or a special value string.
         $text = $this->_getText($record, $metadata);
 
-        // Apply the snippet option before escaping text HTML. If applied after
-        // escaping the HTML, this may result in invalid markup.
-        if (array_key_exists(self::SNIPPET, $options)) {
-            $text = $this->_snippetText($text, (int)$options[self::SNIPPET]);
-        }
-
-        // Escape the non-HTML text if necessary.
-        if (!(array_key_exists(self::NO_ESCAPE, $options) && $options[self::NO_ESCAPE])) {
-            $text = $this->_escapeTextHtml($text);
-        }
-
-        // Apply plugin filters.
-        if (!(array_key_exists(self::NO_FILTER, $options) && $options[self::NO_FILTER])) {
-            $text = $this->_filterText($text, $metadata, $record);
-        }
-
         if (is_array($text)) {
-            // Extract the text from the records into an array.
-            // This has to happen after escaping HTML because the html
-            // flag is located within the ElementText record.
-            $text = $this->_extractText($text);
-
-            // Return the joined text
-            if (isset($options[self::DELIMITER])) {
-                return join((string) $options[self::DELIMITER], $text);
-            }
-
-            // Return the text at that index.
-            if (isset($options[self::INDEX])) {
-                // Return null if the index doesn't exist for the record.
-                if (!isset($text[$options[self::INDEX]])) {
-                    return null;
+            // If ALL or DELIMITER isn't specified, pare the array down to
+            // just one entry, otherwise we need to work on the whole thing
+            if ($all || $delimiter) {
+                foreach ($text as $key => $value) {
+                    $text[$key] = $this->_process($value, $snippet, $escape, $filter);
                 }
-                return $text[$options[self::INDEX]];
-            }
 
-            // If the all option is set, return the entire array of escaped data
-            if (isset($options[self::ALL])) {
-                return $text;
+                // Return the joined text if there was a delimiter
+                if ($delimiter) {
+                    return join($delimiter, $text);
+                } else {
+                    return $text;
+                }
+            } else {
+                // Return null if the index doesn't exist for the record.
+                if (!isset($text[$index])) {
+                    $text = null;
+                } else {
+                    $text = $text[$index];
+                }
             }
-
-            // Otherwise, return the first entry in the array.
-            return reset($text);
         }
 
-        // Or, if we're dealing with a string, return the whole thing.
-        return $text;
+        return $this->_process($text, $snippet, $escape, $filter);
     }
     
     /**
@@ -159,7 +157,7 @@ class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
         }
         // If we get an array of length 2, retrieve the ElementTexts
         // that correspond to the given field.
-        if(is_array($metadata) && count($metadata) == 2) {
+        if (is_array($metadata) && count($metadata) == 2) {
             return $this->_getElementText($record, $metadata[0], $metadata[1]);
         }
 
@@ -206,17 +204,61 @@ class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
         
         return $elementTexts;
     }
+
+    /**
+     * Process an individual piece of text.
+     *
+     * If given an ElementText record, the actual text string will be
+     * extracted automatically.
+     *
+     * @param string|ElementText $text Text to process.
+     * @param int|bool $snippet Snippet length, or false if no snippet.
+     * @param bool $escape Whether to HTML escape the text.
+     * @param bool $filter Whether to pass the output through plugin
+     *  filters.
+     * @return string
+     */
+    protected function _process($text, $snippet, $escape, $filter)
+    {
+        if ($text instanceof ElementText) {
+            $elementText = $text;
+            $isHtml = $elementText->isHtml();
+            $text = $elementText->getText();
+        } else {
+            $elementText = false;
+            $isHtml = false;
+        }
+        
+        // Apply the snippet option before escaping text HTML. If applied after
+        // escaping the HTML, this may result in invalid markup.
+        if ($snippet) {
+            $text = snippet($text, 0, $snippet);
+        }
+
+        // Escape the non-HTML text if necessary.
+        if ($escape && !$isHtml) {
+            $text = html_escape($text);
+        }
+
+        // Apply plugin filters.
+        if ($filter) {
+            $text = $this->_filterText($text, $elementText);
+        }
+
+        return $text;
+    }
     
     /**
      * Apply filters to a set of element text.
      * 
      * @param array|string $text
-     * @param string|array $metadata
-     * @param Omeka_Record $record
+     * @param ElementText|bool $elementText
      * @return array|string
      */
-    protected function _filterText($text, $metadata, $record)
+    protected function _filterText($text, $elementText)
     {
+        $record = $this->_record;
+        $metadata = $this->_metadata;
         // Build the name of the filter to use. This will end up looking like: 
         // array('Display', 'Item', 'Dublin Core', 'Title') or something similar.
         $filterName = array('Display', get_class($record));
@@ -226,100 +268,12 @@ class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
             $filterName[] = $metadata;
         }
 
-        if (is_array($text)) {
-            
-            // What to do if there is no text to filter?  For now, filter an 
-            // empty string.
-            if (empty($text)) {
-                $text[] = new ElementText;
-            }
-            
-            // This really needs to be an instance of ElementText for the 
-            // following to work.
-            if (!(reset($text) instanceof ElementText)) {
-                throw new Omeka_View_Exception('The provided text needs to be an instance of ElementText.');
-            }
-            
-            // Apply the filters individually to each text record.
-            foreach ($text as $elementTextRecord) {
-                // This filter receives the Item record as well as the 
-                // ElementText record
-                $elementTextRecord->setText(apply_filters($filterName, $elementTextRecord->getText(), $record, $elementTextRecord));
-            }
+        if ($elementText) {
+            $text = apply_filters($filterName, $text, $record, $elementText);
         } else {
             $text = apply_filters($filterName, $text, $record);
         }     
         
         return $text;
-    }
-    
-    /**
-     * Retrieve a snippet (or set of snippets) for the text values to return.
-     * 
-     * @param string|array $text
-     * @param integer $length
-     * @return string|array
-     */
-    protected function _snippetText($text, $length)
-    {
-        // Integers get no formatting
-        if (is_int($text)) {
-
-        } else if (is_string($text)) {
-            $text = snippet($text, 0, $length);
-        } else if (is_array($text)) {
-            foreach ($text as $textRecord) {
-                $textRecord->setText(snippet($textRecord->getText(), 0, $length));
-            }   
-        } else {
-            throw new Omeka_View_Exception('Cannot retrieve a text snippet for a data type that is a '. gettype($text));
-        }
-        
-        return $text;
-    }
-    
-    /**
-     * This applies all filters defined for the 'html_escape' filter. 
-     * This will only be applied to string values or element text records that 
-     * are not marked as HTML. If they are marked as HTML, then there should be     
-     * no escaping because the values are already stored in the database as 
-     * fully valid HTML markup. Any errors resulting from displaying that HTML 
-     * is the responsibility of the administrator to fix.
-     * 
-     * @param string|array $text
-     * @return string|array
-     */
-    protected function _escapeTextHtml($text)
-    {           
-        // The assumption here is that all string values (item type name, 
-        // collection name, etc.) will need to be escaped.
-        if (is_string($text)) {
-            $text = html_escape($text);
-        } else if (is_array($text)) {
-            foreach ($text as $record) {
-                 if (!$record->isHtml()) {
-                     $record->setText(html_escape($record->getText()));
-                 }
-             }
-        } 
-        
-        return $text;
-    }
-    
-    /**
-     * Extract texts from an array.
-     *
-     * @param array $text
-     * @return array
-     */
-    protected function _extractText($text)
-    {
-        $extractedText = array();
-        foreach ($text as $key => $record) {
-            if ($textString = $record->getText()) {
-                $extractedText[$key] = $textString;
-            }
-        }
-        return $extractedText;
     }
 }
