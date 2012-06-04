@@ -160,8 +160,8 @@ function link_to_file_metadata($attributes = array(), $text = null, $file = null
     }
 
     if (!$text) {
-        $fileTitle = strip_formatting(item_file('Dublin Core', 'Title', array(), $file));
-        $text = $fileTitle ? $fileTitle : item_file('Original Filename', null, array(), $file);
+        $fileTitle = strip_formatting(item_file(array('Dublin Core', 'Title'), array(), $file));
+        $text = $fileTitle ? $fileTitle : item_file('Original Filename', array(), $file);
     }
 
     return link_to($file, 'show', $text, $attributes);
