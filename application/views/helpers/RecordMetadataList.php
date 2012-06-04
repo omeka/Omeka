@@ -178,7 +178,9 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
                 $elementsInSet[$key] = array();
                 $elementsInSet[$key]['element'] = $element;
                 $elementsInSet[$key]['elementName'] = $element->name;
-                $elementTexts = $this->_getFormattedElementText($this->_record, $element->set_name, $element->name);
+                $elementTexts = $this->_getFormattedElementText(
+                    $this->_record, array($element->set_name, $element->name)
+                );
                 $elementsInSet[$key]['isShowable'] = $this->_elementIsShowable($element, $elementTexts);
                 $elementsInSet[$key]['isEmpty'] = empty($elementTexts);
                 $elementsInSet[$key]['emptyText'] = html_escape($this->_emptyElementString);
@@ -202,13 +204,12 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
      * Return a formatted version of the requested element.
      *
      * @param Omeka_Record $record
-     * @param string $elementSetName
-     * @param string $elementName
+     * @param array $metadata
      * @return string
      */
-    protected function _getFormattedElementText($record, $elementSetName, $elementName)
+    protected function _getFormattedElementText($record, $metadata)
     {
-        return $this->view->recordMetadata($record, $elementSetName, $elementName, array('all' => true));
+        return $this->view->recordMetadata($record, $metadata, array('all' => true));
     }
 
     /**
@@ -224,7 +225,7 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
             $outputArray[$setName] = array();
             foreach ($elementsInSet as $key => $element) {
                 $elementName = $element->name;
-                $textArray = $this->_getFormattedElementText($this->_record, $element->set_name, $elementName);
+                $textArray = $this->_getFormattedElementText($this->_record, array($element->set_name, $elementName));
                 if (!empty($textArray[0]) or $this->_showEmptyElements) {
                     $outputArray[$setName][$elementName] = $textArray;
                 }
@@ -252,7 +253,7 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
                 return $this->_getOutputAsArray();
                 break;
             default:
-                throw new Exception('Invalid return type!');
+                throw new Omeka_View_Exception('Invalid return type!');
                 break;
         }
     }

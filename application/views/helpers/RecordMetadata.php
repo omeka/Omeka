@@ -36,11 +36,10 @@ class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
      * 
      * @param Omeka_Record $record Database record representing the item from 
      * which to retrieve field data.
-     * @param string $elementSetName The element set name of a specified element
-     * OR another arbitrary field name for the record.
-     * @param string $elementName The element belonging to the specified element 
-     * set. If this parameter is not set, or if it is null, the code assumes the 
-     * previous parameter is a special value.
+     * @param string|array $metadata The metadata field to retrieve.
+     *  If a string, refers to a "special" field on the record itself,
+     *  if an array, refers to an Element: the first entry is the set name,
+     *  the second is the element name.
      * @param array|string|integer $options Options for formatting the metadata 
      * for display.
      * - Default array options:
@@ -65,17 +64,14 @@ class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
      * @return string|array|null Null if field does not exist for item. Array
      * if certain options are passed.  String otherwise.
      */
-    public function recordMetadata(Omeka_Record $record, 
-                         $elementSetName, 
-                         $elementName = null, 
-                         $options     = array())
+    public function recordMetadata(Omeka_Record $record, $metadata, $options = array())
     {
         // Convert the shortcuts for the options into a proper array.
         $options = $this->_getOptions($options);
 
         // Set the initial text value, which is either an array of ElementText 
         // records, or a special value string.
-        $text = $this->_getText($record, $elementSetName, $elementName);
+        $text = $this->_getText($record, $metadata);
 
         // Apply the snippet option before escaping text HTML. If applied after
         // escaping the HTML, this may result in invalid markup.
@@ -90,7 +86,7 @@ class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
 
         // Apply plugin filters.
         if (!(array_key_exists(self::NO_FILTER, $options) && $options[self::NO_FILTER])) {
-            $text = $this->_filterText($text, $elementSetName, $elementName, $record);
+            $text = $this->_filterText($text, $metadata, $record);
         }
 
         if (is_array($text)) {
@@ -151,24 +147,25 @@ class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
      * Retrieve the text associated with a given element or field of the record.
      * 
      * @param Omeka_Record $record
-     * @param string $elementSetName
-     * @param string|null $elementName
+     * @param string|array $metadata
      * @return string|array Either an array of ElementText records or a string.
      */
-    protected function _getText($record, $elementSetName, $elementName)
+    protected function _getText($record, $metadata)
     {        
-        // If $elementName is null we assume that $elementSetName is actually a 
+        // If $metadata is a string, we assume that it refers to a
         // special value, e.g. id, item type name, date added, etc.
-        if (null === $elementName) {
-            $text = $this->_getRecordMetadata($record, $elementSetName);
-            
-        // Retrieve the ElementText records (or other values, like strings,
-        // integers, booleans) that correspond to all the element text for the
-        // given field.
-        } else {
-            $text = $this->_getElementText($record, $elementSetName, $elementName);
+        if (is_string($metadata)) {
+            return $this->_getRecordMetadata($record, $metadata);
         }
-        return $text;
+        // If we get an array of length 2, retrieve the ElementTexts
+        // that correspond to the given field.
+        if(is_array($metadata) && count($metadata) == 2) {
+            return $this->_getElementText($record, $metadata[0], $metadata[1]);
+        }
+
+        // If we didn't fit either of those categories, it's an invalid
+        // argument.
+        throw new Omeka_View_Exception('Unrecognized metadata specifier.');
     }
     
     /**
@@ -214,18 +211,19 @@ class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
      * Apply filters to a set of element text.
      * 
      * @param array|string $text
-     * @param string $elementSetName
-     * @param string $elementName
+     * @param string|array $metadata
      * @param Omeka_Record $record
      * @return array|string
      */
-    protected function _filterText($text, $elementSetName, $elementName, $record)
+    protected function _filterText($text, $metadata, $record)
     {
         // Build the name of the filter to use. This will end up looking like: 
         // array('Display', 'Item', 'Dublin Core', 'Title') or something similar.
-        $filterName = array('Display', get_class($record), $elementSetName);
-        if ($elementName !== null) {
-            $filterName[] = $elementName;
+        $filterName = array('Display', get_class($record));
+        if (is_array($metadata)) {
+            $filterName = array_merge($filterName, $metadata);
+        } else {
+            $filterName[] = $metadata;
         }
 
         if (is_array($text)) {
@@ -239,7 +237,7 @@ class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
             // This really needs to be an instance of ElementText for the 
             // following to work.
             if (!(reset($text) instanceof ElementText)) {
-                throw new Exception('The provided text needs to be an instance of ElementText.');
+                throw new Omeka_View_Exception('The provided text needs to be an instance of ElementText.');
             }
             
             // Apply the filters individually to each text record.
@@ -274,7 +272,7 @@ class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
                 $textRecord->setText(snippet($textRecord->getText(), 0, $length));
             }   
         } else {
-            throw new Exception('Cannot retrieve a text snippet for a data type that is a '. gettype($text));
+            throw new Omeka_View_Exception('Cannot retrieve a text snippet for a data type that is a '. gettype($text));
         }
         
         return $text;

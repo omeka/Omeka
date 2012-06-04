@@ -1,8 +1,8 @@
-<?php head(array('title' => item('Dublin Core', 'Title'), 'bodyid'=>'items','bodyclass' => 'show')); ?>
+<?php head(array('title' => item(array('Dublin Core', 'Title')), 'bodyid'=>'items','bodyclass' => 'show')); ?>
 
 <div id="primary">
 
-    <h1><?php echo item('Dublin Core', 'Title'); ?></h1>
+    <h1><?php echo item(array('Dublin Core', 'Title')); ?></h1>
 
     <?php echo custom_show_item_metadata(); ?>
 

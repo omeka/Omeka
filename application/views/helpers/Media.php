@@ -379,8 +379,8 @@ class Omeka_View_Helper_Media
     protected function _linkToFile($html = null, $file, $options)
     {
         if ($html === null) {
-            $fileTitle = strip_formatting(item_file('Dublin Core', 'Title', array(), $file));
-            $html = $fileTitle ? $fileTitle : item_file('Original Filename', null, array(), $file);
+            $fileTitle = strip_formatting(item_file(array('Dublin Core', 'Title'), array(), $file));
+            $html = $fileTitle ? $fileTitle : item_file('Original Filename', array(), $file);
         }
 
         if ($options['linkToMetadata']) {
@@ -822,12 +822,12 @@ class Omeka_View_Helper_Media
         $alt = '';
         if (isset($props['alt'])) {
             $alt = $props['alt'];
-        } elseif ($fileDescription = item_file('Dublin Core', 'Description', array(), $file)) {
+        } elseif ($fileDescription = item_file(array('Dublin Core', 'Description'), array(), $file)) {
             $alt = $fileDescription;
-        } elseif ($fileTitle = item_file('Dublin Core', 'Title', array(), $file)) {
+        } elseif ($fileTitle = item_file(array('Dublin Core', 'Title'), array(), $file)) {
             $alt = $fileTitle;
         } else if (isset($item)) {
-            $alt = item('Dublin Core', 'Title', array(), $item);           
+            $alt = item(array('Dublin Core', 'Title'), array(), $item);           
         }
         $props['alt'] = $alt;
         

@@ -25,7 +25,7 @@ if (!$isPartial):
             if (!has_permission($item, 'edit') || !has_permission($item, 'delete')) {
                 $showItemFields = false;
             }
-            $itemCheckboxes[$id] = item('Dublin Core', 'Title', null, $item);
+            $itemCheckboxes[$id] = item(array('Dublin Core', 'Title'), array(), $item);
             release_object($item);
         }
         echo $this->formMultiCheckbox('items[]', null, array('checked' => 'checked'), $itemCheckboxes); ?>

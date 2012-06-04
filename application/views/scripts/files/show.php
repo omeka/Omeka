@@ -1,5 +1,5 @@
 <?php
-    $fileTitle = item_file('Dublin Core', 'Title') ? item_file('Dublin Core', 'Title') : strip_formatting(item_file('original filename'));
+    $fileTitle = item_file(array('Dublin Core', 'Title')) ? item_file('Dublin Core', 'Title') : strip_formatting(item_file('original filename'));
 
     if ($fileTitle != '') {
         $fileTitle = ': &quot;' . $fileTitle . '&quot; ';

@@ -160,7 +160,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                     echo link_to_item(item_square_thumbnail(), array('class'=>'square-thumbnail'));
                 }
                 ?>
-                <?php echo snippet_by_word_count(strip_formatting(item('Dublin Core', 'Description')), 40); ?>
+                <?php echo snippet_by_word_count(strip_formatting(item(array('Dublin Core', 'Description'))), 40); ?>
                 <ul>
                     <li><strong><?php echo __('Collection'); ?>:</strong> <?php if (item_belongs_to_collection()) echo link_to_collection_for_item(); else echo __('No Collection'); ?></li>
                     <li><strong><?php echo __('Tags'); ?>:</strong> <?php if ($tags = item_tags_as_string()) echo $tags; else echo __('No Tags'); ?></li>
@@ -168,10 +168,10 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                 <?php fire_plugin_hook('admin_append_to_items_browse_detailed_each'); ?>
             </div>
         </td>
-        <td><?php echo strip_formatting(item('Dublin Core', 'Creator')); ?></td>
+        <td><?php echo strip_formatting(item(array('Dublin Core', 'Creator'))); ?></td>
         <td><?php echo ($typeName = item('Item Type Name'))
                     ? $typeName
-                    : '<em>' . item('Dublin Core', 'Type', array('snippet' => 35)) . '</em>'; ?></td>
+                    : '<em>' . item(array('Dublin Core', 'Type'), array('snippet' => 35)) . '</em>'; ?></td>
         <td>
         <?php if($item->public): ?>
         <img src="<?php echo img('silk-icons/tick.png'); ?>" alt="<?php echo __('Public'); ?>"/>

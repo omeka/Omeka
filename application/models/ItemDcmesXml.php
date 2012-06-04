@@ -26,7 +26,7 @@ class ItemDcmesXml
         $xml = "\n" . '<rdf:Description rdf:about="' . xml_escape(abs_item_uri($item)) . '">';
         // Iterate throught the DCMES.
         foreach ($this->_dcElements as $elementName) {
-            if ($text = item('Dublin Core', $elementName, array('all'=>true, 'no_escape'=>true))) {
+            if ($text = item(array('Dublin Core', $elementName), array('all'=>true, 'no_escape'=>true))) {
                 foreach ($text as $k => $v) {
                     if (!empty($v)) {
                         $xml .= "\n" . '<dc:' . strtolower($elementName) . '>' 
