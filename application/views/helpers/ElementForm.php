@@ -10,9 +10,8 @@
  * Generate the form markup for entering element text metadata.
  *
  * @package Omeka
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Omeka_View_Helper_ElementForm
+class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
 {
     /**
      * Element record to display the form for.
@@ -279,14 +278,5 @@ class Omeka_View_Helper_ElementForm
         $html .= '</div>'; // Close 'controls' div
 
         return $html;
-    }
-
-    /**
-     * Zend Framework wants this.
-     *
-     */
-    public function setView(Zend_View_Interface $view)
-    {
-        $this->view = $view;
     }
 }

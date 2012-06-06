@@ -17,14 +17,11 @@
  * should be in the core of Omeka, define a method in this class and then make 
  * sure that it responds to all the correct MIME types by modifying other 
  * properties in this class.
- * 
  *
  * @package Omeka_ThemeHelpers
  * @subpackage Omeka_View_Helper
- * @author CHNM
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Omeka_View_Helper_Media
+class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
 {   
     /**
      * Array of MIME types and the callbacks that can process it.
