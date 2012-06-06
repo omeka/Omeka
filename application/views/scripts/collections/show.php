@@ -34,7 +34,7 @@
             </div>
             <?php endif; ?>
 
-            <?php if ($text = item('Item Type Metadata', 'Text', array('snippet'=>250))): ?>
+            <?php if ($text = item(array('Item Type Metadata', 'Text'), array('snippet'=>250))): ?>
             <div class="item-description">
                 <p><?php echo $text; ?></p>
             </div>

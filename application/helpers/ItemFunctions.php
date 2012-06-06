@@ -210,7 +210,7 @@ function item_citation($item = null)
     $creator    = strip_formatting(item(array('Dublin Core', 'Creator'), array(), $item));
     $title      = strip_formatting(item(array('Dublin Core', 'Title'), array(), $item));
     $siteTitle  = strip_formatting(settings('site_title'));
-    $itemId     = item('id', null, array(), $item);
+    $itemId     = item('id', array(), $item);
     $accessDate = date('F j, Y');
     $uri        = html_escape(abs_item_uri($item));
 
