@@ -24,13 +24,22 @@ class Omeka_Core_Resource_Locale extends Zend_Application_Resource_Locale {
         $bootstrap = $this->getBootstrap();
         $bootstrap->bootstrap('Config');
         $config = $bootstrap->getResource('Config');
-        $cache = Zend_Cache::factory(
-            'Core',
-            'File',
-            array('automatic_serialization' => true),
-            array('file_name_prefix' => 'omeka_i18n_cache'));
 
-        if (($locale = $config->locale)) {
+        $locale = $config->locale;
+
+        if ($this->getBootstrap()->hasResource('Pluginbroker')) {
+            $broker = $this->getBootstrap()->getResource('Pluginbroker');
+            $locale = $broker->applyFilters('locale', $locale);
+        }
+
+        if ($locale) {
+            $cache = Zend_Cache::factory(
+                'Core',
+                'File',
+                array('automatic_serialization' => true),
+                array('file_name_prefix' => 'omeka_i18n_cache'
+            ));
+
             $this->setOptions(array(
                 'default' => $locale,
                 'cache' => $cache
