@@ -40,30 +40,14 @@ class ItemTypesController extends Omeka_Controller_Action
              . 'item type.');
     }
 
-    /**
-     * Add the item type and redirect to the item type edit page so the user can
-     * assign new and existing elements.
-     *
-     * Optimal behavior is for it to be possible to add existing elements and
-     * create new elements within the item type add form. This is a temporary
-     * hack and should be removed once the item type forms are in full working
-     * order.
-     */
-    public function addAction()
+    protected function _getAddSuccessMessage($itemType)
     {
-        $itemType = new ItemType();
-        try {
-            if ($itemType->saveForm($_POST)) {
-                $this->_helper->flashMessenger(
-                    __('The item type "%s" was successfully added!  You may now add elements to your new item type.', $itemType->name),
-                    'success'
-                );
-                $this->_redirect("item-types/edit/{$itemType->id}");
-            }
-        } catch (Omeka_Validator_Exception $e) {
-            $this->_helper->flashMessenger($e);
-        }
-        $this->view->assign(array('itemtype' => $itemType));
+        return __('The item type "%s" was successfully added!  You may now add elements to your new item type.', $itemType->name);
+    }
+    
+    protected function _redirectAfterAdd($itemType)
+    {
+        $this->_redirect("item-types/edit/{$itemType->id}");
     }
 
     public function editAction()
