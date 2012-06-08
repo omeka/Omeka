@@ -212,7 +212,7 @@ function fire_plugin_hook()
     if ($pluginBroker = get_plugin_broker()) {
         $args = func_get_args();
         $hook = array_shift($args);
-        return call_user_func_array(array($pluginBroker, $hook), $args);
+        return $pluginBroker->callHook($hook, $args);
     }
 }
 

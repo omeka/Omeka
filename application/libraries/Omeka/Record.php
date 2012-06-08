@@ -298,10 +298,10 @@ abstract class Omeka_Record implements ArrayAccess
             // run a general hook (one which is not specific to the classs of the record)
             // this is used by plugins which may need to process every record, and 
             // cannot anticipate all of the class names of those records
-            call_user_func_array(array($broker, $plugin_hook_general), $args);
+            $broker->callHook($plugin_hook_general, $args);
 
             // run a hook specific to the class
-            call_user_func_array(array($broker, $plugin_hook_specific), $args);
+            $broker->callHook($plugin_hook_specific, $args);
         }
     }
     

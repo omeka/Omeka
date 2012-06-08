@@ -43,7 +43,7 @@ class Omeka_Core_Resource_Acl extends Zend_Application_Resource_ResourceAbstract
                 
         if ($this->getBootstrap()->hasResource('PluginBroker')) {
             $broker = $this->getBootstrap()->getResource('PluginBroker');
-            $broker->define_acl($acl);
+            $broker->callHook('define_acl', array($acl));
         }
                 
         return $acl;
