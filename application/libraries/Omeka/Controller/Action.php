@@ -24,7 +24,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      * @var string
      */
     protected $_browseRecordsPerPage;
-
+    
     /**
      * Base controller constructor.
      *
@@ -227,7 +227,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
                 if ($successMessage != '') {
                     $this->_helper->flashMessenger($successMessage, 'success');
                 }
-                $this->_helper->redirector('browse');
+                $this->_redirectAfterAdd($record);
             }
         } catch (Omeka_Validator_Exception $e) {
             $this->_helper->flashMessenger($e);
@@ -269,6 +269,21 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      * @return string
      */
     protected function _getDeleteConfirmMessage($record) {return '';}
+
+    protected function _redirectAfterAdd($record)
+    {
+        $this->_helper->redirector('browse');
+    }
+
+    protected function _redirectAfterEdit($record)
+    {
+        $this->_helper->redirector('show', null, null, array('id'=>$record->id));
+    }
+
+    protected function _redirectAfterDelete($record)
+    {
+        $this->_helper->redirector('browse');
+    }
     
     /**
      * Similar to 'add' action, except this requires a pre-existing record.
@@ -290,7 +305,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
                 if ($successMessage != '') {
                     $this->_helper->flashMessenger($successMessage, 'success');
                 }
-                $this->_helper->redirector('show', null, null, array('id'=>$record->id));
+                $this->_redirectAfterEdit($record);
             }
         } catch (Omeka_Validator_Exception $e) {
             $this->_helper->flashMessenger($e);
@@ -328,7 +343,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
         if ($successMessage != '') {
             $this->_helper->flashMessenger($successMessage, 'success');
         }
-        $this->_helper->redirector('browse');
+        $this->_redirectAfterDelete($record);
     }
     
     /**
