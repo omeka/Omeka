@@ -135,16 +135,6 @@ class ActsAsElementText extends Omeka_Record_Mixin
     }
     
     /**
-     * Retrieve the record_type_id for this record.
-     * 
-     * @return integer
-     */
-    protected function getRecordTypeId()
-    {
-        return (int) $this->_getDb()->getTable('RecordType')->findIdFromName($this->_getRecordType());
-    }
-    
-    /**
      * Load all the ElementText records for the given record (Item, File, etc.).
      * These will be indexed by [element_id].
      * 
@@ -434,7 +424,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
         $textRecord = new ElementText;
         $textRecord->record_id = $this->_record->id;
         $textRecord->element_id = $element->id;
-        $textRecord->record_type_id = $this->getRecordTypeId();
+        $textRecord->record_type = $this->_getRecordType();
         $textRecord->text = $elementText;
         $textRecord->html = (int)$isHtml;
             
@@ -498,7 +488,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
                 continue;
             }
             $text = new ElementText;
-            $text->record_type_id = $this->getRecordTypeId();
+            $text->record_type = $this->_getRecordType();
             $text->element_id = $info['element_id'];
             $text->record_id = $this->_record->id;
             $text->text = $info['text'];
@@ -688,19 +678,20 @@ class ActsAsElementText extends Omeka_Record_Mixin
     public function deleteElementTextsByElementId(array $elementIdArray = array())
     {
         $db = $this->_getDb();
-        $recordTableName = $this->_record->getTable()->getTableName();
-        $recordTypeName = $this->_getRecordType();
+        $recordTypeName = $db->quote($this->_getRecordType());
+        $id = $db->quote($this->_record->id);
+        $elements = $db->quote($elementIdArray);
+
         // For some reason, this needs the parameters to be quoted directly into the
         // SQL statement in order for the DELETE to work. It may have something to
         // do with quoting the array of element IDs into a string.
-        $deleteSql =  "
-        DELETE etx FROM $db->ElementText etx 
-        INNER JOIN $recordTableName i ON i.id = etx.record_id 
-        INNER JOIN $db->RecordType rty ON rty.id = etx.record_type_id
-        WHERE rty.name = " . $db->quote($recordTypeName) . " 
-        AND i.id = " . $db->quote($this->_record->id) . " 
-        AND etx.element_id IN (" . $db->quote($elementIdArray) . ")";
-        return $db->query($deleteSql);
+        $db->query(<<<SQL
+DELETE FROM {$db->ElementText} 
+WHERE record_type = $recordTypeName 
+AND record_id = $id 
+AND element_id IN ($elements)
+SQL
+        );
     }
     
     /**
@@ -711,14 +702,14 @@ class ActsAsElementText extends Omeka_Record_Mixin
     public function deleteElementTexts()
     {
         $db = $this->_getDb();
-        $recordTableName = $this->_record->getTable()->getTableName();
-        $recordTypeName = $this->_getRecordType();
-        $deleteSql =  "
-        DELETE etx FROM $db->ElementText etx 
-        INNER JOIN $recordTableName i ON i.id = etx.record_id 
-        INNER JOIN $db->RecordType rty ON rty.id = etx.record_type_id
-        WHERE rty.name = " . $db->quote($recordTypeName) . " 
-        AND i.id = " . $db->quote($this->_record->id) . "";
-        return $db->query($deleteSql);
+        $recordTypeName = $db->quote($this->_getRecordType());
+        $id = $db->quote($this->_record->id);
+
+        $db->query(<<<SQL
+DELETE FROM {$db->ElementText} 
+WHERE record_type = $recordTypeName 
+AND record_id = $id
+SQL
+        );
     }
 }

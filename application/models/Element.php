@@ -13,23 +13,10 @@
  */
 class Element extends Omeka_Record
 {
-    public $record_type_id;
     public $element_set_id;
     public $order;
     public $name = '';
     public $description = '';
-
-    const DEFAULT_RECORD_TYPE = 'Item';
-
-    /**
-     * Set the record type for the element (Item, File, All, etc.).
-     * @param string $recordTypeName
-     * @return void
-     */
-    public function setRecordType($recordTypeName)
-    {
-        $this->record_type_id = $this->_getRecordTypeId($recordTypeName);
-    }
 
     /**
      * Set the element set for the element.
@@ -94,9 +81,7 @@ class Element extends Omeka_Record
      *  <li>name</li>
      *  <li>description</li>
      *  <li>order</li>
-     *  <li>record_type_id</li>
      *  <li>element_set_id</li>
-     *  <li>record_type</li>
      *  <li>element_set</li>
      * </ul>
      * @return void
@@ -108,9 +93,6 @@ class Element extends Omeka_Record
         } else {
             foreach ($data as $key => $value) {
                 switch ($key) {
-                    case 'record_type':
-                        $this->setRecordType($value);
-                        break;
                     case 'order':
                         $this->setOrder($value);
                         break;
@@ -149,10 +131,6 @@ class Element extends Omeka_Record
             $this->addError('name', __('Name must not be empty!'));
         }
 
-        if (empty($this->record_type_id)) {
-            $this->addError('record_type_id', __('Element must have a valid record type!'));
-        }
-
         // Check if the element set / element name combination already exists.
         if ($this->_nameIsInSet($this->name, $this->element_set_id)) {
             $this->addError('name', __('%1$s already exists for element set #%2$s', $this->name, $this->element_set_id) );
@@ -171,26 +149,6 @@ class Element extends Omeka_Record
         foreach ($elementTexts as $elementText) {
             $elementText->delete();
         }
-    }
-
-    /**
-     * Set the default record type for the element (if necessary).
-     * @return void
-     */
-    protected function beforeValidate()
-    {
-        if (empty($this->record_type_id)) {
-            $this->record_type_id = $this->_getRecordTypeId(self::DEFAULT_RECORD_TYPE);
-        }
-    }
-
-    /**
-     * Retrieve the record type ID from the name.
-     * @return RecordType
-     */
-    private function _getRecordTypeId($recordTypeName)
-    {
-        return $this->getDb()->getTable('RecordType')->findIdFromName($recordTypeName);
     }
 
     /**

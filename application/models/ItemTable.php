@@ -331,9 +331,8 @@ class ItemTable extends Omeka_Db_Table
         if (count($fieldData) == 2) {
             $element = $db->getTable('Element')->findByElementSetNameAndElementName($fieldData[0], $fieldData[1]);
             if ($element) {
-                $recordTypeId = $db->getTable('RecordType')->findIdFromName('Item');
                 $select->joinLeft(array('et_sort' => $db->ElementText),
-                                  "et_sort.record_id = i.id AND et_sort.record_type_id = {$recordTypeId} AND et_sort.element_id = {$element->id}",
+                                  "et_sort.record_id = i.id AND et_sort.record_type = 'Item' AND et_sort.element_id = {$element->id}",
                                   array())
                        ->group('i.id')
                        ->order(array("IF(ISNULL(et_sort.text), 1, 0) $sortDir",

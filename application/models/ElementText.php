@@ -16,7 +16,7 @@
 class ElementText extends Omeka_Record
 {
     public $record_id;
-    public $record_type_id;
+    public $record_type;
     public $element_id;
     public $html = 0;
     public $text;

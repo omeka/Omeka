@@ -538,9 +538,7 @@ function update_item($item, $metadata = array(), $elementTexts = array(), $fileM
  *         array(
  *             'name'           => [(string) name, required],
  *             'description'    => [(string) description, optional],
- *             'record_type'    => [(string) record type name, optional],
  *             'order'          => [(int) order, optional],
- *             'record_type_id' => [(int) record type id, optional]
  *         ),
  *         [(Element)],
  *     );
@@ -587,8 +585,7 @@ function insert_collection($metadata = array())
  *     array(
  *         'name'           => [(string) element set name, required, unique],
  *         'description'    => [(string) element set description, optional],
- *         'record_type'    => [(string) record type name, optional],
- *         'record_type_id' => [(int) record type id, optional]
+ *         'record_type'    => [(string) record type name, optional]
  *     );
  * </code>
  * @param array $elements An array containing element data. Follows one of more
@@ -602,8 +599,6 @@ function insert_collection($metadata = array())
  *         array(
  *             'name'           => [(string) name, required],
  *             'description'    => [(string) description, optional],
- *             'record_type'    => [(string) record type name, optional],
- *             'record_type_id' => [(int) record type id, optional]
  *         ),
  *         [(string) element name]
  *     );

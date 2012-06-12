@@ -45,7 +45,7 @@ function custom_show_item_metadata(array $options = array(), $item = null)
 
         $otherElementSets = array();
 
-        $elementSets = get_db()->getTable('ElementSet')->findForItems();
+        $elementSets = get_db()->getTable('ElementSet')->findByRecordType('Item');
         foreach ($elementSets as $set) {
             if ($set->name == 'Dublin Core') continue;
             $otherElementSets[] = $set->name;

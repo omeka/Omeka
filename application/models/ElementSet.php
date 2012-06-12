@@ -13,7 +13,7 @@
  */
 class ElementSet extends Omeka_Record
 {
-    public $record_type_id;
+    public $record_type;
     public $name;
     public $description;
     
@@ -24,11 +24,6 @@ class ElementSet extends Omeka_Record
     public function getElements()
     {
         return $this->getTable('Element')->findBySet($this->name);
-    }
-    
-    private function _getDefaultRecordTypeId()
-    {
-        return $this->getTable('RecordType')->findIdFromName(self::DEFAULT_RECORD_TYPE);
     }
     
     /**
@@ -49,18 +44,6 @@ class ElementSet extends Omeka_Record
         $obj = new Element;
         $obj->setArray($options);
         return $obj;        
-    }
-    
-    /**
-     * Set some default options when saving element sets (if not given).
-     * 
-     * @return void
-     */
-    protected function beforeSave()
-    {
-        if (empty($this->record_type_id)) {
-            $this->record_type_id = $this->_getDefaultRecordTypeId();
-        }
     }
     
     protected function afterSave()

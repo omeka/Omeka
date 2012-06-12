@@ -76,7 +76,7 @@ class ItemsController extends Omeka_Controller_Action
     
     protected function _getItemElementSets()
     {
-        return $this->_helper->db->getTable('ElementSet')->findForItems();
+        return $this->_helper->db->getTable('ElementSet')->findByRecordType('Item');
     }
     
     /**

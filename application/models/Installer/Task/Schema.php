@@ -28,7 +28,6 @@ class Installer_Task_Schema implements Installer_TaskInterface
         'elements',
         'item_types_elements',
         'options',
-        'record_types',
         'users',
         'element_sets',
         'files',

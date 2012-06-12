@@ -27,11 +27,7 @@ class ElementTable extends Omeka_Db_Table
         $select = $this->getSelect();
         $db = $this->getDb();
 
-        // Join against the record_types table to pull only elements for Items
-         $select->joinInner(array('record_types'=> $db->RecordType),
-                             'record_types.id = elements.record_type_id',
-                             array('record_type_name'=>'record_types.name'));
-        $select->where('record_types.name = ? OR record_types.name = "All"', $recordTypeName);
+        $select->where('element_sets.record_type = ? OR element_sets.record_type IS NULL', $recordTypeName);
         
         $this->orderElements($select);
         
@@ -151,12 +147,13 @@ class ElementTable extends Omeka_Db_Table
         
         // Retrieve only elements matching a specific record type.
         if (array_key_exists('record_types', $params)) {
-            $select->joinInner(array('record_types'=> $db->RecordType),
-                                 'record_types.id = elements.record_type_id',
-                                 array('record_type_name'=>'record_types.name'));
             $where = array();
             foreach ($params['record_types'] as $recordTypeName) {
-                $where[] = 'record_types.name = ' . $db->quote($recordTypeName);
+                if ($recordTypeName == 'All') {
+                    $where[] = 'element_sets.record_type IS NULL';
+                } else {
+                    $where[] = 'element_sets.record_type = ' . $db->quote($recordTypeName);
+                }
             }
             $select->where('(' . join(' OR ', $where) . ')');
         }

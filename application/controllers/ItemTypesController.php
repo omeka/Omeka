@@ -147,7 +147,6 @@ class ItemTypesController extends Omeka_Controller_Action
 
                 $element = new Element;
                 $element->setElementSet(ELEMENT_SET_ITEM_TYPE);
-                $element->setRecordType('Item');
                 $element->setName($elementName);
                 $element->setDescription($elementDescription);
                 $element->order = null;
@@ -176,7 +175,6 @@ class ItemTypesController extends Omeka_Controller_Action
                 } else {
                     $element = new Element;
                     $element->setElementSet(ELEMENT_SET_ITEM_TYPE);
-                    $element->setRecordType('Item');
                     $element->order = null;
                 }
 
