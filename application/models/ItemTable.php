@@ -62,12 +62,12 @@ class ItemTable extends Omeka_Db_Table
     public function filterBySearch($select, $params)
     {
         //Apply the simple or advanced search
-        if (isset($params['search']) || isset($params['advanced_search'])) {
+        if (isset($params['search']) || isset($params['advanced'])) {
             $search = new ItemSearch($select);
             if ($simpleTerms = @$params['search']) {
                 $search->simple($simpleTerms);
             }
-            if ($advancedTerms = @$params['advanced_search']) {
+            if ($advancedTerms = @$params['advanced']) {
                 $search->advanced($advancedTerms);
             }
         }
@@ -82,7 +82,7 @@ class ItemTable extends Omeka_Db_Table
      */
     public function filterByPublic($select, $isPublic)
     {
-        $isPublic = (bool) $isPublic; // this makes sure that empty strings and unset parameters are false
+        $isPublic = is_true($isPublic); // this makes sure that empty strings and unset parameters are false
 
         //Force a preview of the public items
         if ($isPublic) {
@@ -94,7 +94,7 @@ class ItemTable extends Omeka_Db_Table
 
     public function filterByFeatured($select, $isFeatured)
     {
-        $isFeatured = (bool) $isFeatured; // this make sure that empty strings and unset parameters are false
+        $isFeatured = is_true($isFeatured); // this make sure that empty strings and unset parameters are false
 
         //filter items based on featured (only value of 'true' will return featured items)
         if ($isFeatured) {
@@ -251,7 +251,7 @@ class ItemTable extends Omeka_Db_Table
      */
     public function filterByHasDerivativeImage($select, $hasDerivativeImage = true)
     {
-        $hasDerivativeImage = $hasDerivativeImage ? '1' : '0';
+        $hasDerivativeImage = is_true($hasDerivativeImage) ? '1' : '0';
 
         $db = $this->getDb();
 
@@ -269,50 +269,55 @@ class ItemTable extends Omeka_Db_Table
      */
     public function applySearchFilters($select, $params)
     {
-        if (isset($params['user'])) {
-            $this->filterByUser($select, $params['user']);
-        }
+        foreach ($params as $paramName => $paramValue) {
+            if ($paramValue === null || (is_string($paramValue) && trim($paramValue) == '')) {
+                continue;
+            }
 
-        if(isset($params['public'])) {
-            $this->filterByPublic($select, $params['public']);
-        }
-        if(isset($params['featured'])) {
-            $this->filterByFeatured($select, $params['featured']);
-        }
+            switch ($paramName) {
+                case 'user':
+                    $this->filterByUser($select, $paramValue);
+                    break;
 
-        if (isset($params['collection'])) {
-            $this->filterByCollection($select, $params['collection']);
-        }
+                case 'public':
+                    $this->filterByPublic($select, $paramValue);
+                    break;
 
-        // filter based on type
-        if (isset($params['type'])) {
-            $this->filterByItemType($select, $params['type']);
-        }
+                case 'featured':
+                    $this->filterByFeatured($select, $paramValue);
+                    break;
 
-        // filter based on tags
-        if (isset($params['tags'])) {
-            $this->filterByTags($select, $params['tags']);
-        }
+                case 'collection':
+                    $this->filterByCollection($select, $paramValue);
+                    break;
 
-        // exclude Items with given tags
-        if (isset($params['excludeTags'])) {
-            $this->filterByExcludedTags($select, $params['excludeTags']);
-        }
+                case 'type':
+                    $this->filterByItemType($select, $paramValue);
+                    break;
 
-        // include only Items with derivative images.
-        if (isset($params['hasImage'])) {
-            $this->filterByHasDerivativeImage($select, $params['hasImage']);
+                case 'tag':
+                case 'tags':
+                    $this->filterByTags($select, $paramValue);
+                    break;
+
+                case 'excludeTags':
+                    $this->filterByExcludedTags($select, $paramValue);
+                    break;
+
+                case 'hasImage':
+                    $this->filterByHasDerivativeImage($select, $paramValue);
+                    break;
+
+                case 'range':
+                    $this->filterByRange($select, $paramValue);
+                    break;
+            }
         }
 
         $this->filterBySearch($select, $params);
 
-        if (isset($params['range'])) {
-            $this->filterByRange($select, $params['range']);
-        }
-
         //If we returning the data itself, we need to group by the item ID
         $select->group('items.id');
-
     }
 
     /**

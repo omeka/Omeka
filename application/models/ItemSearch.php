@@ -53,6 +53,10 @@ class ItemSearch
         $select = $this->_getSelect();
                         
         foreach ($advanced as $k => $v) {
+
+            if (empty($entry['element_id']) || empty($entry['type'])) {
+                continue;
+            }
             
             $value = $v['terms'];
             
