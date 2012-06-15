@@ -38,12 +38,12 @@ class ItemTable extends Omeka_Db_Table
                 $start  = (int) trim($start);
                 $finish = (int) trim($finish);
 
-                $wheres[] = "(i.id BETWEEN $start AND $finish)";
+                $wheres[] = "(items.id BETWEEN $start AND $finish)";
 
                 //It is a single item ID
             } else {
                 $id = (int) trim($expr);
-                $wheres[] = "(i.id = $id)";
+                $wheres[] = "(items.id = $id)";
             }
         }
 
@@ -334,7 +334,7 @@ class ItemTable extends Omeka_Db_Table
                 $select->joinLeft(array('et_sort' => $db->ElementText),
                                   "et_sort.record_id = i.id AND et_sort.record_type = 'Item' AND et_sort.element_id = {$element->id}",
                                   array())
-                       ->group('i.id')
+                       ->group('items.id')
                        ->order(array("IF(ISNULL(et_sort.text), 1, 0) $sortDir",
                                      "et_sort.text $sortDir"));
             }
