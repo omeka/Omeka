@@ -82,14 +82,6 @@ class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
     }
     
     /**
-     * @return array Set of ElementText records.
-     */
-    public function getElementText()
-    {
-        return $this->getElementTextRecords();
-    }
-    
-    /**
      * Retrieve a set of elements associated with the item type of the item.
      *
      * Each one of the Element records that is retrieved should contain all the 

@@ -43,8 +43,7 @@ class Omeka_View_Helper_ItemMetadataList extends Omeka_View_Helper_RecordMetadat
 
     /**
      * Get an array of all element sets containing their respective elements.
-     * @uses Item::getAllElementsBySet()
-     * @uses Item::getItemTypeElements()
+     * 
      * @return array
      */
     protected function _getElementsBySet()

@@ -248,7 +248,7 @@ function item_field_uses_html($elementSetName, $elementName, $index=0, $item = n
         $item = get_current_item();
     }
 
-    $textRecords = $item->getElementTextsByElementNameAndSetName($elementName, $elementSetName);
+    $textRecords = $item->getElementTexts($elementSetName, $elementName);
     $textRecord = @$textRecords[$index];
 
     return ($textRecord instanceof ElementText and $textRecord->isHtml());

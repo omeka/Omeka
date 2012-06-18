@@ -173,7 +173,7 @@ class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
      */
     protected function _getElementText($record, $elementSetName, $elementName)
     {
-        $elementTexts = $record->getElementTextsByElementNameAndSetName($elementName, $elementSetName);
+        $elementTexts = $record->getElementTexts($elementSetName, $elementName);
 
         // Lock the records so that they can't be accidentally saved back to the
         // database, since we are modifying their values directly at this point.

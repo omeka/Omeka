@@ -168,7 +168,8 @@ abstract class Omeka_Output_Xml_Abstract
         $itemType = array();
         
         // Get all element texts associated with the provided record.
-        $elementTexts = $record->getElementTextRecords();
+        $elementTexts = $record->getAllElementTexts();
+
         foreach ($elementTexts as $elementText) {
             
             // Get associated element and element set records.

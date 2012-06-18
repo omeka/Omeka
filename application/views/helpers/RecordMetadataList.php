@@ -113,13 +113,13 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
     /**
      * Get an array of all element sets containing their respective elements.
      *
-     * @uses Item::getAllElementsBySet()
+     * @uses Item::getAllElements()
      * @uses Item::getItemTypeElements()
      * @return array
      */
     protected function _getElementsBySet()
     {
-        $elementsBySet = $this->_record->getAllElementsBySet();
+        $elementsBySet = $this->_record->getAllElements();
 
         // Only show the element sets that are passed in as options.
         if (!empty($this->_elementSetsToShow)) {
@@ -131,13 +131,13 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
 
     /**
      * Get an array of all texts belonging to the provided element.
-     * @uses Item::getTextsByElement()
+     * @uses Item::getElementTextsByRecord()
      * @param Element $element
      * @return array
      */
     protected function _getTextsByElement(Element $element)
     {
-        return $this->_record->getTextsByElement($element);
+        return $this->_record->getElementTextsByRecord($element);
     }
 
     /**

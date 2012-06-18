@@ -165,7 +165,7 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
      */
     public function getElementTexts($index=null)
     {
-        $texts = $this->_record->getTextsByElement($this->_element);
+        $texts = $this->_record->getElementTextsByRecord($this->_element);
         if ($index !== null) {
             if (array_key_exists($index, $texts)) {
                 return $texts[$index];
