@@ -17,7 +17,6 @@
  */
 class Mixin_ElementText extends Omeka_Record_Mixin
 {
-    
     /**
      * ElementText records stored in the order they were retrieved from the database.
      *
@@ -78,16 +77,6 @@ class Mixin_ElementText extends Omeka_Record_Mixin
      * @var array 
      */
     private static $_elementsByRecordType = array();
-    
-    /**
-     * Link to the underlying record
-     *
-     * @param Omeka_Record
-     */
-    public function __construct($record)
-    {
-        $this->_record = $record;
-    }
     
     /**
      * Omeka_Record callback for afterSave. Saves the ElementText records once

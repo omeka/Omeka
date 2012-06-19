@@ -18,17 +18,12 @@ class Mixin_PublicFeatured extends Omeka_Record_Mixin
     private $_wasPublic;
     private $_wasFeatured;
     
-    public function __construct($record)
-    {
-        $this->record = $record;
-    }
-    
     /**
      * @return boolean
      */
     public function isPublic()
     {
-        return (boolean)$this->record->public;
+        return (boolean)$this->_record->public;
     }
     
     /**
@@ -39,18 +34,18 @@ class Mixin_PublicFeatured extends Omeka_Record_Mixin
     public function setPublic($flag)
     {
         $this->_wasPublic = $this->isPublic();
-        $this->record->public = (int)(boolean)$flag;
+        $this->_record->public = (int)(boolean)$flag;
     }
     
     public function isFeatured()
     {
-        return (boolean)$this->record->featured;
+        return (boolean)$this->_record->featured;
     }
     
     public function setFeatured($flag)
     {
         $this->_wasFeatured = $this->isFeatured();
-        $this->record->featured = (int)(boolean)$flag;
+        $this->_record->featured = (int)(boolean)$flag;
     }
     
     /**
@@ -63,9 +58,9 @@ class Mixin_PublicFeatured extends Omeka_Record_Mixin
     protected function getHookName($state, $flag)
     {
         // e.g., 'item'
-        $modelNameForHook = strtolower(get_class($this->record));
+        $modelNameForHook = strtolower(get_class($this->_record));
         $action = ($flag ? '' : 'not_') . $state;
-        return join('_', array('make', $modelNameForHook, $action));
+        return "make_{$modelNameForHook}_{$action}";
     }
     
     public function beforeSaveForm($post)
@@ -95,7 +90,7 @@ class Mixin_PublicFeatured extends Omeka_Record_Mixin
         }
 
         if (isset($hookName)) {
-            fire_plugin_hook($hookName, $this->record);
+            fire_plugin_hook($hookName, $this->_record);
         }
     }
 }

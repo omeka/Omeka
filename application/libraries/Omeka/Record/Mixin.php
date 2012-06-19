@@ -32,21 +32,18 @@ abstract class Omeka_Record_Mixin
      *
      * @var Omeka_Record
      */
-    protected $record;
+    protected $_record;
 
     /**
-     * Delegate method calls to the underlying record.
+     * Base mixin constructor.
+     * 
+     * Store the underlying record for use in the mixin.
      *
-     * Convenience method to allow directly calling methods on the record
-     * using $this.
-     *
-     * @param string $m Method name.
-     * @param array $a Method arguments.
-     * @return mixed
+     * @param Omeka_Record $record
      */
-    public function __call($m, $a)
+    public function __construct($record)
     {
-        return call_user_func_array( array($this->record, $m), $a);
+        $this->_record = $record;
     }
 
     /**#@+

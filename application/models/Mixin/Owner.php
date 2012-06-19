@@ -6,20 +6,20 @@
  */
 
 /**
- * @internal This implements Omeka internals and is not part of the public API.
- * @access private
+ * Mixin for models that have a user that is their "owner."
+ * 
  * @package Omeka
  * @subpackage Mixins
  */
 class Mixin_Owner extends Omeka_Record_Mixin
 {
-    protected $record;
-    protected $column;
+    protected $_record;
+    protected $_column;
     
     public function __construct($record, $column = 'owner_id')
     {
-        $this->record = $record;
-        $this->column = $column;
+        parent::__construct($record);
+        $this->_column = $column;
     }
     
     /**
@@ -27,9 +27,9 @@ class Mixin_Owner extends Omeka_Record_Mixin
      */
     public function beforeInsert()
     {
-        $column = $this->column;
+        $column = $this->_column;
         $user = Omeka_Context::getInstance()->getCurrentUser();
-        if ($user && !$this->record->$column) {
+        if ($user && !$this->_record->$column) {
             $this->setOwner($user);
         }
     }
@@ -41,8 +41,8 @@ class Mixin_Owner extends Omeka_Record_Mixin
      */
     public function setOwner(User $user)
     {
-        $column = $this->column;
-        $this->record->$column = $user->id;
+        $column = $this->_column;
+        $this->_record->$column = $user->id;
     }
 
     /**
@@ -54,12 +54,12 @@ class Mixin_Owner extends Omeka_Record_Mixin
      */
     public function getOwner()
     {
-        $column = $this->column;
-        $id = $this->record->$column;
+        $column = $this->_column;
+        $id = $this->_record->$column;
         if (!$id) {
             return null;
         } else {
-            return $this->getDb()->getTable('User')->find($id);
+            return $this->_record->getDb()->getTable('User')->find($id);
         }
     }
 
@@ -71,7 +71,7 @@ class Mixin_Owner extends Omeka_Record_Mixin
      */
     public function isOwnedBy(User $user)
     {
-        $column = $this->column;
-        return $user->id == $this->record->$column;
+        $column = $this->_column;
+        return $user->id == $this->_record->$column;
     }
 }

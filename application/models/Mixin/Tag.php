@@ -16,17 +16,19 @@
  */
 class Mixin_Tag extends Omeka_Record_Mixin
 {
-    public $tagTable;
-    public $joinTable;
+    private $_tagTable;
+    private $_joinTable;
+
+    private $_type;
     
     public function __construct(Omeka_Record $record) {
+        parent::__construct($record);
         
-        $this->record = $record;
-        
-        $this->type = get_class($record);
+        $this->_type = get_class($record);
 
-        $this->tagTable = $this->getDb()->getTable('Tag');
-        $this->joinTable = $this->getDb()->getTable('Taggings');
+        $db = $this->_record->getDb();
+        $this->_tagTable = $db->getTable('Tag');
+        $this->_joinTable = $db->getTable('Taggings');
     }
     
     /**
@@ -42,11 +44,11 @@ class Mixin_Tag extends Omeka_Record_Mixin
     
     public function deleteTaggings()
     {
-        $db = $this->getDb();
+        $db = $this->_record->getDb();
         
         $db->delete($db->Taggings, array(
-            'relation_id = ?' => (int) $this->record->id,
-            'type = ?' => $this->type
+            'relation_id = ?' => (int) $this->_record->id,
+            'type = ?' => $this->_type
             )
         );
     }
@@ -59,7 +61,7 @@ class Mixin_Tag extends Omeka_Record_Mixin
      */
     public function getTaggings()
     {
-        return $this->joinTable->findBy(array('record'=>$this->record));
+        return $this->_joinTable->findBy(array('record' => $this->_record));
     }
     
     /**
@@ -68,9 +70,9 @@ class Mixin_Tag extends Omeka_Record_Mixin
      * @see TagTable::applySearchFilters
      * @return array of Tag
      */
-    public function getTags($order=array('alpha'))
+    public function getTags($order = array('alpha'))
     {
-        return $this->tagTable->findBy(array('record'=>$this->record, 'sort'=>$order));
+        return $this->_tagTable->findBy(array('record' => $this->_record, 'sort' => $order));
     }
     
     /**
@@ -82,7 +84,7 @@ class Mixin_Tag extends Omeka_Record_Mixin
      *              Returns false if $tags is empty. 
      *              Returns true if at least one tag in $tags is deleted.
      */
-    public function deleteTags($tags, $delimiter=null)
+    public function deleteTags($tags, $delimiter = null)
     {
         // Set the tag_delimiter option if no delimiter was passed.
         if (is_null($delimiter)) {
@@ -98,14 +100,14 @@ class Mixin_Tag extends Omeka_Record_Mixin
         }
         
         $findWith['tag'] = $tags;
-        $findWith['record'] = $this->record;
+        $findWith['record'] = $this->_record;
         
-        $taggings = $this->joinTable->findBy($findWith);
+        $taggings = $this->_joinTable->findBy($findWith);
         foreach ($taggings as $tagging) {
             $tagging->delete();
         }
         
-        return (!empty($taggings));
+        return !empty($taggings);
     }
             
     /**
@@ -115,7 +117,7 @@ class Mixin_Tag extends Omeka_Record_Mixin
      * @return boolean
      */
     public function hasTag($tag) {
-        $count = $this->joinTable->count(array('tag'=>$tag, 'record'=>$this->record));  
+        $count = $this->_joinTable->count(array('tag'=>$tag, 'record'=>$this->_record));  
         return $count > 0;
     }    
     
@@ -125,7 +127,7 @@ class Mixin_Tag extends Omeka_Record_Mixin
      * @param string $string A delimited string of tags
      * @return array An array of tag strings
      */
-    protected function _getTagsFromString($string, $delimiter=null)
+    protected function _getTagsFromString($string, $delimiter = null)
     {
         // Set the tag_delimiter option if no delimiter was passed.
         if (is_null($delimiter)) {
@@ -140,13 +142,13 @@ class Mixin_Tag extends Omeka_Record_Mixin
      * @param array|string $tags Either an array of tags or a delimited string
      * @return void
      */    
-    public function addTags($tags, $delimiter=null) {
+    public function addTags($tags, $delimiter = null) {
         // Set the tag_delimiter option if no delimiter was passed.
         if (is_null($delimiter)) {
             $delimiter = get_option('tag_delimiter');
         }
         
-        if (!$this->record->id) {
+        if (!$this->_record->id) {
             throw new Omeka_Record_Exception( __('A valid record ID # must be provided when tagging.') );
         }
         
@@ -155,13 +157,13 @@ class Mixin_Tag extends Omeka_Record_Mixin
         }
         
         foreach ($tags as $key => $tagName) {
-            $tag = $this->tagTable->findOrNew(trim($tagName));
+            $tag = $this->_tagTable->findOrNew(trim($tagName));
             
             $join = new Taggings;
                         
             $join->tag_id = $tag->id;
-            $join->relation_id = $this->record->id;
-            $join->type = $this->type;
+            $join->relation_id = $this->_record->id;
+            $join->type = $this->_type;
             $join->save();            
         }
     }
@@ -170,7 +172,7 @@ class Mixin_Tag extends Omeka_Record_Mixin
      * Calculate the difference between a tag string and a set of tags
      * @return array Keys('removed','added')
      */
-    public function diffTagString($string, $tags=null, $delimiter=null)
+    public function diffTagString($string, $tags = null, $delimiter = null)
     {
         // Set the tag_delimiter option if no delimiter was passed.
         if (is_null($delimiter)) {
@@ -178,7 +180,7 @@ class Mixin_Tag extends Omeka_Record_Mixin
         }
         
         if (!$tags) {
-            $tags = $this->record->Tags;
+            $tags = $this->_record->Tags;
         }
         
         $inputTags = $this->_getTagsFromString($string, $delimiter);
@@ -209,26 +211,25 @@ class Mixin_Tag extends Omeka_Record_Mixin
      * @param string $string A string of tags delimited by $delimiter
      * @return void
      */
-    public function applyTagString($string, $delimiter=null)
+    public function applyTagString($string, $delimiter = null)
     {
         // Set the tag_delimiter option if no delimiter was passed.
         if (is_null($delimiter)) {
             $delimiter = get_option('tag_delimiter');
         }
 
-        $tags = $this->record->Tags;
+        $tags = $this->_record->Tags;
         $diff = $this->diffTagString($string, $tags, $delimiter);
+        $nameForHook = strtolower($this->_type);
                 
         if (!empty($diff['added'])) {
             $this->addTags($diff['added']);
-            //PLUGIN HOOKS
-            fire_plugin_hook('add_' . strtolower(get_class($this->record)) . '_tag',  $this->record, $diff['added']);
+            fire_plugin_hook("add_{$nameForHook}_tag",  $this->_record, $diff['added']);
         }
 
         if (!empty($diff['removed'])) {
             $this->deleteTags($diff['removed']);
-            //PLUGIN HOOKS
-            fire_plugin_hook('remove_' . strtolower(get_class($this->record)) . '_tag',  $this->record, $diff['removed']);
+            fire_plugin_hook("remove_{$nameForHook}_tag",  $this->_record, $diff['removed']);
         } 
     }
 }
