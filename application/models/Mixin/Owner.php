@@ -11,7 +11,7 @@
  * @package Omeka
  * @subpackage Mixins
  */
-class Ownable extends Omeka_Record_Mixin
+class Mixin_Owner extends Omeka_Record_Mixin
 {
     protected $record;
     protected $column;

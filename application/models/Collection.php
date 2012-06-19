@@ -61,8 +61,8 @@ class Collection extends Omeka_Record implements Zend_Acl_Resource_Interface
                 
     protected function _initializeMixins()
     {
-        $this->_mixins[] = new PublicFeatured($this);
-        $this->_mixins[] = new Ownable($this);
+        $this->_mixins[] = new Mixin_PublicFeatured($this);
+        $this->_mixins[] = new Mixin_Owner($this);
     }
 
     /**

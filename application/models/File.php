@@ -111,7 +111,7 @@ class File extends Omeka_Record implements Zend_Acl_Resource_Interface
 
     protected function _initializeMixins()
     {
-        $this->_mixins[] = new ActsAsElementText($this);
+        $this->_mixins[] = new Mixin_ElementText($this);
     }
 
     protected function beforeInsert()

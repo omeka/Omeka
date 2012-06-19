@@ -14,7 +14,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Taggable extends Omeka_Record_Mixin
+class Mixin_Tag extends Omeka_Record_Mixin
 {
     public $tagTable;
     public $joinTable;

@@ -41,10 +41,10 @@ class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
     
     protected function _initializeMixins()
     {
-        $this->_mixins[] = new Taggable($this);
-        $this->_mixins[] = new Ownable($this);
-        $this->_mixins[] = new ActsAsElementText($this);
-        $this->_mixins[] = new PublicFeatured($this);
+        $this->_mixins[] = new Mixin_Tag($this);
+        $this->_mixins[] = new Mixin_Owner($this);
+        $this->_mixins[] = new Mixin_ElementText($this);
+        $this->_mixins[] = new Mixin_PublicFeatured($this);
     }
     
     // Accessor methods

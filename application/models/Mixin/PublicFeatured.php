@@ -13,7 +13,7 @@
  * @subpackage Mixins
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
  */
-class PublicFeatured extends Omeka_Record_Mixin
+class Mixin_PublicFeatured extends Omeka_Record_Mixin
 {
     private $_wasPublic;
     private $_wasFeatured;
