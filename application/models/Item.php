@@ -180,21 +180,7 @@ class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
             $this->addError('File Upload', $e->getMessage());
         }
     }
-    
-    /**
-     * Things to do in the beforeSave() hook:
-     * 
-     * Explicitly set the modified timestamp.
-     * 
-     * @return void
-     */
-    protected function beforeSave()
-    {
-        $booleanFilter = new Omeka_Filter_Boolean();
-        $this->public = $booleanFilter->filter($this->public);
-        $this->featured = $booleanFilter->filter($this->featured);
-    }
-    
+
     /**
      * Modify the user's tags for this item based on form input.
      * 

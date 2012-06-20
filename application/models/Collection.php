@@ -261,13 +261,6 @@ class Collection extends Omeka_Record implements Zend_Acl_Resource_Interface
         $this->owner_id = $user->id;
     }
 
-    protected function beforeSave()
-    {
-        $boolFilter = new Omeka_Filter_Boolean();
-        $this->featured = $boolFilter->filter($this->featured);
-        $this->public = $boolFilter->filter($this->public);
-    }
-
     /**
      * Required by Zend_Acl_Resource_Interface.
      *

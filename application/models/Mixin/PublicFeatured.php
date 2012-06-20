@@ -34,7 +34,8 @@ class Mixin_PublicFeatured extends Omeka_Record_Mixin
     public function setPublic($flag)
     {
         $this->_wasPublic = $this->isPublic();
-        $this->_record->public = (int)(boolean)$flag;
+        $filter = new Omeka_Filter_Boolean;
+        $this->_record->public = $filter->filter($flag);
     }
     
     public function isFeatured()
@@ -45,7 +46,8 @@ class Mixin_PublicFeatured extends Omeka_Record_Mixin
     public function setFeatured($flag)
     {
         $this->_wasFeatured = $this->isFeatured();
-        $this->_record->featured = (int)(boolean)$flag;
+        $filter = new Omeka_Filter_Boolean;
+        $this->_record->featured = $filter->filter($flag);
     }
     
     /**
@@ -62,17 +64,11 @@ class Mixin_PublicFeatured extends Omeka_Record_Mixin
         $action = ($flag ? '' : 'not_') . $state;
         return "make_{$modelNameForHook}_{$action}";
     }
-    
-    public function beforeSaveForm($post)
+
+    public function beforeSave()
     {
-        if (isset($post['public'])) {
-            $this->setPublic($post['public']);
-            unset($post['public']);
-        }
-        if (isset($post['featured'])) {
-            $this->setFeatured($post['featured']);
-            unset($post['featured']);
-        }
+        $this->setPublic($this->_record->public);
+        $this->setFeatured($this->_record->featured);
     }
     
     public function afterSave()
