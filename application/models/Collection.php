@@ -63,6 +63,7 @@ class Collection extends Omeka_Record implements Zend_Acl_Resource_Interface
     {
         $this->_mixins[] = new Mixin_PublicFeatured($this);
         $this->_mixins[] = new Mixin_Owner($this);
+        $this->_mixins[] = new Mixin_Timestamp($this);
     }
 
     /**
@@ -258,24 +259,6 @@ class Collection extends Omeka_Record implements Zend_Acl_Resource_Interface
             throw new RuntimeException(__("Cannot associate the collection with an unsaved user."));
         }
         $this->owner_id = $user->id;
-    }
-    
-    /**
-     * Set added and modified timestamps for the collection.
-     */
-    protected function beforeInsert()
-    {
-        $now = Zend_Date::now()->toString(self::DATE_FORMAT);
-        $this->added = $now;
-        $this->modified = $now;
-    }
-    
-    /**
-     * Set modified timestamp for the collection.
-     */
-    protected function beforeUpdate()
-    {
-        $this->modified = Zend_Date::now()->toString(self::DATE_FORMAT);
     }
 
     protected function beforeSave()
