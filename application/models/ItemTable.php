@@ -82,8 +82,6 @@ class ItemTable extends Omeka_Db_Table
      */
     public function filterByPublic($select, $isPublic)
     {
-        $isPublic = is_true($isPublic); // this makes sure that empty strings and unset parameters are false
-
         //Force a preview of the public items
         if ($isPublic) {
             $select->where('items.public = 1');
@@ -94,8 +92,6 @@ class ItemTable extends Omeka_Db_Table
 
     public function filterByFeatured($select, $isFeatured)
     {
-        $isFeatured = is_true($isFeatured); // this make sure that empty strings and unset parameters are false
-
         //filter items based on featured (only value of 'true' will return featured items)
         if ($isFeatured) {
             $select->where('items.featured = 1');
@@ -251,7 +247,7 @@ class ItemTable extends Omeka_Db_Table
      */
     public function filterByHasDerivativeImage($select, $hasDerivativeImage = true)
     {
-        $hasDerivativeImage = is_true($hasDerivativeImage) ? '1' : '0';
+        $hasDerivativeImage = $hasDerivativeImage ? '1' : '0';
 
         $db = $this->getDb();
 
@@ -274,17 +270,19 @@ class ItemTable extends Omeka_Db_Table
                 continue;
             }
 
+            $boolean = new Omeka_Filter_Boolean;
+
             switch ($paramName) {
                 case 'user':
                     $this->filterByUser($select, $paramValue);
                     break;
 
                 case 'public':
-                    $this->filterByPublic($select, $paramValue);
+                    $this->filterByPublic($select, $boolean->filter($paramValue));
                     break;
 
                 case 'featured':
-                    $this->filterByFeatured($select, $paramValue);
+                    $this->filterByFeatured($select, $boolean->filter($paramValue));
                     break;
 
                 case 'collection':
@@ -305,7 +303,7 @@ class ItemTable extends Omeka_Db_Table
                     break;
 
                 case 'hasImage':
-                    $this->filterByHasDerivativeImage($select, $paramValue);
+                    $this->filterByHasDerivativeImage($select, $boolean->filter($paramValue));
                     break;
 
                 case 'range':
