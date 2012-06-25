@@ -357,10 +357,8 @@ class ItemTable extends Omeka_Db_Table
     public function getSelect()
     {
         $select = parent::getSelect();
-        $acl = Omeka_Context::getInstance()->acl;
-        if ($acl) {
-            new ItemPermissions($select, $acl);
-        }
+        $permissions = new PublicPermissions('Items');
+        $permissions->apply($select, 'items');
 
         return $select;
     }
