@@ -25,7 +25,7 @@ class Omeka_Session_SaveHandler_DbTable
 
     public function init()
     {
-        $db = Omeka_Context::getInstance()->db;
+        $db = Zend_Registry::get('bootstrap')->getResource('Db');
         $tableName = $db->prefix . 'sessions';
         $this->_metadata = array(
             'id' => array(

@@ -330,9 +330,10 @@ class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
                          'featured' =>'Boolean');  
         $filter = new Zend_Filter_Input($filters, null, $post, $options);
         $post = $filter->getUnescaped();
-        
-        $acl = Omeka_Context::getInstance()->getAcl();
-        $currentUser = Omeka_Context::getInstance()->getCurrentUser();
+
+        $bootstrap = Zend_Registry::get('bootstrap');
+        $acl = $bootstrap->getResource('Acl');
+        $currentUser = $bootstrap->getResource('CurrentUser');
         // check permissions to make public and make featured
         if (!$acl->isAllowed($currentUser, 'Items', 'makePublic')) {
             unset($post['public']);

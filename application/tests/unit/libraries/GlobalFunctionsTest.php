@@ -15,12 +15,6 @@
  */
 class Omeka_GlobalFunctionsTest extends PHPUnit_Framework_TestCase
 {
-    public function setUp()
-    {
-        $this->context = Omeka_Context::getInstance();
-        $this->registry = Zend_Registry::getInstance();
-    }
-    
     public function testGetPluginIni()
     {
         $iniReader = $this->getMock('Omeka_Plugin_Ini', array(), array(), '', false);
@@ -33,26 +27,14 @@ class Omeka_GlobalFunctionsTest extends PHPUnit_Framework_TestCase
                  ->method('getPluginIniValue')
                  ->with('foobar', 'foo')
                  ->will($this->returnValue('returned ini value'));
-                 
-        $this->_setRegistry('plugin_ini_reader', $iniReader);
+
+        Zend_Registry::set('plugin_ini_reader', $iniReader);
         
         $this->assertEquals('returned ini value', get_plugin_ini('foobar', 'foo'));
     }
     
-    private function _setContext($name, $value)
-    {
-        $method = 'set' . $name;
-        $this->context->$method($value);
-    }
-    
-    private function _setRegistry($name, $value)
-    {
-        $this->registry->set($name, $value);
-    }
-    
     public function tearDown()
     {
-        Omeka_Context::resetInstance();
         Zend_Registry::_unsetInstance();
     }
 }

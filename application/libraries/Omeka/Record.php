@@ -113,15 +113,19 @@ abstract class Omeka_Record implements ArrayAccess
     
     /**
      * @param Omeka_Db|null $db (optional) Defaults to the Omeka_Db instance from 
-     * Omeka_Context.
+     * the bootstrap.
      */
     public function __construct($db = null)
     {
         //Dependency injection, for testing
         if (!$db) {
-            $db = Omeka_Context::getInstance()->getDb();
+            try {
+                $db = Zend_Registry::get('bootstrap')->getResource('Db');
+            } catch (Zend_Exception $e) {
+                // No bootstrap...
+            }
             if (!$db) {
-                throw new Omeka_Record_Exception("Unable to retrieve database instance from Omeka_Context.");
+                throw new Omeka_Record_Exception("Unable to retrieve database instance.");
             }
         }
         
@@ -722,7 +726,11 @@ abstract class Omeka_Record implements ArrayAccess
     public function setPluginBroker($broker = null)
     {
         if (!$broker) {
-            $broker = Omeka_Context::getInstance()->getPluginBroker();
+            try {
+                $broker = Zend_Registry::get('bootstrap')->getResource('PluginBroker');
+            } catch (Zend_Exception $e) {
+                $broker = null;
+            }
         }
         $this->_pluginBroker = $broker;
     }

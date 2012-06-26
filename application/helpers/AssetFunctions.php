@@ -121,7 +121,7 @@ function display_js($includeDefaults = true)
 
     if ($includeDefaults) {
         $dir = 'javascripts';
-        $config = Omeka_Context::getInstance()->getConfig('basic');
+        $config = Zend_Registry::get('bootstrap')->getResource('Config');
         $useInternalJs = isset($config->theme->useInternalJavascripts)
                 ? (bool) $config->theme->useInternalJavascripts
                 : false;

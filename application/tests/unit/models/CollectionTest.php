@@ -23,6 +23,12 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $this->pluginBroker = new Omeka_Plugin_Broker;
         $this->collection = new Collection($this->db);
         $this->profilerHelper = new Omeka_Test_Helper_DbProfiler($this->dbAdapter->getProfiler(), $this);
+        Zend_Registry::set('bootstrap', new Omeka_Test_Bootstrap());
+    }
+
+    public function tearDown()
+    {
+        Zend_Registry::_unsetInstance();
     }
     
     public function testHasNoCollectors()

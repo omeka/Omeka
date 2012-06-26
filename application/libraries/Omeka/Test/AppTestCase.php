@@ -53,7 +53,7 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         if (!isset($this->core)) {
             return;
         }
-        return $this->core->getBootstrap()->getContainer()->{$property};
+        return $this->core->getBootstrap()->getResource($property);
     }
 
     public function __set($property, $value)
@@ -131,7 +131,6 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
             Omeka_Test_Resource_Db::setDbAdapter($this->db->getAdapter());
         }
         Zend_Registry::_unsetInstance();
-        Omeka_Context::resetInstance();
         parent::tearDown();
     }
     
@@ -176,7 +175,7 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         $bs->auth->getStorage()->write($user->id);
         $bs->currentUser = $user;
         $bs->getContainer()->currentuser = $user;
-        $aclHelper = Zend_Controller_Action_HelperBroker::getHelper('Acl');
+        $aclHelper = Zend_Controller_Action_HelperBroker::getStaticHelper('Acl');
         $aclHelper->setCurrentUser($user);
     }
     

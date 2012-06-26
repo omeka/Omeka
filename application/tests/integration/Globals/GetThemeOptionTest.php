@@ -25,10 +25,17 @@ class Globals_GetThemeOptionTest extends PHPUnit_Framework_TestCase
     {
         // Configure the options so that get_theme_option() can automatically retrieve 
         // options for the given theme.
-        Omeka_Context::getInstance()->setOptions(array(
+        $bootstrap = new Omeka_Test_Bootstrap;
+        $bootstrap->getContainer()->options = array(
             Theme::PUBLIC_THEME_OPTION => self::THEME_NAME,
             'theme_' . self::THEME_NAME . '_options' => serialize($this->_themeOptions)
-        ));
+        );
+        Zend_Registry::set('bootstrap', $bootstrap);
+    }
+
+    public function tearDown()
+    {
+        Zend_Registry::_unsetInstance();
     }
     
     public function testWithoutThemeName()

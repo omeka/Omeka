@@ -1,6 +1,5 @@
 <?php 
 require_once 'Omeka/Db.php';
-require_once 'Omeka/Context.php';
 require_once 'Omeka/Db/Table.php';
 require_once 'Inflector.php';
 class Core_OmekaDbTest extends PHPUnit_Framework_TestCase

@@ -17,8 +17,15 @@ class Omeka_Models_CollectionTableTest extends PHPUnit_Framework_TestCase
     {
         $this->dbAdapter = new Zend_Test_DbAdapter();
         $this->db = new Omeka_Db($this->dbAdapter, 'omeka_');
-        Omeka_Context::getInstance()->setDb($this->db);
+        $bootstrap = new Omeka_Test_Bootstrap;
+        $bootstrap->getContainer()->db = $this->db;
+        Zend_Registry::set('bootstrap', $bootstrap);
         $this->table = new CollectionTable('Collection', $this->db);
+    }
+
+    public function tearDown()
+    {
+        Zend_Registry::_unsetInstance();
     }
 
     public function testGetSelectAclIntegration()
@@ -31,11 +38,9 @@ class Omeka_Models_CollectionTableTest extends PHPUnit_Framework_TestCase
         $acl = new Zend_Acl;
         $acl->add(new Zend_Acl_Resource('Collections'));
         $acl->deny(null, 'Collections', 'showNotPublic');
-        Omeka_Context::getInstance()->setAcl($acl);
+        Zend_Registry::get('bootstrap')->getContainer()->acl = $acl;
         
         $this->assertContains("WHERE (collections.public = 1)", (string)$this->table->getSelect());
-
-        Omeka_Context::resetInstance();
     }
     
     public function testSearchFilters()

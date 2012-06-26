@@ -218,7 +218,7 @@ abstract class Omeka_File_Ingest_Abstract
      */
     private function _logException(Exception $e)
     {
-        $logger = Omeka_Context::getInstance()->getLogger();
+        $logger = Zend_Registry::get('bootstrap')->getResource('Logger');
         if ($logger) {
             $logger->log($e->getMessage(), Zend_Log::WARN);
         }

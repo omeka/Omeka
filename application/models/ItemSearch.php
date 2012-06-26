@@ -17,6 +17,7 @@
 class ItemSearch
 {
     protected $_select;
+    protected $_db;
     
     /**
      * Constructor.  Adds a SQL_CALC_FOUND_ROWS column to the sql statement
@@ -24,9 +25,10 @@ class ItemSearch
      * @param Zend_Db_Select
      * @return void
      */
-    public function __construct($select)
+    public function __construct($select, $db)
     {   
         $this->_select = $select;
+        $this->_db = $db;
     }
     
     private function _getSelect()
@@ -36,7 +38,7 @@ class ItemSearch
     
     private function _getDb()
     {
-        return Omeka_Context::getInstance()->getDb();
+        return $this->_db;
     }
     
     /**

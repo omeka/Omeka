@@ -63,7 +63,7 @@ class ItemTable extends Omeka_Db_Table
     {
         //Apply the simple or advanced search
         if (isset($params['search']) || isset($params['advanced'])) {
-            $search = new ItemSearch($select);
+            $search = new ItemSearch($select, $this->getDb());
             if ($simpleTerms = @$params['search']) {
                 $search->simple($simpleTerms);
             }

@@ -28,7 +28,7 @@ class Mixin_Owner extends Omeka_Record_Mixin
     public function beforeInsert()
     {
         $column = $this->_column;
-        $user = Omeka_Context::getInstance()->getCurrentUser();
+        $user = Zend_Registry::get('bootstrap')->getResource('CurrentUser');
         if ($user && !$this->_record->$column) {
             $this->setOwner($user);
         }

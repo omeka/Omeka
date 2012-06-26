@@ -13,13 +13,14 @@ class Omeka_CaptchaTest extends PHPUnit_Framework_TestCase
 {   
     public function setUp()
     {
-        $this->context = Omeka_Context::getInstance();
-        $this->context->setOptions = array();
+        $this->bootstrap = new Omeka_Test_Bootstrap;
+        $this->bootstrap->getContainer()->options = array();
+        Zend_Registry::set('bootstrap', $this->bootstrap);
     }
 
     public function tearDown()
     {
-        Omeka_Context::resetInstance();
+        Zend_Registry::_unsetInstance();
     }
 
     public function testIsConfigured()
@@ -30,7 +31,7 @@ class Omeka_CaptchaTest extends PHPUnit_Framework_TestCase
             Omeka_Captcha::PUBLIC_KEY_OPTION => 'public_key',
             Omeka_Captcha::PRIVATE_KEY_OPTION => 'private_key'
             );
-        $this->context->setOptions($options);
+        $this->bootstrap->getContainer()->options = $options;
 
         $this->assertTrue(Omeka_Captcha::isConfigured());
     }
@@ -43,7 +44,7 @@ class Omeka_CaptchaTest extends PHPUnit_Framework_TestCase
             Omeka_Captcha::PUBLIC_KEY_OPTION => 'public_key',
             Omeka_Captcha::PRIVATE_KEY_OPTION => 'private_key'
             );
-        $this->context->setOptions($options);
+        $this->bootstrap->getContainer()->options = $options;
 
         $captcha = Omeka_Captcha::getCaptcha();
         $this->assertNotNull($captcha);

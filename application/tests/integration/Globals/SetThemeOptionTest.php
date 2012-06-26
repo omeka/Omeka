@@ -23,16 +23,23 @@ class Globals_SetThemeOptionTest extends PHPUnit_Framework_TestCase
     );
     
     public function setUp()
-    {        
-        Omeka_Context::getInstance()->setOptions(array(
+    {
+        $bootstrap = new Omeka_Test_Bootstrap;
+        $bootstrap->getContainer()->options = array(
             Theme::PUBLIC_THEME_OPTION => self::THEME,
             self::THEME_OPTIONS_OPTION => serialize($this->_themeOptions)
-        ));
+        );
         
         $this->dbAdapter = new Zend_Test_DbAdapter();
         $this->db = new Omeka_Db($this->dbAdapter, 'omeka_');
 
-        Omeka_Context::getInstance()->setDb($this->db);
+        $bootstrap->getContainer()->db = $this->db;
+        Zend_Registry::set('bootstrap', $bootstrap);
+    }
+
+    public function tearDown()
+    {
+        Zend_Registry::_unsetInstance();
     }
     
     public function testDatabaseInteraction()

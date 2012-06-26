@@ -17,6 +17,7 @@ class Omeka_Test_Resource_DbTest extends PHPUnit_Framework_TestCase
     {
         $this->app = new Zend_Application('foobar');
         $this->bootstrap = new Zend_Application_Bootstrap_Bootstrap($this->app);
+        Zend_Registry::set('bootstrap', $this->bootstrap);
         // This is something crazy that we need so that the bootstrap can resolve
         // plugin resource names from class names.
         $this->bootstrap->setOptions(array(
@@ -108,5 +109,7 @@ class Omeka_Test_Resource_DbTest extends PHPUnit_Framework_TestCase
         if (isset($dbHelper)) {
             $dbHelper->dropTables();
         }
+
+        Zend_Registry::_unsetInstance();
     }
 }

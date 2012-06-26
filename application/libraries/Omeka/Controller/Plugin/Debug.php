@@ -33,13 +33,13 @@ class Omeka_Controller_Plugin_Debug extends Zend_Controller_Plugin_Abstract
      */
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
-        $config = Omeka_Context::getInstance()->config;
+        $bootstrap = Zend_Registry::get('bootstrap');
+        $config = $bootstrap->getResource('Config');
         
         $debugRequests = $config->debug->request;
         
         if ($debugRequests) {
-            $router = Omeka_Context::getInstance()->getFrontController()
-                                                  ->getRouter();
+            $router = Zend_Controller_Front::getInstance()->getRouter();
             $markup = $this->_getRequestMarkup($request, $router);
             $this->_requestMarkup = $markup;
         }
@@ -62,11 +62,12 @@ class Omeka_Controller_Plugin_Debug extends Zend_Controller_Plugin_Abstract
      */
     public function dispatchLoopShutdown()
     {
-        $enableProfiler = Omeka_Context::getInstance()->config->debug->profileDb;
+        $bootstrap = Zend_Registry::get('bootstrap');
+        $enableProfiler = $bootstrap->getResource('Config')->debug->profileDb;
         if (!$enableProfiler) {
             return;
         }
-        $profiler = Omeka_Context::getInstance()->db->getProfiler();
+        $profiler = $bootstrap->getResource('Db')->getProfiler();
         if ($profiler) {
             $markup = $this->_getProfilerMarkup($profiler);
             $this->getResponse()->setBody($markup);

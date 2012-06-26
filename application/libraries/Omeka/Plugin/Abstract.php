@@ -91,7 +91,7 @@ abstract class Omeka_Plugin_Abstract
      */
     public function __construct()
     {
-        $this->_db = Omeka_Context::getInstance()->getDb();
+        $this->_db = Zend_Registry::get('bootstrap')->getResource('Db');
     }
     
     /**

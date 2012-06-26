@@ -29,9 +29,16 @@ class Helpers_CollectionFunctions_GetCollectionsTest extends PHPUnit_Framework_T
         $this->db->expects($this->any())
                  ->method('getTable')
                  ->with('Collection')
-                 ->will($this->returnValue($this->collectionTable));         
-                 
-        Omeka_Context::getInstance()->setDb($this->db);         
+                 ->will($this->returnValue($this->collectionTable));
+
+        $bootstrap = new Omeka_Test_Bootstrap;
+        $bootstrap->getContainer()->db = $this->db;
+        Zend_Registry::set('bootstrap', $bootstrap);
+    }
+
+    public function tearDown()
+    {
+        Zend_Registry::_unsetInstance();
     }
     
     public function testDelegatesToCollectionTable()

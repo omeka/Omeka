@@ -63,8 +63,8 @@ class Omeka_Core extends Zend_Application
             $options = CONFIG_DIR . '/' . 'application.ini';
         }
         parent::__construct($environment, $options);
-        
-        $this->getBootstrap()->setContainer(Omeka_Context::getInstance());
+
+        Zend_Registry::set('bootstrap', $this->getBootstrap());
     }
     
     /**

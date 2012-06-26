@@ -21,7 +21,7 @@
  */
 function get_option($name)
 {
-    $options = Omeka_Context::getInstance()->getOptions();
+    $options = Zend_Registry::get('bootstrap')->getResource('Options');
     if (isset($options[$name])) {
         return $options[$name];
     }
@@ -42,11 +42,11 @@ function set_option($name, $value)
     $db = get_db();
     $db->query("REPLACE INTO $db->Option (name, value) VALUES (?, ?)", array($name, $value));
 
+    $bootstrap = Zend_Registry::get('bootstrap');
     //Now update the options hash so that any subsequent requests have it available
-    $options = Omeka_Context::getInstance()->getOptions();
+    $options = $bootstrap->getResource('Options');
     $options[$name] = $value;
-
-    Omeka_Context::getInstance()->setOptions($options);
+    $bootstrap->getContainer()->options = $options;
 }
 
 /**
@@ -64,11 +64,12 @@ function delete_option($name)
     WHERE `name` = ?";
     $db->query($sql, array($name));
 
-    $options = Omeka_Context::getInstance()->getOptions();
+    $bootstrap = Zend_Registry::get('bootstrap');
+    $options = $bootstrap->getResource('Options');
     if (isset($options[$name])) {
         unset($options[$name]);
     }
-    Omeka_Context::getInstance()->setOptions($options);
+    $bootstrap->getContainer()->options = $options;
 }
 
 /**
@@ -111,7 +112,7 @@ function pluck($col, $array)
  */
 function current_user()
 {
-    return Omeka_Context::getInstance()->getCurrentUser();
+    return Zend_Registry::get('bootstrap')->getResource('CurrentUser');
 }
 
 /**
@@ -121,7 +122,7 @@ function current_user()
  */
 function get_db()
 {
-    $db = Omeka_Context::getInstance()->getDb();
+    $db = Zend_Registry::get('bootstrap')->getResource('Db');
     if (!$db) {
         throw new RuntimeException("Database not available!");
     }
@@ -153,8 +154,13 @@ function debug($msg)
  */
 function _log($msg, $priority = Zend_Log::INFO)
 {
-    $log = Omeka_Context::getInstance()->logger;
-    if (!$log) {
+    try {
+        $bootstrap = Zend_Registry::get('bootstrap');
+    } catch (Zend_Exception $e) {
+        return;
+    }
+    
+    if (!($log = $bootstrap->getResource('Logger'))) {
         return;
     }
     $log->log($msg, $priority);
@@ -387,7 +393,7 @@ function clear_filters($filterName = null)
  */
 function get_acl()
 {
-    return Omeka_Context::getInstance()->getAcl();
+    return Zend_Registry::get('bootstrap')->getResource('Acl');
 }
 
 /**
@@ -675,7 +681,7 @@ function set_theme_option($optionName, $optionValue, $themeName = null)
  */
 function get_user_roles()
 {
-    $roles = Omeka_Context::getInstance()->getAcl()->getRoles();
+    $roles = get_acl()->getRoles();
     foreach($roles as $key => $val) {
         $roles[$val] = __(Inflector::humanize($val));
         unset($roles[$key]);

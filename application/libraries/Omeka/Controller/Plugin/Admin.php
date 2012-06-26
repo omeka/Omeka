@@ -95,12 +95,11 @@ class Omeka_Controller_Plugin_Admin extends Zend_Controller_Plugin_Abstract
     /**
      * Return the auth object.
      *
-     * @uses Omeka_Context
      * @return Zend_Auth
      */
     public function getAuth()
     {
-        return Omeka_Context::getInstance()->getAuth();
+        return Zend_Auth::getInstance();
     }
 
     /**

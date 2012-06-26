@@ -43,7 +43,7 @@ $process = $db->getTable('Process')->find($processId);
 // Get the user to run the process under
 $processUserId = $process->user_id;
 $processUser = $db->getTable('User')->find($processUserId);
-Omeka_Context::getInstance()->setCurrentUser($processUser);
+Zend_Registry::get('bootstrap')->getContainer()->currentuser = $processUser;
 
 // Get the name of the process class to run
 $processClass = $process->class;

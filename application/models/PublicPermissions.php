@@ -25,13 +25,13 @@ class PublicPermissions
      */
     public function __construct($resource)
     {
-        $context = Omeka_Context::getInstance();
-        $acl = $context->acl;
+        $bootstrap = Zend_Registry::get('bootstrap');
+        $acl = $bootstrap->getResource('Acl');
         if (!$acl || !$acl->has($resource)) {
             return;
         }
 
-        $currentUser = $context->getCurrentUser();
+        $currentUser = $bootstrap->getResource('CurrentUser');
         $this->_allPermission = $acl->isAllowed($currentUser, $resource, 'showNotPublic');
         $this->_selfPermission = $acl->isAllowed($currentUser, $resource, 'showSelfNotPublic');
     }
