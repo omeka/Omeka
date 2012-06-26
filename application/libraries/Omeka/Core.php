@@ -13,15 +13,13 @@
  * setting up class autoload, database, configuration files, logging, plugins,
  * front controller, etc.
  *
- * This class delegates to the Omeka_Context instance, which holds all state
- * that get initialized by this class.  Methods can be called on this class
- * as though it were an instance of Omeka_Context.
+ * When any core resource returns from init(), the result is stored in the
+ * bootstrap container. Other parts of the application can get the resources
+ * from the bootstrap when needed.
  *
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private
- * @uses Omeka_Context
  * @package Omeka
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Omeka_Core extends Zend_Application
 {
