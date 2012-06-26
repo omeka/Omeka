@@ -38,7 +38,7 @@
             <div class="item-description">
                 <p><?php echo $text; ?></p>
             </div>
-            <?php elseif ($description = item(array'Dublin Core', 'Description'), array('snippet'=>250))): ?>
+            <?php elseif ($description = item(array('Dublin Core', 'Description'), array('snippet'=>250))): ?>
             <div class="item-description">
                 <?php echo $description; ?>
             </div>
