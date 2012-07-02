@@ -20,7 +20,23 @@ class ElementText extends Omeka_Record
     public $element_id;
     public $html = 0;
     public $text;
-    
+
+    /**
+     * Validate the element text prior to saving.
+     */
+    protected function _validate()
+    {
+        if ($this->record_id < 1) {
+            $this->addError('record_id', __('Invalid record ID.'));
+        }
+        if (empty($this->record_type)) {
+            $this->addError('record_type', __('All element texts must have a record type.'));
+        }
+        if ($this->element_id < 1) {
+            $this->addError('element_id', __('Invalid element ID.'));
+        }
+    }
+
     public function __toString()
     {
         return (string) $text;
