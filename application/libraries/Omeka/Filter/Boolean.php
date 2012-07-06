@@ -6,13 +6,9 @@
  */
 
 /**
- * A Zend_Filter implementation that converts any boolean form value passed to 
- * it to a string "1" or "0". 
- *
- * @todo This deserves some testing to see whether or not it should return 
- * a true boolean or a string representation (not sure how the database 
- * inserts booleans) and whether or not it can be tricked into returning the
- * wrong value under certain circumstances.
+ * A Zend_Filter implementation that converts any boolean value passed to 
+ * it to an integer: 1 or 0.
+ * 
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
@@ -26,8 +22,8 @@ class Omeka_Filter_Boolean implements Zend_Filter_Interface
      */
     public function filter($value)
     {
-        return in_array($value, 
-                        array('true', 'On', 'on', 1, "1", true), 
-                        true) ? "1" : "0";
+        return in_array($value, array('true', 'On', 'on', 1, "1", true), true)
+            ? 1
+            : 0;
     }
 }

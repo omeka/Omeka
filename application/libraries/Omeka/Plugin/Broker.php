@@ -8,45 +8,42 @@
 /**
  * Plugin Broker for Omeka.
  *
- * For example, $broker->add_action_contexts($controller) would call the 
- * 'add_action_contexts' on all plugins, and it would provide the controller
- * object as the first argument to all implementations of that hook. 
+ * For example, $broker->callHook('add_action_contexts', $controller)
+ * would call the 'add_action_contexts' on all plugins, and it would
+ * provide the controller object as the first argument to all
+ * implementations of that hook.
  *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Omeka_Plugin_Broker 
-{        
+class Omeka_Plugin_Broker
+{
     /**
      * Array of hooks that have been implemented for plugins.
      *
      * @var array
      */
     protected $_callbacks = array();
-    
+
     /**
-     * Array of classes to delegate plugin API calls to.
-     * 
+     * Stores all defined filters.
+     *
+     * Storage in array where $_filters['filterName']['priority']['plugin'] = $hook;
+     *
+     * @todo Should this storage method be merged into the Plugin Broker class?
+     * Probably.  That way hooks and filters will be no different in the storage
+     * space (in the manner of Wordpress).
      * @var array
      */
-    protected $_delegates = array();
-    
+    protected $_filters = array();
+
     /**
      * The directory name of the current plugin (used for calling hooks)
      *
      * @var string
      */
     protected $_current;
-    
-    /**
-     * Delegation to other plugin API classes is set up here.
-     */
-    public function __construct() 
-    {        
-        // Should be able to delegate to the plugin filters
-        $this->_delegates[] = new Omeka_Plugin_Filters($this);        
-    }
-        
+
     /**
      * Add a hook implementation for a plugin.
      *
@@ -57,14 +54,14 @@ class Omeka_Plugin_Broker
      * @return void
      */
     public function addHook($hook, $callback, $plugin = null)
-    {    
+    {
         if ($plugin) {
             $currentPluginDirName = $plugin;
         } else {
-            $currentPluginDirName = $this->getCurrentPluginDirName(); 
+            $currentPluginDirName = $this->getCurrentPluginDirName();
         }
 
-        // Null or empty plugin name leads to false negatives when 
+        // Null or empty plugin name leads to false negatives when
         // looking up callbacks.
         if (!$currentPluginDirName) {
             throw new RuntimeException("Cannot add a hook without an "
@@ -73,7 +70,7 @@ class Omeka_Plugin_Broker
 
         $this->_callbacks[$hook][$currentPluginDirName] = $callback;
     }
-    
+
     /**
      * Get the hook implementation for a plugin.
      *
@@ -83,28 +80,28 @@ class Omeka_Plugin_Broker
      * @return callback|null
      */
     public function getHook($pluginDirName, $hook)
-    {   
+    {
         if ($pluginDirName instanceof Plugin) {
             $pluginDirName = $pluginDirName->getDirectoryName();
         }
-             
-        if (array_key_exists($hook, $this->_callbacks) 
-            && is_array($this->_callbacks[$hook]) 
+
+        if (array_key_exists($hook, $this->_callbacks)
+            && is_array($this->_callbacks[$hook])
             && array_key_exists($pluginDirName, $this->_callbacks[$hook])
         ) {
             return $this->_callbacks[$hook][$pluginDirName];
         }
         return null;
     }
-    
+
     /**
      * Set the currently-focused plugin by directory name.
      *
      * The plugin helper functions do not have any way of determining what
-     * plugin to is currently in focus.  These get/setCurrentPluginDirName 
-     * methods allow the broker to know how to delegate to specific plugins if 
+     * plugin to is currently in focus.  These get/setCurrentPluginDirName
+     * methods allow the broker to know how to delegate to specific plugins if
      * necessary.
-     * 
+     *
      * @param string $pluginDirName Plugin to set as current.
      * @return void
      */
@@ -112,7 +109,7 @@ class Omeka_Plugin_Broker
     {
         $this->_current = $pluginDirName;
     }
-    
+
     /**
      * Get the directory name of the currently-focused plugin.
      *
@@ -123,24 +120,23 @@ class Omeka_Plugin_Broker
     {
         return $this->_current;
     }
-            
+
     /**
      * Call a hook by name.
      * Hooks can either be called globally or for a specific plugin only.
      *
-     * @see Omeka_Plugin_Broker::__call()
      * @param string $hook Name of the hook.
      * @param array $args Arguments that are passed to each hook implementation.
-     * @param Plugin|string $plugin Optional name of the plugin for which to 
+     * @param Plugin|string $plugin Optional name of the plugin for which to
      * invoke the hook.
      * @return void
      */
-    public function callHook($hook, $args, $plugin = null)
+    public function callHook($hook, $args = array(), $plugin = null)
     {
         if (empty($this->_callbacks[$hook])) {
             return;
         }
-        
+
         // If we are calling the hook for a single function, do that and return.
         if ($plugin) {
             if ($callback = $this->getHook($plugin, $hook)) {
@@ -148,40 +144,134 @@ class Omeka_Plugin_Broker
             }
             return;
         }
-        
+
         // Otherwise iterate through all the hooks and call each in turn.
         foreach ($this->_callbacks[$hook] as $pluginDirName => $callback) {
             //Make sure the callback executes within the scope of the current plugin
             $this->setCurrentPluginDirName($pluginDirName);
             call_user_func_array($callback, $args);
         }
-        
+
         // Reset the value for current plugin after this loop finishes
-        $this->setCurrentPluginDirName(null);       
+        $this->setCurrentPluginDirName(null);
     }
-    
+
     /**
-     * Handle dispatching for all plugin calls.
+     * Add a filter implementation.
      *
-     * Check for delegating to other classes that handle plugin API stuff first,
-     * i.e. Omeka_Plugin_Filters etc.
-     *
-     * @see Omeka_Plugin_Broker::__construct()
-     * @return mixed
+     * @see applyFilters()
+     * @param string|array $filterName Name of filter being implemented.
+     * @param callback $callback PHP callback for filter implementation.
+     * @param integer|null (optional) Priority. A lower priority will
+     * cause a filter to be run before those with higher priority.
+     * @return void
      */
-    public function __call($hook, $args) 
+    public function addFilter($filterName, $callback, $priority = 10)
     {
-        // Delegation
-        foreach ($this->_delegates as $delegator) {
-            if(method_exists($delegator, $hook)) {
-                return call_user_func_array(array($delegator, $hook), $args);
+        $this->_filters[$this->_getFilterKey($filterName)][$priority][$this->_getFilterNamespace()] = $callback;
+    }
+
+    /**
+     * Retrieve the namespace to use for the filter to be added.
+     *
+     * @return string Name of the current plugin (if applicable). Otherwise, a
+     * magic constant that denotes globally applied filters.
+     */
+    protected function _getFilterNamespace()
+    {
+        if($pluginName = $this->getCurrentPluginDirName()) {
+            return $pluginName;
+        }
+
+        return '__global__';
+    }
+
+    /**
+     * Retrieve the key used for indexing the filter. The filter name should be
+     * either a string or an array of strings. If the filter name is an object,
+     * that might cause fiery death when using the serialized value for an array
+     * key.
+     *
+     * @see addFilters()
+     * @param string|array $name Filter name.
+     * @return string Key for filter indexing.
+     */
+    protected function _getFilterKey($name)
+    {
+        return is_string($name) ? $name : serialize($name);
+    }
+
+    /**
+     * Return all the filters for a specific hook in the correct order of
+     * execution.
+     *
+     * @param string|array $hookName Filter name.
+     * @return array Indexed array of filter callbacks.
+     */
+    public function getFilters($hookName)
+    {
+        $filterKey = $this->_getFilterKey($hookName);
+        if (!isset($this->_filters[$filterKey])) {
+            return array();
+        }
+
+        $filters = (array) $this->_filters[$filterKey];
+
+        ksort($filters);
+
+        return $filters;
+    }
+
+    /**
+     * Clear all implementations for a filter (or all filters).
+     *
+     * @param string|null $name The name of the filter to clear.  If
+     *  null or omitted, all filters will be cleared.
+     * @return void
+     */
+    public function clearFilters($name = null)
+    {
+        if ($name) {
+            unset($this->_filters[$this->_getFilterKey($name)]);
+        } else {
+            $this->_filters = array();
+        }
+    }
+
+    /**
+     * Run an arbitrary value through a set of filters.
+     *
+     * @see addFilter()
+     * @param mixed $filterName Name of the filter to apply.
+     * @param mixed $value Value to be filtered.
+     * @param array $otherParams Optional set of parameters to pass in addition
+     * to the value to filter.  If these are passed, they will show up as
+     * sequential arguments to the filter implementation after the value to
+     * filter.
+     * @return mixed Result of filtering $value.
+     */
+    public function applyFilters($filterName, $value, array $otherParams = array())
+    {
+        $filters = $this->getFilters($filterName);
+        if ($filters) {
+            // Filters are indexed by priority, then by plugin name.
+            foreach ($filters as $priority => $filterSet) {
+                // Each set of filters has a key that corresponds to a plugin
+                // name, but that's not particularly important for this
+                // particular loop. It only matters during lookup to determine
+                // whether or not a specific filter has been set already.
+                foreach ($filterSet as $filter) {
+                    // The value must be prepended to the argument set b/c it is
+                    // always the first argument to any filter callback.
+                    $tempArgs = $otherParams;
+                    array_unshift($tempArgs, $value);
+                    $value = call_user_func_array($filter, $tempArgs);
+                }
             }
         }
-        
-        // Call the hook for the plugins
-        return $this->callHook($hook, $args);
+        return $value;
     }
-    
+
     /**
      * Register the plugin broker so that plugin writers can use global functions
      * like add_plugin_hook() to interact with the plugin API.
@@ -189,7 +279,7 @@ class Omeka_Plugin_Broker
      * @return void
      */
     public function register()
-    { 
+    {
         Zend_Registry::set('pluginbroker', $this);
     }
 }

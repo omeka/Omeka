@@ -51,7 +51,11 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
     {
         $record = new DummyRecord($this->db);
         $this->assertNull($record->getPluginBroker());
-        Omeka_Context::getInstance()->setPluginBroker($this->pluginBroker);
+
+        $bootstrap = new Omeka_Test_Bootstrap;
+        $bootstrap->getContainer()->pluginbroker = $this->pluginBroker;
+        Zend_Registry::set('bootstrap', $bootstrap);
+        
         $this->assertSame($this->pluginBroker, $record->getPluginBroker());
         $mockPluginBroker = $this->getMock('Omeka_Plugin_Broker', array(), array(), '', false);
         $record->setPluginBroker($mockPluginBroker);
@@ -332,7 +336,7 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         self::$_eventStack = array();
-        Omeka_Context::resetInstance();
+        Zend_Registry::_unsetInstance();
     }
     
     public function beforeValidateDummy()

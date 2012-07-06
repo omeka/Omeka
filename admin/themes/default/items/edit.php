@@ -1,5 +1,5 @@
 <?php
-    $itemTitle = strip_formatting(item('Dublin Core', 'Title'));
+    $itemTitle = strip_formatting(item(array('Dublin Core', 'Title')));
     if ($itemTitle != '' && $itemTitle != __('[Untitled]')) {
         $itemTitle = ': &quot;' . $itemTitle . '&quot; ';
     } else {

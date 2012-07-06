@@ -13,15 +13,13 @@
  * setting up class autoload, database, configuration files, logging, plugins,
  * front controller, etc.
  *
- * This class delegates to the Omeka_Context instance, which holds all state
- * that get initialized by this class.  Methods can be called on this class
- * as though it were an instance of Omeka_Context.
+ * When any core resource returns from init(), the result is stored in the
+ * bootstrap container. Other parts of the application can get the resources
+ * from the bootstrap when needed.
  *
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private
- * @uses Omeka_Context
  * @package Omeka
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Omeka_Core extends Zend_Application
 {
@@ -63,8 +61,8 @@ class Omeka_Core extends Zend_Application
             $options = CONFIG_DIR . '/' . 'application.ini';
         }
         parent::__construct($environment, $options);
-        
-        $this->getBootstrap()->setContainer(Omeka_Context::getInstance());
+
+        Zend_Registry::set('bootstrap', $this->getBootstrap());
     }
     
     /**
@@ -180,8 +178,13 @@ class Omeka_Core extends Zend_Application
      */
     private function _displayErrorPage($e, $title = null)
     {
-        error_log("Omeka fatal error: $e");
-        $displayError = (bool) ini_get('display_errors');
+        if (($logger = $this->getBootstrap()->getResource('Logger')))
+        {
+            $logger->log($e, Zend_Log::ERR);
+        } else {
+            error_log("Omeka fatal error: $e");
+        }
+        $displayError = $this->getEnvironment() != 'production';
         header("HTTP/1.0 500 Internal Server Error");
         require VIEW_SCRIPTS_DIR . '/error/index.php';
     }

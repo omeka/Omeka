@@ -59,18 +59,16 @@ function get_current_file()
  * Retrieve metadata for a given field in the current file.
  *
  * @since 1.0
- * @param string $elementSetName
- * @param string $elementName
- * @param array $options
+ * @param string|array $metadata
  * @param File|null $file
  * @return mixed
  */
-function item_file($elementSetName, $elementName = null, $options = array(), $file = null)
+function item_file($metadata, $options = array(), $file = null)
 {
     if (!$file) {
         $file = get_current_file();
     }
-    return __v()->recordMetadata($file, $elementSetName, $elementName, $options);
+    return __v()->recordMetadata($file, $metadata, $options);
 }
 
 /**

@@ -41,10 +41,11 @@ class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
     
     protected function _initializeMixins()
     {
-        $this->_mixins[] = new Taggable($this);
-        $this->_mixins[] = new Ownable($this);
-        $this->_mixins[] = new ActsAsElementText($this);
-        $this->_mixins[] = new PublicFeatured($this);
+        $this->_mixins[] = new Mixin_Tag($this);
+        $this->_mixins[] = new Mixin_Owner($this);
+        $this->_mixins[] = new Mixin_ElementText($this);
+        $this->_mixins[] = new Mixin_PublicFeatured($this);
+        $this->_mixins[] = new Mixin_Timestamp($this);
     }
     
     // Accessor methods
@@ -79,14 +80,6 @@ class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
     public function getFiles()
     {
         return $this->getTable('File')->findByItem($this->id, null, 'order');
-    }
-    
-    /**
-     * @return array Set of ElementText records.
-     */
-    public function getElementText()
-    {
-        return $this->getElementTextRecords();
     }
     
     /**
@@ -187,22 +180,7 @@ class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
             $this->addError('File Upload', $e->getMessage());
         }
     }
-    
-    /**
-     * Things to do in the beforeSave() hook:
-     * 
-     * Explicitly set the modified timestamp.
-     * 
-     * @return void
-     */
-    protected function beforeSave()
-    {
-        $this->modified = Zend_Date::now()->toString(self::DATE_FORMAT);
-        $booleanFilter = new Omeka_Filter_Boolean();
-        $this->public = $booleanFilter->filter($this->public);
-        $this->featured = $booleanFilter->filter($this->featured);
-    }
-    
+
     /**
      * Modify the user's tags for this item based on form input.
      * 
@@ -352,9 +330,10 @@ class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
                          'featured' =>'Boolean');  
         $filter = new Zend_Filter_Input($filters, null, $post, $options);
         $post = $filter->getUnescaped();
-        
-        $acl = Omeka_Context::getInstance()->getAcl();
-        $currentUser = Omeka_Context::getInstance()->getCurrentUser();
+
+        $bootstrap = Zend_Registry::get('bootstrap');
+        $acl = $bootstrap->getResource('Acl');
+        $currentUser = $bootstrap->getResource('CurrentUser');
         // check permissions to make public and make featured
         if (!$acl->isAllowed($currentUser, 'Items', 'makePublic')) {
             unset($post['public']);

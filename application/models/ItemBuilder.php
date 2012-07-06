@@ -104,7 +104,7 @@ class ItemBuilder extends Omeka_Record_Builder
         // The rest of the element texts will get added as per usual.
         foreach ($this->_elementTexts as $elementSetName => $textArray) {
             foreach ($textArray as $elementName => $elementTextSet) {
-                $etRecordSet = $item->getElementTextsByElementNameAndSetName($elementName, $elementSetName);
+                $etRecordSet = $item->getElementTexts($elementSetName, $elementName);
                 foreach ($elementTextSet as $elementTextIndex => $textAttr) {
                     // If we have an existing ElementText record, use that
                     // instead of adding a new one.
@@ -116,7 +116,7 @@ class ItemBuilder extends Omeka_Record_Builder
                     } else {
                         // Otherwise we should just append the new text to the 
                         // pre-existing ones.
-                        $elementRecord = $item->getElementByNameAndSetName($elementName, $elementSetName);
+                        $elementRecord = $item->getElement($elementSetName, $elementName);
                         $item->addTextForElement($elementRecord, $textAttr['text'], $textAttr['html']);
                     }
                 }

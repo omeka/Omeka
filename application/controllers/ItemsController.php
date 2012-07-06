@@ -76,7 +76,7 @@ class ItemsController extends Omeka_Controller_Action
     
     protected function _getItemElementSets()
     {
-        return $this->_helper->db->getTable('ElementSet')->findForItems();
+        return $this->_helper->db->getTable('ElementSet')->findByRecordType('Item');
     }
     
     /**
@@ -141,27 +141,51 @@ class ItemsController extends Omeka_Controller_Action
      * @return void
      */
     public function browseAction()
-    {   
-        $results = $this->_helper->searchItems();
-        
-        /** 
-         * Now process the pagination
-         * 
-         */
-        $paginationUrl = $this->getRequest()->getBaseUrl().'/items/browse/';
+    {
+        if (!$this->_getParam('sort_field')) {
+            $this->_setParam('sort_field', 'added');
+            $this->_setParam('sort_dir', 'd');
+        }
 
-        //Serve up the pagination
-        $pagination = array('menu'          => null, // This hasn't done anything since $menu was never instantiated in ItemsController::browseAction()
-                            'page'          => $results['page'], 
-                            'per_page'      => $results['per_page'], 
-                            'total_results' => $results['total_results'], 
-                            'link'          => $paginationUrl);
+        //Must be logged in to view items specific to certain users
+        if ($this->_getParam('user') && !$this->_helper->acl->isAllowed('browse', 'Users')) {
+            $this->_helper->flashMessenger('May not browse by specific users.');
+            $this->_setParam('user', null);
+        }
         
-        Zend_Registry::set('pagination', $pagination);
+        parent::browseAction();
+    }
+
+    /**
+     * Retrieve the number of items to display on any given browse page.
+     * This can be modified as a query parameter provided that a user is
+     * actually logged in.
+     *
+     * @return integer
+     */
+    public function _getBrowseRecordsPerPage()
+    {
+        //Retrieve the number from the options table
+        $options = $this->getFrontController()->getParam('bootstrap')
+                          ->getResource('Options');
+
+        if (is_admin_theme()) {
+            $perPage = (int) $options['per_page_admin'];
+        } else {
+            $perPage = (int) $options['per_page_public'];
+        }
         
-        fire_plugin_hook('browse_items', $results['items']);
-        
-        $this->view->assign(array('items'=>$results['items'], 'total_items'=>$results['total_items']));
+        // If users are allowed to modify the # of items displayed per page,
+        // then they can pass the 'per_page' query parameter to change that.
+        if ($this->_helper->acl->isAllowed('modifyPerPage', 'Items') && ($queryPerPage = $this->getRequest()->get('per_page'))) {
+            $perPage = $queryPerPage;
+        }
+
+        if ($perPage < 1) {
+            $perPage = null;
+        }
+
+        return $perPage;
     }
     
     public function elementFormAction()

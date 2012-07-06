@@ -15,7 +15,7 @@ class Core_OmekaCoreTest extends PHPUnit_Framework_TestCase
 {
     public function testCanCallPhasedLoadingInTheOldWay()
     {
-        $this->assertNull(Omeka_Context::getInstance()->getDb());
+        $this->assertFalse(Zend_Registry::isRegistered('bootstrap'));
         
         $core = new Omeka_Core;
         
@@ -29,12 +29,12 @@ class Core_OmekaCoreTest extends PHPUnit_Framework_TestCase
                 
         $core->phasedLoading('initializeDb');
         
-        $db = Omeka_Context::getInstance()->getDb();
+        $db = Zend_Registry::get('bootstrap')->getResource('Db');
         $this->assertEquals('Omeka_Db', get_class($db));
     }
     
     public function tearDown()
     {
-        Omeka_Context::resetInstance();
+        Zend_Registry::_unsetInstance();
     }
 }

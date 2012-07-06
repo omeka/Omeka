@@ -28,7 +28,7 @@ class ProcessDispatcher
         $cliPath = self::getPHPCliPath();
 
         if (!$user) {
-            $user = Omeka_Context::getInstance()->getCurrentUser();
+            $user = Zend_Registry::get('bootstrap')->getResource('CurrentUser');
         }
 
         if($user) {
@@ -86,7 +86,7 @@ class ProcessDispatcher
     {
         // Use the user-specified path, or attempt autodetection if no path
         // specified.
-        $cliPath = Omeka_Context::getInstance()->getConfig('basic')->background->php->path;
+        $cliPath = Zend_Registry::get('bootstrap')->getResource('Config')->background->php->path;
 
         if ($cliPath == "") {
             $cliPath = self::_autodetectCliPath();

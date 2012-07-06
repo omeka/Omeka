@@ -200,7 +200,6 @@ class ItemType extends Omeka_Record
                 $elementToSave = new Element;
                 $elementToSave->setArray($element);
                 $elementToSave->setElementSet(ELEMENT_SET_ITEM_TYPE);
-                $elementToSave->setRecordType('Item');
             } else if ($element instanceof Element) {
                 $elementToSave = $element;
                 if ($element->id) {

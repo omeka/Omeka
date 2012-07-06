@@ -17,6 +17,7 @@
 class ItemSearch
 {
     protected $_select;
+    protected $_db;
     
     /**
      * Constructor.  Adds a SQL_CALC_FOUND_ROWS column to the sql statement
@@ -24,9 +25,10 @@ class ItemSearch
      * @param Zend_Db_Select
      * @return void
      */
-    public function __construct($select)
+    public function __construct($select, $db)
     {   
         $this->_select = $select;
+        $this->_db = $db;
     }
     
     private function _getSelect()
@@ -36,7 +38,7 @@ class ItemSearch
     
     private function _getDb()
     {
-        return Omeka_Context::getInstance()->getDb();
+        return $this->_db;
     }
     
     /**
@@ -53,6 +55,10 @@ class ItemSearch
         $select = $this->_getSelect();
                         
         foreach ($advanced as $k => $v) {
+
+            if (empty($entry['element_id']) || empty($entry['type'])) {
+                continue;
+            }
             
             $value = $v['terms'];
             
@@ -104,10 +110,8 @@ class ItemSearch
             // This does not use Omeka_Db_Select b/c there is no conditional SQL
             // and it is easier to read without all the extra cruft.
             $subQuery = "SELECT etx.record_id FROM $db->ElementText etx
-                        LEFT JOIN $db->RecordType rty
-                        ON etx.record_type_id = rty.id
                         WHERE etx.text $predicate 
-                        AND rty.name = 'Item' 
+                        AND etx.record_type = 'Item' 
                         AND etx.element_id = " . $db->quote($elementId);
             
             // Each advanced search mini-form represents another subquery
@@ -175,8 +179,7 @@ class ItemSearch
             SELECT i.id as item_id, MATCH (etx.text) AGAINST ($quotedTerms) as rank
             FROM $db->Item i 
             INNER JOIN $db->ElementText etx ON etx.record_id = i.id
-            INNER JOIN $db->RecordType rty ON rty.id = etx.record_type_id AND rty.name = 'Item'
-            WHERE MATCH (etx.text) AGAINST ($quotedTerms)";
+            WHERE etx.record_type = 'Item' AND MATCH (etx.text) AGAINST ($quotedTerms)";
         
         return $query;
     }

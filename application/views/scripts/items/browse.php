@@ -17,7 +17,7 @@ head(array('title'=>$pageTitle,'bodyid'=>'items','bodyclass' => 'browse'));
     <div class="item hentry">
         <div class="item-meta">
 
-        <h2><?php echo link_to_item(item('Dublin Core', 'Title'), array('class'=>'permalink')); ?></h2>
+        <h2><?php echo link_to_item(item(array('Dublin Core', 'Title')), array('class'=>'permalink')); ?></h2>
 
         <?php if (item_has_thumbnail()): ?>
         <div class="item-img">
@@ -25,11 +25,11 @@ head(array('title'=>$pageTitle,'bodyid'=>'items','bodyclass' => 'browse'));
         </div>
         <?php endif; ?>
 
-        <?php if ($text = item('Item Type Metadata', 'Text', array('snippet'=>250))): ?>
+        <?php if ($text = item(array('Item Type Metadata', 'Text'), array('snippet'=>250))): ?>
         <div class="item-description">
             <p><?php echo $text; ?></p>
         </div>
-        <?php elseif ($description = item('Dublin Core', 'Description', array('snippet'=>250))): ?>
+        <?php elseif ($description = item(array('Dublin Core', 'Description'), array('snippet'=>250))): ?>
         <div class="item-description">
             <?php echo $description; ?>
         </div>

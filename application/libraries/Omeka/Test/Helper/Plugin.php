@@ -61,10 +61,11 @@ class Omeka_Test_Helper_Plugin
     public function initialize($pluginName = null)
     {
         $this->_defineResponseContexts();
-
+        $bootstrap = Zend_Registry::get('bootstrap');
+        
         $this->pluginBroker->callHook('initialize', array(), $pluginName);
-        $this->pluginBroker->callHook('define_acl', array(Omeka_Context::getInstance()->acl), $pluginName);
-        $this->pluginBroker->callHook('define_routes', array(Omeka_Context::getInstance()->router), $pluginName);
+        $this->pluginBroker->callHook('define_acl', array($bootstrap->getResource('Acl')), $pluginName);
+        $this->pluginBroker->callHook('define_routes', array($bootstrap->getResource('Router')), $pluginName);
     }
 
     /**
@@ -155,11 +156,11 @@ class Omeka_Test_Helper_Plugin
             case 'pluginIniReader':
                 return $this->pluginIniReader = Zend_Registry::get('plugin_ini_reader');
             case 'pluginBroker':
-                return $this->pluginBroker = Omeka_Context::getInstance()->pluginbroker;
+                return $this->pluginBroker = Zend_Registry::get('bootstrap')->getResource('PluginBroker');
             case 'acl':
-                return $this->acl = Omeka_Context::getInstance()->acl;
+                return $this->acl = Zend_Registry::get('bootstrap')->getResource('Acl');
             case 'router':
-                return $this->router = Omeka_Context::getInstance()->router;
+                return $this->router = Zend_Registry::get('bootstrap')->getResource('Router');
             default:
                 return null;
         }

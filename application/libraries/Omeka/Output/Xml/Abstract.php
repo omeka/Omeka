@@ -14,7 +14,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-abstract class Omeka_Output_Xml_Abstract extends Omeka_Output_Xml
+abstract class Omeka_Output_Xml_Abstract
 {
     /**
      * XML Schema instance namespace URI.
@@ -168,7 +168,8 @@ abstract class Omeka_Output_Xml_Abstract extends Omeka_Output_Xml
         $itemType = array();
         
         // Get all element texts associated with the provided record.
-        $elementTexts = $record->getElementTextRecords();
+        $elementTexts = $record->getAllElementTexts();
+
         foreach ($elementTexts as $elementText) {
             
             // Get associated element and element set records.

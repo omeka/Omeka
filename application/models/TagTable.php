@@ -95,9 +95,8 @@ class TagTable extends Omeka_Db_Table
         if ($type == 'Item') {
             //Join on the items table, add permissions checks for public
             $select->joinInner( array('items'=>$db->Item), "items.id = taggings.relation_id AND taggings.type = 'Item'", array());
-            if($acl = Omeka_Context::getInstance()->getAcl()) {
-                new ItemPermissions($select, $acl);
-            }
+            $permissions = new PublicPermissions('Items');
+            $permissions->apply($select, 'items');
         } else {
             $select->where("taggings.type = ?", (string) $type);
         }

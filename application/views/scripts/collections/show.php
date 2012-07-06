@@ -26,19 +26,19 @@
 
         <?php while (loop_items_in_collection(5)): ?>
         <div class="item hentry">
-            <h3><?php echo link_to_item(item('Dublin Core', 'Title'), array('class'=>'permalink')); ?></h3>
+            <h3><?php echo link_to_item(item(array('Dublin Core', 'Title')), array('class'=>'permalink')); ?></h3>
 
             <?php if (item_has_thumbnail()): ?>
             <div class="item-img">
-                <?php echo link_to_item(item_square_thumbnail(array('alt'=>item('Dublin Core', 'Title')))); ?>
+                <?php echo link_to_item(item_square_thumbnail(array('alt'=>item(array('Dublin Core', 'Title'))))); ?>
             </div>
             <?php endif; ?>
 
-            <?php if ($text = item('Item Type Metadata', 'Text', array('snippet'=>250))): ?>
+            <?php if ($text = item(array('Item Type Metadata', 'Text'), array('snippet'=>250))): ?>
             <div class="item-description">
                 <p><?php echo $text; ?></p>
             </div>
-            <?php elseif ($description = item('Dublin Core', 'Description', array('snippet'=>250))): ?>
+            <?php elseif ($description = item(array('Dublin Core', 'Description'), array('snippet'=>250))): ?>
             <div class="item-description">
                 <?php echo $description; ?>
             </div>

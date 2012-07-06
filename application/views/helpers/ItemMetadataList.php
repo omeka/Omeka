@@ -43,8 +43,7 @@ class Omeka_View_Helper_ItemMetadataList extends Omeka_View_Helper_RecordMetadat
 
     /**
      * Get an array of all element sets containing their respective elements.
-     * @uses Item::getAllElementsBySet()
-     * @uses Item::getItemTypeElements()
+     * 
      * @return array
      */
     protected function _getElementsBySet()
@@ -55,7 +54,7 @@ class Omeka_View_Helper_ItemMetadataList extends Omeka_View_Helper_RecordMetadat
             // Overwrite elements assigned to the item type element set with only
             // those that belong to this item's particular item type. This is
             // necessary because, otherwise, all item type elements will be shown.
-            $itemTypeElementSetName = item('Item Type Name', null, array(), $this->_record) . ' ' . self::ELEMENT_SET_ITEM_TYPE;
+            $itemTypeElementSetName = $this->_record->getProperty('item type name') . ' ' . self::ELEMENT_SET_ITEM_TYPE;
 
             // Check to see if either the generic or specific Item Type element
             // set has been chosen, i.e. 'Item Type Metadata' or 'Document

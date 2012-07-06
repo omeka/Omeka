@@ -111,14 +111,12 @@ class File extends Omeka_Record implements Zend_Acl_Resource_Interface
 
     protected function _initializeMixins()
     {
-        $this->_mixins[] = new ActsAsElementText($this);
+        $this->_mixins[] = new Mixin_ElementText($this);
+        $this->_mixins[] = new Mixin_Timestamp($this);
     }
 
     protected function beforeInsert()
     {
-        $now = Zend_Date::now()->toString(self::DATE_FORMAT);
-        $this->added = $now;
-        $this->modified = $now;
         $fileInfo = new Omeka_File_Info($this);
         $fileInfo->setMimeTypeIfAmbiguous();
     }
@@ -129,11 +127,6 @@ class File extends Omeka_Record implements Zend_Acl_Resource_Interface
         $dispatcher->setQueueName('uploads');
         $dispatcher->send('File_ProcessUploadJob', 
                           array('fileId' => $this->id));
-    }
-    
-    protected function beforeUpdate()
-    {
-        $this->modified = Zend_Date::now()->toString(self::DATE_FORMAT);
     }
     
     protected function filterInput($post)

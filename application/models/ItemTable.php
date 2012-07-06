@@ -38,12 +38,12 @@ class ItemTable extends Omeka_Db_Table
                 $start  = (int) trim($start);
                 $finish = (int) trim($finish);
 
-                $wheres[] = "(i.id BETWEEN $start AND $finish)";
+                $wheres[] = "(items.id BETWEEN $start AND $finish)";
 
                 //It is a single item ID
             } else {
                 $id = (int) trim($expr);
-                $wheres[] = "(i.id = $id)";
+                $wheres[] = "(items.id = $id)";
             }
         }
 
@@ -62,12 +62,12 @@ class ItemTable extends Omeka_Db_Table
     public function filterBySearch($select, $params)
     {
         //Apply the simple or advanced search
-        if (isset($params['search']) || isset($params['advanced_search'])) {
-            $search = new ItemSearch($select);
+        if (isset($params['search']) || isset($params['advanced'])) {
+            $search = new ItemSearch($select, $this->getDb());
             if ($simpleTerms = @$params['search']) {
                 $search->simple($simpleTerms);
             }
-            if ($advancedTerms = @$params['advanced_search']) {
+            if ($advancedTerms = @$params['advanced']) {
                 $search->advanced($advancedTerms);
             }
         }
@@ -82,8 +82,6 @@ class ItemTable extends Omeka_Db_Table
      */
     public function filterByPublic($select, $isPublic)
     {
-        $isPublic = (bool) $isPublic; // this makes sure that empty strings and unset parameters are false
-
         //Force a preview of the public items
         if ($isPublic) {
             $select->where('items.public = 1');
@@ -94,8 +92,6 @@ class ItemTable extends Omeka_Db_Table
 
     public function filterByFeatured($select, $isFeatured)
     {
-        $isFeatured = (bool) $isFeatured; // this make sure that empty strings and unset parameters are false
-
         //filter items based on featured (only value of 'true' will return featured items)
         if ($isFeatured) {
             $select->where('items.featured = 1');
@@ -269,50 +265,57 @@ class ItemTable extends Omeka_Db_Table
      */
     public function applySearchFilters($select, $params)
     {
-        if (isset($params['user'])) {
-            $this->filterByUser($select, $params['user']);
-        }
+        foreach ($params as $paramName => $paramValue) {
+            if ($paramValue === null || (is_string($paramValue) && trim($paramValue) == '')) {
+                continue;
+            }
 
-        if(isset($params['public'])) {
-            $this->filterByPublic($select, $params['public']);
-        }
-        if(isset($params['featured'])) {
-            $this->filterByFeatured($select, $params['featured']);
-        }
+            $boolean = new Omeka_Filter_Boolean;
 
-        if (isset($params['collection'])) {
-            $this->filterByCollection($select, $params['collection']);
-        }
+            switch ($paramName) {
+                case 'user':
+                    $this->filterByUser($select, $paramValue);
+                    break;
 
-        // filter based on type
-        if (isset($params['type'])) {
-            $this->filterByItemType($select, $params['type']);
-        }
+                case 'public':
+                    $this->filterByPublic($select, $boolean->filter($paramValue));
+                    break;
 
-        // filter based on tags
-        if (isset($params['tags'])) {
-            $this->filterByTags($select, $params['tags']);
-        }
+                case 'featured':
+                    $this->filterByFeatured($select, $boolean->filter($paramValue));
+                    break;
 
-        // exclude Items with given tags
-        if (isset($params['excludeTags'])) {
-            $this->filterByExcludedTags($select, $params['excludeTags']);
-        }
+                case 'collection':
+                    $this->filterByCollection($select, $paramValue);
+                    break;
 
-        // include only Items with derivative images.
-        if (isset($params['hasImage'])) {
-            $this->filterByHasDerivativeImage($select, $params['hasImage']);
+                case 'type':
+                    $this->filterByItemType($select, $paramValue);
+                    break;
+
+                case 'tag':
+                case 'tags':
+                    $this->filterByTags($select, $paramValue);
+                    break;
+
+                case 'excludeTags':
+                    $this->filterByExcludedTags($select, $paramValue);
+                    break;
+
+                case 'hasImage':
+                    $this->filterByHasDerivativeImage($select, $boolean->filter($paramValue));
+                    break;
+
+                case 'range':
+                    $this->filterByRange($select, $paramValue);
+                    break;
+            }
         }
 
         $this->filterBySearch($select, $params);
 
-        if (isset($params['range'])) {
-            $this->filterByRange($select, $params['range']);
-        }
-
         //If we returning the data itself, we need to group by the item ID
         $select->group('items.id');
-
     }
 
     /**
@@ -331,11 +334,10 @@ class ItemTable extends Omeka_Db_Table
         if (count($fieldData) == 2) {
             $element = $db->getTable('Element')->findByElementSetNameAndElementName($fieldData[0], $fieldData[1]);
             if ($element) {
-                $recordTypeId = $db->getTable('RecordType')->findIdFromName('Item');
                 $select->joinLeft(array('et_sort' => $db->ElementText),
-                                  "et_sort.record_id = i.id AND et_sort.record_type_id = {$recordTypeId} AND et_sort.element_id = {$element->id}",
+                                  "et_sort.record_id = i.id AND et_sort.record_type = 'Item' AND et_sort.element_id = {$element->id}",
                                   array())
-                       ->group('i.id')
+                       ->group('items.id')
                        ->order(array("IF(ISNULL(et_sort.text), 1, 0) $sortDir",
                                      "et_sort.text $sortDir"));
             }
@@ -355,10 +357,8 @@ class ItemTable extends Omeka_Db_Table
     public function getSelect()
     {
         $select = parent::getSelect();
-        $acl = Omeka_Context::getInstance()->acl;
-        if ($acl) {
-            new ItemPermissions($select, $acl);
-        }
+        $permissions = new PublicPermissions('Items');
+        $permissions->apply($select, 'items');
 
         return $select;
     }

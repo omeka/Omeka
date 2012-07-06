@@ -13,6 +13,12 @@
  */
 class ElementSetTable extends Omeka_Db_Table
 {
+    public function getSelect() {
+        $select = parent::getSelect();
+        $select->order('id ASC');
+        return $select;
+    }
+    
     /**
      * Find all the element sets that correspond to a particular record type.  
      * If the second param is set, this will include all element sets that belong 
@@ -25,24 +31,12 @@ class ElementSetTable extends Omeka_Db_Table
     public function findByRecordType($recordTypeName, $includeAll = true)
     {
         $select = $this->getSelect();
-        $select->joinInner(array('record_types' => $this->getDb()->RecordType), 'record_types.id = element_sets.record_type_id', array());
-        $select->where('record_types.name = ?', $recordTypeName);
+        $select->where('record_type = ?', $recordTypeName);
         if ($includeAll) {
-            $select->orWhere('record_types.name = "All"');
+            $select->orWhere('record_type IS NULL');
         }
         
         return $this->fetchObjects($select);
-    }
-    
-    /**
-     * Find all element sets for Item record type. If the second param is set, 
-     * this will include all element sets that belong to the 'All' record type.
-     *
-     * @param boolean
-     */
-    public function findForItems($includeAll = true)
-    {
-        return $this->findByRecordType('Item', $includeAll);
     }
     
     public function findByName($name)

@@ -13,11 +13,7 @@
  */
 function total_results()
 {
-    if(Zend_Registry::isRegistered('total_results')) {
-        $count = Zend_Registry::get('total_results');
-
-        return $count;
-    }
+    return __v()->total_records;
 }
 
 /**

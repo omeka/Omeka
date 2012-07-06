@@ -56,7 +56,7 @@ class Installer_Test extends Installer_Default
     public static function addItem(Omeka_Db $db)
     {
         // Keep the record objects from dying.
-        Omeka_Context::getInstance()->db = $db;
+        Zend_Registry::get('bootstrap')->getContainer()->db = $db;
         $itemBuilder = new ItemBuilder($db);
         // Item should be public to avoid weird issues with ACL integration 
         // (test must authenticate a user in order to retrieve non-public 

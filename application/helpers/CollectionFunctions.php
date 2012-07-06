@@ -28,54 +28,7 @@ function collection($fieldName, $options=array(), $collection=null)
         $collection = get_current_collection();
     }
 
-    // Retrieve the data to display.
-    switch (strtolower($fieldName)) {
-        case 'id':
-            $text = $collection->id;
-            break;
-        case 'name':
-            $text = $collection->name;
-            break;
-        case 'description':
-            $text = $collection->description;
-            break;
-        case 'public':
-            $text = $collection->public;
-            break;
-        case 'featured':
-            $text = $collection->featured;
-            break;
-        case 'date added':
-            $text = $collection->added;
-            break;
-        case 'date modified':
-            $text = $collection->modified;
-            break;
-        case 'collectors': // The names of collectors
-            $text = $collection->getCollectors();
-            break;
-        default:
-            throw new Exception(__('%s does not exist for collections!', $fieldName));
-            break;
-    }
-
-    // Apply any options to it.
-    if (isset($options['snippet'])) {
-        $text = snippet($text, 0, (int)$options['snippet']);
-    }
-
-    // Escape it for display as HTML.
-    if (!is_array($text)) {
-        $text = html_escape($text);
-    } else {
-        $text = array_map('html_escape', $text);
-    }
-
-    // Return the join'd text
-    if (isset($options['delimiter'])) {
-        $text = join((string) $options['delimiter'], (array) $text);
-    }
-    return $text;
+    return __v()->recordMetadata($collection, $fieldName, $options);
 }
 
 /**

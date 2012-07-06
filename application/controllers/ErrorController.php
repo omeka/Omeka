@@ -29,7 +29,7 @@ class ErrorController extends Omeka_Controller_Action
             $this->view->setAssetPath(VIEW_SCRIPTS_DIR, WEB_VIEW_SCRIPTS);
         }
         
-        $handler = $this->_getParam('error_handler');        
+        $handler = $this->_getParam('error_handler');
         $e = $handler->exception;
         
         if ($this->is404($e, $handler)) {
@@ -62,16 +62,15 @@ class ErrorController extends Omeka_Controller_Action
     public function notFoundAction()
     {
         $this->getResponse()->setHttpResponseCode(404);
-        if (!($e = $this->_getException())) {
-            $e = new Omeka_Controller_Exception_404(__("Page not found."));
-        }
-        $this->view->assign(array('badUri' => $this->getRequest()->getRequestUri(), 
-                                  'e' => $e));
+
+        $this->view->badUri = $this->getRequest()->getRequestUri();
         
         // Render the error script that displays debugging info.
         if ($this->isInDebugMode()) {
-            $this->view->displayError = true;
-            $this->render('index');
+            if (!($e = $this->_getException())) {
+                $e = new Omeka_Controller_Exception_404(__("Page not found."));
+            }
+            $this->renderException($e);
         } else {
             $this->render('404');
         }
@@ -80,16 +79,13 @@ class ErrorController extends Omeka_Controller_Action
     public function forbiddenAction()
     {
         $this->getResponse()->setHttpResponseCode(403);
-        // Fake an exception if there isn't one in the request.
-        if (!($e = $this->_getException())) {
-            $e = new Omeka_Controller_Exception_403(__("Access denied."));
-        }
-        $this->view->assign(array('e' => $e));
         
         // Render the error script that displays debugging info.
         if ($this->isInDebugMode()) {
-            $this->view->displayError = true;
-            $this->render('index');
+            if (!($e = $this->_getException())) {
+                $e = new Omeka_Controller_Exception_403(__("Access denied."));
+            }
+            $this->renderException($e);
         } else {
             $this->render('403');
         }
@@ -131,7 +127,10 @@ class ErrorController extends Omeka_Controller_Action
     protected function renderException(Exception $e)
     {
         $this->view->e = $e;
-        $this->view->displayError = $this->isInDebugMode();
+        $environment = $this->getInvokeArg('bootstrap')->getApplication()->getEnvironment();
+
+        // Don't show error messages in production.
+        $this->view->displayError = ($environment != 'production');
         $this->render('index');
     }
     

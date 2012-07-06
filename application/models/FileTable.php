@@ -26,9 +26,10 @@ class FileTable extends Omeka_Db_Table
         $select = parent::getSelect();
         $db = $this->getDb();
         $select->joinInner(array('items' => $db->Item), 'items.id = files.item_id', array());
-        if($acl = Omeka_Context::getInstance()->getAcl()) {
-            new ItemPermissions($select, $acl);
-        }
+
+        $permissions = new PublicPermissions('Items');
+        $permissions->apply($select, 'items');
+
         $select->group('files.id');
         return $select;
     }

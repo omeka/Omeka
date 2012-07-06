@@ -80,7 +80,6 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
          
                         batchEditSubmit.prop('disabled', !checked);
                     }
-
                 });
             </script>
                                 

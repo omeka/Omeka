@@ -15,9 +15,8 @@
  * @subpackage Mixins
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class ActsAsElementText extends Omeka_Record_Mixin
+class Mixin_ElementText extends Omeka_Record_Mixin
 {
-    
     /**
      * ElementText records stored in the order they were retrieved from the database.
      *
@@ -33,25 +32,9 @@ class ActsAsElementText extends Omeka_Record_Mixin
     protected $_textsByElementId = array();
     
     /**
-     * Element records in the order they were retrieved from the database.
-     *
-     * @var array
-     */
-    protected $_elementsByNaturalOrder = array();
-    
-    /**
-     * Element records indexed by name and element set name, so that it looks like this:
+     * Element records indexed by set name and element name, so it looks like:
      * 
-     * $elements['Title']['Dublin Core'] = Element instance;
-     *
-     * @var array
-     */
-    protected $_elementsByNameAndSet = array();
-    
-    /**
-     * Element records indexed by set name, so that it looks like:
-     * 
-     * $elements['Dublin Core'] = array(Element instance, Element instance, ...).
+     * $elements['Dublin Core']['Title'] = Element instance;
      *
      * @var array
      */
@@ -96,16 +79,6 @@ class ActsAsElementText extends Omeka_Record_Mixin
     private static $_elementsByRecordType = array();
     
     /**
-     * Link to the underlying record
-     *
-     * @param Omeka_Record
-     */
-    public function __construct($record)
-    {
-        $this->_record = $record;
-    }
-    
-    /**
      * Omeka_Record callback for afterSave. Saves the ElementText records once
      * the associated record is saved.
      */
@@ -135,16 +108,6 @@ class ActsAsElementText extends Omeka_Record_Mixin
     }
     
     /**
-     * Retrieve the record_type_id for this record.
-     * 
-     * @return integer
-     */
-    protected function getRecordTypeId()
-    {
-        return (int) $this->_getDb()->getTable('RecordType')->findIdFromName($this->_getRecordType());
-    }
-    
-    /**
      * Load all the ElementText records for the given record (Item, File, etc.).
      * These will be indexed by [element_id].
      * 
@@ -161,7 +124,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
             return;
         }
         
-        $elementTextRecords = $this->getElementTextRecords();
+        $elementTextRecords = $this->_getElementTextRecords();
         
         $this->_textsByNaturalOrder = $elementTextRecords;
         $this->_textsByElementId = $this->_indexTextsByElementId($elementTextRecords);        
@@ -173,34 +136,32 @@ class ActsAsElementText extends Omeka_Record_Mixin
     {
         $recordType = $this->_getRecordType();
         if (!array_key_exists($recordType, self::$_elementsByRecordType) || $reload) {
-            $elements = $this->getElements();
+            $elements = $this->_getElementRecords();
             self::$_elementsByRecordType[$recordType] = $elements;
         } else {
             $elements = self::$_elementsByRecordType[$recordType];
         }
-        
-        $this->_elementsByNaturalOrder = $elements;
-        $this->_elementsByNameAndSet = $this->_indexElementsByNameAndSet($elements);
+
         $this->_elementsBySet = $this->_indexElementsBySet($elements);
         $this->_elementsById = $this->_indexElementsById($elements);
     }
     
     /**
-     * Retrieve ALL of the ElementText records for the given record.
+     * Retrieve all of the ElementText records for the given record.
      * 
      * @return array Set of ElementText records for the record.
      */
-    public function getElementTextRecords()
+    private function _getElementTextRecords()
     {
         return $this->_record->getTable('ElementText')->findByRecord($this->_record);
     }
     
     /**
-     * Retrieve ALL of the Element records for the given record.
+     * Retrieve all of the Element records for the given record.
      * 
      * @return array All Elements that apply to the record's type.
      */
-    public function getElements()
+    private function _getElementRecords()
     {        
         return $this->_record->getTable('Element')->findByRecordType($this->_getRecordType());
     }
@@ -211,7 +172,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
      * @param Element $element
      * @return array Set of ElementText records.
      */
-    public function getTextsByElement($element)
+    public function getElementTextsByRecord($element)
     {        
         // Load 'em if we need 'em.
         if (!$this->_recordsAreLoaded) {
@@ -229,16 +190,83 @@ class ActsAsElementText extends Omeka_Record_Mixin
      * Retrieve all of the record's ElementTexts for the given element name and
      * element set name.
      *
-     * @param string $elementName Element name
      * @param string $elementSetName Element set name
+     * @param string $elementName Element name
      * @return array Set of ElementText records.
      */
-    public function getElementTextsByElementNameAndSetName($elementName, $elementSetName = null)
+    public function getElementTexts($elementSetName, $elementName)
     {
-        $element = $this->getElementByNameAndSetName($elementName, $elementSetName);
-        return $this->getTextsByElement($element);
+        $element = $this->getElement($elementSetName, $elementName);
+        return $this->getElementTextsByRecord($element);
+    }
+
+    /**
+     * Retrieve all of the record's ElementTexts, in order.
+     *
+     * @return array Set of ElementText records.
+     */
+    public function getAllElementTexts()
+    {
+        if (!$this->_recordsAreLoaded) {
+            $this->loadElementsAndTexts();
+        }
+
+        return $this->_textsByNaturalOrder;
     }
     
+    /**
+     * Retrieve the Element records for the given ElementSet.
+     *
+     * @param string Element Set name
+     * @return array Set of Element records
+     */
+    public function getElementsBySetName($elementSetName)
+    {
+        if (!$this->_recordsAreLoaded) {
+            $this->loadElementsAndTexts();
+        }
+        
+        $elements = @$this->_elementsBySet[$elementSetName];
+        return !empty($elements) ? $elements : array();
+    }
+    
+    /**
+     * Retrieve ALL the Element records for the object, organized by ElementSet.
+     * For example, $elements['Dublin Core'] = array(Element instance, Element instance, ...)
+     * 
+     * @return array Set of Element records 
+     */
+    public function getAllElements()
+    {
+        if (!$this->_recordsAreLoaded) {
+            $this->loadElementsAndTexts();
+        }
+        
+        return $this->_elementsBySet;
+    }
+    
+    /**
+     * Retrieve the Element record corresponding to the given element name and
+     * element set name.
+     *
+     * @param string $elementSetName
+     * @param string $elementName
+     * @return Element
+     */
+    public function getElement($elementSetName, $elementName)
+    {
+        if (!$this->_recordsAreLoaded) {
+            $this->loadElementsAndTexts();
+        }
+        
+        $element = @$this->_elementsBySet[$elementSetName][$elementName];
+        if (!$element) {
+            throw new Omeka_Record_Exception(__('There is no element "%1$s", "%2$s"!', $elementSetName, $elementName));
+        }
+
+        return $element;
+    }
+
     /**
      * Retrieve the Element with the given ID.
      *
@@ -259,78 +287,6 @@ class ActsAsElementText extends Omeka_Record_Mixin
     }
     
     /**
-     * Retrieve the Element records for the given ElementSet.
-     *
-     * @param string Element set name
-     * @return array Set of Element records
-     */
-    public function getElementsBySetName($elementSetName)
-    {
-        if (!$this->_recordsAreLoaded) {
-            $this->loadElementsAndTexts();
-        }
-        
-        $elements = @$this->_elementsBySet[$elementSetName];
-        return !empty($elements) ? $elements : array();
-    }
-    
-    /**
-     * Retrieve ALL the Element records for the object, organized by ElementSet.
-     * For example, $elements['Dublin Core'] = array(Element instance, Element instance, ...)
-     * 
-     * @return array Set of Element records 
-     */
-    public function getAllElementsBySet()
-    {
-        if (!$this->_recordsAreLoaded) {
-            $this->loadElementsAndTexts();
-        }
-        
-        return $this->_elementsBySet;
-    }
-    
-    /**
-     * Retrieve the Element record corresponding to the given element name and
-     * (optional) element set name.
-     *
-     * @param string $elementName
-     * @param string $elementSetName
-     * @return Element
-     */
-    public function getElementByNameAndSetName($elementName, $elementSetName = null)
-    {
-        if (!$this->_recordsAreLoaded) {
-            $this->loadElementsAndTexts();
-        }
-        
-        if (!$elementSetName) {
-            $element = @$this->_elementsByNameAndSet[$elementName];
-            // We can safely assume that $element is an array, even if empty.
-            if (count($element) > 1) {
-                // If we have more than one element set with an element of that 
-                // name, return the first one.
-                debug(__('Element name is ambiguous! There is more than one element set containing an element named "%s"!', $elementName));
-                return current($element);
-            } else if(empty($element)) {
-                throw new Omeka_Record_Exception(__('There is no element named "%s"!',$elementName));
-            }
-            // Grab the first element of the result array.
-            $element = current($element);
-        } else {
-            $elements = $this->_elementsByNameAndSet[$elementName];
-            if (!$elements) {
-                throw new Omeka_Record_Exception(__('There is no element named "%s"!',$elementName));
-            }
-            $element = @$elements[$elementSetName];
-            if (!$element) {
-                throw new Omeka_Record_Exception(__('There is no element named "%1$s" in the set named "%2$s"!',$elementName, $elementSetName));
-            }
-        }
-
-        return $element;
-    }
-    
-    /**
      * Index a set of ElementTexts based on element ID.
      *
      * @param array $textRecords Set of ElementText records
@@ -348,57 +304,21 @@ class ActsAsElementText extends Omeka_Record_Mixin
     
     /**
      * Index a set of Elements based on their name. The result is a doubly
-     * associative array, with the first key being element name and the second
-     * being element set name.  
-     * i.e., $indexed['Creator']['Dublin Core'] = Element instance
+     * associative array, with the first key being element set name and the second
+     * being element name.
+     * 
+     * i.e., $indexed['Dublin Core']['Creator'] = Element instance
      * 
      * @param array $elementRecords Set of Element records
      * @return array The provided Elements, indexed as described
      */
-    private function _indexElementsByNameAndSet(array $elementRecords)
-    {
-        $indexed = array();
-        foreach($elementRecords as $record) {
-            $indexed[$record->name][$record->set_name] = $record;
-        }
-        return $indexed;        
-    }
-    
-    /**
-     * Index a set of Elements based on their set name.
-     *
-     * @todo May need to apply ksort() to this to ensure that all sub-arrays are 
-     *       in the correct order.
-     * @todo May need to optimize this method so we avoid three foreach loops. 
-     *       Somehow using SQL to auto-order unordered elements?
-     * 
-     * @param array
-     * @return array
-     */
     private function _indexElementsBySet(array $elementRecords)
     {
-        // Account for elements without an order by separating them from 
-        // elements with an order.
-        $orderedRecords = array();
-        $unorderedRecords = array();
-        foreach($elementRecords as $record) {
-            if ((int) $record->order) {
-                $orderedRecords[] = $record;
-            } else {
-                $unorderedRecords[] = $record;
-            }
-        }
-        // Now build the index by iterating through the ordered elements first 
-        // then pushing the unordered elements onto the end of the index in 
-        // natural order.
         $indexed = array();
-        foreach ($orderedRecords as $orderedRecord) {
-            $indexed[$orderedRecord->set_name][(int) $orderedRecord->order] = $orderedRecord;
+        foreach($elementRecords as $record) {
+            $indexed[$record->set_name][$record->name] = $record;
         }
-        foreach ($unorderedRecords as $unorderedRecord) {
-            $indexed[$unorderedRecord->set_name][] = $unorderedRecord;
-        }
-        return $indexed;
+        return $indexed;        
     }
     
     /**
@@ -434,7 +354,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
         $textRecord = new ElementText;
         $textRecord->record_id = $this->_record->id;
         $textRecord->element_id = $element->id;
-        $textRecord->record_type_id = $this->getRecordTypeId();
+        $textRecord->record_type = $this->_getRecordType();
         $textRecord->text = $elementText;
         $textRecord->html = (int)$isHtml;
             
@@ -476,7 +396,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
     {
         foreach ($elementTexts as $elementSetName => $elements) {
             foreach ($elements as $elementName => $elementTexts) {
-                $element = $this->getElementByNameAndSetName($elementName, $elementSetName);
+                $element = $this->getElement($elementSetName, $elementName);
                 foreach ($elementTexts as $elementText) {
                     if (!array_key_exists('text', $elementText)) {
                         throw new Omeka_Record_Exception(__('Element texts are not formatted correctly!'));
@@ -498,7 +418,7 @@ class ActsAsElementText extends Omeka_Record_Mixin
                 continue;
             }
             $text = new ElementText;
-            $text->record_type_id = $this->getRecordTypeId();
+            $text->record_type = $this->_getRecordType();
             $text->element_id = $info['element_id'];
             $text->record_id = $this->_record->id;
             $text->text = $info['text'];
@@ -688,19 +608,20 @@ class ActsAsElementText extends Omeka_Record_Mixin
     public function deleteElementTextsByElementId(array $elementIdArray = array())
     {
         $db = $this->_getDb();
-        $recordTableName = $this->_record->getTable()->getTableName();
-        $recordTypeName = $this->_getRecordType();
+        $recordTypeName = $db->quote($this->_getRecordType());
+        $id = $db->quote($this->_record->id);
+        $elements = $db->quote($elementIdArray);
+
         // For some reason, this needs the parameters to be quoted directly into the
         // SQL statement in order for the DELETE to work. It may have something to
         // do with quoting the array of element IDs into a string.
-        $deleteSql =  "
-        DELETE etx FROM $db->ElementText etx 
-        INNER JOIN $recordTableName i ON i.id = etx.record_id 
-        INNER JOIN $db->RecordType rty ON rty.id = etx.record_type_id
-        WHERE rty.name = " . $db->quote($recordTypeName) . " 
-        AND i.id = " . $db->quote($this->_record->id) . " 
-        AND etx.element_id IN (" . $db->quote($elementIdArray) . ")";
-        return $db->query($deleteSql);
+        $db->query(<<<SQL
+DELETE FROM {$db->ElementText} 
+WHERE record_type = $recordTypeName 
+AND record_id = $id 
+AND element_id IN ($elements)
+SQL
+        );
     }
     
     /**
@@ -711,14 +632,14 @@ class ActsAsElementText extends Omeka_Record_Mixin
     public function deleteElementTexts()
     {
         $db = $this->_getDb();
-        $recordTableName = $this->_record->getTable()->getTableName();
-        $recordTypeName = $this->_getRecordType();
-        $deleteSql =  "
-        DELETE etx FROM $db->ElementText etx 
-        INNER JOIN $recordTableName i ON i.id = etx.record_id 
-        INNER JOIN $db->RecordType rty ON rty.id = etx.record_type_id
-        WHERE rty.name = " . $db->quote($recordTypeName) . " 
-        AND i.id = " . $db->quote($this->_record->id) . "";
-        return $db->query($deleteSql);
+        $recordTypeName = $db->quote($this->_getRecordType());
+        $id = $db->quote($this->_record->id);
+
+        $db->query(<<<SQL
+DELETE FROM {$db->ElementText} 
+WHERE record_type = $recordTypeName 
+AND record_id = $id
+SQL
+        );
     }
 }

@@ -67,7 +67,7 @@ function get_current_item()
  *
  * $item = get_item_by_id(4);
  * set_current_item($item); // necessary to use item() and other similar theme API calls.
- * echo item('Dublin Core', 'Title');
+ * echo item(array('Dublin Core', 'Title'));
  *
  * @since 0.10
  * @param integer $itemId
@@ -152,22 +152,21 @@ function has_items_for_loop()
  * Retrieve the values for a given field in the current item.
  *
  * @since 0.10
- * @uses Omeka_View_Helper_RecordMetadata::_get() Contains instructions and
+ * @since 2.0 $elementSetName and $elementName params combined to $metadata
+ * @uses Omeka_View_Helper_RecordMetadata Contains instructions and
  * examples.
- * @uses Omeka_View_Helper_ItemMetadata::_getRecordMetadata() Contains a list of
- * all fields that do not belong to element sets, e.g. 'id', 'date modified', etc.
- * @param string $elementSetName
- * @param string $elementName
+ * @param string|array $metadata The metadata field to display. If an
+ *  array, refers to an Element: array('Set Name', 'Element Name')
  * @param array $options
  * @param Item|null Check for this specific item record (current item if null).
- * @return string|array|null
+ * @return mixed
  */
-function item($elementSetName, $elementName = null, $options = array(), $item = null)
+function item($metadata, $options = array(), $item = null)
 {
     if (!$item) {
         $item = get_current_item();
     }
-    return __v()->recordMetadata($item, $elementSetName, $elementName, $options);
+    return __v()->recordMetadata($item, $metadata, $options);
 }
 
 /**
@@ -208,10 +207,10 @@ function item_citation($item = null)
         $item = get_current_item();
     }
 
-    $creator    = strip_formatting(item('Dublin Core', 'Creator', array(), $item));
-    $title      = strip_formatting(item('Dublin Core', 'Title', array(), $item));
+    $creator    = strip_formatting(item(array('Dublin Core', 'Creator'), array(), $item));
+    $title      = strip_formatting(item(array('Dublin Core', 'Title'), array(), $item));
     $siteTitle  = strip_formatting(settings('site_title'));
-    $itemId     = item('id', null, array(), $item);
+    $itemId     = item('id', array(), $item);
     $accessDate = date('F j, Y');
     $uri        = html_escape(abs_item_uri($item));
 
@@ -249,7 +248,7 @@ function item_field_uses_html($elementSetName, $elementName, $index=0, $item = n
         $item = get_current_item();
     }
 
-    $textRecords = $item->getElementTextsByElementNameAndSetName($elementName, $elementSetName);
+    $textRecords = $item->getElementTexts($elementSetName, $elementName);
     $textRecord = @$textRecords[$index];
 
     return ($textRecord instanceof ElementText and $textRecord->isHtml());
@@ -315,7 +314,7 @@ function item_has_type($name = null, $item = null)
         $item = get_current_item();
     }
 
-    $itemTypeName = item('Item Type Name', null, array(), $item);
+    $itemTypeName = item('Item Type Name', array(), $item);
     return ($name and ($itemTypeName == $name)) or (!$name and !empty($itemTypeName));
 }
 
@@ -523,7 +522,7 @@ function display_random_featured_items($num = 5, $hasImage = null)
 
     if ($randomFeaturedItems = random_featured_items($num, $hasImage)) {
         foreach ($randomFeaturedItems as $randomItem) {
-            $itemTitle = item('Dublin Core', 'Title', array(), $randomItem);
+            $itemTitle = item(array('Dublin Core', 'Title'), array(), $randomItem);
 
             $html .= '<h3>' . link_to_item($itemTitle, array(), 'show', $randomItem) . '</h3>';
 
@@ -531,7 +530,7 @@ function display_random_featured_items($num = 5, $hasImage = null)
                 $html .= link_to_item(item_square_thumbnail(array(), 0, $randomItem), array('class'=>'image'), 'show', $randomItem);
             }
 
-            if ($itemDescription = item('Dublin Core', 'Description', array('snippet'=>150), $randomItem)) {
+            if ($itemDescription = item(array('Dublin Core', 'Description'), array('snippet'=>150), $randomItem)) {
                 $html .= '<p class="item-description">' . $itemDescription . '</p>';
             }
         }

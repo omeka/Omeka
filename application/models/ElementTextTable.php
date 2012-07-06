@@ -22,11 +22,8 @@ class ElementTextTable extends Omeka_Db_Table
     {
         $select = $this->getSelect();
         $db = $this->getDb();
-        
-        // Join against the record_types table to only retrieve text for items.
-        $select->joinInner(array('record_types' => $db->RecordType), 
-            'record_types.id = element_texts.record_type_id AND record_types.name = "' . (string)$recordType . '"', array());
-        
+
+        $select->where('element_texts.record_type = ?', (string) $recordType);
         $select->where('element_texts.record_id = ?', (int) $recordId);
         
         // Retrieve element texts ordered by ID, which is incremental.
@@ -53,20 +50,5 @@ class ElementTextTable extends Omeka_Db_Table
     {
         $select = $this->getSelect()->where('element_texts.element_id = ?', (int)$elementId);
         return $this->fetchObjects($select);
-    }
-    
-    /**
-     * 
-     * @param string
-     * @return void
-     */
-    protected function getRecordTypeId($recordTypeName)
-    {
-        // Cache the record type ID so we don't have to retrieve it every time.
-        if(empty($this->_recordTypeId[$recordTypeName])) {
-            $this->_recordTypeId[$recordTypeName] = $this->getDb()->getTable('RecordType')->findIdFromName($recordTypeName);
-        }
-        
-        return $this->_recordTypeId[$recordTypeName];
     }
 }

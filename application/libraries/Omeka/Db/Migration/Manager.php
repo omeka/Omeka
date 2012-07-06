@@ -165,7 +165,7 @@ class Omeka_Db_Migration_Manager
     public static function getDefault($db = null)
     {
         if (!$db) {
-            $db = Omeka_Context::getInstance()->getDb();
+            $db = Zend_Registry::get('bootstrap')->getResource('Db');
         }
         return new self($db, UPGRADE_DIR);
     }

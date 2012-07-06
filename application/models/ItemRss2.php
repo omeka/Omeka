@@ -71,7 +71,7 @@ class ItemRss2
         set_current_item($item);
         
         // Title is a CDATA section, so no need for extra escaping.
-        $entry['title'] = strip_formatting(item('Dublin Core', 'Title', array('no_escape'=>true)));
+        $entry['title'] = strip_formatting(item(array('Dublin Core', 'Title'), array('no_escape'=>true)));
         $entry['description'] = $this->buildDescription($item);
         
         $entry['link'] = xml_escape(abs_item_uri($item));

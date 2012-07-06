@@ -27,6 +27,6 @@ class Omeka_Core_Resource_Plugins extends Zend_Application_Resource_ResourceAbst
         $bootstrap->bootstrap('Pluginbroker');
         $broker = $bootstrap->getResource('Pluginbroker');
         // Fire all the 'initialize' hooks for the plugins
-        $broker->initialize();
+        $broker->callHook('initialize');
     }
 }

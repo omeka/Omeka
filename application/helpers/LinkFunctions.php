@@ -160,8 +160,8 @@ function link_to_file_metadata($attributes = array(), $text = null, $file = null
     }
 
     if (!$text) {
-        $fileTitle = strip_formatting(item_file('Dublin Core', 'Title', array(), $file));
-        $text = $fileTitle ? $fileTitle : item_file('Original Filename', null, array(), $file);
+        $fileTitle = strip_formatting(item_file(array('Dublin Core', 'Title'), array(), $file));
+        $text = $fileTitle ? $fileTitle : item_file('Original Filename', array(), $file);
     }
 
     return link_to($file, 'show', $text, $attributes);
@@ -187,7 +187,7 @@ function link_to_item($text = null, $props = array(), $action = 'show', $item=nu
         $item = get_current_item();
     }
 
-    $text = (!empty($text) ? $text : strip_formatting(item('Dublin Core', 'Title', array(), $item)));
+    $text = (!empty($text) ? $text : strip_formatting(item(array('Dublin Core', 'Title'), array(), $item)));
 
     return link_to($item, $action, $text, $props);
 }

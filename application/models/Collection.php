@@ -61,8 +61,38 @@ class Collection extends Omeka_Record implements Zend_Acl_Resource_Interface
                 
     protected function _initializeMixins()
     {
-        $this->_mixins[] = new PublicFeatured($this);
-        $this->_mixins[] = new Ownable($this);
+        $this->_mixins[] = new Mixin_PublicFeatured($this);
+        $this->_mixins[] = new Mixin_Owner($this);
+        $this->_mixins[] = new Mixin_Timestamp($this);
+    }
+
+    /**
+     * Get a property about this collection.
+     *
+     * @param string $property The property to get, always lowercase.
+     */
+    public function getProperty($property)
+    {
+        switch ($property) {
+            case 'id':
+                return $this->id;
+            case 'name':
+                return $this->name;
+            case 'description':
+                return $this->description;
+            case 'public':
+                return $this->public;
+            case 'featured':
+                return $this->featured;
+            case 'date added':
+                return $this->added;
+            case 'date modified':
+                return $this->modified;
+            case 'collectors': // The names of collectors
+                return $this->getCollectors();
+            default:
+                throw new Exception(__('%s does not exist for collections!', $property));
+        }
     }
     
     /**
@@ -229,31 +259,6 @@ class Collection extends Omeka_Record implements Zend_Acl_Resource_Interface
             throw new RuntimeException(__("Cannot associate the collection with an unsaved user."));
         }
         $this->owner_id = $user->id;
-    }
-    
-    /**
-     * Set added and modified timestamps for the collection.
-     */
-    protected function beforeInsert()
-    {
-        $now = Zend_Date::now()->toString(self::DATE_FORMAT);
-        $this->added = $now;
-        $this->modified = $now;
-    }
-    
-    /**
-     * Set modified timestamp for the collection.
-     */
-    protected function beforeUpdate()
-    {
-        $this->modified = Zend_Date::now()->toString(self::DATE_FORMAT);
-    }
-
-    protected function beforeSave()
-    {
-        $boolFilter = new Omeka_Filter_Boolean();
-        $this->featured = $boolFilter->filter($this->featured);
-        $this->public = $boolFilter->filter($this->public);
     }
 
     /**

@@ -37,6 +37,9 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
         
         // Trick it into loading existing shared javascripts.
         $this->view->addAssetPath(VIEW_SCRIPTS_DIR, self::ASSET_PATH_ROOT);
+
+        $bootstrap = new Omeka_Test_Bootstrap;
+        Zend_Registry::set('bootstrap', $bootstrap);
     }
 
     public function tearDown()
@@ -77,10 +80,9 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
     public function testInternalDefaults()
     {
         $configArray['theme']['useInternalJavascripts'] = true;
-        Omeka_Context::getInstance()->setConfig('basic', new Zend_Config($configArray));
+        Zend_Registry::get('bootstrap')->getContainer()->config = new Zend_Config($configArray);
 
         $this->_assertScriptsIncluded($this->_getJsOutput(), $this->internalDefaults);
-        Omeka_Context::resetInstance();
     }
 
     public function testQueueJs()

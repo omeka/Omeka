@@ -15,11 +15,6 @@
 abstract class Omeka_Record implements ArrayAccess
 {
     /**
-     * Zend_Date format for saving to the database.
-     */
-    const DATE_FORMAT = 'yyyy-MM-dd HH:mm:ss';
-    
-    /**
      * Unique ID for the record.
      *
      * All implementations of Omeka_Record must have a table containing an 'id'
@@ -118,15 +113,19 @@ abstract class Omeka_Record implements ArrayAccess
     
     /**
      * @param Omeka_Db|null $db (optional) Defaults to the Omeka_Db instance from 
-     * Omeka_Context.
+     * the bootstrap.
      */
     public function __construct($db = null)
     {
         //Dependency injection, for testing
         if (!$db) {
-            $db = Omeka_Context::getInstance()->getDb();
+            try {
+                $db = Zend_Registry::get('bootstrap')->getResource('Db');
+            } catch (Zend_Exception $e) {
+                // No bootstrap...
+            }
             if (!$db) {
-                throw new Omeka_Record_Exception("Unable to retrieve database instance from Omeka_Context.");
+                throw new Omeka_Record_Exception("Unable to retrieve database instance.");
             }
         }
         
@@ -298,10 +297,10 @@ abstract class Omeka_Record implements ArrayAccess
             // run a general hook (one which is not specific to the classs of the record)
             // this is used by plugins which may need to process every record, and 
             // cannot anticipate all of the class names of those records
-            call_user_func_array(array($broker, $plugin_hook_general), $args);
+            $broker->callHook($plugin_hook_general, $args);
 
             // run a hook specific to the class
-            call_user_func_array(array($broker, $plugin_hook_specific), $args);
+            $broker->callHook($plugin_hook_specific, $args);
         }
     }
     
@@ -727,7 +726,11 @@ abstract class Omeka_Record implements ArrayAccess
     public function setPluginBroker($broker = null)
     {
         if (!$broker) {
-            $broker = Omeka_Context::getInstance()->getPluginBroker();
+            try {
+                $broker = Zend_Registry::get('bootstrap')->getResource('PluginBroker');
+            } catch (Zend_Exception $e) {
+                $broker = null;
+            }
         }
         $this->_pluginBroker = $broker;
     }

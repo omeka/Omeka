@@ -45,7 +45,7 @@ function custom_show_item_metadata(array $options = array(), $item = null)
 
         $otherElementSets = array();
 
-        $elementSets = get_db()->getTable('ElementSet')->findForItems();
+        $elementSets = get_db()->getTable('ElementSet')->findByRecordType('Item');
         foreach ($elementSets as $set) {
             if ($set->name == 'Dublin Core') continue;
             $otherElementSets[] = $set->name;
@@ -56,7 +56,7 @@ function custom_show_item_metadata(array $options = array(), $item = null)
         foreach ($dcFields as $field) {
             $field = trim($field);
             if (element_exists('Dublin Core', $field)) {
-                if ($fieldValues = item('Dublin Core', $field, 'all')) {
+                if ($fieldValues = item(array('Dublin Core', $field), 'all')) {
                     $html .= '<h3>'.__($field).'</h3>';
                     foreach ($fieldValues as $key => $fieldValue) {
                         if (!item_field_uses_html('Dublin Core', $field, $key)) {
