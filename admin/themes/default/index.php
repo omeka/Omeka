@@ -7,8 +7,7 @@ head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?>
                 <?php 
                     $db = get_db();
                     $pluginRecords = $db->getTable('Plugin')->count();
-                    $themeName = $db->getTable('Option')->find(public_theme)->value;
-                    
+                    $themeName = Theme::getAvailable(Theme::getCurrentThemeName('public'))->title;
                 ?>
                 <p><?php echo link_to('items', null, __(total_items())) ?><br><?php echo __('items') ?></p>
                 <p><?php echo link_to('collections', null, __(total_collections())); ?><br><?php echo __('collections') ?></p>
