@@ -33,58 +33,27 @@ if (extension_loaded('zlib')) {
     ini_set('zlib.output_compression_level', '5');    
 }
 
-// Set directory names:
-$site['application']       = 'application';
-$site['core']              = 'core';
-$site['libraries']         = 'libraries';
-$site['helpers']           = 'helpers';
-$site['controllers']       = 'controllers';
-$site['forms']             = 'forms';
-$site['models']            = 'models';
-$site['config']            = 'config';
-$site['admin']             = 'admin';
-$site['plugins']           = 'plugins';
-$site['logs']              = 'logs';
-$site['archive']           = 'archive';
-$site['fullsize']          = 'fullsize';
-$site['thumbnails']        = 'thumbnails';
-$site['square_thumbnails'] = 'square_thumbnails';
-$site['files']             = 'files';
-$site['public_theme']      = 'themes';
-$site['admin_theme']       = 'themes';
-$site['views']             = 'views';
-$site['scripts']           = 'scripts';
-$site['migrations']        = 'migrations';
-$site['install']           = 'install';
-$site['theme_uploads']     = 'theme_uploads';
-$site['languages']         = 'languages';
-
 // Define directory path constants:
 define('BASE_DIR',         dirname(__FILE__));
-define('APP_DIR',          BASE_DIR . '/' . $site['application']);
-define('PLUGIN_DIR',       BASE_DIR . '/' . $site['plugins']);
-define('ADMIN_DIR',        BASE_DIR . '/' . $site['admin']);
-define('ARCHIVE_DIR',      BASE_DIR . '/' . $site['archive']);
-define('ADMIN_THEME_DIR',  BASE_DIR . '/' . $site['admin'] . '/' . $site['admin_theme']);
-define('PUBLIC_THEME_DIR', BASE_DIR . '/' . $site['public_theme']);
-define('INSTALL_DIR',      BASE_DIR . '/' . $site['install']);
-define('CORE_DIR',         APP_DIR . '/' . $site['core']);
-define('MODEL_DIR',        APP_DIR . '/' . $site['models']);
-define('FORM_DIR',         APP_DIR . '/' . $site['forms']);
-define('CONTROLLER_DIR',   APP_DIR . '/' . $site['controllers']);
-define('LIB_DIR',          APP_DIR . '/' . $site['libraries']);
-define('HELPER_DIR',       APP_DIR . '/' . $site['helpers']);
-define('CONFIG_DIR',       APP_DIR . '/' . $site['config']);
-define('LOGS_DIR',         APP_DIR . '/' . $site['logs']);
-define('VIEW_SCRIPTS_DIR', APP_DIR . '/' . $site['views'] . '/' . $site['scripts']);
-define('VIEW_HELPERS_DIR', APP_DIR . '/' . $site['views'] . '/' . $site['helpers']);
-define('UPGRADE_DIR',      APP_DIR . '/' . $site['migrations']);
-define('LANGUAGES_DIR',    APP_DIR . '/' . $site['languages']);
-define('THUMBNAIL_DIR',        ARCHIVE_DIR . '/' . $site['thumbnails']);
-define('SQUARE_THUMBNAIL_DIR', ARCHIVE_DIR . '/' . $site['square_thumbnails']);
-define('FULLSIZE_DIR',         ARCHIVE_DIR . '/' . $site['fullsize']);
-define('FILES_DIR',            ARCHIVE_DIR . '/' . $site['files']);
-define('THEME_UPLOADS_DIR',    ARCHIVE_DIR . '/' . $site['theme_uploads']);
+define('APP_DIR',          BASE_DIR . '/application');
+define('PLUGIN_DIR',       BASE_DIR . '/plugins');
+define('ADMIN_DIR',        BASE_DIR . '/admin');
+define('ARCHIVE_DIR',      BASE_DIR . '/archive');
+define('ADMIN_THEME_DIR',  BASE_DIR . '/admin/themes');
+define('PUBLIC_THEME_DIR', BASE_DIR . '/themes');
+define('INSTALL_DIR',      BASE_DIR . '/install');
+define('CORE_DIR',         APP_DIR . '/core');
+define('MODEL_DIR',        APP_DIR . '/models');
+define('FORM_DIR',         APP_DIR . '/forms');
+define('CONTROLLER_DIR',   APP_DIR . '/controllers');
+define('LIB_DIR',          APP_DIR . '/libraries');
+define('HELPER_DIR',       APP_DIR . '/helpers');
+define('CONFIG_DIR',       APP_DIR . '/config');
+define('LOGS_DIR',         APP_DIR . '/logs');
+define('VIEW_SCRIPTS_DIR', APP_DIR . '/views/scripts');
+define('VIEW_HELPERS_DIR', APP_DIR . '/views/helpers');
+define('UPGRADE_DIR',      APP_DIR . '/migrations');
+define('LANGUAGES_DIR',    APP_DIR . '/languages');
 
 define('BACKGROUND_BOOTSTRAP_PATH', CORE_DIR . '/background.php');
 
@@ -94,15 +63,10 @@ define('HELPERS', HELPER_DIR . '/all.php');
 // Define the web address constants:
 defined('WEB_ROOT') || _define_web_root();
 define('WEB_THEME', WEB_DIR . '/themes');
-define('WEB_PLUGIN',       WEB_ROOT . '/' . $site['plugins']);
-define('WEB_ARCHIVE',      WEB_ROOT . '/' . $site['archive']);
-define('WEB_PUBLIC_THEME', WEB_ROOT . '/' . $site['public_theme']);
-define('WEB_VIEW_SCRIPTS', WEB_ROOT . '/' . $site['application'] . '/' . $site['views'] . '/' . $site['scripts']);
-define('WEB_THUMBNAILS',        WEB_ARCHIVE . '/' . $site['thumbnails']);
-define('WEB_SQUARE_THUMBNAILS', WEB_ARCHIVE . '/' . $site['square_thumbnails']);
-define('WEB_FULLSIZE',          WEB_ARCHIVE . '/' . $site['fullsize']);
-define('WEB_FILES',             WEB_ARCHIVE . '/' . $site['files']);
-define('WEB_THEME_UPLOADS',     WEB_ARCHIVE . '/' . $site['theme_uploads']);
+define('WEB_PLUGIN',       WEB_ROOT . '/plugins');
+define('WEB_ARCHIVE',      WEB_ROOT . '/archive');
+define('WEB_PUBLIC_THEME', WEB_ROOT . '/themes');
+define('WEB_VIEW_SCRIPTS', WEB_ROOT . '/application/views/scripts');
 
 // Set the include path for the models directory.
 set_include_path(LIB_DIR. PATH_SEPARATOR . MODEL_DIR . PATH_SEPARATOR . get_include_path());
@@ -159,7 +123,7 @@ $dir = trim(dirname($_SERVER['SCRIPT_NAME']), '\,/');
 
 // current path should be empty and not a '/' if there is no directory path.
 $currentPath = !empty($dir) ? "/$dir" : '';
-$adminDir = $site['admin'];
+$adminDir = 'admin';
 
 // This is how we determine whether or not we are in the admin bootstrap.
 if (defined('ADMIN')) {
