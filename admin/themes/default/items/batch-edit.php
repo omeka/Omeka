@@ -5,89 +5,111 @@ if (!$isPartial):
                'bodyclass' => 'advanced-search', 
                'bodyid' => 'advanced-search-page'));
 ?>
-<h1><?php echo $title; ?></h1>
-<div id="primary">
-<?php endif; ?>
-<div title="<?php echo $title; ?>">
-<form id="batch-edit-form" action="<?php echo html_escape(uri('items/batch-edit-save')); ?>" method="post" accept-charset="utf-8">
-    <fieldset id="item-list" style="float:right; width: 28%;">
-        <legend><?php echo __('Items'); ?></legend>
-        <p><em><?php echo __('Changes will be applied to checked items.'); ?></em></p>
-        <div style="height: 250px; overflow-y: auto; overflow-x:hidden;border: 1px solid #ddd; padding: 10px;">
-        <?php 
-        $itemCheckboxes = array();
-        foreach ($itemIds as $id) {
-            if (!($item = get_item_by_id($id))) {
-                continue;
-            }
 
-            $showItemFields = true;
-            if (!has_permission($item, 'edit') || !has_permission($item, 'delete')) {
-                $showItemFields = false;
-            }
-            $itemCheckboxes[$id] = item(array('Dublin Core', 'Title'), array(), $item);
-            release_object($item);
-        }
-        echo $this->formMultiCheckbox('items[]', null, array('checked' => 'checked'), $itemCheckboxes); ?>
-        </div>
-    </fieldset>
+<?php endif; ?>
+        
+<div title="<?php echo $title; ?>">
+
+<form id="batch-edit-form" action="<?php echo html_escape(uri('items/batch-edit-save')); ?>" method="post" accept-charset="utf-8">
+
+    <div id="save" class="three columns omega panel">
+        <input type="submit" class="big green button" value="<?php echo __('Save Changes'); ?>">
+    </div>
+
+        <fieldset id="item-list" class="panel">
+            <h2 class="two columns alpha"><?php echo __('Items'); ?></h2>
+            <div class="four columns omega">
+                <div>
+                <?php 
+                $itemCheckboxes = array();
+                foreach ($itemIds as $id) {
+                    if (!($item = get_item_by_id($id))) {
+                        continue;
+                    }
+        
+                    $showItemFields = true;
+                    if (!has_permission($item, 'edit') || !has_permission($item, 'delete')) {
+                        $showItemFields = false;
+                    }
+                    $itemCheckboxes[$id] = item('Dublin Core', 'Title', null, $item);
+                    release_object($item);
+                }
+                echo $this->formMultiCheckbox('items[]', null, array('checked' => 'checked'), $itemCheckboxes); ?>
+                </div>
+                <p class="explanation"><?php echo __('Changes will be applied to checked items.'); ?></p>
+                
+            </div>
+        </fieldset>
     
-    <fieldset id="item-fields" style="width: 70%; margin-bottom:2em;">
-        <legend><?php echo __('Item Metadata'); ?></legend>
+    <fieldset id="item-fields">
+        <h2><?php echo __('Item Metadata'); ?></h2>
+
         <?php if ( has_permission('Items', 'makePublic') ): ?>
+    
         <div class="field">
-        <label for="metadata[public]"><?php echo __('Public?'); ?></label>
-        <?php
-        $publicOptions = array(''  => __('Select Below'),
-                               '1' => __('Public'),
-                               '0' => __('Not Public')
-                               );
-        echo $this->formSelect('metadata[public]', null, array(), $publicOptions); ?>
+            <label class="two columns alpha" for="metadata[public]"><?php echo __('Public?'); ?></label>
+            <div class="inputs five columns omega">
+                <?php
+                $publicOptions = array(''  => __('Select Below'),
+                                       '1' => __('Public'),
+                                       '0' => __('Not Public')
+                                       );
+                echo $this->formSelect('metadata[public]', null, array(), $publicOptions); ?>
+            </div>
         </div>
+    
         <?php endif; ?>
 
         <?php if ( has_permission('Items', 'makeFeatured') ): ?>
         <div class="field">
-        <label for="metadata[featured]"><?php echo __('Featured?'); ?></label>
-        <?php
-        $featuredOptions = array(''  => __('Select Below'),
-                                 '1' => __('Featured'),
-                                 '0' => __('Not Featured')
-                                 );
-        echo $this->formSelect('metadata[featured]', null, array(), $featuredOptions); ?>
+            <label class="two columns alpha" for="metadata[featured]"><?php echo __('Featured?'); ?></label>
+            <div class="inputs five columns omega">
+                <?php
+                $featuredOptions = array(''  => __('Select Below'),
+                                         '1' => __('Featured'),
+                                         '0' => __('Not Featured')
+                                         );
+                echo $this->formSelect('metadata[featured]', null, array(), $featuredOptions); ?>
+            </div>
         </div>
         <?php endif; ?>
         
         <div class="field">
-        <label for="metadata[item_type_id]"><?php echo __('Item Type'); ?></label>
-        <?php
-        $itemTypeOptions = get_db()->getTable('ItemType')->findPairsForSelectForm();
-        $itemTypeOptions = array('' => __('Select Below')) + $itemTypeOptions;
-        echo $this->formSelect('metadata[item_type_id]', null, array(), $itemTypeOptions);
-        ?>
-        <div class="batch-edit-remove">
-        <?php echo $this->formCheckbox('removeMetadata[item_type_id]'); ?>
-        <label for="removeMetadata[item_type_id]" style="float:none;"><?php echo __('Remove?'); ?></label>
-        </div>
+            <label class="two columns alpha" for="metadata[item_type_id]"><?php echo __('Item Type'); ?></label>
+            <div class="inputs five columns omega">
+            <?php
+            $itemTypeOptions = get_db()->getTable('ItemType')->findPairsForSelectForm();
+            $itemTypeOptions = array('' => __('Select Below')) + $itemTypeOptions;
+            echo $this->formSelect('metadata[item_type_id]', null, array(), $itemTypeOptions);
+            ?>
+                <div class="batch-edit-remove">
+                <?php echo $this->formCheckbox('removeMetadata[item_type_id]'); ?>
+                <label for="removeMetadata[item_type_id]" style="float:none;"><?php echo __('Remove?'); ?></label>
+                </div>
+            </div>
         </div>
         
         <div class="field">
-        <label for="metadata[collection_id]"><?php echo __('Collection'); ?></label>
-        <?php
-        $collectionOptions = get_db()->getTable('Collection')->findPairsForSelectForm();
-        $collectionOptions = array('' => __('Select Below')) + $collectionOptions;
-        echo $this->formSelect('metadata[collection_id]', null, array(), $collectionOptions);
-        ?>
-        <div class="batch-edit-remove">
-        <?php echo $this->formCheckbox('removeMetadata[collection_id]'); ?>
-        <label for="removeMetadata[collection_id]" style="float:none;"><?php echo __('Remove?'); ?></label>
-        </div>
+            <label class="two columns alpha" for="metadata[collection_id]"><?php echo __('Collection'); ?></label>
+            <div class="inputs five columns omega">
+                <?php
+                $collectionOptions = get_db()->getTable('Collection')->findPairsForSelectForm();
+                $collectionOptions = array('' => __('Select Below')) + $collectionOptions;
+                echo $this->formSelect('metadata[collection_id]', null, array(), $collectionOptions);
+                ?>
+                <div class="batch-edit-remove">
+                    <?php echo $this->formCheckbox('removeMetadata[collection_id]'); ?>
+                    <label class="two columns alpha" for="removeMetadata[collection_id]" style="float:none;"><?php echo __('Remove?'); ?></label>
+                </div>
+            </div>
         </div>
 
         <div class="field">
-            <label for="metadata[tags]"><?php echo __('Add Tags'); ?></label>
-            <?php echo $this->formText('metadata[tags]', null, array('size' => 32, 'class' => 'textinput')); ?>
-            <p class="explanation"><?php echo __('List of tags to add to all checked items, separated by %s.', settings('tag_delimiter')); ?></p>
+            <label class="two columns alpha" for="metadata[tags]"><?php echo __('Add Tags'); ?></label>
+            <div class="inputs five columns omega">
+                <?php echo $this->formText('metadata[tags]', null, array('size' => 32, 'class' => 'textinput')); ?>
+                <p class="explanation"><?php echo __('List of tags to add to all checked items, separated by %s.', settings('tag_delimiter')); ?></p>
+            </div>
         </div>
     </fieldset>
 
@@ -95,11 +117,13 @@ if (!$isPartial):
 
     <?php if ($showItemFields): ?>
     <fieldset style="width: 70%;">
-        <legend><?php echo __('Delete Items'); ?></legend>
+        <h2><?php echo __('Delete Items'); ?></h2>
         <p class="explanation"><?php echo __('Check if you wish to delete selected items.'); ?></p>
         <div class="field">
-            <label for="delete"><?php echo __('Delete'); ?></label>
-            <?php echo $this->formCheckbox('delete'); ?>
+            <label class="two columns alpha" for="delete"><?php echo __('Delete'); ?></label>
+            <div class="inputs five columns omega">
+               <?php echo $this->formCheckbox('delete'); ?>
+            </div>
         </div>
     </fieldset>
     <?php endif; ?>
@@ -110,9 +134,9 @@ if (!$isPartial):
     $hash->removeDecorator('HtmlTag');
     echo $hash;
     ?>
-    <input type="submit" value="<?php echo __('Save Changes'); ?>">
+   
 </form>
-</div>
+
 <script type="text/javascript">
     jQuery(document).ready(function(){
         var otherFormElements = jQuery('#item-fields select, #item-fields input');
@@ -132,6 +156,5 @@ if (!$isPartial):
     });
 </script>
 <?php if (!$isPartial): ?>
-</div>
 <?php foot(); ?>
 <?php endif; ?>

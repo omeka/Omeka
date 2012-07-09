@@ -29,7 +29,8 @@ class Omeka_Form_GeneralSettings extends Omeka_Form
         ));
         
         $this->addElement('textarea', 'description', array(
-            'label' => __('Site Description')
+            'label' => __('Site Description'),
+            'rows' => 10
         ));
         
         $this->addElement('text', 'administrator_email', array(
@@ -105,7 +106,8 @@ class Omeka_Form_GeneralSettings extends Omeka_Form
         ));
         
         $this->addElement('submit', 'settings_submit', array(
-            'label' => __('Save Settings')
+            'label' => __('Save Settings'),
+            'class' => 'big green button'
         ));
         
         $this->addDisplayGroup(

@@ -1,12 +1,11 @@
 <?php 
-$pageTitle = __('Browse Collections');
+$pageTitle = __('Browse Collections ('.$total_records.' total)');
 head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
-<h1><?php echo $pageTitle; ?> <?php echo __('(%s total)', $total_records); ?></h1>
+
 <?php if (has_permission('Collections', 'add')): ?>
-    <p id="add-collection" class="add-button"><a href="<?php echo html_escape(uri('collections/add')); ?>" class="add add-collection"><?php echo __('Add a Collection'); ?></a></p>
+    <a href="<?php echo html_escape(uri('collections/add')); ?>" class="small green button"><?php echo __('Add a Collection'); ?></a>
 <?php endif; ?>
 
-<div id="primary">
     <?php echo flash(); ?>
     <?php if (total_collections() > 0): ?>
         <div class="pagination"><?php echo pagination_links(); ?></div>
@@ -21,9 +20,6 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
                     __('Date Added') => 'added',
                     __('Total Number of Items') => null
                 )); ?>
-                <?php if (has_permission('Collections', 'edit')): ?>
-                    <th scope="col"><?php echo __('Edit?'); ?></th>                
-                <?php endif; ?>
                 </tr>
             </thead>
             <tbody>
@@ -31,18 +27,20 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
         <?php while (loop_collections()): ?>
         
             <tr class="collection<?php if(++$key%2==1) echo ' odd'; else echo ' even'; ?>">
-                <td scope="row"><?php echo collection('id');?>
-                </td> 
-                <td class="title"><?php echo link_to_collection(); ?></td>
+                <td scope="row"><?php echo collection('id');?></td> 
+                <td class="title">
+                    <?php echo link_to_collection(); ?>
+                    <?php if (has_permission(get_current_collection(), 'edit')): ?>
+                    <ul class="action-links">
+                        <li><?php echo link_to_collection(__('Edit'), array('class'=>'edit'), 'edit'); ?></li>
+                    </ul>
+                    <?php endif; ?>
+                </td>
                 <td>
                 <?php if (collection_has_collectors()): ?> 
-                    <ul>
-                        <li><?php echo collection('Collectors', array('delimiter'=>'</li><li>')); ?></li>
-                    </ul>
+                    <?php echo collection('Collectors', array('delimiter'=>'<br>')); ?>
                 <?php else: ?>
-                    <ul>
-                        <li><?php echo __('No collectors'); ?></li>
-                    </ul>
+                    <?php echo __('No collectors'); ?>
                 <?php endif; ?>
                 
                 </td>   
@@ -51,10 +49,6 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
                 <?php endif; ?>
                 </td>
                 <td><?php echo link_to_items_in_collection(); ?></td>
-                <td><?php if (has_permission(get_current_collection(), 'edit')): ?>
-                    <?php echo link_to_collection(__('Edit'), array('class'=>'edit'), 'edit'); ?>
-                <?php endif; ?>
-                </td>
             </tr>
         
             

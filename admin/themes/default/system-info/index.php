@@ -2,9 +2,6 @@
 $title = __('System Information');
 head(array('title' => $title, 'bodyclass' => 'system-info')); ?>
 
-<h1><?php echo $title; ?></h1>
-
-<div id="primary">
 <?php echo flash(); ?>
 
 <pre id="info-field">
@@ -20,6 +17,5 @@ foreach ($info as $category => $entries) {
 }
 ?>
 </pre>
-</div>
 
 <?php foot();

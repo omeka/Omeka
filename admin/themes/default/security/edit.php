@@ -27,12 +27,13 @@ jQuery(document).ready(function () {
 });
 //]]>
 </script>
-<h1><?php echo $pageTitle; ?></h1>
-<?php common('settings-nav'); ?>
 
-<div id="primary">
+<div class="eight columns alpha">
+
+<?php common('settings-nav'); ?>
 <?php echo flash(); ?>
 <?php echo $this->form; ?>
-
+			
 </div>
+
 <?php foot(); ?>

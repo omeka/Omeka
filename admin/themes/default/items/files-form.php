@@ -46,14 +46,15 @@ if (empty($pathToConvert) && has_permission('Settings', 'edit')): ?>
     </div>
 </div>
 
-<div class="field" id="file-inputs">
+<div class="field two columns alpha" id="file-inputs">
     <label><?php echo __('Find a File'); ?></label>
-        
-    <?php for($i=0;$i<$numFiles;$i++): ?>
-    <div class="files inputs">
-        <input name="file[<?php echo $i; ?>]" id="file-<?php echo $i; ?>" type="file" class="fileinput" />          
-    </div>
-    <?php endfor; ?>
 </div>
+
+<?php for($i=0;$i<$numFiles;$i++): ?>
+<div class="files inputs five columns omega">
+    <input name="file[<?php echo $i; ?>]" id="file-<?php echo $i; ?>" type="file" class="fileinput" />          
+</div>
+<?php endfor; ?>
+
 
 <?php fire_plugin_hook('admin_append_to_items_form_files', $item); ?>

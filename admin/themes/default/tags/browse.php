@@ -1,30 +1,42 @@
 <?php
-$pageTitle = __('Browse Tags');
+$pageTitle = __('Browse Tags ('. total_tags() .' total)');
 head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodyclass'=>'tags browse-tags primary')); ?>
-<h1><?php echo $pageTitle; ?> <?php echo __('(%s total)', count($tags)); ?></h1>
-<?php common('tags-nav'); ?>
-<div id="primary">
-<?php if ( total_results() ): ?>
-    <p id="tags-nav"><?php echo __('Sort by'); ?>:
-        <?php
-        $sortOptions = array(
-            __('Most') => array('sort_field' => 'count', 'sort_dir' => 'd'),
-            __('Least') => array('sort_field' => 'count'),
-            __('Alphabetical') => array('sort_field' => 'name'),
-            __('Recent') => array('sort_field' => 'time', 'sort_dir' => 'd')
-        );
+<?php echo flash(); ?>
+<?php if ( total_tags() ): ?>
 
-        foreach ($sortOptions as $label => $params) {
-            $uri = html_escape(current_uri($params));
-            $class = ($sort == $params) ? ' class="current"' : '';
-
-            echo "<a href=\"$uri\"$class>$label</a>";
-        }
-        ?>
-    </p>
-    <?php echo tag_cloud($tags, ($browse_for == 'Item') ? uri('items/browse/'): uri('exhibits/browse/')); ?>
+    <div class="two columns alpha">
+        <h3><?php echo __('Edit/Delete Tags'); ?></h3>
+    </div>
+    
+    <div class="eight columns omega">
+        <p id="tags-nav">
+            <?php
+            $sortOptions = array(
+                __('Most') => array('sort_field' => 'count', 'sort_dir' => 'd'),
+                __('Least') => array('sort_field' => 'count','sort_dir' => 'a'),
+                __('Alphabetical') => array('sort_field' => 'name', 'sort_dir'=> 'a'),
+                __('Recent') => array('sort_field' => 'time', 'sort_dir' => 'd')
+            );
+    
+            foreach ($sortOptions as $label => $params) {
+                $uri = html_escape(current_uri($params));
+                $class = ($sort == $params) ? ' class="current"' : '';
+    
+                echo "<span $class><a href=\"$uri\">$label</a></span>";
+            }
+            ?>
+        </p>
+        <?php echo tag_cloud($tags, ($browse_for == 'Item') ? uri('items/browse/'): uri('exhibits/browse/'), 9, true, 'before'); ?>
+        <div class="hTagcloud">
+            <ul>
+                <li><a href="/admin/items/browse/?tags=united+states"><span class="count">1</span>united states</a><span class="close"><a href="#">close</a></span></li>
+            </ul>
+        </div>
+    </div>
 <?php else: ?>
-    <p><?php echo __('There are no tags to display. You must first tag some items.'); ?></p>
+        <p><?php echo __('There are no tags to display. You must first tag some items.'); ?></p>
+    </div>
 <?php endif; ?>
+
 </div>
 <?php foot(); ?>

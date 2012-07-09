@@ -13,12 +13,10 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
 //]]>    
 </script>
 
-<h1><?php echo $pageTitle; ?></h1>
-
+<div class="seven columns alpha">
 <?php common('settings-nav'); ?>
-
-<div id="primary">
 <?php echo flash(); ?>
 <?php echo $this->form; ?>
 </div>
-<?php foot();
+
+<?php foot(); ?>

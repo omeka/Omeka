@@ -46,7 +46,7 @@ class Omeka_Form_SecuritySettings extends Omeka_Form
                 'description' => __('List of allowed MIME types for file uploads'),
                 'value' => get_option(Omeka_Validate_File_MimeType::WHITELIST_OPTION),
                 'cols' => 50, 
-                'rows' => 5
+                'rows' => 13
             )
         );
         
@@ -89,7 +89,8 @@ class Omeka_Form_SecuritySettings extends Omeka_Form
         ));
         
         $this->addElement('submit', 'security_submit', array(
-            'label' => __('Save Changes')
+            'label' => __('Save Changes'),
+            'class' => 'big green button'
         ));
     }
 }

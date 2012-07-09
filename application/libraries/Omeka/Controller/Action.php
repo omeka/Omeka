@@ -401,7 +401,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
         $form->setElementDecorators(array('ViewHelper'));
         $form->removeDecorator('HtmlTag');
         $form->addElement('hash', 'confirm_delete_hash');
-        $form->addElement('submit', 'Delete', array('class' => 'delete'));
+        $form->addElement('submit', 'Delete', array('class' => 'delete red button'));
         $form->setAction($this->view->url(array('action' => 'delete')));
         return $form;
     }

@@ -1,0 +1,59 @@
+/* Table of Contents
+==================================================
+    #Content Navigation 
+    #Content
+        #Dashboard */
+
+
+/* Form Elements
+==================================================*/
+
+a.button.big, input[type=submit].big, button.big {
+    font-size: 1em;
+    }
+
+/* Content Navigation
+==================================================*/
+
+#content-nav { 
+    width: 100px;
+    font-size: .75em; 
+    }
+
+    #content-nav .current:after {
+        width: 10px;
+        height: 2.375em;
+        background: url('../../images/blue-arrow_sm.png') no-repeat;
+        position: absolute;
+        content: "";
+        top: -1px;
+        right: -10px;
+        }
+
+/* Content 
+==================================================*/
+
+#content {padding: 1em 0;}
+
+.section-title { margin: 60px 0 10px 140px; }
+
+
+    /* Dashboard 
+    ================================================== */
+
+    #stats p { min-width: 1em; }
+    
+    /* Browse Items
+    ==================================================*/
+    
+    .item-actions, .pagination {
+        font-size: .875em;
+        }
+        
+    .item-info {
+        width: 40%;
+        }
+    
+    #quick-filter {
+        width: 80px;
+        }

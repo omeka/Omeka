@@ -29,31 +29,22 @@ jQuery(document).bind('omeka:elementformload', function () {
 //]]>   
 </script>
 
-<?php echo flash(); ?>
+<div class="seven columns alpha">
 
-<div id="public-featured">
-    <?php if ( has_permission('Items', 'makePublic') ): ?>
-        <div class="checkbox">
-            <label for="public"><?php echo __('Public'); ?>:</label> 
-            <div class="checkbox"><?php echo $this->formCheckbox('public', $item->public, array(), array('1', '0')); ?></div>
-        </div>
-    <?php endif; ?>
-    <?php if ( has_permission('Items', 'makeFeatured') ): ?>
-        <div class="checkbox">
-            <label for="featured"><?php echo __('Featured'); ?>:</label> 
-            <div class="checkbox"><?php echo $this->formCheckbox('featured', $item->featured, array(), array('1', '0')); ?></div>
-        </div>
-    <?php endif; ?>
+    <?php echo flash(); ?>
+    
+    <div id="item-metadata">
+    <?php foreach ($tabs as $tabName => $tabContent): ?>
+        <?php if (!empty($tabContent)): ?>
+            <div id="<?php echo text_to_id(html_escape($tabName)); ?>-metadata">
+            <fieldset class="set">
+                <h2><?php echo html_escape(__($tabName)); ?></h2>
+                <?php echo $tabContent; ?>        
+            </fieldset>
+            </div>     
+        <?php endif; ?>
+    <?php endforeach; ?>
+    </div>
+
 </div>
-<div id="item-metadata">
-<?php foreach ($tabs as $tabName => $tabContent): ?>
-    <?php if (!empty($tabContent)): ?>
-        <div id="<?php echo text_to_id(html_escape($tabName)); ?>-metadata">
-        <fieldset class="set">
-            <legend><?php echo html_escape(__($tabName)); ?></legend>
-            <?php echo $tabContent; ?>        
-        </fieldset>
-        </div>     
-    <?php endif; ?>
-<?php endforeach; ?>
-</div>
+

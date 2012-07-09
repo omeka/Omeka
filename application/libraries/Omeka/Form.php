@@ -35,9 +35,6 @@ class Omeka_Form extends Zend_Form
      */
     public function init()
     {
-        // We handle form translations manually.
-        $this->setDisableTranslator(true);
-
         $this->addElementPrefixPath('Omeka_', 'Omeka/');
         $this->addPrefixPath('Omeka_Form_Element', 'Omeka/Form/Element/', 'element');
         
@@ -131,12 +128,8 @@ class Omeka_Form extends Zend_Form
                     array(array('FieldTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'field'))
                 ));
             } else if($element instanceof Zend_Form_Element_Radio) {
-                // ZF sets some strange decorators for Radios by default,
-                // explicitly replace them with our own: see ZF-10065
-                $element->setDecorators($this->getDefaultElementDecorators());
                 // Radio buttons must have a 'radio' class on the div wrapper.
                 $element->getDecorator('InputsTag')->setOption('class', 'inputs radio');
-                $element->getDecorator('Label')->setOption('disableFor', true);
                 $element->setSeparator('');
             } else if ($element instanceof Zend_Form_Element_Hidden 
                     || $element instanceof Zend_Form_Element_Hash) {
@@ -165,19 +158,6 @@ class Omeka_Form extends Zend_Form
             $errors[] = Inflector::humanize($elementName) . ': ' . join($messageDelimiter, $errorArray);
         }
         return join($elementDelimiter, $errors);
-    }
-
-    /**
-     * The logical counterpart to Zend_Form::getMessages(), this is clearly 
-     * missing from the interface.
-     *
-     * @param array $messages
-     */
-    public function setMessages(array $messages)
-    {
-        foreach ($messages as $element => $errors) {
-            $this->$element->addErrors($errors);
-        }
     }
     
     /**

@@ -1,4 +1,3 @@
-<h3><?php echo __('Edit Current Elements'); ?></h3>
 <table width="100%">
     <thead>
         <tr>

@@ -102,7 +102,7 @@ function item_tags_as_string($delimiter = null, $params = array('sort_field' => 
  *      tags in the cloud will not be given links.
  * @return string HTML for the tag cloud
  */
-function tag_cloud($recordOrTags = null, $link = null, $maxClasses = 9)
+function tag_cloud($recordOrTags = null, $link = null, $maxClasses = 9, $tagNumber = false, $tagNumberOrder = null)
 {
     if (!$recordOrTags) {
         $recordOrTags = array();
@@ -140,7 +140,13 @@ function tag_cloud($recordOrTags = null, $link = null, $maxClasses = 9)
         if ($link) {
             $html .= '<a href="' . html_escape($link . '?tags=' . urlencode($tag['name'])) . '">';
         }
+        if($tagNumber && $tagNumberOrder == 'before') {
+            $html .= ' <span class="count">'.$tag['tagCount'].'</span> ';
+        }
         $html .= html_escape($tag['name']);
+        if($tagNumber && $tagNumberOrder == 'after') {
+            $html .= ' <span class="count">'.$tag['tagCount'].'</span> ';
+        }
         if ($link) {
             $html .= '</a>';
         }

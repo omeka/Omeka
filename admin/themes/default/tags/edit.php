@@ -2,9 +2,7 @@
 $pageTitle = __('Edit Tag');
 head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodyclass'=>'tags')); ?>
 
-<h1><?php echo $pageTitle; ?></h1>
 <?php common('tags-nav'); ?>
-<div id="primary">
 <?php echo flash(); ?>
 <?php if (count($tags)): ?>    
 <form method="post" action="">
@@ -31,5 +29,4 @@ head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodyclass'=
 <?php else: ?>
     <p><?php echo __('There are no tags to edit. You must first tag some items.'); ?></p>
 <?php endif; ?>
-</div>
 <?php foot(); ?>
