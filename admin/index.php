@@ -20,7 +20,7 @@ define('ADMIN', true);
 include dirname(dirname(__FILE__)) . '/paths.php';
 
 // Define the admin theme directory path.
-define('THEME_DIR', ADMIN_DIR . '/' . $site['admin_theme']);
+define('THEME_DIR', ADMIN_THEME_DIR);
 
 $app = new Omeka_Core;
 // Configure the Theme bootstrap resource with the correct paths/URLs.
