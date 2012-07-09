@@ -15,8 +15,12 @@
     <li class="page-input">
     <form action="" method="get" accept-charset="utf-8">
     <?php
+    $hiddenParams = array();
     $entries = explode('&', http_build_query($getParams));
     foreach ($entries as $entry) {
+        if(!$entry) {
+            continue;
+        }
         list($key, $value) = explode('=', $entry);
         $hiddenParams[urldecode($key)] = urldecode($value);
     } ?>

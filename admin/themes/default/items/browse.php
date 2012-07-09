@@ -124,8 +124,8 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                         <th id="batch-edit-heading"><?php echo __('Select'); ?></th>
                         <?php endif; ?>
                         <?php
-                        $browseHeadings[__('Title')] = 'Dublin Core,Title';
-                        $browseHeadings[__('Creator')] = 'Dublin Core,Creator';
+                        $browseHeadings[__('Title')] = array('Dublin Core,Title');
+                        $browseHeadings[__('Creator')] = array('Dublin Core,Creator');
                         $browseHeadings[__('Type')] = null;
                         $browseHeadings[__('Public')]  = 'public';
                         $browseHeadings[__('Featured')] = 'featured';
@@ -153,16 +153,16 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                         </ul>
                         <?php fire_plugin_hook('admin_append_to_items_browse_simple_each'); ?>
                         <div class="item-details">
-                            <?php echo snippet_by_word_count(strip_formatting(item('Dublin Core', 'Description')), 40); ?>
+                            <?php echo snippet_by_word_count(strip_formatting(item(array('Dublin Core', 'Description'))), 40); ?>
                             <p><strong><?php echo __('Collection'); ?>:</strong> <?php if (item_belongs_to_collection()) echo link_to_collection_for_item(); else echo __('No Collection'); ?></p><p><strong><?php echo __('Tags'); ?>:</strong> <?php if ($tags = item_tags_as_string()) echo $tags; else echo __('No Tags'); ?></p>
                             </ul>
                             <?php fire_plugin_hook('admin_append_to_items_browse_detailed_each'); ?>
                         </div>
                     </td>
-                    <td><?php echo strip_formatting(item('Dublin Core', 'Creator')); ?></td>
+                    <td><?php echo strip_formatting(item(array('Dublin Core', 'Creator'))); ?></td>
                     <td><?php echo ($typeName = item('Item Type Name'))
                                 ? $typeName
-                                : item('Dublin Core', 'Type', array('snippet' => 35)); ?></td>
+                                : item(array('Dublin Core', 'Type'), array('snippet' => 35)); ?></td>
                     <td>
                     <?php if($item->public): ?>
                     <img src="<?php echo img('silk-icons/tick.png'); ?>" alt="<?php echo __('Public'); ?>"/>

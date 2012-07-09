@@ -35,12 +35,14 @@
                     <?php endif; ?> 
                 </ul>
                 
+                <?php if(total_items_in_collection() > 0): ?>
                 <h2><?php echo __('Recently Added Items'); ?></h2>
                 <ul>
                 <?php while (loop_items_in_collection(10)): ?>
                     <li><span class="date"><?php echo format_date(item('Date Added')); ?></span><span class="title"> <?php echo link_to_item(); ?></span></li>
                 <?php endwhile;?>
                 </ul>
+                <?php endif; ?>
                 
                 <h2><?php echo __('Total Number of Items'); ?></h2>
                 <p><?php echo link_to_items_in_collection(); ?></p>

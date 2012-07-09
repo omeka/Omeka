@@ -366,7 +366,9 @@ p, li {
         /* Checkboxes 
         ================================================== */
         
-            
+        input[type="checkbox"] {
+            margin: 10px;
+        }
 
 
         /* Alerts
@@ -1247,14 +1249,48 @@ header nav {
 .hTagcloud li a {
     height: 100%;
     color: #ffffff;
-    width: 100%;
-    display: block;
+    display: inline-block;
     line-height: 30px;
     padding: 0 0px 0 10px;
     position: relative;
     text-shadow: -1px -1px 1px rgba(0,0,0,.5);
     z-index: 9999;    
     }
+
+.hTagcloud li .close {
+    display: inline-block;
+}
+    
+.hTagcloud li .close a {
+    display: inline-block;
+    text-indent: -999px;
+    width: 17px;
+    background-color: rgba(0, 0, 0, .3);
+    height: 17px;
+    border-radius: 10px;
+    margin: 0 0 0 10px;    
+    position: relative;
+    top: 5px;
+    padding: 0;
+}
+
+.hTagcloud li .close a:after {
+    content: "x";
+    height: 100%;
+    width: 100%;
+    box-shadow: 0px -1px 1px rgba(255,255,255,.3);
+    border-radius: 20px;
+    color:#769a3f;
+    display: block;
+    position: relative;
+    font-family: "Verdana", sans-serif;
+    font-size: 15px;
+    top: 0;
+    float: left;
+    text-indent: 4px;
+    line-height: 14px;
+    text-shadow: none;
+}
     
 #tags-nav {
     margin: 20px 0;
