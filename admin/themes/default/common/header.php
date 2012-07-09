@@ -68,7 +68,7 @@
     <h1 class="section-title"><?php echo $title ?></h1>
     <?php endif; ?>
     
-    <section id="content" class="container">
+    <section class="container">
     
     
-    <div class="ten columns offset-by-two omega">
+    <div id="content" class="ten columns offset-by-two omega">

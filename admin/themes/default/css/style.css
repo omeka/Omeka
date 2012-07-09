@@ -724,6 +724,7 @@ header nav {
         -webkit-box-shadow: 0 0 1px #999999; 
         -moz-box-shadow: 0 0 1px #999999; 
         -o-box-shadow: 0 0 1px #999999; 
+    padding: 20px 10px;
     }    
 
         #content h1:first-child, #content h2:first-child {
@@ -885,7 +886,6 @@ header nav {
 ================================================== */
 
 #stats {
-    display: inline-block;
     text-align: center;
     margin: auto;
     }
@@ -1145,7 +1145,7 @@ header nav {
 #section-nav {
     font-family: "Arvo", sans-serif;
     list-style-type: none;
-    margin: -16px 0 16px 0;
+    margin: -10px 0 16px 0;
     padding: 0;
     }
     
@@ -1186,6 +1186,10 @@ header nav {
 
 /* Tags
 ================================================== */
+
+.tags h3 { margin: 0; }
+
+.tags #tags-nav { margin: 0; }
 
 .count {
     padding: 0 10px 0 0;
@@ -1254,7 +1258,7 @@ header nav {
     padding: 0 0px 0 10px;
     position: relative;
     text-shadow: -1px -1px 1px rgba(0,0,0,.5);
-    z-index: 9999;    
+    z-index: 500;    
     }
 
 .hTagcloud li .close {
