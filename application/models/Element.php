@@ -17,6 +17,7 @@ class Element extends Omeka_Record
     public $order;
     public $name = '';
     public $description = '';
+    public $comment = '';
 
     /**
      * Set the element set for the element.
@@ -72,6 +73,11 @@ class Element extends Omeka_Record
     {
         $this->description = (string)trim($description);
     }
+    
+    public function setComment($comment)
+    {
+        $this->comment = trim($comment);
+    }
 
     /**
      * @param array|string $data If string, it's the name of the element.
@@ -80,6 +86,7 @@ class Element extends Omeka_Record
      * <ul>
      *  <li>name</li>
      *  <li>description</li>
+     *  <li>comment</li>
      *  <li>order</li>
      *  <li>element_set_id</li>
      *  <li>element_set</li>
@@ -104,6 +111,9 @@ class Element extends Omeka_Record
                         break;
                     case 'description':
                         $this->setDescription($value);
+                        break;
+                    case 'comment':
+                        $this->setComment($value);
                         break;
                     default:
                         $this->$key = $value;

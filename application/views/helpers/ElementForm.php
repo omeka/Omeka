@@ -65,7 +65,12 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
     {
         return html_escape($this->_element['description']);
     }
-
+    
+    protected function _getFieldComment()
+    {
+        return html_escape($this->_element['comment']);
+    }
+    
     protected function _isPosted()
     {
         $postArray = $this->_getPostArray();
@@ -254,7 +259,8 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
         // Tooltips should be in a <span class="tooltip">
         $html = '<p class="explanation">';
         $html .= __($this->_getFieldDescription()) .'</p>';
-
+        $html .= '<p class="explanation">';
+        $html .= __($this->_getFieldComment()) .'</p>';
         return $html;
     }
 

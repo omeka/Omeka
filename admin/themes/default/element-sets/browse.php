@@ -3,7 +3,7 @@ $pageTitle = __('Browse Element Sets');
 head(array('title'=> $pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'element-sets primary'));?>
 
 <?php common('settings-nav'); ?>
-
+<?php echo flash(); ?>
 <table>
     <thead>
         <tr>
@@ -18,11 +18,14 @@ head(array('title'=> $pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=
             
             <td class="element-set-name">
                 <?php echo html_escape(__($elementSet->name)); ?>
-                <?php if (has_permission('ElementSets', 'delete') and !in_array($elementSet->name, $doNotDelete)): ?>
                 <ul class="action-links">
+                    <?php if (ELEMENT_SET_ITEM_TYPE != $elementSet->name): ?>
+                    <li><?php echo link_to($elementSet, 'edit', __('Edit')); ?></li>
+                    <?php endif; ?>
+                    <?php if (has_permission('ElementSets', 'delete') && !in_array($elementSet->name, $doNotDelete)): ?>
                     <li><?php echo link_to($elementSet, 'delete-confirm', __('Delete'), array('class' => 'delete')); ?></li>
+                    <?php endif; ?>
                 </ul>
-                <?php endif; ?>
             </td>
             <td>
                 <?php echo html_escape(__($elementSet->description)); ?>

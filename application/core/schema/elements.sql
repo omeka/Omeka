@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%elements` (
   `order` int unsigned default NULL,
   `name` varchar(255) collate utf8_unicode_ci NOT NULL,
   `description` text collate utf8_unicode_ci,
+  `comment` text collate utf8_unicode_ci,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name_element_set_id` (`element_set_id`,`name`),
   UNIQUE KEY `order_element_set_id` (`element_set_id`,`order`),

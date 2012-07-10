@@ -28,7 +28,7 @@ class ElementSetsController extends Omeka_Controller_Action
              . 'to this element set.');
     }
     /**
-     * Can't add or edit element sets via the admin interface, so disable these
+     * Can't add element sets via the admin interface, so disable these
      * actions from being POST'ed to.
      * 
      * @return void
@@ -40,6 +40,57 @@ class ElementSetsController extends Omeka_Controller_Action
     
     public function editAction()
     {
-        throw new Omeka_Controller_Exception_403();
+        $elementSet = $this->_helper->db->findById();
+        
+        // Do not allow editing of item type elements.
+        if (ELEMENT_SET_ITEM_TYPE == $elementSet->name) {
+            $this->_helper->redirector('index');
+        }
+        
+        $db = $this->_helper->db;
+        
+        // Handle a submitted edit form.
+        if ($elements = $this->getRequest()->getPost('elements')) {
+            
+            // Establish a valid element order.
+            $order = array();
+            foreach ($elements as $id => $element) {
+                $order[$id] = (int) $element['order'];
+            }
+            asort($order); // sort preserving keys
+            $i = 1;
+            foreach ($order as $id => $orderNumber) {
+                $elements[$id]['order'] = $i;
+                $i++;
+            }
+            
+            // Delete existing element order to prevent duplicate indices.
+            $db->getDb()->update(
+                $db->getDb()->Element, 
+                array('order' => null), 
+                array('element_set_id' => $this->getRequest()->getParam('id'))
+            );
+            
+            // Update the elements.
+            try {
+                foreach ($elements as $id => $element) {
+                    $elementRecord = $db->getTable('Element')->find($id);
+                    $elementRecord->comment = trim($element['comment']);
+                    $elementRecord->order = $element['order'];
+                    $elementRecord->save();
+                }
+                $this->_helper->flashMessenger(__('The element set was successfully changed!'), 'success');
+                $this->_helper->redirector('index');
+            } catch (Exception $e) {
+                $this->_helper->flashMessenger($e->getMessage(), 'error');
+            }
+        }
+        
+        $this->view->assign('elementSet', $elementSet);
+    }
+    
+    protected function _redirectAfterEdit($record)
+    {
+        $this->_helper->redirector('index');
     }
 }
