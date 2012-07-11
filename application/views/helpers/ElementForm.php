@@ -260,7 +260,7 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
         $html = '<p class="explanation">';
         $html .= __($this->_getFieldDescription()) .'</p>';
         $html .= '<p class="explanation">';
-        $html .= __($this->_getFieldComment()) .'</p>';
+        $html .= $this->_getFieldComment() .'</p>';
         return $html;
     }
 

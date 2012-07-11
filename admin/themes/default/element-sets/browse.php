@@ -1,7 +1,8 @@
 <?php 
 $pageTitle = __('Browse Element Sets');
-head(array('title'=> $pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'element-sets primary'));?>
-
+head(array('title'=> $pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'element-sets primary'));
+$doNotDelete = array('Dublin Core', 'Item Type Metadata', 'Omeka Image File', 'Omeka Video File');
+?>
 <?php common('settings-nav'); ?>
 <?php echo flash(); ?>
 <table>
@@ -14,15 +15,13 @@ head(array('title'=> $pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=
     <tbody>
     <?php foreach ($elementsets as $elementSet): ?>
         <tr>
-            <?php $doNotDelete = array('Dublin Core', 'Item Type Metadata', 'Omeka Image File', 'Omeka Video File'); ?>
-            
             <td class="element-set-name">
                 <?php echo html_escape(__($elementSet->name)); ?>
                 <ul class="action-links">
                     <?php if (ELEMENT_SET_ITEM_TYPE != $elementSet->name): ?>
                     <li><?php echo link_to($elementSet, 'edit', __('Edit')); ?></li>
                     <?php endif; ?>
-                    <?php if (has_permission('ElementSets', 'delete') && !in_array($elementSet->name, $doNotDelete)): ?>
+                    <?php if (!in_array($elementSet->name, $doNotDelete)): ?>
                     <li><?php echo link_to($elementSet, 'delete-confirm', __('Delete'), array('class' => 'delete')); ?></li>
                     <?php endif; ?>
                 </ul>
