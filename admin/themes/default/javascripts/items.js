@@ -432,15 +432,11 @@ Omeka.Items.enableWysiwygCheckbox = function (checkbox) {
 /**
  * Enable the WYSIWYG editor for "html-editor" fields on the form, and allow
  * checkboxes to create editors for more fields.
+ *
+ * @param {Element} element The element to search at and below.
  */
-Omeka.Items.enableWysiwyg = function () {
-    jQuery('div.inputs input[type="checkbox"]').each(function () {
+Omeka.Items.enableWysiwyg = function (element) {
+    jQuery(element).find('div.inputs input[type="checkbox"]').each(function () {
         Omeka.Items.enableWysiwygCheckbox(this);
-    });
-
-    Omeka.wysiwyg({
-        mode: "specific_textareas",
-        editor_selector: "html-editor",
-        forced_root_block: ""
     });
 };

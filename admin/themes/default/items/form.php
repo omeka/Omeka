@@ -15,6 +15,12 @@ jQuery(window).load(function () {
     Omeka.Items.makeFileWindow();
     Omeka.Items.tagChoices('#tags', <?php echo js_escape(uri(array('controller'=>'tags', 'action'=>'autocomplete'), 'default', array(), true)); ?>);
 
+    Omeka.wysiwyg({
+        mode: "specific_textareas",
+        editor_selector: "html-editor",
+        forced_root_block: ""
+    });
+
     // Must run the element form scripts AFTER reseting textarea ids.
     jQuery(document).trigger('omeka:elementformload');
 
@@ -22,9 +28,9 @@ jQuery(window).load(function () {
     Omeka.Items.changeItemType(<?php echo js_escape(uri("items/change-type")) ?><?php if ($id = item('id')) echo ', '.$id; ?>);
 });
 
-jQuery(document).bind('omeka:elementformload', function () {
+jQuery(document).bind('omeka:elementformload', function (event) {
     Omeka.Items.makeElementControls(<?php echo js_escape(uri('items/element-form')); ?><?php if ($id = item('id')) echo ', '.$id; ?>);
-    Omeka.Items.enableWysiwyg();
+    Omeka.Items.enableWysiwyg(event.target);
 });
 //]]>   
 </script>
