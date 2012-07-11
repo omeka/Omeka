@@ -29,7 +29,7 @@ jQuery(window).load(function () {
 });
 
 jQuery(document).bind('omeka:elementformload', function (event) {
-    Omeka.Items.makeElementControls(<?php echo js_escape(uri('items/element-form')); ?><?php if ($id = item('id')) echo ', '.$id; ?>);
+    Omeka.Items.makeElementControls(event.target, <?php echo js_escape(uri('items/element-form')); ?><?php if ($id = item('id')) echo ', '.$id; ?>);
     Omeka.Items.enableWysiwyg(event.target);
 });
 //]]>   

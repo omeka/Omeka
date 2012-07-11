@@ -320,17 +320,26 @@ Omeka.Items.elementFormRequest = function (fieldDiv, params, elementFormPartialU
 /**
  * Set up add/remove element buttons for ElementText inputs.
  *
+ * @param {Element} element The element to search at and below.
  * @param {string} elementFormPartialUrl AJAX URL for form inputs.
  * @param {string} itemId Current Item ID.
  */
-Omeka.Items.makeElementControls = function (elementFormPartialUrl, itemId) {
+Omeka.Items.makeElementControls = function (element, elementFormPartialUrl, itemId) {
     var addSelector = '.add-element';
     var removeSelector = '.remove-element';
     var fieldSelector = 'div.field';
     var inputBlockSelector = 'div.input-block';
+    var context = jQuery(element);
+    var fields;
+
+    if (context.is(fieldSelector)) {
+        fields = context;
+    } else {
+        fields = context.find(fieldSelector);
+    }
 
     // Show remove buttons for fields with 2 or more inputs.
-    jQuery('div.field').each(function () {
+    fields.each(function () {
         var removeButtons = jQuery(this).find(removeSelector);
         if (removeButtons.length > 1) {
             removeButtons.show();
@@ -338,7 +347,7 @@ Omeka.Items.makeElementControls = function (elementFormPartialUrl, itemId) {
     });
 
     // When an add button is clicked, make an AJAX request to add another input.
-    jQuery(addSelector).click(function (event) {
+    context.find(addSelector).click(function (event) {
         event.preventDefault();
         var fieldDiv = jQuery(this).parents(fieldSelector);
 
@@ -346,7 +355,7 @@ Omeka.Items.makeElementControls = function (elementFormPartialUrl, itemId) {
     });
 
     // When a remove button is clicked, remove that input from the form.
-    jQuery(removeSelector).click(function (event) {
+    context.find(removeSelector).click(function (event) {
         event.preventDefault();
         var removeButton = jQuery(this);
 
