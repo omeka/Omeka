@@ -78,8 +78,8 @@ class ElementTable extends Omeka_Db_Table
         // ORDER BY e.order ASC, es.name ASC
         // This SQL statement will return results ordered each element set,
         // and for each element set these will be in the proper designated order.
-        $select->order('elements.order ASC');
         $select->order('elements.element_set_id ASC');
+        $select->order('elements.order ASC');
     }
     
     /**
