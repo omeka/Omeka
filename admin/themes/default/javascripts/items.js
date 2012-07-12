@@ -415,17 +415,17 @@ Omeka.Items.enableWysiwygCheckbox = function (checkbox) {
     var textarea = jQuery(checkbox).parents('.input-block').find('textarea');
     if (textarea.length) {
         var textareaId = textarea.attr('id');
-        if (checkbox.checked) {
-            textarea.addClass('html-editor');
-        }
-        // Whenever the checkbox is toggled, toggle the WYSIWYG editor.
-        jQuery(checkbox).click(function () {
+        var enableIfChecked = function () {
+            tinyMCE.execCommand("mceRemoveControl", false, textareaId);
             if (checkbox.checked) {
                 tinyMCE.execCommand("mceAddControl", false, textareaId);
-            } else {
-                tinyMCE.execCommand("mceRemoveControl", false, textareaId);
             }
-        });
+        };
+
+        enableIfChecked();
+
+        // Whenever the checkbox is toggled, toggle the WYSIWYG editor.
+        jQuery(checkbox).click(enableIfChecked);
     }
 };
 

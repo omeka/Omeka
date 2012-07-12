@@ -16,8 +16,7 @@ jQuery(window).load(function () {
     Omeka.Items.tagChoices('#tags', <?php echo js_escape(uri(array('controller'=>'tags', 'action'=>'autocomplete'), 'default', array(), true)); ?>);
 
     Omeka.wysiwyg({
-        mode: "specific_textareas",
-        editor_selector: "html-editor",
+        mode: "none",
         forced_root_block: ""
     });
 
