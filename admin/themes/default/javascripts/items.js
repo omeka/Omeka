@@ -77,6 +77,9 @@ Omeka.Items.changeItemType = function (changeItemTypeUrl, itemId) {
             success: function (response) {
                 var form = jQuery('#type-metadata-form');
                 form.hide();
+                form.find('textarea').each(function () {
+                    tinyMCE.execCommand('mceRemoveControl', true, this.id);
+                });
                 form.html(response);
                 form.trigger('omeka:elementformload');
                 form.slideDown(1000, function () {
@@ -311,6 +314,9 @@ Omeka.Items.elementFormRequest = function (fieldDiv, params, elementFormPartialU
         dataType: 'html',
         data: params,
         success: function (response) {
+            fieldDiv.find('textarea').each(function () {
+                tinyMCE.execCommand('mceRemoveControl', false, this.id);
+            });
             fieldDiv.html(response);
             fieldDiv.trigger('omeka:elementformload');
         }
@@ -368,7 +374,11 @@ Omeka.Items.makeElementControls = function (element, elementFormPartialUrl, item
             return;
         }
 
-        removeButton.parents(inputBlockSelector).remove();
+        var inputBlock = removeButton.parents(inputBlockSelector);
+        inputBlock.find('textarea').each(function () {
+            tinyMCE.execCommand('mceRemoveControl', false, this.id);
+        });
+        inputBlock.remove();
 
         // Hide remove buttons for fields with one input.
         jQuery(fieldSelector).each(function () {
@@ -416,9 +426,10 @@ Omeka.Items.enableWysiwygCheckbox = function (checkbox) {
     if (textarea.length) {
         var textareaId = textarea.attr('id');
         var enableIfChecked = function () {
-            tinyMCE.execCommand("mceRemoveControl", false, textareaId);
             if (checkbox.checked) {
                 tinyMCE.execCommand("mceAddControl", false, textareaId);
+            } else {
+                tinyMCE.execCommand("mceRemoveControl", false, textareaId);
             }
         };
 
