@@ -71,8 +71,7 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
     {
         $this->_record = $record;
         $this->_setOptions($options);
-        $output = $this->_getOutput();
-        return $output;
+        return $this->_getOutput();
     }
 
     /**
@@ -130,17 +129,6 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
     }
 
     /**
-     * Get an array of all texts belonging to the provided element.
-     * @uses Item::getElementTextsByRecord()
-     * @param Element $element
-     * @return array
-     */
-    protected function _getTextsByElement(Element $element)
-    {
-        return $this->_record->getElementTextsByRecord($element);
-    }
-
-    /**
      * Determine if an element is allowed to be shown.
      *
      * @param Element $element
@@ -150,6 +138,18 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
     protected function _elementIsShowable(Element $element, $texts)
     {
         return $this->_showEmptyElements || !empty($texts);
+    }
+
+    /**
+     * Return a formatted version of all the texts for the requested element.
+     *
+     * @param Omeka_Record $record
+     * @param array $metadata
+     * @return string
+     */
+    protected function _getFormattedElementTexts($record, $metadata)
+    {
+        return $this->view->recordMetadata($record, $metadata, array('all' => true));
     }
 
     /**
@@ -166,7 +166,7 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
         foreach ($elementSets as $setName => $elementsInSet) {
             $setInfo = array();
             foreach ($elementsInSet as $elementName => $element) {
-                $elementTexts = $this->_getFormattedElementText(
+                $elementTexts = $this->_getFormattedElementTexts(
                     $this->_record, array($element->set_name, $element->name)
                 );
                 if (!$this->_elementIsShowable($element, $elementTexts)) {
@@ -195,18 +195,6 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
     }
 
     /**
-     * Return a formatted version of the requested element.
-     *
-     * @param Omeka_Record $record
-     * @param array $metadata
-     * @return string
-     */
-    protected function _getFormattedElementText($record, $metadata)
-    {
-        return $this->view->recordMetadata($record, $metadata, array('all' => true));
-    }
-
-    /**
      * Get the metadata list as a PHP array.
      *
      * @return array
@@ -219,7 +207,7 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
             $outputArray[$setName] = array();
             foreach ($elementsInSet as $key => $element) {
                 $elementName = $element->name;
-                $textArray = $this->_getFormattedElementText($this->_record, array($element->set_name, $elementName));
+                $textArray = $this->_getFormattedElementTexts($this->_record, array($element->set_name, $elementName));
                 if (!empty($textArray[0]) or $this->_showEmptyElements) {
                     $outputArray[$setName][$elementName] = $textArray;
                 }
