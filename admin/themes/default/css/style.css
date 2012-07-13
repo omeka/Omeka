@@ -681,6 +681,10 @@ header nav {
     #save .panel {
         clear: both;
         }
+        
+    #save .pagination {
+        width: 100%;
+    }
     
     #save .pagination li {
         margin: 0 0 10px 0;
@@ -1144,6 +1148,11 @@ header nav {
 /* Show Item  
 ================================================== */
 
+.admin-thumb {
+    width: 100px;
+    box-shadow: 0 0 3px rgba(0,0,0,.15);
+}
+
 .element {
     clear: both;
     overflow: auto;
@@ -1159,7 +1168,13 @@ header nav {
     font-size: 16px;
     word-wrap: break-word;
     line-height: 16px;
+    margin: 0 0 1em 0;
+    padding: 7px 0;
     }
+
+#item-images {
+    margin: 0 0 20px 0;
+}
 
 /* Batch Edit Items
 ================================================== */

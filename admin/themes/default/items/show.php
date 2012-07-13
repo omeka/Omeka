@@ -87,6 +87,11 @@
 
             <div class="seven columns alpha">
                 <?php echo flash(); ?>            
+                    <?php if(item_has_files()): ?>
+                    <div id="item-images">
+                    <?php echo display_files_for_item(array('imageSize' => 'square_thumbnail', 'imgAttributes' => array('class' => 'admin-thumb'))); ?> 
+                    </div>
+                    <?php endif; ?>
                 <?php echo show_item_metadata(array('show_empty_elements' => true)); ?>
             </div>
             
