@@ -59,21 +59,21 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
     public static function formPresence()
     {
         return array(
-            array('/items/browse', 'simple-search'),
-            array('/items/add', 'item-form'),
-            array('/items/edit/1', 'item-form'),
-            array('/items/advanced-search', 'advanced-search-form'),
-            array('/items/browse', 'items-browse'),
+            array('/items/browse', 'form#simple-search'),
+            array('/items/add', 'form#item-form'),
+            array('/items/edit/1', 'form#item-form'),
+            array('/items/advanced-search', 'form#advanced-search-form'),
+            array('/items/browse', 'form.items-browse'),
         );
     }
 
     /**
      * @dataProvider formPresence
      */
-    public function testFormPresence($url, $formId, $callback = null)
+    public function testFormPresence($url, $query, $callback = null)
     {
         $this->dispatch($url, $callback);
-        $this->assertQuery("form#$formId", (string)$this->response->getBody());
+        $this->assertQuery($query, (string)$this->response->getBody());
     }
 
     public static function ajaxRequired()

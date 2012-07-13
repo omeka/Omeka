@@ -14,7 +14,14 @@ head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?>
                 <p><?php echo link_to('plugins', null, __($pluginRecords)); ?><br><?php echo __('plugins') ?></p>
                 <p><?php echo link_to('tags', null, __(total_tags())); ?><br><?php echo __('tags') ?></p>
                 <p><?php echo link_to('users', null, __(total_users())); ?><br><?php echo __('users') ?></p>
-                <p><a href="<?php echo html_escape(uri('system-info')); ?>" ><?php echo __('%s', OMEKA_VERSION); ?></a><br>Omeka version</p>
+                <p>
+                    <?php if (get_option('display_system_info') && has_permission('SystemInfo', 'index')): ?>
+                    <a href="<?php echo html_escape(uri('system-info')); ?>" ><?php echo OMEKA_VERSION; ?></a>
+                    <?php else: ?>
+                    <?php echo OMEKA_VERSION; ?>
+                    <?php endif; ?>
+                    <br><?php echo __('Omeka version'); ?>
+                </p>
                 <p class="theme"><?php echo link_to('themes', null, $themeName); ?></a><br>theme</p>
             </section>
             
