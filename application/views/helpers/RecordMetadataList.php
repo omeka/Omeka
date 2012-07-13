@@ -141,25 +141,15 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
     }
 
     /**
-     * Determine if an element is allowed to be shown. This method also caches
-     * the current Element object and the array of the current ElementText
-     * objects. This caching occurs to avoid complexity in the output methods.
-     * @todo Maybe separate caching here so it's not hiding in a seemingly
-     * unassociated method. Though, doing so would require an extra step in the
-     * output methods (i.e. <?php $this->_cache($element); ?>).
+     * Determine if an element is allowed to be shown.
+     *
      * @param Element $element
      * @param array $texts
      * @return boolean
      */
     protected function _elementIsShowable(Element $element, $texts)
     {
-        // If the condidtions are met, this element is showable.
-        if (!empty($texts)
-            || (empty($texts) && $this->_showEmptyElements)) {
-            return true;
-        }
-        // This element is not showable.
-        return false;
+        return $this->_showEmptyElements || !empty($texts);
     }
 
     /**
@@ -171,33 +161,37 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
         // Prepare the metadata for display on the partial.  There should be no
         // need for method calls by default in the view partial.
         $elementSets = $this->_getElementsBySet();
+        $emptyString = html_escape(__($this->_emptyElementString));
+        $elementsForDisplay = array();
         foreach ($elementSets as $setName => $elementsInSet) {
-            $setIsEmpty = true;
-            foreach ($elementsInSet as $key => $element) {
-                $elementName = $element->name;
-                $elementsInSet[$key] = array();
-                $elementsInSet[$key]['element'] = $element;
-                $elementsInSet[$key]['elementName'] = $element->name;
+            $setInfo = array();
+            foreach ($elementsInSet as $elementName => $element) {
                 $elementTexts = $this->_getFormattedElementText(
                     $this->_record, array($element->set_name, $element->name)
                 );
-                $elementsInSet[$key]['isShowable'] = $this->_elementIsShowable($element, $elementTexts);
-                $elementsInSet[$key]['isEmpty'] = empty($elementTexts);
-                $elementsInSet[$key]['emptyText'] = html_escape($this->_emptyElementString);
-                $elementsInSet[$key]['texts'] = $elementTexts;
-                if ($setIsEmpty && !$elementsInSet[$key]['isEmpty']) {
-                    $setIsEmpty = false;
+                if (!$this->_elementIsShowable($element, $elementTexts)) {
+                    continue;
                 }
-            }
-            $elementSets[$setName] = $elementsInSet;
 
-            // We're done preparing the data for display, so display it.
-            if (!$setIsEmpty || $this->_showEmptyElements){
-            $varsToInject = array('elementSets'=>$elementSets, 'setName'=>$setName,
-            'elementsInSet'=>$elementsInSet, 'record'=>$this->_record);
-            $this->_loadViewPartial($varsToInject);
+                $displayInfo = array();
+                $displayInfo['element'] = $element;
+                if (empty($elementTexts)) {
+                    $displayInfo['texts'] = array($emptyString);
+                } else {
+                    $displayInfo['texts'] = $elementTexts;
+                }
+
+                $setInfo[$elementName] = $displayInfo;
+            }
+            if (!empty($setInfo)) {
+                $elementsForDisplay[$setName] = $setInfo;
             }
         }
+        // We're done preparing the data for display, so display it.
+        $this->_loadViewPartial(array(
+            'elementsForDisplay' => $elementsForDisplay,
+            'record' => $this->_record
+        ));
     }
 
     /**
@@ -245,16 +239,12 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
             case self::RETURN_HTML:
                 ob_start();
                 $this->_getOutputAsHtml();
-                $output = ob_get_contents();
-                ob_end_clean();
+                $output = ob_get_clean();
                 return $output;
-                break;
             case self::RETURN_ARRAY:
                 return $this->_getOutputAsArray();
-                break;
             default:
                 throw new Omeka_View_Exception('Invalid return type!');
-                break;
         }
     }
 
@@ -270,6 +260,6 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
      */
     protected function _loadViewPartial($vars = array())
     {
-        return common('record-metadata', $vars);
+        common('record-metadata', $vars);
     }
 }
