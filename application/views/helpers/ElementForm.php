@@ -189,68 +189,11 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
         $html = '';
 
         for ($i=0; $i < $fieldCount; $i++) {
-            $html .= '<div class="input-block">';
-
-            $fieldStem = $this->_getFieldNameStem($i);
-
-            $html .= '<div class="input">';
-            $html .= $this->_displayFormInput($fieldStem, $this->_getValueForField($i));
-            $html .= '</div>';
-
-            $html .= $this->_displayFormControls();
-
-            $html .= $this->_displayHtmlFlag($fieldStem, $i);
-
-            $html .= '</div>';
+            $html .= $this->view->elementInput(
+                $this->_element, $this->_record, $i,
+                $this->_getValueForField($i), $this->_getHtmlFlagForField($i));
         }
 
-        return $html;
-    }
-
-    protected function _getFieldNameStem($index)
-    {
-        return "Elements[" . $this->_element['id'] . "][$index]";
-    }
-
-    protected function _getPluginFilterForFormInput()
-    {
-        return array(
-            'Form',
-            get_class($this->_record),
-            $this->_element->set_name,
-            $this->_element->name);
-    }
-
-    protected function _displayFormInput($inputNameStem, $value, $options=array())
-    {
-        // Plugins should apply a filter to this blank HTML in order to display it in a certain way.
-        $html = '';
-
-        $filterName = $this->_getPluginFilterForFormInput();
-
-        $html = apply_filters($filterName, $html, $inputNameStem, $value, $options, $this->_record, $this->_element);
-
-        // Short-circuit the default display functions b/c we already have the HTML we need.
-        if (!empty($html)) {
-            return $html;
-        }
-
-        return $this->view->formTextarea(
-            $inputNameStem . '[text]',
-            $value,
-            array('class' => 'textinput', 'rows' => 3, 'cols' => 50));
-    }
-
-    protected function _displayHtmlFlag($inputNameStem, $index)
-    {
-        $isHtml = $this->_getHtmlFlagForField($index);
-
-        // Add a checkbox for the 'html' flag (always for any field)
-        $html = '<label class="use-html">' . __('Use HTML');
-        $html .= $this->view->formCheckbox($inputNameStem . '[html]', 1, array('checked'=>$isHtml));
-        $html .= '</label>';
-
-        $html = apply_filters('element_form_display_html_flag', $html, $this->_element);
         return $html;
     }
 
@@ -267,23 +210,5 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
     protected function _displayFieldLabel()
     {
         return '<label>' . __($this->_getFieldLabel()) . '</label>';
-    }
-
-    /**
-     *   The + button that will allow a user to add another form input.
-     *   The name of the submit input is 'add_element_#' and it has a class of
-     *   'add-element', which is used by the Javascript to do stuff. *
-     */
-    protected function _displayFormControls()
-    {
-        // Used by Javascript.
-        $html = '<div class="controls">';
-
-        $html .= $this->view->formSubmit('remove_element_' . $this->_element['id'], __('Remove'),
-            array('class'=>'remove-element red button'));
-
-        $html .= '</div>'; // Close 'controls' div
-
-        return $html;
     }
 }
