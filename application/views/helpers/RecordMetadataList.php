@@ -8,11 +8,10 @@
 
 /**
  * View helper for retrieving lists of metadata for any record that
- * uses ActsAsElementText.
+ * uses Mixin_ElementText.
  *
  * @package Omeka
  * @subpackage Omeka_View_Helper
- * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  */
 class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
 {
@@ -20,8 +19,8 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
     const RETURN_ARRAY = 'array';
 
     /**
-     * The Item object.
-     * @var object
+     * The record being printed.
+     * @var Omeka_Record
      */
     protected $_record;
 
@@ -145,7 +144,7 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
      *
      * @param Omeka_Record $record
      * @param array $metadata
-     * @return string
+     * @return array
      */
     protected function _getFormattedElementTexts($record, $metadata)
     {
@@ -153,8 +152,8 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
     }
 
     /**
-     * Output the default format for displaying record metadata.
-     * @return void
+     * Output the default HTML format for displaying record metadata.
+     * @return string
      */
     protected function _getOutputAsHtml()
     {
@@ -188,7 +187,7 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
             }
         }
         // We're done preparing the data for display, so display it.
-        $this->_loadViewPartial(array(
+        return $this->_loadViewPartial(array(
             'elementsForDisplay' => $elementsForDisplay,
             'record' => $this->_record
         ));
@@ -225,10 +224,7 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
     {
         switch ($this->_returnType) {
             case self::RETURN_HTML:
-                ob_start();
-                $this->_getOutputAsHtml();
-                $output = ob_get_clean();
-                return $output;
+                return $this->_getOutputAsHtml();
             case self::RETURN_ARRAY:
                 return $this->_getOutputAsArray();
             default:
@@ -243,11 +239,11 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
      * hardcoding it.  That would allow us to use arbitrary partials for
      * purposes such as repackaging the data for RSS/XML or other data formats.
      *
-     * @param array $vars
-     * @return void
+     * @param array $vars Variables to pass to the partial.
+     * @return string
      */
     protected function _loadViewPartial($vars = array())
     {
-        common('record-metadata', $vars);
+        return $this->view->partial('common/record-metadata.php', $vars);
     }
 }
