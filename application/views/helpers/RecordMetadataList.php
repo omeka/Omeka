@@ -125,7 +125,7 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
             $elementsBySet = array_intersect_key($elementsBySet, array_flip($this->_elementSetsToShow));
         }
 
-        return $elementsBySet;
+        return apply_filters('record_metadata_elements', $elementsBySet);
     }
 
     /**
