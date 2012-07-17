@@ -4,6 +4,7 @@
 # 
 # Translators:
 #   <daniel.takacs@gmail.com>, 2012.
+# Imre Juhász <juhasz.imr@gmail.com>, 2012.
 #   <madarasz.csaba@gmail.com>, 2012.
 # Sándor Koroknai <koroknaisandor@gmail.com>, 2012.
 msgid ""
@@ -11,9 +12,9 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2011-11-22 16:18-0500\n"
-"PO-Revision-Date: 2012-03-30 08:49+0000\n"
-"Last-Translator: Sándor Koroknai <koroknaisandor@gmail.com>\n"
-"Language-Team: Hungarian (Hungary) (http://www.transifex.net/projects/p/omeka/language/hu_HU/)\n"
+"PO-Revision-Date: 2012-05-10 06:36+0000\n"
+"Last-Translator: Imre Juhász <juhasz.imr@gmail.com>\n"
+"Language-Team: Hungarian (Hungary) (http://www.transifex.com/projects/p/omeka/language/hu_HU/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -347,13 +348,13 @@ msgstr "Gyűjtemény hozzáadása"
 
 #: admin/themes/default/collections/browse.php:71
 msgid "There are no collections in your archive."
-msgstr ""
+msgstr "Nincs gyűjtemény az archívumban."
 
 #: admin/themes/default/collections/edit.php:8
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Edit Collection #%s"
-msgstr ""
+msgstr "#%s gyűjtemény szerkesztése"
 
 #: admin/themes/default/collections/edit.php:14
 msgid "Delete this Collection"
@@ -393,7 +394,7 @@ msgstr "Gyűjtemény leírása"
 #: admin/themes/default/collections/form.php:25
 msgid ""
 "List collectors for this collection (optional - enter one name per line)"
-msgstr ""
+msgstr "Gyűjtők felsorolása a gyűjteményhez (javaslat - egy név soronként)"
 
 #: admin/themes/default/collections/form.php:35
 #: admin/themes/default/collections/form.php:37
@@ -522,11 +523,11 @@ msgstr "Általános beállítások"
 
 #: admin/themes/default/common/settings-nav.php:8
 msgid "Plugins"
-msgstr ""
+msgstr "Bővítmények"
 
 #: admin/themes/default/common/settings-nav.php:11
 msgid "Themes"
-msgstr ""
+msgstr "Témák"
 
 #: admin/themes/default/common/settings-nav.php:14
 #: admin/themes/default/index.php:45
@@ -586,7 +587,7 @@ msgstr "Oldal adminisztrátor"
 #: admin/themes/default/error/403.php:13
 #, php-format
 msgid "If you think you should have permission, try contacting the %s."
-msgstr ""
+msgstr "Ha úgy gondolja van jogosultsága, próbáljon kapcsolatba lépni az %s."
 
 #: admin/themes/default/error/404.php:2
 msgid "404: Page Not Found"
@@ -626,7 +627,7 @@ msgstr ""
 #: admin/themes/default/files/edit.php:8
 #, php-format
 msgid "Edit File #%s"
-msgstr ""
+msgstr "#%s fájl szerkesztése"
 
 #: admin/themes/default/files/edit.php:17
 msgid "Delete this File"
@@ -771,21 +772,21 @@ msgstr "Általános beállítások szerkesztése"
 
 #: admin/themes/default/index.php:62
 msgid "Manage Themes"
-msgstr ""
+msgstr "Témák kezelése"
 
 #: admin/themes/default/index.php:63
 msgid "Manage Plugins"
-msgstr ""
+msgstr "Bővítmények kezelés"
 
 #: admin/themes/default/index.php:65
 msgid ""
 "Manage your general settings for the site, including title, description, and"
 " themes."
-msgstr ""
+msgstr "Az oldal általános beállításainak kezelése, beleértve a címet, leírást és a témákat."
 
 #: admin/themes/default/index.php:75
 msgid "Site Overview"
-msgstr ""
+msgstr "Honlap áttekintés"
 
 #: admin/themes/default/index.php:85
 #, php-format
@@ -876,7 +877,7 @@ msgstr ""
 
 #: admin/themes/default/item-types/element-list.php:8
 msgid "Order"
-msgstr ""
+msgstr "Rendezés"
 
 #: admin/themes/default/item-types/element-list.php:59
 msgid "Existing"
@@ -965,7 +966,7 @@ msgstr "Gyűjtemény"
 #: admin/themes/default/items/tag-form.php:11
 #: admin/themes/default/items/tag-form.php:13
 msgid "Add Tags"
-msgstr ""
+msgstr "Cimkék hozzáadása"
 
 #: admin/themes/default/items/batch-edit.php:90
 #, php-format
@@ -1014,7 +1015,7 @@ msgstr "Összes"
 
 #: admin/themes/default/items/browse.php:101
 msgid "Private"
-msgstr ""
+msgstr "Privát"
 
 #: admin/themes/default/items/browse.php:109
 #: application/helpers/LinkFunctions.php:63
@@ -1082,7 +1083,7 @@ msgid ""
 "The path to Image Magick has not been set. No derivative images will be "
 "created. If you would like Omeka to create derivative images, please add the"
 " path to your settings form."
-msgstr ""
+msgstr "Az Image Magick elérési útvonala nem lett beállítva. Származtatott képfájlok nem készíthetők. Ha szeretné, hogy az Omeka készítsen származtatott képfájlokat akkor kérem adja hozzá az elérési utat az Általános beállításokhoz."
 
 #: admin/themes/default/items/files-form.php:7
 msgid "Current Files"
@@ -1133,7 +1134,7 @@ msgstr "Cimkéim"
 
 #: admin/themes/default/items/show.php:85
 msgid "Save Tags"
-msgstr ""
+msgstr "Cimkék mentése"
 
 #: admin/themes/default/items/show.php:95
 #: admin/themes/default/items/show.php:102
@@ -1142,7 +1143,7 @@ msgstr ""
 
 #: admin/themes/default/items/show.php:98
 msgid "Add a File"
-msgstr ""
+msgstr "Fájl hozáadása"
 
 #: admin/themes/default/items/show.php:98
 msgid "There are no files for this item yet."
@@ -1151,12 +1152,12 @@ msgstr ""
 #: admin/themes/default/items/tag-form.php:14
 #, php-format
 msgid "Separate tags with %s"
-msgstr ""
+msgstr "Cimkék elválasztása %s karakterrel"
 
 #: admin/themes/default/items/tag-form.php:42
 #: admin/themes/default/items/tag-list.php:2
 msgid "All Tags"
-msgstr ""
+msgstr "Minden cimke"
 
 #: admin/themes/default/items/tags.php:2
 msgid "Browse Items by Tag"
@@ -1169,13 +1170,13 @@ msgstr ""
 
 #: admin/themes/default/plugins/browse.php:2
 msgid "Browse Plugins"
-msgstr ""
+msgstr "Bővítmények keresése"
 
 #: admin/themes/default/plugins/browse.php:21
 msgid ""
 "You do not have any plugins installed. Add them to the plugins directory to "
 "see them listed here."
-msgstr ""
+msgstr "Egyetlen bővítmény sincs telepítve. Adjon bővítményeket a plugins könyvtárhoz, hogy megjelenjen itt."
 
 #: admin/themes/default/plugins/browse.php:24
 msgid ""
@@ -1183,25 +1184,25 @@ msgid ""
 "ons/plugins/\">Omeka Plugins Directory</a>, or <a "
 "href=\"http://omeka.org/codex/Plugin_Writing_Best_Practices\">write your "
 "own</a>!"
-msgstr ""
+msgstr "Új bővítmények letöltése az <a href=\"http://omeka.org/add-ons/plugins/\">Omeka Bővítmény Könyvtárból</a>, vagy <a href=\"http://omeka.org/codex/Plugin_Writing_Best_Practices\">saját bővítmény készítése</a>!"
 
 #: admin/themes/default/plugins/config.php:2
 #, php-format
 msgid "Configure the &#8220;%s&#8221; Plugin"
-msgstr ""
+msgstr "&#8220;%s&#8221; bővítmény konfigurálása"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:2
 #, php-format
 msgid "Confirm %s Uninstall"
-msgstr ""
+msgstr "%s eltávolításának megerősítése"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:8
 msgid "Are you sure you want to uninstall this plugin?"
-msgstr ""
+msgstr "Biztos benne, hogy eltávolítja a bővítményt?"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:13
 msgid "Yes, I want to uninstall this plugin."
-msgstr ""
+msgstr "Igen, el szeretném távolítani a bővítményt."
 
 #: admin/themes/default/plugins/confirm-uninstall.php:16
 msgid "Cancel"
@@ -1210,7 +1211,7 @@ msgstr "mégsem"
 #: admin/themes/default/plugins/confirm-uninstall.php:16
 #: admin/themes/default/plugins/plugin-info.php:107
 msgid "Uninstall"
-msgstr ""
+msgstr "Eltávolítás"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:16
 msgid "or"
@@ -1219,23 +1220,23 @@ msgstr "vagy"
 #: admin/themes/default/plugins/plugin-info.php:24
 #, php-format
 msgid "This version of %1$s requires at least Omeka %2$s."
-msgstr ""
+msgstr "%1$s eme verziójához legalább az Omeka %2$s szükséges."
 
 #: admin/themes/default/plugins/plugin-info.php:27
 #, php-format
 msgid ""
 "%1$s requires the following plugins to be installed, activated, and loaded: "
 "%2$s"
-msgstr ""
+msgstr "%1$s bővítménynek szükséges, hogy a következő bővítmény telepítve, aktiválva és betöltve legyen: %2$s"
 
 #: admin/themes/default/plugins/plugin-info.php:30
 msgid "The plugin.php file is missing."
-msgstr ""
+msgstr "A plugin.php fájl hiányzik."
 
 #: admin/themes/default/plugins/plugin-info.php:39
 #, php-format
 msgid "The %s plugin cannot be loaded for the following reasons:"
-msgstr ""
+msgstr "%s bővítményt nem lehet betölteni a következő okok miatt:"
 
 #: admin/themes/default/plugins/plugin-info.php:48
 #, php-format
@@ -1245,7 +1246,7 @@ msgstr ""
 #: admin/themes/default/plugins/plugin-info.php:58
 #: admin/themes/default/themes/browse.php:10
 msgid "Configure"
-msgstr ""
+msgstr "Konfigurálás"
 
 #: admin/themes/default/plugins/plugin-info.php:69
 #, php-format
@@ -1254,7 +1255,7 @@ msgstr ""
 
 #: admin/themes/default/plugins/plugin-info.php:87
 msgid "Upgrade"
-msgstr ""
+msgstr "Frissítés"
 
 #: admin/themes/default/plugins/plugin-info.php:97
 #: application/views/scripts/users/activate.php:26
@@ -1272,7 +1273,7 @@ msgstr "Telepítés"
 
 #: admin/themes/default/security/edit.php:2
 msgid "Edit Security Settings"
-msgstr ""
+msgstr "Biztonsági beállítások szerkesztése"
 
 #: admin/themes/default/security/edit.php:10
 msgid "Restore Default File Extensions"
@@ -1288,7 +1289,7 @@ msgstr "Teszt"
 
 #: admin/themes/default/system-info/index.php:2
 msgid "System Information"
-msgstr ""
+msgstr "Rendszer információ"
 
 #: admin/themes/default/tags/browse.php:8
 msgid "Sort by"
@@ -1312,7 +1313,7 @@ msgstr ""
 
 #: admin/themes/default/tags/delete.php:11
 msgid "Select a tag to delete:"
-msgstr ""
+msgstr "Cimkék kijelölése törlésre:"
 
 #: admin/themes/default/tags/delete.php:25
 msgid "There are no tags to delete. You must first tag some items."
@@ -1332,17 +1333,17 @@ msgstr ""
 
 #: admin/themes/default/themes/browse.php:2
 msgid "Browse Themes"
-msgstr ""
+msgstr "Témák böngészése"
 
 #: admin/themes/default/themes/browse.php:10
 msgid "Current Theme"
-msgstr ""
+msgstr "Aktuális téma"
 
 #: admin/themes/default/themes/browse.php:13
 #: admin/themes/default/themes/browse.php:38
 #, php-format
 msgid "Screenshot for %s Theme"
-msgstr ""
+msgstr "Képernyőkép %s témához"
 
 #: admin/themes/default/themes/browse.php:16
 #: admin/themes/default/themes/browse.php:32
@@ -1373,24 +1374,24 @@ msgid ""
 "ons/themes/\">Omeka Theme Directory</a>, or <a "
 "href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">design your "
 "own</a>!"
-msgstr ""
+msgstr "Új téma hozzáadása az  <a href=\"http://omeka.org/add-ons/themes/\">Omeka Táma Könyvtárból</a>, vagy <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">saját készítése</a>!"
 
 #: admin/themes/default/themes/config.php:2
 #, php-format
 msgid "Configure the &#8220;%s&#8221; Theme"
-msgstr ""
+msgstr "&#8220;%s&#8221; téma konfigurálása"
 
 #: admin/themes/default/themes/config.php:9
 msgid "Configurations apply to this theme only."
-msgstr ""
+msgstr "A konfiguráció csak erre a témára vonatkozik."
 
 #: admin/themes/default/users/add.php:2
 msgid "Add New User"
-msgstr ""
+msgstr "Új felhasználó hozzáadása"
 
 #: admin/themes/default/users/browse.php:13
 msgid "Search Users"
-msgstr ""
+msgstr "Felhasználók keresése"
 
 #: admin/themes/default/users/browse.php:15
 msgid "Select Role"
@@ -1487,17 +1488,17 @@ msgstr ""
 #: application/controllers/CollectionsController.php:31
 #, php-format
 msgid "The collection \"%s\" was successfully added!"
-msgstr ""
+msgstr " \"%s\" gyűjtemény sikeresen hozzáadva!"
 
 #: application/controllers/CollectionsController.php:37
 #, php-format
 msgid "The collection \"%s\" was successfully changed!"
-msgstr ""
+msgstr " \"%s\" gyűjtemény sikeresen megváltoztatva!"
 
 #: application/controllers/CollectionsController.php:43
 #, php-format
 msgid "The collection \"%s\" was successfully deleted!"
-msgstr ""
+msgstr " \"%s\" gyűjtemény sikeresen törölve!"
 
 #: application/controllers/CollectionsController.php:48
 msgid ""
@@ -1518,7 +1519,7 @@ msgstr "Az oldal nem található!"
 
 #: application/controllers/ErrorController.php:85
 msgid "Access denied."
-msgstr ""
+msgstr "Hozzáférés megtagadva."
 
 #: application/controllers/ItemTypesController.php:38
 msgid ""
@@ -1565,7 +1566,7 @@ msgstr ""
 
 #: application/controllers/ItemsController.php:266
 msgid "User does not have permission to add tags."
-msgstr ""
+msgstr "A felhasználónak nincs engedélye cimke hozzáadásához."
 
 #: application/controllers/ItemsController.php:299
 msgid "You must choose some items to batch edit."
@@ -1600,62 +1601,62 @@ msgstr ""
 msgid ""
 "Error in configuring plugin named \"%s\". Missing config and/or config_form "
 "hook(s)."
-msgstr ""
+msgstr "\"%s\" konfigurálása közben hiba történt. Hiányzó config és/vagy config_from fájl(ok)."
 
 #: application/controllers/PluginsController.php:55
 #, php-format
 msgid "The %s plugin was successfully configured!"
-msgstr ""
+msgstr "%s bővítmény sikeresen konfigurálva!"
 
 #: application/controllers/PluginsController.php:70
 #, php-format
 msgid "The %s plugin has already been installed."
-msgstr ""
+msgstr "%s bővítmény már telepítve van."
 
 #: application/controllers/PluginsController.php:76
 #, php-format
 msgid "The %s plugin was successfully installed!"
-msgstr ""
+msgstr "%s bővítmény sikeresen telepítve!"
 
 #: application/controllers/PluginsController.php:86
 #, php-format
 msgid "The following error occurred while installing the %s plugin: "
-msgstr ""
+msgstr "%s bővítmény telepítése közben a következő hiba történt: "
 
 #: application/controllers/PluginsController.php:111
 #, php-format
 msgid "The %s plugin was successfully activated!"
-msgstr ""
+msgstr "%s bővítmény sikeresen aktiválva!"
 
 #: application/controllers/PluginsController.php:113
 #, php-format
 msgid "The %s plugin was activated, but could not be loaded: "
-msgstr ""
+msgstr "%s bővítmény aktiválva, de nem lehet betölteni: "
 
 #: application/controllers/PluginsController.php:116
 #, php-format
 msgid "The following error occurred while activating the %s plugin: "
-msgstr ""
+msgstr "%s bővítmény aktiválása közben a következő hiba lépett fel: "
 
 #: application/controllers/PluginsController.php:137
 #, php-format
 msgid "The %s plugin was successfully deactivated!"
-msgstr ""
+msgstr "%s bővítmény sikeresen deaktiválva!"
 
 #: application/controllers/PluginsController.php:139
 #, php-format
 msgid "The following error occurred while deactivating the %s plugin: "
-msgstr ""
+msgstr "%s bővítmény deaktiválása közben a következő hiba lépett fel: "
 
 #: application/controllers/PluginsController.php:156
 #, php-format
 msgid "The %s plugin was successfully upgraded!"
-msgstr ""
+msgstr "%s bővítmény sikeresen frissítve!"
 
 #: application/controllers/PluginsController.php:161
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
-msgstr ""
+msgstr "%s bővítmény frissítése közben a következő hiba lépett fel: "
 
 #: application/controllers/PluginsController.php:212
 msgid "You must confirm the uninstall before proceeding."
@@ -1664,25 +1665,25 @@ msgstr ""
 #: application/controllers/PluginsController.php:227
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
-msgstr ""
+msgstr "%s bővítmény sikeresen eltávolítva!"
 
 #: application/controllers/PluginsController.php:229
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
-msgstr ""
+msgstr "%s bővítmény eltávolítása közben a következő hiba lépett fel: "
 
 #: application/controllers/PluginsController.php:256
 msgid "No plugin name given."
-msgstr ""
+msgstr "Nincs megadva a bővítmény neve."
 
 #: application/controllers/PluginsController.php:269
 #, php-format
 msgid "The plugin %s must be installed."
-msgstr ""
+msgstr "%s bővítményt telepíteni kell."
 
 #: application/controllers/SecurityController.php:46
 msgid "The security settings have been updated."
-msgstr ""
+msgstr "A biztonsági beállítások frissítve. "
 
 #: application/controllers/SettingsController.php:44
 msgid "The general settings have been updated."
@@ -1704,7 +1705,7 @@ msgstr ""
 #: application/controllers/TagsController.php:51
 #, php-format
 msgid "Tag named '%s' was successfully deleted."
-msgstr ""
+msgstr "'%s' nevű cimke sikeresen törölve."
 
 #: application/controllers/TagsController.php:64
 msgid "You have to be logged in to edit tags!"
@@ -1729,7 +1730,7 @@ msgstr ""
 
 #: application/controllers/ThemesController.php:51
 msgid "The theme has been successfully changed."
-msgstr ""
+msgstr "A téma sikeresen megváltoztatva."
 
 #: application/controllers/ThemesController.php:77
 msgid "The theme settings were successfully saved!"
@@ -1919,13 +1920,13 @@ msgstr ""
 
 #: application/forms/GeneralSettings.php:104
 msgid "Enable Prototype"
-msgstr ""
+msgstr "Prototype engedélyezése"
 
 #: application/forms/GeneralSettings.php:106
 msgid ""
 "Enable the Prototype JavaScript library. This may be required for some older"
 " plugins."
-msgstr ""
+msgstr "Prototype JavaScript könyvtár engedélyezése. Néhány régebbi bővítményhez szükséges lehet."
 
 #: application/forms/GeneralSettings.php:110 application/forms/Install.php:169
 msgid "Imagemagick Directory Path"
@@ -2273,17 +2274,17 @@ msgstr ""
 
 #: application/models/Collection.php:107
 msgid "Collectors must be either a string or an array."
-msgstr ""
+msgstr "A gyűjtőknek vagy szöveg vagy tömb típusnak kell lennie!"
 
 #: application/models/Collection.php:148
 #, php-format
 msgid "The collection name must have between %1$s and %2$s characters."
-msgstr ""
+msgstr "A gyűjtemény neve minimum %1$s és maximum %2$s karakterből állhat."
 
 #: application/models/Collection.php:198
 msgid ""
 "Argument passed to addCollector() must be a string or an instance of Entity."
-msgstr ""
+msgstr "Az addCollector()-nak átadott paraméter szöveg típusú vagy Entity egy példánya kell, hogy legyen."
 
 #: application/models/Collection.php:230
 msgid "Cannot associate the collection with an unsaved user."
@@ -2444,7 +2445,7 @@ msgstr ""
 
 #: application/models/Plugin.php:94
 msgid "Names of plugins must not be blank"
-msgstr ""
+msgstr "Bővítmények nevei nem lehetnek üresek"
 
 #: application/models/Relatable.php:158
 msgid "Invalid entity provided!"
@@ -2530,7 +2531,7 @@ msgstr ""
 #: application/views/scripts/collections/browse.php:21
 #: application/views/scripts/collections/show.php:13
 msgid "Collector(s)"
-msgstr ""
+msgstr "Gyűjtő(k)"
 
 #: application/views/scripts/collections/browse.php:28
 #: application/views/scripts/collections/show.php:22
@@ -2670,7 +2671,7 @@ msgstr ""
 
 #: application/views/scripts/items/advanced-search.php:102
 msgid "Search By Collection"
-msgstr ""
+msgstr "Keresés gyűjtemény szerint"
 
 #: application/views/scripts/items/advanced-search.php:112
 msgid "Search By Type"
@@ -2826,7 +2827,7 @@ msgstr ""
 
 #: install/views/scripts/index/index.phtml:13
 msgid "Configure Your Site"
-msgstr ""
+msgstr "Konfigurálja az Oldalát"
 
 #: install/views/scripts/index/index.phtml:15
 msgid "Form Validation Errors"

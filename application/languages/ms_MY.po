@@ -9,9 +9,9 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2011-11-22 16:18-0500\n"
-"PO-Revision-Date: 2012-01-09 06:54+0000\n"
+"PO-Revision-Date: 2012-06-15 12:41+0000\n"
 "Last-Translator: Haslan Tamjehi <haslant@gmail.com>\n"
-"Language-Team: Malay (Malaysia) (http://www.transifex.net/projects/p/omeka/team/ms_MY/)\n"
+"Language-Team: Malay (Malaysia) (http://www.transifex.com/projects/p/omeka/language/ms_MY/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -111,9 +111,7 @@ msgstr "Metada Jenis Bahan"
 msgid ""
 "The item type metadata element set, consisting of all item type elements "
 "bundled with Omeka and all item type elements created by an administrator."
-msgstr ""
-"Set elemen metadata jenis bahan, mengandungi semua elemen yang dirangkumkan "
-"bersama Omeka dan jenis bahan yang disediakan oleh pentadbir sistem."
+msgstr "Set elemen metadata jenis bahan, mengandungi semua elemen yang dirangkumkan bersama Omeka dan jenis bahan yang disediakan oleh pentadbir sistem."
 
 # Omeka Legacy File
 msgid "Omeka Legacy File"
@@ -125,11 +123,7 @@ msgid ""
 "was included in the `files` table in previous versions of Omeka. These "
 "elements are common to all Omeka files. This set may be deprecated in future"
 " versions."
-msgstr ""
-"Set elemen metadata yang menjadi tambahan kepada Metadata Dublin Core dan "
-"dimasukkan ke dalam fail-fail versi Omeka sebelum ini. Elemen-elemen ini "
-"adalah sebahagian daripada fail-fail Omeka. Set elemen ini kemungkinan akan "
-"dikurangkan untuk versi akan datang. "
+msgstr "Set elemen metadata yang menjadi tambahan kepada Metadata Dublin Core dan dimasukkan ke dalam fail-fail versi Omeka sebelum ini. Elemen-elemen ini adalah sebahagian daripada fail-fail Omeka. Set elemen ini kemungkinan akan dikurangkan untuk versi akan datang. "
 
 # Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
@@ -145,11 +139,11 @@ msgstr "Produser"
 
 # Omeka Legacy File: Render Device element
 msgid "Render Device"
-msgstr ""
+msgstr "Alatan Rander"
 
 # Omeka Legacy File: Render Details element
 msgid "Render Details"
-msgstr ""
+msgstr "Perincian Rander"
 
 # Omeka Legacy File: Capture Date element
 msgid "Capture Date"
@@ -165,23 +159,23 @@ msgstr "Butiran Perolehan"
 
 # Omeka Legacy File: Change History element
 msgid "Change History"
-msgstr ""
+msgstr "Ubah Sejarah"
 
 # Omeka Legacy File: Watermark element
 msgid "Watermark"
-msgstr ""
+msgstr "Watermark"
 
 # Omeka Legacy File: Encryption element
 msgid "Encryption"
-msgstr ""
+msgstr "Enkripsi"
 
 # Omeka Legacy File: Compression element
 msgid "Compression"
-msgstr ""
+msgstr "Kompresi"
 
 # Omeka Legacy File: Post Processing element
 msgid "Post Processing"
-msgstr ""
+msgstr "Pasca Proses"
 
 # Omeka Image File
 msgid "Omeka Image File"
@@ -237,7 +231,7 @@ msgstr ""
 
 # Omeka Video File: Bitrate element
 msgid "Bitrate"
-msgstr ""
+msgstr "Tahap Bit"
 
 # Omeka Video File: Duration element
 msgid "Duration"
@@ -245,11 +239,11 @@ msgstr "Durasi"
 
 # Omeka Video File: Sample Rate element
 msgid "Sample Rate"
-msgstr ""
+msgstr "Tahap Sampel "
 
 # Omeka Video File: Codec element
 msgid "Codec"
-msgstr ""
+msgstr "Kodek"
 
 # User role: Super
 msgid "Super"
@@ -290,7 +284,7 @@ msgstr "Layar Koleksi"
 #: application/views/scripts/items/browse.php:8
 #, php-format
 msgid "(%s total)"
-msgstr ""
+msgstr "(%s keseluruhan)"
 
 #: admin/themes/default/collections/browse.php:18
 msgid "ID"
@@ -422,12 +416,12 @@ msgstr "Bukan PaparanAwam"
 #: admin/themes/default/items/browse.php:182
 #: admin/themes/default/items/form.php:43
 msgid "Featured"
-msgstr ""
+msgstr "Dipaparkan"
 
 #: admin/themes/default/collections/form.php:44
 #: admin/themes/default/items/batch-edit.php:55
 msgid "Not Featured"
-msgstr ""
+msgstr "Bukan Paparan"
 
 #: admin/themes/default/collections/show.php:11
 #: admin/themes/default/items/show.php:14
@@ -478,7 +472,7 @@ msgstr "Pengurus Omeka"
 
 #: admin/themes/default/common/header.php:24
 msgid "Skip Navigation"
-msgstr ""
+msgstr "Langkau Navigasi"
 
 #: admin/themes/default/common/header.php:33
 msgid "Log Out"
@@ -491,7 +485,7 @@ msgstr "Selamat Datang %s"
 
 #: admin/themes/default/common/header.php:36 admin/themes/default/index.php:58
 msgid "Settings"
-msgstr ""
+msgstr "Konfigurasi"
 
 #: admin/themes/default/common/header.php:38
 msgid "View Public Site"
@@ -522,11 +516,11 @@ msgstr "Tag"
 
 #: admin/themes/default/common/settings-nav.php:6
 msgid "General Settings"
-msgstr ""
+msgstr "Konfigurasi Am"
 
 #: admin/themes/default/common/settings-nav.php:8
 msgid "Plugins"
-msgstr ""
+msgstr "Plugins"
 
 #: admin/themes/default/common/settings-nav.php:11
 msgid "Themes"
@@ -543,7 +537,7 @@ msgstr "Set Elemen"
 
 #: admin/themes/default/common/settings-nav.php:20
 msgid "Security Settings"
-msgstr ""
+msgstr "Konfigurasi Keselamatan"
 
 #: admin/themes/default/common/tags-nav.php:3
 #: admin/themes/default/tags/browse.php:2
@@ -563,7 +557,7 @@ msgstr "Batal Tag"
 
 #: admin/themes/default/element-sets/browse.php:2
 msgid "Browse Element Sets"
-msgstr ""
+msgstr "Susur Set Elemen"
 
 #: admin/themes/default/element-sets/browse.php:14
 #: admin/themes/default/items/batch-edit.php:101
@@ -601,7 +595,7 @@ msgid ""
 "You&#8217;ve tried to access a page that does not seem to exist. Sometimes "
 "this happens. Below is a quick break-down of the items, collections, and "
 "exhibits on this site."
-msgstr ""
+msgstr "Anda#8217;telah mencuba mengakses laman yang tidak wujud. Kadangkala ini berlaku. Di bawah adalah pecahan kepada bahan, koleksi, dan pameran di dalam laamn ini."
 
 #: admin/themes/default/error/404.php:13
 #, php-format
@@ -610,11 +604,11 @@ msgstr ""
 
 #: admin/themes/default/error/404.php:15 admin/themes/default/index.php:88
 msgid "Recent Items"
-msgstr ""
+msgstr "Bahan Terbaru"
 
 #: admin/themes/default/error/404.php:25
 msgid "Recent Collections"
-msgstr ""
+msgstr "Koleksi Terbaru"
 
 #: admin/themes/default/error/405.php:2
 msgid "405: Method Not Allowed"
@@ -658,71 +652,71 @@ msgstr "Edit fail ini"
 #: admin/themes/default/files/show.php:23
 #: application/views/scripts/files/show.php:55
 msgid "File History"
-msgstr ""
+msgstr "Fail Sejarah"
 
 #: admin/themes/default/files/show.php:26
 #: application/views/scripts/files/show.php:61
 msgid "Date Modified"
-msgstr ""
+msgstr "Tarikh Diubah"
 
 #: admin/themes/default/files/show.php:28
 #: application/views/scripts/files/show.php:65
 msgid "Authentication"
-msgstr ""
+msgstr "Pengesahan"
 
 #: admin/themes/default/files/show.php:36
 msgid "Format Metadata"
-msgstr ""
+msgstr "Format Metadata"
 
 #: admin/themes/default/files/show.php:38
 #: application/views/scripts/files/show.php:23
 msgid "Archive Filename"
-msgstr ""
+msgstr "Nama Fail Arkib"
 
 #: admin/themes/default/files/show.php:39
 #: application/views/scripts/files/show.php:28
 msgid "Original Filename"
-msgstr ""
+msgstr "Nama Fail Asal"
 
 #: admin/themes/default/files/show.php:40
 #: application/views/scripts/files/show.php:33
 msgid "File Size"
-msgstr ""
+msgstr "Saiz Fail"
 
 #: admin/themes/default/files/show.php:45
 #: admin/themes/default/item-types/show.php:20
 #: application/views/scripts/files/show.php:39
 msgid "Type Metadata"
-msgstr ""
+msgstr "Jenis Metadata"
 
 #: admin/themes/default/files/show.php:47
 #: application/views/scripts/files/show.php:41
 msgid "Mime Type / Browser"
-msgstr ""
+msgstr "Jenis Mime / Penyusur"
 
 #: admin/themes/default/files/show.php:48
 #: application/views/scripts/files/show.php:45
 msgid "Mime Type / OS"
-msgstr ""
+msgstr "Jenis Mime / OS"
 
 #: admin/themes/default/files/show.php:49
 #: application/views/scripts/files/show.php:49
 msgid "File Type / OS"
-msgstr ""
+msgstr "Jenis Fail / OS"
 
 #: admin/themes/default/files/show.php:54
 #: admin/themes/default/items/browse.php:201
 #: admin/themes/default/items/show.php:110
 msgid "Output Formats"
-msgstr ""
+msgstr "Format Output"
 
 #: admin/themes/default/index.php:2
 msgid "Dashboard"
-msgstr ""
+msgstr "Papan Kenyataan"
 
 #: admin/themes/default/index.php:12
 msgid "A new version of Omeka is available for download."
-msgstr ""
+msgstr "Versi Omeka terkini tersedia untuk dimuatnaik."
 
 #: admin/themes/default/index.php:13
 #, php-format
@@ -731,15 +725,15 @@ msgstr ""
 
 #: admin/themes/default/index.php:19
 msgid "Getting Started with Omeka"
-msgstr ""
+msgstr "Bermula dengan Omeka"
 
 #: admin/themes/default/index.php:24
 msgid "Add a new item to your archive"
-msgstr ""
+msgstr "Tambah bahan baru ke dalam arkib anda"
 
 #: admin/themes/default/index.php:25
 msgid "Browse your items"
-msgstr ""
+msgstr "Susur bahan anda"
 
 #: admin/themes/default/index.php:28
 msgid "Manage items in your archive: add, edit, and delete items."
@@ -796,9 +790,7 @@ msgstr ""
 msgid ""
 "<em>%1$s</em> contains %2$s items, in %3$s collections, tagged with %4$s "
 "keywords. There are %5$s users."
-msgstr ""
-"<em>%1$s</em> mengandungi %2$s bahan, didalam %3$s koleksi, dengan tag %4$s "
-"katakunci. Terdapat %5$s pengguna."
+msgstr "<em>%1$s</em> mengandungi %2$s bahan, didalam %3$s koleksi, dengan tag %4$s katakunci. Terdapat %5$s pengguna."
 
 #: admin/themes/default/index.php:91
 msgid "There are no items to display."
@@ -2855,5 +2847,3 @@ msgstr ""
 #: install/views/scripts/layout.phtml:5 install/views/scripts/layout.phtml:9
 msgid "Omeka Installation"
 msgstr ""
-
-
