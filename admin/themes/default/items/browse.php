@@ -110,18 +110,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                     <input type="submit" class="red small" name="submit" value="Delete">
                     <?php endif; ?>
                     </form>
-                    <div class="quick-filter-wrapper">
-                        <div class="quick-filter-content">
-                        <ul>
-                            <li><a href="#"><?php echo __('Quick Filter') ?></a></li>
-                            <li><a href="../items/browse"><?php echo __('View All') ?></a></li>
-                            <li><a href="../items/browse?public=1"><?php echo __('Public'); ?></a></li>
-                            <li><a href="../items/browse?public=0"><?php echo __('Private'); ?></a></li>
-                            <li><a href="../items/browse?featured=1"><?php echo __('Featured'); ?></a></li>
-                        </ul>
-                        </div>
-                        <p class="quick-filter-resting"><?php echo __('Quick Filter'); ?></p>
-                    </div>                     
+                    <?php echo common('quick-filters',array(),'items'); ?>
                 </div>
                 
             <table id="items" class="simple" cellspacing="0" cellpadding="0">
@@ -195,18 +184,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                     <input type="submit" class="red small" name="submit" value="Delete">
                     <?php endif; ?>
                     </form>
-                    <div class="quick-filter-wrapper">
-                        <div class="quick-filter-content">
-                        <ul>
-                            <li><a href="#"><?php echo __('Quick Filter') ?></a></li>
-                            <li><a href="../items/browse"><?php echo __('View All') ?></a></li>
-                            <li><a href="../items/browse?public=1"><?php echo __('Public'); ?></a></li>
-                            <li><a href="../items/browse?public=0"><?php echo __('Private'); ?></a></li>
-                            <li><a href="../items/browse?featured=1"><?php echo __('Featured'); ?></a></li>
-                        </ul>
-                        </div>
-                        <p class="quick-filter-resting"><?php echo __('Quick Filter'); ?></p>
-                    </div> 
+                    <?php echo common('quick-filters',array(),'items'); ?>
                 </div>
     
             </form>
