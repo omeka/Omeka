@@ -3,15 +3,16 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
+# Marcel Everink <mj@everink.com>, 2012.
 # Peter Baan <exnihilo@xs4all.nl>, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2011-11-22 16:18-0500\n"
-"PO-Revision-Date: 2012-01-31 10:35+0000\n"
-"Last-Translator: Peter Baan <exnihilo@xs4all.nl>\n"
-"Language-Team: Dutch (Netherlands) (http://www.transifex.net/projects/p/omeka/team/nl_NL/)\n"
+"PO-Revision-Date: 2012-04-23 23:05+0000\n"
+"Last-Translator: Marcel Everink <mj@everink.com>\n"
+"Language-Team: Dutch (Netherlands) (http://www.transifex.com/projects/p/omeka/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,10 +24,7 @@ msgid ""
 "The Dublin Core metadata element set. These elements are common to all Omeka"
 " resources, including items, files, collections, exhibits, and entities. See"
 " http://dublincore.org/documents/dces/."
-msgstr ""
-"Dublin Core Metadata Element Set. Alle Omeka-middelen hebben deze elementen "
-"gemeenschappelijk, waaronder bestanden, collecties, tentoonstellingen en "
-"eenheden. Zie: http://dublincore.org/documents/dces/."
+msgstr "Dublin Core Metadata Element Set. Alle Omeka-middelen hebben deze elementen gemeenschappelijk, waaronder bestanden, collecties, tentoonstellingen en eenheden. Zie: http://dublincore.org/documents/dces/."
 
 # #-#-#-#-#  Omeka.base.pot (Omeka 1.5)  #-#-#-#-#
 # Dublin Core: Title element
@@ -114,10 +112,7 @@ msgstr "Itemtype metadata"
 msgid ""
 "The item type metadata element set, consisting of all item type elements "
 "bundled with Omeka and all item type elements created by an administrator."
-msgstr ""
-"De itemtype metadata elementenset, bestaande uit alle met Omeka meegeleverde"
-" itemtype-elementen en alle itemtype-elementen die door een beheerder zijn "
-"aangemaakt."
+msgstr "De itemtype metadata elementenset, bestaande uit alle met Omeka meegeleverde itemtype-elementen en alle itemtype-elementen die door een beheerder zijn aangemaakt."
 
 # Omeka Legacy File
 msgid "Omeka Legacy File"
@@ -129,11 +124,7 @@ msgid ""
 "was included in the `files` table in previous versions of Omeka. These "
 "elements are common to all Omeka files. This set may be deprecated in future"
 " versions."
-msgstr ""
-"De metadata elementenset die, in aanvulling op de Dublin Core elementenset, "
-"was opgenomen in de `files` tabel in eerdere versies van Omeka. Alle Omeka-"
-"bestanden hebben deze elementen gemeenschappelijk. Deze set zal mogelijk "
-"worden afgekeurd in toekomstige versies."
+msgstr "De metadata elementenset die, in aanvulling op de Dublin Core elementenset, was opgenomen in de `files` tabel in eerdere versies van Omeka. Alle Omeka-bestanden hebben deze elementen gemeenschappelijk. Deze set zal mogelijk worden afgekeurd in toekomstige versies."
 
 # Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
@@ -195,10 +186,7 @@ msgstr "Omeka afbeeldingsbestand"
 msgid ""
 "The metadata element set that was included in the `files_images` table in "
 "previous versions of Omeka. These elements are common to all image files."
-msgstr ""
-"De metadata elementenset die was opgenomen in de `files_images` tabel in "
-"eerdere versies van Omeka. Alle afbeeldingsbestanden hebben deze elementen "
-"gemeenschappelijk."
+msgstr "De metadata elementenset die was opgenomen in de `files_images` tabel in eerdere versies van Omeka. Alle afbeeldingsbestanden hebben deze elementen gemeenschappelijk."
 
 # Omeka Image File: Width element
 msgid "Width"
@@ -240,10 +228,7 @@ msgstr "Omeka videobestand"
 msgid ""
 "The metadata element set that was included in the `files_videos` table in "
 "previous versions of Omeka. These elements are common to all video files."
-msgstr ""
-"De metadata elementenset die was opgenomen in de `files_videos` tabel in "
-"eerdere versies van Omeka. Alle videobestanden hebben deze elementen "
-"gemeenschappelijk."
+msgstr "De metadata elementenset die was opgenomen in de `files_videos` tabel in eerdere versies van Omeka. Alle videobestanden hebben deze elementen gemeenschappelijk."
 
 # Omeka Video File: Bitrate element
 msgid "Bitrate"
@@ -255,7 +240,7 @@ msgstr "Duur"
 
 # Omeka Video File: Sample Rate element
 msgid "Sample Rate"
-msgstr "Samplefrequentie"
+msgstr "Steekproef frequentie"
 
 # Omeka Video File: Codec element
 msgid "Codec"
@@ -276,18 +261,18 @@ msgstr "Onderzoeker"
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:6
 msgid "Add a Collection"
-msgstr "Voeg collectie toe"
+msgstr "Voeg verzameling toe"
 
 #: admin/themes/default/collections/add.php:9
 msgid "Save Collection"
-msgstr "Bewaar collectie"
+msgstr "Bewaar verzameling"
 
 #: admin/themes/default/collections/browse.php:2
 #: application/views/scripts/collections/browse.php:2
 #: application/views/scripts/common/footer.php:6
 #: application/views/scripts/functions.php:98
 msgid "Browse Collections"
-msgstr "Blader door collecties"
+msgstr "Blader door verzameling"
 
 #: admin/themes/default/collections/browse.php:4
 #: admin/themes/default/element-sets/browse.php:4
@@ -407,9 +392,7 @@ msgstr "Beschrijving collectie"
 #: admin/themes/default/collections/form.php:25
 msgid ""
 "List collectors for this collection (optional - enter one name per line)"
-msgstr ""
-"Lijst van verzamelaars voor deze collectie (optioneel - voeg een naam per "
-"regel toe)"
+msgstr "Lijst van verzamelaars voor deze collectie (optioneel - voeg een naam per regel toe)"
 
 #: admin/themes/default/collections/form.php:35
 #: admin/themes/default/collections/form.php:37
@@ -602,9 +585,7 @@ msgstr "site beheerder"
 #: admin/themes/default/error/403.php:13
 #, php-format
 msgid "If you think you should have permission, try contacting the %s."
-msgstr ""
-"Wanneer u denkt dat u toegangsrechten zou moeten hebben, kunt u contact "
-"opnemen met de %s."
+msgstr "Wanneer u denkt dat u toegangsrechten zou moeten hebben, kunt u contact opnemen met de %s."
 
 #: admin/themes/default/error/404.php:2
 msgid "404: Page Not Found"
@@ -615,10 +596,7 @@ msgid ""
 "You&#8217;ve tried to access a page that does not seem to exist. Sometimes "
 "this happens. Below is a quick break-down of the items, collections, and "
 "exhibits on this site."
-msgstr ""
-"U probeerde een pagina op te vragen die niet bestaat. Dat kan gebeuren. "
-"Hieronder vindt u een snel overzicht van de items, collecties en "
-"tentoonstellingen op deze site."
+msgstr "U probeerde een pagina op te vragen die niet bestaat. Dat kan gebeuren. Hieronder vindt u een snel overzicht van de items, collecties en tentoonstellingen op deze site."
 
 #: admin/themes/default/error/404.php:13
 #, php-format
@@ -635,19 +613,14 @@ msgstr "Recente collecties"
 
 #: admin/themes/default/error/405.php:2
 msgid "405: Method Not Allowed"
-msgstr ""
-"405:  De wijze waarop u het bestand probeert op te vragen, is niet "
-"toegestaan."
+msgstr "405:  De wijze waarop u het bestand probeert op te vragen, is niet toegestaan."
 
 #: admin/themes/default/error/405.php:11
 #, php-format
 msgid ""
 "You must use a different method to access this URL. If you reached this page"
 " by following a link or clicking a button in Omeka, please contact the %s."
-msgstr ""
-"U dient deze URL op een andere manier op te vragen. Wanneer u op deze pagina"
-" terecht kwam via een link of door op een knop in Omeka te klikken, kunt u "
-"contact opnemen met de %s."
+msgstr "U dient deze URL op een andere manier op te vragen. Wanneer u op deze pagina terecht kwam via een link of door op een knop in Omeka te klikken, kunt u contact opnemen met de %s."
 
 #: admin/themes/default/files/edit.php:8
 #, php-format
@@ -765,8 +738,7 @@ msgstr "Blader door uw items"
 
 #: admin/themes/default/index.php:28
 msgid "Manage items in your archive: add, edit, and delete items."
-msgstr ""
-"Beheer items in uw archief: toevoegen, bewerken en verwijderen van items."
+msgstr "Beheer items in uw archief: toevoegen, bewerken en verwijderen van items."
 
 #: admin/themes/default/index.php:35
 msgid "Add a collection to group items"
@@ -778,9 +750,7 @@ msgstr "Blader door collecties"
 
 #: admin/themes/default/index.php:39
 msgid "Manage collections in your archive: add, edit, and delete collections."
-msgstr ""
-"Beheer collecties in uw archief: toevoegen, bewerken en verwijderen van "
-"collecties."
+msgstr "Beheer collecties in uw archief: toevoegen, bewerken en verwijderen van collecties."
 
 #: admin/themes/default/index.php:48 admin/themes/default/users/browse.php:2
 msgid "Browse Users"
@@ -810,9 +780,7 @@ msgstr "Plugins beheren"
 msgid ""
 "Manage your general settings for the site, including title, description, and"
 " themes."
-msgstr ""
-"Beheer de algemene instellingen van de site, zoals titel, beschrijving en "
-"thema's."
+msgstr "Beheer de algemene instellingen van de site, zoals titel, beschrijving en thema's."
 
 #: admin/themes/default/index.php:75
 msgid "Site Overview"
@@ -823,9 +791,7 @@ msgstr "Site Overzicht"
 msgid ""
 "<em>%1$s</em> contains %2$s items, in %3$s collections, tagged with %4$s "
 "keywords. There are %5$s users."
-msgstr ""
-"<em>%1$s</em> bevat %2$s items, in %3$s collecties, voorzien van %4$s "
-"trefwoorden. Er zijn %5$s gebruikers."
+msgstr "<em>%1$s</em> bevat %2$s items, in %3$s collecties, voorzien van %4$s trefwoorden. Er zijn %5$s gebruikers."
 
 #: admin/themes/default/index.php:91
 msgid "There are no items to display."
@@ -1003,9 +969,7 @@ msgstr "Tags toevoegen"
 #: admin/themes/default/items/batch-edit.php:90
 #, php-format
 msgid "List of tags to add to all checked items, separated by %s."
-msgstr ""
-"Lijst met tags om aan alle aangevinkte items toe te voegen, gescheiden door "
-"%s."
+msgstr "Lijst met tags om aan alle aangevinkte items toe te voegen, gescheiden door %s."
 
 #: admin/themes/default/items/batch-edit.php:98
 msgid "Delete Items"
@@ -1117,10 +1081,7 @@ msgid ""
 "The path to Image Magick has not been set. No derivative images will be "
 "created. If you would like Omeka to create derivative images, please add the"
 " path to your settings form."
-msgstr ""
-"Het pad naar ImageMagick is niet ingesteld. Er zullen geen afgeleide "
-"afbeeldingen worden aangemaakt. Voeg het pad toe aan uw instellingen, "
-"wanneer u wilt dat Omeka afgeleide afbeeldingen aanmaakt. "
+msgstr "Het pad naar ImageMagick is niet ingesteld. Er zullen geen afgeleide afbeeldingen worden aangemaakt. Voeg het pad toe aan uw instellingen, wanneer u wilt dat Omeka afgeleide afbeeldingen aanmaakt. "
 
 #: admin/themes/default/items/files-form.php:7
 msgid "Current Files"
@@ -1203,9 +1164,7 @@ msgstr "Blader door item per tag"
 #: admin/themes/default/items/tags.php:9
 #: admin/themes/default/tags/browse.php:27
 msgid "There are no tags to display. You must first tag some items."
-msgstr ""
-"Er kunnen geen tags worden getoond. U moet eerst enkele items van een tag "
-"voorzien."
+msgstr "Er kunnen geen tags worden getoond. U moet eerst enkele items van een tag voorzien."
 
 #: admin/themes/default/plugins/browse.php:2
 msgid "Browse Plugins"
@@ -1215,9 +1174,7 @@ msgstr "Blader door plugins"
 msgid ""
 "You do not have any plugins installed. Add them to the plugins directory to "
 "see them listed here."
-msgstr ""
-"U hebt nog geen plugins geïnstalleerd. Voeg ze toe aan de plugins-directory "
-"om ze hier in de lijst te laten verschijnen."
+msgstr "U hebt nog geen plugins geïnstalleerd. Voeg ze toe aan de plugins-directory om ze hier in de lijst te laten verschijnen."
 
 #: admin/themes/default/plugins/browse.php:24
 msgid ""
@@ -1225,11 +1182,7 @@ msgid ""
 "ons/plugins/\">Omeka Plugins Directory</a>, or <a "
 "href=\"http://omeka.org/codex/Plugin_Writing_Best_Practices\">write your "
 "own</a>!"
-msgstr ""
-"Voeg nieuwe plugins toe door ze te downloaden uit de <a "
-"href=\"http://omeka.org/add-ons/plugins/\">Omeka Plugins Directory</a>, of "
-"<a href=\"http://omeka.org/codex/Plugin_Writing_Best_Practices\">schrijf uw "
-"eigen plugin</a>!"
+msgstr "Voeg nieuwe plugins toe door ze te downloaden uit de <a href=\"http://omeka.org/add-ons/plugins/\">Omeka Plugins Directory</a>, of <a href=\"http://omeka.org/codex/Plugin_Writing_Best_Practices\">schrijf uw eigen plugin</a>!"
 
 #: admin/themes/default/plugins/config.php:2
 #, php-format
@@ -1272,9 +1225,7 @@ msgstr "Deze versie van %1$s vereist minimaal Omeka %2$s."
 msgid ""
 "%1$s requires the following plugins to be installed, activated, and loaded: "
 "%2$s"
-msgstr ""
-"%1$s vereist dat de volgende plugins geïnstalleerd, geactiveerd en geladen "
-"zijn: %2$s"
+msgstr "%1$s vereist dat de volgende plugins geïnstalleerd, geactiveerd en geladen zijn: %2$s"
 
 #: admin/themes/default/plugins/plugin-info.php:30
 msgid "The plugin.php file is missing."
@@ -1364,9 +1315,7 @@ msgstr "Selecteer een tag om te verwijderen:"
 
 #: admin/themes/default/tags/delete.php:25
 msgid "There are no tags to delete. You must first tag some items."
-msgstr ""
-"Er zijn geen tags om te verwijderen. U moet eerst enkele items van een tag "
-"voorzien."
+msgstr "Er zijn geen tags om te verwijderen. U moet eerst enkele items van een tag voorzien."
 
 #: admin/themes/default/tags/edit.php:12
 msgid "Choose a tag to rename"
@@ -1378,9 +1327,7 @@ msgstr "Voer een nieuwe tag-naam in"
 
 #: admin/themes/default/tags/edit.php:32
 msgid "There are no tags to edit. You must first tag some items."
-msgstr ""
-"Er zijn geen tags om te bewerken. U moet eerst enkele items van een tag "
-"voorzien."
+msgstr "Er zijn geen tags om te bewerken. U moet eerst enkele items van een tag voorzien."
 
 #: admin/themes/default/themes/browse.php:2
 msgid "Browse Themes"
@@ -1425,11 +1372,7 @@ msgid ""
 "ons/themes/\">Omeka Theme Directory</a>, or <a "
 "href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">design your "
 "own</a>!"
-msgstr ""
-"Voeg nieuwe thema's door ze te downloaden uit de <a href=\"http://omeka.org"
-"/add-ons/themes/\">Omeka Theme Directory</a>, of <a "
-"href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">ontwerp uw "
-"eigen thema</a>!"
+msgstr "Voeg nieuwe thema's door ze te downloaden uit de <a href=\"http://omeka.org/add-ons/themes/\">Omeka Theme Directory</a>, of <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">ontwerp uw eigen thema</a>!"
 
 #: admin/themes/default/themes/config.php:2
 #, php-format
@@ -1560,19 +1503,13 @@ msgid ""
 "This will delete the collection and its associated metadata. This will not "
 "delete any items in this collection, but will delete the reference to this "
 "collection in each item."
-msgstr ""
-"Dit zal de collectie en daarmee verbonden metadata verwijderen. Er zullen "
-"geen items worden verwijderd die in de collectie voorkomen, wel wordt de "
-"verwijzing naar deze collectie uit elk item verwijderd."
+msgstr "Dit zal de collectie en daarmee verbonden metadata verwijderen. Er zullen geen items worden verwijderd die in de collectie voorkomen, wel wordt de verwijzing naar deze collectie uit elk item verwijderd."
 
 #: application/controllers/ElementSetsController.php:26
 msgid ""
 "This will delete the element set and all elements assigned to the element "
 "set. Items will lose all metadata that is specific to this element set."
-msgstr ""
-"Dit zal de elementenset en alle aan deze set toegewezen elementen "
-"verwijderen. Item zullen alle metadata kwijtraken die bij deze elementenset "
-"horen."
+msgstr "Dit zal de elementenset en alle aan deze set toegewezen elementen verwijderen. Item zullen alle metadata kwijtraken die bij deze elementenset horen."
 
 #: application/controllers/ErrorController.php:66
 msgid "Page not found."
@@ -1587,20 +1524,14 @@ msgid ""
 "This will delete the item type but will not delete the elements assigned to "
 "the item type. Items that are assigned to this item type will lose all "
 "metadata that is specific to the item type."
-msgstr ""
-"Dit zal het itemtype verwijderen, maar zal niet de aan het itemtype "
-"toegewezen elementen verwijderen. Items die aan dit itemtype zijn "
-"toegewezen, zullen alle metadata verliezen die specifiek zijn voor het "
-"itemtype."
+msgstr "Dit zal het itemtype verwijderen, maar zal niet de aan het itemtype toegewezen elementen verwijderen. Items die aan dit itemtype zijn toegewezen, zullen alle metadata verliezen die specifiek zijn voor het itemtype."
 
 #: application/controllers/ItemTypesController.php:58
 #, php-format
 msgid ""
 "The item type \"%s\" was successfully added!  You may now add elements to "
 "your new item type."
-msgstr ""
-"Het itemtype \"%s\" is met succes toegevoegd! U kunt nu elementen toevoegen "
-"aan uw nieuwe itemtype."
+msgstr "Het itemtype \"%s\" is met succes toegevoegd! U kunt nu elementen toevoegen aan uw nieuwe itemtype."
 
 #: application/controllers/ItemTypesController.php:94
 #, php-format
@@ -1629,10 +1560,7 @@ msgstr "Het item is met succes verwijderd!"
 msgid ""
 "This will delete the item and its associated metadata. It will also delete "
 "all files and file metadata associated with this item."
-msgstr ""
-"Dit zal het itemtype en zijn verbonden metadata verwijderen. Het zal ook "
-"alle bestanden en metadata van bestanden verwijderen die met dit item zijn "
-"verbonden."
+msgstr "Dit zal het itemtype en zijn verbonden metadata verwijderen. Het zal ook alle bestanden en metadata van bestanden verwijderen die met dit item zijn verbonden."
 
 #: application/controllers/ItemsController.php:266
 msgid "User does not have permission to add tags."
@@ -1644,19 +1572,15 @@ msgstr "U moet enkele items kiezen om in <em>batch</em> te bewerken."
 
 #: application/controllers/ItemsController.php:338
 msgid "User is not allowed to modify visibility of items."
-msgstr ""
-"Het is gebruiker niet toegestaan om de zichtbaarheid van items te wijzigen."
+msgstr "Het is gebruiker niet toegestaan om de zichtbaarheid van items te wijzigen."
 
 #: application/controllers/ItemsController.php:343
 msgid "User is not allowed to modify featured status of items."
-msgstr ""
-"Het is gebruiker niet toegestaan om de aanbevolen status van items te "
-"wijzigen."
+msgstr "Het is gebruiker niet toegestaan om de aanbevolen status van items te wijzigen."
 
 #: application/controllers/ItemsController.php:350
 msgid "User is not allowed to delete selected items."
-msgstr ""
-"Het is gebruiker niet toegestaan om geselecteerde items te verwijderen."
+msgstr "Het is gebruiker niet toegestaan om geselecteerde items te verwijderen."
 
 #: application/controllers/ItemsController.php:356
 msgid "User is not allowed to edit selected items."
@@ -1664,9 +1588,7 @@ msgstr "Het is gebruiker niet toegestaan om geselecteerde items te bewerken."
 
 #: application/controllers/ItemsController.php:361
 msgid "User is not allowed to tag selected items."
-msgstr ""
-"Het is gebruiker niet toegestaan om geselecteerde items van een tag te "
-"voorzien."
+msgstr "Het is gebruiker niet toegestaan om geselecteerde items van een tag te voorzien."
 
 #: application/controllers/ItemsController.php:384
 msgid "The items were successfully changed!"
@@ -1677,9 +1599,7 @@ msgstr "De items zijn met succes gewijzigd."
 msgid ""
 "Error in configuring plugin named \"%s\". Missing config and/or config_form "
 "hook(s)."
-msgstr ""
-"Fout bij het configureren van plugin \"%s\". Er ontbreekt een config en/of "
-"config_form hook."
+msgstr "Fout bij het configureren van plugin \"%s\". Er ontbreekt een config en/of config_form hook."
 
 #: application/controllers/PluginsController.php:55
 #, php-format
@@ -1770,8 +1690,7 @@ msgstr "De algemene instellingen zijn bijgewerkt."
 #: application/controllers/SettingsController.php:46
 #: install/views/scripts/index/index.phtml:16
 msgid "There were errors found in your form. Please edit and resubmit."
-msgstr ""
-"Er bevonden zich fouten in uw formulier. Graag opnieuw bewerken en insturen."
+msgstr "Er bevonden zich fouten in uw formulier. Graag opnieuw bewerken en insturen."
 
 #: application/controllers/SettingsController.php:70
 msgid "Works"
@@ -1805,8 +1724,7 @@ msgstr "Ongeldig formulier verstuurd."
 
 #: application/controllers/ThemesController.php:38
 msgid "You have chosen an illegal theme name. Please select another theme."
-msgstr ""
-"U hebt een niet-toegestane thema-naam gekozen. Selecteer een ander thema."
+msgstr "U hebt een niet-toegestane thema-naam gekozen. Selecteer een ander thema."
 
 #: application/controllers/ThemesController.php:51
 msgid "The theme has been successfully changed."
@@ -1825,9 +1743,7 @@ msgstr "SQL-fout tijdens migratie:"
 msgid ""
 "Unable to reset password. Please verify that the information is correct and "
 "contact an administrator if necessary."
-msgstr ""
-"Niet in staat wachtwoord opnieuw in te stellen. Gelieve te controleren of de"
-" informatie correct is.  Neem indien nodig contact op met een beheerder."
+msgstr "Niet in staat wachtwoord opnieuw in te stellen. Gelieve te controleren of de informatie correct is.  Neem indien nodig contact op met een beheerder."
 
 #: application/controllers/UsersController.php:129
 msgid "Please follow this link to reset your password:"
@@ -1847,8 +1763,7 @@ msgstr "[%s] stel uw wachtwoord opnieuw in"
 
 #: application/controllers/UsersController.php:138
 msgid "Please check your email for a link to reset your password."
-msgstr ""
-"Controleer uw e-mail voor een link om uw wachtwoord opnieuw in te stellen."
+msgstr "Controleer uw e-mail voor een link om uw wachtwoord opnieuw in te stellen."
 
 #: application/controllers/UsersController.php:154
 msgid "Password: The passwords do not match."
@@ -1887,10 +1802,7 @@ msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
 "this user will remain in the archive, but will no longer be associated with "
 "this user."
-msgstr ""
-"%s zal uit het systeem worden verwijderd. Items, collecties en door deze "
-"gebruiker aangemaakte tags zullen in het archief blijven bestaan, maar niet "
-"langer verbonden met deze gebruiker."
+msgstr "%s zal uit het systeem worden verwijderd. Items, collecties en door deze gebruiker aangemaakte tags zullen in het archief blijven bestaan, maar niet langer verbonden met deze gebruiker."
 
 #: application/controllers/UsersController.php:294
 msgid "Welcome!"
@@ -1901,9 +1813,7 @@ msgstr "Welkom!"
 msgid ""
 "Your account for the %s archive has been created. Please click the following"
 " link to activate your account:"
-msgstr ""
-"Uw account voor het %s archief is aangemaakt. Klik op de volgende link om uw"
-" account te activeren:"
+msgstr "Uw account voor het %s archief is aangemaakt. Klik op de volgende link om uw account te activeren:"
 
 #: application/controllers/UsersController.php:299
 #, php-format
@@ -1958,10 +1868,7 @@ msgstr "Tag scheidingsteken"
 msgid ""
 "Separate tags using this character or string. Be careful when changing this "
 "setting. You run the risk of splitting tags that contain the old delimiter."
-msgstr ""
-"Scheid tags met behulp van dit teken of deze tekenreeks. Wees voorzichtig "
-"bij het wijzigen van deze instelling. U loopt het risico tags te splitsen "
-"die het oude scheidingsteken bevatten."
+msgstr "Scheid tags met behulp van dit teken of deze tekenreeks. Wees voorzichtig bij het wijzigen van deze instelling. U loopt het risico tags te splitsen die het oude scheidingsteken bevatten."
 
 #: application/forms/GeneralSettings.php:64 application/forms/Install.php:123
 msgid "Fullsize Image Size"
@@ -1995,8 +1902,7 @@ msgstr "Items per pagina (admin)"
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
-msgstr ""
-"Beperk het aantal getoonde items per pagina in de beheerders-interface."
+msgstr "Beperk het aantal getoonde items per pagina in de beheerders-interface."
 
 #: application/forms/GeneralSettings.php:92 application/forms/Install.php:155
 msgid "Items Per Page (public)"
@@ -2018,9 +1924,7 @@ msgstr "Inschakelen Prototype"
 msgid ""
 "Enable the Prototype JavaScript library. This may be required for some older"
 " plugins."
-msgstr ""
-"Schakel de Prototype JavaScript bibliotheek in. Dit kan vereist zijn voor "
-"sommige oudere plugins."
+msgstr "Schakel de Prototype JavaScript bibliotheek in. Dit kan vereist zijn voor sommige oudere plugins."
 
 #: application/forms/GeneralSettings.php:110 application/forms/Install.php:169
 msgid "Imagemagick Directory Path"
@@ -2124,9 +2028,7 @@ msgstr "Schakel validatie bij bestandsupload uit"
 msgid ""
 "Check this field if you would like to allow any file to be uploaded to "
 "Omeka."
-msgstr ""
-"Vink dit veld aan als u wilt toestaan dat elk soort bestand in Omeka kan "
-"worden geupload."
+msgstr "Vink dit veld aan als u wilt toestaan dat elk soort bestand in Omeka kan worden geupload."
 
 #: application/forms/SecuritySettings.php:35
 msgid "Allowed File Extensions"
@@ -2152,9 +2054,7 @@ msgstr "ReCaptcha publieke sleutel"
 msgid ""
 "Public key from recaptcha.net. Both this and the private key must be filled "
 "in to secure public forms."
-msgstr ""
-"Publieke sleutel van recaptcha.net. Zowel deze als de persoonlijke sleutel "
-"moeten worden ingevuld in beveiligde openbare formulieren."
+msgstr "Publieke sleutel van recaptcha.net. Zowel deze als de persoonlijke sleutel moeten worden ingevuld in beveiligde openbare formulieren."
 
 #: application/forms/SecuritySettings.php:63
 msgid "ReCaptcha Private Key"
@@ -2164,9 +2064,7 @@ msgstr "ReCaptcha persoonlijke sleutel"
 msgid ""
 "Private key from recaptcha.net. Both this and the public key must be filled "
 "in to secure public forms."
-msgstr ""
-"Persoonlijke sleutel van recaptcha.net. Zowel deze als de publieke sleutel "
-"moeten worden ingevuld in beveiligde openbare formulieren."
+msgstr "Persoonlijke sleutel van recaptcha.net. Zowel deze als de publieke sleutel moeten worden ingevuld in beveiligde openbare formulieren."
 
 #: application/forms/User.php:35
 msgid "Username is required."
@@ -2238,9 +2136,7 @@ msgstr "Invoer toevoegen"
 #: application/helpers/ElementForm.php:286
 #, php-format
 msgid "Cannot display a form input for \"%s\" if element type name is not given!"
-msgstr ""
-"Kan geen formulierinvoer voor \"%s\" tonen als elementtypenaam niet is "
-"ingevoerd!"
+msgstr "Kan geen formulierinvoer voor \"%s\" tonen als elementtypenaam niet is ingevoerd!"
 
 #: application/helpers/ElementForm.php:346
 msgid "From"
@@ -2289,9 +2185,7 @@ msgstr "Aanbevolen item"
 msgid ""
 "An item has not been set to be displayed on this theme page! Please see "
 "Omeka documentation for details."
-msgstr ""
-"Er is geen item ingesteld om op deze themapagina te worden getoond! Zie de "
-"Omeka-documentatie voor details."
+msgstr "Er is geen item ingesteld om op deze themapagina te worden getoond! Zie de Omeka-documentatie voor details."
 
 #: application/helpers/ItemFunctions.php:571
 msgid "No featured items are available."
@@ -2340,9 +2234,7 @@ msgstr "Kan geen element vinden met het ID '%s'!"
 msgid ""
 "Element name is ambiguous! There is more than one element set containing an "
 "element named \"%s\"!"
-msgstr ""
-"Elementnaam is niet eenduidig! Er is meer dan een elementset die een element"
-" bevat met de naam \"%s\"!"
+msgstr "Elementnaam is niet eenduidig! Er is meer dan een elementset die een element bevat met de naam \"%s\"!"
 
 #: application/models/ActsAsElementText.php:317
 #: application/models/ActsAsElementText.php:324
@@ -2362,8 +2254,7 @@ msgstr "Elementteksten zijn niet correct opgemaakt."
 #: application/models/ActsAsElementText.php:647
 #, php-format
 msgid "Cannot process form input for element with data type \"%s\"!"
-msgstr ""
-"Kan de formulierinvoer niet verwerken voor het element met datatype \"%s\"!"
+msgstr "Kan de formulierinvoer niet verwerken voor het element met datatype \"%s\"!"
 
 #: application/models/ActsAsElementText.php:662
 #, php-format
@@ -2377,8 +2268,7 @@ msgstr "Kan het element met het datatype \"%s\" niet valideren!"
 
 #: application/models/ActsAsElementText.php:735
 msgid "Cannot save element text for records that are not yet persistent!"
-msgstr ""
-"Kan geen elementtekst opslaan voor records die nog niet constant zijn!"
+msgstr "Kan geen elementtekst opslaan voor records die nog niet constant zijn!"
 
 #: application/models/Collection.php:107
 msgid "Collectors must be either a string or an array."
@@ -2392,9 +2282,7 @@ msgstr "De collectienaam moet tussen de %1$s en %2$s tekens bevatten."
 #: application/models/Collection.php:198
 msgid ""
 "Argument passed to addCollector() must be a string or an instance of Entity."
-msgstr ""
-"Argument dat wordt doorgegeven aan addCollector() moet een tekenreeks zijn "
-"of een instance van Entity."
+msgstr "Argument dat wordt doorgegeven aan addCollector() moet een tekenreeks zijn of een instance van Entity."
 
 #: application/models/Collection.php:230
 msgid "Cannot associate the collection with an unsaved user."
@@ -2402,8 +2290,7 @@ msgstr "Kan de collectie niet verbinden met een niet-opgeslagen gebruiker."
 
 #: application/models/CollectionPermissions.php:37
 msgid "Invalid query provided to CollectionPermissions check"
-msgstr ""
-"Ongeldige <em>query</em> geleverd voor de CollectionPermissions controle."
+msgstr "Ongeldige <em>query</em> geleverd voor de CollectionPermissions controle."
 
 #: application/models/DataTypeTable.php:31
 #, php-format
@@ -2442,8 +2329,7 @@ msgstr "Naam van elementset mag niet leeg zijn."
 
 #: application/models/EntitiesRelations.php:29
 msgid "Joins in the EntitiesRelations table must be given a polymorphic type"
-msgstr ""
-"Joins in the EntitiesRelations tabel dienen een polymorphic type te krijgen."
+msgstr "Joins in the EntitiesRelations tabel dienen een polymorphic type te krijgen."
 
 #: application/models/EntitiesRelations.php:33
 msgid "Joins in the EntitiesRelations table must be filled out entirely"
@@ -2468,9 +2354,7 @@ msgstr "Kan het lokale pad voor een opgeslagen bestand niet vinden."
 #: application/models/Item.php:284
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
-msgstr ""
-"Bestanden kunnen niet gehecht worden aan een item dat niet constant is in de"
-" database."
+msgstr "Bestanden kunnen niet gehecht worden aan een item dat niet constant is in de database."
 
 #: application/models/Item.php:398
 msgid "Cannot add an existing file to an item!"
@@ -2482,24 +2366,18 @@ msgstr "Bestand moet geldig zijn voor het verbonden kan worden aan een item!"
 
 #: application/models/ItemBuilder.php:141
 msgid "Cannot add tags to an item if no Entity is available to tag."
-msgstr ""
-"Kan geen tags toevoegen aan een item als er geen entiteit beschikbaar is die"
-" van een tag kan worden voorzien."
+msgstr "Kan geen tags toevoegen aan een item als er geen entiteit beschikbaar is die van een tag kan worden voorzien."
 
 #: application/models/ItemBuilder.php:265
 msgid "Must specify a file transfer type when attaching files to an item!"
-msgstr ""
-"Het type bestandsoverdracht moet gespecificeerd zijn bij het hechten van "
-"bestanden aan een item."
+msgstr "Het type bestandsoverdracht moet gespecificeerd zijn bij het hechten van bestanden aan een item."
 
 #: application/models/ItemPermissions.php:34
 #, php-format
 msgid ""
 "This SQL statement needs a FROM or JOIN clause equivalent to '%s i' in order"
 " to have permissions checked!"
-msgstr ""
-"Dit SQL-statement heeft een FROM of JOIN clause equivalent nodig bij '%s i' "
-"om rechten te kunnen controleren!"
+msgstr "Dit SQL-statement heeft een FROM of JOIN clause equivalent nodig bij '%s i' om rechten te kunnen controleren!"
 
 #: application/models/ItemSearch.php:98
 msgid "Invalid search type given!"
@@ -2526,17 +2404,13 @@ msgstr "Er zijn te weinig waarden in de sorteerlijst van elementen."
 msgid ""
 "Invalid element data. To add elements, you must either pass an element "
 "objects or an array of element metadata."
-msgstr ""
-"Ongeldige element data. Om elementen toe te voegen, dient een element object"
-" door te geven of een lijst van element metadata."
+msgstr "Ongeldige element data. Om elementen toe te voegen, dient een element object door te geven of een lijst van element metadata."
 
 #: application/models/ItemType.php:285
 msgid ""
 "Cannot remove elements from an item type that is not persistent in the "
 "database!"
-msgstr ""
-"Kan geen elementen verwijderen uit een itemtype dat niet constant is in de "
-"database!"
+msgstr "Kan geen elementen verwijderen uit een itemtype dat niet constant is in de database!"
 
 #: application/models/ItemType.php:294
 #, php-format
@@ -2552,9 +2426,7 @@ msgstr "Itemtype bevat geen element met het ID %s!"
 msgid ""
 "Invalid parameter. The hasElement function requires either an element object"
 " or an element id to determine if an item type has an element."
-msgstr ""
-"Ongeldige parameter. De hasElement functie vereist een element object of een"
-" element id om vast te kunnen stellen of een itemtype ook een element heeft."
+msgstr "Ongeldige parameter. De hasElement functie vereist een element object of een element id om vast te kunnen stellen of een itemtype ook een element heeft."
 
 #: application/models/Option.php:28 application/models/Option.php:32
 msgid "Each option must have a unique name."
@@ -2562,8 +2434,7 @@ msgstr "Iedere optie moet een unieke naam hebben."
 
 #: application/models/Orderable.php:101
 msgid "Cannot add a child to a record that does not exist yet!"
-msgstr ""
-"Kan geen <em>child</em> toevoegen aan een record dat nog niet bestaat!"
+msgstr "Kan geen <em>child</em> toevoegen aan een record dat nog niet bestaat!"
 
 #: application/models/Orderable.php:105
 #, php-format
@@ -2597,15 +2468,11 @@ msgstr "Deze naam is al in gebruik voor deze tag."
 
 #: application/models/Taggable.php:195
 msgid "A valid record ID # must be provided when tagging."
-msgstr ""
-"Er moet een geldige record ID-nummer worden geleverd bij het toewijzen van "
-"tags."
+msgstr "Er moet een geldige record ID-nummer worden geleverd bij het toewijzen van tags."
 
 #: application/models/Taggable.php:199
 msgid "A valid entity or user must be provided when tagging."
-msgstr ""
-"Er moet een geldige entiteit of gebruiker worden geleverd bij het toewijzen "
-"van tags."
+msgstr "Er moet een geldige entiteit of gebruiker worden geleverd bij het toewijzen van tags."
 
 #: application/models/User.php:63
 msgid "No Entity record available."
@@ -2613,8 +2480,7 @@ msgstr "Geen entiteitsrecord beschikbaar."
 
 #: application/models/User.php:75
 msgid "No Entity record is available when saving this User."
-msgstr ""
-"Er is geen entiteitsrecord beschikbaar bij het opslaan van deze gebruiker."
+msgstr "Er is geen entiteitsrecord beschikbaar bij het opslaan van deze gebruiker."
 
 #: application/models/User.php:92
 msgid "User may not change permissions to super-user"
@@ -2628,9 +2494,7 @@ msgstr "Het is gebruiker niet toegestaan rollen te wijzigen."
 msgid ""
 "If a first name and last name are not provided, then an institution name is "
 "required."
-msgstr ""
-"Als er geen voornaam en achternaam voorhanden zijn, is een instellingsnaam "
-"vereist."
+msgstr "Als er geen voornaam en achternaam voorhanden zijn, is een instellingsnaam vereist."
 
 #: application/models/User.php:156
 msgid "A first name is required."
@@ -2660,8 +2524,7 @@ msgstr "'%s' is al in gebruik. Gelieve een andere gebruikersnaam te kiezen."
 
 #: application/models/UsersActivations.php:31
 msgid "Cannot create a user activation for non-existent user."
-msgstr ""
-"Kan geen gebruikersactivering aanmaken voor een niet-bestaande gebruiker."
+msgstr "Kan geen gebruikersactivering aanmaken voor een niet-bestaande gebruiker."
 
 #: application/views/scripts/collections/browse.php:21
 #: application/views/scripts/collections/show.php:13
@@ -2754,11 +2617,7 @@ msgid ""
 "Omeka Codex page on <a "
 "href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error "
 "messages</a>."
-msgstr ""
-"Zie de Omeka Codex pagina over <a "
-"href=\"http://omeka.org/codex/Retrieving_error_messages\">ophalen van "
-"foutmeldingen</a> om te leren hoe u meer gedetailleerde informatie over deze"
-" fout te zien kunt krijgen."
+msgstr "Zie de Omeka Codex pagina over <a href=\"http://omeka.org/codex/Retrieving_error_messages\">ophalen van foutmeldingen</a> om te leren hoe u meer gedetailleerde informatie over deze fout te zien kunt krijgen."
 
 #: application/views/scripts/functions.php:131
 msgid "Browse All"
@@ -2881,10 +2740,7 @@ msgid ""
 "If you have any questions please refer to <a "
 "href=\"http://omeka.org/codex\">Omeka documentation</a> or post a message on"
 " the <a href=\"http://omeka.org/forums\">Omeka forums</a>."
-msgstr ""
-"Wanneer u vragen hebt, raadpleeg dan de <a "
-"href=\"http://omeka.org/codex\">Omeka documentatie</a> of plaats een bericht"
-" op de <a href=\"http://omeka.org/forums\">Omeka forums</a>."
+msgstr "Wanneer u vragen hebt, raadpleeg dan de <a href=\"http://omeka.org/codex\">Omeka documentatie</a> of plaats een bericht op de <a href=\"http://omeka.org/forums\">Omeka forums</a>."
 
 #: application/views/scripts/upgrade/index.php:10
 msgid "Upgrade Your Omeka Database"
@@ -2898,9 +2754,7 @@ msgstr "Uw Omeka database is niet compatibel met uw huidige versie van Omeka."
 #: application/views/scripts/upgrade/index.php:13
 msgid ""
 "Please back up your existing database and then click the button to upgrade."
-msgstr ""
-"Maak a.u.b. eerst een <em>backup</em> van uw bestaande database en klik dan "
-"pas op de knop om op te waarderen."
+msgstr "Maak a.u.b. eerst een <em>backup</em> van uw bestaande database en klik dan pas op de knop om op te waarderen."
 
 #: application/views/scripts/upgrade/index.php:15
 msgid "Upgrade Database"
@@ -2953,9 +2807,7 @@ msgstr "Installatiefout"
 #: install/views/scripts/index/errors.phtml:2
 msgid ""
 "Before installation can continue, the following errors must be resolved:"
-msgstr ""
-"Om de installatie voort te kunnen zetten, dienen eerst de volgende fouten "
-"worden opgelost:"
+msgstr "Om de installatie voort te kunnen zetten, dienen eerst de volgende fouten worden opgelost:"
 
 #: install/views/scripts/index/fatal-error.phtml:1
 msgid "Fatal Error"
@@ -2969,9 +2821,7 @@ msgstr "Installatiewaarschuwing"
 msgid ""
 "The following issues will not affect installation, but they may negatively "
 "affect the behavior of Omeka:"
-msgstr ""
-"De volgende problemen zullen geen invloed op de installatie hebben, maar "
-"kunnen de werking van Omeka negatief beïnvloeden:"
+msgstr "De volgende problemen zullen geen invloed op de installatie hebben, maar kunnen de werking van Omeka negatief beïnvloeden:"
 
 #: install/views/scripts/index/index.phtml:13
 msgid "Configure Your Site"
@@ -2985,9 +2835,7 @@ msgstr "Formulier validatie-fouten"
 msgid ""
 "Omeka is installed. You may remove the \"install\" directory for security "
 "reasons."
-msgstr ""
-"Omeka is geïnstalleerd. U kunt nu de \"install\" directory verwijderen als "
-"beveiligingsmaatregel."
+msgstr "Omeka is geïnstalleerd. U kunt nu de \"install\" directory verwijderen als beveiligingsmaatregel."
 
 #: install/views/scripts/index/installed.phtml:2
 msgid "Admin Panel"
@@ -3000,5 +2848,3 @@ msgstr "Openbare site"
 #: install/views/scripts/layout.phtml:5 install/views/scripts/layout.phtml:9
 msgid "Omeka Installation"
 msgstr "Omeka installatie"
-
-
