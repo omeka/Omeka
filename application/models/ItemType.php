@@ -123,7 +123,7 @@ class ItemType extends Omeka_Record
 
         // add the elements that need to be added
         foreach ($this->_elementsToSave as $key => $element) {
-            $element->forceSave();
+            $element->save();
             $this->addElementById($element->id);
             unset($this->_elementsToSave[$key]);
         }
@@ -172,7 +172,7 @@ class ItemType extends Omeka_Record
         $i = 0;
         foreach ($joinRecordArray as $key => $joinRecord) {
             $joinRecord->order = ++$i;
-            $joinRecord->forceSave();
+            $joinRecord->save();
         }
     }
 
@@ -244,7 +244,7 @@ class ItemType extends Omeka_Record
             $select = $table->getSelectForCount()
                     ->where('item_types_elements.item_type_id = ?');
             $iteJoin->order = (int) $table->fetchOne($select, array($this->id)) + 1;
-            $iteJoin->forceSave();
+            $iteJoin->save();
         }
     }
 

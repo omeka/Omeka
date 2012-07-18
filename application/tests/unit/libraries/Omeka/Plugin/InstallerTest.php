@@ -35,7 +35,7 @@ class Omeka_Plugin_InstallerTest extends PHPUnit_Framework_TestCase
     public function testActivate()
     {
         $this->plugin->expects($this->once())
-                 ->method('forceSave'); 
+                 ->method('save'); 
         
         $this->installer->activate($this->plugin);       
         $this->assertEquals(1, $this->plugin->active);
@@ -44,7 +44,7 @@ class Omeka_Plugin_InstallerTest extends PHPUnit_Framework_TestCase
     public function testDeactivate()
     {
         $this->plugin->expects($this->once())
-                 ->method('forceSave'); 
+                 ->method('save'); 
         
         $this->installer->deactivate($this->plugin);       
         $this->assertEquals(0, $this->plugin->active);
@@ -81,7 +81,7 @@ class Omeka_Plugin_InstallerTest extends PHPUnit_Framework_TestCase
     public function testInstall()
     {        
         $this->plugin->expects($this->once())
-                 ->method('forceSave');
+                 ->method('save');
 
         // Also, we loaded this thing successfully.
         $this->loader->expects($this->once())

@@ -50,7 +50,7 @@ class Omeka_Plugin_Installer
     public function activate(Plugin $plugin)
     {
         $plugin->active = 1;
-        $plugin->forceSave();
+        $plugin->save();
     }
     
     /**
@@ -62,7 +62,7 @@ class Omeka_Plugin_Installer
     public function deactivate(Plugin $plugin)
     {
         $plugin->active = 0;
-        $plugin->forceSave();
+        $plugin->save();
     }
     
     /**
@@ -93,7 +93,7 @@ class Omeka_Plugin_Installer
         // run the upgrade hook for the plugin.
         $this->_broker->callHook('upgrade', array($oldVersion, $plugin->getIniVersion()), $plugin);
 
-        $plugin->forceSave();
+        $plugin->save();
     }
     
     /**
@@ -113,7 +113,7 @@ class Omeka_Plugin_Installer
         try {
             $plugin->setActive(true);            
             $plugin->setDbVersion($plugin->getIniVersion());
-            $plugin->forceSave();
+            $plugin->save();
             
             // Force the plugin to load.  Will throw exception if plugin cannot be loaded for some reason.
             $this->_loader->load($plugin, true);

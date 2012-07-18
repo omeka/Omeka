@@ -188,7 +188,7 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
         $newUser->active = 1;
         $newUser->name = ucwords($role) . ' User';
         $newUser->email = $role . '@example.com';
-        $newUser->forceSave();
+        $newUser->save();
         return $newUser;
     }
 

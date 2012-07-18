@@ -141,7 +141,7 @@ class UsersController extends Omeka_Controller_Action
                 }
                 $ua->User->setPassword($_POST['new_password1']);
                 $ua->User->active = 1;
-                $ua->User->forceSave();
+                $ua->User->save();
                 $ua->delete();
                 $this->_helper->flashMessenger(__('You may now log in to Omeka.'), 'success');
                 $this->_helper->redirector('login');
@@ -231,7 +231,7 @@ class UsersController extends Omeka_Controller_Action
             if ($changePasswordForm->isValid($_POST)) {
                 $values = $changePasswordForm->getValues();
                 $user->setPassword($values['new_password']);
-                $user->forceSave();
+                $user->save();
                 $this->_helper->flashMessenger(__('Password changed!'), 'success');
                 $success = true;
             }

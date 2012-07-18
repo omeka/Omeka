@@ -52,7 +52,7 @@ class ElementSet extends Omeka_Record
         foreach ($this->_elementsToSave as $order => $obj) {
             $obj->element_set_id = $this->id;
             $obj->setOrder($maxOrder + (int)$order);
-            $obj->forceSave();
+            $obj->save();
             unset($this->_elementsToSave[$order]);
         }
     }

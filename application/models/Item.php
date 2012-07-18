@@ -305,7 +305,7 @@ class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
         
         foreach ($this->_files as $key => $file) {
             $file->item_id = $this->id;
-            $file->forceSave();
+            $file->save();
             // Make sure we can't save it twice by mistake.
             unset($this->_files[$key]);
         }        

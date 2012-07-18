@@ -136,7 +136,7 @@ class User extends Omeka_Record implements Zend_Acl_Resource_Interface,
             return false;
         }
         $user->setPassword($password);
-        $user->forceSave();
+        $user->save();
         return true;
     }
     

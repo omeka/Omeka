@@ -592,7 +592,7 @@ class Mixin_ElementText extends Omeka_Record_Mixin
                 
         foreach ($this->_textsToSave as $textRecord) {
             $textRecord->record_id = $this->_record->id;
-            $textRecord->forceSave();
+            $textRecord->save();
         }
         
         // Cause texts to be re-loaded if accessed after save.

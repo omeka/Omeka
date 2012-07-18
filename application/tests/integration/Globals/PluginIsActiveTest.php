@@ -26,7 +26,7 @@ class Omeka_Globals_PluginIsActiveTest extends Omeka_Test_AppTestCase
         $plugin->setDirectoryName(self::PLUGIN_NAME);
         $plugin->setActive(true);
         $plugin->setDbVersion('1.0');
-        $plugin->forceSave();
+        $plugin->save();
         $this->plugin = $plugin;
         self::dbChanged(false);
     }
@@ -39,7 +39,7 @@ class Omeka_Globals_PluginIsActiveTest extends Omeka_Test_AppTestCase
     public function testNotActive()
     {
         $this->plugin->setActive(false);
-        $this->plugin->forceSave();
+        $this->plugin->save();
         $this->assertFalse(plugin_is_active(self::PLUGIN_NAME));
     }
 

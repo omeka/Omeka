@@ -48,7 +48,7 @@ class Omeka_Controller_CollectionsControllerTest extends Omeka_Test_AppTestCase
         $collection = new Collection;
         $collection->name = 'foobar';
         $collection->owner_id = 5;
-        $collection->forceSave();
+        $collection->save();
         $this->request->setPost(array(
             'name' => 'foobar',
             'description' => 'baz'

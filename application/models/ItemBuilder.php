@@ -112,7 +112,7 @@ class ItemBuilder extends Omeka_Record_Builder
                         $etRecord = $etRecordSet[$elementTextIndex];
                         $etRecord->text = $textAttr['text'];
                         $etRecord->html = $textAttr['html'];
-                        $etRecord->forceSave();
+                        $etRecord->save();
                     } else {
                         // Otherwise we should just append the new text to the 
                         // pre-existing ones.

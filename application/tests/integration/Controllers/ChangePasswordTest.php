@@ -26,7 +26,7 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
         // Pretend that this user is not a super user.
         $this->_authenticateUser($this->user);
         $this->user->role = 'admin';
-        $this->user->forceSave();
+        $this->user->save();
     }
 
     public function assertPreConditions()
@@ -54,7 +54,7 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
     public function testChangePasswordFormAsSuperUser()
     {
         $this->user->role = 'super';
-        $this->user->forceSave();
+        $this->user->save();
         $this->dispatch(self::FORM_URL);
         $this->assertNotRedirect();
         $this->assertNotQuery('form#change-password input#current_password');
@@ -73,7 +73,7 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
     public function testSuperUserCanChangePasswordForAnotherUser()
     {
         $this->user->role = 'super';
-        $this->user->forceSave();
+        $this->user->save();
         $newUser = $this->_addNewUserWithRole('admin');
         $this->dispatch('/users/edit/' . $newUser->id);
         $this->assertController('users');
@@ -157,7 +157,7 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
         $newUser->active = 1;
         $newUser->name = 'New Admin User';
         $newUser->email = 'bananabananabanana@example.com';
-        $newUser->forceSave();
+        $newUser->save();
         $this->assertTrue($newUser->exists());
         return $newUser;
     }

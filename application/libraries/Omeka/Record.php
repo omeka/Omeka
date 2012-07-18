@@ -358,21 +358,6 @@ abstract class Omeka_Record implements ArrayAccess
     }
     
     /**
-     * Validate the record.
-     * 
-     * Validation should be handled by the _validate() method.
-     * 
-     * @uses Omeka_Record::_validate()
-     * @return void
-     */
-    protected function validate() 
-    {
-        $this->runCallbacks('beforeValidate');
-        $validator = $this->_validate();        
-        $this->runCallbacks('afterValidate');
-    }
-    
-    /**
      * Template method for defining record validation rules.
      * 
      * Should be overridden by subclasses.
@@ -390,7 +375,7 @@ abstract class Omeka_Record implements ArrayAccess
      */
     public function isValid()
     {
-        $this->validate();
+        $this->_validate();
         return !$this->hasErrors();    
     }
     
@@ -520,17 +505,17 @@ abstract class Omeka_Record implements ArrayAccess
      * If the record does not validate, nothing will happen.  If the record is 
      * not yet persisted, it will be inserted into the database.  If it is, then
      * the existing database row(s) will be updated.
-     * 
+     *
+     * @since 2.0 Added the $throwIfInvalid parameter
+     * @param boolean $throwIfInvalid Whether a validation error should result in
+     *  an exception being thrown. The default is to throw. Otherwise, if false
+     *  is passed, this method will simply return false if the record is invalid.
      * @return boolean Whether or not the save was successful.
      */
-    public function save()
-    {    
+    public function save($throwIfInvalid = true)
+    {
         if ($this->_locked) {
             throw new Omeka_Record_Exception('Cannot save a locked record!');
-        }
-        
-        if (!$this->isValid()) {
-            return false;
         }
         
         $was_inserted = !$this->exists();
@@ -543,7 +528,16 @@ abstract class Omeka_Record implements ArrayAccess
         }
         
         $this->runCallbacks('beforeSave');
-        
+
+        // Test validity after the "before" callbacks but before actually saving
+        if (!$this->isValid()) {
+            if ($throwIfInvalid) {
+                throw new Omeka_Validator_Exception($this->getErrors());
+            } else {
+                return false;
+            }
+        }
+
         // Only try to save columns in the $data that are actually defined
         // columns for the model
         $data_to_save = $this->toArray();
@@ -565,23 +559,6 @@ abstract class Omeka_Record implements ArrayAccess
         
         $this->runCallbacks('afterSave');
                
-        return true;
-    }
-    
-    /**
-     * Force the record to save.
-     * 
-     * @throws Omeka_Validator_Exception If the record cannot be saved for some 
-     * reason.
-     * @return boolean True if the save was successful, an exception is thrown
-     * otherwise.
-     */
-    public function forceSave()
-    {
-        if (!$this->isValid() || !$this->save()) {
-            throw new Omeka_Validator_Exception($this->getErrors());
-        }
-        
         return true;
     }
     
@@ -808,7 +785,7 @@ abstract class Omeka_Record implements ArrayAccess
             $clean = $this->setFromPost($clean);
             
             //Save will return TRUE if there are no validation errors
-            if ($this->save()) {
+            if ($this->save(false)) {
                 $this->runCallbacks('afterSaveForm', $clean);
                 return true;
             } else {

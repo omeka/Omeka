@@ -103,30 +103,6 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
                               (string)$record->getErrors());
     }
     
-    /**
-     * Test that the isValid() event (and others that use runCallbacks()) properly 
-     * triggers events on 1) the record itself, 2) the record's mixin classes,
-     * 3) the plugins.
-     */
-    public function testRunCallbacks()
-    {        
-        $this->pluginBroker->addHook('before_validate_dummy_record', array($this, 'beforeValidateDummy'), 'Dummy');
-        $this->pluginBroker->addHook('before_validate_record', array($this, 'beforeValidateRecord'), 'Dummy');
-        
-        $record = new DummyRecord($this->db);
-        $record->setPluginBroker($this->pluginBroker);
-        $record->isValid();
-        $this->assertEquals(array(
-            'DummyRecord::beforeValidate()',
-            'DummyMixin::beforeValidate()',
-            'Plugin Hook: before_validate_record',
-            'Plugin Hook: before_validate_dummy_record',
-            'DummyRecord::afterValidate()',
-            'DummyMixin::afterValidate()'
-        ),
-        self::$_eventStack);
-    }
-    
     public function testExists()
     {
         $record = new DummyRecord($this->db);
@@ -223,8 +199,6 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
         $record = new DummyRecord($this->db);
         $record->save();
         $this->assertEquals(array(
-            'DummyRecord::beforeValidate()',
-            'DummyRecord::afterValidate()',
             'DummyRecord::beforeInsert()',
             'DummyRecord::beforeSave()',
             'DummyRecord::afterInsert()',
@@ -240,7 +214,7 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
         $record = new DummyRecord($this->db);
         $record->do_not_set = true;
         try {
-            $record->forceSave();
+            $record->save();
         } catch (Exception $e) {
             $this->assertContains(self::VALIDATION_ERROR, $e->getMessage());
             throw $e;
@@ -322,8 +296,6 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
         $postObject = new ArrayObject($post);
         $this->assertEquals(array(
             'DummyRecord::beforeSaveForm() with POST = ' . print_r($postObject, true),
-            "DummyRecord::beforeValidate()",
-            "DummyRecord::afterValidate()",
             "DummyRecord::beforeInsert()",
             "DummyRecord::beforeSave()",
             "DummyRecord::afterInsert()",
@@ -337,16 +309,6 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
     {
         self::$_eventStack = array();
         Zend_Registry::_unsetInstance();
-    }
-    
-    public function beforeValidateDummy()
-    {
-        self::addToEventStack('Plugin Hook: before_validate_dummy_record');
-    }
-    
-    public function beforeValidateRecord()
-    {
-        self::addToEventStack('Plugin Hook: before_validate_record');
     }
     
     public static function addToEventStack($event)
@@ -405,11 +367,6 @@ class DummyRecord extends Omeka_Record
         Omeka_RecordTest::addToEventStack('DummyRecord::beforeInsert()');
     }
     
-    protected function beforeValidate()
-    {
-        Omeka_RecordTest::addToEventStack('DummyRecord::beforeValidate()');
-    }
-    
     protected function afterSave()
     {
         Omeka_RecordTest::addToEventStack('DummyRecord::afterSave()');
@@ -446,13 +403,6 @@ class DummyRecord extends Omeka_Record
     protected function afterDelete() {
         Omeka_RecordTest::addToEventStack('DummyRecord::afterDelete()');
     }
-        
-    /**
-     * Executes after the record is validated.
-     */
-    protected function afterValidate() {
-        Omeka_RecordTest::addToEventStack('DummyRecord::afterValidate()');
-    }
     
     protected function _validate()
     {
@@ -483,15 +433,4 @@ class DummyMixin extends Omeka_Record_Mixin
     {
         Omeka_RecordTest::addToEventStack('DummyMixin::beforeSave()');
     }
-    
-    public function beforeValidate()
-    {
-        Omeka_RecordTest::addToEventStack('DummyMixin::beforeValidate()');
-    }
-    
-    public function afterValidate()
-    {
-        Omeka_RecordTest::addToEventStack('DummyMixin::afterValidate()');
-    }
-    
 }

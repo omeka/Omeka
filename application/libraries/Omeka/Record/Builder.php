@@ -67,7 +67,7 @@ abstract class Omeka_Record_Builder
         $record = $this->getRecord();
         $this->_setRecordProperties($record);
         $this->_beforeBuild($record);
-        $record->forceSave();
+        $record->save();
         $this->_afterBuild($record);
         return $record;        
     }
