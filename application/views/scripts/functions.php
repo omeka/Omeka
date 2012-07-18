@@ -86,17 +86,3 @@ function custom_header_background()
         echo $html;
     }
 }
-
-function custom_nav_items($navArray = array())
-{
-    if (!$navArray) {
-        $navArray = array(__('Browse All') => uri('items'), __('Browse by Tag') => uri('items/tags'));
-    }
-
-    // Check to see if the function public_nav_items, introduced in Omeka 1.3, exists.
-    if (function_exists('public_nav_items')) {
-        return public_nav_items($navArray);
-    } else {
-        return nav($navArray);
-    }
-}

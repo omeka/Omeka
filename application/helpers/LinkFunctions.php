@@ -503,7 +503,11 @@ function public_nav_main(array $navArray, $maxDepth = 0)
  * @uses public_nav()
  * @return string
  */
-function public_nav_items(array $navArray, $maxDepth = 0)
+function public_nav_items(array $navArray = null, $maxDepth = 0)
 {
+    if (!$navArray) {
+        $navArray = array(__('Browse All') => uri('items'), __('Browse by Tag') => uri('items/tags'));
+    }
+
     return public_nav($navArray, 'items', $maxDepth);
 }
