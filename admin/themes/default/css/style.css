@@ -17,6 +17,7 @@
         #Show Item
         #Batch Edit Items
         #Edit Item
+        #Show File
         #Tags
         #Advanced Search
         #Show Collection
@@ -1218,6 +1219,24 @@ header nav {
 }
 
 
+
+/* Show File  
+================================================== */
+
+.files dt, .files dd {
+    font-size: 14px;
+    line-height: 1.5em;
+    margin: 0;
+    padding: 0;
+}
+
+.files dt {
+    font-weight: bold;
+}
+
+.files dd {
+    margin-bottom: 1em;
+}
 
 /* Tags
 ================================================== */

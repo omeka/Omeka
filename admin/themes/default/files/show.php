@@ -10,53 +10,69 @@
 ?>
 <?php head(array('title' => $fileTitle, 'bodyclass'=>'files show primary-secondary')); ?>
 
-<?php if (has_permission('Files', 'edit') or $file->getItem()->wasAddedBy(current_user())): ?>
 
-    <p id="edit-file" class="edit-button"><?php echo link_to($file, 'edit', __('Edit this File'), array('class'=>'edit')); ?></p>
-<?php endif; ?>
-<div id="primary">
+<div id="save" class="three columns omega">
+
+    <?php if (has_permission('Files', 'edit') or $file->getItem()->wasAddedBy(current_user())): ?>    
+    <div class="panel">
+        <?php echo link_to($file, 'edit', __('Edit this File'), array('class'=>'big green button')); ?>
+    <?php if (has_permission('Files', 'delete')): ?>
+        <?php echo delete_button(null, 'delete-file', __('Delete this File'), array('class' => 'big red button'), 'delete-record-form'); ?>
+    <?php endif; ?>        
+    </div>
+    <?php endif; ?>
+
+    
+    <div id="format-metadata" class="panel">
+        <h4><?php echo __('Format Metadata'); ?></h4>
+        <dl>
+        <dt><?php echo __('Archive Filename'); ?>:</dt>
+        <dd><?php echo item_file('Archive Filename'); ?></dd>
+        <dt><?php echo __('Original Filename'); ?>:</dt>
+        <dd><?php echo item_file('Original Filename'); ?></dd>
+        <dt><?php echo __('File Size'); ?>:</dt>
+        <dd><?php echo item_file('Size'); ?> bytes</dd>
+        </dl>
+    </div>
+
+    <div id="file-history" class="panel">
+        <h4><?php echo __('File History'); ?></h4>
+        <dt><?php echo __('Date Added'); ?></dt>
+        <dd><?php echo item_file('Date Added'); ?></dd>
+        <dt><?php echo __('Date Modified'); ?></dt> 
+        <dd><?php echo item_file('Date Modified'); ?></dd>
+        <dt><?php echo __('Authentication'); ?></dt> 
+        <dd><?php echo item_file('Authentication'); ?></dd>
+    </div>
+
+    <div id="type-metadata" class="panel">
+        <h4><?php echo __('Type Metadata'); ?></h4>
+        <dt><?php echo __('Mime Type / Browser'); ?>:</dt>
+        <dd><?php echo item_file('MIME Type'); ?></dd>
+        <dt><?php echo __('Mime Type / OS'); ?>:</dt>
+        <dd><?php echo item_file('MIME Type OS'); ?></dd>
+        <dt><?php echo __('File Type / OS'); ?>:</dt>
+        <dd><?php echo item_file('File Type OS'); ?></dd>
+    </div>
+
+    <div class="panel">
+        <h4><?php echo __('Output Formats'); ?></h4>
+        <?php echo output_format_list(); ?>
+    </div>
+
+</div>
+
+<div class="seven columns alpha">
+
+    <?php echo flash(); ?>            
+    
     <div id="fullsize-file">
         <?php echo display_file($file, array('imageSize' => 'fullsize')); ?>
     </div>
     <?php echo show_file_metadata(); ?>
-    <div id="file-history" class="section">
-    <h2><?php echo __('File History'); ?></h2>
-    <h3><?php echo __('Date Added'); ?></h3> 
-    <div class="element-text"><?php echo item_file('Date Added'); ?></div>
-    <h3><?php echo __('Date Modified'); ?></h3> 
-    <div class="element-text"><?php echo item_file('Date Modified'); ?></div>
-    <h3><?php echo __('Authentication'); ?></h3> 
-    <div class="element-text"><?php echo item_file('Authentication'); ?></div>
-    </div>
     <?php fire_plugin_hook('admin_append_to_files_show_primary', $file); ?>
-</div><!--end primary-->
-<div id="secondary">
     
-    <div id="format-metadata" class="info-panel">
-        <h2><?php echo __('Format Metadata'); ?></h2>
-    <dl>
-    <dt><?php echo __('Archive Filename'); ?>:</dt> <dd><?php echo item_file('Archive Filename'); ?></dd>
-    <dt><?php echo __('Original Filename'); ?>:</dt> <dd><?php echo item_file('Original Filename'); ?></dd>
-    <dt><?php echo __('File Size'); ?>:</dt> <dd><?php echo item_file('Size'); ?> bytes</dd>
-    </dl>
-    </div>
-
-    <div id="type-metadata" class="info-panel">
-    <h2><?php echo __('Type Metadata'); ?></h2>
-    <dl>
-    <dt><?php echo __('Mime Type / Browser'); ?>:</dt> <dd><?php echo item_file('MIME Type'); ?></dd>
-    <dt><?php echo __('Mime Type / OS'); ?>:</dt> <dd><?php echo item_file('MIME Type OS'); ?></dd>
-    <dt><?php echo __('File Type / OS'); ?>:</dt> <dd><?php echo item_file('File Type OS'); ?></dd>
-    </dl>
-    </div>
-
-    <div class="info-panel">
-        <h2><?php echo __('Output Formats'); ?></h2>
-        <div>
-            <?php echo output_format_list(); ?>
-        </div>
-    </div>
+</div>
     
     <?php fire_plugin_hook('admin_append_to_files_show_secondary', $file); ?>
-</div>
 <?php foot();?>
