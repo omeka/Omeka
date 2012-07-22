@@ -148,7 +148,7 @@ $formAttributes['method'] = 'GET';
             <div class="inputs">
                 <?php echo select(array('name' => 'public', 'id' => 'public'),
                     array('1' => __('Only Public Items'),
-                          '0' => __('Only Non-Public Items'))
+                          '0' => __('Only Non-Public Items')),
                     @$_REQUEST['public']); ?>
             </div>
         </div>
@@ -159,7 +159,7 @@ $formAttributes['method'] = 'GET';
             <div class="inputs">
                 <?php echo select(array('name' => 'featured', 'id' => 'featured'),
                     array('1' => __('Only Featured Items'),
-                          '0' => __('Only Non-Featured Items'))
+                          '0' => __('Only Non-Featured Items')),
                     @$_REQUEST['featured']); ?>
             </div>
         </div>
