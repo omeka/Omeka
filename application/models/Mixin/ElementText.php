@@ -88,7 +88,12 @@ class Mixin_ElementText extends Omeka_Record_Mixin
         $this->saveElementTexts();
         
         $titles = $this->getElementTexts('Dublin Core', 'Title');
-        $this->_record->setSearchTextTitle($titles[0]->text);
+        if ($titles) {
+            $title = $titles[0]->text;
+        } else {
+            $title = null;
+        }
+        $this->_record->setSearchTextTitle($title);
         $text = '';
         foreach ($this->getAllElementTexts() as $elementText) {
             $text .= ' ' . $elementText->text;

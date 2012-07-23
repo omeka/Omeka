@@ -16,7 +16,7 @@ class Mixin_Search extends Omeka_Record_Mixin
 {
     protected $_text;
     protected $_title;
-    protected $_public = true;
+    protected $_public = 1;
     
     public function __construct($record)
     {
@@ -69,7 +69,7 @@ class Mixin_Search extends Omeka_Record_Mixin
             $searchText->record_name = $recordName;
             $searchText->record_id = $this->_record->id;
         }
-        $searchText->public = $this->_public;
+        $searchText->public = $this->_public ? 1 : 0;
         $searchText->title = $this->_title;
         $searchText->text = $this->_text;
         $searchText->save();
