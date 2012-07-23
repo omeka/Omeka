@@ -19,11 +19,14 @@ class CollectionTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->dbAdapter = new Zend_Test_DbAdapter;
+        $this->dbAdapter->appendLastInsertIdToStack(self::COLLECTION_ID);
         $this->db = new Omeka_Db($this->dbAdapter);
         $this->pluginBroker = new Omeka_Plugin_Broker;
         $this->collection = new Collection($this->db);
         $this->profilerHelper = new Omeka_Test_Helper_DbProfiler($this->dbAdapter->getProfiler(), $this);
-        Zend_Registry::set('bootstrap', new Omeka_Test_Bootstrap());
+        $bootstrap = new Omeka_Test_Bootstrap();
+        $bootstrap->getContainer()->db = $this->db;
+        Zend_Registry::set('bootstrap', $bootstrap);
     }
 
     public function tearDown()

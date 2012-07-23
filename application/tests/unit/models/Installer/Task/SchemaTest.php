@@ -68,6 +68,7 @@ class Installer_Task_SchemaTest extends PHPUnit_Framework_TestCase
             'taggings' => CORE_DIR . '/schema/taggings.sql',
             'users_activations' => CORE_DIR . '/schema/users_activations.sql',
             'sessions' => CORE_DIR . '/schema/sessions.sql',
+            'search_texts' => CORE_DIR . '/schema/search_texts.sql',
         ), $this->schemaTask->getTables());
     }
         
