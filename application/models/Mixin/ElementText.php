@@ -80,11 +80,20 @@ class Mixin_ElementText extends Omeka_Record_Mixin
     
     /**
      * Omeka_Record callback for afterSave. Saves the ElementText records once
-     * the associated record is saved.
+     * the associated record is saved. Adds the record's element texts to the 
+     * search text.
      */
     public function afterSave()
     {
         $this->saveElementTexts();
+        
+        $titles = $this->getElementTexts('Dublin Core', 'Title');
+        $this->_record->setSearchTextTitle($titles[0]->text);
+        $text = '';
+        foreach ($this->getAllElementTexts() as $elementText) {
+            $text .= ' ' . $elementText->text;
+        }
+        $this->_record->addSearchText($text);
     }
     
     /**

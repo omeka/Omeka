@@ -20,6 +20,7 @@ $resources = array(
     'SystemInfo',
     'ItemTypes', 
     'Users',
+    'Search',
 );
 
 $acl = new Zend_Acl;
@@ -39,7 +40,7 @@ foreach ($resources as $resourceName) {
 
 // Anyone can browse Items, Item Types, Tags and Collections
 $acl->allow(null,
-            array('Items', 'ItemTypes', 'Tags', 'Collections'),
+            array('Items', 'ItemTypes', 'Tags', 'Collections', 'Search'),
             array('index','browse', 'show')
 );
 // Anyone can browse items by tags or use advanced search for items

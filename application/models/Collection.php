@@ -64,6 +64,7 @@ class Collection extends Omeka_Record implements Zend_Acl_Resource_Interface
         $this->_mixins[] = new Mixin_PublicFeatured($this);
         $this->_mixins[] = new Mixin_Owner($this);
         $this->_mixins[] = new Mixin_Timestamp($this);
+        $this->_mixins[] = new Mixin_Search($this);
     }
 
     /**
@@ -272,5 +273,15 @@ class Collection extends Omeka_Record implements Zend_Acl_Resource_Interface
     public function getResourceId()
     {
         return 'Collections';
+    }
+    
+    protected function afterSave()
+    {
+        if (!$this->public) {
+            $this->setSearchTextPrivate();
+        }
+        $this->setSearchTextTitle($this->name);
+        $text = "{$this->name} {$this->description}";
+        $this->addSearchText($text);
     }
 }

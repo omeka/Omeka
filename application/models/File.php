@@ -113,6 +113,7 @@ class File extends Omeka_Record implements Zend_Acl_Resource_Interface
     {
         $this->_mixins[] = new Mixin_ElementText($this);
         $this->_mixins[] = new Mixin_Timestamp($this);
+        $this->_mixins[] = new Mixin_Search($this);
     }
 
     protected function beforeInsert()
@@ -420,6 +421,14 @@ class File extends Omeka_Record implements Zend_Acl_Resource_Interface
             return $item->isOwnedBy($user);
         } else {
             return false;
+        }
+    }
+    
+    protected function afterSave()
+    {
+        $item = $this->getItem();
+        if (!$item->public) {
+            $this->setSearchTextPrivate();
         }
     }
 }

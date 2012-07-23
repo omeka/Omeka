@@ -889,4 +889,16 @@ abstract class Omeka_Record implements ArrayAccess
         $validator = new Zend_Validate_Db_NoRecordExists($validatorOptions);
         return $validator->isValid($value);
     }
+    
+    /**
+     * Get the route to this record.
+     * 
+     * Primarily used to generate a URL to a record's web page. Subclasses 
+     * should override this method if the default route is incorrect.
+     */
+    public function getRecordRoute()
+    {
+        $controller = str_replace('_', '-', Inflector::tableize(get_class($this)));
+        return "/$controller/show/{$this->id}";
+    }
 }

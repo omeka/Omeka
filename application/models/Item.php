@@ -46,6 +46,7 @@ class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
         $this->_mixins[] = new Mixin_ElementText($this);
         $this->_mixins[] = new Mixin_PublicFeatured($this);
         $this->_mixins[] = new Mixin_Timestamp($this);
+        $this->_mixins[] = new Mixin_Search($this);
     }
     
     // Accessor methods
@@ -241,6 +242,9 @@ class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
      */
     protected function afterSave()
     {
+        if (!$this->public) {
+            $this->setSearchTextPrivate();
+        }
         $this->saveFiles();
     }
             
