@@ -2,6 +2,18 @@
 <project name="Omeka" basedir=".">
     <property name="lang.dir" location="application/languages" />
 
+    <target name="changeme" description="Copy .changeme files to their proper locations.">
+        <copy todir=".">
+            <filelist dir=".">
+                <file name=".htaccess.changeme"/>
+                <file name="db.ini.changeme"/>
+                <file name="application/config/config.ini.changeme"/>
+                <file name="application/tests/config.ini.changeme"/>
+            </filelist>
+            <mapper type="glob" from="*.changeme" to="*"/>
+        </copy>
+        <copy file="application/logs/errors.log.empty" tofile="application/logs/errors.log"/>
+    </target>
     <target name="test" description="Run automated tests.">
         <exec executable="phpunit" dir="application/tests" failonerror="true"/>
     </target>
