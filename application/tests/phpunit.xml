@@ -11,4 +11,7 @@
             <directory>unit</directory>
         </testsuite>
     </testsuites>
+    <logging>
+        <log type="junit" target="log.xml"/>
+    </logging>
 </phpunit>

@@ -9,6 +9,7 @@
 # Log files
 /application/logs/errors.log
 /application/logs/processes.log
+/application/tests/log.xml
 
 # Plugins and themes
 /plugins/
