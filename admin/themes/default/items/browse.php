@@ -120,8 +120,8 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                         <th id="batch-edit-heading"><?php echo __('Select'); ?></th>
                         <?php endif; ?>
                         <?php
-                        $browseHeadings[__('Title')] = array('Dublin Core,Title');
-                        $browseHeadings[__('Creator')] = array('Dublin Core,Creator');
+                        $browseHeadings[__('Title')] = 'Dublin Core,Title';
+                        $browseHeadings[__('Creator')] = 'Dublin Core,Creator';
                         $browseHeadings[__('Type')] = null;
                         $browseHeadings[__('Public')]  = 'public';
                         $browseHeadings[__('Featured')] = 'featured';
