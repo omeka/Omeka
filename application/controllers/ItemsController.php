@@ -66,12 +66,9 @@ class ItemsController extends Omeka_Controller_Action
     public function advancedSearchAction()
     {
         // Only show this form as a partial if it's being pulled via XmlHttpRequest
-        $this->view->isPartial = $this->getRequest()->isXmlHttpRequest();
-        
-        // If this is set to null, use the default items/browse action.
-        $this->view->formActionUri = null;
-        
-        $this->view->formAttributes = array('id'=>'advanced-search-form');
+        if($this->getRequest()->isXmlHttpRequest()) {
+            $this->render('advanced-search-form');
+        }
     }
     
     protected function _getItemElementSets()

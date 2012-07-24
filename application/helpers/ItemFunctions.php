@@ -366,7 +366,7 @@ function item_image($imageType, $props = array(), $index = 0, $item = null)
  */
 function items_search_form($props=array(), $formActionUri = null)
 {
-    return __v()->partial('items/advanced-search.php', array('isPartial'=>true, 'formAttributes'=>$props, 'formActionUri'=>$formActionUri));
+    return __v()->partial('items/advanced-search-form.php', array('formAttributes'=>$props, 'formActionUri'=>$formActionUri));
 }
 
 /**
