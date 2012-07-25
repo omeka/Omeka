@@ -63,7 +63,6 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
             array('/items/add', 'form#item-form'),
             array('/items/edit/1', 'form#item-form'),
             array('/items/advanced-search', 'form#advanced-search-form'),
-            array('/items/browse', 'form.items-browse'),
         );
     }
 
