@@ -40,10 +40,10 @@ head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?>
                         $collections = get_collections(array('recent'=>true),5);
                         set_collections_for_loop($collections);
                         
-                        while(loop_collections()):
+                        while($collection = loop_collections()):
                             echo '<div class="recent-row">';
                             echo '<p class="recent">'.link_to_collection().'</p>';
-                            if (has_permission('Collections', 'edit')):
+                            if (has_permission($collection, 'edit')):
                             echo '<p class="dash-edit">'.link_to_collection(__('Edit'), array('class'=>'dash-edit'), 'edit').'</p>';
                             endif;                        
                             echo '</div>';

@@ -12,7 +12,7 @@
             <div id="save" class="three columns omega">
             
                 <div class="panel">
-                    <?php if (has_permission('Collections', 'edit')): ?>    
+                    <?php if (has_permission(get_current_collection(), 'edit')): ?>    
                     <?php echo link_to_collection(__('Edit Collection'), array('class'=>'big green button'), 'edit'); ?>
                     <?php endif; ?>
                     <a href="<?php echo html_escape(public_uri('collections/show/'.collection('id'))); ?>" class="big blue button" target="_blank"><?php echo __('View Public Page'); ?></a>
