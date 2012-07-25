@@ -93,27 +93,24 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
             </div>
  
              <?php display_search_filters(); ?>
+            
 
 
                 <?php echo pagination_links(array('partial_file' => common('pagination_control'))); ?>
+            
+            <form action="<?php echo html_escape(uri('items/batch-edit')); ?>" method="post" accept-charset="utf-8">                
 
-
-            
-            
-            
                 <div class="item-actions">
-                    <form class="items-browse top" action="<?php echo html_escape(uri('items/batch-edit')); ?>" method="post" accept-charset="utf-8">                
                     <?php if (has_permission('Items', 'edit')): ?>
                     <input type="submit" class="edit-items small blue button" name="submit" value="<?php echo __('Edit'); ?>" />
                     <?php endif; ?>
                     <?php if (has_permission('Items', 'delete')): ?>
                     <input type="submit" class="red small" name="submit" value="Delete">
                     <?php endif; ?>
-                    </form>
                     <?php echo common('quick-filters',array(),'items'); ?>
                 </div>
                 
-            <table id="items" class="simple" cellspacing="0" cellpadding="0">
+            <table id="items" class="full" cellspacing="0" cellpadding="0">
                  <thead>
                     <tr>
                         <?php if (has_permission('Items', 'edit')): ?>
@@ -176,17 +173,15 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
         </table>
             
                 <div class="item-actions">
-                    <form class="items-browse bottom" action="<?php echo html_escape(uri('items/batch-edit')); ?>" method="post" accept-charset="utf-8">                
                     <?php if (has_permission('Items', 'edit')): ?>
                     <input type="submit" class="edit-items small blue button" name="submit" value="<?php echo __('Edit'); ?>" />
                     <?php endif; ?>
                     <?php if (has_permission('Items', 'delete')): ?>
                     <input type="submit" class="red small" name="submit" value="Delete">
                     <?php endif; ?>
-                    </form>
                     <?php echo common('quick-filters',array(),'items'); ?>
                 </div>
-    
+                        
             </form>
     
                 <div class="pagination">

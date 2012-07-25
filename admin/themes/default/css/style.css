@@ -714,7 +714,7 @@ header nav {
         }
         
 .panel {
-    background-color: rgba(255,255,255,.5);
+    background-color: rgb(255,255,255);
     box-shadow: 0 0 1px rgba(0,0,0,.4) inset;
         -webkit-box-shadow: 0 0 1px rgba(0,0,0,.4) inset;
         -moz-box-shadow: 0 0 1px rgba(0,0,0,.4) inset;
@@ -982,17 +982,13 @@ header nav {
     float: left;
 }
     
-    .browse-items .items-browse input[type=submit], .browse-items .items-browse a.button, 
-    .browse-items .items-browse button {
+    .browse-items .item-actions input[type=submit], .browse-items .item-actions a.button, 
+    .browse-items .item-actions button {
         float: left;
         height: 25px;
         line-height: 25px;
     }
         
-    .browse-items .item-actions {
-        float: left;
-    }
-
 .browse-items .item-details {
     background-color: #fff;
     border: 1px solid #E4E5DE;
