@@ -169,7 +169,8 @@ background.php.path = ""
 ; time out for longer jobs. On systems where the older PHP background
 ; processes worked, the BackgroundProcess adapter can be used instead
 ; of the Synchronous one.
-jobs.dispatcher = "Omeka_Job_Dispatcher_Adapter_Synchronous"
+jobs.dispatcher.default = "Omeka_Job_Dispatcher_Adapter_Synchronous"
+jobs.dispatcher.longRunning = "Omeka_Job_Dispatcher_Adapter_BackgroundProcess"
 
 ;;;;;;;;
 ; Mail ;

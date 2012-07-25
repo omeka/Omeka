@@ -31,43 +31,71 @@ class Omeka_Job_Dispatcher_Default implements Omeka_Job_Dispatcher
     /**
      * @var Omeka_Job_Dispatcher_Adapter
      */
-    private $_adapter;
-
-    private $_user;
-
+    private $_defaultAdapter;
+    
     /**
-     * @param Omeka_Job_Dispatcher_Adapter $adapter
+     * @var Omeka_Job_Dispatcher_Adapter
+     */
+    private $_longRunningAdapter;
+    
+    /**
+     * @var User
+     */
+    private $_user;
+    
+    /**
+     * @param Omeka_Job_Dispatcher_Adapter $defaultAdapter
+     * @param Omeka_Job_Dispatcher_Adapter $longRunningAdapter
      * @param User|null $user The user account associated with the request,
      * i.e. the user account associated with jobs sent by the dispatcher.
      */
-    public function __construct(Omeka_Job_Dispatcher_Adapter $adapter, 
-                                $user)
-    {
-        $this->setAdapter($adapter);
+    public function __construct(Omeka_Job_Dispatcher_Adapter $defaultAdapter, 
+        Omeka_Job_Dispatcher_Adapter $longRunningAdapter, $user) {
+        $this->setDefaultAdapter($defaultAdapter);
+        $this->setLongRunningAdapter($longRunningAdapter);
         $this->setUser($user);
     }
-
+    
     /**
+     * Set the user.
+     * 
      * @param User|null $user
      */
     public function setUser($user)
     {
         $this->_user = $user;
     }
-
+    
+    /**
+     * Get the user.
+     * 
+     * @return User|null
+     */
     public function getUser()
     {
         return $this->_user;
     }
 
     /**
+     * Set the default adapter.
+     * 
      * @param Omeka_Job_Dispatcher_Adapter $adapter
      */
-    public function setAdapter(Omeka_Job_Dispatcher_Adapter $adapter)
+    public function setDefaultAdapter(Omeka_Job_Dispatcher_Adapter $defaultAdapter)
     {
-        $this->_adapter = $adapter;
+        $this->_defaultAdapter = $defaultAdapter;
     }
-
+    
+    /**
+     * Set the long running adapter.
+     * 
+     * @param Omeka_Job_Dispatcher_Adapter $adapter
+     */
+    public function setLongRunningAdapter(Omeka_Job_Dispatcher_Adapter $longRunningAdapter)
+    {
+        $this->_longRunningAdapter = $longRunningAdapter;
+    }
+    
     /**
      * Set the name of the queue to which jobs will be sent.
      *
@@ -82,17 +110,31 @@ class Omeka_Job_Dispatcher_Default implements Omeka_Job_Dispatcher
     }
 
     /**
-     * @param string $jobClass Name of a class that implements 
-     * Omeka_JobInterface.
-     * @param array $options Optional Associative array containing options
-     * that the task needs in order to do its job.  Note that all options
-     * should be primitive data types (or arrays containing primitive data
-     * types).
+     * Dispatch a job using the default dispatcher.
+     * 
+     * @param string $jobClass Class name that implements Omeka_JobInterface.
+     * @param array $options Optional associative array containing options that 
+     * the task needs in order to do its job. Note that all options should be 
+     * primitive data types (or arrays containing primitive data types).
      */
     public function send($jobClass, $options = array())
     {
         $metadata = $this->_getJobMetadata($jobClass, $options);
-        $this->_adapter->send($this->_toJson($metadata), $metadata);
+        $this->_defaultAdapter->send($this->_toJson($metadata), $metadata);
+    }
+    
+    /**
+     * Dispatch a job using the long-running dispatcher.
+     * 
+     * @param string $jobClass Name of a class that implements Omeka_JobInterface.
+     * @param array $options Optional associative array containing options that 
+     * the task needs in order to do its job. Note that all options should be 
+     * primitive data types (or arrays containing primitive data types).
+     */
+    public function sendLongRunning($jobClass, $options = array())
+    {
+        $metadata = $this->_getJobMetadata($jobClass, $options);
+        $this->_longRunningAdapter->send($this->_toJson($metadata), $metadata);
     }
 
     private function _getJobMetadata($class, $options)
