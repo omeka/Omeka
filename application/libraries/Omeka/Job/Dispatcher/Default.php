@@ -97,7 +97,7 @@ class Omeka_Job_Dispatcher_Default implements Omeka_Job_Dispatcher
     }
     
     /**
-     * Set the name of the queue to which jobs will be sent.
+     * Set the name of the queue to which default jobs will be sent.
      *
      * NOTE: This may be ignored by adapters that do not understand the notion 
      * of named queues (or queues in general).
@@ -106,9 +106,22 @@ class Omeka_Job_Dispatcher_Default implements Omeka_Job_Dispatcher
      */
     public function setQueueName($name)
     {
-        $this->_adapter->setQueueName($name);
+        $this->_defaultAdapter->setQueueName($name);
     }
-
+    
+    /**
+     * Set the name of the queue to which long-running jobs will be sent.
+     *
+     * NOTE: This may be ignored by adapters that do not understand the notion 
+     * of named queues (or queues in general).
+     *
+     * @param string $name
+     */
+    public function setQueueNameLongRunning($name)
+    {
+        $this->_longRunningAdapter->setQueueName($name);
+    }
+    
     /**
      * Dispatch a job using the default dispatcher.
      * 
