@@ -9,20 +9,27 @@ head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?>
                     $pluginRecords = $db->getTable('Plugin')->count();
                     $themeName = Theme::getAvailable(Theme::getCurrentThemeName('public'))->title;
                 ?>
-                <p><?php echo link_to('items', null, __(total_items())) ?><br><?php echo __('items') ?></p>
-                <p><?php echo link_to('collections', null, __(total_collections())); ?><br><?php echo __('collections') ?></p>
-                <p><?php echo link_to('plugins', null, __($pluginRecords)); ?><br><?php echo __('plugins') ?></p>
-                <p><?php echo link_to('tags', null, __(total_tags())); ?><br><?php echo __('tags') ?></p>
-                <p><?php echo link_to('users', null, __(total_users())); ?><br><?php echo __('users') ?></p>
+                <p><span class="number"><?php echo link_to('items', null, __(total_items())) ?></span><br /><?php echo __('items') ?></p>
+                <p><span class="number"><?php echo link_to('collections', null, __(total_collections())); ?></span><br /><?php echo __('collections') ?></p>
+                <?php if(has_permission('Plugins','edit')): ?>
+                <p><span class="number"><?php echo link_to('plugins', null, __($pluginRecords)); ?></span><br /><?php echo __('plugins') ?></p>
+                <?php endif; ?>
+                <p><span class="number"><?php echo link_to('tags', null, __(total_tags())); ?></span><br /><?php echo __('tags') ?></p>
+                <?php if(has_permission('Users','edit')): ?>
+                <p><span class="number"><?php echo link_to('users', null, __(total_users())); ?></span><br /><?php echo __('users') ?></p>
+                <?php endif; ?>
                 <p>
+                    <span class="number">
                     <?php if (get_option('display_system_info') && has_permission('SystemInfo', 'index')): ?>
                     <a href="<?php echo html_escape(uri('system-info')); ?>" ><?php echo OMEKA_VERSION; ?></a>
                     <?php else: ?>
                     <?php echo OMEKA_VERSION; ?>
                     <?php endif; ?>
-                    <br><?php echo __('Omeka version'); ?>
+                    </span><br /><?php echo __('Omeka version'); ?>
                 </p>
-                <p class="theme"><?php echo link_to('themes', null, $themeName); ?></a><br>theme</p>
+                <?php if(has_permission('Themes','edit')): ?>                
+                <p class="theme"><span class="number"><?php echo link_to('themes', null, $themeName); ?></a></span><br />theme</p>
+                <?php endif; ?>
             </section>
             
             <section id="recent-collections" class="five columns alpha">

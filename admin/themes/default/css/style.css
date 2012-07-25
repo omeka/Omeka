@@ -130,6 +130,8 @@ p, li {
         text-align: center;
     }
     
+    .mobile { display: none; }
+    
     
     /* Form elements 
     ================================================== */
@@ -835,6 +837,10 @@ header nav {
             display: block;
             float: right;
         }
+        
+#login #content h2 {
+    margin: 1em 0;
+}
 
 #login .login-footer {
     clear: both;
@@ -870,6 +876,11 @@ header nav {
     margin: auto;
 }
     
+#stats .number {
+    font-size: 2em;
+    font-style: normal;
+}
+    
 #stats p {
     min-width: 3em;
     display: inline-block;
@@ -886,11 +897,6 @@ header nav {
     
     #stats p:last-child {
         margin-right: 0;
-    }
-    
-    #stats a {
-        font-size: 2em;
-        font-style: normal;
     }
 
 
