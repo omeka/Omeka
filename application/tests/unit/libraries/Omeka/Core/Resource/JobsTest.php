@@ -12,8 +12,10 @@ class Omeka_Core_Resource_JobsTest extends PHPUnit_Framework_TestCase
         $this->bootstrap = new Omeka_Core_Bootstrap_Mock($this->application);
         $this->config = new Zend_Config(array(
             'jobs' => array(
-                'dispatcher'        => 'Omeka_Job_Dispatcher_Adapter_Array',
-                'adapterOptions'    => array(),
+                'dispatcher' => array(
+                    'default'        => 'Omeka_Job_Dispatcher_Adapter_Array',
+                    'defaultOptions' => array(),
+                )
             )
         ), true);
         $this->bootstrap->setResource('config', $this->config);
@@ -35,7 +37,7 @@ class Omeka_Core_Resource_JobsTest extends PHPUnit_Framework_TestCase
     {
         $resource = new Omeka_Core_Resource_Jobs();
         $resource->setBootstrap($this->bootstrap);
-        $this->config->jobs->dispatcher = 'foobar';
+        $this->config->jobs->dispatcher->default = 'foobar';
         $resource->init();
     }
 
@@ -59,7 +61,7 @@ class Omeka_Core_Resource_JobsTest extends PHPUnit_Framework_TestCase
         $resource->setBootstrap($this->bootstrap);
         // A class name that exists but does not implement the correct 
         // interface.
-        $this->config->jobs->dispatcher = "Omeka_Core";
+        $this->config->jobs->dispatcher->default = "Omeka_Core";
         $dispatcher = $resource->init();
     }
 
