@@ -303,6 +303,8 @@ class Omeka_Db_Table
      */
     public function getSelectForFindBy($params=array())
     {
+        $params = apply_filters($this->_getHookName('browse_params'), $params);
+
         $select = $this->getSelect();
 
         $sortParams = $this->_getSortParams($params);
@@ -311,7 +313,9 @@ class Omeka_Db_Table
             $this->applySorting($select, $sortField, $sortDir);
         }
         $this->applySearchFilters($select, $params);
-        $this->_fireBrowseSqlHook($select, $params);
+
+        fire_plugin_hook($this->_getHookName('browse_sql'), $select, $params);
+
         return $select;
     }
     
@@ -540,14 +544,14 @@ class Omeka_Db_Table
     }
 
     /**
-     * Fires a hook to allow plugins to alter the SQL SELECT query.
+     * Get the name for a model-specific hook or filter..
      *
-     * @param Zend_Db_Select $select
-     * @param array $params
+     * @param string $suffix The hook-specific part of the hook name.
+     * @return string
      */
-    private function _fireBrowseSqlHook($select, $params)
+    private function _getHookName($suffix)
     {
         $modelName = Inflector::underscore($this->_target);
-        fire_plugin_hook("{$modelName}_browse_sql", $select, $params);
+        return "{$modelName}_{$suffix}";
     }
 }
