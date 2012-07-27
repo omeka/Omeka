@@ -10,6 +10,7 @@
     if (has_permission('Security', 'edit')) {
         $navArray[__('Security Settings')] = uri('security');
     }
+    $navArray[__('Search Settings')] = uri('search/settings');
 
     echo nav(apply_filters('admin_navigation_settings', $navArray));
 ?>
