@@ -223,7 +223,7 @@ class Omeka_File_Derivative_Image_Creator
 
     private function _getDefaultResizeCmdArgs($constraint)
     {
-        return '-resize ' . escapeshellarg($constraint.'x'.$constraint.'>');
+        return '-thumbnail ' . escapeshellarg($constraint.'x'.$constraint.'>');
     }
 
     /**
