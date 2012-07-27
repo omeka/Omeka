@@ -8,7 +8,7 @@
     <!-- Previous page link --> 
     <li class="pagination_previous">
     <?php $getParams['page'] = $previous; ?>
-    <a href="<?php echo html_escape($this->url(array(), null, $getParams)); ?>"><?php echo __('<'); ?></a>
+    <a href="<?php echo html_escape($this->url(array(), null, $getParams)); ?>"><?php echo __('&lt;'); ?></a>
     </li>
     <?php endif; ?>
     
@@ -36,7 +36,7 @@
     <!-- Next page link -->
     <li class="pagination_next">
     <?php $getParams['page'] = $next; ?>
-    <a href="<?php echo html_escape($this->url(array(), null, $getParams)); ?>"><?php echo __('>'); ?></a>
+    <a href="<?php echo html_escape($this->url(array(), null, $getParams)); ?>"><?php echo __('&gt;'); ?></a>
     </li>
     <?php endif; ?>
     
