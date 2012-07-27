@@ -1,8 +1,20 @@
 <?php
 $pageTitle = __('Browse Items ('.total_results().' total)');
 head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=>'items primary browse-items')); ?>
-        
+
             <?php echo flash(); ?>
+
+            <?php if (has_permission('Items', 'add')): ?>
+            <a href="<?php echo html_escape(uri('items/add')); ?>" class="add-item button small green">Add an Item</a>
+            <?php endif; ?>
+
+            <div id="simple-search-form">
+                <?php echo simple_search(); ?>
+                <?php echo link_to_advanced_search(__('Advanced Search'), array('id' => 'advanced-search-link')); ?>
+            </div>
+
+            <?php display_search_filters(); ?>
+
             <?php if ( total_results() ): ?>
             <script type="text/javascript">
                 jQuery(window).load(function() {
@@ -82,21 +94,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                     }
                 });
             </script>
-                                
-            <?php if (has_permission('Items', 'add')): ?>
-            <a href="<?php echo html_escape(uri('items/add')); ?>" class="add-item button small green">Add an Item</a>
-            <?php endif; ?>
-            
-            <div id="simple-search-form">
-                <?php echo simple_search(); ?>         
-                <?php echo link_to_advanced_search(__('Advanced Search'), array('id' => 'advanced-search-link')); ?>
-            </div>
- 
-             <?php display_search_filters(); ?>
-            
-
-
-                <?php echo pagination_links(array('partial_file' => common('pagination_control'))); ?>
+            <?php echo pagination_links(array('partial_file' => common('pagination_control'))); ?>
             
             <form action="<?php echo html_escape(uri('items/batch-edit')); ?>" method="post" accept-charset="utf-8">                
 
