@@ -11,7 +11,7 @@ class SearchController extends Omeka_Controller_Action
     {
         if (isset($_POST['index_search_text'])) {
             Zend_Registry::get('bootstrap')->getResource('jobs')
-                                           ->sendLongRunning('SearchText_IndexJob');
+                                           ->sendLongRunning('Job_SearchTextIndex');
             $this->_helper->flashMessenger(__('Indexing search text. This may take a while.'), 'success');
         }
     }

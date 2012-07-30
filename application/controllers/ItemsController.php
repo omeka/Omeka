@@ -319,7 +319,7 @@ class ItemsController extends Omeka_Controller_Action
             } else {
                 $dispatcher = Zend_Registry::get('job_dispatcher');
                 $dispatcher->send(
-                    'Item_BatchEditJob', 
+                    'Job_ItemBatchEdit', 
                     array(
                         'itemIds' => $itemIds, 
                         'delete' => $delete, 

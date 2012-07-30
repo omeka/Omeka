@@ -6,11 +6,9 @@
  */
 
 /**
- * Interface for batch item edit job.
- *
  * @package Omeka
  */
-class Item_BatchEditJob extends Omeka_JobAbstract {
+class Job_ItemBatchEdit extends Omeka_JobAbstract {
     
     public function perform()
     {

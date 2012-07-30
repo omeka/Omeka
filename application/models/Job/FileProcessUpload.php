@@ -6,12 +6,10 @@
  */
 
 /**
- * Interface for jobs.
- *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
  */
-class File_ProcessUploadJob extends Omeka_JobAbstract
+class Job_FileProcessUpload extends Omeka_JobAbstract
 {
     public function perform()
     {

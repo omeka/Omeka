@@ -126,8 +126,7 @@ class File extends Omeka_Record implements Zend_Acl_Resource_Interface
     {
         $dispatcher = Zend_Registry::get('job_dispatcher');
         $dispatcher->setQueueName('uploads');
-        $dispatcher->send('File_ProcessUploadJob', 
-                          array('fileId' => $this->id));
+        $dispatcher->send('Job_FileProcessUpload', array('fileId' => $this->id));
     }
     
     protected function filterInput($post)

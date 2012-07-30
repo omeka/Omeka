@@ -1,5 +1,5 @@
 <?php
-class SearchText_IndexJob extends Omeka_JobAbstract
+class Job_SearchTextIndex extends Omeka_JobAbstract
 {
     /**
      * List of all class names in the application/models directory that extend 
