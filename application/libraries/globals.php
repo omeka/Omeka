@@ -471,13 +471,13 @@ function is_admin_theme()
  *      <li>'files' (array or string) Represents information indicating the file
  * to ingest.  Corresponds to the $files argument for addFiles().</li>
  * </ul>
- * @uses ItemBuilder For more information on arguments and usage.
+ * @uses Builder_Item For more information on arguments and usage.
  * @see ActsAsElementText::addElementTextsByArray()
  * @return Item
  */
 function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata = array())
 {
-    $builder = new ItemBuilder(get_db());
+    $builder = new Builder_Item(get_db());
     $builder->setRecordMetadata($metadata);
     $builder->setElementTexts($elementTexts);
     $builder->setFileMetadata($fileMetadata);
@@ -487,7 +487,7 @@ function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata
 /**
  * Add files to an item.
  *
- * @uses ItemBuilder::addFiles() See for information on arguments and notes
+ * @uses Builder_Item::addFiles() See for information on arguments and notes
  * on usage.
  * @param Item|integer $item
  * @param string|Omeka_File_Ingest_Abstract $transferStrategy
@@ -497,7 +497,7 @@ function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata
  */
 function insert_files_for_item($item, $transferStrategy, $files, $options = array())
 {
-    $builder = new ItemBuilder(get_db());
+    $builder = new Builder_Item(get_db());
     $builder->setRecord($item);
     return $builder->addFiles($transferStrategy, $files, $options);
 }
@@ -506,7 +506,7 @@ function insert_files_for_item($item, $transferStrategy, $files, $options = arra
  * Update an existing item.
  *
  * @see insert_item()
- * @uses ItemBuilder
+ * @uses Builder_Item
  * @param Item|int $item Either an Item object or the ID for the item.
  * @param array $metadata Set of options that can be passed to the item.
  * @param array $elementTexts
@@ -515,7 +515,7 @@ function insert_files_for_item($item, $transferStrategy, $files, $options = arra
  */
 function update_item($item, $metadata = array(), $elementTexts = array(), $fileMetadata = array())
 {
-    $builder = new ItemBuilder(get_db());
+    $builder = new Builder_Item(get_db());
     $builder->setRecord($item);
     $builder->setRecordMetadata($metadata);
     $builder->setElementTexts($elementTexts);
@@ -554,7 +554,7 @@ function update_item($item, $metadata = array(), $elementTexts = array(), $fileM
  */
 function insert_item_type($metadata = array(), $elementInfos = array())
 {
-    $builder = new ItemTypeBuilder(get_db());
+    $builder = new Builder_ItemType(get_db());
     $builder->setRecordMetadata($metadata);
     $builder->setElements($elementInfos);
     return $builder->build();
@@ -576,7 +576,7 @@ function insert_item_type($metadata = array(), $elementInfos = array())
  */
 function insert_collection($metadata = array())
 {
-    $builder = new CollectionBuilder(get_db());
+    $builder = new Builder_Collection(get_db());
     $builder->setRecordMetadata($metadata);
     return $builder->build();
 }
@@ -613,7 +613,7 @@ function insert_collection($metadata = array())
  */
 function insert_element_set($elementSetMetadata = array(), array $elements = array())
 {
-    $builder = new ElementSetBuilder(get_db());
+    $builder = new Builder_ElementSet(get_db());
     $builder->setRecordMetadata($elementSetMetadata);
     $builder->setElements($elements);
     return $builder->build();

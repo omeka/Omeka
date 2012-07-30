@@ -57,7 +57,7 @@ class Installer_Test extends Installer_Default
     {
         // Keep the record objects from dying.
         Zend_Registry::get('bootstrap')->getContainer()->db = $db;
-        $itemBuilder = new ItemBuilder($db);
+        $itemBuilder = new Builder_Item($db);
         // Item should be public to avoid weird issues with ACL integration 
         // (test must authenticate a user in order to retrieve non-public 
         // items).

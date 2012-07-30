@@ -29,7 +29,7 @@
  *
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private
- * @see ItemBuilder::addFiles()
+ * @see Builder_Item::addFiles()
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  */

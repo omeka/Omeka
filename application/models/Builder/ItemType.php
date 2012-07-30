@@ -14,7 +14,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
  */
-class ItemTypeBuilder extends Omeka_Record_Builder
+class Builder_ItemType extends Omeka_Record_Builder
 {
     protected $_recordClass = 'ItemType';
     
