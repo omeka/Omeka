@@ -30,8 +30,7 @@ try {
     exit;
 }
 
-// Load only the phases needed.
-$core = new Omeka_Core;
+$core = new Omeka_Core(APPLICATION_ENV);
 
 function handle_exception($e)
 {

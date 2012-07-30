@@ -18,7 +18,7 @@ require_once("{$baseDir}/../../paths.php");
 require_once("{$baseDir}/../libraries/Omeka/Core.php");
 
 // Set the command line arguments.
-$options = new Zend_Console_Getopt(array('process|p=i' => 'process to run', 'lastphase|l=s' => 'last phase to load'));
+$options = new Zend_Console_Getopt(array('process|p=i' => 'process to run'));
 
 try {
     $options->parse();
@@ -27,11 +27,11 @@ try {
     exit;
 }
 
-// Load only the phases needed.
-$core = new Omeka_Core;
-$lastPhase = $options->getOption('lastphase');
-$core->phasedLoading($lastPhase);
-$core->bootstrap('Jobs');
+// Load a core set of resources.
+$core = new Omeka_Core(APPLICATION_ENV);
+$core->bootstrap(array('Autoloader', 'Config', 'Db', 'Options', 'Pluginbroker', 
+                       'Plugins', 'Jobs', 'Storage', 'Mail',
+));
 
 // Get the database object.
 $db = get_db();

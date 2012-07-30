@@ -24,78 +24,23 @@
 class Omeka_Core extends Zend_Application
 {
     /**
-     * Array containing all core loading phase methods in sequential order. 
-     * Modify this array if any phase is added or deleted.
-     *
-     * @var array
-     */
-    protected $_phases = array('sanitizeMagicQuotes' => null, 
-                               'initializeConfigFiles' => 'Config', 
-                               'initializeLogger' => 'Logger', 
-                               'initializeDb' => 'Db', 
-                               'initializeOptions' => 'Options',
-                               'initializeStorage' => 'Storage',
-                               'initializePluginBroker' => 'PluginBroker',
-                               'initializeSession' => 'Session',
-                               'initializePlugins' => 'Plugins',
-                               'initializeAcl' => 'Acl', 
-                               'initializeAuth' => 'Auth', 
-                               'initializeCurrentUser' => 'CurrentUser',
-                               'initializeFrontController' => 'FrontController',
-                               'initializeRoutes' => 'Router',
-                               'initializeDebugging' => 'Debug');
-    
-    /**
      * Initialize the application.
      *
      * @param string $environment Environment name.
      * @param string|array|Zend_Config $options Application configuration.
      */
-    public function __construct($environment = null, $options = null)
+    public function __construct($environment, $options = null)
     {
         require_once 'globals.php';
-        // For the sake of backwards compatibility with existing scripts that
-        // instantiate Omeka_Core with no arguments.
-        if (!$environment && !$options) {
-            $environment = APPLICATION_ENV;
+        
+        // Set the configuration file if not passed.
+        if (!$options) {
             $options = CONFIG_DIR . '/' . 'application.ini';
         }
-        parent::__construct($environment, $options);
-
-        Zend_Registry::set('bootstrap', $this->getBootstrap());
-    }
-    
-    /**
-     * Delegate to the context object.
-     *
-     * @param string $m Method called.
-     * @param array $a Arguments to method.
-     * @return mixed
-     */
-    public function __call($m, $a)
-    {
-        if (substr($m, 0, 10) == 'initialize') {
-            $bootstrapResource = $this->_phases[$m];
-            return $this->getBootstrap()->bootstrap($bootstrapResource);
-        }
         
-        return call_user_func_array(array($this->getBootstrap()->getContainer(), $m), $a);
-    }
-    
-    /**
-     * If magic_quotes has been enabled, then strip all slashes from the $_GET, 
-     * $_POST and $_REQUEST superglobals.
-     * 
-     * @return void
-     */
-    public function sanitizeMagicQuotes()
-    {
-        //Strip out those bastard slashes
-        if (get_magic_quotes_gpc()) {
-            $_POST    = stripslashes_deep($_POST);
-            $_REQUEST = stripslashes_deep($_REQUEST);
-            $_GET     = stripslashes_deep($_GET);
-        }
+        parent::__construct($environment, $options);
+        
+        Zend_Registry::set('bootstrap', $this->getBootstrap());
     }
     
     /**
@@ -134,25 +79,18 @@ class Omeka_Core extends Zend_Application
     }
     
     /**
-     * Provide phased loading of core Omeka functionality. Primarily used for 
-     * Omeka scripts that run outside a web environment.
-     *
-     * @param string $stopPhase The phase where the user wants loading to stop. 
+     * If magic_quotes has been enabled, then strip all slashes from the $_GET, 
+     * $_POST and $_REQUEST superglobals.
+     * 
      * @return void
      */
-    public function phasedLoading($stopPhase)
-    {       
-        // Throw an error if the stop phase doesn't exist.
-        if (!array_key_exists($stopPhase, $this->_phases)) {
-            exit("Error: The provided stop phase method \"$stopPhase\" does not exist.");
-        }
-        
-        // Load initialization callbacks in the proper order.
-        foreach ($this->_phases as $phase => $bootstrap) {
-            $this->$phase();
-            if ($phase == $stopPhase) {
-                break;
-            }
+    public function sanitizeMagicQuotes()
+    {
+        //Strip out those bastard slashes
+        if (get_magic_quotes_gpc()) {
+            $_POST = stripslashes_deep($_POST);
+            $_REQUEST = stripslashes_deep($_REQUEST);
+            $_GET = stripslashes_deep($_GET);
         }
     }
     
