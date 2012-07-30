@@ -20,7 +20,7 @@ class Omeka_Models_CollectionTableTest extends PHPUnit_Framework_TestCase
         $bootstrap = new Omeka_Test_Bootstrap;
         $bootstrap->getContainer()->db = $this->db;
         Zend_Registry::set('bootstrap', $bootstrap);
-        $this->table = new CollectionTable('Collection', $this->db);
+        $this->table = new Table_Collection('Collection', $this->db);
     }
 
     public function tearDown()

@@ -25,7 +25,7 @@ class Helpers_CollectionFunctions_GetCollectionsTest extends PHPUnit_Framework_T
     {
         // Link a mock collections table to a mock database.
         $this->db = $this->getMock('Omeka_Db', array(), array(), '', false);
-        $this->collectionTable = $this->getMock('CollectionTable', array(), array(), '', false);
+        $this->collectionTable = $this->getMock('Table_Collection', array(), array(), '', false);
         $this->db->expects($this->any())
                  ->method('getTable')
                  ->with('Collection')

@@ -22,7 +22,7 @@ class Omeka_Models_ItemTableTest extends PHPUnit_Framework_TestCase
         $bootstrap->getContainer()->db = $this->db;
         Zend_Registry::set('bootstrap', $bootstrap);
         
-        $this->table = new ItemTable('Item', $this->db);
+        $this->table = new Table_Item('Item', $this->db);
     }
 
     public function tearDown()

@@ -23,7 +23,7 @@ class CollectionBuilderTest extends PHPUnit_Framework_TestCase
         $this->profilerHelper = new Omeka_Test_Helper_DbProfiler($this->dbAdapter->getProfiler(), $this);
         $this->dbAdapter->appendLastInsertIdToStack(self::COLLECTION_ID);
         $this->dbAdapter->appendLastInsertIdToStack(2);
-        $this->builder = new CollectionBuilder($this->db);
+        $this->builder = new Builder_Collection($this->db);
         $bootstrap = new Omeka_Test_Bootstrap();
         $bootstrap->getContainer()->db = $this->db;
         Zend_Registry::set('bootstrap', $bootstrap);
