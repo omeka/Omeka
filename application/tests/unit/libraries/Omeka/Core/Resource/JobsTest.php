@@ -61,7 +61,7 @@ class Omeka_Core_Resource_JobsTest extends PHPUnit_Framework_TestCase
         $resource->setBootstrap($this->bootstrap);
         // A class name that exists but does not implement the correct 
         // interface.
-        $this->config->jobs->dispatcher->default = "Omeka_Core";
+        $this->config->jobs->dispatcher->default = 'stdClass';
         $dispatcher = $resource->init();
     }
 
