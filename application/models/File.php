@@ -156,7 +156,7 @@ class File extends Omeka_Record implements Zend_Acl_Resource_Interface
      *
      * @return string
      */
-    public function getPath($type='fullsize')
+    public function getPath($type = 'archive')
     {
         $fn = $this->getDerivativeFilename();
 
@@ -178,7 +178,7 @@ class File extends Omeka_Record implements Zend_Acl_Resource_Interface
      *
      * @return void
      */
-    public function getWebPath($type='fullsize')
+    public function getWebPath($type = 'archive')
     {
         return $this->getStorage()->getUri($this->getStoragePath($type));
     }
