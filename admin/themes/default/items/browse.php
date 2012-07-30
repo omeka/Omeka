@@ -98,7 +98,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
             
             <form action="<?php echo html_escape(uri('items/batch-edit')); ?>" method="post" accept-charset="utf-8">                
 
-                <div class="item-actions">
+                <div class="item-actions batch-edit-option">
                     <?php if (has_permission('Items', 'edit')): ?>
                     <input type="submit" class="edit-items small blue button" name="submit" value="<?php echo __('Edit'); ?>" />
                     <?php endif; ?>

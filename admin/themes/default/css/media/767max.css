@@ -25,65 +25,14 @@ header nav { float: left; }
 /* Tables
 ==================================================*/
 
-table {
-    border-bottom: 1px solid #ccc;
-    clear: both;
-    margin: 0 0 .5em 0;
+.full { display: none; }
+
+.mobile { display: inherit; }
+
+    .mobile th {
+        width: 1%;
     }
 
-table, thead, tbody, th, td, tr {
-    display: block;
-    font-size: 1em;
-    }
-    
-    thead tr {
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
-        }
-        
-    tr { 
-        border-top: 1px solid #ccc; 
-        }
-        
-        tr:first-child {
-            border-top: 0;
-            }
-        
-    td {
-        min-height: 20px;
-        border: none;
-        border-bottom: 1px dotted #ccc;
-        position: relative;
-        padding-left: 40%;
-        text-align: left;
-        }
-        
-    td:before {
-        position: absolute;
-        top: .5em;
-        left: .5em;
-        width: 25%;
-        font-weight: 700;
-        padding-right: .625em;
-        text-align: left;
-        white-space: nowrap;
-        }
-    
-    tr:nth-child(2n+1) {
-        background-color: #ffffff;
-        }
-        
-    td:nth-of-type(1):before { content: "Select"; }
-    td:nth-of-type(2):before { content: "Title"; }
-    td:nth-of-type(3):before { content: "Creator"; }
-    td:nth-of-type(4):before { content: "Type"; }
-    td:nth-of-type(5):before { content: "Public"; }
-    td:nth-of-type(6):before { content: "Featured"; }
-    td:nth-of-type(7):before { content: "Date Added"; }
-    
-    td:nth-of-type(7) { border-bottom: 0; }
-    
 /* Content Navigation 
 ================================================== */
 
@@ -93,8 +42,17 @@ table, thead, tbody, th, td, tr {
 
 #mobile-content-nav { 
     display: block; 
-    margin-top: 100px;
+    margin-top: 120px;
     }
+
+#section-nav {
+    border-image: url('../../images/red-bg.jpg') 5 repeat; 
+        -webkit-border-image: url('../../images/red-bg.jpg') 5 repeat;
+        -moz-border-image: url('../../images/red-bg.jpg') 5 repeat; 
+        -o-border-image: url('../../images/red-bg.jpg') 50 repeat;     
+    border-width: .375em 0 0 0; 
+    margin: 0 0 16px 0;
+}
 
 
 /* Content
@@ -102,7 +60,8 @@ table, thead, tbody, th, td, tr {
 
 #content {
     border: 0;
-    box-shadow: 0 0 0 transparent;    
+    box-shadow: 0 0 0 transparent;
+    padding: 0;
     }
 
 .section-title { margin-top: 20px;}

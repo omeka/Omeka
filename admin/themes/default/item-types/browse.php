@@ -6,7 +6,7 @@ head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
 <?php echo link_to('item-types', 'add', __('Add an Item Type'), array('class'=>'add green button')); ?>
 <?php endif ?>
 
-    <table>
+    <table class="full">
         <thead>
             <tr>
                 <th><?php echo __('Type Name'); ?></th>

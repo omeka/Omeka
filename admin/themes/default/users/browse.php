@@ -38,7 +38,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
     });
     
 </script>
-            <form class="items-browse top" action="<?php echo html_escape(uri('users/batch-edit')); ?>" method="post" accept-charset="utf-8">
+            <form class="top" action="<?php echo html_escape(uri('users/batch-edit')); ?>" method="post" accept-charset="utf-8">
 
                 <div class="item-actions">
                     <?php if (has_permission('Users', 'edit')): ?>
@@ -51,7 +51,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
     
                 <?php echo pagination_links(array('partial_file' => common('pagination_control'))); ?>
                 
-                <table id="users">
+                <table id="users" class="full">
                     <thead>
                         <tr>
                             <th id="batch-edit-heading"><?php echo __('Select') ?></th>
