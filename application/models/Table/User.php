@@ -11,7 +11,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class UserTable extends Omeka_Db_Table
+class Table_User extends Omeka_Db_Table
 {
     /**
      * Find an active User given that user's ID.

@@ -12,7 +12,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class ElementTable extends Omeka_Db_Table
+class Table_Element extends Omeka_Db_Table
 {   
     /**
      * Find all the Element records that have a specific record type or the

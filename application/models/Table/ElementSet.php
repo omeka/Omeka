@@ -11,7 +11,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class ElementSetTable extends Omeka_Db_Table
+class Table_ElementSet extends Omeka_Db_Table
 {
     public function getSelect() {
         $select = parent::getSelect();

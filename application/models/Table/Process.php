@@ -10,7 +10,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class ProcessTable extends Omeka_Db_Table
+class Table_Process extends Omeka_Db_Table
 {
     protected $_target = 'Process';
     

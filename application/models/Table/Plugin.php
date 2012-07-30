@@ -13,7 +13,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class PluginTable extends Omeka_Db_Table
+class Table_Plugin extends Omeka_Db_Table
 {
     protected $_target = 'Plugin';
     

@@ -11,7 +11,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class TagTable extends Omeka_Db_Table
+class Table_Tag extends Omeka_Db_Table
 {    
     public function findOrNew($name) 
     {

@@ -7,18 +7,16 @@
  */
 
 /**
- * This is only necessary because the table name for MimeElementSetLookup does
- *  not adhere to the pluralization conventions. If it ever does, this class
- *  should be removed.
- *
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private
  * @package Omeka
- * @subpackage Models
- * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class MimeElementSetLookupTable extends Omeka_Db_Table
+class Table_UsersActivations extends Omeka_Db_Table
 {
-    protected $_name = 'mime_element_set_lookup';
+    
+    public function findByUrl($url)
+    {
+        return $this->fetchObject($this->getSelect()->where('url = ?', $url)->limit(1));
+    }
 }

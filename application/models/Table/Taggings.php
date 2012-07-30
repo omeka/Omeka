@@ -11,7 +11,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class TaggingsTable extends Omeka_Db_Table
+class Table_Taggings extends Omeka_Db_Table
 {
     public function applySearchFilters($select, $params = array())
     {

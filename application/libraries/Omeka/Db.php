@@ -138,8 +138,10 @@ class Omeka_Db
      * Retrieve a table object corresponding to the model class.
      * 
      * Table classes can be extended by inheriting off of Omeka_Db_Table
-     * and then calling your table ModelNameTable, i.e. ItemTable or 
-     * CollectionTable, etc.
+     * and then calling your table Table_ModelName, e.g. Table_Item or 
+     * Table_Collection. For backwards compatibility you may call your table 
+     * ModelNameTable, i.e. ItemTable or CollectionTable. The latter naming 
+     * pattern is deprecated.
      * 
      * @internal This will cache every table object so that tables
      * are not instantiated multiple times for complicated web requests.
@@ -148,18 +150,25 @@ class Omeka_Db
      * @return Omeka_Db_Table
      */
     public function getTable($class) {
-        $tableClass = $class . 'Table';
         
+        // Return the cached table object.
         if (array_key_exists($class, $this->_tables)) {
             return $this->_tables[$class];
         }
         
+        // Set the expected table class names.
+        $tableClass = "Table_$class";
+        $tableClassDeprecated = "{$class}Table";
+        
         if (class_exists($tableClass)) {
             $table = new $tableClass($class, $this);
+        } else if (class_exists($tableClassDeprecated)) {
+            $table = new $tableClassDeprecated($class, $this);
         } else {
             $table = new Omeka_Db_Table($class, $this);
         }
         
+        // Cache the table object
         $this->setTable($class, $table);
         
         return $table;

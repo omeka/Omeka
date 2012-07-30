@@ -11,7 +11,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class ItemTable extends Omeka_Db_Table
+class Table_Item extends Omeka_Db_Table
 {
     /**
      * Can specify a range of valid Item IDs or an individual ID

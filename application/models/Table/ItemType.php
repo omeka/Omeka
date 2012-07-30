@@ -11,7 +11,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class ItemTypeTable extends Omeka_Db_Table
+class Table_ItemType extends Omeka_Db_Table
 {
     protected function _getColumnPairs()
     {

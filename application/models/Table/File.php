@@ -11,7 +11,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class FileTable extends Omeka_Db_Table
+class Table_File extends Omeka_Db_Table
 {
     protected $_target = 'File';
 
