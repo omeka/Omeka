@@ -10,7 +10,7 @@
     queue_css('layout', 'all');
     queue_css('skeleton', 'all');
     queue_css('jquery-ui', 'all');    
-    queue_js('globals');
+    queue_js(array('globals','jquery.jeditable.mini'));
 ?>
 
 <!-- Plugin Stuff -->
@@ -22,6 +22,12 @@
 
 <!-- JavaScripts -->
 <?php display_js(); ?>
+
+<script>
+ jQuery(document).ready(function() {
+     jQuery('.edit').editable('<?php echo uri('tags'); ?>/edit.php');
+ });
+</script>
 
 </head>
 
