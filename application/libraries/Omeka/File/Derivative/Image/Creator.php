@@ -71,12 +71,8 @@ class Omeka_File_Derivative_Image_Creator
      */
     public function create($fromFilePath, $derivFilename, $mimeType)
     {
-        if (!is_string($derivFilename) || $derivFilename == null) {
-            throw new InvalidArgumentException("Invalid derivative filename given.");
-        }
-        
-        if (!file_exists($fromFilePath)) {
-            throw new RuntimeException("File at '$fromFilePath' does not exist.");
+        if (empty($derivFilename) || !is_string($derivFilename)) {
+            throw new InvalidArgumentException("Invalid derivative filename.");
         }
         
         if (!is_readable($fromFilePath)) {
@@ -92,20 +88,17 @@ class Omeka_File_Derivative_Image_Creator
             return false;
         }
                 
-        $storageDir = dirname($fromFilePath);
-        if (!is_string($storageDir) || empty($storageDir)) {
-            throw new InvalidArgumentException("Invalid derivative storage path given.");
+        $workingDir = dirname($fromFilePath);
+        if (empty($workingDir) || !is_string($workingDir)) {
+            throw new InvalidArgumentException("Invalid derivative working path.");
         }
         
-        if (!is_dir($storageDir)) {
-            throw new RuntimeException("Derivative storage directory does not exist: '$storageDir'.");
+        if (!(is_dir($workingDir) && is_writable($workingDir))) {
+            throw new RuntimeException("Derivative working directory '$workingDir' is not writable.");
         }
-        
-        if (!is_writable($storageDir)) {
-            throw new RuntimeException("Derivative storage directory is not writable");
-        }
+
         foreach ($this->_derivatives as $storageType => $cmdArgs) {
-            $newFilePath = rtrim($storageDir, DIRECTORY_SEPARATOR ) 
+            $newFilePath = rtrim($workingDir, DIRECTORY_SEPARATOR ) 
                          . DIRECTORY_SEPARATOR . $storageType . '_' . $derivFilename;
             $this->_createImage($fromFilePath, $newFilePath, $cmdArgs);
         }
@@ -187,10 +180,10 @@ class Omeka_File_Derivative_Image_Creator
             }
             $status = proc_close($proc);
             if ($status) {
-                throw new Omeka_File_Derivative_Exception("ImageMagick failed with status code $status\nError output: $errors");
+                throw new Omeka_File_Derivative_Exception("ImageMagick failed with status code $status. Error output:\n$errors");
             }
             if (!empty($errors)) {
-                _log("Error output from ImageMagick: $errors", Zend_Log::WARN);
+                _log("Error output from ImageMagick:\n$errors", Zend_Log::WARN);
             }
         } else {
             throw new Omeka_File_Derivative_Exception("Failed to execute command: $cmd.");
