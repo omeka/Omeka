@@ -92,15 +92,15 @@ p, li {
     }
     
     th {
-        background-color: #EBEADC;
-        border: 1px solid #E4E3D3;
+        background-color: #D8CFB6;
+        border: 1px solid #E4DECE;
         font-size: 14px;
         padding:  .25em .625em;
         text-align: left;
         font-weight: normal;
     }
         
-        th a:link, th a:visited { color: #4E7181; }
+        th a:link, th a:visited { color: #857541; }
     
     tr { background-color: rgba(255,255,255,.5); }
         
@@ -618,7 +618,7 @@ header nav {
     
     .pagination .page-input input[type=text] {
         width: 40px;
-        height: 25px;
+        height: 24px;
         box-sizing: border-box;
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
@@ -954,11 +954,6 @@ header nav {
     margin-bottom: 20px;
 }
     
-.browse-items #submit_search {
-    margin: 0 0 5px 0;
-    vertical-align: top;
-}
-
 .browse-items #filter-list {
     list-style-type: none;
     padding: 0;
@@ -1001,8 +996,21 @@ header nav {
         margin: 0;
     }
 
+.browse-items .even td {
+    background-color: #F3F3E7;
+}
+
+.browse-items .odd td {
+    background-color: #fff;
+}
+
 .browse-items .pagination {
     float: right;
+}
+
+.browse-items #submit_search {
+    margin: 0 0 5px 0;
+    vertical-align: top;
 }
 
 .quick-filter-wrapper {
@@ -1030,6 +1038,7 @@ header nav {
         -o-box-sizing: border-box;
     color: #666;
     display: inline-block;
+    float: left;
     font-size: 14px;
     line-height: 1.5em;
     margin: 0;

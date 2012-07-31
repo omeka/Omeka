@@ -105,14 +105,15 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                     <?php if (has_permission('Items', 'delete')): ?>
                     <input type="submit" class="red small" name="submit" value="Delete">
                     <?php endif; ?>
-                    <?php echo common('quick-filters',array(),'items'); ?>
                 </div>
+                
+                <?php echo common('quick-filters',array(),'items'); ?>
                 
             <table id="items" class="full" cellspacing="0" cellpadding="0">
                  <thead>
                     <tr>
                         <?php if (has_permission('Items', 'edit')): ?>
-                        <th id="batch-edit-heading"><?php echo __('Select'); ?></th>
+                        <th class="batch-edit-heading"><?php echo __('Select'); ?></th>
                         <?php endif; ?>
                         <?php
                         $browseHeadings[__('Title')] = 'Dublin Core,Title';
@@ -177,8 +178,9 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                     <?php if (has_permission('Items', 'delete')): ?>
                     <input type="submit" class="red small" name="submit" value="Delete">
                     <?php endif; ?>
-                    <?php echo common('quick-filters',array(),'items'); ?>
                 </div>
+                
+                <?php echo common('quick-filters',array(),'items'); ?>
                         
             </form>
     
