@@ -12,7 +12,7 @@
  * @package Omeka
  * @copyright Center for History and New Media, 2007-2010
  **/
-class Omeka_File_Derivative_Image_Creator_CreatorTest extends PHPUnit_Framework_TestCase
+class Omeka_File_Derivative_Image_CreatorTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -74,7 +74,7 @@ class Omeka_File_Derivative_Image_Creator_CreatorTest extends PHPUnit_Framework_
         try {
             $creator->create($this->invalidFile, $this->derivativeFilename, $this->validMimeType);
         } catch (Exception $e) {
-            $this->assertContains("does not exist", $e->getMessage());
+            $this->assertContains("is not readable", $e->getMessage());
             return;
         }
         $this->fail("Failed to throw an exception when given an invalid original file.");
