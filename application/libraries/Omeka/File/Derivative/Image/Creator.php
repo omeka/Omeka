@@ -1,22 +1,19 @@
 <?php 
 /**
- * @version $Id$
- * @copyright Center for History and New Media, 2009
+ * @copyright Roy Rosenzweig Center for History and New Media, 2009-2012
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
- **/
+ */
  
 /**
  * Create derivative images for a file in Omeka.
  *
+ * @since 2.0
  * @package Omeka
- * @copyright Center for History and New Media, 2009
- **/
+ */
 class Omeka_File_Derivative_Image_Creator
 {
     const IMAGEMAGICK_COMMAND = 'convert';
-    
-    const DERIVATIVE_EXT = 'jpg';
     
     private $_cmdPath;
     
@@ -39,10 +36,9 @@ class Omeka_File_Derivative_Image_Creator
     /**
      * Set the path to the ImageMagick executable.
      * 
-     * @since 2.0
      * @param string $dir Path to the directory containing the ImageMagick binary.
      * @throws Omeka_File_Derivative_Exception When the path is not a valid directory.
-     **/
+     */
     public function setConvertPath($dir)
     {
         // Assert that this is both a valid path and a directory (cannot be a 
@@ -56,7 +52,9 @@ class Omeka_File_Derivative_Image_Creator
     }
     
     /**
-     * @since 2.0
+     * Get the full path to the ImageMagick 'convert' command.
+     *
+     * @return string
      */
     public function getConvertPath()
     {
@@ -64,7 +62,8 @@ class Omeka_File_Derivative_Image_Creator
     }
     
     /**
-     * @since 2.0
+     * Create all the derivatives requested with addDerivative().
+     * 
      * @param string $fromFilePath
      * @param string $derivFilename
      * @param string $mimeType
@@ -115,15 +114,17 @@ class Omeka_File_Derivative_Image_Creator
     }
 
     /**
-     * @since 2.0
+     * Add a derivative image to be created.
+     * 
      * @param string $storageType
      * @param integer|string $size If an integer, it is the size constraint for
      * the image, meaning it will have that maximum width or height, depending
      * on whether the image is landscape or portrait.  Otherwise, it is a string
      * of arguments to be passed to the ImageMagick convert utility.  MUST BE 
      * PROPERLY ESCAPED AS SHELL ARGUMENTS.
+     * @param boolean $square Whether the derivative to add should be made square.
      */
-    public function addDerivative($storageType, $size)
+    public function addDerivative($storageType, $size, $square = false)
     {
         if (!preg_match('/^\w+$/', $storageType)) {
             throw new InvalidArgumentException("Invalid derivative type given: '$storageType' "
@@ -134,34 +135,12 @@ class Omeka_File_Derivative_Image_Creator
         }
 
         if (is_numeric($size)) {
-            $this->_derivatives[$storageType] = $this->_getDefaultResizeCmdArgs($size);
+            $this->_derivatives[$storageType] = $this->_getResizeCmdArgs($size, $square);
         } else if (is_string($size)) {
             $this->_derivatives[$storageType] = $size;
         } else {
             throw new InvalidArgumentException("Invalid derivative storage size given.");
         }
-    }
-
-    /**
-     * Retrieve the path to the directory containing ImageMagick's convert utility.
-     * 
-     * Uses the 'which' command-line utility to detect the path to 'convert'. 
-     * Note that this will only work if the convert utility is in PHP's PATH and
-     * thus can be located by 'which'.
-     * 
-     * @return string The path to the directo
-     */
-    public static function getDefaultConvertDir()
-    {
-        // Use the "which" command to auto-detect the path to ImageMagick;
-        // redirect std error to where std input goes, which is nowhere. See: 
-        // http://www.unix.org.ua/orelly/unix/upt/ch45_21.htm. If $returnVar is "0" 
-        // there was no error, so assign the output of the "which" command. See: 
-        // http://us.php.net/manual/en/function.system.php#66795.
-        $command = 'which convert 2>&0';
-        $lastLineOutput = exec($command, $output, $returnVar);
-        // Return only the directory component of the path returned.
-        return $returnVar == 0 ? dirname($lastLineOutput) : '';
     }
 
     /**
@@ -171,9 +150,6 @@ class Omeka_File_Derivative_Image_Creator
      * example, if the constraint is 500, the resulting image file will be scaled 
      * so that the largest side is 500px. If the image is less than 500px on both 
      * sides, the image will not be resized.
-     * 
-     * All derivative images will be JPEG, which is specified by the class 
-     * constant DERIVATIVE_EXT.  
      * 
      * Derivative images will only be generated for files with mime types
      * that are not listed on the isDerivable static function's blacklist, and can
@@ -201,29 +177,46 @@ class Omeka_File_Derivative_Image_Creator
         $descriptorspec = array(
             0 => array("pipe", "r"), //STDIN
             1 => array("pipe", "w"), //STDOUT
-            2 => array("pipe", "a"), //STDERR
+            2 => array("pipe", "w"), //STDERR
         );
-        $pipes = array();
+
         if ($proc = proc_open($cmd, $descriptorspec, $pipes, getcwd())) {
             $errors = stream_get_contents($pipes[2]);
-            if (!empty($errors)) {
-                throw new Omeka_File_Derivative_Exception("Error in ImageMagick conversion: $errors.");
-            }
             foreach ($pipes as $pipe) {
                 fclose($pipe);
             }
             $status = proc_close($proc);
             if ($status) {
-                throw new Omeka_File_Derivative_Exception("ImageMagick exited with status code: $status.");
+                throw new Omeka_File_Derivative_Exception("ImageMagick failed with status code $status\nError output: $errors");
+            }
+            if (!empty($errors)) {
+                _log("Error output from ImageMagick: $errors", Zend_Log::WARN);
             }
         } else {
             throw new Omeka_File_Derivative_Exception("Failed to execute command: $cmd.");
         }
     }
 
-    private function _getDefaultResizeCmdArgs($constraint)
+    /**
+     * Get the ImageMagick command line for resizing to the given constraints.
+     *
+     * @param integer $constraint Maximum side length in pixels.
+     * @param boolean $square Whether the derivative should be squared off.
+     * @return string
+     */
+    private function _getResizeCmdArgs($constraint, $square)
     {
-        return '-thumbnail ' . escapeshellarg($constraint.'x'.$constraint.'>');
+        if ($square) {
+            return '-thumbnail ' . escapeshellarg("{$constraint}x{$constraint}>");
+        } else {
+            return join(' ', array(
+                '-thumbnail ' . escapeshellarg('x' . $constraint*2),
+                '-resize ' . escapeshellarg($constraint*2 . 'x<'),
+                '-resize 50%',
+                '-gravity center',
+                '-crop ' . escapeshellarg("{$constraint}x{$constraint}+0+0"),
+                '+repage'));
+        }
     }
 
     /**
@@ -242,5 +235,27 @@ class Omeka_File_Derivative_Image_Creator
                 && is_readable($old_path) 
                 && getimagesize($old_path) 
                 && !(in_array($mimeType, $this->_mimeTypeBlacklist)));
+    }
+
+    /**
+     * Retrieve the path to the directory containing ImageMagick's convert utility.
+     * 
+     * Uses the 'which' command-line utility to detect the path to 'convert'. 
+     * Note that this will only work if the convert utility is in PHP's PATH and
+     * thus can be located by 'which'.
+     * 
+     * @return string The path to the directory
+     */
+    public static function getDefaultConvertDir()
+    {
+        // Use the "which" command to auto-detect the path to ImageMagick;
+        // redirect std error to where std input goes, which is nowhere. See: 
+        // http://www.unix.org.ua/orelly/unix/upt/ch45_21.htm. If $returnVar is "0" 
+        // there was no error, so assign the output of the "which" command. See: 
+        // http://us.php.net/manual/en/function.system.php#66795.
+        $command = 'which convert 2>&0';
+        $lastLineOutput = exec($command, $output, $returnVar);
+        // Return only the directory component of the path returned.
+        return $returnVar == 0 ? dirname($lastLineOutput) : '';
     }
 }

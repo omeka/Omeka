@@ -26,6 +26,7 @@ if (!function_exists('mime_content_type')) {
 class File extends Omeka_Record implements Zend_Acl_Resource_Interface 
 { 
     const DISABLE_DEFAULT_VALIDATION_OPTION = 'disable_default_file_validation';
+    const DERIVATIVE_EXT = 'jpg';
 
     public $item_id;
     public $order;
@@ -191,7 +192,7 @@ class File extends Omeka_Record implements Zend_Acl_Resource_Interface
         if (count($parts) > 1) {
             $ext = array_pop($parts);
         }
-        array_push($parts, Omeka_File_Derivative_Image_Creator::DERIVATIVE_EXT);
+        array_push($parts, self::DERIVATIVE_EXT);
         return join('.', $parts);        
     }
     
@@ -307,7 +308,7 @@ class File extends Omeka_Record implements Zend_Acl_Resource_Interface
         
         $creator->addDerivative('fullsize', get_option('fullsize_constraint'));
         $creator->addDerivative('thumbnail', get_option('thumbnail_constraint'));
-        $this->_makeSquareThumbnails($creator);
+        $creator->addDerivative('square_thumbnail', get_option('square_thumbnail_constraint'), true);
         
         if ($creator->create($this->getPath('archive'), 
                              $this->getDerivativeFilename(),
@@ -316,20 +317,7 @@ class File extends Omeka_Record implements Zend_Acl_Resource_Interface
             $this->save();
         }
     }
-    
-    private function _makeSquareThumbnails($creator)
-    {
-        $constraint = get_option('square_thumbnail_constraint');
-        $args = join(' ', array(
-                    '-thumbnail ' . escapeshellarg('x' . $constraint*2),
-                    '-resize ' . escapeshellarg($constraint*2 . 'x<'),
-                    '-resize 50%',
-                    '-gravity center',
-                    '-crop ' . escapeshellarg($constraint . 'x' . $constraint . '+0+0'),
-                    '+repage'));
-        $creator->addDerivative('square_thumbnail', $args);
-    }
-    
+
     /**
      * Extract metadata associated with the file.
      * 
