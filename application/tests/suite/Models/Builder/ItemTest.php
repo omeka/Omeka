@@ -11,7 +11,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Models_ItemBuilderTest extends Omeka_Test_AppTestCase
+class Models_Builder_ItemTest extends Omeka_Test_AppTestCase
 {
     public function setUp()
     {

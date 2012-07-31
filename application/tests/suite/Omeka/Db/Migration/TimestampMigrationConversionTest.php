@@ -11,7 +11,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class TimestampMigrationConversionTest extends Omeka_Test_AppTestCase
+class Omeka_Db_Migration_TimestampMigrationConversionTest extends Omeka_Test_AppTestCase
 {
     public function setUp()
     {

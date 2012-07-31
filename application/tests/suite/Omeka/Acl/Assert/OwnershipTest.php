@@ -10,7 +10,7 @@
  * @package Omeka
  * @subpackage Tests
  */
-class Item_OwnershipAclAssertionTest extends Omeka_Test_AppTestCase
+class Omeka_Acl_Assert_OwnershipTest extends Omeka_Test_AppTestCase
 {
     private $_users;
     private $_items;

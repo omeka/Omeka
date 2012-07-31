@@ -6,12 +6,12 @@
  */
 
 /**
- * Test ItemTable class.
+ * Test Table_Item class.
  *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2011
  */
-class Omeka_Models_ItemTableTest extends PHPUnit_Framework_TestCase   
+class Models_Table_ItemTest extends PHPUnit_Framework_TestCase   
 {
     public function setUp()
     {

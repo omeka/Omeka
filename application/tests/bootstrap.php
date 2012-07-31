@@ -30,3 +30,11 @@ set_include_path(get_include_path() . PATH_SEPARATOR . TEST_LIB_DIR);
 // Warning: tests for code that uses THEME_DIR will only use the admin theme dir,
 // not the public one.  This could potentially cause subtle breakage in tests.
 define('THEME_DIR', join('/', array(BASE_DIR, 'admin', 'themes')));
+
+// Clean out the test database before running any tests.
+$config = new Omeka_Test_Resource_Config;
+$config->init();
+$dbIni = Zend_Registry::get('test_config')->db;
+$helper = Omeka_Test_Helper_Db::factory($dbIni);
+$helper->dropTables($dbIni->prefix);
+$helper->getAdapter()->closeConnection();

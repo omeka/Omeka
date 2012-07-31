@@ -7,13 +7,10 @@
 
 /**
  * 
- * @todo The design needs to come together on this, so we don't have both a 
- * Context instance and a registry.  That is two service locators too many.  But
- * global state is required for global functions in the API.
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
  */
-class Omeka_GlobalFunctionsTest extends PHPUnit_Framework_TestCase
+class Globals_GetPluginIniTest extends PHPUnit_Framework_TestCase
 {
     public function testGetPluginIni()
     {

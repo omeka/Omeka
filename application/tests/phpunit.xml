@@ -4,11 +4,8 @@
          convertNoticesToExceptions="true"
          backupGlobals="true">
     <testsuites>
-        <testsuite name="Integration">
-            <file>integration/TestSuite.php</file>
-        </testsuite>
-        <testsuite name="Unit">
-            <directory>unit</directory>
+        <testsuite name="Core Tests">
+            <directory>suite</directory>
         </testsuite>
     </testsuites>
     <logging>

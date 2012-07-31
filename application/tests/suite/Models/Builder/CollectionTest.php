@@ -11,7 +11,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class CollectionBuilderTest extends PHPUnit_Framework_TestCase
+class Models_Builder_CollectionTest extends PHPUnit_Framework_TestCase
 {
     const COLLECTION_ID = 1;
     const USER_ID = 2;

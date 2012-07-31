@@ -6,12 +6,12 @@
  */
 
 /**
- * Test ElementTable.
+ * Test Table_Element.
  *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Omeka_Models_ElementTableTest extends Omeka_Test_AppTestCase
+class Models_Table_ElementTest extends Omeka_Test_AppTestCase
 {
     public function setUp()
     {
