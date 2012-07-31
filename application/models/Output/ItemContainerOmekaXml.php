@@ -14,12 +14,12 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Omeka_Output_Xml_ItemContainer extends Omeka_Output_Xml_Abstract
+class Output_ItemContainerOmekaXml extends Output_OmekaXmlAbstract
 {
     /**
      * Create a node to contain Item nodes.
      *
-     * @see Omeka_Output_Xml_Item
+     * @see Output_ItemOmekaXml
      * @return void
      */
     protected function _buildNode()
@@ -29,7 +29,7 @@ class Omeka_Output_Xml_ItemContainer extends Omeka_Output_Xml_Abstract
         $this->_setContainerPagination($itemContainerElement);
         
         foreach ($this->_record as $item) {
-            $itemOmekaXml = new Omeka_Output_Xml_Item($item, $this->_context);
+            $itemOmekaXml = new Output_ItemOmekaXml($item, $this->_context);
             $itemElement = $this->_doc->importNode($itemOmekaXml->_node, true);
             $itemContainerElement->appendChild($itemElement);
         }

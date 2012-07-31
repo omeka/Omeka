@@ -14,7 +14,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Omeka_Output_Xml_File extends Omeka_Output_Xml_Abstract
+class Output_FileOmekaXml extends Output_OmekaXmlAbstract
 {
     /**
      * Create a node repesenting a File record.
@@ -35,7 +35,7 @@ class Omeka_Output_Xml_File extends Omeka_Output_Xml_Abstract
         
         if (in_array($this->_context, array('file'))) {
             $item = get_db()->getTable('Item')->find($this->_record->item_id);
-            $itemOmekaXml = new Omeka_Output_Xml_Item($item, $this->_context);
+            $itemOmekaXml = new Output_ItemOmekaXml($item, $this->_context);
             $itemElement = $this->_doc->importNode($itemOmekaXml->_node, true);
             $fileElement->appendChild($itemElement);
         }

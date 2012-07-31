@@ -1,5 +1,4 @@
 <?php
-require_once 'ItemAtom.php';
-$atom = new ItemAtom(array($item));
+$atom = new Output_ItemAtom(array($item));
 echo $atom->getFeed();
 ?>

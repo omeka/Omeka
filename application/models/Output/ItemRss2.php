@@ -13,7 +13,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class ItemRss2
+class Output_ItemRss2
 {
     public function render(array $records)
     {

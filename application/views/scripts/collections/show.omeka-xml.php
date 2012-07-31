@@ -1,3 +1,3 @@
 <?php
-$omekaXml = new Omeka_Output_Xml_Collection($collection, 'collection');
+$omekaXml = new Output_CollectionOmekaXml($collection, 'collection');
 echo $omekaXml->getDoc()->saveXML();

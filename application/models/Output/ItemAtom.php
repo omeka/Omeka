@@ -14,7 +14,7 @@
  * @link http://en.wikipedia.org/wiki/Atom_(standard)
  * @link http://tools.ietf.org/html/rfc4287
  */
-class ItemAtom
+class Output_ItemAtom
 {
     /**
      * @var DOMDocument

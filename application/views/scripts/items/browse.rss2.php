@@ -1,4 +1,4 @@
-<?php require_once 'ItemRss2.php';
-$convert = new ItemRss2;
+<?php
+$convert = new Output_ItemRss2;
 echo $convert->render($items);
  ?>

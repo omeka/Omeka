@@ -15,7 +15,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Omeka_Output_Json
+class Output_OmekaJson
 {
     /**
      * JsonML XML stylesheet filename
@@ -25,10 +25,10 @@ class Omeka_Output_Json
     /**
      * Convert omeka-xml output to JSON.
      *
-     * @param Omeka_Output_Xml $omekaXml
+     * @param Output_OmekaXmlAbstract $omekaXml
      * @return string
      */
-    public static function toJson(Omeka_Output_Xml $omekaXml)
+    public static function toJson(Output_OmekaXmlAbstract $omekaXml)
     {
         $xsltPath = dirname(__FILE__) . '/' . self::JSONML_XSLT_FILENAME;
 

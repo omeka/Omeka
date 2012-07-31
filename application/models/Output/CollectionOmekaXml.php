@@ -14,7 +14,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Omeka_Output_Xml_Collection extends Omeka_Output_Xml_Abstract
+class Output_CollectionOmekaXml extends Output_OmekaXmlAbstract
 {
     /**
      * Create a node representing a collection.

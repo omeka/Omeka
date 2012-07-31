@@ -1,2 +1,2 @@
 <?php
-echo Omeka_Output_Json::toJson(new Omeka_Output_Xml_ItemContainer($items, 'itemContainer'));
+echo Output_OmekaJson::toJson(new Output_ItemContainerOmekaXml($items, 'itemContainer'));

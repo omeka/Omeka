@@ -14,7 +14,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-abstract class Omeka_Output_Xml_Abstract
+abstract class Output_OmekaXmlAbstract
 {
     /**
      * XML Schema instance namespace URI.
@@ -320,7 +320,7 @@ abstract class Omeka_Output_Xml_Abstract
         // fileContainer
         $fileContainerElement = $this->_createElement('fileContainer');
         foreach ($item->Files as $file) {
-            $fileOmekaXml = new Omeka_Output_Xml_File($file, $this->_context);
+            $fileOmekaXml = new Output_FileOmekaXml($file, $this->_context);
             $fileElement = $this->_doc->importNode($fileOmekaXml->_node, true);
             $fileContainerElement->appendChild($fileElement);
         }
@@ -408,7 +408,7 @@ abstract class Omeka_Output_Xml_Abstract
         }
         
         // itemContainer
-        $collectionOmekaXml = new Omeka_Output_Xml_ItemContainer($items, 'collection');
+        $collectionOmekaXml = new Output_ItemContainerOmekaXml($items, 'collection');
         $itemContainerElement = $this->_doc->importNode($collectionOmekaXml->_node, true);
         $parentElement->appendChild($itemContainerElement);
     }

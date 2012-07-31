@@ -13,7 +13,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class ItemDcmesXml
+class Output_ItemDcmesXml
 {
     private $_dcElements = array('Title', 'Subject', 'Description', 
                                  'Creator', 'Source', 'Publisher', 

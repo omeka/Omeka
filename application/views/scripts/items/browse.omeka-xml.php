@@ -1,3 +1,3 @@
 <?php
-$omekaXml = new Omeka_Output_Xml_ItemContainer($items, 'itemContainer');
+$omekaXml = new Output_ItemContainerOmekaXml($items, 'itemContainer');
 echo $omekaXml->getDoc()->saveXML();
