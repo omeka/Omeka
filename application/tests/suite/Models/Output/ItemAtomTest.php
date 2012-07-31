@@ -10,7 +10,7 @@
  *
  * @package Omeka
  */
-class Models_ItemAtomTest extends Omeka_Test_AppTestCase
+class Models_Output_ItemAtomTest extends Omeka_Test_AppTestCase
 {
     protected $_isAdminTest = false;
 
@@ -40,7 +40,7 @@ class Models_ItemAtomTest extends Omeka_Test_AppTestCase
         $item = new Item;
         $item->id = 100;
 
-        $atom = new ItemAtom(array($item));
+        $atom = new Output_ItemAtom(array($item));
 
         $feed = $atom->getFeed();
 
@@ -69,7 +69,7 @@ class Models_ItemAtomTest extends Omeka_Test_AppTestCase
         $file->size = $size;
         $item->Files = array($file);
 
-        $atom = new ItemAtom(array($item));
+        $atom = new Output_ItemAtom(array($item));
 
         $feed = $atom->getFeed();
 

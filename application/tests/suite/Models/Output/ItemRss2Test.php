@@ -11,7 +11,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Models_ItemRss2Test extends Omeka_Test_AppTestCase
+class Models_Output_ItemRss2Test extends Omeka_Test_AppTestCase
 {
     protected $_isAdminTest = false;
     
