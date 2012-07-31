@@ -13,7 +13,7 @@
  * @package Omeka
  * @subpackage Models
  */ 
-abstract class ProcessAbstract
+abstract class Omeka_Job_ProcessAbstract
 {
     protected $_process;
     protected $_logger;

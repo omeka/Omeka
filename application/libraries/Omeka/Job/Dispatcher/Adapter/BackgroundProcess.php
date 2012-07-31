@@ -12,8 +12,8 @@
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
  */
 class Omeka_Job_Dispatcher_Adapter_BackgroundProcess extends 
-Omeka_Job_Dispatcher_AdapterAbstract
-{
+    Omeka_Job_Dispatcher_AdapterAbstract {
+        
     private $_processDispatcher;
 
     /**
@@ -34,7 +34,7 @@ Omeka_Job_Dispatcher_AdapterAbstract
     /**
      * For test purposes.
      */
-    public function setProcessDispatcher(ProcessDispatcher $dispatcher)
+    public function setProcessDispatcher(Omeka_Job_ProcessDispatcher $dispatcher)
     {
         $this->_processDispatcher = $dispatcher;
     }
@@ -42,7 +42,7 @@ Omeka_Job_Dispatcher_AdapterAbstract
     public function getProcessDispatcher()
     {
         if (!$this->_processDispatcher) {
-            $this->_processDispatcher = new ProcessDispatcher;
+            $this->_processDispatcher = new Omeka_Job_ProcessDispatcher;
         }
         return $this->_processDispatcher;
     }

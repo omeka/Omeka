@@ -12,12 +12,12 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class ProcessDispatcher
+class Omeka_Job_ProcessDispatcher
 {
     /**
      * Create a table entry for a new background process and spawn it.
      *
-     * @param string $className ProcessAbstract subclass name to spawn
+     * @param string $className Omeka_Job_ProcessAbstract subclass name to spawn
      * @param User $user User to run process as, defaults to current user
      * @param Array|null $args Arguments specific to the child class process
      * @return Process The model object for the background process
