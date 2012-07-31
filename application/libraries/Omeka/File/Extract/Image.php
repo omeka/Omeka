@@ -15,7 +15,7 @@
  * @subpackage Models
  * @author CHNM
  */
-class FilesImages
+class Omeka_File_Extract_Image
 {
     public function initialize($id3, $pathToFile)
     {

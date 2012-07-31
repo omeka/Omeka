@@ -14,7 +14,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class FilesVideos
+class Omeka_File_Extract_Video
 {        
     public function initialize($id3, $pathToFile)
     {

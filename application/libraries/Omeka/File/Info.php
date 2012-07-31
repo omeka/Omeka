@@ -84,7 +84,8 @@ class Omeka_File_Info
      * 
      * @param array $elements Set of Element records.
      * @param array $id3Info Info extracted from the file by the getID3 library.
-     * @param string $extractionStrategy Either 'FilesVideos' or 'FilesImages'.
+     * @param string $extractionStrategy Either 'Omeka_File_Extract_Video' or 
+     * 'Omeka_File_Extract_Images'.
      * @return void
      */
     protected function _populateMimeTypeElements($elements, $id3Info, $extractionStrategy)
@@ -97,7 +98,8 @@ class Omeka_File_Info
         // for each of them.
         foreach ($elements as $element) {
             // Method that is named the same as the element, which is how the data 
-            // gets retrieved. E.g. FilesVideos::getBitrate() for the Bitrate element. 
+            // gets retrieved. E.g. Omeka_File_Extract_Video::getBitrate() for 
+            // the Bitrate element. 
             
             // Strip out whitespace and prepend 'get' to adhere to naming conventions.
             $helperFunction = 'get' . preg_replace('/\s*/', '', $element->name);
@@ -136,15 +138,15 @@ class Omeka_File_Info
         }
                 
         // Figure out what kind of extraction strategy to use for retrieving the 
-        // metadata from ID3. Current possibilities include either FilesImages 
-        // or FilesVideos
+        // metadata from ID3. Current possibilities include either 
+        // Omeka_File_Extract_Image or Omeka_File_Extract_Video
         $elementSetToExtract = current($elements)->set_name;
         switch ($elementSetToExtract) {
             case 'Omeka Video File':
-                $extraction = 'FilesVideos';
+                $extraction = 'Omeka_File_Extract_Video';
                 break;
             case 'Omeka Image File':
-                $extraction = 'FilesImages';
+                $extraction = 'Omeka_File_Extract_Image';
                 break;
             default:
                 throw new Exception('Cannot extract metadata for element set: ' . $elementSetToExtract . '.');
