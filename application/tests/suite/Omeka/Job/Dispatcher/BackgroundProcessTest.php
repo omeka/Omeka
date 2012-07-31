@@ -10,8 +10,8 @@ class Omeka_Job_Dispatcher_Adapter_BackgroundProcessTest extends PHPUnit_Framewo
 
     public function setUp()
     {
-        // The ProcessDispatcher is quite untestable so this test just calls 
-        // a mock instead.
+        // Omeka_Job_ProcessDispatcher is quite untestable so this test just 
+        // calls a mock instead.
         $this->processDispatcher = new MockProcessDispatcher;
         MockProcessDispatcher::_reset();
         $this->adapter = new Omeka_Job_Dispatcher_Adapter_BackgroundProcess;
@@ -19,7 +19,7 @@ class Omeka_Job_Dispatcher_Adapter_BackgroundProcessTest extends PHPUnit_Framewo
 
     public function testDefaultUsesProcessDispatcher()
     {
-        $this->assertEquals("ProcessDispatcher", get_class($this->adapter->getProcessDispatcher()));
+        $this->assertEquals("Omeka_Job_ProcessDispatcher", get_class($this->adapter->getProcessDispatcher()));
     }
 
     public function testSendStartsProcess()
@@ -39,7 +39,7 @@ class Omeka_Job_Dispatcher_Adapter_BackgroundProcessTest extends PHPUnit_Framewo
     }
 }
 
-class MockProcessDispatcher extends ProcessDispatcher
+class MockProcessDispatcher extends Omeka_Job_ProcessDispatcher
 {
     public static $processStarted;
     public static $processClass;
