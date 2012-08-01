@@ -10,7 +10,7 @@
  *
  * @package Omeka
  */
-class PublicPermissions
+class Omeka_Db_Select_PublicPermissions
 {
     protected $_allPermission;
     protected $_selfPermission;

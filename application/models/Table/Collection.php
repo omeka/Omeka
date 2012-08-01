@@ -39,7 +39,7 @@ class Table_Collection extends Omeka_Db_Table
     public function getSelect()
     {
         $select = parent::getSelect();
-        $permissions = new PublicPermissions('Collections');
+        $permissions = new Omeka_Db_Select_PublicPermissions('Collections');
         $permissions->apply($select, 'collections');
         
         return $select;

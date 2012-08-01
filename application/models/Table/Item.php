@@ -357,7 +357,7 @@ class Table_Item extends Omeka_Db_Table
     public function getSelect()
     {
         $select = parent::getSelect();
-        $permissions = new PublicPermissions('Items');
+        $permissions = new Omeka_Db_Select_PublicPermissions('Items');
         $permissions->apply($select, 'items');
 
         return $select;

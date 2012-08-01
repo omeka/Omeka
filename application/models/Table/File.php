@@ -27,7 +27,7 @@ class Table_File extends Omeka_Db_Table
         $db = $this->getDb();
         $select->joinInner(array('items' => $db->Item), 'items.id = files.item_id', array());
 
-        $permissions = new PublicPermissions('Items');
+        $permissions = new Omeka_Db_Select_PublicPermissions('Items');
         $permissions->apply($select, 'items');
 
         $select->group('files.id');

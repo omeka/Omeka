@@ -95,7 +95,7 @@ class Table_Tag extends Omeka_Db_Table
         if ($type == 'Item') {
             //Join on the items table, add permissions checks for public
             $select->joinInner( array('items'=>$db->Item), "items.id = taggings.relation_id AND taggings.type = 'Item'", array());
-            $permissions = new PublicPermissions('Items');
+            $permissions = new Omeka_Db_Select_PublicPermissions('Items');
             $permissions->apply($select, 'items');
         } else {
             $select->where("taggings.type = ?", (string) $type);
