@@ -63,12 +63,121 @@ class Table_Item extends Omeka_Db_Table
     {
         //Apply the simple or advanced search
         if (isset($params['search']) || isset($params['advanced'])) {
-            $search = new ItemSearch($select, $this->getDb());
             if ($simpleTerms = @$params['search']) {
-                $search->simple($simpleTerms);
+                $this->_simpleSearch($select, $simpleTerms);
             }
             if ($advancedTerms = @$params['advanced']) {
-                $search->advanced($advancedTerms);
+                $this->_advancedSearch($select, $advancedTerms);
+            }
+        }
+    }
+    
+    /**
+     * Build the simple search.
+     * 
+     * The search query consists of a derived table that is INNER JOINed to the 
+     * main SQL query.  That derived table is a union of two SELECT queries. The 
+     * first query searches the FULLTEXT index on the items_elements table, and 
+     * the second query searches the tags table for every word in the search 
+     * terms and assigns each found result a rank of '1'. That should make 
+     * tagged items show up higher on the found results list for a given search.
+     * 
+     * @param Zend_Db_Select $select
+     * @param string $simpleTerms
+     */
+    protected function _simpleSearch($select, $terms)
+    {
+        $db = $this->getDb();
+        $quotedTerms = $db->quote($terms);
+        
+        // Build elements query.
+        $elementsQuery = "
+        SELECT i.id as item_id, MATCH (etx.text) AGAINST ($quotedTerms) as rank 
+        FROM $db->Item i 
+        INNER JOIN $db->ElementText etx ON etx.record_id = i.id 
+        WHERE etx.record_type = 'Item' 
+        AND MATCH (etx.text) AGAINST ($quotedTerms)";
+        
+        // Build tags query.
+        $rank = 1;
+        $tagList = preg_split('/\s+/', $terms);
+        // Make sure the tag list contains the whole search string, just in case 
+        // that is found
+        $tagList[] = $terms;
+        $tagsSelect = new Omeka_Db_Select;
+        $tagsSelect->from(array('i' => $db->Item), array('item_id' => 'i.id', 'rank' => new Zend_Db_Expr($rank)))
+                   ->joinInner(array('tg' => $db->Taggings), 'tg.relation_id = i.id AND tg.type = "Item"', array())
+                   ->joinInner(array('t' => $db->Tag), 't.id = tg.tag_id', array());
+        foreach ($tagList as $tag) {
+            $tagsSelect->orWhere('t.name LIKE ?', $tag);
+        }
+        $tagsQuery = (string) $tagsSelect;
+        
+        // INNER JOIN to the main SQL query and then ORDER BY rank DESC
+        $query = "$elementsQuery UNION $tagsQuery";
+        $select->joinInner(array('s' => new Zend_Db_Expr("($query)")), 
+                           's.item_id = items.id', 
+                           array())->order('s.rank DESC');
+    }
+    
+    /**
+     * Build the advanced search.
+     * 
+     * @param Zend_Db_Select $select
+     * @param array $simpleTerms
+     */
+    protected function _advancedSearch($select, $terms)
+    {
+        $db = $this->getDb();
+        
+        foreach ($terms as $v) {
+            
+            // Do not search on blank rows.
+            if (empty($v['element_id']) || empty($v['type'])) {
+                continue;
+            }
+            
+            $value = $v['terms'];
+            $type = $v['type'];
+            // If this is set we join this subquery with NOT IN instead of IN. 
+            // Predicates that set $negate to true should also fall through to 
+            // their non-negated counterpart in the switch statement.
+            $negate = false;
+            
+            // Determine what the WHERE clause should look like.
+            switch ($type) {
+                case 'does not contain':
+                    $negate = true;
+                case 'contains':
+                    $predicate = "LIKE " . $db->quote('%'.$value .'%');
+                    break;
+                case 'is exactly':
+                    $predicate = ' = ' . $db->quote($value);
+                    break;
+                case 'is empty':
+                    $negate = true;
+                case 'is not empty':
+                    $predicate = "IS NOT NULL";
+                    break;
+                default:
+                    throw new Omeka_Record_Exception( __('Invalid search type given!') );
+            }
+            
+            $elementId = (int) $v['element_id'];
+            
+            // This does not use Omeka_Db_Select b/c there is no conditional SQL
+            // and it is easier to read without all the extra cruft.
+            $subQuery = "
+            SELECT etx.record_id FROM $db->ElementText etx
+            WHERE etx.text $predicate 
+            AND etx.record_type = 'Item' 
+            AND etx.element_id = " . $db->quote($elementId);
+            
+            // Each advanced search mini-form represents another subquery.
+            if ($negate) {
+                $select->where('items.id NOT IN ( ' . (string) $subQuery . ' )');
+            } else {
+                $select->where('items.id IN ( ' . (string) $subQuery . ' )');
             }
         }
     }
