@@ -15,7 +15,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Installer_Default implements InstallerInterface
+class Installer_Default implements Installer_InstallerInterface
 {
     const DEFAULT_USER_ACTIVE = true;
     const DEFAULT_USER_ROLE = 'super';

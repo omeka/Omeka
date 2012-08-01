@@ -14,7 +14,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-interface InstallerInterface
+interface Installer_InstallerInterface
 {    
     public function __construct(Omeka_Db $db);
     public function install();
