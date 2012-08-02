@@ -203,31 +203,47 @@ function item_belongs_to_collection($name=null, $item=null)
  */
 function item_citation($item = null)
 {
-    if(!$item) {
+    if (!$item) {
         $item = get_current_item();
     }
-
-    $creator    = strip_formatting(item(array('Dublin Core', 'Creator'), array(), $item));
-    $title      = strip_formatting(item(array('Dublin Core', 'Title'), array(), $item));
-    $siteTitle  = strip_formatting(settings('site_title'));
-    $itemId     = item('id', array(), $item);
-    $accessDate = date('F j, Y');
-    $uri        = html_escape(abs_item_uri($item));
-
-    $cite = '';
-    if ($creator) {
-        $cite .= "$creator, ";
+    
+    $citation = '';
+    
+    $creators = item(array('Dublin Core', 'Creator'), array('all' => true), $item);
+    // Strip formatting and remove empty creator elements.
+    $creators = array_filter(array_map('strip_formatting', $creators));
+    if ($creators) {
+        switch (count($creators)) {
+            case 1:
+                $creator = $creators[0];
+                break;
+            case 2:
+                $creator = "{$creators[0]} and {$creators[1]}";
+                break;
+            case 3:
+                $creator = "{$creators[0]}, {$creators[1]}, and {$creators[2]}";
+                break;
+            default:
+                $creator = "{$creators[0]} et al.";
+        }
+        $citation .= "$creator, ";
     }
+    
+    $title = strip_formatting(item(array('Dublin Core', 'Title'), array(), $item));
     if ($title) {
-        $cite .= "&#8220;$title,&#8221; ";
+        $citation .= "&#8220;$title,&#8221; ";
     }
+    
+    $siteTitle = strip_formatting(settings('site_title'));
     if ($siteTitle) {
-        $cite .= "<em>$siteTitle</em>, ";
+        $citation .= "<em>$siteTitle</em>, ";
     }
-    $cite .= "accessed $accessDate, ";
-    $cite .= "$uri.";
-
-    return apply_filters('item_citation', $cite, $item);
+    
+    $accessed = date('F j, Y');
+    $url = html_escape(abs_item_uri($item));
+    $citation .= "accessed $accessed, $url.";
+    
+    return apply_filters('item_citation', $citation, $item);
 }
 
 /**
