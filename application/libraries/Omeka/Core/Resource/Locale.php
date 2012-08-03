@@ -26,25 +26,29 @@ class Omeka_Core_Resource_Locale extends Zend_Application_Resource_Locale {
         $config = $bootstrap->getResource('Config');
 
         $locale = $config->locale;
+        if ($locale instanceof Zend_Config) {
+            $localeName = $locale->name;
+            $cache = $locale->cache;
+        } else {
+            $localeName = $locale;
+            $cache = null;
+        }
 
         if ($this->getBootstrap()->hasResource('Pluginbroker')) {
             $broker = $this->getBootstrap()->getResource('Pluginbroker');
-            $locale = $broker->applyFilters('locale', $locale);
+            $localeName = $broker->applyFilters('locale', $localeName);
         }
 
-        if ($locale) {
-            $cache = Zend_Cache::factory(
-                'Core',
-                'File',
-                array('automatic_serialization' => true),
-                array('file_name_prefix' => 'omeka_i18n_cache'
-            ));
+        if ($localeName) {
+            if ($cache === null) {
+                $cache = 'locale';
+            }
 
             $this->setOptions(array(
-                'default' => $locale,
+                'default' => $localeName,
                 'cache' => $cache
             ));
-            $this->_setTranslate($locale, $cache);
+            $this->_setTranslate($localeName, $cache);
         }
 
         return parent::init();
@@ -57,17 +61,19 @@ class Omeka_Core_Resource_Locale extends Zend_Application_Resource_Locale {
      */
     private function _setTranslate($locale, $cache)
     {
-        Zend_Translate::setCache($cache);
+        $options = array(
+            'bootstrap' => $this->getBootstrap(),
+            'locale' => $locale,
+            'adapter' => 'gettext',
+            'disableNotices' => true,
+            'content' => LANGUAGES_DIR . "/$locale.mo",
+            'cache' => $cache
+        );
+
+        $translateResource = new Zend_Application_Resource_Translate($options);
+
         try {
-            $translate = new Zend_Translate(array(
-                'locale' => $locale,
-                'adapter' => 'gettext',
-                'disableNotices' => true,
-                'content' => LANGUAGES_DIR . "/$locale.mo"
-            ));
-            Zend_Registry::set(
-                Zend_Application_Resource_Translate::DEFAULT_REGISTRY_KEY,
-                $translate);
+            $translateResource->getTranslate();
         } catch (Zend_Translate_Exception $e) {
             // Do nothing, allow the user to set a locale without a
             // translation.

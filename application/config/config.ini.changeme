@@ -14,7 +14,7 @@
 ; Localization ;
 ;;;;;;;;;;;;;;;;
 
-; locale
+; locale.name
 ; The locale identifier used for translating and displaying Omeka.
 ; default: none
 ;
@@ -28,7 +28,7 @@
 ; To enable translations, the identifier must also have a
 ; corresponding .mo file in the application/languages directory.
 
-locale = ""
+locale.name = ""
 
 ;;;;;;;;;;;;;
 ; Debugging ;
