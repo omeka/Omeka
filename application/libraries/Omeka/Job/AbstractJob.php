@@ -17,7 +17,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
  */
-abstract class Omeka_JobAbstract implements Omeka_Job
+abstract class Omeka_Job_AbstractJob implements Omeka_Job
 {
     /**
      * @var Omeka_Db

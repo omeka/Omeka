@@ -8,7 +8,8 @@
 /**
  * @package Omeka
  */
-class Job_ItemBatchEdit extends Omeka_JobAbstract {
+class Job_ItemBatchEdit extends Omeka_Job_AbstractJob
+{
     
     public function perform()
     {

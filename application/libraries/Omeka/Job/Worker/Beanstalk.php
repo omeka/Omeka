@@ -32,7 +32,7 @@ class Omeka_Job_Worker_Beanstalk
                 );
             }
 
-            if ($omekaJob instanceof Omeka_JobAbstract) {
+            if ($omekaJob instanceof Omeka_Job_AbstractJob) {
                 $user = $omekaJob->getUser();
                 if ($user) {
                     Zend_Registry::get('bootstrap')->getContainer()->currentuser = $user;

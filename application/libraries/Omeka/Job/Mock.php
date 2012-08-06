@@ -11,7 +11,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
  */
-class Omeka_Job_Mock extends Omeka_JobAbstract
+class Omeka_Job_Mock extends Omeka_Job_AbstractJob
 {
     public $options;
     public $performed;

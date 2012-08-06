@@ -9,7 +9,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
  */
-class Job_FileProcessUpload extends Omeka_JobAbstract
+class Job_FileProcessUpload extends Omeka_Job_AbstractJob
 {
     public function perform()
     {
