@@ -14,7 +14,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Output_FileOmekaXml extends Output_OmekaXmlAbstract
+class Output_FileOmekaXml extends Omeka_Output_XmlAbstract
 {
     /**
      * Create a node repesenting a File record.
