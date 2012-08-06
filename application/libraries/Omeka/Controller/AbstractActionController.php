@@ -11,7 +11,7 @@
  *
  * @package Omeka
  */
-abstract class Omeka_Controller_Action extends Zend_Controller_Action
+abstract class Omeka_Controller_AbstractActionController extends Zend_Controller_Action
 {
     /**
      * The number of records to browse per page.
@@ -63,7 +63,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
     /**
      * Forward to the 'browse' action
      *
-     * @see Omeka_Controller_Action::browseAction()
+     * @see Omeka_Controller_AbstractActionController::browseAction()
      * @return void
      */
     public function indexAction()

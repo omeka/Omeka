@@ -16,7 +16,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class FilesController extends Omeka_Controller_Action
+class FilesController extends Omeka_Controller_AbstractActionController
 {
     public $contexts = array(
         'show' => array('omeka-xml', 'omeka-json')

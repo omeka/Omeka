@@ -14,7 +14,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class SettingsController extends Omeka_Controller_Action
+class SettingsController extends Omeka_Controller_AbstractActionController
 {    
     const DEFAULT_TAG_DELIMITER = ',';
     const DEFAULT_FULLSIZE_CONSTRAINT = 800;

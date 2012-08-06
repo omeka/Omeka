@@ -17,7 +17,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class IndexController extends Omeka_Controller_Action
+class IndexController extends Omeka_Controller_AbstractActionController
 {
     public function indexAction()
     {

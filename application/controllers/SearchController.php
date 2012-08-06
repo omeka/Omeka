@@ -1,5 +1,5 @@
 <?php
-class SearchController extends Omeka_Controller_Action
+class SearchController extends Omeka_Controller_AbstractActionController
 {
     public function indexAction()
     {

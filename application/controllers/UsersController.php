@@ -14,7 +14,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class UsersController extends Omeka_Controller_Action
+class UsersController extends Omeka_Controller_AbstractActionController
 {
     const INVALID_LOGIN_MESSAGE = 'Login information incorrect. Please try again.';
 

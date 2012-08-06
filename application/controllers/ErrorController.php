@@ -16,7 +16,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class ErrorController extends Omeka_Controller_Action
+class ErrorController extends Omeka_Controller_AbstractActionController
 {
     public function errorAction()
     {

@@ -14,7 +14,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class ThemesController extends Omeka_Controller_Action
+class ThemesController extends Omeka_Controller_AbstractActionController
 {
     public function browseAction()
     {

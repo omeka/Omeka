@@ -7,7 +7,7 @@
 
 /**
  * An action helper replacement for the database-oriented methods that were baked
- * into Omeka_Controller_Action in v1.x.
+ * into Omeka_Controller_AbstractActionController in v1.x.
  * 
  * @since 2.0
  * @package Omeka

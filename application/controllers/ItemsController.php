@@ -5,7 +5,7 @@
  * @package Omeka
  * @subpackage Controllers
  * @author CHNM
- * @see Omeka_Controller_Action
+ * @see Omeka_Controller_AbstractActionController
  * @access private
  */
 
@@ -15,7 +15,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class ItemsController extends Omeka_Controller_Action
+class ItemsController extends Omeka_Controller_AbstractActionController
 {
     public $contexts = array(
             'browse' => array('json', 'dcmes-xml', 'rss2', 'omeka-xml', 'omeka-json', 'atom'),

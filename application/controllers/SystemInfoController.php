@@ -14,7 +14,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2011
  */
-class SystemInfoController extends Omeka_Controller_Action
+class SystemInfoController extends Omeka_Controller_AbstractActionController
 {
     public function preDispatch()
     {
