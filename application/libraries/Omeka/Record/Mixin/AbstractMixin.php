@@ -26,7 +26,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-abstract class Omeka_Record_Mixin
+abstract class Omeka_Record_Mixin_AbstractMixin
 {
     /**
      * Underlying record object.

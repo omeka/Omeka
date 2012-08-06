@@ -11,7 +11,7 @@
  * @package Omeka
  * @subpackage Mixins
  */
-class Mixin_Timestamp extends Omeka_Record_Mixin
+class Mixin_Timestamp extends Omeka_Record_Mixin_AbstractMixin
 {
     const DATE_FORMAT = 'Y-m-d h:i:s';
 

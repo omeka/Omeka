@@ -8,11 +8,11 @@
  * can add search text--for example, after ElementText.
  * 
  * This mixin leverages the Omeka_Record_AbstractRecord::afterSave() and 
- * Omeka_Record_Mixin::afterSave() callbacks, so note their order of execution. 
- * Records that initialize ActsAsElementText will automatically add their 
- * element texts to the search text.
+ * Omeka_Record_Mixin_AbstractMixin::afterSave() callbacks, so note their order 
+ * of execution. Records that initialize ActsAsElementText will automatically 
+ * add their element texts to the search text.
  */
-class Mixin_Search extends Omeka_Record_Mixin
+class Mixin_Search extends Omeka_Record_Mixin_AbstractMixin
 {
     protected $_text;
     protected $_title;

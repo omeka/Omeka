@@ -422,7 +422,7 @@ class DummyRecord extends Omeka_Record_AbstractRecord
     }
 }
 
-class DummyMixin extends Omeka_Record_Mixin
+class DummyMixin extends Omeka_Record_Mixin_AbstractMixin
 {
     public function dummyMixinMethod()
     {

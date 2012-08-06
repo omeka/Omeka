@@ -41,13 +41,13 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
     protected $_cache = array();
     
     /**
-     * Set of Omeka_Record_Mixin objects that are designed to extend
-     * the behavior of Omeka_Record_AbstractRecord implementations.
+     * Set of Omeka_Record_Mixin_AbstractMixin objects that are designed to 
+     * extend the behavior of Omeka_Record_AbstractRecord implementations.
      *
      * Examples include {@link Taggable}, {@link Relatable},
      * {@link ActsAsElementText}, etc.
      *
-     * @see Omeka_Record_Mixin
+     * @see Omeka_Record_Mixin_AbstractMixin
      * @var array
      */
     protected $_mixins = array();
@@ -196,7 +196,8 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
     }
     
     /**
-     * Delegate unknown method calls to Omeka_Record_Mixin instances.
+     * Delegate unknown method calls to Omeka_Record_Mixin_AbstractMixin 
+     * instances.
      * 
      * @see Omeka_Record_AbstractRecord::delegateToMixins()
      * @param string $m Method name.

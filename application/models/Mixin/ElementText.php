@@ -15,7 +15,7 @@
  * @subpackage Mixins
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Mixin_ElementText extends Omeka_Record_Mixin
+class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
 {
     /**
      * ElementText records stored in the order they were retrieved from the database.
