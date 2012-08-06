@@ -7,13 +7,13 @@
 
 /**
  * Wrapper that allows Omeka_Job to work with the existing Process/
- * Omeka_Job_ProcessDispatcher API. Jobs are passed in as the 'job' argument, 
+ * Omeka_Job_Process_Dispatcher API. Jobs are passed in as the 'job' argument, 
  * and this wrapper handles decoding and executing the job.
  *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
  */
-class Omeka_Job_ProcessWrapper extends Omeka_Job_ProcessAbstract
+class Omeka_Job_Process_Wrapper extends Omeka_Job_Process_AbstractProcess
 {
     private function _getJob($str)
     {

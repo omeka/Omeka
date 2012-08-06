@@ -23,18 +23,18 @@ class Omeka_Job_Dispatcher_Adapter_BackgroundProcess extends
      * is CLI), so if a process triggers its own subprocesses, those will be 
      * listed as belonging to no user (ID = 0).       
      *
-     * @see Omeka_Job_ProcessWrapper
+     * @see Omeka_Job_Process_Wrapper
      */
     public function send($encodedJob, array $metadata)
     {
-        $this->getProcessDispatcher()->startProcess('Omeka_Job_ProcessWrapper', 
+        $this->getProcessDispatcher()->startProcess('Omeka_Job_Process_Wrapper', 
             $metadata['createdBy'], array('job' => $encodedJob));
     }
 
     /**
      * For test purposes.
      */
-    public function setProcessDispatcher(Omeka_Job_ProcessDispatcher $dispatcher)
+    public function setProcessDispatcher(Omeka_Job_Process_Dispatcher $dispatcher)
     {
         $this->_processDispatcher = $dispatcher;
     }
@@ -42,7 +42,7 @@ class Omeka_Job_Dispatcher_Adapter_BackgroundProcess extends
     public function getProcessDispatcher()
     {
         if (!$this->_processDispatcher) {
-            $this->_processDispatcher = new Omeka_Job_ProcessDispatcher;
+            $this->_processDispatcher = new Omeka_Job_Process_Dispatcher;
         }
         return $this->_processDispatcher;
     }
