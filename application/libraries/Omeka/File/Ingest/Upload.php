@@ -15,7 +15,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  */
-class Omeka_File_Ingest_Upload extends Omeka_File_Ingest_Abstract
+class Omeka_File_Ingest_Upload extends Omeka_File_Ingest_AbstractIngest
 {
     /**
      * @var Zend_File_Transfer_Adapter_Http
@@ -44,8 +44,8 @@ class Omeka_File_Ingest_Upload extends Omeka_File_Ingest_Abstract
     }
     
     /**
-     * In addition to the default options available for Omeka_File_Ingest_Abstract,
-     * this understands the following options:
+     * In addition to the default options available for 
+     * Omeka_File_Ingest_AbstractIngest, this understands the following options:
      * - 'ignoreNoFile' => boolean False by default.  Whether or not to ignore 
      * - validation errors that occur when an uploaded file is missing.  This 
      * - may occur when a file input is left empty on a form.  
@@ -129,7 +129,7 @@ class Omeka_File_Ingest_Upload extends Omeka_File_Ingest_Abstract
      * Use the Zend Framework adapter to handle validation instead of the 
      * built-in _validateFile() method.
      * 
-     * @see Omeka_File_Ingest_Abstract::_validateFile()
+     * @see Omeka_File_Ingest_AbstractIngest::_validateFile()
      * @param Zend_Validate_Interface $validator
      * @return void
      */

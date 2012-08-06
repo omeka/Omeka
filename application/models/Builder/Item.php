@@ -136,11 +136,11 @@ class Builder_Item extends Omeka_Record_Builder_AbstractBuilder
     /**
      * Add files to an item.
      * 
-     * @param string|Omeka_File_Ingest_Abstract $transferStrategy
+     * @param string|Omeka_File_Ingest_AbstractIngest $transferStrategy
      * This can either be one of the following strings denoting built-in transfer
      * methods: 
      *      'Upload', 'Filesystem', 'Url'
-     * Or it could be an implemented Omeka_File_Ingest_Abstract class.
+     * Or it could be an implemented Omeka_File_Ingest_AbstractIngest class.
      * 
      * @param string|array $files This can be a single string, an array of strings,
      * or an array of arrays, depending on the parameters that are needed by the 
@@ -184,14 +184,16 @@ class Builder_Item extends Omeka_Record_Builder_AbstractBuilder
      */
     public function addFiles($transferStrategy, $files, array $options = array())
     {        
-        if ($transferStrategy instanceof Omeka_File_Ingest_Abstract) {
+        if ($transferStrategy instanceof Omeka_File_Ingest_AbstractIngest) {
             $ingester = $transferStrategy;
             $ingester->setItem($this->_record);
             $ingester->setOptions($options);
         } else {
-            $ingester = Omeka_File_Ingest_Abstract::factory($transferStrategy,
-                                                            $this->_record,
-                                                            $options);
+            $ingester = Omeka_File_Ingest_AbstractIngest::factory(
+                $transferStrategy,
+                $this->_record,
+                $options
+            );
         }
 
         $this->_addIngestValidators($ingester);
@@ -218,10 +220,10 @@ class Builder_Item extends Omeka_Record_Builder_AbstractBuilder
      * Plugins can add/remove/modify validators via the 'file_ingest_validators'
      * filter.
      * 
-     * @param Omeka_File_Ingest_Abstract $ingester
+     * @param Omeka_File_Ingest_AbstractIngest $ingester
      * @return void
      */
-    protected function _addIngestValidators(Omeka_File_Ingest_Abstract $ingester)
+    protected function _addIngestValidators(Omeka_File_Ingest_AbstractIngest $ingester)
     {    
         $validators = get_option(File::DISABLE_DEFAULT_VALIDATION_OPTION) 
                     ? array()

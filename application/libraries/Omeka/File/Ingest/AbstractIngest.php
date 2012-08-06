@@ -23,7 +23,7 @@
  * Typical usage is via the factory() method:
  * 
  * <code>
- * $ingest = Omeka_File_Ingest_Abstract::factory('Url', $item);
+ * $ingest = Omeka_File_Ingest_AbstractIngest::factory('Url', $item);
  * $fileRecords = $ingest->ingest('http://www.example.com');
  * </code>
  *
@@ -33,7 +33,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  */
-abstract class Omeka_File_Ingest_Abstract
+abstract class Omeka_File_Ingest_AbstractIngest
 {
     /**
      * @var Item
@@ -51,7 +51,7 @@ abstract class Omeka_File_Ingest_Abstract
      * Set of validators implementing Zend_Validate_Interface.
      * 
      * @var array
-     * @see Omeka_File_Ingest_Abstract::addValidator()
+     * @see Omeka_File_Ingest_AbstractIngest::addValidator()
      */
     private $_validators = array();
 
@@ -72,7 +72,7 @@ abstract class Omeka_File_Ingest_Abstract
      * @param string $adapterName Ingest adapter.
      * @param Item $item
      * @param array $options
-     * @return Omeka_File_Ingest_Abstract
+     * @return Omeka_File_Ingest_AbstractIngest
      */
     final static public function factory($adapterName, $item, $options = array())
     {
@@ -267,7 +267,7 @@ abstract class Omeka_File_Ingest_Abstract
      * This will generate an archival filename in order to prevent naming 
      * conflicts between ingested files.
      * 
-     * This should be used as necessary by Omeka_File_Ingest_Abstract 
+     * This should be used as necessary by Omeka_File_Ingest_AbstractIngest 
      * implementations in order to determine where to transfer any given file.
      * 
      * @param string $fromFilename The filename from which to derive the 
@@ -295,7 +295,7 @@ abstract class Omeka_File_Ingest_Abstract
      * Emulates the way Zend Framework adds validators.
      * 
      * @param Zend_Validate_Interface $validator
-     * @return Omeka_File_Ingest_Abstract
+     * @return Omeka_File_Ingest_AbstractIngest
      */
     public function addValidator(Zend_Validate_Interface $validator)
     {        
@@ -307,8 +307,8 @@ abstract class Omeka_File_Ingest_Abstract
     /**
      * Validate a file that has been transferred to Omeka.
      * 
-     * Implementations of Omeka_File_Ingest_Abstract should use this to validate 
-     * the uploaded file based on user-defined security criteria.
+     * Implementations of Omeka_File_Ingest_AbstractIngest should use this to 
+     * validate the uploaded file based on user-defined security criteria.
      * 
      * Important: $fileInfo may need to contain the following keys in order to work
      * with particular Zend_Validate_File_* validation classes:

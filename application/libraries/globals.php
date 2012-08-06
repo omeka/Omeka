@@ -490,7 +490,7 @@ function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata
  * @uses Builder_Item::addFiles() See for information on arguments and notes
  * on usage.
  * @param Item|integer $item
- * @param string|Omeka_File_Ingest_Abstract $transferStrategy
+ * @param string|Omeka_File_Ingest_AbstractIngest $transferStrategy
  * @param array $files
  * @param array $options Optional
  * @return array
