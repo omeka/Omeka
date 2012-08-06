@@ -13,7 +13,7 @@
  *
  * @package Omeka
  */
-abstract class Omeka_Plugin_Abstract
+abstract class Omeka_Plugin_AbstractPlugin
 {
     /**
      * Database object accessible to plugin authors.
