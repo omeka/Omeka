@@ -5,7 +5,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2012
  */
-class shortenDcDescriptions extends Omeka_Db_Migration
+class shortenDcDescriptions extends Omeka_Db_Migration_AbstractMigration
 {
     private $_dcElements = array(
         array('name' => 'Contributor', 'description' => 'An entity responsible for making contributions to the resource.'), 

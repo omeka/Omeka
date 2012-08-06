@@ -5,7 +5,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2011
  */
-class addFileOrder extends Omeka_Db_Migration
+class addFileOrder extends Omeka_Db_Migration_AbstractMigration
 {
     public function up()
     {

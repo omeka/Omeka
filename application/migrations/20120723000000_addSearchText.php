@@ -1,5 +1,5 @@
 <?php
-class addSearchText extends Omeka_Db_Migration
+class addSearchText extends Omeka_Db_Migration_AbstractMigration
 {
     public function up()
     {

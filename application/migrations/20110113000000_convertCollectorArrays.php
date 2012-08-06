@@ -12,7 +12,7 @@
  * @package Omeka
  * @subpackage Migrations
  */
-class convertCollectorArrays extends Omeka_Db_Migration
+class convertCollectorArrays extends Omeka_Db_Migration_AbstractMigration
 {
     public function up()
     {

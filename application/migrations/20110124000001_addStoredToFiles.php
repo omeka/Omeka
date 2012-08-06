@@ -1,6 +1,6 @@
 <?php
 
-class addStoredToFiles extends Omeka_Db_Migration
+class addStoredToFiles extends Omeka_Db_Migration_AbstractMigration
 {
     public function up()
     {

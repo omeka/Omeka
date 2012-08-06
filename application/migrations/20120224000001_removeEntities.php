@@ -5,7 +5,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2011
  */
-class removeEntities extends Omeka_Db_Migration
+class removeEntities extends Omeka_Db_Migration_AbstractMigration
 {
     public function up()
     {

@@ -236,7 +236,7 @@ class Omeka_Db_Migration_Manager
      * with it.
      *
      * @param string $filename Migration script filename.
-     * @return Omeka_Db_Migration
+     * @return Omeka_Db_Migration_AbstractMigration
      */
     private function _loadMigration($filename)
     {

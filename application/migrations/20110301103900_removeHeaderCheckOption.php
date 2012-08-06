@@ -12,7 +12,7 @@
  * @package Omeka
  * @subpackage Migrations
  */
-class removeHeaderCheckOption extends Omeka_Db_Migration
+class removeHeaderCheckOption extends Omeka_Db_Migration_AbstractMigration
 {
     public function up()
     {

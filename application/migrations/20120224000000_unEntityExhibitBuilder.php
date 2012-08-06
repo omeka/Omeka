@@ -5,7 +5,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2011
  */
-class unEntityExhibitBuilder extends Omeka_Db_Migration
+class unEntityExhibitBuilder extends Omeka_Db_Migration_AbstractMigration
 {
     public function up()
     {

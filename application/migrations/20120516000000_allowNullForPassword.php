@@ -11,7 +11,7 @@
  *
  * @package Omeka
  */
-class allowNullForPassword extends Omeka_Db_Migration
+class allowNullForPassword extends Omeka_Db_Migration_AbstractMigration
 {
     public function up()
     {
