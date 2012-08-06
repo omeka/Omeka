@@ -14,7 +14,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Output_ItemOmekaXml extends Omeka_Output_XmlAbstract
+class Output_ItemOmekaXml extends Omeka_Output_OmekaXml_AbstractOmekaXml
 {
     /**
      * Create a node representing an Item record.

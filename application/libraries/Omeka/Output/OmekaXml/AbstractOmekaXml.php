@@ -14,7 +14,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-abstract class Omeka_Output_XmlAbstract
+abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
 {
     /**
      * XML Schema instance namespace URI.
