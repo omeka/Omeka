@@ -14,7 +14,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  */
-class Omeka_File_Ingest_Filesystem extends Omeka_File_Ingest_Source
+class Omeka_File_Ingest_Filesystem extends Omeka_File_Ingest_AbstractSourceIngest
 {
     /**
      * Set of info about the file to be transferred.

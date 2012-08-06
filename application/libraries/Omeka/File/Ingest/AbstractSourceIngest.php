@@ -22,7 +22,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  */
-abstract class Omeka_File_Ingest_Source extends Omeka_File_Ingest_AbstractIngest
+abstract class Omeka_File_Ingest_AbstractSourceIngest extends Omeka_File_Ingest_AbstractIngest
 {
     /**
      * The 'source' key of the file info is parsed out by default.

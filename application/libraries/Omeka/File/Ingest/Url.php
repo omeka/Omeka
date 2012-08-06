@@ -13,7 +13,7 @@
  * @access private
  * @package Omeka
  */
-class Omeka_File_Ingest_Url extends Omeka_File_Ingest_Source
+class Omeka_File_Ingest_Url extends Omeka_File_Ingest_AbstractSourceIngest
 {
     /**
      * Return the original filename.

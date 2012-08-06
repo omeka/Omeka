@@ -325,7 +325,8 @@ abstract class Omeka_File_Ingest_AbstractIngest
      * @internal These required keys may be derived from existing data if 
      * necessary, rather than forcing the end user to include them in the array 
      * of file info that is passed to the ingest script.  See 
-     * Omeka_File_Ingest_Source::_addZendValidatorAttributes() for more info.
+     * Omeka_File_Ingest_AbstractSourceIngest::_addZendValidatorAttributes() for 
+     * more info.
      * 
      * @throws Omeka_File_Ingest_InvalidException
      * @param string $filePath Absolute path to the file.  The file should 
