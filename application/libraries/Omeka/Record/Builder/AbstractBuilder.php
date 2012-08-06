@@ -14,7 +14,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  */
-abstract class Omeka_Record_Builder
+abstract class Omeka_Record_Builder_AbstractBuilder
 {    
     /**
      * Class of record that the builder will create.

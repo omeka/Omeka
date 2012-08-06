@@ -24,7 +24,7 @@ class Omeka_Record_BuilderTest extends PHPUnit_Framework_TestCase
     public function testConstructor()
     {
         $builder = new DummyRecordBuilder($this->db);
-        $this->assertThat($builder, $this->isInstanceOf('Omeka_Record_Builder'));
+        $this->assertThat($builder, $this->isInstanceOf('Omeka_Record_Builder_AbstractBuilder'));
     }
         
     public function testSetRecordMetadata()
@@ -127,7 +127,7 @@ class Omeka_Record_BuilderTest extends PHPUnit_Framework_TestCase
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class DummyRecordBuilder extends Omeka_Record_Builder
+class DummyRecordBuilder extends Omeka_Record_Builder_AbstractBuilder
 {
     protected $_recordClass = 'DummyRecordBuilderRecord';
     protected $_settableProperties = array('description');

@@ -12,7 +12,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
  */
-class Builder_Item extends Omeka_Record_Builder
+class Builder_Item extends Omeka_Record_Builder_AbstractBuilder
 {
     const TAGS = 'tags';
     const FILES = 'files';

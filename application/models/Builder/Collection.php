@@ -16,7 +16,7 @@
  * @subpackage Models
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
  */
-class Builder_Collection extends Omeka_Record_Builder
+class Builder_Collection extends Omeka_Record_Builder_AbstractBuilder
 {
     protected $_settableProperties = array(
         'name', 

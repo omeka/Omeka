@@ -7,7 +7,7 @@
  
 /**
  * Exception thrown when there is an error creating a Record using
- * {@link Omeka_Record_Builder}.
+ * {@link Omeka_Record_Builder_AbstractBuilder}.
  *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
