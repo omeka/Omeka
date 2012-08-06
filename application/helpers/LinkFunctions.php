@@ -14,9 +14,9 @@
  * @since 0.10 No longer prepends the word 'View' to the text of the link.  Instead
  * 'View' is the default text.
  *
- * @param Omeka_Record|string $record The name of the controller to use for the
- * link.  If a record instance is passed, then it inflects the name of the
- * controller from the record class.
+ * @param Omeka_Record_AbstractRecord|string $record The name of the controller 
+ * to use for the link.  If a record instance is passed, then it inflects the 
+ * name of the controller from the record class.
  * @param string $action The action to use for the link (optional)
  * @param string $text The text to put in the link.  Default is 'View'.
  * @param array $props Attributes for the <a> tag
@@ -26,7 +26,7 @@
 function link_to($record, $action=null, $text=null, $props = array(), $queryParams=array())
 {
     // If we're linking directly to a record, use the URI for that record.
-    if($record instanceof Omeka_Record) {
+    if($record instanceof Omeka_Record_AbstractRecord) {
         $url = record_uri($record, $action);
     }
     else {

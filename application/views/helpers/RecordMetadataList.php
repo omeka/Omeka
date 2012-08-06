@@ -20,7 +20,7 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
 
     /**
      * The record being printed.
-     * @var Omeka_Record
+     * @var Omeka_Record_AbstractRecord
      */
     protected $_record;
 
@@ -55,7 +55,7 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
     /**
      * Get the record metadata list.
      *
-     * @param Omeka_Record $record Record to retrieve metadata from.
+     * @param Omeka_Record_AbstractRecord $record Record to retrieve metadata from.
      * @param array $options
      *  Available options:
      *  - show_empty_elements' => bool|string Whether to show elements that
@@ -66,7 +66,7 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
      * @since 1.0 Added 'show_element_sets' and 'return_type' options.
      * @return string|array
      */
-    public function recordMetadataList(Omeka_Record $record, array $options = array())
+    public function recordMetadataList(Omeka_Record_AbstractRecord $record, array $options = array())
     {
         $this->_record = $record;
         $this->_setOptions($options);
@@ -142,7 +142,7 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
     /**
      * Return a formatted version of all the texts for the requested element.
      *
-     * @param Omeka_Record $record
+     * @param Omeka_Record_AbstractRecord $record
      * @param array $metadata
      * @return array
      */

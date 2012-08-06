@@ -25,7 +25,7 @@ class Mixin_Timestamp extends Omeka_Record_Mixin
      * Setting either of the column parameters to null will skip updating that
      * timestamp. The default column names are 'updated' and 'added'.
      *
-     * @param Omeka_Record $record
+     * @param Omeka_Record_AbstractRecord $record
      * @param string $addedColumn Name of the column holding the "added" timestamp.
      * @param string $updatedColumn Name of the column holding the "modified" timestamp.
      */

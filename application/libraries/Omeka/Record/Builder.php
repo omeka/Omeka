@@ -7,7 +7,7 @@
  */
 
 /**
- * Build or update an {@link Omeka_Record} as needed.
+ * Build or update an {@link Omeka_Record_AbstractRecord} as needed.
  *
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private
@@ -42,7 +42,7 @@ abstract class Omeka_Record_Builder
     /**
      * Record being built or updated.
      *
-     * @var Omeka_Record
+     * @var Omeka_Record_AbstractRecord
      */
     protected $_record;    
     
@@ -60,7 +60,7 @@ abstract class Omeka_Record_Builder
      * Build the actual record.  If the record already exists, update it as 
      * necessary.
      *
-     * @return Omeka_Record
+     * @return Omeka_Record_AbstractRecord
      */    
     public function build()
     {
@@ -99,17 +99,17 @@ abstract class Omeka_Record_Builder
     /**
      * Get the record that is being acted upon by the builder.
      * 
-     * When an Omeka_Record instance has been provided via setRecord(), that will
-     * be returned.  If a record ID has been provided, then the appropriate 
-     * record will be returned.
+     * When an Omeka_Record_AbstractRecord instance has been provided via 
+     * setRecord(), that will be returned.  If a record ID has been provided, 
+     * then the appropriate record will be returned.
      * 
-     * Otherwise, a new instance of Omeka_Record will be returned.
+     * Otherwise, a new instance of Omeka_Record_AbstractRecord will be returned.
      * 
-     * @return Omeka_Record
+     * @return Omeka_Record_AbstractRecord
      */
     public function getRecord()
     {        
-        if (!($this->_record instanceof Omeka_Record)) {
+        if (!($this->_record instanceof Omeka_Record_AbstractRecord)) {
             $this->setRecord($this->_record);
         }
         return $this->_record;
@@ -119,14 +119,14 @@ abstract class Omeka_Record_Builder
      * Set the record upon which this builder will act.
      * 
      * @see Omeka_Record_Builder::getRecord()
-     * @param Omeka_Record|integer|null $record
+     * @param Omeka_Record_AbstractRecord|integer|null $record
      * @return void
      */
     public function setRecord($record = null)
     {
         if ($record === null) {
             $this->_record = new $this->_recordClass($this->_db);        
-        } else if ($record instanceof Omeka_Record) {
+        } else if ($record instanceof Omeka_Record_AbstractRecord) {
             if (!($record instanceof $this->_recordClass)) {
                 throw new Omeka_Record_Builder_Exception("Incorrect record instance given.  Must be instance of '$this->_recordClass'.");
             }
@@ -137,7 +137,7 @@ abstract class Omeka_Record_Builder
                 throw new Omeka_Record_Builder_Exception("Could not find record with ID = " . $record);
             }
         } else {
-            throw new InvalidArgumentException("Argument passed to setRecord() must be Omeka_Record, integer, or null.");
+            throw new InvalidArgumentException("Argument passed to setRecord() must be Omeka_Record_AbstractRecord, integer, or null.");
         }
     }
     
@@ -148,7 +148,7 @@ abstract class Omeka_Record_Builder
      *
      * @return void
      */
-    protected function _beforeBuild(Omeka_Record $record)
+    protected function _beforeBuild(Omeka_Record_AbstractRecord $record)
     {}
     
     /**
@@ -159,14 +159,14 @@ abstract class Omeka_Record_Builder
      *
      * @return void
      */
-    protected function _afterBuild(Omeka_Record $record)
+    protected function _afterBuild(Omeka_Record_AbstractRecord $record)
     {}
         
     /**
      * Set the properties for the record, taking care to filter based on the 
      * $_settableProperties array.
      * 
-     * @param Omeka_Record $record
+     * @param Omeka_Record_AbstractRecord $record
      * @return void
      */
     private function _setRecordProperties($record)

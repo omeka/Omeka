@@ -79,9 +79,9 @@ class Mixin_ElementText extends Omeka_Record_Mixin
     private static $_elementsByRecordType = array();
     
     /**
-     * Omeka_Record callback for afterSave. Saves the ElementText records once
-     * the associated record is saved. Adds the record's element texts to the 
-     * search text.
+     * Omeka_Record_AbstractRecord callback for afterSave. Saves the ElementText 
+     * records once the associated record is saved. Adds the record's element 
+     * texts to the search text.
      */
     public function afterSave()
     {

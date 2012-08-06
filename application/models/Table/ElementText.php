@@ -37,10 +37,10 @@ class Table_ElementText extends Omeka_Db_Table
     /**
      * Find all ElementText records for a given database record (Item, File, etc).
      * 
-     * @param Omeka_Record
+     * @param Omeka_Record_AbstractRecord
      * @return array
      */
-    public function findByRecord(Omeka_Record $record)
+    public function findByRecord(Omeka_Record_AbstractRecord $record)
     {
         $select = $this->getSelectForRecord($record->id, get_class($record));
         return $this->fetchObjects($select);

@@ -100,7 +100,7 @@ function simple_search($buttonText = null, $formProperties=array('id'=>'simple-s
  *
  * @since 0.10
  * @param Element|array $element
- * @param Omeka_Record $record
+ * @param Omeka_Record_AbstractRecord $record
  * @param array $options Optional
  * @return string HTML
  */
@@ -124,7 +124,7 @@ function display_form_input_for_element($element, $record, $options = array())
  *
  * @since 0.10
  * @uses display_form_input_for_element()
- * @param Omeka_Record $record
+ * @param Omeka_Record_AbstractRecord $record
  * @param string $elementSetName The name of the element set.
  * @return string
  */
@@ -216,8 +216,9 @@ function button_to($action, $name = null, $value = null, $attribs = array(), $fo
  *
  * @since 1.3
  *
- * @param string|Omeka_Record $action Form action URI. If an Omeka_Record is
- *  passed, uses record_uri to form a link to the delete action for that record.
+ * @param string|Omeka_Record_AbstractRecord $action Form action URI. If an 
+ * Omeka_Record_AbstractRecord is passed, uses record_uri to form a link to the 
+ * delete action for that record.
  * @param string $name Name/id attribute for button.
  * @param string $value Button value.
  * @param array $attribs Other HTML attributes for button.
@@ -234,7 +235,7 @@ function delete_button($action = null, $name = null, $value = null, $attribs = a
     if (!isset($action)) {
         // If nothing is set at all, use the current route's delete action.
         $action = uri(array('action' => 'delete-confirm'));
-    } else if ($action instanceof Omeka_Record) {
+    } else if ($action instanceof Omeka_Record_AbstractRecord) {
         // If a record is given, use record_uri to get the action.
         $action = record_uri($action, 'delete-confirm');
     }

@@ -279,7 +279,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      * Returns the success message for adding a record.
      * Default is empty string. Subclasses should override it.
      *
-     * @param Omeka_Record $record
+     * @param Omeka_Record_AbstractRecord $record
      * @return string
      */
     protected function _getAddSuccessMessage($record) {return '';}
@@ -288,7 +288,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      * Returns the success message for editing a record.
      * Default is empty string. Subclasses should override it.
      *
-     * @param Omeka_Record $record
+     * @param Omeka_Record_AbstractRecord $record
      * @return string
      */
     protected function _getEditSuccessMessage($record) {return '';}
@@ -297,7 +297,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      * Returns the success message for deleting a record.
      * Default is empty string. Subclasses should override it.
      *
-     * @param Omeka_Record $record
+     * @param Omeka_Record_AbstractRecord $record
      * @return string
      */
     protected function _getDeleteSuccessMessage($record) {return '';}
@@ -305,7 +305,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
     /**
      * Returns the delete confirm message for deleting a record.
      *
-     * @param Omeka_Record $record
+     * @param Omeka_Record_AbstractRecord $record
      * @return string
      */
     protected function _getDeleteConfirmMessage($record) {return '';}
@@ -315,7 +315,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      *
      * The default is to reidrect to this controller's browse page.
      *
-     * @param Omeka_Record $record
+     * @param Omeka_Record_AbstractRecord $record
      */
     protected function _redirectAfterAdd($record)
     {
@@ -327,7 +327,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      *
      * The default is to redirect to this record's show page.
      *
-     * @param Omeka_Record $record
+     * @param Omeka_Record_AbstractRecord $record
      */
     protected function _redirectAfterEdit($record)
     {
@@ -339,7 +339,7 @@ abstract class Omeka_Controller_Action extends Zend_Controller_Action
      *
      * The default is to redirect to this controller's browse page.
      *
-     * @param Omeka_Record $record
+     * @param Omeka_Record_AbstractRecord $record
      */
     protected function _redirectAfterDelete($record)
     {

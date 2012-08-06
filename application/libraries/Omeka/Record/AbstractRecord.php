@@ -12,13 +12,13 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-abstract class Omeka_Record implements ArrayAccess
+abstract class Omeka_Record_AbstractRecord implements ArrayAccess
 {
     /**
      * Unique ID for the record.
      *
-     * All implementations of Omeka_Record must have a table containing an 'id'
-     * column, preferably as the primary key.
+     * All implementations of Omeka_Record_AbstractRecord must have a table 
+     * containing an 'id' column, preferably as the primary key.
      * @var integer
      */
     public $id;
@@ -35,14 +35,14 @@ abstract class Omeka_Record implements ArrayAccess
      * via the magic __get() syntax.
      *
      * @var array
-     * @see Omeka_Record::__get()
-     * @see Omeka_Record::_addToCache()
+     * @see Omeka_Record_AbstractRecord::__get()
+     * @see Omeka_Record_AbstractRecord::_addToCache()
      */
     protected $_cache = array();
     
     /**
      * Set of Omeka_Record_Mixin objects that are designed to extend
-     * the behavior of Omeka_Record implementations.
+     * the behavior of Omeka_Record_AbstractRecord implementations.
      *
      * Examples include {@link Taggable}, {@link Relatable},
      * {@link ActsAsElementText}, etc.
@@ -77,7 +77,7 @@ abstract class Omeka_Record implements ArrayAccess
      * The difference being, the former is cached so as to avoid multiple
      * trips to the database.
      * @var array
-     * @see Omeka_Record::__get()
+     * @see Omeka_Record_AbstractRecord::__get()
      */
     protected $_related = array();
     
@@ -139,8 +139,8 @@ abstract class Omeka_Record implements ArrayAccess
     /**
      * Subclass constructor behavior.
      *
-     * Subclasses of Omeka_Record can override this function to add behavior to
-     * the constructor without overriding __construct.
+     * Subclasses of Omeka_Record_AbstractRecord can override this function to 
+     * add behavior to the constructor without overriding __construct.
      *
      * @todo Should __construct() be declared final if this the preferred method?
      * @return void
@@ -162,9 +162,9 @@ abstract class Omeka_Record implements ArrayAccess
     /**
      * Retrieve database records that are associated with the current one.
      *
-     * @see Omeka_Record::$_related
-     * @uses Omeka_Record::_addToCache()
-     * @uses Omeka_Record::_getCached()
+     * @see Omeka_Record_AbstractRecord::$_related
+     * @uses Omeka_Record_AbstractRecord::_addToCache()
+     * @uses Omeka_Record_AbstractRecord::_getCached()
      * @param string $prop Related data to retrieve.
      * @return mixed
      */
@@ -198,7 +198,7 @@ abstract class Omeka_Record implements ArrayAccess
     /**
      * Delegate unknown method calls to Omeka_Record_Mixin instances.
      * 
-     * @see Omeka_Record::delegateToMixins()
+     * @see Omeka_Record_AbstractRecord::delegateToMixins()
      * @param string $m Method name.
      * @param array $a Method arguments.
      * @return mixed
@@ -211,9 +211,9 @@ abstract class Omeka_Record implements ArrayAccess
     /**
      * Initialize the mixins for a record. 
      * 
-     * Any Omeka_Record subclass that uses mixins should initialize them here, 
-     * since this is called on construction and when mixins need to be 
-     * reinitialized.
+     * Any Omeka_Record_AbstractRecord subclass that uses mixins should 
+     * initialize them here, since this is called on construction and when 
+     * mixins need to be reinitialized.
      */
     protected function _initializeMixins() {}
     
@@ -261,7 +261,7 @@ abstract class Omeka_Record implements ArrayAccess
      * Invoke all callbacks associated with a specific record event.
      * 
      * Callbacks execute in the following order:
-     *  - Omeka_Record hooks like Omeka_Record::afterDelete()
+     *  - Omeka_Record_AbstractRecord hooks like Omeka_Record_AbstractRecord::afterDelete()
      *  - Record mixin hooks like Taggable::afterSave()
      *  - Generic record plugin hooks like 'before_delete_record'
      *  - Specific record plugin hooks like 'before_delete_item'
@@ -369,8 +369,8 @@ abstract class Omeka_Record implements ArrayAccess
     /**
      * Determine whether or not the record is valid.
      * 
-     * @uses Omeka_Record::validate()
-     * @uses Omeka_Record::hasErrors()
+     * @uses Omeka_Record_AbstractRecord::validate()
+     * @uses Omeka_Record_AbstractRecord::hasErrors()
      * @return boolean
      */
     public function isValid()
@@ -424,14 +424,14 @@ abstract class Omeka_Record implements ArrayAccess
     }
     
     /**
-     * Combine errors from a different Omeka_Record instance with the errors
-     * already on this record.
+     * Combine errors from a different Omeka_Record_AbstractRecord instance with 
+     * the errors already on this record.
      *
      * @see Item::_validateElements()
-     * @param Omeka_Record $record
+     * @param Omeka_Record_AbstractRecord $record
      * @return void
      */
-    public function addErrorsFrom(Omeka_Record $record)
+    public function addErrorsFrom(Omeka_Record_AbstractRecord $record)
     {
         $errors = $record->getErrors();
         foreach ($errors->get() as $field => $error) {
@@ -845,7 +845,7 @@ abstract class Omeka_Record implements ArrayAccess
      * Template callback that executes after the form data has been saved to the
      * record.
      * 
-     * @see Omeka_Record::beforeSaveForm()
+     * @see Omeka_Record_AbstractRecord::beforeSaveForm()
      * @param ArrayObject $post
      * @return void
      */

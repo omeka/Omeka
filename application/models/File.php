@@ -23,7 +23,7 @@ if (!function_exists('mime_content_type')) {
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class File extends Omeka_Record implements Zend_Acl_Resource_Interface 
+class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Interface 
 { 
     const DISABLE_DEFAULT_VALIDATION_OPTION = 'disable_default_file_validation';
     const DERIVATIVE_EXT = 'jpg';

@@ -18,7 +18,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class MimeElementSetLookup extends Omeka_Record
+class MimeElementSetLookup extends Omeka_Record_AbstractRecord
 {
     public $element_set_id;
     public $mime;

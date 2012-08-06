@@ -21,9 +21,9 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
     protected $_element;
 
     /**
-     * Omeka_Record to display the input for.
+     * Omeka_Record_AbstractRecord to display the input for.
      *
-     * @var Omeka_Record
+     * @var Omeka_Record_AbstractRecord
      */
     protected $_record;
 
@@ -31,13 +31,14 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
      * Display one form input for an Element.
      *
      * @param Element $element The Element to display the input for.
-     * @param Omeka_Record $record The record to display the input for.
+     * @param Omeka_Record_AbstractRecord $record The record to display the 
+     * input for.
      * @param int $index The index of this input. (starting at zero).
      * @param string $value The default value of this input.
      * @param bool $isHtml Whether this input's value is HTML.
      * @return string
      */
-    public function elementInput(Element $element, Omeka_Record $record, $index = 0, $value = '', $isHtml = false)
+    public function elementInput(Element $element, Omeka_Record_AbstractRecord $record, $index = 0, $value = '', $isHtml = false)
     {
         $this->_element = $element;
         $this->_record = $record;

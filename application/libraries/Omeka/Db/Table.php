@@ -204,7 +204,7 @@ class Omeka_Db_Table
      * Retrieve a single record given an ID.
      *
      * @param integer $id
-     * @return Omeka_Record|false
+     * @return Omeka_Record_AbstractRecord|false
      */
     public function find($id)
     {        
@@ -218,7 +218,7 @@ class Omeka_Db_Table
      * WARNING: This will be memory intensive and is thus not recommended for 
      * large data sets.
      *
-     * @return array Array of {@link Omeka_Record}s.
+     * @return array Array of {@link Omeka_Record_AbstractRecord}s.
      */
     public function findAll()
     {
@@ -396,7 +396,7 @@ class Omeka_Db_Table
      * clause.  Used to prevent security flaws.
      * @param boolean $findOne optional Whether or not to retrieve a single
      * record or the whole set (retrieve all by default).
-     * @return array|Omeka_Record|false
+     * @return array|Omeka_Record_AbstractRecord|false
      */
     public function findBySql($sqlWhereClause, array $params=array(), $findOne=false)
     {
@@ -468,8 +468,8 @@ class Omeka_Db_Table
      * @param string $sql This could be either a string or any object that can
      * be cast to a string (commonly Omeka_Db_Select).
      * @param array $params Set of parameters to bind to the SQL statement.
-     * @return array|null Set of Omeka_Record instances, or null if none can be
-     * found.
+     * @return array|null Set of Omeka_Record_AbstractRecord instances, or null 
+     * if none can be found.
      */
     public function fetchObjects($sql, $params=array())
     {        
@@ -491,7 +491,7 @@ class Omeka_Db_Table
      * @see Omeka_Db_Table::fetchObjects()
      * @param string $sql
      * @param string $params Parameters to substitute into SQL query.
-     * @return Omeka_Record
+     * @return Omeka_Record_AbstractRecord
      */
     public function fetchObject($sql, array $params=array())
     {
@@ -504,7 +504,7 @@ class Omeka_Db_Table
      * 
      * @todo FIXME: Should follow Zend coding standards for protected methods.
      * @param array $data A keyed array representing a row from the database.
-     * @return Omeka_Record
+     * @return Omeka_Record_AbstractRecord
      */
     protected function recordFromData(array $data)
     {

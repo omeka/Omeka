@@ -33,7 +33,7 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
     
     /**
      * This class' contextual record(s).
-     * @var array|Omeka_Record
+     * @var array|Omeka_Record_AbstractRecord
      */
     protected $_record;
 
@@ -63,7 +63,7 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
     abstract protected function _buildNode();
     
     /**
-     * @param Omeka_Record|array $record
+     * @param Omeka_Record_AbstractRecord|array $record
      * @param string $context The context of this DOM document.
      */
     public function __construct($record, $context)
@@ -158,11 +158,12 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
      * Get all element sets, elements, and element texts associated with the 
      * provided record.
      * 
-     * @param Omeka_Record $record The record from which to extract metadata.
+     * @param Omeka_Record_AbstractRecord $record The record from which to 
+     * extract metadata.
      * @param bool $getItemType Whether to get the item type metadata.
      * @return stdClass A list of element sets or an item type.
      */
-    protected function _getElemetSetsByElementTexts(Omeka_Record $record, $getItemType = false)
+    protected function _getElemetSetsByElementTexts(Omeka_Record_AbstractRecord $record, $getItemType = false)
     {
         $elementSets = array();
         $itemType = array();
@@ -206,12 +207,13 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
     /**
      * Build an elementSetContainer element in a record (item or file) context.
      * 
-     * @param Omeka_Record $record The record from which to build element sets.
+     * @param Omeka_Record_AbstractRecord $record The record from which to build 
+     * element sets.
      * @param DOMElement $parentElement The element set container will append to 
      * this element.
      * @return void|null
      */
-    protected function _buildElementSetContainerForRecord(Omeka_Record $record, DOMElement $parentElement)
+    protected function _buildElementSetContainerForRecord(Omeka_Record_AbstractRecord $record, DOMElement $parentElement)
     {
         $elementSets = $this->_getElemetSetsByElementTexts($record);
         

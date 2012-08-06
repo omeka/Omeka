@@ -12,9 +12,8 @@
  * @subpackage Models
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class User extends Omeka_Record implements Zend_Acl_Resource_Interface, 
-                                           Zend_Acl_Role_Interface
-{
+class User extends Omeka_Record_AbstractRecord 
+    implements Zend_Acl_Resource_Interface, Zend_Acl_Role_Interface {
 
     public $username;
     

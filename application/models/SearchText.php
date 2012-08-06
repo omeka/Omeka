@@ -1,5 +1,5 @@
 <?php
-class SearchText extends Omeka_Record
+class SearchText extends Omeka_Record_AbstractRecord
 {
     public $record_name;
     public $record_id;

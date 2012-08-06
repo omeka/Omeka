@@ -10,7 +10,7 @@
  * to having this class is that casting it to a string will convert the errors
  * into a nicely formatted, human-readable string.
  *
- * @see Omeka_Record
+ * @see Omeka_Record_AbstractRecord
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
@@ -61,7 +61,7 @@ class Omeka_Validator_Errors extends ArrayObject
     /**
      * Get the array of errors.
      *
-     * @see Omeka_Record::addErrorsFrom()
+     * @see Omeka_Record_AbstractRecord::addErrorsFrom()
      * @return array
      */
     public function get()

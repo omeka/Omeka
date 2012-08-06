@@ -3,7 +3,7 @@ class Job_SearchTextIndex extends Omeka_JobAbstract
 {
     /**
      * List of all class names in the application/models directory that extend 
-     * Omeka_Record and implement the search mixin.
+     * Omeka_Record_AbstractRecord and implement the search mixin.
      * @var array
      */
     protected $_searchRecords = array('Item', 'File', 'Collection');
@@ -21,7 +21,7 @@ class Job_SearchTextIndex extends Omeka_JobAbstract
                 continue;
             }
             $record = new $searchRecord;
-            if (!($record instanceof Omeka_Record)) {
+            if (!($record instanceof Omeka_Record_AbstractRecord)) {
                 // The class is not a valid record.
                 continue;
             }

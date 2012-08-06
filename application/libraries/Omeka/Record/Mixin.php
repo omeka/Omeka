@@ -6,10 +6,11 @@
  */
 
 /**
- * Represents a kind of mixin for Omeka_Record implementations.
+ * Represents a kind of mixin for Omeka_Record_AbstractRecord implementations.
  *
  * Any methods declared for an implementation of this class can be called
- * transparently by an Omeka_Record object that uses one of these modules.
+ * transparently by an Omeka_Record_AbstractRecord object that uses one of these 
+ * modules.
  *
  * For instance, the Item model does not have an addTags() method, but the
  * Taggable class does.  Since Item declares Taggable as one of its modules,
@@ -21,7 +22,7 @@
  *
  * @see Taggable
  * @see Orderable
- * @see Omeka_Record
+ * @see Omeka_Record_AbstractRecord
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
@@ -30,7 +31,7 @@ abstract class Omeka_Record_Mixin
     /**
      * Underlying record object.
      *
-     * @var Omeka_Record
+     * @var Omeka_Record_AbstractRecord
      */
     protected $_record;
 
@@ -39,7 +40,7 @@ abstract class Omeka_Record_Mixin
      * 
      * Store the underlying record for use in the mixin.
      *
-     * @param Omeka_Record $record
+     * @param Omeka_Record_AbstractRecord $record
      */
     public function __construct($record)
     {
@@ -47,10 +48,10 @@ abstract class Omeka_Record_Mixin
     }
 
     /**#@+
-     * Callback automatically called by Omeka_Record.
+     * Callback automatically called by Omeka_Record_AbstractRecord.
      *
-     * See the corresponding {@link Omeka_Record} method for definitions of
-     * call times.
+     * See the corresponding {@link Omeka_Record_AbstractRecord} method for 
+     * definitions of call times.
      *
      * @return void
      */

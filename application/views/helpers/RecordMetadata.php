@@ -22,7 +22,7 @@ class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
     const DELIMITER = 'delimiter';
 
     /**
-     * @var Omeka_Record
+     * @var Omeka_Record_AbstractRecord
      */
     protected $_record;
 
@@ -34,8 +34,8 @@ class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
     /**
      * Retrieve a specific piece of a record's metadata for display.
      *
-     * @param Omeka_Record $record Database record representing the item from
-     * which to retrieve field data.
+     * @param Omeka_Record_AbstractRecord $record Database record representing 
+     * the item from which to retrieve field data.
      * @param string|array $metadata The metadata field to retrieve.
      *  If a string, refers to a property of the record itself.
      *  If an array, refers to an Element: the first entry is the set name,
@@ -58,7 +58,7 @@ class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
      * @return string|array|null Null if field does not exist for item. Array
      * if certain options are passed.  String otherwise.
      */
-    public function recordMetadata(Omeka_Record $record, $metadata, $options = array())
+    public function recordMetadata(Omeka_Record_AbstractRecord $record, $metadata, $options = array())
     {
         $this->_record = $record;
         $this->_metadata = $metadata;
@@ -127,7 +127,7 @@ class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
     /**
      * Retrieve the text associated with a given element or field of the record.
      *
-     * @param Omeka_Record $record
+     * @param Omeka_Record_AbstractRecord $record
      * @param string|array $metadata
      * @return string|array Either an array of ElementText records or a string.
      */
@@ -152,8 +152,8 @@ class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
     /**
      * Retrieve record metadata that is not stored as ElementTexts.
      *
-     * @uses Omeka_Record::getProperty()
-     * @param Omeka_Record $record
+     * @uses Omeka_Record_AbstractRecord::getProperty()
+     * @param Omeka_Record_AbstractRecord $record
      * @param string $specialValue Field name.
      * @return mixed
      */
@@ -166,7 +166,7 @@ class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
      * Retrieve the set of ElementText records that correspond to a given
      * element set and element.
      *
-     * @param Omeka_Record $record
+     * @param Omeka_Record_AbstractRecord $record
      * @param string $elementSetName
      * @param string $elementName
      * @return array Set of ElementText records.

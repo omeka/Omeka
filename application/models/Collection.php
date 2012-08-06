@@ -12,7 +12,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Collection extends Omeka_Record implements Zend_Acl_Resource_Interface
+class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Interface
 {        
     const COLLECTION_NAME_MIN_CHARACTERS = 1;
     const COLLECTION_NAME_MAX_CHARACTERS = 255;

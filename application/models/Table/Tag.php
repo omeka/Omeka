@@ -33,10 +33,10 @@ class Table_Tag extends Omeka_Db_Table
     }
     
     /**
-     * Filter a SELECT statement based on an Omeka_Record instance
+     * Filter a SELECT statement based on an Omeka_Record_AbstractRecord instance
      * 
      * @param Omeka_Db_Select
-     * @param Omeka_Record
+     * @param Omeka_Record_AbstractRecord
      * @return void
      */
     public function filterByRecord($select, $record)
@@ -120,7 +120,7 @@ class Table_Tag extends Omeka_Db_Table
      * @param Omeka_Db_Select 
      * @param array $params
      *        'limit' => integer
-     *        'record' => instanceof Omeka_Record
+     *        'record' => instanceof Omeka_Record_AbstractRecord
      *        'like' => partial_tag_name
      *        'type' => tag_type
      * @return void
@@ -138,7 +138,7 @@ class Table_Tag extends Omeka_Db_Table
             }
         }
         
-        if (array_key_exists('record', $params) && $params['record'] instanceof Omeka_Record) {
+        if (array_key_exists('record', $params) && $params['record'] instanceof Omeka_Record_AbstractRecord) {
             $this->filterByRecord($select, $params['record']);
         }
 

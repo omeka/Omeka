@@ -14,7 +14,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Option extends Omeka_Record { 
+class Option extends Omeka_Record_AbstractRecord { 
     public $name;
     public $value;
     

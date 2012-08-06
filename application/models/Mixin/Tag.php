@@ -21,7 +21,7 @@ class Mixin_Tag extends Omeka_Record_Mixin
 
     private $_type;
     
-    public function __construct(Omeka_Record $record) {
+    public function __construct(Omeka_Record_AbstractRecord $record) {
         parent::__construct($record);
         
         $this->_type = get_class($record);

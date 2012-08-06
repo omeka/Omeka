@@ -13,7 +13,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class ElementText extends Omeka_Record
+class ElementText extends Omeka_Record_AbstractRecord
 {
     public $record_id;
     public $record_type;

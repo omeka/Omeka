@@ -139,13 +139,13 @@ class DummyRecordBuilder extends Omeka_Record_Builder
         $this->_test = $test;
     }
     
-    protected function _beforeBuild(Omeka_Record $record)
+    protected function _beforeBuild(Omeka_Record_AbstractRecord $record)
     {
         $this->_test->ranBeforeBuild = true;
         $this->_test->assertThat($record, $this->_test->isInstanceOf('DummyRecordBuilderRecord'));
     }
     
-    protected function _afterBuild(Omeka_Record $record)
+    protected function _afterBuild(Omeka_Record_AbstractRecord $record)
     {
         $this->_test->assertTrue($record->exists());
         $this->_test->ranAfterBuild = true;
@@ -158,7 +158,7 @@ class DummyRecordBuilder extends Omeka_Record_Builder
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class DummyRecordBuilderRecord extends Omeka_Record
+class DummyRecordBuilderRecord extends Omeka_Record_AbstractRecord
 {
     public $description;
 }

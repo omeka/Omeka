@@ -11,7 +11,7 @@
  * @todo If possible to use Zend_Form for form generation instead of this
  * class, then this class and Omeka_Validator_Errors will be deprecated
  * in favor of built-in Zend Framework capabilities.
- * @see Omeka_Record::saveForm()
+ * @see Omeka_Record_AbstractRecord::saveForm()
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */

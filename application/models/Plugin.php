@@ -15,7 +15,7 @@
  * @subpackage Models
  * @author CHNM
  */
-class Plugin extends Omeka_Record implements Zend_Acl_Resource_Interface
+class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Interface
 {
     public $name;
     public $active = '0';

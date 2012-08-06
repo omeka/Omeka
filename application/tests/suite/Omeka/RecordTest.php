@@ -331,7 +331,7 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
     }
 }
 
-class DummyRecord extends Omeka_Record
+class DummyRecord extends Omeka_Record_AbstractRecord
 {   
     /**
      * Setting this property will automatically invalidate the record.

@@ -14,7 +14,7 @@
  * @subpackage Models
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Item extends Omeka_Record implements Zend_Acl_Resource_Interface
+class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Interface
 {        
     public $item_type_id;
     public $collection_id;

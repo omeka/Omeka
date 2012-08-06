@@ -109,7 +109,7 @@ class Omeka_Controller_Action_Helper_Db extends Zend_Controller_Action_Helper_Ab
      * @param string The model class corresponding to the table that should be checked (optional)
      * @throws Omeka_Controller_Exception_404
      * @throws Omeka_Controller_Exception_403
-     * @return Omeka_Record
+     * @return Omeka_Record_AbstractRecord
      */
     public function findById($id = null, $table = null)
     {

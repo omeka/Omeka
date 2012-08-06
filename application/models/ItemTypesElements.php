@@ -14,7 +14,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class ItemTypesElements extends Omeka_Record
+class ItemTypesElements extends Omeka_Record_AbstractRecord
 {
     public $item_type_id;
     public $element_id;

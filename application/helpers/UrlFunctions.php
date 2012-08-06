@@ -112,17 +112,17 @@ function file_display_uri(File $file, $format='fullsize')
 }
 
 /**
- * Given an Omeka_Record instance and the name of an action, this will generated
- * the URI for that record.  Used primarily by other theme helpers and most likely
- * not useful for theme writers.
+ * Given an Omeka_Record_AbstractRecord instance and the name of an action, this 
+ * will generated the URI for that record.  Used primarily by other theme 
+ * helpers and most likely not useful for theme writers.
  *
  * @since 0.10
- * @param Omeka_Record $record
+ * @param Omeka_Record_AbstractRecord $record
  * @param string $action
  * @param string|null $controller Optional
  * @return string
  */
-function record_uri(Omeka_Record $record, $action, $controller = null)
+function record_uri(Omeka_Record_AbstractRecord $record, $action, $controller = null)
 {
     $options = array();
     // Inflect the name of the controller from the record class if no

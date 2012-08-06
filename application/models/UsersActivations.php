@@ -16,7 +16,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class UsersActivations extends Omeka_Record
+class UsersActivations extends Omeka_Record_AbstractRecord
 {
     public $user_id;
     public $url;

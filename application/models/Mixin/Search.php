@@ -2,12 +2,12 @@
 /**
  * Make an Omeka record fulltext searchable.
  * 
- * Any class that extends Omeka_Record can be made searchable by pushing an 
- * instance of this mixin into Omeka_Record::$_mixins during 
- * Omeka_Record::_initializeMixins(). It must be pushed after 
- * all mixins that can add search text--for example, after ActsAsElementText.
+ * Any class that extends Omeka_Record_AbstractRecord can be made searchable by 
+ * pushing an instance of this mixin into Omeka_Record::$_mixins during 
+ * Omeka_Record::_initializeMixins(). It must be pushed after all mixins that 
+ * can add search text--for example, after ElementText.
  * 
- * This mixin leverages the Omeka_Record::afterSave() and 
+ * This mixin leverages the Omeka_Record_AbstractRecord::afterSave() and 
  * Omeka_Record_Mixin::afterSave() callbacks, so note their order of execution. 
  * Records that initialize ActsAsElementText will automatically add their 
  * element texts to the search text.

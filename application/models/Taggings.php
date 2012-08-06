@@ -11,7 +11,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Taggings extends Omeka_Record
+class Taggings extends Omeka_Record_AbstractRecord
 {
     public $relation_id;
     public $tag_id;

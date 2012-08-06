@@ -11,7 +11,7 @@
  * @author CHNM
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class ItemType extends Omeka_Record
+class ItemType extends Omeka_Record_AbstractRecord
 {
     const ITEM_TYPE_NAME_MIN_CHARACTERS = 1;
     const ITEM_TYPE_NAME_MAX_CHARACTERS = 255;

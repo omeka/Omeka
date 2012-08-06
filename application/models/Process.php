@@ -14,7 +14,7 @@
  * @package Omeka
  * @subpackage Models
  */
-class Process extends Omeka_Record
+class Process extends Omeka_Record_AbstractRecord
 {
     const STATUS_STARTING = 'starting';
     const STATUS_IN_PROGRESS = 'in progress';
