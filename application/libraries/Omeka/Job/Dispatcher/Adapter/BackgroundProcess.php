@@ -12,7 +12,7 @@
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
  */
 class Omeka_Job_Dispatcher_Adapter_BackgroundProcess extends 
-    Omeka_Job_Dispatcher_AdapterAbstract {
+    Omeka_Job_Dispatcher_Adapter_AbstractAdapter {
         
     private $_processDispatcher;
 

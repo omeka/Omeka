@@ -17,7 +17,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
  */
-class Omeka_Job_Dispatcher_Adapter_Synchronous extends Omeka_Job_Dispatcher_AdapterAbstract
+class Omeka_Job_Dispatcher_Adapter_Synchronous extends Omeka_Job_Dispatcher_Adapter_AbstractAdapter
 {
     public function send($encodedJob, array $metadata)
     {

@@ -16,7 +16,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
  */
-class Omeka_Job_Dispatcher_Adapter_Beanstalk extends Omeka_Job_Dispatcher_AdapterAbstract
+class Omeka_Job_Dispatcher_Adapter_Beanstalk extends Omeka_Job_Dispatcher_Adapter_AbstractAdapter
 {
     private $_pheanstalk;
 
