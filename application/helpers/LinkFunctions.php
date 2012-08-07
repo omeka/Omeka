@@ -147,7 +147,6 @@ function link_to_items_with_item_type($text = null, $props = array(), $action = 
  *
  * @since 1.0
  * @uses get_current_file()
- * @uses item_file()
  * @param array
  * @param string
  * @param File
@@ -160,8 +159,8 @@ function link_to_file_metadata($attributes = array(), $text = null, $file = null
     }
 
     if (!$text) {
-        $fileTitle = strip_formatting(item_file(array('Dublin Core', 'Title'), array(), $file));
-        $text = $fileTitle ? $fileTitle : item_file('Original Filename', array(), $file);
+        $fileTitle = strip_formatting(metadata($file, array('Dublin Core', 'Title')));
+        $text = $fileTitle ? $fileTitle : metadata($file, 'Original Filename');
     }
 
     return link_to($file, 'show', $text, $attributes);
@@ -187,7 +186,7 @@ function link_to_item($text = null, $props = array(), $action = 'show', $item=nu
         $item = get_current_item();
     }
 
-    $text = (!empty($text) ? $text : strip_formatting(item(array('Dublin Core', 'Title'), array(), $item)));
+    $text = (!empty($text) ? $text : strip_formatting(metadata($item, array('Dublin Core', 'Title'))));
 
     return link_to($item, $action, $text, $props);
 }
@@ -266,7 +265,7 @@ function link_to_collection($text=null, $props=array(), $action='show', $collect
         $collectionObj = get_current_collection();
     }
 
-    $collectionName = collection('name', array(), $collectionObj);
+    $collectionName = metadata($collectionObj, 'name');
 
     $text = (!empty($text) ? $text : (!empty($collectionName) ? $collectionName : __('[Untitled]')));
 

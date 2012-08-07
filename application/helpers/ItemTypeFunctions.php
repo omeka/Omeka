@@ -99,7 +99,7 @@ function item_type_elements($item=null)
     }
     $elements = $item->getItemTypeElements();
     foreach ($elements as $element) {
-        $elementText[$element->name] = item(ELEMENT_SET_ITEM_TYPE, $element->name);
+        $elementText[$element->name] = metadata($item, array(ELEMENT_SET_ITEM_TYPE, $element->name));
     }
     return $elementText;
 }

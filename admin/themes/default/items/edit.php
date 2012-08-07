@@ -1,11 +1,11 @@
 <?php
-    $itemTitle = strip_formatting(item(array('Dublin Core', 'Title')));
+    $itemTitle = strip_formatting(metadata('item', array('Dublin Core', 'Title')));
     if ($itemTitle != '' && $itemTitle != __('[Untitled]')) {
         $itemTitle = ': &quot;' . $itemTitle . '&quot; ';
     } else {
         $itemTitle = '';
     }
-    $itemTitle = __('Edit Item #%s', item('id')) . $itemTitle;
+    $itemTitle = __('Edit Item #%s', metadata('item', 'id')) . $itemTitle;
 ?>
 <?php head(array('title'=> $itemTitle, 'bodyclass'=>'items primary','content_class' => 'vertical-nav'));?>
 
@@ -17,7 +17,7 @@
                 <div id="save" class="three columns omega panel">
                     
                     <?php echo $this->formSubmit('submit', __('Save Changes'), array('id'=>'save-changes', 'class'=>'submit big green button')); ?>
-                    <a href="<?php echo html_escape(public_uri('items/show/'.item('id'))); ?>" class="big blue button" target="_blank">View Public Page</a>
+                    <a href="<?php echo html_escape(public_uri('items/show/'.metadata('item', 'id'))); ?>" class="big blue button" target="_blank">View Public Page</a>
                     <?php echo link_to_item(__('Delete Item'), array('class' => 'big red button'), 'delete-confirm'); ?>
         
                     <div id="public-featured">

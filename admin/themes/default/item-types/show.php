@@ -35,7 +35,7 @@
             <ul>
             <?php set_items_for_loop($itemtype->Items); ?>
             <?php while(loop_items()): ?>
-            <li><span class="date"><?php echo date('m.d.Y', strtotime(item('Date Added'))); ?></span> <?php echo link_to_item('<span class="title">' . item('Dublin Core', 'Title') . '</span>') ?></li>
+            <li><span class="date"><?php echo format_date(metadata('item', 'Date Added')); ?></span> <?php echo link_to_item('<span class="title">' . metadata('item', array('Dublin Core', 'Title')) . '</span>') ?></li>
             <?php endwhile;?>
             </ul>
             <?php else: ?>

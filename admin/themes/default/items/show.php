@@ -1,11 +1,11 @@
 <?php    
-    $itemTitle = strip_formatting(item(array('Dublin Core', 'Title')));
+    $itemTitle = strip_formatting(metadata('item', array('Dublin Core', 'Title')));
     if ($itemTitle != '' && $itemTitle != __('[Untitled]')) {
         $itemTitle = ': &quot;' . $itemTitle . '&quot; ';
     } else {
         $itemTitle = '';
     }
-    $itemTitle = __('Item #%s', item('id')) . $itemTitle;
+    $itemTitle = __('Item #%s', metadata('item', 'id')) . $itemTitle;
 ?>
 
 <?php head(array('title' => $itemTitle, 'bodyclass'=>'items show')); ?>
@@ -32,7 +32,7 @@
         <?php 
         echo link_to_item(__('Edit Item'), array('class'=>'big green button'), 'edit'); ?>
         <?php endif; ?>
-        <a href="<?php echo html_escape(public_uri('items/show/'.item('id'))); ?>" class="big blue button" target="_blank">View Public Page</a>
+        <a href="<?php echo html_escape(public_uri('items/show/'.metadata('item', 'id'))); ?>" class="big blue button" target="_blank">View Public Page</a>
         <?php echo delete_button(null, 'delete-item', __('Delete this Item'), array('class'=>'big red button'), 'delete-record-form'); ?>
     </div>
 
@@ -46,7 +46,7 @@
     <div class="collection panel">
         <h4><?php echo __('Collection'); ?></h4>
         <div>
-           <p><?php if (item_belongs_to_collection()) echo item('Collection Name'); else echo __('No Collection'); ?></p>
+           <p><?php if (item_belongs_to_collection()) echo metadata('item', 'Collection Name'); else echo __('No Collection'); ?></p>
         </div>
     </div>
 

@@ -1,12 +1,12 @@
 <?php
-    $fileTitle = item_file(array('Dublin Core', 'Title')) ? item_file(array('Dublin Core', 'Title')) : strip_formatting(item_file('original filename'));
+    $fileTitle = metadata('file', array('Dublin Core', 'Title')) ? strip_formatting(metadata('file', array('Dublin Core', 'Title'))) : metadata('file', 'original filename');
 
     if ($fileTitle != '') {
         $fileTitle = ': &quot;' . $fileTitle . '&quot; ';
     } else {
         $fileTitle = '';
     }
-    $fileTitle = __('File #%s', item_file('id')) . $fileTitle;
+    $fileTitle = __('File #%s', metadata('file', 'id')) . $fileTitle;
 ?>
 <?php head(array('title' => $fileTitle, 'bodyclass'=>'files show primary-secondary')); ?>
 
@@ -27,32 +27,32 @@
         <h4><?php echo __('Format Metadata'); ?></h4>
         <dl>
         <dt><?php echo __('Archive Filename'); ?>:</dt>
-        <dd><?php echo item_file('Archive Filename'); ?></dd>
+        <dd><?php echo metadata('file', 'Archive Filename'); ?></dd>
         <dt><?php echo __('Original Filename'); ?>:</dt>
-        <dd><?php echo item_file('Original Filename'); ?></dd>
+        <dd><?php echo metadata('file', 'Original Filename'); ?></dd>
         <dt><?php echo __('File Size'); ?>:</dt>
-        <dd><?php echo item_file('Size'); ?> bytes</dd>
+        <dd><?php echo metadata('file', 'Size'); ?> bytes</dd>
         </dl>
     </div>
 
     <div id="file-history" class="panel">
         <h4><?php echo __('File History'); ?></h4>
         <dt><?php echo __('Date Added'); ?></dt>
-        <dd><?php echo item_file('Date Added'); ?></dd>
+        <dd><?php echo metadata('file', 'Date Added'); ?></dd>
         <dt><?php echo __('Date Modified'); ?></dt> 
-        <dd><?php echo item_file('Date Modified'); ?></dd>
+        <dd><?php echo metadata('file', 'Date Modified'); ?></dd>
         <dt><?php echo __('Authentication'); ?></dt> 
-        <dd><?php echo item_file('Authentication'); ?></dd>
+        <dd><?php echo metadata('file', 'Authentication'); ?></dd>
     </div>
 
     <div id="type-metadata" class="panel">
         <h4><?php echo __('Type Metadata'); ?></h4>
         <dt><?php echo __('Mime Type / Browser'); ?>:</dt>
-        <dd><?php echo item_file('MIME Type'); ?></dd>
+        <dd><?php echo metadata('file', 'MIME Type'); ?></dd>
         <dt><?php echo __('Mime Type / OS'); ?>:</dt>
-        <dd><?php echo item_file('MIME Type OS'); ?></dd>
+        <dd><?php echo metadata('file', 'MIME Type OS'); ?></dd>
         <dt><?php echo __('File Type / OS'); ?>:</dt>
-        <dd><?php echo item_file('File Type OS'); ?></dd>
+        <dd><?php echo metadata('file', 'File Type OS'); ?></dd>
     </div>
 
     <div class="panel">

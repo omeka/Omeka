@@ -27,7 +27,7 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
         <?php while (loop_collections()): ?>
         
             <tr class="collection<?php if(++$key%2==1) echo ' odd'; else echo ' even'; ?>">
-                <td scope="row"><?php echo collection('id');?></td> 
+                <td scope="row"><?php echo metadata('collection', 'id');?></td> 
                 <td class="title">
                     <?php echo link_to_collection(); ?>
                     <?php if (has_permission(get_current_collection(), 'edit')): ?>
@@ -38,13 +38,13 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
                 </td>
                 <td>
                 <?php if (collection_has_collectors()): ?> 
-                    <?php echo collection('Collectors', array('delimiter'=>'<br>')); ?>
+                    <?php echo metadata('collection', 'Collectors', array('delimiter'=>'<br>')); ?>
                 <?php else: ?>
                     <?php echo __('No collectors'); ?>
                 <?php endif; ?>
                 
                 </td>   
-                <td><?php if($time = collection('Date Added')):?>
+                <td><?php if($time = metadata('collection', 'Date Added')):?>
                     <?php echo format_date($time); ?>
                 <?php endif; ?>
                 </td>

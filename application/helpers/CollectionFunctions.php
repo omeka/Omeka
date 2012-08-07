@@ -9,29 +9,6 @@
  */
 
 /**
- * This is a similar interface to item(), except for accessing metadata about collections.
- *
- * As of the date of writing, it is greatly simplified in comparison to item(),
- * mostly because collections do not (and may not ever) utilize the 'elements'
- * metadata schema.
- *
- * @since 0.10
- * @see item()
- * @param string
- * @param array $options
- * @param Collection|null $collection Check for this specific collection record (current collection if null).
- * @return string|array
- */
-function collection($fieldName, $options=array(), $collection=null)
-{
-    if (!$collection) {
-        $collection = get_current_collection();
-    }
-
-    return __v()->recordMetadata($collection, $fieldName, $options);
-}
-
-/**
  * Determine whether or not the collection has any collectors associated with it.
  *
  * @since 0.10
@@ -76,7 +53,7 @@ function display_random_featured_collection()
     $html = '<h2>' . __('Featured Collection') . '</h2>';
     if ($featuredCollection) {
         $html .= '<h3>' . link_to_collection($collectionTitle, array(), 'show', $featuredCollection) . '</h3>';
-        if ($collectionDescription = collection('Description', array('snippet'=>150), $featuredCollection)) {
+        if ($collectionDescription = metadata($featuredCollection, 'Description', array('snippet'=>150))) {
             $html .= '<p class="collection-description">' . $collectionDescription . '</p>';
         }
 

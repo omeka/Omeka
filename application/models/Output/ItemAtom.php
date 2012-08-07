@@ -132,7 +132,7 @@ class Output_ItemAtom
             $feedEntryElement->appendChild($feedEntryIdElement);
             
             // feed/entry/title
-            if (!$feedEntryTitle = item(array('Dublin Core', 'Title'), null, $item)) {
+            if (!$feedEntryTitle = metadata($item, array('Dublin Core', 'Title'))) {
                 $feedEntryTitle = 'Untitled';
             }
             $feedEntryTitleElement = $doc->createElement('title');
@@ -140,14 +140,14 @@ class Output_ItemAtom
             $feedEntryElement->appendChild($feedEntryTitleElement);
             
             // feed/entry/summary
-            if ($feedEntrySummary = item(array('Dublin Core', 'Description'), null, $item)) {
+            if ($feedEntrySummary = metadata($item, array('Dublin Core', 'Description'))) {
                 $feedEntrySummaryElement = $doc->createElement('summary');
                 $feedEntrySummaryElement->appendChild($doc->createCDATASection($feedEntrySummary));
                 $feedEntryElement->appendChild($feedEntrySummaryElement);
             }
             
             // feed/entry/updated
-            $feedEntryUpdated = $doc->createElement('updated', date(DATE_ATOM, strtotime(item('Date Modified', null, $item))));
+            $feedEntryUpdated = $doc->createElement('updated', date(DATE_ATOM, strtotime(metadata($item, 'Date Modified'))));
             $feedEntryElement->appendChild($feedEntryUpdated);
             
             // feed/entry/link[rel=alternate]

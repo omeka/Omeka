@@ -355,3 +355,21 @@ function display_search_filters() {
 		echo $html;
 	}
 }
+
+/**
+ * Get a piece or pieces of metadata for a record.
+ *
+ * @see Omeka_View_Helper_RecordMetadata
+ * @param Omeka_Record_AbstractRecord|string $record The record to get metadata
+ *  for. If an Omeka_Record_AbstractRecord, that record is used. If a string,
+ *  that string is used to look up a record in the current view.
+ * @param mixed $metadata The metadata to get. If an array is given, this is
+ *  Element metadata, identified by array('Element Set', 'Element'). If a string,
+ *  the metadata is a record-specific "property."
+ * @param array $options Options for getting the metadata.
+ * @return mixed
+ */
+function metadata($record, $metadata, $options = array())
+{
+    return __v()->recordMetadata($record, $metadata, $options);
+}

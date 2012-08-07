@@ -58,8 +58,16 @@ class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
      * @return string|array|null Null if field does not exist for item. Array
      * if certain options are passed.  String otherwise.
      */
-    public function recordMetadata(Omeka_Record_AbstractRecord $record, $metadata, $options = array())
+    public function recordMetadata($record, $metadata, $options = array())
     {
+        if (is_string($record)) {
+            $record = $this->view->$record;
+        }
+
+        if (!($record instanceof Omeka_Record_AbstractRecord)) {
+            throw new InvalidArgumentException('Invalid record passed to recordMetadata.');
+        }
+         
         $this->_record = $record;
         $this->_metadata = $metadata;
 

@@ -66,8 +66,8 @@ function get_current_item()
  * Example of usage on a public theme page:
  *
  * $item = get_item_by_id(4);
- * set_current_item($item); // necessary to use item() and other similar theme API calls.
- * echo item(array('Dublin Core', 'Title'));
+ * set_current_item($item);
+ * echo metadata('item', array('Dublin Core', 'Title'));
  *
  * @since 0.10
  * @param integer $itemId
@@ -149,27 +149,6 @@ function has_items_for_loop()
 }
 
 /**
- * Retrieve the values for a given field in the current item.
- *
- * @since 0.10
- * @since 2.0 $elementSetName and $elementName params combined to $metadata
- * @uses Omeka_View_Helper_RecordMetadata Contains instructions and
- * examples.
- * @param string|array $metadata The metadata field to display. If an
- *  array, refers to an Element: array('Set Name', 'Element Name')
- * @param array $options
- * @param Item|null Check for this specific item record (current item if null).
- * @return mixed
- */
-function item($metadata, $options = array(), $item = null)
-{
-    if (!$item) {
-        $item = get_current_item();
-    }
-    return __v()->recordMetadata($item, $metadata, $options);
-}
-
-/**
  * Determine whether or not the current item belongs to a collection.
  *
  * @since 0.10
@@ -209,7 +188,7 @@ function item_citation($item = null)
     
     $citation = '';
     
-    $creators = item(array('Dublin Core', 'Creator'), array('all' => true), $item);
+    $creators = metadata($item, array('Dublin Core', 'Creator'), array('all' => true));
     // Strip formatting and remove empty creator elements.
     $creators = array_filter(array_map('strip_formatting', $creators));
     if ($creators) {
@@ -229,7 +208,7 @@ function item_citation($item = null)
         $citation .= "$creator, ";
     }
     
-    $title = strip_formatting(item(array('Dublin Core', 'Title'), array(), $item));
+    $title = strip_formatting(metadata($item, array('Dublin Core', 'Title')));
     if ($title) {
         $citation .= "&#8220;$title,&#8221; ";
     }
@@ -330,7 +309,7 @@ function item_has_type($name = null, $item = null)
         $item = get_current_item();
     }
 
-    $itemTypeName = item('Item Type Name', array(), $item);
+    $itemTypeName = metadata($item, 'Item Type Name');
     return ($name and ($itemTypeName == $name)) or (!$name and !empty($itemTypeName));
 }
 
@@ -538,7 +517,7 @@ function display_random_featured_items($num = 5, $hasImage = null)
 
     if ($randomFeaturedItems = random_featured_items($num, $hasImage)) {
         foreach ($randomFeaturedItems as $randomItem) {
-            $itemTitle = item(array('Dublin Core', 'Title'), array(), $randomItem);
+            $itemTitle = metadata($randomItem, array('Dublin Core', 'Title'));
 
             $html .= '<h3>' . link_to_item($itemTitle, array(), 'show', $randomItem) . '</h3>';
 
@@ -546,7 +525,7 @@ function display_random_featured_items($num = 5, $hasImage = null)
                 $html .= link_to_item(item_square_thumbnail(array(), 0, $randomItem), array('class'=>'image'), 'show', $randomItem);
             }
 
-            if ($itemDescription = item(array('Dublin Core', 'Description'), array('snippet'=>150), $randomItem)) {
+            if ($itemDescription = metadata($randomItem, array('Dublin Core', 'Description'), array('snippet'=>150))) {
                 $html .= '<p class="item-description">' . $itemDescription . '</p>';
             }
         }

@@ -129,7 +129,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                 <?php $key = 0; ?>
                 <?php while($item = loop_items()): ?>
                 <tr class="item <?php if(++$key%2==1) echo 'odd'; else echo 'even'; ?>">
-                    <?php $id = item('id'); ?>
+                    <?php $id = metadata('item', 'id'); ?>
                     <?php if (has_permission($item, 'edit') || has_permission($item, 'tag')): ?>
                     <td class="batch-edit-check" scope="row"><input type="checkbox" name="items[]" value="<?php echo $id; ?>" /></td>
         <?php endif; ?>
@@ -145,16 +145,16 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                         </ul>
                         <?php fire_plugin_hook('admin_append_to_items_browse_simple_each'); ?>
                         <div class="item-details">
-                            <?php echo snippet_by_word_count(strip_formatting(item(array('Dublin Core', 'Description'))), 40); ?>
+                            <?php echo snippet_by_word_count(strip_formatting(metadata('item', array('Dublin Core', 'Description'))), 40); ?>
                             <p><strong><?php echo __('Collection'); ?>:</strong> <?php if (item_belongs_to_collection()) echo link_to_collection_for_item(); else echo __('No Collection'); ?></p><p><strong><?php echo __('Tags'); ?>:</strong> <?php if ($tags = item_tags_as_string()) echo $tags; else echo __('No Tags'); ?></p>
                             </ul>
                             <?php fire_plugin_hook('admin_append_to_items_browse_detailed_each'); ?>
                         </div>
                     </td>
-                    <td><?php echo strip_formatting(item(array('Dublin Core', 'Creator'))); ?></td>
-                    <td><?php echo ($typeName = item('Item Type Name'))
+                    <td><?php echo strip_formatting(metadata('item', array('Dublin Core', 'Creator'))); ?></td>
+                    <td><?php echo ($typeName = metadata('item', 'Item Type Name'))
                                 ? $typeName
-                                : item(array('Dublin Core', 'Type'), array('snippet' => 35)); ?></td>
+                                : metadata('item', array('Dublin Core', 'Type'), array('snippet' => 35)); ?></td>
                     <td>
                     <?php if($item->public): ?>
                     <img src="<?php echo img('silk-icons/tick.png'); ?>" alt="<?php echo __('Public'); ?>"/>
@@ -165,7 +165,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                     <img src="<?php echo img('silk-icons/star.png'); ?>" alt="<?php echo __('Featured'); ?>"/>
                     <?php endif; ?>
                     </td>
-                    <td><?php echo format_date(item('Date Added')); ?></td>
+                    <td><?php echo format_date(metadata('item', 'Date Added')); ?></td>
                 </tr>
                 <?php endwhile; ?>
             </tbody>

@@ -24,11 +24,11 @@ jQuery(window).load(function () {
     jQuery(document).trigger('omeka:elementformload');
 
     Omeka.Items.enableAddFiles(<?php echo js_escape(__('Add Another File')); ?>);
-    Omeka.Items.changeItemType(<?php echo js_escape(uri("items/change-type")) ?><?php if ($id = item('id')) echo ', '.$id; ?>);
+    Omeka.Items.changeItemType(<?php echo js_escape(uri("items/change-type")) ?><?php if ($id = metadata('item', 'id')) echo ', '.$id; ?>);
 });
 
 jQuery(document).bind('omeka:elementformload', function (event) {
-    Omeka.Items.makeElementControls(event.target, <?php echo js_escape(uri('items/element-form')); ?><?php if ($id = item('id')) echo ', '.$id; ?>);
+    Omeka.Items.makeElementControls(event.target, <?php echo js_escape(uri('items/element-form')); ?><?php if ($id = metadata('item', 'id')) echo ', '.$id; ?>);
     Omeka.Items.enableWysiwyg(event.target);
 });
 //]]>   

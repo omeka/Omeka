@@ -376,8 +376,8 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
     protected function _linkToFile($html = null, $file, $options)
     {
         if ($html === null) {
-            $fileTitle = strip_formatting(item_file(array('Dublin Core', 'Title'), array(), $file));
-            $html = $fileTitle ? $fileTitle : item_file('Original Filename', array(), $file);
+            $fileTitle = strip_formatting(metadata($file, array('Dublin Core', 'Title')));
+            $html = $fileTitle ? $fileTitle : metadata($file, 'Original Filename');
         }
 
         if ($options['linkToMetadata']) {
@@ -819,12 +819,12 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
         $alt = '';
         if (isset($props['alt'])) {
             $alt = $props['alt'];
-        } elseif ($fileDescription = item_file(array('Dublin Core', 'Description'), array(), $file)) {
+        } elseif ($fileDescription = metadata($file, array('Dublin Core', 'Description'))) {
             $alt = $fileDescription;
-        } elseif ($fileTitle = item_file(array('Dublin Core', 'Title'), array(), $file)) {
+        } elseif ($fileTitle = metadata($file, array('Dublin Core', 'Title'))) {
             $alt = $fileTitle;
         } else if (isset($item)) {
-            $alt = item(array('Dublin Core', 'Title'), array(), $item);           
+            $alt = metadata($item, array('Dublin Core', 'Title'));           
         }
         $props['alt'] = $alt;
         

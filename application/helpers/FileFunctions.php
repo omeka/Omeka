@@ -56,22 +56,6 @@ function get_current_file()
 }
 
 /**
- * Retrieve metadata for a given field in the current file.
- *
- * @since 1.0
- * @param string|array $metadata
- * @param File|null $file
- * @return mixed
- */
-function item_file($metadata, $options = array(), $file = null)
-{
-    if (!$file) {
-        $file = get_current_file();
-    }
-    return __v()->recordMetadata($file, $metadata, $options);
-}
-
-/**
  * @since 0.10
  * @param File
  * @return void
