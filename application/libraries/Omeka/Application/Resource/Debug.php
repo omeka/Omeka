@@ -7,16 +7,14 @@
  */
 
 /**
- * Fire the 'initialize' hook for all installed plugins.  Note that
- * this hook fires before the front controller has been initialized or
- * dispatched.
+ * Sets up debugging output for web requests (if enabled).
  *
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  */
-class Omeka_Core_Resource_Plugins extends Zend_Application_Resource_ResourceAbstract
+class Omeka_Application_Resource_Debug extends Zend_Application_Resource_ResourceAbstract
 {
     /**
      * @return void
@@ -24,9 +22,11 @@ class Omeka_Core_Resource_Plugins extends Zend_Application_Resource_ResourceAbst
     public function init()
     {
         $bootstrap = $this->getBootstrap();
-        $bootstrap->bootstrap('Pluginbroker');
-        $broker = $bootstrap->getResource('Pluginbroker');
-        // Fire all the 'initialize' hooks for the plugins
-        $broker->callHook('initialize');
+        $bootstrap->bootstrap('FrontController');
+        $front = $bootstrap->getResource('FrontController');
+                
+        // This plugin allows for debugging request objects without inserting 
+        // debugging code into the Zend Framework code files.        
+        $front->registerPlugin(new Omeka_Controller_Plugin_Debug);
     }
 }

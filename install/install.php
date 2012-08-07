@@ -12,7 +12,7 @@ $application = new Zend_Application(
 );
 
 if (APPLICATION_ENV !== 'testing') {
-    $dbResource = new Omeka_Core_Resource_Db;
+    $dbResource = new Omeka_Application_Resource_Db;
     $dbResource->setinipath(BASE_DIR . '/db.ini');
     $application->getBootstrap()->registerPluginResource($dbResource);   
 }
@@ -25,8 +25,9 @@ $application->getBootstrap()->registerPluginResource('Zend_Application_Resource_
         'throwExceptions' => true));
 // This line is a workaround for what seems like a bug in Zend_Application.
 // It loads the plugin resources, which need to be loaded before the bootstrap() 
-// call so as to prevent loading the wrong resource (e.g. Omeka_Core_Resource_Frontcontroller
-// instead of Zend_Application_Resource_FrontController).
+// call so as to prevent loading the wrong resource (e.g. 
+// Omeka_Application_Resource_Frontcontroller instead of 
+// Zend_Application_Resource_FrontController).
 $plugins = $application->getBootstrap()->getPluginResources();
 
 $application->getBootstrap()->bootstrap();

@@ -11,7 +11,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
  */
-class Omeka_Core_Resource_Jobs extends Zend_Application_Resource_ResourceAbstract
+class Omeka_Application_Resource_Jobs extends Zend_Application_Resource_ResourceAbstract
 {
     const DEFAULT_DISPATCHER = "Omeka_Job_Dispatcher_Adapter_Synchronous";
     const LONG_RUNNING_DISPATCHER = "Omeka_Job_Dispatcher_Adapter_BackgroundProcess";
@@ -47,10 +47,10 @@ class Omeka_Core_Resource_Jobs extends Zend_Application_Resource_ResourceAbstrac
         
         // Validate the dispatcher classes.
         if (!class_exists($defaultClass)) {
-            throw new Omeka_Core_Resource_Jobs_InvalidAdapterException("Cannot find job dispatcher adapter class named \"$defaultClass\".");
+            throw new Omeka_Application_Resource_Jobs_InvalidAdapterException("Cannot find job dispatcher adapter class named \"$defaultClass\".");
         }
         if (!class_exists($longRunningClass)) {
-            throw new Omeka_Core_Resource_Jobs_InvalidAdapterException("Cannot find job dispatcher adapter class named \"$longRunningClass\".");
+            throw new Omeka_Application_Resource_Jobs_InvalidAdapterException("Cannot find job dispatcher adapter class named \"$longRunningClass\".");
         }
         
         // Instantiate the dispatcher objects.
@@ -59,10 +59,10 @@ class Omeka_Core_Resource_Jobs extends Zend_Application_Resource_ResourceAbstrac
         
         // Validate the dispatcher objects.
         if (!($default instanceof Omeka_Job_Dispatcher_Adapter_AdapterInterface)) {
-            throw new Omeka_Core_Resource_Jobs_InvalidAdapterException("Adapter named \"$defaultClass\" does not implement the required Omeka_Job_Dispatcher_Adapter_AdapterInterface interface.");
+            throw new Omeka_Application_Resource_Jobs_InvalidAdapterException("Adapter named \"$defaultClass\" does not implement the required Omeka_Job_Dispatcher_Adapter_AdapterInterface interface.");
         }
         if (!($longRunning instanceof Omeka_Job_Dispatcher_Adapter_AdapterInterface)) {
-            throw new Omeka_Core_Resource_Jobs_InvalidAdapterException("Adapter named \"$longRunningClass\" does not implement the required Omeka_Job_Dispatcher_Adapter_AdapterInterface interface.");
+            throw new Omeka_Application_Resource_Jobs_InvalidAdapterException("Adapter named \"$longRunningClass\" does not implement the required Omeka_Job_Dispatcher_Adapter_AdapterInterface interface.");
         }
         
         // Register the job dispatcher.

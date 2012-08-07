@@ -22,9 +22,9 @@ include dirname(dirname(__FILE__)) . '/paths.php';
 // Define the admin theme directory path.
 define('THEME_DIR', ADMIN_THEME_DIR);
 
-$app = new Omeka_Core(APPLICATION_ENV);
+$application = new Omeka_Application(APPLICATION_ENV);
 // Configure the Theme bootstrap resource with the correct paths/URLs.
-$app->getBootstrap()->setOptions(array(
+$application->getBootstrap()->setOptions(array(
     'resources' => array(
         'theme' => array(
             'basePath' => THEME_DIR,
@@ -36,4 +36,4 @@ $app->getBootstrap()->setOptions(array(
 // This is used by the global is_admin_theme to detect that this is the admin.
 Zend_Controller_Front::getInstance()->setParam('admin', true);
 
-$app->initialize()->run();
+$application->initialize()->run();

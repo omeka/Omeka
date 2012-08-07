@@ -11,7 +11,7 @@
  *
  * @package Omeka
  */
-class Omeka_Core_Resource_Cachemanager extends Zend_Application_Resource_Cachemanager {
+class Omeka_Application_Resource_Cachemanager extends Zend_Application_Resource_Cachemanager {
     
     /**
      * @return void

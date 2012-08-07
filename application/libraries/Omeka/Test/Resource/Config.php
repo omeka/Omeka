@@ -22,7 +22,7 @@
 class Omeka_Test_Resource_Config extends Zend_Application_Resource_ResourceAbstract
 {
     /**
-     * @var Omeka_Core_Resource_Config
+     * @var Omeka_Application_Resource_Config
      */
     private $_coreResource;
     
@@ -31,7 +31,7 @@ class Omeka_Test_Resource_Config extends Zend_Application_Resource_ResourceAbstr
      */
     public function __construct($options = null)
     {
-        $this->_coreResource = new Omeka_Core_Resource_Config($options);
+        $this->_coreResource = new Omeka_Application_Resource_Config($options);
     }
     
     /**

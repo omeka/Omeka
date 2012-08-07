@@ -19,10 +19,10 @@ class Omeka_Plugins_AdminAppendToUsersFormTest extends Omeka_Test_AppTestCase
         parent::setUp();
         
         // Set the ACL to allow access to users.
-        $this->acl = $this->core->getBootstrap()->acl;
+        $this->acl = $this->application->getBootstrap()->acl;
         $this->acl->allow(null, 'Users');
         
-        $this->db = $this->core->getBootstrap()->db;
+        $this->db = $this->application->getBootstrap()->db;
         $this->user = $this->db->getTable('User')->find(1);
         $this->_authenticateUser($this->user);
 

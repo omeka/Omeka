@@ -15,7 +15,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  */
-class Omeka_Core_Resource_Session extends Zend_Application_Resource_Session
+class Omeka_Application_Resource_Session extends Zend_Application_Resource_Session
 {
     /**
      * @return void

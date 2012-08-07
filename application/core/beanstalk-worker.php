@@ -12,7 +12,7 @@
  * Paths.php is required at minimum in order to define all path constants.
  */
 require_once dirname(__FILE__) . "/../../paths.php";
-require_once "Omeka/Core.php";
+require_once "Omeka/Application.php";
 
 declare(ticks = 1);
 
@@ -30,7 +30,7 @@ try {
     exit;
 }
 
-$core = new Omeka_Core(APPLICATION_ENV);
+$application = new Omeka_Application(APPLICATION_ENV);
 
 function handle_exception($e)
 {
@@ -52,7 +52,7 @@ function handle_signal($signal)
 pcntl_signal(SIGINT, "handle_signal");
 
 
-$core->bootstrap(array('Autoloader', 'Logger'));
+$application->bootstrap(array('Autoloader', 'Logger'));
 $host = isset($options->host) ? $options->host : '127.0.0.1';
 $port = isset($options->port) ? $options->port : 11300;
 $pheanstalk = new Pheanstalk("$host:$port");
@@ -70,17 +70,8 @@ if (!$pheanJob) {
     echo "Beanstalk worker timed out when reserving a job.";
     exit(0);
 }
-$core->bootstrap(array(
-    'Autoloader', 
-    'Config', 
-    'Db', 
-    'Options', 
-    'Pluginbroker', 
-    'Plugins', 
-    'Jobs', 
-    'Storage',
-    'Mail',
-));
+$application->bootstrap(array('Autoloader', 'Config', 'Db', 'Options', 
+                              'Pluginbroker', 'Plugins', 'Jobs', 'Storage', 'Mail'));
 
 // resend() must send jobs to the original queue by default.
 $jobDispatcher = Zend_Registry::get('job_dispatcher');
@@ -89,9 +80,9 @@ if ($options->queue) {
 }
 
 // Log all to stdout.
-$log = $core->getBootstrap()->logger;
+$log = $application->getBootstrap()->logger;
 $log->addWriter(new Zend_Log_Writer_Stream('php://output'));
 
 $worker = new Omeka_Job_Worker_Beanstalk($pheanstalk, 
-    Zend_Registry::get('job_factory'), $core->getBootstrap()->db);
+    Zend_Registry::get('job_factory'), $application->getBootstrap()->db);
 $worker->work($pheanJob);

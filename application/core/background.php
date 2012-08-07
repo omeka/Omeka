@@ -15,7 +15,7 @@ $baseDir = dirname(__FILE__);
  * Paths.php is required at minimum in order to define all path constants.
  */
 require_once("{$baseDir}/../../paths.php");
-require_once("{$baseDir}/../libraries/Omeka/Core.php");
+require_once("{$baseDir}/../libraries/Omeka/Application.php");
 
 // Set the command line arguments.
 $options = new Zend_Console_Getopt(array('process|p=i' => 'process to run'));
@@ -28,9 +28,9 @@ try {
 }
 
 // Load a core set of resources.
-$core = new Omeka_Core(APPLICATION_ENV);
-$core->bootstrap(array('Autoloader', 'Config', 'Db', 'Options', 'Pluginbroker', 
-                       'Plugins', 'Jobs', 'Storage', 'Mail',
+$application = new Omeka_Application(APPLICATION_ENV);
+$application->bootstrap(array('Autoloader', 'Config', 'Db', 'Options', 
+                              'Pluginbroker', 'Plugins', 'Jobs', 'Storage', 'Mail',
 ));
 
 // Get the database object.
@@ -54,7 +54,7 @@ $processArgs = $process->getArguments();
 // Enable process logging.
 $logFile = LOGS_DIR . '/processes.log';
 $logger = null;
-if ($core->getBootstrap()->getResource('Config')->log->processes && is_writable($logFile)) {
+if ($application->getBootstrap()->getResource('Config')->log->processes && is_writable($logFile)) {
     // Set the writer.
     $writer = new Zend_Log_Writer_Stream($logFile);
     $format = '%processClass% (%processId%) %timestamp% %priorityName% (%priority%): %message%' . PHP_EOL;

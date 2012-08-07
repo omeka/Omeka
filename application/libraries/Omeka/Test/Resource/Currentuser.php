@@ -7,7 +7,7 @@
  */
 
 /**
- * Mask the behavior of Omeka_Core_Resource_Currentuser in tests. 
+ * Mask the behavior of Omeka_Application_Resource_Currentuser in tests. 
  * 
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private

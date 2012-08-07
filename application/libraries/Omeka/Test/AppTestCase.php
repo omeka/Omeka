@@ -50,10 +50,10 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         if ($retVal = parent::__get($property)) {
             return $retVal;
         }
-        if (!isset($this->core)) {
+        if (!isset($this->application)) {
             return;
         }
-        return $this->core->getBootstrap()->getResource($property);
+        return $this->application->getBootstrap()->getResource($property);
     }
 
     public function __set($property, $value)
@@ -80,12 +80,12 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
      */
     public function appBootstrap()
     {        
-        $this->core = new Omeka_Core('testing', array(
+        $this->application = new Omeka_Application('testing', array(
             'config' => CONFIG_DIR . '/' . 'application.ini'));
         
         // No idea why we actually need to add the default routes.
         $this->frontController->getRouter()->addDefaultRoutes();
-        $this->frontController->setParam('bootstrap', $this->core->getBootstrap());
+        $this->frontController->setParam('bootstrap', $this->application->getBootstrap());
         $this->getRequest()->setBaseUrl('');
         // These two properties have equivalent semantic meaning, therefore should
         // be combined at some future point.
@@ -98,13 +98,13 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
             $this->_setUpThemeBootstrap('public');
         }
         
-        $this->setUpBootstrap($this->core->getBootstrap());
-        $this->core->bootstrap();
+        $this->setUpBootstrap($this->application->getBootstrap());
+        $this->application->bootstrap();
     }
     
     /**
      * Subclasses can override this to perform specialized setup on the Omeka
-     * core.
+     * application.
      *
      * @param Zend_Application_Bootstrap $bootstrap
      * @return void
@@ -171,7 +171,7 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         if (!$user->exists()) {
             throw new InvalidArgumentException("User is not persistent in db.");
         }
-        $bs = $this->core->getBootstrap();
+        $bs = $this->application->getBootstrap();
         $bs->auth->getStorage()->write($user->id);
         $bs->currentUser = $user;
         $bs->getContainer()->currentuser = $user;
@@ -199,7 +199,7 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
             case 'admin':
                 $this->frontController->setParam('admin', true);
                 $this->frontController->registerPlugin(new Omeka_Controller_Plugin_Admin);
-                $this->core->getBootstrap()->setOptions(array(
+                $this->application->getBootstrap()->setOptions(array(
                     'resources' => array(
                         'theme' => array(
                             'basePath' => ADMIN_THEME_DIR,
@@ -209,7 +209,7 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
                 ));
                 break;
             case 'public':
-                $this->core->getBootstrap()->setOptions(array(
+                $this->application->getBootstrap()->setOptions(array(
                     'resources' => array(
                         'theme' => array(
                             'basePath' => PUBLIC_THEME_DIR,

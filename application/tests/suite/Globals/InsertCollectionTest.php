@@ -12,12 +12,12 @@ class Globals_InsertCollectionTest extends Omeka_Test_AppTestCase
     public function setUp()
     {
         parent::setUp();
-        $this->_dbHelper = Omeka_Test_Helper_Db::factory($this->core);
+        $this->_dbHelper = Omeka_Test_Helper_Db::factory($this->application);
     }
     
     public function testCanInsertCollection()
     {
-        $collectionsTable = $this->core->getBootstrap()->db->Collection;
+        $collectionsTable = $this->application->getBootstrap()->db->Collection;
         
         // Verify no collections exist.
         $this->assertEquals(0, $this->_dbHelper->getRowCount($collectionsTable));

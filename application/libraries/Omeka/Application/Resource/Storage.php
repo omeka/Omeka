@@ -10,7 +10,7 @@
  *
  * @package Omeka
  */
-class Omeka_Core_Resource_Storage extends Zend_Application_Resource_ResourceAbstract
+class Omeka_Application_Resource_Storage extends Zend_Application_Resource_ResourceAbstract
 {
     const DEFAULT_ADAPTER = "Omeka_Storage_Adapter_Filesystem";
 

@@ -1,5 +1,5 @@
 <?php
-class Omeka_Core_Resource_JobsTest extends PHPUnit_Framework_TestCase
+class Omeka_Application_Resource_JobsTest extends PHPUnit_Framework_TestCase
 {
     /**
      * Warning: this code has been adapted from Zend Framework's 
@@ -9,7 +9,7 @@ class Omeka_Core_Resource_JobsTest extends PHPUnit_Framework_TestCase
     {
         Zend_Registry::_unsetInstance();
         $this->application = new Zend_Application('testing');
-        $this->bootstrap = new Omeka_Core_Bootstrap_Mock($this->application);
+        $this->bootstrap = new Omeka_Application_Bootstrap_Mock($this->application);
         $this->config = new Zend_Config(array(
             'jobs' => array(
                 'dispatcher' => array(
@@ -31,11 +31,11 @@ class Omeka_Core_Resource_JobsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Omeka_Core_Resource_Jobs_InvalidAdapterException
+     * @expectedException Omeka_Application_Resource_Jobs_InvalidAdapterException
      */
     public function testErrorOnInvalidAdapterClassName()
     {
-        $resource = new Omeka_Core_Resource_Jobs();
+        $resource = new Omeka_Application_Resource_Jobs();
         $resource->setBootstrap($this->bootstrap);
         $this->config->jobs->dispatcher->default = 'foobar';
         $resource->init();
@@ -43,7 +43,7 @@ class Omeka_Core_Resource_JobsTest extends PHPUnit_Framework_TestCase
 
     public function testLoadDefaultDispatcher()
     {
-        $resource = new Omeka_Core_Resource_Jobs();
+        $resource = new Omeka_Application_Resource_Jobs();
         $resource->setBootstrap($this->bootstrap);
         unset($this->config->jobs);
         // The fact that this doesn't die when there are no config settings 
@@ -53,11 +53,11 @@ class Omeka_Core_Resource_JobsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Omeka_Core_Resource_Jobs_InvalidAdapterException
+     * @expectedException Omeka_Application_Resource_Jobs_InvalidAdapterException
      */
     public function testErrorOnMissingAdapterClassInterface()
     {
-        $resource = new Omeka_Core_Resource_Jobs();
+        $resource = new Omeka_Application_Resource_Jobs();
         $resource->setBootstrap($this->bootstrap);
         // A class name that exists but does not implement the correct 
         // interface.
@@ -67,7 +67,7 @@ class Omeka_Core_Resource_JobsTest extends PHPUnit_Framework_TestCase
 
     public function testFactoryAndDispatcherRegistered()
     {
-        $resource = new Omeka_Core_Resource_Jobs();
+        $resource = new Omeka_Application_Resource_Jobs();
         $resource->setBootstrap($this->bootstrap);
         $dispatcher = $resource->init();
         $this->assertTrue(Zend_Registry::isRegistered('job_dispatcher'));
@@ -75,7 +75,7 @@ class Omeka_Core_Resource_JobsTest extends PHPUnit_Framework_TestCase
     }
 }
 
-class Omeka_Core_Bootstrap_Mock extends Zend_Application_Bootstrap_BootstrapAbstract
+class Omeka_Application_Bootstrap_Mock extends Zend_Application_Bootstrap_BootstrapAbstract
 {
     private $_mockResources = array();
 

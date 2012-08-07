@@ -6,12 +6,12 @@
  */
 
 /**
- * Marker interface for future exceptions thrown by Omeka_Core_Resource 
+ * Marker interface for future exceptions thrown by Omeka_Application_Resource 
  * classes.  This provides a pattern for differentiating setup/configuration 
  * errors.
  *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
  */
-interface Omeka_Core_Resource_Exception
+interface Omeka_Application_Resource_Exception
 {}

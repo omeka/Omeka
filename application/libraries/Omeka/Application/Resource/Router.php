@@ -14,7 +14,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Omeka_Core_Resource_Router extends Zend_Application_Resource_Router
+class Omeka_Application_Resource_Router extends Zend_Application_Resource_Router
 {
     /**
      * @return Zend_Controller_Router_Rewrite

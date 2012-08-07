@@ -16,7 +16,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Omeka_Core_Resource_Autoloader extends Zend_Application_Resource_ResourceAbstract
+class Omeka_Application_Resource_Autoloader extends Zend_Application_Resource_ResourceAbstract
 {
     /**
      * Register autoloaders. 

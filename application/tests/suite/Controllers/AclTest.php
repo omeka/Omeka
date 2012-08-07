@@ -33,7 +33,7 @@ class Controllers_AclTest extends Omeka_Test_AppTestCase
              
     public function assertPreConditions()
     {
-        $this->assertNull($this->core->getBootstrap()->getResource('Currentuser'));
+        $this->assertNull($this->application->getBootstrap()->getResource('Currentuser'));
         $this->assertEquals('Omeka_Controller_Action_Helper_Acl', get_class($this->aclHelper));
     }
         

@@ -20,7 +20,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  */
-class Omeka_Core_Resource_Acl extends Zend_Application_Resource_ResourceAbstract
+class Omeka_Application_Resource_Acl extends Zend_Application_Resource_ResourceAbstract
 {
     /**
      * Access control list object.

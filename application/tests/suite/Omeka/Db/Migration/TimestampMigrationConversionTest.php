@@ -15,10 +15,10 @@ class Omeka_Db_Migration_TimestampMigrationConversionTest extends Omeka_Test_App
 {
     public function setUp()
     {
-        $this->core = new Omeka_Core('testing', array(
+        $this->application = new Omeka_Application('testing', array(
             'config' => CONFIG_DIR . '/' . 'application.ini'));
             
-        $this->db = $this->core->getBootstrap()->bootstrap('Db')->db;
+        $this->db = $this->application->getBootstrap()->bootstrap('Db')->db;
         
         $this->db->query("DELETE FROM omeka_options WHERE name = 'omeka_version' LIMIT 1");
         $this->db->query("INSERT INTO omeka_options (name, value) VALUES ('migration', '47')");
@@ -37,7 +37,7 @@ class Omeka_Db_Migration_TimestampMigrationConversionTest extends Omeka_Test_App
     
     public function testTimestampSchemaMigration()
     {
-        $this->core->getBootstrap()->bootstrap('Options');
+        $this->application->getBootstrap()->bootstrap('Options');
         $this->assertFalse($this->db->fetchOne("SELECT value FROM omeka_options WHERE name = 'migration'"),
                              "There should not be a 'migration' option in the database.");
         $this->assertEquals($this->db->fetchOne(

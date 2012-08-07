@@ -14,7 +14,7 @@
  * @access private
  * @package Omeka
  */
-class Omeka_Core_Resource_Locale extends Zend_Application_Resource_Locale {
+class Omeka_Application_Resource_Locale extends Zend_Application_Resource_Locale {
     
     /**
      * @return void

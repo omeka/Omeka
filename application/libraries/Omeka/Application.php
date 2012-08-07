@@ -21,7 +21,7 @@
  * @access private
  * @package Omeka
  */
-class Omeka_Core extends Zend_Application
+class Omeka_Application extends Zend_Application
 {
     /**
      * Initialize the application.

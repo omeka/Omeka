@@ -16,8 +16,8 @@ require_once 'paths.php';
 // Define the public theme directory path.
 define('THEME_DIR', PUBLIC_THEME_DIR);
 
-$app = new Omeka_Core(APPLICATION_ENV);
-$app->getBootstrap()->setOptions(array(
+$application = new Omeka_Application(APPLICATION_ENV);
+$application->getBootstrap()->setOptions(array(
     'resources' => array(
         'theme' => array(
             'basePath' => THEME_DIR,
@@ -25,4 +25,4 @@ $app->getBootstrap()->setOptions(array(
         )
     )
 ));
-$app->initialize()->run();
+$application->initialize()->run();

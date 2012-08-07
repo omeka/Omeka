@@ -17,7 +17,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
  */
-class Omeka_Core_Resource_Currentuser extends Zend_Application_Resource_ResourceAbstract
+class Omeka_Application_Resource_Currentuser extends Zend_Application_Resource_ResourceAbstract
 {
     /**
      * Retrieve the User record associated with the authenticated user.

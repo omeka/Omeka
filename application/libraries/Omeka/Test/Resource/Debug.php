@@ -7,7 +7,7 @@
  */
 
 /**
- * Stub resource to mask the behavior of Omeka_Core_Resource_Debug.
+ * Stub resource to mask the behavior of Omeka_Application_Resource_Debug.
  *
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private

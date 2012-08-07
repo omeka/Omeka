@@ -11,7 +11,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
  */
-class Omeka_Core_Resource_Helpers extends Zend_Application_Resource_ResourceAbstract
+class Omeka_Application_Resource_Helpers extends Zend_Application_Resource_ResourceAbstract
 {
     public function init()
     {
