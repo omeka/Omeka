@@ -11,7 +11,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-interface Omeka_Db_MigrationInterface
+interface Omeka_Db_Migration_MigrationInterface
 {
     public function up();
     public function down();

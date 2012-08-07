@@ -12,7 +12,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-abstract class Omeka_Db_Migration_AbstractMigration implements Omeka_Db_MigrationInterface
+abstract class Omeka_Db_Migration_AbstractMigration implements Omeka_Db_Migration_MigrationInterface
 {
     protected $db;
         
