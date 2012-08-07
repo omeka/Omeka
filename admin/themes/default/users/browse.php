@@ -54,7 +54,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
                 <table id="users" class="full">
                     <thead>
                         <tr>
-                            <th id="batch-edit-heading"><?php echo __('Select') ?></th>
+                            <th class="batch-edit-heading"><?php echo __('Select') ?></th>
                             <th><?php echo __('Username') ?></th>
                             <th><?php echo __('Real Name'); ?></th>
                             <th><?php echo __('Email'); ?></th>
@@ -64,7 +64,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
                     <tbody>
                     <?php foreach( $users as $key => $user ): ?>
                         <tr class="<?php if (current_user()->id == $user->id) echo 'current-user '; ?><?php if($key%2==1) echo 'even'; else echo 'odd'; ?>">
-                            <td><input type="checkbox" name="users[]" value="<?php echo html_escape($user->username);?>" /></td>
+                            <td class="batch-edit-check"><input type="checkbox" name="users[]" value="<?php echo html_escape($user->username);?>" /></td>
                             <td>
                             <?php echo html_escape($user->username); ?>
                             <ul class="action-links group">
