@@ -971,6 +971,7 @@ header nav {
 }
     
 .browse-items #filter-list {
+    clear: both;
     list-style-type: none;
     padding: 0;
     margin: 10px 0 30px 0;

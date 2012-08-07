@@ -49,7 +49,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                     });
          
                     var itemCheckboxes = jQuery("table#items tbody input[type=checkbox]");
-                    var globalCheckbox = jQuery('th#batch-edit-heading').html('<input type="checkbox">').find('input');
+                    var globalCheckbox = jQuery('th.batch-edit-heading').html('<input type="checkbox">').find('input');
                     var batchEditSubmit = jQuery('.batch-edit-option input');
                     /**
                      * Disable the batch submit button first, will be enabled once item
@@ -119,8 +119,6 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                         $browseHeadings[__('Title')] = 'Dublin Core,Title';
                         $browseHeadings[__('Creator')] = 'Dublin Core,Creator';
                         $browseHeadings[__('Type')] = null;
-                        $browseHeadings[__('Public')]  = 'public';
-                        $browseHeadings[__('Featured')] = 'featured';
                         $browseHeadings[__('Date Added')] = 'added';
                         echo browse_headings($browseHeadings); ?>
                     </tr>
@@ -134,7 +132,15 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                     <td class="batch-edit-check" scope="row"><input type="checkbox" name="items[]" value="<?php echo $id; ?>" /></td>
         <?php endif; ?>
                     <td class="item-info">
-                        <span class="title"><?php echo link_to_item(); ?></span>
+                        <span class="title">
+                        <?php echo link_to_item(); ?>
+                        <?php if(!$item->public): ?>
+                        <?php echo __('(Private)'); ?>
+                        <?php endif; ?>
+                        <?php if ($item->featured): ?>
+                        <img src="<?php echo img('silk-icons/star.png'); ?>" alt="Featured"/>
+                        <?php endif; ?>
+                        </span>
                         <ul class="action-links group">
                             <?php if (has_permission($item, 'edit')): ?>
                             <li><?php echo link_to_item(__('Edit'), array(), 'edit'); ?></li>
@@ -155,16 +161,6 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                     <td><?php echo ($typeName = metadata('item', 'Item Type Name'))
                                 ? $typeName
                                 : metadata('item', array('Dublin Core', 'Type'), array('snippet' => 35)); ?></td>
-                    <td>
-                    <?php if($item->public): ?>
-                    <img src="<?php echo img('silk-icons/tick.png'); ?>" alt="<?php echo __('Public'); ?>"/>
-                    <?php endif; ?>
-                    </td>
-                    <td>
-                    <?php if($item->featured): ?>
-                    <img src="<?php echo img('silk-icons/star.png'); ?>" alt="<?php echo __('Featured'); ?>"/>
-                    <?php endif; ?>
-                    </td>
                     <td><?php echo format_date(metadata('item', 'Date Added')); ?></td>
                 </tr>
                 <?php endwhile; ?>
