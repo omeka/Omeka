@@ -58,11 +58,11 @@ class Omeka_Core_Resource_Jobs extends Zend_Application_Resource_ResourceAbstrac
         $longRunning = new $longRunningClass($longRunningOptions);
         
         // Validate the dispatcher objects.
-        if (!($default instanceof Omeka_Job_Dispatcher_Adapter)) {
-            throw new Omeka_Core_Resource_Jobs_InvalidAdapterException("Adapter named \"$defaultClass\" does not implement the required Omeka_Job_Dispatcher_Adapter interface.");
+        if (!($default instanceof Omeka_Job_Dispatcher_Adapter_AdapterInterface)) {
+            throw new Omeka_Core_Resource_Jobs_InvalidAdapterException("Adapter named \"$defaultClass\" does not implement the required Omeka_Job_Dispatcher_Adapter_AdapterInterface interface.");
         }
-        if (!($longRunning instanceof Omeka_Job_Dispatcher_Adapter)) {
-            throw new Omeka_Core_Resource_Jobs_InvalidAdapterException("Adapter named \"$longRunningClass\" does not implement the required Omeka_Job_Dispatcher_Adapter interface.");
+        if (!($longRunning instanceof Omeka_Job_Dispatcher_Adapter_AdapterInterface)) {
+            throw new Omeka_Core_Resource_Jobs_InvalidAdapterException("Adapter named \"$longRunningClass\" does not implement the required Omeka_Job_Dispatcher_Adapter_AdapterInterface interface.");
         }
         
         // Register the job dispatcher.

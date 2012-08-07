@@ -29,12 +29,12 @@
 class Omeka_Job_Dispatcher_Default implements Omeka_Job_Dispatcher
 {
     /**
-     * @var Omeka_Job_Dispatcher_Adapter
+     * @var Omeka_Job_Dispatcher_Adapter_AdapterInterface
      */
     private $_defaultAdapter;
     
     /**
-     * @var Omeka_Job_Dispatcher_Adapter
+     * @var Omeka_Job_Dispatcher_Adapter_AdapterInterface
      */
     private $_longRunningAdapter;
     
@@ -44,13 +44,13 @@ class Omeka_Job_Dispatcher_Default implements Omeka_Job_Dispatcher
     private $_user;
     
     /**
-     * @param Omeka_Job_Dispatcher_Adapter $defaultAdapter
-     * @param Omeka_Job_Dispatcher_Adapter $longRunningAdapter
+     * @param Omeka_Job_Dispatcher_Adapter_AdapterInterface $defaultAdapter
+     * @param Omeka_Job_Dispatcher_Adapter_AdapterInterface $longRunningAdapter
      * @param User|null $user The user account associated with the request,
      * i.e. the user account associated with jobs sent by the dispatcher.
      */
-    public function __construct(Omeka_Job_Dispatcher_Adapter $defaultAdapter, 
-        Omeka_Job_Dispatcher_Adapter $longRunningAdapter, $user) {
+    public function __construct(Omeka_Job_Dispatcher_Adapter_AdapterInterface $defaultAdapter, 
+        Omeka_Job_Dispatcher_Adapter_AdapterInterface $longRunningAdapter, $user) {
         $this->setDefaultAdapter($defaultAdapter);
         $this->setLongRunningAdapter($longRunningAdapter);
         $this->setUser($user);
@@ -79,9 +79,9 @@ class Omeka_Job_Dispatcher_Default implements Omeka_Job_Dispatcher
     /**
      * Set the default adapter.
      * 
-     * @param Omeka_Job_Dispatcher_Adapter $adapter
+     * @param Omeka_Job_Dispatcher_Adapter_AdapterInterface $adapter
      */
-    public function setDefaultAdapter(Omeka_Job_Dispatcher_Adapter $defaultAdapter)
+    public function setDefaultAdapter(Omeka_Job_Dispatcher_Adapter_AdapterInterface $defaultAdapter)
     {
         $this->_defaultAdapter = $defaultAdapter;
     }
@@ -89,9 +89,9 @@ class Omeka_Job_Dispatcher_Default implements Omeka_Job_Dispatcher
     /**
      * Set the long running adapter.
      * 
-     * @param Omeka_Job_Dispatcher_Adapter $adapter
+     * @param Omeka_Job_Dispatcher_Adapter_AdapterInterface $adapter
      */
-    public function setLongRunningAdapter(Omeka_Job_Dispatcher_Adapter $longRunningAdapter)
+    public function setLongRunningAdapter(Omeka_Job_Dispatcher_Adapter_AdapterInterface $longRunningAdapter)
     {
         $this->_longRunningAdapter = $longRunningAdapter;
     }

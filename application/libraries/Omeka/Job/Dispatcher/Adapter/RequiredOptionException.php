@@ -7,7 +7,7 @@
 
 /**
  * Exception thrown when required options have not been passed to the 
- * Omeka_Job_Dispatcher_Adapter's constructor.
+ * Omeka_Job_Dispatcher_Adapter_AdapterInterface's constructor.
  *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2010

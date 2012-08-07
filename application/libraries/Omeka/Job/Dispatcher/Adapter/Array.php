@@ -14,7 +14,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2011
  */
-class Omeka_Job_Dispatcher_Adapter_Array implements Omeka_Job_Dispatcher_Adapter
+class Omeka_Job_Dispatcher_Adapter_Array implements Omeka_Job_Dispatcher_Adapter_AdapterInterface
 {
     private $_queueName = 'default';
 

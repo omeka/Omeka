@@ -11,7 +11,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
  */
-interface Omeka_Job_Dispatcher_Adapter
+interface Omeka_Job_Dispatcher_Adapter_AdapterInterface
 {
     /**
      * Set the name of the queue that the adapter will use for incoming jobs.
