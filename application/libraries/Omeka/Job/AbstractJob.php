@@ -12,7 +12,7 @@
  * convenient access to the database and other potentially important 
  * resources.
  *
- * For information on how to dispatch jobs, see Omeka_Job_Dispatcher.
+ * For information on how to dispatch jobs, see Omeka_Job_Dispatcher_DispatcherInterface.
  *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
@@ -25,7 +25,7 @@ abstract class Omeka_Job_AbstractJob implements Omeka_Job_JobInterface
     protected $_db;
     
     /**
-     * @var Omeka_Job_Dispatcher
+     * @var Omeka_Job_Dispatcher_DispatcherInterface
      */
     protected $_dispatcher;
 
@@ -67,7 +67,7 @@ abstract class Omeka_Job_AbstractJob implements Omeka_Job_JobInterface
         $this->_db = $db;
     }
 
-    public function setJobDispatcher(Omeka_Job_Dispatcher $dispatcher)
+    public function setJobDispatcher(Omeka_Job_Dispatcher_DispatcherInterface $dispatcher)
     {
         $this->_dispatcher = $dispatcher;
     }

@@ -26,7 +26,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
  */
-class Omeka_Job_Dispatcher_Default implements Omeka_Job_Dispatcher
+class Omeka_Job_Dispatcher_Default implements Omeka_Job_Dispatcher_DispatcherInterface
 {
     /**
      * @var Omeka_Job_Dispatcher_Adapter_AdapterInterface

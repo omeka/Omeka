@@ -11,7 +11,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
  */
-interface Omeka_Job_Dispatcher
+interface Omeka_Job_Dispatcher_DispatcherInterface
 {
     /**
      * Set the name of the queue to which jobs will be sent.
