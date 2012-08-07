@@ -4,7 +4,7 @@ class Omeka_JobTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->db = $this->getMock('Omeka_Db', array(), array(), '', false);
-        $this->dispatcher = $this->getMock('Omeka_Job_Dispatcher', array(), array(), '', false);   
+        $this->dispatcher = $this->getMock('Omeka_Job_Dispatcher_DispatcherInterface', array(), array(), '', false);   
     }
 
     public function testSetters()

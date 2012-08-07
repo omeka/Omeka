@@ -8,7 +8,7 @@ class Omeka_Job_Worker_BeanstalkTest extends PHPUnit_Framework_TestCase
         $this->dbAdapter = $this->getMock('Zend_Test_DbAdapter');
         $this->db = new Omeka_Db($this->dbAdapter);
         $this->pheanJob = new Pheanstalk_Job(1, 'foo');
-        $this->omekaJob = $this->getMock('Omeka_Job', array(), array(array()));
+        $this->omekaJob = $this->getMock('Omeka_Job_JobInterface', array(), array(array()));
         $this->worker = new Omeka_Job_Worker_Beanstalk($this->pheanstalk, 
             $this->jobFactory, $this->db);
     }
