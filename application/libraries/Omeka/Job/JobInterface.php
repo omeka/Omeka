@@ -11,7 +11,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
  */
-interface Omeka_Job
+interface Omeka_Job_JobInterface
 {
     public function __construct(array $options);
     public function perform();
