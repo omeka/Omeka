@@ -100,10 +100,10 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
 
                 <div class="item-actions batch-edit-option">
                     <?php if (has_permission('Items', 'edit')): ?>
-                    <input type="submit" class="edit-items small blue button" name="submit" value="<?php echo __('Edit'); ?>" />
+                    <input type="submit" class="edit-items small blue button" name="submit-batch-edit" value="<?php echo __('Edit'); ?>" />
                     <?php endif; ?>
                     <?php if (has_permission('Items', 'delete')): ?>
-                    <input type="submit" class="red small" name="submit" value="Delete">
+                    <input type="submit" class="red small" name="submit-batch-delete" value="<?php echo __('Delete'); ?>">
                     <?php endif; ?>
                 </div>
                 
@@ -167,12 +167,12 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
             </tbody>
         </table>
             
-                <div class="item-actions">
+                <div class="item-actions batch-edit-option">
                     <?php if (has_permission('Items', 'edit')): ?>
-                    <input type="submit" class="edit-items small blue button" name="submit" value="<?php echo __('Edit'); ?>" />
+                    <input type="submit" class="edit-items small blue button" name="submit-batch-edit" value="<?php echo __('Edit'); ?>" />
                     <?php endif; ?>
                     <?php if (has_permission('Items', 'delete')): ?>
-                    <input type="submit" class="red small" name="submit" value="Delete">
+                    <input type="submit" class="red small" name="submit-batch-delete" value="<?php echo __('Delete'); ?>">
                     <?php endif; ?>
                 </div>
                 

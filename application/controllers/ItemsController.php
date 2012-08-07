@@ -246,6 +246,9 @@ class ItemsController extends Omeka_Controller_AbstractActionController
         }
 
         $this->view->assign(compact('itemIds'));
+        if ($this->_getParam('submit-batch-delete')) {
+            $this->render('batch-delete');
+        }
     }
     
     /**
