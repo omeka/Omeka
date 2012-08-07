@@ -12,5 +12,5 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
  */
-class Omeka_Job_Dispatcher_Adapter_RequiredOptionException extends LogicException implements Omeka_Job_Exception 
+class Omeka_Job_Dispatcher_Adapter_RequiredOptionException extends LogicException
 {}

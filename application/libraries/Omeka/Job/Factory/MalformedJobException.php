@@ -12,5 +12,5 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
  */
-class Omeka_Job_Factory_MalformedJobException extends InvalidArgumentException implements Omeka_Job_Exception 
+class Omeka_Job_Factory_MalformedJobException extends InvalidArgumentException
 {}
