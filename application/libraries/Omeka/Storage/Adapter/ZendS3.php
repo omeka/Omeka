@@ -14,7 +14,7 @@
  *
  * @package Omeka
  */
-class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter
+class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInterface
 {
     const AWS_KEY_OPTION = 'accessKeyId';
     const AWS_SECRET_KEY_OPTION = 'secretAccessKey';

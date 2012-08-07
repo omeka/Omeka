@@ -18,10 +18,10 @@ class Omeka_Storage
 
     const MSG_NOT_INITIALIZED = 'The storage adapter is not initialized.';
     const MSG_NO_SUCH_METHOD = 'The storage adapter has no method "%s"';
-    const MSG_INVALID_ADAPTER = 'Storage adapters must implement the Omeka_Storage_Adapter interface.';
+    const MSG_INVALID_ADAPTER = 'Storage adapters must implement the Omeka_Storage_Adapter_AdapterInterface interface.';
         
     /**
-     * @var Omeka_Storage_Adapter
+     * @var Omeka_Storage_Adapter_AdapterInterface
      */
     private $_adapter;
 
@@ -108,10 +108,10 @@ class Omeka_Storage
      * method or use this method as a factory by passing the name of an
      * adapter class and options to set on it.
      *
-     * @param Omeka_Storage_Adapter|string $adapter Storage adapter to
-     *  set. If an adapter object is passed, it is simply set as the
-     *  current adapter. If a string is passed, an object of that class
-     *  is created and set as the current adapter.
+     * @param Omeka_Storage_Adapter_AdapterInterface|string $adapter Storage 
+     * adapter to set. If an adapter object is passed, it is simply set as the
+     * current adapter. If a string is passed, an object of that class is 
+     * created and set as the current adapter.
      * @param array|null $options If a string is passed to $adapter,
      *  this array of options is passed to the class' constructor.
      */
@@ -121,7 +121,7 @@ class Omeka_Storage
             $adapter = new $adapter($options);
         }
 
-        if ($adapter instanceof Omeka_Storage_Adapter) {
+        if ($adapter instanceof Omeka_Storage_Adapter_AdapterInterface) {
             $this->_adapter = $adapter;
         } else {
             throw new Omeka_Storage_Exception(self::MSG_INVALID_ADAPTER);
@@ -135,7 +135,7 @@ class Omeka_Storage
      * method to perform any storage actions.
      *
      * @see Omeka_Storage::setAdapter()
-     * @return Omeka_Storage_Adapter
+     * @return Omeka_Storage_Adapter_AdapterInterface
      */
     public function getAdapter()
     {

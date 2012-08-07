@@ -13,7 +13,7 @@
  *
  * @package Omeka
  */
-interface Omeka_Storage_Adapter
+interface Omeka_Storage_Adapter_AdapterInterface
 {
     /**
      * Set options for the storage adapter.

@@ -13,7 +13,7 @@
  *
  * @package Omeka
  */
-class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter
+class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter_AdapterInterface
 {
     /**
      * Local directory where files are stored.
