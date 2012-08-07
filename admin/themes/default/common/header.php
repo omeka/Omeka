@@ -68,7 +68,7 @@
 
 <section class="container container-twelve">
 
-    <?php echo common('content-nav'); ?>
+    <?php echo common('content-nav', array('title' => $title)); ?>
     
     <?php if (isset($title)) : ?>
     <h1 class="section-title"><?php echo $title ?></h1>

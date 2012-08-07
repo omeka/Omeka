@@ -10,7 +10,7 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
     <?php if (total_collections() > 0): ?>
         <div class="pagination"><?php echo pagination_links(); ?></div>
       <?php if (has_collections_for_loop()): ?>
-        <table id="collections" class="simple" cellspacing="0" cellpadding="0">
+        <table id="collections" class="full" cellspacing="0" cellpadding="0">
             <thead>
                 <tr>
                 <?php browse_headings(array(

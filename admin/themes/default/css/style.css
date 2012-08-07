@@ -81,7 +81,7 @@ p, li {
 .left { float: left; }
 
 
-    /* Table styles 
+    /* Tables 
     ================================================== */
     
     table {
@@ -110,6 +110,15 @@ p, li {
         padding: .625em;
         vertical-align: top;
     }
+    
+        .even td {
+            background-color: #F3F3E7;
+        }
+        
+        .odd td {
+            background-color: #fff;
+        }
+    
 
     .action-links {
         list-style-type: none;
@@ -558,6 +567,12 @@ header nav {
     color: #f7f7f7;
     font-family: "Arvo", serif;
 }
+
+    #mobile-content-nav li a { color: #fff; }
+    
+    #mobile-content-nav li .dropdown a { color: #666; }
+    
+    #mobile-content-nav.quick-filter-wrapper ul li:hover:first-child { background-color:#ccc; }
     
 .pagination {
     clear: right;
@@ -945,6 +960,7 @@ header nav {
 ================================================== */
 
 .browse-items .add-item.button {
+    float: left;
     min-height: inherit;
 }
     
@@ -995,14 +1011,6 @@ header nav {
     .browse-items .item-details p {
         margin: 0;
     }
-
-.browse-items .even td {
-    background-color: #F3F3E7;
-}
-
-.browse-items .odd td {
-    background-color: #fff;
-}
 
 .browse-items .pagination {
     float: right;
@@ -1071,6 +1079,7 @@ header nav {
     list-style: none;   
 }
 
+
 .quick-filter-wrapper li a { 
     min-width: 105px; 
     display:block; 
@@ -1080,16 +1089,17 @@ header nav {
     text-decoration:none; 
 }
 
-.quick-filter-wrapper ul li { margin:0; }
-.quick-filter-wrapper ul li a { min-width:105px; }
-
-.quick-filter-wrapper ul li:hover:first-child { background-color:#fff; }
-.quick-filter-wrapper ul li:hover { background-color:#ccc; }
-
-.quick-filter-wrapper li a:active + ul.dropdown, 
-.quick-filter-wrapper li a:focus + ul.dropdown { left: -1px; }
-
-.quick-filter-wrapper li ul:hover { left: -1px; }
+    .quick-filter-wrapper ul li { margin:0; }
+    .quick-filter-wrapper ul li a { min-width:105px; }
+    
+    .quick-filter-wrapper ul li:hover:first-child { background-color:#fff; }
+    .quick-filter-wrapper ul li:hover { background-color:#ccc; }
+    
+    .quick-filter-wrapper li a:active + ul.dropdown, 
+    .quick-filter-wrapper li a:focus + ul.dropdown { left: -1px; }
+    
+    .quick-filter-wrapper li a:focus { outline: none; }
+    .quick-filter-wrapper li ul:hover { left: -1px; }
 
 #item-metadata .remove-element {
     display: none;

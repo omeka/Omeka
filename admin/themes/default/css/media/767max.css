@@ -32,6 +32,11 @@ header nav { float: left; }
     .mobile th {
         width: 1%;
     }
+    
+.even th { background-color: #B1A584; border: 0; }
+                
+.odd th { background-color: #D3D0B5; border: 0; }
+    
 
 /* Content Navigation 
 ================================================== */
@@ -42,7 +47,7 @@ header nav { float: left; }
 
 #mobile-content-nav { 
     display: block; 
-    margin-top: 120px;
+    margin-top: 100px;
     }
 
 #section-nav {
@@ -71,17 +76,12 @@ header nav { float: left; }
     
     .add-item {
         float: left;
-        margin-left: 5px !important;
         }
         
     .browse-items #advanced-search-link { float: left; margin-bottom: 20px; }
         
     .batch-edit-heading, .batch-edit-check { display: none; }
-    
-    .browse-items .even th { border: 0;}
-                    
-    .browse-items .odd th { background-color: #D3D0B5; border: 0; }
-    
+        
     .browse-items .filters { clear: both; }
     
     .browse-items #filter-list { margin: 10px 0; }
