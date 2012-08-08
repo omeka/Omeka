@@ -1,5 +1,5 @@
 <?php
-$pageTitle = __('Browse Users ('.$total_records.' total)');
+$pageTitle = __('Browse Users') . ' ' . __('(%s total)', $total_records);
 head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'users primary'));?>
 
 <?php if (has_permission('Users', 'add')): ?>
@@ -45,7 +45,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
                     <input type="submit" class="edit-items small blue button" name="submit" value="<?php echo __('Change Role'); ?>" />
                     <?php endif; ?>
                     <?php if (has_permission('Users', 'delete')): ?>
-                    <input type="submit" class="red small" name="submit" value="Delete">
+                    <input type="submit" class="red small" name="submit" value="<?php echo __('Delete'); ?>">
                     <?php endif; ?>                    
                 </div>
     

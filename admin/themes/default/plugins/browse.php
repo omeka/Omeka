@@ -1,5 +1,5 @@
 <?php 
-$pageTitle = __('Plugins (' . get_db()->getTable('Plugin')->count() . ' total)');
+$pageTitle = __('Plugins') . ' ' . __('(%s total)', count($plugins));
 head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'plugins browse')); ?>    
 
     <?php if ($plugins): ?>

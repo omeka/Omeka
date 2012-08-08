@@ -1,11 +1,11 @@
 <?php
-$pageTitle = __('Browse Items ('.total_results().' total)');
+$pageTitle = __('Browse Items') . ' ' . __('(%s total)', $total_records);
 head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=>'items primary browse-items')); ?>
 
             <?php echo flash(); ?>
 
             <?php if (has_permission('Items', 'add')): ?>
-            <a href="<?php echo html_escape(uri('items/add')); ?>" class="add-item button small green">Add an Item</a>
+            <a href="<?php echo html_escape(uri('items/add')); ?>" class="add-item button small green"><?php echo __('Add an Item'); ?></a>
             <?php endif; ?>
 
             <div id="simple-search-form">

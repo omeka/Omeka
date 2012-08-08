@@ -1,5 +1,5 @@
 <?php 
-$pageTitle = __('Browse Collections ('.$total_records.' total)');
+$pageTitle = __('Browse Collections') . ' ' .  __('(%s total)', $total_records);
 head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
 
 <?php if (has_permission('Collections', 'add')): ?>
