@@ -33,6 +33,10 @@ set_include_path(get_include_path() . PATH_SEPARATOR . TEST_LIB_DIR);
 // not the public one.  This could potentially cause subtle breakage in tests.
 define('THEME_DIR', join('/', array(BASE_DIR, 'admin', 'themes')));
 
+// Make sure the autoloader is initialized.
+$autoloader = new Omeka_Application_Resource_Autoloader;
+$autoloader->init();
+
 // Clean out the test database before running any tests.
 $config = new Omeka_Test_Resource_Config;
 $config->init();
