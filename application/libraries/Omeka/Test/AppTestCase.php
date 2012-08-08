@@ -56,23 +56,6 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         return $this->application->getBootstrap()->getResource($property);
     }
 
-    public function __set($property, $value)
-    {
-        if ($property == '_useAdminViews') {
-            $this->_useAdminViewsWarning();
-        }
-        return parent::__set($property, $value);
-    }
-    
-    private function _useAdminViewsWarning()
-    {
-        trigger_error("Omeka_Test_AppTestCase::\$_useAdminViews is " 
-            . "deprecated since v1.4, please set Omeka_Test_AppTestCase::"
-            . "\$_isAdminTest = false to indicate that a given test should "
-            . "run against the public theme (\$_isAdminTest is " 
-            . "true by default).", E_USER_WARNING);
-    }
-    
     /**
      * Bootstrap the application.
      *
@@ -87,11 +70,7 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         $this->frontController->getRouter()->addDefaultRoutes();
         $this->frontController->setParam('bootstrap', $this->application->getBootstrap());
         $this->getRequest()->setBaseUrl('');
-        // These two properties have equivalent semantic meaning, therefore should
-        // be combined at some future point.
-        if (isset($this->_useAdminViews)) {
-            $this->_useAdminViewsWarning();
-        }
+
         if ($this->_isAdminTest) {
             $this->_setUpThemeBootstrap('admin');
         } else {
@@ -148,9 +127,8 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
             if (isset($this->request->error_handler)) {
                 throw $this->request->error_handler->exception;
             }
-        }        
+        }
     }
-    
 
     public static function dbChanged($flag = null)
     {
