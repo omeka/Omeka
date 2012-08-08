@@ -20,7 +20,7 @@ class Omeka_Application_Resource_Helpers extends Zend_Application_Resource_Resou
         $this->_initResponseContexts();
         $this->_initAclHelper();
 
-        Zend_Controller_Action_HelperBroker::addPrefix('Omeka_Controller_Action_Helper');
+        Zend_Controller_Action_HelperBroker::addPath(APP_DIR . '/controllers/helpers', 'Omeka_Controller_Action_Helper');
     }
 
     private function _initDbHelper()

@@ -30,19 +30,23 @@ class Omeka_Application_Resource_Autoloader extends Zend_Application_Resource_Re
      */
     public function init()
     {
-        $resourceLoader = new Zend_Loader_Autoloader_Resource(array(
-            'basePath'      => APP_DIR,
-            'namespace'     => 'Omeka',
+        new Zend_Loader_Autoloader_Resource(array(
+            'basePath' => APP_DIR, 
+            'namespace' => 'Omeka', 
             'resourceTypes' => array(
                 'form' => array(
-                    'path'      => 'forms/',
-                    'namespace' => 'Form',
+                    'path' => 'forms/', 
+                    'namespace' => 'Form', 
                 ),
-                'helper' => array(
-                    'path'      => 'views/helpers',
-                    'namespace' => 'View_Helper'
-                )
-            )        
+                'view_helper' => array(
+                    'path' => 'views/helpers', 
+                    'namespace' => 'View_Helper', 
+                ), 
+                'action_helper' => array(
+                    'path' => 'controllers/helpers', 
+                    'namespace' => 'Controller_Action_Helper', 
+                ), 
+            )
         ));
     }
 }
