@@ -131,14 +131,15 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                     <?php if (has_permission($item, 'edit') || has_permission($item, 'tag')): ?>
                     <td class="batch-edit-check" scope="row"><input type="checkbox" name="items[]" value="<?php echo $id; ?>" /></td>
         <?php endif; ?>
+                    <?php if ($item->featured): ?>
+                    <td class="item-info featured">
+                    <?php else: ?>
                     <td class="item-info">
+                    <?php endif; ?>
                         <span class="title">
                         <?php echo link_to_item(); ?>
                         <?php if(!$item->public): ?>
                         <?php echo __('(Private)'); ?>
-                        <?php endif; ?>
-                        <?php if ($item->featured): ?>
-                        <img src="<?php echo img('silk-icons/star.png'); ?>" alt="Featured"/>
                         <?php endif; ?>
                         </span>
                         <ul class="action-links group">

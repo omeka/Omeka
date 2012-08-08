@@ -1000,6 +1000,9 @@ header nav {
         height: 25px;
         line-height: 25px;
     }
+
+    .browse-items .item-actions input[type=submit][disabled], .browse-items .item-actions a.button[disabled], 
+    .browse-items .item-actions button[disabled] { opacity: .35 }
         
 .browse-items .item-details {
     background-color: #fff;
@@ -1021,6 +1024,10 @@ header nav {
     margin: 0 0 5px 0;
     vertical-align: top;
 }
+
+.browse-items .featured { background: url('../images/featured-bg.png') no-repeat right bottom; }
+
+    .browse-items .even td.featured { background-color: #F3F3E7; }
 
 .quick-filter-wrapper {
     height: 25px;
