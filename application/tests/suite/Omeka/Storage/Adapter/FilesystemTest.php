@@ -11,8 +11,8 @@ class Omeka_Storage_Adapter_FilesystemTest extends PHPUnit_Framework_TestCase
     {
         $storage = new Omeka_Storage_Adapter_Filesystem();
         $options = $storage->getOptions();
-        if (defined('ARCHIVE_DIR')) {
-            $this->assertEquals($options['localDir'], ARCHIVE_DIR);
+        if (defined('FILES_DIR')) {
+            $this->assertEquals($options['localDir'], FILES_DIR);
         } else {
             $this->assertEquals($options['localDir'], null);
         }
@@ -22,8 +22,8 @@ class Omeka_Storage_Adapter_FilesystemTest extends PHPUnit_Framework_TestCase
     {
         $storage = new Omeka_Storage_Adapter_Filesystem();
         $options = $storage->getOptions();
-        if (defined('WEB_ARCHIVE')) {
-            $this->assertEquals($options['webDir'], WEB_ARCHIVE);
+        if (defined('WEB_FILES')) {
+            $this->assertEquals($options['webDir'], WEB_FILES);
         } else {
             $this->assertEquals($options['webDir'], null);
         }

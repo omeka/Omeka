@@ -359,7 +359,7 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
      * 
      * If the 'linkToMetadata' option is true, then link to the file
      * metadata page (files/show).  If 'linkToFile' is true,
-     * link to the archive file, and if 'linkToFile' is a string, try
+     * link to the original file, and if 'linkToFile' is a string, try
      * to link to that specific derivative. Otherwise just return the
      * $html without wrapping in a link.
      * 
@@ -386,11 +386,11 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
         } else if (($linkToFile = $options['linkToFile'])) {
             // If you've manually specified a derivative type to link
             // to, and this file actually has derivatives, we'll use
-            // that, otherwise, the link is to the "archive" file.
+            // that, otherwise, the link is to the "original" file.
             if (is_string($linkToFile) && $file->hasThumbnail()) {
                 $derivative = $linkToFile;
             } else {
-                $derivative = 'archive';
+                $derivative = 'original';
             }
 
             // Wrap in a link that will download the file directly.
@@ -407,8 +407,8 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
     }
     
     /**
-     * Returns valid XHTML markup for displaying an image that has been archived 
-     * through Omeka.  
+     * Returns valid XHTML markup for displaying an image that has been stored 
+     * in Omeka.
      * 
      * @param File $file
      * @param array $file Options for customizing the display of images. Current
@@ -438,7 +438,7 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
             $imgClass = $imgClasses[$imageSize];
             $imgAttributes = array_merge(array('class' => $imgClass),
                                 (array)$options['imgAttributes']);
-            $imgHtml = $this->archive_image($file, $imgAttributes, $imageSize);
+            $imgHtml = $this->image_tag($file, $imgAttributes, $imageSize);
         }
         $html .= !empty($imgHtml) ? $imgHtml : html_escape($file->original_filename);   
         $html = $this->_linkToFile($html, $file, $options);
@@ -458,7 +458,7 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
      */ 
     public function wmv($file, array $options=array())
     {
-        $path = html_escape($file->getWebPath('archive'));
+        $path = html_escape($file->getWebPath('original'));
         $html = '<object type="application/x-mplayer2" width="'.$options['width'].'" height="'.$options['height'].'" data="'.$path.'" autoStart="'.$options['autostart'].'">'
               . '<param name="FileName" value="'.$path.'" />'
               . '<param name="autoStart" value="'.($options['autostart'] ? 'true' : 'false').'" />'
@@ -484,7 +484,7 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
      */ 
     public function wma($file, array $options=array())
     {
-        $path = html_escape($file->getWebPath('archive'));
+        $path = html_escape($file->getWebPath('original'));
         $html = '<object type="audio/x-ms-wma" width="'.$options['width'].'" height="'.$options['height'].'" data="'.$path.'" autoStart="'.$options['autostart'].'">'
               . '<param name="FileName" value="'.$path.'" />'
               . '<param name="autoStart" value="'.($options['autostart'] ? 'true' : 'false').'" />'
@@ -505,7 +505,7 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
      */ 
     public function mov($file, array $options=array())
     {
-        $path = html_escape($file->getWebPath('archive'));
+        $path = html_escape($file->getWebPath('original'));
         $html = '<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab" width="'.$options['width'].'" height="'.$options['height'].'">'
               . '<param name="src" value="'.$path.'" />'
               . '<param name="controller" value="'.($options['controller'] ? 'true' : 'false').'" />'
@@ -528,7 +528,7 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
      */
     private function _audio($file, array $options, $type)
     {
-        $path = html_escape($file->getWebPath('archive'));
+        $path = html_escape($file->getWebPath('original'));
         $html = '<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab" width="'.$options['width'].'" height="'.$options['height'].'">'
               . '<param name="src" value="'.$path.'" />'
               . '<param name="controller" value="'.($options['controller'] ? 'true' : 'false').'" />'
@@ -785,7 +785,7 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
      * @param string $format
      * @return string
      */
-    public function archive_image($record, $props, $format)
+    public function image_tag($record, $props, $format)
     {
         if (!$record) {
             return false;

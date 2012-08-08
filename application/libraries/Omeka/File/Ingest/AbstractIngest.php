@@ -7,14 +7,13 @@
  */
 
 /**
- * An abstract class that handles ingesting files into the Omeka archive and
- * database.  
+ * An abstract class that handles ingesting files into Omeka and database.
  * 
  * Specific responsibilities handled by this class:
  * - Parsing/validating arbitrary inputs that somehow identify the files to 
  *   be ingested.
  * - Iterating through the parsed file information, validating, and 
- *   transferring each file to the Omeka archive.
+ *   transferring each file to Omeka.
  * - Inserting a new record into the files table that corresponds to the
  *   transferred file's metadata.
  * - Returning a collection of the records associated with the ingested
@@ -96,7 +95,7 @@ abstract class Omeka_File_Ingest_AbstractIngest
     abstract protected function _getOriginalFilename($fileInfo);
     
     /**
-     * Transfer the file to the archive.  
+     * Transfer the file to Omeka.
      * 
      * To indicate validation errors, Omeka_File_Ingest_InvalidException can be
      * thrown at any time.  To indicate other types of non-recoverable errors 
@@ -133,7 +132,7 @@ abstract class Omeka_File_Ingest_AbstractIngest
      *   is valid (i.e. a valid URL), whether or not the file itself is valid
      *   (i.e. invalid file extension), or whether the basic algorithm for 
      *   ingesting the file fails (i.e., files cannot be transferred because the
-     *   archive/ directory is not writeable).  
+     *   files/ directory is not writeable).  
      *   This option is primarily useful for skipping known invalid files when 
      *   ingesting large data sets.
      * @return void
@@ -227,7 +226,7 @@ abstract class Omeka_File_Ingest_AbstractIngest
     /**
      * Insert a File record corresponding to an ingested file and its metadata.
      * 
-     * @param string $newFilePath Path to the file within Omeka's archive.
+     * @param string $newFilePath Path to the file within Omeka.
      * @param string $oldFilename The original filename for the file.  This will
      * usually be displayed to the end user.
      * @param array $elementMetadata See ActsAsElementText::addElementTextsByArray()
@@ -277,7 +276,7 @@ abstract class Omeka_File_Ingest_AbstractIngest
     protected function _getDestination($fromFilename)
     {
         $filter = new Omeka_Filter_Filename;
-        $filename = $filter->renameFileForArchive($fromFilename);
+        $filename = $filter->renameFile($fromFilename);
 
         $storage = Zend_Registry::get('storage');
         $dir = $storage->getTempDir();
@@ -315,8 +314,8 @@ abstract class Omeka_File_Ingest_AbstractIngest
      * - 'name': string filename (for Zend_Validate_File_Extension) If 
      *   ZF is unable to determine the file extension when validating, it will 
      *   check the 'name' attribute instead.  Current use cases involve saving the 
-     *   file to a temporary location before transferring to the Omeka archive.  
-     *   Most temporary files do not maintain the original file extension.
+     *   file to a temporary location before transferring to Omeka. Most 
+     *   temporary files do not maintain the original file extension.
      * - 'type': string MIME type (for Zend_Validate_File_MimeType) If ZF
      *   is unable to determine the mime type from the transferred file.  Unless 
      *   the server running Omeka has a mime_magic file or has installed the 

@@ -38,7 +38,7 @@ define('BASE_DIR',         dirname(__FILE__));
 define('APP_DIR',          BASE_DIR . '/application');
 define('PLUGIN_DIR',       BASE_DIR . '/plugins');
 define('ADMIN_DIR',        BASE_DIR . '/admin');
-define('ARCHIVE_DIR',      BASE_DIR . '/archive');
+define('FILES_DIR',      BASE_DIR . '/files');
 define('ADMIN_THEME_DIR',  BASE_DIR . '/admin/themes');
 define('PUBLIC_THEME_DIR', BASE_DIR . '/themes');
 define('INSTALL_DIR',      BASE_DIR . '/install');
@@ -64,7 +64,7 @@ define('HELPERS', HELPER_DIR . '/all.php');
 defined('WEB_ROOT') || _define_web_root();
 define('WEB_THEME', WEB_DIR . '/themes');
 define('WEB_PLUGIN',       WEB_ROOT . '/plugins');
-define('WEB_ARCHIVE',      WEB_ROOT . '/archive');
+define('WEB_FILES',      WEB_ROOT . '/files');
 define('WEB_PUBLIC_THEME', WEB_ROOT . '/themes');
 define('WEB_VIEW_SCRIPTS', WEB_ROOT . '/application/views/scripts');
 

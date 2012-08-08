@@ -15,12 +15,12 @@
 /plugins/
 /themes/
 
-# Archive
-/archive/files/*
-/archive/fullsize/*
-/archive/square_thumbnails/*
-/archive/theme_uploads/*
-/archive/thumbnails/*
+# Files
+/files/original/*
+/files/fullsize/*
+/files/square_thumbnails/*
+/files/theme_uploads/*
+/files/thumbnails/*
 
 # For macs
 .DS_Store

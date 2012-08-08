@@ -137,7 +137,7 @@ class Omeka_File_Derivative_Image_Creator
     }
 
     /**
-     * Generate a derivative image from an existing file stored in Omeka's archive.  
+     * Generate a derivative image from an existing file stored in Omeka.  
      * 
      * This image will be generated based on a constraint given in pixels.  For 
      * example, if the constraint is 500, the resulting image file will be scaled 

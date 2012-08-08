@@ -272,7 +272,7 @@ class UsersController extends Omeka_Controller_AbstractActionController
         $user = $record;
         return __('%s will be deleted from the system. Items, '
              . 'collections, and tags created by this user will remain in the '
-             . 'archive, but will no longer be associated with this user.', $user->username);
+             . 'system, but will no longer be associated with this user.', $user->username);
     }
 
     /**
@@ -293,10 +293,10 @@ class UsersController extends Omeka_Controller_AbstractActionController
         $from       = get_option('administrator_email');
         $body       = __('Welcome!')
                     ."\n\n"
-                    . __('Your account for the %s archive has been created. Please click the following link to activate your account:',$siteTitle)."\n\n"
+                    . __('Your account for the %s repository has been created. Please click the following link to activate your account:',$siteTitle)."\n\n"
                     . WEB_ROOT . "/admin/users/activate?u={$ua->url}\n\n"
                     . __('%s Administrator', $siteTitle);
-        $subject    = __('Activate your account with the %s archive', $siteTitle);
+        $subject    = __('Activate your account with the %s repository', $siteTitle);
         
         $mail = new Zend_Mail();
         $mail->setBodyText($body);

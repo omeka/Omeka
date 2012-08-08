@@ -64,7 +64,7 @@ class Models_Output_ItemAtomTest extends Omeka_Test_AppTestCase
         // an item without saving them.
         $file = new File;
         $file->id = 100;
-        $file->archive_filename = $filename;
+        $file->filename = $filename;
         $file->setMimeType($mimeType);
         $file->size = $size;
         $item->Files = array($file);
@@ -85,7 +85,7 @@ class Models_Output_ItemAtomTest extends Omeka_Test_AppTestCase
                         'rel' => 'enclosure',
                         'type' => $mimeType,
                         'length' => $size,
-                        'href' => $file->getWebPath('archive')
+                        'href' => $file->getWebPath('original')
                     )
                 )
             )

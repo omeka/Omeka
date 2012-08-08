@@ -110,18 +110,18 @@ abstract class Omeka_File_Ingest_AbstractSourceIngest extends Omeka_File_Ingest_
     }
     
     /**
-     * Transfer the file to the Omeka archive.
+     * Transfer the file to Omeka.
      * 
      * @param array $fileInfo
      * @param string $originalFilename
-     * @return string Path to file in archive.
+     * @return string Path to file in Omeka.
      */
     protected function _transferFile($fileInfo, $originalFilename)
     {        
         $fileSourcePath = $this->_getFileSource($fileInfo);
         $this->_validateSource($fileSourcePath, $fileInfo);
         
-        // The final destination of the file (Omeka archive).
+        // The final destination of the file in Omeka.
         $fileDestinationPath = $this->_getDestination($originalFilename);
         
         // Transfer to the temp directory.

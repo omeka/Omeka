@@ -26,8 +26,8 @@
     <div id="format-metadata" class="panel">
         <h4><?php echo __('Format Metadata'); ?></h4>
         <dl>
-        <dt><?php echo __('Archive Filename'); ?>:</dt>
-        <dd><?php echo metadata('file', 'Archive Filename'); ?></dd>
+        <dt><?php echo __('Filename'); ?>:</dt>
+        <dd><?php echo metadata('file', 'Filename'); ?></dd>
         <dt><?php echo __('Original Filename'); ?>:</dt>
         <dd><?php echo metadata('file', 'Original Filename'); ?></dd>
         <dt><?php echo __('File Size'); ?>:</dt>

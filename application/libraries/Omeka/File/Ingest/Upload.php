@@ -39,7 +39,7 @@ class Omeka_File_Ingest_Upload extends Omeka_File_Ingest_AbstractIngest
         $this->_adapter = new Zend_File_Transfer_Adapter_Http($this->_adapterOptions);
         $this->_adapter->setDestination($storage->getTempDir());
         
-        // Add a filter to rename the file to something archive-friendly.
+        // Add a filter to rename the file to something Omeka-friendly.
         $this->_adapter->addFilter(new Omeka_Filter_Filename);
     }
     
@@ -87,7 +87,7 @@ class Omeka_File_Ingest_Upload extends Omeka_File_Ingest_AbstractIngest
      * 
      * @param array $fileInfo
      * @param string $originalFilename
-     * @return string Path to the file in the archive.
+     * @return string Path to the file in Omeka.
      */
     protected function _transferFile($fileInfo, $originalFilename)
     {
@@ -96,7 +96,7 @@ class Omeka_File_Ingest_Upload extends Omeka_File_Ingest_AbstractIngest
             throw new Omeka_File_Ingest_InvalidException(join("\n\n", $this->_adapter->getMessages()));
         }
 
-        // Return the path to the file as it is listed in the archive.
+        // Return the path to the file as it is listed in Omeka.
         return $this->_adapter->getFileName($fileInfo['form_index']);
     }
         

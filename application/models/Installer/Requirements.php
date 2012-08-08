@@ -31,7 +31,7 @@ class Installer_Requirements
         $this->_checkHtaccessFilesExist();
         $this->_checkRegisterGlobalsIsOff();
         $this->_checkExifModuleIsLoaded();
-        $this->_checkArchiveStorageSetup();
+        $this->_checkFileStorageSetup();
         $this->_checkFileinfoIsLoaded();
     }
     
@@ -137,13 +137,13 @@ class Installer_Requirements
         }
     }
     
-    private function _checkArchiveStorageSetup()
+    private function _checkFileStorageSetup()
     {
         if (!$this->_storage->canStore()) {
             try {
                 $this->_storage->setUp();
             } catch (Omeka_Storage_Exception $e) {
-                $header = 'Archive storage not set up properly.';
+                $header = 'File storage not set up properly.';
                 $exMessage = $e->getMessage();
                 $message = "The following error occurred when attempting to "
                     . "set up storage for your Omeka site: $exMessage  "

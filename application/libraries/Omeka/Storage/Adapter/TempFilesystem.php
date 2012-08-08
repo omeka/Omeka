@@ -23,7 +23,7 @@ class Omeka_Storage_Adapter_TempFilesystem extends Omeka_Storage_Adapter_Filesys
 
     public function __construct(array $options = array())
     {
-        $this->_storageDir = sys_get_temp_dir() . '/archive' . mt_rand();
+        $this->_storageDir = sys_get_temp_dir() . '/files' . mt_rand();
         mkdir($this->_storageDir);
         $webDir = '/'; // CLI tests don't care whether the URL is valid.
         parent::__construct(array(

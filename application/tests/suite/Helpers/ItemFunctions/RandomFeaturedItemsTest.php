@@ -63,7 +63,7 @@ class Omeka_Helper_RandomFeaturedItemsTest extends Omeka_Test_AppTestCase
             
             $db->insert('File', array(
                 'has_derivative_image' => '1',
-                'archive_filename' => 'file'.$i,
+                'filename' => 'file'.$i,
                 'original_filename' => 'file'.$i,
                 'size' => 0,
                 'item_id' => $item->id

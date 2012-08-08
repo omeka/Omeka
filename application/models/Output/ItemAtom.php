@@ -161,7 +161,7 @@ class Output_ItemAtom
             foreach ($item->Files as $file) {
                 $feedEntryLinkEnclosureElement = $doc->createElement('link');
                 $feedEntryLinkEnclosureElement->setAttribute('rel', 'enclosure');
-                $feedEntryLinkEnclosureElement->setAttribute('href', $file->getWebPath('archive'));
+                $feedEntryLinkEnclosureElement->setAttribute('href', $file->getWebPath('original'));
                 $feedEntryLinkEnclosureElement->setAttribute('type', $file->mime_browser);
                 $feedEntryLinkEnclosureElement->setAttribute('length', $file->size);
                 $feedEntryElement->appendChild($feedEntryLinkEnclosureElement);

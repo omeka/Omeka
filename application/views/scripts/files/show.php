@@ -19,9 +19,9 @@
     <?php echo show_file_metadata(); ?>
 
     <div id="format-metadata">
-        <div id="archive-filename" class="element">
-            <h3><?php echo __('Archive Filename'); ?></h3>
-            <div class="element-text"><?php echo metadata('file', 'Archive Filename'); ?></div>
+        <div id="filename" class="element">
+            <h3><?php echo __('Filename'); ?></h3>
+            <div class="element-text"><?php echo metadata('file', 'Filename'); ?></div>
         </div>
 
         <div id="original-filename" class="element">

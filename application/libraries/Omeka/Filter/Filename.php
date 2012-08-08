@@ -6,7 +6,7 @@
  */
 
 /**
- * Rename a file to make it suitable for inclusion in the Omeka archive.
+ * Rename a file to make it suitable for inclusion in the Omeka repository.
  *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
@@ -24,7 +24,7 @@ class Omeka_Filter_Filename implements Zend_Filter_Interface
     {
         $filename = basename($value);
         $directory = dirname($value);
-        $newFilename = $this->renameFileForArchive($filename);
+        $newFilename = $this->renameFile($filename);
         
         $targetPath = $directory . '/' . $newFilename;
         $result = rename($value, $targetPath);
@@ -33,12 +33,12 @@ class Omeka_Filter_Filename implements Zend_Filter_Interface
     }
     
     /**
-     * Creates a new, random filename for storage in the archive.
+     * Creates a new, random filename for storage in Omeka.
      * 
      * @param string $name
      * @return string
      */
-    public function renameFileForArchive($name) 
+    public function renameFile($name) 
     {
         $extension = strrchr($name, '.');
         $basename = md5(mt_rand() + microtime(true));        

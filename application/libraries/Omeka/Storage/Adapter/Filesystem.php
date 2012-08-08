@@ -8,7 +8,7 @@
 /**
  * Standard local filesystem storage adapter.
  *
- * The default adapter; this stores files in the Omeka archive directory
+ * The default adapter; this stores files in the Omeka files directory
  * by default, but can be set to point to a different path.
  *
  * @package Omeka
@@ -26,7 +26,7 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter_AdapterI
         'thumbnails', 
         'square_thumbnails', 
         'fullsize', 
-        'files',
+        'original',
         'theme_uploads'
     );
 
@@ -59,18 +59,18 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter_AdapterI
                     break;
             }
         }
-        if (!$this->_localDir && defined('ARCHIVE_DIR')) {
-            $this->_localDir = ARCHIVE_DIR;
+        if (!$this->_localDir && defined('FILES_DIR')) {
+            $this->_localDir = FILES_DIR;
         }
-        if (!$this->_webDir && defined('WEB_ARCHIVE')) {
-            $this->_webDir = WEB_ARCHIVE;
+        if (!$this->_webDir && defined('WEB_FILES')) {
+            $this->_webDir = WEB_FILES;
         }
     }
 
     public function setUp()
     {
-        foreach ($this->_subDirs as $archiveDirName) {
-            $dirToCreate = $this->_getAbsPath($archiveDirName);
+        foreach ($this->_subDirs as $filesDirName) {
+            $dirToCreate = $this->_getAbsPath($filesDirName);
             if (!is_dir($dirToCreate)) {
                 $made = @mkdir($dirToCreate, 0770, true);
                 if (!$made || !is_readable($dirToCreate)) {

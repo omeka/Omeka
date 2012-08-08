@@ -43,7 +43,7 @@ class Omeka_File_Info
     public function __construct(File $file)
     {
         $this->_file = $file;
-        $this->_filePath = $file->getPath('archive');
+        $this->_filePath = $file->getPath('original');
     }
 
     /**

@@ -30,7 +30,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
 
     public $item_id;
     public $order;
-    public $archive_filename;
+    public $filename;
     public $original_filename;
     public $size = '0';
     public $authentication;
@@ -43,7 +43,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     public $stored = '0';
 
     static private $_pathsByType = array(
-        'archive' => 'files',
+        'original' => 'original',
         'fullsize' => 'fullsize',
         'thumbnail' => 'thumbnails',
         'square_thumbnail' => 'square_thumbnails'
@@ -54,7 +54,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      *
      * Available properties:
      * - id
-     * - archive filename
+     * - filename
      * - original filename
      * - size
      * - mime type
@@ -77,8 +77,8 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         switch ($property) {
             case 'id':
                 return $this->id;
-            case 'archive filename':
-                return $this->archive_filename;
+            case 'filename':
+                return $this->filename;
             case 'original filename':
                 return $this->original_filename;
             case 'size':
@@ -96,7 +96,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             case 'file type os':
                 return $this->type_os;
             case 'uri':
-                return $this->getWebPath('archive');
+                return $this->getWebPath('original');
             case 'fullsize uri':
                 return $this->getWebPath('fullsize');
             case 'thumbnail uri':
@@ -133,7 +133,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     protected function filterInput($post)
     {
         $immutable = array('id', 'modified', 'added', 
-                           'authentication', 'archive_filename', 
+                           'authentication', 'filename', 
                            'original_filename', 'mime_browser', 
                            'mime_os', 'type_os', 'item_id');
         foreach ($immutable as $value) {
@@ -157,7 +157,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      *
      * @return string
      */
-    public function getPath($type = 'archive')
+    public function getPath($type = 'original')
     {
         $fn = $this->getDerivativeFilename();
 
@@ -167,8 +167,8 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
 
         $dir = $this->getStorage()->getTempDir();
         
-        if ($type == 'archive') {
-            return $dir . '/' . $this->archive_filename;
+        if ($type == 'original') {
+            return $dir . '/' . $this->filename;
         } else {
             return $dir . "/{$type}_{$fn}";
         }
@@ -179,21 +179,21 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      *
      * @return void
      */
-    public function getWebPath($type = 'archive')
+    public function getWebPath($type = 'original')
     {
         return $this->getStorage()->getUri($this->getStoragePath($type));
     }
     
     public function getDerivativeFilename()
     {
-        $filename = basename($this->archive_filename);
+        $filename = basename($this->filename);
         $parts = explode('.', $filename);
         // One or more . in the filename, pop the last section to be replaced.
         if (count($parts) > 1) {
             $ext = array_pop($parts);
         }
         array_push($parts, self::DERIVATIVE_EXT);
-        return join('.', $parts);        
+        return join('.', $parts);
     }
     
     public function hasThumbnail()
@@ -210,7 +210,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      * Set the default values that will be stored for this file in the 'files' table.
      * 
      * These values include 'size', 'authentication', 'mime_browser', 'mime_os', 'type_os'
-     * and 'archive_filename.
+     * and 'filename.
      * 
      * @param string
      * @return void
@@ -225,7 +225,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         $this->mime_os      = trim(exec('file -ib ' . trim(escapeshellarg($filepath))));
         $this->type_os      = trim(exec('file -b ' . trim(escapeshellarg($filepath))));
         
-        $this->archive_filename = basename($filepath);
+        $this->filename = basename($filepath);
     }
         
     public function getMimeTypeElements($mimeType = null)
@@ -277,11 +277,11 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     {
         $storage = $this->getStorage();
 
-        $files = array($this->getStoragePath('archive'));
+        $files = array($this->getStoragePath('original'));
 
         if ($this->has_derivative_image) {
             $types = self::$_pathsByType;
-            unset($types['archive']);
+            unset($types['original']);
 
             foreach($types as $type => $path) {
                 $files[] = $this->getStoragePath($type);
@@ -310,7 +310,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         $creator->addDerivative('thumbnail', get_option('thumbnail_constraint'));
         $creator->addDerivative('square_thumbnail', get_option('square_thumbnail_constraint'), true);
         
-        if ($creator->create($this->getPath('archive'), 
+        if ($creator->create($this->getPath('original'), 
                              $this->getDerivativeFilename(),
                              $this->getMimeType())) {
             $this->has_derivative_image = 1;
@@ -333,16 +333,16 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     {
         $storage = $this->getStorage();
 
-        $archiveFilename = $this->archive_filename;
+        $filename = $this->filename;
         $derivativeFilename = $this->getDerivativeFilename();
         
-        $storage->store($this->getPath('archive'), $this->getStoragePath('archive'));
+        $storage->store($this->getPath('original'), $this->getStoragePath('original'));
                 
         if ($this->has_derivative_image) {
             $types = array_keys(self::$_pathsByType);
 
             foreach ($types as $type) {
-                if ($type != 'archive') {
+                if ($type != 'original') {
                     $storage->store($this->getPath($type), $this->getStoragePath($type));
                 }
             }
@@ -355,8 +355,8 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     {
         $storage = $this->getStorage();
         
-        if ($type == 'archive') {
-            $fn = $this->archive_filename;
+        if ($type == 'original') {
+            $fn = $this->filename;
         } else {
             $fn = $this->getDerivativeFilename();
         }

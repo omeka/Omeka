@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%files` (
   `mime_browser` varchar(255) collate utf8_unicode_ci default NULL,
   `mime_os` varchar(255) collate utf8_unicode_ci default NULL,
   `type_os` varchar(255) collate utf8_unicode_ci default NULL,
-  `archive_filename` text collate utf8_unicode_ci NOT NULL,
+  `filename` text collate utf8_unicode_ci NOT NULL,
   `original_filename` text collate utf8_unicode_ci NOT NULL,
   `modified` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `added` timestamp NOT NULL default '0000-00-00 00:00:00',

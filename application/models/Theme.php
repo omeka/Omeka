@@ -260,7 +260,7 @@ class Theme
     static public function getUploadedFileName($themeName, $optionName, $fileName)
     {
         $filter = new Omeka_Filter_Filename;
-        return $filter->renameFileForArchive($fileName);
+        return $filter->renameFile($fileName);
     }
     
     /**
