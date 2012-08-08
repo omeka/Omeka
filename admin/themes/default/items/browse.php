@@ -4,15 +4,6 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
 
             <?php echo flash(); ?>
 
-            <?php if (has_permission('Items', 'add')): ?>
-            <a href="<?php echo html_escape(uri('items/add')); ?>" class="add-item button small green"><?php echo __('Add an Item'); ?></a>
-            <?php endif; ?>
-
-            <div id="simple-search-form">
-                <?php echo simple_search(); ?>
-                <?php echo link_to_advanced_search(__('Advanced Search'), array('id' => 'advanced-search-link')); ?>
-            </div>
-
             <?php display_search_filters(); ?>
 
             <?php if ( total_results() ): ?>
@@ -98,17 +89,20 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
             
             <form action="<?php echo html_escape(uri('items/batch-edit')); ?>" method="post" accept-charset="utf-8">                
 
-                <div class="item-actions batch-edit-option">
+                <div class="item-actions batch-edit-option fourteen columns alpha">
+                    <?php if (has_permission('Items', 'add')): ?>
+                    <a href="<?php echo html_escape(uri('items/add')); ?>" class="add-item button small green"><?php echo __('Add an Item'); ?></a>
+                    <?php endif; ?>
+                    <?php echo link_to_advanced_search(__('Advanced Search'), array('id' => 'advanced-search-link', 'class' => 'small blue button')); ?>
                     <?php if (has_permission('Items', 'edit')): ?>
                     <input type="submit" class="edit-items small blue button" name="submit-batch-edit" value="<?php echo __('Edit'); ?>" />
                     <?php endif; ?>
                     <?php if (has_permission('Items', 'delete')): ?>
                     <input type="submit" class="red small" name="submit-batch-delete" value="<?php echo __('Delete'); ?>">
                     <?php endif; ?>
+                    <?php echo common('quick-filters',array(),'items'); ?>
                 </div>
-                
-                <?php echo common('quick-filters',array(),'items'); ?>
-                
+
             <table id="items" class="full" cellspacing="0" cellpadding="0">
                  <thead>
                     <tr>

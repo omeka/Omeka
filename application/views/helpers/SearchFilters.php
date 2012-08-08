@@ -99,11 +99,11 @@ class Omeka_View_Helper_SearchFilters extends Zend_View_Helper_Abstract
             $html .= '<div class="filters">';
             $html .= '<ul id="filter-list">';
             foreach($displayArray as $name => $query) {
-                $html .= '<li id="' . $name . '">' . ucfirst($name) . ': ' . $query . '</li>';
+                $html .= '<li class="' . $name . '">' . ucfirst($name) . ': ' . $query . '</li>';
             }
             if(!empty($advancedArray)) {
                 foreach($advancedArray as $j => $advanced) {
-                    $html .= '<li id="advanced">' . $advanced . '</li>';
+                    $html .= '<li class="advanced">' . $advanced . '</li>';
                 }
             }
             $html .= '</ul>';

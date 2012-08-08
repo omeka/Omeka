@@ -69,12 +69,27 @@
 <section class="container container-twelve">
 
     <?php echo common('content-nav', array('title' => $title)); ?>
+
+    <div class="subhead">
     
-    <?php if (isset($title)) : ?>
-    <h1 class="section-title"><?php echo $title ?></h1>
-    <?php endif; ?>
+        <form id="search" action="<?php echo uri('search') ?>" method="get">
+            <fieldset>
+                <input type="text" name="query" class="textinput" />
+                <input type="submit" value="Search" class="blue" />
+            </fieldset>
+        </form>
+            
+        <?php if (isset($title)) : ?>
+            <?php 
+                if(strlen($title) > 80) {
+                    $title = substr($title,0,79) . '..."';
+                } 
+            ?>
+            <h1 class="section-title"><?php echo $title ?></h1>
+        <?php endif; ?>
+    
+    </div>
     
     <section class="container">
     
-    
-    <div id="content" class="ten columns offset-by-two omega">
+        <div id="content" class="ten columns offset-by-two omega">

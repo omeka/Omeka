@@ -69,7 +69,11 @@ header nav { float: left; }
     padding: 0;
     }
 
-.section-title { margin-top: 20px;}
+.section-title { margin-top: 40px; width: 100%; }
+
+#search { position: relative; float: left; }
+
+    #search input[type=text] { width: 239px; }
 
     /* Browse Items
     ==================================================*/
@@ -93,7 +97,6 @@ header nav { float: left; }
     }
     
     .browse-items .pagination li { 
-        float: none; 
         display: inline-block; 
         margin: 0 5px 0 0;
     }
@@ -120,10 +123,7 @@ header nav { float: left; }
     .quick-filter-wrapper a { width: 100%; }
     
     .quick-filter-wrapper { margin: 1em 0;}
-                
-    #simple-search-form { margin-right: 5px; float: none; clear: both; }
-    
-    #search { width: 233px; }
+
 
 /* Content
 ==================================================*/
