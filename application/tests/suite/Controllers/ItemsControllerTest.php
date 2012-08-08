@@ -59,7 +59,6 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
     public static function formPresence()
     {
         return array(
-            array('/items/browse', 'form#simple-search'),
             array('/items/add', 'form#item-form'),
             array('/items/edit/1', 'form#item-form'),
             array('/items/advanced-search', 'form#advanced-search-form'),
