@@ -92,7 +92,7 @@
         <?php echo display_files_for_item(array('imageSize' => 'square_thumbnail', 'imgAttributes' => array('class' => 'admin-thumb'))); ?> 
         </div>
         <?php endif; ?>
-    <?php echo show_item_metadata(array('show_empty_elements' => true)); ?>
+    <?php echo show_item_metadata(); ?>
 </div>
 
 <?php fire_plugin_hook('admin_append_to_items_show_secondary', $item); ?>
