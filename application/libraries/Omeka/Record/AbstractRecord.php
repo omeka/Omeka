@@ -490,13 +490,11 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
     public function toArray()
     {
         $columns = $this->getTable()->getColumns();
-        
         $fields = array();
-        
         foreach ($columns as $col) {
-            $fields[$col] = $this->$col;
-        }    
-        
+            // Cast true to 1 and false to 0 to reflect what MySQL is expecting.
+            $fields[$col] = is_bool($this->$col) ? (int) $this->$col : $this->$col;
+        }
         return $fields;
     }    
     
