@@ -335,13 +335,13 @@ function add_file_display_callback($fileIdentifiers, $callback, array $options=a
  * @uses Omeka_Plugin_Filters::applyFilters()
  * @param string|array $name The filter name.
  * @param mixed $value The value to filter.
- * @param array $options Additional options to pass to filter implementations.
+ * @param array $args Additional arguments to pass to filter implementations.
  * @return mixed Result of applying filters to $value.
  */
-function apply_filters($name, $value, array $options = array())
+function apply_filters($name, $value, array $args = array())
 {
     if ($pluginBroker = get_plugin_broker()) {
-        return $pluginBroker->applyFilters($name, $value, $options);
+        return $pluginBroker->applyFilters($name, $value, $args);
     }
     // If the plugin broker is not enabled for this request (possibly for 
     // testing), return the original value.

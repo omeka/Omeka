@@ -577,10 +577,10 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
         // array('Validate', 'Item', 'Title', 'Dublin Core')
         // add_filter(array('Validate', 'Item', 'Title', 'Dublin Core'), 'my_filter_name');
         
-        // function my_filter_name($isValid, $elementText, $options)
+        // function my_filter_name($isValid, $elementText, $args)
         // {
-        //      $item = $options['item'];
-        //      $element = $options['element'];
+        //      $item = $args['item'];
+        //      $element = $args['element'];
         //      if (!in_array($elementText, array('foo'))) {
         //          return false;
         //      }

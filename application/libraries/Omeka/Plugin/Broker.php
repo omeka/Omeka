@@ -244,10 +244,10 @@ class Omeka_Plugin_Broker
      * @see addFilter()
      * @param mixed $name The filter name.
      * @param mixed $value The value to filter.
-     * @param array $options Additional options to pass to filter implementations.
+     * @param array $args Additional arguments to pass to filter implementations.
      * @return mixed Result of applying filters to $value.
      */
-    public function applyFilters($name, $value, array $options = array())
+    public function applyFilters($name, $value, array $args = array())
     {
         $filters = $this->getFilters($name);
         if ($filters) {
@@ -260,8 +260,8 @@ class Omeka_Plugin_Broker
                 foreach ($filterSet as $filter) {
                     // The value must be prepended to the argument set b/c it is
                     // always the first argument to any filter callback.
-                    if ($options) {
-                        $value = call_user_func($filter, $value, $options);
+                    if ($args) {
+                        $value = call_user_func($filter, $value, $args);
                     } else {
                         $value = call_user_func($filter, $value);
                     }
