@@ -315,7 +315,15 @@ class ItemsController extends Omeka_Controller_AbstractActionController
                 }
             }
 
-            $errorMessage = apply_filters('items_batch_edit_error', $errorMessage, $metadata, $custom, $itemIds);
+            $errorMessage = apply_filters(
+                'items_batch_edit_error', 
+                $errorMessage, 
+                array(
+                    'metadata' => $metadata, 
+                    'custom' => $custom, 
+                    'item_ids' => $itemIds, 
+                )
+            );
 
             if ($errorMessage) {
                 $this->_helper->flashMessenger($errorMessage, 'error');

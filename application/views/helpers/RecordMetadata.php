@@ -257,13 +257,6 @@ class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
         } else {
             $filterName[] = $metadata;
         }
-
-        if ($elementText) {
-            $text = apply_filters($filterName, $text, $record, $elementText);
-        } else {
-            $text = apply_filters($filterName, $text, $record);
-        }
-
-        return $text;
+        return apply_filters($filterName, $text, array('record' => $record, 'element_text' => $elementText));
     }
 }

@@ -222,7 +222,7 @@ function item_citation($item = null)
     $url = html_escape(abs_item_uri($item));
     $citation .= "accessed $accessed, $url.";
     
-    return apply_filters('item_citation', $citation, $item);
+    return apply_filters('item_citation', $citation, array('item' => $item));
 }
 
 /**

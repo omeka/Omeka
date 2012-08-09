@@ -70,7 +70,7 @@ class Omeka_View_Helper_SearchFilters extends Zend_View_Helper_Abstract
             }
         }
 
-        apply_filters('display_search_filters', $displayArray, $requestArray);
+        apply_filters('display_search_filters', $displayArray, array('request_array' => $requestArray));
         
         // Advanced needs a separate array from $displayValue because it's
         // possible for "Specific Fields" to have multiple values due to 

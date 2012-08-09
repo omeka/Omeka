@@ -769,7 +769,16 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
         $wrapper = !empty($wrapperAttributes) ? '<div ' . _tag_attributes($wrapperAttributes) . '>' : ''; 
         $html = !empty($wrapper) ? $wrapper . $html . "</div>" : $html;
         
-        return apply_filters('display_file', $html, $file, $callback, $options, $wrapperAttributes);
+        return apply_filters(
+            'display_file', 
+            $html, 
+            array(
+                'file' => $file, 
+                'callback' => $callback, 
+                'options' => $options, 
+                'wrapper_attributes' => $wrapperAttributes, 
+            )
+        );
     }
     
     private function _getFileExtension($file)

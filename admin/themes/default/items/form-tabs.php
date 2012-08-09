@@ -36,7 +36,7 @@ foreach (array('Files', 'Miscellaneous') as $tabName) {
     ob_end_clean();
 } 
 
-$tabs = apply_filters('admin_items_form_tabs', $tabs, $item);
+$tabs = apply_filters('admin_items_form_tabs', $tabs, array('item' => $item));
 ?>
 
 <!-- Create the sections for the various element sets -->

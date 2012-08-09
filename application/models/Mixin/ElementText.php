@@ -495,7 +495,11 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
                 
                 // Save element text filter.
                 $filterName = array('Save', $this->_getRecordType(), $element->set_name, $element->name);
-                $elementText = apply_filters($filterName, $elementText, $this->_record, $element);
+                $elementText = apply_filters(
+                    $filterName, 
+                    $elementText, 
+                    array('record' => $this->_record, 'element' => $element)
+                );
                 
                 // Ignore fields that are empty (no text)
                 if (empty($elementText)) {
@@ -526,7 +530,11 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
 
         // If no filters, this should return null.
         $flatText = null;
-        $flatText = apply_filters($filterName, $flatText, $postArray, $element);
+        $flatText = apply_filters(
+            $filterName, 
+            $flatText, 
+            array('post_array' => $postArray, 'element' => $element)
+        );
         
         // If we got something back, short-circuit the built-in processing.
         if ($flatText) {
@@ -569,8 +577,10 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
         // array('Validate', 'Item', 'Title', 'Dublin Core')
         // add_filter(array('Validate', 'Item', 'Title', 'Dublin Core'), 'my_filter_name');
         
-        // function my_filter_name($isValid, $elementText, $item, $element)
+        // function my_filter_name($isValid, $elementText, $options)
         // {
+        //      $item = $options['item'];
+        //      $element = $options['element'];
         //      if (!in_array($elementText, array('foo'))) {
         //          return false;
         //      }
@@ -582,7 +592,15 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
         // $textValue = the string value that needs to be validated
         // $record = the Item or File or whatever record that the element text needs to apply to.
         // $element = the Element record that the text belongs to.
-        $isValid = apply_filters($filterName, $isValid, $textValue, $this->_record, $elementRecord);
+        $isValid = apply_filters(
+            $filterName, 
+            $isValid, 
+            array(
+                'text' => $textValue, 
+                'record' => $this->_record, 
+                'element' => $elementRecord, 
+            )
+        );
 
         return $isValid;
     }

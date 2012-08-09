@@ -160,15 +160,15 @@ class Omeka_Plugin_Broker
      * Add a filter implementation.
      *
      * @see applyFilters()
-     * @param string|array $filterName Name of filter being implemented.
+     * @param string|array $name Name of filter being implemented.
      * @param callback $callback PHP callback for filter implementation.
      * @param integer|null (optional) Priority. A lower priority will
      * cause a filter to be run before those with higher priority.
      * @return void
      */
-    public function addFilter($filterName, $callback, $priority = 10)
+    public function addFilter($name, $callback, $priority = 10)
     {
-        $this->_filters[$this->_getFilterKey($filterName)][$priority][$this->_getFilterNamespace()] = $callback;
+        $this->_filters[$this->_getFilterKey($name)][$priority][$this->_getFilterNamespace()] = $callback;
     }
 
     /**
@@ -242,17 +242,14 @@ class Omeka_Plugin_Broker
      * Run an arbitrary value through a set of filters.
      *
      * @see addFilter()
-     * @param mixed $filterName Name of the filter to apply.
-     * @param mixed $value Value to be filtered.
-     * @param array $otherParams Optional set of parameters to pass in addition
-     * to the value to filter.  If these are passed, they will show up as
-     * sequential arguments to the filter implementation after the value to
-     * filter.
-     * @return mixed Result of filtering $value.
+     * @param mixed $name The filter name.
+     * @param mixed $value The value to filter.
+     * @param array $options Additional options to pass to filter implementations.
+     * @return mixed Result of applying filters to $value.
      */
-    public function applyFilters($filterName, $value, array $otherParams = array())
+    public function applyFilters($name, $value, array $options = array())
     {
-        $filters = $this->getFilters($filterName);
+        $filters = $this->getFilters($name);
         if ($filters) {
             // Filters are indexed by priority, then by plugin name.
             foreach ($filters as $priority => $filterSet) {
@@ -263,9 +260,11 @@ class Omeka_Plugin_Broker
                 foreach ($filterSet as $filter) {
                     // The value must be prepended to the argument set b/c it is
                     // always the first argument to any filter callback.
-                    $tempArgs = $otherParams;
-                    array_unshift($tempArgs, $value);
-                    $value = call_user_func_array($filter, $tempArgs);
+                    if ($options) {
+                        $value = call_user_func($filter, $value, $options);
+                    } else {
+                        $value = call_user_func($filter, $value);
+                    }
                 }
             }
         }

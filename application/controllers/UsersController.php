@@ -344,7 +344,7 @@ class UsersController extends Omeka_Controller_AbstractActionController
             $authAdapter->setIdentity($loginForm->getValue('username'))
                         ->setCredential($loginForm->getValue('password'));
         } else {
-            $authAdapter = apply_filters('login_adapter', $authAdapter, $loginForm);   
+            $authAdapter = apply_filters('login_adapter', $authAdapter, array('login_form' => $loginForm));
         }
         $authResult = $this->_auth->authenticate($authAdapter);
         if (!$authResult->isValid()) {

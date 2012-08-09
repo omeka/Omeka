@@ -78,10 +78,18 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
     {
         // Plugins should apply a filter to this blank HTML in order to display it in a certain way.
         $html = '';
-
+        
         $filterName = $this->_getPluginFilterForFormInput();
-
-        $html = apply_filters($filterName, $html, $inputNameStem, $value, array(), $this->_record, $this->_element);
+        $html = apply_filters(
+            $filterName, 
+            $html, 
+            array(
+                'input_name_stem' => $inputNameStem, 
+                'value' => $value, 
+                'record' => $this->_record, 
+                'element' => $this->_element, 
+            )
+        );
 
         // Short-circuit the default display functions b/c we already have the HTML we need.
         if (!empty($html)) {
@@ -143,7 +151,8 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
                     array('checked' => $isHtml))
               . '</label>';
 
-        $html = apply_filters('element_form_display_html_flag', $html, $this->_element);
+        $html = apply_filters('element_form_display_html_flag', 
+                              $html, array('element' => $this->_element));
         return $html;
     }
 }

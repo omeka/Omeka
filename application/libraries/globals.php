@@ -331,42 +331,36 @@ function add_file_display_callback($fileIdentifiers, $callback, array $options=a
 /**
  * Apply a set of plugin filters to a given value.
  *
- * The first two arguments represent the name of the filter and the value to
- * filter, and all subsequent arguments are passed to the individual filter
- * implementations.
- *
  * @since 0.10
  * @uses Omeka_Plugin_Filters::applyFilters()
- * @param string|array $filterName
- * @param mixed $valueToFilter
- * @param mixed $args,... (optional) Any additional arguments to pass to filter
- * implementations.
- * @return mixed Result of applying filters to $valueToFilter.
+ * @param string|array $name The filter name.
+ * @param mixed $value The value to filter.
+ * @param array $options Additional options to pass to filter implementations.
+ * @return mixed Result of applying filters to $value.
  */
-function apply_filters($filterName, $valueToFilter)
+function apply_filters($name, $value, array $options = array())
 {
     if ($pluginBroker = get_plugin_broker()) {
-        $extraOptions = array_slice(func_get_args(), 2);
-        return $pluginBroker->applyFilters($filterName, $valueToFilter, $extraOptions);
+        return $pluginBroker->applyFilters($name, $value, $options);
     }
-
-    // If the plugin broker is not enabled for this request (possibly for testing), return the original value.
-    return $valueToFilter;
+    // If the plugin broker is not enabled for this request (possibly for 
+    // testing), return the original value.
+    return $value;
 }
 
 /**
  * Declare a filter implementation.
  *
  * @since 0.10
- * @param string|array $filterName
- * @param callback $callback
+ * @param string|array $name The filter name.
+ * @param callback $callback The function to call.
  * @param integer $priority Optional, Defaults to 10.
  * @return void
  */
-function add_filter($filterName, $callback, $priority = 10)
+function add_filter($name, $callback, $priority = 10)
 {
     if ($pluginBroker = get_plugin_broker()) {
-        $pluginBroker->addFilter($filterName, $callback, $priority);
+        $pluginBroker->addFilter($name, $callback, $priority);
     }
 }
 

@@ -190,7 +190,11 @@ class Theme
     {
         $themeOptionName = self::getOptionName($themeName);
         $themeConfigOptions = get_option($themeOptionName);
-        $themeConfigOptions = apply_filters('theme_options', $themeConfigOptions, $themeName);
+        $themeConfigOptions = apply_filters(
+            'theme_options', 
+            $themeConfigOptions, 
+            array('theme_name' => $themeName)
+        );
         if ($themeConfigOptions) {
             $themeConfigOptions = unserialize($themeConfigOptions);
         } else {

@@ -366,8 +366,11 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
             // The 'define_action_contexts' filter receives the controller
             // object as the 2st argument and the context switcher object as the
             // 3nd (in case custom modification is required).
-            $contextArray = $broker->applyFilters('define_action_contexts', $contextArray,
-            array($this, $contextSwitcher));
+            $contextArray = $broker->applyFilters(
+                'define_action_contexts', 
+                $contextArray,
+                array('controller' => $this, 'context_switcher' => $contextSwitcher)
+            );
         }
 
         // Replace the existing contexts with the filtered plugin list.
