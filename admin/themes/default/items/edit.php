@@ -17,17 +17,21 @@
                 <div id="save" class="three columns omega panel">
                     
                     <?php echo $this->formSubmit('submit', __('Save Changes'), array('id'=>'save-changes', 'class'=>'submit big green button')); ?>
-                    <a href="<?php echo html_escape(public_uri('items/show/'.metadata('item', 'id'))); ?>" class="big blue button" target="_blank">View Public Page</a>
-                    <?php echo link_to_item(__('Delete Item'), array('class' => 'big red button'), 'delete-confirm'); ?>
+                    <a href="<?php echo html_escape(public_uri('items/show/'.metadata('item', 'id'))); ?>" class="big blue button" target="_blank"><?php echo __('View Public Page'); ?></a>
+                    <?php echo link_to_item(__('Delete'), array('class' => 'big red button'), 'delete-confirm'); ?>
         
                     <div id="public-featured">
                         <?php if ( has_permission('Items', 'makePublic') ): ?>
+                            <div class="public">
                                 <label for="public"><?php echo __('Public'); ?>:</label> 
                                 <?php echo $this->formCheckbox('public', $item->public, array(), array('1', '0')); ?>
+                            </div>
                         <?php endif; ?>
                         <?php if ( has_permission('Items', 'makeFeatured') ): ?>
+                            <div class="featured">
                                 <label for="featured"><?php echo __('Featured'); ?>:</label> 
                                 <?php echo $this->formCheckbox('featured', $item->featured, array(), array('1', '0')); ?>
+                            </div>
                         <?php endif; ?>
                     </div>
                     
