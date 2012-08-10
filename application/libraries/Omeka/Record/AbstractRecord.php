@@ -819,7 +819,7 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
      * modify the contents of $post before it is saved to the record.
      * @return void
      */
-    protected function beforeSaveForm($post) 
+    protected function beforeSaveForm($args) 
     {
         return true;
     }
@@ -847,7 +847,7 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
      * @param ArrayObject $post
      * @return void
      */
-    protected function afterSaveForm($post) 
+    protected function afterSaveForm($args) 
     {
         return true;
     }

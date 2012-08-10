@@ -35,8 +35,10 @@ class User extends Omeka_Record_AbstractRecord
     const INVALID_EMAIL_ERROR_MSG = "That email address is not valid.  A valid email address is required.";
     const CLAIMED_EMAIL_ERROR_MSG = "That email address has already been claimed by a different user. Please notify an administrator if you feel this has been done in error.";
     
-    protected function beforeSaveForm($post)
+    protected function beforeSaveForm($args)
     {
+        $post = $args['post'];
+        
         // Permissions check to see if whoever is trying to change role to a super-user
         if (!empty($post['role'])) {
             $bootstrap = Zend_Registry::get('bootstrap');

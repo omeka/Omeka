@@ -143,8 +143,8 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     }
     
     protected function beforeSaveForm($post)
-    {        
-        $this->beforeSaveElements($post);
+    {
+        $this->beforeSaveElements($args['post']);
     }
         
     public function getItem()

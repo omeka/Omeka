@@ -199,8 +199,10 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
         return false;
     }
     
-    protected function beforeSaveForm($post)
+    protected function beforeSaveForm($args)
     {
+        $post = $args['post'];
+        
         // Process the collectors that have been provided on the form
         if (isset($post['collectors'])) {
             $collectorPost = (string)$post['collectors'];

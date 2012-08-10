@@ -164,8 +164,10 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      *
      * @return void
      */
-    protected function beforeSaveForm($post)
-    {        
+    protected function beforeSaveForm($args)
+    {
+        $post = $args['post'];
+        
         $this->beforeSaveElements($post);
         
         if (!empty($post['change_type'])) {
@@ -208,8 +210,10 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      * 
      * @return void
      */
-    protected function afterSaveForm($post)
-    {        
+    protected function afterSaveForm($args)
+    {
+        $post = $args['post'];
+        
         // Update file order for this item.
         foreach ($post['order'] as $fileId => $fileOrder) {
             

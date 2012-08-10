@@ -411,14 +411,14 @@ class DummyRecord extends Omeka_Record_AbstractRecord
         }
     }
     
-    protected function beforeSaveForm($post)
+    protected function beforeSaveForm($args)
     {
-        Omeka_RecordTest::addToEventStack('DummyRecord::beforeSaveForm() with POST = ' . print_r($post, true));
+        Omeka_RecordTest::addToEventStack('DummyRecord::beforeSaveForm() with POST = ' . print_r($args['post'], true));
     }
     
-    protected function afterSaveForm($post)
+    protected function afterSaveForm($args)
     {
-        Omeka_RecordTest::addToEventStack('DummyRecord::afterSaveForm() with POST = ' . print_r($post, true));
+        Omeka_RecordTest::addToEventStack('DummyRecord::afterSaveForm() with POST = ' . print_r($args['post'], true));
     }
 }
 
