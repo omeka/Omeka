@@ -13,13 +13,13 @@
         
             <form method="post" enctype="multipart/form-data" id="item-form" action="">
                 <?php include 'form.php'; ?>
-                
+
                 <div id="save" class="three columns omega panel">
                     
                     <?php echo $this->formSubmit('submit', __('Save Changes'), array('id'=>'save-changes', 'class'=>'submit big green button')); ?>
                     <a href="<?php echo html_escape(public_uri('items/show/'.metadata('item', 'id'))); ?>" class="big blue button" target="_blank"><?php echo __('View Public Page'); ?></a>
                     <?php echo link_to_item(__('Delete'), array('class' => 'big red button'), 'delete-confirm'); ?>
-        
+
                     <div id="public-featured">
                         <?php if ( has_permission('Items', 'makePublic') ): ?>
                             <div class="public">

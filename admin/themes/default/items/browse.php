@@ -4,7 +4,9 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
 
             <?php echo flash(); ?>
 
-            <?php display_search_filters(); ?>
+            <div class="seven columns alpha">
+                <?php display_search_filters(); ?>
+            </div>
 
             <?php if ( total_results() ): ?>
             <script type="text/javascript">
@@ -178,10 +180,8 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                 <?php echo common('quick-filters',array(),'items'); ?>
                         
             </form>
-    
-                <div class="pagination">
-                    <div class="pagination"><?php echo pagination_links(); ?></div>
-                </div>            
+
+            <?php echo pagination_links(); ?>
 
             <?php else: ?>
                 <p><?php echo __('The query searched %s items and returned no results.', total_items()); ?> <?php echo __('Would you like to %s?', link_to_advanced_search(__('refine your search'))); ?></p>
