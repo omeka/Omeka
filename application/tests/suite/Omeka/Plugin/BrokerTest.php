@@ -58,13 +58,13 @@ class Omeka_Plugin_BrokerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('2nd argument', $this->testHooksFired['hook2']);
     }
     
-    public function hookImpl1($arg1, $arg2)
+    public function hookImpl1($args)
     {
-        $this->testHooksFired['hook1'] = $arg1;
+        $this->testHooksFired['hook1'] = $args[0];
     }
     
-    public function hookImpl2($arg1, $arg2)
+    public function hookImpl2($args)
     {
-        $this->testHooksFired['hook2'] = $arg2;
+        $this->testHooksFired['hook2'] = $args[1];
     }
 }

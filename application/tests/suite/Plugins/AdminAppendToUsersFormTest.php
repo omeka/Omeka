@@ -55,6 +55,6 @@ class Omeka_Plugins_AdminAppendToUsersFormTest extends Omeka_Test_AppTestCase
     
     public function appendExtraFormInput($args)
     {
-        $form->addElement('text', 'foobar', array('label' => 'TEST HOOK CONTENT'));
+        $args['form']->addElement('text', 'foobar', array('label' => 'TEST HOOK CONTENT'));
     }
 }

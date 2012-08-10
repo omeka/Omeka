@@ -73,7 +73,7 @@ class Omeka_Plugin_InstallerTest extends PHPUnit_Framework_TestCase
         // whether it actually calls the 'upgrade' hook.
         $this->broker->expects($this->once())
                  ->method('callHook')
-                 ->with('upgrade', array('1.0', '1.1'), $this->isInstanceOf('Plugin'));
+                 ->with('upgrade', array('old_version' => '1.0', 'new_version' => '1.1'), $this->isInstanceOf('Plugin'));
              
         $this->installer->upgrade($this->plugin);
     }
@@ -90,7 +90,7 @@ class Omeka_Plugin_InstallerTest extends PHPUnit_Framework_TestCase
                 
         $this->broker->expects($this->once())
                  ->method('callHook')
-                 ->with('install', array(1), $this->isInstanceOf('Plugin'));
+                 ->with('install', array('plugin_id' => 1), $this->isInstanceOf('Plugin'));
         
         $this->installer->install($this->plugin);
     }
@@ -131,6 +131,6 @@ class Omeka_Plugin_InstallerTest extends PHPUnit_Framework_TestCase
                 ->method('callHook')
                 ->with('uninstall', array(), $this->isInstanceOf('Plugin'));
         
-        $this->installer->uninstall($this->plugin);                  
+        $this->installer->uninstall($this->plugin);
     }        
 }

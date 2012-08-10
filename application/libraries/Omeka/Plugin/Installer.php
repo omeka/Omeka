@@ -94,7 +94,7 @@ class Omeka_Plugin_Installer
         $this->_broker->callHook(
             'upgrade', 
             array('old_version' => $oldVersion, 
-                  'new _version' => $plugin->getIniVersion()), 
+                  'new_version' => $plugin->getIniVersion()), 
             $plugin
         );
 

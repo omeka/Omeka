@@ -295,12 +295,12 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
         $record->saveForm($post);
         $postObject = new ArrayObject($post);
         $this->assertEquals(array(
-            'DummyRecord::beforeSaveForm() with POST = ' . print_r($postObject, true),
+            'DummyRecord::beforeSaveForm() with POST = ' . print_r(array('post' => $postObject), true),
             "DummyRecord::beforeInsert()",
             "DummyRecord::beforeSave()",
             "DummyRecord::afterInsert()",
             "DummyRecord::afterSave()",
-            'DummyRecord::afterSaveForm() with POST = ' . print_r($postObject, true)
+            'DummyRecord::afterSaveForm() with POST = ' . print_r(array('post' => $postObject), true)
         ),
         $this->_simpleStack());
     }
