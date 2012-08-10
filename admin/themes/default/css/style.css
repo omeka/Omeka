@@ -461,6 +461,9 @@ header ul {
         display: inline-block;
         margin: 0 0 5px -5px;
         vertical-align: top;
+        width: inherit;
+        padding: 0 5px;
+        float: none;
     }
 
 .subhead {
@@ -949,6 +952,7 @@ header nav {
 
 .plugins.browse a.button, .plugins.browse input[type=submit], .plugins.browse button {
     width: 90px;
+    height: auto;
     float: left;
     padding: 3px inherit;
 }
@@ -1073,7 +1077,7 @@ header nav {
     float: left;
     font-size: 14px;
     line-height: 1.5em;
-    margin: 0;
+    margin: 0px 0px 20px 0px;
     padding: 0;    
     z-index: 15;
 }
