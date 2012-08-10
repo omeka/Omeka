@@ -163,6 +163,10 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
         </table>
             
                 <div class="item-actions batch-edit-option">
+                    <?php if (has_permission('Items', 'add')): ?>
+                    <a href="<?php echo html_escape(uri('items/add')); ?>" class="add-item button small green"><?php echo __('Add an Item'); ?></a>
+                    <?php endif; ?>
+                    <?php echo link_to_advanced_search(__('Advanced Search'), array('id' => 'advanced-search-link', 'class' => 'small blue button')); ?>
                     <?php if (has_permission('Items', 'edit')): ?>
                     <input type="submit" class="edit-items small blue button" name="submit-batch-edit" value="<?php echo __('Edit'); ?>" />
                     <?php endif; ?>

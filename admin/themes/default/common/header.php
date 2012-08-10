@@ -37,7 +37,7 @@
 
     <div class="container">
     
-        <div id="site-title" class="one-third column">
+        <div id="site-title" class="two columns">
             <?php echo link_to_home_page(settings('site_title'), array('target' => '_blank')); ?>
         </div>
     
@@ -75,7 +75,7 @@
         <form id="search" action="<?php echo uri('search') ?>" method="get">
             <fieldset>
                 <input type="text" name="query" class="textinput" />
-                <input type="submit" value="Search" class="blue" />
+                <input type="submit" value="<?php echo __('Search'); ?>" class="blue" />
             </fieldset>
         </form>
             
