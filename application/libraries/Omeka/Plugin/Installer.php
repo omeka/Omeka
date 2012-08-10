@@ -91,7 +91,12 @@ class Omeka_Plugin_Installer
         $this->_loader->load($plugin, true);
 
         // run the upgrade hook for the plugin.
-        $this->_broker->callHook('upgrade', array($oldVersion, $plugin->getIniVersion()), $plugin);
+        $this->_broker->callHook(
+            'upgrade', 
+            array('old_version' => $oldVersion, 
+                  'new _version' => $plugin->getIniVersion()), 
+            $plugin
+        );
 
         $plugin->save();
     }
@@ -119,7 +124,7 @@ class Omeka_Plugin_Installer
             $this->_loader->load($plugin, true);
             
             //Now run the installer for the plugin
-            $this->_broker->callHook('install', array($plugin->id), $plugin);               
+            $this->_broker->callHook('install', array('plugin_id' => $plugin->id), $plugin);
         } catch (Exception $e) {
             //If there was an error, remove the plugin from the DB so that we can retry the install
             $plugin->delete();

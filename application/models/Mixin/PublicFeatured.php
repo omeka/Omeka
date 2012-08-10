@@ -86,7 +86,7 @@ class Mixin_PublicFeatured extends Omeka_Record_Mixin_AbstractMixin
         }
 
         if (isset($hookName)) {
-            fire_plugin_hook($hookName, $this->_record);
+            fire_plugin_hook($hookName, array('record' => $this->_record));
         }
     }
 }

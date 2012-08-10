@@ -57,4 +57,4 @@ if (empty($pathToConvert) && has_permission('Settings', 'edit')): ?>
 <?php endfor; ?>
 
 
-<?php fire_plugin_hook('admin_append_to_items_form_files', $item); ?>
+<?php fire_plugin_hook('admin_append_to_items_form_files', array('item' => $item)); ?>

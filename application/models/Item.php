@@ -288,7 +288,7 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      */
     private function _uploadFiles()
     {
-        fire_plugin_hook('before_upload_files', $this);
+        fire_plugin_hook('before_upload_files', array('item' => $this));
         // Tell it to always try the upload, but ignore any errors if any of
         // the files were not actually uploaded (left form fields empty).
         if (!empty($_FILES['file'])) {

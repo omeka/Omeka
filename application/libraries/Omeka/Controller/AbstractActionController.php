@@ -101,7 +101,8 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
         Zend_Registry::set($pluralName, $records);
 
         // Fire the plugin hook
-        fire_plugin_hook('browse_' . strtolower(ucwords($pluralName)),  $records);
+        fire_plugin_hook('browse_' . strtolower(ucwords($pluralName)), 
+                         array('records' => $records));
 
         // If we are using the pagination, we'll need to set some info in the
         // registry.
@@ -133,7 +134,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
 
         Zend_Registry::set($varName, $record);
 
-        fire_plugin_hook('show_' . strtolower(get_class($record)), $record);
+        fire_plugin_hook('show_' . strtolower(get_class($record)), array('record' => $record));
 
         $this->view->assign(array($varName => $record));
     }

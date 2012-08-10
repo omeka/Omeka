@@ -314,7 +314,8 @@ class Omeka_Db_Table
         }
         $this->applySearchFilters($select, $params);
 
-        fire_plugin_hook($this->_getHookName('browse_sql'), $select, $params);
+        fire_plugin_hook($this->_getHookName('browse_sql'), 
+                         array('select' => $select, 'params' => $params));
 
         return $select;
     }

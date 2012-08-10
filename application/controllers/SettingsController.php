@@ -108,7 +108,7 @@ class SettingsController extends Omeka_Controller_AbstractActionController
         require_once APP_DIR . '/forms/GeneralSettings.php';
         $form = new Omeka_Form_GeneralSettings;
         $form->setDefaults($this->getInvokeArg('bootstrap')->getResource('Options'));
-        fire_plugin_hook('general_settings_form', $form);
+        fire_plugin_hook('general_settings_form', array('form' => $form));
         return $form;
     }
     

@@ -27,7 +27,7 @@
     </fieldset>
     <?php endforeach; ?>
     
-    <?php fire_plugin_hook('admin_append_to_files_form', $file); ?>
+    <?php fire_plugin_hook('admin_append_to_files_form', array('file' => $file)); ?>
 
 </div>
 

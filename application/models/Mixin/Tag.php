@@ -224,12 +224,14 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
                 
         if (!empty($diff['added'])) {
             $this->addTags($diff['added']);
-            fire_plugin_hook("add_{$nameForHook}_tag",  $this->_record, $diff['added']);
+            fire_plugin_hook("add_{$nameForHook}_tag", 
+                             array('record' => $this->_record, 'added' => $diff['added']));
         }
 
         if (!empty($diff['removed'])) {
             $this->deleteTags($diff['removed']);
-            fire_plugin_hook("remove_{$nameForHook}_tag",  $this->_record, $diff['removed']);
+            fire_plugin_hook("remove_{$nameForHook}_tag", 
+                             array('record' => $this->_record, 'removed' => $diff['removed']));
         } 
     }
 }

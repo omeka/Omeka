@@ -425,7 +425,7 @@ class UsersController extends Omeka_Controller_AbstractActionController
             'hasActiveElement'  => $hasActiveElement,
             'user'              => $user
         ));
-        fire_plugin_hook('admin_append_to_users_form', $form, $user);
+        fire_plugin_hook('admin_append_to_users_form', array('form' => $form, 'user' => $user));
         return $form;
     }
 

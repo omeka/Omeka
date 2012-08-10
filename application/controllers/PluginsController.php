@@ -52,7 +52,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
         
         if ($this->getRequest()->isPost()) {
             try {
-                $this->_pluginBroker->callHook('config', array($_POST), $plugin);
+                $this->_pluginBroker->callHook('config', array('post' => $_POST), $plugin);
                 $this->_helper->flashMessenger(
                     __('The %s plugin was successfully configured!', $plugin->getDisplayName()),
                     'success'

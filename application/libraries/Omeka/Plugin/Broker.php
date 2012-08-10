@@ -8,7 +8,8 @@
 /**
  * Plugin Broker for Omeka.
  *
- * For example, $broker->callHook('add_action_contexts', $controller)
+ * For example, 
+ * $broker->callHook('add_action_contexts', array('controller' => $controller))
  * would call the 'add_action_contexts' on all plugins, and it would
  * provide the controller object as the first argument to all
  * implementations of that hook.
@@ -123,35 +124,37 @@ class Omeka_Plugin_Broker
 
     /**
      * Call a hook by name.
+     * 
      * Hooks can either be called globally or for a specific plugin only.
      *
-     * @param string $hook Name of the hook.
-     * @param array $args Arguments that are passed to each hook implementation.
-     * @param Plugin|string $plugin Optional name of the plugin for which to
-     * invoke the hook.
+     * @param string $name The name of the hook.
+     * @param array $args Arguments to be passed to the hook implementations.
+     * @param Plugin|string $plugin Name of the plugin that will invoke the hook.
      * @return void
      */
-    public function callHook($hook, $args = array(), $plugin = null)
+    public function callHook($name, array $args = array(), $plugin = null)
     {
-        if (empty($this->_callbacks[$hook])) {
+        // Check if callbacks were registered for this hook.
+        if (empty($this->_callbacks[$name])) {
             return;
         }
-
+        
         // If we are calling the hook for a single function, do that and return.
         if ($plugin) {
-            if ($callback = $this->getHook($plugin, $hook)) {
-                call_user_func_array($callback, $args);
+            if ($callback = $this->getHook($plugin, $name)) {
+                call_user_func($callback, $args);
             }
             return;
         }
-
+        
         // Otherwise iterate through all the hooks and call each in turn.
-        foreach ($this->_callbacks[$hook] as $pluginDirName => $callback) {
-            //Make sure the callback executes within the scope of the current plugin
+        foreach ($this->_callbacks[$name] as $pluginDirName => $callback) {
+            // Make sure the callback executes within the scope of the current 
+            // plugin
             $this->setCurrentPluginDirName($pluginDirName);
-            call_user_func_array($callback, $args);
+            call_user_func($callback, $args);
         }
-
+        
         // Reset the value for current plugin after this loop finishes
         $this->setCurrentPluginDirName(null);
     }

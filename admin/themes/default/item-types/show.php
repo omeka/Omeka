@@ -47,6 +47,6 @@
         </div>
     </div>
     
-    <?php fire_plugin_hook('admin_append_to_item_types_show_primary', $itemtype); ?>
+    <?php fire_plugin_hook('admin_append_to_item_types_show_primary', array('item_type' => $itemtype)); ?>
 </div>
 <?php foot();?>

@@ -186,6 +186,6 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
             
             
             
-            <?php fire_plugin_hook('admin_append_to_items_browse_primary', $items); ?>
+            <?php fire_plugin_hook('admin_append_to_items_browse_primary', array('items' => $items)); ?>
         
         <?php foot(); ?>

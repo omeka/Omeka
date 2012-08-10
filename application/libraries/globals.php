@@ -198,46 +198,39 @@ function add_plugin_hook($hook, $callback)
 /**
  * Declare the point of execution for a specific plugin hook.
  *
- * All plugin implementations of a given hook will be executed when this is called.
- *
- * The first argument corresponds to the string name of the hook.  Subsequent
- * arguments will be passed to the plugin hook implementations.
+ * All plugin implementations of a given hook will be executed when this is 
+ * called. The first argument corresponds to the string name of the hook. The 
+ * second is an associative array containing arguments that will be passed to 
+ * the plugin hook implementations.
  *
  * <code>
  * // Calls the hook 'after_save_item' with the arguments '$item' and '$arg2'
- * fire_plugin_hook('after_save_item', $item, $arg2);
+ * fire_plugin_hook('after_save_item', array('item' => $item, 'foo' => $arg2));
  * </code>
  *
- * @param string $hookName
- * @param mixed $args,... (optional) Any arguments to be passed to hook
- * implementations.
+ * @param string $name The hook name.
+ * @param array $args Arguments to be passed to the hook implementations.
  * @return mixed
  */
-function fire_plugin_hook()
+function fire_plugin_hook($name, array $args = array())
 {
     if ($pluginBroker = get_plugin_broker()) {
-        $args = func_get_args();
-        $hook = array_shift($args);
-        return $pluginBroker->callHook($hook, $args);
+        return $pluginBroker->callHook($name, $args);
     }
 }
 
 /**
  * Retrieve the output of fire_plugin_hook() as a string.
- *
- * This is invoked in the same way as fire_plugin_hook().
- *
+ * 
  * @uses fire_plugin_hook()
- * @param string $hookName
- * @param mixed $args,... (optional) Any arguments to be passed to hook
- * implementations.
+ * @param string $name The hook name.
+ * @param array $args Arguments to be passed to the hook implementations.
  * @return string
  */
-function get_plugin_hook_output()
+function get_plugin_hook_output($name, array $args = array())
 {
-    $args = func_get_args();
     ob_start();
-    call_user_func_array('fire_plugin_hook', $args);
+    fire_plugin_hook($name, $args);
     $content = ob_get_contents();
     ob_end_clean();
     return $content;

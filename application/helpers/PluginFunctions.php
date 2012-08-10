@@ -17,7 +17,7 @@
 function admin_plugin_footer()
 {
     $request = Zend_Controller_Front::getInstance()->getRequest();
-    fire_plugin_hook('admin_theme_footer', $request);
+    fire_plugin_hook('admin_theme_footer', array('request' => $request));
 }
 
 /**
@@ -44,7 +44,7 @@ function admin_plugin_footer()
 function admin_plugin_header()
 {
     $request = Zend_Controller_Front::getInstance()->getRequest();
-    fire_plugin_hook('admin_theme_header', $request);
+    fire_plugin_hook('admin_theme_header', array('request' => $request));
 }
 
 /**
@@ -136,7 +136,7 @@ function plugin_append_to_collections_show()
 function plugin_footer()
 {
     $request = Zend_Controller_Front::getInstance()->getRequest();
-    fire_plugin_hook('public_theme_footer', $request);
+    fire_plugin_hook('public_theme_footer', array('request' => $request));
 }
 
 /**
@@ -153,7 +153,7 @@ function plugin_footer()
 function plugin_header()
 {
     $request = Zend_Controller_Front::getInstance()->getRequest();
-    fire_plugin_hook('public_theme_header', $request);
+    fire_plugin_hook('public_theme_header', array('request' => $request));
 }
 
 /**
@@ -170,7 +170,7 @@ function plugin_header()
 function plugin_body()
 {
     $request = Zend_Controller_Front::getInstance()->getRequest();
-    fire_plugin_hook('public_theme_body', $request);
+    fire_plugin_hook('public_theme_body', array('request' => $request));
 }
 
 /**
@@ -187,7 +187,7 @@ function plugin_body()
 function plugin_page_header()
 {
     $request = Zend_Controller_Front::getInstance()->getRequest();
-    fire_plugin_hook('public_theme_page_header', $request);
+    fire_plugin_hook('public_theme_page_header', array('request' => $request));
 }
 
 /**
@@ -204,7 +204,7 @@ function plugin_page_header()
 function plugin_page_content()
 {
     $request = Zend_Controller_Front::getInstance()->getRequest();
-    fire_plugin_hook('public_theme_page_content', $request);
+    fire_plugin_hook('public_theme_page_content', array('request' => $request));
 }
 
 /**

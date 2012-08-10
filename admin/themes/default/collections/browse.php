@@ -63,6 +63,6 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
         <p><?php echo __('There are no collections in your system.'); ?> <?php if (has_permission('Collections', 'add')): ?><?php link_to('collections', 'add', __('Add a collection.')); ?><?php endif; ?></p>
     <?php endif; ?>
     
-    <?php fire_plugin_hook('admin_append_to_collections_browse_primary', $collections); ?>
+    <?php fire_plugin_hook('admin_append_to_collections_browse_primary', array('collections' => $collections)); ?>
 </div>      
 <?php foot(); ?>

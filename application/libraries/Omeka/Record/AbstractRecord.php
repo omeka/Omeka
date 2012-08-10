@@ -290,10 +290,9 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
         $plugin_hook_general = $plugin_hook_base . '_record'; 
         $plugin_hook_specific = $plugin_hook_base . '_' . Inflector::underscore(get_class($this));
         
-        // Plugins called from within the record always receive that record 
-        // instance as the first argument
-        array_unshift($args, $this);
-                    
+        // Plugins called from within the record always receive that record.
+        $args = array('record' => $this) + $args;
+        
         if ($broker = $this->getPluginBroker()) {
             // run a general hook (one which is not specific to the classs of the record)
             // this is used by plugins which may need to process every record, and 
@@ -780,12 +779,12 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
         {                    
             $clean = $this->filterInput($post);
             $clean = new ArrayObject($clean);
-            $this->runCallbacks('beforeSaveForm', $clean);
+            $this->runCallbacks('beforeSaveForm', array('post' => $clean));
             $clean = $this->setFromPost($clean);
             
             //Save will return TRUE if there are no validation errors
             if ($this->save(false)) {
-                $this->runCallbacks('afterSaveForm', $clean);
+                $this->runCallbacks('afterSaveForm', array('post' => $clean));
                 return true;
             } else {
                 $errors = $this->getErrors();

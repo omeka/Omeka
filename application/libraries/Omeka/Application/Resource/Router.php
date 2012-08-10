@@ -25,7 +25,7 @@ class Omeka_Application_Resource_Router extends Zend_Application_Resource_Router
         $routesIni = new Zend_Config_Ini(CONFIG_DIR . '/' . 'routes.ini', 'routes');
         $router->addConfig($routesIni);
         // Plugins hook into this.
-        fire_plugin_hook('define_routes', $router);
+        fire_plugin_hook('define_routes', array('router' => $router));
         return $router;
     }
 }

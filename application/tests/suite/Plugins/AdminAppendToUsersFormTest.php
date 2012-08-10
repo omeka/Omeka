@@ -53,7 +53,7 @@ class Omeka_Plugins_AdminAppendToUsersFormTest extends Omeka_Test_AppTestCase
         $this->assertQueryContentContains("label", "TEST HOOK CONTENT");
     }
     
-    public function appendExtraFormInput(Omeka_Form_User $form)
+    public function appendExtraFormInput($args)
     {
         $form->addElement('text', 'foobar', array('label' => 'TEST HOOK CONTENT'));
     }
