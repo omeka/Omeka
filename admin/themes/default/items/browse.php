@@ -184,8 +184,25 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
             <?php echo pagination_links(); ?>
 
             <?php else: ?>
-                <p><?php echo __('The query searched %s items and returned no results.', total_items()); ?> <?php echo __('Would you like to %s?', link_to_advanced_search(__('refine your search'))); ?></p>
-            
+
+                <?php if (total_items() === 0): ?>
+                
+                <h2><?php echo __('You have no items.'); ?></h2>
+                
+                    <?php if(has_permission('Items', 'add')): ?>
+                    
+                    <p>Get started by adding your first item.</p>
+                    
+                            <a href="<?php echo html_escape(uri('items/add')); ?>" class="add-item big green button"><?php echo __('Add an Item'); ?></a>
+                    <?php endif; ?>
+
+                <?php else: ?>
+                    
+                    <p><?php echo __('The query searched %s items and returned no results.', total_items()); ?> <?php echo __('Would you like to %s?', link_to_advanced_search(__('refine your search'))); ?></p>
+    
+                
+                <?php endif; ?>
+
             <?php endif; ?>
             
             
