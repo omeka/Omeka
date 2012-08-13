@@ -6,21 +6,21 @@ class Job_SearchTextIndex extends Omeka_Job_AbstractJob
      * Omeka_Record_AbstractRecord and implement the search mixin.
      * @var array
      */
-    protected $_searchRecords = array('Item', 'File', 'Collection');
+    protected $_recordsTypes = array('Item', 'File', 'Collection');
     
     public function perform()
     {
         // Get the registry of records that implement the search mixin.
         $pluginBroker = Zend_Registry::get('pluginbroker');
-        $searchRecords = $pluginBroker->applyFilters('search_records', $this->_searchRecords);
+        $recordTypes = $pluginBroker->applyFilters('search_record_types', $this->_recordsTypes);
         
-        foreach ($searchRecords as $searchRecord) {
+        foreach ($recordTypes as $recordType) {
             
-            if (!class_exists($searchRecord)) {
+            if (!class_exists($recordType)) {
                 // The class does not exist or cannot be found.
                 continue;
             }
-            $record = new $searchRecord;
+            $record = new $recordType;
             if (!($record instanceof Omeka_Record_AbstractRecord)) {
                 // The class is not a valid record.
                 continue;

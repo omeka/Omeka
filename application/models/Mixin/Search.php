@@ -62,11 +62,11 @@ class Mixin_Search extends Omeka_Record_Mixin_AbstractMixin
      */
     public function afterSave()
     {
-        $recordName = get_class($this->_record);
-        $searchText = $this->_record->getDb()->getTable('SearchText')->findByRecord($recordName, $this->_record->id);
+        $recordType = get_class($this->_record);
+        $searchText = $this->_record->getDb()->getTable('SearchText')->findByRecord($recordType, $this->_record->id);
         if (!$searchText) {
             $searchText = new SearchText;
-            $searchText->record_name = $recordName;
+            $searchText->record_type = $recordType;
             $searchText->record_id = $this->_record->id;
         }
         $searchText->public = $this->_public ? 1 : 0;

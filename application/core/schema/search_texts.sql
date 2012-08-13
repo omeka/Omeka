@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS `%PREFIX%search_texts` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `record_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `record_type` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `record_id` int(10) unsigned NOT NULL,
   `public` tinyint(1) NOT NULL,
   `title` tinytext COLLATE utf8_unicode_ci,
