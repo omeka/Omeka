@@ -3,7 +3,8 @@ class SearchController extends Omeka_Controller_AbstractActionController
 {
     public function indexAction()
     {
-        $results = $this->_helper->db->getTable('SearchText')->search($this->_getParam('query'));
+        $results = $this->_helper->db->getTable('SearchText')
+            ->search($this->_getParam('query'), $this->_getParam('record_type'));
         $this->view->results = $results;
     }
     

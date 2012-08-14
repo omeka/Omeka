@@ -6,9 +6,8 @@ head(array('title' => $pageTitle));
     <table>
         <thead>
             <tr>
-                <th>Record</th>
+                <th>Record Type</th>
                 <th>Title</th>
-                <th>Relevance</th>
             </tr>
         </thead>
         <tbody>
@@ -16,7 +15,6 @@ head(array('title' => $pageTitle));
             <tr>
                 <td><?php echo Inflector::titleize($result['record_type']); ?></td>
                 <td><a href="<?php echo record_uri($result['record'], 'show'); ?>"><?php echo $result['title'] ? $result['title'] : '[Unknown]'; ?></a></td>
-                <td><?php echo $result['relevance']; ?></td>
             </tr>
             <?php endforeach; ?>
         </tbody>
