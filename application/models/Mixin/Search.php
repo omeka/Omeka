@@ -108,8 +108,13 @@ class Mixin_Search extends Omeka_Record_Mixin_AbstractMixin
         // Apply the filters only once.
         static $searchRecordTypes = null;
         if (!$searchRecordTypes) {
-            $searchRecordTypes = Zend_Registry::get('pluginbroker')
-                ->applyFilters('search_record_types', array('Item', 'File', 'Collection'));
+            $coreSearchRecordTypes = array('Item', 'File', 'Collection');
+            try {
+                $searchRecordTypes = Zend_Registry::get('pluginbroker')
+                    ->applyFilters('search_record_types', $coreSearchRecordTypes);
+            } catch (Zend_Exception $e) {
+                $searchRecordTypes = $coreSearchRecordTypes;
+            }
         }
         return $searchRecordTypes;
     }
