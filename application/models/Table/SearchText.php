@@ -2,6 +2,21 @@
 class Table_SearchText extends Omeka_Db_Table
 {
     /**
+     * Find search text by record.
+     * 
+     * @param string $recordType
+     * @param int $recordId
+     * @return SearchText|null
+     */
+    public function findByRecord($recordType, $recordId)
+    {
+         $select = $this->getSelect();
+         $select->where('record_type = ?', $recordType);
+         $select->where('record_id = ?', $recordId);
+         return $this->fetchObject($select);
+    }
+    
+    /**
      * Perform a fulltext search.
      * 
      * @param string $query
