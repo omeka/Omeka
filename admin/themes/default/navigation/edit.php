@@ -10,10 +10,21 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
         padding: 0; 
         width: 80%; 
     }
+    
     #navigation_main_list li { 
-        margin: 3px 3px 3px 3px; 
+        margin: 3px 3px 6px 3px; 
         background-color: #EEEEEE;
-        font-size: 14px; 
+        font-size: 14px;    
+    }
+    
+    #navigation_main_list_new {
+        margin-top: 20px;
+    }
+    
+    .navigation_main_list_delete {
+        float: right;
+        margin-top: 3px;
+        margin-right: 20px;
     }
 </style>
 
@@ -25,8 +36,43 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
         jQuery('#navigation_main_list > dd').wrapInner('<li />');
         jQuery('#navigation_main_list > dd > li').unwrap();
         
-        jQuery( "#navigation_main_list" ).sortable();
-    	jQuery( "#navigation_main_list" ).disableSelection();
+        jQuery( '#navigation_main_list' ).sortable();
+    	jQuery( '#navigation_main_list' ).disableSelection();
+    	
+    	function updateDeletables() {
+    	    jQuery( 'input.can_delete_nav_link').each(function(i,e) {
+    	       if (!jQuery(e).parent().children('a[class="navigation_main_list_delete"]').length) {
+    	           jQuery(e).parent().append('<a class="navigation_main_list_delete" href="">Delete</a>');
+           	       jQuery(e).parent().children('.navigation_main_list_delete').click(function(ee) {
+           	           ee.preventDefault();
+               	       jQuery(ee.target).parent().remove();
+           	       });
+    	       } 
+    	    });
+    	}
+    	
+    	updateDeletables();
+    	
+    	jQuery( '#navigation_main_list').after('<div id="navigation_main_list_new"><label for="navigation_main_list_new_text">New Link Text</label><br/><input id="navigation_main_list_new_text" type="text"/><br/><label for="navigation_main_list_new_uri">New Link URI</label><br/><input id="navigation_main_list_new_uri" type="text" /><br/><a href="" id="navigation_main_list_add" class="blue button">Add Link</a></div>');
+    	
+    	jQuery( '#navigation_main_list_add' ).click(function(e) {
+    	    e.preventDefault();
+            var n_text = jQuery( '#navigation_main_list_new_text' ).val();
+            var n_uri = jQuery( '#navigation_main_list_new_uri' ).val();
+            if (n_text && n_uri) {
+                
+                var n_id = 'navigation_main_nav_checkboxes_new_' + (new Date()).getTime();                
+                var n_value = '1' +'|' + n_uri + '|' + n_text;
+                
+                jQuery( '#navigation_main_list' ).append('<li><input type="hidden" name="' + n_id + '" value="0"><input type="checkbox" name="' + n_id + '" id="' + n_id + '" value="' + n_value +  '" class="can_delete_nav_link"> <a href="' + n_uri + '">' + n_text + '</a></li>');
+                
+                
+                jQuery( '#navigation_main_list_new_text' ).val('');
+                jQuery( '#navigation_main_list_new_uri' ).val('');
+                
+                updateDeletables();
+            }
+    	});
     	
     	jQuery('#navigation_form').submit(function(e) {
 
@@ -50,6 +96,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
 <div class="seven columns alpha">
 <?php echo flash(); ?>
 <h2>Main Navigation</h2>
+<p>Check the links you would like to display in the main navigation. Drag the links into the order you would like them displayed.</p>
 <?php echo $this->form; ?>
 </div>
 

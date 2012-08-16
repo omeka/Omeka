@@ -102,6 +102,6 @@ class Omeka_Form_Navigation extends Omeka_Form
     
     private function _getPageId(Zend_Navigation_Page $page) 
     {
-        return (int)$page->isActive() . '|' . $page->getHref() . '|' . $page->getLabel();
+        return (int)$page->can_delete . '|' . $page->getHref() . '|' . $page->getLabel();
     }
 }
