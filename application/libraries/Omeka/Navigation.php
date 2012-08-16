@@ -49,7 +49,10 @@ class Omeka_Navigation extends Zend_Navigation
      */
     public function addPagesFromFilters() 
     {
-        $pageLinks = array();
+        $pageLinks = array(
+            __('Browse Items') => public_uri('items'), 
+            __('Browse Collections') => public_uri('collections')
+        );
         $pageLinks = apply_filters('public_navigation_main', $pageLinks);        
         
         $pageUids = array();

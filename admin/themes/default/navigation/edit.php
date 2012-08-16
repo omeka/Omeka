@@ -96,7 +96,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
 <div class="seven columns alpha">
 <?php echo flash(); ?>
 <h2>Main Navigation</h2>
-<p>Check the links you would like to display in the main navigation. Drag the links into the order you would like them displayed.</p>
+<p>Check the links you would like to display in the main navigation.<br/> You can click and drag the links into your preferred display order.</p>
 <?php echo $this->form; ?>
 </div>
 
