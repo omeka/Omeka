@@ -1,0 +1,80 @@
+<?php
+/**
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @package Omeka
+ * @access private
+ */
+
+/**
+ * @internal This implements Omeka internals and is not part of the public API.
+ * @access private
+ * @package Omeka
+ * @subpackage Controllers
+ * @author CHNM
+ * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
+ */
+class NavigationController extends Omeka_Controller_AbstractActionController
+{            
+    const NAVIGATION_MAIN_OPTION_NAME = 'navigation_main';
+    
+    public function indexAction() 
+    {
+        $this->_forward('edit');
+    }
+    
+    public function browseAction() 
+    {
+        $this->_forward('edit');
+    }
+    
+    public function editAction() 
+    {
+        $form = $this->_getForm();
+        $this->view->form = $form;
+        
+        if (isset($_POST['navigation_submit'])) {
+            if ($form->isValid($_POST)) {
+                $this->_setOptions($form);
+                $this->_helper->flashMessenger(__('The navigation settings have been updated.'), 'success');
+            } else {
+                $this->_helper->flashMessenger(__('There were errors found in your form. Please edit and resubmit.'), 'error');
+            }
+        }
+    }
+    
+    /**
+     * Gets navigation form
+     * 
+     * @param string
+     * @return boolean
+     */    
+    private function _getForm()
+    {
+        require_once APP_DIR . '/forms/Navigation.php';
+        
+        $nav = new Omeka_Navigation();
+        $nav->loadAsOption(self::NAVIGATION_MAIN_OPTION_NAME);
+        $nav->addPagesFromFilters();
+        
+        $form = new Omeka_Form_Navigation();
+        $form->setNavigation($nav);
+        
+        fire_plugin_hook('navigation_form', array('form' => $form));
+        return $form;
+    }
+    
+    /**
+     * Sets navigation form
+     * 
+     * @param string
+     * @return boolean
+     */
+    private function _setOptions(Zend_Form $form)
+    {   
+        $nav = new Omeka_Navigation();             
+        $form->addPagesToNavFromHiddenElementValue($nav);        
+        $nav->saveAsOption('navigation_main');
+        $form->setNavigation($nav);        
+    }
+}
