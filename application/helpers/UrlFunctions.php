@@ -113,10 +113,11 @@ function file_display_uri(File $file, $format='fullsize')
 
 /**
  * Given an Omeka_Record_AbstractRecord instance and the name of an action, this 
- * will generated the URI for that record.  Used primarily by other theme 
- * helpers and most likely not useful for theme writers.
+ * will generate the URI for that record. Used primarily by other theme helpers 
+ * and most likely not useful for theme writers.
  *
  * @since 0.10
+ * @uses Omeka_Record_AbstractRecord::getRecordRoute()
  * @param Omeka_Record_AbstractRecord $record
  * @param string $action
  * @param string|null $controller Optional
@@ -124,23 +125,8 @@ function file_display_uri(File $file, $format='fullsize')
  */
 function record_uri(Omeka_Record_AbstractRecord $record, $action, $controller = null)
 {
-    $options = array();
-    // Inflect the name of the controller from the record class if no
-    // controller name is given.
-    if (!$controller) {
-        $recordClass = get_class($record);
-        $inflector = new Zend_Filter_Word_CamelCaseToDash();
-        // Convert the record class name from CamelCased to dashed-lowercase.
-        $controller = strtolower($inflector->filter($recordClass));
-        // Pluralize the record class name.
-        $controller = Inflector::pluralize($controller);
-    }
-    $options['controller'] = $controller;
-    $options['id'] = $record->id;
-    $options['action'] = $action;
-
     // Use the 'id' route for all urls pointing to records
-    return uri($options, 'id');
+    return uri($record->getRecordRoute($action, $controller), 'id');
 }
 
 /**

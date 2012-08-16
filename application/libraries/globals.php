@@ -285,7 +285,7 @@ function get_plugin_broker()
 {
     try {
         return Zend_Registry::get('pluginbroker');
-    } catch (Exception $e) {
+    } catch (Zend_Exception $e) {
         return null;
     }
 }

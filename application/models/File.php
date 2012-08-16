@@ -127,7 +127,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     {
         $dispatcher = Zend_Registry::get('job_dispatcher');
         $dispatcher->setQueueName('uploads');
-        $dispatcher->send('Job_FileProcessUpload', array('fileId' => $this->id));
+        $dispatcher->send('Job_FileProcessUpload', array('fileData' => $this->toArray()));
     }
     
     protected function filterInput($post)

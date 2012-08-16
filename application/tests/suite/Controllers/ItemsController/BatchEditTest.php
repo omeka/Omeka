@@ -312,7 +312,7 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
         $messages = $flash->getCurrentMessages();
         
         if ($succeeds) {
-            $this->assertContains("The items were successfully changed!", $messages['success']);
+            $this->assertContains("The items were successfully deleted!", $messages['success']);
             foreach ($itemIds as $id) {
                 $item = $this->db->getTable('Item')->find($id);
                 $this->assertNull($item);

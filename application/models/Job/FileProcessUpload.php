@@ -29,10 +29,8 @@ class Job_FileProcessUpload extends Omeka_Job_AbstractJob
 
     private function _getFile()
     {
-        $file = $this->_db->getTable('File')->find($this->_options['fileId']);
-        if (!$file) {
-            throw new RuntimeException("File with ID={$this->_options['fileId']} does not exist");
-        }
+        $file = new File;
+        $file->setArray($this->_options['fileData']);
         return $file;
     }
 }

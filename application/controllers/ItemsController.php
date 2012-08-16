@@ -338,8 +338,12 @@ class ItemsController extends Omeka_Controller_AbstractActionController
                         'custom' => $custom
                     )
                 );
-                $this->_helper->flashMessenger(__('The items were successfully changed!'), 'success');
-            }
+                if ($delete) {
+                  $message = __('The items were successfully deleted!');
+                } else {
+                  $message = __('The items were successfully changed!');
+                }
+                $this->_helper->flashMessenger($message, 'success');            }
          }
 
          $this->_helper->redirector('browse', 'items');
