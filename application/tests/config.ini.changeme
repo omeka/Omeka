@@ -6,7 +6,14 @@ db.password = ""
 db.dbname = ""
 
 paths.imagemagick = ""
-paths.maildir = ""
+
+; A temp directory for the tests to write to. If not set, the tests will use
+; _files/temp under this directory.
+;
+; Warning: the tests wipe this directory on each run, so don't specify a directory
+; that contains anything.
+;
+;paths.tempDir = ""
 
 ; The [site] section below will be merged with the main config.ini such that it
 ; overrides settings in that file.  These config settings do not need to change

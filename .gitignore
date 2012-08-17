@@ -11,6 +11,9 @@
 /application/logs/processes.log
 /application/tests/log.xml
 
+# Test files
+/application/tests/_files/temp/
+
 # Plugins and themes
 /plugins/
 /themes/

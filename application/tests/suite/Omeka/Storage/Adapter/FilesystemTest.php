@@ -7,6 +7,14 @@ class Omeka_Storage_Adapter_FilesystemTest extends PHPUnit_Framework_TestCase
         'webDir' => '/foobar',
     );
 
+    public static $tempDir;
+
+    public static function setUpBeforeClass()
+    {
+        $tempDirResource = new Omeka_Test_Resource_Tempdir;
+        self::$tempDir = $tempDirResource->init();
+    }
+
     public function testDefaultLocalDir()
     {
         $storage = new Omeka_Storage_Adapter_Filesystem();
@@ -47,7 +55,7 @@ class Omeka_Storage_Adapter_FilesystemTest extends PHPUnit_Framework_TestCase
     {
         $cantStore = new Omeka_Storage_Adapter_Filesystem($this->_options);
         $this->assertFalse($cantStore->canStore());
-        $tempDir = sys_get_temp_dir();
+        $tempDir = self::$tempDir;
         $canStore = new Omeka_Storage_Adapter_Filesystem(array(
             'localDir' => $tempDir,
         ));
@@ -58,7 +66,7 @@ class Omeka_Storage_Adapter_FilesystemTest extends PHPUnit_Framework_TestCase
     public static function localDirs()
     {
         return array(
-            array(sys_get_temp_dir(), false),
+            array(null, false),
             array('/foo/bar' . mt_rand(), true),
         );
     }
@@ -68,10 +76,14 @@ class Omeka_Storage_Adapter_FilesystemTest extends PHPUnit_Framework_TestCase
      */
     public function testMove($localDir, $throwsException)
     {
+        if (!$localDir) {
+            $localDir = self::$tempDir;
+        }
+        
         $storage = new Omeka_Storage_Adapter_Filesystem(array(
             'localDir' => $localDir,
         ));
-        $testFile = tempnam($localDir, 'omeka_storage_filesystem_test');
+        $testFile = tempnam(self::$tempDir, 'omeka_storage_filesystem_test');
         try {
             $storage->move(basename($testFile), 'foo.txt');
             $this->assertTrue(file_exists("$localDir/foo.txt"));
@@ -90,10 +102,14 @@ class Omeka_Storage_Adapter_FilesystemTest extends PHPUnit_Framework_TestCase
      */
     public function testStore($localDir, $throwsException)
     {
+        if (!$localDir) {
+            $localDir = self::$tempDir;
+        }
+        
         $storage = new Omeka_Storage_Adapter_Filesystem(array(
             'localDir' => $localDir,
         ));
-        $testFile = tempnam(sys_get_temp_dir(), 'omeka_storage_filesystem_test');
+        $testFile = tempnam(self::$tempDir, 'omeka_storage_filesystem_test');
         try {
             $storage->store($testFile, 'foo.txt');
             $this->assertTrue(file_exists("$localDir/foo.txt"));
@@ -109,7 +125,7 @@ class Omeka_Storage_Adapter_FilesystemTest extends PHPUnit_Framework_TestCase
 
     public function testDelete()
     {
-        $tempDir = sys_get_temp_dir();
+        $tempDir = self::$tempDir;
         $storage = new Omeka_Storage_Adapter_Filesystem(array(
             'localDir' => $tempDir,
         ));
@@ -128,7 +144,7 @@ class Omeka_Storage_Adapter_FilesystemTest extends PHPUnit_Framework_TestCase
     public static function notWritable()
     {
         return array(
-            array('store', array(self::_getWritableFile(), 
+            array('store', array(self::_getRandomFilename(), 
                                  self::_getRandomFilename())),
             array('move', array(self::_getRandomFilename(),
                                 self::_getRandomFilename())),
@@ -152,13 +168,5 @@ class Omeka_Storage_Adapter_FilesystemTest extends PHPUnit_Framework_TestCase
     private static function _getRandomFilename()
     {
         return 'foo.txt' . mt_rand();
-    }
-
-    private static function _getWritableFile($dir = null)
-    {
-        if ($dir === null) {
-            $dir = sys_get_temp_dir();
-        }
-        return tempnam($dir, 'omeka_storage_filesystem_test');
     }
 }

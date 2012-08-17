@@ -20,9 +20,9 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter_AdapterI
      * 
      * @var string
      */
-    private $_localDir;
+    protected $_localDir;
 
-    private $_subDirs = array(
+    protected $_subDirs = array(
         'thumbnails', 
         'square_thumbnails', 
         'fullsize', 
@@ -35,7 +35,7 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter_AdapterI
      *
      * @var string
      */
-    private $_webDir;
+    protected $_webDir;
 
     /**
      * Set options for the storage adapter.
@@ -187,7 +187,7 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter_AdapterI
      * @param string $path Storage path.
      * @return string Absolute local filesystem path.
      */
-    private function _getAbsPath($path)
+    protected function _getAbsPath($path)
     {
         return $this->_localDir . '/' . $path;
     }
@@ -196,7 +196,7 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter_AdapterI
      * @throws Omeka_Storage_Exception
      * @return boolean
      */
-    private function _rename($source, $dest)
+    protected function _rename($source, $dest)
     {
         $destDir = dirname($dest);
         if (!is_writable($destDir)) {

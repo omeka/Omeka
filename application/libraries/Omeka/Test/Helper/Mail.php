@@ -25,13 +25,6 @@ class Omeka_Test_Helper_Mail
      */
     public function __construct($path)
     {
-        if (!is_dir($path) && !mkdir($path)) {
-            throw new RuntimeException(
-                'The mail path must be set in paths.maildir in '
-                . 'the tests configuration.'
-            );
-        }
-        
         if (!is_writable($path)) {
             throw new RuntimeException('The mail path '.$path.' must be writable by this user.');
         }
@@ -46,24 +39,9 @@ class Omeka_Test_Helper_Mail
      */
     public static function factory()
     {
-        $testConfig = Zend_Registry::get('test_config');
-        $path = $testConfig->paths->maildir;
+        $path = Zend_Registry::get('test_mail_dir');
         $helper = new self($path);
         return $helper;
-    }
-    
-    /**
-     * Empty the fakemail storage directory between test runs.
-     *
-     * @return void
-     */
-    public function reset()
-    {
-        foreach ($this->_getIterator() as $file) {
-            if ($this->_isMailFile($file)) {
-                unlink($file->getRealPath());                
-            }
-        }
     }
     
     /**

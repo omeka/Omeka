@@ -20,7 +20,6 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
 
         $this->mailHelper = Omeka_Test_Helper_Mail::factory();
         $this->email = 'user@example.com';
-        $this->mailHelper->reset();
     }
     
     public function testAddingNewUserSendsActivationEmail()

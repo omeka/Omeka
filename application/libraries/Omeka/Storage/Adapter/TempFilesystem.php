@@ -17,27 +17,6 @@
  */
 class Omeka_Storage_Adapter_TempFilesystem extends Omeka_Storage_Adapter_Filesystem
 {
-    private $_storageDir;
-
-    private $_files = array();
-
-    public function __construct(array $options = array())
-    {
-        $this->_storageDir = sys_get_temp_dir() . '/files' . mt_rand();
-        mkdir($this->_storageDir);
-        $webDir = '/'; // CLI tests don't care whether the URL is valid.
-        parent::__construct(array(
-            'localDir' => $this->_storageDir,
-            'webDir' => $webDir,
-        ));
-    }
-
-    public function __destruct()
-    {
-        exec("rm -rf " . escapeshellarg($this->_storageDir));
-    }
-
-
     /**
      * No need to perform this check.
      */
@@ -77,7 +56,7 @@ class Omeka_Storage_Adapter_TempFilesystem extends Omeka_Storage_Adapter_Filesys
 
     private function _mkdir($filepath)
     {
-        $absPath = $this->_storageDir . '/' . $filepath;
+        $absPath = $this->_localDir . '/' . $filepath;
         // Meant to stub out filesystem behavior, prevent failure due to 
         // missing subdirectories.
         if (!is_dir(dirname($absPath))) {
