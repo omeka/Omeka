@@ -5,9 +5,6 @@ db.username = ""
 db.password = ""
 db.dbname = ""
 
-email.to = ""
-email.administrator = ""
-
 paths.imagemagick = ""
 paths.maildir = ""
 
