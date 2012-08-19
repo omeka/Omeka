@@ -13,7 +13,7 @@
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Omeka_Navigation extends Zend_Navigation
-{   
+{       
     /**
      * Creates a new navigation container
      *
@@ -44,29 +44,32 @@ class Omeka_Navigation extends Zend_Navigation
      * @param array $args    Uses the following keys:
      * 'label' = link label
      * 'uri' = link uri
-     * 'active' = whether link is enabled for display or not
+     * 'visible' = whether link is enabled for display or not
      * 'can_delete' = whether or not the link can be deleted or not
      */
     public function addPagesFromFilters() 
-    {
+    {   
+        set_theme_base_uri('public');     
         $pageLinks = array(
-            __('Browse Items') => public_uri('items'), 
-            __('Browse Collections') => public_uri('collections')
+            __('Browse Items') => abs_uri('items'), 
+            __('Browse Collections') => abs_uri('collections')
         );
+        revert_theme_base_uri();
+                
         $pageLinks = apply_filters('public_navigation_main', $pageLinks);        
         
         $pageUids = array();
         foreach($pageLinks as $label => $uri) {
-            
-            $page = Zend_Navigation_Page::factory(array(
-                'label'   => $label,
-                'uri' => $uri,
-                'active' => false,
-                'can_delete' => false,
-            ));
-            $this->_addUniquePage($page);
-            
-            $pageUids[] = $this->_createUid($page);
+            if ($uri = $this->_normalizeUri($uri)) {
+                $page = Zend_Navigation_Page::factory(array(
+                    'label'   => $label,
+                    'uri' => $uri,
+                    'visible' => false,
+                    'can_delete' => false,
+                ));
+                $this->_addUniquePage($page);
+                $pageUids[] = $this->_createUid($page);
+            }
         }
                 
         // remove old pages that cannot be deleted and which are not provided by plugins and other filterers
@@ -81,13 +84,42 @@ class Omeka_Navigation extends Zend_Navigation
         }
     }
     
+    
+    /**
+     * Normalizes a uri.  
+     * If the $uri is a path, then convert it to a valid uri.
+     *
+     *
+     * @param String $uri
+     * @return String|null
+     */
+    private function _normalizeUri($uri) 
+    {
+        if ($uri !== null) {
+            // if uri is a path, then prepend it with WEB_ROOT
+            if (strlen($uri) && $uri[0] == '/') {
+                if (strpos($uri, ADMIN_BASE_URL) === 0) {
+                    $uri = WEB_ROOT . '/admin/' . str_replace(ADMIN_BASE_URL, '', $uri);
+                } elseif (strpos($uri, PUBLIC_BASE_URL) === 0) {
+                    $uri = WEB_ROOT . str_replace(PUBLIC_BASE_URL, '', $uri);
+                } else {
+                    $uri = WEB_ROOT . $uri;
+                }
+            }
+            if (Zend_Uri::check($uri)) {
+                return $uri;
+            }
+        }
+        return null;
+    }
+    
     /**
      * Adds a page based on link data
      *
      * @param array $args    Uses the following keys:
      * 'label' = link label
      * 'uri' = link uri
-     * 'active' = whether link is enabled for display or not
+     * 'visible' = whether link is enabled for display or not
      * 'can_delete' = whether or not the link can be deleted or not
      */
     public function addPageFromLinkData($args) 
@@ -104,6 +136,10 @@ class Omeka_Navigation extends Zend_Navigation
          $pageUid = $this->_createUid($page);
          if (!$this->findBy('uid', $pageUid)) {
             $page->uid = $pageUid;
+            
+            // specify whether the page is the current page (i.e. the "active" page)
+            $page->setActive(is_current_uri($page->getHref()));
+            
             $this->addPage($page);
             return true;
          }

@@ -17,6 +17,8 @@
 class Omeka_Form_Navigation extends Omeka_Form
 {
     const HIDDEN_ELEMENT_ID = 'navigation_hidden';
+    const SELECT_HOMEPAGE_ELEMENT_ID = 'navigation_homepage_select';
+    const HOMEPAGE_URI_OPTION_NAME = 'homepage_uri';
     
     private $_nav;
     
@@ -38,7 +40,7 @@ class Omeka_Form_Navigation extends Omeka_Form
         
         $this->addCheckboxElementsFromNav($this->_nav);
         $this->addHiddenElementFromNav($this->_nav);
-        
+        $this->addHomepageSelectElementFromNav($this->_nav);
         $this->addElement('submit', 'navigation_submit', array(
             'label' => __('Save Changes'),
             'class' => 'big green button'
@@ -59,7 +61,7 @@ class Omeka_Form_Navigation extends Omeka_Form
                 $checkboxId = 'navigation_main_nav_checkboxes_' . $checkboxCount;                
                 $checkboxDesc = '<a href="' . $page->getHref() . '">' . __($page->getLabel()) . '</a>';
                 $this->addElement('checkbox', $checkboxId, array(
-                    'checked' => $page->isActive(),
+                    'checked' => $page->isVisible(),
                     'description' => $checkboxDesc,
                     'checkedValue' => $this->_getPageId($page),
                     'class' => $pageClasses,
@@ -91,7 +93,7 @@ class Omeka_Form_Navigation extends Omeka_Form
                     $linkData['can_delete'] = (bool)$linkIdParts[0];
                     $linkData['uri'] = $linkIdParts[1];
                     $linkData['label'] = $linkIdParts[2];
-                    $linkData['active'] = $pageLink['active'];
+                    $linkData['visible'] = $pageLink['visible'];
 
                     // add the page to the navigation
                     $nav->addPageFromLinkData($linkData);
@@ -100,8 +102,42 @@ class Omeka_Form_Navigation extends Omeka_Form
         }
     }
     
+    public function addHomepageSelectElementFromNav(Zend_Navigation $nav)
+    {
+        $pageLinks = array();
+        $pageLinks['/'] = '[Default]';
+        foreach($nav as $page) {
+            if (!$page->hasChildren()) {                
+                //if (is_dispatchable_uri($page->getHref())) {
+                    $pageLinks[$page->getHref()] = $page->getLabel();
+                //}
+            }
+        }
+        
+        $this->addElement('select', self::SELECT_HOMEPAGE_ELEMENT_ID, array(
+            'label' => __('Select Homepage'),
+            'multiOptions' => $pageLinks,
+            'value' => get_option(self::HOMEPAGE_URI_OPTION_NAME),
+            'registerInArrayValidator' => false,
+            'decorators' =>  array(
+                    'ViewHelper',
+                    array('Description', array('escape' => false, 'tag' => false)),
+                    array('HtmlTag', array('tag' => 'div')),
+                    array('Label'),
+                    'Errors',)
+        ));
+    }
+    
+    public function saveHomepageFromPost()
+    {
+        $homepageURI = $this->getValue(self::SELECT_HOMEPAGE_ELEMENT_ID);
+        set_option(self::HOMEPAGE_URI_OPTION_NAME, $homepageURI);
+    }
+    
     private function _getPageId(Zend_Navigation_Page $page) 
     {
         return (int)$page->can_delete . '|' . $page->getHref() . '|' . $page->getLabel();
     }
+    
+    
 }

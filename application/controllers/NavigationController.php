@@ -32,7 +32,6 @@ class NavigationController extends Omeka_Controller_AbstractActionController
     {
         $form = $this->_getForm();
         $this->view->form = $form;
-        
         if (isset($_POST['navigation_submit'])) {
             if ($form->isValid($_POST)) {
                 $this->_setOptions($form);
@@ -71,10 +70,15 @@ class NavigationController extends Omeka_Controller_AbstractActionController
      * @return boolean
      */
     private function _setOptions(Zend_Form $form)
-    {   
+    {                   
         $nav = new Omeka_Navigation();             
-        $form->addPagesToNavFromHiddenElementValue($nav);        
-        $nav->saveAsOption('navigation_main');
-        $form->setNavigation($nav);        
+        $form->addPagesToNavFromHiddenElementValue($nav);
+                
+        $nav->saveAsOption('navigation_main');        
+        $form->saveHomepageFromPost();
+        
+        // set the navigation after all saving has completed
+        $form->setNavigation($nav);
+        
     }
 }

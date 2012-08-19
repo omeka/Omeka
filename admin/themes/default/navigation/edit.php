@@ -39,6 +39,21 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
         jQuery( '#navigation_main_list' ).sortable();
     	jQuery( '#navigation_main_list' ).disableSelection();
     	
+    	function updateSelectHomepageOptions() {
+            var hPages = {}
+            hPages[''] = '[Default]'; 
+            jQuery( '#navigation_main_list > li > input[type="checkbox"]' ).each(function(i,e) {
+                hPages[jQuery(e).next().attr('href')] = jQuery(e).next().text();
+            });
+	        
+	        var selectedValue = jQuery('#navigation_homepage_select option').filter(":selected").val();
+    	    jQuery('#navigation_homepage_select').empty();
+    	    for(var i in hPages) {
+    	        jQuery('#navigation_homepage_select').append('<option value="' + i + '" label="' + hPages[i] + '">' + hPages[i]  + '</option>')
+    	    }
+    	    jQuery('#navigation_homepage_select option[value="' + selectedValue + '"]').attr('selected', 'selected');
+    	}
+    	
     	function updateDeletables() {
     	    jQuery( 'input.can_delete_nav_link').each(function(i,e) {
     	       if (!jQuery(e).parent().children('a[class="navigation_main_list_delete"]').length) {
@@ -46,10 +61,16 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
            	       jQuery(e).parent().children('.navigation_main_list_delete').click(function(ee) {
            	           ee.preventDefault();
                	       jQuery(ee.target).parent().remove();
+               	       updateSelectHomepageOptions();
            	       });
     	       } 
     	    });
     	}
+    	
+    	// update the homepage options whenver anyone checks or unchecks a link
+    	jQuery( '#navigation_main_list > li > input[type="checkbox"]' ).click(function(){
+    	    updateSelectHomepageOptions();
+    	});
     	
     	updateDeletables();
     	
@@ -71,6 +92,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
                 jQuery( '#navigation_main_list_new_uri' ).val('');
                 
                 updateDeletables();
+                updateSelectHomepageOptions();
             }
     	});
     	
@@ -81,7 +103,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
             jQuery('#navigation_main_list > li > input[type="checkbox"]').each(function(i, e) {
                 var linkInfo = {};
                 linkInfo['id'] = jQuery(e).val();
-                linkInfo['active'] = jQuery(e).is(':checked');
+                linkInfo['visible'] = jQuery(e).is(':checked');
                 linkData.push(linkInfo);
             });
             
