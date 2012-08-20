@@ -206,8 +206,6 @@ class Omeka_Navigation extends Zend_Navigation
     {
         // The navigation object is assumed to only contain
         // either Zend_Navigation_Page_Mvc or Omeka_Navigaton_Page_Uri objects
-        //$nPage = $page;
-        //print get_class($page) . '<br/>';
         if ($nPage = $this->_normalizePage($page)) {
             // only add the page to the navigation if it does not already exist in the navigation 
             // according to its unique id.  otherwise, update date it
