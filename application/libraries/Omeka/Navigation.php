@@ -75,7 +75,7 @@ class Omeka_Navigation extends Zend_Navigation
         $pageUids = array();
         foreach($pageLinks as $label => $uriOrPage) {
             
-            // normalize the page and if the page is valid, it to the navigation
+            // normalize the page and if the page is valid, add it to the navigation
             if ($nPage = $this->_normalizePage($uriOrPage)) {
                 $nPage->setLabel($label); // set the label of the navigation link
                                 
@@ -105,21 +105,18 @@ class Omeka_Navigation extends Zend_Navigation
     }
     
     /**
-     * Loads the navigation from the global options table
+     * Normalizes the uri or navigation page object into either a Omeka_Navigation_Page_Uri 
+     * or Zend_Navigation_Page_Mvc object.  If it cannot be normalized, it returns null.
      *
      * @param String|Omeka_Navigation_Page_Uri|Zend_Navigation_Page_Uri|Zend_Navigation_Page_Mvc|Zend_Uri_Http $uriOrPage    The name of the option
+     * @return Omeka_Navigation_Page_Uri|Zend_Navigation_Page_Mvc|null 
      */
     private function _normalizePage($uriOrPage)
     {
         $nPage = null;
-        if (is_string($uriOrPage)) {
-            if ($nUri = $this->_normalizeHref($uriOrPage)) {                
-                $nPage = new Omeka_Navigation_Page_Uri();
-                $nPage->setUri($nUri->getUri());                    
-                if ($nUri->getFragment() !== false) {
-                    $nPage->setFragment($nUri->getFragment());
-                }
-            }
+        if ($uriOrPage instanceof Zend_Navigation_Page_Mvc) {
+            /* ToDo:  how do we validate these mvc pages? */
+            $nPage = $uriOrPage;
         } elseif ($uriOrPage instanceof Omeka_Navigation_Page_Uri) {
             if ($nUri = $this->_normalizeHref($uriOrPage->getHref())) {
                 $nPage = $uriOrPage;
@@ -127,7 +124,15 @@ class Omeka_Navigation extends Zend_Navigation
                 if ($nUri->getFragment() !== false) {
                     $nPage->setFragment($nUri->getFragment());
                 }                    
-            }  
+            }
+        } elseif (is_string($uriOrPage)) {
+            if ($nUri = $this->_normalizeHref($uriOrPage)) {                
+                $nPage = new Omeka_Navigation_Page_Uri();
+                $nPage->setUri($nUri->getUri());                    
+                if ($nUri->getFragment() !== false) {
+                    $nPage->setFragment($nUri->getFragment());
+                }
+            }
         } elseif ($uriOrPage instanceof Zend_Navigation_Page_Uri) {
             // convert a Zend_Navigation_Page_Uri to an Omeka_Navigation_Page_Uri
             if ($nUri = $this->_normalizeHref($uriOrPage->getHref())) {
@@ -136,10 +141,14 @@ class Omeka_Navigation extends Zend_Navigation
                 if ($nUri->getFragment() !== false) {
                     $nPage->setFragment($nUri->getFragment());
                 }
-            }
-        } elseif ($uriOrPage instanceof Zend_Navigation_Page_Mvc) {
-            /* ToDo:  how do we validate these mvc pages? */
-            $nPage = $uriOrPage;                
+                // copy information from Zend_Navigation_Page_Uri into Omeka_Navigation_Page_Uri
+                // note: we may need to update this list
+                $nPage->setVisible($uriOrPage->getVisible());
+                $nPage->setOrder($uriOrPage->getOrder()); 
+                $nPage->setLabel($uriOrPage->getLabel());
+                $nPage->can_delete = $uriOrPage->can_delete;
+                $nPage->uid = $uriOrPage->uid;
+            }               
         } elseif ($uriOrPage instanceof Zend_Uri_Http) {
             if ($uriOrPage->valid()) {
                 $nPage = new Omeka_Navigation_Page_Uri();
@@ -190,34 +199,39 @@ class Omeka_Navigation extends Zend_Navigation
      * It uses to the uid of the page to determine if it exists.
      * Returns true if the page was added, otherwise returns false.
      *
-     * @param Zend_Navigation_Page $page
+     * @param Omeka_Navigation_Page_Uri|Zend_Navigation_Page_Mvc $page
      * @return Zend_Navigation_Page|null
      */
     public function addOrUpdatePage(Zend_Navigation_Page $page)
     {
-        if ($page) {
+        // The navigation object is assumed to only contain
+        // either Zend_Navigation_Page_Mvc or Omeka_Navigaton_Page_Uri objects
+        //$nPage = $page;
+        //print get_class($page) . '<br/>';
+        if ($nPage = $this->_normalizePage($page)) {
             // only add the page to the navigation if it does not already exist in the navigation 
             // according to its unique id.  otherwise, update date it
-            $pageUid = $this->createPageUid($page);
+            $pageUid = $this->createPageUid($nPage);
             if ($fPage = $this->findOneBy('uid', $pageUid)) {
-                // we assume that this navigation object only contains 
-                // either Zend_Navigation_Page_Mvc or Omeka_Navigaton_Page_Uri objects
-                $fPage->setVisible($page->getVisible()); // update the visibility            
-                $fPage->setOrder($page->getOrder());
-                $fPage->setActive(is_current_uri($page->getUri()));
-                $fPage->can_delete = $page->can_delete;
+                $fPage->setVisible($nPage->getVisible()); // update the visibility            
+                $fPage->setOrder($nPage->getOrder());
+                $fPage->can_delete = $nPage->can_delete;
                 return $fPage;
             } else {
-                $page->uid = $this->createPageUid($page); // create a new uid for the page
-                // specify whether the page is the current page (i.e. the "active" page)
-                $page->setActive(is_current_uri($page->getUri())); 
-                $this->addPage($page); // add the page to the navigation
-                return $page;
+                $nPage->uid = $this->createPageUid($nPage); // create a new uid for the page
+                $this->addPage($nPage); // add the page to the navigation
+                return $nPage;
              }
         }
         return null;
     }
     
+    /**
+     * Returns the navigation page associated with uid.  If not page is associated, then it returns null.
+     *
+     * @param String $pageUid The uid of the page
+     * @return Omeka_Zend_Navigation_Page_Uri|Zend_Navigation_Page_Mvc|null
+     */
     public function getPageByUid($pageUid)
     {
         if ($page = $this->findOneBy('uid', $pageUid)) {
