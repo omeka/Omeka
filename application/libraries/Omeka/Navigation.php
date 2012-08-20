@@ -54,8 +54,8 @@ class Omeka_Navigation extends Zend_Navigation
      * adding the values to this navigation object, will normalize and convert all values to either an
      * Omeka_Navigation_Page_Uri or a Zend_Navigation_Page_Mvc.  If the associated uri of any page is invalid, it
      * will not add that page to the navigation. 
-     * Also, it removes old pages from formerly active plugins and other former handlers of the
-     * 'public_navigation_filter'.
+     * Also, it removes expired pages from formerly active plugins and other former handlers of the
+     * 'public_navigation_main' filter.
      * 
      */
     public function addPagesFromFilters() 
@@ -75,20 +75,20 @@ class Omeka_Navigation extends Zend_Navigation
         $pageUids = array();
         foreach($pageLinks as $label => $uriOrPage) {
             
-            // if the page is valid, add or update the page to the navigation
-            if ($page = $this->_normalizePage($uriOrPage)) {
-                $page->setLabel($label); // set the label of the navigation link
+            // normalize the page and if the page is valid, it to the navigation
+            if ($nPage = $this->_normalizePage($uriOrPage)) {
+                $nPage->setLabel($label); // set the label of the navigation link
                 
                 // if the navigation does not have the page, then add it
-                $nPage = $this->getPageByUid($this->createPageUid($page));
-                if ($nPage === null) {                    
+                $sPage = $this->getPageByUid($this->createPageUid($nPage));
+                if ($sPage === null) {                    
                     // initialize the page with settings for pages that come from filters.
                     $page->setVisible(false); // by default, make the navigation link not visible
                     $page->can_delete = false; // make sure the user cannot manually delete the navigation link
-                    $nPage = $this->addOrUpdatePage($page);
+                    $sPage = $this->addOrUpdatePage($page); // add the new page
                 }
                 
-                $pageUids[] = $nPage->uid; // gather the uids of current pages offered by filters
+                $pageUids[] = $sPage->uid; // gather the uids of pages offered by filters
             }
         }
                 
