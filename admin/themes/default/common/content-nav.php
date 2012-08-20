@@ -7,7 +7,9 @@
                 __('Items') => uri('items'),
                 __('Collections') => uri('collections'),
                 __('Item Types') => uri('item-types'),
-                __('Tags') => uri('tags')
+                __('Tags') => uri('tags'),
+                __('Navigation') => uri('navigation'),
+                
                 );
             echo nav(apply_filters('admin_navigation_main', $contentNav));
         ?>
@@ -25,7 +27,8 @@
                 __('Items') => uri('items'),
                 __('Collections') => uri('collections'),
                 __('Item Types') => uri('item-types'),
-                __('Tags') => uri('tags')
+                __('Tags') => uri('tags'),
+                __('Navigation') => uri('navigation')
                 );
             echo nav(apply_filters('admin_navigation_main', $contentNav));
         ?>            
