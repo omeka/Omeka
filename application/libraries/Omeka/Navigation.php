@@ -70,7 +70,7 @@ class Omeka_Navigation extends Zend_Navigation
         
         // gather other main nav links from filter handlers (e.g. plugins)      
         $pageLinks = apply_filters('public_navigation_main', $pageLinks);        
-        
+                        
         // validate and normalize pages from filter handlers (e.g. plugins)
         $pageUids = array();
         foreach($pageLinks as $label => $uriOrPage) {
@@ -78,14 +78,14 @@ class Omeka_Navigation extends Zend_Navigation
             // normalize the page and if the page is valid, it to the navigation
             if ($nPage = $this->_normalizePage($uriOrPage)) {
                 $nPage->setLabel($label); // set the label of the navigation link
-                
+                                
                 // if the navigation does not have the page, then add it
                 $sPage = $this->getPageByUid($this->createPageUid($nPage));
                 if ($sPage === null) {                    
                     // initialize the page with settings for pages that come from filters.
-                    $page->setVisible(false); // by default, make the navigation link not visible
-                    $page->can_delete = false; // make sure the user cannot manually delete the navigation link
-                    $sPage = $this->addOrUpdatePage($page); // add the new page
+                    $nPage->setVisible(false); // by default, make the navigation link not visible
+                    $nPage->can_delete = false; // make sure the user cannot manually delete the navigation link
+                    $sPage = $this->addOrUpdatePage($nPage); // add the new page
                 }
                 
                 $pageUids[] = $sPage->uid; // gather the uids of pages offered by filters
@@ -113,7 +113,7 @@ class Omeka_Navigation extends Zend_Navigation
     {
         $nPage = null;
         if (is_string($uriOrPage)) {
-            if ($nUri = $this->_normalizeHref($uriOrPage)) {
+            if ($nUri = $this->_normalizeHref($uriOrPage)) {                
                 $nPage = new Omeka_Navigation_Page_Uri();
                 $nPage->setUri($nUri->getUri());                    
                 if ($nUri->getFragment() !== false) {
@@ -162,13 +162,13 @@ class Omeka_Navigation extends Zend_Navigation
      * @return Zend_Uri_Http|null
      */
     private function _normalizeHref($href) 
-    {
+    {        
         if ($href !== null) {
             // if href is a relative path, then prepend it with WEB_ROOT
             if (strlen($href) && $href[0] == '/') {
                 if (strpos($href, ADMIN_BASE_URL) === 0) {
                     // normalize an admin page like 'http://{domain}/{base_dir}/admin/items/browse'
-                    $href = WEB_ROOT . '/admin/' . str_replace(ADMIN_BASE_URL, '', $href);
+                    $href = WEB_ROOT . '/admin' . str_replace(ADMIN_BASE_URL, '', $href);
                 } elseif (strpos($href, PUBLIC_BASE_URL) === 0) {
                     // normalize an public page like 'http://{domain}/{base_dir}/items/browse'
                     $href = WEB_ROOT . str_replace(PUBLIC_BASE_URL, '', $href);
