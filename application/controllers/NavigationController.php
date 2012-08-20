@@ -15,9 +15,7 @@
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class NavigationController extends Omeka_Controller_AbstractActionController
-{            
-    const NAVIGATION_MAIN_OPTION_NAME = 'navigation_main';
-    
+{    
     public function indexAction() 
     {
         $this->_forward('edit');
@@ -51,13 +49,8 @@ class NavigationController extends Omeka_Controller_AbstractActionController
     private function _getForm()
     {
         require_once APP_DIR . '/forms/Navigation.php';
-        
-        $nav = new Omeka_Navigation();
-        $nav->loadAsOption(self::NAVIGATION_MAIN_OPTION_NAME);
-        $nav->addPagesFromFilters();
-        
+                
         $form = new Omeka_Form_Navigation();
-        $form->setNavigation($nav);
         
         fire_plugin_hook('navigation_form', array('form' => $form));
         return $form;
@@ -70,15 +63,7 @@ class NavigationController extends Omeka_Controller_AbstractActionController
      * @return boolean
      */
     private function _setOptions(Zend_Form $form)
-    {                   
-        $nav = new Omeka_Navigation();             
-        $form->addPagesToNavFromHiddenElementValue($nav);
-                
-        $nav->saveAsOption('navigation_main');        
-        $form->saveHomepageFromPost();
-        
-        // set the navigation after all saving has completed
-        $form->setNavigation($nav);
-        
+    {
+        $form->saveFromPost();
     }
 }

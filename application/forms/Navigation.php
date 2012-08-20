@@ -16,41 +16,40 @@
  */
 class Omeka_Form_Navigation extends Omeka_Form
 {
+    const FORM_ELEMENT_ID = 'navigation_form';
     const HIDDEN_ELEMENT_ID = 'navigation_hidden';
     const SELECT_HOMEPAGE_ELEMENT_ID = 'navigation_homepage_select';
+
     const HOMEPAGE_URI_OPTION_NAME = 'homepage_uri';
+    const NAVIGATION_MAIN_OPTION_NAME = 'navigation_main';
     
     private $_nav;
     
     public function init()
     {
         parent::init();
-        $this->setAttrib('id', 'navigation_form');
-    }
-    
-    public function setNavigation(Omeka_Navigation $nav) 
-    {
-        $this->_nav = $nav;
+        $this->setAttrib('id', self::FORM_ELEMENT_ID);
+        
+        $this->_nav = new Omeka_Navigation();
+        $this->_nav->loadAsOption(self::NAVIGATION_MAIN_OPTION_NAME);
+        $this->_nav->addPagesFromFilters();
+        
         $this->_initElements();
     }
     
     private function _initElements() 
     {
         $this->clearElements();
-        
-        $this->addCheckboxElementsFromNav($this->_nav);
-        $this->addHiddenElementFromNav($this->_nav);
-        $this->addHomepageSelectElementFromNav($this->_nav);
-        $this->addElement('submit', 'navigation_submit', array(
-            'label' => __('Save Changes'),
-            'class' => 'big green button'
-        ));
+        $this->_addCheckboxElementsFromNav($this->_nav);
+        $this->_addHiddenElementFromNav($this->_nav);
+        $this->_addHomepageSelectElementFromNav($this->_nav);
+        $this->_addSubmitButton();
     }
-    
-    public function addCheckboxElementsFromNav(Omeka_Navigation $nav) 
+        
+    private function _addCheckboxElementsFromNav(Omeka_Navigation $nav) 
     {   
         $checkboxCount = 0;
-        foreach($nav as $page) {
+        foreach($nav as $page) {            
             if (!$page->hasChildren()) {
                 $checkboxCount++;
                 $pageClasses = array();
@@ -76,46 +75,23 @@ class Omeka_Form_Navigation extends Omeka_Form
         }
     }
     
-    public function addHiddenElementFromNav(Omeka_Navigation $nav) 
+    private function _addHiddenElementFromNav(Omeka_Navigation $nav) 
     {
         $this->addElement('hidden', self::HIDDEN_ELEMENT_ID, array('value' => ''));
     }
     
-    public function addPagesToNavFromHiddenElementValue(Omeka_Navigation $nav) 
-    {
-        if ($pageLinks = $this->getValue(self::HIDDEN_ELEMENT_ID) ) {
-            if ($pageLinks = json_decode($pageLinks, true)) {
-                foreach($pageLinks as $pageLink) {
-
-                    // parse the linkdata for the page from the hidden element text
-                    $linkIdParts = explode('|', $pageLink['id'], 3);
-                    $linkData = array();
-                    $linkData['can_delete'] = (bool)$linkIdParts[0];
-                    $linkData['uri'] = $linkIdParts[1];
-                    $linkData['label'] = $linkIdParts[2];
-                    $linkData['visible'] = $pageLink['visible'];
-
-                    // add the page to the navigation
-                    $nav->addPageFromLinkData($linkData);
-                }
-            }
-        }
-    }
-    
-    public function addHomepageSelectElementFromNav(Zend_Navigation $nav)
+    private function _addHomepageSelectElementFromNav(Zend_Navigation $nav)
     {
         $pageLinks = array();
-        $pageLinks['/'] = '[Default]';
+        $pageLinks['/'] = '[Default]'; // Add the default homepage link option 
         foreach($nav as $page) {
             if (!$page->hasChildren()) {                
-                //if (is_dispatchable_uri($page->getHref())) {
-                    $pageLinks[$page->getHref()] = $page->getLabel();
-                //}
+                $pageLinks[$page->getHref()] = $page->getLabel();
             }
         }
         
         $this->addElement('select', self::SELECT_HOMEPAGE_ELEMENT_ID, array(
-            'label' => __('Select Homepage'),
+            'label' => __('Select a Homepage'),
             'multiOptions' => $pageLinks,
             'value' => get_option(self::HOMEPAGE_URI_OPTION_NAME),
             'registerInArrayValidator' => false,
@@ -128,7 +104,73 @@ class Omeka_Form_Navigation extends Omeka_Form
         ));
     }
     
-    public function saveHomepageFromPost()
+    private function _addSubmitButton()
+    {
+        $this->addElement('submit', 'navigation_submit', array(
+            'label' => __('Save Changes'),
+            'class' => 'big green button'
+        ));
+    }
+    
+    public function saveFromPost() 
+    {
+        // Save the homepage uri
+        $this->_saveHomepageFromPost();
+        
+        // Save the navigation from post                 
+        $this->_saveNavigationFromPost();
+        
+        // Reset the form elements to display the updated navigation
+        $this->_initElements();
+    }
+    
+    public function _saveNavigationFromPost() 
+    {
+        // update the navigation from the hidden element value in the post data
+        $nav = new Omeka_Navigation();
+        $nav->loadAsOption(self::NAVIGATION_MAIN_OPTION_NAME);             
+        
+        if ($pageLinks = $this->getValue(self::HIDDEN_ELEMENT_ID) ) {
+            if ($pageLinks = json_decode($pageLinks, true)) {
+                
+                // add and update the pages in the navigation
+                $pageOrder = 0;
+                $pageUids = array();
+                foreach($pageLinks as $pageLink) {
+                    $pageOrder++;  
+                    // parse the linkdata for the page from the hidden element text
+                    $linkIdParts = explode('|', $pageLink['id'], 3);
+                    $linkData = array();
+                    $linkData['can_delete'] = (bool)$linkIdParts[0];
+                    $linkData['uri'] = $linkIdParts[1];
+                    $linkData['label'] = $linkIdParts[2];
+                    $linkData['visible'] = $pageLink['visible'];
+                    $linkData['order'] = $pageOrder;
+
+                    // add or update the page in the navigation
+                    $page = Zend_Navigation_Page::factory($linkData);
+                    if ($page = $nav->addOrUpdatePage($page)) {
+                        $pageUids[] = $page->uid;
+                    }
+                }
+                
+                // remove expired pages from navigation
+                $expiredPages = array();
+                foreach($nav as $page) {
+                    if (!in_array($page->uid, $pageUids)) {
+                        $expiredPages[] = $page;
+                    }
+                }
+                foreach($expiredPages as $expiredPage) {
+                    $nav->removePage($expiredPage);
+                }
+            }
+        }
+        $nav->saveAsOption('navigation_main');
+        $this->_nav = $nav;
+    }
+    
+    private function _saveHomepageFromPost()
     {
         $homepageURI = $this->getValue(self::SELECT_HOMEPAGE_ELEMENT_ID);
         set_option(self::HOMEPAGE_URI_OPTION_NAME, $homepageURI);
@@ -138,6 +180,4 @@ class Omeka_Form_Navigation extends Omeka_Form
     {
         return (int)$page->can_delete . '|' . $page->getHref() . '|' . $page->getLabel();
     }
-    
-    
 }
