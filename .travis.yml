@@ -1,0 +1,26 @@
+language: php
+
+php:
+  - 5.2
+  - 5.3
+
+env:
+  - DB=mysql
+
+before_script:
+  - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS omeka_test;" -uroot; fi
+  - mv application/config/config.ini.changeme application/config/config.ini
+  - mv application/tests/config.ini.changeme application/tests/config.ini
+  - sed -i 's/db.host = ""/db.host = "localhost"/' application/tests/config.ini
+  - sed -i 's/db.username = ""/db.username = "root"/' application/tests/config.ini
+  - sed -i 's/db.dbname = ""/db.dbname = "omeka_test"/' application/tests/config.ini
+  - sed -i 's/email.to = ""/email.to = "test@example.com"/' application/tests/config.ini
+  - sed -i 's/email.administator = ""/email.administrator = "admin@example.com"/' application/tests/config.ini
+  - sed -i 's/paths.maildir = ""/paths.maildir = "\/tmp"/' application/tests/config.ini
+  - sed -i 's/paths.imagemagick = ""/paths.imagemagick = "\/usr\/bin\/"/' application/tests/config.ini
+  - sed -i 's/256M/512M/' application/tests/bootstrap.php
+
+script: cd application/tests && phpunit --coverage-text
+
+notifications:
+  irc: "irc.freenode.org#omeka"
