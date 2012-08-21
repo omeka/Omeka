@@ -65,44 +65,12 @@ class SettingsController extends Omeka_Controller_AbstractActionController
     {
         $imPath = $this->_getParam('path-to-convert');
         $this->_helper->viewRenderer->setNoRender(true);
-        $isValid = $this->_isValidImageMagickPath($imPath);
+        $isValid = Omeka_File_Derivative_Image_Creator::isValidImageMagickPath($imPath);
         $this->getResponse()->setBody($isValid 
-                                    ? '<div class="im-success">' . __('Works') . '</div>' 
-                                    : '<div class="im-failure">' . __('Fails') . '</div>');
+                                    ? '<div class="im-success">' . __('The ImageMagick directory path works.') . '</div>' 
+                                    : '<div class="im-failure">' . __('The ImageMagick directory path does not work.') . '</div>');
     }
-    
-    /**
-     * Determine whether or not the path given to ImageMagick is valid.
-     * 
-     * @param string
-     * @return boolean
-     */
-    private function _isValidImageMagickPath($dirToIm)
-    {
-        if (!realpath($dirToIm)) {
-            return false;
-        }
-        if (!is_dir($dirToIm)) {
-            return false;
-        }        
-        // Append the binary to the given path.
-        $filePath = rtrim($dirToIm, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR
-                  . Omeka_File_Derivative_Image_Creator::IMAGEMAGICK_COMMAND;
         
-        //Make sure the file is executable
-        if (!is_executable($filePath)) {
-            return false;
-        }
-                        
-        // Attempt to run the ImageMagick binary with the version argument
-        // If you try to run it without any arguments, it returns an error code
-        $fullPath = $filePath . ' -version';
-        exec($fullPath, $output, $returnCode);        
-                
-        // A return value of 0 indicates the binary is working correctly.
-        return !(int)$returnCode;
-    }
-    
     private function _getForm()
     {
         require_once APP_DIR . '/forms/GeneralSettings.php';
