@@ -28,6 +28,8 @@ class NavigationController extends Omeka_Controller_AbstractActionController
     
     public function editAction() 
     {
+        require_once HELPERS;
+        set_theme_base_uri('public');
         $form = $this->_getForm();
         $this->view->form = $form;
         if (isset($_POST['navigation_submit'])) {
@@ -38,6 +40,7 @@ class NavigationController extends Omeka_Controller_AbstractActionController
                 $this->_helper->flashMessenger(__('There were errors found in your form. Please edit and resubmit.'), 'error');
             }
         }
+        revert_theme_base_uri();
     }
     
     /**

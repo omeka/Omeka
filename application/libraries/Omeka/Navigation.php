@@ -59,14 +59,12 @@ class Omeka_Navigation extends Zend_Navigation
      * 
      */
     public function addPagesFromFilters() 
-    {   
+    {
         // add the standard Browse Items and Browse Collections links to the main nav
-        set_theme_base_uri('public');     
         $pageLinks = array(
-            __('Browse Items') => abs_uri('items'), 
-            __('Browse Collections') => abs_uri('collections')
+            __('Browse Items') => new Zend_Navigation_Page_Mvc(array('controller' => 'items', 'action' => 'browse')), 
+            __('Browse Collections') => new Zend_Navigation_Page_Mvc(array('controller' => 'collections', 'action' => 'browse'))
         );
-        revert_theme_base_uri();
         
         // gather other main nav links from filter handlers (e.g. plugins)      
         $pageLinks = apply_filters('public_navigation_main', $pageLinks);        

@@ -477,19 +477,19 @@ function public_nav(array $navArray, $navType=null, $maxDepth = 0)
 }
 
 /**
- * Alias for public_nav($array, 'main'). This is to avoid potential typos so
- *  that all plugins can count on having at least a 'main' navigation filter in
- *  the public themes.
+ * Output the main navigation for the public side
  *
  * @since 0.10
- * @param array $navArray
- * @param integer|null $maxDepth
- * @uses public_nav()
- * @return string
+ * @since 2.0 Uses Omeka_Navigation
+ * @return Zend_View_Helper_Navigation_Menu Can be echoed like a string or
+ *  manipulated by the theme.
  */
-function public_nav_main(array $navArray, $maxDepth = 0)
+function public_nav_main()
 {
-    return public_nav($navArray, 'main', $maxDepth);
+    $view = __v();
+    $nav = new Omeka_Navigation;
+    $nav->loadAsOption('navigation_main');
+    return $view->navigation()->menu($nav);
 }
 
 /**
