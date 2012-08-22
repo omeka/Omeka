@@ -114,7 +114,7 @@ abstract class Omeka_Plugin_Abstract
      */
     protected function _uninstallOptions()
     {
-        $options = self::$_options;
+        $options = $this->_options;
         if (!is_array($options)) {
             return;
         }
