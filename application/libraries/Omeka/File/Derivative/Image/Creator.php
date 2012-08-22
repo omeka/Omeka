@@ -199,27 +199,32 @@ class Omeka_File_Derivative_Image_Creator
     }
 
     /**
-     * Checks if ImageMagick is able to make derivative images of that file based
-     * upon whether or not it can be identified by ImageMagick's 'identify' binary 
+     * Returns true only if ImageMagick is able to make derivative images of that file based
+     * upon whether or not it can be identified by ImageMagick's 'identify' binary. Otherwise returns false. 
      * 
-     * @param string
-     * @param string
+     * @param string $filePath
      * @return boolean
      */
-    private function _isDerivable($old_path)
+    private function _isDerivable($filePath)
     {
         // Next we'll check that it is identifiable by ImageMagick, and isn't on a blacklist
-        return (file_exists($old_path) 
-                && is_readable($old_path) 
-                && $this->_isIdentifiable($old_path));
+        return (file_exists($filePath) 
+                && is_readable($filePath) 
+                && $this->_isIdentifiable($filePath));
     }
 
 
-    private function _isIdentifiable($old_path)
+    /**
+     * Returns true only if the file can be identified by ImageMagick's 'identify' binary 
+     * 
+     * @param string $filePath
+     * @return boolean
+     */
+    private function _isIdentifiable($filePath)
     {
         $cmd = join(' ', array(
             escapeshellcmd($this->_identifyPath),
-            escapeshellarg($old_path . '[0]'), // first page of multi-page images.
+            escapeshellarg($filePath . '[0]'), // first page of multi-page images.
         ));
         
         self::executeCommand($cmd, $status, $output, $errors);
