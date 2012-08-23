@@ -21,7 +21,6 @@ class Omeka_Form_Navigation extends Omeka_Form
     const SELECT_HOMEPAGE_ELEMENT_ID = 'navigation_homepage_select';
 
     const HOMEPAGE_URI_OPTION_NAME = 'homepage_uri';
-    const NAVIGATION_MAIN_OPTION_NAME = 'navigation_main';
     
     private $_nav;
     
@@ -31,8 +30,8 @@ class Omeka_Form_Navigation extends Omeka_Form
         $this->setAttrib('id', self::FORM_ELEMENT_ID);
         
         $this->_nav = new Omeka_Navigation();
-        $this->_nav->loadAsOption(self::NAVIGATION_MAIN_OPTION_NAME);
-        $this->_nav->addPagesFromFilters();
+        $this->_nav->loadAsOption(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME);
+        $this->_nav->addPagesFromFilter('public_navigation_main');
         $this->_initElements();
     }
     
@@ -127,7 +126,7 @@ class Omeka_Form_Navigation extends Omeka_Form
     {
         // update the navigation from the hidden element value in the post data
         $nav = new Omeka_Navigation();
-        $nav->loadAsOption(self::NAVIGATION_MAIN_OPTION_NAME);             
+        $nav->loadAsOption(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME);             
         
         if ($pageLinks = $this->getValue(self::HIDDEN_ELEMENT_ID) ) {
             if ($pageLinks = json_decode($pageLinks, true)) {
@@ -147,10 +146,17 @@ class Omeka_Form_Navigation extends Omeka_Form
                     $linkData['order'] = $pageOrder;
 
                     // add or update the page in the navigation
-                    $page = Zend_Navigation_Page::factory($linkData);
-                    if ($page = $nav->addOrUpdatePage($page)) {
-                        $pageUids[] = $page->uid;
+                    $pageUid = $nav->createPageUid($linkData['label'], $linkData['uri']);
+                    if (!($page = $nav->getPageByUid($pageUid))) {
+                        $page = new Omeka_Navigation_Page_Uri();
+                        $page->setHref($linkData['uri']); // this sets both the uri and the fragment
+                        $page->setLabel($linkData['label']);
+                        $page->set('can_delete', true);
+                        $nav->addPage($page);
                     }
+                    $page->setVisible($linkData['visible']);
+                    $page->setOrder($linkData['order']);
+                    $pageUids[] = $page->uid;
                 }
                 
                 // remove expired pages from navigation
@@ -165,14 +171,14 @@ class Omeka_Form_Navigation extends Omeka_Form
                 }
             }
         }
-        $nav->saveAsOption('navigation_main');
+        $nav->saveAsOption(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME);
         $this->_nav = $nav;
     }
     
     private function _saveHomepageFromPost()
     {
-        $homepageURI = $this->getValue(self::SELECT_HOMEPAGE_ELEMENT_ID);
-        set_option(self::HOMEPAGE_URI_OPTION_NAME, $homepageURI);
+        $homepageUri = $this->getValue(self::SELECT_HOMEPAGE_ELEMENT_ID);
+        set_option(self::HOMEPAGE_URI_OPTION_NAME, $homepageUri); 
     }
     
     private function _getPageId(Zend_Navigation_Page $page) 

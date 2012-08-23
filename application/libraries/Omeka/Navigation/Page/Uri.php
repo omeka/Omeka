@@ -27,4 +27,55 @@ class Omeka_Navigation_Page_Uri extends Zend_Navigation_Page_Uri
         $this->_active = is_current_uri($this->getUri());
         return parent::isActive($recursive);
     }
+    
+    /**
+     * Sets page href.  It will parse the href and update the uri and fragment properties.
+     *
+     * @param  string $href                page href, must a string or null
+     * @return Omeka_Navigation_Page_Uri   fluent interface, returns self
+     * @throws Zend_Navigation_Exception  if $uri is invalid
+     */
+    public function setHref($href)
+    {
+        if ($hrefData = $this->_normalizeHref($href)) {
+            $this->setUri($hrefData['uri']);
+            if ($hrefData['fragment'] !== false) {
+                $this->setFragment($hrefData['fragment']);
+            }                    
+        }
+    }
+    
+    /**
+     * Normalizes a string href for a navigation page and returns an array with the following keys:
+     * 'uri' => the uri of the href. 
+     * 'fragment' => the fragment of the href 
+     * If the $href is a relative path, then it must be a root path.
+     * If $href is an invalid uri, then return null.  
+     *
+     * @param String $href
+     * @return array|null
+     */
+    private function _normalizeHref($href) 
+    {                
+        if ($href !== null) {       
+            if (strlen($href) && $href[0] == '/') {
+                // attempt to convert root path into a full path, 
+                // so that we can later extract the fragment using Zend_Uri_Http
+                $href = substr(WEB_ROOT, 0, strrpos(WEB_ROOT, PUBLIC_BASE_URL)) . $href;
+            }
+            try {
+                $uri = Zend_Uri::factory($href);
+                if ($uri->valid()) {
+                    $fragment = $uri->getFragment();
+                    $uri->setFragment('');
+                    return array(
+                        'uri' => $uri->getUri(),
+                        'fragment' => $fragment, 
+                    );
+                }
+            } catch (Zend_Uri_Exception $e) {
+            }
+        }
+        return null;
+    }
 }
