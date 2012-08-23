@@ -488,7 +488,7 @@ function public_nav_main()
 {
     $view = __v();
     $nav = new Omeka_Navigation;
-    $nav->loadAsOption('navigation_main');
+    $nav->loadAsOption(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME);
     return $view->navigation()->menu($nav);
 }
 
