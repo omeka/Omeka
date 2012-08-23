@@ -133,6 +133,9 @@ class Omeka_Navigation extends Zend_Navigation
                 $page->setHref($page->getHref());
             } elseif ($uriOrPage instanceof Zend_Navigation_Page_Mvc) {
                 $page = $uriOrPage;
+                // this prevents the default route paramters from being reset 
+                //and perhaps missing default parameters
+                $page->setResetParams(false); 
             }
     
             if ($page) {

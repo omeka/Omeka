@@ -29,9 +29,9 @@ class Omeka_Navigation_Page_Uri extends Zend_Navigation_Page_Uri
     }
     
     /**
-     * Sets page URI
+     * Sets page href.  It will parse the href and update the uri and fragment properties.
      *
-     * @param  string $uri                page URI, must a string or null
+     * @param  string $href                page href, must a string or null
      * @return Omeka_Navigation_Page_Uri   fluent interface, returns self
      * @throws Zend_Navigation_Exception  if $uri is invalid
      */
@@ -59,6 +59,8 @@ class Omeka_Navigation_Page_Uri extends Zend_Navigation_Page_Uri
     {                
         if ($href !== null) {       
             if (strlen($href) && $href[0] == '/') {
+                // attempt to convert root path into a full path, 
+                // so that we can later extract the fragment using Zend_Uri_Http
                 $href = substr(WEB_ROOT, 0, strrpos(WEB_ROOT, PUBLIC_BASE_URL)) . $href;
             }
             try {
