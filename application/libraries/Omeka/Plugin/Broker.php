@@ -139,6 +139,13 @@ class Omeka_Plugin_Broker
             return;
         }
         
+        // Add the view object if it has not already been specified
+        if (!array_key_exists('view', $args)) {
+            if ($view = Zend_Registry::get('view')) {
+                $args['view'] = $view;
+            }
+        }
+        
         // If we are calling the hook for a single function, do that and return.
         if ($plugin) {
             if ($callback = $this->getHook($plugin, $name)) {
@@ -261,6 +268,7 @@ class Omeka_Plugin_Broker
                 // particular loop. It only matters during lookup to determine
                 // whether or not a specific filter has been set already.
                 foreach ($filterSet as $filter) {
+                    
                     // The value must be prepended to the argument set b/c it is
                     // always the first argument to any filter callback.
                     if ($args) {
