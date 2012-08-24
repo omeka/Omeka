@@ -136,7 +136,7 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
             'linkToMetadata'=>false,
             'linkText' => null, 
             ),
-        'image'=>array(
+        'derivativeImage'=>array(
             'imageSize'=>'square_thumbnail',
             'linkToFile'=>true,
             'linkToMetadata'=>false,
@@ -619,7 +619,7 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
      * options include: 'imageSize'
      * @return string HTML for display
      */
-    public function image($file, array $options=array())
+    public function derivativeImage($file, array $options=array())
     {
         $html = '';
         $imgHtml = '';
@@ -666,7 +666,7 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
         } else if (array_key_exists($fileExtension, self::$_fileExtensionCallbacks)) {
             $name = self::$_fileExtensionCallbacks[$fileExtension];
         } else if ($file->hasThumbnail()) {
-            $name = 'image';
+            $name = 'derivativeImage';
         } else {
             $name = 'defaultDisplay';
         }
