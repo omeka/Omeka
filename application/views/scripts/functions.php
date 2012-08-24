@@ -86,3 +86,26 @@ function custom_header_background()
         echo $html;
     }
 }
+
+/**
+ * Partial for the admin bar.
+ */
+function admin_bar() {
+    common('admin-bar');
+}
+
+/**
+ * Styles for admin bar.
+ */
+function admin_bar_css() {
+    __v()->headLink()->appendStylesheet('http://fonts.googleapis.com/css?family=Arvo:400', 'screen');
+    queue_css('admin-bar', 'screen');
+}
+
+/**
+ * Adds 'admin-bar' to the class attribute for the body tag.
+ */
+function admin_bar_class($attributes) {
+    $attributes['class'] = trim('admin-bar '.$attributes['class']);
+    return $attributes;
+}
