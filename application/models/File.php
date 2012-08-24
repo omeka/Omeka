@@ -201,6 +201,11 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         return $this->has_derivative_image;
     }
     
+    public function getExtension()
+    {
+        return pathinfo($this->original_filename, PATHINFO_EXTENSION);
+    }
+    
     public function hasFullsize()
     {
         return $this->has_derivative_image;
