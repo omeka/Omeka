@@ -39,9 +39,7 @@
         </div><!-- end header -->
 
         <div id="primary-nav">
-            <ul class="navigation">
-            <?php echo custom_public_nav_header(); ?>
-            </ul>
+            <?php echo public_nav_main(); ?>
         </div><!-- end primary-nav -->
         <?php echo custom_header_image(); ?>
 
