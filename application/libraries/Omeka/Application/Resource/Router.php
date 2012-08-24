@@ -35,7 +35,6 @@ class Omeka_Application_Resource_Router extends Zend_Application_Resource_Router
     private function _addHomepageRoute($router)
     {
         $homepageUri = get_option(Omeka_Form_Navigation::HOMEPAGE_URI_OPTION_NAME);
-
         if (!is_admin_theme()) {
                         
             $homepageRequest = new Zend_Controller_Request_Http();
