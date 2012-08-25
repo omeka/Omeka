@@ -45,4 +45,4 @@ jQuery(document).ready(function () {
 </div>
 <?php endif; ?>
 
-<?php fire_plugin_hook('admin_append_to_item_types_form', array('item_type' => $itemtype)); ?>
+<?php fire_plugin_hook('admin_append_to_item_types_form', array('item_type' => $itemtype, 'view' => $this)); ?>

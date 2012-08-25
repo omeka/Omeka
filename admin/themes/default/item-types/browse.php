@@ -35,6 +35,6 @@ head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
 <?php endwhile; ?>
 </tbody>
 </table>
-<?php fire_plugin_hook('admin_append_to_item_types_browse_primary', array('item_types' => $itemtypes)); ?>
+<?php fire_plugin_hook('admin_append_to_item_types_browse_primary', array('item_types' => $itemtypes, 'view' => $this)); ?>
 </div>
 <?php foot(); ?>

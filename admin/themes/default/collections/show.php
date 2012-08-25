@@ -48,7 +48,7 @@
                 <p><?php echo link_to_items_in_collection(); ?></p>
 
                 
-                <?php fire_plugin_hook('admin_append_to_collections_show_primary', array('collection' => $collection)); ?>
+                <?php fire_plugin_hook('admin_append_to_collections_show_primary', array('collection' => $collection, 'view' => $this)); ?>
             
             </div>
         

@@ -29,4 +29,4 @@
 </div>
 
 
-<?php fire_plugin_hook('admin_append_to_collections_form', array('collection' => $collection)); ?>
+<?php fire_plugin_hook('admin_append_to_collections_form', array('collection' => $collection, 'view' => $this)); ?>
