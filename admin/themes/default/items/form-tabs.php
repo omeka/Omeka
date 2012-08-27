@@ -14,7 +14,7 @@ foreach ($elementSets as $key => $elementSet) {
         
         default:
             $tabContent  = '<p class="element-set-description" id="';
-            $tabContent .= html_escape(text_to_id($elementSet->name) . '-description') . '">';            
+            $tabContent .= html_escape(text_to_id($elementSet->name) . '-description') . '">';
             $tabContent .= url_to_link($elementSet->description) . '</p>' . "\n\n";
             $tabContent .= display_element_set_form($item, $elementSet->name);
             $tabs[$tabName] = $tabContent;
@@ -22,7 +22,7 @@ foreach ($elementSets as $key => $elementSet) {
     }
 }
 
-foreach (array('Files', 'Miscellaneous') as $tabName) {
+foreach (array('Files', 'Miscellaneous', 'Tags') as $tabName) {
     ob_start();
     switch ($tabName) {
         case 'Files':
@@ -31,10 +31,14 @@ foreach (array('Files', 'Miscellaneous') as $tabName) {
         case 'Miscellaneous':
             require 'miscellaneous-form.php';
         break;
+        case 'Tags':
+            require 'tag-form.php';
+        break;
     }
     $tabs[$tabName] = ob_get_contents();
     ob_end_clean();
 } 
+
 
 $tabs = apply_filters('admin_items_form_tabs', $tabs, array('item' => $item));
 ?>

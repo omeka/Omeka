@@ -679,7 +679,7 @@ header nav {
 ================================================== */
 
 #save {
-    float: right;
+    margin-top: 0;
 }
         
     #save .big {
@@ -1206,9 +1206,18 @@ header nav {
 }
     
 #public-featured {
-    margin: 10px 0;
-    padding: 10px 0;
+    margin: 0 0 10px 0;
+    padding: 0;
     text-align: center;
+    font-size: 12px;
+}
+
+#public-featured div {
+    display: inline-block;
+}
+
+#public-featured input[type=checkbox] {
+    margin: 10px 10px 10px 5px;
 }
     
 .items input[type=text], .items textarea {

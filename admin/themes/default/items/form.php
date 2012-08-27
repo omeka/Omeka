@@ -34,7 +34,7 @@ jQuery(document).bind('omeka:elementformload', function (event) {
 //]]>   
 </script>
 
-<div class="seven columns alpha">
+<div class="seven columns alpha" id="edit-form">
 
     <?php echo flash(); ?>
     
