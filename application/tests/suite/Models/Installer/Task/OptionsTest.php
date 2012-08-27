@@ -68,6 +68,7 @@ class Installer_Task_OptionsTest extends PHPUnit_Framework_TestCase
             'html_purifier_allowed_html_elements'   => 'foo',
             'html_purifier_allowed_html_attributes' => 'bar',
             'tag_delimiter'                 => ',',
+            Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME => 'foobar'
         ));
         try {
             $task->install($this->db);
@@ -106,6 +107,7 @@ class Installer_Task_OptionsTest extends PHPUnit_Framework_TestCase
             'html_purifier_allowed_html_elements'   => 'foo',
             'html_purifier_allowed_html_attributes' => 'bar',
             'tag_delimiter'                 => ',',
+            Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME => 'foobar'
         ));
         $task->install($this->db);
         $this->profilerHelper->assertDbQuery(array(
