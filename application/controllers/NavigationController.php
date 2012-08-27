@@ -40,7 +40,9 @@ class NavigationController extends Omeka_Controller_AbstractActionController
                 $this->_helper->flashMessenger(__('There were errors found in your form. Please edit and resubmit.'), 'error');
             }
         }
-        revert_theme_base_uri();
+        // Reset to "current" base uri. "revert" won't work here because
+        // something may have used public_uri or admin_uri in between.
+        set_theme_base_uri();
     }
     
     /**
