@@ -397,8 +397,7 @@ Omeka.Items.makeElementControls = function (element, elementFormPartialUrl, item
  * @param {string} label
  */
 Omeka.Items.enableAddFiles = function (label) {
-    var filesDiv = jQuery('#file-inputs .files').first();
-    var filesDivWrap = jQuery('#file-inputs');
+    var filesDiv = jQuery('#files-metadata .files.inputs');
 
     var link = jQuery('<a href="#" id="add-file" class="add-file">' + label + '</a>');
     link.click(function (event) {
@@ -413,7 +412,7 @@ Omeka.Items.enableAddFiles = function (label) {
     });
 
     jQuery('#add-more-files').html('');
-    filesDivWrap.append(link);
+    jQuery('#file-inputs').append(link);
 };
 
 /**
