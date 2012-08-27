@@ -102,7 +102,7 @@ class Omeka_Form_GeneralSettings extends Omeka_Form
         ));
 
         $this->addElement('text', 'path_to_convert', array(
-            'label' => __('Imagemagick Directory Path')
+            'label' => __('ImageMagick Directory Path')
         ));
         
         $this->addElement('submit', 'settings_submit', array(

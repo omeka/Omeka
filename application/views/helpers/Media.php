@@ -55,15 +55,6 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
         'audio/x-mp4'       => 'mp4',
         'audio/wav'         => 'wav',
         'audio/x-wav'       => 'wav',
-        'image/bmp'         => 'image',
-        'image/gif'         => 'image',
-        'image/jpeg'        => 'image',
-        'image/jpg'         => 'image',
-        'image/pjpeg'       => 'image',
-        'image/png'         => 'image',
-        'image/tif'         => 'image',
-        'image/tiff'        => 'image', 
-        'image/x-ms-bmp'    => 'image',
         'video/mp4'         => 'mov',
         'video/mpeg'        => 'mov',
         'video/ogg'         => 'mov',
@@ -111,20 +102,7 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
         'ogg' => 'ogg', 
         'spx' => 'ogg', 
         // audio/x-wav
-        'wav' => 'wav', 
-        // image/bmp
-        'bmp' => 'image', 
-        // image/gif
-        'gif' => 'image', 
-        // image/jpeg
-        'jpeg' => 'image', 
-        'jpg' => 'image', 
-        'jpe' => 'image', 
-        // image/png
-        'png' => 'image', 
-        // image/tiff
-        'tif' => 'image', 
-        'tiff' => 'image', 
+        'wav' => 'wav',
         // video/mp4
         'mp4' => 'mov', 
         'mp4v' => 'mov',  
@@ -158,7 +136,7 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
             'linkToMetadata'=>false,
             'linkText' => null, 
             ),
-        'image'=>array(
+        'derivativeImage'=>array(
             'imageSize'=>'square_thumbnail',
             'linkToFile'=>true,
             'linkToMetadata'=>false,
@@ -353,7 +331,7 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
         }
         return $this->_linkToFile($html, $file, $options);
     }
-    
+        
     /**
      * Add a link for the file based on the given set of options.
      * 
@@ -405,46 +383,7 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
         }
         return $html;
     }
-    
-    /**
-     * Returns valid XHTML markup for displaying an image that has been stored 
-     * in Omeka.
-     * 
-     * @param File $file
-     * @param array $file Options for customizing the display of images. Current
-     * options include: 'imageSize'
-     * @return string HTML for display
-     */
-    public function image($file, array $options=array())
-    {
-        $html = '';
-        $imgHtml = '';
         
-        // Should we ever include more image sizes by default, this will be 
-        // easier to modify.        
-        $imgClasses = array(
-            'thumbnail'=>'thumb', 
-            'square_thumbnail'=>'thumb', 
-            'fullsize'=>'full');
-        $imageSize = $options['imageSize'];
-        
-        // If we can make an image from the given image size.
-        if (in_array($imageSize, array_keys($imgClasses))) {
-            
-            // A class is given to all of the images by default to make it 
-            // easier to style. This can be modified by passing it in as an 
-            // option, but recommended against. Can also modify alt text via an 
-            // option.
-            $imgClass = $imgClasses[$imageSize];
-            $imgAttributes = array_merge(array('class' => $imgClass),
-                                (array)$options['imgAttributes']);
-            $imgHtml = $this->image_tag($file, $imgAttributes, $imageSize);
-        }
-        $html .= !empty($imgHtml) ? $imgHtml : html_escape($file->original_filename);   
-        $html = $this->_linkToFile($html, $file, $options);
-        return $html;
-    }
-    
     /**
      * Retrieve valid XHTML for displaying a wmv video file or equivalent.  
      * Currently this loads the video inside of an <object> tag, but that 
@@ -654,7 +593,7 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
      */
     public function icon($file, array $options=array())
     {
-        $mimeType = $this->getMimeFromFile($file);
+        $mimeType = $file->getMimeType();
         $imgAttributes = (array)$options['imgAttributes'];
         // The path to the icon is keyed to the MIME type of the file.
         $imgAttributes['src'] = (string)$options['icons'][$mimeType];
@@ -670,15 +609,52 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
         return $this->_linkToFile($html, $file, $options);
     }
     
+    
+    /**
+     * Returns valid XHTML markup for displaying an image that has been stored 
+     * in Omeka.
+     * 
+     * @param File $file
+     * @param array $file Options for customizing the display of images. Current
+     * options include: 'imageSize'
+     * @return string HTML for display
+     */
+    public function derivativeImage($file, array $options=array())
+    {
+        $html = '';
+        $imgHtml = '';
+        
+        // Should we ever include more image sizes by default, this will be 
+        // easier to modify.        
+        $imgClasses = array(
+            'thumbnail'=>'thumb', 
+            'square_thumbnail'=>'thumb', 
+            'fullsize'=>'full');
+        $imageSize = $options['imageSize'];
+        
+        // If we can make an image from the given image size.
+        if (in_array($imageSize, array_keys($imgClasses))) {
+            
+            // A class is given to all of the images by default to make it 
+            // easier to style. This can be modified by passing it in as an 
+            // option, but recommended against. Can also modify alt text via an 
+            // option.
+            $imgClass = $imgClasses[$imageSize];
+            $imgAttributes = array_merge(array('class' => $imgClass),
+                                (array)$options['imgAttributes']);
+            $imgHtml = $this->image_tag($file, $imgAttributes, $imageSize);
+        }
+        $html .= !empty($imgHtml) ? $imgHtml : html_escape($file->original_filename);   
+        $html = $this->_linkToFile($html, $file, $options);
+        return $html;
+    }
     // END DEFINED DISPLAY CALLBACKS
     
-    protected function getMimeFromFile($file)
+    protected function getCallback($file, $options)
     {
-        return $file->getMimeType();
-    }
-    
-    protected function getCallback($mimeType, $options, $fileExtension)
-    {
+        $mimeType = $file->getMimeType();
+        $fileExtension = $file->getExtension();
+        
         // Displaying icons overrides the default lookup mechanism.
         if (array_key_exists('icons', $options) and
                 array_key_exists($mimeType, $options['icons'])) {
@@ -689,6 +665,8 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
             $name = self::$_callbacks[$mimeType];
         } else if (array_key_exists($fileExtension, self::$_fileExtensionCallbacks)) {
             $name = self::$_fileExtensionCallbacks[$fileExtension];
+        } else if ($file->hasThumbnail()) {
+            $name = 'derivativeImage';
         } else {
             $name = 'defaultDisplay';
         }
@@ -742,14 +720,11 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
      * @return string HTML
      */
     public function media($file, array $props=array(), $wrapperAttributes = array())
-    {
-        $mimeType = $this->getMimeFromFile($file);
-        $fileExtension = $this->_getFileExtension($file);
-        
+    {        
         // There is a chance that $props passed in could modify the callback
         // that is used.  Currently used to determine whether or not to display
         // an icon.
-        $callback = $this->getCallback($mimeType, $props, $fileExtension);   
+        $callback = $this->getCallback($file, $props);   
         
         $options = array_merge($this->getDefaultOptions($callback), $props);
         
@@ -757,7 +732,7 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
         
         // Append a class name that corresponds to the MIME type.
         if ($wrapperAttributes) {
-            $mimeTypeClassName = str_ireplace('/', '-', $mimeType);
+            $mimeTypeClassName = str_ireplace('/', '-', $file->getMimeType());
             if (array_key_exists('class', $wrapperAttributes)) {
                 $wrapperAttributes['class'] .= ' ' . $mimeTypeClassName;
             } else {
@@ -780,12 +755,7 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
             )
         );
     }
-    
-    private function _getFileExtension($file)
-    {
-        return pathinfo($file->original_filename, PATHINFO_EXTENSION);
-    }
-    
+        
     /**
      * Return a valid img tag for an image.
      *
