@@ -296,7 +296,6 @@ class ItemType extends Omeka_Record_AbstractRecord
         $this->_elementsToSave = $elementsToSave;
 
         // Reset the elements to remove
-        $elementsToRemove = array();
         $hasElement = false;
         foreach($this->_elementsToRemove as $elementToRemove) {
             if ($elementToRemove->id == $elementId) {
@@ -308,7 +307,7 @@ class ItemType extends Omeka_Record_AbstractRecord
             if ($element) {
                 $this->_elementsToRemove[] = $element;
             }
-        }
+        }        
     }
 
      /**

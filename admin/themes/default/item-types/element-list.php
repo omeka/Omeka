@@ -1,3 +1,11 @@
+<?php 
+$elementsToAdd = $this->form->getElementsToAdd(); 
+$elementsToAddIsNew = $this->form->getElementsToAddIsNew();
+$elementsToAddTempIds = $this->form->getElementsToAddTempIds();
+$elementsOrder = $this->form->getElementsOrder();
+
+?>
+
 <table width="100%">
     <thead>
         <tr>
@@ -15,7 +23,7 @@
             <tr class="element">
                 <td class="element-name"><strong><?php echo html_escape($element->name); ?></strong></td>
                 <td><?php echo html_escape($element->description); ?></td>
-                <td class="element-order"><?php echo __v()->formText("element-order-". $element->id, $elementsOrder[$orderIndex], array('size'=>2)); ?></td>
+                <td class="element-order"><?php echo __v()->formText('element-order-'. $element->id, $elementsOrder[$orderIndex], array('size'=>2)); ?></td>
 
                 <?php if (has_permission('ItemTypes', 'delete-element')): ?>
                 <td><a id="remove-element-link-<?php echo html_escape($element->id); ?>" href="" class="delete-element"><?php echo __('Remove'); ?></a></td>
@@ -24,7 +32,7 @@
             <?php $orderIndex++; ?>
         <?php endforeach; ?>
         <?php $elementToAddIndex = 0; ?>
-        <?php foreach ($elementsToAdd as $elementToAdd): ?>
+        <?php foreach ($elementsToAdd as $elementToAdd): ?>            
         <?php if ($elementsToAddIsNew[$elementToAddIndex] == true):  ?>
         <?php echo $this->action('add-new-element',
                                  'item-types',
@@ -48,7 +56,7 @@
          <?php $elementToAddIndex++; ?>
          <?php $orderIndex++; ?>
          <?php endforeach;?>
-        <?php echo __v()->formHidden("elements-to-remove", ''); ?>
+        <?php echo $this->form->getElement(Omeka_Form_ItemTypes::REMOVE_HIDDEN_ELEMENT_ID); ?>
     </tbody>
 </table>
 <p style="float:right;">
