@@ -7,7 +7,8 @@
     }
     $itemTitle = __('Edit Item #%s', metadata('item', 'id')) . $itemTitle;
 ?>
-<?php head(array('title'=> $itemTitle, 'bodyclass'=>'items primary','content_class' => 'vertical-nav'));?>
+
+<?php head(array('title'=> $itemTitle, 'bodyclass'=>'items edit primary','content_class' => 'vertical-nav'));?>
 
         <?php include 'form-tabs.php'; // Definitions for all the tabs for the form. ?>
         
@@ -48,7 +49,6 @@
                                 ?>
                             </div>
                         </div>
-                        <?php include 'tag-form.php'; ?>
                     </div>
 
 <?php foot();?>
