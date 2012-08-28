@@ -47,7 +47,7 @@
         <?php endwhile; ?>
     </div><!-- end collection-items -->
 
-    <?php echo plugin_append_to_collections_show(); ?>
+    <?php fire_plugin_hook('public_append_to_collections_show', array('view' => $this)); ?>
 
 </div><!-- end primary -->
 

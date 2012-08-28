@@ -48,82 +48,6 @@ function admin_plugin_header()
 }
 
 /**
- * Hook is fired on the public advanced search form.
- *
- * @since 0.10
- * @return string
- */
-function plugin_append_to_advanced_search()
-{
-    return get_plugin_hook_output('public_append_to_advanced_search');
-}
-
-/**
- * Retrieve the HTML that is output by the 'public_append_to_items_browse_each'
- * hook.  This hook is fired on the public theme, inside the items/browse loop.
- *
- * @since 0.10
- * @return string
- */
-function plugin_append_to_items_browse_each()
-{
-    return get_plugin_hook_output('public_append_to_items_browse_each');
-}
-
-/**
- * Hook is fired at the end of the items/browse page, after the loop.
- *
- * @since 0.10
- * @see plugin_append_to_items_browse_each()
- */
-function plugin_append_to_items_browse()
-{
-    return get_plugin_hook_output('public_append_to_items_browse');
-}
-
- /**
-  * Hook is fired at the end of the items/show page.
-  *
-  * @since 0.10
-  * @see plugin_append_to_items_browse_each()
-  */
-function plugin_append_to_items_show()
-{
-    return get_plugin_hook_output('public_append_to_items_show');
-}
-
-/**
- * @since 0.10
- * @see plugin_append_to_items_browse_each()
- */
-function plugin_append_to_collections_browse_each()
-{
-    return get_plugin_hook_output('public_append_to_collections_browse_each');
-}
-
-/**
- * Hook is fired on the public collections/browse page.
- *
- * @since 0.10
- * @return string
- */
-function plugin_append_to_collections_browse()
-{
-    return get_plugin_hook_output('public_append_to_collections_browse');
-}
-
-/**
- * Hook is fired on the public collections/show page.
- *
- * @since 0.10
- * @return string
- */
-function plugin_append_to_collections_show()
-{
-    return get_plugin_hook_output('public_append_to_collections_show');
-}
-
-/**
  * Allow plugins to hook in to the footer of public themes.
  *
  * Uses the 'public_theme_footer' hook, which receives the request object as
@@ -205,13 +129,4 @@ function plugin_page_content()
 {
     $request = Zend_Controller_Front::getInstance()->getRequest();
     fire_plugin_hook('public_theme_page_content', array('request' => $request));
-}
-
-/**
- * @since 1.1
- * @see plugin_append_to_admin_site_info()
- */
-function plugin_append_to_admin_site_info()
-{
-    return get_plugin_hook_output('plugin_append_to_admin_site_info');
 }

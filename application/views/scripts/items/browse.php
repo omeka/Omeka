@@ -41,7 +41,7 @@ head(array('title'=>$pageTitle,'bodyid'=>'items','bodyclass' => 'browse'));
         </div>
         <?php endif; ?>
 
-        <?php echo plugin_append_to_items_browse_each(); ?>
+        <?php fire_plugin_hook('public_append_to_items_browse_each', array('view' => $this)); ?>
 
         </div><!-- end class="item-meta" -->
     </div><!-- end class="item hentry" -->
@@ -49,7 +49,7 @@ head(array('title'=>$pageTitle,'bodyid'=>'items','bodyclass' => 'browse'));
 
     <div id="pagination-bottom" class="pagination"><?php echo pagination_links(); ?></div>
 
-    <?php echo plugin_append_to_items_browse(); ?>
+    <?php fire_plugin_hook('public_append_to_items_browse', array('view' => $this)); ?>
 
 </div><!-- end primary -->
 
