@@ -126,7 +126,13 @@ function file_display_uri(File $file, $format='fullsize')
 function record_uri(Omeka_Record_AbstractRecord $record, $action, $controller = null)
 {
     // Use the 'id' route for all urls pointing to records
-    return uri($record->getRecordRoute($action, $controller), 'id');
+    $uriData = $record->getRecordRoute($action, $controller);
+    if (isset($uriData['id'])) {
+        $route = 'id';
+    } else {
+        $route = 'default';
+    }
+    return uri($uriData, $route);
 }
 
 /**
