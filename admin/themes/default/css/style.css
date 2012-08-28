@@ -140,7 +140,14 @@ p, li {
         width: 1%;
         text-align: center;
     }
+
+    .featured { background: url('../images/featured-bg.png') no-repeat right bottom; }
     
+        .odd td.featured { background-color: #FFFFFF; }
+    
+        .even td.featured { background-color: #F3F3E7; }
+    
+
     .mobile { display: none; }
     
     
@@ -951,12 +958,29 @@ header nav {
 /* Browse Plugins
 ================================================== */
 
-.plugins.browse a.button, .plugins.browse input[type=submit], .plugins.browse button {
-    width: 90px;
-    height: auto;
-    float: left;
-    padding: 3px inherit;
+.plugins.browse table form {
+    display: inline-block;
 }
+
+.plugins.browse table a.button, .plugins.browse table input[type=submit], .plugins.browse table button {
+    background: none;
+    border: 0;
+    box-shadow: 0 0 0;
+    text-shadow: 0 0 0;
+    color: #4E7181;
+    padding: 0;
+    display: inline;
+    margin: 0;
+}
+
+.plugins.browse table form:after {
+    content: ' \00b7';
+}
+
+.plugins.browse table form:last-child:after {
+    content: '';
+}
+
     
 .plugin-row {
     overflow: auto;
@@ -1045,12 +1069,6 @@ header nav {
     .browse-items .item-details p {
         margin: 0;
     }
-
-.browse-items .featured { background: url('../images/featured-bg.png') no-repeat right bottom; }
-
-    .browse-items .odd td.featured { background-color: #FFFFFF; }
-
-    .browse-items .even td.featured { background-color: #F3F3E7; }
 
 .quick-filter-wrapper {
     height: 25px;
