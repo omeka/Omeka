@@ -12,7 +12,7 @@
 
 <?php echo js('items'); ?>
         
-<div id="save" class="three columns omega">
+<div id="edit" class="three columns omega">
     
     <ul class="pagination">
         <?php if(link_to_previous_item()): ?>

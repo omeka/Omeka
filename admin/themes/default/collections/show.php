@@ -9,7 +9,7 @@
 ?>
 <?php head(array('title'=> $collectionTitle, 'bodyclass'=>'collections show')); ?>
 
-            <div id="save" class="three columns omega">
+            <div id="edit" class="three columns omega">
             
                 <div class="panel">
                     <?php if (has_permission(get_current_collection(), 'edit')): ?>    

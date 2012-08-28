@@ -678,62 +678,63 @@ header nav {
 /* Save Panel
 ================================================== */
 
-#save {
+#save, #edit {
     margin-top: 0;
 }
+
+    #edit {
+        float: right;
+    }
         
-    #save .big {
+    #save .big, #edit .big {
         width: 100%;
         margin: 10px auto;
         padding: 0;
     }
-    
-    #save .field {
+
+        #save .big:first-child, #edit .big:first-child {
+            margin-top: 0;
+        }
+
+    #save .field, #edit .field {
         border-top: 1px solid #e7e7e7;
         overflow: visible;
         padding-top: 20px;
     }
         
-        #save .field:last-child {
+        #save .field:last-child, #edit .field:last-child {
             margin-bottom: 0;
         }
 
         
-    #save label {
+    #save label, #edit label {
         float:none;
     }
         
-    #save .panel {
+    #save .panel, #edit .panel {
         clear: both;
     }
         
-    #save .pagination {
+    #save .pagination, #edit .pagination {
         width: 100%;
     }
     
-    #save .pagination li {
+    #save .pagination li, #edit .pagination li {
         margin: 0 0 10px 0;
     }
                 
-    #save #previous-item {
+    #save #previous-item, #edit #previous-item {
         float: left;
     }
         
-    #save #next-item {
+    #save #next-item, #edit #next-item {
         float: right;
     }
 
-    #save select {
+    #save select, #edit select {
         width: 100%;
         margin: 10px 0 0 0;
-    }        
-    
-    #save input[type=submit] {
     }
-
-        #save .big:first-child {
-            margin-top: 0;
-        }
 
 #add-tags-explanation {
     margin: 0 0 10px 0;
@@ -1046,6 +1047,8 @@ header nav {
     }
 
 .browse-items .featured { background: url('../images/featured-bg.png') no-repeat right bottom; }
+
+    .browse-items .odd td.featured { background-color: #FFFFFF; }
 
     .browse-items .even td.featured { background-color: #F3F3E7; }
 

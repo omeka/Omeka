@@ -8,7 +8,7 @@
     $itemTypeTitle = __('Item Type #%s', $itemtype->id) . $itemTypeTitle;
 ?>
 <?php head(array('title'=> $itemTypeTitle,'bodyclass'=>'item-types'));?>
-    <div id="save" class="three columns omega">
+    <div id="edit" class="three columns omega">
         <div class="panel">
         <?php if ( has_permission('ItemTypes','edit') ): ?>
         <a class="edit big green button" href="<?php echo html_escape(record_uri($itemtype, 'edit', 'item-types')); ?>"><?php echo __('Edit this Item Type'); ?></a>
