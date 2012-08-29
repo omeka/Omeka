@@ -687,12 +687,9 @@ header nav {
 
 #save, #edit {
     margin-top: 0;
+    float: right;
 }
 
-    #edit {
-        float: right;
-    }
-        
     #save .big, #edit .big {
         width: 100%;
         margin: 10px auto;
@@ -1014,7 +1011,7 @@ header nav {
 /* Edit Users
 ================================================== */
 
-.users .submit {
+.users input[type="submit"] {
     clear: both;
 }
     
