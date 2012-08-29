@@ -40,7 +40,6 @@ jQuery(window).load(function() {
         topPadding = 65;
     
     $window.scroll(function() {
-        console.log($window.scrollTop());
         if($window.scrollTop() > offset.top) {
             $save.stop().animate({
                 marginTop: $window.scrollTop() - offset.top + topPadding
