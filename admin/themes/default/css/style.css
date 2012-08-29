@@ -112,6 +112,11 @@ p, li {
         }
         
         th a:link, th a:visited { color: #857541; }
+        
+        th.sorting { font-weight: bold; }
+        
+        th.desc a:after { content: url('../images/desc.png'); }
+        th.asc a:after { content: url('../images/asc.png'); }
     
     tr { background-color: rgba(255,255,255,.5); }
         
