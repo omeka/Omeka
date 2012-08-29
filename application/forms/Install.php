@@ -32,7 +32,6 @@ class Omeka_Form_Install extends Omeka_Form
             
         $this->addElement('text', 'username', array(
             'label' => __('Username'),
-            'class' => 'textinput',
             'description' => __('Only alphanumeric characters are allowed.'), 
             'validators' => array(array('StringLength', false, array(User::USERNAME_MIN_LENGTH, User::USERNAME_MAX_LENGTH)), 'Alnum'), 
             'required' => true

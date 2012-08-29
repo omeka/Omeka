@@ -103,22 +103,12 @@ class Omeka_Form extends Zend_Form
     {
         foreach ($this->getElements() as $element) {
             if ($element instanceof Zend_Form_Element_Submit) {
-                // All submit form elements should have class 'submit'.
-                $this->_addClassNameToElement($element, 'submit');
                 // All submit form elements should be wrapped in a div with 
                 // no class.
                 $element->setDecorators(array(
                     'ViewHelper', 
                     array('HtmlTag', array('tag' => 'div'))));
-            } else if ($element instanceof Zend_Form_Element_Text) {
-                // Text inputs should have class = "textinput".
-                $this->_addClassNameToElement($element, 'textinput');
-            } else if ($element instanceof Zend_Form_Element_Textarea) {
-                $this->_addClassNameToElement($element, 'textinput');
-            } else if ($element instanceof Zend_Form_Element_Password) {
-                $this->_addClassNameToElement($element, 'textinput');
-            } else if ($element instanceof Zend_Form_Element_File) {       
-                $this->_addClassNameToElement($element, 'fileinput');
+            } else if ($element instanceof Zend_Form_Element_File) {
                 $element->setDecorators(array(
                     'File', 
                     'Errors', 

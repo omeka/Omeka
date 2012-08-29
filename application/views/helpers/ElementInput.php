@@ -99,7 +99,7 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
         return $this->view->formTextarea(
             $inputNameStem . '[text]',
             $value,
-            array('class' => 'textinput', 'rows' => 3, 'cols' => 50));
+            array('rows' => 3, 'cols' => 50));
     }
 
     /**

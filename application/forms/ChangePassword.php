@@ -34,7 +34,6 @@ class Omeka_Form_ChangePassword extends Omeka_Form
             array(
                 'label'         => __('Current Password'),
                 'required'      => true,
-                'class'         => 'textinput',
                 'errorMessages' => array(self::ERROR_CURRENT_PASSWORD_INVALID),
             )
         );
@@ -43,7 +42,6 @@ class Omeka_Form_ChangePassword extends Omeka_Form
             array(
                 'label'         => __('New Password'),
                 'required'      => true,
-                'class'         => 'textinput',
                 'validators'    => array(
                     array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' => 
                         array(
@@ -77,7 +75,6 @@ class Omeka_Form_ChangePassword extends Omeka_Form
             array(
                 'label'         => __('Repeat New Password'),
                 'required'      => true,
-                'class'         => 'textinput',
                 'errorMessages' => array(self::ERROR_NEW_PASSWORD_CONFIRM_REQUIRED)
             )
         );

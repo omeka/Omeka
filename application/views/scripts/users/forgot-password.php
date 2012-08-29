@@ -12,7 +12,7 @@ head(array('title' => $pageTitle, 'bodyclass' => 'login'), $header);
 <form method="post" accept-charset="utf-8">
     <div class="field">        
         <label for="email"><?php echo __('Email'); ?></label>
-        <?php echo $this->formText('email', @$_POST['email'], array('class'=>'textinput')); ?>
+        <?php echo $this->formText('email', @$_POST['email']); ?>
     </div>
 
     <input type="submit" class="submit" value="<?php echo __('Submit'); ?>" />

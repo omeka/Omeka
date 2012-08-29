@@ -14,7 +14,7 @@ head(array('title' => $pageTitle, 'bodyclass' => 'login'), $header);
 <form method="post" accept-charset="utf-8">
     <div class="field">    
         <div class="inputs six columns offset-by-one omega">
-            <?php echo $this->formText('email', @$_POST['email'], array('class'=>'textinput')); ?>
+            <?php echo $this->formText('email', @$_POST['email']); ?>
         </div>
     </div>
 

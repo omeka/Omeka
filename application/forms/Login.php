@@ -24,7 +24,6 @@ class Omeka_Form_Login extends Omeka_Form
         $this->addElement('text', 'username', array(
             'label'     => __('Username'),
             'required'  => true,
-            'class' => 'textinput',
             'validators' => array(
                     array('validator'   => 'NotEmpty',
                           'options'     =>  array(
@@ -33,7 +32,6 @@ class Omeka_Form_Login extends Omeka_Form
         $this->addElement('password', 'password', array(
             'label'=>__('Password'),
             'required'  => true,
-            'class' => 'textinput',
             'validators' => array(
                     array('validator'   => 'NotEmpty',
                           'options'     =>  array(

@@ -7,7 +7,7 @@
     </div>
     
     <div class="inputs five columns omega">
-        <?php echo $this->formText('name', $collection->name, array('class'=>'textinput', 'size'=>'40')); ?>
+        <?php echo $this->formText('name', $collection->name, array('size'=>'40')); ?>
     </div>
     
     <div class="field two columns alpha">
@@ -15,14 +15,14 @@
     </div>
         
     <div class="inputs five columns omega">
-    <?php echo $this->formTextarea('description', $collection->description, array('class'=>'textinput', 'rows'=>'10', 'cols'=>'60')); ?>
+    <?php echo $this->formTextarea('description', $collection->description, array('rows'=>'10', 'cols'=>'60')); ?>
     </div>
     
     <div class="field two columns alpha">
         <?php echo $this->formLabel('collectors', __('Collectors')); ?>
     </div>
     <div class="inputs five columns omega">
-        <?php echo $this->formTextarea('collectors', $collection->collectors, array('class' => 'texinput', 'rows' => '10', 'cols' => '60')); 
+        <?php echo $this->formTextarea('collectors', $collection->collectors, array('rows' => '10', 'cols' => '60')); 
     ?>
     </div>
     

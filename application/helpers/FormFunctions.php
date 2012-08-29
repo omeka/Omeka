@@ -66,7 +66,7 @@ function simple_search($buttonText = null, $formProperties=array('id'=>'simple-s
     $formProperties['method'] = 'get';
     $html  = '<form ' . _tag_attributes($formProperties) . '>' . "\n";
     $html .= '<fieldset>' . "\n\n";
-    $html .= __v()->formText('search', $searchQuery, array('name'=>'search','class'=>'textinput'));
+    $html .= __v()->formText('search', $searchQuery);
     $html .= __v()->formSubmit('submit_search', $buttonText, array('class' => 'blue'));
     $html .= '</fieldset>' . "\n\n";
 

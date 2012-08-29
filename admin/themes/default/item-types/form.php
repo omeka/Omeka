@@ -23,13 +23,13 @@ jQuery(document).ready(function () {
         <div class="field">
             <?php echo $this->formLabel('name', __('Name'), array('class' => 'required two columns alpha')); ?>
             <div class="inputs five columns omega">
-            <?php echo $this->formText('name', $itemtype->name, array('class'=>'textinput')); ?>
+            <?php echo $this->formText('name', $itemtype->name); ?>
             </div>
         </div>
         <div class="field">
         <?php echo $this->formLabel('description', __('Description'), array('class' => 'two columns alpha')); ?>
             <div class="inputs five columns omega">
-            <?php echo $this->formTextarea('description', $itemtype->description, array('class'=>'textinput', 'rows'=>'10', 'cols'=>'40')); ?>
+            <?php echo $this->formTextarea('description', $itemtype->description, array('rows'=>'10', 'cols'=>'40')); ?>
             </div>
         </div>
     </fieldset>

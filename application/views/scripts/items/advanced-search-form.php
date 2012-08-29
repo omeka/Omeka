@@ -16,8 +16,7 @@ $formAttributes['method'] = 'GET';
             echo $this->formText(
                 'search',
                 @$_REQUEST['search'],
-                array('id' => 'keyword-search', 'size' => '40',
-                    'class' => 'textinput')
+                array('id' => 'keyword-search', 'size' => '40')
             );
         ?>
         </div>
@@ -83,7 +82,7 @@ $formAttributes['method'] = 'GET';
         <div class="inputs">
         <?php
             echo $this->formText('range', @$_GET['range'],
-                array('size' => '40', 'class' => 'textinput')
+                array('size' => '40')
             );
         ?>
         </div>
@@ -140,8 +139,7 @@ $formAttributes['method'] = 'GET';
             <div class="inputs">
             <?php
                 echo $this->formText('tags', @$_REQUEST['tags'],
-                    array('size' => '40', 'id' => 'tag-search',
-                        'class' => 'textinput')
+                    array('size' => '40', 'id' => 'tag-search')
                 );
             ?>
             </div>

@@ -29,7 +29,7 @@
             echo $this->formHidden($key,$value);
         }
     } ?>
-    <?php echo $this->formText('page', $this->current, array('class'=>'textinput')); ?> of <?php echo $this->last; ?></li>
+    <?php echo $this->formText('page', $this->current); ?> of <?php echo $this->last; ?></li>
     </form>
     
     <?php if (isset($this->next)): ?> 
