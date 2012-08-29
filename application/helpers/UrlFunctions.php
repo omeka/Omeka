@@ -127,7 +127,7 @@ function record_uri(Omeka_Record_AbstractRecord $record, $action, $controller = 
 {
     // Use the 'id' route for all urls pointing to records
     $uriData = $record->getRecordRoute($action, $controller);
-    if (isset($uriData['id'])) {
+    if (isset($uriData['id']) && !isset($uriData['module'])) {
         $route = 'id';
     } else {
         $route = 'default';
