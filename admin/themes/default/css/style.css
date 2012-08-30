@@ -108,7 +108,7 @@ p, li {
             content: url('../images/sort.png');
             display: inline-block;
             line-height: 10px;
-            margin: 0 5px;
+            margin: 0 0 0 5px;
         }
         
         th a:link, th a:visited { color: #857541; }
@@ -154,7 +154,24 @@ p, li {
         width: 1%;
         text-align: center;
     }
+    
 
+
+    .details {
+        background-color: #fff;
+        border: 1px solid #E4E5DE;
+        border-radius: 3px;
+        margin-top: .5em;
+        padding: .5em;
+    }
+        
+        .details p { margin: 0; }
+        
+        .details ul { 
+            margin-bottom: 0; 
+            padding: 0 0 0 20px; 
+        }
+        
     .featured { background: url('../images/featured-bg.png') no-repeat right bottom; }
     
         .odd td.featured { background-color: #FFFFFF; }
@@ -997,6 +1014,9 @@ header nav {
     content: '';
 }
 
+.plugins.browse th:first-child {
+    width: 30%;
+}
     
 .plugin-row {
     overflow: auto;
@@ -1072,18 +1092,6 @@ header nav {
         float: left;
         height: 25px;
         line-height: 25px;
-    }
-
-.browse-items .item-details {
-    background-color: #fff;
-    border: 1px solid #E4E5DE;
-    border-radius: 3px;
-    margin-top: .5em;
-    padding: .5em;
-}
-    
-    .browse-items .item-details p {
-        margin: 0;
     }
 
 .quick-filter-wrapper {
@@ -1266,7 +1274,7 @@ header nav {
     font-size: 14px;
 }
 
-#section-nav {
+ul#section-nav, #section-nav ul {
     font-family: "Arvo", sans-serif;
     list-style-type: none;
     margin: -20px 0 16px 0;
@@ -1277,6 +1285,7 @@ header nav {
         
         #section-nav li:first-child a { padding: 10px 10px 10px 0; }
             
+        #section-nav li.active:first-child a,
         #section-nav li.current:first-child a, 
         #section-nav li:first-child a.active {
             padding: 10px 10px 10px 10px;
@@ -1287,6 +1296,7 @@ header nav {
         padding: 10px;            
         }
                     
+    #section-nav .active a,
     #section-nav .current a, 
     #section-nav a.active {
         background-image: url('../images/red-bg.jpg');

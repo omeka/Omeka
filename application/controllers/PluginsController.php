@@ -223,6 +223,65 @@ class PluginsController extends Omeka_Controller_AbstractActionController
     }
     
     /**
+     * Action to browse only uninstalled plugins
+     *
+     * @return void
+     */
+
+    public function uninstalledAction()
+    {
+        $installedPlugins = $this->_pluginLoader->getPlugins();
+        $pluginFactory = new Omeka_Plugin_Factory(PLUGIN_DIR);
+        $uninstalledPlugins = $pluginFactory->getNewPlugins($installedPlugins);
+        $this->_pluginLoader->loadPlugins($uninstalledPlugins);
+        
+        uksort($uninstalledPlugins, "strnatcasecmp");
+        $uninstalledPlugins = apply_filters('browse_plugins', $uninstalledPlugins);
+        
+        $this->view->assign(array('uninstalledPlugins' => $uninstalledPlugins, 'loader'=>$this->_pluginLoader));
+    }
+
+    /**
+     * Action to browse only uninstalled plugins
+     *
+     * @return void
+     */
+
+    public function activeAction()
+    {
+        $installedPlugins = $this->_pluginLoader->getPlugins();
+        $activePlugins = array();
+        foreach($installedPlugins as $pluginDirName => $plugin) {
+            if($plugin->isActive()) {
+                $activePlugins[$pluginDirName] = $plugin;
+            }
+        }
+        $this->_pluginLoader->loadPlugins($activePlugins);
+        
+        uksort($activePlugins, "strnatcasecmp");
+        $activePlugins = apply_filters('browse_plugins', $activePlugins);
+        
+        $this->view->assign(array('activePlugins' => $activePlugins, 'loader'=>$this->_pluginLoader));
+    }
+    
+    public function inactiveAction()
+    {
+        $installedPlugins = $this->_pluginLoader->getPlugins();
+        $inactivePlugins = array();
+        foreach($installedPlugins as $pluginDirName => $plugin) {
+            if(!$plugin->isActive()) {
+                $inactivePlugins[$pluginDirName] = $plugin;
+            }
+        }
+        $this->_pluginLoader->loadPlugins($inactivePlugins);
+
+        uksort($inactivePlugins, "strnatcasecmp");
+        $inactivePlugins = apply_filters('browse_plugins', $inactivePlugins);
+        
+        $this->view->assign(array('inactivePlugins' => $inactivePlugins, 'loader'=>$this->_pluginLoader));
+    }
+
+    /**
      * Action to uninstall a plugin
      *
      * @return void
