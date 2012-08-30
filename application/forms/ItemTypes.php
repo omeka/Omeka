@@ -35,14 +35,17 @@ class Omeka_Form_ItemTypes extends Omeka_Form
     const ADD_EXISTING_ELEMENT_ID_PREFIX = 'add-existing-element-id-';
     const ADD_EXISTING_ELEMENT_ORDER_PREFIX = 'add-existing-element-order-';
     
-    private $_itemType;
-    private $_elementsOrder;
+    private $_itemType;  // the item type for the form
     
-    private $_elementsToSave; // the item type elements to save
-    
-    private $_elementsToAdd; // the item type elements to add
-    private $_elementsToAddTempIds; // the item type elements to add temporary ids
-    private $_elementsToAddIsNew; // the item type elements to add is new
+    /* 
+       An info array for each item type element in the item type
+       each elementInfo contains the following keys:
+       
+       'element' => the item type element object
+       'temp_id' => the temporary form element id for 
+                    item type elements that have not yet been added to the item type
+    */
+    private $_elementInfos; 
     
     public function init()
     {
@@ -56,24 +59,9 @@ class Omeka_Form_ItemTypes extends Omeka_Form
         $this->_initElements();
     } 
     
-    public function getElementsToAdd()
+    public function getElementInfos()
     {
-        return $this->_elementsToAdd;
-    }
-    
-    public function getElementsToAddTempIds()
-    {
-        return $this->_elementsToAddTempIds;
-    }
-    
-    public function getElementsToAddIsNew()
-    {
-        return $this->_elementsToAddIsNew;
-    }
-    
-    public function getElementsOrder() 
-    {
-        return $this->_elementsOrder;
+        return $this->_elementInfos;
     }
         
     public function saveFromPost() 
@@ -83,28 +71,52 @@ class Omeka_Form_ItemTypes extends Omeka_Form
                 $this->_itemType = new ItemType;
             }
             
-            $elementsToSave = $this->_getElementsToSaveFromPost();            
-            $this->_checkForDuplicateElements($elementsToSave);
-            $this->_removeElementsFromPost();
-            $this->_itemType->addElements($elementsToSave);
+            // get the item type element infos from post
+            $this->_elementInfos = $this->_getElementInfosFromPost();
+            
+            // make sure that there are no duplicates in item type elements            
+            $this->_checkForDuplicateElements();
+            
+            // remove old item type elements from post
+            $this->_removeElementsFromItemType();
+            
+            // add elements to the item type
+            $this->_addElementsToItemType();
         
+            // set the name and description of the item type
             $this->_itemType->name = $this->getValue(self::NAME_ELEMENT_ID);
             $this->_itemType->description = $this->getValue(self::DESCRIPTION_ELEMENT_ID);
-                        
+            
+            // save the item type
             if ($this->_itemType->save()) {            
-                $this->_itemType->reorderElements($this->_elementsOrder);
+                // reorder the item type's elements
+                $this->_reorderItemTypeElements();
             }
         }
         
         return $this->_itemType;
     }
     
+    private function _addElementsToItemType()
+    {
+        $elements = array();
+        foreach($this->_elementInfos as $elementInfo) {
+            $elements[] = $elementInfo['element'];
+        }
+        $this->_itemType->addElements($elements);
+    }
+    
+    private function _reorderItemTypeElements()
+    {
+        $elementOrders = array();
+        foreach($this->_elementInfos as $elementInfo) {
+            $elementOrders[] = $elementInfo['order'];
+        }
+        $this->_itemType->reorderElements($elementOrders);
+    }
+    
     private function _initElements()
-    {   
-        $this->_elementsToAdd = array();
-        $this->_elementsToAddTempIds = array(); 
-        $this->_elementsToAddIsNew = array(); 
-        
+    {           
         // set the item type name and description
         $itemTypeName = '';
         $itemTypeDescription = '';
@@ -113,11 +125,18 @@ class Omeka_Form_ItemTypes extends Omeka_Form
              $itemTypeDescription  = $this->_itemType->description;
         }
         
-        // set the default item type element order
-        $this->_elementsOrder = array();
+        // set the default element infos
+        $this->_elementInfos = array();
         if ($this->_itemType) {
-            if ($elementCount = count($this->_itemType->Elements)) {
-                $this->_elementsOrder = range(1, $elementCount);
+            $elementOrder = 1;
+            foreach($this->_itemType->Elements as $element) {
+                $elementInfo = array(
+                    'element' => $element,
+                    'temp_id' => null,
+                    'order' => $elementOrder,
+                );
+                $this->_elementInfos[] = $elementInfo;
+                $elementOrder++;
             }
         }
          
@@ -181,12 +200,15 @@ class Omeka_Form_ItemTypes extends Omeka_Form
         ));
     }
     
-    private function _checkForDuplicateElements($elements)
+    private function _checkForDuplicateElements()
     {
-        // Make sure their are no duplicate elements
+        // Check for duplicate elements and throw an exception if a duplicate is found
         $elementIds = array();
         $elementNames = array();
-        foreach($elements as $element) {
+        foreach($this->_elementInfos as $elementInfo) {
+            $element = $elementInfo['element'];
+            
+            // prevent duplicate item type element ids
             if ($element->id) {
                 if (in_array($element->id, $elementIds)) {
                     throw new Omeka_Validator_Exception(__('The item type cannot have more than one "%s" element.', $elementToSave->name));
@@ -195,6 +217,7 @@ class Omeka_Form_ItemTypes extends Omeka_Form
                 }
             }
 
+            // prevent duplicate item type element names
             if ($element->name) {
                 if (in_array($element->name, $elementNames)) {
                     throw new Omeka_Validator_Exception(__('The item type cannot have more than one "%s" element.', $elementToSave->name));
@@ -205,52 +228,42 @@ class Omeka_Form_ItemTypes extends Omeka_Form
         }
     }
     
-    private function _removeElementsFromPost()
+    private function _removeElementsFromItemType()
     {        
         $elementTable = get_db()->getTable('Element');
-        
-        // get the elements to delete from the post
-        $elements = array();
-        $elementIds = array();
-        $pElementIds = explode(',', $this->getValue(self::REMOVE_HIDDEN_ELEMENT_ID));
-                
-        foreach($pElementIds as $elementId) {
+        // get the item type element ids to remove from the post and remove those elements from the item type
+        $elementIds = explode(',', $this->getValue(self::REMOVE_HIDDEN_ELEMENT_ID));            
+        foreach($elementIds as $elementId) {
             $elementId = intval(trim($elementId));
-            if ($elementId && !in_array($elementId, $elementIds)) {
-                if ($elementToRemove = $elementTable->find($elementId)) {
-                   $elements[] = $elementToRemove;
-                   $elementIds[] = $elementId;
+            if ($elementId) {
+                if ($element = $elementTable->find($elementId)) {
+                    $this->_itemType->removeElement($element);        
                 }
             }
-        }
-    
-        $this->_itemType->removeElements($elements);        
+        }    
     }
     
     // get the elements to save from the post
-    private function _getElementsToSaveFromPost()
+    private function _getElementInfosFromPost()
     {
         $elementTable = get_db()->getTable('Element');
-        
-        $elementsToSave = array();
-        $this->_elementsOrder = array();
-
-        $this->_elementsToAdd = array();
-        $this->_elementsToAddTempIds = array();
-        $this->_elementsToAddIsNew = array();
-                        
+        $elementInfos = array();                        
         foreach($_POST as $key => $value) {
-
-            $element = null;
-            $elementOrder = null;
+            $elementInfo = null;
+            
             if (preg_match('/^' . self::CURRENT_ELEMENT_ORDER_PREFIX  . '/', $key)) {
-
+                
                 // get the old element (but do not save it yet)
                 $elementIdParts = explode('-', $key);
                 $elementId = array_pop($elementIdParts);
                 $element = $elementTable->find($elementId);
-                $elementOrder = $_POST[self::CURRENT_ELEMENT_ORDER_PREFIX . $elementId];
-
+                
+                $elementInfo = array(
+                  'element' => $element,
+                  'temp_id' => null, 
+                  'order' => $_POST[self::CURRENT_ELEMENT_ORDER_PREFIX . $elementId], 
+                );
+                
             } else if (preg_match('/^' . self::ADD_NEW_ELEMENT_NAME_PREFIX  . '/', $key)) {
 
                 // construct a new element to add (but do not save it yet)
@@ -261,11 +274,12 @@ class Omeka_Form_ItemTypes extends Omeka_Form
                 $element->setName($value);
                 $element->setDescription($_POST[self::ADD_NEW_ELEMENT_DESCRIPTION_PREFIX . $elementTempId]);
                 $element->order = null;
-                $elementOrder = $_POST[self::ADD_NEW_ELEMENT_ORDER_PREFIX . $elementTempId];
                                 
-                $this->_elementsToAdd[] = $element;
-                $this->_elementsToAddTempIds[] = $elementTempId;
-                $this->_elementsToAddIsNew[] = true;
+                $elementInfo = array(
+                    'element' => $element,
+                    'temp_id' => $elementTempId,
+                    'order' => $_POST[self::ADD_NEW_ELEMENT_ORDER_PREFIX . $elementTempId],
+                );
                 
             } else if (preg_match('/^' . self::ADD_EXISTING_ELEMENT_ID_PREFIX  . '/', $key)) {
 
@@ -275,29 +289,24 @@ class Omeka_Form_ItemTypes extends Omeka_Form
                 $elementId = $_POST[self::ADD_EXISTING_ELEMENT_ID_PREFIX . $elementTempId];
                 $element = $elementTable->find($elementId);                
                 
-                if (!$element) {
-                    $element = new Element;
-                    $element->setElementSet(ELEMENT_SET_ITEM_TYPE);
-                    $element->order = null;
+                if ($element) {
+                    $elementInfo = array(
+                        'element' => $element,
+                        'temp_id' => $elementTempId,
+                        'order' => $_POST[self::ADD_EXISTING_ELEMENT_ORDER_PREFIX . $elementTempId],
+                    );
                 }
-                $elementOrder = $_POST[self::ADD_EXISTING_ELEMENT_ORDER_PREFIX . $elementTempId];
-                
-                
-                $this->_elementsToAdd[] = $element;
-                $this->_elementsToAddTempIds[] = $elementTempId;
-                $this->_elementsToAddIsNew[] = false;
             }
 
-            // Add the element to save
-            if ($element) {
-                if ($element->order == 0) {
-                    $element->order = null;
+            // Add the element info
+            if ($elementInfo) {
+                if ($elementInfo['element'] && $elementInfo['element']->order == 0) {
+                    $elementInfo['element']->order = null;
                 }
-                $elementsToSave[] = $element;
-                $this->_elementsOrder[] = $elementOrder;                
+                $elementInfos[] = $elementInfo;
             }
-        }        
+        }
         
-        return $elementsToSave;
+        return $elementInfos;
     }
 }

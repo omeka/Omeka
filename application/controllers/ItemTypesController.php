@@ -79,8 +79,6 @@ class ItemTypesController extends Omeka_Controller_AbstractActionController
 
     public function addNewElementAction()
     {
-        $elementCount = intval($this->_getParam('elementCount'));
-
         if ($this->_getParam('from_post') == 'true') {
             $elementTempId = $this->_getParam('elementTempId');
             $elementName = $this->_getParam('elementName');
@@ -90,23 +88,29 @@ class ItemTypesController extends Omeka_Controller_AbstractActionController
             $elementTempId = '' . time();
             $elementName = '';
             $elementDescription = '';
-            $elementOrder = $elementCount + 1;
+            $elementOrder = intval($this->_getParam('elementCount')) + 1;
         }
 
-        $this->view->assign(array('elementTempId' => $elementTempId,
-                                  'elementName' => $elementName,
-                                  'elementDescription' => $elementDescription,
-                                  'elementOrder' => $elementOrder,
-                                  'addNewElementNamePrefix' => Omeka_Form_ItemTypes::ADD_NEW_ELEMENT_NAME_PREFIX,
-                                  'addNewElementDescriptionPrefix' => Omeka_Form_ItemTypes::ADD_NEW_ELEMENT_DESCRIPTION_PREFIX,
-                                  'addNewElementOrderPrefix' => Omeka_Form_ItemTypes::ADD_NEW_ELEMENT_ORDER_PREFIX
+        $elementNameId =  Omeka_Form_ItemTypes::ADD_NEW_ELEMENT_NAME_PREFIX . $elementTempId;
+        $elementNameValue = $elementName;
+
+        $elementDescriptionId = Omeka_Form_ItemTypes::ADD_NEW_ELEMENT_DESCRIPTION_PREFIX . $elementTempId;
+        $elementDescriptionValue = $elementDescription;
+
+        $elementOrderId = Omeka_Form_ItemTypes::ADD_NEW_ELEMENT_ORDER_PREFIX . $elementTempId;
+        $elementOrderValue = $elementOrder;
+
+        $this->view->assign(array('elementNameId' => $elementNameId,
+                                  'elementNameValue' => $elementNameValue,
+                                  'elementDescriptionId' => $elementDescriptionId,
+                                  'elementDescriptionValue' => $elementDescriptionValue,
+                                  'elementOrderId' => $elementOrderId,
+                                  'elementOrderValue' => $elementOrderValue,
                                    ));
     }
 
     public function addExistingElementAction()
     {
-        $elementCount = intval($this->_getParam('elementCount'));
-
         if ($this->_getParam('from_post') == 'true') {
             $elementTempId = $this->_getParam('elementTempId');
             $elementId = $this->_getParam('elementId');            
@@ -119,23 +123,26 @@ class ItemTypesController extends Omeka_Controller_AbstractActionController
             $elementTempId = '' . time();
             $elementId = '';
             $elementDescription = '';
-            $elementOrder = $elementCount + 1;
+            $elementOrder = intval($this->_getParam('elementCount')) + 1;
         }
 
-        $this->view->assign(array('elementTempId' => $elementTempId,
-                                  'elementId' => $elementId,
+        $elementNameId = Omeka_Form_ItemTypes::ADD_EXISTING_ELEMENT_ID_PREFIX . $elementTempId;
+        $elementNameValue = $elementId;
+
+        $elementOrderId = Omeka_Form_ItemTypes::ADD_EXISTING_ELEMENT_ORDER_PREFIX . $elementTempId;
+        $elementOrderValue = $elementOrder;
+
+        $this->view->assign(array('elementNameId' => $elementNameId,
+                                  'elementNameValue' => $elementNameValue,
                                   'elementDescription' => $elementDescription,
-                                  'elementOrder' => $elementOrder,
-                                  'addExistingElementIdPrefix' => Omeka_Form_ItemTypes::ADD_EXISTING_ELEMENT_ID_PREFIX,
-                                  'addExistingElementOrderPrefix' => Omeka_Form_ItemTypes::ADD_EXISTING_ELEMENT_ORDER_PREFIX
+                                  'elementOrderId' => $elementOrderId,
+                                  'elementOrderValue' => $elementOrderValue,
                                   ));
     }
 
     public function changeExistingElementAction()
     {
         $elementId = $this->_getParam('elementId');
-        // $elementTempId = $this->_getParam('elementTempId');
-
         $element = $this->_helper->db->getTable('Element')->find($elementId);
 
         $elementDescription = '';
