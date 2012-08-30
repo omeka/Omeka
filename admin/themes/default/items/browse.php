@@ -12,15 +12,15 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
             <script type="text/javascript">
                 jQuery(window).load(function() {
                     var detailsText = <?php echo js_escape(__('Details')); ?>;
-                    var showDetailsText = <?php echo js_escape(__('Show Details')); ?>;
-                    var hideDetailsText = <?php echo js_escape(__('Hide Details')); ?>;
-                    jQuery('.item-details').hide();
-                    jQuery('.action-links').prepend('<li class="details">' + detailsText + '</li>');
+                    var showDetailsText = <?php echo js_escape(__('Show All Details')); ?>;
+                    var hideDetailsText = <?php echo js_escape(__('Hide All Details')); ?>;
+                    jQuery('.details').hide();
+                    jQuery('.action-links').prepend('<li class="details-link">' + detailsText + '</li>');
          
                     jQuery('tr.item').each(function() {
-                        var itemDetails = jQuery(this).find('.item-details');
+                        var itemDetails = jQuery(this).find('.details');
                         if (jQuery.trim(itemDetails.html()) != '') {
-                            jQuery(this).find('.details').css({'color': '#4E7181', 'cursor': 'pointer'}).click(function() {
+                            jQuery(this).find('.details-link').css({'color': '#4E7181', 'cursor': 'pointer'}).click(function() {
                                 itemDetails.slideToggle('fast');
                             });
                         }
@@ -34,11 +34,11 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                     jQuery('.toggle-all-details').toggle(function(e) {
                         e.preventDefault();
                         jQuery('.toggle-all-details').text(hideDetailsText);
-                        jQuery('.item-details').slideDown('fast');
+                        jQuery('.details').slideDown('fast');
                     }, function(e) {
                         e.preventDefault();
                         jQuery('.toggle-all-details').text(showDetailsText);
-                        jQuery('.item-details').slideUp('fast');
+                        jQuery('.details').slideUp('fast');
                     });
          
                     var itemCheckboxes = jQuery("table#items tbody input[type=checkbox]");
@@ -147,7 +147,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                             <?php endif; ?>
                         </ul>
                         <?php fire_plugin_hook('admin_append_to_items_browse_simple_each'); ?>
-                        <div class="item-details">
+                        <div class="details">
                             <?php echo snippet_by_word_count(strip_formatting(metadata('item', array('Dublin Core', 'Description'))), 40); ?>
                             <p><strong><?php echo __('Collection'); ?>:</strong> <?php if (item_belongs_to_collection()) echo link_to_collection_for_item(); else echo __('No Collection'); ?></p><p><strong><?php echo __('Tags'); ?>:</strong> <?php if ($tags = item_tags_as_string()) echo $tags; else echo __('No Tags'); ?></p>
                             </ul>
