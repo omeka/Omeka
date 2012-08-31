@@ -177,7 +177,8 @@ p, li {
         .odd td.featured { background-color: #FFFFFF; }
     
         .even td.featured { background-color: #F3F3E7; }
-    
+        
+    .inactive { opacity: .65; }
 
     .mobile { display: none; }
     

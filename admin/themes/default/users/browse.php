@@ -63,10 +63,10 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
                     </thead>
                     <tbody>
                     <?php foreach( $users as $key => $user ): ?>
-                        <tr class="<?php if (current_user()->id == $user->id) echo 'current-user '; ?><?php if($key%2==1) echo 'even'; else echo 'odd'; ?>">
+                        <tr class="<?php if (current_user()->id == $user->id) echo 'current-user '; ?><?php if($key%2==1) echo 'even'; else echo 'odd'; ?><?php if(!$user->active): ?> inactive<?php endif; ?>">
                             <td class="batch-edit-check"><input type="checkbox" name="users[]" value="<?php echo html_escape($user->username);?>" /></td>
                             <td>
-                            <?php echo html_escape($user->username); ?>
+                            <?php echo html_escape($user->username); ?> <?php if(!$user->active): ?>(<?php echo __('inactive'); ?>)<?php endif; ?>
                             <ul class="action-links group">
                                 <?php if (has_permission($user, 'edit')): ?>
                                 <li><?php echo link_to($user, 'edit', __('Edit'), array('class'=>'edit')); ?></li>
