@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html lang="<?php echo get_html_lang(); ?>">
+
 <head>
-<meta charset="utf-8">
-<title><?php echo __('Omeka Installation'); ?></title>
-<?php echo $this->headLink()->appendStylesheet($this->baseUrl('/screen.css')); ?>
+    <meta charset="utf-8">
+    <title><?php echo __('Omeka'); ?></title>
+    <?php echo $this->headLink()->appendStylesheet($this->baseUrl('/screen.css')); ?>
+    <?php echo $this->headLink()->appendStylesheet($this->baseUrl('/skeleton.css')); ?>
+    <?php echo $this->headLink()->appendStylesheet($this->baseUrl('/layout.css')); ?>
+    <link href='http://fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic|Cabin:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 </head>
+
 <body>
-<h1><?php echo __('Omeka Installation'); ?></h1>
-<div id="content">
-<?php echo $this->layout()->content ?>
+
+<div class="container container-sixteen">
+    <div id="content" class="eight columns offset-by-four">
+        <header>
+            <h1><?php echo __('Omeka'); ?></h1>
+        </header>
+        <?php echo $this->layout()->content ?>
+    </div>
 </div>
+
 </body>
 </html>
