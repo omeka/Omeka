@@ -14,7 +14,7 @@
  */
 class Mixin_Search extends Omeka_Record_Mixin_AbstractMixin
 {
-    protected $_text;
+    protected $_text = '';
     protected $_title;
     protected $_public = 1;
     
