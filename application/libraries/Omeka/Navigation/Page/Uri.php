@@ -37,7 +37,7 @@ class Omeka_Navigation_Page_Uri extends Zend_Navigation_Page_Uri
      */
     public function setHref($href)
     {
-        if ($hrefData = $this->_normalizeHref($href)) {
+        if ($hrefData = $this->_normalizeHref($href)) {            
             $this->setUri($hrefData['uri']);
             if ($hrefData['fragment'] !== false) {
                 $this->setFragment($hrefData['fragment']);
@@ -50,6 +50,7 @@ class Omeka_Navigation_Page_Uri extends Zend_Navigation_Page_Uri
      * 'uri' => the uri of the href. 
      * 'fragment' => the fragment of the href 
      * If the $href is a relative path, then it must be a root path.
+     * If the $href is a relative path then the value for the 'uri' key will be a relative path.
      * If $href is an invalid uri, then return null.  
      *
      * @param String $href
@@ -58,18 +59,25 @@ class Omeka_Navigation_Page_Uri extends Zend_Navigation_Page_Uri
     private function _normalizeHref($href) 
     {                
         if ($href !== null) {       
+            $isPath = false;
             if (strlen($href) && $href[0] == '/') {
                 // attempt to convert root path into a full path, 
                 // so that we can later extract the fragment using Zend_Uri_Http
                 $href = substr(WEB_ROOT, 0, strrpos(WEB_ROOT, PUBLIC_BASE_URL)) . $href;
+                $isPath = true;
             }
             try {
                 $uri = Zend_Uri::factory($href);
                 if ($uri->valid()) {
                     $fragment = $uri->getFragment();
                     $uri->setFragment('');
+                    if ($isPath) {
+                        $uri = $uri->getPath();
+                    } else {
+                        $uri = $uri->getUri();
+                    }
                     return array(
-                        'uri' => $uri->getUri(),
+                        'uri' => $uri,
                         'fragment' => $fragment, 
                     );
                 }

@@ -128,6 +128,7 @@ class Omeka_Navigation extends Zend_Navigation
                 $page = new Omeka_Navigation_Page_Uri();
                 $page->setUri($uriOrPage);
                 $page->setHref($page->getHref());
+                $page->setVisible(false);
             } elseif ($uriOrPage instanceof Omeka_Navigation_Page_Uri) {
                 $page = $uriOrPage;
                 $page->setHref($page->getHref());
@@ -148,10 +149,10 @@ class Omeka_Navigation extends Zend_Navigation
                 
                 if (!($fPage = $this->getPageByUid($pUid))) {                    
                     // initialize the page with settings for pages that come from filters.
-                    $page->can_delete = false; // make sure the user cannot manually delete the navigation link
+                    $page->set('can_delete', false); // make sure the user cannot manually delete the navigation link
                     $this->addPage($page); // add the new page
-                }                
-            }  
+                }
+            }
         }
                         
         // remove old pages that cannot be deleted and which are not provided by plugins or other filter handlers
