@@ -14,7 +14,7 @@
 ?>
 
 <!-- Plugin Stuff -->
-<?php admin_plugin_header(); ?>
+<?php fire_plugin_hook('admin_theme_header'); ?>
 
 <!-- Stylesheets -->
 <?php display_css(); ?>
