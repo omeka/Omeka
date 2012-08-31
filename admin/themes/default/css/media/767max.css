@@ -1,7 +1,11 @@
 /* Table of Contents
 ==================================================
     #Global Navigation
-    #Content Navigation */
+    #Tables
+    #Content Navigation
+    #Content
+        #Browse Items
+        #Login */
 
 
 /* Global Navigation
@@ -16,11 +20,6 @@ header nav { float: left; }
     header ul { margin: .375em 0 0 0; }
 
 #user-nav { clear: left; }
-
-    
-/* Form Elements
-==================================================*/
-
     
 /* Tables
 ==================================================*/
@@ -125,17 +124,17 @@ header nav { float: left; }
     .quick-filter-wrapper { margin: 1em 0;}
 
 
-/* Content
-==================================================*/
-
-    .login-content h1 {
-        font-size: 24px;
-        }
-        
-    .login-content .inputs {
-        margin: 0 0 20px 0;
-        }
-        
-    #username-label, #password-label {
-        text-align: left;
-        }
+    /* Login
+    ==================================================*/
+    
+        .login-content h1 {
+            font-size: 24px;
+            }
+            
+        .login-content .inputs {
+            margin: 0 0 20px 0;
+            }
+            
+        #username-label, #password-label {
+            text-align: left;
+            }
