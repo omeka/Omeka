@@ -117,7 +117,7 @@ function file_display_uri(File $file, $format='fullsize')
  * and most likely not useful for theme writers.
  *
  * @since 0.10
- * @uses Omeka_Record_AbstractRecord::getRecordRoute()
+ * @uses Omeka_Record_AbstractRecord::getRecordUrl()
  * @param Omeka_Record_AbstractRecord $record
  * @param string $action
  * @param string|null $controller Optional
@@ -125,14 +125,20 @@ function file_display_uri(File $file, $format='fullsize')
  */
 function record_uri(Omeka_Record_AbstractRecord $record, $action, $controller = null)
 {
-    // Use the 'id' route for all urls pointing to records
-    $uriData = $record->getRecordRoute($action, $controller);
-    if (isset($uriData['id']) && !isset($uriData['module'])) {
-        $route = 'id';
-    } else {
-        $route = 'default';
+    $url = $record->getRecordUrl($action, $controller);
+    if (is_string($url)) {
+        return $url;
+    } else if (is_array($url)) {
+        // Use the 'id' route for urls pointing to records, but not when a 
+        // module is specified. 
+        if (isset($url['id']) && !isset($url['module'])) {
+            $route = 'id';
+        } else {
+            $route = 'default';
+        }
+        return uri($url, $route);
     }
-    return uri($uriData, $route);
+    return '';
 }
 
 /**
