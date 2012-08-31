@@ -25,12 +25,15 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
             <tbody>
                 <?php $key = 0;?>
         <?php while (loop_collections()): ?>
-        
+            <?php $collection = get_current_collection(); ?>
             <tr class="collection<?php if(++$key%2==1) echo ' odd'; else echo ' even'; ?>">
                 <td scope="row"><?php echo metadata('collection', 'id');?></td> 
-                <td class="title">
+                <td class="title<?php if ($collection->featured) { echo ' featured';} ?>">
                     <?php echo link_to_collection(); ?>
-                    <?php if (has_permission(get_current_collection(), 'edit')): ?>
+                    <?php if(!$collection->public): ?>
+                    <?php echo __('(Private)'); ?>
+                    <?php endif; ?>
+                    <?php if (has_permission($collection, 'edit')): ?>
                     <ul class="action-links">
                         <li><?php echo link_to_collection(__('Edit'), array('class'=>'edit'), 'edit'); ?></li>
                     </ul>
