@@ -6,6 +6,11 @@ class Job_SearchTextIndex extends Omeka_Job_AbstractJob
      */
     public function perform()
     {
+        // Truncate the `search_texts` table before indexing to clean out 
+        // obsolete records.
+        $sql = "TRUNCATE TABLE {$this->_db->SearchText}";
+        $this->_db->query($sql);
+        
         foreach (Mixin_Search::getSearchRecordTypes() as $recordType) {
             
             if (!class_exists($recordType)) {
