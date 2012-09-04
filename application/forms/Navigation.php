@@ -30,7 +30,7 @@ class Omeka_Form_Navigation extends Omeka_Form
         $this->setAttrib('id', self::FORM_ELEMENT_ID);
         
         $this->_nav = new Omeka_Navigation();
-        $this->_nav->loadAsOption(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME);
+        $this->_nav->loadAsOption(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME);        
         $this->_nav->addPagesFromFilter('public_navigation_main');
         $this->_initElements();
     }
@@ -126,34 +126,34 @@ class Omeka_Form_Navigation extends Omeka_Form
     {
         // update the navigation from the hidden element value in the post data
         $nav = new Omeka_Navigation();
-        $nav->loadAsOption(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME);             
-        
+        $nav->loadAsOption(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME);
+            
         if ($pageLinks = $this->getValue(self::HIDDEN_ELEMENT_ID) ) {
             if ($pageLinks = json_decode($pageLinks, true)) {
-                
+                                
                 // add and update the pages in the navigation
                 $pageOrder = 0;
                 $pageUids = array();
                 foreach($pageLinks as $pageLink) {
                     $pageOrder++;  
                     // parse the linkdata for the page from the hidden element text
-                    $linkIdParts = explode('|', $pageLink['id'], 3);
+                    $linkIdParts = explode('|', $pageLink['id'], 3);                    
                     $linkData = array();
                     $linkData['can_delete'] = (bool)$linkIdParts[0];
                     $linkData['uri'] = $linkIdParts[1];
                     $linkData['label'] = $linkIdParts[2];
                     $linkData['visible'] = $pageLink['visible'];
                     $linkData['order'] = $pageOrder;
-
+                    
                     // add or update the page in the navigation
-                    $pageUid = $nav->createPageUid($linkData['label'], $linkData['uri']);
+                    $pageUid = $nav->createPageUid($linkData['label'], $linkData['uri']);                    
                     if (!($page = $nav->getPageByUid($pageUid))) {
                         $page = new Omeka_Navigation_Page_Uri();
                         $page->setHref($linkData['uri']); // this sets both the uri and the fragment
                         $page->setLabel($linkData['label']);
-                        $page->set('can_delete', true);
                         $nav->addPage($page);
                     }
+                    $page->set('can_delete', $linkData['can_delete']);
                     $page->setVisible($linkData['visible']);
                     $page->setOrder($linkData['order']);
                     $pageUids[] = $page->uid;
@@ -171,7 +171,7 @@ class Omeka_Form_Navigation extends Omeka_Form
                 }
             }
         }
-        $nav->saveAsOption(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME);
+        $nav->saveAsOption(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME);        
         $this->_nav = $nav;
     }
     
