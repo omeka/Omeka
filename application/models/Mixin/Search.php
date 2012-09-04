@@ -7,6 +7,9 @@
  * Omeka_Record::_initializeMixins(). It must be pushed after all mixins that 
  * can add search text--for example, after ElementText.
  * 
+ * The record type must also be registered using the search_record_types filter 
+ * in order for the records to be searchable. See self::getSearchRecordTypes().
+ * 
  * This mixin leverages the Omeka_Record_AbstractRecord::afterSave() and 
  * Omeka_Record_Mixin_AbstractMixin::afterSave() callbacks, so note their order 
  * of execution. Records that initialize ActsAsElementText will automatically 
@@ -14,7 +17,7 @@
  */
 class Mixin_Search extends Omeka_Record_Mixin_AbstractMixin
 {
-    protected $_text = '';
+    protected $_text;
     protected $_title;
     protected $_public = 1;
     
@@ -32,7 +35,7 @@ class Mixin_Search extends Omeka_Record_Mixin_AbstractMixin
      */
     public function addSearchText($text)
     {
-        $this->_text .= " $text";
+        $this->_text .= "$text ";
     }
     
     /**
@@ -62,24 +65,8 @@ class Mixin_Search extends Omeka_Record_Mixin_AbstractMixin
      */
     public function afterSave()
     {
-        $recordType = get_class($this->_record);
-        
-        // Index this record only if it's of a type that is registered in the 
-        // search_record_types filter.
-        if (!in_array($recordType, self::getSearchRecordTypes())) {
-            return;
-        }
-        
-        $searchText = $this->_record->getDb()->getTable('SearchText')->findByRecord($recordType, $this->_record->id);
-        if (!$searchText) {
-            $searchText = new SearchText;
-            $searchText->record_type = $recordType;
-            $searchText->record_id = $this->_record->id;
-        }
-        $searchText->public = $this->_public ? 1 : 0;
-        $searchText->title = $this->_title;
-        $searchText->text = $this->_text;
-        $searchText->save();
+        self::saveSearchText(get_class($this->_record), $this->_record->id, 
+            $this->_text, $this->_title, $this->_public);
     }
     
     /**
@@ -87,10 +74,56 @@ class Mixin_Search extends Omeka_Record_Mixin_AbstractMixin
      */
     public function afterDelete()
     {
-        $searchText = $this->_record->getDb()->getTable('SearchText')->findByRecord(get_class($this->_record), $this->_record->id);
+        $searchText = $this->_record->getDb()->getTable('SearchText')
+            ->findByRecord(get_class($this->_record), $this->_record->id);
         if ($searchText) {
             $searchText->delete();
         }
+    }
+    
+    /**
+     * Save a search text row.
+     * 
+     * Call this statically only when necessary. Used primarily when in a record 
+     * that does not implement Mixin_Search but contains text that is needed for 
+     * another record's search text. For example, when saving a child record 
+     * that contains search text that should be saved to its parent record.
+     * 
+     * @param string $recordType
+     * @param int $recordId
+     * @param string $text
+     * @param string $title
+     * @param int $public
+     */
+    public static function saveSearchText($recordType, $recordId, $text, $title, $public = 1) {
+        
+        // Index this record only if it's of a type that is registered in the 
+        // search_record_types filter.
+        if (!in_array($recordType, self::getSearchRecordTypes())) {
+            return;
+        }
+        
+        $searchText = Zend_Registry::get('bootstrap')->getResource('Db')
+            ->getTable('SearchText')->findByRecord($recordType, $recordId);
+        
+        // Either don't save the search text or delete an existing search text 
+        // row if the record has no assigned text.
+        if (!trim($text)) {
+            if ($searchText) {
+                $searchText->delete();
+            }
+            return;
+        }
+        
+        if (!$searchText) {
+            $searchText = new SearchText;
+            $searchText->record_type = $recordType;
+            $searchText->record_id = $recordId;
+        }
+        $searchText->public = $public ? 1 : 0;
+        $searchText->title = $title;
+        $searchText->text = $text;
+        $searchText->save();
     }
     
     /**
