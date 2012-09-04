@@ -70,9 +70,9 @@
         <?php echo display_file($file, array('imageSize' => 'fullsize')); ?>
     </div>
     <?php echo show_file_metadata(); ?>
-    <?php fire_plugin_hook('admin_append_to_files_show_primary', array('file' => $file)); ?>
+    <?php fire_plugin_hook('admin_append_to_files_show_primary', array('file' => $file, 'view' => $this)); ?>
     
 </div>
     
-    <?php fire_plugin_hook('admin_append_to_files_show_secondary', array('file' => $file)); ?>
+    <?php fire_plugin_hook('admin_append_to_files_show_secondary', array('file' => $file, 'view' => $this)); ?>
 <?php foot();?>

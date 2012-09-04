@@ -19,6 +19,5 @@ require_once 'ItemTypeFunctions.php';
 require_once 'CollectionFunctions.php';
 require_once 'UserFunctions.php';
 require_once 'FileFunctions.php';
-require_once 'PluginFunctions.php';
 require_once 'StringFunctions.php';
 require_once 'TagFunctions.php';

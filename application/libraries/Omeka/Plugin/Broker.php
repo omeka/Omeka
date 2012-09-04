@@ -261,6 +261,7 @@ class Omeka_Plugin_Broker
                 // particular loop. It only matters during lookup to determine
                 // whether or not a specific filter has been set already.
                 foreach ($filterSet as $filter) {
+                    
                     // The value must be prepended to the argument set b/c it is
                     // always the first argument to any filter callback.
                     if ($args) {

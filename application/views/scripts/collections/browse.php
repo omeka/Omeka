@@ -27,12 +27,12 @@ head(array('title'=>$pageTitle,'bodyid'=>'collections','bodyclass' => 'browse'))
 
         <p class="view-items-link"><?php echo link_to_browse_items(__('View the items in %s', metadata('collection', 'Name')), array('collection' => metadata('collection', 'id'))); ?></p>
 
-        <?php echo plugin_append_to_collections_browse_each(); ?>
+        <?php fire_plugin_hook('public_append_to_collections_browse_each', array('view' => $this)); ?>
 
     </div><!-- end class="collection" -->
     <?php endwhile; ?>
 
-    <?php echo plugin_append_to_collections_browse(); ?>
+    <?php fire_plugin_hook('public_append_to_collections_browse', array('view' => $this)); ?>
 
 </div><!-- end primary -->
 

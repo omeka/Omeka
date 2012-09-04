@@ -182,7 +182,7 @@ $formAttributes['method'] = 'GET';
         </div>
     </div>
 
-    <?php fire_plugin_hook('public_append_to_advanced_search'); ?>
+    <?php fire_plugin_hook('public_append_to_advanced_search', array('view' => $this)); ?>
     <div>
         <input type="submit" class="submit" name="submit_search" id="submit_search_advanced" value="<?php echo __('Search'); ?>" />
     </div>

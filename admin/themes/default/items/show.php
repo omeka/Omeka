@@ -79,7 +79,7 @@
         <div><?php echo output_format_list(); ?></div>
     </div>
 
-<?php fire_plugin_hook('admin_append_to_items_show_secondary', array('item' => $item)); ?>
+<?php fire_plugin_hook('admin_append_to_items_show_secondary', array('item' => $item, 'view' => $this)); ?>
 
 
 
@@ -95,7 +95,7 @@
     <?php echo show_item_metadata(); ?>
 </div>
 
-<?php fire_plugin_hook('admin_append_to_items_show_secondary', array('item' => $item)); ?>
+<?php fire_plugin_hook('admin_append_to_items_show_secondary', array('item' => $item, 'view' => $this)); ?>
 </div>
         
     <?php foot();?>

@@ -14,7 +14,7 @@
                 <p><?php echo __('Proudly powered by <a href="http://omeka.org">Omeka</a>.'); ?></p>
             </div>
 
-            <?php plugin_footer(); ?>
+            <?php fire_plugin_hook('public_theme_footer'); ?>
 
         </div><!-- end footer -->
     </div><!-- end wrap -->
