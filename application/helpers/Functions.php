@@ -98,6 +98,11 @@ function settings($name)
     return $name;
 }
 
+function loop_records_prototype($recordType)
+{
+    return __v()->loopRecords($recordType);
+}
+
 /**
  * Loops through a specific record set, setting the current record to a
  * globally accessible scope and returning it.  Records are only valid for

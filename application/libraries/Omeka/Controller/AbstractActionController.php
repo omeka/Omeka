@@ -386,10 +386,9 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
      * @param boolean $lower Whether or not to return the name in lowercase.
      * @return string
      */
-    protected function _getPluralized($lower = true)
+    protected function _getPluralized()
     {
-        $plural = Inflector::pluralize($this->_helper->db->getDefaultModelName());
-        return $lower ? strtolower($plural) : $plural;
+        return Inflector::tableize($this->_helper->db->getDefaultModelName());
     }
 
     /**

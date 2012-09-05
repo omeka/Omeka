@@ -121,7 +121,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                 </thead>
                 <tbody>
                 <?php $key = 0; ?>
-                <?php while($item = loop_items()): ?>
+                <?php foreach ($this->loopRecords('Item') as $item): ?>
                 <tr class="item <?php if(++$key%2==1) echo 'odd'; else echo 'even'; ?>">
                     <?php $id = metadata('item', 'id'); ?>
                     <?php if (has_permission($item, 'edit') || has_permission($item, 'tag')): ?>
@@ -160,7 +160,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                                 : metadata('item', array('Dublin Core', 'Type'), array('snippet' => 35)); ?></td>
                     <td><?php echo format_date(metadata('item', 'Date Added')); ?></td>
                 </tr>
-                <?php endwhile; ?>
+                <?php endforeach; ?>
             </tbody>
         </table>
             
