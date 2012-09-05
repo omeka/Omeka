@@ -20,28 +20,6 @@ function collection_has_collectors()
 }
 
 /**
- * Determine whether or not the current collection is featured.
- *
- * @since 0.10
- * @return boolean
- */
-function collection_is_featured()
-{
-    return get_current_collection()->featured;
-}
-
-/**
- * Determine whether or not the current collection is public.
- *
- * @since 0.10
- * @return boolean
- */
-function collection_is_public()
-{
-    return get_current_collection()->public;
-}
-
-/**
  * Returns the HTML markup for displaying a random featured collection.
  *
  * @since 0.10
