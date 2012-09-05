@@ -13,7 +13,7 @@
 <div class="seven columns alpha">
 <?php echo $this->form; ?>
 <?php if (has_permission($user, 'delete')): ?>
-    <?php echo delete_button(null, 'delete-user', 'Delete this User', array('class'=>'red button'), 'delete-record-form'); ?>
+    <?php echo link_to($user, 'delete-confirm', __('Delete this User'), array('class'=>'red button delete-confirm')); ?>
 <?php endif; ?>
 
 <?php echo $this->passwordForm; ?>

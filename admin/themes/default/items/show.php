@@ -33,7 +33,7 @@
         echo link_to_item(__('Edit Item'), array('class'=>'big green button'), 'edit'); ?>
         <?php endif; ?>
         <a href="<?php echo html_escape(public_uri('items/show/'.metadata('item', 'id'))); ?>" class="big blue button" target="_blank">View Public Page</a>
-        <?php echo delete_button(null, 'delete-item', __('Delete this Item'), array('class'=>'big red button'), 'delete-record-form'); ?>
+        <?php echo link_to_item(__('Delete this Item'), array('class' => 'delete-confirm big red button'), 'delete-confirm'); ?>
     </div>
 
     <div class="info panel">

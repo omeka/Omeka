@@ -14,7 +14,7 @@
         <div id="save" class="three columns omega panel">
             <input type="submit" name="submit" value="<?php echo __('Save Changes'); ?>" class="submit big green button" />
             <?php if (has_permission('ItemTypes', 'delete')): ?>
-                <?php echo delete_button(null, 'delete-item-type', __('Delete this Item Type'), array('class' => 'big red button'), 'delete-record-form'); ?>
+                <?php echo link_to($itemtype, 'delete-confirm', __('Delete this Item Type'), array('class' => 'big red button delete-confirm')); ?>
             <?php endif; ?>
         </div>
     </form>
