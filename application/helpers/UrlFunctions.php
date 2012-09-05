@@ -123,9 +123,9 @@ function file_display_uri(File $file, $format='fullsize')
  * @param string|null $controller Optional
  * @return string
  */
-function record_uri(Omeka_Record_AbstractRecord $record, $action, $controller = null)
+function record_uri(Omeka_Record_AbstractRecord $record, $action)
 {
-    $url = $record->getRecordUrl($action, $controller);
+    $url = $record->getRecordUrl($action);
     if (is_string($url)) {
         return $url;
     } else if (is_array($url)) {

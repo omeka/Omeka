@@ -889,22 +889,25 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
     }
     
     /**
-     * Get the URL string or routing array to this record.
+     * Get the routing parameters or the URL string to this record.
      * 
-     * Primarily used to generate a URL to a record's web page. Subclasses 
-     * should override this method if the default route is incorrect.
+     * The record_uri() global uses this method to get routing parameters for 
+     * non-standard records, e.g. records defined by plugins. Subclasses should 
+     * override this method if the default route (as defined below) is 
+     * incorrect.
      * 
      * @param string $action
      * @param null|string $controller
      * @return string|array A URL string or a routing array.
      */
-    public function getRecordUrl($action = 'show', $controller = null)
+    public function getRecordUrl($action = 'show')
     {
-        if (!$controller) {
-            $controller = str_replace('_', '-', Inflector::tableize(get_class($this)));
-        }
-        return array('controller' => $controller, 
-                     'action' => $action,
-                     'id' => $this->id);
+        // Inflect the controller from the record type. This works primarily 
+        // with built-in records that have controllers within the default 
+        // module.
+        $controller = str_replace('_', '-', Inflector::tableize(get_class($this)));
+        
+        // Return the default routing parameters. 
+        return array('controller' => $controller, 'action' => $action, 'id' => $this->id);
     }
 }
