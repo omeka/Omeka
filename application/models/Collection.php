@@ -283,7 +283,7 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
             $this->setSearchTextPrivate();
         }
         $this->setSearchTextTitle($this->name);
-        $text = "{$this->name} {$this->description}";
-        $this->addSearchText($text);
+        $this->addSearchText($this->name);
+        $this->addSearchText($this->description);
     }
 }

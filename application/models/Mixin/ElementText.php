@@ -94,11 +94,9 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
             $title = null;
         }
         $this->_record->setSearchTextTitle($title);
-        $text = '';
         foreach ($this->getAllElementTexts() as $elementText) {
-            $text .= ' ' . $elementText->text;
+            $this->_record->addSearchText($elementText->text);
         }
-        $this->_record->addSearchText($text);
     }
     
     /**
