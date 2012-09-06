@@ -1,25 +1,26 @@
 <?php
 class Omeka_View_Helper_LoopRecords extends Zend_View_Helper_Abstract implements Iterator
 {
-    private $_recordParamPlural;
-    private $_recordParamSingular;
-    private $_records;
+    private $_records = array();
+    private $_recordParam;
     
     /**
      * Return an iterator meant to be used for looping records.
      * 
-     * The view must already have corresponding array of records assigned to it. 
-     * This iterator sets the current record to the view and returns it. It also 
-     * releases the previous record to prevent memory leaks.
+     * This sets the current record to the view and returns it. It also releases 
+     * the previous record to prevent memory leaks.
      * 
      * @param string $recordType
+     * @param array|null $records
      * @return Omeka_View_Helper_LoopRecords
      */
-    public function loopRecords($recordType)
+    public function loopRecords($recordType, $records = null)
     {
-        $this->_recordParamPlural = Inflector::tableize($recordType);
-        $this->_recordParamSingular = Inflector::underscore($recordType);
-        $this->_records = $this->view->{$this->_recordParamPlural};
+        if (!is_array($records)) {
+            $records = $this->view->{Inflector::tableize($recordType)};
+        }
+        $this->_records = $records;
+        $this->_recordParam = Inflector::underscore($recordType);
         return $this;
     }
     
@@ -30,7 +31,7 @@ class Omeka_View_Helper_LoopRecords extends Zend_View_Helper_Abstract implements
     
     public function current()
     {
-        $this->view->{$this->_recordParamSingular} = current($this->_records);
+        $this->view->{$this->_recordParam} = current($this->_records);
         return current($this->_records);
     }
     

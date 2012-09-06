@@ -98,9 +98,9 @@ function settings($name)
     return $name;
 }
 
-function loop($recordType)
+function loop($recordType, $records = null)
 {
-    return __v()->loopRecords($recordType);
+    return __v()->loopRecords($recordType, $records);
 }
 
 /**
