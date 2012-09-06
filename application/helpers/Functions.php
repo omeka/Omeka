@@ -98,7 +98,7 @@ function settings($name)
     return $name;
 }
 
-function loop_records_prototype($recordType)
+function loop($recordType)
 {
     return __v()->loopRecords($recordType);
 }

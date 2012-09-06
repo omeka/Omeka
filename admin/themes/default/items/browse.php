@@ -121,7 +121,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                 </thead>
                 <tbody>
                 <?php $key = 0; ?>
-                <?php foreach ($this->loopRecords('Item') as $item): ?>
+                <?php foreach (loop('Item') as $item): ?>
                 <tr class="item <?php if(++$key%2==1) echo 'odd'; else echo 'even'; ?>">
                     <?php $id = metadata('item', 'id'); ?>
                     <?php if (has_permission($item, 'edit') || has_permission($item, 'tag')): ?>

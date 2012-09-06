@@ -54,7 +54,7 @@ function set_current_item_type($itemtype)
  */
 function get_current_item_type()
 {
-    return __v()->itemtype;
+    return __v()->item_type;
 }
 
 /**

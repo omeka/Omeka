@@ -12,29 +12,26 @@ head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
                 <th><?php echo __('Type Name'); ?></th>
                 <th><?php echo __('Description'); ?></th>
                 <th><?php echo __('Total Items'); ?></th>
-                <?php if (has_permission('ItemTypes', 'edit')): ?>
-                <?php endif; ?>
             </tr>
         </thead>
         <tbody>
         
-<?php while (loop_item_types()): ?>
-<?php $itemtype = get_current_item_type();?>
+<?php foreach (loop('ItemType') as $itemType): ?>
 <tr class="itemtype">
     <td class="itemtype-name">
-        <a href="<?php echo html_escape(record_uri($itemtype, 'show', 'item-types')); ?>"><?php echo html_escape($itemtype->name); ?></a>
+        <a href="<?php echo html_escape(record_uri($itemType, 'show', 'item-types')); ?>"><?php echo html_escape($itemType->name); ?></a>
         <ul class="action-links group">
         <?php if (has_permission('ItemTypes', 'edit')): ?>
-            <li><a class="edit" href="<?php echo html_escape(uri('item-types/edit/'.$itemtype->id)); ?>"><?php echo __('Edit'); ?></a></li>
+            <li><a class="edit" href="<?php echo html_escape(uri('item-types/edit/'.$itemType->id)); ?>"><?php echo __('Edit'); ?></a></li>
         <?php endif; ?>        
         </ul>
     </td>
-    <td class="itemtype-description"><?php echo html_escape($itemtype->description); ?></td>
+    <td class="itemtype-description"><?php echo html_escape($itemType->description); ?></td>
     <td><?php echo link_to_items_with_item_type(); ?></td>
 </tr>
-<?php endwhile; ?>
+<?php endforeach; ?>
 </tbody>
 </table>
-<?php fire_plugin_hook('admin_append_to_item_types_browse_primary', array('item_types' => $itemtypes, 'view' => $this)); ?>
+<?php fire_plugin_hook('admin_append_to_item_types_browse_primary', array('item_types' => $this->item_types, 'view' => $this)); ?>
 </div>
 <?php foot(); ?>

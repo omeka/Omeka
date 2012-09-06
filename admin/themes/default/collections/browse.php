@@ -24,7 +24,7 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
             </thead>
             <tbody>
                 <?php $key = 0;?>
-        <?php foreach (loop_records_prototype('Collection') as $collection): ?>
+        <?php foreach (loop('Collection') as $collection): ?>
             <tr class="collection<?php if(++$key%2==1) echo ' odd'; else echo ' even'; ?>">
                 <td scope="row"><?php echo metadata('collection', 'id');?></td> 
                 <td class="title<?php if ($collection->featured) { echo ' featured';} ?>">
