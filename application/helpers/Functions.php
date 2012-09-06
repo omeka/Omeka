@@ -99,6 +99,24 @@ function settings($name)
 }
 
 /**
+ * Get a set of records from the database.
+ *
+ * @since 2.0
+ *
+ * @uses Omeka_Db_Table::findBy
+ *
+ * @param string $recordType Type of records to get.
+ * @param array $params Array of search parameters for records.
+ * @param integer $limit Maximum number of records to return.
+ * 
+ * @return array An array of result records (of $recordType).
+ */
+function get_records($recordType, $params = array(), $limit = 10)
+{
+    return get_db()->getTable($recordType)->findBy($params, $limit);
+}
+
+/**
  * Loops through a specific record set, setting the current record to a
  * globally accessible scope and returning it.  Records are only valid for
  * the current call to loop_records (i.e., the next call to loop_records()

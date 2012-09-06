@@ -8,11 +8,11 @@
 require_once HELPERS;
 
 /**
- * Tests get_tags() in helpers/TagFunctions.php.
+ * Tests get_records('Tag').
  *
  * @package Omeka
  */
-class Helpers_TagFunctions_GetTagsTest extends Omeka_Test_AppTestCase
+class Omeka_Helpers_GetRecordsTagTest extends Omeka_Test_AppTestCase
 {   
     private $_defaultTagLimit;
     private $_itemToTag;
@@ -39,14 +39,14 @@ class Helpers_TagFunctions_GetTagsTest extends Omeka_Test_AppTestCase
     
     public function testGetTagsByDefaultAndWithNoTags()
     {        
-        $this->assertEquals(0, count(get_tags()));
+        $this->assertEquals(0, count(get_records('Tag')));
     }
 
     public function testGetTagsByDefaultAndWithLessThanLimitOfTags()
     {
         $this->_addTags(array('Duck', 'Chicken', 'Goose'));
         
-        $tags = get_tags();
+        $tags = get_records('Tag');
         $this->assertEquals(3, count($tags));
         $this->assertEquals('Duck', $tags[0]->name);
         $this->assertEquals('Chicken', $tags[1]->name);
@@ -62,7 +62,7 @@ class Helpers_TagFunctions_GetTagsTest extends Omeka_Test_AppTestCase
                     
         $this->_addTags($tags);
 
-        $tags = get_tags();
+        $tags = get_records('Tag');
         $this->assertEquals($this->_defaultTagLimit, count($tags));
         for($i = 0; $i < $this->_defaultTagLimit; $i++) {
             $this->assertEquals((string)$i, $tags[$i]->name);            
@@ -77,7 +77,7 @@ class Helpers_TagFunctions_GetTagsTest extends Omeka_Test_AppTestCase
         }        
         $this->_addTags($tags);     
 
-        $tags = get_tags(array(), 0);
+        $tags = get_records('Tag', array(), 0);
         $this->assertEquals($this->_defaultTagLimit + 10, count($tags));
         for($i = 0; $i < $this->_defaultTagLimit; $i++) {
             $this->assertEquals((string)$i, $tags[$i]->name);            
@@ -98,14 +98,14 @@ class Helpers_TagFunctions_GetTagsTest extends Omeka_Test_AppTestCase
          * Get tags for type=Item and public=true. Should return 3 tags, since
          * our item is public.
          */
-        $publicTags = get_tags(array('public' => true, 'type' => 'Item'));
+        $publicTags = get_records('Tag', array('public' => true, 'type' => 'Item'));
         $this->assertEquals(3, count($publicTags));
 
         /**
          * Get tags for type=Item and public=false. Should return 0 tags, since
          * our item is public.
          */
-        $nonPublicTags = get_tags(array('public' => false, 'type' => 'Item'));
+        $nonPublicTags = get_records('Tag', array('public' => false, 'type' => 'Item'));
         $this->assertEquals(0, count($nonPublicTags));
     }
 
@@ -114,14 +114,14 @@ class Helpers_TagFunctions_GetTagsTest extends Omeka_Test_AppTestCase
         $this->_addTags(array('Duck', 'Chicken', 'Goose'));
 
         // Should return 0 tags, since our item is not public.
-        $publicTags = get_tags(array('public' => true, 'type' => 'Item'));
+        $publicTags = get_records('Tag', array('public' => true, 'type' => 'Item'));
         $this->assertEquals(0, count($publicTags));
 
         /**
          * Get tags for type=Item and public=false. Should return 0 tags, since
          * our item is not public and we're not logged in.
          */
-        $nonPublicTags = get_tags(array('public' => false, 'type' => 'Item'));
+        $nonPublicTags = get_records('Tag', array('public' => false, 'type' => 'Item'));
         $this->assertEquals(0, count($publicTags));
 
         /**
@@ -130,7 +130,7 @@ class Helpers_TagFunctions_GetTagsTest extends Omeka_Test_AppTestCase
          * in.
          */
         $this->_authenticateUser($this->_getDefaultUser());
-        $nonPublicTagsAuth = get_tags(array('public' => false, 'type' => 'Item'));
+        $nonPublicTagsAuth = get_records('Tag', array('public' => false, 'type' => 'Item'));
         $this->assertEquals(3, count($nonPublicTagsAuth));
     }
 }

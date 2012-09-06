@@ -90,7 +90,7 @@ function show_file_metadata(array $options = array(), $file = null)
  */
 function recent_files($num = 10)
 {
-    return get_files(array('sort_field' => 'added', 'sort_dir' => 'd'), $num);
+    return get_records('File', array('sort_field' => 'added', 'sort_dir' => 'd'), $num);
 }
 
 /**
@@ -100,17 +100,6 @@ function recent_files($num = 10)
 function set_files_for_loop($files)
 {
     __v()->files = $files;
-}
-
-/**
- * @since 1.1
- * @param array $params
- * @param integer $limit
- * @return array
- */
-function get_files($params = array(), $limit = 10)
-{
-    return get_db()->getTable('File')->findBy($params, $limit);
 }
 
 /**

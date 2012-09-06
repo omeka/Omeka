@@ -79,25 +79,6 @@ function get_item_by_id($itemId)
 }
 
 /**
- * Retrieve a set of Item records corresponding to the criteria given by $params.
- *
- * This could be used on the public theme like so:
- *
- * set_items_for_loop(get_items('tags'=>'foo, bar'), 10);
- * while (loop_items()): ....
- *
- * @since 0.10
- * @see ItemTable::applySearchFilters()
- * @param array $params
- * @param integer $limit The maximum number of items to return.
- * @return array
- */
-function get_items($params = array(), $limit = 10)
-{
-    return get_db()->getTable('Item')->findBy($params, $limit);
-}
-
-/**
  * Retrieve the set of items for the current loop.
  *
  * @since 0.10
@@ -508,7 +489,7 @@ function total_items()
  */
 function random_featured_items($num = 5, $hasImage = null)
 {
-    return get_items(array('featured'=>1, 'sort_field' => 'random', 'hasImage' => $hasImage), $num);
+    return get_records('Item', array('featured'=>1, 'sort_field' => 'random', 'hasImage' => $hasImage), $num);
 }
 
 function display_random_featured_items($num = 5, $hasImage = null)

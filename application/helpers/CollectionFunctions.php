@@ -71,17 +71,6 @@ function get_collection_for_item($item=null)
 }
 
 /**
- * @since 0.10
- * @param array $params
- * @param integer $limit
- * @return array
- */
-function get_collections($params = array(), $limit = 10)
-{
-    return get_db()->getTable('Collection')->findBy($params, $limit);
-}
-
-/**
  * Retrieve the set of collections that are being looped.
  *
  * @since 0.10
@@ -192,7 +181,7 @@ function total_items_in_collection()
  */
 function recent_collections($num = 10)
 {
-    return get_collections(array('sort_field' => 'added', 'sort_dir' => 'd'), $num);
+    return get_records('Collection', array('sort_field' => 'added', 'sort_dir' => 'd'), $num);
 }
 
 /**

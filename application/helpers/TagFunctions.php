@@ -7,18 +7,6 @@
  */
 
 /**
- * @since 0.10
- * @see TagTable::applySearchFilters() for params
- * @param array $params
- * @param integer $limit
- * @return array
- */
-function get_tags($params = array(), $limit = 10)
-{
-    return get_db()->getTable('Tag')->findBy($params, $limit);
-}
-
-/**
  * Returns the total number of tags
  *
  * @return integer
@@ -36,7 +24,7 @@ function total_tags()
  */
 function recent_tags($limit = 10)
 {
-    return get_tags(array('sort_field' => 'time', 'sort_dir' => 'd'), $limit);
+    return get_records('Tag', array('sort_field' => 'time', 'sort_dir' => 'd'), $limit);
 }
 
 /**
@@ -58,7 +46,7 @@ function item_tags_as_cloud($params = array('sort_field' => 'name'), $tagsAreLin
         $item = get_current_item();
     }
     $params['record'] = $item;
-    $tags = get_tags($params, $limit);
+    $tags = get_records('Tag', $params, $limit);
     $urlToLinkTo = ($tagsAreLinked) ? uri('items/browse/tag/') : null;
     return tag_cloud($tags, $urlToLinkTo);
 }
@@ -89,7 +77,7 @@ function item_tags_as_string($delimiter = null, $params = array('sort_field' => 
         $item = get_current_item();
     }
     $params['record'] = $item;
-    $tags = get_tags($params, $limit);
+    $tags = get_records('Tag', $params, $limit);
     $urlToLinkTo = ($tagsAreLinked) ? uri('items/browse/tag/') : null;
     return tag_string($tags, $urlToLinkTo, $delimiter);
 }

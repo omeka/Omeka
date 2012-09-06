@@ -37,7 +37,7 @@ head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?>
                     <h2 class="serif">Recent Collections</h2>
                     <?php
                         
-                        $collections = get_collections(array('recent'=>true),5);
+                        $collections = recent_collections(5);
                         set_collections_for_loop($collections);
                         
                         while($collection = loop_collections()):
