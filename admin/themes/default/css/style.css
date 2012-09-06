@@ -939,6 +939,7 @@ header nav {
 
 #login #remember {
     display: inline-block;
+    margin: 0 0 0 5px;
 }
 
 #login #remember-label {
