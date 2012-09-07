@@ -87,7 +87,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
         // Only respect GET params when browsing.
         $this->getRequest()->setParamSources(array('_GET'));
 
-        $pluralName = $this->_getPluralized();
+        $pluralName = $this->view->pluralize($this->_helper->db->getDefaultModelName());
 
         $params = $this->_getAllParams();
 
@@ -378,17 +378,6 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
         $contextSwitcher->setActionContexts($contextArray);
 
         $contextSwitcher->initContext();
-    }
-
-    /**
-     * Convenience method to get the pluralized form of the CRUD data model.
-     *
-     * @param boolean $lower Whether or not to return the name in lowercase.
-     * @return string
-     */
-    protected function _getPluralized()
-    {
-        return Inflector::tableize($this->_helper->db->getDefaultModelName());
     }
 
     /**
