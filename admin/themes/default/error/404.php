@@ -16,7 +16,7 @@ head(array('bodyclass'=>'error404 primary', 'title'=> $pageTitle)); ?>
         <ul class="items">
             <?php 
             set_items_for_loop(recent_items('10'));
-            if(has_items_for_loop()): foreach (loop('items' as $item)): ?>
+            if (has_items_for_loop()): foreach (loop('items') as $item): ?>
             <li class="item"><?php echo link_to_item(); ?></li>
             <?php endforeach; endif; ?>
         </ul>
