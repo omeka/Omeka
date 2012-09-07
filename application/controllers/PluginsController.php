@@ -39,7 +39,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
     {
         $plugin = $this->_getPluginByName();
         if (!$plugin) {
-            return $this->_helper->redirector('browse');
+            return $this->_helper->redirector('index');
         }
         
         $this->view->pluginBroker = $this->_pluginBroker;
@@ -57,7 +57,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
                     __('The %s plugin was successfully configured!', $plugin->getDisplayName()),
                     'success'
                 );
-                $this->_helper->redirector('browse'); 
+                $this->_helper->redirector('index'); 
             } catch (Omeka_Validator_Exception $e) {
                 $this->_helper->flashMessenger($e);
             }
@@ -75,7 +75,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
                 __('The %s plugin has already been installed.', $plugin->getDisplayName()),
                 'error'
             );
-            $this->_helper->redirector('browse');
+            $this->_helper->redirector('index');
         }
              
         try {
@@ -99,7 +99,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
             );
         }
         
-        $this->_helper->redirector('browse');
+        $this->_helper->redirector('index');
     }
     
     /**
@@ -109,7 +109,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
      */
     public function activateAction()
     {
-        $this->_helper->redirector('browse');
+        $this->_helper->redirector('active');
         
         $plugin = $this->_getPluginByName();
         if (!$plugin) {
@@ -130,7 +130,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
         
         // check to make sure the plugin can be loaded.
         try {
-            $this->_pluginLoader->load($plugin, true);
+            $this->_pluginLoader->load($plugin, true); 
             $this->_helper->flashMessenger(
                 __("The %s plugin was successfully activated!", $name),
                 'success'
@@ -150,7 +150,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
      */
     public function deactivateAction()
     {
-        $this->_helper->redirector('browse');
+        $this->_helper->redirector('inactive');
         $plugin = $this->_getPluginByName();
         if (!$plugin) {
             return;
@@ -174,7 +174,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
     
     public function upgradeAction()
     {
-        $this->_helper->redirector('browse');
+        $this->_helper->redirector('index');
         $plugin = $this->_getPluginByName();
         if (!$plugin) {
             return;
@@ -288,7 +288,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
      */
     public function uninstallAction()
     {
-        $this->_helper->redirector('browse');
+        $this->_helper->redirector('uninstalled');
         $plugin = $this->_getPluginByName();
         if (!$plugin) {
             return;
@@ -338,12 +338,12 @@ class PluginsController extends Omeka_Controller_AbstractActionController
     
     public function deleteAction()
     {
-        $this->_helper->redirector('browse');
+        $this->_helper->redirector('index');
     }
 
     public function addAction()
     {
-        $this->_helper->redirector('browse');
+        $this->_helper->redirector('index');
     }
     
     /**
