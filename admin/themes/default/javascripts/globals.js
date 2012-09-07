@@ -21,7 +21,8 @@ Omeka.wysiwyg = function (params) {
         theme_advanced_buttons2: "",
         theme_advanced_buttons3: "",
         plugins: "paste,inlinepopups,media",
-        media_strict: false
+        media_strict: false,
+        width: "100%"
     };
 
     // Overwrite default params with user-passed ones.
