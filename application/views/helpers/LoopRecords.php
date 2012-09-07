@@ -10,7 +10,7 @@ class Omeka_View_Helper_LoopRecords extends Zend_View_Helper_Abstract
      */
     public function loopRecords($recordsVar, $records = null)
     {
-        $recordsVar = Inflector::tableize($recordsVar);
+        $recordsVar = $this->view->pluralize($recordsVar);
         if (!is_array($records)) {
             $records = $this->view->$recordsVar;
         }

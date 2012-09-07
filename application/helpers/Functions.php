@@ -138,8 +138,8 @@ function loop($recordsVar, $records = null)
  */
 function set_current_record($recordVar, Omeka_Record_AbstractRecord $record, $setPreviousRecord = false)
 {
-    $recordVar = Inflector::singularize(Inflector::tableize($recordVar));
     $view = __v();
+    $recordVar = $view->singularize($recordVar);
     if ($setPreviousRecord) {
         $previousRecordVar = "previous_$recordVar";
         $view->$previousRecordVar = $view->$recordVar;
