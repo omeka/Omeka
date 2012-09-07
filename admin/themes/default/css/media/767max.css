@@ -46,7 +46,7 @@ header nav { float: left; }
 
 #mobile-content-nav { 
     display: block; 
-    margin-top: 100px;
+    margin-top: 120px;
     }
 
 #section-nav {
@@ -68,11 +68,21 @@ header nav { float: left; }
     padding: 0;
     }
 
-.section-title { margin-top: 40px; width: 100%; }
+.section-title { 
+    width: 100%;
+    clear: left;
+    margin: 40px 0; 
+}
 
-#search { position: relative; float: left; }
+#search {
+    float: left;
+    margin: 10px 0;
+    position: relative; 
+}
 
-    #search input[type=text] { width: 239px; }
+    #search input[type=text] { width: 369px; }
+    
+.subhead { display: inline-block; }
 
     /* Browse Items
     ==================================================*/

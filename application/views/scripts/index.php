@@ -41,7 +41,7 @@
         ?>
 
         <div class="items-list">
-            <?php while (loop_items()): ?>
+            <?php foreach (loop('items') as $item): ?>
             <div class="item">
 
                 <h3><?php echo link_to_item(); ?></h3>
@@ -59,7 +59,7 @@
                 <?php endif; ?>
 
             </div>
-            <?php endwhile; ?>
+            <?php endforeach; ?>
         </div>
 
         <?php else: ?>

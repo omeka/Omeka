@@ -66,9 +66,9 @@
                     <p><?php echo __('There are no files for this item yet.');?> <?php echo link_to_item(__('Add a File'), array(), 'edit'); ?>.</p>
                 <?php else: ?>
                     <ul>
-                        <?php while(loop_files_for_item()): ?>
+                        <?php foreach (loop('files', $this->item->Files) as $file): ?>
                             <li><?php echo link_to_file_metadata(array('class'=>'show', 'title'=>__('View File Metadata'))); ?></li>
-                        <?php endwhile; ?>
+                        <?php endforeach; ?>
                     </ul>
                 <?php endif;?>
             </div>

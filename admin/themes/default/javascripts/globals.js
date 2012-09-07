@@ -48,4 +48,30 @@ jQuery(document).ready(function () {
         });
         return false;
     });
+
+    
+    function saveScroll() {
+
+        var $save   = jQuery("#save"),
+            $window = jQuery(window),
+            offset  = $save.offset(),
+            topPadding = 62;
+        
+        if (document.getElementById("save")) {
+            $window.scroll(function() {
+                if($window.scrollTop() > offset.top && $window.width() > 767) {
+                    $save.stop().animate({
+                        marginTop: $window.scrollTop() - offset.top + topPadding
+                        });
+                } else {
+                    $save.stop().animate({
+                        marginTop: 0
+                    });
+                }
+            });
+        }
+    }
+
+    saveScroll();
+    
 });

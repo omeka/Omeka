@@ -10,19 +10,6 @@
 
 /**
  * @since 0.10
- * @see get_items()
- * @see get_tags()
- * @param array $params
- * @param integer $limit
- * @return array
- */
-function get_users($params = array(), $limit = 10)
-{
-    return get_db()->getTable('User')->findBy($params, $limit);
-}
-
-/**
- * @since 0.10
  * @see get_item_by_id()
  * @param integer
  * @return User|null

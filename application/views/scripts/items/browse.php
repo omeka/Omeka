@@ -13,7 +13,7 @@ head(array('title'=>$pageTitle,'bodyid'=>'items','bodyclass' => 'browse'));
 
     <div id="pagination-top" class="pagination"><?php echo pagination_links(); ?></div>
 
-    <?php while (loop_items()): ?>
+    <?php foreach (loop('items') as $item): ?>
     <div class="item hentry">
         <div class="item-meta">
 
@@ -45,7 +45,7 @@ head(array('title'=>$pageTitle,'bodyid'=>'items','bodyclass' => 'browse'));
 
         </div><!-- end class="item-meta" -->
     </div><!-- end class="item hentry" -->
-    <?php endwhile; ?>
+    <?php endforeach; ?>
 
     <div id="pagination-bottom" class="pagination"><?php echo pagination_links(); ?></div>
 

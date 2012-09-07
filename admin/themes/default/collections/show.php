@@ -38,9 +38,9 @@
                 <?php if(total_items_in_collection() > 0): ?>
                 <h2><?php echo __('Recently Added Items'); ?></h2>
                 <ul>
-                <?php while (loop_items_in_collection(10)): ?>
+                <?php foreach (loop('items') as $item): ?>
                     <li><span class="date"><?php echo format_date(metadata('item', 'Date Added')); ?></span><span class="title"> <?php echo link_to_item(); ?></span></li>
-                <?php endwhile;?>
+                <?php endforeach;?>
                 </ul>
                 <?php endif; ?>
                 

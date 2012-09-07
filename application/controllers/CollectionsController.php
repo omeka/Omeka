@@ -27,6 +27,13 @@ class CollectionsController extends Omeka_Controller_AbstractActionController
         $this->_helper->db->setDefaultModelName('Collection');     
     }
     
+    public function showAction()
+    {
+        parent::showAction();
+        $this->view->items = $this->_helper->db->getTable('Item')->findBy(
+            array('collection' => $this->view->collection->id), is_admin_theme() ? 10 : 5);
+    }
+    
     protected function _getAddSuccessMessage($collection)
     {
         return __('The collection "%s" was successfully added!', $collection->name);        

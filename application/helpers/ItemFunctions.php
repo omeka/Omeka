@@ -79,25 +79,6 @@ function get_item_by_id($itemId)
 }
 
 /**
- * Retrieve a set of Item records corresponding to the criteria given by $params.
- *
- * This could be used on the public theme like so:
- *
- * set_items_for_loop(get_items('tags'=>'foo, bar'), 10);
- * while (loop_items()): ....
- *
- * @since 0.10
- * @see ItemTable::applySearchFilters()
- * @param array $params
- * @param integer $limit The maximum number of items to return.
- * @return array
- */
-function get_items($params = array(), $limit = 10)
-{
-    return get_db()->getTable('Item')->findBy($params, $limit);
-}
-
-/**
  * Retrieve the set of items for the current loop.
  *
  * @since 0.10
@@ -395,33 +376,6 @@ function item_thumbnail($props = array(), $index = 0, $item = null)
 }
 
 /**
- * Loops through items assigned to the view.
- *
- * @since 0.10
- * @return mixed The current item
- */
-function loop_items()
-{
-    return loop_records('items', get_items_for_loop(), 'set_current_item');
-}
-
-/**
- * Loops through files assigned to the current item.
- *
- * @since 0.10
- * @return mixed The current file within the loop.
- * @param Item|null Check for this specific item record (current item if null).
- */
-function loop_files_for_item($item=null)
-{
-    if (!$item) {
-        $item = get_current_item();
-    }
-    $files = $item->Files;
-    return loop_records('files_for_item', $files, 'set_current_file');
-}
-
-/**
  * @since 0.10
  * @access private
  * @see loop_items()
@@ -508,7 +462,7 @@ function total_items()
  */
 function random_featured_items($num = 5, $hasImage = null)
 {
-    return get_items(array('featured'=>1, 'sort_field' => 'random', 'hasImage' => $hasImage), $num);
+    return get_records('Item', array('featured'=>1, 'sort_field' => 'random', 'hasImage' => $hasImage), $num);
 }
 
 function display_random_featured_items($num = 5, $hasImage = null)

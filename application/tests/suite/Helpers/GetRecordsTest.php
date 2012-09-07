@@ -11,7 +11,7 @@
 require_once HELPERS;
  
 /**
- * Tests get_collections() in helpers/CollectionFunctions.php
+ * Tests get_records() in helpers/Functions.php
  *
  * Should just test that it delegates properly to CollectionsTable::findBy(),
  * which should be tested separately.
@@ -19,7 +19,7 @@ require_once HELPERS;
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */ 
-class Helpers_CollectionFunctions_GetCollectionsTest extends PHPUnit_Framework_TestCase
+class Helpers_GetRecordsTest extends PHPUnit_Framework_TestCase
 {   
     public function setUp()
     {
@@ -50,6 +50,6 @@ class Helpers_CollectionFunctions_GetCollectionsTest extends PHPUnit_Framework_T
                  ->method('findBy')
                  ->with($params, $limit)
                  ->will($this->returnValue(array($collection)));
-        $this->assertEquals(array($collection), get_collections($params, $limit));             
+        $this->assertEquals(array($collection), get_records('Collection', $params, $limit));             
     }
 }

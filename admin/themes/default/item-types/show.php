@@ -34,9 +34,9 @@
             <?php if($itemtype->Items != null): ?>
             <ul>
             <?php set_items_for_loop($itemtype->Items); ?>
-            <?php while(loop_items()): ?>
+            <?php foreach (loop('items') as $item): ?>
             <li><span class="date"><?php echo format_date(metadata('item', 'Date Added')); ?></span> <?php echo link_to_item('<span class="title">' . metadata('item', array('Dublin Core', 'Title')) . '</span>') ?></li>
-            <?php endwhile;?>
+            <?php endforeach;?>
             </ul>
             <?php else: ?>
             <p><?php echo __('There are no recently added items.'); ?></p>

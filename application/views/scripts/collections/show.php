@@ -24,7 +24,7 @@
     <div id="collection-items">
         <h2><?php echo __('Items in the %s Collection', metadata('collection', 'Name')); ?></h2>
 
-        <?php while (loop_items_in_collection(5)): ?>
+        <?php foreach (loop('items') as $item): ?>
         <div class="item hentry">
             <h3><?php echo link_to_item(metadata('item', array('Dublin Core', 'Title')), array('class'=>'permalink')); ?></h3>
 
@@ -44,7 +44,7 @@
             </div>
             <?php endif; ?>
         </div>
-        <?php endwhile; ?>
+        <?php endforeach; ?>
     </div><!-- end collection-items -->
 
     <?php fire_plugin_hook('public_append_to_collections_show', array('view' => $this)); ?>

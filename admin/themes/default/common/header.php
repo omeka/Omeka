@@ -29,31 +29,6 @@
  });
 </script>
 
-
-<script type="text/javascript" charset="utf-8">
-
-jQuery(window).load(function() {
-
-    var $save   = jQuery("#save"),
-        $window = jQuery(window),
-        offset  = $save.offset(),
-        topPadding = 65;
-    
-    $window.scroll(function() {
-        if($window.scrollTop() > offset.top) {
-            $save.stop().animate({
-                marginTop: $window.scrollTop() - offset.top + topPadding
-                });
-        } else {
-            $save.stop().animate({
-                marginTop: 0
-            });
-        }
-    });
-});
-
-</script>
-
 </head>
 
 <?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass)); ?>

@@ -28,17 +28,6 @@ function set_item_types_for_loop($itemtypes)
 }
 
 /**
- * Loops through item typees assigned to the current view.
- *
- * @since 1.1
- * @return mixed The current item type in the loop.
- */
-function loop_item_types()
-{
-    return loop_records('item_types', get_item_types_for_loop(), 'set_current_item_type');
-}
-
-/**
  * @since 1.1
  * @param ItemType
  * @return void
@@ -68,23 +57,6 @@ function has_item_types_for_loop()
 {
     $view = __v();
     return $view->itemtypes && count($view->itemtypes);
-}
-
-/**
- * Retrieve a full set of ItemType objects currently available to Omeka.
- *
- * Keep in mind that the $params and $limit arguments are in place for the sake
- * of consistency with other data retrieval functions, though in this case
- * they don't have any effect on the number of results returned.
- *
- * @since 0.10
- * @param array $params
- * @param integer $limit
- * @return array
- */
-function get_item_types($params = array(), $limit = 10)
-{
-    return get_db()->getTable('ItemType')->findAll();
 }
 
 /**

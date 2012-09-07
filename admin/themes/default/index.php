@@ -37,17 +37,17 @@ head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?>
                     <h2 class="serif">Recent Collections</h2>
                     <?php
                         
-                        $collections = get_collections(array('recent'=>true),5);
+                        $collections = recent_collections(5);
                         set_collections_for_loop($collections);
                         
-                        while($collection = loop_collections()):
+                        foreach (loop('collections') as $collection):
                             echo '<div class="recent-row">';
                             echo '<p class="recent">'.link_to_collection().'</p>';
                             if (has_permission($collection, 'edit')):
                             echo '<p class="dash-edit">'.link_to_collection(__('Edit'), array('class'=>'dash-edit'), 'edit').'</p>';
                             endif;                        
                             echo '</div>';
-                        endwhile;
+                        endforeach;
                         
                        ?>
                     <div class="add-new"><p><a class="add-collection" href="<?php echo html_escape(uri('collections/add')); ?>">Add a new collection</a></p></div>
@@ -62,14 +62,14 @@ head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?>
                         $items = recent_items(5); 
                         set_items_for_loop($items);
                      
-                        while($item = loop_items()):
+                        foreach (loop('items') as $item):
                             echo '<div class="recent-row">';
                             echo '<p class="recent">'.link_to_item().'</p>';
                             if (has_permission($item, 'edit')):
                             echo '<p class="dash-edit">'.link_to_item(__('Edit'), array(), 'edit').'</p>';
                             endif;
                             echo '</div>';                            
-                        endwhile;
+                        endforeach;
                      
                     ?>
                 <div class="add-new"><p><a class="add-new" href="<?php echo html_escape(uri('items/add')); ?>">Add a new item</a></p></div>

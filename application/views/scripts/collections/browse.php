@@ -6,7 +6,7 @@ head(array('title'=>$pageTitle,'bodyid'=>'collections','bodyclass' => 'browse'))
     <h1><?php echo $pageTitle; ?></h1>
     <div class="pagination"><?php echo pagination_links(); ?></div>
 
-    <?php while (loop_collections()): ?>
+    <?php foreach (loop('collections') as $collection): ?>
     <div class="collection">
 
         <h2><?php echo link_to_collection(); ?></h2>
@@ -30,7 +30,7 @@ head(array('title'=>$pageTitle,'bodyid'=>'collections','bodyclass' => 'browse'))
         <?php fire_plugin_hook('public_append_to_collections_browse_each', array('view' => $this)); ?>
 
     </div><!-- end class="collection" -->
-    <?php endwhile; ?>
+    <?php endforeach; ?>
 
     <?php fire_plugin_hook('public_append_to_collections_browse', array('view' => $this)); ?>
 

@@ -14,13 +14,6 @@ before_script:
   - sed -i 's/db.host = ""/db.host = "localhost"/' application/tests/config.ini
   - sed -i 's/db.username = ""/db.username = "root"/' application/tests/config.ini
   - sed -i 's/db.dbname = ""/db.dbname = "omeka_test"/' application/tests/config.ini
-  - sed -i 's/email.to = ""/email.to = "test@example.com"/' application/tests/config.ini
-  - sed -i 's/email.administator = ""/email.administrator = "admin@example.com"/' application/tests/config.ini
-  - sed -i 's/paths.maildir = ""/paths.maildir = "\/tmp"/' application/tests/config.ini
   - sed -i 's/paths.imagemagick = ""/paths.imagemagick = "\/usr\/bin\/"/' application/tests/config.ini
-  - sed -i 's/256M/512M/' application/tests/bootstrap.php
 
-script: cd application/tests && phpunit --coverage-text
-
-#notifications:
-  #irc: "irc.freenode.org#omeka"
+script: cd application/tests && phpunit

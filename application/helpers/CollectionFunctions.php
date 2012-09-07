@@ -71,17 +71,6 @@ function get_collection_for_item($item=null)
 }
 
 /**
- * @since 0.10
- * @param array $params
- * @param integer $limit
- * @return array
- */
-function get_collections($params = array(), $limit = 10)
-{
-    return get_db()->getTable('Collection')->findBy($params, $limit);
-}
-
-/**
  * Retrieve the set of collections that are being looped.
  *
  * @since 0.10
@@ -112,45 +101,6 @@ function has_collections_for_loop()
 {
     $view = __v();
     return $view->collections && count($view->collections);
-}
-
-/**
- * Loops through collections assigned to the current view.
- *
- * @since 0.10
- * @return mixed The current collection in the loop.
- */
-function loop_collections()
-{
-    return loop_records('collections', get_collections_for_loop(), 'set_current_collection');
-}
-
-/**
- * Retrieve and loop through a subset of items in the collection.
- *
- * @since 0.10
- * @param integer $num
- * @param array $options Optional
- * @return Item|null
- */
-function loop_items_in_collection($num = 10, $options = array())
-{
-    // Cache this so we don't end up calling the DB query over and over again
-    // inside the loop.
-    static $loopIsRun = false;
-
-    if (!$loopIsRun) {
-        // Retrieve a limited # of items based on the collection given.
-        $items = get_items(array('collection'=>get_current_collection()->id), $num);
-        set_items_for_loop($items);
-        $loopIsRun = true;
-    }
-
-    $item = loop_items();
-    if (!$item) {
-        $loopIsRun = false;
-    }
-    return $item;
 }
 
 /**
@@ -192,7 +142,7 @@ function total_items_in_collection()
  */
 function recent_collections($num = 10)
 {
-    return get_collections(array('sort_field' => 'added', 'sort_dir' => 'd'), $num);
+    return get_records('Collection', array('sort_field' => 'added', 'sort_dir' => 'd'), $num);
 }
 
 /**
