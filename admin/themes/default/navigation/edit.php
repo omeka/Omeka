@@ -16,9 +16,14 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
         width: 500px;
     }
     
+    #navigation_main_list li div.navigation_main_link_header {
+        background: #C1BDA3;
+    }
+    
     #navigation_main_list li div.navigation_main_link_body {
         margin:0;
-        height: 200px;
+        height: 120px;
+        background: #EEEEEE;
     }
     
     #navigation_main_list_new {
@@ -28,13 +33,15 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
     #navigation_main_list li div.navigation_main_link_body .navigation_main_list_delete {
         float: right;
         color: white;
-        margin:0;
+        margin-bottom:0;
+        margin-top: 10px;
     }
     
     #navigation_main_list li div.navigation_main_link_body .navigation_main_list_visit {
         float: left;
         color: white;
         margin-bottom:0;
+        margin-top: 10px;
     }
     
     .navigation_main_link_header input {
@@ -52,6 +59,26 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
         float: right;
         margin-right: 20px;
         margin-top: 10px;
+    }
+    
+    .navigation_main_link_label_label {
+        margin-right:20px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    
+    .navigation_main_link_label {
+        width: 420px;
+    }
+
+    .navigation_main_link_uri_label {
+        margin-right:30px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .navigation_main_link_uri {
+        width: 420px;
     }
     
 </style>
@@ -164,8 +191,8 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
 
                     var edit_nav_header_html = '<div class="navigation_main_link_header"><input type="hidden" name="' + n_id + '" value="0"><input type="checkbox" name="' + n_id + '" id="' + n_id + '" class="can_delete_nav_link"> <a href="' + n_uri + '">' + n_label + '</a></div>'
 
-                    var link_label_html = '<p><label>Link Label</label><br/><input type="text" value="' + n_label + '" class="navigation_main_link_label" /></p>';
-                    var link_uri_html = '<p><label>Link URI</label><br/><input type="text" value="' + n_uri + '" class="navigation_main_link_uri" /></p>';
+                    var link_label_html = '<div><label class="navigation_main_link_label_label">Label</label><input type="text" value="' + n_label + '" class="navigation_main_link_label" /></div>';
+                    var link_uri_html = '<div><label class="navigation_main_link_uri_label">URI</label><input type="text" value="' + n_uri + '" class="navigation_main_link_uri" /></div>';
                     var visit_url_html = '<a href="' + n_uri + '" class="navigation_main_list_visit blue button">Visit</a>';
                     var edit_nav_body_html = '<div class="navigation_main_link_body">' + link_label_html + link_uri_html + visit_url_html + '</div>';
 
@@ -195,7 +222,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
         jQuery('#navigation_main_list > dd').wrapInner('<li />');
         jQuery('#navigation_main_list > dd > li').unwrap();
         jQuery('#navigation_main_list > li').wrapInner('<div class="navigation_main_link_header" />');
-        jQuery('#navigation_main_list > li').append('<div class="navigation_main_link_body"><p><label>Link Label</label><br/><input type="text" class="navigation_main_link_label" /></p><p><label>Link URI</label><br/><input type="text" class="navigation_main_link_uri" /></p></div>');
+        jQuery('#navigation_main_list > li').append('<div class="navigation_main_link_body"><div><label class="navigation_main_link_label_label">Label</label><input type="text" class="navigation_main_link_label" /></div><div><label class="navigation_main_link_uri_label">URI</label><input type="text" class="navigation_main_link_uri" /></div></div>');
         
         // add data to edit Nav Link forms
         updateNavLinkEditForms();
