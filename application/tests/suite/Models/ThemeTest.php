@@ -82,10 +82,10 @@ class Models_ThemeTest extends Omeka_Test_AppTestCase
         self::dbChanged(false);
         $themeName = 'seasons';
         
-        $themes = Theme::getAvailable();
+        $themes = Theme::getAllThemes();
         $this->assertTrue(is_array($themes));
         
-        $theme = Theme::getAvailable($themeName);
+        $theme = Theme::getTheme($themeName);
         $this->assertTrue($theme instanceof Theme);
         $this->assertEquals($themeName, $theme->directory);
     }

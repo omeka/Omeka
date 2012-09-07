@@ -44,7 +44,7 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
         parent::init();
         $themeName = $this->getThemeName();
         
-        $theme = Theme::getAvailable($themeName);
+        $theme = Theme::getTheme($themeName);
         $themeConfigIni = $theme->path . '/config.ini';
 
         if (file_exists($themeConfigIni) && is_readable($themeConfigIni)) {
