@@ -55,8 +55,6 @@ class Omeka_Plugin_Loader
      */
     protected $_plugins = array();
     
-    private $_requireOnce = true;
-    
     /**
      * @param Omeka_Plugin_Broker $broker Plugin broker.
      * @param Omeka_Plugin_Ini $iniReader plugin.ini reader.
@@ -94,17 +92,6 @@ class Omeka_Plugin_Loader
         foreach ($plugins as $plugin) {
             $this->load($plugin, $force);
         }
-    }
-
-    /**
-     * Flag to determine whether or not plugin.php should be require'd or 
-     * require_once'd. This flag is true by default.
-     *
-     * @param boolean $flag
-     */
-    public function setRequireOnce($flag)
-    {
-        $this->_requireOnce = $flag;
     }
     
     /**
@@ -159,9 +146,6 @@ class Omeka_Plugin_Loader
         $this->registerPlugin($plugin);
         
         $this->_iniReader->load($plugin);
-        if ($plugin->getRequireOnce() === null) {
-            $plugin->setRequireOnce($this->_requireOnce);
-        }
         
         $pluginDirName = $plugin->getDirectoryName();
         if (!$this->_canLoad($plugin, $force)) {
@@ -397,11 +381,7 @@ class Omeka_Plugin_Loader
         // Bootstrap plugin.php if it exists.
         $pluginFilePath = $this->getPluginFilePath($pluginDirName);
         if (file_exists($pluginFilePath)) {
-            if ($plugin->getRequireOnce()) {
-                require_once $pluginFilePath;
-            } else {
-                require $pluginFilePath;
-            }
+            require $pluginFilePath;
         // Otherwise bootstrap the plugin class.
         } else {
             require_once $this->getPluginClassFilePath($pluginDirName);
