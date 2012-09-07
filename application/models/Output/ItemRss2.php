@@ -68,7 +68,7 @@ class Output_ItemRss2
     protected function itemToRSS($item)
     {        
         $entry = array();
-        set_current_item($item);
+        set_current_record('item', $item, true);
         
         // Title is a CDATA section, so no need for extra escaping.
         $entry['title'] = strip_formatting(metadata($item, array('Dublin Core', 'Title'), array('no_escape'=>true)));

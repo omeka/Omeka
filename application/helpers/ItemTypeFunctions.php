@@ -29,16 +29,6 @@ function set_item_types_for_loop($itemtypes)
 
 /**
  * @since 1.1
- * @param ItemType
- * @return void
- */
-function set_current_item_type($itemtype)
-{
-    __v()->itemtype = $itemtype;
-}
-
-/**
- * @since 1.1
  * @return ItemType|null
  */
 function get_current_item_type()

@@ -130,6 +130,24 @@ function loop($recordsVar, $records = null)
 }
 
 /**
+ * Set a record to the view as the current record.
+ * 
+ * @param string $recordVar
+ * @param Omeka_Record_AbstractRecord $record
+ * @param bool $setPreviousRecord
+ */
+function set_current_record($recordVar, Omeka_Record_AbstractRecord $record, $setPreviousRecord = false)
+{
+    $recordVar = Inflector::singularize(Inflector::tableize($recordVar));
+    $view = __v();
+    if ($setPreviousRecord) {
+        $previousRecordVar = "previous_$recordVar";
+        $view->$previousRecordVar = $view->$recordVar;
+    }
+    $view->$recordVar = $record;
+}
+
+/**
  * Get all output formats available in the current action.
  *
  * @return array A sorted list of contexts.

@@ -53,7 +53,7 @@ class Omeka_Helper_ItemCitationTest extends Omeka_Test_AppTestCase
         $item->addElementTextsByArray($elementTexts);
         $item->save();
         
-        set_current_item($item);
+        set_current_record('item', $item, true);
         
         $siteTitle = settings('site_title');
         $dateAccessed = date('F j, Y');

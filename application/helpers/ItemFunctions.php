@@ -66,7 +66,7 @@ function get_current_item()
  * Example of usage on a public theme page:
  *
  * $item = get_item_by_id(4);
- * set_current_item($item);
+ * set_current_record('item', $item, true);
  * echo metadata('item', array('Dublin Core', 'Title'));
  *
  * @since 0.10
@@ -373,20 +373,6 @@ function item_square_thumbnail($props = array(), $index = 0, $item = null)
 function item_thumbnail($props = array(), $index = 0, $item = null)
 {
     return item_image('thumbnail', $props, $index, $item);
-}
-
-/**
- * @since 0.10
- * @access private
- * @see loop_items()
- * @param Item
- * @return void
- */
-function set_current_item(Item $item)
-{
-    $view = __v();
-    $view->previous_item = $view->item;
-    $view->item = $item;
 }
 
 /**

@@ -35,7 +35,7 @@ class Omeka_Helper_ItemHasTypeTest extends Omeka_Test_AppTestCase
         $this->assertTrue(item_has_type($typeName, $item));
         $this->assertFalse(item_has_type('Not ' . $typeName, $item));
 
-        set_current_item($item);
+        set_current_record('item', $item);
 
         $this->assertTrue(item_has_type($typeName));
         $this->assertFalse(item_has_type('Not ' . $typeName, $item));
@@ -55,10 +55,10 @@ class Omeka_Helper_ItemHasTypeTest extends Omeka_Test_AppTestCase
         $this->assertTrue(item_has_type(null, $itemWithType));
         $this->assertFalse(item_has_type(null, $itemWithNoType));
 
-        set_current_item($itemWithType);
+        set_current_record('item', $itemWithType);
         $this->assertTrue(item_has_type());
 
-        set_current_item($itemWithNoType);
+        set_current_record('item', $itemWithNoType);
         $this->assertFalse(item_has_type());
     }
 }

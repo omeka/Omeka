@@ -114,16 +114,6 @@ function set_collections_for_loop($collections)
 }
 
 /**
- * @since 0.10
- * @param Collection
- * @return void
- */
-function set_current_collection($collection)
-{
-    __v()->collection = $collection;
-}
-
-/**
  * Retrieve the total number of items in the current collection.
  *
  * @since 0.10

@@ -56,16 +56,6 @@ function get_current_file()
 }
 
 /**
- * @since 0.10
- * @param File
- * @return void
- */
-function set_current_file(File $file)
-{
-    __v()->file = $file;
-}
-
-/**
  * Retrieve the set of all metadata for the current file.
  *
  * @since 1.0

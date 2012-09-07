@@ -26,7 +26,7 @@ class Omeka_Helper_LinkFunctions_LinkToItemTest extends Omeka_Test_AppTestCase
 
     public function testLinkToItemWithCurrentItem()
     {
-        set_current_item($this->item);
+        set_current_record('item', $this->item);
         $linkToItemHtml = '<a href="/items/show/1">' . Installer_Test::TEST_ITEM_TITLE 
             . '</a>';
         $this->assertEquals($linkToItemHtml, link_to_item());

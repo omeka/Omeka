@@ -53,7 +53,7 @@ class Omeka_Helper_ShowItemMetadataTest extends Omeka_Test_AppTestCase
 
         $metadataOutput = show_item_metadata(array('return_type' => 'array'), $item);
 
-        set_current_item($item);
+        set_current_record('item', $item, true);
 
         // Compare runs with and without item set on view, they should be
         // the same.
