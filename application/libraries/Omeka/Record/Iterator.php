@@ -1,20 +1,20 @@
 <?php
 class Omeka_Record_Iterator implements Iterator
 {
-    private $_recordParam;
+    private $_recordVar;
     private $_records;
     private $_view;
     
     /**
      * Construct the record iterator.
      * 
-     * @param string $recordType
+     * @param string $recordsVar
      * @param array $records
      * @param Zend_View_Abstract|null $view
      */
-    public function __construct($recordType, $records, $view = null)
+    public function __construct($recordsVar, $records, $view = null)
     {
-        $this->_recordParam = Inflector::underscore($recordType);
+        $this->_recordVar = Inflector::singularize(Inflector::tableize($recordsVar));
         $this->_records = $records;
         $this->_view = $view;
     }
@@ -30,7 +30,7 @@ class Omeka_Record_Iterator implements Iterator
     public function current()
     {
         if ($this->_view instanceof Zend_View_Abstract) {
-            $this->_view->{$this->_recordParam} = current($this->_records);
+            $this->_view->{$this->_recordVar} = current($this->_records);
         }
         return current($this->_records);
     }

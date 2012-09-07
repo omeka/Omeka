@@ -98,73 +98,12 @@ function settings($name)
     return $name;
 }
 
-function loop($recordType, $records = null)
-{
-    return __v()->loopRecords($recordType, $records);
-}
-
 /**
- * Loops through a specific record set, setting the current record to a
- * globally accessible scope and returning it.  Records are only valid for
- * the current call to loop_records (i.e., the next call to loop_records()
- * will release the previously-returned item).
- *
- * @since 0.10
- * @see loop_items()
- * @see loop_files_for_item()
- * @see loop_collections()
- * @param string $recordType The type of record to loop through
- * @param mixed $records The iterable set of records
- * @param mixed $setCurrentRecordCallback The callback to set the current record
- * @return mixed The current record
+ * 
  */
-function loop_records($recordType, $records, $setCurrentRecordCallback=null)
+function loop($recordsVar, $records = null)
 {
-    if (!$records) {
-        return false;
-    }
-
-    // If this is the first call to loop_records(), set a static record loop and
-    // set it to NULL.
-    static $recordLoop = null;
-
-    // If this is the first call, set an array holding the last-returned
-    // record from the loop, for each record type.  Initially set to null.
-    static $lastRecord = null;
-
-    // If the record type index does not exist, set it with the provided
-    // records. We do this so multiple record types can coexist.
-    if (!isset($recordLoop[$recordType])) {
-        $recordLoop[$recordType] = $records;
-    }
-
-    // If there is a previously-returned record from this loop, release the
-    // object before returning the next record.
-    if ($lastRecord && array_key_exists($recordType, $lastRecord) && $lastRecord[$recordType]) {
-        release_object($lastRecord[$recordType]);
-        $lastRecord[$recordType] = null;
-    }
-
-    // If we haven't reached the end of the loop, set the current record in the
-    // loop and return it. This advances the array cursor so the next loop
-    // iteration will get the next record.
-    if (list($key, $record) = each($recordLoop[$recordType])) {
-
-        $lastRecord[$recordType] = $record;
-
-        if (is_callable($setCurrentRecordCallback)) {
-            call_user_func($setCurrentRecordCallback, $record);
-        } else {
-            throw new Exception(__('Error: Invalid callback was provided for the loop.'));
-        }
-
-        return $record;
-    }
-
-    // Reset the particular record loop if the loop has finished (so we can run
-    // it again if necessary). Return false to indicate the end of the loop.
-    unset($recordLoop[$recordType]);
-    return false;
+    return __v()->loopRecords($recordsVar, $records);
 }
 
 /**
