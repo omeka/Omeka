@@ -153,7 +153,7 @@ function record_uri(Omeka_Record_AbstractRecord $record, $action)
 function item_uri($action = 'show', $item=null)
 {
     if (!$item) {
-        $item = get_current_item();
+        $item = get_current_record('item');
     }
     return record_uri($item, $action);
 }
@@ -218,7 +218,7 @@ function abs_uri()
 function abs_item_uri($item = null)
 {
     if (!$item) {
-        $item = get_current_item();
+        $item = get_current_record('item');
     }
 
     return abs_uri(array('controller'=>'items', 'action'=>'show', 'id'=>$item->id), 'id');

@@ -107,7 +107,7 @@ function link_to_collection_for_item($text = null, $props = array(), $action = '
 function link_to_items_in_collection($text = null, $props = array(), $action = 'browse', $collectionObj = null)
 {
     if (!$collectionObj) {
-        $collectionObj = get_current_collection();
+        $collectionObj = get_current_record('collection');
     }
 
     $queryParams = array();
@@ -123,7 +123,7 @@ function link_to_items_in_collection($text = null, $props = array(), $action = '
 function link_to_items_with_item_type($text = null, $props = array(), $action = 'browse', $itemTypeObj = null)
 {
     if (!$itemTypeObj) {
-        $itemTypeObj = get_current_item_type();
+        $itemTypeObj = get_current_record('item_type');
     }
 
     $queryParams = array();
@@ -146,7 +146,6 @@ function link_to_items_with_item_type($text = null, $props = array(), $action = 
  * the original filename, unless otherwise specified.
  *
  * @since 1.0
- * @uses get_current_file()
  * @param array
  * @param string
  * @param File
@@ -155,7 +154,7 @@ function link_to_items_with_item_type($text = null, $props = array(), $action = 
 function link_to_file_metadata($attributes = array(), $text = null, $file = null)
 {
     if (!$file) {
-        $file = get_current_file();
+        $file = get_current_record('file');
     }
 
     if (!$text) {
@@ -182,8 +181,8 @@ function link_to_file_metadata($attributes = array(), $text = null, $file = null
  */
 function link_to_item($text = null, $props = array(), $action = 'show', $item=null)
 {
-    if(!$item) {
-        $item = get_current_item();
+    if (!$item) {
+        $item = get_current_record('item');
     }
 
     $text = (!empty($text) ? $text : strip_formatting(metadata($item, array('Dublin Core', 'Title'))));
@@ -212,9 +211,6 @@ function link_to_items_rss($text = null, $params=array())
 /**
  * Link to the item immediately following the current one.
  *
- * @since 0.10 Signature has changed to reflect the use of get_current_item()
- * instead of passing the $item object as the first argument.
- * @uses get_current_item()
  * @uses link_to()
  * @return string
  */
@@ -224,7 +220,7 @@ function link_to_next_item($text=null, $props=array())
         $text = __("Next Item &rarr;");
     }
 
-    $item = get_current_item();
+    $item = get_current_record('item');
     if($next = $item->next()) {
         return link_to($next, 'show', $text, $props);
     }
@@ -240,7 +236,7 @@ function link_to_previous_item($text=null, $props=array())
         $text = __('&larr; Previous Item');
     }
 
-    $item = get_current_item();
+    $item = get_current_record('item');
     if($previous = $item->previous()) {
         return link_to($previous, 'show', $text, $props);
     }
@@ -249,20 +245,20 @@ function link_to_previous_item($text=null, $props=array())
 /**
  *
  * @since 0.10 Signature has changed so that $text is the first argument.  Uses
- * get_current_collection() to determine what collection to link to.  Or you can
+ * get_current_record() to determine what collection to link to.  Or you can 
  * pass it the Collection record as the last argument.
  * @param string $text Optional text to use for the title of the collection.  Default
  * behavior is to use the name of the collection.
  * @param array $props Set of attributes to use for the link.
  * @param array $action The action to link to for the collection.  Default is 'show'.
  * @param array $collectionObj Optional Collection record can be passed to this
- * to override the collection object retrieved by get_current_collection().
+ * to override the collection object retrieved by get_current_record().
  * @return string
  */
 function link_to_collection($text=null, $props=array(), $action='show', $collectionObj = null)
 {
     if (!$collectionObj) {
-        $collectionObj = get_current_collection();
+        $collectionObj = get_current_record('collection');
     }
 
     $collectionName = metadata($collectionObj, 'name');

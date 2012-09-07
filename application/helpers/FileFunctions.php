@@ -47,15 +47,6 @@ function display_files($files, array $props = array(), $wrapperAttributes = arra
 }
 
 /**
- * @since 0.10
- * @return File|null
- */
-function get_current_file()
-{
-    return __v()->file;
-}
-
-/**
  * Retrieve the set of all metadata for the current file.
  *
  * @since 1.0
@@ -66,7 +57,7 @@ function get_current_file()
 function show_file_metadata(array $options = array(), $file = null)
 {
     if (!$file) {
-        $file = get_current_file();
+        $file = get_current_record('file');
     }
     return __v()->fileMetadataList($file, $options);
 }

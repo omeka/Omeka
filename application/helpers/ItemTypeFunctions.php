@@ -28,15 +28,6 @@ function set_item_types_for_loop($itemtypes)
 }
 
 /**
- * @since 1.1
- * @return ItemType|null
- */
-function get_current_item_type()
-{
-    return __v()->item_type;
-}
-
-/**
  * Determine whether there are any item types to loop through.
  *
  * @since 1.0
@@ -57,7 +48,7 @@ function has_item_types_for_loop()
 function item_type_elements($item=null)
 {
     if (!$item) {
-        $item = get_current_item();
+        $item = get_current_record('item');
     }
     $elements = $item->getItemTypeElements();
     foreach ($elements as $element) {

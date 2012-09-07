@@ -148,6 +148,27 @@ function set_current_record($recordVar, Omeka_Record_AbstractRecord $record, $se
 }
 
 /**
+ * Get the current record from the view.
+ * 
+ * @throws Omeka_View_Exception
+ * @param string $recordVar
+ * @param bool $throwException
+ * @return Omeka_Record_AbstractRecord|false
+ */
+function get_current_record($recordVar, $throwException = true)
+{
+    $view = __v();
+    $recordVar = $view->singularize($recordVar);
+    if (!$view->$recordVar) {
+        if ($throwException) {
+            throw new Omeka_View_Exception(__("A current %s has not been set to this view.", $recordVar));
+        }
+        return false;
+    }
+    return $view->$recordVar;
+}
+
+/**
  * Get all output formats available in the current action.
  *
  * @return array A sorted list of contexts.

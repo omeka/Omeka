@@ -16,7 +16,7 @@
  */
 function collection_has_collectors()
 {
-    return get_current_collection()->hasCollectors();
+    return get_current_record('collection')->hasCollectors();
 }
 
 /**
@@ -65,7 +65,7 @@ function get_collection_by_id($collectionId)
 function get_collection_for_item($item=null)
 {
     if (!$item) {
-        $item = get_current_item();
+        $item = get_current_record('item');
     }
     return $item->Collection;
 }
@@ -79,15 +79,6 @@ function get_collection_for_item($item=null)
 function get_collections_for_loop()
 {
     return __v()->collections;
-}
-
-/**
- * @since 0.10
- * @return Collection|null
- */
-function get_current_collection()
-{
-    return __v()->collection;
 }
 
 /**
@@ -121,7 +112,7 @@ function set_collections_for_loop($collections)
  */
 function total_items_in_collection()
 {
-    return get_current_collection()->totalItems();
+    return get_current_record('collection')->totalItems();
 }
 
 /**

@@ -43,7 +43,7 @@ function recent_tags($limit = 10)
 function item_tags_as_cloud($params = array('sort_field' => 'name'), $tagsAreLinked = true, $item=null, $limit=null)
 {
     if (!$item) {
-        $item = get_current_item();
+        $item = get_current_record('item');
     }
     $params['record'] = $item;
     $tags = get_records('Tag', $params, $limit);
@@ -74,7 +74,7 @@ function item_tags_as_string($delimiter = null, $params = array('sort_field' => 
     }
 
     if (!$item) {
-        $item = get_current_item();
+        $item = get_current_record('item');
     }
     $params['record'] = $item;
     $tags = get_records('Tag', $params, $limit);

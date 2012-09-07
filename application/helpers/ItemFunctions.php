@@ -11,7 +11,7 @@
 /**
  * @since 0.10
  * @uses display_files()
- * @uses get_current_item()
+ * @uses get_current_record()
  * @param array $options
  * @param array $wrapperAttributes
  * @param Item|null $item Check for this specific item record (current item if null).
@@ -19,8 +19,8 @@
  */
 function display_files_for_item($options = array(), $wrapperAttributes = array('class'=>'item-file'), $item = null)
 {
-    if(!$item) {
-        $item = get_current_item();
+    if (!$item) {
+        $item = get_current_record('item');
     }
 
     return display_files($item->Files, $options, $wrapperAttributes);
@@ -42,22 +42,6 @@ function display_random_featured_item($withImage = null)
     $html = '<h2>'. __('Featured Item') .'</h2>';
     $html .= display_random_featured_items('1', $withImage);
     return $html;
-}
-
-/**
- * Retrieve the current Item record.
- *
- * @since 0.10
- * @throws Exception
- * @return Item
- */
-function get_current_item()
-{
-    if (!($item = __v()->item)) {
-        throw new Exception(__('An item has not been set to be displayed on this theme page! Please see Omeka documentation for details.'));
-    }
-
-    return $item;
 }
 
 /**
@@ -100,7 +84,7 @@ function get_items_for_loop()
 function get_next_item($item=null)
 {
     if (!$item) {
-        $item = get_current_item();
+        $item = get_current_record('item');
     }
     return $item->next();
 }
@@ -114,7 +98,7 @@ function get_next_item($item=null)
 function get_previous_item($item=null)
 {
     if (!$item) {
-        $item = get_current_item();
+        $item = get_current_record('item');
     }
     return $item->previous();
 }
@@ -142,8 +126,8 @@ function has_items_for_loop()
 function item_belongs_to_collection($name=null, $item=null)
 {
     //Dependency injection
-    if(!$item) {
-        $item = get_current_item();
+    if (!$item) {
+        $item = get_current_record('item');
     }
 
      return (($collection = $item->Collection)
@@ -164,7 +148,7 @@ function item_belongs_to_collection($name=null, $item=null)
 function item_citation($item = null)
 {
     if (!$item) {
-        $item = get_current_item();
+        $item = get_current_record('item');
     }
     
     $citation = '';
@@ -221,7 +205,7 @@ function item_citation($item = null)
 function item_field_uses_html($elementSetName, $elementName, $index=0, $item = null)
 {
     if (!$item) {
-        $item = get_current_item();
+        $item = get_current_record('item');
     }
 
     $textRecords = $item->getElementTexts($elementSetName, $elementName);
@@ -253,8 +237,8 @@ function item_fullsize($props = array(), $index = 0, $item = null)
  */
 function item_has_files($item=null)
 {
-    if(!$item) {
-        $item = get_current_item();
+    if (!$item) {
+        $item = get_current_record('item');
     }
     return $item->hasFiles();
 }
@@ -266,8 +250,8 @@ function item_has_files($item=null)
  */
 function item_has_tags($item=null)
 {
-    if(!$item) {
-        $item = get_current_item();
+    if (!$item) {
+        $item = get_current_record('item');
     }
     return (count($item->Tags) > 0);
 }
@@ -286,8 +270,8 @@ function item_has_tags($item=null)
  */
 function item_has_type($name = null, $item = null)
 {
-    if(!$item) {
-        $item = get_current_item();
+    if (!$item) {
+        $item = get_current_record('item');
     }
 
     $itemTypeName = metadata($item, 'Item Type Name');
@@ -303,8 +287,8 @@ function item_has_type($name = null, $item = null)
  */
 function item_has_thumbnail($item=null)
 {
-    if(!$item) {
-        $item = get_current_item();
+    if (!$item) {
+        $item = get_current_record('item');
     }
     return $item->hasThumbnail();
 }
@@ -324,7 +308,7 @@ function item_has_thumbnail($item=null)
 function item_image($imageType, $props = array(), $index = 0, $item = null)
 {
     if (!$item) {
-        $item = get_current_item();
+        $item = get_current_record('item');
     }
 
     $imageFile = get_db()->getTable('File')->findWithImages($item->id, $index);
@@ -397,7 +381,7 @@ function set_items_for_loop($items)
 function show_item_metadata(array $options = array(), $item=null)
 {
     if (!$item) {
-        $item = get_current_item();
+        $item = get_current_record('item');
     }
     return __v()->itemMetadataList($item, $options);
 }
