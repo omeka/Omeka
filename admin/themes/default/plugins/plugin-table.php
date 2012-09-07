@@ -126,5 +126,5 @@
 
 
 <?php else: ?>
-<p><?php echo __('You do not have any plugins installed. Add them to the plugins directory to see them listed here.'); ?></p>
+<p><?php echo $noPlugins; ?></p>
 <?php endif; ?>
