@@ -7,7 +7,7 @@
         'title' => 'All Plugins',
         'module' => 'default',
         'controller' => 'plugins',
-        'action' => 'browse'
+        'action' => 'index'
         ),
         array(
         'label' => 'Active',
