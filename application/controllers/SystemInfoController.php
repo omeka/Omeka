@@ -96,7 +96,7 @@ class SystemInfoController extends Omeka_Controller_AbstractActionController
 
     private function _addThemeInfo(&$info)
     {
-        $themes = Theme::getAvailable();
+        $themes = Theme::getAllThemes();
         $currentTheme = get_option('public_theme');
         $info['Themes'] = array();
 

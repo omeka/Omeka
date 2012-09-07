@@ -31,7 +31,7 @@ class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
     {
         set_option(Theme::PUBLIC_THEME_OPTION, self::THEME);
 
-        $theme = Theme::getAvailable(self::THEME);
+        $theme = Theme::getTheme(self::THEME);
         $name = $theme->title;
 
         $this->request->setParam('name', self::THEME);
