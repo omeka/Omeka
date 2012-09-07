@@ -22,5 +22,5 @@ before_script:
 
 script: cd application/tests && phpunit --coverage-text
 
-#notifications:
-  #irc: "irc.freenode.org#omeka"
+notifications:
+  email: false
