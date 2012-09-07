@@ -35,6 +35,14 @@ class Theme
     public $website;
     public $omeka_minimum_version;
     
+    public function __construct($themeName) 
+    {
+        $this->setDirectoryName($themeName);
+        $this->setImage(self::THEME_IMAGE_FILE_NAME);
+        $this->setIni(self::THEME_INI_FILE_NAME);
+        $this->setConfig(self::THEME_CONFIG_FILE_NAME);
+    }
+    
     public function setDirectoryName($dir)
     {
         // Define a hard theme path for the theme
@@ -133,34 +141,38 @@ class Theme
         return apply_filters($type . '_theme_name', get_option("{$type}_theme"));
     }
 
+
     /**
-     * Retrieve an available theme (or all themes).
+     * Retrieve all themes
      *
-     * @param string|null $themeName  The name of the theme.  If null, it returns all available themes.
-     * @return Theme|array A theme object or array of theme objects
+     * @return array An array of theme objects
      */
-    static public function getAvailable($themeName=null) 
+    static public function getAllThemes() 
     {
         /**
          * Create an array of themes, with the directory paths
          * theme.ini files and images paths if they are present
          */
-        if (!$themeName) {
-            $themes = array();
-            $iterator = new VersionedDirectoryIterator(PUBLIC_THEME_DIR);
-            $themeDirs = $iterator->getValid();
-            foreach ($themeDirs as $themeName) {
-                $themes[$themeName] = self::getAvailable($themeName);
-            }
-            return $themes;
-        } else {
-            $theme = new Theme();            
-            $theme->setDirectoryName($themeName);
-            $theme->setImage(self::THEME_IMAGE_FILE_NAME);
-            $theme->setIni(self::THEME_INI_FILE_NAME);
-            $theme->setConfig(self::THEME_CONFIG_FILE_NAME);
-            return $theme;
+        $themes = array();
+        $iterator = new VersionedDirectoryIterator(PUBLIC_THEME_DIR);
+        $themeDirs = $iterator->getValid();
+        foreach ($themeDirs as $themeName) {
+            $themes[$themeName] = self::getTheme($themeName);
         }
+        return $themes;
+    }
+
+
+    /**
+     * Retrieve a theme.
+     *
+     * @param string $themeName  The name of the theme.
+     * @return Theme A theme object
+     */
+    static public function getTheme($themeName) 
+    {
+        $theme = new Theme($themeName);     
+        return $theme;
     }
     
     /** 

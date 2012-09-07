@@ -18,7 +18,7 @@ class ThemesController extends Omeka_Controller_AbstractActionController
 {
     public function browseAction()
     {
-        $themes = apply_filters('browse_themes', Theme::getAvailable());
+        $themes = apply_filters('browse_themes', Theme::getAllThemes());
         $public = get_option(Theme::PUBLIC_THEME_OPTION);
         $this->view->themes = $themes;
         $this->view->current = $themes[$public];
@@ -39,7 +39,7 @@ class ThemesController extends Omeka_Controller_AbstractActionController
             return;
         }
 
-        $theme = Theme::getAvailable($themeName);
+        $theme = Theme::getTheme($themeName);
         $minVer = $theme->omeka_minimum_version;
         if (!empty($minVer) && version_compare(OMEKA_VERSION, $theme->omeka_minimum_version, '<')) {
             $this->_helper->flashMessenger(__('This theme requires a newer version of Omeka (%s).', $minVer), 'error');
@@ -70,7 +70,7 @@ class ThemesController extends Omeka_Controller_AbstractActionController
     {                      
         // get the theme name and theme object
         $themeName = $this->_getParam('name');
-        $theme = Theme::getAvailable($themeName);
+        $theme = Theme::getTheme($themeName);
         $themeOptions = Theme::getOptions($themeName);
         
         // get the configuration form        
