@@ -260,7 +260,7 @@ class Omeka_Plugin_Loader
         $loadCriteria = array(
             array(
                 'check' => !$this->hasPluginBootstrap($plugin),
-                'exception' => "'$pluginDirName' plugin directory does not contain a 'plugin.php' file."),
+                'exception' => "'$pluginDirName' has no valid bootstrap file."),
             array(
                 'check' => !$plugin->isInstalled(),
                 'exception' => "'$pluginDirName' has not been installed."),
@@ -294,9 +294,9 @@ class Omeka_Plugin_Loader
     }
                         
     /**
-     * Return whether a plugin has a plugin.php file.
+     * Check whether a plugin has a bootstrap file.
      * 
-     * @param string|Plugin $pluginDirName Plugin object or directory name.
+     * @param string|Plugin $pluginDirName
      * @return boolean
      */
     public function hasPluginBootstrap($pluginDirName)
@@ -305,20 +305,59 @@ class Omeka_Plugin_Loader
             $pluginDirName = $pluginDirName->getDirectoryName();
         }
         
-        return file_exists($this->getPluginFilePath($pluginDirName));
-    }
+        $pluginClassFilePath = $this->getPluginClassFilePath($pluginDirName);
         
+        // Check if the plugin.php file exists.
+        if (file_exists($this->getPluginFilePath($pluginDirName))) {
+            return true;
+        // Check if the valid plugin class exists.
+        } else if (file_exists($pluginClassFilePath)) {
+            require_once $pluginClassFilePath;
+            if (is_subclass_of($this->getPluginClassName($pluginDirName), 'Omeka_Plugin_AbstractPlugin')) {
+                return true;
+            } else {
+                return false;
+            }
+        // The plugin has no bootstrap.
+        } else {
+            return false;
+        }
+    }
+    
     /**
-     * Returns the path to the plugin.php file
+     * Return the valid plugin class name.
      * 
-     * @param string $pluginDirName Plugin directory name.
+     * @param string $pluginDirName
+     * @return string
+     */
+    public function getPluginClassName($pluginDirName)
+    {
+        return "{$pluginDirName}Plugin";
+    }
+    
+    /**
+     * Return the path to the plugin.php file.
+     * 
+     * @param string $pluginDirName
      * @return string
      */
     public function getPluginFilePath($pluginDirName)
     {
-        return $this->_basePath . '/' . $pluginDirName . '/' . 'plugin.php';
+        return "{$this->_basePath}/$pluginDirName/plugin.php";
     }
-        
+    
+    /**
+     * Return the path to the plugin class file.
+     * 
+     * @param string $pluginDirName
+     * @param string $pluginClassName
+     * @return string
+     */
+    public function getPluginClassFilePath($pluginDirName)
+    {
+        return "{$this->_basePath}/$pluginDirName/{$this->getPluginClassName($pluginDirName)}.php";
+    }
+    
     /**
      * Return a list of all the plugins that have been loaded (or attempted to
      * be loaded) thus far.
@@ -345,25 +384,33 @@ class Omeka_Plugin_Loader
     }
     
     /**
-     * Loads the plugin bootstrap (plugin.php) file for a plugin.
+     * Loads the plugin bootstrap file for a plugin.
      *
-     * @param Plugin $plugin Plugin to bootstrap.
+     * @param Plugin $plugin
      * @return void
      */
     protected function _loadPluginBootstrap(Plugin $plugin)
     {
         $pluginDirName = $plugin->getDirectoryName();
-        
-        // set the current plugin
         $this->_broker->setCurrentPluginDirName($pluginDirName);
-        $path = $this->getPluginFilePath($pluginDirName);
-        if ($plugin->getRequireOnce()) {
-            require_once $path;
+        
+        // Bootstrap plugin.php if it exists.
+        $pluginFilePath = $this->getPluginFilePath($pluginDirName);
+        if (file_exists($pluginFilePath)) {
+            if ($plugin->getRequireOnce()) {
+                require_once $pluginFilePath;
+            } else {
+                require $pluginFilePath;
+            }
+        // Otherwise bootstrap the plugin class.
         } else {
-            require $path;
+            require_once $this->getPluginClassFilePath($pluginDirName);
+            $pluginClassName = $this->getPluginClassName($pluginDirName);
+            $pluginClass = new $pluginClassName;
+            $pluginClass->setUp();
         }
-
-        // set the current plugin back to null
+        
+        // Reset the current plugin.
         $this->_broker->setCurrentPluginDirName(null);
     }
 }

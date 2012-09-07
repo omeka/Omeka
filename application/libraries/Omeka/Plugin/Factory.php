@@ -59,7 +59,7 @@ class Omeka_Plugin_Factory
     /**
      * Retrieve an array of all the plugins in the plugin directory.
      * A plugin is considered to be present when a directory includes a
-     * plugin.php file.
+     * plugin.php file or has a valid plugin class.
      *
      * @return array A list of valid plugin directory names.
      */

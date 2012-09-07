@@ -27,7 +27,7 @@
         $loadErrors[] = __('%1$s requires the following plugins to be installed, activated, and loaded: %2$s', html_escape($displayName), implode(', ', $missingPluginNames));
     endif;
     if (!$loader->hasPluginBootstrap($pluginDirName)):
-        $loadErrors[] = __('The plugin.php file is missing.');
+        $loadErrors[] = __('There is no valid bootstrap file.');
     endif;
         
     $cannotLoad = !empty($loadErrors);
