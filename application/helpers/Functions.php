@@ -116,6 +116,14 @@ function get_records($recordType, $params = array(), $limit = 10)
     return get_db()->getTable($recordType)->findBy($params, $limit);
 }
 
+/**
+ * Return an iterator used for looping an array of records.
+ * 
+ * @uses Omeka_View_Helper_LoopRecords
+ * @param string $recordsVar
+ * @param array|null $records
+ * @return Omeka_Record_Iterator
+ */
 function loop($recordsVar, $records = null)
 {
     return __v()->loopRecords($recordsVar, $records);
