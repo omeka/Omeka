@@ -128,7 +128,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
     public function showAction()
     {
         $dbHelper = $this->_helper->db;
-        $varName = strtolower($dbHelper->getDefaultModelName());
+        $varName = $this->view->singularize($dbHelper->getDefaultModelName());
 
         $record = $dbHelper->findById();
 
