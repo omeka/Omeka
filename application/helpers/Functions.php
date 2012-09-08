@@ -132,24 +132,20 @@ function loop($recordsVar, $records = null)
 /**
  * Set a record to the view as the current record.
  * 
+ * @uses Omeka_View_Helper_SetCurrentRecord
  * @param string $recordVar
  * @param Omeka_Record_AbstractRecord $record
  * @param bool $setPreviousRecord
  */
 function set_current_record($recordVar, Omeka_Record_AbstractRecord $record, $setPreviousRecord = false)
 {
-    $view = __v();
-    $recordVar = $view->singularize($recordVar);
-    if ($setPreviousRecord) {
-        $previousRecordVar = "previous_$recordVar";
-        $view->$previousRecordVar = $view->$recordVar;
-    }
-    $view->$recordVar = $record;
+    __v()->setCurrentRecord($recordVar, $record, $setPreviousRecord);
 }
 
 /**
  * Get the current record from the view.
  * 
+ * @uses Omeka_View_Helper_GetCurrentRecord
  * @throws Omeka_View_Exception
  * @param string $recordVar
  * @param bool $throwException
@@ -157,15 +153,7 @@ function set_current_record($recordVar, Omeka_Record_AbstractRecord $record, $se
  */
 function get_current_record($recordVar, $throwException = true)
 {
-    $view = __v();
-    $recordVar = $view->singularize($recordVar);
-    if (!$view->$recordVar) {
-        if ($throwException) {
-            throw new Omeka_View_Exception(__("A current %s has not been set to this view.", $recordVar));
-        }
-        return false;
-    }
-    return $view->$recordVar;
+    return __v()->getCurrentRecord($recordVar, $throwException);
 }
 
 /**
