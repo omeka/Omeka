@@ -71,40 +71,6 @@ function get_collection_for_item($item=null)
 }
 
 /**
- * Retrieve the set of collections that are being looped.
- *
- * @since 0.10
- * @return array
- */
-function get_collections_for_loop()
-{
-    return __v()->collections;
-}
-
-/**
- * Determine whether there are any collections to loop through.
- *
- * @since 1.0
- * @see has_items_for_loop()
- * @return boolean
- */
-function has_collections_for_loop()
-{
-    $view = __v();
-    return $view->collections && count($view->collections);
-}
-
-/**
- * @since 0.10
- * @param array $collections Set of Collection records to loop.
- * @return void
- */
-function set_collections_for_loop($collections)
-{
-    __v()->collections = $collections;
-}
-
-/**
  * Retrieve the total number of items in the current collection.
  *
  * @since 0.10

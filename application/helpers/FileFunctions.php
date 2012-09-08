@@ -73,33 +73,3 @@ function recent_files($num = 10)
 {
     return get_records('File', array('sort_field' => 'added', 'sort_dir' => 'd'), $num);
 }
-
-/**
- * @since 1.1
- * @param array $files Set of File records to loop.
- */
-function set_files_for_loop($files)
-{
-    __v()->files = $files;
-}
-
-/**
- * Retrieve the set of files for the current loop.
- *
- * @since 1.1
- * @return array
- */
-function get_files_for_loop()
-{
-    return __v()->files;
-}
-
-/**
- * @since 1.1
- * @return boolean
- */
-function has_files_for_loop()
-{
-    $view = __v();
-    return ($view->files and count($view->files));
-}

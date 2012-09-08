@@ -14,7 +14,7 @@ class Omeka_View_Helper_GetCurrentRecord extends Zend_View_Helper_Abstract
         $recordVar = $this->view->singularize($recordVar);
         if (!$this->view->$recordVar) {
             if ($throwException) {
-                throw new Omeka_View_Exception(__("A current %s has not been set to this view.", $recordVar));
+                throw new Omeka_View_Exception(__("A current %s variable has not been set to this view.", $recordVar));
             }
             return false;
         }

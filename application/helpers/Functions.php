@@ -130,6 +130,39 @@ function loop($recordsVar, $records = null)
 }
 
 /**
+ * Set records to the view for iteration.
+ * 
+ * @param string $recordsVar
+ * @param array $records
+ */
+function set_loop_records($recordsVar, array $records)
+{
+    __v()->setLoopRecords($recordsVar, $records);
+}
+
+/**
+ * Get records from the view for iteration.
+ * 
+ * @param string $recordsVar
+ * @return array|null
+ */
+function get_loop_records($recordsVar, $throwException = true)
+{
+    return __v()->getLoopRecords($recordsVar, $throwException);
+}
+
+/**
+ * Check if records have been set to the view for iteration.
+ * 
+ * @param string $recordsVar
+ * @return bool
+ */
+function has_loop_records($recordsVar)
+{
+    return (bool) __v()->getLoopRecords($recordsVar, false);
+}
+
+/**
  * Set a record to the view as the current record.
  * 
  * @uses Omeka_View_Helper_SetCurrentRecord
