@@ -45,24 +45,6 @@ function display_random_featured_item($withImage = null)
 }
 
 /**
- * Retrieve an Item object directly by its ID.
- *
- * Example of usage on a public theme page:
- *
- * $item = get_item_by_id(4);
- * set_current_record('item', $item, true);
- * echo metadata('item', array('Dublin Core', 'Title'));
- *
- * @since 0.10
- * @param integer $itemId
- * @return Item|null
- */
-function get_item_by_id($itemId)
-{
-    return get_db()->getTable('Item')->find($itemId);
-}
-
-/**
  * Retrieve the next item in the database.
  *
  * @todo Should this look for the next item in the loop, or just via the database?

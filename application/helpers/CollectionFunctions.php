@@ -42,17 +42,6 @@ function display_random_featured_collection()
 }
 
 /**
- * @since 0.10
- * @see get_item_by_id()
- * @param integer
- * @return Collection|null
- */
-function get_collection_by_id($collectionId)
-{
-    return get_db()->getTable('Collection')->find($collectionId);
-}
-
-/**
  * Retrieve the Collection object for the current item.
  *
  * @since 0.10

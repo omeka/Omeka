@@ -24,7 +24,7 @@ if (!$isPartial):
             $itemCheckboxes = array();
             $excludedItems = false;
             foreach ($itemIds as $id) {
-                if (!($item = get_item_by_id($id))) {
+                if (!($item = get_record_by_id('item', $id))) {
                     continue;
                 }
                 

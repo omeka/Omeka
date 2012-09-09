@@ -190,6 +190,18 @@ function get_current_record($recordVar, $throwException = true)
 }
 
 /**
+ * Get a record by its ID.
+ * 
+ * @param string $recordVar
+ * @param int $recordId
+ * @return Omeka_Record_AbstractRecord|null
+ */
+function get_record_by_id($recordVar, $recordId)
+{
+    return __v()->getRecordById($recordVar, $recordId);
+}
+
+/**
  * Get all output formats available in the current action.
  *
  * @return array A sorted list of contexts.
