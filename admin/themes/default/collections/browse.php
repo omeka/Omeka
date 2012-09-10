@@ -68,7 +68,7 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
     
     <?php else: ?>
 
-        <h2><?php echo __('There are no collections in your system.'); ?></h2>
+        <h2><?php echo __('You have no collections.'); ?></h2>
         <?php if(has_permission('Collections', 'add')): ?>
             <p><?php echo __('Get started by adding your first collection.'); ?></p>
             <a href="<?php echo html_escape(uri('collections/add')); ?>" class="add big green button"><?php echo __('Add a collection'); ?></a>
