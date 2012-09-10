@@ -39,7 +39,6 @@ head(array('title'=>$pageTitle,'content_class' => 'vertical-nav', 'bodyclass'=>'
                                 );?>
                             </div>                        
                         </div>
-                        <?php include 'tag-form.php'; ?>
                     </div>
                                     
         </form>
