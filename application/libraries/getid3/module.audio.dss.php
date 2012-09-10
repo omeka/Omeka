@@ -1,51 +1,45 @@
 <?php
-// +----------------------------------------------------------------------+
-// | PHP version 5                                                        |
-// +----------------------------------------------------------------------+
-// | Copyright (c) 2002-2009 James Heinrich, Allan Hansen                 |
-// +----------------------------------------------------------------------+
-// | This source file is subject to version 2 of the GPL license,         |
-// | that is bundled with this package in the file license.txt and is     |
-// | available through the world-wide-web at the following url:           |
-// | http://www.gnu.org/copyleft/gpl.html                                 |
-// +----------------------------------------------------------------------+
-// | getID3() - http://getid3.sourceforge.net or http://www.getid3.org    |
-// +----------------------------------------------------------------------+
-// | Authors: James Heinrich <infoØgetid3*org>                            |
-// |          Allan Hansen <ahØartemis*dk>                                |
-// +----------------------------------------------------------------------+
-// | module.audio.dss.php                                                 |
-// | module for analyzing Digital Speech Standard (DSS) files             |
-// | dependencies: NONE                                                   |
-// +----------------------------------------------------------------------+
+/////////////////////////////////////////////////////////////////
+/// getID3() by James Heinrich <info@getid3.org>               //
+//  available at http://getid3.sourceforge.net                 //
+//            or http://www.getid3.org                         //
+/////////////////////////////////////////////////////////////////
+// See readme.txt for more details                             //
+/////////////////////////////////////////////////////////////////
+//                                                             //
+// module.audio.dss.php                                        //
+// module for analyzing Digital Speech Standard (DSS) files    //
+// dependencies: NONE                                          //
+//                                                            ///
+/////////////////////////////////////////////////////////////////
 
 
 class getid3_dss extends getid3_handler
 {
 
-    public function Analyze() {
+	function Analyze() {
+		$info = &$this->getid3->info;
 
-        $getid3 = $this->getid3;
+		fseek($this->getid3->fp, $info['avdataoffset'], SEEK_SET);
+		$DSSheader  = fread($this->getid3->fp, 1256);
 
-		fseek($getid3->fp, $getid3->info['avdataoffset'], SEEK_SET);
-		$DSSheader  = fread($getid3->fp, 1256);
-
-		if (substr($DSSheader, 0, 4) != "\x02".'dss') {
-			$getid3->info['error'][] = 'Expecting "[x02]dss" at offset '.$getid3->info['avdataoffset'].', found "'.substr($DSSheader, 0, 4).'"';
+		if (!preg_match('#^(\x02|\x03)dss#', $DSSheader)) {
+			$info['error'][] = 'Expecting "[02-03] 64 73 73" at offset '.$info['avdataoffset'].', found "'.getid3_lib::PrintHexBytes(substr($DSSheader, 0, 4)).'"';
 			return false;
 		}
 
 		// some structure information taken from http://cpansearch.perl.org/src/RGIBSON/Audio-DSS-0.02/lib/Audio/DSS.pm
 
 		// shortcut
-		$getid3->info['dss'] = array();
-		$thisfile_dss        = &$getid3->info['dss'];
+		$info['dss'] = array();
+		$thisfile_dss        = &$info['dss'];
 
-		$getid3->info['fileformat']            = 'dss';
-		$getid3->info['audio']['dataformat']   = 'dss';
-		$getid3->info['audio']['bitrate_mode'] = 'cbr';
+		$info['fileformat']            = 'dss';
+		$info['audio']['dataformat']   = 'dss';
+		$info['audio']['bitrate_mode'] = 'cbr';
 		//$thisfile_dss['encoding']              = 'ISO-8859-1';
 
+		$thisfile_dss['version']        =                            ord(substr($DSSheader,   0,   1));
 		$thisfile_dss['date_create']    = $this->DSSdateStringToUnixDate(substr($DSSheader,  38,  12));
 		$thisfile_dss['date_complete']  = $this->DSSdateStringToUnixDate(substr($DSSheader,  50,  12));
 		//$thisfile_dss['length']         =                         intval(substr($DSSheader,  62,   6)); // I thought time was in seconds, it's actually HHMMSS
@@ -54,12 +48,12 @@ class getid3_dss extends getid3_handler
 		$thisfile_dss['comments']       =                           trim(substr($DSSheader, 798, 100));
 
 
-		//$getid3->info['audio']['bits_per_sample']  = ?;
-		//$getid3->info['audio']['sample_rate']      = ?;
-		$getid3->info['audio']['channels']     = 1;
+		//$info['audio']['bits_per_sample']  = ?;
+		//$info['audio']['sample_rate']      = ?;
+		$info['audio']['channels']     = 1;
 
-		$getid3->info['playtime_seconds'] = $thisfile_dss['length'];
-		$getid3->info['audio']['bitrate'] = ($getid3->info['filesize'] * 8) / $getid3->info['playtime_seconds'];
+		$info['playtime_seconds'] = $thisfile_dss['length'];
+		$info['audio']['bitrate'] = ($info['filesize'] * 8) / $info['playtime_seconds'];
 
 		return true;
 	}
@@ -76,5 +70,6 @@ class getid3_dss extends getid3_handler
 	}
 
 }
+
 
 ?>
