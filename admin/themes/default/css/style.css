@@ -8,7 +8,7 @@
         #Alerts
     #Global Navigation
     #Content Navigation
-    #Save Panel
+    #Edit and Save Panels
     #Content
         #Dashboard
         #Browse Plugins
@@ -714,7 +714,7 @@ header nav {
         text-align: center;
     }
 
-/* Save Panel
+/* Edit and Save Panels
 ================================================== */
 
 #save, #edit {
@@ -780,6 +780,8 @@ header nav {
 #add-tags-explanation {
     margin: 0 0 10px 0;
 }
+
+#edit .pagination { margin: 0; }
     
 /* General Content  
 ================================================== */
@@ -821,11 +823,11 @@ header nav {
     }
     
     .panel h1, .panel h2, .panel h3, .panel h4 {
-        margin-top: 0;
+        margin: 0;
     }    
         
     .panel ul {
-        padding: 0 0 0 30px;
+        padding: 0 0 0 20px;
     }
     
         
@@ -1187,6 +1189,7 @@ header nav {
 .admin-thumb {
     width: 100px;
     box-shadow: 0 0 3px rgba(0,0,0,.15);
+    padding: 10px;
 }
 
 .element {
@@ -1208,9 +1211,24 @@ header nav {
     padding: 7px 0;
 }
 
+.item-file {
+    display: inline-block;
+    margin: 0 10px 0 0;
+}
+
 #item-images {
     margin: 0 0 20px 0;
 }
+
+.public-featured { }
+
+    .public-featured p {
+        display: inline-block;
+        margin: 0 5px 10px 0;
+        text-align: center;
+    }
+    
+    .public-featured .label { font-weight: bold; }
 
 /* Batch Edit Items
 ================================================== */
@@ -1522,32 +1540,24 @@ button.remove_search {
     margin: 20px 0;
 }
 
-
-
 /* Show Collections
 ================================================== */
 
-.collections.show #content ul {
+.collections.show .recent-items {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
     
-    .collections.show #content li {
+    .collections.show .recent-items li {
         border-bottom: 1px solid #cccccc;
         padding: 10px 0;
     }
         
-        .collections.show #content li:last-child {
+        .collections.show .recent-items li:last-child {
             border-bottom: 0;
         }
 
-
-/* Edit Collection
-================================================== */
-
-
-            
 /* Browse Item Types
 ================================================== */
 

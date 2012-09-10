@@ -35,6 +35,11 @@
         <a href="<?php echo html_escape(public_uri('items/show/'.metadata('item', 'id'))); ?>" class="big blue button" target="_blank">View Public Page</a>
         <?php echo link_to_item(__('Delete this Item'), array('class' => 'delete-confirm big red button'), 'delete-confirm'); ?>
     </div>
+    
+    <div class="public-featured panel">
+        <p><span class="label"><?php echo __('Public'); ?>:</span> <?php echo ($item->public) ? __('Yes') : __('No'); ?></p>
+        <p><span class="label"><?php echo __('Featured'); ?>:</span> <?php echo ($item->featured) ? __('Yes') : __('No'); ?></p>
+    </div>
 
     <div class="info panel">
         <h4><?php echo __('Bibliographic Citation'); ?></h4>
@@ -42,7 +47,7 @@
             <p><?php echo item_citation();?></p>
         </div>
     </div>
-    
+
     <div class="collection panel">
         <h4><?php echo __('Collection'); ?></h4>
         <div>
@@ -50,16 +55,16 @@
         </div>
     </div>
 
-    <div class="panel">
-        <div id="tags" class="info-panel">
+    <?php if(item_has_tags()): ?>
+    <div class="tags panel">
             <h4><?php echo __('Tags'); ?></h4>
             <div id="tag-cloud">
                 <?php common('tag-list', compact('item'), 'items'); ?>
             </div>
-        </div>
       </div>
+    <?php endif; ?>
     
-    <div class="panel">
+    <div class="file-metadata panel">
         <h4><?php echo __('View File Metadata'); ?></h4>
             <div id="file-list">
                 <?php if(!item_has_files()):?>
@@ -89,7 +94,7 @@
     <?php echo flash(); ?>            
         <?php if(item_has_files()): ?>
         <div id="item-images">
-        <?php echo display_files_for_item(array('imageSize' => 'square_thumbnail', 'imgAttributes' => array('class' => 'admin-thumb'))); ?> 
+        <?php echo display_files_for_item(array('imageSize' => 'square_thumbnail', 'imgAttributes' => array('class' => 'admin-thumb panel'))); ?> 
         </div>
         <?php endif; ?>
     <?php echo show_item_metadata(); ?>
