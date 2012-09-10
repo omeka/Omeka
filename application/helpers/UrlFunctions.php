@@ -112,33 +112,16 @@ function file_display_uri(File $file, $format='fullsize')
 }
 
 /**
- * Given an Omeka_Record_AbstractRecord instance and the name of an action, this 
- * will generate the URI for that record. Used primarily by other theme helpers 
- * and most likely not useful for theme writers.
+ * Return a URL to a record.
  *
- * @since 0.10
- * @uses Omeka_Record_AbstractRecord::getRecordUrl()
- * @param Omeka_Record_AbstractRecord $record
+ * @uses Omeka_View_Helper_GetRecordUrl::getRecordUrl()
+ * @param Omeka_Record_AbstractRecord|string $record
  * @param string $action
- * @param string|null $controller Optional
  * @return string
  */
-function record_uri(Omeka_Record_AbstractRecord $record, $action)
+function record_uri($record, $action)
 {
-    $url = $record->getRecordUrl($action);
-    if (is_string($url)) {
-        return $url;
-    } else if (is_array($url)) {
-        // Use the 'id' route for urls pointing to records, but not when a 
-        // module is specified. 
-        if (isset($url['id']) && !isset($url['module'])) {
-            $route = 'id';
-        } else {
-            $route = 'default';
-        }
-        return uri($url, $route);
-    }
-    return '';
+    return __v()->getRecordUrl($record, $action);
 }
 
 /**
