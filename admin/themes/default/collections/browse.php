@@ -14,7 +14,6 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
             <thead>
                 <tr>
                 <?php browse_headings(array(
-                    __('ID') => 'id',
                     __('Name') => 'name',
                     __('Collectors') => null,
                     __('Date Added') => 'added',
@@ -26,7 +25,6 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
                 <?php $key = 0;?>
         <?php foreach (loop('Collection') as $collection): ?>
             <tr class="collection<?php if(++$key%2==1) echo ' odd'; else echo ' even'; ?>">
-                <td scope="row"><?php echo metadata('collection', 'id');?></td> 
                 <td class="title<?php if ($collection->featured) { echo ' featured';} ?>">
                     <?php echo link_to_collection(); ?>
                     <?php if(!$collection->public): ?>
