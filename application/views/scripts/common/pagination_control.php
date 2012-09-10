@@ -4,7 +4,7 @@
     <?php if ($this->first != $this->current): ?>
     <!-- First page link --> 
     <li class="pagination_first">
-    <a href="<?php echo current_uri(); ?>"><?php echo __('First'); ?></a>
+    <a href="<?php echo html_escape($this->url(array('page' => $this->first), null, $_GET)); ?>"><?php echo __('First'); ?></a>
     </li>
     <?php endif; ?>
     
