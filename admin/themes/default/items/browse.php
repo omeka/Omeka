@@ -4,9 +4,11 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
 
             <?php echo flash(); ?>
 
-            <div class="seven columns alpha">
-                <?php display_search_filters(); ?>
-            </div>
+            <?php if(display_search_filters()): ?>
+                <div class="seven columns alpha">
+                    <?php display_search_filters(); ?>
+                </div>
+            <?php endif; ?>
 
             <?php if ( total_results() ): ?>
             <script type="text/javascript">
@@ -93,7 +95,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
 
                 <div class="item-actions batch-edit-option fourteen columns alpha">
                     <?php if (has_permission('Items', 'add')): ?>
-                    <a href="<?php echo html_escape(uri('items/add')); ?>" class="add-item button small green"><?php echo __('Add an Item'); ?></a>
+                    <a href="<?php echo html_escape(uri('items/add')); ?>" class="add button small green"><?php echo __('Add an Item'); ?></a>
                     <?php endif; ?>
                     <?php echo link_to_advanced_search(__('Advanced Search'), array('id' => 'advanced-search-link', 'class' => 'small blue button')); ?>
                     <?php if (has_permission('Items', 'edit')): ?>
@@ -166,7 +168,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
             
                 <div class="item-actions batch-edit-option">
                     <?php if (has_permission('Items', 'add')): ?>
-                    <a href="<?php echo html_escape(uri('items/add')); ?>" class="add-item button small green"><?php echo __('Add an Item'); ?></a>
+                    <a href="<?php echo html_escape(uri('items/add')); ?>" class="add button small green"><?php echo __('Add an Item'); ?></a>
                     <?php endif; ?>
                     <?php echo link_to_advanced_search(__('Advanced Search'), array('id' => 'advanced-search-link', 'class' => 'small blue button')); ?>
                     <?php if (has_permission('Items', 'edit')): ?>
@@ -193,7 +195,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                     
                     <p><?php echo __('Get started by adding your first item.'); ?></p>
                     
-                            <a href="<?php echo html_escape(uri('items/add')); ?>" class="add-item big green button"><?php echo __('Add an Item'); ?></a>
+                            <a href="<?php echo html_escape(uri('items/add')); ?>" class="add big green button"><?php echo __('Add an Item'); ?></a>
                     <?php endif; ?>
 
                 <?php else: ?>
