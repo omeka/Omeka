@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%files` (
   `modified` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `added` timestamp NOT NULL default '0000-00-00 00:00:00',
   `stored` tinyint(1) NOT NULL default '0',
+  `metadata` text collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `item_id` (`item_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
