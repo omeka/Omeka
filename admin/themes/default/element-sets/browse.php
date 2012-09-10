@@ -13,7 +13,7 @@ $doNotDelete = array('Dublin Core', 'Item Type Metadata', 'Omeka Image File', 'O
         </tr>
     </thead>
     <tbody>
-    <?php foreach ($elementsets as $elementSet): ?>
+    <?php foreach (loop('element_sets') as $elementSet): ?>
         <tr>
             <td class="element-set-name">
                 <?php echo html_escape(__($elementSet->name)); ?>
