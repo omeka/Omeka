@@ -34,16 +34,6 @@ class Table_Element extends Omeka_Db_Table
         return $this->fetchObjects($select);
     }
     
-    public function findForFilesByMimeType($mimeType = null)
-    {
-        $db = $this->getDb(); 
-        $sqlMimeTypeElements = $this->getSelect()
-        ->joinInner(array('mime_element_set_lookup' => $db->MimeElementSetLookup), 'mime_element_set_lookup.element_set_id = element_sets.id', array())
-        ->where('mime_element_set_lookup.mime = ?', $mimeType);
-        
-        return $this->fetchObjects($sqlMimeTypeElements);        
-    }
-    
     /**
      * Overriding getSelect() to always return the type_name and type_regex
      * for retrieved elements.

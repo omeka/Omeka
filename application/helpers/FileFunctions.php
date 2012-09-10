@@ -59,8 +59,11 @@ function show_file_metadata(array $options = array(), $file = null)
     if (!$file) {
         $file = get_current_record('file');
     }
-    return __v()->fileMetadataList($file, $options);
+    $helper = new Omeka_View_Helper_FileMetadata;
+    return $helper->display($file, $options);
 }
+
+
 
 /**
  * Returns the most recent files
