@@ -56,11 +56,25 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
         <?php endforeach; ?>
         </tbody>
         </table>
+
+        <?php if (has_permission('Collections', 'add')): ?>
+            <a href="<?php echo html_escape(uri('collections/add')); ?>" class="small green button"><?php echo __('Add a Collection'); ?></a>
+        <?php endif; ?>
+
       <?php else: ?>
+      
         <p><?php echo __('There are no collections on this page.'); ?> <?php echo link_to('collections', null, __('View All Collections')); ?></p>
+      
       <?php endif; ?> 
+    
     <?php else: ?>
-        <p><?php echo __('There are no collections in your system.'); ?> <?php if (has_permission('Collections', 'add')): ?><?php link_to('collections', 'add', __('Add a collection.')); ?><?php endif; ?></p>
+
+        <h2><?php echo __('There are no collections in your system.'); ?></h2>
+        <?php if(has_permission('Collections', 'add')): ?>
+            <p><?php echo __('Get started by adding your first collection.'); ?></p>
+            <a href="<?php echo html_escape(uri('collections/add')); ?>" class="add-collection big green button"><?php echo __('Add a collection.'); ?></a>
+        <?php endif; ?>
+
     <?php endif; ?>
     
     <?php fire_plugin_hook('admin_append_to_collections_browse_primary', array('collections' => $collections, 'view' => $this)); ?>

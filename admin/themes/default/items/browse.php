@@ -186,12 +186,12 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
             <?php else: ?>
 
                 <?php if (total_items() === 0): ?>
-                
-                <h2><?php echo __('You have no items.'); ?></h2>
+
+                    <h2><?php echo __('You have no items.'); ?></h2>
                 
                     <?php if(has_permission('Items', 'add')): ?>
                     
-                    <p>Get started by adding your first item.</p>
+                    <p><?php echo __('Get started by adding your first item.'); ?></p>
                     
                             <a href="<?php echo html_escape(uri('items/add')); ?>" class="add-item big green button"><?php echo __('Add an Item'); ?></a>
                     <?php endif; ?>
