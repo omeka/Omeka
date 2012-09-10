@@ -130,26 +130,55 @@ function loop($recordsVar, $records = null)
 }
 
 /**
+ * Set records to the view for iteration.
+ * 
+ * @param string $recordsVar
+ * @param array $records
+ */
+function set_loop_records($recordsVar, array $records)
+{
+    __v()->setLoopRecords($recordsVar, $records);
+}
+
+/**
+ * Get records from the view for iteration.
+ * 
+ * @param string $recordsVar
+ * @return array|null
+ */
+function get_loop_records($recordsVar, $throwException = true)
+{
+    return __v()->getLoopRecords($recordsVar, $throwException);
+}
+
+/**
+ * Check if records have been set to the view for iteration.
+ * 
+ * @param string $recordsVar
+ * @return bool
+ */
+function has_loop_records($recordsVar)
+{
+    return (bool) __v()->getLoopRecords($recordsVar, false);
+}
+
+/**
  * Set a record to the view as the current record.
  * 
+ * @uses Omeka_View_Helper_SetCurrentRecord
  * @param string $recordVar
  * @param Omeka_Record_AbstractRecord $record
  * @param bool $setPreviousRecord
  */
 function set_current_record($recordVar, Omeka_Record_AbstractRecord $record, $setPreviousRecord = false)
 {
-    $view = __v();
-    $recordVar = $view->singularize($recordVar);
-    if ($setPreviousRecord) {
-        $previousRecordVar = "previous_$recordVar";
-        $view->$previousRecordVar = $view->$recordVar;
-    }
-    $view->$recordVar = $record;
+    __v()->setCurrentRecord($recordVar, $record, $setPreviousRecord);
 }
 
 /**
  * Get the current record from the view.
  * 
+ * @uses Omeka_View_Helper_GetCurrentRecord
  * @throws Omeka_View_Exception
  * @param string $recordVar
  * @param bool $throwException
@@ -157,15 +186,19 @@ function set_current_record($recordVar, Omeka_Record_AbstractRecord $record, $se
  */
 function get_current_record($recordVar, $throwException = true)
 {
-    $view = __v();
-    $recordVar = $view->singularize($recordVar);
-    if (!$view->$recordVar) {
-        if ($throwException) {
-            throw new Omeka_View_Exception(__("A current %s has not been set to this view.", $recordVar));
-        }
-        return false;
-    }
-    return $view->$recordVar;
+    return __v()->getCurrentRecord($recordVar, $throwException);
+}
+
+/**
+ * Get a record by its ID.
+ * 
+ * @param string $recordVar
+ * @param int $recordId
+ * @return Omeka_Record_AbstractRecord|null
+ */
+function get_record_by_id($recordVar, $recordId)
+{
+    return __v()->getRecordById($recordVar, $recordId);
 }
 
 /**

@@ -45,35 +45,6 @@ function display_random_featured_item($withImage = null)
 }
 
 /**
- * Retrieve an Item object directly by its ID.
- *
- * Example of usage on a public theme page:
- *
- * $item = get_item_by_id(4);
- * set_current_record('item', $item, true);
- * echo metadata('item', array('Dublin Core', 'Title'));
- *
- * @since 0.10
- * @param integer $itemId
- * @return Item|null
- */
-function get_item_by_id($itemId)
-{
-    return get_db()->getTable('Item')->find($itemId);
-}
-
-/**
- * Retrieve the set of items for the current loop.
- *
- * @since 0.10
- * @return array
- */
-function get_items_for_loop()
-{
-    return __v()->items;
-}
-
-/**
  * Retrieve the next item in the database.
  *
  * @todo Should this look for the next item in the loop, or just via the database?
@@ -101,16 +72,6 @@ function get_previous_item($item=null)
         $item = get_current_record('item');
     }
     return $item->previous();
-}
-
-/**
- * @since 0.10
- * @return boolean
- */
-function has_items_for_loop()
-{
-    $view = __v();
-    return ($view->items and count($view->items));
 }
 
 /**
@@ -357,16 +318,6 @@ function item_square_thumbnail($props = array(), $index = 0, $item = null)
 function item_thumbnail($props = array(), $index = 0, $item = null)
 {
     return item_image('thumbnail', $props, $index, $item);
-}
-
-/**
- * @since 0.10
- * @param array $items
- */
-function set_items_for_loop($items)
-{
-    $view = __v();
-    $view->items = $items;
 }
 
 /**

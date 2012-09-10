@@ -1661,3 +1661,19 @@ button.remove_search {
 ================================================== */
 
 #info-field { word-wrap: break-word; }
+
+
+/* Errors
+================================================== */
+
+#error-message dd { margin: 0; }
+
+#backtrace {
+    background-color: white;
+    box-shadow: 0 0 1px #999;
+        -webkit-box-shadow: 0 0 1px #999;
+        -moz-box-shadow: 0 0 1px #999;
+        -o-box-shadow: 0 0 1px #999;
+    padding: 10px;
+    word-break: break-word;
+}

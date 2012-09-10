@@ -42,17 +42,6 @@ function display_random_featured_collection()
 }
 
 /**
- * @since 0.10
- * @see get_item_by_id()
- * @param integer
- * @return Collection|null
- */
-function get_collection_by_id($collectionId)
-{
-    return get_db()->getTable('Collection')->find($collectionId);
-}
-
-/**
  * Retrieve the Collection object for the current item.
  *
  * @since 0.10
@@ -68,40 +57,6 @@ function get_collection_for_item($item=null)
         $item = get_current_record('item');
     }
     return $item->Collection;
-}
-
-/**
- * Retrieve the set of collections that are being looped.
- *
- * @since 0.10
- * @return array
- */
-function get_collections_for_loop()
-{
-    return __v()->collections;
-}
-
-/**
- * Determine whether there are any collections to loop through.
- *
- * @since 1.0
- * @see has_items_for_loop()
- * @return boolean
- */
-function has_collections_for_loop()
-{
-    $view = __v();
-    return $view->collections && count($view->collections);
-}
-
-/**
- * @since 0.10
- * @param array $collections Set of Collection records to loop.
- * @return void
- */
-function set_collections_for_loop($collections)
-{
-    __v()->collections = $collections;
 }
 
 /**

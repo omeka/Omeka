@@ -9,12 +9,11 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
     <?php echo flash(); ?>
     <?php if (total_collections() > 0): ?>
         <div class="pagination"><?php echo pagination_links(); ?></div>
-      <?php if (has_collections_for_loop()): ?>
+      <?php if (has_loop_records('collections')): ?>
         <table id="collections" class="full" cellspacing="0" cellpadding="0">
             <thead>
                 <tr>
                 <?php browse_headings(array(
-                    __('ID') => 'id',
                     __('Name') => 'name',
                     __('Collectors') => null,
                     __('Date Added') => 'added',
@@ -26,7 +25,6 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
                 <?php $key = 0;?>
         <?php foreach (loop('Collection') as $collection): ?>
             <tr class="collection<?php if(++$key%2==1) echo ' odd'; else echo ' even'; ?>">
-                <td scope="row"><?php echo metadata('collection', 'id');?></td> 
                 <td class="title<?php if ($collection->featured) { echo ' featured';} ?>">
                     <?php echo link_to_collection(); ?>
                     <?php if(!$collection->public): ?>

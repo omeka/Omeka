@@ -82,8 +82,7 @@ class Omeka_Navigation extends Zend_Navigation
                     'Zend_Navigation_Page_Mvc or Omeka_Navigation_Page_Uri');
         }
                 
-        $page->uid = $this->createPageUid($page->getLabel(), $page->getHref());        
-        
+        $page->uid = $this->createPageUid($page->getHref());
         if (!($fPage = $this->findByUid($page->uid))) {
             return parent::addPage($page);
         }
@@ -144,7 +143,7 @@ class Omeka_Navigation extends Zend_Navigation
                 $page->setLabel($label);
                 
                 // if the navigation does not have the page, then add it
-                $pUid = $this->createPageUid($page->getLabel(), $page->getHref());
+                $pUid = $this->createPageUid($page->getHref());
                 $pageUids[] = $pUid; // gather the uids of pages offered by filters
                 
                 if (!($fPage = $this->getPageByUid($pUid))) {                    
@@ -182,17 +181,14 @@ class Omeka_Navigation extends Zend_Navigation
     }
     
     /**
-     * Returns the unique id for the page, which can be used to determine whether it can be added to the navigaton
-     * It is based on the href (and not just the uri) because the href has the fragment included.
-     * It is also based on the label of the link.
+     * Returns the unique id for the page, which can be used to determine whether it can be added to the navigation
      *
-     * @param String $label
      * @param String $href
      * @return String
      */
-    public function createPageUid($label, $href) 
+    public function createPageUid($href) 
     {
-        return $href. '|' . $label;
+        return $href;
     }
     
     /**

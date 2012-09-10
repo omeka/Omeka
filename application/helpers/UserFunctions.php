@@ -9,17 +9,6 @@
  */
 
 /**
- * @since 0.10
- * @see get_item_by_id()
- * @param integer
- * @return User|null
- */
-function get_user_by_id($userId)
-{
-    return get_db()->getTable('User')->find($userId);
-}
-
-/**
  * Check the ACL to determine whether the current user has proper permissions.
  *
  * <code>has_permission('Items', 'showNotPublic')</code>

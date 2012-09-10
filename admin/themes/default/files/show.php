@@ -11,7 +11,7 @@
 <?php head(array('title' => $fileTitle, 'bodyclass'=>'files show primary-secondary')); ?>
 
 
-<div id="save" class="three columns omega">
+<div id="edit" class="three columns omega">
 
     <?php if (has_permission('Files', 'edit') or $file->getItem()->wasAddedBy(current_user())): ?>    
     <div class="panel">

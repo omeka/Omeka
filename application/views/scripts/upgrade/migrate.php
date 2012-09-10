@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en-us">
-<head>
-    <meta charset="utf-8">
-    <title><?php echo __('Upgrade Omeka'); ?></title>
-    <link rel="stylesheet" media="all" href="<?php echo html_escape(css('style')); ?>">
-</head>
-<body id="upgrade">
-    <div id="content">
-<?php if(!$success): ?>
+<?php
+$pageTitle = __('Upgrade Omeka');
+head(array('title' => $pageTitle));
+?><?php if(!$success): ?>
     <h1><?php echo __('Omeka encountered an error when upgrading your installation.'); ?></h1>
     <p class="error_text"><?php echo html_escape($error); ?></p>
     <?php if ($debugMode): ?>

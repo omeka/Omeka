@@ -15,8 +15,8 @@ head(array('bodyclass'=>'error404 primary', 'title'=> $pageTitle)); ?>
         <h2><?php echo __('Recent Items'); ?></h2>
         <ul class="items">
             <?php 
-            set_items_for_loop(recent_items('10'));
-            if (has_items_for_loop()): foreach (loop('items') as $item): ?>
+            set_loop_records('items', recent_items('10'));
+            if (has_loop_records('items')): foreach (loop('items') as $item): ?>
             <li class="item"><?php echo link_to_item(); ?></li>
             <?php endforeach; endif; ?>
         </ul>
@@ -25,8 +25,8 @@ head(array('bodyclass'=>'error404 primary', 'title'=> $pageTitle)); ?>
         <h2><?php echo __('Recent Collections'); ?></h2>
         <ul class="collections">
             <?php 
-            set_collections_for_loop(recent_collections('5'));
-            if(has_collections_for_loop()): foreach (loop($collection) as $collection):?>
+            set_loop_records('collections', recent_collections('5'));
+            if (has_loop_records('collections')): foreach (loop($collection) as $collection):?>
             <li class="collection"><?php echo link_to_collection(); ?></li>
             <?php endforeach; endif; ?>
         </ul>

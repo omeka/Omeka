@@ -38,7 +38,7 @@ head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?>
                     <?php
                         
                         $collections = recent_collections(5);
-                        set_collections_for_loop($collections);
+                        set_loop_records('collections', $collections);
                         
                         foreach (loop('collections') as $collection):
                             echo '<div class="recent-row">';
@@ -60,7 +60,7 @@ head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?>
                     <?php 
                      
                         $items = recent_items(5); 
-                        set_items_for_loop($items);
+                        set_loop_records('items', $items);
                      
                         foreach (loop('items') as $item):
                             echo '<div class="recent-row">';
