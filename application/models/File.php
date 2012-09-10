@@ -306,14 +306,28 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     {
         if (!is_readable($this->getPath('original'))) {
             throw new Exception('Could not extract metadata: unable to read file at the following path: "' . $this->_filePath . '"');
-        }        
-        
+        }
         // Skip if getid3 did not return a valid object.
         if (!$id3 = $this->_getId3()) {
             return false;
         }
         $this->setMimeType($id3->info['mime_type']);
-        $this->metadata = json_encode($id3->info);      
+        
+        getid3_lib::CopyTagsToComments($id3->info);
+        $metadata = array();
+        $keys = array(
+            'mime_type',
+            'audio',
+            'video',
+            'comments', 
+            'comments_html',
+        );
+        foreach($keys as $key) {
+            if (array_key_exists($key, $id3->info)) {
+                $metadata[$key] = $id3->info[$key];
+            }
+        }
+        $this->metadata = json_encode($metadata);      
         return true;
     }
 
