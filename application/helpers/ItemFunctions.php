@@ -196,28 +196,6 @@ function item_has_tags($item=null)
 }
 
 /**
- * Determine whether an item has an item type.
- *
- * If no $name is given, this will return true if the item has any item type
- * (items do not have to have an item type).  If $name is given, then this will
- * determine if an item has a specific item type.
- *
- * @since 0.10
- * @param string|null $name
- * @param Item|null Check for this specific item record (current item if null).
- * @return boolean
- */
-function item_has_type($name = null, $item = null)
-{
-    if (!$item) {
-        $item = get_current_record('item');
-    }
-
-    $itemTypeName = metadata($item, 'Item Type Name');
-    return ($name and ($itemTypeName == $name)) or (!$name and !empty($itemTypeName));
-}
-
-/**
  * Determine whether or not the item has a thumbnail image that it can display.
  *
  * @since 0.10
