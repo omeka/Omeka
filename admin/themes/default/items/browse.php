@@ -151,8 +151,14 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                         <?php fire_plugin_hook('admin_append_to_items_browse_simple_each', array('view' => $this)); ?>
                         <div class="details">
                             <?php echo snippet_by_word_count(strip_formatting(metadata('item', array('Dublin Core', 'Description'))), 40); ?>
-                            <p><strong><?php echo __('Collection'); ?>:</strong> <?php if (item_belongs_to_collection()) echo link_to_collection_for_item(); else echo __('No Collection'); ?></p><p><strong><?php echo __('Tags'); ?>:</strong> <?php if ($tags = item_tags_as_string()) echo $tags; else echo __('No Tags'); ?></p>
-                            </ul>
+                            <p>
+                                <strong><?php echo __('Collection'); ?>:</strong>
+                                <?php echo link_to_collection_for_item(); ?>
+                            </p>
+                            <p>
+                                <strong><?php echo __('Tags'); ?>:</strong>
+                                <?php if ($tags = item_tags_as_string()) echo $tags; else echo __('No Tags'); ?>
+                            </p>
                             <?php fire_plugin_hook('admin_append_to_items_browse_detailed_each', array('view' => $this)); ?>
                         </div>
                     </td>

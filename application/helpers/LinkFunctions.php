@@ -101,7 +101,11 @@ function link_to_browse_items($text, $browseParams = array(), $linkProperties = 
  */
 function link_to_collection_for_item($text = null, $props = array(), $action = 'show')
 {
-    return link_to_collection($text, $props, $action, get_collection_for_item());
+    if ($collection = get_collection_for_item()) {
+        return link_to_collection($text, $props, $action, $collection);
+    }
+
+    return __('No Collection');
 }
 
 function link_to_items_in_collection($text = null, $props = array(), $action = 'browse', $collectionObj = null)

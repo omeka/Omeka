@@ -51,7 +51,7 @@
     <div class="collection panel">
         <h4><?php echo __('Collection'); ?></h4>
         <div>
-           <p><?php if (item_belongs_to_collection()) echo metadata('item', 'Collection Name'); else echo __('No Collection'); ?></p>
+           <p><?php echo link_to_collection_for_item(); ?></p>
         </div>
     </div>
 

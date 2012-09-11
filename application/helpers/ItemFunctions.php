@@ -75,28 +75,6 @@ function get_previous_item($item=null)
 }
 
 /**
- * Determine whether or not the current item belongs to a collection.
- *
- * @since 0.10
- * @param string|null The name of the collection that the item would belong
- * to.  If null, then this will check to see whether the item belongs to
- * any collection.
- * @param Item|null Check for this specific item record (current item if null).
- * @return boolean
- */
-function item_belongs_to_collection($name=null, $item=null)
-{
-    //Dependency injection
-    if (!$item) {
-        $item = get_current_record('item');
-    }
-
-     return (($collection = $item->Collection)
-         && (!$name || $collection->name == $name)
-         && ($collection->public || has_permission('Collections', 'showNotPublic')));
-}
-
-/**
  * Retrieve a valid citation for the current item.
  *
  * Generally follows Chicago Manual of Style note format for webpages.  Does not
