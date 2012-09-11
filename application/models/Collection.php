@@ -92,7 +92,7 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
             case 'collectors': // The names of collectors
                 return $this->getCollectors();
             default:
-                throw new Exception(__('%s does not exist for collections!', $property));
+                throw new InvalidArgumentException(__('%s does not exist for collections!', $property));
         }
     }
     

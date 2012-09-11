@@ -106,7 +106,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             case 'permalink':
                 return absolute_url(array('controller' => 'files', 'action' => 'show', 'id' => $this->id));
             default:
-                throw new Exception(__("'%s' is an invalid special value.", $property));
+                throw new InvalidArgumentException(__("'%s' is an invalid special value.", $property));
         }
     }
 
@@ -162,7 +162,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         $fn = $this->getDerivativeFilename();
 
         if ($this->stored) {
-            throw new Exception(__('Cannot get the local path for a stored file.'));
+            throw new RuntimeException(__('Cannot get the local path for a stored file.'));
         }
 
         $dir = $this->getStorage()->getTempDir();
@@ -367,7 +367,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         }
 
         if (!isset(self::$_pathsByType[$type])) {
-            throw new Exception(__('"%s" is not a valid file derivative.', $type));
+            throw new RuntimeException(__('"%s" is not a valid file derivative.', $type));
         }
         return $storage->getPathByType($fn, self::$_pathsByType[$type]);
     }

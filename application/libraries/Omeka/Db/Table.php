@@ -257,7 +257,7 @@ class Omeka_Db_Table
      */
     protected function _getColumnPairs()
     {
-        throw new Exception('Column pairs must be defined in order to use ' .
+        throw new BadMethodCallException('Column pairs must be defined by _getColumnPairs() in order to use ' .
             'Omeka_Db_Table::findPairsForSelectForm()!');
     }
     

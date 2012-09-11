@@ -76,7 +76,7 @@ class Omeka_Plugin_Installer
     public function upgrade(Plugin $plugin)
     {           
         if (!$plugin->hasNewVersion()) {
-            throw new Exception("The '" . $plugin->getDisplayName() . "' plugin must be installed and have newer files to upgrade it.");
+            throw new RuntimeException(__('The "%s" plugin must be installed and have newer files to upgrade it.', $plugin->getDisplayName()));
         }
         
         $oldVersion = $plugin->getDbVersion();
@@ -112,7 +112,7 @@ class Omeka_Plugin_Installer
     public function install(Plugin $plugin) 
     {
         if (!$plugin->getDirectoryName()) {
-            throw new Exception("Plugin must have a valid directory name before it can be installed.");
+            throw new RuntimeException(__('Plugin must have a valid directory name before it can be installed.'));
         }
 
         try {

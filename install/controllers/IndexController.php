@@ -23,7 +23,7 @@ class IndexController extends Zend_Controller_Action
             try {
                 $bootstrap->bootstrap('Db');
                 if (!$bootstrap->hasResource('db')) {
-                    throw new Exception("Could not load database resource!");
+                    throw new Omeka_Application_Resource_Exception(__('Could not load database resource!'));
                 }
             } catch (Zend_Config_Exception $e) {
                 // A Zend_Config_Exception means it couldn't read the db.ini file.

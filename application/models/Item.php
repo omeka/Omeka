@@ -147,7 +147,7 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             case 'permalink':
                 return record_url($this, null, true);
             default:
-                throw new Exception(__("'%s' is an invalid special value.", $property));
+                throw new InvalidArgumentException(__("'%s' is an invalid special value.", $property));
         }
     }
         

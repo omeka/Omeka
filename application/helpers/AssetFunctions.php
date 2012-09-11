@@ -236,7 +236,7 @@ function physical_path_to($file)
             return $physical . '/' . $file;
         }
     }
-    throw new Exception( __("Could not find file %s!",$file) );
+    throw new InvalidArgumentException( __("Could not find file %s!",$file) );
 }
 
 /**
@@ -255,5 +255,5 @@ function web_path_to($file)
             return $web . '/' . $file;
         }
     }
-    throw new Exception( __("Could not find file %s!",$file) );
+    throw new InvalidArgumentException( __("Could not find file %s!",$file) );
 }
