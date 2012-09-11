@@ -47,7 +47,7 @@
                 <h2><?php echo __('Description'); ?></h2> 
                 <p><?php echo metadata('collection', 'Description'); ?></p>
                                                 
-                <?php if(total_items_in_collection() > 0): ?>
+                <?php if(metadata('collection', 'Total Items') > 0): ?>
                 <h2><?php echo __('Recently Added Items'); ?></h2>
                 <ul class="recent-items">
                 <?php foreach (loop('items') as $item): ?>
