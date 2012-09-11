@@ -46,8 +46,8 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
         $html .= '</div>'; // Close 'inputs' div
 
         $html .= '<div class="inputs five columns omega">';
-        $html .= $this->_displayFormFields($extraFieldCount);
         $html .= $this->_displayTooltip();
+        $html .= $this->_displayFormFields($extraFieldCount);
 
         $html .= '</div>'; // Close 'inputs' div
 
@@ -202,8 +202,10 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
         // Tooltips should be in a <span class="tooltip">
         $html = '<p class="explanation">';
         $html .= __($this->_getFieldDescription()) .'</p>';
-        $html .= '<p class="explanation">';
-        $html .= $this->_getFieldComment() .'</p>';
+        if($this->_getFieldComment()) {
+            $html .= '<p class="explanation">';
+            $html .= $this->_getFieldComment() .'</p>';
+        }
         return $html;
     }
 

@@ -267,20 +267,28 @@ p, li {
             font-size: 14px;
             font-weight: bold;
             float: left;
+            line-height: 1.5em;
             margin: 0 0 10px 0;
             min-width: 120px;
-            padding: 7px 0;
         }
             
         .field select {
             min-width: 100%;
             margin-bottom: 10px;
         }
+        
+    .input-block {
+        overflow: auto;
+    }
 
     .inputs {
         margin: 0 0 20px 0;
     }
-            
+        
+        .inputs .input-block {
+            margin: 0 0 20px 0;
+        }
+
         .inputs select {
             margin-top: 0;
         }
@@ -401,7 +409,7 @@ p, li {
         ================================================== */
         
         input[type="checkbox"] {
-            margin: 10px;
+            margin: 0 10px;
         }
 
 
@@ -1267,7 +1275,7 @@ header nav {
 .explanation {
     clear: both;
     font-style: italic;
-    margin-top: 0;
+    margin: 0 0 10px 0;
 }
     
 #public-featured {
@@ -1292,6 +1300,7 @@ header nav {
 .field .use-html {
     clear: none !important;
     font-size: 14px;
+    line-height: 2.125em;
 }
 
 ul#section-nav, #section-nav ul {
