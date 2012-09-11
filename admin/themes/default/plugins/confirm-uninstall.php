@@ -8,7 +8,7 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'plugins')); ?>
     <?php if ($message): ?>
     <?php echo __($message); ?>
     <?php endif; ?>
-    <form action="<?php echo html_escape(uri('plugins/uninstall')); ?>" method="post">
+    <form action="<?php echo html_escape(url('plugins/uninstall')); ?>" method="post">
         <p><input type="checkbox" name="confirm" /> <?php echo __('Yes, I want to uninstall this plugin.'); ?></p>
         <input type="hidden" name="name" value="<?php echo html_escape($plugin->getDirectoryName()); ?>" />
 

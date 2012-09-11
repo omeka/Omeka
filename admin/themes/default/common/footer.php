@@ -10,7 +10,7 @@
         
         <p class="right"><?php echo __('Version %s', OMEKA_VERSION); ?>
         <?php if (get_option('display_system_info') && has_permission('SystemInfo', 'index')): ?>
-        | <a href="<?php echo html_escape(uri('system-info')); ?>"><?php echo __('More information about your system'); ?></a></p>
+        | <a href="<?php echo html_escape(url('system-info')); ?>"><?php echo __('More information about your system'); ?></a></p>
         <?php endif; ?>
         </div>
     </footer>

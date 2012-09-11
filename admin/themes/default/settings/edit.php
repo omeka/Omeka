@@ -6,7 +6,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
 //<![CDATA[
     jQuery(document).ready(function () {
         Omeka.Settings.checkImageMagick(
-            <?php echo js_escape(uri(array("controller"=>"settings","action"=>"check-imagemagick"))); ?>,
+            <?php echo js_escape(url(array("controller" => "settings", "action" => "check-imagemagick"))); ?>,
             <?php echo js_escape(__('Test')); ?>
         );
     });

@@ -17,7 +17,7 @@
  * @param boolean $encode
  * @return string
  */
-function uri($options = array(), $name = null, $queryParams = array(), $reset = false, $encode = true) {
+function url($options = array(), $name = null, $queryParams = array(), $reset = false, $encode = true) {
     $urlHelper = new Omeka_View_Helper_Url;
     return $urlHelper->url($options, $name, $queryParams, $reset, $encode);
 }
@@ -28,7 +28,7 @@ function uri($options = array(), $name = null, $queryParams = array(), $reset = 
  * This is necessary because Zend_View_Helper_Url returns relative URLs, though 
  * absolute URLs are required in some contexts.
  *
- * @uses uri()
+ * @uses url()
  * @param mixed
  * @return string HTML
  */
@@ -98,7 +98,7 @@ function items_output_url($output, $otherParams = array()) {
     $queryParams['output'] = $output;
     
     // Use the 'default' route as opposed to the current route.
-    return uri(array('controller'=>'items', 'action'=>'browse'), 'default', $queryParams);
+    return url(array('controller'=>'items', 'action'=>'browse'), 'default', $queryParams);
 }
 
 /**

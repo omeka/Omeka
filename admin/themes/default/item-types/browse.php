@@ -22,7 +22,7 @@ head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
         <a href="<?php echo html_escape(record_url($itemType, 'show', 'item-types')); ?>"><?php echo html_escape($itemType->name); ?></a>
         <ul class="action-links group">
         <?php if (has_permission('ItemTypes', 'edit')): ?>
-            <li><a class="edit" href="<?php echo html_escape(uri('item-types/edit/'.$itemType->id)); ?>"><?php echo __('Edit'); ?></a></li>
+            <li><a class="edit" href="<?php echo html_escape(url('item-types/edit/' . $itemType->id)); ?>"><?php echo __('Edit'); ?></a></li>
         <?php endif; ?>        
         </ul>
     </td>

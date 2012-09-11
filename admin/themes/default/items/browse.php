@@ -91,11 +91,11 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
             </script>
             <?php echo pagination_links(array('partial_file' => common('pagination_control'))); ?>
             
-            <form action="<?php echo html_escape(uri('items/batch-edit')); ?>" method="post" accept-charset="utf-8">                
+            <form action="<?php echo html_escape(url('items/batch-edit')); ?>" method="post" accept-charset="utf-8">                
 
                 <div class="item-actions batch-edit-option fourteen columns alpha">
                     <?php if (has_permission('Items', 'add')): ?>
-                    <a href="<?php echo html_escape(uri('items/add')); ?>" class="add button small green"><?php echo __('Add an Item'); ?></a>
+                    <a href="<?php echo html_escape(url('items/add')); ?>" class="add button small green"><?php echo __('Add an Item'); ?></a>
                     <?php endif; ?>
                     <?php echo link_to_advanced_search(__('Advanced Search'), array('id' => 'advanced-search-link', 'class' => 'small blue button')); ?>
                     <?php if (has_permission('Items', 'edit')): ?>
@@ -168,7 +168,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
             
                 <div class="item-actions batch-edit-option">
                     <?php if (has_permission('Items', 'add')): ?>
-                    <a href="<?php echo html_escape(uri('items/add')); ?>" class="add button small green"><?php echo __('Add an Item'); ?></a>
+                    <a href="<?php echo html_escape(url('items/add')); ?>" class="add button small green"><?php echo __('Add an Item'); ?></a>
                     <?php endif; ?>
                     <?php echo link_to_advanced_search(__('Advanced Search'), array('id' => 'advanced-search-link', 'class' => 'small blue button')); ?>
                     <?php if (has_permission('Items', 'edit')): ?>
@@ -195,7 +195,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                     
                     <p><?php echo __('Get started by adding your first item.'); ?></p>
                     
-                            <a href="<?php echo html_escape(uri('items/add')); ?>" class="add big green button"><?php echo __('Add an Item'); ?></a>
+                            <a href="<?php echo html_escape(url('items/add')); ?>" class="add big green button"><?php echo __('Add an Item'); ?></a>
                     <?php endif; ?>
 
                 <?php else: ?>

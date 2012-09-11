@@ -38,7 +38,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
     });
     
 </script>
-            <form class="top" action="<?php echo html_escape(uri('users/batch-edit')); ?>" method="post" accept-charset="utf-8">
+            <form class="top" action="<?php echo html_escape(url('users/batch-edit')); ?>" method="post" accept-charset="utf-8">
 
                 <div class="item-actions">
                     <?php if (has_permission('Users', 'edit')): ?>

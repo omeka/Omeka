@@ -21,10 +21,10 @@ head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodyclass'=
         }
         ?>
     </p>
-    <?php echo tag_cloud($tags, ($browse_for == 'Item') ? uri('items/browse/'): uri('exhibits/browse/'), 9, true, 'before'); ?>
+    <?php echo tag_cloud($tags, ($browse_for == 'Item') ? url('items/browse/'): url('exhibits/browse/'), 9, true, 'before'); ?>
     <div class="hTagcloud">
         <ul>
-            <li><a href="<?php echo uri('items/browse/?tags=united+states'); ?>"><span class="count">1</span></a><span  class="edit"">united states</span><span class="close"><a href="#">close</a></span></li>
+            <li><a href="<?php echo url('items/browse/?tags=united+states'); ?>"><span class="count">1</span></a><span  class="edit"">united states</span><span class="close"><a href="#">close</a></span></li>
         </ul>
     </div>
 <?php else: ?>

@@ -10,7 +10,7 @@
 <?php head(array('title' => $fileTitle, 'bodyclass'=>'files edit-file primary')); ?>
 <?php echo js('files'); ?>
 
-<form method="post" id="editfile" action="<?php echo html_escape(uri('files/edit/'.$file->id)); ?>" name="editFile">
+<form method="post" id="editfile" action="<?php echo html_escape(url('files/edit/' . $file->id)); ?>" name="editFile">
 
 <div class="seven columns alpha">
 

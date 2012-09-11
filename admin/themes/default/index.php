@@ -21,7 +21,7 @@ head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?>
                 <p>
                     <span class="number">
                     <?php if (get_option('display_system_info') && has_permission('SystemInfo', 'index')): ?>
-                    <a href="<?php echo html_escape(uri('system-info')); ?>" ><?php echo OMEKA_VERSION; ?></a>
+                    <a href="<?php echo html_escape(url('system-info')); ?>" ><?php echo OMEKA_VERSION; ?></a>
                     <?php else: ?>
                     <?php echo OMEKA_VERSION; ?>
                     <?php endif; ?>
@@ -50,7 +50,7 @@ head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?>
                         endforeach;
                         
                        ?>
-                    <div class="add-new"><p><a class="add-collection" href="<?php echo html_escape(uri('collections/add')); ?>">Add a new collection</a></p></div>
+                    <div class="add-new"><p><a class="add-collection" href="<?php echo html_escape(url('collections/add')); ?>">Add a new collection</a></p></div>
                 </div>
             </section>
             
@@ -72,7 +72,7 @@ head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?>
                         endforeach;
                      
                     ?>
-                <div class="add-new"><p><a class="add-new" href="<?php echo html_escape(uri('items/add')); ?>">Add a new item</a></p></div>
+                <div class="add-new"><p><a class="add-new" href="<?php echo html_escape(url('items/add')); ?>">Add a new item</a></p></div>
                 </div>
             </section>
     

@@ -239,7 +239,7 @@ function output_format_list($list = true, $delimiter = ' | ')
         foreach ($actionContexts as $key => $actionContext) {
             $query = $_GET;
             $query['output'] = $actionContext;
-            $html .= '<li><a href="' . html_escape(uri() . '?' . http_build_query($query)) . '">' . $actionContext . '</a></li>';
+            $html .= '<li><a href="' . html_escape(url() . '?' . http_build_query($query)) . '">' . $actionContext . '</a></li>';
         }
         $html .= '</ul>';
 
@@ -249,7 +249,7 @@ function output_format_list($list = true, $delimiter = ' | ')
         foreach ($actionContexts as $key => $actionContext) {
             $query = $_GET;
             $query['output'] = $actionContext;
-            $html .= '<a href="' . html_escape(uri() . '?' . http_build_query($query)) . '">' . $actionContext . '</a>';
+            $html .= '<a href="' . html_escape(url() . '?' . http_build_query($query)) . '">' . $actionContext . '</a>';
             $html .= (count($actionContexts) - 1) == $key ? '' : $delimiter;
         }
         $html .= '</p>';
@@ -280,7 +280,7 @@ function browse_headings($headings)
                     $urlParams[$sortDirParam] = 'd';
                 }
             }
-            $url = uri(array(), null, $urlParams);
+            $url = url(array(), null, $urlParams);
             echo "<th $class scope=\"col\"><a href=\"$url\">$label</a></th>";
         } else {
             echo "<th scope=\"col\">$label</th>";

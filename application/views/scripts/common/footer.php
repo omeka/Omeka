@@ -3,7 +3,7 @@
         <div id="footer">
 
             <ul class="navigation">
-                <?php echo public_nav_main(array(__('Home') => uri(''), __('Browse Items') => uri('items'), __('Browse Collections') => uri('collections'))); ?>
+                <?php echo public_nav_main(array(__('Home') => url(''), __('Browse Items') => url('items'), __('Browse Collections') => url('collections'))); ?>
             </ul>
 
             <div id="footer-text">

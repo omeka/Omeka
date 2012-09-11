@@ -25,7 +25,7 @@
 
 <script>
  jQuery(document).ready(function() {
-     jQuery('.edit-tag').editable('<?php echo uri('tags'); ?>/edit.php');
+     jQuery('.edit-tag').editable('<?php echo url('tags'); ?>/edit.php');
  });
 </script>
 
@@ -50,13 +50,13 @@
                 <?php
                     $name = html_escape($user->name);
                     if (has_permission($user, 'edit')) {
-                        $userLink = '<a href="' . html_escape(uri('users/edit/' . $user->id)) . '">' . $name . '</a>';
+                        $userLink = '<a href="' . html_escape(url('users/edit/' . $user->id)) . '">' . $name . '</a>';
                     } else {
                         $userLink = $name;
                     }
                 ?>
                 <li><?php echo __('Welcome, %s', $userLink); ?></li>
-                <li><a href="<?php echo html_escape(uri('users/logout'));?>" id="logout"><?php echo __('Log Out'); ?></a></li>
+                <li><a href="<?php echo html_escape(url('users/logout'));?>" id="logout"><?php echo __('Log Out'); ?></a></li>
             <?php endif; ?>
             </ul>
 
@@ -72,7 +72,7 @@
 
     <div class="subhead">
     
-        <form id="search" action="<?php echo uri('search') ?>" method="get">
+        <form id="search" action="<?php echo url('search') ?>" method="get">
             <fieldset>
                 <input type="text" name="query" class="textinput" />
                 <input type="submit" value="<?php echo __('Search'); ?>" class="blue" />

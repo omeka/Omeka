@@ -3,12 +3,12 @@
     <ul>
         <?php
             $contentNav = array(
-                __('Dashboard') => uri(''),
-                __('Items') => uri('items'),
-                __('Collections') => uri('collections'),
-                __('Item Types') => uri('item-types'),
-                __('Tags') => uri('tags'),
-                __('Navigation') => uri('navigation'),
+                __('Dashboard') => url(''),
+                __('Items') => url('items'),
+                __('Collections') => url('collections'),
+                __('Item Types') => url('item-types'),
+                __('Tags') => url('tags'),
+                __('Navigation') => url('navigation'),
                 
                 );
             echo nav(apply_filters('admin_navigation_main', $contentNav));
@@ -23,12 +23,12 @@
         <ul class="dropdown">
         <?php
             $contentNav = array(
-                __('Dashboard') => uri(''),
-                __('Items') => uri('items'),
-                __('Collections') => uri('collections'),
-                __('Item Types') => uri('item-types'),
-                __('Tags') => uri('tags'),
-                __('Navigation') => uri('navigation')
+                __('Dashboard') => url(''),
+                __('Items') => url('items'),
+                __('Collections') => url('collections'),
+                __('Item Types') => url('item-types'),
+                __('Tags') => url('tags'),
+                __('Navigation') => url('navigation')
                 );
             echo nav(apply_filters('admin_navigation_main', $contentNav));
         ?>            

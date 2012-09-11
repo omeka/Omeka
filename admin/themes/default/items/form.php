@@ -13,7 +13,7 @@ jQuery(window).load(function () {
     Omeka.Items.tagDelimiter = <?php echo js_escape(get_option('tag_delimiter')); ?>;
     Omeka.Items.enableTagRemoval(addImage, deleteImage);
     Omeka.Items.makeFileWindow();
-    Omeka.Items.tagChoices('#tags', <?php echo js_escape(uri(array('controller'=>'tags', 'action'=>'autocomplete'), 'default', array(), true)); ?>);
+    Omeka.Items.tagChoices('#tags', <?php echo js_escape(url(array('controller'=>'tags', 'action'=>'autocomplete'), 'default', array(), true)); ?>);
 
     Omeka.wysiwyg({
         mode: "none",
@@ -24,11 +24,11 @@ jQuery(window).load(function () {
     jQuery(document).trigger('omeka:elementformload');
 
     Omeka.Items.enableAddFiles(<?php echo js_escape(__('Add Another File')); ?>);
-    Omeka.Items.changeItemType(<?php echo js_escape(uri("items/change-type")) ?><?php if ($id = metadata('item', 'id')) echo ', '.$id; ?>);
+    Omeka.Items.changeItemType(<?php echo js_escape(url("items/change-type")) ?><?php if ($id = metadata('item', 'id')) echo ', '.$id; ?>);
 });
 
 jQuery(document).bind('omeka:elementformload', function (event) {
-    Omeka.Items.makeElementControls(event.target, <?php echo js_escape(uri('items/element-form')); ?><?php if ($id = metadata('item', 'id')) echo ', '.$id; ?>);
+    Omeka.Items.makeElementControls(event.target, <?php echo js_escape(url('items/element-form')); ?><?php if ($id = metadata('item', 'id')) echo ', '.$id; ?>);
     Omeka.Items.enableWysiwyg(event.target);
 });
 //]]>   
