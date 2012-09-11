@@ -19,6 +19,7 @@
         #Edit Item
         #Show File
         #Tags
+        #Navigation
         #Advanced Search
         #Show Collection
         #Browse Item Types
@@ -1212,11 +1213,8 @@ header nav {
     }
 
 .element-text p {
-    font-size: 16px;
     word-wrap: break-word;
-    line-height: 16px;
     margin: 0 0 1em 0;
-    padding: 7px 0;
 }
 
 .item-file {
@@ -1237,6 +1235,7 @@ header nav {
     }
     
     .public-featured .label { font-weight: bold; }
+
 
 /* Batch Edit Items
 ================================================== */
@@ -1362,6 +1361,7 @@ ul#section-nav, #section-nav ul {
 .files dd {
     margin-bottom: 1em;
 }
+
 
 /* Tags
 ================================================== */
@@ -1526,7 +1526,93 @@ ul#section-nav, #section-nav ul {
     
 .tags div.two.columns { clear: both; }
 
-    
+
+/* Navigation Form
+================================================== */
+
+#navigation_main_list { 
+    list-style-type: none; 
+    margin: 0; 
+    padding: 0; 
+}
+
+#navigation_main_list li { 
+    background-color: #EEEEEE;
+    font-size: 14px;
+    width: 500px;
+}
+
+#navigation_main_list_new {
+    margin-top: 20px;
+}
+
+#navigation_main_list li div.navigation_main_link_header {
+    background: #EBEADC;
+    border: 0;
+}
+
+#navigation_main_list li div.navigation_main_link_header input {
+    position: absolute;
+    top; 50%;
+    left: .5em;
+}
+
+#navigation_main_list li div.navigation_main_link_header a {
+    margin-left: 1em;
+}
+
+#navigation_main_list li div.navigation_main_link_header span.ui-icon {
+    position: static;
+    float: right;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+#navigation_main_list li div.navigation_main_link_body {
+    height: 120px;
+    background: #fff;
+    border: 0;
+    box-shadow: 0 0 1px #999 inset;
+    margin: 0 0 2px 0;
+}
+
+#navigation_main_list li div.navigation_main_link_body .navigation_main_list_delete {
+    float: right;
+    color: white;
+    margin-bottom:0;
+    margin-top: 10px;
+}
+
+#navigation_main_list li div.navigation_main_link_body .navigation_main_list_visit {
+    float: left;
+    color: white;
+    margin-bottom:0;
+    margin-top: 10px;
+}
+
+.navigation_main_link_label_label {
+    margin-right:20px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.navigation_main_link_label {
+    width: 420px;
+}
+
+.navigation_main_link_uri_label {
+    margin-right:30px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.navigation_main_link_uri {
+    width: 420px;
+}
+
+#navigation_form input[type=checkbox] { margin: 10px; }
+
+
 /* Advanced Search
 ================================================== */
 
@@ -1674,7 +1760,8 @@ button.remove_search {
     margin: 0;
     padding: 0 !important;
 }
-    
+
+
 /* System Information
 ================================================== */
 
