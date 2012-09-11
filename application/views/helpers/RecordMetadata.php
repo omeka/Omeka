@@ -219,15 +219,17 @@ class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
             $isHtml = false;
         }
 
-        // Apply the snippet option before escaping text HTML. If applied after
-        // escaping the HTML, this may result in invalid markup.
-        if ($snippet) {
-            $text = snippet($text, 0, $snippet);
-        }
+        if (is_string($text)) {
+            // Apply the snippet option before escaping text HTML. If applied after
+            // escaping the HTML, this may result in invalid markup.
+            if ($snippet) {
+                $text = snippet($text, 0, $snippet);
+            }
 
-        // Escape the non-HTML text if necessary.
-        if ($escape && !$isHtml) {
-            $text = html_escape($text);
+            // Escape the non-HTML text if necessary.
+            if ($escape && !$isHtml) {
+                $text = html_escape($text);
+            }
         }
 
         // Apply plugin filters.
