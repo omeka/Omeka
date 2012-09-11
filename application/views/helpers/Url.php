@@ -75,7 +75,8 @@ class Omeka_View_Helper_Url extends Zend_View_Helper_Abstract
      * @return string
      */
     public function url($options = array(), $name = null, array $queryParams = array(), 
-        $reset = false, $encode = true) {
+        $reset = false, $encode = true
+    ) {
         $url = '';
         $front = Zend_Controller_Front::getInstance();
         
