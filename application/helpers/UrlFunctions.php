@@ -127,7 +127,7 @@ function public_url()
 {
     set_theme_base_url('public');
     $args = func_get_args();
-    $url = call_user_func_array('uri', $args);
+    $url = call_user_func_array('url', $args);
     revert_theme_base_url();
     return $url;
 }
@@ -143,7 +143,7 @@ function admin_url()
 {
     set_theme_base_url('admin');
     $args = func_get_args();
-    $url = call_user_func_array('uri', $args);
+    $url = call_user_func_array('url', $args);
     revert_theme_base_url();
     return $url;
 }
