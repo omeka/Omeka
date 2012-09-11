@@ -74,14 +74,14 @@ class Output_ItemRss2
         $entry['title'] = strip_formatting(metadata($item, array('Dublin Core', 'Title'), array('no_escape'=>true)));
         $entry['description'] = $this->buildDescription($item);
         
-        $entry['link'] = xml_escape(abs_item_uri($item));
+        $entry['link'] = xml_escape(record_url($item, null, true));
                 
         $entry['lastUpdate'] = strtotime($item->added);
                 
         //List the first file as an enclosure (only one per RSS feed)
         if(($files = $item->Files) && ($file = current($files))) {
             $entry['enclosure']   = array();
-            $fileDownloadUrl = file_display_uri($file);
+            $fileDownloadUrl = file_display_url($file);
             $enc['url']           = $fileDownloadUrl;
             $enc['type']          = $file->mime_browser;
             $enc['length']        = (int) $file->size;

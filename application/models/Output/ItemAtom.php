@@ -128,7 +128,7 @@ class Output_ItemAtom
             
             // feed/entry/id
             $feedEntryIdElement = $doc->createElement('id');
-            $feedEntryIdElement->appendChild($doc->createTextNode(abs_item_uri($item)));
+            $feedEntryIdElement->appendChild($doc->createTextNode(record_url($item, null, true)));
             $feedEntryElement->appendChild($feedEntryIdElement);
             
             // feed/entry/title
@@ -154,7 +154,7 @@ class Output_ItemAtom
             $feedEntryLinkAlternateElement = $doc->createElement('link');
             $feedEntryLinkAlternateElement->setAttribute('rel', 'alternate');
             $feedEntryLinkAlternateElement->setAttribute('type', 'text/html');
-            $feedEntryLinkAlternateElement->setAttribute('href', abs_item_uri($item));
+            $feedEntryLinkAlternateElement->setAttribute('href', record_url($item, null, true));
             $feedEntryElement->appendChild($feedEntryLinkAlternateElement);
             
             // feed/entry/link[rel=enclosure]
@@ -212,42 +212,42 @@ class Output_ItemAtom
             $pages = $paginator->getPages();
             
             // first
-            $feedLinks['first'] = abs_uri(array('page' => $pages->first), 'default', $_GET);
+            $feedLinks['first'] = absolute_url(array('page' => $pages->first), 'default', $_GET);
             
             // previous
             if (isset($pages->previous)) {
-                $feedLinks['previous'] = abs_uri(array('page' => $pages->previous), 'default', $_GET);
+                $feedLinks['previous'] = absolute_url(array('page' => $pages->previous), 'default', $_GET);
             }
             
             // next
             if (isset($pages->next)) {
-                $feedLinks['next'] = abs_uri(array('page' => $pages->next), 'default', $_GET);
+                $feedLinks['next'] = absolute_url(array('page' => $pages->next), 'default', $_GET);
             }
             
             // last
-            $feedLinks['last'] = abs_uri(array('page' => $pages->last), 'default', $_GET);
+            $feedLinks['last'] = absolute_url(array('page' => $pages->last), 'default', $_GET);
             
         // If pagination is not registered, assume item show.
         } else {
             
             // first
             if ($itemFirst = get_db()->getTable('Item')->findFirst()) {
-                $feedLinks['first'] = abs_item_uri($itemFirst) . '?output=atom';
+                $feedLinks['first'] = record_url($itemFirst, null, true) . '?output=atom';
             }
             
             // previous
             if ($itemPrev = $items[0]->previous()) {
-                $feedLinks['previous'] = abs_item_uri($itemPrev) . '?output=atom';
+                $feedLinks['previous'] = record_url($itemPrev, null, true) . '?output=atom';
             }
             
             // next
             if ($itemNext = $items[0]->next()) {
-                $feedLinks['next'] = abs_item_uri($itemNext) . '?output=atom';
+                $feedLinks['next'] = record_url($itemNext, null, true) . '?output=atom';
             }
             
             // last
-            if ($itemFirst = get_db()->getTable('Item')->findLast()) {
-                $feedLinks['last'] = abs_item_uri($itemFirst) . '?output=atom';
+            if ($itemLast = get_db()->getTable('Item')->findLast()) {
+                $feedLinks['last'] = record_url($itemLast, null, true) . '?output=atom';
             }
         }
         

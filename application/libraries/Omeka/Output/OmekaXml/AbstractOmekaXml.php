@@ -422,7 +422,7 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
     */
    protected function _buildTagUri()
    {
-       $uri = Zend_Uri::factory(abs_uri());
+       $uri = Zend_Uri::factory(absolute_url());
        $tagUri = 'tag:' . $uri->getHost() . ',' . date('Y-m-d') . ':' . $uri->getPath();
        return $tagUri;
    }
@@ -434,7 +434,7 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
     */
    protected function _buildUrl()
    {
-       $uri = Zend_Uri::factory(abs_uri());
+       $uri = Zend_Uri::factory(absolute_url());
        $uri->setQuery($_GET);
        return $uri->getUri();
    }

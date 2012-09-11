@@ -23,7 +23,7 @@ class Output_ItemDcmesXml
 
     public function recordToDcmesXml($item)
     {
-        $xml = "\n" . '<rdf:Description rdf:about="' . xml_escape(abs_item_uri($item)) . '">';
+        $xml = "\n" . '<rdf:Description rdf:about="' . xml_escape(record_url($item, null, true)) . '">';
         // Iterate throught the DCMES.
         foreach ($this->_dcElements as $elementName) {
             if ($text = metadata($item, array('Dublin Core', $elementName), array('all'=>true, 'no_escape'=>true))) {

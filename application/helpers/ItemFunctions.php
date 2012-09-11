@@ -145,7 +145,7 @@ function item_citation($item = null)
     }
     
     $accessed = date('F j, Y');
-    $url = html_escape(abs_item_uri($item));
+    $url = html_escape(record_url($item, null, true));
     $citation .= "accessed $accessed, $url.";
     
     return apply_filters('item_citation', $citation, array('item' => $item));

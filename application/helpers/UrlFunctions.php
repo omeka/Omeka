@@ -7,103 +7,108 @@
  */
 
 /**
- * @since 0.10 Incorporates search parameters into the query string for the URI.
- * This enables auto_discovery_link_tag() to automatically discover the RSS feed
- * for any search.
- * @since 0.10 Adds a second argument so that extra query parameters can be used
- * to build the URI for the output feed.
- * @internal This filters query parameters via a blacklist instead of a whitelist,
- * because conceivably plugins could add extra fields to the advanced search.
- * @param string
- * @param array $otherParams Optional set of query parameters to merge in to the
- * default output feed URI query string.
- * @return string URI
+ * Return a URL given the provided arguments.
+ *
+ * @uses Omeka_View_Helper_Url::url() See for details on usage.
+ * @param string|array $options
+ * @param string|null|array $name
+ * @param array $queryParams
+ * @param boolean $reset
+ * @param boolean $encode
+ * @return string
  */
-function items_output_uri($output="rss2", $otherParams = array()) {
+function uri($options = array(), $name = null, $queryParams = array(), $reset = false, $encode = true) {
+    $urlHelper = new Omeka_View_Helper_Url;
+    return $urlHelper->url($options, $name, $queryParams, $reset, $encode);
+}
+
+/**
+ * Return an absolute URL.
+ *
+ * This is necessary because Zend_View_Helper_Url returns relative URLs, though 
+ * absolute URLs are required in some contexts.
+ *
+ * @uses uri()
+ * @param mixed
+ * @return string HTML
+ */
+function absolute_url($options = array(), $route = null, $queryParams = array(), $reset = false, $encode = true) {
+    $view = __v();
+    return $view->serverUrl() . $view->url($options, $route, $queryParams, $reset, $encode);
+}
+
+/**
+ * Return a URL to a record.
+ *
+ * @uses Omeka_View_Helper_GetRecordUrl::getRecordUrl()
+ * @param Omeka_Record_AbstractRecord|string $record
+ * @param string|null $action
+ * @param bool $getAbsoluteUrl
+ * @return string
+ */
+function record_url($record, $action = null, $getAbsoluteUrl = false)
+{
+    return __v()->getRecordUrl($record, $action, $getAbsoluteUrl);
+}
+
+/**
+ * Return the current URL with query parameters appended.
+ *
+ * @param array $params
+ * @return string
+ */
+function current_url(array $params = array())
+{
+    return __v()->getCurrentUrl($params);
+}
+
+/**
+ * Determine whether the given URI matches the current request URI.
+ *
+ * @param string $url
+ * @param Zend_Controller_Request_Http|null $req
+ * @return boolean
+ */
+function is_current_url($url)
+{
+    return __v()->isCurrentUrl($url);
+}
+
+/**
+ * Return a URL to an output page.
+ * 
+ * @param string $output
+ * @param array $otherParams
+ * @return string
+ */
+function items_output_url($output, $otherParams = array()) {
+    
     // Copy $_GET and filter out all the cruft.
     $queryParams = $_GET;
+    
     // The submit button the search form.
     unset($queryParams['submit_search']);
+    
     // If 'page' is passed in query string and not via the route
     // Page should always be the first so that accurate results are retrieved
     // for the RSS.  Does it make sense to get an RSS feed of the 2nd page?
     unset($queryParams['page']);
-
+    
     $queryParams = array_merge($queryParams, $otherParams);
-
     $queryParams['output'] = $output;
+    
     // Use the 'default' route as opposed to the current route.
     return uri(array('controller'=>'items', 'action'=>'browse'), 'default', $queryParams);
 }
 
 /**
- * Return a valid URL when given a set of options.
- *
- * @uses Omeka_View_Helper_Url::url() See for details on usage.
- * @param string|array Either a string URL stub or a set of options for
- * building a URL from scratch.
- * @param string The name of a route to use to generate the URL (optional)
- * @param array Set of query parameters to append to the URL (optional)
+ * Return the provided file's URL.
+ * 
+ * @param File $file
+ * @param string $format
  * @return string
  */
-function uri($options=array(), $route=null, $queryParams=array(), $reset = false, $encode = true)
-{
-    $urlHelper = new Omeka_View_Helper_Url;
-    return $urlHelper->url($options, $route, $queryParams, $reset, $encode);
-}
-
-/**
- * Returns the current URL (optionally with query parameters appended).
- *
- * @since 0.9
- * @param array $params Optional Set of query parameters to append.
- * @return string
- */
-function current_uri($params=array())
-{
-    //Grab everything before the ? of the query
-    $request = Zend_Controller_Front::getInstance()->getRequest();
-    $uriParts = explode('?', $request->getRequestUri());
-    $uri = array_shift($uriParts);
-
-    if(!empty($params)) {
-
-        //The query should be a combination of $_GET and passed parameters
-        $query = array_merge($_GET, $params);
-
-        $query_string = http_build_query($query);
-        $uri .= '?' . $query_string;
-    }
-
-    return $uri;
-}
-
-/**
- * Determine whether or not a given URI matches the current request URI.
- *
- * @since 0.9
- * @param string $link URI.
- * @param Zend_Controller_Request_Http|null $req
- * @return boolean
- */
-function is_current_uri($link, $req = null) {
-
-    if(!$req) {
-        $req = Zend_Controller_Front::getInstance()->getRequest();
-    }
-    $current = $req->getRequestUri();
-    $base = $req->getBaseUrl();
-
-    //Strip out the protocol, host, base URI, rightmost slash before comparing the link to the current one
-    $strip_out = array(WEB_DIR, @$_SERVER['HTTP_HOST'], $base);
-    $current = rtrim( str_replace($strip_out, '', $current), '/');
-    $link = rtrim( str_replace($strip_out, '', $link), '/');
-
-    if(strlen($link) == 0) return (strlen($current) == 0);
-    return ($link == $current) or (strpos($current, $link) === 0);
-}
-
-function file_display_uri(File $file, $format='fullsize')
+function file_display_url(File $file, $format = 'fullsize')
 {
     if (!$file->exists()) {
         return false;
@@ -112,109 +117,43 @@ function file_display_uri(File $file, $format='fullsize')
 }
 
 /**
- * Return a URL to a record.
+ * Return a URL to the public theme.
  *
- * @uses Omeka_View_Helper_GetRecordUrl::getRecordUrl()
- * @param Omeka_Record_AbstractRecord|string $record
- * @param string $action
- * @return string
- */
-function record_uri($record, $action)
-{
-    return __v()->getRecordUrl($record, $action);
-}
-
-/**
- * Retrieve a URL for the current item.
- *
- * @since 0.10
- * @param string $action Action to link to for this item.  Default is 'show'.
- * @uses record_uri()
- * @param Item|null Check for this specific item record (current item if null).
- * @return string URL
- */
-function item_uri($action = 'show', $item=null)
-{
-    if (!$item) {
-        $item = get_current_record('item');
-    }
-    return record_uri($item, $action);
-}
-
-/**
- * This behaves as uri() except it always provides a url to the public theme.
- *
- * @since 0.10
- * @see uri()
- * @see admin_uri()
+ * @see admin_url()
  * @param mixed
  * @return string
  */
-function public_uri()
+function public_url()
 {
-    set_theme_base_uri('public');
+    set_theme_base_url('public');
     $args = func_get_args();
     $url = call_user_func_array('uri', $args);
-    revert_theme_base_uri();
+    revert_theme_base_url();
     return $url;
 }
 
 /**
- * @since 0.10
- * @see public_uri()
+ * Return a URL to the admin theme.
+ * 
+ * @see public_url()
  * @param mixed
- * @return mixed
+ * @return string
  */
-function admin_uri()
+function admin_url()
 {
-    set_theme_base_uri('admin');
+    set_theme_base_url('admin');
     $args = func_get_args();
     $url = call_user_func_array('uri', $args);
-    revert_theme_base_uri();
+    revert_theme_base_url();
     return $url;
 }
 
 /**
- * Generate an absolute URI.
- *
- * Useful because Zend Framework's default URI helper generates relative URLs,
- * though absolute URIs are required in some contexts.
- *
- * @since 0.10
- * @uses uri()
- * @param mixed
- * @return string HTML
+ * Set the base URL for the specified theme.
+ * 
+ * @param string $theme
  */
-function abs_uri()
-{
-    $args = func_get_args();
-    return __v()->serverUrl() . call_user_func_array('uri', $args);
-}
-
-/**
- * Generate an absolute URI to an item.  Primarily useful for generating permalinks.
- *
- * @since 0.10
- * @param Item|null Check for this specific item record (current item if null).
- * @return void
- */
-function abs_item_uri($item = null)
-{
-    if (!$item) {
-        $item = get_current_record('item');
-    }
-
-    return abs_uri(array('controller'=>'items', 'action'=>'show', 'id'=>$item->id), 'id');
-}
-
-/**
- * Example: set_theme_base_uri('public');  uri('items');  --> example.com/items.
- * @access private
- * @since 0.10
- * @param string
- * @return void
- */
-function set_theme_base_uri($theme = null)
+function set_theme_base_url($theme = null)
 {
     switch ($theme) {
         case 'public':
@@ -233,9 +172,9 @@ function set_theme_base_uri($theme = null)
 }
 
 /**
- * @since 1.3
+ * Revert the base URL to its previous state.
  */
-function revert_theme_base_uri()
+function revert_theme_base_url()
 {
     $front = Zend_Controller_Front::getInstance();
     if (($previous = $front->getParam('previousBaseUrl')) !== null) {

@@ -11,7 +11,7 @@
     <div id="edit" class="three columns omega">
         <div class="panel">
         <?php if ( has_permission('ItemTypes','edit') ): ?>
-        <a class="edit big green button" href="<?php echo html_escape(record_uri($item_type, 'edit', 'item-types')); ?>"><?php echo __('Edit this Item Type'); ?></a>
+        <a class="edit big green button" href="<?php echo html_escape(record_url($item_type, 'edit', 'item-types')); ?>"><?php echo __('Edit this Item Type'); ?></a>
         <?php endif; ?>
         </div>
     </div>

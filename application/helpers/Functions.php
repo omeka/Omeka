@@ -23,12 +23,12 @@ function __v()
  * Output a <link> tag for the RSS feed so the browser can auto-discover the field.
  *
  * @since 1.4
- * @uses items_output_uri()
+ * @uses items_output_url()
  * @return string HTML
  */
 function auto_discovery_link_tags() {
-    $html = '<link rel="alternate" type="application/rss+xml" title="'. __('Omeka RSS Feed') . '" href="'. html_escape(items_output_uri()) .'" />';
-    $html .= '<link rel="alternate" type="application/atom+xml" title="'. __('Omeka Atom Feed') .'" href="'. html_escape(items_output_uri('atom')) .'" />';
+    $html = '<link rel="alternate" type="application/rss+xml" title="'. __('Omeka RSS Feed') . '" href="'. html_escape(items_output_url('rss2')) .'" />';
+    $html .= '<link rel="alternate" type="application/atom+xml" title="'. __('Omeka Atom Feed') .'" href="'. html_escape(items_output_url('atom')) .'" />';
     return $html;
 }
 

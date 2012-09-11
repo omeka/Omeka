@@ -24,7 +24,7 @@ class Omeka_Navigation_Page_Uri extends Zend_Navigation_Page_Uri
      */
     public function isActive($recursive = false)
     {
-        $this->_active = is_current_uri($this->getUri());
+        $this->_active = is_current_url($this->getUri());
         return parent::isActive($recursive);
     }
     

@@ -14,7 +14,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodyclass'=
         );
 
         foreach ($sortOptions as $label => $params) {
-            $uri = html_escape(current_uri($params));
+            $uri = html_escape(current_url($params));
             $class = ($sort == $params) ? ' class="current"' : '';
 
             echo "<span $class><a href=\"$uri\">$label</a></span>";

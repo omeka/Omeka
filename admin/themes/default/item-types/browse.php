@@ -19,7 +19,7 @@ head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
 <?php foreach (loop('ItemType') as $itemType): ?>
 <tr class="itemtype">
     <td class="itemtype-name">
-        <a href="<?php echo html_escape(record_uri($itemType, 'show', 'item-types')); ?>"><?php echo html_escape($itemType->name); ?></a>
+        <a href="<?php echo html_escape(record_url($itemType, 'show', 'item-types')); ?>"><?php echo html_escape($itemType->name); ?></a>
         <ul class="action-links group">
         <?php if (has_permission('ItemTypes', 'edit')): ?>
             <li><a class="edit" href="<?php echo html_escape(uri('item-types/edit/'.$itemType->id)); ?>"><?php echo __('Edit'); ?></a></li>

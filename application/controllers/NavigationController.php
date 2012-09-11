@@ -29,7 +29,7 @@ class NavigationController extends Omeka_Controller_AbstractActionController
     public function editAction() 
     {
         require_once HELPERS;
-        set_theme_base_uri('public');
+        set_theme_base_url('public');
         $form = $this->_getForm();
         $this->view->form = $form;
         if (isset($_POST['navigation_submit'])) {
@@ -42,7 +42,7 @@ class NavigationController extends Omeka_Controller_AbstractActionController
         }
         // Reset to "current" base uri. "revert" won't work here because
         // something may have used public_uri or admin_uri in between.
-        set_theme_base_uri();
+        set_theme_base_url();
     }
     
     /**

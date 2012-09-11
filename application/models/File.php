@@ -104,7 +104,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             case 'square thumbnail uri':
                 return $this->getWebPath('square_thumbnail');
             case 'permalink':
-                return abs_uri(array('controller' => 'files', 'action' => 'show', 'id' => $this->id));
+                return absolute_url(array('controller' => 'files', 'action' => 'show', 'id' => $this->id));
             default:
                 throw new Exception(__("'%s' is an invalid special value.", $property));
         }

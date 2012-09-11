@@ -27,7 +27,7 @@ function link_to($record, $action=null, $text=null, $props = array(), $queryPara
 {
     // If we're linking directly to a record, use the URI for that record.
     if($record instanceof Omeka_Record_AbstractRecord) {
-        $url = record_uri($record, $action);
+        $url = record_url($record, $action);
     }
     else {
         // Otherwise $record is the name of the controller to link to.
@@ -205,7 +205,7 @@ function link_to_items_rss($text = null, $params=array())
     if (!$text) {
         $text = __('RSS');
     }
-    return '<a href="' . html_escape(items_output_uri('rss2', $params)) . '" class="rss">' . $text . '</a>';
+    return '<a href="' . html_escape(items_output_url('rss2', $params)) . '" class="rss">' . $text . '</a>';
 }
 
 /**
@@ -296,7 +296,7 @@ function link_to_admin_home_page($text = null, $props = array())
     if (!$text) {
         $text = settings('site_title');
     }
-    return '<a href="' . html_escape(admin_uri('')) . '" ' . _tag_attributes($props)
+    return '<a href="' . html_escape(admin_url('')) . '" ' . _tag_attributes($props)
          . '>' . $text . "</a>\n";
 }
 
@@ -309,7 +309,7 @@ function link_to_admin_home_page($text = null, $props = array())
  * generates
  * <code><li class="nav-themes"><a href="themes/browse">Themes</a></li></code>
  *
- * @uses is_current_uri()
+ * @uses is_current_url()
  * @param array A keyed array, where key = text of the link, and value = uri of the link,
  * or value = another ordered array $a with the following recursive structure:
  * $a['uri'] = URI of the link
@@ -369,7 +369,7 @@ function nav(array $links, $maxDepth = 0)
             $nav .= '">' . html_escape($text);
         } else {
             // If the uri is the current uri, then give it the 'current' class
-            $nav .= (is_current_uri($uri) ? ' current':'') . '">' . '<a href="' . html_escape($uri) . '">' . html_escape($text) . '</a>';
+            $nav .= (is_current_url($uri) ? ' current':'') . '">' . '<a href="' . html_escape($uri) . '">' . html_escape($text) . '</a>';
         }
 
         // Display the subnavigation links if they exist and if the max depth has not been reached

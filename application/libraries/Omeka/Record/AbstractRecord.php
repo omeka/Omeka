@@ -891,7 +891,7 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
     /**
      * Get the routing parameters or the URL string to this record.
      * 
-     * The record_uri() global uses this method to get routing parameters for 
+     * The record_url() global uses this method to get routing parameters for 
      * non-standard records, e.g. records defined by plugins. Subclasses should 
      * override this method if the default route (as defined below) is 
      * incorrect.

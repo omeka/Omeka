@@ -22,17 +22,17 @@ class Omeka_Helper_AbsUriTest extends Omeka_Test_AppTestCase
     public function testAbsUriDoesNotGiveNoticeIfMissingHttpHost()
     {
         try {
-            $uri = abs_uri();
+            $uri = absolute_url();
         } catch (PHPUnit_Framework_Error_Notice $e) {
             $this->assertNotContains("Undefined index:  HTTP_HOST", $e->getMessage(),
-                "abs_uri() should not give an 'Undefined index:  HTTP_HOST' notice.");
+                "absolute_url() should not give an 'Undefined index:  HTTP_HOST' notice.");
         }
     }
     
     public function testAbsUriUsesHttpHost()
     {   
         $_SERVER['HTTP_HOST'] = 'www.example.com';
-        $uri = abs_uri(array('controller' => 'items', 'action' => 'browse'), 'default');
+        $uri = absolute_url(array('controller' => 'items', 'action' => 'browse'), 'default');
         $this->assertEquals('http://www.example.com/items/browse', $uri);
     }
 }

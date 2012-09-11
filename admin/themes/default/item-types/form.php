@@ -2,9 +2,9 @@
 <script type="text/javascript" charset="utf-8">
 //<![CDATA[
 jQuery(document).ready(function () {
-    var addNewRequestUrl = '<?php echo admin_uri('item-types/add-new-element'); ?>';
-    var addExistingRequestUrl = '<?php echo admin_uri('item-types/add-existing-element'); ?>';
-    var changeExistingElementUrl = '<?php echo admin_uri('item-types/change-existing-element'); ?>';
+    var addNewRequestUrl = '<?php echo admin_url('item-types/add-new-element'); ?>';
+    var addExistingRequestUrl = '<?php echo admin_url('item-types/add-existing-element'); ?>';
+    var changeExistingElementUrl = '<?php echo admin_url('item-types/change-existing-element'); ?>';
 
     Omeka.ItemTypes.manageItemTypes(addNewRequestUrl, addExistingRequestUrl, changeExistingElementUrl);
 });

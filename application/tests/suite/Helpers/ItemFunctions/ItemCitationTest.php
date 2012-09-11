@@ -57,7 +57,7 @@ class Omeka_Helper_ItemCitationTest extends Omeka_Test_AppTestCase
         
         $siteTitle = settings('site_title');
         $dateAccessed = date('F j, Y');
-        $itemUrl = abs_item_uri();
+        $itemUrl = record_url('item', null, true);
         
         $citationHtml = "&#8220;$title,&#8221; <em>$siteTitle</em>, accessed $dateAccessed, $itemUrl.";
         

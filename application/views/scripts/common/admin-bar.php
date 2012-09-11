@@ -3,7 +3,7 @@
 <?php
     $links = array(
       __('Welcome, %s', $user->name) => uri('users/edit/'.$user->id),
-      __('Omeka Admin') => admin_uri(),
+      __('Omeka Admin') => admin_url(),
       __('Log Out') => uri('users/logout')
     );
 
