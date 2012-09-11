@@ -40,8 +40,8 @@ function url($options = array(), $name = null, $queryParams = array(),
 function absolute_url($options = array(), $route = null, $queryParams = array(), 
     $reset = false, $encode = true
 ) {
-    $serverUrlHelper = Zend_View_Helper_ServerUrl;
-    $urlHelper = Omeka_View_Helper_Url;
+    $serverUrlHelper = new Zend_View_Helper_ServerUrl;
+    $urlHelper = new Omeka_View_Helper_Url;
     return $serverUrlHelper->serverUrl() 
          . $urlHelper->url($options, $route, $queryParams, $reset, $encode);
 }
@@ -56,7 +56,7 @@ function absolute_url($options = array(), $route = null, $queryParams = array(),
  */
 function current_url(array $params = array())
 {
-    $helper = Omeka_View_Helper_GetCurrentUrl;
+    $helper = new Omeka_View_Helper_GetCurrentUrl;
     return $helper->getCurrentUrl($params);
 }
 
