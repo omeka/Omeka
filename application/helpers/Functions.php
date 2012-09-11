@@ -102,7 +102,6 @@ function settings($name)
  * Get a set of records from the database.
  *
  * @since 2.0
- *
  * @uses Omeka_Db_Table::findBy
  *
  * @param string $recordType Type of records to get.
@@ -114,6 +113,21 @@ function settings($name)
 function get_records($recordType, $params = array(), $limit = 10)
 {
     return get_db()->getTable($recordType)->findBy($params, $limit);
+}
+
+/**
+ * Get the total number of a given type of record in the database.
+ *
+ * @since 2.0
+ * @uses Omeka_Db_Table::count
+ *
+ * @param string $recordType Type of record to count.
+ *
+ * @return integer Number of records of $recordType in the database.
+ */
+function total_records($recordType)
+{
+    return get_db()->getTable($recordType)->count();
 }
 
 /**

@@ -187,7 +187,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
 
             <?php else: ?>
 
-                <?php if (total_items() === 0): ?>
+                <?php if (total_records('Item') === 0): ?>
 
                     <h2><?php echo __('You have no items.'); ?></h2>
                 
@@ -200,7 +200,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
 
                 <?php else: ?>
                     
-                    <p><?php echo __('The query searched %s items and returned no results.', total_items()); ?> <?php echo __('Would you like to %s?', link_to_advanced_search(__('refine your search'))); ?></p>
+                    <p><?php echo __('The query searched %s items and returned no results.', total_records('Item')); ?> <?php echo __('Would you like to %s?', link_to_advanced_search(__('refine your search'))); ?></p>
     
                 
                 <?php endif; ?>

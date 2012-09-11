@@ -1,8 +1,8 @@
 <?php
-$pageTitle = __('Edit Tags') . ' ' .  __('(%s total)', total_tags());
+$pageTitle = __('Edit Tags') . ' ' .  __('(%s total)', $total_tags);
 head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodyclass'=>'tags browse-tags primary')); ?>
 <?php echo flash(); ?>
-<?php if ( total_tags() ): ?>
+<?php if ($total_tags): ?>
 
     <p id="tags-nav">
         <?php

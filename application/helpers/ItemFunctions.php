@@ -364,16 +364,6 @@ function random_featured_item($hasImage=null)
 }
 
 /**
- * Returns the total number of items
- *
- * @return integer
- */
-function total_items()
-{
-    return get_db()->getTable('Item')->count();
-}
-
-/**
  * Returns multiple random featured item
  *
  * @since 1.4

@@ -90,13 +90,3 @@ function random_featured_collection()
 {
     return get_db()->getTable('Collection')->findRandomFeatured();
 }
-
-/**
- * Returns the total number of collection
- *
- * @return integer
- */
-function total_collections()
-{
-    return get_db()->getTable('Collection')->count();
-}

@@ -7,16 +7,6 @@
  */
 
 /**
- * Returns the total number of tags
- *
- * @return integer
- */
-function total_tags()
-{
-    return get_db()->getTable('Tag')->count();
-}
-
-/**
  * Returns the most recent tags.
  *
  * @param integer $limit The maximum number of recent tags to return

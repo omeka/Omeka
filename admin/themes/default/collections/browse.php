@@ -3,7 +3,7 @@ $pageTitle = __('Browse Collections') . ' ' .  __('(%s total)', $total_records);
 head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
 
     <?php echo flash(); ?>
-    <?php if (total_collections() > 0): ?>
+    <?php if (total_records('Collection') > 0): ?>
         <?php if (has_permission('Collections', 'add')): ?>
             <a href="<?php echo html_escape(url('collections/add')); ?>" class="small green button"><?php echo __('Add a Collection'); ?></a>
         <?php endif; ?>
