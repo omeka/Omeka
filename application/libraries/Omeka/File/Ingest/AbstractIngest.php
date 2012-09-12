@@ -82,7 +82,7 @@ abstract class Omeka_File_Ingest_AbstractIngest
             $instance->setOptions($options);
             return $instance;
         } else {
-            throw new Omeka_File_Ingest_Exception('Could not load ' . $className);
+            throw new Omeka_File_Ingest_Exception(__('Could not load %s', $className));
         }
     }
     
@@ -282,8 +282,7 @@ abstract class Omeka_File_Ingest_AbstractIngest
         $dir = $storage->getTempDir();
         
         if (!is_writable($dir)) {
-            throw new Omeka_File_Ingest_Exception('Cannot write to the following directory: "'
-                              . $dir . '"!');
+            throw new Omeka_File_Ingest_Exception(__('Cannot write to the following directory: "%s"!', $dir));
         }
         return $dir . '/' . $filename;
     }

@@ -73,7 +73,7 @@ class Omeka_Db_Table
     public function __call($m, $a)
     {
         if (!method_exists($this->_db, $m) && !method_exists($this->_db->getAdapter(), $m)) {
-            throw new BadMethodCallException("Method named '$m' does not exist or is not callable.");
+            throw new BadMethodCallException(__("Method named '%s' does not exist or is not callable.", $m));
         }
         return call_user_func_array(array($this->_db, $m), $a);
     }
@@ -257,8 +257,8 @@ class Omeka_Db_Table
      */
     protected function _getColumnPairs()
     {
-        throw new BadMethodCallException('Column pairs must be defined by _getColumnPairs() in order to use ' .
-            'Omeka_Db_Table::findPairsForSelectForm()!');
+        throw new BadMethodCallException(__('Column pairs must be defined by _getColumnPairs() in order to use ' .
+            'Omeka_Db_Table::findPairsForSelectForm()!'));
     }
     
     /**

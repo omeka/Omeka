@@ -147,7 +147,7 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
     protected function _authenticateUser(User $user)
     {
         if (!$user->exists()) {
-            throw new InvalidArgumentException("User is not persistent in db.");
+            throw new InvalidArgumentException(__("User is not persistent in db."));
         }
         $bs = $this->application->getBootstrap();
         $bs->auth->getStorage()->write($user->id);
@@ -197,7 +197,7 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
                 ));
                 break;
             default:
-                throw new InvalidArgumentException("Invalid theme type given.");
+                throw new InvalidArgumentException(__("Invalid theme type given."));
                 break;
         }
     }

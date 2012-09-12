@@ -67,7 +67,7 @@ class Omeka_Controller_Plugin_Admin extends Zend_Controller_Plugin_Abstract
             require_once 'Zend/Session.php';
 
             if (!($auth = $this->getAuth())) {
-                throw new RuntimeException('Auth object must be available when routing admin requests!');
+                throw new RuntimeException(__('Auth object must be available when routing admin requests!'));
             }
         
             if (!$auth->hasIdentity()) {

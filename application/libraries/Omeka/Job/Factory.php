@@ -31,16 +31,16 @@ class Omeka_Job_Factory
         try {
             $data = Zend_Json::decode($json);
         } catch (Zend_Json_Exception $e) {
-            throw new Omeka_Job_Factory_MalformedJobException("Zend_Json_Exception: " . $e->getMessage() . " ($json)");
+            throw new Omeka_Job_Factory_MalformedJobException(__("Zend_Json_Exception: %s (%s)", $e->getMessage(), $json));
         }
         if (!$data) {
-            throw new Omeka_Job_Factory_MalformedJobException("The following malformed job was given: $json");
+            throw new Omeka_Job_Factory_MalformedJobException(__("The following malformed job was given: %s", $json));
         }
         if (!array_key_exists('className', $data)) {
-            throw new Omeka_Job_Factory_MalformedJobException("No 'className' attribute was given in the message.");
+            throw new Omeka_Job_Factory_MalformedJobException(__("No 'className' attribute was given in the message."));
         }
         if (!array_key_exists('options', $data)) {
-            throw new Omeka_Job_Factory_MalformedJobException("No 'options' attribute was given in the message.");
+            throw new Omeka_Job_Factory_MalformedJobException(__("No 'options' attribute was given in the message."));
         }
 
         return $this->build($data);
@@ -56,7 +56,7 @@ class Omeka_Job_Factory
     {
         $className = $data['className'];
         if (!class_exists($className, true)) {
-            throw new Omeka_Job_Factory_MissingClassException("Job class named $className does not exist.");
+            throw new Omeka_Job_Factory_MissingClassException(__("Job class named %s does not exist.", $className));
         }
         if (!isset($data['options'])) {
             $data['options'] = array();
@@ -64,7 +64,7 @@ class Omeka_Job_Factory
         if (isset($this->_options['db']) && isset($data['createdBy'])) {
             $user = $this->_options['db']->getTable('User')->find($data['createdBy']);
             if (!$user) {
-                throw new Omeka_Job_Factory_MalformedJobException("The user that created this job does not exist.");
+                throw new Omeka_Job_Factory_MalformedJobException(__("The user that created this job does not exist."));
             }
             $data['options']['user'] = $user;
         }

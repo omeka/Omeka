@@ -110,7 +110,7 @@ class Omeka_Plugin_Loader
     {
         $dirName = $plugin->getDirectoryName();
         if (array_key_exists($dirName, $this->_plugins) && $this->_plugins[$dirName] !== $plugin) {
-            throw new Omeka_Plugin_Loader_Exception("Plugin named '$dirName' has already been loaded/registered.");
+            throw new Omeka_Plugin_Loader_Exception(__("Plugin named '%s' has already been loaded/registered.", $dirName));
         }
         $this->_plugins[$dirName] = $plugin;
     }
@@ -150,7 +150,7 @@ class Omeka_Plugin_Loader
         $pluginDirName = $plugin->getDirectoryName();
         if (!$this->_canLoad($plugin, $force)) {
             if ($force) {
-                throw new Omeka_Plugin_Loader_Exception("The $pluginDirName plugin could not be loaded.");
+                throw new Omeka_Plugin_Loader_Exception(__("The %s plugin could not be loaded.", $pluginDirName));
             } else {
                 return;
             }
@@ -171,7 +171,7 @@ class Omeka_Plugin_Loader
                 // If we can't find one of the required plugins, loading should
                 // fail.
                 if ($force) {
-                    throw new Omeka_Plugin_Loader_Exception("The required plugin '$requiredPluginDirName' could not be found.");
+                    throw new Omeka_Plugin_Loader_Exception(__("The required plugin '%s' could not be found.", $requiredPluginDirName));
                 } else {
                     return;
                 }

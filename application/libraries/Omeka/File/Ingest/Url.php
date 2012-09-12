@@ -67,16 +67,12 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_AbstractSourceIngest
             $client->setStream($destination);
             $response = $client->request('GET');
         } catch (Zend_Http_Client_Exception $e) {
-            throw new Omeka_File_Ingest_Exception(
-                'Could not transfer the file from "' . $source
-                . '" to "' . $destination . '": ' . $e->getMessage());
+            throw new Omeka_File_Ingest_Exception(__('Could not transfer the file from "%s" to "%s": %s', $source, $destination, $e->getMessage()));
         }
     
         if ($response->isError()) {
             $code = $response->getStatus();
-            $msg = "The server returned code '$code'";
-            throw new Omeka_File_Ingest_Exception(
-                "'$source' cannot be read: " . $msg);
+            throw new Omeka_File_Ingest_Exception(__("'%s' cannot be read: \"The server returned code '%s'\"", $source, $code));
         }
     }
 
@@ -99,7 +95,7 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_AbstractSourceIngest
         }
 
         if (!($uri && $uriIsValid)) {
-            throw new Omeka_File_Ingest_InvalidException("$source is not a valid URL.");
+            throw new Omeka_File_Ingest_InvalidException(__("%s is not a valid URL.", $source));
         }
     }
 }

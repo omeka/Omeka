@@ -76,7 +76,7 @@ class Omeka_Db
         }
         
         if (!method_exists($this->_conn, $m)) {
-            throw new BadMethodCallException("Method named '$m' does not exist or is not callable.");
+            throw new BadMethodCallException(__("Method named '%s' does not exist or is not callable.", $m));
         }        
         
         try {
@@ -313,7 +313,7 @@ class Omeka_Db
     public function loadSqlFile($filePath)
     {
         if (!is_readable($filePath)) {
-            throw new InvalidArgumentException("Cannot read SQL file at '$filePath'.");
+            throw new InvalidArgumentException(__("Cannot read SQL file at '%s'.", $filePath));
         }
         $loadSql = file_get_contents($filePath);
         $subbedSql = str_replace('%PREFIX%', $this->prefix, $loadSql);

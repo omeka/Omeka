@@ -241,13 +241,13 @@ class Omeka_Db_Migration_Manager
     private function _loadMigration($filename)
     {
         if (!preg_match('/^\d{14}_(\w+)\.php$/', $filename, $match)) {
-            throw new Omeka_Db_Migration_Exception("Migration file '$filename' does not follow proper naming conventions.");
+            throw new Omeka_Db_Migration_Exception(__("Migration file '%s' does not follow proper naming conventions.", $filename));
         }
         $filePath = $this->_migrationsDir . '/' . $filename;
         require_once $filePath;
         $class = $match[1];
         if (!class_exists($class)) {
-            throw new Omeka_Db_Migration_Exception("Migration file '$filename' does not contain class '$class'.");
+            throw new Omeka_Db_Migration_Exception(__("Migration file '%s' does not contain class '%s'.", $filename, $class));
         }
         $inst = new $class;
         $inst->setDb($this->_db);

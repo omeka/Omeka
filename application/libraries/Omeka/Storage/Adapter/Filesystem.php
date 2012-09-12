@@ -55,7 +55,7 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter_AdapterI
                     break;
 
                 default:
-                    throw new Omeka_Storage_Exception("Invalid option: '$key'");
+                    throw new Omeka_Storage_Exception(__("Invalid option: '%s'", $key));
                     break;
             }
         }
@@ -74,13 +74,11 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter_AdapterI
             if (!is_dir($dirToCreate)) {
                 $made = @mkdir($dirToCreate, 0770, true);
                 if (!$made || !is_readable($dirToCreate)) {
-                    throw new Omeka_Storage_Exception("Error making directory: "
-                        . "'$dirToCreate'");
+                    throw new Omeka_Storage_Exception(__("Error making directory: '%s'", $dirToCreate));
                 }
             }
             if (!is_writable($dirToCreate)) {
-                throw new Omeka_Storage_Exception("Directory not writable: "
-                    . "'$dirToCreate'");
+                throw new Omeka_Storage_Exception(__("Directory not writable: '%s'", $dirToCreate));
             }
         }
     }
@@ -115,7 +113,7 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter_AdapterI
         $status = $this->_rename($source, $this->_getAbsPath($dest));
 
         if(!$status) {
-            throw new Omeka_Storage_Exception('Unable to store file.');
+            throw new Omeka_Storage_Exception(__('Unable to store file.'));
         }
     }
 
@@ -131,7 +129,7 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter_AdapterI
             $this->_getAbsPath($dest));
 
         if(!$status) {
-            throw new Omeka_Storage_Exception('Unable to move file.');
+            throw new Omeka_Storage_Exception(__('Unable to move file.'));
         }
     }
 
@@ -147,7 +145,7 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter_AdapterI
 
         if(!$status) {
             if (file_exists($absPath)) {
-                throw new Omeka_Storage_Exception('Unable to delete file.');
+                throw new Omeka_Storage_Exception(__('Unable to delete file.'));
             } else {
                 _log("Omeka_Storage_Adapter_Filesystem: Tried to delete missing file '$path'.", Zend_Log::WARN);
             }
@@ -200,8 +198,7 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter_AdapterI
     {
         $destDir = dirname($dest);
         if (!is_writable($destDir)) {
-            throw new Omeka_Storage_Exception("Destination directory is not "
-                . "writable: '$destDir'.");
+            throw new Omeka_Storage_Exception(__("Destination directory is not writable: '%s'.", $destDir));
         }
         return rename($source, $dest);
     }

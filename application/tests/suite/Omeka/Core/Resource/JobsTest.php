@@ -89,7 +89,7 @@ class Omeka_Application_Bootstrap_Mock extends Zend_Application_Bootstrap_Bootst
 
     public function getResource($name) {
         if (!$this->hasResource($name)) {
-            throw new InvalidArgumentException("Resource named '$name' is not available.");
+            throw new InvalidArgumentException(__("Resource named '%s' is not available.", $name));
         }
         return $this->_mockResources[$name];
     }
@@ -101,7 +101,7 @@ class Omeka_Application_Bootstrap_Mock extends Zend_Application_Bootstrap_Bootst
     protected function _bootstrap($resource = null)
     {
         if (!$this->hasResource($resource)) {
-            throw new InvalidArgumentException("Resource named '$resource' is not available.");
+            throw new InvalidArgumentException(__("Resource named '%s' is not available.", $resource));
         }
     }
 }

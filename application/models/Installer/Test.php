@@ -42,7 +42,7 @@ class Installer_Test extends Installer_Default
     protected function _getValue($fieldName)
     {
         if (!array_key_exists($fieldName, $this->_testDefaults)) {
-            throw new Installer_Exception("Cannot find field named '$fieldName'.");
+            throw new Installer_Exception(__("Cannot find field named '%s'.", $fieldName));
         }
         return $this->_testDefaults[$fieldName];
     }

@@ -46,11 +46,11 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
             $awsKey = $options[self::AWS_KEY_OPTION];
             $awsSecretKey = $options[self::AWS_SECRET_KEY_OPTION];
         } else {
-            throw new Omeka_Storage_Exception('You must specify your AWS access key and secret key to use the ZendS3 storage adapter.');
+            throw new Omeka_Storage_Exception(__('You must specify your AWS access key and secret key to use the ZendS3 storage adapter.'));
         }
 
         if (!array_key_exists(self::BUCKET_OPTION, $options)) {
-            throw new Omeka_Storage_Exception('You must specify an S3 bucket name to use the ZendS3 storage adapter.');
+            throw new Omeka_Storage_Exception(__('You must specify an S3 bucket name to use the ZendS3 storage adapter.'));
         }
         
         $region = @$options[self::REGION_OPTION];
@@ -95,7 +95,7 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
         $status = $this->_s3->putFileStream($source, $objectName, $meta);
 
         if(!$status) {
-            throw new Omeka_Storage_Exception('Unable to store file.');
+            throw new Omeka_Storage_Exception(__('Unable to store file.'));
         }
         
         _log("Omeka_Storage_Adapter_ZendS3: Stored '$source' as '$objectName'.");
@@ -116,7 +116,7 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
         $status = $this->_s3->moveObject($sourceObject, $destObject);
 
         if(!$status) {
-            throw new Omeka_Storage_Exception('Unable to move file.');
+            throw new Omeka_Storage_Exception(__('Unable to move file.'));
         }
 
         _log("Omeka_Storage_Adapter_ZendS3: Moved '$sourceObject' to '$destObject'.");
@@ -135,7 +135,7 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
 
         if(!$status) {
             if ($this->_s3->isObjectAvailable($objectName)) {
-                throw new Omeka_Storage_Exception('Unable to delete file.');
+                throw new Omeka_Storage_Exception(__('Unable to delete file.'));
             } else {
                 _log("Omeka_Storage_Adapter_ZendS3: Tried to delete missing object '$objectName'.", Zend_Log::WARN);
             }

@@ -22,7 +22,7 @@ class Omeka_Db_Select extends Zend_Db_Select
         if (!$adapter) {
             //Omeka's connection to the Zend_Db_Adapter
             if (!($db = Zend_Registry::get('bootstrap')->getResource('Db'))) {
-                throw new RuntimeException("Unable to retrieve Omeka_Db instance.");
+                throw new RuntimeException(__("Unable to retrieve Omeka_Db instance."));
             }
             $adapter = $db->getAdapter();
         }

@@ -228,7 +228,7 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
             case self::RETURN_ARRAY:
                 return $this->_getOutputAsArray();
             default:
-                throw new Omeka_View_Exception('Invalid return type!');
+                throw new Omeka_View_Exception(__('Invalid return type!'));
         }
     }
 

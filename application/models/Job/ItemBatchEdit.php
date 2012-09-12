@@ -42,7 +42,7 @@ class Job_ItemBatchEdit extends Omeka_Job_AbstractJob
     {
         $item = $this->_db->getTable('Item')->find($id);
         if (!$item) {
-            throw new RuntimeException("Item with ID={$this->_options['itemId']} does not exist");
+            throw new RuntimeException(__("Item with ID=%s does not exist", $this->_options['itemId']));
         }
         return $item;
     }

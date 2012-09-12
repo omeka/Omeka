@@ -527,7 +527,7 @@ class Table_Item extends Omeka_Db_Table
                 break;
 
             default:
-                throw new Omeka_Record_Exception( 'Invalid position provided to ItemTable::findNearby()!' );
+                throw new Omeka_Record_Exception(__('Invalid position provided to ItemTable::findNearby()!'));
                 break;
         }
 

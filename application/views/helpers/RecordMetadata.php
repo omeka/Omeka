@@ -65,7 +65,7 @@ class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
         }
 
         if (!($record instanceof Omeka_Record_AbstractRecord)) {
-            throw new InvalidArgumentException('Invalid record passed to recordMetadata.');
+            throw new InvalidArgumentException(__('Invalid record passed to recordMetadata.'));
         }
          
         $this->_record = $record;
@@ -154,7 +154,7 @@ class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
 
         // If we didn't fit either of those categories, it's an invalid
         // argument.
-        throw new Omeka_View_Exception('Unrecognized metadata specifier.');
+        throw new Omeka_View_Exception(__('Unrecognized metadata specifier.'));
     }
 
     /**
