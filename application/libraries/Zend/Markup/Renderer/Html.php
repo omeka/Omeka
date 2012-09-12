@@ -15,9 +15,9 @@
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Html.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Html.php 24593 2012-01-05 20:35:02Z matthew $
  */
 
 /**
@@ -43,7 +43,7 @@ require_once 'Zend/Markup/Renderer/RendererAbstract.php';
  * @category   Zend
  * @package    Zend_Markup
  * @subpackage Renderer
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Markup_Renderer_Html extends Zend_Markup_Renderer_RendererAbstract

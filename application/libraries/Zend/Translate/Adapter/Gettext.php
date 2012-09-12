@@ -14,8 +14,8 @@
  *
  * @category   Zend
  * @package    Zend_Translate
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id: Gettext.php 23961 2011-05-03 11:20:34Z yoshida@zend.co.jp $
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @version    $Id: Gettext.php 24593 2012-01-05 20:35:02Z matthew $
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -28,7 +28,7 @@ require_once 'Zend/Translate/Adapter.php';
 /**
  * @category   Zend
  * @package    Zend_Translate
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Translate_Adapter_Gettext extends Zend_Translate_Adapter {
@@ -133,7 +133,7 @@ class Zend_Translate_Adapter_Gettext extends Zend_Translate_Adapter {
                 }
             }
         }
-
+        
         @fclose($this->_file);
 
         $this->_data[$locale][''] = trim($this->_data[$locale]['']);

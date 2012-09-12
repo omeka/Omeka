@@ -15,9 +15,9 @@
  * @category   Zend
  * @package    Zend_Pdf
  * @subpackage Fonts
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: CidFont.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: CidFont.php 24664 2012-02-26 16:36:51Z adamlundrigan $
  */
 
 /** Internally used classes */
@@ -51,7 +51,7 @@ require_once 'Zend/Pdf/Resource/Font.php';
  *
  * @package    Zend_Pdf
  * @subpackage Fonts
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Pdf_Resource_Font_CidFont extends Zend_Pdf_Resource_Font
@@ -129,7 +129,9 @@ abstract class Zend_Pdf_Resource_Font_CidFont extends Zend_Pdf_Resource_Font
         $charGlyphs  = $this->_cmap->getCoveredCharactersGlyphs();
         $charWidths  = array();
         foreach ($charGlyphs as $charCode => $glyph) {
-            $charWidths[$charCode] = $glyphWidths[$glyph];
+            if(isset($glyphWidths[$glyph]) && !is_null($glyphWidths[$glyph])) {
+                $charWidths[$charCode] = $glyphWidths[$glyph];
+            }
         }
         $this->_charWidths       = $charWidths;
         $this->_missingCharWidth = $glyphWidths[0];

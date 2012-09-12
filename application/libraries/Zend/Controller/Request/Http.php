@@ -14,9 +14,9 @@
  *
  * @category   Zend
  * @package    Zend_Controller
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Http.php 24008 2011-05-04 18:11:15Z ralph $
+ * @version    $Id: Http.php 24842 2012-05-31 18:31:28Z rob $
  */
 
 /** @see Zend_Controller_Request_Abstract */
@@ -390,7 +390,11 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
     public function setRequestUri($requestUri = null)
     {
         if ($requestUri === null) {
-            if (isset($_SERVER['HTTP_X_REWRITE_URL'])) { // check this first so IIS will catch
+            if (isset($_SERVER['HTTP_X_ORIGINAL_URL'])) { 
+                // IIS with Microsoft Rewrite Module
+                $requestUri = $_SERVER['HTTP_X_ORIGINAL_URL'];
+            } elseif (isset($_SERVER['HTTP_X_REWRITE_URL'])) { 
+                // IIS with ISAPI_Rewrite
                 $requestUri = $_SERVER['HTTP_X_REWRITE_URL'];
             } elseif (
                 // IIS7 with URL Rewrite: make sure we get the unencoded url (double slash problem)

@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Form
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -26,9 +26,9 @@ require_once 'Zend/Validate/Interface.php';
  *
  * @category   Zend
  * @package    Zend_Form
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Form.php 24156 2011-06-27 14:57:44Z ezimuel $
+ * @version    $Id: Form.php 24848 2012-05-31 19:28:48Z rob $
  */
 class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
 {
@@ -495,12 +495,13 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
                 $loader->addPrefixPath($prefix, $path);
                 return $this;
             case null:
-                $prefix = rtrim($prefix, '_');
+                $nsSeparator = (false !== strpos($prefix, '\\'))?'\\':'_';
+                $prefix = rtrim($prefix, $nsSeparator);
                 $path   = rtrim($path, DIRECTORY_SEPARATOR);
                 foreach (array(self::DECORATOR, self::ELEMENT) as $type) {
                     $cType        = ucfirst(strtolower($type));
                     $pluginPath   = $path . DIRECTORY_SEPARATOR . $cType . DIRECTORY_SEPARATOR;
-                    $pluginPrefix = $prefix . '_' . $cType;
+                    $pluginPrefix = $prefix . $nsSeparator . $cType;
                     $loader       = $this->getPluginLoader($type);
                     $loader->addPrefixPath($pluginPrefix, $pluginPath);
                 }
@@ -2254,7 +2255,8 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
             }
         }
         foreach ($this->getSubForms() as $key => $form) {
-            if (null !== $translator && !$form->hasTranslator()) {
+            if (null !== $translator && $this->hasTranslator()
+                    && !$form->hasTranslator()) {
                 $form->setTranslator($translator);
             }
             if (isset($data[$key]) && !$form->isArray()) {

@@ -16,9 +16,9 @@
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: App.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: App.php 24593 2012-01-05 20:35:02Z matthew $
  */
 
 /**
@@ -42,6 +42,11 @@ require_once 'Zend/Version.php';
 require_once 'Zend/Gdata/App/MediaSource.php';
 
 /**
+ * Zend_Uri/Http
+ */
+require_once 'Zend/Uri/Http.php';
+
+/**
  * Provides Atom Publishing Protocol (APP) functionality.  This class and all
  * other components of Zend_Gdata_App are designed to work independently from
  * other Zend_Gdata components in order to interact with generic APP services.
@@ -49,7 +54,7 @@ require_once 'Zend/Gdata/App/MediaSource.php';
  * @category   Zend
  * @package    Zend_Gdata
  * @subpackage App
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_App

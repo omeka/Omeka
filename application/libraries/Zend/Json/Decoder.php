@@ -14,9 +14,9 @@
  *
  * @category   Zend
  * @package    Zend_Json
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Decoder.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Decoder.php 24799 2012-05-12 19:27:07Z adamlundrigan $
  */
 
 /**
@@ -29,7 +29,7 @@ require_once 'Zend/Json.php';
  *
  * @category   Zend
  * @package    Zend_Json
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Json_Decoder
@@ -236,6 +236,9 @@ class Zend_Json_Decoder
                 // Create new StdClass and populate with $members
                 $result = new StdClass();
                 foreach ($members as $key => $value) {
+                    if ($key === '') {
+                        $key = '_empty_';
+                    }
                     $result->$key = $value;
                 }
                 break;

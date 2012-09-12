@@ -14,15 +14,15 @@
  *
  * @category   Zend
  * @package    Zend_Cache
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Cache.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: Cache.php 24656 2012-02-26 06:02:53Z adamlundrigan $
  */
 
 
 /**
  * @package    Zend_Cache
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Cache
@@ -133,7 +133,7 @@ abstract class Zend_Cache
             require_once str_replace('_', DIRECTORY_SEPARATOR, $backendClass) . '.php';
         } else {
             // we use a custom backend
-            if (!preg_match('~^[\w]+$~D', $backend)) {
+            if (!preg_match('~^[\w\\\\]+$~D', $backend)) {
                 Zend_Cache::throwException("Invalid backend name [$backend]");
             }
             if (!$customBackendNaming) {
@@ -175,7 +175,7 @@ abstract class Zend_Cache
             require_once str_replace('_', DIRECTORY_SEPARATOR, $frontendClass) . '.php';
         } else {
             // we use a custom frontend
-            if (!preg_match('~^[\w]+$~D', $frontend)) {
+            if (!preg_match('~^[\w\\\\]+$~D', $frontend)) {
                 Zend_Cache::throwException("Invalid frontend name [$frontend]");
             }
             if (!$customFrontendNaming) {

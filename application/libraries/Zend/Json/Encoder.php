@@ -14,9 +14,9 @@
  *
  * @category   Zend
  * @package    Zend_Json
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Encoder.php 24152 2011-06-24 15:23:19Z adamlundrigan $
+ * @version    $Id: Encoder.php 24593 2012-01-05 20:35:02Z matthew $
  */
 
 /**
@@ -24,7 +24,7 @@
  *
  * @category   Zend
  * @package    Zend_Json
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Json_Encoder
@@ -135,22 +135,24 @@ class Zend_Json_Encoder
         }
 
         $props = '';
-
-        if ($value instanceof Iterator) {
-            $propCollection = $value;
+        if (method_exists($value, 'toJson')) {
+            $props =',' . preg_replace("/^\{(.*)\}$/","\\1",$value->toJson());
         } else {
-            $propCollection = get_object_vars($value);
-        }
+            if ($value instanceof Iterator) {
+                $propCollection = $value;
+            } else {
+                $propCollection = get_object_vars($value);
+            }
 
-        foreach ($propCollection as $name => $propValue) {
-            if (isset($propValue)) {
-                $props .= ','
-                        . $this->_encodeString($name)
-                        . ':'
-                        . $this->_encodeValue($propValue);
+            foreach ($propCollection as $name => $propValue) {
+                if (isset($propValue)) {
+                    $props .= ','
+                            . $this->_encodeString($name)
+                            . ':'
+                            . $this->_encodeValue($propValue);
+                }
             }
         }
-
         $className = get_class($value);
         return '{"__className":' . $this->_encodeString($className)
                 . $props . '}';

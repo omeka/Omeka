@@ -15,16 +15,16 @@
  * @category   Zend
  * @package    Zend_Service
  * @subpackage LiveDocx
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: LiveDocx.php 23953 2011-05-03 05:47:39Z ralph $
+ * @version    $Id: LiveDocx.php 25024 2012-07-30 15:08:15Z rob $
  */
 
 /**
  * @category   Zend
  * @package    Zend_Service
  * @subpackage LiveDocx
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @since      LiveDocx 1.0
  */

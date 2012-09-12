@@ -15,9 +15,9 @@
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: HelperAbstract.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id: HelperAbstract.php 24962 2012-06-15 14:28:42Z adamlundrigan $
  */
 
 /**
@@ -36,7 +36,7 @@ require_once 'Zend/View/Helper/HtmlElement.php';
  * @category   Zend
  * @package    Zend_View
  * @subpackage Helper
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_View_Helper_Navigation_HelperAbstract
@@ -70,6 +70,20 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
      * @var string
      */
     protected $_indent = '';
+
+    /**
+     * Prefix for IDs when they are normalized
+     *
+     * @var string|null
+     */
+    protected $_prefixForId = null;
+
+    /**
+     * Skip current prefix for IDs when they are normalized (flag)
+     *
+     * @var bool
+     */
+    protected $_skipPrefixForId = false;
 
     /**
      * Translator
@@ -271,6 +285,50 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
     public function getIndent()
     {
         return $this->_indent;
+    }
+
+    /**
+     * Sets prefix for IDs when they are normalized
+     *
+     * @param   string $prefix                              Prefix for IDs
+     * @return  Zend_View_Helper_Navigation_HelperAbstract  fluent interface, returns self
+     */
+    public function setPrefixForId($prefix)
+    {
+        if (is_string($prefix)) {
+            $this->_prefixForId = trim($prefix);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Returns prefix for IDs when they are normalized
+     *
+     * @return string   Prefix for
+     */
+    public function getPrefixForId()
+    {
+        if (null === $this->_prefixForId) {
+            $prefix             = get_class($this);
+            $this->_prefixForId = strtolower(
+                    trim(substr($prefix, strrpos($prefix, '_')), '_')
+                ) . '-';
+        }
+
+        return $this->_prefixForId;
+    }
+
+    /**
+     * Skip the current prefix for IDs when they are normalized
+     *
+     * @param  bool $flag
+     * @return Zend_View_Helper_Navigation_HelperAbstract  fluent interface, returns self
+     */
+    public function skipPrefixForId($flag = true)
+    {
+        $this->_skipPrefixForId = (bool) $flag;
+        return $this;
     }
 
     /**
@@ -669,12 +727,15 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
         }
 
         // get attribs for anchor element
-        $attribs = array(
-            'id'     => $page->getId(),
-            'title'  => $title,
-            'class'  => $page->getClass(),
-            'href'   => $page->getHref(),
-            'target' => $page->getTarget()
+        $attribs = array_merge(
+            array(
+                'id'     => $page->getId(),
+                'title'  => $title,
+                'class'  => $page->getClass(),
+                'href'   => $page->getHref(),
+                'target' => $page->getTarget()
+            ),
+            $page->getCustomHtmlAttribs()
         );
 
         return '<a' . $this->_htmlAttribs($attribs) . '>'
@@ -800,17 +861,22 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
     /**
      * Normalize an ID
      *
-     * Overrides {@link Zend_View_Helper_HtmlElement::_normalizeId()}.
+     * Extends {@link Zend_View_Helper_HtmlElement::_normalizeId()}.
      *
-     * @param  string $value
-     * @return string
+     * @param  string $value    ID
+     * @return string           Normalized ID
      */
     protected function _normalizeId($value)
-    {
-        $prefix = get_class($this);
-        $prefix = strtolower(trim(substr($prefix, strrpos($prefix, '_')), '_'));
+    {        
+        if (false === $this->_skipPrefixForId) {
+            $prefix = $this->getPrefixForId();
 
-        return $prefix . '-' . $value;
+            if (strlen($prefix)) {
+                return $prefix . $value;
+            }
+        }
+
+        return parent::_normalizeId($value);
     }
 
     // Static methods:

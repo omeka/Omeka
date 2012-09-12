@@ -15,9 +15,9 @@
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Twitter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Twitter.php 23877 2011-04-28 20:17:01Z ralph $
+ * @version    $Id: Twitter.php 25024 2012-07-30 15:08:15Z rob $
  */
 
 /**
@@ -39,7 +39,7 @@ require_once 'Zend/Oauth/Consumer.php';
  * @category   Zend
  * @package    Zend_Service
  * @subpackage Twitter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Service_Twitter extends Zend_Rest_Client

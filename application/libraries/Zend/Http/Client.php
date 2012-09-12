@@ -16,8 +16,8 @@
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Client
- * @version    $Id: Client.php 24461 2011-09-11 19:25:08Z padraic $
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @version    $Id: Client.php 24593 2012-01-05 20:35:02Z matthew $
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -60,7 +60,7 @@ require_once 'Zend/Http/Response/Stream.php';
  * @package    Zend_Http
  * @subpackage Client
  * @throws     Zend_Http_Client_Exception
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Http_Client
@@ -101,7 +101,7 @@ class Zend_Http_Client
      */
     const ENC_URLENCODED = 'application/x-www-form-urlencoded';
     const ENC_FORMDATA   = 'multipart/form-data';
-    
+
     /**
      * Value types for Body key/value pairs
      */
@@ -207,14 +207,14 @@ class Zend_Http_Client
      * @var array
      */
     protected $files = array();
-    
+
     /**
      * Ordered list of keys from key/value pair data to include in body
-     * 
+     *
      * An associative array, where each element is of the format:
      *   '<field name>' => VTYPE_SCALAR | VTYPE_FILE
-     * 
-     * @var array 
+     *
+     * @var array
      */
     protected $body_field_order = array();
 
@@ -855,7 +855,7 @@ class Zend_Http_Client
         $this->files         = array();
         $this->raw_post_data = null;
         $this->enctype       = null;
-        
+
         if($clearAll) {
             $this->headers = array();
             $this->last_request = null;
@@ -939,7 +939,7 @@ class Zend_Http_Client
      */
     public function getAdapter()
     {
-         if (null === $this->adapter) {
+        if (null === $this->adapter) {
             $this->setAdapter($this->config['adapter']);
         }
 
@@ -1111,7 +1111,7 @@ class Zend_Http_Client
                 // Avoid problems with buggy servers that add whitespace at the
                 // end of some headers (See ZF-11283)
                 $location = trim($location);
-                
+
                 // Check whether we send the exact same request again, or drop the parameters
                 // and send a GET request
                 if ($response->getStatus() == 303 ||
@@ -1290,7 +1290,7 @@ class Zend_Http_Client
                     // Encode body as multipart/form-data
                     $boundary = '---ZENDHTTPCLIENT-' . md5(microtime());
                     $this->setHeaders(self::CONTENT_TYPE, self::ENC_FORMDATA . "; boundary={$boundary}");
-                    
+
                     // Encode all files and POST vars in the order they were given
                     foreach ($this->body_field_order as $fieldName=>$fieldType) {
                         switch ($fieldType) {
