@@ -1,25 +1,27 @@
 <?php
 class Omeka_Record_Iterator implements Iterator
 {
-    private $_currentRecordVar;
-    private $_records;
-    private $_view;
+    protected $_records;
+    protected $_view;
+    protected $_currentRecordVar;
     
     /**
      * Construct the record iterator.
      * 
-     * @param string $currentRecordVar
+     * @uses Omeka_View_Helper_Singularize::singularize()
      * @param array $records
-     * @param Zend_View_Abstract|null $view
+     * @param null|Zend_View_Abstract $view
+     * @param null|string $currentRecordVar
      */
-    public function __construct($currentRecordVar, $records, $view = null)
+    public function __construct(array $records, $view = null, $currentRecordVar = null)
     {
         // Normalize the current record variable for the view.
         if ($view instanceof Zend_View_Abstract) {
             $currentRecordVar = $view->singularize($currentRecordVar);
         }
-        $this->_currentRecordVar = $currentRecordVar;
+        
         $this->_records = $records;
+        $this->_currentRecordVar = $currentRecordVar;
         $this->_view = $view;
     }
     
@@ -33,6 +35,10 @@ class Omeka_Record_Iterator implements Iterator
      */
     public function current()
     {
+        if (!(current($this->_records) instanceof Omeka_Record_AbstractRecord)) {
+            throw new Omeka_Record_Exception(__('An invalid value was detected during record iteration.'));
+        }
+        
         if ($this->_view instanceof Zend_View_Abstract) {
             $this->_view->{$this->_currentRecordVar} = current($this->_records);
         }
@@ -46,6 +52,8 @@ class Omeka_Record_Iterator implements Iterator
     
     /**
      * Release the previous record and advance the pointer to the next one.
+     * 
+     * @uses release_object()
      */
     public function next()
     {
@@ -55,6 +63,6 @@ class Omeka_Record_Iterator implements Iterator
     
     public function valid()
     {
-        return false !== $this->current();
+        return false !== current($this->_records);
     }
 }
