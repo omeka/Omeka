@@ -267,7 +267,8 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
             'do_not_set' => 'foobar'
         );
         try {
-            $record->saveForm($post);
+            $record->setPostData($post);
+            $record->save();
         } catch (Exception $e) {
             $this->assertContains(self::VALIDATION_ERROR, $e->getMessage());
             throw $e;
@@ -281,28 +282,8 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
         $post = array(
             'id' => 2,
         );    
-        $record->saveForm($post);
+        $record->setPostData($post);
         $this->assertNotEquals(2, $record->id);
-    }
-        
-    public function testSaveFormCallbacks()
-    {
-        $this->dbAdapter->appendLastInsertIdToStack(self::DUMMY_RECORD_ID);
-        $record = new DummyRecord($this->db);
-        $post = array(
-            'other_field' => true
-        );
-        $record->saveForm($post);
-        $postObject = new ArrayObject($post);
-        $this->assertEquals(array(
-            'DummyRecord::beforeSaveForm() with POST = ' . print_r($postObject, true),
-            "DummyRecord::beforeInsert()",
-            "DummyRecord::beforeSave()",
-            "DummyRecord::afterInsert()",
-            "DummyRecord::afterSave()",
-            'DummyRecord::afterSaveForm() with POST = ' . print_r($postObject, true)
-        ),
-        $this->_simpleStack());
     }
         
     public function tearDown()
