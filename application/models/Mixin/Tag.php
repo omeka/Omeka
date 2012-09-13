@@ -42,6 +42,16 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
         $this->deleteTaggings();
     }
     
+    /**
+     * Add tags to this record's search text.
+     */
+    public function afterSave($args)
+    {
+        foreach ($this->getTags() as $tag) {
+            $this->_record->addSearchText($tag->name);
+        }
+    }
+    
     public function deleteTaggings()
     {
         $db = $this->_record->getDb();
