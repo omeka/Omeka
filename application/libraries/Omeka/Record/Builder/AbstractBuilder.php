@@ -128,16 +128,16 @@ abstract class Omeka_Record_Builder_AbstractBuilder
             $this->_record = new $this->_recordClass($this->_db);        
         } else if ($record instanceof Omeka_Record_AbstractRecord) {
             if (!($record instanceof $this->_recordClass)) {
-                throw new Omeka_Record_Builder_Exception(__("Incorrect record instance given.  Must be instance of %s.", $this->_recordClass));
+                throw new Omeka_Record_Builder_Exception("Incorrect record instance given.  Must be instance of '$this->_recordClass'.");
             }
             $this->_record = $record;
         } else if (is_int($record)) {
             $this->_record = $this->_db->getTable($this->_recordClass)->find($record);
             if (!$this->_record) {
-                throw new Omeka_Record_Builder_Exception(__("Could not find record with ID = %s", $record));
+                throw new Omeka_Record_Builder_Exception("Could not find record with ID = " . $record);
             }
         } else {
-            throw new InvalidArgumentException(__("Argument passed to setRecord() must be Omeka_Record_AbstractRecord, integer, or null."));
+            throw new InvalidArgumentException("Argument passed to setRecord() must be Omeka_Record_AbstractRecord, integer, or null.");
         }
     }
     

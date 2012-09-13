@@ -829,7 +829,7 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
         } else if (is_callable($callback, false, $name)) {
             return $name;
         } else {
-            throw new InvalidArgumentException(__('Invalid file display callback.'));
+            throw new InvalidArgumentException('Invalid file display callback.');
         }
     }
 }

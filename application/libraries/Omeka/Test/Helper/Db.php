@@ -55,7 +55,7 @@ class Omeka_Test_Helper_Db
         } else if (is_array($dbConfig) || ($dbConfig instanceof Zend_Config)){
             return new self(Zend_Db::factory('Mysqli', $dbConfig));
         } else {
-            throw new InvalidArgumentException(__('$dbConfig must be an array, Zend_Config or Zend_Application!'));
+            throw new InvalidArgumentException("\$dbConfig must be an array, Zend_Config or Zend_Application!");
         }
     }
     

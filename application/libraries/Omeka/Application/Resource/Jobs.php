@@ -47,10 +47,10 @@ class Omeka_Application_Resource_Jobs extends Zend_Application_Resource_Resource
         
         // Validate the dispatcher classes.
         if (!class_exists($defaultClass)) {
-            throw new Omeka_Application_Resource_Jobs_InvalidAdapterException(__('Cannot find job dispatcher adapter class named "%s".', $defaultClass));
+            throw new Omeka_Application_Resource_Jobs_InvalidAdapterException("Cannot find job dispatcher adapter class named \"$defaultClass\".");
         }
         if (!class_exists($longRunningClass)) {
-            throw new Omeka_Application_Resource_Jobs_InvalidAdapterException(__('Cannot find job dispatcher adapter class named "%s".', $longRunningClass));
+            throw new Omeka_Application_Resource_Jobs_InvalidAdapterException("Cannot find job dispatcher adapter class named \"$longRunningClass\".");
         }
         
         // Instantiate the dispatcher objects.
@@ -59,10 +59,10 @@ class Omeka_Application_Resource_Jobs extends Zend_Application_Resource_Resource
         
         // Validate the dispatcher objects.
         if (!($default instanceof Omeka_Job_Dispatcher_Adapter_AdapterInterface)) {
-            throw new Omeka_Application_Resource_Jobs_InvalidAdapterException(__('Adapter named "%s" does not implement the required Omeka_Job_Dispatcher_Adapter_AdapterInterface interface.', $defaultClass));
+            throw new Omeka_Application_Resource_Jobs_InvalidAdapterException("Adapter named \"$defaultClass\" does not implement the required Omeka_Job_Dispatcher_Adapter_AdapterInterface interface.");
         }
         if (!($longRunning instanceof Omeka_Job_Dispatcher_Adapter_AdapterInterface)) {
-            throw new Omeka_Application_Resource_Jobs_InvalidAdapterException(__('Adapter named "%s" does not implement the required Omeka_Job_Dispatcher_Adapter_AdapterInterface interface.', $longRunningClass));
+            throw new Omeka_Application_Resource_Jobs_InvalidAdapterException("Adapter named \"$longRunningClass\" does not implement the required Omeka_Job_Dispatcher_Adapter_AdapterInterface interface.");
         }
         
         // Register the job dispatcher.

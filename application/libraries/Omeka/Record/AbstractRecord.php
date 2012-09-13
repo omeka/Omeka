@@ -125,7 +125,7 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
                 // No bootstrap...
             }
             if (!$db) {
-                throw new Omeka_Record_Exception(__("Unable to retrieve database instance."));
+                throw new Omeka_Record_Exception("Unable to retrieve database instance.");
             }
         }
         
@@ -254,7 +254,7 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
             }
         }
         if (!$methodFound) {
-            throw new BadMethodCallException(__("Method named %s() does not exist.", $method));
+            throw new BadMethodCallException( "Method named $method() does not exist."  );
         }
     }
     
@@ -513,7 +513,7 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
     public function save($throwIfInvalid = true)
     {
         if ($this->_locked) {
-            throw new Omeka_Record_Exception(__('Cannot save a locked record!'));
+            throw new Omeka_Record_Exception('Cannot save a locked record!');
         }
         
         $was_inserted = !$this->exists();
@@ -543,7 +543,7 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
         $insert_id = $this->getDb()->insert(get_class($this), $data_to_save);
         
         if ($was_inserted && (empty($insert_id) || !is_numeric($insert_id))) {
-            throw new Omeka_Record_Exception(__("LAST_INSERT_ID() did not return a numeric ID when saving the record."));
+            throw new Omeka_Record_Exception("LAST_INSERT_ID() did not return a numeric ID when saving the record.");
         }
         $this->id = $insert_id;
         
@@ -578,7 +578,7 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
     public function delete()
     {
         if ($this->_locked) {
-            throw new Omeka_Record_Exception(__('Cannot delete a locked record!'));
+            throw new Omeka_Record_Exception( 'Cannot delete a locked record!' );
         }
         
         if (!$this->exists()) {
@@ -867,7 +867,7 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
         $value = $value ? $value : $this->$field;
 
         if ($value === null) {
-            throw new Omeka_Record_Exception(__("Cannot check uniqueness of NULL value."));
+            throw new Omeka_Record_Exception("Cannot check uniqueness of NULL value.");
         }
 
         $validatorOptions = array(

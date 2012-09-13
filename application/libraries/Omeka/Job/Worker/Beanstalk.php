@@ -27,7 +27,9 @@ class Omeka_Job_Worker_Beanstalk
         try {
             $omekaJob = $this->_jobFactory->from($pJob->getData());
             if (!$omekaJob) {
-                throw new UnexpectedValueException(__("Job factory returned null (should never happen)."));
+                throw new UnexpectedValueException(
+                    "Job factory returned null (should never happen)."
+                );
             }
 
             if ($omekaJob instanceof Omeka_Job_AbstractJob) {

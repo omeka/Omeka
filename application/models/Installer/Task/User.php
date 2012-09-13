@@ -66,7 +66,7 @@ class Installer_Task_User implements Installer_TaskInterface
         );
         foreach ($required as $propName => $fieldName) {
             if (!$this->$propName) {
-                throw new Installer_Task_Exception(__("Required field '%s' not given.", $fieldName));
+                throw new Installer_Task_Exception("Required field '$fieldName' not given.");
             }
         }
         
@@ -80,7 +80,8 @@ class Installer_Task_User implements Installer_TaskInterface
         try {
             $user->save();
         } catch (Omeka_Validator_Exception $e) {
-            throw new Installer_Task_Exception(__("New user does not validate: %s", $e->getMessage()));
+            throw new Installer_Task_Exception("New user does not validate: "
+             . $e->getMessage());
         }
     }
 }

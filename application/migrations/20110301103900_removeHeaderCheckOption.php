@@ -23,6 +23,6 @@ class removeHeaderCheckOption extends Omeka_Db_Migration_AbstractMigration
 
     public function down()
     {
-        throw new Omeka_Db_Migration_Exception(__("Cannot reverse this migration."));
+        throw new RuntimeException("Cannot reverse this migration.");
     }
 }

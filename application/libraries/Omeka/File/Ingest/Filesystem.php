@@ -47,7 +47,7 @@ class Omeka_File_Ingest_Filesystem extends Omeka_File_Ingest_AbstractSourceInges
         $result = copy($source, $destination);
 
         if (!$result) {
-            throw new Omeka_File_Ingest_Exception(__('Could not transfer "%s" to "%s".', $source, $destination));
+            throw new Omeka_File_Ingest_Exception("Could not transfer \"$source\" to \"$destination\".");
         }
     }
     
@@ -61,7 +61,7 @@ class Omeka_File_Ingest_Filesystem extends Omeka_File_Ingest_AbstractSourceInges
     protected function _validateSource($source, $info)
     {
         if (!is_readable($source)) {
-            throw new Omeka_File_Ingest_InvalidException(__("File is not readable or does not exist: %s", $source));
+            throw new Omeka_File_Ingest_InvalidException("File is not readable or does not exist: $source");
         }
     }
 }

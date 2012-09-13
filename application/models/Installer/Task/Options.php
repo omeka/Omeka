@@ -58,11 +58,11 @@ class Installer_Task_Options implements Installer_TaskInterface
         $givenOptions = array_keys($this->_options);
         if ($missingOptions = array_diff($this->_expectedOptions, $givenOptions)) {
             $optStr = join(', ', $missingOptions);
-            throw new Installer_Task_Exception(__("Missing the following options: %s.", $optStr));
+            throw new Installer_Task_Exception("Missing the following options: $optStr.");
         }
         if ($unknownOptions = array_diff($givenOptions, $this->_expectedOptions)) {
             $optStr = join(', ', $unknownOptions);
-            throw new Installer_Task_Exception(__("Unknown options given: %s.", $optStr));
+            throw new Installer_Task_Exception("Unknown options given: $optStr.");
         }
         
         foreach ($this->_options as $name => $value) {

@@ -50,7 +50,7 @@ class Installer_Task_Schema implements Installer_TaskInterface
     public function addTable($tableName, $sqlFilePath)
     {
         if (!(file_exists($sqlFilePath) && is_readable($sqlFilePath))) {
-            throw new Installer_Task_Exception(__("Invalid SQL file given: %s.", $sqlFilePath));
+            throw new Installer_Task_Exception("Invalid SQL file given: $sqlFilePath.");
         }
         $this->_tables[$tableName] = $sqlFilePath;
     }
@@ -86,7 +86,7 @@ class Installer_Task_Schema implements Installer_TaskInterface
     public function removeTable($tableName)
     {
         if (!array_key_exists($tableName, $this->_tables)) {
-            throw new Installer_Task_Exception(__("Table named '%s' cannot be removed from the list (not found).", $tableName));
+            throw new Installer_Task_Exception("Table named '$tableName' cannot be removed from the list (not found).");
         }
         unset($this->_tables[$tableName]);
     }
@@ -113,14 +113,16 @@ class Installer_Task_Schema implements Installer_TaskInterface
     public function install(Omeka_Db $db)
     {
         if (empty($this->_tables)) {
-            throw new Installer_Task_Exception(__("No SQL files were given to create the schema."));
+            throw new Installer_Task_Exception("No SQL files were given to create the schema.");
         }
         
         foreach ($this->_tables as $tableName => $sqlFilePath) {
             try {
                 $db->loadSqlFile($sqlFilePath);
             } catch (Zend_Db_Exception $e) {
-                throw new Installer_Task_Exception(__("Schema task failed on table '%s' with %s: %s", $db->prefix . $tableName, get_class($e), $e->getMessage()));
+                throw new Installer_Task_Exception("Schema task failed"
+                    . " on table '" . $db->prefix . $tableName . "' with " 
+                    . get_class($e) . ": " . $e->getMessage());
             }
         }
     }

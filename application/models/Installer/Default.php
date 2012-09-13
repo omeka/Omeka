@@ -62,7 +62,7 @@ class Installer_Default implements Installer_InstallerInterface
     protected function _getValue($fieldName)
     {
         if (!$this->_form) {
-            throw new Installer_Exception(__("Form was not set via setForm()."));
+            throw new Installer_Exception("Form was not set via setForm().");
         }
         
         return $this->_form->getValue($fieldName);

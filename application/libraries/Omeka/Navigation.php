@@ -66,7 +66,8 @@ class Omeka_Navigation extends Zend_Navigation
     {
         if ($page === $this) {
             require_once 'Zend/Navigation/Exception.php';
-            throw new Zend_Navigation_Exception(__('A page cannot have itself as a parent'));
+            throw new Zend_Navigation_Exception(
+                'A page cannot have itself as a parent');
         }
 
         if (is_array($page) || $page instanceof Zend_Config) {
@@ -76,7 +77,9 @@ class Omeka_Navigation extends Zend_Navigation
         
         if (!($page instanceof Zend_Navigation_Page_Mvc || $page instanceof Omeka_Navigation_Page_Uri)) {
             require_once 'Zend/Navigation/Exception.php';
-            throw new Zend_Navigation_Exception(__('Invalid argument: $page must be an instance of Zend_Navigation_Page_Mvc or Omeka_Navigation_Page_Uri'));
+            throw new Zend_Navigation_Exception(
+                    'Invalid argument: $page must be an instance of ' .
+                    'Zend_Navigation_Page_Mvc or Omeka_Navigation_Page_Uri');
         }
                 
         $page->uid = $this->createPageUid($page->getHref());

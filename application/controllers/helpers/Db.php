@@ -52,10 +52,10 @@ class Omeka_Controller_Action_Helper_Db extends Zend_Controller_Action_Helper_Ab
     public function __call($method, $args)
     {
         if (!$this->_defaultTable) {
-            throw new BadMethodCallException(__("No default table has been set."));
+            throw new BadMethodCallException("No default table has been set.");
         }
         if (!method_exists($this->_defaultTable, $method)) {
-            throw new BadMethodCallException(__("Method named '%s' does not exist in the default table, which is an instance of '%s'.", $method, get_class($this->_defaultTable)));
+            throw new BadMethodCallException("Method named '$method' does not exist in the default table, which is an instance of '" . get_class($this->_defaultTable) . "'.");
         }
         return call_user_func_array(array($this->_defaultTable, $method), $args);
     }
@@ -92,7 +92,7 @@ class Omeka_Controller_Action_Helper_Db extends Zend_Controller_Action_Helper_Ab
     {
         if(!$tableName) {
             if (!$this->_defaultTable) {
-                throw new InvalidArgumentException(__('Default table must be assigned.'));
+                throw new InvalidArgumentException("Default table must be assigned.");
             }
             return $this->_defaultTable;
         } else {

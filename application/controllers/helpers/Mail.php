@@ -51,7 +51,7 @@ class Omeka_Controller_Action_Helper_Mail extends Zend_Controller_Action_Helper_
         if (method_exists($this->_mail, $method)) {
             return call_user_func_array(array($this->_mail, $method), $args);
         }
-        throw new BadMethodCallException(__("Method named '%s' does not exist.", $method));
+        throw new BadMethodCallException("Method named '$method' does not exist.");
     }
     
     /**

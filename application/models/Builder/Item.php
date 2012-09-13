@@ -78,7 +78,7 @@ class Builder_Item extends Omeka_Record_Builder_AbstractBuilder
                                               array($metadata[self::ITEM_TYPE_NAME]), 
                                               true);
             if(!$itemType) {
-                throw new Omeka_Record_Builder_Exception(__("Invalid type named %s provided!", $metadata[self::ITEM_TYPE_NAME]));
+                throw new Omeka_Record_Builder_Exception( "Invalid type named {$metadata[self::ITEM_TYPE_NAME]} provided!");
             }            
             $metadata[self::ITEM_TYPE_ID] = $itemType->id;
         }

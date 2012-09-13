@@ -41,7 +41,7 @@ class Omeka_File_Derivative_Image_Creator
             $this->_convertPath = $imDirPathClean . DIRECTORY_SEPARATOR . self::IMAGEMAGICK_CONVERT_COMMAND;
             $this->_identifyPath = $imDirPathClean . DIRECTORY_SEPARATOR . self::IMAGEMAGICK_IDENTIFY_COMMAND;
         } else {
-            throw new Omeka_File_Derivative_Exception(__('ImageMagick is not properly configured: invalid directory given for the ImageMagick command!'));
+            throw new Omeka_File_Derivative_Exception('ImageMagick is not properly configured: invalid directory given for the ImageMagick command!');
         }
     }
     
@@ -76,11 +76,11 @@ class Omeka_File_Derivative_Image_Creator
     public function create($fromFilePath, $derivFilename, $mimeType)
     {
         if (empty($derivFilename) || !is_string($derivFilename)) {
-            throw new InvalidArgumentException(__("Invalid derivative filename."));
+            throw new InvalidArgumentException("Invalid derivative filename.");
         }
         
         if (!is_readable($fromFilePath)) {
-            throw new RuntimeException(__("File at '%s' is not readable.", $fromFilePath));
+            throw new RuntimeException("File at '$fromFilePath' is not readable.");
         }
         
         if (!$this->_isDerivable($fromFilePath)) {
@@ -94,11 +94,11 @@ class Omeka_File_Derivative_Image_Creator
                 
         $workingDir = dirname($fromFilePath);
         if (empty($workingDir) || !is_string($workingDir)) {
-            throw new InvalidArgumentException(__("Invalid derivative working path."));
+            throw new InvalidArgumentException("Invalid derivative working path.");
         }
         
         if (!(is_dir($workingDir) && is_writable($workingDir))) {
-            throw new RuntimeException(__("Derivative working directory '%s' is not writable.", $workingDir));
+            throw new RuntimeException("Derivative working directory '$workingDir' is not writable.");
         }
 
         foreach ($this->_derivatives as $storageType => $cmdArgs) {
@@ -124,10 +124,11 @@ class Omeka_File_Derivative_Image_Creator
     public function addDerivative($storageType, $size, $square = false)
     {
         if (!preg_match('/^\w+$/', $storageType)) {
-            throw new InvalidArgumentException(__("Invalid derivative type given: '%s' must be alphanumeric string.", $storageType));
+            throw new InvalidArgumentException("Invalid derivative type given: '$storageType' "
+                . "must be alphanumeric string.");
         }
         if (empty($size)) {
-            throw new InvalidArgumentException(__("Invalid derivative storage size given."));
+            throw new InvalidArgumentException("Invalid derivative storage size given.");
         }
 
         if (is_numeric($size)) {
@@ -135,7 +136,7 @@ class Omeka_File_Derivative_Image_Creator
         } else if (is_string($size)) {
             $this->_derivatives[$storageType] = $size;
         } else {
-            throw new InvalidArgumentException(__("Invalid derivative storage size given."));
+            throw new InvalidArgumentException("Invalid derivative storage size given.");
         }
     }
 
@@ -168,7 +169,7 @@ class Omeka_File_Derivative_Image_Creator
         self::executeCommand($cmd, $status, $output, $errors);
         
         if ($status) {
-            throw new Omeka_File_Derivative_Exception(__("ImageMagick failed with status code %s. Error output:\n%s", $status, $errors));
+            throw new Omeka_File_Derivative_Exception("ImageMagick failed with status code $status. Error output:\n$errors");
         }
         if (!empty($errors)) {
             _log("Error output from ImageMagick:\n$errors", Zend_Log::WARN);
@@ -309,7 +310,7 @@ class Omeka_File_Derivative_Image_Creator
             }
             $status = proc_close($proc);
         } else {
-            throw new Omeka_File_Derivative_Exception(__("Failed to execute command: %s.", $cmd));
+            throw new Omeka_File_Derivative_Exception("Failed to execute command: $cmd.");
         }
     }
 }

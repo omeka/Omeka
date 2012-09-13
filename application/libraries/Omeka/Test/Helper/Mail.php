@@ -26,7 +26,7 @@ class Omeka_Test_Helper_Mail
     public function __construct($path)
     {
         if (!is_writable($path)) {
-            throw new RuntimeException(__('The mail path %s must be writable by this user.', $path));
+            throw new RuntimeException('The mail path '.$path.' must be writable by this user.');
         }
         
         $this->_path = $path;
@@ -86,7 +86,7 @@ class Omeka_Test_Helper_Mail
         sort($mails);
         
         if (!isset($mails[$index])) {
-            throw new InvalidArgumentException(__("No mail exists at index: %s.", strval($index)));
+            throw new InvalidArgumentException("No mail exists at index: $index.");
         }
         return file_get_contents($mails[$index]);
     }

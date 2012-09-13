@@ -57,7 +57,7 @@ class Omeka_Storage
     public function __call($name, $arguments)
     {
         if (!$this->_adapter) {
-            throw new Omeka_Storage_Exception(__(self::MSG_NOT_INITIALIZED));
+            throw new Omeka_Storage_Exception(self::MSG_NOT_INITIALIZED);
         }
 
         $callback = array($this->_adapter, $name);
@@ -65,7 +65,7 @@ class Omeka_Storage
         if (is_callable($callback)) {
             return call_user_func_array($callback, $arguments);
         } else {
-            throw new Omeka_Storage_Exception(__(self::MSG_NO_SUCH_METHOD, $name));
+            throw new Omeka_Storage_Exception(sprintf(self::MSG_NO_SUCH_METHOD, $name));
         }
     }
 
@@ -124,7 +124,7 @@ class Omeka_Storage
         if ($adapter instanceof Omeka_Storage_Adapter_AdapterInterface) {
             $this->_adapter = $adapter;
         } else {
-            throw new Omeka_Storage_Exception(__(self::MSG_INVALID_ADAPTER));
+            throw new Omeka_Storage_Exception(self::MSG_INVALID_ADAPTER);
         }
     }
 

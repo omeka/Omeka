@@ -58,7 +58,7 @@ class Omeka_Validate_Confirmation extends Zend_Validate_Abstract
             if (array_key_exists('field', $field)) {
                 $field = $field['field'];
             } else {
-                throw new Zend_Validate_Exception(__("Missing option 'field'"));
+                throw new Zend_Validate_Exception("Missing option 'field'");
             }
         }
 

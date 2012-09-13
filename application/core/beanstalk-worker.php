@@ -43,7 +43,7 @@ function handle_signal($signal)
 {
     switch ($signal) {
         case SIGINT:
-            throw new Omeka_Job_Worker_InterruptException(__('Caught SIGINT, shutting down.')); 
+            throw new Omeka_Job_Worker_InterruptException("Caught SIGINT, shutting down."); 
             break;
         default:
             break;
