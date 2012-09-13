@@ -34,7 +34,7 @@ class UsersActivations extends Omeka_Record_AbstractRecord
         return $ua;
     }
 
-    protected function beforeSave()
+    protected function beforeSave($args)
     {
         $timestamp = microtime(true);
         $this->added = date('Y-m-d H:i:s', $timestamp);

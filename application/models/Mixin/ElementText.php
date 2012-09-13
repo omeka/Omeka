@@ -83,7 +83,7 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
      * records once the associated record is saved. Adds the record's element 
      * texts to the search text.
      */
-    public function afterSave()
+    public function afterSave($args)
     {
         $this->saveElementTexts();
         
@@ -448,8 +448,6 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
      *  3) After the item saves correctly, delete all the ElementText records 
      *     for the Item.
      *  4) Save the new ElementText objects to the database.
-     *
-     * @see Item::beforeSaveForm()
      * 
      * @param array POST data
      */

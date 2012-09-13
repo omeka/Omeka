@@ -82,6 +82,15 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
     protected $_related = array();
     
     /**
+     * Storage for the POST data when handling a form.
+     * 
+     * @see Omeka_Record_AbstractRecord::setPostData()
+     * @see Omeka_Record_AbstractRecord::save()
+     * @var array
+     */
+    protected $_postData;
+    
+    /**
      * Whether or not the record is locked.
      * Locked records cannot be saved.
      *
@@ -95,8 +104,6 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
      * @var array
      */
     private $_eventCallbacks = array(
-        'beforeValidate',
-        'afterValidate',
         'beforeInsert',
         'beforeUpdate',
         'beforeSave',
@@ -105,8 +112,6 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
         'afterSave',
         'beforeDelete',
         'afterDelete',
-        'beforeSaveForm',
-        'afterSaveForm'
     );
     
     private $_pluginBroker;
@@ -238,9 +243,9 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
         }
         
         if (!count($this->_mixins)) {
-            // The event callbacks, e.g. beforeValidate() are common to all
-            // mixins.  If attempting to trigger one of these callbacks on an
-            // empty mixin list, we 'found' the method.
+            // The event callbacks are common to all mixins. If attempting to 
+            // trigger one of these callbacks on an empty mixin list, we 'found' 
+            // the method.
             $methodFound = in_array($method, $this->_eventCallbacks);
         }
         
@@ -499,35 +504,36 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
     
     /**
      * Save the record.
-     * 
-     * If the record does not validate, nothing will happen.  If the record is 
-     * not yet persisted, it will be inserted into the database.  If it is, then
-     * the existing database row(s) will be updated.
      *
-     * @since 2.0 Added the $throwIfInvalid parameter
-     * @param boolean $throwIfInvalid Whether a validation error should result in
-     *  an exception being thrown. The default is to throw. Otherwise, if false
-     *  is passed, this method will simply return false if the record is invalid.
-     * @return boolean Whether or not the save was successful.
+     * @throws Omeka_Validator_Exception
+     * @throws Omeka_Record_Exception
+     * @see Omeka_Record_AbstractRecord::setPostData()
+     * @param boolean $throwIfInvalid
+     * @return boolean Whether the save was successful.
      */
     public function save($throwIfInvalid = true)
     {
+        // Set the POST data to be passed to the before/afterSave callbacks.
+        if ($this->_postData) {
+            $callbackArgs = array('post' => $this->_postData);
+        } else {
+            $callbackArgs = null;
+        }
+        
         if ($this->_locked) {
             throw new Omeka_Record_Exception('Cannot save a locked record!');
         }
         
-        $was_inserted = !$this->exists();
+        $wasInserted = !$this->exists();
         
-        // Some callbacks
-        if ($was_inserted) {
+        if ($wasInserted) {
             $this->runCallbacks('beforeInsert');
         } else {
             $this->runCallbacks('beforeUpdate');
         }
         
-        $this->runCallbacks('beforeSave');
-
-        // Test validity after the "before" callbacks but before actually saving
+        $this->runCallbacks('beforeSave', $callbackArgs);
+        
         if (!$this->isValid()) {
             if ($throwIfInvalid) {
                 throw new Omeka_Validator_Exception($this->getErrors());
@@ -536,27 +542,25 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
             }
         }
 
-        // Only try to save columns in the $data that are actually defined
-        // columns for the model
-        $data_to_save = $this->toArray();
+        // Only save data that are properties defined by the record.
+        $dataToSave = $this->toArray();
         
-        $insert_id = $this->getDb()->insert(get_class($this), $data_to_save);
+        // Save the record to the database.
+        $insertId = $this->getDb()->insert(get_class($this), $dataToSave);
         
-        if ($was_inserted && (empty($insert_id) || !is_numeric($insert_id))) {
+        if ($wasInserted && (empty($insertId) || !is_numeric($insertId))) {
             throw new Omeka_Record_Exception("LAST_INSERT_ID() did not return a numeric ID when saving the record.");
         }
-        $this->id = $insert_id;
+        $this->id = $insertId;
         
-        if ($was_inserted) {
-            // Run the local afterInsert hook, the modules afterInsert hook, then
-            // the plugins' insert_record hook
+        if ($wasInserted) {
             $this->runCallbacks('afterInsert');
         } else {
             $this->runCallbacks('afterUpdate');
         }
         
-        $this->runCallbacks('afterSave');
-               
+        $this->runCallbacks('afterSave', $callbackArgs);
+        
         return true;
     }
     
@@ -638,12 +642,12 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
     /**
      * Executes before the record is saved.
      */
-    protected function beforeSave() {}
+    protected function beforeSave($args) {}
     
     /**
      * Executes after the record is inserted.
      */
-    protected function afterSave() {}
+    protected function afterSave($args) {}
     
     /**
      * Executes before the record is updated.
@@ -664,16 +668,6 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
      * Executes after the record is deleted.
      */
     protected function afterDelete() {}
-    
-    /**
-     * Executes before the record is validated.
-     */
-    protected function beforeValidate() {}
-    
-    /**
-     * Executes after the record is validated.
-     */
-    protected function afterValidate() {}
     
     /**#@-*/
     
@@ -762,37 +756,6 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
     {
         $this->$name = $value;
     }
-        
-    /**
-     * Modify and save the given record given an associative array.
-     * 
-     * Filters data from $post before attempting to save the record.
-     *
-     * @throws Omeka_Validator_Exception If the form does not validate.
-     * @param array $post An associative array, typically a copy of $_POST.
-     * @return boolean True if the form saved successfully, false if there was
-     * no post data.  Throws an exception if form does not validate.
-     */
-    public function saveForm($post)
-    {        
-        if(!empty($post))
-        {                    
-            $clean = $this->filterInput($post);
-            $clean = new ArrayObject($clean);
-            $this->runCallbacks('beforeSaveForm', array('post' => $clean));
-            $clean = $this->setFromPost($clean);
-            
-            //Save will return TRUE if there are no validation errors
-            if ($this->save(false)) {
-                $this->runCallbacks('afterSaveForm', array('post' => $clean));
-                return true;
-            } else {
-                $errors = $this->getErrors();
-                throw new Omeka_Validator_Exception($errors);
-            }            
-        }
-        return false;
-    }
     
     /**
      * Filter the form input according to some criteria.
@@ -803,53 +766,27 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
      * @param array $post
      * @return array Filtered post data.
      */
-    protected function filterInput($post) 
+    protected function filterPostData($post) 
     {
         return $post;
     }
     
     /**
-     * Template callback that executes before the form data is saved to the 
-     * record.
+     * Set the POST data to the record.
      * 
-     * @internal This receives an ArrayObject instance to make it easier for
-     * plugins to modify these values without having to pass arrays by
-     * reference.
-     * @param ArrayObject $post Subclasses may override this method in order to
-     * modify the contents of $post before it is saved to the record.
-     * @return void
-     */
-    protected function beforeSaveForm($args) 
-    {
-        return true;
-    }
-    
-    /**
-     * Set the record values from POST data.
-     *
+     * @see Omeka_Record_AbstractRecord::save()
      * @param array $post
-     * @return array POST data that has been filtered yet again.
      */
-    protected function setFromPost($post) 
+    public function setPostData($post)
     {
+        $post = new ArrayObject($this->filterPostData($post));
+        
         if (array_key_exists('id', $post)) {
             unset($post['id']);
         }
+        
         $this->setArray($post);
-        return $post;
-    }
-    
-    /**
-     * Template callback that executes after the form data has been saved to the
-     * record.
-     * 
-     * @see Omeka_Record_AbstractRecord::beforeSaveForm()
-     * @param ArrayObject $post
-     * @return void
-     */
-    protected function afterSaveForm($args) 
-    {
-        return true;
+        $this->_postData = $post;
     }
     
     /**

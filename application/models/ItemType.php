@@ -77,7 +77,7 @@ class ItemType extends Omeka_Record_AbstractRecord
      *
      * @return void
      */
-    protected function filterInput($post)
+    protected function filterPostData($post)
     {
         $options = array('inputNamespace'=>'Omeka_Filter');
 
@@ -113,7 +113,7 @@ class ItemType extends Omeka_Record_AbstractRecord
      *
      * @return void
      */
-    protected function afterSave()
+    protected function afterSave($args)
     {
         // remove the elements that need to be removed
         foreach ($this->_elementsToRemove as $key => $element) {
@@ -126,20 +126,6 @@ class ItemType extends Omeka_Record_AbstractRecord
             $element->save();
             $this->addElementById($element->id);
             unset($this->_elementsToSave[$key]);
-        }
-    }
-
-    /**
-     * Validate the elements to ensure saveability-ness.
-     *
-     * @return void
-     */
-    protected function afterValidate()
-    {
-        foreach ($this->_elementsToSave as $key => $element) {
-            if (!$element->isValid()) {
-                $this->addError("Element #$key", $element->getErrors());
-            }
         }
     }
 

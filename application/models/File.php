@@ -130,7 +130,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         $dispatcher->send('Job_FileProcessUpload', array('fileData' => $this->toArray()));
     }
     
-    protected function filterInput($post)
+    protected function filterPostData($post)
     {
         $immutable = array('id', 'modified', 'added', 
                            'authentication', 'filename', 
@@ -142,9 +142,11 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         return $post;
     }
     
-    protected function beforeSaveForm($post)
+    protected function beforeSave($args)
     {
-        $this->beforeSaveElements($args['post']);
+        if (isset($args['post'])) {
+            $this->beforeSaveElements($args['post']);
+        }
     }
         
     public function getItem()
@@ -416,7 +418,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         }
     }
     
-    protected function afterSave()
+    protected function afterSave($args)
     {
         $item = $this->getItem();
         if (!$item->public) {

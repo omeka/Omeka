@@ -65,13 +65,13 @@ class Mixin_PublicFeatured extends Omeka_Record_Mixin_AbstractMixin
         return "make_{$modelNameForHook}_{$action}";
     }
 
-    public function beforeSave()
+    public function beforeSave($args)
     {
         $this->setPublic($this->_record->public);
         $this->setFeatured($this->_record->featured);
     }
     
-    public function afterSave()
+    public function afterSave($args)
     {
         if ($this->isPublic() and !$this->_wasPublic) {
             $hookName = $this->getHookName('public', true);

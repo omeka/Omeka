@@ -30,7 +30,7 @@ abstract class Omeka_Plugin_AbstractPlugin
      * name is given, the child class should contain an identically named 
      * method. If no callback key is given, the child class should contain a 
      * corresponding hookCamelCased() method. E.g: the after_save_form_record 
-     * filter should have a corresponding hookAfterSaveFormRecord() method.
+     * filter should have a corresponding hookAfterSaveRecord() method.
      * 
      * For example:
      * <code>

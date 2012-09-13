@@ -68,10 +68,11 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
         fire_plugin_hook('html_purifier_form_submission', 
                          array('request' => $request, 'purifier' => $purifier));
         
-        // No processing for users form, since it's already properly filtered by User::filterInput()
-        // No processing for tags form, none of the tags should be HTML.
-        // The only input on the tags form is the 'new_tag' field on the edit page.
-        // No processing on the item-types form since there are no HTML fields.
+        // No processing for users form, since it's already properly filtered by 
+        // User::filterPostData(). No processing for tags form, none of the tags 
+        // should be HTML. The only input on the tags form is the 'new_tag' 
+        // field on the edit page. No processing on the item-types form since 
+        // there are no HTML fields.
     }
     
     /**

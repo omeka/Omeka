@@ -170,7 +170,8 @@ class UsersController extends Omeka_Controller_AbstractActionController
         }
         
         try {
-            if ($user->saveForm($_POST)) {                
+            $user->setPostData($_POST);
+            if ($user->save()) {
                 if ($this->sendActivationEmail($user)) {
                     $this->_helper->flashMessenger(
                         __('The user "%s" was successfully added!', $user->username),
@@ -240,7 +241,8 @@ class UsersController extends Omeka_Controller_AbstractActionController
                 return;
             }        
             try {
-                if ($user->saveForm($form->getValues())) {
+                $user->setPostData($form->getValues());
+                if ($user->save()) {
                     $this->_helper->flashMessenger(
                         __('The user %s was successfully changed!', $user->username),
                         'success'

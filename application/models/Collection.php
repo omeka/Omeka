@@ -151,7 +151,7 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
      * @param array $post
      * @return array
      */
-    protected function filterInput($post)
+    protected function filterPostData($post)
     {
         $options = array('inputNamespace'=>'Omeka_Filter');
         
@@ -201,16 +201,18 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
         return false;
     }
     
-    protected function beforeSaveForm($args)
+    protected function beforeSave($args)
     {
-        $post = $args['post'];
-        
-        // Process the collectors that have been provided on the form
-        if (isset($post['collectors'])) {
-            $collectorPost = (string)$post['collectors'];
-            $collectors = explode(self::COLLECTOR_DELIMITER, $collectorPost);
-            $this->setCollectors($collectors);
-        }        
+        if (isset($args['post'])) {
+            $post = $args['post'];
+            
+            // Process the collectors that have been provided on the form
+            if (isset($post['collectors'])) {
+                $collectorPost = (string)$post['collectors'];
+                $collectors = explode(self::COLLECTOR_DELIMITER, $collectorPost);
+                $this->setCollectors($collectors);
+            }
+        }
     }
     
     /**
