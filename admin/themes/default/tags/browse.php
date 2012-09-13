@@ -21,11 +21,16 @@ head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodyclass'=
         }
         ?>
     </p>
-    <?php echo tag_cloud($tags, ($browse_for == 'Item') ? url('items/browse/'): url('exhibits/browse/'), 9, true, 'before'); ?>
     <div class="hTagcloud">
-        <ul>
-            <li><a href="<?php echo url('items/browse/?tags=united+states'); ?>"><span class="count">1</span></a><span  class="edit"">united states</span><span class="close"><a href="#">close</a></span></li>
-        </ul>
+    <ul>
+    <?php foreach ($tags as $tag): ?>
+        <li>
+            <a href="<?php echo url('items/?tag=' . $tag->name); ?>" class="count"><?php echo $tag['tagCount']; ?></a> 
+            <span class="edit-tag"><?php echo $tag->name; ?></span> 
+            <span class="close"><?php echo link_to($tag, 'delete-confirm', 'delete', array()); ?></span> 
+        </li>
+    <?php endforeach; ?>
+    </ul>
     </div>
 <?php else: ?>
     <p><?php echo __('There are no tags to display. You must first tag some items.'); ?></p>

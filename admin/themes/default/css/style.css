@@ -1382,6 +1382,17 @@ ul#section-nav, #section-nav ul {
         -o-box-shadow: -1px 0px 0px 0px rgba(255,255,255,.2) inset, 1px 0px -1px 1px rgba(255,255,255,.2);
 }
 
+.edit-tag {
+    color: #ffffff;
+    position: relative;
+    text-shadow: -1px -1px 1px rgba(0,0,0,.5);
+    z-index: 2;
+}
+
+    .edit-tag form {
+        display: inline-block;
+    }
+
 .hTagcloud ul {
     list-style-type: none;
     padding: 0;
@@ -1400,7 +1411,6 @@ ul#section-nav, #section-nav ul {
     display:inline-block;
     margin: 0 30px 10px 0;
     position: relative;
-    z-index: 2;
 }
     
     .hTagcloud li:after {
@@ -1434,7 +1444,7 @@ ul#section-nav, #section-nav ul {
     color: #ffffff;
     display: inline-block;
     line-height: 30px;
-    padding: 0 0px 0 10px;
+    padding: 0 10px 0 10px;
     position: relative;
     text-shadow: -1px -1px 1px rgba(0,0,0,.5);
     z-index: 10;    
@@ -1449,7 +1459,7 @@ ul#section-nav, #section-nav ul {
     background-color: rgba(0, 0, 0, .3);
     height: 17px;
     border-radius: 10px;
-    margin: 0 0 0 10px;    
+    margin: 0 0 0 5px;
     position: relative;
     top: 5px;
     padding: 0;

@@ -25,7 +25,7 @@
 
 <script>
  jQuery(document).ready(function() {
-     jQuery('.edit-tag').editable('<?php echo url('tags'); ?>/edit.php');
+     jQuery('.edit-tag').editable('<?php echo url('tags'); ?>');
  });
 </script>
 
