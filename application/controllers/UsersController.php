@@ -133,24 +133,26 @@ class UsersController extends Omeka_Controller_AbstractActionController
             $this->_helper->flashMessenger('Invalid activation code given.', 'error');
             return $this->_helper->redirector('forgot-password', 'users');
         }
+
+        $user = $ua->User;
+        $this->view->user = $user;
         
-        if (!empty($_POST)) {
-            try {
-                if ($_POST['new_password1'] != $_POST['new_password2']) {
-                    throw new Omeka_Validator_Exception(__('Password: The passwords do not match.'));
-                }
-                $ua->User->setPassword($_POST['new_password1']);
-                $ua->User->active = 1;
-                $ua->User->save();
+        if ($this->getRequest()->isPost()) {
+            if ($_POST['new_password1'] != $_POST['new_password2']) {
+                $this->_helper->flashMessenger(__('Password: The passwords do not match.'), 'error');
+                return;
+            }
+            
+            $user->setPassword($_POST['new_password1']);
+            $user->active = 1;
+            if ($user->save(false)) {
                 $ua->delete();
                 $this->_helper->flashMessenger(__('You may now log in to Omeka.'), 'success');
                 $this->_helper->redirector('login');
-            } catch (Omeka_Validator_Exception $e) {
-                $this->_helper->flashMessenger($e);
+            } else {
+                $this->_helper->flashMessenger($user->getErrors());
             }
         }
-        $user = $ua->User;
-        $this->view->assign(compact('user'));
     }
     
     /**
@@ -169,23 +171,21 @@ class UsersController extends Omeka_Controller_AbstractActionController
             return;
         }
         
-        try {
-            $user->setPostData($_POST);
-            if ($user->save()) {
-                if ($this->sendActivationEmail($user)) {
-                    $this->_helper->flashMessenger(
-                        __('The user "%s" was successfully added!', $user->username),
-                        'success'
-                    );
-                } else {
-                    $this->_helper->flashMessenger(__('The user "%s" was added, but the activation email could not be sent.',
-                        $user->username));
-                }
-                //Redirect to the main user browse page
-                $this->_helper->redirector('browse');
+        $user->setPostData($_POST);
+        if ($user->save(false)) {
+            if ($this->sendActivationEmail($user)) {
+                $this->_helper->flashMessenger(
+                    __('The user "%s" was successfully added!', $user->username),
+                    'success'
+                );
+            } else {
+                $this->_helper->flashMessenger(__('The user "%s" was added, but the activation email could not be sent.',
+                    $user->username));
             }
-        } catch (Omeka_Validator_Exception $e) {
-            $this->_helper->flashMessenger($e);
+            //Redirect to the main user browse page
+            $this->_helper->redirector('browse');
+        } else {
+            $this->_helper->flashMessenger($user->getErrors());
         }
     }
 
@@ -240,17 +240,15 @@ class UsersController extends Omeka_Controller_AbstractActionController
             if (!$form->isValid($_POST)) {
                 return;
             }        
-            try {
-                $user->setPostData($form->getValues());
-                if ($user->save()) {
-                    $this->_helper->flashMessenger(
-                        __('The user %s was successfully changed!', $user->username),
-                        'success'
-                    );
-                    $success = true;
-                }
-            } catch (Omeka_Validator_Exception $e) {
-                $this->_helper->flashMessenger($e);
+            $user->setPostData($form->getValues());
+            if ($user->save(false)) {
+                $this->_helper->flashMessenger(
+                    __('The user %s was successfully changed!', $user->username),
+                    'success'
+                );
+                $success = true;
+            } else {
+                $this->_helper->flashMessenger($user->getErrors());
             }
         }
 

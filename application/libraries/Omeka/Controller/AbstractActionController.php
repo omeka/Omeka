@@ -155,17 +155,15 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
 
         $record = new $class();
         if ($this->getRequest()->isPost()) {
-            try {
-                $record->setPostData($_POST);
-                if ($record->save()) {
-                    $successMessage = $this->_getAddSuccessMessage($record);
-                    if ($successMessage != '') {
-                        $this->_helper->flashMessenger($successMessage, 'success');
-                    }
-                    $this->_redirectAfterAdd($record);
+            $record->setPostData($_POST);
+            if ($record->save(false)) {
+                $successMessage = $this->_getAddSuccessMessage($record);
+                if ($successMessage != '') {
+                    $this->_helper->flashMessenger($successMessage, 'success');
                 }
-            } catch (Omeka_Validator_Exception $e) {
-                $this->_helper->flashMessenger($e);
+                $this->_redirectAfterAdd($record);
+            } else {
+                $this->_helper->flashMessenger($record->getErrors());
             }
         }
         $this->view->assign(array(strtolower($class)=>$record));
@@ -186,17 +184,15 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
         $record = $this->_helper->db->findById();
         
         if ($this->getRequest()->isPost()) {
-            try {
-                $record->setPostData($_POST);
-                if ($record->save()) {
-                    $successMessage = $this->_getEditSuccessMessage($record);
-                    if ($successMessage != '') {
-                        $this->_helper->flashMessenger($successMessage, 'success');
-                    }
-                    $this->_redirectAfterEdit($record);
+            $record->setPostData($_POST);
+            if ($record->save(false)) {
+                $successMessage = $this->_getEditSuccessMessage($record);
+                if ($successMessage != '') {
+                    $this->_helper->flashMessenger($successMessage, 'success');
                 }
-            } catch (Omeka_Validator_Exception $e) {
-                $this->_helper->flashMessenger($e);
+                $this->_redirectAfterEdit($record);
+            } else {
+                $this->_helper->flashMessenger($record->getErrors());
             }
         }
         

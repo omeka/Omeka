@@ -36,9 +36,12 @@ class Omeka_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Acti
             if ($status === null) {
                 $status = 'error';
             }
-        }
-        
-        if ($status === null) {
+        } else if ($message instanceof Omeka_Validator_Errors) {
+            $message = (string) $message;
+            if ($status === null) {
+                $status = 'error';
+            }
+        } else if ($status === null) {
             $status = 'alert';
         }
         

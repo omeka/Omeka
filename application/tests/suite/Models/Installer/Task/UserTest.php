@@ -50,9 +50,6 @@ class Installer_Task_UserTest extends PHPUnit_Framework_TestCase
             $this->fail("Should have thrown an exception for invalid user.");
         } catch (Installer_Task_Exception $e) {
             $this->assertContains("New user does not validate: Email: ", $e->getMessage());
-        } catch (Omeka_Validator_Exception $e) {
-            $this->fail("Wrong type of exception thrown. Should have thrown Installer_Task_Exception"
-            . " instead of Omeka_Validator_Exception.");
         }
     }
     

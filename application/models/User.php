@@ -46,10 +46,10 @@ class User extends Omeka_Record_AbstractRecord
                 $acl = $bootstrap->getResource('Acl');
                 $currentUser = $bootstrap->getResource('CurrentUser');
                 if ($post['role'] == 'super' && !$acl->isAllowed($currentUser, 'Users', 'makeSuperUser')) {
-                    throw new Omeka_Validator_Exception( __('User may not change permissions to super-user') );
+                    $this->addError('role', __('User may not change permissions to super-user'));
                 }
                 if (!$acl->isAllowed($currentUser, $this, 'change-role')) {
-                    throw new Omeka_Validator_Exception(__('User may not change roles.'));
+                    $this->addError('role', __('User may not change roles.'));
                 }
             }
         }
