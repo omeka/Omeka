@@ -826,6 +826,12 @@ header nav {
     overflow: auto;
     word-wrap: break-word;
 }
+
+    .panel img {
+        max-width: 100%;
+        padding-bottom: 10px;
+        vertical-align: bottom;
+    }
     
     .panel:first-child {
         margin-top: 0;
@@ -1198,7 +1204,6 @@ header nav {
 .admin-thumb {
     width: 100px;
     box-shadow: 0 0 3px rgba(0,0,0,.15);
-    padding: 10px;
 }
 
 .element {
@@ -1221,6 +1226,10 @@ header nav {
     display: inline-block;
     margin: 0 10px 0 0;
 }
+
+    .item-file img {
+        max-width: 100%;
+    }
 
 #item-images {
     margin: 0 0 20px 0;

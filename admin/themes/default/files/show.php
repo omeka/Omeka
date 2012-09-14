@@ -67,7 +67,7 @@
     <?php echo flash(); ?>            
     
     <div id="fullsize-file">
-        <?php echo display_file($file, array('imageSize' => 'thumbnail')); ?>
+        <?php echo display_file($file, array('imageSize' => 'fullsize'), array('class' => 'panel')); ?>
     </div>
     <h3>ID3 Metadata</h3>
     <?php echo show_file_metadata(); ?>
