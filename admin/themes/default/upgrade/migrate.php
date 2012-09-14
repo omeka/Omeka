@@ -42,7 +42,6 @@
                 <?php else: ?>
                     <h1><?php echo __('Omeka has upgraded successfully.'); ?></h1>
                     <p><?php echo link_to_admin_home_page(__('Return to Dashboard')); ?></p>    
-                <?php endif; ?>
             <?php endif; ?>
         </section>
     </div>
