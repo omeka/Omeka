@@ -11,11 +11,17 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2012
  */
-class Omeka_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Action_Helper_FlashMessenger
+class Omeka_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Action_Helper_Abstract
 {    
     const MESSAGE_KEY = 'message';
     const STATUS_KEY = 'status';
 
+    private $_messenger;
+
+    public function __construct()
+    {
+        $this->_messenger = new Zend_Controller_Action_Helper_FlashMessenger;
+    }
     /**
      * addMessage() - Add a message to flash message
      *
@@ -30,45 +36,35 @@ class Omeka_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Acti
             if ($status === null) {
                 $status = 'error';
             }
-        }
-        
-        if ($status === null) {
+        } else if ($message instanceof Omeka_Validator_Errors) {
+            $message = (string) $message;
+            if ($status === null) {
+                $status = 'error';
+            }
+        } else if ($status === null) {
             $status = 'alert';
         }
         
-        return parent::addMessage(array(self::MESSAGE_KEY => $message,
+        return $this->_messenger->addMessage(array(self::MESSAGE_KEY => $message,
             self::STATUS_KEY => $status));
     }
     
     
     /**
-     * getMessages() - Get messages from a specific status
+     * getMessages() - Get messages
      *
-     * @param string|null $status The status from which to get messages.
      * @return array
      */
-    public function getMessages($status = null)
+    public function getMessages()
     {
-        return $this->_getMessages(parent::getMessages(), $status);
+        return $this->_filterMessages($this->_messenger->getMessages());
     }
 
-    /**
-     * Iterate through messages and extract based on status.
-     */
-    private function _getMessages($iter, $status)
+    public function _filterMessages($messages)
     {
         $filtered = array();
-        if ($status) {
-            foreach ($iter as $message) {
-                if ($status == $message[self::STATUS_KEY]) {
-                    $filtered[] = $message[self::MESSAGE_KEY];
-                }
-            }
-        } else {
-            foreach ($iter as $message) {
-                $filtered[$message[self::STATUS_KEY]][] = 
-                    $message[self::MESSAGE_KEY];
-            }
+        foreach ($messages as $message) {
+            $filtered[$message[self::STATUS_KEY]][] = $message[self::MESSAGE_KEY];
         }
         return $filtered;
     }
@@ -76,88 +72,39 @@ class Omeka_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Acti
     /**
      * Clear all messages from the previous request & specified status
      *
-     * @param string $status The namespace to clear
      * @return boolean True if messages were cleared, false if none existed
      */
-    public function clearMessages($status = null)
+    public function clearMessages()
     {
-        if (!$status) {
-            return parent::clearMessages();
-        }
-        $existed = false;
-        foreach (self::$_messages[$this->_namespace] as $key => $message) {
-            if ($message[self::STATUS_KEY] == $status) {
-                unset(self::$_messages[$this->_namespace][$key]);
-                $existed = true;
-            }
-        }
-        return $existed;
+        return $this->_messenger->clearMessages();
     }
 
     /**
      * Clear all current messages with specified status
      *
-     * @param string $status The status to clear
      * @return boolean True if messages were cleared, false if none existed
      */
-    public function clearCurrentMessages($status = null)
+    public function clearCurrentMessages()
     {
-        if (!$status) {
-            return parent::clearCurrentMessages();
-        }
-        $existed = false;
-        foreach (self::$_session->{$this->_namespace} as $key => $message) {
-            if ($message[self::STATUS_KEY] == $status) {
-                unset(self::$_session->{$this->_namespace}[$key]);
-                $existed = true;
-            }
-        }
-        return $existed;
+        return $this->_messenger->clearCurrentMessages();
     }
 
     /**
      * Whether has messages with a specific status (or any messages, if null).
      */
-    public function hasMessages($status = null)
+    public function hasMessages()
     {
-        if (!$status) {
-            return parent::hasMessages();
-        }
-        return $this->_hasMessages(self::$_messages[$this->_namespace], $status);
+        return $this->_messenger->hasMessages();
     }
     
-    public function hasCurrentMessages($status = null)
+    public function hasCurrentMessages()
     {
-        if (!$status) {
-            return parent::hasCurrentMessages();
-        }
-        return $this->_hasMessages(self::$_session->{$this->_namespace}, $status);
-    }
-    
-    private function _hasMessages($iter, $status)
-    {
-        $existed = false;
-        foreach ($iter as $key => $message) {
-            if ($message[self::STATUS_KEY] == $status) {
-                $existed = true;
-            }
-        }
-        return $existed;
+        return $this->_messenger->hasCurrentMessages();
     }
 
     public function getCurrentMessages($status = null)
     {
-        return $this->_getMessages(parent::getCurrentMessages(), $status);
-    }
-    
-    /**
-     * For testing purposes, reset all the static properties of this class.
-     */
-    public static function reset()
-    {
-        self::$_messages = array();
-        self::$_session = null;
-        self::$_messageAdded = false;
+        return $this->_filterMessages($this->_messenger->getCurrentMessages());
     }
     
     /**
@@ -169,10 +116,5 @@ class Omeka_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Acti
     public function direct($message, $status = null)
     {
         return $this->addMessage($message, $status);
-    }
-    
-    public function getNamespace() 
-    {
-        return $this->_namespace;
     }
 }

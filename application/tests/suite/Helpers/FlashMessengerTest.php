@@ -27,33 +27,16 @@ class Omeka_Controller_Action_Helper_FlashMessengerTest extends Omeka_Test_AppTe
         $this->messenger->addMessage("Second message to error namespace", 'error');
         $this->messenger->addMessage("Third message to success namespace", 'success');
         
-        $this->assertEquals(array("First message to default namespace"), $this->messenger->getCurrentMessages('default'));
-        $this->assertEquals(array("Second message to error namespace"), $this->messenger->getCurrentMessages('error'));
-        $this->assertEquals(array("Third message to success namespace"), $this->messenger->getCurrentMessages('success'));
+        $this->assertEquals(array(
+            'default' => array('First message to default namespace'),
+            'error' => array('Second message to error namespace'),
+            'success' => array('Third message to success namespace')
+            ), $this->messenger->getCurrentMessages());
     }
     
-    public function testHasMessagesInNamespace()
-    {
-        $this->assertFalse($this->messenger->hasMessages());
-        $this->messenger->addMessage("Random message in foobar namespace", 'foobar');
-        $this->assertTrue($this->messenger->hasCurrentMessages('foobar'));
-    }
-    
-    public function testHasCurrentMessagesInNamespace()
+    public function testHasCurrentMessages()
     {
         $this->messenger->addMessage("Random message", 'foobar');
         $this->assertTrue($this->messenger->hasCurrentMessages('foobar'));
-    }
-    
-    public function testGetCurrentMessagesInNamespace()
-    {
-        $this->messenger->addMessage("Random message", 'foobar');
-        $this->assertEquals(array("Random message"), $this->messenger->getCurrentMessages('foobar'));
-    }
-    
-    public function tearDown()
-    {
-        parent::tearDown();
-        Omeka_Controller_Action_Helper_FlashMessenger::reset();
     }
 }

@@ -63,7 +63,7 @@ class Mixin_Search extends Omeka_Record_Mixin_AbstractMixin
     /**
      * Save the accumulated search text to the database.
      */
-    public function afterSave()
+    public function afterSave($args)
     {
         self::saveSearchText(get_class($this->_record), $this->_record->id, 
             $this->_text, $this->_title, $this->_public);

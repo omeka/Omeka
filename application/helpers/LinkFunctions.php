@@ -7,7 +7,7 @@
  */
 
 /**
- * Uses uri() to generate <a> tags for a given link.
+ * Uses url() to generate <a> tags for a given link.
  *
  * @since 0.10 No longer escapes the text for the link.  This text must be valid
  * HTML.
@@ -36,7 +36,7 @@ function link_to($record, $action=null, $text=null, $props = array(), $queryPara
         $route = 'default';
         $urlOptions['controller'] = (string) $record;
         if($action) $urlOptions['action'] = (string) $action;
-        $url = uri($urlOptions, $route, $queryParams, true);
+        $url = url($urlOptions, $route, $queryParams, true);
     }
 
     if ($text === null) {
@@ -64,7 +64,7 @@ function link_to_advanced_search($text = null, $props = array(), $uri=null)
     }
 
     if (!$uri) {
-        $uri = apply_filters('advanced_search_link_default_uri', uri('items/advanced-search'));
+        $uri = apply_filters('advanced_search_link_default_uri', url('items/advanced-search'));
     }
     // Is appending the query string directly a security issue?  We should figure that out.
     $props['href'] = $uri . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
@@ -101,7 +101,11 @@ function link_to_browse_items($text, $browseParams = array(), $linkProperties = 
  */
 function link_to_collection_for_item($text = null, $props = array(), $action = 'show')
 {
-    return link_to_collection($text, $props, $action, get_collection_for_item());
+    if ($collection = get_collection_for_item()) {
+        return link_to_collection($text, $props, $action, $collection);
+    }
+
+    return __('No Collection');
 }
 
 function link_to_items_in_collection($text = null, $props = array(), $action = 'browse', $collectionObj = null)
@@ -305,7 +309,7 @@ function link_to_admin_home_page($text = null, $props = array())
  * with class "current" for any links corresponding to the current page
  *
  * For example:
- * <code>nav(array('Themes' => uri('themes/browse')));</code>
+ * <code>nav(array('Themes' => url('themes/browse')));</code>
  * generates
  * <code><li class="nav-themes"><a href="themes/browse">Themes</a></li></code>
  *
@@ -501,7 +505,7 @@ function public_nav_main()
 function public_nav_items(array $navArray = null, $maxDepth = 0)
 {
     if (!$navArray) {
-        $navArray = array(__('Browse All') => uri('items'), __('Browse by Tag') => uri('items/tags'));
+        $navArray = array(__('Browse All') => url('items'), __('Browse by Tag') => url('items/tags'));
     }
 
     return public_nav($navArray, 'items', $maxDepth);

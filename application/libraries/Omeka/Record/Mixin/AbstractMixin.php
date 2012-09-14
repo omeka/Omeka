@@ -55,25 +55,9 @@ abstract class Omeka_Record_Mixin_AbstractMixin
      *
      * @return void
      */
-    public function beforeSave() {}
-    public function beforeUpdate() {}
-    public function beforeInsert() {}
-    public function afterInsert() {}
-    public function afterSave() {}
-    public function afterUpdate() {}
-    /**
-     * @param ArrayObject $post POST array. Passed by reference; changes to this
-     * array will affect the caller's $post array.
-     */
-    public function afterSaveForm($args) {}
-    /**
-     * @param ArrayObject $post POST array. Passed by reference; changes to this
-     * array will affect the caller's $post array.
-     */
-    public function beforeSaveForm($args) {}
+    public function beforeSave($args) {}
+    public function afterSave($args) {}
     public function beforeDelete() {}
     public function afterDelete() {}
-    public function beforeValidate() {}
-    public function afterValidate() {}
     /**#@-*/
 }

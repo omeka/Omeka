@@ -46,7 +46,7 @@ class ElementSet extends Omeka_Record_AbstractRecord
         return $obj;        
     }
     
-    protected function afterSave()
+    protected function afterSave($args)
     {
         $maxOrder = $this->_getNextElementOrder();
         foreach ($this->_elementsToSave as $order => $obj) {

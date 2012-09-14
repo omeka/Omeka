@@ -104,7 +104,8 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
         );
 
         $user = new User;
-        $user->saveForm($userInfo);
+        $user->setPostData($userInfo);
+        $user->save();
 
         $id = $user->id;
 

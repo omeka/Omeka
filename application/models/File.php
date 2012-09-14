@@ -116,21 +116,8 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         $this->_mixins[] = new Mixin_Timestamp($this);
         $this->_mixins[] = new Mixin_Search($this);
     }
-
-    protected function beforeInsert()
-    {
-        $fileInfo = new Omeka_File_Info($this);
-        $fileInfo->setMimeTypeIfAmbiguous();
-    }
-
-    protected function afterInsert()
-    {
-        $dispatcher = Zend_Registry::get('job_dispatcher');
-        $dispatcher->setQueueName('uploads');
-        $dispatcher->send('Job_FileProcessUpload', array('fileData' => $this->toArray()));
-    }
     
-    protected function filterInput($post)
+    protected function filterPostData($post)
     {
         $immutable = array('id', 'modified', 'added', 
                            'authentication', 'filename', 
@@ -142,9 +129,15 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         return $post;
     }
     
-    protected function beforeSaveForm($post)
+    protected function beforeSave($args)
     {
-        $this->beforeSaveElements($args['post']);
+        if ($args['insert']) {
+            $fileInfo = new Omeka_File_Info($this);
+            $fileInfo->setMimeTypeIfAmbiguous();
+        }
+        if ($args['post']) {
+            $this->beforeSaveElements($args['post']);
+        }
     }
         
     public function getItem()
@@ -416,8 +409,14 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         }
     }
     
-    protected function afterSave()
+    protected function afterSave($args)
     {
+        if ($args['insert']) {
+            $dispatcher = Zend_Registry::get('job_dispatcher');
+            $dispatcher->setQueueName('uploads');
+            $dispatcher->send('Job_FileProcessUpload', array('fileData' => $this->toArray()));
+        }
+        
         $item = $this->getItem();
         if (!$item->public) {
             $this->setSearchTextPrivate();

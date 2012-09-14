@@ -49,7 +49,7 @@ function custom_public_nav_header()
                     $link = trim($pairArray[0]);
                     $url = trim($pairArray[1]); 
                     if (strncmp($url, 'http://', 7) && strncmp($url, 'https://', 8)){                        
-                        $url = uri($url);
+                        $url = url($url);
                     }
                 }
                 $navArray[$link] = $url;
@@ -57,7 +57,7 @@ function custom_public_nav_header()
         }
         return nav($navArray);
     } else {
-        $navArray = array(__('Browse Items') => uri('items'), __('Browse Collections') =>uri('collections'));
+        $navArray = array(__('Browse Items') => url('items'), __('Browse Collections') => url('collections'));
         return public_nav_main($navArray);
     }
 }

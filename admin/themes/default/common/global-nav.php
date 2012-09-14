@@ -3,16 +3,16 @@
 <?php
     $globalNav = array();
     if(has_permission('Plugins', 'edit')) {
-        $globalNav[__('Plugins')] = uri('plugins');
+        $globalNav[__('Plugins')] = url('plugins');
     }
     if(has_permission('Themes', 'edit')) {
-        $globalNav[__('Themes')] = uri('themes');
+        $globalNav[__('Themes')] = url('themes');
     }
     if(has_permission('Users', 'edit')) {
-        $globalNav[__('Users')] = uri('users');
+        $globalNav[__('Users')] = url('users');
     }
     if(has_permission('Settings', 'edit')) {
-        $globalNav[__('Settings')] = uri('settings');
+        $globalNav[__('Settings')] = url('settings');
     }
     echo nav(apply_filters('admin_navigation_global', $globalNav));
 ?>    

@@ -26,38 +26,28 @@ class Omeka_View_Helper_Flash extends Zend_View_Helper_Abstract
     /**
      * Display messages from the FlashMessenger.
      *
-     * @param string|null $msgStatus Status of messages to retrieve.
      * @return string HTML for messages.
      */
-    public function flash($msgStatus = null)
+    public function flash()
     {
         $flashHtml = '';
-        if ($this->_flashMessenger->hasMessages($msgStatus)
-         || $this->_flashMessenger->hasCurrentMessages($msgStatus)) {
+        if ($this->_flashMessenger->hasMessages()
+         || $this->_flashMessenger->hasCurrentMessages()) {
             $flashHtml .= '<div id="flash">' . "\n" . '<ul>';
-            if ($msgStatus) {
-                foreach ($this->_flashMessenger->getMessages($msgStatus) as $message) {
-                    $flashHtml .= $this->_getListHtml($msgStatus, $message);
+            foreach ($this->_flashMessenger->getMessages() as $status => $messages) {
+                foreach ($messages as $message) {
+                    $flashHtml .= $this->_getListHtml($status, $message);
                 }
-                foreach ($this->_flashMessenger->getCurrentMessages($msgStatus) as $message) {
-                    $flashHtml .= $this->_getListHtml($msgStatus, $message);
-                }
-            } else {
-                foreach ($this->_flashMessenger->getMessages($msgStatus) as $status => $messages) {
-                    foreach ($messages as $message) {
-                        $flashHtml .= $this->_getListHtml($status, $message);
-                    }
-                }
-                foreach ($this->_flashMessenger->getCurrentMessages($msgStatus) as $status => $messages) {
-                    foreach ($messages as $message) {
-                        $flashHtml .= $this->_getListHtml($status, $message);
-                    }
+            }
+            foreach ($this->_flashMessenger->getCurrentMessages() as $status => $messages) {
+                foreach ($messages as $message) {
+                    $flashHtml .= $this->_getListHtml($status, $message);
                 }
             }
             $flashHtml .= '</ul></div>';
         }
-        $this->_flashMessenger->clearMessages($msgStatus);
-        $this->_flashMessenger->clearCurrentMessages($msgStatus);
+        $this->_flashMessenger->clearMessages();
+        $this->_flashMessenger->clearCurrentMessages();
         return $flashHtml;
     }
 

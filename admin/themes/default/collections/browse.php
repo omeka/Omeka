@@ -3,9 +3,9 @@ $pageTitle = __('Browse Collections') . ' ' .  __('(%s total)', $total_records);
 head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
 
     <?php echo flash(); ?>
-    <?php if (total_collections() > 0): ?>
+    <?php if (total_records('Collection') > 0): ?>
         <?php if (has_permission('Collections', 'add')): ?>
-            <a href="<?php echo html_escape(uri('collections/add')); ?>" class="small green button"><?php echo __('Add a Collection'); ?></a>
+            <a href="<?php echo html_escape(url('collections/add')); ?>" class="small green button"><?php echo __('Add a Collection'); ?></a>
         <?php endif; ?>
         <div class="pagination"><?php echo pagination_links(); ?></div>
       <?php if (has_loop_records('collections')): ?>
@@ -57,7 +57,7 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
         </table>
 
         <?php if (has_permission('Collections', 'add')): ?>
-            <a href="<?php echo html_escape(uri('collections/add')); ?>" class="small green button"><?php echo __('Add a Collection'); ?></a>
+            <a href="<?php echo html_escape(url('collections/add')); ?>" class="small green button"><?php echo __('Add a Collection'); ?></a>
         <?php endif; ?>
 
       <?php else: ?>
@@ -71,7 +71,7 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
         <h2><?php echo __('You have no collections.'); ?></h2>
         <?php if(has_permission('Collections', 'add')): ?>
             <p><?php echo __('Get started by adding your first collection.'); ?></p>
-            <a href="<?php echo html_escape(uri('collections/add')); ?>" class="add big green button"><?php echo __('Add a collection'); ?></a>
+            <a href="<?php echo html_escape(uri('collections/add')); ?>" class="add big green button"><?php echo __('Add a Collection'); ?></a>
         <?php endif; ?>
 
     <?php endif; ?>

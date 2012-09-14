@@ -16,8 +16,8 @@
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Client_Adapter
- * @version    $Id: Proxy.php 23775 2011-03-01 17:25:24Z ralph $
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @version    $Id: Proxy.php 24818 2012-05-28 18:49:53Z rob $
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -46,7 +46,7 @@ require_once 'Zend/Http/Client/Adapter/Socket.php';
  * @category   Zend
  * @package    Zend_Http
  * @subpackage Client_Adapter
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Http_Client_Adapter_Proxy extends Zend_Http_Client_Adapter_Socket
@@ -75,6 +75,13 @@ class Zend_Http_Client_Adapter_Proxy extends Zend_Http_Client_Adapter_Socket
      * @var boolean
      */
     protected $negotiated = false;
+    
+    /**
+     * Stores the last CONNECT handshake request
+     * 
+     * @var string
+     */
+    protected $connectHandshakeRequest;
 
     /**
      * Connect to the remote server
@@ -136,10 +143,20 @@ class Zend_Http_Client_Adapter_Proxy extends Zend_Http_Client_Adapter_Socket
         }
 
         // Add Proxy-Authorization header
-        if ($this->config['proxy_user'] && ! isset($headers['proxy-authorization'])) {
-            $headers['proxy-authorization'] = Zend_Http_Client::encodeAuthHeader(
-                $this->config['proxy_user'], $this->config['proxy_pass'], $this->config['proxy_auth']
-            );
+        if ($this->config['proxy_user']) {
+            // Check to see if one already exists
+            $hasProxyAuthHeader = false;
+            foreach ($headers as $k => $v) {
+                if ($k == 'proxy-authorization' || preg_match("/^proxy-authorization:/i", $v) ) {
+                    $hasProxyAuthHeader = true;
+                    break;
+                }
+            }
+            if (!$hasProxyAuthHeader) {
+                $headers[] = 'Proxy-authorization: ' . Zend_Http_Client::encodeAuthHeader(
+                    $this->config['proxy_user'], $this->config['proxy_pass'], $this->config['proxy_auth']
+                );
+            }
         }
 
         // if we are proxying HTTPS, preform CONNECT handshake with the proxy
@@ -204,19 +221,22 @@ class Zend_Http_Client_Adapter_Proxy extends Zend_Http_Client_Adapter_Socket
         $request = "CONNECT $host:$port HTTP/$http_ver\r\n" .
                    "Host: " . $this->config['proxy_host'] . "\r\n";
 
-        // Add the user-agent header
-        if (isset($this->config['useragent'])) {
-            $request .= "User-agent: " . $this->config['useragent'] . "\r\n";
+        // Process provided headers, including important ones to CONNECT request
+        foreach ( $headers as $k=>$v ) {
+            switch ( strtolower(substr($v,0,strpos($v,':'))) ) {
+                case 'proxy-authorization':
+                    // break intentionally omitted
+                case 'user-agent':
+                    $request .= $v . "\r\n";
+                    break;
+                default:
+                    break;
+            }
         }
-
-        // If the proxy-authorization header is set, send it to proxy but remove
-        // it from headers sent to target host
-        if (isset($headers['proxy-authorization'])) {
-            $request .= "Proxy-authorization: " . $headers['proxy-authorization'] . "\r\n";
-            unset($headers['proxy-authorization']);
-        }
-
         $request .= "\r\n";
+        
+        // @see ZF-3189
+        $this->connectHandshakeRequest = $request;
 
         // Send the request
         if (! @fwrite($this->socket, $request)) {

@@ -77,11 +77,9 @@ class Installer_Task_User implements Installer_TaskInterface
         $user->setPassword($this->_password);
         $user->active = $this->_active;
         $user->role = $this->_role;
-        try {
-            $user->save();
-        } catch (Omeka_Validator_Exception $e) {
+        if (!$user->save(false)) {
             throw new Installer_Task_Exception("New user does not validate: "
-             . $e->getMessage());
+             . (string) $user->getErrors());
         }
     }
 }

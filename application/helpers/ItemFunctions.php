@@ -75,28 +75,6 @@ function get_previous_item($item=null)
 }
 
 /**
- * Determine whether or not the current item belongs to a collection.
- *
- * @since 0.10
- * @param string|null The name of the collection that the item would belong
- * to.  If null, then this will check to see whether the item belongs to
- * any collection.
- * @param Item|null Check for this specific item record (current item if null).
- * @return boolean
- */
-function item_belongs_to_collection($name=null, $item=null)
-{
-    //Dependency injection
-    if (!$item) {
-        $item = get_current_record('item');
-    }
-
-     return (($collection = $item->Collection)
-         && (!$name || $collection->name == $name)
-         && ($collection->public || has_permission('Collections', 'showNotPublic')));
-}
-
-/**
  * Retrieve a valid citation for the current item.
  *
  * Generally follows Chicago Manual of Style note format for webpages.  Does not
@@ -215,28 +193,6 @@ function item_has_tags($item=null)
         $item = get_current_record('item');
     }
     return (count($item->Tags) > 0);
-}
-
-/**
- * Determine whether an item has an item type.
- *
- * If no $name is given, this will return true if the item has any item type
- * (items do not have to have an item type).  If $name is given, then this will
- * determine if an item has a specific item type.
- *
- * @since 0.10
- * @param string|null $name
- * @param Item|null Check for this specific item record (current item if null).
- * @return boolean
- */
-function item_has_type($name = null, $item = null)
-{
-    if (!$item) {
-        $item = get_current_record('item');
-    }
-
-    $itemTypeName = metadata($item, 'Item Type Name');
-    return ($name and ($itemTypeName == $name)) or (!$name and !empty($itemTypeName));
 }
 
 /**
@@ -361,16 +317,6 @@ function random_featured_item($hasImage=null)
 {
     $item = random_featured_items('1', $hasImage);
     return $item[0];
-}
-
-/**
- * Returns the total number of items
- *
- * @return integer
- */
-function total_items()
-{
-    return get_db()->getTable('Item')->count();
 }
 
 /**

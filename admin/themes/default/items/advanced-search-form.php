@@ -2,8 +2,7 @@
 if (!empty($formActionUri)):
     $formAttributes['action'] = $formActionUri;
 else:
-    $formAttributes['action'] = uri(array('controller'=>'items',
-                                          'action'=>'browse'));
+    $formAttributes['action'] = url(array('controller'=>'items', 'action'=>'browse'));
 endif;
 $formAttributes['method'] = 'GET';
 ?>

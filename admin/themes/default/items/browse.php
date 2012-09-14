@@ -91,11 +91,11 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
             </script>
             <?php echo pagination_links(array('partial_file' => common('pagination_control'))); ?>
             
-            <form action="<?php echo html_escape(uri('items/batch-edit')); ?>" method="post" accept-charset="utf-8">                
+            <form action="<?php echo html_escape(url('items/batch-edit')); ?>" method="post" accept-charset="utf-8">                
 
                 <div class="item-actions batch-edit-option fourteen columns alpha">
                     <?php if (has_permission('Items', 'add')): ?>
-                    <a href="<?php echo html_escape(uri('items/add')); ?>" class="add button small green"><?php echo __('Add an Item'); ?></a>
+                    <a href="<?php echo html_escape(url('items/add')); ?>" class="add button small green"><?php echo __('Add an Item'); ?></a>
                     <?php endif; ?>
                     <?php echo link_to_advanced_search(__('Advanced Search'), array('id' => 'advanced-search-link', 'class' => 'small blue button')); ?>
                     <?php if (has_permission('Items', 'edit')): ?>
@@ -151,8 +151,14 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                         <?php fire_plugin_hook('admin_append_to_items_browse_simple_each', array('view' => $this)); ?>
                         <div class="details">
                             <?php echo snippet_by_word_count(strip_formatting(metadata('item', array('Dublin Core', 'Description'))), 40); ?>
-                            <p><strong><?php echo __('Collection'); ?>:</strong> <?php if (item_belongs_to_collection()) echo link_to_collection_for_item(); else echo __('No Collection'); ?></p><p><strong><?php echo __('Tags'); ?>:</strong> <?php if ($tags = item_tags_as_string()) echo $tags; else echo __('No Tags'); ?></p>
-                            </ul>
+                            <p>
+                                <strong><?php echo __('Collection'); ?>:</strong>
+                                <?php echo link_to_collection_for_item(); ?>
+                            </p>
+                            <p>
+                                <strong><?php echo __('Tags'); ?>:</strong>
+                                <?php if ($tags = item_tags_as_string()) echo $tags; else echo __('No Tags'); ?>
+                            </p>
                             <?php fire_plugin_hook('admin_append_to_items_browse_detailed_each', array('view' => $this)); ?>
                         </div>
                     </td>
@@ -168,7 +174,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
             
                 <div class="item-actions batch-edit-option">
                     <?php if (has_permission('Items', 'add')): ?>
-                    <a href="<?php echo html_escape(uri('items/add')); ?>" class="add button small green"><?php echo __('Add an Item'); ?></a>
+                    <a href="<?php echo html_escape(url('items/add')); ?>" class="add button small green"><?php echo __('Add an Item'); ?></a>
                     <?php endif; ?>
                     <?php echo link_to_advanced_search(__('Advanced Search'), array('id' => 'advanced-search-link', 'class' => 'small blue button')); ?>
                     <?php if (has_permission('Items', 'edit')): ?>
@@ -187,7 +193,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
 
             <?php else: ?>
 
-                <?php if (total_items() === 0): ?>
+                <?php if (total_records('Item') === 0): ?>
 
                     <h2><?php echo __('You have no items.'); ?></h2>
                 
@@ -195,12 +201,12 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                     
                     <p><?php echo __('Get started by adding your first item.'); ?></p>
                     
-                            <a href="<?php echo html_escape(uri('items/add')); ?>" class="add big green button"><?php echo __('Add an Item'); ?></a>
+                            <a href="<?php echo html_escape(url('items/add')); ?>" class="add big green button"><?php echo __('Add an Item'); ?></a>
                     <?php endif; ?>
 
                 <?php else: ?>
                     
-                    <p><?php echo __('The query searched %s items and returned no results.', total_items()); ?> <?php echo __('Would you like to %s?', link_to_advanced_search(__('refine your search'))); ?></p>
+                    <p><?php echo __('The query searched %s items and returned no results.', total_records('Item')); ?> <?php echo __('Would you like to %s?', link_to_advanced_search(__('refine your search'))); ?></p>
     
                 
                 <?php endif; ?>

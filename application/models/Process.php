@@ -31,7 +31,7 @@ class Process extends Omeka_Record_AbstractRecord
     public $started;
     public $stopped;
     
-    protected function beforeSave()
+    protected function beforeSave($args)
     {
         if (!$this->_isSerialized($this->args)) {
             $this->args = serialize($this->args);            

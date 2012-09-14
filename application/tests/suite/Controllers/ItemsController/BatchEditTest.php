@@ -33,7 +33,8 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
                 'email'         => $role .'@example.com'
             );
 
-            $user->saveForm($userData);
+            $user->setPostData($userData);
+            $user->save();
 
             $this->_users[$role] = $user;
         }

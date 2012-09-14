@@ -30,13 +30,3 @@ function has_permission($resource, $privilege)
     // User implements Zend_Acl_Role_Interface, so it can be checked directly by the ACL.
     return $acl->isAllowed($user, $resource, $privilege);
 }
-
-/**
- * Returns the total number of users
- *
- * @return integer
- */
-function total_users()
-{
-    return get_db()->getTable('User')->count();
-}

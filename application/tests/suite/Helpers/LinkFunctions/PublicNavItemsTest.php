@@ -19,6 +19,16 @@ require_once HELPERS;
  */ 
 class Omeka_Helper_LinkFunctions_PublicNavItemsTest extends PHPUnit_Framework_TestCase
 {
+    public function setUp()
+    {
+        Zend_Registry::set('view', new Omeka_View);
+    }
+
+    public function tearDown()
+    {
+        Zend_Registry::_unsetInstance();
+    }
+    
     public function testWithEmptyArray()
     {
         $links = array();

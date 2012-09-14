@@ -155,101 +155,68 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     
     // ActiveRecord callbacks
     
-    /**
-     * Stop the form submission if we are using the non-JS form to change the 
-     * Item Type or add files.
-     *
-     * Also, do not allow people to change the public/featured status of an item
-     * unless they have 'makePublic' or 'makeFeatured' permissions.
-     *
-     * @return void
-     */
-    protected function beforeSaveForm($args)
+    protected function beforeSave($args)
     {
-        $post = $args['post'];
-        
-        $this->beforeSaveElements($post);
-        
-        if (!empty($post['change_type'])) {
-            return false;
-        }
-        if (!empty($post['add_more_files'])) {
-            return false;
-        }
-        
-        try {
-            $this->_uploadFiles();
-        } catch (Omeka_File_Ingest_InvalidException $e) {
-            $this->addError('File Upload', $e->getMessage());
-        }
-    }
-
-    /**
-     * Modify the user's tags for this item based on form input.
-     * 
-     * Checks the 'tags' field from the post and applies all the differences in
-     * the list of tags for the current user.
-     * 
-     * @param ArrayObject
-     * @return void
-     */
-    protected function _modifyTagsByForm($post)
-    {
-        // Change the tags (remove some, add some)
-        if (array_key_exists('tags-to-add', $post)) {
-            $this->addTags($post['tags-to-add']);
-            $this->deleteTags($post['tags-to-delete']);
-        }
-    }
-        
-    /**
-     * Save all metadata for the item that has been received through the form.
-     *
-     * All of these have to run after the Item has been saved, because all 
-     * require that the Item is already persistent in the database.
-     * 
-     * @return void
-     */
-    protected function afterSaveForm($args)
-    {
-        $post = $args['post'];
-        
-        // Update file order for this item.
-        foreach ($post['order'] as $fileId => $fileOrder) {
+        if ($args['post']) {
+            $post = $args['post'];
             
-            // File order must be an integer or NULL.
-            $fileOrder = (int) $fileOrder;
-            if (!$fileOrder) {
-                $fileOrder = null;
+            $this->beforeSaveElements($post);
+            
+            if (!empty($post['change_type'])) {
+                return false;
+            }
+            if (!empty($post['add_more_files'])) {
+                return false;
             }
             
-            $file = $this->getTable('File')->find($fileId);
-            $file->order = $fileOrder;
-            $file->save();
+            try {
+                $this->_uploadFiles();
+            } catch (Omeka_File_Ingest_InvalidException $e) {
+                $this->addError('File Upload', $e->getMessage());
+            }
         }
-        
-        // Delete files that have been designated by passing an array of IDs 
-        // through the form.
-        if (isset($post['delete_files']) && ($files = $post['delete_files'])) {
-            $this->_deleteFiles($files);
-        }
-        
-        $this->_modifyTagsByForm($post);
     }
     
     /**
-     * Things to do in the afterSave() hook:
-     * 
-     * Save all files that had been associated with the item.
-     * 
-     * @return void
+     * Logic for after the record has been saved.
      */
-    protected function afterSave()
+    protected function afterSave($args)
     {
         if (!$this->public) {
             $this->setSearchTextPrivate();
         }
+        
         $this->saveFiles();
+        
+        if ($args['post']) {
+            $post = $args['post'];
+            
+            // Update file order for this item.
+            foreach ($post['order'] as $fileId => $fileOrder) {
+                
+                // File order must be an integer or NULL.
+                $fileOrder = (int) $fileOrder;
+                if (!$fileOrder) {
+                    $fileOrder = null;
+                }
+                
+                $file = $this->getTable('File')->find($fileId);
+                $file->order = $fileOrder;
+                $file->save();
+            }
+            
+            // Delete files that have been designated by passing an array of IDs 
+            // through the form.
+            if (isset($post['delete_files']) && ($files = $post['delete_files'])) {
+                $this->_deleteFiles($files);
+            }
+            
+            // Save/delete the tags.
+            if (array_key_exists('tags-to-add', $post)) {
+                $this->addTags($post['tags-to-add']);
+                $this->deleteTags($post['tags-to-delete']);
+            }
+        }
     }
             
     /**
@@ -325,7 +292,7 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      * @param array Dirty post data
      * @return array Clean post data
      */
-    protected function filterInput($post)
+    protected function filterPostData($post)
     {
         $options = array('inputNamespace'=>'Omeka_Filter');
         $filters = array(                         

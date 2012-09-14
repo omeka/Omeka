@@ -185,7 +185,7 @@ class Omeka_File_Derivative_Image_Creator
      */
     private function _getResizeCmdArgs($constraint, $square)
     {
-        if ($square) {
+        if (!$square) {
             return '-thumbnail ' . escapeshellarg("{$constraint}x{$constraint}>");
         } else {
             return join(' ', array(

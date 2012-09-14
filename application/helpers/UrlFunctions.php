@@ -8,6 +8,8 @@
 
 /**
  * Return a URL given the provided arguments.
+ * 
+ * Instantiates view helpers directly because a view may not be registered.
  *
  * @uses Omeka_View_Helper_Url::url() See for details on usage.
  * @param string|array $options
@@ -17,24 +19,60 @@
  * @param boolean $encode
  * @return string
  */
-function uri($options = array(), $name = null, $queryParams = array(), $reset = false, $encode = true) {
-    $urlHelper = new Omeka_View_Helper_Url;
-    return $urlHelper->url($options, $name, $queryParams, $reset, $encode);
+function url($options = array(), $name = null, $queryParams = array(), 
+    $reset = false, $encode = true
+) {
+    $helper = new Omeka_View_Helper_Url;
+    return $helper->url($options, $name, $queryParams, $reset, $encode);
 }
 
 /**
  * Return an absolute URL.
- *
+ * 
  * This is necessary because Zend_View_Helper_Url returns relative URLs, though 
- * absolute URLs are required in some contexts.
+ * absolute URLs are required in some contexts. Instantiates view helpers 
+ * directly because a view may not be registered.
  *
- * @uses uri()
+ * @uses url()
  * @param mixed
  * @return string HTML
  */
-function absolute_url($options = array(), $route = null, $queryParams = array(), $reset = false, $encode = true) {
-    $view = __v();
-    return $view->serverUrl() . $view->url($options, $route, $queryParams, $reset, $encode);
+function absolute_url($options = array(), $route = null, $queryParams = array(), 
+    $reset = false, $encode = true
+) {
+    $serverUrlHelper = new Zend_View_Helper_ServerUrl;
+    $urlHelper = new Omeka_View_Helper_Url;
+    return $serverUrlHelper->serverUrl() 
+         . $urlHelper->url($options, $route, $queryParams, $reset, $encode);
+}
+
+/**
+ * Return the current URL with query parameters appended.
+ *
+ * Instantiates view helpers directly because a view may not be registered.
+ * 
+ * @param array $params
+ * @return string
+ */
+function current_url(array $params = array())
+{
+    $helper = new Omeka_View_Helper_GetCurrentUrl;
+    return $helper->getCurrentUrl($params);
+}
+
+/**
+ * Determine whether the given URI matches the current request URI.
+ * 
+ * Instantiates view helpers directly because a view may not be registered.
+ *
+ * @param string $url
+ * @param Zend_Controller_Request_Http|null $req
+ * @return boolean
+ */
+function is_current_url($url)
+{
+    $helper = new Omeka_View_Helper_IsCurrentUrl;
+    return $helper->isCurrentUrl($url);
 }
 
 /**
@@ -49,29 +87,6 @@ function absolute_url($options = array(), $route = null, $queryParams = array(),
 function record_url($record, $action = null, $getAbsoluteUrl = false)
 {
     return __v()->getRecordUrl($record, $action, $getAbsoluteUrl);
-}
-
-/**
- * Return the current URL with query parameters appended.
- *
- * @param array $params
- * @return string
- */
-function current_url(array $params = array())
-{
-    return __v()->getCurrentUrl($params);
-}
-
-/**
- * Determine whether the given URI matches the current request URI.
- *
- * @param string $url
- * @param Zend_Controller_Request_Http|null $req
- * @return boolean
- */
-function is_current_url($url)
-{
-    return __v()->isCurrentUrl($url);
 }
 
 /**
@@ -98,7 +113,7 @@ function items_output_url($output, $otherParams = array()) {
     $queryParams['output'] = $output;
     
     // Use the 'default' route as opposed to the current route.
-    return uri(array('controller'=>'items', 'action'=>'browse'), 'default', $queryParams);
+    return url(array('controller'=>'items', 'action'=>'browse'), 'default', $queryParams);
 }
 
 /**
@@ -127,7 +142,7 @@ function public_url()
 {
     set_theme_base_url('public');
     $args = func_get_args();
-    $url = call_user_func_array('uri', $args);
+    $url = call_user_func_array('url', $args);
     revert_theme_base_url();
     return $url;
 }
@@ -143,7 +158,7 @@ function admin_url()
 {
     set_theme_base_url('admin');
     $args = func_get_args();
-    $url = call_user_func_array('uri', $args);
+    $url = call_user_func_array('url', $args);
     revert_theme_base_url();
     return $url;
 }

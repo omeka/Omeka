@@ -58,7 +58,7 @@ function simple_search($buttonText = null, $formProperties=array('id'=>'simple-s
 
     // Always post the 'items/browse' page by default (though can be overridden).
     if (!$uri) {
-        $uri = apply_filters('simple_search_default_uri', uri('items/browse'));
+        $uri = apply_filters('simple_search_default_uri', url('items/browse'));
     }
 
     $searchQuery = array_key_exists('search', $_GET) ? $_GET['search'] : '';

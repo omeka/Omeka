@@ -60,17 +60,6 @@ function get_collection_for_item($item=null)
 }
 
 /**
- * Retrieve the total number of items in the current collection.
- *
- * @since 0.10
- * @return integer
- */
-function total_items_in_collection()
-{
-    return get_current_record('collection')->totalItems();
-}
-
-/**
  * Returns the most recent collections
  *
  * @param integer $num The maximum number of recent collections to return
@@ -89,14 +78,4 @@ function recent_collections($num = 10)
 function random_featured_collection()
 {
     return get_db()->getTable('Collection')->findRandomFeatured();
-}
-
-/**
- * Returns the total number of collection
- *
- * @return integer
- */
-function total_collections()
-{
-    return get_db()->getTable('Collection')->count();
 }

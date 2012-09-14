@@ -154,17 +154,17 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
         $class = $this->_helper->db->getDefaultModelName();
 
         $record = new $class();
-
-        try {
-            if ($record->saveForm($_POST)) {
+        if ($this->getRequest()->isPost()) {
+            $record->setPostData($_POST);
+            if ($record->save(false)) {
                 $successMessage = $this->_getAddSuccessMessage($record);
                 if ($successMessage != '') {
                     $this->_helper->flashMessenger($successMessage, 'success');
                 }
                 $this->_redirectAfterAdd($record);
+            } else {
+                $this->_helper->flashMessenger($record->getErrors());
             }
-        } catch (Omeka_Validator_Exception $e) {
-            $this->_helper->flashMessenger($e);
         }
         $this->view->assign(array(strtolower($class)=>$record));
     }
@@ -182,18 +182,20 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
         $varName = strtolower($this->_helper->db->getDefaultModelName());
 
         $record = $this->_helper->db->findById();
-
-        try {
-            if ($record->saveForm($_POST)) {
+        
+        if ($this->getRequest()->isPost()) {
+            $record->setPostData($_POST);
+            if ($record->save(false)) {
                 $successMessage = $this->_getEditSuccessMessage($record);
                 if ($successMessage != '') {
                     $this->_helper->flashMessenger($successMessage, 'success');
                 }
                 $this->_redirectAfterEdit($record);
+            } else {
+                $this->_helper->flashMessenger($record->getErrors());
             }
-        } catch (Omeka_Validator_Exception $e) {
-            $this->_helper->flashMessenger($e);
         }
+        
         $this->view->assign(array($varName=>$record));
     }
 

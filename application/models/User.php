@@ -35,30 +35,27 @@ class User extends Omeka_Record_AbstractRecord
     const INVALID_EMAIL_ERROR_MSG = "That email address is not valid.  A valid email address is required.";
     const CLAIMED_EMAIL_ERROR_MSG = "That email address has already been claimed by a different user. Please notify an administrator if you feel this has been done in error.";
     
-    protected function beforeSaveForm($args)
+    protected function beforeSave($args)
     {
-        $post = $args['post'];
-        
-        // Permissions check to see if whoever is trying to change role to a super-user
-        if (!empty($post['role'])) {
-            $bootstrap = Zend_Registry::get('bootstrap');
-            $acl = $bootstrap->getResource('Acl');
-            $currentUser = $bootstrap->getResource('CurrentUser');
-            if ($post['role'] == 'super' && !$acl->isAllowed($currentUser, 'Users', 'makeSuperUser')) {
-                throw new Omeka_Validator_Exception( __('User may not change permissions to super-user') );
+        if ($args['post']) {
+            $post = $args['post'];
+            
+            // Permissions check to see if whoever is trying to change role to a super-user
+            if (!empty($post['role'])) {
+                $bootstrap = Zend_Registry::get('bootstrap');
+                $acl = $bootstrap->getResource('Acl');
+                $currentUser = $bootstrap->getResource('CurrentUser');
+                if ($post['role'] == 'super' && !$acl->isAllowed($currentUser, 'Users', 'makeSuperUser')) {
+                    $this->addError('role', __('User may not change permissions to super-user'));
+                }
+                if (!$acl->isAllowed($currentUser, $this, 'change-role')) {
+                    $this->addError('role', __('User may not change roles.'));
+                }
             }
-            if (!$acl->isAllowed($currentUser, $this, 'change-role')) {
-                throw new Omeka_Validator_Exception(__('User may not change roles.'));
-            }
-        } 
+        }
     }
     
-    /**
-     * @duplication Mostly duplicated in Item::filterInput()
-     *
-     * @return void
-     */
-    protected function filterInput($post)
+    protected function filterPostData($post)
     {
         $options = array('inputNamespace'=>'Omeka_Filter');
         
@@ -77,7 +74,7 @@ class User extends Omeka_Record_AbstractRecord
         return $post;
     }
     
-    public function setFromPost($post)
+    public function setPostData($post)
     {
         // potential security hole
         if (isset($post['password'])) {
@@ -86,7 +83,7 @@ class User extends Omeka_Record_AbstractRecord
         if (array_key_exists('salt', $post)) {
             unset($post['salt']);
         }
-        return parent::setFromPost($post);
+        return parent::setPostData($post);
     }
     
     protected function _validate()

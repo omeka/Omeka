@@ -10,7 +10,7 @@ if (!$isPartial):
         
 <div title="<?php echo $title; ?>">
 
-<form id="batch-edit-form" action="<?php echo html_escape(uri('items/batch-edit-save')); ?>" method="post" accept-charset="utf-8">
+<form id="batch-edit-form" action="<?php echo html_escape(url('items/batch-edit-save')); ?>" method="post" accept-charset="utf-8">
 
     <div id="save" class="three columns omega panel">
         <input type="submit" class="big green button" value="<?php echo __('Save Changes'); ?>">

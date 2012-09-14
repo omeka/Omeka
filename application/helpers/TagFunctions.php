@@ -7,16 +7,6 @@
  */
 
 /**
- * Returns the total number of tags
- *
- * @return integer
- */
-function total_tags()
-{
-    return get_db()->getTable('Tag')->count();
-}
-
-/**
  * Returns the most recent tags.
  *
  * @param integer $limit The maximum number of recent tags to return
@@ -47,7 +37,7 @@ function item_tags_as_cloud($params = array('sort_field' => 'name'), $tagsAreLin
     }
     $params['record'] = $item;
     $tags = get_records('Tag', $params, $limit);
-    $urlToLinkTo = ($tagsAreLinked) ? uri('items/browse/tag/') : null;
+    $urlToLinkTo = ($tagsAreLinked) ? url('items/browse/tag/') : null;
     return tag_cloud($tags, $urlToLinkTo);
 }
 
@@ -78,7 +68,7 @@ function item_tags_as_string($delimiter = null, $params = array('sort_field' => 
     }
     $params['record'] = $item;
     $tags = get_records('Tag', $params, $limit);
-    $urlToLinkTo = ($tagsAreLinked) ? uri('items/browse/tag/') : null;
+    $urlToLinkTo = ($tagsAreLinked) ? url('items/browse/tag/') : null;
     return tag_string($tags, $urlToLinkTo, $delimiter);
 }
 

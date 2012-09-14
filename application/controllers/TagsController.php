@@ -32,20 +32,6 @@ class TagsController extends Omeka_Controller_AbstractActionController
         $this->view->assign(compact('tags'));
     }
     
-    public function deleteAction()
-    {
-        if (!empty($_POST)) {
-            
-            $tag_id = $_POST['delete_tag'];
-            $tag = $this->_helper->db->find($tag_id);
-            $tag->delete();
-            $this->_helper->flashMessenger(__("Tag named '%s' was successfully deleted.", $tag->name), 'success');
-        }
-        
-        $tags = $this->getTagsForAdministration();
-        $this->view->assign(compact('tags'));
-    }
-    
     protected function getTagsForAdministration()
     {
         $user = $this->getCurrentUser();

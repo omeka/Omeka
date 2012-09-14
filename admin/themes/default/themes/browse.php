@@ -8,7 +8,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
             <div id="current-theme" class="theme">
                 <div id="current-image" class="five columns alpha">
                     <div class="crop"><img src="<?php echo html_escape($current->image); ?>" alt="<?php echo __('Screenshot for %s Theme', html_escape($current->title)); ?>" /></div>
-                <?php if($current->hasConfig): ?><a href="<?php echo html_escape(uri('themes/config?name='.$current->directory)); ?>" id="configure-button" class="blue button"><?php echo __('Configure Theme'); ?></a><?php endif; ?>
+                <?php if($current->hasConfig): ?><a href="<?php echo html_escape(url('themes/config?name=' . $current->directory)); ?>" id="configure-button" class="blue button"><?php echo __('Configure Theme'); ?></a><?php endif; ?>
                 </div>
                 <div id="current-info" class="five columns omega">
                     <h2 id="current-theme-title"><?php echo __('Current Theme'); ?></h2>

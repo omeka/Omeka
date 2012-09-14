@@ -66,22 +66,25 @@ class ItemTypesController extends Omeka_Controller_AbstractActionController
         if ($elementCount = count($itemType->Elements)) {
            $elementsOrder = range(1, $elementCount);
         }
-
-        try {
-            if ($_POST) {
-                $this->_extractElementDataFromPost($_POST, $elementsToRemove, $elementsToSave, $elementsToAdd, $elementsToAddTempIds, $elementsToAddIsNew, $elementsOrder);
+        
+        if ($this->getRequest()->isPost()) {
+            try {
+                $this->_extractElementDataFromPost($_POST, $elementsToRemove, 
+                    $elementsToSave, $elementsToAdd, $elementsToAddTempIds, 
+                    $elementsToAddIsNew, $elementsOrder);
                 $this->_checkForDuplicateElements($elementsToSave);
                 $itemType->removeElements($elementsToRemove);
                 $itemType->addElements($elementsToSave);
+                
+                $itemType->setPostData($_POST);
+                if ($itemType->save()) {
+                    $itemType->reorderElements($elementsOrder);
+                    $this->_helper->flashMessenger(__('The item type "%s" was successfully changed!', $itemType->name), 'success');
+                    $this->_helper->redirector('show', null, null, array('id'=>$itemType->id));
+                }
+            } catch (Omeka_Validator_Exception $e) {
+                $this->_helper->flashMessenger($e);
             }
-
-            if ($itemType->saveForm($_POST)) {
-                $itemType->reorderElements($elementsOrder);
-                $this->_helper->flashMessenger(__('The item type "%s" was successfully changed!', $itemType->name), 'success');
-                $this->_helper->redirector('show', null, null, array('id'=>$itemType->id));
-            }
-        } catch (Omeka_Validator_Exception $e) {
-            $this->_helper->flashMessenger($e);
         }
         $this->view->assign(array('itemtype' => $itemType,
                                   'elementsToAdd' => $elementsToAdd,
