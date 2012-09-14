@@ -1772,3 +1772,16 @@ button.remove_search {
 ================================================== */
 
 #info-field { word-wrap: break-word; }
+
+
+/* Upgrade
+================================================== */
+
+#upgrade #content {
+    margin-top: 10%;
+}
+
+#upgrade a.button {
+    float: left;
+    margin: 0;
+}

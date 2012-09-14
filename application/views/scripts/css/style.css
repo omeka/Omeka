@@ -1677,12 +1677,3 @@ button.remove_search {
     padding: 10px;
     word-break: break-word;
 }
-
-
-/* Upgrade
-================================================== */
-
-#upgrade a.button {
-    float: left;
-    margin: 0;
-}

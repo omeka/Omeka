@@ -10,9 +10,6 @@
 
     <?php echo auto_discovery_link_tags(); ?>
 
-    <!-- Plugin Stuff -->
-    <?php fire_plugin_hook('public_theme_header'); ?>
-
     <!-- Stylesheets -->
     <?php
     queue_css('style', 'all');
@@ -32,15 +29,18 @@
     <div class="container container-sixteen">
     
         <section id="content" class="eight columns offset-by-four">
-            <h1><?php echo __('Omeka Upgrade Completed'); ?></h1>
-            <p><?php echo __('Your Omeka database is completely up-to-date.'); ?> <?php echo __('Please return to the %1$s or your site&#8217;s %2$s', link_to_admin_home_page('admin'), link_to_home_page('home page')); ?>. 
-            <?php echo
-            __('If you have any questions please refer to <a href="http://omeka.org/codex">Omeka documentation</a> or post a message on the <a href="http://omeka.org/forums">Omeka forums</a>.'); ?>
-            </p>
+        
+        <h1><?php echo __('Upgrade Your Omeka Database'); ?></h1> 
+        <p>
+            <?php echo __('Your Omeka database is not compatible with your current version of Omeka.'); ?>
+            <?php echo __('Please back up your existing database and then click the button to upgrade.'); ?>
+        </p>
+        <?php echo link_to('upgrade', 'migrate', __('Upgrade Database'), array('id' => 'upgrade-database-link', 'class'=>'big green button')); ?>
+        
         </section>
     
     </div>
-    
+
 </body>
 
 </html>
