@@ -22,15 +22,15 @@ class Mixin_Owner extends Omeka_Record_Mixin_AbstractMixin
         $this->_column = $column;
     }
     
-    /**
-     * After inserting a record, mark that the logged-in user owns it.
-     */
-    public function beforeInsert()
+    public function beforeSave($args)
     {
-        $column = $this->_column;
-        $user = Zend_Registry::get('bootstrap')->getResource('CurrentUser');
-        if ($user && !$this->_record->$column) {
-            $this->setOwner($user);
+        // After inserting a record, mark that the logged-in user owns it.
+        if ($args['insert']) {
+            $column = $this->_column;
+            $user = Zend_Registry::get('bootstrap')->getResource('CurrentUser');
+            if ($user && !$this->_record->$column) {
+                $this->setOwner($user);
+            }
         }
     }
 

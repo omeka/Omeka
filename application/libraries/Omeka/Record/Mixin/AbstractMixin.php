@@ -56,11 +56,7 @@ abstract class Omeka_Record_Mixin_AbstractMixin
      * @return void
      */
     public function beforeSave($args) {}
-    public function beforeUpdate() {}
-    public function beforeInsert() {}
-    public function afterInsert() {}
     public function afterSave($args) {}
-    public function afterUpdate() {}
     public function beforeDelete() {}
     public function afterDelete() {}
     /**#@-*/

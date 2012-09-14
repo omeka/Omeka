@@ -86,7 +86,7 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
      * 
      * @see Omeka_Record_AbstractRecord::setPostData()
      * @see Omeka_Record_AbstractRecord::save()
-     * @var array
+     * @var ArrayObject
      */
     protected $_postData;
     
@@ -104,11 +104,7 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
      * @var array
      */
     private $_eventCallbacks = array(
-        'beforeInsert',
-        'beforeUpdate',
         'beforeSave',
-        'afterInsert',
-        'afterUpdate',
         'afterSave',
         'beforeDelete',
         'afterDelete',
@@ -513,23 +509,19 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
      */
     public function save($throwIfInvalid = true)
     {
-        // Set the POST data to be passed to the before/afterSave callbacks.
-        if ($this->_postData) {
-            $callbackArgs = array('post' => $this->_postData);
-        } else {
-            $callbackArgs = null;
-        }
-        
         if ($this->_locked) {
             throw new Omeka_Record_Exception('Cannot save a locked record!');
         }
         
         $wasInserted = !$this->exists();
         
+        // Set the arguments for the before/afterSave callbacks.
+        $callbackArgs = array('post' => false, 'insert' => false);
+        if ($this->_postData) {
+            $callbackArgs['post'] = $this->_postData;
+        }
         if ($wasInserted) {
-            $this->runCallbacks('beforeInsert');
-        } else {
-            $this->runCallbacks('beforeUpdate');
+            $callbackArgs['insert'] = true;
         }
         
         $this->runCallbacks('beforeSave', $callbackArgs);
@@ -541,23 +533,15 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
                 return false;
             }
         }
-
-        // Only save data that are properties defined by the record.
-        $dataToSave = $this->toArray();
         
-        // Save the record to the database.
-        $insertId = $this->getDb()->insert(get_class($this), $dataToSave);
+        // Save the record to the database. Only save data that are properties 
+        // defined by the record.
+        $insertId = $this->getDb()->insert(get_class($this), $this->toArray());
         
         if ($wasInserted && (empty($insertId) || !is_numeric($insertId))) {
             throw new Omeka_Record_Exception("LAST_INSERT_ID() did not return a numeric ID when saving the record.");
         }
         $this->id = $insertId;
-        
-        if ($wasInserted) {
-            $this->runCallbacks('afterInsert');
-        } else {
-            $this->runCallbacks('afterUpdate');
-        }
         
         $this->runCallbacks('afterSave', $callbackArgs);
         
@@ -630,16 +614,6 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
      */
     
     /**
-     * Executes before the record is inserted.
-     */
-    protected function beforeInsert() {}
-    
-    /**
-     * Executes after the record is inserted.
-     */
-    protected function afterInsert() {}
-    
-    /**
      * Executes before the record is saved.
      */
     protected function beforeSave($args) {}
@@ -648,16 +622,6 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
      * Executes after the record is inserted.
      */
     protected function afterSave($args) {}
-    
-    /**
-     * Executes before the record is updated.
-     */
-    protected function beforeUpdate() {}
-    
-    /**
-     * Executes after the record is updated.
-     */
-    protected function afterUpdate() {}
     
     /**
      * Executes before the record is deleted.

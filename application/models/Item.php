@@ -157,7 +157,7 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     
     protected function beforeSave($args)
     {
-        if (isset($args['post'])) {
+        if ($args['post']) {
             $post = $args['post'];
             
             $this->beforeSaveElements($post);
@@ -188,7 +188,7 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         
         $this->saveFiles();
         
-        if (isset($args['post'])) {
+        if ($args['post']) {
             $post = $args['post'];
             
             // Update file order for this item.

@@ -37,7 +37,7 @@ class User extends Omeka_Record_AbstractRecord
     
     protected function beforeSave($args)
     {
-        if (isset($args['post'])) {
+        if ($args['post']) {
             $post = $args['post'];
             
             // Permissions check to see if whoever is trying to change role to a super-user

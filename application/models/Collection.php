@@ -203,7 +203,7 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
     
     protected function beforeSave($args)
     {
-        if (isset($args['post'])) {
+        if ($args['post']) {
             $post = $args['post'];
             
             // Process the collectors that have been provided on the form
