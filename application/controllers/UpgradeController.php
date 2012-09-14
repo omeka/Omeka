@@ -38,7 +38,7 @@ class UpgradeController extends Zend_Controller_Action
     {        
         $manager = Omeka_Db_Migration_Manager::getDefault();
         if (!$manager->canUpgrade()) {
-            return $this->_forward('completed');
+            throw new Omeka_Db_Migration_Exception('Omeka is unable to upgrade.');
         }
         
         $debugMode = (boolean)$this->getInvokeArg('bootstrap')->config->debug->exceptions;
@@ -54,10 +54,5 @@ class UpgradeController extends Zend_Controller_Action
             $this->view->error = __("SQL error in migration: ") . $e->getMessage();
             $this->view->trace = $e->getTraceAsString();
         }
-    }
-    
-    public function completedAction()
-    {
-        
     }
 }
