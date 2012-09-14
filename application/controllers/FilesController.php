@@ -58,4 +58,16 @@ class FilesController extends Omeka_Controller_AbstractActionController
         $this->view->assign(compact('elementSets'));
         parent::editAction();
     }
+    
+    protected function _getDeleteConfirmMessage($record)
+    {
+        return __('This will delete the file and its associated metadata.');
+    }
+    
+    protected function _redirectAfterDelete($record)
+    {
+        // Redirect back to the item show page for this file
+        $this->_helper->flashMessenger('The file was successfully deleted.', 'success');
+        $this->_helper->redirector('show', 'items', null, array('id'=>$record->item_id));
+    }
 }
