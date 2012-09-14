@@ -63,7 +63,8 @@ class Omeka_Helper_RandomFeaturedItemTest extends Omeka_Test_AppTestCase
                 'filename' => 'file'.$i,
                 'original_filename' => 'file'.$i,
                 'size' => 0,
-                'item_id' => $item->id
+                'item_id' => $item->id,
+                'metadata' => '',
             ));
         }
     }
