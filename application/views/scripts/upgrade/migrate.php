@@ -10,9 +10,6 @@
 
     <?php echo auto_discovery_link_tags(); ?>
 
-    <!-- Plugin Stuff -->
-    <?php fire_plugin_hook('public_theme_header'); ?>
-
     <!-- Stylesheets -->
     <?php
     queue_css('style', 'all');

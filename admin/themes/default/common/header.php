@@ -23,12 +23,6 @@
 <!-- JavaScripts -->
 <?php display_js(); ?>
 
-<script>
- jQuery(document).ready(function() {
-     jQuery('.edit-tag').editable('<?php echo url('tags'); ?>');
- });
-</script>
-
 </head>
 
 <?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass)); ?>
