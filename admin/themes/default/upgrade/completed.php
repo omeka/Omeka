@@ -12,9 +12,7 @@
 
     <!-- Stylesheets -->
     <?php
-    queue_css('style', 'all');
-    queue_css('skeleton', 'all');
-    queue_css('layout', 'all');
+    queue_css(array('style', 'skeleton', 'layout'));
     display_css();
     ?>
     <link href='http://fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic|Cabin:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
