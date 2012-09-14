@@ -311,7 +311,6 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         if (!$id3 = $this->_getId3()) {
             return false;
         }
-        $this->setMimeType($id3->info['mime_type']);
         
         getid3_lib::CopyTagsToComments($id3->info);
         $metadata = array();
@@ -354,7 +353,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
                 }
             }
             if ($mimeType === null) {
-                if ($id3 = $this->_getId3()) {
+                if ($id3 = $this->_getId3() && isset($id3->info['mime_type'])) {
                     $mimeType = $id3->info['mime_type'];
                 }
             }
