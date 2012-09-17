@@ -78,6 +78,7 @@ class Omeka_Plugin_Loader
      * @param array $plugins List of Plugin records to load.  
      * @param boolean $force If true, throws exceptions for plugins that cannot
      * be loaded for some reason.
+     * @throws Omeka_Plugin_Loader_Exception
      * @return void
      */
     public function loadPlugins(array $plugins, $force = false)
@@ -104,6 +105,7 @@ class Omeka_Plugin_Loader
      * was registered.
      *
      * @param Plugin $plugin Record of plugin to register.
+     * @throws Omeka_Plugin_Loader_Exception
      * @return void
      */
     public function registerPlugin(Plugin $plugin)
@@ -139,6 +141,7 @@ class Omeka_Plugin_Loader
      * @param boolean $force If true, throws exceptions if a plugin can't be 
      * loaded.
      * @param array $pluginsWaitingToLoad Plugins waiting to be loaded
+     * @throws Omeka_Plugin_Loader_Exception
      * @return void
      */
     public function load(Plugin $plugin, $force = false, $pluginsWaitingToLoad = array())

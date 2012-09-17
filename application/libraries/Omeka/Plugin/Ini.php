@@ -54,7 +54,6 @@ class Omeka_Plugin_Ini
         if ($pluginDirName instanceof Plugin) {
             $pluginDirName = $pluginDirName->getDirectoryName();
         }
-
         $pluginIniPath = $this->getPluginIniFilePath($pluginDirName);
         if (file_exists($pluginIniPath)) {
             if (array_key_exists($pluginDirName, $this->_configs)) {
@@ -63,9 +62,8 @@ class Omeka_Plugin_Ini
                 $config = new Zend_Config_Ini($pluginIniPath, 'info');
                 $this->_configs[$pluginDirName] = $config;
             }
-
         } else {
-            throw new Exception("Path to plugin.ini for '$pluginDirName' is not correct.");
+            throw new RuntimeException(__('Path to plugin.ini for "%s" is not correct.', $pluginDirName));
         }
         return $config->$iniKeyName;
     }

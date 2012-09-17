@@ -141,7 +141,7 @@ class User extends Omeka_Record_AbstractRecord
     public function getRoleId()
     {
         if (!$this->role) {
-            throw new Exception(__('The user must be assigned a role.'));
+            throw new RuntimeException(__('The user must be assigned a role.'));
         }
         return $this->role;
     }  

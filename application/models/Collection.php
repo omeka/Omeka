@@ -94,7 +94,7 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
             case 'total items':
                 return $this->totalItems();
             default:
-                throw new Exception(__('%s does not exist for collections!', $property));
+                throw new InvalidArgumentException(__('%s does not exist for collections!', $property));
         }
     }
     

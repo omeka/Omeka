@@ -37,7 +37,7 @@ class TagsController extends Omeka_Controller_AbstractActionController
         $user = $this->getCurrentUser();
         
         if (!$user) {
-            throw new Exception( __('You have to be logged in to edit tags!') );
+            throw new Zend_Acl_Exception( __('You have to be logged in to edit tags!') );
         }
         
         $criteria = array('sort' => 'alpha');
@@ -93,7 +93,7 @@ class TagsController extends Omeka_Controller_AbstractActionController
         }
         //Since tagType must correspond to a valid classname, this will barf an error on Injection attempts
         if (!class_exists($for)) {
-            throw new Exception(__('Invalid tagType given'));
+            throw new InvalidArgumentException(__('Invalid tagType given.'));
         }
         
         if($record = $this->_getParam('record')) {

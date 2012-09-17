@@ -341,7 +341,7 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
         if ($property == 'id') {
             return $this->id;
         } else {
-            throw new Exception(__("'%s' is an invalid special value.", $property));
+            throw new InvalidArgumentException(__("'%s' is an invalid special value.", $property));
         }
     }
 

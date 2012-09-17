@@ -110,10 +110,9 @@ class Omeka_Job_Process_Dispatcher
         $command = escapeshellcmd($cliPath).' -v';
         $output = array();
         exec($command, $output, $returnCode);
-
-        $error = "The configured PHP path ($cliPath)";
+        
         if ($returnCode != 0) {
-            throw new Exception($error.' is invalid.');
+            throw new RuntimeException(__('The configured PHP path (%s) is invalid.', $cliPath));
         }
 
         // Attempt to parse the output from 'php -v' (the first line only)
@@ -123,10 +122,9 @@ class Omeka_Job_Process_Dispatcher
         $phpVersion = phpversion();
 
         if ($cliName != 'PHP'  || !$cliVersion) {
-            throw new Exception($error.' does not point to a PHP-CLI binary.');
+            throw new RuntimeException(__('The configured PHP path (%s) does not point to a PHP-CLI binary.', $cliPath));
         } else if (version_compare($cliVersion, '5.2', '<')) {
-            throw new Exception($error.' points to a PHP-CLI binary with an'
-                                      ." invalid version ($cliVersion)");
+            throw new RuntimeException(__('The configured PHP path (%s) points to a PHP-CLI binary with an invalid version (%s)', $cliPath, $cliVersion));
         } else if ($cliVersion != $phpVersion) {
             // potentially display a warning for this
         }
