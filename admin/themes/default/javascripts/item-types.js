@@ -45,7 +45,7 @@ Omeka.ItemTypes.manageItemTypes = function (addNewRequestUrl, addExistingRequest
     function activateRemoveElementLinks() {
         jQuery('a.delete-element').click(function (event) {
             event.preventDefault();
-            var elementsToRemove = jQuery('#elements-to-remove');
+            var elementsToRemove = jQuery('#itemtypes_remove');
 
             var removeElementLinkPrefix = 'remove-element-link-';
             var removeElementLinkId = this.getAttribute('id');
@@ -91,4 +91,9 @@ Omeka.ItemTypes.manageItemTypes = function (addNewRequestUrl, addExistingRequest
     });
 
     activateRemoveElementLinks();
+    
+    jQuery(document).ready(function() {
+      // remove the mobile table because it interferes with the POST data
+      jQuery('table.mobile').remove();
+    });
 };

@@ -12,7 +12,7 @@
     <form id="edit-item-type-form" method="post" action="">
         <?php include 'form.php';?>
         <div id="save" class="three columns omega panel">
-            <input type="submit" name="submit" value="<?php echo __('Save Changes'); ?>" class="submit big green button" />
+            <?php echo $form->getElement(Omeka_Form_ItemTypes::SUBMIT_EDIT_ELEMENT_ID); ?>
             <?php if (has_permission('ItemTypes', 'delete')): ?>
                 <?php echo link_to($itemtype, 'delete-confirm', __('Delete this Item Type'), array('class' => 'big red button delete-confirm')); ?>
             <?php endif; ?>
