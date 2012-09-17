@@ -24,7 +24,6 @@ class Omeka_Form_ItemTypes extends Omeka_Form
     const DESCRIPTION_ELEMENT_ID = 'itemtypes_description';
     const REMOVE_HIDDEN_ELEMENT_ID = 'itemtypes_remove';
     const SUBMIT_EDIT_ELEMENT_ID = 'itemtypes_edit_submit';
-    const DELETE_ELEMENT_ID = 'itemtypes_delete';
     const SUBMIT_ADD_ELEMENT_ID = 'itemtypes_add_submit';
     
     // prefixes
@@ -79,7 +78,7 @@ class Omeka_Form_ItemTypes extends Omeka_Form
             
             // remove old item type elements from post
             $this->_removeElementsFromItemType();
-            
+                        
             // add elements to the item type
             $this->_addElementsToItemType();
         
@@ -190,14 +189,6 @@ class Omeka_Form_ItemTypes extends Omeka_Form
                         'ViewHelper',
                         'Errors',)
         ));
-        
-        $this->addElement('submit', self::DELETE_ELEMENT_ID, array(
-            'label' => __('Delete this Item Type'),
-            'class' => 'big red button',
-            'decorators' =>  array(
-                        'ViewHelper',
-                        'Errors',)
-        ));
     }
     
     private function _checkForDuplicateElements()
@@ -211,7 +202,7 @@ class Omeka_Form_ItemTypes extends Omeka_Form
             // prevent duplicate item type element ids
             if ($element->id) {
                 if (in_array($element->id, $elementIds)) {
-                    throw new Omeka_Validator_Exception(__('The item type cannot have more than one "%s" element.', $elementToSave->name));
+                    throw new Omeka_Validator_Exception(__('The item type cannot have more than one "%s" element.', $element->name));
                 } else {
                     $elementIds[] = $element->id;
                 }
@@ -220,7 +211,7 @@ class Omeka_Form_ItemTypes extends Omeka_Form
             // prevent duplicate item type element names
             if ($element->name) {
                 if (in_array($element->name, $elementNames)) {
-                    throw new Omeka_Validator_Exception(__('The item type cannot have more than one "%s" element.', $elementToSave->name));
+                    throw new Omeka_Validator_Exception(__('The item type cannot have more than one "%s" element.', $element->name));
                 } else {
                     $elementNames[] = trim($element->name);
                 }

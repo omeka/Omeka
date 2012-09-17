@@ -50,16 +50,10 @@ class ItemTypesController extends Omeka_Controller_AbstractActionController
         // get the item type
         $itemType = $this->_helper->db->findById();
         
-        // check to see if the item type should be deleted
-        if (isset($_POST[Omeka_Form_ItemTypes::DELETE_ELEMENT_ID])) {
-            $this->_redirect("item-types/delete-confirm/{$itemType->id}");
-        }
-        
-        // edit the item type        
+        // edit the item type
         $form = $this->_getForm($itemType);
         if (isset($_POST[Omeka_Form_ItemTypes::SUBMIT_EDIT_ELEMENT_ID])) {
             if ($form->isValid($_POST)) {
-                
                 try{                    
                     $form->saveFromPost();                    
                     $this->_helper->flashMessenger(__('The item type "%s" was successfully updated.', $itemType->name), 'success');
