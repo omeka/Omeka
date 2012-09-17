@@ -6,10 +6,7 @@
     <title><?php echo __('Omeka Admin'); ?>: <?php echo settings('site_title'); echo isset($title) ? ' | ' . strip_formatting($title) : ''; ?></title>
 
 <?php
-    queue_css('style', 'all');
-    queue_css('layout', 'all');
-    queue_css('skeleton', 'all');
-    queue_css('jquery-ui', 'all');    
+    queue_css(array('style', 'layout', 'skeleton', 'jquery-ui'));
     queue_js(array('globals','jquery.jeditable.mini'));
 ?>
 
