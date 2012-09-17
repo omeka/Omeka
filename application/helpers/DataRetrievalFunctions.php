@@ -57,7 +57,7 @@ function get_latest_omeka_version()
                  . "returned with status=" . $result->getStatus() . " and "
                  . "response body=" . $result->getBody());
         }
-    } catch (Exception $e) {
+    } catch (Zend_Http_Client_Adapter_Exception $e) {
         debug('Error in retrieving latest Omeka version: ' . $e->getMessage());
     }
     return false;

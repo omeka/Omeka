@@ -71,12 +71,13 @@ class Omeka_Plugin_Installer
      * This will activate the plugin, then run the 'upgrade' hook.
      *
      * @param Plugin $plugin Plugin to upgrade.
+     * @throws Omeka_Plugin_Exception | Omeka_Plugin_Loader_Exception
      * @return void
      */
     public function upgrade(Plugin $plugin)
     {           
         if (!$plugin->hasNewVersion()) {
-            throw new Exception("The '" . $plugin->getDisplayName() . "' plugin must be installed and have newer files to upgrade it.");
+            throw new Omeka_Plugin_Installer_Exception(__('The "%s" plugin must be installed and have newer files to upgrade it.', $plugin->getDisplayName()));
         }
         
         $oldVersion = $plugin->getDbVersion();
@@ -107,12 +108,13 @@ class Omeka_Plugin_Installer
      * This will activate the plugin, then run the 'install' hook.
      *
      * @param Plugin $plugin Plugin to install.
+     * @throws Omeka_Plugin_Exception | Omeka_Plugin_Loader_Exception
      * @return void
      */
     public function install(Plugin $plugin) 
     {
         if (!$plugin->getDirectoryName()) {
-            throw new Exception("Plugin must have a valid directory name before it can be installed.");
+            throw new Omeka_Plugin_Installer_Exception(__('Plugin must have a valid directory name before it can be installed.'));
         }
 
         try {
@@ -139,6 +141,7 @@ class Omeka_Plugin_Installer
      * will remove the entry in the DB corresponding to the plugin.
      * 
      * @param Plugin $plugin Plugin to uninstall.
+     * @throws Omeka_Plugin_Loader_Exception
      * @return void
      */
     public function uninstall(Plugin $plugin)

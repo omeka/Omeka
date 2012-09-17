@@ -15,6 +15,6 @@ class foobar extends Omeka_Db_Migration_AbstractMigration
 {
     public function up()
     {
-        throw new Exception("This migration should have been run previously (should not run again).");
+        throw new Omeka_Db_Migration_Exception(__('This migration should have been run previously (should not run again).'));
     }
 }
