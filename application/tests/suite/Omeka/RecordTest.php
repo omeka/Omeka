@@ -190,7 +190,7 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
         $record = new DummyRecord($this->db);
         $record->id = 4;
         $record->save();
-        $this->assertContains('DummyRecord::beforeUpdate()', self::$_eventStack);
+        $this->assertContains('DummyRecord::beforeSave(), insert = false', self::$_eventStack);
     }
     
     public function testSaveFiresCallbacksInCorrectOrder()
@@ -199,10 +199,8 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
         $record = new DummyRecord($this->db);
         $record->save();
         $this->assertEquals(array(
-            'DummyRecord::beforeInsert()',
-            'DummyRecord::beforeSave()',
-            'DummyRecord::afterInsert()',
-            'DummyRecord::afterSave()',
+            'DummyRecord::beforeSave(), insert = true',
+            'DummyRecord::afterSave(), insert = true',
         ), $this->_simpleStack());
     }
     
@@ -338,37 +336,22 @@ class DummyRecord extends Omeka_Record_AbstractRecord
         $this->_foobar = $flag;
     }
     
-    protected function beforeSave()
+    protected function beforeSave($args)
     {
-        Omeka_RecordTest::addToEventStack('DummyRecord::beforeSave()');
-    }
-
-    protected function beforeInsert()
-    {
-        Omeka_RecordTest::addToEventStack('DummyRecord::beforeInsert()');
-    }
-    
-    protected function afterSave()
-    {
-        Omeka_RecordTest::addToEventStack('DummyRecord::afterSave()');
+        if ($args['insert']) {
+            Omeka_RecordTest::addToEventStack('DummyRecord::beforeSave(), insert = true');
+        } else {
+            Omeka_RecordTest::addToEventStack('DummyRecord::beforeSave(), insert = false');
+        }
     }
     
-    protected function afterInsert()
+    protected function afterSave($args)
     {
-        Omeka_RecordTest::addToEventStack('DummyRecord::afterInsert()');
-    }
-        
-    protected function beforeUpdate()
-    {
-        Omeka_RecordTest::addToEventStack('DummyRecord::beforeUpdate()');
-    }
-                    
-    /**
-     * Executes after the record is updated.
-     */
-    protected function afterUpdate() 
-    {
-        Omeka_RecordTest::addToEventStack('DummyRecord::afterUpdate()');
+        if ($args['insert']) {
+            Omeka_RecordTest::addToEventStack('DummyRecord::afterSave(), insert = true');
+        } else {
+            Omeka_RecordTest::addToEventStack('DummyRecord::aftrerSave(), insert = false');
+        }
     }
     
     /**
@@ -390,16 +373,6 @@ class DummyRecord extends Omeka_Record_AbstractRecord
         if ($this->do_not_set) {
             $this->addError('do_not_set', "Do Not Set property will automatically invalidate the record.");
         }
-    }
-    
-    protected function beforeSaveForm($args)
-    {
-        Omeka_RecordTest::addToEventStack('DummyRecord::beforeSaveForm() with POST = ' . print_r($args['post'], true));
-    }
-    
-    protected function afterSaveForm($args)
-    {
-        Omeka_RecordTest::addToEventStack('DummyRecord::afterSaveForm() with POST = ' . print_r($args['post'], true));
     }
 }
 

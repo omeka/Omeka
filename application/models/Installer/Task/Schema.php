@@ -22,7 +22,6 @@ class Installer_Task_Schema implements Installer_TaskInterface
         'collections',
         'element_texts',
         'item_types',
-        'mime_element_set_lookup',
         'processes',
         'tags',
         'elements',

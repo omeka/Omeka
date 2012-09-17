@@ -85,7 +85,6 @@ class Omeka_Test_Resource_DbTest extends PHPUnit_Framework_TestCase
           'omeka_item_types',
           'omeka_item_types_elements',
           'omeka_items',
-          'omeka_mime_element_set_lookup',
           'omeka_options',
           'omeka_plugins',
           'omeka_processes',

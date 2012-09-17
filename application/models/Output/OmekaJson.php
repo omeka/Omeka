@@ -28,7 +28,7 @@ class Output_OmekaJson
      * @param Output_OmekaXmlAbstract $omekaXml
      * @return string
      */
-    public static function toJson(Output_OmekaXmlAbstract $omekaXml)
+    public static function toJson(Omeka_Output_OmekaXml_AbstractOmekaXml $omekaXml)
     {
         $xsltPath = dirname(__FILE__) . '/' . self::JSONML_XSLT_FILENAME;
 

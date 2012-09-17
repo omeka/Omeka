@@ -41,6 +41,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     public $added;
     public $modified;
     public $stored = '0';
+    public $metadata;
 
     static private $_pathsByType = array(
         'original' => 'original',
@@ -132,8 +133,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     protected function beforeSave($args)
     {
         if ($args['insert']) {
-            $fileInfo = new Omeka_File_Info($this);
-            $fileInfo->setMimeTypeIfAmbiguous();
+            $this->_setMimeTypeIfAmbiguous();
         }
         if ($args['post']) {
             $this->beforeSaveElements($args['post']);
@@ -153,13 +153,10 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     public function getPath($type = 'original')
     {
         $fn = $this->getDerivativeFilename();
-
         if ($this->stored) {
             throw new RuntimeException(__('Cannot get the local path for a stored file.'));
         }
-
         $dir = $this->getStorage()->getTempDir();
-        
         if ($type == 'original') {
             return $dir . '/' . $this->filename;
         } else {
@@ -217,22 +214,11 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     {
         $this->size = filesize($filepath);
         $this->authentication = md5_file($filepath);
-        
         $this->setMimeType(mime_content_type($filepath));
-        
-        $this->mime_os      = trim(exec('file -ib ' . trim(escapeshellarg($filepath))));
-        $this->type_os      = trim(exec('file -b ' . trim(escapeshellarg($filepath))));
-        
+        $this->mime_os = trim(exec('file -ib ' . trim(escapeshellarg($filepath))));
+        $this->type_os = trim(exec('file -b ' . trim(escapeshellarg($filepath))));
         $this->filename = basename($filepath);
-    }
-        
-    public function getMimeTypeElements($mimeType = null)
-    {
-        if (!$mimeType) {
-            $mimeType = $this->getMimeType();
-        }
-        
-        return $this->getTable('Element')->findForFilesByMimeType($mimeType);
+        $this->metadata = '';
     }
     
     /**
@@ -274,9 +260,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     public function unlinkFile() 
     {
         $storage = $this->getStorage();
-
         $files = array($this->getStoragePath('original'));
-
         if ($this->has_derivative_image) {
             $types = self::$_pathsByType;
             unset($types['original']);
@@ -285,7 +269,6 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
                 $files[] = $this->getStoragePath($type);
             }
         }
-        
         foreach($files as $file) {
             $storage->delete($file);
         }
@@ -303,11 +286,9 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             return;
         }
         $creator = new Omeka_File_Derivative_Image_Creator($convertDir);
-        
         $creator->addDerivative('fullsize', get_option('fullsize_constraint'));
         $creator->addDerivative('thumbnail', get_option('thumbnail_constraint'));
         $creator->addDerivative('square_thumbnail', get_option('square_thumbnail_constraint'), true);
-        
         if ($creator->create($this->getPath('original'), 
                              $this->getDerivativeFilename(),
                              $this->getMimeType())) {
@@ -317,28 +298,110 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     }
 
     /**
-     * Extract metadata associated with the file.
+     * Extract ID3 metadata associated with the file.
      * 
      * @return boolean
      */
     public function extractMetadata()
     {
-        $extractor = new Omeka_File_Info($this);
-        return $extractor->extract();
+        if (!is_readable($this->getPath('original'))) {
+            throw new Exception('Could not extract metadata: unable to read file at the following path: "' . $this->_filePath . '"');
+        }
+        // Skip if getid3 did not return a valid object.
+        if (!$id3 = $this->_getId3()) {
+            return false;
+        }
+        
+        getid3_lib::CopyTagsToComments($id3->info);
+        $metadata = array();
+        $keys = array(
+            'mime_type',
+            'audio',
+            'video',
+            'comments', 
+            'comments_html',
+        );
+        foreach($keys as $key) {
+            if (array_key_exists($key, $id3->info)) {
+                $metadata[$key] = $id3->info[$key];
+            }
+        }
+        $this->metadata = json_encode($metadata);      
+        return true;
     }
+
+    /**
+     * Sets the MIME type for the file to the one detected by getID3, but only
+     * if the existing MIME type is 'ambiguous' and getID3 can detect a better
+     * one.
+     *
+     * @uses Omeka_File_Info::isAmbiguousMimeType() 
+     */
+    private function _setMimeTypeIfAmbiguous()
+    {
+        $ambiguousMimeTypes = array(
+            'text/plain', 
+            'application/octet-stream', 
+            'regular file',
+        );
+        $mimeType = $this->getMimeType();    
+        if ((empty($mimeType) || in_array($mimeType, $ambiguousMimeTypes))) {
+            $mimeType = null;
+            if ($this->metadata) {
+                if ($metadata = json_decode($this->metadata,true)) {
+                    $mimeType = $metadata['mime_type'];
+                }
+            }
+            if ($mimeType === null) {
+                if ($id3 = $this->_getId3() && isset($id3->info['mime_type'])) {
+                    $mimeType = $id3->info['mime_type'];
+                }
+            }
+            if ($mimeType) {
+                $this->setMimeType($mimeType);
+            }
+        }
+    }
+
+
+    /**
+     * Pull down the file's extra metadata via getID3 library.
+     *
+     * @param string $path Path to file.
+     * @return getID3
+     */
+    private function _getId3()
+    {
+        // Do not extract metadata if the exif module is not loaded. This 
+        // applies to all files, not just files with Exif data -- i.e. images.
+        if (!extension_loaded('exif')) {
+            return false;
+        }
+        if (!$this->_id3) {
+            require_once 'getid3/getid3.php';
+            $id3 = new getID3;
+            $id3->encoding = 'UTF-8';
+            try {
+                $id3->Analyze($this->getPath('original'));
+                $this->_id3 = $id3;
+            } catch (getid3_exception $e) {
+                $message = $e->getMessage();
+                _log("getID3: $message");
+                return false;
+            }        
+        }
+        return $this->_id3;
+    }
+
 
     public function storeFiles()
     {
         $storage = $this->getStorage();
-
         $filename = $this->filename;
         $derivativeFilename = $this->getDerivativeFilename();
-        
         $storage->store($this->getPath('original'), $this->getStoragePath('original'));
-                
         if ($this->has_derivative_image) {
             $types = array_keys(self::$_pathsByType);
-
             foreach ($types as $type) {
                 if ($type != 'original') {
                     $storage->store($this->getPath($type), $this->getStoragePath($type));
@@ -352,13 +415,11 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     public function getStoragePath($type = 'fullsize')
     {
         $storage = $this->getStorage();
-        
         if ($type == 'original') {
             $fn = $this->filename;
         } else {
             $fn = $this->getDerivativeFilename();
         }
-
         if (!isset(self::$_pathsByType[$type])) {
             throw new RuntimeException(__('"%s" is not a valid file derivative.', $type));
         }
@@ -375,7 +436,6 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         if (!$this->_storage) {
             $this->_storage = Zend_Registry::get('storage');
         }
-
         return $this->_storage;
     }
 
