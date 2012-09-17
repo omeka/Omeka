@@ -89,10 +89,14 @@ class PluginsController extends Omeka_Controller_AbstractActionController
             if ($this->_pluginBroker->getHook($plugin, 'config')) {
                 return $this->_helper->redirector('config', 'plugins', 'default', array('name'=>$plugin->getDirectoryName()));
             }
-        } catch (Exception $e) {
+        } catch (Omeka_Plugin_Installer_Exception $e) {
             // Taken from Plugin_Installer::install().  
             // "The '$pluginDirName' plugin cannot be installed because it requires other plugins to be installed, activated, and loaded. See below for details."
-            
+            $this->_helper->flashMessenger(
+                __("The following error occurred while installing the %s plugin: ", $plugin->getDirectoryName()) . $e->getMessage(),
+                'error'
+            );
+        } catch (Omeka_Plugin_Loader_Exception $e) {
             $this->_helper->flashMessenger(
                 __("The following error occurred while installing the %s plugin: ", $plugin->getDirectoryName()) . $e->getMessage(),
                 'error'
@@ -120,7 +124,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
         // Activate the plugin
         try {
            $this->_pluginInstaller->activate($plugin);
-        } catch (Exception $e) {
+        } catch (Omeka_Plugin_Installer_Exception $e) {
             $this->_helper->flashMessenger(
                 __("The following error occurred while activating the %s plugin: ", $name) . $e->getMessage(),
                 'error'
@@ -135,7 +139,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
                 __("The %s plugin was successfully activated!", $name),
                 'success'
             );
-        } catch (Exception $e) {
+        } catch (Omeka_Plugin_Loader_Exception $e) {
             $this->_helper->flashMessenger(
                 __("The %s plugin was activated, but could not be loaded: ", $name) . $e->getMessage(),
                 'error'
@@ -164,7 +168,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
                 __("The %s plugin was successfully deactivated!", $name),
                 'success'
             );
-        } catch (Exception $e) {
+        } catch (Omeka_Plugin_Installer_Exception $e) {
             $this->_helper->flashMessenger(
                 __("The following error occurred while deactivating the %s plugin: ", $name) . $e->getMessage(),
                 'error'
@@ -194,7 +198,12 @@ class PluginsController extends Omeka_Controller_AbstractActionController
             if ($this->_pluginBroker->getHook($plugin, 'config')) {
                 $this->_helper->redirector('config', 'plugins', 'default', array('name' => $name));
             }
-        } catch (Exception $e) {
+        } catch (Omeka_Plugin_Installer_Exception $e) {
+            $this->_helper->flashMessenger(
+                __("The following error occurred while upgrading the %s plugin: ", $name) . $e->getMessage(),
+                'error'
+            );
+        } catch (Omeka_Plugin_Loader_Exception $e) {
             $this->_helper->flashMessenger(
                 __("The following error occurred while upgrading the %s plugin: ", $name) . $e->getMessage(),
                 'error'
@@ -327,7 +336,12 @@ class PluginsController extends Omeka_Controller_AbstractActionController
                     __("The %s plugin was successfully uninstalled!", $plugin->getDirectoryName()),
                     'success'
                 );
-            } catch (Exception $e) {
+            } catch (Omeka_Plugin_Installer_Exception $e) {
+                $this->_helper->flashMessenger(
+                    __("The following error occurred while uninstalling the %s plugin: ", $plugin->getDirectoryName()) . $e->getMessage(),
+                    'error'
+                );
+            } catch (Omeka_Plugin_Loader_Exception $e) {
                 $this->_helper->flashMessenger(
                     __("The following error occurred while uninstalling the %s plugin: ", $plugin->getDirectoryName()) . $e->getMessage(),
                     'error'
