@@ -1455,11 +1455,11 @@ ul#section-nav, #section-nav ul {
     z-index: 10;    
 }
 
-.hTagcloud li .close { display: inline-block; }
+.hTagcloud li .delete-tag { display: inline-block; }
     
-.hTagcloud li .close a {
+.hTagcloud li .delete-tag a {
     display: inline-block;
-    text-indent: -999px;
+    text-indent: -9999px;
     width: 17px;
     background-color: rgba(0, 0, 0, .3);
     height: 17px;
@@ -1470,7 +1470,7 @@ ul#section-nav, #section-nav ul {
     padding: 0;
 }
 
-.hTagcloud li .close a:after {
+.hTagcloud li .delete-tag a:after {
     content: "x";
     height: 100%;
     width: 100%;

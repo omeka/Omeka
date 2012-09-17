@@ -26,8 +26,9 @@ head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodyclass'=
     <?php foreach ($tags as $tag): ?>
         <li>
             <a href="<?php echo url('items/?tag=' . $tag->name); ?>" class="count"><?php echo $tag['tagCount']; ?></a> 
-            <span class="edit-tag"><?php echo $tag->name; ?></span> 
-            <span class="close"><?php echo link_to($tag, 'delete-confirm', 'delete', array()); ?></span> 
+            <span class="edit-tag" id="<?php echo $tag->id; ?>"><?php echo $tag->name; ?></span> 
+            <span class="delete-tag"><?php echo link_to($tag, 'delete-confirm', 'delete', array('class' => 'delete-confirm')); ?></span>
+            
         </li>
     <?php endforeach; ?>
     </ul>
@@ -37,4 +38,13 @@ head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodyclass'=
 <?php endif; ?>
 
 </div>
+
+<script>
+
+ jQuery(document).ready(function() {
+     jQuery('.edit-tag').editable(<?php echo js_escape(url('tags/rename-ajax')); ?>); 
+ });
+ 
+</script>
+
 <?php foot(); ?>

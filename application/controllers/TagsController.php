@@ -135,4 +135,20 @@ class TagsController extends Omeka_Controller_AbstractActionController
         $tagNames = $this->getTable()->findTagNamesLike($tagText);
         $this->_helper->json($tagNames);
     }
+    
+    public function renameAjaxAction()
+    {
+        $oldTagId = $_POST['id'];
+        $oldTag = $this->_helper->db->findById($oldTagId);
+        $oldName = $oldTag->name;
+        $newName = trim($_POST['value']);
+
+        $oldTag->name = $newName;
+        $this->_helper->viewRenderer->setNoRender();
+        if ($oldTag->save(false)) {
+            $this->getResponse()->setBody($newName);
+        } else {
+            $this->getResponse()->setBody($oldName);
+        }
+    }
 }
