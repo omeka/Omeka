@@ -55,6 +55,11 @@
         <dd><?php echo metadata('file', 'File Type OS'); ?></dd>
     </div>
 
+    <div id="id3-metadata" class="panel">
+        <h4><?php echo __('ID3 Metadata'); ?></h4>
+        <?php echo show_file_id3_metadata(); ?>
+    </div>
+
     <div class="panel">
         <h4><?php echo __('Output Formats'); ?></h4>
         <?php echo output_format_list(); ?>
@@ -69,11 +74,10 @@
     <div id="fullsize-file">
         <?php echo display_file($file, array('imageSize' => 'fullsize'), array('class' => 'panel')); ?>
     </div>
-    <h3>ID3 Metadata</h3>
+        
     <?php echo show_file_metadata(); ?>
     <?php fire_plugin_hook('admin_append_to_files_show_primary', array('file' => $file, 'view' => $this)); ?>
     
 </div>
-    
     <?php fire_plugin_hook('admin_append_to_files_show_secondary', array('file' => $file, 'view' => $this)); ?>
 <?php foot();?>

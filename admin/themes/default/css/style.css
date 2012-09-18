@@ -1367,6 +1367,10 @@ ul#section-nav, #section-nav ul {
     margin-bottom: 1em;
 }
 
+.id3-property-name {
+  font-weight: bold;
+}
+
 
 /* Tags
 ================================================== */

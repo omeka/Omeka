@@ -349,6 +349,8 @@ Omeka.Items.makeElementControls = function (element, elementFormPartialUrl, item
         var removeButtons = jQuery(this).find(removeSelector);
         if (removeButtons.length > 1) {
             removeButtons.show();
+        } else {
+            removeButtons.hide();
         }
     });
 

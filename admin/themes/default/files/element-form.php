@@ -1,0 +1,1 @@
+<?php echo display_form_input_for_element($element, $file, array('divWrap'=>false, 'extraFieldCount'=>1)); ?>

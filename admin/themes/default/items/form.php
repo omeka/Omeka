@@ -52,4 +52,3 @@ jQuery(document).bind('omeka:elementformload', function (event) {
     </div>
 
 </div>
-
