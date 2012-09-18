@@ -181,7 +181,15 @@ p, li {
         
     .inactive { opacity: .65; }
 
-    .mobile { display: none; }
+    .mobile { 
+        max-width: 100%;
+        clear: both;
+        display: none; 
+        overflow-x: hidden;
+        word-break: break-word;
+    }
+    
+        .mobile th { width: 20%; }
     
     
     /* Form elements 
@@ -312,6 +320,7 @@ p, li {
     }
         
     textarea {
+        width: 100%;
         border: 1px solid #d8d8d8;
         border-radius: 0;
         box-shadow: 0 0 .375em #d6d6d6 inset;
@@ -1616,7 +1625,7 @@ ul#section-nav, #section-nav ul {
 }
 
 .navigation_main_link_label {
-    width: 420px;
+    width: 100%;
 }
 
 .navigation_main_link_uri_label {
@@ -1626,7 +1635,7 @@ ul#section-nav, #section-nav ul {
 }
 
 .navigation_main_link_uri {
-    width: 420px;
+    width: 100%;
 }
 
 #navigation_form input[type=checkbox] { margin: 10px; }

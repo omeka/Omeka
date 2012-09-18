@@ -76,3 +76,61 @@ jQuery(document).ready(function () {
     saveScroll();
     
 });
+
+
+// Generates mobile-friendly tables
+jQuery('table').each(function() {
+    var table = jQuery(this); // cache table object
+    var form_wrapper = table.closest("form");
+    var head = table.find('thead th');
+    var rows = table.find('tbody tr').clone(); // appending afterwards does not break original table
+    
+    jQuery(table).addClass("full");
+
+    // create new table
+    var newtable = jQuery(
+      '<table class="mobile">' +
+      '  <tbody>' +
+      '  </tbody>' +
+      '</table>'
+    );
+    
+
+    
+    if (form_wrapper.length) {
+        var form_attributes = jQuery(form_wrapper).prop("attributes");
+        var new_form = jQuery('<form></form>');
+        var new_submits_before = table.prevAll().clone();
+        var new_submits_after = table.nextAll().clone();
+        form_wrapper.addClass("full");
+        if (form_attributes.length) {
+            jQuery.each(form_attributes, function() {
+                jQuery(new_form).attr(this.name, this.value);
+            });
+        }
+        new_form.attr("class","mobile");
+    }
+
+    // cache tbody where we'll be adding data
+    var newtable_tbody = newtable.find('tbody');
+
+    rows.each(function(i) {
+      var cols = jQuery(this).find('td');
+      var classname = i % 2 ? 'even' : 'odd';
+      cols.each(function(k) {
+        var new_tr = jQuery('<tr class="' + classname + '"></tr>').appendTo(newtable_tbody);
+        new_tr.append(head.clone().get(k));
+        new_tr.append(jQuery(this));
+      });
+    });
+
+    if (form_wrapper.length) {
+        form_wrapper.after(new_form);
+        new_form.prepend(newtable);
+        new_form.prepend(new_submits_before);
+        new_form.append(new_submits_after);
+    } else {
+        jQuery(this).after(newtable);
+    }
+    
+});

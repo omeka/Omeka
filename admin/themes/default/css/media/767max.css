@@ -27,10 +27,6 @@ header nav { float: left; }
 .full { display: none; }
 
 .mobile { display: inherit; }
-
-    .mobile th {
-        width: 1%;
-    }
     
 .even th { background-color: #B1A584; border: 0; }
                 
