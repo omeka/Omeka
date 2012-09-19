@@ -4,7 +4,7 @@
 
     <h1><?php echo metadata('item', array('Dublin Core', 'Title')); ?></h1>
 
-    <?php echo show_item_metadata(); ?>
+    <?php echo all_element_texts('item'); ?>
 
     <!-- The following returns all of the files associated with an item. -->
     <div id="itemfiles" class="element">

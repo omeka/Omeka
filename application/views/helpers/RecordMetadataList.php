@@ -55,7 +55,8 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
     /**
      * Get the record metadata list.
      *
-     * @param Omeka_Record_AbstractRecord $record Record to retrieve metadata from.
+     * @param Omeka_Record_AbstractRecord|string $record Record to retrieve
+     *  metadata from.
      * @param array $options
      *  Available options:
      *  - show_empty_elements' => bool|string Whether to show elements that
@@ -66,8 +67,16 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
      * @since 1.0 Added 'show_element_sets' and 'return_type' options.
      * @return string|array
      */
-    public function recordMetadataList(Omeka_Record_AbstractRecord $record, array $options = array())
+    public function recordMetadataList($record, array $options = array())
     {
+        if (is_string($record)) {
+            $record = $this->view->{$this->view->singularize($record)};
+        }
+
+        if (!($record instanceof Omeka_Record_AbstractRecord)) {
+            throw new InvalidArgumentException('Invalid record passed to recordMetadata.');
+        }
+        
         $this->_record = $record;
         $this->_setOptions($options);
         return $this->_getOutput();
@@ -124,7 +133,49 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
             $elementsBySet = array_intersect_key($elementsBySet, array_flip($this->_elementSetsToShow));
         }
 
+        $elementsBySet = $this->_filterItemTypeElements($elementsBySet);
+
         return apply_filters('record_metadata_elements', $elementsBySet);
+    }
+
+    /**
+     * Filter the display of the Item Type element set, if present.
+     *
+     * @param array $elementsBySet
+     * @return array
+     */
+    protected function _filterItemTypeElements($elementsBySet)
+    {
+        if ($this->_record instanceof Item) {
+            if ($this->_record->item_type_id) {
+                // Overwrite elements assigned to the item type element set with only
+                // those that belong to this item's particular item type. This is
+                // necessary because, otherwise, all item type elements will be shown.
+                $itemTypeElementSetName = $this->_record->getProperty('item type name') . ' ' . ELEMENT_SET_ITEM_TYPE;
+                
+                // Check to see if either the generic or specific Item Type element
+                // set has been chosen, i.e. 'Item Type Metadata' or 'Document
+                // Item Type Metadata', etc.
+
+                $itemTypeElements = $this->_record->getItemTypeElements();
+                
+                if (!empty($this->_elementSetsToShow)) {
+                    if (in_array($itemTypeElementSetName, $this->_elementSetsToShow) or
+                    in_array(ELEMENT_SET_ITEM_TYPE, $this->_elementSetsToShow)) {
+                        $elementsBySet[$itemTypeElementSetName] = $itemTypeElements;
+                    }
+                }
+                else {
+                    $elementsBySet[$itemTypeElementSetName] = $itemTypeElements;
+                }
+            }
+
+            // Unset the existing 'Item Type' element set b/c it shows elements
+            // for all item types.
+            unset($elementsBySet[ELEMENT_SET_ITEM_TYPE]);
+        }
+
+        return $elementsBySet;
     }
 
     /**

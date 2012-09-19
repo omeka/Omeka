@@ -97,7 +97,7 @@
         <?php echo display_files_for_item(array('imageSize' => 'square_thumbnail'), array('class' => 'admin-thumb panel')); ?> 
         </div>
         <?php endif; ?>
-    <?php echo show_item_metadata(); ?>
+    <?php echo all_element_texts('item'); ?>
 </div>
 
 <?php fire_plugin_hook('admin_append_to_items_show_secondary', array('item' => $item, 'view' => $this)); ?>

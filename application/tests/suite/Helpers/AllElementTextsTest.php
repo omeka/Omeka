@@ -6,15 +6,15 @@
  */
 
 /**
- * Test class for show_item_metadata
+ * Test class for all_element_texts
  *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
  */
-class Omeka_Helper_ShowItemMetadataTest extends Omeka_Test_AppTestCase
+class Omeka_Helpers_AllElementTextsTest extends Omeka_Test_AppTestCase
 {
     /**
-     * Tests that show_item_metadata can correctly produce an array as output.
+     * Tests that all_element_texts can correctly produce an array as output.
      */
     public function testArrayOutput()
     {
@@ -32,7 +32,7 @@ class Omeka_Helper_ShowItemMetadataTest extends Omeka_Test_AppTestCase
         $item->addElementTextsByArray($elementTexts);
         $item->save();
 
-        $metadataOutput = show_item_metadata(array('return_type' => 'array'), $item);
+        $metadataOutput = all_element_texts($item, array('return_type' => 'array'));
 
         $this->assertInternalType('array', $metadataOutput);
         $this->assertArrayHasKey('Dublin Core', $metadataOutput);
@@ -43,7 +43,7 @@ class Omeka_Helper_ShowItemMetadataTest extends Omeka_Test_AppTestCase
     }
 
     /**
-     * Tests that show_item_metadata behaves the same when an item is
+     * Tests that all_element_texts behaves the same when an item is
      * set on the view and when it is directly passed.
      */
     public function testWithNoItemOnView()
@@ -51,12 +51,12 @@ class Omeka_Helper_ShowItemMetadataTest extends Omeka_Test_AppTestCase
         $item = new Item;
         $item->item_type_id = 1;
 
-        $metadataOutput = show_item_metadata(array('return_type' => 'array'), $item);
+        $metadataOutput = all_element_texts($item, array('return_type' => 'array'));
 
         set_current_record('item', $item, true);
 
         // Compare runs with and without item set on view, they should be
         // the same.
-        $this->assertEquals($metadataOutput, show_item_metadata(array('return_type' => 'array')));
+        $this->assertEquals($metadataOutput, all_element_texts('item', array('return_type' => 'array')));
     }
 }

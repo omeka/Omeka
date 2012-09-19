@@ -277,23 +277,6 @@ function item_thumbnail($props = array(), $index = 0, $item = null)
 }
 
 /**
- * Retrieve the set of all metadata for the current item.
- *
- * @since 0.10
- * @uses Omeka_View_Helper_ItemMetadata
- * @param array $options Optional
- * @param Item|null Check for this specific item record (current item if null).
- * @return string|array
- */
-function show_item_metadata(array $options = array(), $item=null)
-{
-    if (!$item) {
-        $item = get_current_record('item');
-    }
-    return __v()->itemMetadataList($item, $options);
-}
-
-/**
  * Returns the most recent items
  *
  * @param integer $num The maximum number of recent items to return

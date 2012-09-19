@@ -347,3 +347,19 @@ function metadata($record, $metadata, $options = array())
 {
     return __v()->recordMetadata($record, $metadata, $options);
 }
+
+/**
+ * Retrieve the set of all element text metadata for a record.
+ *
+ * @since 2.0
+ * @uses Omeka_View_Helper_RecordMetadataList
+ * 
+ * @param Omeka_Record_AbstractRecord|string $record The record to get the
+ *  element text metadata for.
+ * @param array $options Options for getting the metadata.
+ * @return string|array
+ */
+function all_element_texts($record, $options = array())
+{
+    return __v()->recordMetadataList($record, $options);
+}
