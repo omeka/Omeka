@@ -15,7 +15,7 @@
 
     <?php if (has_permission('Files', 'edit') or $file->getItem()->wasAddedBy(current_user())): ?>    
     <div class="panel">
-        <?php echo link_to($file, 'edit', __('Edit this File'), array('class'=>'big green button')); ?>
+        <?php echo link_to($file, 'edit', __('Edit'), array('class'=>'big green button')); ?>
         <?php if (has_permission('Files', 'delete')): ?>
             <?php echo link_to($file, 'delete-confirm', __('Delete this File'), array('class' => 'big red button delete-confirm')); ?>
         <?php endif; ?>
