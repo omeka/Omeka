@@ -1,7 +1,7 @@
 <?php echo js('tiny_mce/tiny_mce'); 
 // echo js('tiny_mce/tiny_mce_src'); // Use the 'tiny_mce_src' file for debugging.
 ?>
-<?php echo js('items'); ?>
+<?php echo js('elements'); ?>
 <script type="text/javascript" charset="utf-8">
 //<![CDATA[
 // TinyMCE hates document.ready.
@@ -17,8 +17,8 @@ jQuery(window).load(function () {
 });
 
 jQuery(document).bind('omeka:elementformload', function (event) {
-    Omeka.Files.makeElementControls(event.target, <?php echo js_escape(url('files/element-form')); ?><?php if ($id = metadata('file', 'id')) echo ', '.$id; ?>);
-    Omeka.Files.enableWysiwyg(event.target);
+    Omeka.Elements.makeElementControls(event.target, <?php echo js_escape(url('elements/element-form')); ?>,'File'<?php if ($id = metadata('file', 'id')) echo ', '.$id; ?>);
+    Omeka.Elements.enableWysiwyg(event.target);
 });
 //]]>   
 </script>

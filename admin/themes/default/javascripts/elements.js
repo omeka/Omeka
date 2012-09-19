@@ -2,7 +2,7 @@ if (typeof Omeka === 'undefined') {
     Omeka = {};
 }
 
-Omeka.Files = {};
+Omeka.Elements = {};
 
 /**
  * Send an AJAX request to update a <div class="field"> that contains all
@@ -11,9 +11,10 @@ Omeka.Files = {};
  * @param {jQuery} fieldDiv
  * @param {Object} params Parameters to pass to AJAX URL.
  * @param {string} elementFormPartialUri AJAX URL.
- * @param {string} fileId Current File ID.
+ * @param {string} recordType Current record type.
+ * @param {string} recordId Current record ID.
  */
-Omeka.Files.elementFormRequest = function (fieldDiv, params, elementFormPartialUri, fileId) {
+Omeka.Elements.elementFormRequest = function (fieldDiv, params, elementFormPartialUri, recordType, recordId) {
     var elementId = fieldDiv.attr('id').replace(/element-/, '');
     
     fieldDiv.find('input, textarea, select').each(function () {
@@ -26,8 +27,11 @@ Omeka.Files.elementFormRequest = function (fieldDiv, params, elementFormPartialU
         }
     });
     
+    recordId = typeof recordId !== 'undefined' ? recordId : 0;
+    
     params.element_id = elementId;
-    params.file_id = fileId;
+    params.record_id = recordId;
+    params.record_type = recordType;
 
     jQuery.ajax({
         url: elementFormPartialUri,
@@ -49,9 +53,10 @@ Omeka.Files.elementFormRequest = function (fieldDiv, params, elementFormPartialU
  *
  * @param {Element} element The element to search at and below.
  * @param {string} elementFormPartialUrl AJAX URL for form inputs.
- * @param {string} fileId Current File ID.
+ * @param {string} recordType Current record type.
+ * @param {string} recordId Current record ID.
  */
-Omeka.Files.makeElementControls = function (element, elementFormPartialUrl, fileId) {
+Omeka.Elements.makeElementControls = function (element, elementFormPartialUrl, recordType, recordId) {
     var addSelector = '.add-element';
     var removeSelector = '.remove-element';
     var fieldSelector = 'div.field';
@@ -80,7 +85,7 @@ Omeka.Files.makeElementControls = function (element, elementFormPartialUrl, file
         event.preventDefault();
         var fieldDiv = jQuery(this).parents(fieldSelector);
 
-        Omeka.Files.elementFormRequest(fieldDiv, {add: '1'}, elementFormPartialUrl, fileId);
+        Omeka.Elements.elementFormRequest(fieldDiv, {add: '1'}, elementFormPartialUrl, recordType, recordId);
     });
 
     // When a remove button is clicked, remove that input from the form.
@@ -118,7 +123,7 @@ Omeka.Files.makeElementControls = function (element, elementFormPartialUrl, file
  *
  * @param {Element} checkbox
  */
-Omeka.Files.enableWysiwygCheckbox = function (checkbox) {
+Omeka.Elements.enableWysiwygCheckbox = function (checkbox) {
     var textarea = jQuery(checkbox).parents('.input-block').find('textarea');
     if (textarea.length) {
         var textareaId = textarea.attr('id');
@@ -143,14 +148,8 @@ Omeka.Files.enableWysiwygCheckbox = function (checkbox) {
  *
  * @param {Element} element The element to search at and below.
  */
-Omeka.Files.enableWysiwyg = function (element) {
+Omeka.Elements.enableWysiwyg = function (element) {
     jQuery(element).find('div.inputs input[type="checkbox"]').each(function () {
-        Omeka.Files.enableWysiwygCheckbox(this);
+        Omeka.Elements.enableWysiwygCheckbox(this);
     });
 };
-
-jQuery(document).ready(function () {
-    // Get rid of the add/remove buttons and 'Use HTML' checkbox.
-    // This may be added back in future releases.
-    //jQuery('input.add-element, input.remove-element, label.use-html').remove();
-});

@@ -1,6 +1,7 @@
 <?php echo js('tiny_mce/tiny_mce'); 
 // echo js('tiny_mce/tiny_mce_src'); // Use the 'tiny_mce_src' file for debugging.
 ?>
+<?php echo js('elements'); ?>
 <?php echo js('items'); ?>
 <script type="text/javascript" charset="utf-8">
 //<![CDATA[
@@ -28,8 +29,8 @@ jQuery(window).load(function () {
 });
 
 jQuery(document).bind('omeka:elementformload', function (event) {
-    Omeka.Items.makeElementControls(event.target, <?php echo js_escape(url('items/element-form')); ?><?php if ($id = metadata('item', 'id')) echo ', '.$id; ?>);
-    Omeka.Items.enableWysiwyg(event.target);
+    Omeka.Elements.makeElementControls(event.target, <?php echo js_escape(url('elements/element-form')); ?>,'Item'<?php if ($id = metadata('item', 'id')) echo ', '.$id; ?>);
+    Omeka.Elements.enableWysiwyg(event.target);
 });
 //]]>   
 </script>

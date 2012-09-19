@@ -49,26 +49,6 @@ class FilesController extends Omeka_Controller_AbstractActionController
         parent::editAction();
     }
     
-    public function elementFormAction()
-    {        
-        $elementId = (int)$_POST['element_id'];
-        $fileId  = (int)$_POST['file_id'];
-                         
-        // Re-index the element form posts so that they are displayed in the correct order
-        // when one is removed.
-        $_POST['Elements'][$elementId] = array_merge($_POST['Elements'][$elementId]);
-
-        $element = $this->_helper->db->getTable('Element')->find($elementId);
-                      
-        try {
-            $file = $this->_helper->db->findById($fileId);
-        } catch (Omeka_Controller_Exception_404 $e) {
-            $file = new File;
-        }
-        
-        $this->view->assign(compact('element', 'file'));
-    }
-    
     protected function _getFileElementSets()
     {
         // Get element sets assigned to "All" and "File" record types.
