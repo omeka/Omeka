@@ -15,12 +15,12 @@
 
     <!-- Stylesheets -->
     <?php
-    queue_css('style');
-    display_css();
+    queue_css_file('style');
+    echo head_css();
     ?>
 
     <!-- JavaScripts -->
-    <?php display_js(); ?>
+    <?php echo head_js(); ?>
 </head>
 
 <?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass)); ?>

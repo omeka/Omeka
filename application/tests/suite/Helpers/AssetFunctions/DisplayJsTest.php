@@ -8,7 +8,7 @@
 require_once HELPERS;
 
 /**
- * Tests for the queue_js/display_js pair of helpers.
+ * Tests for the queue_js_file/head_js pair of helpers.
  *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
@@ -49,7 +49,7 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
     
     private function _getJsOutput($includeDefaults = true) {
         ob_start();
-        display_js($includeDefaults);
+        echo head_js($includeDefaults);
         return ob_get_clean();
     }
 
@@ -87,7 +87,7 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
 
     public function testQueueJs()
     {
-        queue_js(array('search', 'tiny_mce/tiny_mce'));
+        queue_js_file(array('search', 'tiny_mce/tiny_mce'));
 
         $scripts = array(
             self::ASSET_PATH_ROOT . '/javascripts/search.js',

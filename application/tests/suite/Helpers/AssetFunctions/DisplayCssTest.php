@@ -8,7 +8,7 @@
 require_once HELPERS;
 
 /**
- * Tests for the queue_css, queue_css_string and display_css helpers.
+ * Tests for the queue_css, queue_css_string and head_css helpers.
  *
  * @package Omeka
  */
@@ -33,7 +33,7 @@ class Omeka_Helper_DisplayCssTest extends PHPUnit_Framework_TestCase
 
     private function _getCssOutput() {
         ob_start();
-        display_css();
+        echo head_css();
         return ob_get_clean();
     }
 
@@ -68,7 +68,7 @@ class Omeka_Helper_DisplayCssTest extends PHPUnit_Framework_TestCase
 
     public function testQueueCssSingle()
     {
-        queue_css('style');
+        queue_css_file('style');
 
         $styles = array(
             self::ASSET_PATH_ROOT . '/css/style.css'
@@ -79,7 +79,7 @@ class Omeka_Helper_DisplayCssTest extends PHPUnit_Framework_TestCase
 
     public function testQueueCssArray()
     {
-        queue_css(array('style', 'jquery-ui'));
+        queue_css_file(array('style', 'jquery-ui'));
 
         $styles = array(
             self::ASSET_PATH_ROOT . '/css/style.css',
@@ -91,7 +91,7 @@ class Omeka_Helper_DisplayCssTest extends PHPUnit_Framework_TestCase
 
     public function testQueueCssWithMedia()
     {
-        queue_css('style', 'screen');
+        queue_css_file('style', 'screen');
 
         $path = self::ASSET_PATH_ROOT . '/css/style.css';
 
