@@ -18,8 +18,6 @@
 
     <?php echo all_element_texts('file'); ?>
 
-    <?php echo show_file_metadata(); ?>
-
     <div id="format-metadata">
         <div id="filename" class="element">
             <h3><?php echo __('Filename'); ?></h3>

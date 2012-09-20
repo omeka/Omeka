@@ -15,12 +15,12 @@
 <div id="edit" class="three columns omega">
     
     <ul class="pagination">
-        <?php if(link_to_previous_item()): ?>
+        <?php if (link_to_previous_item()): ?>
         <li id="previous-item" class="previous">
             <?php echo link_to_previous_item('Prev Item'); ?>
         </li>
         <?php endif; ?>
-        <?php if(link_to_next_item()): ?>
+        <?php if (link_to_next_item()): ?>
         <li id="next-item" class="next">
             <?php echo link_to_next_item('Next Item'); ?>
         </li>
@@ -55,28 +55,28 @@
         </div>
     </div>
 
-    <?php if(item_has_tags()): ?>
+    <?php if (item_has_tags()): ?>
     <div class="tags panel">
-            <h4><?php echo __('Tags'); ?></h4>
-            <div id="tag-cloud">
-                <?php common('tag-list', compact('item'), 'items'); ?>
-            </div>
-      </div>
+        <h4><?php echo __('Tags'); ?></h4>
+        <div id="tag-cloud">
+            <?php common('tag-list', compact('item'), 'items'); ?>
+        </div>
+     </div>
     <?php endif; ?>
     
     <div class="file-metadata panel">
         <h4><?php echo __('View File Metadata'); ?></h4>
-            <div id="file-list">
-                <?php if(!item_has_files()):?>
-                    <p><?php echo __('There are no files for this item yet.');?> <?php echo link_to_item(__('Add a File'), array(), 'edit'); ?>.</p>
-                <?php else: ?>
-                    <ul>
-                        <?php foreach (loop('files', $this->item->Files) as $file): ?>
-                            <li><?php echo link_to_file_metadata(array('class'=>'show', 'title'=>__('View File Metadata'))); ?></li>
-                        <?php endforeach; ?>
-                    </ul>
-                <?php endif;?>
-            </div>
+        <div id="file-list">
+            <?php if (!item_has_files()):?>
+                <p><?php echo __('There are no files for this item yet.');?> <?php echo link_to_item(__('Add a File'), array(), 'edit'); ?>.</p>
+            <?php else: ?>
+                <ul>
+                    <?php foreach (loop('files', $this->item->Files) as $file): ?>
+                        <li><?php echo link_to_file_metadata(array('class'=>'show', 'title'=>__('View File Metadata'))); ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif;?>
+        </div>
     </div>
 
     <div class="panel">
@@ -85,14 +85,11 @@
     </div>
 
 <?php fire_plugin_hook('admin_append_to_items_show_secondary', array('item' => $item, 'view' => $this)); ?>
-
-
-
 </div>
 
 <div class="seven columns alpha">
     <?php echo flash(); ?>            
-        <?php if(item_has_files()): ?>
+        <?php if (item_has_files()): ?>
         <div id="item-images">
         <?php echo display_files_for_item(array('imageSize' => 'square_thumbnail'), array('class' => 'admin-thumb panel')); ?> 
         </div>
@@ -101,6 +98,5 @@
 </div>
 
 <?php fire_plugin_hook('admin_append_to_items_show_secondary', array('item' => $item, 'view' => $this)); ?>
-</div>
-        
-    <?php foot();?>
+</div>        
+<?php foot();?>
