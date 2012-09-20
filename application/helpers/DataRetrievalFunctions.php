@@ -24,7 +24,7 @@ function total_results()
  * @return string|false The latest available version of Omeka, or false if the
  * request failed for some reason.
  */
-function get_latest_omeka_version()
+function latest_omeka_version()
 {
     $omekaApiUri = 'http://api.omeka.org/latest-version';
     $omekaApiVersion = '0.1';
