@@ -57,7 +57,7 @@
 
     <div id="id3-metadata" class="panel">
         <h4><?php echo __('ID3 Metadata'); ?></h4>
-        <?php echo show_file_id3_metadata(); ?>
+        <?php echo file_id3_metadata(); ?>
     </div>
 
     <div class="panel">

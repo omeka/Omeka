@@ -49,20 +49,18 @@ function display_files($files, array $props = array(), $wrapperAttributes = arra
 /**
  * Retrieve display for ID3 metadata for the current file.
  *
- * @since 1.0
+ * @since 2.0
  * @param array $options Optional
  * @param File|null $file Optional
  * @return string|array
  */
-function show_file_id3_metadata(array $options = array(), $file = null)
+function file_id3_metadata(array $options = array(), $file = null)
 {
     if (!$file) {
         $file = get_current_record('file');
     }
     return __v()->fileID3Metadata($file, $options);
 }
-
-
 
 /**
  * Returns the most recent files
