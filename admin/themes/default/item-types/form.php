@@ -1,4 +1,4 @@
-<?php echo js('item-types'); ?>
+<?php echo js_src('item-types'); ?>
 <script type="text/javascript" charset="utf-8">
 //<![CDATA[
 jQuery(document).ready(function () {

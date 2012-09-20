@@ -1,7 +1,7 @@
 <?php
 $pageTitle = __('Edit Navigation');
 head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
-<?php echo js('settings'); ?>
+<?php echo js_src('settings'); ?>
 
 <script type="text/javascript">
 //<![CDATA[

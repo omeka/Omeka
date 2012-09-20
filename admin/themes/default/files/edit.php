@@ -8,7 +8,7 @@
     $fileTitle = __('Edit File #%s', metadata('file', 'id')) . $fileTitle;
 ?>
 <?php head(array('title' => $fileTitle, 'bodyclass'=>'files edit-file primary')); ?>
-<?php echo js('files'); ?>
+<?php echo js_src('files'); ?>
 
 <form method="post" id="editfile" action="<?php echo html_escape(url('files/edit/' . $file->id)); ?>" name="editFile">
 
