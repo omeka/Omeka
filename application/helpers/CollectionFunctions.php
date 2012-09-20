@@ -25,9 +25,9 @@ function collection_has_collectors()
  * @since 0.10
  * @return string
  */
-function display_random_featured_collection()
+function random_featured_collection()
 {
-    $featuredCollection = random_featured_collection();
+    $featuredCollection = get_random_featured_collection();
     $html = '<h2>' . __('Featured Collection') . '</h2>';
     if ($featuredCollection) {
         $html .= '<h3>' . link_to_collection($collectionTitle, array(), 'show', $featuredCollection) . '</h3>';
@@ -65,7 +65,7 @@ function get_collection_for_item($item=null)
  * @param integer $num The maximum number of recent collections to return
  * @return array
  */
-function recent_collections($num = 10)
+function get_recent_collections($num = 10)
 {
     return get_records('Collection', array('sort_field' => 'added', 'sort_dir' => 'd'), $num);
 }
@@ -75,7 +75,7 @@ function recent_collections($num = 10)
  *
  * @return Collection
  */
-function random_featured_collection()
+function get_random_featured_collection()
 {
     return get_db()->getTable('Collection')->findRandomFeatured();
 }

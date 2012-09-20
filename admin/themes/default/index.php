@@ -35,7 +35,7 @@ head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?>
                     <h2 class="serif">Recent Collections</h2>
                     <?php
                         
-                        $collections = recent_collections(5);
+                        $collections = get_recent_collections(5);
                         set_loop_records('collections', $collections);
                         
                         foreach (loop('collections') as $collection):
