@@ -99,7 +99,7 @@ function admin_bar() {
  */
 function admin_bar_css() {
     __v()->headLink()->appendStylesheet('http://fonts.googleapis.com/css?family=Arvo:400', 'screen');
-    queue_css('admin-bar', 'screen');
+    queue_css_file('admin-bar', 'screen');
 }
 
 /**

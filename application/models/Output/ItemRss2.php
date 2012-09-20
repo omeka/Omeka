@@ -55,9 +55,7 @@ class Output_ItemRss2
     
     protected function buildDescription($item)
     {
-        $description = '';
-
-        $description .= show_item_metadata();
+        $description = all_element_texts($item);
         
         //Output HTML that would display all the files in whatever way is possible
         $description .= display_files($item->Files);

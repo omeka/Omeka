@@ -1,7 +1,7 @@
 <?php 
 $pageTitle = __('Edit Security Settings');
 head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
-<?php echo js('security'); ?>
+<?php echo js_src('security'); ?>
 <script type="text/javascript">
 //<![CDATA[
 jQuery(document).ready(function () {

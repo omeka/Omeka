@@ -14,7 +14,7 @@
 </head>
 <body id="debug">
     <div class="container container-sixteen">
-        <div id="content" class="eight columns offset-by-four">
+        <div id="content" class="ten columns offset-by-three">
             <h1><?php echo $title; ?></h1>
             <?php if ($displayError): ?>
                 <?php if (is_string($e)): ?>

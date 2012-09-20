@@ -99,8 +99,12 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         /* My hope is that this will retrieve a set of elements, where each
         element contains an array of all the values for that element */
         $elements = $this->getTable('Element')->findByItemType($this->item_type_id);
-        
-        return $elements;
+
+        $indexedElements = array();
+        foreach ($elements as $element) {
+            $indexedElements[$element->name] = $element;
+        }
+        return $indexedElements;
     }
 
     /**

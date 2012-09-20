@@ -10,7 +10,7 @@
 
 <?php head(array('title' => $itemTitle, 'bodyclass'=>'items show')); ?>
 
-<?php echo js('items'); ?>
+<?php echo js_src('items'); ?>
         
 <div id="edit" class="three columns omega">
     
@@ -30,10 +30,10 @@
     <div class="panel">
         <?php if (has_permission($item, 'edit')): ?>
         <?php 
-        echo link_to_item(__('Edit Item'), array('class'=>'big green button'), 'edit'); ?>
+        echo link_to_item(__('Edit'), array('class'=>'big green button'), 'edit'); ?>
         <?php endif; ?>
         <a href="<?php echo html_escape(public_url('items/show/'.metadata('item', 'id'))); ?>" class="big blue button" target="_blank">View Public Page</a>
-        <?php echo link_to_item(__('Delete this Item'), array('class' => 'delete-confirm big red button'), 'delete-confirm'); ?>
+        <?php echo link_to_item(__('Delete'), array('class' => 'delete-confirm big red button'), 'delete-confirm'); ?>
     </div>
     
     <div class="public-featured panel">
@@ -89,12 +89,12 @@
 
 <div class="seven columns alpha">
     <?php echo flash(); ?>            
-    <?php if (item_has_files()): ?>
-    <div id="item-images">
-    <?php echo display_files_for_item(array('imageSize' => 'square_thumbnail'), array('class' => 'admin-thumb panel')); ?> 
-    </div>
-    <?php endif; ?>
-    <?php echo show_item_metadata(); ?>
+        <?php if (item_has_files()): ?>
+        <div id="item-images">
+        <?php echo display_files_for_item(array('imageSize' => 'square_thumbnail'), array('class' => 'admin-thumb panel')); ?> 
+        </div>
+        <?php endif; ?>
+    <?php echo all_element_texts('item'); ?>
 </div>
 
 <?php fire_plugin_hook('admin_append_to_items_show_secondary', array('item' => $item, 'view' => $this)); ?>

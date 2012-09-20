@@ -28,7 +28,7 @@ class Omeka_Helper_JsTest extends PHPUnit_Framework_TestCase
     {
         // Test with Contains to avoid matching issues with newlines.
         $this->assertContains('<script type="text/javascript" src="http://fake.local/path/to/omeka/javascripts/jquery.js" charset="utf-8"></script>', 
-                            js('jquery'));                    
+                            js_src('jquery'));                    
     }
 
     

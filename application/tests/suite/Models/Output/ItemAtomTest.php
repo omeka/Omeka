@@ -34,7 +34,6 @@ class Models_Output_ItemAtomTest extends Omeka_Test_AppTestCase
     public function testGetFeedOnEmptyItem()
     {
         // Dispatching seems to be required to get the view scripts loaded
-        // so show_item_metadata works in ItemAtom.
         $this->dispatch('items/browse');
 
         $item = new Item;
@@ -54,7 +53,6 @@ class Models_Output_ItemAtomTest extends Omeka_Test_AppTestCase
         $size = '1024';
 
         // Dispatching seems to be required to get the view scripts loaded
-        // so show_item_metadata works in ItemAtom.
         $this->dispatch('items/browse');
 
         $item = new Item;

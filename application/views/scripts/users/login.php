@@ -1,5 +1,5 @@
 <?php
-queue_js('login');
+queue_js_file('login');
 $pageTitle = __('Log In');
 head(array('bodyclass' => 'login', 'title' => $pageTitle), $header);
 ?>

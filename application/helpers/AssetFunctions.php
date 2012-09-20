@@ -15,18 +15,18 @@
  * This needs to be called either before head(), or in a plugin_header hook.
  *
  * @since 1.3
- * @see display_js()
+ * @see head_js()
  * @param string|array $file File to use, if an array is passed, each array
  *  member will be treated like a file.
  * @param string $dir Directory to search for the file.  Keeping the default
  *  is recommended.
  * @return void
  */
-function queue_js($file, $dir = 'javascripts')
+function queue_js_file($file, $dir = 'javascripts')
 {
     if (is_array($file)) {
         foreach($file as $singleFile) {
-            queue_js($singleFile, $dir);
+            queue_js_file($singleFile, $dir);
         }
         return;
     }
@@ -41,7 +41,7 @@ function queue_js($file, $dir = 'javascripts')
  * hook.
  *
  * @since 1.5
- * @see display_js()
+ * @see head_js()
  * @param string $string JavaScript string to include.
  */
 function queue_js_string($string)
@@ -56,7 +56,7 @@ function queue_js_string($string)
  * This needs to be called either before head(), or in a plugin_header hook.
  *
  * @since 1.3
- * @see display_css()
+ * @see head_css()
  * @param string|array $file File to use, if an array is passed, each array
  *  member will be treated like a file.
  * @param string $media CSS media declaration, defaults to 'all'.
@@ -66,15 +66,15 @@ function queue_js_string($string)
  *  is recommended.
  * @return void
  */
-function queue_css($file, $media = 'all', $conditional = false, $dir = 'css')
+function queue_css_file($file, $media = 'all', $conditional = false, $dir = 'css')
 {
     if (is_array($file)) {
         foreach($file as $singleFile) {
-            queue_css($singleFile, $media, $conditional, $dir);
+            queue_css_file($singleFile, $media, $conditional, $dir);
         }
         return;
     }
-    __v()->headLink()->appendStylesheet(css($file, $dir), $media, $conditional);
+    __v()->headLink()->appendStylesheet(css_src($file, $dir), $media, $conditional);
 }
 
 /**
@@ -85,7 +85,7 @@ function queue_css($file, $media = 'all', $conditional = false, $dir = 'css')
  * hook.
  *
  * @since 1.5
- * @see display_css
+ * @see head_css
  * @param string $string CSS string to include.
  * @param string $media CSS media declaration, defaults to 'all'.
  * @param string|bool $conditional Optional IE-style conditional comment,
@@ -110,12 +110,12 @@ function queue_css_string($string, $media = 'all', $conditional = false)
  * head.
  *
  * @since 1.3
- * @see queue_js()
+ * @see queue_js_file()
  * @param bool $includeDefaults Whether the default javascripts should be
  *  included. Defaults to true.
  * @return void
  */
-function display_js($includeDefaults = true)
+function head_js($includeDefaults = true)
 {
     $headScript = __v()->headScript();
 
@@ -136,7 +136,7 @@ function display_js($includeDefaults = true)
         }
     }
 
-    echo $headScript;
+    return $headScript;
 }
 
 /**
@@ -146,13 +146,12 @@ function display_js($includeDefaults = true)
  * head.
  *
  * @since 1.3
- * @see queue_css()
+ * @see queue_css_file()
  * @return void
  */
-function display_css()
+function head_css()
 {
-    echo __v()->headLink();
-    echo __v()->headStyle();
+    return __v()->headLink() . __v()->headStyle();
 }
 
 /**
@@ -162,7 +161,7 @@ function display_css()
  * @param string $dir Defaults to 'css'
  * @return string
  */
-function css($file, $dir = 'css')
+function css_src($file, $dir = 'css')
 {
     return src($file, $dir, 'css');
 }
@@ -190,7 +189,7 @@ function img($file, $dir = 'images')
  * @param string $file The name of the file, without .js extension.
  * @param string $dir The directory in which to look for javascript files.  Recommended to leave the default value.
  */
-function js($file, $dir = 'javascripts')
+function js_src($file, $dir = 'javascripts')
 {
     $href = src($file, $dir, 'js');
 

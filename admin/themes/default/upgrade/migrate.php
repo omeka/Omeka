@@ -12,14 +12,14 @@
 
     <!-- Stylesheets -->
     <?php
-    queue_css(array('style', 'skeleton', 'layout'));
-    display_css();
+    queue_css_file(array('style', 'skeleton', 'layout'));
+    echo head_css();
     ?>
     <link href='http://fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic|Cabin:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
 
     <!-- JavaScripts -->
-    <?php display_js(); ?>
+    <?php echo head_js(); ?>
 </head>
 
 <body id="upgrade">

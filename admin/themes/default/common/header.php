@@ -6,19 +6,19 @@
     <title><?php echo __('Omeka Admin'); ?>: <?php echo settings('site_title'); echo isset($title) ? ' | ' . strip_formatting($title) : ''; ?></title>
 
 <?php
-    queue_css(array('style', 'layout', 'skeleton', 'jquery-ui'));
-    queue_js(array('globals','jquery.jeditable.mini'));
+    queue_css_file(array('style', 'layout', 'skeleton', 'jquery-ui'));
+    queue_js_file(array('globals','jquery.jeditable.mini'));
 ?>
 
 <!-- Plugin Stuff -->
 <?php fire_plugin_hook('admin_theme_header'); ?>
 
 <!-- Stylesheets -->
-<?php display_css(); ?>
+<?php echo head_css(); ?>
 <link href='http://fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic|Cabin:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
 <!-- JavaScripts -->
-<?php display_js(); ?>
+<?php echo head_js(); ?>
 
 </head>
 

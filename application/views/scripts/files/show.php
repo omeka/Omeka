@@ -16,7 +16,7 @@
 
     <?php echo display_file($file, array('imageSize'=>'fullsize')); ?>
 
-    <?php echo show_file_metadata(); ?>
+    <?php echo all_element_texts('file'); ?>
 
     <div id="format-metadata">
         <div id="filename" class="element">

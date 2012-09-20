@@ -1674,6 +1674,6 @@ button.remove_search {
         -webkit-box-shadow: 0 0 1px #999;
         -moz-box-shadow: 0 0 1px #999;
         -o-box-shadow: 0 0 1px #999;
+    overflow-x: scroll;
     padding: 10px;
-    word-break: break-word;
 }

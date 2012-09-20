@@ -177,7 +177,7 @@ class Output_ItemAtom
             // feed/entry/content
             $feedEntryContentElement = $doc->createElement('content');
             $feedEntryContentElement->setAttribute('type', 'html');
-            $feedEntryContentElement->appendChild($doc->createCDATASection(show_item_metadata(array(), $item)));
+            $feedEntryContentElement->appendChild($doc->createCDATASection(all_element_texts($item)));
             $feedEntryElement->appendChild($feedEntryContentElement);
             
             $feedElement->appendChild($feedEntryElement);
