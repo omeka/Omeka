@@ -77,7 +77,6 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
     public static function ajaxRequired()
     {
         return array(
-            array('/items/element-form'),
             array('/items/change-type')
         );
     }
@@ -97,7 +96,6 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
     public static function postRequired()
     {
         return array(
-            array('/items/element-form', '_makeXmlHttpRequest'),
             array('/items/modify-tags'),
             array('/items/delete/1'),
             array('/items/change-type', '_makeXmlHttpRequest'),
@@ -168,25 +166,6 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
     {
         $this->dispatch('/items/browse');
         $this->assertQueryContentContains("table .title", Installer_Test::TEST_ITEM_TITLE);
-    }
-
-    public function testElementFormXmlHttpRequest()
-    {
-        $this->_makeXmlHttpRequest();
-        $this->_makePost(array(
-            'element_id' => 1,
-            'item_id' => 1,
-            'Elements' => array(
-                1 => array(
-                    array(
-                        'text' => 'foo',
-                        'html' => '1',
-                    )
-                )
-            )
-        ));
-        $this->dispatch('/items/element-form');
-        $this->assertQueryContentContains("textarea#Elements-1-0-text", "foo");
     }
 
     public function testDelete()

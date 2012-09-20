@@ -23,12 +23,10 @@ class ItemsController extends Omeka_Controller_AbstractActionController
     );
 
     private $_ajaxRequiredActions = array(
-        'element-form',
         'change-type',
     );
 
     private $_methodRequired = array(
-        'element-form' => array('POST'),
         'modify-tags' => array('POST'),
         'power-edit' => array('POST'),
         'change-type' => array('POST'),
