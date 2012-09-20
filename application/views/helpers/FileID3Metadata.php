@@ -12,15 +12,11 @@
  * @package Omeka
  * @subpackage Omeka_View_Helper
  */
-class Omeka_View_Helper_FileMetadata extends Zend_View_Helper_Abstract
-{
-    public function display($file, $options = array()) 
+class Omeka_View_Helper_FileID3Metadata extends Zend_View_Helper_Abstract
+{   
+    public function fileID3Metadata($file, $options) 
     {
-        $output = '<div class="file-metadata"';
-        if ($file->exists()) {
-            $output .= ' id="file-metadata-' . $file->id . '"';
-        }
-        $output .= '>';
+        $output = '';
         if ($file->metadata) {
             $metadataArray = json_decode($file->metadata, true);
             ob_start();
@@ -28,7 +24,6 @@ class Omeka_View_Helper_FileMetadata extends Zend_View_Helper_Abstract
             $output .= ob_get_contents();
             ob_end_clean();
         }
-        $output .= '</div>';
         return $output;
     }
     
@@ -39,9 +34,9 @@ class Omeka_View_Helper_FileMetadata extends Zend_View_Helper_Abstract
         {
             if (is_array($value))
             {
-                $output .= '<li>' . $key . $this->_arrayToList($value) . '</li>';
+                $output .= '<li><span class="id3-property-name">' . $key . '</span>' . $this->_arrayToList($value) . '</li>';
             } else {
-                $output .= '<li>' . $key . ' => ' . $value . '</li>';
+                $output .= '<li><span class="id3-property-name">' . $key . '</span> => ' . $value . '</li>';
             }
         }
         $output .= '</ul>';

@@ -231,7 +231,7 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
                     $displayInfo['texts'] = $elementTexts;
                 }
 
-                $setInfo[$elementName] = $displayInfo;
+                $setInfo[$elementName] = $displayInfo; 
             }
             if (!empty($setInfo)) {
                 $elementsForDisplay[$setName] = $setInfo;
@@ -256,7 +256,7 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
         foreach ($elementSets as $setName => $elementsInSet) {
             $outputArray[$setName] = array();
             foreach ($elementsInSet as $key => $element) {
-                $elementName = $element->name;
+                $elementName = $element->name;                
                 $textArray = $this->_getFormattedElementTexts($this->_record, array($element->set_name, $elementName));
                 if (!empty($textArray[0]) or $this->_showEmptyElements) {
                     $outputArray[$setName][$elementName] = $textArray;

@@ -47,20 +47,19 @@ function display_files($files, array $props = array(), $wrapperAttributes = arra
 }
 
 /**
- * Retrieve the set of all metadata for the current file.
+ * Retrieve display for ID3 metadata for the current file.
  *
  * @since 1.0
  * @param array $options Optional
  * @param File|null $file Optional
  * @return string|array
  */
-function show_file_metadata(array $options = array(), $file = null)
+function show_file_id3_metadata(array $options = array(), $file = null)
 {
     if (!$file) {
         $file = get_current_record('file');
     }
-    $helper = new Omeka_View_Helper_FileMetadata;
-    return $helper->display($file, $options);
+    return __v()->fileID3Metadata($file, $options);
 }
 
 

@@ -84,7 +84,6 @@ class ItemsController extends Omeka_Controller_AbstractActionController
     {
         // Get all the element sets that apply to the item.
         $this->view->elementSets = $this->_getItemElementSets();
-
         parent::editAction();
     }
     
@@ -114,7 +113,6 @@ class ItemsController extends Omeka_Controller_AbstractActionController
     {
         // Get all the element sets that apply to the item.
         $this->view->elementSets = $this->_getItemElementSets();
-        
         return parent::addAction();
     }
 
@@ -183,26 +181,6 @@ class ItemsController extends Omeka_Controller_AbstractActionController
         }
 
         return $perPage;
-    }
-    
-    public function elementFormAction()
-    {        
-        $elementId = (int)$_POST['element_id'];
-        $itemId  = (int)$_POST['item_id'];
-                         
-        // Re-index the element form posts so that they are displayed in the correct order
-        // when one is removed.
-        $_POST['Elements'][$elementId] = array_merge($_POST['Elements'][$elementId]);
-
-        $element = $this->_helper->db->getTable('Element')->find($elementId);
-                      
-        try {
-            $item = $this->_helper->db->findById($itemId);
-        } catch (Omeka_Controller_Exception_404 $e) {
-            $item = new Item;
-        }
-        
-        $this->view->assign(compact('element', 'item'));
     }
     
     ///// AJAX ACTIONS /////
