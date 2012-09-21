@@ -307,13 +307,13 @@ function browse_headings($headings)
  * can be filtered using the 'body_tag_attributes' filter.
  *
  * @since 1.4
- * @uses _tag_attributes()
+ * @uses tag_attributes()
  * @return string An HTML <body> tag with attributes and their values.
  */
 function body_tag($attributes = array())
 {
     $attributes = apply_filters('body_tag_attributes', $attributes);
-    if ($attributes = _tag_attributes($attributes)) {
+    if ($attributes = tag_attributes($attributes)) {
         return "<body ". $attributes . ">\n";
     }
     return "<body>\n";

@@ -17,7 +17,7 @@
  * @param string $value
  * @return string
  */
-function _tag_attributes($attributes, $value=null)
+function tag_attributes($attributes, $value=null)
 {
     if (is_string($attributes)) {
         $toProcess['name'] = $attributes;
@@ -50,7 +50,7 @@ function _tag_attributes($attributes, $value=null)
  * @param string $uri Optional Action for the form.  Defaults to 'items/browse'.
  * @return string
  */
-function simple_search($buttonText = null, $formProperties=array('id'=>'simple-search'), $uri = null)
+function simple_search_form($buttonText = null, $formProperties=array('id'=>'simple-search'), $uri = null)
 {
     if (!$buttonText) {
         $buttonText = __('Search');
@@ -64,7 +64,7 @@ function simple_search($buttonText = null, $formProperties=array('id'=>'simple-s
     $searchQuery = array_key_exists('search', $_GET) ? $_GET['search'] : '';
     $formProperties['action'] = $uri;
     $formProperties['method'] = 'get';
-    $html  = '<form ' . _tag_attributes($formProperties) . '>' . "\n";
+    $html  = '<form ' . tag_attributes($formProperties) . '>' . "\n";
     $html .= '<fieldset>' . "\n\n";
     $html .= __v()->formText('search', $searchQuery);
     $html .= __v()->formSubmit('submit_search', $buttonText, array('class' => 'blue'));
@@ -104,7 +104,7 @@ function simple_search($buttonText = null, $formProperties=array('id'=>'simple-s
  * @param array $options Optional
  * @return string HTML
  */
-function display_form_input_for_element($element, $record, $options = array())
+function form_input_for_element($element, $record, $options = array())
 {
     $html = '';
     // If we have an array of Elements, loop through the form to display them.
@@ -122,12 +122,12 @@ function display_form_input_for_element($element, $record, $options = array())
  * Used within the admin theme (and potentially within plugins) to display a form
  * for a record for a given element set.
  *
- * @uses display_form_input_for_element()
+ * @uses form_input_for_element()
  * @param Omeka_Record_AbstractRecord $record
  * @param string $elementSetName The name of the element set or 'Item Type Metadata' for an item's item type data
  * @return string
  */
-function display_element_set_form($record, $elementSetName)
+function element_set_form($record, $elementSetName)
 {
     $recordType = get_class($record);
     
@@ -143,7 +143,7 @@ function display_element_set_form($record, $elementSetName)
         array('recordType' => $recordType, 'record' => $record, 'elementSetName' => $elementSetName)
     );
             
-    $html = display_form_input_for_element($elements, $record);
+    $html = form_input_for_element($elements, $record);
 
     return $html;
 }
@@ -156,7 +156,7 @@ function display_element_set_form($record, $elementSetName)
  * @param string|null $labelOption
  * @return array
  */
-function label_options($options, $labelOption = null)
+function label_table_options($options, $labelOption = null)
 {
     if ($labelOption === null) {
         $labelOption = __('Select Below ');
@@ -175,5 +175,5 @@ function get_table_options($tableClass, $labelOption = null, $searchParams = arr
 {
     $options = get_db()->getTable($tableClass)->findPairsForSelectForm($searchParams);
     $options = apply_filters(Inflector::underscore($tableClass) . '_select_options', $options);
-    return label_options($options, $labelOption);
+    return label_table_options($options, $labelOption);
 }

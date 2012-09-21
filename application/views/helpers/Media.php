@@ -379,7 +379,7 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
             $linkAttributes = array_key_exists('linkAttributes', $options)
                             ? $options['linkAttributes'] : array();
             $linkAttributes = array_merge($defaultLinkAttributes, $linkAttributes);
-            $html = '<a ' . _tag_attributes($linkAttributes) . '>' . $html . '</a>';
+            $html = '<a ' . tag_attributes($linkAttributes) . '>' . $html . '</a>';
         }
         return $html;
     }
@@ -598,11 +598,11 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
         // The path to the icon is keyed to the MIME type of the file.
         $imgAttributes['src'] = (string)$options['icons'][$mimeType];
         
-        $html = '<img ' . _tag_attributes($imgAttributes) . ' />';
+        $html = '<img ' . tag_attributes($imgAttributes) . ' />';
         
         if ($options['showFilename']) {
             // Add a div with arbitrary attributes.
-            $html .= '<div ' . _tag_attributes((array)$options['filenameAttributes']) 
+            $html .= '<div ' . tag_attributes((array)$options['filenameAttributes']) 
                    . '>' . html_escape($file->original_filename) . '</div>';
         }
         
@@ -741,7 +741,7 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
         }
         
         //Wrap the HTML in a div with a class (if class is not set to null)
-        $wrapper = !empty($wrapperAttributes) ? '<div ' . _tag_attributes($wrapperAttributes) . '>' : ''; 
+        $wrapper = !empty($wrapperAttributes) ? '<div ' . tag_attributes($wrapperAttributes) . '>' : ''; 
         $html = !empty($wrapper) ? $wrapper . $html . "</div>" : $html;
         
         return apply_filters(
@@ -808,7 +808,7 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
         $props['alt'] = $alt;
         
         // Build the img tag
-        $html = '<img src="' . $uri . '" '._tag_attributes($props) . '/>' . "\n";
+        $html = '<img src="' . $uri . '" '.tag_attributes($props) . '/>' . "\n";
         
         return $html;
     }

@@ -10,7 +10,7 @@ class TagAttributesTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * Test when a string is passed as the first argument to _tag_attributes. This
+     * Test when a string is passed as the first argument to tag_attributes. This
      * should return the id and name attributes, and use the argument for each of
      * their values.
      */
@@ -18,7 +18,7 @@ class TagAttributesTest extends PHPUnit_Framework_TestCase
     {
         $attributeString = 'elementvalue';
         $html = 'name="elementvalue" id="elementvalue"';
-        $this->assertEquals($html, _tag_attributes($attributeString));
+        $this->assertEquals($html, tag_attributes($attributeString));
     }
     
     /**
@@ -28,7 +28,7 @@ class TagAttributesTest extends PHPUnit_Framework_TestCase
     {
         $attributesWithValues = array('id' => 'elementid', 'class' => 'element class', 'title' => 'Element title');
         $html = 'id="elementid" class="element class" title="Element title"';
-        $this->assertEquals($html, _tag_attributes($attributesWithValues));
+        $this->assertEquals($html, tag_attributes($attributesWithValues));
     }
     
     /**
@@ -38,7 +38,7 @@ class TagAttributesTest extends PHPUnit_Framework_TestCase
     {
         $attributesWithNullValues = array('id' => null, 'class' => 'element class', 'title' => null);
         $html = 'class="element class"';
-        $this->assertEquals($html, _tag_attributes($attributesWithNullValues));
+        $this->assertEquals($html, tag_attributes($attributesWithNullValues));
     }
     
     /** 
@@ -48,7 +48,7 @@ class TagAttributesTest extends PHPUnit_Framework_TestCase
     {
         $attributesWithEmptyStringValues = array('id' => '', 'class' => '', 'title' => '');
         $html = 'id="" class="" title=""';
-        $this->assertEquals($html, _tag_attributes($attributesWithEmptyStringValues));
+        $this->assertEquals($html, tag_attributes($attributesWithEmptyStringValues));
     }
     
     /** 
@@ -58,7 +58,7 @@ class TagAttributesTest extends PHPUnit_Framework_TestCase
     {
         $attributesWithMixedValues = array('id' => null, 'class' => 'element class', 'title' => '');
         $html = 'class="element class" title=""';
-        $this->assertEquals($html, _tag_attributes($attributesWithMixedValues));
+        $this->assertEquals($html, tag_attributes($attributesWithMixedValues));
     }
     
     public function tearDown()

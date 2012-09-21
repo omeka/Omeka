@@ -43,7 +43,7 @@ function link_to($record, $action=null, $text=null, $props = array(), $queryPara
         $text = __('View');
     }
 
-    $attr = !empty($props) ? ' ' . _tag_attributes($props) : '';
+    $attr = !empty($props) ? ' ' . tag_attributes($props) : '';
 
     return '<a href="'. html_escape($url) . '"' . $attr . '>' . $text . '</a>';
 }
@@ -68,7 +68,7 @@ function link_to_advanced_search($text = null, $props = array(), $uri=null)
     }
     // Is appending the query string directly a security issue?  We should figure that out.
     $props['href'] = $uri . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
-    return '<a ' . _tag_attributes($props) . '>' . $text . '</a>';
+    return '<a ' . tag_attributes($props) . '>' . $text . '</a>';
 }
 
 /**
@@ -286,7 +286,7 @@ function link_to_home_page($text = null, $props = array())
         $text = settings('site_title');
     }
     $uri = WEB_ROOT;
-    return '<a href="' . html_escape($uri) . '" '._tag_attributes($props).'>' . $text . "</a>\n";
+    return '<a href="' . html_escape($uri) . '" '.tag_attributes($props).'>' . $text . "</a>\n";
 }
 
 /**
@@ -300,7 +300,7 @@ function link_to_admin_home_page($text = null, $props = array())
     if (!$text) {
         $text = settings('site_title');
     }
-    return '<a href="' . html_escape(admin_url('')) . '" ' . _tag_attributes($props)
+    return '<a href="' . html_escape(admin_url('')) . '" ' . tag_attributes($props)
          . '>' . $text . "</a>\n";
 }
 
@@ -378,7 +378,7 @@ function nav(array $links, $maxDepth = 0)
 
         // Display the subnavigation links if they exist and if the max depth has not been reached
         if ($subNavLinks !== null && ($maxDepth === null || $maxDepth > 0)) {
-            $subNavAttributes = !empty($subNavAttributes) ? ' ' . _tag_attributes($subNavAttributes) : '';
+            $subNavAttributes = !empty($subNavAttributes) ? ' ' . tag_attributes($subNavAttributes) : '';
             $nav .= "\n" . '<ul' . $subNavAttributes . '>' . "\n";
             if ($maxDepth === null) {
                 $nav .= nav($subNavLinks, null);

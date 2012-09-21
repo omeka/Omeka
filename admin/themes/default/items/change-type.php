@@ -4,5 +4,5 @@
 </p>
 </div>
 <?php
-echo display_element_set_form(get_current_record('item'), 'Item Type Metadata');
+echo element_set_form(get_current_record('item'), 'Item Type Metadata');
 ?>

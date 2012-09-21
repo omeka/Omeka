@@ -8,7 +8,7 @@ endif;
 $formAttributes['method'] = 'GET';
 ?>
 
-<form <?php echo _tag_attributes($formAttributes); ?>>
+<form <?php echo tag_attributes($formAttributes); ?>>
     <div id="search-keywords" class="field">
         <?php echo $this->formLabel('keyword-search', __('Search for Keywords')); ?>
         <div class="inputs">
@@ -56,7 +56,7 @@ $formAttributes['method'] = 'GET';
                     "advanced[$i][type]",
                     @$rows['type'],
                     array(),
-                    label_options(array(
+                    label_table_options(array(
                         'contains' => __('contains'),
                         'does not contain' => __('does not contain'),
                         'is exactly' => __('is exactly'),
@@ -155,7 +155,7 @@ $formAttributes['method'] = 'GET';
                 'public',
                 @$_REQUEST['public'],
                 array(),
-                label_options(array(
+                label_table_options(array(
                     '1' => __('Only Public Items'),
                     '0' => __('Only Non-Public Items')
                 ))
@@ -173,7 +173,7 @@ $formAttributes['method'] = 'GET';
                 'featured',
                 @$_REQUEST['featured'],
                 array(),
-                label_options(array(
+                label_table_options(array(
                     '1' => __('Only Featured Items'),
                     '0' => __('Only Non-Featured Items')
                 ))

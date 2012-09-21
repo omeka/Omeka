@@ -16,7 +16,7 @@ foreach ($elementSets as $key => $elementSet) {
             $tabContent  = '<p class="element-set-description" id="';
             $tabContent .= html_escape(text_to_id($elementSet->name) . '-description') . '">';
             $tabContent .= url_to_link($elementSet->description) . '</p>' . "\n\n";
-            $tabContent .= display_element_set_form($item, $elementSet->name);
+            $tabContent .= element_set_form($item, $elementSet->name);
             $tabs[$tabName] = $tabContent;
             break;
     }
