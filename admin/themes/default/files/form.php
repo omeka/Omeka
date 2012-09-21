@@ -33,7 +33,7 @@ jQuery(document).bind('omeka:elementformload', function (event) {
         <?php foreach ($elementSets as $elementSet): ?>
         <fieldset>
             <h2><?php echo __($elementSet->name); ?></h2>    
-            <?php echo display_element_set_form('File', $file, $elementSet->name); ?>
+            <?php echo display_element_set_form($file, $elementSet->name); ?>
         </fieldset>
         <?php endforeach; ?>
         <?php fire_plugin_hook('admin_append_to_files_form', array('file' => $file, 'view' => $this)); ?>
