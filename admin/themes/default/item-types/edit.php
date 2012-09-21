@@ -1,20 +1,20 @@
 <?php
-    $itemTypeTitle = strip_formatting($itemtype->name);
-    if ($itemTypeTitle != '') {
-        $itemTypeTitle = ': &quot;' . html_escape($itemTypeTitle) . '&quot; ';
+    $type_name = strip_formatting($item_type->name);
+    if ($type_name != '') {
+        $type_name = ': &quot;' . html_escape($type_name) . '&quot; ';
     } else {
-        $itemTypeTitle = '';
+        $type_name = '';
     }
-    $itemTypeTitle = __('Edit Item Type #%s', $itemtype->id) . $itemTypeTitle;
+    $title = __('Edit Item Type #%s', $item_type->id) . $type_name;
 ?>
-<?php head(array('title'=> $itemTypeTitle,'bodyclass'=>'item-types')); ?>
+<?php head(array('title'=> $title,'bodyclass'=>'item-types')); ?>
 
     <form id="edit-item-type-form" method="post" action="">
         <?php include 'form.php';?>
         <div id="save" class="three columns omega panel">
             <?php echo $form->getElement(Omeka_Form_ItemTypes::SUBMIT_EDIT_ELEMENT_ID); ?>
             <?php if (has_permission('ItemTypes', 'delete')): ?>
-                <?php echo link_to($itemtype, 'delete-confirm', __('Delete'), array('class' => 'big red button delete-confirm')); ?>
+                <?php echo link_to($item_type, 'delete-confirm', __('Delete'), array('class' => 'big red button delete-confirm')); ?>
             <?php endif; ?>
         </div>
     </form>

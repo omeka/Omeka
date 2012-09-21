@@ -86,7 +86,7 @@ class ElementSetsController extends Omeka_Controller_AbstractActionController
             }
         }
         
-        $this->view->assign('elementSet', $elementSet);
+        $this->view->element_set = $elementSet;
     }
     
     protected function _redirectAfterEdit($record)

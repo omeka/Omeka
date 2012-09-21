@@ -30,10 +30,10 @@ jQuery(document).ready(function () {
     <fieldset id="type-elements">
         <h2><?php echo __('Elements'); ?></h2>
         <div id="element-list">
-            <?php $itemTypeId = $itemtype ? $itemtype->id : null; ?>
-            <?php echo $this->action('element-list', 'item-types', null, array('item-type-id' => $itemTypeId)); ?>
+            <?php $id = $item_type ? $item_type->id : null; ?>
+            <?php echo $this->action('element-list', 'item-types', null, array('item-type-id' => $id)); ?>
         </div>
     </fieldset>
 </div>
 
-<?php fire_plugin_hook('admin_append_to_item_types_form', array('item_type' => $itemtype, 'view' => $this)); ?>
+<?php fire_plugin_hook('admin_append_to_item_types_form', array('item_type' => $item_type, 'view' => $this)); ?>

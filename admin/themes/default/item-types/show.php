@@ -1,13 +1,13 @@
 <?php
-    $itemTypeTitle = strip_formatting($item_type->name);
-    if ($itemTypeTitle != '') {
-        $itemTypeTitle = ': &quot;' . html_escape($itemTypeTitle) . '&quot; ';
+    $type_name = strip_formatting($item_type->name);
+    if ($type_name != '') {
+        $type_name = ': &quot;' . html_escape($type_name) . '&quot; ';
     } else {
-        $itemTypeTitle = '';
+        $type_name = '';
     }
-    $itemTypeTitle = __('Item Type #%s', $item_type->id) . $itemTypeTitle;
+    $title = __('Item Type #%s', $item_type->id) . $type_name;
 ?>
-<?php head(array('title'=> $itemTypeTitle,'bodyclass'=>'item-types'));?>
+<?php head(array('title'=> $title,'bodyclass'=>'item-types'));?>
     <div id="edit" class="three columns omega">
         <div class="panel">
         <?php if ( has_permission('ItemTypes','edit') ): ?>

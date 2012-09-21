@@ -16,17 +16,17 @@ head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
         </thead>
         <tbody>
         
-<?php foreach (loop('ItemType') as $itemType): ?>
+<?php foreach (loop('ItemType') as $item_type): ?>
 <tr class="itemtype">
     <td class="itemtype-name">
-        <a href="<?php echo html_escape(record_url($itemType, 'show', 'item-types')); ?>"><?php echo html_escape($itemType->name); ?></a>
+        <a href="<?php echo html_escape(record_url($item_type, 'show', 'item-types')); ?>"><?php echo html_escape($item_type->name); ?></a>
         <ul class="action-links group">
         <?php if (has_permission('ItemTypes', 'edit')): ?>
-            <li><a class="edit" href="<?php echo html_escape(url('item-types/edit/' . $itemType->id)); ?>"><?php echo __('Edit'); ?></a></li>
+            <li><a class="edit" href="<?php echo html_escape(url('item-types/edit/' . $item_type->id)); ?>"><?php echo __('Edit'); ?></a></li>
         <?php endif; ?>        
         </ul>
     </td>
-    <td class="itemtype-description"><?php echo html_escape($itemType->description); ?></td>
+    <td class="itemtype-description"><?php echo html_escape($item_type->description); ?></td>
     <td><?php echo link_to_items_with_item_type(); ?></td>
 </tr>
 <?php endforeach; ?>

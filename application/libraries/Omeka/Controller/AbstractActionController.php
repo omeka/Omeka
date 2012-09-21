@@ -152,6 +152,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
     public function addAction()
     {
         $class = $this->_helper->db->getDefaultModelName();
+        $varName = $this->view->singularize($class);
 
         $record = new $class();
         if ($this->getRequest()->isPost()) {
@@ -166,7 +167,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
                 $this->_helper->flashMessenger($record->getErrors());
             }
         }
-        $this->view->assign(array(strtolower($class)=>$record));
+        $this->view->$varName = $record;
     }
 
     /**
@@ -179,7 +180,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
      */
     public function editAction()
     {
-        $varName = strtolower($this->_helper->db->getDefaultModelName());
+        $varName = $this->view->singularize($this->_helper->db->getDefaultModelName());
 
         $record = $this->_helper->db->findById();
         
@@ -196,7 +197,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
             }
         }
         
-        $this->view->assign(array($varName=>$record));
+        $this->view->$varName = $record;
     }
 
     /**

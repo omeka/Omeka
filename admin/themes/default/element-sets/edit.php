@@ -4,8 +4,8 @@ head(array('title'=> $pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=
 ?>
 <?php common('settings-nav'); ?>
 <?php echo flash(); ?>
-<h2><?php echo __($elementSet->name); ?></h2>
-<p><?php echo __($elementSet->description); ?></p>
+<h2><?php echo __($element_set->name); ?></h2>
+<p><?php echo __($element_set->description); ?></p>
 <form method='post'>
     <table>
         <thead>
@@ -17,7 +17,7 @@ head(array('title'=> $pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($elementSet->getElements() as $element): ?>
+        <?php foreach ($element_set->getElements() as $element): ?>
         <tr>
             <td><?php echo __($element->name); ?></td>
             <td><?php echo __($element->description); ?></td>
