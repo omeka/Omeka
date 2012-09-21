@@ -55,7 +55,7 @@ class Omeka_Helper_ItemCitationTest extends Omeka_Test_AppTestCase
         
         set_current_record('item', $item, true);
         
-        $siteTitle = settings('site_title');
+        $siteTitle = option('site_title');
         $dateAccessed = date('F j, Y');
         $itemUrl = record_url('item', null, true);
         

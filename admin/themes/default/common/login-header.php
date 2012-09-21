@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta charset="utf-8">
-    <title><?php echo settings('site_title'); ?></title>
+    <title><?php echo option('site_title'); ?></title>
     
     <!-- Stylesheets -->
     <?php queue_css_file('style'); ?>

@@ -8,7 +8,7 @@
     }
     $fileTitle = __('File #%s', metadata('file', 'id')) . $fileTitle;
 ?>
-<?php head(array('title' => $fileTitle, 'bodyclass'=>'files show primary-secondary')); ?>
+<?php echo head(array('title' => $fileTitle, 'bodyclass'=>'files show primary-secondary')); ?>
 
 
 <div id="edit" class="three columns omega">
@@ -81,4 +81,4 @@
     
 </div>
     <?php fire_plugin_hook('admin_append_to_files_show_secondary', array('file' => $file, 'view' => $this)); ?>
-<?php foot();?>
+<?php echo foot();?>

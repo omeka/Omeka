@@ -1,6 +1,6 @@
 <?php
 $pageTitle = __('403: Forbidden');
-head(array('bodyclass'=>'error403 primary', 'title'=>$pageTitle)); ?>
+echo head(array('bodyclass'=>'error403 primary', 'title'=>$pageTitle)); ?>
 <h1><?php echo $pageTitle; ?></h1>
 
 <div id="primary" class="file-forbidden">
@@ -9,8 +9,8 @@ head(array('bodyclass'=>'error403 primary', 'title'=>$pageTitle)); ?>
     <p><?php echo __('Sorry, you do not have permission to access this page.'); ?></p>
     
     <p><?php 
-    $siteAdministratorEmail = '<a href="mailto:'. settings('administrator_email') . '">' . __('site administrator') . '</a>';
+    $siteAdministratorEmail = '<a href="mailto:'. option('administrator_email') . '">' . __('site administrator') . '</a>';
     echo __('If you think you should have permission, try contacting the %s.', $siteAdministratorEmail); ?>
     </p>
 </div>
-<?php foot(); ?>
+<?php echo foot(); ?>

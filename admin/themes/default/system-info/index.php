@@ -1,6 +1,6 @@
 <?php
 $title = __('System Information');
-head(array('title' => $title, 'bodyclass' => 'system-info')); ?>
+echo head(array('title' => $title, 'bodyclass' => 'system-info')); ?>
 
 <?php echo flash(); ?>
 <table>
@@ -14,4 +14,4 @@ head(array('title' => $title, 'bodyclass' => 'system-info')); ?>
     <?php endforeach; ?>
 <?php endforeach; ?>
 </table>
-<?php foot();
+<?php echo foot();

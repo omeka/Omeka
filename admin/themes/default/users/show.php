@@ -7,7 +7,7 @@
     }
     $userTitle = __('User #%s', $user->id) . $userTitle;
 ?>
-<?php head(array('title'=>$userTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'themes primary'));?>
+<?php echo head(array('title'=>$userTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'themes primary'));?>
 <h1><?php echo $userTitle; ?></h1>
 
 <?php if (has_permission('Users', 'edit')): ?>
@@ -15,7 +15,7 @@
 echo link_to($user, 'edit', __('Edit this User'), array('class'=>'edit')); ?></p>   
 <?php endif; ?>
 
-<?php common('settings-nav'); ?>
+<?php echo common('settings-nav'); ?>
 
     <h2><?php echo __('Username'); ?></h2>
     <p><?php echo html_escape($user->username); ?></p>
@@ -24,4 +24,4 @@ echo link_to($user, 'edit', __('Edit this User'), array('class'=>'edit')); ?></p
     <h2><?php echo __('Email'); ?></h2>
     <p><?php echo html_escape($user->email); ?></p>
     
-<?php foot();?>
+<?php echo foot();?>

@@ -8,7 +8,7 @@
     }
     $fileTitle = __('File #%s', metadata('file', 'id')) . $fileTitle;
 ?>
-<?php head(array('title' => $fileTitle, 'bodyclass'=>'files show primary-secondary')); ?>
+<?php echo head(array('title' => $fileTitle, 'bodyclass'=>'files show primary-secondary')); ?>
 
 <h1><?php echo $fileTitle; ?></h1>
 
@@ -68,4 +68,4 @@
     </div><!-- end file-history -->
 
 </div><!--end primary-->
-<?php foot();?>
+<?php echo foot();?>

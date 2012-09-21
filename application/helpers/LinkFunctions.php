@@ -283,7 +283,7 @@ function link_to_collection($text=null, $props=array(), $action='show', $collect
 function link_to_home_page($text = null, $props = array())
 {
     if (!$text) {
-        $text = settings('site_title');
+        $text = option('site_title');
     }
     $uri = WEB_ROOT;
     return '<a href="' . html_escape($uri) . '" '.tag_attributes($props).'>' . $text . "</a>\n";
@@ -298,7 +298,7 @@ function link_to_home_page($text = null, $props = array())
 function link_to_admin_home_page($text = null, $props = array())
 {
     if (!$text) {
-        $text = settings('site_title');
+        $text = option('site_title');
     }
     return '<a href="' . html_escape(admin_url('')) . '" ' . tag_attributes($props)
          . '>' . $text . "</a>\n";
@@ -444,7 +444,7 @@ function pagination_links($options = array())
               ->setItemCountPerPage($itemCountPerPage)
               ->setPageRange($pageRange);
 
-    return __v()->paginationControl($paginator,
+    return get_view()->paginationControl($paginator,
                                     $scrollingStyle,
                                     $partial);
 }
@@ -486,7 +486,7 @@ function public_nav(array $navArray, $navType=null, $maxDepth = 0)
  */
 function public_nav_main()
 {
-    $view = __v();
+    $view = get_view();
     $nav = new Omeka_Navigation;
     $nav->loadAsOption(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME);
     return $view->navigation()->menu($nav);

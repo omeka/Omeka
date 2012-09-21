@@ -1,7 +1,7 @@
 <?php
 $title = __('Batch Delete Items');
 if (!$isPartial):
-    head(array('title' => $title, 
+    echo head(array('title' => $title, 
                'bodyclass' => 'advanced-search', 
                'bodyid' => 'advanced-search-page'));
 ?>
@@ -56,5 +56,5 @@ if (!$isPartial):
     ?>
 </form>
 <?php if (!$isPartial): ?>
-<?php foot(); ?>
+<?php echo foot(); ?>
 <?php endif; ?>

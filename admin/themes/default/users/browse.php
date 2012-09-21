@@ -1,6 +1,6 @@
 <?php
 $pageTitle = __('Browse Users') . ' ' . __('(%s total)', $total_records);
-head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'users primary'));?>
+echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'users primary'));?>
 
 <?php if (has_permission('Users', 'add')): ?>
     <?php echo link_to('users', 'add', __('Add a User'), array('class'=>'small green button')); ?>
@@ -49,7 +49,7 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
                     <?php endif; ?>                    
                 </div>
     
-                <?php echo pagination_links(array('partial_file' => common('pagination_control'))); ?>
+                <?php echo pagination_links(); ?>
                 
                 <table id="users" class="full">
                     <thead>
@@ -85,4 +85,4 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
             </table>
             <div class="pagination"><?php echo pagination_links(); ?></div>
         </form>
-<?php foot();?>
+<?php echo foot();?>

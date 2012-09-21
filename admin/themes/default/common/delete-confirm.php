@@ -3,7 +3,7 @@ $class = get_class($record);
 $pageTitle = __('Delete %s', Inflector::titleize($class));
 
 if (!$isPartial):
-head(array('title' => $pageTitle));
+echo head(array('title' => $pageTitle));
 ?>
 
 <?php endif; ?>
@@ -15,6 +15,6 @@ head(array('title' => $pageTitle));
         </div>
         <?php if (!$isPartial): ?>
     </div>
-<?php foot(); ?>
+<?php echo foot(); ?>
 
 <?php endif; ?>

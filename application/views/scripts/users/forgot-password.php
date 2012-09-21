@@ -1,6 +1,6 @@
 <?php
 $pageTitle = __('Forgot Password');
-head(array('title' => $pageTitle, 'bodyclass' => 'login'), $header);
+echo head(array('title' => $pageTitle, 'bodyclass' => 'login'), $header);
 ?>
 <h1><?php echo $pageTitle; ?></h1>
 <p id="login-links">
@@ -17,4 +17,4 @@ head(array('title' => $pageTitle, 'bodyclass' => 'login'), $header);
 
     <input type="submit" class="submit" value="<?php echo __('Submit'); ?>" />
 </form>
-<?php foot(array(), $footer); ?>
+<?php echo foot(array(), $footer); ?>

@@ -86,7 +86,7 @@ function is_current_url($url)
  */
 function record_url($record, $action = null, $getAbsoluteUrl = false)
 {
-    return __v()->getRecordUrl($record, $action, $getAbsoluteUrl);
+    return get_view()->getRecordUrl($record, $action, $getAbsoluteUrl);
 }
 
 /**

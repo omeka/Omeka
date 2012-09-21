@@ -1,8 +1,8 @@
 <?php
 $pageTitle = __('Delete Tag');
-head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodyclass'=>'tags')); ?>
+echo head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodyclass'=>'tags')); ?>
 		
-<?php common('tags-nav'); ?>
+<?php echo common('tags-nav'); ?>
 <?php echo flash(); ?>
 <?php if (count($tags)): ?>
 <form method="post" action="">
@@ -24,4 +24,4 @@ head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodyclass'=
     <p><?php echo __('There are no tags to delete. You must first tag some items.'); ?></p>
 <?php endif; ?>
 
-<?php foot(); ?>
+<?php echo foot(); ?>

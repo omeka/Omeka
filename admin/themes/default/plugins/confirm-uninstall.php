@@ -1,6 +1,6 @@
 <?php 
 $pageTitle = __('Confirm %s Uninstall', $plugin->getDirectoryName());
-head(array('title'=>$pageTitle, 'bodyclass'=>'plugins')); ?>
+echo head(array('title'=>$pageTitle, 'bodyclass'=>'plugins')); ?>
         
     <div class="six columns alpha">
     <?php echo flash(); ?>
@@ -15,4 +15,4 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'plugins')); ?>
         <p id="uninstall-confirm"><input type="submit" class="uninstall small red button" name="uninstall-confirm" class="foo" value="<?php echo __('Uninstall'); ?>" /> <span><?php echo __('or'); ?> <?php echo link_to('plugins', 'browse', __('Cancel')); ?></span></p>
     </form>
 
-<?php foot(); ?>
+<?php echo foot(); ?>

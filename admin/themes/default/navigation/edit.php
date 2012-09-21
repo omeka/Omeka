@@ -1,6 +1,6 @@
 <?php
 $pageTitle = __('Edit Navigation');
-head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
+echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
 <?php echo js_src('settings'); ?>
 
 <script type="text/javascript">
@@ -177,4 +177,4 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
 <?php echo $this->form; ?>
 </div>
 
-<?php foot(); ?>
+<?php echo foot(); ?>

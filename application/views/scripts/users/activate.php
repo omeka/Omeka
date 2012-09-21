@@ -1,6 +1,6 @@
 <?php
 $pageTitle = __('User Activation');
-head(array('title' => $pageTitle), $header);
+echo head(array('title' => $pageTitle), $header);
 ?>
 <h1><?php echo $pageTitle; ?></h1>
 
@@ -27,4 +27,4 @@ head(array('title' => $pageTitle), $header);
     </div>
 </form>
 
-<?php foot(array(), $footer); ?>
+<?php echo foot(array(), $footer); ?>

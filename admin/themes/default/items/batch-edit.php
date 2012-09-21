@@ -1,7 +1,7 @@
 <?php
 $title = __('Batch Edit Items');
 if (!$isPartial):
-    head(array('title' => $title, 
+    echo head(array('title' => $title, 
                'bodyclass' => 'advanced-search', 
                'bodyid' => 'advanced-search-page'));
 ?>
@@ -108,7 +108,7 @@ if (!$isPartial):
             <label class="two columns alpha" for="metadata[tags]"><?php echo __('Add Tags'); ?></label>
             <div class="inputs five columns omega">
                 <?php echo $this->formText('metadata[tags]', null, array('size' => 32)); ?>
-                <p class="explanation"><?php echo __('List of tags to add to all checked items, separated by %s.', settings('tag_delimiter')); ?></p>
+                <p class="explanation"><?php echo __('List of tags to add to all checked items, separated by %s.', option('tag_delimiter')); ?></p>
             </div>
         </div>
     </fieldset>
@@ -156,5 +156,5 @@ if (!$isPartial):
     });
 </script>
 <?php if (!$isPartial): ?>
-<?php foot(); ?>
+<?php echo foot(); ?>
 <?php endif; ?>

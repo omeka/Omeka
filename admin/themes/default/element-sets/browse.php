@@ -1,9 +1,9 @@
 <?php 
 $pageTitle = __('Browse Element Sets');
-head(array('title'=> $pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'element-sets primary'));
+echo head(array('title'=> $pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'element-sets primary'));
 $doNotDelete = array('Dublin Core', 'Item Type Metadata', 'Omeka Image File', 'Omeka Video File');
 ?>
-<?php common('settings-nav'); ?>
+<?php echo common('settings-nav'); ?>
 <?php echo flash(); ?>
 <table>
     <thead>
@@ -36,4 +36,4 @@ $doNotDelete = array('Dublin Core', 'Item Type Metadata', 'Omeka Image File', 'O
 
 </div>
 
-<?php foot(); ?>
+<?php echo foot(); ?>

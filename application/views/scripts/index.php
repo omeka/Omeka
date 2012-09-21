@@ -1,4 +1,4 @@
-<?php head(array('bodyid'=>'home')); ?>
+<?php echo head(array('bodyid'=>'home')); ?>
 
 <div id="primary">
 
@@ -74,4 +74,4 @@
 
 </div><!-- end secondary -->
 
-<?php foot(); ?>
+<?php echo foot(); ?>

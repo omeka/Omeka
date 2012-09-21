@@ -1,6 +1,6 @@
 <?php 
 $pageTitle = __('Edit Security Settings');
-head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
+echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
 <?php echo js_src('security'); ?>
 <script type="text/javascript">
 //<![CDATA[
@@ -30,10 +30,10 @@ jQuery(document).ready(function () {
 
 <div class="eight columns alpha">
 
-<?php common('settings-nav'); ?>
+<?php echo common('settings-nav'); ?>
 <?php echo flash(); ?>
 <?php echo $this->form; ?>
 			
 </div>
 
-<?php foot(); ?>
+<?php echo foot(); ?>

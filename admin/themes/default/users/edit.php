@@ -7,7 +7,7 @@
     }
     $userTitle = __('Edit User #%s', $user->id) . $userTitle;
 ?>
-<?php head(array('title'=> $userTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'users primary'));?>
+<?php echo head(array('title'=> $userTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'users primary'));?>
 
 
 <div class="seven columns alpha">
@@ -20,4 +20,4 @@
 
 </div>
 
-<?php foot();?>
+<?php echo foot();?>

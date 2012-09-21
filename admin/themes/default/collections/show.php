@@ -7,7 +7,7 @@
     }
     $collectionTitle = __('Edit Collection #%s', metadata('collection', 'id')) . $collectionTitle;
 ?>
-<?php head(array('title'=> $collectionTitle, 'bodyclass'=>'collections show')); ?>
+<?php echo head(array('title'=> $collectionTitle, 'bodyclass'=>'collections show')); ?>
 
             <div id="edit" class="three columns omega">
             
@@ -63,4 +63,4 @@
             
             </div>
         
-<?php foot(); ?>
+<?php echo foot(); ?>

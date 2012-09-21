@@ -1,12 +1,12 @@
 <?php
 $pageTitle = __('Browse Items') . ' ' . __('(%s total)', $total_records);
-head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=>'items primary browse-items')); ?>
+echo head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=>'items primary browse-items')); ?>
 
             <?php echo flash(); ?>
 
-            <?php if(display_search_filters()): ?>
+            <?php if ($searchFilters = search_filters()): ?>
                 <div class="seven columns alpha">
-                    <?php display_search_filters(); ?>
+                    <?php echo $searchFilters; ?>
                 </div>
             <?php endif; ?>
 
@@ -89,7 +89,7 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
                     }
                 });
             </script>
-            <?php echo pagination_links(array('partial_file' => common('pagination_control'))); ?>
+            <?php echo pagination_links(); ?>
             
             <form action="<?php echo html_escape(url('items/batch-edit')); ?>" method="post" accept-charset="utf-8">                
 
@@ -217,4 +217,4 @@ head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=
             
             <?php fire_plugin_hook('admin_append_to_items_browse_primary', array('items' => $items, 'view' => $this)); ?>
         
-        <?php foot(); ?>
+        <?php echo foot(); ?>

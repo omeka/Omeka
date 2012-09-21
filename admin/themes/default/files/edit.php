@@ -7,7 +7,7 @@
     }
     $fileTitle = __('Edit File #%s', metadata('file', 'id')) . $fileTitle;
 ?>
-<?php head(array('title' => $fileTitle, 'bodyclass'=>'files edit-file primary')); ?>
+<?php echo head(array('title' => $fileTitle, 'bodyclass'=>'files edit-file primary')); ?>
 <form method="post" id="editfile" action="<?php echo html_escape(url('files/edit/' . $file->id)); ?>" name="editFile">
     <?php include 'form.php'; ?>
     <div id="save" class="three columns omega">
@@ -48,4 +48,4 @@
         </div>
     </div>
 </form>
-<?php foot(); ?>
+<?php echo foot(); ?>

@@ -66,8 +66,8 @@ function simple_search_form($buttonText = null, $formProperties=array('id'=>'sim
     $formProperties['method'] = 'get';
     $html  = '<form ' . tag_attributes($formProperties) . '>' . "\n";
     $html .= '<fieldset>' . "\n\n";
-    $html .= __v()->formText('search', $searchQuery);
-    $html .= __v()->formSubmit('submit_search', $buttonText, array('class' => 'blue'));
+    $html .= get_view()->formText('search', $searchQuery);
+    $html .= get_view()->formSubmit('submit_search', $buttonText, array('class' => 'blue'));
     $html .= '</fieldset>' . "\n\n";
 
     // add hidden fields for the get parameters passed in uri
@@ -75,7 +75,7 @@ function simple_search_form($buttonText = null, $formProperties=array('id'=>'sim
     if (array_key_exists('query', $parsedUri)) {
         parse_str($parsedUri['query'], $getParams);
         foreach($getParams as $getParamName => $getParamValue) {
-            $html .= __v()->formHidden($getParamName, $getParamValue);
+            $html .= get_view()->formHidden($getParamName, $getParamValue);
         }
     }
 
@@ -110,10 +110,10 @@ function form_input_for_element($element, $record, $options = array())
     // If we have an array of Elements, loop through the form to display them.
     if (is_array($element)) {
         foreach ($element as $key => $e) {
-            $html .= __v()->elementForm($e, $record, $options);
+            $html .= get_view()->elementForm($e, $record, $options);
         }
     } else {
-        $html = __v()->elementForm($element, $record, $options);
+        $html = get_view()->elementForm($element, $record, $options);
     }
     return $html;
 }

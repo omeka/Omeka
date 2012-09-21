@@ -1,6 +1,6 @@
 <?php
 $pageTitle = __('Advanced Search');
-head(array('title' => $pageTitle,
+echo head(array('title' => $pageTitle,
            'bodyclass' => 'advanced-search',
            'bodyid' => 'advanced-search-page'));
 ?>
@@ -12,4 +12,4 @@ head(array('title' => $pageTitle,
         array('id'=>'advanced-search-form'))); ?>
 
 </div> <!-- Close 'primary' div. -->
-<?php foot();
+<?php echo foot();

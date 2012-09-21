@@ -8,7 +8,7 @@
     $collectionTitle = __('Edit Collection #%s', metadata('collection', 'id')) . $collectionTitle;
 ?>
 
-<?php head(array('title'=> $collectionTitle, 'bodyclass'=>'collections')); ?>
+<?php echo head(array('title'=> $collectionTitle, 'bodyclass'=>'collections')); ?>
 
         <form method="post">
             
@@ -39,4 +39,4 @@
 
         </form>
 
-<?php foot(); ?>
+<?php echo foot(); ?>

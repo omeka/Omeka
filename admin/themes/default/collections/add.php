@@ -1,6 +1,6 @@
 <?php 
 $pageTitle = __('Add a Collection');
-head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
+echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
         
             <form method="post">
                 <?php include 'form.php';?>
@@ -21,4 +21,4 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
                     </div>
                 </div>
             </form>
-<?php foot(); ?>
+<?php echo foot(); ?>

@@ -34,18 +34,18 @@ class Output_ItemRss2
         $headers = array();
         
         // How do we determine what title to give the RSS feed?        
-        $headers['title'] = settings('site_title');
+        $headers['title'] = option('site_title');
         
-        $headers['link'] = xml_escape(__v()->serverUrl(isset($_SERVER['REQUEST_URI'])));
+        $headers['link'] = xml_escape(get_view()->serverUrl(isset($_SERVER['REQUEST_URI'])));
         $headers['lastUpdate'] = time();
         $headers['charset'] = "UTF-8";    
         
         // Feed could have a description, where would it be stored ?
         // $headers['description'] = ""
         
-        $headers['author'] = settings('site_title');
-        $headers['email'] = settings('administrator_email');
-        $headers['copyright'] = settings('copyright');
+        $headers['author'] = option('site_title');
+        $headers['email'] = option('administrator_email');
+        $headers['copyright'] = option('copyright');
         
         //How do we determine how long a feed can be cached?
         //$headers['ttl'] = 

@@ -18,7 +18,7 @@ class Omeka_Helper_DisplayCssTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        // Load a view object to allow __v() to work.
+        // Load a view object to allow get_view() to work.
         $this->view = new Omeka_View;
         Zend_Registry::set('view', $this->view);
 

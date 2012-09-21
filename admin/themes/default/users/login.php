@@ -1,7 +1,7 @@
 <?php
 queue_js_file('login');
 $pageTitle = __('Log In');
-head(array('bodyclass' => 'login', 'title' => $pageTitle), $header);
+echo head(array('bodyclass' => 'login', 'title' => $pageTitle), $header);
 ?>
 <h1>Omeka</h1>
 
@@ -17,4 +17,4 @@ head(array('bodyclass' => 'login', 'title' => $pageTitle), $header);
 <?php echo link_to('users', 'forgot-password', __('(Lost your password?)')); ?>
 </p>
 
-<?php foot(array(), $footer); ?>
+<?php echo foot(array(), $footer); ?>

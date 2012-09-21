@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title><?php echo __('Omeka Admin'); ?>: <?php echo settings('site_title'); echo isset($title) ? ' | ' . strip_formatting($title) : ''; ?></title>
+    <title><?php echo __('Omeka Admin'); ?>: <?php echo option('site_title'); echo isset($title) ? ' | ' . strip_formatting($title) : ''; ?></title>
 
 <?php
     queue_css_file(array('style', 'layout', 'skeleton', 'jquery-ui'));
@@ -29,7 +29,7 @@
     <div class="container">
     
         <div id="site-title" class="two columns">
-            <?php echo link_to_home_page(settings('site_title'), array('target' => '_blank')); ?>
+            <?php echo link_to_home_page(option('site_title'), array('target' => '_blank')); ?>
         </div>
     
         <nav>

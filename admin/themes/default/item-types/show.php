@@ -7,7 +7,7 @@
     }
     $title = __('Item Type #%s', $item_type->id) . $type_name;
 ?>
-<?php head(array('title'=> $title,'bodyclass'=>'item-types'));?>
+<?php echo head(array('title'=> $title,'bodyclass'=>'item-types'));?>
     <div id="edit" class="three columns omega">
         <div class="panel">
         <?php if ( has_permission('ItemTypes','edit') ): ?>
@@ -52,4 +52,4 @@
     
     <?php fire_plugin_hook('admin_append_to_item_types_show_primary', array('item_type' => $item_type, 'view' => $this)); ?>
 </div>
-<?php foot();?>
+<?php echo foot();?>

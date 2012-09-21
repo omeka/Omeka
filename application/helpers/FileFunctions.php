@@ -58,7 +58,7 @@ function file_id3_metadata(array $options = array(), $file = null)
     if (!$file) {
         $file = get_current_record('file');
     }
-    return __v()->fileID3Metadata($file, $options);
+    return get_view()->fileID3Metadata($file, $options);
 }
 
 /**

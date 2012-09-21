@@ -7,7 +7,7 @@
     }
     $title = __('Edit Item Type #%s', $item_type->id) . $type_name;
 ?>
-<?php head(array('title'=> $title,'bodyclass'=>'item-types')); ?>
+<?php echo head(array('title'=> $title,'bodyclass'=>'item-types')); ?>
 
     <form id="edit-item-type-form" method="post" action="">
         <?php include 'form.php';?>
@@ -19,4 +19,4 @@
         </div>
     </form>
 
-<?php foot(); ?>
+<?php echo foot(); ?>

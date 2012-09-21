@@ -1,6 +1,6 @@
 <?php
 $pageTitle = __('Forgot Password');
-head(array('title' => $pageTitle, 'bodyclass' => 'login'), $header);
+echo head(array('title' => $pageTitle, 'bodyclass' => 'login'), $header);
 ?>
 <h1><?php echo $pageTitle; ?></h1>
 
@@ -25,4 +25,4 @@ head(array('title' => $pageTitle, 'bodyclass' => 'login'), $header);
 <span id="backtologin"><?php echo link_to('users', 'login', __('Back to Log In')); ?></span>
 </p>
 </div>
-<?php foot(array(), $footer); ?>
+<?php echo foot(array(), $footer); ?>

@@ -57,7 +57,7 @@ abstract class Omeka_Plugin_AbstractPlugin
      * <code>
      * array('admin_navigation_main', 
      *       'public_navigation_main', 
-     *       'changeSomething' => 'display_setting_site_title', 
+     *       'changeSomething' => 'display_option_site_title', 
      *       'displayItemDublinCoreTitle' => array('Display', 'Item', 'Dublin Core', 'Title'))
      * </code>
      *

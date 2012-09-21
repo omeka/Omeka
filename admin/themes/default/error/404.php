@@ -1,6 +1,6 @@
 <?php 
 $pageTitle = __('404: Page Not Found');
-head(array('bodyclass'=>'error404 primary', 'title'=> $pageTitle)); ?>
+echo head(array('bodyclass'=>'error404 primary', 'title'=> $pageTitle)); ?>
 <h1><?php echo $pageTitle; ?></h1>
 
 <div id="primary" class="filenotfound">
@@ -9,7 +9,7 @@ head(array('bodyclass'=>'error404 primary', 'title'=> $pageTitle)); ?>
     <p><?php echo __('You&#8217;ve tried to access a page that does not seem to exist. Sometimes this happens. Below is a quick break-down of the items, collections, and exhibits on this site.'); ?></p>
     <p>
     <?php 
-    $siteAdministratorEmail = '<a href="mailto:'. settings('administrator_email') . '">' . __('site administrator') . '</a>';
+    $siteAdministratorEmail = '<a href="mailto:'. option('administrator_email') . '">' . __('site administrator') . '</a>';
     echo __('If this does not help, try contacting the %s.', $siteAdministratorEmail); ?></p>
     <div id="recent-items">
         <h2><?php echo __('Recent Items'); ?></h2>
@@ -34,4 +34,4 @@ head(array('bodyclass'=>'error404 primary', 'title'=> $pageTitle)); ?>
 
 </div>
 
-<?php foot(); ?>
+<?php echo foot(); ?>

@@ -8,7 +8,7 @@
     $itemTitle = __('Edit Item #%s', metadata('item', 'id')) . $itemTitle;
 ?>
 
-<?php head(array('title'=> $itemTitle, 'bodyclass'=>'items edit primary','content_class' => 'vertical-nav'));?>
+<?php echo head(array('title'=> $itemTitle, 'bodyclass'=>'items edit primary','content_class' => 'vertical-nav'));?>
     <?php include 'form-tabs.php'; // Definitions for all the tabs for the form. ?>
 
     <form method="post" enctype="multipart/form-data" id="item-form" action="">
@@ -48,4 +48,4 @@
             </div>
         </div> <!-- end collection-form div -->
     </div> <!-- end save div -->
-<?php foot();?>
+<?php echo foot();?>

@@ -38,7 +38,7 @@ class Output_ItemAtom
         
         // feed/id
         $feedIdElement = $doc->createElement('id');
-        $feedIdElement->appendChild($doc->createTextNode(__v()->serverUrl(isset($_SERVER['REQUEST_URI']))));
+        $feedIdElement->appendChild($doc->createTextNode(get_view()->serverUrl(isset($_SERVER['REQUEST_URI']))));
         $feedElement->appendChild($feedIdElement);
         
         // feed/title
@@ -199,7 +199,7 @@ class Output_ItemAtom
         $feedLinks = array();
         
         // There is always a self link.
-        $feedLinks['self'] = __v()->serverUrl(isset($_SERVER['REQUEST_URI']));
+        $feedLinks['self'] = get_view()->serverUrl(isset($_SERVER['REQUEST_URI']));
         
         // If pagination is registered, assume item browse or search.
         if (Zend_Registry::isRegistered('pagination')) {

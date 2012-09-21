@@ -1,6 +1,6 @@
 <?php
 $pageTitle = __('Dashboard');
-head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?>
+echo head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?>
     
             <section id="stats">
             
@@ -74,4 +74,4 @@ head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?>
                 </div>
             </section>
     
-<?php foot(); ?>
+<?php echo foot(); ?>

@@ -1,6 +1,6 @@
 <?php 
 $pageTitle = __('Add an Item');
-head(array('title'=>$pageTitle,'content_class' => 'vertical-nav', 'bodyclass'=>'items primary'));?>
+echo head(array('title'=>$pageTitle,'content_class' => 'vertical-nav', 'bodyclass'=>'items primary'));?>
 
 <?php include('form-tabs.php'); ?>
         
@@ -43,4 +43,4 @@ head(array('title'=>$pageTitle,'content_class' => 'vertical-nav', 'bodyclass'=>'
                                     
         </form>
 
-<?php foot();?>
+<?php echo foot();?>

@@ -1,6 +1,6 @@
 <?php 
 $pageTitle = __('Browse Item Types') . ' ' . __('(%s total)', $total_records);
-head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
+echo head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
 
 <?php if (has_permission('ItemTypes', 'add')): ?>
 <?php echo link_to('item-types', 'add', __('Add an Item Type'), array('class'=>'add green button')); ?>
@@ -34,4 +34,4 @@ head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
 </table>
 <?php fire_plugin_hook('admin_append_to_item_types_browse_primary', array('item_types' => $this->item_types, 'view' => $this)); ?>
 </div>
-<?php foot(); ?>
+<?php echo foot(); ?>

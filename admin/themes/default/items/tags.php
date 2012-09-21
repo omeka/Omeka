@@ -1,6 +1,6 @@
 <?php
 $pageTitle = __('Browse Items by Tag');
-head(array('title'=>$pageTitle)); ?>
+echo head(array('title'=>$pageTitle)); ?>
 <div id="primary">
 <h2><?php echo $pageTitle; ?></h2>
 <?php if (count($tags)): ?>
@@ -9,4 +9,4 @@ head(array('title'=>$pageTitle)); ?>
     <p><?php echo __('There are no tags to display. You must first tag some items.'); ?></p>
 <?php endif; ?>
 </div>
-<?php foot(); ?>
+<?php echo foot(); ?>

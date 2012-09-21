@@ -1,6 +1,6 @@
 <?php
 $pageTitle = __('Configure the &#8220;%s&#8221; Plugin', $plugin->getDisplayName());
-head(array('title'=>$pageTitle, 'bodyclass'=>'plugins')); ?>
+echo head(array('title'=>$pageTitle, 'bodyclass'=>'plugins')); ?>
         
             <div class="six columns">
 
@@ -13,4 +13,4 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'plugins')); ?>
             
             </div>
 
-<?php foot(); ?>
+<?php echo foot(); ?>

@@ -30,7 +30,7 @@ function queue_js_file($file, $dir = 'javascripts')
         }
         return;
     }
-    __v()->headScript()->appendFile(src($file, $dir, 'js'));
+    get_view()->headScript()->appendFile(src($file, $dir, 'js'));
 }
 
 /**
@@ -46,7 +46,7 @@ function queue_js_file($file, $dir = 'javascripts')
  */
 function queue_js_string($string)
 {
-    __v()->headScript()->appendScript($string);
+    get_view()->headScript()->appendScript($string);
 }
 
 /**
@@ -74,7 +74,7 @@ function queue_css_file($file, $media = 'all', $conditional = false, $dir = 'css
         }
         return;
     }
-    __v()->headLink()->appendStylesheet(css_src($file, $dir), $media, $conditional);
+    get_view()->headLink()->appendStylesheet(css_src($file, $dir), $media, $conditional);
 }
 
 /**
@@ -100,7 +100,7 @@ function queue_css_string($string, $media = 'all', $conditional = false)
     if ($conditional) {
         $attrs['conditional'] = $conditional;
     }
-    __v()->headStyle()->appendStyle($string, $attrs);
+    get_view()->headStyle()->appendStyle($string, $attrs);
 }
 
 /**
@@ -117,7 +117,7 @@ function queue_css_string($string, $media = 'all', $conditional = false)
  */
 function head_js($includeDefaults = true)
 {
-    $headScript = __v()->headScript();
+    $headScript = get_view()->headScript();
 
     if ($includeDefaults) {
         $dir = 'javascripts';
@@ -151,7 +151,7 @@ function head_js($includeDefaults = true)
  */
 function head_css()
 {
-    return __v()->headLink() . __v()->headStyle();
+    return get_view()->headLink() . get_view()->headStyle();
 }
 
 /**
@@ -226,7 +226,7 @@ function src($file, $dir=null, $ext = null)
  */
 function physical_path_to($file)
 {
-    $view = __v();
+    $view = get_view();
     $paths = $view->getAssetPaths();
 
     foreach ($paths as $path) {
@@ -246,7 +246,7 @@ function physical_path_to($file)
  */
 function web_path_to($file)
 {
-    $view = __v();
+    $view = get_view();
     $paths = $view->getAssetPaths();
     foreach ($paths as $path) {
         list($physical, $web) = $path;

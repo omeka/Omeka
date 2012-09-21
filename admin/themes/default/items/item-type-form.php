@@ -15,5 +15,5 @@
 <input type="submit" name="change_type" id="change_type" value="<?php echo __('Pick this type'); ?>" />  
 </div>
 <div id="type-metadata-form">
-<?php common('change-type', compact('item'), 'items'); ?>
+<?php echo common('change-type', compact('item'), 'items'); ?>
 </div>

@@ -1,7 +1,7 @@
 <?php
 queue_js_file('login');
 $pageTitle = __('Log In');
-head(array('bodyclass' => 'login', 'title' => $pageTitle), $header);
+echo head(array('bodyclass' => 'login', 'title' => $pageTitle), $header);
 ?>
 <h1><?php echo $pageTitle; ?></h1>
 
@@ -13,4 +13,4 @@ head(array('bodyclass' => 'login', 'title' => $pageTitle), $header);
     
 <?php echo $this->form->setAction($this->url('users/login')); ?>
 
-<?php foot(array(), $footer); ?>
+<?php echo foot(array(), $footer); ?>

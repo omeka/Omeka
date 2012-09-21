@@ -13,7 +13,7 @@
  */
 function total_results()
 {
-    return __v()->total_records;
+    return get_view()->total_records;
 }
 
 /**

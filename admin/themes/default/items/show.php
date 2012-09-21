@@ -8,7 +8,7 @@
     $itemTitle = __('Item #%s', metadata('item', 'id')) . $itemTitle;
 ?>
 
-<?php head(array('title' => $itemTitle, 'bodyclass'=>'items show')); ?>
+<?php echo head(array('title' => $itemTitle, 'bodyclass'=>'items show')); ?>
 
 <?php echo js_src('items'); ?>
         
@@ -59,7 +59,7 @@
     <div class="tags panel">
         <h4><?php echo __('Tags'); ?></h4>
         <div id="tag-cloud">
-            <?php common('tag-list', compact('item'), 'items'); ?>
+            <?php echo common('tag-list', compact('item'), 'items'); ?>
         </div>
      </div>
     <?php endif; ?>
@@ -99,4 +99,4 @@
 
 <?php fire_plugin_hook('admin_append_to_items_show_secondary', array('item' => $item, 'view' => $this)); ?>
 </div>        
-<?php foot();?>
+<?php echo foot();?>

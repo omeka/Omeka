@@ -1,6 +1,6 @@
 <?php 
 $pageTitle = __('Add Item Type');
-head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
+echo head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
 
 <div id="primary">
     <form method="post" action="">
@@ -10,4 +10,4 @@ head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
         </div>
     </form>
 </div>
-<?php foot(); ?>
+<?php echo foot(); ?>

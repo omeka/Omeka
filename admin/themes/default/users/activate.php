@@ -1,6 +1,6 @@
 <?php
 $pageTitle = __('User Activation');
-head(array('title' => $pageTitle), $header);
+echo head(array('title' => $pageTitle), $header);
 ?>
 
 
@@ -35,4 +35,4 @@ Your username is: <?php echo html_escape($user->username); ?></h2>
 
 </div>
 
-<?php foot(array(), $footer); ?>
+<?php echo foot(array(), $footer); ?>

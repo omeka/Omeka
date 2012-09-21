@@ -1,4 +1,4 @@
-<?php head(array('title'=>metadata('collection', 'Name'), 'bodyid'=>'collections', 'bodyclass' => 'show')); ?>
+<?php echo head(array('title'=>metadata('collection', 'Name'), 'bodyid'=>'collections', 'bodyclass' => 'show')); ?>
 
 <div id="primary">
     <h1><?php echo metadata('collection', 'Name'); ?></h1>
@@ -51,4 +51,4 @@
 
 </div><!-- end primary -->
 
-<?php foot(); ?>
+<?php echo foot(); ?>

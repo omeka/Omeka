@@ -1,6 +1,6 @@
 <?php
 $pageTitle = __('Search Omeka');
-head(array('title' => $pageTitle));
+echo head(array('title' => $pageTitle));
 ?>
 <div id="primary">
     <table>
@@ -20,4 +20,4 @@ head(array('title' => $pageTitle));
         </tbody>
     </table>
 </div>
-<?php foot(); ?>
+<?php echo foot(); ?>

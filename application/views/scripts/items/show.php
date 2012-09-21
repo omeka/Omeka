@@ -1,4 +1,4 @@
-<?php head(array('title' => metadata('item', array('Dublin Core', 'Title')), 'bodyid'=>'items','bodyclass' => 'show')); ?>
+<?php echo head(array('title' => metadata('item', array('Dublin Core', 'Title')), 'bodyid'=>'items','bodyclass' => 'show')); ?>
 
 <div id="primary">
 
@@ -43,4 +43,4 @@
 
 </div><!-- end primary -->
 
-<?php foot(); ?>
+<?php echo foot(); ?>

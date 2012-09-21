@@ -1,6 +1,6 @@
 <?php
 $pageTitle = __('Browse Themes');
-head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'themes primary'));?>
+echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'themes primary'));?>
 
                <?php echo flash(); ?>
               
@@ -49,4 +49,4 @@ head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>
                 </div>
             </form>
 
-<?php foot(); ?>
+<?php echo foot(); ?>

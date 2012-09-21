@@ -30,7 +30,7 @@ function custom_display_logo()
         if ($logo) {
             $storage = Zend_Registry::get('storage');
             $uri = $storage->getUri($storage->getPathByType($logo, 'theme_uploads'));
-            return '<img src="'.$uri.'" title="'.settings('site_title').'" />';
+            return '<img src="'.$uri.'" title="'.option('site_title').'" />';
         }
     }
     return null;
@@ -98,7 +98,7 @@ function admin_bar() {
  * Styles for admin bar.
  */
 function admin_bar_css() {
-    __v()->headLink()->appendStylesheet('http://fonts.googleapis.com/css?family=Arvo:400', 'screen');
+    get_view()->headLink()->appendStylesheet('http://fonts.googleapis.com/css?family=Arvo:400', 'screen');
     queue_css_file('admin-bar', 'screen');
 }
 

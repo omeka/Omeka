@@ -1,6 +1,6 @@
 <?php
 $pageTitle = __('Browse Items');
-head(array('title'=>$pageTitle,'bodyid'=>'items','bodyclass'=>'tags'));
+echo head(array('title'=>$pageTitle,'bodyid'=>'items','bodyclass'=>'tags'));
 ?>
 
 <div id="primary">
@@ -15,4 +15,4 @@ head(array('title'=>$pageTitle,'bodyid'=>'items','bodyclass'=>'tags'));
 
 </div><!-- end primary -->
 
-<?php foot(); ?>
+<?php echo foot(); ?>

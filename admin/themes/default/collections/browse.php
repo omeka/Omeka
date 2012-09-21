@@ -1,6 +1,6 @@
 <?php 
 $pageTitle = __('Browse Collections') . ' ' .  __('(%s total)', $total_records);
-head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
+echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
 
     <?php echo flash(); ?>
     <?php if (total_records('Collection') > 0): ?>
@@ -78,4 +78,4 @@ head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
     
     <?php fire_plugin_hook('admin_append_to_collections_browse_primary', array('collections' => $collections, 'view' => $this)); ?>
 </div>      
-<?php foot(); ?>
+<?php echo foot(); ?>

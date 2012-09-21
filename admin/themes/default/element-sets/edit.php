@@ -1,8 +1,8 @@
 <?php
 $pageTitle = __('Edit Elements');
-head(array('title'=> $pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'element-sets primary'));
+echo head(array('title'=> $pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'element-sets primary'));
 ?>
-<?php common('settings-nav'); ?>
+<?php echo common('settings-nav'); ?>
 <?php echo flash(); ?>
 <h2><?php echo __($element_set->name); ?></h2>
 <p><?php echo __($element_set->description); ?></p>
@@ -29,4 +29,4 @@ head(array('title'=> $pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=
     </table>
 <?php echo $this->formSubmit('submit_edit_elements', 'Edit Elements'); ?>
 </form>
-<?php foot(); ?>
+<?php echo foot(); ?>

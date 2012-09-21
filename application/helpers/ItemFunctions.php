@@ -117,7 +117,7 @@ function item_citation($item = null)
         $citation .= "&#8220;$title,&#8221; ";
     }
     
-    $siteTitle = strip_formatting(settings('site_title'));
+    $siteTitle = strip_formatting(option('site_title'));
     if ($siteTitle) {
         $citation .= "<em>$siteTitle</em>, ";
     }
@@ -243,7 +243,7 @@ function item_image($imageType, $props = array(), $index = 0, $item = null)
  */
 function items_search_form($props=array(), $formActionUri = null)
 {
-    return __v()->partial('items/advanced-search-form.php', array('formAttributes'=>$props, 'formActionUri'=>$formActionUri));
+    return get_view()->partial('items/advanced-search-form.php', array('formAttributes'=>$props, 'formActionUri'=>$formActionUri));
 }
 
 /**

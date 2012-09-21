@@ -14,7 +14,7 @@
  * @access private
  * @return Omeka_View
  */
-function __v()
+function get_view()
 {
     return Zend_Registry::get('view');
 }
@@ -42,7 +42,7 @@ function auto_discovery_link_tags() {
  */
 function common($file, $vars = array(), $dir = 'common')
 {
-    echo __v()->partial($dir . '/' . $file . '.php', $vars);
+    return get_view()->partial($dir . '/' . $file . '.php', $vars);
 }
 
 /**
@@ -55,7 +55,7 @@ function common($file, $vars = array(), $dir = 'common')
  */
 function head($vars = array(), $file = 'header')
 {
-    common($file, $vars);
+    return common($file, $vars);
 }
 
 /**
@@ -66,7 +66,7 @@ function head($vars = array(), $file = 'header')
  * @return void
  */
 function foot($vars = array(), $file = 'footer') {
-    common($file, $vars);
+    return common($file, $vars);
 }
 
 /**
@@ -76,7 +76,7 @@ function foot($vars = array(), $file = 'footer') {
  */
 function flash()
 {
-    return __v()->flash();
+    return get_view()->flash();
 }
 
 /**
@@ -84,16 +84,16 @@ function flash()
  * any option that would be retrieved with get_option().
  *
  * Content for any specific option can be filtered by using a filter named
- * 'display_setting_(option)' where (option) is the name of the option, e.g.
- * 'display_setting_site_title'.
+ * 'display_option_(option)' where (option) is the name of the option, e.g.
+ * 'display_option_site_title'.
  *
  * @uses get_option()
  * @since 0.9
  * @return string
  */
-function settings($name)
+function option($name)
 {
-    $name = apply_filters("display_setting_$name", get_option($name));
+    $name = apply_filters("display_option_$name", get_option($name));
     $name = html_escape($name);
     return $name;
 }
@@ -140,7 +140,7 @@ function total_records($recordType)
  */
 function loop($recordsVar, $records = null)
 {
-    return __v()->loopRecords($recordsVar, $records);
+    return get_view()->loopRecords($recordsVar, $records);
 }
 
 /**
@@ -151,7 +151,7 @@ function loop($recordsVar, $records = null)
  */
 function set_loop_records($recordsVar, array $records)
 {
-    __v()->setLoopRecords($recordsVar, $records);
+    get_view()->setLoopRecords($recordsVar, $records);
 }
 
 /**
@@ -162,7 +162,7 @@ function set_loop_records($recordsVar, array $records)
  */
 function get_loop_records($recordsVar, $throwException = true)
 {
-    return __v()->getLoopRecords($recordsVar, $throwException);
+    return get_view()->getLoopRecords($recordsVar, $throwException);
 }
 
 /**
@@ -173,7 +173,7 @@ function get_loop_records($recordsVar, $throwException = true)
  */
 function has_loop_records($recordsVar)
 {
-    return (bool) __v()->getLoopRecords($recordsVar, false);
+    return (bool) get_view()->getLoopRecords($recordsVar, false);
 }
 
 /**
@@ -186,7 +186,7 @@ function has_loop_records($recordsVar)
  */
 function set_current_record($recordVar, Omeka_Record_AbstractRecord $record, $setPreviousRecord = false)
 {
-    __v()->setCurrentRecord($recordVar, $record, $setPreviousRecord);
+    get_view()->setCurrentRecord($recordVar, $record, $setPreviousRecord);
 }
 
 /**
@@ -200,7 +200,7 @@ function set_current_record($recordVar, Omeka_Record_AbstractRecord $record, $se
  */
 function get_current_record($recordVar, $throwException = true)
 {
-    return __v()->getCurrentRecord($recordVar, $throwException);
+    return get_view()->getCurrentRecord($recordVar, $throwException);
 }
 
 /**
@@ -212,7 +212,7 @@ function get_current_record($recordVar, $throwException = true)
  */
 function get_record_by_id($recordVar, $recordId)
 {
-    return __v()->getRecordById($recordVar, $recordId);
+    return get_view()->getRecordById($recordVar, $recordId);
 }
 
 /**
@@ -220,7 +220,7 @@ function get_record_by_id($recordVar, $recordId)
  *
  * @return array A sorted list of contexts.
  */
-function current_action_contexts()
+function get_current_action_contexts()
 {
     $actionName = Zend_Controller_Front::getInstance()->getRequest()->getActionName();
     $contexts = Zend_Controller_Action_HelperBroker::getStaticHelper('contextSwitch')->getActionContexts($actionName);
@@ -238,7 +238,7 @@ function current_action_contexts()
  */
 function output_format_list($list = true, $delimiter = ' | ')
 {
-    $actionContexts = current_action_contexts();
+    $actionContexts = get_current_action_contexts();
     $html = '';
 
     // Do not display the list if there are no output formats available in the
@@ -320,14 +320,14 @@ function body_tag($attributes = array())
 }
 
 /**
- * Print a list of the current search filters in use.
+ * Return a list of the current search filters in use.
  *
  * @since 2.0
  * @params array $params Optional params to replace the ones read from the request.
  */
-function display_search_filters(array $params = null)
+function search_filters(array $params = null)
 {
-    echo __v()->searchFilters($params);
+    return get_view()->searchFilters($params);
 }
 
 /**
@@ -345,7 +345,7 @@ function display_search_filters(array $params = null)
  */
 function metadata($record, $metadata, $options = array())
 {
-    return __v()->recordMetadata($record, $metadata, $options);
+    return get_view()->recordMetadata($record, $metadata, $options);
 }
 
 /**
@@ -361,5 +361,5 @@ function metadata($record, $metadata, $options = array())
  */
 function all_element_texts($record, $options = array())
 {
-    return __v()->recordMetadataList($record, $options);
+    return get_view()->recordMetadataList($record, $options);
 }
