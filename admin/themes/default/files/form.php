@@ -27,7 +27,7 @@ jQuery(document).bind('omeka:elementformload', function (event) {
     <?php echo flash(); ?>
     <div id="file-metadata">
         <div id="fullsize-file">
-            <?php echo display_file($file, array('imageSize' => 'fullsize')); ?>
+            <?php echo file_markup($file, array('imageSize' => 'fullsize')); ?>
         </div> <!-- end fullsize-file div -->
     
         <?php foreach ($elementSets as $elementSet): ?>

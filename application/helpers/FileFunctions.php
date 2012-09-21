@@ -9,17 +9,16 @@
  */
 
 /**
- * @see display_files()
- * @uses display_files()
+ * @uses files_markup()
  * @param File $file One File record.
  * @param array $props
  * @param array $wrapperAttributes Optional XHTML attributes for the div wrapper
  * for the displayed file.  Defaults to array('class'=>'item-file').
  * @return string HTML
  */
-function display_file($file, array $props=array(), $wrapperAttributes = array('class'=>'item-file'))
+function file_markup($file, array $props=array(), $wrapperAttributes = array('class'=>'item-file'))
 {
-    return display_files(array($file), $props, $wrapperAttributes);
+    return files_markup(array($file), $props, $wrapperAttributes);
 }
 
 /**
@@ -36,7 +35,7 @@ function display_file($file, array $props=array(), $wrapperAttributes = array('c
  * div.
  * @return string HTML
  */
-function display_files($files, array $props = array(), $wrapperAttributes = array('class'=>'item-file'))
+function files_markup($files, array $props = array(), $wrapperAttributes = array('class'=>'item-file'))
 {
     $helper = new Omeka_View_Helper_Media;
     $output = '';
@@ -69,7 +68,7 @@ function file_id3_metadata(array $options = array(), $file = null)
  * @param integer $num The maximum number of recent files to return
  * @return array
  */
-function recent_files($num = 10)
+function get_recent_files($num = 10)
 {
     return get_records('File', array('sort_field' => 'added', 'sort_dir' => 'd'), $num);
 }

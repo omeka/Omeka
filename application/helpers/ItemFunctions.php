@@ -10,7 +10,7 @@
 
 /**
  * @since 0.10
- * @uses display_files()
+ * @uses files_markup()
  * @uses get_current_record()
  * @param array $options
  * @param array $wrapperAttributes
@@ -23,7 +23,7 @@ function display_files_for_item($options = array(), $wrapperAttributes = array('
         $item = get_current_record('item');
     }
 
-    return display_files($item->Files, $options, $wrapperAttributes);
+    return files_markup($item->Files, $options, $wrapperAttributes);
 }
 
 /**

@@ -72,7 +72,7 @@
     <?php echo flash(); ?>            
     
     <div id="fullsize-file">
-        <?php echo display_file($file, array('imageSize' => 'fullsize'), array('class' => 'panel')); ?>
+        <?php echo file_markup($file, array('imageSize' => 'fullsize'), array('class' => 'panel')); ?>
     </div>
     
     <?php echo all_element_texts('file'); ?>
