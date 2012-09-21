@@ -122,19 +122,29 @@ function display_form_input_for_element($element, $record, $options = array())
  * Used within the admin theme (and potentially within plugins) to display a form
  * for a record for a given element set.
  *
- * @since 0.10
  * @uses display_form_input_for_element()
  * @param Omeka_Record_AbstractRecord $record
- * @param string $elementSetName The name of the element set.
+ * @param string $elementSetName The name of the element set or 'Item Type Metadata' for an item's item type data
  * @return string
  */
 function display_element_set_form($record, $elementSetName)
 {
-    $elements = get_db()->getTable('Element')->findBySet($elementSetName);
-    $html = '';
-    foreach ($elements as $key => $element) {
-       $html .= display_form_input_for_element($element, $record);
+    $recordType = get_class($record);
+    
+    if ($recordType == 'Item' && $elementSetName == 'Item Type Metadata') {
+        $elements = $record->getItemTypeElements();
+    } else {
+        $elements = get_db()->getTable('Element')->findBySet($elementSetName);
     }
+    $filterName = array('Form', $recordType, $elementSetName);
+    $elements = apply_filters(
+        $filterName, 
+        $elements,
+        array('recordType' => $recordType, 'record' => $record, 'elementSetName' => $elementSetName)
+    );
+            
+    $html = display_form_input_for_element($elements, $record);
+
     return $html;
 }
 
