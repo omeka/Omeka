@@ -122,21 +122,58 @@ function display_form_input_for_element($element, $record, $options = array())
  * Used within the admin theme (and potentially within plugins) to display a form
  * for a record for a given element set.
  *
- * @since 0.10
  * @uses display_form_input_for_element()
+ * @param String $recordType
  * @param Omeka_Record_AbstractRecord $record
  * @param string $elementSetName The name of the element set.
  * @return string
  */
-function display_element_set_form($record, $elementSetName)
+function display_element_set_form($recordType, $record, $elementSetName)
 {
     $elements = get_db()->getTable('Element')->findBySet($elementSetName);
+        
+    $filterName = array('Form', $recordType, $elementSetName);
+    $elements = apply_filters(
+        $filterName, 
+        $elements,
+        array('recordType' => $recordType, 'record' => $record, 'elementSetName' => $elementSetName)
+    );
+            
     $html = '';
     foreach ($elements as $key => $element) {
        $html .= display_form_input_for_element($element, $record);
     }
     return $html;
 }
+
+
+/**
+ * Used within the admin theme (and potentially within plugins) to display a form
+ * for an item's item type
+ *
+ * @uses display_form_input_for_element()
+ * @param Item $item
+ * @return string
+ */
+function display_item_type_elements_for_item_form($item)
+{    
+    $itemType = $item->getItemType();
+    $filterName = array('Form', 'ItemTypeForItem', $itemType->name);
+    $elements = $item->getItemTypeElements();
+    $elements = apply_filters(
+        $filterName,
+        $elements,
+        array('item' => $item)
+    );
+    
+    //Loop through all of the element records for the item's item type
+    $html = '';
+    foreach ($elements as $key => $element) {
+       $html .= display_form_input_for_element($element, $item);
+    }    
+    return $html;
+}
+
 
 /**
  * Adds the "Select Below" or other label option to a set of select
