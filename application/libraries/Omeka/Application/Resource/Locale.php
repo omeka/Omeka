@@ -66,17 +66,17 @@ class Omeka_Application_Resource_Locale extends Zend_Application_Resource_Locale
             'locale' => $locale,
             'adapter' => 'gettext',
             'disableNotices' => true,
-            'content' => LANGUAGES_DIR . "/$locale.mo",
             'cache' => $cache
         );
 
-        $translateResource = new Zend_Application_Resource_Translate($options);
-
-        try {
-            $translateResource->getTranslate();
-        } catch (Zend_Translate_Exception $e) {
-            // Do nothing, allow the user to set a locale without a
-            // translation.
+        $translatePath = LANGUAGES_DIR . "/$locale.mo";
+        if (is_readable($translatePath)) {
+            $options['content'] = $translatePath;
+        } else {
+            $options['content'] = '';
         }
+
+        $translateResource = new Zend_Application_Resource_Translate($options);
+        $translateResource->getTranslate();
     }
 }
