@@ -17,7 +17,7 @@
  * @param Item|null $item Check for this specific item record (current item if null).
  * @return string HTML
  */
-function display_files_for_item($options = array(), $wrapperAttributes = array('class'=>'item-file'), $item = null)
+function files_for_item($options = array(), $wrapperAttributes = array('class'=>'item-file'), $item = null)
 {
     if (!$item) {
         $item = get_current_record('item');
@@ -37,10 +37,10 @@ function display_files_for_item($options = array(), $wrapperAttributes = array('
  * none with images.
  * @return string HTML
  */
-function display_random_featured_item($withImage = null)
+function random_featured_item($withImage = null)
 {
     $html = '<h2>'. __('Featured Item') .'</h2>';
-    $html .= display_random_featured_items('1', $withImage);
+    $html .= random_featured_items('1', $withImage);
     return $html;
 }
 
@@ -282,7 +282,7 @@ function item_thumbnail($props = array(), $index = 0, $item = null)
  * @param integer $num The maximum number of recent items to return
  * @return array
  */
-function recent_items($num = 10)
+function get_recent_items($num = 10)
 {
     return get_db()->getTable('Item')->findBy(array('sort_field' => 'added', 'sort_dir' => 'd'), $num);
 }
@@ -296,9 +296,9 @@ function recent_items($num = 10)
  * @param boolean|null $hasImage
  * @return Item
  */
-function random_featured_item($hasImage=null)
+function get_random_featured_item($hasImage=null)
 {
-    $item = random_featured_items('1', $hasImage);
+    $item = get_random_featured_items('1', $hasImage);
     return $item[0];
 }
 
@@ -310,16 +310,16 @@ function random_featured_item($hasImage=null)
  * @param boolean|null $hasImage
  * @return array $items
  */
-function random_featured_items($num = 5, $hasImage = null)
+function get_random_featured_items($num = 5, $hasImage = null)
 {
     return get_records('Item', array('featured'=>1, 'sort_field' => 'random', 'hasImage' => $hasImage), $num);
 }
 
-function display_random_featured_items($num = 5, $hasImage = null)
+function random_featured_items($num = 5, $hasImage = null)
 {
     $html = '';
 
-    if ($randomFeaturedItems = random_featured_items($num, $hasImage)) {
+    if ($randomFeaturedItems = get_random_featured_items($num, $hasImage)) {
         foreach ($randomFeaturedItems as $randomItem) {
             $itemTitle = metadata($randomItem, array('Dublin Core', 'Title'));
 

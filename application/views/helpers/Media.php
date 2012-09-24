@@ -573,7 +573,7 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
      * 
      * Example usage:
      * 
-     * echo display_files_for_item(array(
+     * echo files_for_item(array(
      *            'showFilename'=>false,
      *            'linkToFile'=>false,
      *            'linkAttributes'=>array('rel'=>'lightbox'),

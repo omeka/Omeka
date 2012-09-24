@@ -6,7 +6,7 @@
  */
 
 /**
- * Tests random_featured_items()
+ * Tests get_random_featured_items()
  * in helpers/ItemFunctions.php
  *
  * @package Omeka
@@ -21,10 +21,10 @@ class Omeka_Helper_RandomFeaturedItemsTest extends Omeka_Test_AppTestCase
     
     public function testRandomFeaturedItems()
     {   
-        $randomFeaturedItems = random_featured_items();
+        $randomFeaturedItems = get_random_featured_items();
         $this->assertEquals(5, count($randomFeaturedItems));
         
-        $randomFeaturedItemsWithImages = random_featured_items('5', true);
+        $randomFeaturedItemsWithImages = get_random_featured_items('5', true);
         $this->assertEquals(5, count($randomFeaturedItemsWithImages));
         
         foreach ($randomFeaturedItemsWithImages as $randomItem) {

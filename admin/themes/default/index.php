@@ -57,7 +57,7 @@ echo head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?
                 <h2 class="serif">Recent Items</h2>
                     <?php 
                      
-                        $items = recent_items(5); 
+                        $items = get_recent_items(5); 
                         set_loop_records('items', $items);
                      
                         foreach (loop('items') as $item):

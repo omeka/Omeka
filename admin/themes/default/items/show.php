@@ -91,7 +91,7 @@
     <?php echo flash(); ?>            
         <?php if (item_has_files()): ?>
         <div id="item-images">
-        <?php echo display_files_for_item(array('imageSize' => 'square_thumbnail'), array('class' => 'admin-thumb panel')); ?> 
+        <?php echo files_for_item(array('imageSize' => 'square_thumbnail'), array('class' => 'admin-thumb panel')); ?> 
         </div>
         <?php endif; ?>
     <?php echo all_element_texts('item'); ?>
