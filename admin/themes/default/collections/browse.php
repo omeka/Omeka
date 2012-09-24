@@ -9,7 +9,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
         <?php endif; ?>
         <div class="pagination"><?php echo pagination_links(); ?></div>
       <?php if (has_loop_records('collections')): ?>
-        <table id="collections" class="full" cellspacing="0" cellpadding="0">
+        <table id="collections" cellspacing="0" cellpadding="0">
             <thead>
                 <tr>
                 <?php browse_headings(array(
