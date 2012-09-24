@@ -53,6 +53,13 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
     protected $_returnType = self::RETURN_HTML;
 
     /**
+     * Path for the view partial.
+     *
+     * @var string
+     */
+    protected $_partial = 'common/record-metadata.php';
+
+    /**
      * Get the record metadata list.
      *
      * @param Omeka_Record_AbstractRecord|string $record Record to retrieve
@@ -115,6 +122,11 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
         if (array_key_exists('return_type', $options)) {
             $this->_returnType = (string)$options['return_type'];
         }
+
+        if (array_key_exists('partial', $options)) {
+            $this->_partial = (string)$options['partial'];
+        }
+
     }
 
     /**
@@ -286,15 +298,11 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
     /**
      * Load a view partial to display the data.
      *
-     * @todo Could pass the name of the partial in as an argument rather than
-     * hardcoding it.  That would allow us to use arbitrary partials for
-     * purposes such as repackaging the data for RSS/XML or other data formats.
-     *
      * @param array $vars Variables to pass to the partial.
      * @return string
      */
     protected function _loadViewPartial($vars = array())
     {
-        return $this->view->partial('common/record-metadata.php', $vars);
+        return $this->view->partial($this->_partial, $vars);
     }
 }
