@@ -359,7 +359,7 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
         }
 
         if ($options['linkToMetadata']) {
-            $html = link_to_file_metadata((array)$options['linkAttributes'],
+            $html = link_to_file_show((array)$options['linkAttributes'],
                   $html, $file);
         } else if (($linkToFile = $options['linkToFile'])) {
             // If you've manually specified a derivative type to link

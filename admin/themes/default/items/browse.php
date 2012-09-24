@@ -97,7 +97,7 @@ echo head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodycl
                     <?php if (has_permission('Items', 'add')): ?>
                     <a href="<?php echo html_escape(url('items/add')); ?>" class="add button small green"><?php echo __('Add an Item'); ?></a>
                     <?php endif; ?>
-                    <?php echo link_to_advanced_search(__('Advanced Search'), array('id' => 'advanced-search-link', 'class' => 'small blue button')); ?>
+                    <?php echo link_to_item_search(__('Advanced Search'), array('id' => 'advanced-search-link', 'class' => 'small blue button')); ?>
                     <?php if (has_permission('Items', 'edit')): ?>
                     <input type="submit" class="edit-items small blue button" name="submit-batch-edit" value="<?php echo __('Edit'); ?>" />
                     <?php endif; ?>
@@ -176,7 +176,7 @@ echo head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodycl
                     <?php if (has_permission('Items', 'add')): ?>
                     <a href="<?php echo html_escape(url('items/add')); ?>" class="add button small green"><?php echo __('Add an Item'); ?></a>
                     <?php endif; ?>
-                    <?php echo link_to_advanced_search(__('Advanced Search'), array('id' => 'advanced-search-link', 'class' => 'small blue button')); ?>
+                    <?php echo link_to_item_search(__('Advanced Search'), array('id' => 'advanced-search-link', 'class' => 'small blue button')); ?>
                     <?php if (has_permission('Items', 'edit')): ?>
                     <input type="submit" class="edit-items small blue button" name="submit-batch-edit" value="<?php echo __('Edit'); ?>" />
                     <?php endif; ?>
@@ -206,7 +206,7 @@ echo head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodycl
 
                 <?php else: ?>
                     
-                    <p><?php echo __('The query searched %s items and returned no results.', total_records('Item')); ?> <?php echo __('Would you like to %s?', link_to_advanced_search(__('refine your search'))); ?></p>
+                    <p><?php echo __('The query searched %s items and returned no results.', total_records('Item')); ?> <?php echo __('Would you like to %s?', link_to_item_search(__('refine your search'))); ?></p>
     
                 
                 <?php endif; ?>

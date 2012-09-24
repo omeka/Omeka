@@ -37,8 +37,8 @@
     <?php fire_plugin_hook('public_append_to_items_show', array('view' => $this)); ?>
 
     <ul class="item-pagination navigation">
-        <li id="previous-item" class="previous"><?php echo link_to_previous_item(); ?></li>
-        <li id="next-item" class="next"><?php echo link_to_next_item(); ?></li>
+        <li id="previous-item" class="previous"><?php echo link_to_previous_item_show(); ?></li>
+        <li id="next-item" class="next"><?php echo link_to_next_item_show(); ?></li>
     </ul>
 
 </div><!-- end primary -->

@@ -31,7 +31,7 @@
             <?php fire_plugin_hook('public_theme_page_header'); ?>
             <div id="search-container">
                 <?php echo simple_search_form(); ?>
-                <?php echo link_to_advanced_search(); ?>
+                <?php echo link_to_item_search(); ?>
             </div><!-- end search -->
 
             <div id="site-title"><?php echo link_to_home_page(custom_display_logo()); ?></div>

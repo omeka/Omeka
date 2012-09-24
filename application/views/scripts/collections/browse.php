@@ -25,7 +25,7 @@ echo head(array('title'=>$pageTitle,'bodyid'=>'collections','bodyclass' => 'brow
         </div>
         <?php endif; ?>
 
-        <p class="view-items-link"><?php echo link_to_browse_items(__('View the items in %s', metadata('collection', 'Name')), array('collection' => metadata('collection', 'id'))); ?></p>
+        <p class="view-items-link"><?php echo link_to_items_browse(__('View the items in %s', metadata('collection', 'Name')), array('collection' => metadata('collection', 'id'))); ?></p>
 
         <?php fire_plugin_hook('public_append_to_collections_browse_each', array('view' => $this)); ?>
 

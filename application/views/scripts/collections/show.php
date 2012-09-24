@@ -19,7 +19,7 @@
     </div><!-- end collectors -->
     <?php endif; ?>
 
-    <p class="view-items-link"><?php echo link_to_browse_items(__('View the items in %s', metadata('collection', 'Name')), array('collection' => metadata('collection', 'id'))); ?></p>
+    <p class="view-items-link"><?php echo link_to_items_browse(__('View the items in %s', metadata('collection', 'Name')), array('collection' => metadata('collection', 'id'))); ?></p>
 
     <div id="collection-items">
         <h2><?php echo __('Items in the %s Collection', metadata('collection', 'Name')); ?></h2>

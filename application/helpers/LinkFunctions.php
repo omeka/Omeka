@@ -57,7 +57,7 @@ function link_to($record, $action=null, $text=null, $props = array(), $queryPara
  * @param string $uri Optional Action for the form.  Defaults to 'items/browse'.
  * @return string
  */
-function link_to_advanced_search($text = null, $props = array(), $uri=null)
+function link_to_item_search($text = null, $props = array(), $uri=null)
 {
     if (!$text) {
         $text = __('Advanced Search');
@@ -82,7 +82,7 @@ function link_to_advanced_search($text = null, $props = array(), $uri=null)
  * @param array $linkProperties Optional XHTML attributes for the link.
  * @return string HTML
  */
-function link_to_browse_items($text, $browseParams = array(), $linkProperties = array())
+function link_to_items_browse($text, $browseParams = array(), $linkProperties = array())
 {
     return link_to('items', 'browse', $text, $linkProperties, $browseParams);
 }
@@ -155,7 +155,7 @@ function link_to_items_with_item_type($text = null, $props = array(), $action = 
  * @param File
  * @return string
  */
-function link_to_file_metadata($attributes = array(), $text = null, $file = null)
+function link_to_file_show($attributes = array(), $text = null, $file = null)
 {
     if (!$file) {
         $file = get_current_record('file');
@@ -218,7 +218,7 @@ function link_to_items_rss($text = null, $params=array())
  * @uses link_to()
  * @return string
  */
-function link_to_next_item($text=null, $props=array())
+function link_to_next_item_show($text=null, $props=array())
 {
     if (!$text) {
         $text = __("Next Item &rarr;");
@@ -231,10 +231,10 @@ function link_to_next_item($text=null, $props=array())
 }
 
 /**
- * @see link_to_next_item()
+ * @see link_to_next_item_show()
  * @return string
  */
-function link_to_previous_item($text=null, $props=array())
+function link_to_previous_item_show($text=null, $props=array())
 {
     if (!$text) {
         $text = __('&larr; Previous Item');

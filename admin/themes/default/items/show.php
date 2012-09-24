@@ -15,14 +15,14 @@
 <div id="edit" class="three columns omega">
     
     <ul class="pagination">
-        <?php if (link_to_previous_item()): ?>
+        <?php if (link_to_previous_item_show()): ?>
         <li id="previous-item" class="previous">
-            <?php echo link_to_previous_item('Prev Item'); ?>
+            <?php echo link_to_previous_item_show('Prev Item'); ?>
         </li>
         <?php endif; ?>
-        <?php if (link_to_next_item()): ?>
+        <?php if (link_to_next_item_show()): ?>
         <li id="next-item" class="next">
-            <?php echo link_to_next_item('Next Item'); ?>
+            <?php echo link_to_next_item_show('Next Item'); ?>
         </li>
         <?php endif; ?>
     </ul>
@@ -72,7 +72,7 @@
             <?php else: ?>
                 <ul>
                     <?php foreach (loop('files', $this->item->Files) as $file): ?>
-                        <li><?php echo link_to_file_metadata(array('class'=>'show', 'title'=>__('View File Metadata'))); ?></li>
+                        <li><?php echo link_to_file_show(array('class'=>'show', 'title'=>__('View File Metadata'))); ?></li>
                     <?php endforeach; ?>
                 </ul>
             <?php endif;?>
