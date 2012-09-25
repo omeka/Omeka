@@ -4,7 +4,7 @@
             <th><?php echo __('Element Name'); ?></th>
             <th><?php echo __('Description'); ?></th>
             <th><?php echo __('Order'); ?></th>
-            <?php if (has_permission('ItemTypes', 'delete-element')): ?>
+            <?php if (is_allowed('ItemTypes', 'delete-element')): ?>
                 <th><?php echo __('Remove'); ?></th>
             <?php endif; ?>
         </tr>
@@ -26,7 +26,7 @@
                 <td><?php echo html_escape($element->description); ?></td>
                 <td class="element-order"><?php echo get_view()->formText('element-order-'. $element->id, $elementOrder, array('size'=>2)); ?></td>
 
-                <?php if (has_permission('ItemTypes', 'delete-element')): ?>
+                <?php if (is_allowed('ItemTypes', 'delete-element')): ?>
                 <td><a id="remove-element-link-<?php echo html_escape($element->id); ?>" href="" class="delete-element"><?php echo __('Remove'); ?></a></td>
                 <?php endif; ?>
             </tr>

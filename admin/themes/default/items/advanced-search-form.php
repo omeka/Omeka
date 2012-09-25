@@ -125,7 +125,7 @@ $formAttributes['method'] = 'GET';
             </div>
         </div>
 
-        <?php if(has_permission('Users', 'browse')): ?>
+        <?php if(is_allowed('Users', 'browse')): ?>
         <div class="field">
             <div class="two columns alpha">
             <?php echo $this->formLabel('user-search', __('Search By User'));?>
@@ -157,7 +157,7 @@ $formAttributes['method'] = 'GET';
         </div>
     </div>
 
-    <?php if (has_permission('Items','showNotPublic')): ?>
+    <?php if (is_allowed('Items','showNotPublic')): ?>
     <div class="field">
         <div class="two columns alpha">
         <?php echo $this->formLabel('public', __('Public/Non-Public')); ?>

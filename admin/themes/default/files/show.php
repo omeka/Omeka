@@ -13,10 +13,10 @@
 
 <div id="edit" class="three columns omega">
 
-    <?php if (has_permission('Files', 'edit') or $file->getItem()->wasAddedBy(current_user())): ?>    
+    <?php if (is_allowed('Files', 'edit') or $file->getItem()->wasAddedBy(current_user())): ?>    
     <div class="panel">
         <?php echo link_to($file, 'edit', __('Edit'), array('class'=>'big green button')); ?>
-        <?php if (has_permission('Files', 'delete')): ?>
+        <?php if (is_allowed('Files', 'delete')): ?>
             <?php echo link_to($file, 'delete-confirm', __('Delete'), array('class' => 'big red button delete-confirm')); ?>
         <?php endif; ?>
     </div>

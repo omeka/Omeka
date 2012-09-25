@@ -13,7 +13,7 @@
         <?php include 'form.php';?>
         <div id="save" class="three columns omega panel">
             <?php echo $form->getElement(Omeka_Form_ItemTypes::SUBMIT_EDIT_ELEMENT_ID); ?>
-            <?php if (has_permission('ItemTypes', 'delete')): ?>
+            <?php if (is_allowed('ItemTypes', 'delete')): ?>
                 <?php echo link_to($item_type, 'delete-confirm', __('Delete'), array('class' => 'big red button delete-confirm')); ?>
             <?php endif; ?>
         </div>

@@ -5,7 +5,7 @@
 
     <div id="description" class="element">
         <h2><?php echo __('Description'); ?></h2>
-        <div class="element-text"><?php echo nls2p(metadata('collection', 'Description')); ?></div>
+        <div class="element-text"><?php echo text_to_paragraphs(metadata('collection', 'Description')); ?></div>
     </div><!-- end description -->
 
     <?php if (collection_has_collectors()): ?>

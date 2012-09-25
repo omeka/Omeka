@@ -10,7 +10,7 @@ echo head(array('title' => $pageTitle));
 
         <div title="<?php echo $pageTitle; ?>">
             <h2><?php echo __('Are you sure?'); ?></h2>
-            <?php echo nls2p(html_escape($confirmMessage)); ?>
+            <?php echo text_to_paragraphs(html_escape($confirmMessage)); ?>
             <?php echo $form; ?>
         </div>
         <?php if (!$isPartial): ?>

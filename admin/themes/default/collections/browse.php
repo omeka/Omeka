@@ -5,7 +5,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
     <?php echo flash(); ?>
     <?php if (total_records('Collection') > 0): ?>
         <div class="table-actions">
-        <?php if (has_permission('Collections', 'add')): ?>
+        <?php if (is_allowed('Collections', 'add')): ?>
             <a href="<?php echo html_escape(url('collections/add')); ?>" class="small green button"><?php echo __('Add a Collection'); ?></a>
         <?php endif; ?>
         </div>
@@ -31,7 +31,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
                     <?php if(!$collection->public): ?>
                     <?php echo __('(Private)'); ?>
                     <?php endif; ?>
-                    <?php if (has_permission($collection, 'edit')): ?>
+                    <?php if (is_allowed($collection, 'edit')): ?>
                     <ul class="action-links">
                         <li><?php echo link_to_collection(__('Edit'), array('class'=>'edit'), 'edit'); ?></li>
                     </ul>
@@ -58,7 +58,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
         </tbody>
         </table>
 
-        <?php if (has_permission('Collections', 'add')): ?>
+        <?php if (is_allowed('Collections', 'add')): ?>
             <a href="<?php echo html_escape(url('collections/add')); ?>" class="small green button"><?php echo __('Add a Collection'); ?></a>
         <?php endif; ?>
 
@@ -71,7 +71,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
     <?php else: ?>
 
         <h2><?php echo __('You have no collections.'); ?></h2>
-        <?php if(has_permission('Collections', 'add')): ?>
+        <?php if(is_allowed('Collections', 'add')): ?>
             <p><?php echo __('Get started by adding your first collection.'); ?></p>
             <a href="<?php echo html_escape(url('collections/add')); ?>" class="add big green button"><?php echo __('Add a Collection'); ?></a>
         <?php endif; ?>

@@ -28,7 +28,7 @@ if (!$isPartial):
                     }
         
                     $showItemFields = true;
-                    if (!has_permission($item, 'edit') || !has_permission($item, 'delete')) {
+                    if (!is_allowed($item, 'edit') || !is_allowed($item, 'delete')) {
                         $showItemFields = false;
                     }
                     $itemCheckboxes[$id] = metadata($item, array('Dublin Core', 'Title'));
@@ -44,7 +44,7 @@ if (!$isPartial):
     <fieldset id="item-fields">
         <h2><?php echo __('Item Metadata'); ?></h2>
 
-        <?php if ( has_permission('Items', 'makePublic') ): ?>
+        <?php if ( is_allowed('Items', 'makePublic') ): ?>
     
         <div class="field">
             <label class="two columns alpha" for="metadata[public]"><?php echo __('Public?'); ?></label>
@@ -60,7 +60,7 @@ if (!$isPartial):
     
         <?php endif; ?>
 
-        <?php if ( has_permission('Items', 'makeFeatured') ): ?>
+        <?php if ( is_allowed('Items', 'makeFeatured') ): ?>
         <div class="field">
             <label class="two columns alpha" for="metadata[featured]"><?php echo __('Featured?'); ?></label>
             <div class="inputs five columns omega">

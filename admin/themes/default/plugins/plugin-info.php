@@ -75,7 +75,7 @@
 
     <?php if ($plugin->isInstalled()): ?>
         <?php if ($plugin->hasNewVersion()): ?>
-            <?php if (has_permission($plugin, 'upgrade')): ?>
+            <?php if (is_allowed($plugin, 'upgrade')): ?>
                 <form action="<?php echo html_escape(url('plugins/upgrade')); ?>" method="post" accept-charset="utf-8">     
                         <button name="upgrade" type="submit" class="upgrade"<?php if ($cannotLoad): ?> disabled="disabled"<?php endif; ?>><?php echo __('Upgrade'); ?></button>
                         <input type="hidden" name="name" value="<?php echo html_escape($pluginDirName); ?>" />
@@ -84,9 +84,9 @@
         <?php else: ?>
             <?php $activateOrDeactivate = ($plugin->isActive()) ? 'deactivate' : 'activate'; ?>
             <?php $activateClass = ($plugin->isActive()) ? 'small red button' : 'small green button'; ?>
-            <?php if (has_permission($plugin, 'activate')): ?>
+            <?php if (is_allowed($plugin, 'activate')): ?>
                 <form action="<?php echo html_escape(url('plugins/' . $activateOrDeactivate)); ?>" method="post" accept-charset="utf-8">
-			            <?php if (has_permission($plugin, 'config') && $plugin->hasConfig() ): ?>
+			            <?php if (is_allowed($plugin, 'config') && $plugin->hasConfig() ): ?>
 			                <a href="<?php echo html_escape(url('plugins/config', array('name' => $plugin->getDirectoryName()))); ?>" class="small blue button"><?php echo __('Configure'); ?></a>
 			            <?php endif; ?>
                         
@@ -94,7 +94,7 @@
                         <input type="hidden" name="name" value="<?php echo html_escape($pluginDirName); ?>" />
                 </form>                
             <?php endif; ?>
-            <?php if (has_permission($plugin, 'uninstall')): ?>
+            <?php if (is_allowed($plugin, 'uninstall')): ?>
                 <form action="<?php echo html_escape(url(array(
                     'controller'=>'plugins',
                     'action'=>'uninstall'), 'default')); ?>" method="post" accept-charset="utf-8">
@@ -104,7 +104,7 @@
             <?php endif; ?>
         <?php endif; ?>
     <?php else: //The plugin has not been installed yet ?>
-    <?php if (has_permission($plugin, 'install')): ?>
+    <?php if (is_allowed($plugin, 'install')): ?>
         <form action="<?php echo html_escape(url('plugins/install')); ?>" method="post" accept-charset="utf-8">
                 <div>
                     <button name="install" type="submit" class="install"<?php if ($cannotLoad): ?> disabled="disabled"<?php endif; ?>><?php echo __('Install'); ?></button>

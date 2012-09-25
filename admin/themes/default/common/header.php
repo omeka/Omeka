@@ -40,7 +40,7 @@
             <?php if ($user = current_user()): ?>
                 <?php
                     $name = html_escape($user->name);
-                    if (has_permission($user, 'edit')) {
+                    if (is_allowed($user, 'edit')) {
                         $userLink = '<a href="' . html_escape(url('users/edit/' . $user->id)) . '">' . $name . '</a>';
                     } else {
                         $userLink = $name;

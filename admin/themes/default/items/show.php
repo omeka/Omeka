@@ -28,7 +28,7 @@
     </ul>
     
     <div class="panel">
-        <?php if (has_permission($item, 'edit')): ?>
+        <?php if (is_allowed($item, 'edit')): ?>
         <?php 
         echo link_to_item(__('Edit'), array('class'=>'big green button'), 'edit'); ?>
         <?php endif; ?>
