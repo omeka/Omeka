@@ -1557,6 +1557,19 @@ ul#section-nav, #section-nav ul {
 /* Navigation Form
 ================================================== */
 
+#fieldset-navigation_main_checkbox_display {
+  margin-bottom: 20px;
+}
+
+#fieldset-homepage_select_display {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#fieldset-new_nav_link_display {
+  margin-top: 40px;
+}
+
 #navigation_main_list { 
     list-style-type: none; 
     margin: 0; 
@@ -1616,28 +1629,27 @@ ul#section-nav, #section-nav ul {
     margin-top: 10px;
 }
 
-.navigation_main_link_label_label {
-    margin-right:20px;
-    font-size: 14px;
-    font-weight: bold;
+#navigation_form input[type=checkbox] { margin: 10px; }
+
+#navigation_homepage_select {
+  margin-bottom: 20px;
 }
 
-.navigation_main_link_label {
-    width: 100%;
+.navigation_main_link_label_label {
+ margin-right: 20px; 
 }
 
 .navigation_main_link_uri_label {
-    margin-right:30px;
-    font-size: 14px;
-    font-weight: bold;
+ margin-right: 30px; 
+}
+
+.navigation_main_link_label {
+ width: 100%;
 }
 
 .navigation_main_link_uri {
-    width: 100%;
+ width: 100%;
 }
-
-#navigation_form input[type=checkbox] { margin: 10px; }
-
 
 /* Advanced Search
 ================================================== */
