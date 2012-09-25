@@ -1,7 +1,7 @@
 <?php
 $pageTitle = __('Edit General Settings');
 echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
-<?php echo js_src('settings'); ?>
+<?php echo js_tag('settings'); ?>
 <script type="text/javascript">
 //<![CDATA[
     jQuery(document).ready(function () {

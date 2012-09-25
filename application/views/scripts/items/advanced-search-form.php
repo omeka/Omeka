@@ -188,7 +188,7 @@ $formAttributes['method'] = 'GET';
     </div>
 </form>
 
-<?php echo js_src('search'); ?>
+<?php echo js_tag('search'); ?>
 <script type="text/javascript">
     jQuery(document).ready(function () {
         Omeka.Search.activateSearchButtons();

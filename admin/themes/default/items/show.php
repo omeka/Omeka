@@ -10,7 +10,7 @@
 
 <?php echo head(array('title' => $itemTitle, 'bodyclass'=>'items show')); ?>
 
-<?php echo js_src('items'); ?>
+<?php echo js_tag('items'); ?>
         
 <div id="edit" class="three columns omega">
     

@@ -203,7 +203,7 @@ $formAttributes['method'] = 'GET';
     <input type="submit" class="submit big green button" name="submit_search" id="submit_search_advanced" value="<?php echo __('Search for items'); ?>" />
 </form>
 
-<?php echo js_src('search'); ?>
+<?php echo js_tag('search'); ?>
 <script type="text/javascript">
     jQuery(document).ready(function () {
         Omeka.Search.activateSearchButtons();

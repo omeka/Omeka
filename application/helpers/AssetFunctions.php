@@ -189,7 +189,7 @@ function img($file, $dir = 'images')
  * @param string $file The name of the file, without .js extension.
  * @param string $dir The directory in which to look for javascript files.  Recommended to leave the default value.
  */
-function js_src($file, $dir = 'javascripts')
+function js_tag($file, $dir = 'javascripts')
 {
     $href = src($file, $dir, 'js');
 
