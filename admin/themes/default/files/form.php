@@ -26,10 +26,12 @@ jQuery(document).bind('omeka:elementformload', function (event) {
 <div class="seven columns alpha" id="edit-form">
     <?php echo flash(); ?>
     <div id="file-metadata">
-        <div id="fullsize-file">
-            <?php echo file_markup($file, array('imageSize' => 'fullsize')); ?>
-        </div> <!-- end fullsize-file div -->
-    
+        <?php if (file_markup($file)): ?>
+            <div id="item-images">
+                <?php echo file_markup($file, array('imageSize' => 'square_thumbnail'), array('class' => 'admin-thumb panel')); ?>
+            </div>
+        <?php endif; ?>    
+
         <?php foreach ($elementSets as $elementSet): ?>
         <fieldset>
             <h2><?php echo __($elementSet->name); ?></h2>    

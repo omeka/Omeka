@@ -17,7 +17,7 @@
     <div class="panel">
         <?php echo link_to($file, 'edit', __('Edit'), array('class'=>'big green button')); ?>
         <?php if (has_permission('Files', 'delete')): ?>
-            <?php echo link_to($file, 'delete-confirm', __('Delete this File'), array('class' => 'big red button delete-confirm')); ?>
+            <?php echo link_to($file, 'delete-confirm', __('Delete'), array('class' => 'big red button delete-confirm')); ?>
         <?php endif; ?>
     </div>
     <?php endif; ?>
@@ -37,24 +37,29 @@
 
     <div id="file-history" class="panel">
         <h4><?php echo __('File History'); ?></h4>
+        <dl>
         <dt><?php echo __('Date Added'); ?></dt>
         <dd><?php echo metadata('file', 'Date Added'); ?></dd>
         <dt><?php echo __('Date Modified'); ?></dt> 
         <dd><?php echo metadata('file', 'Date Modified'); ?></dd>
         <dt><?php echo __('Authentication'); ?></dt> 
         <dd><?php echo metadata('file', 'Authentication'); ?></dd>
+        </dl>
     </div>
 
     <div id="type-metadata" class="panel">
         <h4><?php echo __('Type Metadata'); ?></h4>
+        <dl>
         <dt><?php echo __('Mime Type / Browser'); ?>:</dt>
         <dd><?php echo metadata('file', 'MIME Type'); ?></dd>
         <dt><?php echo __('Mime Type / OS'); ?>:</dt>
         <dd><?php echo metadata('file', 'MIME Type OS'); ?></dd>
         <dt><?php echo __('File Type / OS'); ?>:</dt>
         <dd><?php echo metadata('file', 'File Type OS'); ?></dd>
+        </dl>
     </div>
 
+    <?php if (file_id3_metadata()): ?>
     <div id="id3-metadata" class="panel">
         <h4><?php echo __('ID3 Metadata'); ?></h4>
         <?php echo file_id3_metadata(); ?>
@@ -64,6 +69,7 @@
         <h4><?php echo __('Output Formats'); ?></h4>
         <?php echo output_format_list(); ?>
     </div>
+    <?php endif; ?>
 
 </div>
 
@@ -71,9 +77,11 @@
 
     <?php echo flash(); ?>            
     
-    <div id="fullsize-file">
-        <?php echo file_markup($file, array('imageSize' => 'fullsize'), array('class' => 'panel')); ?>
+    <?php if (file_marksup($file)): ?>
+    <div id="item-images">
+        <?php echo file_markup($file, array('imageSize' => 'square_thumbnail'), array('class' => 'admin-thumb panel')); ?>
     </div>
+    <?php endif; ?>
     
     <?php echo all_element_texts('file'); ?>
     
