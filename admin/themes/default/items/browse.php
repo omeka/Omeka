@@ -30,7 +30,7 @@ echo head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodycl
          
                     var toggleList = '<a href="#" class="toggle-all-details small blue button">' + showDetailsText + '</a>';
          
-                    jQuery('.edit-items').before(toggleList);
+                    jQuery('.advanced-search-link').before(toggleList);
          
                     // Toggle item details.
                     jQuery('.toggle-all-details').toggle(function(e) {
@@ -93,19 +93,20 @@ echo head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodycl
             
             <form action="<?php echo html_escape(url('items/batch-edit')); ?>" method="post" accept-charset="utf-8">                
 
-                <div class="item-actions batch-edit-option fourteen columns alpha">
+                <div class="table-actions batch-edit-option">
                     <?php if (has_permission('Items', 'add')): ?>
                     <a href="<?php echo html_escape(url('items/add')); ?>" class="add button small green"><?php echo __('Add an Item'); ?></a>
                     <?php endif; ?>
-                    <?php echo link_to_item_search(__('Advanced Search'), array('id' => 'advanced-search-link', 'class' => 'small blue button')); ?>
+                    <?php echo link_to_item_search(__('Advanced Search'), array('class' => 'small blue advanced-search-link button')); ?>
                     <?php if (has_permission('Items', 'edit')): ?>
-                    <input type="submit" class="edit-items small blue button" name="submit-batch-edit" value="<?php echo __('Edit'); ?>" />
+                    <input type="submit" class="edit-items small blue batch-action button" name="submit-batch-edit" value="<?php echo __('Edit'); ?>" />
                     <?php endif; ?>
                     <?php if (has_permission('Items', 'delete')): ?>
-                    <input type="submit" class="red small" name="submit-batch-delete" value="<?php echo __('Delete'); ?>">
+                    <input type="submit" class="small red batch-action button" name="submit-batch-delete" value="<?php echo __('Delete'); ?>">
                     <?php endif; ?>
-                    <?php echo common('quick-filters',array(),'items'); ?>
                 </div>
+
+                <?php echo common('quick-filters',array(),'items'); ?>
 
             <table id="items" class="full" cellspacing="0" cellpadding="0">
                  <thead>
@@ -172,16 +173,16 @@ echo head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodycl
             </tbody>
         </table>
             
-                <div class="item-actions batch-edit-option">
+                <div class="table-actions batch-edit-option">
                     <?php if (has_permission('Items', 'add')): ?>
                     <a href="<?php echo html_escape(url('items/add')); ?>" class="add button small green"><?php echo __('Add an Item'); ?></a>
                     <?php endif; ?>
-                    <?php echo link_to_item_search(__('Advanced Search'), array('id' => 'advanced-search-link', 'class' => 'small blue button')); ?>
+                    <?php echo link_to_item_search(__('Advanced Search'), array('class' => 'small blue advanced-search-link button')); ?>
                     <?php if (has_permission('Items', 'edit')): ?>
-                    <input type="submit" class="edit-items small blue button" name="submit-batch-edit" value="<?php echo __('Edit'); ?>" />
+                    <input type="submit" class="small blue batch-action button" name="submit-batch-edit" value="<?php echo __('Edit'); ?>" />
                     <?php endif; ?>
                     <?php if (has_permission('Items', 'delete')): ?>
-                    <input type="submit" class="red small" name="submit-batch-delete" value="<?php echo __('Delete'); ?>">
+                    <input type="submit" class="small red batch-action button" name="submit-batch-delete" value="<?php echo __('Delete'); ?>">
                     <?php endif; ?>
                 </div>
                 

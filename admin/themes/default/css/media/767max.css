@@ -1,6 +1,6 @@
 /* Table of Contents
 ==================================================
-    #Global Navigation
+    #Global
     #Tables
     #Content Navigation
     #Content
@@ -8,7 +8,7 @@
         #Login */
 
 
-/* Global Navigation
+/* Global
 ================================================== */
 
 body {
@@ -31,6 +31,8 @@ header nav { float: left; }
 .even th { background-color: #B1A584; border: 0; }
                 
 .odd th { background-color: #D3D0B5; border: 0; }
+
+th a:after, th.desc a:after, th.asc a:after { content: ""; }
     
 
 /* Content Navigation 
@@ -67,7 +69,7 @@ header nav { float: left; }
 .section-title { 
     width: 100%;
     clear: left;
-    margin: 40px 0; 
+    margin: 40px 0 20px 0; 
 }
 
 #search {
@@ -99,6 +101,7 @@ header nav { float: left; }
         width: 100%; 
         clear:both;
         float: none;
+        overflow: auto;
     }
     
     .browse-items .pagination li { 
@@ -106,10 +109,10 @@ header nav { float: left; }
         margin: 0 5px 0 0;
     }
     
-    .item-actions {
+    .table-actions {
         width: 100%;
         font-size: .875em;
-        display: none;
+        margin-bottom: 20px;
         }
         
     .items-browse {
@@ -118,16 +121,40 @@ header nav { float: left; }
         margin: 0;
         }
             
-        .item-actions a.button, .item-actions input[type=submit] {
+        .table-actions a.button, .table-actions input[type=submit] {
+            height: auto !important;
+            background: #fff;
+            border: solid #E4E5DE;
+            border-width: 1px 1px 0 1px;
+            box-shadow: 0 0 0 transparent;
+            color: #A28E8A;
+            cursor: hand;
             float: none;
             margin: 0 !important;
+            padding: 5px 0;
+            text-shadow: none;
+            width: 100%;
+            height:inherit;
+            box-sizing: border-box;
             }
+            
+        .table-actions a.button:first-child, .table-actions input[type=submit]:first-child {
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+        }
+        
+        .table-actions a.button:last-child, .table-actions input[type=submit]:last-child {
+            border-bottom-left-radius: 3px;
+            border-bottom-right-radius: 3px;
+            border-bottom: 1px solid #E4E5DE;
+        }
+
     
     .quick-filter-wrapper,
     .quick-filter-wrapper li,
     .quick-filter-wrapper a { width: 100%; }
     
-    .quick-filter-wrapper { margin: 1em 0;}
+    .quick-filter-wrapper { margin: 0 0 1em 0;}
 
 
     /* Login

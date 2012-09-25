@@ -4,9 +4,11 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
 
     <?php echo flash(); ?>
     <?php if (total_records('Collection') > 0): ?>
+        <div class="table-actions">
         <?php if (has_permission('Collections', 'add')): ?>
             <a href="<?php echo html_escape(url('collections/add')); ?>" class="small green button"><?php echo __('Add a Collection'); ?></a>
         <?php endif; ?>
+        </div>
         <div class="pagination"><?php echo pagination_links(); ?></div>
       <?php if (has_loop_records('collections')): ?>
         <table id="collections" cellspacing="0" cellpadding="0">
@@ -22,9 +24,9 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
             </thead>
             <tbody>
                 <?php $key = 0;?>
-        <?php foreach (loop('Collection') as $collection): ?>
-            <tr class="collection<?php if(++$key%2==1) echo ' odd'; else echo ' even'; ?>">
-                <td class="title<?php if ($collection->featured) { echo ' featured';} ?>">
+                <?php foreach (loop('Collection') as $collection): ?>
+                <tr class="collection<?php if(++$key%2==1) echo ' odd'; else echo ' even'; ?>">
+                    <td class="title<?php if ($collection->featured) { echo ' featured';} ?>">
                     <?php echo link_to_collection(); ?>
                     <?php if(!$collection->public): ?>
                     <?php echo __('(Private)'); ?>

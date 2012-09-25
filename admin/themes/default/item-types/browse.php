@@ -2,9 +2,11 @@
 $pageTitle = __('Browse Item Types') . ' ' . __('(%s total)', $total_records);
 echo head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
 
-<?php if (has_permission('ItemTypes', 'add')): ?>
-<?php echo link_to('item-types', 'add', __('Add an Item Type'), array('class'=>'add green button')); ?>
-<?php endif ?>
+<div class="table-actions">
+    <?php if (has_permission('ItemTypes', 'add')): ?>
+    <?php echo link_to('item-types', 'add', __('Add an Item Type'), array('class'=>'add green button')); ?>
+    <?php endif ?>
+</div>
 
     <table class="full">
         <thead>
@@ -32,6 +34,13 @@ echo head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
 <?php endforeach; ?>
 </tbody>
 </table>
+
+<div class="table-actions">
+    <?php if (has_permission('ItemTypes', 'add')): ?>
+    <?php echo link_to('item-types', 'add', __('Add an Item Type'), array('class'=>'add green button')); ?>
+    <?php endif ?>
+</div>
+
 <?php fire_plugin_hook('admin_append_to_item_types_browse_primary', array('item_types' => $this->item_types, 'view' => $this)); ?>
 </div>
 <?php echo foot(); ?>

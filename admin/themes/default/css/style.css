@@ -185,7 +185,6 @@ p, li {
         max-width: 100%;
         clear: both;
         display: none; 
-        overflow-x: hidden;
         word-break: break-word;
     }
     
@@ -1111,12 +1110,12 @@ header nav {
     margin: 0 0 20px 0;
 }   
      
-.item-actions {
+.table-actions {
     float: left;
 }
     
-    .browse-items .item-actions input[type=submit], .browse-items .item-actions a.button, 
-    .browse-items .item-actions button {
+    .browse-items .table-actions input[type=submit], .browse-items .table-actions a.button, 
+    .browse-items .table-actions button {
         float: left;
         height: 25px;
         line-height: 25px;
