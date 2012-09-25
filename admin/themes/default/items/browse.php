@@ -94,14 +94,14 @@ echo head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodycl
             <form action="<?php echo html_escape(url('items/batch-edit')); ?>" method="post" accept-charset="utf-8">                
 
                 <div class="table-actions batch-edit-option">
-                    <?php if (has_permission('Items', 'add')): ?>
+                    <?php if (is_allowed('Items', 'add')): ?>
                     <a href="<?php echo html_escape(url('items/add')); ?>" class="add button small green"><?php echo __('Add an Item'); ?></a>
                     <?php endif; ?>
                     <?php echo link_to_item_search(__('Advanced Search'), array('class' => 'small blue advanced-search-link button')); ?>
-                    <?php if (has_permission('Items', 'edit')): ?>
+                    <?php if (is_allowed('Items', 'edit')): ?>
                     <input type="submit" class="edit-items small blue batch-action button" name="submit-batch-edit" value="<?php echo __('Edit'); ?>" />
                     <?php endif; ?>
-                    <?php if (has_permission('Items', 'delete')): ?>
+                    <?php if (is_allowed('Items', 'delete')): ?>
                     <input type="submit" class="small red batch-action button" name="submit-batch-delete" value="<?php echo __('Delete'); ?>">
                     <?php endif; ?>
                 </div>
@@ -111,7 +111,7 @@ echo head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodycl
             <table id="items" class="full" cellspacing="0" cellpadding="0">
                  <thead>
                     <tr>
-                        <?php if (has_permission('Items', 'edit')): ?>
+                        <?php if (is_allowed('Items', 'edit')): ?>
                         <th class="batch-edit-heading"><?php echo __('Select'); ?></th>
                         <?php endif; ?>
                         <?php
@@ -127,7 +127,7 @@ echo head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodycl
                 <?php foreach (loop('Item') as $item): ?>
                 <tr class="item <?php if(++$key%2==1) echo 'odd'; else echo 'even'; ?>">
                     <?php $id = metadata('item', 'id'); ?>
-                    <?php if (has_permission($item, 'edit') || has_permission($item, 'tag')): ?>
+                    <?php if (is_allowed($item, 'edit') || is_allowed($item, 'tag')): ?>
                     <td class="batch-edit-check" scope="row"><input type="checkbox" name="items[]" value="<?php echo $id; ?>" /></td>
         <?php endif; ?>
                     <?php if ($item->featured): ?>
@@ -142,10 +142,10 @@ echo head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodycl
                         <?php endif; ?>
                         </span>
                         <ul class="action-links group">
-                            <?php if (has_permission($item, 'edit')): ?>
+                            <?php if (is_allowed($item, 'edit')): ?>
                             <li><?php echo link_to_item(__('Edit'), array(), 'edit'); ?></li>
                             <?php endif; ?>
-                            <?php if (has_permission($item, 'delete')): ?>
+                            <?php if (is_allowed($item, 'delete')): ?>
                             <li><?php echo link_to_item(__('Delete'), array('class' => 'delete-confirm'), 'delete-confirm'); ?></li>
                             <?php endif; ?>
                         </ul>
@@ -174,14 +174,14 @@ echo head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodycl
         </table>
             
                 <div class="table-actions batch-edit-option">
-                    <?php if (has_permission('Items', 'add')): ?>
+                    <?php if (is_allowed('Items', 'add')): ?>
                     <a href="<?php echo html_escape(url('items/add')); ?>" class="add button small green"><?php echo __('Add an Item'); ?></a>
                     <?php endif; ?>
                     <?php echo link_to_item_search(__('Advanced Search'), array('class' => 'small blue advanced-search-link button')); ?>
-                    <?php if (has_permission('Items', 'edit')): ?>
+                    <?php if (is_allowed('Items', 'edit')): ?>
                     <input type="submit" class="small blue batch-action button" name="submit-batch-edit" value="<?php echo __('Edit'); ?>" />
                     <?php endif; ?>
-                    <?php if (has_permission('Items', 'delete')): ?>
+                    <?php if (is_allowed('Items', 'delete')): ?>
                     <input type="submit" class="small red batch-action button" name="submit-batch-delete" value="<?php echo __('Delete'); ?>">
                     <?php endif; ?>
                 </div>
@@ -198,7 +198,7 @@ echo head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodycl
 
                     <h2><?php echo __('You have no items.'); ?></h2>
                 
-                    <?php if(has_permission('Items', 'add')): ?>
+                    <?php if(is_allowed('Items', 'add')): ?>
                     
                     <p><?php echo __('Get started by adding your first item.'); ?></p>
                     

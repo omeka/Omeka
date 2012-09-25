@@ -117,7 +117,7 @@ $formAttributes['method'] = 'GET';
             </div>
         </div>
 
-        <?php if(has_permission('Users', 'browse')): ?>
+        <?php if(is_allowed('Users', 'browse')): ?>
         <div class="field">
         <?php
             echo $this->formLabel('user-search', __('Search By User'));?>
@@ -146,7 +146,7 @@ $formAttributes['method'] = 'GET';
         </div>
     </div>
 
-    <?php if (has_permission('Items','showNotPublic')): ?>
+    <?php if (is_allowed('Items','showNotPublic')): ?>
     <div class="field">
         <?php echo $this->formLabel('public', __('Public/Non-Public')); ?>
         <div class="inputs">
@@ -188,7 +188,7 @@ $formAttributes['method'] = 'GET';
     </div>
 </form>
 
-<?php echo js_src('search'); ?>
+<?php echo js_tag('search'); ?>
 <script type="text/javascript">
     jQuery(document).ready(function () {
         Omeka.Search.activateSearchButtons();

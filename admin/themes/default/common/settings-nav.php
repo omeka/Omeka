@@ -1,13 +1,13 @@
-<?php if (has_permission('Settings', 'edit')): ?>
+<?php if (is_allowed('Settings', 'edit')): ?>
 <ul id="section-nav" class="navigation vertical">
 <?php
     $navArray = array();
 
     $navArray[__('General Settings')] = url('settings');
-    if (has_permission('ElementSets', 'browse')) {
+    if (is_allowed('ElementSets', 'browse')) {
         $navArray[__('Element Sets')] = url('element-sets');
     }
-    if (has_permission('Security', 'edit')) {
+    if (is_allowed('Security', 'edit')) {
         $navArray[__('Security Settings')] = url('security');
     }
     $navArray[__('Search Settings')] = url('search/settings');

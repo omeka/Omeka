@@ -1,10 +1,10 @@
 <?php 
     $navArray = array();
     $navArray[__('Browse Tags')] = url('tags/browse');
-    if(has_permission('Tags','edit')) {
+    if(is_allowed('Tags','edit')) {
         $navArray[__('Edit Tag')] = url('tags/edit');
     }
-    if(has_permission('Tags','delete')) {
+    if(is_allowed('Tags','delete')) {
         $navArray[__('Delete Tag')] = url('tags/delete');
     }
     $navArray = apply_filters('admin_navigation_tags', $navArray);

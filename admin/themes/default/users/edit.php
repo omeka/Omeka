@@ -12,7 +12,7 @@
 
 <div class="seven columns alpha">
 <?php echo $this->form; ?>
-<?php if (has_permission($user, 'delete')): ?>
+<?php if (is_allowed($user, 'delete')): ?>
     <?php echo link_to($user, 'delete-confirm', __('Delete'), array('class'=>'red button delete-confirm')); ?>
 <?php endif; ?>
 

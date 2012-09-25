@@ -12,7 +12,7 @@
  * @param integer $limit The maximum number of recent tags to return
  * @return array
  */
-function recent_tags($limit = 10)
+function get_recent_tags($limit = 10)
 {
     return get_records('Tag', array('sort_field' => 'time', 'sort_dir' => 'd'), $limit);
 }

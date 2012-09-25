@@ -2,7 +2,7 @@
 $pageTitle = __('Browse Users') . ' ' . __('(%s total)', $total_records);
 echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'users primary'));?>
 
-<?php if (has_permission('Users', 'add')): ?>
+<?php if (is_allowed('Users', 'add')): ?>
     <?php echo link_to('users', 'add', __('Add a User'), array('class'=>'small green button')); ?>
 <?php endif; ?>
 <?php echo flash(); ?>
@@ -41,10 +41,10 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
             <form class="top" action="<?php echo html_escape(url('users/batch-edit')); ?>" method="post" accept-charset="utf-8">
 
                 <div class="item-actions">
-                    <?php if (has_permission('Users', 'edit')): ?>
+                    <?php if (is_allowed('Users', 'edit')): ?>
                     <input type="submit" class="edit-items small blue button" name="submit" value="<?php echo __('Change Role'); ?>" />
                     <?php endif; ?>
-                    <?php if (has_permission('Users', 'delete')): ?>
+                    <?php if (is_allowed('Users', 'delete')): ?>
                     <input type="submit" class="red small" name="submit" value="<?php echo __('Delete'); ?>">
                     <?php endif; ?>                    
                 </div>
@@ -68,10 +68,10 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
                             <td>
                             <?php echo html_escape($user->username); ?> <?php if(!$user->active): ?>(<?php echo __('inactive'); ?>)<?php endif; ?>
                             <ul class="action-links group">
-                                <?php if (has_permission($user, 'edit')): ?>
+                                <?php if (is_allowed($user, 'edit')): ?>
                                 <li><?php echo link_to($user, 'edit', __('Edit'), array('class'=>'edit')); ?></li>
                                 <?php endif; ?>     
-                                <?php if (has_permission($user, 'delete')): ?>
+                                <?php if (is_allowed($user, 'delete')): ?>
                                 <li><?php echo link_to($user, 'delete-confirm', __('Delete'), array('class'=>'delete')); ?></li>
                                 <?php endif; ?>
                             </ul>

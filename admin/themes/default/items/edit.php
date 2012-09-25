@@ -20,13 +20,13 @@
         <?php echo link_to_item(__('Delete'), array('class' => 'big red button'), 'delete-confirm'); ?>
 
         <div id="public-featured">
-            <?php if ( has_permission('Items', 'makePublic') ): ?>
+            <?php if ( is_allowed('Items', 'makePublic') ): ?>
                 <div class="public">
                     <label for="public"><?php echo __('Public'); ?>:</label> 
                     <?php echo $this->formCheckbox('public', $item->public, array(), array('1', '0')); ?>
                 </div>
             <?php endif; ?>
-            <?php if ( has_permission('Items', 'makeFeatured') ): ?>
+            <?php if ( is_allowed('Items', 'makeFeatured') ): ?>
                 <div class="featured">
                     <label for="featured"><?php echo __('Featured'); ?>:</label> 
                     <?php echo $this->formCheckbox('featured', $item->featured, array(), array('1', '0')); ?>

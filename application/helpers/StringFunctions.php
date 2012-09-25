@@ -58,7 +58,7 @@ function xml_escape($value)
  * @param string $str
  * @return string
  */
-function nls2p($str)
+function text_to_paragraphs($str)
 {
   return str_replace('<p></p>', '', '<p>'
         . preg_replace('#([\r\n]\s*?[\r\n]){2,}#', '</p>$0<p>', $str)

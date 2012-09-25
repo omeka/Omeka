@@ -28,7 +28,7 @@ if (!$isPartial):
                     continue;
                 }
                 
-                if (has_permission($item, 'delete')) {
+                if (is_allowed($item, 'delete')) {
                     $itemCheckboxes[$id] = metadata($item, array('Dublin Core', 'Title'));
                 } else {
                     $excludedItems = true;

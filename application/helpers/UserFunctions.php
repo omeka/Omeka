@@ -11,14 +11,14 @@
 /**
  * Check the ACL to determine whether the current user has proper permissions.
  *
- * <code>has_permission('Items', 'showNotPublic')</code>
+ * <code>is_allowed('Items', 'showNotPublic')</code>
  * Will check if the user has permission to view Items that are not public.
  *
  * @param string|Zend_Acl_Resource_Interface
  * @param string|null
  * @return boolean
  */
-function has_permission($resource, $privilege)
+function is_allowed($resource, $privilege)
 {
     $acl = Zend_Controller_Front::getInstance()->getParam('bootstrap')->acl;
     $user = current_user();

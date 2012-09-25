@@ -3,7 +3,7 @@ $pageTitle = __('Browse Item Types') . ' ' . __('(%s total)', $total_records);
 echo head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
 
 <div class="table-actions">
-    <?php if (has_permission('ItemTypes', 'add')): ?>
+    <?php if (is_allowed('ItemTypes', 'add')): ?>
     <?php echo link_to('item-types', 'add', __('Add an Item Type'), array('class'=>'add green button')); ?>
     <?php endif ?>
 </div>
@@ -23,7 +23,7 @@ echo head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
     <td class="itemtype-name">
         <a href="<?php echo html_escape(record_url($item_type, 'show', 'item-types')); ?>"><?php echo html_escape($item_type->name); ?></a>
         <ul class="action-links group">
-        <?php if (has_permission('ItemTypes', 'edit')): ?>
+        <?php if (is_allowed('ItemTypes', 'edit')): ?>
             <li><a class="edit" href="<?php echo html_escape(url('item-types/edit/' . $item_type->id)); ?>"><?php echo __('Edit'); ?></a></li>
         <?php endif; ?>        
         </ul>
@@ -36,7 +36,7 @@ echo head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
 </table>
 
 <div class="table-actions">
-    <?php if (has_permission('ItemTypes', 'add')): ?>
+    <?php if (is_allowed('ItemTypes', 'add')): ?>
     <?php echo link_to('item-types', 'add', __('Add an Item Type'), array('class'=>'add green button')); ?>
     <?php endif ?>
 </div>

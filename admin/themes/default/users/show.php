@@ -10,7 +10,7 @@
 <?php echo head(array('title'=>$userTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'themes primary'));?>
 <h1><?php echo $userTitle; ?></h1>
 
-<?php if (has_permission('Users', 'edit')): ?>
+<?php if (is_allowed('Users', 'edit')): ?>
 <p id="edit-item" class="edit-button"><?php 
 echo link_to($user, 'edit', __('Edit this User'), array('class'=>'edit')); ?></p>   
 <?php endif; ?>
