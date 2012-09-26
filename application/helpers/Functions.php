@@ -212,7 +212,7 @@ function get_current_record($recordVar, $throwException = true)
  */
 function get_record_by_id($recordVar, $recordId)
 {
-    return get_view()->getRecordById($recordVar, $recordId);
+    return get_db()->getTable(Inflector::camelize($recordVar))->find($recordId);
 }
 
 /**

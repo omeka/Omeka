@@ -56,8 +56,17 @@ function absolute_url($options = array(), $route = null, $queryParams = array(),
  */
 function current_url(array $params = array())
 {
-    $helper = new Omeka_View_Helper_GetCurrentUrl;
-    return $helper->getCurrentUrl($params);
+    // Get the URL before the ?.
+    $request = Zend_Controller_Front::getInstance()->getRequest();
+    $urlParts = explode('?', $request->getRequestUri());
+    $url = $urlParts[0];
+    if ($params) {
+        // Merge $_GET and passed parameters to build the complete query.
+        $query = array_merge($_GET, $params);
+        $queryString = http_build_query($query);
+        $url .= "?$queryString";
+    }
+    return $url;
 }
 
 /**
@@ -71,8 +80,20 @@ function current_url(array $params = array())
  */
 function is_current_url($url)
 {
-    $helper = new Omeka_View_Helper_IsCurrentUrl;
-    return $helper->isCurrentUrl($url);
+    $request = Zend_Controller_Front::getInstance()->getRequest();
+    $currentUrl = $request->getRequestUri();
+    $baseUrl = $request->getBaseUrl();
+    
+    // Strip out the protocol, host, base URL, and rightmost slash before 
+    // comparing the URL to the current one
+    $stripOut = array(WEB_DIR, @$_SERVER['HTTP_HOST'], $baseUrl);
+    $currentUrl = rtrim(str_replace($stripOut, '', $currentUrl), '/');
+    $url = rtrim(str_replace($stripOut, '', $url), '/');
+    
+    if (strlen($url) == 0) {
+        return (strlen($currentUrl) == 0);
+    }
+    return ($url == $currentUrl) or (strpos($currentUrl, $url) === 0);
 }
 
 /**
