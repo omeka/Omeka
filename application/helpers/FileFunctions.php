@@ -9,38 +9,27 @@
  */
 
 /**
- * @uses files_markup()
- * @param File $file One File record.
- * @param array $props
- * @param array $wrapperAttributes Optional XHTML attributes for the div wrapper
- * for the displayed file.  Defaults to array('class'=>'item-file').
- * @return string HTML
- */
-function file_markup($file, array $props=array(), $wrapperAttributes = array('class'=>'item-file'))
-{
-    return files_markup(array($file), $props, $wrapperAttributes);
-}
-
-/**
  * Displays a set of files based on the file's MIME type and any options that are
  * passed.  This is primarily used by other helper functions and will not be used
  * by theme writers in most cases.
- *
- * @since 0.9
- * @uses Omeka_View_Helper_Media
- * @param array $files An array of File records to display.
+ * 
+ * @uses Omeka_View_Helper_FileMarkup
+ * @param File $files A file record or an array of File records to display.
  * @param array $props Properties to customize display for different file types.
- * @param array $wrapperAttributes XHTML attributes for the div that wraps each
- * displayed file.  If empty or null, this will not wrap the displayed file in a
- * div.
+ * @param array $wrapperAttributes Attributes XHTML attributes for the div that 
+ * wraps each displayed file. If empty or null, this will not wrap the displayed 
+ * file in a div.
  * @return string HTML
  */
-function files_markup($files, array $props = array(), $wrapperAttributes = array('class'=>'item-file'))
+function file_markup($files, array $props = array(), $wrapperAttributes = array('class' => 'item-file'))
 {
-    $helper = new Omeka_View_Helper_Media;
+    if (!is_array($files)) {
+        $files = array($file);
+    }
+    $helper = new Omeka_View_Helper_FileMarkup;
     $output = '';
     foreach ($files as $file) {
-        $output .= $helper->media($file, $props, $wrapperAttributes);
+        $output .= $helper->fileMarkup($file, $props, $wrapperAttributes);
     }
     return $output;
 }
@@ -58,7 +47,7 @@ function file_id3_metadata(array $options = array(), $file = null)
     if (!$file) {
         $file = get_current_record('file');
     }
-    return get_view()->fileID3Metadata($file, $options);
+    return get_view()->fileId3Metadata($file, $options);
 }
 
 /**

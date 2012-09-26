@@ -1,5 +1,5 @@
 <?php
-class Omeka_View_Helper_GetRecordUrl extends Zend_View_Helper_Abstract
+class Omeka_View_Helper_RecordUrl extends Zend_View_Helper_Abstract
 {
     /**
      * Return a URL to a record.
@@ -13,7 +13,7 @@ class Omeka_View_Helper_GetRecordUrl extends Zend_View_Helper_Abstract
      * @param bool $getAbsoluteUrl
      * @return string
      */
-    public function getRecordUrl($record, $action = null, $getAbsoluteUrl = false)
+    public function recordUrl($record, $action = null, $getAbsoluteUrl = false)
     {
         // Get the current record from the view if passed as a string.
         if (is_string($record)) {

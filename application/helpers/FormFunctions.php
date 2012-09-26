@@ -104,7 +104,7 @@ function simple_search_form($buttonText = null, $formProperties=array('id'=>'sim
  * @param array $options Optional
  * @return string HTML
  */
-function form_input_for_element($element, $record, $options = array())
+function element_form($element, $record, $options = array())
 {
     $html = '';
     // If we have an array of Elements, loop through the form to display them.
@@ -122,7 +122,7 @@ function form_input_for_element($element, $record, $options = array())
  * Used within the admin theme (and potentially within plugins) to display a form
  * for a record for a given element set.
  *
- * @uses form_input_for_element()
+ * @uses element_form()
  * @param Omeka_Record_AbstractRecord $record
  * @param string $elementSetName The name of the element set or 'Item Type Metadata' for an item's item type data
  * @return string
@@ -143,7 +143,7 @@ function element_set_form($record, $elementSetName)
         array('recordType' => $recordType, 'record' => $record, 'elementSetName' => $elementSetName)
     );
             
-    $html = form_input_for_element($elements, $record);
+    $html = element_form($elements, $record);
 
     return $html;
 }

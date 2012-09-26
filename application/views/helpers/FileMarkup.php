@@ -21,7 +21,7 @@
  * @package Omeka_ThemeHelpers
  * @subpackage Omeka_View_Helper
  */
-class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
+class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
 {   
     /**
      * Array of MIME types and the callbacks that can process it.
@@ -719,7 +719,7 @@ class Omeka_View_Helper_Media extends Zend_View_Helper_Abstract
      * @param array $wrapperAttributes
      * @return string HTML
      */
-    public function media($file, array $props=array(), $wrapperAttributes = array())
+    public function fileMarkup($file, array $props=array(), $wrapperAttributes = array())
     {        
         // There is a chance that $props passed in could modify the callback
         // that is used.  Currently used to determine whether or not to display

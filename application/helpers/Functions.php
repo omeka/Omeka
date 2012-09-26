@@ -133,14 +133,14 @@ function total_records($recordType)
 /**
  * Return an iterator used for looping an array of records.
  * 
- * @uses Omeka_View_Helper_LoopRecords
+ * @uses Omeka_View_Helper_Loop
  * @param string $recordsVar
  * @param array|null $records
  * @return Omeka_Record_Iterator
  */
 function loop($recordsVar, $records = null)
 {
-    return get_view()->loopRecords($recordsVar, $records);
+    return get_view()->loop($recordsVar, $records);
 }
 
 /**
@@ -333,7 +333,7 @@ function search_filters(array $params = null)
 /**
  * Get a piece or pieces of metadata for a record.
  *
- * @see Omeka_View_Helper_RecordMetadata
+ * @see Omeka_View_Helper_Metadata
  * @param Omeka_Record_AbstractRecord|string $record The record to get metadata
  *  for. If an Omeka_Record_AbstractRecord, that record is used. If a string,
  *  that string is used to look up a record in the current view.
@@ -345,14 +345,14 @@ function search_filters(array $params = null)
  */
 function metadata($record, $metadata, $options = array())
 {
-    return get_view()->recordMetadata($record, $metadata, $options);
+    return get_view()->metadata($record, $metadata, $options);
 }
 
 /**
  * Retrieve the set of all element text metadata for a record.
  *
  * @since 2.0
- * @uses Omeka_View_Helper_RecordMetadataList
+ * @uses Omeka_View_Helper_AllElementTexts
  * 
  * @param Omeka_Record_AbstractRecord|string $record The record to get the
  *  element text metadata for.
@@ -361,5 +361,5 @@ function metadata($record, $metadata, $options = array())
  */
 function all_element_texts($record, $options = array())
 {
-    return get_view()->recordMetadataList($record, $options);
+    return get_view()->allElementTexts($record, $options);
 }

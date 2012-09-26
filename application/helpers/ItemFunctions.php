@@ -10,7 +10,7 @@
 
 /**
  * @since 0.10
- * @uses files_markup()
+ * @uses file_markup()
  * @uses get_current_record()
  * @param array $options
  * @param array $wrapperAttributes
@@ -23,7 +23,7 @@ function files_for_item($options = array(), $wrapperAttributes = array('class'=>
         $item = get_current_record('item');
     }
 
-    return files_markup($item->Files, $options, $wrapperAttributes);
+    return file_markup($item->Files, $options, $wrapperAttributes);
 }
 
 /**

@@ -99,7 +99,7 @@ function is_current_url($url)
 /**
  * Return a URL to a record.
  *
- * @uses Omeka_View_Helper_GetRecordUrl::getRecordUrl()
+ * @uses Omeka_View_Helper_RecordUrl::recordUrl()
  * @param Omeka_Record_AbstractRecord|string $record
  * @param string|null $action
  * @param bool $getAbsoluteUrl
@@ -107,7 +107,7 @@ function is_current_url($url)
  */
 function record_url($record, $action = null, $getAbsoluteUrl = false)
 {
-    return get_view()->getRecordUrl($record, $action, $getAbsoluteUrl);
+    return get_view()->recordUrl($record, $action, $getAbsoluteUrl);
 }
 
 /**

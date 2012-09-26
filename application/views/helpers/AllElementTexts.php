@@ -13,7 +13,7 @@
  * @package Omeka
  * @subpackage Omeka_View_Helper
  */
-class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
+class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
 {
     const RETURN_HTML = 'html';
     const RETURN_ARRAY = 'array';
@@ -74,7 +74,7 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
      * @since 1.0 Added 'show_element_sets' and 'return_type' options.
      * @return string|array
      */
-    public function recordMetadataList($record, array $options = array())
+    public function allElementTexts($record, array $options = array())
     {
         if (is_string($record)) {
             $record = $this->view->{$this->view->singularize($record)};
@@ -211,7 +211,7 @@ class Omeka_View_Helper_RecordMetadataList extends Zend_View_Helper_Abstract
      */
     protected function _getFormattedElementTexts($record, $metadata)
     {
-        return $this->view->recordMetadata($record, $metadata, array('all' => true));
+        return $this->view->metadata($record, $metadata, array('all' => true));
     }
 
     /**

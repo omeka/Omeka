@@ -1,1 +1,1 @@
-<?php echo form_input_for_element($element, $record, array('divWrap'=>false, 'extraFieldCount'=>1)); ?>
+<?php echo element_form($element, $record, array('divWrap'=>false, 'extraFieldCount'=>1)); ?>

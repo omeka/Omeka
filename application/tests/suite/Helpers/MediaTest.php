@@ -18,7 +18,7 @@ class Omeka_View_Helper_MediaTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->view = $this->getMock('Omeka_View', array(), array(), '', false);
-        $this->helper = new Omeka_View_Helper_Media;
+        $this->helper = new Omeka_View_Helper_FileMarkup;
         $this->file = $this->getMock('File', array(), array(), '', false);
     }
     
@@ -34,7 +34,7 @@ class Omeka_View_Helper_MediaTest extends PHPUnit_Framework_TestCase
                  ->will($this->returnValue('image/jpeg'));
         $this->file->stored = '1';
 
-        $this->helper->media($this->file);  
+        $this->helper->fileMarkup($this->file);  
         $this->assertTrue($this->mimeTypeCallbackFired, "MIME type callback should have been fired.");                                                   
     }
     

@@ -58,7 +58,7 @@ class Output_ItemRss2
         $description = all_element_texts($item);
         
         //Output HTML that would display all the files in whatever way is possible
-        $description .= files_markup($item->Files);
+        $description .= file_markup($item->Files);
         
         return $description;
     }
