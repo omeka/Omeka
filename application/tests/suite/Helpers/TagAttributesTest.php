@@ -1,6 +1,4 @@
 <?php 
-require_once HELPERS;
-
 class TagAttributesTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()

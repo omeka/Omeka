@@ -24,7 +24,7 @@
     <?php if (item_has_tags()): ?>
     <div id="item-tags" class="element">
         <h3><?php echo __('Tags'); ?></h3>
-        <div class="element-text"><?php echo item_tags_as_string(); ?></div>
+        <div class="element-text"><?php echo tag_string('item'); ?></div>
     </div>
     <?php endif;?>
 

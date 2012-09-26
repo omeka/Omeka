@@ -4,11 +4,6 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  */
-
-/**
- * Require view helper functions.
- */
-require_once HELPERS;
  
 /**
  * Tests nav($links)

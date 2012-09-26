@@ -1,7 +1,6 @@
 <?php 
 $pageTitle = __('404: Page Not Found');
 echo head(array('bodyclass'=>'error404 primary', 'title'=> $pageTitle)); ?>
-<h1><?php echo $pageTitle; ?></h1>
 
 <div id="primary" class="filenotfound">
     <?php echo flash(); ?>
@@ -26,7 +25,7 @@ echo head(array('bodyclass'=>'error404 primary', 'title'=> $pageTitle)); ?>
         <ul class="collections">
             <?php 
             set_loop_records('collections', get_recent_collections('5'));
-            if (has_loop_records('collections')): foreach (loop($collection) as $collection):?>
+            if (has_loop_records('collections')): foreach (loop('collections') as $collection):?>
             <li class="collection"><?php echo link_to_collection(); ?></li>
             <?php endforeach; endif; ?>
         </ul>

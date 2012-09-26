@@ -5,8 +5,6 @@
  * @package Omeka
  */
 
-require_once HELPERS;
-
 /**
  * Tests get_records('Tag').
  *

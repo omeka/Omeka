@@ -4,7 +4,6 @@
  * @package Omeka
  * @subpackage Tests
  */
-require_once HELPERS;
 
 /**
  * Tests the is_allowed helper.

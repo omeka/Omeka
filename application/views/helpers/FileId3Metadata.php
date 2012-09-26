@@ -12,9 +12,9 @@
  * @package Omeka
  * @subpackage Omeka_View_Helper
  */
-class Omeka_View_Helper_FileID3Metadata extends Zend_View_Helper_Abstract
+class Omeka_View_Helper_FileId3Metadata extends Zend_View_Helper_Abstract
 {   
-    public function fileID3Metadata($file, $options) 
+    public function fileId3Metadata($file, $options) 
     {
         $output = '';
         if ($file->metadata) {

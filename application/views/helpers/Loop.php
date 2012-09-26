@@ -1,5 +1,5 @@
 <?php
-class Omeka_View_Helper_LoopRecords extends Zend_View_Helper_Abstract
+class Omeka_View_Helper_Loop extends Zend_View_Helper_Abstract
 {
     /**
      * Return an iterator used for looping an array of records.
@@ -8,7 +8,7 @@ class Omeka_View_Helper_LoopRecords extends Zend_View_Helper_Abstract
      * @param array|null $records
      * @return Omeka_Record_Iterator
      */
-    public function loopRecords($recordsVar, $records = null)
+    public function loop($recordsVar, $records = null)
     {
         $recordsVar = $this->view->pluralize($recordsVar);
         if (!is_array($records)) {

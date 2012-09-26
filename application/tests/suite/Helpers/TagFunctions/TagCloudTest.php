@@ -6,11 +6,6 @@
  */
 
 /**
- * Require view helper functions.
- */
-require_once HELPERS;
-
-/**
  * Tests tag_cloud() in application/helpers/TagFunctions.php.
  *
  * @package Omeka

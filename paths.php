@@ -47,7 +47,6 @@ define('MODEL_DIR',        APP_DIR . '/models');
 define('FORM_DIR',         APP_DIR . '/forms');
 define('CONTROLLER_DIR',   APP_DIR . '/controllers');
 define('LIB_DIR',          APP_DIR . '/libraries');
-define('HELPER_DIR',       APP_DIR . '/helpers');
 define('CONFIG_DIR',       APP_DIR . '/config');
 define('LOGS_DIR',         APP_DIR . '/logs');
 define('VIEW_SCRIPTS_DIR', APP_DIR . '/views/scripts');
@@ -56,9 +55,6 @@ define('UPGRADE_DIR',      APP_DIR . '/migrations');
 define('LANGUAGES_DIR',    APP_DIR . '/languages');
 
 define('BACKGROUND_BOOTSTRAP_PATH', CORE_DIR . '/background.php');
-
-// Define the script that loads all the helpers:
-define('HELPERS', HELPER_DIR . '/all.php');
 
 // Define the web address constants:
 defined('WEB_ROOT') || _define_web_root();

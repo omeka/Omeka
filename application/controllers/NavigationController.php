@@ -28,7 +28,6 @@ class NavigationController extends Omeka_Controller_AbstractActionController
     
     public function editAction() 
     {
-        require_once HELPERS;
         set_theme_base_url('public');
         $form = $this->_getForm();
         $this->view->form = $form;

@@ -12,7 +12,7 @@
  * @package Omeka
  * @subpackage Omeka_View_Helper
  */
-class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
+class Omeka_View_Helper_Metadata extends Zend_View_Helper_Abstract
 {
     const SNIPPET = 'snippet';
     const INDEX = 'index';
@@ -58,7 +58,7 @@ class Omeka_View_Helper_RecordMetadata extends Zend_View_Helper_Abstract
      * @return string|array|null Null if field does not exist for item. Array
      * if certain options are passed.  String otherwise.
      */
-    public function recordMetadata($record, $metadata, $options = array())
+    public function metadata($record, $metadata, $options = array())
     {
         if (is_string($record)) {
             $record = $this->view->{$this->view->singularize($record)};

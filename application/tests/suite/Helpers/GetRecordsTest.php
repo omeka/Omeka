@@ -6,11 +6,6 @@
  */
 
 /**
- * Need access to view helper functions.
- */  
-require_once HELPERS;
- 
-/**
  * Tests get_records() in helpers/Functions.php
  *
  * Should just test that it delegates properly to CollectionsTable::findBy(),

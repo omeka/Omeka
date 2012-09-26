@@ -37,7 +37,7 @@ echo head(array('title'=>$pageTitle,'bodyid'=>'items','bodyclass' => 'browse'));
 
         <?php if (item_has_tags()): ?>
         <div class="tags"><p><strong><?php echo __('Tags'); ?>:</strong>
-            <?php echo item_tags_as_string(); ?></p>
+            <?php echo tag_string('items'); ?></p>
         </div>
         <?php endif; ?>
 
