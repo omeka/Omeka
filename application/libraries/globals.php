@@ -199,7 +199,7 @@ function get_plugin_hook_output($name, array $args = array())
  * @see get_plugin_hook_output()
  * @param string $pluginName
  * @param string $hookName
- * @param mixed $args,... (optional) Any arguments to be passed to the hook
+ * @param mixed $args Any arguments to be passed to the hook
  * implementation.
  * @return string
  */
@@ -298,7 +298,7 @@ function apply_filters($name, $value, array $args = array())
  *
  * @param string|array $name The filter name.
  * @param callback $callback The function to call.
- * @param integer $priority Optional, Defaults to 10.
+ * @param integer $priority Defaults to 10.
  */
 function add_filter($name, $callback, $priority = 10)
 {
@@ -349,7 +349,7 @@ function is_admin_theme()
 /**
  * Insert a new item into the Omeka database.
  *
- * @param array $metadata Optional Set of metadata options for configuring the
+ * @param array $metadata Set of metadata options for configuring the
  *  item.  Array which can include the following properties:
  *  <ul>
  *      <li>'public' (boolean)</li>
@@ -366,7 +366,7 @@ function is_admin_theme()
  *  added in the usual manner.  False by default.</li>
  *  </ul>
  *
- * @param array $elementTexts Optional, Array of element texts to assign to the item.
+ * @param array $elementTexts Array of element texts to assign to the item.
  *  This follows the format:
  * <code>
  * array(
@@ -394,7 +394,7 @@ function is_admin_theme()
  * </code>
  *  See ActsAsElementText::addElementTextsByArray() for more info.
  *
- * @param array $fileMetadata Optional, Set of metadata options that allow one or more
+ * @param array $fileMetadata Set of metadata options that allow one or more
  * files to be associated with the item.  Includes the following options:
  *  <ul>
  *      <li>'file_transfer_type' (string = 'Url|Filesystem|Upload' or
@@ -427,7 +427,7 @@ function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata
  * @param Item|integer $item
  * @param string|Omeka_File_Ingest_AbstractIngest $transferStrategy
  * @param array $files
- * @param array $options Optional
+ * @param array $options
  * @return array
  */
 function insert_files_for_item($item, $transferStrategy, $files, $options = array())
@@ -573,12 +573,12 @@ function release_object(&$var)
 }
 
 /**
- * Gets a theme option
+ * Return a theme option.
  *
- * @param string $optionName The name of the option to get.
- * @param string $themeName The name of the theme.  If null, it will use the
- * current public theme.
- * @return string The value of the theme option.
+ * @param string $optionName The option name.
+ * @param string $themeName The theme name.  If null, it will use the current 
+ * public theme.
+ * @return string The option value.
  */
 function get_theme_option($optionName, $themeName = null)
 {
@@ -589,23 +589,24 @@ function get_theme_option($optionName, $themeName = null)
 }
 
 /**
- * Sets a theme option
+ * Set a theme option.
  *
- * @param string $optionName The name of the option to set.
- * @param string $optionValue The value of the option.
- * @param string $themeName The name of the theme.  If null, it will use the
- * current public theme.
+ * @param string $optionName The option name.
+ * @param string $optionValue The option value.
+ * @param string $themeName The theme name. If null, it will use the current 
+ * public theme.
+ * @return 
  */
 function set_theme_option($optionName, $optionValue, $themeName = null)
 {
     if (!$themeName) {
         $themeName = Theme::getCurrentThemeName('public');
     }
-    return Theme::setOption($themeName, $optionName, $optionValue);
+    Theme::setOption($themeName, $optionName, $optionValue);
 }
 
 /**
- * Returns an array of all user role names.
+ * Return an array of all user role names.
  *
  * @return array
  */
@@ -620,25 +621,23 @@ function get_user_roles()
 }
 
 /**
- * Determines whether an Element Set contains a specific Element
+ * Determine whether an element set contains a specific element.
  *
- * @param string $elementSetName The name of the element set.
- * @param string $elementName The name of the element.
+ * @param string $elementSetName The element set name.
+ * @param string $elementName The element name.
  * @return bool
  */
 function element_exists($elementSetName, $elementName) {
     $element = get_db()->getTable('Element')->findByElementSetNameAndElementName($elementSetName, $elementName);
-    return (bool)$element;
+    return (bool) $element;
 }
 
 
 /**
- * Determine whether or not a plugin is installed and active.
+ * Determine whether a plugin is installed and active.
  *
  * May be used by theme/plugin writers to customize behavior based on the
- * existence of certain plugins.
- *
- * Some examples of how to use this function:
+ * existence of certain plugins. Some examples of how to use this function:
  *
  * Check if ExhibitBuilder is installed and activated.
  * <code>
@@ -657,10 +656,9 @@ function element_exists($elementSetName, $elementName) {
  * </code>
  *
  * @param string $name Directory name of the plugin.
- * @param string $version Optional Version of the plugin to check.
- * @param string $compOperator Optional Comparison operator to use when
- * checking the installed version of ExhibitBuilder.  Defaults to '>=' (to
- * check verify installed version).
+ * @param string $version Version of the plugin to check.
+ * @param string $compOperator Comparison operator to use when checking the 
+ * installed version of ExhibitBuilder.
  * @return boolean
  */
 function plugin_is_active($name, $version = null, $compOperator = '>=')
@@ -683,9 +681,8 @@ function plugin_is_active($name, $version = null, $compOperator = '>=')
  * Translate a string.
  *
  * @param string $string The string to be translated.
- * @param mixed $args Optional string formatting args. If any extra args are
- *  passed, the args and the translated string will be formatted with
- *  sprintf().
+ * @param mixed $args string formatting args. If any extra args are passed, the 
+ * args and the translated string will be formatted with sprintf().
  * @return string The translated string.
  */
 function __($string)
@@ -719,11 +716,11 @@ function __($string)
 /**
  * Add an translation source directory.
  *
- * The directory's contents should be .mo files following the naming
- * scheme of Omeka's application/languages directory. If a .mo for the
- * current locale exists, the translations will be loaded.
+ * The directory's contents should be .mo files following the naming scheme of 
+ * Omeka's application/languages directory. If a .mo for the current locale 
+ * exists, the translations will be loaded.
  *
- * @param string $dir Directory to load translations from.
+ * @param string $dir Directory from which to load translations.
  */
 function add_translation_source($dir)
 {
@@ -759,7 +756,6 @@ function get_html_lang()
     } catch(Zend_Exception $e) {
         return 'en-US';
     }
-
     return str_replace('_', '-', $locale->toString());
 }
 
@@ -767,12 +763,10 @@ function get_html_lang()
 /**
  * Format a date for output according to the current locale.
  *
- * @param mixed $date Date to format. If an integer, the date is intepreted
- *  as a Unix timestamp. If a string, the date is interpreted as an ISO 8601
- *  date.
- * @param string $format Format to apply. See Zend_Date for possible formats.
- *  The default format is the current locale's "medium" format.
- *
+ * @param mixed $date Date to format. If an integer, the date is intepreted as a 
+ * Unix timestamp. If a string, the date is interpreted as an ISO 8601 date.
+ * @param string $format Format to apply. See Zend_Date for possible formats. 
+ * The default format is the current locale's "medium" format.
  * @return string
  */
 function format_date($date, $format = Zend_Date::DATE_MEDIUM)
@@ -789,15 +783,15 @@ function format_date($date, $format = Zend_Date::DATE_MEDIUM)
 
 /**
  * Declare that a JavaScript file or files will be used on the page.
- * All "used" scripts will be included in the page's head.
- *
- * This needs to be called either before head(), or in a plugin_header hook.
+ * 
+ * All "used" scripts will be included in the page's head. This needs to be 
+ * called either before head(), or in a plugin_header hook.
  *
  * @see head_js()
  * @param string|array $file File to use, if an array is passed, each array
- *  member will be treated like a file.
- * @param string $dir Directory to search for the file.  Keeping the default
- *  is recommended.
+ * member will be treated like a file.
+ * @param string $dir Directory to search for the file. Keeping the default is 
+ * recommended.
  */
 function queue_js_file($file, $dir = 'javascripts')
 {
@@ -811,11 +805,10 @@ function queue_js_file($file, $dir = 'javascripts')
 }
 
 /**
- * Declare a JavaScript string to be used on the page and included in
- * the page's head.
+ * Declare a JavaScript string to be used on the page and included in the page's 
+ * head.
  *
- * This needs to be called either before head() or in a plugin_header
- * hook.
+ * This needs to be called either before head() or in a plugin_header hook.
  *
  * @see head_js()
  * @param string $string JavaScript string to include.
@@ -827,18 +820,18 @@ function queue_js_string($string)
 
 /**
  * Declare that a CSS file or files will be used on the page.
- * All "used" stylesheets will be included in the page's head.
- *
- * This needs to be called either before head(), or in a plugin_header hook.
+ * 
+ * All "used" stylesheets will be included in the page's head. This needs to be 
+ * called either before head(), or in a plugin_header hook.
  *
  * @see head_css()
  * @param string|array $file File to use, if an array is passed, each array
- *  member will be treated like a file.
+ * member will be treated like a file.
  * @param string $media CSS media declaration, defaults to 'all'.
- * @param string|bool $conditional Optional IE-style conditional comment, used
- *  generally to include IE-specific styles. Defaults to false.
- * @param string $dir Directory to search for the file.  Keeping the default
- *  is recommended.
+ * @param string|bool $conditional IE-style conditional comment, used generally 
+ * to include IE-specific styles. Defaults to false.
+ * @param string $dir Directory to search for the file.  Keeping the default is 
+ * recommended.
  */
 function queue_css_file($file, $media = 'all', $conditional = false, $dir = 'css')
 {
@@ -852,17 +845,15 @@ function queue_css_file($file, $media = 'all', $conditional = false, $dir = 'css
 }
 
 /**
- * Declare a CSS string to be used on the page and included in the
- * page's head.
+ * Declare a CSS string to be used on the page and included in the page's head.
  *
- * This needs to be called either before head() or in a plugin_header
- * hook.
+ * This needs to be called either before head() or in a plugin_header hook.
  *
  * @see head_css
  * @param string $string CSS string to include.
  * @param string $media CSS media declaration, defaults to 'all'.
- * @param string|bool $conditional Optional IE-style conditional comment,
- *  used generally to include IE-specific styles. Defaults to false.
+ * @param string|bool $conditional IE-style conditional comment, used generally 
+ * to include IE-specific styles. Defaults to false.
  */
 function queue_css_string($string, $media = 'all', $conditional = false)
 {
@@ -877,14 +868,14 @@ function queue_css_string($string, $media = 'all', $conditional = false)
 }
 
 /**
- * Print the JavaScript tags that will be used on the page.
+ * Return the JavaScript tags that will be used on the page.
  *
- * This should generally be used with echo to print the scripts in the page
+ * This should generally be used with echo to print the scripts in the page 
  * head.
  *
  * @see queue_js_file()
  * @param bool $includeDefaults Whether the default javascripts should be
- *  included. Defaults to true.
+ * included. Defaults to true.
  */
 function head_js($includeDefaults = true)
 {
@@ -906,12 +897,11 @@ function head_js($includeDefaults = true)
                        ->prependFile('https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js');
         }
     }
-
     return $headScript;
 }
 
 /**
- * Print the CSS link tags that will be used on the page.
+ * Return the CSS link tags that will be used on the page.
  *
  * This should generally be used with echo to print the scripts in the page
  * head.
@@ -939,8 +929,8 @@ function css_src($file, $dir = 'css')
  * Return the web path to an image file.
  *
  * @param string $file Filename, including the extension.
- * @param string $dir Optional Directory within the theme to look for image
- * files.  Defaults to 'images'.
+ * @param string $dir Directory within the theme to look for image files. 
+ * Defaults to 'images'.
  * @return string
  */
 function img($file, $dir = 'images')
@@ -949,32 +939,28 @@ function img($file, $dir = 'images')
 }
 
 /**
- * Echos the web path (that's what's important to the browser)
- * to a javascript file.
- * $dir defaults to 'javascripts'
- * $file should not include the .js extension
+ * Return a javascript tag.
  *
  * @param string $file The name of the file, without .js extension.
- * @param string $dir The directory in which to look for javascript files.  Recommended to leave the default value.
+ * @param string $dir The directory in which to look for javascript files. 
+ * Recommended to leave the default value.
+ * @return string
  */
 function js_tag($file, $dir = 'javascripts')
 {
     $href = src($file, $dir, 'js');
-
     return '<script type="text/javascript" src="' . html_escape($href) . '" charset="utf-8"></script>'."\n";
 }
 
 /**
- * Return a valid src attribute value for a given file.  Used primarily
- * by other helper functions.
+ * Return a valid src attribute value for a given file.
  *
- *
- * @param string        Filename
- * @param string|null   Directory that the file is contained in (optional)
- * @param string        File extension (optional)
+ * @param string $file The filename.
+ * @param string|null $dir The file's directory.
+ * @param string $ext The file's extension.
  * @return string
  */
-function src($file, $dir=null, $ext = null)
+function src($file, $dir = null, $ext = null)
 {
     if ($ext !== null) {
         $file .= '.'.$ext;
@@ -986,7 +972,8 @@ function src($file, $dir=null, $ext = null)
 }
 
 /**
- * Return the physical path for an asset/resource within the theme (or plugins, shared, etc.)
+ * Return the physical path for an asset/resource within the theme (or plugins, 
+ * shared, etc.)
  *
  * @throws InvalidArgumentException
  * @param string $file
@@ -1179,8 +1166,8 @@ function file_markup($files, array $props = array(), $wrapperAttributes = array(
 /**
  * Return display for ID3 metadata for the current file.
  *
- * @param array $options Optional
- * @param File|null $file Optional
+ * @param array $options
+ * @param File|null $file
  * @return string|array
  */
 function file_id3_metadata(array $options = array(), $file = null)
@@ -1237,10 +1224,10 @@ function tag_attributes($attributes, $value=null)
  *
  * Contains a single fieldset with a text input and submit button.
  *
- * @param string $buttonText Optional Defaults to 'Search'.
- * @param array $formProperties Optional XHTML attributes for the form.  Defaults
+ * @param string $buttonText Defaults to 'Search'.
+ * @param array $formProperties XHTML attributes for the form.  Defaults
  * to setting id="simple-search".
- * @param string $uri Optional Action for the form.  Defaults to 'items/browse'.
+ * @param string $uri Action for the form.  Defaults to 'items/browse'.
  * @return string
  */
 function simple_search_form($buttonText = null, $formProperties=array('id'=>'simple-search'), $uri = null)
@@ -1293,7 +1280,7 @@ function simple_search_form($buttonText = null, $formProperties=array('id'=>'sim
  *
  * @param Element|array $element
  * @param Omeka_Record_AbstractRecord $record
- * @param array $options Optional
+ * @param array $options
  * @return string HTML
  */
 function element_form($element, $record, $options = array())
@@ -1361,7 +1348,7 @@ function label_table_options($options, $labelOption = null)
  *
  * @param string $tableClass
  * @param string $labelOption
- * @param array $searchParams Optional search parameters on table.
+ * @param array $searchParams search parameters on table.
  */
 function get_table_options($tableClass, $labelOption = null, $searchParams = array())
 {
@@ -1675,7 +1662,7 @@ function body_tag($attributes = array())
 /**
  * Return a list of the current search filters in use.
  *
- * @params array $params Optional params to replace the ones read from the request.
+ * @params array $params params to replace the ones read from the request.
  */
 function search_filters(array $params = null)
 {
@@ -2051,7 +2038,7 @@ function item_type_elements($item=null)
  * @param Omeka_Record_AbstractRecord|string $record The name of the controller 
  * to use for the link.  If a record instance is passed, then it inflects the 
  * name of the controller from the record class.
- * @param string $action The action to use for the link (optional)
+ * @param string $action The action to use for the link
  * @param string $text The text to put in the link.  Default is 'View'.
  * @param array $props Attributes for the <a> tag
  * @param array $queryParams the parameters in the uri query
@@ -2085,9 +2072,9 @@ function link_to($record, $action=null, $text=null, $props = array(), $queryPara
 /**
  * Return HTML for a link to the advanced search form.
  *
- * @param string $text Optional Text of the link. Default is 'Advanced Search'.
- * @param array $props Optional XHTML attributes for the link.
- * @param string $uri Optional Action for the form.  Defaults to 'items/browse'.
+ * @param string $text Text of the link. Default is 'Advanced Search'.
+ * @param array $props XHTML attributes for the link.
+ * @param string $uri Action for the form.  Defaults to 'items/browse'.
  * @return string
  */
 function link_to_item_search($text = null, $props = array(), $uri=null)
@@ -2109,9 +2096,9 @@ function link_to_item_search($text = null, $props = array(), $uri=null)
  * filtering parameters passed to the URL.
  *
  * @param string $text Text to display in the link.
- * @param array $browseParams Optional Any parameters to use to build the browse page URL, e.g.
+ * @param array $browseParams Any parameters to use to build the browse page URL, e.g.
  * array('collection' => 1) would build items/browse?collection=1 as the URL.
- * @param array $linkProperties Optional XHTML attributes for the link.
+ * @param array $linkProperties XHTML attributes for the link.
  * @return string HTML
  */
 function link_to_items_browse($text, $browseParams = array(), $linkProperties = array())
@@ -2125,9 +2112,9 @@ function link_to_items_browse($text, $browseParams = array(), $linkProperties = 
  * The default text displayed for this link will be the name of the collection,
  * but that can be changed by passing a string argument.
  *
- * @param string|null $text Optional Text for the link.
- * @param array $props Optional XHTML attributes for the <a> tag.
- * @param string $action Optional 'show' by default.
+ * @param string|null $text Text for the link.
+ * @param array $props XHTML attributes for the <a> tag.
+ * @param string $action 'show' by default.
  * @return string
  */
 function link_to_collection_for_item($text = null, $props = array(), $action = 'show')
@@ -2201,7 +2188,7 @@ function link_to_file_show($attributes = array(), $text = null, $file = null)
 
 /**
  * @param string HTML for the text of the link.
- * @param array Properties for the <a> tag. (optional)
+ * @param array Properties for the <a> tag.
  * @param string The page to link to (this will be the 'show' page almost always
  * within the public theme).
  * @param Item Used for dependency injection testing or to use this function outside
@@ -2269,11 +2256,11 @@ function link_to_previous_item_show($text=null, $props=array())
 }
 
 /**
- * @param string $text Optional text to use for the title of the collection.  Default
+ * @param string $text text to use for the title of the collection.  Default
  * behavior is to use the name of the collection.
  * @param array $props Set of attributes to use for the link.
  * @param array $action The action to link to for the collection.  Default is 'show'.
- * @param array $collectionObj Optional Collection record can be passed to this
+ * @param array $collectionObj Collection record can be passed to this
  * to override the collection object retrieved by get_current_record().
  * @return string
  */
@@ -2408,7 +2395,7 @@ function nav(array $links, $maxDepth = 0)
 /**
  * Return HTML for the set of pagination links.
  *
- * @param array $options Optional Configurable parameters for the pagination
+ * @param array $options Configurable parameters for the pagination
  * links.  The following options are available:
  *      'scrolling_style' (string) See Zend_View_Helper_PaginationControl
   * for more details.  Default 'Sliding'.
@@ -2629,7 +2616,7 @@ function snippet($text, $startPos, $endPos, $append = '…')
  *
  * @param string $text
  * @param integer $maxWords
- * @param string $ellipsis Optional '...' by default.
+ * @param string $ellipsis
  * @return string
  */
 function snippet_by_word_count($text, $maxWords = 20, $ellipsis = '...')
