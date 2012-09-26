@@ -192,7 +192,7 @@ function item_has_tags($item=null)
     if (!$item) {
         $item = get_current_record('item');
     }
-    return (count($item->Tags) > 0);
+    return record_has_tags($item);
 }
 
 /**

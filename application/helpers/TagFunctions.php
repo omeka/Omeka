@@ -177,3 +177,18 @@ function tag_string($recordOrTags = null, $link=null, $delimiter=null)
     }
     return $tagString;
 }
+
+/**
+ * Check if the specified record has tags.
+ *
+ * @param Omeka_Record $record
+ * @return boolean
+ */
+function record_has_tags(Omeka_Record $record)
+{
+    try {
+        return (bool) $record->getTags();
+    } catch (BadMethodCallException $e) {
+        return false;
+    }
+}
