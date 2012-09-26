@@ -230,7 +230,7 @@ function item_image($imageType, $props = array(), $index = 0, $item = null)
 
     $imageFile = get_db()->getTable('File')->findWithImages($item->id, $index);
 
-    $media = new Omeka_View_Helper_Media;
+    $media = new Omeka_View_Helper_FileMarkup;
     return $media->image_tag($imageFile, $props, $imageType);
 }
 

@@ -310,7 +310,7 @@ function get_plugin_ini($pluginDirName, $iniKeyName)
  * Declare a callback function that will be used to display files with a given
  * MIME type and/or file extension.
  *
- * @uses Omeka_View_Helper_Media::addMimeTypes() See for info on usage.
+ * @uses Omeka_View_Helper_FileMarkup::addMimeTypes() See for info on usage.
  * @param array|string $fileIdentifiers Set of MIME types and/or file extensions
  * to which the provided callback will respond.
  * @param callback $callback Any valid callback.
@@ -318,7 +318,7 @@ function get_plugin_ini($pluginDirName, $iniKeyName)
  */
 function add_file_display_callback($fileIdentifiers, $callback, array $options=array())
 {
-    Omeka_View_Helper_Media::addMimeTypes($fileIdentifiers, $callback, $options);
+    Omeka_View_Helper_FileMarkup::addMimeTypes($fileIdentifiers, $callback, $options);
 }
 
 /**
