@@ -158,7 +158,7 @@ echo head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodycl
                             </p>
                             <p>
                                 <strong><?php echo __('Tags'); ?>:</strong>
-                                <?php if ($tags = item_tags_as_string()) echo $tags; else echo __('No Tags'); ?>
+                                <?php if ($tags = tag_string('items')) echo $tags; else echo __('No Tags'); ?>
                             </p>
                             <?php fire_plugin_hook('admin_append_to_items_browse_detailed_each', array('view' => $this)); ?>
                         </div>

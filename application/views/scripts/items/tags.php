@@ -11,7 +11,7 @@ echo head(array('title'=>$pageTitle,'bodyid'=>'items','bodyclass'=>'tags'));
         <?php echo public_nav_items(); ?>
     </ul>
 
-    <?php echo tag_cloud($tags, url('items/browse')); ?>
+    <?php echo tag_cloud($tags, 'items/browse'); ?>
 
 </div><!-- end primary -->
 

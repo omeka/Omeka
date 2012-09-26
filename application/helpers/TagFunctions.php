@@ -18,61 +18,6 @@ function get_recent_tags($limit = 10)
 }
 
 /**
- * Retrieve a tag cloud of all the tags for the current item.
- *
- * @since 0.10
- * @see item_tags_as_string()
- * @param array $params Options for sorting or filtering tags.
- * If null, the tags will display in the order they were added to the database.
- * @param boolean $tagsAreLinked Optional Whether or not to make each tag a link
- * to browse all the items with that tag.  True by default.
- * @param Item|null $item Check for this specific item record (current item if null).
- * @param int|null $limit The maximum number of tags to return (get all of the tags if null)
- * @return string
- */
-function item_tags_as_cloud($params = array('sort_field' => 'name'), $tagsAreLinked = true, $item=null, $limit=null)
-{
-    if (!$item) {
-        $item = get_current_record('item');
-    }
-    $params['record'] = $item;
-    $tags = get_records('Tag', $params, $limit);
-    $urlToLinkTo = ($tagsAreLinked) ? url('items/browse/tag/') : null;
-    return tag_cloud($tags, $urlToLinkTo);
-}
-
-/**
- * Output the tags for the current item as a string.
- *
- * @since 0.10
- * @see item_tags_as_cloud()
- * @param string $delimiter String that separates each tag.  Default is a comma
- * and space.
- * @param array $params Options for sorting or filtering tags.
- * If null, the tags will display in the order they were added to the database.
- * @param boolean $tagsAreLinked If tags should be linked or just represented as
- * text.  Default is true.
- * @param Item|null $item Check for this specific item record (current item if null).
- * @param int|null $limit The maximum number of tags to return (get all of the tags if null)
- * @return string HTML
- */
-function item_tags_as_string($delimiter = null, $params = array('sort_field' => 'name'),  $tagsAreLinked = true, $item=null, $limit=null)
-{
-    // Set the tag_delimiter option if no delimiter was passed.
-    if (is_null($delimiter)) {
-        $delimiter = get_option('tag_delimiter') . ' ';
-    }
-
-    if (!$item) {
-        $item = get_current_record('item');
-    }
-    $params['record'] = $item;
-    $tags = get_records('Tag', $params, $limit);
-    $urlToLinkTo = ($tagsAreLinked) ? url('items/browse/tag/') : null;
-    return tag_string($tags, $urlToLinkTo, $delimiter);
-}
-
-/**
  * Create a tag cloud made of divs that follow the hTagcloud microformat
  *
  * @param Omeka_Record_AbstractRecord|array $recordOrTags The record to retrieve 
@@ -84,18 +29,17 @@ function item_tags_as_string($delimiter = null, $params = array('sort_field' => 
 function tag_cloud($recordOrTags = null, $link = null, $maxClasses = 9, $tagNumber = false, $tagNumberOrder = null)
 {
     if (!$recordOrTags) {
-        $recordOrTags = array();
-    }
-
-    if ($recordOrTags instanceof Omeka_Record_AbstractRecord) {
+        $tags = array();
+    } else if (is_string($recordOrTags)) {
+        $tags = get_current_record($recordOrTags)->Tags;
+    } else if ($recordOrTags instanceof Omeka_Record_AbstractRecord) {
         $tags = $recordOrTags->Tags;
     } else {
         $tags = $recordOrTags;
     }
 
     if (empty($tags)) {
-        $html = '<p>'. __('No tags are available.') .'</p>';
-        return $html;
+        return '<p>' . __('No tags are available.') . '</p>';
     }
 
     //Get the largest value in the tags array
@@ -117,7 +61,7 @@ function tag_cloud($recordOrTags = null, $link = null, $maxClasses = 9, $tagNumb
         $class = str_repeat('v', $size) . ($size ? '-' : '') . 'popular';
         $html .= '<li class="' . $class . '">';
         if ($link) {
-            $html .= '<a href="' . html_escape($link . '?tags=' . urlencode($tag['name'])) . '">';
+            $html .= '<a href="' . html_escape(url($link, array('tags' => $tag['name']))) . '">';
         }
         if($tagNumber && $tagNumberOrder == 'before') {
             $html .= ' <span class="count">'.$tag['tagCount'].'</span> ';
@@ -146,7 +90,7 @@ function tag_cloud($recordOrTags = null, $link = null, $maxClasses = 9, $tagNumb
  * @param string $delimiter ', ' (comma and whitespace) by default
  * @return string HTML
  */
-function tag_string($recordOrTags = null, $link=null, $delimiter=null)
+function tag_string($recordOrTags = null, $link = 'items/browse', $delimiter = null)
 {
     // Set the tag_delimiter option if no delimiter was passed.
     if (is_null($delimiter)) {
@@ -154,26 +98,27 @@ function tag_string($recordOrTags = null, $link=null, $delimiter=null)
     }
 
     if (!$recordOrTags) {
-        $recordOrTags = array();
-    }
-
-    if ($recordOrTags instanceof Omeka_Record_AbstractRecord) {
+        $tags = array();
+    } else if (is_string($recordOrTags)) {
+        $tags = get_current_record($recordOrTags)->Tags;
+    } else if ($recordOrTags instanceof Omeka_Record_AbstractRecord) {
         $tags = $recordOrTags->Tags;
     } else {
         $tags = $recordOrTags;
     }
 
-    $tagString = '';
-    if (!empty($tags)) {
-        $tagStrings = array();
-        foreach ($tags as $key=>$tag) {
-            if (!$link) {
-                $tagStrings[$key] = html_escape($tag['name']);
-            } else {
-                $tagStrings[$key] = '<a href="' . html_escape($link.urlencode($tag['name'])) . '" rel="tag">'.html_escape($tag['name']).'</a>';
-            }
-        }
-        $tagString = join(html_escape($delimiter),$tagStrings);
+    if (empty($tags)) {
+        return '';
     }
-    return $tagString;
+    
+    $tagStrings = array();
+    foreach ($tags as $tag) {
+        $name = $tag['name'];
+        if (!$link) {
+            $tagStrings[] = html_escape($name);
+        } else {
+            $tagStrings[] = '<a href="' . html_escape(url($link, array('tag' => $name))) . '" rel="tag">' . html_escape($name) . '</a>';
+        }
+    }
+    return join(html_escape($delimiter), $tagStrings);
 }
