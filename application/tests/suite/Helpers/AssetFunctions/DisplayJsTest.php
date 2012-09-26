@@ -5,8 +5,6 @@
  * @package Omeka
  */
 
-require_once HELPERS;
-
 /**
  * Tests for the queue_js_file/head_js pair of helpers.
  *

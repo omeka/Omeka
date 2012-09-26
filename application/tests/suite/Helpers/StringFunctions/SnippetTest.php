@@ -1,6 +1,4 @@
 <?php 
-require_once HELPERS;
-
 class SnippetTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()

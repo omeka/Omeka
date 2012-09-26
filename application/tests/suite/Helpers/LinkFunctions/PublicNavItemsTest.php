@@ -6,11 +6,6 @@
  */
 
 /**
- * Require view helper functions.
- */
-require_once HELPERS;
- 
-/**
  * Tests public_nav_items()
  * in helpers/LinkFunctions.php
  *

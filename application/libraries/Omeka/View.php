@@ -104,12 +104,8 @@ class Omeka_View extends Zend_View_Abstract
      */
     public function _run() {
         $this->_loadCustomThemeScripts();
-        
         $vars = $this->getVars();
-                
-        require_once HELPERS;
-        
-        extract($vars);    
+        extract($vars);
         include func_get_arg(0);
     }
     

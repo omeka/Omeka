@@ -1,6 +1,4 @@
 <?php 
-require_once HELPERS;
-
 /**
  * Tests snippet_by_word_count($phrase, $maxWords, $ellipsis)
  * in helpers/StringFunctions.php

@@ -5,8 +5,6 @@
  * @package Omeka
  */
 
-require_once HELPERS;
-
 /**
  * Tests for the queue_css, queue_css_string and head_css helpers.
  *
