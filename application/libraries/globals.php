@@ -347,62 +347,60 @@ function is_admin_theme()
 /**
  * Insert a new item into the Omeka database.
  *
- * @param array $metadata Set of metadata options for configuring the
- *  item.  Array which can include the following properties:
- *  <ul>
- *      <li>'public' (boolean)</li>
- *      <li>'featured' (boolean)</li>
- *      <li>'collection_id' (integer)</li>
- *      <li>'item_type_id' (integer)</li>
- *      <li>'item_type_name' (string)</li>
- *      <li>'tags' (string, comma-delimited)</li>
- *      <li>'tag_entity' (Entity, optional and only checked if 'tags' is given)</li>
- *      <li>'overwriteElementTexts' (boolean) -- determines whether or not to
- *  overwrite existing element texts.  If true, this will loop through the
- *  element texts provided in $elementTexts, and it will update existing
- *  records where possible.  All texts that are not yet in the DB will be
- *  added in the usual manner.  False by default.</li>
- *  </ul>
- *
+ * @param array $metadata Set of metadata options for configuring the item. 
+ * Array which can include the following properties:
+ * <ul>
+ *   <li>'public' (boolean)</li>
+ *   <li>'featured' (boolean)</li>
+ *   <li>'collection_id' (integer)</li>
+ *   <li>'item_type_id' (integer)</li>
+ *   <li>'item_type_name' (string)</li>
+ *   <li>'tags' (string, comma-delimited)</li>
+ *   <li>'tag_entity' (Entity, optional and only checked if 'tags' is given)</li>
+ *   <li>'overwriteElementTexts' (boolean) -- determines whether or not to
+ * overwrite existing element texts.  If true, this will loop through the 
+ * element texts provided in $elementTexts, and it will update existing records 
+ * where possible.  All texts that are not yet in the DB will be added in the 
+ * usual manner.  False by default.</li>
+ * </ul>
  * @param array $elementTexts Array of element texts to assign to the item.
- *  This follows the format:
+ * This follows the format:
  * <code>
  * array(
- *     [element set name] => array(
- *         [element name] => array(
- *             array('text' => [string], 'html' => [false|true]),
- *             array('text' => [string], 'html' => [false|true])
- *         ),
- *         [element name] => array(
- *             array('text' => [string], 'html' => [false|true]),
- *             array('text' => [string], 'html' => [false|true])
- *         )
- *     ),
- *     [element set name] => array(
- *         [element name] => array(
- *             array('text' => [string], 'html' => [false|true]),
- *             array('text' => [string], 'html' => [false|true])
- *         ),
- *         [element name] => array(
- *             array('text' => [string], 'html' => [false|true]),
- *             array('text' => [string], 'html' => [false|true])
- *         )
+ *   [element set name] => array(
+ *     [element name] => array(
+ *       array('text' => [string], 'html' => [false|true]),
+ *       array('text' => [string], 'html' => [false|true])
+ *      ),
+ *     [element name] => array(
+ *       array('text' => [string], 'html' => [false|true]),
+ *       array('text' => [string], 'html' => [false|true])
  *     )
+ *   ),
+ *   [element set name] => array(
+ *     [element name] => array(
+ *       array('text' => [string], 'html' => [false|true]),
+ *       array('text' => [string], 'html' => [false|true])
+ *     ),
+ *     [element name] => array(
+ *       array('text' => [string], 'html' => [false|true]),
+ *       array('text' => [string], 'html' => [false|true])
+ *     )
+ *   )
  * );
  * </code>
- *  See ActsAsElementText::addElementTextsByArray() for more info.
- *
+ * @see ActsAsElementText::addElementTextsByArray()
  * @param array $fileMetadata Set of metadata options that allow one or more
  * files to be associated with the item.  Includes the following options:
- *  <ul>
- *      <li>'file_transfer_type' (string = 'Url|Filesystem|Upload' or
- * Omeka_File_Transfer_Adapter_Interface).  Corresponds to the
- * $transferStrategy argument for addFiles().</li>
- *      <li>'file_ingest_options' OPTIONAL (array of possible options to pass
+ * <ul>
+ *   <li>'file_transfer_type' (string = 'Url|Filesystem|Upload' or
+ * Omeka_File_Transfer_Adapter_Interface). Corresponds to the $transferStrategy 
+ * argument for addFiles().</li>
+ *   <li>'file_ingest_options' OPTIONAL (array of possible options to pass 
  * modify the behavior of the ingest script).  Corresponds to the $options
  * argument for addFiles().</li>
- *      <li>'files' (array or string) Represents information indicating the file
- * to ingest.  Corresponds to the $files argument for addFiles().</li>
+ *   <li>'files' (array or string) Represents information indicating the file to 
+ * ingest. Corresponds to the $files argument for addFiles().</li>
  * </ul>
  * @uses Builder_Item For more information on arguments and usage.
  * @see ActsAsElementText::addElementTextsByArray()
@@ -462,8 +460,8 @@ function update_item($item, $metadata = array(), $elementTexts = array(), $fileM
  * @param array $metadata Follows the format:
  * <code>
  * array(
- *     'name'        => [string],
- *     'description' => [string]
+ *   'name'        => [string],
+ *   'description' => [string]
  * );
  * </code>
  * @param array $elementInfos An array containing element data. Each entry 
@@ -473,14 +471,14 @@ function update_item($item, $metadata = array(), $elementTexts = array(), $fileM
  *   <li>An Element object</li>
  * </ol>
  * <code>
- *    array(
- *         array(
- *             'name'        => [(string) name, required],
- *             'description' => [(string) description, optional],
- *             'order'       => [(int) order, optional],
- *         ),
- *         [(Element)],
- *     );
+ * array(
+ *   array(
+ *     'name' => [(string) name, required],
+ *     'description' => [(string) description, optional],
+ *     'order' => [(int) order, optional],
+ *   ),
+ *   [(Element)],
+ * );
  * </code>
  * @return ItemType
  */
@@ -505,7 +503,6 @@ function insert_item_type($metadata = array(), $elementInfos = array())
  *   'collectors'  => [array of string names]
  * )
  * </code>
- *
  * @return Collection
  */
 function insert_collection($metadata = array())
@@ -535,13 +532,13 @@ function insert_collection($metadata = array())
  * <li>A string of the element name</li>
  * </ol>
  * <code>
- *    array(
- *         array(
- *             'name'        => [(string) name, required],
- *             'description' => [(string) description, optional],
- *         ),
- *         [(string) element name]
- *     );
+ * array(
+ *   array(
+ *     'name' => [(string) name, required],
+ *     'description' => [(string) description, optional],
+ *   ),
+ *   [(string) element name]
+ * );
  * </code>
  * @return ElementSet
  */
@@ -640,20 +637,14 @@ function element_exists($elementSetName, $elementName) {
  * existence of certain plugins. Some examples of how to use this function:
  *
  * Check if ExhibitBuilder is installed and activated.
- * <code>
- * if (plugin_is_active('ExhibitBuilder')):
- * </code>
+ * <code>if (plugin_is_active('ExhibitBuilder')):</code>
  *
  * Check if installed version of ExhibitBuilder is at least version 1.0 or
  * higher.
- * <code>
- * if (plugin_is_active('ExhibitBuilder', '1.0')):
- * </code>
+ * <code>if (plugin_is_active('ExhibitBuilder', '1.0')):</code>
  *
  * Check if installed version of ExhibitBuilder is anything less than 2.0.
- * <code>
- * if (plugin_is_active('ExhibitBuilder', '2.0', '<')):
- * </code>
+ * <code>if (plugin_is_active('ExhibitBuilder', '2.0', '<')):</code>
  *
  * @param string $name Directory name of the plugin.
  * @param string $version Version of the plugin to check.
@@ -738,7 +729,8 @@ function add_translation_source($dir)
             'locale' => $locale
         ));
     } catch (Zend_Translate_Exception $e) {
-        // Do nothing, allow the user to set a locale or dir without a translation.
+        // Do nothing, allow the user to set a locale or dir without a 
+        // translation.
     }
 }
 
@@ -2672,11 +2664,13 @@ function strip_formatting($str, $allowableTags = '', $fallbackStr = '')
  *
  * This is primarily for easy creation of HTML ids within Omeka
  *
- * 1) convert to lowercase
- * 2) Replace whitespace with -,
- * 3) remove all non-alphanumerics,
- * 4) remove leading/trailing delimiters
- * 5) optionally prepend a piece of text
+ * <ol>
+ *   <li>convert to lowercase</li>
+ *   <li>Replace whitespace with -</li>
+ *   <li>remove all non-alphanumerics</li>
+ *   <li>remove leading/trailing delimiters</li>
+ *   <li>optionally prepend a piece of text</li>
+ * </ol>
  *
  * @param string $text The text to convert
  * @param string $prepend Another string to prepend to the ID
