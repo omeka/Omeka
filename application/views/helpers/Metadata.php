@@ -61,7 +61,7 @@ class Omeka_View_Helper_Metadata extends Zend_View_Helper_Abstract
     public function metadata($record, $metadata, $options = array())
     {
         if (is_string($record)) {
-            $record = $this->view->{$this->view->singularize($record)};
+            $record = $this->view->getCurrentRecord($record);
         }
 
         if (!($record instanceof Omeka_Record_AbstractRecord)) {
