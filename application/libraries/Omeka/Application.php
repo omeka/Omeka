@@ -137,6 +137,6 @@ class Omeka_Application extends Zend_Application
      */
     private function _stripSlashes($value)
     {
-        return is_array($value) ? array_map(array($this, '_stripSlashes'), $value) : $this->_stripSlashes($value);
+        return is_array($value) ? array_map(array($this, '_stripSlashes'), $value) : stripslashes($value);
     }
 }
