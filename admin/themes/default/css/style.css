@@ -1566,6 +1566,10 @@ ul#section-nav, #section-nav ul {
   margin-bottom: 20px;
 }
 
+#fieldset-new_nav_link_display {
+  margin-top: 40px;
+}
+
 #navigation_main_list { 
     list-style-type: none; 
     margin: 0; 

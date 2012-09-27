@@ -104,8 +104,8 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
 
                     jQuery( '#navigation_main_list' ).append('<li>' + edit_nav_header_html + edit_nav_body_html + '</li>');
                     jQuery( '#' + n_id).val(n_value); // does escaping for json data
-                    jQuery( '#navigation_main_list_new_label' ).val('');
-                    jQuery( '#navigation_main_list_new_uri' ).val('');
+                    jQuery( '#new_nav_link_label' ).val('');
+                    jQuery( '#new_nav_link_uri' ).val('');
                     updateAccordion();
                     updateDeleteButtons();
                     updateSelectHomepageOptions();
@@ -179,12 +179,23 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
 <div class="seven columns alpha">
 <?php echo flash(); ?>
 <?php echo $this->form->getDisplayGroup(Omeka_Form_Navigation::MAIN_NAV_CHECKBOX_DISPLAY_ELEMENT_ID); ?>
-<?php echo $this->form->getDisplayGroup(Omeka_Form_Navigation::NEW_NAV_LINK_DISPLAY_ELEMENT_ID); ?>
 </div>
 
 <div id="save" class="three columns omega panel">
  <?php echo $this->formSubmit('submit', __('Save Changes'), array('id'=>'save-changes', 'class'=>'submit big green button')); ?>
 <?php echo $this->form->getDisplayGroup(Omeka_Form_Navigation::HOMEPAGE_SELECT_DISPLAY_ELEMENT_ID); ?>
+
+    <fieldset id="fieldset-new_nav_link_display">
+        <legend><?php echo __('New Link'); ?></legend>
+        <label for="new_nav_link_label"><?php echo __('New Link Label'); ?></label><br/>
+        <input type="text" id="new_nav_link_label" name="new_nav_link_label" /><br/>
+
+        <label for="new_nav_link_uri"><?php echo __('New Link Uri'); ?></label><br/>
+        <input type="text" id="new_nav_link_uri" name="new_nav_link_uri" /><br/>
+
+        <a href="" id="new_nav_link_button_link" class="blue button"><?php echo __('Add Link'); ?></a>
+    </fieldset>
+
 </div>
 
 </form>

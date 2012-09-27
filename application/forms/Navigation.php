@@ -23,11 +23,6 @@ class Omeka_Form_Navigation extends Omeka_Form
 
     const MAIN_NAV_CHECKBOX_DISPLAY_ELEMENT_ID = 'navigation_main_checkbox_display';
     
-    const NEW_NAV_LINK_DISPLAY_ELEMENT_ID = 'new_nav_link_display';
-    const NEW_NAV_LINK_LABEL_ELEMENT_ID = 'new_nav_link_label';
-    const NEW_NAV_LINK_URI_ELEMENT_ID = 'new_nav_link_uri';
-    const NEW_NAV_LINK_BUTTON_ELEMENT_ID = 'new_nav_link_button';
-    
     const HOMEPAGE_SELECT_DISPLAY_ELEMENT_ID = 'homepage_select_display';
         
     private $_nav;
@@ -47,7 +42,6 @@ class Omeka_Form_Navigation extends Omeka_Form
     {
         $this->clearElements();
         $this->_addNavElements($this->_nav);
-        $this->_addNewNavigationLink();
         $this->_addHomepageSelectElement($this->_nav);
     }
         
@@ -133,44 +127,6 @@ class Omeka_Form_Navigation extends Omeka_Form
         $this->addDisplayGroup(
             $elementIds,
             self::HOMEPAGE_SELECT_DISPLAY_ELEMENT_ID);
-    }
-    
-    protected function _addNewNavigationLink()
-    {   
-        $elementIds = array();
-        
-        $this->addElement('text', self::NEW_NAV_LINK_LABEL_ELEMENT_ID, array(
-            'value' => '',
-            'label' => __('New Link Label'),
-        ));
-        $elementIds[] = self::NEW_NAV_LINK_LABEL_ELEMENT_ID;
-        
-        $this->addElement('text', self::NEW_NAV_LINK_URI_ELEMENT_ID, array(
-            'value' => '',
-            'label' => __('New Link URI'),
-        ));
-        $elementIds[] = self::NEW_NAV_LINK_URI_ELEMENT_ID;
-        
-        $this->addElement('html', self::NEW_NAV_LINK_BUTTON_ELEMENT_ID, array(
-            'value' => '<a href="" id="new_nav_link_button_link" class="blue button">' . __('Add Link') . '</a>',
-        ));
-        $elementIds[] = self::NEW_NAV_LINK_BUTTON_ELEMENT_ID;
-        
-        $this->addDisplayGroup(
-            $elementIds,
-            self::NEW_NAV_LINK_DISPLAY_ELEMENT_ID,
-            array(
-                'legend' => __('Add Link'),
-        ));
-        
-        $this->getDisplayGroup(self::NEW_NAV_LINK_DISPLAY_ELEMENT_ID)->setDecorators(
-            array(
-                array('Description', array('escape' => false, 'tag' => false)),
-                'FormElements',
-                'Fieldset', 
-            )
-        );
-        
     }
     
     public function saveFromPost() 
