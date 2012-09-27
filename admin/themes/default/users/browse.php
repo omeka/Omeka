@@ -6,55 +6,14 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
     <?php echo link_to('users', 'add', __('Add a User'), array('class'=>'small green button')); ?>
 <?php endif; ?>
 <?php echo flash(); ?>
-<script type="text/javascript">
-    jQuery(window).load(function() {
-        var itemCheckboxes = jQuery("table#users tbody input[type=checkbox]");
-        var globalCheckbox = jQuery('th#batch-edit-heading').html('<input type="checkbox">').find('input');
-        var batchEditSubmit = jQuery('.batch-edit-option input');
-        
-        globalCheckbox.change(function() {
-            itemCheckboxes.prop('checked', !!this.checked);
-            checkBatchEditSubmitButton();
-        });
-        
-        itemCheckboxes.change(function(){
-            if(!this.checked) {
-                globalCheckbox.prop('checked', false);
-            }
-            checkBatchEditSubmitButton();
-        });
-        
-        function checkBatchEditSubmitButton() {
-            var checked = false;
-            itemCheckboxes.each(function() {
-                if (this.checked) {
-                    checked = true;
-                    return false;
-                }
-            });
-        
-            batchEditSubmit.prop('disabled', !checked);
-        }    
-    });
-    
-</script>
-            <form class="top" action="<?php echo html_escape(url('users/batch-edit')); ?>" method="post" accept-charset="utf-8">
 
-                <div class="item-actions">
-                    <?php if (is_allowed('Users', 'edit')): ?>
-                    <input type="submit" class="edit-items small blue button" name="submit" value="<?php echo __('Change Role'); ?>" />
-                    <?php endif; ?>
-                    <?php if (is_allowed('Users', 'delete')): ?>
-                    <input type="submit" class="red small" name="submit" value="<?php echo __('Delete'); ?>">
-                    <?php endif; ?>                    
-                </div>
+            <form class="top" action="<?php echo html_escape(url('users/batch-edit')); ?>" method="post" accept-charset="utf-8">
     
                 <?php echo pagination_links(); ?>
                 
-                <table id="users" class="full">
+                <table id="users">
                     <thead>
                         <tr>
-                            <th class="batch-edit-heading"><?php echo __('Select') ?></th>
                             <th><?php echo __('Username') ?></th>
                             <th><?php echo __('Real Name'); ?></th>
                             <th><?php echo __('Email'); ?></th>
@@ -64,7 +23,6 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
                     <tbody>
                     <?php foreach( $users as $key => $user ): ?>
                         <tr class="<?php if (current_user()->id == $user->id) echo 'current-user '; ?><?php if($key%2==1) echo 'even'; else echo 'odd'; ?><?php if(!$user->active): ?> inactive<?php endif; ?>">
-                            <td class="batch-edit-check"><input type="checkbox" name="users[]" value="<?php echo html_escape($user->username);?>" /></td>
                             <td>
                             <?php echo html_escape($user->username); ?> <?php if(!$user->active): ?>(<?php echo __('inactive'); ?>)<?php endif; ?>
                             <ul class="action-links group">
