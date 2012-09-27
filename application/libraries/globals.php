@@ -140,6 +140,7 @@ function _log($msg, $priority = Zend_Log::INFO)
 /**
  * Declare a plugin hook implementation within a plugin.
  *
+ * @uses Omeka_Plugin_Broker::addHook()
  * @param string $hook Name of hook being implemented.
  * @param mixed $callback Any valid PHP callback.
  */
@@ -161,6 +162,7 @@ function add_plugin_hook($hook, $callback)
  * fire_plugin_hook('after_save_item', array('item' => $item, 'foo' => $arg2));
  * </code>
  *
+ * @uses Omeka_Plugin_Broker::callHook()
  * @param string $name The hook name.
  * @param array $args Arguments to be passed to the hook implementations.
  * @return mixed
@@ -195,7 +197,7 @@ function get_plugin_hook_output($name, array $args = array())
  * This is like get_plugin_hook_output() but only calls the hook within the
  * provided plugin.
  *
- * @see get_plugin_hook_output()
+ * @uses Omeka_Plugin_Broker::getHook()
  * @param string $pluginName
  * @param string $hookName
  * @param mixed $args Any arguments to be passed to the hook implementation.
@@ -275,7 +277,7 @@ function add_file_display_callback($fileIdentifiers, $callback, array $options =
 /**
  * Apply a set of plugin filters to a given value.
  *
- * @uses Omeka_Plugin_Filters::applyFilters()
+ * @uses Omeka_Plugin_Broker::applyFilters()
  * @param string|array $name The filter name.
  * @param mixed $value The value to filter.
  * @param array $args Additional arguments to pass to filter implementations.
@@ -294,6 +296,7 @@ function apply_filters($name, $value, array $args = array())
 /**
  * Declare a filter implementation.
  *
+ * @uses Omeka_Plugin_Broker::addFilter()
  * @param string|array $name The filter name.
  * @param callback $callback The function to call.
  * @param integer $priority Defaults to 10.
@@ -308,7 +311,7 @@ function add_filter($name, $callback, $priority = 10)
 /**
  * Clear all implementations for a filter (or all filters).
  *
- * @uses Omeka_Plugin_Filters::clearFilters()
+ * @uses Omeka_Plugin_Broker::clearFilters()
  * @param string|null $name The name of the filter to clear. If null or omitted, 
  * all filters will be cleared.
  */
@@ -347,6 +350,7 @@ function is_admin_theme()
 /**
  * Insert a new item into the Omeka database.
  *
+ * @uses Builder_Item
  * @param array $metadata Set of metadata options for configuring the item. 
  * Array which can include the following properties:
  * <ul>
@@ -389,7 +393,6 @@ function is_admin_theme()
  *   )
  * );
  * </code>
- * @see ActsAsElementText::addElementTextsByArray()
  * @param array $fileMetadata Set of metadata options that allow one or more
  * files to be associated with the item.  Includes the following options:
  * <ul>
@@ -402,8 +405,6 @@ function is_admin_theme()
  *   <li>'files' (array or string) Represents information indicating the file to 
  * ingest. Corresponds to the $files argument for addFiles().</li>
  * </ul>
- * @uses Builder_Item For more information on arguments and usage.
- * @see ActsAsElementText::addElementTextsByArray()
  * @return Item
  */
 function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata = array())
@@ -418,8 +419,7 @@ function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata
 /**
  * Add files to an item.
  *
- * @uses Builder_Item::addFiles() See for information on arguments and notes on 
- * usage.
+ * @uses Builder_Item::addFiles()
  * @param Item|integer $item
  * @param string|Omeka_File_Ingest_AbstractIngest $transferStrategy
  * @param array $files
@@ -457,6 +457,7 @@ function update_item($item, $metadata = array(), $elementTexts = array(), $fileM
 /**
  * Insert a new item type.
  *
+ * @uses Builder_ItemType
  * @param array $metadata Follows the format:
  * <code>
  * array(
@@ -493,6 +494,7 @@ function insert_item_type($metadata = array(), $elementInfos = array())
 /**
  * Insert a collection
  *
+ * @uses Builder_Collection
  * @param array $metadata Follows the format:
  * <code>
  * array(
@@ -515,6 +517,7 @@ function insert_collection($metadata = array())
 /**
  * Insert an element set and its elements into the database.
  *
+ * @uses Builder_ElementSet
  * @param string|array $elementSetMetadata Element set information.
  * <code>
  * [(string) element set name]
@@ -572,6 +575,7 @@ function release_object(&$var)
 /**
  * Return a theme option.
  *
+ * @uses Theme::getOption()
  * @param string $optionName The option name.
  * @param string $themeName The theme name.  If null, it will use the current 
  * public theme.
@@ -587,7 +591,8 @@ function get_theme_option($optionName, $themeName = null)
 
 /**
  * Set a theme option.
- *
+ * 
+ * @uses Theme::setOption()
  * @param string $optionName The option name.
  * @param string $optionValue The option value.
  * @param string $themeName The theme name. If null, it will use the current 
@@ -605,6 +610,7 @@ function set_theme_option($optionName, $optionValue, $themeName = null)
 /**
  * Return an array of all user role names.
  *
+ * @uses Zend_Acl::getRoles()
  * @return array
  */
 function get_user_roles()
@@ -1126,7 +1132,7 @@ function latest_omeka_version()
  * Displays a set of files based on the file's MIME type and any options that 
  * are passed.
  * 
- * @uses Omeka_View_Helper_FileMarkup
+ * @uses Omeka_View_Helper_FileMarkup::fileMarkup()
  * @param File $files A file record or an array of File records to display.
  * @param array $props Properties to customize display for different file types.
  * @param array $wrapperAttributes Attributes XHTML attributes for the div that 
@@ -1351,7 +1357,6 @@ function get_view()
  * Output a <link> tag for the RSS feed so the browser can auto-discover the 
  * field.
  *
- * @uses items_output_url()
  * @return string HTML
  */
 function auto_discovery_link_tags() {
@@ -1456,7 +1461,7 @@ function total_records($recordType)
 /**
  * Return an iterator used for looping an array of records.
  * 
- * @uses Omeka_View_Helper_Loop
+ * @uses Omeka_View_Helper_Loop::loop()
  * @param string $recordsVar
  * @param array|null $records
  * @return Omeka_Record_Iterator
@@ -1502,7 +1507,7 @@ function has_loop_records($recordsVar)
 /**
  * Set a record to the view as the current record.
  * 
- * @uses Omeka_View_Helper_SetCurrentRecord
+ * @uses Omeka_View_Helper_SetCurrentRecord::setCurrentRecord()
  * @param string $recordVar
  * @param Omeka_Record_AbstractRecord $record
  * @param bool $setPreviousRecord
@@ -1515,7 +1520,7 @@ function set_current_record($recordVar, Omeka_Record_AbstractRecord $record, $se
 /**
  * Get the current record from the view.
  * 
- * @uses Omeka_View_Helper_GetCurrentRecord
+ * @uses Omeka_View_Helper_GetCurrentRecord::getCurrentRecord()
  * @param string $recordVar
  * @param bool $throwException
  * @return Omeka_Record_AbstractRecord|false
@@ -1680,7 +1685,7 @@ function metadata($record, $metadata, $options = array())
 /**
  * Return the set of all element text metadata for a record.
  *
- * @uses Omeka_View_Helper_AllElementTexts
+ * @uses Omeka_View_Helper_AllElementTexts::allElementTexts()
  * @param Omeka_Record_AbstractRecord|string $record The record to get the
  * element text metadata for.
  * @param array $options Options for getting the metadata.
@@ -2302,7 +2307,6 @@ function link_to_admin_home_page($text = null, $props = array())
  * generates
  * <code><li class="nav-themes"><a href="themes/browse">Themes</a></li></code>
  *
- * @uses is_current_url()
  * @param array $links A keyed array, where key = text of the link, and value = 
  * uri of the link, or value = another ordered array $a with the following 
  * recursive structure:
