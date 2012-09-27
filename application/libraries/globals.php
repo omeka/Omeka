@@ -626,6 +626,7 @@ function get_user_roles()
 /**
  * Determine whether an element set contains a specific element.
  *
+ * @uses Table_Element::findByElementSetNameAndElementName()
  * @param string $elementSetName The element set name.
  * @param string $elementName The element name.
  * @return bool
@@ -652,6 +653,7 @@ function element_exists($elementSetName, $elementName) {
  * Check if installed version of ExhibitBuilder is anything less than 2.0.
  * <code>if (plugin_is_active('ExhibitBuilder', '2.0', '<')):</code>
  *
+ * @uses Table_Plugin::findByDirectoryName()
  * @param string $name Directory name of the plugin.
  * @param string $version Version of the plugin to check.
  * @param string $compOperator Comparison operator to use when checking the 
@@ -677,6 +679,7 @@ function plugin_is_active($name, $version = null, $compOperator = '>=')
 /**
  * Translate a string.
  *
+ * @uses Zend_Translate::translate()
  * @param string $string The string to be translated.
  * @param mixed $args string formatting args. If any extra args are passed, the 
  * args and the translated string will be formatted with sprintf().
@@ -716,6 +719,7 @@ function __($string)
  * Omeka's application/languages directory. If a .mo for the current locale 
  * exists, the translations will be loaded.
  *
+ * @uses Zend_Translate::addTranslation()
  * @param string $dir Directory from which to load translations.
  */
 function add_translation_source($dir)
@@ -759,6 +763,7 @@ function get_html_lang()
 /**
  * Format a date for output according to the current locale.
  *
+ * @uses Zend_Date
  * @param mixed $date Date to format. If an integer, the date is intepreted as a 
  * Unix timestamp. If a string, the date is interpreted as an ISO 8601 date.
  * @param string $format Format to apply. See Zend_Date for possible formats. 
@@ -912,6 +917,7 @@ function head_css()
 /**
  * Return the web path to a css file.
  *
+ * @uses src()
  * @param string $file Should not include the .css extension
  * @param string $dir Defaults to 'css'
  * @return string
@@ -924,6 +930,7 @@ function css_src($file, $dir = 'css')
 /**
  * Return the web path to an image file.
  *
+ * @uses src()
  * @param string $file Filename, including the extension.
  * @param string $dir Directory within the theme to look for image files. 
  * Defaults to 'images'.
@@ -937,6 +944,7 @@ function img($file, $dir = 'images')
 /**
  * Return a javascript tag.
  *
+ * @uses src()
  * @param string $file The name of the file, without .js extension.
  * @param string $dir The directory in which to look for javascript files. 
  * Recommended to leave the default value.
@@ -951,6 +959,7 @@ function js_tag($file, $dir = 'javascripts')
 /**
  * Return a valid src attribute value for a given file.
  *
+ * @uses web_path_to()
  * @param string $file The filename.
  * @param string|null $dir The file's directory.
  * @param string $ext The file's extension.
@@ -1010,6 +1019,7 @@ function web_path_to($file)
 /**
  * Determine whether the current collection has associated collectors.
  *
+ * @uses Collection::hasCollectors()
  * @return boolean
  */
 function collection_has_collectors()
@@ -1054,6 +1064,7 @@ function get_collection_for_item($item=null)
 /**
  * Returns the most recent collections
  *
+ * @uses get_records()
  * @param integer $num The maximum number of recent collections to return
  * @return array
  */
@@ -1065,6 +1076,7 @@ function get_recent_collections($num = 10)
 /**
  * Returns a random featured collection.
  *
+ * @uses Collection::findRandomFeatured()
  * @return Collection
  */
 function get_random_featured_collection()
@@ -1156,6 +1168,7 @@ function file_markup($files, array $props = array(), $wrapperAttributes = array(
 /**
  * Return display for ID3 metadata for the current file.
  *
+ * @uses Omeka_View_Helper_FileId3Metadata::fileId3Metadata()
  * @param array $options
  * @param File|null $file
  * @return string|array
@@ -1171,6 +1184,7 @@ function file_id3_metadata(array $options = array(), $file = null)
 /**
  * Returns the most recent files
  *
+ * @uses get_records()
  * @param integer $num The maximum number of recent files to return
  * @return array
  */
@@ -1266,6 +1280,7 @@ function simple_search_form($buttonText = null, $formProperties=array('id'=>'sim
  * All sets of form inputs for elements will be wrapped in a div with 
  * class="field".
  *
+ * @uses Omeka_View_Helper_ElementForm::elementForm()
  * @param Element|array $element
  * @param Omeka_Record_AbstractRecord $record
  * @param array $options
@@ -1331,6 +1346,7 @@ function label_table_options($options, $labelOption = null)
 /**
  * Get the options array for a given table.
  *
+ * @uses Omeka_Db_Table::findPairsForSelectForm()
  * @param string $tableClass
  * @param string $labelOption
  * @param array $searchParams search parameters on table.
@@ -1369,6 +1385,7 @@ function auto_discovery_link_tags() {
  * Includes a file from the common/ directory, passing variables into that 
  * script.
  *
+ * @uses Zend_View_Helper_Partial::partial()
  * @param string $file Filename
  * @param array $vars A keyed array of variables to be extracted into the script
  * @param string $dir Defaults to 'common'
@@ -1382,7 +1399,7 @@ function common($file, $vars = array(), $dir = 'common')
 /**
  * Include the header script into the view
  *
- * @see common()
+ * @uses common
  * @param array Keyed array of variables
  * @param string $file Filename of header script (defaults to 'header')
  * @return string
@@ -1395,6 +1412,7 @@ function head($vars = array(), $file = 'header')
 /**
  * Include the footer script into the view
  *
+ * @uses common()
  * @param array Keyed array of variables
  * @param string $file Filename of footer script (defaults to 'footer')
  * @return string
@@ -1406,6 +1424,7 @@ function foot($vars = array(), $file = 'footer') {
 /**
  * Return a flashed message from the controller
  *
+ * @uses Omeka_View_Helper_Flash::flash()
  * @return string
  */
 function flash()
@@ -1449,7 +1468,7 @@ function get_records($recordType, $params = array(), $limit = 10)
 /**
  * Get the total number of a given type of record in the database.
  *
- * @uses Omeka_Db_Table::count
+ * @uses Omeka_Db_Table::count()
  * @param string $recordType Type of record to count.
  * @return integer Number of records of $recordType in the database.
  */
@@ -1474,6 +1493,7 @@ function loop($recordsVar, $records = null)
 /**
  * Set records to the view for iteration.
  * 
+ * @uses Omeka_View_Helper_SetLoopRecords::setLoopRecords()
  * @param string $recordsVar
  * @param array $records
  */
@@ -1485,6 +1505,7 @@ function set_loop_records($recordsVar, array $records)
 /**
  * Get records from the view for iteration.
  * 
+ * @uses Omeka_View_Helper_GetLoopRecords::getLoopRecords()
  * @param string $recordsVar
  * @return array|null
  */
@@ -1496,6 +1517,7 @@ function get_loop_records($recordsVar, $throwException = true)
 /**
  * Check if records have been set to the view for iteration.
  * 
+ * @uses Omeka_View_Helper_GetLoopRecords::getLoopRecords()
  * @param string $recordsVar
  * @return bool
  */
@@ -1533,6 +1555,7 @@ function get_current_record($recordVar, $throwException = true)
 /**
  * Get a record by its ID.
  * 
+ * @uses Omeka_Db_Table::find()
  * @param string $recordVar
  * @param int $recordId
  * @return Omeka_Record_AbstractRecord|null
@@ -1559,6 +1582,7 @@ function get_current_action_contexts()
  * Builds an HTML list containing all available output format contexts for the
  * current action.
  *
+ * @uses get_current_action_contexts()
  * @param bool True = unordered list; False = use delimiter
  * @param string If the first argument is false, use this as a delimiter.
  * @return string|bool HTML
@@ -1656,6 +1680,7 @@ function body_tag($attributes = array())
 /**
  * Return a list of the current search filters in use.
  *
+ * @uses Omeka_View_Helper_SearchFilters::searchFilters()
  * @params array $params params to replace the ones read from the request.
  * @return string
  */
@@ -1667,7 +1692,7 @@ function search_filters(array $params = null)
 /**
  * Get a piece or pieces of metadata for a record.
  *
- * @see Omeka_View_Helper_Metadata
+ * @uses Omeka_View_Helper_Metadata::metadata()
  * @param Omeka_Record_AbstractRecord|string $record The record to get metadata
  * for. If an Omeka_Record_AbstractRecord, that record is used. If a string,
  * that string is used to look up a record in the current view.
@@ -1698,7 +1723,6 @@ function all_element_texts($record, $options = array())
 
 /**
  * @uses file_markup()
- * @uses get_current_record()
  * @param array $options
  * @param array $wrapperAttributes
  * @param Item|null $item Check for this specific item record (current item if null).
@@ -1716,6 +1740,7 @@ function files_for_item($options = array(), $wrapperAttributes = array('class'=>
  * Returns the HTML markup for displaying a random featured item.  Most commonly
  * used on the home page of public themes.
  *
+ * @uses random_featured_items()
  * @param boolean $withImage Whether or not the featured item should have an 
  * image associated with it. If set to true, this will either display a 
  * clickable square thumbnail for an item, or it will display "You have no 
@@ -1732,6 +1757,7 @@ function random_featured_item($withImage = null)
 /**
  * Return the next item in the database.
  *
+ * @uses Item::next()
  * @param Item|null Check for this specific item record (current item if null).
  * @return Item|null
  */
@@ -1744,7 +1770,7 @@ function get_next_item($item=null)
 }
 
 /**
- * @see get_previous_item()
+ * @uses Item::previous()
  * @param Item|null Check for this specific item record (current item if null).
  * @return Item|null
  */
@@ -1811,11 +1837,12 @@ function item_citation($item = null)
 }
 
 /**
- * Determine whether or not a specific element uses HTML.
+ * Determine whether a specific element uses HTML.
  * 
  * By default this will test the first element text, though it is possible to 
  * test against a different element text by modifying the $index parameter.
  *
+ * @uses ElementText::isHtml()
  * @param string $elementSetName
  * @param string $elementName
  * @param integer $index
@@ -1834,7 +1861,7 @@ function item_field_uses_html($elementSetName, $elementName, $index = 0, $item =
 }
 
 /**
- * @see item_thumbnail()
+ * @uses item_image()
  * @param array $props
  * @param integer $index
  * @return string HTML
@@ -1847,7 +1874,6 @@ function item_fullsize($props = array(), $index = 0, $item = null)
 /**
  * Determine whether or not the item has any files associated with it.
  *
- * @see has_files()
  * @uses Item::hasFiles()
  * @param Item|null Check for this specific item record (current item if null).
  * @return boolean
@@ -1875,6 +1901,7 @@ function item_has_tags($item=null)
 /**
  * Determine whether the item has a thumbnail image that it can display.
  *
+ * @uses Item::hasThumbnail()
  * @param Item|null Check for this specific item record (current item if null).
  * @return bool
  */
@@ -1889,6 +1916,7 @@ function item_has_thumbnail($item=null)
 /**
  * Return a customized item image tag.
  *
+ * @uses Omeka_View_Helper_FileMarkup::image_tag()
  * @param string $imageType
  * @param array $props
  * @param integer $index
@@ -1907,6 +1935,7 @@ function item_image($imageType, $props = array(), $index = 0, $item = null)
 /**
  * Returns the HTML for an item search form
  *
+ * @uses Zend_View_Helper_Partial::partial()
  * @param array $props
  * @param string $formActionUri
  * @return string
@@ -1917,7 +1946,7 @@ function items_search_form($props=array(), $formActionUri = null)
 }
 
 /**
- * @see item_thumbnail()
+ * @uses item_image()
  * @param array $props
  * @param integer $index
  * @param Item $item The item to which the image belongs
@@ -1949,6 +1978,7 @@ function item_thumbnail($props = array(), $index = 0, $item = null)
 /**
  * Return the most recent items
  *
+ * @uses Table_Item::findBy()
  * @param integer $num The maximum number of recent items to return
  * @return array
  */
@@ -1960,6 +1990,7 @@ function get_recent_items($num = 10)
 /**
  * Return a random featured item
  *
+ * @uses get_random_featured_items()
  * @param boolean|null $hasImage
  * @return Item
  */
@@ -1972,6 +2003,7 @@ function get_random_featured_item($hasImage=null)
 /**
  * Return multiple random featured items.
  *
+ * @uses get_records()
  * @param integer $num The maximum number of recent items to return
  * @param boolean|null $hasImage
  * @return array $items
@@ -1984,6 +2016,7 @@ function get_random_featured_items($num = 5, $hasImage = null)
 /**
  * Return markup for random featured items.
  * 
+ * @uses get_random_featured_items()
  * @param int $num
  * @param bool|null $hasImage
  * @return string
@@ -2012,10 +2045,11 @@ function random_featured_items($num = 5, $hasImage = null)
 /**
  * Return the set of values for item type elements.
  * 
+ * @uses Item::getItemTypeElements()
  * @param Item|null Check for this specific item record (current item if null).
  * @return array
  */
-function item_type_elements($item=null)
+function item_type_elements($item = null)
 {
     if (!$item) {
         $item = get_current_record('item');
@@ -2030,6 +2064,8 @@ function item_type_elements($item=null)
 /**
  * Uses url() to generate <a> tags for a given link.
  *
+ * @uses record_url()
+ * @uses url()
  * @param Omeka_Record_AbstractRecord|string $record The name of the controller 
  * to use for the link.  If a record instance is passed, then it inflects the 
  * name of the controller from the record class.
@@ -2084,6 +2120,7 @@ function link_to_item_search($text = null, $props = array(), $uri=null)
  * Get the proper HTML for a link to the browse page for items, with any 
  * appropriate filtering parameters passed to the URL.
  *
+ * @uses link_to()
  * @param string $text Text to display in the link.
  * @param array $browseParams Any parameters to use to build the browse page 
  * URL, e.g. array('collection' => 1) would build items/browse?collection=1 as 
@@ -2102,6 +2139,7 @@ function link_to_items_browse($text, $browseParams = array(), $linkProperties = 
  * The default text displayed for this link will be the name of the collection,
  * but that can be changed by passing a string argument.
  *
+ * @uses link_to_collection()
  * @param string|null $text Text for the link.
  * @param array $props XHTML attributes for the <a> tag.
  * @param string $action 'show' by default.
@@ -2118,6 +2156,7 @@ function link_to_collection_for_item($text = null, $props = array(), $action = '
 /**
  * Return a link to collection items browse page.
  * 
+ * @uses link_to()
  * @param string|null $text
  * @param array $props
  * @param string $action
@@ -2141,6 +2180,7 @@ function link_to_items_in_collection($text = null, $props = array(),
 /**
  * Return a link to item type items browse page.
  * 
+ * @uses link_to()
  * @param string|null $text
  * @param array $props
  * @param string $action
@@ -2168,6 +2208,7 @@ function link_to_items_with_item_type($text = null, $props = array(),
  * context. The text of the link defaults to the DC:Title of the file record, 
  * then to the original filename, unless otherwise specified.
  *
+ * @uses link_to()
  * @param array $attributes
  * @param string $text
  * @param File null|File
@@ -2186,6 +2227,7 @@ function link_to_file_show($attributes = array(), $text = null, $file = null)
 }
 
 /**
+ * @uses link_to()
  * @param string HTML for the text of the link.
  * @param array Properties for the <a> tag.
  * @param string The page to link to (this will be the 'show' page almost always
@@ -2204,6 +2246,7 @@ function link_to_item($text = null, $props = array(), $action = 'show', $item=nu
 }
 
 /**
+ * @uses items_output_url()
  * @param string $text The text of the link.
  * @param array $params A set of query string parameters to merge in to the href
  * of the link.  E.g., if this link was clicked on the items/browse?collection=1
@@ -2236,7 +2279,7 @@ function link_to_next_item_show($text=null, $props=array())
 }
 
 /**
- * @see link_to_next_item_show()
+ * @uses link_to()
  * @return string
  */
 function link_to_previous_item_show($text = null, $props = array())
@@ -2251,6 +2294,7 @@ function link_to_previous_item_show($text = null, $props = array())
 }
 
 /**
+ * @uses link_to()
  * @param string $text text to use for the title of the collection.  Default
  * behavior is to use the name of the collection.
  * @param array $props Set of attributes to use for the link.
@@ -2284,6 +2328,7 @@ function link_to_home_page($text = null, $props = array())
 }
 
 /**
+ * @uses admin_url()
  * @see link_to_home_page()
  * @param null|string $text
  * @param array $props
@@ -2398,6 +2443,7 @@ function nav(array $links, $maxDepth = 0)
 /**
  * Return HTML for the set of pagination links.
  *
+ * @uses Zend_View_Helper_PaginationControl::paginationControl()
  * @param array $options Configurable parameters for the pagination links. The 
  * following options are available:
  * <ul>
@@ -2459,7 +2505,7 @@ function pagination_links($options = array())
  * differentiate between the different navigation elements by passing the 2nd
  * argument as 'main', so that it knew that this was the main navigation.
  *
- * @see apply_filters()
+ * @uses nav()
  * @param array $navArray
  * @param string|null $navType
  * @param integer|null $maxDepth
@@ -2526,6 +2572,7 @@ function html_escape($value)
  * not wrap the resulting output of this function in quotes, as proper JSON 
  * encoding will take care of that.
  * 
+ * @uses Zend_Json::encode()
  * @param string $value
  * @return string
  */
@@ -2708,6 +2755,7 @@ function url_to_link($str)
 /**
  * Returns the most recent tags.
  *
+ * @uses get_records()
  * @param integer $limit The maximum number of recent tags to return
  * @return array
  */
@@ -2852,7 +2900,8 @@ function url($options = array(), $name = null, $queryParams = array(),
  * absolute URLs are required in some contexts. Instantiates view helpers 
  * directly because a view may not be registered.
  *
- * @uses url()
+ * @uses Zend_View_Helper_ServerUrl::serverUrl()
+ * @uses Omeka_View_Helper_Url::url()
  * @param mixed
  * @return string HTML
  */
@@ -2931,6 +2980,7 @@ function record_url($record, $action = null, $getAbsoluteUrl = false)
 /**
  * Return a URL to an output page.
  * 
+ * @uses url()
  * @param string $output
  * @param array $otherParams
  * @return string
@@ -2958,6 +3008,7 @@ function items_output_url($output, $otherParams = array()) {
 /**
  * Return the provided file's URL.
  * 
+ * @uses File::getWebPath()
  * @param File $file
  * @param string $format
  * @return string
@@ -2973,7 +3024,8 @@ function file_display_url(File $file, $format = 'fullsize')
 /**
  * Return a URL to the public theme.
  *
- * @see admin_url()
+ * @uses set_theme_base_url()
+ * @uses revert_theme_base_url()
  * @param mixed
  * @return string
  */
@@ -2989,7 +3041,8 @@ function public_url()
 /**
  * Return a URL to the admin theme.
  * 
- * @see public_url()
+ * @uses set_theme_base_url()
+ * @uses revert_theme_base_url()
  * @param mixed
  * @return string
  */
@@ -3005,6 +3058,7 @@ function admin_url()
 /**
  * Set the base URL for the specified theme.
  * 
+ * @uses Zend_Controller_Front::setBaseUrl()
  * @param string $theme
  */
 function set_theme_base_url($theme = null)
@@ -3027,6 +3081,8 @@ function set_theme_base_url($theme = null)
 
 /**
  * Revert the base URL to its previous state.
+ * 
+ * @uses Zend_Controller_Front::setBaseUrl()
  */
 function revert_theme_base_url()
 {
@@ -3043,6 +3099,7 @@ function revert_theme_base_url()
  * <code>is_allowed('Items', 'showNotPublic')</code>
  * Will check if the user has permission to view Items that are not public.
  *
+ * @uses Zend_Acl::is_allowed()
  * @param string|Zend_Acl_Resource_Interface
  * @param string|null
  * @return boolean
