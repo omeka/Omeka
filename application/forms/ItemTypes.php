@@ -176,7 +176,7 @@ class Omeka_Form_ItemTypes extends Omeka_Form
         
         $this->addElement('submit', self::SUBMIT_ADD_ELEMENT_ID, array(
             'label' => __('Add Item Type'),
-            'class' => 'big red button',
+            'class' => 'big green button',
             'decorators' =>  array(
                         'ViewHelper',
                         'Errors',)
