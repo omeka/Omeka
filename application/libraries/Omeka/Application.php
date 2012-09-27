@@ -86,11 +86,10 @@ class Omeka_Application extends Zend_Application
      */
     public function sanitizeMagicQuotes()
     {
-        //Strip out those bastard slashes
         if (get_magic_quotes_gpc()) {
-            $_POST = stripslashes_deep($_POST);
-            $_REQUEST = stripslashes_deep($_REQUEST);
-            $_GET = stripslashes_deep($_GET);
+            $_POST = $this->_stripSlashes($_POST);
+            $_REQUEST = $this->_stripSlashes($_REQUEST);
+            $_GET = $this->_stripSlashes($_GET);
         }
     }
     
@@ -125,5 +124,19 @@ class Omeka_Application extends Zend_Application
         $displayError = $this->getEnvironment() != 'production';
         header("HTTP/1.0 500 Internal Server Error");
         require VIEW_SCRIPTS_DIR . '/error/index.php';
+    }
+    
+    /**
+     * Strip slashes.
+     * 
+     * Filters request superglobals in order to avoid problems with PHP's 
+     * magic_quotes setting.
+     *
+     * @param mixed $value
+     * @return mixed
+     */
+    private function _stripSlashes($value)
+    {
+        return is_array($value) ? array_map(array($this, '_stripSlashes'), $value) : stripslashes($value);
     }
 }

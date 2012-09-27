@@ -1,23 +1,19 @@
 <?php
 /**
- * Helper functions that are always available in Omeka.  As global functions,
- * these should be used as little as possible in the application code
- * to reduce coupling.
- *
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  */
 
 /**
- * Retrieve an option from the Omeka database.
+ * Return an option from the options table.
  *
  * If the returned value represents an object or array, it must be unserialized
- * by the caller before use.  For example,
+ * by the caller before use. For example:
  * <code>$object = unserialize(get_option('plugin_object'))</code>.
  *
- * @param string $name
- * @return string
+ * @param string $name The option name.
+ * @return string The option value.
  */
 function get_option($name)
 {
@@ -28,42 +24,38 @@ function get_option($name)
 }
 
 /**
- * Set an option in the Omeka database.
+ * Set an option to the options table.
  *
  * Note that objects and arrays must be serialized before being saved.
  *
- * @see get_option()
- * @param string $name
- * @param string $value
- * @return void
+ * @param string $name The option name.
+ * @param string $value The option value.
  */
 function set_option($name, $value)
 {
     $db = get_db();
-    $db->query("REPLACE INTO $db->Option (name, value) VALUES (?, ?)", array($name, $value));
-
+    $sql = "REPLACE INTO {$db->Option} (name, value) VALUES (?, ?)";
+    $db->query($sql, array($name, $value));
+    
+    // Update the options cache.
     $bootstrap = Zend_Registry::get('bootstrap');
-    //Now update the options hash so that any subsequent requests have it available
     $options = $bootstrap->getResource('Options');
     $options[$name] = $value;
     $bootstrap->getContainer()->options = $options;
 }
 
 /**
- * Delete an option from the database.
+ * Delete an option from the options table.
  *
- * @param string $name
- * @return void
+ * @param string $name The option name.
  */
 function delete_option($name)
 {
     $db = get_db();
-    $sql = "
-    DELETE
-    FROM $db->Option
-    WHERE `name` = ?";
+    $sql = "DELETE FROM {$db->Option} WHERE `name` = ?";
     $db->query($sql, array($name));
-
+    
+    // Update the options cache.
     $bootstrap = Zend_Registry::get('bootstrap');
     $options = $bootstrap->getResource('Options');
     if (isset($options[$name])) {
@@ -73,28 +65,11 @@ function delete_option($name)
 }
 
 /**
- * Generate a URL slug from a piece of text.
+ * Return one column of a multidimensional array as an array.
  *
- * Trims whitespace, replaces disallowed characters with hyphens,
- * converts the resulting string to lowercase, and trims at 30 characters.
- *
- * @param string $text
- * @return string
- */
-function generate_slug($text)
-{
-    // Remove characters other than alphanumeric, hyphen, underscore.
-    $slug = preg_replace('/[^a-z0-9\-_]/', '-', strtolower(trim($text)));
-    // Trim down to 30 characters.
-    return substr($slug, 0, 30);
-}
-
-/**
- * Retrieve one column of a multidimensional array as an array.
- *
- * @param string|integer $col
- * @param array $array
- * @return array
+ * @param string|integer $col The column to pluck.
+ * @param array $array The array from which to pluck.
+ * @return array The column as an array.
  */
 function pluck($col, $array)
 {
@@ -106,7 +81,7 @@ function pluck($col, $array)
 }
 
 /**
- * Retrieve the User record associated with the currently logged in user.
+ * Return the currently logged in User record.
  *
  * @return User|null Null if no user is logged in.
  */
@@ -116,8 +91,9 @@ function current_user()
 }
 
 /**
- * Retrieve the database object.
+ * Return the database object.
  *
+ * @throws RuntimeException
  * @return Omeka_Db
  */
 function get_db()
@@ -134,7 +110,6 @@ function get_db()
  *
  * @uses _log()
  * @param string $msg
- * @return void
  */
 function debug($msg)
 {
@@ -143,14 +118,11 @@ function debug($msg)
 
 /**
  * Log a message.
- *
+ * 
  * Enabled via config.ini: log.errors.
  *
- * @since 1.4
- * @param mixed $msg
- * @param integer $priority Optional Defaults to Zend_Log::INFO.  See Zend_Log
- * for a list of available priorities.
- * @return void
+ * @param mixed $msg The log message.
+ * @param integer $priority See Zend_Log for a list of available priorities.
  */
 function _log($msg, $priority = Zend_Log::INFO)
 {
@@ -159,7 +131,6 @@ function _log($msg, $priority = Zend_Log::INFO)
     } catch (Zend_Exception $e) {
         return;
     }
-    
     if (!($log = $bootstrap->getResource('Logger'))) {
         return;
     }
@@ -167,28 +138,11 @@ function _log($msg, $priority = Zend_Log::INFO)
 }
 
 /**
- * Called during startup to strip out slashes from the request superglobals in
- * order to avoid problems with PHP's magic_quotes setting.
- *
- * Does not need to be called elsewhere in the application.
- *
- * @access private
- * @param mixed $value
- * @return mixed
- */
-function stripslashes_deep($value)
-{
-     $value = is_array($value) ? array_map('stripslashes_deep', $value) : stripslashes($value);
-
-     return $value;
-}
-
-/**
  * Declare a plugin hook implementation within a plugin.
  *
+ * @uses Omeka_Plugin_Broker::addHook()
  * @param string $hook Name of hook being implemented.
  * @param mixed $callback Any valid PHP callback.
- * @return void
  */
 function add_plugin_hook($hook, $callback)
 {
@@ -208,6 +162,7 @@ function add_plugin_hook($hook, $callback)
  * fire_plugin_hook('after_save_item', array('item' => $item, 'foo' => $arg2));
  * </code>
  *
+ * @uses Omeka_Plugin_Broker::callHook()
  * @param string $name The hook name.
  * @param array $args Arguments to be passed to the hook implementations.
  * @return mixed
@@ -220,7 +175,7 @@ function fire_plugin_hook($name, array $args = array())
 }
 
 /**
- * Retrieve the output of fire_plugin_hook() as a string.
+ * Return the output of fire_plugin_hook() as a string.
  * 
  * @uses fire_plugin_hook()
  * @param string $name The hook name.
@@ -237,17 +192,16 @@ function get_plugin_hook_output($name, array $args = array())
 }
 
 /**
- * Retrieve the output of a specific plugin's hook as a string.
+ * Return the output of a specific plugin's hook as a string.
  *
  * This is like get_plugin_hook_output() but only calls the hook within the
  * provided plugin.
  *
- * @see get_plugin_hook_output()
+ * @uses Omeka_Plugin_Broker::getHook()
  * @param string $pluginName
  * @param string $hookName
- * @param mixed $args,... (optional) Any arguments to be passed to the hook
- * implementation.
- * @return string
+ * @param mixed $args Any arguments to be passed to the hook implementation.
+ * @return string|null
  */
 function get_specific_plugin_hook_output()
 {
@@ -256,16 +210,16 @@ function get_specific_plugin_hook_output()
     // Get the plugin name (1st arg) and hook name (2nd arg).
     $pluginName = array_shift($args);
     $hookName = array_shift($args);
-
+    
     // Get the specific hook.
     $pluginBroker = get_plugin_broker();
     $hookNameSpecific = $pluginBroker->getHook($pluginName, $hookName);
-
+    
     // Return null if the specific hook doesn't exist.
     if (!$hookNameSpecific) {
         return null;
     }
-
+    
     // Buffer and return any output originating from the hook.
     ob_start();
     call_user_func_array($hookNameSpecific, $args);
@@ -276,9 +230,8 @@ function get_specific_plugin_hook_output()
 }
 
 /**
- * Retrieve the broker object for Omeka plugins.
+ * Return the broker object for Omeka plugins.
  *
- * @access private
  * @return Omeka_Plugin_Broker|null
  */
 function get_plugin_broker()
@@ -291,7 +244,7 @@ function get_plugin_broker()
 }
 
 /**
- * Retrieve specified descriptive info for a plugin from its ini file.
+ * Return specified descriptive info for a plugin from its ini file.
  *
  * @param string $pluginDirName The directory name of the plugin.
  * @param string $iniKeyName The name of the key in the ini file.
@@ -316,7 +269,7 @@ function get_plugin_ini($pluginDirName, $iniKeyName)
  * @param callback $callback Any valid callback.
  * @param array $options
  */
-function add_file_display_callback($fileIdentifiers, $callback, array $options=array())
+function add_file_display_callback($fileIdentifiers, $callback, array $options = array())
 {
     Omeka_View_Helper_FileMarkup::addMimeTypes($fileIdentifiers, $callback, $options);
 }
@@ -324,8 +277,7 @@ function add_file_display_callback($fileIdentifiers, $callback, array $options=a
 /**
  * Apply a set of plugin filters to a given value.
  *
- * @since 0.10
- * @uses Omeka_Plugin_Filters::applyFilters()
+ * @uses Omeka_Plugin_Broker::applyFilters()
  * @param string|array $name The filter name.
  * @param mixed $value The value to filter.
  * @param array $args Additional arguments to pass to filter implementations.
@@ -344,11 +296,10 @@ function apply_filters($name, $value, array $args = array())
 /**
  * Declare a filter implementation.
  *
- * @since 0.10
+ * @uses Omeka_Plugin_Broker::addFilter()
  * @param string|array $name The filter name.
  * @param callback $callback The function to call.
- * @param integer $priority Optional, Defaults to 10.
- * @return void
+ * @param integer $priority Defaults to 10.
  */
 function add_filter($name, $callback, $priority = 10)
 {
@@ -360,11 +311,9 @@ function add_filter($name, $callback, $priority = 10)
 /**
  * Clear all implementations for a filter (or all filters).
  *
- * @since 1.4
- * @uses Omeka_Plugin_Filters::clearFilters()
- * @param string|null $name The name of the filter to clear.  If
- *  null or omitted, all filters will be cleared.
- * @return void
+ * @uses Omeka_Plugin_Broker::clearFilters()
+ * @param string|null $name The name of the filter to clear. If null or omitted, 
+ * all filters will be cleared.
  */
 function clear_filters($filterName = null)
 {
@@ -374,7 +323,7 @@ function clear_filters($filterName = null)
 }
 
 /**
- * Retrieve the ACL object.
+ * Return the ACL object.
  *
  * @return Zend_Acl
  */
@@ -401,65 +350,61 @@ function is_admin_theme()
 /**
  * Insert a new item into the Omeka database.
  *
- * @param array $metadata Optional Set of metadata options for configuring the
- *  item.  Array which can include the following properties:
- *  <ul>
- *      <li>'public' (boolean)</li>
- *      <li>'featured' (boolean)</li>
- *      <li>'collection_id' (integer)</li>
- *      <li>'item_type_id' (integer)</li>
- *      <li>'item_type_name' (string)</li>
- *      <li>'tags' (string, comma-delimited)</li>
- *      <li>'tag_entity' (Entity, optional and only checked if 'tags' is given)</li>
- *      <li>'overwriteElementTexts' (boolean) -- determines whether or not to
- *  overwrite existing element texts.  If true, this will loop through the
- *  element texts provided in $elementTexts, and it will update existing
- *  records where possible.  All texts that are not yet in the DB will be
- *  added in the usual manner.  False by default.</li>
- *  </ul>
- *
- * @param array $elementTexts Optional, Array of element texts to assign to the item.
- *  This follows the format:
+ * @uses Builder_Item
+ * @param array $metadata Set of metadata options for configuring the item. 
+ * Array which can include the following properties:
+ * <ul>
+ *   <li>'public' (boolean)</li>
+ *   <li>'featured' (boolean)</li>
+ *   <li>'collection_id' (integer)</li>
+ *   <li>'item_type_id' (integer)</li>
+ *   <li>'item_type_name' (string)</li>
+ *   <li>'tags' (string, comma-delimited)</li>
+ *   <li>'tag_entity' (Entity, optional and only checked if 'tags' is given)</li>
+ *   <li>'overwriteElementTexts' (boolean) -- determines whether or not to
+ * overwrite existing element texts.  If true, this will loop through the 
+ * element texts provided in $elementTexts, and it will update existing records 
+ * where possible.  All texts that are not yet in the DB will be added in the 
+ * usual manner.  False by default.</li>
+ * </ul>
+ * @param array $elementTexts Array of element texts to assign to the item.
+ * This follows the format:
  * <code>
  * array(
- *     [element set name] => array(
- *         [element name] => array(
- *             array('text' => [string], 'html' => [false|true]),
- *             array('text' => [string], 'html' => [false|true])
- *         ),
- *         [element name] => array(
- *             array('text' => [string], 'html' => [false|true]),
- *             array('text' => [string], 'html' => [false|true])
- *         )
- *     ),
- *     [element set name] => array(
- *         [element name] => array(
- *             array('text' => [string], 'html' => [false|true]),
- *             array('text' => [string], 'html' => [false|true])
- *         ),
- *         [element name] => array(
- *             array('text' => [string], 'html' => [false|true]),
- *             array('text' => [string], 'html' => [false|true])
- *         )
+ *   [element set name] => array(
+ *     [element name] => array(
+ *       array('text' => [string], 'html' => [false|true]),
+ *       array('text' => [string], 'html' => [false|true])
+ *      ),
+ *     [element name] => array(
+ *       array('text' => [string], 'html' => [false|true]),
+ *       array('text' => [string], 'html' => [false|true])
  *     )
+ *   ),
+ *   [element set name] => array(
+ *     [element name] => array(
+ *       array('text' => [string], 'html' => [false|true]),
+ *       array('text' => [string], 'html' => [false|true])
+ *     ),
+ *     [element name] => array(
+ *       array('text' => [string], 'html' => [false|true]),
+ *       array('text' => [string], 'html' => [false|true])
+ *     )
+ *   )
  * );
  * </code>
- *  See ActsAsElementText::addElementTextsByArray() for more info.
- *
- * @param array $fileMetadata Optional, Set of metadata options that allow one or more
+ * @param array $fileMetadata Set of metadata options that allow one or more
  * files to be associated with the item.  Includes the following options:
- *  <ul>
- *      <li>'file_transfer_type' (string = 'Url|Filesystem|Upload' or
- * Omeka_File_Transfer_Adapter_Interface).  Corresponds to the
- * $transferStrategy argument for addFiles().</li>
- *      <li>'file_ingest_options' OPTIONAL (array of possible options to pass
+ * <ul>
+ *   <li>'file_transfer_type' (string = 'Url|Filesystem|Upload' or
+ * Omeka_File_Transfer_Adapter_Interface). Corresponds to the $transferStrategy 
+ * argument for addFiles().</li>
+ *   <li>'file_ingest_options' OPTIONAL (array of possible options to pass 
  * modify the behavior of the ingest script).  Corresponds to the $options
  * argument for addFiles().</li>
- *      <li>'files' (array or string) Represents information indicating the file
- * to ingest.  Corresponds to the $files argument for addFiles().</li>
+ *   <li>'files' (array or string) Represents information indicating the file to 
+ * ingest. Corresponds to the $files argument for addFiles().</li>
  * </ul>
- * @uses Builder_Item For more information on arguments and usage.
- * @see ActsAsElementText::addElementTextsByArray()
  * @return Item
  */
 function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata = array())
@@ -474,12 +419,11 @@ function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata
 /**
  * Add files to an item.
  *
- * @uses Builder_Item::addFiles() See for information on arguments and notes
- * on usage.
+ * @uses Builder_Item::addFiles()
  * @param Item|integer $item
  * @param string|Omeka_File_Ingest_AbstractIngest $transferStrategy
  * @param array $files
- * @param array $options Optional
+ * @param array $options
  * @return array
  */
 function insert_files_for_item($item, $transferStrategy, $files, $options = array())
@@ -513,31 +457,31 @@ function update_item($item, $metadata = array(), $elementTexts = array(), $fileM
 /**
  * Insert a new item type.
  *
+ * @uses Builder_ItemType
  * @param array $metadata Follows the format:
  * <code>
  * array(
- *     'name'        => [string],
- *     'description' => [string]
+ *   'name'        => [string],
+ *   'description' => [string]
  * );
  * </code>
- * @param array $elementInfos An array containing element data. Each entry follows
- * one or more of the following formats:
+ * @param array $elementInfos An array containing element data. Each entry 
+ * follows one or more of the following formats:
  * <ol>
- * <li>An array containing element metadata</li>
- * <li>An Element object</li>
+ *   <li>An array containing element metadata</li>
+ *   <li>An Element object</li>
  * </ol>
  * <code>
- *    array(
- *         array(
- *             'name'           => [(string) name, required],
- *             'description'    => [(string) description, optional],
- *             'order'          => [(int) order, optional],
- *         ),
- *         [(Element)],
- *     );
+ * array(
+ *   array(
+ *     'name' => [(string) name, required],
+ *     'description' => [(string) description, optional],
+ *     'order' => [(int) order, optional],
+ *   ),
+ *   [(Element)],
+ * );
  * </code>
  * @return ItemType
- * @throws Exception
  */
 function insert_item_type($metadata = array(), $elementInfos = array())
 {
@@ -550,15 +494,17 @@ function insert_item_type($metadata = array(), $elementInfos = array())
 /**
  * Insert a collection
  *
+ * @uses Builder_Collection
  * @param array $metadata Follows the format:
- * <code> array(
- *     'name'        => [string],
- *     'description' => [string],
- *     'public'      => [true|false],
- *     'featured'    => [true|false]
- *     'collectors'  => [array of string names]
- * )</code>
- *
+ * <code>
+ * array(
+ *   'name'        => [string],
+ *   'description' => [string],
+ *   'public'      => [true|false],
+ *   'featured'    => [true|false]
+ *   'collectors'  => [array of string names]
+ * )
+ * </code>
  * @return Collection
  */
 function insert_collection($metadata = array())
@@ -571,15 +517,16 @@ function insert_collection($metadata = array())
 /**
  * Insert an element set and its elements into the database.
  *
+ * @uses Builder_ElementSet
  * @param string|array $elementSetMetadata Element set information.
  * <code>
- *     [(string) element set name]
- *     -OR-
- *     array(
- *         'name'           => [(string) element set name, required, unique],
- *         'description'    => [(string) element set description, optional],
- *         'record_type'    => [(string) record type name, optional]
- *     );
+ * [(string) element set name]
+ * // OR
+ * array(
+ *   'name'        => [(string) element set name, required, unique],
+ *   'description' => [(string) element set description, optional],
+ *   'record_type' => [(string) record type name, optional]
+ * );
  * </code>
  * @param array $elements An array containing element data. Follows one of more
  * of the following formats:
@@ -588,13 +535,13 @@ function insert_collection($metadata = array())
  * <li>A string of the element name</li>
  * </ol>
  * <code>
- *    array(
- *         array(
- *             'name'           => [(string) name, required],
- *             'description'    => [(string) description, optional],
- *         ),
- *         [(string) element name]
- *     );
+ * array(
+ *   array(
+ *     'name' => [(string) name, required],
+ *     'description' => [(string) description, optional],
+ *   ),
+ *   [(string) element name]
+ * );
  * </code>
  * @return ElementSet
  */
@@ -614,7 +561,6 @@ function insert_element_set($elementSetMetadata = array(), array $elements = arr
  * circular references.
  *
  * @param mixed &$var The object to be released, or an array of such objects.
- * @return void
  */
 function release_object(&$var)
 {
@@ -627,13 +573,13 @@ function release_object(&$var)
 }
 
 /**
- * Gets a theme option
+ * Return a theme option.
  *
- * @since 1.3
- * @param string $optionName The name of the option to get.
- * @param string $themeName The name of the theme.  If null, it will use the
- * current public theme.
- * @return string The value of the theme option.
+ * @uses Theme::getOption()
+ * @param string $optionName The option name.
+ * @param string $themeName The theme name.  If null, it will use the current 
+ * public theme.
+ * @return string The option value.
  */
 function get_theme_option($optionName, $themeName = null)
 {
@@ -644,26 +590,27 @@ function get_theme_option($optionName, $themeName = null)
 }
 
 /**
- * Sets a theme option
- *
- * @since 1.3
- * @param string $optionName The name of the option to set.
- * @param string $optionValue The value of the option.
- * @param string $themeName The name of the theme.  If null, it will use the
- * current public theme.
- * @return void
+ * Set a theme option.
+ * 
+ * @uses Theme::setOption()
+ * @param string $optionName The option name.
+ * @param string $optionValue The option value.
+ * @param string $themeName The theme name. If null, it will use the current 
+ * public theme.
+ * @return 
  */
 function set_theme_option($optionName, $optionValue, $themeName = null)
 {
     if (!$themeName) {
         $themeName = Theme::getCurrentThemeName('public');
     }
-    return Theme::setOption($themeName, $optionName, $optionValue);
+    Theme::setOption($themeName, $optionName, $optionValue);
 }
 
 /**
- * Returns an array of all user role names.
+ * Return an array of all user role names.
  *
+ * @uses Zend_Acl::getRoles()
  * @return array
  */
 function get_user_roles()
@@ -677,49 +624,40 @@ function get_user_roles()
 }
 
 /**
- * Determines whether an Element Set contains a specific Element
+ * Determine whether an element set contains a specific element.
  *
- * @since 1.3
- * @param string $elementSetName The name of the element set.
- * @param string $elementName The name of the element.
+ * @uses Table_Element::findByElementSetNameAndElementName()
+ * @param string $elementSetName The element set name.
+ * @param string $elementName The element name.
  * @return bool
  */
 function element_exists($elementSetName, $elementName) {
     $element = get_db()->getTable('Element')->findByElementSetNameAndElementName($elementSetName, $elementName);
-    return (bool)$element;
+    return (bool) $element;
 }
 
 
 /**
- * Determine whether or not a plugin is installed and active.
+ * Determine whether a plugin is installed and active.
  *
  * May be used by theme/plugin writers to customize behavior based on the
- * existence of certain plugins.
- *
- * Some examples of how to use this function:
+ * existence of certain plugins. Some examples of how to use this function:
  *
  * Check if ExhibitBuilder is installed and activated.
- * <code>
- * if (plugin_is_active('ExhibitBuilder')):
- * </code>
+ * <code>if (plugin_is_active('ExhibitBuilder')):</code>
  *
  * Check if installed version of ExhibitBuilder is at least version 1.0 or
  * higher.
- * <code>
- * if (plugin_is_active('ExhibitBuilder', '1.0')):
- * </code>
+ * <code>if (plugin_is_active('ExhibitBuilder', '1.0')):</code>
  *
  * Check if installed version of ExhibitBuilder is anything less than 2.0.
- * <code>
- * if (plugin_is_active('ExhibitBuilder', '2.0', '<')):
- * </code>
+ * <code>if (plugin_is_active('ExhibitBuilder', '2.0', '<')):</code>
  *
- * @since 1.4
+ * @uses Table_Plugin::findByDirectoryName()
  * @param string $name Directory name of the plugin.
- * @param string $version Optional Version of the plugin to check.
- * @param string $compOperator Optional Comparison operator to use when
- * checking the installed version of ExhibitBuilder.  Defaults to '>=' (to
- * check verify installed version).
+ * @param string $version Version of the plugin to check.
+ * @param string $compOperator Comparison operator to use when checking the 
+ * installed version of ExhibitBuilder.
  * @return boolean
  */
 function plugin_is_active($name, $version = null, $compOperator = '>=')
@@ -741,18 +679,17 @@ function plugin_is_active($name, $version = null, $compOperator = '>=')
 /**
  * Translate a string.
  *
- * @since 1.5
+ * @uses Zend_Translate::translate()
  * @param string $string The string to be translated.
- * @param mixed $args Optional string formatting args. If any extra args are
- *  passed, the args and the translated string will be formatted with
- *  sprintf().
+ * @param mixed $args string formatting args. If any extra args are passed, the 
+ * args and the translated string will be formatted with sprintf().
  * @return string The translated string.
  */
 function __($string)
 {
     // Avoid getting the translate object more than once.
     static $translate;
-
+    
     if (!isset($translate)) {
         try {
             $translate = Zend_Registry::get('Zend_Translate');
@@ -760,31 +697,30 @@ function __($string)
             $translate = false;
         }
     }
-
+    
     if ($translate) {
         $string = $translate->translate($string);
     }
-
+    
     $args = func_get_args();
-
     array_shift($args);
-
+    
     if (!empty($args)) {
         return vsprintf($string, $args);
     }
-
+    
     return $string;
 }
 
 /**
  * Add an translation source directory.
  *
- * The directory's contents should be .mo files following the naming
- * scheme of Omeka's application/languages directory. If a .mo for the
- * current locale exists, the translations will be loaded.
+ * The directory's contents should be .mo files following the naming scheme of 
+ * Omeka's application/languages directory. If a .mo for the current locale 
+ * exists, the translations will be loaded.
  *
- * @since 1.5
- * @param string $dir Directory to load translations from.
+ * @uses Zend_Translate::addTranslation()
+ * @param string $dir Directory from which to load translations.
  */
 function add_translation_source($dir)
 {
@@ -794,16 +730,16 @@ function add_translation_source($dir)
     } catch (Zend_Exception $e) {
         return;
     }
-
+    
     $locale = $locale->toString();
-
+    
     try {
         $translate->addTranslation(array(
             'content' => "$dir/$locale.mo",
             'locale' => $locale
         ));
     } catch (Zend_Translate_Exception $e) {
-        // Do nothing, allow the user to set a locale or dir without a
+        // Do nothing, allow the user to set a locale or dir without a 
         // translation.
     }
 }
@@ -811,17 +747,15 @@ function add_translation_source($dir)
 /**
  * Get the correct HTML "lang" attribute for the current locale.
  *
- * @since 1.5
  * @return string
  */
 function get_html_lang()
 {
     try {
         $locale = Zend_Registry::get('Zend_Locale');
-    } catch(Zend_Exception $e) {
+    } catch (Zend_Exception $e) {
         return 'en-US';
     }
-
     return str_replace('_', '-', $locale->toString());
 }
 
@@ -829,13 +763,11 @@ function get_html_lang()
 /**
  * Format a date for output according to the current locale.
  *
- * @param mixed $date Date to format. If an integer, the date is intepreted
- *  as a Unix timestamp. If a string, the date is interpreted as an ISO 8601
- *  date.
- * @param string $format Format to apply. See Zend_Date for possible formats.
- *  The default format is the current locale's "medium" format.
- *
- * @since 1.5
+ * @uses Zend_Date
+ * @param mixed $date Date to format. If an integer, the date is intepreted as a 
+ * Unix timestamp. If a string, the date is interpreted as an ISO 8601 date.
+ * @param string $format Format to apply. See Zend_Date for possible formats. 
+ * The default format is the current locale's "medium" format.
  * @return string
  */
 function format_date($date, $format = Zend_Date::DATE_MEDIUM)
@@ -845,29 +777,26 @@ function format_date($date, $format = Zend_Date::DATE_MEDIUM)
     } else {
         $sourceFormat = Zend_Date::ISO_8601;
     }
-
     $dateObj = new Zend_Date($date, $sourceFormat);
     return $dateObj->toString($format);
 }
 
 /**
  * Declare that a JavaScript file or files will be used on the page.
- * All "used" scripts will be included in the page's head.
+ * 
+ * All "used" scripts will be included in the page's head. This needs to be 
+ * called either before head(), or in a plugin_header hook.
  *
- * This needs to be called either before head(), or in a plugin_header hook.
- *
- * @since 1.3
  * @see head_js()
  * @param string|array $file File to use, if an array is passed, each array
- *  member will be treated like a file.
- * @param string $dir Directory to search for the file.  Keeping the default
- *  is recommended.
- * @return void
+ * member will be treated like a file.
+ * @param string $dir Directory to search for the file. Keeping the default is 
+ * recommended.
  */
 function queue_js_file($file, $dir = 'javascripts')
 {
     if (is_array($file)) {
-        foreach($file as $singleFile) {
+        foreach ($file as $singleFile) {
             queue_js_file($singleFile, $dir);
         }
         return;
@@ -876,13 +805,11 @@ function queue_js_file($file, $dir = 'javascripts')
 }
 
 /**
- * Declare a JavaScript string to be used on the page and included in
- * the page's head.
+ * Declare a JavaScript string to be used on the page and included in the page's 
+ * head.
  *
- * This needs to be called either before head() or in a plugin_header
- * hook.
+ * This needs to be called either before head() or in a plugin_header hook.
  *
- * @since 1.5
  * @see head_js()
  * @param string $string JavaScript string to include.
  */
@@ -893,25 +820,23 @@ function queue_js_string($string)
 
 /**
  * Declare that a CSS file or files will be used on the page.
- * All "used" stylesheets will be included in the page's head.
+ * 
+ * All "used" stylesheets will be included in the page's head. This needs to be 
+ * called either before head(), or in a plugin_header hook.
  *
- * This needs to be called either before head(), or in a plugin_header hook.
- *
- * @since 1.3
  * @see head_css()
  * @param string|array $file File to use, if an array is passed, each array
- *  member will be treated like a file.
+ * member will be treated like a file.
  * @param string $media CSS media declaration, defaults to 'all'.
- * @param string|bool $conditional Optional IE-style conditional comment, used
- *  generally to include IE-specific styles. Defaults to false.
- * @param string $dir Directory to search for the file.  Keeping the default
- *  is recommended.
- * @return void
+ * @param string|bool $conditional IE-style conditional comment, used generally 
+ * to include IE-specific styles. Defaults to false.
+ * @param string $dir Directory to search for the file.  Keeping the default is 
+ * recommended.
  */
 function queue_css_file($file, $media = 'all', $conditional = false, $dir = 'css')
 {
     if (is_array($file)) {
-        foreach($file as $singleFile) {
+        foreach ($file as $singleFile) {
             queue_css_file($singleFile, $media, $conditional, $dir);
         }
         return;
@@ -920,18 +845,15 @@ function queue_css_file($file, $media = 'all', $conditional = false, $dir = 'css
 }
 
 /**
- * Declare a CSS string to be used on the page and included in the
- * page's head.
+ * Declare a CSS string to be used on the page and included in the page's head.
  *
- * This needs to be called either before head() or in a plugin_header
- * hook.
+ * This needs to be called either before head() or in a plugin_header hook.
  *
- * @since 1.5
  * @see head_css
  * @param string $string CSS string to include.
  * @param string $media CSS media declaration, defaults to 'all'.
- * @param string|bool $conditional Optional IE-style conditional comment,
- *  used generally to include IE-specific styles. Defaults to false.
+ * @param string|bool $conditional IE-style conditional comment, used generally 
+ * to include IE-specific styles. Defaults to false.
  */
 function queue_css_string($string, $media = 'all', $conditional = false)
 {
@@ -946,16 +868,15 @@ function queue_css_string($string, $media = 'all', $conditional = false)
 }
 
 /**
- * Print the JavaScript tags that will be used on the page.
+ * Return the JavaScript tags that will be used on the page.
  *
- * This should generally be used with echo to print the scripts in the page
+ * This should generally be used with echo to print the scripts in the page 
  * head.
  *
- * @since 1.3
  * @see queue_js_file()
  * @param bool $includeDefaults Whether the default javascripts should be
- *  included. Defaults to true.
- * @return void
+ * included. Defaults to true.
+ * @return string
  */
 function head_js($includeDefaults = true)
 {
@@ -965,9 +886,8 @@ function head_js($includeDefaults = true)
         $dir = 'javascripts';
         $config = Zend_Registry::get('bootstrap')->getResource('Config');
         $useInternalJs = isset($config->theme->useInternalJavascripts)
-                ? (bool) $config->theme->useInternalJavascripts
-                : false;
-
+                       ? (bool) $config->theme->useInternalJavascripts
+                       : false;
         $headScript->prependScript('jQuery.noConflict();');
         if ($useInternalJs) {
             $headScript->prependFile(src('jquery-ui', $dir, 'js'))
@@ -977,19 +897,17 @@ function head_js($includeDefaults = true)
                        ->prependFile('https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js');
         }
     }
-
     return $headScript;
 }
 
 /**
- * Print the CSS link tags that will be used on the page.
+ * Return the CSS link tags that will be used on the page.
  *
  * This should generally be used with echo to print the scripts in the page
  * head.
  *
- * @since 1.3
  * @see queue_css_file()
- * @return void
+ * @return string
  */
 function head_css()
 {
@@ -997,8 +915,9 @@ function head_css()
 }
 
 /**
- * Retrieve the web path to a css file.
+ * Return the web path to a css file.
  *
+ * @uses src()
  * @param string $file Should not include the .css extension
  * @param string $dir Defaults to 'css'
  * @return string
@@ -1009,12 +928,12 @@ function css_src($file, $dir = 'css')
 }
 
 /**
- * Retrieve the web path to an image file.
+ * Return the web path to an image file.
  *
- * @since 0.9
+ * @uses src()
  * @param string $file Filename, including the extension.
- * @param string $dir Optional Directory within the theme to look for image
- * files.  Defaults to 'images'.
+ * @param string $dir Directory within the theme to look for image files. 
+ * Defaults to 'images'.
  * @return string
  */
 function img($file, $dir = 'images')
@@ -1023,67 +942,65 @@ function img($file, $dir = 'images')
 }
 
 /**
- * Echos the web path (that's what's important to the browser)
- * to a javascript file.
- * $dir defaults to 'javascripts'
- * $file should not include the .js extension
+ * Return a javascript tag.
  *
+ * @uses src()
  * @param string $file The name of the file, without .js extension.
- * @param string $dir The directory in which to look for javascript files.  Recommended to leave the default value.
+ * @param string $dir The directory in which to look for javascript files. 
+ * Recommended to leave the default value.
+ * @return string
  */
 function js_tag($file, $dir = 'javascripts')
 {
     $href = src($file, $dir, 'js');
-
     return '<script type="text/javascript" src="' . html_escape($href) . '" charset="utf-8"></script>'."\n";
 }
 
 /**
- * Return a valid src attribute value for a given file.  Used primarily
- * by other helper functions.
+ * Return a valid src attribute value for a given file.
  *
- *
- * @param string        Filename
- * @param string|null   Directory that the file is contained in (optional)
- * @param string        File extension (optional)
+ * @uses web_path_to()
+ * @param string $file The filename.
+ * @param string|null $dir The file's directory.
+ * @param string $ext The file's extension.
  * @return string
  */
-function src($file, $dir=null, $ext = null)
+function src($file, $dir = null, $ext = null)
 {
     if ($ext !== null) {
-        $file .= '.'.$ext;
+        $file .= '.' . $ext;
     }
     if ($dir !== null) {
-        $file = $dir. '/' .$file;
+        $file = $dir . '/' . $file;
     }
     return web_path_to($file);
 }
 
 /**
- * Return the physical path for an asset/resource within the theme (or plugins, shared, etc.)
+ * Return the physical path for an asset/resource within the theme (or plugins, 
+ * shared, etc.)
  *
- * @param string $file
- * @throws Exception
+ * @throws InvalidArgumentException
+ * @param string $file The filename.
  * @return string
  */
 function physical_path_to($file)
 {
-    $view = get_view();
-    $paths = $view->getAssetPaths();
-
+    $paths = get_view()->getAssetPaths();
     foreach ($paths as $path) {
         list($physical, $web) = $path;
-        if(file_exists($physical . '/' . $file)) {
+        if (file_exists($physical . '/' . $file)) {
             return $physical . '/' . $file;
         }
     }
-    throw new InvalidArgumentException( __("Could not find file %s!",$file) );
+    throw new InvalidArgumentException(__("Could not find file %s!", $file));
 }
 
 /**
- * Return the web path for an asset/resource within the theme
+ * Return the web path for an asset/resource within the theme.
  *
- * @param string $file
+ * @throws InvalidArgumentException
+ * @param string $file The filename.
  * @return string
  */
 function web_path_to($file)
@@ -1092,7 +1009,7 @@ function web_path_to($file)
     $paths = $view->getAssetPaths();
     foreach ($paths as $path) {
         list($physical, $web) = $path;
-        if(file_exists($physical . '/' . $file)) {
+        if (file_exists($physical . '/' . $file)) {
             return $web . '/' . $file;
         }
     }
@@ -1100,9 +1017,9 @@ function web_path_to($file)
 }
 
 /**
- * Determine whether or not the collection has any collectors associated with it.
+ * Determine whether the current collection has associated collectors.
  *
- * @since 0.10
+ * @uses Collection::hasCollectors()
  * @return boolean
  */
 function collection_has_collectors()
@@ -1113,7 +1030,6 @@ function collection_has_collectors()
 /**
  * Returns the HTML markup for displaying a random featured collection.
  *
- * @since 0.10
  * @return string
  */
 function random_featured_collection()
@@ -1125,7 +1041,6 @@ function random_featured_collection()
         if ($collectionDescription = metadata($featuredCollection, 'Description', array('snippet'=>150))) {
             $html .= '<p class="collection-description">' . $collectionDescription . '</p>';
         }
-
     } else {
         $html .= '<p>' . __('No featured collections are available.') . '</p>';
     }
@@ -1133,13 +1048,9 @@ function random_featured_collection()
 }
 
 /**
- * Retrieve the Collection object for the current item.
+ * Return the Collection object for the current item.
  *
- * @since 0.10
  * @param Item|null Check for this specific item record (current item if null).
- * @internal This is meant to be a simple facade for access to the Collection
- * record.  Ideally theme writers won't have to interact with the actual object.
- * @access private
  * @return Collection
  */
 function get_collection_for_item($item=null)
@@ -1153,6 +1064,7 @@ function get_collection_for_item($item=null)
 /**
  * Returns the most recent collections
  *
+ * @uses get_records()
  * @param integer $num The maximum number of recent collections to return
  * @return array
  */
@@ -1164,6 +1076,7 @@ function get_recent_collections($num = 10)
 /**
  * Returns a random featured collection.
  *
+ * @uses Collection::findRandomFeatured()
  * @return Collection
  */
 function get_random_featured_collection()
@@ -1182,10 +1095,9 @@ function total_results()
 }
 
 /**
- * Retrieve the latest available version of Omeka by accessing the appropriate
+ * Return the latest available version of Omeka by accessing the appropriate
  * URI on omeka.org.
  *
- * @since 1.0
  * @return string|false The latest available version of Omeka, or false if the
  * request failed for some reason.
  */
@@ -1229,11 +1141,10 @@ function latest_omeka_version()
 }
 
 /**
- * Displays a set of files based on the file's MIME type and any options that are
- * passed.  This is primarily used by other helper functions and will not be used
- * by theme writers in most cases.
+ * Displays a set of files based on the file's MIME type and any options that 
+ * are passed.
  * 
- * @uses Omeka_View_Helper_FileMarkup
+ * @uses Omeka_View_Helper_FileMarkup::fileMarkup()
  * @param File $files A file record or an array of File records to display.
  * @param array $props Properties to customize display for different file types.
  * @param array $wrapperAttributes Attributes XHTML attributes for the div that 
@@ -1255,11 +1166,11 @@ function file_markup($files, array $props = array(), $wrapperAttributes = array(
 }
 
 /**
- * Retrieve display for ID3 metadata for the current file.
+ * Return display for ID3 metadata for the current file.
  *
- * @since 2.0
- * @param array $options Optional
- * @param File|null $file Optional
+ * @uses Omeka_View_Helper_FileId3Metadata::fileId3Metadata()
+ * @param array $options
+ * @param File|null $file
  * @return string|array
  */
 function file_id3_metadata(array $options = array(), $file = null)
@@ -1273,7 +1184,7 @@ function file_id3_metadata(array $options = array(), $file = null)
 /**
  * Returns the most recent files
  *
- * @since 1.1
+ * @uses get_records()
  * @param integer $num The maximum number of recent files to return
  * @return array
  */
@@ -1285,11 +1196,8 @@ function get_recent_files($num = 10)
 /**
  * Generate attributes for XHTML tags.
  *
- * @since 0.9
- * @access private
- * @param array|string $attributes Attributes for the tag.  If this is a
- * string, it will assign both 'name' and 'id' attributes that value for
- * the tag.
+ * @param array|string $attributes Attributes for the tag.  If this is a string, 
+ * it will assign both 'name' and 'id' attributes that value for the tag.
  * @param string $value
  * @return string
  */
@@ -1303,7 +1211,7 @@ function tag_attributes($attributes, $value=null)
         unset($attributes['value']);
         $toProcess = $attributes;
     }
-
+    
     $attr = array();
     foreach ($toProcess as $key => $attribute) {
         // Only include the attribute if its value is a string.
@@ -1319,11 +1227,9 @@ function tag_attributes($attributes, $value=null)
  *
  * Contains a single fieldset with a text input and submit button.
  *
- * @since 0.9
- * @param string $buttonText Optional Defaults to 'Search'.
- * @param array $formProperties Optional XHTML attributes for the form.  Defaults
- * to setting id="simple-search".
- * @param string $uri Optional Action for the form.  Defaults to 'items/browse'.
+ * @param string $buttonText Defaults to 'Search'.
+ * @param array $formProperties XHTML attributes for the form.
+ * @param string $uri Action for the form.  Defaults to 'items/browse'.
  * @return string
  */
 function simple_search_form($buttonText = null, $formProperties=array('id'=>'simple-search'), $uri = null)
@@ -1331,12 +1237,12 @@ function simple_search_form($buttonText = null, $formProperties=array('id'=>'sim
     if (!$buttonText) {
         $buttonText = __('Search');
     }
-
+    
     // Always post the 'items/browse' page by default (though can be overridden).
     if (!$uri) {
         $uri = apply_filters('simple_search_default_uri', url('items/browse'));
     }
-
+    
     $searchQuery = array_key_exists('search', $_GET) ? $_GET['search'] : '';
     $formProperties['action'] = $uri;
     $formProperties['method'] = 'get';
@@ -1345,7 +1251,7 @@ function simple_search_form($buttonText = null, $formProperties=array('id'=>'sim
     $html .= get_view()->formText('search', $searchQuery);
     $html .= get_view()->formSubmit('submit_search', $buttonText, array('class' => 'blue'));
     $html .= '</fieldset>' . "\n\n";
-
+    
     // add hidden fields for the get parameters passed in uri
     $parsedUri = parse_url($uri);
     if (array_key_exists('query', $parsedUri)) {
@@ -1354,30 +1260,30 @@ function simple_search_form($buttonText = null, $formProperties=array('id'=>'sim
             $html .= get_view()->formHidden($getParamName, $getParamValue);
         }
     }
-
+    
     $html .= '</form>';
     return $html;
 }
 
 /**
- * Retrieve the proper HTML for a form input for a given Element record.
+ * Return the proper HTML for a form input for a given Element record.
  *
  * Assume that the given element has access to all of its values (for example,
  * all values of a Title element for a given Item).
  *
- * This will output as many form inputs as there are values for a given
- * element.  In addition to that, it will give each set of inputs a label and
- * a span with class="tooltip" containing the description for the element.
- * This span can either be displayed, hidden with CSS or converted into a
- * tooltip with javascript.
+ * This will output as many form inputs as there are values for a given element. 
+ * In addition to that, it will give each set of inputs a label and a span with 
+ * class="tooltip" containing the description for the element. This span can 
+ * either be displayed, hidden with CSS or converted into a tooltip with 
+ * javascript.
  *
- * All sets of form inputs for elements will be wrapped in a div with
+ * All sets of form inputs for elements will be wrapped in a div with 
  * class="field".
  *
- * @since 0.10
+ * @uses Omeka_View_Helper_ElementForm::elementForm()
  * @param Element|array $element
  * @param Omeka_Record_AbstractRecord $record
- * @param array $options Optional
+ * @param array $options
  * @return string HTML
  */
 function element_form($element, $record, $options = array())
@@ -1395,18 +1301,18 @@ function element_form($element, $record, $options = array())
 }
 
 /**
- * Used within the admin theme (and potentially within plugins) to display a form
- * for a record for a given element set.
+ * Used within the admin theme (and potentially within plugins) to display a 
+ * form for a record for a given element set.
  *
  * @uses element_form()
  * @param Omeka_Record_AbstractRecord $record
- * @param string $elementSetName The name of the element set or 'Item Type Metadata' for an item's item type data
+ * @param string $elementSetName The name of the element set or 'Item Type 
+ * Metadata' for an item's item type data.
  * @return string
  */
 function element_set_form($record, $elementSetName)
 {
     $recordType = get_class($record);
-    
     if ($recordType == 'Item' && $elementSetName == 'Item Type Metadata') {
         $elements = $record->getItemTypeElements();
     } else {
@@ -1418,15 +1324,12 @@ function element_set_form($record, $elementSetName)
         $elements,
         array('recordType' => $recordType, 'record' => $record, 'elementSetName' => $elementSetName)
     );
-            
     $html = element_form($elements, $record);
-
     return $html;
 }
 
 /**
- * Adds the "Select Below" or other label option to a set of select
- * options.
+ * Adds the "Select Below" or other label option to a set of select options.
  *
  * @param array $options
  * @param string|null $labelOption
@@ -1443,9 +1346,10 @@ function label_table_options($options, $labelOption = null)
 /**
  * Get the options array for a given table.
  *
+ * @uses Omeka_Db_Table::findPairsForSelectForm()
  * @param string $tableClass
  * @param string $labelOption
- * @param array $searchParams Optional search parameters on table.
+ * @param array $searchParams search parameters on table.
  */
 function get_table_options($tableClass, $labelOption = null, $searchParams = array())
 {
@@ -1455,11 +1359,9 @@ function get_table_options($tableClass, $labelOption = null, $searchParams = arr
 }
 
 /**
- * Retrieve the view object.  Should be used only to avoid function scope
- * issues within other theme helper functions.
+ * Return the view object.  Should be used only to avoid function scope issues 
+ * within other theme helper functions.
  *
- * @since 0.10
- * @access private
  * @return Omeka_View
  */
 function get_view()
@@ -1468,10 +1370,9 @@ function get_view()
 }
 
 /**
- * Output a <link> tag for the RSS feed so the browser can auto-discover the field.
+ * Output a <link> tag for the RSS feed so the browser can auto-discover the 
+ * field.
  *
- * @since 1.4
- * @uses items_output_url()
  * @return string HTML
  */
 function auto_discovery_link_tags() {
@@ -1481,12 +1382,14 @@ function auto_discovery_link_tags() {
 }
 
 /**
- * Includes a file from the common/ directory, passing variables into that script.
+ * Includes a file from the common/ directory, passing variables into that 
+ * script.
  *
+ * @uses Zend_View_Helper_Partial::partial()
  * @param string $file Filename
  * @param array $vars A keyed array of variables to be extracted into the script
  * @param string $dir Defaults to 'common'
- * @return void
+ * @return string
  */
 function common($file, $vars = array(), $dir = 'common')
 {
@@ -1496,10 +1399,10 @@ function common($file, $vars = array(), $dir = 'common')
 /**
  * Include the header script into the view
  *
- * @see common()
+ * @uses common
  * @param array Keyed array of variables
  * @param string $file Filename of header script (defaults to 'header')
- * @return void
+ * @return string
  */
 function head($vars = array(), $file = 'header')
 {
@@ -1509,17 +1412,19 @@ function head($vars = array(), $file = 'header')
 /**
  * Include the footer script into the view
  *
+ * @uses common()
  * @param array Keyed array of variables
  * @param string $file Filename of footer script (defaults to 'footer')
- * @return void
+ * @return string
  */
 function foot($vars = array(), $file = 'footer') {
     return common($file, $vars);
 }
 
 /**
- * Retrieve a flashed message from the controller
+ * Return a flashed message from the controller
  *
+ * @uses Omeka_View_Helper_Flash::flash()
  * @return string
  */
 function flash()
@@ -1528,7 +1433,7 @@ function flash()
 }
 
 /**
- * Retrieve the value of a particular site setting.  This can be used to display
+ * Return the value of a particular site setting.  This can be used to display
  * any option that would be retrieved with get_option().
  *
  * Content for any specific option can be filtered by using a filter named
@@ -1536,7 +1441,6 @@ function flash()
  * 'display_option_site_title'.
  *
  * @uses get_option()
- * @since 0.9
  * @return string
  */
 function option($name)
@@ -1549,9 +1453,7 @@ function option($name)
 /**
  * Get a set of records from the database.
  *
- * @since 2.0
  * @uses Omeka_Db_Table::findBy
- *
  * @param string $recordType Type of records to get.
  * @param array $params Array of search parameters for records.
  * @param integer $limit Maximum number of records to return.
@@ -1566,11 +1468,8 @@ function get_records($recordType, $params = array(), $limit = 10)
 /**
  * Get the total number of a given type of record in the database.
  *
- * @since 2.0
- * @uses Omeka_Db_Table::count
- *
+ * @uses Omeka_Db_Table::count()
  * @param string $recordType Type of record to count.
- *
  * @return integer Number of records of $recordType in the database.
  */
 function total_records($recordType)
@@ -1581,7 +1480,7 @@ function total_records($recordType)
 /**
  * Return an iterator used for looping an array of records.
  * 
- * @uses Omeka_View_Helper_Loop
+ * @uses Omeka_View_Helper_Loop::loop()
  * @param string $recordsVar
  * @param array|null $records
  * @return Omeka_Record_Iterator
@@ -1594,6 +1493,7 @@ function loop($recordsVar, $records = null)
 /**
  * Set records to the view for iteration.
  * 
+ * @uses Omeka_View_Helper_SetLoopRecords::setLoopRecords()
  * @param string $recordsVar
  * @param array $records
  */
@@ -1605,6 +1505,7 @@ function set_loop_records($recordsVar, array $records)
 /**
  * Get records from the view for iteration.
  * 
+ * @uses Omeka_View_Helper_GetLoopRecords::getLoopRecords()
  * @param string $recordsVar
  * @return array|null
  */
@@ -1616,6 +1517,7 @@ function get_loop_records($recordsVar, $throwException = true)
 /**
  * Check if records have been set to the view for iteration.
  * 
+ * @uses Omeka_View_Helper_GetLoopRecords::getLoopRecords()
  * @param string $recordsVar
  * @return bool
  */
@@ -1627,7 +1529,7 @@ function has_loop_records($recordsVar)
 /**
  * Set a record to the view as the current record.
  * 
- * @uses Omeka_View_Helper_SetCurrentRecord
+ * @uses Omeka_View_Helper_SetCurrentRecord::setCurrentRecord()
  * @param string $recordVar
  * @param Omeka_Record_AbstractRecord $record
  * @param bool $setPreviousRecord
@@ -1640,8 +1542,7 @@ function set_current_record($recordVar, Omeka_Record_AbstractRecord $record, $se
 /**
  * Get the current record from the view.
  * 
- * @uses Omeka_View_Helper_GetCurrentRecord
- * @throws Omeka_View_Exception
+ * @uses Omeka_View_Helper_GetCurrentRecord::getCurrentRecord()
  * @param string $recordVar
  * @param bool $throwException
  * @return Omeka_Record_AbstractRecord|false
@@ -1654,6 +1555,7 @@ function get_current_record($recordVar, $throwException = true)
 /**
  * Get a record by its ID.
  * 
+ * @uses Omeka_Db_Table::find()
  * @param string $recordVar
  * @param int $recordId
  * @return Omeka_Record_AbstractRecord|null
@@ -1680,9 +1582,10 @@ function get_current_action_contexts()
  * Builds an HTML list containing all available output format contexts for the
  * current action.
  *
+ * @uses get_current_action_contexts()
  * @param bool True = unordered list; False = use delimiter
  * @param string If the first argument is false, use this as a delimiter.
- * @return string HTML
+ * @return string|bool HTML
  */
 function output_format_list($list = true, $delimiter = ' | ')
 {
@@ -1720,6 +1623,10 @@ function output_format_list($list = true, $delimiter = ' | ')
     return $html;
 }
 
+/**
+ * @param array $headings
+ * @return string
+ */
 function browse_headings($headings)
 {
     $sortParam = Omeka_Db_Table::SORT_PARAM;
@@ -1728,6 +1635,7 @@ function browse_headings($headings)
     $currentSort = trim($req->getParam($sortParam));
     $currentDir = trim($req->getParam($sortDirParam));
 
+    $browseHeadings = '';
     foreach ($headings as $label => $column) {
         if($column) {
             $urlParams = $_GET;
@@ -1743,19 +1651,21 @@ function browse_headings($headings)
                 }
             }
             $url = url(array(), null, $urlParams);
-            echo "<th $class scope=\"col\"><a href=\"$url\">$label</a></th>";
+            $browseHeadings .= "<th $class scope=\"col\"><a href=\"$url\">$label</a></th>";
         } else {
-            echo "<th scope=\"col\">$label</th>";
+            $browseHeadings .= "<th scope=\"col\">$label</th>";
         }
     }
+    return $browseHeadings;
 }
 
 /**
- * Returns a <body> tag with attributes. Attributes
- * can be filtered using the 'body_tag_attributes' filter.
+ * Returns a <body> tag with attributes.
+ * 
+ * Attributes can be filtered using the 'body_tag_attributes' filter.
  *
- * @since 1.4
  * @uses tag_attributes()
+ * @param array $attributes
  * @return string An HTML <body> tag with attributes and their values.
  */
 function body_tag($attributes = array())
@@ -1770,8 +1680,9 @@ function body_tag($attributes = array())
 /**
  * Return a list of the current search filters in use.
  *
- * @since 2.0
- * @params array $params Optional params to replace the ones read from the request.
+ * @uses Omeka_View_Helper_SearchFilters::searchFilters()
+ * @params array $params params to replace the ones read from the request.
+ * @return string
  */
 function search_filters(array $params = null)
 {
@@ -1781,13 +1692,13 @@ function search_filters(array $params = null)
 /**
  * Get a piece or pieces of metadata for a record.
  *
- * @see Omeka_View_Helper_Metadata
+ * @uses Omeka_View_Helper_Metadata::metadata()
  * @param Omeka_Record_AbstractRecord|string $record The record to get metadata
- *  for. If an Omeka_Record_AbstractRecord, that record is used. If a string,
- *  that string is used to look up a record in the current view.
+ * for. If an Omeka_Record_AbstractRecord, that record is used. If a string,
+ * that string is used to look up a record in the current view.
  * @param mixed $metadata The metadata to get. If an array is given, this is
- *  Element metadata, identified by array('Element Set', 'Element'). If a string,
- *  the metadata is a record-specific "property."
+ * Element metadata, identified by array('Element Set', 'Element'). If a string,
+ * the metadata is a record-specific "property."
  * @param array $options Options for getting the metadata.
  * @return mixed
  */
@@ -1797,13 +1708,11 @@ function metadata($record, $metadata, $options = array())
 }
 
 /**
- * Retrieve the set of all element text metadata for a record.
+ * Return the set of all element text metadata for a record.
  *
- * @since 2.0
- * @uses Omeka_View_Helper_AllElementTexts
- * 
+ * @uses Omeka_View_Helper_AllElementTexts::allElementTexts()
  * @param Omeka_Record_AbstractRecord|string $record The record to get the
- *  element text metadata for.
+ * element text metadata for.
  * @param array $options Options for getting the metadata.
  * @return string|array
  */
@@ -1813,9 +1722,7 @@ function all_element_texts($record, $options = array())
 }
 
 /**
- * @since 0.10
  * @uses file_markup()
- * @uses get_current_record()
  * @param array $options
  * @param array $wrapperAttributes
  * @param Item|null $item Check for this specific item record (current item if null).
@@ -1826,7 +1733,6 @@ function files_for_item($options = array(), $wrapperAttributes = array('class'=>
     if (!$item) {
         $item = get_current_record('item');
     }
-
     return file_markup($item->Files, $options, $wrapperAttributes);
 }
 
@@ -1834,11 +1740,11 @@ function files_for_item($options = array(), $wrapperAttributes = array('class'=>
  * Returns the HTML markup for displaying a random featured item.  Most commonly
  * used on the home page of public themes.
  *
- * @since 0.10
- * @param boolean $withImage Whether or not the featured item should have an image associated
- * with it.  If set to true, this will either display a clickable square thumbnail
- * for an item, or it will display "You have no featured items." if there are
- * none with images.
+ * @uses random_featured_items()
+ * @param boolean $withImage Whether or not the featured item should have an 
+ * image associated with it. If set to true, this will either display a 
+ * clickable square thumbnail for an item, or it will display "You have no 
+ * featured items." if there are none with images.
  * @return string HTML
  */
 function random_featured_item($withImage = null)
@@ -1849,10 +1755,9 @@ function random_featured_item($withImage = null)
 }
 
 /**
- * Retrieve the next item in the database.
+ * Return the next item in the database.
  *
- * @todo Should this look for the next item in the loop, or just via the database?
- * @since 0.10
+ * @uses Item::next()
  * @param Item|null Check for this specific item record (current item if null).
  * @return Item|null
  */
@@ -1865,8 +1770,7 @@ function get_next_item($item=null)
 }
 
 /**
- * @see get_previous_item()
- * @since 0.10
+ * @uses Item::previous()
  * @param Item|null Check for this specific item record (current item if null).
  * @return Item|null
  */
@@ -1879,12 +1783,11 @@ function get_previous_item($item=null)
 }
 
 /**
- * Retrieve a valid citation for the current item.
+ * Return a valid citation for the current item.
  *
  * Generally follows Chicago Manual of Style note format for webpages.  Does not
  * account for multiple creators or titles.
  *
- * @since  0.10
  * @param Item|null Check for this specific item record (current item if null).
  * @return string
  */
@@ -1934,32 +1837,31 @@ function item_citation($item = null)
 }
 
 /**
- * Determine whether or not a specific element uses HTML.  By default this will
- * test the first element text, though it is possible to test against a different
- * element text by modifying the $index parameter.
+ * Determine whether a specific element uses HTML.
+ * 
+ * By default this will test the first element text, though it is possible to 
+ * test against a different element text by modifying the $index parameter.
  *
- * @since 0.10
- * @param string
- * @param string
- * @param integer
- * @param Item|null Check for this specific item record (current item if null).
+ * @uses ElementText::isHtml()
+ * @param string $elementSetName
+ * @param string $elementName
+ * @param integer $index
+ * @param Item|null $item Check for this specific item record (current item if 
+ * null).
  * @return boolean
  */
-function item_field_uses_html($elementSetName, $elementName, $index=0, $item = null)
+function item_field_uses_html($elementSetName, $elementName, $index = 0, $item = null)
 {
     if (!$item) {
         $item = get_current_record('item');
     }
-
     $textRecords = $item->getElementTexts($elementSetName, $elementName);
     $textRecord = @$textRecords[$index];
-
     return ($textRecord instanceof ElementText and $textRecord->isHtml());
 }
 
 /**
- * @see item_thumbnail()
- * @since 0.10
+ * @uses item_image()
  * @param array $props
  * @param integer $index
  * @return string HTML
@@ -1972,8 +1874,6 @@ function item_fullsize($props = array(), $index = 0, $item = null)
 /**
  * Determine whether or not the item has any files associated with it.
  *
- * @since 0.10
- * @see has_files()
  * @uses Item::hasFiles()
  * @param Item|null Check for this specific item record (current item if null).
  * @return boolean
@@ -1987,7 +1887,6 @@ function item_has_files($item=null)
 }
 
 /**
- * @since 0.10
  * @param Item|null Check for this specific item record (current item if null).
  * @return boolean
  */
@@ -2000,11 +1899,11 @@ function item_has_tags($item=null)
 }
 
 /**
- * Determine whether or not the item has a thumbnail image that it can display.
+ * Determine whether the item has a thumbnail image that it can display.
  *
- * @since 0.10
+ * @uses Item::hasThumbnail()
  * @param Item|null Check for this specific item record (current item if null).
- * @return void
+ * @return bool
  */
 function item_has_thumbnail($item=null)
 {
@@ -2015,25 +1914,20 @@ function item_has_thumbnail($item=null)
 }
 
 /**
- * Primarily used internally by other theme helpers, not intended to be used
- * within themes.  Plugin writers creating new helpers may want to use this
- * function to display a customized derivative image.
+ * Return a customized item image tag.
  *
- * @since 0.10
+ * @uses Omeka_View_Helper_FileMarkup::image_tag()
  * @param string $imageType
  * @param array $props
  * @param integer $index
  * @param Item|null Check for this specific item record (current item if null).
- * @return void
  */
 function item_image($imageType, $props = array(), $index = 0, $item = null)
 {
     if (!$item) {
         $item = get_current_record('item');
     }
-
     $imageFile = get_db()->getTable('File')->findWithImages($item->id, $index);
-
     $media = new Omeka_View_Helper_FileMarkup;
     return $media->image_tag($imageFile, $props, $imageType);
 }
@@ -2041,6 +1935,7 @@ function item_image($imageType, $props = array(), $index = 0, $item = null)
 /**
  * Returns the HTML for an item search form
  *
+ * @uses Zend_View_Helper_Partial::partial()
  * @param array $props
  * @param string $formActionUri
  * @return string
@@ -2051,8 +1946,7 @@ function items_search_form($props=array(), $formActionUri = null)
 }
 
 /**
- * @see item_thumbnail()
- * @since 0.10
+ * @uses item_image()
  * @param array $props
  * @param integer $index
  * @param Item $item The item to which the image belongs
@@ -2064,10 +1958,11 @@ function item_square_thumbnail($props = array(), $index = 0, $item = null)
 }
 
 /**
- * HTML for a thumbnail image associated with an item.  Default parameters will
- * use the first image, but that can be changed by modifying $index.
+ * Return HTML for a thumbnail image associated with an item.
+ * 
+ * Default parameters will use the first image, but that can be changed by 
+ * modifying $index.
  *
- * @since 0.10
  * @uses item_image()
  * @param array $props A set of attributes for the <img /> tag.
  * @param integer $index The position of the file to use (starting with 0 for
@@ -2081,8 +1976,9 @@ function item_thumbnail($props = array(), $index = 0, $item = null)
 }
 
 /**
- * Returns the most recent items
+ * Return the most recent items
  *
+ * @uses Table_Item::findBy()
  * @param integer $num The maximum number of recent items to return
  * @return array
  */
@@ -2092,11 +1988,9 @@ function get_recent_items($num = 10)
 }
 
 /**
- * Returns a random featured item
+ * Return a random featured item
  *
- * @since 7/3/08 This will retrieve featured items with or without images by
- *  default. The prior behavior was to retrieve only items with images by
- *  default.
+ * @uses get_random_featured_items()
  * @param boolean|null $hasImage
  * @return Item
  */
@@ -2107,9 +2001,9 @@ function get_random_featured_item($hasImage=null)
 }
 
 /**
- * Returns multiple random featured item
+ * Return multiple random featured items.
  *
- * @since 1.4
+ * @uses get_records()
  * @param integer $num The maximum number of recent items to return
  * @param boolean|null $hasImage
  * @return array $items
@@ -2119,20 +2013,25 @@ function get_random_featured_items($num = 5, $hasImage = null)
     return get_records('Item', array('featured'=>1, 'sort_field' => 'random', 'hasImage' => $hasImage), $num);
 }
 
+/**
+ * Return markup for random featured items.
+ * 
+ * @uses get_random_featured_items()
+ * @param int $num
+ * @param bool|null $hasImage
+ * @return string
+ */
 function random_featured_items($num = 5, $hasImage = null)
 {
     $html = '';
-
     if ($randomFeaturedItems = get_random_featured_items($num, $hasImage)) {
         foreach ($randomFeaturedItems as $randomItem) {
             $itemTitle = metadata($randomItem, array('Dublin Core', 'Title'));
-
             $html .= '<h3>' . link_to_item($itemTitle, array(), 'show', $randomItem) . '</h3>';
-
+            
             if (item_has_thumbnail($randomItem)) {
                 $html .= link_to_item(item_square_thumbnail(array(), 0, $randomItem), array('class'=>'image'), 'show', $randomItem);
             }
-
             if ($itemDescription = metadata($randomItem, array('Dublin Core', 'Description'), array('snippet'=>150))) {
                 $html .= '<p class="item-description">' . $itemDescription . '</p>';
             }
@@ -2140,16 +2039,17 @@ function random_featured_items($num = 5, $hasImage = null)
     } else {
         $html .= '<p>'.__('No featured items are available.').'</p>';
     }
-
     return $html;
 }
 
 /**
- * Retrieve the set of values for item type elements.
+ * Return the set of values for item type elements.
+ * 
+ * @uses Item::getItemTypeElements()
  * @param Item|null Check for this specific item record (current item if null).
  * @return array
  */
-function item_type_elements($item=null)
+function item_type_elements($item = null)
 {
     if (!$item) {
         $item = get_current_record('item');
@@ -2164,15 +2064,12 @@ function item_type_elements($item=null)
 /**
  * Uses url() to generate <a> tags for a given link.
  *
- * @since 0.10 No longer escapes the text for the link.  This text must be valid
- * HTML.
- * @since 0.10 No longer prepends the word 'View' to the text of the link.  Instead
- * 'View' is the default text.
- *
+ * @uses record_url()
+ * @uses url()
  * @param Omeka_Record_AbstractRecord|string $record The name of the controller 
  * to use for the link.  If a record instance is passed, then it inflects the 
  * name of the controller from the record class.
- * @param string $action The action to use for the link (optional)
+ * @param string $action The action to use for the link
  * @param string $text The text to put in the link.  Default is 'View'.
  * @param array $props Attributes for the <a> tag
  * @param array $queryParams the parameters in the uri query
@@ -2181,11 +2078,10 @@ function item_type_elements($item=null)
 function link_to($record, $action=null, $text=null, $props = array(), $queryParams=array())
 {
     // If we're linking directly to a record, use the URI for that record.
-    if($record instanceof Omeka_Record_AbstractRecord) {
+    if ($record instanceof Omeka_Record_AbstractRecord) {
         $url = record_url($record, $action);
-    }
-    else {
-        // Otherwise $record is the name of the controller to link to.
+    // Otherwise $record is the name of the controller to link to.
+    } else {
         $urlOptions = array();
         //Use Zend Framework's built-in 'default' route
         $route = 'default';
@@ -2193,23 +2089,19 @@ function link_to($record, $action=null, $text=null, $props = array(), $queryPara
         if($action) $urlOptions['action'] = (string) $action;
         $url = url($urlOptions, $route, $queryParams, true);
     }
-
     if ($text === null) {
         $text = __('View');
     }
-
     $attr = !empty($props) ? ' ' . tag_attributes($props) : '';
-
     return '<a href="'. html_escape($url) . '"' . $attr . '>' . $text . '</a>';
 }
 
 /**
- * Retrieve HTML for a link to the advanced search form.
+ * Return HTML for a link to the advanced search form.
  *
- * @since 0.10
- * @param string $text Optional Text of the link. Default is 'Advanced Search'.
- * @param array $props Optional XHTML attributes for the link.
- * @param string $uri Optional Action for the form.  Defaults to 'items/browse'.
+ * @param string $text Text of the link. Default is 'Advanced Search'.
+ * @param array $props XHTML attributes for the link.
+ * @param string $uri Action for the form.  Defaults to 'items/browse'.
  * @return string
  */
 function link_to_item_search($text = null, $props = array(), $uri=null)
@@ -2217,24 +2109,23 @@ function link_to_item_search($text = null, $props = array(), $uri=null)
     if (!$text) {
         $text = __('Advanced Search');
     }
-
     if (!$uri) {
         $uri = apply_filters('advanced_search_link_default_uri', url('items/advanced-search'));
     }
-    // Is appending the query string directly a security issue?  We should figure that out.
     $props['href'] = $uri . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
     return '<a ' . tag_attributes($props) . '>' . $text . '</a>';
 }
 
 /**
- * Get the proper HTML for a link to the browse page for items, with any appropriate
- * filtering parameters passed to the URL.
+ * Get the proper HTML for a link to the browse page for items, with any 
+ * appropriate filtering parameters passed to the URL.
  *
- * @since 0.10
+ * @uses link_to()
  * @param string $text Text to display in the link.
- * @param array $browseParams Optional Any parameters to use to build the browse page URL, e.g.
- * array('collection' => 1) would build items/browse?collection=1 as the URL.
- * @param array $linkProperties Optional XHTML attributes for the link.
+ * @param array $browseParams Any parameters to use to build the browse page 
+ * URL, e.g. array('collection' => 1) would build items/browse?collection=1 as 
+ * the URL.
+ * @param array $linkProperties XHTML attributes for the link.
  * @return string HTML
  */
 function link_to_items_browse($text, $browseParams = array(), $linkProperties = array())
@@ -2248,10 +2139,10 @@ function link_to_items_browse($text, $browseParams = array(), $linkProperties = 
  * The default text displayed for this link will be the name of the collection,
  * but that can be changed by passing a string argument.
  *
- * @since 0.10
- * @param string|null $text Optional Text for the link.
- * @param array $props Optional XHTML attributes for the <a> tag.
- * @param string $action Optional 'show' by default.
+ * @uses link_to_collection()
+ * @param string|null $text Text for the link.
+ * @param array $props XHTML attributes for the <a> tag.
+ * @param string $action 'show' by default.
  * @return string
  */
 function link_to_collection_for_item($text = null, $props = array(), $action = 'show')
@@ -2259,55 +2150,68 @@ function link_to_collection_for_item($text = null, $props = array(), $action = '
     if ($collection = get_collection_for_item()) {
         return link_to_collection($text, $props, $action, $collection);
     }
-
     return __('No Collection');
 }
 
-function link_to_items_in_collection($text = null, $props = array(), $action = 'browse', $collectionObj = null)
-{
+/**
+ * Return a link to collection items browse page.
+ * 
+ * @uses link_to()
+ * @param string|null $text
+ * @param array $props
+ * @param string $action
+ * @param Collection $collectionObj
+ * @return string
+ */
+function link_to_items_in_collection($text = null, $props = array(), 
+    $action = 'browse', $collectionObj = null
+) {
     if (!$collectionObj) {
         $collectionObj = get_current_record('collection');
     }
-
     $queryParams = array();
     $queryParams['collection'] = $collectionObj->id;
-
     if ($text === null) {
         $text = $collectionObj->totalItems();
     }
-
-    return link_to('items', $action, $text, $props, $queryParams);
-}
-
-function link_to_items_with_item_type($text = null, $props = array(), $action = 'browse', $itemTypeObj = null)
-{
-    if (!$itemTypeObj) {
-        $itemTypeObj = get_current_record('item_type');
-    }
-
-    $queryParams = array();
-    $queryParams['type'] = $itemTypeObj->id;
-
-    if ($text === null) {
-        $text = $itemTypeObj->totalItems();
-    }
-
     return link_to('items', $action, $text, $props, $queryParams);
 }
 
 /**
- * Retrieve the HTML for a link to the file metadata page for a particular file.
+ * Return a link to item type items browse page.
+ * 
+ * @uses link_to()
+ * @param string|null $text
+ * @param array $props
+ * @param string $action
+ * @param Collection $collectionObj
+ * @return string
+ */
+function link_to_items_with_item_type($text = null, $props = array(), 
+    $action = 'browse', $itemTypeObj = null
+) {
+    if (!$itemTypeObj) {
+        $itemTypeObj = get_current_record('item_type');
+    }
+    $queryParams = array();
+    $queryParams['type'] = $itemTypeObj->id;
+    if ($text === null) {
+        $text = $itemTypeObj->totalItems();
+    }
+    return link_to('items', $action, $text, $props, $queryParams);
+}
+
+/**
+ * Return the HTML for a link to the file metadata page for a particular file.
  *
  * If no File object is specified, this will determine the file to use through
- * context.
+ * context. The text of the link defaults to the DC:Title of the file record, 
+ * then to the original filename, unless otherwise specified.
  *
- * The text of the link defaults to the DC:Title of the file record, then to
- * the original filename, unless otherwise specified.
- *
- * @since 1.0
- * @param array
- * @param string
- * @param File
+ * @uses link_to()
+ * @param array $attributes
+ * @param string $text
+ * @param File null|File
  * @return string
  */
 function link_to_file_show($attributes = array(), $text = null, $file = null)
@@ -2315,27 +2219,21 @@ function link_to_file_show($attributes = array(), $text = null, $file = null)
     if (!$file) {
         $file = get_current_record('file');
     }
-
     if (!$text) {
         $fileTitle = strip_formatting(metadata($file, array('Dublin Core', 'Title')));
         $text = $fileTitle ? $fileTitle : metadata($file, 'Original Filename');
     }
-
     return link_to($file, 'show', $text, $attributes);
 }
 
 /**
- * @since 0.10 Function signature has changed so that the item to link to can be
- * determined by the context of the function call.  Also, text passed to the link
- * must be valid HTML (will not be automatically escaped because any HTML can be
- * passed in, e.g. an <img /> or the like).
- *
+ * @uses link_to()
  * @param string HTML for the text of the link.
- * @param array Properties for the <a> tag. (optional)
+ * @param array Properties for the <a> tag.
  * @param string The page to link to (this will be the 'show' page almost always
  * within the public theme).
- * @param Item Used for dependency injection testing or to use this function outside
- * the context of a loop.
+ * @param Item Used for dependency injection testing or to use this function 
+ * outside the context of a loop.
  * @return string HTML
  */
 function link_to_item($text = null, $props = array(), $action = 'show', $item=null)
@@ -2343,21 +2241,17 @@ function link_to_item($text = null, $props = array(), $action = 'show', $item=nu
     if (!$item) {
         $item = get_current_record('item');
     }
-
     $text = (!empty($text) ? $text : strip_formatting(metadata($item, array('Dublin Core', 'Title'))));
-
     return link_to($item, $action, $text, $props);
 }
 
 /**
- * @since 0.10 First argument is now the text of the link, 2nd argument are the
- * query parameters to merge in to the href for the link.
- *
+ * @uses items_output_url()
  * @param string $text The text of the link.
  * @param array $params A set of query string parameters to merge in to the href
  * of the link.  E.g., if this link was clicked on the items/browse?collection=1
- * page, and array('foo'=>'bar') was passed as this argument, the new URI would be
- * items/browse?collection=1&foo=bar.
+ * page, and array('foo'=>'bar') was passed as this argument, the new URI would 
+ * be items/browse?collection=1&foo=bar.
  */
 function link_to_items_rss($text = null, $params=array())
 {
@@ -2378,7 +2272,6 @@ function link_to_next_item_show($text=null, $props=array())
     if (!$text) {
         $text = __("Next Item &rarr;");
     }
-
     $item = get_current_record('item');
     if($next = $item->next()) {
         return link_to($next, 'show', $text, $props);
@@ -2386,15 +2279,14 @@ function link_to_next_item_show($text=null, $props=array())
 }
 
 /**
- * @see link_to_next_item_show()
+ * @uses link_to()
  * @return string
  */
-function link_to_previous_item_show($text=null, $props=array())
+function link_to_previous_item_show($text = null, $props = array())
 {
     if (!$text) {
         $text = __('&larr; Previous Item');
     }
-
     $item = get_current_record('item');
     if($previous = $item->previous()) {
         return link_to($previous, 'show', $text, $props);
@@ -2402,37 +2294,28 @@ function link_to_previous_item_show($text=null, $props=array())
 }
 
 /**
- *
- * @since 0.10 Signature has changed so that $text is the first argument.  Uses
- * get_current_record() to determine what collection to link to.  Or you can 
- * pass it the Collection record as the last argument.
- * @param string $text Optional text to use for the title of the collection.  Default
+ * @uses link_to()
+ * @param string $text text to use for the title of the collection.  Default
  * behavior is to use the name of the collection.
  * @param array $props Set of attributes to use for the link.
- * @param array $action The action to link to for the collection.  Default is 'show'.
- * @param array $collectionObj Optional Collection record can be passed to this
- * to override the collection object retrieved by get_current_record().
+ * @param array $action The action to link to for the collection.
+ * @param array $collectionObj Collection record can be passed to this to 
+ * override the collection object retrieved by get_current_record().
  * @return string
  */
-function link_to_collection($text=null, $props=array(), $action='show', $collectionObj = null)
+function link_to_collection($text = null, $props = array(), $action='show', $collectionObj = null)
 {
     if (!$collectionObj) {
         $collectionObj = get_current_record('collection');
     }
-
     $collectionName = metadata($collectionObj, 'name');
-
     $text = (!empty($text) ? $text : (!empty($collectionName) ? $collectionName : __('[Untitled]')));
-
     return link_to($collectionObj, $action, $text, $props);
 }
 
 /**
- *
- * @since 0.10 All arguments to this function are optional.  If no text is given,
- * it will automatically use the text for the 'site_title' option.
- * @since 0.10 The text passed to this function will not be automatically escaped
- * with htmlentities(), which allows for passing images or other HTML in place of text.
+ * @param null|string $text
+ * @param array $props
  * @return string
  */
 function link_to_home_page($text = null, $props = array())
@@ -2445,9 +2328,10 @@ function link_to_home_page($text = null, $props = array())
 }
 
 /**
- *
- * @since 0.10 Arguments follow the same pattern as link_to_home_page().
+ * @uses admin_url()
  * @see link_to_home_page()
+ * @param null|string $text
+ * @param array $props
  * @return string
  */
 function link_to_admin_home_page($text = null, $props = array())
@@ -2460,7 +2344,7 @@ function link_to_admin_home_page($text = null, $props = array())
 }
 
 /**
- * Generate an unordered list of navigation links (and subnavigation links),
+ * Generate an unordered list of navigation links (and subnavigation links), 
  * with class "current" for any links corresponding to the current page
  *
  * For example:
@@ -2468,46 +2352,55 @@ function link_to_admin_home_page($text = null, $props = array())
  * generates
  * <code><li class="nav-themes"><a href="themes/browse">Themes</a></li></code>
  *
- * @uses is_current_url()
- * @param array A keyed array, where key = text of the link, and value = uri of the link,
- * or value = another ordered array $a with the following recursive structure:
- * $a['uri'] = URI of the link
- * $a['subnav_links'] = array of $sublinks for the sub navigation (this can be recursively structured like $links)
- * $a['subnav_attributes'] = associative array of attributes for the sub navigation
- *
+ * @param array $links A keyed array, where key = text of the link, and value = 
+ * uri of the link, or value = another ordered array $a with the following 
+ * recursive structure:
+ * <ul>
+ *   <li>$a['uri'] = URI of the link</li>
+ *   <li>$a['subnav_links'] = array of $sublinks for the sub navigation (this 
+ * can be recursively structured like $links)</li>
+ *   <li>$a['subnav_attributes'] = associative array of attributes for the sub 
+ * navigation</li>
+ * </ul>
  * For example:
- * $links = array('Browse' => 'http://yoursite.com/browse',
- *                'Categories' => array('uri' => 'http://yoursite.com/categories',
- *                                      'subnav_links' => array('Dogs' => 'http://yoursite.com/dogs',
- *                                                              'Cats' => 'http://yoursite.com/cats'),
- *                                      'subnav_attributes' => array('class' => 'subnav')),
- *                'Contact Us' => 'http://yoursite.com/contact-us');
+ * <code>
+ * $links = array(
+ *   'Browse' => 'http://yoursite.com/browse',
+ *   'Categories' => array(
+ *     'uri' => 'http://yoursite.com/categories',
+ *     'subnav_links' => array(
+ *       'Dogs' => 'http://yoursite.com/dogs',
+ *       'Cats' => 'http://yoursite.com/cats'
+ *     ),
+ *     'subnav_attributes' => array('class' => 'subnav')
+ *   ),
+ *   'Contact Us' => 'http://yoursite.com/contact-us'
+ * );
  * echo nav($links);
- *
+ * </code>
  * This would produce:
+ * <code>
  * <li><a href="http://yoursite.com/browse">Browse</a></li>
  * <li><a href="http://yoursite.com/categories">Categories</a>
- *     <ul class="subnav">
- *        <li><a href="http://yoursite.com/dogs">Dogs</a></li>
- *        <li><a href="http://yoursite.com/cats">Cats</a></li>
- *    </ul>
+ *   <ul class="subnav">
+ *     <li><a href="http://yoursite.com/dogs">Dogs</a></li>
+ *     <li><a href="http://yoursite.com/cats">Cats</a></li>
+ *   </ul>
  * </li>
  * <li><a href="http://yoursite.com/contact-us">Contact Us</a><li>
- *
- * @param integer|null $maxDepth The maximum number of sub navigation levels to display.
- * By default it is 0, which means it will only display the top level of links.
- * If null, it will display all the levels.
- *
+ * <code>
+ * @param integer|null $maxDepth The maximum number of sub navigation levels to 
+ * display. By default it is 0, which means it will only display the top level 
+ * of links. If null, it will display all the levels.
  * @return string HTML for the unordered list
  */
 function nav(array $links, $maxDepth = 0)
 {
     // Get the current uri from the request
     $current = Zend_Controller_Front::getInstance()->getRequest()->getRequestUri();
-
+    
     $nav = '';
     foreach( $links as $text => $uri ) {
-
         // Get the subnavigation attributes and links
         $subNavLinks = null;
         if (is_array($uri)) {
@@ -2521,8 +2414,8 @@ function nav(array $links, $maxDepth = 0)
             }
             $uri = (string) $uri['uri'];
         }
-
-        // Build a link if the uri is available, otherwise simply list the text without a hyperlink
+        // Build a link if the uri is available, otherwise simply list the text 
+        // without a hyperlink
         $nav .= '<li class="' . text_to_id($text, 'nav');
         if ($uri == '') {
             $nav .= '">' . html_escape($text);
@@ -2530,8 +2423,8 @@ function nav(array $links, $maxDepth = 0)
             // If the uri is the current uri, then give it the 'current' class
             $nav .= (is_current_url($uri) ? ' current':'') . '">' . '<a href="' . html_escape($uri) . '">' . html_escape($text) . '</a>';
         }
-
-        // Display the subnavigation links if they exist and if the max depth has not been reached
+        // Display the subnavigation links if they exist and if the max depth 
+        // has not been reached
         if ($subNavLinks !== null && ($maxDepth === null || $maxDepth > 0)) {
             $subNavAttributes = !empty($subNavAttributes) ? ' ' . tag_attributes($subNavAttributes) : '';
             $nav .= "\n" . '<ul' . $subNavAttributes . '>' . "\n";
@@ -2542,32 +2435,32 @@ function nav(array $links, $maxDepth = 0)
             }
             $nav .= '</ul>' . "\n";
         }
-
         $nav .= '</li>' . "\n";
     }
-
     return $nav;
 }
 
 /**
- * Retrieve HTML for the set of pagination links.
+ * Return HTML for the set of pagination links.
  *
- * @since 0.10
- * @param array $options Optional Configurable parameters for the pagination
- * links.  The following options are available:
- *      'scrolling_style' (string) See Zend_View_Helper_PaginationControl
-  * for more details.  Default 'Sliding'.
- *      'partial_file' (string) View script to use to render the pagination HTML.
- * Default is 'common/pagination_control.php'.
- *      'page_range' (integer) See Zend_Paginator::setPageRange() for details.
- * Default is 5.
- *      'total_results' (integer) Total results to paginate through.  Default is
- * provided by the 'total_results' key of the 'pagination' array that is typically
- * registered by the controller.
- *      'page' (integer) Current page of the result set.  Default is the 'page'
- * key of the 'pagination' array.
- *      'per_page' (integer) Number of results to display per page.  Default is
- * the 'per_page' key of the 'pagination' array.
+ * @uses Zend_View_Helper_PaginationControl::paginationControl()
+ * @param array $options Configurable parameters for the pagination links. The 
+ * following options are available:
+ * <ul>
+ *   <li>'scrolling_style' (string) See Zend_View_Helper_PaginationControl for 
+ * more details.  Default 'Sliding'.</li>
+ *   <li>'partial_file' (string) View script to use to render the pagination 
+ * HTML. Default is 'common/pagination_control.php'.</li>
+ *   <li>'page_range' (integer) See Zend_Paginator::setPageRange() for details.
+ * Default is 5.</li>
+ *   <li>'total_results' (integer) Total results to paginate through. Default is
+ * provided by the 'total_results' key of the 'pagination' array that is 
+ * typically registered by the controller.</li>
+ *   <li>'page' (integer) Current page of the result set.  Default is the 'page'
+ * key of the 'pagination' array.</li>
+ *   <li>'per_page' (integer) Number of results to display per page. Default is
+ * the 'per_page' key of the 'pagination' array.</li>
+ * <ul>
  * @return string HTML for the pagination links.
  */
 function pagination_links($options = array())
@@ -2578,45 +2471,41 @@ function pagination_links($options = array())
     } else {
         // If the pagination variables are not registered, set required defaults
         // arbitrarily to avoid errors.
-        $p = array('total_results'   => 1,
-                   'page'            => 1,
-                   'per_page'        => 1);
+        $p = array('total_results' => 1, 'page' => 1, 'per_page' => 1);
     }
-
+    
     // Set preferred settings.
-    $scrollingStyle   = isset($options['scrolling_style']) ? $options['scrolling_style']     : 'Sliding';
-    $partial          = isset($options['partial_file'])    ? $options['partial_file']        : 'common/pagination_control.php';
-    $pageRange        = isset($options['page_range'])      ? (int) $options['page_range']    : 5;
-    $totalCount       = isset($options['total_results'])   ? (int) $options['total_results'] : (int) $p['total_results'];
-    $pageNumber       = isset($options['page'])            ? (int) $options['page']          : (int) $p['page'];
-    $itemCountPerPage = isset($options['per_page'])        ? (int) $options['per_page']      : (int) $p['per_page'];
-
+    $scrollingStyle = isset($options['scrolling_style']) ? $options['scrolling_style'] : 'Sliding';
+    $partial = isset($options['partial_file']) ? $options['partial_file'] : 'common/pagination_control.php';
+    $pageRange = isset($options['page_range']) ? (int) $options['page_range'] : 5;
+    $totalCount = isset($options['total_results']) ? (int) $options['total_results'] : (int) $p['total_results'];
+    $pageNumber = isset($options['page']) ? (int) $options['page'] : (int) $p['page'];
+    $itemCountPerPage = isset($options['per_page']) ? (int) $options['per_page'] : (int) $p['per_page'];
+    
     // Create an instance of Zend_Paginator.
     $paginator = Zend_Paginator::factory($totalCount);
-
+    
     // Configure the instance.
     $paginator->setCurrentPageNumber($pageNumber)
               ->setItemCountPerPage($itemCountPerPage)
               ->setPageRange($pageRange);
-
-    return get_view()->paginationControl($paginator,
-                                    $scrollingStyle,
-                                    $partial);
+    
+    return get_view()->paginationControl($paginator, $scrollingStyle, $partial);
 }
 
 /**
- * Helper function to be used in public themes to allow plugins to modify the navigation of those themes.
+ * Helper function to be used in public themes to allow plugins to modify the 
+ * navigation of those themes.
  *
  * Plugins can modify navigation by adding filters to specific subsets of the
- *  navigation. For instance, most themes will have what might be called a 'main'
- *  navigation set on the header of the site. This main navigation header would
- *  be attached to a filter called 'public_navigation_main', which would always
- *  act on that particular navigation. You would signal to the plugins to
- *  differentiate between the different navigation elements by passing the 2nd
- *  argument as 'main', so that it knew that this was the main navigation.
+ * navigation. For instance, most themes will have what might be called a 'main'
+ * navigation set on the header of the site. This main navigation header would
+ * be attached to a filter called 'public_navigation_main', which would always
+ * act on that particular navigation. You would signal to the plugins to
+ * differentiate between the different navigation elements by passing the 2nd
+ * argument as 'main', so that it knew that this was the main navigation.
  *
- * @since 0.10
- * @see apply_filters()
+ * @uses nav()
  * @param array $navArray
  * @param string|null $navType
  * @param integer|null $maxDepth
@@ -2634,10 +2523,8 @@ function public_nav(array $navArray, $navType=null, $maxDepth = 0)
 /**
  * Output the main navigation for the public side
  *
- * @since 0.10
- * @since 2.0 Uses Omeka_Navigation
  * @return Zend_View_Helper_Navigation_Menu Can be echoed like a string or
- *  manipulated by the theme.
+ * manipulated by the theme.
  */
 function public_nav_main()
 {
@@ -2650,11 +2537,10 @@ function public_nav_main()
 /**
  * Alias for public_nav($array, 'items'). Provides a navigation and filter for
  * the items/browse page.
- *
- * @since 1.3
+ * 
+ * @uses public_nav()
  * @param array $navArray
  * @param integer|null $maxDepth
- * @uses public_nav()
  * @return string
  */
 function public_nav_items(array $navArray = null, $maxDepth = 0)
@@ -2662,7 +2548,6 @@ function public_nav_items(array $navArray = null, $maxDepth = 0)
     if (!$navArray) {
         $navArray = array(__('Browse All') => url('items'), __('Browse by Tag') => url('items/tags'));
     }
-
     return public_nav($navArray, 'items', $maxDepth);
 }
 
@@ -2671,7 +2556,7 @@ function public_nav_items(array $navArray = null, $maxDepth = 0)
  *
  * This uses the 'html_escape' filter for escaping.
  *
- * @param string
+ * @param string $value
  * @return string
  */
 function html_escape($value)
@@ -2683,10 +2568,13 @@ function html_escape($value)
  * Escape the value for use in javascript.
  *
  * This is a convenience function for encoding a value using JSON notation.
- * Must be used when interpolating PHP output in javascript.
- *
- * Note on usage: do not wrap the resulting output of this function in quotes,
- * as proper JSON encoding will take care of that.
+ * Must be used when interpolating PHP output in javascript. Note on usage: do 
+ * not wrap the resulting output of this function in quotes, as proper JSON 
+ * encoding will take care of that.
+ * 
+ * @uses Zend_Json::encode()
+ * @param string $value
+ * @return string
  */
 function js_escape($value)
 {
@@ -2718,13 +2606,12 @@ function xml_escape($value)
  */
 function text_to_paragraphs($str)
 {
-  return str_replace('<p></p>', '', '<p>'
-        . preg_replace('#([\r\n]\s*?[\r\n]){2,}#', '</p>$0<p>', $str)
-        . '</p>');
+  return str_replace('<p></p>', '', '<p>' 
+       . preg_replace('#([\r\n]\s*?[\r\n]){2,}#', '</p>$0<p>', $str) . '</p>');
 }
 
 /**
- * Retrieve a substring of a given piece of text.
+ * Return a substring of a given piece of text.
  *
  * Note: this will only split strings on the space character.
  * this will also strip html tags from the text before getting a snippet
@@ -2739,9 +2626,9 @@ function snippet($text, $startPos, $endPos, $append = '…')
 {
     // strip html tags from the text
     $text = strip_formatting($text);
-
+    
     $textLength = strlen($text);
-
+    
     // Calculate the start position. Set to zero if the start position is
     // null or 0, OR if the start offset is greater than the length of the
     // original text.
@@ -2749,7 +2636,7 @@ function snippet($text, $startPos, $endPos, $append = '…')
     $startPos = !$startPos || $startPosOffset > $textLength
                 ? 0
                 : strrpos($text, ' ', $startPosOffset);
-
+    
     // Calculate the end position. Set to the length of the text if the
     // end position is greater than or equal to the length of the original
     // text, OR if the end offset is greater than the length of the
@@ -2758,35 +2645,33 @@ function snippet($text, $startPos, $endPos, $append = '…')
     $endPos = $endPos >= $textLength || $endPosOffset > $textLength
               ? $textLength
               : strrpos($text, ' ', $endPosOffset);
-
+    
     // Set the snippet by getting its substring.
     $snippet = substr($text, $startPos, $endPos - $startPos);
-
+    
     // Return the snippet without the append string if the text's original
     // length equals to 1) the length of the snippet, i.e. when the return
     // string is identical to the passed string; OR 2) the calculated
     // end position, i.e. when the return string ends at the same point as
     // the passed string.
     return strlen($snippet) == $textLength || $endPos == $textLength
-            ? $snippet
-            : $snippet . $append;
+         ? $snippet
+         : $snippet . $append;
 }
 
 /**
- * Retrieve a substring of the text by limiting the word count.
+ * Return a substring of the text by limiting the word count.
  * Note: it strips the HTML tags from the text before getting the snippet
  *
- * @since 0.10
  * @param string $text
  * @param integer $maxWords
- * @param string $ellipsis Optional '...' by default.
+ * @param string $ellipsis
  * @return string
  */
 function snippet_by_word_count($text, $maxWords = 20, $ellipsis = '...')
 {
     // strip html tags from the text
     $text = strip_formatting($text);
-
     if ($maxWords > 0) {
         $textArray = explode(' ', $text);
         if (count($textArray) > $maxWords) {
@@ -2805,7 +2690,6 @@ function snippet_by_word_count($text, $maxWords = 20, $ellipsis = '...')
  * added benefit of returning a fallback string in case the resulting stripped
  * string is empty or contains only whitespace.
  *
- * @since 0.10
  * @uses strip_tags()
  * @param string $str The string to be stripped of HTML formatting.
  * @param string $allowableTags The string of tags to allow when stripping tags.
@@ -2831,18 +2715,20 @@ function strip_formatting($str, $allowableTags = '', $fallbackStr = '')
  *
  * This is primarily for easy creation of HTML ids within Omeka
  *
- * 1) convert to lowercase
- * 2) Replace whitespace with -,
- * 3) remove all non-alphanumerics,
- * 4) remove leading/trailing delimiters
- * 5) optionally prepend a piece of text
+ * <ol>
+ *   <li>convert to lowercase</li>
+ *   <li>Replace whitespace with -</li>
+ *   <li>remove all non-alphanumerics</li>
+ *   <li>remove leading/trailing delimiters</li>
+ *   <li>optionally prepend a piece of text</li>
+ * </ol>
  *
  * @param string $text The text to convert
  * @param string $prepend Another string to prepend to the ID
  * @param string $delimiter The delimiter to use (- by default)
  * @return string
  */
-function text_to_id($text, $prepend=null, $delimiter='-')
+function text_to_id($text, $prepend = null, $delimiter = '-')
 {
     $text = strtolower($text);
     $id = preg_replace('/\s/', $delimiter, $text);
@@ -2855,7 +2741,6 @@ function text_to_id($text, $prepend=null, $delimiter='-')
 /**
  * Converts any URLs in a given string to links.
  *
- * @since 1.4
  * @param string $str The string to be searched for URLs to convert to links.
  * @return string
  */
@@ -2870,6 +2755,7 @@ function url_to_link($str)
 /**
  * Returns the most recent tags.
  *
+ * @uses get_records()
  * @param integer $limit The maximum number of recent tags to return
  * @return array
  */
@@ -2883,8 +2769,11 @@ function get_recent_tags($limit = 10)
  *
  * @param Omeka_Record_AbstractRecord|array $recordOrTags The record to retrieve 
  * tags from, or the actual array of tags
- * @param string|null The URI to use in the link for each tag.  If none given,
- *      tags in the cloud will not be given links.
+ * @param string|null $link The URI to use in the link for each tag. If none 
+ * given, tags in the cloud will not be given links.
+ * @param int $maxClasses
+ * @param bool $tagNumber
+ * @param string $tagNumberOrder
  * @return string HTML for the tag cloud
  */
 function tag_cloud($recordOrTags = null, $link = null, $maxClasses = 9, $tagNumber = false, $tagNumberOrder = null)
@@ -2898,11 +2787,11 @@ function tag_cloud($recordOrTags = null, $link = null, $maxClasses = 9, $tagNumb
     } else {
         $tags = $recordOrTags;
     }
-
+    
     if (empty($tags)) {
         return '<p>' . __('No tags are available.') . '</p>';
     }
-
+    
     //Get the largest value in the tags array
     $largest = 0;
     foreach ($tags as $tag) {
@@ -2912,11 +2801,11 @@ function tag_cloud($recordOrTags = null, $link = null, $maxClasses = 9, $tagNumb
     }
     $html = '<div class="hTagcloud">';
     $html .= '<ul class="popularity">';
-
+    
     if ($largest < $maxClasses) {
         $maxClasses = $largest;
     }
-
+    
     foreach( $tags as $tag ) {
         $size = (int)(($tag['tagCount'] * $maxClasses) / $largest - 1);
         $class = str_repeat('v', $size) . ($size ? '-' : '') . 'popular';
@@ -2937,17 +2826,17 @@ function tag_cloud($recordOrTags = null, $link = null, $maxClasses = 9, $tagNumb
         $html .= '</li>' . "\n";
     }
     $html .= '</ul></div>';
-
+    
     return $html;
 }
 
 /**
  * Output a tag string given an Item, Exhibit, or a set of tags.
  *
- * @internal Any record that has the Taggable module can be passed to this function
  * @param Omeka_Record_AbstractRecord|array $recordOrTags The record to retrieve 
  * tags from, or the actual array of tags
- * @param string|null $link The URL to use for links to the tags (if null, tags aren't linked)
+ * @param string|null $link The URL to use for links to the tags (if null, tags 
+ * aren't linked)
  * @param string $delimiter ', ' (comma and whitespace) by default
  * @return string HTML
  */
@@ -2957,7 +2846,7 @@ function tag_string($recordOrTags = null, $link = 'items/browse', $delimiter = n
     if (is_null($delimiter)) {
         $delimiter = get_option('tag_delimiter') . ' ';
     }
-
+    
     if (!$recordOrTags) {
         $tags = array();
     } else if (is_string($recordOrTags)) {
@@ -2967,7 +2856,7 @@ function tag_string($recordOrTags = null, $link = 'items/browse', $delimiter = n
     } else {
         $tags = $recordOrTags;
     }
-
+    
     if (empty($tags)) {
         return '';
     }
@@ -3011,7 +2900,8 @@ function url($options = array(), $name = null, $queryParams = array(),
  * absolute URLs are required in some contexts. Instantiates view helpers 
  * directly because a view may not be registered.
  *
- * @uses url()
+ * @uses Zend_View_Helper_ServerUrl::serverUrl()
+ * @uses Omeka_View_Helper_Url::url()
  * @param mixed
  * @return string HTML
  */
@@ -3053,7 +2943,6 @@ function current_url(array $params = array())
  * Instantiates view helpers directly because a view may not be registered.
  *
  * @param string $url
- * @param Zend_Controller_Request_Http|null $req
  * @return boolean
  */
 function is_current_url($url)
@@ -3091,6 +2980,7 @@ function record_url($record, $action = null, $getAbsoluteUrl = false)
 /**
  * Return a URL to an output page.
  * 
+ * @uses url()
  * @param string $output
  * @param array $otherParams
  * @return string
@@ -3118,6 +3008,7 @@ function items_output_url($output, $otherParams = array()) {
 /**
  * Return the provided file's URL.
  * 
+ * @uses File::getWebPath()
  * @param File $file
  * @param string $format
  * @return string
@@ -3133,7 +3024,8 @@ function file_display_url(File $file, $format = 'fullsize')
 /**
  * Return a URL to the public theme.
  *
- * @see admin_url()
+ * @uses set_theme_base_url()
+ * @uses revert_theme_base_url()
  * @param mixed
  * @return string
  */
@@ -3149,7 +3041,8 @@ function public_url()
 /**
  * Return a URL to the admin theme.
  * 
- * @see public_url()
+ * @uses set_theme_base_url()
+ * @uses revert_theme_base_url()
  * @param mixed
  * @return string
  */
@@ -3165,6 +3058,7 @@ function admin_url()
 /**
  * Set the base URL for the specified theme.
  * 
+ * @uses Zend_Controller_Front::setBaseUrl()
  * @param string $theme
  */
 function set_theme_base_url($theme = null)
@@ -3187,6 +3081,8 @@ function set_theme_base_url($theme = null)
 
 /**
  * Revert the base URL to its previous state.
+ * 
+ * @uses Zend_Controller_Front::setBaseUrl()
  */
 function revert_theme_base_url()
 {
@@ -3203,6 +3099,7 @@ function revert_theme_base_url()
  * <code>is_allowed('Items', 'showNotPublic')</code>
  * Will check if the user has permission to view Items that are not public.
  *
+ * @uses Zend_Acl::is_allowed()
  * @param string|Zend_Acl_Resource_Interface
  * @param string|null
  * @return boolean

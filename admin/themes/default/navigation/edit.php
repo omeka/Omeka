@@ -84,11 +84,10 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
     	
     	function addNewNavLinkForm() {
     	    // add the new nav link add button
-        	jQuery( '#navigation_main_list').after('<div id="navigation_main_list_new"><label for="navigation_main_list_new_label">New Link Label</label><br/><input id="navigation_main_list_new_label" type="text"/><br/><label for="navigation_main_list_new_uri">New Link URI</label><br/><input id="navigation_main_list_new_uri" type="text" /><br/><a href="" id="navigation_main_list_add" class="blue button">Add Link</a></div>');
-        	jQuery( '#navigation_main_list_add' ).click(function(e) {
+        	jQuery( '#new_nav_link_button_link' ).click(function(e) {
         	    e.preventDefault();
-                var n_label = jQuery( '#navigation_main_list_new_label' ).val();
-                var n_uri = jQuery( '#navigation_main_list_new_uri' ).val();
+                var n_label = jQuery( '#new_nav_link_label' ).val();
+                var n_uri = jQuery( '#new_nav_link_uri' ).val();
                 if (n_label && n_uri) {
                     var n_hidden_info = {
                         'can_delete': true,
@@ -105,8 +104,8 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
 
                     jQuery( '#navigation_main_list' ).append('<li>' + edit_nav_header_html + edit_nav_body_html + '</li>');
                     jQuery( '#' + n_id).val(n_value); // does escaping for json data
-                    jQuery( '#navigation_main_list_new_label' ).val('');
-                    jQuery( '#navigation_main_list_new_uri' ).val('');
+                    jQuery( '#new_nav_link_label' ).val('');
+                    jQuery( '#new_nav_link_uri' ).val('');
                     updateAccordion();
                     updateDeleteButtons();
                     updateSelectHomepageOptions();
@@ -116,7 +115,7 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
     	}
     	
     	// create the list of navigation links from checkboxes
-    	jQuery('#navigation_form > dd').wrapAll('<ul id="navigation_main_list" />');
+    	jQuery('#fieldset-navigation_main_checkbox_display > dd').wrapAll('<ul id="navigation_main_list" />');
         jQuery('#navigation_main_list > dd').wrapInner('<li />');
         jQuery('#navigation_main_list > dd > li').unwrap();
         jQuery('#navigation_main_list > li').wrapInner('<div class="navigation_main_link_header" />');
@@ -170,11 +169,35 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
 //]]>    
 </script>
 
+
+<form action="<?php echo $this->form->getAction() ?>"
+      enctype="<?php echo $this->form->getEnctype() ?>"
+      method="<?php echo $this->form->getMethod() ?>"
+      id="<?php echo $this->form->getId() ?>"
+      class="<?php echo $this->form->getAttrib('class') ?>" >
+
 <div class="seven columns alpha">
 <?php echo flash(); ?>
-<h2>Main Navigation</h2>
-<p>Check the links you would like to display in the main navigation.<br/> You can click and drag the links into your preferred display order.</p>
-<?php echo $this->form; ?>
+<?php echo $this->form->getDisplayGroup(Omeka_Form_Navigation::MAIN_NAV_CHECKBOX_DISPLAY_ELEMENT_ID); ?>
 </div>
+
+<div id="save" class="three columns omega panel">
+ <?php echo $this->formSubmit('submit', __('Save Changes'), array('id'=>'save-changes', 'class'=>'submit big green button')); ?>
+<?php echo $this->form->getDisplayGroup(Omeka_Form_Navigation::HOMEPAGE_SELECT_DISPLAY_ELEMENT_ID); ?>
+
+    <fieldset id="fieldset-new_nav_link_display">
+        <legend><?php echo __('New Link'); ?></legend>
+        <label for="new_nav_link_label"><?php echo __('New Link Label'); ?></label><br/>
+        <input type="text" id="new_nav_link_label" name="new_nav_link_label" /><br/>
+
+        <label for="new_nav_link_uri"><?php echo __('New Link Uri'); ?></label><br/>
+        <input type="text" id="new_nav_link_uri" name="new_nav_link_uri" /><br/>
+
+        <a href="" id="new_nav_link_button_link" class="blue button"><?php echo __('Add Link'); ?></a>
+    </fieldset>
+
+</div>
+
+</form>
 
 <?php echo foot(); ?>

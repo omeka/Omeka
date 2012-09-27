@@ -31,7 +31,7 @@ class NavigationController extends Omeka_Controller_AbstractActionController
         set_theme_base_url('public');
         $form = $this->_getForm();
         $this->view->form = $form;
-        if (isset($_POST['navigation_submit'])) {
+        if (isset($_POST['submit'])) {            
             if ($form->isValid($_POST)) {
                 $this->_setOptions($form);
                 $this->_helper->flashMessenger(__('The navigation settings have been updated.'), 'success');

@@ -19,9 +19,12 @@ class Omeka_Form_Navigation extends Omeka_Form
     const FORM_ELEMENT_ID = 'navigation_form';
     const HIDDEN_ELEMENT_ID = 'navigation_hidden';
     const SELECT_HOMEPAGE_ELEMENT_ID = 'navigation_homepage_select';
-
     const HOMEPAGE_URI_OPTION_NAME = 'homepage_uri';
+
+    const MAIN_NAV_CHECKBOX_DISPLAY_ELEMENT_ID = 'navigation_main_checkbox_display';
     
+    const HOMEPAGE_SELECT_DISPLAY_ELEMENT_ID = 'homepage_select_display';
+        
     private $_nav;
     
     public function init()
@@ -35,17 +38,16 @@ class Omeka_Form_Navigation extends Omeka_Form
         $this->_initElements();
     }
     
-    private function _initElements() 
+    protected function _initElements() 
     {
         $this->clearElements();
-        $this->_addCheckboxElementsFromNav($this->_nav);
-        $this->_addHiddenElementFromNav($this->_nav);
-        $this->_addHomepageSelectElementFromNav($this->_nav);
-        $this->_addSubmitButton();
+        $this->_addNavElements($this->_nav);
+        $this->_addHomepageSelectElement($this->_nav);
     }
         
-    private function _addCheckboxElementsFromNav(Omeka_Navigation $nav) 
+    protected function _addNavElements(Omeka_Navigation $nav) 
     {   
+        $elementIds = array();
         $checkboxCount = 0;
         foreach($nav as $page) {            
             if (!$page->hasChildren()) {
@@ -56,6 +58,7 @@ class Omeka_Form_Navigation extends Omeka_Form
                 }
                 
                 $checkboxId = 'navigation_main_nav_checkboxes_' . $checkboxCount;                
+                $elementIds[] = $checkboxId;
                 $checkboxDesc = '<a href="' . $page->getHref() . '">' . __($page->getLabel()) . '</a>';
                 $this->addElement('checkbox', $checkboxId, array(
                     'checked' => $page->isVisible(),
@@ -71,15 +74,33 @@ class Omeka_Form_Navigation extends Omeka_Form
                 ));
             }
         }
-    }
-    
-    private function _addHiddenElementFromNav(Omeka_Navigation $nav) 
-    {
+        
         $this->addElement('hidden', self::HIDDEN_ELEMENT_ID, array('value' => ''));
+        $elementIds[] = self::HIDDEN_ELEMENT_ID;
+        
+        $desc = '<p>Check the links you would like to display in the main navigation.<br/> You can click and drag the links into your preferred display order.</p>';
+        $this->addDisplayGroup(
+            $elementIds,
+            self::MAIN_NAV_CHECKBOX_DISPLAY_ELEMENT_ID,
+            array(
+                'legend' => 'Main Navigation',
+                'description' => $desc,
+        ));
+                
+        $this->getDisplayGroup(self::MAIN_NAV_CHECKBOX_DISPLAY_ELEMENT_ID)->setDecorators(
+            array(
+                array('Description', array('escape' => false, 'tag' => false)),
+                'FormElements',
+                'Fieldset', 
+            )
+        );
     }
     
-    private function _addHomepageSelectElementFromNav(Zend_Navigation $nav)
+    
+    protected function _addHomepageSelectElement(Zend_Navigation $nav)
     {
+        $elementIds = array();
+        
         $pageLinks = array();
         $pageLinks['/'] = '[Default]'; // Add the default homepage link option 
         foreach($nav as $page) {
@@ -100,14 +121,12 @@ class Omeka_Form_Navigation extends Omeka_Form
                     array('Label'),
                     'Errors',)
         ));
-    }
-    
-    private function _addSubmitButton()
-    {
-        $this->addElement('submit', 'navigation_submit', array(
-            'label' => __('Save Changes'),
-            'class' => 'big green button'
-        ));
+        $elementIds[] = self::SELECT_HOMEPAGE_ELEMENT_ID;
+        
+        
+        $this->addDisplayGroup(
+            $elementIds,
+            self::HOMEPAGE_SELECT_DISPLAY_ELEMENT_ID);
     }
     
     public function saveFromPost() 
@@ -167,13 +186,13 @@ class Omeka_Form_Navigation extends Omeka_Form
         $this->_nav = $nav;
     }
     
-    private function _saveHomepageFromPost()
+    protected function _saveHomepageFromPost()
     {
         $homepageUri = $this->getValue(self::SELECT_HOMEPAGE_ELEMENT_ID);
         set_option(self::HOMEPAGE_URI_OPTION_NAME, $homepageUri); 
     }
     
-    private function _getPageHiddenInfo(Zend_Navigation_Page $page) 
+    protected function _getPageHiddenInfo(Zend_Navigation_Page $page) 
     {
         $hiddenInfo = array(
           'can_delete' =>  (bool)$page->can_delete,

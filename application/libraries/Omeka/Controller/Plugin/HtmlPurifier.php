@@ -65,8 +65,7 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
         }
         
         // Let plugins hook into this to process form submissions in their own way.
-        fire_plugin_hook('html_purifier_form_submission', 
-                         array('request' => $request, 'purifier' => $purifier));
+        fire_plugin_hook('html_purifier_form_submission', array('purifier' => $purifier));
         
         // No processing for users form, since it's already properly filtered by 
         // User::filterPostData(). No processing for tags form, none of the tags 
