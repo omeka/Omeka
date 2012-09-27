@@ -108,7 +108,7 @@ echo head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodycl
 
                 <?php echo common('quick-filters',array(),'items'); ?>
 
-            <table id="items" class="full" cellspacing="0" cellpadding="0">
+            <table id="items" cellspacing="0" cellpadding="0">
                  <thead>
                     <tr>
                         <?php if (is_allowed('Items', 'edit')): ?>

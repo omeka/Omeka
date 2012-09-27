@@ -8,7 +8,7 @@ echo head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
     <?php endif ?>
 </div>
 
-    <table class="full">
+    <table>
         <thead>
             <tr>
                 <th><?php echo __('Type Name'); ?></th>
