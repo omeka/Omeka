@@ -1604,6 +1604,7 @@ function output_format_list($list = true, $delimiter = ' | ')
 
 /**
  * @param array $headings
+ * @return string
  */
 function browse_headings($headings)
 {
@@ -1613,6 +1614,7 @@ function browse_headings($headings)
     $currentSort = trim($req->getParam($sortParam));
     $currentDir = trim($req->getParam($sortDirParam));
 
+    $browseHeadings = '';
     foreach ($headings as $label => $column) {
         if($column) {
             $urlParams = $_GET;
@@ -1628,11 +1630,12 @@ function browse_headings($headings)
                 }
             }
             $url = url(array(), null, $urlParams);
-            echo "<th $class scope=\"col\"><a href=\"$url\">$label</a></th>";
+            $browseHeadings .= "<th $class scope=\"col\"><a href=\"$url\">$label</a></th>";
         } else {
-            echo "<th scope=\"col\">$label</th>";
+            $browseHeadings .= "<th scope=\"col\">$label</th>";
         }
     }
+    return $browseHeadings;
 }
 
 /**

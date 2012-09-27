@@ -14,7 +14,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
         <table id="collections" cellspacing="0" cellpadding="0">
             <thead>
                 <tr>
-                <?php browse_headings(array(
+                <?php echo browse_headings(array(
                     __('Name') => 'name',
                     __('Collectors') => null,
                     __('Date Added') => 'added',
