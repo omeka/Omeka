@@ -192,21 +192,21 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
         <h4><?php echo __('Add a Link to the Navigation'); ?></h4>
         
         <div class="field">
-            <div class="three columns alpha">
+            <div class="two columns alpha">
             <label for="new_nav_link_label"><?php echo __('New Link Label'); ?></label>
             </div>
             
-            <div class="inputs four columns omega">
+            <div class="inputs five columns omega">
             <input type="text" id="new_nav_link_label" name="new_nav_link_label" />
             </div>
         </div>
         
         <div class="field">
-            <div class="three columns alpha">
+            <div class="two columns alpha">
                 <label for="new_nav_link_uri"><?php echo __('New Link Uri'); ?></label>
             </div>
             
-            <div class="inputs four columns omega">
+            <div class="inputs five columns omega">
                 <input type="text" id="new_nav_link_uri" name="new_nav_link_uri" />
             </div>
         </div>
