@@ -418,7 +418,7 @@ p, li {
         ================================================== */
         
         input[type="checkbox"] {
-            margin: 0 10px;
+            margin: 0;
         }
 
 
@@ -1566,10 +1566,6 @@ ul#section-nav, #section-nav ul {
   margin-bottom: 20px;
 }
 
-#fieldset-new_nav_link_display {
-  margin-top: 40px;
-}
-
 #navigation_main_list { 
     list-style-type: none; 
     margin: 0; 
@@ -1608,11 +1604,16 @@ ul#section-nav, #section-nav ul {
     margin-top: 10px;
 }
 
+#navigation_main_list li div.navigation_main_link_header.ui-state-active {
+    font-weight: bold;
+}
+
 #navigation_main_list li div.navigation_main_link_body {
     background: #fff;
     border: 0;
     box-shadow: 0 0 1px #999 inset;
     margin: 0 0 2px 0;
+    padding: 1em 3.2em;
 }
 
 #navigation_main_list li div.navigation_main_link_body .navigation_main_list_delete {
