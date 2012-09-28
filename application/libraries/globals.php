@@ -1155,7 +1155,7 @@ function latest_omeka_version()
 function file_markup($files, array $props = array(), $wrapperAttributes = array('class' => 'item-file'))
 {
     if (!is_array($files)) {
-        $files = array($file);
+        $files = array($files);
     }
     $helper = new Omeka_View_Helper_FileMarkup;
     $output = '';
