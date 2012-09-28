@@ -8,7 +8,6 @@
                 __('Collections') => url('collections'),
                 __('Item Types') => url('item-types'),
                 __('Tags') => url('tags'),
-                __('Navigation') => url('navigation'),
                 
                 );
             echo nav(apply_filters('admin_navigation_main', $contentNav));
@@ -28,7 +27,6 @@
                 __('Collections') => url('collections'),
                 __('Item Types') => url('item-types'),
                 __('Tags') => url('tags'),
-                __('Navigation') => url('navigation')
                 );
             echo nav(apply_filters('admin_navigation_main', $contentNav));
         ?>            
