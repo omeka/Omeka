@@ -28,12 +28,19 @@ jQuery(document).ready(function () {
 //]]>
 </script>
 
-<div class="eight columns alpha">
-
 <?php echo common('settings-nav'); ?>
 <?php echo flash(); ?>
-<?php echo $this->form; ?>
-			
-</div>
+
+<form method="post">
+
+    <div class="seven columns alpha">
+        <?php echo $this->form->getDisplayGroup('security_settings'); ?>
+    </div>
+    
+    <div id="save" class="three columns omega panel">
+        <?php echo $this->formSubmit('submit', __('Save Changes'), array('class'=>'submit big green button')); ?>
+    </div>
+
+</form>
 
 <?php echo foot(); ?>
