@@ -21,6 +21,7 @@ $resources = array(
     'ItemTypes', 
     'Users',
     'Search',
+    'Appearance'
 );
 
 $acl = new Zend_Acl;
@@ -78,7 +79,8 @@ $acl->deny('admin', array(
     'Themes', 
     'ElementSets', 
     'Security', 
-    'SystemInfo'
+    'SystemInfo',
+    'Appearance'
 ));
 
 // We have to jump through some hoops to deny Users to admins since they

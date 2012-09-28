@@ -17,11 +17,6 @@
 class SettingsController extends Omeka_Controller_AbstractActionController
 {    
     const DEFAULT_TAG_DELIMITER = ',';
-    const DEFAULT_FULLSIZE_CONSTRAINT = 800;
-    const DEFAULT_THUMBNAIL_CONSTRAINT = 200;
-    const DEFAULT_SQUARE_THUMBNAIL_CONSTRAINT = 200;
-    const DEFAULT_PER_PAGE_ADMIN = 10;
-    const DEFAULT_PER_PAGE_PUBLIC = 10;
         
     public function indexAction() 
     {
