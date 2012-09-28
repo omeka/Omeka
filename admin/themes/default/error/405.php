@@ -1,7 +1,6 @@
 <?php
 $pageTitle = __('405: Method Not Allowed');
 echo head(array('bodyclass'=>'error405 primary', 'title'=>$pageTitle)); ?>
-<h1><?php echo $pageTitle; ?></h1>
 
 <div id="primary" class="method-not-allowed">
     <?php echo flash(); ?>
