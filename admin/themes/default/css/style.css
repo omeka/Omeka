@@ -1387,6 +1387,17 @@ ul#section-nav, #section-nav ul {
 
 .tags #tags-nav { margin: 0; }
 
+.tags ol { padding: 0 0 0 1em; }
+
+.tags ol:before {
+    content: "";
+    display: inline-block;
+    width: 166px;
+    height: 70px;
+    background:url('../images/tag-desc.jpg');
+    margin: .25em 0 1em -1em;
+}
+
 .count {
     padding: 0 10px 0 0;
     border-right: 1px solid #749308;

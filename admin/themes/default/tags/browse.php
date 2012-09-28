@@ -4,6 +4,20 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodycl
 <?php echo flash(); ?>
 <?php if ($total_tags): ?>
 
+<div class="three columns alpha">
+
+    <h2><?php echo __('Editing Tags'); ?></h2>
+    
+    <ol>
+        <li><?php echo __('The numbers of items with this tag. Click the number to see all items with this tag.'); ?></li>
+        <li><?php echo __('To edit the name of the tag, click the name and start typing. Clicking away will cancel the edit. Hitting "return" when finished editing will save the new tag name.'); ?></li>
+        <li><?php echo __('Click here to delete the tag. Deleting the tag will not delete the tagged items.'); ?></li>
+    </ol>
+
+</div>
+
+<div class="seven columns omega">
+
     <p id="tags-nav">
         <?php
         $sortOptions = array(
@@ -36,6 +50,8 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodycl
 <?php else: ?>
     <p><?php echo __('There are no tags to display. You must first tag some items.'); ?></p>
 <?php endif; ?>
+
+</div>
 
 </div>
 
