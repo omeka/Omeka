@@ -22,8 +22,8 @@ class Core_AclTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        include CORE_DIR . '/acl.php';
-        $this->_acl = $acl;
+        $acl = new Omeka_Application_Resource_Acl;
+        $this->_acl = $acl->getAcl();
     }
 
     public function tearDown()

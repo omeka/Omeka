@@ -38,11 +38,10 @@ define('BASE_DIR',         dirname(__FILE__));
 define('APP_DIR',          BASE_DIR . '/application');
 define('PLUGIN_DIR',       BASE_DIR . '/plugins');
 define('ADMIN_DIR',        BASE_DIR . '/admin');
-define('FILES_DIR',      BASE_DIR . '/files');
+define('FILES_DIR',        BASE_DIR . '/files');
 define('ADMIN_THEME_DIR',  BASE_DIR . '/admin/themes');
 define('PUBLIC_THEME_DIR', BASE_DIR . '/themes');
 define('INSTALL_DIR',      BASE_DIR . '/install');
-define('CORE_DIR',         APP_DIR . '/core');
 define('MODEL_DIR',        APP_DIR . '/models');
 define('FORM_DIR',         APP_DIR . '/forms');
 define('CONTROLLER_DIR',   APP_DIR . '/controllers');
@@ -53,14 +52,16 @@ define('VIEW_SCRIPTS_DIR', APP_DIR . '/views/scripts');
 define('VIEW_HELPERS_DIR', APP_DIR . '/views/helpers');
 define('UPGRADE_DIR',      APP_DIR . '/migrations');
 define('LANGUAGES_DIR',    APP_DIR . '/languages');
+define('SCHEMA_DIR',       APP_DIR . '/schema');
+define('SCRIPTS_DIR',      APP_DIR . '/scripts');
 
-define('BACKGROUND_BOOTSTRAP_PATH', CORE_DIR . '/background.php');
+define('BACKGROUND_BOOTSTRAP_PATH', SCRIPTS_DIR . '/background.php');
 
 // Define the web address constants:
 defined('WEB_ROOT') || _define_web_root();
-define('WEB_THEME', WEB_DIR . '/themes');
+define('WEB_THEME',        WEB_DIR . '/themes');
 define('WEB_PLUGIN',       WEB_ROOT . '/plugins');
-define('WEB_FILES',      WEB_ROOT . '/files');
+define('WEB_FILES',        WEB_ROOT . '/files');
 define('WEB_PUBLIC_THEME', WEB_ROOT . '/themes');
 define('WEB_VIEW_SCRIPTS', WEB_ROOT . '/application/views/scripts');
 
