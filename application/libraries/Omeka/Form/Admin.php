@@ -45,12 +45,13 @@ class Omeka_Form_Admin extends Omeka_Form
         $this->addElementToSaveGroup('AdminSave', 'submit');
         
         if($this->_record && $this->_hasPublicPage) {
-            $this->addElementToSaveGroup('AdminPublicPage', 'public-page');
+            $this->addElementToSaveGroup('AdminPublicPage', 'public-page', array('record'=>$this->_record));
         }
         
         if($this->_record) {
-            $this->addElementToSaveGroup('AdminDelete', 'delete' , array('content'=>'Delete'));
+            $this->addElementToSaveGroup('AdminDelete', 'delete' , array('content'=>'Delete', 'record'=>$this->_record));
         }
+        
     }
     
     /**
@@ -63,7 +64,7 @@ class Omeka_Form_Admin extends Omeka_Form
      */
     
     public function addElementToEditGroup($element, $name, $options = null)
-    {
+    {     
         return $this->addElementToDisplayGroup('edit', $element, $name, $options );
     }
 
@@ -83,20 +84,10 @@ class Omeka_Form_Admin extends Omeka_Form
     
     protected function addElementToDisplayGroup($group, $element, $name = null, $options = null)    
     {
+        
         if(is_string($element) && is_null($name)) {
             throw new Zend_Form_Exception('To add directly to a part of the admin edit page, you must give your element a name');
         }
-        
-        //if no record is passed, assume we want to use the form's record on elements
-
-        if($options) {
-            if(!isset($options['record'])) {
-                $options['record'] = $this->_record;
-            }
-        } else {
-            $options = array('record'=>$this->_record);
-        }
-
         
         $this->addElement($element, $name, $options);
         
@@ -104,7 +95,13 @@ class Omeka_Form_Admin extends Omeka_Form
 
         switch($group) {
             case 'save':
-                $this->_saveDisplayGroup->addElement($element);
+                $this->_saveDisplayGroup->addElement($element);                
+                //need to have slightly different decorators from the defaults when in the save panel
+                //not necessary on standard things like the Save and Delete buttons
+                if(! $element instanceOf Omeka_Form_Element_AbstractAdmin) {
+                    $element->setDecorators($this->getSaveGroupDefaultElementDecorators());
+                }
+                
                 break;
                 
             case 'edit':
@@ -112,6 +109,20 @@ class Omeka_Form_Admin extends Omeka_Form
                 break;
         }     
         return $this;           
+    }
+    
+    public function getSaveGroupDefaultElementDecorators()
+    {
+        return array(
+                'ViewHelper',
+                array('Description', array('tag' => 'p', 'class' => 'explanation')),
+                'Errors',
+                array(array('InputsTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs')),
+                array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha')),
+                array(array('FieldTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'field'))
+        );        
+        
+        
     }
     
     public function setEditGroupCssClass($cssClass)

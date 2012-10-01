@@ -124,7 +124,6 @@ class Zend_Form_Decorator_FormElements extends Zend_Form_Decorator_Abstract
             }
         }
         $elementContent = implode($separator, $items);
-
         switch ($this->getPlacement()) {
             case self::PREPEND:
                 return $elementContent . $separator . $content;

@@ -16,6 +16,7 @@ class Omeka_Form_Element_AdminPublicPage extends Omeka_Form_Element_AbstractAdmi
 
         ));
         revert_theme_base_url();
-        return $decorators();
+        
+        return $decorators;
     }
 }
