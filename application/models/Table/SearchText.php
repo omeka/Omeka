@@ -16,37 +16,34 @@ class Table_SearchText extends Omeka_Db_Table
          return $this->fetchObject($select);
     }
     
-    /**
-     * Perform a fulltext search.
-     * 
-     * @param string $query
-     * @param string $recordType Limit results to this record type.
-     * @return array
-     */
-    public function search($query, $recordType = null)
+    public function applySearchFilters($select, $params)
     {
+        // Set the base select statement.
+        $select->reset(Zend_Db_Select::COLUMNS);
+        $select->columns(array(
+            'record_type', 'record_id', 'title', 
+            'relevance' => new Zend_Db_Expr(
+                'MATCH (`text`) AGAINST (' . $this->getDb()->quote($params['query']) . ')'
+            )
+        ));
+        $select->where('MATCH (`text`) AGAINST (?)', $params['query']);
+        
+        // Search only those record types that are configured to be searched.
+        $searchRecordTypes = Mixin_Search::getSearchRecordTypes();
+        if ($searchRecordTypes) {
+            $select->where('`record_type` IN (?)', $searchRecordTypes);
+        }
+        
+        // Search on an specific record type.
+        if (isset($params['record_type'])) {
+            $select->where('`record_type` = ?', $params['record_type']);
+        }
+        
+        // Restrict access to private records.
         $showNotPublic = Zend_Registry::get('bootstrap')->getResource('Acl')
             ->isAllowed(current_user(), 'Search', 'showNotPublic');
-        $searchRecordTypes = Mixin_Search::getSearchRecordTypes();
-        
-        $sql = "
-        SELECT record_type, record_id, title, MATCH (text) AGAINST (?) AS relevance
-        FROM {$this->getTableName()} 
-        WHERE MATCH (text) AGAINST (?)";
-        if ($searchRecordTypes) {
-            $sql .= $this->getDb()->quoteInto(" AND record_type IN (?)", $searchRecordTypes);
-        }
-        if ($recordType) {
-            $sql .= $this->getDb()->quoteInto(" AND record_type = ?", $recordType);
-        }
         if (!$showNotPublic) {
-            $sql .= " AND public = 1";
+            $select->where('`public` = 1');
         }
-        $results = $this->getDb()->fetchAll($sql, array($query, $query));
-        foreach ($results as $key => $result) {
-            $results[$key]['record'] = $this->getTable($result['record_type'])
-                                            ->find($result['record_id']);
-        }
-        return $results;
     }
 }

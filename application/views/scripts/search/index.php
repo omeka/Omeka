@@ -11,10 +11,10 @@ echo head(array('title' => $pageTitle));
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($this->results as $result): ?>
+            <?php foreach ($this->searchTexts as $searchText): ?>
             <tr>
-                <td><?php echo Inflector::titleize($result['record_type']); ?></td>
-                <td><a href="<?php echo record_url($result['record'], 'show'); ?>"><?php echo $result['title'] ? $result['title'] : '[Unknown]'; ?></a></td>
+                <td><?php echo Inflector::titleize($searchText['record_type']); ?></td>
+                <td><a href="<?php echo record_url($searchText['record'], 'show'); ?>"><?php echo $searchText['title'] ? $searchText['title'] : '[Unknown]'; ?></a></td>
             </tr>
             <?php endforeach; ?>
         </tbody>

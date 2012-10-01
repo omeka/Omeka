@@ -1,11 +1,23 @@
 <?php
 class SearchController extends Omeka_Controller_AbstractActionController
 {
+    public function init()
+    {
+        $this->_helper->db->setDefaultModelName('SearchText');
+    }
+    
     public function indexAction()
     {
-        $results = $this->_helper->db->getTable('SearchText')
-            ->search($this->_getParam('query'), $this->_getParam('record_type'));
-        $this->view->results = $results;
+        // Find the search texts.
+        $searchTexts = $this->_helper->db->findBy($this->getAllParams(), 20, 
+                                                  $this->getParam('page', 1));
+        // Set the record to the results.
+        foreach ($searchTexts as $key => $searchText) {
+            $searchTexts[$key]['record'] = $this->_helper->db
+                                                ->getTable($searchText['record_type'])
+                                                ->find($searchText['record_id']);
+        }
+        $this->view->searchTexts = $searchTexts;
     }
     
     public function settingsAction()
