@@ -130,7 +130,7 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('post');
         $this->dispatch('/users/edit/' . $this->adminUser->id);
         $this->assertNotRedirect("This should not have redirected since the form submission was invalid.");
-        $this->assertQueryContentContains('ul.errors', "email address is invalid",
+        $this->assertQueryContentContains('ul.error', "email address is invalid",
             "Form should contain an error message indicating that the email address provided was invalid.");
     }
 
