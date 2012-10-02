@@ -91,7 +91,7 @@ function custom_header_background()
  * Partial for the admin bar.
  */
 function admin_bar() {
-    common('admin-bar');
+    echo common('admin-bar');
 }
 
 /**

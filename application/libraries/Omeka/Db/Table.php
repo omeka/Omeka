@@ -6,51 +6,55 @@
  */
 
 /**
- * Table classes are instantiated by Omeka_Db.  
+ * Database table classes.
  * 
- * Subclasses attached to models must follow the naming convention: model name + 
- * Table (e.g, ExhibitTable).
- *
- * @package Omeka
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
+ * Subclasses attached to models must follow the naming convention: 
+ * Table_TableName, e.g. Table_ElementSet in models/Table/ElementSet.php.
  */
 class Omeka_Db_Table
 {
     const SORT_PARAM = 'sort_field';
     const SORT_DIR_PARAM = 'sort_dir';
-
+    
     /**
-     * The name of the model that this table will retrieve objects for.
+     * The name of the model for which this table will retrieve objects.
      *
      * @var string
      */
     protected $_target;
     
     /**
-     * The name of the table (sans prefix).  If this is not given, it will
-     * be inflected magically.
+     * The name of the table (sans prefix).
+     * 
+     * If this is not given, it will be inflected.
      *
      * @var string
      */
     protected $_name;
     
     /**
-     * Table prefix.
-     * Generally used to differentiate Omeka installations sharing a DB. 
+     * The table prefix.
+     * 
+     * Generally used to differentiate Omeka installations sharing a database. 
      *
      * @var string
      */
     protected $_tablePrefix;
     
     /**
+     * The Omeka database object.
+     * 
      * @var Omeka_Db
      */
     protected $_db;
     
     /**
-     * @internal Do not instantiate this by itself, only access instances via
+     * Construct the database table object.
+     * 
+     * Do not instantiate this by itself. Access instances only via
      * Omeka_Db::getTable().
      * 
+     * @see Omeka_Db::getTable()
      * @param string $targetModel Class name of the table's model.
      * @param Omeka_Db $db Database object to use for queries.
      */
@@ -61,11 +65,11 @@ class Omeka_Db_Table
     }
     
     /**
-     * Delegate to the DB adapter. Used primarily as a convenience method.
+     * Delegate to the database adapter.
      * 
-     * For example, now you can call fetchOne() from this table object.
+     * Used primarily as a convenience method. For example, you can call 
+     * fetchOne() and fetchAll() directly from this object.
      * 
-     * @since 0.10
      * @param string $m Method name.
      * @param array $a Method arguments.
      * @return mixed
@@ -87,7 +91,6 @@ class Omeka_Db_Table
         if (empty($this->_name)) {
            $this->setTableName();
         }
-
         return $this->_name;
     }
     
@@ -102,25 +105,22 @@ class Omeka_Db_Table
     }
     
     /**
-     * Determine whether or not a model has a given column.
+     * Determine whether a model has a given column.
      * 
      * @param string $field Field name.
      * @return bool
      */
     public function hasColumn($field)
     {
-        $cols = $this->getColumns();
-        
-        return in_array($field, $cols);
+        return in_array($field, $this->getColumns());
     }
 
     /**
      * Retrieve a list of all the columns for a given model.
      * 
-     * @internal This should be here and not in the model class because 
-     * get_class_vars() returns private/protected properties when called from
-     * within the class.  Will only return public properties when called in this
-     * fashion.
+     * This should be here and not in the model class because get_class_vars() 
+     * returns private/protected properties when called from within the class. 
+     * Will only return public properties when called in this fashion.
      *
      * @return array
      */
@@ -130,8 +130,10 @@ class Omeka_Db_Table
     }
     
     /**
-     * Retrieve the name of the table for the current table (used in SQL statements).
-     * If the table name has not been set, then it will inflect the table name
+     * Retrieve the name of the table for the current table (used in SQL 
+     * statements).
+     * 
+     * If the table name has not been set, it will inflect the table name.
      *
      * @uses Omeka_Db_Table::setTableName().
      * @return string
@@ -142,7 +144,7 @@ class Omeka_Db_Table
            $this->setTableName();
         }
         
-        //Return the table name with the prefix added
+        // Return the table name with the prefix added.
         return $this->getTablePrefix()  . $this->_name;
     }
     
@@ -150,13 +152,13 @@ class Omeka_Db_Table
      * Set the name of the database table accessed by this class.
      * 
      * If no name is provided, it will inflect the table name from the name of
-     * the model defined in the constructor.  For example, Item --> items
+     * the model defined in the constructor. For example, Item -> items.
      * 
      * @uses Inflector::tableize()
      * @param string $name (optional) Table name.
      * @return void
      */
-    public function setTableName($name=null)
+    public function setTableName($name = null)
     {
         if ($name) {
             $this->_name = (string) $name;
@@ -168,7 +170,6 @@ class Omeka_Db_Table
     /**
      * Retrieve the table prefix for this table instance.
      * 
-     * @since 1.2
      * @return string
      */
     public function getTablePrefix()
@@ -180,16 +181,14 @@ class Omeka_Db_Table
     }
 
     /**
-     * Set the table prefix.  Defaults to the table prefix defined by the 
-     * Omeka_Db instance.
+     * Set the table prefix.
      * 
-     * In most cases, this should remain the default.  However, edge cases may 
-     * require customization, e.g. creating wrappers for tables generated by other
+     * Defaults to the table prefix defined by the Omeka_Db instance. This 
+     * should remain the default in most cases. However, edge cases may require 
+     * customization, e.g. creating wrappers for tables generated by other
      * applications.
      * 
-     * @since 1.2
      * @param string|null $tablePrefix
-     * @return void
      */
     public function setTablePrefix($tablePrefix = null)
     {
@@ -228,19 +227,19 @@ class Omeka_Db_Table
     
     /**
      * Retrieve an array of key=>value pairs that can be used as options in a 
-     * <select> form input.  As it applies to the given table.
+     * <select> form input.
      * 
      * @uses Omeka_Db_Table::_getColumnPairs()
-     * @param array $options (optional) Set of parameters for searching/filtering 
-     * results.
      * @see Omeka_Db_Table::applySearchFilters()
+     * @param array $options (optional) Set of parameters for searching/
+     * filtering results.
      * @return array
      */
     public function findPairsForSelectForm(array $options = array())
     {
         $select = $this->getSelectForFindBy($options);
         $select->reset(Zend_Db_Select::COLUMNS);
-        $select->from(array(), $this->_getColumnPairs());        
+        $select->from(array(), $this->_getColumnPairs());
         $pairs = $this->getDb()->fetchPairs($select);
         return $pairs;
     }
@@ -250,15 +249,14 @@ class Omeka_Db_Table
      * 
      * This is a template method because these columns are different for every
      * table, but the underlying logic that retrieves the pairs from the 
-     * database is the same in every instance.  This is an attempt to stay DRY.
+     * database is the same in every instance.
      * 
      * @see Omeka_Db_Table::findPairsForSelectForm()
      * @return array
      */
     protected function _getColumnPairs()
     {
-        throw new BadMethodCallException('Column pairs must be defined by _getColumnPairs() in order to use ' .
-            'Omeka_Db_Table::findPairsForSelectForm()!');
+        throw new BadMethodCallException('Column pairs must be defined by _getColumnPairs() in order to use Omeka_Db_Table::findPairsForSelectForm()!');
     }
     
     /**
@@ -266,15 +264,14 @@ class Omeka_Db_Table
      * 
      * @uses Omeka_Db_Table::getSelectForFindBy()
      * @param array $params A set of parameters by which to filter the objects
-     * that get returned from the DB.
+     * that get returned from the database.
      * @param integer $limit Number of objects to return per "page".
      * @param integer $page Page to retrieve.
      * @return array|null The set of objects that is returned
      */
-    public function findBy($params=array(), $limit = null, $page = null)
+    public function findBy($params = array(), $limit = null, $page = null)
     {
         $select = $this->getSelectForFindBy($params);
-
         if ($limit) {
             $this->applyPagination($select, $limit, $page);
         }
@@ -282,7 +279,7 @@ class Omeka_Db_Table
     }
     
     /**
-     * Retrieve a SELECT object for this table.
+     * Retrieve a select object for this table.
      * 
      * @return Omeka_Db_Select
      */
@@ -290,38 +287,39 @@ class Omeka_Db_Table
     {
         $select = new Omeka_Db_Select($this->getDb()->getAdapter());
         $alias = $this->getTableAlias();
-        $select->from(array($alias=>$this->getTableName()), "$alias.*");    
-        return $select;    
+        $select->from(array($alias=>$this->getTableName()), "$alias.*");
+        return $select;
     }
     
     /**
-     * Retrieve a SELECT object that has had search filters applied to it.
+     * Retrieve a select object that has had search filters applied to it.
      * 
      * @uses Omeka_Db_Table::getSelectForFindBy()
      * @param array $params optional Set of named search parameters.
      * @return Omeka_Db_Select
      */
-    public function getSelectForFindBy($params=array())
+    public function getSelectForFindBy($params = array())
     {
         $params = apply_filters($this->_getHookName('browse_params'), $params);
-
+        
         $select = $this->getSelect();
-
         $sortParams = $this->_getSortParams($params);
+        
         if ($sortParams) {
             list($sortField, $sortDir) = $sortParams;
             $this->applySorting($select, $sortField, $sortDir);
         }
+        
         $this->applySearchFilters($select, $params);
-
+        
         fire_plugin_hook($this->_getHookName('browse_sql'), 
                          array('select' => $select, 'params' => $params));
-
+        
         return $select;
     }
     
     /**
-     * Retrieve a SELECT object that is used for retrieving a single record from 
+     * Retrieve a select object that is used for retrieving a single record from 
      * the database.
      * 
      * @param integer $recordId
@@ -329,9 +327,9 @@ class Omeka_Db_Table
      */
     public function getSelectForFind($recordId)
     {
-        //Cast to integer to prevent SQL injection
+        // Cast to integer to prevent SQL injection.
         $recordId = (int) $recordId;
-
+        
         $select = $this->getSelect();
         $select->where( $this->getTableAlias().'.id = ?', $recordId);
         $select->limit(1);     
@@ -340,20 +338,18 @@ class Omeka_Db_Table
     }
     
     /**
-     * Apply a set of filters to a Select object based on the parameters 
-     * given.
+     * Apply a set of filters to a Select object based on the parameters given.
      * 
      * This template method must be implemented by subclasses in order to define
      * search behaviors.
      * 
      * @param Omeka_Db_Select $select
      * @param array $params
-     * @return void
      */
     public function applySearchFilters($select, $params) {}
-
+    
     /**
-     * Applies default column-based sorting for a table.
+     * Apply default column-based sorting for a table.
      *
      * @param Omeka_Db_Select $select
      * @param string $sortField Field to sort on.
@@ -371,7 +367,7 @@ class Omeka_Db_Table
     }
     
     /**
-     * Apply pagination to a SELECT object via the LIMIT and OFFSET clauses.
+     * Apply pagination to a select object via the LIMIT and OFFSET clauses.
      * 
      * @param Zend_Db_Select $select
      * @param integer $limit Number of results per "page".
@@ -385,7 +381,6 @@ class Omeka_Db_Table
         } else {
             $select->limit($limit);
         }
-             
         return $select;
     }   
      
@@ -394,12 +389,12 @@ class Omeka_Db_Table
      *
      * @param string $sqlWhereClause
      * @param array $params optional Set of parameters to bind to the WHERE
-     * clause.  Used to prevent security flaws.
+     * clause. Used to prevent security flaws.
      * @param boolean $findOne optional Whether or not to retrieve a single
      * record or the whole set (retrieve all by default).
      * @return array|Omeka_Record_AbstractRecord|false
      */
-    public function findBySql($sqlWhereClause, array $params=array(), $findOne=false)
+    public function findBySql($sqlWhereClause, array $params = array(), $findOne = false)
     {
         $select = $this->getSelect();
         $select->where($sqlWhereClause);
@@ -421,32 +416,31 @@ class Omeka_Db_Table
     }
     
     /**
-     * Retrieve a Select object that is used to retrieve a count of all the rows
-     * in the table.
+     * Retrieve a select object used to retrieve a count of all the table rows.
      * 
      * @param array $params optional Set of search filters.
      * @return Omeka_Db_Select
      */
-    public function getSelectForCount($params=array())
+    public function getSelectForCount($params = array())
     {
         $select = $params ? $this->getSelectForFindBy($params) : $this->getSelect();
         
-        //Make sure the SELECT only pulls down the COUNT() column
+        // Make sure the SELECT only pulls down the COUNT() column.
         $select->reset(Zend_Db_Select::COLUMNS);        
         $alias = $this->getTableAlias();
         $select->from(array(), "COUNT(DISTINCT($alias.id))");
         
-        //Reset the GROUP and ORDER BY clauses if necessary
+        // Reset the GROUP and ORDER BY clauses if necessary.
         $select->reset(Zend_Db_Select::ORDER)->reset(Zend_Db_Select::GROUP);
         
-        //Reset the LIMIT and OFFSET clauses if necessary
+        // Reset the LIMIT and OFFSET clauses if necessary.
         $select->reset(Zend_Db_Select::LIMIT_COUNT)->reset(Zend_Db_Select::LIMIT_OFFSET);
-
-        return $select;        
+        
+        return $select;
     }
     
     /**
-     * Check whether or not a given row exists in the database.
+     * Check whether a given row exists in the database.
      *
      * Currently used to verify that a row exists even though the current user 
      * may not have permissions to access it.
@@ -459,7 +453,6 @@ class Omeka_Db_Table
         $alias = $this->getTableAlias();
         $select = $this->getSelectForCount()->where("$alias.id = ?", $id);
         $count = $this->getDb()->fetchOne($select);
-        
         return ($count == 1);
     }
     
@@ -476,8 +469,8 @@ class Omeka_Db_Table
     {        
         $res = $this->getDb()->query($sql, $params);
         $data = $res->fetchAll();
-                            
-        //Would use fetchAll() but it can be memory-intensive
+        
+        // Would use fetchAll() but it can be memory-intensive.
         $objs = array();
         foreach ($data as $k => $row) {
             $objs[$k] = $this->recordFromData($row);
@@ -487,7 +480,7 @@ class Omeka_Db_Table
     }
     
     /**
-     * Retrieve a single record from the database.
+     * Retrieve a single record object from the database.
      * 
      * @see Omeka_Db_Table::fetchObjects()
      * @param string $sql
@@ -503,7 +496,6 @@ class Omeka_Db_Table
     /**
      * Populate a record object with data retrieved from the database.
      * 
-     * @todo FIXME: Should follow Zend coding standards for protected methods.
      * @param array $data A keyed array representing a row from the database.
      * @return Omeka_Record_AbstractRecord
      */
@@ -514,16 +506,16 @@ class Omeka_Db_Table
         $obj->setArray($data);
         return $obj;
     }
-
+    
     /**
      * Get and parse sorting parameters to pass to applySorting.
      *
-     * A sorting direction of 'ASC' will be used if no direction parameter
-     * is passed.
+     * A sorting direction of 'ASC' will be used if no direction parameter is 
+     * passed.
      *
      * @param array $params
-     * @return array|null Array of sort field, sort dir if params exist,
-     * null otherwise.
+     * @return array|null Array of sort field, sort dir if params exist, null 
+     * otherwise.
      */
     private function _getSortParams($params)
     {
@@ -543,7 +535,7 @@ class Omeka_Db_Table
         }
         return null;
     }
-
+    
     /**
      * Get the name for a model-specific hook or filter..
      *
