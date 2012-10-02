@@ -7,6 +7,7 @@
 
 /**
  * Base class for Omeka controllers.
+ * 
  * Provides basic create, read, update, and delete (CRUD) operations.
  *
  * @package Omeka
@@ -15,10 +16,10 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
 {
     /**
      * The number of records to browse per page.
-     * If this is left null, then results will not paginate.
-     *
-     * This is partially because not every controller will want to paginate
-     * records and also to avoid BC breaks for plugins.
+     * 
+     * If this is left null, then results will not paginate. This is partially 
+     * because not every controller will want to paginate records and also to 
+     * avoid BC breaks for plugins.
      *
      * @var string
      */
@@ -29,10 +30,12 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
      *
      * Does the following things:
      *
-     *  - Aliases the redirector helper to clean up the syntax (is this bad?)
-     *  - Sets the table object automatically if given the class of the model to
-     *    use for CRUD.
-     *  - Sets all the built-in action contexts for the CRUD actions.
+     * <ul>
+     *   <li>Aliases the redirector helper to clean up the syntax</li>
+     *   <li>Sets the table object automatically if given the class of the model 
+     * to use for CRUD.</li>
+     *   <li>Sets all the built-in action contexts for the CRUD actions.</li>
+     * </ul>
      *
      * Instead of overriding this constructor, controller subclasses should
      * implement the init() method for initial setup.
@@ -44,116 +47,108 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
      */
     public function __construct(Zend_Controller_Request_Abstract $request,
                                 Zend_Controller_Response_Abstract $response,
-                                array $invokeArgs = array())
-    {
-        // Zend_Controller_Action __construct finishes by running init()
-        $init = parent::__construct($request, $response, $invokeArgs);
-
+                                array $invokeArgs = array()
+    ) {
+        parent::__construct($request, $response, $invokeArgs);
         $response->setHeader('Content-Type', 'text/html; charset=utf-8', true);
-
         $this->_setActionContexts();
-
-        return $init;
     }
-
-    //==================//
-    // Built-in Actions //
-    //==================//
-
+    
     /**
      * Forward to the 'browse' action
      *
-     * @see Omeka_Controller_AbstractActionController::browseAction()
-     * @return void
+     * @see self::browseAction()
      */
     public function indexAction()
     {
         $this->_forward('browse');
     }
-
+    
     /**
-     * Retrieve and renders a set of records for the controller's model.
+     * Retrieve and render a set of records for the controller's model.
      *
-     * Uses inflection based on the model class in order to determine
-     * which records to retrieve.  Registers the set of records with the
-     * pluralized name.  Retrieves all records by default.
+     * Using this action requires some setup:
+     * 
+     * <ul>
+     *   <li>In your controller's <code>init()</code>, set the default model name: 
+     *     <code>$this->_helper->db->setDefaultModelName('YourRecord');</code></li>
+     *   <li>In your controller, set the records per page and return them using: 
+     *     <code>protected function _getBrowseRecordsPerPage()</code></li>
+     *   <li>In your table record, filter the select object using the provided 
+     *     parameters using: 
+     *     <code>public function applySearchFilters($select, $params)</code></li>
+     * </ul>
      *
-     * The model class must be set to use this action.
-     *
-     * @return void
+     * @uses Omeka_Controller_Action_Helper_Db::getDefaultModelName()
+     * @uses Omeka_Db_Table::findBy()
      */
     public function browseAction()
     {
-        // Only respect GET params when browsing.
+        // Respect only GET parameters when browsing.
         $this->getRequest()->setParamSources(array('_GET'));
-
+        
+        // Inflect the record type from the model name.
         $pluralName = $this->view->pluralize($this->_helper->db->getDefaultModelName());
-
-        $params = $this->_getAllParams();
-
+        
+        $params = $this->getAllParams();
         $recordsPerPage = $this->_getBrowseRecordsPerPage();
-        $currentPage = $this->_getParam('page', 1);
-
+        $currentPage = $this->getParam('page', 1);
+        
+        // Get the records filtered to Omeka_Db_Table::applySearchFilters().
         $records = $this->_helper->db->findBy($params, $recordsPerPage, $currentPage);
-
         $totalRecords = $this->_helper->db->count($params);
-
-        Zend_Registry::set($pluralName, $records);
-
-        // Fire the plugin hook
-        fire_plugin_hook('browse_' . strtolower(ucwords($pluralName)), 
-                         array('records' => $records));
-
-        // If we are using the pagination, we'll need to set some info in the
-        // registry.
+        
+        // Fire the specific browse records hook.
+        fire_plugin_hook("browse_$pluralName", array('records' => $records));
+        
+        // Add pagination data to the registry. Used by pagination_links().
         if ($recordsPerPage) {
-            $pagination = array('page'          => $currentPage,
-                                'per_page'      => $recordsPerPage,
-                                'total_results' => $totalRecords);
-            Zend_Registry::set('pagination', $pagination);
+            Zend_Registry::set('pagination', array(
+                'page' => $currentPage, 
+                'per_page' => $recordsPerPage, 
+                'total_results' => $totalRecords, 
+            ));
         }
-
-        $this->view->assign(array($pluralName     => $records,
-                                  'total_records' => $totalRecords));
+        
+        $this->view->assign(array($pluralName => $records, 'total_records' => $totalRecords));
     }
-
+    
     /**
      * Retrieve a single record and render it.
-     *
+     * 
      * Every request to this action must pass a record ID in the 'id' parameter.
      *
+     * @uses Omeka_Controller_Action_Helper_Db::getDefaultModelName()
      * @uses Omeka_Controller_Action_Helper_Db::findById()
-     * @return void
      */
     public function showAction()
     {
-        $dbHelper = $this->_helper->db;
-        $varName = $this->view->singularize($dbHelper->getDefaultModelName());
-
-        $record = $dbHelper->findById();
-
-        Zend_Registry::set($varName, $record);
-
-        fire_plugin_hook('show_' . strtolower(get_class($record)), array('record' => $record));
-
-        $this->view->assign(array($varName => $record));
+        $singularName = $this->view->singularize($this->_helper->db->getDefaultModelName());
+        $record = $this->_helper->db->findById();
+        
+        // Fire the specific show record hook.
+        fire_plugin_hook("show_$singularName", array('record' => $record));
+        
+        $this->view->assign(array($singularName => $record));
     }
-
+    
     /**
      * Add an instance of a record to the database.
      *
      * This behaves differently based on the contents of the $_POST superglobal.
-     * If the $_POST is empty or invalid, it will render the form used for data entry.
-     * Otherwise, if the $_POST exists and is valid, it will save the new
+     * If the $_POST is empty or invalid, it will render the form used for data 
+     * entry. Otherwise, if the $_POST exists and is valid, it will save the new
      * record and redirect to the 'browse' action.
      *
-     * @return void
+     * @uses Omeka_Controller_Action_Helper_Db::getDefaultModelName()
+     * @uses self::_getAddSuccessMessage()
+     * @uses self::_redirectAfterAdd()
      */
     public function addAction()
     {
         $class = $this->_helper->db->getDefaultModelName();
         $varName = $this->view->singularize($class);
-
+        
         $record = new $class();
         if ($this->getRequest()->isPost()) {
             $record->setPostData($_POST);
@@ -169,19 +164,21 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
         }
         $this->view->$varName = $record;
     }
-
+    
     /**
      * Similar to 'add' action, except this requires a pre-existing record.
      *
      * Every request to this action must pass a record ID in the 'id' parameter.
      *
+     * @uses Omeka_Controller_Action_Helper_Db::getDefaultModelName()
      * @uses Omeka_Controller_Action_Helper_Db::findById()
-     * @return void
+     * @uses self::_getEditSuccessMessage()
+     * @uses self::_redirectAfterEdit()
      */
     public function editAction()
     {
         $varName = $this->view->singularize($this->_helper->db->getDefaultModelName());
-
+        
         $record = $this->_helper->db->findById();
         
         if ($this->getRequest()->isPost()) {
@@ -199,9 +196,12 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
         
         $this->view->$varName = $record;
     }
-
+    
     /**
      * Ask for user confirmation before deleting a record.
+     * 
+     * @uses Omeka_Controller_Action_Helper_Db::findById()
+     * @uses self::_getDeleteConfirmMessage()
      */
     public function deleteConfirmAction()
     {
@@ -213,15 +213,15 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
         $this->view->assign(compact('confirmMessage','record', 'isPartial', 'form'));
         $this->render('common/delete-confirm', null, true);
     }
-
+    
     /**
      * Delete a record from the database.
      *
      * Every request to this action must pass a record ID in the 'id' parameter.
-     * Find a record based on ID, delete it and redirect to 'browse' action.
      *
      * @uses Omeka_Controller_Action_Helper_Db::findById()
-     * @return void
+     * @uses self::_getDeleteSuccessMessage()
+     * @uses self::_redirectAfterDelete()
      */
     public function deleteAction()
     {
@@ -229,30 +229,25 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
             $this->_forward('method-not-allowed', 'error', 'default');
             return;
         }
-
+        
         $record = $this->_helper->db->findById();
-
+        
         $form = $this->_getDeleteForm();
-
         if ($form->isValid($_POST)) {
             $record->delete();
         } else {
             throw new Omeka_Controller_Exception_404;
         }
-
+        
         $successMessage = $this->_getDeleteSuccessMessage($record);
         if ($successMessage != '') {
             $this->_helper->flashMessenger($successMessage, 'success');
         }
         $this->_redirectAfterDelete($record);
     }
-
-    //=====================//
-    // Convenience Methods //
-    //=====================//
-
+    
     /**
-     * Retrieve the record for the current user.
+     * Return the record for the current user.
      *
      * @return User|bool User object if a user is logged in, false otherwise.
      */
@@ -260,60 +255,70 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
     {
         return $this->getInvokeArg('bootstrap')->getResource('Currentuser');
     }
-
-    //==================//
-    // Template Methods //
-    //==================//
-
+    
     /**
-     * Retrieve the number of records to display per page.
+     * Return the number of records to display per page.
      *
-     * By default, this will return null, disabling pagination.
+     * By default this will return null, disabling pagination. This can be 
+     * overridden in subclasses by redefining this method.
      *
      * @return integer|null
      */
     protected function _getBrowseRecordsPerPage()
     {
-        // Don't care about the 'per_page' query parameter by default.
-        // This can be overridden in subclasses by redefining this method.
         return $this->_browseRecordsPerPage;
     }
 
     /**
-     * Returns the success message for adding a record.
+     * Return the success message for adding a record.
+     * 
      * Default is empty string. Subclasses should override it.
      *
      * @param Omeka_Record_AbstractRecord $record
      * @return string
      */
-    protected function _getAddSuccessMessage($record) {return '';}
-
+    protected function _getAddSuccessMessage($record)
+    {
+        return '';
+    }
+    
     /**
-     * Returns the success message for editing a record.
+     * Return the success message for editing a record.
+     * 
      * Default is empty string. Subclasses should override it.
      *
      * @param Omeka_Record_AbstractRecord $record
      * @return string
      */
-    protected function _getEditSuccessMessage($record) {return '';}
-
+    protected function _getEditSuccessMessage($record)
+    {
+        return '';
+    }
+    
     /**
-     * Returns the success message for deleting a record.
+     * Return the success message for deleting a record.
+     * 
      * Default is empty string. Subclasses should override it.
      *
      * @param Omeka_Record_AbstractRecord $record
      * @return string
      */
-    protected function _getDeleteSuccessMessage($record) {return '';}
-
+    protected function _getDeleteSuccessMessage($record)
+    {
+        return '';
+    }
+    
     /**
-     * Returns the delete confirm message for deleting a record.
+     * Return the delete confirm message for deleting a record.
      *
      * @param Omeka_Record_AbstractRecord $record
      * @return string
      */
-    protected function _getDeleteConfirmMessage($record) {return '';}
-
+    protected function _getDeleteConfirmMessage($record)
+    {
+        return '';
+    }
+    
     /**
      * Redirect to another page after a record is successfully added.
      *
@@ -355,16 +360,12 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
      *
      * Passes Omeka's default additional contexts through the
      * 'define_action_contexts' filter to allow plugins to add contexts.
-     *
-     * @link http://framework.zend.com/manual/en/zend.controller.actionhelpers.html#zend.controller.actionhelpers.contextswitch
-     * @return void
      */
     protected function _setActionContexts()
     {
         $contextSwitcher = $this->_helper->getHelper('contextSwitch');
-
         $contextArray = !empty($this->contexts) ? $this->contexts : array();
-
+        
         // Plugins can hook in to add contexts to actions
         if ($broker = $this->getInvokeArg('bootstrap')->getResource('Pluginbroker')) {
             // The 'define_action_contexts' filter receives the controller
@@ -376,10 +377,9 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
                 array('controller' => $this, 'context_switcher' => $contextSwitcher)
             );
         }
-
+        
         // Replace the existing contexts with the filtered plugin list.
         $contextSwitcher->setActionContexts($contextArray);
-
         $contextSwitcher->initContext();
     }
 
