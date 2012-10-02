@@ -69,11 +69,7 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
             'inputs' => $inputsComponent,
             'description' => $descriptionComponent,
             'comment' => $commentComponent,
-            'add_input' => $addInputComponent,
-            /* todo
-            'use_html' => $useHtml,
-            'remove_input => $removeInput,
-            */
+            'add_input' => $addInputComponent
         );
         $elementSetName = $element->getElementSet()->name;
         $recordType = get_class($record);
