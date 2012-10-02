@@ -48,7 +48,8 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
         $components = array(
             'input' => $this->_getInputComponent($inputNameStem, $value),
             'form_controls' => $this->_getControlsComponent(),
-            'html_checkbox' => $this->_getHtmlCheckboxComponent($inputNameStem, $isHtml)
+            'html_checkbox' => $this->_getHtmlCheckboxComponent($inputNameStem, $isHtml),
+            'html' => null
         );
         
         $filterName = array('ElementInput',
@@ -66,6 +67,10 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
                                           'index' => $index,
                                           'is_html' => $isHtml));
                                     
+        
+        if ($components['html'] !== null) {
+            return strval($components['html']);
+        }
         
         $html = '<div class="input-block">'
               . '<div class="input">'

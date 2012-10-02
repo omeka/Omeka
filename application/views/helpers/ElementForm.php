@@ -69,7 +69,8 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
             'inputs' => $inputsComponent,
             'description' => $descriptionComponent,
             'comment' => $commentComponent,
-            'add_input' => $addInputComponent
+            'add_input' => $addInputComponent,
+            'html' => null 
         );
         $elementSetName = $element->getElementSet()->name;
         $recordType = get_class($record);
@@ -81,6 +82,10 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
                   'element' => $element, 
                   'options' => $options)
         );
+
+        if ($components['html'] !== null) {
+            return strval($components['html']);
+        }
 
         // Compose html for element form
         $html = $divWrap ? '<div class="field" id="element-' . html_escape($element->id) . '">' : '';
