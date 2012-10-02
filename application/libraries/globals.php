@@ -1037,7 +1037,7 @@ function random_featured_collection()
     $featuredCollection = get_random_featured_collection();
     $html = '<h2>' . __('Featured Collection') . '</h2>';
     if ($featuredCollection) {
-        $html .= '<h3>' . link_to_collection($collectionTitle, array(), 'show', $featuredCollection) . '</h3>';
+        $html .= '<h3>' . link_to_collection($featuredCollection->title, array(), 'show', $featuredCollection) . '</h3>';
         if ($collectionDescription = metadata($featuredCollection, 'Description', array('snippet'=>150))) {
             $html .= '<p class="collection-description">' . $collectionDescription . '</p>';
         }
