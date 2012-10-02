@@ -35,8 +35,8 @@ class Table_SearchText extends Omeka_Db_Table
         }
         
         // Search on an specific record type.
-        if (isset($params['record_type'])) {
-            $select->where('`record_type` = ?', $params['record_type']);
+        if (isset($params['record_types'])) {
+            $select->where('`record_type` IN (?)', $params['record_types']);
         }
         
         // Restrict access to private records.
