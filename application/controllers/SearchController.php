@@ -8,16 +8,7 @@ class SearchController extends Omeka_Controller_AbstractActionController
     
     public function indexAction()
     {
-        // Find the search texts.
-        $searchTexts = $this->_helper->db->findBy($this->getAllParams(), 20, 
-                                                  $this->getParam('page', 1));
-        // Set the record to the results.
-        foreach ($searchTexts as $key => $searchText) {
-            $searchTexts[$key]['record'] = $this->_helper->db
-                                                ->getTable($searchText['record_type'])
-                                                ->find($searchText['record_id']);
-        }
-        $this->view->searchTexts = $searchTexts;
+        parent::browseAction();
     }
     
     public function settingsAction()
@@ -27,5 +18,10 @@ class SearchController extends Omeka_Controller_AbstractActionController
                                            ->sendLongRunning('Job_SearchTextIndex');
             $this->_helper->flashMessenger(__('Indexing search text. This may take a while.'), 'success');
         }
+    }
+    
+    protected function _getBrowseRecordsPerPage()
+    {
+        return 20;
     }
 }
