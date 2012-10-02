@@ -425,13 +425,13 @@ p, li {
         /* Alerts
         ================================================== */
         
-        #content #flash ul {
+        #content #flash ul, ul.error {
             list-style-type: none;
             margin-top: 0;
             padding: 0;
         }
             
-            #content #flash li {
+            #content #flash li, ul.error li {
                 background-color: rgba(255, 255, 255, .5);
                 border: 1px solid #E7E7E7;
                 border-radius: 3px;

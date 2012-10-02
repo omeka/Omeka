@@ -84,7 +84,7 @@ class Omeka_Form extends Zend_Form
         return array(
                         array('Description', array('tag' => 'p', 'class' => 'explanation')), 
                         'ViewHelper', 
-                        'Errors', 
+                        array('Errors', array('class' => 'error')),
                         array(array('InputsTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs five columns omega')), 
                         array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha')),
                         array(array('FieldTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'field'))
