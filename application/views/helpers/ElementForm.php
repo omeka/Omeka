@@ -26,7 +26,7 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
      *   // Where $components would looks like:
      *   //  array(
      *   //      'label' => [...], 
-     *   //      'input' => [...], 
+     *   //      'inputs' => [...], 
      *   //      'description' => [...], 
      *   //      'comment' => [...], 
      *   //      'add_input' => [...], 
