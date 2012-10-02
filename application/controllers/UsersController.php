@@ -229,17 +229,22 @@ class UsersController extends Omeka_Controller_AbstractActionController
         }
 
         if (isset($_POST['new_password'])) {
-            if ($changePasswordForm->isValid($_POST)) {
-                $values = $changePasswordForm->getValues();
-                $user->setPassword($values['new_password']);
-                $user->save();
-                $this->_helper->flashMessenger(__('Password changed!'), 'success');
-                $success = true;
+            if (!$changePasswordForm->isValid($_POST)) {
+                $this->_helper->flashMessenger(__('There was an invalid entry on the form. Please try again.'), 'error');
+                return;
             }
+            
+            $values = $changePasswordForm->getValues();
+            $user->setPassword($values['new_password']);
+            $user->save();
+            $this->_helper->flashMessenger(__('Password changed!'), 'success');
+            $success = true;
         } else {
             if (!$form->isValid($_POST)) {
+                $this->_helper->flashMessenger(__('There was an invalid entry on the form. Please try again.'), 'error');
                 return;
-            }        
+            }
+            
             $user->setPostData($form->getValues());
             if ($user->save(false)) {
                 $this->_helper->flashMessenger(

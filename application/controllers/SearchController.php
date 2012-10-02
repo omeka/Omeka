@@ -1,11 +1,14 @@
 <?php
 class SearchController extends Omeka_Controller_AbstractActionController
 {
+    public function init()
+    {
+        $this->_helper->db->setDefaultModelName('SearchText');
+    }
+    
     public function indexAction()
     {
-        $results = $this->_helper->db->getTable('SearchText')
-            ->search($this->_getParam('query'), $this->_getParam('record_type'));
-        $this->view->results = $results;
+        parent::browseAction();
     }
     
     public function settingsAction()
@@ -15,5 +18,10 @@ class SearchController extends Omeka_Controller_AbstractActionController
                                            ->sendLongRunning('Job_SearchTextIndex');
             $this->_helper->flashMessenger(__('Indexing search text. This may take a while.'), 'success');
         }
+    }
+    
+    protected function _getBrowseRecordsPerPage()
+    {
+        return 20;
     }
 }

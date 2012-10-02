@@ -176,25 +176,51 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
       id="<?php echo $this->form->getId() ?>"
       class="<?php echo $this->form->getAttrib('class') ?>" >
 
-<div class="seven columns alpha">
-<?php echo flash(); ?>
-<?php echo $this->form->getDisplayGroup(Omeka_Form_Navigation::MAIN_NAV_CHECKBOX_DISPLAY_ELEMENT_ID); ?>
-</div>
+<?php echo common('appearance-nav'); ?>
 
-<div id="save" class="three columns omega panel">
- <?php echo $this->formSubmit('submit', __('Save Changes'), array('id'=>'save-changes', 'class'=>'submit big green button')); ?>
-<?php echo $this->form->getDisplayGroup(Omeka_Form_Navigation::HOMEPAGE_SELECT_DISPLAY_ELEMENT_ID); ?>
+<?php echo flash(); ?>
+
+<div class="seven columns alpha">
+
+<h2><?php echo __('Main Navigation'); ?></h2>
+
+    <p class="description"><?php echo __('Check the links you would like to display in the main navigation. You can click and drag the links into your preferred display order.'); ?></p>
+
+    <?php echo $this->form->getDisplayGroup(Omeka_Form_Navigation::MAIN_NAV_CHECKBOX_DISPLAY_ELEMENT_ID); ?>
 
     <fieldset id="fieldset-new_nav_link_display">
-        <legend><?php echo __('New Link'); ?></legend>
-        <label for="new_nav_link_label"><?php echo __('New Link Label'); ?></label><br/>
-        <input type="text" id="new_nav_link_label" name="new_nav_link_label" /><br/>
-
-        <label for="new_nav_link_uri"><?php echo __('New Link Uri'); ?></label><br/>
-        <input type="text" id="new_nav_link_uri" name="new_nav_link_uri" /><br/>
+        <h4><?php echo __('Add a Link to the Navigation'); ?></h4>
+        
+        <div class="field">
+            <div class="two columns alpha">
+            <label for="new_nav_link_label"><?php echo __('New Link Label'); ?></label>
+            </div>
+            
+            <div class="inputs five columns omega">
+            <input type="text" id="new_nav_link_label" name="new_nav_link_label" />
+            </div>
+        </div>
+        
+        <div class="field">
+            <div class="two columns alpha">
+                <label for="new_nav_link_uri"><?php echo __('New Link Uri'); ?></label>
+            </div>
+            
+            <div class="inputs five columns omega">
+                <input type="text" id="new_nav_link_uri" name="new_nav_link_uri" />
+            </div>
+        </div>
 
         <a href="" id="new_nav_link_button_link" class="blue button"><?php echo __('Add Link'); ?></a>
     </fieldset>
+    
+</div>
+
+<div id="save" class="three columns omega panel">
+
+    <?php echo $this->formSubmit('submit', __('Save Changes'), array('class'=>'submit big green button')); ?>
+    
+    <?php echo $this->form->getDisplayGroup(Omeka_Form_Navigation::HOMEPAGE_SELECT_DISPLAY_ELEMENT_ID); ?>
 
 </div>
 

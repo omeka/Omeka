@@ -2,7 +2,9 @@
 $pageTitle = __('Browse Themes');
 echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'themes primary'));?>
 
-               <?php echo flash(); ?>
+            <?php echo common('appearance-nav'); ?>
+            
+            <?php echo flash(); ?>
               
 
             <div id="current-theme" class="theme">

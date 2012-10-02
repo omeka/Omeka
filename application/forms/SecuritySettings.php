@@ -87,10 +87,12 @@ class Omeka_Form_SecuritySettings extends Omeka_Form
             'cols' => 50, 
             'rows' => 5
         ));
-        
-        $this->addElement('submit', 'security_submit', array(
-            'label' => __('Save Changes'),
-            'class' => 'big green button'
-        ));
+
+        $this->addDisplayGroup(
+            array(File::DISABLE_DEFAULT_VALIDATION_OPTION, Omeka_Validate_File_Extension::WHITELIST_OPTION,
+                Omeka_Validate_File_MimeType::WHITELIST_OPTION, Omeka_Captcha::PUBLIC_KEY_OPTION, Omeka_Captcha::PRIVATE_KEY_OPTION,
+                'html_purifier_is_enabled', 'html_purifier_allowed_html_elements', 'html_purifier_allowed_html_attributes'),
+            'security_settings');
+
     }
 }

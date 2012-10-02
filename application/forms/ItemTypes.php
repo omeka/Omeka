@@ -147,12 +147,7 @@ class Omeka_Form_ItemTypes extends Omeka_Form
                 'description' => __('The name of the item type.'),
                 'required' => true,
                 'value' => $itemTypeName,
-                'class' => 'textinput',
-                'decorators' =>  array(
-                            'ViewHelper',
-                            array('HtmlTag', array('tag' => 'dd')),
-                            array('Label', array('tag' => 'dt', 'class' => 'two columns alpha')),                           
-                            'Errors',)
+                'class' => 'textinput'
             )
         );                
         
@@ -163,12 +158,7 @@ class Omeka_Form_ItemTypes extends Omeka_Form
                 'value' => $itemTypeDescription,
                 'cols' => 50,
                 'rows' => 13,
-                'class' => 'textinput',
-                'decorators' =>  array(
-                            'ViewHelper',
-                            array('HtmlTag', array('tag' => 'dd')),
-                            array('Label', array('tag' => 'dt', 'class' => 'two columns alpha')),                           
-                            'Errors',)
+                'class' => 'textinput'
             )
         );        
         

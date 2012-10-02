@@ -78,14 +78,10 @@ class Omeka_Form_Navigation extends Omeka_Form
         $this->addElement('hidden', self::HIDDEN_ELEMENT_ID, array('value' => ''));
         $elementIds[] = self::HIDDEN_ELEMENT_ID;
         
-        $desc = '<p>Check the links you would like to display in the main navigation.<br/> You can click and drag the links into your preferred display order.</p>';
         $this->addDisplayGroup(
             $elementIds,
-            self::MAIN_NAV_CHECKBOX_DISPLAY_ELEMENT_ID,
-            array(
-                'legend' => 'Main Navigation',
-                'description' => $desc,
-        ));
+            self::MAIN_NAV_CHECKBOX_DISPLAY_ELEMENT_ID
+        );
                 
         $this->getDisplayGroup(self::MAIN_NAV_CHECKBOX_DISPLAY_ELEMENT_ID)->setDecorators(
             array(
@@ -126,7 +122,9 @@ class Omeka_Form_Navigation extends Omeka_Form
         
         $this->addDisplayGroup(
             $elementIds,
-            self::HOMEPAGE_SELECT_DISPLAY_ELEMENT_ID);
+            self::HOMEPAGE_SELECT_DISPLAY_ELEMENT_ID, 
+            array('class' => 'field')
+        );
     }
     
     public function saveFromPost() 

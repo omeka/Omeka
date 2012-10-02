@@ -5,8 +5,8 @@
     if(is_allowed('Plugins', 'edit')) {
         $globalNav[__('Plugins')] = url('plugins');
     }
-    if(is_allowed('Themes', 'edit')) {
-        $globalNav[__('Themes')] = url('themes');
+    if(is_allowed('Appearance', 'edit')) {
+        $globalNav[__('Appearance')] = url('appearance');
     }
     if(is_allowed('Users', 'edit')) {
         $globalNav[__('Users')] = url('users');

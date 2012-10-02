@@ -60,46 +60,6 @@ class Omeka_Form_GeneralSettings extends Omeka_Form
         // match the value to a string containing one or more characters.
         $this->getElement('tag_delimiter')->setAllowEmpty(false);
         $this->getElement('tag_delimiter')->addValidator('regex', false, array('/^.+$/'));
-        
-        $this->addElement('text', 'fullsize_constraint', array(
-            'label' => __('Fullsize Image Size'),
-            'description' => __('Maximum fullsize image size constraint (in pixels).'), 
-            'validators' => array('Digits'), 
-            'required' => true
-        ));
-        
-        $this->addElement('text', 'thumbnail_constraint', array(
-            'label' => __('Thumbnail Size'),
-            'description' => __('Maximum thumbnail size constraint (in pixels).'), 
-            'validators' => array('Digits'), 
-            'required' => true
-        ));
-        
-        $this->addElement('text', 'square_thumbnail_constraint', array(
-            'label' => __('Square Thumbnail Size'), 
-            'description' => __('Maximum square thumbnail size constraint (in pixels).'), 
-            'validators' => array('Digits'), 
-            'required' => true
-        ));
-        
-        $this->addElement('text', 'per_page_admin', array(
-            'label' => __('Items Per Page (admin)'), 
-            'description' => __('Limit the number of items displayed per page in the administrative interface.'), 
-            'validators' => array('Digits'), 
-            'required' => true
-        ));
-        
-        $this->addElement('text', 'per_page_public', array(
-            'label' => __('Items Per Page (public)'), 
-            'description' => __('Limit the number of items displayed per page in the public interface.'), 
-            'validators' => array('Digits'), 
-            'required' => true
-        ));
-        
-        $this->addElement('checkbox', 'show_empty_elements', array(
-            'label' => __('Show Empty Elements'),
-            'class' => 'checkbox'
-        ));
 
         $this->addElement('text', 'path_to_convert', array(
             'label' => __('ImageMagick Directory Path')

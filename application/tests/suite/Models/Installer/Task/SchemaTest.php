@@ -26,7 +26,7 @@ class Installer_Task_SchemaTest extends PHPUnit_Framework_TestCase
         
     public function testAddTable()
     {
-        $collectionSql = CORE_DIR . '/schema/collections.sql';
+        $collectionSql = SCHEMA_DIR . '/collections.sql';
         $this->schemaTask->addTable('collections', $collectionSql);
         $this->assertEquals(array(
             'collections' => $collectionSql
@@ -51,31 +51,31 @@ class Installer_Task_SchemaTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(0, count($this->schemaTask->getTables()));
         $this->schemaTask->useDefaultTables();
         $this->assertEquals(array(
-            'collections' => CORE_DIR . '/schema/collections.sql',
-            'element_texts' => CORE_DIR . '/schema/element_texts.sql',
-            'item_types' => CORE_DIR . '/schema/item_types.sql',
-            'processes' => CORE_DIR . '/schema/processes.sql',
-            'tags' => CORE_DIR . '/schema/tags.sql',
-            'elements' => CORE_DIR . '/schema/elements.sql',
-            'item_types_elements' => CORE_DIR . '/schema/item_types_elements.sql',
-            'options' => CORE_DIR . '/schema/options.sql',
-            'users' => CORE_DIR . '/schema/users.sql',
-            'element_sets' => CORE_DIR . '/schema/element_sets.sql',
-            'files' => CORE_DIR . '/schema/files.sql',
-            'items' => CORE_DIR . '/schema/items.sql',
-            'plugins' => CORE_DIR . '/schema/plugins.sql',
-            'taggings' => CORE_DIR . '/schema/taggings.sql',
-            'users_activations' => CORE_DIR . '/schema/users_activations.sql',
-            'sessions' => CORE_DIR . '/schema/sessions.sql',
-            'search_texts' => CORE_DIR . '/schema/search_texts.sql',
+            'collections' => SCHEMA_DIR . '/collections.sql',
+            'element_texts' => SCHEMA_DIR . '/element_texts.sql',
+            'item_types' => SCHEMA_DIR . '/item_types.sql',
+            'processes' => SCHEMA_DIR . '/processes.sql',
+            'tags' => SCHEMA_DIR . '/tags.sql',
+            'elements' => SCHEMA_DIR . '/elements.sql',
+            'item_types_elements' => SCHEMA_DIR . '/item_types_elements.sql',
+            'options' => SCHEMA_DIR . '/options.sql',
+            'users' => SCHEMA_DIR . '/users.sql',
+            'element_sets' => SCHEMA_DIR . '/element_sets.sql',
+            'files' => SCHEMA_DIR . '/files.sql',
+            'items' => SCHEMA_DIR . '/items.sql',
+            'plugins' => SCHEMA_DIR . '/plugins.sql',
+            'taggings' => SCHEMA_DIR . '/taggings.sql',
+            'users_activations' => SCHEMA_DIR . '/users_activations.sql',
+            'sessions' => SCHEMA_DIR . '/sessions.sql',
+            'search_texts' => SCHEMA_DIR . '/search_texts.sql',
         ), $this->schemaTask->getTables());
     }
         
     public function testAddTables()
     {
         $expectedTables = array(
-            'collections' => CORE_DIR . '/schema/collections.sql',
-            'items' => CORE_DIR . '/schema/items.sql'
+            'collections' => SCHEMA_DIR . '/collections.sql',
+            'items' => SCHEMA_DIR . '/items.sql'
         );
         $this->schemaTask->addTables($expectedTables);
         $this->assertEquals($expectedTables, $this->schemaTask->getTables());
@@ -84,8 +84,8 @@ class Installer_Task_SchemaTest extends PHPUnit_Framework_TestCase
     public function testSetTables()
     {
         $expectedTables = array(
-            'collections' => CORE_DIR . '/schema/collections.sql',
-            'items' => CORE_DIR . '/schema/items.sql'
+            'collections' => SCHEMA_DIR . '/collections.sql',
+            'items' => SCHEMA_DIR . '/items.sql'
         );
         $this->schemaTask->setTables($expectedTables);
         $this->assertEquals($expectedTables, $this->schemaTask->getTables());
@@ -94,8 +94,8 @@ class Installer_Task_SchemaTest extends PHPUnit_Framework_TestCase
     public function testRemoveTable()
     {
         $someTables = array(
-            'collections' => CORE_DIR . '/schema/collections.sql',
-            'items' => CORE_DIR . '/schema/items.sql'
+            'collections' => SCHEMA_DIR . '/collections.sql',
+            'items' => SCHEMA_DIR . '/items.sql'
         );
         $this->schemaTask->addTables($someTables);
         $this->schemaTask->removeTable('collections');
