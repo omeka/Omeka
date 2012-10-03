@@ -12,6 +12,8 @@ class Omeka_Form_Admin extends Omeka_Form
     
     protected $_saveDisplayGroup;
     
+    protected $_saveDisplayGroupActionDecorator;
+    
     protected $_record;
     
     protected $_hasPublicPage = true;
@@ -19,6 +21,8 @@ class Omeka_Form_Admin extends Omeka_Form
     protected $_editGroupCssClass = 'seven columns alpha';
     
     protected $_saveGroupCssClass = 'three columns omega panel';
+    
+    
     
     
     public function init()
@@ -37,21 +41,15 @@ class Omeka_Form_Admin extends Omeka_Form
         //create the decorators with CSS classes set up via options 
         $editDecorator = new Zend_Form_Decorator_HtmlTag(array('tag'=>'div', 'class'=>$this->_editGroupCssClass));
         $saveDecorator = new Zend_Form_Decorator_HtmlTag(array('tag'=>'div', 'id'=>'save', 'class'=>$this->_saveGroupCssClass));
-                
+        $this->_saveDisplayGroupActionDecorator = new Omeka_Form_Decorator_SavePanelAction(array('class'=>'woot'));
+        if($this->_record) {
+            $this->_saveDisplayGroupActionDecorator->setOption('record', $this->_record);
+            $this->setHasPublicPage();          
+        }
+        
         //Pro tip: order of adding decorators matters! if reversed, group elements would appear after the div!
         $this->_editDisplayGroup->setDecorators(array('FormElements', $editDecorator));
-        $this->_saveDisplayGroup->setDecorators(array('FormElements', $saveDecorator));
-
-        $this->addElementToSaveGroup('AdminSave', 'submit');
-        
-        if($this->_record && $this->_hasPublicPage) {
-            $this->addElementToSaveGroup('AdminPublicPage', 'public-page', array('record'=>$this->_record));
-        }
-        
-        if($this->_record) {
-            $this->addElementToSaveGroup('AdminDelete', 'delete' , array('content'=>'Delete', 'record'=>$this->_record));
-        }
-        
+        $this->_saveDisplayGroup->setDecorators(array($this->_saveDisplayGroupActionDecorator, 'FormElements',  $saveDecorator));        
     }
     
     /**
@@ -142,7 +140,7 @@ class Omeka_Form_Admin extends Omeka_Form
     
     public function setHasPublicPage($value = true)
     {
-        $this->_hasPublicPage = $value;
+        $this->_saveDisplayGroupActionDecorator->setOption('hasPublicPage', $value);
     }
     
 }
