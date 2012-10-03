@@ -94,12 +94,7 @@ class Omeka_Form_Admin extends Omeka_Form
         switch($group) {
             case 'save':
                 $this->_saveDisplayGroup->addElement($element);                
-                //need to have slightly different decorators from the defaults when in the save panel
-                //not necessary on standard things like the Save and Delete buttons
-                if(! $element instanceOf Omeka_Form_Element_AbstractAdmin) {
-                    $element->setDecorators($this->getSaveGroupDefaultElementDecorators());
-                }
-                
+                $element->setDecorators($this->getSaveGroupDefaultElementDecorators());                
                 break;
                 
             case 'edit':
