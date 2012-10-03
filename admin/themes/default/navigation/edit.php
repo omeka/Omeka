@@ -182,7 +182,7 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
 
 <div class="seven columns alpha">
 
-<h2><?php echo __('Main Navigation'); ?></h2>
+<h2><?php echo __('Navigation'); ?></h2>
 
     <p class="description"><?php echo __('Check the links you would like to display in the main navigation. You can click and drag the links into your preferred display order.'); ?></p>
 
@@ -193,7 +193,7 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
         
         <div class="field">
             <div class="two columns alpha">
-            <label for="new_nav_link_label"><?php echo __('New Link Label'); ?></label>
+            <label for="new_nav_link_label"><?php echo __('Link Label'); ?></label>
             </div>
             
             <div class="inputs five columns omega">
@@ -203,7 +203,7 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
         
         <div class="field">
             <div class="two columns alpha">
-                <label for="new_nav_link_uri"><?php echo __('New Link Uri'); ?></label>
+                <label for="new_nav_link_uri"><?php echo __('Link URI'); ?></label>
             </div>
             
             <div class="inputs five columns omega">
