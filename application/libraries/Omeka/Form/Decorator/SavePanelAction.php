@@ -13,7 +13,11 @@ class Omeka_Form_Decorator_SavePanelAction extends Zend_Form_Decorator_HtmlTag
     
     public function getRecord()
     {
-        return $this->_options['record'];
+        if(isset($this->_options['record'])) {
+            return $this->_options['record'];
+        }
+        return false;
+        
     }
     
     public function hasPublicPage()
