@@ -89,7 +89,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             case 'permalink':
                 return absolute_url(array('controller' => 'files', 'action' => 'show', 'id' => $this->id));
             default:
-                parent::getProperty($property);
+                return parent::getProperty($property);
         }
     }
 

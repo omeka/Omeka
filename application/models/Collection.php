@@ -80,7 +80,7 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
             case 'total_items':
                 return $this->totalItems();
             default:
-                parent::getProperty($property);
+                return parent::getProperty($property);
         }
     }
     

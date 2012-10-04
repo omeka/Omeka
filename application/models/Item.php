@@ -141,7 +141,7 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             case 'permalink':
                 return record_url($this, null, true);
             default:
-                parent::getProperty($property);
+                return parent::getProperty($property);
         }
     }
         
