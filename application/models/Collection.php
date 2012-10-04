@@ -75,26 +75,12 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
     public function getProperty($property)
     {
         switch ($property) {
-            case 'id':
-                return $this->id;
-            case 'name':
-                return $this->name;
-            case 'description':
-                return $this->description;
-            case 'public':
-                return $this->public;
-            case 'featured':
-                return $this->featured;
-            case 'date added':
-                return $this->added;
-            case 'date modified':
-                return $this->modified;
-            case 'collectors': // The names of collectors
+            case 'collectors':
                 return $this->getCollectors();
-            case 'total items':
+            case 'total_items':
                 return $this->totalItems();
             default:
-                throw new InvalidArgumentException(__('%s does not exist for collections!', $property));
+                parent::getProperty($property);
         }
     }
     

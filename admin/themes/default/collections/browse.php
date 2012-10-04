@@ -45,7 +45,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
                 <?php endif; ?>
                 
                 </td>   
-                <td><?php if($time = metadata('collection', 'Date Added')):?>
+                <td><?php if($time = metadata('collection', 'Added')):?>
                     <?php echo format_date($time); ?>
                 <?php endif; ?>
                 </td>

@@ -126,32 +126,22 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     public function getProperty($property)
     {
         switch($property) {
-            case 'id':
-                return $this->id;
-            case 'item type name':
+            case 'item_type_name':
                 if ($type = $this->Type) {
                     return $type->name;
                 } else {
                     return null;
                 }
-            case 'date added':
-                return $this->added;
-            case 'date modified':
-                return $this->modified;
-            case 'collection name':
+            case 'collection_name':
                 if ($collection = $this->Collection) {
                     return $collection->name;
                 } else {
                     return null;
                 }
-            case 'featured':
-                return $this->featured;
-            case 'public':
-                return $this->public;
             case 'permalink':
                 return record_url($this, null, true);
             default:
-                throw new InvalidArgumentException(__("'%s' is an invalid special value.", $property));
+                parent::getProperty($property);
         }
     }
         

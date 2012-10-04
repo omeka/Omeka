@@ -39,9 +39,9 @@
         <h4><?php echo __('File History'); ?></h4>
         <dl>
         <dt><?php echo __('Date Added'); ?></dt>
-        <dd><?php echo metadata('file', 'Date Added'); ?></dd>
+        <dd><?php echo metadata('file', 'Added'); ?></dd>
         <dt><?php echo __('Date Modified'); ?></dt> 
-        <dd><?php echo metadata('file', 'Date Modified'); ?></dd>
+        <dd><?php echo metadata('file', 'Modified'); ?></dd>
         <dt><?php echo __('Authentication'); ?></dt> 
         <dd><?php echo metadata('file', 'Authentication'); ?></dd>
         </dl>
