@@ -41,15 +41,16 @@ class Omeka_Form_Admin extends Omeka_Form
         //create the decorators with CSS classes set up via options 
         $editDecorator = new Zend_Form_Decorator_HtmlTag(array('tag'=>'div', 'class'=>$this->_editGroupCssClass));
         $saveDecorator = new Zend_Form_Decorator_HtmlTag(array('tag'=>'div', 'id'=>'save', 'class'=>$this->_saveGroupCssClass));
-        $this->_saveDisplayGroupActionDecorator = new Omeka_Form_Decorator_SavePanelAction(array('class'=>'woot'));
+        $this->_saveDisplayGroupActionDecorator = new Omeka_Form_Decorator_SavePanelAction();
         if($this->_record) {
             $this->_saveDisplayGroupActionDecorator->setOption('record', $this->_record);
             $this->setHasPublicPage();          
         }
         
+        $savePanelHookDecorator = new Omeka_Form_Decorator_SavePanelHook();
         //Pro tip: order of adding decorators matters! if reversed, group elements would appear after the div!
         $this->_editDisplayGroup->setDecorators(array('FormElements', $editDecorator));
-        $this->_saveDisplayGroup->setDecorators(array($this->_saveDisplayGroupActionDecorator, 'FormElements',  $saveDecorator));        
+        $this->_saveDisplayGroup->setDecorators(array($this->_saveDisplayGroupActionDecorator, 'FormElements', $savePanelHookDecorator,  $saveDecorator));        
     }
     
     /**

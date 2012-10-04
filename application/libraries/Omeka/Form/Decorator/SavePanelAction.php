@@ -1,6 +1,6 @@
 <?php
 
-class Omeka_Form_Decorator_SavePanelAction extends Zend_Form_Decorator_HtmlTag
+class Omeka_Form_Decorator_SavePanelAction extends Zend_Form_Decorator_Abstract
 {
     
     protected $content;    
@@ -42,9 +42,6 @@ class Omeka_Form_Decorator_SavePanelAction extends Zend_Form_Decorator_HtmlTag
             $attribs = $this->getOptions();
         }
     
-        $html = $this->_getOpenTag('a', $attribs);
-        $html .= $content;
-        $html .= $this->_getCloseTag('a');
         $html = "<input id='save-changes' class='submit big green button' type='submit' value='Save Changes' name='submit' />";
         if($record) {
             if($this->hasPublicPage()) {
