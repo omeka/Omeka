@@ -462,13 +462,20 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
      * that is keyed to an element's ID.  That array should contain all the 
      * text values for that element. For example:
      *
-     *      * Elements:
-     *          * 1:
-     *              * 0: 
-     *                  'text': 'Foobar'
-     *                  'html': '0'
-     *              * 1: 'Baz'
+     * <code>
      * 
+     * array('Elements' => 
+     *             array(
+     *                 '50' => array('text' => 'Foobar', //element id 50, e.g. DC:Title
+     *                               'html' => 0
+     *                               ),
+     *                 '41' => array('text' => '<p>Baz baz baz</p>', //element id 41, e.g. DC:Description
+     *                                'html' => 1
+     *                               )
+     *                  )
+     *      )
+     * 
+     * </code>
      * @todo May want to throw an Exception if an element in the POST doesn't
      * actually exist.
      * @param array POST data
