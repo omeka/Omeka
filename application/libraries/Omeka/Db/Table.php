@@ -340,13 +340,23 @@ class Omeka_Db_Table
     /**
      * Apply a set of filters to a Select object based on the parameters given.
      * 
-     * This template method must be implemented by subclasses in order to define
-     * search behaviors.
+     * By default, this simply checks the params for keys corresponding to database
+     * column names. For more complex filtering (e.g., when other tables are involved),
+     * or to use keys other than column names, override this method and optionally
+     * call this parent method.
      * 
      * @param Omeka_Db_Select $select
      * @param array $params
      */
-    public function applySearchFilters($select, $params) {}
+    public function applySearchFilters($select, $params)
+    {
+        $columns = $this->getColumns();
+        foreach($columns as $column) {
+            if(array_key_exists($column, $params)) {
+                $select->where("$column = ?", $params[$column]);
+            }
+        }
+    }
     
     /**
      * Apply default column-based sorting for a table.
