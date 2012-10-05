@@ -168,10 +168,13 @@ p, li {
         
         .details p { margin: 0; }
         
-        .details ul { 
+        ul.details { 
             margin-bottom: 0; 
-            padding: 0 0 0 20px; 
+            padding: .5em .5em .5em 2em; 
         }
+        
+        ul.details li { margin-bottom: 1em; }
+        ul.details li:last-child { margin-bottom: 0; }
         
     .featured { background: url('../images/featured-bg.png') no-repeat right bottom; }
     

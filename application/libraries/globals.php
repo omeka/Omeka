@@ -1141,6 +1141,17 @@ function latest_omeka_version()
 }
 
 /**
+ * Return the maximum file size.
+ * 
+ * @return Zend_Measure_Binary
+ */
+function max_file_size()
+{
+    $helper = new Omeka_View_Helper_MaxFileSize;
+    return $helper->maxFileSize();
+}
+
+/**
  * Return HTML for a set of files.
  * 
  * @uses Omeka_View_Helper_FileMarkup::fileMarkup()

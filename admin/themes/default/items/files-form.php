@@ -34,6 +34,7 @@ if (empty($pathToConvert) && is_allowed('Settings', 'edit')): ?>
     </div>
 <?php endif; ?>
 <h3><?php echo __('Add New Files'); ?></h3>
+<p>The maximum file size is <?php echo max_file_size(); ?>.</p>
 
 <div id="add-more-files">
 <label for="add_num_files"><?php echo __('Find a File'); ?></label>

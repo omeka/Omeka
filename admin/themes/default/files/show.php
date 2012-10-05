@@ -39,9 +39,9 @@
         <h4><?php echo __('File History'); ?></h4>
         <dl>
         <dt><?php echo __('Date Added'); ?></dt>
-        <dd><?php echo metadata('file', 'Date Added'); ?></dd>
+        <dd><?php echo metadata('file', 'Added'); ?></dd>
         <dt><?php echo __('Date Modified'); ?></dt> 
-        <dd><?php echo metadata('file', 'Date Modified'); ?></dd>
+        <dd><?php echo metadata('file', 'Modified'); ?></dd>
         <dt><?php echo __('Authentication'); ?></dt> 
         <dd><?php echo metadata('file', 'Authentication'); ?></dd>
         </dl>
@@ -53,9 +53,9 @@
         <dt><?php echo __('Mime Type / Browser'); ?>:</dt>
         <dd><?php echo metadata('file', 'MIME Type'); ?></dd>
         <dt><?php echo __('Mime Type / OS'); ?>:</dt>
-        <dd><?php echo metadata('file', 'MIME Type OS'); ?></dd>
+        <dd><?php echo metadata('file', 'MIME OS'); ?></dd>
         <dt><?php echo __('File Type / OS'); ?>:</dt>
-        <dd><?php echo metadata('file', 'File Type OS'); ?></dd>
+        <dd><?php echo metadata('file', 'Type OS'); ?></dd>
         </dl>
     </div>
 
@@ -77,11 +77,9 @@
 
     <?php echo flash(); ?>            
     
-    <?php if (file_marksup($file)): ?>
     <div id="item-images">
         <?php echo file_markup($file, array('imageSize' => 'square_thumbnail'), array('class' => 'admin-thumb panel')); ?>
     </div>
-    <?php endif; ?>
     
     <?php echo all_element_texts('file'); ?>
     

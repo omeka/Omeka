@@ -163,7 +163,7 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
                 // Overwrite elements assigned to the item type element set with only
                 // those that belong to this item's particular item type. This is
                 // necessary because, otherwise, all item type elements will be shown.
-                $itemTypeElementSetName = $this->_record->getProperty('item type name') . ' ' . ELEMENT_SET_ITEM_TYPE;
+                $itemTypeElementSetName = $this->_record->getProperty('item_type_name') . ' ' . ELEMENT_SET_ITEM_TYPE;
                 
                 // Check to see if either the generic or specific Item Type element
                 // set has been chosen, i.e. 'Item Type Metadata' or 'Document

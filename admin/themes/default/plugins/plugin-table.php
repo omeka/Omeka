@@ -27,11 +27,6 @@
                     endif;
                 endforeach;
     
-                $trClassName = null;
-                if ($plugin->hasNewVersion()):
-                    $trClassName = "upgrade-plugin";
-                endif;
-    
                 $loadErrors = array();
                 if (!$plugin->meetsOmekaMinimumVersion()):
                     $minVersion = $plugin->getMinimumOmekaVersion();
@@ -45,6 +40,8 @@
                 endif;
     
                 $cannotLoad = !empty($loadErrors);
+                $needsUpgrade = $plugin->hasNewVersion();
+
             ?>
             <tr class="<?php if(++$key%2==1) echo 'odd'; else echo 'even'; ?>">
                 <td>
@@ -56,6 +53,16 @@
                 <?php endif; ?>
                     <ul class="action-links">
                     <?php if ($plugin->isInstalled()): ?>
+                        <?php if ($needsUpgrade): ?>
+                            <?php if (is_allowed('Plugins', 'upgrade')): ?>
+                                <form action="<?php echo html_escape(url('plugins/upgrade')); ?>" method="post" accept-charset="utf-8">     
+                                    <li>
+                                        <button name="upgrade" type="submit" class="upgrade"<?php if ($cannotLoad): ?> disabled="disabled"<?php endif; ?>><?php echo __('Upgrade'); ?></button>
+                                        <input type="hidden" name="name" value="<?php echo html_escape($pluginDirName); ?>" />
+                                    </li>
+                                </form>
+                            <?php endif; ?>
+                        <?php endif; ?>
                         <?php $activateOrDeactivate = ($plugin->isActive()) ? 'deactivate' : 'activate'; ?>
                         <?php if (is_allowed($plugin, 'activate')  && !$cannotLoad): ?>
                         <form action="<?php echo html_escape(url('plugins/' . $activateOrDeactivate)); ?>" method="post" accept-charset="utf-8">
@@ -77,7 +84,7 @@
                                 <input type="hidden" name="name" value="<?php echo html_escape($plugin->name); ?>" />
                             </li>
                         </form>
-                        <?php endif; ?>
+                        <?php endif; ?> 
                     <?php else: //The plugin has not been installed yet ?>
                         <?php if (is_allowed($plugin, 'install') && !$cannotLoad): ?>
                             <form action="<?php echo html_escape(url('plugins/install')); ?>" method="post" accept-charset="utf-8">
@@ -89,12 +96,15 @@
                         <?php endif; ?>
                     <?php endif; ?>
                     </ul>
+                    <?php if ($needsUpgrade): ?>
+                        <ul class="details">
+                            <li class="error"><?php echo __('You have a new version of %s. Please upgrade!', $displayName); ?></li>
+                        </ul>
+                    <?php endif; ?>
                     <?php if ($cannotLoad): ?>
-                    <div class="error details">
-                         <?php echo __('The %s plugin cannot be loaded for the following reasons:', html_escape($displayName)); ?>
-                        <ul>
+                        <ul class="details">
                         <?php foreach ($loadErrors as $error): ?>
-                            <li><?php echo html_escape($error); ?></li>
+                            <li class="error"><?php echo html_escape($error); ?></li>
                         <?php endforeach; ?>
                         </ul>
                     </div>
