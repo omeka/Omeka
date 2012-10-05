@@ -2917,10 +2917,10 @@ function tag_string($recordOrTags = null, $link = 'items/browse', $delimiter = n
 /**
  * Check whether the specified record has tags.
  *
- * @param Omeka_Record $record
+ * @param Omeka_Record_AbstractRecord $record
  * @return bool
  */
-function has_tags(Omeka_Record $record)
+function has_tags(Omeka_Record_AbstractRecord $record)
 {
     try {
         return (bool) $record->getTags();
