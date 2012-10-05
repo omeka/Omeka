@@ -69,23 +69,23 @@ class Omeka_Form extends Zend_Form
         // 
         //     <div class="inputs">
         //         <input name="whatever" type="text" />
+        //     <p class="explanation">Here's the explanation</p>        
         //         <ul class="errors">
         //             <li>Here's your error</li>
         //         </ul>
         //     </div>
         // 
-        //     <p class="explanation">Here's the explanation</p>
         // 
         // </div>
         // <div>
         // <input type="submit" />
         // </div>
             
-        return array(
-                        array('Description', array('tag' => 'p', 'class' => 'explanation')), 
+        return array(                         
                         'ViewHelper', 
                         array('Errors', array('class' => 'error')),
                         array(array('InputsTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs five columns omega')), 
+                        array('Description', array('tag' => 'p', 'class' => 'explanation', 'escape'=>false )),                                               
                         array('Label', array('tag' => 'div', 'tagClass' => 'two columns alpha')),
                         array(array('FieldTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'field'))
                     );
@@ -100,8 +100,9 @@ class Omeka_Form extends Zend_Form
      * @return void
      */
     public function applyOmekaStyles()
-    {
+    {        
         foreach ($this->getElements() as $element) {
+
             if ($element instanceof Zend_Form_Element_Submit) {
                 // All submit form elements should be wrapped in a div with 
                 // no class.
