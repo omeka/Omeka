@@ -2599,7 +2599,7 @@ function public_nav_main()
 function public_nav_items(array $navArray = null, $maxDepth = 0)
 {
     if (!$navArray) {
-        $navArray = array(__('Browse All') => url('items'), __('Browse by Tag') => url('items/tags'));
+        $navArray = array(__('Browse All') => url('items/browse'), __('Browse by Tag') => url('items/tags'));
     }
     return public_nav($navArray, 'items', $maxDepth);
 }
