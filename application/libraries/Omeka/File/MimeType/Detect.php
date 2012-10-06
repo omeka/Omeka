@@ -111,9 +111,11 @@ class Omeka_File_MimeType_Detect
         
         // If no strategy detects a definitive MIME type, set the MIME type to 
         // the one detected by the highest priority strategy. If there are no 
-        // valid strategies, this sets the definitive MIME type to false.
+        // valid strategies, this sets the definitive MIME type to the generic 
+        // "application/octet-stream".
         if (!$this->_mimeType) {
-            $this->_mimeType = reset($this->_mimeTypes);
+            $fallbackMimeType = reset($this->_mimeTypes);
+            $this->_mimeType = (false === $fallbackMimeType) ? 'application/octet-stream' : $fallbackMimeType;
         }
         
         // Return the definitive MIME type.

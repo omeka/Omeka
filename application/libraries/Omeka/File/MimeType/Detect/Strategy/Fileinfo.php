@@ -8,9 +8,7 @@ class Omeka_File_MimeType_Detect_Strategy_Fileinfo
             // The Fileinfo extension is not installed.
             return false;
         }
-        // FILEINFO_MIME_TYPE was introduced in PHP 5.3.0.
-        $option = defined(FILEINFO_MIME_TYPE) ? FILEINFO_MIME_TYPE : FILEINFO_MIME;
-        $finfo = new finfo($option);
+        $finfo = new finfo(FILEINFO_MIME);
         return $finfo->file($file);
     }
 }
