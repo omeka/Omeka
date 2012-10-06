@@ -70,7 +70,6 @@ class Omeka_File_MimeType_Detect
             // Validate the passed strategies.
             foreach ($strategies as $strategy) {
                 if (!($strategy instanceof Omeka_File_MimeType_Detect_StrategyInterface)) {
-                    var_dump($strategy);exit;
                     throw new Omeka_File_MimeType_Exception('Invalid MIME type detection strategy passed to Omeka_File_MimeType_Detect.');
                 }
             }
