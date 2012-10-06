@@ -162,7 +162,7 @@ class Omeka_Navigation extends Zend_Navigation
             }
         }
         foreach($expiredPages as $expiredPage) {
-            $this->removePage($expiredPage);
+            $this->removePageRecursive($expiredPage);
         }
     }
         
@@ -189,6 +189,57 @@ class Omeka_Navigation extends Zend_Navigation
     public function createPageUid($href) 
     {
         return $href;
+    }
+    
+    /**
+     * Remove page(s) matching $property == $value
+     * Code from: http://stackoverflow.com/questions/6112267/zend-navigation-container-removepage-is-not-recursive
+     *
+     * @param string $property
+     * @param mixed $value
+     * @param bool $all
+     * @return Omeka_Navigation
+     */
+    public function removePageRecursiveBy($property, $value, $all = false)
+    {
+        $pages = array();
+
+        if ($all) {
+            $pages = $this->findAllBy($property, $value);
+        } else {
+            if ($page = $this->findOneBy($property, $value)) {
+                $pages[] = $page;
+            }
+        }
+
+        foreach ($pages as $page) {
+            $this->removePageRecursive($page);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Recursively removes the given page from the container
+     * Code from: http://stackoverflow.com/questions/6112267/zend-navigation-container-removepage-is-not-recursive
+     *
+     * @param Zend_Navigation_Page $page
+     * @return boolean
+     */
+    public function removePageRecursive(Zend_Navigation_Page $page)
+    {
+        if ($this->removePage($page)) {
+            return true;
+        }
+
+        $iterator = new RecursiveIteratorIterator($this, RecursiveIteratorIterator::SELF_FIRST);
+        foreach ($iterator as $pageContainer) {
+            if ($pageContainer->removePage($page)) {
+                return true;
+            }
+        }
+
+        return false;
     }
     
     /**

@@ -1572,6 +1572,11 @@ ul#section-nav, #section-nav ul {
   margin-bottom: 20px;
 }
 
+#fieldset-navigation_main_checkbox_display ul li {
+  background-image: url('../images/content_bg.jpg');
+}
+
+
 #save #fieldset-homepage_select_display {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -1580,28 +1585,41 @@ ul#section-nav, #section-nav ul {
 #navigation_main_list { 
     list-style-type: none; 
     margin: 0; 
-    padding: 0; 
+    padding: 0;
 }
+
+#navigation_main_list ul { 
+    list-style-type: none;
+    margin-top: 15px;
+}
+
 
 #navigation_main_list li { 
     background-color: #EEEEEE;
     font-size: 14px;
-    width: 500px;
+    cursor: move;
+    margin-bottom: 15px;
+}
+
+.navigation_main_list_hide {
+  float:right;
+  margin-right: 20px;
+  margin-top: 5px;
+  cursor: pointer;
+  font-size: 18px;
 }
 
 #navigation_main_list_new {
     margin-top: 20px;
 }
 
+#navigation_main_list li div.navigation_main_link {
+
+}
+
 #navigation_main_list li div.navigation_main_link_header {
     background: #EBEADC;
     border: 0;
-}
-
-#navigation_main_list li div.navigation_main_link_header input {
-    position: absolute;
-    top; 50%;
-    left: .5em;
 }
 
 #navigation_main_list li div.navigation_main_link_header a {
@@ -1639,6 +1657,11 @@ ul#section-nav, #section-nav ul {
     color: white;
     margin-bottom:0;
     margin-top: 10px;
+}
+
+.navigation_main_link_buttons {
+  width: 100%;
+  overflow: auto;
 }
 
 #navigation_form input[type=checkbox] { margin: 10px; }
