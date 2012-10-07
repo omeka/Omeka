@@ -162,7 +162,7 @@ class Output_ItemAtom
                 $feedEntryLinkEnclosureElement = $doc->createElement('link');
                 $feedEntryLinkEnclosureElement->setAttribute('rel', 'enclosure');
                 $feedEntryLinkEnclosureElement->setAttribute('href', $file->getWebPath('original'));
-                $feedEntryLinkEnclosureElement->setAttribute('type', $file->mime_browser);
+                $feedEntryLinkEnclosureElement->setAttribute('type', $file->mime_type);
                 $feedEntryLinkEnclosureElement->setAttribute('length', $file->size);
                 $feedEntryElement->appendChild($feedEntryLinkEnclosureElement);
             }

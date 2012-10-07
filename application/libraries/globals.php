@@ -1910,7 +1910,7 @@ function item_has_tags($item = null)
     if (!$item) {
         $item = get_current_record('item');
     }
-    return (count($item->Tags) > 0);
+    return has_tags($item);
 }
 
 /**
@@ -2923,6 +2923,21 @@ function tag_string($recordOrTags = null, $link = 'items/browse', $delimiter = n
         }
     }
     return join(html_escape($delimiter), $tagStrings);
+}
+
+/**
+ * Check whether the specified record has tags.
+ *
+ * @param Omeka_Record_AbstractRecord $record
+ * @return bool
+ */
+function has_tags(Omeka_Record_AbstractRecord $record)
+{
+    try {
+        return (bool) $record->getTags();
+    } catch (BadMethodCallException $e) {
+        return false;
+    }
 }
 
 /**

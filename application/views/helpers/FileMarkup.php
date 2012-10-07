@@ -593,7 +593,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
      */
     public function icon($file, array $options=array())
     {
-        $mimeType = $file->getMimeType();
+        $mimeType = $file->mime_type;
         $imgAttributes = (array)$options['imgAttributes'];
         // The path to the icon is keyed to the MIME type of the file.
         $imgAttributes['src'] = (string)$options['icons'][$mimeType];
@@ -652,7 +652,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
     
     protected function getCallback($file, $options)
     {
-        $mimeType = $file->getMimeType();
+        $mimeType = $file->mime_type;
         $fileExtension = $file->getExtension();
         
         // Displaying icons overrides the default lookup mechanism.
@@ -732,7 +732,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         
         // Append a class name that corresponds to the MIME type.
         if ($wrapperAttributes) {
-            $mimeTypeClassName = str_ireplace('/', '-', $file->getMimeType());
+            $mimeTypeClassName = str_ireplace('/', '-', $file->mime_type);
             if (array_key_exists('class', $wrapperAttributes)) {
                 $wrapperAttributes['class'] .= ' ' . $mimeTypeClassName;
             } else {

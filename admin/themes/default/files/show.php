@@ -50,10 +50,8 @@
     <div id="type-metadata" class="panel">
         <h4><?php echo __('Type Metadata'); ?></h4>
         <dl>
-        <dt><?php echo __('Mime Type / Browser'); ?>:</dt>
+        <dt><?php echo __('Mime Type'); ?>:</dt>
         <dd><?php echo metadata('file', 'MIME Type'); ?></dd>
-        <dt><?php echo __('Mime Type / OS'); ?>:</dt>
-        <dd><?php echo metadata('file', 'MIME OS'); ?></dd>
         <dt><?php echo __('File Type / OS'); ?>:</dt>
         <dd><?php echo metadata('file', 'Type OS'); ?></dd>
         </dl>

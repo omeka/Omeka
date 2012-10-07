@@ -81,7 +81,7 @@ class Output_ItemRss2
             $entry['enclosure']   = array();
             $fileDownloadUrl = file_display_url($file);
             $enc['url']           = $fileDownloadUrl;
-            $enc['type']          = $file->mime_browser;
+            $enc['type']          = $file->mime_type;
             $enc['length']        = (int) $file->size;
             $entry['enclosure'][] = $enc;
         }
