@@ -63,7 +63,7 @@ class Models_Output_ItemAtomTest extends Omeka_Test_AppTestCase
         $file = new File;
         $file->id = 100;
         $file->filename = $filename;
-        $file->setMimeType($mimeType);
+        $file->mime_type = $mimeType;
         $file->size = $size;
         $item->Files = array($file);
 
