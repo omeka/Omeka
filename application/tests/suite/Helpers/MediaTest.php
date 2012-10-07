@@ -29,9 +29,7 @@ class Omeka_View_Helper_MediaTest extends PHPUnit_Framework_TestCase
                               array('foo' => 'bar'));
                               
         // File should be of the 'image/jpeg' type.
-        $this->file->expects($this->once())
-                 ->method('getMimeType')
-                 ->will($this->returnValue('image/jpeg'));
+        $this->file->mime_type = 'image/jpeg';
         $this->file->stored = '1';
 
         $this->helper->fileMarkup($this->file);  
