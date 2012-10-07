@@ -30,6 +30,7 @@ class Omeka_File_MimeType_Detect
     protected $_ambiguousMimeTypes = array(
         'text/plain', 
         'application/octet-stream', 
+        'application/x-empty', 
         'regular file',
     );
     
@@ -61,9 +62,9 @@ class Omeka_File_MimeType_Detect
             // Set the default strategies, in default priority order.
             $strategies = array(
                 new Omeka_File_MimeType_Detect_Strategy_Fileinfo, 
+                new Omeka_File_MimeType_Detect_Strategy_FileCommand, 
                 new Omeka_File_MimeType_Detect_Strategy_MimeContentType, 
                 new Omeka_File_MimeType_Detect_Strategy_GetId3, 
-                new Omeka_File_MimeType_Detect_Strategy_FileCommand, 
                 new Omeka_File_MimeType_Detect_Strategy_Browser, 
             );
         } else {
