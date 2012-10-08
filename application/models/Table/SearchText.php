@@ -18,6 +18,11 @@ class Table_SearchText extends Omeka_Db_Table
     
     public function applySearchFilters($select, $params)
     {
+        // Set the query string if not passed.
+        if (!isset($params['query'])) {
+            $params['query'] = '';
+        }
+        
         // Set the base select statement.
         $select->reset(Zend_Db_Select::COLUMNS);
         $select->columns(array('record_type', 'record_id', 'title'));

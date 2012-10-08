@@ -11,6 +11,11 @@ class SearchController extends Omeka_Controller_AbstractActionController
         parent::browseAction();
     }
     
+    public function advancedSearchAction()
+    {
+        $this->view->assign('searchRecordTypes', Mixin_Search::getSearchRecordTypes());
+    }
+    
     public function settingsAction()
     {
         $this->view->assign('searchRecordTypes', Mixin_Search::getSearchRecordTypes());
