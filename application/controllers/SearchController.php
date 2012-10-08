@@ -13,10 +13,11 @@ class SearchController extends Omeka_Controller_AbstractActionController
     
     public function settingsAction()
     {
+        $this->view->assign('searchRecordTypes', Mixin_Search::getSearchRecordTypes());
         if (isset($_POST['index_search_text'])) {
             Zend_Registry::get('bootstrap')->getResource('jobs')
                                            ->sendLongRunning('Job_SearchTextIndex');
-            $this->_helper->flashMessenger(__('Indexing search text. This may take a while.'), 'success');
+            $this->_helper->flashMessenger(__('Indexing records. This may take a while. You may continue administering your site.'), 'success');
         }
     }
     
