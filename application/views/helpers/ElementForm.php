@@ -14,17 +14,38 @@
 class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
 {
     /**
-     * Element record to display the form for.
+     * Displays a form for the record's element.
+     * 
+     * The function applies filters that allow plugins to customize the display of element form components.
+     * Here is an example of how a plugin may add and implement an element form filter:
+     *
+     * add_filter(array('ElementForm', 'Item', 'Dublin Core', 'Title')), 'form_item_title');
+     * function form_item_title(array $components, $args)
+     * {
+     *
+     *   // Where $components would looks like:
+     *   //  array(
+     *   //      'label' => [...], 
+     *   //      'inputs' => [...], 
+     *   //      'description' => [...], 
+     *   //      'comment' => [...], 
+     *   //      'add_input' => [...], 
+     *   //  )
+     *   // and $args looks like:
+     *   //  array(      
+     *   //      'record' => [...],
+     *   //      'element' => [...],
+     *   //      'options' => [...],
+     *   //  )
+     * }
      *
      * @var Element
      */
     protected $_element;
-
     protected $_record;
 
-    public function elementForm(Element $element, Omeka_Record_AbstractRecord $record,
-        $options = array())
-    {
+    public function elementForm(Element $element, Omeka_Record_AbstractRecord $record, $options = array())
+    {    
         $divWrap = isset($options['divWrap']) ? $options['divWrap'] : true;
         $extraFieldCount = isset($options['extraFieldCount']) ? $options['extraFieldCount'] : null;
 
@@ -35,20 +56,49 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
         $record->loadElementsAndTexts();
         $this->_record = $record;
 
-        $html = $divWrap ? '<div class="field" id="element-' . html_escape($element->id) . '">' : '';
+        // Filter the components of the element form display
+        $labelComponent = $this->_getLabelComponent();
+        $inputsComponent = $this->_getInputsComponent($extraFieldCount);
+        $descriptionComponent = $this->_getDescriptionComponent();
+        $commentComponent = $this->_getCommentComponent();
+        $addInputComponent = $this->view->formSubmit('add_element_' . $this->_element['id'], 
+                                         __('Add Input'),
+                                         array('class'=>'add-element'));
+        $components = array(
+            'label' => $labelComponent,
+            'inputs' => $inputsComponent,
+            'description' => $descriptionComponent,
+            'comment' => $commentComponent,
+            'add_input' => $addInputComponent,
+            'html' => null 
+        );
+        $elementSetName = $element->getElementSet()->name;
+        $recordType = get_class($record);
+        $filterName = array('ElementForm', $recordType, $elementSetName, $element->name);
+        $components = apply_filters(
+            $filterName, 
+            $components,
+            array('record' => $record, 
+                  'element' => $element, 
+                  'options' => $options)
+        );
 
-        // Put out the label for the field
-        $html .= '<div class="two columns alpha">';
-        $html .= $this->_displayFieldLabel();
-        $html .= $this->view->formSubmit('add_element_' . $this->_element['id'], __('Add Input'),
-            array('class'=>'add-element'));
+        if ($components['html'] !== null) {
+            return strval($components['html']);
+        }
+
+        // Compose html for element form
+        $html = $divWrap ? '<div class="field" id="element-' . html_escape($element->id) . '">' : '';
         
-        $html .= '</div>'; // Close 'inputs' div
+        $html .= '<div class="two columns alpha">';
+        $html .= $components['label'];
+        $html .= $components['add_input'];
+        $html .= '</div>'; // Close div
 
         $html .= '<div class="inputs five columns omega">';
-        $html .= $this->_displayTooltip();
-        $html .= $this->_displayFormFields($extraFieldCount);
-
+        $html .= $components['description'];
+        $html .= $components['comment'];
+        $html .= $components['inputs'];
         $html .= '</div>'; // Close 'inputs' div
 
         $html .= $divWrap ? '</div>' : ''; // Close 'field' div
@@ -133,12 +183,10 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
             $isHtml = (boolean) @$_POST['Elements'][$this->_element['id']][$index]['html'];
         } else {
             $elementText = $this->getElementTexts($index);
-
             if (isset($elementText)) {
                 $isHtml = (boolean) $elementText->html;
             }
         }
-
         return $isHtml;
     }
 
@@ -154,7 +202,6 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
             return $this->_getPostValueForField($index);
         } else {
             $elementText = $this->getElementTexts($index);
-
             if (isset($elementText)) {
                 return $elementText->text;
             } else {
@@ -182,34 +229,32 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
         return $texts;
     }
 
-    protected function _displayFormFields($extraFieldCount = null)
+    protected function _getInputsComponent($extraFieldCount = null)
     {
         $fieldCount = $this->_getFormFieldCount() + (int) $extraFieldCount;
-
         $html = '';
-
         for ($i=0; $i < $fieldCount; $i++) {
             $html .= $this->view->elementInput(
                 $this->_element, $this->_record, $i,
                 $this->_getValueForField($i), $this->_getHtmlFlagForField($i));
         }
-
         return $html;
     }
 
-    protected function _displayTooltip()
+    protected function _getDescriptionComponent()
     {
-        // Tooltips should be in a <span class="tooltip">
-        $html = '<p class="explanation">';
-        $html .= __($this->_getFieldDescription()) .'</p>';
-        if($this->_getFieldComment()) {
-            $html .= '<p class="explanation">';
-            $html .= $this->_getFieldComment() .'</p>';
+        return '<p class="explanation">' . __($this->_getFieldDescription()) .'</p>';
+    }  
+        
+    protected function _getCommentComponent() 
+    { 
+        if ($this->_getFieldComment()) {
+            return '<p class="explanation">' . $this->_getFieldComment() .'</p>';
         }
-        return $html;
+        return '';
     }
 
-    protected function _displayFieldLabel()
+    protected function _getLabelComponent()
     {
         return '<label>' . __($this->_getFieldLabel()) . '</label>';
     }
