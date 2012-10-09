@@ -11,17 +11,6 @@
     font-size: .875em; 
     }
 
-	#content-nav .current:after {
-		width: 10px;
-		height: 2.375em;
-		background: url('../../images/blue-arrow.png') no-repeat;
-		position: absolute;
-		content: "";
-		top: -1px;
-		right: -10px;
-		}
-		
-
 /* Content
 ==================================================*/
 

@@ -15,6 +15,8 @@ body {
     background-image: url('../../images/content_bg.jpg');
     }
 
+header { position: relative; top: auto; }
+
 header nav { float: left; }
 
     header ul { margin: .375em 0 0 0; }
@@ -42,10 +44,7 @@ th a:after, th.desc a:after, th.asc a:after { content: ""; }
     
     #content-nav ul { display: none; }    
 
-#mobile-content-nav { 
-    display: block; 
-    margin-top: 120px;
-    }
+#mobile-content-nav { display: block; }
 
 #section-nav {
     border-image: url('../../images/red-bg.jpg') 5 repeat; 
@@ -73,14 +72,19 @@ th a:after, th.desc a:after, th.asc a:after { content: ""; }
 }
 
 #search {
+    width: 100%;
     float: left;
     margin: 10px 0;
     position: relative; 
 }
 
-    #search input[type=text] { width: 369px; }
+    #search input[type=text] { width: 80%; }
+    #search input[type=submit] { width: 20%; }
     
-.subhead { display: inline-block; }
+.subhead { 
+    width: 100%;
+    display: inline-block; 
+}
 
     /* Browse Items
     ==================================================*/
@@ -95,7 +99,7 @@ th a:after, th.desc a:after, th.asc a:after { content: ""; }
         
     .browse-items .filters { clear: both; }
     
-    .browse-items #filter-list { margin: 10px 0; }
+    .browse-items #filter-list { margin: 0; }
 
     .browse-items .pagination { 
         width: 100%; 
@@ -143,7 +147,7 @@ th a:after, th.desc a:after, th.asc a:after { content: ""; }
             border-top-right-radius: 3px;
         }
         
-        .table-actions a.button:last-child, .table-actions input[type=submit]:last-child {
+        .table-actions a.button:last-of-type, .table-actions input[type=submit]:last-of-type {
             border-bottom-left-radius: 3px;
             border-bottom-right-radius: 3px;
             border-bottom: 1px solid #E4E5DE;
@@ -154,7 +158,7 @@ th a:after, th.desc a:after, th.asc a:after { content: ""; }
     .quick-filter-wrapper li,
     .quick-filter-wrapper a { width: 100%; }
     
-    .quick-filter-wrapper { margin: 0 0 1em 0;}
+    .quick-filter-wrapper { margin: 1em 0;}
 
 
     /* Login

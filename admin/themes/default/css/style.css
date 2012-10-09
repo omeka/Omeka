@@ -365,6 +365,7 @@ p, li {
             padding: 0 10px;            
             text-align: center;
             text-shadow: -1px -1px 1px rgba(0,0,0,.5);
+            white-space: normal;
         }
         
             a.button[disabled], input[type=submit][disabled], button[disabled] { 
@@ -373,12 +374,12 @@ p, li {
             }
             
         a.button.big, input[type=submit].big, button.big {
-            height: 32px;
             display: block;
-            line-height: 32px;
+            line-height: 1.5em;
             font-family: "Arvo",serif;
-            font-size: 16px;
+            font-size: 14px;
             margin: 10px auto;
+            padding: .3125em 0;
         }
             
         a.button.small, input[type=submit].small, button.small {
@@ -569,15 +570,16 @@ header nav {
 }
     
 #content-nav li {
-    height: 2.1875em;
     background-image: url('../images/navbg-gray.jpg');
         border-right: 1px solid rgba(0,0,0,1);
         border-bottom: 1px solid rgba(0,0,0,1);
         border-left: 1px solid rgba(0,0,0,1);
+        border-top: 1px solid rgba(255,255,255,.1);
     box-shadow: 1px 1px 3px rgba(0,0,0,.5);
         -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
         -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
         -o-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
+    word-wrap: break-word;
     font-size: 14px;
     line-height: 100%;
     text-shadow: -1px -1px 1px rgba(0,0,0,1);
@@ -594,8 +596,8 @@ header nav {
         height: 100%;
         color: #ffffff;
         display: block;
-        line-height: 2.1875em;
-        padding: 0 1.125em;
+        line-height: 1.5em;
+        padding: .625em .5em .625em 1em;
     }
         
     #content-nav li a:hover, #content-nav li a:active {
@@ -606,10 +608,6 @@ header nav {
 #content-nav .current {
     background-image: url('../images/navbg-blue.jpg');
     position: relative;
-    box-shadow: 0 0 0;
-        -webkit-box-shadow: 0 0 0;
-        -moz-box-shadow: 0 0 0;
-        -o-box-shadow: 0 0 0;
     overflow: visible;
 }
     
@@ -745,7 +743,6 @@ header nav {
     #save .big, #edit .big {
         width: 100%;
         margin: 10px auto;
-        padding: 0;
     }
 
         #save .big:first-child, #edit .big:first-child {
@@ -1114,6 +1111,7 @@ header nav {
 }   
      
 .table-actions {
+    clear: left;
     float: left;
 }
     
