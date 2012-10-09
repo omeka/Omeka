@@ -1280,7 +1280,23 @@ header nav {
     list-style-type: none;
     padding: 0;
 }
-    
+
+.tag-removed {
+    opacity: .3;
+}
+
+.undo_remove_tag {
+    display: none;
+}
+
+.tag-removed .remove_tag {
+    display: none;
+}
+
+.tag-removed .undo_remove_tag {
+    display: inline;
+}
+
 .controls {
     float: left;
 }
