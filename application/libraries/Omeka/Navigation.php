@@ -204,7 +204,7 @@ class Omeka_Navigation extends Zend_Navigation
 
         $iterator = new RecursiveIteratorIterator($this, RecursiveIteratorIterator::SELF_FIRST);
         foreach ($iterator as $pageContainer) {
-            $removed = $removed && $pageContainer->removePage($page);
+            $removed = $removed || $pageContainer->removePage($page);
         }
 
         return $removed;
