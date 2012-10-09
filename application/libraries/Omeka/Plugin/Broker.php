@@ -69,7 +69,7 @@ class Omeka_Plugin_Broker
                 . "associated plugin namespace.");
         }
 
-        $this->_callbacks[$hook][$currentPluginDirName] = $callback;
+        $this->_callbacks[$hook][$currentPluginDirName][] = $callback;
     }
 
     /**
@@ -142,7 +142,9 @@ class Omeka_Plugin_Broker
         // If we are calling the hook for a single function, do that and return.
         if ($plugin) {
             if ($callback = $this->getHook($plugin, $name)) {
-                call_user_func($callback, $args);
+                foreach ($callback as $cb) {
+                    call_user_func($cb, $args);
+                }
             }
             return;
         }
@@ -152,7 +154,9 @@ class Omeka_Plugin_Broker
             // Make sure the callback executes within the scope of the current 
             // plugin
             $this->setCurrentPluginDirName($pluginDirName);
-            call_user_func($callback, $args);
+            foreach ($callback as $cb) {
+                call_user_func($cb, $args);
+            }
         }
         
         // Reset the value for current plugin after this loop finishes

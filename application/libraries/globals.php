@@ -224,7 +224,9 @@ function get_specific_plugin_hook_output()
     
     // Buffer and return any output originating from the hook.
     ob_start();
-    call_user_func_array($hookNameSpecific, $args);
+    foreach ($hookNameSpecific as $cb) {
+        call_user_func_array($cb, $args);
+    }
     $content = ob_get_contents();
     ob_end_clean();
 

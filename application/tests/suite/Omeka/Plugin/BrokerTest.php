@@ -23,7 +23,8 @@ class Omeka_Plugin_BrokerTest extends PHPUnit_Framework_TestCase
     
     public function testHookStorage()
     {
-        $this->assertEquals(array($this, 'hookImpl1'), $this->broker->getHook('foobar', 'initialize'));
+        $callback = $this->broker->getHook('foobar', 'initialize');
+        $this->assertEquals(array($this, 'hookImpl1'), $callback[0]);
     }
         
     public function testHookStorageViaAddPluginHookFunction()
@@ -33,7 +34,8 @@ class Omeka_Plugin_BrokerTest extends PHPUnit_Framework_TestCase
         add_plugin_hook('initialize', 'fake_plugin_initialize');
         // Using the registry should not interfere with the other unit tests.
         Zend_Registry::_unsetInstance();
-        $this->assertEquals('fake_plugin_initialize', $this->broker->getHook('fake-plugin-name', 'initialize'));
+        $callback = $this->broker->getHook('fake-plugin-name', 'initialize');
+        $this->assertEquals('fake_plugin_initialize', $callback[0]);
     }    
     
     public function testCallSingleHook()
