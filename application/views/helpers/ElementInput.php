@@ -43,28 +43,44 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
         $this->_element = $element;
         $this->_record = $record;
 
-        $fieldStem = $this->_getFieldNameStem($index);
+        $inputNameStem = "Elements[" . $this->_element->id . "][$index]";
+        
+        $components = array(
+            'input' => $this->_getInputComponent($inputNameStem, $value),
+            'form_controls' => $this->_getControlsComponent(),
+            'html_checkbox' => $this->_getHtmlCheckboxComponent($inputNameStem, $isHtml),
+            'html' => null
+        );
+        
+        $filterName = array('ElementInput',
+                            get_class($this->_record),
+                            $this->_element->set_name,
+                            $this->_element->name);
+        
+        // Plugins should apply a filter to this HTML in order to display it in a certain way.
+        $components = apply_filters($filterName,
+                                    $components, 
+                                    array('input_name_stem' => $inputNameStem, 
+                                          'value' => $value, 
+                                          'record' => $this->_record, 
+                                          'element' => $this->_element,
+                                          'index' => $index,
+                                          'is_html' => $isHtml));
+                                    
+        
+        if ($components['html'] !== null) {
+            return strval($components['html']);
+        }
         
         $html = '<div class="input-block">'
               . '<div class="input">'
-              . $this->_getFormInput($fieldStem, $value)
+              . $components['input']
               . '</div>'
-              . $this->_getFormControls()
-              . $this->_getHtmlCheckbox($fieldStem, $index, $isHtml)
+              . $components['form_controls']
+              . $components['html_checkbox']
               . '</div>';
 
         return $html;
-    }
-
-    /**
-     * Get the leading part of the "name" element for the input.
-     *
-     * @param int $index
-     * @return string
-     */
-    protected function _getFieldNameStem($index)
-    {
-        return "Elements[" . $this->_element->id . "][$index]";
     }
 
     /**
@@ -74,47 +90,13 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
      * @param string $value
      * @return string
      */
-    protected function _getFormInput($inputNameStem, $value)
-    {
-        // Plugins should apply a filter to this blank HTML in order to display it in a certain way.
-        $html = '';
-        
-        $filterName = $this->_getPluginFilterForFormInput();
-        $html = apply_filters(
-            $filterName, 
-            $html, 
-            array(
-                'input_name_stem' => $inputNameStem, 
-                'value' => $value, 
-                'record' => $this->_record, 
-                'element' => $this->_element, 
-            )
-        );
-
-        // Short-circuit the default display functions b/c we already have the HTML we need.
-        if (!empty($html)) {
-            return $html;
-        }
-
-        return $this->view->formTextarea(
-            $inputNameStem . '[text]',
-            $value,
-            array('rows' => 3, 'cols' => 50));
-    }
-
-    /**
-     * Get the "name" of the filter that allows plugins to override this form
-     * input.
-     *
-     * @return array
-     */
-    protected function _getPluginFilterForFormInput()
-    {
-        return array(
-            'Form',
-            get_class($this->_record),
-            $this->_element->set_name,
-            $this->_element->name);
+    protected function _getInputComponent($inputNameStem, $value)
+    {        
+        $html = $this->view->formTextarea($inputNameStem . '[text]',
+                                          $value,
+                                          array('rows' => 3, 
+                                                'cols' => 50));
+        return $html;
     }
 
     /**
@@ -124,11 +106,12 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
      *
      * @return string
      */
-    protected function _getFormControls()
+    protected function _getControlsComponent()
     {
         $html = '<div class="controls">'
-              . $this->view->formSubmit(null, __('Remove'),
-                    array('class' => 'remove-element red button'))
+              . $this->view->formSubmit(null, 
+                                       __('Remove'),
+                                       array('class' => 'remove-element red button'))
               . '</div>';
 
         return $html;
@@ -138,21 +121,17 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
      * Get the HTML checkbox that lets users toggle the editor.
      *
      * @param string $inputNameStem
-     * @param int $index
      * @param bool $isHtml
      * @return string
      */
-    protected function _getHtmlCheckbox($inputNameStem, $index, $isHtml)
+    protected function _getHtmlCheckboxComponent($inputNameStem, $isHtml)
     {
         // Add a checkbox for the 'html' flag (always for any field)
         $html = '<label class="use-html">'
               . __('Use HTML')
-              . $this->view->formCheckbox($inputNameStem . '[html]', 1,
-                    array('checked' => $isHtml))
+              . $this->view->formCheckbox($inputNameStem . '[html]', 1, array('checked' => $isHtml))
               . '</label>';
 
-        $html = apply_filters('element_form_display_html_flag', 
-                              $html, array('element' => $this->_element));
         return $html;
     }
 }
