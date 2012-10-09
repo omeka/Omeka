@@ -248,7 +248,7 @@ ol { padding: 0 0 0 20px; }
     }
 
 
-/* Form Elements
+/* Content
 ================================================== */
 
 header { text-align: center; }
@@ -268,5 +268,27 @@ header { text-align: center; }
     margin-bottom: 10%; 
     padding: 20px 10px;
 }
-    
-.fatal, .installed { text-align: center; }
+
+        /* Alerts
+        ================================================== */
+        
+        #content #flash ul, ul.error {
+            list-style-type: none;
+            margin-top: 0;
+            padding: 0;
+        }
+            
+            #content #flash li, ul.error li {
+                background-color: rgba(255, 255, 255, .5);
+                border: 1px solid #E7E7E7;
+                border-radius: 3px;
+                font-size: 14px;
+                margin-bottom: 20px;
+                padding: .5em;            
+            }
+
+        .error, .alert { color: #914E33;  }
+
+        .fatal, .installed { text-align: center; }
+        
+        .success { color: #729108; }

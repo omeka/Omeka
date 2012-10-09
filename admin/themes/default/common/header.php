@@ -68,6 +68,7 @@
                 <input type="text" name="query" class="textinput" />
                 <input type="submit" value="<?php echo __('Search'); ?>" class="blue" />
             </fieldset>
+            <a href="<?php echo url('search/advanced-search'); ?>">advanced search</a>
         </form>
             
         <?php if (isset($title)) : ?>

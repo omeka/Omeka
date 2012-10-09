@@ -53,7 +53,15 @@ abstract class Omeka_File_Ingest_AbstractIngest
      * @see Omeka_File_Ingest_AbstractIngest::addValidator()
      */
     private $_validators = array();
-
+    
+    /**
+     * The current validated file MIME type.
+     * 
+     * @see Omeka_Validate_File_MimeType::isValid()
+     * @var string
+     */
+    public static $mimeType;
+    
     /**
      * Set the item to use as a target when ingesting files.
      * 
@@ -236,9 +244,18 @@ abstract class Omeka_File_Ingest_AbstractIngest
      */        
     private function _createFile($newFilePath, $oldFilename, $elementMetadata = array())
     {
+        // Normally, the MIME type validator sets the type to this class's 
+        // static $mimeType property during validation. If that validator has 
+        // been disabled (from the admin settings menu, for example), set the 
+        // MIME type here.
+        if (!self::$mimeType) {
+            $detect = new Omeka_File_MimeType_Detect($newFilePath);
+            self::$mimeType = $detect->detect();
+        }
         $file = new File;
         try {
             $file->original_filename = $oldFilename;
+            $file->mime_type = self::$mimeType;
             
             $file->setDefaults($newFilePath);
             

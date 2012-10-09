@@ -18,15 +18,20 @@ class Table_SearchText extends Omeka_Db_Table
     
     public function applySearchFilters($select, $params)
     {
+        // Set the query string if not passed.
+        if (!isset($params['query'])) {
+            $params['query'] = '';
+        }
+        
         // Set the base select statement.
         $select->reset(Zend_Db_Select::COLUMNS);
-        $select->columns(array(
-            'record_type', 'record_id', 'title', 
-            'relevance' => new Zend_Db_Expr(
-                'MATCH (`text`) AGAINST (' . $this->getDb()->quote($params['query']) . ')'
-            )
-        ));
-        $select->where('MATCH (`text`) AGAINST (?)', $params['query']);
+        $select->columns(array('record_type', 'record_id', 'title'));
+        if (isset($params['boolean'])) {
+            $match = 'MATCH (`text`) AGAINST (? IN BOOLEAN MODE)';
+        } else {
+            $match = 'MATCH (`text`) AGAINST (?)';
+        }
+        $select->where($match, $params['query']);
         
         // Search only those record types that are configured to be searched.
         $searchRecordTypes = Mixin_Search::getSearchRecordTypes();

@@ -1,7 +1,7 @@
 <?php 
 $pageTitle = __('Browse Element Sets');
 echo head(array('title'=> $pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'element-sets primary'));
-$doNotDelete = array('Dublin Core', 'Item Type Metadata', 'Omeka Image File', 'Omeka Video File');
+$doNotDelete = array('Dublin Core', 'Item Type Metadata');
 ?>
 <?php echo common('settings-nav'); ?>
 <?php echo flash(); ?>

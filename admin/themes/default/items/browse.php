@@ -167,7 +167,7 @@ echo head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodycl
                     <td><?php echo ($typeName = metadata('item', 'Item Type Name'))
                                 ? $typeName
                                 : metadata('item', array('Dublin Core', 'Type'), array('snippet' => 35)); ?></td>
-                    <td><?php echo format_date(metadata('item', 'Date Added')); ?></td>
+                    <td><?php echo format_date(metadata('item', 'Added')); ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

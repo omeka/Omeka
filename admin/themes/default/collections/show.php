@@ -54,7 +54,7 @@
                 <h2><?php echo __('Recently Added Items'); ?></h2>
                 <ul class="recent-items">
                 <?php foreach (loop('items') as $item): ?>
-                    <li><span class="date"><?php echo format_date(metadata('item', 'Date Added')); ?></span><span class="title"> <?php echo link_to_item(); ?></span></li>
+                    <li><span class="date"><?php echo format_date(metadata('item', 'Added')); ?></span><span class="title"> <?php echo link_to_item(); ?></span></li>
                 <?php endforeach;?>
                 </ul>
                 <?php endif; ?>

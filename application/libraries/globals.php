@@ -10,7 +10,9 @@
  *
  * If the returned value represents an object or array, it must be unserialized
  * by the caller before use. For example:
- * <code>$object = unserialize(get_option('plugin_object'))</code>.
+ * <code>
+ *     $object = unserialize(get_option('plugin_object'));
+ * </code>
  *
  * @param string $name The option name.
  * @return string The option value.
@@ -644,14 +646,20 @@ function element_exists($elementSetName, $elementName) {
  * existence of certain plugins. Some examples of how to use this function:
  *
  * Check if ExhibitBuilder is installed and activated.
- * <code>if (plugin_is_active('ExhibitBuilder')):</code>
+ * <code>
+ *     if (plugin_is_active('ExhibitBuilder')):
+ * </code>
  *
  * Check if installed version of ExhibitBuilder is at least version 1.0 or
  * higher.
- * <code>if (plugin_is_active('ExhibitBuilder', '1.0')):</code>
+ * <code>
+ *     if (plugin_is_active('ExhibitBuilder', '1.0')):
+ * </code>
  *
  * Check if installed version of ExhibitBuilder is anything less than 2.0.
- * <code>if (plugin_is_active('ExhibitBuilder', '2.0', '<')):</code>
+ * <code>
+ *     if (plugin_is_active('ExhibitBuilder', '2.0', '<')):
+ * </code>
  *
  * @uses Table_Plugin::findByDirectoryName()
  * @param string $name Directory name of the plugin.
@@ -1050,7 +1058,7 @@ function random_featured_collection()
 /**
  * Get the Collection object for the current item.
  *
- * @param Item|null Check for this specific item record (current item if null).
+ * @param Item|null $item Check for this specific item record (current item if null).
  * @return Collection
  */
 function get_collection_for_item($item=null)
@@ -1410,7 +1418,7 @@ function common($file, $vars = array(), $dir = 'common')
  * Return the view's header HTML.
  *
  * @uses common
- * @param array Keyed array of variables
+ * @param array $vars Keyed array of variables
  * @param string $file Filename of header script (defaults to 'header')
  * @return string
  */
@@ -1423,7 +1431,7 @@ function head($vars = array(), $file = 'header')
  * Return the view's footer HTML.
  *
  * @uses common()
- * @param array Keyed array of variables
+ * @param array $vars Keyed array of variables
  * @param string $file Filename of footer script (defaults to 'footer')
  * @return string
  */
@@ -1451,6 +1459,7 @@ function flash()
  * 'display_option_site_title'.
  *
  * @uses get_option()
+ * @param string $name The name of the option
  * @return string
  */
 function option($name)
@@ -1593,8 +1602,8 @@ function get_current_action_contexts()
  * current action.
  *
  * @uses get_current_action_contexts()
- * @param bool True = unordered list; False = use delimiter
- * @param string If the first argument is false, use this as a delimiter.
+ * @param bool $list True = unordered list; False = use delimiter
+ * @param string $delimiter If the first argument is false, use this as a delimiter.
  * @return string|bool HTML
  */
 function output_format_list($list = true, $delimiter = ' | ')
@@ -1771,7 +1780,7 @@ function random_featured_item($withImage = null)
  * Get the next item in the database.
  *
  * @uses Item::next()
- * @param Item|null Check for this specific item record (current item if null).
+ * @param Item|null $item Check for this specific item record (current item if null).
  * @return Item|null
  */
 function get_next_item($item=null)
@@ -1786,7 +1795,7 @@ function get_next_item($item=null)
  *  Get the previous item in the database.
  * 
  * @uses Item::previous()
- * @param Item|null Check for this specific item record (current item if null).
+ * @param Item|null $item Check for this specific item record (current item if null).
  * @return Item|null
  */
 function get_previous_item($item=null)
@@ -1803,7 +1812,7 @@ function get_previous_item($item=null)
  * Generally follows Chicago Manual of Style note format for webpages. 
  * Implementers can use the item_citation filter to return a customized citation.
  *
- * @param Item|null Check for this specific item record (current item if null).
+ * @param Item|null $item Check for this specific item record (current item if null).
  * @return string
  */
 function item_citation($item = null)
@@ -1879,7 +1888,7 @@ function item_field_uses_html($elementSetName, $elementName, $index = 0, $item =
  * Determine whether the item has any files assigned to it.
  *
  * @uses Item::hasFiles()
- * @param Item|null Check for this specific item record (current item if null).
+ * @param Item|null $item Check for this specific item record (current item if null).
  * @return boolean
  */
 function item_has_files($item = null)
@@ -1893,7 +1902,7 @@ function item_has_files($item = null)
 /**
  * Determine whether the item has tags assigned to it.
  * 
- * @param Item|null Check for this specific item record (current item if null).
+ * @param Item|null $item Check for this specific item record (current item if null).
  * @return boolean
  */
 function item_has_tags($item = null)
@@ -1901,14 +1910,14 @@ function item_has_tags($item = null)
     if (!$item) {
         $item = get_current_record('item');
     }
-    return (count($item->Tags) > 0);
+    return has_tags($item);
 }
 
 /**
  * Determine whether the item has a thumbnail image that it can display.
  *
  * @uses Item::hasThumbnail()
- * @param Item|null Check for this specific item record (current item if null).
+ * @param Item|null $item Check for this specific item record (current item if null).
  * @return bool
  */
 function item_has_thumbnail($item = null)
@@ -2073,7 +2082,7 @@ function random_featured_items($num = 5, $hasImage = null)
  * Return the set of values for item type elements.
  * 
  * @uses Item::getItemTypeElements()
- * @param Item|null Check for this specific item record (current item if null).
+ * @param Item|null $item Check for this specific item record (current item if null).
  * @return array
  */
 function item_type_elements($item = null)
@@ -2237,7 +2246,7 @@ function link_to_items_with_item_type($text = null, $props = array(),
  * @uses link_to()
  * @param array $attributes
  * @param string $text
- * @param File null|File
+ * @param File|null $file
  * @return string
  */
 function link_to_file_show($attributes = array(), $text = null, $file = null)
@@ -2256,11 +2265,11 @@ function link_to_file_show($attributes = array(), $text = null, $file = null)
  * Return a link to an item.
  * 
  * @uses link_to()
- * @param string HTML for the text of the link.
- * @param array Properties for the <a> tag.
- * @param string The page to link to (this will be the 'show' page almost always
+ * @param string $text HTML for the text of the link.
+ * @param array $props Properties for the <a> tag.
+ * @param string $action The page to link to (this will be the 'show' page almost always
  * within the public theme).
- * @param Item Used for dependency injection testing or to use this function 
+ * @param Item $item Used for dependency injection testing or to use this function 
  * outside the context of a loop.
  * @return string HTML
  */
@@ -2389,7 +2398,9 @@ function link_to_admin_home_page($text = null, $props = array())
  * with class "current" for any links corresponding to the current page
  *
  * For example:
- * <code>nav(array('Themes' => url('themes/browse')));</code>
+ * <code>
+ *     nav(array('Themes' => url('themes/browse')));
+ * </code>
  * generates
  * <code><li class="nav-themes"><a href="themes/browse">Themes</a></li></code>
  *
@@ -2878,7 +2889,7 @@ function tag_cloud($recordOrTags = null, $link = null, $maxClasses = 9, $tagNumb
  * tags from, or the actual array of tags
  * @param string|null $link The URL to use for links to the tags (if null, tags 
  * aren't linked)
- * @param string $delimiter ', ' (comma and whitespace) by default
+ * @param string $delimiter ', ' (comma and whitespace) is the default tag_delimiter option. Configurable in Settings
  * @return string HTML
  */
 function tag_string($recordOrTags = null, $link = 'items/browse', $delimiter = null)
@@ -2915,6 +2926,21 @@ function tag_string($recordOrTags = null, $link = 'items/browse', $delimiter = n
 }
 
 /**
+ * Check whether the specified record has tags.
+ *
+ * @param Omeka_Record_AbstractRecord $record
+ * @return bool
+ */
+function has_tags(Omeka_Record_AbstractRecord $record)
+{
+    try {
+        return (bool) $record->getTags();
+    } catch (BadMethodCallException $e) {
+        return false;
+    }
+}
+
+/**
  * Return a URL given the provided arguments.
  * 
  * Instantiates view helpers directly because a view may not be registered.
@@ -2943,7 +2969,11 @@ function url($options = array(), $name = null, $queryParams = array(),
  *
  * @uses Zend_View_Helper_ServerUrl::serverUrl()
  * @uses Omeka_View_Helper_Url::url()
- * @param mixed
+ * @param mixed $options
+ * @param string $route
+ * @param mixed $queryParams
+ * @param bool $reset
+ * @param book $encode
  * @return string HTML
  */
 function absolute_url($options = array(), $route = null, $queryParams = array(), 
@@ -3067,7 +3097,7 @@ function file_display_url(File $file, $format = 'fullsize')
  *
  * @uses set_theme_base_url()
  * @uses revert_theme_base_url()
- * @param mixed
+ * @param mixed $args
  * @return string
  */
 function public_url()
@@ -3084,7 +3114,7 @@ function public_url()
  * 
  * @uses set_theme_base_url()
  * @uses revert_theme_base_url()
- * @param mixed
+ * @param mixed $args
  * @return string
  */
 function admin_url()
@@ -3137,12 +3167,14 @@ function revert_theme_base_url()
 /**
  * Check the ACL to determine whether the current user has proper permissions.
  *
- * <code>is_allowed('Items', 'showNotPublic')</code>
+ * <code>
+ *     is_allowed('Items', 'showNotPublic');
+ * </code>
  * Will check if the user has permission to view Items that are not public.
  *
  * @uses Zend_Acl::is_allowed()
- * @param string|Zend_Acl_Resource_Interface
- * @param string|null
+ * @param string|Zend_Acl_Resource_Interface $resource
+ * @param string|null $privilege
  * @return boolean
  */
 function is_allowed($resource, $privilege)

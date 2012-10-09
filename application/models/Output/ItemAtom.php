@@ -147,7 +147,7 @@ class Output_ItemAtom
             }
             
             // feed/entry/updated
-            $feedEntryUpdated = $doc->createElement('updated', date(DATE_ATOM, strtotime(metadata($item, 'Date Modified'))));
+            $feedEntryUpdated = $doc->createElement('updated', date(DATE_ATOM, strtotime(metadata($item, 'Modified'))));
             $feedEntryElement->appendChild($feedEntryUpdated);
             
             // feed/entry/link[rel=alternate]
@@ -162,7 +162,7 @@ class Output_ItemAtom
                 $feedEntryLinkEnclosureElement = $doc->createElement('link');
                 $feedEntryLinkEnclosureElement->setAttribute('rel', 'enclosure');
                 $feedEntryLinkEnclosureElement->setAttribute('href', $file->getWebPath('original'));
-                $feedEntryLinkEnclosureElement->setAttribute('type', $file->mime_browser);
+                $feedEntryLinkEnclosureElement->setAttribute('type', $file->mime_type);
                 $feedEntryLinkEnclosureElement->setAttribute('length', $file->size);
                 $feedEntryElement->appendChild($feedEntryLinkEnclosureElement);
             }

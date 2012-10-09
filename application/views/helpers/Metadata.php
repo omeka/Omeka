@@ -167,7 +167,9 @@ class Omeka_View_Helper_Metadata extends Zend_View_Helper_Abstract
      */
     protected function _getRecordMetadata($record, $specialValue)
     {
-        return $record->getProperty(strtolower($specialValue));
+        // Normalize to a valid record property.
+        $property = str_replace(' ', '_', strtolower($specialValue));
+        return $record->getProperty($property);
     }
 
     /**
