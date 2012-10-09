@@ -28,7 +28,7 @@ class Omeka_Helper_LinkFunctions_PublicNavItemsTest extends PHPUnit_Framework_Te
     {
         $links = array();
         
-        $navHtml = '<li class="nav-browse-all current"><a href="/items">Browse All</a></li>' . "\n"
+        $navHtml = '<li class="nav-browse-all current"><a href="/items/browse">Browse All</a></li>' . "\n"
                  . '<li class="nav-browse-by-tag"><a href="/items/tags">Browse by Tag</a></li>' . "\n";
 
         
