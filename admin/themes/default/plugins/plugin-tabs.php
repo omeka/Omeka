@@ -3,37 +3,32 @@
 <?php 
     $pluginNav = array(
         array(
-        'label' => 'All',
-        'title' => 'All Plugins',
+        'label' => __('All'),
         'module' => 'default',
         'controller' => 'plugins',
         'action' => 'index'
         ),
         array(
-        'label' => 'Active',
-        'title' => 'Active Plugins',
+        'label' => __('Active'),
         'module' => 'default',
         'controller' => 'plugins',
         'action' => 'active'
         ),
         array(
-        'label' => 'Inactive',
-        'title' => 'Inactive Plugins',
+        'label' => __('Inactive'),
         'module' => 'default',
         'controller' => 'plugins',
         'action' => 'inactive'
         ),
         array(
-        'label' => 'Uninstalled',
-        'title' => 'Uninstalled Plugins',
+        'label' => __('Uninstalled'),
         'module' => 'default',
         'controller' => 'plugins',
         'action' => 'uninstalled'
         )
     );
 
-    $this->navigation()->menu()->setUlClass('navigation tabs');
-    echo $this->navigation()->menu(new Omeka_Navigation($pluginNav)); 
+    echo nav($pluginNav);
 ?>
 
 </div>

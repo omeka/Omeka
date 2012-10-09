@@ -1,20 +1,33 @@
 <?php if(is_allowed('Plugins','edit')): ?>
-<ul id="global-nav">
+<div id="global-nav">
 <?php
-    $globalNav = array();
-    if(is_allowed('Plugins', 'edit')) {
-        $globalNav[__('Plugins')] = url('plugins');
-    }
-    if(is_allowed('Appearance', 'edit')) {
-        $globalNav[__('Appearance')] = url('appearance');
-    }
-    if(is_allowed('Users', 'edit')) {
-        $globalNav[__('Users')] = url('users');
-    }
-    if(is_allowed('Settings', 'edit')) {
-        $globalNav[__('Settings')] = url('settings');
-    }
-    echo nav(apply_filters('admin_navigation_global', $globalNav));
+    $globalNav = array(
+        array(
+            'label' => __('Plugins'),
+            'uri' => url('plugins'),
+            'resource' => 'Plugins',
+            'privilege' => 'edit'
+            ),
+        array(
+            'label' => __('Appearance'),
+            'uri' => url('appearance'),
+            'resource' => 'Appearance',
+            'privilege' => 'edit'
+            ),
+        array(
+            'label' => __('Users'),
+            'uri' => url('users'),
+            'resource' => 'Users',
+            'privilege' => 'edit'
+            ),
+        array(
+            'label' => __('Settings'),
+            'uri' => url('settings'),
+            'resource' => 'Settings',
+            'privilege' => 'edit'
+            )
+        );
+    echo nav($globalNav, 'admin_navigation_global');
 ?>    
-</ul>
+</div>
 <?php endif; ?>

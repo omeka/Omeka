@@ -1,18 +1,31 @@
 <?php if (is_allowed('Settings', 'edit')): ?>
-<ul id="section-nav" class="navigation vertical">
+<div id="section-nav">
 <?php
-    $navArray = array();
+    $navArray = array(
+        array(
+            'label' => __('General Settings'),
+            'controller' => 'settings'
+        ),
+        array(
+            'label' => __('Element Sets'),
+            'controller' => 'element-sets',
+            'resource' => 'ElementSets',
+            'privilege' => 'browse'
+        ),
+        array(
+            'label' => __('Security Settings'),
+            'controller' => 'security',
+            'resource' => 'Security',
+            'privilege' => 'edit'
+        ),
+        array(
+            'label' => __('Search Settings'),
+            'controller' => 'search',
+            'action' => 'settings',
+        )
+    );
 
-    $navArray[__('General Settings')] = url('settings');
-    if (is_allowed('ElementSets', 'browse')) {
-        $navArray[__('Element Sets')] = url('element-sets');
-    }
-    if (is_allowed('Security', 'edit')) {
-        $navArray[__('Security Settings')] = url('security');
-    }
-    $navArray[__('Search Settings')] = url('search/settings');
-
-    echo nav(apply_filters('admin_navigation_settings', $navArray));
+    echo nav($navArray, 'admin_navigation_settings');
 ?>
-</ul>
+</div>
 <?php endif ?>

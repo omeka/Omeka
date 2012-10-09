@@ -36,32 +36,6 @@ function custom_display_logo()
     return null;
 }
 
-function custom_public_nav_header()
-{    
-    if ($customHeaderNavigation = get_theme_option('custom_header_navigation')) {
-        $navArray = array();
-        $customLinkPairs = explode("\n", $customHeaderNavigation);
-        foreach ($customLinkPairs as $pair) {
-            $pair = trim($pair);
-            if ($pair != '') {
-                $pairArray = explode('|', $pair, 2);
-                if (count($pairArray) == 2) {
-                    $link = trim($pairArray[0]);
-                    $url = trim($pairArray[1]); 
-                    if (strncmp($url, 'http://', 7) && strncmp($url, 'https://', 8)){                        
-                        $url = url($url);
-                    }
-                }
-                $navArray[$link] = $url;
-            }
-        }
-        return nav($navArray);
-    } else {
-        $navArray = array(__('Browse Items') => url('items'), __('Browse Collections') => url('collections'));
-        return public_nav_main($navArray);
-    }
-}
-
 function custom_header_image()
 {
     if(function_exists('get_theme_option') && $headerBg = get_theme_option('Header Image')) {

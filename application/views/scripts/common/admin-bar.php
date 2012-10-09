@@ -1,12 +1,21 @@
 <?php if ($user = current_user()): ?>
-<ul id="admin-bar">
+<div id="admin-bar">
 <?php
 $links = array(
-    __('Welcome, %s', $user->name) => admin_url('/users/edit/'.$user->id),
-    __('Omeka Admin') => admin_url('/'),
-    __('Log Out') => url('/users/logout')
+    array(
+        'label' => __('Welcome, %s', $user->name),
+        'uri' => admin_url('/users/edit/'.$user->id)
+    ),
+    array(
+        'label' => __('Omeka Admin'),
+        'uri' => admin_url('/')
+    ),
+    array(
+        'label' => __('Log Out'),
+        'uri' => url('/users/logout')
+    )
 );
-echo nav(apply_filters('admin_bar_nav', $links));
+echo nav($links, 'public_navigation_admin_bar');
 ?>
-</ul>
+</div>
 <?php endif; ?>
