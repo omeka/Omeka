@@ -1587,11 +1587,11 @@ ul#section-nav, #section-nav ul {
 /* Navigation Form
 ================================================== */
 
-#fieldset-navigation_main_checkbox_display {
+#fieldset-navigation_main_nav_links_display {
   margin-bottom: 20px;
 }
 
-#fieldset-navigation_main_checkbox_display ul li {
+#fieldset-navigation_main_nav_links_display ul li {
   background-image: url('../images/content_bg.jpg');
 }
 

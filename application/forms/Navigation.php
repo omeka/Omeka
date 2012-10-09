@@ -23,8 +23,12 @@ class Omeka_Form_Navigation extends Omeka_Form
     
     const HOMEPAGE_SELECT_DISPLAY_ELEMENT_ID = 'homepage_select_display';
         
-    private $_nav;
+    private $_nav;  // The Omeka_Navigaton object
     
+    /**
+     * Initializes the form.  Loads the navigation object from the saved main navigation object.  
+     *
+     */
     public function init()
     {
         parent::init();
@@ -36,14 +40,19 @@ class Omeka_Form_Navigation extends Omeka_Form
         $this->_initElements();
     }
     
-    public function displayCheckboxesFieldset()
+    /**
+     * Returns the html for the fieldset containing the navigation link checkboxes 
+     *
+     * @return String The html for the fieldset containing the navigation link checkboxes
+     */
+    public function displayNavigationLinksFieldset()
     {        
-        $html = '<fieldset id="fieldset-navigation_main_checkbox_display">';
+        $html = '<fieldset id="fieldset-navigation_main_nav_links_display">';
         $html .= '<ul id="navigation_main_list">';
         
-        $checkboxCount = 0;
+        $pageCount = 0;
         foreach($this->_nav as $page) {
-            $html .= $this->_displayCheckboxesForNavPage($page, $checkboxCount);
+            $html .= $this->_displayNavigationPageLink($page, $pageCount);
         }
         
         $html .= '</ul>';
@@ -51,24 +60,54 @@ class Omeka_Form_Navigation extends Omeka_Form
         return $html;
     }
     
+    /**
+     * Saves the navigation and homepage from the form post data 
+     *
+     */
+    public function saveFromPost() 
+    {
+        // Save the homepage uri
+        $this->_saveHomepageFromPost();
+        
+        // Save the navigation from post                 
+        $this->_saveNavigationFromPost();
+        
+        // Reset the form elements to display the updated navigation
+        $this->_initElements();
+    }
+    
+    /**
+     * Initializes the form elements. 
+     *
+     */
     protected function _initElements() 
     {
         $this->clearElements();
         $this->_addHiddenElement();
         $this->_addHomepageSelectElement();
     }
-        
+    
+    /**
+     * Adds the hidden element to the form. 
+     *
+     */    
     protected function _addHiddenElement() 
     {
         $this->addElement('hidden', self::HIDDEN_ELEMENT_ID, array('value' => ''));
     }
     
-    
-    protected function _displayCheckboxesForNavPage(Zend_Navigation_Page $page, &$checkboxCount)
+    /**
+     * Returns the html for a navigation page link and its sublinks. 
+     *
+     * @param Zend_Navigation_Page $page The navigation page
+     * @param int $pageCount The number of pages added so far to the form
+     * @return String The html for a navigation page link and its sublinks
+     */
+    protected function _displayNavigationPageLink(Zend_Navigation_Page $page, &$pageCount)
     {        
-        $checkboxCount++;
+        $pageCount++;
          
-        $checkboxId = 'navigation_main_nav_checkboxes_' . $checkboxCount;                
+        $checkboxId = 'navigation_main_nav_checkboxes_' . $pageCount;                
         $checkboxValue = $this->_getPageHiddenInfo($page);
         $checkboxChecked = $page->isVisible() ? 'checked="checked"' : '';
         $checkboxClasses = array();
@@ -102,7 +141,7 @@ class Omeka_Form_Navigation extends Omeka_Form
         if ($page->hasChildren()) {
             $html .= '<ul>';
             foreach($page as $childPage) {
-                $html .= $this->_displayCheckboxesForNavPage($childPage, $checkboxCount);
+                $html .= $this->_displayNavigationPageLink($childPage, $pageCount);
             }
             $html .= '</ul>';
         }
@@ -111,6 +150,10 @@ class Omeka_Form_Navigation extends Omeka_Form
         return $html;
     }
     
+    /**
+     * Adds the homepage select element to the form 
+     *
+     */
     protected function _addHomepageSelectElement()
     {
         $elementIds = array();
@@ -143,20 +186,12 @@ class Omeka_Form_Navigation extends Omeka_Form
             array('class' => 'field')
         );
     }
-    
-    public function saveFromPost() 
-    {
-        // Save the homepage uri
-        $this->_saveHomepageFromPost();
         
-        // Save the navigation from post                 
-        $this->_saveNavigationFromPost();
-        
-        // Reset the form elements to display the updated navigation
-        $this->_initElements();
-    }
-    
-    public function _saveNavigationFromPost() 
+    /**
+     * Saves the main navigation object from the form post data 
+     *
+     */
+    protected function _saveNavigationFromPost() 
     {           
         // update the navigation from the hidden element value in the post data
         $nav = new Omeka_Navigation();
@@ -235,12 +270,22 @@ class Omeka_Form_Navigation extends Omeka_Form
         $this->_nav = $nav;
     }
     
+    /**
+     * Saves the homepage from the form post data 
+     *
+     */
     protected function _saveHomepageFromPost()
     {
         $homepageUri = $this->getValue(self::SELECT_HOMEPAGE_ELEMENT_ID);
         set_option(self::HOMEPAGE_URI_OPTION_NAME, $homepageUri); 
     }
     
+    /**
+     * Returns JSON with the hidden info for a navigation page link. 
+     *
+     * @param Zend_Navigation_Page $page The navigation page
+     * @return String JSON with the hidden info for a navigation page link. 
+     */
     protected function _getPageHiddenInfo(Zend_Navigation_Page $page) 
     {
         $hiddenInfo = array(
