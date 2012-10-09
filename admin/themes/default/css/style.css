@@ -1213,6 +1213,7 @@ header nav {
 .admin-thumb {
     width: 100px;
     box-shadow: 0 0 3px rgba(0,0,0,.15);
+    float: left;
 }
 
 .element {
@@ -1240,19 +1241,28 @@ header nav {
         max-width: 100%;
     }
 
-#item-images {
-    margin: 0 0 20px 0;
+#item-images { margin: 0; }
+
+    #item-images img { vertical-align: bottom; }
+    
+    #item-images div { margin: 0 20px 20px 0; }
+
+        #item-images div:nth-of-type(4) { margin-right: 0; }
+
+    #item-images:after {
+        content: "";
+        display: inline-block;
+        width: 100%;
+        clear: both;
+    }
+
+.public-featured p {
+    display: inline-block;
+    margin: 0 5px 10px 0;
+    text-align: center;
 }
 
-.public-featured { }
-
-    .public-featured p {
-        display: inline-block;
-        margin: 0 5px 10px 0;
-        text-align: center;
-    }
-    
-    .public-featured .label { font-weight: bold; }
+.public-featured .label { font-weight: bold; }
 
 
 /* Batch Edit Items

@@ -160,6 +160,12 @@ th a:after, th.desc a:after, th.asc a:after { content: ""; }
     
     .quick-filter-wrapper { margin: 1em 0;}
 
+    /* Show Items
+    ==================================================*/
+
+    #item-images div:nth-of-type(3) { margin-right: 0; }
+    
+    #item-images div:nth-of-type(4) { margin-right: 20px; }
 
     /* Login
     ==================================================*/
