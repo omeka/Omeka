@@ -145,7 +145,7 @@ class Omeka_Job_Process_Dispatcher
      */
     static private function _getBootstrapFilePath()
     {
-        return BACKGROUND_BOOTSTRAP_PATH;
+        return SCRIPTS_DIR . '/background.php';
     }
 
     /**

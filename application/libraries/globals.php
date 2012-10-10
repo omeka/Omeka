@@ -333,7 +333,11 @@ function clear_filters($filterName = null)
  */
 function get_acl()
 {
-    return Zend_Registry::get('bootstrap')->getResource('Acl');
+    try {
+        return Zend_Registry::get('bootstrap')->getResource('Acl');
+    } catch (Zend_Exception $e) {
+        return null;
+    }
 }
 
 /**
@@ -2396,102 +2400,27 @@ function link_to_admin_home_page($text = null, $props = array())
 }
 
 /**
- * Generate an unordered list of navigation links (and subnavigation links), 
- * with class "current" for any links corresponding to the current page
+ * Create a navigation menu of links.
  *
- * For example:
- * <code>
- *     nav(array('Themes' => url('themes/browse')));
- * </code>
- * generates
- * <code><li class="nav-themes"><a href="themes/browse">Themes</a></li></code>
+ * @param array $navLinks The array of links for the navigation.
+ * @param string $name Optionally, the name of a filter to pass the links
+ *  through before using them.
  *
- * @param array $links A keyed array, where key = text of the link, and value = 
- * uri of the link, or value = another ordered array $a with the following 
- * recursive structure:
- * <ul>
- *   <li>$a['uri'] = URI of the link</li>
- *   <li>$a['subnav_links'] = array of $sublinks for the sub navigation (this 
- * can be recursively structured like $links)</li>
- *   <li>$a['subnav_attributes'] = associative array of attributes for the sub 
- * navigation</li>
- * </ul>
- * For example:
- * <code>
- * $links = array(
- *   'Browse' => 'http://yoursite.com/browse',
- *   'Categories' => array(
- *     'uri' => 'http://yoursite.com/categories',
- *     'subnav_links' => array(
- *       'Dogs' => 'http://yoursite.com/dogs',
- *       'Cats' => 'http://yoursite.com/cats'
- *     ),
- *     'subnav_attributes' => array('class' => 'subnav')
- *   ),
- *   'Contact Us' => 'http://yoursite.com/contact-us'
- * );
- * echo nav($links);
- * </code>
- * This would produce:
- * <code>
- * <li><a href="http://yoursite.com/browse">Browse</a></li>
- * <li><a href="http://yoursite.com/categories">Categories</a>
- *   <ul class="subnav">
- *     <li><a href="http://yoursite.com/dogs">Dogs</a></li>
- *     <li><a href="http://yoursite.com/cats">Cats</a></li>
- *   </ul>
- * </li>
- * <li><a href="http://yoursite.com/contact-us">Contact Us</a><li>
- * <code>
- * @param integer|null $maxDepth The maximum number of sub navigation levels to 
- * display. By default it is 0, which means it will only display the top level 
- * of links. If null, it will display all the levels.
- * @return string HTML for the unordered list
+ * @return Zend_View_Helper_Navigation_Menu The navigation menu object. Can
+ *  generally be treated simply as a string.
  */
-function nav(array $links, $maxDepth = 0)
-{
-    // Get the current uri from the request
-    $current = Zend_Controller_Front::getInstance()->getRequest()->getRequestUri();
-    
-    $nav = '';
-    foreach( $links as $text => $uri ) {
-        // Get the subnavigation attributes and links
-        $subNavLinks = null;
-        if (is_array($uri)) {
-            $subNavLinks = $uri['subnav_links'];
-            if (!is_array($subNavLinks)) {
-                $subNavLinks = array();
-            }
-            $subNavAttributes = $uri['subnav_attributes'];
-            if (!is_array($subNavAttributes)) {
-                $subNavAttributes = array();
-            }
-            $uri = (string) $uri['uri'];
-        }
-        // Build a link if the uri is available, otherwise simply list the text 
-        // without a hyperlink
-        $nav .= '<li class="' . text_to_id($text, 'nav');
-        if ($uri == '') {
-            $nav .= '">' . html_escape($text);
-        } else {
-            // If the uri is the current uri, then give it the 'current' class
-            $nav .= (is_current_url($uri) ? ' current':'') . '">' . '<a href="' . html_escape($uri) . '">' . html_escape($text) . '</a>';
-        }
-        // Display the subnavigation links if they exist and if the max depth 
-        // has not been reached
-        if ($subNavLinks !== null && ($maxDepth === null || $maxDepth > 0)) {
-            $subNavAttributes = !empty($subNavAttributes) ? ' ' . tag_attributes($subNavAttributes) : '';
-            $nav .= "\n" . '<ul' . $subNavAttributes . '>' . "\n";
-            if ($maxDepth === null) {
-                $nav .= nav($subNavLinks, null);
-            } else {
-                $nav .= nav($subNavLinks, $maxDepth - 1);
-            }
-            $nav .= '</ul>' . "\n";
-        }
-        $nav .= '</li>' . "\n";
+function nav(array $navLinks, $name = null) {
+    if ($name !== null) {
+        $navLinks = apply_filters($name, $navLinks);
     }
-    return $nav;
+
+    $menu = get_view()->navigation()->menu(new Omeka_Navigation($navLinks));
+
+    if ($acl = get_acl()) {
+        $menu->setRole(current_user())->setAcl($acl);
+    }
+    
+    return $menu;
 }
 
 /**
@@ -2548,33 +2477,6 @@ function pagination_links($options = array())
 }
 
 /**
- * Helper function to be used in public themes to allow plugins to modify the 
- * navigation of those themes.
- *
- * Plugins can modify navigation by adding filters to specific subsets of the
- * navigation. For instance, most themes will have what might be called a 'main'
- * navigation set on the header of the site. This main navigation header would
- * be attached to a filter called 'public_navigation_main', which would always
- * act on that particular navigation. You would signal to the plugins to
- * differentiate between the different navigation elements by passing the 2nd
- * argument as 'main', so that it knew that this was the main navigation.
- *
- * @uses nav()
- * @param array $navArray
- * @param string|null $navType
- * @param integer|null $maxDepth
- * @return string HTML
- */
-function public_nav(array $navArray, $navType=null, $maxDepth = 0)
-{
-    if ($navType) {
-        $filterName = 'public_navigation_' . $navType;
-        $navArray = apply_filters($filterName, $navArray);
-    }
-    return nav($navArray, $maxDepth);
-}
-
-/**
  * Return the main navigation for the public site.
  *
  * @return Zend_View_Helper_Navigation_Menu Can be echoed like a string or
@@ -2591,7 +2493,7 @@ function public_nav_main()
 /**
  * Return the navigation for items.
  * 
- * @uses public_nav()
+ * @uses nav()
  * @param array $navArray
  * @param integer|null $maxDepth
  * @return string
@@ -2599,9 +2501,18 @@ function public_nav_main()
 function public_nav_items(array $navArray = null, $maxDepth = 0)
 {
     if (!$navArray) {
-        $navArray = array(__('Browse All') => url('items/browse'), __('Browse by Tag') => url('items/tags'));
+        $navArray = array(
+            array(
+                'label' =>__('Browse All'),
+                'uri' => url('items/browse'),
+            ),
+            array(
+                'label' => __('Browse by Tag'),
+                'uri' => url('items/tags')
+            )
+        );
     }
-    return public_nav($navArray, 'items', $maxDepth);
+    return nav($navArray, 'public_navigation_items');
 }
 
 /**

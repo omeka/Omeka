@@ -74,7 +74,12 @@ class Omeka_Navigation extends Zend_Navigation
             require_once 'Zend/Navigation/Page.php';
             $page = Zend_Navigation_Page::factory($page);
         }
-        
+
+        // Handle URI pages from Zend's page factory
+        if (get_class($page) == 'Zend_Navigation_Page_Uri') {
+            $page = new Omeka_Navigation_Page_Uri($page->toArray());
+        }
+
         if (!($page instanceof Zend_Navigation_Page_Mvc || $page instanceof Omeka_Navigation_Page_Uri)) {
             require_once 'Zend/Navigation/Exception.php';
             throw new Zend_Navigation_Exception(

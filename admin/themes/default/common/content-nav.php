@@ -1,36 +1,40 @@
 <nav id="content-nav" class="two columns">
-
-    <ul>
-        <?php
-            $contentNav = array(
-                __('Dashboard') => url(''),
-                __('Items') => url('items'),
-                __('Collections') => url('collections'),
-                __('Item Types') => url('item-types'),
-                __('Tags') => url('tags'),
-                
-                );
-            echo nav(apply_filters('admin_navigation_main', $contentNav));
-        ?>
-    </ul>
-
+    <?php
+        $mainNav = array(
+            array(
+                'label' => __('Dashboard'),
+                'uri' => url('')
+            ),
+            array(
+                'label' => __('Items'),
+                'controller' => 'items',
+                'route' => 'default',
+            ),
+            array(
+                'label' => __('Collections'),
+                'controller' => 'collections',
+                'route' => 'default',
+            ),
+            array(
+                'label' => __('Item Types'),
+                'controller' => 'item-types',
+                'route' => 'default',
+            ),
+            array(
+                'label' => __('Tags'),
+                'controller' => 'tags',
+                'route' => 'default'
+            )
+        );
+        $nav = nav($mainNav, 'admin_navigation_main');
+        echo $nav;
+    ?>
 </nav>
 
 <nav>
     <ul id="mobile-content-nav" class="quick-filter-wrapper"  name="mobile-nav">
         <li><a href="#" tabindex="0"><?php echo $title; ?></a>
-        <ul class="dropdown">
-        <?php
-            $contentNav = array(
-                __('Dashboard') => url(''),
-                __('Items') => url('items'),
-                __('Collections') => url('collections'),
-                __('Item Types') => url('item-types'),
-                __('Tags') => url('tags'),
-                );
-            echo nav(apply_filters('admin_navigation_main', $contentNav));
-        ?>            
-        </ul>
+        <?php echo $nav->setUlClass('dropdown'); ?>
         </li>
     </ul>    
 </nav>

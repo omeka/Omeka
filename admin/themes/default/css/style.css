@@ -605,23 +605,23 @@ header nav {
         text-shadow: -1px -1px 1px rgba(0,0,0,.75)
     }
         
-#content-nav .current {
+#content-nav .active {
     background-image: url('../images/navbg-blue.jpg');
     position: relative;
     overflow: visible;
 }
     
-    #content-nav .current:hover, #content-nav .current:active {
+    #content-nav .active:hover, #content-nav .active:active {
         background-image: url('../images/navbg-blue.jpg');
     }
     
-    #content-nav .current a {
+    #content-nav .active a {
         height: auto;
         background-color: transparent;
         display: block;
     }
         
-    #content-nav .current a:hover, #content-nav .current a:active {
+    #content-nav .active a:hover, #content-nav .active a:active {
         background-color: transparent;
     }
         
