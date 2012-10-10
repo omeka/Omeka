@@ -1,9 +1,10 @@
 <?php
-$pageTitle = __('Search Omeka');
+$pageTitle = __('Search Omeka ' . __('(%s total)', total_results()));
 echo head(array('title' => $pageTitle));
 $searchRecordTypes = get_search_record_types();
 ?>
 <div id="primary">
+<?php if (total_results()): ?>
 <div id="pagination-top" class="pagination"><?php echo pagination_links(); ?></div>
 <table>
     <thead>
@@ -22,5 +23,9 @@ $searchRecordTypes = get_search_record_types();
         <?php endforeach; ?>
     </tbody>
 </table>
+<div id="pagination-bottom" class="pagination"><?php echo pagination_links(); ?></div>
+<?php else: ?>
+<p>Your query returned no results. Would you like to refine your search using boolean mode?</p>
+<?php endif; ?>
 </div>
 <?php echo foot(); ?>
