@@ -75,6 +75,27 @@ jQuery(document).ready(function () {
     }
 
     saveScroll();
+    
+    function showAdvancedForm() {
+        var $advanced_form = jQuery("#advanced-form");
+        jQuery("#advanced-site-search").click( function(event) {
+            event.stopPropagation();
+            if($advanced_form.css("display") == "none") {
+                $advanced_form.fadeIn();
+            }
+            $advanced_form.click( function(event) {
+               event.stopPropagation(); 
+            });
+            jQuery(document).click( function() {
+                if($advanced_form.css("display") == "block") {
+                    $advanced_form.fadeOut();
+                }
+            });
+            
+        });
+    }
+    
+    showAdvancedForm();
 
     // Generates mobile-friendly tables
     jQuery('table').each(function() {

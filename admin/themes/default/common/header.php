@@ -68,7 +68,17 @@
                 <input type="text" name="query" class="textinput" />
                 <input type="submit" value="<?php echo __('Search'); ?>" class="blue" />
             </fieldset>
-            <a href="<?php echo url('search/advanced-search'); ?>">advanced search</a>
+            <a href="#" id="advanced-site-search" class="blue button">advanced search</a>
+            <div id="advanced-form">
+                <p><?php echo $this->formCheckbox('boolean', null, array('disableHidden' => true)); ?>
+                <?php echo __('Use boolean'); ?></p>
+                <p>Search only these record types:</p>
+                    <?php $searchRecordTypes = Mixin_Search::getSearchRecordTypes(); ?>
+                    <?php foreach ($searchRecordTypes as $searchRecordType): ?>
+                    <input type="checkbox" name="record_types[]" value="<?php echo $searchRecordType; ?>" checked="checked" /> <?php echo $searchRecordType; ?><br />
+                    <?php endforeach; ?><br />
+                    <?php echo $this->formSubmit(null, __('Search'), array('class' => 'blue button')); ?>
+            </div>
         </form>
             
         <?php if (isset($title)) : ?>
