@@ -158,7 +158,7 @@ function add_plugin_hook($hook, $callback)
  * called. The first argument corresponds to the string name of the hook. The 
  * second is an associative array containing arguments that will be passed to 
  * the plugin hook implementations.
- *
+ * 
  * <code>
  * // Calls the hook 'after_save_item' with the arguments '$item' and '$arg2'
  * fire_plugin_hook('after_save_item', array('item' => $item, 'foo' => $arg2));
@@ -431,7 +431,12 @@ function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata
  * @param Item|integer $item
  * @param string|Omeka_File_Ingest_AbstractIngest $transferStrategy
  * @param array $files
- * @param array $options
+ * @param array $options Available Options:
+ * <ul>
+ *     <li>'ignore_invalid_files': boolean false by default.  Determine 
+ *           whether or not to throw exceptions when a file is not valid.
+ *     </li>
+ * </ul>
  * @return array
  */
 function insert_files_for_item($item, $transferStrategy, $files, $options = array())
