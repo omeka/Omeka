@@ -73,9 +73,8 @@
                 <p><?php echo $this->formCheckbox('boolean', null, array('disableHidden' => true)); ?>
                 <?php echo __('Use boolean'); ?></p>
                 <p>Search only these record types:</p>
-                    <?php $searchRecordTypes = Mixin_Search::getSearchRecordTypes(); ?>
-                    <?php foreach ($searchRecordTypes as $searchRecordType): ?>
-                    <input type="checkbox" name="record_types[]" value="<?php echo $searchRecordType; ?>" checked="checked" /> <?php echo $searchRecordType; ?><br />
+                    <?php foreach (Mixin_Search::getSearchRecordTypes() as $key => $value): ?>
+                    <input type="checkbox" name="record_types[]" value="<?php echo $key; ?>" checked="checked" /> <?php echo $value; ?><br />
                     <?php endforeach; ?><br />
                     <?php echo $this->formSubmit(null, __('Search'), array('class' => 'blue button')); ?>
             </div>
