@@ -7,23 +7,19 @@
             ),
             array(
                 'label' => __('Items'),
-                'controller' => 'items',
-                'route' => 'default',
+                'uri' => url('items')
             ),
             array(
                 'label' => __('Collections'),
-                'controller' => 'collections',
-                'route' => 'default',
+                'uri' => url('collections')
             ),
             array(
                 'label' => __('Item Types'),
-                'controller' => 'item-types',
-                'route' => 'default',
+                'uri' => url('item-types')
             ),
             array(
                 'label' => __('Tags'),
-                'controller' => 'tags',
-                'route' => 'default'
+                'uri' => url('tags')
             )
         );
         $nav = nav($mainNav, 'admin_navigation_main');
