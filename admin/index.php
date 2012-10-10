@@ -26,4 +26,8 @@ $application->getBootstrap()->setOptions(array(
         )
     )
 ));
+
+// Set an admin flag to the front controller.
+Zend_Controller_Front::getInstance()->setParam('admin', true);
+
 $application->initialize()->run();
