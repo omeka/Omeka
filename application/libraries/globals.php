@@ -2880,7 +2880,7 @@ function url($options = array(), $route = null, $queryParams = array(),
     $reset = false, $encode = true
 ) {
     $helper = new Omeka_View_Helper_Url;
-    return $helper->url($options, $name, $queryParams, $reset, $encode);
+    return $helper->url($options, $route, $queryParams, $reset, $encode);
 }
 
 /**
