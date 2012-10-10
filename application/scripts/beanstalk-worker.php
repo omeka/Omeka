@@ -11,7 +11,7 @@
 /**
  * Paths.php is required at minimum in order to define all path constants.
  */
-require_once dirname(__FILE__) . "/../../paths.php";
+require_once dirname(__FILE__) . "/../../bootstrap.php";
 require_once "Omeka/Application.php";
 
 declare(ticks = 1);

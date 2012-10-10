@@ -12,4 +12,22 @@
 
 // Flag this as the admin theme.
 define('ADMIN', true);
+
+// Bootstrap the application.
 include dirname(dirname(__FILE__)) . '/bootstrap.php';
+
+// Configure the bootstrap and run the application.
+$application = new Omeka_Application(APPLICATION_ENV);
+$application->getBootstrap()->setOptions(array(
+    'resources' => array(
+        'theme' => array(
+            'basePath' => THEME_DIR,
+            'webBasePath' => WEB_THEME
+        )
+    )
+));
+
+// Set an admin flag to the front controller.
+Zend_Controller_Front::getInstance()->setParam('admin', true);
+
+$application->initialize()->run();

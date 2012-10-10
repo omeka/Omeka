@@ -1,5 +1,5 @@
 <?php
-require_once realpath(dirname(__FILE__) . '/../paths.php');
+require_once realpath(dirname(__FILE__) . '/../bootstrap.php');
 
 // This mini app is in the install/ directory.
 defined('APPLICATION_PATH')
