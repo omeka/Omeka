@@ -356,6 +356,39 @@ function is_admin_theme()
 }
 
 /**
+ * Get all record types that should be indexed and searchable.
+ * 
+ * Plugins may add record types via the "search_record_types" filter. The 
+ * keys should be the record's class name and the respective values should 
+ * be the human readable and internationalized version of the record type.
+ * 
+ * These record classes must extend Omeka_Record_AbstractRecord and 
+ * implement this search mixin (Mixin_Search).
+ * 
+ * @return array
+ */
+function get_search_record_types()
+{
+    // Apply the filters only once.
+    static $searchRecordTypes = null;
+    
+    if (!$searchRecordTypes) {
+        $coreSearchRecordTypes = array(
+            'Item' => __('Item'), 
+            'File' => __('File'), 
+            'Collection' => __('Collection'), 
+        );
+        try {
+            $searchRecordTypes = Zend_Registry::get('pluginbroker')
+                ->applyFilters('search_record_types', $coreSearchRecordTypes);
+        } catch (Zend_Exception $e) {
+            $searchRecordTypes = $coreSearchRecordTypes;
+        }
+    }
+    return $searchRecordTypes;
+}
+
+/**
  * Insert a new item into the Omeka database.
  *
  * @uses Builder_Item

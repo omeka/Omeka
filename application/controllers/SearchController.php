@@ -11,14 +11,9 @@ class SearchController extends Omeka_Controller_AbstractActionController
         parent::browseAction();
     }
     
-    public function advancedSearchAction()
-    {
-        $this->view->assign('searchRecordTypes', Mixin_Search::getSearchRecordTypes());
-    }
-    
     public function settingsAction()
     {
-        $this->view->assign('searchRecordTypes', Mixin_Search::getSearchRecordTypes());
+        $this->view->assign('searchRecordTypes', get_search_record_types());
         if (isset($_POST['index_search_text'])) {
             Zend_Registry::get('bootstrap')->getResource('jobs')
                                            ->sendLongRunning('Job_SearchTextIndex');
