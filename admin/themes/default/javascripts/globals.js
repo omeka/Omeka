@@ -82,7 +82,12 @@ jQuery(document).ready(function () {
             event.stopPropagation();
             if($advanced_form.css("display") == "none") {
                 $advanced_form.fadeIn();
+            } else {
+                $advanced_form.fadeOut();
             }
+            jQuery("#search input[type=text]").click( function(event) {
+               event.stopPropagation(); 
+            });
             $advanced_form.click( function(event) {
                event.stopPropagation(); 
             });
