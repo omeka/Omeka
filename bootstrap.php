@@ -125,15 +125,3 @@ $autoloader->suppressNotFoundWarnings(true);
 
 // Define the theme directory path.
 define('THEME_DIR', defined('ADMIN') ? ADMIN_THEME_DIR : PUBLIC_THEME_DIR);
-
-// Configure the bootstrap and run the application.
-$application = new Omeka_Application(APPLICATION_ENV);
-$application->getBootstrap()->setOptions(array(
-    'resources' => array(
-        'theme' => array(
-            'basePath' => THEME_DIR,
-            'webBasePath' => WEB_THEME
-        )
-    )
-));
-$application->initialize()->run();

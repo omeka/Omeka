@@ -12,9 +12,9 @@
 $baseDir = dirname(__FILE__);
 
 /**
- * Paths.php is required at minimum in order to define all path constants.
+ * bootstrap.php is required at minimum in order to define all path constants.
  */
-require_once("{$baseDir}/../../paths.php");
+require_once("{$baseDir}/../../bootstrap.php");
 require_once("{$baseDir}/../libraries/Omeka/Application.php");
 
 // Set the command line arguments.
