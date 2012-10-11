@@ -88,4 +88,34 @@ class Table_Collection extends Omeka_Db_Table
             $select->where('collections.featured = 0');
         }     
     }
+    
+    /**
+     * Enables sorting based on ElementSet,Element field strings.
+     *
+     * @param Omeka_Db_Select $select
+     * @param string $sortField Field to sort on
+     * @param string $sortDir Sorting direction (ASC or DESC)
+     */
+    public function applySorting($select, $sortField, $sortDir)
+    {
+        parent::applySorting($select, $sortField, $sortDir);
+
+        $db = $this->getDb();
+        $fieldData = explode(',', $sortField);
+        if (count($fieldData) == 2) {
+            $element = $db->getTable('Element')->findByElementSetNameAndElementName($fieldData[0], $fieldData[1]);
+            if ($element) {
+                $select->joinLeft(array('et_sort' => $db->ElementText),
+                                  "et_sort.record_id = collections.id AND et_sort.record_type = 'Collection' AND et_sort.element_id = {$element->id}",
+                                  array())
+                       ->group('collections.id')
+                       ->order(array("IF(ISNULL(et_sort.text), 1, 0) $sortDir",
+                                     "et_sort.text $sortDir"));
+            }
+        } else {
+            if ($sortField == 'random') {
+                $select->order('RAND()');
+            }
+        }
+    }
 }

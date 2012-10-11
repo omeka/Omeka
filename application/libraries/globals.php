@@ -2366,8 +2366,9 @@ function link_to_collection($text = null, $props = array(), $action = 'show', $c
     if (!$collectionObj) {
         $collectionObj = get_current_record('collection');
     }
-    $collectionName = metadata($collectionObj, 'name');
-    $text = (!empty($text) ? $text : (!empty($collectionName) ? $collectionName : __('[Untitled]')));
+    
+    $collectionTitle = metadata($collectionObj, array('Dublin Core', 'Title'));    
+    $text = (!empty($text) ? $text : (!empty($collectionTitle) ? $collectionTitle : __('[Untitled]')));
     return link_to($collectionObj, $action, $text, $props);
 }
 

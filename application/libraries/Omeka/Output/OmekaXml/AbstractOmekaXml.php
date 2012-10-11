@@ -393,8 +393,8 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
     */
     protected function _buildItemContainerForCollection(Collection $collection, DOMElement $parentElement)
     {
-        $nameElement = $this->_createElement('name', $collection->name, null, $parentElement);
-        $descriptionElement = $this->_createElement('description', $collection->description, null, $parentElement);
+        $nameElement = $this->_createElement('name', strip_formatting(metadata($collection, array('Dublin Core', 'Title'))), null, $parentElement);
+        $descriptionElement = $this->_createElement('description', strip_formatting(metadata($collection, array('Dublin Core', 'Description'))), null, $parentElement);
         $collectorContainerElement = $this->_createElement('collectorContainer');
         foreach ($collection->getCollectors() as $collector) {
             $collectorElement = $this->_createElement('collector', $collector, null, $collectorContainerElement);

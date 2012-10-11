@@ -69,6 +69,11 @@ class ItemsController extends Omeka_Controller_AbstractActionController
         }
     }
     
+    /**
+     * Gets the element sets for the 'Item' record type.
+     * 
+     * @return array The element sets for the 'Item' record type
+     */
     protected function _getItemElementSets()
     {
         return $this->_helper->db->getTable('ElementSet')->findByRecordType('Item');
@@ -341,7 +346,5 @@ class ItemsController extends Omeka_Controller_AbstractActionController
         } else {
             $paginationUrl = $baseUrl;
         }
-
     }
-
 }

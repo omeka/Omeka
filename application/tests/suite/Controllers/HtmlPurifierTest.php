@@ -30,8 +30,14 @@ class Omeka_Controllers_HtmlPurifierTest extends Omeka_Test_AppTestCase
         
         // Create a collection
         $collection = new Collection();
-        $collection->name = 'a';
-        $collection->description = 'a';
+        
+        $collection->addElementTextsByArray(array(
+            'Dublin Core' => array(
+                'Title' => array(array('text' => 'a', 'html' => false)),
+                'Description' => array(array('text' => 'a', 'html' => false)),
+            )
+        ));
+        
         $collection->collectors = 'a';
         $collection->public = true;
         $collection->save();

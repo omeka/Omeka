@@ -58,11 +58,15 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
      * @var integer
      */
     public $owner_id = 0;
+    
+    protected $_related = array('Elements'=>'getElements',
+                                'ElementTexts'=>'getElementText');
                 
     protected function _initializeMixins()
     {
         $this->_mixins[] = new Mixin_PublicFeatured($this);
         $this->_mixins[] = new Mixin_Owner($this);
+        $this->_mixins[] = new Mixin_ElementText($this);
         $this->_mixins[] = new Mixin_Timestamp($this);
         $this->_mixins[] = new Mixin_Search($this);
     }
@@ -154,6 +158,17 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
         return $post;
     }
     
+    
+    /**
+     * All of the custom code for deleting an collection.
+     *
+     * @return void
+     */
+    protected function _delete()
+    {    
+        $this->deleteElementTexts();
+    }
+    
     /**
      * Validate the record.
      * 
@@ -191,6 +206,8 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
     {
         if ($args['post']) {
             $post = $args['post'];
+            
+            $this->beforeSaveElements($post);
             
             // Process the collectors that have been provided on the form
             if (isset($post['collectors'])) {

@@ -1,6 +1,6 @@
 <?php
-    $collectionTitle = strip_formatting(metadata('collection', 'Name'));
-    if ($collectionTitle != '') {
+    $collectionTitle = strip_formatting(metadata('collection', array('Dublin Core', 'Title')));
+    if ($collectionTitle != '' && $collectionTitle != __('[Untitled]')) {
         $collectionTitle = ': &quot;' . $collectionTitle . '&quot; ';
     } else {
         $collectionTitle = '';
@@ -10,9 +10,10 @@
 
 <?php echo head(array('title'=> $collectionTitle, 'bodyclass'=>'collections')); ?>
 
+        <?php include('form-tabs.php'); ?>
+
         <form method="post">
             
-
             <?php include 'form.php';?>
 
             <div id="save" class="three columns omega">

@@ -54,8 +54,8 @@ class Models_Builder_CollectionTest extends PHPUnit_Framework_TestCase
             'owner_id' => self::USER_ID
         ));
         $collection = $this->builder->build();        
-        $this->assertEquals('foobar', $collection->name);
-        $this->assertEquals('foobar desc', $collection->description);
+        $this->assertEquals('foobar', strip_formatting(metadata($collection, array('Dublin Core', 'Title'))));
+        $this->assertEquals('foobar desc', strip_formatting(metadata($collection, array('Dublin Core', 'Description'))));
         $this->assertEquals("1", $collection->public);
         $this->assertEquals("0", $collection->featured);
         $this->assertEquals(self::USER_ID, $collection->owner_id,
