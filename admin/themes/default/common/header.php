@@ -72,11 +72,15 @@
             <div id="advanced-form">
                 <p><?php echo $this->formCheckbox('boolean', null, array('disableHidden' => true)); ?>
                 <?php echo __('Use boolean'); ?></p>
-                <p>Search only these record types:</p>
-                    <?php foreach (get_custom_search_record_types() as $key => $value): ?>
-                    <input type="checkbox" name="record_types[]" value="<?php echo $key; ?>" checked="checked" /> <?php echo $value; ?><br />
-                    <?php endforeach; ?><br />
-                    <?php echo $this->formSubmit(null, __('Search'), array('class' => 'blue button')); ?>
+                <?php if($searchRecordTypes = get_custom_search_record_types()): ?>
+                    <p><?php echo __('Search only these record types:'); ?></p>
+                        <?php foreach ($searchRecordTypes as $key => $value): ?>
+                        <input type="checkbox" name="record_types[]" value="<?php echo $key; ?>" checked="checked" /> <?php echo $value; ?><br />
+                        <?php endforeach; ?><br />
+                        <?php echo $this->formSubmit(null, __('Search'), array('class' => 'blue button')); ?>
+                <?php else: ?>
+                    <p><a href="<?php echo url('search/settings'); ?>"><?php echo __('Go to search settings to select record types to use.'); ?></a></p>
+                <?php endif; ?>
             </div>
         </form>
             
