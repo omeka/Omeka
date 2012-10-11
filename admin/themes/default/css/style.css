@@ -504,10 +504,10 @@ header ul {
         }
 
 #advanced-site-search {
-    width: 25px;
+    width: 10%;
     text-indent: -9999px;
     display: inline-block;
-    float: right;
+    float: left;
     padding: 0;
     margin: 0;
 }
@@ -528,13 +528,14 @@ header ul {
 }
 
 #search { 
-    float: right; 
+    width: 30%;
+    float: left; 
     display: inline-block; 
     position: absolute; 
     top: 0; 
     right: 0; 
 }
-
+    
     #search p {
         clear: both;
     }
@@ -551,22 +552,27 @@ header ul {
     }
 
     #search fieldset {
+        width: 90%;
         float: left;
+        text-align: right;
     }
 
     #search input[type=text] {
+        width: 75%;
         height: 27px;
+        float: left;
         display: inline-block;
         margin: 0;
     }
     
     #search input[type=submit] {
+        width: 25%;
+        height: 27px;
         display: inline-block;
-        margin: 0 0 0 -5px;
+        margin: 0;
         vertical-align: top;
-        width: inherit;
         padding: 0 5px;
-        float: none;
+        float: left;
     }
 
 .subhead {
