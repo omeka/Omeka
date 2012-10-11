@@ -1,25 +1,21 @@
-<?php 
+<?php
 /**
- * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
- * @access private
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
- * Initialize the session and customize the session name to prevent session
- * overlap between different applications that operate on the same server.
+ * Initialize the session.
  * 
- * @internal This implements Omeka internals and is not part of the public API.
- * @access private
- * @package Omeka
- * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
+ * Customizes the session name to prevent session overlap between different 
+ * applications that operate on the same server.
+ * 
+ * @package Omeka\Application\Resource
  */
 class Omeka_Application_Resource_Session extends Zend_Application_Resource_Session
 {
-    /**
-     * @return void
-     */
     public function init()
     {
         $this->_setOptionsFromConfig();
@@ -49,7 +45,7 @@ class Omeka_Application_Resource_Session extends Zend_Application_Resource_Sessi
         ) {
             $sessionConfig['name'] = $this->_buildSessionName();
         }
-
+        
         // Default is store sessions in the sessions table.
         if (!array_key_exists('saveHandler', $sessionConfig)) {
             $db = $bootstrap->db;
@@ -73,7 +69,7 @@ class Omeka_Application_Resource_Session extends Zend_Application_Resource_Sessi
             // sessions.
             unset($sessionConfig['saveHandler']);
         }
-
+        
         return $sessionConfig;
     }
     
@@ -89,7 +85,7 @@ class Omeka_Application_Resource_Session extends Zend_Application_Resource_Sessi
     {
         return md5(BASE_DIR);
     }
-
+    
     private function _setOptionsFromConfig()
     {
         $this->setOptions($this->_getSessionConfig());
