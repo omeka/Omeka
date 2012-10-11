@@ -34,7 +34,7 @@ class Table_SearchText extends Omeka_Db_Table
         $select->where($match, $params['query']);
         
         // Search only those record types that are configured to be searched.
-        $searchRecordTypes = Mixin_Search::getSearchRecordTypes();
+        $searchRecordTypes = get_custom_search_record_types();
         if ($searchRecordTypes) {
             $select->where('`record_type` IN (?)', array_keys($searchRecordTypes));
         }

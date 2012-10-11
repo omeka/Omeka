@@ -99,7 +99,7 @@ class Mixin_Search extends Omeka_Record_Mixin_AbstractMixin
         
         // Index this record only if it's of a type that is registered in the 
         // search_record_types filter.
-        if (!array_key_exists($recordType, self::getSearchRecordTypes())) {
+        if (!array_key_exists($recordType, get_search_record_types())) {
             return;
         }
         
@@ -124,38 +124,5 @@ class Mixin_Search extends Omeka_Record_Mixin_AbstractMixin
         $searchText->title = $title;
         $searchText->text = $text;
         $searchText->save();
-    }
-    
-    /**
-     * Get all record types that should be indexed and searchable.
-     * 
-     * Plugins may add record types via the "search_record_types" filter. The 
-     * keys should be the record's class name and the respective values should 
-     * be the human readable and internationalized version of the record type.
-     * 
-     * These record classes must extend Omeka_Record_AbstractRecord and 
-     * implement this search mixin (Mixin_Search).
-     * 
-     * @return array
-     */
-    public static function getSearchRecordTypes()
-    {
-        // Apply the filters only once.
-        static $searchRecordTypes = null;
-        
-        if (!$searchRecordTypes) {
-            $coreSearchRecordTypes = array(
-                'Item' => __('Items'), 
-                'File' => __('Files'), 
-                'Collection' => __('Collections'), 
-            );
-            try {
-                $searchRecordTypes = Zend_Registry::get('pluginbroker')
-                    ->applyFilters('search_record_types', $coreSearchRecordTypes);
-            } catch (Zend_Exception $e) {
-                $searchRecordTypes = $coreSearchRecordTypes;
-            }
-        }
-        return $searchRecordTypes;
     }
 }
