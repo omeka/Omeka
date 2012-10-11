@@ -15,7 +15,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
             <thead>
                 <tr>
                 <?php echo browse_headings(array(
-                    __('Name') => 'name',
+                    __('Title') => 'Dublin Core,Title',
                     __('Collectors') => null,
                     __('Date Added') => 'added',
                     __('Total Number of Items') => null

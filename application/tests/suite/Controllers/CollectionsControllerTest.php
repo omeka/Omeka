@@ -45,7 +45,13 @@ class Omeka_Controller_CollectionsControllerTest extends Omeka_Test_AppTestCase
         $user = $this->_getDefaultUser();
         $this->_authenticateUser($user);
         $collection = new Collection;
-        $collection->name = 'foobar';
+                
+        $collection->addElementTextsByArray(array(
+            'Dublin Core' => array(
+                'Title' => array(array('text' => 'foobar', 'html' => false)),
+            )
+        ));
+        
         $collection->owner_id = 5;
         $collection->save();
         $this->request->setPost(array(

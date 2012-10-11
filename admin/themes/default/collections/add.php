@@ -1,8 +1,10 @@
 <?php 
 $pageTitle = __('Add a Collection');
 echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
-        
-            <form method="post">
+
+<?php include('form-tabs.php'); ?>
+       
+            <form method="post" enctype="multipart/form-data" id="collection-form" action="">
                 <?php include 'form.php';?>
                 <div id="save" class="three columns omega">
                     <div class="panel">

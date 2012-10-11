@@ -1,29 +1,46 @@
-<?php echo flash(); ?>
-
-<div class="seven columns alpha">
-
-    <div class="field two columns alpha">
-        <?php echo $this->formLabel('name', __('Name'), array('class' => 'required')); ?>
-    </div>
+<?php echo js_tag('tiny_mce/tiny_mce'); 
+// echo js_tag('tiny_mce/tiny_mce_src'); // Use the 'tiny_mce_src' file for debugging.
+?>
+<?php echo js_tag('elements'); ?>
+<?php echo js_tag('tabs'); ?>
+<script type="text/javascript" charset="utf-8">
+//<![CDATA[
+// TinyMCE hates document.ready.
+jQuery(window).load(function () {
+    Omeka.Tabs.initialize();
     
-    <div class="inputs five columns omega">
-        <?php echo $this->formText('name', $collection->name, array('size'=>'40')); ?>
-    </div>
-    
-    <div class="field two columns alpha">
-        <?php echo $this->formLabel('description', __('Description')); ?>
-    </div>
+    Omeka.wysiwyg({
+        mode: "none",
+        forced_root_block: ""
+    });
+
+    // Must run the element form scripts AFTER reseting textarea ids.
+    jQuery(document).trigger('omeka:elementformload');
+
+});
+
+jQuery(document).bind('omeka:elementformload', function (event) {
+    Omeka.Elements.makeElementControls(event.target, <?php echo js_escape(url('elements/element-form')); ?>,'Item'<?php if ($id = metadata('collection', 'id')) echo ', '.$id; ?>);
+    Omeka.Elements.enableWysiwyg(event.target);
+});
+//]]>   
+</script>
+
+<div class="seven columns alpha" id="edit-form">
+
+    <?php echo flash(); ?>
         
-    <div class="inputs five columns omega">
-    <?php echo $this->formTextarea('description', $collection->description, array('rows'=>'10', 'cols'=>'60')); ?>
-    </div>
-    
-    <div class="field two columns alpha">
-        <?php echo $this->formLabel('collectors', __('Collectors')); ?>
-    </div>
-    <div class="inputs five columns omega">
-        <?php echo $this->formTextarea('collectors', $collection->collectors, array('rows' => '10', 'cols' => '60')); 
-    ?>
+    <div id="collection-metadata">
+    <?php foreach ($tabs as $tabName => $tabContent): ?>
+        <?php if (!empty($tabContent)): ?>
+            <div id="<?php echo text_to_id(html_escape($tabName)); ?>-metadata">
+            <fieldset class="set">
+                <h2><?php echo html_escape(__($tabName)); ?></h2>
+                <?php echo $tabContent; ?>        
+            </fieldset>
+            </div>     
+        <?php endif; ?>
+    <?php endforeach; ?>
     </div>
     
 </div>
