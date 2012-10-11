@@ -11,7 +11,9 @@ class Job_SearchTextIndex extends Omeka_Job_AbstractJob
         $sql = "TRUNCATE TABLE {$this->_db->SearchText}";
         $this->_db->query($sql);
         
-        foreach (Mixin_Search::getSearchRecordTypes() as $recordType) {
+        foreach (get_custom_search_record_types() as $key => $value) {
+            
+            $recordType = is_string($key) ? $key : $value;
             
             if (!class_exists($recordType)) {
                 // The class does not exist or cannot be found.

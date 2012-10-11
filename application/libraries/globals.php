@@ -356,6 +356,69 @@ function is_admin_theme()
 }
 
 /**
+ * Get all record types that may be indexed and searchable.
+ * 
+ * Plugins may add record types via the "search_record_types" filter. The 
+ * keys should be the record's class name and the respective values should 
+ * be the human readable and internationalized version of the record type.
+ * 
+ * These record classes must extend Omeka_Record_AbstractRecord and 
+ * implement this search mixin (Mixin_Search).
+ * 
+ * @return array
+ */
+function get_search_record_types()
+{
+    // Apply the filters only once.
+    static $searchRecordTypes = null;
+    
+    if ($searchRecordTypes) {
+        return $searchRecordTypes;
+    }
+    
+    $coreSearchRecordTypes = array(
+        'Item' => __('Item'), 
+        'File' => __('File'), 
+        'Collection' => __('Collection'), 
+    );
+    
+    try {
+        $searchRecordTypes = Zend_Registry::get('pluginbroker')
+            ->applyFilters('search_record_types', $coreSearchRecordTypes);
+    } catch (Zend_Exception $e) {
+        $searchRecordTypes = $coreSearchRecordTypes;
+    }
+    
+    return $searchRecordTypes;
+}
+
+/**
+ * Get all record types that have been customized to be searchable.
+ * 
+ * @uses get_search_record_types()
+ * @return array
+ */
+function get_custom_search_record_types()
+{
+    // Get the custom search record types from the database.
+    $customSearchRecordTypes = unserialize(get_option('search_record_types'));
+    if (!is_array($customSearchRecordTypes)) {
+        $customSearchRecordTypes = array();
+    }
+    
+    // Compare the custom list to the full list.
+    $searchRecordTypes = get_search_record_types();
+    foreach ($searchRecordTypes as $key => $value) {
+        // Remove record types that have been omitted.
+        if (!in_array($key, $customSearchRecordTypes)) {
+            unset($searchRecordTypes[$key]);
+        }
+    }
+    
+    return $searchRecordTypes;
+}
+
+/**
  * Insert a new item into the Omeka database.
  *
  * @uses Builder_Item
