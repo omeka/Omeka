@@ -1,9 +1,10 @@
 <?php
 /**
- * Bootstrap the Omeka application.
+ * Omeka
  * 
- * @copyright Roy Rosenzweig Center for History and New Media, 2009-2012
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
+ * @package Omeka
  */
 
 // Define the current version of Omeka.
@@ -111,6 +112,14 @@ if (extension_loaded('zlib')) {
     ini_set('zlib.output_compression_level', '5');
 }
 
+// Strip slashes from superglobals to avoid problems with PHP's magic_quotes.
+if (get_magic_quotes_gpc()) {
+    $_GET = stripslashes_deep($_GET);
+    $_POST = stripslashes_deep($_POST);
+    $_COOKIE = stripslashes_deep($_COOKIE);
+    $_REQUEST = stripslashes_deep($_REQUEST);
+}
+
 // Add the libraries and models directories to the include path.
 set_include_path(LIB_DIR. PATH_SEPARATOR . MODEL_DIR . PATH_SEPARATOR . get_include_path());
 
@@ -125,3 +134,14 @@ $autoloader->suppressNotFoundWarnings(true);
 
 // Define the theme directory path.
 define('THEME_DIR', defined('ADMIN') ? ADMIN_THEME_DIR : PUBLIC_THEME_DIR);
+
+/**
+ * Strip slashes recursively.
+ *
+ * @param array|string $value
+ * @return array
+ */
+function stripslashes_deep($value)
+{
+    return is_array($value) ? array_map('stripslashes_deep', $value) : stripslashes($value);
+}

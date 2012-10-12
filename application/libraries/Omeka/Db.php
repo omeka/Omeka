@@ -1,8 +1,9 @@
-<?php 
+<?php
 /**
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
@@ -10,6 +11,8 @@
  *
  * While mostly a wrapper for a Zend_Db_Adapter instance, this also provides 
  * shortcuts for retrieving table objects and table names for use in SQL.
+ * 
+ * @package Omeka\Db
  */
 class Omeka_Db
 {
@@ -106,7 +109,6 @@ class Omeka_Db
      * Set logger for SQL queries.
      *
      * @param Zend_Log $logger
-     * @return void
      */
     public function setLogger($logger)
     {
@@ -189,7 +191,6 @@ class Omeka_Db
      *
      * @param string $alias
      * @param Omeka_Db_Table $table
-     * @return void
      */
     public function setTable($alias, Omeka_Db_Table $table)
     {

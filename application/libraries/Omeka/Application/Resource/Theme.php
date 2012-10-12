@@ -1,18 +1,15 @@
 <?php 
 /**
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
- * @access private
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
- 
+
 /**
  * Set up the controller plugin that determines theme view script paths.
- *
- * @internal This implements Omeka internals and is not part of the public API.
- * @access private
- * @package Omeka
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
+ * 
+ * @package Omeka\Application\Resource
  */
 class Omeka_Application_Resource_Theme extends Zend_Application_Resource_ResourceAbstract
 {
@@ -26,15 +23,13 @@ class Omeka_Application_Resource_Theme extends Zend_Application_Resource_Resourc
     
     /**
      * Theme base URI.
+     * 
      * Set by application config.
      *
      * @var string
      */
     protected $_webBasePath;
     
-    /**
-     * @return void
-     */
     public function init()
     {
         // We need the front controller to be set up if we're initializing the
@@ -59,7 +54,6 @@ class Omeka_Application_Resource_Theme extends Zend_Application_Resource_Resourc
      * Used to allow {@link $_basePath} to be set by application config.
      *
      * @param string $basePath
-     * @return void
      */
     public function setbasepath($basePath)
     {
@@ -71,7 +65,6 @@ class Omeka_Application_Resource_Theme extends Zend_Application_Resource_Resourc
      * Used to allow {@link $_webBasePath} to be set by application config.
      *
      * @param string $webBasePath
-     * @return void
      */
     public function setwebbasepath($webBasePath)
     {
