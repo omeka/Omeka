@@ -459,6 +459,7 @@ p, li {
 header {
     width: 100%;
     background-color: #2A2520;
+    border: solid #9d5b41;
     border-image: url('../images/red-bg.jpg') 5 repeat;
         -webkit-border-image: url('../images/red-bg.jpg') 5 repeat;
         -moz-border-image: url('../images/red-bg.jpg') 5 repeat;
@@ -854,11 +855,12 @@ header nav {
 
 #content { 
     background-image: url('../images/content_bg.jpg');
+    border: solid #9d5b41;
     border-image: url('../images/red-bg.jpg') 5 repeat; 
         -webkit-border-image: url('../images/red-bg.jpg') 5 repeat;
         -moz-border-image: url('../images/red-bg.jpg') 5 repeat; 
-        -o-border-image: url('../images/red-bg.jpg') 50 repeat; 
-    border-width: .375em 0 0 0; 
+        -o-border-image: url('../images/red-bg.jpg') 5 repeat; 
+    border-width: 5px 0 0 0; 
     box-shadow: 0 0 1px #999999; 
         -webkit-box-shadow: 0 0 1px #999999; 
         -moz-box-shadow: 0 0 1px #999999; 
