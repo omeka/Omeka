@@ -22,73 +22,75 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
                 e.stopPropagation();
             });    
         }
-    	
-    	function updateSelectHomepageOptions() {
+        
+        function updateSelectHomepageOptions() {
             var hPages = {}
             hPages[''] = '[Default]'; 
             jQuery( 'div.navigation_main_link_header input[type="checkbox"]' ).each(function(i,e) {
                 hPages[jQuery(e).next().attr('href')] = jQuery(e).next().text();
             });
-	        var selectedValue = jQuery('#navigation_homepage_select option').filter(":selected").val();
-    	    jQuery('#navigation_homepage_select').empty();
-    	    for(var i in hPages) {
-    	        jQuery('#navigation_homepage_select').append('<option value="' + i + '" label="' + hPages[i] + '">' + hPages[i]  + '</option>')
-    	    }
-    	    jQuery('#navigation_homepage_select option[value="' + selectedValue + '"]').attr('selected', 'selected');
-    	}
+            var selectedValue = jQuery('#navigation_homepage_select option').filter(":selected").val();
+            jQuery('#navigation_homepage_select').empty();
+            for(var i in hPages) {
+                jQuery('#navigation_homepage_select').append('<option value="' + i + '" label="' + hPages[i] + '">' + hPages[i]  + '</option>')
+            }
+            jQuery('#navigation_homepage_select option[value="' + selectedValue + '"]').attr('selected', 'selected');
+        }
 
-    	function updateHideButtons() {
+        function updateHideButtons() {
             jQuery('div.navigation_main_link_header > input[type="checkbox"]').each(function(i, e) {
                 var headerDiv = jQuery(e).parent(); 
                 if (!headerDiv.find('div[class="navigation_main_list_hide"]').length) {
-        	        headerDiv.append('<div class="navigation_main_list_hide">&#9654;</div>');
-    	            headerDiv.find('.navigation_main_list_hide').click(function(ee) {
-              	        ee.preventDefault();
-              	        var d = jQuery(ee.target).parent().next();
-              	        d.toggle();
-              	        if (d.is(':hidden')) {
-              	            jQuery(ee.target).html('&#9654;'); // right arrow
-              	        } else {
-              	            jQuery(ee.target).html('&#9660;'); // down arrow
-              	        }
-              	    });
-              	    headerDiv.next().hide();       
-        	    }
+                    headerDiv.append('<div class="navigation_main_list_hide hidden">&#9654;</div>');
+                    headerDiv.find('.navigation_main_list_hide').click(function(ee) {
+                        ee.preventDefault();
+                        var d = jQuery(ee.target).parent().next();
+                        d.toggle();
+                        if (d.is(':hidden')) {
+                          jQuery(ee.target).html('&#9654;'); // right arrow
+                          headerDiv.find('.navigation_main_list_hide').removeClass('revealed').addClass('hidden');
+                        } else {
+                          jQuery(ee.target).html('&#9660;'); // down arrow
+                          headerDiv.find('.navigation_main_list_hide').removeClass('hidden').addClass('revealed');
+                        }
+                      });
+                      headerDiv.next().hide();       
+                }
             });
-    	}
+        }
 
-    	function updateVisitButtons() {
+        function updateVisitButtons() {
             jQuery('div.navigation_main_link_header > input[type="checkbox"]').each(function(i, e) {
                 var hiddenInfo = jQuery.parseJSON(jQuery(e).val());
                 var buttonsDiv = jQuery(e).parent().next().find('div.navigation_main_link_buttons'); 
                 if (!buttonsDiv.find('a[class="navigation_main_list_visit blue button"]').length) {
-        	        buttonsDiv.append('<a class="navigation_main_list_visit blue button" href="' + hiddenInfo['uri'] + '">Visit</a>');
-    	            buttonsDiv.find('.navigation_main_list_visit').click(function(ee) {
-              	        ee.preventDefault();
-              	        var url = jQuery(ee.target).parent().parent().find('.navigation_main_link_uri').val();
+                    buttonsDiv.append('<a class="navigation_main_list_visit blue button" href="' + hiddenInfo['uri'] + '">Visit</a>');
+                    buttonsDiv.find('.navigation_main_list_visit').click(function(ee) {
+                          ee.preventDefault();
+                          var url = jQuery(ee.target).parent().parent().find('.navigation_main_link_uri').val();
                         window.open(url);
-              	    });       
-        	    }
+                      });       
+                }
             });
-    	}
-    	
-    	function updateDeleteButtons() {
-    	    jQuery( 'input.can_delete_nav_link').each(function(i,e) {
-    	        var buttonsDiv = jQuery(e).parent().next().find('div.navigation_main_link_buttons'); 
-    	        if (!buttonsDiv.children('a[class="navigation_main_list_delete red button"]').length) {
-    	            buttonsDiv.append('<a class="navigation_main_list_delete red button" href="">Delete</a>');
-           	        buttonsDiv.children('.navigation_main_list_delete').click(function(ee) {
-           	            ee.preventDefault();
-               	        jQuery(ee.target).parent().parent().parent().parent().remove(); // removes li element
-               	        updateNavList();
-               	        updateSelectHomepageOptions();
-           	        });
-    	        } 
-    	    });
-    	}
-    	    	
-    	function updateNavLinkEditForms() {
-    	    jQuery( 'div.navigation_main_link_header input[type="checkbox"]' ).each(function(i,e) {
+        }
+        
+        function updateDeleteButtons() {
+            jQuery( 'input.can_delete_nav_link').each(function(i,e) {
+                var buttonsDiv = jQuery(e).parent().next().find('div.navigation_main_link_buttons'); 
+                if (!buttonsDiv.children('a[class="navigation_main_list_delete red button"]').length) {
+                    buttonsDiv.append('<a class="navigation_main_list_delete red button" href="">Delete</a>');
+                       buttonsDiv.children('.navigation_main_list_delete').click(function(ee) {
+                           ee.preventDefault();
+                           jQuery(ee.target).parent().parent().parent().parent().remove(); // removes li element
+                           updateNavList();
+                           updateSelectHomepageOptions();
+                       });
+                } 
+            });
+        }
+                
+        function updateNavLinkEditForms() {
+            jQuery( 'div.navigation_main_link_header input[type="checkbox"]' ).each(function(i,e) {
                 var hiddenInfo = jQuery.parseJSON(jQuery(e).val());
                 var bodyDiv = jQuery(e).parent().next(); 
                 bodyDiv.find('.navigation_main_link_label').val(hiddenInfo['label']);
@@ -96,13 +98,13 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
                 if (!hiddenInfo['can_delete']) {
                     bodyDiv.find('.navigation_main_link_uri').attr('disabled', 'disabled');
                 }
-	        });
-    	}
-    	
-    	function addNewNavLinkForm() {
-    	    // add the new nav link add button
-        	jQuery( '#new_nav_link_button_link' ).click(function(e) {
-        	    e.preventDefault();
+            });
+        }
+        
+        function addNewNavLinkForm() {
+            // add the new nav link add button
+            jQuery( '#new_nav_link_button_link' ).click(function(e) {
+                e.preventDefault();
                 var n_label = jQuery( '#new_nav_link_label' ).val();
                 var n_uri = jQuery( '#new_nav_link_uri' ).val();
                 if (n_label && n_uri) {
@@ -129,9 +131,9 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
                     updateVisitButtons();
                     updateHideButtons();
                 }
-        	});
-    	}
-    	    	                
+            });
+        }
+                                
         // add data to edit nav link forms
         updateNavLinkEditForms();
         
@@ -142,23 +144,23 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
         updateNavList();
 
         // add delete buttons to list
-    	updateDeleteButtons();
-    	
+        updateDeleteButtons();
+        
         // add the new navigation link form
         addNewNavLinkForm();
         
         // add the hide buttons
         updateHideButtons();
-    	
-    	// set up form submission
-    	jQuery('#navigation_form').submit(function(e) {
-    	    
-    	    // add ids to li elements so that we can pull out the parent/child relationships
-        	jQuery('#navigation_main_list li').each(function(i, e) {
+        
+        // set up form submission
+        jQuery('#navigation_form').submit(function(e) {
+            
+            // add ids to li elements so that we can pull out the parent/child relationships
+            jQuery('#navigation_main_list li').each(function(i, e) {
                 jQuery(e).attr('id', "list_" + i);
             });
-        	var parentChildData = jQuery("#navigation_main_list").nestedSortable('toArray', {startDepthCount: 0});
-    	    
+            var parentChildData = jQuery("#navigation_main_list").nestedSortable('toArray', {startDepthCount: 0});
+            
             // get link data
             var linkData = [];
             jQuery('div.navigation_main_link_header > input[type="checkbox"]').each(function(i, e) {
@@ -189,7 +191,7 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
             
             // store link data in hidden element
             jQuery('#navigation_hidden').val(JSON.stringify(linkData)); 
-    	});
+        });
     });
 //]]>    
 </script>
