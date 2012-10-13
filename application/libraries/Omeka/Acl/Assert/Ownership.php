@@ -1,18 +1,18 @@
 <?php
 /**
- * @copyright Center for History and New Media, 2011
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
- * Assertion to take account of "All" and "Self" sub-permissions for
- * records.
+ * Assertion to take account of "All" and "Self" sub-permissions for records.
  *
- * A common use is the "edit" and "delete" permissions for Items and
- * other "ownable" records.
- *
- * @package Omeka
+ * A common use is the "edit" and "delete" permissions for Items and other 
+ * "ownable" records.
+ * 
+ * @package Omeka\Acl
  */
 class Omeka_Acl_Assert_Ownership implements Zend_Acl_Assert_Interface
 {
