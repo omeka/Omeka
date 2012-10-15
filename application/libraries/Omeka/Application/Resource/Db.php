@@ -1,18 +1,15 @@
-<?php 
+<?php
 /**
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
- * @access private
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
  * Set up the default database connection for Omeka.
- *
- * @internal This implements Omeka internals and is not part of the public API.
- * @access private
- * @package Omeka
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
+ * 
+ * @package Omeka\Application\Resource
  */
 class Omeka_Application_Resource_Db extends Zend_Application_Resource_Db
 {
@@ -78,10 +75,10 @@ class Omeka_Application_Resource_Db extends Zend_Application_Resource_Db
     
     /**
      * Set the path to the database configuration file.
+     * 
      * Allows {@link $_iniPath} to be set by the app configuration.
      *
      * @param string $path
-     * @return void
      */
     public function setinipath($path)
     {

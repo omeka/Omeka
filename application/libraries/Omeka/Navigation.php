@@ -1,16 +1,15 @@
 <?php
 /**
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
  * Customized subclass of Zend Framework's Zend_Navigation class.
- *
- *
- * @package Omeka
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
+ * 
+ * @package Omeka\Navigation
  */
 class Omeka_Navigation extends Zend_Navigation
 {
@@ -104,6 +103,7 @@ class Omeka_Navigation extends Zend_Navigation
      * If the associated uri of any page is invalid, it will not add that page to the navigation. 
      * Also, it removes expired pages from formerly active plugins and other former handlers of the filter.
      * 
+     * @param String $filterName    The name of the filter  
      */
     public function addPagesFromFilter($filterName='public_navigation_main') 
     {                
@@ -167,7 +167,7 @@ class Omeka_Navigation extends Zend_Navigation
             }
         }
         foreach($expiredPages as $expiredPage) {
-            $this->removePage($expiredPage);
+            $this->removePageRecursive($expiredPage);
         }
     }
         
@@ -188,12 +188,30 @@ class Omeka_Navigation extends Zend_Navigation
     /**
      * Returns the unique id for the page, which can be used to determine whether it can be added to the navigation
      *
-     * @param String $href
+     * @param String $href The href of the page.
      * @return String
      */
     public function createPageUid($href) 
     {
         return $href;
+    }
+
+    /**
+     * Recursively removes the given page from the navigation, including all subpages
+     *
+     * @param Zend_Navigation_Page $page
+     * @return boolean Whether the page was removed
+     */
+    public function removePageRecursive(Zend_Navigation_Page $page)
+    {        
+        $removed = $this->removePage($page);
+
+        $iterator = new RecursiveIteratorIterator($this, RecursiveIteratorIterator::SELF_FIRST);
+        foreach ($iterator as $pageContainer) {
+            $removed = $removed || $pageContainer->removePage($page);
+        }
+
+        return $removed;
     }
     
     /**
@@ -205,7 +223,7 @@ class Omeka_Navigation extends Zend_Navigation
      */
     public static function getNavigationOptionValueForInstall($optionName) 
     {
-        $v = '';
+        $value = '';
         $nav = new Omeka_Navigation();
         switch($optionName) {
             case self::PUBLIC_NAVIGATION_MAIN_OPTION_NAME:
@@ -214,8 +232,8 @@ class Omeka_Navigation extends Zend_Navigation
         }
                 
         if ($nav->count()) {
-            $v = json_encode($nav->toArray());
+            $value = json_encode($nav->toArray());
         }
-        return $v;
+        return $value;
     }
 }

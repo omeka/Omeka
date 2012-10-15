@@ -1,11 +1,12 @@
 <?php
 /**
+ * Omeka
+ * 
  * Bootstrap file for background processes.
  * 
- * @access private
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  * @package Omeka
- * @copyright Copyright (c) 2009 Center for History and New Media
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
  */
 
 // Require the necessary files.

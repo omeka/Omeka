@@ -2,8 +2,8 @@
 $pageTitle = __('Search Settings');
 echo head(array('title' => $pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary'));
 ?>
-<div class="seven columns alpha">
 <?php echo common('settings-nav'); ?>
+<div class="seven columns alpha">
 <?php echo flash(); ?>
 <h2>Record Types</h2>
 <p>Here you may customize which types of records will be searchable in Omeka.</p>

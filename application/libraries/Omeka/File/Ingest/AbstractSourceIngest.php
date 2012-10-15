@@ -1,26 +1,24 @@
 <?php
 /**
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
  * This abstract class encapsulates all the behavior that facilitates file 
- * ingest based on the assumption that each file can be retrieved via a
- * string containing both the name and location of that file.  
+ * ingest based on the assumption that each file can be retrieved via a string 
+ * containing both the name and location of that file.  
  * 
- * Applies to: URLs, file paths on a server.
- * Does not apply to: direct HTTP uploads.
+ * Applies to: URLs, file paths on a server. Does not apply to: direct HTTP 
+ * uploads.
  * 
  * Also, if the original filename is not properly represented by the source 
  * identifier (incorrect file extension, etc.), a more accurate filename can be
  * provided via the 'filename' attribute.
  * 
- * @internal This implements Omeka internals and is not part of the public API.
- * @access private
- * @package Omeka
- * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
+ * @package Omeka\File\Ingest
  */
 abstract class Omeka_File_Ingest_AbstractSourceIngest extends Omeka_File_Ingest_AbstractIngest
 {

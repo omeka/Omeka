@@ -1,15 +1,15 @@
 <?php
 /**
- * @copyright Roy Rosenzweig Center for History and New Media, 2009
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
  * Initializes controller action helpers.
- *
- * @package Omeka
- * @copyright Roy Rosenzweig Center for History and New Media, 2009
+ * 
+ * @package Omeka\Application\Resource
  */
 class Omeka_Application_Resource_Helpers extends Zend_Application_Resource_ResourceAbstract
 {
@@ -19,10 +19,10 @@ class Omeka_Application_Resource_Helpers extends Zend_Application_Resource_Resou
         $this->_initViewRenderer();
         $this->_initResponseContexts();
         $this->_initAclHelper();
-
+        
         Zend_Controller_Action_HelperBroker::addPath(APP_DIR . '/controllers/helpers', 'Omeka_Controller_Action_Helper');
     }
-
+    
     private function _initDbHelper()
     {
         $this->getBootstrap()->bootstrap('Db');
@@ -30,7 +30,7 @@ class Omeka_Application_Resource_Helpers extends Zend_Application_Resource_Resou
             $this->getBootstrap()->getResource('Db'));
         Zend_Controller_Action_HelperBroker::addHelper($dbHelper);
     }
-
+    
     private function _initViewRenderer()
     {
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
@@ -41,7 +41,7 @@ class Omeka_Application_Resource_Helpers extends Zend_Application_Resource_Resou
         // Register the view object so that it can be called by the view helpers.
         Zend_Registry::set('view', $view);
     }
-
+    
     /**
      * Define the custom response format contexts for Omeka.
      *
@@ -67,19 +67,18 @@ class Omeka_Application_Resource_Helpers extends Zend_Application_Resource_Resou
     {
         Zend_Controller_Action_HelperBroker::addHelper(new Omeka_Controller_Action_Helper_ContextSwitch);
         $contexts = Zend_Controller_Action_HelperBroker::getStaticHelper('contextSwitch');
-
+        
         $contexts->setContextParam('output');
-
+        
         $contextArray = self::getDefaultResponseContexts();
-
+        
         if ($pluginBroker = $this->getBootstrap()->getResource('PluginBroker')) {
             $contextArray = $pluginBroker->applyFilters('define_response_contexts', $contextArray);
         }
-
+        
         $contexts->addContexts($contextArray);
     }
-
-
+    
     /**
      * Returns the default response contexts for Omeka.
      *
@@ -110,7 +109,7 @@ class Omeka_Application_Resource_Helpers extends Zend_Application_Resource_Resou
              )
          );
     }
-
+    
     private function _initAclHelper()
     {
         $acl = $this->_bootstrap->bootstrap('Acl')->acl;
@@ -119,5 +118,4 @@ class Omeka_Application_Resource_Helpers extends Zend_Application_Resource_Resou
         $aclChecker = new Omeka_Controller_Action_Helper_Acl($acl, $currentUser);
         Zend_Controller_Action_HelperBroker::addHelper($aclChecker);
     }
-
 }

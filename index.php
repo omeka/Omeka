@@ -1,15 +1,16 @@
 <?php
 /**
- * Bootstrap the public interface.
- *
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2012
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
+ * @package Omeka
  */
 
 // Bootstrap the application.
 require_once 'bootstrap.php';
 
-// Configure the bootstrap and run the application.
+// Configure, initialize, and run the application.
 $application = new Omeka_Application(APPLICATION_ENV);
 $application->getBootstrap()->setOptions(array(
     'resources' => array(

@@ -1,18 +1,15 @@
 <?php
 /**
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
- * @access private
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
- * Overrides Omeka's normal routing when the database needs to be upgraded. 
- *
- * @internal This implements Omeka internals and is not part of the public API.
- * @access private
- * @package Omeka
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
+ * Overrides Omeka's normal routing when the database needs to be upgraded.
+ * 
+ * @package Omeka\Controller\Plugin
  */
 class Omeka_Controller_Plugin_Upgrade extends Zend_Controller_Plugin_Abstract
 {

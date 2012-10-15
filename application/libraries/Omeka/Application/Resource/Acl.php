@@ -1,24 +1,15 @@
 <?php 
 /**
- * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
- * @access private
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
- * Initializes Omeka's ACL
+ * Initializes Omeka's ACL.
  * 
- * @internal This implements Omeka internals and is not part of the public API.
- * @access private
- * @since 0.10 Plugins must use the 'define_acl' hook to modify ACL definitions.
- * @uses Zend_Acl
- * @todo ACL settings should be stored in the database.  When ACL settings
- * are properly stored in a normalized database configuration, then this
- * method should populate a new Acl instance with those settings and store
- * that Acl object in a session for quick access.
- * @package Omeka
- * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
+ * @package Omeka\Application\Resource
  */
 class Omeka_Application_Resource_Acl extends Zend_Application_Resource_ResourceAbstract
 {

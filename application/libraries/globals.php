@@ -1,7 +1,11 @@
 <?php
 /**
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * Omeka
+ * 
+ * Global functions.
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  * @package Omeka
  */
 
@@ -975,8 +979,8 @@ function head_js($includeDefaults = true)
             $headScript->prependFile(src('jquery-ui', $dir, 'js'))
                        ->prependFile(src('jquery', $dir, 'js'));
         } else {
-            $headScript->prependFile('https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js')
-                       ->prependFile('https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js');
+            $headScript->prependFile('https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js')
+                       ->prependFile('https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js');
         }
     }
     return $headScript;
