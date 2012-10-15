@@ -1,18 +1,16 @@
-<?php 
+<?php
 /**
- * @version $Id$
- * @copyright Center for History and New Media, 2007-2008
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
- **/
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
+ */
 
 /**
- * A Zend_Filter implementation that uses HtmlPurifier to purify a string
- *
- * @package Omeka
- * @author CHNM
- * @copyright Center for History and New Media, 2007-2008
- **/
+ * A Zend_Filter implementation that uses HtmlPurifier to purify a string.
+ * 
+ * @package Omeka\Filter
+ */
 class Omeka_Filter_HtmlPurifier implements Zend_Filter_Interface
 {
     private static $_purifier = null;

@@ -1,16 +1,16 @@
-<?php 
+<?php
 /**
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
- * A Zend_Filter implementation that converts any boolean value passed to 
- * it to an integer: 1 or 0.
+ * A Zend_Filter implementation that converts any boolean value passed to it to 
+ * an integer: 1 or 0.
  * 
- * @package Omeka
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
+ * @package Omeka\Filter
  */
 class Omeka_Filter_Boolean implements Zend_Filter_Interface
 {
