@@ -971,11 +971,11 @@ function head_js($includeDefaults = true)
     if ($includeDefaults) {
         $dir = 'javascripts';
         $config = Zend_Registry::get('bootstrap')->getResource('Config');
-        $useInternalJs = isset($config->theme->useInternalJavascripts)
-                       ? (bool) $config->theme->useInternalJavascripts
+        $useInternalAssets = isset($config->theme->useInternalAssets)
+                       ? (bool) $config->theme->useInternalAssets
                        : false;
         $headScript->prependScript('jQuery.noConflict();');
-        if ($useInternalJs) {
+        if ($useInternalAssets) {
             $headScript->prependFile(src('jquery-ui', $dir, 'js'))
                        ->prependFile(src('jquery', $dir, 'js'));
         } else {
