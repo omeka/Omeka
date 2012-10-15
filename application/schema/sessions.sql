@@ -4,4 +4,4 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%sessions` (
 `lifetime` int,
 `data` text,
 PRIMARY KEY (`id`)
-) ENGINE=InnoDb;
+) ENGINE=InnoDB;

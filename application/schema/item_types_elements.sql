@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%item_types_elements` (
   UNIQUE KEY `item_type_id_element_id` (`item_type_id`,`element_id`),
   KEY `item_type_id` (`item_type_id`),
   KEY `element_id` (`element_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `%PREFIX%item_types_elements` VALUES 
 (1, 1, 7, null),

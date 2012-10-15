@@ -6,4 +6,4 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%plugins` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `active_idx` (`active`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

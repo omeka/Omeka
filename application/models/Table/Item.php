@@ -86,36 +86,34 @@ class Table_Item extends Omeka_Db_Table
     protected function _simpleSearch($select, $terms)
     {
         $db = $this->getDb();
-        $quotedTerms = $db->quote($terms);
+        $quotedTerms = $db->quote("%{$terms}%");
         
         // Build elements query.
         $elementsQuery = "
-        SELECT i.id as item_id, MATCH (etx.text) AGAINST ($quotedTerms) as rank 
-        FROM $db->Item i 
-        INNER JOIN $db->ElementText etx ON etx.record_id = i.id 
+        SELECT etx.record_id AS item_id
+        FROM $db->ElementText etx
         WHERE etx.record_type = 'Item' 
-        AND MATCH (etx.text) AGAINST ($quotedTerms)";
+        AND etx.text LIKE $quotedTerms";
         
         // Build tags query.
-        $rank = 1;
         $tagList = preg_split('/\s+/', $terms);
         // Make sure the tag list contains the whole search string, just in case 
         // that is found
         $tagList[] = $terms;
         $tagsSelect = new Omeka_Db_Select;
-        $tagsSelect->from(array('i' => $db->Item), array('item_id' => 'i.id', 'rank' => new Zend_Db_Expr($rank)))
-                   ->joinInner(array('tg' => $db->Taggings), 'tg.relation_id = i.id AND tg.type = "Item"', array())
+        $tagsSelect->from(array('tg' => $db->Taggings), array('item_id' => 'tg.relation_id'))
                    ->joinInner(array('t' => $db->Tag), 't.id = tg.tag_id', array());
         foreach ($tagList as $tag) {
             $tagsSelect->orWhere('t.name LIKE ?', $tag);
         }
+        $tagsSelect->where("tg.type = 'Item'");
         $tagsQuery = (string) $tagsSelect;
         
         // INNER JOIN to the main SQL query and then ORDER BY rank DESC
         $query = "$elementsQuery UNION $tagsQuery";
         $select->joinInner(array('s' => new Zend_Db_Expr("($query)")), 
                            's.item_id = items.id', 
-                           array())->order('s.rank DESC');
+                           array());
     }
     
     /**
