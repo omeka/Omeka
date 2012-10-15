@@ -1,19 +1,17 @@
-<?php 
+<?php
 /**
- * @copyright Roy Rosenzweig Center for History and New Media, 2011
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
  * Wrapper for Zend_Http_Client.
  *
- * Adds the following functionality:
- *
- * Retries on timeouts.
- *
- * @package Omeka
- * @copyright Roy Rosenzweig Center for History and New Media, 2011
+ * Adds the following functionality: retries on timeouts.
+ * 
+ * @package Omeka\Http
  */
 class Omeka_Http_Client extends Zend_Http_Client
 {
