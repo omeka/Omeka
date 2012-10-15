@@ -91,49 +91,6 @@ Omeka.Items.changeItemType = function (changeItemTypeUrl, itemId) {
     });
 };
 
-/**
- * Add container for tag remove buttons.
- */
-Omeka.Items.createTagsHeaderAndList = function () {
-    if (!jQuery('#all-tags-list').length) {
-        var allTags = jQuery('#all-tags');
-        allTags.append('<h3>All Tags</h3>');
-        allTags.append('<ul id="all-tags-list"/>');
-    }
-};
-
-/**
- * Add remove/undo buttons for removing a tag.
- *
- * @param {string} tag Tag to add buttons for.
- * @param {string} addImage URL for add button image.
- * @param {string} deleteImage URL for delete button image.
- */
-Omeka.Items.addTagElement = function (tag, addImage, deleteImage) {
-    Omeka.Items.createTagsHeaderAndList();
-    var tagLi = jQuery('<li class="tag-delete"/>');
-
-    var undoButton = jQuery('<input type="image" class="undo_remove_tag" />').appendTo(tagLi);
-    undoButton.attr('src', addImage).val(tag);
-    undoButton.click(function (event) {
-        event.preventDefault();
-        Omeka.Items.toggleTag(this);
-    });
-
-    var deleteButton = jQuery('<input type="image" class="remove_tag" />').appendTo(tagLi);
-    deleteButton.attr('src', deleteImage).val(tag);
-    deleteButton.click(function (event) {
-        event.preventDefault();
-        Omeka.Items.toggleTag(this);
-    });
-
-    tagLi.append(tag);
-
-    jQuery('#all-tags-list').append(tagLi);
-
-    Omeka.Items.updateTagsField();
-    return false;
-};
 
 /**
  * Add tag elements for new tags from the input box.
@@ -146,7 +103,7 @@ Omeka.Items.addTags = function (tags, addImage, deleteImage) {
     var newTags = tags.split(Omeka.Items.tagDelimiter);
 
     // only add tags from the input box that are new
-    var oldTags = jQuery('#all-tags-list input.remove_tag').map(function () {
+    var oldTags = jQuery('#all-tags-list input.remove-tag').map(function () {
         return jQuery.trim(this.value);
     });
 
@@ -177,7 +134,7 @@ Omeka.Items.updateTagsField = function () {
     var tagsToAdd = [];
     var tagsToDelete = [];
 
-    jQuery('#all-tags-list input.remove_tag').each(function () {
+    jQuery('#all-tags-list input.remove-tag').each(function () {
         var button = jQuery(this);
         var tag = jQuery.trim(button.val());
         if (button.parent().hasClass('tag-removed')) {
@@ -203,12 +160,12 @@ Omeka.Items.enableTagRemoval = function (addImage, deleteImage) {
         Omeka.Items.addTags(jQuery('#tags').val(), addImage, deleteImage);
     });
 
-    jQuery('input.remove_tag').click(function (event) {
+    jQuery('span.remove-tag').click(function (event) {
         event.preventDefault();
         Omeka.Items.toggleTag(this);
     });
 
-    jQuery('input.undo_remove_tag').click(function (event) {
+    jQuery('span.undo-remove-tag').click(function (event) {
         event.preventDefault();
         Omeka.Items.toggleTag(this);
     });
