@@ -10,6 +10,7 @@
     #Content Navigation
     #Edit and Save Panels
     #Content
+        #Login
         #Dashboard
         #Browse Plugins
         #Edit User
@@ -971,6 +972,10 @@ header nav {
 #login #flash {
     margin: 0 10px;
 }
+
+#login input[type=text], #login input[type=password] {
+    width: 100%;
+}
     
 #login h1 {
     width: 300px;
@@ -1018,16 +1023,10 @@ header nav {
     margin: 0 0 0 5px;
 }
 
-#login #remember-label {
-    display: inline-block;
+#login label {
+    text-align: left;
 }
 
-#login #remember-label label {
-    width: auto;
-    min-width: 0;
-    float: none;
-}
-            
 #login .submit {
     clear: both;
 }
