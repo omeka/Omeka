@@ -10,6 +10,7 @@
     #Content Navigation
     #Edit and Save Panels
     #Content
+        #Site-wide Search
         #Login
         #Dashboard
         #Browse Plugins
@@ -21,7 +22,7 @@
         #Show File
         #Tags
         #Navigation
-        #Advanced Search
+        #Advanced Item Search
         #Show Collection
         #Browse Item Types
         #Browse Element Sets
@@ -372,7 +373,6 @@ p, li {
             font-size: 14px;
             display: inline-block;            
             margin: 0 5px 20px 0;
-            line-height: 25px;
             min-height: 25px;
             padding: 0 10px;            
             text-align: center;
@@ -387,7 +387,7 @@ p, li {
             
         a.button.big, input[type=submit].big, button.big {
             display: block;
-            line-height: 1.5em;
+            line-height: 1.75em;
             font-family: "Arvo",serif;
             font-size: 14px;
             margin: 10px auto;
@@ -564,6 +564,8 @@ header ul {
         padding: 0 20px 1em 20px;
         border: 1px solid #e7e7e7;
     }
+    
+        #advanced-form input[type=checkbox] { margin-right: 5px; }
 
     #search fieldset {
         width: 90%;
@@ -938,6 +940,16 @@ header nav {
             margin: 0; 
         }
 
+
+/* Site-wide Search Settings  
+================================================== */
+
+.search-record-types ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+    .search-record-types input[type=checkbox] { margin-right: 5px;}
 
 /* Login  
 ================================================== */
@@ -1836,7 +1848,7 @@ ul#section-nav, #section-nav ul {
  width: 100%;
 }
 
-/* Advanced Search
+/* Advanced Item Search
 ================================================== */
 
 .search-entry select {
