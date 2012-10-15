@@ -1,17 +1,15 @@
-<?php 
+<?php
 /**
- * @copyright Roy Rosenzweig Center for History and New Media, 2009
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
- * @access private
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
- 
+
 /**
  * Adds default behavior associated with the 'public' and 'featured' flags.
- *
- * @package Omeka
- * @subpackage Mixins
- * @copyright Roy Rosenzweig Center for History and New Media, 2009
+ * 
+ * @package Omeka\Record\Mixin
  */
 class Mixin_PublicFeatured extends Omeka_Record_Mixin_AbstractMixin
 {

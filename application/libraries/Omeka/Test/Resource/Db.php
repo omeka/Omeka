@@ -1,24 +1,18 @@
 <?php
-/**
- * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
- * @access private
- */
+require_once APP_DIR . '/forms/Install.php';
 
 /**
- * Get the install form to get current default values.
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
-require_once APP_DIR . '/forms/Install.php';
 
 /**
  * Set up the database test environment by wiping and resetting the database to
  * a recently-installed state.
- *
- * @internal This implements Omeka internals and is not part of the public API.
- * @access private
- * @package Omeka
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
+ * 
+ * @package Omeka\Test\Resource
  */
 class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
 {

@@ -1,18 +1,15 @@
 <?php
 /**
- * @package Omeka
- * @subpackage Models
- * @copyright Copyright (c) 2011 Center for History and New Media
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
  * Model class for an Atom feed for a list of items.
- *
- * @package Omeka
- * @subpackage Models
- * @link http://en.wikipedia.org/wiki/Atom_(standard)
- * @link http://tools.ietf.org/html/rfc4287
+ * 
+ * @package Omeka\Output
  */
 class Output_ItemAtom
 {

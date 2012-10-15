@@ -1,18 +1,13 @@
 <?php
 /**
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
- * Taggable
- * Adaptation of the Rails Acts_as_taggable
- *
- * @package Omeka
- * @subpackage Mixins
- * @author CHNM
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
+ * @package Omeka\Record\Mixin
  */
 class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
 {

@@ -1,19 +1,15 @@
 <?php
 /**
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
  * Exception that is thrown when a form could not be validated correctly.
- *
- * @todo If possible to use Zend_Form for form generation instead of this
- * class, then this class and Omeka_Validator_Errors will be deprecated
- * in favor of built-in Zend Framework capabilities.
- * @see Omeka_Record_AbstractRecord::save()
- * @package Omeka
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
+ * 
+ * @package Omeka\Validator
  */
 class Omeka_Validator_Exception extends Exception
 {
