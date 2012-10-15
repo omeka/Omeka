@@ -4,24 +4,23 @@
     $navArray = array(
         array(
             'label' => __('General Settings'),
-            'controller' => 'settings'
+            'uri' => url('settings')
         ),
         array(
             'label' => __('Element Sets'),
-            'controller' => 'element-sets',
+            'uri' => url('element-sets'),
             'resource' => 'ElementSets',
             'privilege' => 'browse'
         ),
         array(
             'label' => __('Security Settings'),
-            'controller' => 'security',
+            'uri' => url('security'),
             'resource' => 'Security',
             'privilege' => 'edit'
         ),
         array(
             'label' => __('Search Settings'),
-            'controller' => 'search',
-            'action' => 'settings',
+            'uri' => url('search/settings')
         )
     );
 
