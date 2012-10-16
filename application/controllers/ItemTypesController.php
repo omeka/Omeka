@@ -18,7 +18,7 @@ class ItemTypesController extends Omeka_Controller_AbstractActionController
 
     public function addAction()
     {
-        $itemType = null;
+        $itemType = new ItemType;
         $form = $this->_getForm($itemType);
         
         if (isset($_POST[Omeka_Form_ItemTypes::SUBMIT_ADD_ELEMENT_ID])) {
