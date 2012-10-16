@@ -35,7 +35,9 @@ class Omeka_File_Derivative_Image_CreatorTest extends PHPUnit_Framework_TestCase
     public function testConstructor()
     {
         $creator = new Omeka_File_Derivative_Image_Creator($this->convertDir);
-        $this->assertEquals("{$this->convertDir}/convert", $creator->getConvertPath());
+        $convertPath = rtrim($this->convertDir, DIRECTORY_SEPARATOR)
+                     . DIRECTORY_SEPARATOR . 'convert';
+        $this->assertEquals($convertPath, $creator->getConvertPath());
     }
     
     public function testCreateWithoutProvidingDerivativeFilename()
