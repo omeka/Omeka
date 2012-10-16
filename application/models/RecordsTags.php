@@ -7,14 +7,14 @@
  */
 
 /**
- * A tagging and its metadata.
+ * A records tags and its metadata.
  * 
  * @package Omeka\Record
  */
-class Taggings extends Omeka_Record_AbstractRecord
+class RecordsTags extends Omeka_Record_AbstractRecord
 {
-    public $relation_id;
+    public $record_id;
+    public $record_type;
     public $tag_id;
-    public $type;
     public $time;
 }

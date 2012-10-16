@@ -23,7 +23,7 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
 
         $db = $this->_record->getDb();
         $this->_tagTable = $db->getTable('Tag');
-        $this->_joinTable = $db->getTable('Taggings');
+        $this->_joinTable = $db->getTable('RecordsTags');
     }
     
     /**
@@ -51,9 +51,9 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
     {
         $db = $this->_record->getDb();
         
-        $db->delete($db->Taggings, array(
-            'relation_id = ?' => (int) $this->_record->id,
-            'type = ?' => $this->_type
+        $db->delete($db->RecordsTags, array(
+            'record_id = ?' => (int) $this->_record->id,
+            'record_type = ?' => $this->_type
             )
         );
     }
@@ -164,11 +164,11 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
         foreach ($tags as $key => $tagName) {
             $tag = $this->_tagTable->findOrNew(trim($tagName));
             
-            $join = new Taggings;
+            $join = new RecordsTags;
                         
             $join->tag_id = $tag->id;
-            $join->relation_id = $this->_record->id;
-            $join->type = $this->_type;
+            $join->record_id = $this->_record->id;
+            $join->record_type = $this->_type;
             $join->save();            
         }
     }

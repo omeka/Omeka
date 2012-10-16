@@ -41,10 +41,10 @@ class Table_Tag extends Omeka_Db_Table
     {
         if ($record->exists()) {
             $record_id = $record->id;
-            $select->where('taggings.relation_id = ?', $record_id);
+            $select->where('records_tags.record_id = ?', $record_id);
             
             if (empty($for)) {
-                $select->where('taggings.type = ?', get_class($record));
+                $select->where('records_tags.record_type = ?', get_class($record));
             }
         //A non-persistent record has no tags, so return emptiness
         } else {
@@ -68,7 +68,7 @@ class Table_Tag extends Omeka_Db_Table
 
         switch ($sortField) {
             case 'time':
-                $select->order(array("taggings.time $sortDir", 'tags.name ASC'));
+                $select->order(array("records_tags.time $sortDir", 'tags.name ASC'));
                 break;
             case 'count':
                 $select->order("tagCount $sortDir");
@@ -92,11 +92,11 @@ class Table_Tag extends Omeka_Db_Table
         //Showing tags related to items
         if ($type == 'Item') {
             //Join on the items table, add permissions checks for public
-            $select->joinInner( array('items'=>$db->Item), "items.id = taggings.relation_id AND taggings.type = 'Item'", array());
+            $select->joinInner( array('items'=>$db->Item), "items.id = records_tags.record_id AND records_tags.record_type = 'Item'", array());
             $permissions = new Omeka_Db_Select_PublicPermissions('Items');
             $permissions->apply($select, 'items');
         } else {
-            $select->where("taggings.type = ?", (string) $type);
+            $select->where("records_tags.record_type = ?", (string) $type);
         }
     }
     
@@ -161,7 +161,7 @@ class Table_Tag extends Omeka_Db_Table
         $db = $this->getDb();
         
         $select->from(array('tags'=>$db->Tag), array('tags.*', 'tagCount'=>'COUNT(tags.id)'))
-                ->joinInner( array('taggings'=>$db->Taggings), 'taggings.tag_id = tags.id', array())
+                ->joinInner( array('records_tags'=>$db->RecordsTags), 'records_tags.tag_id = tags.id', array())
                 ->group('tags.id');
                 
         return $select;

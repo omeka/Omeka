@@ -64,7 +64,7 @@ class Installer_Task_SchemaTest extends PHPUnit_Framework_TestCase
             'files' => SCHEMA_DIR . '/files.sql',
             'items' => SCHEMA_DIR . '/items.sql',
             'plugins' => SCHEMA_DIR . '/plugins.sql',
-            'taggings' => SCHEMA_DIR . '/taggings.sql',
+            'records_tags' => SCHEMA_DIR . '/records_tags.sql',
             'users_activations' => SCHEMA_DIR . '/users_activations.sql',
             'sessions' => SCHEMA_DIR . '/sessions.sql',
             'search_texts' => SCHEMA_DIR . '/search_texts.sql',
@@ -142,7 +142,7 @@ class Installer_Task_SchemaTest extends PHPUnit_Framework_TestCase
             'test_plugins',
             'test_processes',
             'test_tags',
-            'test_taggings',
+            'test_records_tags',
             'test_users',
             'test_users_activations'
         );

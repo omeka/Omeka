@@ -29,7 +29,7 @@ class Installer_Task_Schema implements Installer_TaskInterface
         'files',
         'items',
         'plugins',
-        'taggings',
+        'records_tags',
         'users_activations',
         'sessions',
         'search_texts',

@@ -91,7 +91,7 @@ class Omeka_Test_Resource_DbTest extends PHPUnit_Framework_TestCase
           'omeka_schema_migrations',
           'omeka_search_texts',
           'omeka_sessions',
-          'omeka_taggings',
+          'omeka_records_tags',
           'omeka_tags',
           'omeka_users',
           'omeka_users_activations',

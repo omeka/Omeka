@@ -27,7 +27,7 @@ class Tag extends Omeka_Record_AbstractRecord {
     protected function _delete()
     {
         $taggings = $this->getDb()
-                         ->getTable('Taggings')
+                         ->getTable('RecordsTags')
                          ->findBySql('tag_id = ?', array((int) $this->id));
         
         foreach ($taggings as $tagging) {
@@ -80,7 +80,7 @@ class Tag extends Omeka_Record_AbstractRecord {
      */
     public function rename($new_names) 
     {
-        $taggings = $this->getTable('Taggings')->findBy(array('tag' => $this->name));
+        $taggings = $this->getTable('RecordsTags')->findBy(array('tag' => $this->name));
         $keepOldTaggings = false;
 
         // If the current tag is in the new tag list, we don't need
