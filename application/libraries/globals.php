@@ -171,12 +171,11 @@ function add_plugin_hook($hook, $callback)
  * @uses Omeka_Plugin_Broker::callHook()
  * @param string $name The hook name.
  * @param array $args Arguments to be passed to the hook implementations.
- * @return mixed
  */
 function fire_plugin_hook($name, array $args = array())
 {
     if ($pluginBroker = get_plugin_broker()) {
-        return $pluginBroker->callHook($name, $args);
+        $pluginBroker->callHook($name, $args);
     }
 }
 
