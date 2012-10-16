@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS `%PREFIX%sessions` (
-`id` char(32),
+`id` varchar(128),
 `modified` bigint,
 `lifetime` int,
 `data` text,
 PRIMARY KEY (`id`)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
