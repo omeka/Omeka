@@ -38,6 +38,7 @@ class Installer_Task_Options implements Installer_TaskInterface
         'html_purifier_allowed_html_attributes',
         'tag_delimiter',
         Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME,
+        'search_record_types',
     );
     
     private $_options = array();
