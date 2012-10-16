@@ -22,6 +22,8 @@ class Omeka_Form_Admin extends Omeka_Form
     
     protected $_record;
     
+    protected $_record_type;
+    
     protected $_hasPublicPage = true;
         
     protected $_editGroupCssClass = 'seven columns alpha';
@@ -35,6 +37,9 @@ class Omeka_Form_Admin extends Omeka_Form
     {
         parent::init();
         
+        if(empty($this->_record_type)) {
+            throw new Zend_Form_Exception("A record type must be given to use Omeka_Form_Admin");
+        }
         //instead of extending Zend_Form_DisplayGroup, setting up here so css classes can be options directly
         //on instantiating the form. If those classes should never change, then this probably should go to 
         //Omeka extensions of Zend_Form_DisplayGroup
@@ -48,12 +53,19 @@ class Omeka_Form_Admin extends Omeka_Form
         $editDecorator = new Zend_Form_Decorator_HtmlTag(array('tag'=>'div', 'class'=>$this->_editGroupCssClass));
         $saveDecorator = new Zend_Form_Decorator_HtmlTag(array('tag'=>'div', 'id'=>'save', 'class'=>$this->_saveGroupCssClass));
         $this->_saveDisplayGroupActionDecorator = new Omeka_Form_Decorator_SavePanelAction();
+        
+        $hookDecoratorOptions = array('recordType'=>$this->_record_type);
         if($this->_record) {
             $this->_saveDisplayGroupActionDecorator->setOption('record', $this->_record);
             $this->setHasPublicPage();          
+            $hookDecoratorOptions['record'] = $this->_record;
+        }        
+        if(class_exists('Omeka_Form_Decorator_SavePanelHook')) {
+            echo 'ok';
+        } else {
+            echo 'boo';
         }
-        
-        $savePanelHookDecorator = new Omeka_Form_Decorator_SavePanelHook();
+        $savePanelHookDecorator = new Omeka_Form_Decorator_SavePanelHook($hookDecoratorOptions);
         //Pro tip: order of adding decorators matters! if reversed, group elements would appear after the div!
         $this->_editDisplayGroup->setDecorators(array('FormElements', $editDecorator));
         $this->_saveDisplayGroup->setDecorators(array($this->_saveDisplayGroupActionDecorator, 'FormElements', $savePanelHookDecorator,  $saveDecorator));        
@@ -133,6 +145,11 @@ class Omeka_Form_Admin extends Omeka_Form
     public function setSaveGroupCssClass($cssClass)
     {
         $this->_saveGroupCssClass = $cssClass;
+    }
+    
+    public function setRecordType($type)
+    {
+        $this->_record_type = $type;
     }
     
     public function setRecord($record)

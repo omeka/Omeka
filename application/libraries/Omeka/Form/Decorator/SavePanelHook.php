@@ -11,10 +11,49 @@
  */
 class Omeka_Form_Decorator_SavePanelHook extends Zend_Form_Decorator_Abstract
 {    
+
     public function render($content)
-    {
-        $prependHtml = fire_plugin_hooks('admin_append_to_panel_buttons');
-        $appendHtml = fire_plugin_hooks('admin_append_to_panel_fields');
-        return $prependHtml . $content . $appendHtml;
+    {        
+
+        $type = $this->getRecordType();
+        $pluralType = Inflector::pluralize($type);
+        $record = $this->getRecord();
+
+        //hooks echo the content, so stuff the hook results into an output buffer
+        //then put that ob content into a variable
+        ob_start();
+        fire_plugin_hook("admin_append_to_" . $pluralType . "_panel_buttons", array($type=>$record));        
+        $buttonsHtml = ob_get_contents();
+        ob_end_clean();
+        
+        ob_start();
+        fire_plugin_hook("admin_append_to_" . $pluralType . "_panel_fields", array($type=>$record));
+        $fieldsHtml = ob_get_contents();
+        ob_end_clean();
+        
+        //the fields start with the first <div class="field">, so replace the first instance
+        //with the buttonsHTML
+        $pos = strpos($content, '<div class="field">' );
+        $html = substr_replace($content , $buttonsHtml . '<div class="field">', $pos, 19 );
+        return $html . $fieldsHtml;
     }    
+    
+    public function getRecordType()
+    {
+        if(isset($this->_options['recordType'])) {
+            return $this->_options['recordType'];
+        }
+        return false;
+        
+    }
+    
+    public function getRecord()
+    {
+        if(isset($this->_options['record'])) {
+            return $this->_options['record'];
+        }
+        return false;
+        
+    }
+    
 }
