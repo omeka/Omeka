@@ -36,4 +36,9 @@ class Omeka_Controller_UpgradeControllerTest extends Omeka_Test_AppTestCase
     {
         $this->dispatch('/upgrade');
     }
+
+    public function tearDown()
+    {
+        Omeka_Test_Resource_Db::$runInstaller = true;
+    }
 }

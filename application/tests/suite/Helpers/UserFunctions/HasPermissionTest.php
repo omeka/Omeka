@@ -22,12 +22,6 @@ class Helpers_UserFunctions_HasPermissionTest extends Omeka_Test_AppTestCase
         $acl->allow(null, 'TestResource', 'allowedPrivilege');
         $acl->deny(null, 'TestResource', 'deniedPrivilege');
     }
-    
-    public function tearDown()
-    {
-        parent::tearDown();
-        self::dbChanged(false);
-    }
 
     /**
      * Tests whether permissions checks work for anonymous users.

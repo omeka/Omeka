@@ -24,6 +24,11 @@ class Omeka_Db_Migration_TimestampMigrationConversionTest extends Omeka_Test_App
         $this->db->query("INSERT INTO omeka_options (name, value) VALUES ('migration', '47')");
         $this->db->query("DROP TABLE omeka_schema_migrations");    
     }
+
+    public function tearDown()
+    {
+        Omeka_Test_Resource_Db::$runInstaller = true;
+    }
     
     public function assertPreConditions()
     {

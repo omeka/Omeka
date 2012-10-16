@@ -18,7 +18,6 @@ class Omeka_Acl_Assert_OwnershipTest extends Omeka_Test_AppTestCase
     public function setUp()
     {
         parent::setUp();
-        self::dbChanged(false);
 
         $super = new User;
         $super->role = 'super';

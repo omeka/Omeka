@@ -14,12 +14,6 @@ class Models_Output_ItemAtomTest extends Omeka_Test_AppTestCase
 {
     protected $_isAdminTest = false;
 
-    public function tearDown()
-    {
-        parent::tearDown();
-        self::dbChanged(false);
-    }
-
     public function testNoContext()
     {
         $this->dispatch('items/browse');

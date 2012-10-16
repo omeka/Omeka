@@ -49,7 +49,6 @@ class Models_ThemeTest extends Omeka_Test_AppTestCase
     
     public function testGetUploadedFileName()
     {
-        self::dbChanged(false);
         $themeName = 'seasons';
         $optionName = 'logo';
         $fileName = 'bob.jpg';
@@ -58,7 +57,6 @@ class Models_ThemeTest extends Omeka_Test_AppTestCase
     
     public function testGetOptions()
     {
-        self::dbChanged(false);
         $themeName = 'seasons';
         $options = array();
         $this->assertEquals($options, Theme::getOptions($themeName));
@@ -79,7 +77,6 @@ class Models_ThemeTest extends Omeka_Test_AppTestCase
     
     public function testGetAvailable()
     {
-        self::dbChanged(false);
         $themeName = 'seasons';
         
         $themes = Theme::getAllThemes();

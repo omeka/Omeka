@@ -18,12 +18,6 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
         parent::setUp();
         $this->adminUser = $this->_addNewUserWithRole('admin');
         $this->superUser = $this->_addNewUserWithRole('super');
-        self::dbChanged(false);
-    }
-
-    public static function tearDownAfterClass()
-    {
-        self::dbChanged(true);
     }
 
     public function testSuperCanAccessForm()

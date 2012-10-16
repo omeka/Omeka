@@ -133,13 +133,12 @@ class Omeka_Filter_HtmlPurifier implements Zend_Filter_Interface
             self::filterAttributesWithMissingElements(
                 $allowedHtmlAttributes, $allowedHtmlElements);
 
-        self::$_purifierConfig['HTML.AllowedElements'] = $allowedHtmlElements;
-        self::$_purifierConfig['HTML.AllowedAttributes'] = $allowedHtmlAttributes;
-
         $purifierConfig = HTMLPurifier_Config::createDefault();
         foreach (self::$_purifierConfig as $key => $value) {
             $purifierConfig->set($key, $value);
         }
+        $purifierConfig->set('HTML.AllowedElements', $allowedHtmlElements);
+        $purifierConfig->set('HTML.AllowedAttributes', $allowedHtmlAttributes);
 
         $purifier = HTMLPurifier::instance($purifierConfig);
         return $purifier;

@@ -50,10 +50,14 @@ class Installer_Default implements Installer_InstallerInterface
 
     public function install()
     {
+        $this->getDb()->beginTransaction();
+
         $this->_createSchema();
         $this->_createUser();
         $this->_setupMigrations();
-        $this->_addOptions();   
+        $this->_addOptions();
+
+        $this->getDb()->commit();
     }
     
     protected function _getValue($fieldName)

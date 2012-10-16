@@ -20,12 +20,6 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
      * @var boolean
      */
     protected $_isAdminTest = true;
-
-    /**
-     * Optimize tests by indicating whether the database was modified during 
-     * the test run.  If not, the next test run can skip the Installer.
-     */
-    private static $_dbChanged = true;
     
     /**
      * Bootstrap the application on each test run.
@@ -108,6 +102,7 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         }    
         if ($this->db instanceof Omeka_Db) {
             Omeka_Test_Resource_Db::setDbAdapter($this->db->getAdapter());
+            $this->db->rollBack();
         }
         Zend_Registry::_unsetInstance();
         parent::tearDown();
@@ -128,14 +123,6 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
                 throw $this->request->error_handler->exception;
             }
         }
-    }
-
-    public static function dbChanged($flag = null)
-    {
-        if ($flag !== null) {
-            self::$_dbChanged = (boolean)$flag;
-        }
-        return self::$_dbChanged;
     }
 
     /**
