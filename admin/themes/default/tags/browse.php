@@ -35,7 +35,7 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodycl
         }
         ?>
     </p>
-    <div class="hTagcloud">
+    <div class="tag-list">
     <ul>
     <?php foreach ($tags as $tag): ?>
         <li>

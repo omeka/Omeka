@@ -7,7 +7,7 @@ echo head(array('title' => $pageTitle, 'content_class' => 'vertical-nav', 'bodyc
 <?php echo flash(); ?>
 <h2>Record Types</h2>
 <p>Here you may customize which types of records will be searchable in Omeka.</p>
-<form method="post">
+<form method="post" class="search-record-types">
 <ul>
     <?php foreach ($this->searchRecordTypes as $key => $value): ?>
     <li><?php echo $this->formCheckbox('search_record_types[]', $key, 

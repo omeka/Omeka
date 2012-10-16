@@ -1,18 +1,15 @@
 <?php
 /**
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
- * @access private
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
  * Installer task for inserting options into the options table.
- *
- * @internal This implements Omeka internals and is not part of the public API.
- * @access private
- * @package Omeka
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
+ * 
+ * @package Omeka\Install
  */
 class Installer_Task_Options implements Installer_TaskInterface
 {
@@ -41,6 +38,7 @@ class Installer_Task_Options implements Installer_TaskInterface
         'html_purifier_allowed_html_attributes',
         'tag_delimiter',
         Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME,
+        'search_record_types',
     );
     
     private $_options = array();

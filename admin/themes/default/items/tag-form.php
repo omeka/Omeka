@@ -13,23 +13,18 @@
     <div id="all-tags">
     <?php if ($tags): ?>
         <h3><?php echo __('All Tags'); ?></h3>
+        
+        <div class="tag-list">
         <ul id="all-tags-list">
             <?php foreach( $tags as $tag ): ?>
                 <li>
-                    <?php echo get_view()->formImage('undo-remove-tag-' . $tag->id, 
-                                                $tag->name,
-                                                array(
-                                                    'src'   => img('silk-icons/add.png'),
-                                                    'class' => 'undo_remove_tag')); 
-                          echo get_view()->formImage('remove-tag-' . $tag->id,
-                                                $tag->name,
-                                                array(
-                                                    'src'   => img('silk-icons/delete.png'),
-                                                    'class' => 'remove_tag'));
-                          echo $tag->name; ?>
+                    <?php echo '<a href="' . url('items/?tag=' . $tag->name) . '">' . $tag->name . '</a>'; 
+                          echo '<span class="undo-remove-tag"><a href="#">' . __('Undo') . '</a></span>';
+                          echo '<span class="remove-tag"><a href="#">' . __('Remove') . '</a></span>'; ?>
                 </li>
             <?php endforeach; ?>
         </ul>
+        </div>
     <?php endif; ?>
     </div>
     <?php fire_plugin_hook('admin_append_to_items_form_tags', array('item' => $item, 'view' => $this)); ?>

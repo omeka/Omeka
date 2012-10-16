@@ -22,4 +22,4 @@
 
     <div class="container container-sixteen">
     
-        <div id="content" class="login-content eight columns offset-by-four">
+        <div id="content" class="login-content ten columns offset-by-three">

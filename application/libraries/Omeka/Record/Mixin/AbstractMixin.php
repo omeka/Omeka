@@ -1,8 +1,9 @@
 <?php
 /**
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
@@ -14,17 +15,13 @@
  *
  * For instance, the Item model does not have an addTags() method, but the
  * Taggable class does.  Since Item declares Taggable as one of its modules,
- * an Item instance call all of Taggable's methods, so that adding tags
- * would be as simple as calling $item->addTags('foo, bar');
+ * an Item instance call all of Taggable's methods, so that adding tags would be 
+ * as simple as calling $item->addTags('foo, bar');
  *
  * Note that this is not a true mixin because it cannot override any existing
  * methods on a Record object.
- *
- * @see Taggable
- * @see Orderable
- * @see Omeka_Record_AbstractRecord
- * @package Omeka
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
+ * 
+ * @package Omeka\Record\Mixin
  */
 abstract class Omeka_Record_Mixin_AbstractMixin
 {

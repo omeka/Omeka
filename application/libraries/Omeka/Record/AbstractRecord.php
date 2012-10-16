@@ -1,16 +1,16 @@
-<?php 
+<?php
 /**
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
- * A base class for domain objects, inspired by, though not strictly adherent to,
- * the ActiveRecord pattern.
+ * A base class for domain objects, inspired by, though not strictly adherent 
+ * to, the ActiveRecord pattern.
  * 
- * @package Omeka
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
+ * @package Omeka\Record
  */
 abstract class Omeka_Record_AbstractRecord implements ArrayAccess
 {
@@ -26,7 +26,7 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
     /**
      * Any errors raised during the validation process.
      *
-     * @var Omeka_Validator_Errors 
+     * @var Omeka_Validate_Errors 
      */
     private $_errors = array();
         
@@ -132,7 +132,7 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
         
         $this->_db = $db;
         
-        $this->_errors = new Omeka_Validator_Errors;
+        $this->_errors = new Omeka_Validate_Errors;
         $this->_initializeMixins();
         $this->construct();
     }
@@ -382,7 +382,7 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
     /**
      * Retrieve validation errors associated with this record.
      * 
-     * @return Omeka_Validator_Errors
+     * @return Omeka_Validate_Errors
      */
     public function getErrors()
     {
@@ -500,7 +500,7 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
     /**
      * Save the record.
      *
-     * @throws Omeka_Validator_Exception
+     * @throws Omeka_Validate_Exception
      * @throws Omeka_Record_Exception
      * @see Omeka_Record_AbstractRecord::setPostData()
      * @param boolean $throwIfInvalid
@@ -527,7 +527,7 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
         
         if (!$this->isValid()) {
             if ($throwIfInvalid) {
-                throw new Omeka_Validator_Exception($this->getErrors());
+                throw new Omeka_Validate_Exception($this->getErrors());
             } else {
                 return false;
             }

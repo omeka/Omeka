@@ -8,5 +8,5 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%element_texts` (
   PRIMARY KEY  (`id`),
   KEY `record_type_record_id` (`record_type`, `record_id`),
   KEY `element_id` (`element_id`),
-  FULLTEXT KEY `text` (`text`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  KEY `text` (`text`(20))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

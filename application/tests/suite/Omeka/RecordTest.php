@@ -205,7 +205,7 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
     }
     
     /**
-     * @expectedException Omeka_Validator_Exception
+     * @expectedException Omeka_Validate_Exception
      */
     public function testForceSaveThrowsExceptionForUnsaveableRecord()
     {
@@ -256,7 +256,7 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
     }
         
     /**
-     * @expectedException Omeka_Validator_Exception
+     * @expectedException Omeka_Validate_Exception
      */
     public function testSaveFormThrowsExceptionForInvalidPost()
     {

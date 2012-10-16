@@ -15,4 +15,4 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%files` (
   `metadata` text collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `item_id` (`item_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

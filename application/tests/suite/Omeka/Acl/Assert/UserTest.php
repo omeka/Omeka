@@ -5,7 +5,6 @@ class Omeka_Acl_Assert_UserTest extends Omeka_Test_AppTestCase
     public function setUp()
     {
         parent::setUp();
-        self::dbChanged(false);
         
         $this->super = new User();
         $this->super->role = 'super';
