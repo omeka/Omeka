@@ -11,9 +11,9 @@
  * to having this class is that casting it to a string will convert the errors
  * into a nicely formatted, human-readable string.
  * 
- * @package Omeka\Validator
+ * @package Omeka\Validate
  */
-class Omeka_Validator_Errors extends ArrayObject
+class Omeka_Validate_Errors extends ArrayObject
 {
     /**
      * List of validation errors.

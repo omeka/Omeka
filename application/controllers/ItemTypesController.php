@@ -27,7 +27,7 @@ class ItemTypesController extends Omeka_Controller_AbstractActionController
                     $itemType = $form->saveFromPost();                    
                     $this->_helper->flashMessenger(__('The item type "%s" was successfully added.', $itemType->name), 'success');
                     $this->_helper->redirector('show', null, null, array('id'=>$itemType->id));
-                } catch (Omeka_Validator_Exception $e) {
+                } catch (Omeka_Validate_Exception $e) {
                     $this->_helper->flashMessenger($e);
                 }                
             } else {
@@ -53,7 +53,7 @@ class ItemTypesController extends Omeka_Controller_AbstractActionController
                     $form->saveFromPost();                    
                     $this->_helper->flashMessenger(__('The item type "%s" was successfully updated.', $itemType->name), 'success');
                     $this->_helper->redirector('show', null, null, array('id'=>$itemType->id));
-                } catch (Omeka_Validator_Exception $e) {
+                } catch (Omeka_Validate_Exception $e) {
                     $this->_helper->flashMessenger($e);
                 }                
             } else {

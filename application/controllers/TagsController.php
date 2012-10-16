@@ -64,7 +64,7 @@ class TagsController extends Omeka_Controller_AbstractActionController
                 __('Tag named "%1$s" was successfully renamed to "%2$s".', $oldName, $newNames),
                 'success'
             );
-        } catch (Omeka_Validator_Exception $e) {
+        } catch (Omeka_Validate_Exception $e) {
             $this->_helper->flashMessenger($e);
         }
     }

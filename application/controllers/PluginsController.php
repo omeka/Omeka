@@ -53,7 +53,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
                     'success'
                 );
                 $this->_helper->redirector('index'); 
-            } catch (Omeka_Validator_Exception $e) {
+            } catch (Omeka_Validate_Exception $e) {
                 $this->_helper->flashMessenger($e);
             }
         }

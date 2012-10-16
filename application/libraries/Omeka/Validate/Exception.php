@@ -9,9 +9,9 @@
 /**
  * Exception that is thrown when a form could not be validated correctly.
  * 
- * @package Omeka\Validator
+ * @package Omeka\Validate
  */
-class Omeka_Validator_Exception extends Exception
+class Omeka_Validate_Exception extends Exception
 {
     /**
      * Message representing form errors.
@@ -21,8 +21,8 @@ class Omeka_Validator_Exception extends Exception
     protected $_errors = array();
 
     /**
-     * @param $errors string|Omeka_Validator_Errors If a string, it is a
-     * single error.  If it is an instance of Omeka_Validator_Errors, it is
+     * @param $errors string|Omeka_Validate_Errors If a string, it is a
+     * single error.  If it is an instance of Omeka_Validate_Errors, it is
      * a set of errors.
      * @return void
      */
@@ -30,7 +30,7 @@ class Omeka_Validator_Exception extends Exception
     {
         $this->_errors = $errors;
 
-        if ($errors instanceof Omeka_Validator_Errors) {
+        if ($errors instanceof Omeka_Validate_Errors) {
             $this->message = (string) $errors;
         } else if (is_string($errors)) {
             $this->message = $errors;

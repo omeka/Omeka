@@ -76,7 +76,7 @@ class ElementSetsController extends Omeka_Controller_AbstractActionController
                 }
                 $this->_helper->flashMessenger(__('The element set was successfully changed!'), 'success');
                 $this->_helper->redirector('index');
-            } catch (Omeka_Validator_Exception $e) {
+            } catch (Omeka_Validate_Exception $e) {
                 $this->_helper->flashMessenger($e);
             }
         }
