@@ -17,51 +17,6 @@ function show_untitled_items($title)
 }
 
 /**
-* This function checks the Logo theme option, then returns either an
-* image tag with the logo as the src, or returns null.
-*
-*/
-function custom_display_logo()
-{
-    if(function_exists('get_theme_option')) {
-    
-        $logo = get_theme_option('Logo');
-
-        if ($logo) {
-            $storage = Zend_Registry::get('storage');
-            $uri = $storage->getUri($storage->getPathByType($logo, 'theme_uploads'));
-            return '<img src="'.$uri.'" title="'.option('site_title').'" />';
-        }
-    }
-    return null;
-}
-
-function custom_header_image()
-{
-    if(function_exists('get_theme_option') && $headerBg = get_theme_option('Header Image')) {
-        $storage = Zend_Registry::get('storage');
-        $headerBg = $storage->getUri($storage->getPathByType($headerBg, 'theme_uploads'));
-        $html = '<div id="header-image"><img src="'.$headerBg.'" /></div>';
-        return $html;	
-    }
-    return false;
-}
-
-function custom_header_background()
-{
-    if(function_exists('get_theme_option') && $headerBg = get_theme_option('Header Background')) {
-        $storage = Zend_Registry::get('storage');
-        $headerBg = $storage->getUri($storage->getPathByType($headerBg, 'theme_uploads'));
-        $html = "<style type=\"text/css\" media=\"screen\">"
-              . " #header {"
-              . "    background:transparent url('$headerBg') top left no-repeat;"
-              . "}"
-              . "</style>";
-        echo $html;
-    }
-}
-
-/**
  * Partial for the admin bar.
  */
 function admin_bar() {
