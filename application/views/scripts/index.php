@@ -27,6 +27,8 @@
     <?php echo exhibit_builder_display_random_featured_exhibit(); ?>
     <?php endif; ?>
 
+    <?php fire_plugin_hook('public_append_to_home_primary', array('view' => $this)); ?>
+
 </div><!-- end primary -->
 
 <div id="secondary">
@@ -71,6 +73,8 @@
         <p class="view-items-link"><a href="<?php echo html_escape(url('items')); ?>"><?php echo __('View All Items'); ?></a></p>
 
     </div><!--end recent-items -->
+
+    <?php fire_plugin_hook('public_append_to_home_secondary', array('view' => $this)); ?>
 
 </div><!-- end secondary -->
 
