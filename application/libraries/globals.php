@@ -3159,6 +3159,56 @@ function revert_theme_base_url()
 }
 
 /**
+ * Return the theme's logo image tag.
+ * 
+ * @uses get_theme_option()
+ * @return string|null
+ */
+function theme_logo()
+{
+    $logo = get_theme_option('Logo');
+    if ($logo) {
+        $storage = Zend_Registry::get('storage');
+        $uri = $storage->getUri($storage->getPathByType($logo, 'theme_uploads'));
+        return '<img src="' . $uri . '" title="' . option('site_title') . '" />';
+    }
+}
+
+/**
+ * Return the theme's header image tag.
+ * 
+ * @uses get_theme_option()
+ * @return string|null
+ */
+function theme_header_image()
+{
+    $headerImage = get_theme_option('Header Image');
+    if ($headerImage) {
+        $storage = Zend_Registry::get('storage');
+        $headerImage = $storage->getUri($storage->getPathByType($headerImage, 'theme_uploads'));
+        return '<div id="header-image"><img src="' . $headerImage . '" /></div>';
+    }
+}
+
+/**
+ * Return the theme's header background image style.
+ * 
+ * @uses get_theme_option()
+ * @return string|null
+ */
+function theme_header_background()
+{
+    $headerBg = get_theme_option('Header Background');
+    if ($headerBg) {
+        $storage = Zend_Registry::get('storage');
+        $headerBg = $storage->getUri($storage->getPathByType($headerBg, 'theme_uploads'));
+        echo '<style type="text/css" media="screen">#header {'
+           . 'background:transparent url("' . $headerBg . '") top left no-repeat;'
+           . '}</style>';
+    }
+}
+
+/**
  * Check the ACL to determine whether the current user has proper permissions.
  *
  * <code>
