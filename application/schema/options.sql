@@ -4,4 +4,4 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%options` (
   `value` text collate utf8_unicode_ci,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

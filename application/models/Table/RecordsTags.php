@@ -9,14 +9,14 @@
 /**
  * @package Omeka\Db\Table
  */
-class Table_Taggings extends Omeka_Db_Table
+class Table_RecordsTags extends Omeka_Db_Table
 {
     public function applySearchFilters($select, $params = array())
     {
         $db = $this->getDb();
         if(isset($params['tag'])) {
             $tag = $params['tag'];
-            $select->joinInner(array('tags'=>$db->Tag), 'tags.id = taggings.tag_id', array());
+            $select->joinInner(array('tags'=>$db->Tag), 'tags.id = records_tags.tag_id', array());
 
             if (is_array($tag)) {
                 $wheres = array();
@@ -34,11 +34,11 @@ class Table_Taggings extends Omeka_Db_Table
 
         if (isset($params['record'])) {
             $record = $params['record'];
-            $select->where('taggings.relation_id = ?', $record->id);
-            $select->where('taggings.type = ?', get_class($record) );
+            $select->where('records_tags.record_id = ?', $record->id);
+            $select->where('records_tags.record_type = ?', get_class($record) );
         } else if (isset($params['type'])) {
             $type = $params['type'];
-            $select->where('taggings.type = ?', $type);
+            $select->where('records_tags.record_type = ?', $type);
         }
     }
 }

@@ -1,15 +1,15 @@
 <?php
 /**
- * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
  * Abstract test case class that bootstraps the entire application.
- *
- * @package Omeka
- * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
+ * 
+ * @package Omeka\Test
  */
 abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCase
 {   
@@ -20,12 +20,6 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
      * @var boolean
      */
     protected $_isAdminTest = true;
-
-    /**
-     * Optimize tests by indicating whether the database was modified during 
-     * the test run.  If not, the next test run can skip the Installer.
-     */
-    private static $_dbChanged = true;
     
     /**
      * Bootstrap the application on each test run.
@@ -108,6 +102,7 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         }    
         if ($this->db instanceof Omeka_Db) {
             Omeka_Test_Resource_Db::setDbAdapter($this->db->getAdapter());
+            $this->db->rollBack();
         }
         Zend_Registry::_unsetInstance();
         parent::tearDown();
@@ -128,14 +123,6 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
                 throw $this->request->error_handler->exception;
             }
         }
-    }
-
-    public static function dbChanged($flag = null)
-    {
-        if ($flag !== null) {
-            self::$_dbChanged = (boolean)$flag;
-        }
-        return self::$_dbChanged;
     }
 
     /**

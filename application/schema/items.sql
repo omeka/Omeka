@@ -13,4 +13,4 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%items` (
   KEY `public` (`public`),
   KEY `featured` (`featured`),
   KEY `owner_id` (`owner_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

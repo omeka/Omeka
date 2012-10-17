@@ -15,9 +15,9 @@ class Omeka_Helper_DisplayRandomFeaturedItemsTest extends Omeka_Test_AppTestCase
 {
     public function testDisplayRandomFeaturedItems()
     {   
-        $this->_createFeaturedItems();
+        $ids = $this->_createFeaturedItems();
         $html = random_featured_items();
-        $this->assertContains('<h3><a href="/items/show/2">Title 1</a></h3>', $html);
+        $this->assertContains('<h3><a href="/items/show/'. $ids[0]. '">Title 1</a></h3>', $html);
         $this->assertContains('<p class="item-description">Description for item 1.</p>', $html);
     }
     
@@ -34,6 +34,8 @@ class Omeka_Helper_DisplayRandomFeaturedItemsTest extends Omeka_Test_AppTestCase
     protected function _createFeaturedItems($featured = true)
     {
         $db = $this->db;
+
+        $ids = array();
         
         for ($i=1; $i < 6; $i++) {
             $title = "Title $i";
@@ -49,6 +51,9 @@ class Omeka_Helper_DisplayRandomFeaturedItemsTest extends Omeka_Test_AppTestCase
             $item->featured = $featured ? '1' : '0';
             $item->addElementTextsByArray($elementTexts);
             $item->save();
+            $ids[] = $item->id;
         }
+
+        return $ids;
     }
 }

@@ -12,4 +12,4 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%processes` (
   KEY `pid` (`pid`),
   KEY `started` ( `started` ),
   KEY `stopped` ( `stopped` )
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

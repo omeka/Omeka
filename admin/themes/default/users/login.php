@@ -9,7 +9,7 @@ echo head(array('bodyclass' => 'login', 'title' => $pageTitle), $header);
 
 <?php echo flash(); ?>
 
-<div class="six columns alpha offset-by-one">
+<div class="eight columns alpha offset-by-one">
 <?php echo $this->form->setAction($this->url('users/login')); ?>
 </div>    
 

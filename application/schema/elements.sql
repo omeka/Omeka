@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%elements` (
   UNIQUE KEY `name_element_set_id` (`element_set_id`,`name`),
   UNIQUE KEY `order_element_set_id` (`element_set_id`,`order`),
   KEY `element_set_id` (`element_set_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `%PREFIX%elements` VALUES 
 (1, 3, NULL, 'Text', 'Any textual data included in the document.', NULL),

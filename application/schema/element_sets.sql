@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%element_sets` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `record_type` (`record_type`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `%PREFIX%element_sets` VALUES 
 (1, NULL, 'Dublin Core', 'The Dublin Core metadata element set. These elements are common to all Omeka resources, including items, files, collections, exhibits, and entities. See http://dublincore.org/documents/dces/.'),

@@ -189,7 +189,7 @@ class Omeka_Form_ItemTypes extends Omeka_Form
             // prevent duplicate item type element ids
             if ($element->id) {
                 if (in_array($element->id, $elementIds)) {
-                    throw new Omeka_Validator_Exception(__('The item type cannot have more than one "%s" element.', $element->name));
+                    throw new Omeka_Validate_Exception(__('The item type cannot have more than one "%s" element.', $element->name));
                 } else {
                     $elementIds[] = $element->id;
                 }
@@ -198,7 +198,7 @@ class Omeka_Form_ItemTypes extends Omeka_Form
             // prevent duplicate item type element names
             if ($element->name) {
                 if (in_array($element->name, $elementNames)) {
-                    throw new Omeka_Validator_Exception(__('The item type cannot have more than one "%s" element.', $element->name));
+                    throw new Omeka_Validate_Exception(__('The item type cannot have more than one "%s" element.', $element->name));
                 } else {
                     $elementNames[] = trim($element->name);
                 }

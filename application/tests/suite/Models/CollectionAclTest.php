@@ -18,7 +18,6 @@ class Models_CollectionAclTest extends Omeka_Test_AppTestCase
     public function setUp()
     {
         parent::setUp();
-        self::dbChanged(false);
 
         $super = new User;
         $super->role = 'super';

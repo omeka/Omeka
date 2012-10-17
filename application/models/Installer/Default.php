@@ -1,19 +1,16 @@
 <?php
 /**
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
- * @access private
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
  * The default installer, which extracts values from the installer form to 
  * create the default Omeka installation.
- *
- * @internal This implements Omeka internals and is not part of the public API.
- * @access private
- * @package Omeka
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
+ * 
+ * @package Omeka\Install
  */
 class Installer_Default implements Installer_InstallerInterface
 {
@@ -53,10 +50,14 @@ class Installer_Default implements Installer_InstallerInterface
 
     public function install()
     {
+        $this->getDb()->beginTransaction();
+
         $this->_createSchema();
         $this->_createUser();
         $this->_setupMigrations();
-        $this->_addOptions();   
+        $this->_addOptions();
+
+        $this->getDb()->commit();
     }
     
     protected function _getValue($fieldName)
@@ -120,7 +121,8 @@ class Installer_Default implements Installer_InstallerInterface
             'html_purifier_allowed_html_elements' => implode(',', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlElements()),
             'html_purifier_allowed_html_attributes' => implode(',', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlAttributes()),
             'tag_delimiter'                 => ',',
-            Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME => Omeka_Navigation::getNavigationOptionValueForInstall(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME)
+            Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME => Omeka_Navigation::getNavigationOptionValueForInstall(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME),
+            'search_record_types' => serialize(get_search_record_types()), 
         ));
         $task->install($this->_db);
     }

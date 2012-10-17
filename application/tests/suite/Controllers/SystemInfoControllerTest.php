@@ -20,12 +20,6 @@ class Omeka_Controllers_SystemInfoControllerTest extends Omeka_Test_AppTestCase
     {
         parent::setUp();
         $this->_authenticateUser($this->_getDefaultUser());
-        self::dbChanged(false);
-    }
-
-    public static function tearDownAfterClass()
-    {
-        self::dbChanged(true);
     }
 
     public static function roles()

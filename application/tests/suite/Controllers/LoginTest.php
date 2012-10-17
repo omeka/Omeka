@@ -34,7 +34,6 @@ class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
     {
         $this->_login(Omeka_Test_Resource_Db::SUPER_USERNAME, Omeka_Test_Resource_Db::SUPER_PASSWORD);
         $this->assertRedirectTo('/');
-        self::dbChanged(false);
     }
     
     public function testInvalidLogin()
@@ -42,7 +41,6 @@ class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
         $this->_login('foo', 'bar');
         $this->assertNotRedirect();
         $this->assertContains(UsersController::INVALID_LOGIN_MESSAGE, $this->getResponse()->sendResponse());
-        self::dbChanged(false);
     }
 
     public static function roles()

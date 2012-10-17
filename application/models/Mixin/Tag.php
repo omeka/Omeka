@@ -1,18 +1,13 @@
 <?php
 /**
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
- * Taggable
- * Adaptation of the Rails Acts_as_taggable
- *
- * @package Omeka
- * @subpackage Mixins
- * @author CHNM
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
+ * @package Omeka\Record\Mixin
  */
 class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
 {
@@ -28,7 +23,7 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
 
         $db = $this->_record->getDb();
         $this->_tagTable = $db->getTable('Tag');
-        $this->_joinTable = $db->getTable('Taggings');
+        $this->_joinTable = $db->getTable('RecordsTags');
     }
     
     /**
@@ -56,9 +51,9 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
     {
         $db = $this->_record->getDb();
         
-        $db->delete($db->Taggings, array(
-            'relation_id = ?' => (int) $this->_record->id,
-            'type = ?' => $this->_type
+        $db->delete($db->RecordsTags, array(
+            'record_id = ?' => (int) $this->_record->id,
+            'record_type = ?' => $this->_type
             )
         );
     }
@@ -169,11 +164,11 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
         foreach ($tags as $key => $tagName) {
             $tag = $this->_tagTable->findOrNew(trim($tagName));
             
-            $join = new Taggings;
+            $join = new RecordsTags;
                         
             $join->tag_id = $tag->id;
-            $join->relation_id = $this->_record->id;
-            $join->type = $this->_type;
+            $join->record_id = $this->_record->id;
+            $join->record_type = $this->_type;
             $join->save();            
         }
     }

@@ -3,7 +3,7 @@
     <?php echo flash(); ?>            
 
     
-    <table class="full">
+    <table>
         <thead>
             <th><?php echo __('Name'); ?></th>
             <th><?php echo __('Version'); ?></th>

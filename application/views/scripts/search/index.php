@@ -25,7 +25,7 @@ $searchRecordTypes = get_search_record_types();
 </table>
 <div id="pagination-bottom" class="pagination"><?php echo pagination_links(); ?></div>
 <?php else: ?>
-<p>Your query returned no results. Would you like to refine your search using boolean mode?</p>
+<p>Your query returned no results. You can refine your search by using a different query type.</p>
 <?php endif; ?>
 </div>
 <?php echo foot(); ?>

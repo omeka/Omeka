@@ -16,6 +16,8 @@
             <?php if (is_allowed('ItemTypes', 'delete')): ?>
                 <?php echo link_to($item_type, 'delete-confirm', __('Delete'), array('class' => 'big red button delete-confirm')); ?>
             <?php endif; ?>
+            <?php fire_plugin_hook("admin_append_to_item_types_panel_buttons", array('item_type'=> get_current_record('item_type'))); ?>
+            <?php fire_plugin_hook("admin_append_to_item_types_panel_fields", array('item_type'=> get_current_record('item_type'))); ?>
         </div>
     </form>
 

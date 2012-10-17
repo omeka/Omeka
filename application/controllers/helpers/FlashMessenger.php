@@ -25,18 +25,18 @@ class Omeka_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Acti
     /**
      * addMessage() - Add a message to flash message
      *
-     * @param  string|Omeka_Validator_Exception $message The message to add
+     * @param  string|Omeka_Validate_Exception $message The message to add
      * @param  string|null $status The message status
      * @return Mu_Controller_Action_Helper_FlashMessenger Provides a fluent interface
      */
     public function addMessage($message, $status = null) 
     {
-        if ($message instanceof Omeka_Validator_Exception) {
+        if ($message instanceof Omeka_Validate_Exception) {
             $message = $message->getErrors();
             if ($status === null) {
                 $status = 'error';
             }
-        } else if ($message instanceof Omeka_Validator_Errors) {
+        } else if ($message instanceof Omeka_Validate_Errors) {
             $message = (string) $message;
             if ($status === null) {
                 $status = 'error';

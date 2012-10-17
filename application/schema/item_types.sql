@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%item_types` (
   `description` text collate utf8_unicode_ci,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `%PREFIX%item_types` VALUES
 (1, 'Document', 'A resource containing textual data.  Note that facsimiles or images of texts are still of the genre text.'),

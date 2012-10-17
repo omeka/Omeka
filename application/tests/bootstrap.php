@@ -26,21 +26,6 @@ define('TEST_DIR', dirname(__FILE__));
 define('TEST_LIB_DIR', TEST_DIR . '/libraries');
 set_include_path(get_include_path() . PATH_SEPARATOR . TEST_LIB_DIR);
 
-// THEME_DIR is the only constant defined by the bootstrap(s).
-// Redefine it here in order to prevent test errors that stem from not defining
-// this constant.
-// Warning: tests for code that uses THEME_DIR will only use the admin theme dir,
-// not the public one.  This could potentially cause subtle breakage in tests.
-define('THEME_DIR', join('/', array(BASE_DIR, 'admin', 'themes')));
-
 // Make sure the autoloader is initialized.
 $autoloader = new Omeka_Application_Resource_Autoloader;
 $autoloader->init();
-
-// Clean out the test database before running any tests.
-$config = new Omeka_Test_Resource_Config;
-$config->init();
-$dbIni = Zend_Registry::get('test_config')->db;
-$helper = Omeka_Test_Helper_Db::factory($dbIni);
-$helper->dropTables($dbIni->prefix);
-$helper->getAdapter()->closeConnection();

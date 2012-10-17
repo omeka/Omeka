@@ -34,14 +34,14 @@
                 <?php echo link_to_item_search(); ?>
             </div><!-- end search -->
 
-            <div id="site-title"><?php echo link_to_home_page(custom_display_logo()); ?></div>
+            <div id="site-title"><?php echo link_to_home_page(theme_logo()); ?></div>
 
         </div><!-- end header -->
 
         <div id="primary-nav">
             <?php echo public_nav_main(); ?>
         </div><!-- end primary-nav -->
-        <?php echo custom_header_image(); ?>
+        <?php echo theme_header_image(); ?>
 
         <div id="content">
             <?php fire_plugin_hook('public_theme_page_content'); ?>

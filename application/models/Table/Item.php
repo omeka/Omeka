@@ -86,36 +86,34 @@ class Table_Item extends Omeka_Db_Table
     protected function _simpleSearch($select, $terms)
     {
         $db = $this->getDb();
-        $quotedTerms = $db->quote($terms);
+        $quotedTerms = $db->quote("%{$terms}%");
         
         // Build elements query.
         $elementsQuery = "
-        SELECT i.id as item_id, MATCH (etx.text) AGAINST ($quotedTerms) as rank 
-        FROM $db->Item i 
-        INNER JOIN $db->ElementText etx ON etx.record_id = i.id 
+        SELECT etx.record_id AS item_id
+        FROM $db->ElementText etx
         WHERE etx.record_type = 'Item' 
-        AND MATCH (etx.text) AGAINST ($quotedTerms)";
+        AND etx.text LIKE $quotedTerms";
         
         // Build tags query.
-        $rank = 1;
         $tagList = preg_split('/\s+/', $terms);
         // Make sure the tag list contains the whole search string, just in case 
         // that is found
         $tagList[] = $terms;
         $tagsSelect = new Omeka_Db_Select;
-        $tagsSelect->from(array('i' => $db->Item), array('item_id' => 'i.id', 'rank' => new Zend_Db_Expr($rank)))
-                   ->joinInner(array('tg' => $db->Taggings), 'tg.relation_id = i.id AND tg.type = "Item"', array())
+        $tagsSelect->from(array('tg' => $db->RecordsTags), array('item_id' => 'tg.record_id'))
                    ->joinInner(array('t' => $db->Tag), 't.id = tg.tag_id', array());
         foreach ($tagList as $tag) {
             $tagsSelect->orWhere('t.name LIKE ?', $tag);
         }
+        $tagsSelect->where("tg.record_type = 'Item'");
         $tagsQuery = (string) $tagsSelect;
         
         // INNER JOIN to the main SQL query and then ORDER BY rank DESC
         $query = "$elementsQuery UNION $tagsQuery";
         $select->joinInner(array('s' => new Zend_Db_Expr("($query)")), 
                            's.item_id = items.id', 
-                           array())->order('s.rank DESC');
+                           array());
     }
     
     /**
@@ -260,15 +258,15 @@ class Table_Item extends Omeka_Db_Table
      *    WHERE
      *    (
      *    i.id IN
-     *        (SELECT tg.relation_id as id
-     *        FROM omeka_taggings tg
+     *        (SELECT tg.record_id as id
+     *        FROM omeka_records_tags tg
      *        INNER JOIN omeka_tags t ON t.id = tg.tag_id
-     *        WHERE t.name = 'foo' AND tg.type = 'Item')
+     *        WHERE t.name = 'foo' AND tg.record_type = 'Item')
      *    AND i.id IN
-     *       (SELECT tg.relation_id as id
-     *       FROM omeka_taggings tg
+     *       (SELECT tg.record_id as id
+     *       FROM omeka_records_tags tg
      *       INNER JOIN omeka_tags t ON t.id = tg.tag_id
-     *       WHERE t.name = 'bar' AND tg.type = 'Item')
+     *       WHERE t.name = 'bar' AND tg.record_type = 'Item')
      *    )
      *      ...
      *
@@ -292,9 +290,9 @@ class Table_Item extends Omeka_Db_Table
         foreach ($tags as $tagName) {
 
             $subSelect = new Omeka_Db_Select;
-            $subSelect->from(array('taggings'=>$db->Taggings), array('items.id'=>'taggings.relation_id'))
-                ->joinInner(array('tags'=>$db->Tag), 'tags.id = taggings.tag_id', array())
-                ->where('tags.name = ? AND taggings.`type` = "Item"', trim($tagName));
+            $subSelect->from(array('records_tags'=>$db->RecordsTags), array('items.id'=>'records_tags.record_id'))
+                ->joinInner(array('tags'=>$db->Tag), 'tags.id = records_tags.tag_id', array())
+                ->where('tags.name = ? AND records_tags.`record_type` = "Item"', trim($tagName));
 
             $select->where('items.id IN (' . (string) $subSelect . ')');
         }
@@ -329,11 +327,11 @@ class Table_Item extends Omeka_Db_Table
         }
         $subSelect = new Omeka_Db_Select;
         $subSelect->from(array('items'=>$db->Item), 'items.id')
-                         ->joinInner(array('taggings' => $db->Taggings),
-                                     'taggings.relation_id = items.id AND taggings.type = "Item"',
+                         ->joinInner(array('records_tags' => $db->RecordsTags),
+                                     'records_tags.record_id = items.id AND records_tags.record_type = "Item"',
                                      array())
                          ->joinInner(array('tags' => $db->Tag),
-                                     'taggings.tag_id = tags.id',
+                                     'records_tags.tag_id = tags.id',
                                      array());
 
         foreach ($tags as $key => $tag) {

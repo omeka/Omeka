@@ -20,7 +20,6 @@ class Omeka_Controller_CollectionsControllerTest extends Omeka_Test_AppTestCase
         $this->assertController('collections');
         $this->assertAction('add');
         $this->assertQuery("input#name");
-        self::dbChanged(false);
     }
     
     public function testOwnerIdSetForNewCollections()

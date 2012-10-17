@@ -1,24 +1,18 @@
 <?php
-/**
- * @copyright Roy Rosenzweig Center for History and New Media, 2009-2010
- * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
- * @access private
- */
+require_once APP_DIR . '/forms/Install.php';
 
 /**
- * Get the install form to get current default values.
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
-require_once APP_DIR . '/forms/Install.php';
 
 /**
  * Set up the database test environment by wiping and resetting the database to
  * a recently-installed state.
- *
- * @internal This implements Omeka internals and is not part of the public API.
- * @access private
- * @package Omeka
- * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
+ * 
+ * @package Omeka\Test\Resource
  */
 class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
 {
@@ -32,15 +26,25 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
     const DEFAULT_AUTHOR        = 'CHNM';
     const DEFAULT_COPYRIGHT     = '2010';
     const DEFAULT_DESCRIPTION   = 'This database will be reset after every test run.  DO NOT USE WITH PRODUCTION SITES';
-    
-    private $_runInstaller = true;
+
+    /**
+     * Flag to determine whether the tables need to be dropped. This is a slow
+     * process, and really should only be happening once, when the tests are
+     * first run.
+     */
+    public static $dropTables = true;
+
+    /**
+     * Flag to determine whether the installer needs to be run.
+     */
+    public static $runInstaller = true;
 
     /**
      * Avoid issues with database connections not closing properly after each 
      * test run.
      */
     private static $_cachedAdapter;
-        
+
     /**
      * Load and initialize the database.
      *
@@ -48,17 +52,21 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
      */
     public function init()
     {   
-        $omekaDb = $this->getDb();
-        if (!Omeka_Test_AppTestCase::dbChanged()) {
-            $this->setInstall(false);
-            Omeka_Test_AppTestCase::dbChanged(true);
+        $db = $this->getDb();
+        $helper = Omeka_Test_Helper_Db::factory($this);
+        if (self::$dropTables) {
+            $helper->dropTables();
+            self::$dropTables = false;
         }
-        if ($this->_runInstaller) {
-            $this->_truncateTables($omekaDb);
-            $installer = new Installer_Test($omekaDb);
-            $installer->install();
+        if (self::$runInstaller) {
+            if (!self::$dropTables) {
+                $helper->truncateTables();
+            }
+            $helper->install();
+            self::$runInstaller = false;
         }
-        return $omekaDb;
+        $db->beginTransaction();
+        return $db;
     }
     
     /**
@@ -129,16 +137,4 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
             $db->setLogger($bs->getResource('Logger'));
         }
     }
-        
-    /**
-     * Truncate all the tables in the test database.
-     *
-     * @param Omeka_Db $db
-     * @return void
-     */
-    private function _truncateTables(Omeka_Db $db)
-    {
-        $dbHelper = new Omeka_Test_Helper_Db($db->getAdapter());
-        $dbHelper->truncateTables($db->prefix);
-    }    
 }

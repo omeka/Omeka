@@ -14,12 +14,6 @@
 class Omeka_Helpers_SetRevertThemeBaseUriTest extends Omeka_Test_AppTestCase
 {
     protected $_isAdminTest = true;
-    
-    public function tearDown()
-    {
-        parent::tearDown();
-        self::dbChanged(false);
-    }
 
     public function assertPreConditions()
     {

@@ -33,15 +33,25 @@ class Table_SearchText extends Omeka_Db_Table
             $params['query'] = '';
         }
         
+        // Set the query type if not passed.
+        if (!isset($params['query_type'])) {
+            $params['query_type'] = 'full_text';
+        }
+        
         // Set the base select statement.
         $select->reset(Zend_Db_Select::COLUMNS);
         $select->columns(array('record_type', 'record_id', 'title'));
-        if (isset($params['boolean'])) {
-            $match = 'MATCH (`text`) AGAINST (? IN BOOLEAN MODE)';
+        
+        // Set the where clause according to the query type.
+        if ('exact_match' == $params['query_type']) {
+            $where = '`text` LIKE ?';
+            $params['query'] = "%{$params['query']}%";
+        } else if ('boolean' == $params['query_type']) {
+            $where = 'MATCH (`text`) AGAINST (? IN BOOLEAN MODE)';
         } else {
-            $match = 'MATCH (`text`) AGAINST (?)';
+            $where = 'MATCH (`text`) AGAINST (?)';
         }
-        $select->where($match, $params['query']);
+        $select->where($where, $params['query']);
         
         // Search only those record types that are configured to be searched.
         $searchRecordTypes = get_custom_search_record_types();

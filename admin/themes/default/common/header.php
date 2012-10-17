@@ -70,9 +70,9 @@
             </fieldset>
             <a href="#" id="advanced-site-search" class="blue button">advanced search</a>
             <div id="advanced-form">
-                <p><?php echo $this->formCheckbox('boolean', null, array('disableHidden' => true)); ?>
-                <?php echo __('Use boolean'); ?></p>
-                <?php if($searchRecordTypes = get_custom_search_record_types()): ?>
+                <p><?php echo __('Search using this query type:'); ?></p>
+                <?php echo $this->formRadio('query_type', 'full_text', null, array('full_text' => __('Full text'), 'boolean' => __('Boolean'), 'exact_match' => __('Exact match'))); ?>
+                <?php if ($searchRecordTypes = get_custom_search_record_types()): ?>
                     <p><?php echo __('Search only these record types:'); ?></p>
                         <?php foreach ($searchRecordTypes as $key => $value): ?>
                         <input type="checkbox" name="record_types[]" value="<?php echo $key; ?>" checked="checked" /> <?php echo $value; ?><br />

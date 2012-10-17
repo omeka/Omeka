@@ -171,12 +171,11 @@ function add_plugin_hook($hook, $callback)
  * @uses Omeka_Plugin_Broker::callHook()
  * @param string $name The hook name.
  * @param array $args Arguments to be passed to the hook implementations.
- * @return mixed
  */
 function fire_plugin_hook($name, array $args = array())
 {
     if ($pluginBroker = get_plugin_broker()) {
-        return $pluginBroker->callHook($name, $args);
+        $pluginBroker->callHook($name, $args);
     }
 }
 
@@ -3157,6 +3156,56 @@ function revert_theme_base_url()
     if (($previous = $front->getParam('previousBaseUrl')) !== null) {
         $front->setBaseUrl($previous);
         $front->clearParams('previousBaseUrl');
+    }
+}
+
+/**
+ * Return the theme's logo image tag.
+ * 
+ * @uses get_theme_option()
+ * @return string|null
+ */
+function theme_logo()
+{
+    $logo = get_theme_option('Logo');
+    if ($logo) {
+        $storage = Zend_Registry::get('storage');
+        $uri = $storage->getUri($storage->getPathByType($logo, 'theme_uploads'));
+        return '<img src="' . $uri . '" title="' . option('site_title') . '" />';
+    }
+}
+
+/**
+ * Return the theme's header image tag.
+ * 
+ * @uses get_theme_option()
+ * @return string|null
+ */
+function theme_header_image()
+{
+    $headerImage = get_theme_option('Header Image');
+    if ($headerImage) {
+        $storage = Zend_Registry::get('storage');
+        $headerImage = $storage->getUri($storage->getPathByType($headerImage, 'theme_uploads'));
+        return '<div id="header-image"><img src="' . $headerImage . '" /></div>';
+    }
+}
+
+/**
+ * Return the theme's header background image style.
+ * 
+ * @uses get_theme_option()
+ * @return string|null
+ */
+function theme_header_background()
+{
+    $headerBg = get_theme_option('Header Background');
+    if ($headerBg) {
+        $storage = Zend_Registry::get('storage');
+        $headerBg = $storage->getUri($storage->getPathByType($headerBg, 'theme_uploads'));
+        echo '<style type="text/css" media="screen">#header {'
+           . 'background:transparent url("' . $headerBg . '") top left no-repeat;'
+           . '}</style>';
     }
 }
 
