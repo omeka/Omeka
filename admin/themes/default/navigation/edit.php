@@ -40,7 +40,7 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
         function updateHideButtons() {
             jQuery('div.navigation_main_link_header > input[type="checkbox"]').each(function(i, e) {
                 var headerDiv = jQuery(e).parent(); 
-                if (!headerDiv.find('div[class="navigation_main_list_hide"]').length) {
+                if (!headerDiv.find('div[class="navigation_main_list_hide hidden"]').length) {
                     headerDiv.append('<div class="navigation_main_list_hide hidden">&#9654;</div>');
                     headerDiv.find('.navigation_main_list_hide').click(function(ee) {
                         ee.preventDefault();
