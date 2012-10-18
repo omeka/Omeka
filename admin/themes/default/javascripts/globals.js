@@ -77,15 +77,16 @@ jQuery(document).ready(function () {
     saveScroll();
     
     function showAdvancedForm() {
+        jQuery('#search-form input[type=submit]').addClass("blue button").after('<a href="#" id="advanced-search" class="blue button">Advanced Search</a>');
         var $advanced_form = jQuery("#advanced-form");
-        jQuery("#advanced-site-search").click( function(event) {
+        jQuery("#advanced-search").click( function(event) {
             event.stopPropagation();
             if($advanced_form.css("display") == "none") {
                 $advanced_form.fadeIn();
             } else {
                 $advanced_form.fadeOut();
             }
-            jQuery("#search input[type=text]").click( function(event) {
+            jQuery("#search-form input[type=text]").click( function(event) {
                event.stopPropagation(); 
             });
             $advanced_form.click( function(event) {
