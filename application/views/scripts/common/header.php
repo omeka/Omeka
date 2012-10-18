@@ -27,7 +27,7 @@
     <?php fire_plugin_hook('public_theme_body'); ?>
     <div id="wrap">
 
-        <header>
+        <header role="banner">
 
             <?php fire_plugin_hook('public_theme_page_header'); ?>
 
