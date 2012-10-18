@@ -1321,7 +1321,7 @@ function tag_attributes($attributes, $value=null)
  * Return the site-wide search form.
  * 
  * @param array $options Valid options are as follows:
- * - show_advanced (bool): whether to show the advanced search; default is true.
+ * - show_advanced (bool): whether to show the advanced search; default is false.
  * - submit_value (string): the value of the submit button; default "Submit".
  * - form_attributes (array): an array containing form tag attributes.
  * @return string The search form markup.
@@ -1330,7 +1330,7 @@ function search_form(array $options = array())
 {
     // Set the default flag indicating whether to show the advanced form.
     if (!isset($options['show_advanced'])) {
-        $options['show_advanced'] = true;
+        $options['show_advanced'] = false;
     }
     
     // Set the default submit value.
@@ -1373,24 +1373,15 @@ function search_form(array $options = array())
         $recordTypes = array_keys($validRecordTypes);
     }
     
-    // Set the view and begin output buffering.
-    $view = get_view();
-    ob_start();
-?>
-<?php echo $view->form('search-form', $options['form_attributes']); ?>
-    <?php echo $view->formText('query', $query); ?>
-    <?php if ($options['show_advanced']): ?>
-    <p><?php echo __('Search using this query type:'); ?></p>
-    <?php echo $view->formRadio('query_type', $queryType, null, $validQueryTypes); ?>
-    <p><?php echo __('Search only these record types:'); ?></p>
-    <?php foreach ($validRecordTypes as $key => $value): ?>
-    <?php echo $view->formCheckbox('record_types[]', $key, in_array($key, $recordTypes) ? array('checked' => true) : null); ?> <?php echo $value; ?><br>
-    <?php endforeach; ?>
-    <?php endif; ?>
-    <?php echo $view->formSubmit(null, $options['submit_value']); ?>
-</form>
-<?php
-    return ob_get_clean();
+    return get_view()->partial(
+        'search/search-form.php', 
+        array('options' => $options, 
+              'query' => $query, 
+              'validQueryTypes' => $validQueryTypes, 
+              'validRecordTypes' => $validRecordTypes, 
+              'queryType' => $queryType, 
+              'recordTypes' => $recordTypes)
+    );
 }
 
 /**
