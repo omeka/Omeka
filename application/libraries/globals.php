@@ -1318,46 +1318,73 @@ function tag_attributes($attributes, $value=null)
 }
 
 /**
- * Make a simple search form for the items.
- *
- * Contains a single fieldset with a text input and submit button.
- *
- * @param string $buttonText Defaults to 'Search'.
- * @param array $formProperties HTML attributes for the form.
- * @param string $uri Action for the form.  Defaults to 'items/browse'.
- * @return string
+ * Return the site-wide search form.
+ * 
+ * @param array $options Valid options are as follows:
+ * - show_advanced (bool): whether to show the advanced search; default is true.
+ * - submit_value (string): the value of the submit button; default "Submit".
+ * - form_attributes (array): an array containing form tag attributes.
+ * @return string The search form markup.
  */
-function simple_search_form($buttonText = null, $formProperties=array('id'=>'simple-search'), $uri = null)
+function search_form(array $options = array())
 {
-    if (!$buttonText) {
-        $buttonText = __('Search');
+    // Set the default flag indicating whether to show the advanced form.
+    if (!isset($options['show_advanced'])) {
+        $options['show_advanced'] = true;
     }
     
-    // Always post the 'items/browse' page by default (though can be overridden).
-    if (!$uri) {
-        $uri = apply_filters('simple_search_default_uri', url('items/browse'));
+    // Set the default submit value.
+    if (!isset($options['submit_value'])) {
+        $options['submit_value'] = __('Search');
     }
     
-    $searchQuery = array_key_exists('search', $_GET) ? $_GET['search'] : '';
-    $formProperties['action'] = $uri;
-    $formProperties['method'] = 'get';
-    $html  = '<form ' . tag_attributes($formProperties) . '>' . "\n";
-    $html .= '<fieldset>' . "\n\n";
-    $html .= get_view()->formText('search', $searchQuery);
-    $html .= get_view()->formSubmit('submit_search', $buttonText, array('class' => 'blue'));
-    $html .= '</fieldset>' . "\n\n";
-    
-    // add hidden fields for the get parameters passed in uri
-    $parsedUri = parse_url($uri);
-    if (array_key_exists('query', $parsedUri)) {
-        parse_str($parsedUri['query'], $getParams);
-        foreach($getParams as $getParamName => $getParamValue) {
-            $html .= get_view()->formHidden($getParamName, $getParamValue);
-        }
+    // Set the default form attributes.
+    if (!isset($options['form_attributes'])) {
+        $options['form_attributes'] = array();
+    }
+    $options['form_attributes']['method'] = 'get';
+    if (!isset($options['form_attributes']['action'])) {
+        $options['form_attributes']['action'] = apply_filters('search_form_default_action', url('search'));
+    }
+    if (!isset($options['form_attributes']['id'])) {
+        $options['form_attributes']['id'] = 'search-form';
     }
     
-    $html .= '</form>';
-    return $html;
+    // Set the valid query and record types.
+    $validQueryTypes = array('full_text' => __('Full text'), 
+                             'boolean' => __('Boolean'), 
+                             'exact_match' => __('Exact match'));
+    $validRecordTypes = get_custom_search_record_types();
+    
+    // Set default form values if not passed with the request.
+    if (!isset($_GET['query'])) {
+        $_GET['query'] = '';
+    }
+    if (!isset($_GET['query_type']) || !array_key_exists($_GET['query_type'], $validQueryTypes)) {
+        $_GET['query_type'] = 'full_text';
+    }
+    if (!isset($_GET['record_types'])) {
+        $_GET['record_types'] = array_keys($validRecordTypes);
+    }
+    
+    // Set the view and begin output buffering.
+    $view = get_view();
+    ob_start();
+?>
+<?php echo $view->form('search-form', $options['form_attributes']); ?>
+    <?php echo $view->formText('query', $_GET['query']); ?>
+    <?php if ($options['show_advanced']): ?>
+    <p><?php echo __('Search using this query type:'); ?></p>
+    <?php echo $view->formRadio('query_type', $_GET['query_type'], null, $validQueryTypes); ?>
+    <p><?php echo __('Search only these record types:'); ?></p>
+    <?php foreach ($validRecordTypes as $key => $value): ?>
+    <?php echo $view->formCheckbox('record_types[]', $key, in_array($key, $_GET['record_types']) ? array('checked' => true) : null); ?> <?php echo $value; ?><br>
+    <?php endforeach; ?>
+    <?php endif; ?>
+    <?php echo $view->formSubmit(null, $options['submit_value']); ?>
+</form>
+<?php
+    return ob_get_clean();
 }
 
 /**
