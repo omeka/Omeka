@@ -1321,80 +1321,14 @@ function tag_attributes($attributes, $value=null)
  * Return the site-wide search form.
  * 
  * @param array $options Valid options are as follows:
- * - show_advanced (bool): whether to show the advanced search; default is true.
+ * - show_advanced (bool): whether to show the advanced search; default is false.
  * - submit_value (string): the value of the submit button; default "Submit".
  * - form_attributes (array): an array containing form tag attributes.
  * @return string The search form markup.
  */
 function search_form(array $options = array())
 {
-    // Set the default flag indicating whether to show the advanced form.
-    if (!isset($options['show_advanced'])) {
-        $options['show_advanced'] = true;
-    }
-    
-    // Set the default submit value.
-    if (!isset($options['submit_value'])) {
-        $options['submit_value'] = __('Search');
-    }
-    
-    // Set the default form attributes.
-    if (!isset($options['form_attributes'])) {
-        $options['form_attributes'] = array();
-    }
-    $options['form_attributes']['method'] = 'get';
-    if (!isset($options['form_attributes']['action'])) {
-        $options['form_attributes']['action'] = apply_filters('search_form_default_action', url('search'));
-    }
-    if (!isset($options['form_attributes']['id'])) {
-        $options['form_attributes']['id'] = 'search-form';
-    }
-    
-    // Set the valid query and record types.
-    $validQueryTypes = array('full_text' => __('Full text'), 
-                             'boolean' => __('Boolean'), 
-                             'exact_match' => __('Exact match'));
-    $validRecordTypes = get_custom_search_record_types();
-    
-    // Set default form values if not passed with the request.
-    if (!isset($_GET['query'])) {
-        $_GET['query'] = '';
-    }
-    if (!isset($_GET['query_type']) || !array_key_exists($_GET['query_type'], $validQueryTypes)) {
-        $_GET['query_type'] = 'full_text';
-    }
-    if (!isset($_GET['record_types'])) {
-        $_GET['record_types'] = array_keys($validRecordTypes);
-    }
-    
-    // Set the view and begin output buffering.
-    $view = get_view();
-    ob_start();
-?>
-<?php echo $view->form('search-form', $options['form_attributes']); ?>
-    <?php echo $view->formText('query', $_GET['query']); ?>
-    <?php if ($options['show_advanced']): ?>
-    <fieldset id="advanced-form">
-        <fieldset id="query-types">
-            <p><?php echo __('Search using this query type:'); ?></p>
-            <?php echo $view->formRadio('query_type', $_GET['query_type'], null, $validQueryTypes); ?>
-        </fieldset>
-        <?php if($validRecordTypes): ?>
-        <fieldset id="record-types">
-            <p><?php echo __('Search only these record types:'); ?></p>
-                <?php foreach ($validRecordTypes as $key => $value): ?>
-                <?php echo $view->formCheckbox('record_types[]', $key, in_array($key, $_GET['record_types']) ? array('checked' => true) : null); ?> <?php echo $value; ?><br>
-                <?php endforeach; ?>
-            <?php elseif(is_admin_theme()): ?>
-                <p><a href="<?php echo url('search/settings'); ?>"><?php echo __('Go to search settings to select record types to use.'); ?></a></p>
-        </fieldset>
-        <?php endif; ?>
-    </fieldset>
-    <?php endif; ?>
-    <?php echo $view->formSubmit(null, $options['submit_value']); ?>
-</form>
-<?php
-    return ob_get_clean();
+    return get_view()->searchForm($options);
 }
 
 /**
@@ -3089,21 +3023,18 @@ function record_url($record, $action = null, $getAbsoluteUrl = false)
  */
 function items_output_url($output, $otherParams = array()) {
     
-    // Copy $_GET and filter out all the cruft.
-    $queryParams = $_GET;
+    $queryParams = array();
     
-    // The submit button the search form.
-    unset($queryParams['submit_search']);
-    
-    // If 'page' is passed in query string and not via the route
-    // Page should always be the first so that accurate results are retrieved
-    // for the RSS.  Does it make sense to get an RSS feed of the 2nd page?
-    unset($queryParams['page']);
-    
+    // Provide additional query parameters if the current page is items/browse.
+    $request = Zend_Controller_Front::getInstance()->getRequest();
+    if ('items' == $request->getControllerName() && 'browse' == $request->getActionName()) {
+        $queryParams = $_GET;
+        unset($queryParams['submit_search']);
+        unset($queryParams['page']);
+    }
     $queryParams = array_merge($queryParams, $otherParams);
     $queryParams['output'] = $output;
     
-    // Use the 'default' route as opposed to the current route.
     return url(array('controller'=>'items', 'action'=>'browse'), 'default', $queryParams);
 }
 

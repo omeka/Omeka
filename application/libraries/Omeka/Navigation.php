@@ -63,28 +63,8 @@ class Omeka_Navigation extends Zend_Navigation
      */
     public function addPage($page)
     {
-        if ($page === $this) {
-            require_once 'Zend/Navigation/Exception.php';
-            throw new Zend_Navigation_Exception(
-                'A page cannot have itself as a parent');
-        }
-
-        if (is_array($page) || $page instanceof Zend_Config) {
-            require_once 'Zend/Navigation/Page.php';
-            $page = Zend_Navigation_Page::factory($page);
-        }
-
-        // Handle URI pages from Zend's page factory
-        if (get_class($page) == 'Zend_Navigation_Page_Uri') {
-            $page = new Omeka_Navigation_Page_Uri($page->toArray());
-        }
-
-        if (!($page instanceof Zend_Navigation_Page_Mvc || $page instanceof Omeka_Navigation_Page_Uri)) {
-            require_once 'Zend/Navigation/Exception.php';
-            throw new Zend_Navigation_Exception(
-                    'Invalid argument: $page must be an instance of ' .
-                    'Zend_Navigation_Page_Mvc or Omeka_Navigation_Page_Uri');
-        }
+         // normalize the page and its subpages            
+        $page = $this->_normalizePageRecursive($page);        
                 
         $page->uid = $this->createPageUid($page->getHref());
         if (!($fPage = $this->findByUid($page->uid))) {
@@ -102,7 +82,8 @@ class Omeka_Navigation extends Zend_Navigation
      * If the associated uri of any page is invalid, it will not add that page to the navigation. 
      * Also, it removes expired pages from formerly active plugins and other former handlers of the filter.
      * 
-     * @param String $filterName    The name of the filter  
+     * @param String $filterName    The name of the filter
+     * @throws Zend_Navigation_Exception if a filter page is invalid  
      */
     public function addPagesFromFilter($filterName='public_navigation_main') 
     {                
@@ -134,9 +115,9 @@ class Omeka_Navigation extends Zend_Navigation
         // add pages from filter handlers (e.g. plugins)
         $pageUids = array();
         foreach($pageLinks as $pageLink) {
-                         
+                                     
             // normalize the page and its subpages            
-            $page = $this->_normalizePageRecursive($pageLink);
+            $page = $this->_normalizePageRecursive($pageLink, array('can_delete' => false));
     
             if ($page) {
                 // if the navigation does not have the page, then add it
@@ -144,7 +125,7 @@ class Omeka_Navigation extends Zend_Navigation
                 $pageUids[] = $pUid; // gather the uids of pages offered by filters
                 
                 if (!($fPage = $this->getPageByUid($pUid))) {                    
-                    $this->addPage($page); // add the new page
+                    parent::addPage($page); // add the new page
                 }
             }
         }
@@ -231,12 +212,18 @@ class Omeka_Navigation extends Zend_Navigation
      * Normalizes a page and its subpages so it can be added
      *
      * @param  Zend_Navigation_Page|array|Zend_Config $page  Page to normalize
+     * @param  $pageOptions  The options to set during normalization for every page and subpage
      * @return Omeka_Navigation_Page_Uri|Zend_Navigation_Page_Mvc|null The normalized page
+     * @throws Zend_Navigation_Exception if a page or subpage is invalid  
      */
-    protected function _normalizePageRecursive($page) 
+    protected function _normalizePageRecursive($page, $pageOptions = array()) 
     {
-        $isValidPage = false;
-        
+        if ($page === $this) {
+            require_once 'Zend/Navigation/Exception.php';
+            throw new Zend_Navigation_Exception(
+                'A page cannot have itself as a parent');
+        }
+                
         // convert an array or Zend_Config to a Zend_Navigation_Page 
         if (is_array($page) || $page instanceof Zend_Config) {
             require_once 'Zend/Navigation/Page.php';
@@ -244,38 +231,39 @@ class Omeka_Navigation extends Zend_Navigation
         }
         
         // convert a Zend_Navigation_Page_Uri page to an Omeka_Navigation_Page_Uri page
-        if ($page instanceof Zend_Navigation_Page_Uri) {
+        if (get_class($page) == 'Zend_Navigation_Page_Uri') {
             $page = $this->_convertZendToOmekaNavigationPageUri($page);
         }
         
         if ($page instanceof Omeka_Navigation_Page_Uri) {
-            $page->setHref($page->getHref());
-            $isValidPage = true;
+            $page->setHref($page->getHref());  // sets the href, which normalizes the uri from an href
         } elseif ($page instanceof Zend_Navigation_Page_Mvc) {
             if ($page->getRoute() === null) {
                 $page->setRoute('default');
             }
-            $isValidPage = true;
         }
         
-        if ($isValidPage) {
-            // set the uid
-            $uid = $this->createPageUid($page->getHref());
-            $page->set('uid', $uid);
-            
-            // set can_delete
-            $page->set('can_delete', false); // make sure the user cannot manually delete the page        
-            
-            // normalize sub pages
-            $subPages = array();
-            foreach($page->getPages() as $subPage) {
-                $subPages[] = $this->_normalizePageRecursive($subPage);
-            }
-            $page->setPages($subPages);
-        } else {
-            $page = null;
+        if (!($page instanceof Zend_Navigation_Page_Mvc || $page instanceof Omeka_Navigation_Page_Uri)) {
+            require_once 'Zend/Navigation/Exception.php';
+            throw new Zend_Navigation_Exception(
+                    'Invalid argument: $page must resolve to an instance of ' .
+                    'Zend_Navigation_Page_Mvc or Omeka_Navigation_Page_Uri');
         }
         
+        // set options for the page
+        $page->setOptions($pageOptions);
+        
+        // set the uid
+        $uid = $this->createPageUid($page->getHref());
+        $page->set('uid', $uid);
+        
+        // normalize sub pages
+        $subPages = array();
+        foreach($page->getPages() as $subPage) {
+            $subPages[] = $this->_normalizePageRecursive($subPage, $pageOptions);
+        }
+        $page->setPages($subPages);
+            
         return $page;
     }
     
