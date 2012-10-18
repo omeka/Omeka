@@ -1374,12 +1374,22 @@ function search_form(array $options = array())
 <?php echo $view->form('search-form', $options['form_attributes']); ?>
     <?php echo $view->formText('query', $_GET['query']); ?>
     <?php if ($options['show_advanced']): ?>
-    <p><?php echo __('Search using this query type:'); ?></p>
-    <?php echo $view->formRadio('query_type', $_GET['query_type'], null, $validQueryTypes); ?>
-    <p><?php echo __('Search only these record types:'); ?></p>
-    <?php foreach ($validRecordTypes as $key => $value): ?>
-    <?php echo $view->formCheckbox('record_types[]', $key, in_array($key, $_GET['record_types']) ? array('checked' => true) : null); ?> <?php echo $value; ?><br>
-    <?php endforeach; ?>
+    <fieldset id="advanced-form">
+        <fieldset id="query-types">
+            <p><?php echo __('Search using this query type:'); ?></p>
+            <?php echo $view->formRadio('query_type', $_GET['query_type'], null, $validQueryTypes); ?>
+        </fieldset>
+        <?php if($validRecordTypes): ?>
+        <fieldset id="record-types">
+            <p><?php echo __('Search only these record types:'); ?></p>
+                <?php foreach ($validRecordTypes as $key => $value): ?>
+                <?php echo $view->formCheckbox('record_types[]', $key, in_array($key, $_GET['record_types']) ? array('checked' => true) : null); ?> <?php echo $value; ?><br>
+                <?php endforeach; ?>
+            <?php elseif(is_admin_theme()): ?>
+                <p><a href="<?php echo url('search/settings'); ?>"><?php echo __('Go to search settings to select record types to use.'); ?></a></p>
+        <?php endif; ?>
+        </fieldset>
+    </fieldset>
     <?php endif; ?>
     <?php echo $view->formSubmit(null, $options['submit_value']); ?>
 </form>
