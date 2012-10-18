@@ -1387,8 +1387,8 @@ function search_form(array $options = array())
                 <?php endforeach; ?>
             <?php elseif(is_admin_theme()): ?>
                 <p><a href="<?php echo url('search/settings'); ?>"><?php echo __('Go to search settings to select record types to use.'); ?></a></p>
-        <?php endif; ?>
         </fieldset>
+        <?php endif; ?>
     </fieldset>
     <?php endif; ?>
     <?php echo $view->formSubmit(null, $options['submit_value']); ?>
