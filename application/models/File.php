@@ -304,11 +304,6 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      */
     private function _getId3()
     {
-        // Do not extract metadata if the exif module is not loaded. This 
-        // applies to all files, not just files with Exif data -- i.e. images.
-        if (!extension_loaded('exif')) {
-            return false;
-        }
         if (!$this->_id3) {
             require_once 'getid3/getid3.php';
             $id3 = new getID3;
