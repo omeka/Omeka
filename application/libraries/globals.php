@@ -1328,60 +1328,7 @@ function tag_attributes($attributes, $value=null)
  */
 function search_form(array $options = array())
 {
-    // Set the default flag indicating whether to show the advanced form.
-    if (!isset($options['show_advanced'])) {
-        $options['show_advanced'] = false;
-    }
-    
-    // Set the default submit value.
-    if (!isset($options['submit_value'])) {
-        $options['submit_value'] = __('Search');
-    }
-    
-    // Set the default form attributes.
-    if (!isset($options['form_attributes'])) {
-        $options['form_attributes'] = array();
-    }
-    $options['form_attributes']['method'] = 'get';
-    if (!isset($options['form_attributes']['action'])) {
-        $options['form_attributes']['action'] = apply_filters('search_form_default_action', url('search'));
-    }
-    if (!isset($options['form_attributes']['id'])) {
-        $options['form_attributes']['id'] = 'search-form';
-    }
-    
-    // Set the valid query and record types.
-    $validQueryTypes = array('full_text' => __('Full text'), 
-                             'boolean' => __('Boolean'), 
-                             'exact_match' => __('Exact match'));
-    $validRecordTypes = get_custom_search_record_types();
-    
-    // Set default form values if not passed with the request.
-    if (isset($_GET['query'])) {
-        $query = $_GET['query'];
-    } else {
-        $query = '';
-    }
-    if (isset($_GET['query_type']) && array_key_exists($_GET['query_type'], $validQueryTypes)) {
-        $queryType = $_GET['query_type'];
-    } else {
-        $queryType = 'full_text';
-    }
-    if (isset($_GET['record_types'])) {
-        $recordTypes = $_GET['record_types'];
-    } else {
-        $recordTypes = array_keys($validRecordTypes);
-    }
-    
-    return get_view()->partial(
-        'search/search-form.php', 
-        array('options' => $options, 
-              'query' => $query, 
-              'validQueryTypes' => $validQueryTypes, 
-              'validRecordTypes' => $validRecordTypes, 
-              'queryType' => $queryType, 
-              'recordTypes' => $recordTypes)
-    );
+    return get_view()->searchForm($options);
 }
 
 /**
