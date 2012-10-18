@@ -45,8 +45,27 @@ class SearchController extends Omeka_Controller_AbstractActionController
         $this->view->assign('customSearchRecordTypes', get_custom_search_record_types());
     }
     
+    /**
+     * Return the number of results to display per page.
+     * 
+     * An authorized user can modify this using the "per_page" query parameter.
+     *
+     * @return int
+     */
     protected function _getBrowseRecordsPerPage()
     {
-        return 20;
+        // Return the per page if the current user has permission to modify it.
+        if ($this->_helper->acl->isAllowed('modifyPerPage', 'Search')) {
+            $perPage = (int) $this->getRequest()->get('per_page');
+            if ($perPage) {
+                return $perPage;
+            } 
+        }
+        if (is_admin_theme()) {
+            $perPage = (int) get_option('per_page_admin');
+        } else {
+            $perPage = (int) get_option('per_page_public');
+        }
+        return $perPage;
     }
 }
