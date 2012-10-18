@@ -77,7 +77,8 @@ jQuery(document).ready(function () {
     saveScroll();
     
     function showAdvancedForm() {
-        jQuery('#search-form input[type=submit]').addClass("blue button").after('<a href="#" id="advanced-search" class="blue button">Advanced Search</a>');
+        jQuery('#search-form input[type=submit]').addClass("blue button with-advanced").after('<a href="#" id="advanced-search" class="blue button">Advanced Search</a>');
+        jQuery('#search-form input[type=text]').addClass("blue button with-advanced");
         var $advanced_form = jQuery("#advanced-form");
         jQuery("#advanced-search").click( function(event) {
             event.stopPropagation();
@@ -101,7 +102,11 @@ jQuery(document).ready(function () {
         });
     }
     
-    showAdvancedForm();
+    if(jQuery("#advanced-form")) {
+        showAdvancedForm();
+    } else {
+        jQuery('#search-form input[type=submit]').addClass("blue button");
+    }
 
     // Generates mobile-friendly tables
     jQuery('table').each(function() {

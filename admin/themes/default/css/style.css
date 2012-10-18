@@ -538,7 +538,6 @@ header ul {
     
     #advanced-form {
         display: none;
-        position: relative;
         background-color: #fff;
         overflow: auto;
         clear: both;
@@ -555,7 +554,7 @@ header ul {
         #advanced-form input[type=checkbox] { margin-right: 5px; }
 
     #search-form input[type=text] {
-        width: 65%;
+        width: 75%;
         height: 27px;
         float: left;
         display: inline-block;
@@ -565,6 +564,10 @@ header ul {
         margin: 0;
     }
     
+            #search-form input[type=text].with-advanced {
+                width: 65%;
+            }
+    
     #search-form input[type=submit] {
         width: 25%;
         height: 27px;
@@ -573,9 +576,13 @@ header ul {
         padding: 0 5px;
         position: absolute;
         top: 0;
-        left: 65%;
+        left: 75%;
         float: left;
     }
+    
+            #search-form input[type=submit].with-advanced {
+                left: 65%;
+            }
     
     #advanced-search {
         width: 10%;
