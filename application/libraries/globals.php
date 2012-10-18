@@ -3079,21 +3079,18 @@ function record_url($record, $action = null, $getAbsoluteUrl = false)
  */
 function items_output_url($output, $otherParams = array()) {
     
-    // Copy $_GET and filter out all the cruft.
-    $queryParams = $_GET;
+    $queryParams = array();
     
-    // The submit button the search form.
-    unset($queryParams['submit_search']);
-    
-    // If 'page' is passed in query string and not via the route
-    // Page should always be the first so that accurate results are retrieved
-    // for the RSS.  Does it make sense to get an RSS feed of the 2nd page?
-    unset($queryParams['page']);
-    
-    $queryParams = array_merge($queryParams, $otherParams);
+    // Provide additional query parameters if the current page is items/browse.
+    $request = Zend_Controller_Front::getInstance()->getRequest();
+    if ('items' == $request->getControllerName() && 'browse' == $request->getActionName()) {
+        $queryParams = $_GET;
+        unset($queryParams['submit_search']);
+        unset($queryParams['page']);
+    }
+    $queryParams['output'] = array_merge($queryParams, $otherParams);
     $queryParams['output'] = $output;
     
-    // Use the 'default' route as opposed to the current route.
     return url(array('controller'=>'items', 'action'=>'browse'), 'default', $queryParams);
 }
 
