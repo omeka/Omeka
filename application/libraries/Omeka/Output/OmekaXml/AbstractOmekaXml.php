@@ -342,9 +342,15 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
         }
         
         // collection
+        $collectionTitle = strip_formatting(metadata($item->Collection, array('Dublin Core', 'Title')));
+        if ($collectionTitle == '') {
+            $collectionTitle = __('[Untitled]');
+        }
+        $collectionDescription = strip_formatting(metadata($item->Collection, array('Dublin Core', 'Description')));
+        
         $collectionElement = $this->_createElement('collection', null, $item->Collection->id);
-        $nameElement = $this->_createElement('name', $item->Collection->name, null, $collectionElement);
-        $descriptionElement = $this->_createElement('description', $item->Collection->description, null, $collectionElement);
+        $nameElement = $this->_createElement('name', $collectionTitle, null, $collectionElement);
+        $descriptionElement = $this->_createElement('description', $collectionDescription, null, $collectionElement);
         $collectorContainerElement = $this->_createElement('collectorContainer');
         foreach ($item->Collection->getCollectors() as $collector) {
             $collectorElement = $this->_createElement('collector', $collector, null, $collectorContainerElement);
@@ -390,8 +396,15 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
     */
     protected function _buildItemContainerForCollection(Collection $collection, DOMElement $parentElement)
     {
-        $nameElement = $this->_createElement('name', strip_formatting(metadata($collection, array('Dublin Core', 'Title'))), null, $parentElement);
-        $descriptionElement = $this->_createElement('description', strip_formatting(metadata($collection, array('Dublin Core', 'Description'))), null, $parentElement);
+        $collectionTitle = strip_formatting(metadata($item->Collection, array('Dublin Core', 'Title')));
+        if ($collectionTitle == '') {
+            $collectionTitle = __('[Untitled]');
+        }
+        $collectionDescription = strip_formatting(metadata($item->Collection, array('Dublin Core', 'Description')));
+        
+        
+        $nameElement = $this->_createElement('name', $collectionTitle, null, $parentElement);
+        $descriptionElement = $this->_createElement('description', $collectionDescription, null, $parentElement);
         $collectorContainerElement = $this->_createElement('collectorContainer');
         foreach ($collection->getCollectors() as $collector) {
             $collectorElement = $this->_createElement('collector', $collector, null, $collectorContainerElement);

@@ -12,21 +12,8 @@
  * @package Omeka\Record
  */
 class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Interface
-{        
-    const COLLECTION_NAME_MIN_CHARACTERS = 1;
-    const COLLECTION_NAME_MAX_CHARACTERS = 255;
-    
+{            
     const COLLECTOR_DELIMITER = "\n";
-    
-    /**
-     * @var string Name of the collection.
-     */
-    public $name;
-    
-    /**
-     * @var string Description for the collection.
-     */
-    public $description;
     
     /**
      * @var array Strings containing the names of this collection's collectors.
@@ -60,20 +47,12 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
     
     protected $_related = array('Elements'=>'getElements',
                                 'ElementTexts'=>'getElementText');
-                
-    protected function _initializeMixins()
-    {
-        $this->_mixins[] = new Mixin_PublicFeatured($this);
-        $this->_mixins[] = new Mixin_Owner($this);
-        $this->_mixins[] = new Mixin_ElementText($this);
-        $this->_mixins[] = new Mixin_Timestamp($this);
-        $this->_mixins[] = new Mixin_Search($this);
-    }
-
+    
     /**
      * Get a property about this collection.
      *
      * @param string $property The property to get, always lowercase.
+     * @return mixed The value of the property
      */
     public function getProperty($property)
     {
@@ -111,6 +90,7 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
      * Retrieve a list of all the collectors associated with this collection.
      * 
      * @return array List of strings.
+     * @throws RuntimeException
      */
     public function getCollectors()
     {
@@ -132,59 +112,6 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
     }
 
     /**
-     * Filter the POST data from the form.
-     *
-     * Trims the 'name' and 'description' strings, strips tags from the 
-     * collection name, and converts public/featured flags to booleans.
-     * 
-     * @param array $post
-     * @return array
-     */
-    protected function filterPostData($post)
-    {
-        $options = array('inputNamespace'=>'Omeka_Filter');
-        
-        // User form input does not allow HTML tags or superfluous whitespace
-        $filters = array('name'         => array('StripTags','StringTrim'),
-                         'description'  => array('StringTrim'),
-                         'public'       => 'Boolean',
-                         'featured'     => 'Boolean');
-            
-        $filter = new Zend_Filter_Input($filters, null, $post, $options);
-        
-        $post = $filter->getUnescaped();
-                
-        return $post;
-    }
-    
-    
-    /**
-     * All of the custom code for deleting an collection.
-     *
-     * @return void
-     */
-    protected function _delete()
-    {    
-        $this->deleteElementTexts();
-    }
-    
-    /**
-     * Validate the record.
-     * 
-     * Checks the collection name to ensure that it is below 255 characters.
-     */
-    protected function _validate()
-    {        
-        if (!Zend_Validate::is($this->name, 'StringLength', array(
-                'min' => self::COLLECTION_NAME_MIN_CHARACTERS,
-                'max' => self::COLLECTION_NAME_MAX_CHARACTERS))
-        ) {
-            $this->addError('name', __('The collection name must have between %1$s and %2$s characters.', self::COLLECTION_NAME_MIN_CHARACTERS, 
-            self::COLLECTION_NAME_MAX_CHARACTERS));
-        }
-    }
-    
-    /**
      * Disassociate a collector with this collection.
      * 
      * @param string
@@ -200,23 +127,7 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
         }
         return false;
     }
-    
-    protected function beforeSave($args)
-    {
-        if ($args['post']) {
-            $post = $args['post'];
-            
-            $this->beforeSaveElements($post);
-            
-            // Process the collectors that have been provided on the form
-            if (isset($post['collectors'])) {
-                $collectorPost = (string)$post['collectors'];
-                $collectors = explode(self::COLLECTOR_DELIMITER, $collectorPost);
-                $this->setCollectors($collectors);
-            }
-        }
-    }
-    
+
     /**
      * Add a collector to the collection.
      *
@@ -227,6 +138,7 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
      * 
      * @param string $collector
      * @return void
+     * @throws InvalidArgumentException
      */
     public function addCollector($collector)
     {
@@ -282,14 +194,73 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
     {
         return 'Collections';
     }
+
+    /**
+     * Initialize the mixins
+     *
+     */            
+    protected function _initializeMixins()
+    {
+        $this->_mixins[] = new Mixin_PublicFeatured($this);
+        $this->_mixins[] = new Mixin_Owner($this);
+        $this->_mixins[] = new Mixin_ElementText($this);
+        $this->_mixins[] = new Mixin_Timestamp($this);
+        $this->_mixins[] = new Mixin_Search($this);
+    }
+
+    /**
+     * Filter the POST data from the form.
+     *
+     * Converts public/featured flags to booleans.
+     * 
+     * @param array $post
+     * @return array
+     */
+    protected function filterPostData($post)
+    {
+        $options = array('inputNamespace'=>'Omeka_Filter');
+        
+        // User form input does not allow HTML tags or superfluous whitespace
+        $filters = array('public'       => 'Boolean',
+                         'featured'     => 'Boolean');
+            
+        $filter = new Zend_Filter_Input($filters, null, $post, $options);
+        
+        $post = $filter->getUnescaped();
+                
+        return $post;
+    }
+    
+    /**
+     * All of the custom code for deleting an collection.
+     *
+     * @return void
+     */
+    protected function _delete()
+    {    
+        $this->deleteElementTexts();
+    }
+    
+    protected function beforeSave($args)
+    {
+        if ($args['post']) {
+            $post = $args['post'];
+            
+            $this->beforeSaveElements($post);
+            
+            // Process the collectors that have been provided on the form
+            if (isset($post['collectors'])) {
+                $collectorPost = (string)$post['collectors'];
+                $collectors = explode(self::COLLECTOR_DELIMITER, $collectorPost);
+                $this->setCollectors($collectors);
+            }
+        }
+    }
     
     protected function afterSave()
     {
         if (!$this->public) {
             $this->setSearchTextPrivate();
         }
-        $this->setSearchTextTitle($this->name);
-        $this->addSearchText($this->name);
-        $this->addSearchText($this->description);
     }
 }

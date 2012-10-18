@@ -36,24 +36,36 @@ class Models_Builder_CollectionTest extends PHPUnit_Framework_TestCase
     
     public function testBuildReturnsSavedCollection()
     {
-        $this->builder->setRecordMetadata(array(
-            'name' => 'foobar name'
-        ));
-        $collection = $this->builder->build();    
+        // build collection
+        $elementTexts = array(
+            'Dublin Core' => array(
+                'Title' => array(array('text' => 'foobar name', 'html' => false)),
+            )
+        );
+        $this->builder->setElementTexts($elementTexts);
+        $collection = $this->builder->build();
+        
         $this->assertThat($collection, $this->isInstanceOf('Collection'));
         $this->assertTrue($collection->exists());
     }
     
     public function testCanSetValidPropertiesForCollection()
     {
+        // build the collection
         $this->builder->setRecordMetadata(array(
-            'name' => 'foobar',
-            'description' => 'foobar desc',
             'public' => true,
             'featured' => false,
             'owner_id' => self::USER_ID
         ));
-        $collection = $this->builder->build();        
+        $elementTexts = array(
+            'Dublin Core' => array(
+                'Title' => array(array('text' => 'foobar', 'html' => false)),
+                'Description' => array(array('text' => 'foobar desc', 'html' => false)),
+            )
+        );
+        $this->builder->setElementTexts($elementTexts);
+        $collection = $this->builder->build();
+              
         $this->assertEquals('foobar', strip_formatting(metadata($collection, array('Dublin Core', 'Title'))));
         $this->assertEquals('foobar desc', strip_formatting(metadata($collection, array('Dublin Core', 'Description'))));
         $this->assertEquals("1", $collection->public);
@@ -65,13 +77,18 @@ class Models_Builder_CollectionTest extends PHPUnit_Framework_TestCase
     public function testCannotSetInvalidPropertiesForCollection()
     {
         $this->builder->setRecordMetadata(array(
-            'name' => 'foobar',
-            'description' => 'foobar desc',
             'public' => true,
             'featured' => false,
             'owner_id' => self::USER_ID,
             'jabberwocky' => 'huzzah'    
         ));
+        $elementTexts = array(
+            'Dublin Core' => array(
+                'Title' => array(array('text' => 'foobar', 'html' => false)),
+                'Description' => array(array('text' => 'foobar desc', 'html' => false)),
+            )
+        );
+        $this->builder->setElementTexts($elementTexts);
         $collection = $this->builder->build();
         $this->assertFalse(isset($collection->jabberwocky));
     }
