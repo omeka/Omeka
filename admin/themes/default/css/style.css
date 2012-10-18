@@ -516,41 +516,23 @@ header ul {
             margin-right: 0;
         }
 
-#advanced-site-search {
-    width: 10%;
-    text-indent: -9999px;
-    display: inline-block;
-    float: left;
-    line-height: 25px;
-    padding: 0;
-    margin: 0;
-}
-
-    #advanced-site-search:after {
-        content: "+";
-        display: block;
-        text-indent: 0;
-        text-align: center;
-        margin-top: -1.8125em;
-        padding: 0;
-    }
-
 #site-title {
     float: left;
     display: inline-block;
     line-height: 1.5em;
 }
 
-#search { 
+#search-form { 
     width: 30%;
     float: left; 
     display: inline-block; 
     position: absolute; 
     top: 0; 
     right: 0; 
+    z-index: 1000;
 }
     
-    #search p {
+    #search-form p {
         clear: both;
     }
     
@@ -561,34 +543,60 @@ header ul {
         overflow: auto;
         clear: both;
         z-index: 1001;
+        position: absolute;
+        top: 27px;
+        left: 0;
         padding: 0 20px 1em 20px;
         border: 1px solid #e7e7e7;
+        box-sizing: border-box;
+        width: 100%;
     }
     
         #advanced-form input[type=checkbox] { margin-right: 5px; }
 
-    #search fieldset {
-        width: 90%;
-        float: left;
-        text-align: right;
-    }
-
-    #search input[type=text] {
-        width: 75%;
+    #search-form input[type=text] {
+        width: 65%;
         height: 27px;
         float: left;
         display: inline-block;
+        position: absolute;
+        top: 0;
+        left: 0;
         margin: 0;
     }
     
-    #search input[type=submit] {
+    #search-form input[type=submit] {
         width: 25%;
         height: 27px;
         display: inline-block;
-        margin: 0;
         vertical-align: top;
         padding: 0 5px;
+        position: absolute;
+        top: 0;
+        left: 65%;
         float: left;
+    }
+    
+    #advanced-search {
+        width: 10%;
+        text-indent: -9999px;
+        display: inline-block;
+        float: left;
+        line-height: 25px;
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 90%;
+    }
+
+    #advanced-search:after {
+        content: "+";
+        display: block;
+        text-indent: 0;
+        text-align: center;
+        margin-top: -1.8125em;
+        padding: 0;
     }
 
 .subhead {
