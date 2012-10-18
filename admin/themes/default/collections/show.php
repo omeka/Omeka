@@ -1,11 +1,11 @@
 <?php
-    $collectionTitle = strip_formatting(metadata('collection', 'Name'));
-    if ($collectionTitle != '') {
+    $collectionTitle = strip_formatting(metadata('collection', array('Dublin Core', 'Title')));
+    if ($collectionTitle != '' && $collectionTitle != __('[Untitled]')) {
         $collectionTitle = ': &quot;' . $collectionTitle . '&quot; ';
     } else {
         $collectionTitle = '';
     }
-    $collectionTitle = __('Edit Collection #%s', metadata('collection', 'id')) . $collectionTitle;
+    $collectionTitle = __('Collection #%s', metadata('collection', 'id')) . $collectionTitle;
 ?>
 <?php echo head(array('title'=> $collectionTitle, 'bodyclass'=>'collections show')); ?>
 
@@ -45,10 +45,7 @@
             </div>
             
             <div class="seven columns alpha">
-
                 <?php echo flash(); ?>
-                <h2><?php echo __('Description'); ?></h2> 
-                <p><?php echo metadata('collection', 'Description'); ?></p>
                                                 
                 <?php if(metadata('collection', 'Total Items') > 0): ?>
                 <h2><?php echo __('Recently Added Items'); ?></h2>
@@ -59,8 +56,9 @@
                 </ul>
                 <?php endif; ?>
 
+                <?php echo all_element_texts('collection'); ?>
+
                 <?php fire_plugin_hook('admin_append_to_collections_show_primary', array('collection' => $collection, 'view' => $this)); ?>
-            
             </div>
         
 <?php echo foot(); ?>

@@ -131,7 +131,7 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
                 }
             case 'collection_name':
                 if ($collection = $this->Collection) {
-                    return $collection->name;
+                    return strip_formatting(metadata($collection, array('Dublin Core', 'Title')));
                 } else {
                     return null;
                 }

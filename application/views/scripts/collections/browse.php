@@ -11,11 +11,13 @@ echo head(array('title'=>$pageTitle,'bodyid'=>'collections','bodyclass' => 'brow
 
         <h2><?php echo link_to_collection(); ?></h2>
 
+        <?php if (metadata('collection', array('Dublin Core', 'Description'))): ?>
         <div class="element">
             <h3><?php echo __('Description'); ?></h3>
-            <div class="element-text"><?php echo text_to_paragraphs(metadata('collection', 'Description', array('snippet'=>150))); ?></div>
+            <div class="element-text"><?php echo text_to_paragraphs(metadata('collection', array('Dublin Core', 'Description'), array('snippet'=>150))); ?></div>
         </div>
-
+        <?php endif; ?>
+        
         <?php if(collection_has_collectors()): ?>
         <div class="element">
             <h3><?php echo __('Collector(s)'); ?></h3>
@@ -25,7 +27,7 @@ echo head(array('title'=>$pageTitle,'bodyid'=>'collections','bodyclass' => 'brow
         </div>
         <?php endif; ?>
 
-        <p class="view-items-link"><?php echo link_to_items_browse(__('View the items in %s', metadata('collection', 'Name')), array('collection' => metadata('collection', 'id'))); ?></p>
+        <p class="view-items-link"><?php echo link_to_items_browse(__('View the items in %s', metadata('collection', array('Dublin Core', 'Title'))), array('collection' => metadata('collection', 'id'))); ?></p>
 
         <?php fire_plugin_hook('public_append_to_collections_browse_each', array('view' => $this)); ?>
 
