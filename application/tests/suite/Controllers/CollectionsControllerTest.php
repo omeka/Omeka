@@ -26,13 +26,12 @@ class Omeka_Controller_CollectionsControllerTest extends Omeka_Test_AppTestCase
     {
         $user = $this->_getDefaultUser();
         $this->_authenticateUser($user);
-        $this->request->setPost(array(
-            'name' => 'foobar',
-            'description' => 'baz'
-        ));
+        
+        $this->request->setPost(array());
         $this->request->setMethod('post');
         $this->dispatch('collections/add');
         $this->assertRedirect();
+        
         $collections = $this->db->getTable('Collection')->findAll();
         $this->assertEquals(1, count($collections));
         $this->assertThat($collections[0], $this->isInstanceOf('Collection'));
@@ -44,20 +43,20 @@ class Omeka_Controller_CollectionsControllerTest extends Omeka_Test_AppTestCase
     {
         $user = $this->_getDefaultUser();
         $this->_authenticateUser($user);
+        
+        //create collection
         $collection = new Collection;
-                
-        $collection->addElementTextsByArray(array(
+        $elementTexts = array(
             'Dublin Core' => array(
                 'Title' => array(array('text' => 'foobar', 'html' => false)),
+                'Description' => array(array('text' => 'baz', 'html' => false))
             )
-        ));
-        
-        $collection->owner_id = 5;
+        );        
+        $collection->addElementTextsByArray($elementTexts);
+        $collection->owner_id = $user->id + 1;
         $collection->save();
-        $this->request->setPost(array(
-            'name' => 'foobar',
-            'description' => 'baz'
-        ));
+        
+        $this->request->setPost(array());
         $this->request->setMethod('post');
         $this->dispatch('collections/edit/' . $collection->id);
         $this->assertRedirect();

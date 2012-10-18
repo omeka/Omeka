@@ -1,7 +1,5 @@
 CREATE TABLE IF NOT EXISTS `%PREFIX%collections` (
   `id` int unsigned NOT NULL auto_increment,
-  `name` varchar(255) collate utf8_unicode_ci NOT NULL,
-  `description` text collate utf8_unicode_ci DEFAULT NULL,
   `collectors` text collate utf8_unicode_ci DEFAULT NULL,
   `public` tinyint NOT NULL,
   `featured` tinyint NOT NULL,

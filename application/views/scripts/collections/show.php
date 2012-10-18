@@ -1,7 +1,17 @@
-<?php echo head(array('title'=>metadata('collection', 'Name'), 'bodyid'=>'collections', 'bodyclass' => 'show')); ?>
+<?php
+$collectionTitle = strip_formatting(metadata('collection', array('Dublin Core', 'Title')));
+if ($collectionTitle == '') {
+    $collectionTitle = __('[Untitled]');
+}
+
+$itemTitle = strip_formatting(metadata('item', array('Dublin Core', 'Title')));
+
+?>
+
+<?php echo head(array('title'=> $collectionTitle, 'bodyid'=>'collections', 'bodyclass' => 'show')); ?>
 
 <div id="primary">
-    <h1><?php echo metadata('collection', 'Name'); ?></h1>
+    <h1><?php echo $collectionTitle; ?></h1>
 
     <div id="description" class="element">
         <h2><?php echo __('Description'); ?></h2>
@@ -19,14 +29,14 @@
     </div><!-- end collectors -->
     <?php endif; ?>
 
-    <p class="view-items-link"><?php echo link_to_items_browse(__('View the items in %s', metadata('collection', 'Name')), array('collection' => metadata('collection', 'id'))); ?></p>
+    <p class="view-items-link"><?php echo link_to_items_browse(__('View the items in %s', $collectionTitle), array('collection' => metadata('collection', 'id'))); ?></p>
 
     <div id="collection-items">
-        <h2><?php echo __('Items in the %s Collection', metadata('collection', 'Name')); ?></h2>
+        <h2><?php echo __('Items in the %s Collection', $collectionTitle); ?></h2>
 
         <?php foreach (loop('items') as $item): ?>
         <div class="item hentry">
-            <h3><?php echo link_to_item(metadata('item', array('Dublin Core', 'Title')), array('class'=>'permalink')); ?></h3>
+            <h3><?php echo link_to_item($itemTitle, array('class'=>'permalink')); ?></h3>
 
             <?php if (item_has_thumbnail()): ?>
             <div class="item-img">
