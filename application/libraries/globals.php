@@ -1747,15 +1747,15 @@ function body_tag($attributes = array())
 }
 
 /**
- * Return a list of the current search filters in use.
+ * Return a list of the current search item filters in use.
  *
  * @uses Omeka_View_Helper_SearchFilters::searchFilters()
  * @params array $params params to replace the ones read from the request.
  * @return string
  */
-function search_filters(array $params = null)
+function item_search_filters(array $params = null)
 {
-    return get_view()->searchFilters($params);
+    return get_view()->itemSearchFilters($params);
 }
 
 /**

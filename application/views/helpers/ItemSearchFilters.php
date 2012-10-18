@@ -11,16 +11,16 @@
  * 
  * @package Omeka\View\Helper
  */
-class Omeka_View_Helper_SearchFilters extends Zend_View_Helper_Abstract
+class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
 {
     /**
-     * Get a list of the currently-active filters.
+     * Get a list of the currently-active filters for item browse/search.
      *
      * @param array $params Optional array of key-value pairs to use instead of
      *  reading the current params from the request.
      * @return string HTML output
      */
-    public function searchFilters(array $params = null)
+    public function itemSearchFilters(array $params = null)
     {
         if ($params === null) {
             $request = Zend_Controller_Front::getInstance()->getRequest(); 
@@ -69,7 +69,7 @@ class Omeka_View_Helper_SearchFilters extends Zend_View_Helper_Abstract
             }
         }
 
-        apply_filters('display_search_filters', $displayArray, array('request_array' => $requestArray));
+        apply_filters('display_search_item_filters', $displayArray, array('request_array' => $requestArray));
         
         // Advanced needs a separate array from $displayValue because it's
         // possible for "Specific Fields" to have multiple values due to 
