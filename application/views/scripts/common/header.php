@@ -27,21 +27,24 @@
     <?php fire_plugin_hook('public_theme_body'); ?>
     <div id="wrap">
 
-        <div id="header">
+        <header>
+
             <?php fire_plugin_hook('public_theme_page_header'); ?>
+
+            <?php echo theme_header_image(); ?>
+
             <div id="search-container">
-                <?php echo simple_search_form(); ?>
-                <?php echo link_to_item_search(); ?>
+                <?php echo search_form(); ?>
             </div><!-- end search -->
 
-            <div id="site-title"><?php echo link_to_home_page(theme_logo()); ?></div>
+            <div id="site-title"><?php echo link_to_home_page(custom_display_logo()); ?></div>
+            
+            <nav id="top-nav">
+                <?php echo public_nav_main(); ?>
+            </nav>
 
-        </div><!-- end header -->
-
-        <div id="primary-nav">
-            <?php echo public_nav_main(); ?>
-        </div><!-- end primary-nav -->
-        <?php echo theme_header_image(); ?>
-
-        <div id="content">
+        </header>
+        
+        <article id="content">
+        
             <?php fire_plugin_hook('public_theme_page_content'); ?>

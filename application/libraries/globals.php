@@ -1318,46 +1318,17 @@ function tag_attributes($attributes, $value=null)
 }
 
 /**
- * Make a simple search form for the items.
- *
- * Contains a single fieldset with a text input and submit button.
- *
- * @param string $buttonText Defaults to 'Search'.
- * @param array $formProperties HTML attributes for the form.
- * @param string $uri Action for the form.  Defaults to 'items/browse'.
- * @return string
+ * Return the site-wide search form.
+ * 
+ * @param array $options Valid options are as follows:
+ * - show_advanced (bool): whether to show the advanced search; default is false.
+ * - submit_value (string): the value of the submit button; default "Submit".
+ * - form_attributes (array): an array containing form tag attributes.
+ * @return string The search form markup.
  */
-function simple_search_form($buttonText = null, $formProperties=array('id'=>'simple-search'), $uri = null)
+function search_form(array $options = array())
 {
-    if (!$buttonText) {
-        $buttonText = __('Search');
-    }
-    
-    // Always post the 'items/browse' page by default (though can be overridden).
-    if (!$uri) {
-        $uri = apply_filters('simple_search_default_uri', url('items/browse'));
-    }
-    
-    $searchQuery = array_key_exists('search', $_GET) ? $_GET['search'] : '';
-    $formProperties['action'] = $uri;
-    $formProperties['method'] = 'get';
-    $html  = '<form ' . tag_attributes($formProperties) . '>' . "\n";
-    $html .= '<fieldset>' . "\n\n";
-    $html .= get_view()->formText('search', $searchQuery);
-    $html .= get_view()->formSubmit('submit_search', $buttonText, array('class' => 'blue'));
-    $html .= '</fieldset>' . "\n\n";
-    
-    // add hidden fields for the get parameters passed in uri
-    $parsedUri = parse_url($uri);
-    if (array_key_exists('query', $parsedUri)) {
-        parse_str($parsedUri['query'], $getParams);
-        foreach($getParams as $getParamName => $getParamValue) {
-            $html .= get_view()->formHidden($getParamName, $getParamValue);
-        }
-    }
-    
-    $html .= '</form>';
-    return $html;
+    return get_view()->searchForm($options);
 }
 
 /**
@@ -3053,21 +3024,18 @@ function record_url($record, $action = null, $getAbsoluteUrl = false)
  */
 function items_output_url($output, $otherParams = array()) {
     
-    // Copy $_GET and filter out all the cruft.
-    $queryParams = $_GET;
+    $queryParams = array();
     
-    // The submit button the search form.
-    unset($queryParams['submit_search']);
-    
-    // If 'page' is passed in query string and not via the route
-    // Page should always be the first so that accurate results are retrieved
-    // for the RSS.  Does it make sense to get an RSS feed of the 2nd page?
-    unset($queryParams['page']);
-    
+    // Provide additional query parameters if the current page is items/browse.
+    $request = Zend_Controller_Front::getInstance()->getRequest();
+    if ('items' == $request->getControllerName() && 'browse' == $request->getActionName()) {
+        $queryParams = $_GET;
+        unset($queryParams['submit_search']);
+        unset($queryParams['page']);
+    }
     $queryParams = array_merge($queryParams, $otherParams);
     $queryParams['output'] = $output;
     
-    // Use the 'default' route as opposed to the current route.
     return url(array('controller'=>'items', 'action'=>'browse'), 'default', $queryParams);
 }
 

@@ -14,7 +14,14 @@
 class Omeka_Helper_AutoDiscoveryLinkTagsTest extends Omeka_Test_AppTestCase
 {           
     protected $_isAdminTest = false;
- 
+    
+    public function setUp()
+    {
+        // Somehow a previous GET request is leaking into these tests.
+        $_GET = array();
+        parent::setUp();
+    }
+    
     public function testLinkTagOnHome()
     {
         $this->dispatch('/');
@@ -45,7 +52,7 @@ class Omeka_Helper_AutoDiscoveryLinkTagsTest extends Omeka_Test_AppTestCase
     
     public function testLinkTagEscapesUrl()
     {
-        $this->dispatch('/');
+        $this->dispatch('/items/browse');
         $_GET['cookies&cream'] = 'tasty&delicious';
         $html = '<link rel="alternate" type="application/rss+xml" title="Omeka RSS Feed" href="/items/browse?cookies%26cream=tasty%26delicious&amp;output=rss2" />';
         $html .= '<link rel="alternate" type="application/atom+xml" title="Omeka Atom Feed" href="/items/browse?cookies%26cream=tasty%26delicious&amp;output=atom" />';
