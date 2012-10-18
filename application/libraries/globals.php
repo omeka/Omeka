@@ -1357,14 +1357,20 @@ function search_form(array $options = array())
     $validRecordTypes = get_custom_search_record_types();
     
     // Set default form values if not passed with the request.
-    if (!isset($_GET['query'])) {
-        $_GET['query'] = '';
+    if (isset($_GET['query'])) {
+        $query = $_GET['query'];
+    } else {
+        $query = '';
     }
-    if (!isset($_GET['query_type']) || !array_key_exists($_GET['query_type'], $validQueryTypes)) {
-        $_GET['query_type'] = 'full_text';
+    if (isset($_GET['query_type']) && array_key_exists($_GET['query_type'], $validQueryTypes)) {
+        $queryType = $_GET['query_type'];
+    } else {
+        $queryType = 'full_text';
     }
-    if (!isset($_GET['record_types'])) {
-        $_GET['record_types'] = array_keys($validRecordTypes);
+    if (isset($_GET['record_types'])) {
+        $recordTypes = $_GET['record_types'];
+    } else {
+        $recordTypes = array_keys($validRecordTypes);
     }
     
     // Set the view and begin output buffering.
@@ -1372,13 +1378,13 @@ function search_form(array $options = array())
     ob_start();
 ?>
 <?php echo $view->form('search-form', $options['form_attributes']); ?>
-    <?php echo $view->formText('query', $_GET['query']); ?>
+    <?php echo $view->formText('query', $query); ?>
     <?php if ($options['show_advanced']): ?>
     <p><?php echo __('Search using this query type:'); ?></p>
-    <?php echo $view->formRadio('query_type', $_GET['query_type'], null, $validQueryTypes); ?>
+    <?php echo $view->formRadio('query_type', $queryType, null, $validQueryTypes); ?>
     <p><?php echo __('Search only these record types:'); ?></p>
     <?php foreach ($validRecordTypes as $key => $value): ?>
-    <?php echo $view->formCheckbox('record_types[]', $key, in_array($key, $_GET['record_types']) ? array('checked' => true) : null); ?> <?php echo $value; ?><br>
+    <?php echo $view->formCheckbox('record_types[]', $key, in_array($key, $recordTypes) ? array('checked' => true) : null); ?> <?php echo $value; ?><br>
     <?php endforeach; ?>
     <?php endif; ?>
     <?php echo $view->formSubmit(null, $options['submit_value']); ?>
