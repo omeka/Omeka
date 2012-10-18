@@ -3088,7 +3088,7 @@ function items_output_url($output, $otherParams = array()) {
         unset($queryParams['submit_search']);
         unset($queryParams['page']);
     }
-    $queryParams['output'] = array_merge($queryParams, $otherParams);
+    $queryParams = array_merge($queryParams, $otherParams);
     $queryParams['output'] = $output;
     
     return url(array('controller'=>'items', 'action'=>'browse'), 'default', $queryParams);
