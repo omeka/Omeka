@@ -1,10 +1,10 @@
-        </div><!-- end content -->
+        </article>
 
-        <div id="footer">
+        <footer>
 
-            <ul class="navigation">
+            <nav id="bottom-nav">
                 <?php echo public_nav_main(); ?>
-            </ul>
+            </nav>
 
             <div id="footer-text">
                 <?php echo get_theme_option('Footer Text'); ?>
@@ -16,7 +16,8 @@
 
             <?php fire_plugin_hook('public_theme_footer'); ?>
 
-        </div><!-- end footer -->
+        </footer>
+
     </div><!-- end wrap -->
 </body>
 </html>
