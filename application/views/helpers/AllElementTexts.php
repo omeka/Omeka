@@ -162,7 +162,7 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
                 // Overwrite elements assigned to the item type element set with only
                 // those that belong to this item's particular item type. This is
                 // necessary because, otherwise, all item type elements will be shown.
-                $itemTypeElementSetName = $this->_record->getProperty('item_type_name') . ' ' . ELEMENT_SET_ITEM_TYPE;
+                $itemTypeElementSetName = $this->_record->getProperty('item_type_name') . ' ' . ElementSet::ITEM_TYPE_NAME;
                 
                 // Check to see if either the generic or specific Item Type element
                 // set has been chosen, i.e. 'Item Type Metadata' or 'Document
@@ -172,7 +172,7 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
                 
                 if (!empty($this->_elementSetsToShow)) {
                     if (in_array($itemTypeElementSetName, $this->_elementSetsToShow) or
-                    in_array(ELEMENT_SET_ITEM_TYPE, $this->_elementSetsToShow)) {
+                    in_array(ElementSet::ITEM_TYPE_NAME, $this->_elementSetsToShow)) {
                         $elementsBySet[$itemTypeElementSetName] = $itemTypeElements;
                     }
                 }
@@ -183,7 +183,7 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
 
             // Unset the existing 'Item Type' element set b/c it shows elements
             // for all item types.
-            unset($elementsBySet[ELEMENT_SET_ITEM_TYPE]);
+            unset($elementsBySet[ElementSet::ITEM_TYPE_NAME]);
         }
 
         return $elementsBySet;

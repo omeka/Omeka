@@ -18,7 +18,7 @@ $doNotDelete = array('Dublin Core', 'Item Type Metadata');
             <td class="element-set-name">
                 <?php echo html_escape(__($elementSet->name)); ?>
                 <ul class="action-links">
-                    <?php if (ELEMENT_SET_ITEM_TYPE != $elementSet->name): ?>
+                    <?php if (ElementSet::ITEM_TYPE_NAME != $elementSet->name): ?>
                     <li><?php echo link_to($elementSet, 'edit', __('Edit')); ?></li>
                     <?php endif; ?>
                     <?php if (!in_array($elementSet->name, $doNotDelete)): ?>

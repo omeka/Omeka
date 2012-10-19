@@ -248,7 +248,7 @@ class Omeka_Form_ItemTypes extends Omeka_Form
                 $elementTempIdParts = explode('-', $key);
                 $elementTempId = array_pop($elementTempIdParts);
                 $element = new Element;
-                $element->setElementSet(ELEMENT_SET_ITEM_TYPE);
+                $element->setElementSet(ElementSet::ITEM_TYPE_NAME);
                 $element->setName($value);
                 $element->setDescription($_POST[self::ADD_NEW_ELEMENT_DESCRIPTION_PREFIX . $elementTempId]);
                 $element->order = null;

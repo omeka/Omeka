@@ -12,9 +12,9 @@
             <?php foreach ($validRecordTypes as $key => $value): ?>
                 <?php echo $this->formCheckbox('record_types[]', $key, in_array($key, $request['recordTypes']) ? array('checked' => true) : null); ?> <?php echo $value; ?><br>
             <?php endforeach; ?>
+        </fieldset>
         <?php elseif (is_admin_theme()): ?>
             <p><a href="<?php echo url('search/settings'); ?>"><?php echo __('Go to search settings to select record types to use.'); ?></a></p>
-        </fieldset>
         <?php endif; ?>
     </fieldset>
     <?php endif; ?>

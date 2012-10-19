@@ -1747,15 +1747,15 @@ function body_tag($attributes = array())
 }
 
 /**
- * Return a list of the current search filters in use.
+ * Return a list of the current search item filters in use.
  *
  * @uses Omeka_View_Helper_SearchFilters::searchFilters()
  * @params array $params params to replace the ones read from the request.
  * @return string
  */
-function search_filters(array $params = null)
+function item_search_filters(array $params = null)
 {
-    return get_view()->searchFilters($params);
+    return get_view()->itemSearchFilters($params);
 }
 
 /**
@@ -2140,7 +2140,7 @@ function item_type_elements($item = null)
     }
     $elements = $item->getItemTypeElements();
     foreach ($elements as $element) {
-        $elementText[$element->name] = metadata($item, array(ELEMENT_SET_ITEM_TYPE, $element->name));
+        $elementText[$element->name] = metadata($item, array(ElementSet::ITEM_TYPE_NAME, $element->name));
     }
     return $elementText;
 }

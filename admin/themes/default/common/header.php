@@ -63,7 +63,7 @@
 
     <div class="subhead">
     
-        <?php echo search_form(); ?>
+        <?php echo search_form(array('show_advanced' => true)); ?>
             
         <?php if (isset($title)) : ?>
             <?php 

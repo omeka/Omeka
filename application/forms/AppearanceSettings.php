@@ -40,15 +40,15 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
         ));
         
         $this->addElement('text', 'per_page_admin', array(
-            'label' => __('Items Per Page (admin)'), 
-            'description' => __('Limit the number of items displayed per page in the administrative interface.'), 
+            'label' => __('Results Per Page (admin)'), 
+            'description' => __('Limit the number of results displayed per page in the administrative interface.'), 
             'validators' => array('Digits'), 
             'required' => true,
         ));
         
         $this->addElement('text', 'per_page_public', array(
-            'label' => __('Items Per Page (public)'), 
-            'description' => __('Limit the number of items displayed per page in the public interface.'), 
+            'label' => __('Results Per Page (public)'), 
+            'description' => __('Limit the number of results displayed per page in the public interface.'), 
             'validators' => array('Digits'), 
             'required' => true,
         ));

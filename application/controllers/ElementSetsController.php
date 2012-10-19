@@ -38,7 +38,7 @@ class ElementSetsController extends Omeka_Controller_AbstractActionController
         $elementSet = $this->_helper->db->findById();
         
         // Do not allow editing of item type elements.
-        if (ELEMENT_SET_ITEM_TYPE == $elementSet->name) {
+        if (ElementSet::ITEM_TYPE_NAME == $elementSet->name) {
             $this->_helper->redirector('index');
         }
         

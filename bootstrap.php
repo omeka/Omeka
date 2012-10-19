@@ -15,10 +15,6 @@ defined('APPLICATION_ENV') || define('APPLICATION_ENV', (
     getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'
 ));
 
-// Define the name of the item type element set. This is used wherever it is 
-// important to distinguish this special case element set from others.
-define('ELEMENT_SET_ITEM_TYPE', 'Item Type Metadata');
-
 // Define directory path constants.
 
 define('BASE_DIR', dirname(__FILE__));
