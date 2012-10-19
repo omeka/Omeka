@@ -54,10 +54,12 @@ class Table_File extends Omeka_Db_Table
      * @param integer $itemId
      * @param array $fileIds Optional If given, this will only retrieve files
      * with these specific IDs.
-     * @param string $sort The manner in which to order the files by. For example: 'id' = file id, 'filename' = alphabetical by filename
+     * @param string $sort The manner by which to order the files. For example:
+     *  'id': file id, 'filename' = alphabetical by filename. The default is
+     *  'order', following the user's specified order.
      * @return array
      */
-    public function findByItem($itemId, $fileIds = array(), $sort='id')
+    public function findByItem($itemId, $fileIds = array(), $sort = 'order')
     {
         $select = $this->getSelect();
         $select->where('files.item_id = ?');
@@ -73,14 +75,16 @@ class Table_File extends Omeka_Db_Table
     /**
      * Retrieve files for an item that has derivative images.
      *
-     * @param integer $itemId
+     * @param integer $itemId The ID of the item to get images for.
      * @param integer|null $index Optional If given, this specifies the file to
-     * retrieve for an item, based upon the ordering of its derivative files.
-     * @param string $sort The manner in which to order the files by. For example: 'id' = file id, 'filename' = alphabetical by filename
+     * retrieve for an item, based upon the ordering of its files.
+     * @param string $sort The manner by which to order the files. For example:
+     *  'id': file id, 'filename': alphabetical by filename. The default is
+     *  'order', following the user's specified order.
      *
      * @return File|array
      */
-    public function findWithImages($itemId, $index=null, $sort='id')
+    public function findWithImages($itemId, $index = null, $sort = 'order')
     {
         $select = $this->getSelect()
                        ->where('files.item_id = ? AND files.has_derivative_image = 1');

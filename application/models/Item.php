@@ -77,7 +77,7 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      */
     public function getFiles()
     {
-        return $this->getTable('File')->findByItem($this->id, null, 'order');
+        return $this->getTable('File')->findByItem($this->id);
     }
     
     /**
@@ -234,7 +234,7 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      */
     protected function _deleteFiles(array $fileIds = array())
     {           
-        $filesToDelete = $this->getTable('File')->findByItem($this->id, $fileIds);
+        $filesToDelete = $this->getTable('File')->findByItem($this->id, $fileIds, 'id');
         
         foreach ($filesToDelete as $fileRecord) {
             $fileRecord->delete();
