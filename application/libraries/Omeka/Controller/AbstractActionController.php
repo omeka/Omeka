@@ -111,7 +111,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
             ));
         }
         
-        $this->view->assign(array($pluralName => $records, 'total_records' => $totalRecords));
+        $this->view->assign(array($pluralName => $records, 'total_results' => $totalRecords));
     }
     
     /**

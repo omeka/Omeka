@@ -5,7 +5,7 @@ echo head(array('title'=>$pageTitle,'bodyid'=>'items','bodyclass' => 'browse'));
 
 <div id="primary">
 
-    <h1><?php echo $pageTitle;?> <?php echo __('(%s total)', total_results()); ?></h1>
+    <h1><?php echo $pageTitle;?> <?php echo __('(%s total)', $total_results); ?></h1>
 
     <ul class="items-nav navigation" id="secondary-nav">
         <?php echo public_nav_items(); ?>

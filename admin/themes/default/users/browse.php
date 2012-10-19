@@ -1,5 +1,5 @@
 <?php
-$pageTitle = __('Browse Users') . ' ' . __('(%s total)', $total_records);
+$pageTitle = __('Browse Users') . ' ' . __('(%s total)', $total_results);
 echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'users primary'));?>
 
 <?php if (is_allowed('Users', 'add')): ?>

@@ -1170,16 +1170,6 @@ function get_random_featured_collection()
 }
 
 /**
- * Return the total number of records set to the view.
- *
- * @return integer
- */
-function total_results()
-{
-    return get_view()->total_records;
-}
-
-/**
  * Return the latest available version of Omeka by accessing the appropriate
  * URI on omeka.org.
  *
