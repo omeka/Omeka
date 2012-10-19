@@ -1,5 +1,5 @@
 <?php
-$pageTitle = __('Browse Items') . ' ' . __('(%s total)', $total_records);
+$pageTitle = __('Browse Items') . ' ' . __('(%s total)', $total_results);
 echo head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodyclass'=>'items primary browse-items')); ?>
 
             <?php echo flash(); ?>
@@ -10,7 +10,7 @@ echo head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodycl
                 </div>
             <?php endif; ?>
 
-            <?php if ( total_results() ): ?>
+            <?php if ($total_results): ?>
             <script type="text/javascript">
                 jQuery(window).load(function() {
                     var detailsText = <?php echo js_escape(__('Details')); ?>;

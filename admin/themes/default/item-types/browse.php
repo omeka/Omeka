@@ -1,5 +1,5 @@
 <?php 
-$pageTitle = __('Browse Item Types') . ' ' . __('(%s total)', $total_records);
+$pageTitle = __('Browse Item Types') . ' ' . __('(%s total)', $total_results);
 echo head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
 
 <div class="table-actions">

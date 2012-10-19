@@ -1,10 +1,10 @@
 <?php
-$pageTitle = __('Search Omeka ' . __('(%s total)', total_results()));
+$pageTitle = __('Search Omeka ' . __('(%s total)', $total_results));
 echo head(array('title' => $pageTitle));
 $searchRecordTypes = get_search_record_types();
 ?>
 <div id="primary">
-<?php if (total_results()): ?>
+<?php if ($total_results): ?>
 <div id="pagination-top" class="pagination"><?php echo pagination_links(); ?></div>
 <table>
     <thead>
