@@ -91,7 +91,7 @@ class CollectionsController extends Omeka_Controller_AbstractActionController
     {
         $collectionTitle = $this->_getElementMetadata($collection, 'Dublin Core', 'Title');
         if ($collectionTitle != '') {
-            return __('The collection "%s" was successfully deleted!', $collectionTitle);
+            return __('The collection "%s" was successfully deleted!', $collectionTitle);        
         } else {
             return __('The collection #%s was successfully deleted!', strval($collection->id));
         }
