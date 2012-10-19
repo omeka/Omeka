@@ -39,9 +39,9 @@
         <h4><?php echo __('File History'); ?></h4>
         <dl>
         <dt><?php echo __('Date Added'); ?></dt>
-        <dd><?php echo metadata('file', 'Added'); ?></dd>
+        <dd><?php echo format_date(metadata('file', 'Added'), Zend_Date::DATETIME_MEDIUM); ?></dd>
         <dt><?php echo __('Date Modified'); ?></dt> 
-        <dd><?php echo metadata('file', 'Modified'); ?></dd>
+        <dd><?php echo format_date(metadata('file', 'Modified'), Zend_Date::DATETIME_MEDIUM); ?></dd>
         <dt><?php echo __('Authentication'); ?></dt> 
         <dd><?php echo metadata('file', 'Authentication'); ?></dd>
         </dl>
