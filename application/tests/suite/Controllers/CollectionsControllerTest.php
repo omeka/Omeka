@@ -19,7 +19,41 @@ class Omeka_Controller_CollectionsControllerTest extends Omeka_Test_AppTestCase
         $this->dispatch('collections/add');
         $this->assertController('collections');
         $this->assertAction('add');
-        $this->assertQuery("input#name");
+        $this->assertQuery("input#public");
+        $this->assertQuery("input#featured");
+        
+        $titleElement = $this->db->getTable('Element')->findByElementSetNameAndElementName('Dublin Core', 'Title');
+        $this->assertQuery('textarea#Elements-' . $titleElement->id . '-0-text');
+        $this->assertQuery('input#Elements-' . $titleElement->id . '-0-html');
+        
+        $descriptionElement = $this->db->getTable('Element')->findByElementSetNameAndElementName('Dublin Core', 'Description');
+        $this->assertQuery('textarea#Elements-' . $descriptionElement->id . '-0-text');
+        $this->assertQuery('input#Elements-' . $descriptionElement->id . '-0-html');
+        
+        $this->assertQuery('textarea#collectors');
+    }
+    
+    public function testRenderEditForm()
+    {
+        $collection = new Collection();
+        $collection->save();
+        
+        $this->_authenticateUser($this->_getDefaultUser());
+        $this->dispatch('collections/edit/' . $collection->id);
+        $this->assertController('collections');
+        $this->assertAction('edit');
+        $this->assertQuery("input#public");
+        $this->assertQuery("input#featured");
+        
+        $titleElement = $this->db->getTable('Element')->findByElementSetNameAndElementName('Dublin Core', 'Title');
+        $this->assertQuery('textarea#Elements-' . $titleElement->id . '-0-text');
+        $this->assertQuery('input#Elements-' . $titleElement->id . '-0-html');
+        
+        $descriptionElement = $this->db->getTable('Element')->findByElementSetNameAndElementName('Dublin Core', 'Description');
+        $this->assertQuery('textarea#Elements-' . $descriptionElement->id . '-0-text');
+        $this->assertQuery('input#Elements-' . $descriptionElement->id . '-0-html');
+        
+        $this->assertQuery('textarea#collectors');
     }
     
     public function testOwnerIdSetForNewCollections()
@@ -27,7 +61,7 @@ class Omeka_Controller_CollectionsControllerTest extends Omeka_Test_AppTestCase
         $user = $this->_getDefaultUser();
         $this->_authenticateUser($user);
         
-        $this->request->setPost(array());
+        $this->request->setPost(array('Elements' => array()));
         $this->request->setMethod('post');
         $this->dispatch('collections/add');
         $this->assertRedirect();
@@ -56,7 +90,7 @@ class Omeka_Controller_CollectionsControllerTest extends Omeka_Test_AppTestCase
         $collection->owner_id = $user->id + 1;
         $collection->save();
         
-        $this->request->setPost(array());
+        $this->request->setPost(array('Elements' => array()));
         $this->request->setMethod('post');
         $this->dispatch('collections/edit/' . $collection->id);
         $this->assertRedirect();

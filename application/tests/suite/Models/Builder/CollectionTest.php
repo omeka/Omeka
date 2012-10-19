@@ -11,22 +11,14 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Models_Builder_CollectionTest extends PHPUnit_Framework_TestCase
+class Models_Builder_CollectionTest extends Omeka_Test_AppTestCase
 {
-    const COLLECTION_ID = 1;
     const USER_ID = 2;
     
     public function setUp()
     {
-        $this->dbAdapter = new Zend_Test_DbAdapter;
-        $this->db = new Omeka_Db($this->dbAdapter);
-        $this->profilerHelper = new Omeka_Test_Helper_DbProfiler($this->dbAdapter->getProfiler(), $this);
-        $this->dbAdapter->appendLastInsertIdToStack(self::COLLECTION_ID);
-        $this->dbAdapter->appendLastInsertIdToStack(2);
+        parent::setUp();
         $this->builder = new Builder_Collection($this->db);
-        $bootstrap = new Omeka_Test_Bootstrap();
-        $bootstrap->getContainer()->db = $this->db;
-        Zend_Registry::set('bootstrap', $bootstrap);
     }
 
     public function tearDown()

@@ -24,9 +24,28 @@ class Table_Collection extends Omeka_Db_Table
     
     protected function _getColumnPairs()
     {
-        return array('collections.id', 'collections.name');
+        // will replace the second value with the Dublin Core Title in findPairsForSelectForm()
+        return array('collections.id', 'collections.id');
     }
-
+    
+    public function findPairsForSelectForm(array $options = array())
+    {
+        // replace the second value with the Dublin Core Title in findPairsForSelectForm()
+        $pairs = parent::findPairsForSelectForm($options);
+        $nPairs = array();
+        foreach($pairs as $collectionId => $v) {
+            $collection = $this->find($collectionId);
+            if ($collection) {
+                $collectionTitle = strip_formatting(metadata($collection, array('Dublin Core', 'Title')));
+                if ($collectionTitle == '') {
+                    $collectionTitle = __('[Untitled] #%s', strval($collectionId));
+                }
+                $nPairs[$collectionId] = $collectionTitle;
+            }
+        }
+        return $nPairs;
+    }
+    
     /**
      * Apply permissions checks to all SQL statements retrieving collections from the table
      * 

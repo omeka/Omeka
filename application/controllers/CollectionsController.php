@@ -70,26 +70,45 @@ class CollectionsController extends Omeka_Controller_AbstractActionController
     protected function _getAddSuccessMessage($collection)
     {
         $collectionTitle = $this->_getElementMetadata($collection, 'Dublin Core', 'Title');
-        return __('The collection "%s" was successfully added!', $collectionTitle);
+        if ($collectionTitle != '') {
+            return __('The collection "%s" was successfully added!', $collectionTitle);
+        } else {
+            return __('The collection #%s was successfully added!', strval($collection->id));
+        }
     }
     
     protected function _getEditSuccessMessage($collection)
     {
         $collectionTitle = $this->_getElementMetadata($collection, 'Dublin Core', 'Title');
-        return __('The collection "%s" was successfully changed!', $collectionTitle);        
+        if ($collectionTitle != '') {
+            return __('The collection "%s" was successfully changed!', $collectionTitle);        
+        } else {
+            return __('The collection #%s was successfully changed!', strval($collection->id));
+        }
     }
     
     protected function _getDeleteSuccessMessage($collection)
     {
         $collectionTitle = $this->_getElementMetadata($collection, 'Dublin Core', 'Title');
-        return __('The collection "%s" was successfully deleted!', $collectionTitle);        
+        if ($collectionTitle != '') {
+            return __('The collection "%s" was successfully deleted!', $collectionTitle);
+        } else {
+            return __('The collection #%s was successfully deleted!', strval($collection->id));
+        }
     }
 
     protected function _getDeleteConfirmMessage($collection)
     {
-        return __('This will delete the collection and its associated metadata. '
-             . 'This will not delete any items in this collection, but will '
-             . 'delete the reference to this collection in each item.');
+        $collectionTitle = $this->_getElementMetadata($collection, 'Dublin Core', 'Title');
+        if ($collectionTitle != '') {        
+            return __('This will delete the collection "%s" and its associated metadata. '
+                 . 'This will not delete any items in this collection, but will '
+                 . 'delete the reference to this collection in each item.', $collectionTitle);
+        } else {
+            return __('This will delete the collection #%s and its associated metadata. '
+                 . 'This will not delete any items in this collection, but will '
+                 . 'delete the reference to this collection in each item.', strval($collection->id));
+        }
     }
     
     protected function _getElementMetadata($collection, $elementSetName, $elementName) 

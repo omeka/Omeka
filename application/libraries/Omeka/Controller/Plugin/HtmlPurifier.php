@@ -48,7 +48,6 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
         }
 
         // Don't purify if the purifier is not enabled
-        
         if (get_option('html_purifier_is_enabled') != '1') {
             return;
         }
@@ -92,9 +91,8 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
     }
             
     /**
-     * Title = Plain text.
-     * Description = HTML.
-     * 
+     * Filter the Collections form post, including the 'Elements' array of the POST.
+     *
      * @param Zend_Controller_Request_Abstract $request
      * @param Omeka_Filter_HtmlPurifier $htmlPurifierFilter
      * @return void
@@ -103,14 +101,17 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
     {   
         if ($htmlPurifierFilter === null) {
             $htmlPurifierFilter = new Omeka_Filter_HtmlPurifier();
-        }        
+        }
+        
         $post = $request->getPost();
-        $post['description'] = $htmlPurifierFilter->filter($post['description']);
+        $post = $this->_filterElementsFromPost($post, $htmlPurifierFilter);
+                
         $request->setPost($post);
     }
     
     /**
     * Purify all of the data in the theme settings
+    *
     * @param Zend_Controller_Request_Abstract $request
     * @param Omeka_Filter_HtmlPurifier $htmlPurifierFilter
     * @return void    
@@ -150,13 +151,35 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
     }
     
     /**
-     * Filter the 'Elements' array of the POST.
+     * Filter the Items form post, including the 'Elements' array of the POST.
      * 
      * @param Zend_Controller_Request_Abstract $request
      * @param Omeka_Filter_HtmlPurifier $htmlPurifierFilter
      * @return void
      **/    
     public function filterItemsForm($request, $htmlPurifierFilter=null)
+    {
+        if ($htmlPurifierFilter === null) {
+            $htmlPurifierFilter = new Omeka_Filter_HtmlPurifier();
+        }
+                
+        $post = $request->getPost();
+        $post = $this->_filterElementsFromPost($post, $htmlPurifierFilter);
+        
+        // Also strip HTML out of the tags field.
+        $post['tags'] = strip_tags($post['tags']);        
+        
+        $request->setPost($post);
+    }
+    
+    /**
+     * Filter the 'Elements' array of the POST.
+     * 
+     * @param Zend_Controller_Request_Abstract $post
+     * @param Omeka_Filter_HtmlPurifier $htmlPurifierFilter
+     * @return void
+     **/
+    protected function _filterElementsFromPost($post, $htmlPurifierFilter=null)
     {
         if ($htmlPurifierFilter === null) {
             $htmlPurifierFilter = new Omeka_Filter_HtmlPurifier();
@@ -169,26 +192,16 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
         // 
         // What we do in this case is just not do anything if there is no text field
         // alongside the html field.
-        
-        $post = $request->getPost();
-                
         foreach ($post['Elements'] as $elementId => $texts) {
-            
             foreach ($texts as $index => $values) {
-                if (!array_key_exists('text', $values)) {
-                    break;
-                }
-                
-                if (array_key_exists('html', $values) && (boolean)$values['html']) {
-                    $post['Elements'][$elementId][$index]['text'] = $htmlPurifierFilter->filter($values['text']);
+                if (array_key_exists('text', $values)) {
+                    if (array_key_exists('html', $values) && (boolean)$values['html']) {
+                        $post['Elements'][$elementId][$index]['text'] = $htmlPurifierFilter->filter($values['text']);
+                    }
                 }
             }
         }
-        
-        // Also strip HTML out of the tags field.
-        $post['tags'] = strip_tags($post['tags']);        
-        
-        $request->setPost($post);
+        return $post;
     }
     
     protected function _setupHtmlPurifierOptions()
