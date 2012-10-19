@@ -185,7 +185,7 @@ class ItemType extends Omeka_Record_AbstractRecord
                 // the element is an array of element metadata
                 $elementToSave = new Element;
                 $elementToSave->setArray($element);
-                $elementToSave->setElementSet(ELEMENT_SET_ITEM_TYPE);
+                $elementToSave->setElementSet(ElementSet::ITEM_TYPE_NAME);
             } else if ($element instanceof Element) {
                 $elementToSave = $element;
                 if ($element->id) {
@@ -360,6 +360,6 @@ class ItemType extends Omeka_Record_AbstractRecord
     static public function getItemTypeElementSet()
     {
         // Element should belong to the 'Item Type' element set.
-        return get_db()->getTable('ElementSet')->findBySql('name = ?', array(ELEMENT_SET_ITEM_TYPE), true);
+        return get_db()->getTable('ElementSet')->findBySql('name = ?', array(ElementSet::ITEM_TYPE_NAME), true);
     }
 }

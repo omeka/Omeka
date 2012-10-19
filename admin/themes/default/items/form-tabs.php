@@ -4,7 +4,7 @@ foreach ($elementSets as $key => $elementSet) {
     $tabName = $elementSet->name;
         
     switch ($tabName) {
-        case ELEMENT_SET_ITEM_TYPE:
+        case ElementSet::ITEM_TYPE_NAME:
             // Output buffer this form instead of displaying it right away.
             ob_start();
             include 'item-type-form.php';

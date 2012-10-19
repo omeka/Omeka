@@ -19,7 +19,13 @@ class ElementSet extends Omeka_Record_AbstractRecord
     
     protected $_elementsToSave = array();
     
-    const DEFAULT_RECORD_TYPE = 'Item';
+    /**
+     * The name of the item type element set.
+     * 
+     * This is used wherever it is important to distinguish this special case 
+     * element set from others.
+     */
+    const ITEM_TYPE_NAME = 'Item Type Metadata';
     
     public function getElements()
     {

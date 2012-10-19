@@ -176,7 +176,7 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
             
             // Differenciate between the element sets and the "Item Type 
             // Metadata" pseudo element set.
-            if (ELEMENT_SET_ITEM_TYPE == $elementSet->name) {
+            if (ElementSet::ITEM_TYPE_NAME == $elementSet->name) {
                 $itemType['elements'][$element->id]['name'] = $element->name;
                 $itemType['elements'][$element->id]['description'] = $element->description;
                 $itemType['elements'][$element->id]['elementTexts'][$elementText->id]['text'] = $elementText->text;

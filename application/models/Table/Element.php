@@ -168,7 +168,7 @@ class Table_Element extends Omeka_Db_Table
             $select->where('item_types_elements.item_type_id = ? OR item_types_elements.item_type_id IS NULL', 
                 (int)$params['item_type_id']);
         } else if (array_key_exists('exclude_item_type', $params)) {
-            $select->where('element_sets.name != ?', ELEMENT_SET_ITEM_TYPE);
+            $select->where('element_sets.name != ?', ElementSet::ITEM_TYPE_NAME);
         }
     }
     

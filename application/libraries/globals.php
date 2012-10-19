@@ -2140,7 +2140,7 @@ function item_type_elements($item = null)
     }
     $elements = $item->getItemTypeElements();
     foreach ($elements as $element) {
-        $elementText[$element->name] = metadata($item, array(ELEMENT_SET_ITEM_TYPE, $element->name));
+        $elementText[$element->name] = metadata($item, array(ElementSet::ITEM_TYPE_NAME, $element->name));
     }
     return $elementText;
 }
