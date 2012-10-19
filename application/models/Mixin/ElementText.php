@@ -463,12 +463,12 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
      * 
      * array('Elements' => 
      *             array(
-     *                 '50' => array('text' => 'Foobar', //element id 50, e.g. DC:Title
+     *                 '50' => array(array('text' => 'Foobar', //element id 50, e.g. DC:Title
      *                               'html' => 0
-     *                               ),
-     *                 '41' => array('text' => '<p>Baz baz baz</p>', //element id 41, e.g. DC:Description
+     *                               )),
+     *                 '41' => array(array('text' => '<p>Baz baz baz</p>', //element id 41, e.g. DC:Description
      *                                'html' => 1
-     *                               )
+     *                               ))
      *                  )
      *      )
      * 
