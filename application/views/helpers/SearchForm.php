@@ -21,11 +21,7 @@ class Omeka_View_Helper_SearchForm extends Zend_View_Helper_Abstract
      */
     public function __construct()
     {
-        $this->_validQueryTypes = array(
-            'full_text'   => __('Full text'), 
-            'boolean'     => __('Boolean'), 
-            'exact_match' => __('Exact match'), 
-        );
+        $this->_validQueryTypes = get_search_query_types();
         $this->_validRecordTypes = get_custom_search_record_types();
     }
     
@@ -38,7 +34,7 @@ class Omeka_View_Helper_SearchForm extends Zend_View_Helper_Abstract
      * - form_attributes: an array containing form tag attributes.
      * @return string The search form markup.
      */
-    public function searchForm($options)
+    public function searchForm(array $options = array())
     {
         return $this->view->partial(
             'search/search-form.php', 

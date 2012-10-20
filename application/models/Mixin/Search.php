@@ -15,13 +15,14 @@
  * can add search text--for example, after ElementText.
  * 
  * The record type must also be registered using the search_record_types filter 
- * in order for the records to be searchable. See self::getSearchRecordTypes().
+ * in order for the records to be searchable.
  * 
  * This mixin leverages the Omeka_Record_AbstractRecord::afterSave() and 
  * Omeka_Record_Mixin_AbstractMixin::afterSave() callbacks, so note their order 
  * of execution. Records that initialize ActsAsElementText will automatically 
  * add their element texts to the search text.
  * 
+ * @see get_search_record_types()
  * @package Omeka\Record\Mixin
  */
 class Mixin_Search extends Omeka_Record_Mixin_AbstractMixin

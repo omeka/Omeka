@@ -368,30 +368,23 @@ function is_admin_theme()
  * These record classes must extend Omeka_Record_AbstractRecord and 
  * implement this search mixin (Mixin_Search).
  * 
+ * @see Mixin_Search
  * @return array
  */
 function get_search_record_types()
 {
     // Apply the filters only once.
     static $searchRecordTypes = null;
-    
     if ($searchRecordTypes) {
         return $searchRecordTypes;
     }
     
-    $coreSearchRecordTypes = array(
-        'Item' => __('Item'), 
-        'File' => __('File'), 
+    $searchRecordTypes = array(
+        'Item'       => __('Item'), 
+        'File'       => __('File'), 
         'Collection' => __('Collection'), 
     );
-    
-    try {
-        $searchRecordTypes = Zend_Registry::get('pluginbroker')
-            ->applyFilters('search_record_types', $coreSearchRecordTypes);
-    } catch (Zend_Exception $e) {
-        $searchRecordTypes = $coreSearchRecordTypes;
-    }
-    
+    $searchRecordTypes = apply_filters('search_record_types', $searchRecordTypes);
     return $searchRecordTypes;
 }
 
@@ -419,6 +412,37 @@ function get_custom_search_record_types()
     }
     
     return $searchRecordTypes;
+}
+
+/**
+ * Get all available search query types.
+ * 
+ * Plugins may add query types via the "search_query_types" filter. The keys 
+ * should be the type's GET query value and the respective values should be the 
+ * human readable and internationalized version of the query type.
+ * 
+ * Plugins that add a query type must modify the select object via the 
+ * "search_sql" hook to account for whatever custom search strategy they 
+ * implement.
+ * 
+ * @see Table_SearchText::applySearchFilters()
+ * @return array
+ */
+function get_search_query_types()
+{
+    // Apply the filter only once.
+    static $searchQueryTypes;
+    if ($searchQueryTypes) {
+        return $searchQueryTypes;
+    }
+    
+    $searchQueryTypes = array(
+        'full_text'   => __('Full text'), 
+        'boolean'     => __('Boolean'), 
+        'exact_match' => __('Exact match'), 
+    );
+    $searchQueryTypes = apply_filters('search_query_types', $searchQueryTypes);
+    return $searchQueryTypes;
 }
 
 /**
