@@ -12,7 +12,7 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
                         
             jQuery("#navigation_main_list").nestedSortable({
                 listType: 'ul',
-                handle: 'div',
+                handle: '.navigation_main_link_header',
                 items: 'li',
                 toleranceElement: '> div',
                 placeholder: 'placeholder',
@@ -55,7 +55,7 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
                           jQuery(ee.target).html('&#9660;'); // down arrow
                           headerDiv.find('.navigation_main_list_hide').removeClass('hidden').addClass('revealed');
                         }
-                      });
+                      }).mousedown(function(ee) { ee.stopPropagation(); });
                       headerDiv.next().hide();       
                 }
             });
