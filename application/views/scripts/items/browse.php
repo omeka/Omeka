@@ -21,7 +21,7 @@ echo head(array('title'=>$pageTitle,'bodyid'=>'items','bodyclass' => 'browse'));
 
         <?php if (item_has_thumbnail()): ?>
         <div class="item-img">
-            <?php echo link_to_item(item_square_thumbnail()); ?>
+            <?php echo link_to_item(item_image('square_thumbnail')); ?>
         </div>
         <?php endif; ?>
 

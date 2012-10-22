@@ -2023,57 +2023,6 @@ function item_image($imageType, $props = array(), $index = 0, $item = null)
 }
 
 /**
- * Return HTML for a fullsize image assigned to an item.
- * 
- * Default parameters will use the first image, but that can be changed by 
- * modifying $index.
- * 
- * @uses item_image()
- * @param array $props
- * @param integer $index
- * @return string HTML
- */
-function item_fullsize($props = array(), $index = 0, $item = null)
-{
-    return item_image('fullsize', $props, $index, $item);
-}
-
-/**
- * Return HTML for a square thumbnail image assigned to an item.
- * 
- * Default parameters will use the first image, but that can be changed by 
- * modifying $index.
- * 
- * @uses item_image()
- * @param array $props
- * @param integer $index
- * @param Item $item The item to which the image belongs
- * @return string HTML
- */
-function item_square_thumbnail($props = array(), $index = 0, $item = null)
-{
-    return item_image('square_thumbnail', $props, $index, $item);
-}
-
-/**
- * Return HTML for a thumbnail image assigned to an item.
- * 
- * Default parameters will use the first image, but that can be changed by 
- * modifying $index.
- *
- * @uses item_image()
- * @param array $props A set of attributes for the <img /> tag.
- * @param integer $index The position of the file to use (starting with 0 for
- * the first file).
- * @param Item $item The item to which the image belongs
- * @return string HTML
- */
-function item_thumbnail($props = array(), $index = 0, $item = null)
-{
-    return item_image('thumbnail', $props, $index, $item);
-}
-
-/**
  * Return the HTML for an item search form.
  *
  * @uses Zend_View_Helper_Partial::partial()
@@ -2141,7 +2090,7 @@ function random_featured_items($num = 5, $hasImage = null)
             $html .= '<h3>' . link_to_item($itemTitle, array(), 'show', $randomItem) . '</h3>';
             
             if (item_has_thumbnail($randomItem)) {
-                $html .= link_to_item(item_square_thumbnail(array(), 0, $randomItem), array('class'=>'image'), 'show', $randomItem);
+                $html .= link_to_item(item_image('square_thumbnail', array(), 0, $randomItem), array('class'=>'image'), 'show', $randomItem);
             }
             if ($itemDescription = metadata($randomItem, array('Dublin Core', 'Description'), array('snippet'=>150))) {
                 $html .= '<p class="item-description">' . $itemDescription . '</p>';
