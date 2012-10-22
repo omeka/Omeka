@@ -437,7 +437,7 @@ function get_search_query_types()
     }
     
     $searchQueryTypes = array(
-        'full_text'   => __('Full text'), 
+        'keyword'     => __('Keyword'), 
         'boolean'     => __('Boolean'), 
         'exact_match' => __('Exact match'), 
     );

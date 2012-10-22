@@ -34,7 +34,7 @@ abstract class Omeka_View_Helper_AbstractSearch extends Zend_View_Helper_Abstrac
         if (isset($_GET['query_type']) && array_key_exists($_GET['query_type'], $this->_validQueryTypes)) {
             $filters['query_type'] = $_GET['query_type'];
         } else {
-            $filters['query_type'] = 'full_text';
+            $filters['query_type'] = 'keyword';
         }
         if (isset($_GET['record_types'])) {
             $filters['record_types'] = $_GET['record_types'];
