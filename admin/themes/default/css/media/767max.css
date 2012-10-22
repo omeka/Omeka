@@ -26,10 +26,6 @@ header nav { float: left; }
 /* Tables
 ==================================================*/
 
-.full { display: none; }
-
-.mobile { display: inherit; }
-    
 .even th { background-color: #B1A584; border: 0; }
                 
 .odd th { background-color: #D3D0B5; border: 0; }
@@ -85,6 +81,11 @@ th a:after, th.desc a:after, th.asc a:after { content: ""; }
     width: 100%;
     display: inline-block; 
 }
+
+    /* Site-Wide Search
+    ==================================================*/
+
+    #search-form { width: 100%; }
 
     /* Browse Items
     ==================================================*/

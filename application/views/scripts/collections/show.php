@@ -40,7 +40,7 @@ $itemTitle = strip_formatting(metadata('item', array('Dublin Core', 'Title')));
 
             <?php if (item_has_thumbnail()): ?>
             <div class="item-img">
-                <?php echo link_to_item(item_square_thumbnail(array('alt'=>$itemTitle))); ?>
+                <?php echo link_to_item(item_image('square_thumbnail', array('alt'=>$itemTitle))); ?>
             </div>
             <?php endif; ?>
 

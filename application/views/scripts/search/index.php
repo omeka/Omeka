@@ -4,8 +4,9 @@ echo head(array('title' => $pageTitle));
 $searchRecordTypes = get_search_record_types();
 ?>
 <div id="primary">
+<?php echo search_filters(); ?>
 <?php if ($total_results): ?>
-<div id="pagination-top" class="pagination"><?php echo pagination_links(); ?></div>
+<?php echo pagination_links(); ?>
 <table>
     <thead>
         <tr>
@@ -23,7 +24,7 @@ $searchRecordTypes = get_search_record_types();
         <?php endforeach; ?>
     </tbody>
 </table>
-<div id="pagination-bottom" class="pagination"><?php echo pagination_links(); ?></div>
+<?php echo pagination_links(); ?>
 <?php else: ?>
 <p>Your query returned no results.</p>
 <?php endif; ?>

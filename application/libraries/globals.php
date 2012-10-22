@@ -368,30 +368,23 @@ function is_admin_theme()
  * These record classes must extend Omeka_Record_AbstractRecord and 
  * implement this search mixin (Mixin_Search).
  * 
+ * @see Mixin_Search
  * @return array
  */
 function get_search_record_types()
 {
     // Apply the filters only once.
     static $searchRecordTypes = null;
-    
     if ($searchRecordTypes) {
         return $searchRecordTypes;
     }
     
-    $coreSearchRecordTypes = array(
-        'Item' => __('Item'), 
-        'File' => __('File'), 
+    $searchRecordTypes = array(
+        'Item'       => __('Item'), 
+        'File'       => __('File'), 
         'Collection' => __('Collection'), 
     );
-    
-    try {
-        $searchRecordTypes = Zend_Registry::get('pluginbroker')
-            ->applyFilters('search_record_types', $coreSearchRecordTypes);
-    } catch (Zend_Exception $e) {
-        $searchRecordTypes = $coreSearchRecordTypes;
-    }
-    
+    $searchRecordTypes = apply_filters('search_record_types', $searchRecordTypes);
     return $searchRecordTypes;
 }
 
@@ -419,6 +412,37 @@ function get_custom_search_record_types()
     }
     
     return $searchRecordTypes;
+}
+
+/**
+ * Get all available search query types.
+ * 
+ * Plugins may add query types via the "search_query_types" filter. The keys 
+ * should be the type's GET query value and the respective values should be the 
+ * human readable and internationalized version of the query type.
+ * 
+ * Plugins that add a query type must modify the select object via the 
+ * "search_sql" hook to account for whatever custom search strategy they 
+ * implement.
+ * 
+ * @see Table_SearchText::applySearchFilters()
+ * @return array
+ */
+function get_search_query_types()
+{
+    // Apply the filter only once.
+    static $searchQueryTypes;
+    if ($searchQueryTypes) {
+        return $searchQueryTypes;
+    }
+    
+    $searchQueryTypes = array(
+        'keyword'     => __('Keyword'), 
+        'boolean'     => __('Boolean'), 
+        'exact_match' => __('Exact match'), 
+    );
+    $searchQueryTypes = apply_filters('search_query_types', $searchQueryTypes);
+    return $searchQueryTypes;
 }
 
 /**
@@ -1309,6 +1333,19 @@ function search_form(array $options = array())
 }
 
 /**
+ * Return a list of current site-wide search filters in use.
+ * 
+ * @uses Omeka_View_Helper_SearchFilters::searchFilters()
+ * @param array $options Valid options are as follows:
+ * - id (string): the value of the div wrapping the filters.
+ * @return string
+ */
+function search_filters(array $options = array())
+{
+    return get_view()->searchFilters($options);
+}
+
+/**
  * Return the proper HTML for a form input for a given Element record.
  *
  * Assume that the given element has access to all of its values (for example,
@@ -1968,59 +2005,25 @@ function item_image($imageType, $props = array(), $index = 0, $item = null)
         $item = get_current_record('item');
     }
     $imageFile = get_db()->getTable('File')->findWithImages($item->id, $index);
-    $media = new Omeka_View_Helper_FileMarkup;
-    return $media->image_tag($imageFile, $props, $imageType);
+    $fileMarkup = new Omeka_View_Helper_FileMarkup;
+    return $fileMarkup->image_tag($imageFile, $props, $imageType);
 }
 
 /**
- * Return HTML for a fullsize image assigned to an item.
- * 
- * Default parameters will use the first image, but that can be changed by 
- * modifying $index.
- * 
- * @uses item_image()
- * @param array $props
- * @param integer $index
- * @return string HTML
- */
-function item_fullsize($props = array(), $index = 0, $item = null)
-{
-    return item_image('fullsize', $props, $index, $item);
-}
-
-/**
- * Return HTML for a square thumbnail image assigned to an item.
- * 
- * Default parameters will use the first image, but that can be changed by 
- * modifying $index.
- * 
- * @uses item_image()
- * @param array $props
- * @param integer $index
- * @param Item $item The item to which the image belongs
- * @return string HTML
- */
-function item_square_thumbnail($props = array(), $index = 0, $item = null)
-{
-    return item_image('square_thumbnail', $props, $index, $item);
-}
-
-/**
- * Return HTML for a thumbnail image assigned to an item.
- * 
- * Default parameters will use the first image, but that can be changed by 
- * modifying $index.
+ * Return a customized file image tag.
  *
- * @uses item_image()
- * @param array $props A set of attributes for the <img /> tag.
- * @param integer $index The position of the file to use (starting with 0 for
- * the first file).
- * @param Item $item The item to which the image belongs
- * @return string HTML
+ * @uses Omeka_View_Helper_FileMarkup::image_tag()
+ * @param string $imageType
+ * @param array $props
+ * @param File|null Check for this specific file record (current file if null).
  */
-function item_thumbnail($props = array(), $index = 0, $item = null)
+function file_image($imageType, $props = array(), $file = null)
 {
-    return item_image('thumbnail', $props, $index, $item);
+    if (!$file) {
+        $file = get_current_record('file');
+    }
+    $fileMarkup = new Omeka_View_Helper_FileMarkup;
+    return $fileMarkup->image_tag($file, $props, $imageType);
 }
 
 /**
@@ -2091,7 +2094,7 @@ function random_featured_items($num = 5, $hasImage = null)
             $html .= '<h3>' . link_to_item($itemTitle, array(), 'show', $randomItem) . '</h3>';
             
             if (item_has_thumbnail($randomItem)) {
-                $html .= link_to_item(item_square_thumbnail(array(), 0, $randomItem), array('class'=>'image'), 'show', $randomItem);
+                $html .= link_to_item(item_image('square_thumbnail', array(), 0, $randomItem), array('class'=>'image'), 'show', $randomItem);
             }
             if ($itemDescription = metadata($randomItem, array('Dublin Core', 'Description'), array('snippet'=>150))) {
                 $html .= '<p class="item-description">' . $itemDescription . '</p>';

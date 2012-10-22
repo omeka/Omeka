@@ -53,6 +53,12 @@ class Table_SearchText extends Omeka_Db_Table
         }
         $select->where($where, $params['query']);
         
+        // Must fire the "search_sql" hook here instead of relying on the native 
+        // "search_text_browse_sql" hook to ensure that the subsequent WHERE 
+        // clauses are not reset. This hook can be used when a custom search 
+        // strategy is added using the "search_query_types" filter.
+        fire_plugin_hook('search_sql', array('select' => $select, 'params' => $params));
+        
         // Search only those record types that are configured to be searched.
         $searchRecordTypes = get_custom_search_record_types();
         if ($searchRecordTypes) {

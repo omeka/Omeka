@@ -4,7 +4,6 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
 <?php echo js_tag('settings'); ?>
 <?php echo js_tag('jquery.mjs.nestedSortable'); ?>
 
-
 <script type="text/javascript">
 //<![CDATA[
     jQuery(document).ready(function () {
@@ -13,9 +12,12 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
                         
             jQuery("#navigation_main_list").nestedSortable({
                 listType: 'ul',
-                handle: 'div',
+                handle: '.navigation_main_link_header',
                 items: 'li',
-                toleranceElement: '> div'
+                toleranceElement: '> div',
+                placeholder: 'placeholder',
+                forcePlaceholderSize: true,
+                containment: '#content'
             });
             
             jQuery('div.navigation_main_link_header input[type="checkbox"]').click(function(e) {
@@ -53,7 +55,7 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
                           jQuery(ee.target).html('&#9660;'); // down arrow
                           headerDiv.find('.navigation_main_list_hide').removeClass('hidden').addClass('revealed');
                         }
-                      });
+                      }).mousedown(function(ee) { ee.stopPropagation(); });
                       headerDiv.next().hide();       
                 }
             });
