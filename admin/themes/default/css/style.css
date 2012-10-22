@@ -28,8 +28,8 @@
         #Browse Element Sets
         #Browse Themes
         #System Information */
-        
-        
+
+
 /* Basic Styles
 ================================================== */
 
@@ -959,6 +959,43 @@ header nav {
 /* Site-wide Search Settings  
 ================================================== */
 
+#search-filters {
+    float: left;
+    width: 70%;
+}
+
+#search-filters ul {
+    clear: both;
+    list-style-type: none;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+    
+    #search-filters li {
+        display: inline-block;
+        background: url('../images/search.png') no-repeat;
+        padding: 0 0 0 21px;
+        margin: 0 30px 20px 0;
+        background-position-y: 2px;        
+    }
+    
+    #search-filters li ul li { 
+        display: inline-block; 
+        background: none; 
+        margin: 0; 
+        padding: 0; 
+    }
+        
+        #search-filters li ul li:after {
+          content: ",";
+        }
+        
+        #search-filters li ul li:last-child:after {
+          content: "";
+        }
+        
 .search-record-types ul {
     list-style-type: none;
     padding: 0;
