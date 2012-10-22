@@ -577,11 +577,8 @@ function insert_item_type($metadata = array(), $elementInfos = array())
  * @param array $metadata Follows the format:
  * <code>
  * array(
- *   'name'        => [string],
- *   'description' => [string],
  *   'public'      => [true|false],
  *   'featured'    => [true|false]
- *   'collectors'  => [array of string names]
  * )
  * </code>
  * @return Collection
@@ -1102,17 +1099,6 @@ function web_path_to($file)
 }
 
 /**
- * Determine whether the current collection has associated collectors.
- *
- * @uses Collection::hasCollectors()
- * @return boolean
- */
-function collection_has_collectors()
-{
-    return get_current_record('collection')->hasCollectors();
-}
-
-/**
  * Returns the HTML for displaying a random featured collection.
  *
  * @return string
@@ -1120,10 +1106,11 @@ function collection_has_collectors()
 function random_featured_collection()
 {
     $featuredCollection = get_random_featured_collection();
+    $featuredCollectionTitle = strip_formatting(metadata($featuredCollection, array('Dublin Core', 'Title')));
     $html = '<h2>' . __('Featured Collection') . '</h2>';
     if ($featuredCollection) {
-        $html .= '<h3>' . link_to_collection($featuredCollection->title, array(), 'show', $featuredCollection) . '</h3>';
-        if ($collectionDescription = metadata($featuredCollection, 'Description', array('snippet'=>150))) {
+        $html .= '<h3>' . link_to_collection($featuredCollectionTitle, array(), 'show', $featuredCollection) . '</h3>';
+        if ($collectionDescription = metadata($featuredCollection, array('Dublin Core', 'Description'), array('snippet'=>150))) {
             $html .= '<p class="collection-description">' . $collectionDescription . '</p>';
         }
     } else {

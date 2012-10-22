@@ -13,13 +13,6 @@
  */
 class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Interface
 {            
-    const COLLECTOR_DELIMITER = "\n";
-    
-    /**
-     * @var array Strings containing the names of this collection's collectors.
-     */
-    public $collectors;
-    
     /**
      * @var boolean Whether or not the collection is publicly accessible.
      */
@@ -57,8 +50,6 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
     public function getProperty($property)
     {
         switch ($property) {
-            case 'collectors':
-                return $this->getCollectors();
             case 'total_items':
                 return $this->totalItems();
             default:
@@ -66,15 +57,6 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
         }
     }
     
-    /**
-     * Determine whether or not the collection has collectors associated with it.
-     * 
-     * @return boolean
-     */
-    public function hasCollectors()
-    {
-        return (boolean)$this->getCollectors();
-    }
     
     /**
      * Determine the total number of items associated with this collection.
@@ -87,90 +69,9 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
     }
     
     /**
-     * Retrieve a list of all the collectors associated with this collection.
-     * 
-     * @return array List of strings.
-     * @throws RuntimeException
-     */
-    public function getCollectors()
-    {
-        if (!$this->collectors) {
-            return array();
-        } else if (is_string($this->collectors)) {
-            if (trim($this->collectors) == '') {
-                return array();
-            } else {
-                $collectors = explode(self::COLLECTOR_DELIMITER, $this->collectors);
-                $collectors = array_map('trim', $collectors);
-                $collectors = array_diff($collectors, array(''));
-                $collectors = array_values($collectors);
-                return $collectors;
-            }
-        } else if (!is_array($this->collectors)) {
-            throw new RuntimeException(__("Collectors must be either a string or an array."));
-        }
-    }
-
-    /**
-     * Disassociate a collector with this collection.
-     * 
-     * @param string
-     * @return boolean Was successful or not.
-     */
-    public function removeCollector($collector)
-    {
-        $collectors = $this->getCollectors();
-        if ($foundKey = array_search($collector, $collectors)) {
-            unset($collectors[$foundKey]);
-            $this->setCollectors($collectors);
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Add a collector to the collection.
-     *
-     * Note that prior versions of Omeka allowed for entering collector metadata
-     * as Entity records.  This behavior has been deprecated and removed in 
-     * Omeka >= 1.3.  Please use the new syntax, which is simply the string name
-     * for the collector.
-     * 
-     * @param string $collector
-     * @return void
-     * @throws InvalidArgumentException
-     */
-    public function addCollector($collector)
-    {
-        if (is_string($collector)) {
-            $collectorName = $collector;
-        } else {
-            throw new InvalidArgumentException(__("Argument passed to addCollector() must be a string."));
-        }
-        $collectorName = trim($collectorName);
-        if ($collectorName != '') {
-            $this->collectors .= ($this->collectors ? self::COLLECTOR_DELIMITER 
-                : ''). $collectorName;
-        }
-    }
-    
-    /**
-     * Set the list of collectors for this collection.
-     * 
-     * @param array List of string names of collectors.
-     */
-    public function setCollectors(array $collectorList)
-    {
-        $this->collectors = '';
-        foreach ($collectorList as $key => $collector) {
-            $this->addCollector($collector);
-        }
-    } 
-    
-    /**
      * Set the user who added the collection.
      * 
-     * Note that this is not to be confused with the collection's "collectors".
+     * Note that this is not to be confused with the collection's "contributors".
      * 
      * @param User $user
      */
@@ -193,6 +94,17 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
     public function getResourceId()
     {
         return 'Collections';
+    }
+
+
+    /**
+     * Returns whether or not the collection has at least 1 contributor element text
+     *
+     * @return boolean
+     */
+    public function hasContributor()
+    {
+        return $this->hasElementText('Dublin Core', 'Contributor');
     }
 
     /**
@@ -225,9 +137,8 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
                          'featured'     => 'Boolean');
             
         $filter = new Zend_Filter_Input($filters, null, $post, $options);
-        
         $post = $filter->getUnescaped();
-                
+        
         return $post;
     }
     
@@ -245,15 +156,7 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
     {
         if ($args['post']) {
             $post = $args['post'];
-            
             $this->beforeSaveElements($post);
-            
-            // Process the collectors that have been provided on the form
-            if (isset($post['collectors'])) {
-                $collectorPost = (string)$post['collectors'];
-                $collectors = explode(self::COLLECTOR_DELIMITER, $collectorPost);
-                $this->setCollectors($collectors);
-            }
         }
     }
     

@@ -18,15 +18,15 @@ $itemTitle = strip_formatting(metadata('item', array('Dublin Core', 'Title')));
         <div class="element-text"><?php echo text_to_paragraphs(metadata('collection', 'Description')); ?></div>
     </div><!-- end description -->
 
-    <?php if (collection_has_collectors()): ?>
-    <div id="collectors" class="element">
-        <h2><?php echo __('Collector(s)'); ?></h2>
+    <?php if ($collection->hasContributor()): ?>
+    <div id="contributors" class="element">
+        <h2><?php echo __('Contributor(s)'); ?></h2>
         <div class="element-text">
             <ul>
-                <li><?php echo metadata('collection', 'Collectors', array('delimiter'=>'</li><li>')); ?></li>
+                <li><?php echo metadata('collection', array('Dublin Core', 'Contributor'), array('all'=>true, 'delimiter'=>'</li><li>')); ?></li>
             </ul>
         </div>
-    </div><!-- end collectors -->
+    </div><!-- end contributors -->
     <?php endif; ?>
 
     <p class="view-items-link"><?php echo link_to_items_browse(__('View the items in %s', $collectionTitle), array('collection' => metadata('collection', 'id'))); ?></p>

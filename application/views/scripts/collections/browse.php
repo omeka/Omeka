@@ -18,11 +18,11 @@ echo head(array('title'=>$pageTitle,'bodyid'=>'collections','bodyclass' => 'brow
         </div>
         <?php endif; ?>
         
-        <?php if(collection_has_collectors()): ?>
+        <?php if ($collection->hasContributor()): ?>
         <div class="element">
-            <h3><?php echo __('Collector(s)'); ?></h3>
+            <h3><?php echo __('Contributors(s)'); ?></h3>
             <div class="element-text">
-                <p><?php echo metadata('collection', 'Collectors', array('delimiter'=>', ')); ?></p>
+                <p><?php echo metadata('collection', array('Dublin Core', 'Contributor'), array('all'=>true, 'delimiter'=>', ')); ?></p>
             </div>
         </div>
         <?php endif; ?>

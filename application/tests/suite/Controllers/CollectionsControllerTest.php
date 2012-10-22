@@ -22,15 +22,12 @@ class Omeka_Controller_CollectionsControllerTest extends Omeka_Test_AppTestCase
         $this->assertQuery("input#public");
         $this->assertQuery("input#featured");
         
-        $titleElement = $this->db->getTable('Element')->findByElementSetNameAndElementName('Dublin Core', 'Title');
-        $this->assertQuery('textarea#Elements-' . $titleElement->id . '-0-text');
-        $this->assertQuery('input#Elements-' . $titleElement->id . '-0-html');
-        
-        $descriptionElement = $this->db->getTable('Element')->findByElementSetNameAndElementName('Dublin Core', 'Description');
-        $this->assertQuery('textarea#Elements-' . $descriptionElement->id . '-0-text');
-        $this->assertQuery('input#Elements-' . $descriptionElement->id . '-0-html');
-        
-        $this->assertQuery('textarea#collectors');
+        $elementNames = array('Title', 'Description', 'Contributor');
+        foreach($elementNames as $elementName) {
+            $element = $this->db->getTable('Element')->findByElementSetNameAndElementName('Dublin Core', $elementName);
+            $this->assertQuery('textarea#Elements-' . $element->id . '-0-text');
+            $this->assertQuery('input#Elements-' . $element->id . '-0-html');
+        }    
     }
     
     public function testRenderEditForm()
@@ -45,15 +42,12 @@ class Omeka_Controller_CollectionsControllerTest extends Omeka_Test_AppTestCase
         $this->assertQuery("input#public");
         $this->assertQuery("input#featured");
         
-        $titleElement = $this->db->getTable('Element')->findByElementSetNameAndElementName('Dublin Core', 'Title');
-        $this->assertQuery('textarea#Elements-' . $titleElement->id . '-0-text');
-        $this->assertQuery('input#Elements-' . $titleElement->id . '-0-html');
-        
-        $descriptionElement = $this->db->getTable('Element')->findByElementSetNameAndElementName('Dublin Core', 'Description');
-        $this->assertQuery('textarea#Elements-' . $descriptionElement->id . '-0-text');
-        $this->assertQuery('input#Elements-' . $descriptionElement->id . '-0-html');
-        
-        $this->assertQuery('textarea#collectors');
+        $elementNames = array('Title', 'Description', 'Contributor');
+        foreach($elementNames as $elementName) {
+            $element = $this->db->getTable('Element')->findByElementSetNameAndElementName('Dublin Core', $elementName);
+            $this->assertQuery('textarea#Elements-' . $element->id . '-0-text');
+            $this->assertQuery('input#Elements-' . $element->id . '-0-html');
+        }
     }
     
     public function testOwnerIdSetForNewCollections()

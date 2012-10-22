@@ -17,7 +17,6 @@ class Builder_Collection extends Omeka_Record_Builder_AbstractBuilder
     const IS_PUBLIC = 'public';
     const IS_FEATURED = 'featured';
     
-    const COLLECTORS = 'collectors';
     const OVERWRITE_ELEMENT_TEXTS = 'overwriteElementTexts';
     
     protected $_recordClass = 'Collection';
@@ -79,7 +78,7 @@ class Builder_Collection extends Omeka_Record_Builder_AbstractBuilder
     }
        
     /**
-     * Add collectors associated with the collection.
+     * Add elements associated with the collection.
      */
     protected function _beforeBuild(Omeka_Record_AbstractRecord $record)
     {
@@ -89,13 +88,6 @@ class Builder_Collection extends Omeka_Record_Builder_AbstractBuilder
             $this->_replaceElementTexts();
         } else {
             $this->_addElementTexts();
-        }
-        
-        if (array_key_exists(self::COLLECTORS, $metadata)) {
-            $record = $this->getRecord();
-            foreach($metadata[self::COLLECTORS] as $collector) {
-                $record->addCollector($collector);
-            }
         }
     }
 }

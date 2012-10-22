@@ -10,17 +10,6 @@ foreach ($elementSets as $key => $elementSet) {
     $tabs[$tabName] = $tabContent;    
 }
 
-foreach (array('Collectors') as $tabName) {
-    ob_start();
-    switch ($tabName) {
-        case 'Collectors':
-            require 'collectors-form.php';
-        break;
-    }
-    $tabs[$tabName] = ob_get_contents();
-    ob_end_clean();
-}
-
 $tabs = apply_filters('admin_collections_form_tabs', $tabs, array('collection' => $collection));
 ?>
 
