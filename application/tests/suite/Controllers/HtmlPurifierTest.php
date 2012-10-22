@@ -30,7 +30,6 @@ class Omeka_Controllers_HtmlPurifierTest extends Omeka_Test_AppTestCase
         
         // Create a collection
         $collection = new Collection();
-        $collection->collectors = 'a';
         $collection->public = true;
         $collection->save();
         

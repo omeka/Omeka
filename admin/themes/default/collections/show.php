@@ -31,13 +31,13 @@
                     <p><?php echo link_to_items_in_collection(); ?></p>
                 </div>
 
-                <div class="collectors panel">
-                    <h4><?php echo __('Collectors'); ?></h4>
-                    <ul id="collector-list">
-                        <?php if (collection_has_collectors()): ?> 
-                        <li><?php echo metadata('collection', 'Collectors', array('delimiter'=>'</li><li>')); ?></li>
+                <div class="contributors panel">
+                    <h4><?php echo __('Contributors'); ?></h4>
+                    <ul id="contributor-list">
+                        <?php if ($collection->hasContributor()): ?> 
+                        <li><?php echo metadata('collection', array('Dublin Core', 'Contributor'), array('all'=>true, 'delimiter'=>'</li><li>')); ?></li>
                         <?php else: ?>
-                        <li><?php echo __('No collectors.'); ?></li>
+                        <li><?php echo __('No contributors.'); ?></li>
                         <?php endif; ?> 
                     </ul>
                 </div>

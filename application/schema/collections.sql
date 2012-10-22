@@ -1,6 +1,5 @@
 CREATE TABLE IF NOT EXISTS `%PREFIX%collections` (
   `id` int unsigned NOT NULL auto_increment,
-  `collectors` text collate utf8_unicode_ci DEFAULT NULL,
   `public` tinyint NOT NULL,
   `featured` tinyint NOT NULL,
   `added` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',

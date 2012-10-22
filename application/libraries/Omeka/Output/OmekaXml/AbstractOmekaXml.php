@@ -347,15 +347,15 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
             $collectionTitle = __('[Untitled]');
         }
         $collectionDescription = strip_formatting(metadata($item->Collection, array('Dublin Core', 'Description')));
-        
+        $collectionContributors = array_map('strip_formatting', metadata($item->Collection, array('Dublin Core', 'Description'), array('all' => true)));
         $collectionElement = $this->_createElement('collection', null, $item->Collection->id);
         $nameElement = $this->_createElement('name', $collectionTitle, null, $collectionElement);
         $descriptionElement = $this->_createElement('description', $collectionDescription, null, $collectionElement);
-        $collectorContainerElement = $this->_createElement('collectorContainer');
-        foreach ($item->Collection->getCollectors() as $collector) {
-            $collectorElement = $this->_createElement('collector', $collector, null, $collectorContainerElement);
+        $contributorContainerElement = $this->_createElement('contributorContainer');
+        foreach ($collectionContributors as $contributor) {
+            $contributorElement = $this->_createElement('contributor', $contributor, null, $contributorContainerElement);
         }
-        $collectionElement->appendChild($collectorContainerElement);
+        $collectionElement->appendChild($contributorContainerElement);
         $parentElement->appendChild($collectionElement);
     }
     
@@ -401,15 +401,14 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
             $collectionTitle = __('[Untitled]');
         }
         $collectionDescription = strip_formatting(metadata($item->Collection, array('Dublin Core', 'Description')));
-        
-        
+        $collectionContributors = array_map('strip_formatting', metadata($item->Collection, array('Dublin Core', 'Description'), array('all' => true)));
         $nameElement = $this->_createElement('name', $collectionTitle, null, $parentElement);
         $descriptionElement = $this->_createElement('description', $collectionDescription, null, $parentElement);
-        $collectorContainerElement = $this->_createElement('collectorContainer');
-        foreach ($collection->getCollectors() as $collector) {
-            $collectorElement = $this->_createElement('collector', $collector, null, $collectorContainerElement);
+        $contributorContainerElement = $this->_createElement('contributorContainer');
+        foreach ($collectionContributors as $contributor) {
+            $contributorElement = $this->_createElement('contributer', $contributor, null, $contributorContainerElement);
         }
-        $parentElement->appendChild($collectorContainerElement );
+        $parentElement->appendChild($contributorContainerElement);
         
         // Get items belonging to this collection.
         $items = get_db()->getTable('Item')->findBy(array('collection' => $collection->id));

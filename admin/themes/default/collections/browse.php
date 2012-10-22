@@ -16,7 +16,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
                 <tr>
                 <?php echo browse_headings(array(
                     __('Title') => 'Dublin Core,Title',
-                    __('Collectors') => null,
+                    __('Contributors') => null,
                     __('Date Added') => 'added',
                     __('Total Number of Items') => null
                 )); ?>
@@ -38,10 +38,10 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
                     <?php endif; ?>
                 </td>
                 <td>
-                <?php if (collection_has_collectors()): ?> 
-                    <?php echo metadata('collection', 'Collectors', array('delimiter'=>'<br>')); ?>
+                <?php if ($collection->hasContributor()): ?> 
+                    <?php echo metadata('collection', array('Dublin Core', 'Contributor'), array('all'=>true, 'delimiter'=>'<br>')); ?>
                 <?php else: ?>
-                    <?php echo __('No collectors'); ?>
+                    <?php echo __('No contributors'); ?>
                 <?php endif; ?>
                 
                 </td>   

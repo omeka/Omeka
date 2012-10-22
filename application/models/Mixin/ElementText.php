@@ -674,4 +674,28 @@ AND record_id = $id
 SQL
         );
     }
+    
+    /**
+     * Returns whether or not the record has at least 1 element text
+     *
+     * @param string $elementSetName Element set name
+     * @param string $elementName Element name
+     * @return boolean
+     */
+    public function hasElementText($elementSetName, $elementName)
+    {
+        return ($this->getElementTextCount($elementSetName, $elementName) > 0);
+    }
+    
+    /**
+     * Returns the number of element texts for the record
+     *
+     * @param string $elementSetName Element set name
+     * @param string $elementName Element name
+     * @return boolean
+     */
+    public function getElementTextCount($elementSetName, $elementName)
+    {
+        return count($this->getElementTexts($elementSetName, $elementName));
+    }
 }
