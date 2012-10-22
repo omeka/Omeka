@@ -4,6 +4,7 @@ echo head(array('title' => $pageTitle));
 $searchRecordTypes = get_search_record_types();
 ?>
 <div id="primary">
+<?php echo search_filters(); ?>
 <?php if ($total_results): ?>
 <div id="pagination-top" class="pagination"><?php echo pagination_links(); ?></div>
 <table>

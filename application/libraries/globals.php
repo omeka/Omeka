@@ -1346,6 +1346,19 @@ function search_form(array $options = array())
 }
 
 /**
+ * Return a list of current site-wide search filters in use.
+ * 
+ * @uses Omeka_View_Helper_SearchFilters::searchFilters()
+ * @param array $options Valid options are as follows:
+ * - id (string): the value of the div wrapping the filters.
+ * @return string
+ */
+function search_filters(array $options = array())
+{
+    return get_view()->searchFilters($options);
+}
+
+/**
  * Return the proper HTML for a form input for a given Element record.
  *
  * Assume that the given element has access to all of its values (for example,
