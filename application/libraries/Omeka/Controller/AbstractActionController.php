@@ -233,14 +233,16 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
         
         $record = $this->_helper->db->findById();
         
+        // get the success message before deleting it, so controllers can find related info, like its name
+        $successMessage = $this->_getDeleteSuccessMessage($record);
+                
         $form = $this->_getDeleteForm();
         if ($form->isValid($_POST)) {
             $record->delete();
         } else {
             throw new Omeka_Controller_Exception_404;
         }
-        
-        $successMessage = $this->_getDeleteSuccessMessage($record);
+                
         if ($successMessage != '') {
             $this->_helper->flashMessenger($successMessage, 'success');
         }

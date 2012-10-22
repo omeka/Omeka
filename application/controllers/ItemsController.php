@@ -63,6 +63,11 @@ class ItemsController extends Omeka_Controller_AbstractActionController
         }
     }
     
+    /**
+     * Gets the element sets for the 'Item' record type.
+     * 
+     * @return array The element sets for the 'Item' record type
+     */
     protected function _getItemElementSets()
     {
         return $this->_helper->db->getTable('ElementSet')->findByRecordType('Item');
@@ -79,26 +84,54 @@ class ItemsController extends Omeka_Controller_AbstractActionController
         parent::editAction();
     }
     
-    protected function _getAddSuccessMessage($record)
+    protected function _getAddSuccessMessage($item)
     {
-        return __('The item was successfully added!');        
+        $itemTitle = $this->_getElementMetadata($item, 'Dublin Core', 'Title');
+        if ($itemTitle != '') {
+            return __('The item "%s" was successfully added!', $itemTitle);
+        } else {
+            return __('The item #%s was successfully added!', strval($item->id));
+        }        
     }
     
-    protected function _getEditSuccessMessage($record)
+    protected function _getEditSuccessMessage($item)
     {
-        return __('The item was successfully changed!');
+        $itemTitle = $this->_getElementMetadata($item, 'Dublin Core', 'Title');
+        if ($itemTitle != '') {
+            return __('The item "%s" was successfully changed!', $itemTitle);
+        } else {
+            return __('The item #%s was successfully changed!', strval($item->id));
+        }
     }
 
-    protected function  _getDeleteSuccessMessage($record)
+    protected function  _getDeleteSuccessMessage($item)
     {
-        return __('The item was successfully deleted!');
+        $itemTitle = $this->_getElementMetadata($item, 'Dublin Core', 'Title');
+        if ($itemTitle != '') {
+            return __('The item "%s" was successfully deleted!', $itemTitle);
+        } else {
+            return __('The item #%s was successfully deleted!', strval($item->id));
+        }
     }
     
-    protected function _getDeleteConfirmMessage($record)
+    protected function _getDeleteConfirmMessage($item)
     {
-        return __('This will delete the item and its associated metadata. It will '
-             . 'also delete all files and file metadata associated with this '
-             . 'item.');
+        $itemTitle = $this->_getElementMetadata($item, 'Dublin Core', 'Title');
+        if ($itemTitle != '') {        
+            return __('This will delete the item "%s" and its associated metadata. It will '
+                 . 'also delete all files and file metadata associated with this '
+                 . 'item.', $itemTitle);
+        } else {
+            return __('This will delete the item #%s and its associated metadata. It will '
+                 . 'also delete all files and file metadata associated with this '
+                 . 'item.', strval($item->id));
+        }
+    }
+    
+    protected function _getElementMetadata($item, $elementSetName, $elementName) 
+    {
+        $m = new Omeka_View_Helper_Metadata;
+        return strip_formatting($m->metadata($item, array($elementSetName, $elementName)));
     }
     
     public function addAction()
@@ -335,7 +368,5 @@ class ItemsController extends Omeka_Controller_AbstractActionController
         } else {
             $paginationUrl = $baseUrl;
         }
-
     }
-
 }
