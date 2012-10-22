@@ -82,6 +82,11 @@ th a:after, th.desc a:after, th.asc a:after { content: ""; }
     display: inline-block; 
 }
 
+    /* Site-Wide Search
+    ==================================================*/
+
+    #search-form { width: 100%; }
+
     /* Browse Items
     ==================================================*/
     
