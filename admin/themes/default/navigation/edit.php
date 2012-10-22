@@ -4,7 +4,6 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
 <?php echo js_tag('settings'); ?>
 <?php echo js_tag('jquery.mjs.nestedSortable'); ?>
 
-
 <script type="text/javascript">
 //<![CDATA[
     jQuery(document).ready(function () {
@@ -15,7 +14,9 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
                 listType: 'ul',
                 handle: 'div',
                 items: 'li',
-                toleranceElement: '> div'
+                toleranceElement: '> div',
+                placeholder: 'placeholder',
+                forcePlaceholderSize: true
             });
             
             jQuery('div.navigation_main_link_header input[type="checkbox"]').click(function(e) {

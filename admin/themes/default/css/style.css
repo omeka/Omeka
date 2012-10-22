@@ -1836,6 +1836,11 @@ ul#section-nav, #section-nav ul {
     margin-top: 10px;
 }
 
+#navigation_main_list .placeholder {
+    border: 1px solid blue; /* Temporary */
+    display: block;
+}
+
 .navigation_main_link_buttons {
   width: 100%;
   overflow: auto;
