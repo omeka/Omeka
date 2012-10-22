@@ -529,7 +529,7 @@ header ul {
     position: absolute; 
     top: 0; 
     right: 0; 
-    z-index: 1000;
+    z-index: 100;
 }
     
     #search-form p {
