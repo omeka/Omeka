@@ -2018,8 +2018,25 @@ function item_image($imageType, $props = array(), $index = 0, $item = null)
         $item = get_current_record('item');
     }
     $imageFile = get_db()->getTable('File')->findWithImages($item->id, $index);
-    $media = new Omeka_View_Helper_FileMarkup;
-    return $media->image_tag($imageFile, $props, $imageType);
+    $fileMarkup = new Omeka_View_Helper_FileMarkup;
+    return $fileMarkup->image_tag($imageFile, $props, $imageType);
+}
+
+/**
+ * Return a customized file image tag.
+ *
+ * @uses Omeka_View_Helper_FileMarkup::image_tag()
+ * @param string $imageType
+ * @param array $props
+ * @param File|null Check for this specific file record (current file if null).
+ */
+function file_image($imageType, $props = array(), $file = null)
+{
+    if (!$file) {
+        $file = get_current_record('file');
+    }
+    $fileMarkup = new Omeka_View_Helper_FileMarkup;
+    return $fileMarkup->image_tag($file, $props, $imageType);
 }
 
 /**
