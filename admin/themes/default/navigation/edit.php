@@ -16,7 +16,8 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
                 items: 'li',
                 toleranceElement: '> div',
                 placeholder: 'placeholder',
-                forcePlaceholderSize: true
+                forcePlaceholderSize: true,
+                containment: '#content'
             });
             
             jQuery('div.navigation_main_link_header input[type="checkbox"]').click(function(e) {
