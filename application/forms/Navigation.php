@@ -233,7 +233,6 @@ class Omeka_Form_Navigation extends Omeka_Form
                                         
                     if ($parentPageId === null) {
                          // add a page that lacks a parent
-                        echo 'a' . '<br/>';
                         $nav->addPage($page);
                     } else {    
                         // add a child page to its parent page
@@ -242,7 +241,6 @@ class Omeka_Form_Navigation extends Omeka_Form
                         if (!($parentPage = $nav->getPageByUid($parentPageUid))) {
                             throw RuntimeException(__("Cannot find parent navigation page."));
                         } else {
-                            echo 'b' . '<br/>';
                             $parentPage->addPage($page);
                         }
                     }
