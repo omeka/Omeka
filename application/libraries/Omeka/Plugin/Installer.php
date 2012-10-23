@@ -120,7 +120,9 @@ class Omeka_Plugin_Installer
             $plugin->save();
             
             // Force the plugin to load.  Will throw exception if plugin cannot be loaded for some reason.
-            $this->_loader->load($plugin, true);
+            if (!$plugin->isLoaded()) {
+                $this->_loader->load($plugin, true);
+            }
             
             //Now run the installer for the plugin
             $this->_broker->callHook('install', array('plugin_id' => $plugin->id), $plugin);
