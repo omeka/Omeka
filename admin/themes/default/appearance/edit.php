@@ -1,7 +1,6 @@
 <?php
 $pageTitle = __('Edit Appearance Settings');
 echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
-<?php echo js_tag('settings'); ?>
 
 <?php echo common('appearance-nav'); ?>
 

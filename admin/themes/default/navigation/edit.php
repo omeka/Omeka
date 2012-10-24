@@ -1,5 +1,5 @@
 <?php
-queue_js_file(array('jquery.mjs.nestedSortable', 'settings', 'navigation'));
+queue_js_file(array('jquery.mjs.nestedSortable', 'navigation'));
 $pageTitle = __('Edit Navigation');
 echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
 
