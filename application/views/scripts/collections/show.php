@@ -3,9 +3,6 @@ $collectionTitle = strip_formatting(metadata('collection', array('Dublin Core', 
 if ($collectionTitle == '') {
     $collectionTitle = __('[Untitled]');
 }
-
-$itemTitle = strip_formatting(metadata('item', array('Dublin Core', 'Title')));
-
 ?>
 
 <?php echo head(array('title'=> $collectionTitle, 'bodyid'=>'collections', 'bodyclass' => 'show')); ?>
@@ -15,7 +12,7 @@ $itemTitle = strip_formatting(metadata('item', array('Dublin Core', 'Title')));
 
     <div id="description" class="element">
         <h2><?php echo __('Description'); ?></h2>
-        <div class="element-text"><?php echo text_to_paragraphs(metadata('collection', 'Description')); ?></div>
+        <div class="element-text"><?php echo text_to_paragraphs(metadata('collection', array('Dublin Core', 'Description'))); ?></div>
     </div><!-- end description -->
 
     <?php if ($collection->hasContributor()): ?>
@@ -35,12 +32,13 @@ $itemTitle = strip_formatting(metadata('item', array('Dublin Core', 'Title')));
         <h2><?php echo __('Items in the %s Collection', $collectionTitle); ?></h2>
 
         <?php foreach (loop('items') as $item): ?>
+        <?php $itemTitle = strip_formatting(metadata('item', array('Dublin Core', 'Title'))); ?>
         <div class="item hentry">
             <h3><?php echo link_to_item($itemTitle, array('class'=>'permalink')); ?></h3>
 
             <?php if (item_has_thumbnail()): ?>
             <div class="item-img">
-                <?php echo link_to_item(item_image('square_thumbnail', array('alt'=>metadata('item', array('Dublin Core', 'Title'))))); ?>
+                <?php echo link_to_item(item_image('square_thumbnail', array('alt' => $itemTitle))); ?>
             </div>
             <?php endif; ?>
 
