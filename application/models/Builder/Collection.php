@@ -12,28 +12,82 @@
  * @package Omeka\Record\Builder
  */
 class Builder_Collection extends Omeka_Record_Builder_AbstractBuilder
-{
-    protected $_settableProperties = array(
-        'name', 
-        'description', 
-        'public', 
-        'featured',
-        'owner_id'
-    );
+{    
+    const OWNER_ID = 'owner_id';
+    const IS_PUBLIC = 'public';
+    const IS_FEATURED = 'featured';
+    
+    const OVERWRITE_ELEMENT_TEXTS = 'overwriteElementTexts';
     
     protected $_recordClass = 'Collection';
+    protected $_settableProperties = array(
+        self::OWNER_ID, 
+        self::IS_PUBLIC, 
+        self::IS_FEATURED
+    );    
+    
+    private $_elementTexts = array();
     
     /**
-     * Add collectors associated with the collection.
+     * Set the element texts for the collection.
+     * 
+     * @param array $elementTexts
+     */    
+    public function setElementTexts(array $elementTexts)
+    {
+        $this->_elementTexts = $elementTexts;
+    }
+    
+    /**
+     * Add element texts to a record.
+     */            
+    private function _addElementTexts()
+    {
+        return $this->_record->addElementTextsByArray($this->_elementTexts);
+    }
+    
+    /**
+     * Replace all the element texts for existing element texts.
+     */    
+    private function _replaceElementTexts()
+    {
+        $item = $this->_record;
+        // If this option is set, it will loop through the $elementTexts provided,
+        // find each one and manually update it (provided it exists).
+        // The rest of the element texts will get added as per usual.
+        foreach ($this->_elementTexts as $elementSetName => $textArray) {
+            foreach ($textArray as $elementName => $elementTextSet) {
+                $etRecordSet = $item->getElementTexts($elementSetName, $elementName);
+                foreach ($elementTextSet as $elementTextIndex => $textAttr) {
+                    // If we have an existing ElementText record, use that
+                    // instead of adding a new one.
+                    if (array_key_exists($elementTextIndex, $etRecordSet)) {
+                        $etRecord = $etRecordSet[$elementTextIndex];
+                        $etRecord->text = $textAttr['text'];
+                        $etRecord->html = $textAttr['html'];
+                        $etRecord->save();
+                    } else {
+                        // Otherwise we should just append the new text to the 
+                        // pre-existing ones.
+                        $elementRecord = $item->getElement($elementSetName, $elementName);
+                        $item->addTextForElement($elementRecord, $textAttr['text'], $textAttr['html']);
+                    }
+                }
+            }
+        }
+    }
+       
+    /**
+     * Add elements associated with the collection.
      */
     protected function _beforeBuild(Omeka_Record_AbstractRecord $record)
     {
         $metadata = $this->getRecordMetadata();
-        if (array_key_exists('collectors', $metadata)) {
-            $record = $this->getRecord();
-            foreach($metadata['collectors'] as $collector) {
-                $record->addCollector($collector);
-            }
+        
+        if ($this->_record->exists() and array_key_exists(self::OVERWRITE_ELEMENT_TEXTS, $metadata)) {
+            $this->_replaceElementTexts();
+        } else {
+            $this->_addElementTexts();
         }
     }
 }

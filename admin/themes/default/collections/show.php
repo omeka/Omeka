@@ -1,11 +1,11 @@
 <?php
-    $collectionTitle = strip_formatting(metadata('collection', 'Name'));
-    if ($collectionTitle != '') {
+    $collectionTitle = strip_formatting(metadata('collection', array('Dublin Core', 'Title')));
+    if ($collectionTitle != '' && $collectionTitle != __('[Untitled]')) {
         $collectionTitle = ': &quot;' . $collectionTitle . '&quot; ';
     } else {
         $collectionTitle = '';
     }
-    $collectionTitle = __('Edit Collection #%s', metadata('collection', 'id')) . $collectionTitle;
+    $collectionTitle = __('Collection #%s', metadata('collection', 'id')) . $collectionTitle;
 ?>
 <?php echo head(array('title'=> $collectionTitle, 'bodyclass'=>'collections show')); ?>
 
@@ -31,13 +31,13 @@
                     <p><?php echo link_to_items_in_collection(); ?></p>
                 </div>
 
-                <div class="collectors panel">
-                    <h4><?php echo __('Collectors'); ?></h4>
-                    <ul id="collector-list">
-                        <?php if (collection_has_collectors()): ?> 
-                        <li><?php echo metadata('collection', 'Collectors', array('delimiter'=>'</li><li>')); ?></li>
+                <div class="contributors panel">
+                    <h4><?php echo __('Contributors'); ?></h4>
+                    <ul id="contributor-list">
+                        <?php if ($collection->hasContributor()): ?> 
+                        <li><?php echo metadata('collection', array('Dublin Core', 'Contributor'), array('all'=>true, 'delimiter'=>'</li><li>')); ?></li>
                         <?php else: ?>
-                        <li><?php echo __('No collectors.'); ?></li>
+                        <li><?php echo __('No contributors.'); ?></li>
                         <?php endif; ?> 
                     </ul>
                 </div>
@@ -45,11 +45,10 @@
             </div>
             
             <div class="seven columns alpha">
-
                 <?php echo flash(); ?>
-                <h2><?php echo __('Description'); ?></h2> 
-                <p><?php echo metadata('collection', 'Description'); ?></p>
-                                                
+
+                <?php echo all_element_texts('collection'); ?>
+
                 <?php if(metadata('collection', 'Total Items') > 0): ?>
                 <h2><?php echo __('Recently Added Items'); ?></h2>
                 <ul class="recent-items">
@@ -60,7 +59,6 @@
                 <?php endif; ?>
 
                 <?php fire_plugin_hook('admin_append_to_collections_show_primary', array('collection' => $collection, 'view' => $this)); ?>
-            
             </div>
         
 <?php echo foot(); ?>
