@@ -60,11 +60,6 @@ class Omeka_Form_Admin extends Omeka_Form
             $this->setHasPublicPage();          
             $hookDecoratorOptions['record'] = $this->_record;
         }        
-        if(class_exists('Omeka_Form_Decorator_SavePanelHook')) {
-            echo 'ok';
-        } else {
-            echo 'boo';
-        }
         $savePanelHookDecorator = new Omeka_Form_Decorator_SavePanelHook($hookDecoratorOptions);
         //Pro tip: order of adding decorators matters! if reversed, group elements would appear after the div!
         $this->_editDisplayGroup->setDecorators(array('FormElements', $editDecorator));
