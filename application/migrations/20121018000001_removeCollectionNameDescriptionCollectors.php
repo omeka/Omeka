@@ -22,7 +22,7 @@ class removeCollectionNameDescriptionCollectors extends Omeka_Db_Migration_Abstr
                 'id' => $result['id'],
                 'name' => $result['name'],
                 'description' => $result['description'],
-                'collectors' => $result['collectors'];
+                'collectors' => $result['collectors']
             );
         }
         
