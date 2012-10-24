@@ -46,7 +46,9 @@
             
             <div class="seven columns alpha">
                 <?php echo flash(); ?>
-                                                
+
+                <?php echo all_element_texts('collection'); ?>
+
                 <?php if(metadata('collection', 'Total Items') > 0): ?>
                 <h2><?php echo __('Recently Added Items'); ?></h2>
                 <ul class="recent-items">
@@ -55,8 +57,6 @@
                 <?php endforeach;?>
                 </ul>
                 <?php endif; ?>
-
-                <?php echo all_element_texts('collection'); ?>
 
                 <?php fire_plugin_hook('admin_append_to_collections_show_primary', array('collection' => $collection, 'view' => $this)); ?>
             </div>
