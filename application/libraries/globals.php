@@ -1923,30 +1923,6 @@ function item_citation($item = null)
 }
 
 /**
- * Determine whether a specific element uses HTML.
- * 
- * By default this will test the first element text, though it is possible to 
- * test against a different element text by modifying the $index parameter.
- *
- * @uses ElementText::isHtml()
- * @param string $elementSetName
- * @param string $elementName
- * @param integer $index
- * @param Item|null $item Check for this specific item record (current item if 
- * null).
- * @return boolean
- */
-function item_field_uses_html($elementSetName, $elementName, $index = 0, $item = null)
-{
-    if (!$item) {
-        $item = get_current_record('item');
-    }
-    $textRecords = $item->getElementTexts($elementSetName, $elementName);
-    $textRecord = @$textRecords[$index];
-    return ($textRecord instanceof ElementText and $textRecord->isHtml());
-}
-
-/**
  * Determine whether the item has any files assigned to it.
  *
  * @uses Item::hasFiles()
