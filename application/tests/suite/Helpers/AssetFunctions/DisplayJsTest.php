@@ -77,7 +77,7 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
 
     public function testInternalDefaults()
     {
-        $configArray['theme']['useInternalJavascripts'] = true;
+        $configArray['theme']['useInternalAssets'] = true;
         Zend_Registry::get('bootstrap')->getContainer()->config = new Zend_Config($configArray);
 
         $this->_assertScriptsIncluded($this->_getJsOutput(), $this->internalDefaults);

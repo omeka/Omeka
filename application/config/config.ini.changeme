@@ -137,14 +137,14 @@ session.name = ""
 ; Theme ;
 ;;;;;;;;;
 
-; theme.useInternalJavascripts
-; Whether Omeka should use locally-stored Javascript files.
+; theme.useInternalAssets
+; Whether Omeka should use locally-stored asset files.
 ; default: false
 ;
-; Omeka includes some JavaScript files served by Google by default.
-; Set this to true if the Omeka installation does not have
+; Omeka includes some asset files from external sources, such as Google by
+; default. Set this to true if the Omeka installation does not have
 ; web access, and Omeka will instead serve local copies of these files.
-theme.useInternalJavascripts = false
+theme.useInternalAssets = false
 
 ;;;;;;;;;;;;;;;;;;;;;;
 ; Background Scripts ;
