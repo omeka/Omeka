@@ -189,7 +189,7 @@ p, li {
         ul.details li { margin-bottom: 1em; }
         ul.details li:last-child { margin-bottom: 0; }
         
-    .featured { background: url('../images/featured-bg.png') no-repeat right bottom; }
+    td.featured { background: url('../images/featured-bg.png') no-repeat right bottom; }
     
         .odd td.featured { background-color: #FFFFFF; }
     
