@@ -48,21 +48,4 @@ if (empty($pathToConvert) && is_allowed('Settings', 'edit')): ?>
     <?php endfor; ?>
 </div>
 
-<script>
-jQuery(document).ready(function() {
-    jQuery( ".sortable" ).sortable({
-        'items': 'li.file',
-        'forcePlaceholderSize': true, 
-        'forceHelperSize': true,
-        'placeholder': "ui-sortable-highlight",
-        'update': function (event, ui) {
-            jQuery(this).find('.file-order').each(function (index) {
-                jQuery(this).val(index + 1);
-            });
-        }
-    });
-    jQuery( ".sortable" ).disableSelection();
-});
-</script>
-
 <?php fire_plugin_hook('admin_append_to_items_form_files', array('item' => $item, 'view' => $this)); ?>

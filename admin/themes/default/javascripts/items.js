@@ -45,14 +45,54 @@ Omeka.Items.initializeTabs = function () {
 };
 
 /**
+ * Enable drag and drop sorting for files.
+ */
+
+Omeka.Items.enableSorting = function () {
+    jQuery( ".sortable" ).sortable({
+        'items': 'li.file',
+        'forcePlaceholderSize': true, 
+        'forceHelperSize': true,
+        'placeholder': "ui-sortable-highlight",
+        'update': function (event, ui) {
+            jQuery(this).find('.file-order').each(function (index) {
+                jQuery(this).val(index + 1);
+            });
+        }
+    });
+    jQuery( ".sortable" ).disableSelection();
+    
+    jQuery( ".sortable input[type=checkbox]" ).each( function() {
+        jQuery(this).css("display", "none");
+    });
+}
+
+/**
  * Make links to files open in a new window.
  */
+ 
 Omeka.Items.makeFileWindow = function () {
-    jQuery('#file-list a').click(function () {
-        window.open(this.getAttribute('href'));
-        return false;
+    jQuery('#file-list a').click(function (event) {
+        event.preventDefault();
+        if( jQuery(this).hasClass("delete") == true ) {
+            Omeka.Items.enableFileDeletion(jQuery(this));
+        } else {
+            window.open(this.getAttribute('href'));
+        }
     });
-};
+}
+
+/**
+ * Set up toggle for marking files for deletion. 
+ */
+
+Omeka.Items.enableFileDeletion = function (deleteLink) {
+    if( !deleteLink.next().is(":checked") ) {
+        deleteLink.text("Undo").next().prop('checked', true).parents('.sortable-item').addClass("deleted");
+    } else {
+        deleteLink.text("Delete").next().prop('checked', false).parents('.sortable-item').removeClass("deleted");
+    }
+}
 
 /**
  * Make the item type selector AJAX in the right item type form.
