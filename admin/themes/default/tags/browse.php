@@ -1,6 +1,18 @@
 <?php
 $pageTitle = __('Edit Tags') . ' ' .  __('(%s total)', $total_tags);
 echo head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodyclass'=>'tags browse-tags primary')); ?>
+
+<?php echo js_tag('tags'); ?>
+<script type="text/javascript" charset="utf-8">
+//<![CDATA[
+jQuery(document).ready(function () {
+    var editableURL = '<?php echo url('tags/rename-ajax'); ?>';
+    var tagURLBase = '<?php echo url('items/?tag='); ?>';
+    Omeka.Tags.enableEditInPlace(editableURL, tagURLBase);
+});
+//]]>
+</script>
+
 <?php echo flash(); ?>
 <?php if ($total_tags): ?>
 
@@ -54,13 +66,5 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodycl
 </div>
 
 </div>
-
-<script>
-
- jQuery(document).ready(function() {
-     jQuery('.edit-tag').editable(<?php echo js_escape(url('tags/rename-ajax')); ?>); 
- });
- 
-</script>
 
 <?php echo foot(); ?>
