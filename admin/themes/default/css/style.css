@@ -847,6 +847,19 @@ header nav {
         margin: 0;
     }
 
+.ui-sortable .deleted.sortable-item {
+    background: #EBEADC;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F8F8F3), color-stop(100%,#ECEEE2));
+    background: -moz-linear-gradient(center top, #F1F1EF 0%, #ECEEE2 100%);
+    box-shadow: 1px 1px 2px rgba(0,0,0,.1);
+        -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
+        -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
+        -o-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
+    border: 1px solid #EFF0EB;
+    border-radius: 2px;
+
+}
+
 .ui-sortable .action-links {
     display: inline-block;
     float: right;
