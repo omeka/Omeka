@@ -27,8 +27,6 @@
     <?php echo exhibit_builder_display_random_featured_exhibit(); ?>
     <?php endif; ?>
 
-    <?php fire_plugin_hook('public_append_to_home_primary', array('view' => $this)); ?>
-
 </div><!-- end primary -->
 
 <div id="secondary">
@@ -74,8 +72,8 @@
 
     </div><!--end recent-items -->
 
-    <?php fire_plugin_hook('public_append_to_home_secondary', array('view' => $this)); ?>
-
 </div><!-- end secondary -->
+
+<?php fire_plugin_hook('public_append_to_home', array('view' => $this)); ?>
 
 <?php echo foot(); ?>
