@@ -1,5 +1,5 @@
-if (typeof Omeka === 'undefined') {
-    Omeka = {};
+if (!Omeka) {
+    var Omeka = {};
 }
 
 Omeka.Tabs = {};

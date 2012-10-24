@@ -1,5 +1,5 @@
-if (typeof Omeka === 'undefined') {
-    Omeka = {};
+if (!Omeka) {
+    var Omeka = {};
 }
 
 /**
@@ -36,10 +36,8 @@ Omeka.wysiwyg = function (params) {
     tinyMCE.init(initParams);
 };
 
-jQuery(document).ready(function () {
-    // Adds confirm dialog for delete buttons.
+Omeka.deleteConfirm = function () {
     jQuery('.delete-confirm').click(function () {
-        
         if (jQuery(this).is('input')) {
             var url = jQuery(this).parents('form').attr('action');
         } else if (jQuery(this).is('a')) {
@@ -50,33 +48,31 @@ jQuery(document).ready(function () {
         });
         return false;
     });
+};
 
+Omeka.saveScroll = function () {
+    var $save   = jQuery("#save"),
+        $window = jQuery(window),
+        offset  = $save.offset(),
+        topPadding = 62;
     
-    function saveScroll() {
-
-        var $save   = jQuery("#save"),
-            $window = jQuery(window),
-            offset  = $save.offset(),
-            topPadding = 62;
-        
-        if (document.getElementById("save")) {
-            $window.scroll(function() {
-                if($window.scrollTop() > offset.top && $window.width() > 767) {
-                    $save.stop().animate({
-                        marginTop: $window.scrollTop() - offset.top + topPadding
-                        });
-                } else {
-                    $save.stop().animate({
-                        marginTop: 0
+    if (document.getElementById("save")) {
+        $window.scroll(function() {
+            if($window.scrollTop() > offset.top && $window.width() > 767) {
+                $save.stop().animate({
+                    marginTop: $window.scrollTop() - offset.top + topPadding
                     });
-                }
-            });
-        }
+            } else {
+                $save.stop().animate({
+                    marginTop: 0
+                });
+            }
+        });
     }
+};
 
-    saveScroll();
-    
-    function showAdvancedForm() {
+Omeka.showAdvancedForm = function () {
+    if (jQuery("#advanced-form")) {
         jQuery('#search-form input[type=submit]').addClass("blue button with-advanced").after('<a href="#" id="advanced-search" class="blue button">Advanced Search</a>');
         jQuery('#search-form input[type=text]').addClass("blue button with-advanced");
         var $advanced_form = jQuery("#advanced-form");
@@ -100,12 +96,23 @@ jQuery(document).ready(function () {
             });
             
         });
-    }
-    
-    if(jQuery("#advanced-form")) {
-        showAdvancedForm();
     } else {
         jQuery('#search-form input[type=submit]').addClass("blue button");
     }
+};
 
-});
+Omeka.addReadyCallback = function (callback, params) {
+    this.readyCallbacks.push([callback, params]);
+};
+
+Omeka.runReadyCallbacks = function () {
+    for (var i = 0; i < this.readyCallbacks.length; ++i) {
+        this.readyCallbacks[i][0].apply(this, this.readyCallbacks[i][1]);
+    }
+};
+
+Omeka.readyCallbacks = [
+    [Omeka.deleteConfirm, null],
+    [Omeka.saveScroll, null],
+    [Omeka.showAdvancedForm, null]
+];
