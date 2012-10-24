@@ -938,11 +938,6 @@ header nav {
         #save .big:first-child, #edit .big:first-child {
             margin-top: 0;
         }
-        
-    #save .featured { 
-        background: url('../images/small-featured-bg.png') no-repeat right bottom; 
-        background-size: 40px; 
-    }
 
     #save .field, #edit .field {
         border-top: 1px solid #e7e7e7;
