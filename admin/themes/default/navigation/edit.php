@@ -12,15 +12,15 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
                         
             jQuery("#navigation_main_list").nestedSortable({
                 listType: 'ul',
-                handle: '.navigation_main_link_header',
+                handle: '.main_link',
                 items: 'li',
                 toleranceElement: '> div',
-                placeholder: 'placeholder',
+                placeholder: 'ui-sortable-highlight',
                 forcePlaceholderSize: true,
                 containment: '#content'
             });
             
-            jQuery('div.navigation_main_link_header input[type="checkbox"]').click(function(e) {
+            jQuery('div.sortable-item input[type="checkbox"]').click(function(e) {
                 e.stopPropagation();
             });    
         }
@@ -28,7 +28,7 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
         function updateSelectHomepageOptions() {
             var hPages = {}
             hPages[''] = '[Default]'; 
-            jQuery( 'div.navigation_main_link_header input[type="checkbox"]' ).each(function(i,e) {
+            jQuery( 'div.sortable-item input[type="checkbox"]' ).each(function(i,e) {
                 hPages[jQuery(e).next().attr('href')] = jQuery(e).next().text();
             });
             var selectedValue = jQuery('#navigation_homepage_select option').filter(":selected").val();
@@ -40,20 +40,20 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
         }
 
         function updateHideButtons() {
-            jQuery('div.navigation_main_link_header > input[type="checkbox"]').each(function(i, e) {
+            jQuery('div.sortable-item > input[type="checkbox"]').each(function(i, e) {
                 var headerDiv = jQuery(e).parent(); 
-                if (!headerDiv.find('div[class="navigation_main_list_hide hidden"]').length) {
-                    headerDiv.append('<div class="navigation_main_list_hide hidden">&#9654;</div>');
-                    headerDiv.find('.navigation_main_list_hide').click(function(ee) {
+                if (!headerDiv.find('div[class="drawer closed"]').length) {
+                    headerDiv.append('<div class="drawer closed">&#9654;</div>');
+                    headerDiv.find('.drawer').click(function(ee) {
                         ee.preventDefault();
                         var d = jQuery(ee.target).parent().next();
                         d.toggle();
                         if (d.is(':hidden')) {
                           jQuery(ee.target).html('&#9654;'); // right arrow
-                          headerDiv.find('.navigation_main_list_hide').removeClass('revealed').addClass('hidden');
+                          headerDiv.find('.drawer').removeClass('opened').addClass('closed');
                         } else {
                           jQuery(ee.target).html('&#9660;'); // down arrow
-                          headerDiv.find('.navigation_main_list_hide').removeClass('hidden').addClass('revealed');
+                          headerDiv.find('.drawer').removeClass('closed').addClass('opened');
                         }
                       }).mousedown(function(ee) { ee.stopPropagation(); });
                       headerDiv.next().hide();       
@@ -62,14 +62,14 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
         }
 
         function updateVisitButtons() {
-            jQuery('div.navigation_main_link_header > input[type="checkbox"]').each(function(i, e) {
+            jQuery('div.sortable-item > input[type="checkbox"]').each(function(i, e) {
                 var hiddenInfo = jQuery.parseJSON(jQuery(e).val());
-                var buttonsDiv = jQuery(e).parent().next().find('div.navigation_main_link_buttons'); 
+                var buttonsDiv = jQuery(e).parent().next().find('div.main_link_buttons'); 
                 if (!buttonsDiv.find('a[class="navigation_main_list_visit blue button"]').length) {
                     buttonsDiv.append('<a class="navigation_main_list_visit blue button" href="' + hiddenInfo['uri'] + '">Visit</a>');
                     buttonsDiv.find('.navigation_main_list_visit').click(function(ee) {
                           ee.preventDefault();
-                          var url = jQuery(ee.target).parent().parent().find('.navigation_main_link_uri').val();
+                          var url = jQuery(ee.target).parent().parent().find('.main_link_uri').val();
                         window.open(url);
                       });       
                 }
@@ -78,7 +78,7 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
         
         function updateDeleteButtons() {
             jQuery( 'input.can_delete_nav_link').each(function(i,e) {
-                var buttonsDiv = jQuery(e).parent().next().find('div.navigation_main_link_buttons'); 
+                var buttonsDiv = jQuery(e).parent().next().find('div.main_link_buttons'); 
                 if (!buttonsDiv.children('a[class="navigation_main_list_delete red button"]').length) {
                     buttonsDiv.append('<a class="navigation_main_list_delete red button" href="">Delete</a>');
                        buttonsDiv.children('.navigation_main_list_delete').click(function(ee) {
@@ -92,13 +92,13 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
         }
                 
         function updateNavLinkEditForms() {
-            jQuery( 'div.navigation_main_link_header input[type="checkbox"]' ).each(function(i,e) {
+            jQuery( 'div.sortable-item input[type="checkbox"]' ).each(function(i,e) {
                 var hiddenInfo = jQuery.parseJSON(jQuery(e).val());
                 var bodyDiv = jQuery(e).parent().next(); 
-                bodyDiv.find('.navigation_main_link_label').val(hiddenInfo['label']);
-                bodyDiv.find('.navigation_main_link_uri').val(hiddenInfo['uri']);
+                bodyDiv.find('.main_link_label').val(hiddenInfo['label']);
+                bodyDiv.find('.main_link_uri').val(hiddenInfo['uri']);
                 if (!hiddenInfo['can_delete']) {
-                    bodyDiv.find('.navigation_main_link_uri').attr('disabled', 'disabled');
+                    bodyDiv.find('.main_link_uri').attr('disabled', 'disabled');
                 }
             });
         }
@@ -117,13 +117,13 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
                     };
                     var n_id = 'navigation_main_nav_checkboxes_new_' + (new Date()).getTime();                
                     var n_value = JSON.stringify(n_hidden_info);
-                    var edit_nav_header_html = '<div class="navigation_main_link_header"><input type="hidden" name="' + n_id + '" value="0"><input type="checkbox" name="' + n_id + '" id="' + n_id + '" class="can_delete_nav_link"> <a href="' + n_uri + '">' + n_label + '</a></div>';
-                    var link_label_html = '<div><label class="navigation_main_link_label_label">Label</label><input type="text" value="' + n_label + '" class="navigation_main_link_label" /></div>';
-                    var link_uri_html = '<div><label class="navigation_main_link_uri_label">URI</label><input type="text" value="' + n_uri + '" class="navigation_main_link_uri" /></div>';
-                    var buttons_html = '<div class="navigation_main_link_buttons"></div>';
-                    var edit_nav_body_html = '<div class="navigation_main_link_body">' + link_label_html + link_uri_html + buttons_html + '</div>';
+                    var edit_nav_header_html = '<div class="sortable-item"><input type="hidden" name="' + n_id + '" value="0"><input type="checkbox" name="' + n_id + '" id="' + n_id + '" class="can_delete_nav_link"> <a href="' + n_uri + '">' + n_label + '</a></div>';
+                    var link_label_html = '<div><label class="main_link_label_label">Label</label><input type="text" value="' + n_label + '" class="main_link_label" /></div>';
+                    var link_uri_html = '<div><label class="main_link_uri_label">URI</label><input type="text" value="' + n_uri + '" class="main_link_uri" /></div>';
+                    var buttons_html = '<div class="main_link_buttons"></div>';
+                    var edit_nav_body_html = '<div class="drawer-contents">' + link_label_html + link_uri_html + buttons_html + '</div>';
 
-                    jQuery( '#navigation_main_list' ).append('<li><div class="navigation_main_link">' + edit_nav_header_html + edit_nav_body_html + '</div></li>');
+                    jQuery( '#navigation_main_list' ).append('<li><div class="main_link">' + edit_nav_header_html + edit_nav_body_html + '</div></li>');
                     jQuery( '#' + n_id).val(n_value); // does escaping for json data
                     jQuery( '#new_nav_link_label' ).val('');
                     jQuery( '#new_nav_link_uri' ).val('');
@@ -165,11 +165,11 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
             
             // get link data
             var linkData = [];
-            jQuery('div.navigation_main_link_header > input[type="checkbox"]').each(function(i, e) {
+            jQuery('div.sortable-item > input[type="checkbox"]').each(function(i, e) {
                 var hiddenInfo = jQuery.parseJSON(jQuery(e).val());                
                 var bodyDiv = jQuery(e).parent().next();
-                var newLabel = jQuery.trim(bodyDiv.find('.navigation_main_link_label').val());
-                var newUri = jQuery.trim(bodyDiv.find('.navigation_main_link_uri').val());                  
+                var newLabel = jQuery.trim(bodyDiv.find('.main_link_label').val());
+                var newUri = jQuery.trim(bodyDiv.find('.main_link_uri').val());                  
                 var linkInfo = {};
                 linkInfo['can_delete'] = hiddenInfo['can_delete'];
                 linkInfo['visible'] = jQuery(e).is(':checked');
@@ -215,35 +215,21 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
 
     <p class="description"><?php echo __('Check the links you would like to display in the main navigation. You can click and drag the links into your preferred display order.'); ?></p>
 
-    <?php echo $this->form->displayNavigationLinksFieldset(); ?>
+    <?php echo $this->form->displayNavigationLinks(); ?>
     
     <?php echo $this->form->getElement(Omeka_Form_Navigation::HIDDEN_ELEMENT_ID); ?>
 
-    <fieldset id="fieldset-new_nav_link_display">
-        <h4><?php echo __('Add a Link to the Navigation'); ?></h4>
+        <div class="add-new-item"><?php echo __('Add a Link to the Navigation'); ?></div>
         
-        <div class="field">
-            <div class="two columns alpha">
-            <label for="new_nav_link_label"><?php echo __('Link Label'); ?></label>
-            </div>
-            
-            <div class="inputs five columns omega">
-            <input type="text" id="new_nav_link_label" name="new_nav_link_label" />
-            </div>
-        </div>
-        
-        <div class="field">
-            <div class="two columns alpha">
-                <label for="new_nav_link_uri"><?php echo __('Link URI'); ?></label>
-            </div>
-            
-            <div class="inputs five columns omega">
-                <input type="text" id="new_nav_link_uri" name="new_nav_link_uri" />
-            </div>
-        </div>
+        <div class="drawer-contents">
 
-        <a href="" id="new_nav_link_button_link" class="blue button"><?php echo __('Add Link'); ?></a>
-    </fieldset>
+            <label for="new_nav_link_label"><?php echo __('Link Label'); ?></label>
+            <input type="text" id="new_nav_link_label" name="new_nav_link_label" />
+            <label for="new_nav_link_uri"><?php echo __('Link URI'); ?></label>
+            <input type="text" id="new_nav_link_uri" name="new_nav_link_uri" />
+            <a href="" id="new_nav_link_button_link" class="blue button"><?php echo __('Add Link'); ?></a>
+        
+        </div>
     
 </div>
 
