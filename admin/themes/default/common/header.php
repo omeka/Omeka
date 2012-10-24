@@ -7,7 +7,7 @@
 
 <?php
     queue_css_file(array('style', 'layout', 'skeleton', 'jquery-ui'));
-    queue_js_file(array('globals','jquery.jeditable.mini','modernizr-min','selectivizr-min'));
+    queue_js_file(array('globals','modernizr-min','selectivizr-min'));
 ?>
 
 <!-- Plugin Stuff -->
