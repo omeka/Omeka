@@ -45,19 +45,7 @@ class ElementSetsController extends Omeka_Controller_AbstractActionController
         $db = $this->_helper->db;
         
         // Handle a submitted edit form.
-        if ($elements = $this->getRequest()->getPost('elements')) {
-            
-            // Establish a valid element order.
-            $order = array();
-            foreach ($elements as $id => $element) {
-                $order[$id] = (int) $element['order'];
-            }
-            asort($order); // sort preserving keys
-            $i = 1;
-            foreach ($order as $id => $orderNumber) {
-                $elements[$id]['order'] = $i;
-                $i++;
-            }
+        if ($this->getRequest()->isPost()) {
             
             // Delete existing element order to prevent duplicate indices.
             $db->getDb()->update(
@@ -68,6 +56,7 @@ class ElementSetsController extends Omeka_Controller_AbstractActionController
             
             // Update the elements.
             try {
+                $elements = $this->getRequest()->getPost('elements');
                 foreach ($elements as $id => $element) {
                     $elementRecord = $db->getTable('Element')->find($id);
                     $elementRecord->comment = trim($element['comment']);

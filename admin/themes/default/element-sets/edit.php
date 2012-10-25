@@ -2,31 +2,29 @@
 $pageTitle = __('Edit Elements');
 echo head(array('title'=> $pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'element-sets primary'));
 ?>
+<?php echo js_tag('elements'); ?>
+<script type="text/javascript" charset="utf-8">
+//<![CDATA[
+jQuery(window).load(function () {
+    Omeka.Elements.enableSorting();
+});
+//]]>
+</script>
 <?php echo common('settings-nav'); ?>
 <?php echo flash(); ?>
 <h2><?php echo __($element_set->name); ?></h2>
 <p><?php echo __($element_set->description); ?></p>
 <form method='post'>
-    <table>
-        <thead>
-        <tr>
-            <th><?php echo __('Name'); ?></th>
-            <th><?php echo __('Description'); ?></th>
-            <th><?php echo __('Comment'); ?></th>
-            <th><?php echo __('Order'); ?></th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($element_set->getElements() as $element): ?>
-        <tr>
-            <td><?php echo __($element->name); ?></td>
-            <td><?php echo __($element->description); ?></td>
-            <td><?php echo $this->formTextarea("elements[{$element->id}][comment]", $element->comment, array('rows' => '5', 'cols' => '40')); ?></td>
-            <td><?php echo $this->formText("elements[{$element->id}][order]", $element->order, array('size' => '3')); ?></td>
-        </tr>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
+<ul class="sortable">
+    <?php foreach ($element_set->getElements() as $element): ?>
+    <li class="element">
+        <?php echo __($element->name); ?><br />
+        <?php echo __($element->description); ?><br />
+        <?php echo $this->formTextarea("elements[{$element->id}][comment]", $element->comment); ?>
+        <?php echo $this->formHidden("elements[{$element->id}][order]", $element->order, array('class' => 'element-order')); ?>
+    </li>
+    <?php endforeach; ?>
+</ul>
 <?php echo $this->formSubmit('submit_edit_elements', 'Edit Elements'); ?>
 </form>
 <?php echo foot(); ?>

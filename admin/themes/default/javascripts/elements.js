@@ -5,6 +5,24 @@ if (!Omeka) {
 Omeka.Elements = {};
 
 /**
+ * Enable drag and drop sorting for elements.
+ */
+
+Omeka.Elements.enableSorting = function () {
+    jQuery( ".sortable" ).sortable({
+        'items': 'li.element',
+        'forcePlaceholderSize': true, 
+        'forceHelperSize': true,
+        'placeholder': "ui-sortable-highlight",
+        'update': function (event, ui) {
+            jQuery(this).find('.element-order').each(function (index) {
+                jQuery(this).val(index + 1);
+            });
+        }
+    });
+}
+
+/**
  * Send an AJAX request to update a <div class="field"> that contains all
  * the form inputs for an element.
  *
