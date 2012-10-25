@@ -242,7 +242,7 @@ class Omeka_Navigation extends Zend_Navigation
     }
     
     /**
-     * Returns the page order of the last page in the container.  
+     * Returns the page order of the last child page in the container.  
      * If no page exists in the container, it returns 0.
      * 
      * @param  Zend_Navigation_Container $container  The container to search for the last page order
@@ -250,14 +250,14 @@ class Omeka_Navigation extends Zend_Navigation
      */ 
     protected function _getLastPageOrderInContainer($container)
     {
-        $lastPage = null;
-        foreach($container->getPages() as $lastPage) {}
-        if ($lastPage) {
-            $pageOrder = $lastPage->getOrder();
-        } else {
-            $pageOrder = 0;
+        $lastPageOrder = 0;
+        foreach($container->getPages() as $page) {
+            $pageOrder = $page->getOrder();
+            if ($pageOrder > $lastPageOrder) {
+                $lastPageOrder = $pageOrder;
+            }
         }
-        return $pageOrder;
+        return $lastPageOrder;
     }
     
     /**
