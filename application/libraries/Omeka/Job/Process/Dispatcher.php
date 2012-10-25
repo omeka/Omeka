@@ -9,7 +9,7 @@
 /**
  * Spawns and manages background processes.
  *
- * @package Omeka
+ * @package Omeka\Job\Process
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Omeka_Job_Process_Dispatcher

@@ -10,7 +10,7 @@
  * 
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
- * @package Omeka
+ * @package Omeka\Job\Process
  * @subpackage Models
  */ 
 abstract class Omeka_Job_Process_AbstractProcess

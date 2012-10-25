@@ -11,7 +11,7 @@
  * 
  * @internal This implements Omeka internals and is not part of the public API.
  * @access private
- * @package Omeka
+ * @package Omeka\Test\Resource
  * @copyright Roy Rosenzweig Center for History and New Media, 2011
  */
 class Omeka_Test_Resource_Currentuser extends Zend_Application_Resource_ResourceAbstract

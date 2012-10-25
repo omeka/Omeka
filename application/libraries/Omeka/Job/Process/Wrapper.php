@@ -10,7 +10,7 @@
  * Omeka_Job_Process_Dispatcher API. Jobs are passed in as the 'job' argument, 
  * and this wrapper handles decoding and executing the job.
  *
- * @package Omeka
+ * @package Omeka\Job\Process
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
  */
 class Omeka_Job_Process_Wrapper extends Omeka_Job_Process_AbstractProcess
