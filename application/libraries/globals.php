@@ -1182,10 +1182,9 @@ function web_path_to($file)
  */
 function random_featured_collection()
 {
-    $featuredCollection = get_random_featured_collection();
-    $featuredCollectionTitle = strip_formatting(metadata($featuredCollection, array('Dublin Core', 'Title')));
     $html = '<h2>' . __('Featured Collection') . '</h2>';
-    if ($featuredCollection) {
+    if ($featuredCollection = get_random_featured_collection()) {
+        $featuredCollectionTitle = strip_formatting(metadata($featuredCollection, array('Dublin Core', 'Title')));
         $html .= '<h3>' . link_to_collection($featuredCollectionTitle, array(), 'show', $featuredCollection) . '</h3>';
         if ($collectionDescription = metadata($featuredCollection, array('Dublin Core', 'Description'), array('snippet'=>150))) {
             $html .= '<p class="collection-description">' . $collectionDescription . '</p>';
