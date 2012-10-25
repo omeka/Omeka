@@ -205,7 +205,7 @@ class Omeka_Form_Navigation extends Omeka_Form
         if ($pageLinks = $this->getValue(self::HIDDEN_ELEMENT_ID) ) {            
                 
             if ($pageLinks = json_decode($pageLinks, true)) {
-                                                                
+                                                                                
                 // add and update the pages in the navigation
                 $pageOrder = 0;
                 $pageUids = array();
@@ -231,7 +231,7 @@ class Omeka_Form_Navigation extends Omeka_Form
                     
                     $pageIdsToPageUids[strval($pageLink['id'])] = $page->uid;
                 }
-                                
+                                                                
                 // structure the parent/child relationships
                 // this assumes that the $pages are in a flattened hierarchical order           
                 for($i = 0; $i < $pageOrder; $i++) {
@@ -253,7 +253,7 @@ class Omeka_Form_Navigation extends Omeka_Form
                         }
                     }
                 }
-                                
+                                                
                 // remove expired pages from navigation
                 $nav->pruneExpiredPages($pageUids);
             }

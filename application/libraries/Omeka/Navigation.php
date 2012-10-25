@@ -52,7 +52,9 @@ class Omeka_Navigation extends Zend_Navigation
     /**
      * Adds a page to the container.  If a page does not have a valid id, it will give it one.
      * and is an instance of Zend_Navigation_Page_Mvc or Omeka_Navigation_Page_Uri.
-     * If a page already has another page with the same uid then it will not add the page.
+     * If a direct child page already has another page with the same uid then it will not add the page.
+     * However, it will add the page as a child of this navigation if one of its descendants already
+     * has the page. 
      *
      * This method will inject the container as the given page's parent by
      * calling {@link Zend_Navigation_Page::setParent()}.
@@ -68,11 +70,27 @@ class Omeka_Navigation extends Zend_Navigation
         $page = $this->_normalizePageRecursive($page);        
                 
         $page->uid = $this->createPageUid($page->getHref());
-        if (!($fPage = $this->getPageByUid($page->uid))) {
+        if (!($fPage = $this->getChildByUid($page->uid))) {
             return parent::addPage($page);
         }
         
         return $this;
+    }
+    
+    /**
+     * Returns an immediate child page that has a uid of $uid.  If none exists, it returns null.
+     *
+     * @param string $uid   The uid to search for in this navigation
+     * @return Zend_Navigation_Page The page
+     */
+    public function getChildByUid($uid)
+    {
+        foreach($this->getPages() as $page) {
+            if ($page->get('uid') == $uid) {
+                return $page;
+            }
+        }
+        return null;
     }
     
     /**
@@ -184,34 +202,36 @@ class Omeka_Navigation extends Zend_Navigation
      */
     public function mergePage(Zend_Navigation_Page $page, Zend_Navigation_Container $parentContainer=null)
     {
-        // save the child pages and remove them from the current page
-        $childPages = $page->getPages();
-        $page->removePages($childPages);
-        
         if (!$page->uid) {
             // we assume that every page has already been normalized
             throw RuntimeException(__('The page must be normalized and have a valid uid.'));
         }
+        
+        if ($parentContainer === null) {
+            $parentContainer = $this;
+        }
+        
+        // save the child pages and remove them from the current page
+        $childPages = $page->getPages();
+        $page->removePages($childPages);
+        
         if (!($oldPage = $this->getPageByUid($page->uid))) {    
-            if ($parentContainer === null) {
-                // add page to end of the navigation
-                $pageOrder = $this->_getLastPageOrderInContainer($this) + 1;
-                $page->setOrder($pageOrder); 
-                parent::addPage($page);
-            } else {
-                // add the page to the end of the parent container
-                if ($this !== $parentContainer && !$this->hasPage($parentContainer, true)) {
-                    // we assume parentContainer is already in this navigation and will remain in the navigation
-                    // throughout the merge
-                    throw RuntimeException(__('The parent container must either be the navigation object' .
-                                           ' or be a subpage of the navigation object.'));
-                }
-                $pageOrder = $this->_getLastPageOrderInContainer($parentContainer) + 1;
-                $page->setOrder($pageOrder);
-                $this->addPageToContainer($page, $parentContainer);
+            if ($parentContainer !== $this && !$this->hasPage($parentContainer, true)) {
+                // we assume parentContainer is either the navigation object
+                // or a descendant page of the navigation object 
+                throw RuntimeException(__('The parent container must either be the navigation object' .
+                                       ' or a descendant subpage of the navigation object.'));
             }
+            
+            // add the page to the end of the parent container
+            $pageOrder = $this->_getLastPageOrderInContainer($parentContainer) + 1;
+            $page->setOrder($pageOrder);
+            $this->addPageToContainer($page, $parentContainer);
+            
+            // set the new parent page
             $parentPage = $page;
         } else {
+            // set the new parent page
             $parentPage = $oldPage;
         }
         
@@ -346,7 +366,10 @@ class Omeka_Navigation extends Zend_Navigation
     }  
         
     /**
-     * Returns the navigation page associated with uid.  If not page is associated, then it returns null.
+     * Returns the navigation page associated with uid.
+     * It searches all descendant pages of this navigation  
+     * If not page is associated, then it returns null.
+     * 
      *
      * @param String $pageUid The uid of the page
      * @param Zend_Navigation_Container $container The container within which to search for the page.
