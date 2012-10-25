@@ -1007,11 +1007,16 @@ header nav {
         }
         
 .panel {
+    width: 100%;
     background-color: rgb(255,255,255);
     box-shadow: 0 0 1px rgba(0,0,0,.4) inset;
         -webkit-box-shadow: 0 0 1px rgba(0,0,0,.4) inset;
         -moz-box-shadow: 0 0 1px rgba(0,0,0,.4) inset;
         -o-box-shadow: 0 0 1px rgba(0,0,0,.4) inset;
+    box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -o-box-sizing: border-box;
     border-top: 5px solid #EBEADC;
     display: block;
     margin: 10px 0;
