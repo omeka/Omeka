@@ -10,8 +10,8 @@
 <?php echo head(array('title' => $fileTitle, 'bodyclass'=>'files edit-file primary')); ?>
 <form method="post" id="editfile" action="<?php echo html_escape(url('files/edit/' . $file->id)); ?>" name="editFile">
     <?php include 'form.php'; ?>
-    <div id="save" class="three columns omega">
-        <div class="panel">
+    <section class="three columns omega">
+        <div id="save" class="panel">
             <fieldset>
                 <input type="submit" name="submit" class="submit big green button" value="<?php echo __('Save Changes'); ?>" id="file_edit" />
             </fieldset>    
@@ -19,6 +19,6 @@
                 <?php echo link_to($file, 'delete-confirm', __('Delete'), array('class' => 'big red button delete-confirm')); ?>
             <?php endif; ?>
         </div>
-    </div>
+    </section>
 </form>
 <?php echo foot(); ?>

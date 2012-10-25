@@ -19,9 +19,9 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
 
 <form method="post">
 
-    <div class="seven columns alpha">
+    <section class="seven columns alpha">
         <?php echo $this->form->getDisplayGroup('site_settings'); ?>
-    </div>
+    </section>
     
     <section class="three columns omega">
         

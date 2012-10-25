@@ -37,7 +37,7 @@ jQuery(document).bind('omeka:elementformload', function (event) {
 //]]>
 </script>
 
-<div class="seven columns alpha" id="edit-form">
+<section class="seven columns alpha" id="edit-form">
 
     <?php echo flash(); ?>
     
@@ -54,4 +54,4 @@ jQuery(document).bind('omeka:elementformload', function (event) {
     <?php endforeach; ?>
     </div>
 
-</div>
+</section>

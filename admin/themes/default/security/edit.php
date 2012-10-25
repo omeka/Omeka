@@ -33,13 +33,15 @@ jQuery(document).ready(function () {
 
 <form method="post">
 
-    <div class="seven columns alpha">
+    <section class="seven columns alpha">
         <?php echo $this->form->getDisplayGroup('security_settings'); ?>
-    </div>
-    
-    <div id="save" class="three columns omega panel">
-        <?php echo $this->formSubmit('submit', __('Save Changes'), array('class'=>'submit big green button')); ?>
-    </div>
+    </section>
+
+    <section class="three columns omega">
+        <div id="save" class="panel">
+            <?php echo $this->formSubmit('submit', __('Save Changes'), array('class'=>'submit big green button')); ?>
+        </div>
+    </section>
 
 </form>
 

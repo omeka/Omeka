@@ -6,8 +6,8 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
        
             <form method="post" enctype="multipart/form-data" id="collection-form" action="">
                 <?php include 'form.php';?>
-                <div id="save" class="three columns omega">
-                    <div class="panel">
+                <section class="three columns omega">
+                    <div id="save" class="panel">
                         <input type="submit" class="big green button" name="submit" value="<?php echo __('Save Collection'); ?>" />
                         
                         <?php fire_plugin_hook("admin_append_to_collections_panel_buttons", array('collection'=> get_current_record('collection'))); ?>
@@ -24,8 +24,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
                         ?>
                         </div>
                         <?php fire_plugin_hook("admin_append_to_collections_panel_fields", array('collection'=> get_current_record('collection'))); ?>
-                        
                     </div>
-                </div>
+                </section>
             </form>
 <?php echo foot(); ?>

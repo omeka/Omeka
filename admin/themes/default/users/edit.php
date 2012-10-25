@@ -10,7 +10,7 @@
 <?php echo head(array('title'=> $userTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'users primary'));?>
 
 <?php echo flash(); ?>
-<div class="seven columns alpha">
+<section class="seven columns alpha">
 <?php echo $this->form; ?>
 <?php if (is_allowed($user, 'delete')): ?>
     <?php echo link_to($user, 'delete-confirm', __('Delete'), array('class'=>'red button delete-confirm')); ?>
@@ -18,6 +18,6 @@
 
 <?php echo $this->passwordForm; ?>
 
-</div>
+</section>
 
 <?php echo foot();?>

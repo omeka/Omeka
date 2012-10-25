@@ -8,19 +8,19 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
 
 <form id="appearance-form" enctype="application/x-www-form-urlencoded" method="post">
 
-<div class="seven columns alpha">
+<section class="seven columns alpha">
         
     <?php echo $this->form->getDisplayGroup('appearance'); ?>
     
     <?php fire_plugin_hook('admin_append_to_appearance_settings_form', array('appearance_settings_form' => $form, 'view' => $this)); ?>
 
-</div>
+</section>
 
-<div id="save" class="three columns omega panel">
-
-    <?php echo $this->formSubmit('appearance_submit', __('Save Changes'), array('class'=>'submit big green button')); ?>
-
-</div>
+<section class="three columns omega">
+    <div id="save" class="panel">
+        <?php echo $this->formSubmit('appearance_submit', __('Save Changes'), array('class'=>'submit big green button')); ?>
+    </div>
+</section>
 
 </form>
 

@@ -23,7 +23,7 @@ jQuery(document).bind('omeka:elementformload', function (event) {
 //]]>   
 </script>
 
-<div class="seven columns alpha" id="edit-form">
+<section class="seven columns alpha" id="edit-form">
     <?php echo flash(); ?>
     <div id="file-metadata">
         <?php if (file_markup($file)): ?>
@@ -40,4 +40,4 @@ jQuery(document).bind('omeka:elementformload', function (event) {
         <?php endforeach; ?>
         <?php fire_plugin_hook('admin_append_to_files_form', array('file' => $file, 'view' => $this)); ?>
     </div> <!-- end file-metadata div -->
-</div>
+</section>

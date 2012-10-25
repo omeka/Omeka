@@ -13,7 +13,7 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
 
 <?php echo flash(); ?>
 
-<div class="seven columns alpha">
+<section class="seven columns alpha">
 
 <h2><?php echo __('Navigation'); ?></h2>
 
@@ -35,15 +35,16 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
         
         </div>
     
-</div>
+</section>
 
-<div id="save" class="three columns omega panel">
+<section class="three columns omega">
 
-    <?php echo $this->formSubmit('submit', __('Save Changes'), array('class'=>'submit big green button')); ?>
-    
-    <?php echo $this->form->getDisplayGroup(Omeka_Form_Navigation::HOMEPAGE_SELECT_DISPLAY_ELEMENT_ID); ?>
+    <div id="save" class="panel">
+        <?php echo $this->formSubmit('submit', __('Save Changes'), array('class'=>'submit big green button')); ?>
+        <?php echo $this->form->getDisplayGroup(Omeka_Form_Navigation::HOMEPAGE_SELECT_DISPLAY_ELEMENT_ID); ?>
+    </div>
 
-</div>
+</section>
 
 </form>
 <script type="text/javascript">
