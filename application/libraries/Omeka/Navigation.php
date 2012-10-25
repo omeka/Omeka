@@ -446,7 +446,7 @@ class Omeka_Navigation extends Zend_Navigation
         $nav = new Omeka_Navigation();
         switch($optionName) {
             case self::PUBLIC_NAVIGATION_MAIN_OPTION_NAME:
-                $nav->addPagesFromFilter('public_navigation_main');
+                $nav->addPagesFromFilter(self::PUBLIC_NAVIGATION_MAIN_FILTER_NAME);
             break;
         }
                 
