@@ -18,8 +18,6 @@
  */
 class Omeka_Plugin_Broker
 {
-    const INTERNAL_HOOK_PLUGIN_NAME = 'Omeka';
-    
     /**
      * Array of hooks that have been implemented for plugins.
      *
@@ -71,19 +69,6 @@ class Omeka_Plugin_Broker
         }
 
         $this->_callbacks[$hook][$currentPluginDirName][] = $callback;
-    }
-
-
-    /**
-     * Add an internal hook implementation for Omeka core.
-     *
-     * @param string $hook Name of the hook being implemented.
-     * @param string $callback PHP callback for the hook implementation.
-     * @return void
-     */
-    public function addInternalHook($hook, $callback)
-    {
-        $this->addHook($hook, $callback, self::INTERNAL_HOOK_PLUGIN_NAME);
     }
 
     /**
@@ -153,14 +138,6 @@ class Omeka_Plugin_Broker
             return;
         }
         
-        // Call the internal hooks
-        if (array_key_exists(self::INTERNAL_HOOK_PLUGIN_NAME, $this->_callbacks[$name])) {
-            $internalCallbacks = $this->_callbacks[$name][self::INTERNAL_HOOK_PLUGIN_NAME];
-            foreach ($internalCallbacks as $cb) {
-                call_user_func($cb, $args);
-            }
-        }        
-        
         // If we are calling the hook for a single function, do that and return.
         if ($plugin) {
             if ($callback = $this->getHook($plugin, $name)) {
@@ -175,11 +152,9 @@ class Omeka_Plugin_Broker
         foreach ($this->_callbacks[$name] as $pluginDirName => $callback) {
             // Make sure the callback executes within the scope of the current 
             // plugin
-            if ($pluginDirName != self::INTERNAL_HOOK_PLUGIN_NAME) {
-                $this->setCurrentPluginDirName($pluginDirName);
-                foreach ($callback as $cb) {
-                    call_user_func($cb, $args);
-                }                
+            $this->setCurrentPluginDirName($pluginDirName);
+            foreach ($callback as $cb) {
+                call_user_func($cb, $args);
             }
         }
         

@@ -31,7 +31,7 @@ try {
 // Load a core set of resources.
 $application = new Omeka_Application(APPLICATION_ENV);
 $application->bootstrap(array('Autoloader', 'Config', 'Db', 'Options', 
-                              'Pluginbroker', 'Plugins', 'Mainnavigation', 'Jobs', 'Storage', 'Mail',
+                              'Pluginbroker', 'Plugins', 'Jobs', 'Storage', 'Mail',
 ));
 
 // Get the database object.
