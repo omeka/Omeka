@@ -76,7 +76,7 @@ function delete_option($name)
 /**
  * Return one column of a multidimensional array as an array.
  *
- * @package Omeka/Function/Application
+ * @package Omeka\Function\Application
  * @param string|integer $col The column to pluck.
  * @param array $array The array from which to pluck.
  * @return array The column as an array.
@@ -93,7 +93,7 @@ function pluck($col, $array)
 /**
  * Return the currently logged in User record.
  *
- * @package Omeka/Function/User
+ * @package Omeka\Function\User
  * @return User|null Null if no user is logged in.
  */
 function current_user()
@@ -120,7 +120,7 @@ function get_db()
 /**
  * Log a message with 'DEBUG' priority.
  *
- * @package Omeka/Function/Development
+ * @package Omeka\Function\Development
  * @uses _log()
  * @param string $msg
  */
@@ -134,7 +134,7 @@ function debug($msg)
  * 
  * Enabled via config.ini: log.errors.
  *
- * @package Omeka/Function/Development
+ * @package Omeka\Function\Development
  * @param mixed $msg The log message.
  * @param integer $priority See Zend_Log for a list of available priorities.
  */
@@ -154,7 +154,7 @@ function _log($msg, $priority = Zend_Log::INFO)
 /**
  * Declare a plugin hook implementation within a plugin.
  *
- * @package Omeka/Function/Plugin
+ * @package Omeka\Function\Plugin
  * @uses Omeka_Plugin_Broker::addHook()
  * @param string $hook Name of hook being implemented.
  * @param mixed $callback Any valid PHP callback.
@@ -177,7 +177,7 @@ function add_plugin_hook($hook, $callback)
  * fire_plugin_hook('after_save_item', array('item' => $item, 'foo' => $arg2));
  * </code>
  *
- * @package Omeka/Function/Plugin
+ * @package Omeka\Function\Plugin
  * @uses Omeka_Plugin_Broker::callHook()
  * @param string $name The hook name.
  * @param array $args Arguments to be passed to the hook implementations.
@@ -192,7 +192,7 @@ function fire_plugin_hook($name, array $args = array())
 /**
  * Get the output of fire_plugin_hook() as a string.
  * 
- * @package Omeka/Function/Plugin
+ * @package Omeka\Function\Plugin
  * @uses fire_plugin_hook()
  * @param string $name The hook name.
  * @param array $args Arguments to be passed to the hook implementations.
@@ -213,7 +213,7 @@ function get_plugin_hook_output($name, array $args = array())
  * This is like get_plugin_hook_output() but only calls the hook within the
  * provided plugin.
  *
- * @package Omeka/Function/Plugin
+ * @package Omeka\Function\Plugin
  * @uses Omeka_Plugin_Broker::getHook()
  * @param string $pluginName
  * @param string $hookName
@@ -251,7 +251,7 @@ function get_specific_plugin_hook_output()
 /**
  * Get the broker object for Omeka plugins.
  *
- * @package Omeka/Function/Plugin
+ * @package Omeka\Function\Plugin
  * @return Omeka_Plugin_Broker|null
  */
 function get_plugin_broker()
@@ -266,7 +266,7 @@ function get_plugin_broker()
 /**
  * Get specified descriptive info for a plugin from its ini file.
  *
- * @package Omeka/Function/Plugin
+ * @package Omeka\Function\Plugin
  * @param string $pluginDirName The directory name of the plugin.
  * @param string $iniKeyName The name of the key in the ini file.
  * @return string|null The value of the specified plugin key. If the key does
@@ -299,7 +299,7 @@ function add_file_display_callback($fileIdentifiers, $callback, array $options =
 /**
  * Apply a set of plugin filters to a given value.
  *
- * @package Omeka/Function/Plugin
+ * @package Omeka\Function\Plugin
  * @uses Omeka_Plugin_Broker::applyFilters()
  * @param string|array $name The filter name.
  * @param mixed $value The value to filter.
@@ -319,7 +319,7 @@ function apply_filters($name, $value, array $args = array())
 /**
  * Declare a filter implementation.
  *
- * @package Omeka/Function/Plugin
+ * @package Omeka\Function\Plugin
  * @uses Omeka_Plugin_Broker::addFilter()
  * @param string|array $name The filter name.
  * @param callback $callback The function to call.
@@ -335,7 +335,7 @@ function add_filter($name, $callback, $priority = 10)
 /**
  * Clear all implementations for a filter (or all filters).
  *
- * @package Omeka/Function/Plugin
+ * @package Omeka\Function\Plugin
  * @uses Omeka_Plugin_Broker::clearFilters()
  * @param string|null $name The name of the filter to clear. If null or omitted, 
  * all filters will be cleared.
@@ -350,7 +350,7 @@ function clear_filters($filterName = null)
 /**
  * Get the ACL object.
  *
- * @package Omeka/Function/User
+ * @package Omeka\Function\User
  * @return Zend_Acl
  */
 function get_acl()
@@ -388,7 +388,7 @@ function is_admin_theme()
  * These record classes must extend Omeka_Record_AbstractRecord and 
  * implement this search mixin (Mixin_Search).
  * 
- * @package Omeka/Function/Search
+ * @package Omeka\Function\Search
  * @see Mixin_Search
  * @return array
  */
@@ -412,7 +412,7 @@ function get_search_record_types()
 /**
  * Get all record types that have been customized to be searchable.
  * 
- * @package Omeka/Function/Search
+ * @package Omeka\Function\Search
  * @uses get_search_record_types()
  * @return array
  */
@@ -447,7 +447,7 @@ function get_custom_search_record_types()
  * "search_sql" hook to account for whatever custom search strategy they 
  * implement.
  * 
- * @package Omeka/Function/Search
+ * @package Omeka\Function\Search
  * @see Table_SearchText::applySearchFilters()
  * @return array
  */
@@ -689,7 +689,7 @@ function insert_element_set($elementSetMetadata = array(), array $elements = arr
  * memory leaks.  Required because PHP 5.2 does not do garbage collection on
  * circular references.
  *
- * @package Omeka/Function/Application
+ * @package Omeka\Function\Application
  * @param mixed &$var The object to be released, or an array of such objects.
  */
 function release_object(&$var)
@@ -742,7 +742,7 @@ function set_theme_option($optionName, $optionValue, $themeName = null)
 /**
  * Get an array of all user role names.
  *
- * @package Omeka/Function/User
+ * @package Omeka\Function\User
  * @uses Zend_Acl::getRoles()
  * @return array
  */
@@ -793,7 +793,7 @@ function element_exists($elementSetName, $elementName) {
  *     if (plugin_is_active('ExhibitBuilder', '2.0', '<')):
  * </code>
  *
- * @package Omeka/Function/Plugin
+ * @package Omeka\Function\Plugin
  * @uses Table_Plugin::findByDirectoryName()
  * @param string $name Directory name of the plugin.
  * @param string $version Version of the plugin to check.
@@ -1113,7 +1113,7 @@ function js_tag($file, $dir = 'javascripts')
 /**
  * Return a valid src attribute value for a given file.
  *
- * @package Omeka/Function/Application/FilePath
+ * @package Omeka\Function\Application\FilePath
  * @uses web_path_to()
  * @param string $file The filename.
  * @param string|null $dir The file's directory.
@@ -1135,7 +1135,7 @@ function src($file, $dir = null, $ext = null)
  * Return the physical path for an asset/resource within the theme (or plugins, 
  * shared, etc.)
  *
- * @package Omeka/Function/Application/FilePath
+ * @package Omeka\Function\Application\FilePath
  * @throws InvalidArgumentException
  * @param string $file The filename.
  * @return string
@@ -1155,7 +1155,7 @@ function physical_path_to($file)
 /**
  * Return the web path for an asset/resource within the theme.
  *
- * @package Omeka/Function/Application/FilePath
+ * @package Omeka\Function\Application\FilePath
  * @throws InvalidArgumentException
  * @param string $file The filename.
  * @return string
@@ -1240,7 +1240,7 @@ function get_random_featured_collection()
  * Return the latest available version of Omeka by accessing the appropriate
  * URI on omeka.org.
  *
- * @package Omeka/Function/Application
+ * @package Omeka\Function\Application
  * @return string|false The latest available version of Omeka, or false if the
  * request failed for some reason.
  */
@@ -1286,7 +1286,7 @@ function latest_omeka_version()
 /**
  * Return the maximum file size.
  * 
- * @package Omeka/Function/Application
+ * @package Omeka\Function\Application
  * @return Zend_Measure_Binary
  */
 function max_file_size()
@@ -1383,7 +1383,7 @@ function tag_attributes($attributes, $value=null)
 /**
  * Return the site-wide search form.
  * 
- * @package Omeka/Function/Search
+ * @package Omeka\Function\Search
  * @param array $options Valid options are as follows:
  * - show_advanced (bool): whether to show the advanced search; default is false.
  * - submit_value (string): the value of the submit button; default "Submit".
@@ -1398,7 +1398,7 @@ function search_form(array $options = array())
 /**
  * Return a list of current site-wide search filters in use.
  * 
- * @package Omeka/Function/Search
+ * @package Omeka\Function\Search
  * @uses Omeka_View_Helper_SearchFilters::searchFilters()
  * @param array $options Valid options are as follows:
  * - id (string): the value of the div wrapping the filters.
@@ -1851,7 +1851,7 @@ function body_tag($attributes = array())
 /**
  * Return a list of the current search item filters in use.
  *
- * @package Omeka/Function/Search
+ * @package Omeka\Function\Search
  * @uses Omeka_View_Helper_SearchFilters::searchFilters()
  * @params array $params params to replace the ones read from the request.
  * @return string
@@ -3293,7 +3293,7 @@ function theme_header_background()
  * </code>
  * Will check if the user has permission to view Items that are not public.
  *
- * @package Omeka/Function/User
+ * @package Omeka\Function\User
  * @uses Zend_Acl::is_allowed()
  * @param string|Zend_Acl_Resource_Interface $resource
  * @param string|null $privilege
