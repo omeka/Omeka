@@ -1035,15 +1035,15 @@ function head_js($includeDefaults = true)
     if ($includeDefaults) {
         $dir = 'javascripts';
         $config = Zend_Registry::get('bootstrap')->getResource('Config');
-        $useInternalJs = isset($config->theme->useInternalJavascripts)
-                       ? (bool) $config->theme->useInternalJavascripts
+        $useInternalAssets = isset($config->theme->useInternalAssets)
+                       ? (bool) $config->theme->useInternalAssets
                        : false;
         $headScript->prependScript('jQuery.noConflict();');
-        if ($useInternalJs) {
+        if ($useInternalAssets) {
             $headScript->prependFile(src('jquery-ui', $dir, 'js'))
                        ->prependFile(src('jquery', $dir, 'js'));
         } else {
-            $headScript->prependFile('https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js')
+            $headScript->prependFile('https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js')
                        ->prependFile('https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js');
         }
     }
@@ -1182,10 +1182,9 @@ function web_path_to($file)
  */
 function random_featured_collection()
 {
-    $featuredCollection = get_random_featured_collection();
-    $featuredCollectionTitle = strip_formatting(metadata($featuredCollection, array('Dublin Core', 'Title')));
     $html = '<h2>' . __('Featured Collection') . '</h2>';
-    if ($featuredCollection) {
+    if ($featuredCollection = get_random_featured_collection()) {
+        $featuredCollectionTitle = strip_formatting(metadata($featuredCollection, array('Dublin Core', 'Title')));
         $html .= '<h3>' . link_to_collection($featuredCollectionTitle, array(), 'show', $featuredCollection) . '</h3>';
         if ($collectionDescription = metadata($featuredCollection, array('Dublin Core', 'Description'), array('snippet'=>150))) {
             $html .= '<p class="collection-description">' . $collectionDescription . '</p>';

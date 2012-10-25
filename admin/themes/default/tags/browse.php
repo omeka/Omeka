@@ -1,9 +1,9 @@
 <?php
+queue_js_file(array('jquery.jeditable.mini', 'tags'));
 $pageTitle = __('Edit Tags') . ' ' .  __('(%s total)', $total_tags);
 echo head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodyclass'=>'tags browse-tags primary')); ?>
 
-<?php echo js_tag('tags'); ?>
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
 //<![CDATA[
 jQuery(document).ready(function () {
     var editableURL = '<?php echo url('tags/rename-ajax'); ?>';

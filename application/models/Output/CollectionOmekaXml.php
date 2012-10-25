@@ -22,12 +22,8 @@ class Output_CollectionOmekaXml extends Omeka_Output_OmekaXml_AbstractOmekaXml
     {
         // collection
         $collectionElement = $this->_createElement('collection', null, $this->_record->id);
-        
-        $collectionElement->setAttribute('public', $this->_record->public);
-        $collectionElement->setAttribute('featured', $this->_record->featured);
-        
+        $this->_buildElementSetContainerForRecord($this->_record, $collectionElement);
         $this->_buildItemContainerForCollection($this->_record, $collectionElement);
-        
         $this->_node = $collectionElement;
     }
 }

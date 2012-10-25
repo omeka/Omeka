@@ -237,7 +237,7 @@ Omeka.Items.modifyTagsShow = function () {
  * @param {string} label
  */
 Omeka.Items.enableAddFiles = function (label) {
-    var filesDiv = jQuery('#files-metadata .files.inputs');
+    var filesDiv = jQuery('#files-metadata .files');
 
     var link = jQuery('<a href="#" id="add-file" class="add-file">' + label + '</a>');
     link.click(function (event) {

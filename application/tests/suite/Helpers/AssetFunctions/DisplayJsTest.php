@@ -22,7 +22,7 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
     { 
         $this->externalDefaults = array(
             'https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js',
-            'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js'
+            'https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js'
         );
         $this->internalDefaults = array(
             self::ASSET_PATH_ROOT . '/javascripts/jquery.js',
@@ -77,7 +77,7 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
 
     public function testInternalDefaults()
     {
-        $configArray['theme']['useInternalJavascripts'] = true;
+        $configArray['theme']['useInternalAssets'] = true;
         Zend_Registry::get('bootstrap')->getContainer()->config = new Zend_Config($configArray);
 
         $this->_assertScriptsIncluded($this->_getJsOutput(), $this->internalDefaults);
