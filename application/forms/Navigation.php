@@ -255,17 +255,7 @@ class Omeka_Form_Navigation extends Omeka_Form
                 }
                                 
                 // remove expired pages from navigation
-                $expiredPages = array();
-                $iterator = new RecursiveIteratorIterator($nav,
-                                    RecursiveIteratorIterator::SELF_FIRST);
-                foreach($iterator as $page) {
-                    if (!in_array($page->uid, $pageUids)) {
-                        $expiredPages[] = $page;
-                    }
-                }
-                foreach($expiredPages as $expiredPage) {
-                    $nav->removePageRecursive($expiredPage);
-                }
+                $nav->pruneExpiredPages($pageUids);
             }
         }
 
