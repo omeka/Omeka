@@ -38,7 +38,7 @@
             <ul>
             <?php set_loop_records('items', $item_type->Items); ?>
             <?php foreach (loop('items') as $item): ?>
-            <li><span class="date"><?php echo format_date(metadata('item', 'Date Added')); ?></span> <?php echo link_to_item('<span class="title">' . metadata('item', array('Dublin Core', 'Title')) . '</span>') ?></li>
+            <li><span class="date"><?php echo format_date(metadata('item', 'Added')); ?></span> <?php echo link_to_item('<span class="title">' . metadata('item', array('Dublin Core', 'Title')) . '</span>') ?></li>
             <?php endforeach;?>
             </ul>
             <?php else: ?>
