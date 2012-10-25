@@ -23,9 +23,13 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
         <?php echo $this->form->getDisplayGroup('site_settings'); ?>
     </div>
     
-    <div id="save" class="three columns omega panel">
-        <?php echo $this->formSubmit('submit', __('Save Changes'), array('class'=>'submit big green button')); ?>
-    </div>
+    <section class="three columns omega">
+        
+        <div id="save" class="panel">
+            <?php echo $this->formSubmit('submit', __('Save Changes'), array('class'=>'submit big green button')); ?>
+        </div>
+    
+    </section>
 
 </form>
 

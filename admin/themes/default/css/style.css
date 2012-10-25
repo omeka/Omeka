@@ -921,7 +921,6 @@ header nav {
     .drawer-contents :first-child { margin-top: 0; }
 
 
-
 /* Edit and Save Panels
 ================================================== */
 
@@ -1924,15 +1923,23 @@ button.remove_search {
             border-bottom: 0;
         }
 
+
 /* Browse Item Types
 ================================================== */
 
 .itemtype-name { width: 15%; }
+
     
 /* Browse Element Sets
 ================================================== */
 
 .element-set-name { width: 20%; }
+
+
+/* Edit Element Set
+================================================== */
+
+.element-sets textarea { height: 200px; }
             
 /* Browse Themes
 ================================================== */
