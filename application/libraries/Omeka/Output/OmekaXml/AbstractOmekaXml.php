@@ -21,12 +21,12 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
     /**
      * Omeka-XML namespace URI.
      */
-    const XMLNS                = 'http://omeka.org/schemas/omeka-xml/v4';
+    const XMLNS                = 'http://omeka.org/schemas/omeka-xml/v5';
     
     /**
      * Omeka-XML XML Schema URI.
      */
-    const XMLNS_SCHEMALOCATION = 'http://omeka.org/schemas/omeka-xml/v4/omeka-xml-4-1.xsd';
+    const XMLNS_SCHEMALOCATION = 'http://omeka.org/schemas/omeka-xml/v5/omeka-xml-5-0.xsd';
     
     /**
      * This class' contextual record(s).
@@ -341,21 +341,8 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
             return null;
         }
         
-        // collection
-        $collectionTitle = strip_formatting(metadata($item->Collection, array('Dublin Core', 'Title')));
-        if ($collectionTitle == '') {
-            $collectionTitle = __('[Untitled]');
-        }
-        $collectionDescription = strip_formatting(metadata($item->Collection, array('Dublin Core', 'Description')));
-        $collectionContributors = array_map('strip_formatting', metadata($item->Collection, array('Dublin Core', 'Description'), array('all' => true)));
         $collectionElement = $this->_createElement('collection', null, $item->Collection->id);
-        $nameElement = $this->_createElement('name', $collectionTitle, null, $collectionElement);
-        $descriptionElement = $this->_createElement('description', $collectionDescription, null, $collectionElement);
-        $contributorContainerElement = $this->_createElement('contributorContainer');
-        foreach ($collectionContributors as $contributor) {
-            $contributorElement = $this->_createElement('contributor', $contributor, null, $contributorContainerElement);
-        }
-        $collectionElement->appendChild($contributorContainerElement);
+        $this->_buildElementSetContainerForRecord($item->Collection, $collectionElement);
         $parentElement->appendChild($collectionElement);
     }
     
@@ -396,20 +383,6 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
     */
     protected function _buildItemContainerForCollection(Collection $collection, DOMElement $parentElement)
     {
-        $collectionTitle = strip_formatting(metadata($item->Collection, array('Dublin Core', 'Title')));
-        if ($collectionTitle == '') {
-            $collectionTitle = __('[Untitled]');
-        }
-        $collectionDescription = strip_formatting(metadata($item->Collection, array('Dublin Core', 'Description')));
-        $collectionContributors = array_map('strip_formatting', metadata($item->Collection, array('Dublin Core', 'Description'), array('all' => true)));
-        $nameElement = $this->_createElement('name', $collectionTitle, null, $parentElement);
-        $descriptionElement = $this->_createElement('description', $collectionDescription, null, $parentElement);
-        $contributorContainerElement = $this->_createElement('contributorContainer');
-        foreach ($collectionContributors as $contributor) {
-            $contributorElement = $this->_createElement('contributer', $contributor, null, $contributorContainerElement);
-        }
-        $parentElement->appendChild($contributorContainerElement);
-        
         // Get items belonging to this collection.
         $items = get_db()->getTable('Item')->findBy(array('collection' => $collection->id));
         
