@@ -54,11 +54,11 @@ Omeka.saveScroll = function () {
     var $save   = jQuery("#save"),
         $window = jQuery(window),
         offset  = $save.offset(),
-        topPadding = 62;
-    
+        topPadding = 62,
+        $contentDiv = jQuery("#content");
     if (document.getElementById("save")) {
         $window.scroll(function() {
-            if($window.scrollTop() > offset.top && $window.width() > 767) {
+            if($window.scrollTop() > offset.top && $window.width() > 767 && ($window.height() - topPadding - 85) >  $save.height()) {
                 $save.stop().animate({
                     marginTop: $window.scrollTop() - offset.top + topPadding
                     });
