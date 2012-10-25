@@ -33,7 +33,7 @@ class Omeka_Form_Navigation extends Omeka_Form
         
         $this->_nav = new Omeka_Navigation();
         $this->_nav->loadAsOption(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME);        
-        $this->_nav->addPagesFromFilter('public_navigation_main');
+        $this->_nav->addPagesFromFilter(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_FILTER_NAME);
         $this->_initElements();
     }
     
