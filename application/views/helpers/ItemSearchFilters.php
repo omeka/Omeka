@@ -44,7 +44,7 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
                     
                     case 'collection':
                         $collection = $db->getTable('Collection')->find($value);
-                        $displayValue = $collection->name;
+                        $displayValue = strip_formatting(metadata($collection, array('Dublin Core', 'Title')));
                         break;
 
                     case 'user':

@@ -97,6 +97,5 @@
     <?php echo all_element_texts('item'); ?>
 </div>
 
-<?php fire_plugin_hook('admin_append_to_items_show_secondary', array('item' => $item, 'view' => $this)); ?>
 </div>        
 <?php echo foot();?>

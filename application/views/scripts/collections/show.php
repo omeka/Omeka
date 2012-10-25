@@ -1,36 +1,44 @@
-<?php echo head(array('title'=>metadata('collection', 'Name'), 'bodyid'=>'collections', 'bodyclass' => 'show')); ?>
+<?php
+$collectionTitle = strip_formatting(metadata('collection', array('Dublin Core', 'Title')));
+if ($collectionTitle == '') {
+    $collectionTitle = __('[Untitled]');
+}
+?>
+
+<?php echo head(array('title'=> $collectionTitle, 'bodyid'=>'collections', 'bodyclass' => 'show')); ?>
 
 <div id="primary">
-    <h1><?php echo metadata('collection', 'Name'); ?></h1>
+    <h1><?php echo $collectionTitle; ?></h1>
 
     <div id="description" class="element">
         <h2><?php echo __('Description'); ?></h2>
-        <div class="element-text"><?php echo text_to_paragraphs(metadata('collection', 'Description')); ?></div>
+        <div class="element-text"><?php echo text_to_paragraphs(metadata('collection', array('Dublin Core', 'Description'))); ?></div>
     </div><!-- end description -->
 
-    <?php if (collection_has_collectors()): ?>
-    <div id="collectors" class="element">
-        <h2><?php echo __('Collector(s)'); ?></h2>
+    <?php if ($collection->hasContributor()): ?>
+    <div id="contributors" class="element">
+        <h2><?php echo __('Contributor(s)'); ?></h2>
         <div class="element-text">
             <ul>
-                <li><?php echo metadata('collection', 'Collectors', array('delimiter'=>'</li><li>')); ?></li>
+                <li><?php echo metadata('collection', array('Dublin Core', 'Contributor'), array('all'=>true, 'delimiter'=>'</li><li>')); ?></li>
             </ul>
         </div>
-    </div><!-- end collectors -->
+    </div><!-- end contributors -->
     <?php endif; ?>
 
-    <p class="view-items-link"><?php echo link_to_items_browse(__('View the items in %s', metadata('collection', 'Name')), array('collection' => metadata('collection', 'id'))); ?></p>
+    <p class="view-items-link"><?php echo link_to_items_browse(__('View the items in %s', $collectionTitle), array('collection' => metadata('collection', 'id'))); ?></p>
 
     <div id="collection-items">
-        <h2><?php echo __('Items in the %s Collection', metadata('collection', 'Name')); ?></h2>
+        <h2><?php echo __('Items in the %s Collection', $collectionTitle); ?></h2>
 
         <?php foreach (loop('items') as $item): ?>
+        <?php $itemTitle = strip_formatting(metadata('item', array('Dublin Core', 'Title'))); ?>
         <div class="item hentry">
-            <h3><?php echo link_to_item(metadata('item', array('Dublin Core', 'Title')), array('class'=>'permalink')); ?></h3>
+            <h3><?php echo link_to_item($itemTitle, array('class'=>'permalink')); ?></h3>
 
             <?php if (item_has_thumbnail()): ?>
             <div class="item-img">
-                <?php echo link_to_item(item_image('square_thumbnail', array('alt'=>metadata('item', array('Dublin Core', 'Title'))))); ?>
+                <?php echo link_to_item(item_image('square_thumbnail', array('alt' => $itemTitle))); ?>
             </div>
             <?php endif; ?>
 

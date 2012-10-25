@@ -5,54 +5,54 @@ if (typeof Omeka === 'undefined') {
 Omeka.Items = {};
 
 /**
- * Set up JS hide/show tabs for the edit page/
+ * Enable drag and drop sorting for files.
  */
-Omeka.Items.initializeTabs = function () {
-    var tabLinks = jQuery('#section-nav > li > a');
-    var tabIds = tabLinks.map(function () {
-        // Rely on the fact that the links have pound signs.
-        // Workaround IE7's creation of absolute URLs.
-        return '#' + this.getAttribute('href').split('#')[1];
-    }).toArray().join(',');
-    var tabs = jQuery(tabIds);
 
-    function selectTab(tabLink) {
-        tabLinks.removeClass('active');
-        tabs.hide();
-
-        tabLink.addClass('active');
-        jQuery(tabLink.attr('href')).show();
-        tabLink.trigger('omeka:tabselected');
-    }
-
-    tabLinks.click(function (event) {
-        event.preventDefault();
-        selectTab(jQuery(this));
+Omeka.Items.enableSorting = function () {
+    jQuery( ".sortable" ).sortable({
+        'items': 'li.file',
+        'forcePlaceholderSize': true, 
+        'forceHelperSize': true,
+        'placeholder': "ui-sortable-highlight",
+        'update': function (event, ui) {
+            jQuery(this).find('.file-order').each(function (index) {
+                jQuery(this).val(index + 1);
+            });
+        }
     });
-
-    // Select the tab given in the anchor, if any, or the first tab.
-    var selectedTab;
-    var url = document.location.toString();
-    if (url.match('#')) {
-        var anchor = '#' + url.split('#')[1];
-        selectedTab = tabLinks.filter('[href=' + anchor + ']');
-    }
-    if (!selectedTab || !selectedTab.length) {
-        selectedTab = tabLinks.first();
-    }
-
-    selectTab(selectedTab);
-};
+    jQuery( ".sortable" ).disableSelection();
+    
+    jQuery( ".sortable input[type=checkbox]" ).each( function() {
+        jQuery(this).css("display", "none");
+    });
+}
 
 /**
  * Make links to files open in a new window.
  */
+ 
 Omeka.Items.makeFileWindow = function () {
-    jQuery('#file-list a').click(function () {
-        window.open(this.getAttribute('href'));
-        return false;
+    jQuery('#file-list a').click(function (event) {
+        event.preventDefault();
+        if( jQuery(this).hasClass("delete") == true ) {
+            Omeka.Items.enableFileDeletion(jQuery(this));
+        } else {
+            window.open(this.getAttribute('href'));
+        }
     });
-};
+}
+
+/**
+ * Set up toggle for marking files for deletion. 
+ */
+
+Omeka.Items.enableFileDeletion = function (deleteLink) {
+    if( !deleteLink.next().is(":checked") ) {
+        deleteLink.text("Undo").next().prop('checked', true).parents('.sortable-item').addClass("deleted");
+    } else {
+        deleteLink.text("Delete").next().prop('checked', false).parents('.sortable-item').removeClass("deleted");
+    }
+}
 
 /**
  * Make the item type selector AJAX in the right item type form.
@@ -237,7 +237,7 @@ Omeka.Items.modifyTagsShow = function () {
  * @param {string} label
  */
 Omeka.Items.enableAddFiles = function (label) {
-    var filesDiv = jQuery('#files-metadata .files.inputs');
+    var filesDiv = jQuery('#files-metadata .files');
 
     var link = jQuery('<a href="#" id="add-file" class="add-file">' + label + '</a>');
     link.click(function (event) {

@@ -38,14 +38,13 @@ class Omeka_Form_Navigation extends Omeka_Form
     }
     
     /**
-     * Returns the html for the fieldset containing the navigation link checkboxes 
+     * Returns the html for the wrapper containing the navigation link checkboxes 
      *
-     * @return String The html for the fieldset containing the navigation link checkboxes
+     * @return String The html for the wrapper containing the navigation link checkboxes
      */
-    public function displayNavigationLinksFieldset()
+    public function displayNavigationLinks()
     {        
-        $html = '<fieldset id="fieldset-navigation_main_nav_links_display">';
-        $html .= '<ul id="navigation_main_list">';
+        $html = '<ul id="navigation_main_list">';
         
         $pageCount = 0;
         foreach($this->_nav as $page) {
@@ -53,7 +52,6 @@ class Omeka_Form_Navigation extends Omeka_Form
         }
         
         $html .= '</ul>';
-        $html .= '</fieldset>';
         return $html;
     }
     
@@ -90,7 +88,17 @@ class Omeka_Form_Navigation extends Omeka_Form
      */    
     protected function _addHiddenElement() 
     {
-        $this->addElement('hidden', self::HIDDEN_ELEMENT_ID, array('value' => ''));
+        $this->addElement('hidden', 
+            self::HIDDEN_ELEMENT_ID, 
+            array(
+                'value' => '',
+                'decorators' =>  array(
+                    'ViewHelper',
+                    array('Description', array('escape' => false, 'tag' => false)),
+                    array('HtmlTag', array('tag' => 'div')),
+                    array('Label'),
+                    'Errors',)
+        ));
     }
     
     /**
@@ -104,7 +112,7 @@ class Omeka_Form_Navigation extends Omeka_Form
     {        
         $pageCount++;
          
-        $checkboxId = 'navigation_main_nav_checkboxes_' . $pageCount;                
+        $checkboxId = 'main_nav_checkboxes_' . $pageCount;                
         $checkboxValue = $this->_getPageHiddenInfo($page);
         $checkboxChecked = $page->isVisible() ? 'checked="checked"' : '';
         $checkboxClasses = array();
@@ -115,8 +123,8 @@ class Omeka_Form_Navigation extends Omeka_Form
         
         $html = '<li>';
         
-        $html .= '<div class="navigation_main_link">';
-        $html .= '<div class="navigation_main_link_header">';
+        $html .= '<div class="main_link">';
+        $html .= '<div class="sortable-item">';
         $html .= '<input type="checkbox" name="' 
                  . $checkboxId 
                  . '" id="' 
@@ -129,10 +137,10 @@ class Omeka_Form_Navigation extends Omeka_Form
                  . '">';
         $html .= '<a href="' . $page->getHref() . '">' . __($page->getLabel()) . '</a>';
         $html .= '</div>';
-        $html .= '<div class="navigation_main_link_body">';
-        $html .= '<div><label class="navigation_main_link_label_label">Label</label><input type="text" class="navigation_main_link_label" /></div>';
-        $html .= '<div><label class="navigation_main_link_uri_label">URI</label><input type="text" class="navigation_main_link_uri" /></div>';
-        $html .= '<div class="navigation_main_link_buttons"></div>';
+        $html .= '<div class="drawer-contents">';
+        $html .= '<label>Label</label><input type="text" class="navigation-label" />';
+        $html .= '<label>URI</label><input type="text" class="navigation-uri" />';
+        $html .= '<div class="main_link_buttons"></div>';
         $html .= '</div>';
         $html .= '</div>';
         if ($page->hasChildren()) {

@@ -463,12 +463,12 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
      * 
      * array('Elements' => 
      *             array(
-     *                 '50' => array('text' => 'Foobar', //element id 50, e.g. DC:Title
+     *                 '50' => array(array('text' => 'Foobar', //element id 50, e.g. DC:Title
      *                               'html' => 0
-     *                               ),
-     *                 '41' => array('text' => '<p>Baz baz baz</p>', //element id 41, e.g. DC:Description
+     *                               )),
+     *                 '41' => array(array('text' => '<p>Baz baz baz</p>', //element id 41, e.g. DC:Description
      *                                'html' => 1
-     *                               )
+     *                               ))
      *                  )
      *      )
      * 
@@ -673,5 +673,29 @@ WHERE record_type = $recordTypeName
 AND record_id = $id
 SQL
         );
+    }
+    
+    /**
+     * Returns whether or not the record has at least 1 element text
+     *
+     * @param string $elementSetName Element set name
+     * @param string $elementName Element name
+     * @return boolean
+     */
+    public function hasElementText($elementSetName, $elementName)
+    {
+        return ($this->getElementTextCount($elementSetName, $elementName) > 0);
+    }
+    
+    /**
+     * Returns the number of element texts for the record
+     *
+     * @param string $elementSetName Element set name
+     * @param string $elementName Element name
+     * @return boolean
+     */
+    public function getElementTextCount($elementSetName, $elementName)
+    {
+        return count($this->getElementTexts($elementSetName, $elementName));
     }
 }

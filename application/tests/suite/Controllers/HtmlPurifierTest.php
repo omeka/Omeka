@@ -30,13 +30,10 @@ class Omeka_Controllers_HtmlPurifierTest extends Omeka_Test_AppTestCase
         
         // Create a collection
         $collection = new Collection();
-        $collection->name = 'a';
-        $collection->description = 'a';
-        $collection->collectors = 'a';
         $collection->public = true;
         $collection->save();
         
-        $this->collection = $collection;
+        $this->collection = $collection;        
     }
     
     public function assertPreConditions()
@@ -57,15 +54,14 @@ class Omeka_Controllers_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $dirtyHtml = '<p class="person">Bob</p>';
         $cleanHtml = '<p class="person">Bob</p>';
         
-        $post = $this->collection->toArray();
-        $post['description'] = $dirtyHtml;
+        $post = $this->_addElementTextWithDirtyHtmlToPost($dirtyHtml, 'Dublin Core', 'Title');
         
         $this->getRequest()->setMethod('POST');
         $this->getRequest()->setPost($post);
         $this->dispatch('/collections/edit/' . $this->collection->id);
                 
         $collectionAfter = $this->db->getTable('Collection')->find($this->collection->id);
-        $this->assertEquals($cleanHtml, $collectionAfter->description);
+        $this->assertEquals($cleanHtml, metadata($collectionAfter, array('Dublin Core', 'Title')));
     }
     
     public function testHtmlPurifyCollectionFormWithAllowedElementAndUnallowedAttributeInDescription()
@@ -76,15 +72,14 @@ class Omeka_Controllers_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $dirtyHtml = '<p id="person">Bob</p>';
         $cleanHtml = '<p>Bob</p>';
         
-        $post = $this->collection->toArray();
-        $post['description'] = $dirtyHtml;
+        $post = $this->_addElementTextWithDirtyHtmlToPost($dirtyHtml, 'Dublin Core', 'Title');
         
         $this->getRequest()->setMethod('POST');
         $this->getRequest()->setPost($post);
         $this->dispatch('/collections/edit/' . $this->collection->id);
                 
         $collectionAfter = $this->db->getTable('Collection')->find($this->collection->id);
-        $this->assertEquals($cleanHtml, $collectionAfter->description);
+        $this->assertEquals($cleanHtml, metadata($collectionAfter, array('Dublin Core', 'Title')));
     }
     
     public function testHtmlPurifyCollectionFormWithUnallowedElementAndAllowedAttributeInDescription()
@@ -95,15 +90,14 @@ class Omeka_Controllers_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $dirtyHtml = 'Bob is <j class="trait">bad</j>.';
         $cleanHtml = 'Bob is bad.';
         
-        $post = $this->collection->toArray();
-        $post['description'] = $dirtyHtml;
+        $post = $this->_addElementTextWithDirtyHtmlToPost($dirtyHtml, 'Dublin Core', 'Title');
         
         $this->getRequest()->setMethod('POST');
         $this->getRequest()->setPost($post);
         $this->dispatch('/collections/edit/' . $this->collection->id);
                 
         $collectionAfter = $this->db->getTable('Collection')->find($this->collection->id);
-        $this->assertEquals($cleanHtml, $collectionAfter->description);
+        $this->assertEquals($cleanHtml, metadata($collectionAfter, array('Dublin Core', 'Title')));
     }
     
     public function testHtmlPurifyCollectionFormWithUnallowedElementAndUnallowedAttributeInDescription()
@@ -113,16 +107,15 @@ class Omeka_Controllers_HtmlPurifierTest extends Omeka_Test_AppTestCase
         
         $dirtyHtml = '<j id="person">Bob</j> is bad.';
         $cleanHtml = 'Bob is bad.';
-        
-        $post = $this->collection->toArray();
-        $post['description'] = $dirtyHtml;
+
+        $post = $this->_addElementTextWithDirtyHtmlToPost($dirtyHtml, 'Dublin Core', 'Title');        
         
         $this->getRequest()->setMethod('POST');
         $this->getRequest()->setPost($post);
         $this->dispatch('/collections/edit/' . $this->collection->id);
                 
         $collectionAfter = $this->db->getTable('Collection')->find($this->collection->id);
-        $this->assertEquals($cleanHtml, $collectionAfter->description);
+        $this->assertEquals($cleanHtml, metadata($collectionAfter, array('Dublin Core', 'Title')));
     }
     
     public function testHtmlPurifyCollectionFormWithAllowedAndUnallowedElementsAndAttributesInDescription()
@@ -136,14 +129,32 @@ class Omeka_Controllers_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $dirtyHtml = '<p class="person" id="person">Bob is bad <j>and mean<j> and <strong id="trait">fun</strong>.</p>';
         $cleanHtml = '<p class="person">Bob is bad and mean and <strong>fun</strong>.</p>';
         
-        $post = $this->collection->toArray();
-        $post['description'] = $dirtyHtml;
-        
+        $post = $this->_addElementTextWithDirtyHtmlToPost($dirtyHtml, 'Dublin Core', 'Title');
+
         $this->getRequest()->setMethod('POST');
         $this->getRequest()->setPost($post);
         $this->dispatch('/collections/edit/' . $this->collection->id);
                 
         $collectionAfter = $this->db->getTable('Collection')->find($this->collection->id);
-        $this->assertEquals($cleanHtml, $collectionAfter->description);
+        $this->assertEquals($cleanHtml, metadata($collectionAfter, array('Dublin Core', 'Title')));
+    }
+    
+    /**
+     * Adds an element text with dirty html to a post array
+     * @param string $dirtyHtml The dirty html to add to the new element text
+     * @param string $elementSetName The element set name of the new element text
+     * @param string $elementSetName The element name of the new element text
+     * @param string $post The post array to which to add an element text    
+     * @return array $post
+     **/
+    protected function _addElementTextWithDirtyHtmlToPost($dirtyHtml, $elementSetName, $elementName, $post=array())
+    {
+        $titleElement = $this->db->getTable('Element')->findByElementSetNameAndElementName($elementSetName, $elementName);
+        
+        $elementsArray = array();
+        $elementsArray[strval($titleElement->id)] = array(array('text' => $dirtyHtml, 'html' => 1));
+        $post['Elements'] = $elementsArray;
+        
+        return $post;
     }
 }
