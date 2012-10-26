@@ -1149,13 +1149,6 @@ header nav {
 #login #forgotpassword {
     clear: both;
 }
-    
-#login #fieldset-login .field:last-child .inputs {
-    width: auto;
-    float: left;
-    display: inline-block;
-    margin: 0 0 20px 5px;
-}
         
 #login .field label {
     min-width: 0;
@@ -1213,7 +1206,11 @@ header nav {
 
 #login #remember {
     display: inline-block;
-    margin: 0 0 0 5px;
+    margin: 0;
+}
+
+#login #fieldset-login {
+    text-align: left;
 }
 
 #login label {
