@@ -324,11 +324,10 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
      */
     public function defaultDisplay($file, array $options=array())
     {
-        $html = null;
         if ($options['linkText']) {
             $html = $options['linkText'];
         }
-        return $this->_linkToFile($html, $file, $options);
+        return $this->_linkToFile($file, $options);
     }
         
     /**
@@ -345,12 +344,12 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
      * 
      * If $html is null, it defaults to original filename of the file.
      * 
-     * @param string $html
      * @param File $file
      * @param array $options
+     * @param string $html
      * @return string
      */
-    protected function _linkToFile($html = null, $file, $options)
+    protected function _linkToFile($file, $options, $html = null)
     {
         if ($html === null) {
             $fileTitle = strip_formatting(metadata($file, array('Dublin Core', 'Title')));
@@ -605,7 +604,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
                    . '>' . html_escape($file->original_filename) . '</div>';
         }
         
-        return $this->_linkToFile($html, $file, $options);
+        return $this->_linkToFile($file, $options, $html);
     }
     
     
@@ -644,7 +643,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
             $imgHtml = $this->image_tag($file, $imgAttributes, $imageSize);
         }
         $html .= !empty($imgHtml) ? $imgHtml : html_escape($file->original_filename);   
-        $html = $this->_linkToFile($html, $file, $options);
+        $html = $this->_linkToFile($file, $options, $html);
         return $html;
     }
     // END DEFINED DISPLAY CALLBACKS
