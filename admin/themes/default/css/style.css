@@ -374,7 +374,7 @@ p, li {
             display: inline-block;            
             margin: 0 5px 20px 0;
             min-height: 25px;
-            padding: 0 10px;            
+            padding: 3px 10px;            
             text-align: center;
             text-shadow: -1px -1px 1px rgba(0,0,0,.5);
             white-space: normal;
@@ -400,12 +400,14 @@ p, li {
             font-size: 14px;
             display: inline-block;            
             margin: 0 5px 20px 0;
-            padding: 0 10px;
+            padding: 3px 10px;
         }
             
         a.button.blue, input[type=submit].blue, button.blue {
             background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#22546b), color-stop(100%,#102d3b));
             background: -moz-linear-gradient(center top, #22546b 0%, #102d3b 100%);
+            filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#22546b', endColorstr='#102d3b'); /* IE6 & IE7 */
+                -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#22546b', endColorstr='#102d3b')"; /* IE8 */
             -webkit-box-shadow: 0px 1px 0px 0px #526c80 inset, 0px -1px 0px 0px #142233 inset, 0px 2px 2px 0px #d4d4d4;
             -moz-box-shadow: 0px 1px 0px 0px #526c80 inset, 0px -1px 0px 0px #142233 inset, 0px 2px 2px 0px #d4d4d4;
             box-shadow: 0px 1px 0px 0px #526c80 inset, 0px -1px 0px 0px #142233 inset, 0px 2px 2px 0px #d4d4d4;
