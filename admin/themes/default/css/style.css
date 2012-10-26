@@ -1267,6 +1267,8 @@ header nav {
 
 .plugins.browse table a.button, .plugins.browse table input[type=submit], .plugins.browse table button {
     background: none;
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(enabled = false)";
     border: 0;
     box-shadow: 0 0 0;
     text-shadow: 0 0 0;
