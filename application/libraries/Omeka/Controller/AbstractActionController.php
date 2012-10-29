@@ -31,12 +31,11 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
      *
      * Does the following things:
      *
-     * <ul>
-     *   <li>Aliases the redirector helper to clean up the syntax</li>
-     *   <li>Sets the table object automatically if given the class of the model 
-     * to use for CRUD.</li>
-     *   <li>Sets all the built-in action contexts for the CRUD actions.</li>
-     * </ul>
+     * - Aliases the redirector helper to clean up the syntax
+     * - Sets the table object automatically if given the class of the model 
+     * to use for CRUD.
+     * - Sets all the built-in action contexts for the CRUD actions.
+     * 
      *
      * Instead of overriding this constructor, controller subclasses should
      * implement the init() method for initial setup.
@@ -70,15 +69,12 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
      *
      * Using this action requires some setup:
      * 
-     * <ul>
-     *   <li>In your controller's <code>init()</code>, set the default model name: 
-     *     <code>$this->_helper->db->setDefaultModelName('YourRecord');</code></li>
-     *   <li>In your controller, set the records per page and return them using: 
-     *     <code>protected function _getBrowseRecordsPerPage()</code></li>
-     *   <li>In your table record, filter the select object using the provided 
-     *     parameters using: 
-     *     <code>public function applySearchFilters($select, $params)</code></li>
-     * </ul>
+     * - In your controller's ``init()``, set the default model name: 
+     *     ``$this->_helper->db->setDefaultModelName('YourRecord');``
+     * - In your controller, set the records per page and return them using: 
+     *     ``protected function _getBrowseRecordsPerPage();``
+     * - In your table record, filter the select object using the provided 
+     *     parameters using: ``public function applySearchFilters($select, $params);``
      *
      * @uses Omeka_Controller_Action_Helper_Db::getDefaultModelName()
      * @uses Omeka_Db_Table::findBy()

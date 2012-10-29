@@ -324,6 +324,7 @@ abstract class Omeka_File_Ingest_AbstractIngest
      * 
      * Important: $fileInfo may need to contain the following keys in order to work
      * with particular Zend_Validate_File_* validation classes:
+     * 
      * - 'name': string filename (for Zend_Validate_File_Extension) If 
      *   ZF is unable to determine the file extension when validating, it will 
      *   check the 'name' attribute instead.  Current use cases involve saving the 

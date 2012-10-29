@@ -127,12 +127,12 @@ class Element extends Omeka_Record_AbstractRecord
      * Validate the element prior to being saved.
      *
      * Checks the following criteria:
-     * <ul>
-     *  <li>Name is not empty.</li>
-     *  <li>Has a data type.</li>
-     *  <li>Has a record type.</li>
-     *  <li>Name does not already exist within the given element set.</li>
-     * </ul>
+     * 
+     * - Name is not empty.
+     * - Has a data type.
+     * - Has a record type.
+     * - Name does not already exist within the given element set.
+     * 
      * @return void
      */
     protected function _validate()
