@@ -2018,6 +2018,22 @@ function item_citation($item = null)
 }
 
 /**
+ * Return the number of files associated with an item
+ * 
+ * @package Omeka\Function\View\Body\Item
+ * @uses Item::numberOfFiles()
+ * @param Item|null $item Check for this specific item record (current item if null).
+ * @return integer
+ */
+function item_number_of_files($item = null)
+{
+    if (!$item) {
+        $item = get_current_record('item');
+    }
+    return $item->numberOfFiles();
+}
+
+/**
  * Determine whether the item has any files assigned to it.
  *
  * @package Omeka\Function\View\Body\Item
