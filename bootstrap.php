@@ -82,15 +82,15 @@ $dir = trim(dirname($_SERVER['SCRIPT_NAME']), '\,/');
 
 // current path should be empty and not a '/' if there is no directory path.
 $currentPath = !empty($dir) ? "/$dir" : '';
-$adminDir = 'admin';
+define('ADMIN_WEB_DIR', 'admin');
 
 // This is how we determine whether or not we are in the admin bootstrap.
 if (defined('ADMIN')) {
     $adminPath = $currentPath;
     // Strip off the admin directory to get the public dir.
-    $publicPath = rtrim(preg_replace("/(.*)$adminDir$/", '$1', $currentPath, 1), '/');
+    $publicPath = rtrim(preg_replace("/(.*)" . ADMIN_WEB_DIR . "$/", '$1', $currentPath, 1), '/');
 } else {
-    $adminPath = "$currentPath/$adminDir";
+    $adminPath = "$currentPath/" . ADMIN_WEB_DIR;
     $publicPath = $currentPath;
 }
 

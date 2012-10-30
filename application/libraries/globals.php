@@ -3310,3 +3310,21 @@ function is_allowed($resource, $privilege)
     // User implements Zend_Acl_Role_Interface, so it can be checked directly by the ACL.
     return $acl->isAllowed($user, $resource, $privilege);
 }
+
+/**
+ * Left trims the first occurrence of a string within a string. 
+ * Note: it will only trim the first occurrence of the string.
+ *
+ * @package Omeka\Function\Application
+ * @param string $s  The base string 
+ * @param string $n The string to remove from the left side of the base string
+ * @return string
+ */
+function left_trim($s, $n) 
+{
+    $pos = strpos($s, $n);
+    if ($pos === FALSE || $pos !== 0) {
+        return $s;
+    }
+    return substr($s, strlen($n));
+}

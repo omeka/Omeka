@@ -79,8 +79,8 @@ Omeka.Navigation.updateDeleteButtons = function () {
             buttonsDiv.children('.navigation_main_list_delete').click(function(ee) {
                 ee.preventDefault();
                 jQuery(ee.target).parent().parent().parent().parent().remove(); // removes li element
-                updateNavList();
-                updateSelectHomepageOptions();
+                Omeka.Navigation.updateNavList();
+                Omeka.Navigation.updateSelectHomepageOptions();
             });
         } 
     });
