@@ -7,7 +7,6 @@ Omeka.Elements = {};
 /**
  * Enable drag and drop sorting for elements.
  */
-
 Omeka.Elements.enableSorting = function () {
     jQuery( ".sortable" ).sortable({
         'items': 'li.element',
@@ -25,7 +24,6 @@ Omeka.Elements.enableSorting = function () {
 /**
  * Add link that collapses and expands content.
  */
-
 Omeka.Elements.addHideButtons = function () {
     jQuery('div.sortable-item').each(function(e) {
         var headerDiv = jQuery(e).parent();
@@ -49,7 +47,6 @@ Omeka.Elements.addHideButtons = function () {
           headerDiv.find('.drawer').removeClass('closed').addClass('opened');
         }
     }).mousedown(function(ee) { ee.stopPropagation(); });
-
 };
 
 /**
@@ -167,30 +164,6 @@ Omeka.Elements.makeElementControls = function (element, elementFormPartialUrl, r
 };
 
 /**
- * Set up a "Uses HTML" checkbox to enable the WYSIWYG editor.
- *
- * @param {Element} checkbox
- */
-Omeka.Elements.enableWysiwygCheckbox = function (checkbox) {
-    var textarea = jQuery(checkbox).parents('.input-block').find('textarea');
-    if (textarea.length) {
-        var textareaId = textarea.attr('id');
-        var enableIfChecked = function () {
-            if (checkbox.checked) {
-                tinyMCE.execCommand("mceAddControl", false, textareaId);
-            } else {
-                tinyMCE.execCommand("mceRemoveControl", false, textareaId);
-            }
-        };
-
-        enableIfChecked();
-
-        // Whenever the checkbox is toggled, toggle the WYSIWYG editor.
-        jQuery(checkbox).click(enableIfChecked);
-    }
-};
-
-/**
  * Enable the WYSIWYG editor for "html-editor" fields on the form, and allow
  * checkboxes to create editors for more fields.
  *
@@ -198,6 +171,21 @@ Omeka.Elements.enableWysiwygCheckbox = function (checkbox) {
  */
 Omeka.Elements.enableWysiwyg = function (element) {
     jQuery(element).find('div.inputs input[type="checkbox"]').each(function () {
-        Omeka.Elements.enableWysiwygCheckbox(this);
+        var textarea = jQuery(this).parents('.input-block').find('textarea');
+        if (textarea.length) {
+            var textareaId = textarea.attr('id');
+            var enableIfChecked = function () {
+                if (this.checked) {
+                    tinyMCE.execCommand("mceAddControl", false, textareaId);
+                } else {
+                    tinyMCE.execCommand("mceRemoveControl", false, textareaId);
+                }
+            };
+
+            enableIfChecked();
+
+            // Whenever the checkbox is toggled, toggle the WYSIWYG editor.
+            jQuery(this).click(enableIfChecked);
+        }
     });
 };
