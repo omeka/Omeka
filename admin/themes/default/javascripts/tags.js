@@ -14,4 +14,4 @@ Omeka.Tags.enableEditInPlace = function(editableURL,tagURLBase) {
             jQuery(this).prev().attr("href", tagURLBase + jQuery(this).text());
         }
     }); 
-}
+};

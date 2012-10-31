@@ -37,16 +37,21 @@ Omeka.wysiwyg = function (params) {
 };
 
 Omeka.deleteConfirm = function () {
-    jQuery('.delete-confirm').click(function () {
+    jQuery('.delete-confirm').click(function (event) {
+        var url;
+
+        event.preventDefault();
         if (jQuery(this).is('input')) {
-            var url = jQuery(this).parents('form').attr('action');
+            url = jQuery(this).parents('form').attr('action');
         } else if (jQuery(this).is('a')) {
-            var url = jQuery(this).attr('href');
+            url = jQuery(this).attr('href');
+        } else {
+            return;
         }
+
         jQuery.post(url, function (response){
             jQuery(response).dialog({modal:true});
         });
-        return false;
     });
 };
 

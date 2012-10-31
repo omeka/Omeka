@@ -21,7 +21,7 @@ Omeka.Navigation.updateNavList = function () {
 };
 
 Omeka.Navigation.updateSelectHomepageOptions = function () {
-    var hPages = {}
+    var hPages = {};
     hPages[''] = '[Default]'; 
     jQuery( 'div.sortable-item input[type="checkbox"]' ).each(function(i,e) {
         hPages[jQuery(e).next().attr('href')] = jQuery(e).next().text();
@@ -29,7 +29,7 @@ Omeka.Navigation.updateSelectHomepageOptions = function () {
     var selectedValue = jQuery('#navigation_homepage_select option').filter(":selected").val();
     jQuery('#navigation_homepage_select').empty();
     for(var i in hPages) {
-        jQuery('#navigation_homepage_select').append('<option value="' + i + '" label="' + hPages[i] + '">' + hPages[i]  + '</option>')
+        jQuery('#navigation_homepage_select').append('<option value="' + i + '" label="' + hPages[i] + '">' + hPages[i]  + '</option>');
     }
     jQuery('#navigation_homepage_select option[value="' + selectedValue + '"]').attr('selected', 'selected');
 };
@@ -61,7 +61,7 @@ Omeka.Navigation.updateVisitButtons = function () {
         var hiddenInfo = jQuery.parseJSON(jQuery(e).val());
         var buttonsDiv = jQuery(e).parent().next().find('div.main_link_buttons'); 
         if (!buttonsDiv.find('a[class="navigation_main_list_visit blue button"]').length) {
-            buttonsDiv.append('<a class="navigation_main_list_visit blue button" href="' + hiddenInfo['uri'] + '">Visit</a>');
+            buttonsDiv.append('<a class="navigation_main_list_visit blue button" href="' + hiddenInfo.uri + '">Visit</a>');
             buttonsDiv.find('.navigation_main_list_visit').click(function(ee) {
                 ee.preventDefault();
                 var url = jQuery(ee.target).parent().parent().find('.main_link_uri').val();
@@ -79,8 +79,8 @@ Omeka.Navigation.updateDeleteButtons = function () {
             buttonsDiv.children('.navigation_main_list_delete').click(function(ee) {
                 ee.preventDefault();
                 jQuery(ee.target).parent().parent().parent().parent().remove(); // removes li element
-                updateNavList();
-                updateSelectHomepageOptions();
+                Omeka.Navigation.updateNavList();
+                Omeka.Navigation.updateSelectHomepageOptions();
             });
         } 
     });
@@ -90,9 +90,9 @@ Omeka.Navigation.updateNavLinkEditForms = function () {
     jQuery( 'div.sortable-item input[type="checkbox"]' ).each(function(i,e) {
         var hiddenInfo = jQuery.parseJSON(jQuery(e).val());
         var bodyDiv = jQuery(e).parent().next(); 
-        bodyDiv.find('.navigation-label').val(hiddenInfo['label']);
-        bodyDiv.find('.navigation-uri').val(hiddenInfo['uri']);
-        if (!hiddenInfo['can_delete']) {
+        bodyDiv.find('.navigation-label').val(hiddenInfo.label);
+        bodyDiv.find('.navigation-uri').val(hiddenInfo.uri);
+        if (!hiddenInfo.can_delete) {
             bodyDiv.find('.navigation-uri').attr('disabled', 'disabled');
         }
     });
@@ -108,7 +108,7 @@ Omeka.Navigation.addNewNavLinkForm = function () {
             var n_hidden_info = {
                 'can_delete': true,
                 'uri': n_uri,
-                'label': n_label,
+                'label': n_label
             };
             var n_id = 'navigation_main_nav_checkboxes_new_' + (new Date()).getTime();                
             var n_value = JSON.stringify(n_hidden_info);
@@ -143,22 +143,22 @@ Omeka.Navigation.setUpFormSubmission = function () {
             var newLabel = jQuery.trim(bodyDiv.find('.navigation-label').val());
             var newUri = jQuery.trim(bodyDiv.find('.navigation-uri').val());                  
             var linkInfo = {};
-            linkInfo['can_delete'] = hiddenInfo['can_delete'];
-            linkInfo['visible'] = jQuery(e).is(':checked');
+            linkInfo.can_delete = hiddenInfo.can_delete;
+            linkInfo.visible = jQuery(e).is(':checked');
             // use the user-specified label
             if (newLabel) {
-                linkInfo['label'] = newLabel;
+                linkInfo.label = newLabel;
             } else {
-                linkInfo['label'] = hiddenInfo['label'];
+                linkInfo.label = hiddenInfo.label;
             }
             // only deletable nav links can have their uri's updated
-            if (hiddenInfo['can_delete'] && newUri) {
-                linkInfo['uri'] = newUri;
+            if (hiddenInfo.can_delete && newUri) {
+                linkInfo.uri = newUri;
             } else {
-                linkInfo['uri'] = hiddenInfo['uri'];
+                linkInfo.uri = hiddenInfo.uri;
             }
-            linkInfo['id'] = parseInt(parentChildData[i+1]['item_id']);
-            linkInfo['parent_id'] = parseInt(parentChildData[i+1]['parent_id']);
+            linkInfo.id = parseInt(parentChildData[i+1].item_id, 10);
+            linkInfo.parent_id = parseInt(parentChildData[i+1].parent_id, 10);
             
             linkData.push(linkInfo);
         });

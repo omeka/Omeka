@@ -39,7 +39,7 @@ jQuery(document).ready(function () {
 
         hiddenFile = jQuery("#hidden_file_" + fileInputName);
         hiddenFileUri = jQuery.trim(hiddenFile.attr("value"));
-        if (hiddenFileUri != "") {
+        if (hiddenFileUri !== "") {
             var fileNameDiv = jQuery('<div class="theme-file" id="x_hidden_file_' + fileInputName + '"></div>');
 
             var fileImgLink = jQuery('<a href="' + hiddenFileUri + '"><img src="' + hiddenFileUri + '" /></a>');

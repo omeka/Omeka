@@ -20,7 +20,7 @@ Omeka.Elements.enableSorting = function () {
             });
         }
     });
-}
+};
 
 /**
  * Add link that collapses and expands content.

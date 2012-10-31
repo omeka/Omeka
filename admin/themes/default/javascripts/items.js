@@ -25,7 +25,7 @@ Omeka.Items.enableSorting = function () {
     jQuery( ".sortable input[type=checkbox]" ).each( function() {
         jQuery(this).css("display", "none");
     });
-}
+};
 
 /**
  * Make links to files open in a new window.
@@ -34,13 +34,13 @@ Omeka.Items.enableSorting = function () {
 Omeka.Items.makeFileWindow = function () {
     jQuery('#file-list a').click(function (event) {
         event.preventDefault();
-        if( jQuery(this).hasClass("delete") == true ) {
+        if(jQuery(this).hasClass("delete")) {
             Omeka.Items.enableFileDeletion(jQuery(this));
         } else {
             window.open(this.getAttribute('href'));
         }
     });
-}
+};
 
 /**
  * Set up toggle for marking files for deletion. 
@@ -52,7 +52,7 @@ Omeka.Items.enableFileDeletion = function (deleteLink) {
     } else {
         deleteLink.text("Delete").next().prop('checked', false).parents('.sortable-item').removeClass("deleted");
     }
-}
+};
 
 /**
  * Make the item type selector AJAX in the right item type form.
@@ -181,7 +181,7 @@ Omeka.Items.enableTagRemoval = function (addImage, deleteImage) {
  */
 Omeka.Items.tagChoices = function (inputSelector, tagChoicesUrl) {
     function split(val) {
-        var escapedTagDelimiter = Omeka.Items.tagDelimiter.replace(/([.?*+^$[\]\\(){}-])/g, "\\$1");
+        var escapedTagDelimiter = Omeka.Items.tagDelimiter.replace(/([.?*+\^$\[\]\\(){}\-])/g, "\\$1");
         var re = new RegExp(escapedTagDelimiter + '\\s*');
         return val.split(re);
     }
