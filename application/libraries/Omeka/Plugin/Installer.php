@@ -48,7 +48,6 @@ class Omeka_Plugin_Installer
     {
         $plugin->active = 1;
         $plugin->save();
-        $this->_broker->callHook('activate', array(), $plugin);
     }
     
     /**
@@ -61,7 +60,6 @@ class Omeka_Plugin_Installer
     {
         $plugin->active = 0;
         $plugin->save();
-        $this->_broker->callHook('deactivate', array(), $plugin);
     }
     
     /**
