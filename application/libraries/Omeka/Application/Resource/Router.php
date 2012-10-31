@@ -48,7 +48,7 @@ class Omeka_Application_Resource_Router extends Zend_Application_Resource_Router
             $withoutAdminUri = left_trim(left_trim($homepageUri, ADMIN_BASE_URL), '/' . ADMIN_WEB_DIR);
             if ($withoutAdminUri != $homepageUri) {
                 // homepage uri is an admin link                
-                $homepageUri = WEB_ROOT . '/' . ADMIN_WEB_DIR . $withoutAdminUri;
+                $homepageUri = WEB_ROOT . '/' . ADMIN_WEB_DIR . $withoutAdminUri;                
                 $this->addRedirectRouteForDefaultRoute(self::HOMEPAGE_ROUTE_NAME, $homepageUri, array(), $router);
             } else {
                 // homepage uri is not an admin link
@@ -56,6 +56,7 @@ class Omeka_Application_Resource_Router extends Zend_Application_Resource_Router
                 // left trim root directory off of the homepage uri
                 $homepageUri = left_trim($homepageUri, PUBLIC_BASE_URL); 
                 
+                // make sure the new homepage is not the default homepage
                 if ($homepageUri == '' || 
                     $homepageUri == self::DEFAULT_ROUTE_NAME || 
                     $homepageUri == PUBLIC_BASE_URL) {
@@ -87,7 +88,7 @@ class Omeka_Application_Resource_Router extends Zend_Application_Resource_Router
     /**
      * Adds a redirect route for the default route and returns whether the route was successfully added
      * If the current request matches the default route, then the flow will redirect to the 
-     * index action of the RedirectController, where the page will be redirected to the absolute uri
+     * index action of the RedirectorController, where the page will be redirected to the absolute uri
      * We must use this Redirector proxy controller because a user may be redirecting to an admin page and it needs
      * to reload the application from the admin context.  Also, the Zend router and dispatcher 
      * does not allow us to directly dispatch to an absolute uri. 
