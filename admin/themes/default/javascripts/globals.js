@@ -107,7 +107,8 @@ Omeka.addReadyCallback = function (callback, params) {
 
 Omeka.runReadyCallbacks = function () {
     for (var i = 0; i < this.readyCallbacks.length; ++i) {
-        this.readyCallbacks[i][0].apply(this, this.readyCallbacks[i][1]);
+        var params = this.readyCallbacks[i][1] || [];
+        this.readyCallbacks[i][0].apply(this, params);
     }
 };
 
