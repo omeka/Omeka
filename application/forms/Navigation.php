@@ -60,12 +60,12 @@ class Omeka_Form_Navigation extends Omeka_Form
      *
      */
     public function saveFromPost() 
-    {
-        // Save the homepage uri
-        $this->_saveHomepageFromPost();
-        
+    {   
         // Save the navigation from post                 
         $this->_saveNavigationFromPost();
+        
+        // Save the homepage uri
+        $this->_saveHomepageFromPost();
         
         // Reset the form elements to display the updated navigation
         $this->_initElements();
@@ -205,7 +205,7 @@ class Omeka_Form_Navigation extends Omeka_Form
         if ($pageLinks = $this->getValue(self::HIDDEN_ELEMENT_ID) ) {            
                 
             if ($pageLinks = json_decode($pageLinks, true)) {
-                                                                
+                                                                                
                 // add and update the pages in the navigation
                 $pageOrder = 0;
                 $pageUids = array();
@@ -280,6 +280,20 @@ class Omeka_Form_Navigation extends Omeka_Form
     protected function _saveHomepageFromPost()
     {
         $homepageUri = $this->getValue(self::SELECT_HOMEPAGE_ELEMENT_ID);
+        
+        // make sure the homepageUri still exists in the navigation
+        $pageExists = false;
+        $iterator = new RecursiveIteratorIterator($this->_nav, RecursiveIteratorIterator::SELF_FIRST);
+        foreach($iterator as $page) {
+            if ($page->getHref() == $homepageUri) {
+                $pageExists = true;
+                break;
+            }
+        }
+        
+        if (!$pageExists) {
+            $homepageUri = '/';
+        }
         set_option(self::HOMEPAGE_URI_OPTION_NAME, $homepageUri); 
     }
     
