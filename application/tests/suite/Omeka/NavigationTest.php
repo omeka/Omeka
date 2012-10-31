@@ -660,4 +660,130 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
         $this->assertEquals(__('Edit Collections'), $afterPage4->getLabel());
         $this->assertEquals(__('Omeka'), $afterPage5->getLabel());
     }
+    
+    public function addDifferentPagesNestedArray()
+    {
+        $explicitVisibleOmekaNavPageUri = new Omeka_Navigation_Page_Uri(array(
+            'label' => __('CHNM'),
+            'uri' => 'http://chnm.gmu.edu',
+            'visible' => true
+        ));
+        
+        $implicitVisibleZendNavPageUri = new Zend_Navigation_Page_Uri(array(
+            'label' => __('Browse Collections'),
+            'uri' => url('collections/browse'),
+            'pages' => array(
+                $explicitVisibleOmekaNavPageUri
+            )
+        ));
+        
+        $notVisibleNavPageUriArray = array(
+            'label' => __('Edit Items'),
+            'uri' => url('items/edit'),
+            'visible' => false
+        );
+        
+        $explicitVisibleZendNavPageMvc = new Zend_Navigation_Page_Mvc(array(
+            'label' => __('Browse Items'),
+            'controller' => 'items',
+            'action' => 'browse',
+            'visible' => true,
+            'pages' => array(
+                $implicitVisibleZendNavPageUri,
+                $notVisibleNavPageUriArray,
+            )
+        ));
+        
+        $notVisibleOmekaNavPageUri = new Omeka_Navigation_Page_Uri(array(
+            'label' => __('Edit Collections'),
+            'uri' => url('collections/edit'),
+            'visible' => false
+        ));
+        
+        $explicitVisibleOmekaNavPageUri = new Omeka_Navigation_Page_Uri(array(
+            'label' => __('Omeka'),
+            'uri' => 'http://omeka.org',
+            'visible' => true
+        ));
+        
+        $pages = array(
+            $explicitVisibleZendNavPageMvc,
+            $notVisibleOmekaNavPageUri,
+            $explicitVisibleOmekaNavPageUri
+        );
+        
+        $this->_nav->addPages($pages);
+        
+        $this->assertEquals(3, $this->_nav->count());
+        $this->assertTrue($this->_nav->hasChildren());
+        $this->assertTrue($this->_nav->hasPages());
+        
+        $addedPages = $this->_nav->getPages();
+        $this->assertEquals(3, $addedPages);
+        
+        $afterPage1 = $addedPages[0];
+        $afterPage2 = $addedPages[1];
+        $afterPage3 = $addedPages[2];
+        
+        $this->assertEquals(2, $afterPage1->count());
+        $this->assertTrue($afterPage1->hasChildren());
+        $this->assertTrue($afterPage1->hasPages());
+        $this->assertEquals(0, $afterPage2->count());
+        $this->assertFalse($afterPage2->hasChildren());
+        $this->assertFalse($afterPage2->hasPages());
+        $this->assertEquals(0, $afterPage3->count());
+        $this->assertFalse($afterPage3->hasChildren());
+        $this->assertFalse($afterPage3->hasPages());
+
+        $afterPage1Pages = $afterPage1->getPages();
+
+        $afterPage1Page1 = $afterPage1Pages[0];
+        $afterPage1Page2 = $afterPage1Pages[1];
+        
+        $this->assertEquals(1, $afterPage1Page1->count());
+        $this->assertTrue($afterPage1Page1->hasChildren());
+        $this->assertTrue($afterPage1Page1->hasPages());
+        $this->assertEquals(0, $afterPage1Page2->count());
+        $this->assertFalse($afterPage1Page2->hasChildren());
+        $this->assertFalse($afterPage1Page2->hasPages());
+        
+        $afterPage1Page1Pages = $afterPage1Page1->getPages();
+        $afterPage1Page1Page1 = $afterPage1Page1Pages[0];
+        
+        $this->assertEquals(0, $afterPage1Page1Page1->count());
+        $this->assertFalse($afterPage1Page1Page1->hasChildren());
+        $this->assertFalse($afterPage1Page1Page1->hasPages());
+        
+        $this->assertEquals($explicitVisibleZendNavPageMvc, $afterPage1);
+        $this->assertNotEquals($implicitVisibleZendNavPageUri, $afterPage1Page1);
+        $this->assertNotEquals($explicitVisibleOmekaNavPageUri, $afterPage1Page1Page1);
+        $this->assertNotEquals($notVisibleNavPageUriArray, $afterPage1Page2);
+        $this->assertEquals($notVisibleOmekaNavPageUri, $afterPage2);
+        $this->assertEquals($explicitVisibleOmekaNavPageUri, $afterPage3);
+
+        $this->assertInstanceOf('Omeka_Navigation_Page_Uri', $afterPage1Page1);
+        $this->assertInstanceOf('Omeka_Navigation_Page_Uri', $afterPage1Page1Page1);
+        $this->assertInstanceOf('Omeka_Navigation_Page_Uri', $afterPage1Page2);
+
+        $this->assertEquals(0, $afterPage1->getOrder());
+        $this->assertEquals(0, $afterPage1Page1->getOrder());
+        $this->assertEquals(0, $afterPage1Page1Page1->getOrder());
+        $this->assertEquals(1, $afterPage1Page2->getOrder());
+        $this->assertEquals(1, $afterPage2->getOrder());
+        $this->assertEquals(2, $afterPage3->getOrder());
+        
+        $this->assertEquals(url('items/browse'), $afterPage1->getUid());
+        $this->assertEquals(url('collections/browse'), $afterPage1Page1->getUid());
+        $this->assertEquals('http://chnm.gmu.edu', $afterPage1Page1Page1->getUid());
+        $this->assertEquals(url('items/edit'), $afterPage1Page2->getUid());
+        $this->assertEquals(url('collections/edit'), $afterPage2->getUid());
+        $this->assertEquals('http://omeka.org', $afterPage3->getUid());
+
+        $this->assertEquals(__('Browse Items'), $afterPage1->getLabel());
+        $this->assertEquals(__('Browse Collections'), $afterPage1Page1->getLabel());
+        $this->assertEquals(__('CHNM'), $afterPage1Page1Page1->getLabel());
+        $this->assertEquals(__('Edit Items'), $afterPage1Page2->getLabel());
+        $this->assertEquals(__('Edit Collections'), $afterPage2->getLabel());
+        $this->assertEquals(__('Omeka'), $afterPage3->getLabel());
+    }
 }
