@@ -314,7 +314,7 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     /**
      * Number of files associated with an item
      */
-    public function numberOfFiles()
+    public function fileCount()
     {
         $db = $this->getDb();
         $sql = "
@@ -332,8 +332,7 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      */
     public function hasFiles()
     {
-        $count = $this->numberOfFiles();
-        return $count > 0;
+        return $this->fileCount() > 0;
     }
     
     /**

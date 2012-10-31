@@ -2025,12 +2025,12 @@ function item_citation($item = null)
  * @param Item|null $item Check for this specific item record (current item if null).
  * @return integer
  */
-function item_number_of_files($item = null)
+function item_file_count($item = null)
 {
     if (!$item) {
         $item = get_current_record('item');
     }
-    return $item->numberOfFiles();
+    return $item->fileCount();
 }
 
 /**
