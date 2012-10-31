@@ -1742,7 +1742,7 @@ ul#section-nav, #section-nav ul {
     position: relative;
 }
     
-.tag-list li .tag {
+.tag-list li .tag, .tag-list li a {
     height: 100%;
     color: #ffffff;
     display: inline-block;
