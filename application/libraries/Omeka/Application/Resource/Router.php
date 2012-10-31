@@ -26,9 +26,7 @@ class Omeka_Application_Resource_Router extends Zend_Application_Resource_Router
         $router->addConfig($routesIni);
         // Plugins hook into this.
         fire_plugin_hook('define_routes', array('router' => $router));
-        
         $this->_addHomepageRoute($router);
-        
         return $router;
     }
     
@@ -45,7 +43,7 @@ class Omeka_Application_Resource_Router extends Zend_Application_Resource_Router
             $homepageUri = get_option(Omeka_Form_Navigation::HOMEPAGE_URI_OPTION_NAME);
             $homepageUri = trim($homepageUri);
                                                 
-            $withoutAdminUri = left_trim(left_trim($homepageUri, ADMIN_BASE_URL), '/' . ADMIN_WEB_DIR);
+            $withoutAdminUri = $this->_leftTrim($this->_leftTrim($homepageUri, ADMIN_BASE_URL), '/' . ADMIN_WEB_DIR);
             if ($withoutAdminUri != $homepageUri) {
                 // homepage uri is an admin link                
                 $homepageUri = WEB_ROOT . '/' . ADMIN_WEB_DIR . $withoutAdminUri;                
@@ -54,7 +52,7 @@ class Omeka_Application_Resource_Router extends Zend_Application_Resource_Router
                 // homepage uri is not an admin link
                 
                 // left trim root directory off of the homepage uri
-                $homepageUri = left_trim($homepageUri, PUBLIC_BASE_URL); 
+                $homepageUri = $this->_leftTrim($homepageUri, PUBLIC_BASE_URL); 
                 
                 // make sure the new homepage is not the default homepage
                 if ($homepageUri == '' || 
@@ -122,5 +120,22 @@ class Omeka_Application_Resource_Router extends Zend_Application_Resource_Router
         );
         
         return true;
+    }
+    
+    /**
+     * Left trims the first occurrence of a string within a string. 
+     * Note: it will only trim the first occurrence of the string.
+     *
+     * @param string $s  The base string 
+     * @param string $n The string to remove from the left side of the base string
+     * @return string
+     */
+    protected function _leftTrim($s, $n) 
+    {
+        $pos = strpos($s, $n);
+        if ($pos === FALSE || $pos !== 0) {
+            return $s;
+        }
+        return substr($s, strlen($n));
     }
 }
