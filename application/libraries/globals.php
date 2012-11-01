@@ -2130,31 +2130,19 @@ function get_recent_items($num = 10)
 }
 
 /**
- * Get a random featured item.
- *
- * @package Omeka\Function\View\Body
- * @uses get_random_featured_items()
- * @param boolean|null $hasImage
- * @return Item
- */
-function get_random_featured_item($hasImage=null)
-{
-    $item = get_random_featured_items('1', $hasImage);
-    return $item[0];
-}
-
-/**
- * Get multiple random featured items.
- *
+ * Get random featured items.
+ * 
  * @package Omeka\Function\View\Body
  * @uses get_records()
  * @param integer $num The maximum number of recent items to return
  * @param boolean|null $hasImage
- * @return array $items
+ * @return array|Item
  */
 function get_random_featured_items($num = 5, $hasImage = null)
 {
-    return get_records('Item', array('featured'=>1, 'sort_field' => 'random', 'hasImage' => $hasImage), $num);
+    return get_records('Item', array('featured' => 1, 
+                                     'sort_field' => 'random', 
+                                     'hasImage' => $hasImage), $num);
 }
 
 /**
