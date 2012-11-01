@@ -26,8 +26,8 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
        $this->assertFalse($this->_nav->hasChildren());
        $this->assertNull($this->_nav->getChildren());
        $this->assertFalse($this->_nav->hasPages());
-       $this->assertEquals(array(), $this->_nav->getPages());
-       $this->assertEquals(array(), $this->_nav->toArray());
+       $this->assertEmpty($this->_nav->getPages());
+       $this->assertEmpty($this->_nav->toArray());
     }
     
     public function testAddSingleExplicitVisibleZendNavigationPageMvc()
@@ -578,7 +578,7 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
         $this->assertContains($pageArray, $this->_nav->toArray());
     }
     
-    public function addDifferentPagesFlatArray()
+    public function testAddDifferentPagesFlatArray()
     {
         $explicitVisibleZendNavPageMvc = new Zend_Navigation_Page_Mvc(array(
             'label' => __('Browse Items'),
@@ -617,7 +617,7 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
             $notVisibleOmekaNavPageUri,
             $explicitVisibleOmekaNavPageUri
         );
-        
+                
         $this->_nav->addPages($pages);
         
         $this->assertEquals(5, $this->_nav->count());
@@ -625,13 +625,14 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
         $this->assertTrue($this->_nav->hasPages());
         
         $addedPages = $this->_nav->getPages();
-        $this->assertEquals(5, $addedPages);
+        $this->assertCount(5, $addedPages);
         
-        $afterPage1 = $addedPages[0];
-        $afterPage2 = $addedPages[1];
-        $afterPage3 = $addedPages[2];
-        $afterPage4 = $addedPages[3];
-        $afterPage5 = $addedPages[4];
+        $afterPages = $this->_getSimpleArray($addedPages);
+        $afterPage1 = $afterPages[0];
+        $afterPage2 = $afterPages[1];
+        $afterPage3 = $afterPages[2];
+        $afterPage4 = $afterPages[3];
+        $afterPage5 = $afterPages[4];
         
         $this->assertEquals($explicitVisibleZendNavPageMvc, $afterPage1);
         $this->assertNotEquals($implicitVisibleZendNavPageUri, $afterPage2);
@@ -642,17 +643,18 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
         $this->assertInstanceOf('Omeka_Navigation_Page_Uri', $afterPage2);
         $this->assertInstanceOf('Omeka_Navigation_Page_Uri', $afterPage3);
 
-        $this->assertEquals(0, $afterPage1->getOrder());
-        $this->assertEquals(1, $afterPage2->getOrder());
-        $this->assertEquals(2, $afterPage3->getOrder());
-        $this->assertEquals(3, $afterPage4->getOrder());
-        $this->assertEquals(4, $afterPage5->getOrder());
+        // order is null unless explicitly specified
+        $this->assertNull($afterPage1->getOrder());
+        $this->assertNull($afterPage2->getOrder());
+        $this->assertNull($afterPage3->getOrder());
+        $this->assertNull($afterPage4->getOrder());
+        $this->assertNull($afterPage5->getOrder());
         
-        $this->assertEquals(url('items/browse'), $afterPage1->getUid());
-        $this->assertEquals(url('collections/browse'), $afterPage2->getUid());
-        $this->assertEquals(url('items/edit'), $afterPage3->getUid());
-        $this->assertEquals(url('collections/edit'), $afterPage4->getUid());
-        $this->assertEquals('http://omeka.org', $afterPage5->getUid());
+        $this->assertEquals(url('items/browse'), $afterPage1->uid);
+        $this->assertEquals(url('collections/browse'), $afterPage2->uid);
+        $this->assertEquals(url('items/edit'), $afterPage3->uid);
+        $this->assertEquals(url('collections/edit'), $afterPage4->uid);
+        $this->assertEquals('http://omeka.org', $afterPage5->uid);
 
         $this->assertEquals(__('Browse Items'), $afterPage1->getLabel());
         $this->assertEquals(__('Browse Collections'), $afterPage2->getLabel());
@@ -661,7 +663,7 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
         $this->assertEquals(__('Omeka'), $afterPage5->getLabel());
     }
     
-    public function addDifferentPagesNestedArray()
+    public function testAddDifferentPagesNestedArray()
     {
         $explicitVisibleOmekaNavPageUri = new Omeka_Navigation_Page_Uri(array(
             'label' => __('CHNM'),
@@ -719,11 +721,13 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
         $this->assertTrue($this->_nav->hasPages());
         
         $addedPages = $this->_nav->getPages();
-        $this->assertEquals(3, $addedPages);
+        $this->assertCount(3, $addedPages);
         
-        $afterPage1 = $addedPages[0];
-        $afterPage2 = $addedPages[1];
-        $afterPage3 = $addedPages[2];
+        $afterPages = $this->_getSimpleArray($addedPages);
+        
+        $afterPage1 = $afterPages[0];
+        $afterPage2 = $afterPages[1];
+        $afterPage3 = $afterPages[2];
         
         $this->assertEquals(2, $afterPage1->count());
         $this->assertTrue($afterPage1->hasChildren());
@@ -736,9 +740,11 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
         $this->assertFalse($afterPage3->hasPages());
 
         $afterPage1Pages = $afterPage1->getPages();
-
-        $afterPage1Page1 = $afterPage1Pages[0];
-        $afterPage1Page2 = $afterPage1Pages[1];
+        $this->assertCount(2, $afterPage1Pages);
+        $afterPages = $this->_getSimpleArray($afterPage1Pages);
+        
+        $afterPage1Page1 = $afterPages[0];
+        $afterPage1Page2 = $afterPages[1];
         
         $this->assertEquals(1, $afterPage1Page1->count());
         $this->assertTrue($afterPage1Page1->hasChildren());
@@ -748,7 +754,9 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
         $this->assertFalse($afterPage1Page2->hasPages());
         
         $afterPage1Page1Pages = $afterPage1Page1->getPages();
-        $afterPage1Page1Page1 = $afterPage1Page1Pages[0];
+        $this->assertCount(1, $afterPage1Page1Pages);
+        $afterPages = $this->_getSimpleArray($afterPage1Page1Pages);
+        $afterPage1Page1Page1 = $afterPages[0];
         
         $this->assertEquals(0, $afterPage1Page1Page1->count());
         $this->assertFalse($afterPage1Page1Page1->hasChildren());
@@ -765,19 +773,20 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
         $this->assertInstanceOf('Omeka_Navigation_Page_Uri', $afterPage1Page1Page1);
         $this->assertInstanceOf('Omeka_Navigation_Page_Uri', $afterPage1Page2);
 
-        $this->assertEquals(0, $afterPage1->getOrder());
-        $this->assertEquals(0, $afterPage1Page1->getOrder());
-        $this->assertEquals(0, $afterPage1Page1Page1->getOrder());
-        $this->assertEquals(1, $afterPage1Page2->getOrder());
-        $this->assertEquals(1, $afterPage2->getOrder());
-        $this->assertEquals(2, $afterPage3->getOrder());
+        // order is null unless explicitly specified
+        $this->assertNull($afterPage1->getOrder());
+        $this->assertNull($afterPage1Page1->getOrder());
+        $this->assertNull($afterPage1Page1Page1->getOrder());
+        $this->assertNull($afterPage1Page2->getOrder());
+        $this->assertNull($afterPage2->getOrder());
+        $this->assertNull($afterPage3->getOrder());
         
-        $this->assertEquals(url('items/browse'), $afterPage1->getUid());
-        $this->assertEquals(url('collections/browse'), $afterPage1Page1->getUid());
-        $this->assertEquals('http://chnm.gmu.edu', $afterPage1Page1Page1->getUid());
-        $this->assertEquals(url('items/edit'), $afterPage1Page2->getUid());
-        $this->assertEquals(url('collections/edit'), $afterPage2->getUid());
-        $this->assertEquals('http://omeka.org', $afterPage3->getUid());
+        $this->assertEquals(url('items/browse'), $afterPage1->uid);
+        $this->assertEquals(url('collections/browse'), $afterPage1Page1->uid);
+        $this->assertEquals('http://chnm.gmu.edu', $afterPage1Page1Page1->uid);
+        $this->assertEquals(url('items/edit'), $afterPage1Page2->uid);
+        $this->assertEquals(url('collections/edit'), $afterPage2->uid);
+        $this->assertEquals('http://omeka.org', $afterPage3->uid);
 
         $this->assertEquals(__('Browse Items'), $afterPage1->getLabel());
         $this->assertEquals(__('Browse Collections'), $afterPage1Page1->getLabel());
@@ -785,5 +794,91 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
         $this->assertEquals(__('Edit Items'), $afterPage1Page2->getLabel());
         $this->assertEquals(__('Edit Collections'), $afterPage2->getLabel());
         $this->assertEquals(__('Omeka'), $afterPage3->getLabel());
+    }
+    
+    protected function _getSimpleArray($a)
+    {
+        $aa = array();
+        foreach($a as $k => $v) {
+            $aa[] = $v;
+        }
+        return $aa;
+    }
+    
+    public function testCreatePageUid()
+    {
+        $href = "http://omeka.org";
+        $this->assertEquals($href, $this->_nav->createPageUid($href));
+        
+        $href = "/omeka.org";
+        $this->assertEquals($href, $this->_nav->createPageUid($href));
+    }
+    
+    public function testGetPageByUidFlatList()
+    {
+        $explicitVisibleZendNavPageMvc = new Zend_Navigation_Page_Mvc(array(
+            'label' => __('Browse Items'),
+            'controller' => 'items',
+            'action' => 'browse',
+            'visible' => true
+        ));
+        
+        $implicitVisibleZendNavPageUri = new Zend_Navigation_Page_Uri(array(
+            'label' => __('Browse Collections'),
+            'uri' => url('collections/browse'),
+        ));
+        
+        $notVisibleNavPageUriArray = array(
+            'label' => __('Edit Items'),
+            'uri' => url('items/edit'),
+            'visible' => false
+        );
+        
+        $notVisibleOmekaNavPageUri = new Omeka_Navigation_Page_Uri(array(
+            'label' => __('Edit Collections'),
+            'uri' => url('collections/edit'),
+            'visible' => false
+        ));
+        
+        $explicitVisibleOmekaNavPageUri = new Omeka_Navigation_Page_Uri(array(
+            'label' => __('Omeka'),
+            'uri' => 'http://omeka.org',
+            'visible' => true
+        ));
+        
+        $pages = array(
+            $explicitVisibleZendNavPageMvc,
+            $implicitVisibleZendNavPageUri,
+            $notVisibleNavPageUriArray,
+            $notVisibleOmekaNavPageUri,
+            $explicitVisibleOmekaNavPageUri
+        );
+        
+        $this->_nav->addPages($pages);
+                
+        $unchangedPages = array(
+            $explicitVisibleZendNavPageMvc,
+            $notVisibleOmekaNavPageUri,
+            $explicitVisibleOmekaNavPageUri
+        );
+        
+        foreach($unchangedPages as $page) {
+            $uid = $page->uid;
+            $retrievedPage = $this->_nav->getPageByUid($uid);
+            $this->assertEquals($page, $retrievedPage);
+            $this->assertEquals($uid, $retrievedPage->uid);
+        }
+        
+        $uid = url('collections/browse');
+        $retrievedPage = $this->_nav->getPageByUid($uid);
+        $this->assertNotEquals($implicitVisibleZendNavPageUri, $retrievedPage);
+        $this->assertEquals($uid, $retrievedPage->uid);
+        $this->assertEquals(__('Browse Collections'), $retrievedPage->getLabel());
+        
+        $uid = url('items/edit');
+        $retrievedPage = $this->_nav->getPageByUid($uid);
+        $this->assertNotEquals($notVisibleNavPageUriArray, $retrievedPage);
+        $this->assertEquals($uid, $retrievedPage->uid);
+        $this->assertEquals(__('Edit Items'), $retrievedPage->getLabel());
     }
 }
