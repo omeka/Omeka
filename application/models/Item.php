@@ -312,11 +312,9 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     }
     
     /**
-     * Whether or not the Item has files associated with it.
-     * 
-     * @return boolean
+     * Number of files associated with an item
      */
-    public function hasFiles()
+    public function fileCount()
     {
         $db = $this->getDb();
         $sql = "
@@ -324,7 +322,17 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         FROM $db->File f 
         WHERE f.item_id = ?";
         $count = (int) $db->fetchOne($sql, array((int) $this->id));
-        return $count > 0;
+        return $count;
+    }
+    
+    /**
+     * Whether or not the Item has files associated with it.
+     * 
+     * @return boolean
+     */
+    public function hasFiles()
+    {
+        return $this->fileCount() > 0;
     }
     
     /**
