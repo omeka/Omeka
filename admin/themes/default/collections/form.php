@@ -46,4 +46,4 @@ jQuery(document).bind('omeka:elementformload', function (event) {
 </div>
 
 
-<?php fire_plugin_hook('admin_append_to_collections_form', array('collection' => $collection, 'view' => $this)); ?>
+<?php fire_plugin_hook('admin_append_to_collections_form', array('collection' => $collection)); ?>
