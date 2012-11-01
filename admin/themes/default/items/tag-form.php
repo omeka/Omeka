@@ -27,5 +27,5 @@
         </div>
     <?php endif; ?>
     </div>
-    <?php fire_plugin_hook('admin_append_to_items_form_tags', array('item' => $item, 'view' => $this)); ?>
+    <?php fire_plugin_hook('admin_append_to_items_form_tags', array('item' => $item)); ?>
 </div>
