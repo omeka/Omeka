@@ -24,7 +24,7 @@ Omeka.Security.buildRestoreButton = function (whitelistInput, ajaxUri, buttonTex
     function buttonAfter(element, text) {
         button = jQuery('<button type="button">' + text + '</button>');
         return button.insertAfter(element);
-    };
+    }
 
     /**
      * Make an AJAX request to restore the form input value.
@@ -44,7 +44,7 @@ Omeka.Security.buildRestoreButton = function (whitelistInput, ajaxUri, buttonTex
                 input.val(data);
             }
         });
-    };
+    }
 
     var restoreButton = buttonAfter(input, buttonText);
     restoreButton.click(function () {

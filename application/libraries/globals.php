@@ -2529,7 +2529,8 @@ function link_to_admin_home_page($text = null, $props = array())
  * @return Zend_View_Helper_Navigation_Menu The navigation menu object. Can
  *  generally be treated simply as a string.
  */
-function nav(array $navLinks, $name = null) {
+function nav(array $navLinks, $name = null) 
+{
     if ($name !== null) {
         $navLinks = apply_filters($name, $navLinks);
     }
@@ -2609,6 +2610,7 @@ function public_nav_main()
     $view = get_view();
     $nav = new Omeka_Navigation;
     $nav->loadAsOption(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME);
+    $nav->addPagesFromFilter(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_FILTER_NAME);
     return $view->navigation()->menu($nav);
 }
 

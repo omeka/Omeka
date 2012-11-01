@@ -1,16 +1,11 @@
 <?php
-$pageTitle = __('Edit Elements');
-echo head(array('title'=> $pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'element-sets primary'));
+queue_js_file('element-sets');
+echo head(array(
+    'title'=> __('Edit Elements'),
+    'content_class' => 'vertical-nav',
+    'bodyclass'=>'element-sets primary'
+));
 ?>
-<?php echo js_tag('elements'); ?>
-<script type="text/javascript" charset="utf-8">
-//<![CDATA[
-jQuery(window).load(function () {
-    Omeka.Elements.enableSorting();
-    Omeka.Elements.addHideButtons();
-});
-//]]>
-</script>
 <?php echo common('settings-nav'); ?>
 <?php echo flash(); ?>
 <form method='post'>
@@ -43,4 +38,10 @@ jQuery(window).load(function () {
 
 </form>
 </div>
+<script type="text/javascript">
+//<![CDATA[
+Omeka.addReadyCallback(Omeka.ElementSets.enableSorting);
+Omeka.addReadyCallback(Omeka.ElementSets.addHideButtons);
+//]]>
+</script>
 <?php echo foot(); ?>

@@ -6,8 +6,12 @@
     <title><?php echo __('Omeka Admin'); ?>: <?php echo option('site_title'); echo isset($title) ? ' | ' . strip_formatting($title) : ''; ?></title>
 
 <?php
-    queue_css_file(array('style', 'layout', 'skeleton', 'jquery-ui'));
-    queue_js_file(array('globals','modernizr-min','selectivizr-min'));
+    queue_css_file(array('style', 'skeleton', 'jquery-ui'));
+    queue_css_file('media/960min', 'only screen and (min-width: 960px)');
+    queue_css_file('media/768min', 'only screen and (min-width: 768px) and (max-width: 959px)');
+    queue_css_file('media/767max', 'only screen and (max-width: 767px)');
+    queue_css_file('media/479max', 'only screen and (max-width: 479px)');
+    queue_js_file(array('respond.min','globals','modernizr-min','selectivizr-min'));
 ?>
 
 <!-- Plugin Stuff -->

@@ -37,7 +37,7 @@ Omeka.Search.activateSearchButtons = function () {
 
         //Match the index, parse into integer, increment and convert to string again
         var index = inputName.match(/advanced\[(\d+)\]/)[1];
-        var newIndex = (parseInt(index) + 1).toString();
+        var newIndex = (parseInt(index, 10) + 1).toString();
 
         //Reset the selects and inputs
         inputs.val('');

@@ -97,7 +97,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
                 'error'
             );
         }
-        
+                
         $this->_helper->redirector('index');
     }
     

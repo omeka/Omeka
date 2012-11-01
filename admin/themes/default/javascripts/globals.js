@@ -37,16 +37,21 @@ Omeka.wysiwyg = function (params) {
 };
 
 Omeka.deleteConfirm = function () {
-    jQuery('.delete-confirm').click(function () {
+    jQuery('.delete-confirm').click(function (event) {
+        var url;
+
+        event.preventDefault();
         if (jQuery(this).is('input')) {
-            var url = jQuery(this).parents('form').attr('action');
+            url = jQuery(this).parents('form').attr('action');
         } else if (jQuery(this).is('a')) {
-            var url = jQuery(this).attr('href');
+            url = jQuery(this).attr('href');
+        } else {
+            return;
         }
+
         jQuery.post(url, function (response){
             jQuery(response).dialog({modal:true});
         });
-        return false;
     });
 };
 
@@ -107,7 +112,8 @@ Omeka.addReadyCallback = function (callback, params) {
 
 Omeka.runReadyCallbacks = function () {
     for (var i = 0; i < this.readyCallbacks.length; ++i) {
-        this.readyCallbacks[i][0].apply(this, this.readyCallbacks[i][1]);
+        var params = this.readyCallbacks[i][1] || [];
+        this.readyCallbacks[i][0].apply(this, params);
     }
 };
 

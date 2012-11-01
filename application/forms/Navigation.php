@@ -33,7 +33,7 @@ class Omeka_Form_Navigation extends Omeka_Form
         
         $this->_nav = new Omeka_Navigation();
         $this->_nav->loadAsOption(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME);        
-        $this->_nav->addPagesFromFilter('public_navigation_main');
+        $this->_nav->addPagesFromFilter(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_FILTER_NAME);
         $this->_initElements();
     }
     
@@ -205,7 +205,7 @@ class Omeka_Form_Navigation extends Omeka_Form
         if ($pageLinks = $this->getValue(self::HIDDEN_ELEMENT_ID) ) {            
                 
             if ($pageLinks = json_decode($pageLinks, true)) {
-                                                                
+                                                                                
                 // add and update the pages in the navigation
                 $pageOrder = 0;
                 $pageUids = array();
@@ -231,7 +231,7 @@ class Omeka_Form_Navigation extends Omeka_Form
                     
                     $pageIdsToPageUids[strval($pageLink['id'])] = $page->uid;
                 }
-                                
+                                                                
                 // structure the parent/child relationships
                 // this assumes that the $pages are in a flattened hierarchical order           
                 for($i = 0; $i < $pageOrder; $i++) {
@@ -253,19 +253,9 @@ class Omeka_Form_Navigation extends Omeka_Form
                         }
                     }
                 }
-                                
+                                                
                 // remove expired pages from navigation
-                $expiredPages = array();
-                $iterator = new RecursiveIteratorIterator($nav,
-                                    RecursiveIteratorIterator::SELF_FIRST);
-                foreach($iterator as $page) {
-                    if (!in_array($page->uid, $pageUids)) {
-                        $expiredPages[] = $page;
-                    }
-                }
-                foreach($expiredPages as $expiredPage) {
-                    $nav->removePageRecursive($expiredPage);
-                }
+                $nav->pruneExpiredPages($pageUids);
             }
         }
 

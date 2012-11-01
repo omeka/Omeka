@@ -5,54 +5,6 @@ if (!Omeka) {
 Omeka.Elements = {};
 
 /**
- * Enable drag and drop sorting for elements.
- */
-
-Omeka.Elements.enableSorting = function () {
-    jQuery( ".sortable" ).sortable({
-        'items': 'li.element',
-        'forcePlaceholderSize': true, 
-        'forceHelperSize': true,
-        'placeholder': "ui-sortable-highlight",
-        'update': function (event, ui) {
-            jQuery(this).find('.element-order').each(function (index) {
-                jQuery(this).val(index + 1);
-            });
-        }
-    });
-}
-
-/**
- * Add link that collapses and expands content.
- */
-
-Omeka.Elements.addHideButtons = function () {
-    jQuery('div.sortable-item').each(function(e) {
-        var headerDiv = jQuery(e).parent();
-        jQuery(this).append('<div class="drawer closed">&#9654;</div>');
-        jQuery('.sortable .drawer-contents').each( function() {
-            jQuery(this).css("display", "none");
-        });
-        headerDiv.next().hide();    
-    });
-    jQuery('.drawer').click(function(ee) {
-        var headerDiv = jQuery(ee).parent();
-        console.log("clicked!");
-        ee.preventDefault();
-        var d = jQuery(ee.target).parent().next();
-        d.toggle();
-        if (d.is(':hidden')) {
-          jQuery(ee.target).html('&#9654;'); // right arrow
-          headerDiv.find('.drawer').removeClass('opened').addClass('closed');
-        } else {
-          jQuery(ee.target).html('&#9660;'); // down arrow
-          headerDiv.find('.drawer').removeClass('closed').addClass('opened');
-        }
-    }).mousedown(function(ee) { ee.stopPropagation(); });
-
-};
-
-/**
  * Send an AJAX request to update a <div class="field"> that contains all
  * the form inputs for an element.
  *
@@ -167,30 +119,6 @@ Omeka.Elements.makeElementControls = function (element, elementFormPartialUrl, r
 };
 
 /**
- * Set up a "Uses HTML" checkbox to enable the WYSIWYG editor.
- *
- * @param {Element} checkbox
- */
-Omeka.Elements.enableWysiwygCheckbox = function (checkbox) {
-    var textarea = jQuery(checkbox).parents('.input-block').find('textarea');
-    if (textarea.length) {
-        var textareaId = textarea.attr('id');
-        var enableIfChecked = function () {
-            if (checkbox.checked) {
-                tinyMCE.execCommand("mceAddControl", false, textareaId);
-            } else {
-                tinyMCE.execCommand("mceRemoveControl", false, textareaId);
-            }
-        };
-
-        enableIfChecked();
-
-        // Whenever the checkbox is toggled, toggle the WYSIWYG editor.
-        jQuery(checkbox).click(enableIfChecked);
-    }
-};
-
-/**
  * Enable the WYSIWYG editor for "html-editor" fields on the form, and allow
  * checkboxes to create editors for more fields.
  *
@@ -198,6 +126,21 @@ Omeka.Elements.enableWysiwygCheckbox = function (checkbox) {
  */
 Omeka.Elements.enableWysiwyg = function (element) {
     jQuery(element).find('div.inputs input[type="checkbox"]').each(function () {
-        Omeka.Elements.enableWysiwygCheckbox(this);
+        var textarea = jQuery(this).parents('.input-block').find('textarea');
+        if (textarea.length) {
+            var textareaId = textarea.attr('id');
+            var enableIfChecked = function () {
+                if (this.checked) {
+                    tinyMCE.execCommand("mceAddControl", false, textareaId);
+                } else {
+                    tinyMCE.execCommand("mceRemoveControl", false, textareaId);
+                }
+            };
+
+            enableIfChecked();
+
+            // Whenever the checkbox is toggled, toggle the WYSIWYG editor.
+            jQuery(this).click(enableIfChecked);
+        }
     });
 };
