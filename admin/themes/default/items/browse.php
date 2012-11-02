@@ -149,7 +149,7 @@ echo head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodycl
                             <li><?php echo link_to_item(__('Delete'), array('class' => 'delete-confirm'), 'delete-confirm'); ?></li>
                             <?php endif; ?>
                         </ul>
-                        <?php fire_plugin_hook('admin_append_to_items_browse_simple_each', array('view' => $this)); ?>
+                        <?php fire_plugin_hook('admin_append_to_items_browse_simple_each', array('item'=>$item, 'view' => $this)); ?>
                         <div class="details">
                             <?php echo snippet_by_word_count(strip_formatting(metadata('item', array('Dublin Core', 'Description'))), 40); ?>
                             <p>
@@ -160,7 +160,7 @@ echo head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodycl
                                 <strong><?php echo __('Tags'); ?>:</strong>
                                 <?php if ($tags = tag_string('items')) echo $tags; else echo __('No Tags'); ?>
                             </p>
-                            <?php fire_plugin_hook('admin_append_to_items_browse_detailed_each', array('view' => $this)); ?>
+                            <?php fire_plugin_hook('admin_append_to_items_browse_detailed_each', array('item'=>$item, 'view' => $this)); ?>
                         </div>
                     </td>
                     <td><?php echo strip_formatting(metadata('item', array('Dublin Core', 'Creator'))); ?></td>
