@@ -48,4 +48,4 @@ if (empty($pathToConvert) && is_allowed('Settings', 'edit')): ?>
     <?php endfor; ?>
 </div>
 
-<?php fire_plugin_hook('admin_append_to_items_form_files', array('item' => $item)); ?>
+<?php fire_plugin_hook('admin_append_to_items_form_files', array('item' => $item, 'view' => $this)); ?>
