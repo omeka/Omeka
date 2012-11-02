@@ -69,6 +69,8 @@
     </div>
     <?php endif; ?>
 
+    <?php fire_plugin_hook('admin_append_to_files_show_secondary', array('file' => $file, 'view' => $this)); ?>
+    
 </div>
 
 <div class="seven columns alpha">
@@ -84,5 +86,5 @@
     <?php fire_plugin_hook('admin_append_to_files_show_primary', array('file' => $file, 'view' => $this)); ?>
     
 </div>
-    <?php fire_plugin_hook('admin_append_to_files_show_secondary', array('file' => $file, 'view' => $this)); ?>
+    
 <?php echo foot();?>
