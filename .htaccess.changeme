@@ -1,39 +1,66 @@
-<IfModule mod_php5.c>
-    php_flag register_globals off
-    php_flag magic_quotes_gpc off
-</IfModule>
+# Omeka .htaccess: Apache configuration file
+# This file is required for Omeka to function correctly.
 
-# Uncomment the following line to turn on detailed on-screen error
-# reporting. Remember: this should be kept off for production sites.
+# --------------- #
+# Error Reporting #
+# --------------- #
+
+# Uncomment the SetEnv line below to turn on detailed on-screen error
+# reporting.
 #
-#SetEnv APPLICATION_ENV development
+# Note: This should only be enabled for development or debugging. Keep this
+# line commented for production sites.
+# 
+# SetEnv APPLICATION_ENV development
+
+# ------------- #
+# Rewrite Rules #
+# ------------- #
 
 RewriteEngine on
 
-# If know that mod_rewrite is enabled, but you are still getting mod_rewrite errors,
-# uncomment the line below and replace "/" with your base directory.
+# If you know mod_rewrite is enabled, but you are still getting mod_rewrite
+# errors, uncomment the line below and replace "/" with your base directory.
+#
 # RewriteBase /
 
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^admin/ - [C]
-RewriteRule .* admin/index.php [L]
+# Allow direct access to files (except PHP files)
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule !.php$ - [C]
+RewriteRule .* - [L]
 
-RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^install/.*$ install/install.php [L]
+RewriteRule ^admin/.*$ admin/index.php [L]
 RewriteRule .* index.php
 
-<FilesMatch "\.(php|ini)$">
- Order Allow,Deny
- Deny from all
+# -------------- #
+# Access Control #
+# -------------- #
+
+# Block access to all .ini files.
+<FilesMatch "\.ini$">
+    Order Allow,Deny
+    Deny from all
 </FilesMatch>
 
-<Files index.php>
-Allow from all
-</Files>
+# --------#
+# Caching #
+# --------#
 
-# Uncomment the lines below in order to enable caching of some files via Apache (after a finished site has gone live)
-<IfModule mod_expires.c>
-#  <FilesMatch "\.(js|ico|gif|jpg|png|css)$">
-#       ExpiresActive on
-#       ExpiresDefault "access plus 10 day"
-#   </FilesMatch>
+# Uncomment the lines below in order to enable caching of some files
+# (after a finished site has gone live)
+#
+# <IfModule mod_expires.c>
+#    <FilesMatch "\.(js|ico|gif|jpg|png|css)$">
+#        ExpiresActive on
+#        ExpiresDefault "access plus 10 day"
+#    </FilesMatch>
+# </IfModule>
+
+# ------------ #
+# PHP Settings #
+# ------------ #
+<IfModule mod_php5.c>
+    php_flag register_globals off
+    php_flag magic_quotes_gpc off
 </IfModule>
