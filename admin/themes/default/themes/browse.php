@@ -44,7 +44,7 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
                             <h3><a href="<?php echo html_escape($theme->website); ?>" target="_blank"><?php echo html_escape($theme->title); ?></a></h3>
                             <p class="author">By <?php echo html_escape($theme->author); ?></p>
                         </div>
-                        <?php fire_plugin_hook('admin_append_to_themes_browse_each', array('theme' => $theme, 'view' => $this)); ?>
+                        <?php fire_plugin_hook('admin_append_to_themes_browse_each', array('theme' => $theme)); ?>
                     </div>
                     </form>
                     <?php endif; ?>

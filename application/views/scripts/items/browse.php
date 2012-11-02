@@ -7,9 +7,9 @@ echo head(array('title'=>$pageTitle,'bodyid'=>'items','bodyclass' => 'browse'));
 
     <h1><?php echo $pageTitle;?> <?php echo __('(%s total)', $total_results); ?></h1>
 
-    <ul class="items-nav navigation" id="secondary-nav">
+    <nav class="items-nav navigation" id="secondary-nav">
         <?php echo public_nav_items(); ?>
-    </ul>
+    </nav>
 
     <div id="pagination-top" class="pagination"><?php echo pagination_links(); ?></div>
 

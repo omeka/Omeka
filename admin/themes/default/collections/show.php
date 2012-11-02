@@ -58,7 +58,7 @@
                 </ul>
                 <?php endif; ?>
 
-                <?php fire_plugin_hook('admin_append_to_collections_show_primary', array('collection' => $collection, 'view' => $this)); ?>
+                <?php fire_plugin_hook('admin_append_to_collections_show_primary', array('collection' => $collection)); ?>
             </div>
         
 <?php echo foot(); ?>

@@ -37,7 +37,7 @@
                 <?php echo search_form(); ?>
             </div><!-- end search -->
 
-            <div id="site-title"><?php echo link_to_home_page(custom_display_logo()); ?></div>
+            <div id="site-title"><?php echo link_to_home_page(theme_logo()); ?></div>
             
             <nav id="top-nav">
                 <?php echo public_nav_main(); ?>

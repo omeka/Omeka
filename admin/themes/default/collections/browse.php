@@ -78,6 +78,6 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
 
     <?php endif; ?>
     
-    <?php fire_plugin_hook('admin_append_to_collections_browse_primary', array('collections' => $collections, 'view' => $this)); ?>
+    <?php fire_plugin_hook('admin_append_to_collections_browse_primary', array('collections' => $collections)); ?>
 </div>      
 <?php echo foot(); ?>

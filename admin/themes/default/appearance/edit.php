@@ -12,7 +12,7 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
         
     <?php echo $this->form->getDisplayGroup('appearance'); ?>
     
-    <?php fire_plugin_hook('admin_append_to_appearance_settings_form', array('appearance_settings_form' => $form, 'view' => $this)); ?>
+    <?php fire_plugin_hook('admin_append_to_appearance_settings_form', array('appearance_settings_form' => $form)); ?>
 
 </section>
 

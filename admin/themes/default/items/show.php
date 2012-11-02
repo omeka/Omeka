@@ -84,7 +84,7 @@
         <div><?php echo output_format_list(); ?></div>
     </div>
 
-<?php fire_plugin_hook('admin_append_to_items_show_secondary', array('item' => $item, 'view' => $this)); ?>
+
 </div>
 
 <div class="seven columns alpha">
