@@ -135,6 +135,9 @@ echo head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodycl
                     <?php else: ?>
                     <td class="item-info">
                     <?php endif; ?>
+                        <?php if (metadata('item', 'has files')): ?>
+                        <?php echo link_to_item(item_image('square_thumbnail', array(), 0, $item), array('class' => 'item-thumbnail'), 'show', $item); ?>
+                        <?php endif; ?>
                         <span class="title">
                         <?php echo link_to_item(); ?>
                         <?php if(!$item->public): ?>

@@ -172,10 +172,11 @@ p, li {
 
 
     .details {
-        background-color: #fff;
+        background-color: rgb(255,255,255);
+        background-color: rgba(255,255,255,.5);
         border: 1px solid #E4E5DE;
-        border-radius: 3px;
-        margin-top: .5em;
+        display: block;
+        margin-top: 10px;
         padding: .5em;
     }
         
@@ -1341,7 +1342,27 @@ header nav {
     overflow: auto;
     margin: 0 0 20px 0;
 }   
-     
+
+.browse-items a.item-thumbnail {
+    overflow: auto;
+    display: inline-block;
+    float: left;
+    margin: 0 10px 0 0;
+    max-width: 20%;
+}
+
+.browse-items .item-thumbnail img {
+    display: block;
+    border: 1px solid #E4E5DE;
+    max-width: 100%;
+    margin: 0;
+    float: left;
+    box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -o-box-sizing: border-box;
+}
+
 .table-actions {
     clear: left;
     float: left;
