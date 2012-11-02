@@ -3,7 +3,7 @@ $pathToConvert = get_option('path_to_convert');
 if (empty($pathToConvert) && is_allowed('Settings', 'edit')): ?>
     <div class="error"><?php echo __('The path to Image Magick has not been set. No derivative images will be created. If you would like Omeka to create derivative images, please add the path to your settings form.'); ?></div>
 <?php endif; ?>
-<?php if ( item_has_files() ): ?>
+<?php if (metadata('item', 'has files')): ?>
     <div id="file-list">
         <ul class="sortable">
         <?php foreach( $item->Files as $key => $file ): ?>

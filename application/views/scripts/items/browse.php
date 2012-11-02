@@ -19,7 +19,7 @@ echo head(array('title'=>$pageTitle,'bodyid'=>'items','bodyclass' => 'browse'));
 
         <h2><?php echo link_to_item(metadata('item', array('Dublin Core', 'Title')), array('class'=>'permalink')); ?></h2>
 
-        <?php if (item_has_thumbnail()): ?>
+        <?php if (metadata('item', 'has thumbnail')): ?>
         <div class="item-img">
             <?php echo link_to_item(item_image('square_thumbnail')); ?>
         </div>
@@ -35,7 +35,7 @@ echo head(array('title'=>$pageTitle,'bodyid'=>'items','bodyclass' => 'browse'));
         </div>
         <?php endif; ?>
 
-        <?php if (item_has_tags()): ?>
+        <?php if (metadata('item', 'has tags')): ?>
         <div class="tags"><p><strong><?php echo __('Tags'); ?>:</strong>
             <?php echo tag_string('items'); ?></p>
         </div>

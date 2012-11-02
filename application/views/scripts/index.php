@@ -44,7 +44,7 @@
 
             <h3><?php echo link_to_item(); ?></h3>
 
-            <?php if(item_has_thumbnail()): ?>
+            <?php if (metadata('item', 'has thumbnail')): ?>
             <div class="item-img">
                 <?php echo link_to_item(item_image('square_thumbnail')); ?>
             </div>

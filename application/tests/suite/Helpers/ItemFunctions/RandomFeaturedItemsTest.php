@@ -28,7 +28,7 @@ class Omeka_Helper_RandomFeaturedItemsTest extends Omeka_Test_AppTestCase
         $this->assertEquals(5, count($randomFeaturedItemsWithImages));
         
         foreach ($randomFeaturedItemsWithImages as $randomItem) {
-            $this->assertTrue(item_has_files($randomItem));
+            $this->assertTrue(metadata($randomItem, 'has files'));
         }
     }
     
