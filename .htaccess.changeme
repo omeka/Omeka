@@ -60,6 +60,7 @@ RewriteRule .* index.php
 # ------------ #
 # PHP Settings #
 # ------------ #
+
 <IfModule mod_php5.c>
     php_flag register_globals off
     php_flag magic_quotes_gpc off
