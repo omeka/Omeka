@@ -11,7 +11,7 @@ echo head(array('title'=>$pageTitle,'bodyid'=>'items','bodyclass' => 'browse'));
         <?php echo public_nav_items(); ?>
     </nav>
 
-    <div id="pagination-top" class="pagination"><?php echo pagination_links(); ?></div>
+    <?php echo pagination_links(); ?>
 
     <?php foreach (loop('items') as $item): ?>
     <div class="item hentry">
@@ -47,7 +47,7 @@ echo head(array('title'=>$pageTitle,'bodyid'=>'items','bodyclass' => 'browse'));
     </div><!-- end class="item hentry" -->
     <?php endforeach; ?>
 
-    <div id="pagination-bottom" class="pagination"><?php echo pagination_links(); ?></div>
+    <?php echo pagination_links(); ?>
 
     <?php fire_plugin_hook('public_append_to_items_browse', array('view' => $this)); ?>
 
