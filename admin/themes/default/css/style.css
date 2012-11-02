@@ -1508,8 +1508,18 @@ header nav {
     margin-bottom: 20px;
 }
     
-    #item-list h2 {
-        margin: 0 -10px 0 0 ;
+    #item-list h2 { margin: 0 -10px 0 0; }
+    
+    #item-list input[type="checkbox"] { margin: 0 5px 0 0; }
+    
+    #item-list ul { 
+        margin: 0;
+        padding: 0; 
+    }
+    
+    #item-list li { 
+        list-style-type: none;
+        margin-bottom: 20px; 
     }
     
         
