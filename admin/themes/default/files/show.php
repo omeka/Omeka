@@ -81,8 +81,8 @@
     
     <?php echo all_element_texts('file'); ?>
     
-    <?php fire_plugin_hook('admin_append_to_files_show_primary', array('file' => $file)); ?>
+    <?php fire_plugin_hook('admin_append_to_files_show_primary', array('file' => $file, 'view' => $this)); ?>
     
 </div>
-
+    <?php fire_plugin_hook('admin_append_to_files_show_secondary', array('file' => $file, 'view' => $this)); ?>
 <?php echo foot();?>
