@@ -4,7 +4,7 @@ echo head(array('title'=>$pageTitle,'bodyid'=>'collections','bodyclass' => 'brow
 ?>
 <div id="primary">
     <h1><?php echo $pageTitle; ?></h1>
-    <div class="pagination"><?php echo pagination_links(); ?></div>
+    <?php echo pagination_links(); ?>
 
     <?php foreach (loop('collections') as $collection): ?>
     <div class="collection">
@@ -33,6 +33,8 @@ echo head(array('title'=>$pageTitle,'bodyid'=>'collections','bodyclass' => 'brow
 
     </div><!-- end class="collection" -->
     <?php endforeach; ?>
+
+    <?php echo pagination_links(); ?>
 
     <?php fire_plugin_hook('public_append_to_collections_browse', array('view' => $this)); ?>
 
