@@ -1413,7 +1413,7 @@ header nav {
 }
 
 
-.quick-filter-wrapper li a { 
+.quick-filter-wrapper li a, .quick-filter-wrapper li span { 
     min-width: 105px; 
     display:block; 
     float:left; 
