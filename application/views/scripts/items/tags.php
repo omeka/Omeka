@@ -7,9 +7,9 @@ echo head(array('title'=>$pageTitle,'bodyid'=>'items','bodyclass'=>'tags'));
 
     <h1><?php echo $pageTitle; ?></h1>
 
-    <ul class="navigation item-tags" id="secondary-nav">
+    <nav class="navigation item-tags" id="secondary-nav">
         <?php echo public_nav_items(); ?>
-    </ul>
+    </nav>
 
     <?php echo tag_cloud($tags, 'items/browse'); ?>
 
