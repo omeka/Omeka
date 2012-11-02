@@ -36,4 +36,4 @@ jQuery(document).ready(function () {
     </fieldset>
 </div>
 
-<?php fire_plugin_hook('admin_append_to_item_types_form', array('item_type' => $item_type)); ?>
+<?php fire_plugin_hook('admin_append_to_item_types_form', array('item_type' => $item_type, 'view' => $this)); ?>
