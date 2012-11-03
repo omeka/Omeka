@@ -38,6 +38,6 @@ jQuery(document).bind('omeka:elementformload', function (event) {
             <?php echo element_set_form($file, $elementSet->name); ?>
         </fieldset>
         <?php endforeach; ?>
-        <?php fire_plugin_hook('admin_append_to_files_form', array('file' => $file)); ?>
+        <?php fire_plugin_hook('admin_append_to_file_form', array('file' => $file, 'view' => $this)); ?>
     </div> <!-- end file-metadata div -->
 </section>

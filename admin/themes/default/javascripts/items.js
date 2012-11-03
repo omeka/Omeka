@@ -98,12 +98,18 @@ Omeka.Items.changeItemType = function (changeItemTypeUrl, itemId) {
  */
 Omeka.Items.addTagElement = function (tag) {
     var tagLi = jQuery('<li/>');
+    tagLi.after(" ");
 
     var undoButton = jQuery('<span class="undo-remove-tag"><a href="#">Undo</a></span>').appendTo(tagLi);
     var deleteButton = jQuery('<span class="remove-tag"><a href="#">Remove</a></span>').appendTo(tagLi);
     tagLi.prepend('<span class="tag">' + tag + '</span>');
 
-    jQuery('#all-tags-list').append(tagLi);
+    if(jQuery('#all-tags-list').length != 0) {
+        jQuery('#all-tags-list').append(tagLi);
+    } else {
+        jQuery('#all-tags').append(jQuery('<h3>All Tags</h3><div class="tag-list"><ul id="all-tags-list"></ul></div>'));
+        jQuery('#all-tags-list').append(tagLi);
+    }
 
     Omeka.Items.updateTagsField();
     return false;

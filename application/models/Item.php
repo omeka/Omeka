@@ -107,16 +107,6 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     /**
      * Get a property for display.
      *
-     * Available property values:
-     * - id
-     * - item type name
-     * - date added
-     * - date modified
-     * - collection name
-     * - featured
-     * - public
-     * - permalink
-     *
      * @param string $property
      * @return mixed
      */
@@ -137,6 +127,14 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
                 }
             case 'permalink':
                 return record_url($this, null, true);
+            case 'has_files':
+                return (bool) $this->fileCount();
+            case 'file_count':
+                return $this->fileCount();
+            case 'has_thumbnail':
+                return $this->hasThumbnail();
+            case 'citation':
+                return $this->getCitation();
             default:
                 return parent::getProperty($property);
         }
@@ -312,19 +310,18 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     }
     
     /**
-     * Whether or not the Item has files associated with it.
+     * Retrieve the number of files assigned to this item.
      * 
      * @return boolean
      */
-    public function hasFiles()
+    public function fileCount()
     {
         $db = $this->getDb();
         $sql = "
         SELECT COUNT(f.id) 
         FROM $db->File f 
         WHERE f.item_id = ?";
-        $count = (int) $db->fetchOne($sql, array((int) $this->id));
-        return $count > 0;
+        return (int) $db->fetchOne($sql, array((int) $this->id));
     }
     
     /**
@@ -368,6 +365,56 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         $count = $db->fetchOne($sql, array((int) $this->id));
             
         return $count > 0;
+    }
+    
+    /**
+     * Return a valid citation for this item.
+     *
+     * Generally follows Chicago Manual of Style note format for webpages. 
+     * Implementers can use the item_citation filter to return a customized 
+     * citation.
+     *
+     * @return string
+     */
+    function getCitation()
+    {
+        $citation = '';
+        
+        $creators = metadata($this, array('Dublin Core', 'Creator'), array('all' => true));
+        // Strip formatting and remove empty creator elements.
+        $creators = array_filter(array_map('strip_formatting', $creators));
+        if ($creators) {
+            switch (count($creators)) {
+                case 1:
+                    $creator = $creators[0];
+                    break;
+                case 2:
+                    $creator = "{$creators[0]} and {$creators[1]}";
+                    break;
+                case 3:
+                    $creator = "{$creators[0]}, {$creators[1]}, and {$creators[2]}";
+                    break;
+                default:
+                    $creator = "{$creators[0]} et al.";
+            }
+            $citation .= "$creator, ";
+        }
+        
+        $title = strip_formatting(metadata($this, array('Dublin Core', 'Title')));
+        if ($title) {
+            $citation .= "&#8220;$title,&#8221; ";
+        }
+        
+        $siteTitle = strip_formatting(option('site_title'));
+        if ($siteTitle) {
+            $citation .= "<em>$siteTitle</em>, ";
+        }
+        
+        $accessed = date('F j, Y');
+        $url = html_escape(record_url($this, null, true));
+        $citation .= "accessed $accessed, $url.";
+        
+        return apply_filters('item_citation', $citation, array('item' => $this));
     }
     
     /**

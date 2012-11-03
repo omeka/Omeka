@@ -1,5 +1,5 @@
 <?php if ($user = current_user()): ?>
-<div id="admin-bar">
+<nav id="admin-bar">
 <?php
 $links = array(
     array(
@@ -17,5 +17,5 @@ $links = array(
 );
 echo nav($links, 'public_navigation_admin_bar');
 ?>
-</div>
+</nav>
 <?php endif; ?>

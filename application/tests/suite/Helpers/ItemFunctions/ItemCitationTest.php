@@ -6,7 +6,7 @@
  */
  
 /**
- * Tests item_citation()
+ * Tests Item::getCitation()
  * in helpers/ItemFunctions.php
  *
  * @package Omeka
@@ -15,26 +15,26 @@
 class Omeka_Helper_ItemCitationTest extends Omeka_Test_AppTestCase
 {
     /**
-     * Test the default output of item_citation(), which should include 
+     * Test the default output of Item::getCitation(), which should include 
      * DC:Creator, DC:Title, site title, date accessed, and the absolute item 
      * URI.
      */
     public function testDefaultOutput()
     {
         $citationHtml = $this->_createItemCitationString('Item Title', 'Item Creator');
-        $this->assertEquals($citationHtml, item_citation());
+        $this->assertEquals($citationHtml, metadata('item', 'citation', array('no_escape' => true)));
     }
     
     public function testOutputWithoutCreator()
     {
         $citationHtml = $this->_createItemCitationString('Item Title');
-        $this->assertEquals($citationHtml, item_citation());
+        $this->assertEquals($citationHtml, metadata('item', 'citation', array('no_escape' => true)));
     }
     
     /**
      * Creates a test Item and returns a citation string.
      *
-     * @todo This function, like item_citation(), uses date() to generate a date
+     * @todo This function, like Item::getCitation(), uses date() to generate a date
      * accessed for the citation. This should be changed when we
      * internationalize date outputs.
      *

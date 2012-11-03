@@ -113,7 +113,7 @@ class TagsController extends Omeka_Controller_AbstractActionController
         Zend_Registry::set('total_results', $total_results);    
         
         //Plugin hook
-        fire_plugin_hook('browse_tags', array('tags' => $tags, 'for' => $for));
+        fire_plugin_hook('browse_tags', array('records' => $tags, 'object' => $for));
         
         $browse_for = $for;
         $sort = array_intersect_key($findByParams, array('sort_field' => '', 'sort_dir' => ''));
