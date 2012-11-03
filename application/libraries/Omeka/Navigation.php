@@ -293,76 +293,85 @@ class Omeka_Navigation extends Zend_Navigation
         // get filter navigation from plugins
         $filterNav = $this->createNavigationFromFilter($filterName);
         
-        // prune the expired navigation based on the filter nav
-        $this->pruneExpiredNavigation($filterNav);
+        // prune the expired navigation pages
+        $expiredPages = $this->getExpiredPagesFromNav($filterNav);
+        $this->prunePages($expiredPages);
         
         // merge filter nav into navigation
         $this->mergeNavigation($filterNav);
     }
     
     /**
-     * Prunes expired pages from this navigation, where all pages in the $nonExpiredNav are considered non-expired.
-     * When an expired page is pruned its children pages are reattached to the first non-expired ancestor page.  
+     * Returns an array of expired pages from this navigation, 
+     * where all pages in the $excludeNav are considered non-expired.
      * 
-     * @param  Omeka_Navigation $nonExpiredNav  The navigation with all non-expired pages
+     * @param  Omeka_Navigation $excludeNav  Pages from this navigation should not be pruned
+     * @return array The array of expired pages 
      */
-    public function pruneExpiredNavigation(Omeka_Navigation $nonExpiredNav)
+    public function getExpiredPagesFromNav(Omeka_Navigation $excludeNav)
     {           
-        // get non-expired page uids from $nonExpiredNav
+        // get non-expired page uids from $excludeNav
         $nonExpiredPageUids = array();
-        $iterator = new RecursiveIteratorIterator($nonExpiredNav, RecursiveIteratorIterator::SELF_FIRST);
-        foreach ($iterator as $nonExpiredPage) {
-            if (!in_array($nonExpiredPage->uid, $nonExpiredPageUids)) {
-                $nonExpiredPageUids[] = $nonExpiredPage->uid;
+        $iterator = new RecursiveIteratorIterator($excludeNav, RecursiveIteratorIterator::SELF_FIRST);
+        foreach ($iterator as $page) {
+            if (!in_array($page->uid, $nonExpiredPageUids)) {
+                $nonExpiredPageUids[] = $page->uid;
             }
         }    
         
-        // prune expired pages that were not included in the non-expired page uids
-        $this->pruneExpiredPages($nonExpiredPageUids);
-    }
-    
-    /**
-     * Prunes expired pages from this navigation, where all pages who have a uid in  
-     * $nonExpiredPageUids are considered non-expired.
-     * When an expired page is pruned its children pages are reattached to the first non-expired ancestor page.  
-     * 
-     * @param array $nonExpiredPageUids  The list uids for non-expired pages
-     */ 
-    public function pruneExpiredPages($nonExpiredPageUids)
-    {
-        // remove all pages that cannot be deleted 
-        // and whose uid's are not in $nonExpiredPageUids
-        // but reattach their children to the closest ancestor container
-        foreach($this->getExpiredPages($nonExpiredPageUids) as $expiredPage) {
-            $this->removePageRecursive($expiredPage, $this, true);
-        }
-    }
-    
-    /**
-     * Gets all expired pages from navigation.
-     * A page is expired if and only if 
-     * 1) it is non-deleteable, and
-     * 2) it is in the navigation, and
-     * 3) it's uid is not in the $nonExpiredPageUids list
-     * 
-     * @param array $nonExpiredPageUids  The list uids for non-expired pages
-     * @return array The array of expired pages.
-     */
-    public function getExpiredPages($nonExpiredPageUids)
-    {
-        // get all expired pages
-        // a page is expired if and only if 
-        // 1) it is non-deleteable, and
-        // 2) it is in the navigation, and
-        // 3) it's uid is not in the $nonExpiredPageUids list
+        // prune expired pages
+        // only pages provided by a filter (non-deleteable) should be expired
+        $otherPages = $this->getOtherPages($nonExpiredPageUids);
         $expiredPages = array();
-        $iterator = new RecursiveIteratorIterator($this, RecursiveIteratorIterator::SELF_FIRST);
-        foreach ($iterator as $page) {
-            if (!$page->can_delete && !in_array($page->uid, $nonExpiredPageUids)) {
+        foreach($otherPages as $page) {
+            if (!$page->can_delete) {
                 $expiredPages[] = $page;
             }
         }
+        
         return $expiredPages;
+    }
+    
+    /**
+     * Prunes pages from this navigation.
+     * When a page is pruned its children pages are reattached to the first non-pruneable ancestor page.
+     * @param Zend_Navigation_Page_Mvc|Omeka_Navigation_Page_Uri $page  The page to prune
+     */ 
+    public function prunePages($pages)
+    {
+        foreach($pages as $page) {
+            $this->prunePage($page);
+        }
+    }
+    
+    /**
+     * Prune page from this navigation.
+     * When a page is pruned its children pages are reattached to the first non-pruneable ancestor page.
+     * @param Zend_Navigation_Page_Mvc|Omeka_Navigation_Page_Uri $page  The page to prune
+     */ 
+    public function prunePage($page)
+    {        
+        $this->removePageRecursive($page, $this, true);
+    }
+    
+    /**
+     * Returns an array of all pages from navigation that
+     * lack a uid in $excludePageUids
+     * 
+     * @param array $excludePageUids  The list uids for pages to exclude
+     * @return array The array of other pages.
+     */
+    public function getOtherPages($excludePageUids)
+    {
+        // get other pages
+        $otherPages = array();
+        $iterator = new RecursiveIteratorIterator($this, RecursiveIteratorIterator::SELF_FIRST);
+        foreach ($iterator as $page) {
+            if (!in_array($page->uid, $excludePageUids)) {
+                $otherPages[] = $page;
+            }
+        }
+        return $otherPages;
     }  
         
     /**

@@ -31,7 +31,10 @@ class NavigationController extends Omeka_Controller_AbstractActionController
                 $this->_setOptions($form);
                 $this->_helper->flashMessenger(__('The navigation settings have been updated.'), 'success');
             } else {
-                $this->_helper->flashMessenger(__('There were errors found in your form. Please edit and resubmit.'), 'error');
+                $this->_helper->flashMessenger(__('The navigation settings were not saved because of missing or invalid values.  All changed values have been restored.'), 'error');
+                foreach($form->getMessages() as $msg) {
+                    $this->_helper->flashMessenger($msg, 'error');
+                }
             }
         }
         // Reset to "current" base uri. "revert" won't work here because
