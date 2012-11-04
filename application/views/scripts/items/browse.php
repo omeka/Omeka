@@ -41,7 +41,7 @@ echo head(array('title'=>$pageTitle,'bodyid'=>'items','bodyclass' => 'browse'));
         </div>
         <?php endif; ?>
 
-        <?php fire_plugin_hook('public_append_to_items_browse_each', array('view' => $this)); ?>
+        <?php fire_plugin_hook('public_append_to_items_browse_each', array('view' => $this, 'item' => get_current_record('item'))); ?>
 
         </div><!-- end class="item-meta" -->
     </div><!-- end class="item hentry" -->
