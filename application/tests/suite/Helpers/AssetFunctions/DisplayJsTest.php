@@ -113,4 +113,26 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
             "Script tag for inline script not found.");
         $this->assertContains($script, $output);
     }
+
+    public function testQueueJsConditional()
+    {
+        queue_js_file('search', 'javascripts', array('conditional' => 'lt IE 9'));
+
+        $output = $this->_getJsOutput(false);
+
+        $this->assertContains('<!--[if lt IE 9]>', $output);
+
+    }
+
+    public function testQueueJsStringConditional()
+    {
+        $script = 'Inline JS script.';
+        queue_js_string($script, array('conditional' => 'lt IE 9'));
+
+        $output = $this->_getJsOutput(false);
+
+        $this->assertContains('<!--[if lt IE 9]>', $output);
+        $this->assertContains($script, $output);
+    }
+
 }
