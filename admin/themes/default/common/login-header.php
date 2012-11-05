@@ -16,7 +16,7 @@
     <?php echo head_js(); ?>
 
     <!-- Plugin Stuff -->
-    <?php fire_plugin_hook('admin_theme_header'); ?>
+    <?php fire_plugin_hook('admin_theme_header', array('view'=>$this)); ?>
 </head>
 <body id="login">
 

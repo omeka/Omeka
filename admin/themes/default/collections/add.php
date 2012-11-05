@@ -10,7 +10,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
                     <div id="save" class="panel">
                         <input type="submit" class="big green button" name="submit" value="<?php echo __('Save Collection'); ?>" />
                         
-                        <?php fire_plugin_hook("admin_append_to_collections_panel_buttons", array('view'=>$this, 'collection'=> get_current_record('collection'))); ?>
+                        <?php fire_plugin_hook("admin_append_to_collections_panel_buttons", array('view'=>$this, 'collection'=>$collection)); ?>
                                                                     
                         <div id="public-featured">
                             <?php echo $this->formLabel('public', __('Public')); ?>
@@ -23,7 +23,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
                             echo $this->formCheckbox('featured', $collection->featured, array(), array('1', '0')); 
                         ?>
                         </div>
-                        <?php fire_plugin_hook("admin_append_to_collections_panel_fields", array('view'=>$this, 'collection'=> get_current_record('collection'))); ?>
+                        <?php fire_plugin_hook("admin_append_to_collections_panel_fields", array('view'=>$this, 'collection'=>$collection)); ?>
                     </div>
                 </section>
             </form>

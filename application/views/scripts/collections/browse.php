@@ -36,7 +36,7 @@ echo head(array('title'=>$pageTitle,'bodyid'=>'collections','bodyclass' => 'brow
 
     <?php echo pagination_links(); ?>
 
-    <?php fire_plugin_hook('public_append_to_collections_browse', array('view' => $this)); ?>
+    <?php fire_plugin_hook('public_append_to_collections_browse', array('collections'=>$collections, 'view' => $this)); ?>
 
 </div><!-- end primary -->
 

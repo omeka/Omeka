@@ -13,7 +13,7 @@ echo head(array('title'=>$pageTitle,'content_class' => 'vertical-nav', 'bodyclas
                     
                         <input type="submit" name="submit" class="submit big green button" id="add_item" value="<?php echo __('Add Item'); ?>" />        
                         
-                        <?php fire_plugin_hook("admin_append_to_items_panel_buttons", array('view'=>$this, 'item'=> get_current_record('item'))); ?>
+                        <?php fire_plugin_hook("admin_append_to_items_panel_buttons", array('view'=>$this, 'item'=>$item)); ?>
                         
                         <div id="public-featured">
                             <?php if ( is_allowed('Items', 'makePublic') ): ?>
@@ -43,7 +43,7 @@ echo head(array('title'=>$pageTitle,'content_class' => 'vertical-nav', 'bodyclas
                         </div>
                         
                         <!--  append_to_item_panel_fields hook -->
-                        <?php fire_plugin_hook("admin_append_to_items_panel_fields", array('view'=>$this, 'item'=> get_current_record('item'))); ?>
+                        <?php fire_plugin_hook("admin_append_to_items_panel_fields", array('view'=>$this, 'item'=>$item)); ?>
                         
                         <!-- end append_to_item_panel_fields hook -->                        
                         
