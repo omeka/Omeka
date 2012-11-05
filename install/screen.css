@@ -76,7 +76,6 @@ a:link {
 
 p, li {
     font-size: 14px;
-    line-height: 1.5em;
 }
 
 ol { padding: 0 0 0 20px; }
@@ -199,6 +198,14 @@ ol { padding: 0 0 0 20px; }
         clear: both;
         margin: 0 0 10px 0;
     }
+
+    .field:after {
+        content: "";
+        display: block;
+        height: 0;
+        overflow: hidden;
+        clear: both;
+    }
             
         .field label {
             clear: left;
@@ -206,7 +213,6 @@ ol { padding: 0 0 0 20px; }
             font-weight: bold;
             float: left;
             margin: 0;
-            padding: 7px 0;
         }
             
         .field select {
@@ -215,7 +221,7 @@ ol { padding: 0 0 0 20px; }
         }
     
     .inputs {
-        margin: 0 0 5px 0;
+        margin: 0 0 20px 0;
     }
             
         .inputs select {
