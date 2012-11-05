@@ -80,18 +80,18 @@ Omeka.showAdvancedForm = function () {
     var advancedForm = jQuery('#advanced-form');
     if (advancedForm) {
         jQuery('#search-form input[type=submit]').addClass("blue button with-advanced").after('<a href="#" id="advanced-search" class="blue button">Advanced Search</a>');
-        advanced_form.click(function (event) {
+        advancedForm.click(function (event) {
             event.stopPropagation();
         });
         jQuery("#advanced-search").click(function (event) {
             event.preventDefault();
             event.stopPropagation();
-            advanced_form.fadeToggle();
+            advancedForm.fadeToggle();
             jQuery(document).click(function (event) {
                 if (event.target.id == 'query') {
                     return;
                 }
-                advanced_form.fadeOut();
+                advancedForm.fadeOut();
                 jQuery(this).unbind(event);
             });
         });
