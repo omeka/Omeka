@@ -46,17 +46,17 @@ Omeka.Navigation.updateSelectHomepageOptions = function () {
 };
 
 Omeka.Navigation.updateHideButtons = function () {
-    jQuery('div.sortable-item').each(function() {
+    jQuery('div.sortable-item').each(function () {
         var headerDiv = jQuery(this); 
         if (!headerDiv.find('.drawer').length) {
             headerDiv.append('<div class="drawer"></div>');
             headerDiv.find('.drawer')
-                .click(function(event) {
+                .click(function (event) {
                     event.preventDefault();
                     jQuery(this).parent().next().toggle();
                     jQuery(this).toggleClass('closed');
                 })
-                .mousedown(function(event) {
+                .mousedown(function (event) {
                     event.stopPropagation();
                 });
             headerDiv.next().hide();
@@ -65,12 +65,12 @@ Omeka.Navigation.updateHideButtons = function () {
 };
 
 Omeka.Navigation.updateVisitButtons = function () {
-    jQuery('div.sortable-item > input[type="checkbox"]').each(function() {
+    jQuery('div.sortable-item > input[type="checkbox"]').each(function () {
         var hiddenInfo = jQuery.parseJSON(jQuery(this).val());
         var buttonsDiv = jQuery(this).parent().next().find('div.main_link_buttons'); 
         if (!buttonsDiv.find('.navigation_main_list_visit').length) {
             buttonsDiv.append('<a class="navigation_main_list_visit blue button" href="' + hiddenInfo.uri + '">Visit</a>');
-            buttonsDiv.find('.navigation_main_list_visit').click(function(event) {
+            buttonsDiv.find('.navigation_main_list_visit').click(function (event) {
                 event.preventDefault();
                 var url = jQuery(this).parent().parent().find('.main_link_uri').val();
                 window.open(url);
@@ -80,11 +80,11 @@ Omeka.Navigation.updateVisitButtons = function () {
 };
 
 Omeka.Navigation.updateDeleteButtons = function () {
-    jQuery('input.can_delete_nav_link').each(function() {
+    jQuery('input.can_delete_nav_link').each(function () {
         var buttonsDiv = jQuery(this).parent().next().find('div.main_link_buttons'); 
         if (!buttonsDiv.children('a[class="navigation_main_list_delete red button"]').length) {
             buttonsDiv.append('<a class="navigation_main_list_delete red button" href="">Delete</a>');
-            buttonsDiv.children('.navigation_main_list_delete').click(function(event) {
+            buttonsDiv.children('.navigation_main_list_delete').click(function (event) {
                 event.preventDefault();
                 jQuery(this).parent().parent().parent().parent().remove(); // removes li element
                 Omeka.Navigation.updateNavList();
@@ -95,7 +95,7 @@ Omeka.Navigation.updateDeleteButtons = function () {
 };
 
 Omeka.Navigation.updateNavLinkEditForms = function () {
-    jQuery( 'div.sortable-item input[type="checkbox"]' ).each(function() {
+    jQuery( 'div.sortable-item input[type="checkbox"]' ).each(function () {
         var hiddenInfo = jQuery.parseJSON(jQuery(this).val());
         var bodyDiv = jQuery(this).parent().next(); 
         bodyDiv.find('.navigation-label').val(hiddenInfo.label);
@@ -108,7 +108,7 @@ Omeka.Navigation.updateNavLinkEditForms = function () {
 
 Omeka.Navigation.addNewNavLinkForm = function () {
     // add the new nav link add button
-    jQuery( '#new_nav_link_button_link' ).click(function(event) {
+    jQuery( '#new_nav_link_button_link' ).click(function (event) {
         event.preventDefault();
         var n_label = jQuery( '#new_nav_link_label' ).val();
         var n_uri = jQuery( '#new_nav_link_uri' ).val();
@@ -136,16 +136,16 @@ Omeka.Navigation.addNewNavLinkForm = function () {
 };
 
 Omeka.Navigation.setUpFormSubmission = function () {
-    jQuery('#navigation_form').submit(function(event) {
+    jQuery('#navigation_form').submit(function (event) {
         // add ids to li elements so that we can pull out the parent/child relationships
-        jQuery('#navigation_main_list li').each(function(index) {
+        jQuery('#navigation_main_list li').each(function (index) {
             jQuery(this).attr('id', "list_" + index);
         });
         var parentChildData = jQuery("#navigation_main_list").nestedSortable('toArray', {startDepthCount: 0});
         
         // get link data
         var linkData = [];
-        jQuery('div.sortable-item > input[type="checkbox"]').each(function(index) {
+        jQuery('div.sortable-item > input[type="checkbox"]').each(function (index) {
             var hiddenInfo = jQuery.parseJSON(jQuery(this).val());
             var bodyDiv = jQuery(this).parent().next();
             var newLabel = jQuery.trim(bodyDiv.find('.navigation-label').val());

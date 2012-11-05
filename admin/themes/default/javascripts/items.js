@@ -22,7 +22,7 @@ Omeka.Items.enableSorting = function () {
     });
     jQuery( ".sortable" ).disableSelection();
     
-    jQuery( ".sortable input[type=checkbox]" ).each( function() {
+    jQuery( ".sortable input[type=checkbox]" ).each(function () {
         jQuery(this).css("display", "none");
     });
 };
