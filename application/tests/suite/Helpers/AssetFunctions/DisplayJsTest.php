@@ -85,10 +85,10 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
 
     public function testQueueJs()
     {
-        queue_js_file(array('search', 'tiny_mce/tiny_mce'));
+        queue_js_file(array('items-search', 'tiny_mce/tiny_mce'));
 
         $scripts = array(
-            self::ASSET_PATH_ROOT . '/javascripts/search.js',
+            self::ASSET_PATH_ROOT . '/javascripts/items-search.js',
             self::ASSET_PATH_ROOT . '/javascripts/tiny_mce/tiny_mce.js'
         );
 
@@ -116,7 +116,7 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
 
     public function testQueueJsConditional()
     {
-        queue_js_file('search', 'javascripts', array('conditional' => 'lt IE 9'));
+        queue_js_file('items-search', 'javascripts', array('conditional' => 'lt IE 9'));
 
         $output = $this->_getJsOutput(false);
 
