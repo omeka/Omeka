@@ -11,15 +11,16 @@
     queue_css_file('media/768min', 'only screen and (min-width: 768px) and (max-width: 959px)');
     queue_css_file('media/767max', 'only screen and (max-width: 767px)');
     queue_css_file('media/479max', 'only screen and (max-width: 479px)');
+    queue_css_url('https://fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic|Cabin:400,700,400italic,700italic');
+
     queue_js_file(array('respond.min','globals','modernizr-min','selectivizr-min'));
 ?>
 
 <!-- Plugin Stuff -->
-<?php fire_plugin_hook('admin_theme_header'); ?>
+<?php fire_plugin_hook('admin_theme_header', array('view'=>$this)); ?>
 
 <!-- Stylesheets -->
 <?php echo head_css(); ?>
-<link href='http://fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic|Cabin:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
 <!-- JavaScripts -->
 <?php echo head_js(); ?>

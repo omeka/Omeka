@@ -938,16 +938,33 @@ function format_date($date, $format = Zend_Date::DATE_MEDIUM)
  * member will be treated like a file.
  * @param string $dir Directory to search for the file. Keeping the default is 
  * recommended.
+ * @param array $options An array of options.
  */
-function queue_js_file($file, $dir = 'javascripts')
+function queue_js_file($file, $dir = 'javascripts', $options = array())
 {
     if (is_array($file)) {
         foreach ($file as $singleFile) {
-            queue_js_file($singleFile, $dir);
+            queue_js_file($singleFile, $dir, $options);
         }
         return;
     }
-    get_view()->headScript()->appendFile(src($file, $dir, 'js'));
+
+    queue_js_url(src($file, $dir, 'js'), $options);
+}
+
+/**
+ * Declare a URL to a JavaScript file to be used on the page.
+ *
+ * This needs to be called either before head() or in a plugin_header hook.
+ *
+ * @package Omeka\Function\View\Head
+ * @see head_js()
+ * @param string $string URL to script.
+ * @param array $options An array of options.
+ */
+function queue_js_url($url, $options = array())
+{
+    get_view()->headScript()->appendFile($url, null, $options);
 }
 
 /**
@@ -959,10 +976,11 @@ function queue_js_file($file, $dir = 'javascripts')
  * @package Omeka\Function\View\Head
  * @see head_js()
  * @param string $string JavaScript string to include.
+ * @param array $options An array of options.
  */
-function queue_js_string($string)
+function queue_js_string($string, $options = array())
 {
-    get_view()->headScript()->appendScript($string);
+    get_view()->headScript()->appendScript($string, null, $options);
 }
 
 /**
@@ -989,7 +1007,25 @@ function queue_css_file($file, $media = 'all', $conditional = false, $dir = 'css
         }
         return;
     }
-    get_view()->headLink()->appendStylesheet(css_src($file, $dir), $media, $conditional);
+    queue_css_url(css_src($file, $dir), $media, $conditional);
+}
+
+/**
+ * Declare a URL to a stylesheet to be used on the page and included in the
+ * page's head.
+ *
+ * This needs to be called either before head() or in a plugin_header hook.
+ *
+ * @package Omeka\Function\View\Head
+ * @see head_css
+ * @param string $string URL to stylesheet.
+ * @param string $media CSS media declaration, defaults to 'all'.
+ * @param string|bool $conditional IE-style conditional comment, used generally 
+ * to include IE-specific styles. Defaults to false.
+ */
+function queue_css_url($url, $media = 'all', $conditional = false)
+{
+    get_view()->headLink()->appendStylesheet($url, $media, $conditional);
 }
 
 /**
@@ -1043,8 +1079,8 @@ function head_js($includeDefaults = true)
             $headScript->prependFile(src('jquery-ui', $dir, 'js'))
                        ->prependFile(src('jquery', $dir, 'js'));
         } else {
-            $headScript->prependFile('https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js')
-                       ->prependFile('https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js');
+            $headScript->prependFile('//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js')
+                       ->prependFile('//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js');
         }
     }
     return $headScript;
@@ -1963,108 +1999,6 @@ function get_previous_item($item=null)
 }
 
 /**
- * Return a valid citation for the current item.
- *
- * Generally follows Chicago Manual of Style note format for webpages. 
- * Implementers can use the item_citation filter to return a customized citation.
- *
- * @package Omeka\Function\View\Body\Item
- * @param Item|null $item Check for this specific item record (current item if null).
- * @return string
- */
-function item_citation($item = null)
-{
-    if (!$item) {
-        $item = get_current_record('item');
-    }
-    
-    $citation = '';
-    
-    $creators = metadata($item, array('Dublin Core', 'Creator'), array('all' => true));
-    // Strip formatting and remove empty creator elements.
-    $creators = array_filter(array_map('strip_formatting', $creators));
-    if ($creators) {
-        switch (count($creators)) {
-            case 1:
-                $creator = $creators[0];
-                break;
-            case 2:
-                $creator = "{$creators[0]} and {$creators[1]}";
-                break;
-            case 3:
-                $creator = "{$creators[0]}, {$creators[1]}, and {$creators[2]}";
-                break;
-            default:
-                $creator = "{$creators[0]} et al.";
-        }
-        $citation .= "$creator, ";
-    }
-    
-    $title = strip_formatting(metadata($item, array('Dublin Core', 'Title')));
-    if ($title) {
-        $citation .= "&#8220;$title,&#8221; ";
-    }
-    
-    $siteTitle = strip_formatting(option('site_title'));
-    if ($siteTitle) {
-        $citation .= "<em>$siteTitle</em>, ";
-    }
-    
-    $accessed = date('F j, Y');
-    $url = html_escape(record_url($item, null, true));
-    $citation .= "accessed $accessed, $url.";
-    
-    return apply_filters('item_citation', $citation, array('item' => $item));
-}
-
-/**
- * Determine whether the item has any files assigned to it.
- *
- * @package Omeka\Function\View\Body\Item
- * @uses Item::hasFiles()
- * @param Item|null $item Check for this specific item record (current item if null).
- * @return boolean
- */
-function item_has_files($item = null)
-{
-    if (!$item) {
-        $item = get_current_record('item');
-    }
-    return $item->hasFiles();
-}
-
-/**
- * Determine whether the item has tags assigned to it.
- * 
- * @package Omeka\Function\View\Body\Item
- * @param Item|null $item Check for this specific item record (current item if null).
- * @return boolean
- */
-function item_has_tags($item = null)
-{
-    if (!$item) {
-        $item = get_current_record('item');
-    }
-    return has_tags($item);
-}
-
-/**
- * Determine whether the item has a thumbnail image that it can display.
- *
- * @package Omeka\Function\View\Body\Item
- * @uses Item::hasThumbnail()
- * @param Item|null $item Check for this specific item record (current item if null).
- * @return bool
- */
-function item_has_thumbnail($item = null)
-{
-    if (!$item) {
-        $item = get_current_record('item');
-    }
-    return $item->hasThumbnail();
-}
-
-/**
  * Return a customized item image tag.
  *
  * @package Omeka\Function\View\Body\Item\File
@@ -2162,7 +2096,7 @@ function random_featured_items($num = 5, $hasImage = null)
             $itemTitle = metadata($randomItem, array('Dublin Core', 'Title'));
             $html .= '<h3>' . link_to_item($itemTitle, array(), 'show', $randomItem) . '</h3>';
             
-            if (item_has_thumbnail($randomItem)) {
+            if (metadata($randomItem, 'has thumbnail')) {
                 $html .= link_to_item(item_image('square_thumbnail', array(), 0, $randomItem), array('class'=>'image'), 'show', $randomItem);
             }
             if ($itemDescription = metadata($randomItem, array('Dublin Core', 'Description'), array('snippet'=>150))) {
@@ -2618,12 +2552,13 @@ function public_nav_items(array $navArray = null, $maxDepth = 0)
             array(
                 'label' =>__('Browse All'),
                 'uri' => url('items/browse'),
-            ),
-            array(
+            ));
+        if (total_records('Tag')) {
+            $navArray[] = array(
                 'label' => __('Browse by Tag'),
                 'uri' => url('items/tags')
-            )
-        );
+            );
+        }
     }
     return nav($navArray, 'public_navigation_items');
 }
@@ -2961,22 +2896,6 @@ function tag_string($recordOrTags = null, $link = 'items/browse', $delimiter = n
         }
     }
     return join(html_escape($delimiter), $tagStrings);
-}
-
-/**
- * Check whether the specified record has tags.
- *
- * @package Omeka\Function\View\Body
- * @param Omeka_Record_AbstractRecord $record
- * @return bool
- */
-function has_tags(Omeka_Record_AbstractRecord $record)
-{
-    try {
-        return (bool) $record->getTags();
-    } catch (BadMethodCallException $e) {
-        return false;
-    }
 }
 
 /**

@@ -10,21 +10,7 @@ if ($collectionTitle == '') {
 <div id="primary">
     <h1><?php echo $collectionTitle; ?></h1>
 
-    <div id="description" class="element">
-        <h2><?php echo __('Description'); ?></h2>
-        <div class="element-text"><?php echo text_to_paragraphs(metadata('collection', array('Dublin Core', 'Description'))); ?></div>
-    </div><!-- end description -->
-
-    <?php if ($collection->hasContributor()): ?>
-    <div id="contributors" class="element">
-        <h2><?php echo __('Contributor(s)'); ?></h2>
-        <div class="element-text">
-            <ul>
-                <li><?php echo metadata('collection', array('Dublin Core', 'Contributor'), array('all'=>true, 'delimiter'=>'</li><li>')); ?></li>
-            </ul>
-        </div>
-    </div><!-- end contributors -->
-    <?php endif; ?>
+    <?php echo all_element_texts('collection'); ?>
 
     <p class="view-items-link"><?php echo link_to_items_browse(__('View the items in %s', $collectionTitle), array('collection' => metadata('collection', 'id'))); ?></p>
 
@@ -36,7 +22,7 @@ if ($collectionTitle == '') {
         <div class="item hentry">
             <h3><?php echo link_to_item($itemTitle, array('class'=>'permalink')); ?></h3>
 
-            <?php if (item_has_thumbnail()): ?>
+            <?php if (metadata('item', 'has thumbnail')): ?>
             <div class="item-img">
                 <?php echo link_to_item(item_image('square_thumbnail', array('alt' => $itemTitle))); ?>
             </div>
@@ -55,7 +41,7 @@ if ($collectionTitle == '') {
         <?php endforeach; ?>
     </div><!-- end collection-items -->
 
-    <?php fire_plugin_hook('public_append_to_collections_show', array('view' => $this)); ?>
+    <?php fire_plugin_hook('public_append_to_collections_show', array('view' => $this, 'collection' => $collection)); ?>
 
 </div><!-- end primary -->
 

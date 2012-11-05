@@ -62,7 +62,7 @@ Omeka.saveScroll = function () {
         topPadding = 62,
         $contentDiv = jQuery("#content");
     if (document.getElementById("save")) {
-        $window.scroll(function() {
+        $window.scroll(function () {
             if($window.scrollTop() > offset.top && $window.width() > 767 && ($window.height() - topPadding - 85) >  $save.height()) {
                 $save.stop().animate({
                     marginTop: $window.scrollTop() - offset.top + topPadding
@@ -77,29 +77,23 @@ Omeka.saveScroll = function () {
 };
 
 Omeka.showAdvancedForm = function () {
-    if (jQuery("#advanced-form")) {
+    var advancedForm = jQuery('#advanced-form');
+    if (advancedForm) {
         jQuery('#search-form input[type=submit]').addClass("blue button with-advanced").after('<a href="#" id="advanced-search" class="blue button">Advanced Search</a>');
-        jQuery('#search-form input[type=text]').addClass("blue button with-advanced");
-        var $advanced_form = jQuery("#advanced-form");
-        jQuery("#advanced-search").click( function(event) {
+        advancedForm.click(function (event) {
             event.stopPropagation();
-            if($advanced_form.css("display") == "none") {
-                $advanced_form.fadeIn();
-            } else {
-                $advanced_form.fadeOut();
-            }
-            jQuery("#search-form input[type=text]").click( function(event) {
-               event.stopPropagation(); 
-            });
-            $advanced_form.click( function(event) {
-               event.stopPropagation(); 
-            });
-            jQuery(document).click( function() {
-                if($advanced_form.css("display") == "block") {
-                    $advanced_form.fadeOut();
+        });
+        jQuery("#advanced-search").click(function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            advancedForm.fadeToggle();
+            jQuery(document).click(function (event) {
+                if (event.target.id == 'query') {
+                    return;
                 }
+                advancedForm.fadeOut();
+                jQuery(this).unbind(event);
             });
-            
         });
     } else {
         jQuery('#search-form input[type=submit]').addClass("blue button");

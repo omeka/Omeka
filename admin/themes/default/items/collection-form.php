@@ -11,5 +11,3 @@
     ?>
 </div>
 </div>
-
-<?php fire_plugin_hook('admin_append_to_items_form_collection', array('item' => $item)); ?>

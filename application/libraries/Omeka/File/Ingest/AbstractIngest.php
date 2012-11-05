@@ -259,7 +259,6 @@ abstract class Omeka_File_Ingest_AbstractIngest
                 $file->addElementTextsByArray($elementMetadata);
             }
             
-            fire_plugin_hook('after_upload_file', array('file' => $file, 'item' => $this->_item));
             fire_plugin_hook('after_ingest_file', array('file' => $file, 'item' => $this->_item));
             
             $this->_item->addFile($file);

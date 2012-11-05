@@ -4,7 +4,7 @@ echo head(array('title'=>$pageTitle,'bodyid'=>'collections','bodyclass' => 'brow
 ?>
 <div id="primary">
     <h1><?php echo $pageTitle; ?></h1>
-    <div class="pagination"><?php echo pagination_links(); ?></div>
+    <?php echo pagination_links(); ?>
 
     <?php foreach (loop('collections') as $collection): ?>
     <div class="collection">
@@ -29,12 +29,14 @@ echo head(array('title'=>$pageTitle,'bodyid'=>'collections','bodyclass' => 'brow
 
         <p class="view-items-link"><?php echo link_to_items_browse(__('View the items in %s', metadata('collection', array('Dublin Core', 'Title'))), array('collection' => metadata('collection', 'id'))); ?></p>
 
-        <?php fire_plugin_hook('public_append_to_collections_browse_each', array('view' => $this)); ?>
+        <?php fire_plugin_hook('public_append_to_collections_browse_each', array('view' => $this, $collection => $collection)); ?>
 
     </div><!-- end class="collection" -->
     <?php endforeach; ?>
 
-    <?php fire_plugin_hook('public_append_to_collections_browse', array('view' => $this)); ?>
+    <?php echo pagination_links(); ?>
+
+    <?php fire_plugin_hook('public_append_to_collections_browse', array('collections'=>$collections, 'view' => $this)); ?>
 
 </div><!-- end primary -->
 

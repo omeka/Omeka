@@ -60,12 +60,12 @@ class Omeka_Form_Navigation extends Omeka_Form
      *
      */
     public function saveFromPost() 
-    {
-        // Save the homepage uri
-        $this->_saveHomepageFromPost();
-        
+    {   
         // Save the navigation from post                 
         $this->_saveNavigationFromPost();
+        
+        // Save the homepage uri
+        $this->_saveHomepageFromPost();
         
         // Reset the form elements to display the updated navigation
         $this->_initElements();
@@ -170,7 +170,7 @@ class Omeka_Form_Navigation extends Omeka_Form
         foreach($iterator as $page) {
             $pageLinks[$page->getHref()] = $page->getLabel();
         }
-        
+                        
         $this->addElement('select', self::SELECT_HOMEPAGE_ELEMENT_ID, array(
             'label' => __('Select a Homepage'),
             'multiOptions' => $pageLinks,
@@ -202,10 +202,10 @@ class Omeka_Form_Navigation extends Omeka_Form
         $nav = new Omeka_Navigation();
         $nav->loadAsOption(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME);
                             
-        if ($pageLinks = $this->getValue(self::HIDDEN_ELEMENT_ID) ) {            
-                
+        if ($pageLinks = $this->getValue(self::HIDDEN_ELEMENT_ID)) {            
+            
             if ($pageLinks = json_decode($pageLinks, true)) {
-                                                                                
+                                                                                                
                 // add and update the pages in the navigation
                 $pageOrder = 0;
                 $pageUids = array();
@@ -253,9 +253,17 @@ class Omeka_Form_Navigation extends Omeka_Form
                         }
                     }
                 }
-                                                
-                // remove expired pages from navigation
-                $nav->pruneExpiredPages($pageUids);
+                                                                
+                // prune expired pages from navigation
+                // these pages must be deletable
+                $otherPages = $nav->getOtherPages($pageUids);                
+                $expiredPages = array();
+                foreach($otherPages as $otherPage) {
+                    if ($otherPage->can_delete) {
+                        $expiredPages[] = $otherPage;
+                    }
+                }
+                $nav->prunePages($expiredPages);                
             }
         }
 
@@ -270,6 +278,20 @@ class Omeka_Form_Navigation extends Omeka_Form
     protected function _saveHomepageFromPost()
     {
         $homepageUri = $this->getValue(self::SELECT_HOMEPAGE_ELEMENT_ID);
+        
+        // make sure the homepageUri still exists in the navigation
+        $pageExists = false;
+        $iterator = new RecursiveIteratorIterator($this->_nav, RecursiveIteratorIterator::SELF_FIRST);
+        foreach($iterator as $page) {
+            if ($page->getHref() == $homepageUri) {
+                $pageExists = true;
+                break;
+            }
+        }
+        
+        if (!$pageExists) {
+            $homepageUri = '/';
+        }
         set_option(self::HOMEPAGE_URI_OPTION_NAME, $homepageUri); 
     }
     
@@ -288,5 +310,62 @@ class Omeka_Form_Navigation extends Omeka_Form
           'visible' => $page->isVisible(),
         );
         return json_encode($hiddenInfo);
+    }
+    
+    /**
+     * Validate the form
+     *
+     * @param  array $data
+     * @return boolean
+     */
+    public function isValid($data)
+    {
+        if (!parent::isValid($data)) {
+            return false;
+        }
+        
+        $hasErrors = false;
+        $missingLabel = false;
+        $missingURI = false;
+        $duplicateURI = false;
+        $uids = array();
+        if ($pageLinks = $this->getValue(self::HIDDEN_ELEMENT_ID) ) {
+            if ($pageLinks = json_decode($pageLinks, true)) {                                                                 
+                foreach($pageLinks as $pageLink) {
+                    
+                    if (!$missingLabel && trim($pageLink['label']) == '') {
+                        $this->addError('All navigation links must have both labels.');
+                        $hasErrors = true;
+                        $missingLabel = true;
+                    }
+                    if (!$missingURI && trim($pageLink['uri']) == '') {
+                        $this->addError('All navigation links must have URIs.');
+                        $hasErrors = true;
+                        $missingURI = true;
+                    }
+                    if (trim($pageLink['uri']) != '') {
+                        try {
+                            $page = new Omeka_Navigation_Page_Uri();                    
+                            $page->setHref($pageLink['uri']);
+                            $uid = $this->_nav->createPageUid($page->getHref());
+                            if (!in_array($uid, $uids)) {
+                                $uids[] = $uid;
+                            } else {
+                                if (!$duplicateURI) {
+                                    $this->addError('All navigation links must have different URIs.');
+                                    $duplicateURI = true;
+                                    $hasErrors = true;
+                                }
+                            }
+                            
+                        } catch (Omeka_Navigation_Page_Uri_Exception $e) {
+                            $this->addError('Invalid URI for "' . $pageLink['label'] . '" navigation link:  "' . $pageLink['uri'] . '"');
+                            $hasErrors = true;
+                        }
+                    }
+                }
+            }
+        }
+        return !$hasErrors;
     }
 }

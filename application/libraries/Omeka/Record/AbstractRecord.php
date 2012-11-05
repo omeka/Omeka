@@ -338,8 +338,19 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
      */
     public function getProperty($property)
     {
-        if (in_array($property, $this->getTable()->getColumns())) {
-            return $this->$property;
+        switch ($property) {
+            case 'has_tags':
+                try {
+                    return (bool) $this->getTags();
+                } catch (BadMethodCallException $e) {
+                    return false;
+                }
+                break;
+            default:
+                if (in_array($property, $this->getTable()->getColumns())) {
+                    return $this->$property;
+                }
+                break;
         }
         throw new InvalidArgumentException(__("'%s' is an invalid special value.", $property));
     }

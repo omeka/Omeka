@@ -44,7 +44,7 @@
     <div class="info panel">
         <h4><?php echo __('Bibliographic Citation'); ?></h4>
         <div>
-            <p><?php echo item_citation();?></p>
+            <p><?php echo metadata('item', 'citation', array('no_escape' => true));?></p>
         </div>
     </div>
 
@@ -55,7 +55,7 @@
         </div>
     </div>
 
-    <?php if (item_has_tags()): ?>
+    <?php if (metadata('item', 'has tags')): ?>
     <div class="tags panel">
         <h4><?php echo __('Tags'); ?></h4>
         <div id="tag-cloud">
@@ -67,7 +67,7 @@
     <div class="file-metadata panel">
         <h4><?php echo __('View File Metadata'); ?></h4>
         <div id="file-list">
-            <?php if (!item_has_files()):?>
+            <?php if (!metadata('item', 'has files')):?>
                 <p><?php echo __('There are no files for this item yet.');?> <?php echo link_to_item(__('Add a File'), array(), 'edit'); ?>.</p>
             <?php else: ?>
                 <ul>
@@ -84,17 +84,18 @@
         <div><?php echo output_format_list(); ?></div>
     </div>
 
-
+<?php fire_plugin_hook('admin_append_to_items_show_sidebar', array('item' => $item, 'view' => $this)); ?>
 </div>
 
 <div class="seven columns alpha">
     <?php echo flash(); ?>            
-        <?php if (item_has_files()): ?>
+        <?php if (metadata('item', 'has files')): ?>
         <div id="item-images">
         <?php echo files_for_item(array('imageSize' => 'square_thumbnail'), array('class' => 'admin-thumb panel')); ?> 
         </div>
         <?php endif; ?>
     <?php echo all_element_texts('item'); ?>
+    <?php fire_plugin_hook('admin_append_to_items_show_content', array('item' => $item, 'view' => $this)); ?>
 </div>
 
 </div>        
