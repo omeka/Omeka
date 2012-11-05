@@ -949,7 +949,22 @@ function queue_js_file($file, $dir = 'javascripts', $options = array())
         return;
     }
 
-    get_view()->headScript()->appendFile(src($file, $dir, 'js'), null, $options);
+    queue_js_url(src($file, $dir, 'js'), $options);
+}
+
+/**
+ * Declare a URL to a JavaScript file to be used on the page.
+ *
+ * This needs to be called either before head() or in a plugin_header hook.
+ *
+ * @package Omeka\Function\View\Head
+ * @see head_js()
+ * @param string $string URL to script.
+ * @param array $options An array of options.
+ */
+function queue_js_url($url, $options = array())
+{
+    get_view()->headScript()->appendFile($url, null, $options);
 }
 
 /**
@@ -992,7 +1007,25 @@ function queue_css_file($file, $media = 'all', $conditional = false, $dir = 'css
         }
         return;
     }
-    get_view()->headLink()->appendStylesheet(css_src($file, $dir), $media, $conditional);
+    queue_css_url(css_src($file, $dir), $media, $conditional);
+}
+
+/**
+ * Declare a URL to a stylesheet to be used on the page and included in the
+ * page's head.
+ *
+ * This needs to be called either before head() or in a plugin_header hook.
+ *
+ * @package Omeka\Function\View\Head
+ * @see head_css
+ * @param string $string URL to stylesheet.
+ * @param string $media CSS media declaration, defaults to 'all'.
+ * @param string|bool $conditional IE-style conditional comment, used generally 
+ * to include IE-specific styles. Defaults to false.
+ */
+function queue_css_url($url, $media = 'all', $conditional = false)
+{
+    get_view()->headLink()->appendStylesheet($url, $media, $conditional);
 }
 
 /**
