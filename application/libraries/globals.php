@@ -938,16 +938,18 @@ function format_date($date, $format = Zend_Date::DATE_MEDIUM)
  * member will be treated like a file.
  * @param string $dir Directory to search for the file. Keeping the default is 
  * recommended.
+ * @param array $options An array of options.
  */
-function queue_js_file($file, $dir = 'javascripts')
+function queue_js_file($file, $dir = 'javascripts', $options = array())
 {
     if (is_array($file)) {
         foreach ($file as $singleFile) {
-            queue_js_file($singleFile, $dir);
+            queue_js_file($singleFile, $dir, $options);
         }
         return;
     }
-    get_view()->headScript()->appendFile(src($file, $dir, 'js'));
+
+    get_view()->headScript()->appendFile(src($file, $dir, 'js'), null, $options);
 }
 
 /**
@@ -959,10 +961,11 @@ function queue_js_file($file, $dir = 'javascripts')
  * @package Omeka\Function\View\Head
  * @see head_js()
  * @param string $string JavaScript string to include.
+ * @param array $options An array of options.
  */
-function queue_js_string($string)
+function queue_js_string($string, $options = array())
 {
-    get_view()->headScript()->appendScript($string);
+    get_view()->headScript()->appendScript($string, null, $options);
 }
 
 /**
