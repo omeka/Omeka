@@ -2,42 +2,44 @@ if (!Omeka) {
     var Omeka = {};
 }
 
-Omeka.ElementSets = {
+Omeka.ElementSets = {};
+
+(function ($) {
     /**
      * Enable drag and drop sorting for elements.
      */
-    enableSorting: function () {
-        jQuery('.sortable').sortable({
+    Omeka.ElementSets.enableSorting = function () {
+        $('.sortable').sortable({
             items: 'li.element',
             forcePlaceholderSize: true,
             forceHelperSize: true,
             placeholder: 'ui-sortable-highlight',
             update: function (event, ui) {
-                jQuery(this).find('.element-order').each(function (index) {
-                    jQuery(this).val(index + 1);
+                $(this).find('.element-order').each(function (index) {
+                    $(this).val(index + 1);
                 });
             }
         });
-    },
+    };
 
     /**
      * Add link that collapses and expands content.
      */
-    addHideButtons: function () {
-        jQuery('.sortable .drawer-contents').each(function () {
-            jQuery(this).hide();
+    Omeka.ElementSets.addHideButtons = function () {
+        $('.sortable .drawer-contents').each(function () {
+            $(this).hide();
         });
-        jQuery('div.sortable-item').each(function () {
-            jQuery(this).append('<div class="drawer"></div>');
+        $('div.sortable-item').each(function () {
+            $(this).append('<div class="drawer"></div>');
         });
-        jQuery('.drawer')
+        $('.drawer')
             .click(function (event) {
                 event.preventDefault();
-                jQuery(event.target).parent().next().toggle();
-                jQuery(this).toggleClass('opened');
+                $(event.target).parent().next().toggle();
+                $(this).toggleClass('opened');
             })
             .mousedown(function (event) {
                 event.stopPropagation();
             });
-    }
-};
+    };
+})(jQuery);

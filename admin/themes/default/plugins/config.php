@@ -1,16 +1,15 @@
 <?php
 $pageTitle = __('Configure the &#8220;%s&#8221; Plugin', $plugin->getDisplayName());
-echo head(array('title'=>$pageTitle, 'bodyclass'=>'plugins')); ?>
-        
-            <div class="six columns">
-
-            <?php echo flash(); ?>
-        
-            <form method="post">
-                <?php echo $pluginBroker->callHook('config_form', array(), $plugin); ?>
-                <input type="submit" name="install_plugin" value="<?php echo __('Save Changes'); ?>" class="submit" />
-            </form>
-            
-            </div>
-
+echo head(array('title' => $pageTitle, 'bodyclass' => 'plugins')); ?>
+<?php echo flash(); ?>
+<form method="post">
+<section class="seven columns alpha">
+    <?php echo $pluginBroker->callHook('config_form', array(), $plugin); ?>
+</section>
+<section class="three columns omega">
+    <div id="save" class="panel">
+        <?php echo $this->formSubmit('install_plugin', 'Save Changes', array('class' => 'submit big green button')); ?>
+    </div>
+</section>
+</form>
 <?php echo foot(); ?>

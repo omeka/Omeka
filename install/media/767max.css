@@ -1,21 +1,12 @@
-/* Table of Contents
-==================================================
-    #Global Navigation
-    #Content */
-
-
-/* Global Navigation
-================================================== */
-
 body {
-    background-image: url('../../images/content_bg.jpg');
+    background-image: url('../images/content_bg.jpg');
     }
-
-/* Content
-==================================================*/
 
 #content {
     border: 0;
-    box-shadow: 0 0 0 transparent;
     padding: 0;
+    box-shadow: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        -o-box-shadow: none;
     }
