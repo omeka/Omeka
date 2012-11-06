@@ -1,8 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Omeka" basedir=".">
-    <property name="lang.dir" location="application/languages" />
+    <property name="lang.dir" location="application/languages"/>
+    <property name="dist" location="dist"/>
 
-    <target name="changeme" description="Copy .changeme files to their proper locations.">
+    <target name="dist" description="Create the dist directory.">
+        <mkdir dir="${dist}"/>
+    </target>
+
+    <target name="get-version" unless="version">
+        <input addproperty="version" message="Omeka version number:"/>
+    </target>
+
+    <target name="zip" depends="dist,changeme,get-version"
+        description="Create a zip of Omeka.">
+        <zip destfile="${dist}/omeka-${version}.zip">
+            <zipfileset dir="." prefix="omeka-${version}">
+                <exclude name="**/*.changeme"/>
+                <exclude name="application/logs/errors.log.empty"/>
+                <exclude name="**/.tx/**"/>
+                <exclude name="dist/**"/>
+                <exclude name="**/build.xml"/>
+                <exclude name=".travis.yml"/>
+            </zipfileset>
+        </zip>
+    </target>
+
+    <target name="check-changeme">
+        <available property="filesExist" file="db.ini"/>
+    </target>
+    
+    <target name="changeme"
+        description="Copy .changeme files to their proper locations."
+        depends="check-changeme" unless="filesExist">
         <copy todir=".">
             <filelist dir=".">
                 <file name=".htaccess.changeme"/>
@@ -12,10 +41,13 @@
             </filelist>
             <mapper type="glob" from="*.changeme" to="*"/>
         </copy>
-        <copy file="application/logs/errors.log.empty" tofile="application/logs/errors.log"/>
+        <copy file="application/logs/errors.log.empty"
+            tofile="application/logs/errors.log"/>
     </target>
+
     <target name="test" description="Run automated tests.">
-        <exec executable="phpunit" dir="application/tests" failonerror="true"/>
+        <exec executable="phpunit" dir="application/tests"
+            failonerror="true"/>
     </target>
 
     <target name="test-plugins" description="Run automated tests for plugins.">
@@ -25,13 +57,15 @@
         </apply>
     </target>
 
-    <target name="test-all" depends="test,test-plugins" description="Run all automated tests." />
+    <target name="test-all" depends="test,test-plugins"
+        description="Run all automated tests." />
 
     <target name="update-pot" description="Update the translation template.">
         <property name="pot.file" location="${lang.dir}/Omeka.pot"/>
         <property name="pot.base" location="${lang.dir}/Omeka.base.pot"/>
         <tempfile property="pot.temp" suffix=".pot"/>
-        <apply executable="xgettext" relative="true" parallel="true" verbose="true">
+        <apply executable="xgettext" relative="true" parallel="true"
+            verbose="true">
             <arg value="-L"/>
             <arg value="php"/>
             <arg value="--from-code=utf-8"/>
@@ -41,7 +75,8 @@
             <arg value="-F"/>
             <arg value="-o"/>
             <arg file="${pot.temp}"/>
-            <fileset dir="." includes="**/*.php **/*.phtml" excludes="themes/ plugins/"/>
+            <fileset dir="." includes="**/*.php **/*.phtml"
+                excludes="themes/ plugins/"/>
         </apply>
         <exec executable="msgcat">
             <arg value="-o"/>

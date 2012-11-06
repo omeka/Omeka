@@ -1,5 +1,8 @@
-# Root .htaccess should not be tracked.  Other htaccess files should be though.
+# Root .htaccess
 /.htaccess
+
+# dist directory
+/dist/
 
 # Config files
 /db.ini
