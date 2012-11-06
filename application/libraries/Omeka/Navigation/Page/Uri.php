@@ -61,12 +61,25 @@ class Omeka_Navigation_Page_Uri extends Zend_Navigation_Page_Uri
                 'fragment' => null
             );
         }
+        
+        $href = trim($href);
                      
         $isPath = false;
         if (strlen($href) && $href[0] == '/') {
             // attempt to convert root path into a full path, 
             // so that we can later extract the fragment using Zend_Uri_Http
-            $href = substr(WEB_ROOT, 0, strrpos(WEB_ROOT, PUBLIC_BASE_URL)) . $href;
+            $webRoot = trim(WEB_ROOT);
+            $webPath = trim(PUBLIC_BASE_URL);
+            if ($webPath == '') {
+                $href = $webRoot . $href;
+            } else {
+                $index = strrpos($webRoot, $webPath);
+                if ($index !== false) {
+                    $href = substr($webRoot, 0, $index) . $href;
+                } else {
+                    $href = $webRoot . $href;
+                }
+            }
             $isPath = true;
         }
         try {

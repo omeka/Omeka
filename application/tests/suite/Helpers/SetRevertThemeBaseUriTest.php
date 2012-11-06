@@ -23,12 +23,19 @@ class Omeka_Helpers_SetRevertThemeBaseUriTest extends Omeka_Test_AppTestCase
     
     public function testSetAndRevertBaseUri()
     {
-        $baseUrl = $this->frontController->getBaseUrl();
         $this->assertTrue(defined('PUBLIC_BASE_URL'));
-        set_theme_base_url('public');
-        $newBaseUrl = $this->frontController->getBaseUrl();
-        $this->assertTrue($baseUrl != $newBaseUrl);
+        $this->assertTrue(defined('ADMIN_BASE_URL'));
+        $this->assertTrue(defined('CURRENT_BASE_URL'));
+
+        $this->assertEquals(PUBLIC_BASE_URL, CURRENT_BASE_URL);
+
+        $baseUrl = $this->frontController->getBaseUrl();
+        $this->assertEquals($baseUrl, PUBLIC_BASE_URL);
+        
+        set_theme_base_url('admin');
+        $this->assertEquals($this->frontController->getBaseUrl(), ADMIN_BASE_URL);
+        
         revert_theme_base_url();
-        $this->assertEquals($baseUrl, $this->frontController->getBaseUrl());
+        $this->assertEquals($this->frontController->getBaseUrl(), PUBLIC_BASE_URL);
     }
 }

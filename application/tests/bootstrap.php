@@ -14,6 +14,7 @@ ini_set('memory_limit', '256M');
 // Set the include path and all the constants.
 $_SERVER['HTTP_HOST'] = 'www.example.com';
 $_SERVER['SERVER_PORT'] = '80';
+$_SERVER['SCRIPT_NAME'] = '';
 require_once (dirname(dirname(dirname(__FILE__))) . '/bootstrap.php');
 require_once 'globals.php';
 

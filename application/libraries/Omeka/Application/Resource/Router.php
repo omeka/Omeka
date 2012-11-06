@@ -132,6 +132,9 @@ class Omeka_Application_Resource_Router extends Zend_Application_Resource_Router
      */
     protected function _leftTrim($s, $n) 
     {
+        if ($n == '') {
+            return $s;
+        }
         $pos = strpos($s, $n);
         if ($pos === FALSE || $pos !== 0) {
             return $s;
