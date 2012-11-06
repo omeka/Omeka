@@ -8,7 +8,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
                 <?php include 'form.php';?>
                 <section class="three columns omega">
                     <div id="save" class="panel">
-                        <input type="submit" class="big green button" name="submit" value="<?php echo __('Save Collection'); ?>" />
+                        <input type="submit" class="big green button" name="submit" value="<?php echo __('Add Collection'); ?>" />
                         
                         <?php fire_plugin_hook("admin_append_to_collections_panel_buttons", array('view'=>$this, 'collection'=>$collection)); ?>
                                                                     
