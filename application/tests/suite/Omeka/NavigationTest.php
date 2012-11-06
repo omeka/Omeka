@@ -18,6 +18,7 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
     {
         parent::setUp();
         $this->_nav = new Omeka_Navigation();
+        $this->_beforePages = array();
     }
     
     public function testEmptyOmekaNavigation()
@@ -702,7 +703,7 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
             'visible' => false
         ));
         
-        $explicitVisibleOmekaNavPageUri = new Omeka_Navigation_Page_Uri(array(
+        $explicitVisibleOmekaNavPageUri2 = new Omeka_Navigation_Page_Uri(array(
             'label' => __('Omeka'),
             'uri' => 'http://omeka.org',
             'visible' => true
@@ -711,8 +712,10 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
         $pages = array(
             $explicitVisibleZendNavPageMvc,
             $notVisibleOmekaNavPageUri,
-            $explicitVisibleOmekaNavPageUri
+            $explicitVisibleOmekaNavPageUri2,
         );
+        
+        $this->assertEquals(0, $this->_nav->count());
         
         $this->_nav->addPages($pages);
         
@@ -767,7 +770,7 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
         $this->assertNotEquals($explicitVisibleOmekaNavPageUri, $afterPage1Page1Page1);
         $this->assertNotEquals($notVisibleNavPageUriArray, $afterPage1Page2);
         $this->assertEquals($notVisibleOmekaNavPageUri, $afterPage2);
-        $this->assertEquals($explicitVisibleOmekaNavPageUri, $afterPage3);
+        $this->assertEquals($explicitVisibleOmekaNavPageUri2, $afterPage3);
 
         $this->assertInstanceOf('Omeka_Navigation_Page_Uri', $afterPage1Page1);
         $this->assertInstanceOf('Omeka_Navigation_Page_Uri', $afterPage1Page1Page1);
@@ -814,71 +817,293 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
         $this->assertEquals($href, $this->_nav->createPageUid($href));
     }
     
-    public function testGetPageByUidFlatList()
+    public function testGetPageByUidFlatArray()
     {
-        $explicitVisibleZendNavPageMvc = new Zend_Navigation_Page_Mvc(array(
-            'label' => __('Browse Items'),
+        $this->_addFlatPagesArray();
+                
+        $testPageInfos = array();
+        $hrefPageIds = array(1,2,4,5);
+        foreach($hrefPageIds as $pageId) {
+            $page = $this->_beforePages[__('Page ' . $pageId)];
+            $testPageInfos[] = array(
+                'label' => $page->getLabel(),
+                'href' => $page->getHref(),
+            );
+        }
+        $arrayPageIds = array(3);
+        foreach($arrayPageIds as $pageId) {
+            $page = $this->_beforePages[__('Page ' . $pageId)];
+            $testPageInfos[] = array(
+                'label' => $page['label'],
+                'href' => $page['uri'],
+            );
+        }
+                
+        foreach($testPageInfos as $pageInfo) {
+            $uid = $this->_nav->createPageUid($pageInfo['href']);            
+            $retrievedPage = $this->_nav->getPageByUid($uid);
+            $this->assertEquals($pageInfo['label'], $retrievedPage->getLabel());
+            $this->assertEquals($uid, $retrievedPage->uid);
+        }
+    }
+
+
+    protected function _addNestedPagesArray()
+    {                
+        $page1 = new Omeka_Navigation_Page_Uri(array(
+            'label' => __('Page 1'),
+            'uri' => 'http://chnm.gmu.edu',
+            'visible' => true
+        ));        
+        $this->_beforePages[__('Page 1')] = $page1;
+        
+        $page2 = new Zend_Navigation_Page_Uri(array(
+            'label' => __('Page 2'),
+            'uri' => url('collections/browse'),
+            'pages' => array(
+                $page1
+            )
+        ));
+        $this->_beforePages[__('Page 2')] = $page2;
+        
+        $page3 = array(
+            'label' => __('Page 3'),
+            'uri' => url('items/edit'),
+            'visible' => false
+        );
+        $this->_beforePages[__('Page 3')] = $page3;
+        
+        $page4 = new Zend_Navigation_Page_Mvc(array(
+            'label' => __('Page 4'),
+            'controller' => 'items',
+            'action' => 'browse',
+            'visible' => true,
+            'pages' => array(
+                $page2,
+                $page3,
+            )
+        ));
+        $this->_beforePages[__('Page 4')] = $page4;
+        
+        $page5 = new Omeka_Navigation_Page_Uri(array(
+            'label' => __('Page 5'),
+            'uri' => url('collections/edit'),
+            'visible' => false
+        ));
+        $this->_beforePages[__('Page 5')] = $page5;
+        
+        $page6 = new Omeka_Navigation_Page_Uri(array(
+            'label' => __('Page 6'),
+            'uri' => 'http://omeka.org',
+            'visible' => true
+        ));
+        $this->_beforePages[__('Page 6')] = $page6;
+        
+        $pages = array(
+            $page4,
+            $page5,
+            $page6
+        );
+
+        $this->assertEquals(0, $this->_nav->count());
+        $this->_nav->addPages($pages);
+        $this->assertEquals(3, $this->_nav->count());
+    }
+    
+    protected function _addFlatPagesArray()
+    {
+        $page1 = new Zend_Navigation_Page_Mvc(array(
+            'label' => __('Page 1'),
             'controller' => 'items',
             'action' => 'browse',
             'visible' => true
         ));
-        
-        $implicitVisibleZendNavPageUri = new Zend_Navigation_Page_Uri(array(
-            'label' => __('Browse Collections'),
+        $this->_beforePages[__('Page 1')] = $page1;
+
+        $page2 = new Zend_Navigation_Page_Uri(array(
+            'label' => __('Page 2'),
             'uri' => url('collections/browse'),
         ));
-        
-        $notVisibleNavPageUriArray = array(
-            'label' => __('Edit Items'),
+        $this->_beforePages[__('Page 2')] = $page2;
+
+        $page3 = array(
+            'label' => __('Page 3'),
             'uri' => url('items/edit'),
             'visible' => false
         );
-        
-        $notVisibleOmekaNavPageUri = new Omeka_Navigation_Page_Uri(array(
-            'label' => __('Edit Collections'),
+        $this->_beforePages[__('Page 3')] = $page3;
+
+        $page4 = new Omeka_Navigation_Page_Uri(array(
+            'label' => __('Page 4'),
             'uri' => url('collections/edit'),
             'visible' => false
         ));
-        
-        $explicitVisibleOmekaNavPageUri = new Omeka_Navigation_Page_Uri(array(
-            'label' => __('Omeka'),
+        $this->_beforePages[__('Page 4')] = $page4;
+
+        $page5 = new Omeka_Navigation_Page_Uri(array(
+            'label' => __('Page 5'),
             'uri' => 'http://omeka.org',
             'visible' => true
         ));
-        
+        $this->_beforePages[__('Page 5')] = $page5;
+
         $pages = array(
-            $explicitVisibleZendNavPageMvc,
-            $implicitVisibleZendNavPageUri,
-            $notVisibleNavPageUriArray,
-            $notVisibleOmekaNavPageUri,
-            $explicitVisibleOmekaNavPageUri
+           $page1,
+           $page2,
+           $page3,
+           $page4,
+           $page5
         );
-        
+
+        $this->assertEquals(0, $this->_nav->count());
         $this->_nav->addPages($pages);
-                
-        $unchangedPages = array(
-            $explicitVisibleZendNavPageMvc,
-            $notVisibleOmekaNavPageUri,
-            $explicitVisibleOmekaNavPageUri
-        );
-        
-        foreach($unchangedPages as $page) {
-            $uid = $page->uid;
-            $retrievedPage = $this->_nav->getPageByUid($uid);
-            $this->assertEquals($page, $retrievedPage);
-            $this->assertEquals($uid, $retrievedPage->uid);
+        $this->assertEquals(5, $this->_nav->count());
+    }
+    
+    public function testGetPageByUidNestedArray()
+    {   
+        $this->_addNestedPagesArray();
+ 
+        $addedPages = $this->_nav->getPages();
+        $this->assertCount(3, $addedPages);
+
+        $testPageInfos = array();
+        $hrefPageIds = array(1,2,4,5,6);
+        foreach($hrefPageIds as $pageId) {
+            $page = $this->_beforePages[__('Page ' . $pageId)];
+            $testPageInfos[] = array(
+                'label' => $page->getLabel(),
+                'href' => $page->getHref(),
+            );
+        }
+        $arrayPageIds = array(3);
+        foreach($arrayPageIds as $pageId) {
+            $page = $this->_beforePages[__('Page ' . $pageId)];
+            $testPageInfos[] = array(
+                'label' => $page['label'],
+                'href' => $page['uri'],
+            );
         }
         
-        $uid = url('collections/browse');
-        $retrievedPage = $this->_nav->getPageByUid($uid);
-        $this->assertNotEquals($implicitVisibleZendNavPageUri, $retrievedPage);
-        $this->assertEquals($uid, $retrievedPage->uid);
-        $this->assertEquals(__('Browse Collections'), $retrievedPage->getLabel());
+        foreach($testPageInfos as $pageInfo) {
+            $uid = $this->_nav->createPageUid($pageInfo['href']);            
+            $retrievedPage = $this->_nav->getPageByUid($uid);
+            $this->assertEquals($pageInfo['label'], $retrievedPage->getLabel());
+            $this->assertEquals($uid, $retrievedPage->uid);
+        }        
+    }
+    
+    public function testPrunePageFlatArray()
+    {
+        $this->_addFlatPagesArray();
         
-        $uid = url('items/edit');
-        $retrievedPage = $this->_nav->getPageByUid($uid);
-        $this->assertNotEquals($notVisibleNavPageUriArray, $retrievedPage);
-        $this->assertEquals($uid, $retrievedPage->uid);
-        $this->assertEquals(__('Edit Items'), $retrievedPage->getLabel());
+        // test pruning first page
+        $beforePrunePage = $this->_beforePages[__('Page 1')];
+        $prunePage = $this->_nav->getPageByUid($beforePrunePage->getHref());
+        $this->_nav->prunePage($prunePage);
+        $afterPrunePages = $this->_nav->getPages();
+        $this->assertNotContains($prunePage, $afterPrunePages);
+        $this->assertCount(4, $afterPrunePages);
+        $labels = array(
+            __('Page 2'),
+            __('Page 3'),
+            __('Page 4'),
+            __('Page 5'),
+        );
+        $i = 0;
+        foreach($afterPrunePages as $afterPrunePage) {
+            $this->assertEquals($labels[$i], $afterPrunePage->getLabel());
+            $i++;
+        }
+        
+        // test pruning last page
+        $beforePrunePage = $this->_beforePages[__('Page 5')];
+        $prunePage = $this->_nav->getPageByUid($beforePrunePage->getHref());
+        $this->_nav->prunePage($prunePage);
+        $afterPrunePages = $this->_nav->getPages();
+        $this->assertNotContains($prunePage, $afterPrunePages);
+        $this->assertCount(3, $afterPrunePages);
+        $labels = array(
+            __('Page 2'),
+            __('Page 3'),
+            __('Page 4'),
+        );
+        $i = 0;
+        foreach($afterPrunePages as $afterPrunePage) {
+            $this->assertEquals($labels[$i], $afterPrunePage->getLabel());
+            $i++;
+        }
+        
+        // test pruning middle page
+        $beforePrunePage = $this->_beforePages[__('Page 3')];
+        $prunePage = $this->_nav->getPageByUid($beforePrunePage['uri']);
+        $this->_nav->prunePage($prunePage);
+        $afterPrunePages = $this->_nav->getPages();
+        $this->assertNotContains($prunePage, $afterPrunePages);
+        $this->assertCount(2, $afterPrunePages);
+        $labels = array(
+            __('Page 2'),
+            __('Page 4'),
+        );
+        $i = 0;
+        foreach($afterPrunePages as $afterPrunePage) {
+            $this->assertEquals($labels[$i], $afterPrunePage->getLabel());
+            $i++;
+        }
+    }
+    
+    public function testPrunePageNestedArray()
+    {
+        $this->_addNestedPagesArray();
+        
+        // prune a page without a subpage
+        $beforePrunePage = $this->_beforePages[__('Page 6')];
+        $prunePage = $this->_nav->getPageByUid($beforePrunePage->getHref());
+        $this->_nav->prunePage($prunePage);
+        $afterPrunePages = $this->_nav->getPages();
+        $this->assertNotContains($prunePage, $afterPrunePages);
+        $this->assertCount(2, $afterPrunePages);
+        $labels = array(
+            __('Page 4'),
+            __('Page 5'),
+        );
+        $i = 0;
+        foreach($afterPrunePages as $afterPrunePage) {
+            $this->assertEquals($labels[$i], $afterPrunePage->getLabel());
+            $i++;
+        }
+        
+        // prune a page with a subpage
+        $beforePrunePage = $this->_beforePages[__('Page 2')];
+        $prunePage = $this->_nav->getPageByUid($beforePrunePage->getHref());
+        $this->_nav->prunePage($prunePage);
+        $afterPrunePages = $this->_nav->getPages();
+        $this->assertNotContains($prunePage, $afterPrunePages);
+        $this->assertNull($this->_nav->getPageByUid($beforePrunePage->getHref()));
+        $this->assertCount(2, $afterPrunePages);
+        $labels = array(
+            __('Page 4'),
+            __('Page 5'),
+        );
+        $i = 0;
+        foreach($afterPrunePages as $afterPrunePage) {
+            $this->assertEquals($labels[$i], $afterPrunePage->getLabel());
+            $i++;
+        }
+        
+        // make sure page 1 is now appended to the bottom of page 4
+        $beforePage4 = $this->_beforePages[__('Page 4')];
+        $page4 = $this->_nav->getPageByUid($beforePage4->getHref());
+        $childPages = $page4->getPages();
+        $this->assertCount(2, $childPages);
+        $labels = array(
+            __('Page 3'),
+            __('Page 1'),
+        );
+        $i = 0;
+        foreach($childPages as $page) {
+            $this->assertEquals($labels[$i], $page->getLabel());
+            $i++;
+        }
     }
 }
