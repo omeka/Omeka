@@ -12,6 +12,7 @@
  * 
  * @package Omeka\Form
  */
+
 class Omeka_Form_Admin extends Omeka_Form
 {
     protected $_editDisplayGroup;
@@ -93,6 +94,20 @@ class Omeka_Form_Admin extends Omeka_Form
     {
         return $this->addElementToDisplayGroup('save', $element, $name, $options );
     }
+
+    /**
+     * Generalizes creating and adding new elements to one of the display groups
+     * 
+     * You can pass in either an Zend_Form_Element you have already created, or pass
+     * parameters as you would to Zend_Form::addElement
+     * 
+     * @param string $group Either 'save' or 'edit'
+     * @param Zend_Form_Element $element The element to add to the display group
+     * @param string $name
+     * @param array $options
+     * @throws Zend_Form_Exception
+     * @return Omeka_Form_Admin
+     */
     
     protected function addElementToDisplayGroup($group, $element, $name = null, $options = null)    
     {
@@ -118,6 +133,12 @@ class Omeka_Form_Admin extends Omeka_Form
         return $this;           
     }
     
+    /**
+     * Get the decorators for the save display group
+     * 
+     * @return array The default decorators for the save display group
+     */
+    
     public function getSaveGroupDefaultElementDecorators()
     {
         return array(
@@ -132,25 +153,77 @@ class Omeka_Form_Admin extends Omeka_Form
         
     }
     
+    /**
+     * Set the class for the edit display group.
+     * 
+     * You can alter the default css class for the edit group panel by passing in an
+     * option for 'editGroupCssClass' when you create an instance of Omeka_Form_Admin.
+     * This should be done very sparingly, as the default class is the best match to
+     * existing admin theme look and feel
+     * 
+     * @param string $cssClass
+     */
+    
     public function setEditGroupCssClass($cssClass)
     {
         $this->_editGroupCssClass = $cssClass;
     }
+
+    /**
+     * Set the class for the save display group.
+     *
+     * You can alter the default css class for the save group panel by passing in an
+     * option for 'editGroupCssClass' when you create an instance of Omeka_Form_Admin.
+     * This should be done very sparingly, as the default class is the best match to
+     * existing admin theme look and feel
+     *
+     * @param string $cssClass
+     */
+    
     
     public function setSaveGroupCssClass($cssClass)
     {
         $this->_saveGroupCssClass = $cssClass;
     }
     
+    /**
+     * Set the record type of the object being edited (e.g., 'item')
+     * 
+     * Pass in the recordType as part of the options array when you create an instance
+     * 
+     * @param string $type
+     */
+    
     public function setRecordType($type)
     {
         $this->_record_type = $type;
     }
     
+    /**
+     * Set the record (if one exists) for the object being edited
+     * 
+     * Passing the record object as part of the options when you create the form
+     * will automatically add 'Edit' and 'Delete' buttons to the save panel
+     * 
+     * @param Omeka_Record_AbstractRecord $record
+     */
+    
     public function setRecord($record)
     {
         $this->_record = $record;
     }
+    
+    /**
+     * 
+     * Set whether the save panel should display a link to the record's public page if it exists
+     * 
+     * By default, a link to a record's public page is available if it exists. Pass false as the
+     * value of hasPublicPage in the options array to suppress this behavior.
+     * 
+     * 
+     * @param bool $value true
+     */
+    
     
     public function setHasPublicPage($value = true)
     {
