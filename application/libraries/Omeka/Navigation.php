@@ -422,9 +422,7 @@ class Omeka_Navigation extends Zend_Navigation
         if ($parentContainer === null) {
             $parentContainer = $this;
         }
-        
         $childPages = $page->getPages();
-        
         $removed = $parentContainer->removePage($page);
         if ($removed && $reattach) {
             // reattach the child pages to the container page
@@ -434,11 +432,9 @@ class Omeka_Navigation extends Zend_Navigation
                 $this->addPageToContainer($childPage, $parentContainer);
             }
         }
-        
         foreach ($parentContainer->getPages() as $subPage) {
             $removed = $removed || $this->removePageRecursive($page, $subPage, $reattach);
         }
-
         return $removed;
     }
     
@@ -510,8 +506,8 @@ class Omeka_Navigation extends Zend_Navigation
         $page->setOptions($pageOptions);
         
         // set the uid
-        $uid = $this->createPageUid($page->getHref());
-        $page->set('uid', $uid);
+        $uid = $this->createPageUid($page->getHref());        
+        $page->uid = $uid;
         
         // normalize sub pages
         $subPages = array();
