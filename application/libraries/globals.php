@@ -1949,24 +1949,6 @@ function files_for_item($options = array(), $wrapperAttributes = array('class'=>
 }
 
 /**
- * Return the HTML for displaying a random featured item.
- *
- * @package Omeka\Function\View\Body
- * @uses random_featured_items()
- * @param boolean $withImage Whether or not the featured item should have an 
- * image associated with it. If set to true, this will either display a 
- * clickable square thumbnail for an item, or it will display "You have no 
- * featured items." if there are none with images.
- * @return string HTML
- */
-function random_featured_item($withImage = null)
-{
-    $html = '<h2>'. __('Featured Item') .'</h2>';
-    $html .= random_featured_items('1', $withImage);
-    return $html;
-}
-
-/**
  * Get the next item in the database.
  *
  * @package Omeka\Function\View\Navigation
@@ -2085,12 +2067,18 @@ function get_random_featured_items($num = 5, $hasImage = null)
  * @package Omeka\Function\View\Body
  * @uses get_random_featured_items()
  * @param int $num
- * @param bool|null $hasImage
+ * @param boolean $withImage Whether or not the featured item should have an 
+ * image associated with it. If set to true, this will either display a 
+ * clickable square thumbnail for an item, or it will display "You have no 
+ * featured items." if there are none with images.
  * @return string
  */
 function random_featured_items($num = 5, $hasImage = null)
 {
     $html = '';
+    if (1 == $num) {
+        $html .= '<h2>'. __('Featured Item') .'</h2>';
+    }
     if ($randomFeaturedItems = get_random_featured_items($num, $hasImage)) {
         foreach ($randomFeaturedItems as $randomItem) {
             $itemTitle = metadata($randomItem, array('Dublin Core', 'Title'));
