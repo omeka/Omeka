@@ -1424,7 +1424,7 @@ header nav {
     min-width:122px;
     top:-1px; 
     padding: 0; 
-    z-index: 20;
+    z-index: 1001;
 }
 
 .quick-filter-wrapper li {
