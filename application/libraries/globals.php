@@ -2541,12 +2541,16 @@ function public_nav_items(array $navArray = null, $maxDepth = 0)
                 'label' =>__('Browse All'),
                 'uri' => url('items/browse'),
             ));
-        if (total_records('Tag')) {
+            if (total_records('Tag')) {
+                $navArray[] = array(
+                    'label' => __('Browse by Tag'),
+                    'uri' => url('items/tags')
+                );
+            }
             $navArray[] = array(
-                'label' => __('Browse by Tag'),
-                'uri' => url('items/tags')
+                'label' => __('Advanced Search'),
+                'uri' => url('items/advanced-search')
             );
-        }
     }
     return nav($navArray, 'public_navigation_items');
 }
