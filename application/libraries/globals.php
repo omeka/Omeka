@@ -1498,7 +1498,7 @@ function element_set_form($record, $elementSetName)
     } else {
         $elements = get_db()->getTable('Element')->findBySet($elementSetName);
     }
-    $filterName = array('Form', $recordType, $elementSetName);
+    $filterName = array('ElementSetForm', $recordType, $elementSetName);
     $elements = apply_filters(
         $filterName, 
         $elements,
