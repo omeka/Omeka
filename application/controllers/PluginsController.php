@@ -317,7 +317,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
             
             // Call the append to uninstall message hook for the specific 
             // plugin, if it exists.
-            $message = get_specific_plugin_hook_output($plugin, 'admin_append_to_plugin_uninstall_message');
+            $message = get_specific_plugin_hook_output($plugin, 'uninstall_message');
             
             $this->view->assign(compact('plugin', 'message'));
             // Cancel the redirect here.

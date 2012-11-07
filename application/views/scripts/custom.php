@@ -14,11 +14,11 @@ add_filter('html_escape', 'nl2br', 2);
  */
 add_filter(array('Display', 'Item', 'Dublin Core', 'Title'), 'show_untitled_items');
 
-add_plugin_hook('public_theme_header', 'theme_header_background');
+add_plugin_hook('public head', 'theme_header_background');
 
 // If there is a current user, add admin_bar.
 if (current_user()) {
-    add_plugin_hook('public_theme_header', 'admin_bar_css');
+    add_plugin_hook('public head', 'admin_bar_css');
     add_plugin_hook('public_theme_body', 'admin_bar');
     add_filter('body_tag_attributes', 'admin_bar_class');
 }

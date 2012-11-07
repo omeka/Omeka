@@ -17,7 +17,7 @@
 ?>
 
 <!-- Plugin Stuff -->
-<?php fire_plugin_hook('admin_theme_header', array('view'=>$this)); ?>
+<?php fire_plugin_hook('admin_head', array('view'=>$this)); ?>
 
 <!-- Stylesheets -->
 <?php echo head_css(); ?>

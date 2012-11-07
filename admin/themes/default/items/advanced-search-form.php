@@ -198,7 +198,7 @@ $formAttributes['method'] = 'GET';
     </div>
     
     <div class="seven columns alpha">
-    <?php fire_plugin_hook('admin_append_to_advanced_search', array('view' => $this)); ?>
+    <?php fire_plugin_hook('admin_items_advanced_search', array('view' => $this)); ?>
     </div>
     <input type="submit" class="submit big green button" name="submit_search" id="submit_search_advanced" value="<?php echo __('Search for items'); ?>" />
 </form>

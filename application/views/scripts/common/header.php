@@ -11,7 +11,7 @@
     <?php echo auto_discovery_link_tags(); ?>
 
     <!-- Plugin Stuff -->
-    <?php fire_plugin_hook('public_theme_header', array('view'=>$this)); ?>
+    <?php fire_plugin_hook('public head', array('view'=>$this)); ?>
 
     <!-- Stylesheets -->
     <?php
@@ -29,7 +29,7 @@
 
         <header role="banner">
 
-            <?php fire_plugin_hook('public_theme_page_header', array('view'=>$this)); ?>
+            <?php fire_plugin_hook('public_header', array('view'=>$this)); ?>
 
             <?php echo theme_header_image(); ?>
 
@@ -47,4 +47,4 @@
         
         <article id="content">
         
-            <?php fire_plugin_hook('public_theme_page_content', array('view'=>$this)); ?>
+            <?php fire_plugin_hook('public_content_top', array('view'=>$this)); ?>
