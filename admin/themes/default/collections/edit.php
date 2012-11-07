@@ -36,7 +36,7 @@
                             <?php echo $this->formCheckbox('featured', $collection->featured, array(), array('1', '0')); ?>
                         </div>
                     </div>
-                    <?php fire_plugin_hook("admin_append_to_collections_panel_fields", array('view'=>$this, 'collection'=>$collection)); ?>
+                    <?php fire_plugin_hook("admin_append_to_collections_panel_fields", array('view'=>$this, 'record'=>$collection)); ?>
                 </div>
 
             </section>
