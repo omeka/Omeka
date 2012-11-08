@@ -20,13 +20,13 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
 <form method="post">
 
     <section class="seven columns alpha">
-        <?php echo $this->form->getDisplayGroup('site_settings'); ?>
+        <?php echo $this->form; ?>
     </section>
     
     <section class="three columns omega">
         
         <div id="save" class="panel">
-            <?php echo $this->formSubmit('submit', __('Save Changes'), array('class'=>'submit big green button')); ?>
+            <?php echo $this->formSubmit('submit', __('Save Settings'), array('class'=>'submit big green button')); ?>
         </div>
     
     </section>

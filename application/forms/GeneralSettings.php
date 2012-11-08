@@ -59,11 +59,6 @@ class Omeka_Form_GeneralSettings extends Omeka_Form
             'label' => __('ImageMagick Directory Path')
         ));
         
-        $this->addElement('submit', 'settings_submit', array(
-            'label' => __('Save Settings'),
-            'class' => 'big green button'
-        ));
-        
         $this->addDisplayGroup(
             array('administrator_email', 'site_title', 'description', 
                   'copyright', 'author', 'tag_delimiter', 'fullsize_constraint', 
@@ -71,9 +66,5 @@ class Omeka_Form_GeneralSettings extends Omeka_Form
                   'per_page_admin', 'per_page_public', 'show_empty_elements',
                   'path_to_convert'),
             'site_settings');
-        
-        $this->addDisplayGroup(
-            array('settings_submit'), 
-            'submit');
     }
 }

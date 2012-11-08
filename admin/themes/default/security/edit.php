@@ -34,7 +34,7 @@ jQuery(document).ready(function () {
 <form method="post">
 
     <section class="seven columns alpha">
-        <?php echo $this->form->getDisplayGroup('security_settings'); ?>
+        <?php echo $this->form; ?>
     </section>
 
     <section class="three columns omega">
