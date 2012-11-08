@@ -1,11 +1,9 @@
 #admin-bar {
-    position:absolute;
     width: 100%;
     box-sizing:border-box;
     top:0;
     left:0;
     margin:0;
-    padding:0;
     background: rgba(0,0,0,0.75);
     line-height: 30px;
     color: #fff;
@@ -50,8 +48,4 @@
 #admin-bar li a:hover,
 #admin-bar li a:active {
     color: #fff !important;
-}
-
-body.admin-bar {
-    padding-top: 30px; /* Matches line-height for #admin-bar. */
 }
