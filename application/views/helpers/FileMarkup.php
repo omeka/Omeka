@@ -743,7 +743,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         $html = !empty($wrapper) ? $wrapper . $html . "</div>" : $html;
         
         return apply_filters(
-            'display_file', 
+            'file_markup', 
             $html, 
             array(
                 'file' => $file, 

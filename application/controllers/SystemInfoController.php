@@ -53,7 +53,7 @@ class SystemInfoController extends Omeka_Controller_AbstractActionController
         $this->_addPluginInfo($info);
         $this->_addThemeInfo($info);
 
-        return apply_filters('system_info_array', $info);
+        return apply_filters('system_info', $info);
     }
 
     private function _addExtensionInfo(&$info)

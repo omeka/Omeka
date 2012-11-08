@@ -1536,7 +1536,7 @@ function label_table_options($options, $labelOption = null)
 function get_table_options($tableClass, $labelOption = null, $searchParams = array())
 {
     $options = get_db()->getTable($tableClass)->findPairsForSelectForm($searchParams);
-    $options = apply_filters(Inflector::underscore($tableClass) . '_select_options', $options);
+    $options = apply_filters(Inflector::tableize($tableClass) . '_select_options', $options);
     return label_table_options($options, $labelOption);
 }
 
@@ -2168,7 +2168,7 @@ function link_to_item_search($text = null, $props = array(), $uri = null)
         $text = __('Advanced Search');
     }
     if (!$uri) {
-        $uri = apply_filters('advanced_search_link_default_uri', url('items/advanced-search'));
+        $uri = apply_filters('items_advanced_search_default_url', url('items/advanced-search'));
     }
     $props['href'] = $uri . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
     return '<a ' . tag_attributes($props) . '>' . $text . '</a>';

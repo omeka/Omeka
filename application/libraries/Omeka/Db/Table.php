@@ -557,7 +557,7 @@ class Omeka_Db_Table
      */
     private function _getHookName($suffix)
     {
-        $modelName = Inflector::underscore($this->_target);
+        $modelName = Inflector::tableize($this->_target);
         return "{$modelName}_{$suffix}";
     }
 }

@@ -69,7 +69,7 @@ class Omeka_Test_Helper_Plugin
     }
 
     /**
-     * Run the define_response_contexts filter.
+     * Run the response_contexts filter.
      *
      * @return void
      */
@@ -82,7 +82,7 @@ class Omeka_Test_Helper_Plugin
         $contexts->setContextParam('output');
 
         $contextArray = Omeka_Application_Resource_Helpers::getDefaultResponseContexts();
-        $contextArray = $this->pluginBroker->applyFilters('define_response_contexts', $contextArray);
+        $contextArray = $this->pluginBroker->applyFilters('response_contexts', $contextArray);
 
         $contexts->addContexts($contextArray);
     }

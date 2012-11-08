@@ -45,7 +45,7 @@ class Omeka_Application_Resource_Helpers extends Zend_Application_Resource_Resou
     /**
      * Define the custom response format contexts for Omeka.
      *
-     * Plugin writers should use the 'define_response_contexts' filter to modify
+     * Plugin writers should use the 'response_contexts' filter to modify
      * or expand the list of formats that existing controllers may respond to.
      *
      * @link http://framework.zend.com/manual/en/zend.controller.actionhelpers.html#zend.controller.actionhelpers.contextswitch
@@ -73,7 +73,7 @@ class Omeka_Application_Resource_Helpers extends Zend_Application_Resource_Resou
         $contextArray = self::getDefaultResponseContexts();
         
         if ($pluginBroker = $this->getBootstrap()->getResource('PluginBroker')) {
-            $contextArray = $pluginBroker->applyFilters('define_response_contexts', $contextArray);
+            $contextArray = $pluginBroker->applyFilters('response_contexts', $contextArray);
         }
         
         $contexts->addContexts($contextArray);

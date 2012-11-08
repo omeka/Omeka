@@ -146,7 +146,7 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
 
         $elementsBySet = $this->_filterItemTypeElements($elementsBySet);
 
-        return apply_filters('record_metadata_elements', $elementsBySet);
+        return apply_filters('display_elements', $elementsBySet);
     }
 
     /**
