@@ -11,7 +11,7 @@
     <?php echo auto_discovery_link_tags(); ?>
 
     <!-- Plugin Stuff -->
-    <?php fire_plugin_hook('public head', array('view'=>$this)); ?>
+    <?php fire_plugin_hook('public_head', array('view'=>$this)); ?>
 
     <!-- Stylesheets -->
     <?php
