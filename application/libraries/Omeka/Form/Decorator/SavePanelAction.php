@@ -7,8 +7,11 @@
  */
 
 /**
+ * Decorator for buttons (usually actions) for the save panel in Omeka_Form_Admin
+ * 
  * @package Omeka\Form\Decorator
  */
+
 class Omeka_Form_Decorator_SavePanelAction extends Zend_Form_Decorator_Abstract
 {
     
@@ -16,9 +19,14 @@ class Omeka_Form_Decorator_SavePanelAction extends Zend_Form_Decorator_Abstract
     
     public function getContent()
     {
-        return $this->content;
-    
+        return $this->content;    
     }
+    
+    /**
+     * Checks if a record was passed to the Omeka_Form_Admin form. returns it if it has been
+     * 
+     * @return mixed false or the record
+     */
     
     public function getRecord()
     {
@@ -29,11 +37,22 @@ class Omeka_Form_Decorator_SavePanelAction extends Zend_Form_Decorator_Abstract
         
     }
     
+    /**
+     * Checks if the Omeka_Form_Admin should display a link to a record's public page
+     */
+    
     public function hasPublicPage()
     {
-        return $this->_options['hasPublicPage'];
-        
+        return $this->_options['hasPublicPage'];        
     }
+    
+    /**
+     * Render html for the save panel buttons
+     * 
+     * @param string $content
+     * @return string
+     */
+    
     public function render($content)
     {
     
@@ -64,7 +83,5 @@ class Omeka_Form_Decorator_SavePanelAction extends Zend_Form_Decorator_Abstract
 
         }
         return $html;
-    }    
-    
-    
+    }
 }

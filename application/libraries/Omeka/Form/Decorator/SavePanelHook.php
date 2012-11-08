@@ -7,6 +7,8 @@
  */
 
 /**
+ * Decorator to add hooks into the admin save panel created via Omeka_Form_Admin
+ * 
  * @package Omeka\Form\Decorator
  */
 class Omeka_Form_Decorator_SavePanelHook extends Zend_Form_Decorator_Abstract
@@ -14,7 +16,6 @@ class Omeka_Form_Decorator_SavePanelHook extends Zend_Form_Decorator_Abstract
 
     public function render($content)
     {        
-
         $type = $this->getRecordType();
         $pluralType = Inflector::pluralize($type);
         $record = $this->getRecord();
@@ -38,6 +39,12 @@ class Omeka_Form_Decorator_SavePanelHook extends Zend_Form_Decorator_Abstract
         return $html . $fieldsHtml;
     }    
     
+    /**
+     * Get the record type if the Omeka_Form_Admin was created with that option set
+     * 
+     * @return mixed false or the record
+     */
+    
     public function getRecordType()
     {
         if(isset($this->_options['recordType'])) {
@@ -46,6 +53,12 @@ class Omeka_Form_Decorator_SavePanelHook extends Zend_Form_Decorator_Abstract
         return false;
         
     }
+    
+    /**
+     * Get the record if the Omeka_Form_Admin was created with that option set
+     * 
+     * @return mixed false or the record
+     */
     
     public function getRecord()
     {
