@@ -41,7 +41,7 @@ if ($collectionTitle == '') {
         <?php endforeach; ?>
     </div><!-- end collection-items -->
 
-    <?php fire_plugin_hook('public_append_to_collections_show', array('view' => $this, 'collection' => $collection)); ?>
+    <?php fire_plugin_hook('public_collections_show', array('view' => $this, 'collection' => $collection)); ?>
 
 </div><!-- end primary -->
 

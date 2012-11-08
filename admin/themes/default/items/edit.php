@@ -21,7 +21,7 @@
             <a href="<?php echo html_escape(public_url('items/show/'.metadata('item', 'id'))); ?>" class="big blue button" target="_blank"><?php echo __('View Public Page'); ?></a>
             <?php echo link_to_item(__('Delete'), array('class' => 'big red button'), 'delete-confirm'); ?>
             
-            <?php fire_plugin_hook("admin_append_to_items_panel_buttons", array('view'=>$this, 'record'=>$item)); ?>
+            <?php fire_plugin_hook("admin_items_panel_buttons", array('view'=>$this, 'record'=>$item)); ?>
             
             <div id="public-featured">
                 <?php if ( is_allowed('Items', 'makePublic') ): ?>
@@ -52,7 +52,7 @@
                 </div>
             </div> <!-- end collection-form div -->
             <!--  append_to_item_panel_fields hook -->
-            <?php fire_plugin_hook("admin_append_to_items_panel_fields", array('view'=>$this, 'record'=>$item)); ?>
+            <?php fire_plugin_hook("admin_items_panel_fields", array('view'=>$this, 'record'=>$item)); ?>
             
         </div>
         

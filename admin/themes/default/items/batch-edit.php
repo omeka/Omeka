@@ -111,7 +111,7 @@ if (!$isPartial):
             </div>
         </fieldset>
 
-        <?php fire_plugin_hook('admin_append_to_items_batch_edit_form', array('view' => $this)); ?>
+        <?php fire_plugin_hook('admin_items_batch_edit_form', array('view' => $this)); ?>
     
         <?php if ($showItemFields): ?>
         <fieldset>

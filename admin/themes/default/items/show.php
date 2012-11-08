@@ -84,7 +84,7 @@
         <div><?php echo output_format_list(); ?></div>
     </div>
 
-<?php fire_plugin_hook('admin_append_to_items_show_sidebar', array('item' => $item, 'view' => $this)); ?>
+<?php fire_plugin_hook('admin_items_show_sidebar', array('item' => $item, 'view' => $this)); ?>
 </div>
 
 <div class="seven columns alpha">
@@ -95,7 +95,7 @@
         </div>
         <?php endif; ?>
     <?php echo all_element_texts('item'); ?>
-    <?php fire_plugin_hook('admin_append_to_items_show_content', array('item' => $item, 'view' => $this)); ?>
+    <?php fire_plugin_hook('admin_items_show', array('item' => $item, 'view' => $this)); ?>
 </div>
 
 </div>        

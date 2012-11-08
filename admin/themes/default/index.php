@@ -73,5 +73,5 @@ echo head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?
                 <div class="add-new"><p><a class="add-new" href="<?php echo html_escape(url('items/add')); ?>">Add a new item</a></p></div>
                 </div>
             </section>
-            <?php fire_plugin_hook('admin_append_to_dashboard', array('view' => $this)); ?>
+            <?php fire_plugin_hook('admin_dashboard', array('view' => $this)); ?>
 <?php echo foot(); ?>

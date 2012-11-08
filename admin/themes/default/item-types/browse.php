@@ -40,6 +40,6 @@ echo head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
     <?php endif ?>
 </div>
 
-<?php fire_plugin_hook('admin_append_to_item_types_browse_primary', array('item_types' => $this->item_types, 'view' => $this)); ?>
+<?php fire_plugin_hook('admin_item_types_browse', array('item_types' => $this->item_types, 'view' => $this)); ?>
 </div>
 <?php echo foot(); ?>

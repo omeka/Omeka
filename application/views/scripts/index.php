@@ -70,6 +70,6 @@
 
 </div><!--end recent-items -->
 
-<?php fire_plugin_hook('public_append_to_home', array('view' => $this)); ?>
+<?php fire_plugin_hook('public_home', array('view' => $this)); ?>
 
 <?php echo foot(); ?>
