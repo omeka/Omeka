@@ -95,9 +95,6 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
         $records = $this->_helper->db->findBy($params, $recordsPerPage, $currentPage);
         $totalRecords = $this->_helper->db->count($params);
         
-        // Fire the specific browse records hook.
-        fire_plugin_hook("browse_$pluralName", array('records' => $records, 'view'=>$this->view));
-        
         // Add pagination data to the registry. Used by pagination_links().
         if ($recordsPerPage) {
             Zend_Registry::set('pagination', array(
@@ -122,10 +119,6 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
     {
         $singularName = $this->view->singularize($this->_helper->db->getDefaultModelName());
         $record = $this->_helper->db->findById();
-        
-        // Fire the specific show record hook.
-        fire_plugin_hook("show_$singularName", array('record' => $record, 'view'=>$this->view));
-        
         $this->view->assign(array($singularName => $record));
     }
     
