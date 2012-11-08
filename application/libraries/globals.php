@@ -1502,7 +1502,7 @@ function element_set_form($record, $elementSetName)
     $elements = apply_filters(
         $filterName, 
         $elements,
-        array('recordType' => $recordType, 'record' => $record, 'elementSetName' => $elementSetName)
+        array('record_type' => $recordType, 'record' => $record, 'element_set_name' => $elementSetName)
     );
     $html = element_form($elements, $record);
     return $html;
