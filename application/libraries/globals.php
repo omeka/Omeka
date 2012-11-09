@@ -2029,7 +2029,10 @@ function file_image($imageType, $props = array(), $file = null)
  */
 function items_search_form($props = array(), $formActionUri = null)
 {
-    return get_view()->partial('items/advanced-search-form.php', array('formAttributes'=>$props, 'formActionUri'=>$formActionUri));
+    return get_view()->partial(
+        'items/search-form.php', 
+        array('formAttributes' => $props, 'formActionUri' => $formActionUri)
+    );
 }
 
 /**
@@ -2154,10 +2157,10 @@ function link_to($record, $action = null, $text = null, $props = array(), $query
 }
 
 /**
- * Return HTML for a link to the advanced search form.
+ * Return HTML for a link to the item search form.
  *
  * @package Omeka\Function\View\Body\Navigation\Link
- * @param string $text Text of the link. Default is 'Advanced Search'.
+ * @param string $text Text of the link. Default is 'Search Items'.
  * @param array $props HTML attributes for the link.
  * @param string $uri Action for the form.  Defaults to 'items/browse'.
  * @return string
@@ -2165,10 +2168,10 @@ function link_to($record, $action = null, $text = null, $props = array(), $query
 function link_to_item_search($text = null, $props = array(), $uri = null)
 {
     if (!$text) {
-        $text = __('Advanced Search');
+        $text = __('Search Items');
     }
     if (!$uri) {
-        $uri = apply_filters('items_advanced_search_default_url', url('items/advanced-search'));
+        $uri = apply_filters('items_search_default_url', url('items/search'));
     }
     $props['href'] = $uri . (!empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '');
     return '<a ' . tag_attributes($props) . '>' . $text . '</a>';
@@ -2548,8 +2551,8 @@ function public_nav_items(array $navArray = null, $maxDepth = 0)
                 );
             }
             $navArray[] = array(
-                'label' => __('Advanced Search'),
-                'uri' => url('items/advanced-search')
+                'label' => __('Item Search'),
+                'uri' => url('items/search')
             );
     }
     return nav($navArray, 'public_navigation_items');

@@ -1,5 +1,5 @@
 <?php
-$pageTitle = __('Advanced Search');
+$pageTitle = __('Search Items');
 echo head(array('title' => $pageTitle,
            'bodyclass' => 'advanced-search',
            'bodyid' => 'advanced-search-page'));
@@ -11,7 +11,7 @@ echo head(array('title' => $pageTitle,
         <?php echo public_nav_items(); ?>
     </nav>
 
-<?php echo $this->partial('items/advanced-search-form.php',
+<?php echo $this->partial('items/search-form.php',
     array('formAttributes' =>
         array('id'=>'advanced-search-form'))); ?>
 

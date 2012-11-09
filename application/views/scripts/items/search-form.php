@@ -2,17 +2,16 @@
 if (!empty($formActionUri)):
     $formAttributes['action'] = $formActionUri;
 else:
-    $formAttributes['action'] = url(array('controller'=>'items', 'action'=>'browse'));
+    $formAttributes['action'] = url(array('controller'=>'items',
+                                          'action'=>'browse'));
 endif;
 $formAttributes['method'] = 'GET';
 ?>
 
 <form <?php echo tag_attributes($formAttributes); ?>>
     <div id="search-keywords" class="field">
-        <div class="two columns alpha">
-            <?php echo $this->formLabel('keyword-search', __('Search for Keywords')); ?>
-        </div>
-        <div class="five columns omega inputs">
+        <?php echo $this->formLabel('keyword-search', __('Search for Keywords')); ?>
+        <div class="inputs">
         <?php
             echo $this->formText(
                 'search',
@@ -23,10 +22,8 @@ $formAttributes['method'] = 'GET';
         </div>
     </div>
     <div id="search-narrow-by-fields" class="field">
-        <div class="two columns alpha label"><label><?php echo __('Narrow by Specific Fields'); ?></label>
-        <button type="button" class="add_search"><?php echo __('Add a Field'); ?></button>
-        </div>
-        <div class="five columns omega inputs">
+        <div class="label"><?php echo __('Narrow by Specific Fields'); ?></div>
+        <div class="inputs">
         <?php
         // If the form has been submitted, retain the number of search
         // fields used and rebuild the form
@@ -73,17 +70,16 @@ $formAttributes['method'] = 'GET';
                     array('size' => '20')
                 );
                 ?>
-                <button type="button" class="remove_search red button" disabled="disabled" style="display: none;">Remove Field</button>
+                <button type="button" class="remove_search" disabled="disabled" style="display: none;">-</button>
             </div>
         <?php endforeach; ?>
         </div>
+        <button type="button" class="add_search"><?php echo __('Add a Field'); ?></button>
     </div>
 
     <div id="search-by-range" class="field">
-        <div class="two columns alpha">
         <?php echo $this->formLabel('range', __('Search by a range of ID#s (example: 1-4, 156, 79)')); ?>
-        </div>
-        <div class="five columns omega inputs">
+        <div class="inputs">
         <?php
             echo $this->formText('range', @$_GET['range'],
                 array('size' => '40')
@@ -92,77 +88,67 @@ $formAttributes['method'] = 'GET';
         </div>
     </div>
 
-    <div id="search-selects">
-        <div class="field">
-            <div class="two columns alpha">
-            <?php echo $this->formLabel('collection-search', __('Search By Collection')); ?>
-            </div>
-            <div class="five columns omega inputs">
-            <?php
-                echo $this->formSelect(
-                    'collection',
-                    @$_REQUEST['collection'],
-                    array('id' => 'collection-search'),
-                    get_table_options('Collection')
-                );
-            ?>
-            </div>
-        </div>
-
-        <div class="field">
-            <div class="two columns alpha">
-            <?php echo $this->formLabel('item-type-search', __('Search By Type')); ?>
-            </div>
-            <div class="five columns omega inputs">
-            <?php
-                echo $this->formSelect(
-                    'type',
-                    @$_REQUEST['item-type-search'],
-                    array('id' => 'item-type-search'),
-                    get_table_options('ItemType')
-                );
-            ?>
-            </div>
-        </div>
-
-        <?php if(is_allowed('Users', 'browse')): ?>
-        <div class="field">
-            <div class="two columns alpha">
-            <?php echo $this->formLabel('user-search', __('Search By User'));?>
-            </div>
-            <div class="five columns omega inputs">
-            <?php
-                echo $this->formSelect(
-                    'user',
-                    @$_REQUEST['user'],
-                    array('id' => 'user-search'),
-                    get_table_options('User')
-                );
-            ?>
-            </div>
-        </div>
-        <?php endif; ?>
-
-        <div class="field">
-            <div class="two columns alpha">
-            <?php echo $this->formLabel('tag-search', __('Search By Tags')); ?>
-            </div>
-            <div class="five columns omega inputs">
-            <?php
-                echo $this->formText('tags', @$_REQUEST['tags'],
-                    array('size' => '40', 'id' => 'tag-search')
-                );
-            ?>
-            </div>
+    <div class="field">
+        <?php echo $this->formLabel('collection-search', __('Search By Collection')); ?>
+        <div class="inputs">
+        <?php
+            echo $this->formSelect(
+                'collection',
+                @$_REQUEST['collection'],
+                array('id' => 'collection-search'),
+                get_table_options('Collection')
+            );
+        ?>
         </div>
     </div>
 
+    <div class="field">
+        <?php echo $this->formLabel('item-type-search', __('Search By Type')); ?>
+        <div class="inputs">
+        <?php
+            echo $this->formSelect(
+                'type',
+                @$_REQUEST['item-type-search'],
+                array('id' => 'item-type-search'),
+                get_table_options('ItemType')
+            );
+        ?>
+        </div>
+    </div>
+
+    <?php if(is_allowed('Users', 'browse')): ?>
+    <div class="field">
+    <?php
+        echo $this->formLabel('user-search', __('Search By User'));?>
+        <div class="inputs">
+        <?php
+            echo $this->formSelect(
+                'user',
+                @$_REQUEST['user'],
+                array('id' => 'user-search'),
+                get_table_options('User')
+            );
+        ?>
+        </div>
+    </div>
+    <?php endif; ?>
+
+    <div class="field">
+        <?php echo $this->formLabel('tag-search', __('Search By Tags')); ?>
+        <div class="inputs">
+        <?php
+            echo $this->formText('tags', @$_REQUEST['tags'],
+                array('size' => '40', 'id' => 'tag-search')
+            );
+        ?>
+        </div>
+    </div>
+
+
     <?php if (is_allowed('Items','showNotPublic')): ?>
     <div class="field">
-        <div class="two columns alpha">
         <?php echo $this->formLabel('public', __('Public/Non-Public')); ?>
-        </div>
-        <div class="five columns omega inputs">
+        <div class="inputs">
         <?php
             echo $this->formSelect(
                 'public',
@@ -179,10 +165,8 @@ $formAttributes['method'] = 'GET';
     <?php endif; ?>
 
     <div class="field">
-        <div class="two columns alpha">
         <?php echo $this->formLabel('featured', __('Featured/Non-Featured')); ?>
-        </div>
-        <div class="five columns omega inputs">
+        <div class="inputs">
         <?php
             echo $this->formSelect(
                 'featured',
@@ -196,11 +180,11 @@ $formAttributes['method'] = 'GET';
         ?>
         </div>
     </div>
-    
-    <div class="seven columns alpha">
-    <?php fire_plugin_hook('admin_items_advanced_search', array('view' => $this)); ?>
+
+    <?php fire_plugin_hook('public_items_search', array('view' => $this)); ?>
+    <div>
+        <input type="submit" class="submit" name="submit_search" id="submit_search_advanced" value="<?php echo __('Search'); ?>" />
     </div>
-    <input type="submit" class="submit big green button" name="submit_search" id="submit_search_advanced" value="<?php echo __('Search for items'); ?>" />
 </form>
 
 <?php echo js_tag('items-search'); ?>

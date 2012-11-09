@@ -21,7 +21,7 @@ echo head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodycl
         <?php if (is_allowed('Items', 'add')): ?>
         <a href="<?php echo html_escape(url('items/add')); ?>" class="add button small green"><?php echo __('Add an Item'); ?></a>
         <?php endif; ?>
-        <?php echo link_to_item_search(__('Advanced Search'), array('class' => 'small blue advanced-search-link button')); ?>
+        <?php echo link_to_item_search(__('Search Items'), array('class' => 'small blue advanced-search-link button')); ?>
         <?php if (is_allowed('Items', 'edit')): ?>
         <input type="submit" class="edit-items small blue batch-action button" name="submit-batch-edit" value="<?php echo __('Edit'); ?>" />
         <?php endif; ?>
@@ -104,7 +104,7 @@ echo head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodycl
         <?php if (is_allowed('Items', 'add')): ?>
         <a href="<?php echo html_escape(url('items/add')); ?>" class="add button small green"><?php echo __('Add an Item'); ?></a>
         <?php endif; ?>
-        <?php echo link_to_item_search(__('Advanced Search'), array('class' => 'small blue advanced-search-link button')); ?>
+        <?php echo link_to_item_search(__('Search Items'), array('class' => 'small blue advanced-search-link button')); ?>
         <?php if (is_allowed('Items', 'edit')): ?>
         <input type="submit" class="small blue batch-action button" name="submit-batch-edit" value="<?php echo __('Edit'); ?>" />
         <?php endif; ?>

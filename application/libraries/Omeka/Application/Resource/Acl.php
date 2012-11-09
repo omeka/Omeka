@@ -62,8 +62,8 @@ class Omeka_Application_Resource_Acl extends Zend_Application_Resource_ResourceA
         // Everyone can view and browse items, item types, tags, collections, and search.
         $acl->allow(null, array('Items', 'ItemTypes', 'Tags', 'Collections', 'Search'), 
                     array('index', 'browse', 'show'));
-        // Everyone can view an item's tags and use the item advanced search.
-        $acl->allow(null, array('Items'), array('tags', 'advanced-search'));
+        // Everyone can view an item's tags and use the item search.
+        $acl->allow(null, array('Items'), array('tags', 'search'));
         // Everyone can view files.
         $acl->allow(null, 'Files', 'show');
         // Non-authenticated users can access the upgrade script, for logistical reasons.

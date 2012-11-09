@@ -40,7 +40,7 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
         return array(
             array('/items/add', 'items', 'add'),
             array('/items/edit/1', 'items', 'edit'),
-            array('/items/advanced-search', 'items', 'advanced-search'),
+            array('/items/search', 'items', 'search'),
             array('/items/tags', 'items', 'tags')
         );
     }
@@ -60,7 +60,7 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
         return array(
             array('/items/add', 'form#item-form'),
             array('/items/edit/1', 'form#item-form'),
-            array('/items/advanced-search', 'form#advanced-search-form'),
+            array('/items/search', 'form#advanced-search-form'),
         );
     }
 
@@ -115,7 +115,7 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
     public static function ajaxPartials()
     {
         return array(
-            array('/items/advanced-search'),
+            array('/items/search'),
         );
     }
 
@@ -138,7 +138,7 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
 
     public function testAdvancedSearchXSSInjection()
     {
-        $url = '/items/advanced-search?' . http_build_query(array(
+        $url = '/items/search?' . http_build_query(array(
             'search' => self::XSS_QUERY_STRING,
             'advanced' => array(
                 array('element_id' => self::XSS_QUERY_STRING,
@@ -157,7 +157,7 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
         ));
         $this->dispatch($url);
         $this->assertController('items');
-        $this->assertAction('advanced-search');
+        $this->assertAction('search');
         $this->assertNotContains(self::XSS_QUERY_STRING, $this->response->getBody());
     }
 
