@@ -16,19 +16,18 @@ class Omeka_Form_Decorator_SavePanelHook extends Zend_Form_Decorator_Abstract
 
     public function render($content)
     {        
-        $type = $this->getRecordType();
-        $pluralType = Inflector::pluralize($type);
+        $type = $this->geType();
         $record = $this->getRecord();
 
         //hooks echo the content, so stuff the hook results into an output buffer
         //then put that ob content into a variable
         ob_start();
-        fire_plugin_hook("admin_" . $pluralType . "_panel_buttons", array('view'=>$this, 'record'=>$record));        
+        fire_plugin_hook("admin_" . $type . "_panel_buttons", array('view'=>$this, 'record'=>$record));        
         $buttonsHtml = ob_get_contents();
         ob_end_clean();
         
         ob_start();
-        fire_plugin_hook("admin_" . $pluralType . "_panel_fields", array('view'=>$this, 'record'=>$record));
+        fire_plugin_hook("admin_" . $type . "_panel_fields", array('view'=>$this, 'record'=>$record));
         $fieldsHtml = ob_get_contents();
         ob_end_clean();
         
@@ -45,10 +44,10 @@ class Omeka_Form_Decorator_SavePanelHook extends Zend_Form_Decorator_Abstract
      * @return mixed false or the record
      */
     
-    public function getRecordType()
+    public function getType()
     {
-        if(isset($this->_options['recordType'])) {
-            return $this->_options['recordType'];
+        if(isset($this->_options['type'])) {
+            return $this->_options['type'];
         }
         return false;
         

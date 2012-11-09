@@ -72,7 +72,7 @@ class Omeka_Form_Decorator_SavePanelAction extends Zend_Form_Decorator_Abstract
     
         $html = "<input id='save-changes' class='submit big green button' type='submit' value='Save Changes' name='submit' />";
         if($record) {
-            if($this->hasPublicPage()) {
+            if($this->hasPublicPage() && $record->exists()) {
                 set_theme_base_url('public');
                 $publicPageUrl = record_url($record, 'show');
                 revert_theme_base_url();

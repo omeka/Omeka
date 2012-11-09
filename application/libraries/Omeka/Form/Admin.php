@@ -23,7 +23,7 @@ class Omeka_Form_Admin extends Omeka_Form
     
     protected $_record;
     
-    protected $_record_type;
+    protected $_type;
     
     protected $_hasPublicPage = true;
         
@@ -38,8 +38,8 @@ class Omeka_Form_Admin extends Omeka_Form
     {
         parent::init();
         
-        if(empty($this->_record_type)) {
-            throw new Zend_Form_Exception("A record type must be given to use Omeka_Form_Admin");
+        if(empty($this->_type)) {
+            throw new Zend_Form_Exception("A type (often the record type) must be given to use Omeka_Form_Admin");
         }
         //instead of extending Zend_Form_DisplayGroup, setting up here so css classes can be options directly
         //on instantiating the form. If those classes should never change, then this probably should go to 
@@ -55,7 +55,7 @@ class Omeka_Form_Admin extends Omeka_Form
         $saveDecorator = new Zend_Form_Decorator_HtmlTag(array('tag'=>'div', 'id'=>'save', 'class'=>$this->_saveGroupCssClass));
         $this->_saveDisplayGroupActionDecorator = new Omeka_Form_Decorator_SavePanelAction();
         
-        $hookDecoratorOptions = array('recordType'=>$this->_record_type);
+        $hookDecoratorOptions = array('type'=>$this->_type);
         if($this->_record) {
             $this->_saveDisplayGroupActionDecorator->setOption('record', $this->_record);
             $this->setHasPublicPage();          
@@ -194,9 +194,9 @@ class Omeka_Form_Admin extends Omeka_Form
      * @param string $type
      */
     
-    public function setRecordType($type)
+    public function setType($type)
     {
-        $this->_record_type = $type;
+        $this->_type = $type;
     }
     
     /**
@@ -225,7 +225,7 @@ class Omeka_Form_Admin extends Omeka_Form
      */
     
     
-    public function setHasPublicPage($value = true)
+    public function setHasPublicPage($value = false)
     {
         $this->_saveDisplayGroupActionDecorator->setOption('hasPublicPage', $value);
     }
