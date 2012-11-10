@@ -25,7 +25,7 @@ class Omeka_Form_Admin extends Omeka_Form
     
     protected $_type;
     
-    protected $_hasPublicPage = true;
+    protected $_hasPublicPage = false;
         
     protected $_editGroupCssClass = 'seven columns alpha';
     
@@ -35,9 +35,9 @@ class Omeka_Form_Admin extends Omeka_Form
     
     
     public function init()
-    {
+    {        
         parent::init();
-        
+
         if(empty($this->_type)) {
             throw new Zend_Form_Exception("A type (often the record type) must be given to use Omeka_Form_Admin");
         }
@@ -53,12 +53,12 @@ class Omeka_Form_Admin extends Omeka_Form
         //create the decorators with CSS classes set up via options 
         $editDecorator = new Zend_Form_Decorator_HtmlTag(array('tag'=>'div', 'class'=>$this->_editGroupCssClass));
         $saveDecorator = new Zend_Form_Decorator_HtmlTag(array('tag'=>'div', 'id'=>'save', 'class'=>$this->_saveGroupCssClass));
-        $this->_saveDisplayGroupActionDecorator = new Omeka_Form_Decorator_SavePanelAction();
         
-        $hookDecoratorOptions = array('type'=>$this->_type);
+                
+        $hookDecoratorOptions = array('type'=>$this->_type, 'hasPublicPage'=>$this->_hasPublicPage);
+        $this->_saveDisplayGroupActionDecorator = new Omeka_Form_Decorator_SavePanelAction($hookDecoratorOptions);
         if($this->_record) {
             $this->_saveDisplayGroupActionDecorator->setOption('record', $this->_record);
-            $this->setHasPublicPage();          
             $hookDecoratorOptions['record'] = $this->_record;
         }        
         $savePanelHookDecorator = new Omeka_Form_Decorator_SavePanelHook($hookDecoratorOptions);
@@ -227,7 +227,6 @@ class Omeka_Form_Admin extends Omeka_Form
     
     public function setHasPublicPage($value = false)
     {
-        $this->_saveDisplayGroupActionDecorator->setOption('hasPublicPage', $value);
-    }
-    
+        $this->_hasPublicPage = $value;
+    }    
 }

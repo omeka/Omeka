@@ -43,7 +43,7 @@ class Omeka_Form_Decorator_SavePanelAction extends Zend_Form_Decorator_Abstract
     
     public function hasPublicPage()
     {
-        return $this->_options['hasPublicPage'];        
+        return $this->_options['hasPublicPage'];          
     }
     
     /**
@@ -57,7 +57,7 @@ class Omeka_Form_Decorator_SavePanelAction extends Zend_Form_Decorator_Abstract
     {
     
         $noAttribs = $this->getOption('noAttribs');
-        $record = $this->getRecord();
+        $record = $this->getRecord();        
         $content = $this->getOption('content');
         $this->removeOption('content');
         $this->removeOption('noAttribs');
