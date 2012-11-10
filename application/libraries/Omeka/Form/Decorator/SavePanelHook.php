@@ -16,7 +16,7 @@ class Omeka_Form_Decorator_SavePanelHook extends Zend_Form_Decorator_Abstract
 
     public function render($content)
     {        
-        $type = $this->geType();
+        $type = $this->getType();
         $record = $this->getRecord();
 
         //hooks echo the content, so stuff the hook results into an output buffer
