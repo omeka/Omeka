@@ -17,7 +17,6 @@ class Omeka_Form_Navigation extends Omeka_Form
     const HIDDEN_ELEMENT_ID = 'navigation_hidden';
     const SELECT_HOMEPAGE_ELEMENT_ID = 'navigation_homepage_select';
     const HOMEPAGE_URI_OPTION_NAME = 'homepage_uri';
-    
     const HOMEPAGE_SELECT_DISPLAY_ELEMENT_ID = 'homepage_select_display';
         
     private $_nav;  // The Omeka_Navigaton object
@@ -30,7 +29,6 @@ class Omeka_Form_Navigation extends Omeka_Form
     {
         parent::init();
         $this->setAttrib('id', self::FORM_ELEMENT_ID);
-        
         $this->_nav = new Omeka_Navigation();
         $this->_nav->loadAsOption(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME);        
         $this->_nav->addPagesFromFilter(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_FILTER_NAME);
@@ -45,12 +43,10 @@ class Omeka_Form_Navigation extends Omeka_Form
     public function displayNavigationLinks()
     {        
         $html = '<ul id="navigation_main_list">';
-        
         $pageCount = 0;
         foreach($this->_nav as $page) {
             $html .= $this->_displayNavigationPageLink($page, $pageCount);
         }
-        
         $html .= '</ul>';
         return $html;
     }
@@ -63,10 +59,8 @@ class Omeka_Form_Navigation extends Omeka_Form
     {   
         // Save the navigation from post                 
         $this->_saveNavigationFromPost();
-        
         // Save the homepage uri
         $this->_saveHomepageFromPost();
-        
         // Reset the form elements to display the updated navigation
         $this->_initElements();
     }
@@ -111,7 +105,6 @@ class Omeka_Form_Navigation extends Omeka_Form
     protected function _displayNavigationPageLink(Zend_Navigation_Page $page, &$pageCount)
     {        
         $pageCount++;
-         
         $checkboxId = 'main_nav_checkboxes_' . $pageCount;                
         $checkboxValue = $this->_getPageHiddenInfo($page);
         $checkboxChecked = $page->isVisible() ? 'checked="checked"' : '';
@@ -119,10 +112,8 @@ class Omeka_Form_Navigation extends Omeka_Form
         if ($page->can_delete) {
             $checkboxClasses[] = 'can_delete_nav_link';
         }
-        $checkboxClass = implode(' ', $checkboxClasses);        
-        
+        $checkboxClass = implode(' ', $checkboxClasses);
         $html = '<li>';
-        
         $html .= '<div class="main_link">';
         $html .= '<div class="sortable-item">';
         $html .= '<input type="checkbox" name="' 
@@ -135,7 +126,7 @@ class Omeka_Form_Navigation extends Omeka_Form
                  . ' class="' 
                  . $checkboxClass 
                  . '">';
-        $html .= '<a href="' . $page->getHref() . '">' . __($page->getLabel()) . '</a>';
+        $html .= '<a href="' . $page->getHref() . '">' . html_escape($page->getLabel()) . '</a>';
         $html .= '</div>';
         $html .= '<div class="drawer-contents">';
         $html .= '<label>Label</label><input type="text" class="navigation-label" />';
@@ -151,7 +142,6 @@ class Omeka_Form_Navigation extends Omeka_Form
             $html .= '</ul>';
         }
         $html .= '</li>';
-        
         return $html;
     }
     
@@ -162,15 +152,12 @@ class Omeka_Form_Navigation extends Omeka_Form
     protected function _addHomepageSelectElement()
     {
         $elementIds = array();
-
         $pageLinks = array();
-        $pageLinks['/'] = '[Default]'; // Add the default homepage link option 
-        
+        $pageLinks['/'] = '[Default]'; // Add the default homepage link option
         $iterator = new RecursiveIteratorIterator($this->_nav, RecursiveIteratorIterator::SELF_FIRST);
         foreach($iterator as $page) {
             $pageLinks[$page->getHref()] = $page->getLabel();
         }
-                        
         $this->addElement('select', self::SELECT_HOMEPAGE_ELEMENT_ID, array(
             'label' => __('Select a Homepage'),
             'multiOptions' => $pageLinks,
@@ -184,7 +171,6 @@ class Omeka_Form_Navigation extends Omeka_Form
                     'Errors',)
         ));
         $elementIds[] = self::SELECT_HOMEPAGE_ELEMENT_ID;
-        
         $this->addDisplayGroup(
             $elementIds,
             self::HOMEPAGE_SELECT_DISPLAY_ELEMENT_ID, 
@@ -201,14 +187,28 @@ class Omeka_Form_Navigation extends Omeka_Form
         // update the navigation from the hidden element value in the post data
         $nav = new Omeka_Navigation();
         $nav->loadAsOption(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME);
-                            
+        // add pages from the post                  
+        $nonExpiredPageUids = $this->_addPagesFromPostToNav($nav);
+        // remove pages from the nav that were not in the post  
+        $this->_removeExpiredPagesFromNav($nav, $nonExpiredPageUids);
+        $nav->saveAsOption(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME);        
+        $this->_nav = $nav;
+    }
+    
+    /**
+     * Adds pages from the post to the navigation object 
+     *
+     * @param Omeka_Navigation $nav - The navigation object in which to add navigation pages from the post
+     * @return array The navigation page uids in the navigation object that were added from the post 
+     * to the navigation object.
+     */
+    protected function _addPagesFromPostToNav($nav)
+    {
+        $pageUids = array();
         if ($pageLinks = $this->getValue(self::HIDDEN_ELEMENT_ID)) {            
-            
-            if ($pageLinks = json_decode($pageLinks, true)) {
-                                                                                                
+            if ($pageLinks = json_decode($pageLinks, true)) {                                                                  
                 // add and update the pages in the navigation
                 $pageOrder = 0;
-                $pageUids = array();
                 $pages = array();
                 $parentPageIds = array();
                 $pageIdsToPageUids = array();
@@ -228,17 +228,14 @@ class Omeka_Form_Navigation extends Omeka_Form
                     $parentPageIds[] = $pageLink['parent_id'];                                        
                     $pageUids[] = $page->uid;
                     $pages[] = $page;
-                    
                     $pageIdsToPageUids[strval($pageLink['id'])] = $page->uid;
-                }
-                                                                
+                }                                 
                 // structure the parent/child relationships
                 // this assumes that the $pages are in a flattened hierarchical order           
                 for($i = 0; $i < $pageOrder; $i++) {
                     $page = $pages[$i];
                     $page->removePages(); // remove old children pages
-                    $parentPageId = $parentPageIds[$i];
-                                        
+                    $parentPageId = $parentPageIds[$i];         
                     if ($parentPageId === null) {
                          // add a page that lacks a parent
                         $nav->addPage($page);
@@ -253,22 +250,29 @@ class Omeka_Form_Navigation extends Omeka_Form
                         }
                     }
                 }
-                                                                
-                // prune expired pages from navigation
-                // these pages must be deletable
-                $otherPages = $nav->getOtherPages($pageUids);                
-                $expiredPages = array();
-                foreach($otherPages as $otherPage) {
-                    if ($otherPage->can_delete) {
-                        $expiredPages[] = $otherPage;
-                    }
-                }
-                $nav->prunePages($expiredPages);                
             }
         }
+        return $pageUids;
+    }
 
-        $nav->saveAsOption(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME);        
-        $this->_nav = $nav;
+    /**
+     * Removes expired pages from the navigation object 
+     *
+     * @param Omeka_Navigation $nav - The navigation object from which to prune pages
+     * @param array $nonExpiredPageUids - The navigation page uids in the navigation object NOT to prune.
+     */    
+    protected function _removeExpiredPagesFromNav($nav, $nonExpiredPageUids)
+    {
+        // prune expired pages from navigation
+        // these pages must be deletable
+        $otherPages = $nav->getOtherPages($nonExpiredPageUids);                
+        $expiredPages = array();
+        foreach($otherPages as $otherPage) {
+            if ($otherPage->can_delete) {
+                $expiredPages[] = $otherPage;
+            }
+        }
+        $nav->prunePages($expiredPages);
     }
     
     /**
@@ -278,7 +282,6 @@ class Omeka_Form_Navigation extends Omeka_Form
     protected function _saveHomepageFromPost()
     {
         $homepageUri = $this->getValue(self::SELECT_HOMEPAGE_ELEMENT_ID);
-        
         // make sure the homepageUri still exists in the navigation
         $pageExists = false;
         $iterator = new RecursiveIteratorIterator($this->_nav, RecursiveIteratorIterator::SELF_FIRST);
@@ -288,7 +291,6 @@ class Omeka_Form_Navigation extends Omeka_Form
                 break;
             }
         }
-        
         if (!$pageExists) {
             $homepageUri = '/';
         }
@@ -323,7 +325,6 @@ class Omeka_Form_Navigation extends Omeka_Form
         if (!parent::isValid($data)) {
             return false;
         }
-        
         $hasErrors = false;
         $missingLabel = false;
         $missingURI = false;
@@ -339,7 +340,7 @@ class Omeka_Form_Navigation extends Omeka_Form
                         $missingLabel = true;
                     }
                     if (!$missingURI && trim($pageLink['uri']) == '') {
-                        $this->addError('All navigation links must have URIs.');
+                        $this->addError(__('All navigation links must have URIs.'));
                         $hasErrors = true;
                         $missingURI = true;
                     }
@@ -352,20 +353,44 @@ class Omeka_Form_Navigation extends Omeka_Form
                                 $uids[] = $uid;
                             } else {
                                 if (!$duplicateURI) {
-                                    $this->addError('All navigation links must have different URIs.');
+                                    $this->addError(__('All navigation links must have different URIs.'));
                                     $duplicateURI = true;
                                     $hasErrors = true;
                                 }
                             }
                             
                         } catch (Omeka_Navigation_Page_Uri_Exception $e) {
-                            $this->addError('Invalid URI for "' . $pageLink['label'] . '" navigation link:  "' . $pageLink['uri'] . '"');
+                            $this->addError(__('Invalid URI for "%s" navigation link:  "%s"', array($pageLink['label'],  $pageLink['uri'])));
                             $hasErrors = true;
                         }
                     }
                 }
             }
         }
+        $hasErrors = $hasErrors || $this->_postHasDeletedUndeletablePage();
         return !$hasErrors;
+    }
+    
+    /**
+     * Returns whether the post is attempting to delete an undeletable page
+     *
+     * @return boolean
+     */
+    protected function _postHasDeletedUndeletablePage()
+    {
+        $nav = new Omeka_Navigation();
+        $nav->loadAsOption(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME);
+        // add pages from the post                  
+        $nonExpiredPageUids = $this->_addPagesFromPostToNav($nav);       
+        // check expired pages from navigation
+        // these pages must not be deleteable and must not have a subpage that is deletable
+        $otherPages = $nav->getOtherPages($nonExpiredPageUids);                
+        foreach($otherPages as $otherPage) {
+            if (!$otherPage->can_delete || $otherPage->findByOne('can_delete', false)) {
+                $this->addError(__('Navigation links that have undeleteable sublinks cannot be deleted.'));
+                return true;
+            }
+        }        
+        return false;
     }
 }
