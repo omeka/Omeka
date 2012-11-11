@@ -28,7 +28,7 @@ class SettingsController extends Omeka_Controller_AbstractActionController
         $form = $this->_getForm();
         $this->view->form = $form;
         
-        if (isset($_POST['settings_submit'])) {
+        if ($this->getRequest()->isPost()) {
             if ($form->isValid($_POST)) {
                 $this->_setOptions($form);
                 $this->_helper->flashMessenger(__('The general settings have been updated.'), 'success');
@@ -67,6 +67,8 @@ class SettingsController extends Omeka_Controller_AbstractActionController
         $form = new Omeka_Form_GeneralSettings;
         $form->setDefaults($this->getInvokeArg('bootstrap')->getResource('Options'));
         fire_plugin_hook('general_settings_form', array('form' => $form));
+
+        $form->removeDecorator('Form');
         return $form;
     }
     

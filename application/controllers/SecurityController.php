@@ -21,6 +21,7 @@ class SecurityController extends Omeka_Controller_AbstractActionController
     
     public function editAction() {
         $this->view->form = new Omeka_Form_SecuritySettings;
+        $this->view->form->removeDecorator('Form');
         
         
         //Any changes to this list should be reflected in the install script (and possibly the view functions)        
