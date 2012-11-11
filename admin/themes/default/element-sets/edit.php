@@ -12,6 +12,8 @@ echo head(array(
 
 <section class="seven columns alpha">
     <h2><?php echo __($element_set->name); ?></h2>
+    <p class="description">You can click and drag the elements into your preferred 
+    display order. Click the right arrows to add customized comments to elements.</p>
     <p><?php echo __($element_set->description); ?></p>
     <ul class="sortable">
         <?php foreach ($element_set->getElements() as $element): ?>
