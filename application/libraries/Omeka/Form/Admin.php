@@ -51,8 +51,8 @@ class Omeka_Form_Admin extends Omeka_Form
         $this->addDisplayGroups(array($this->_editDisplayGroup, $this->_saveDisplayGroup));
         
         //create the decorators with CSS classes set up via options 
-        $editDecorator = new Zend_Form_Decorator_HtmlTag(array('tag'=>'div', 'class'=>$this->_editGroupCssClass));
-        $saveDecorator = new Zend_Form_Decorator_HtmlTag(array('tag'=>'div', 'id'=>'save', 'class'=>$this->_saveGroupCssClass));
+        $editDecorator = new Zend_Form_Decorator_HtmlTag(array('tag'=>'section', 'class'=>$this->_editGroupCssClass));
+        $saveDecorator = new Zend_Form_Decorator_HtmlTag(array('tag'=>'section', 'id'=>'save', 'class'=>$this->_saveGroupCssClass));
         
                 
         $hookDecoratorOptions = array('type'=>$this->_type, 'hasPublicPage'=>$this->_hasPublicPage);
