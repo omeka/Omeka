@@ -1,6 +1,4 @@
-<?php echo js_tag('tiny_mce/tiny_mce'); 
-// echo js_tag('tiny_mce/tiny_mce_src'); // Use the 'tiny_mce_src' file for debugging.
-?>
+<?php echo js_tag('vendor/tiny_mce/tiny_mce'); ?>
 <?php echo js_tag('elements'); ?>
 <script type="text/javascript" charset="utf-8">
 //<![CDATA[

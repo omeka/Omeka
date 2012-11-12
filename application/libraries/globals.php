@@ -1076,8 +1076,8 @@ function head_js($includeDefaults = true)
                        : false;
         $headScript->prependScript('jQuery.noConflict();');
         if ($useInternalAssets) {
-            $headScript->prependFile(src('jquery-ui', $dir, 'js'))
-                       ->prependFile(src('jquery', $dir, 'js'));
+            $headScript->prependFile(src('vendor/jquery-ui', $dir, 'js'))
+                       ->prependFile(src('vendor/jquery', $dir, 'js'));
         } else {
             $headScript->prependFile('//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js')
                        ->prependFile('//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js');

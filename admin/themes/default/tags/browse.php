@@ -1,5 +1,5 @@
 <?php
-queue_js_file(array('jquery.jeditable.mini', 'tags'));
+queue_js_file(array('vendor/jquery.jeditable', 'tags'));
 $pageTitle = __('Edit Tags') . ' ' .  __('(%s total)', $total_tags);
 echo head(array('title'=>$pageTitle, 'content_class' => 'horizontal-nav','bodyclass'=>'tags browse-tags primary')); ?>
 

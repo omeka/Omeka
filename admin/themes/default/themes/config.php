@@ -1,7 +1,7 @@
 <?php
 $pageTitle = __('Configure the &#8220;%s&#8221; Theme', html_escape($theme->title));
 echo head(array('title'=>$pageTitle, 'bodyclass'=>'themes theme-configuration')); ?>
-<?php echo js_tag('tiny_mce/tiny_mce'); ?>
+<?php echo js_tag('vendor/tiny_mce/tiny_mce'); ?>
 <?php echo js_tag('themes'); ?>
 
 <?php echo common('appearance-nav'); ?>
