@@ -109,14 +109,10 @@ class Omeka_Form extends Zend_Form
                     'ViewHelper', 
                     array('HtmlTag', array('tag' => 'div'))));
             } else if ($element instanceof Zend_Form_Element_File) {
-                $element->setDecorators(array(
-                    'File', 
-                    'Errors', 
-                    array(array('InputsTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'inputs')), 
-                    array('Description', array('tag' => 'p', 'class' => 'explanation')), 
-                    'Label', 
-                    array(array('FieldTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'field'))
-                ));
+                // Picking the same name as the ViewHelper allows us to change
+                // it in-place.
+                $element->addDecorator(
+                    array('Zend_Form_Decorator_ViewHelper' => 'File'));
             } else if($element instanceof Zend_Form_Element_Radio) {
                 // Radio buttons must have a 'radio' class on the div wrapper.
                 $element->getDecorator('InputsTag')->setOption('class', 'inputs radio');
