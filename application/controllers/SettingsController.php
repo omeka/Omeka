@@ -15,27 +15,92 @@ class SettingsController extends Omeka_Controller_AbstractActionController
         
     public function indexAction() 
     {
-        $this->_forward('edit');
+        $this->_helper->redirector('edit-settings');
     }
     
     public function browseAction() 
     {
-        $this->_forward('edit');
+        $this->_helper->redirector('edit-settings');
     }
     
-    public function editAction() 
+    public function editSettingsAction() 
     {
-        $form = $this->_getForm();
+        require_once APP_DIR . '/forms/GeneralSettings.php';
+        $form = new Omeka_Form_GeneralSettings;
+        $form->setDefaults($this->getInvokeArg('bootstrap')->getResource('Options'));
+        fire_plugin_hook('general_settings_form', array('form' => $form));
+        $form->removeDecorator('Form');
         $this->view->form = $form;
         
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($_POST)) {
-                $this->_setOptions($form);
+                $options = $form->getValues();
+                // Everything except the submit button should correspond to a 
+                // valid option in the database.
+                unset($options['settings_submit']);
+                foreach ($options as $key => $value) {
+                    set_option($key, $value);
+                }
                 $this->_helper->flashMessenger(__('The general settings have been updated.'), 'success');
             } else {
                 $this->_helper->flashMessenger(__('There were errors found in your form. Please edit and resubmit.'), 'error');
             }
         }
+    }
+    
+    public function editSecurityAction() {
+        $form = new Omeka_Form_SecuritySettings;
+        $form->removeDecorator('Form');
+        $this->view->form = $form;
+        
+        if ($this->getRequest()->isPost()) {
+            if ($form->isValid($_POST)) {
+                // Any changes to this list should be reflected in the install 
+                // script (and possibly the view functions).
+                $options = array(
+                    Omeka_Validate_File_Extension::WHITELIST_OPTION,
+                    Omeka_Validate_File_MimeType::WHITELIST_OPTION,
+                    File::DISABLE_DEFAULT_VALIDATION_OPTION,
+                    'html_purifier_is_enabled',
+                    'html_purifier_allowed_html_elements',
+                    'html_purifier_allowed_html_attributes',
+                    Omeka_Captcha::PUBLIC_KEY_OPTION,
+                    Omeka_Captcha::PRIVATE_KEY_OPTION
+                );
+                foreach ($form->getValues() as $key => $value) {
+                    if (in_array($key, $options)) {
+                        set_option($key, $value);
+                    }
+                }
+                $this->_helper->flashMessenger(__('The security settings have been updated.'), 'success');
+            }
+        }
+    }
+    
+    public function editSearchAction()
+    {
+        // Customize search record types.
+        if ($this->getRequest()->isPost()) {
+            if (isset($_POST['submit_save_changes'])) {
+                if (isset($_POST['search_record_types'])) {
+                    $option = serialize($_POST['search_record_types']);
+                } else {
+                    $option = serialize(array());
+                }
+                set_option('search_record_types', $option);
+                $this->_helper->flashMessenger(__('You have changed which records are searchable in Omeka. Please re-index the records using the form below.'), 'success');
+            }
+            
+            // Index the records.
+            if (isset($_POST['submit_index_records'])) {
+                Zend_Registry::get('bootstrap')->getResource('jobs')
+                                               ->sendLongRunning('Job_SearchTextIndex');
+                $this->_helper->flashMessenger(__('Indexing records. This may take a while. You may continue administering your site.'), 'success');
+            }
+        }
+        
+        $this->view->assign('searchRecordTypes', get_search_record_types());
+        $this->view->assign('customSearchRecordTypes', get_custom_search_record_types());
     }
     
     /**
@@ -53,33 +118,55 @@ class SettingsController extends Omeka_Controller_AbstractActionController
      */
     public function checkImagemagickAction()
     {
-        $imPath = $this->_getParam('path-to-convert');
         $this->_helper->viewRenderer->setNoRender(true);
+        $imPath = $this->_getParam('path-to-convert');
         $isValid = Omeka_File_Derivative_Image_Creator::isValidImageMagickPath($imPath);
-        $this->getResponse()->setBody($isValid 
-                                    ? '<div class="im-success">' . __('The ImageMagick directory path works.') . '</div>' 
-                                    : '<div class="im-failure">' . __('The ImageMagick directory path does not work.') . '</div>');
-    }
-        
-    private function _getForm()
-    {
-        require_once APP_DIR . '/forms/GeneralSettings.php';
-        $form = new Omeka_Form_GeneralSettings;
-        $form->setDefaults($this->getInvokeArg('bootstrap')->getResource('Options'));
-        fire_plugin_hook('general_settings_form', array('form' => $form));
-
-        $form->removeDecorator('Form');
-        return $form;
+        $this->getResponse()->setBody(
+            $isValid ? '<div class="im-success">' . __('The ImageMagick directory path works.') . '</div>' 
+                     : '<div class="im-failure">' . __('The ImageMagick directory path does not work.') . '</div>');
     }
     
-    private function _setOptions(Zend_Form $form)
-    {        
-        $options = $form->getValues();
-        // Everything except the submit button should correspond to a valid 
-        // option in the database.
-        unset($options['settings_submit']);
-        foreach ($options as $key => $value) {
-            set_option($key, $value);
+    public function getFileExtensionWhitelistAction()
+    {
+        $this->_helper->viewRenderer->setNoRender(true);
+        if ($this->_getParam('default')) {
+            $body = Omeka_Validate_File_Extension::DEFAULT_WHITELIST;
+        } else {
+            $body = get_option(Omeka_Validate_File_Extension::WHITELIST_OPTION);
         }
+        $this->getResponse()->setBody($body);
+    }
+    
+    public function getFileMimeTypeWhitelistAction()
+    {
+        $this->_helper->viewRenderer->setNoRender(true);
+        if ($this->_getParam('default')) {
+            $body = Omeka_Validate_File_MimeType::DEFAULT_WHITELIST;
+        } else {
+            $body = get_option(Omeka_Validate_File_MimeType::WHITELIST_OPTION);
+        }
+        $this->getResponse()->setBody($body);
+    }
+    
+    public function getHtmlPurifierAllowedHtmlElementsAction()
+    {
+        $this->_helper->viewRenderer->setNoRender(true);
+        if ($this->_getParam('default')) {
+            $body = implode(',', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlElements());
+        } else {
+            $body = get_option('html_purifier_allowed_html_elements');
+        }
+        $this->getResponse()->setBody($body);
+    }
+    
+    public function getHtmlPurifierAllowedHtmlAttributesAction()
+    {
+        $this->_helper->viewRenderer->setNoRender(true);
+        if ($this->_getParam('default')) {
+            $body = implode(',', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlAttributes());
+        } else {
+            $body = get_option('html_purifier_allowed_html_attributes');
+        }
+        $this->getResponse()->setBody($body);
     }
 }

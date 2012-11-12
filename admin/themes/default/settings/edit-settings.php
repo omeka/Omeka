@@ -26,7 +26,7 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
     <section class="three columns omega">
         
         <div id="save" class="panel">
-            <?php echo $this->formSubmit('submit', __('Save Settings'), array('class'=>'submit big green button')); ?>
+            <?php echo $this->formSubmit('submit', __('Save Changes'), array('class'=>'submit big green button')); ?>
         </div>
     
     </section>
