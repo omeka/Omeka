@@ -1,5 +1,5 @@
 <?php
-$pageTitle = __('Appearance');
+$pageTitle = __('Edit Theme');
 echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'themes primary'));?>
 
             <?php echo common('appearance-nav'); ?>

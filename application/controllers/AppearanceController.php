@@ -11,58 +11,68 @@
  */
 class AppearanceController extends Omeka_Controller_AbstractActionController
 {
-
     const DEFAULT_FULLSIZE_CONSTRAINT = 800;
     const DEFAULT_THUMBNAIL_CONSTRAINT = 200;
     const DEFAULT_SQUARE_THUMBNAIL_CONSTRAINT = 200;
     const DEFAULT_PER_PAGE_ADMIN = 10;
     const DEFAULT_PER_PAGE_PUBLIC = 10;
-
+    
     public function indexAction() 
     {
-        $this->_forward('edit');
+        $this->_helper->redirector('browse', 'themes');
     }
+    
     public function browseAction() 
     {
-        $this->_forward('edit');
+        $this->_helper->redirector('browse', 'themes'); 
     }
-
-    public function editAction() 
-    {
-        $form = $this->_getForm();
-        $this->view->form = $form;
-        
-        if (isset($_POST['appearance_submit'])) {
-            if ($form->isValid($_POST)) {
-                $this->_setOptions($form);
-                $this->_helper->flashMessenger(__('The appearance settings have been updated.'), 'success');
-            } else {
-                $this->_helper->flashMessenger(__('There were errors found in your form. Please edit and resubmit.'), 'error');
-            }
-        }
-
-    }
-
-    private function _getForm()
+    
+    public function editAppearanceAction() 
     {
         require_once APP_DIR . '/forms/AppearanceSettings.php';
         $form = new Omeka_Form_AppearanceSettings;
         $form->setDefaults($this->getInvokeArg('bootstrap')->getResource('Options'));
         fire_plugin_hook('appearance_settings_form', array('form' => $form));
-        return $form;
-    }
-
-    private function _setOptions(Zend_Form $form)
-    {        
-        $options = $form->getValues();
-        // Everything except the submit button should correspond to a valid 
-        // option in the database.
-        unset($options['settings_submit']);
-        foreach ($options as $key => $value) {
-            set_option($key, $value);
+        $this->view->form = $form;
+        
+        if (isset($_POST['appearance_submit'])) {
+            if ($form->isValid($_POST)) {
+                $options = $form->getValues();
+                // Everything except the submit button should correspond to a 
+                // valid option in the database.
+                unset($options['settings_submit']);
+                foreach ($options as $key => $value) {
+                    set_option($key, $value);
+                }
+                $this->_helper->flashMessenger(__('The appearance settings have been updated.'), 'success');
+            } else {
+                $this->_helper->flashMessenger(__('There were errors found in your form. Please edit and resubmit.'), 'error');
+            }
         }
     }
-
+    
+    public function editNavigationAction() 
+    {
+        set_theme_base_url('public');
+        require_once APP_DIR . '/forms/Navigation.php';
+        $form = new Omeka_Form_Navigation();
+        fire_plugin_hook('navigation_form', array('form' => $form));
+        $this->view->form = $form;
+        if (isset($_POST['submit'])) {
+            if ($form->isValid($_POST)) {
+                $form->saveFromPost();
+                $this->_helper->flashMessenger(__('The navigation settings have been updated.'), 'success');
+            } else {
+                $this->_helper->flashMessenger(__('The navigation settings were not saved because of missing or invalid values.  All changed values have been restored.'), 'error');
+                foreach($form->getMessages() as $msg) {
+                    $this->_helper->flashMessenger($msg, 'error');
+                }
+            }
+        }
+        // Reset to "current" base uri. "revert" won't work here because
+        // something may have used public_uri or admin_uri in between.
+        set_theme_base_url();
+    }
 }
 
 ?>
