@@ -9,5 +9,5 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%element_sets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `%PREFIX%element_sets` VALUES 
-(1, NULL, 'Dublin Core', 'The Dublin Core metadata element set. These elements are common to all Omeka resources, including items, files, collections, exhibits, and entities. See http://dublincore.org/documents/dces/.'),
+(1, NULL, 'Dublin Core', 'The Dublin Core metadata element set. These elements are common to all Omeka records, including items, files, and collections. See http://dublincore.org/documents/dces/.'),
 (3, 'Item', 'Item Type Metadata', 'The item type metadata element set, consisting of all item type elements bundled with Omeka and all item type elements created by an administrator.');
