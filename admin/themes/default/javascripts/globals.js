@@ -17,6 +17,7 @@ if (!Omeka) {
             mode: "textareas", // All textareas
             theme: "advanced",
             theme_advanced_toolbar_location: "top",
+            theme_advanced_statusbar_location: "none",
             theme_advanced_toolbar_align: "left",
             theme_advanced_buttons1: "bold,italic,underline,|,justifyleft,justifycenter,justifyright,|,bullist,numlist,|,link,formatselect,code",
             theme_advanced_buttons2: "",
