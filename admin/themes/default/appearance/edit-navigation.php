@@ -1,6 +1,6 @@
 <?php
 queue_js_file(array('vendor/jquery.nestedSortable', 'navigation'));
-$pageTitle = __('Edit Navigation');
+$pageTitle = __('Appearance');
 echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
 
 <form action="<?php echo $this->form->getAction() ?>"

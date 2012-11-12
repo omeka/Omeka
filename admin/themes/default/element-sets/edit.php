@@ -1,7 +1,7 @@
 <?php
 queue_js_file('element-sets');
 echo head(array(
-    'title'=> __('Edit Elements'),
+    'title'=> __('Edit Element Set'),
     'content_class' => 'vertical-nav',
     'bodyclass'=>'element-sets primary'
 ));

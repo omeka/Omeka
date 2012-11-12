@@ -3,17 +3,17 @@
 <?php
     $navArray = array(
         array(
-            'label' => __('General Settings'),
+            'label' => __('General'),
             'uri' => url('settings/edit-settings')
         ),
         array(
-            'label' => __('Security Settings'),
+            'label' => __('Security'),
             'uri' => url('settings/edit-security'),
             'resource' => 'Security',
             'privilege' => 'edit'
         ),
         array(
-            'label' => __('Search Settings'),
+            'label' => __('Search'),
             'uri' => url('settings/edit-search')
         ),
         array(

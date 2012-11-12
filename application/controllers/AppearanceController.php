@@ -27,7 +27,7 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
         $this->_helper->redirector('browse', 'themes'); 
     }
     
-    public function editAppearanceAction() 
+    public function editSettingsAction() 
     {
         require_once APP_DIR . '/forms/AppearanceSettings.php';
         $form = new Omeka_Form_AppearanceSettings;

@@ -1,5 +1,5 @@
 <?php 
-$pageTitle = __('Browse Element Sets');
+$pageTitle = __('Settings');
 echo head(array('title'=> $pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'element-sets primary'));
 $doNotDelete = array('Dublin Core', 'Item Type Metadata');
 ?>

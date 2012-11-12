@@ -8,12 +8,12 @@
             'privilege' => 'edit'
         ),
         array(
-            'label' => __('Appearance Settings'),
-            'uri' => url('appearance/edit-appearance')
-        ),
-        array(
             'label' => __('Navigation'),
             'uri' => url('appearance/edit-navigation')
+        ),
+        array(
+            'label' => __('Settings'),
+            'uri' => url('appearance/edit-settings')
         ),
     );
     echo nav($navArray, 'admin_navigation_settings');

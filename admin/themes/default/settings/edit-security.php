@@ -1,5 +1,5 @@
 <?php 
-$pageTitle = __('Edit Security Settings');
+$pageTitle = __('Settings');
 echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
 <?php echo js_tag('security'); ?>
 <script type="text/javascript">

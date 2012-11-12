@@ -1,5 +1,5 @@
 <?php
-$pageTitle = __('Edit Search Settings');
+$pageTitle = __('Settings');
 echo head(array('title' => $pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary'));
 ?>
 <?php echo common('settings-nav'); ?>
