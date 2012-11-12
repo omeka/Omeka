@@ -25,8 +25,8 @@ class Omeka_Helper_JsTest extends PHPUnit_Framework_TestCase
     public function testOutputsScriptTagWithHref()
     {
         // Test with Contains to avoid matching issues with newlines.
-        $this->assertContains('<script type="text/javascript" src="http://fake.local/path/to/omeka/javascripts/jquery.js" charset="utf-8"></script>', 
-                            js_tag('jquery'));                    
+        $this->assertContains('<script type="text/javascript" src="http://fake.local/path/to/omeka/javascripts/vendor/jquery.js" charset="utf-8"></script>',
+                            js_tag('vendor/jquery'));
     }
 
     
