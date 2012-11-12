@@ -25,8 +25,8 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
             '//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js'
         );
         $this->internalDefaults = array(
-            self::ASSET_PATH_ROOT . '/javascripts/jquery.js',
-            self::ASSET_PATH_ROOT . '/javascripts/jquery-ui.js',
+            self::ASSET_PATH_ROOT . '/javascripts/vendor/jquery.js',
+            self::ASSET_PATH_ROOT . '/javascripts/vendor/jquery-ui.js',
         );
         
         // Load a view object to allow get_view() to work.
@@ -85,11 +85,11 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
 
     public function testQueueJs()
     {
-        queue_js_file(array('items-search', 'tiny_mce/tiny_mce'));
+        queue_js_file(array('items-search', 'vendor/tiny_mce/tiny_mce'));
 
         $scripts = array(
             self::ASSET_PATH_ROOT . '/javascripts/items-search.js',
-            self::ASSET_PATH_ROOT . '/javascripts/tiny_mce/tiny_mce.js'
+            self::ASSET_PATH_ROOT . '/javascripts/vendor/tiny_mce/tiny_mce.js'
         );
 
         $this->_assertScriptsIncluded($this->_getJsOutput(), $scripts);
