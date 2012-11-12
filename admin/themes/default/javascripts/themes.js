@@ -14,7 +14,7 @@ Omeka.Themes = {};
     Omeka.Themes.createChangeFileButton = function (fileInputName) {
         var button = $(document.createElement('a'));
         button.text('Change');
-        button.attr('class', 'submit');
+        button.attr('class', 'green button');
         button.click(function () {
             hiddenFile = $("#hidden_file_" + fileInputName);
             hiddenFile.attr("value", "");

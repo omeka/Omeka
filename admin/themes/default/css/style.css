@@ -2062,6 +2062,12 @@ button.remove_search {
     padding: 0 !important;
 }
 
+/* Configure Theme
+================================================== */
+.theme-file img {
+    max-width: 100%;
+}
+
 
 /* System Information
 ================================================== */

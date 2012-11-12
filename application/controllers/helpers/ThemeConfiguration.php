@@ -47,12 +47,14 @@ class Omeka_Controller_Action_Helper_ThemeConfiguration extends Zend_Controller_
             $this->_themeOptions = $originalOptions;
             
             foreach($elements as $element) {
-                if ($element instanceof Zend_Form_Element_File) {                                                
+                if ($element instanceof Zend_Form_Element_File) {
                     $this->_processFileElement($element);
                 }
             }
             
             return $this->_formValues;
+        } else {
+            var_dump($this->_form->getErrorMessages()); die();
         }
 
         return false;

@@ -70,6 +70,7 @@ class ThemesController extends Omeka_Controller_AbstractActionController
         
         // get the configuration form        
         $form = new Omeka_Form_ThemeConfiguration(array('themeName' => $themeName));
+        $form->removeDecorator('Form');
                 
         // process the form if posted
         if ($this->getRequest()->isPost()) {
@@ -79,6 +80,8 @@ class ThemesController extends Omeka_Controller_AbstractActionController
                 Theme::setOptions($themeName, $newOptions);
                 $this->_helper->flashMessenger(__('The theme settings were successfully saved!'), 'success');
                 $this->_helper->redirector('browse');
+            } else {
+                $this->_helper->_flashMessenger(__('There was an error on the form. Please try again.'), 'error');
             }
         }
         
