@@ -84,11 +84,6 @@ p, li {
 }
             
         li:empty { display: none; }
-    
-.serif {
-    font-family: "Arvo", serif;
-    font-weight: normal;
-}
 
 .section-title { width: 50%; }
     
@@ -1252,7 +1247,12 @@ header nav {
     #stats p:last-child {
         margin-right: 0;
     }
-
+    
+.index .panel h1, .index .panel h2, .index .panel h3, .index .panel h4 {
+    font-family: "Arvo", serif;
+    font-weight: normal;
+}
+    
 
 /* Browse Plugins
 ================================================== */

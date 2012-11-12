@@ -32,7 +32,7 @@ echo head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?
             
             <section id="recent-collections" class="five columns alpha">
                 <div class="panel">
-                    <h2 class="serif">Recent Collections</h2>
+                    <h2>Recent Collections</h2>
                     <?php
                         
                         $collections = get_recent_collections(5);
@@ -54,7 +54,7 @@ echo head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?
             
             <section id="recent-items" class="five columns omega">
                 <div class="panel">
-                <h2 class="serif">Recent Items</h2>
+                <h2>Recent Items</h2>
                     <?php 
                      
                         $items = get_recent_items(5); 
