@@ -22,18 +22,15 @@ foreach ($elementSets as $key => $elementSet) {
     }
 }
 
-foreach (array('Files', 'Miscellaneous', 'Tags') as $tabName) {
+foreach (array('Files', 'Tags') as $tabName) {
     ob_start();
     switch ($tabName) {
         case 'Files':
             require 'files-form.php';
-        break;
-        case 'Miscellaneous':
-            require 'miscellaneous-form.php';
-        break;
+            break;
         case 'Tags':
             require 'tag-form.php';
-        break;
+            break;
     }
     $tabs[$tabName] = ob_get_contents();
     ob_end_clean();
