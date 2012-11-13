@@ -23,13 +23,10 @@ class Omeka_Form_ItemTypes extends Omeka_Form
     const SUBMIT_EDIT_ELEMENT_ID = 'itemtypes_edit_submit';
     const SUBMIT_ADD_ELEMENT_ID = 'itemtypes_add_submit';
     
-    // prefixes
-    const CURRENT_ELEMENT_ORDER_PREFIX = 'element-order-';
-    const ADD_NEW_ELEMENT_NAME_PREFIX = 'add-new-element-name-';
-    const ADD_NEW_ELEMENT_DESCRIPTION_PREFIX = 'add-new-element-description-';
-    const ADD_NEW_ELEMENT_ORDER_PREFIX = 'add-new-element-order-';
-    const ADD_EXISTING_ELEMENT_ID_PREFIX = 'add-existing-element-id-';
-    const ADD_EXISTING_ELEMENT_ORDER_PREFIX = 'add-existing-element-order-';
+    // input names
+    const ELEMENTS_INPUT_NAME = 'elements';
+    const ELEMENTS_TO_ADD_INPUT_NAME = 'elements-to-add';
+    const NEW_ELEMENTS_INPUT_NAME = 'new-elements';
     
     private $_itemType;  // the item type for the form
     
@@ -99,6 +96,7 @@ class Omeka_Form_ItemTypes extends Omeka_Form
         foreach($this->_elementInfos as $elementInfo) {
             $elements[] = $elementInfo['element'];
         }
+
         $this->_itemType->addElements($elements);
     }
     
@@ -106,7 +104,7 @@ class Omeka_Form_ItemTypes extends Omeka_Form
     {
         $elementOrders = array();
         foreach($this->_elementInfos as $elementInfo) {
-            $elementOrders[] = $elementInfo['order'];
+            $elementOrders[$elementInfo['element']['id']] = $elementInfo['order'];
         }
         $this->_itemType->reorderElements($elementOrders);
     }
@@ -225,66 +223,44 @@ class Omeka_Form_ItemTypes extends Omeka_Form
     private function _getElementInfosFromPost()
     {
         $elementTable = get_db()->getTable('Element');
-        $elementInfos = array();                        
-        foreach($_POST as $key => $value) {
-            $elementInfo = null;
-            
-            if (preg_match('/^' . self::CURRENT_ELEMENT_ORDER_PREFIX  . '/', $key)) {
-                
-                // get the old element (but do not save it yet)
-                $elementIdParts = explode('-', $key);
-                $elementId = array_pop($elementIdParts);
-                $element = $elementTable->find($elementId);
-                
-                $elementInfo = array(
-                  'element' => $element,
-                  'temp_id' => null, 
-                  'order' => $_POST[self::CURRENT_ELEMENT_ORDER_PREFIX . $elementId], 
+        $elementInfos = array();
+
+        if (isset($_POST[self::ELEMENTS_INPUT_NAME])) {
+            $currentElements = $_POST[self::ELEMENTS_INPUT_NAME];
+            foreach ($currentElements as $elementId => $info) {
+                $elementInfos[] = array(
+                    'element' => $elementTable->find($elementId),
+                    'order' => $info['order']
                 );
-                
-            } else if (preg_match('/^' . self::ADD_NEW_ELEMENT_NAME_PREFIX  . '/', $key)) {
-
-                // construct a new element to add (but do not save it yet)
-                $elementTempIdParts = explode('-', $key);
-                $elementTempId = array_pop($elementTempIdParts);
-                $element = new Element;
-                $element->setElementSet(ElementSet::ITEM_TYPE_NAME);
-                $element->setName($value);
-                $element->setDescription($_POST[self::ADD_NEW_ELEMENT_DESCRIPTION_PREFIX . $elementTempId]);
-                $element->order = null;
-                                
-                $elementInfo = array(
-                    'element' => $element,
-                    'temp_id' => $elementTempId,
-                    'order' => $_POST[self::ADD_NEW_ELEMENT_ORDER_PREFIX . $elementTempId],
-                );
-                
-            } else if (preg_match('/^' . self::ADD_EXISTING_ELEMENT_ID_PREFIX  . '/', $key)) {
-
-                // construct an existing element to add (but do not save it yet)
-                $elementTempIdParts = explode('-', $key);
-                $elementTempId = array_pop($elementTempIdParts);
-                $elementId = $_POST[self::ADD_EXISTING_ELEMENT_ID_PREFIX . $elementTempId];
-                $element = $elementTable->find($elementId);                
-                
-                if ($element) {
-                    $elementInfo = array(
-                        'element' => $element,
-                        'temp_id' => $elementTempId,
-                        'order' => $_POST[self::ADD_EXISTING_ELEMENT_ORDER_PREFIX . $elementTempId],
-                    );
-                }
-            }
-
-            // Add the element info
-            if ($elementInfo) {
-                if ($elementInfo['element'] && $elementInfo['element']->order == 0) {
-                    $elementInfo['element']->order = null;
-                }
-                $elementInfos[] = $elementInfo;
             }
         }
-        
+
+        if (isset($_POST[self::ELEMENTS_TO_ADD_INPUT_NAME])) {
+            $elementsToAdd = $_POST[self::ELEMENTS_TO_ADD_INPUT_NAME];
+            foreach ($elementsToAdd as $tempId => $info) {
+                $elementInfos[] = array(
+                    'element' => $elementTable->find($info['id']),
+                    'order' => $info['order']
+                );
+            }
+        }
+
+        if (isset($_POST[self::NEW_ELEMENTS_INPUT_NAME])) {
+            $newElements = $_POST[self::NEW_ELEMENTS_INPUT_NAME];
+            foreach ($newElements as $tempId => $info) {
+                $element = new Element;
+                $element->setElementSet(ElementSet::ITEM_TYPE_NAME);
+                $element->setName($info['name']);
+                $element->setDescription($info['description']);
+                $element->order = null;
+                                
+                $elementInfos[] = array(
+                    'element' => $element,
+                    'order' => $info['order']
+                );
+            }
+        }
+
         return $elementInfos;
     }
 }

@@ -24,7 +24,7 @@
             <tr class="element">
                 <td class="element-name"><strong><?php echo html_escape($element->name); ?></strong></td>
                 <td><?php echo html_escape($element->description); ?></td>
-                <td class="element-order"><?php echo get_view()->formText('element-order-'. $element->id, $elementOrder, array('size'=>2)); ?></td>
+                <td class="element-order"><?php echo get_view()->formText("elements[$element->id][order]", $elementOrder, array('size'=>2)); ?></td>
 
                 <?php if (is_allowed('ItemTypes', 'delete-element')): ?>
                 <td><a id="remove-element-link-<?php echo html_escape($element->id); ?>" href="" class="delete-element"><?php echo __('Remove'); ?></a></td>

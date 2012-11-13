@@ -80,21 +80,17 @@ class ItemTypesController extends Omeka_Controller_AbstractActionController
             $elementOrder = intval($this->_getParam('elementCount')) + 1;
         }
 
-        $elementNameId =  Omeka_Form_ItemTypes::ADD_NEW_ELEMENT_NAME_PREFIX . $elementTempId;
-        $elementNameValue = $elementName;
+        $stem = Omeka_Form_ItemTypes::NEW_ELEMENTS_INPUT_NAME . "[$elementTempId]";
+        $elementNameName = $stem . '[name]';
+        $elementDescriptionName = $stem . '[description]';
+        $elementOrderName = $stem . '[order]';
 
-        $elementDescriptionId = Omeka_Form_ItemTypes::ADD_NEW_ELEMENT_DESCRIPTION_PREFIX . $elementTempId;
-        $elementDescriptionValue = $elementDescription;
-
-        $elementOrderId = Omeka_Form_ItemTypes::ADD_NEW_ELEMENT_ORDER_PREFIX . $elementTempId;
-        $elementOrderValue = $elementOrder;
-
-        $this->view->assign(array('elementNameId' => $elementNameId,
-                                  'elementNameValue' => $elementNameValue,
-                                  'elementDescriptionId' => $elementDescriptionId,
-                                  'elementDescriptionValue' => $elementDescriptionValue,
-                                  'elementOrderId' => $elementOrderId,
-                                  'elementOrderValue' => $elementOrderValue,
+        $this->view->assign(array('element_name_name' => $elementNameName,
+                                  'element_name_value' => $elementName,
+                                  'element_description_name' => $elementDescriptionName,
+                                  'element_description_value' => $elementDescription,
+                                  'element_order_name' => $elementOrderName,
+                                  'element_order_value' => $elementOrder,
                                    ));
     }
 
@@ -115,17 +111,15 @@ class ItemTypesController extends Omeka_Controller_AbstractActionController
             $elementOrder = intval($this->_getParam('elementCount')) + 1;
         }
 
-        $elementNameId = Omeka_Form_ItemTypes::ADD_EXISTING_ELEMENT_ID_PREFIX . $elementTempId;
-        $elementNameValue = $elementId;
+        $stem = Omeka_Form_ItemTypes::ELEMENTS_TO_ADD_INPUT_NAME . "[$elementTempId]";
+        $elementIdName = $stem .'[id]';
+        $elementOrderName = $stem .'[order]';
 
-        $elementOrderId = Omeka_Form_ItemTypes::ADD_EXISTING_ELEMENT_ORDER_PREFIX . $elementTempId;
-        $elementOrderValue = $elementOrder;
-
-        $this->view->assign(array('elementNameId' => $elementNameId,
-                                  'elementNameValue' => $elementNameValue,
-                                  'elementDescription' => $elementDescription,
-                                  'elementOrderId' => $elementOrderId,
-                                  'elementOrderValue' => $elementOrderValue,
+        $this->view->assign(array('element_id_name' => $elementIdName,
+                                  'element_id_value' => $elementId,
+                                  'element_description' => $elementDescription,
+                                  'element_order_name' => $elementOrderName,
+                                  'element_order_value' => $elementOrder,
                                   ));
     }
 

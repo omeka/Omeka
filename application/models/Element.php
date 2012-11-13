@@ -51,7 +51,11 @@ class Element extends Omeka_Record_AbstractRecord
      */
     public function setOrder($order)
     {
-        $this->order = (int)$order;
+        if ($order !== null) {
+            $order = (int) $order;
+        }
+        
+        $this->order = $order;
     }
 
     /**
