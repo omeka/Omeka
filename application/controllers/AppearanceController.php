@@ -45,6 +45,7 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
                     set_option($key, $value);
                 }
                 $this->_helper->flashMessenger(__('The appearance settings have been updated.'), 'success');
+                $this->_helper->redirector('edit-settings');
             } else {
                 $this->_helper->flashMessenger(__('There were errors found in your form. Please edit and resubmit.'), 'error');
             }
@@ -58,10 +59,13 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
         $form = new Omeka_Form_Navigation();
         fire_plugin_hook('navigation_form', array('form' => $form));
         $this->view->form = $form;
+        set_theme_base_url();
+
         if (isset($_POST['submit'])) {
             if ($form->isValid($_POST)) {
                 $form->saveFromPost();
                 $this->_helper->flashMessenger(__('The navigation settings have been updated.'), 'success');
+                $this->_helper->redirector('edit-navigation');
             } else {
                 $this->_helper->flashMessenger(__('The navigation settings were not saved because of missing or invalid values.  All changed values have been restored.'), 'error');
                 foreach($form->getMessages() as $msg) {
@@ -69,10 +73,6 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
                 }
             }
         }
-        // Reset to "current" base uri. "revert" won't work here because
-        // something may have used public_uri or admin_uri in between.
-        set_theme_base_url();
+        
     }
 }
-
-?>

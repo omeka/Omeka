@@ -42,6 +42,7 @@ class SettingsController extends Omeka_Controller_AbstractActionController
                     set_option($key, $value);
                 }
                 $this->_helper->flashMessenger(__('The general settings have been updated.'), 'success');
+                $this->_helper->redirector('edit-settings');
             } else {
                 $this->_helper->flashMessenger(__('There were errors found in your form. Please edit and resubmit.'), 'error');
             }
@@ -73,6 +74,9 @@ class SettingsController extends Omeka_Controller_AbstractActionController
                     }
                 }
                 $this->_helper->flashMessenger(__('The security settings have been updated.'), 'success');
+                $this->_helper->redirector('edit-security');
+            } else {
+                $this->_helper->flashMessenger(__('There were errors found in your form. Please edit and resubmit.'), 'error');
             }
         }
     }
@@ -97,6 +101,7 @@ class SettingsController extends Omeka_Controller_AbstractActionController
                                                ->sendLongRunning('Job_SearchTextIndex');
                 $this->_helper->flashMessenger(__('Indexing records. This may take a while. You may continue administering your site.'), 'success');
             }
+            $this->_helper->redirector('edit-search');
         }
         
         $this->view->assign('searchRecordTypes', get_search_record_types());
