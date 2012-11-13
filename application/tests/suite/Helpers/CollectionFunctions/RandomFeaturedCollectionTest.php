@@ -19,6 +19,7 @@ class Omeka_Helper_RandomFeaturedCollectionTest extends Omeka_Test_AppTestCase
      */
     public function testNoRandomFeaturedCollection()
     {
+        $this->dispatch('/');
         $html = random_featured_collection();
         $this->assertContains('No featured collections are available.', $html);
     }

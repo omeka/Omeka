@@ -16,6 +16,7 @@ class Omeka_Helper_DisplayRandomFeaturedItemsTest extends Omeka_Test_AppTestCase
     public function testDisplayRandomFeaturedItems()
     {   
         $ids = $this->_createFeaturedItems();
+        $this->dispatch('/');
         $html = random_featured_items();
         $this->assertContains('<h3><a href="/items/show/'. $ids[0]. '">Title 1</a></h3>', $html);
         $this->assertContains('<p class="item-description">Description for item 1.</p>', $html);
@@ -24,6 +25,7 @@ class Omeka_Helper_DisplayRandomFeaturedItemsTest extends Omeka_Test_AppTestCase
     public function testDisplayNoRandomFeaturedItems()
     {
         $this->_createFeaturedItems(false);
+        $this->dispatch('/');
         $html = random_featured_items();
         $this->assertContains('<p>No featured items are available.</p>', $html);
     }
