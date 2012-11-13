@@ -246,20 +246,17 @@ class Omeka_Form_Navigation extends Omeka_Form
                         }
                     }
                 }
-
-                // prune expired pages from navigation
-                // these pages must be deletable
-                $otherPages = $nav->getOtherPages($pageUids);                
-                $expiredPages = array();
-                foreach($otherPages as $otherPage) {
-                    if ($otherPage->can_delete) {
-                        $expiredPages[] = $otherPage;
-                    }
-                }
-                $nav->prunePages($expiredPages); 
             }
         }
         
+        // prune the remaining expired pages from navigation
+        $otherPages = $nav->getOtherPages($pageUids);                
+        $expiredPages = array();
+        foreach($otherPages as $otherPage) {
+            $expiredPages[] = $otherPage;
+        }
+        $nav->prunePages($expiredPages);
+                
         return $nav;
     }
     
@@ -268,7 +265,7 @@ class Omeka_Form_Navigation extends Omeka_Form
      *
      */
     protected function _saveHomepageFromPost()
-    {
+    {   
         $homepageUri = $this->getValue(self::SELECT_HOMEPAGE_ELEMENT_ID);
         // make sure the homepageUri still exists in the navigation
         $pageExists = false;
@@ -309,7 +306,7 @@ class Omeka_Form_Navigation extends Omeka_Form
      * @return boolean
      */
     public function isValid($data)
-    {
+    {        
         if (!parent::isValid($data)) {
             return false;
         }
@@ -321,7 +318,6 @@ class Omeka_Form_Navigation extends Omeka_Form
         if ($pageLinks = $this->getValue(self::HIDDEN_ELEMENT_ID) ) {
             if ($pageLinks = json_decode($pageLinks, true)) {                                                                 
                 foreach($pageLinks as $pageLink) {
-                    
                     if (!$missingLabel && trim($pageLink['label']) == '') {
                         $this->addError('All navigation links must have both labels.');
                         $hasErrors = true;
@@ -346,7 +342,6 @@ class Omeka_Form_Navigation extends Omeka_Form
                                     $hasErrors = true;
                                 }
                             }
-                            
                         } catch (Omeka_Navigation_Page_Uri_Exception $e) {
                             $this->addError(__('Invalid URI for "%s" navigation link:  "%s"', array($pageLink['label'],  $pageLink['uri'])));
                             $hasErrors = true;
