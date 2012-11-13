@@ -230,6 +230,7 @@ class Omeka_Form_ItemTypes extends Omeka_Form
             foreach ($currentElements as $elementId => $info) {
                 $elementInfos[] = array(
                     'element' => $elementTable->find($elementId),
+                    'temp_id' => null,
                     'order' => $info['order']
                 );
             }
@@ -240,6 +241,7 @@ class Omeka_Form_ItemTypes extends Omeka_Form
             foreach ($elementsToAdd as $tempId => $info) {
                 $elementInfos[] = array(
                     'element' => $elementTable->find($info['id']),
+                    'temp_id' => $tempId,
                     'order' => $info['order']
                 );
             }
@@ -256,6 +258,7 @@ class Omeka_Form_ItemTypes extends Omeka_Form
                                 
                 $elementInfos[] = array(
                     'element' => $element,
+                    'temp_id' => $tempId,
                     'order' => $info['order']
                 );
             }
