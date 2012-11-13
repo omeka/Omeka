@@ -829,7 +829,7 @@ header nav {
     list-style-type: none; 
 }
 
-.ui-sortable .sortable-item, .add-new-item { 
+.ui-sortable .sortable-item, .add-new { 
     background: #EBEADC;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F5F3EC), color-stop(100%,#E9E5DA));
     background: -moz-linear-gradient(center top, #F5F3EC 0%, #E9E5DA 100%);
@@ -842,6 +842,10 @@ header nav {
     cursor: move;
     padding: 10px;
 }
+
+    .ui-sortable .sortable-item input {
+        margin: 0;
+    }
 
     .add-new-item { cursor: default; 
         font-size: 14px;
@@ -913,8 +917,10 @@ header nav {
     line-height: 1.5em;
     margin: -2px 0 2px 0;
     overflow: auto;
-    padding: 20px;
+    padding: 10px;
 }
+
+    .drawer-contents:empty { display: none; padding: 0;}
 
     .drawer-contents input[type=text] { width: 100%; }
 
@@ -1470,7 +1476,6 @@ header nav {
 
 .element {
     clear: both;
-    overflow: auto;
     margin: 0 0 16px 0;
 }
     
