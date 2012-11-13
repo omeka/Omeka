@@ -73,7 +73,7 @@ Omeka.Navigation = {};
                 buttonsDiv.append('<a class="navigation_main_list_visit blue button" href="' + hiddenInfo.uri + '">Visit</a>');
                 buttonsDiv.find('.navigation_main_list_visit').click(function (event) {
                     event.preventDefault();
-                    var url = $(this).parent().parent().find('.main_link_uri').val();
+                    var url = $(this).parent().parent().find('.navigation-uri').val();
                     window.open(url);
                 });
             }
