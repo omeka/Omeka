@@ -6,9 +6,7 @@ echo head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodycl
 <?php echo flash(); ?>
 
 <?php if ($searchFilters = item_search_filters()): ?>
-    <div class="seven columns alpha">
-        <?php echo $searchFilters; ?>
-    </div>
+<?php echo $searchFilters; ?>
 <?php endif; ?>
 
 <?php if ($total_results): ?>

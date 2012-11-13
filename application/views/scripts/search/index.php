@@ -26,7 +26,9 @@ $searchRecordTypes = get_search_record_types();
 </table>
 <?php echo pagination_links(); ?>
 <?php else: ?>
-<p>Your query returned no results.</p>
+<div id="no-results">
+    <p>Your query returned no results.</p>
+</div>
 <?php endif; ?>
 </div>
 <?php echo foot(); ?>
