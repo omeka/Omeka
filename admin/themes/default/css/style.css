@@ -1070,15 +1070,10 @@ header nav {
 /* Site-wide Search Settings  
 ================================================== */
 
-#search-filters {
-    float: left;
-    width: 70%;
-}
-
 #search-filters ul {
     clear: both;
     list-style-type: none;
-    display: inline-block;
+    display: inline;
     padding: 0;
     margin: 0;
     text-align: left;
@@ -1113,6 +1108,10 @@ header nav {
 }
 
     .search-record-types input[type=checkbox] { margin-right: 5px;}
+    
+#no-results {
+    clear: both;
+}
 
 /* Login  
 ================================================== */

@@ -1218,17 +1218,10 @@ function web_path_to($file)
  */
 function random_featured_collection()
 {
-    $html = '<h2>' . __('Featured Collection') . '</h2>';
-    if ($featuredCollection = get_random_featured_collection()) {
-        $featuredCollectionTitle = strip_formatting(metadata($featuredCollection, array('Dublin Core', 'Title')));
-        $html .= '<h3>' . link_to_collection($featuredCollectionTitle, array(), 'show', $featuredCollection) . '</h3>';
-        if ($collectionDescription = metadata($featuredCollection, array('Dublin Core', 'Description'), array('snippet'=>150))) {
-            $html .= '<p class="collection-description">' . $collectionDescription . '</p>';
-        }
-    } else {
-        $html .= '<p>' . __('No featured collections are available.') . '</p>';
-    }
-    return $html;
+    return get_view()->partial(
+        'collections/random-featured.php', 
+        array('collection' => get_random_featured_collection())
+    );
 }
 
 /**
@@ -1791,38 +1784,11 @@ function get_current_action_contexts()
  */
 function output_format_list($list = true, $delimiter = ' | ')
 {
-    $actionContexts = get_current_action_contexts();
-    $html = '';
-
-    // Do not display the list if there are no output formats available in the
-    // current action.
-    if (empty($actionContexts)) {
-        return false;
-    }
-
-    // Unordered list format.
-    if ($list) {
-        $html .= '<ul id="output-format-list">';
-        foreach ($actionContexts as $key => $actionContext) {
-            $query = $_GET;
-            $query['output'] = $actionContext;
-            $html .= '<li><a href="' . html_escape(url() . '?' . http_build_query($query)) . '">' . $actionContext . '</a></li>';
-        }
-        $html .= '</ul>';
-
-    // Delimited format.
-    } else {
-        $html .= '<p id="output-format-list">';
-        foreach ($actionContexts as $key => $actionContext) {
-            $query = $_GET;
-            $query['output'] = $actionContext;
-            $html .= '<a href="' . html_escape(url() . '?' . http_build_query($query)) . '">' . $actionContext . '</a>';
-            $html .= (count($actionContexts) - 1) == $key ? '' : $delimiter;
-        }
-        $html .= '</p>';
-    }
-
-    return $html;
+    return get_view()->partial(
+        'common/output-format-list.php', 
+        array('output_formats' => get_current_action_contexts(), 'query' => $_GET, 
+              'list' => $list, 'delimiter' => $delimiter)
+    );
 }
 
 /**
@@ -2069,35 +2035,19 @@ function get_random_featured_items($num = 5, $hasImage = null)
  * 
  * @package Omeka\Function\View\Body
  * @uses get_random_featured_items()
- * @param int $num
+ * @param int $count
  * @param boolean $withImage Whether or not the featured item should have an 
  * image associated with it. If set to true, this will either display a 
  * clickable square thumbnail for an item, or it will display "You have no 
  * featured items." if there are none with images.
  * @return string
  */
-function random_featured_items($num = 5, $hasImage = null)
+function random_featured_items($count = 5, $hasImage = null)
 {
-    $html = '';
-    if (1 == $num) {
-        $html .= '<h2>'. __('Featured Item') .'</h2>';
-    }
-    if ($randomFeaturedItems = get_random_featured_items($num, $hasImage)) {
-        foreach ($randomFeaturedItems as $randomItem) {
-            $itemTitle = metadata($randomItem, array('Dublin Core', 'Title'));
-            $html .= '<h3>' . link_to_item($itemTitle, array(), 'show', $randomItem) . '</h3>';
-            
-            if (metadata($randomItem, 'has thumbnail')) {
-                $html .= link_to_item(item_image('square_thumbnail', array(), 0, $randomItem), array('class'=>'image'), 'show', $randomItem);
-            }
-            if ($itemDescription = metadata($randomItem, array('Dublin Core', 'Description'), array('snippet'=>150))) {
-                $html .= '<p class="item-description">' . $itemDescription . '</p>';
-            }
-        }
-    } else {
-        $html .= '<p>'.__('No featured items are available.').'</p>';
-    }
-    return $html;
+    return get_view()->partial(
+        'items/random-featured.php', 
+        array('items' => get_random_featured_items($count, $hasImage), 'count' => $count)
+    );
 }
 
 /**

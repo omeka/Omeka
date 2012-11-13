@@ -131,10 +131,10 @@ class ItemType extends Omeka_Record_AbstractRecord
 
     /**
      * This extracts the ordering for the elements from the form's POST, then uses
-     * the given ordering to resort the join records from item_types_elements into
+     * the given ordering to reorder each join record from item_types_elements into
      * a new ordering, which is then saved.
      *
-     * @param Array $elementOrderingArray An array of numbers representing
+     * @param Array $elementOrderingArray An array of element_id => order pairs
      * @return void
      */
     public function reorderElements($elementOrderingArray)
@@ -151,13 +151,9 @@ class ItemType extends Omeka_Record_AbstractRecord
         } else if (count($elementOrderingArray) < count($joinRecordArray)) {
             throw new Omeka_Record_Exception(__('There are too few values in the element ordering array.'));
         }
-
-        // This is essentially voodoo magic.
-        array_multisort($elementOrderingArray, SORT_ASC, SORT_NUMERIC, $joinRecordArray);
-
-        $i = 0;
+        
         foreach ($joinRecordArray as $key => $joinRecord) {
-            $joinRecord->order = ++$i;
+            $joinRecord->order = $elementOrderingArray[$joinRecord->element_id];
             $joinRecord->save();
         }
     }
