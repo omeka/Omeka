@@ -142,9 +142,8 @@ class Omeka_Form_ItemTypes extends Omeka_Form
                 'description' => __('The name of the item type.'),
                 'required' => true,
                 'value' => $itemTypeName,
-                'class' => 'textinput'
             )
-        );                
+        );
         
         $this->addElement('textarea', self::DESCRIPTION_ELEMENT_ID,
             array(
@@ -152,10 +151,9 @@ class Omeka_Form_ItemTypes extends Omeka_Form
                 'description' => __('The description of the item type.'),
                 'value' => $itemTypeDescription,
                 'cols' => 50,
-                'rows' => 13,
-                'class' => 'textinput'
+                'rows' => 5,
             )
-        );        
+        );
         
         $this->addElement('hidden', self::REMOVE_HIDDEN_ELEMENT_ID, array('value' => ''));
         
