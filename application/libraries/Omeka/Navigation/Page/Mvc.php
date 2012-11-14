@@ -28,7 +28,7 @@ class Omeka_Navigation_Page_Mvc extends Zend_Navigation_Page_Mvc
             $themeOption = 'public';
         }
         
-        // create an href for the public theme
+        // create an href for the correct theme
         set_theme_base_url($themeOption);
         $href = parent::getHref();
         set_theme_base_url();

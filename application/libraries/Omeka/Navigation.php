@@ -213,7 +213,6 @@ class Omeka_Navigation extends Zend_Navigation
             $pageOrder = $this->_getLastPageOrderInContainer($parentContainer) + 1;
             $page->setOrder($pageOrder);
             $this->addPageToContainer($page, $parentContainer);
-            
             // set the new parent page
             $parentPage = $page;
         } else {
@@ -460,12 +459,11 @@ class Omeka_Navigation extends Zend_Navigation
             $page = Zend_Navigation_Page::factory($page);
         }
         // convert a Zend_Navigation_Page_Uri page to an Omeka_Navigation_Page_Uri page
+        // or convert a Zend_Navigation_Page_Mvc page to an Omeka_Navigation_Page_Mvc page
         if (get_class($page) == 'Zend_Navigation_Page_Uri') {
-            $page = $this->_convertZendToOmekaNavigationPageUri($page);
-        }
-        // convert a Zend_Navigation_Page_Mvc page to an Omeka_Navigation_Page_Mvc page
-        if (get_class($page) == 'Zend_Navigation_Page_Mvc') {
-            $page = $this->_convertZendToOmekaNavigationPageMvc($page);
+            $page = $this->_convertZendToOmekaNavigationPage($page, 'Uri');
+        } elseif (get_class($page) == 'Zend_Navigation_Page_Mvc') {
+            $page = $this->_convertZendToOmekaNavigationPage($page, 'Mvc');
         }
         // configure Omeka_Navigation_Page_Uri or Omeka_Navigation_Page_Mvc
         if ($page instanceof Omeka_Navigation_Page_Uri) {
@@ -494,41 +492,25 @@ class Omeka_Navigation extends Zend_Navigation
         $page->setPages($subPages);
         return $page;
     }
-    
+
     /**
-     * Converts a Zend_Navigation_Page_Uri to an Omeka_Navigation_Page_Uri
+     * Converts a Zend_Navigation_Page subclass object to a corresponding Omeka object
      *
-     * @param Zend_Navigation_Page_Uri $page The page to convert
-     * @return Omeka_Navigation_Page_Uri The converted page
+     * @param Zend_Navigation_Page $page The page to convert
+     * @param string $subclassPostfix The postfix of the subclass.  Must be 'Uri' or 'Mvc'
+     * @return Omeka_Navigation_Page_Uri|Omeka_Navigation_Page_Mvc The converted page
      */
-    protected function _convertZendToOmekaNavigationPageUri(Zend_Navigation_Page_Uri $page) 
+    protected function _convertZendToOmekaNavigationPage(Zend_Navigation_Page $page, $subclassPostfix) 
     {   
-        // change the type of page     
+        // change the type of page
+        $fromClass = 'Zend_Navigation_Page_' . $subclassPostfix;
+        $toClass = 'Omeka_Navigation_Page_' . $subclassPostfix;
         $pageOptions = $this->_conditionalReplaceValueInArray($page->toArray(), 
                                                               'pages', 
                                                               'type', 
-                                                              'Zend_Navigation_Page_Uri', 
-                                                              'Omeka_Navigation_Page_Uri');
-        $convertedPage = new Omeka_Navigation_Page_Uri();
-        $convertedPage->setOptions($pageOptions);
-        return $convertedPage;
-    }
-    
-    /**
-     * Converts a Zend_Navigation_Page_Mvc to an Omeka_Navigation_Page_Mvc
-     *
-     * @param Zend_Navigation_Page_Mvc $page The page to convert
-     * @return Omeka_Navigation_Page_Mvc The converted page
-     */
-    protected function _convertZendToOmekaNavigationPageMvc(Zend_Navigation_Page_Mvc $page) 
-    {   
-        // change the type of page     
-        $pageOptions = $this->_conditionalReplaceValueInArray($page->toArray(), 
-                                                              'pages', 
-                                                              'type', 
-                                                              'Zend_Navigation_Page_Mvc', 
-                                                              'Omeka_Navigation_Page_Mvc');
-        $convertedPage = new Omeka_Navigation_Page_Mvc();
+                                                              $fromClass, 
+                                                              $toClass);
+        $convertedPage = new $toClass();
         $convertedPage->setOptions($pageOptions);
         return $convertedPage;
     }
