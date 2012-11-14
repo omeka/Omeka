@@ -12,24 +12,40 @@ echo head(array(
 
 <section class="seven columns alpha">
     <h2><?php echo __($element_set->name); ?></h2>
-    <p class="description">You can click and drag the elements into your preferred 
+    <?php if (ElementSet::ITEM_TYPE_NAME == $element_set->name): ?>
+    <p class="explanation">You can customize the element descriptions below. You 
+    can order the elements by editing the specific item type.</p>
+    <p><?php echo __($element_set->description); ?></p>
+    <ul>
+    <?php foreach ($element_set->getElements() as $element): ?>
+        <li><p><label for="<?php echo "elements[{$element->id}][name]"; ?>"><?php echo __('Name'); ?></label>
+        <?php echo $this->formText("elements[{$element->id}][name]", $element->name); ?></p>
+        <p><label for="<?php echo "elements[{$element->id}][description]"; ?>"><?php echo __('Description'); ?></label>
+        <?php echo $this->formTextarea("elements[{$element->id}][description]", $element->description); ?></p>
+        <p><label for="<?php echo "elements[{$element->id}][delete]"; ?>"><?php echo __('Delete?'); ?></label>
+        <?php echo $this->formCheckbox("elements[{$element->id}][delete]"); ?></p>
+    <?php endforeach; ?>
+    </ul>
+    <?php else: ?>
+    <p class="explanation">You can click and drag the elements into your preferred 
     display order. Click the right arrows to add customized comments to elements.</p>
     <p><?php echo __($element_set->description); ?></p>
     <ul class="sortable">
-        <?php foreach ($element_set->getElements() as $element): ?>
+    <?php foreach ($element_set->getElements() as $element): ?>
         <li class="element">
-            <div class="sortable-item">
-                <?php echo __($element->name); ?>
-            </div>
-            <div class="drawer-contents">
-                <p><?php echo __($element->description); ?></p>
-                <label for="<?php echo "elements[{" . $element->id . "}][comment]"; ?>"><?php echo __('Comment'); ?></label>
-                <?php echo $this->formTextarea("elements[{$element->id}][comment]", $element->comment); ?>
-                <?php echo $this->formHidden("elements[{$element->id}][order]", $element->order, array('class' => 'element-order')); ?>
-            </div>
+        <div class="sortable-item">
+            <?php echo __($element->name); ?>
+        </div>
+        <div class="drawer-contents">
+            <p><?php echo __($element->description); ?></p>
+            <label for="<?php echo "elements[{$element->id}][comment]"; ?>"><?php echo __('Comment'); ?></label>
+            <?php echo $this->formTextarea("elements[{$element->id}][comment]", $element->comment); ?>
+            <?php echo $this->formHidden("elements[{$element->id}][order]", $element->order, array('class' => 'element-order')); ?>
+        </div>
         </li>
-        <?php endforeach; ?>
-</ul>
+    <?php endforeach; ?>
+    </ul>
+    <?php endif; ?>
 </section>
 
 <section class="three columns omega">
@@ -39,11 +55,12 @@ echo head(array(
 </section>
 
 </form>
-</div>
+<?php if (ElementSet::ITEM_TYPE_NAME != $element_set->name): ?>
 <script type="text/javascript">
 //<![CDATA[
 Omeka.addReadyCallback(Omeka.ElementSets.enableSorting);
 Omeka.addReadyCallback(Omeka.ElementSets.addHideButtons);
 //]]>
 </script>
+<?php endif; ?>
 <?php echo foot(); ?>

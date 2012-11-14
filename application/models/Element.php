@@ -152,16 +152,18 @@ class Element extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * When deleting this element, delete all ElementText records associated
-     * with this element.
-     * @return void
+     * When deleting an element, cascade delete all element texts and item type 
+     * assignments associated with the element.
      */
     protected function _delete()
     {
-        // Cascade delete all element texts associated with an element when deleting the element.
         $elementTexts = $this->getTable('ElementText')->findByElement($this->id);
         foreach ($elementTexts as $elementText) {
             $elementText->delete();
+        }
+        $itemTypesElements = $this->getTable('ItemTypesElements')->findByElement($this->id);
+        foreach ($itemTypesElements as $itemTypesElement) {
+            $itemTypesElement->delete();
         }
     }
 

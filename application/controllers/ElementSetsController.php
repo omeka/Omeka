@@ -36,12 +36,6 @@ class ElementSetsController extends Omeka_Controller_AbstractActionController
     public function editAction()
     {
         $elementSet = $this->_helper->db->findById();
-        
-        // Do not allow editing of item type elements.
-        if (ElementSet::ITEM_TYPE_NAME == $elementSet->name) {
-            $this->_helper->redirector('index');
-        }
-        
         $db = $this->_helper->db;
         
         // Handle a submitted edit form.
@@ -59,8 +53,17 @@ class ElementSetsController extends Omeka_Controller_AbstractActionController
                 $elements = $this->getRequest()->getPost('elements');
                 foreach ($elements as $id => $element) {
                     $elementRecord = $db->getTable('Element')->find($id);
-                    $elementRecord->comment = trim($element['comment']);
-                    $elementRecord->order = $element['order'];
+                    if (ElementSet::ITEM_TYPE_NAME == $elementSet->name) {
+                        if ($element['delete']) {
+                            $elementRecord->delete();
+                            continue;
+                        }
+                        $elementRecord->name = $element['name'];
+                        $elementRecord->description = $element['description'];
+                    } else {
+                        $elementRecord->comment = trim($element['comment']);
+                        $elementRecord->order = $element['order'];
+                    }
                     $elementRecord->save();
                 }
                 $this->_helper->flashMessenger(__('The element set was successfully changed!'), 'success');
