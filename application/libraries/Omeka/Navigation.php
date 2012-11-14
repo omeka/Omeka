@@ -140,13 +140,15 @@ class Omeka_Navigation extends Zend_Navigation
                         'label' => __('Browse Items'),
                         'controller' => 'items',
                         'action' => 'browse',
-                        'visible' => true
+                        'visible' => true,
+                        'theme' => 'public'
                     )), 
                     new Omeka_Navigation_Page_Mvc(array(
                         'label' => __('Browse Collections'),
                         'controller' => 'collections',
                         'action' => 'browse',
                         'visible' => true,
+                        'theme' => 'public'
                     )),
                 );
             break;

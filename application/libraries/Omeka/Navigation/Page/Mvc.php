@@ -12,7 +12,14 @@
  * @package Omeka\Navigation
  */
 class Omeka_Navigation_Page_Mvc extends Zend_Navigation_Page_Mvc
-{    
+{
+    /**
+     * Theme option to use when assembling URL
+     *
+     * @var string
+     */
+    protected $_theme;
+        
     /**
      * Returns href for this page
      *
@@ -23,9 +30,15 @@ class Omeka_Navigation_Page_Mvc extends Zend_Navigation_Page_Mvc
      */
     public function getHref()
     {
-        $themeOption = $this->theme;
-        if (!$themeOption) {
-            $themeOption = 'public';
+        $themeOption = $this->_theme;
+        if ($themeOption === null) {
+            return parent::getHref();
+        }
+        
+        // clear cache if themeOption is the empty string,
+        // which corresponds to current base url
+        if ($themeOption == '') {
+            $this->_hrefCache = null;
         }
         
         // create an href for the correct theme
@@ -33,5 +46,39 @@ class Omeka_Navigation_Page_Mvc extends Zend_Navigation_Page_Mvc
         $href = parent::getHref();
         revert_theme_base_url();
         return $href;
+    }
+    
+    /**
+     * Returns theme option to use when assembling URL
+     *
+     * @see getHref()
+     *
+     * @return string|null  theme option
+     */
+    public function getTheme()
+    {
+        return $this->_theme;
+    }
+    
+    /**
+     * Sets theme option to use when assembling URL
+     *
+     * @see getHref()
+     *
+     * @param  string $theme             theme option 'admin' or 'public'
+     * @return Omeka_Navigation_Page_Mvc   fluent interface, returns self
+     * @throws Zend_Navigation_Exception  if invalid $theme is given
+     */
+    public function setTheme($theme)
+    {
+        if (null !== $theme && !is_string($theme)) {
+            require_once 'Zend/Navigation/Exception.php';
+            throw new Zend_Navigation_Exception(
+                    'Invalid argument: $theme must be a string or null');
+        }
+
+        $this->_theme = $theme;
+        $this->_hrefCache = null;
+        return $this;
     }
 }
