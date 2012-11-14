@@ -4,27 +4,19 @@
     $pluginNav = array(
         array(
         'label' => __('All'),
-        'module' => 'default',
-        'controller' => 'plugins',
-        'action' => 'index'
+        'uri' => url('plugins/browse')
         ),
         array(
         'label' => __('Active'),
-        'module' => 'default',
-        'controller' => 'plugins',
-        'action' => 'active'
+        'uri' => url('plugins/active')
         ),
         array(
         'label' => __('Inactive'),
-        'module' => 'default',
-        'controller' => 'plugins',
-        'action' => 'inactive'
+        'uri' => url('plugins/inactive')
         ),
         array(
         'label' => __('Uninstalled'),
-        'module' => 'default',
-        'controller' => 'plugins',
-        'action' => 'uninstalled'
+        'uri' => url('plugins/uninstalled')
         )
     );
 
