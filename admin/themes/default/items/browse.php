@@ -117,6 +117,11 @@ echo head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodycl
 
 <?php echo pagination_links(); ?>
 
+<div id="outputs">
+<span class="outputs-label"><?php echo __('Outputs'); ?></span>
+<?php echo output_format_list(); ?>
+</div>
+
 <script type="text/javascript">
 Omeka.addReadyCallback(Omeka.ItemsBrowse.setupDetails, [
     <?php echo js_escape(__('Details')); ?>,
