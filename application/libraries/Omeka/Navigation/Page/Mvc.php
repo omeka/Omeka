@@ -31,7 +31,7 @@ class Omeka_Navigation_Page_Mvc extends Zend_Navigation_Page_Mvc
         // create an href for the correct theme
         set_theme_base_url($themeOption);
         $href = parent::getHref();
-        set_theme_base_url();
+        revert_theme_base_url();
         return $href;
     }
 }

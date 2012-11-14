@@ -59,7 +59,7 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
         $form = new Omeka_Form_Navigation();
         fire_plugin_hook('navigation_form', array('form' => $form));
         $this->view->form = $form;
-        set_theme_base_url();
+        revert_theme_base_url();
 
         if (isset($_POST['submit'])) {
             if ($form->isValid($_POST)) {
