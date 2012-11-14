@@ -279,7 +279,7 @@ header { text-align: center; }
         
         #content #flash ul, ul.error {
             list-style-type: none;
-            margin-top: 0;
+            margin-top: 20px;
             padding: 0;
         }
             
