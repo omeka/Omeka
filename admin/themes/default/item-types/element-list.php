@@ -1,15 +1,4 @@
-<table width="100%">
-    <thead>
-        <tr>
-            <th><?php echo __('Element Name'); ?></th>
-            <th><?php echo __('Description'); ?></th>
-            <th><?php echo __('Order'); ?></th>
-            <?php if (is_allowed('ItemTypes', 'delete-element')): ?>
-                <th><?php echo __('Remove'); ?></th>
-            <?php endif; ?>
-        </tr>
-    </thead>
-    <tbody id="element-list-tbody">
+<ul id="item-type-elements" class="sortable">
         <?php $elementInfos = $this->form->getElementInfos(); ?>
         
         <?php foreach ($elementInfos as $elementInfo): ?>
@@ -21,15 +10,20 @@
             
             <?php if ($element && $elementTempId === null): ?>
             
-            <tr class="element">
-                <td class="element-name"><strong><?php echo html_escape($element->name); ?></strong></td>
-                <td><?php echo html_escape($element->description); ?></td>
-                <td class="element-order"><?php echo get_view()->formText("elements[$element->id][order]", $elementOrder, array('size'=>2)); ?></td>
+            <li class="element">
+                <div class="sortable-item">
+                <strong><?php echo html_escape($element->name); ?></strong>
+                <?php echo $this->formHidden("elements[$element->id][order]", $elementOrder, array('size'=>2, 'class' => 'element-order')); ?>
+                </div>
+                
+                <div class="drawer-contents">
+                    <div class="element-description"><?php echo html_escape($element->description); ?></div>
 
                 <?php if (is_allowed('ItemTypes', 'delete-element')): ?>
-                <td><a id="remove-element-link-<?php echo html_escape($element->id); ?>" href="" class="delete-element"><?php echo __('Remove'); ?></a></td>
+                <a id="remove-element-link-<?php echo html_escape($element->id); ?>" href="" class="delete-element red button"><?php echo __('Remove'); ?></a>
                 <?php endif; ?>
-            </tr>
+                </div>
+            </li>
 
             <?php else: ?>
 
@@ -56,12 +50,17 @@
 
             <?php endif; ?>
         <?php endforeach; // end for each $elementInfos ?> 
-         
-        <?php echo $this->form->getElement(Omeka_Form_ItemTypes::REMOVE_HIDDEN_ELEMENT_ID); ?>
-    </tbody>
-</table>
-<p style="float:right;">
-<input type="radio" name="add-element-type" value="existing" checked="checked" /><?php echo __('Existing'); ?>
-<input type="radio" name="add-element-type" value="new" /><?php echo __('New'); ?>
-<button style="float:none; margin-left:10px;" id="add-element" name="add-element"><?php echo __('Add Element'); ?></button>
-</p>
+        <li>
+            <div class="add-new">
+            <?php echo __('Add Element'); ?>
+            </div>
+            <div class="drawer-contents">
+                <p>
+                    <input type="radio" name="add-element-type" value="existing" checked="checked" /><?php echo __('Existing'); ?>
+                    <input type="radio" name="add-element-type" value="new" /><?php echo __('New'); ?>
+                </p>
+                <button id="add-element" name="add-element"><?php echo __('Add Element'); ?></button>
+            </div>
+        </li>
+</ul>
+<?php echo $this->form->getElement(Omeka_Form_ItemTypes::REMOVE_HIDDEN_ELEMENT_ID); ?>

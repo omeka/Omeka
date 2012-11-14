@@ -23,4 +23,10 @@
         </section>
     </form>
 
+<script type="text/javascript">
+//<![CDATA[
+Omeka.addReadyCallback(Omeka.ItemTypes.enableSorting);
+Omeka.addReadyCallback(Omeka.ItemTypes.addHideButtons);
+//]]>
+</script>
 <?php echo foot(); ?>
