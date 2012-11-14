@@ -41,7 +41,8 @@ echo head(array('title'=>$pageTitle,'content_class' => 'horizontal-nav', 'bodycl
                 $browseHeadings[__('Creator')] = 'Dublin Core,Creator';
                 $browseHeadings[__('Type')] = null;
                 $browseHeadings[__('Date Added')] = 'added';
-                echo browse_headings($browseHeadings); ?>
+                echo browse_sort_links($browseHeadings, array('link_tag' => 'th scope="col"', 'list_tag' => '')); 
+                ?>
             </tr>
         </thead>
         <tbody>

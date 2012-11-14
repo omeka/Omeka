@@ -12,6 +12,13 @@ echo head(array('title'=>$pageTitle,'bodyid'=>'items','bodyclass' => 'browse'));
     </nav>
 
     <?php echo pagination_links(); ?>
+    
+    <?php
+    $sortLinks[__('Title')] = 'Dublin Core,Title';
+    $sortLinks[__('Creator')] = 'Dublin Core,Creator';
+    $sortLinks[__('Date Added')] = 'added';
+    echo browse_sort_links($sortLinks); 
+    ?>
 
     <?php foreach (loop('items') as $item): ?>
     <div class="item hentry">

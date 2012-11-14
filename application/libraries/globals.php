@@ -1798,7 +1798,7 @@ function output_format_list($list = true, $delimiter = ' | ')
  * @param array $headings
  * @return string
  */
-function browse_headings($headings)
+function browse_sort_links($links, $wrapperTags = array())
 {
     $sortParam = Omeka_Db_Table::SORT_PARAM;
     $sortDirParam = Omeka_Db_Table::SORT_DIR_PARAM;
@@ -1806,8 +1806,18 @@ function browse_headings($headings)
     $currentSort = trim($req->getParam($sortParam));
     $currentDir = trim($req->getParam($sortDirParam));
 
-    $browseHeadings = '';
-    foreach ($headings as $label => $column) {
+    $defaults = array(
+        'link_tag' => 'li',
+        'list_tag' => 'ul',
+        'link_attr' => '',
+        'list_attr' => ''
+    );
+
+    $sortlistWrappers = array_merge($defaults, $wrapperTags);
+
+    $sortlist = '';
+
+    foreach ($links as $label => $column) {
         if($column) {
             $urlParams = $_GET;
             $urlParams[$sortParam] = $column;
@@ -1822,12 +1832,16 @@ function browse_headings($headings)
                 }
             }
             $url = url(array(), null, $urlParams);
-            $browseHeadings .= "<th $class scope=\"col\"><a href=\"$url\">$label</a></th>";
+            if ($sortlistWrappers['link_tag'] !== '') {
+                $sortlist .= '<' . $sortlistWrappers['link_tag'] . ' ' . $class . ' ' . '><a href="' . $url . '">' . $label . '</a></' . $sortlistWrappers['link_tag'] . '>';
+            } else {
+                $sortlist .= '<a href="' . $url . ' ' . $class . '">' . $label . '</a>';
+            }
         } else {
-            $browseHeadings .= "<th scope=\"col\">$label</th>";
+            $sortlist .= '<' . $sortlistWrappers['link_tag'] . '/>' . $label . '</' . $sortlistWrappers['link_tag'] . '>';
         }
     }
-    return $browseHeadings;
+    return $sortlist;
 }
 
 /**
