@@ -3082,7 +3082,9 @@ function set_theme_base_url($theme = null)
             break;
     }
     $front = Zend_Controller_Front::getInstance();
-    $front->setParam('previousBaseUrl', $front->getBaseUrl());
+    $previousBases = $front->getParam('previousBaseUrls');
+    $previousBases[] = $front->getBaseUrl();
+    $front->setParam('previousBaseUrls', $previousBases);
     return $front->setBaseUrl($baseUrl);
 }
 
@@ -3095,9 +3097,9 @@ function set_theme_base_url($theme = null)
 function revert_theme_base_url()
 {
     $front = Zend_Controller_Front::getInstance();
-    if (($previous = $front->getParam('previousBaseUrl')) !== null) {
-        $front->setBaseUrl($previous);
-        $front->clearParams('previousBaseUrl');
+    if (($previous = $front->getParam('previousBaseUrls'))) {
+        $front->setBaseUrl(array_pop($previous));
+        $front->setParam('previousBaseUrls', $previous);
     }
 }
 
