@@ -6,25 +6,29 @@
             'label' => __('Plugins'),
             'uri' => url('plugins'),
             'resource' => 'Plugins',
-            'privilege' => 'edit'
+            'privilege' => 'edit',
+            'theme' => 'admin',
             ),
         array(
             'label' => __('Appearance'),
             'uri' => url('appearance'),
             'resource' => 'Appearance',
-            'privilege' => 'edit'
+            'privilege' => 'edit',
+            'theme' => 'admin'
             ),
         array(
             'label' => __('Users'),
             'uri' => url('users'),
             'resource' => 'Users',
-            'privilege' => 'edit'
+            'privilege' => 'edit',
+            'theme' => 'admin'
             ),
         array(
             'label' => __('Settings'),
             'uri' => url('settings'),
             'resource' => 'Settings',
-            'privilege' => 'edit'
+            'privilege' => 'edit',
+            'theme' => 'admin'
             )
         );
     echo nav($globalNav, 'admin_navigation_global');
