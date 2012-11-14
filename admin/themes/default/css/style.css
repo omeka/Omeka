@@ -830,7 +830,7 @@ header nav {
     list-style-type: none; 
 }
 
-.ui-sortable .sortable-item, .ui-sortable .add-new { 
+.ui-sortable .sortable-item, .ui-sortable .add-new, #navigation_form .add-new { 
     background: #EBEADC;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F5F3EC), color-stop(100%,#E9E5DA));
     background: -moz-linear-gradient(center top, #F5F3EC 0%, #E9E5DA 100%);
@@ -841,6 +841,9 @@ header nav {
     border: 1px solid #D6D5C2;
     border-radius: 2px;
     padding: 10px;
+    font-size: 14px;
+    line-height: 1.5em;
+    margin: 0;
 }
 
     .ui-sortable .sortable-item { cursor: move; }
