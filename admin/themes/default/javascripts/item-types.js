@@ -6,6 +6,46 @@ Omeka.ItemTypes = {};
 
 (function ($) {
     /**
+     * Enable drag and drop sorting for elements.
+     */
+    Omeka.ItemTypes.enableSorting = function () {
+        $('.sortable').sortable({
+            items: 'li.element',
+            forcePlaceholderSize: true,
+            forceHelperSize: true,
+            placeholder: 'ui-sortable-highlight',
+            update: function (event, ui) {
+                $(this).find('.element-order').each(function (index) {
+                    $(this).val(index + 1);
+                });
+            }
+        });
+    };
+
+    /**
+     * Add link that collapses and expands content.
+     */
+    Omeka.ItemTypes.addHideButtons = function () {
+        $('.sortable .drawer-contents').each(function () {
+            if( $(this).prev().hasClass("sortable-item") ) {
+                $(this).hide();
+            }
+        });
+        $('div.sortable-item').each(function () {
+            $(this).append('<div class="drawer"></div>');
+        });
+        $('.drawer')
+            .click(function (event) {
+                event.preventDefault();
+                $(event.target).parent().next().toggle();
+                $(this).toggleClass('opened');
+            })
+            .mousedown(function (event) {
+                event.stopPropagation();
+            });
+    };
+
+    /**
      * Add AJAX-enabled buttons to item type form for adding and removing elements.
      *
      * @param {string} addNewRequestUrl
@@ -66,7 +106,7 @@ Omeka.ItemTypes = {};
 
         $('#add-element').click(function (event) {
             event.preventDefault();
-            var elementCount = $('#element-list-tbody tr').length;
+            var elementCount = $('#item-type-elements li').length;
             var typeValue = $('input[name=add-element-type]:checked').val();
             var requestUrl;
             if (typeValue === 'new') {
@@ -80,8 +120,8 @@ Omeka.ItemTypes = {};
                 data: {elementCount: elementCount},
                 success: function (responseText) {
                     var response = responseText || 'no response text';
-                    var list = $('#element-list-tbody');
-                    list.append(response);
+                    var lastElement = $('.element').last();
+                    lastElement.after(response);
                     activateRemoveElementLinks();
                     activateSelectElementDropdowns();
                 },

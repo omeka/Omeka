@@ -246,6 +246,7 @@ p, li {
         overflow: hidden;
         font-size: 14px;
         padding: 5px 16px;
+        margin-left: 0;
     }
         
     input[type=text], input[type=password] {
@@ -829,7 +830,7 @@ header nav {
     list-style-type: none; 
 }
 
-.ui-sortable .sortable-item, .add-new-item { 
+.ui-sortable .sortable-item, .ui-sortable .add-new { 
     background: #EBEADC;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F5F3EC), color-stop(100%,#E9E5DA));
     background: -moz-linear-gradient(center top, #F5F3EC 0%, #E9E5DA 100%);
@@ -839,11 +840,17 @@ header nav {
         -o-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
     border: 1px solid #D6D5C2;
     border-radius: 2px;
-    cursor: move;
     padding: 10px;
 }
 
-    .add-new-item { cursor: default; 
+    .ui-sortable .sortable-item { cursor: move; }
+    
+    .ui-sortable .sortable-item input {
+        margin: 0;
+    }
+
+    .add-new-item { 
+        cursor: default; 
         font-size: 14px;
         line-height: 1.5em;
         margin: 0;
@@ -913,8 +920,10 @@ header nav {
     line-height: 1.5em;
     margin: -2px 0 2px 0;
     overflow: auto;
-    padding: 20px;
+    padding: 10px;
 }
+
+    .drawer-contents:empty { display: none; padding: 0;}
 
     .drawer-contents input[type=text] { width: 100%; }
 
@@ -1470,7 +1479,6 @@ header nav {
 
 .element {
     clear: both;
-    overflow: auto;
     margin: 0 0 16px 0;
 }
     
@@ -1687,7 +1695,22 @@ ul#section-nav, #section-nav ul {
     }
                 
 
+/* Edit Item Types
+================================================== */
 
+.item-types #add-element {
+    margin: 0;
+}
+
+.delete-element {
+    clear: both;
+    display: block;
+}
+
+.element-description {
+    width: 100%;
+    margin-bottom: 10px;
+}
 
 /* Show File  
 ================================================== */

@@ -16,7 +16,7 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
     . 'display order.'); ?></p>
     <?php echo $this->form->displayNavigationLinks(); ?>
     <?php echo $this->form->getElement(Omeka_Form_Navigation::HIDDEN_ELEMENT_ID); ?>
-        <div class="add-new-item"><?php echo __('Add a Link to the Navigation'); ?></div>
+        <div class="add-new"><?php echo __('Add a Link to the Navigation'); ?></div>
         <div class="drawer-contents">
             <label for="new_nav_link_label"><?php echo __('Link Label'); ?></label>
             <input type="text" id="new_nav_link_label" name="new_nav_link_label" />
