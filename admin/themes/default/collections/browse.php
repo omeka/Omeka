@@ -14,12 +14,15 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections')); ?>
         <table id="collections" cellspacing="0" cellpadding="0">
             <thead>
                 <tr>
-                <?php echo browse_headings(array(
+                <?php
+                $sortLinks = array(
                     __('Title') => 'Dublin Core,Title',
                     __('Contributors') => null,
                     __('Date Added') => 'added',
                     __('Total Number of Items') => null
-                )); ?>
+                );
+                ?>
+                <?php echo browse_sort_links($sortLinks, array('link_tag' => 'th scope="col"', 'list_tag' => '')); ?>
                 </tr>
             </thead>
             <tbody>
