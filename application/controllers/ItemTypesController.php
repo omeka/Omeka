@@ -139,22 +139,6 @@ class ItemTypesController extends Omeka_Controller_AbstractActionController
         $this->_helper->json($data);
     }
 
-    public function elementListAction()
-    {
-        $itemTypeId = $this->_getParam('item-type-id');
-        if ($itemTypeId) {
-            $itemType = $this->_helper->db->findById($itemTypeId);
-        } else {
-            $itemType = null;
-        }
-        $this->view->item_type = $itemType;
-        if ($itemType) {
-            $this->view->elements = $itemType->Elements;
-        } else {
-            $this->view->elements = array();
-        }
-    }
-    
     protected function _redirectAfterAdd($itemType)
     {
         $this->_redirect("item-types/edit/{$itemType->id}");

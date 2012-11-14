@@ -30,8 +30,7 @@ jQuery(document).ready(function () {
     <fieldset id="type-elements">
         <h2><?php echo __('Elements'); ?></h2>
         <div id="element-list">
-            <?php $id = $item_type ? $item_type->id : null; ?>
-            <?php echo $this->action('element-list', 'item-types', null, array('item-type-id' => $id)); ?>
+            <?php echo common('element-list', array('form' => $form), 'item-types'); ?>
         </div>
     </fieldset>
 </div>
