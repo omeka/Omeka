@@ -198,7 +198,6 @@ class Omeka_Form_Navigation extends Omeka_Form
     {
         $nav = new Omeka_Navigation();
         $nav->loadAsOption(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME);
-        
         $pageUids = array();
         if ($pageLinks = $this->getValue(self::HIDDEN_ELEMENT_ID)) {            
             if ($pageLinks = json_decode($pageLinks, true)) {
@@ -248,7 +247,6 @@ class Omeka_Form_Navigation extends Omeka_Form
                 }
             }
         }
-        
         // prune the remaining expired pages from navigation
         $otherPages = $nav->getOtherPages($pageUids);                
         $expiredPages = array();
@@ -256,7 +254,6 @@ class Omeka_Form_Navigation extends Omeka_Form
             $expiredPages[] = $otherPage;
         }
         $nav->prunePages($expiredPages);
-                
         return $nav;
     }
     
@@ -265,7 +262,7 @@ class Omeka_Form_Navigation extends Omeka_Form
      *
      */
     protected function _saveHomepageFromPost()
-    {   
+    {
         $homepageUri = $this->getValue(self::SELECT_HOMEPAGE_ELEMENT_ID);
         // make sure the homepageUri still exists in the navigation
         $pageExists = false;
@@ -279,7 +276,7 @@ class Omeka_Form_Navigation extends Omeka_Form
         if (!$pageExists) {
             $homepageUri = '/';
         }
-        set_option(self::HOMEPAGE_URI_OPTION_NAME, $homepageUri); 
+        set_option(self::HOMEPAGE_URI_OPTION_NAME, $homepageUri);
     }
     
     /**
@@ -306,7 +303,7 @@ class Omeka_Form_Navigation extends Omeka_Form
      * @return boolean
      */
     public function isValid($data)
-    {        
+    {   
         if (!parent::isValid($data)) {
             return false;
         }
@@ -370,7 +367,6 @@ class Omeka_Form_Navigation extends Omeka_Form
                 $newUndeleteableUids[] = $page->uid;
             }
         }
-        
         // make sure every undeleteable page uid from old navigation is in the list of new undeleteable page uids
         $nav = new Omeka_Navigation();
         $nav->loadAsOption(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME);
@@ -383,7 +379,6 @@ class Omeka_Form_Navigation extends Omeka_Form
                 }
             }
         }
-
         return false;
     }
 }
