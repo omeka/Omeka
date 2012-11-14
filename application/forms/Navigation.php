@@ -361,7 +361,7 @@ class Omeka_Form_Navigation extends Omeka_Form
         // get undeleteable page uids from new navigation
         $nav = $this->_getNavigationFromPost();
         $iterator = new RecursiveIteratorIterator($nav, RecursiveIteratorIterator::SELF_FIRST);
-        $newUndeletableUids = array();
+        $newUndeleteableUids = array();
         foreach($iterator as $page) {
             if ($page->can_delete == false) {
                 $newUndeleteableUids[] = $page->uid;
@@ -373,7 +373,7 @@ class Omeka_Form_Navigation extends Omeka_Form
         $iterator = new RecursiveIteratorIterator($nav, RecursiveIteratorIterator::SELF_FIRST);
         foreach($iterator as $page) {
             if ($page->can_delete == false) {
-                if (!in_array($page->uid, $newUndeleteableUids)) {
+                if (!in_array($page->uid, $newUndeleteableUids)) {                   
                     $this->addError(__('Navigation links that have undeleteable sublinks cannot be deleted.'));
                     return true;
                 }
