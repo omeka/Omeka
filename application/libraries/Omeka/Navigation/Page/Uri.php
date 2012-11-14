@@ -61,9 +61,7 @@ class Omeka_Navigation_Page_Uri extends Zend_Navigation_Page_Uri
                 'fragment' => null
             );
         }
-        
-        $href = trim($href);
-                     
+        $href = trim($href);            
         $isPath = false;
         if (strlen($href) && $href[0] == '/') {
             // attempt to convert root path into a full path, 

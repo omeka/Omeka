@@ -94,8 +94,17 @@ if (defined('ADMIN')) {
     $publicPath = $currentPath;
 }
 
+if (defined('INSTALL')) {
+    $publicPath = substr($publicPath, 0,  strlen($publicPath) - strlen('/install'));
+    $adminPath = "$publicPath/" . ADMIN_WEB_DIR;
+}
+
+define('INSTALL_WEB_DIR', 'install');
+$installPath = "$publicPath/" . INSTALL_WEB_DIR;
+
 define('ADMIN_BASE_URL', $adminPath);
 define('PUBLIC_BASE_URL', $publicPath);
+define('INSTALL_BASE_URL', $installPath);
 define('CURRENT_BASE_URL', $currentPath);
 
 // If date.timezone is not set, this will query the OS for the timezone and set 

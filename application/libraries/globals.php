@@ -3061,6 +3061,8 @@ function set_theme_base_url($theme = null)
         case 'admin':
             $baseUrl = ADMIN_BASE_URL;
             break;
+        case 'install':
+            $baseUrl = INSTALL_BASE_URL;
         default:
             $baseUrl = CURRENT_BASE_URL;
             break;

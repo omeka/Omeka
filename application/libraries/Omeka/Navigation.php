@@ -51,7 +51,6 @@ class Omeka_Navigation extends Zend_Navigation
     
     /**
      * Adds a page to the container.  If a page does not have a valid id, it will give it one.
-     * and is an instance of Zend_Navigation_Page_Mvc or Omeka_Navigation_Page_Uri.
      * If a direct child page already has another page with the same uid then it will not add the page.
      * However, it will add the page as a child of this navigation if one of its descendants already
      * has the page. 
@@ -68,12 +67,10 @@ class Omeka_Navigation extends Zend_Navigation
     {   
          // normalize the page and its subpages            
         $page = $this->_normalizePageRecursive($page);        
-                
-        $page->uid = $this->createPageUid($page->getHref());
+        $page->uid = $this->createPageUid($page->getHref());        
         if (!($fPage = $this->getChildByUid($page->uid))) {
             return parent::addPage($page);
         }
-        
         return $this;
     }
     
@@ -105,15 +102,12 @@ class Omeka_Navigation extends Zend_Navigation
         if ($container === $this) {
             return $this->addPage($page);
         }
-        
         // normalize the page and its subpages            
         $page = $this->_normalizePageRecursive($page);        
-                
         $page->uid = $this->createPageUid($page->getHref());
         if (!($fPage = $this->getPageByUid($page->uid, $container))) {
             return $container->addPage($page);
         }
-        
         return $container;
     }
     
@@ -130,61 +124,59 @@ class Omeka_Navigation extends Zend_Navigation
      * @throws Zend_Navigation_Exception if a filter page is invalid  
      */
     public function createNavigationFromFilter($filterName='')
-    {        
+    {
         if ($filterName == '') {
             $filterName = self::PUBLIC_NAVIGATION_MAIN_FILTER_NAME;
         }
-        
         // create a new navigation object from the filterName
-        $filterNav = new Omeka_Navigation();
-                        
+        $filterNav = new Omeka_Navigation();               
         // get default pages for the filter
         $pageLinks = array();
         switch($filterName) {
             case self::PUBLIC_NAVIGATION_MAIN_FILTER_NAME:
                 // add the standard Browse Items and Browse Collections links to the main nav
                 $pageLinks = array(  
-                    new Zend_Navigation_Page_Mvc(array(
+                    new Omeka_Navigation_Page_Mvc(array(
                         'label' => __('Browse Items'),
                         'controller' => 'items',
                         'action' => 'browse',
-                        'visible' => true
+                        'visible' => true,
+                        'theme' => 'public'
                     )), 
-                    new Zend_Navigation_Page_Mvc(array(
+                    new Omeka_Navigation_Page_Mvc(array(
                         'label' => __('Browse Collections'),
                         'controller' => 'collections',
                         'action' => 'browse',
                         'visible' => true,
+                        'theme' => 'public'
                     )),
                 );
             break;
         }
-        
         // gather other page links from filter handlers (e.g. plugins)      
         $pageLinks = apply_filters($filterName, $pageLinks);
-        
         foreach($pageLinks as $pageLink) {                            
             // normalize the page and its subpages            
             $page = $this->_normalizePageRecursive($pageLink, array('can_delete' => false));
-            $filterNav->baseAddPage($page);
+            $filterNav->baseAddNormalizedPage($page);
         }
-        
         return $filterNav;
     }
     
     /**
-     * Add a page to the navigation using parent::addPage()
+     * Add a normalized page to the navigation using parent::addPage()
      * This needs to wrapped so that methods like createNavigationFromFilter() can add pages directly using
      * the parent class method.
      * 
-     * @param  Zend_Navigation_Page|array|Zend_Config $page  page to add
+     * @param  Zend_Navigation_Page|array|Zend_Config $normalizedPage  normalized page to add
      * @return Zend_Navigation_Container                     fluent interface,
      *                                                       returns self
      * @throws Zend_Navigation_Exception                     if page is invalid     
      */
-    public function baseAddPage($page)
+    public function baseAddNormalizedPage($normalizedPage)
     {
-        return parent::addPage($page);
+        // the page is assumed to be normalized already. 
+        return parent::addPage($normalizedPage);
     }
     
     
@@ -206,15 +198,12 @@ class Omeka_Navigation extends Zend_Navigation
             // we assume that every page has already been normalized
             throw RuntimeException(__('The page must be normalized and have a valid uid.'));
         }
-        
         if ($parentContainer === null) {
             $parentContainer = $this;
         }
-        
         // save the child pages and remove them from the current page
         $childPages = $page->getPages();
         $page->removePages($childPages);
-        
         if (!($oldPage = $this->getPageByUid($page->uid))) {    
             if ($parentContainer !== $this && !$this->hasPage($parentContainer, true)) {
                 // we assume parentContainer is either the navigation object
@@ -222,19 +211,16 @@ class Omeka_Navigation extends Zend_Navigation
                 throw RuntimeException(__('The parent container must either be the navigation object' .
                                        ' or a descendant subpage of the navigation object.'));
             }
-            
             // add the page to the end of the parent container
             $pageOrder = $this->_getLastPageOrderInContainer($parentContainer) + 1;
             $page->setOrder($pageOrder);
             $this->addPageToContainer($page, $parentContainer);
-            
             // set the new parent page
             $parentPage = $page;
         } else {
             // set the new parent page
             $parentPage = $oldPage;
         }
-        
         // merge the child pages
         foreach($childPages as $childPage) {
             $this->mergePage($childPage, $parentPage);
@@ -277,7 +263,7 @@ class Omeka_Navigation extends Zend_Navigation
      * Adds pages generated by Omeka plugins and other contributors via a filter (e.x. 'public_navigation_main').
      * The filter should provide an array pages like they are added to Zend_Navigation_Container::addPages
      * However, the page types should only be one of the following types:
-     * Omeka_Navigation_Page_Uri or Zend_Navigation_Page_Mvc.  
+     * Omeka_Navigation_Page_Uri or Omeka_Navigation_Page_Mvc.  
      * If the associated uri of any page is invalid, it will not add that page to the navigation. 
      * Also, it removes expired pages from formerly active plugins and other former handlers of the filter.
      * 
@@ -285,18 +271,15 @@ class Omeka_Navigation extends Zend_Navigation
      * @throws Zend_Navigation_Exception    if a filter page is invalid  
      */
     public function addPagesFromFilter($filterName='') 
-    {
+    {              
         if ($filterName == '') {
             $filterName = self::PUBLIC_NAVIGATION_MAIN_FILTER_NAME;
         }
-
         // get filter navigation from plugins
         $filterNav = $this->createNavigationFromFilter($filterName);
-        
         // prune the expired navigation pages
         $expiredPages = $this->getExpiredPagesFromNav($filterNav);
         $this->prunePages($expiredPages);
-        
         // merge filter nav into navigation
         $this->mergeNavigation($filterNav);
     }
@@ -317,8 +300,7 @@ class Omeka_Navigation extends Zend_Navigation
             if (!in_array($page->uid, $nonExpiredPageUids)) {
                 $nonExpiredPageUids[] = $page->uid;
             }
-        }    
-        
+        }
         // prune expired pages
         // only pages provided by a filter (non-deleteable) should be expired
         $otherPages = $this->getOtherPages($nonExpiredPageUids);
@@ -328,14 +310,13 @@ class Omeka_Navigation extends Zend_Navigation
                 $expiredPages[] = $page;
             }
         }
-        
         return $expiredPages;
     }
     
     /**
      * Prunes pages from this navigation.
      * When a page is pruned its children pages are reattached to the first non-pruneable ancestor page.
-     * @param Zend_Navigation_Page_Mvc|Omeka_Navigation_Page_Uri $page  The page to prune
+     * @param Omeka_Navigation_Page_Mvc|Omeka_Navigation_Page_Uri $page  The page to prune
      */ 
     public function prunePages($pages)
     {
@@ -347,7 +328,7 @@ class Omeka_Navigation extends Zend_Navigation
     /**
      * Prune page from this navigation.
      * When a page is pruned its children pages are reattached to the first non-pruneable ancestor page.
-     * @param Zend_Navigation_Page_Mvc|Omeka_Navigation_Page_Uri $page  The page to prune
+     * @param Omeka_Navigation_Page_Mvc|Omeka_Navigation_Page_Uri $page  The page to prune
      */ 
     public function prunePage($page)
     {        
@@ -358,16 +339,17 @@ class Omeka_Navigation extends Zend_Navigation
      * Returns an array of all pages from navigation that
      * lack a uid in $excludePageUids
      * 
-     * @param array $excludePageUids  The list uids for pages to exclude
+     * @param array|null $excludePageUids  The list uids for pages to exclude
      * @return array The array of other pages.
      */
-    public function getOtherPages($excludePageUids)
+    public function getOtherPages($excludePageUids=null)
     {
         // get other pages
         $otherPages = array();
         $iterator = new RecursiveIteratorIterator($this, RecursiveIteratorIterator::SELF_FIRST);
         foreach ($iterator as $page) {
-            if (!in_array($page->uid, $excludePageUids)) {
+            if ($excludePageUids === null || 
+                count($excludePageUids) == 0 || !in_array($page->uid, $excludePageUids)) {
                 $otherPages[] = $page;
             }
         }
@@ -383,14 +365,13 @@ class Omeka_Navigation extends Zend_Navigation
      * @param String $pageUid The uid of the page
      * @param Zend_Navigation_Container $container The container within which to search for the page.
      * By default, it uses this navigation.
-     * @return Omeka_Zend_Navigation_Page_Uri|Zend_Navigation_Page_Mvc|null
+     * @return Omeka_Zend_Navigation_Page_Uri|Omeka_Navigation_Page_Mvc|null
      */
     public function getPageByUid($pageUid, $container = null)
     {
         if ($container == null) {
             $container = $this;
         }
-        
         if ($page = $container->findOneBy('uid', $pageUid)) {
             return $page;
         }
@@ -446,7 +427,7 @@ class Omeka_Navigation extends Zend_Navigation
      * If no option is found for the option name, then it returns an empty string.
      */
     public static function getNavigationOptionValueForInstall($optionName) 
-    {
+    {        
         $value = '';
         $nav = new Omeka_Navigation();
         switch($optionName) {
@@ -454,7 +435,6 @@ class Omeka_Navigation extends Zend_Navigation
                 $nav->addPagesFromFilter(self::PUBLIC_NAVIGATION_MAIN_FILTER_NAME);
             break;
         }
-                
         if ($nav->count()) {
             $value = json_encode($nav->toArray());
         }
@@ -466,7 +446,7 @@ class Omeka_Navigation extends Zend_Navigation
      *
      * @param  Zend_Navigation_Page|array|Zend_Config $page  Page to normalize
      * @param  $pageOptions  The options to set during normalization for every page and subpage
-     * @return Omeka_Navigation_Page_Uri|Zend_Navigation_Page_Mvc|null The normalized page
+     * @return Omeka_Navigation_Page_Uri|Omeka_Navigation_Page_Mvc|null The normalized page
      * @throws Zend_Navigation_Exception if a page or subpage is invalid  
      */
     protected function _normalizePageRecursive($page, $pageOptions = array()) 
@@ -474,72 +454,68 @@ class Omeka_Navigation extends Zend_Navigation
         if ($page === $this) {
             require_once 'Zend/Navigation/Exception.php';
             throw new Zend_Navigation_Exception('A page cannot have itself as a parent');
-        }
-                
+        }       
         // convert an array or Zend_Config to a Zend_Navigation_Page 
         if (is_array($page) || $page instanceof Zend_Config) {
             require_once 'Zend/Navigation/Page.php';
             $page = Zend_Navigation_Page::factory($page);
         }
-        
         // convert a Zend_Navigation_Page_Uri page to an Omeka_Navigation_Page_Uri page
+        // or convert a Zend_Navigation_Page_Mvc page to an Omeka_Navigation_Page_Mvc page
         if (get_class($page) == 'Zend_Navigation_Page_Uri') {
-            $page = $this->_convertZendToOmekaNavigationPageUri($page);
+            $page = $this->_convertZendToOmekaNavigationPage($page, 'Uri');
+        } elseif (get_class($page) == 'Zend_Navigation_Page_Mvc') {
+            $page = $this->_convertZendToOmekaNavigationPage($page, 'Mvc');
         }
-        
+        // configure Omeka_Navigation_Page_Uri or Omeka_Navigation_Page_Mvc
         if ($page instanceof Omeka_Navigation_Page_Uri) {
             $page->setHref($page->getHref());  // sets the href, which normalizes the uri from an href
-        } elseif ($page instanceof Zend_Navigation_Page_Mvc) {
+        } elseif ($page instanceof Omeka_Navigation_Page_Mvc) {
             if ($page->getRoute() === null) {
                 $page->setRoute('default');
             }
         }
-        
-        if (!($page instanceof Zend_Navigation_Page_Mvc || $page instanceof Omeka_Navigation_Page_Uri)) {
+        if (!($page instanceof Omeka_Navigation_Page_Mvc || $page instanceof Omeka_Navigation_Page_Uri)) {
             require_once 'Zend/Navigation/Exception.php';
             throw new Zend_Navigation_Exception(
                     'Invalid argument: $page must resolve to an instance of ' .
-                    'Zend_Navigation_Page_Mvc or Omeka_Navigation_Page_Uri');
+                    'Omeka_Navigation_Page_Mvc or Omeka_Navigation_Page_Uri');
         }
-        
         // set options for the page
         $page->setOptions($pageOptions);
-        
         // set the uid
-        $uid = $this->createPageUid($page->getHref());        
+        $uid = $this->createPageUid($page->getHref());
         $page->uid = $uid;
-        
         // normalize sub pages
         $subPages = array();
         foreach($page->getPages() as $subPage) {
             $subPages[] = $this->_normalizePageRecursive($subPage, $pageOptions);
         }
         $page->setPages($subPages);
-            
         return $page;
     }
-    
+
     /**
-     * Converts a Zend_Navigation_Page_Uri to an Omeka_Navigation_Page_Uri
+     * Converts a Zend_Navigation_Page subclass object to a corresponding Omeka object
      *
-     * @param Zend_Navigation_Page_Uri $page The page to convert
-     * @return Omeka_Navigation_Page_Uri The converted page
+     * @param Zend_Navigation_Page $page The page to convert
+     * @param string $subclassPostfix The postfix of the subclass.  Must be 'Uri' or 'Mvc'
+     * @return Omeka_Navigation_Page_Uri|Omeka_Navigation_Page_Mvc The converted page
      */
-    protected function _convertZendToOmekaNavigationPageUri(Zend_Navigation_Page_Uri $page) 
+    protected function _convertZendToOmekaNavigationPage(Zend_Navigation_Page $page, $subclassPostfix) 
     {   
-        // change the type of page     
+        // change the type of page
+        $fromClass = 'Zend_Navigation_Page_' . $subclassPostfix;
+        $toClass = 'Omeka_Navigation_Page_' . $subclassPostfix;
         $pageOptions = $this->_conditionalReplaceValueInArray($page->toArray(), 
                                                               'pages', 
                                                               'type', 
-                                                              'Zend_Navigation_Page_Uri', 
-                                                              'Omeka_Navigation_Page_Uri');
-                
-        $convertedPage = new Omeka_Navigation_Page_Uri();
+                                                              $fromClass, 
+                                                              $toClass);
+        $convertedPage = new $toClass();
         $convertedPage->setOptions($pageOptions);
-        
         return $convertedPage;
     }
-    
     
     /**
      * Returns an nested associative array such that all array elements have replaced an key value to 

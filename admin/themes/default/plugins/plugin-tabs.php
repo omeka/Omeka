@@ -6,25 +6,29 @@
         'label' => __('All'),
         'module' => 'default',
         'controller' => 'plugins',
-        'action' => 'index'
+        'action' => 'index',
+        'theme' => 'admin'
         ),
         array(
         'label' => __('Active'),
         'module' => 'default',
         'controller' => 'plugins',
-        'action' => 'active'
+        'action' => 'active',
+        'theme' => 'admin'
         ),
         array(
         'label' => __('Inactive'),
         'module' => 'default',
         'controller' => 'plugins',
-        'action' => 'inactive'
+        'action' => 'inactive',
+        'theme' => 'admin'
         ),
         array(
         'label' => __('Uninstalled'),
         'module' => 'default',
         'controller' => 'plugins',
-        'action' => 'uninstalled'
+        'action' => 'uninstalled',
+        'theme' => 'admin'
         )
     );
 
