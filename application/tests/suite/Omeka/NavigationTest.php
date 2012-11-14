@@ -31,9 +31,9 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
        $this->assertEmpty($this->_nav->toArray());
     }
     
-    public function testAddSingleExplicitVisibleZendNavigationPageMvc()
+    public function testAddSingleExplicitVisibleOmekaNavigationPageMvc()
     {
-        $page = new Zend_Navigation_Page_Mvc(array(
+        $page = new Omeka_Navigation_Page_Mvc(array(
             'label' => __('Browse Items'),
             'controller' => 'items',
             'action' => 'browse',
@@ -63,7 +63,7 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
             
         $this->assertTrue($this->_nav->hasPages());
         $pages = $this->_nav->getPages();
-        $this->assertContainsOnly('Zend_Navigation_Page_Mvc', $pages);
+        $this->assertContainsOnly('Omeka_Navigation_Page_Mvc', $pages);
         $this->assertContains($page, $pages);
         
         $foundPage = $this->_nav->findOneBy('uid', $uid);
@@ -73,9 +73,9 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
         $this->assertContains($pageArray, $this->_nav->toArray());
     }
     
-    public function testAddSingleImplicitVisibleZendNavigationPageMvc()
+    public function testAddSingleImplicitVisibleOmekaNavigationPageMvc()
     {
-        $page = new Zend_Navigation_Page_Mvc(array(
+        $page = new Omeka_Navigation_Page_Mvc(array(
             'label' => __('Browse Items'),
             'controller' => 'items',
             'action' => 'browse',
@@ -104,7 +104,7 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
             
         $this->assertTrue($this->_nav->hasPages());
         $pages = $this->_nav->getPages();
-        $this->assertContainsOnly('Zend_Navigation_Page_Mvc', $pages);
+        $this->assertContainsOnly('Omeka_Navigation_Page_Mvc', $pages);
         $this->assertContains($page, $pages);
         
         $foundPage = $this->_nav->findOneBy('uid', $uid);
@@ -114,9 +114,9 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
         $this->assertContains($pageArray, $this->_nav->toArray());
     }
     
-    public function testAddSingleExplicitNotVisibleZendNavigationPageMvc()
+    public function testAddSingleExplicitNotVisibleOmekaNavigationPageMvc()
     {
-        $page = new Zend_Navigation_Page_Mvc(array(
+        $page = new Omeka_Navigation_Page_Mvc(array(
             'label' => __('Browse Items'),
             'controller' => 'items',
             'action' => 'browse',
@@ -146,13 +146,168 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
             
         $this->assertTrue($this->_nav->hasPages());
         $pages = $this->_nav->getPages();
-        $this->assertContainsOnly('Zend_Navigation_Page_Mvc', $pages);
+        $this->assertContainsOnly('Omeka_Navigation_Page_Mvc', $pages);
         $this->assertContains($page, $pages);
         
         $foundPage = $this->_nav->findOneBy('uid', $uid);
         $this->assertEquals($page, $foundPage);
         
         $pageArray = $page->toArray();
+        $this->assertContains($pageArray, $this->_nav->toArray());
+    }
+    
+    public function testAddSingleExplicitVisibleZendNavigationPageMvc()
+    {
+        $page = new Zend_Navigation_Page_Mvc(array(
+            'label' => __('Browse Items'),
+            'controller' => 'items',
+            'action' => 'browse',
+            'visible' => true
+        ));
+        
+        $this->assertNull($page->get('uid'));
+        
+        $this->_nav->addPage($page);
+        
+        $this->assertEquals(CURRENT_BASE_URL, PUBLIC_BASE_URL);
+        $uid = PUBLIC_BASE_URL . '/items/browse';
+        
+        // this page should not be altered because it should create a new Omeka_Zend_Navigation_Page_Mvc
+        $this->assertNull($page->get('uid'));         
+        
+        $this->assertEquals(1, $this->_nav->count());
+        $this->assertTrue($this->_nav->hasChildren());
+        
+        $firstChild = $this->_nav->getChildren();
+        $this->assertNotEquals($page, $firstChild);
+        $this->assertInstanceOf('Omeka_Navigation_Page_Mvc', $firstChild);
+        
+        $this->assertEquals(__('Browse Items'), $firstChild->getLabel());
+        $this->assertEquals('items', $firstChild->getController());
+        $this->assertEquals('browse', $firstChild->getAction());        
+        $this->assertTrue($firstChild->getVisible());
+        $this->assertEquals(0, $firstChild->getOrder());
+        
+        $this->assertEquals($uid, $firstChild->get('uid'));
+        $this->assertEquals($uid, $firstChild->getHref());
+            
+        $this->assertTrue($this->_nav->hasPages());
+        $pages = $this->_nav->getPages();
+        
+        // it should convert the Zend_Navigation_Page_Mvc to an 
+        // Omeka_Navigation_Page_Mvc page
+        $this->assertContainsOnly('Omeka_Navigation_Page_Mvc', $pages);
+        $this->assertNotContains($page, $pages);
+        $this->assertContains($firstChild, $pages);
+
+        $foundPage = $this->_nav->findOneBy('uid', $uid);
+        $this->assertNotEquals($page, $foundPage);
+        $this->assertEquals($firstChild, $foundPage);
+        
+        $pageArray = $firstChild->toArray();
+        $this->assertContains($pageArray, $this->_nav->toArray());
+    }
+    
+    public function testAddSingleImplicitVisibleZendNavigationPageMvc()
+    {
+        $page = new Zend_Navigation_Page_Mvc(array(
+            'label' => __('Browse Items'),
+            'controller' => 'items',
+            'action' => 'browse',
+        ));
+        
+        $this->assertNull($page->get('uid'));
+        
+        $this->_nav->addPage($page);
+        
+        $this->assertEquals(CURRENT_BASE_URL, PUBLIC_BASE_URL);
+        $uid = PUBLIC_BASE_URL . '/items/browse';
+        
+        // this page should not be altered because it should create a new Omeka_Zend_Navigation_Page_Mvc
+        $this->assertNull($page->get('uid'));         
+        
+        $this->assertEquals(1, $this->_nav->count());
+        $this->assertTrue($this->_nav->hasChildren());
+        
+        $firstChild = $this->_nav->getChildren();
+        $this->assertNotEquals($page, $firstChild);
+        $this->assertInstanceOf('Omeka_Navigation_Page_Mvc', $firstChild);
+        
+        $this->assertEquals(__('Browse Items'), $firstChild->getLabel());
+        $this->assertEquals('items', $firstChild->getController());
+        $this->assertEquals('browse', $firstChild->getAction());        
+        $this->assertTrue($firstChild->getVisible());
+        $this->assertEquals(0, $firstChild->getOrder());
+        
+        $this->assertEquals($uid, $firstChild->get('uid'));
+        $this->assertEquals($uid, $firstChild->getHref());
+            
+        $this->assertTrue($this->_nav->hasPages());
+        $pages = $this->_nav->getPages();
+        
+        // it should convert the Zend_Navigation_Page_Mvc to an 
+        // Omeka_Navigation_Page_Mvc page
+        $this->assertContainsOnly('Omeka_Navigation_Page_Mvc', $pages);
+        $this->assertNotContains($page, $pages);
+        $this->assertContains($firstChild, $pages);
+
+        $foundPage = $this->_nav->findOneBy('uid', $uid);
+        $this->assertNotEquals($page, $foundPage);
+        $this->assertEquals($firstChild, $foundPage);
+        
+        $pageArray = $firstChild->toArray();
+        $this->assertContains($pageArray, $this->_nav->toArray());
+    }
+    
+    public function testAddSingleExplicitNotVisibleZendNavigationPageMvc()
+    {
+        $page = new Zend_Navigation_Page_Mvc(array(
+            'label' => __('Browse Items'),
+            'controller' => 'items',
+            'action' => 'browse',
+            'visible' => false
+        ));
+        
+        $this->assertNull($page->get('uid'));
+        
+        $this->_nav->addPage($page);
+        
+        $this->assertEquals(CURRENT_BASE_URL, PUBLIC_BASE_URL);
+        $uid = PUBLIC_BASE_URL . '/items/browse';
+        
+        // this page should not be altered because it should create a new Omeka_Zend_Navigation_Page_Mvc
+        $this->assertNull($page->get('uid'));         
+        
+        $this->assertEquals(1, $this->_nav->count());
+        $this->assertTrue($this->_nav->hasChildren());
+        
+        $firstChild = $this->_nav->getChildren();
+        $this->assertNotEquals($page, $firstChild);
+        $this->assertInstanceOf('Omeka_Navigation_Page_Mvc', $firstChild);
+        
+        $this->assertEquals(__('Browse Items'), $firstChild->getLabel());
+        $this->assertEquals('items', $firstChild->getController());
+        $this->assertEquals('browse', $firstChild->getAction());        
+        $this->assertFalse($firstChild->getVisible());
+        $this->assertEquals(0, $firstChild->getOrder());
+        
+        $this->assertEquals($uid, $firstChild->get('uid'));
+        $this->assertEquals($uid, $firstChild->getHref());
+            
+        $this->assertTrue($this->_nav->hasPages());
+        $pages = $this->_nav->getPages();
+        
+        // it should convert the Zend_Navigation_Page_Mvc to an 
+        // Omeka_Navigation_Page_Mvc page
+        $this->assertContainsOnly('Omeka_Navigation_Page_Mvc', $pages);
+        $this->assertNotContains($page, $pages);
+        $this->assertContains($firstChild, $pages);
+
+        $foundPage = $this->_nav->findOneBy('uid', $uid);
+        $this->assertNotEquals($page, $foundPage);
+        $this->assertEquals($firstChild, $foundPage);
+        
+        $pageArray = $firstChild->toArray();
         $this->assertContains($pageArray, $this->_nav->toArray());
     }
     
@@ -581,7 +736,7 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
     
     public function testAddDifferentPagesFlatArray()
     {
-        $explicitVisibleZendNavPageMvc = new Zend_Navigation_Page_Mvc(array(
+        $explicitVisibleZendNavPageMvc = new Omeka_Navigation_Page_Mvc(array(
             'label' => __('Browse Items'),
             'controller' => 'items',
             'action' => 'browse',
@@ -686,7 +841,7 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
             'visible' => false
         );
         
-        $explicitVisibleZendNavPageMvc = new Zend_Navigation_Page_Mvc(array(
+        $explicitVisibleZendNavPageMvc = new Omeka_Navigation_Page_Mvc(array(
             'label' => __('Browse Items'),
             'controller' => 'items',
             'action' => 'browse',
@@ -873,7 +1028,7 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
         );
         $this->_beforePages[__('Page 3')] = $page3;
         
-        $page4 = new Zend_Navigation_Page_Mvc(array(
+        $page4 = new Omeka_Navigation_Page_Mvc(array(
             'label' => __('Page 4'),
             'controller' => 'items',
             'action' => 'browse',
@@ -912,7 +1067,7 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
     
     protected function _addFlatPagesArray()
     {
-        $page1 = new Zend_Navigation_Page_Mvc(array(
+        $page1 = new Omeka_Navigation_Page_Mvc(array(
             'label' => __('Page 1'),
             'controller' => 'items',
             'action' => 'browse',
