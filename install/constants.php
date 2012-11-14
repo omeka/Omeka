@@ -7,6 +7,8 @@
  * @package Omeka\Install
  */
 
+define('INSTALL', true);
+
 require_once realpath(dirname(__FILE__) . '/../bootstrap.php');
 
 // This mini app is in the install/ directory.
