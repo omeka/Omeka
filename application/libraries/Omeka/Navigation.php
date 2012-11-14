@@ -44,9 +44,11 @@ class Omeka_Navigation extends Zend_Navigation
      */
     public function loadAsOption($optionName) 
     {
+        set_theme_base_url('public');
         if ($navPages = json_decode(get_option($optionName), true)) {
             $this->setPages($navPages);
         }
+        revert_theme_base_url();
     }
     
     /**
@@ -130,7 +132,8 @@ class Omeka_Navigation extends Zend_Navigation
      * @throws Zend_Navigation_Exception if a filter page is invalid  
      */
     public function createNavigationFromFilter($filterName='')
-    {        
+    {
+        set_theme_base_url('public');        
         if ($filterName == '') {
             $filterName = self::PUBLIC_NAVIGATION_MAIN_FILTER_NAME;
         }
@@ -169,6 +172,7 @@ class Omeka_Navigation extends Zend_Navigation
             $filterNav->baseAddPage($page);
         }
         
+        revert_theme_base_url();
         return $filterNav;
     }
     
@@ -286,6 +290,8 @@ class Omeka_Navigation extends Zend_Navigation
      */
     public function addPagesFromFilter($filterName='') 
     {
+        set_theme_base_url('public');
+                      
         if ($filterName == '') {
             $filterName = self::PUBLIC_NAVIGATION_MAIN_FILTER_NAME;
         }
@@ -299,6 +305,8 @@ class Omeka_Navigation extends Zend_Navigation
         
         // merge filter nav into navigation
         $this->mergeNavigation($filterNav);
+        
+        revert_theme_base_url();
     }
     
     /**
@@ -358,16 +366,17 @@ class Omeka_Navigation extends Zend_Navigation
      * Returns an array of all pages from navigation that
      * lack a uid in $excludePageUids
      * 
-     * @param array $excludePageUids  The list uids for pages to exclude
+     * @param array|null $excludePageUids  The list uids for pages to exclude
      * @return array The array of other pages.
      */
-    public function getOtherPages($excludePageUids)
+    public function getOtherPages($excludePageUids=null)
     {
         // get other pages
         $otherPages = array();
         $iterator = new RecursiveIteratorIterator($this, RecursiveIteratorIterator::SELF_FIRST);
         foreach ($iterator as $page) {
-            if (!in_array($page->uid, $excludePageUids)) {
+            if ($excludePageUids === null || 
+                count($excludePageUids) == 0 || !in_array($page->uid, $excludePageUids)) {
                 $otherPages[] = $page;
             }
         }
@@ -446,7 +455,8 @@ class Omeka_Navigation extends Zend_Navigation
      * If no option is found for the option name, then it returns an empty string.
      */
     public static function getNavigationOptionValueForInstall($optionName) 
-    {
+    {        
+        set_theme_base_url('public');   
         $value = '';
         $nav = new Omeka_Navigation();
         switch($optionName) {
@@ -454,10 +464,10 @@ class Omeka_Navigation extends Zend_Navigation
                 $nav->addPagesFromFilter(self::PUBLIC_NAVIGATION_MAIN_FILTER_NAME);
             break;
         }
-                
         if ($nav->count()) {
             $value = json_encode($nav->toArray());
         }
+        revert_theme_base_url();
         return $value;
     }
     

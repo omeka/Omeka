@@ -69,7 +69,7 @@ class IndexController extends Zend_Controller_Action
         
     public function installedAction()
     {
-        
+        set_theme_base_url('install');
     }
     
     public function errorsAction()
