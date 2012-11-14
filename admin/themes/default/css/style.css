@@ -390,7 +390,7 @@ p, li {
             font-family: "Arvo",serif;
             font-size: 14px;
             margin: 10px auto;
-            padding: .3125em 0;
+            padding: .3125em;
         }
             
         a.button.small, input[type=submit].small, button.small {
