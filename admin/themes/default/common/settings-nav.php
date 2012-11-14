@@ -4,27 +4,23 @@
     $navArray = array(
         array(
             'label' => __('General'),
-            'uri' => url('settings/edit-settings'),
-            'theme' => 'admin'
+            'uri' => url('settings/edit-settings')
         ),
         array(
             'label' => __('Security'),
             'uri' => url('settings/edit-security'),
             'resource' => 'Security',
-            'privilege' => 'edit',
-            'theme' => 'admin'
+            'privilege' => 'edit'
         ),
         array(
             'label' => __('Search'),
-            'uri' => url('settings/edit-search'),
-            'theme' => 'admin'
+            'uri' => url('settings/edit-search')
         ),
         array(
             'label' => __('Element Sets'),
             'uri' => url('element-sets'),
             'resource' => 'ElementSets',
-            'privilege' => 'browse',
-            'theme' => 'admin'
+            'privilege' => 'browse'
         ),
     );
     echo nav($navArray, 'admin_navigation_settings');

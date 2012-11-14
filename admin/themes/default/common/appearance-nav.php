@@ -5,18 +5,15 @@
             'label' => __('Themes'),
             'uri' => url('themes'),
             'resource' => 'Themes',
-            'privilege' => 'edit',
-            'theme' => 'admin'
+            'privilege' => 'edit'
         ),
         array(
             'label' => __('Navigation'),
-            'uri' => url('appearance/edit-navigation'),
-            'theme' => 'admin'
+            'uri' => url('appearance/edit-navigation')
         ),
         array(
             'label' => __('Settings'),
-            'uri' => url('appearance/edit-settings'),
-            'theme' => 'admin'
+            'uri' => url('appearance/edit-settings')
         ),
     );
     echo nav($navArray, 'admin_navigation_settings');
