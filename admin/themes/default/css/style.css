@@ -34,14 +34,14 @@
 ================================================== */
 
 @font-face {
-	font-family: 'icomoon';
-	src:url('iconfonts/icomoon.eot');
-	src:url('iconfonts/icomoon.eot?#iefix') format('embedded-opentype'),
-		url('iconfonts/icomoon.svg#icomoon') format('svg'),
-		url('iconfonts/icomoon.woff') format('woff'),
-		url('iconfonts/icomoon.ttf') format('truetype');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'icomoon';
+    src:url('iconfonts/icomoon.eot');
+    src:url('iconfonts/icomoon.eot?#iefix') format('embedded-opentype'),
+        url('iconfonts/icomoon.svg#icomoon') format('svg'),
+        url('iconfonts/icomoon.woff') format('woff'),
+        url('iconfonts/icomoon.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 body {
