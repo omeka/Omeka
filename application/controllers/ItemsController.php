@@ -216,8 +216,8 @@ class ItemsController extends Omeka_Controller_AbstractActionController
      */
     public function changeTypeAction()
     {
-        if ($id = $_POST['item_id']) {
-            $item = $this->_helper->db->findById($id);
+        if (isset($_POST['item_id'])) {
+            $item = $this->_helper->db->findById($_POST['item_id']);
         } else {
             $item = new Item;
         }
