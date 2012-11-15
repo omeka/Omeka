@@ -17,7 +17,7 @@ endif; ?>
     $themeName = Theme::getTheme(Theme::getCurrentThemeName('public'))->title;
     $stats[] = array(link_to('themes', null, $themeName), __('theme'));
 endif; ?>
-<?php apply_filters('admin_dashboard_stats', $stats, array('view' => $this)); ?>
+<?php $stats = apply_filters('admin_dashboard_stats', $stats, array('view' => $this)); ?>
 <section id="stats">
     <?php foreach ($stats as $statInfo): ?>
     <p><span class="number"><?php echo $statInfo[0]; ?></span><br><?php echo $statInfo[1]; ?></p>
@@ -59,7 +59,7 @@ endif; ?>
     <div class="add-new"><p><a class="add-collection" href="<?php echo html_escape(url('collections/add')); ?>"><?php echo __('Add a new collection'); ?></a></p></div>
 <?php $panels[] = ob_get_clean(); ?>
 
-<?php apply_filters('admin_dashboard_panels', $panels, array('view' => $this)); ?>
+<?php $panels = apply_filters('admin_dashboard_panels', $panels, array('view' => $this)); ?>
 <?php for ($i = 0; $i < count($panels); $i++): ?>
 <section class="five columns <?php echo ($i & 1) ? 'omega' : 'alpha'; ?>">
     <div class="panel">
