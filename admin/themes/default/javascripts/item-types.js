@@ -36,8 +36,7 @@ Omeka.ItemTypes = {};
         $('div.sortable-item').each(function () {
             $(this).append('<div class="drawer"></div>');
         });
-        $('.drawer')
-            .click(function (event) {
+        $('.drawer').click( function (event) {
                 event.preventDefault();
                 $(event.target).parent().next().toggle();
                 $(this).toggleClass('opened');
@@ -72,7 +71,12 @@ Omeka.ItemTypes = {};
                         data: {elementId: elementId, elementTempId: elementTempId},
                         success: function (response) {
                             var elementDescriptionCol = dropDown.parent().next();
-                            elementDescriptionCol.html(response.elementDescription);
+                            if(response.elementDescription) {
+                                elementDescriptionCol.html('<div class="element-description">' + response.elementDescription + '</div>');
+                                elementDescriptionCol.toggle();
+                            } else {
+                                elementDescriptionCol.hide();
+                            }
                         },
                         error: function () {
                             alert('Unable to get selected element data.');
@@ -86,13 +90,23 @@ Omeka.ItemTypes = {};
          * Turn all the links into AJAX requests that will mark the element for deletion and update the list.
          */
         function activateRemoveElementLinks() {
-            $('a.delete-element').click(function (event) {
-                event.preventDefault();
-                var elementsToRemove = $('#itemtypes_remove');
 
-                var removeElementLinkPrefix = 'remove-element-link-';
-                var removeElementLinkId = this.getAttribute('id');
-                if (removeElementLinkId) {
+            $(document).on('click', '.delete-element', function (event) {
+                event.preventDefault();
+                toggleElements(this);
+            });
+            $('a.undo-delete').click( function (event) {
+                event.preventDefault();
+                toggleElements(this);
+            });
+        }
+        
+        function toggleElements(button) {
+            var elementsToRemove = $('#itemtypes_remove');
+            var removeElementLinkPrefix = 'remove-element-link-';
+            var removeElementLinkId = button.getAttribute('id');
+            if ($(button).hasClass('delete-element')) {
+                if (removeElementLinkId !== null) {
                     var elementId = removeElementLinkId.substring(removeElementLinkPrefix.length);
                     if (elementId) {
                         if (!confirm('Are you sure you want to delete this element? This will remove the element from this particular item type. Items that are assigned to this item type will lose metadata that is specific to this element.')) {
@@ -100,13 +114,26 @@ Omeka.ItemTypes = {};
                         }
                         elementsToRemove.attr('value', elementsToRemove.attr('value') + elementId + ',');
                     }
+                    $(button).prevAll('.element-order').attr('name', '');
+                    $(button).parent().addClass('deleted');
+                    $(button).prev().toggle();
+                    $(button).toggle();
+                } else {
+                    var row = $(button).parent().parent();
+                    row.remove();
                 }
-                var row = $(this).parent().parent();
-                row.remove();
-            });
+            } else {
+                if (removeElementLinkId) {
+                    var elementId = removeElementLinkId.substring(removeElementLinkPrefix.length);
+                    $(button).prevAll('.element-order').attr('name', 'elements[' + elementId + '][order]');
+                }
+                $(button).parent().removeClass('deleted');
+                $(button).next().toggle();
+                $(button).toggle();
+            }
         }
 
-        $('#add-element').click(function (event) {
+        $('#add-element').click( function (event) {
             event.preventDefault();
             var elementCount = $('#item-type-elements li').length;
             var typeValue = $('input[name=add-element-type]:checked').val();
@@ -124,8 +151,6 @@ Omeka.ItemTypes = {};
                     var response = responseText || 'no response text';
                     var lastElement = $('.element').last();
                     lastElement.after(response);
-                    activateRemoveElementLinks();
-                    activateSelectElementDropdowns();
                 },
                 error: function () {
                     alert('Unable to get a new element.');

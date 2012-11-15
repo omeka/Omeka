@@ -14,14 +14,14 @@
                 <div class="sortable-item">
                 <strong><?php echo html_escape($element->name); ?></strong>
                 <?php echo $this->formHidden("elements[$element->id][order]", $elementOrder, array('size'=>2, 'class' => 'element-order')); ?>
+                <?php if (is_allowed('ItemTypes', 'delete-element')): ?>
+                <a id="return-element-link-<?php echo html_escape($element->id); ?>" href="" class="undo-delete"><?php echo __('Undo'); ?></a>
+                <a id="remove-element-link-<?php echo html_escape($element->id); ?>" href="" class="delete-element"><?php echo __('Remove'); ?></a>
+                <?php endif; ?>
                 </div>
                 
                 <div class="drawer-contents">
                     <div class="element-description"><?php echo html_escape($element->description); ?></div>
-
-                <?php if (is_allowed('ItemTypes', 'delete-element')): ?>
-                <a id="remove-element-link-<?php echo html_escape($element->id); ?>" href="" class="delete-element red button"><?php echo __('Remove'); ?></a>
-                <?php endif; ?>
                 </div>
             </li>
 
