@@ -2,76 +2,72 @@
 $pageTitle = __('Dashboard');
 echo head(array('bodyclass'=>'index primary-secondary', 'title'=>$pageTitle)); ?>
     
-            <section id="stats">
-            
-                <?php
-                    $themeName = Theme::getTheme(Theme::getCurrentThemeName('public'))->title;
-                ?>
-                <p><span class="number"><?php echo link_to('items', null, __(total_records('Item'))) ?></span><br /><?php echo __('items') ?></p>
-                <p><span class="number"><?php echo link_to('collections', null, __(total_records('Collection'))); ?></span><br /><?php echo __('collections') ?></p>
-                <?php if(is_allowed('Plugins','edit')): ?>
-                <p><span class="number"><?php echo link_to('plugins', null, __(total_records('Plugin'))); ?></span><br /><?php echo __('plugins') ?></p>
-                <?php endif; ?>
-                <p><span class="number"><?php echo link_to('tags', null, __(total_records('Tag'))); ?></span><br /><?php echo __('tags') ?></p>
-                <?php if(is_allowed('Users','edit')): ?>
-                <p><span class="number"><?php echo link_to('users', null, __(total_records('User'))); ?></span><br /><?php echo __('users') ?></p>
-                <?php endif; ?>
-                <p>
-                    <span class="number">
-                    <?php if (get_option('display_system_info') && is_allowed('SystemInfo', 'index')): ?>
-                    <a href="<?php echo html_escape(url('system-info')); ?>" ><?php echo OMEKA_VERSION; ?></a>
-                    <?php else: ?>
-                    <?php echo OMEKA_VERSION; ?>
-                    <?php endif; ?>
-                    </span><br /><?php echo __('Omeka version'); ?>
-                </p>
-                <?php if(is_allowed('Themes','edit')): ?>                
-                <p class="theme"><span class="number"><?php echo link_to('themes', null, $themeName); ?></a></span><br />theme</p>
-                <?php endif; ?>
-            </section>
-            
-            <section id="recent-collections" class="five columns alpha">
-                <div class="panel">
-                    <h2>Recent Collections</h2>
-                    <?php
-                        
-                        $collections = get_recent_collections(5);
-                        set_loop_records('collections', $collections);
-                        
-                        foreach (loop('collections') as $collection):
-                            echo '<div class="recent-row">';
-                            echo '<p class="recent">'.link_to_collection().'</p>';
-                            if (is_allowed($collection, 'edit')):
-                            echo '<p class="dash-edit">'.link_to_collection(__('Edit'), array('class'=>'dash-edit'), 'edit').'</p>';
-                            endif;                        
-                            echo '</div>';
-                        endforeach;
-                        
-                       ?>
-                    <div class="add-new"><p><a class="add-collection" href="<?php echo html_escape(url('collections/add')); ?>">Add a new collection</a></p></div>
-                </div>
-            </section>
-            
-            <section id="recent-items" class="five columns omega">
-                <div class="panel">
-                <h2>Recent Items</h2>
-                    <?php 
-                     
-                        $items = get_recent_items(5); 
-                        set_loop_records('items', $items);
-                     
-                        foreach (loop('items') as $item):
-                            echo '<div class="recent-row">';
-                            echo '<p class="recent">'.link_to_item().'</p>';
-                            if (is_allowed($item, 'edit')):
-                            echo '<p class="dash-edit">'.link_to_item(__('Edit'), array(), 'edit').'</p>';
-                            endif;
-                            echo '</div>';                            
-                        endforeach;
-                     
-                    ?>
-                <div class="add-new"><p><a class="add-new" href="<?php echo html_escape(url('items/add')); ?>">Add a new item</a></p></div>
-                </div>
-            </section>
-            <?php fire_plugin_hook('admin_dashboard', array('view' => $this)); ?>
+<?php $stats = array(
+    array(link_to('items', null, total_records('Item')), __('items')),
+    array(link_to('collections', null, total_records('Collection')), __('collections')),
+    array(link_to('tags', null, total_records('Tag')), __('tags'))
+); ?>
+<?php if (is_allowed('Plugins', 'edit')):
+    $stats[] = array(link_to('plugins', null, total_records('Plugin')), __('plugins'));
+endif; ?>
+<?php if (is_allowed('Users', 'edit')):
+    $stats[] = array(link_to('users', null, total_records('User')), __('users'));
+endif; ?>
+<?php if (is_allowed('Themes', 'edit')):
+    $themeName = Theme::getTheme(Theme::getCurrentThemeName('public'))->title;
+    $stats[] = array(link_to('themes', null, $themeName), __('theme'));
+endif; ?>
+<?php apply_filters('admin_dashboard_stats', $stats, array('view' => $this)); ?>
+<section id="stats">
+    <?php foreach ($stats as $statInfo): ?>
+    <p><span class="number"><?php echo $statInfo[0]; ?></span><br><?php echo $statInfo[1]; ?></p>
+    <?php endforeach; ?>
+</section>
+
+<?php $panels = array(); ?>
+
+<?php ob_start(); ?>
+<h2><?php echo __('Recent Items'); ?></h2>
+<?php
+    set_loop_records('items', get_recent_items(5));
+    foreach (loop('items') as $item):
+?>
+    <div class="recent-row">
+        <p class="recent"><?php echo link_to_item(); ?></p>
+        <?php if (is_allowed($item, 'edit')): ?>
+        <p class="dash-edit"><?php echo link_to_item(__('Edit'), array(), 'edit'); ?></p>
+        <?php endif; ?>
+    </div>
+<?php endforeach; ?>
+    <div class="add-new"><p><a class="add-new" href="<?php echo html_escape(url('items/add')); ?>"><?php echo __('Add a new item'); ?></a></p></div>
+<?php $panels[] = ob_get_clean(); ?>
+
+<?php ob_start(); ?>
+<h2><?php echo __('Recent Collections'); ?></h2>
+<?php
+    $collections = get_recent_collections(5);
+    set_loop_records('collections', $collections);
+    foreach (loop('collections') as $collection):
+?>
+    <div class="recent-row">
+        <p class="recent"><?php echo link_to_collection(); ?></p>
+        <?php if (is_allowed($collection, 'edit')): ?>
+        <p class="dash-edit"><?php echo link_to_collection(__('Edit'), array(), 'edit'); ?></p>
+        <?php endif; ?>
+    </div>
+<?php endforeach; ?>
+    <div class="add-new"><p><a class="add-collection" href="<?php echo html_escape(url('collections/add')); ?>"><?php echo __('Add a new collection'); ?></a></p></div>
+<?php $panels[] = ob_get_clean(); ?>
+
+<?php apply_filters('admin_dashboard_panels', $panels, array('view' => $this)); ?>
+<?php for ($i = 0; $i < count($panels); $i++): ?>
+<section class="five columns <?php echo ($i & 1) ? 'omega' : 'alpha'; ?>">
+    <div class="panel">
+        <?php echo $panels[$i]; ?>
+    </div>
+</section>
+<?php endfor; ?>
+
+<?php fire_plugin_hook('admin_dashboard', array('view' => $this)); ?>
+
 <?php echo foot(); ?>
