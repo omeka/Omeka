@@ -58,7 +58,6 @@ class ElementSetsController extends Omeka_Controller_AbstractActionController
                             $elementRecord->delete();
                             continue;
                         }
-                        $elementRecord->name = $element['name'];
                         $elementRecord->description = $element['description'];
                     } else {
                         $elementRecord->comment = trim($element['comment']);

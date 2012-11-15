@@ -21,7 +21,7 @@ echo head(array(
     <?php foreach ($element_set->getElements() as $element): ?>
         <li class="element">
             <div class="sortable-item">
-                <?php echo $this->formText("elements[{$element->id}][name]", $element->name); ?>
+                <?php echo __($element->name); ?>
                 <a href="#" class="undo-delete"><?php echo __('Undo'); ?></a>
                 <a href="#" class="delete-element"><?php echo __('Delete'); ?></a>
                 <?php echo $this->formHidden("elements[{$element->id}][delete]"); ?>
