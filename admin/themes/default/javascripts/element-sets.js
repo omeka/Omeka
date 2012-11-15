@@ -42,4 +42,40 @@ Omeka.ElementSets = {};
                 event.stopPropagation();
             });
     };
+
+    /**
+     * Set up tag remove/undo buttons for each element.
+     *
+     */
+    Omeka.ElementSets.enableElementRemoval = function () {
+        $(document).on('click', '.delete-element', function (event) {
+            event.preventDefault();
+            Omeka.ElementSets.toggleElement(this);
+        });
+
+        $(document).on('click', '.undo-delete', function (event) {
+            event.preventDefault();
+            Omeka.ElementSets.toggleElement(this);
+        });
+    };
+
+
+    /**
+     * Callback for element delete and undoing delete actions.
+     *
+     * @param {Element} button Clicked button.
+     */
+    Omeka.ElementSets.toggleElement = function (button) {
+        $(button).parent().toggleClass('deleted');
+        $(button).parent().next().toggleClass('deleted');
+        $(button).toggle();
+        if($(button).nextAll('input[type=hidden]').val() != 1) {
+            $(button).next().val(1);
+            $(button).prev().toggle();
+        } else {
+            $(button).nextAll('input[type=hidden]').val(0);
+            $(button).next().toggle();
+        }
+    };
+
 })(jQuery);

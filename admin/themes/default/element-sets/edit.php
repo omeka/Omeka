@@ -16,14 +16,21 @@ echo head(array(
     <p class="explanation">You can customize the element descriptions below. You 
     can order the elements by editing the specific item type.</p>
     <p><?php echo __($element_set->description); ?></p>
-    <ul>
+    <input type="hidden" name="elements-to-delete" id="elements-to-delete" value="" />
+    <ul class="sortable">
     <?php foreach ($element_set->getElements() as $element): ?>
-        <li><p><label for="<?php echo "elements[{$element->id}][name]"; ?>"><?php echo __('Name'); ?></label>
-        <?php echo $this->formText("elements[{$element->id}][name]", $element->name); ?></p>
-        <p><label for="<?php echo "elements[{$element->id}][description]"; ?>"><?php echo __('Description'); ?></label>
-        <?php echo $this->formTextarea("elements[{$element->id}][description]", $element->description); ?></p>
-        <p><label for="<?php echo "elements[{$element->id}][delete]"; ?>"><?php echo __('Delete?'); ?></label>
-        <?php echo $this->formCheckbox("elements[{$element->id}][delete]"); ?></p>
+        <li class="element">
+            <div class="sortable-item">
+                <?php echo $this->formText("elements[{$element->id}][name]", $element->name); ?>
+                <a href="#" class="undo-delete"><?php echo __('Undo'); ?></a>
+                <a href="#" class="delete-element"><?php echo __('Delete'); ?></a>
+                <?php echo $this->formHidden("elements[{$element->id}][delete]"); ?>
+            </div>
+            <div class="drawer-contents">
+                <label for="<?php echo "elements[{$element->id}][description]"; ?>"><?php echo __('Description'); ?></label>
+                <?php echo $this->formTextarea("elements[{$element->id}][description]", $element->description, array('rows' => '3')); ?>
+            </div>
+        </li>
     <?php endforeach; ?>
     </ul>
     <?php else: ?>
@@ -35,12 +42,12 @@ echo head(array(
         <li class="element">
         <div class="sortable-item">
             <?php echo __($element->name); ?>
+            <?php echo $this->formHidden("elements[{$element->id}][order]", $element->order, array('class' => 'element-order')); ?>
         </div>
         <div class="drawer-contents">
-            <p><?php echo __($element->description); ?></p>
+            <?php echo __($element->description); ?>
             <label for="<?php echo "elements[{$element->id}][comment]"; ?>"><?php echo __('Comment'); ?></label>
-            <?php echo $this->formTextarea("elements[{$element->id}][comment]", $element->comment); ?>
-            <?php echo $this->formHidden("elements[{$element->id}][order]", $element->order, array('class' => 'element-order')); ?>
+            <?php echo $this->formTextarea("elements[{$element->id}][comment]", $element->comment, array('rows' => '3')); ?>
         </div>
         </li>
     <?php endforeach; ?>
@@ -56,11 +63,12 @@ echo head(array(
 
 </form>
 <?php if (ElementSet::ITEM_TYPE_NAME != $element_set->name): ?>
+<?php endif; ?>
 <script type="text/javascript">
 //<![CDATA[
 Omeka.addReadyCallback(Omeka.ElementSets.enableSorting);
 Omeka.addReadyCallback(Omeka.ElementSets.addHideButtons);
+Omeka.addReadyCallback(Omeka.ElementSets.enableElementRemoval);
 //]]>
 </script>
-<?php endif; ?>
 <?php echo foot(); ?>
