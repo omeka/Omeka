@@ -113,6 +113,7 @@ Omeka.ItemTypes = {};
                     }
                     $(button).prevAll('.element-order').attr('name', '');
                     $(button).parent().addClass('deleted');
+                    $(button).parent().next().addClass('deleted');
                     $(button).prev().toggle();
                     $(button).toggle();
                 } else {
@@ -125,6 +126,7 @@ Omeka.ItemTypes = {};
                     $(button).prevAll('.element-order').attr('name', 'elements[' + elementId + '][order]');
                 }
                 $(button).parent().removeClass('deleted');
+                $(button).parent().next().removeClass('deleted');
                 $(button).next().toggle();
                 $(button).toggle();
             }

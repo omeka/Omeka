@@ -3,7 +3,7 @@ queue_js_file('element-sets');
 echo head(array(
     'title'=> __('Edit Element Set'),
     'content_class' => 'vertical-nav',
-    'bodyclass'=>'element-sets item-type-metadata primary'
+    'bodyclass'=>'element-sets primary'
 ));
 ?>
 <?php echo common('settings-nav'); ?>
@@ -17,7 +17,7 @@ echo head(array(
     can order the elements by editing the specific item type.</p>
     <p><?php echo __($element_set->description); ?></p>
     <input type="hidden" name="elements-to-delete" id="elements-to-delete" value="" />
-    <ul class="ui-sortable">
+    <ul class="ui-sortable item-type-metadata">
     <?php foreach ($element_set->getElements() as $element): ?>
         <li class="element">
             <div class="sortable-item">
