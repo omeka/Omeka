@@ -54,12 +54,10 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
     
     public function editNavigationAction() 
     {
-        set_theme_base_url('public');
         require_once APP_DIR . '/forms/Navigation.php';
         $form = new Omeka_Form_Navigation();
         fire_plugin_hook('navigation_form', array('form' => $form));
         $this->view->form = $form;
-        revert_theme_base_url();
 
         if (isset($_POST['submit'])) {
             if ($form->isValid($_POST)) {

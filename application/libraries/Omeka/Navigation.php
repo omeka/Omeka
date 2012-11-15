@@ -123,13 +123,15 @@ class Omeka_Navigation extends Zend_Navigation
      * @param String $filterName    The name of the filter
      * @throws Zend_Navigation_Exception if a filter page is invalid  
      */
-    public function createNavigationFromFilter($filterName='')
+    public static function createNavigationFromFilter($filterName='')
     {
         if ($filterName == '') {
             $filterName = self::PUBLIC_NAVIGATION_MAIN_FILTER_NAME;
         }
         // create a new navigation object from the filterName
-        $filterNav = new Omeka_Navigation();               
+        $filterNav = new Omeka_Navigation();
+
+        $theme = null;
         // get default pages for the filter
         $pageLinks = array();
         switch($filterName) {
@@ -151,13 +153,26 @@ class Omeka_Navigation extends Zend_Navigation
                         'theme' => 'public'
                     )),
                 );
+                $theme = 'public';
             break;
         }
+
         // gather other page links from filter handlers (e.g. plugins)      
+        if ($theme) {
+            set_theme_base_url($theme);
+        }
         $pageLinks = apply_filters($filterName, $pageLinks);
+        if ($theme) {
+            revert_theme_base_url();
+        }
         foreach($pageLinks as $pageLink) {                            
             // normalize the page and its subpages            
-            $page = $this->_normalizePageRecursive($pageLink, array('can_delete' => false));
+            $page = $filterNav->_normalizePageRecursive($pageLink,
+                array(
+                    'can_delete' => false,
+                    'theme' => $theme
+                )
+            );
             $filterNav->baseAddNormalizedPage($page);
         }
         return $filterNav;
@@ -276,7 +291,7 @@ class Omeka_Navigation extends Zend_Navigation
             $filterName = self::PUBLIC_NAVIGATION_MAIN_FILTER_NAME;
         }
         // get filter navigation from plugins
-        $filterNav = $this->createNavigationFromFilter($filterName);
+        $filterNav = self::createNavigationFromFilter($filterName);
         // prune the expired navigation pages
         $expiredPages = $this->getExpiredPagesFromNav($filterNav);
         $this->prunePages($expiredPages);

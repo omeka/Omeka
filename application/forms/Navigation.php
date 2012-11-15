@@ -368,8 +368,7 @@ class Omeka_Form_Navigation extends Omeka_Form
             }
         }
         // make sure every undeleteable page uid from old navigation is in the list of new undeleteable page uids
-        $nav = new Omeka_Navigation();
-        $nav->createNavigationFromFilter('public_navigation_main');
+        $nav = Omeka_Navigation::createNavigationFromFilter('public_navigation_main');
         $iterator = new RecursiveIteratorIterator($nav, RecursiveIteratorIterator::SELF_FIRST);
         foreach($iterator as $page) {
             if ($page->can_delete == false) {
