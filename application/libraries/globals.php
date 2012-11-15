@@ -1792,15 +1792,15 @@ function output_format_list($list = true, $delimiter = ' | ')
 }
 
 /**
- * Return the headings for a browse table.
+ * Return the list of links for sorting displayed records.
  * 
  * @package Omeka\Function\View\Body
- * @param array $links The links to sort the headings
+ * @param array $links The links to sort the headings. Should correspond to the metadata displayed.
  * @param array $wrapperTags The tags and attributes to use for the browse headings
- * - 'list_tag' The HTML tag to use for the containing list
- * - 'link_tag' The HTML tag to use for each list item (the browse headings)
- * - 'list_attr' Attributes to apply to the containing list tag
- * - 'link_attr' Attributes to apply to the list item tag
+ * * 'list_tag' The HTML tag to use for the containing list
+ * * 'link_tag' The HTML tag to use for each list item (the browse headings)
+ * * 'list_attr' Attributes to apply to the containing list tag
+ * * 'link_attr' Attributes to apply to the list item tag
  * 
  * @return string
  */ 
