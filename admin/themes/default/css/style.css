@@ -446,11 +446,17 @@ p, li {
         /* Alerts
         ================================================== */
         
-        #content #flash ul, ul.error {
+        #content #flash ul {
             list-style-type: none;
-            margin-top: 20px;
+            margin-top: 0;
             padding: 0;
         }
+        
+            ul.error {
+                list-style-type: none;
+                margin-top: 20px;
+                padding: 0;
+            }
             
             #content #flash li, ul.error li {
                 background-color: rgba(255, 255, 255, .5);
@@ -2029,18 +2035,13 @@ button.remove_search {
 
 .itemtype-name { width: 15%; }
 
-    
+
 /* Browse Element Sets
 ================================================== */
 
 .element-set-name { width: 20%; }
 
 
-/* Edit Element Set
-================================================== */
-
-.element-sets textarea { height: 200px; }
-            
 /* Browse Themes
 ================================================== */
 
