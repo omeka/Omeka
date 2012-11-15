@@ -1815,13 +1815,26 @@ function browse_sort_links($links, $wrapperTags = array())
     $defaults = array(
         'link_tag' => 'li',
         'list_tag' => 'ul',
-        'link_attr' => '',
-        'list_attr' => ''
+        'link_attr' => array(),
+        'list_attr' => array( 'id' => 'sort-links-list' )
     );
 
     $sortlistWrappers = array_merge($defaults, $wrapperTags);
+    
+    $linkAttrArray = array();
+    foreach ($sortlistWrappers['link_attr'] as $key => $attribute) {
+        $linkAttrArray[$key] = $key . '="' . html_escape( $attribute ) . '"';
+    }
+    $linkAttr = join(' ', $linkAttrArray);
+
+    $listAttrArray = array();
+    foreach ($sortlistWrappers['list_attr'] as $key => $attribute) {
+        $listAttrArray[$key] = $key . '="' . html_escape( $attribute ) . '"';
+    }
+    $listAttr = join(' ', $listAttrArray);    
 
     $sortlist = '';
+    $sortlist .= "<{$sortlistWrappers['list_tag']} $listAttr>";
 
     foreach ($links as $label => $column) {
         if($column) {
@@ -1839,14 +1852,15 @@ function browse_sort_links($links, $wrapperTags = array())
             }
             $url = url(array(), null, $urlParams);
             if ($sortlistWrappers['link_tag'] !== '') {
-                $sortlist .= '<' . $sortlistWrappers['link_tag'] . ' ' . $class . ' ' . '><a href="' . $url . '">' . $label . '</a></' . $sortlistWrappers['link_tag'] . '>';
+                $sortlist .= "<{$sortlistWrappers['link_tag']} $class $linkAttr><a href=\"$url\">$label</a></{$sortlistWrappers['link_tag']}>";
             } else {
-                $sortlist .= '<a href="' . $url . ' ' . $class . '">' . $label . '</a>';
+                $sortlist .= "<a href=\"$url\" $class {$sortlistWrappers['link_attr']}\">$label</a>";
             }
         } else {
-            $sortlist .= '<' . $sortlistWrappers['link_tag'] . '/>' . $label . '</' . $sortlistWrappers['link_tag'] . '>';
+            $sortlist .= "<$linkAttr>$label</{$sortlistWrappers['link_tag']}>";
         }
     }
+    $sortlist .= "</{$sortlistWrappers['list_tag']}>";
     return $sortlist;
 }
 
