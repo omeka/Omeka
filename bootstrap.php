@@ -8,7 +8,7 @@
  */
 
 // Define the current version of Omeka.
-define('OMEKA_VERSION', '2.0-alpha');
+define('OMEKA_VERSION', '2.0-beta');
 
 // Define the application environment.
 defined('APPLICATION_ENV') || define('APPLICATION_ENV', (
