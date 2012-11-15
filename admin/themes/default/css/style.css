@@ -2047,6 +2047,8 @@ button.remove_search {
 
 .item-type-metadata .drawer { display: none; }
 
+.item-type-metadata .ui-sortable .sortable-item { cursor: default; } 
+
 
 
 /* Browse Themes
