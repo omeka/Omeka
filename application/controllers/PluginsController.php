@@ -108,7 +108,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
      */
     public function activateAction()
     {
-        $this->_helper->redirector('active');
+        $this->_helper->redirector('index');
         
         $plugin = $this->_getPluginByName();
         if (!$plugin) {
@@ -149,7 +149,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
      */
     public function deactivateAction()
     {
-        $this->_helper->redirector('inactive');
+        $this->_helper->redirector('index');
         $plugin = $this->_getPluginByName();
         if (!$plugin) {
             return;
@@ -213,76 +213,43 @@ class PluginsController extends Omeka_Controller_AbstractActionController
      */
     public function browseAction() 
     {
-        // Get a list of all plugins currently processed by the system.      
+        // Get installed plugins, includes active and inactive.
         $installedPlugins = $this->_pluginLoader->getPlugins();
-        $pluginFactory = new Omeka_Plugin_Factory(PLUGIN_DIR);
-        $newPlugins = $pluginFactory->getNewPlugins($installedPlugins);
-        $this->_pluginLoader->loadPlugins($newPlugins);
-        $allPlugins = $this->_pluginLoader->getPlugins();
-        // Plugins are keyed to the directory name, so natural sort based on that.
-        uksort($allPlugins, "strnatcasecmp");
-        $allPlugins = apply_filters('browse_plugins', $allPlugins);
-
-        $this->view->assign(array('plugins'=>$allPlugins, 'loader'=>$this->_pluginLoader));
-    }
-    
-    /**
-     * Action to browse only uninstalled plugins
-     *
-     * @return void
-     */
-
-    public function uninstalledAction()
-    {
-        $installedPlugins = $this->_pluginLoader->getPlugins();
-        $pluginFactory = new Omeka_Plugin_Factory(PLUGIN_DIR);
-        $uninstalledPlugins = $pluginFactory->getNewPlugins($installedPlugins);
+        
+        // Get plugins that are not installed and load them.
+        $factory = new Omeka_Plugin_Factory(PLUGIN_DIR);
+        $uninstalledPlugins = $factory->getNewPlugins($installedPlugins);
         $this->_pluginLoader->loadPlugins($uninstalledPlugins);
         
-        uksort($uninstalledPlugins, "strnatcasecmp");
-        $uninstalledPlugins = apply_filters('browse_plugins', $uninstalledPlugins);
+        // Get the combination of installed and not-installed plugins.
+        $allPlugins = $this->_pluginLoader->getPlugins();
+        uksort($allPlugins, 'strnatcasecmp');
         
-        $this->view->assign(array('uninstalledPlugins' => $uninstalledPlugins, 'loader'=>$this->_pluginLoader));
-    }
-
-    /**
-     * Action to browse only uninstalled plugins
-     *
-     * @return void
-     */
-
-    public function activeAction()
-    {
-        $installedPlugins = $this->_pluginLoader->getPlugins();
-        $activePlugins = array();
-        foreach($installedPlugins as $pluginDirName => $plugin) {
-            if($plugin->isActive()) {
-                $activePlugins[$pluginDirName] = $plugin;
+        // Filter the plugins.
+        $allPlugins = apply_filters('browse_plugins', $allPlugins);
+        
+        // Prepare the plugins array for the view.
+        $plugins = array();
+        foreach ($allPlugins as $directoryName => $plugin) {
+            if ($plugin->isInstalled()) {
+                if ($plugin->isActive()) {
+                    $plugins['active'][$directoryName] = $plugin;
+                } else {
+                    $plugins['inactive'][$directoryName] = $plugin;
+                }
+            } else {
+                $plugins['uninstalled'][$directoryName] = $plugin;
             }
         }
-        $this->_pluginLoader->loadPlugins($activePlugins);
         
-        uksort($activePlugins, "strnatcasecmp");
-        $activePlugins = apply_filters('browse_plugins', $activePlugins);
-        
-        $this->view->assign(array('activePlugins' => $activePlugins, 'loader'=>$this->_pluginLoader));
-    }
-    
-    public function inactiveAction()
-    {
-        $installedPlugins = $this->_pluginLoader->getPlugins();
-        $inactivePlugins = array();
-        foreach($installedPlugins as $pluginDirName => $plugin) {
-            if(!$plugin->isActive()) {
-                $inactivePlugins[$pluginDirName] = $plugin;
-            }
-        }
-        $this->_pluginLoader->loadPlugins($inactivePlugins);
-
-        uksort($inactivePlugins, "strnatcasecmp");
-        $inactivePlugins = apply_filters('browse_plugins', $inactivePlugins);
-        
-        $this->view->assign(array('inactivePlugins' => $inactivePlugins, 'loader'=>$this->_pluginLoader));
+        // Set the plugins in the display order.
+        $this->view->plugins = array(
+            'active' => isset($plugins['active']) ? $plugins['active'] : array(), 
+            'inactive' => isset($plugins['inactive']) ? $plugins['inactive'] : array(), 
+            'uninstalled' => isset($plugins['uninstalled']) ? $plugins['uninstalled'] : array(), 
+        );
+        $this->view->loader = $this->_pluginLoader;
+        $this->view->plugin_count = count($allPlugins);
     }
 
     /**
@@ -292,7 +259,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
      */
     public function uninstallAction()
     {
-        $this->_helper->redirector('uninstalled');
+        $this->_helper->redirector('index');
         $plugin = $this->_getPluginByName();
         if (!$plugin) {
             return;
