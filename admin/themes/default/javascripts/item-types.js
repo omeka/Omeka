@@ -109,9 +109,6 @@ Omeka.ItemTypes = {};
                 if (removeElementLinkId !== null) {
                     var elementId = removeElementLinkId.substring(removeElementLinkPrefix.length);
                     if (elementId) {
-                        if (!confirm('Are you sure you want to delete this element? This will remove the element from this particular item type. Items that are assigned to this item type will lose metadata that is specific to this element.')) {
-                            return;
-                        }
                         elementsToRemove.attr('value', elementsToRemove.attr('value') + elementId + ',');
                     }
                     $(button).prevAll('.element-order').attr('name', '');
