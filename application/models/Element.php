@@ -133,21 +133,18 @@ class Element extends Omeka_Record_AbstractRecord
      * Checks the following criteria:
      * 
      * - Name is not empty.
-     * - Has a data type.
-     * - Has a record type.
      * - Name does not already exist within the given element set.
-     * 
-     * @return void
      */
     protected function _validate()
     {
         if (empty($this->name)) {
-            $this->addError('name', __('Name must not be empty!'));
+            $this->addError('name', __('The element name must not be empty.'));
         }
 
         // Check if the element set / element name combination already exists.
         if ($this->_nameIsInSet($this->name, $this->element_set_id)) {
-            $this->addError('name', __('%1$s already exists for element set #%2$s', $this->name, $this->element_set_id) );
+            $elementSetName = $this->getElementSet()->name;
+            $this->addError('name', __('An element named "%s" already exists for the "%s" element set.', $this->name, $elementSetName) );
         }
     }
 
