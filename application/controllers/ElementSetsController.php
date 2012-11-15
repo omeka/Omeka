@@ -45,7 +45,7 @@ class ElementSetsController extends Omeka_Controller_AbstractActionController
             $db->getDb()->update(
                 $db->getDb()->Element, 
                 array('order' => null), 
-                array('element_set_id' => $this->getRequest()->getParam('id'))
+                array('element_set_id = ?' => $this->getRequest()->getParam('id'))
             );
             
             // Update the elements.
