@@ -13,12 +13,42 @@ Omeka.Navigation = {};
             toleranceElement: '> div',
             placeholder: 'ui-sortable-highlight',
             forcePlaceholderSize: true,
-            containment: '#content'
+            containment: '#content',
+            update: function(e, ui) {
+              Omeka.Navigation.updateUndeleteable();
+            }
         });
         
         $('div.sortable-item input[type="checkbox"]').click(function(e) {
             e.stopPropagation();
         });
+    };
+
+    Omeka.Navigation.updateUndeleteable = function() {
+      // check every link and disable its delete button 
+      // if it has an undeleteable sublink
+      // or enable it if it doesn't.
+      $('div.sortable-item > input[type="checkbox"]').each(function (index) {
+          var hiddenInfo = $.parseJSON($(this).val());
+          if (hiddenInfo.can_delete) {            
+            // check every descendant link of this link 
+            // and if any cannot be deleted then 
+            // disable the delete button for this link
+            var hasUndeletableDescendant = false;
+            $(this).parent().parent().next().find('div.sortable-item > input[type="checkbox"]').each(function(index) {
+              var hiddenInfoDesc = $.parseJSON($(this).val());            
+              if (!hiddenInfoDesc.can_delete) {
+                hasUndeletableDescendant = true;
+                return false;
+              }
+            });
+            if (hasUndeletableDescendant) {
+              $(this).parent().next().find('.navigation_main_list_delete').attr('disabled', true);
+            } else {
+              $(this).parent().next().find('.navigation_main_list_delete').attr('disabled', false);            
+            }
+          }
+      });
     };
 
     Omeka.Navigation.updateSelectHomepageOptions = function () {
@@ -87,12 +117,17 @@ Omeka.Navigation = {};
                 buttonsDiv.append('<a class="navigation_main_list_delete red button" href="">Delete</a>');
                 buttonsDiv.children('.navigation_main_list_delete').click(function (event) {
                     event.preventDefault();
-                    $(this).parent().parent().parent().parent().remove(); // removes li element
-                    Omeka.Navigation.updateNavList();
-                    Omeka.Navigation.updateSelectHomepageOptions();
+                    var disabledAttr = $(this).attr('disabled');
+                    if (!(typeof disabledAttr !== 'undefined' && disabledAttr !== false)) {
+                      $(this).parent().parent().parent().parent().remove(); // removes li element
+                      Omeka.Navigation.updateNavList();
+                      Omeka.Navigation.updateSelectHomepageOptions();
+                      Omeka.Navigation.updateUndeleteable();
+                    }                
                 });
             } 
         });
+        Omeka.Navigation.updateUndeleteable();
     };
 
     Omeka.Navigation.updateNavLinkEditForms = function () {
