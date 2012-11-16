@@ -14,7 +14,7 @@ class removeCollectionNameDescriptionCollectors extends Omeka_Db_Migration_Abstr
     public function up()
     {        
         // get the names and descriptions from old collections
-        $sql = "SELECT id, name, description, collectors FROM `{$this->db->Collection}`";
+        $sql = "SELECT `id`, `name`, `description`, `collectors` FROM `{$this->db->Collection}`";
         $results = $this->db->query($sql)->fetchAll();
         $collections = array();
         foreach($results as $result) {
@@ -35,7 +35,7 @@ class removeCollectionNameDescriptionCollectors extends Omeka_Db_Migration_Abstr
         foreach($collections as $collection) {
             $this->_addTitleElement($collection);
             $this->_addDescriptionElement($collection);
-            $this->_addCollectors($collection);
+            $this->_addContributors($collection);
         }
     }
     
@@ -50,7 +50,7 @@ class removeCollectionNameDescriptionCollectors extends Omeka_Db_Migration_Abstr
      */        
     protected function _addElementText($recordId, $recordType, $elementId, $html, $text)
     {
-        $this->db->query("INSERT INTO `{$this->db->ElementText}` (`record_id`, `record_type`, `element_id`, `html`, `text`) VALUES (?, ? ?, ?, ?)", array(
+        $this->db->query("INSERT INTO `{$this->db->ElementText}` (`record_id`, `record_type`, `element_id`, `html`, `text`) VALUES (?, ?, ?, ?, ?)", array(
             $recordId,
             $recordType,
             $elementId,
@@ -67,8 +67,8 @@ class removeCollectionNameDescriptionCollectors extends Omeka_Db_Migration_Abstr
      */
     protected function _getElementId($elementSetName, $elementName)
     {
-        $result = $this->db->query("SELECT `a`.id FROM `{$this->db->Element}` AS `a`, `{$this->db->ElementSet}` AS `b` WHERE `a`.`element_set_id` = `b`.`id` AND `b`.`name` = ? AND `a`.`name` = ? LIMIT 1", array($elementSetName, $elementName))->fetchOne();
-        return intval($result, 10);
+        $result = $this->db->query("SELECT `a`.`id` FROM `{$this->db->Element}` AS `a`, `{$this->db->ElementSet}` AS `b` WHERE `a`.`element_set_id` = `b`.`id` AND `b`.`name` = ? AND `a`.`name` = ? LIMIT 1", array($elementSetName, $elementName))->fetch();
+        return intval($result['id'], 10);
     }
 
     /**
