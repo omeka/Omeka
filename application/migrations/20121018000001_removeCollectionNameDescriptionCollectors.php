@@ -16,9 +16,9 @@ class removeCollectionNameDescriptionCollectors extends Omeka_Db_Migration_Abstr
         // get the names and descriptions from old collections
         $sql = "SELECT id, name, description, collectors FROM `{$this->db->Collection}`";
         $results = $this->db->query($sql)->fetchAll();
-        $oldCollections = array();
+        $collections = array();
         foreach($results as $result) {
-            $oldCollections[] = array(
+            $collections[] = array(
                 'id' => $result['id'],
                 'name' => $result['name'],
                 'description' => $result['description'],
@@ -32,29 +32,80 @@ class removeCollectionNameDescriptionCollectors extends Omeka_Db_Migration_Abstr
         $this->db->query("ALTER TABLE `{$this->db->Collection}` DROP `collectors`");
         
         // add the collection names and descriptions as Dublin Core Title and Description element texts 
-        $collectionTable = $this->db->getTable('Collection');
-        foreach($oldCollections as $oldCollection) {
-            $collection = $collectionTable->find(intval($oldCollection['id']));
-            if ($collection) {
-                $elementTexts = array(
-                    'Dublin Core' => array(
-                        'Title' => array(array('text' => $oldCollection['name'], 'html' => false)),
-                        'Description' => array(array('text' => $oldCollection['description'], 'html' => false)),
-                    )
-                );
-                
-                // add collectors as contributors
-                $collectorNames = $this->_parseCollectors($oldCollection['collectors']);
-                if (count($collectorNames)) {
-                    $contributorTexts = array();
-                    foreach($collectorNames as $collectorName) {
-                         $contributorTexts[] = array('text' => $collectorName, 'html' => false);
-                    }
-                    $elementTexts['Dublin Core']['Contributor'] = $contributorTexts;
-                }
-                        
-                $collection->addElementTextsByArray($elementTexts);
-                $collection->save();
+        foreach($collections as $collection) {
+            $this->_addTitleElement($collection);
+            $this->_addDescriptionElement($collection);
+            $this->_addCollectors($collection);
+        }
+    }
+    
+    /**
+     * Adds element text to the database
+     * 
+     * @param int $recordId The record id for the element text
+     * @param string $recordType The record type for the element text
+     * @param int $elementId The element id for the element text
+     * @param boolean $html Whether the element text is html 
+     * @param string $text The text of the element text
+     */        
+    protected function _addElementText($recordId, $recordType, $elementId, $html, $text)
+    {
+        $this->db->query("INSERT INTO `{$this->db->ElementText}` (`record_id`, `record_type`, `element_id`, `html`, `text`) VALUES (?, ? ?, ?, ?)", array(
+            $recordId,
+            $recordType,
+            $elementId,
+            $html,
+            $text
+        ));
+    }
+    
+    /**
+     * Returns the element id for a given element set name and element name
+     * 
+     * @param array $collection The collection
+     * @return int
+     */
+    protected function _getElementId($elementSetName, $elementName)
+    {
+        $result = $this->db->query("SELECT `a`.id FROM `{$this->db->Element}` AS `a`, `{$this->db->ElementSet}` AS `b` WHERE `a`.`element_set_id` = `b`.`id` AND `b`.`name` = ? AND `a`.`name` = ? LIMIT 1", array($elementSetName, $elementName))->fetchOne();
+        return intval($result, 10);
+    }
+
+    /**
+     * Adds collection title as collection title element text.
+     * 
+     * @param array $collection The collection
+     */
+    protected function _addTitleElement($collection)
+    {
+        $titleElementId = $this->_getElementId('Dublin Core', 'Title'); 
+        $this->_addElementText($collection['id'], 'Collection', $titleElementId, false, $collection['name']);
+    }
+    
+    /**
+     * Adds collection description as collection description element text.
+     * 
+     * @param array $collection The collection
+     */
+    protected function _addDescriptionElement($collection)
+    {
+        $descriptionElementId = $this->_getElementId('Dublin Core', 'Description');
+        $this->_addElementText($collection['id'], 'Collection', $descriptionElementId, false, $collection['description']);
+    }
+    
+    /**
+     * Adds collection collectors as collection contributor element texts.
+     * 
+     * @param array $collection The collection
+     */
+    protected function _addContributors($collection) 
+    {
+        // add collectors as contributors
+        $collectorNames = $this->_parseCollectors($collection['collectors']);
+        if (count($collectorNames)) {            
+            $contributorElementId = $this->_getElementId('Dublin Core', 'Contributor');
+            foreach($collectorNames as $collectorName) {
+                $this->_addElementText($collection['id'], 'Collection', $contributorElementId, false, $collectorName);
             }
         }
     }
@@ -65,7 +116,6 @@ class removeCollectionNameDescriptionCollectors extends Omeka_Db_Migration_Abstr
      * @param string $collectors The string of collectors
      * @param string $delimiter the delimiter used to parse the string
      * @return array List of strings.
-     * @throws RuntimeException
      */
     protected function _parseCollectors($collectors, $delimiter = "\n")
     {
