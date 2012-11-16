@@ -1834,7 +1834,9 @@ function browse_sort_links($links, $wrapperTags = array())
     $listAttr = join(' ', $listAttrArray);    
 
     $sortlist = '';
-    $sortlist .= "<{$sortlistWrappers['list_tag']} $listAttr>";
+    if(!empty($sortlistWrappers['list_tag'])) {
+        $sortlist .= "<{$sortlistWrappers['list_tag']} $listAttr>";
+    }
 
     foreach ($links as $label => $column) {
         if($column) {
@@ -1857,10 +1859,12 @@ function browse_sort_links($links, $wrapperTags = array())
                 $sortlist .= "<a href=\"$url\" $class {$sortlistWrappers['link_attr']}\">$label</a>";
             }
         } else {
-            $sortlist .= "<$linkAttr>$label</{$sortlistWrappers['link_tag']}>";
+            $sortlist .= "<{$sortlistWrappers['link_tag']}>$label</{$sortlistWrappers['link_tag']}>";
         }
     }
-    $sortlist .= "</{$sortlistWrappers['list_tag']}>";
+    if(!empty($sortlistWrappers['list_tag'])) {
+        $sortlist .= "</{$sortlistWrappers['list_tag']}>";
+    }
     return $sortlist;
 }
 
