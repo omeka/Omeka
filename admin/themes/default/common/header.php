@@ -62,7 +62,7 @@
     
 </header>
 
-<section class="container container-twelve">
+<div class="container container-twelve">
 
     <?php echo common('content-nav', array('title' => $title)); ?>
 
@@ -80,7 +80,5 @@
         <?php endif; ?>
     
     </div>
-    
-    <section class="container">
-    
+        
         <div id="content" class="ten columns offset-by-two omega">

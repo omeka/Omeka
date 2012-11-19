@@ -1,7 +1,5 @@
         </div>
         
-    </section>
-
     <footer class="container">
     
         <div class="ten columns offset-by-two">
@@ -15,7 +13,7 @@
         </div>
     </footer>
 
-</section>
+</div>
 <script type="text/javascript">
 jQuery(document).ready(function () {
     Omeka.runReadyCallbacks();
