@@ -27,26 +27,13 @@ if (empty($pathToConvert) && is_allowed('Settings', 'edit')): ?>
 <div class="drawer-contents">
     <p>The maximum file size is <?php echo max_file_size(); ?>.</p>
     
-    <div id="add-more-files">
-    <label for="add_num_files"><?php echo __('Find a File'); ?></label>
-        <div class="files">
-        <?php $numFiles = (int)@$_REQUEST['add_num_files'] or $numFiles = 1; ?>
-        <?php 
-        echo $this->formText('add_num_files', $numFiles, array('size' => 2));
-        echo $this->formSubmit('add_more_files', 'Add this many files'); 
-        ?>
-        </div>
-    </div>
-    
     <div class="field two columns alpha" id="file-inputs">
         <label><?php echo __('Find a File'); ?></label>
     </div>
-    
-    <?php for($i = 0; $i < $numFiles; $i++): ?>
-    <div class="files">
-        <input name="file[<?php echo $i; ?>]" id="file-<?php echo $i; ?>" type="file" class="fileinput" />          
+
+    <div class="files four columns omega">
+        <input name="file[0]" type="file">
     </div>
-    <?php endfor; ?>
 </div>
 
 <?php fire_plugin_hook('admin_items_form_files', array('item' => $item, 'view' => $this)); ?>

@@ -154,9 +154,6 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             if (!empty($post['change_type'])) {
                 return false;
             }
-            if (!empty($post['add_more_files'])) {
-                return false;
-            }
             
             try {
                 $this->_uploadFiles();

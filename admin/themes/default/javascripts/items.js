@@ -261,14 +261,13 @@ Omeka.Items = {};
             event.preventDefault();
             var inputs = filesDiv.find('input');
             var inputCount = inputs.length;
-            var fileHtml = '<div id="fileinput' + inputCount + '" class="fileinput"><input name="file[' + inputCount + ']" id="file[' + inputCount + ']" type="file" class="fileinput" /></div>';
+            var fileHtml = '<input name="file[' + inputCount + ']" type="file"></div>';
             $(fileHtml).insertAfter(inputs.last()).hide().slideDown(200, function () {
                 // Extra show fixes IE bug.
                 $(this).show();
             });
         });
 
-        $('#add-more-files').html('');
         $('#file-inputs').append(link);
     };
 })(jQuery);
