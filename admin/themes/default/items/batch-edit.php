@@ -1,19 +1,18 @@
 <?php
 $title = __('Batch Edit Items');
 if (!$isPartial):
-    echo head(array('title' => $title, 
-               'bodyclass' => 'advanced-search', 
-               'bodyid' => 'advanced-search-page'));
+    echo head(
+        array(
+            'title' => $title, 
+            'bodyclass' => 'items batch-edit',
+        )
+    );
+endif;
 ?>
-
-<?php endif; ?>
-        
 <div title="<?php echo $title; ?>">
 
 <form id="batch-edit-form" action="<?php echo html_escape(url('items/batch-edit-save')); ?>" method="post" accept-charset="utf-8">
-
-    <div class="seven columns alpha">
-
+    <section class="seven columns alpha">
         <fieldset id="item-list" class="panel">
             <h2 class="two columns alpha"><?php echo __('Items'); ?></h2>
             <div class="five columns omega">
@@ -35,7 +34,6 @@ if (!$isPartial):
                 echo '<li>' . $this->formMultiCheckbox('items[]', null, array('checked' => 'checked'), $itemCheckboxes, '</li><li>') . '</li>'; ?>
                 </ul>
                 <p class="explanation"><?php echo __('Changes will be applied to checked items.'); ?></p>
-                
             </div>
         </fieldset>
     
@@ -125,10 +123,13 @@ if (!$isPartial):
             </div>
         </fieldset>
         <?php endif; ?>
+    </section>
 
-        
-    </div>
-
+    <section class="three columns omega">
+        <div id="save" class="panel">
+            <input type="submit" class="big green button" value="<?php echo __('Save Changes'); ?>">
+        </div>
+    </section>
 
     <?php
     $hash = new Zend_Form_Element_Hash('batch_edit_hash');
@@ -136,15 +137,9 @@ if (!$isPartial):
     $hash->removeDecorator('HtmlTag');
     echo $hash;
     ?>
-   
-    <div class="three columns omega">
-        <div id="save" class="panel">
-            <input type="submit" class="big green button" value="<?php echo __('Save Changes'); ?>">
-        </div>
-    </div>
-    
 </form>
 
+</div>
 <script type="text/javascript">
     jQuery(document).ready(function(){
         var otherFormElements = jQuery('#item-fields select, #item-fields input');

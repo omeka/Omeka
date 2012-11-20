@@ -1,10 +1,15 @@
-<?php 
-$pageTitle = __('Settings');
-echo head(array('title'=> $pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'element-sets primary'));
+<?php
 $doNotDelete = array('Dublin Core', 'Item Type Metadata');
+
+echo head(
+    array(
+        'title' => __('Settings'),
+        'bodyclass'=>'element-sets'
+    )
+);
+echo common('settings-nav');
+echo flash();
 ?>
-<?php echo common('settings-nav'); ?>
-<?php echo flash(); ?>
 <table>
     <thead>
         <tr>
@@ -31,7 +36,4 @@ $doNotDelete = array('Dublin Core', 'Item Type Metadata');
     <?php endforeach; ?>
     </tbody>
 </table>
-
-</div>
-
 <?php echo foot(); ?>

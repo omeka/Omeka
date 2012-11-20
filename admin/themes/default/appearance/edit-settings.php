@@ -1,6 +1,6 @@
 <?php
 $pageTitle = __('Appearance');
-echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
+echo head(array('title'=>$pageTitle, 'bodyclass'=>'settings')); ?>
 
 <?php echo common('appearance-nav'); ?>
 

@@ -19,7 +19,5 @@
     <?php fire_plugin_hook('admin_head', array('view'=>$this)); ?>
 </head>
 <body id="login">
-
     <div class="container container-sixteen">
-    
         <div id="content" class="login-content ten columns offset-by-three">

@@ -1,4 +1,4 @@
-<ul id="section-nav" class="navigation vertical">
+<nav id="section-nav" class="navigation vertical">
 <?php
     $navArray = array(
         array(
@@ -18,4 +18,4 @@
     );
     echo nav($navArray, 'admin_navigation_settings');
 ?>
-</ul>
+</nav>

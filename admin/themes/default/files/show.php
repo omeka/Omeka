@@ -1,20 +1,30 @@
 <?php
-    $fileTitle = metadata('file', array('Dublin Core', 'Title')) ? strip_formatting(metadata('file', array('Dublin Core', 'Title'))) : metadata('file', 'original filename');
+$fileTitle = metadata('file', array('Dublin Core', 'Title')) ? strip_formatting(metadata('file', array('Dublin Core', 'Title'))) : metadata('file', 'original filename');
 
-    if ($fileTitle != '') {
-        $fileTitle = ': &quot;' . $fileTitle . '&quot; ';
-    } else {
-        $fileTitle = '';
-    }
-    $fileTitle = __('File #%s', metadata('file', 'id')) . $fileTitle;
+if ($fileTitle != '') {
+    $fileTitle = ': &ldquo;' . $fileTitle . '&rdquo; ';
+} else {
+    $fileTitle = '';
+}
+$fileTitle = __('File #%s', metadata('file', 'id')) . $fileTitle;
+
+echo head(array('title' => $fileTitle, 'bodyclass'=>'files show primary-secondary'));
+echo flash();
 ?>
-<?php echo head(array('title' => $fileTitle, 'bodyclass'=>'files show primary-secondary')); ?>
 
+<section class="seven columns alpha">
+    <div id="item-images">
+        <?php echo file_markup($file, array('imageSize' => 'square_thumbnail'), array('class' => 'admin-thumb panel')); ?>
+    </div>
+    
+    <?php echo all_element_texts('file'); ?>
+    
+    <?php fire_plugin_hook('admin_files_show', array('file' => $file, 'view' => $this)); ?>
+</section>
 
-<div id="edit" class="three columns omega">
-
+<section class="three columns omega">
     <?php if (is_allowed('Files', 'edit') or $file->getItem()->wasAddedBy(current_user())): ?>    
-    <div class="panel">
+    <div id="edit" class="panel">
         <?php echo link_to($file, 'edit', __('Edit'), array('class'=>'big green button')); ?>
         <?php if (is_allowed('Files', 'delete')): ?>
             <?php echo link_to($file, 'delete-confirm', __('Delete'), array('class' => 'big red button delete-confirm')); ?>
@@ -22,7 +32,6 @@
     </div>
     <?php endif; ?>
 
-    
     <div id="format-metadata" class="panel">
         <h4><?php echo __('Format Metadata'); ?></h4>
         <dl>
@@ -62,29 +71,14 @@
         <h4><?php echo __('ID3 Metadata'); ?></h4>
         <?php echo file_id3_metadata(); ?>
     </div>
+    <?php endif; ?>
 
     <div class="panel">
         <h4><?php echo __('Output Formats'); ?></h4>
         <?php echo output_format_list(); ?>
     </div>
-    <?php endif; ?>
 
     <?php fire_plugin_hook('admin_files_show_sidebar', array('file' => $file, 'view' => $this)); ?>
-    
-</div>
-
-<div class="seven columns alpha">
-
-    <?php echo flash(); ?>            
-    
-    <div id="item-images">
-        <?php echo file_markup($file, array('imageSize' => 'square_thumbnail'), array('class' => 'admin-thumb panel')); ?>
-    </div>
-    
-    <?php echo all_element_texts('file'); ?>
-    
-    <?php fire_plugin_hook('admin_files_show', array('file' => $file, 'view' => $this)); ?>
-    
-</div>
+</section>
     
 <?php echo foot();?>

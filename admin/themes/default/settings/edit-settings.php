@@ -1,19 +1,10 @@
 <?php
-$pageTitle = __('Settings');
-echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
-<?php echo js_tag('settings'); ?>
-<script type="text/javascript">
-//<![CDATA[
-    jQuery(document).ready(function () {
-        Omeka.Settings.checkImageMagick(
-            <?php echo js_escape(url(array("controller" => "settings", "action" => "check-imagemagick"))); ?>,
-            <?php echo js_escape(__('Test')); ?>
-        );
-    });
-//]]>    
-</script>
-<?php echo common('settings-nav'); ?>
-<?php echo flash(); ?>
+queue_js_file('settings');
+echo head(array('title' => __('Settings'),'bodyclass' => 'settings edit-settings'));
+echo common('settings-nav');
+echo flash();
+?>
+
 <form method="post">
     <section class="seven columns alpha">
         <?php echo $this->form; ?>
@@ -24,4 +15,12 @@ echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodycla
         </div>
     </section>
 </form>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        Omeka.Settings.checkImageMagick(
+            <?php echo js_escape(url(array("controller" => "settings", "action" => "check-imagemagick"))); ?>,
+            <?php echo js_escape(__('Test')); ?>
+        );
+    });
+</script>
 <?php echo foot(); ?>

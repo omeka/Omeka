@@ -3,12 +3,11 @@ $pageTitle = __('User Activation');
 echo head(array('title' => $pageTitle), $header);
 ?>
 
-
 <h1><?php echo $pageTitle; ?></h1>
 
 <?php echo flash(); ?>
 
-<div class="six columns alpha offset-by-one">
+<div class="eight columns alpha offset-by-one">
 
 <h2>Hello, <?php echo html_escape($user->name); ?>.<br />
 Your username is: <?php echo html_escape($user->username); ?></h2>

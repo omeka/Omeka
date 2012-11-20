@@ -1,7 +1,7 @@
 <?php
 queue_js_file(array('vendor/jquery.nestedSortable', 'navigation'));
 $pageTitle = __('Appearance');
-echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
+echo head(array('title'=>$pageTitle, 'bodyclass'=>'settings')); ?>
 <form action="<?php echo $this->form->getAction() ?>"
       enctype="<?php echo $this->form->getEnctype() ?>"
       method="<?php echo $this->form->getMethod() ?>"

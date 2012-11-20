@@ -2,8 +2,8 @@
     <?php
         $tags = $item->getTags();
     ?>
-    <input type="hidden" name="tags-to-add" size="30" id="tags-to-add" value="" />
-    <input type="hidden" name="tags-to-delete" size="30" id="tags-to-delete" value="" />
+    <input type="hidden" name="tags-to-add" id="tags-to-add" value="" />
+    <input type="hidden" name="tags-to-delete" id="tags-to-delete" value="" />
     <div id="add-tags">
         <label><?php echo __('Add Tags'); ?></label>           
         <input type="text" name="tags" size="20" id="tags" class="textinput" value="" />

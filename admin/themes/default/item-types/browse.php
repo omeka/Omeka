@@ -1,6 +1,6 @@
 <?php 
 $pageTitle = __('Browse Item Types') . ' ' . __('(%s total)', $total_results);
-echo head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
+echo head(array('title' => $pageTitle,'bodyclass' => 'item-types')); ?>
 
 <div class="table-actions">
     <?php if (is_allowed('ItemTypes', 'add')): ?>
@@ -41,5 +41,5 @@ echo head(array('title'=>$pageTitle,'bodyclass'=>'item-types')); ?>
 </div>
 
 <?php fire_plugin_hook('admin_item_types_browse', array('item_types' => $this->item_types, 'view' => $this)); ?>
-</div>
+
 <?php echo foot(); ?>

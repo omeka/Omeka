@@ -42,7 +42,7 @@ if (empty($pathToConvert) && is_allowed('Settings', 'edit')): ?>
         <label><?php echo __('Find a File'); ?></label>
     </div>
     
-    <?php for($i=0;$i<$numFiles;$i++): ?>
+    <?php for($i = 0; $i < $numFiles; $i++): ?>
     <div class="files">
         <input name="file[<?php echo $i; ?>]" id="file-<?php echo $i; ?>" type="file" class="fileinput" />          
     </div>

@@ -39,7 +39,9 @@ endif; ?>
         <?php endif; ?>
     </div>
 <?php endforeach; ?>
+    <?php if (is_allowed('Items', 'add')): ?>
     <div class="add-new"><p><a class="add-new" href="<?php echo html_escape(url('items/add')); ?>"><?php echo __('Add a new item'); ?></a></p></div>
+    <?php endif; ?>
 <?php $panels[] = ob_get_clean(); ?>
 
 <?php ob_start(); ?>
@@ -56,7 +58,9 @@ endif; ?>
         <?php endif; ?>
     </div>
 <?php endforeach; ?>
+    <?php if (is_allowed('Collections', 'add')): ?>
     <div class="add-new"><p><a class="add-collection" href="<?php echo html_escape(url('collections/add')); ?>"><?php echo __('Add a new collection'); ?></a></p></div>
+    <?php endif; ?>
 <?php $panels[] = ob_get_clean(); ?>
 
 <?php $panels = apply_filters('admin_dashboard_panels', $panels, array('view' => $this)); ?>

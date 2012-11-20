@@ -1,16 +1,13 @@
 <?php
-$pageTitle = __('Appearance');
-echo head(array('title'=>$pageTitle, 'bodyclass'=>'themes theme-configuration')); ?>
-<?php echo js_tag('vendor/tiny_mce/tiny_mce'); ?>
-<?php echo js_tag('themes'); ?>
-
-<?php echo common('appearance-nav'); ?>
-
-<?php echo flash(); ?>
+queue_js_file(array('vendor/tiny_mce/tiny_mce', 'themes'));
+echo head(array('title'=> __('Appearance'), 'bodyclass' => 'themes theme-configuration'));
+echo common('appearance-nav');
+echo flash();
+?>
 
 <form method="post" action="" enctype="multipart/form-data">
     <section class="seven columns alpha">
-        <h2><?php echo __('Configure the &#8220;%s&#8221; Theme', html_escape($theme->title)); ?></h2>
+        <h2><?php echo __('Configure Theme: %s', html_escape($theme->title)); ?></h2>
         <p><?php echo __('Configurations apply to this theme only.'); ?></p>
         <?php echo $configForm; ?>
     </section>

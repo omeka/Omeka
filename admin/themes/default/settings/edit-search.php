@@ -1,9 +1,8 @@
 <?php
-$pageTitle = __('Settings');
-echo head(array('title' => $pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary'));
+echo head(array('title' => __('Settings'), 'bodyclass'=>'settings edit-search'));
+echo common('settings-nav');
+echo flash();
 ?>
-<?php echo common('settings-nav'); ?>
-<?php echo flash(); ?>
 <form method="post" class="search-record-types">
     <section class="seven columns alpha">
         <div class="field">

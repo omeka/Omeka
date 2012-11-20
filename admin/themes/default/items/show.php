@@ -1,19 +1,29 @@
 <?php    
-    $itemTitle = strip_formatting(metadata('item', array('Dublin Core', 'Title')));
-    if ($itemTitle != '' && $itemTitle != __('[Untitled]')) {
-        $itemTitle = ': &quot;' . $itemTitle . '&quot; ';
-    } else {
-        $itemTitle = '';
-    }
-    $itemTitle = __('Item #%s', metadata('item', 'id')) . $itemTitle;
+$itemTitle = strip_formatting(metadata('item', array('Dublin Core', 'Title')));
+if ($itemTitle != '' && $itemTitle != __('[Untitled]')) {
+    $itemTitle = ': &quot;' . $itemTitle . '&quot; ';
+} else {
+    $itemTitle = '';
+}
+$itemTitle = __('Item #%s', metadata('item', 'id')) . $itemTitle;
+
+
+echo head(array('title' => $itemTitle, 'bodyclass'=>'items show'));
+echo flash();
 ?>
 
-<?php echo head(array('title' => $itemTitle, 'bodyclass'=>'items show')); ?>
+<section class="seven columns alpha">
+    <?php echo flash(); ?>            
+        <?php if (metadata('item', 'has files')): ?>
+        <div id="item-images">
+        <?php echo files_for_item(array('imageSize' => 'square_thumbnail'), array('class' => 'admin-thumb panel')); ?> 
+        </div>
+        <?php endif; ?>
+    <?php echo all_element_texts('item'); ?>
+    <?php fire_plugin_hook('admin_items_show', array('item' => $item, 'view' => $this)); ?>
+</section>
 
-<?php echo js_tag('items'); ?>
-        
-<div id="edit" class="three columns omega">
-    
+<section class="three columns omega">
     <ul class="pagination">
         <?php if (link_to_previous_item_show()): ?>
         <li id="previous-item" class="previous">
@@ -27,7 +37,7 @@
         <?php endif; ?>
     </ul>
     
-    <div class="panel">
+    <div id="edit" class="panel">
         <?php if (is_allowed($item, 'edit')): ?>
         <?php 
         echo link_to_item(__('Edit'), array('class'=>'big green button'), 'edit'); ?>
@@ -84,19 +94,7 @@
         <div><?php echo output_format_list(); ?></div>
     </div>
 
-<?php fire_plugin_hook('admin_items_show_sidebar', array('item' => $item, 'view' => $this)); ?>
-</div>
+    <?php fire_plugin_hook('admin_items_show_sidebar', array('item' => $item, 'view' => $this)); ?>
+</section>
 
-<div class="seven columns alpha">
-    <?php echo flash(); ?>            
-        <?php if (metadata('item', 'has files')): ?>
-        <div id="item-images">
-        <?php echo files_for_item(array('imageSize' => 'square_thumbnail'), array('class' => 'admin-thumb panel')); ?> 
-        </div>
-        <?php endif; ?>
-    <?php echo all_element_texts('item'); ?>
-    <?php fire_plugin_hook('admin_items_show', array('item' => $item, 'view' => $this)); ?>
-</div>
-
-</div>        
 <?php echo foot();?>

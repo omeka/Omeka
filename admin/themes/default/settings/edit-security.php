@@ -1,34 +1,10 @@
-<?php 
-$pageTitle = __('Settings');
-echo head(array('title'=>$pageTitle, 'content_class' => 'vertical-nav', 'bodyclass'=>'settings primary')); ?>
-<?php echo js_tag('security'); ?>
-<script type="text/javascript">
-//<![CDATA[
-jQuery(document).ready(function () {
-    Omeka.Security.buildRestoreButton('#file_extension_whitelist',
-        <?php echo js_escape(url(array('controller'=>'settings','action'=>'get-file-extension-whitelist'))); ?>,
-        <?php echo js_escape(__('Restore Default File Extensions')); ?>
-    );
-    
-    Omeka.Security.buildRestoreButton('#file_mime_type_whitelist',
-        <?php echo js_escape(url(array('controller'=>'settings','action'=>'get-file-mime-type-whitelist'))); ?>,
-        <?php echo js_escape(__('Restore Default File Mime Types')); ?>
-    );
-                      
-    Omeka.Security.buildRestoreButton('#html_purifier_allowed_html_elements', 
-        <?php echo js_escape(url(array('controller'=>'settings','action'=>'get-html-purifier-allowed-html-elements'))); ?>,
-        <?php echo js_escape(__('Restore Default Allowed Html Elements')); ?>
-    );
+<?php
+queue_js_file('security');
+echo head(array('title' => __('Settings'), 'bodyclass' => 'settings edit-security'));
+echo common('settings-nav');
+echo flash();
+?>
 
-    Omeka.Security.buildRestoreButton('#html_purifier_allowed_html_attributes', 
-        <?php echo js_escape(url(array('controller'=>'settings','action'=>'get-html-purifier-allowed-html-attributes'))); ?>,
-        <?php echo js_escape(__('Restore Default Allowed Html Attributes')); ?>
-    );
-});
-//]]>
-</script>
-<?php echo common('settings-nav'); ?>
-<?php echo flash(); ?>
 <form method="post">
     <section class="seven columns alpha">
         <?php echo $this->form; ?>
@@ -39,4 +15,27 @@ jQuery(document).ready(function () {
         </div>
     </section>
 </form>
+<script type="text/javascript">
+jQuery(document).ready(function () {
+    Omeka.Security.buildRestoreButton('#file_extension_whitelist',
+        <?php echo js_escape(url(array('controller'=>'settings','action'=>'get-file-extension-whitelist'))); ?>,
+        <?php echo js_escape(__('Restore Default Extensions')); ?>
+    );
+    
+    Omeka.Security.buildRestoreButton('#file_mime_type_whitelist',
+        <?php echo js_escape(url(array('controller'=>'settings','action'=>'get-file-mime-type-whitelist'))); ?>,
+        <?php echo js_escape(__('Restore Default Types')); ?>
+    );
+                      
+    Omeka.Security.buildRestoreButton('#html_purifier_allowed_html_elements', 
+        <?php echo js_escape(url(array('controller'=>'settings','action'=>'get-html-purifier-allowed-html-elements'))); ?>,
+        <?php echo js_escape(__('Restore Default Elements')); ?>
+    );
+
+    Omeka.Security.buildRestoreButton('#html_purifier_allowed_html_attributes', 
+        <?php echo js_escape(url(array('controller'=>'settings','action'=>'get-html-purifier-allowed-html-attributes'))); ?>,
+        <?php echo js_escape(__('Restore Default Attributes')); ?>
+    );
+});
+</script>
 <?php echo foot(); ?>

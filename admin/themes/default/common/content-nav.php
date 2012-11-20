@@ -28,7 +28,7 @@
 </nav>
 
 <nav>
-    <ul id="mobile-content-nav" class="quick-filter-wrapper"  name="mobile-nav">
+    <ul id="mobile-content-nav" class="quick-filter-wrapper">
         <li><a href="#" tabindex="0"><?php echo $title; ?></a>
         <?php echo $nav->setUlClass('dropdown'); ?>
         </li>

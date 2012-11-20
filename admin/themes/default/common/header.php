@@ -30,15 +30,12 @@
 <?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass)); ?>
 
 <header>
-
     <div class="container">
-    
         <div id="site-title" class="two columns">
             <?php echo link_to_home_page(option('site_title'), array('target' => '_blank')); ?>
         </div>
-    
+
         <nav>
-            
             <?php echo common('global-nav'); ?>
             
             <ul id="user-nav">
@@ -55,19 +52,14 @@
                 <li><a href="<?php echo html_escape(url('users/logout'));?>" id="logout"><?php echo __('Log Out'); ?></a></li>
             <?php endif; ?>
             </ul>
-
         </nav>
-    
     </div>
-    
 </header>
 
 <div class="container container-twelve">
-
     <?php echo common('content-nav', array('title' => $title)); ?>
 
     <div class="subhead">
-    
         <?php echo search_form(array('show_advanced' => true)); ?>
             
         <?php if (isset($title)) : ?>
@@ -78,7 +70,6 @@
             ?>
             <h1 class="section-title"><?php echo $title ?></h1>
         <?php endif; ?>
-    
     </div>
-        
-        <div id="content" class="ten columns offset-by-two omega">
+
+    <div id="content" class="ten columns offset-by-two omega">

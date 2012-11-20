@@ -1,22 +1,21 @@
 <?php
-    $itemTitle = strip_formatting(metadata('item', array('Dublin Core', 'Title')));
-    if ($itemTitle != '' && $itemTitle != __('[Untitled]')) {
-        $itemTitle = ': &quot;' . $itemTitle . '&quot; ';
-    } else {
-        $itemTitle = '';
-    }
-    $itemTitle = __('Edit Item #%s', metadata('item', 'id')) . $itemTitle;
+$itemTitle = strip_formatting(metadata('item', array('Dublin Core', 'Title')));
+if ($itemTitle != '' && $itemTitle != __('[Untitled]')) {
+    $itemTitle = ': &quot;' . $itemTitle . '&quot; ';
+} else {
+    $itemTitle = '';
+}
+$itemTitle = __('Edit Item #%s', metadata('item', 'id')) . $itemTitle;
+
+echo head(array('title'=> $itemTitle, 'bodyclass'=>'items edit'));
+include 'form-tabs.php';
+echo flash();
 ?>
 
-<?php echo head(array('title'=> $itemTitle, 'bodyclass'=>'items edit primary','content_class' => 'vertical-nav'));?>
-    <?php include 'form-tabs.php'; // Definitions for all the tabs for the form. ?>
-
-    <form method="post" enctype="multipart/form-data" id="item-form" action="">
+<form method="post" enctype="multipart/form-data" id="item-form" action="">
     <?php include 'form.php'; ?>
     <section class="three columns omega">
-        
         <div id="save" class="panel">
-        
             <?php echo $this->formSubmit('submit', __('Save Changes'), array('id'=>'save-changes', 'class'=>'submit big green button')); ?>
             <a href="<?php echo html_escape(public_url('items/show/'.metadata('item', 'id'))); ?>" class="big blue button" target="_blank"><?php echo __('View Public Page'); ?></a>
             <?php echo link_to_item(__('Delete'), array('class' => 'big red button'), 'delete-confirm'); ?>
@@ -51,11 +50,8 @@
                     ?>
                 </div>
             </div> <!-- end collection-form div -->
-            <!--  append_to_item_panel_fields hook -->
             <?php fire_plugin_hook("admin_items_panel_fields", array('view'=>$this, 'record'=>$item)); ?>
-            
         </div>
-        
-        <!-- end append_to_item_panel_fields hook -->
     </section>
+</form>
 <?php echo foot();?>
