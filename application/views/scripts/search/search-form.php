@@ -14,7 +14,7 @@
             <?php endforeach; ?>
         </fieldset>
         <?php elseif (is_admin_theme()): ?>
-            <p><a href="<?php echo url('search/settings'); ?>"><?php echo __('Go to search settings to select record types to use.'); ?></a></p>
+            <p><a href="<?php echo url('settings/edit-search'); ?>"><?php echo __('Go to search settings to select record types to use.'); ?></a></p>
         <?php endif; ?>
     </fieldset>
     <?php endif; ?>
