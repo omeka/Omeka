@@ -17,188 +17,248 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-# Dublin Core description
+#. Dublin Core description
 msgid "The Dublin Core metadata element set. These elements are common to all Omeka records, including items, files, and collections. See http://dublincore.org/documents/dces/."
 msgstr ""
 
-# Dublin Core: Title element
+#. Dublin Core: Title element name
 msgid "Title"
 msgstr ""
 
-# Dublin Core: Creator element
+#. Dublin Core: Title element description
+msgid "A name given to the resource."
+msgstr ""
+
+#. Dublin Core: Creator element name
 msgid "Creator"
 msgstr ""
 
-# Dublin Core: Subject element
+#. Dublin Core: Creator element description
+msgid "An entity primarily responsible for making the resource."
+msgstr ""
+
+#. Dublin Core: Subject element name
 msgid "Subject"
 msgstr ""
 
-# Dublin Core: Description element
+#. Dublin Core: Subject element description
+msgid "The topic of the resource."
+msgstr ""
+
+#. Dublin Core: Description element name
 msgid "Description"
 msgstr ""
 
-# Dublin Core: Publisher element
+#. Dublin Core: Description element description
+msgid "An account of the resource."
+msgstr ""
+
+#. Dublin Core: Publisher element name
 msgid "Publisher"
 msgstr ""
 
-# Dublin Core: Contributor element
-# User role: contributor
+#. Dublin Core: Publisher element description
+msgid "An entity responsible for making the resource available."
+msgstr ""
+
+#. Dublin Core: Contributor element name
+#. User role: contributor
 msgid "Contributor"
 msgstr ""
 
-# Dublin Core: Date element
+#. Dublin Core: Contributor element description
+msgid "An entity responsible for making contributions to the resource."
+msgstr ""
+
+#. Dublin Core: Date element name
 msgid "Date"
 msgstr ""
 
-# Dublin Core: Type element
+#. Dublin Core: Date element description
+msgid "A point or period of time associated with an event in the lifecycle of the resource."
+msgstr ""
+
+#. Dublin Core: Type element name
 msgid "Type"
 msgstr ""
 
-# Dublin Core: Format element
+#. Dublin Core: Type element description
+msgid "The nature or genre of the resource."
+msgstr ""
+
+#. Dublin Core: Format element name
 msgid "Format"
 msgstr ""
 
-# Dublin Core: Identifier element
+#. Dublin Core: Format element description
+msgid "The file format, physical medium, or dimensions of the resource."
+msgstr ""
+
+#. Dublin Core: Identifier element name
 msgid "Identifier"
 msgstr ""
 
-# Dublin Core: Source element
+#. Dublin Core: Identifier element description
+msgid "An unambiguous reference to the resource within a given context."
+msgstr ""
+
+#. Dublin Core: Source element name
 msgid "Source"
 msgstr ""
 
-# Dublin Core: Language element
+#. Dublin Core: Source element description
+msgid "A related resource from which the described resource is derived."
+msgstr ""
+
+#. Dublin Core: Language element name
 msgid "Language"
 msgstr ""
 
-# Dublin Core: Relation element
+#. Dublin Core: Language element description
+msgid "A language of the resource."
+msgstr ""
+
+#. Dublin Core: Relation element name
 msgid "Relation"
 msgstr ""
 
-# Dublin Core: Coverage element
+#. Dublin Core: Relation element description
+msgid "A related resource."
+msgstr ""
+
+#. Dublin Core: Coverage element name
 msgid "Coverage"
 msgstr ""
 
-# Dublin Core: Rights element
+#. Dublin Core: Coverage element description
+msgid "The spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant."
+msgstr ""
+
+#. Dublin Core: Rights element name
 msgid "Rights"
 msgstr ""
 
-# Item Type Metadata
+#. Dublin Core: Rights element description
+msgid "Information about rights held in and over the resource."
+msgstr ""
+
+#. Item Type Metadata
 msgid "Item Type Metadata"
 msgstr ""
 
-# Item Type Metadata description
+#. Item Type Metadata description
 msgid "The item type metadata element set, consisting of all item type elements bundled with Omeka and all item type elements created by an administrator."
 msgstr ""
 
-# Omeka Legacy File
+#. Omeka Legacy File
 msgid "Omeka Legacy File"
 msgstr ""
 
-# Omeka Legacy File description
+#. Omeka Legacy File description
 msgid "The metadata element set that, in addition to the Dublin Core element set, was included in the `files` table in previous versions of Omeka. These elements are common to all Omeka files. This set may be deprecated in future versions."
 msgstr ""
 
-# Omeka Legacy File: Additional Creator element
+#. Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
 msgstr ""
 
-# Omeka Legacy File: Transcriber element
+#. Omeka Legacy File: Transcriber element
 msgid "Transcriber"
 msgstr ""
 
-# Omeka Legacy File: Producer element
+#. Omeka Legacy File: Producer element
 msgid "Producer"
 msgstr ""
 
-# Omeka Legacy File: Render Device element
+#. Omeka Legacy File: Render Device element
 msgid "Render Device"
 msgstr ""
 
-# Omeka Legacy File: Render Details element
+#. Omeka Legacy File: Render Details element
 msgid "Render Details"
 msgstr ""
 
-# Omeka Legacy File: Capture Date element
+#. Omeka Legacy File: Capture Date element
 msgid "Capture Date"
 msgstr ""
 
-# Omeka Legacy File: Capture Device element
+#. Omeka Legacy File: Capture Device element
 msgid "Capture Device"
 msgstr ""
 
-# Omeka Legacy File: Capture Details element
+#. Omeka Legacy File: Capture Details element
 msgid "Capture Details"
 msgstr ""
 
-# Omeka Legacy File: Change History element
+#. Omeka Legacy File: Change History element
 msgid "Change History"
 msgstr ""
 
-# Omeka Legacy File: Watermark element
+#. Omeka Legacy File: Watermark element
 msgid "Watermark"
 msgstr ""
 
-# Omeka Legacy File: Encryption element
+#. Omeka Legacy File: Encryption element
 msgid "Encryption"
 msgstr ""
 
-# Omeka Legacy File: Compression element
+#. Omeka Legacy File: Compression element
 msgid "Compression"
 msgstr ""
 
-# Omeka Legacy File: Post Processing element
+#. Omeka Legacy File: Post Processing element
 msgid "Post Processing"
 msgstr ""
 
-# Omeka Image File
+#. Omeka Image File
 msgid "Omeka Image File"
 msgstr ""
 
-# Omeka Image File description
+#. Omeka Image File description
 msgid "The metadata element set that was included in the `files_images` table in previous versions of Omeka. These elements are common to all image files."
 msgstr ""
 
-# Omeka Image File: Width element
+#. Omeka Image File: Width element
 msgid "Width"
 msgstr ""
 
-# Omeka Image File: Height element
+#. Omeka Image File: Height element
 msgid "Height"
 msgstr ""
 
-# Omeka Image File: Bit Depth element
+#. Omeka Image File: Bit Depth element
 msgid "Bit Depth"
 msgstr ""
 
-# Omeka Image File: Channels element
+#. Omeka Image File: Channels element
 msgid "Channels"
 msgstr ""
 
-# Omeka Image File: Exif String element
+#. Omeka Image File: Exif String element
 msgid "Exif String"
 msgstr ""
 
-# Omeka Image File: Exif Array element
+#. Omeka Image File: Exif Array element
 msgid "Exif Array"
 msgstr ""
 
-# Omeka Image File: IPTC String element
+#. Omeka Image File: IPTC String element
 msgid "IPTC String"
 msgstr ""
 
-# Omeka Image File: IPTC Array element
+#. Omeka Image File: IPTC Array element
 msgid "IPTC Array"
 msgstr ""
 
-# Omeka Video File
+#. Omeka Video File
 msgid "Omeka Video File"
 msgstr ""
 
-# Omeka Video File description
+#. Omeka Video File description
 msgid "The metadata element set that was included in the `files_videos` table in previous versions of Omeka. These elements are common to all video files."
 msgstr ""
 
-# Omeka Video File: Bitrate element
+#. Omeka Video File: Bitrate element
 msgid "Bitrate"
 msgstr ""
 
@@ -206,26 +266,26 @@ msgstr ""
 msgid "Duration"
 msgstr ""
 
-# Omeka Video File: Sample Rate element
+#. Omeka Video File: Sample Rate element
 msgid "Sample Rate"
 msgstr ""
 
-# Omeka Video File: Codec element
+#. Omeka Video File: Codec element
 msgid "Codec"
 msgstr ""
 
-# Format (Legacy) Metadata element set
+#. Format (Legacy) Metadata element set
 msgid "Format (Legacy) Metadata"
 msgstr ""
 
-# User role: Super
+#. User role: Super
 msgid "Super"
 msgstr ""
 
-# User role: Admin
+#. User role: Admin
 msgid "Admin"
 msgstr ""
 
-# User role: Researcher
+#. User role: Researcher
 msgid "Researcher"
 msgstr ""
