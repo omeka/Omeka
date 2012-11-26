@@ -153,7 +153,7 @@ class Omeka_Form_Navigation extends Omeka_Form
     {
         $elementIds = array();
         $pageLinks = array();
-        $pageLinks['/'] = '[Default]'; // Add the default homepage link option
+        $pageLinks['/'] = __('[Default]'); // Add the default homepage link option
         $iterator = new RecursiveIteratorIterator($this->_nav, RecursiveIteratorIterator::SELF_FIRST);
         foreach($iterator as $page) {
             $pageLinks[$page->getHref()] = $page->getLabel();

@@ -12,7 +12,7 @@ echo flash();
     <div id="current-info" class="five columns omega">
         <h2 id="current-theme-title"><?php echo __('Current Theme'); ?></h2>
         <h3><a href="<?php echo html_escape($current->website); ?>"><?php echo html_escape($current->title); ?></a></h3>
-        <p class="author"><?php echo __('By'); ?> <?php echo html_escape($current->author); ?></p>
+        <p class="author"><?php echo __('By %s', html_escape($current->author)); ?></p>
         <p class="theme-description"><?php echo html_escape($current->description); ?></p>
     </div>
 </div>
@@ -33,7 +33,7 @@ foreach($themes as $theme):
             <input type="submit" name="submit" class="use-theme green button" value="<?php echo __('Use this theme'); ?>" />
             <div class="meta">
                 <h3><a href="<?php echo html_escape($theme->website); ?>" target="_blank"><?php echo html_escape($theme->title); ?></a></h3>
-                <p class="author">By <?php echo html_escape($theme->author); ?></p>
+                <p class="author"><?php echo __('By %s', html_escape($current->author)); ?></p>
             </div>
             <?php fire_plugin_hook('admin_themes_browse_each', array('theme' => $theme, 'view' => $this)); ?>
         </div>

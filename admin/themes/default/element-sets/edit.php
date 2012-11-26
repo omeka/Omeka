@@ -14,8 +14,9 @@ echo flash();
         <h2><?php echo __($element_set->name); ?></h2>
 
     <?php if (ElementSet::ITEM_TYPE_NAME == $element_set->name): ?>
-        <p class="explanation">You can customize the element descriptions below. You 
-        can order the elements by editing the specific item type.</p>
+        <p class="explanation">
+            <?php echo __('You can customize the element descriptions below. You can order the elements by editing a specific item type.'); ?>
+        </p>
         <p><?php echo __($element_set->description); ?></p>
         <input type="hidden" name="elements-to-delete" id="elements-to-delete" value="" />
         <ul class="ui-sortable item-type-metadata">
@@ -36,8 +37,9 @@ echo flash();
         </ul>
         
     <?php else: ?>
-        <p class="explanation">You can click and drag the elements into your preferred 
-        display order. Click the right arrows to add customized comments to elements.</p>
+        <p class="explanation">
+            <?php echo __('You can click and drag the elements into your preferred display order. Click the right arrows to add customized comments to elements.'); ?>
+        </p>
         <p><?php echo __($element_set->description); ?></p>
         <ul class="sortable">
         <?php foreach ($element_set->getElements() as $element): ?>
@@ -59,7 +61,7 @@ echo flash();
 
     <section class="three columns omega">
         <div id="save" class="panel">
-            <?php echo $this->formSubmit('submit_edit_elements', 'Save Changes', array('class' => 'big green button')); ?>
+            <?php echo $this->formSubmit('submit_edit_elements', __('Save Changes'), array('class' => 'big green button')); ?>
         </div>
     </section>
 </form>

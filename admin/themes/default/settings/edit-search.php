@@ -20,7 +20,7 @@ echo flash();
         </div>
         <div class="field">
             <div class="two columns alpha">
-                <label for="submit_index_records">Index Records</label>
+                <label><?php echo __('Index Records'); ?></label>
             </div>
             <div class="inputs five columns omega">
                 <p class="explanation"><?php echo __('Click on the "Index Records" ' 

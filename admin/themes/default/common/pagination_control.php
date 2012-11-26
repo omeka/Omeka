@@ -31,7 +31,7 @@ if ($this->pageCount > 1):
         }
     }
     ?>
-    <?php echo $this->formText('page', $this->current); ?> of <?php echo $this->last; ?>
+    <?php echo __('%s of %s', $this->formText('page', $this->current), $this->last); ?>
     </li>
     </form>
     
