@@ -26,6 +26,7 @@
         #Show Collection
         #Browse Item Types
         #Browse Element Sets
+        #Edit Element Sets
         #Browse Themes
         #System Information */
 
@@ -2046,6 +2047,15 @@ button.remove_search {
 ================================================== */
 
 .element-set-name { width: 20%; }
+
+
+/* Edit Element Sets
+================================================== */
+
+.drawer-contents label {
+    display: block;
+    padding: 20px 0 10px 0;
+}
 
 
 /* Edit Item Type Metadata
