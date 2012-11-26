@@ -1,7 +1,7 @@
 <?php echo head(array('bodyid'=>'home')); ?>
 
 <aside id="intro" role="introduction">
-    <?php echo option('description'); ?>
+    <p><?php echo option('description'); ?></p>
 </aside>
 
 <?php if (get_theme_option('Homepage Text')): ?>

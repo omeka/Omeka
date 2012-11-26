@@ -1,13 +1,13 @@
 <?php
 $pageTitle = __('Search Omeka ' . __('(%s total)', $total_results));
-echo head(array('title' => $pageTitle));
+echo head(array('title' => $pageTitle, 'bodyid' => 'search'));
 $searchRecordTypes = get_search_record_types();
 ?>
 <div id="primary">
 <?php echo search_filters(); ?>
 <?php if ($total_results): ?>
 <?php echo pagination_links(); ?>
-<table>
+<table id="search-results">
     <thead>
         <tr>
             <th>Record Type</th>

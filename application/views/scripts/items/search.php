@@ -1,8 +1,8 @@
 <?php
 $pageTitle = __('Search Items');
 echo head(array('title' => $pageTitle,
-           'bodyclass' => 'advanced-search',
-           'bodyid' => 'advanced-search-page'));
+           'bodyclass' => 'items advanced-search',
+           'bodyid' => 'items'));
 ?>
 <div id="primary">
 <h1><?php echo $pageTitle; ?></h1>

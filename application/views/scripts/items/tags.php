@@ -7,7 +7,7 @@ echo head(array('title'=>$pageTitle,'bodyid'=>'items','bodyclass'=>'tags'));
 
     <h1><?php echo $pageTitle; ?></h1>
 
-    <nav class="navigation item-tags" id="secondary-nav">
+    <nav class="navigation items-nav" id="secondary-nav">
         <?php echo public_nav_items(); ?>
     </nav>
 
