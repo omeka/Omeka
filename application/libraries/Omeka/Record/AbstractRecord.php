@@ -269,21 +269,15 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
      *  - Specific record plugin hooks like 'before_delete_item'
      * 
      * @param $event string camelCased name for the event i.e. beforeDelete
-     * @return void
+     * @param $args array optional array of arguments for the callback
      */
-    protected function runCallbacks($event)
+    protected function runCallbacks($event, $args = array())
     {
-        
-        // All arguments beyond the first are optional, and are sent to the 
-        // various callbacks
-        $args = func_get_args();
-        array_shift($args);
-
         // Callback from within the record
-        call_user_func_array(array($this, $event), $args);
+        call_user_func(array($this, $event), $args);
          
         // Module callbacks
-        $this->delegateToMixins($event, $args, true);
+        $this->delegateToMixins($event, array($args), true);
              
         // Format the name of the plugin hook so it's in all lowercase with 
         // underscores. Taken from Doctrine::tableize()
