@@ -1442,7 +1442,7 @@ header nav {
 #output-format-list {
     display: inline-block;
     margin: 0;
-    padding: 0;
+    padding: 20px 0;
 }
 
     #output-format-list li { display: inline-block; }
