@@ -433,7 +433,7 @@ msgstr ""
 #: admin/themes/default/collections/browse.php:24
 #: admin/themes/default/files/show.php:50
 #: admin/themes/default/items/browse.php:43
-#: application/views/scripts/files/show.php:57
+#: application/views/scripts/files/show.php:53
 #: application/views/scripts/items/browse.php:19
 msgid "Date Added"
 msgstr ""
@@ -503,6 +503,7 @@ msgstr ""
 #: admin/themes/default/collections/edit.php:23
 #: admin/themes/default/collections/show.php:34
 #: admin/themes/default/items/edit.php:20
+#: admin/themes/default/items/show.php:45
 msgid "View Public Page"
 msgstr ""
 
@@ -815,18 +816,24 @@ msgstr ""
 msgid "File Size"
 msgstr ""
 
+#: admin/themes/default/files/show.php:43
+#: application/views/scripts/files/show.php:34
+#, php-format
+msgid "%s bytes"
+msgstr ""
+
 #: admin/themes/default/files/show.php:48
-#: application/views/scripts/files/show.php:55
+#: application/views/scripts/files/show.php:51
 msgid "File History"
 msgstr ""
 
 #: admin/themes/default/files/show.php:52
-#: application/views/scripts/files/show.php:61
+#: application/views/scripts/files/show.php:57
 msgid "Date Modified"
 msgstr ""
 
 #: admin/themes/default/files/show.php:54
-#: application/views/scripts/files/show.php:65
+#: application/views/scripts/files/show.php:61
 msgid "Authentication"
 msgstr ""
 
@@ -836,16 +843,17 @@ msgid "Type Metadata"
 msgstr ""
 
 #: admin/themes/default/files/show.php:62
+#: application/views/scripts/files/show.php:41
 msgid "Mime Type"
 msgstr ""
 
 #: admin/themes/default/files/show.php:64
-#: application/views/scripts/files/show.php:49
+#: application/views/scripts/files/show.php:45
 msgid "File Type / OS"
 msgstr ""
 
 #: admin/themes/default/files/show.php:71
-msgid "ID3 Metadata"
+msgid "Embedded Metadata"
 msgstr ""
 
 #: admin/themes/default/files/show.php:77
@@ -3060,14 +3068,6 @@ msgid ""
 "To learn how to see more detailed information about this error, see the "
 "Omeka Codex page on <a href=\"http://omeka.org/codex/"
 "Retrieving_error_messages\">retrieving error messages</a>."
-msgstr ""
-
-#: application/views/scripts/files/show.php:41
-msgid "Mime Type / Browser"
-msgstr ""
-
-#: application/views/scripts/files/show.php:45
-msgid "Mime Type / OS"
 msgstr ""
 
 #: application/views/scripts/index.php:14

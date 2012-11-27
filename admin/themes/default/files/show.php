@@ -40,7 +40,7 @@ echo flash();
         <dt><?php echo __('Original Filename'); ?>:</dt>
         <dd><?php echo metadata('file', 'Original Filename'); ?></dd>
         <dt><?php echo __('File Size'); ?>:</dt>
-        <dd><?php echo metadata('file', 'Size'); ?> bytes</dd>
+        <dd><?php echo __('%s bytes', metadata('file', 'Size')); ?></dd>
         </dl>
     </div>
 
@@ -48,9 +48,9 @@ echo flash();
         <h4><?php echo __('File History'); ?></h4>
         <dl>
         <dt><?php echo __('Date Added'); ?></dt>
-        <dd><?php echo format_date(metadata('file', 'Added'), Zend_Date::DATETIME_MEDIUM); ?></dd>
+        <dd><?php echo format_date(metadata('file', 'Added'), Zend_Date::DATE_MEDIUM); ?></dd>
         <dt><?php echo __('Date Modified'); ?></dt> 
-        <dd><?php echo format_date(metadata('file', 'Modified'), Zend_Date::DATETIME_MEDIUM); ?></dd>
+        <dd><?php echo format_date(metadata('file', 'Modified'), Zend_Date::DATE_MEDIUM); ?></dd>
         <dt><?php echo __('Authentication'); ?></dt> 
         <dd><?php echo metadata('file', 'Authentication'); ?></dd>
         </dl>
@@ -68,7 +68,7 @@ echo flash();
 
     <?php if (file_id3_metadata()): ?>
     <div id="id3-metadata" class="panel">
-        <h4><?php echo __('ID3 Metadata'); ?></h4>
+        <h4><?php echo __('Embedded Metadata'); ?></h4>
         <?php echo file_id3_metadata(); ?>
     </div>
     <?php endif; ?>

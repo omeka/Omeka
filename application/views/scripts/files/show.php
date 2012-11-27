@@ -31,19 +31,15 @@
 
         <div id="file-size" class="element">
             <h3><?php echo __('File Size'); ?></h3>
-            <div class="element-text"><?php echo metadata('file', 'Size'); ?> bytes</div>
+            <div class="element-text"><?php echo __('%s bytes', metadata('file', 'Size')); ?></div>
         </div>
     </div><!-- end format-metadata -->
 
     <div id="type-metadata" class="section">
         <h2><?php echo __('Type Metadata'); ?></h2>
         <div id="mime-type-browser" class="element">
-            <h3><?php echo __('Mime Type / Browser'); ?></h3>
+            <h3><?php echo __('Mime Type'); ?></h3>
             <div class="element-text"><?php echo metadata('file', 'MIME Type'); ?></div>
-        </div>
-        <div id="mime-type-os" class="element">
-            <h3><?php echo __('Mime Type / OS'); ?></h3>
-            <div class="element-text"><?php echo metadata('file', 'MIME Type OS'); ?></div>
         </div>
         <div id="file-type-os" class="element">
             <h3><?php echo __('File Type / OS'); ?></h3>
@@ -55,11 +51,11 @@
         <h2><?php echo __('File History'); ?></h2>
         <div id="date-added" class="element">
             <h3><?php echo __('Date Added'); ?></h3>
-            <div class="element-text"><?php echo metadata('file', 'Date Added'); ?></div>
+            <div class="element-text"><?php echo format_date(metadata('file', 'Added'), Zend_Date::DATE_MEDIUM); ?></div>
         </div>
         <div id="date-modified" class="element">
             <h3><?php echo __('Date Modified'); ?></h3>
-            <div class="element-text"><?php echo metadata('file', 'Date Modified'); ?></div>
+            <div class="element-text"><?php echo format_date(metadata('file', 'Modified'), Zend_Date::DATE_MEDIUM); ?></div>
         </div>
         <div id="authentication" class="element">
             <h3><?php echo __('Authentication'); ?></h3>
