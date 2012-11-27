@@ -59,8 +59,16 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
         ));
         
         $this->addDisplayGroup(
-            array('fullsize_constraint', 'thumbnail_constraint', 'square_thumbnail_constraint', 'per_page_admin', 'per_page_public', 'show_empty_elements'),
-            'appearance'
+            array(
+                'fullsize_constraint', 'thumbnail_constraint',
+                'square_thumbnail_constraint',
+            ),
+            'derivative-constraints', array('legend' => __('Derivative Size Constraints'))
+        );
+
+        $this->addDisplayGroup(
+            array('per_page_admin', 'per_page_public', 'show_empty_elements'),
+            'display-settings', array('legend' => __('Display Settings'))
         );
 
     }

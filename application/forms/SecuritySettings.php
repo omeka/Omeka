@@ -86,10 +86,29 @@ class Omeka_Form_SecuritySettings extends Omeka_Form
         ));
 
         $this->addDisplayGroup(
-            array(File::DISABLE_DEFAULT_VALIDATION_OPTION, Omeka_Validate_File_Extension::WHITELIST_OPTION,
-                Omeka_Validate_File_MimeType::WHITELIST_OPTION, Omeka_Captcha::PUBLIC_KEY_OPTION, Omeka_Captcha::PRIVATE_KEY_OPTION,
-                'html_purifier_is_enabled', 'html_purifier_allowed_html_elements', 'html_purifier_allowed_html_attributes'),
-            'security_settings');
+            array(
+                File::DISABLE_DEFAULT_VALIDATION_OPTION,
+                Omeka_Validate_File_Extension::WHITELIST_OPTION,
+                Omeka_Validate_File_MimeType::WHITELIST_OPTION,
+            ),
+            'file-validation', array('legend' => __('File Validation'))
+        );
 
+        $this->addDisplayGroup(
+            array(
+                Omeka_Captcha::PUBLIC_KEY_OPTION,
+                Omeka_Captcha::PRIVATE_KEY_OPTION,
+            ),
+            'captcha', array('legend' => __('Captcha'))
+        );
+
+        $this->addDisplayGroup(
+            array(
+                'html_purifier_is_enabled',
+                'html_purifier_allowed_html_elements',
+                'html_purifier_allowed_html_attributes'
+            ),
+            'html-filtering', array('legend' => __('HTML Filtering'))
+        );
     }
 }

@@ -10,7 +10,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'settings')); ?>
 
 <section class="seven columns alpha">
         
-    <?php echo $this->form->getDisplayGroup('appearance'); ?>
+    <?php echo $this->form; ?>
     
     <?php fire_plugin_hook('admin_appearance_settings_form', array('form' => $form, 'view' => $this)); ?>
 

@@ -32,6 +32,7 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
         require_once APP_DIR . '/forms/AppearanceSettings.php';
         $form = new Omeka_Form_AppearanceSettings;
         $form->setDefaults($this->getInvokeArg('bootstrap')->getResource('Options'));
+        $form->removeDecorator('Form');
         fire_plugin_hook('appearance_settings_form', array('form' => $form));
         $this->view->form = $form;
         

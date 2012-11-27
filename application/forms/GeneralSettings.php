@@ -61,10 +61,7 @@ class Omeka_Form_GeneralSettings extends Omeka_Form
         
         $this->addDisplayGroup(
             array('administrator_email', 'site_title', 'description', 
-                  'copyright', 'author', 'tag_delimiter', 'fullsize_constraint', 
-                  'thumbnail_constraint', 'square_thumbnail_constraint', 
-                  'per_page_admin', 'per_page_public', 'show_empty_elements',
-                  'path_to_convert'),
+                  'copyright', 'author', 'tag_delimiter', 'path_to_convert'),
             'site_settings');
     }
 }

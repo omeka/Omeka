@@ -1734,11 +1734,11 @@ msgstr ""
 msgid "Edit this User"
 msgstr ""
 
-#: application/controllers/AppearanceController.php:47
+#: application/controllers/AppearanceController.php:48
 msgid "The appearance settings have been updated."
 msgstr ""
 
-#: application/controllers/AppearanceController.php:50
+#: application/controllers/AppearanceController.php:51
 #: application/controllers/ItemTypesController.php:34
 #: application/controllers/ItemTypesController.php:60
 #: application/controllers/SettingsController.php:47
@@ -1747,11 +1747,11 @@ msgstr ""
 msgid "There were errors found in your form. Please edit and resubmit."
 msgstr ""
 
-#: application/controllers/AppearanceController.php:65
+#: application/controllers/AppearanceController.php:66
 msgid "The navigation settings have been updated."
 msgstr ""
 
-#: application/controllers/AppearanceController.php:68
+#: application/controllers/AppearanceController.php:69
 msgid ""
 "The navigation settings were not saved because of missing or invalid "
 "values.  All changed values have been restored."
@@ -2233,6 +2233,14 @@ msgstr ""
 msgid "Show Empty Elements"
 msgstr ""
 
+#: application/forms/AppearanceSettings.php:66
+msgid "Derivative Size Constraints"
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:71
+msgid "Display Settings"
+msgstr ""
+
 #: application/forms/ChangePassword.php:30
 msgid "Current Password"
 msgstr ""
@@ -2481,6 +2489,18 @@ msgstr ""
 
 #: application/forms/SecuritySettings.php:83
 msgid "List of allowed HTML attributes in form input."
+msgstr ""
+
+#: application/forms/SecuritySettings.php:94
+msgid "File Validation"
+msgstr ""
+
+#: application/forms/SecuritySettings.php:102
+msgid "Captcha"
+msgstr ""
+
+#: application/forms/SecuritySettings.php:111
+msgid "HTML Filtering"
 msgstr ""
 
 #: application/forms/User.php:36
