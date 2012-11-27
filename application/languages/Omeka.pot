@@ -532,7 +532,7 @@ msgstr ""
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:26
-#: application/views/scripts/index.php:33
+#: application/views/scripts/index.php:35
 msgid "Recently Added Items"
 msgstr ""
 
@@ -579,7 +579,7 @@ msgid "Dashboard"
 msgstr ""
 
 #: admin/themes/default/common/content-nav.php:9
-#: admin/themes/default/items/batch-delete.php:18
+#: admin/themes/default/items/batch-delete.php:17
 #: admin/themes/default/items/batch-edit.php:17
 msgid "Items"
 msgstr ""
@@ -981,16 +981,16 @@ msgstr ""
 msgid "Batch Delete Items"
 msgstr ""
 
-#: admin/themes/default/items/batch-delete.php:40
+#: admin/themes/default/items/batch-delete.php:38
 msgid ""
 "Some items were excluded because you do not have permission to delete them."
 msgstr ""
 
-#: admin/themes/default/items/batch-delete.php:43
+#: admin/themes/default/items/batch-delete.php:41
 msgid "Checked items will be deleted."
 msgstr ""
 
-#: admin/themes/default/items/batch-delete.php:49
+#: admin/themes/default/items/batch-delete.php:50
 #: admin/themes/default/items/batch-edit.php:116
 msgid "Delete Items"
 msgstr ""
@@ -2561,7 +2561,7 @@ msgstr ""
 msgid "Plugin must have a valid directory name before it can be installed."
 msgstr ""
 
-#: application/libraries/Omeka/Record/AbstractRecord.php:355
+#: application/libraries/Omeka/Record/AbstractRecord.php:349
 #, php-format
 msgid "'%s' is an invalid special value."
 msgstr ""
@@ -2995,6 +2995,10 @@ msgstr ""
 msgid "Items in the %s Collection"
 msgstr ""
 
+#: application/views/scripts/collections/show.php:43
+msgid "There are currently no items within this collection."
+msgstr ""
+
 #: application/views/scripts/common/footer.php:14
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
 msgstr ""
@@ -3066,11 +3070,19 @@ msgstr ""
 msgid "Mime Type / OS"
 msgstr ""
 
-#: application/views/scripts/index.php:65
+#: application/views/scripts/index.php:14
+msgid "Featured Item"
+msgstr ""
+
+#: application/views/scripts/index.php:22
+msgid "Featured Collection"
+msgstr ""
+
+#: application/views/scripts/index.php:67
 msgid "No recent items available."
 msgstr ""
 
-#: application/views/scripts/index.php:69
+#: application/views/scripts/index.php:71
 msgid "View All Items"
 msgstr ""
 
