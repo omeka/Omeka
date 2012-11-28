@@ -286,7 +286,10 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         }
         getid3_lib::CopyTagsToComments($id3->info);
         $metadata = array();
-        $keys = array('mime_type', 'audio', 'video', 'comments', 'comments_html');
+        $keys = array(
+            'mime_type', 'audio', 'video', 'comments', 'comments_html',
+            'iptc', 'jpg'
+        );
         foreach($keys as $key) {
             if (array_key_exists($key, $id3->info)) {
                 $metadata[$key] = $id3->info[$key];

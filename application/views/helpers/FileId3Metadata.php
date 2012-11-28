@@ -31,11 +31,14 @@ class Omeka_View_Helper_FileId3Metadata extends Zend_View_Helper_Abstract
         $output = '<ul>';
         foreach ($array as $key => $value)
         {
-            if (is_array($value))
-            {
+            if (is_array($value)) {
                 $output .= '<li><span class="id3-property-name">' . $key . '</span>' . $this->_arrayToList($value) . '</li>';
             } else {
-                $output .= '<li><span class="id3-property-name">' . $key . '</span>: ' . (is_bool($value) ? ($value ? 'true' : 'false') : $value) . '</li>';
+                $output .= '<li>';
+                if (!is_int($key)) {
+                    $output .= '<li><span class="id3-property-name">' . $key . '</span>: ';
+                }
+                $output .= (is_bool($value) ? ($value ? 'true' : 'false') : $value) . '</li>';
             }
         }
         $output .= '</ul>';
