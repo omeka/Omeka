@@ -57,6 +57,6 @@
             <?php endif; ?> 
         </ul>
     </div>
-</div>
+</section>
 
 <?php echo foot(); ?>
