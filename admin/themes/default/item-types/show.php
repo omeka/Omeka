@@ -14,12 +14,16 @@ echo flash();
         <h2><?php echo __('Description'); ?></h2>
         <p><?php echo html_escape($item_type->description); ?></p>
         <h2><?php echo __('Elements'); ?></h2>
+        <?php if ($item_type->Elements): ?>
         <dl class="type-metadata">
             <?php foreach($item_type->Elements as $element): ?>
             <dt><?php echo html_escape($element->name); ?></dt>
             <dd><?php echo html_escape($element->description); ?></dd>
             <?php endforeach; ?>
         </dl>
+        <?php else: ?>
+        <p><?php echo __('There are no elements.'); ?></p>
+        <?php endif; ?>
     </div>
 
     <div id="type-items">
