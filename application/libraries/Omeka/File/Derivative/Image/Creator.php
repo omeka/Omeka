@@ -186,12 +186,14 @@ class Omeka_File_Derivative_Image_Creator
     private function _getResizeCmdArgs($constraint, $square)
     {
         if (!$square) {
-            return '-thumbnail ' . escapeshellarg("{$constraint}x{$constraint}>");
+            return '-background white -flatten -thumbnail ' . escapeshellarg("{$constraint}x{$constraint}>");
         } else {
             return join(' ', array(
                 '-thumbnail ' . escapeshellarg('x' . $constraint*2),
                 '-resize ' . escapeshellarg($constraint*2 . 'x<'),
                 '-resize 50%',
+                '-background white',
+                '-flatten',
                 '-gravity center',
                 '-crop ' . escapeshellarg("{$constraint}x{$constraint}+0+0"),
                 '+repage'));
