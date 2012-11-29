@@ -415,7 +415,7 @@ class UsersController extends Omeka_Controller_AbstractActionController
         $this->_helper->redirector->gotoUrl('');
     }
     
-    private function _getUserForm(User $user)
+    protected function _getUserForm(User $user)
     {
         $hasActiveElement = $user->exists()
             && $this->_helper->acl->isAllowed('change-status', $user);
