@@ -138,7 +138,7 @@ Omeka.Elements = {};
                     }
                 };
 
-                enableIfChecked();
+                enableIfChecked.call(this);
 
                 // Whenever the checkbox is toggled, toggle the WYSIWYG editor.
                 $(this).click(enableIfChecked);
