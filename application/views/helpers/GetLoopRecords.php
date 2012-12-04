@@ -14,8 +14,13 @@ class Omeka_View_Helper_GetLoopRecords extends Zend_View_Helper_Abstract
     /**
      * Get records from the view for iteration.
      * 
+     * Note that this method will return an empty array if it is set to the 
+     * records variable. Use Omeka_View_Helper_HasLoopRecords::hasLoopRecords() 
+     * to check if records exist.
+     * 
+     * @throws Omeka_View_Exception
      * @param string $recordsVar
-     * @return array|null
+     * @return array|bool
      */
     public function getLoopRecords($recordsVar, $throwException = true)
     {

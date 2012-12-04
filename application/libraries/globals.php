@@ -1693,10 +1693,14 @@ function set_loop_records($recordsVar, array $records)
 /**
  * Get records from the view for iteration.
  * 
+ * Note that this function will return an empty array if it is set to the 
+ * records variable. Use has_loop_records() to check if records exist.
+ * 
  * @package Omeka\Function\View\Body\Loop
  * @uses Omeka_View_Helper_GetLoopRecords::getLoopRecords()
+ * @throws Omeka_View_Exception
  * @param string $recordsVar
- * @return array|null
+ * @return array|bool
  */
 function get_loop_records($recordsVar, $throwException = true)
 {
@@ -1706,14 +1710,18 @@ function get_loop_records($recordsVar, $throwException = true)
 /**
  * Check if records have been set to the view for iteration.
  * 
+ * Note that this function will return false if the records variable is set but 
+ * is an empty array, unlike get_loop_records(), which will return the empty 
+ * array.
+ * 
  * @package Omeka\Function\View\Body\Loop
- * @uses Omeka_View_Helper_GetLoopRecords::getLoopRecords()
+ * @uses Omeka_View_Helper_HasLoopRecords::hasLoopRecords()
  * @param string $recordsVar
  * @return bool
  */
 function has_loop_records($recordsVar)
 {
-    return (bool) get_view()->getLoopRecords($recordsVar, false);
+    return get_view()->hasLoopRecords($recordsVar);
 }
 
 /**
