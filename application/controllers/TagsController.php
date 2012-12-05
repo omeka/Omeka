@@ -124,7 +124,7 @@ class TagsController extends Omeka_Controller_AbstractActionController
         if (empty($tagText)) {
             $this->_helper->json(array());
         }
-        $tagNames = $this->getTable()->findTagNamesLike($tagText);
+        $tagNames = $this->_helper->db->getTable()->findTagNamesLike($tagText);
         $this->_helper->json($tagNames);
     }
     
