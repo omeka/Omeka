@@ -375,7 +375,7 @@ function get_acl()
  */
 function is_admin_theme()
 {
-    return Zend_Controller_Front::getInstance()->getParam('admin');
+    return (bool) Zend_Controller_Front::getInstance()->getParam('admin');
 }
 
 /**
