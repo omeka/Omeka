@@ -976,7 +976,13 @@ header nav {
 
     .drawer-contents .button { margin-bottom: 0; }
 
-    .drawer-contents :first-child { margin-top: 0; }
+    .drawer-contents :first-child { padding-top: 0; }
+
+    .drawer-contents label {
+        display: block;
+        padding: 10px 0;
+    }
+
 
 
 /* Edit and Save Panels
@@ -2047,15 +2053,6 @@ button.remove_search {
 ================================================== */
 
 .element-set-name { width: 20%; }
-
-
-/* Edit Element Sets
-================================================== */
-
-.drawer-contents label {
-    display: block;
-    padding: 20px 0 10px 0;
-}
 
 
 /* Edit Item Type Metadata
