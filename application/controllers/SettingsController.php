@@ -108,6 +108,36 @@ class SettingsController extends Omeka_Controller_AbstractActionController
         $this->view->assign('customSearchRecordTypes', get_custom_search_record_types());
     }
     
+    public function editItemTypeElementsAction()
+    {
+        $elementSet = $this->_helper->db->getTable('ElementSet')->findByName(ElementSet::ITEM_TYPE_NAME);
+        $db = $this->_helper->db;
+        
+        // Handle a submitted edit form.
+        if ($this->getRequest()->isPost()) {
+            
+            // Update the elements.
+            try {
+                $elements = $this->getRequest()->getPost('elements');
+                foreach ($elements as $id => $element) {
+                    $elementRecord = $db->getTable('Element')->find($id);
+                    if ($element['delete']) {
+                        $elementRecord->delete();
+                        continue;
+                    }
+                    $elementRecord->description = $element['description'];
+                    $elementRecord->save();
+                }
+                $this->_helper->flashMessenger(__('The item type elements were successfully changed!'), 'success');
+                $this->_helper->redirector('edit-item-type-elements');
+            } catch (Omeka_Validate_Exception $e) {
+                $this->_helper->flashMessenger($e);
+            }
+        }
+        
+        $this->view->element_set = $elementSet;
+    }
+    
     /**
      * Determine whether or not ImageMagick has been correctly installed and
      * configured.  

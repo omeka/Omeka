@@ -22,6 +22,12 @@
             'resource' => 'ElementSets',
             'privilege' => 'browse'
         ),
+        array(
+            'label' => __('Item Type Elements'),
+            'uri' => url('settings/edit-item-type-elements'),
+            'resource' => 'ElementSets',
+            'privilege' => 'browse'
+        ),
     );
     echo nav($navArray, 'admin_navigation_settings');
 ?>

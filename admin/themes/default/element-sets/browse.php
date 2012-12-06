@@ -19,6 +19,7 @@ echo flash();
     </thead>
     <tbody>
     <?php foreach (loop('element_sets') as $elementSet): ?>
+        <?php if (ElementSet::ITEM_TYPE_NAME == $elementSet->name): continue; endif; ?>
         <tr>
             <td class="element-set-name">
                 <?php echo html_escape(__($elementSet->name)); ?>
