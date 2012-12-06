@@ -85,9 +85,9 @@ Omeka.ElementSets = {};
         $(document).on('click', '#submit_edit_item_type', function (event) {
             event.preventDefault();
             if ($('.undo-delete:visible')[0]) {
-                if (confirm('Are you sure you want to delete the selected item type elements?')) {
-                    $('#edit-item-type-elements').submit();
-                }
+                $( "#dialog" ).dialog('open');
+            } else {
+                $('#edit-item-type-elements').submit();
             }
         });
     };
