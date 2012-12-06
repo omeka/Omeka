@@ -841,7 +841,7 @@ header nav {
 /* Sortable Lists
 ================================================== */
 
-.ui-sortable {
+.ui-sortable, .sortable {
     list-style-type: none; 
     margin: 0; 
     padding: 0;
@@ -852,8 +852,7 @@ header nav {
     list-style-type: none; 
 }
 
-.ui-sortable .sortable-item, .ui-sortable .add-new, 
-#navigation_form .add-new, .items .add-new { 
+.ui-sortable .sortable-item, .ui-sortable .add-new, .add-new { 
     background: #EBEADC;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F5F3EC), color-stop(100%,#E9E5DA));
     background: -moz-linear-gradient(center top, #F5F3EC 0%, #E9E5DA 100%);
@@ -994,7 +993,10 @@ header nav {
 
     .drawer-contents .button { margin-bottom: 0; }
 
-    .drawer-contents :first-child { padding-top: 0; }
+    .drawer-contents :first-child { 
+        margin-top: 0;
+        padding-top: 0; 
+    }
 
     .drawer-contents label {
         display: block;
@@ -1330,6 +1332,17 @@ header nav {
 .index .panel h1, .index .panel h2, .index .panel h3, .index .panel h4 {
     font-family: "Arvo", serif;
     font-weight: normal;
+}
+
+.index .add-new {
+    background: transparent;
+    border: 0;
+    box-shadow: 0 0 0 transparent;
+        -webkit-box-shadow: 0 0 0 transparent;
+        -moz-box-shadow: 0 0 0 transparent;
+        -o-box-shadow: 0 0 0 transparent;
+    margin: 0;
+    padding: 0;
 }
     
 
