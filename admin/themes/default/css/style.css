@@ -886,23 +886,11 @@ header nav {
     background: -moz-linear-gradient(center top, #ad6345 0%, #7d422a 100%);
     filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ad6345', endColorstr='#7d422a'); 
         -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ad6345', endColorstr='#7d422a')";
-    box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 2px 2px 0px #d4d4d4;
-        -webkit-box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 2px 2px 0px #d4d4d4;
-        -moz-box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 2px 2px 0px #d4d4d4;
-        -o-box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 2px 2px 0px #d4d4d4;    
     border: 1px solid #7E432C;
     border-radius: 2px;
     color: #fff;
     text-shadow: -1px -1px 1px rgba(0,0,0,.5);
 }
-
-    .ui-sortable .deleted.drawer-contents {
-        border-color: #EFF0EB;
-        box-shadow: 0px 1px 2px rgba(0,0,0,.1);
-            -webkit-box-shadow: 0px 1px 2px rgba(0,0,0,.1);
-            -moz-box-shadow: 0px 1px 2px rgba(0,0,0,.1);
-            -o-box-shadow: 0px 1px 2px rgba(0,0,0,.1);
-    }
     
     .deleted a:link, .deleted a:visited { 
         color: #fff; 
@@ -961,7 +949,6 @@ header nav {
         -webkit-transform: rotate(90deg);
         -moz-transform: rotate(90deg);
         -o-transform: rotate(90deg);
-        color: #fff;
     }
 
 .delete-element { display: inline-block; }
