@@ -172,8 +172,15 @@ p, li {
         background-color: rgba(255,255,255,.5);
         border: 1px solid #E4E5DE;
         display: block;
+        float: left;
         margin-top: 10px;
         padding: .5em;
+        clear: both;
+        width: 100%;
+        box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -o-box-sizing: border-box;
     }
         
         .details p { margin: 0; }
@@ -459,7 +466,9 @@ p, li {
                 padding: 0;
             }
             
-            #content #flash li, ul.error li {
+                .inputs ul.error { margin-top: 0; }
+            
+            #content #flash li, ul.error li, #im-result {
                 background-color: rgba(255, 255, 255, .5);
                 border: 1px solid #E7E7E7;
                 border-radius: 3px;
@@ -467,6 +476,8 @@ p, li {
                 margin-bottom: 20px;
                 padding: .5em;            
             }
+            
+                #im-result:empty { display: none; }
         
         .success {
             color: #729108;
@@ -841,14 +852,15 @@ header nav {
     list-style-type: none; 
 }
 
-.ui-sortable .sortable-item, .ui-sortable .add-new, #navigation_form .add-new { 
+.ui-sortable .sortable-item, .ui-sortable .add-new, 
+#navigation_form .add-new, .items .add-new { 
     background: #EBEADC;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F5F3EC), color-stop(100%,#E9E5DA));
     background: -moz-linear-gradient(center top, #F5F3EC 0%, #E9E5DA 100%);
-    box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
-        -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
-        -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
-        -o-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
+    box-shadow: 0px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
+        -webkit-box-shadow: 0px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
+        -moz-box-shadow: 0px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
+        -o-box-shadow: 0px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
     border: 1px solid #D6D5C2;
     border-radius: 2px;
     padding: 10px;
@@ -871,14 +883,15 @@ header nav {
     }
 
 .ui-sortable .deleted.sortable-item {
-    background: #EBEADC;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F8F8F3), color-stop(100%,#ECEEE2));
-    background: -moz-linear-gradient(center top, #F1F1EF 0%, #ECEEE2 100%);
-    box-shadow: 1px 1px 2px rgba(0,0,0,.1);
-        -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
-        -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
-        -o-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
-    border: 1px solid #EFF0EB;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ad6345), color-stop(100%,#7d422a));
+    background: -moz-linear-gradient(center top, #ad6345 0%, #7d422a 100%);
+    filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ad6345', endColorstr='#7d422a'); 
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#ad6345', endColorstr='#7d422a')";
+    box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 2px 2px 0px #d4d4d4;
+        -webkit-box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 2px 2px 0px #d4d4d4;
+        -moz-box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 2px 2px 0px #d4d4d4;
+        -o-box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 2px 2px 0px #d4d4d4;    
+    border: 1px solid #7E432C;
     border-radius: 2px;
     color: #AFA6A6;
 
@@ -886,10 +899,15 @@ header nav {
 
     .ui-sortable .deleted.drawer-contents {
         border-color: #EFF0EB;
-        box-shadow: 1px 1px 2px rgba(0,0,0,.1);
-            -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
-            -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
-            -o-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
+        box-shadow: 0px 1px 2px rgba(0,0,0,.1);
+            -webkit-box-shadow: 0px 1px 2px rgba(0,0,0,.1);
+            -moz-box-shadow: 0px 1px 2px rgba(0,0,0,.1);
+            -o-box-shadow: 0px 1px 2px rgba(0,0,0,.1);
+    }
+    
+    .deleted a:link, .deleted a:visited { 
+        color: #fff; 
+        text-shadow: -1px -1px 1px rgba(0,0,0,.5);
     }
 
 .ui-sortable .action-links {
