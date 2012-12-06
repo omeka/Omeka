@@ -18,7 +18,7 @@
     </div>
 <?php endif; ?>
 
-<div class="add-new-item"><?php echo __('Add New Files'); ?></div>
+<div class="add-new"><?php echo __('Add New Files'); ?></div>
 <div class="drawer-contents">
     <p>The maximum file size is <?php echo max_file_size(); ?>.</p>
     

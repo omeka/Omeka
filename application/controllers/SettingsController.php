@@ -157,8 +157,8 @@ class SettingsController extends Omeka_Controller_AbstractActionController
         $imPath = $this->_getParam('path-to-convert');
         $isValid = Omeka_File_Derivative_Image_Creator::isValidImageMagickPath($imPath);
         $this->getResponse()->setBody(
-            $isValid ? '<div class="im-success">' . __('The ImageMagick directory path works.') . '</div>' 
-                     : '<div class="im-failure">' . __('The ImageMagick directory path does not work.') . '</div>');
+            $isValid ? '<div class="success">' . __('The ImageMagick directory path works.') . '</div>' 
+                     : '<div class="error">' . __('The ImageMagick directory path does not work.') . '</div>');
     }
     
     public function getFileExtensionWhitelistAction()
