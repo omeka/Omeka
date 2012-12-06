@@ -256,7 +256,7 @@ Omeka.Items = {};
     Omeka.Items.enableAddFiles = function (label) {
         var filesDiv = $('#files-metadata .files');
 
-        var link = $('<a href="#" id="add-file" class="add-file">' + label + '</a>');
+        var link = $('<a href="#" id="add-file" class="add-file button">' + label + '</a>');
         link.click(function (event) {
             event.preventDefault();
             var inputs = filesDiv.find('input');
