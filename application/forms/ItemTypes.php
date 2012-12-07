@@ -237,6 +237,10 @@ class Omeka_Form_ItemTypes extends Omeka_Form
         if (isset($_POST[self::ELEMENTS_TO_ADD_INPUT_NAME])) {
             $elementsToAdd = $_POST[self::ELEMENTS_TO_ADD_INPUT_NAME];
             foreach ($elementsToAdd as $tempId => $info) {
+                if (empty($info['id'])) {
+                    continue;
+                }
+
                 $elementInfos[] = array(
                     'element' => $elementTable->find($info['id']),
                     'temp_id' => $tempId,
@@ -248,6 +252,10 @@ class Omeka_Form_ItemTypes extends Omeka_Form
         if (isset($_POST[self::NEW_ELEMENTS_INPUT_NAME])) {
             $newElements = $_POST[self::NEW_ELEMENTS_INPUT_NAME];
             foreach ($newElements as $tempId => $info) {
+                if (empty($info['name'])) {
+                    continue;
+                }
+
                 $element = new Element;
                 $element->setElementSet(ElementSet::ITEM_TYPE_NAME);
                 $element->setName($info['name']);
