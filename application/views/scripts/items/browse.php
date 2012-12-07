@@ -13,6 +13,8 @@ echo head(array('title'=>$pageTitle,'bodyid'=>'items','bodyclass' => 'browse'));
 
     <?php echo pagination_links(); ?>
     
+    <?php if ($total_results > 0): ?>
+    
     <?php
     $sortLinks[__('Title')] = 'Dublin Core,Title';
     $sortLinks[__('Creator')] = 'Dublin Core,Creator';
@@ -21,6 +23,8 @@ echo head(array('title'=>$pageTitle,'bodyid'=>'items','bodyclass' => 'browse'));
     <div id="sort-links">
         <span class="sort-label"><?php echo __('Sort by: '); ?></span><?php echo browse_sort_links($sortLinks); ?>
     </div>
+    
+    <?php endif; ?>
     
     <?php foreach (loop('items') as $item): ?>
     <div class="item hentry">
