@@ -139,6 +139,9 @@ abstract class Omeka_Plugin_AbstractPlugin
             return;
         }
         foreach ($this->_options as $name => $value) {
+            if (!is_string($name)) {
+                $name = $value;
+            }
             delete_option($name);
         }
     }
