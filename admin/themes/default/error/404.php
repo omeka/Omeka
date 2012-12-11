@@ -26,7 +26,7 @@ echo flash();
         </div>
         <?php endforeach; ?>
         <?php if (is_allowed('Items', 'add')): ?>
-        <div class="add-new"><p><a class="add-new" href="<?php echo html_escape(url('items/add')); ?>"><?php echo __('Add a new item'); ?></a></p></div>
+        <div class="add-new-link"><p><a class="add-new-link" href="<?php echo html_escape(url('items/add')); ?>"><?php echo __('Add a new item'); ?></a></p></div>
         <?php endif; ?>
     </div>
 </section>
@@ -47,7 +47,7 @@ echo flash();
         </div>
         <?php endforeach; ?>
         <?php if (is_allowed('Collections', 'add')): ?>
-        <div class="add-new"><p><a class="add-collection" href="<?php echo html_escape(url('collections/add')); ?>"><?php echo __('Add a new collection'); ?></a></p></div>
+        <div class="add-new-link"><p><a class="add-collection" href="<?php echo html_escape(url('collections/add')); ?>"><?php echo __('Add a new collection'); ?></a></p></div>
         <?php endif; ?>
     </div>
 </section>
