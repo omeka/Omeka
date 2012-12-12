@@ -584,6 +584,26 @@ function update_item($item, $metadata = array(), $elementTexts = array(), $fileM
 }
 
 /**
+ * Update an existing collection.
+ *
+ * @package Omeka\Function\Db\Collection
+ * @see insert_collection()
+ * @uses Builder_Collection
+ * @param Collection|int $collection Either an Collection object or the ID for the collection.
+ * @param array $metadata Set of options that can be passed to the collection.
+ * @param array $elementTexts The element texts for the collection
+ * @return Collection
+ */
+function update_collection($collection, $metadata = array(), $elementTexts = array())
+{
+    $builder = new Builder_Collection(get_db());
+    $builder->setRecord($collection);
+    $builder->setRecordMetadata($metadata);
+    $builder->setElementTexts($elementTexts);
+    return $builder->build();
+}
+
+/**
  * Insert a new item type.
  *
  * @package Omeka\Function\Db\ItemType
@@ -633,12 +653,39 @@ function insert_item_type($metadata = array(), $elementInfos = array())
  *   'featured'    => [true|false]
  * )
  * </code>
+ * @param array $elementTexts Array of element texts to assign to the collection.
+ * This follows the format:
+ * <code>
+ * array(
+ *   [element set name] => array(
+ *     [element name] => array(
+ *       array('text' => [string], 'html' => [false|true]),
+ *       array('text' => [string], 'html' => [false|true])
+ *      ),
+ *     [element name] => array(
+ *       array('text' => [string], 'html' => [false|true]),
+ *       array('text' => [string], 'html' => [false|true])
+ *     )
+ *   ),
+ *   [element set name] => array(
+ *     [element name] => array(
+ *       array('text' => [string], 'html' => [false|true]),
+ *       array('text' => [string], 'html' => [false|true])
+ *     ),
+ *     [element name] => array(
+ *       array('text' => [string], 'html' => [false|true]),
+ *       array('text' => [string], 'html' => [false|true])
+ *     )
+ *   )
+ * );
+ * </code>
  * @return Collection
  */
-function insert_collection($metadata = array())
+function insert_collection($metadata = array(), $elementTexts = array())
 {
     $builder = new Builder_Collection(get_db());
     $builder->setRecordMetadata($metadata);
+    $builder->setElementTexts($elementTexts);
     return $builder->build();
 }
 

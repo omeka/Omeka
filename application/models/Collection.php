@@ -158,6 +158,10 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
             $post = $args['post'];
             $this->beforeSaveElements($post);
         }
+        
+        $booleanFilter = new Omeka_Filter_Boolean();
+        $this->public = $booleanFilter->filter($this->public);
+        $this->featured = $booleanFilter->filter($this->featured);
     }
     
     protected function afterSave()
