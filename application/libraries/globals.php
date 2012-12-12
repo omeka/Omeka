@@ -394,12 +394,6 @@ function is_admin_theme()
  */
 function get_search_record_types()
 {
-    // Apply the filters only once.
-    static $searchRecordTypes = null;
-    if ($searchRecordTypes) {
-        return $searchRecordTypes;
-    }
-    
     $searchRecordTypes = array(
         'Item'       => __('Item'), 
         'File'       => __('File'), 
