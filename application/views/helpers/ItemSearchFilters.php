@@ -95,8 +95,8 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
 
         $html = '';
         if (!empty($displayArray) || !empty($advancedArray)) {
-            $html .= '<div class="filters">';
-            $html .= '<ul id="filter-list">';
+            $html .= '<div id="item-filters">';
+            $html .= '<ul>';
             foreach($displayArray as $name => $query) {
                 $html .= '<li class="' . $name . '">' . ucfirst($name) . ': ' . $query . '</li>';
             }
