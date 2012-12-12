@@ -51,13 +51,13 @@ class Builder_Collection extends Omeka_Record_Builder_AbstractBuilder
      */    
     private function _replaceElementTexts()
     {
-        $item = $this->_record;
+        $collection = $this->_record;
         // If this option is set, it will loop through the $elementTexts provided,
         // find each one and manually update it (provided it exists).
         // The rest of the element texts will get added as per usual.
         foreach ($this->_elementTexts as $elementSetName => $textArray) {
             foreach ($textArray as $elementName => $elementTextSet) {
-                $etRecordSet = $item->getElementTexts($elementSetName, $elementName);
+                $etRecordSet = $collection->getElementTexts($elementSetName, $elementName);
                 foreach ($elementTextSet as $elementTextIndex => $textAttr) {
                     // If we have an existing ElementText record, use that
                     // instead of adding a new one.
@@ -69,8 +69,8 @@ class Builder_Collection extends Omeka_Record_Builder_AbstractBuilder
                     } else {
                         // Otherwise we should just append the new text to the 
                         // pre-existing ones.
-                        $elementRecord = $item->getElement($elementSetName, $elementName);
-                        $item->addTextForElement($elementRecord, $textAttr['text'], $textAttr['html']);
+                        $elementRecord = $collection->getElement($elementSetName, $elementName);
+                        $collection->addTextForElement($elementRecord, $textAttr['text'], $textAttr['html']);
                     }
                 }
             }
@@ -79,6 +79,8 @@ class Builder_Collection extends Omeka_Record_Builder_AbstractBuilder
        
     /**
      * Add elements associated with the collection.
+     *
+     * @param Omeka_Record_AbstractRecord $record The collection record
      */
     protected function _beforeBuild(Omeka_Record_AbstractRecord $record)
     {
