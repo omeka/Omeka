@@ -6,7 +6,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'settings')); ?>
 
 <?php echo flash(); ?>
 
-<form id="appearance-form" enctype="application/x-www-form-urlencoded" method="post">
+<form id="appearance-form" method="post">
 
 <section class="seven columns alpha">
         
