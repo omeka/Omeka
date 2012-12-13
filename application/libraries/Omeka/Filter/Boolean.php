@@ -18,7 +18,7 @@ class Omeka_Filter_Boolean implements Zend_Filter_Interface
      * Filter the value
      * 
      * @param mixed
-     * @return string "1" or "0"
+     * @return int 1 or 0
      */
     public function filter($value)
     {
