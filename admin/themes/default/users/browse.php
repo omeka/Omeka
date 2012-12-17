@@ -13,10 +13,14 @@ echo flash();
     <table id="users">
         <thead>
             <tr>
-                <th><?php echo __('Username') ?></th>
-                <th><?php echo __('Real Name'); ?></th>
-                <th><?php echo __('Email'); ?></th>
-                <th><?php echo __('Role'); ?></th>            
+            <?php $sortLinks = array(
+                    __('Username') => 'username',
+                    __('Real Name') => 'name',
+                    __('Email') => 'email',
+                    __('Role') => 'role'
+                    );
+            ?>
+            <?php echo browse_sort_links($sortLinks,  array('link_tag' => 'th scope="col"', 'list_tag' => '')); ?>            
             </tr>
         </thead>
         <tbody>
