@@ -94,7 +94,7 @@ echo flash();
         <div><?php echo output_format_list(); ?></div>
     </div>
 
-    <?php fire_plugin_hook('admin_items_show_sidebar', array('record' => $item, 'view' => $this)); ?>
+    <?php fire_plugin_hook('admin_items_show_sidebar', array('item' => $item, 'view' => $this)); ?>
 </section>
 
 <?php echo foot();?>
