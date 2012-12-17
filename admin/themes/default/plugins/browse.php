@@ -163,5 +163,5 @@ echo flash();
 <?php else: ?>
     <p><?php echo __('You do not have any plugins installed. Add them to the plugins directory to see them listed here.'); ?></p>
 <?php endif; ?>
-
+<?php fire_plugin_hook('admin_plugins_browse', array('plugins' => $plugins, 'view' => $this)); ?>
 <?php echo foot(); ?>

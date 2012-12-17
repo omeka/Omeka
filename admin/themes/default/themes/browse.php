@@ -43,5 +43,5 @@ foreach($themes as $theme):
 endforeach;
 ?>
 </div>
-
+<?php fire_plugin_hook('admin_themes_browse', array('themes' => $themes, 'view' => $this)); ?>
 <?php echo foot(); ?>

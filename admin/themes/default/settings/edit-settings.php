@@ -8,6 +8,7 @@ echo flash();
 <form method="post">
     <section class="seven columns alpha">
         <?php echo $this->form; ?>
+        <?php fire_plugin_hook('admin_settings_form', array('form' => $form, 'view' => $this)); ?>
     </section>
     <section class="three columns omega">
         <div id="save" class="panel">

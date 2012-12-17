@@ -49,6 +49,7 @@ echo flash();
                         );
                     ?>
                 </div>
+                <?php fire_plugin_hook('admin_items_form_collection', array('item' => $item, 'view' => $this)); ?>
             </div> <!-- end collection-form div -->
             <?php fire_plugin_hook("admin_items_panel_fields", array('view'=>$this, 'record'=>$item)); ?>
         </div>
