@@ -126,7 +126,7 @@ class Omeka_Form_Navigation extends Omeka_Form
                  . ' class="' 
                  . $checkboxClass 
                  . '">';
-        $html .= '<a href="' . $page->getHref() . '">' . html_escape($page->getLabel()) . '</a>';
+        $html .= html_escape($page->getLabel());
         $html .= '</div>';
         $html .= '<div class="drawer-contents">';
         $html .= '<label>' . __('Label') . '</label><input type="text" class="navigation-label" />';

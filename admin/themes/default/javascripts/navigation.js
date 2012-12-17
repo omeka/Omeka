@@ -156,7 +156,7 @@ Omeka.Navigation = {};
                 };
                 var n_id = 'navigation_main_nav_checkboxes_new_' + (new Date()).getTime();
                 var n_value = JSON.stringify(n_hidden_info);
-                var edit_nav_header_html = '<div class="sortable-item"><input type="hidden" name="' + n_id + '" value="0"><input type="checkbox" name="' + n_id + '" id="' + n_id + '" class="can_delete_nav_link"> <a href="' + n_uri + '">' + n_label + '</a></div>';
+                var edit_nav_header_html = '<div class="sortable-item"><input type="hidden" name="' + n_id + '" value="0"><input type="checkbox" name="' + n_id + '" id="' + n_id + '" class="can_delete_nav_link">' + n_label + '</div>';
                 var link_label_html = '<div><label class="main_link_label_label">' + Omeka.Navigation.labelText + '</label><input type="text" value="' + n_label + '" class="navigation-label" /></div>';
                 var link_uri_html = '<div><label class="main_link_uri_label">' + Omeka.Navigation.urlText + '</label><input type="text" value="' + n_uri + '" class="navigation-uri" /></div>';
                 var buttons_html = '<div class="main_link_buttons"></div>';
