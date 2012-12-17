@@ -3223,7 +3223,7 @@ function theme_header_background()
     if ($headerBg) {
         $storage = Zend_Registry::get('storage');
         $headerBg = $storage->getUri($storage->getPathByType($headerBg, 'theme_uploads'));
-        echo '<style type="text/css" media="screen">#header {'
+        return '<style type="text/css" media="screen">header {'
            . 'background:transparent url("' . $headerBg . '") top left no-repeat;'
            . '}</style>';
     }
