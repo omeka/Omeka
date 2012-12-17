@@ -3,7 +3,7 @@
     <footer class="container">
         <div class="ten columns offset-by-two">
         <?php fire_plugin_hook('admin_footer', array('view'=>$this)); ?>
-        <p class="left"><a href="http://www.omeka.org" target="_blank"><?php echo __('Powered by Omeka') ?></a> | <a href="https://omeka.readthedocs.org/en/latest/index.html" target="_blank"><?php echo __('Documentation'); ?></a> | <a href="http://omeka.org/forums/" target="_blank"><?php echo __('Support Forums'); ?></a></p>
+        <p class="left"><a href="http://www.omeka.org" target="_blank"><?php echo __('Powered by Omeka') ?></a> | <a href="http://omeka.org/c/index.php?title=Working_with_Omeka_Admin_2.0" target="_blank"><?php echo __('Documentation'); ?></a> | <a href="http://omeka.org/forums/" target="_blank"><?php echo __('Support Forums'); ?></a></p>
         
         <p class="right"><?php echo __('Version %s', OMEKA_VERSION); ?>
         <?php if (get_option('display_system_info') && is_allowed('SystemInfo', 'index')): ?>
