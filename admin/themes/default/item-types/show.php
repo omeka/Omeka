@@ -42,6 +42,7 @@ echo flash();
         <h2><?php echo __('Total Number of Items'); ?></h2>
         <p><?php echo link_to_items_with_item_type(); ?></p>
     </div>
+    <?php fire_plugin_hook('admin_item_types_show', array('item_type' => $item_type, 'view' => $this)); ?>
 </section>
 
 <section class="three columns omega">
@@ -54,5 +55,4 @@ echo flash();
     <?php endif; ?>
     </div>
 </section>
-<?php fire_plugin_hook('admin_item_types_show', array('item_type' => $item_type, 'view' => $this)); ?>
 <?php echo foot();?>
