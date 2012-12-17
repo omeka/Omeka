@@ -11,16 +11,16 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'settings')); ?>
 <?php echo common('appearance-nav'); ?>
 <?php echo flash(); ?>
 <section class="seven columns alpha">
-    <p class="explanation"><?php echo __('Check the links you would like to display ' 
-    . 'in the main navigation. You can click and drag the links into your preferred ' 
+    <p class="explanation"><?php echo __('Check the links you wish to display ' 
+    . 'in the main navigation. Click and drag the links into the preferred ' 
     . 'display order.'); ?></p>
     <?php echo $this->form->displayNavigationLinks(); ?>
     <?php echo $this->form->getElement(Omeka_Form_Navigation::HIDDEN_ELEMENT_ID); ?>
         <div class="add-new"><?php echo __('Add a Link to the Navigation'); ?></div>
         <div class="drawer-contents">
-            <label for="new_nav_link_label"><?php echo __('Link Label'); ?></label>
+            <label for="new_nav_link_label"><?php echo __('Label'); ?></label>
             <input type="text" id="new_nav_link_label" name="new_nav_link_label" />
-            <label for="new_nav_link_uri"><?php echo __('Link URI'); ?></label>
+            <label for="new_nav_link_uri"><?php echo __('URL'); ?></label>
             <input type="text" id="new_nav_link_uri" name="new_nav_link_uri" />
             <a href="" id="new_nav_link_button_link" class="blue button"><?php echo __('Add Link'); ?></a>
         </div>
@@ -33,6 +33,10 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'settings')); ?>
 </section>
 </form>
 <script type="text/javascript">
+    Omeka.Navigation.labelText = <?php echo js_escape(__('Label')); ?>;
+    Omeka.Navigation.urlText = <?php echo js_escape(__('URL')); ?>;
+    Omeka.Navigation.visitText = <?php echo js_escape(__('View Public Page')); ?>;
+    Omeka.Navigation.deleteText = <?php echo js_escape(__('Delete')); ?>;
     Omeka.addReadyCallback(Omeka.Navigation.updateNavLinkEditForms);
     Omeka.addReadyCallback(Omeka.Navigation.addNewNavLinkForm);
     Omeka.addReadyCallback(Omeka.Navigation.updateForNewLinks);

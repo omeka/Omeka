@@ -10,9 +10,9 @@ echo flash();
         <h2><?php echo __('Editing Tags'); ?></h2>
         
         <ol>
-            <li><?php echo __('The numbers of items with this tag. Click the number to see all items with this tag.'); ?></li>
-            <li><?php echo __('To edit the name of the tag, click the name and start typing. Clicking away will cancel the edit. Hitting "return" when finished editing will save the new tag name.'); ?></li>
-            <li><?php echo __('Click here to delete the tag. Deleting the tag will not delete the tagged items.'); ?></li>
+            <li><?php echo __('To view all items with a tag, click the number.'); ?></li>
+            <li><?php echo __('To edit the tag name, click the name and begin editing, and hit "enter" to save. To cancel an edit, click the ESC key or click away from the tag.'); ?></li>
+            <li><?php echo __('To delete a tag, click the X. Deleting a tag will not delete the tagged items.'); ?></li>
         </ol>
     </section>
 

@@ -100,7 +100,7 @@ Omeka.Navigation = {};
             var hiddenInfo = $.parseJSON($(this).val());
             var buttonsDiv = $(this).parent().next().find('div.main_link_buttons'); 
             if (!buttonsDiv.find('.navigation_main_list_visit').length) {
-                buttonsDiv.append('<a class="navigation_main_list_visit blue button" href="' + hiddenInfo.uri + '">Visit</a>');
+                buttonsDiv.append('<a class="navigation_main_list_visit blue button" href="' + hiddenInfo.uri + '">' + Omeka.Navigation.visitText + '</a>');
                 buttonsDiv.find('.navigation_main_list_visit').click(function (event) {
                     event.preventDefault();
                     var url = $(this).parent().parent().find('.navigation-uri').val();
@@ -114,7 +114,7 @@ Omeka.Navigation = {};
         $('input.can_delete_nav_link').each(function () {
             var buttonsDiv = $(this).parent().next().find('div.main_link_buttons'); 
             if (!buttonsDiv.children('a[class="navigation_main_list_delete red button"]').length) {
-                buttonsDiv.append('<a class="navigation_main_list_delete red button" href="">Delete</a>');
+                buttonsDiv.append('<a class="navigation_main_list_delete red button" href="">' + Omeka.Navigation.deleteText + '</a>');
                 buttonsDiv.children('.navigation_main_list_delete').click(function (event) {
                     event.preventDefault();
                     var disabledAttr = $(this).attr('disabled');
@@ -157,8 +157,8 @@ Omeka.Navigation = {};
                 var n_id = 'navigation_main_nav_checkboxes_new_' + (new Date()).getTime();
                 var n_value = JSON.stringify(n_hidden_info);
                 var edit_nav_header_html = '<div class="sortable-item"><input type="hidden" name="' + n_id + '" value="0"><input type="checkbox" name="' + n_id + '" id="' + n_id + '" class="can_delete_nav_link"> <a href="' + n_uri + '">' + n_label + '</a></div>';
-                var link_label_html = '<div><label class="main_link_label_label">Label</label><input type="text" value="' + n_label + '" class="navigation-label" /></div>';
-                var link_uri_html = '<div><label class="main_link_uri_label">URI</label><input type="text" value="' + n_uri + '" class="navigation-uri" /></div>';
+                var link_label_html = '<div><label class="main_link_label_label">' + Omeka.Navigation.labelText + '</label><input type="text" value="' + n_label + '" class="navigation-label" /></div>';
+                var link_uri_html = '<div><label class="main_link_uri_label">' + Omeka.Navigation.urlText + '</label><input type="text" value="' + n_uri + '" class="navigation-uri" /></div>';
                 var buttons_html = '<div class="main_link_buttons"></div>';
                 var edit_nav_body_html = '<div class="drawer-contents">' + link_label_html + link_uri_html + buttons_html + '</div>';
 

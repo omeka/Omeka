@@ -7,7 +7,10 @@ echo flash();
 <form method="post" id="edit-item-type-elements">
     <section class="seven columns alpha">
         <p class="explanation">
-            <?php echo __('You can customize the element descriptions below. You can order the elements by editing a specific item type.'); ?>
+        <?php
+        echo __('Customize the element descriptions below. To re-order the elements, %s.',
+            '<a href="' . url('item-types') . '">' . __('edit a specific item type') . '</a>');
+        ?>
         </p>
         <p><?php echo __($element_set->description); ?></p>
         <input type="hidden" name="elements-to-delete" id="elements-to-delete" value="" />

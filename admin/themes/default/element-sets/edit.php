@@ -13,32 +13,8 @@ echo flash();
     <section class="seven columns alpha">
         <h2><?php echo __($element_set->name); ?></h2>
 
-    <?php if (ElementSet::ITEM_TYPE_NAME == $element_set->name): ?>
         <p class="explanation">
-            <?php echo __('You can customize the element descriptions below. You can order the elements by editing a specific item type.'); ?>
-        </p>
-        <p><?php echo __($element_set->description); ?></p>
-        <input type="hidden" name="elements-to-delete" id="elements-to-delete" value="" />
-        <ul class="ui-sortable item-type-metadata">
-        <?php foreach ($element_set->getElements() as $element): ?>
-            <li class="element">
-                <div class="sortable-item">
-                    <?php echo __($element->name); ?>
-                    <a href="#" class="undo-delete"><?php echo __('Undo'); ?></a>
-                    <a href="#" class="delete-element"><?php echo __('Delete'); ?></a>
-                    <?php echo $this->formHidden("elements[{$element->id}][delete]"); ?>
-                </div>
-                <div class="drawer-contents">
-                    <label for="<?php echo "elements[{$element->id}][description]"; ?>"><?php echo __('Description'); ?></label>
-                    <?php echo $this->formTextarea("elements[{$element->id}][description]", $element->description, array('rows' => '3')); ?>
-                </div>
-            </li>
-        <?php endforeach; ?>
-        </ul>
-        
-    <?php else: ?>
-        <p class="explanation">
-            <?php echo __('You can click and drag the elements into your preferred display order. Click the right arrows to add customized comments to elements.'); ?>
+            <?php echo __('Click and drag the elements into the preferred display order. Click the right arrows to add customized comments to element descriptions.'); ?>
         </p>
         <p><?php echo __($element_set->description); ?></p>
         <ul class="sortable">
@@ -56,7 +32,6 @@ echo flash();
             </li>
         <?php endforeach; ?>
         </ul>
-    <?php endif; ?>
     </section>
 
     <section class="three columns omega">

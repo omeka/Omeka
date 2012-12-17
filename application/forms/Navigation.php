@@ -129,8 +129,8 @@ class Omeka_Form_Navigation extends Omeka_Form
         $html .= '<a href="' . $page->getHref() . '">' . html_escape($page->getLabel()) . '</a>';
         $html .= '</div>';
         $html .= '<div class="drawer-contents">';
-        $html .= '<label>Label</label><input type="text" class="navigation-label" />';
-        $html .= '<label>URI</label><input type="text" class="navigation-uri" />';
+        $html .= '<label>' . __('Label') . '</label><input type="text" class="navigation-label" />';
+        $html .= '<label>' . __('URL') . '</label><input type="text" class="navigation-uri" />';
         $html .= '<div class="main_link_buttons"></div>';
         $html .= '</div>';
         $html .= '</div>';
