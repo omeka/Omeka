@@ -10,8 +10,6 @@ echo head(array('title' => $userTitle, 'bodyclass' => 'themes'));
 echo flash();
 ?>
 
-<h1><?php echo $userTitle; ?></h1>
-
 <?php if (is_allowed('Users', 'edit')): ?>
 <p id="edit-item" class="edit-button"><?php 
 echo link_to($user, 'edit', __('Edit this User'), array('class'=>'edit')); ?></p>   
