@@ -1081,6 +1081,10 @@ header nav {
             margin-top: 0;
         }
         
+#content section:first-of-type {
+    min-height: 1px;
+}
+        
 .panel {
     width: 100%;
     background-color: rgb(255,255,255);
@@ -1342,6 +1346,10 @@ header nav {
 
 .plugins.browse table form {
     display: inline-block;
+}
+
+.plugins.browse h3:first-of-type {
+    margin-top: 0;
 }
 
 .plugins.browse table a.button, .plugins.browse table input[type=submit], .plugins.browse table button {
