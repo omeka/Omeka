@@ -64,10 +64,10 @@ Omeka.Navigation = {};
         );
         
         // add links
-        $('div.sortable-item input[type="checkbox"]').each(function() {
+        $('.main_link').each(function() {
             var navLink = $(this).next(),
-                value = navLink.attr('href'),
-                label = navLink.text();
+                value = $(this).find('.navigation-uri').val(),
+                label = $(this).find('.navigation-label').val();
             select.append(
                 $('<option>').attr('value', value).text(label)
             );
