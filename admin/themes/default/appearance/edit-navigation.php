@@ -24,6 +24,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'settings')); ?>
             <input type="text" id="new_nav_link_uri" name="new_nav_link_uri" />
             <a href="" id="new_nav_link_button_link" class="blue button"><?php echo __('Add Link'); ?></a>
         </div>
+    <?php fire_plugin_hook('admin_appearance_navigation_form', array('form' => $form, 'view' => $this)); ?>
 </section>
 <section class="three columns omega">
     <div id="save" class="panel">

@@ -40,6 +40,7 @@ echo flash();
                             <li><?php echo link_to_collection(__('Edit'), array('class'=>'edit'), 'edit'); ?></li>
                         </ul>
                         <?php endif; ?>
+                        <?php fire_plugin_hook('admin_collections_browse_each', array('collection' => $collection, 'view' => $this)); ?>
                     </td>
                     <td>
                         <?php if ($collection->hasContributor()): ?> 

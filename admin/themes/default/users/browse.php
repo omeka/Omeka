@@ -36,6 +36,7 @@ echo flash();
                     <li><?php echo link_to($user, 'delete-confirm', __('Delete'), array('class'=>'delete')); ?></li>
                     <?php endif; ?>
                 </ul>
+                <?php fire_plugin_hook('admin_users_browse_each', array('user' => $user, 'view' => $this)); ?>
                </td>
                 <td><?php echo html_escape($user->name); ?></td>
                 <td><?php echo html_escape($user->email); ?></td>
@@ -46,4 +47,5 @@ echo flash();
 </table>
 <div class="pagination"><?php echo pagination_links(); ?></div>
 </form>
+<?php fire_plugin_hook('admin_users_browse', array('users' => $users, 'view' => $this)); ?>
 <?php echo foot();?>

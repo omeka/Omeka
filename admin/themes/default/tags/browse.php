@@ -43,6 +43,7 @@ echo flash();
             </li>
         <?php endforeach; ?>
         </ul>
+        <?php fire_plugin_hook('admin_tags_browse', array('tags' => $tags, 'view' => $this)); ?>
     </section>
 <?php else: ?>
     <p><?php echo __('There are no tags to display. You must first tag some items.'); ?></p>

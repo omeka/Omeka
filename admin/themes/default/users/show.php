@@ -23,5 +23,5 @@ echo link_to($user, 'edit', __('Edit this User'), array('class'=>'edit')); ?></p
 <p><?php echo html_escape($user->name); ?></p>
 <h2><?php echo __('Email'); ?></h2>
 <p><?php echo html_escape($user->email); ?></p>
-    
+<?php fire_plugin_hook('admin_users_show', array('user' => $user, 'view' => $this)); ?>
 <?php echo foot();?>

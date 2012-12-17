@@ -26,10 +26,12 @@ echo flash();
                 <div class="drawer-contents">
                     <label for="<?php echo "elements[{$element->id}][description]"; ?>"><?php echo __('Description'); ?></label>
                     <?php echo $this->formTextarea("elements[{$element->id}][description]", $element->description, array('rows' => '3')); ?>
+                    <?php fire_plugin_hook('admin_settings_item_type_form_each', array('element_set' => $element_set, 'element' => $element, 'view' => $this)); ?>
                 </div>
             </li>
         <?php endforeach; ?>
         </ul>
+        <?php fire_plugin_hook('admin_settings_item_type_form', array('element_set' => $element_set, 'view' => $this)); ?>
      </section>
     <section class="three columns omega">
         <div id="save" class="panel">

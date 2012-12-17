@@ -17,3 +17,4 @@
 <div id="type-metadata-form">
 <?php echo common('change-type', compact('item'), 'items'); ?>
 </div>
+<?php fire_plugin_hook('admin_items_form_item_types', array('item' => $item, 'view' => $this)); ?>
