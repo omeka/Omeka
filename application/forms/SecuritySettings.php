@@ -30,7 +30,7 @@ class Omeka_Form_SecuritySettings extends Omeka_Form
         $this->addElement('textarea', Omeka_Validate_File_Extension::WHITELIST_OPTION,
             array(
                 'label' => __('Allowed File Extensions'),
-                'description' => __('List of allowed extensions for file uploads.'),
+                'description' => __('List of allowed extensions for file uploads'),
                 'value' => get_option(Omeka_Validate_File_Extension::WHITELIST_OPTION),
                 'cols'=>50, 
                 'rows'=>5
@@ -50,7 +50,7 @@ class Omeka_Form_SecuritySettings extends Omeka_Form
         $this->addElement('text', Omeka_Captcha::PUBLIC_KEY_OPTION,
             array(
                 'label' => __('ReCaptcha Public Key'),
-                'description' => __('Public key from recaptcha.net. Both this and the private key must be filled in to secure public forms.'),
+                'description' => __('Enter public key from recaptcha.net. Both this and the private key must be filled in to secure public forms.'),
                 'value' => get_option(Omeka_Captcha::PUBLIC_KEY_OPTION)
             )
         );
@@ -58,7 +58,7 @@ class Omeka_Form_SecuritySettings extends Omeka_Form
         $this->addElement('text', Omeka_Captcha::PRIVATE_KEY_OPTION,
             array(
                 'label' => __('ReCaptcha Private Key'),
-                'description' => __('Private key from recaptcha.net. Both this and the public key must be filled in to secure public forms.'),
+                'description' => __('Enter private key from recaptcha.net. Both this and the public key must be filled in to secure public forms.'),
                 'value' => get_option(Omeka_Captcha::PRIVATE_KEY_OPTION)
             )
         );
@@ -72,7 +72,7 @@ class Omeka_Form_SecuritySettings extends Omeka_Form
         $this->addElement('textarea', 'html_purifier_allowed_html_elements', array(
             'value' => get_option('html_purifier_allowed_html_elements'),
             'label' => __('Allowed HTML Elements'),
-            'description' => __('List of allowed HTML elements in form input.'),
+            'description' => __('List of allowed HTML elements in form input'),
             'cols' => 50, 
             'rows' =>  5
         ));
@@ -80,7 +80,7 @@ class Omeka_Form_SecuritySettings extends Omeka_Form
         $this->addElement('textarea', 'html_purifier_allowed_html_attributes', array(
             'value' => get_option('html_purifier_allowed_html_attributes'),
             'label' => __('Allowed HTML Attributes'),
-            'description' => __('List of allowed HTML attributes in form input.'),
+            'description' => __('List of allowed HTML attributes in form input'),
             'cols' => 50, 
             'rows' => 5
         ));
