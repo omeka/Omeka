@@ -11,7 +11,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'settings')); ?>
 <?php echo common('appearance-nav'); ?>
 <?php echo flash(); ?>
 <section class="seven columns alpha">
-    <p class="explanation"><?php echo __('Check the links you wish to display ' 
+    <p class="explanation"><?php echo __('Check the links to display them ' 
     . 'in the main navigation. Click and drag the links into the preferred ' 
     . 'display order.'); ?></p>
     <?php echo $this->form->displayNavigationLinks(); ?>
