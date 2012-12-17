@@ -984,7 +984,7 @@ header nav {
 
     .drawer-contents .button { margin-bottom: 0; }
 
-    .drawer-contents :first-child { 
+    .drawer-contents > :first-child { 
         margin-top: 0;
         padding-top: 0; 
     }
