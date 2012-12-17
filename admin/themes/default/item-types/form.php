@@ -9,7 +9,7 @@ jQuery(document).ready(function () {
 });
 </script>
 
-<div class="seven columns alpha">
+<section class="seven columns alpha">
     <fieldset id="type-information">
         <h2><?php echo __('Item Type Information'); ?></h2>
         <p id="required-note">* <?php echo __('Required Fields'); ?></p>
@@ -93,4 +93,4 @@ jQuery(document).ready(function () {
     </fieldset>
 
     <?php fire_plugin_hook('admin_item_types_form', array('item_type' => $item_type, 'view' => $this)); ?>
-</div>
+</section>

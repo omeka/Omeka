@@ -26,8 +26,8 @@ echo flash();
                 <?php echo element_set_form($file, $elementSet->name); ?>
             </fieldset>
             <?php endforeach; ?>
-            <?php fire_plugin_hook('admin_files_form', array('file' => $file, 'view' => $this)); ?>
         </div> <!-- end file-metadata div -->
+        <?php fire_plugin_hook('admin_files_form', array('file' => $file, 'view' => $this)); ?>
     </section>
 
     <section class="three columns omega">
