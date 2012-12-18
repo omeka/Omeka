@@ -18,7 +18,7 @@ INSERT INTO `%PREFIX%elements` VALUES
 (4, 3, NULL, 'Location', 'The location of the interview', NULL),
 (5, 3, NULL, 'Transcription', 'Any written text transcribed from a sound', NULL),
 (6, 3, NULL, 'Local URL', 'The URL of the local directory containing all assets of the website', NULL),
-(7, 3, NULL, 'Original Format', 'If the image is of an object, state the type of object, such as painting, sculpture, paper, photo, and additional data', NULL),
+(7, 3, NULL, 'Original Format', 'The type of object, such as painting, sculpture, paper, photo, and additional data', NULL),
 (10, 3, NULL, 'Physical Dimensions', 'The actual physical size of the original image', NULL),
 (11, 3, NULL, 'Duration', 'Length of time involved (seconds, minutes, hours, days, class periods, etc.)', NULL),
 (12, 3, NULL, 'Compression', 'Type/rate of compression for moving image file (i.e. MPEG-4)', NULL),
