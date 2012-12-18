@@ -108,7 +108,6 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
 
         unset($this->bootstrap);
         unset($this->application);
-        echo memory_get_usage() . "\n";
         parent::tearDown();
     }
     
