@@ -212,6 +212,7 @@ mail.transport.type = "Sendmail"
 ; storage.adapterOptions.secretAccessKey =
 ; storage.adapterOptions.bucket =
 ; storage.adapterOptions.expiration = 10 ; URL expiration time (in minutes)
+; storage.adapterOptions.endpoint = ; Custom S3 endpoint (optional)
 
 ;;;;;;;;;;;;
 ; Security ;

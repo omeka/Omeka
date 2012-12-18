@@ -51,6 +51,22 @@ class Omeka_Storage_Adapter_ZendS3Test extends PHPUnit_Framework_TestCase
         new Omeka_Storage_Adapter_ZendS3($options);
     }
 
+    public function testNoEndpoint()
+    {
+        $options = $this->_options;
+        $adapter = new Omeka_Storage_Adapter_ZendS3($options);
+        $this->assertEquals('http://s3.amazonaws.com/my-bucket%2Ftest', $adapter->getUri('test'));
+    }
+
+    public function testEndpoint()
+    {
+        $endpoint = 'http://s3.example.com';
+        $options = $this->_options;
+        $options['endpoint'] = $endpoint;
+        $adapter = new Omeka_Storage_Adapter_ZendS3($options);
+        $this->assertEquals($endpoint . '/my-bucket%2Ftest', $adapter->getUri('test'));
+    }
+
     /**
      * @dataProvider getUriOptionsProvider
      */
