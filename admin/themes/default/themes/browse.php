@@ -32,8 +32,8 @@ foreach($themes as $theme):
             </div>
             <input type="submit" name="submit" class="use-theme green button" value="<?php echo __('Use this theme'); ?>" />
             <div class="meta">
-                <h3><a href="<?php echo html_escape($theme->website); ?>" target="_blank"><?php echo html_escape($theme->title); ?></a></h3>
-                <p class="author"><?php echo __('By %s', html_escape($theme->author)); ?></p>
+                <h3><?php echo html_escape($theme->title); ?></h3>
+                <p class="author"><a href="<?php echo html_escape($theme->website); ?>" target="_blank"><?php echo __('By %s', html_escape($theme->author)); ?></a></p>
             </div>
             <?php fire_plugin_hook('admin_themes_browse_each', array('theme' => $theme, 'view' => $this)); ?>
         </div>
