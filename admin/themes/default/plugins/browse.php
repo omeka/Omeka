@@ -38,6 +38,8 @@ echo flash();
             echo __('Inactive');
         elseif ('uninstalled' == $key):
             echo __('Uninstalled');
+        elseif ('needs-attention' == $key):
+            continue;
         endif;
         ?>
         </h3>
