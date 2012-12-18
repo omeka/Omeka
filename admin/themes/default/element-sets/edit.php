@@ -28,10 +28,12 @@ echo flash();
                 <?php echo __($element->description); ?>
                 <label for="<?php echo "elements[{$element->id}][comment]"; ?>"><?php echo __('Comment'); ?></label>
                 <?php echo $this->formTextarea("elements[{$element->id}][comment]", $element->comment, array('rows' => '3')); ?>
+                <?php fire_plugin_hook('admin_element_sets_form_each', array('element_set' => $element_set, 'element' => $element, 'view' => $this)); ?>
             </div>
             </li>
         <?php endforeach; ?>
         </ul>
+        <?php fire_plugin_hook('admin_element_sets_form', array('element_set' => $element_set, 'view' => $this)); ?>
     </section>
 
     <section class="three columns omega">

@@ -26,6 +26,7 @@ echo head(array('title' => $pageTitle,'bodyclass' => 'item-types')); ?>
                     <li><a class="edit" href="<?php echo html_escape(url('item-types/edit/' . $item_type->id)); ?>"><?php echo __('Edit'); ?></a></li>
                 <?php endif; ?>        
                 </ul>
+                <?php fire_plugin_hook('admin_item_types_browse_each', array('item_type' => $item_type, 'view' => $this)); ?>
             </td>
             <td class="itemtype-description"><?php echo html_escape($item_type->description); ?></td>
             <td><?php echo link_to_items_with_item_type(); ?></td>

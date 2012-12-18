@@ -19,7 +19,7 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
 {
     const AWS_KEY_OPTION = 'accessKeyId';
     const AWS_SECRET_KEY_OPTION = 'secretAccessKey';
-    const REGION_OPTION = 'region';
+    const ENDPOINT_OPTION = 'endpoint';
     const BUCKET_OPTION = 'bucket';
     const EXPIRATION_OPTION = 'expiration';
 
@@ -53,15 +53,16 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
         if (!array_key_exists(self::BUCKET_OPTION, $options)) {
             throw new Omeka_Storage_Exception('You must specify an S3 bucket name to use the ZendS3 storage adapter.');
         }
-        
-        $region = @$options[self::REGION_OPTION];
 
         // Use Omeka_Http_Client to retry up to 3 times on timeouts
         $client = new Omeka_Http_Client;
         $client->setMaxRetries(3);
         Zend_Service_Amazon_S3::setHttpClient($client);
         
-        $this->_s3 = new Zend_Service_Amazon_S3($awsKey, $awsSecretKey, $region);
+        $this->_s3 = new Zend_Service_Amazon_S3($awsKey, $awsSecretKey);
+        if (!empty($options[self::ENDPOINT_OPTION])) {
+            $this->_s3->setEndpoint($options[self::ENDPOINT_OPTION]);
+        }
     }
 
     public function setUp()

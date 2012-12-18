@@ -29,6 +29,7 @@ echo flash();
                     <li><?php echo link_to($elementSet, 'delete-confirm', __('Delete'), array('class' => 'delete')); ?></li>
                     <?php endif; ?>
                 </ul>
+                <?php fire_plugin_hook('admin_element_sets_browse_each', array('element_set' => $elementSet, 'view' => $this)); ?>
             </td>
             <td>
                 <?php echo html_escape(__($elementSet->description)); ?>
@@ -37,4 +38,5 @@ echo flash();
     <?php endforeach; ?>
     </tbody>
 </table>
+<?php fire_plugin_hook('admin_element_sets_browse', array('element_sets' => $element_sets, 'view' => $this)); ?>
 <?php echo foot(); ?>

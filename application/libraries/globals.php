@@ -2588,7 +2588,7 @@ function public_nav_items(array $navArray = null, $maxDepth = 0)
                 );
             }
             $navArray[] = array(
-                'label' => __('Item Search'),
+                'label' => __('Search Items'),
                 'uri' => url('items/search')
             );
     }

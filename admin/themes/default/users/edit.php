@@ -17,6 +17,7 @@ echo head(array('title' => $userTitle, 'bodyclass' => 'users'));
     <?php endif; ?>
 
     <?php echo $this->passwordForm; ?>
+    <?php fire_plugin_hook('admin_users_form', array('user' => $user, 'form' => $form, 'view' => $this)); ?>
 </section>
 
 <?php echo foot();?>

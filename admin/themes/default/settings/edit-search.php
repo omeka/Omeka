@@ -33,6 +33,7 @@ echo flash();
                 . 'which records will be searchable.'); ?></p>
             </div>
         </div>
+        <?php fire_plugin_hook('admin_settings_search_form', array('view' => $this)); ?>
     </section>
     <section class="three columns omega">
         <div id="save" class="panel">

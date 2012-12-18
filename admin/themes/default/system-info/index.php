@@ -14,4 +14,5 @@ echo head(array('title' => $title, 'bodyclass' => 'system-info')); ?>
     <?php endforeach; ?>
 <?php endforeach; ?>
 </table>
+<?php fire_plugin_hook('admin_system_info', array('system_info' => $info, 'view' => $this)); ?>
 <?php echo foot();
