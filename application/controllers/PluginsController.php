@@ -231,6 +231,22 @@ class PluginsController extends Omeka_Controller_AbstractActionController
         // Prepare the plugins array for the view.
         $plugins = array();
         foreach ($allPlugins as $directoryName => $plugin) {
+            if(!$plugin->meetsOmekaMinimumVersion() ||
+               $plugin->hasNewVersion()) {
+               $plugins['needs-attention'][$directoryName] = $plugin;
+            }
+            $requiredPluginDirNames = $plugin->getRequiredPlugins();
+            $missingPluginNames = array();
+            
+            foreach($requiredPluginDirNames as $requiredPluginDirName) {
+                $requiredPlugin = $this->_pluginLoader->getPlugin($requiredPluginDirName);
+                if (!$requiredPlugin) {
+                    $plugins['needs-attention'][$directoryName] = $plugin;
+                } elseif (!$requiredPlugin->isLoaded()) {
+                    $plugins['needs-attention'][$directoryName] = $plugin;
+                }
+            }           
+             
             if ($plugin->isInstalled()) {
                 if ($plugin->isActive()) {
                     $plugins['active'][$directoryName] = $plugin;
@@ -246,7 +262,8 @@ class PluginsController extends Omeka_Controller_AbstractActionController
         $this->view->plugins = array(
             'active' => isset($plugins['active']) ? $plugins['active'] : array(), 
             'inactive' => isset($plugins['inactive']) ? $plugins['inactive'] : array(), 
-            'uninstalled' => isset($plugins['uninstalled']) ? $plugins['uninstalled'] : array(), 
+            'uninstalled' => isset($plugins['uninstalled']) ? $plugins['uninstalled'] : array(),
+            'needs-attention' => isset($plugins['needs-attention']) ? $plugins['needs-attention'] : array(),
         );
         $this->view->loader = $this->_pluginLoader;
         $this->view->plugin_count = count($allPlugins);
