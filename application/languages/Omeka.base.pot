@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. Dublin Core description
-msgid "The Dublin Core metadata element set. These elements are common to all Omeka records, including items, files, and collections. See http://dublincore.org/documents/dces/."
+msgid "The Dublin Core metadata element set is common to all Omeka records, including items, files, and collections. For more information see, http://dublincore.org/documents/dces/."
 msgstr ""
 
 #. Dublin Core: Title element name
@@ -34,7 +34,7 @@ msgid "Creator"
 msgstr ""
 
 #. Dublin Core: Creator element description
-msgid "An entity primarily responsible for making the resource."
+msgid "An entity primarily responsible for making the resource"
 msgstr ""
 
 #. Dublin Core: Subject element name
@@ -42,7 +42,7 @@ msgid "Subject"
 msgstr ""
 
 #. Dublin Core: Subject element description
-msgid "The topic of the resource."
+msgid "The topic of the resource"
 msgstr ""
 
 #. Dublin Core: Description element name
@@ -50,7 +50,7 @@ msgid "Description"
 msgstr ""
 
 #. Dublin Core: Description element description
-msgid "An account of the resource."
+msgid "An account of the resource"
 msgstr ""
 
 #. Dublin Core: Publisher element name
@@ -58,7 +58,7 @@ msgid "Publisher"
 msgstr ""
 
 #. Dublin Core: Publisher element description
-msgid "An entity responsible for making the resource available."
+msgid "An entity responsible for making the resource available"
 msgstr ""
 
 #. Dublin Core: Contributor element name
@@ -67,7 +67,7 @@ msgid "Contributor"
 msgstr ""
 
 #. Dublin Core: Contributor element description
-msgid "An entity responsible for making contributions to the resource."
+msgid "An entity responsible for making contributions to the resource"
 msgstr ""
 
 #. Dublin Core: Date element name
@@ -75,7 +75,7 @@ msgid "Date"
 msgstr ""
 
 #. Dublin Core: Date element description
-msgid "A point or period of time associated with an event in the lifecycle of the resource."
+msgid "A point or period of time associated with an event in the lifecycle of the resource"
 msgstr ""
 
 #. Dublin Core: Type element name
@@ -83,7 +83,7 @@ msgid "Type"
 msgstr ""
 
 #. Dublin Core: Type element description
-msgid "The nature or genre of the resource."
+msgid "The nature or genre of the resource"
 msgstr ""
 
 #. Dublin Core: Format element name
@@ -91,7 +91,7 @@ msgid "Format"
 msgstr ""
 
 #. Dublin Core: Format element description
-msgid "The file format, physical medium, or dimensions of the resource."
+msgid "The file format, physical medium, or dimensions of the resource"
 msgstr ""
 
 #. Dublin Core: Identifier element name
@@ -99,7 +99,7 @@ msgid "Identifier"
 msgstr ""
 
 #. Dublin Core: Identifier element description
-msgid "An unambiguous reference to the resource within a given context."
+msgid "An unambiguous reference to the resource within a given context"
 msgstr ""
 
 #. Dublin Core: Source element name
@@ -107,7 +107,7 @@ msgid "Source"
 msgstr ""
 
 #. Dublin Core: Source element description
-msgid "A related resource from which the described resource is derived."
+msgid "A related resource from which the described resource is derived"
 msgstr ""
 
 #. Dublin Core: Language element name
@@ -115,7 +115,7 @@ msgid "Language"
 msgstr ""
 
 #. Dublin Core: Language element description
-msgid "A language of the resource."
+msgid "A language of the resource"
 msgstr ""
 
 #. Dublin Core: Relation element name
@@ -123,7 +123,7 @@ msgid "Relation"
 msgstr ""
 
 #. Dublin Core: Relation element description
-msgid "A related resource."
+msgid "A related resource"
 msgstr ""
 
 #. Dublin Core: Coverage element name
@@ -131,7 +131,7 @@ msgid "Coverage"
 msgstr ""
 
 #. Dublin Core: Coverage element description
-msgid "The spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant."
+msgid "The spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant"
 msgstr ""
 
 #. Dublin Core: Rights element name
@@ -139,7 +139,7 @@ msgid "Rights"
 msgstr ""
 
 #. Dublin Core: Rights element description
-msgid "Information about rights held in and over the resource."
+msgid "Information about rights held in and over the resource"
 msgstr ""
 
 #. Item Type Metadata
