@@ -340,7 +340,7 @@ class Omeka_Form_Navigation extends Omeka_Form
                                 }
                             }
                         } catch (Omeka_Navigation_Page_Uri_Exception $e) {
-                            $this->addError(__('Invalid URI for "%s" navigation link:  "%s"', array($pageLink['label'],  $pageLink['uri'])));
+                            $this->addError(__('Invalid URI for "%s" navigation link:  "%s"', $pageLink['label'],  $pageLink['uri']));
                             $hasErrors = true;
                         }
                     }
