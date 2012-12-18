@@ -42,7 +42,6 @@ foreach($themes as $theme):
     endif;
 endforeach;
 ?>
-<div style="clear:both"><?php fire_plugin_hook('admin_themes_browse', array('themes' => $themes, 'view' => $this)); ?></div>
 </div>
-
+<div style="clear:both"><?php fire_plugin_hook('admin_themes_browse', array('themes' => $themes, 'view' => $this)); ?></div>
 <?php echo foot(); ?>
