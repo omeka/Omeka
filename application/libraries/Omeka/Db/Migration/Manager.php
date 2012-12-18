@@ -137,9 +137,16 @@ class Omeka_Db_Migration_Manager
     public function dbNeedsUpgrade()
     {
         $omekaVersion = get_option(self::VERSION_OPTION_NAME);
-        return !$omekaVersion ||
-            (version_compare($omekaVersion, OMEKA_VERSION, '<')
-            && $this->canUpgrade());
+        if (!$omekaVersion || version_compare($omekaVersion, OMEKA_VERSION, '<')) {
+            if ($this->canUpgrade()) {
+                return true;
+            } else {
+                // This version has no migrations, just update the stored version.
+                $this->finalizeDbUpgrade();
+            }
+        }
+
+        return false;
     }
 
     /**
