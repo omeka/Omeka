@@ -16,6 +16,7 @@
         <?php elseif (is_admin_theme()): ?>
             <p><a href="<?php echo url('settings/edit-search'); ?>"><?php echo __('Go to search settings to select record types to use.'); ?></a></p>
         <?php endif; ?>
+        <p><?php echo link_to_item_search(__('Advanced Search (Items only)')); ?>
     </fieldset>
     <?php endif; ?>
     <?php echo $this->formSubmit(null, $options['submit_value']); ?>
