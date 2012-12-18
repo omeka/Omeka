@@ -137,8 +137,8 @@ echo item_search_filters();
     <script type="text/javascript">
     Omeka.addReadyCallback(Omeka.ItemsBrowse.setupDetails, [
         <?php echo js_escape(__('Details')); ?>,
-        <?php echo js_escape(__('Show All Details')); ?>,
-        <?php echo js_escape(__('Hide All Details')); ?>
+        <?php echo js_escape(__('Show Details')); ?>,
+        <?php echo js_escape(__('Hide Details')); ?>
     ]);
     Omeka.addReadyCallback(Omeka.ItemsBrowse.setupBatchEdit);
     </script>
