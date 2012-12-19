@@ -907,7 +907,7 @@ header nav {
     border: 0;
     box-shadow: 0 0 0 transparent;
     display: block;
-    margin: 0 0 15px 0;
+    margin: 15px 0;
     border-radius: 2px;
 }
 
@@ -1396,9 +1396,6 @@ header nav {
     margin: 0;
 }
 
-.plugin-meta {
-    font-style: italic;
-}
 
 
 /* Browse Items  
@@ -1726,13 +1723,11 @@ header nav {
 
 .element-set-description {
     display: inline-block;
-    font-style: italic;
     margin: 0 0 40px 0;
 }
     
 .explanation {
     clear: both;
-    font-style: italic;
     margin: 0 0 10px 0;
 }
     
