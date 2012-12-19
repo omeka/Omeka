@@ -11,6 +11,7 @@ echo head(array('title' => $userTitle, 'bodyclass' => 'users'));
 
 <?php echo flash(); ?>
 <section class="seven columns alpha">
+    <p class='explanation'>* required field</p>
     <?php echo $this->form; ?>
     <?php if (is_allowed($user, 'delete')): ?>
     <?php echo link_to($user, 'delete-confirm', __('Delete'), array('class' => 'red button delete-confirm')); ?>

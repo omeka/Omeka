@@ -23,7 +23,7 @@ class Omeka_Form_ChangePassword extends Omeka_Form
         $this->addElement('password', 'current_password',
             array(
                 'label'         => __('Current Password'),
-                'description'   => __('Password must be at least 6 characters long'),
+                'description'   => __('Password must be at least 6 characters long.'),
                 'required'      => true,
                 'errorMessages' => array(__("Invalid current password")),
             )
@@ -33,7 +33,7 @@ class Omeka_Form_ChangePassword extends Omeka_Form
             array(
                 'label'         => __('New Password'),
                 'required'      => true,
-                'description'   => __('Password must be at least 6 characters long'),
+                'description'   => __('Password must be at least 6 characters long.'),
                 'validators'    => array(
                     array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' => 
                         array(
