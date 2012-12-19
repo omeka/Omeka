@@ -383,7 +383,7 @@ class DummyMixin extends Omeka_Record_Mixin_AbstractMixin
         return true;
     }
     
-    public function beforeSave()
+    public function beforeSave($args)
     {
         Omeka_RecordTest::addToEventStack('DummyMixin::beforeSave()');
     }

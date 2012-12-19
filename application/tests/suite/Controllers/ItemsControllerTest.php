@@ -21,7 +21,7 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
         $this->_authenticateUser($this->_getDefaultUser());
     }
 
-    public function dispatch($url, $callback = null)
+    public function dispatch($url = null, $callback = null)
     {
         if ($callback) {
             $callback = (array)$callback;

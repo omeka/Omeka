@@ -46,7 +46,7 @@ class MockProcessDispatcher extends Omeka_Job_Process_Dispatcher
     public static $user;
     public static $args;
 
-    public static function startProcess($processClass, $user, $args)
+    public static function startProcess($processClass, $user = null, $args = null)
     {
         self::$processStarted = true;
         self::$processClass = $processClass;

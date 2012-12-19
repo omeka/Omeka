@@ -22,7 +22,7 @@ class Controllers_AclTest extends Omeka_Test_AppTestCase
     public function setUp()
     {
         parent::setUp();
-        $this->aclHelper = Zend_Controller_Action_HelperBroker::getHelper('acl');
+        $this->aclHelper = Zend_Controller_Action_HelperBroker::getStaticHelper('acl');
     }
 
     public function assertPreConditions()
