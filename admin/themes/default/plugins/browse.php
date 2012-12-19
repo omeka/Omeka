@@ -4,15 +4,9 @@ echo head(array('title' => $pageTitle, 'bodyclass' => 'plugins browse'));
 echo flash();
 ?>
 
-<?php $topLink = false; include('quick-links.php'); ?>
-
 <?php if ($plugins): ?>
     <?php foreach ($plugins as $key => $value): ?>
-    <?php if($key != 'active'): ?>
-        <?php $topLink = true; include('quick-links.php'); ?>        
-    <?php endif; ?>
-        
-        <h3 id="<?php echo $key;?>" style="clear:both">
+        <h3>
         <?php
         if ('active' == $key):
             echo __('Active');
@@ -20,8 +14,6 @@ echo flash();
             echo __('Inactive');
         elseif ('uninstalled' == $key):
             echo __('Uninstalled');
-        elseif ( ('needs-attention' == $key) || ('new' == $key) ):
-            continue;
         endif;
         ?>
         </h3>
@@ -64,8 +56,8 @@ echo flash();
                 $cannotLoad = !empty($loadErrors);
                 $needsUpgrade = $plugin->hasNewVersion();
                 ?>
-                <tr id="<?php echo $pluginDirName; ?>" class="<?php echo (++$key % 2) ? 'odd' : 'even'; ?>">
-                    <td <?php if(in_array($pluginDirName, array_keys($plugins['needs-attention']) ) ) { echo "class='needs-attention'"; } ?> >
+                <tr class="<?php echo (++$key % 2) ? 'odd' : 'even'; ?>">
+                    <td>
                     <?php $displayName = $plugin->getDisplayName(); ?>
                     <?php if ($plugin->getLinkUrl()): ?>
                         <a href="<?php echo html_escape($plugin->getLinkUrl()); ?>" target="_blank"><?php echo html_escape($displayName); ?></a>
