@@ -1,5 +1,5 @@
 <?php
-$fileTitle = metadata('file', array('Dublin Core', 'Title')) ? strip_formatting(metadata('file', array('Dublin Core', 'Title'))) : metadata('file', 'original filename');
+$fileTitle = metadata('file', 'display title');
 
 if ($fileTitle != '') {
     $fileTitle = ': &ldquo;' . $fileTitle . '&rdquo; ';

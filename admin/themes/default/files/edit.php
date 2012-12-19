@@ -1,5 +1,5 @@
 <?php
-$fileTitle = metadata('file', 'original filename');
+$fileTitle = metadata('file', 'display title');
 if ($fileTitle != '') {
     $fileTitle = ': &quot;' . $fileTitle . '&quot; ';
 } else {

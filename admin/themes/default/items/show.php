@@ -18,7 +18,7 @@ echo flash();
         <div id="item-images">
         <?php foreach ($item->Files as $file) : ?>
             <div class="admin-thumb panel">
-                <a href="<?php echo url('files/show/' . $file->id); ?>" alt="<?php echo $file->filename; ?>"><?php echo file_image('square_thumbnail', array(), $file); ?></a>
+                <a href="<?php echo url('files/show/' . $file->id); ?>"><?php echo file_image('square_thumbnail', array(), $file); ?></a>
             </div>
         <?php endforeach; ?>
         </div>

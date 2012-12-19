@@ -799,14 +799,18 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         $alt = '';
         if (isset($props['alt'])) {
             $alt = $props['alt'];
-        } elseif ($fileDescription = metadata($file, array('Dublin Core', 'Description'))) {
-            $alt = $fileDescription;
-        } elseif ($fileTitle = metadata($file, array('Dublin Core', 'Title'))) {
+        } else if ($fileTitle = metadata($file, 'display title')) {
             $alt = $fileTitle;
-        } else if (isset($item)) {
-            $alt = metadata($item, array('Dublin Core', 'Title'));           
         }
         $props['alt'] = $alt;
+        
+        $title = '';
+        if (isset($props['title'])) {
+            $title = $props['title'];
+        } else {
+            $title = $alt;
+        }
+        $props['title'] = $title;
         
         // Build the img tag
         $html = '<img src="' . $uri . '" '.tag_attributes($props) . '/>' . "\n";

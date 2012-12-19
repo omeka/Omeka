@@ -56,6 +56,14 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
                 return $this->getWebPath('square_thumbnail');
             case 'permalink':
                 return absolute_url(array('controller' => 'files', 'action' => 'show', 'id' => $this->id));
+            case 'display_title':
+                $titles = $this->getElementTexts('Dublin Core', 'Title');
+                if ($titles) {
+                    $title = $titles[0]->text;
+                } else {
+                    $title = $this->original_filename;
+                }
+                return $title;
             default:
                 return parent::getProperty($property);
         }
