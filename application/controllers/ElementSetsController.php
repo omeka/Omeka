@@ -59,7 +59,7 @@ class ElementSetsController extends Omeka_Controller_AbstractActionController
                 foreach ($elements as $id => $element) {
                     $elementRecord = $db->getTable('Element')->find($id);
                     $elementRecord->comment = trim($element['comment']);
-                    $elementRecord->order = $element['order'];
+                    $elementRecord->order = $element['order'] ? $element['order'] : null;
                     $elementRecord->save();
                 }
                 $this->_helper->flashMessenger(__('The element set was successfully changed!'), 'success');
