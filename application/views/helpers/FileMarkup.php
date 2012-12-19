@@ -31,7 +31,6 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
      * @var array
      */
     static protected $_callbacks = array(
-        'application/ogg'   => 'ogg',
         'audio/ogg'         => 'ogg',
         'audio/x-ogg'       => 'ogg',
         'audio/aac'         => 'aac',
