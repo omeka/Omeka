@@ -27,6 +27,7 @@ class Omeka_Form_User extends Omeka_Form
         
         $this->addElement('text', 'username', array(
             'label'         => __('Username'),
+            'description'   => __('Username must use only letters and numbers and be 30 characters or fewer long.'),
             'required'      => true,
             'size'          => '30',
             'validators' => array(
@@ -77,6 +78,7 @@ class Omeka_Form_User extends Omeka_Form
         
         $this->addElement('text', 'name', array(
             'label' => __('Real Name'),
+            'description' => __('Name as it should be displayed on the site'),
             'size' => '30',
             'required' => true,
             'validators' => array(
@@ -124,6 +126,7 @@ class Omeka_Form_User extends Omeka_Form
         if ($this->_hasRoleElement) {
             $this->addElement('select', 'role', array(
                 'label' => __('Role'),
+                'description' => __("Roles describe the permissions a user has. See http://omeka.org/codex/User_Roles for details."),
                 'multiOptions' => get_user_roles(),
                 'required' => true
             ));
@@ -131,7 +134,8 @@ class Omeka_Form_User extends Omeka_Form
         
         if ($this->_hasActiveElement) {
             $this->addElement('checkbox', 'active', array(
-                'label' => __('Active?')
+                'label' => __('Active?'),
+                'description' => __('Inactive users cannot log in to the site.')
             ));
         }
         
