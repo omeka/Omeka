@@ -30,6 +30,33 @@ echo flash();
 
 <?php if ($plugins): ?>
     <?php foreach ($plugins as $key => $value): ?>
+    <?php if($key != 'active'): ?>
+    <div class="table-actions">
+        <?php if(isset($plugins['needs-attention'])) :?>
+        <ul class="quick-filter-wrapper">
+            <li><a href="#" tabindex="0"><?php echo __('Needs Action'); ?></a>
+            <ul class="dropdown">
+                <li><span class="quick-filter-heading"><?php echo __('Needs Action') ?></span></li>
+                <?php foreach($plugins['needs-attention'] as $id=>$plugin): ?>
+                <li><a href="#<?php echo $id; ?>"><?php echo $plugin->getDisplayName(); ?></a></li>
+                <?php endforeach; ?>
+            </ul>
+            </li>
+        </ul>    
+        <?php endif; ?>
+        <?php if(isset($plugins['active'])): ?>
+        <a href="#active" class="small green button"><?php echo __('Active'); ?></a>
+        <?php endif; ?>
+        <?php if(isset($plugins['inactive'])): ?>
+        <a href="#inactive" class="small blue button"><?php echo __('Inactive'); ?></a>
+        <?php endif; ?>
+        <?php if(isset($plugins['uninstalled'])): ?>
+        <a href="#uninstalled" class="small red button"><?php echo __('Uninstalled'); ?></a>
+        <?php endif; ?>
+        <a href="#">Top</a>
+    </div>
+        <?php endif; ?>
+    
         <h3 id="<?php echo $key;?>" style="clear:both">
         <?php
         if ('active' == $key):
