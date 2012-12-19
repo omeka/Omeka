@@ -231,10 +231,13 @@ class PluginsController extends Omeka_Controller_AbstractActionController
         // Prepare the plugins array for the view.
         $plugins = array();
         foreach ($allPlugins as $directoryName => $plugin) {
+            //put together what needs attention based on plugin and Omeka versions
             if(!$plugin->meetsOmekaMinimumVersion() ||
                $plugin->hasNewVersion()) {
                $plugins['needs-attention'][$directoryName] = $plugin;
             }
+            
+            //what needs attention based on dependencies
             $requiredPluginDirNames = $plugin->getRequiredPlugins();
             $missingPluginNames = array();
             
@@ -246,7 +249,18 @@ class PluginsController extends Omeka_Controller_AbstractActionController
                     $plugins['needs-attention'][$directoryName] = $plugin;
                 }
             }           
-             
+            
+            //needs attention based on recently uploaded
+            $fullPathToPlugin = PLUGIN_DIR . "/$directoryName";
+            $created = filectime($fullPathToPlugin);
+            
+            if( (time() - $created < 24*60*60) 
+                    && (!array_key_exists($directoryName, $plugins['needs-attention'])) 
+                    && (!$plugin->isInstalled())
+                ) {
+                $plugins['new'][$directoryName] = $plugin;
+            }
+            
             if ($plugin->isInstalled()) {
                 if ($plugin->isActive()) {
                     $plugins['active'][$directoryName] = $plugin;
@@ -264,6 +278,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
             'inactive' => isset($plugins['inactive']) ? $plugins['inactive'] : array(), 
             'uninstalled' => isset($plugins['uninstalled']) ? $plugins['uninstalled'] : array(),
             'needs-attention' => isset($plugins['needs-attention']) ? $plugins['needs-attention'] : array(),
+            'new' => isset($plugins['new']) ? $plugins['new'] : array(),                
         );
         $this->view->loader = $this->_pluginLoader;
         $this->view->plugin_count = count($allPlugins);
