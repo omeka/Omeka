@@ -783,7 +783,11 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
             return '';
         }
         
-        $uri = html_escape($file->getWebPath($format));
+        if ($file->hasThumbnail()) {
+            $uri = html_escape($file->getWebPath($format));
+        } else {
+            $uri = img('file.jpg');
+        }
         
         /** 
          * Determine alt attribute for images

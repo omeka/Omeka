@@ -16,7 +16,11 @@ echo flash();
     <?php echo flash(); ?>            
         <?php if (metadata('item', 'has files')): ?>
         <div id="item-images">
-        <?php echo files_for_item(array('imageSize' => 'square_thumbnail'), array('class' => 'admin-thumb panel')); ?> 
+        <?php foreach ($item->Files as $file) : ?>
+            <div class="admin-thumb panel">
+                <a href="<?php echo url('files/show/' . $file->id); ?>" alt="<?php echo $file->filename; ?>"><?php echo file_image('square_thumbnail', array(), $file); ?></a>
+            </div>
+        <?php endforeach; ?>
         </div>
         <?php endif; ?>
     <?php echo all_element_texts('item'); ?>
