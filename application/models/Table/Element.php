@@ -62,10 +62,11 @@ class Table_Element extends Omeka_Db_Table
         
     protected function orderElements($select)
     {
-        // ORDER BY e.order ASC, es.name ASC
+        // ORDER BY e.order ASC, ISNULL(e.order), es.name ASC
         // This SQL statement will return results ordered each element set,
         // and for each element set these will be in the proper designated order.
         $select->order('elements.element_set_id ASC');
+        $select->order('ISNULL(elements.order)');
         $select->order('elements.order ASC');
     }
     
