@@ -27,12 +27,12 @@ echo flash();
     <ul class="pagination">
         <?php if (link_to_previous_item_show()): ?>
         <li id="previous-item" class="previous">
-            <?php echo link_to_previous_item_show('Prev Item'); ?>
+            <?php echo link_to_previous_item_show(__('Prev Item')); ?>
         </li>
         <?php endif; ?>
         <?php if (link_to_next_item_show()): ?>
         <li id="next-item" class="next">
-            <?php echo link_to_next_item_show('Next Item'); ?>
+            <?php echo link_to_next_item_show(__('Next Item')); ?>
         </li>
         <?php endif; ?>
     </ul>

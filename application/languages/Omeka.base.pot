@@ -26,7 +26,7 @@ msgid "Title"
 msgstr ""
 
 #. Dublin Core: Title element description
-msgid "A name given to the resource."
+msgid "A name given to the resource"
 msgstr ""
 
 #. Dublin Core: Creator element name

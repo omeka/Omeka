@@ -12,7 +12,7 @@ jQuery(document).ready(function () {
 <section class="seven columns alpha">
     <fieldset id="type-information">
         <h2><?php echo __('Item Type Information'); ?></h2>
-        <p id="required-note">* <?php echo __('Required Fields'); ?></p>
+        <p class='explanation'>* <?php echo __('required field'); ?></p>
             
         <div class="field">
             <?php echo $this->form->getElement(Omeka_Form_ItemTypes::NAME_ELEMENT_ID); ?>
