@@ -56,12 +56,7 @@ Omeka.Navigation = {};
             selectedValue = select.val();
 
         // clear the links
-        $('#navigation_homepage_select option').remove();
-        
-        // add the default link
-        select.append(
-            $('<option>').attr('value', '/').text('[Default]')
-        );
+        $('#navigation_homepage_select option').slice(1).remove();
         
         // add links
         $('.main_link').each(function() {
