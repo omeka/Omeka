@@ -124,6 +124,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         if (!$item->public) {
             $this->setSearchTextPrivate();
         }
+        $this->setSearchTextTitle($this->original_filename);
     }
     
     /**
