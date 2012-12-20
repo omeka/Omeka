@@ -130,8 +130,8 @@ echo item_search_filters();
     <?php echo pagination_links(); ?>
 
     <div id="outputs">
-    <span class="outputs-label"><?php echo __('Outputs'); ?></span>
-    <?php echo output_format_list(); ?>
+    <span class="outputs-label"><?php echo __('Output Formats'); ?></span>
+    <?php echo output_format_list(false); ?>
     </div>
 
     <script type="text/javascript">

@@ -1831,7 +1831,7 @@ function get_current_action_contexts()
  * @param string $delimiter If the first argument is false, use this as a delimiter.
  * @return string|bool HTML
  */
-function output_format_list($list = true, $delimiter = ' | ')
+function output_format_list($list = true, $delimiter = ', ')
 {
     return get_view()->partial(
         'common/output-format-list.php', 
