@@ -31,6 +31,11 @@ echo flash();
         <?php endif; ?>
     </div>
     <?php endif; ?>
+    
+    <div id="item-metadata" class="panel">
+        <h4><?php echo __('Item'); ?></h4>
+        <p><?php echo link_to_item(null, array(), 'show', $file->getItem()); ?></p>
+    </div>
 
     <div id="format-metadata" class="panel">
         <h4><?php echo __('Format Metadata'); ?></h4>
