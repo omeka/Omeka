@@ -1505,9 +1505,9 @@ header nav {
     line-height: 1.5em;
 }
 
-.outputs-label { font-weight: bold; }
+#outputs .outputs-label { font-weight: bold; }
 
-    .outputs-label:after { content: ":"; }
+    #outputs .outputs-label:after { content: ":"; }
 
 #outputs #output-format-list {
     display: inline-block;
@@ -1517,8 +1517,8 @@ header nav {
 
     #outputs #output-format-list li { display: inline-block; }
         
-        #output-format-list li:after { content: ", "; }
-        #output-format-list li:last-child:after { content: ""; }
+        #outputs #output-format-list li:after { content: ", "; }
+        #outputs #output-format-list li:last-child:after { content: ""; }
 
 .quick-filter-wrapper {
     height: 25px;
