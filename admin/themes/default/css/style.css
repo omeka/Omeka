@@ -2145,7 +2145,7 @@ button.remove_search {
             -webkit-box-shadow: 0 0 5px rgba(0,0,0,.1);
             -moz-box-shadow: 0 0 5px rgba(0,0,0,.1);
             -o-box-shadow: 0 0 5px rgba(0,0,0,.1);
-        height: 200px;
+        height: 225px;
         overflow: hidden;
     }
     
@@ -2205,9 +2205,7 @@ button.remove_search {
         overflow: hidden;
     }
         
-    .theme .current-theme {
-        display: none;
-    }
+    .theme .current-theme { display: none; }
     
     .themes .theme h3 {
         font-family: "Arvo", sans-serif;
@@ -2229,9 +2227,14 @@ button.remove_search {
 
 /* Configure Theme
 ================================================== */
-.theme-file img {
-    max-width: 100%;
+
+.theme-file img { 
+    max-width: 100%; 
+    clear: both;
+    display: block;
 }
+
+.theme-file .button { float: left; }
 
 
 /* System Information
