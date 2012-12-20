@@ -80,7 +80,7 @@ Omeka.Navigation = {};
                     .click(function (event) {
                         event.preventDefault();
                         $(this).parent().next().toggle();
-                        $(this).toggleClass('closed');
+                        $(this).toggleClass('opened');
                     })
                     .mousedown(function (event) {
                         event.stopPropagation();
