@@ -4,8 +4,11 @@
     #Tables
     #Content Navigation
     #Content
+        #Site-Wide Search
         #Browse Items
-        #Login */
+        #Show ITems
+        #Login 
+        #Browse Themes*/
 
 
 /* Global
@@ -59,7 +62,7 @@ th a:after, th.desc a:after, th.asc a:after { content: ""; }
     border: 0;
     box-shadow: 0 0 0 transparent;
     padding: 0;
-    }
+}
 
 .section-title { 
     width: 100%;
@@ -90,9 +93,7 @@ th a:after, th.desc a:after, th.asc a:after { content: ""; }
     /* Browse Items
     ==================================================*/
     
-    .add-item {
-        float: left;
-        }
+    .add-item { float: left; }
         
     .browse-items #advanced-search-link { float: left; margin-bottom: 20px; }
         
@@ -118,13 +119,13 @@ th a:after, th.desc a:after, th.asc a:after { content: ""; }
         width: 100%;
         font-size: .875em;
         margin-bottom: 20px;
-        }
+    }
         
     .items-browse {
         text-align: center;
         float: left;
         margin: 0;
-        }
+    }
             
         .table-actions a.button, .table-actions input[type=submit] {
             height: auto !important;
@@ -171,14 +172,20 @@ th a:after, th.desc a:after, th.asc a:after { content: ""; }
     /* Login
     ==================================================*/
     
-        .login-content h1 {
-            font-size: 24px;
-            }
+        .login-content h1 { font-size: 24px; }
             
-        .login-content .inputs {
-            margin: 0 0 20px 0;
-            }
+        .login-content .inputs { margin: 0 0 20px 0; }
             
-        #username-label, #password-label {
-            text-align: left;
-            }
+        #username-label, #password-label { text-align: left; }
+            
+            
+    /* Browse Themes
+    ==================================================*/
+
+    #current-image .crop { height: 250px; }
+
+    .themes .theme .crop { height: 261px; }
+
+    .themes .theme { margin-bottom: 40px; }
+    
+    .themes .group .theme { height: auto; }

@@ -3,7 +3,9 @@
     #Global Navigation
     #Content Navigation
     #Content
-        #Login */
+        #Show Items
+        #Login 
+        #Browse Themes */
 
 
 /* Global Navigation
@@ -55,3 +57,12 @@ header ul {
             margin-top: 0;
             }
             
+
+    /* Browse Themes
+    ==================================================*/
+            
+    #current-image .crop { height: 175px; }
+
+    .themes .theme .crop { height: 186px; }
+
+    .themes .theme { margin-bottom: 40px; }

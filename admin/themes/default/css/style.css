@@ -623,11 +623,13 @@ footer {
     }
 
     #advanced-search:after {
-        content: "+";
+        content: "\22";
+        font-family: "icomoon";
+        font-size: 9px;
         display: block;
         text-indent: 0;
         text-align: center;
-        margin-top: -1.25em;
+        margin-top: -1.3125em;
     }
 
 .subhead {
@@ -2137,6 +2139,7 @@ button.remove_search {
     
     #current-image .crop {
         background-color: rgba(255,255,255,.3);
+        background-image: url('../images/theme-bg.png');
         border: 10px solid transparent;
         box-shadow: 0 0 5px rgba(0,0,0,.1);
             -webkit-box-shadow: 0 0 5px rgba(0,0,0,.1);
@@ -2196,7 +2199,7 @@ button.remove_search {
     }
         
     .themes .theme .crop {
-        height: 120px;
+        height: 136px;
         border: 1px solid #e7e7e7;
         margin: 0 0 10px 0;
         overflow: hidden;
@@ -2215,15 +2218,14 @@ button.remove_search {
         
     .themes .theme input[type=radio] { display: none; }
     
-.type {
-    font-weight: bold;
-}
+.type { font-weight: bold; }
     
 .use-theme {
     width: 100%;
     margin: 0;
     padding: 0 !important;
 }
+
 
 /* Configure Theme
 ================================================== */

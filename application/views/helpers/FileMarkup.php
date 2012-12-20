@@ -785,7 +785,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         if ($file->hasThumbnail()) {
             $uri = html_escape($file->getWebPath($format));
         } else {
-            $uri = img('file.jpg');
+            $uri = img('fallback-file.png');
         }
         
         /** 

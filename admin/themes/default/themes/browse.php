@@ -2,11 +2,17 @@
 echo head(array('title' => __('Appearance'), 'bodyclass' => 'themes'));
 echo common('appearance-nav');
 echo flash();
+
+if ($current->image) {
+    $currentScreenshot = html_escape($current->image);
+} else {
+    $currentScreenshot = img('fallback-theme.png');
+}
 ?>
 
 <div id="current-theme" class="theme">
     <div id="current-image" class="five columns alpha">
-        <div class="crop"><img src="<?php echo html_escape($current->image); ?>" alt="<?php echo __('Screenshot for %s Theme', html_escape($current->title)); ?>" /></div>
+        <div class="crop"><img src="<?php echo $currentScreenshot; ?>" alt="<?php echo __('Screenshot for %s Theme', html_escape($current->title)); ?>" /></div>
     <?php if($current->hasConfig): ?><a href="<?php echo html_escape(url('themes/config?name=' . $current->directory)); ?>" id="configure-button" class="blue button"><?php echo __('Configure Theme'); ?></a><?php endif; ?>
     </div>
     <div id="current-info" class="five columns omega">
@@ -23,12 +29,17 @@ echo flash();
 $i = 0;
 foreach($themes as $theme): 
     if ($current != $theme ):
+    if ($theme->image) {
+        $themeScreenshot = html_escape($theme->image);
+    } else {
+        $themeScreenshot = img('fallback-theme.png');
+    }
 ?>
     <form method="post" class="themeswitch" action="<?php echo $this->url(array('controller'=>'themes', 'action'=>'switch'), 'default'); ?>">
         <div class="theme<?php if($current == $theme) echo ' current-theme';?> three columns<?php if ($i++ % 3) echo ' alpha'; ?>">
             <input type="radio" name="public_theme" value="<?php echo html_escape($theme->directory); ?>" checked="checked" /> 
             <div class="crop">
-                <img src="<?php echo html_escape($theme->image); ?>" alt="<?php echo __('Screenshot for %s Theme', html_escape($theme->title)); ?>" />
+                <img src="<?php echo $themeScreenshot; ?>" alt="<?php echo __('Screenshot for %s Theme', html_escape($theme->title)); ?>" />
             </div>
             <input type="submit" name="submit" class="use-theme green button" value="<?php echo __('Use this theme'); ?>" />
             <div class="meta">

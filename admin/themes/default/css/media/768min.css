@@ -3,7 +3,8 @@
     #Content Navigation 
     #Content
         #Dashboard
-        #Browse Items */
+        #Browse Items
+        #Browse Themes */
 
 
 /* Form Elements
@@ -36,19 +37,21 @@ a.button.big, input[type=submit].big, button.big {
     /* Browse Items
     ==================================================*/
     
-    .item-actions, .pagination {
-        font-size: .875em;
-        }
+    .item-actions, .pagination { font-size: .875em; }
         
     .pagination { 
         clear: left;
         margin: 0 0 20px 0; 
     }
     
-    .item-info {
-        width: 40%;
-        }
+    .item-info { width: 40%; }
     
-    #quick-filter {
-        width: 80px;
-        }
+    #quick-filter { width: 80px; }
+        
+        
+    /* Browse Themes
+    ==================================================*/
+
+    #current-image .crop { height: 175px; }
+
+    .themes .theme .crop { height: 106px; }
