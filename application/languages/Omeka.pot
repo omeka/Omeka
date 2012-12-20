@@ -862,6 +862,7 @@ msgid "Embedded Metadata"
 msgstr ""
 
 #: admin/themes/default/files/show.php:82
+#: admin/themes/default/items/browse.php:133
 #: admin/themes/default/items/show.php:86
 msgid "Output Formats"
 msgstr ""
@@ -938,8 +939,9 @@ msgid "Item Type Information"
 msgstr ""
 
 #: admin/themes/default/item-types/form.php:15
+#: admin/themes/default/users/add.php:6 admin/themes/default/users/edit.php:14
 #: install/views/scripts/index/index.phtml:14
-msgid "Required Fields"
+msgid "required field"
 msgstr ""
 
 #: admin/themes/default/item-types/form.php:25
@@ -1136,10 +1138,6 @@ msgstr ""
 msgid "No Tags"
 msgstr ""
 
-#: admin/themes/default/items/browse.php:133
-msgid "Outputs"
-msgstr ""
-
 #: admin/themes/default/items/browse.php:139
 msgid "Details"
 msgstr ""
@@ -1334,8 +1332,7 @@ msgid "Next Item"
 msgstr ""
 
 #: admin/themes/default/items/show.php:71
-#: admin/themes/default/items/show.php:78
-msgid "View File Metadata"
+msgid "File Metadata"
 msgstr ""
 
 #: admin/themes/default/items/show.php:74
@@ -1344,6 +1341,10 @@ msgstr ""
 
 #: admin/themes/default/items/show.php:74
 msgid "There are no files for this item yet."
+msgstr ""
+
+#: admin/themes/default/items/show.php:78
+msgid "View File Metadata"
 msgstr ""
 
 #: admin/themes/default/items/show.php:91
@@ -1667,10 +1668,6 @@ msgstr ""
 
 #: admin/themes/default/users/add.php:2
 msgid "Add New User"
-msgstr ""
-
-#: admin/themes/default/users/add.php:6 admin/themes/default/users/edit.php:14
-msgid "required field"
 msgstr ""
 
 #: admin/themes/default/users/browse.php:2
