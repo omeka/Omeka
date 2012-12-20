@@ -33,20 +33,25 @@ class Omeka_Application_Resource_Locale extends Zend_Application_Resource_Locale
             $broker = $this->getBootstrap()->getResource('Pluginbroker');
             $localeName = $broker->applyFilters('locale', $localeName);
         }
+
+        if ($cache === null) {
+            $cache = 'locale';
+        }
+        
+        $this->setOptions(array('cache' => $cache));
         
         if ($localeName) {
-            if ($cache === null) {
-                $cache = 'locale';
-            }
-            
             $this->setOptions(array(
                 'default' => $localeName,
-                'cache' => $cache
             ));
             $this->_setTranslate($localeName, $cache);
         }
-        
-        return parent::init();
+
+        $locale = parent::init();
+        if ($cache === '') {
+            $locale->disableCache(true);
+        }
+        return $locale;
     }
     
     /**
@@ -61,8 +66,11 @@ class Omeka_Application_Resource_Locale extends Zend_Application_Resource_Locale
             'locale' => $locale,
             'adapter' => 'gettext',
             'disableNotices' => true,
-            'cache' => $cache
         );
+
+        if ($cache) {
+            $options['cache'] = $cache;
+        }
         
         $translatePath = LANGUAGES_DIR . "/$locale.mo";
         if (is_readable($translatePath)) {
