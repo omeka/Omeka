@@ -36,6 +36,7 @@
 
 @font-face {
     font-family: 'icomoon';
+    src:url('iconfonts/icomoon.eot');
     src:url('iconfonts/icomoon.eot?#iefix') format('embedded-opentype'),
         url('iconfonts/icomoon.woff') format('woff'),
         url('iconfonts/icomoon.ttf') format('truetype');
