@@ -228,26 +228,8 @@ class PluginsController extends Omeka_Controller_AbstractActionController
         // Filter the plugins.
         $allPlugins = apply_filters('browse_plugins', $allPlugins);
         
-        // Prepare the plugins array for the view.
-        $plugins = array();
-        foreach ($allPlugins as $directoryName => $plugin) {
-            if ($plugin->isInstalled()) {
-                if ($plugin->isActive()) {
-                    $plugins['active'][$directoryName] = $plugin;
-                } else {
-                    $plugins['inactive'][$directoryName] = $plugin;
-                }
-            } else {
-                $plugins['uninstalled'][$directoryName] = $plugin;
-            }
-        }
-        
         // Set the plugins in the display order.
-        $this->view->plugins = array(
-            'active' => isset($plugins['active']) ? $plugins['active'] : array(), 
-            'inactive' => isset($plugins['inactive']) ? $plugins['inactive'] : array(), 
-            'uninstalled' => isset($plugins['uninstalled']) ? $plugins['uninstalled'] : array(), 
-        );
+        $this->view->plugins = $allPlugins;
         $this->view->loader = $this->_pluginLoader;
         $this->view->plugin_count = count($allPlugins);
     }

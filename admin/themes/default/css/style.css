@@ -1396,6 +1396,41 @@ header nav {
     margin: 0;
 }
 
+.plugins.browse .action-links:after { 
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    clear: both;
+}
+
+.plugins.browse .plugin {
+    overflow: auto;
+    border-bottom: 1px solid #E4E5DE;
+    margin-left: -10px;
+    width: 100%;
+    padding: 20px 10px;
+}
+
+.plugins.browse #content > div:first-of-type { padding-top: 0; }
+
+.plugins.browse #content > div:last-of-type { padding-bottom: 0; border-bottom: 0; }
+
+.plugins.browse h2 { margin-bottom: 0; }
+
+.plugins.browse .details { list-style-type: none; padding-left: 10px; }
+
+.plugins.browse .plugin-metadata { margin: 0; font-weight: bold;}
+
+.plugins.browse .action-links li { display: inline-block; width: 32.3%; }
+
+.plugins.browse button, .plugins.browse a.button, .plugins.browse input[type=submit] { width: 100%; }
+
+.plugins.browse .action-links li:after { content: none; }
+
+.plugins.browse .cannotload { background-color: #FFE7E7; }
+
+.plugins.browse .upgrade { background-color: #E9FFC2; }
 
 
 /* Browse Items  
