@@ -39,11 +39,13 @@ echo flash();
         
     <div class="plugin <?php echo $attentionClass; ?>">
         <div class="six columns alpha">
+            <h2>
             <?php if ($plugin->getLinkUrl()): ?>
-                <h2><a href="<?php echo html_escape($plugin->getLinkUrl()); ?>" target="_blank"><?php echo html_escape($displayName); ?></a></h2>
+                <a href="<?php echo html_escape($plugin->getLinkUrl()); ?>" target="_blank"><?php echo html_escape($displayName); ?></a>
             <?php else: ?>
                 <?php echo html_escape($displayName); ?>
             <?php endif; ?>
+            </h2>
             <p class="plugin-metadata">
             <?php 
             if ($plugin->getIniVersion()):
