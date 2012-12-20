@@ -55,13 +55,6 @@ echo flash();
         <p><span class="label"><?php echo __('Featured'); ?>:</span> <?php echo ($item->featured) ? __('Yes') : __('No'); ?></p>
     </div>
 
-    <div class="info panel">
-        <h4><?php echo __('Bibliographic Citation'); ?></h4>
-        <div>
-            <p><?php echo metadata('item', 'citation', array('no_escape' => true));?></p>
-        </div>
-    </div>
-
     <div class="collection panel">
         <h4><?php echo __('Collection'); ?></h4>
         <div>
@@ -96,6 +89,13 @@ echo flash();
     <div class="panel">
         <h4><?php echo __('Output Formats'); ?></h4>
         <div><?php echo output_format_list(); ?></div>
+    </div>
+    
+    <div class="info panel">
+        <h4><?php echo __('Bibliographic Citation'); ?></h4>
+        <div>
+            <p><?php echo metadata('item', 'citation', array('no_escape' => true));?></p>
+        </div>
     </div>
 
     <?php fire_plugin_hook('admin_items_show_sidebar', array('item' => $item, 'view' => $this)); ?>
