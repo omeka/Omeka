@@ -148,8 +148,7 @@ Omeka.ItemTypes = {};
                 data: {elementCount: elementCount},
                 success: function (responseText) {
                     var response = responseText || 'no response text';
-                    var lastElement = $('.element').last();
-                    lastElement.after(response);
+                    $('.add-new').parent().before(response);
                 },
                 error: function () {
                     alert('Unable to get a new element.');
