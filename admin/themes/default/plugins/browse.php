@@ -29,7 +29,7 @@ echo flash();
             $loadErrors[] = __('%1$s requires the following plugins to be installed, activated, and loaded: %2$s', html_escape($displayName), implode(', ', $missingPluginNames));
         }
         if (!$loader->hasPluginBootstrap($plugin->name)) {
-            $loadErrors[] = __('There is no valid bootstrap file.');
+            $loadErrors[] = __('This is not a valid plugin.');
         }
         $cannotLoad = !empty($loadErrors);
         $needsUpgrade = $plugin->hasNewVersion();
