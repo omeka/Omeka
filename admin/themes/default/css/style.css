@@ -1886,7 +1886,7 @@ ul#section-nav, #section-nav ul {
     display: inline-block;
     width: 166px;
     height: 70px;
-    background:url('../images/tag-desc.jpg');
+    background:url('../images/tag-desc.png') no-repeat;
     margin: .25em 0 1em -1em;
 }
 
