@@ -1509,16 +1509,7 @@ header nav {
 
     .outputs-label:after { content: ":"; }
 
-#output-format-list {
-    display: inline-block;
-    margin: 0;
-    padding: 20px 0;
-}
 
-    #output-format-list li { display: inline-block; }
-        
-        #output-format-list li:after { content: ", "; }
-        #output-format-list li:last-child:after { content: ""; }
 
 .quick-filter-wrapper {
     height: 25px;
