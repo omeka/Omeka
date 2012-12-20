@@ -68,7 +68,7 @@ echo flash();
     <?php endif; ?>
     
     <div class="file-metadata panel">
-        <h4><?php echo __('View File Metadata'); ?></h4>
+        <h4><?php echo __('File Metadata'); ?></h4>
         <div id="file-list">
             <?php if (!metadata('item', 'has files')):?>
                 <p><?php echo __('There are no files for this item yet.');?> <?php echo link_to_item(__('Add a File'), array(), 'edit'); ?>.</p>
