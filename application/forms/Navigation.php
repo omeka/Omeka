@@ -231,15 +231,17 @@ class Omeka_Form_Navigation extends Omeka_Form
                     $page = $pages[$i];
                     $page->removePages(); // remove old children pages
                     $parentPageId = $parentPageIds[$i];         
-                    if ($parentPageId === null) {
-                         // add a page that lacks a parent
+                    if ($parentPageId === null 
+                        || !array_key_exists($parentPageId, $pageIdsToPageUids)
+                    ) {
+                        // add a page that lacks a parent
                         $nav->addPage($page);
                     } else {    
                         // add a child page to its parent page
                         // we assume that all parents already exist in the navigation
-                        $parentPageUid = $pageIdsToPageUids[strval($parentPageId)];
+                        $parentPageUid = $pageIdsToPageUids[$parentPageId];
                         if (!($parentPage = $nav->getPageByUid($parentPageUid))) {
-                            throw RuntimeException(__("Cannot find parent navigation page."));
+                            throw new RuntimeException(__("Cannot find parent navigation page."));
                         } else {
                             $parentPage->addPage($page);
                         }

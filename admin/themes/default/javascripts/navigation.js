@@ -14,41 +14,11 @@ Omeka.Navigation = {};
             placeholder: 'ui-sortable-highlight',
             forcePlaceholderSize: true,
             containment: '#content',
-            update: function(e, ui) {
-              Omeka.Navigation.updateUndeleteable();
-            }
         });
         
         $('div.sortable-item input[type="checkbox"]').click(function(e) {
             e.stopPropagation();
         });
-    };
-
-    Omeka.Navigation.updateUndeleteable = function() {
-      // check every link and disable its delete button 
-      // if it has an undeleteable sublink
-      // or enable it if it doesn't.
-      $('div.sortable-item > input[type="checkbox"]').each(function (index) {
-          var hiddenInfo = $.parseJSON($(this).val());
-          if (hiddenInfo.can_delete) {            
-            // check every descendant link of this link 
-            // and if any cannot be deleted then 
-            // disable the delete button for this link
-            var hasUndeletableDescendant = false;
-            $(this).parent().parent().next().find('div.sortable-item > input[type="checkbox"]').each(function(index) {
-              var hiddenInfoDesc = $.parseJSON($(this).val());            
-              if (!hiddenInfoDesc.can_delete) {
-                hasUndeletableDescendant = true;
-                return false;
-              }
-            });
-            if (hasUndeletableDescendant) {
-              $(this).parent().next().find('.navigation_main_list_delete').attr('disabled', true);
-            } else {
-              $(this).parent().next().find('.navigation_main_list_delete').attr('disabled', false);            
-            }
-          }
-      });
     };
 
     Omeka.Navigation.updateSelectHomepageOptions = function () {
@@ -107,22 +77,28 @@ Omeka.Navigation = {};
 
     Omeka.Navigation.updateDeleteButtons = function () {
         $('input.can_delete_nav_link').each(function () {
-            var buttonsDiv = $(this).parent().next().find('div.main_link_buttons'); 
-            if (!buttonsDiv.children('a[class="navigation_main_list_delete red button"]').length) {
-                buttonsDiv.append('<a class="navigation_main_list_delete red button" href="">' + Omeka.Navigation.deleteText + '</a>');
-                buttonsDiv.children('.navigation_main_list_delete').click(function (event) {
+            var header = $(this).parent(); 
+            if (!header.children('a.delete-toggle').length) {
+                header.append('<a class="delete-toggle delete-element" href="">' + Omeka.Navigation.deleteText + '</a>');
+                var checkbox = this;
+                header.children('.delete-toggle').css('display', 'inline-block').click(function (event) {
                     event.preventDefault();
+                    if ($(this).hasClass('delete-element')) {
+                        $(this).removeClass('delete-element').addClass('undo-delete');
+                        header.addClass('deleted');
+                        checkbox.disabled = true;
+                    } else {
+                        $(this).removeClass('undo-delete').addClass('delete-element');
+                        header.removeClass('deleted');
+                        checkbox.disabled = false;
+                    }
                     var disabledAttr = $(this).attr('disabled');
-                    if (!(typeof disabledAttr !== 'undefined' && disabledAttr !== false)) {
-                      $(this).parent().parent().parent().parent().remove(); // removes li element
-                      Omeka.Navigation.updateNavList();
-                      Omeka.Navigation.updateSelectHomepageOptions();
-                      Omeka.Navigation.updateUndeleteable();
-                    }                
+
+                    Omeka.Navigation.updateNavList();
+                    Omeka.Navigation.updateSelectHomepageOptions();
                 });
             } 
         });
-        Omeka.Navigation.updateUndeleteable();
     };
 
     Omeka.Navigation.updateNavLinkEditForms = function () {
@@ -177,6 +153,9 @@ Omeka.Navigation = {};
             // get link data
             var linkData = [];
             $('div.sortable-item > input[type="checkbox"]').each(function (index) {
+                if (this.disabled) {
+                    return;
+                }
                 var hiddenInfo = $.parseJSON($(this).val());
                 var bodyDiv = $(this).parent().next();
                 var newLabel = $.trim(bodyDiv.find('.navigation-label').val());
