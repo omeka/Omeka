@@ -1416,15 +1416,28 @@ header nav {
 
 .plugins.browse #content > div:first-of-type { padding-top: 0; }
 
-.plugins.browse #content > div:last-of-type { padding-bottom: 0; border-bottom: 0; }
+.plugins.browse #content > div:last-of-type { 
+    padding-bottom: 0; 
+    border-bottom: 0; 
+}
 
 .plugins.browse h2 { margin-bottom: 0; }
 
-.plugins.browse .details { list-style-type: none; padding-left: 10px; }
+.plugins.browse .details { 
+    list-style-type: none; 
+    padding-left: 10px; 
+}
 
-.plugins.browse .plugin-metadata { margin: 0; font-weight: bold;}
+.plugins.browse .plugin-metadata { 
+    margin: 0; 
+    font-weight: bold;
+}
 
-.plugins.browse .action-links li { display: inline-block; width: 32.3%; }
+.plugins.browse .action-links li { 
+    display: inline-block; 
+    width: 32.3%; 
+    vertical-align: top;
+}
 
 .plugins.browse button, .plugins.browse a.button, .plugins.browse input[type=submit] { width: 100%; }
 
