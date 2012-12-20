@@ -13,16 +13,12 @@ echo flash();
 ?>
 
 <section class="seven columns alpha">
-    <?php echo flash(); ?>            
-        <?php if (metadata('item', 'has files')): ?>
-        <div id="item-images">
-        <?php foreach ($item->Files as $file) : ?>
-            <div class="admin-thumb panel">
-                <a href="<?php echo url('files/show/' . $file->id); ?>"><?php echo file_image('square_thumbnail', array(), $file); ?></a>
-            </div>
-        <?php endforeach; ?>
-        </div>
-        <?php endif; ?>
+    <?php echo flash(); ?>
+    <?php
+    echo item_image_gallery(
+        array('linkWrapper' => array('class' => 'admin-thumb panel')),
+        'square_thumbnail', true);
+    ?>
     <?php echo all_element_texts('item'); ?>
     <?php fire_plugin_hook('admin_items_show', array('item' => $item, 'view' => $this)); ?>
 </section>
