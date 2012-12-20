@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2011-11-22 16:18-0500\n"
-"PO-Revision-Date: 2012-07-09 11:16+0000\n"
+"PO-Revision-Date: 2012-10-17 15:23+0000\n"
 "Last-Translator: YASUSHI INOUE <yasushi.inoue@gmail.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/projects/p/omeka/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ja\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 # Dublin Core description
 msgid ""
@@ -105,7 +105,7 @@ msgstr "権利"
 
 # Item Type Metadata
 msgid "Item Type Metadata"
-msgstr "アイテムタイプのメタデータ"
+msgstr "アイテムのタイプ"
 
 # Item Type Metadata description
 msgid ""
@@ -235,7 +235,7 @@ msgstr "ビットレート"
 
 # Omeka Video File: Duration element
 msgid "Duration"
-msgstr ""
+msgstr "期間"
 
 # Omeka Video File: Sample Rate element
 msgid "Sample Rate"
@@ -247,11 +247,11 @@ msgstr "コーデック"
 
 # User role: Super
 msgid "Super"
-msgstr ""
+msgstr "特権管理者"
 
 # User role: Admin
 msgid "Admin"
-msgstr ""
+msgstr "管理者"
 
 # User role: Researcher
 msgid "Researcher"
@@ -260,7 +260,7 @@ msgstr ""
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:6
 msgid "Add a Collection"
-msgstr "コレクションに追加"
+msgstr "コレクションを追加"
 
 #: admin/themes/default/collections/add.php:9
 msgid "Save Collection"
@@ -284,7 +284,7 @@ msgstr "コレクションをブラウジング"
 #: application/views/scripts/items/browse.php:8
 #, php-format
 msgid "(%s total)"
-msgstr "(トータル %s)"
+msgstr "(合計 %s個)"
 
 #: admin/themes/default/collections/browse.php:18
 msgid "ID"
@@ -416,12 +416,12 @@ msgstr "非公開"
 #: admin/themes/default/items/browse.php:182
 #: admin/themes/default/items/form.php:43
 msgid "Featured"
-msgstr "特集する"
+msgstr "注目"
 
 #: admin/themes/default/collections/form.php:44
 #: admin/themes/default/items/batch-edit.php:55
 msgid "Not Featured"
-msgstr "特集しない"
+msgstr "注目ではない"
 
 #: admin/themes/default/collections/show.php:11
 #: admin/themes/default/items/show.php:14
@@ -464,7 +464,7 @@ msgstr "バージョン %s"
 
 #: admin/themes/default/common/footer.php:9
 msgid "More information about your system"
-msgstr "システムについての詳細"
+msgstr "システムの詳細情報"
 
 #: admin/themes/default/common/header.php:5
 msgid "Omeka Admin"
@@ -737,7 +737,7 @@ msgstr "アイテムを見る"
 
 #: admin/themes/default/index.php:28
 msgid "Manage items in your archive: add, edit, and delete items."
-msgstr ""
+msgstr "アーカイブにあるアイテムの管理： アイテムの追加、編集、削除"
 
 #: admin/themes/default/index.php:35
 msgid "Add a collection to group items"
@@ -749,7 +749,7 @@ msgstr "コレクションを見る"
 
 #: admin/themes/default/index.php:39
 msgid "Manage collections in your archive: add, edit, and delete collections."
-msgstr ""
+msgstr "アーカイブにあるコレクションの管理： コレクションの追加、編集、削除"
 
 #: admin/themes/default/index.php:48 admin/themes/default/users/browse.php:2
 msgid "Browse Users"
@@ -827,7 +827,7 @@ msgstr "アイテムのタイプを追加"
 
 #: admin/themes/default/item-types/browse.php:13
 msgid "Type Name"
-msgstr "タイプの名前"
+msgstr "タイプ"
 
 #: admin/themes/default/item-types/browse.php:15
 msgid "Total Items"
@@ -988,7 +988,7 @@ msgstr "アイテム"
 
 #: admin/themes/default/items/browse.php:13
 msgid "Toggle"
-msgstr ""
+msgstr "表示／非表示"
 
 #: admin/themes/default/items/browse.php:14
 msgid "Details"
@@ -1575,7 +1575,7 @@ msgstr ""
 
 #: application/controllers/ItemsController.php:343
 msgid "User is not allowed to modify featured status of items."
-msgstr "ユーザーは特集アイテムの状況を変更することができません。"
+msgstr "一般ユーザーは注目アイテムの状況を変更することができません。"
 
 #: application/controllers/ItemsController.php:350
 msgid "User is not allowed to delete selected items."
@@ -1671,7 +1671,7 @@ msgstr "%sをインストール中、次のエラーが発生しました。"
 
 #: application/controllers/PluginsController.php:256
 msgid "No plugin name given."
-msgstr ""
+msgstr "プラグインの名前がありません。"
 
 #: application/controllers/PluginsController.php:269
 #, php-format
@@ -1715,7 +1715,7 @@ msgstr ""
 
 #: application/controllers/TagsController.php:128
 msgid "Invalid tagType given"
-msgstr ""
+msgstr "無効なタグタイプ"
 
 #: application/controllers/ThemesController.php:30
 msgid "Invalid form submission."
@@ -1723,7 +1723,7 @@ msgstr ""
 
 #: application/controllers/ThemesController.php:38
 msgid "You have chosen an illegal theme name. Please select another theme."
-msgstr ""
+msgstr "間違ったテーマを選択しました。他のテーマを選択してください。"
 
 #: application/controllers/ThemesController.php:51
 msgid "The theme has been successfully changed."
@@ -1901,7 +1901,7 @@ msgstr "ページごとのアイテム（管理人）"
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
-msgstr ""
+msgstr "管理ページの1ページに表示するアイテムの数を制限する。"
 
 #: application/forms/GeneralSettings.php:92 application/forms/Install.php:155
 msgid "Items Per Page (public)"
@@ -1909,7 +1909,7 @@ msgstr "ページごとのアイテム（公開）"
 
 #: application/forms/GeneralSettings.php:93 application/forms/Install.php:156
 msgid "Limit the number of items displayed per page in the public interface."
-msgstr ""
+msgstr "公開ページの1ページに表示するアイテムの数を制限する。"
 
 #: application/forms/GeneralSettings.php:99 application/forms/Install.php:163
 msgid "Show Empty Elements"
@@ -1964,7 +1964,7 @@ msgstr ""
 
 #: application/forms/Install.php:180
 msgid "Default Superuser Account"
-msgstr ""
+msgstr "デフォルトのスーパーユーザー・アカウント"
 
 #: application/forms/Install.php:190
 msgid "Site Settings"
@@ -1980,7 +1980,7 @@ msgstr "パスワードが入力されていません。"
 
 #: application/forms/Login.php:42
 msgid "Remember Me?"
-msgstr "覚えていますか？"
+msgstr "保存する"
 
 #: application/forms/Login.php:44 application/views/scripts/users/login.php:3
 msgid "Log In"
@@ -2000,7 +2000,7 @@ msgstr "emailアドレスが不正な形式です。"
 
 #: application/forms/RecoverPassword.php:55
 msgid "Invalid hostname given for email address."
-msgstr ""
+msgstr "Emailアドレスのホストネームが無効です。"
 
 #: application/forms/RecoverPassword.php:73
 msgid "Invalid email address"
@@ -2027,7 +2027,7 @@ msgstr ""
 msgid ""
 "Check this field if you would like to allow any file to be uploaded to "
 "Omeka."
-msgstr ""
+msgstr "Omekaにどのファイルのアップローも許可する場合は、このフィールドをチェックしてください。"
 
 #: application/forms/SecuritySettings.php:35
 msgid "Allowed File Extensions"
@@ -2071,19 +2071,19 @@ msgstr "ユーザー名を入力してください。"
 
 #: application/forms/User.php:43
 msgid "Username must contain only letters and numbers."
-msgstr ""
+msgstr "ユーザー名には文字か数字しか使えません。"
 
 #: application/forms/User.php:53
 msgid "Username must be at least %min% characters long."
-msgstr ""
+msgstr "ユーザー名は%min% 文字以上入力してください。"
 
 #: application/forms/User.php:55
 msgid "Username must be at most %max% characters long."
-msgstr ""
+msgstr "ユーザー名は%min% 文字以下入力してください。"
 
 #: application/forms/User.php:69
 msgid "This username is already in use."
-msgstr ""
+msgstr "このユーザー名はすでに使われています。"
 
 #: application/forms/User.php:84
 msgid "First name is required."
@@ -2122,7 +2122,7 @@ msgstr "%sはコレクションにありません。"
 
 #: application/helpers/CollectionFunctions.php:123
 msgid "Featured Collection"
-msgstr "特集コレクション"
+msgstr "注目コレクション"
 
 #: application/helpers/CollectionFunctions.php:131
 msgid "No featured collections are available."
@@ -2178,7 +2178,7 @@ msgstr ""
 
 #: application/helpers/ItemFunctions.php:58
 msgid "Featured Item"
-msgstr "特集アイテム"
+msgstr "注目アイテム"
 
 #: application/helpers/ItemFunctions.php:73
 msgid ""
@@ -2188,7 +2188,7 @@ msgstr ""
 
 #: application/helpers/ItemFunctions.php:571
 msgid "No featured items are available."
-msgstr "特集アイテムはありません。"
+msgstr "注目アイテムはありません。"
 
 #: application/helpers/ItemMetadata.php:86
 #, php-format
@@ -2548,7 +2548,7 @@ msgstr "%sを削除"
 
 #: application/views/scripts/common/delete-confirm.php:12
 msgid "Are you sure?"
-msgstr ""
+msgstr "本当によろしいですか？"
 
 #: application/views/scripts/common/footer.php:6
 msgid "Home"
@@ -2664,7 +2664,7 @@ msgstr "フィードを追加"
 
 #: application/views/scripts/items/advanced-search.php:90
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
-msgstr ""
+msgstr "IDの範囲で検索 (例: 1-4, 156, 79)"
 
 #: application/views/scripts/items/advanced-search.php:102
 msgid "Search By Collection"
@@ -2700,7 +2700,7 @@ msgstr ""
 
 #: application/views/scripts/items/advanced-search.php:160
 msgid "Only Featured Items"
-msgstr "特集アイテムのみ"
+msgstr "注目アイテムのみ"
 
 #: application/views/scripts/items/advanced-search.php:161
 msgid "Only Non-Featured Items"
@@ -2761,7 +2761,7 @@ msgstr "データベースをアップグレードする"
 
 #: application/views/scripts/upgrade/migrate.php:11
 msgid "Omeka encountered an error when upgrading your installation."
-msgstr ""
+msgstr "アップグレード中にエラーが発生しました。"
 
 #: application/views/scripts/upgrade/migrate.php:16
 msgid "Please restore from your database backup and try again."
@@ -2789,7 +2789,7 @@ msgstr "ログインに戻る"
 
 #: application/views/scripts/users/forgot-password.php:10
 msgid "Enter your email address to retrieve your password."
-msgstr ""
+msgstr "パスワードを取得するためにEmailアドレスを入力してください。"
 
 #: application/views/scripts/users/login.php:9
 msgid "Go to Home Page"
@@ -2814,7 +2814,7 @@ msgstr "Fatal Error"
 
 #: install/views/scripts/index/index.phtml:2
 msgid "Installation Warning"
-msgstr ""
+msgstr "インストールエラー"
 
 #: install/views/scripts/index/index.phtml:3
 msgid ""
@@ -2824,7 +2824,7 @@ msgstr ""
 
 #: install/views/scripts/index/index.phtml:13
 msgid "Configure Your Site"
-msgstr ""
+msgstr "サイト設定"
 
 #: install/views/scripts/index/index.phtml:15
 msgid "Form Validation Errors"
@@ -2834,7 +2834,7 @@ msgstr "Form Validation Errors"
 msgid ""
 "Omeka is installed. You may remove the \"install\" directory for security "
 "reasons."
-msgstr ""
+msgstr "Omekaはインストールされました。安全のため \"install\" ディレクトリを削除してください。"
 
 #: install/views/scripts/index/installed.phtml:2
 msgid "Admin Panel"

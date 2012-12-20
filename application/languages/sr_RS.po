@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2011-11-22 16:18-0500\n"
-"PO-Revision-Date: 2012-06-25 07:56+0000\n"
+"PO-Revision-Date: 2012-12-03 07:54+0000\n"
 "Last-Translator: Bogdan Trifunovic <>\n"
 "Language-Team: Serbian (Serbia) (http://www.transifex.com/projects/p/omeka/language/sr_RS/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sr_RS\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 # Dublin Core description
 msgid ""
@@ -115,7 +115,7 @@ msgstr "Скуп елемената метаподатака врсте обје
 
 # Omeka Legacy File
 msgid "Omeka Legacy File"
-msgstr ""
+msgstr "Документ старијих верзија Омеке"
 
 # Omeka Legacy File description
 msgid ""
@@ -127,7 +127,7 @@ msgstr "Скуп елемената метаподатака који је, ка
 
 # Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
-msgstr ""
+msgstr "Додатни аутор"
 
 # Omeka Legacy File: Transcriber element
 msgid "Transcriber"
@@ -135,7 +135,7 @@ msgstr "Преписивач"
 
 # Omeka Legacy File: Producer element
 msgid "Producer"
-msgstr ""
+msgstr "Продуцент"
 
 # Omeka Legacy File: Render Device element
 msgid "Render Device"
@@ -179,7 +179,7 @@ msgstr "Каснија обрада"
 
 # Omeka Image File
 msgid "Omeka Image File"
-msgstr ""
+msgstr "Документ слике Омеке"
 
 # Omeka Image File description
 msgid ""
@@ -299,7 +299,7 @@ msgstr "Име"
 #: admin/themes/default/collections/browse.php:20
 #: admin/themes/default/collections/show.php:22
 msgid "Collectors"
-msgstr ""
+msgstr "Колектори"
 
 #: admin/themes/default/collections/browse.php:21
 #: admin/themes/default/files/show.php:24
@@ -321,7 +321,7 @@ msgstr "Уређивање?"
 
 #: admin/themes/default/collections/browse.php:44
 msgid "No collectors"
-msgstr ""
+msgstr "Нема колектора"
 
 #: admin/themes/default/collections/browse.php:57
 #: admin/themes/default/items/browse.php:150
@@ -391,7 +391,7 @@ msgstr "Опис колекције"
 #: admin/themes/default/collections/form.php:25
 msgid ""
 "List collectors for this collection (optional - enter one name per line)"
-msgstr ""
+msgstr "Наведи колекторе за ову колекцију (опционално - унеси једно име по линији)"
 
 #: admin/themes/default/collections/form.php:35
 #: admin/themes/default/collections/form.php:37
@@ -434,7 +434,7 @@ msgstr "Уреди ову колекцију"
 
 #: admin/themes/default/collections/show.php:27
 msgid "No collectors."
-msgstr ""
+msgstr "Нема колектора"
 
 #: admin/themes/default/collections/show.php:33
 #: admin/themes/default/item-types/show.php:30
@@ -504,7 +504,7 @@ msgstr "Колекције"
 
 #: admin/themes/default/common/primary-nav.php:7
 msgid "Item Types"
-msgstr "Типови објеката"
+msgstr "Врсте објеката"
 
 #: admin/themes/default/common/primary-nav.php:8
 #: admin/themes/default/items/browse.php:166
@@ -637,7 +637,7 @@ msgstr "Даблинско језгро"
 
 #: admin/themes/default/files/edit.php:32
 msgid "Format (Legacy) Metadata"
-msgstr ""
+msgstr "Формат (старих) метаподатака"
 
 #: admin/themes/default/files/show.php:9
 #: application/views/scripts/files/show.php:9
@@ -2271,7 +2271,7 @@ msgstr "Не могу сачувати текст елемента за запи
 
 #: application/models/Collection.php:107
 msgid "Collectors must be either a string or an array."
-msgstr ""
+msgstr "Колектори морају бити или стринг или један низ."
 
 #: application/models/Collection.php:148
 #, php-format
@@ -2281,7 +2281,7 @@ msgstr "Име колекције мора имати између %1$s и %2$s 
 #: application/models/Collection.php:198
 msgid ""
 "Argument passed to addCollector() must be a string or an instance of Entity."
-msgstr ""
+msgstr "Аргумент пренесен за addCollector() мора бити стринг или једна инстанца ентитета."
 
 #: application/models/Collection.php:230
 msgid "Cannot associate the collection with an unsaved user."
@@ -2328,11 +2328,11 @@ msgstr "Назив скупа елемената не сме бити праза
 
 #: application/models/EntitiesRelations.php:29
 msgid "Joins in the EntitiesRelations table must be given a polymorphic type"
-msgstr ""
+msgstr "Повезивачи у EntitiesRelations табели морају добити полиморфни тип"
 
 #: application/models/EntitiesRelations.php:33
 msgid "Joins in the EntitiesRelations table must be filled out entirely"
-msgstr ""
+msgstr "Повезивачи у EntitiesRelations табели морају бити у потпуности попуњени"
 
 #: application/models/Entity.php:37
 msgid "The email address provided is not valid."
@@ -2365,11 +2365,11 @@ msgstr "Документ мора бити исправан пре повези�
 
 #: application/models/ItemBuilder.php:141
 msgid "Cannot add tags to an item if no Entity is available to tag."
-msgstr ""
+msgstr "Не може се додати ознака јединици ако ниједан ентитет није доступан ознаци."
 
 #: application/models/ItemBuilder.php:265
 msgid "Must specify a file transfer type when attaching files to an item!"
-msgstr "Мора се означити врста трансфера документа када се документи каче за јединицу!"
+msgstr "Мора се означити врста трансфера документа када се документи каче за објекат!"
 
 #: application/models/ItemPermissions.php:34
 #, php-format
@@ -2385,11 +2385,11 @@ msgstr "Дата је неисправна врста претраге!"
 #: application/models/ItemType.php:83
 #, php-format
 msgid "The item type name must have between %1$s and %2$s characters."
-msgstr "Назив врсте јединице мора имати између %1$s и %2$s карактера."
+msgstr "Назив врсте објекта мора имати између %1$s и %2$s карактера."
 
 #: application/models/ItemType.php:87
 msgid "The item type name must be unique."
-msgstr "Назив врсте јединице мора бити јединствен."
+msgstr "Назив врсте објекта мора бити јединствен."
 
 #: application/models/ItemType.php:175
 msgid "There are too many values in the element ordering array."
@@ -2403,212 +2403,212 @@ msgstr "Има премало вредности у низу слагања ел
 msgid ""
 "Invalid element data. To add elements, you must either pass an element "
 "objects or an array of element metadata."
-msgstr ""
+msgstr "Неисправан елемент података. За додавање елемената, прво мораш или пренети један објекат елемента или један низ метаподатака елемента."
 
 #: application/models/ItemType.php:285
 msgid ""
 "Cannot remove elements from an item type that is not persistent in the "
 "database!"
-msgstr ""
+msgstr "Не могу се померати елементи врсте објекта који није сталан у бази података!"
 
 #: application/models/ItemType.php:294
 #, php-format
 msgid "Cannot find element with ID %s!"
-msgstr ""
+msgstr "Не могу се наћи елементи са ID %s!"
 
 #: application/models/ItemType.php:337
 #, php-format
 msgid "Item type does not contain an element with the ID %s!"
-msgstr ""
+msgstr "Врста објекта не садржи елемент са ID %s!"
 
 #: application/models/ItemType.php:362
 msgid ""
 "Invalid parameter. The hasElement function requires either an element object"
 " or an element id to determine if an item type has an element."
-msgstr ""
+msgstr "Неисправни параметар. Функција hasElement захтева један елемент објекта или један елемент id да би одредила да ли једна врста објекта има елемент."
 
 #: application/models/Option.php:28 application/models/Option.php:32
 msgid "Each option must have a unique name."
-msgstr ""
+msgstr "Свака опција мора имати јединствено име."
 
 #: application/models/Orderable.php:101
 msgid "Cannot add a child to a record that does not exist yet!"
-msgstr ""
+msgstr "Не може се додати \"дете\" запису који још увек не постоји!"
 
 #: application/models/Orderable.php:105
 #, php-format
 msgid "Child must be an instance of \"%s\""
-msgstr ""
+msgstr "\"Дете\" мора бити инстанца од \"%s\""
 
 #: application/models/Plugin.php:94
 msgid "Names of plugins must not be blank"
-msgstr ""
+msgstr "Имена додатака не могу остати празна"
 
 #: application/models/Relatable.php:158
 msgid "Invalid entity provided!"
-msgstr ""
+msgstr "Дат је неисправан ентитет!"
 
 #: application/models/Relatable.php:169
 #, php-format
 msgid "Relationship called %s does not exist."
-msgstr ""
+msgstr "Релација под именом %s не постоји."
 
 #: application/models/Relatable.php:222
 msgid "Record must exist before relations can be set."
-msgstr ""
+msgstr "Запис мора постојати пре успостављања релација."
 
 #: application/models/Tag.php:58
 msgid "Tags must be given a name."
-msgstr ""
+msgstr "Ознаке морају добити име."
 
 #: application/models/Tag.php:62
 msgid "That name is already taken for this tag."
-msgstr ""
+msgstr "То име је већ заузето за ову ознаку."
 
 #: application/models/Taggable.php:195
 msgid "A valid record ID # must be provided when tagging."
-msgstr ""
+msgstr "Исправан ID # записа мора се дати приликом означавања."
 
 #: application/models/Taggable.php:199
 msgid "A valid entity or user must be provided when tagging."
-msgstr ""
+msgstr "Исправан ентитет или корисник мора се дати приликом означавања."
 
 #: application/models/User.php:63
 msgid "No Entity record available."
-msgstr ""
+msgstr "Нема записа о Ентитету."
 
 #: application/models/User.php:75
 msgid "No Entity record is available when saving this User."
-msgstr ""
+msgstr "Нема записа о Ентитету приликом чувања овог корисника."
 
 #: application/models/User.php:92
 msgid "User may not change permissions to super-user"
-msgstr ""
+msgstr "Корисник не може променити дозволе за супер-корисника"
 
 #: application/models/User.php:95
 msgid "User may not change roles."
-msgstr ""
+msgstr "Корисник не може мењати улоге."
 
 #: application/models/User.php:153
 msgid ""
 "If a first name and last name are not provided, then an institution name is "
 "required."
-msgstr ""
+msgstr "Ако име и презиме нису дати, онда је назив институције обавезан."
 
 #: application/models/User.php:156
 msgid "A first name is required."
-msgstr ""
+msgstr "Име је обавезно."
 
 #: application/models/User.php:159
 msgid "A last name is required."
-msgstr ""
+msgstr "Презиме је обавезно."
 
 #: application/models/User.php:175
 msgid "The user must be assigned a role."
-msgstr ""
+msgstr "Кориснику се мора доделити улога."
 
 #: application/models/User.php:180
 #, php-format
 msgid "The username \"%1$s\" must be between %2$s and %3$s characters."
-msgstr ""
+msgstr "Корисничко име \"%1$s\" мора бити између %2$s и %3$s карактера."
 
 #: application/models/User.php:182
 msgid "The username must be alphanumeric."
-msgstr ""
+msgstr "Корисничко име мора бити у алфанумеричком облику."
 
 #: application/models/User.php:184
 #, php-format
 msgid "'%s' is already in use. Please choose another username."
-msgstr ""
+msgstr "'%s' је већ заузет. Молимо одабери друго корисничко име."
 
 #: application/models/UsersActivations.php:31
 msgid "Cannot create a user activation for non-existent user."
-msgstr ""
+msgstr "Не може се направити активација корисника за непостојећег корисника."
 
 #: application/views/scripts/collections/browse.php:21
 #: application/views/scripts/collections/show.php:13
 msgid "Collector(s)"
-msgstr ""
+msgstr "Колектор(и)"
 
 #: application/views/scripts/collections/browse.php:28
 #: application/views/scripts/collections/show.php:22
 #, php-format
 msgid "View the items in %s"
-msgstr ""
+msgstr "Погледај јединице у %s"
 
 #: application/views/scripts/collections/show.php:25
 #, php-format
 msgid "Items in the %s Collection"
-msgstr ""
+msgstr "Јединице у %s колекцији"
 
 #: application/views/scripts/common/delete-confirm.php:3
 #, php-format
 msgid "Delete %s"
-msgstr ""
+msgstr "Обриши %s"
 
 #: application/views/scripts/common/delete-confirm.php:12
 msgid "Are you sure?"
-msgstr ""
+msgstr "Јеси сигуран?"
 
 #: application/views/scripts/common/footer.php:6
 msgid "Home"
-msgstr ""
+msgstr "Почетна"
 
 #: application/views/scripts/common/footer.php:14
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
-msgstr ""
+msgstr "Поносно покреће <a href=\"http://omeka.org\">Omeka</a>."
 
 #: application/views/scripts/common/pagination_control.php:7
 msgid "First"
-msgstr ""
+msgstr "Први"
 
 #: application/views/scripts/common/pagination_control.php:14
 msgid "Previous"
-msgstr ""
+msgstr "Претходно"
 
 #: application/views/scripts/common/pagination_control.php:30
 msgid "Next"
-msgstr ""
+msgstr "Следеће"
 
 #: application/views/scripts/common/pagination_control.php:37
 msgid "Last"
-msgstr ""
+msgstr "Последње"
 
 #: application/views/scripts/error/403.php:2
 msgid "403 Page Forbidden"
-msgstr ""
+msgstr "403 Приступ страници није дозвољен"
 
 #: application/views/scripts/error/403.php:8
 msgid "You do not have permission to access this page."
-msgstr ""
+msgstr "Немаш дозволу за приступ овој страници."
 
 #: application/views/scripts/error/404.dc.php:1
 #: application/views/scripts/error/404.php:2
 #: application/views/scripts/error/404.xml.php:1
 msgid "404 Page Not Found"
-msgstr ""
+msgstr "404 Страница не постоји"
 
 #: application/views/scripts/error/404.php:7
 #, php-format
 msgid "%s is not a valid URL."
-msgstr ""
+msgstr "%s није валидан URL."
 
 #: application/views/scripts/error/404.rss2.php:1
 msgid "Rss2.0 Feed Not Found!"
-msgstr ""
+msgstr "Rss2.0 Feed није пронађен!"
 
 #: application/views/scripts/error/405.php:2
 msgid "405 Method Not Allowed"
-msgstr ""
+msgstr "405 Метод није дозвољен"
 
 #: application/views/scripts/error/405.php:7
 #, php-format
 msgid "The method used to access this URL (%s) is not valid."
-msgstr ""
+msgstr "Метод искоришћен за приступ овом URL (%s) није валидан."
 
 #: application/views/scripts/error/index.php:4
 msgid "Omeka has encountered an error"
-msgstr ""
+msgstr "Омека је наишла на грешку"
 
 #: application/views/scripts/error/index.php:29
 msgid ""
@@ -2616,122 +2616,122 @@ msgid ""
 "Omeka Codex page on <a "
 "href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error "
 "messages</a>."
-msgstr ""
+msgstr "За детаљније информације о овој грешци, погледај Omeka Codex страницу на <a href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error messages</a>."
 
 #: application/views/scripts/functions.php:131
 msgid "Browse All"
-msgstr ""
+msgstr "Прегледај све"
 
 #: application/views/scripts/functions.php:131
 msgid "Browse by Tag"
-msgstr ""
+msgstr "Прегледај преко ознака"
 
 #: application/views/scripts/index.php:67
 msgid "No recent items available."
-msgstr ""
+msgstr "Недавно унете јединице нису доступне."
 
 #: application/views/scripts/items/advanced-search.php:32
 msgid "Search for Keywords"
-msgstr ""
+msgstr "Претражи преко кључних речи"
 
 #: application/views/scripts/items/advanced-search.php:42
 msgid "Narrow by Specific Fields"
-msgstr ""
+msgstr "Сузи према одређеним пољима"
 
 #: application/views/scripts/items/advanced-search.php:71
 msgid "contains"
-msgstr ""
+msgstr "садржи"
 
 #: application/views/scripts/items/advanced-search.php:72
 msgid "does not contain"
-msgstr ""
+msgstr "не садржи"
 
 #: application/views/scripts/items/advanced-search.php:73
 msgid "is exactly"
-msgstr ""
+msgstr "тачно је"
 
 #: application/views/scripts/items/advanced-search.php:74
 msgid "is empty"
-msgstr ""
+msgstr "празно је"
 
 #: application/views/scripts/items/advanced-search.php:75
 msgid "is not empty"
-msgstr ""
+msgstr "није празно"
 
 #: application/views/scripts/items/advanced-search.php:86
 msgid "Add a Field"
-msgstr ""
+msgstr "Додај поље"
 
 #: application/views/scripts/items/advanced-search.php:90
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
-msgstr ""
+msgstr "Претражи преко опсега ID#s (пример: 1-4, 156, 79)"
 
 #: application/views/scripts/items/advanced-search.php:102
 msgid "Search By Collection"
-msgstr ""
+msgstr "Претражи преко колекција"
 
 #: application/views/scripts/items/advanced-search.php:112
 msgid "Search By Type"
-msgstr ""
+msgstr "Претражи преко врсте"
 
 #: application/views/scripts/items/advanced-search.php:122
 msgid "Search By User"
-msgstr ""
+msgstr "Претражи преко корисника"
 
 #: application/views/scripts/items/advanced-search.php:133
 msgid "Search By Tags"
-msgstr ""
+msgstr "Претражи преко ознака"
 
 #: application/views/scripts/items/advanced-search.php:147
 msgid "Public/Non-Public"
-msgstr ""
+msgstr "Јавно/Није јавно"
 
 #: application/views/scripts/items/advanced-search.php:150
 msgid "Only Public Items"
-msgstr ""
+msgstr "Само јавни објекти"
 
 #: application/views/scripts/items/advanced-search.php:151
 msgid "Only Non-Public Items"
-msgstr ""
+msgstr "Само објекти који нису јавни"
 
 #: application/views/scripts/items/advanced-search.php:157
 msgid "Featured/Non-Featured"
-msgstr ""
+msgstr "Изабрано/Није изабрано"
 
 #: application/views/scripts/items/advanced-search.php:160
 msgid "Only Featured Items"
-msgstr ""
+msgstr "Само изабрани објекти"
 
 #: application/views/scripts/items/advanced-search.php:161
 msgid "Only Non-Featured Items"
-msgstr ""
+msgstr "Само објекти који нису изабрани"
 
 #: application/views/scripts/items/show.php:11
 msgid "Files"
-msgstr ""
+msgstr "Документи"
 
 #: application/views/scripts/items/show.php:33
 msgid "Citation"
-msgstr ""
+msgstr "Цитирање"
 
 #: application/views/scripts/upgrade/completed.php:5
 #: application/views/scripts/upgrade/index.php:5
 #: application/views/scripts/upgrade/migrate.php:5
 msgid "Upgrade Omeka"
-msgstr ""
+msgstr "Надогради Омеку"
 
 #: application/views/scripts/upgrade/completed.php:10
 msgid "Omeka Upgrade Completed"
-msgstr ""
+msgstr "Завршена надоградња Омеке"
 
 #: application/views/scripts/upgrade/completed.php:11
 #, php-format
 msgid "Please return to the %1$s or your site&#8217;s %2$s"
-msgstr ""
+msgstr "Молимо врати се на %1$s или на site&#8217;s %2$s"
 
 #: application/views/scripts/upgrade/completed.php:11
 msgid "Your Omeka database is completely up-to-date."
-msgstr ""
+msgstr "Твоја база података Омеке је у потпуности ажурна."
 
 #: application/views/scripts/upgrade/completed.php:13
 #: application/views/scripts/upgrade/migrate.php:18
@@ -2739,45 +2739,45 @@ msgid ""
 "If you have any questions please refer to <a "
 "href=\"http://omeka.org/codex\">Omeka documentation</a> or post a message on"
 " the <a href=\"http://omeka.org/forums\">Omeka forums</a>."
-msgstr ""
+msgstr "Уколико имаш нека питања молимо обрати се на <a href=\"http://omeka.org/codex\">Omeka documentation</a> или остави поруку на <a href=\"http://omeka.org/forums\">Omeka forums</a>."
 
 #: application/views/scripts/upgrade/index.php:10
 msgid "Upgrade Your Omeka Database"
-msgstr ""
+msgstr "Надогради базу података Омеке"
 
 #: application/views/scripts/upgrade/index.php:12
 msgid ""
 "Your Omeka database is not compatible with your current version of Omeka."
-msgstr ""
+msgstr "База података твоје Омеке није компатибилна са тренутном верзијом Омеке."
 
 #: application/views/scripts/upgrade/index.php:13
 msgid ""
 "Please back up your existing database and then click the button to upgrade."
-msgstr ""
+msgstr "Молимо направи резервну копију постојеће базе података и кликни на дугме за надоградњу."
 
 #: application/views/scripts/upgrade/index.php:15
 msgid "Upgrade Database"
-msgstr ""
+msgstr "Надогради базу података"
 
 #: application/views/scripts/upgrade/migrate.php:11
 msgid "Omeka encountered an error when upgrading your installation."
-msgstr ""
+msgstr "Омека је наишла на грешку приликом надоградње инсталације."
 
 #: application/views/scripts/upgrade/migrate.php:16
 msgid "Please restore from your database backup and try again."
-msgstr ""
+msgstr "Молимо поврати из базе података резервну копију и покушај поново."
 
 #: application/views/scripts/upgrade/migrate.php:21
 msgid "Omeka has upgraded successfully."
-msgstr ""
+msgstr "Омека је успешно надограђена."
 
 #: application/views/scripts/upgrade/migrate.php:22
 msgid "Return to Dashboard"
-msgstr ""
+msgstr "Повратак на Контролну таблу"
 
 #: application/views/scripts/users/activate.php:2
 msgid "User Activation"
-msgstr ""
+msgstr "Активација корисника"
 
 #: application/views/scripts/users/forgot-password.php:2
 msgid "Forgot Password"

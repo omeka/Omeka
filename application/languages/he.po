@@ -3,43 +3,43 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Nicolaie Constantinescu <kosson@gmail.com>, 2011-2012.
+#   <moshegrey@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2011-11-22 16:18-0500\n"
-"PO-Revision-Date: 2012-11-06 18:05+0000\n"
-"Last-Translator: Nicolaie Constantinescu <kosson@gmail.com>\n"
-"Language-Team: Romanian (http://www.transifex.com/projects/p/omeka/language/ro/)\n"
+"PO-Revision-Date: 2012-11-27 14:52+0000\n"
+"Last-Translator: moshe742 <moshegrey@gmail.com>\n"
+"Language-Team: Hebrew (http://www.transifex.com/projects/p/omeka/language/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ro\n"
-"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+"Language: he\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 # Dublin Core description
 msgid ""
 "The Dublin Core metadata element set. These elements are common to all Omeka"
 " resources, including items, files, collections, exhibits, and entities. See"
 " http://dublincore.org/documents/dces/."
-msgstr "Setul de metadate Dublin Core. Aceste elemente sunt aceleași pentru toate resursele Omeka, incluzând fișierele, colecțiile, expozițiile și entitățile. Vezi http://dublincore.org/documents/dces/."
+msgstr "מערך מטה הנתונים של ליבת דאבלין. האלמנטים הללו נפוצים לכל המקורות של אומקה, כולל פריטים, קבצים, אוספים, מוצגים, וישויות. ראה http://dublincore.org/documents/dces/."
 
 # #-#-#-#-#  Omeka.base.pot (Omeka 1.5)  #-#-#-#-#
 # Dublin Core: Title element
 #: admin/themes/default/items/browse.php:129
 msgid "Title"
-msgstr "Titlu"
+msgstr "כותרת"
 
 # #-#-#-#-#  Omeka.base.pot (Omeka 1.5)  #-#-#-#-#
 # Dublin Core: Creator element
 #: admin/themes/default/items/browse.php:130
 msgid "Creator"
-msgstr "Creator"
+msgstr "יוצר"
 
 # Dublin Core: Subject element
 msgid "Subject"
-msgstr "Subiect"
+msgstr "נושא"
 
 # #-#-#-#-#  Omeka.base.pot (Omeka 1.5)  #-#-#-#-#
 # Dublin Core: Description element
@@ -54,68 +54,68 @@ msgstr "Subiect"
 #: application/views/scripts/collections/browse.php:15
 #: application/views/scripts/collections/show.php:7
 msgid "Description"
-msgstr "Descriere"
+msgstr "תיאור"
 
 # Dublin Core: Publisher element
 msgid "Publisher"
-msgstr "Editor"
+msgstr "מפרסם"
 
 # Dublin Core: Contributor element
 # User role: contributor
 msgid "Contributor"
-msgstr "Contributor"
+msgstr "תורם"
 
 # Dublin Core: Date element
 msgid "Date"
-msgstr "Dată"
+msgstr "תאריך"
 
 # #-#-#-#-#  Omeka.base.pot (Omeka 1.5)  #-#-#-#-#
 # Dublin Core: Type element
 #: admin/themes/default/items/browse.php:131
 msgid "Type"
-msgstr "Tip"
+msgstr "סוג"
 
 # Dublin Core: Format element
 msgid "Format"
-msgstr "Format"
+msgstr "תבנית"
 
 # Dublin Core: Identifier element
 msgid "Identifier"
-msgstr "Identificator"
+msgstr "מזהה"
 
 # Dublin Core: Source element
 msgid "Source"
-msgstr "Sursă"
+msgstr "מקור"
 
 # Dublin Core: Language element
 msgid "Language"
-msgstr "Limbă"
+msgstr "שפה"
 
 # Dublin Core: Relation element
 msgid "Relation"
-msgstr "Relație"
+msgstr "קשר"
 
 # Dublin Core: Coverage element
 msgid "Coverage"
-msgstr "Domeniu"
+msgstr "כיסוי"
 
 # Dublin Core: Rights element
 msgid "Rights"
-msgstr "Drepturi"
+msgstr "זכויות יוצרים"
 
 # Item Type Metadata
 msgid "Item Type Metadata"
-msgstr "Metadate corespunzătoare resursei"
+msgstr "מטה הנתונים לסוג פריט "
 
 # Item Type Metadata description
 msgid ""
 "The item type metadata element set, consisting of all item type elements "
 "bundled with Omeka and all item type elements created by an administrator."
-msgstr "Setul de elemente de metadate al resursei care constă din toate elementele corespunzătoare unui anumit tip de resursă care ți le dă Omeka și toate elementele unui tip de resursă creată de un administrator."
+msgstr "מערך אלמנטי מטה הנתונים לסוג פריט, כוללים את כל סוגי האלמנטים של פריטים המובנים באומקה וכל אלמנטי סוגי הפריטים שנוצרו על ידי מנהל המערכת."
 
 # Omeka Legacy File
 msgid "Omeka Legacy File"
-msgstr "Fișier compatibil Omeka"
+msgstr "קובץ המורשת של אומקה"
 
 # Omeka Legacy File description
 msgid ""
@@ -123,155 +123,155 @@ msgid ""
 "was included in the `files` table in previous versions of Omeka. These "
 "elements are common to all Omeka files. This set may be deprecated in future"
 " versions."
-msgstr "Setul de elemente de metadate care suplimentar setului Dublin Core, a fost inclus în tabela „files” în versiunile anterioare Omeka. Aceste elemente sunt comune tuturor fișierelor Omeka. Acest set poate să fie abandonat în viitor."
+msgstr "מערך האלמנטים של מטה הנתונים אשר בנוסף למערך האלמנטים של ליבת דאבלין היה כלול בטבלת ה\"קבצים\" בגרסאות קודמות של אומקה. אלמנטים אלו קיימים בכל קבצי אומקה. מערך זה עשוי לצאת משימוש בגרסאות עתידיות."
 
 # Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
-msgstr "Adaugă creator"
+msgstr "יוצרים נוספים"
 
 # Omeka Legacy File: Transcriber element
 msgid "Transcriber"
-msgstr "Copist"
+msgstr "מתעתק"
 
 # Omeka Legacy File: Producer element
 msgid "Producer"
-msgstr "Producător"
+msgstr "מפיק"
 
 # Omeka Legacy File: Render Device element
 msgid "Render Device"
-msgstr "Dispozitiv de vizualizare"
+msgstr "הנגשת התקן"
 
 # Omeka Legacy File: Render Details element
 msgid "Render Details"
-msgstr "Detalii de vizualizare"
+msgstr "הנגשת פרטים"
 
 # Omeka Legacy File: Capture Date element
 msgid "Capture Date"
-msgstr "Data fixării"
+msgstr "לכידת תאריך"
 
 # Omeka Legacy File: Capture Device element
 msgid "Capture Device"
-msgstr "Dispozitiv de fixare"
+msgstr "לכידת התקן"
 
 # Omeka Legacy File: Capture Details element
 msgid "Capture Details"
-msgstr "Detalii de fixare"
+msgstr "לכידת פרטים"
 
 # Omeka Legacy File: Change History element
 msgid "Change History"
-msgstr "Modifică istoricul"
+msgstr "שינוי היסטוריה"
 
 # Omeka Legacy File: Watermark element
 msgid "Watermark"
-msgstr "Filigran"
+msgstr "סימן מים"
 
 # Omeka Legacy File: Encryption element
 msgid "Encryption"
-msgstr "Criptare"
+msgstr "הצפנה"
 
 # Omeka Legacy File: Compression element
 msgid "Compression"
-msgstr "Compresie"
+msgstr "כיווץ"
 
 # Omeka Legacy File: Post Processing element
 msgid "Post Processing"
-msgstr "Post procesare"
+msgstr "לאחר העיבוד"
 
 # Omeka Image File
 msgid "Omeka Image File"
-msgstr "Fișier de imagine Omeka"
+msgstr "קובץ תמונה של אומקה"
 
 # Omeka Image File description
 msgid ""
 "The metadata element set that was included in the `files_images` table in "
 "previous versions of Omeka. These elements are common to all image files."
-msgstr "Setul de elemente de metadate care a fost inclus în tabelul „files_images” în versiunile anterioare ale Omeka. Aceste elemente sunt comune tuturor fișierelor de imagine."
+msgstr "מערך האלמנטים של מטה הנתונים שהיו מצורפים בטבלה \"קבצי_תמונות\" בגרסאות קודמות של אומקה. אלמנטים אלו קיימים בכל קבצי התמונות."
 
 # Omeka Image File: Width element
 msgid "Width"
-msgstr "Lățime"
+msgstr "רוחב"
 
 # Omeka Image File: Height element
 msgid "Height"
-msgstr "Înălțime"
+msgstr "גובה"
 
 # Omeka Image File: Bit Depth element
 msgid "Bit Depth"
-msgstr "Adâncime de biți"
+msgstr "עומק סיביות"
 
 # Omeka Image File: Channels element
 msgid "Channels"
-msgstr "Canale"
+msgstr "ערוצים"
 
 # Omeka Image File: Exif String element
 msgid "Exif String"
-msgstr "Fragment Exif"
+msgstr "מחרוזת Exif"
 
 # Omeka Image File: Exif Array element
 msgid "Exif Array"
-msgstr "Tablou Exif"
+msgstr "רשימת Exif"
 
 # Omeka Image File: IPTC String element
 msgid "IPTC String"
-msgstr "Fragment IPTC"
+msgstr "מחרוזת IPTC"
 
 # Omeka Image File: IPTC Array element
 msgid "IPTC Array"
-msgstr "Tablou IPTC"
+msgstr "רשימת IPTC"
 
 # Omeka Video File
 msgid "Omeka Video File"
-msgstr "Fișier video Omeka"
+msgstr "קובץ וידאו של אומקה"
 
 # Omeka Video File description
 msgid ""
 "The metadata element set that was included in the `files_videos` table in "
 "previous versions of Omeka. These elements are common to all video files."
-msgstr "Setul de elemente de metadate a fost inclus în tabelul „files_videos” al versiunilor precendente ale Omeka. Aceste elemente sunt comune tuturor fișierelor video."
+msgstr "מערך האלמנטים של מטה הנתונים שהיה כלול בטבלה \"קבצי_וידאו\" בגרסאות קודמות של אומקה. אלמנטים אלו כלולים בכל קבצי הוידאו."
 
 # Omeka Video File: Bitrate element
 msgid "Bitrate"
-msgstr "Bitrate"
+msgstr "קצב סיביות"
 
 # Omeka Video File: Duration element
 msgid "Duration"
-msgstr "Durată"
+msgstr "משך התצוגה"
 
 # Omeka Video File: Sample Rate element
 msgid "Sample Rate"
-msgstr "Sample Rate"
+msgstr "קצב דגימה"
 
 # Omeka Video File: Codec element
 msgid "Codec"
-msgstr "Codec"
+msgstr "קודק"
 
 # User role: Super
 msgid "Super"
-msgstr "Super"
+msgstr "על"
 
 # User role: Admin
 msgid "Admin"
-msgstr "Admin"
+msgstr "מנהל"
 
 # User role: Researcher
 msgid "Researcher"
-msgstr "Cercetător"
+msgstr "חוקר"
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:6
 msgid "Add a Collection"
-msgstr "Adaugă o colecție"
+msgstr "הוספת אוסף"
 
 #: admin/themes/default/collections/add.php:9
 msgid "Save Collection"
-msgstr "Salveză colecția"
+msgstr "שמירת אוסף"
 
 #: admin/themes/default/collections/browse.php:2
 #: application/views/scripts/collections/browse.php:2
 #: application/views/scripts/common/footer.php:6
 #: application/views/scripts/functions.php:98
 msgid "Browse Collections"
-msgstr "Vezi colecțiile"
+msgstr "חיפוש באוספים"
 
 #: admin/themes/default/collections/browse.php:4
 #: admin/themes/default/element-sets/browse.php:4
@@ -284,44 +284,44 @@ msgstr "Vezi colecțiile"
 #: application/views/scripts/items/browse.php:8
 #, php-format
 msgid "(%s total)"
-msgstr "(%s total)"
+msgstr "(%s סה\"כ)"
 
 #: admin/themes/default/collections/browse.php:18
 msgid "ID"
-msgstr "ID"
+msgstr "מזהה"
 
 #: admin/themes/default/collections/browse.php:19
 #: admin/themes/default/element-sets/browse.php:12
 #: admin/themes/default/item-types/form.php:20
 msgid "Name"
-msgstr "Nume"
+msgstr "שם"
 
 #: admin/themes/default/collections/browse.php:20
 #: admin/themes/default/collections/show.php:22
 msgid "Collectors"
-msgstr "Culegătorii"
+msgstr "אספנים"
 
 #: admin/themes/default/collections/browse.php:21
 #: admin/themes/default/files/show.php:24
 #: admin/themes/default/items/browse.php:134
 #: application/views/scripts/files/show.php:57
 msgid "Date Added"
-msgstr "Dată adăugată"
+msgstr "תאריך הוספה"
 
 #: admin/themes/default/collections/browse.php:22
 #: admin/themes/default/collections/show.php:39
 #: admin/themes/default/item-types/show.php:42
 msgid "Total Number of Items"
-msgstr "Toate resursele"
+msgstr "מספר כולל של פריטים"
 
 #: admin/themes/default/collections/browse.php:25
 #: admin/themes/default/item-types/browse.php:17
 msgid "Edit?"
-msgstr "Editezi?"
+msgstr "לערוך?"
 
 #: admin/themes/default/collections/browse.php:44
 msgid "No collectors"
-msgstr "Niciun culegător"
+msgstr "ללא אספנים"
 
 #: admin/themes/default/collections/browse.php:57
 #: admin/themes/default/items/browse.php:150
@@ -329,33 +329,33 @@ msgstr "Niciun culegător"
 #: admin/themes/default/users/browse.php:43
 #: admin/themes/default/users/browse.php:58
 msgid "Edit"
-msgstr "Editează"
+msgstr "עריכה"
 
 #: admin/themes/default/collections/browse.php:68
 msgid "There are no collections on this page."
-msgstr "Nu sunt colecții în această pagină."
+msgstr "בעמוד זה אין אוספים"
 
 #: admin/themes/default/collections/browse.php:68
 msgid "View All Collections"
-msgstr "Vezi toate colecțiile"
+msgstr "צפיה בכל האוספים"
 
 #: admin/themes/default/collections/browse.php:71
 msgid "Add a collection."
-msgstr "Adaugă o colecție."
+msgstr "הוספת אוספים."
 
 #: admin/themes/default/collections/browse.php:71
 msgid "There are no collections in your archive."
-msgstr "Nu există colecții în arhivă."
+msgstr "אין אוספים בארכיב שלך."
 
 #: admin/themes/default/collections/edit.php:8
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Edit Collection #%s"
-msgstr "Editează colecția #%s"
+msgstr "עריכת אוסף #%s"
 
 #: admin/themes/default/collections/edit.php:14
 msgid "Delete this Collection"
-msgstr "Șterge această colecție"
+msgstr "מחיקת אוסף זה"
 
 #: admin/themes/default/collections/edit.php:20
 #: admin/themes/default/files/edit.php:41
@@ -368,30 +368,30 @@ msgstr "Șterge această colecție"
 #: application/forms/SecuritySettings.php:70
 #: application/forms/ThemeConfiguration.php:67
 msgid "Save Changes"
-msgstr "Salvează modificările"
+msgstr "שמירת שינויים"
 
 #: admin/themes/default/collections/form.php:4
 msgid "Collection Details"
-msgstr "Detaliile colecției"
+msgstr "פרטי אוסף"
 
 #: admin/themes/default/collections/form.php:4
 #: admin/themes/default/item-types/form.php:17
 #: install/views/scripts/index/index.phtml:13
 msgid "Required Fields"
-msgstr "Câmpuri obligatorii"
+msgstr "שדות חובה"
 
 #: admin/themes/default/collections/form.php:7
 msgid "Collection Name"
-msgstr "Numele colecției"
+msgstr "שם האוסף"
 
 #: admin/themes/default/collections/form.php:15
 msgid "Collection Description"
-msgstr "Descrierea colecției"
+msgstr "תיאור האוסף"
 
 #: admin/themes/default/collections/form.php:25
 msgid ""
 "List collectors for this collection (optional - enter one name per line)"
-msgstr "Lista culegătorilor pentru această colecție (opțional - un singur nume per linie)"
+msgstr "רשימת האספנים עבור אוסף זה (אפשרות- הוספת שם אחד בכל שורה)"
 
 #: admin/themes/default/collections/form.php:35
 #: admin/themes/default/collections/form.php:37
@@ -401,12 +401,12 @@ msgstr "Lista culegătorilor pentru această colecție (opțional - un singur nu
 #: admin/themes/default/items/browse.php:177
 #: admin/themes/default/items/form.php:37
 msgid "Public"
-msgstr "Public"
+msgstr "ציבורי"
 
 #: admin/themes/default/collections/form.php:37
 #: admin/themes/default/items/batch-edit.php:43
 msgid "Not Public"
-msgstr "Privat"
+msgstr "לא ציבורי"
 
 #: admin/themes/default/collections/form.php:42
 #: admin/themes/default/collections/form.php:44
@@ -416,95 +416,95 @@ msgstr "Privat"
 #: admin/themes/default/items/browse.php:182
 #: admin/themes/default/items/form.php:43
 msgid "Featured"
-msgstr "Evidențiat"
+msgstr "מוצג"
 
 #: admin/themes/default/collections/form.php:44
 #: admin/themes/default/items/batch-edit.php:55
 msgid "Not Featured"
-msgstr "Neevidențiat"
+msgstr "לא מוצג"
 
 #: admin/themes/default/collections/show.php:11
 #: admin/themes/default/items/show.php:14
 msgid "View Public Page"
-msgstr "Vizualizează pagina publică"
+msgstr "צפיה בעמוד ציבורי"
 
 #: admin/themes/default/collections/show.php:13
 msgid "Edit this Collection"
-msgstr "Editează această colecție"
+msgstr "עריכת אוסף זה"
 
 #: admin/themes/default/collections/show.php:27
 msgid "No collectors."
-msgstr "Nu sunt culegători."
+msgstr "ללא אספנים"
 
 #: admin/themes/default/collections/show.php:33
 #: admin/themes/default/item-types/show.php:30
 #: application/views/scripts/index.php:35
 msgid "Recently Added Items"
-msgstr "Resurse adăugate recent"
+msgstr "פריטים שהוספו לאחרונה"
 
 #: admin/themes/default/common/footer.php:4
 msgid "Documentation"
-msgstr "Documentație"
+msgstr "תיעוד"
 
 #: admin/themes/default/common/footer.php:4
 #: admin/themes/default/common/login-footer.php:4
 msgid "Powered by Omeka"
-msgstr "Motorizat de Omeka"
+msgstr "מופעל באמצעות אומקה"
 
 #: admin/themes/default/common/footer.php:4
 msgid "Support Forums"
-msgstr "Forumuri de sprijin"
+msgstr "פורומי עזרה"
 
 #: admin/themes/default/common/footer.php:6
 #: admin/themes/default/common/login-footer.php:4
 #: admin/themes/default/plugins/plugin-info.php:65
 #, php-format
 msgid "Version %s"
-msgstr "Versiunea %s"
+msgstr "גרסה %s"
 
 #: admin/themes/default/common/footer.php:9
 msgid "More information about your system"
-msgstr "Mai multe informații despre sistem"
+msgstr "מידע נוסף על המערכת"
 
 #: admin/themes/default/common/header.php:5
 msgid "Omeka Admin"
-msgstr "Administratorul Omeka"
+msgstr "מנהל אומקה"
 
 #: admin/themes/default/common/header.php:24
 msgid "Skip Navigation"
-msgstr "Sari navigarea"
+msgstr "דלג על ניווט"
 
 #: admin/themes/default/common/header.php:33
 msgid "Log Out"
-msgstr "Log out"
+msgstr "יציאה מהמערכת"
 
 #: admin/themes/default/common/header.php:33
 #, php-format
 msgid "Welcome, %s"
-msgstr "Bine ai venit %s"
+msgstr "ברוך הבא %s"
 
 #: admin/themes/default/common/header.php:36 admin/themes/default/index.php:58
 msgid "Settings"
-msgstr "Setări"
+msgstr "הגדרות"
 
 #: admin/themes/default/common/header.php:38
 msgid "View Public Site"
-msgstr "Vizualizează siteul public"
+msgstr "צפה באתר הציבורי"
 
 #: admin/themes/default/common/primary-nav.php:5
 #: admin/themes/default/index.php:21
 #: admin/themes/default/items/batch-edit.php:14
 msgid "Items"
-msgstr "Resurse"
+msgstr "פריטים"
 
 #: admin/themes/default/common/primary-nav.php:6
 #: admin/themes/default/index.php:32
 msgid "Collections"
-msgstr "Colecții"
+msgstr "אוספים"
 
 #: admin/themes/default/common/primary-nav.php:7
 msgid "Item Types"
-msgstr "Tipuri de resurse"
+msgstr "סוגי פריטים"
 
 #: admin/themes/default/common/primary-nav.php:8
 #: admin/themes/default/items/browse.php:166
@@ -512,52 +512,52 @@ msgstr "Tipuri de resurse"
 #: application/views/scripts/items/browse.php:39
 #: application/views/scripts/items/show.php:26
 msgid "Tags"
-msgstr "Etichete"
+msgstr "תגיות"
 
 #: admin/themes/default/common/settings-nav.php:6
 msgid "General Settings"
-msgstr "Setări generale"
+msgstr "הגדרות כלליות"
 
 #: admin/themes/default/common/settings-nav.php:8
 msgid "Plugins"
-msgstr "Pluginuri"
+msgstr "תוספים"
 
 #: admin/themes/default/common/settings-nav.php:11
 msgid "Themes"
-msgstr "Teme"
+msgstr "ערכות נושא"
 
 #: admin/themes/default/common/settings-nav.php:14
 #: admin/themes/default/index.php:45
 msgid "Users"
-msgstr "Utilizatori"
+msgstr "משתמשים"
 
 #: admin/themes/default/common/settings-nav.php:17
 msgid "Element Sets"
-msgstr "Seturi de elemente"
+msgstr "מערכי אלמנטים"
 
 #: admin/themes/default/common/settings-nav.php:20
 msgid "Security Settings"
-msgstr "Setări de securitate"
+msgstr "הגדרות אבטחה"
 
 #: admin/themes/default/common/tags-nav.php:3
 #: admin/themes/default/tags/browse.php:2
 msgid "Browse Tags"
-msgstr "Vezi etichetele"
+msgstr "סיור בתגיות"
 
 #: admin/themes/default/common/tags-nav.php:5
 #: admin/themes/default/tags/edit.php:2
 msgid "Edit Tag"
-msgstr "Editează eticheta"
+msgstr "עריכת תגיות"
 
 #: admin/themes/default/common/tags-nav.php:8
 #: admin/themes/default/tags/delete.php:2
 #: admin/themes/default/tags/delete.php:21
 msgid "Delete Tag"
-msgstr "Șterge eticheta"
+msgstr "מחיקת תגיות"
 
 #: admin/themes/default/element-sets/browse.php:2
 msgid "Browse Element Sets"
-msgstr "Treci prin setul de elemente"
+msgstr "סיור במערכי אלמנטים"
 
 #: admin/themes/default/element-sets/browse.php:14
 #: admin/themes/default/items/batch-edit.php:101
@@ -566,243 +566,243 @@ msgstr "Treci prin setul de elemente"
 #: admin/themes/default/users/browse.php:46
 #: application/helpers/FormFunctions.php:574
 msgid "Delete"
-msgstr "Șterge"
+msgstr "מחיקה"
 
 #: admin/themes/default/error/403.php:2
 msgid "403: Forbidden"
-msgstr "403: Interzis"
+msgstr "403: אסור"
 
 #: admin/themes/default/error/403.php:9
 msgid "Sorry, you do not have permission to access this page."
-msgstr "Nu ai permisunea de a accesa această pagină"
+msgstr "מצטערים, אין לך הרשאות לצפות בעמוד זה."
 
 #: admin/themes/default/error/403.php:12 admin/themes/default/error/404.php:12
 #: admin/themes/default/error/405.php:10
 msgid "site administrator"
-msgstr "administratorul siteului"
+msgstr "מנהל האתר"
 
 #: admin/themes/default/error/403.php:13
 #, php-format
 msgid "If you think you should have permission, try contacting the %s."
-msgstr "Dacă crezi că ar trebui să ai permisiunea, contactează %s."
+msgstr "אם לדעתכם צריכה להיות לכם הרשאה, נסו ליצור קשר עם %s."
 
 #: admin/themes/default/error/404.php:2
 msgid "404: Page Not Found"
-msgstr "404: Pagină inexistentă"
+msgstr "404: העמוד לא נמצא"
 
 #: admin/themes/default/error/404.php:9
 msgid ""
 "You&#8217;ve tried to access a page that does not seem to exist. Sometimes "
 "this happens. Below is a quick break-down of the items, collections, and "
 "exhibits on this site."
-msgstr "Ai încercat să accesezi o pagină care pare să nu existe. Uneori acest lucru se mai întâmplă. Mai jos sunt detaliate înregistrările, colecțiile și expozițiile acestui site."
+msgstr "ניסיתם לגשת לעמוד שכנראה לא קיים.\nלעתים זה קורה. למטה יש תקציר של הפריטים, האוספים והמוצגים באתר זה."
 
 #: admin/themes/default/error/404.php:13
 #, php-format
 msgid "If this does not help, try contacting the %s."
-msgstr "Dacă nu e clar, contactează %s."
+msgstr "אם זה לא עוזר, נסו ליצור קשר עם %s."
 
 #: admin/themes/default/error/404.php:15 admin/themes/default/index.php:88
 msgid "Recent Items"
-msgstr "Resurse recente"
+msgstr "פריטים אחרונים"
 
 #: admin/themes/default/error/404.php:25
 msgid "Recent Collections"
-msgstr "Colecții recente"
+msgstr "אוספים אחרונים"
 
 #: admin/themes/default/error/405.php:2
 msgid "405: Method Not Allowed"
-msgstr "405: Metodă nepermisă"
+msgstr "405: השיטה אסורה"
 
 #: admin/themes/default/error/405.php:11
 #, php-format
 msgid ""
 "You must use a different method to access this URL. If you reached this page"
 " by following a link or clicking a button in Omeka, please contact the %s."
-msgstr "Folosește o altă metodă de acces pentru acest URL. Dacă ai ajuns pe această pagină urmârind un link sau ai apăsat pe un buton în Omeka, contactează %s."
+msgstr "עליך להשתמש בשיטה אחרת לגשת לכתובת URL זו. אם הגעתם לעמוד זה בעקבות קישור או לחיצה על כפתור באומקה. אנא צרו קשר עם %s."
 
 #: admin/themes/default/files/edit.php:8
 #, php-format
 msgid "Edit File #%s"
-msgstr "Editează fișierul #%s"
+msgstr "עריכת קובץ #%s"
 
 #: admin/themes/default/files/edit.php:17
 msgid "Delete this File"
-msgstr "Șterge acest fișier"
+msgstr "מחקו קובץ זה"
 
 #: admin/themes/default/files/edit.php:27
 #: application/views/scripts/functions.php:54
 msgid "Dublin Core"
-msgstr "Dublin Core"
+msgstr "ליבת דאבלין"
 
 #: admin/themes/default/files/edit.php:32
 msgid "Format (Legacy) Metadata"
-msgstr "Format de metadate (compatibil)"
+msgstr "תבנית מטה הנתונים (מיושנת)"
 
 #: admin/themes/default/files/show.php:9
 #: application/views/scripts/files/show.php:9
 #, php-format
 msgid "File #%s"
-msgstr "Fișierul #$%s"
+msgstr "קובץ #%s"
 
 #: admin/themes/default/files/show.php:15
 msgid "Edit this File"
-msgstr "Editează acest fișier"
+msgstr "עריכת קובץ זה"
 
 #: admin/themes/default/files/show.php:23
 #: application/views/scripts/files/show.php:55
 msgid "File History"
-msgstr "Istoricul fișierului"
+msgstr "הסטורית קובץ"
 
 #: admin/themes/default/files/show.php:26
 #: application/views/scripts/files/show.php:61
 msgid "Date Modified"
-msgstr "Data modificării"
+msgstr "תאריך עודכן"
 
 #: admin/themes/default/files/show.php:28
 #: application/views/scripts/files/show.php:65
 msgid "Authentication"
-msgstr "Autentificare"
+msgstr "אימות"
 
 #: admin/themes/default/files/show.php:36
 msgid "Format Metadata"
-msgstr "Formatare metadate"
+msgstr "תבנית מטה הנתונים"
 
 #: admin/themes/default/files/show.php:38
 #: application/views/scripts/files/show.php:23
 msgid "Archive Filename"
-msgstr "Numele fișierului de arhivă"
+msgstr "שם קובץ ארכיב"
 
 #: admin/themes/default/files/show.php:39
 #: application/views/scripts/files/show.php:28
 msgid "Original Filename"
-msgstr "Numele original al fișierului"
+msgstr "שם הקובץ המקורי"
 
 #: admin/themes/default/files/show.php:40
 #: application/views/scripts/files/show.php:33
 msgid "File Size"
-msgstr "Dimensiune fișier"
+msgstr "גודל קובץ"
 
 #: admin/themes/default/files/show.php:45
 #: admin/themes/default/item-types/show.php:20
 #: application/views/scripts/files/show.php:39
 msgid "Type Metadata"
-msgstr "Metadate aferente tip"
+msgstr "סוג מטה-נתונים"
 
 #: admin/themes/default/files/show.php:47
 #: application/views/scripts/files/show.php:41
 msgid "Mime Type / Browser"
-msgstr "Mime Type / Browser"
+msgstr "סוג/דפדפן Mime"
 
 #: admin/themes/default/files/show.php:48
 #: application/views/scripts/files/show.php:45
 msgid "Mime Type / OS"
-msgstr "Mime Type / OS"
+msgstr "סוג/מערכת הפעלה Mime"
 
 #: admin/themes/default/files/show.php:49
 #: application/views/scripts/files/show.php:49
 msgid "File Type / OS"
-msgstr "Tip fișier / OS"
+msgstr "סוג קובץ/מערכת הפעלה"
 
 #: admin/themes/default/files/show.php:54
 #: admin/themes/default/items/browse.php:201
 #: admin/themes/default/items/show.php:110
 msgid "Output Formats"
-msgstr "Formate de ieșire"
+msgstr "תבנית התוצר"
 
 #: admin/themes/default/index.php:2
 msgid "Dashboard"
-msgstr "Tablou operator"
+msgstr "לוח בקרה"
 
 #: admin/themes/default/index.php:12
 msgid "A new version of Omeka is available for download."
-msgstr "O nouă versiune Omeka este gata pentru descărcare."
+msgstr "גרסה חדשה של אומקה נגישה להורדה."
 
 #: admin/themes/default/index.php:13
 #, php-format
 msgid "Upgrade to %s"
-msgstr "Actualizare la %s"
+msgstr "שדרג ל-%s"
 
 #: admin/themes/default/index.php:19
 msgid "Getting Started with Omeka"
-msgstr "La start cu Omeka"
+msgstr "להתחיל עם אומקה"
 
 #: admin/themes/default/index.php:24
 msgid "Add a new item to your archive"
-msgstr "Adaugă o resursă nouă în arhivă"
+msgstr "הוספת פריט חדש לארכיון"
 
 #: admin/themes/default/index.php:25
 msgid "Browse your items"
-msgstr "Caută printre resurse"
+msgstr "חיפוש בין פריטים"
 
 #: admin/themes/default/index.php:28
 msgid "Manage items in your archive: add, edit, and delete items."
-msgstr "Gestionează-ți resursele: adaugă, editează și șterge."
+msgstr "ניהול פריטים בארכיון: הוספה, עריכה ומחיקה"
 
 #: admin/themes/default/index.php:35
 msgid "Add a collection to group items"
-msgstr "Adaugă o colecție pentru a grupa resurse"
+msgstr "הוספת אוסף לקבוצת פריטים"
 
 #: admin/themes/default/index.php:36
 msgid "Browse your collections"
-msgstr "Treci prin colecții"
+msgstr "חיפוש בין אוספים"
 
 #: admin/themes/default/index.php:39
 msgid "Manage collections in your archive: add, edit, and delete collections."
-msgstr "Gestionează colecțiile arhivei: adaugă, editează și șterge colecțiile."
+msgstr "ניהול אוספים בארכיב שלך: הוספה, עריכה ומחיקת אוספים."
 
 #: admin/themes/default/index.php:48 admin/themes/default/users/browse.php:2
 msgid "Browse Users"
-msgstr "Vezi utilizatorii"
+msgstr "דפדוף במשתמשים"
 
 #: admin/themes/default/index.php:50 admin/themes/default/users/browse.php:6
 msgid "Add a User"
-msgstr "Adaugă un utilizator"
+msgstr "הוספת משתמשים"
 
 #: admin/themes/default/index.php:53
 msgid "Manage users of various levels: from researcher to super."
-msgstr "Gestionează utilizatorii la diferite niveluri: de la cercetător, la super."
+msgstr "ניהול משתמשים בדרגות שונות: מחוקר עד מנהל"
 
 #: admin/themes/default/index.php:61 admin/themes/default/settings/edit.php:2
 msgid "Edit General Settings"
-msgstr "Modifică setările generale"
+msgstr "עריכת הגדרות כלליות"
 
 #: admin/themes/default/index.php:62
 msgid "Manage Themes"
-msgstr "Gestionează temele"
+msgstr "ניהול ערכות נושא"
 
 #: admin/themes/default/index.php:63
 msgid "Manage Plugins"
-msgstr "Gestionează pluginuri"
+msgstr "ניהול תוספים"
 
 #: admin/themes/default/index.php:65
 msgid ""
 "Manage your general settings for the site, including title, description, and"
 " themes."
-msgstr "Aranjează setările generale pentru site, incluzând titlul, descrierea și temele."
+msgstr "ניהול ההגדרות הכלליות שלך עבור האתר, כולל כותרת, תיאור וערכות נושא"
 
 #: admin/themes/default/index.php:75
 msgid "Site Overview"
-msgstr "Privire generală asupra siteului"
+msgstr "תיאור כללי של האתר"
 
 #: admin/themes/default/index.php:85
 #, php-format
 msgid ""
 "<em>%1$s</em> contains %2$s items, in %3$s collections, tagged with %4$s "
 "keywords. There are %5$s users."
-msgstr "<em>%1$s</em> cuprinzând %2$s resurse în %3$s colecții, etichetate prin %4$s cuvinte cheie. Sunt %5$s utilizatori."
+msgstr "<em>%1$s</em>כולל %2$s פריטים, ב-%3$s אוספים, מתוייגים עם %4$s מילות מפתח. יש %5$s משתמשים."
 
 #: admin/themes/default/index.php:91
 msgid "There are no items to display."
-msgstr "Nu există resurse pentru a fi afișate."
+msgstr "אין פריטים להצגה"
 
 #: admin/themes/default/index.php:102 application/views/scripts/index.php:71
 msgid "View All Items"
-msgstr "Vezi toate resursele"
+msgstr "צפיה בכל הפריטים"
 
 #: admin/themes/default/index.php:107
 msgid "Recent Tags"
-msgstr "Etichetele noi"
+msgstr "תגיות אחרונות"
 
 #: admin/themes/default/item-types/add-existing-element.php:7
 #: admin/themes/default/item-types/add-new-element.php:7
@@ -810,146 +810,146 @@ msgstr "Etichetele noi"
 #: admin/themes/default/item-types/element-list.php:24
 #: application/helpers/ElementForm.php:406
 msgid "Remove"
-msgstr "Elimină"
+msgstr "הסרה"
 
 #: admin/themes/default/item-types/add.php:2
 #: admin/themes/default/item-types/add.php:10
 msgid "Add Item Type"
-msgstr "Adaugă tip de resursă"
+msgstr "הוספת סוג פריט"
 
 #: admin/themes/default/item-types/browse.php:2
 msgid "Browse Item Types"
-msgstr "Vezi tipurile de resurse"
+msgstr "סיור בסוגי פריטים"
 
 #: admin/themes/default/item-types/browse.php:6
 msgid "Add an Item Type"
-msgstr "Adaugă un tip de resursă"
+msgstr "הוספת סוג פריט"
 
 #: admin/themes/default/item-types/browse.php:13
 msgid "Type Name"
-msgstr "Numele tipului"
+msgstr "שם פריט"
 
 #: admin/themes/default/item-types/browse.php:15
 msgid "Total Items"
-msgstr "Toate resursele"
+msgstr "סה\"כ פריטים"
 
 #: admin/themes/default/item-types/edit.php:8
 #, php-format
 msgid "Edit Item Type #%s"
-msgstr "Editează tipul de resursă #%s"
+msgstr "עריכת סוג פריט #%s"
 
 #: admin/themes/default/item-types/edit.php:14
 msgid "Delete this Item Type"
-msgstr "Șterge acest tip de resursă"
+msgstr "מחיקת סוג פריט זה"
 
 #: admin/themes/default/item-types/element-form.php:3
 msgid "Add an Element to this Item Type"
-msgstr "Adaugă un element la acest tip de resursă"
+msgstr "הוספת אלמנט לסוג פריט זה"
 
 #: admin/themes/default/item-types/element-form.php:6
 msgid "Choose an existing element"
-msgstr "Alege un element existent"
+msgstr "בחירת אלמנט קיים"
 
 #: admin/themes/default/item-types/element-form.php:14
 msgid "Or Create a new Element"
-msgstr "Sau scrie un element nou"
+msgstr "או יצירת אלמנט חדש"
 
 #: admin/themes/default/item-types/element-form.php:31
 #: admin/themes/default/item-types/element-list.php:7
 msgid "Data Type"
-msgstr "Tip de date"
+msgstr "סוג מידע"
 
 #: admin/themes/default/item-types/element-form.php:40
 #: admin/themes/default/item-types/element-list.php:61
 msgid "Add Element"
-msgstr "Adaugă element"
+msgstr "הוספת אלמנט"
 
 #: admin/themes/default/item-types/element-list.php:1
 msgid "Edit Current Elements"
-msgstr "Editează elementele existente"
+msgstr "עריכת האלמנטים הנוכחיים"
 
 #: admin/themes/default/item-types/element-list.php:5
 msgid "Element Name"
-msgstr "Nume element"
+msgstr "שם האלמנט"
 
 #: admin/themes/default/item-types/element-list.php:8
 msgid "Order"
-msgstr "Ordinea"
+msgstr "סדר"
 
 #: admin/themes/default/item-types/element-list.php:59
 msgid "Existing"
-msgstr "Existente"
+msgstr "קיים"
 
 #: admin/themes/default/item-types/element-list.php:60
 msgid "New"
-msgstr "Nou"
+msgstr "חדש"
 
 #: admin/themes/default/item-types/form.php:17
 msgid "Item Type Information"
-msgstr " Informații despre tipul resursei"
+msgstr "מידע על סוגי פריטים"
 
 #: admin/themes/default/item-types/form.php:35
 msgid "Elements"
-msgstr "Elemente"
+msgstr "אלמנטים"
 
 #: admin/themes/default/item-types/show.php:8
 #, php-format
 msgid "Item Type #%s"
-msgstr "Tip de resursă #%s"
+msgstr "סוג פריט #%s"
 
 #: admin/themes/default/item-types/show.php:13
 msgid "Edit this Item Type"
-msgstr "Editează acest tip de resursă"
+msgstr "עריכת סוג פריט זה"
 
 #: admin/themes/default/item-types/show.php:39
 msgid "There are no recently added items."
-msgstr "Nu există resurse adăugate recent."
+msgstr "אין פריטים שנוספו לאחרונה"
 
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:6
 msgid "Add an Item"
-msgstr "Adaugă o resursă"
+msgstr "הוספת פריט מסויים"
 
 #: admin/themes/default/items/add.php:12
 msgid "Add Item"
-msgstr "Adaugă resursă"
+msgstr "הוספת פריט"
 
 #: admin/themes/default/items/batch-edit.php:2
 msgid "Batch Edit Items"
-msgstr "Editează grupe de resurse"
+msgstr "עריכת פריטים בקבוצה"
 
 #: admin/themes/default/items/batch-edit.php:15
 msgid "Changes will be applied to checked items."
-msgstr "Modificările vor fi aplicate resurselor bifate."
+msgstr "השינויים יבוצעו בפריטים המסומנים."
 
 #: admin/themes/default/items/batch-edit.php:36
 msgid "Item Metadata"
-msgstr "Metadatele resursei"
+msgstr "מטה הנתונים של הפריטים"
 
 #: admin/themes/default/items/batch-edit.php:39
 msgid "Public?"
-msgstr "Public?"
+msgstr "ציבורי?"
 
 #: admin/themes/default/items/batch-edit.php:41
 #: admin/themes/default/items/batch-edit.php:53
 #: admin/themes/default/items/batch-edit.php:65
 #: admin/themes/default/items/batch-edit.php:78
 msgid "Select Below"
-msgstr "Selectează de mai jos"
+msgstr "לבחור למטה"
 
 #: admin/themes/default/items/batch-edit.php:51
 msgid "Featured?"
-msgstr "Evidențiat?"
+msgstr "מוצג?"
 
 #: admin/themes/default/items/batch-edit.php:62
 #: admin/themes/default/items/item-type-form.php:2
 msgid "Item Type"
-msgstr "Tipul resursei"
+msgstr "סוג פריט"
 
 #: admin/themes/default/items/batch-edit.php:70
 #: admin/themes/default/items/batch-edit.php:83
 msgid "Remove?"
-msgstr "Scoți?"
+msgstr "להסיר?"
 
 #: admin/themes/default/items/batch-edit.php:75
 #: admin/themes/default/items/browse.php:165
@@ -957,26 +957,26 @@ msgstr "Scoți?"
 #: admin/themes/default/items/show.php:62
 #: application/views/scripts/items/show.php:18
 msgid "Collection"
-msgstr "Colecție"
+msgstr "אוסף"
 
 #: admin/themes/default/items/batch-edit.php:88
 #: admin/themes/default/items/tag-form.php:11
 #: admin/themes/default/items/tag-form.php:13
 msgid "Add Tags"
-msgstr "Adaugă etichete"
+msgstr "הוספת תגיות"
 
 #: admin/themes/default/items/batch-edit.php:90
 #, php-format
 msgid "List of tags to add to all checked items, separated by %s."
-msgstr "Lista etichetelor pentru a fi adăugate resurselor bifate separate prin %s."
+msgstr "רשימת תגיות להוספה לכל הפריטים המסומנים, מופרדים על ידי %s."
 
 #: admin/themes/default/items/batch-edit.php:98
 msgid "Delete Items"
-msgstr "Șterge resurse"
+msgstr "מחיקת פריטים"
 
 #: admin/themes/default/items/batch-edit.php:99
 msgid "Check if you wish to delete selected items."
-msgstr "Bifează dacă dorești să ștergi resursele selectate."
+msgstr "סמנו אם ברצונכם למחוק את הפריטים המסומנים."
 
 #: admin/themes/default/items/browse.php:2
 #: application/views/scripts/common/footer.php:6
@@ -984,196 +984,196 @@ msgstr "Bifează dacă dorești să ștergi resursele selectate."
 #: application/views/scripts/items/browse.php:2
 #: application/views/scripts/items/tags.php:2
 msgid "Browse Items"
-msgstr "Vezi resursele"
+msgstr "דפדוף בפריטים"
 
 #: admin/themes/default/items/browse.php:13
 msgid "Toggle"
-msgstr "Comută"
+msgstr "לשנות"
 
 #: admin/themes/default/items/browse.php:14
 msgid "Details"
-msgstr "Detalii"
+msgstr "פרטים"
 
 #: admin/themes/default/items/browse.php:15
 msgid "Show Details"
-msgstr "Arată detaliile"
+msgstr "הראה פרטים"
 
 #: admin/themes/default/items/browse.php:16
 msgid "Hide Details"
-msgstr "Ascunde detaliile"
+msgstr "הסתר פרטים"
 
 #: admin/themes/default/items/browse.php:96
 msgid "Quick Filter"
-msgstr "Filtru rapid"
+msgstr "סינון מהיר"
 
 #: admin/themes/default/items/browse.php:99
 msgid "All"
-msgstr "Toate"
+msgstr "כל"
 
 #: admin/themes/default/items/browse.php:101
 msgid "Private"
-msgstr "Privat"
+msgstr "פרטי"
 
 #: admin/themes/default/items/browse.php:109
 #: application/helpers/LinkFunctions.php:63
 #: application/views/scripts/items/advanced-search.php:2
 msgid "Advanced Search"
-msgstr "Căutare avansată"
+msgstr "חיפוש מתקדם"
 
 #: admin/themes/default/items/browse.php:117
 #: admin/themes/default/items/browse.php:193
 msgid "Edit Selected Items"
-msgstr "Editează resursele selectate"
+msgstr "עריכת הפריטים המסומנים"
 
 #: admin/themes/default/items/browse.php:126
 msgid "Select"
-msgstr "Selectează"
+msgstr "בחרו"
 
 #: admin/themes/default/items/browse.php:165
 #: admin/themes/default/items/show.php:64
 msgid "No Collection"
-msgstr "Nicio colecție"
+msgstr "אין אוסף"
 
 #: admin/themes/default/items/browse.php:166
 msgid "No Tags"
-msgstr "Nicio etichetă"
+msgstr "אין תגיות"
 
 #: admin/themes/default/items/browse.php:207
 msgid "There are no items in the archive yet."
-msgstr "Încă nu există resurse în arhivă."
+msgstr "עדיין אין פריטים בארכיב"
 
 #: admin/themes/default/items/browse.php:210
 msgid "Add an item."
-msgstr "Adaugă o resursă"
+msgstr "הוספת פריט"
 
 #: admin/themes/default/items/browse.php:215
 #, php-format
 msgid "The query searched %s items and returned no results."
-msgstr "Căutarea s-a făcut pe %s resurse fără rezultat."
+msgstr "השאילתא חיפשה %s פריטים ולא החזירה תוצאות"
 
 #: admin/themes/default/items/browse.php:215
 #, php-format
 msgid "Would you like to %s?"
-msgstr "Dorești să %s?"
+msgstr "האם תרצו %s?"
 
 #: admin/themes/default/items/browse.php:215
 msgid "refine your search"
-msgstr "detaliază căutarea"
+msgstr "חפש באופן מדוייק יותר"
 
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
 #: application/helpers/LinkFunctions.php:271
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
-msgstr "[Fără titlu]"
+msgstr "[ללא כותרת]"
 
 #: admin/themes/default/items/edit.php:8
 #, php-format
 msgid "Edit Item #%s"
-msgstr "Editează resursa #%s"
+msgstr "עריכת פריט #%s"
 
 #: admin/themes/default/items/edit.php:12
 msgid "Delete this Item"
-msgstr "Șterge această resursă"
+msgstr "מחיקת פריט זה"
 
 #: admin/themes/default/items/files-form.php:4
 msgid ""
 "The path to Image Magick has not been set. No derivative images will be "
 "created. If you would like Omeka to create derivative images, please add the"
 " path to your settings form."
-msgstr "Nu a fost setată calea către Image Magick. Nu vor fi create imagini derivate. Dacă dorești ca Omeka să genereze imagini, adaugă calea în formularul setărilor. "
+msgstr "הנתיב ל-Image Magick לא הוגדר. אף גרסת תמונה לא תיווצר. אם ברצונך שאומקה תיצור גרסאות תמונה שונות, נא להוסיף"
 
 #: admin/themes/default/items/files-form.php:7
 msgid "Current Files"
-msgstr "Fișierele existente"
+msgstr "הקבצים הנוכחיים"
 
 #: admin/themes/default/items/files-form.php:12
 msgid "File Name"
-msgstr "Nume fișier"
+msgstr "שם קובץ"
 
 #: admin/themes/default/items/files-form.php:13
 msgid "Edit File Metadata"
-msgstr "Editează metadatele fișierului"
+msgstr "עריכת מטה הנתונים של הקובץ"
 
 #: admin/themes/default/items/files-form.php:34
 msgid "Add New Files"
-msgstr "Adaugă alte fișiere"
+msgstr "הוספת קבצים חדשים"
 
 #: admin/themes/default/items/files-form.php:37
 #: admin/themes/default/items/files-form.php:48
 msgid "Find a File"
-msgstr "Caută un fișier"
+msgstr "מציאת קובץ"
 
 #: admin/themes/default/items/form.php:21
 msgid "Add Another File"
-msgstr "Adaugă alt fișier"
+msgstr "הוספת קובץ נוסף"
 
 #: admin/themes/default/items/item-type-form.php:8
 msgid "Pick this type"
-msgstr "Alege acest tip"
+msgstr "בחר את סוג זה"
 
 #: admin/themes/default/items/show.php:8
 #, php-format
 msgid "Item #%s"
-msgstr "Resursa #%s"
+msgstr "פריט #%s"
 
 #: admin/themes/default/items/show.php:18
 msgid "Edit this Item"
-msgstr "Editează această resursă"
+msgstr "עריכת פריט זה"
 
 #: admin/themes/default/items/show.php:55
 msgid "Bibliographic Citation"
-msgstr "Referințe bibliografice"
+msgstr "ציטוט ביבליוגרפי"
 
 #: admin/themes/default/items/show.php:76
 #: admin/themes/default/items/tag-form.php:18
 msgid "My Tags"
-msgstr "Etichetele mele"
+msgstr "התגיות שלי"
 
 #: admin/themes/default/items/show.php:85
 msgid "Save Tags"
-msgstr "Salvează etichetele"
+msgstr "שמירת תגיות"
 
 #: admin/themes/default/items/show.php:95
 #: admin/themes/default/items/show.php:102
 msgid "View File Metadata"
-msgstr "Vezi metadatele fișierului"
+msgstr "צפיה במטה נתונים של קובץ"
 
 #: admin/themes/default/items/show.php:98
 msgid "Add a File"
-msgstr "Adaugă un fișier"
+msgstr "הוספת קובץ"
 
 #: admin/themes/default/items/show.php:98
 msgid "There are no files for this item yet."
-msgstr "Deocamdată nu sunt fișiere pentru această resursă"
+msgstr "אין קבצים עבור פריט זה עדיין"
 
 #: admin/themes/default/items/tag-form.php:14
 #, php-format
 msgid "Separate tags with %s"
-msgstr "Separă etichetele prin %s"
+msgstr "הפרד בין תגיות עם %s"
 
 #: admin/themes/default/items/tag-form.php:42
 #: admin/themes/default/items/tag-list.php:2
 msgid "All Tags"
-msgstr "Toate etichetele"
+msgstr "כל התגיות"
 
 #: admin/themes/default/items/tags.php:2
 msgid "Browse Items by Tag"
-msgstr "Răsfoiește resursele după etichete"
+msgstr "סיור בין פריטים על פי תגיות"
 
 #: admin/themes/default/items/tags.php:9
 #: admin/themes/default/tags/browse.php:27
 msgid "There are no tags to display. You must first tag some items."
-msgstr "Nu există etichete care să fie afișate. Mai întâi trebuie să etichetezi câteva resurse."
+msgstr "אין תגיות להצגה. קודם עליך לתייג פריטים מסויימים."
 
 #: admin/themes/default/plugins/browse.php:2
 msgid "Browse Plugins"
-msgstr "Vezi pluginurile"
+msgstr "דפדוף בתוספים"
 
 #: admin/themes/default/plugins/browse.php:21
 msgid ""
 "You do not have any plugins installed. Add them to the plugins directory to "
 "see them listed here."
-msgstr "Nu ai niciun plugin instalat. Adaugă-le în directorul plugins pentru a le vedea aici"
+msgstr "אין לך תוספים מותקנים. יש להוסיף אותם לתיקית התוספים כדי לראותם ברשימה כאן."
 
 #: admin/themes/default/plugins/browse.php:24
 msgid ""
@@ -1181,189 +1181,189 @@ msgid ""
 "ons/plugins/\">Omeka Plugins Directory</a>, or <a "
 "href=\"http://omeka.org/codex/Plugin_Writing_Best_Practices\">write your "
 "own</a>!"
-msgstr "Adaugă noi pluginuri descărcându-le de la <a href=\"http://omeka.org/add-ons/plugins/\">Omeka Plugins Directory</a> sau <a href=\"http://omeka.org/codex/Plugin_Writing_Best_Practices\">scrie tu altele urmând</a>!"
+msgstr "ניתן להוסיף תוספים על ידי הורדתם <a href=\"http://omeka.org/add-ons/plugins/\">מהתיקיה של תוספי אומקה</a> או <a href=\"http://omeka.org/codex/Plugin_Writing_Best_Practices\">לכתוב בעצמך</a>!"
 
 #: admin/themes/default/plugins/config.php:2
 #, php-format
 msgid "Configure the &#8220;%s&#8221; Plugin"
-msgstr "Configurează pluginul &#8220;%s&#8221;"
+msgstr "הגדרת התוסף &#8220;%s&#8221;"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:2
 #, php-format
 msgid "Confirm %s Uninstall"
-msgstr "Confirmă dezinstalarea lui %s"
+msgstr "אשרו הסרת %s"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:8
 msgid "Are you sure you want to uninstall this plugin?"
-msgstr "Ești sigur că vrei să dezinstalezi pluginul?"
+msgstr "האם אתם בטוחים שברצונכם להסיר את התוסף הזה?"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:13
 msgid "Yes, I want to uninstall this plugin."
-msgstr "Da, vreau să dezinstalez pluginul"
+msgstr "כן, ברצוני להסיר את תוסף זה."
 
 #: admin/themes/default/plugins/confirm-uninstall.php:16
 msgid "Cancel"
-msgstr "Anulează"
+msgstr "ביטול"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:16
 #: admin/themes/default/plugins/plugin-info.php:107
 msgid "Uninstall"
-msgstr "Dezinstalează"
+msgstr "הסרה"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:16
 msgid "or"
-msgstr "sau"
+msgstr "או"
 
 #: admin/themes/default/plugins/plugin-info.php:24
 #, php-format
 msgid "This version of %1$s requires at least Omeka %2$s."
-msgstr "Această versiune de %1$s necesită ca Omeka să fie cel puțin %2$s."
+msgstr "גרסה זו של %1$s דורשת את גרסת אומקה %2$s לפחות."
 
 #: admin/themes/default/plugins/plugin-info.php:27
 #, php-format
 msgid ""
 "%1$s requires the following plugins to be installed, activated, and loaded: "
 "%2$s"
-msgstr "%1$s necesită ca următoarele pluginuri să fie instalate, activate și încărcate: %2$s"
+msgstr "התוסף %1$s דורש שהתוספים הבאים יותקנו, יאוקטבו ויופעלו: %2$s"
 
 #: admin/themes/default/plugins/plugin-info.php:30
 msgid "The plugin.php file is missing."
-msgstr "Fișierul plugin.php lipsește."
+msgstr "הקובץ plugin.php חסר"
 
 #: admin/themes/default/plugins/plugin-info.php:39
 #, php-format
 msgid "The %s plugin cannot be loaded for the following reasons:"
-msgstr "Pluginul %s nu poate fi încărcate din următoarele motive:"
+msgstr "התוסף %s לא יכול לעלות בשל הסיבות הבאות:"
 
 #: admin/themes/default/plugins/plugin-info.php:48
 #, php-format
 msgid "You have a new version of %s. Please upgrade!"
-msgstr "Există o versiune nouă a lui %s. Actualizează!"
+msgstr "יש גרסה חדשה של %s, נא לשדרג!"
 
 #: admin/themes/default/plugins/plugin-info.php:58
 #: admin/themes/default/themes/browse.php:10
 msgid "Configure"
-msgstr "Configurează"
+msgstr "הגדירו"
 
 #: admin/themes/default/plugins/plugin-info.php:69
 #, php-format
 msgid "By %s"
-msgstr "De %s"
+msgstr "על ידי %s"
 
 #: admin/themes/default/plugins/plugin-info.php:87
 msgid "Upgrade"
-msgstr "Actualizează"
+msgstr "שדרגו"
 
 #: admin/themes/default/plugins/plugin-info.php:97
 #: application/views/scripts/users/activate.php:26
 msgid "Activate"
-msgstr "Activează"
+msgstr "הפעלה"
 
 #: admin/themes/default/plugins/plugin-info.php:97
 msgid "Deactivate"
-msgstr "Dezactivează"
+msgstr "כיבוי"
 
 #: admin/themes/default/plugins/plugin-info.php:117
 #: application/forms/Install.php:173
 msgid "Install"
-msgstr "Instalează"
+msgstr "התקנה"
 
 #: admin/themes/default/security/edit.php:2
 msgid "Edit Security Settings"
-msgstr "Editează setările de securitate"
+msgstr "עריכת הגדרות אבטחה"
 
 #: admin/themes/default/security/edit.php:10
 msgid "Restore Default File Extensions"
-msgstr "Restaurează extensiile la valoarea implicită"
+msgstr "שחזור ברירת המחדל של סיומות קבצים"
 
 #: admin/themes/default/security/edit.php:15
 msgid "Restore Default File Mime Types"
-msgstr "Restaurează Mime Type-urile implicite"
+msgstr "שחזור ברירת מחדל לסוגי קבצי Mime"
 
 #: admin/themes/default/settings/edit.php:10
 msgid "Test"
-msgstr "Test"
+msgstr "בדיקה"
 
 #: admin/themes/default/system-info/index.php:2
 msgid "System Information"
-msgstr "Informații de sistem"
+msgstr "מידע מערכת"
 
 #: admin/themes/default/tags/browse.php:8
 msgid "Sort by"
-msgstr "Sortează după"
+msgstr "מיין לפי"
 
 #: admin/themes/default/tags/browse.php:11
 msgid "Most"
-msgstr "Frecvent"
+msgstr "לכל היותר"
 
 #: admin/themes/default/tags/browse.php:12
 msgid "Least"
-msgstr "Rar"
+msgstr "לכל הפחות"
 
 #: admin/themes/default/tags/browse.php:13
 msgid "Alphabetical"
-msgstr "Alfabetic"
+msgstr "לפי סדר האלף בית"
 
 #: admin/themes/default/tags/browse.php:14
 msgid "Recent"
-msgstr "Recent"
+msgstr "לאחרונה"
 
 #: admin/themes/default/tags/delete.php:11
 msgid "Select a tag to delete:"
-msgstr "Alege o etichetă pentru ștergere"
+msgstr "בחרו תגית למחיקה:"
 
 #: admin/themes/default/tags/delete.php:25
 msgid "There are no tags to delete. You must first tag some items."
-msgstr "Nu sunt etichete pentru a fi șterse. Mai întâi etichetează câteva resurse."
+msgstr "אין תגיות למחיקה. עליך לבחור קודם פריטים."
 
 #: admin/themes/default/tags/edit.php:12
 msgid "Choose a tag to rename"
-msgstr "Alege o etichetă pentru a o redenumi"
+msgstr "בחרו תגית לשינוי שם"
 
 #: admin/themes/default/tags/edit.php:22
 msgid "Enter a new tag name"
-msgstr "Introdu noul nume"
+msgstr "הוספת שם תגית חדש"
 
 #: admin/themes/default/tags/edit.php:32
 msgid "There are no tags to edit. You must first tag some items."
-msgstr "Nu există etichete pentru a fi editate. Mai întâi etichetează câteva resurse."
+msgstr "אין תגיות לעריכה. עליך לבחור קודם תגיות של פריטים."
 
 #: admin/themes/default/themes/browse.php:2
 msgid "Browse Themes"
-msgstr "Vezi temele"
+msgstr "סיור בערכות נושא"
 
 #: admin/themes/default/themes/browse.php:10
 msgid "Current Theme"
-msgstr "Tema utilizată"
+msgstr "ערכת הנושא הנוכחית"
 
 #: admin/themes/default/themes/browse.php:13
 #: admin/themes/default/themes/browse.php:38
 #, php-format
 msgid "Screenshot for %s Theme"
-msgstr "Captură de ecran pentru tema %s"
+msgstr "תמונת מסך של ערכת הנושא %s"
 
 #: admin/themes/default/themes/browse.php:16
 #: admin/themes/default/themes/browse.php:32
 msgid "Author"
-msgstr "Autor"
+msgstr "כותב"
 
 #: admin/themes/default/themes/browse.php:17
 #: admin/themes/default/themes/browse.php:33
 msgid "License"
-msgstr "Licență"
+msgstr "רישיון"
 
 #: admin/themes/default/themes/browse.php:18
 #: admin/themes/default/themes/browse.php:34
 msgid "Website"
-msgstr "Site"
+msgstr "אתר"
 
 #: admin/themes/default/themes/browse.php:23
 msgid "Change Theme"
-msgstr "Modifică tema"
+msgstr "שינוי ערכת נושא"
 
 #: admin/themes/default/themes/browse.php:44
 msgid "Switch Theme"
-msgstr "Schimbă tema"
+msgstr "החלפת ערכת נושא"
 
 #: admin/themes/default/themes/browse.php:48
 msgid ""
@@ -1371,429 +1371,429 @@ msgid ""
 "ons/themes/\">Omeka Theme Directory</a>, or <a "
 "href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">design your "
 "own</a>!"
-msgstr "Adaugă noi teme descărcându-le de la <a href=\"http://omeka.org/add-ons/themes/\">Omeka Theme Directory</a> sau <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">scrieți propriile teme</a>!"
+msgstr "הוספת ערכות נושא חדשות על ידי הורדתן <a href=\"http://omeka.org/add-ons/themes/\">מהתיקיה ערכות הנושא של אומקה</a>, או <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">תעצבו אחת</a>!"
 
 #: admin/themes/default/themes/config.php:2
 #, php-format
 msgid "Configure the &#8220;%s&#8221; Theme"
-msgstr "Configurează tema &#8220;%s&#8221;"
+msgstr "הגדרת ערכת הנושא &#8220;%s&#8221;"
 
 #: admin/themes/default/themes/config.php:9
 msgid "Configurations apply to this theme only."
-msgstr "Configurările se aplică doar acestei teme"
+msgstr "ההגדרות משפיעות על ערכת הנושא הנוכחית בלבד."
 
 #: admin/themes/default/users/add.php:2
 msgid "Add New User"
-msgstr "Adaugă un utilizator nou"
+msgstr "הוספת משתמש חדש"
 
 #: admin/themes/default/users/browse.php:13
 msgid "Search Users"
-msgstr "Caută utilizator"
+msgstr "חיפוש בין המשתמשים"
 
 #: admin/themes/default/users/browse.php:15
 msgid "Select Role"
-msgstr "Selectează rolul"
+msgstr "בחירת תפקיד"
 
 #: admin/themes/default/users/browse.php:17
 msgid "Active"
-msgstr "Activ"
+msgstr "פעיל"
 
 #: admin/themes/default/users/browse.php:17
 msgid "Inactive"
-msgstr "Inactiv"
+msgstr "לא פעיל"
 
 #: admin/themes/default/users/browse.php:17
 msgid "Select Status"
-msgstr "Selectează starea"
+msgstr "בחירת מצב"
 
 #: admin/themes/default/users/browse.php:19
 msgid "Sort By"
-msgstr "Sortează după"
+msgstr "מיין לפי"
 
 #: admin/themes/default/users/browse.php:20 application/forms/User.php:78
 msgid "First Name"
-msgstr "Nume"
+msgstr "שם פרטי"
 
 #: admin/themes/default/users/browse.php:21 application/forms/User.php:91
 msgid "Last Name"
-msgstr "Prenume"
+msgstr "שם משפחה"
 
 #: admin/themes/default/users/browse.php:22
 msgid "Institution Name"
-msgstr "Numele Instituției"
+msgstr "שם מוסד"
 
 #: admin/themes/default/users/browse.php:23
 #: admin/themes/default/users/browse.php:41 application/forms/User.php:143
 msgid "Role"
-msgstr "Rol"
+msgstr "תפקיד"
 
 #: admin/themes/default/users/browse.php:24
 #: admin/themes/default/users/browse.php:38
 #: admin/themes/default/users/show.php:22 application/forms/Install.php:35
 #: application/forms/Login.php:25 application/forms/User.php:28
 msgid "Username"
-msgstr "Nume de utilizator"
+msgstr "שם משתמש"
 
 #: admin/themes/default/users/browse.php:26
 msgid "Sort Order"
-msgstr "Ordinea de sortare"
+msgstr "סדר המיון"
 
 #: admin/themes/default/users/browse.php:27
 msgid "Ascending"
-msgstr "Ascendent"
+msgstr "מנמוך לגבוה"
 
 #: admin/themes/default/users/browse.php:28
 msgid "Descending"
-msgstr "Descendent"
+msgstr "מגבוה לנמוך"
 
 #: admin/themes/default/users/browse.php:29
 #: application/helpers/FormFunctions.php:271
 #: application/views/scripts/items/advanced-search.php:167
 msgid "Search"
-msgstr "Caută"
+msgstr "חיפוש"
 
 #: admin/themes/default/users/browse.php:39
 #: admin/themes/default/users/show.php:24
 msgid "Real Name"
-msgstr "Nume real"
+msgstr "שם אמיתי"
 
 #: admin/themes/default/users/browse.php:40
 #: admin/themes/default/users/show.php:26 application/forms/Install.php:79
 #: application/forms/RecoverPassword.php:32 application/forms/User.php:105
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
-msgstr "Email"
+msgstr "דוא\"ל"
 
 #: admin/themes/default/users/edit.php:8
 #, php-format
 msgid "Edit User #%s"
-msgstr "Editează utilizatorul #%s"
+msgstr "עריכת משתמש #%s"
 
 #: admin/themes/default/users/show.php:8
 #, php-format
 msgid "User #%s"
-msgstr "Utilizatorul #%s"
+msgstr "משתמש #%s"
 
 #: admin/themes/default/users/show.php:15
 msgid "Edit this User"
-msgstr "Editează acest utilizator"
+msgstr "עריכת משתמש זה"
 
 #: admin/themes/default/users/show.php:28 application/forms/User.php:137
 msgid "Institution"
-msgstr "Instituție"
+msgstr "מוסד"
 
 #: application/controllers/CollectionsController.php:31
 #, php-format
 msgid "The collection \"%s\" was successfully added!"
-msgstr "Colecția \"%s\" a fost adăugată cu succes!"
+msgstr "האוסף \"%s\" הוסף בהצלחה!"
 
 #: application/controllers/CollectionsController.php:37
 #, php-format
 msgid "The collection \"%s\" was successfully changed!"
-msgstr "Colecția \"%s\" a fost modificată cu succes!"
+msgstr "האוסף \"%s\" שונה בהצלחה!"
 
 #: application/controllers/CollectionsController.php:43
 #, php-format
 msgid "The collection \"%s\" was successfully deleted!"
-msgstr "Colecția \"%s\" a fost ștearsă fără probleme!"
+msgstr "האוסף \"%s\" נמחק בהצלחה!"
 
 #: application/controllers/CollectionsController.php:48
 msgid ""
 "This will delete the collection and its associated metadata. This will not "
 "delete any items in this collection, but will delete the reference to this "
 "collection in each item."
-msgstr "Acest lucru va șterge colecția și metadatele asociate. Aceasta nu va șterge nicio resursă din colecție, dar va șterge referința către această colecție în fiecare dintre ele."
+msgstr "פעולה זו תמחק את האוסף ואת מטה הנתונים שלו. הפעולה לא תמחק פריטים הקיימים באוסף זה, אלא רק את הקישור אל האוסף בכל פריט."
 
 #: application/controllers/ElementSetsController.php:26
 msgid ""
 "This will delete the element set and all elements assigned to the element "
 "set. Items will lose all metadata that is specific to this element set."
-msgstr "Aceasta va șterge setul de elemente și toate elementele atribuite acestuia. Înregistrările vor pierde toate metadatele care sunt specifice acestui set de elemente."
+msgstr "פעולה זו תמחק את מערך האלמנטים ואת כל האלמנטים שהוגדרו למערך זה. פריטים יאבדו את כל מטה הנתונים הקשור באופן יחודי למערך האלמנטים הזה."
 
 #: application/controllers/ErrorController.php:66
 msgid "Page not found."
-msgstr "Pagină inexistentă."
+msgstr "העמוד לא נמצא."
 
 #: application/controllers/ErrorController.php:85
 msgid "Access denied."
-msgstr "Acces interzis."
+msgstr "הגישה נמנעה"
 
 #: application/controllers/ItemTypesController.php:38
 msgid ""
 "This will delete the item type but will not delete the elements assigned to "
 "the item type. Items that are assigned to this item type will lose all "
 "metadata that is specific to the item type."
-msgstr "Aceasta va șterge tipul de resursă. dar nu va șterge elementele atribuite lui. Înregistrările care sunt asignate acestui tip vor pierde și ele metadatele specifice tipului în cauză."
+msgstr "פעולה זו תמחק את סוג הפריט אך לא תמחק את האלמנטים הקשורים לסוג הפריט. פריטים שהוגדרו כסוג פריט זה יאבדו את כל מטה הנתונים היחודיים לסוג פריט זה"
 
 #: application/controllers/ItemTypesController.php:58
 #, php-format
 msgid ""
 "The item type \"%s\" was successfully added!  You may now add elements to "
 "your new item type."
-msgstr "Tipul de resursă \"%s\" a fost adăugată cu succes! În acest moment poți adăuga elemente noi la noul tău tip de resursă."
+msgstr "סוג הפריט \"%s\" הוסף בהצלחה!    ביכולתכם כעת להוסיף אלמנטים לסוג הפריט החדש שיצרתם."
 
 #: application/controllers/ItemTypesController.php:94
 #, php-format
 msgid "The item type \"%s\" was successfully changed!"
-msgstr "Tipul de resursă \"%s\" a fost modificată cu succes! "
+msgstr "סוג הפריט \"%s\" שונה בהצלחה!"
 
 #: application/controllers/ItemTypesController.php:115
 #: application/controllers/ItemTypesController.php:123
 #, php-format
 msgid "The item type cannot have more than one \"%s\" element."
-msgstr "Tipul de resursă nu poate avea mai mult de o resursă „%s”. "
+msgstr "סוג הפריט לא יכול לקבל יותר מאשר אלמנט \"%s\" אחד."
 
 #: application/controllers/ItemsController.php:108
 msgid "The item was successfully added!"
-msgstr "Resursa a fost adăugată cu succes!"
+msgstr "הפריט נוסף בהצלחה!"
 
 #: application/controllers/ItemsController.php:113
 msgid "The item was successfully changed!"
-msgstr "Resursa a fost modificată cu succes!"
+msgstr "הפריט שונה בהצלחה!"
 
 #: application/controllers/ItemsController.php:118
 msgid "The item was successfully deleted!"
-msgstr "Resursa a fost ștearsă cu succes!"
+msgstr "הפריט נמחק בהצלחה!"
 
 #: application/controllers/ItemsController.php:123
 msgid ""
 "This will delete the item and its associated metadata. It will also delete "
 "all files and file metadata associated with this item."
-msgstr "Aceasta ca șterge resursa și metadatele asociate. Va șterge și toate fișierele, precum și metadatele asociate."
+msgstr "פעולה זו תמחק את הפריט ואת כל מטה הנתונים שלו. הפעולה תמחק גם את כל הקבצים ומטה הנתונים המקושרים עם פריט זה."
 
 #: application/controllers/ItemsController.php:266
 msgid "User does not have permission to add tags."
-msgstr "Utilizatorul nu are permisiunea de a adăuga etichete."
+msgstr "משתמש לא יכול לקבל הרשאה להוסיף תגיות."
 
 #: application/controllers/ItemsController.php:299
 msgid "You must choose some items to batch edit."
-msgstr "Trebuie să alegi câteva resurse pentru a le edita în grup."
+msgstr "עליך לבחור מספר פריטים לעריכה קבוצתית."
 
 #: application/controllers/ItemsController.php:338
 msgid "User is not allowed to modify visibility of items."
-msgstr "Utilizatorului nu îi este permisă modificarea vizibilității resurselor."
+msgstr "למשתמש אין הרשאה לשנות את הנראות של פריטים."
 
 #: application/controllers/ItemsController.php:343
 msgid "User is not allowed to modify featured status of items."
-msgstr "Utilizatorului nu îi este permisă modificarea stării de evidențiere a unei resurse"
+msgstr "למשתמש אין הרשאה לשנות את סטטוס ההצגה של פריטים."
 
 #: application/controllers/ItemsController.php:350
 msgid "User is not allowed to delete selected items."
-msgstr "Utilizatorului nu îi este permisă ștergerea elementelor selectate."
+msgstr "למשתמש אין הרשאה למחוק את הפריטים הנבחרים."
 
 #: application/controllers/ItemsController.php:356
 msgid "User is not allowed to edit selected items."
-msgstr "Utilizatorului nu îi este permisă editarea înregistrărilor selectate."
+msgstr "למשתמש אין הרשאה לערוך את הפריטים הנבחרים."
 
 #: application/controllers/ItemsController.php:361
 msgid "User is not allowed to tag selected items."
-msgstr "Utilizatorului nu îi este permisă etichetarea înregistrărilor selectate."
+msgstr "למשתמש אין הרשאה לתייג את הפריטים הנבחרים."
 
 #: application/controllers/ItemsController.php:384
 msgid "The items were successfully changed!"
-msgstr "Înregistrările au fost modificate cu succes!"
+msgstr "הפריטים השתנו בהצלחה!"
 
 #: application/controllers/PluginsController.php:49
 #, php-format
 msgid ""
 "Error in configuring plugin named \"%s\". Missing config and/or config_form "
 "hook(s)."
-msgstr "A apărut o eroare la configurarea pluginului numit \"%s\". Configurări lipsă sau cuplă(e) config_form."
+msgstr "שגיאה בהגדרת התוסף בשם \"%s\". חסר config ו/או קישור(י) config_form\n?"
 
 #: application/controllers/PluginsController.php:55
 #, php-format
 msgid "The %s plugin was successfully configured!"
-msgstr "Pluginul %s a fost configurat cu succes!"
+msgstr "התוסף %s הוגדר בהצלחה!"
 
 #: application/controllers/PluginsController.php:70
 #, php-format
 msgid "The %s plugin has already been installed."
-msgstr "Pluginul %s a fost deja instalat."
+msgstr "התוסף %s כבר מותקן."
 
 #: application/controllers/PluginsController.php:76
 #, php-format
 msgid "The %s plugin was successfully installed!"
-msgstr "Pluginul %s a fost instalat cu succes!"
+msgstr "התוסף %s הותקן בהצלחה!"
 
 #: application/controllers/PluginsController.php:86
 #, php-format
 msgid "The following error occurred while installing the %s plugin: "
-msgstr "La instalarea pluginului %s au apărut următoarele erori:"
+msgstr "השגיאה הבאה התרחשה בעת התקנת התוסף %s:"
 
 #: application/controllers/PluginsController.php:111
 #, php-format
 msgid "The %s plugin was successfully activated!"
-msgstr "Pluginul %s a fost activat cu succes!"
+msgstr "התוסף %s הופעל בהצלחה!"
 
 #: application/controllers/PluginsController.php:113
 #, php-format
 msgid "The %s plugin was activated, but could not be loaded: "
-msgstr "Pluginul %s a fost activat, dar nu a putut fi încărcat:"
+msgstr "התוסף %s הופעל אך לא הצליח לעלות:"
 
 #: application/controllers/PluginsController.php:116
 #, php-format
 msgid "The following error occurred while activating the %s plugin: "
-msgstr "A apărut următoarea eroare la activarea pluginului %s:"
+msgstr "השגיאה הבאה התרחשה בעת הפעלת התוסף %s:"
 
 #: application/controllers/PluginsController.php:137
 #, php-format
 msgid "The %s plugin was successfully deactivated!"
-msgstr "Pluginul %s a fost dezactivat fără probleme!"
+msgstr "התוסף %s כובה בהצלחה!"
 
 #: application/controllers/PluginsController.php:139
 #, php-format
 msgid "The following error occurred while deactivating the %s plugin: "
-msgstr "În timp ce pluginul %s era dezactivat, a apărut următoarea problemă:"
+msgstr "השגיאה הבאה התרחשה בעת כיבוי התוסף %s:"
 
 #: application/controllers/PluginsController.php:156
 #, php-format
 msgid "The %s plugin was successfully upgraded!"
-msgstr "Pluginul %s a fost actualizat cu succes!"
+msgstr "התוסף %s שודרג בהצלחה!"
 
 #: application/controllers/PluginsController.php:161
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
-msgstr "La actualizarea pluginului %s a apărut următoarea eroare:"
+msgstr "השגיאה הבאה התרחשה בעת השידרוג של התוסף %s:"
 
 #: application/controllers/PluginsController.php:212
 msgid "You must confirm the uninstall before proceeding."
-msgstr "Trebuie să confirmi dezinstalarea înainte de a proceda."
+msgstr "עליך לאשר את ההסרה לפני שממשיכים."
 
 #: application/controllers/PluginsController.php:227
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
-msgstr "Pluginul %s a fost dezinstalat fără probleme!"
+msgstr "התוסף %s הוסר בהצלחה!"
 
 #: application/controllers/PluginsController.php:229
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
-msgstr "A apărut următoarea eroare la momentul dezinstalării pluginului %s:"
+msgstr "השגיאה הבאה התרחשה בעת הסרת התוסף %s:"
 
 #: application/controllers/PluginsController.php:256
 msgid "No plugin name given."
-msgstr "Nu a fost dat niciun nume pentru plugin."
+msgstr "לא ניתן שם התוסף."
 
 #: application/controllers/PluginsController.php:269
 #, php-format
 msgid "The plugin %s must be installed."
-msgstr "Pluginul %s trebuie instalat."
+msgstr "התוסף %s חייב להיות מותקן."
 
 #: application/controllers/SecurityController.php:46
 msgid "The security settings have been updated."
-msgstr "Setările de securitate au fost actualizate."
+msgstr "הגדרות האבטחה עודכנו."
 
 #: application/controllers/SettingsController.php:44
 msgid "The general settings have been updated."
-msgstr "Setările generale au fost actualizate."
+msgstr "ההגדרות הכלליות עודכנו."
 
 #: application/controllers/SettingsController.php:46
 #: install/views/scripts/index/index.phtml:16
 msgid "There were errors found in your form. Please edit and resubmit."
-msgstr "Au fost descoperite erori în formular. Editează și trimite din nou."
+msgstr "נמצאו שגיאות בטופס שלך. נא לערוך ולהגיש מחדש."
 
 #: application/controllers/SettingsController.php:70
 msgid "Works"
-msgstr "Lucrează"
+msgstr "עובד"
 
 #: application/controllers/SettingsController.php:71
 msgid "Fails"
-msgstr "A eșuat"
+msgstr "נכשל"
 
 #: application/controllers/TagsController.php:51
 #, php-format
 msgid "Tag named '%s' was successfully deleted."
-msgstr "Eticheta '%s' a fost ștearsă fără probleme."
+msgstr "התגית בשם %s הוסר בהצלחה."
 
 #: application/controllers/TagsController.php:64
 msgid "You have to be logged in to edit tags!"
-msgstr "Trebuie să fii logat pentru a edita etichetele!"
+msgstr "עליך להיות מחובר למערכת כדי לערוך תגיות!"
 
 #: application/controllers/TagsController.php:101
 #, php-format
 msgid "Tag named \"%1$s\" was successfully renamed to \"%2$s\"."
-msgstr "Eticheta numită \"%1$s\" s fost redenumită în \"%2$s\" fără probleme."
+msgstr "שם התגית \"%1$s\" שונה בהצלחה לשם \"%2$s\"."
 
 #: application/controllers/TagsController.php:128
 msgid "Invalid tagType given"
-msgstr "tagType invalid"
+msgstr "סוג התגית שניתן אינו חוקי."
 
 #: application/controllers/ThemesController.php:30
 msgid "Invalid form submission."
-msgstr "A fost trimis un formular nevalid."
+msgstr "הגשת טופס לא חוקי"
 
 #: application/controllers/ThemesController.php:38
 msgid "You have chosen an illegal theme name. Please select another theme."
-msgstr "Ai ales o denumire nevalidă pentru numele temei. Selectează o altă temă."
+msgstr "נבחר שם ערכת נושא לא חוקי. נא לבחור ערכת נושא אחרת."
 
 #: application/controllers/ThemesController.php:51
 msgid "The theme has been successfully changed."
-msgstr "Tema a fost modificată fără probleme."
+msgstr "ערכת הנושא שונתה בהצלחה."
 
 #: application/controllers/ThemesController.php:77
 msgid "The theme settings were successfully saved!"
-msgstr "Setările temei au fost salvate fără probleme!"
+msgstr "הגדרות ערכות הנושא נשמרו בהצלחה!"
 
 #: application/controllers/UpgradeController.php:57
 msgid "SQL error in migration: "
-msgstr "Eroare SQL la migrare:"
+msgstr "שגיאת SQL בהעברה:"
 
 #: application/controllers/UsersController.php:97
 #: application/controllers/UsersController.php:103
 msgid ""
 "Unable to reset password. Please verify that the information is correct and "
 "contact an administrator if necessary."
-msgstr "Nu se poate reseta parola. verifică dacă informația este corectă sau dacă este necesar un contact sau administratorul."
+msgstr "לא מצליח לאפס סיסמה. נא לוודא שהמידע נכון וצרו קשר עם מנהל אם יש צורך."
 
 #: application/controllers/UsersController.php:129
 msgid "Please follow this link to reset your password:"
-msgstr "Urmează acest link pentru a reseta parola:"
+msgstr "נא להיכנס לקישור זה כדי לאפס את סיסמתך"
 
 #: application/controllers/UsersController.php:131
 #: application/controllers/UsersController.php:134
 #: application/controllers/UsersController.php:298
 #, php-format
 msgid "%s Administrator"
-msgstr "%s Administrator"
+msgstr "%s מנהל"
 
 #: application/controllers/UsersController.php:135
 #, php-format
 msgid "[%s] Reset Your Password"
-msgstr "[%s] Resetează parola"
+msgstr "[%s] אפס את סיסמתך"
 
 #: application/controllers/UsersController.php:138
 msgid "Please check your email for a link to reset your password."
-msgstr "Verifică mailul pentru linkul de resetare a parolei."
+msgstr "נא לבדוק את הדוא\"ל שלך עבור קישור לאיפוס הסיסמה שלך."
 
 #: application/controllers/UsersController.php:154
 msgid "Password: The passwords do not match."
-msgstr "Parolă: această parolă nu se potrivește."
+msgstr "סיסמה: הסיסמאות לא תואמות."
 
 #: application/controllers/UsersController.php:160
 msgid "You may now log in to Omeka."
-msgstr "Acum te poți loga la Omeka."
+msgstr "כעת ביכולתך להתחבר לאומקה."
 
 #: application/controllers/UsersController.php:179
 msgid "Add User"
-msgstr "Adaugă utilizator"
+msgstr "הוספת משתמש"
 
 #: application/controllers/UsersController.php:189
 #, php-format
 msgid "The user \"%s\" was successfully added!"
-msgstr "Utilizatorul \"%s\" a fost adăugat cu succes!"
+msgstr "המשתמש \"%s\" הוסף בהצלחה!"
 
 #: application/controllers/UsersController.php:245
 msgid "Password changed!"
-msgstr "Parola a fost modificată!"
+msgstr "הסיסמה שונתה!"
 
 #: application/controllers/UsersController.php:254
 #, php-format
 msgid "The user %s was successfully changed!"
-msgstr "Utilizatorul %s a fost modificat fără probleme!"
+msgstr "המשתמש %s שונה בהצלחה!"
 
 #: application/controllers/UsersController.php:274
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
-msgstr "Utilizatorul \"%s\" a fost șters fără probleme!"
+msgstr "המשתמש %s נמחק בהצלחה!"
 
 #: application/controllers/UsersController.php:280
 #, php-format
@@ -1801,403 +1801,403 @@ msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
 "this user will remain in the archive, but will no longer be associated with "
 "this user."
-msgstr "%s va fi șters din sistem. Resursele, colecțiile și etichetele create de el vor rămâne în arhivă dar nu vor mai fi asociate cu acest utilizator. "
+msgstr "%s ימחק מהמערכת. פריטים, אוספים ותיוגים שנוצרו על ידי משתמש זה ישארו בארכיב, אבל לא יהיו מקושרים יותר למשתמש זה."
 
 #: application/controllers/UsersController.php:294
 msgid "Welcome!"
-msgstr "Bine ai venit!"
+msgstr "ברוכים הבאים!"
 
 #: application/controllers/UsersController.php:296
 #, php-format
 msgid ""
 "Your account for the %s archive has been created. Please click the following"
 " link to activate your account:"
-msgstr "Contul tău pentru arhiva %s a fost creat. Urmează următorul link pentru a-ți activa contul:"
+msgstr "החשבון שלך עבור הארכיב %s נוצר. נא להיכנס לקישור הבא כדי להפעיל את החשבון שלך:"
 
 #: application/controllers/UsersController.php:299
 #, php-format
 msgid "Activate your account with the %s archive"
-msgstr "Activează-și contul la arhiva %s"
+msgstr "הפעל את החשבון שלך עם הארכיב %s"
 
 #: application/forms/ChangePassword.php:35
 msgid "Current Password"
-msgstr "Parola existentă"
+msgstr "סיסמה נוכחית"
 
 #: application/forms/ChangePassword.php:44
 msgid "New Password"
-msgstr "Parola nouă"
+msgstr "סיסמה חדשה"
 
 #: application/forms/ChangePassword.php:78
 msgid "Repeat New Password"
-msgstr "Repetă parola nouă"
+msgstr "חזרה על סיסמה חדשה"
 
 #: application/forms/ChangePassword.php:86
 msgid "Save Password"
-msgstr "Salvează parola"
+msgstr "שמירת סיסמה"
 
 #: application/forms/ChangePassword.php:95
 msgid "Change Password"
-msgstr "Modifică parola"
+msgstr "שינוי סיסמה"
 
 #: application/forms/GeneralSettings.php:28 application/forms/Install.php:85
 msgid "Site Title"
-msgstr "Titlul siteului"
+msgstr "כותרת האתר"
 
 #: application/forms/GeneralSettings.php:32 application/forms/Install.php:90
 msgid "Site Description"
-msgstr "Descrierea siteului"
+msgstr "תיאור האתר"
 
 #: application/forms/GeneralSettings.php:36 application/forms/Install.php:94
 msgid "Administrator Email"
-msgstr "Emailul administratorului"
+msgstr "דוא\"ל מנהל"
 
 #: application/forms/GeneralSettings.php:42 application/forms/Install.php:100
 msgid "Site Copyright Information"
-msgstr "Informații privind drepturile de autor pentru acest site"
+msgstr "מידע זכויות יוצרים של האתר"
 
 #: application/forms/GeneralSettings.php:46 application/forms/Install.php:104
 msgid "Site Author Information"
-msgstr "Informații privind autorul siteului"
+msgstr "מידע על כותב האתר"
 
 #: application/forms/GeneralSettings.php:50 application/forms/Install.php:108
 msgid "Tag Delimiter"
-msgstr "Delimitator între etichete"
+msgstr "תוחם תגיות"
 
 #: application/forms/GeneralSettings.php:51
 msgid ""
 "Separate tags using this character or string. Be careful when changing this "
 "setting. You run the risk of splitting tags that contain the old delimiter."
-msgstr "Separă etichetele folosind acest caracter sau șir. Fii atent atunci câns schimbi această setare. Riști să rupi etichete care pot conține vechiul caracter existent."
+msgstr "הפרדת תגיות באמצעות התו או המחרוזת. נא להיזהר בשינוי הגדרה זו. זה עלול לגרום להפרדת תגיות המכילות את התוחם הישן."
 
 #: application/forms/GeneralSettings.php:64 application/forms/Install.php:123
 msgid "Fullsize Image Size"
-msgstr "Imaginea la dimensiune sa reală"
+msgstr "גודל תמונה מלא"
 
 #: application/forms/GeneralSettings.php:65 application/forms/Install.php:124
 msgid "Maximum fullsize image size constraint (in pixels)."
-msgstr "Limitarea dimensiunii imaginii la expunere integrală (în pixeli)."
+msgstr "הגבלת גודל מקסימלי לגודל תמונה מלא (בפיקסלים)"
 
 #: application/forms/GeneralSettings.php:71 application/forms/Install.php:131
 msgid "Thumbnail Size"
-msgstr "Imagine timbru"
+msgstr "גודל תמונה מוקטנת"
 
 #: application/forms/GeneralSettings.php:72 application/forms/Install.php:132
 msgid "Maximum thumbnail size constraint (in pixels)."
-msgstr "Limitarea dimensiunii maxime a imaginii timbru (în pixeli)."
+msgstr "הגבלת גודל מקסימלי לגודל תמונה מוקטנת (בפיקסלים)"
 
 #: application/forms/GeneralSettings.php:78 application/forms/Install.php:139
 msgid "Square Thumbnail Size"
-msgstr "Imagine timbru în pătrat"
+msgstr "גודל תמונה מוקטנת מרובעת"
 
 #: application/forms/GeneralSettings.php:79 application/forms/Install.php:140
 msgid "Maximum square thumbnail size constraint (in pixels)."
-msgstr "Limitarea dimensiunilor imaginii timbru în pătrat (în pixeli)."
+msgstr "הגבלת גודל מקסימלי לגודל תמונה מוקטנת מרובעת (בפיקסלים)"
 
 #: application/forms/GeneralSettings.php:85 application/forms/Install.php:147
 msgid "Items Per Page (admin)"
-msgstr "Resurse per pagină (administrator)"
+msgstr "פריטים בכל עמוד (מנהל)"
 
 #: application/forms/GeneralSettings.php:86 application/forms/Install.php:148
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
-msgstr "Limitarea numărului de resurse afișate pe o pagină în interfața de administrare."
+msgstr "הגבלת מספר הפריטים המוצגים בכל עמוד בממשק הניהול"
 
 #: application/forms/GeneralSettings.php:92 application/forms/Install.php:155
 msgid "Items Per Page (public)"
-msgstr "Resurse per pagină (public)"
+msgstr "פריטים בכל עמוד (ציבורי)"
 
 #: application/forms/GeneralSettings.php:93 application/forms/Install.php:156
 msgid "Limit the number of items displayed per page in the public interface."
-msgstr "Limitarea numărului de resurse afișate per pagină în interfața publică."
+msgstr "הגבלת מספר הפריטים המוצגים בכל עמוד בממשק הציבורי"
 
 #: application/forms/GeneralSettings.php:99 application/forms/Install.php:163
 msgid "Show Empty Elements"
-msgstr "Arată elementele goale"
+msgstr "הראה אלמנטים ריקים"
 
 #: application/forms/GeneralSettings.php:104
 msgid "Enable Prototype"
-msgstr "Activează Prototype"
+msgstr "אפשר Prototype"
 
 #: application/forms/GeneralSettings.php:106
 msgid ""
 "Enable the Prototype JavaScript library. This may be required for some older"
 " plugins."
-msgstr "Activarea bibliotecii JavaScript intitulată Prototype. Aceasta poate fi necesară pentru câteva pluginuri mai vechi."
+msgstr "אפשר את תיקית Prototype JavaScript. זה עשוי להיות נחוץ עבור תוספים ישנים מסויימים."
 
 #: application/forms/GeneralSettings.php:110 application/forms/Install.php:169
 msgid "Imagemagick Directory Path"
-msgstr "Calea către directorul ImageMagick"
+msgstr "נתיב לתיקית Imagemagick"
 
 #: application/forms/GeneralSettings.php:114
 msgid "Save Settings"
-msgstr "Salvează setările"
+msgstr "שמירת הגדרות"
 
 #: application/forms/Install.php:37
 msgid "Only alphanumeric characters are allowed."
-msgstr "Sunt permise doar caractere alfanumerice"
+msgstr "רק תוים אלפא נומרים מותרים."
 
 #: application/forms/Install.php:43 application/forms/Login.php:34
 msgid "Password"
-msgstr "Parolă"
+msgstr "סיסמה"
 
 #: application/forms/Install.php:44
 msgid "Must be at least 6 characters."
-msgstr "Cel puțin 6 caractere."
+msgstr "חייבת להיות עם לפחות 6 תוים."
 
 #: application/forms/Install.php:66 application/forms/ResetPassword.php:49
 #: application/views/scripts/users/activate.php:19
 msgid "Re-type the Password"
-msgstr "Reintrodu parola!"
+msgstr "כתבו מחדש את הסיסמה"
 
 #: application/forms/Install.php:67
 msgid "Confirm your password."
-msgstr "Confirmă parola."
+msgstr "אשרו את סיסמתכם."
 
 #: application/forms/Install.php:109
 msgid "Separate tags using this character or string."
-msgstr "Separă etichetele utilizând acest caracter sau șir."
+msgstr "הפרדת תגיות באמצעות תו זה או מחרוזת זו"
 
 #: application/forms/Install.php:165
 msgid "Whether metadata elements with no text will be displayed."
-msgstr "Afișarea elementelor de metadate fără text"
+msgstr "האם אלמנטים של מטה נתונים ללא כיתוב יוצגו."
 
 #: application/forms/Install.php:180
 msgid "Default Superuser Account"
-msgstr "Contul Superuser implicit"
+msgstr "חשבון ברירת מחדל של מנהל"
 
 #: application/forms/Install.php:190
 msgid "Site Settings"
-msgstr "Setările siteului"
+msgstr "הגדרות אתר"
 
 #: application/forms/Login.php:32
 msgid "Username cannot be empty."
-msgstr "Numele de utilizator nu poate fi gol."
+msgstr "שם משתמש לא יכול להיות ריק."
 
 #: application/forms/Login.php:41
 msgid "Password cannot be empty."
-msgstr "Introdu o parolă!"
+msgstr "סיסמה לא יכולה להיות ריקה"
 
 #: application/forms/Login.php:42
 msgid "Remember Me?"
-msgstr "Ține-mă minte!"
+msgstr "לזכור אותי?"
 
 #: application/forms/Login.php:44 application/views/scripts/users/login.php:3
 msgid "Log In"
-msgstr "Login"
+msgstr "התחברות"
 
 #: application/forms/RecoverPassword.php:41
 msgid "Email address is required."
-msgstr "Este necesară o adresă de email"
+msgstr "כתובת דוא\"ל היא חובה"
 
 #: application/forms/RecoverPassword.php:51
 msgid "Invalid email address given."
-msgstr "Ai introdus o adresă email greșită."
+msgstr "הוזנה כתובת דוא\"ל לא חוקית."
 
 #: application/forms/RecoverPassword.php:53
 msgid "Invalid format given for email address."
-msgstr "Format nepermis pentru email"
+msgstr "כתובת דוא\"ל ניתנה בתבנית לא חוקית"
 
 #: application/forms/RecoverPassword.php:55
 msgid "Invalid hostname given for email address."
-msgstr "Nume de host nepermis pentru email."
+msgstr "ניתן שם מחשב לא חוקי עבור כתובת הדוא\"ל."
 
 #: application/forms/RecoverPassword.php:73
 msgid "Invalid email address"
-msgstr "Adresă email nepermisă ca și combinație"
+msgstr "כתובת דוא\"ל לא חוקית"
 
 #: application/forms/ResetPassword.php:28
 #: application/views/scripts/users/activate.php:13
 msgid "Create a Password"
-msgstr "Pune o parolă!"
+msgstr "צרו סיסמה"
 
 #: application/forms/ResetPassword.php:32
 msgid "Password is required."
-msgstr "Este nevoie de o parolă."
+msgstr "סיסמה היא חובה"
 
 #: application/forms/ResetPassword.php:38
 msgid "Typed passwords do not match."
-msgstr "Parolele introduse nu se potrivesc."
+msgstr "הסיסמאות המוזנות לא תואמות."
 
 #: application/forms/SecuritySettings.php:27
 msgid "Disable File Upload Validation"
-msgstr "Dezactivează validarea la momentul încărcării fișierelor"
+msgstr "ביטול קביעת החוקיות של קבצים מועלים"
 
 #: application/forms/SecuritySettings.php:29
 msgid ""
 "Check this field if you would like to allow any file to be uploaded to "
 "Omeka."
-msgstr "Bifează acest câmp dacă dorești să permiți orice fel de fișier să fie încărcat."
+msgstr "סמן את שדה זה אם ברצונך לאפשר להעלות כל קובץ לאומקה."
 
 #: application/forms/SecuritySettings.php:35
 msgid "Allowed File Extensions"
-msgstr "Extensii de fișier care sunt permise"
+msgstr "סיומות קובץ מותרות"
 
 #: application/forms/SecuritySettings.php:36
 msgid "List of allowed extensions for file uploads."
-msgstr "Lista extensiilor permise"
+msgstr "רשימת הסיומות המותרות עבור העלאת קבצים"
 
 #: application/forms/SecuritySettings.php:45
 msgid "Allowed File Types"
-msgstr "Tipuri de fișiere permise"
+msgstr "סוגי קבצים מותרים"
 
 #: application/forms/SecuritySettings.php:46
 msgid "List of allowed MIME types for file uploads"
-msgstr "Lista de MIME types permise la încărcare"
+msgstr "רשימת סוגי ה-Mime המותרים להעלאת קבצים"
 
 #: application/forms/SecuritySettings.php:55
 msgid "ReCaptcha Public Key"
-msgstr "Cheie Publică ReCaptcha"
+msgstr "מפתח ציבורי של ReCatcha"
 
 #: application/forms/SecuritySettings.php:56
 msgid ""
 "Public key from recaptcha.net. Both this and the private key must be filled "
 "in to secure public forms."
-msgstr "Cheie publică de la recaptcha.net. Împreună cu, cheia privată trebuie introduse pentru a securiza formularele din zona publică."
+msgstr "מפתח ציבורי מהאתר recaptcha.net. חייבים למלא גם את המפתח הזה וגם את המפתח הפרטי כדי לאבטח טפסים ציבוריים."
 
 #: application/forms/SecuritySettings.php:63
 msgid "ReCaptcha Private Key"
-msgstr "Cheia privată ReCaptcha"
+msgstr "מפתח פרטי של ReCaptcha"
 
 #: application/forms/SecuritySettings.php:64
 msgid ""
 "Private key from recaptcha.net. Both this and the public key must be filled "
 "in to secure public forms."
-msgstr "Cheie privată de la recaptcha.net. Aceasta împreună cu, cheia publică trebuie introduse în formulare publice securizate."
+msgstr "מפתח פרטי מהאתר recaptcha.net. חייבים למלא גם את המפתח הזה וגם את המפתח הציבורי כדי לאבטח טפסים ציבוריים."
 
 #: application/forms/User.php:35
 msgid "Username is required."
-msgstr "Este necesar numele utilizatorului."
+msgstr "נחוץ שם משתמש"
 
 #: application/forms/User.php:43
 msgid "Username must contain only letters and numbers."
-msgstr "Numele utilizatorului trebuie să conțină doar litere și cifre."
+msgstr "שם משתמש יכול להכיל רק אותיות ומספרים"
 
 #: application/forms/User.php:53
 msgid "Username must be at least %min% characters long."
-msgstr "Numele utilizatorului trebuie să fie de cel puțin %min% caractere."
+msgstr "שם משתמש חייב להכיל %min% תווים לפחות."
 
 #: application/forms/User.php:55
 msgid "Username must be at most %max% characters long."
-msgstr "Numele utilizatorului trebuie să fie de maxim %max% caractere."
+msgstr "שם משתמש יכול להכיל %max% תווים לכל היותר."
 
 #: application/forms/User.php:69
 msgid "This username is already in use."
-msgstr "Acest nume de utilizator este deja în uz."
+msgstr "שם המשתמש הזה כבר בשימוש."
 
 #: application/forms/User.php:84
 msgid "First name is required."
-msgstr "Este necesar numele."
+msgstr "שם פרטי הוא שדה חובה."
 
 #: application/forms/User.php:97
 msgid "Last name is required."
-msgstr "Este necesar prenumele."
+msgstr "שם משפחה הוא שדה חובה."
 
 #: application/forms/User.php:103
 msgid "This email address is invalid."
-msgstr "Această adresă de email este nevalidă."
+msgstr "כתובת דוא\"ל זו אינה חוקית."
 
 #: application/forms/User.php:111
 msgid "Email is required."
-msgstr "Este necesară o adresă de email."
+msgstr "דוא\"ל הוא שדה חובה."
 
 #: application/forms/User.php:130
 msgid "This email address is already in use."
-msgstr "Acest email este deja folosit."
+msgstr "כתובת דוא\"ל זו כבר בשימוש."
 
 #: application/forms/User.php:151
 msgid "Active?"
-msgstr "Activ?"
+msgstr "פעיל?"
 
 #: application/helpers/AssetFunctions.php:270
 #: application/helpers/AssetFunctions.php:289
 #, php-format
 msgid "Could not find file %s!"
-msgstr "Nu pot găsi fișierul %s!"
+msgstr "לא מצליח למצוא את הקובץ %s!"
 
 #: application/helpers/CollectionFunctions.php:58
 #, php-format
 msgid "%s does not exist for collections!"
-msgstr "%s nu există pentru colecții!"
+msgstr "%s לא קיים עבור אוספים!"
 
 #: application/helpers/CollectionFunctions.php:123
 msgid "Featured Collection"
-msgstr "Colecții evidențiate"
+msgstr "אוסף מוצג"
 
 #: application/helpers/CollectionFunctions.php:131
 msgid "No featured collections are available."
-msgstr "Nu există colecții evidențiate."
+msgstr "אין אוספים מוצגים זמינים."
 
 #: application/helpers/ElementForm.php:50
 msgid "Add Input"
-msgstr "Adaugă date"
+msgstr "הוסף קלט"
 
 #: application/helpers/ElementForm.php:286
 #, php-format
 msgid "Cannot display a form input for \"%s\" if element type name is not given!"
-msgstr "Nu pot datele din formular pentru \"%s\" dacă tipul de element nu este dat!"
+msgstr "לא יכול להציג קלט טופס עבור \"%s\" אם שם סוג האלמנט לא ניתן!"
 
 #: application/helpers/ElementForm.php:346
 msgid "From"
-msgstr "De la"
+msgstr "מאת"
 
 #: application/helpers/ElementForm.php:349
 msgid "To"
-msgstr "Lui"
+msgstr "אל"
 
 #: application/helpers/ElementForm.php:369
 msgid "Use HTML"
-msgstr "Folosește HTML-ul"
+msgstr "השתמש ב-HTML"
 
 #: application/helpers/FileMetadata.php:98
 #, php-format
 msgid "%s is an invalid special value."
-msgstr "%s este o valoare specială nevalidă."
+msgstr "%s הוא ערך מיוחד לא חוקי"
 
 #: application/helpers/FormFunctions.php:135
 msgid "Select Below "
-msgstr "Selectează de mai jos"
+msgstr "בחרו למטה"
 
 #: application/helpers/FormFunctions.php:245
 #: application/helpers/FormFunctions.php:533
 #: application/views/scripts/users/forgot-password.php:18
 msgid "Submit"
-msgstr "Trimite"
+msgstr "הגשה"
 
 #: application/helpers/Functions.php:53
 msgid "Omeka RSS Feed"
-msgstr "Flux RSS Omeka"
+msgstr "עדכוני RSS של אומקה"
 
 #: application/helpers/Functions.php:54
 msgid "Omeka Atom Feed"
-msgstr "Flux Atom Omeka"
+msgstr "עדכוני Atom של אומקה"
 
 #: application/helpers/Functions.php:200
 msgid "Error: Invalid callback was provided for the loop."
-msgstr "Eroare: Invalid callback was provided for the loop."
+msgstr "שגיאה: ניתן callback לא חוקי עבור הלולאה."
 
 #: application/helpers/ItemFunctions.php:58
 msgid "Featured Item"
-msgstr "Resursă în prim-plan"
+msgstr "פריט מוצג"
 
 #: application/helpers/ItemFunctions.php:73
 msgid ""
 "An item has not been set to be displayed on this theme page! Please see "
 "Omeka documentation for details."
-msgstr "O anumită resursă nu a fost setată pentru a fi afișată pe această pagină de temă. Vezi documentația Omeka pentru mai multe detalii."
+msgstr "לא הוגדר פריט להצגה בעמוד ערכת הנושא הזה! נא לקרוא את התיעוד של אומקה עבור פרטים."
 
 #: application/helpers/ItemFunctions.php:571
 msgid "No featured items are available."
-msgstr "Nu sunt disponibile resurse evidențiate."
+msgstr "אין פריטים מוצגים זמינים."
 
 #: application/helpers/ItemMetadata.php:86
 #, php-format
 msgid "'%s' is an invalid special value."
-msgstr "'%s' este o valoare specială nevalidă"
+msgstr "'%s' הוא ערך מיוחד לא חוקי."
 
 #: application/helpers/LinkFunctions.php:43
 msgid "View"
-msgstr "Vezi"
+msgstr "תצוגה"
 
 #: application/helpers/LinkFunctions.php:208
 msgid "RSS"
@@ -2205,11 +2205,11 @@ msgstr "RSS"
 
 #: application/helpers/LinkFunctions.php:225
 msgid "Next Item &rarr;"
-msgstr "Următoarea resursă &rarr;"
+msgstr "הפריט הבא &rarr;"
 
 #: application/helpers/LinkFunctions.php:241
 msgid "&larr; Previous Item"
-msgstr "&larr; Resursa anterioară"
+msgstr "&larr; פריט קודם"
 
 #: application/helpers/LinkFunctions.php:530
 msgid "Atom"
@@ -2217,398 +2217,398 @@ msgstr "Atom"
 
 #: application/helpers/TagFunctions.php:133
 msgid "No tags are available."
-msgstr "Nu există etichete."
+msgstr "אין תגיות זמינות."
 
 #: application/libraries/Omeka/View/Helper/RecordMetadataList.php:91
 msgid "[no text]"
-msgstr "[nu este text]"
+msgstr "[ללא טקסט]"
 
 #: application/models/ActsAsElementText.php:257
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
-msgstr "Nu pot găsi un element cu un ID de „%s”!"
+msgstr "לא מצליח למצוא אלמנט עם המזהה '%s'!"
 
 #: application/models/ActsAsElementText.php:314
 #, php-format
 msgid ""
 "Element name is ambiguous! There is more than one element set containing an "
 "element named \"%s\"!"
-msgstr "Numele elementului este ambiguu! Există mai multe seturi care conțin un element denumit „%s”!"
+msgstr "שם האלמנט לא ברור! יש יותר ממערך אלמנטים אחד הכולל אלמנט בשם \"%s\"!"
 
 #: application/models/ActsAsElementText.php:317
 #: application/models/ActsAsElementText.php:324
 #, php-format
 msgid "There is no element named \"%s\"!"
-msgstr "Nu există niciun element intitulat \"%s\"!"
+msgstr "אין אלמנט בשם \"%s\"!"
 
 #: application/models/ActsAsElementText.php:328
 #, php-format
 msgid "There is no element named \"%1$s\" in the set named \"%2$s\"!"
-msgstr "Nu există niciun element intitulat \"%1$s\" în setul denumit \"%2$s\"!"
+msgstr "אין אלמנט בשם \"%1$s\" במערך בשם \"%2$s\"!"
 
 #: application/models/ActsAsElementText.php:484
 msgid "Element texts are not formatted correctly!"
-msgstr "Textele cuprinse în elemente nu sunt formatate corepunzător!"
+msgstr "תבנית כיתוב האלמנטים לא נכונה!"
 
 #: application/models/ActsAsElementText.php:647
 #, php-format
 msgid "Cannot process form input for element with data type \"%s\"!"
-msgstr "Nu pot procesa datele introduse pentru elementul cu tipul de date „%s”!"
+msgstr "לא יכול לעבוד עם הזנת טופס עבור אלמנט עם סוג מידע \"%s\"!"
 
 #: application/models/ActsAsElementText.php:662
 #, php-format
 msgid "The \"%s\" field has at least one invalid value!"
-msgstr "Câmpul \"%s\" are cel puțin o valoare nevalidă!"
+msgstr "השדה \"%s\" מכיל לפחות ערך אחד לא חוקי!"
 
 #: application/models/ActsAsElementText.php:695
 #, php-format
 msgid "Cannot validate an element of data type \"%s\"!"
-msgstr "Nu pot valida un element cu un tip de date \"%s\"!"
+msgstr "לא יכול לוודא תוקף של אלמנט מסוג מידע \"%s\"!"
 
 #: application/models/ActsAsElementText.php:735
 msgid "Cannot save element text for records that are not yet persistent!"
-msgstr "Nu pot salva textul elementului pentru înregistrările care nu sunt încă fixate!"
+msgstr "לא יכול לשמור כיתוב אלמנט עבור רשומות שהן עדיין לא קבועות!"
 
 #: application/models/Collection.php:107
 msgid "Collectors must be either a string or an array."
-msgstr "Culegătorii trebuie să fie ori un string, ori un tablou."
+msgstr "אספנים חייבים להיות מחרוזת או רשימה."
 
 #: application/models/Collection.php:148
 #, php-format
 msgid "The collection name must have between %1$s and %2$s characters."
-msgstr "Numele colecției trebuie să fie între %1$s și %2$s caractere."
+msgstr "שם האוסף חייב להיות בין %1$s תוים לבין %2$s תוים."
 
 #: application/models/Collection.php:198
 msgid ""
 "Argument passed to addCollector() must be a string or an instance of Entity."
-msgstr "Argumentul pasat lui addCollector() trebuie să fie un string sau o instanță a lui Entity."
+msgstr "הארגומנט שמועבר ל-addCollector() חייב להיות מחרוזת או עצם מישות."
 
 #: application/models/Collection.php:230
 msgid "Cannot associate the collection with an unsaved user."
-msgstr "Nu pot asocia colecția cu un utilizator nesalvat."
+msgstr "לא יכול לקשר בין האוסף לבין משתמש לא שמור"
 
 #: application/models/CollectionPermissions.php:37
 msgid "Invalid query provided to CollectionPermissions check"
-msgstr "Interogare nevalidă trimisă lui CollectionPermission check"
+msgstr "שאילתא לא חוקית הוצגה לבדיקת CollectionPermissions"
 
 #: application/models/DataTypeTable.php:31
 #, php-format
 msgid "Cannot find id from DataType name: %s"
-msgstr "Nu pot găsi id de la DataType name: %s"
+msgstr "לא מצליח למצוא מזהה משם DataType: %s"
 
 #: application/models/Element.php:180
 msgid "Name must not be empty!"
-msgstr "Numele nu trebuie să fie gol!"
+msgstr "שם לא יכול להיות ריק!"
 
 #: application/models/Element.php:184
 msgid "Element must have a valid data type!"
-msgstr "Elementul trebuie să aibe un tip de date valid!"
+msgstr "אלמנט חייב להיות סוג מידע חוקי!"
 
 #: application/models/Element.php:188
 msgid "Element must have a valid record type!"
-msgstr "Elementul trebuie să aibe un tip de înregistrare valid!"
+msgstr "אלמנט חייב להיות סוג רשומה חוקי!"
 
 #: application/models/Element.php:193
 #, php-format
 msgid "%1$s already exists for element set #%2$s"
-msgstr "%1$s deja există pentru setul de elemente #%2$s"
+msgstr "%1$s קיים כבר עבור מערך אלמנטים #%2$s"
 
 #: application/models/Element.php:252
 #, php-format
 msgid "Cannot set element set ID: set named \"%s\" does not exist."
-msgstr "Nu pot seta ID-ul setului de elemente: setul denumit \"%s\" nu există."
+msgstr "לא יכול להגדיר מזהה מערך אלמנטים: מערך בשם \"%s\" לא קיים."
 
 #: application/models/ElementSet.php:119
 msgid "Name of element set must be unique."
-msgstr "Numele elementului trebuie să fie unic."
+msgstr "שם של אלמנט חייב להיות יחודי."
 
 #: application/models/ElementSet.php:123
 msgid "Name of element set must not be empty."
-msgstr "Numele elementului nu trebuie să fie gol."
+msgstr "שם האלמנט לא יכול להיות ריק."
 
 #: application/models/EntitiesRelations.php:29
 msgid "Joins in the EntitiesRelations table must be given a polymorphic type"
-msgstr "Joinurile din tabelul EntitiesRelations trebuie să primească un tip polimorfic"
+msgstr "Joins בטבלת EntitiesRelations חייב לקבל סוג פולימורפי"
 
 #: application/models/EntitiesRelations.php:33
 msgid "Joins in the EntitiesRelations table must be filled out entirely"
-msgstr "Joinurile din tabelul EntitiesRelations trebuie să fie completate integral"
+msgstr "Joins בטבלת EntitiesRelations חייב להיות מלא לגמרי"
 
 #: application/models/Entity.php:37
 msgid "The email address provided is not valid."
-msgstr "Adresa de email introdusă nu este validă."
+msgstr "כתובת הדוא\"ל שסופקה אינה חוקית."
 
 #: application/models/Entity.php:41
 msgid "The name for a person may not be completely blank."
-msgstr "Numele persoanei nu trebuie să fie gol."
+msgstr "שם האדם לא יכול להיות ריק לחלוטין."
 
 #: application/models/Entity.php:134
 msgid "Both of these Entities must be persistent in order to merge them."
-msgstr "Aceste Entities trebuie să fie fixate pentru a le fuziona."
+msgstr "שתי הישויות הללו חייבות להיות קבועות כדי שתהיה אפשרות לאחד אותן."
 
 #: application/models/File.php:109
 msgid "Cannot get the local path for a stored file."
-msgstr "Nu pot obține calea locală pentru un fișier introdus."
+msgstr "לא ניתן להשיג את הנתיב המקומי לקובץ המאוחסן."
 
 #: application/models/Item.php:284
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
-msgstr "Fișierele nu pot fi atașate unei resurse care nu este fixată (persistentă) în baza de date!"
+msgstr "הקבצים לא יכולים להיות מקושרים לפריט לא קבוע במסד הנתונים!"
 
 #: application/models/Item.php:398
 msgid "Cannot add an existing file to an item!"
-msgstr "Nu pot adăuga un fișier existent unei resurse!"
+msgstr "לא ניתן להוסיף קובץ קיים לפריט!"
 
 #: application/models/Item.php:402
 msgid "File must be valid before it can be associated with an item!"
-msgstr "Fișierul trebuie să fie valid înainte de a-l asocia unei resurse!"
+msgstr "קובץ חייב להיות חוקי לפני שניתן לקשר אותו עם פריט!"
 
 #: application/models/ItemBuilder.php:141
 msgid "Cannot add tags to an item if no Entity is available to tag."
-msgstr "Nu pot adăuga etichete unei resurse dacă nu este disponibil nicio entitate pentru a-l eticheta."
+msgstr "לא ניתן להוסיף תגיות לפריט אם אין ישות זמינה לתגית."
 
 #: application/models/ItemBuilder.php:265
 msgid "Must specify a file transfer type when attaching files to an item!"
-msgstr "Trebuie specificat un transfer de fișiere atunci când atașăm fișiere unei resurse!"
+msgstr "חובה להגדיר סוג העברת קובץ כשמקשרים קבצים לפריט!"
 
 #: application/models/ItemPermissions.php:34
 #, php-format
 msgid ""
 "This SQL statement needs a FROM or JOIN clause equivalent to '%s i' in order"
 " to have permissions checked!"
-msgstr "Această declarație SQL are nevoie de clauzele FROM sau JOIN echivalente lui „%s” pentru ca să aibe permisiunea bifată!"
+msgstr "משפט ה-SQL צריך מקבילה לסעיף FROM או JOIN עבור '%s i' כדי שההרשאות יבדקו!"
 
 #: application/models/ItemSearch.php:98
 msgid "Invalid search type given!"
-msgstr "A fost introdus un tip nevalid pentru căutare!"
+msgstr "ניתן סוג חיפוש לא חוקי!"
 
 #: application/models/ItemType.php:83
 #, php-format
 msgid "The item type name must have between %1$s and %2$s characters."
-msgstr "Tipul de resursă trebuie să aibe între %1$s și %2$s caractere."
+msgstr "שם סוג הפריט חייב להיות בין %1$s לבין %2$s תוים."
 
 #: application/models/ItemType.php:87
 msgid "The item type name must be unique."
-msgstr "Tipul de resursă trebuie să fie unic."
+msgstr "שם סוג הפריט חייב להיות יחודי."
 
 #: application/models/ItemType.php:175
 msgid "There are too many values in the element ordering array."
-msgstr "Sunt prea multe valori în tabloul de ordonare a elementelor."
+msgstr "יש יותר מדי ערכים באלמנט סידור המערך."
 
 #: application/models/ItemType.php:177
 msgid "There are too few values in the element ordering array."
-msgstr "Sunt prea puține valori în tabloul de ordonare al elementelor."
+msgstr "יש מעט מידי ערכים באלמנט סידור המערך."
 
 #: application/models/ItemType.php:221
 msgid ""
 "Invalid element data. To add elements, you must either pass an element "
 "objects or an array of element metadata."
-msgstr "Date ale elementului nevalide. Pentru a adăuga elemente, trebuie fie să pasezi obiectele unui element sau un tablou cuprinzând metadatele elementului."
+msgstr "אלמנט מידע לא חוקי. כדי להוסיף אלמנטים, עליך להעביר אובייקטי אלמנטים או מערך מטה נתונים של אלמנטים."
 
 #: application/models/ItemType.php:285
 msgid ""
 "Cannot remove elements from an item type that is not persistent in the "
 "database!"
-msgstr "Nu pot elimina elementele dintr-un tip de resursă care nu sunt fixate în baza de date!"
+msgstr "לא מסוגל להסיר אלמנטים מסוג פריט לא קבוע במסד הנתונים!"
 
 #: application/models/ItemType.php:294
 #, php-format
 msgid "Cannot find element with ID %s!"
-msgstr "Nu pot găsi elementul cu ID-ul %s!"
+msgstr "לא יכול למצוא אלמנט עם מזהה %s!"
 
 #: application/models/ItemType.php:337
 #, php-format
 msgid "Item type does not contain an element with the ID %s!"
-msgstr "Tipul de resursă nu conține un element care are ID-ul %s!"
+msgstr "סוג פריט לא יכול להכיל אלמנט עם המזהה %s!"
 
 #: application/models/ItemType.php:362
 msgid ""
 "Invalid parameter. The hasElement function requires either an element object"
 " or an element id to determine if an item type has an element."
-msgstr "Parametru nevalid. Funcția hasElement necesită, fie un element obiect sau in id de element pentru a determina dacă o resursă are un element."
+msgstr "מאפין לא חוקי. הפונקציה hasElement דורשת אוביקט של אלמנט או מזהה אלמנט כדי לקבוע אם לסוג פריט יש אלמנט."
 
 #: application/models/Option.php:28 application/models/Option.php:32
 msgid "Each option must have a unique name."
-msgstr "Fiecare opțiune trebui să aibe un nume unic."
+msgstr "כל אפשרות חייבת לקבל שם יחודי."
 
 #: application/models/Orderable.php:101
 msgid "Cannot add a child to a record that does not exist yet!"
-msgstr "Nu poți adăuga un copil la o înregistrare care nu există încă!"
+msgstr "לא יכול להוסיף ילד לרשומה שלא קיימת עדיין!"
 
 #: application/models/Orderable.php:105
 #, php-format
 msgid "Child must be an instance of \"%s\""
-msgstr "Copilul trebuie să fie o instanță a lui \"%s\""
+msgstr "ילד חייב להיות פעולה של \"%s\""
 
 #: application/models/Plugin.php:94
 msgid "Names of plugins must not be blank"
-msgstr "Numele pluginurilor nu trebuie să fie goale"
+msgstr "שמות של תוספים לא יכולים להיות ריקים"
 
 #: application/models/Relatable.php:158
 msgid "Invalid entity provided!"
-msgstr "Entitate nevalidă!"
+msgstr "ניתנה ישות לא חוקית!"
 
 #: application/models/Relatable.php:169
 #, php-format
 msgid "Relationship called %s does not exist."
-msgstr "Relația %s apelată nu poate fi setată."
+msgstr "קשר בשם %s לא יכול להתקיים."
 
 #: application/models/Relatable.php:222
 msgid "Record must exist before relations can be set."
-msgstr "Înregistrarea trebuie să existe înainte de a seta relațiile."
+msgstr "רשומה חייבת להתקיים לפני שקשרים יכולים להיות מוגדרים."
 
 #: application/models/Tag.php:58
 msgid "Tags must be given a name."
-msgstr "Etichetele au nevoie de un nume."
+msgstr "תגיות חייבות לקבל שם."
 
 #: application/models/Tag.php:62
 msgid "That name is already taken for this tag."
-msgstr "Acest nume este deja pus."
+msgstr "שם זה כבר קיים עבור תגית זו."
 
 #: application/models/Taggable.php:195
 msgid "A valid record ID # must be provided when tagging."
-msgstr "Un ID valid # trebuie introdus la momentul etichetării."
+msgstr "חובה לספק מזהה רשומה חוקי # כשיוצרים תגיות."
 
 #: application/models/Taggable.php:199
 msgid "A valid entity or user must be provided when tagging."
-msgstr "Trebuie introdusă o entitate validă sau un utilizator când etichetezi."
+msgstr "כשיוצרים תגיות חייבים לספק משתמש או ישות חוקית."
 
 #: application/models/User.php:63
 msgid "No Entity record available."
-msgstr "Nicio informație despre entitate."
+msgstr "אין רשומת ישות זמינה."
 
 #: application/models/User.php:75
 msgid "No Entity record is available when saving this User."
-msgstr "Nicio informație despre entitate nu a existat la salvarea acestui utilizator."
+msgstr "אין רשומת ישות זמינה בזמן שמירת המשתמש הנוכחי."
 
 #: application/models/User.php:92
 msgid "User may not change permissions to super-user"
-msgstr "Utilizatorul nu poate modifica permisiunile pentru a deveni super-user"
+msgstr "משתמש לא יכול לשנות הרשאות למשתמש-על"
 
 #: application/models/User.php:95
 msgid "User may not change roles."
-msgstr "Utilizatorul nu poate schimba rolurile."
+msgstr "משתמש לא יכול לשנות תפקידים."
 
 #: application/models/User.php:153
 msgid ""
 "If a first name and last name are not provided, then an institution name is "
 "required."
-msgstr "Dacă nu sunt introduse numele și prenumele, atunci numele instituției este necesar."
+msgstr "אם שם פרטי ושם משפחה לא מסופקים, אז שם המוסד הוא חובה."
 
 #: application/models/User.php:156
 msgid "A first name is required."
-msgstr "Este necesar numele."
+msgstr "שם פרטי הינו חובה."
 
 #: application/models/User.php:159
 msgid "A last name is required."
-msgstr "Este necesar prenumele."
+msgstr "שם משפחה הינו חובה."
 
 #: application/models/User.php:175
 msgid "The user must be assigned a role."
-msgstr "Utilizatorului trebuie să i se dea un rol."
+msgstr "המשתמש חייב לקבל תפקיד."
 
 #: application/models/User.php:180
 #, php-format
 msgid "The username \"%1$s\" must be between %2$s and %3$s characters."
-msgstr "Numele utilizatorului \"%1$s\" trebuie să fie între %2$s și %3$s caractere."
+msgstr "שם המשתמש \"%1$s\" חייב להיות בין %2$s לבין %3$s תווים."
 
 #: application/models/User.php:182
 msgid "The username must be alphanumeric."
-msgstr "Numele utilizatorului trebuie să fie alfanumeric."
+msgstr "שם המשתמש חייב להיות עם מספרים ואותיות בלבד."
 
 #: application/models/User.php:184
 #, php-format
 msgid "'%s' is already in use. Please choose another username."
-msgstr "„%s” este deja utilizat. Alege alt nume de utilizator."
+msgstr "'%s' כבר בשימוש. נא לבחור בשם משתמש אחר."
 
 #: application/models/UsersActivations.php:31
 msgid "Cannot create a user activation for non-existent user."
-msgstr "Nu pot crea o activare de utilizator pentru unul care nu există."
+msgstr "לא יכול ליצור איתחול משתמש עבור משתמש לא קיים."
 
 #: application/views/scripts/collections/browse.php:21
 #: application/views/scripts/collections/show.php:13
 msgid "Collector(s)"
-msgstr "Culegător(i)"
+msgstr "אספנ(ים)"
 
 #: application/views/scripts/collections/browse.php:28
 #: application/views/scripts/collections/show.php:22
 #, php-format
 msgid "View the items in %s"
-msgstr "Vezi resursele din %s"
+msgstr "צפיה בפריטים ב-%s"
 
 #: application/views/scripts/collections/show.php:25
 #, php-format
 msgid "Items in the %s Collection"
-msgstr "Resursele din colecția %s"
+msgstr "פריטים באוסף %s"
 
 #: application/views/scripts/common/delete-confirm.php:3
 #, php-format
 msgid "Delete %s"
-msgstr "Șterge %s"
+msgstr "מחיקת %s"
 
 #: application/views/scripts/common/delete-confirm.php:12
 msgid "Are you sure?"
-msgstr "Ești sigur?"
+msgstr "האם אתם בטוחים?"
 
 #: application/views/scripts/common/footer.php:6
 msgid "Home"
-msgstr "Acasă"
+msgstr "בית"
 
 #: application/views/scripts/common/footer.php:14
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
-msgstr "Motorizat de <a href=\"http://omeka.org\">Omeka</a>."
+msgstr "הוקם ומופעל על ידי <a href=\"http://omeka.org\">אומקה</a>."
 
 #: application/views/scripts/common/pagination_control.php:7
 msgid "First"
-msgstr "Primul"
+msgstr "ראשון"
 
 #: application/views/scripts/common/pagination_control.php:14
 msgid "Previous"
-msgstr "Anterioară"
+msgstr "הקודם"
 
 #: application/views/scripts/common/pagination_control.php:30
 msgid "Next"
-msgstr "Următoarea"
+msgstr "הבא"
 
 #: application/views/scripts/common/pagination_control.php:37
 msgid "Last"
-msgstr "Ultima"
+msgstr "אחרון"
 
 #: application/views/scripts/error/403.php:2
 msgid "403 Page Forbidden"
-msgstr "403 Pagină interzisă"
+msgstr "403 הגישה אסורה לעמוד זה"
 
 #: application/views/scripts/error/403.php:8
 msgid "You do not have permission to access this page."
-msgstr "Nu ai permisiunea de a accesa această pagină."
+msgstr "אין לך הרשאה לגשת לעמוד זה."
 
 #: application/views/scripts/error/404.dc.php:1
 #: application/views/scripts/error/404.php:2
 #: application/views/scripts/error/404.xml.php:1
 msgid "404 Page Not Found"
-msgstr "404 Pagină inexistentă"
+msgstr "404 העמוד לא נמצא"
 
 #: application/views/scripts/error/404.php:7
 #, php-format
 msgid "%s is not a valid URL."
-msgstr "%s nu este un URL valid."
+msgstr "%s היא כתובת URL לא חוקית."
 
 #: application/views/scripts/error/404.rss2.php:1
 msgid "Rss2.0 Feed Not Found!"
-msgstr "Flux RSS2.0 inexistent!"
+msgstr "קורא Rss2.0 לא נמצא!"
 
 #: application/views/scripts/error/405.php:2
 msgid "405 Method Not Allowed"
-msgstr "405 Metodă nepermisă"
+msgstr "405 המתודה אסורה"
 
 #: application/views/scripts/error/405.php:7
 #, php-format
 msgid "The method used to access this URL (%s) is not valid."
-msgstr "Metoda utilizată pentru a accesa acest URL (%s) nu este validă."
+msgstr "המתודה שנעשה בה שימוש לגישה ל-URL זה (%s) לא חוקית."
 
 #: application/views/scripts/error/index.php:4
 msgid "Omeka has encountered an error"
-msgstr "A apărut o eroare"
+msgstr "אירעה שגיאה באומקה"
 
 #: application/views/scripts/error/index.php:29
 msgid ""
@@ -2616,122 +2616,122 @@ msgid ""
 "Omeka Codex page on <a "
 "href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error "
 "messages</a>."
-msgstr "Pentru a vedea mai multe despre această eroare, vezi pagina Omeka Codex la <a href=\"http://omeka.org/codex/Retrieving_error_messages\">găsirea mesajelor de eroare</a>"
+msgstr "כדי ללמוד איך לראות מידע יותר מפורט על שגיאה זו, צפו בעמוד הקודקס של אומקה בעמוד <a href=\"http://omeka.org/codex/Retrieving_error_messages\">איחזור שגיאות</a>."
 
 #: application/views/scripts/functions.php:131
 msgid "Browse All"
-msgstr "Treci prin toate"
+msgstr "צפיה בהכל"
 
 #: application/views/scripts/functions.php:131
 msgid "Browse by Tag"
-msgstr "Răsfoiește după etichetă"
+msgstr "צפיה לפי תגית"
 
 #: application/views/scripts/index.php:67
 msgid "No recent items available."
-msgstr "Nu sunt disponibile resurse recente."
+msgstr "אין פריטים אחרונים זמינים"
 
 #: application/views/scripts/items/advanced-search.php:32
 msgid "Search for Keywords"
-msgstr "Caută cuvinte cheie"
+msgstr "חיפוש לפי מילות מפתח"
 
 #: application/views/scripts/items/advanced-search.php:42
 msgid "Narrow by Specific Fields"
-msgstr "Filtrează după anumite câmpuri"
+msgstr "צמצום על פי שדות מסויימים"
 
 #: application/views/scripts/items/advanced-search.php:71
 msgid "contains"
-msgstr "conține"
+msgstr "מכיל"
 
 #: application/views/scripts/items/advanced-search.php:72
 msgid "does not contain"
-msgstr "nu conține"
+msgstr "לא מכיל"
 
 #: application/views/scripts/items/advanced-search.php:73
 msgid "is exactly"
-msgstr "este exact"
+msgstr "הוא בדיוק"
 
 #: application/views/scripts/items/advanced-search.php:74
 msgid "is empty"
-msgstr "este gol"
+msgstr "ריק"
 
 #: application/views/scripts/items/advanced-search.php:75
 msgid "is not empty"
-msgstr "nu este gol"
+msgstr "לא ריק"
 
 #: application/views/scripts/items/advanced-search.php:86
 msgid "Add a Field"
-msgstr "Adaugă un câmp"
+msgstr "הוספת שדה"
 
 #: application/views/scripts/items/advanced-search.php:90
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
-msgstr "Caută după o gamă de ID#uri (exemplu: 1-4, 156, 79)"
+msgstr "חיפוש בטווח של מזהים (לדוגמה: 1-4,156,79)"
 
 #: application/views/scripts/items/advanced-search.php:102
 msgid "Search By Collection"
-msgstr "Caută după colecție"
+msgstr "חיפוש לפי אוסף"
 
 #: application/views/scripts/items/advanced-search.php:112
 msgid "Search By Type"
-msgstr "Caută după tip"
+msgstr "חיפוש לפי סוג"
 
 #: application/views/scripts/items/advanced-search.php:122
 msgid "Search By User"
-msgstr "Caută după utilizator"
+msgstr "חיפוש לפי משתמש"
 
 #: application/views/scripts/items/advanced-search.php:133
 msgid "Search By Tags"
-msgstr "Caută după etichete"
+msgstr "חיפוש לפי תגיות"
 
 #: application/views/scripts/items/advanced-search.php:147
 msgid "Public/Non-Public"
-msgstr "Public/Privat"
+msgstr "ציבורי/לא ציבורי"
 
 #: application/views/scripts/items/advanced-search.php:150
 msgid "Only Public Items"
-msgstr "Doar resurse publice"
+msgstr "רק פריטים ציבוריים"
 
 #: application/views/scripts/items/advanced-search.php:151
 msgid "Only Non-Public Items"
-msgstr "Doar resurse private"
+msgstr "רק פריטים לא ציבוריים"
 
 #: application/views/scripts/items/advanced-search.php:157
 msgid "Featured/Non-Featured"
-msgstr "Evidențiate/Neevidențiate"
+msgstr "מוצגים/לא מוצגים"
 
 #: application/views/scripts/items/advanced-search.php:160
 msgid "Only Featured Items"
-msgstr "Doar resurse evidențiate"
+msgstr "רק פריטים מוצגים"
 
 #: application/views/scripts/items/advanced-search.php:161
 msgid "Only Non-Featured Items"
-msgstr "Doar resurse neevidențiate"
+msgstr "רק פריטים לא מוצגים"
 
 #: application/views/scripts/items/show.php:11
 msgid "Files"
-msgstr "Fișiere"
+msgstr "קבצים"
 
 #: application/views/scripts/items/show.php:33
 msgid "Citation"
-msgstr "Citat"
+msgstr "ציטוט"
 
 #: application/views/scripts/upgrade/completed.php:5
 #: application/views/scripts/upgrade/index.php:5
 #: application/views/scripts/upgrade/migrate.php:5
 msgid "Upgrade Omeka"
-msgstr "Actualizează Omeka"
+msgstr "שידרוג אומקה"
 
 #: application/views/scripts/upgrade/completed.php:10
 msgid "Omeka Upgrade Completed"
-msgstr "Actualizare încheiată"
+msgstr "שידרוג אומקה הושלם"
 
 #: application/views/scripts/upgrade/completed.php:11
 #, php-format
 msgid "Please return to the %1$s or your site&#8217;s %2$s"
-msgstr "Întoarce-te la %1$s sau la siteul tău&#8217;s %2$s"
+msgstr "נא לחזור אל %1$s או לאתר שלך &#8217;s %2$s"
 
 #: application/views/scripts/upgrade/completed.php:11
 msgid "Your Omeka database is completely up-to-date."
-msgstr "Baza de date Omeka este actualizată"
+msgstr "מסד הנתונים של אומקה שלך מעודכן."
 
 #: application/views/scripts/upgrade/completed.php:13
 #: application/views/scripts/upgrade/migrate.php:18
@@ -2739,111 +2739,111 @@ msgid ""
 "If you have any questions please refer to <a "
 "href=\"http://omeka.org/codex\">Omeka documentation</a> or post a message on"
 " the <a href=\"http://omeka.org/forums\">Omeka forums</a>."
-msgstr "Dacă ai întrebări întreabă pe <a href=\"http://omeka.org/codex\">Omeka documentation</a> sau pune un mesaj la <a href=\"http://omeka.org/forums\">Omeka forums</a>."
+msgstr "אם יש לך כל שאלה ניתן להיעזר <a href=\"http://omeka.org/codex\">בתיעוד של אומקה</a> או לכתוב שאלה <a href=\"http://omeka.org/forums\">בפורומים של אומקה</a>."
 
 #: application/views/scripts/upgrade/index.php:10
 msgid "Upgrade Your Omeka Database"
-msgstr "Actualizează baza de date Omeka"
+msgstr "שידרוג מסד הנתונים של אומקה"
 
 #: application/views/scripts/upgrade/index.php:12
 msgid ""
 "Your Omeka database is not compatible with your current version of Omeka."
-msgstr "Baza ta Omeka nu este compatibilă cu versiunea curentă de Omeka."
+msgstr "גרסת מסד הנתונים של אומקה שלך לא תואם עם הגרסה הנוכחית של אומקה"
 
 #: application/views/scripts/upgrade/index.php:13
 msgid ""
 "Please back up your existing database and then click the button to upgrade."
-msgstr "Fă o copie de siguranță la baza de date și apoi dă click pe actualizare"
+msgstr "אנא גבו את מסד הנתונים הקיים ואז לחצו על הכפתור כדי לשדרג."
 
 #: application/views/scripts/upgrade/index.php:15
 msgid "Upgrade Database"
-msgstr "Actualizează baza de date"
+msgstr "שידרוג מסד הנתונים"
 
 #: application/views/scripts/upgrade/migrate.php:11
 msgid "Omeka encountered an error when upgrading your installation."
-msgstr "Omeka a raportat o eroare la actualizarea instalării."
+msgstr "אירעה שגיאה באומקה בעת שידרוג ההתקנה."
 
 #: application/views/scripts/upgrade/migrate.php:16
 msgid "Please restore from your database backup and try again."
-msgstr "Restaurează baza de date din copia de siguranță și încearcă din nou."
+msgstr "נא שחזרו מגיבוי מסד הנתונים שלכם ונסו שוב."
 
 #: application/views/scripts/upgrade/migrate.php:21
 msgid "Omeka has upgraded successfully."
-msgstr "Omeka s-a actualizat cu succes."
+msgstr "אומקה שודרגה בהצלחה."
 
 #: application/views/scripts/upgrade/migrate.php:22
 msgid "Return to Dashboard"
-msgstr "Înapoi la Panoul de operare"
+msgstr "חזרה ללוח הבקרה"
 
 #: application/views/scripts/users/activate.php:2
 msgid "User Activation"
-msgstr "Activarea utilizatorilor"
+msgstr "הפעלת משתמש"
 
 #: application/views/scripts/users/forgot-password.php:2
 msgid "Forgot Password"
-msgstr "Am uitat parola"
+msgstr "שכח סיסמה"
 
 #: application/views/scripts/users/forgot-password.php:7
 msgid "Back to Log In"
-msgstr "Înapoi la login"
+msgstr "חזרה להתחברות"
 
 #: application/views/scripts/users/forgot-password.php:10
 msgid "Enter your email address to retrieve your password."
-msgstr "Introdu adresa email pentru a recupera parola."
+msgstr "הזינו את כתובת הדוא\"ל שלכם כדי לשחזר את סיסמתכם."
 
 #: application/views/scripts/users/login.php:9
 msgid "Go to Home Page"
-msgstr "Mergi la pagina principală"
+msgstr "מעבר לעמוד הבית"
 
 #: application/views/scripts/users/login.php:9
 msgid "Lost your password?"
-msgstr "Ți-ai pierdut parola?"
+msgstr "איבדת את סיסמתך?"
 
 #: install/views/scripts/index/errors.phtml:1
 msgid "Installation Error"
-msgstr "Eroare de instalare"
+msgstr "שגיאה בהתקנה"
 
 #: install/views/scripts/index/errors.phtml:2
 msgid ""
 "Before installation can continue, the following errors must be resolved:"
-msgstr "Înainte de a continua instalarea, trebuie rezolvate următoarele erori:"
+msgstr "לפני שההתקנה תוכל להמשיך, השגיאות הבאות חייבות להיפתר:"
 
 #: install/views/scripts/index/fatal-error.phtml:1
 msgid "Fatal Error"
-msgstr "Eroare capitală"
+msgstr "שגיאה פטלית"
 
 #: install/views/scripts/index/index.phtml:2
 msgid "Installation Warning"
-msgstr "Avertisment la instalare"
+msgstr "אזהרת התקנה"
 
 #: install/views/scripts/index/index.phtml:3
 msgid ""
 "The following issues will not affect installation, but they may negatively "
 "affect the behavior of Omeka:"
-msgstr "Următoarele probleme nu vor afecta instalarea, dar vor putea afecta negativ comportamentul softwareului"
+msgstr "הבעיות הבאות לא ישפיעו על ההתקנה, אך הן עלולות להשפיע באופן שלילי על פעילות אומקה."
 
 #: install/views/scripts/index/index.phtml:13
 msgid "Configure Your Site"
-msgstr "Configurează siteul"
+msgstr "קביעת התצורה של אתרך"
 
 #: install/views/scripts/index/index.phtml:15
 msgid "Form Validation Errors"
-msgstr "Erori de validare a datelor din formular"
+msgstr "שגיאות אימות טופס"
 
 #: install/views/scripts/index/installed.phtml:1
 msgid ""
 "Omeka is installed. You may remove the \"install\" directory for security "
 "reasons."
-msgstr "Omeka s-a instalat. Poți șterge directorul \"install\" din motive de securitate."
+msgstr "אומקה הותקנה. כדאי להסיר את התיקיה \"install\" מסיבות אבטחה."
 
 #: install/views/scripts/index/installed.phtml:2
 msgid "Admin Panel"
-msgstr "Panoul de administrare"
+msgstr "לוח בקרה למנהל"
 
 #: install/views/scripts/index/installed.phtml:2
 msgid "Public Site"
-msgstr "Site public"
+msgstr "אתר ציבורי"
 
 #: install/views/scripts/layout.phtml:5 install/views/scripts/layout.phtml:9
 msgid "Omeka Installation"
-msgstr "Instalare Omeka"
+msgstr "התקנת אומקה"

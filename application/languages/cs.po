@@ -5,29 +5,27 @@
 # Translators:
 # Dana Léw <lew.dana@gmail.com>, 2011.
 # Jan Černý <cernyhonza@gmail.com>, 2011, 2012.
+#   <vele@centrum.cz>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2011-11-22 16:18-0500\n"
-"PO-Revision-Date: 2012-01-08 11:38+0000\n"
-"Last-Translator: Jan Černý <cernyhonza@gmail.com>\n"
-"Language-Team: Czech (http://www.transifex.net/projects/p/omeka/team/cs/)\n"
+"PO-Revision-Date: 2012-11-15 14:48+0000\n"
+"Last-Translator: vele <vele@centrum.cz>\n"
+"Language-Team: Czech (http://www.transifex.com/projects/p/omeka/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 # Dublin Core description
 msgid ""
 "The Dublin Core metadata element set. These elements are common to all Omeka"
 " resources, including items, files, collections, exhibits, and entities. See"
 " http://dublincore.org/documents/dces/."
-msgstr ""
-"Dublin Core sada metadat. Tyto elementy jsou společné pro všechny typy "
-"zdrojů v Omeka - položky, soubory, sbírky, expozice, entity ... Více na "
-"http://dublincore.org/documents/dces/."
+msgstr "Dublin Core sada metadat. Tyto elementy jsou společné pro všechny typy zdrojů v Omeka - položky, soubory, sbírky, expozice, entity ... Více na http://dublincore.org/documents/dces/."
 
 # #-#-#-#-#  Omeka.base.pot (Omeka 1.5)  #-#-#-#-#
 # Dublin Core: Title element
@@ -115,9 +113,7 @@ msgstr "Metadata Typu Položky"
 msgid ""
 "The item type metadata element set, consisting of all item type elements "
 "bundled with Omeka and all item type elements created by an administrator."
-msgstr ""
-"Soubor metadat typů položka se skládá ze všech typů prvků Omeky a všemi "
-"položkami vytvořenými administrátorem."
+msgstr "Soubor metadat typů položka se skládá ze všech typů prvků Omeky a všemi položkami vytvořenými administrátorem."
 
 # Omeka Legacy File
 msgid "Omeka Legacy File"
@@ -129,10 +125,7 @@ msgid ""
 "was included in the `files` table in previous versions of Omeka. These "
 "elements are common to all Omeka files. This set may be deprecated in future"
 " versions."
-msgstr ""
-"Sada metadata prvků která byla společně s Dublin Core sadou prvků obsažena v"
-" tabulce `files` v předcházející verzi Omeky. Tato sada může být zavrhnuta v"
-" budoucích verzích."
+msgstr "Sada metadata prvků která byla společně s Dublin Core sadou prvků obsažena v tabulce `files` v předcházející verzi Omeky. Tato sada může být zavrhnuta v budoucích verzích."
 
 # Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
@@ -194,10 +187,7 @@ msgstr "Omeka Obrazový Soubor"
 msgid ""
 "The metadata element set that was included in the `files_images` table in "
 "previous versions of Omeka. These elements are common to all image files."
-msgstr ""
-"Sada metadata prvků která byla obsažena ve `files_images` tabulce v "
-"předcházející verzi Omeky. Tyto prvky jsou společné pro všechny obrázkové "
-"soubory."
+msgstr "Sada metadata prvků která byla obsažena ve `files_images` tabulce v předcházející verzi Omeky. Tyto prvky jsou společné pro všechny obrázkové soubory."
 
 # Omeka Image File: Width element
 msgid "Width"
@@ -239,10 +229,7 @@ msgstr "Omeka Video Soubor"
 msgid ""
 "The metadata element set that was included in the `files_videos` table in "
 "previous versions of Omeka. These elements are common to all video files."
-msgstr ""
-"Sada metadata prvků která byla obsažena ve `files_videos` tabulce v "
-"předcházející verzi Omeky. Tyto prvky jsou společné pro všechny video "
-"soubory."
+msgstr "Sada metadata prvků která byla obsažena ve `files_videos` tabulce v předcházející verzi Omeky. Tyto prvky jsou společné pro všechny video soubory."
 
 # Omeka Video File: Bitrate element
 msgid "Bitrate"
@@ -406,9 +393,7 @@ msgstr "Popis Sbírky"
 #: admin/themes/default/collections/form.php:25
 msgid ""
 "List collectors for this collection (optional - enter one name per line)"
-msgstr ""
-"Seznam kurátorů pro tuto sbírku (volitelné - vložte po jednom jménu na "
-"řádek)"
+msgstr "Seznam kurátorů pro tuto sbírku (volitelné - vložte po jednom jménu na řádek)"
 
 #: admin/themes/default/collections/form.php:35
 #: admin/themes/default/collections/form.php:37
@@ -502,7 +487,7 @@ msgstr "Vítej, %s"
 
 #: admin/themes/default/common/header.php:36 admin/themes/default/index.php:58
 msgid "Settings"
-msgstr "Nastacení"
+msgstr "Nastavení"
 
 #: admin/themes/default/common/header.php:38
 msgid "View Public Site"
@@ -612,9 +597,7 @@ msgid ""
 "You&#8217;ve tried to access a page that does not seem to exist. Sometimes "
 "this happens. Below is a quick break-down of the items, collections, and "
 "exhibits on this site."
-msgstr ""
-"Vámi požadovaná stránka nejspíše neexistuje. Něco je špatně. Dole naleznete "
-"stručný přehled položek, sbírek a expozicí tohoto depositáře."
+msgstr "Vámi požadovaná stránka nejspíše neexistuje. Něco je špatně. Dole naleznete stručný přehled položek, sbírek a expozicí tohoto depositáře."
 
 #: admin/themes/default/error/404.php:13
 #, php-format
@@ -638,9 +621,7 @@ msgstr "405: Nepovolené metoda"
 msgid ""
 "You must use a different method to access this URL. If you reached this page"
 " by following a link or clicking a button in Omeka, please contact the %s."
-msgstr ""
-"Použijte prosím jinou přístupovou metodu. Pokud jste přišli na tuto stránku "
-"skrz odkaz vedoucí z Omeky, prosím kontaktujte %s."
+msgstr "Použijte prosím jinou přístupovou metodu. Pokud jste přišli na tuto stránku skrz odkaz vedoucí z Omeky, prosím kontaktujte %s."
 
 #: admin/themes/default/files/edit.php:8
 #, php-format
@@ -758,8 +739,7 @@ msgstr "Procházet vaše položky."
 
 #: admin/themes/default/index.php:28
 msgid "Manage items in your archive: add, edit, and delete items."
-msgstr ""
-"Spravovat položky ve vašem archivu, přidávat, upravovat a mazat položky."
+msgstr "Spravovat položky ve vašem archivu, přidávat, upravovat a mazat položky."
 
 #: admin/themes/default/index.php:35
 msgid "Add a collection to group items"
@@ -771,8 +751,7 @@ msgstr "Prohlížet vaše sbírky"
 
 #: admin/themes/default/index.php:39
 msgid "Manage collections in your archive: add, edit, and delete collections."
-msgstr ""
-"Spravovat sbírky ve vašem archivu: přidávat, upravovat a mazat sbírky."
+msgstr "Spravovat sbírky ve vašem archivu: přidávat, upravovat a mazat sbírky."
 
 #: admin/themes/default/index.php:48 admin/themes/default/users/browse.php:2
 msgid "Browse Users"
@@ -813,9 +792,7 @@ msgstr "Přehled Depositáře"
 msgid ""
 "<em>%1$s</em> contains %2$s items, in %3$s collections, tagged with %4$s "
 "keywords. There are %5$s users."
-msgstr ""
-"<em>%1$s</em> obsahuje %2$s položek ve %3$s sbírkách, jsou oštítkovány %4$s "
-"slovy. Uživatelů je zde %5$s ."
+msgstr "<em>%1$s</em> obsahuje %2$s položek ve %3$s sbírkách, jsou oštítkovány %4$s slovy. Uživatelů je zde %5$s ."
 
 #: admin/themes/default/index.php:91
 msgid "There are no items to display."
@@ -993,8 +970,7 @@ msgstr "Přidat Štítky"
 #: admin/themes/default/items/batch-edit.php:90
 #, php-format
 msgid "List of tags to add to all checked items, separated by %s."
-msgstr ""
-"Seznam štítků, které budou přidány ke všem označeným položkám, oddělené %s."
+msgstr "Seznam štítků, které budou přidány ke všem označeným položkám, oddělené %s."
 
 #: admin/themes/default/items/batch-edit.php:98
 msgid "Delete Items"
@@ -1106,10 +1082,7 @@ msgid ""
 "The path to Image Magick has not been set. No derivative images will be "
 "created. If you would like Omeka to create derivative images, please add the"
 " path to your settings form."
-msgstr ""
-"Cesta k Image Magick nebyla nastavena. Žádné odvozené obrázky nebudou "
-"vytvořeny. Pokud chcete aby Omeka vytvářela odvozené obrázky, přidejte cestu"
-" do vašeho nastavení."
+msgstr "Cesta k Image Magick nebyla nastavena. Žádné odvozené obrázky nebudou vytvořeny. Pokud chcete aby Omeka vytvářela odvozené obrázky, přidejte cestu do vašeho nastavení."
 
 #: admin/themes/default/items/files-form.php:7
 msgid "Current Files"
@@ -1192,9 +1165,7 @@ msgstr "Procházet Položky podle Štítků"
 #: admin/themes/default/items/tags.php:9
 #: admin/themes/default/tags/browse.php:27
 msgid "There are no tags to display. You must first tag some items."
-msgstr ""
-"Nejsou zde k zobrazení žádné štítky. Nejprve přidejte nové štítky k "
-"Položkám."
+msgstr "Nejsou zde k zobrazení žádné štítky. Nejprve přidejte nové štítky k Položkám."
 
 #: admin/themes/default/plugins/browse.php:2
 msgid "Browse Plugins"
@@ -1204,9 +1175,7 @@ msgstr "Procházet Pluginy"
 msgid ""
 "You do not have any plugins installed. Add them to the plugins directory to "
 "see them listed here."
-msgstr ""
-"Nemáte nainstalované žádné zásuvné moduly. Přidejte je do adresáře plugins a"
-" zde uvidíte jejich seznam."
+msgstr "Nemáte nainstalované žádné zásuvné moduly. Přidejte je do adresáře plugins a zde uvidíte jejich seznam."
 
 #: admin/themes/default/plugins/browse.php:24
 msgid ""
@@ -1214,11 +1183,7 @@ msgid ""
 "ons/plugins/\">Omeka Plugins Directory</a>, or <a "
 "href=\"http://omeka.org/codex/Plugin_Writing_Best_Practices\">write your "
 "own</a>!"
-msgstr ""
-"Stáhněte nové zásuvné moduly z <a href=\"http://omeka.org/add-"
-"ons/plugins/\">Omeka Plugins Directory</a> nebo <a "
-"href=\"http://omeka.org/codex/Plugin_Writing_Best_Practices\">vytvořte svůj "
-"vlastní</a>!"
+msgstr "Stáhněte nové zásuvné moduly z <a href=\"http://omeka.org/add-ons/plugins/\">Omeka Plugins Directory</a> nebo <a href=\"http://omeka.org/codex/Plugin_Writing_Best_Practices\">vytvořte svůj vlastní</a>!"
 
 #: admin/themes/default/plugins/config.php:2
 #, php-format
@@ -1261,9 +1226,7 @@ msgstr "Tato verze %1$s vyžaduje minimálně verzi Omeka %2$s."
 msgid ""
 "%1$s requires the following plugins to be installed, activated, and loaded: "
 "%2$s"
-msgstr ""
-"%1$s vyžaduje aby následující zásuvné moduly byly instalovány, aktivovány a "
-"načteny: %2$s"
+msgstr "%1$s vyžaduje aby následující zásuvné moduly byly instalovány, aktivovány a načteny: %2$s"
 
 #: admin/themes/default/plugins/plugin-info.php:30
 msgid "The plugin.php file is missing."
@@ -1365,9 +1328,7 @@ msgstr "Zadejte nové jméno štítku. "
 
 #: admin/themes/default/tags/edit.php:32
 msgid "There are no tags to edit. You must first tag some items."
-msgstr ""
-"Žádné štítky, které by se daly upravit. Nejdříve musíte oštítkovat nějaké "
-"položky."
+msgstr "Žádné štítky, které by se daly upravit. Nejdříve musíte oštítkovat nějaké položky."
 
 #: admin/themes/default/themes/browse.php:2
 msgid "Browse Themes"
@@ -1412,11 +1373,7 @@ msgid ""
 "ons/themes/\">Omeka Theme Directory</a>, or <a "
 "href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">design your "
 "own</a>!"
-msgstr ""
-"Přidat nový vzhled jeho stažením z <a href=\"http://omeka.org/add-"
-"ons/themes/\">Omeka seznamu vzhledů</a> nebo <a "
-"href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">navrhnout "
-"vlastní</a>!"
+msgstr "Přidat nový vzhled jeho stažením z <a href=\"http://omeka.org/add-ons/themes/\">Omeka seznamu vzhledů</a> nebo <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">navrhnout vlastní</a>!"
 
 #: admin/themes/default/themes/config.php:2
 #, php-format
@@ -1547,17 +1504,13 @@ msgid ""
 "This will delete the collection and its associated metadata. This will not "
 "delete any items in this collection, but will delete the reference to this "
 "collection in each item."
-msgstr ""
-"Tímto smažete sbírku a všechna přidružená metadata. Nesmažete žádné položky "
-"ve sbírce, ale smažete všechny reference na tuto sbírku ze všech položek."
+msgstr "Tímto smažete sbírku a všechna přidružená metadata. Nesmažete žádné položky ve sbírce, ale smažete všechny reference na tuto sbírku ze všech položek."
 
 #: application/controllers/ElementSetsController.php:26
 msgid ""
 "This will delete the element set and all elements assigned to the element "
 "set. Items will lose all metadata that is specific to this element set."
-msgstr ""
-"Tímto smažete sadu prvků a všechny prvky přiřazené do této sady. Položky "
-"ztratí všechna metadata specifická pro tuto sadu prvků."
+msgstr "Tímto smažete sadu prvků a všechny prvky přiřazené do této sady. Položky ztratí všechna metadata specifická pro tuto sadu prvků."
 
 #: application/controllers/ErrorController.php:66
 msgid "Page not found."
@@ -1572,19 +1525,14 @@ msgid ""
 "This will delete the item type but will not delete the elements assigned to "
 "the item type. Items that are assigned to this item type will lose all "
 "metadata that is specific to the item type."
-msgstr ""
-"Tato volba odstraní typ položky, ale neodstraní prvky přidružené k typu "
-"položky. Položky přidružené k tomuto typu položky ztratí všechny metadata, "
-"která jsou specifická pro tento typ."
+msgstr "Tato volba odstraní typ položky, ale neodstraní prvky přidružené k typu položky. Položky přidružené k tomuto typu položky ztratí všechny metadata, která jsou specifická pro tento typ."
 
 #: application/controllers/ItemTypesController.php:58
 #, php-format
 msgid ""
 "The item type \"%s\" was successfully added!  You may now add elements to "
 "your new item type."
-msgstr ""
-"Typ položky \"%s\" byl úspěšně přidán!   Nyní můžete přidat prvky do vašeho "
-"nového typu položky."
+msgstr "Typ položky \"%s\" byl úspěšně přidán!   Nyní můžete přidat prvky do vašeho nového typu položky."
 
 #: application/controllers/ItemTypesController.php:94
 #, php-format
@@ -1613,9 +1561,7 @@ msgstr "Položka úspěšně smazána!"
 msgid ""
 "This will delete the item and its associated metadata. It will also delete "
 "all files and file metadata associated with this item."
-msgstr ""
-"Tímto smažete položku a všechna její metadata. Také smažete všechny soubory "
-"a metadata souborů sdružená s touto položkou."
+msgstr "Tímto smažete položku a všechna její metadata. Také smažete všechny soubory a metadata souborů sdružená s touto položkou."
 
 #: application/controllers/ItemsController.php:266
 msgid "User does not have permission to add tags."
@@ -1654,9 +1600,7 @@ msgstr "Položky byly úspěšně změněny!"
 msgid ""
 "Error in configuring plugin named \"%s\". Missing config and/or config_form "
 "hook(s)."
-msgstr ""
-"Chyba při konfiguraci zásuvného modulu \"%s\". Chybí config a/nebo "
-"config_form háček(ky)."
+msgstr "Chyba při konfiguraci zásuvného modulu \"%s\". Chybí config a/nebo config_form háček(ky)."
 
 #: application/controllers/PluginsController.php:55
 #, php-format
@@ -1711,8 +1655,7 @@ msgstr "%s plugin byl úspěšně aktualizován!"
 #: application/controllers/PluginsController.php:161
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
-msgstr ""
-"V průběhu aktualizace zásuvného modulu %s se stala následující chyba: "
+msgstr "V průběhu aktualizace zásuvného modulu %s se stala následující chyba: "
 
 #: application/controllers/PluginsController.php:212
 msgid "You must confirm the uninstall before proceeding."
@@ -1748,8 +1691,7 @@ msgstr "Nastavení bylo aktualizováno."
 #: application/controllers/SettingsController.php:46
 #: install/views/scripts/index/index.phtml:16
 msgid "There were errors found in your form. Please edit and resubmit."
-msgstr ""
-"Ve vašem formuláři jsou chyby. Prosím opravte je a formulář znovu odešlete."
+msgstr "Ve vašem formuláři jsou chyby. Prosím opravte je a formulář znovu odešlete."
 
 #: application/controllers/SettingsController.php:70
 msgid "Works"
@@ -1802,9 +1744,7 @@ msgstr "SQL chyba při migraci:"
 msgid ""
 "Unable to reset password. Please verify that the information is correct and "
 "contact an administrator if necessary."
-msgstr ""
-"Nelze resetovat heslo. Prosím ověřte, že zadané informace jsou správné a "
-"kontaktuje administrátora, pokud je to nutné."
+msgstr "Nelze resetovat heslo. Prosím ověřte, že zadané informace jsou správné a kontaktuje administrátora, pokud je to nutné."
 
 #: application/controllers/UsersController.php:129
 msgid "Please follow this link to reset your password:"
@@ -1824,8 +1764,7 @@ msgstr "[%s] Resetovat vaše heslo."
 
 #: application/controllers/UsersController.php:138
 msgid "Please check your email for a link to reset your password."
-msgstr ""
-"Prosím, zkontrolujte váš email kvůli odkazu k resetování vašeho hesla."
+msgstr "Prosím, zkontrolujte váš email kvůli odkazu k resetování vašeho hesla."
 
 #: application/controllers/UsersController.php:154
 msgid "Password: The passwords do not match."
@@ -1864,9 +1803,7 @@ msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
 "this user will remain in the archive, but will no longer be associated with "
 "this user."
-msgstr ""
-"%s bude smazán ze systému. Položky, Sbírky a Štítky vytvořené tímto "
-"uživatelem zůstanou v archivu, ale bez uvedení vazeb na tohoto uživatele."
+msgstr "%s bude smazán ze systému. Položky, Sbírky a Štítky vytvořené tímto uživatelem zůstanou v archivu, ale bez uvedení vazeb na tohoto uživatele."
 
 #: application/controllers/UsersController.php:294
 msgid "Welcome!"
@@ -1877,9 +1814,7 @@ msgstr "Vítej!"
 msgid ""
 "Your account for the %s archive has been created. Please click the following"
 " link to activate your account:"
-msgstr ""
-"Váš účet pro %s archiv byl vytvořen. Prosím, klikněte zde pro aktivaci "
-"nového účtu."
+msgstr "Váš účet pro %s archiv byl vytvořen. Prosím, klikněte zde pro aktivaci nového účtu."
 
 #: application/controllers/UsersController.php:299
 #, php-format
@@ -1934,10 +1869,7 @@ msgstr "Oddělovač Štítků"
 msgid ""
 "Separate tags using this character or string. Be careful when changing this "
 "setting. You run the risk of splitting tags that contain the old delimiter."
-msgstr ""
-"Oddělte štítky s pomocí tohoto snaku nebo řetězce. Buďte opatrní při změně "
-"tohoto nastavení. Riskujete rozdělení štítků které obsahují starý oddělovač."
-" "
+msgstr "Oddělte štítky s pomocí tohoto snaku nebo řetězce. Buďte opatrní při změně tohoto nastavení. Riskujete rozdělení štítků které obsahují starý oddělovač. "
 
 #: application/forms/GeneralSettings.php:64 application/forms/Install.php:123
 msgid "Fullsize Image Size"
@@ -1971,8 +1903,7 @@ msgstr "Položek Na Stránku (admin)"
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
-msgstr ""
-"Omezí počet položek zobrazených na stránce v administrátorském rozhraní."
+msgstr "Omezí počet položek zobrazených na stránce v administrátorském rozhraní."
 
 #: application/forms/GeneralSettings.php:92 application/forms/Install.php:155
 msgid "Items Per Page (public)"
@@ -1994,9 +1925,7 @@ msgstr "Povolit Prototyp"
 msgid ""
 "Enable the Prototype JavaScript library. This may be required for some older"
 " plugins."
-msgstr ""
-"Povolit Prototype JavaScript knihovnu. Může být vyžadována některými "
-"staršími zásuvnými moduly."
+msgstr "Povolit Prototype JavaScript knihovnu. Může být vyžadována některými staršími zásuvnými moduly."
 
 #: application/forms/GeneralSettings.php:110 application/forms/Install.php:169
 msgid "Imagemagick Directory Path"
@@ -2100,9 +2029,7 @@ msgstr "Zakázat validaci při nahrávání souborů."
 msgid ""
 "Check this field if you would like to allow any file to be uploaded to "
 "Omeka."
-msgstr ""
-"Vyberte toto pole pokud chcete aby mohl být do Omeky nahrán libovolný "
-"soubor."
+msgstr "Vyberte toto pole pokud chcete aby mohl být do Omeky nahrán libovolný soubor."
 
 #: application/forms/SecuritySettings.php:35
 msgid "Allowed File Extensions"
@@ -2128,9 +2055,7 @@ msgstr "ReCaptcha Veřejný Klíč"
 msgid ""
 "Public key from recaptcha.net. Both this and the private key must be filled "
 "in to secure public forms."
-msgstr ""
-"Veřejný klíč z recaptcha.net. Veřejný a soukromý klíč musí být zadán pro "
-"zabezpečení veřejných formulářů."
+msgstr "Veřejný klíč z recaptcha.net. Veřejný a soukromý klíč musí být zadán pro zabezpečení veřejných formulářů."
 
 #: application/forms/SecuritySettings.php:63
 msgid "ReCaptcha Private Key"
@@ -2261,9 +2186,7 @@ msgstr "Doporučená Položka."
 msgid ""
 "An item has not been set to be displayed on this theme page! Please see "
 "Omeka documentation for details."
-msgstr ""
-"Položka není zobrazena na této stránce vzhledu. Prosím, konzultujte tento "
-"stav s dokumentací Omeky."
+msgstr "Položka není zobrazena na této stránce vzhledu. Prosím, konzultujte tento stav s dokumentací Omeky."
 
 #: application/helpers/ItemFunctions.php:571
 msgid "No featured items are available."
@@ -2312,9 +2235,7 @@ msgstr "Nelze najít prvek s ID  '%s'!"
 msgid ""
 "Element name is ambiguous! There is more than one element set containing an "
 "element named \"%s\"!"
-msgstr ""
-"Jméno prvku není jednoznačné! Existuje více než jedna sada prvků obsahující "
-"prvek jménem \"%s\"!"
+msgstr "Jméno prvku není jednoznačné! Existuje více než jedna sada prvků obsahující prvek jménem \"%s\"!"
 
 #: application/models/ActsAsElementText.php:317
 #: application/models/ActsAsElementText.php:324
@@ -2434,9 +2355,7 @@ msgstr "Nelze uložit lokální cestu pro ukládaný soubor."
 #: application/models/Item.php:284
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
-msgstr ""
-"Soubory nemohou být připojeny k položce která není trvale zaznamenána v "
-"databázi!"
+msgstr "Soubory nemohou být připojeny k položce která není trvale zaznamenána v databázi!"
 
 #: application/models/Item.php:398
 msgid "Cannot add an existing file to an item!"
@@ -2459,9 +2378,7 @@ msgstr "Je třeba zadat typ přenosu souboru při připojování souborů k polo
 msgid ""
 "This SQL statement needs a FROM or JOIN clause equivalent to '%s i' in order"
 " to have permissions checked!"
-msgstr ""
-"SQL dotaz musí obsahovat FROM nebo JOIN klauzuli ekvivalentní '%s i' aby "
-"došlo ke kontrole oprávnění."
+msgstr "SQL dotaz musí obsahovat FROM nebo JOIN klauzuli ekvivalentní '%s i' aby došlo ke kontrole oprávnění."
 
 #: application/models/ItemSearch.php:98
 msgid "Invalid search type given!"
@@ -2488,17 +2405,13 @@ msgstr "Příliš málo hodnot pro řazení prvků pole."
 msgid ""
 "Invalid element data. To add elements, you must either pass an element "
 "objects or an array of element metadata."
-msgstr ""
-"Neplatná data prvku. Pro přidání prvku musíte buď poslat objekt prvku, nebo "
-"pole metadat prvku."
+msgstr "Neplatná data prvku. Pro přidání prvku musíte buď poslat objekt prvku, nebo pole metadat prvku."
 
 #: application/models/ItemType.php:285
 msgid ""
 "Cannot remove elements from an item type that is not persistent in the "
 "database!"
-msgstr ""
-"Nelze odstranit prvek z typu položky který není trvale zaznamenán v "
-"databázi!"
+msgstr "Nelze odstranit prvek z typu položky který není trvale zaznamenán v databázi!"
 
 #: application/models/ItemType.php:294
 #, php-format
@@ -2514,9 +2427,7 @@ msgstr "Typ položky neobsahuje prvek s ID %s!"
 msgid ""
 "Invalid parameter. The hasElement function requires either an element object"
 " or an element id to determine if an item type has an element."
-msgstr ""
-"Neplatný parametr. Funkce hasElement vyžaduje buď objekt prvku nebo id prvku"
-" pro určení zda mát typ položky tento prvek."
+msgstr "Neplatný parametr. Funkce hasElement vyžaduje buď objekt prvku nebo id prvku pro určení zda mát typ položky tento prvek."
 
 #: application/models/Option.php:28 application/models/Option.php:32
 msgid "Each option must have a unique name."
@@ -2584,8 +2495,7 @@ msgstr "Uživatel nesmí změnit svou roli."
 msgid ""
 "If a first name and last name are not provided, then an institution name is "
 "required."
-msgstr ""
-"Pokud není poskytnuto jméno a příjmení, potom je vyžadováno jméno instituce."
+msgstr "Pokud není poskytnuto jméno a příjmení, potom je vyžadováno jméno instituce."
 
 #: application/models/User.php:156
 msgid "A first name is required."
@@ -2708,10 +2618,7 @@ msgid ""
 "Omeka Codex page on <a "
 "href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error "
 "messages</a>."
-msgstr ""
-"Pro detailní informace o této chybě - Omeka Codex page on <a "
-"href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error "
-"messages</a>."
+msgstr "Pro detailní informace o této chybě - Omeka Codex page on <a href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error messages</a>."
 
 #: application/views/scripts/functions.php:131
 msgid "Browse All"
@@ -2834,10 +2741,7 @@ msgid ""
 "If you have any questions please refer to <a "
 "href=\"http://omeka.org/codex\">Omeka documentation</a> or post a message on"
 " the <a href=\"http://omeka.org/forums\">Omeka forums</a>."
-msgstr ""
-"Pokud máte nějaké otázky přečtěte si prosím <a "
-"href=\"http://omeka.org/codex\">Omeka dokumentaci</a> nebo se zeptejte na <a"
-" href=\"http://omeka.org/forums\">Omeka fóru</a>."
+msgstr "Pokud máte nějaké otázky přečtěte si prosím <a href=\"http://omeka.org/codex\">Omeka dokumentaci</a> nebo se zeptejte na <a href=\"http://omeka.org/forums\">Omeka fóru</a>."
 
 #: application/views/scripts/upgrade/index.php:10
 msgid "Upgrade Your Omeka Database"
@@ -2851,9 +2755,7 @@ msgstr "Vaše Omeka databáze není kompatibilní s vaší současnou verzí Ome
 #: application/views/scripts/upgrade/index.php:13
 msgid ""
 "Please back up your existing database and then click the button to upgrade."
-msgstr ""
-"Prosím zálohujte vaší současnou databázi a potom klikněte na tlačítko pro "
-"aktualizaci."
+msgstr "Prosím zálohujte vaší současnou databázi a potom klikněte na tlačítko pro aktualizaci."
 
 #: application/views/scripts/upgrade/index.php:15
 msgid "Upgrade Database"
@@ -2920,9 +2822,7 @@ msgstr "Varování Instalace"
 msgid ""
 "The following issues will not affect installation, but they may negatively "
 "affect the behavior of Omeka:"
-msgstr ""
-"Následující problémy nijak neovlivní instalaci, ale můžou mýt negativní "
-"dopad na chování Omeky:"
+msgstr "Následující problémy nijak neovlivní instalaci, ale můžou mýt negativní dopad na chování Omeky:"
 
 #: install/views/scripts/index/index.phtml:13
 msgid "Configure Your Site"
@@ -2936,9 +2836,7 @@ msgstr "Chyba Validace Formuláře"
 msgid ""
 "Omeka is installed. You may remove the \"install\" directory for security "
 "reasons."
-msgstr ""
-"Omeka byla nainstalována. Z bezpečnostních důvodů můžete odstranit adresář "
-"\"install\"."
+msgstr "Omeka byla nainstalována. Z bezpečnostních důvodů můžete odstranit adresář \"install\"."
 
 #: install/views/scripts/index/installed.phtml:2
 msgid "Admin Panel"
@@ -2951,5 +2849,3 @@ msgstr "Veřejný Depositář"
 #: install/views/scripts/layout.phtml:5 install/views/scripts/layout.phtml:9
 msgid "Omeka Installation"
 msgstr "Instalace Omeky"
-
-

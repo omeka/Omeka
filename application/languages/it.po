@@ -12,14 +12,14 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2011-11-22 16:18-0500\n"
-"PO-Revision-Date: 2012-07-12 11:49+0000\n"
-"Last-Translator: Stefano Costa <steko@iosa.it>\n"
+"PO-Revision-Date: 2012-09-27 09:04+0000\n"
+"Last-Translator: guzzettg <guzzettg@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/omeka/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 # Dublin Core description
 msgid ""
@@ -66,7 +66,7 @@ msgstr "Editore"
 # Dublin Core: Contributor element
 # User role: contributor
 msgid "Contributor"
-msgstr "Collaboratore"
+msgstr "Altri autori"
 
 # Dublin Core: Date element
 msgid "Date"
@@ -250,11 +250,11 @@ msgstr "Codec"
 
 # User role: Super
 msgid "Super"
-msgstr ""
+msgstr "Super"
 
 # User role: Admin
 msgid "Admin"
-msgstr ""
+msgstr "Admin"
 
 # User role: Researcher
 msgid "Researcher"
@@ -340,7 +340,7 @@ msgstr "Nessuna collezione presente in questa pagina."
 
 #: admin/themes/default/collections/browse.php:68
 msgid "View All Collections"
-msgstr "Vedi tutte le collezioni"
+msgstr "Tutte le collezioni"
 
 #: admin/themes/default/collections/browse.php:71
 msgid "Add a collection."
@@ -801,7 +801,7 @@ msgstr "Nessun documento da visualizzare"
 
 #: admin/themes/default/index.php:102 application/views/scripts/index.php:71
 msgid "View All Items"
-msgstr "Vedi tutti i documenti"
+msgstr "Tutti i documenti"
 
 #: admin/themes/default/index.php:107
 msgid "Recent Tags"
@@ -995,7 +995,7 @@ msgstr ""
 
 #: admin/themes/default/items/browse.php:14
 msgid "Details"
-msgstr ""
+msgstr "Dettagli"
 
 #: admin/themes/default/items/browse.php:15
 msgid "Show Details"
@@ -1007,7 +1007,7 @@ msgstr "Nascondi i dettagli"
 
 #: admin/themes/default/items/browse.php:96
 msgid "Quick Filter"
-msgstr ""
+msgstr "Filtro veloce"
 
 #: admin/themes/default/items/browse.php:99
 msgid "All"
@@ -1277,15 +1277,15 @@ msgstr "Modifica le impostazioni di sicurezza"
 
 #: admin/themes/default/security/edit.php:10
 msgid "Restore Default File Extensions"
-msgstr "Ripristina le estensioni dei file predefinite"
+msgstr "Ripristina le estensioni predefinite dei file"
 
 #: admin/themes/default/security/edit.php:15
 msgid "Restore Default File Mime Types"
-msgstr "Ripristina i tipi MIME dei file predefiniti"
+msgstr "Ripristina i tipi MIME predefiniti dei file"
 
 #: admin/themes/default/settings/edit.php:10
 msgid "Test"
-msgstr ""
+msgstr "Test"
 
 #: admin/themes/default/system-info/index.php:2
 msgid "System Information"
@@ -1293,7 +1293,7 @@ msgstr "Informazioni di sistema"
 
 #: admin/themes/default/tags/browse.php:8
 msgid "Sort by"
-msgstr ""
+msgstr "Filtra per"
 
 #: admin/themes/default/tags/browse.php:11
 msgid "Most"
@@ -1374,7 +1374,7 @@ msgid ""
 "ons/themes/\">Omeka Theme Directory</a>, or <a "
 "href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">design your "
 "own</a>!"
-msgstr "Aggiungi nuovi temi scaricandoli dalla <a href=\"http://omeka.org/add-ons/themes/\">Omeka Theme Directory</a>, oppure <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">crea il tuo tema</a>!"
+msgstr "Aggiungi nuovi temi scaricandoli dalla <a href=\"http://omeka.org/add-ons/themes/\">Omeka Theme Directory</a>, oppure <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">creane uno tuo</a>!"
 
 #: admin/themes/default/themes/config.php:2
 #, php-format
@@ -1505,7 +1505,7 @@ msgid ""
 "This will delete the collection and its associated metadata. This will not "
 "delete any items in this collection, but will delete the reference to this "
 "collection in each item."
-msgstr "La raccolta e i suoi metadati saranno eliminati. Questo non eliminerà i documenti contenuti nella raccolta, ma soltanto il riferimento alla raccolta in ognuno dei documenti."
+msgstr "La collezione e i suoi metadati saranno eliminati. Questo non eliminerà i documenti contenuti nella collezione, ma soltanto il riferimento alla collezione in ogni documento."
 
 #: application/controllers/ElementSetsController.php:26
 msgid ""
@@ -1578,7 +1578,7 @@ msgstr "L'utente non è autorizzato a modificare la visibilità dei documenti."
 
 #: application/controllers/ItemsController.php:343
 msgid "User is not allowed to modify featured status of items."
-msgstr "L'utente non è autorizzato a modificare lo stato \"in vetrina\" dei documenti"
+msgstr "L'utente non è autorizzato a modificare lo stato \"in evidenza\" dei documenti."
 
 #: application/controllers/ItemsController.php:350
 msgid "User is not allowed to delete selected items."
@@ -1777,7 +1777,7 @@ msgstr "Ora puoi effettuare il login in Omeka."
 
 #: application/controllers/UsersController.php:179
 msgid "Add User"
-msgstr ""
+msgstr "Aggiungi un utente"
 
 #: application/controllers/UsersController.php:189
 #, php-format
@@ -1804,7 +1804,7 @@ msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
 "this user will remain in the archive, but will no longer be associated with "
 "this user."
-msgstr "%s sarà eliminato dal sistema. Documenti, raccolte e tag creati da questo utente rimarranno nell'archivio, ma non saranno più associati a questo utente."
+msgstr "%s sarà eliminato dal sistema. Documenti, collezioni e tag creati da questo utente rimarranno nell'archivio, ma non saranno più associati a questo utente."
 
 #: application/controllers/UsersController.php:294
 msgid "Welcome!"
@@ -2070,23 +2070,23 @@ msgstr "Chiave privata di recaptcha.net. Sono necessarie sia la chiave pubblica 
 
 #: application/forms/User.php:35
 msgid "Username is required."
-msgstr ""
+msgstr "Il nome utente è obbligatorio."
 
 #: application/forms/User.php:43
 msgid "Username must contain only letters and numbers."
-msgstr ""
+msgstr "Il nome utente può contenere soltanto lettere e numeri."
 
 #: application/forms/User.php:53
 msgid "Username must be at least %min% characters long."
-msgstr ""
+msgstr "Il nome utente deve essere lungo almeno %min% caratteri."
 
 #: application/forms/User.php:55
 msgid "Username must be at most %max% characters long."
-msgstr ""
+msgstr "Il nome utente deve essere lungo al massimo %max% caratteri."
 
 #: application/forms/User.php:69
 msgid "This username is already in use."
-msgstr ""
+msgstr "Il nome utente è già utilizzato."
 
 #: application/forms/User.php:84
 msgid "First name is required."
@@ -2098,15 +2098,15 @@ msgstr ""
 
 #: application/forms/User.php:103
 msgid "This email address is invalid."
-msgstr ""
+msgstr "L'indirizzo email non è valido"
 
 #: application/forms/User.php:111
 msgid "Email is required."
-msgstr ""
+msgstr "L'email è obbligatoria."
 
 #: application/forms/User.php:130
 msgid "This email address is already in use."
-msgstr ""
+msgstr "L'indirizzo email è già utilizzato."
 
 #: application/forms/User.php:151
 msgid "Active?"
@@ -2121,19 +2121,19 @@ msgstr "File %s non trovato!"
 #: application/helpers/CollectionFunctions.php:58
 #, php-format
 msgid "%s does not exist for collections!"
-msgstr "%s non esiste per le raccolte!"
+msgstr "%s non esiste per le collezioni!"
 
 #: application/helpers/CollectionFunctions.php:123
 msgid "Featured Collection"
-msgstr "Raccolta in vetrina"
+msgstr "Collezione in evidenza"
 
 #: application/helpers/CollectionFunctions.php:131
 msgid "No featured collections are available."
-msgstr "Non ci sono raccolte in vetrina"
+msgstr "Non ci sono collezioni in evidenza."
 
 #: application/helpers/ElementForm.php:50
 msgid "Add Input"
-msgstr ""
+msgstr "Inserisci input"
 
 #: application/helpers/ElementForm.php:286
 #, php-format
@@ -2159,7 +2159,7 @@ msgstr "%s non è valido come valore speciale."
 
 #: application/helpers/FormFunctions.php:135
 msgid "Select Below "
-msgstr "Scegli sotto"
+msgstr "Scegli"
 
 #: application/helpers/FormFunctions.php:245
 #: application/helpers/FormFunctions.php:533
@@ -2181,17 +2181,17 @@ msgstr ""
 
 #: application/helpers/ItemFunctions.php:58
 msgid "Featured Item"
-msgstr "Documento in vetrina"
+msgstr "Documento in evidenza"
 
 #: application/helpers/ItemFunctions.php:73
 msgid ""
 "An item has not been set to be displayed on this theme page! Please see "
 "Omeka documentation for details."
-msgstr ""
+msgstr "Nessun elemento da visualizzare é stato impostato per questa pagina! Consultate la documentazione di Omeka per ulteriori dettagli."
 
 #: application/helpers/ItemFunctions.php:571
 msgid "No featured items are available."
-msgstr "Non ci sono documenti in vetrina disponibili."
+msgstr "Non ci sono documenti in evidenza."
 
 #: application/helpers/ItemMetadata.php:86
 #, php-format
@@ -2200,7 +2200,7 @@ msgstr "'%s' non è valido come valore speciale."
 
 #: application/helpers/LinkFunctions.php:43
 msgid "View"
-msgstr ""
+msgstr "Vedi"
 
 #: application/helpers/LinkFunctions.php:208
 msgid "RSS"
@@ -2208,11 +2208,11 @@ msgstr "RSS"
 
 #: application/helpers/LinkFunctions.php:225
 msgid "Next Item &rarr;"
-msgstr "Documento successivo &rarr;"
+msgstr "Successivo &rarr;"
 
 #: application/helpers/LinkFunctions.php:241
 msgid "&larr; Previous Item"
-msgstr "&larr; Documento precedente"
+msgstr "&larr; Precedente"
 
 #: application/helpers/LinkFunctions.php:530
 msgid "Atom"
@@ -2224,7 +2224,7 @@ msgstr "Nessun tag disponibile."
 
 #: application/libraries/Omeka/View/Helper/RecordMetadataList.php:91
 msgid "[no text]"
-msgstr ""
+msgstr "[nessun testo]"
 
 #: application/models/ActsAsElementText.php:257
 #, php-format
@@ -2236,7 +2236,7 @@ msgstr "Impossibile trovare un elemento con ID '%s'!"
 msgid ""
 "Element name is ambiguous! There is more than one element set containing an "
 "element named \"%s\"!"
-msgstr ""
+msgstr "Il nome dell'elemento é ambiguo! Più di un insieme di elementi contiene un elemento chiamato \"%s\"!"
 
 #: application/models/ActsAsElementText.php:317
 #: application/models/ActsAsElementText.php:324
@@ -2256,7 +2256,7 @@ msgstr "I testi dell'elemento non sono formattati correttamente!"
 #: application/models/ActsAsElementText.php:647
 #, php-format
 msgid "Cannot process form input for element with data type \"%s\"!"
-msgstr ""
+msgstr "Non si puó elaborare il modulo per l'inserimento di elementi con data type \"%s\"!"
 
 #: application/models/ActsAsElementText.php:662
 #, php-format
@@ -2274,12 +2274,12 @@ msgstr ""
 
 #: application/models/Collection.php:107
 msgid "Collectors must be either a string or an array."
-msgstr ""
+msgstr "I collectors devono essere o una stringa o un array."
 
 #: application/models/Collection.php:148
 #, php-format
 msgid "The collection name must have between %1$s and %2$s characters."
-msgstr "Il nome della raccolta deve essere compreso tra %1$s e %2$s caratteri."
+msgstr "Il nome della collezione deve essere compreso tra %1$s e %2$s caratteri."
 
 #: application/models/Collection.php:198
 msgid ""
@@ -2288,7 +2288,7 @@ msgstr ""
 
 #: application/models/Collection.php:230
 msgid "Cannot associate the collection with an unsaved user."
-msgstr ""
+msgstr "Non si può associare la collezione ad un utente non salvato"
 
 #: application/models/CollectionPermissions.php:37
 msgid "Invalid query provided to CollectionPermissions check"
@@ -2301,20 +2301,20 @@ msgstr ""
 
 #: application/models/Element.php:180
 msgid "Name must not be empty!"
-msgstr ""
+msgstr "Il nome non può essere vuoto!"
 
 #: application/models/Element.php:184
 msgid "Element must have a valid data type!"
-msgstr ""
+msgstr "L'elemento deve avere un tipo di dato valido!"
 
 #: application/models/Element.php:188
 msgid "Element must have a valid record type!"
-msgstr ""
+msgstr "L'elemento deve avere un tipo di record valido!"
 
 #: application/models/Element.php:193
 #, php-format
 msgid "%1$s already exists for element set #%2$s"
-msgstr ""
+msgstr "%1$s già esiste per il set di elementi #%2$s"
 
 #: application/models/Element.php:252
 #, php-format
@@ -2323,11 +2323,11 @@ msgstr ""
 
 #: application/models/ElementSet.php:119
 msgid "Name of element set must be unique."
-msgstr ""
+msgstr "Il nome del set di elementi deve essere unico!"
 
 #: application/models/ElementSet.php:123
 msgid "Name of element set must not be empty."
-msgstr ""
+msgstr "Il nome del set di elementi non può essere vuoto!"
 
 #: application/models/EntitiesRelations.php:29
 msgid "Joins in the EntitiesRelations table must be given a polymorphic type"
@@ -2343,7 +2343,7 @@ msgstr "L'indirizzo email non è valido"
 
 #: application/models/Entity.php:41
 msgid "The name for a person may not be completely blank."
-msgstr ""
+msgstr "Il nome di persona non puó essere vuoto."
 
 #: application/models/Entity.php:134
 msgid "Both of these Entities must be persistent in order to merge them."
@@ -2351,7 +2351,7 @@ msgstr ""
 
 #: application/models/File.php:109
 msgid "Cannot get the local path for a stored file."
-msgstr ""
+msgstr "Non è possibile recuperare il percorso locale del file archiviato."
 
 #: application/models/Item.php:284
 msgid ""
@@ -2360,11 +2360,11 @@ msgstr ""
 
 #: application/models/Item.php:398
 msgid "Cannot add an existing file to an item!"
-msgstr ""
+msgstr "Non è possibile aggiungere un file esistente ad un oggetto! "
 
 #: application/models/Item.php:402
 msgid "File must be valid before it can be associated with an item!"
-msgstr ""
+msgstr "Il file deve essere valido prima di essere associato ad un oggetto."
 
 #: application/models/ItemBuilder.php:141
 msgid "Cannot add tags to an item if no Entity is available to tag."
@@ -2372,7 +2372,7 @@ msgstr "Non è possibile aggiungere un tag a un documento se non c'è una Entit�
 
 #: application/models/ItemBuilder.php:265
 msgid "Must specify a file transfer type when attaching files to an item!"
-msgstr ""
+msgstr "Bisogna specificare il tipo di file da trasferire quando lo si allega a un elemento!"
 
 #: application/models/ItemPermissions.php:34
 #, php-format
@@ -2383,7 +2383,7 @@ msgstr ""
 
 #: application/models/ItemSearch.php:98
 msgid "Invalid search type given!"
-msgstr ""
+msgstr "Tipo di ricerca non valida!"
 
 #: application/models/ItemType.php:83
 #, php-format
@@ -2392,7 +2392,7 @@ msgstr ""
 
 #: application/models/ItemType.php:87
 msgid "The item type name must be unique."
-msgstr ""
+msgstr "Il nome di tipo contenuto deve essere unico"
 
 #: application/models/ItemType.php:175
 msgid "There are too many values in the element ordering array."
@@ -2417,7 +2417,7 @@ msgstr ""
 #: application/models/ItemType.php:294
 #, php-format
 msgid "Cannot find element with ID %s!"
-msgstr ""
+msgstr "Non è possibile trovare l'ekemento con ID %s!"
 
 #: application/models/ItemType.php:337
 #, php-format
@@ -2436,7 +2436,7 @@ msgstr "Ogni opzione deve avere un nome unico."
 
 #: application/models/Orderable.php:101
 msgid "Cannot add a child to a record that does not exist yet!"
-msgstr ""
+msgstr "Non si puó annettere un figlio a un record che ancora non esiste!"
 
 #: application/models/Orderable.php:105
 #, php-format
@@ -2445,7 +2445,7 @@ msgstr ""
 
 #: application/models/Plugin.php:94
 msgid "Names of plugins must not be blank"
-msgstr ""
+msgstr "I nomi dei plugins non possono essere vuoti."
 
 #: application/models/Relatable.php:158
 msgid "Invalid entity provided!"
@@ -2454,11 +2454,11 @@ msgstr ""
 #: application/models/Relatable.php:169
 #, php-format
 msgid "Relationship called %s does not exist."
-msgstr ""
+msgstr "La relazione %s non esiste"
 
 #: application/models/Relatable.php:222
 msgid "Record must exist before relations can be set."
-msgstr ""
+msgstr "Il record deve esistere prima di poter stabilire una relazione."
 
 #: application/models/Tag.php:58
 msgid "Tags must be given a name."
@@ -2486,11 +2486,11 @@ msgstr ""
 
 #: application/models/User.php:92
 msgid "User may not change permissions to super-user"
-msgstr ""
+msgstr "Un utente non può modificare i permessi di un super-utente"
 
 #: application/models/User.php:95
 msgid "User may not change roles."
-msgstr ""
+msgstr "Un utente non può modificare i ruoli."
 
 #: application/models/User.php:153
 msgid ""
@@ -2513,105 +2513,105 @@ msgstr ""
 #: application/models/User.php:180
 #, php-format
 msgid "The username \"%1$s\" must be between %2$s and %3$s characters."
-msgstr ""
+msgstr "La lunghezza del nome utente \"%1$s\" deve essere compresa fra %2$s e %3$s caratteri."
 
 #: application/models/User.php:182
 msgid "The username must be alphanumeric."
-msgstr ""
+msgstr "Il nome utente deve essere alfanumerico."
 
 #: application/models/User.php:184
 #, php-format
 msgid "'%s' is already in use. Please choose another username."
-msgstr ""
+msgstr "'%s' è già utilizzato. Scegli un altro nome utente."
 
 #: application/models/UsersActivations.php:31
 msgid "Cannot create a user activation for non-existent user."
-msgstr ""
+msgstr "Non si può creare un'attivazione utente per un utente non esistente"
 
 #: application/views/scripts/collections/browse.php:21
 #: application/views/scripts/collections/show.php:13
 msgid "Collector(s)"
-msgstr ""
+msgstr "Possessore"
 
 #: application/views/scripts/collections/browse.php:28
 #: application/views/scripts/collections/show.php:22
 #, php-format
 msgid "View the items in %s"
-msgstr ""
+msgstr "Tutti i documenti nella collezione %s"
 
 #: application/views/scripts/collections/show.php:25
 #, php-format
 msgid "Items in the %s Collection"
-msgstr ""
+msgstr "Oggetti nella collezione %s"
 
 #: application/views/scripts/common/delete-confirm.php:3
 #, php-format
 msgid "Delete %s"
-msgstr ""
+msgstr "Elimina %s"
 
 #: application/views/scripts/common/delete-confirm.php:12
 msgid "Are you sure?"
-msgstr ""
+msgstr "Sei sicuro?"
 
 #: application/views/scripts/common/footer.php:6
 msgid "Home"
-msgstr ""
+msgstr "Home"
 
 #: application/views/scripts/common/footer.php:14
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
-msgstr ""
+msgstr "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
 
 #: application/views/scripts/common/pagination_control.php:7
 msgid "First"
-msgstr ""
+msgstr "Inizio"
 
 #: application/views/scripts/common/pagination_control.php:14
 msgid "Previous"
-msgstr ""
+msgstr "Indietro"
 
 #: application/views/scripts/common/pagination_control.php:30
 msgid "Next"
-msgstr ""
+msgstr "Avanti"
 
 #: application/views/scripts/common/pagination_control.php:37
 msgid "Last"
-msgstr ""
+msgstr "Fine"
 
 #: application/views/scripts/error/403.php:2
 msgid "403 Page Forbidden"
-msgstr ""
+msgstr "403 Accesso Negato"
 
 #: application/views/scripts/error/403.php:8
 msgid "You do not have permission to access this page."
-msgstr ""
+msgstr "Non si hanno i diritti per accedere a questa pagina"
 
 #: application/views/scripts/error/404.dc.php:1
 #: application/views/scripts/error/404.php:2
 #: application/views/scripts/error/404.xml.php:1
 msgid "404 Page Not Found"
-msgstr ""
+msgstr "404 Pagina non trovata"
 
 #: application/views/scripts/error/404.php:7
 #, php-format
 msgid "%s is not a valid URL."
-msgstr ""
+msgstr "%s non è un URL valido"
 
 #: application/views/scripts/error/404.rss2.php:1
 msgid "Rss2.0 Feed Not Found!"
-msgstr ""
+msgstr "Non è stato trovato nessun Feed Rss2.0!"
 
 #: application/views/scripts/error/405.php:2
 msgid "405 Method Not Allowed"
-msgstr ""
+msgstr "405 Metodo non consentito"
 
 #: application/views/scripts/error/405.php:7
 #, php-format
 msgid "The method used to access this URL (%s) is not valid."
-msgstr ""
+msgstr "Il metodo utilizzato per accedere al questo URL (%s) non è valido"
 
 #: application/views/scripts/error/index.php:4
 msgid "Omeka has encountered an error"
-msgstr ""
+msgstr "Omeka ha riscontrato un errore"
 
 #: application/views/scripts/error/index.php:29
 msgid ""
@@ -2619,11 +2619,11 @@ msgid ""
 "Omeka Codex page on <a "
 "href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error "
 "messages</a>."
-msgstr ""
+msgstr "Per avere informazioni più dettagliate su questo errore, confronta la pagina \"<a href=\"http://omeka.org/codex/Retrieving_error_messages\">Retrieving error messages</a>\"."
 
 #: application/views/scripts/functions.php:131
 msgid "Browse All"
-msgstr ""
+msgstr "Sfoglia"
 
 #: application/views/scripts/functions.php:131
 msgid "Browse by Tag"
@@ -2631,55 +2631,55 @@ msgstr "Sfoglia per tag"
 
 #: application/views/scripts/index.php:67
 msgid "No recent items available."
-msgstr ""
+msgstr "Nessuna novità"
 
 #: application/views/scripts/items/advanced-search.php:32
 msgid "Search for Keywords"
-msgstr ""
+msgstr "Cerca per parole chiave"
 
 #: application/views/scripts/items/advanced-search.php:42
 msgid "Narrow by Specific Fields"
-msgstr ""
+msgstr "Restringi per campo specifico"
 
 #: application/views/scripts/items/advanced-search.php:71
 msgid "contains"
-msgstr ""
+msgstr "contiene"
 
 #: application/views/scripts/items/advanced-search.php:72
 msgid "does not contain"
-msgstr ""
+msgstr "non contiene"
 
 #: application/views/scripts/items/advanced-search.php:73
 msgid "is exactly"
-msgstr ""
+msgstr "uguale a"
 
 #: application/views/scripts/items/advanced-search.php:74
 msgid "is empty"
-msgstr ""
+msgstr "vuoto"
 
 #: application/views/scripts/items/advanced-search.php:75
 msgid "is not empty"
-msgstr ""
+msgstr "non vuoto"
 
 #: application/views/scripts/items/advanced-search.php:86
 msgid "Add a Field"
-msgstr ""
+msgstr "Aggiungi un campo"
 
 #: application/views/scripts/items/advanced-search.php:90
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
-msgstr ""
+msgstr "Cerca per intervallo di ID# (esempio: 1-4, 156, 79)"
 
 #: application/views/scripts/items/advanced-search.php:102
 msgid "Search By Collection"
-msgstr ""
+msgstr "Cerca per collezione"
 
 #: application/views/scripts/items/advanced-search.php:112
 msgid "Search By Type"
-msgstr ""
+msgstr "Cerca per tipo"
 
 #: application/views/scripts/items/advanced-search.php:122
 msgid "Search By User"
-msgstr ""
+msgstr "Cerca per utente"
 
 #: application/views/scripts/items/advanced-search.php:133
 msgid "Search By Tags"
@@ -2687,27 +2687,27 @@ msgstr "Cerca per tag"
 
 #: application/views/scripts/items/advanced-search.php:147
 msgid "Public/Non-Public"
-msgstr ""
+msgstr "Pubblico / Non pubblico"
 
 #: application/views/scripts/items/advanced-search.php:150
 msgid "Only Public Items"
-msgstr ""
+msgstr "Solo documenti pubblici"
 
 #: application/views/scripts/items/advanced-search.php:151
 msgid "Only Non-Public Items"
-msgstr ""
+msgstr "Solo documenti non pubblici"
 
 #: application/views/scripts/items/advanced-search.php:157
 msgid "Featured/Non-Featured"
-msgstr ""
+msgstr "In evidenza / Non in evidenza"
 
 #: application/views/scripts/items/advanced-search.php:160
 msgid "Only Featured Items"
-msgstr ""
+msgstr "Soltanto documenti in evidenza"
 
 #: application/views/scripts/items/advanced-search.php:161
 msgid "Only Non-Featured Items"
-msgstr ""
+msgstr "Soltanto documenti non in evidenza"
 
 #: application/views/scripts/items/show.php:11
 msgid "Files"
@@ -2721,11 +2721,11 @@ msgstr "Citazione"
 #: application/views/scripts/upgrade/index.php:5
 #: application/views/scripts/upgrade/migrate.php:5
 msgid "Upgrade Omeka"
-msgstr ""
+msgstr "Aggiorna Omeka"
 
 #: application/views/scripts/upgrade/completed.php:10
 msgid "Omeka Upgrade Completed"
-msgstr ""
+msgstr "Aggiornamento di Omeka completato"
 
 #: application/views/scripts/upgrade/completed.php:11
 #, php-format
@@ -2788,7 +2788,7 @@ msgstr ""
 
 #: application/views/scripts/users/forgot-password.php:7
 msgid "Back to Log In"
-msgstr ""
+msgstr "Torna al login"
 
 #: application/views/scripts/users/forgot-password.php:10
 msgid "Enter your email address to retrieve your password."
@@ -2800,7 +2800,7 @@ msgstr "Vai all'homepage"
 
 #: application/views/scripts/users/login.php:9
 msgid "Lost your password?"
-msgstr ""
+msgstr "Password dimenticata?"
 
 #: install/views/scripts/index/errors.phtml:1
 msgid "Installation Error"
@@ -2809,7 +2809,7 @@ msgstr "Errore di installazione"
 #: install/views/scripts/index/errors.phtml:2
 msgid ""
 "Before installation can continue, the following errors must be resolved:"
-msgstr ""
+msgstr "Prima di poter continuare l'installazione, è necessario correggere i seguenti errori:"
 
 #: install/views/scripts/index/fatal-error.phtml:1
 msgid "Fatal Error"
@@ -2823,11 +2823,11 @@ msgstr ""
 msgid ""
 "The following issues will not affect installation, but they may negatively "
 "affect the behavior of Omeka:"
-msgstr ""
+msgstr "I seguenti problemi non compromettono l'installazione, ma potrebbero avere degli effetti negativi sul funzionamento di Omeka:"
 
 #: install/views/scripts/index/index.phtml:13
 msgid "Configure Your Site"
-msgstr ""
+msgstr "Configura il tuo sito"
 
 #: install/views/scripts/index/index.phtml:15
 msgid "Form Validation Errors"
@@ -2837,11 +2837,11 @@ msgstr ""
 msgid ""
 "Omeka is installed. You may remove the \"install\" directory for security "
 "reasons."
-msgstr ""
+msgstr "Omeka è installato. Per ragioni di scurezza, è consigliabile rimuovere la directory \"install\"."
 
 #: install/views/scripts/index/installed.phtml:2
 msgid "Admin Panel"
-msgstr ""
+msgstr "Pannello di amministrazione"
 
 #: install/views/scripts/index/installed.phtml:2
 msgid "Public Site"
@@ -2849,4 +2849,4 @@ msgstr "Sito pubblico"
 
 #: install/views/scripts/layout.phtml:5 install/views/scripts/layout.phtml:9
 msgid "Omeka Installation"
-msgstr ""
+msgstr "Installazione di Omeka"
