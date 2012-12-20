@@ -21,6 +21,9 @@
                 <exclude name="dist/**"/>
                 <exclude name="**/build.xml"/>
                 <exclude name=".travis.yml"/>
+                <exclude name="**/*.po"/>
+                <exclude name="**/*.pot"/>
+                <exclude name="application/tests/**"/>
             </zipfileset>
         </zip>
     </target>
