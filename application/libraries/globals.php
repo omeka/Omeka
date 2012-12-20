@@ -3284,6 +3284,7 @@ function theme_header_background()
         $headerBg = $storage->getUri($storage->getPathByType($headerBg, 'theme_uploads'));
         return '<style type="text/css" media="screen">header {'
            . 'background:transparent url("' . $headerBg . '") top left no-repeat;'
+           . 'background-size: cover;'
            . '}</style>';
     }
 }
