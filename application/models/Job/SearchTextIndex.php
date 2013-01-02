@@ -46,6 +46,7 @@ class Job_SearchTextIndex extends Omeka_Job_AbstractJob
                 foreach ($recordObjects as $recordObject) {
                     // Save the record object, which indexes its search text.
                     $recordObject->save();
+                    release_object($recordObject);
                 }
                 $pageNumber++;
             }
