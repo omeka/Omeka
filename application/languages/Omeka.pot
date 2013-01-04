@@ -24,7 +24,6 @@ msgid ""
 "dublincore.org/documents/dces/."
 msgstr ""
 
-#. #-#-#-#-#  Omeka.base.pot (Omeka 2.0)  #-#-#-#-#
 #. Dublin Core: Title element name
 #: admin/themes/default/collections/browse.php:22
 #: admin/themes/default/items/browse.php:40
@@ -36,7 +35,6 @@ msgstr ""
 msgid "A name given to the resource"
 msgstr ""
 
-#. #-#-#-#-#  Omeka.base.pot (Omeka 2.0)  #-#-#-#-#
 #. Dublin Core: Creator element name
 #: admin/themes/default/items/browse.php:41
 #: application/views/scripts/items/browse.php:20
@@ -55,7 +53,6 @@ msgstr ""
 msgid "The topic of the resource"
 msgstr ""
 
-#. #-#-#-#-#  Omeka.base.pot (Omeka 2.0)  #-#-#-#-#
 #. Dublin Core: Description element name
 #: admin/themes/default/element-sets/browse.php:17
 #: admin/themes/default/item-types/browse.php:15
@@ -97,7 +94,6 @@ msgid ""
 "resource"
 msgstr ""
 
-#. #-#-#-#-#  Omeka.base.pot (Omeka 2.0)  #-#-#-#-#
 #. Dublin Core: Type element name
 #: admin/themes/default/items/browse.php:42
 msgid "Type"
@@ -436,6 +432,16 @@ msgid "Featured"
 msgstr ""
 
 #: admin/themes/default/collections/browse.php:2
+#: application/libraries/Omeka/Navigation.php:149
+#: application/tests/suite/Omeka/NavigationTest.php:747
+#: application/tests/suite/Omeka/NavigationTest.php:816
+#: application/tests/suite/Omeka/NavigationTest.php:831
+#: application/tests/suite/Omeka/NavigationTest.php:950
+#: application/views/scripts/collections/browse.php:2
+msgid "Browse Collections"
+msgstr ""
+
+#: admin/themes/default/collections/browse.php:2
 #: admin/themes/default/item-types/browse.php:2
 #: admin/themes/default/items/browse.php:3
 #: admin/themes/default/plugins/browse.php:2
@@ -445,16 +451,6 @@ msgstr ""
 #: application/views/scripts/search/index.php:2
 #, php-format
 msgid "(%s total)"
-msgstr ""
-
-#: admin/themes/default/collections/browse.php:2
-#: application/libraries/Omeka/Navigation.php:149
-#: application/tests/suite/Omeka/NavigationTest.php:747
-#: application/tests/suite/Omeka/NavigationTest.php:816
-#: application/tests/suite/Omeka/NavigationTest.php:831
-#: application/tests/suite/Omeka/NavigationTest.php:950
-#: application/views/scripts/collections/browse.php:2
-msgid "Browse Collections"
 msgstr ""
 
 #: admin/themes/default/collections/browse.php:23
@@ -548,7 +544,7 @@ msgstr ""
 #: admin/themes/default/items/show.php:50
 #: admin/themes/default/items/show.php:51
 #: application/views/helpers/ItemSearchFilters.php:57
-msgid "No"
+msgid "Yes"
 msgstr ""
 
 #: admin/themes/default/collections/show.php:41
@@ -556,7 +552,7 @@ msgstr ""
 #: admin/themes/default/items/show.php:50
 #: admin/themes/default/items/show.php:51
 #: application/views/helpers/ItemSearchFilters.php:57
-msgid "Yes"
+msgid "No"
 msgstr ""
 
 #: admin/themes/default/collections/show.php:56
@@ -620,12 +616,12 @@ msgid "Are you sure?"
 msgstr ""
 
 #: admin/themes/default/common/footer.php:6
-msgid "Documentation"
+#: admin/themes/default/common/login-footer.php:7
+msgid "Powered by Omeka"
 msgstr ""
 
 #: admin/themes/default/common/footer.php:6
-#: admin/themes/default/common/login-footer.php:7
-msgid "Powered by Omeka"
+msgid "Documentation"
 msgstr ""
 
 #: admin/themes/default/common/footer.php:6
@@ -1164,12 +1160,12 @@ msgid "The query searched %s items and returned no results."
 msgstr ""
 
 #: admin/themes/default/items/browse.php:154
-#, php-format
-msgid "Would you like to %s?"
+msgid "refine your search"
 msgstr ""
 
 #: admin/themes/default/items/browse.php:154
-msgid "refine your search"
+#, php-format
+msgid "Would you like to %s?"
 msgstr ""
 
 #: admin/themes/default/items/edit.php:8
@@ -1336,11 +1332,11 @@ msgid "File Metadata"
 msgstr ""
 
 #: admin/themes/default/items/show.php:74
-msgid "Add a File"
+msgid "There are no files for this item yet."
 msgstr ""
 
 #: admin/themes/default/items/show.php:74
-msgid "There are no files for this item yet."
+msgid "Add a File"
 msgstr ""
 
 #: admin/themes/default/items/show.php:78
@@ -1404,13 +1400,13 @@ msgid "Configure"
 msgstr ""
 
 #: admin/themes/default/plugins/browse.php:103
-#: admin/themes/default/users/activate.php:31
-#: application/views/scripts/users/activate.php:26
-msgid "Activate"
+msgid "Deactivate"
 msgstr ""
 
 #: admin/themes/default/plugins/browse.php:103
-msgid "Deactivate"
+#: admin/themes/default/users/activate.php:31
+#: application/views/scripts/users/activate.php:26
+msgid "Activate"
 msgstr ""
 
 #: admin/themes/default/plugins/browse.php:113
@@ -1449,21 +1445,21 @@ msgid "Yes, I want to uninstall this plugin."
 msgstr ""
 
 #: admin/themes/default/plugins/confirm-uninstall.php:17
+msgid "or"
+msgstr ""
+
+#: admin/themes/default/plugins/confirm-uninstall.php:17
 #: admin/themes/default/settings/edit-item-type-elements.php:55
 msgid "Cancel"
 msgstr ""
 
-#: admin/themes/default/plugins/confirm-uninstall.php:17
-msgid "or"
+#: admin/themes/default/settings/edit-item-type-elements.php:12
+msgid "edit a specific item type"
 msgstr ""
 
 #: admin/themes/default/settings/edit-item-type-elements.php:11
 #, php-format
 msgid "Customize the element descriptions below. To re-order the elements, %s."
-msgstr ""
-
-#: admin/themes/default/settings/edit-item-type-elements.php:12
-msgid "edit a specific item type"
 msgstr ""
 
 #: admin/themes/default/settings/edit-item-type-elements.php:42
@@ -3257,9 +3253,9 @@ msgid "Omeka is installed."
 msgstr ""
 
 #: install/views/scripts/index/installed.phtml:3
-msgid "Admin Dashboard"
+msgid "Public Site"
 msgstr ""
 
 #: install/views/scripts/index/installed.phtml:3
-msgid "Public Site"
+msgid "Admin Dashboard"
 msgstr ""
