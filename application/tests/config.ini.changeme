@@ -26,5 +26,7 @@ debug.request = 0
 ; considerably.
 log.sql = 0
 log.errors = 0
-log.processes = 0
+
+jobs.dispatcher.default = "Omeka_Job_Dispatcher_Adapter_Synchronous"
+
 locale = ""
