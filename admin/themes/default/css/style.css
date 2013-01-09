@@ -1701,6 +1701,8 @@ header nav {
         margin-bottom: 20px; 
     }
     
+    #item-list:only-of-type { margin-bottom: 0; }
+    
         
 /* Edit Item  
 ================================================== */
