@@ -1810,7 +1810,7 @@ header nav {
 
     .field .use-html input[type=checkbox] { margin-left: 5px; }
 
-ul#section-nav, #section-nav ul {
+#section-nav, #section-nav ul {
     font-family: "Arvo", sans-serif;
     list-style-type: none;
     margin: -20px 0 16px 0;
