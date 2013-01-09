@@ -1824,7 +1824,7 @@ ul#section-nav, #section-nav ul {
         #section-nav li.active:first-child a,
         #section-nav li.current:first-child a, 
         #section-nav li:first-child a.active {
-            padding: 10px 10px 10px 10px;
+            padding: 10px;
         }
         
     #section-nav a {
@@ -1842,7 +1842,6 @@ ul#section-nav, #section-nav ul {
             -o-box-shadow: 0px 2px 3px #cccccc;
         color: #ffffff !important;
         text-shadow: -1px -1px 1px rgba(0,0,0,.05);
-        padding: 10px;
     }
                 
 
