@@ -12,7 +12,7 @@ if (!$isPartial):
 
 <form id="batch-edit-form" action="<?php echo html_escape(url('items/batch-edit-save')); ?>" method="post" accept-charset="utf-8">
 
-    <div class="seven columns alpha">
+    <section class="seven columns alpha">
     <fieldset id="item-list" class="panel">
         <h2 class="two columns alpha"><?php echo __('Items'); ?></h2>
         <div class="five columns omega">
@@ -43,13 +43,13 @@ if (!$isPartial):
 
     <input type="hidden" name="delete" value="1">
     
-    </div>
+    </section>
 
-    <div class="three columns omega">
+    <section class="three columns omega">
         <div  id="save" class="panel">
             <input type="submit" class="big red button" value="<?php echo __('Delete Items'); ?>">
         </div>
-    </div>
+    </section>
 
     <?php
     $hash = new Zend_Form_Element_Hash('batch_edit_hash');
@@ -58,6 +58,7 @@ if (!$isPartial):
     echo $hash;
     ?>
 </form>
+</div>
 <?php if (!$isPartial): ?>
 <?php echo foot(); ?>
 <?php endif; ?>
