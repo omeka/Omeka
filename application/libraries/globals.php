@@ -910,12 +910,11 @@ function add_translation_source($dir)
 {
     try {
         $translate = Zend_Registry::get('Zend_Translate');
-        $locale = Zend_Registry::get('Zend_Locale');
     } catch (Zend_Exception $e) {
         return;
     }
     
-    $locale = $locale->toString();
+    $locale = $translate->getAdapter()->getOptions('localeName');
     
     try {
         $translate->addTranslation(array(
