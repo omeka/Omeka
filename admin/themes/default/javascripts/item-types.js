@@ -13,9 +13,9 @@ Omeka.ItemTypes = {};
             items: 'li.element',
             forcePlaceholderSize: true,
             forceHelperSize: true,
+            revert: 200,
             placeholder: 'ui-sortable-highlight',
-            axis: 'y',
-            containment: '#type-elements',
+            containment: 'document',
             update: function (event, ui) {
                 $(this).find('.element-order').each(function (index) {
                     $(this).val(index + 1);
