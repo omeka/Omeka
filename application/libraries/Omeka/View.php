@@ -48,6 +48,15 @@ class Omeka_View extends Zend_View_Abstract
         $this->doctype()->setDoctype('HTML5');
         
         $this->addHelperPath(VIEW_HELPERS_DIR, 'Omeka_View_Helper');
+
+        try {
+            $mvc = Zend_Registry::get('plugin_mvc');
+            foreach ($mvc->getHelpersDirs() as $pluginDirName => $dir) {
+                $this->addHelperPath($dir, "{$pluginDirName}_View_Helper"); 
+            }
+        } catch (Zend_Exception $e) {
+            // no plugins or MVC component, so we can't add helper paths
+        }
     }
     
     /**
