@@ -498,7 +498,7 @@ class Omeka_Db_Table
      * @see Omeka_Db_Table::fetchObjects()
      * @param string $sql
      * @param string $params Parameters to substitute into SQL query.
-     * @return Omeka_Record_AbstractRecord
+     * @return Omeka_Record_AbstractRecord or null if no record 
      */
     public function fetchObject($sql, array $params=array())
     {
