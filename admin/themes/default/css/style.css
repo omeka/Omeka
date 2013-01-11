@@ -755,7 +755,8 @@ header nav {
         background: url('../images/dropdown-arrow.png') no-repeat right center, -webkit-linear-gradient(top, #1C4E65, #164052);
         background: url('../images/dropdown-arrow.png') no-repeat right center, -moz-linear-gradient(top, #1C4E65, #164052);
         background: url('../images/dropdown-arrow.png') no-repeat right center, -o-linear-gradient(top, #1C4E65, #164052);
-        background: url('../images/dropdown-arrow.png') no-repeat right center, -ms-linear-gradient(top, #1C4E65, #164052);
+    filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#1C4E65', endColorstr='#164052'); 
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#1C4E65', endColorstr='#164052')";
     border: 1px solid #11303F;
     color: #f7f7f7;
     font-family: "Arvo", serif;
@@ -1701,6 +1702,8 @@ header nav {
         margin-bottom: 20px; 
     }
     
+    #item-list:only-of-type { margin-bottom: 0; }
+    
         
 /* Edit Item  
 ================================================== */
@@ -1808,7 +1811,7 @@ header nav {
 
     .field .use-html input[type=checkbox] { margin-left: 5px; }
 
-ul#section-nav, #section-nav ul {
+#section-nav, #section-nav ul {
     font-family: "Arvo", sans-serif;
     list-style-type: none;
     margin: -20px 0 16px 0;
@@ -1822,7 +1825,7 @@ ul#section-nav, #section-nav ul {
         #section-nav li.active:first-child a,
         #section-nav li.current:first-child a, 
         #section-nav li:first-child a.active {
-            padding: 10px 10px 10px 10px;
+            padding: 10px;
         }
         
     #section-nav a {
@@ -1840,7 +1843,6 @@ ul#section-nav, #section-nav ul {
             -o-box-shadow: 0px 2px 3px #cccccc;
         color: #ffffff !important;
         text-shadow: -1px -1px 1px rgba(0,0,0,.05);
-        padding: 10px;
     }
                 
 

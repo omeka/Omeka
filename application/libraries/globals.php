@@ -910,12 +910,11 @@ function add_translation_source($dir)
 {
     try {
         $translate = Zend_Registry::get('Zend_Translate');
-        $locale = Zend_Registry::get('Zend_Locale');
     } catch (Zend_Exception $e) {
         return;
     }
     
-    $locale = $locale->toString();
+    $locale = $translate->getAdapter()->getOptions('localeName');
     
     try {
         $translate->addTranslation(array(
@@ -3283,8 +3282,7 @@ function theme_header_background()
         $storage = Zend_Registry::get('storage');
         $headerBg = $storage->getUri($storage->getPathByType($headerBg, 'theme_uploads'));
         return '<style type="text/css" media="screen">header {'
-           . 'background:transparent url("' . $headerBg . '") top left no-repeat;'
-           . 'background-size: cover;'
+           . 'background:transparent url("' . $headerBg . '") center left no-repeat;'
            . '}</style>';
     }
 }

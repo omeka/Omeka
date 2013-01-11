@@ -99,14 +99,6 @@ log.priority = Zend_Log::WARN
 ; error log.
 log.sql = false
 
-; log.processes
-; Log background processes.
-; default: false
-
-; Enables a separate log for background processes (these are used by
-; by some Omeka plugins).
-log.processes = false
-
 ;;;;;;;;;;;;
 ; Sessions ;
 ;;;;;;;;;;;;

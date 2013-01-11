@@ -64,6 +64,7 @@ class Omeka_Application_Resource_Locale extends Zend_Application_Resource_Locale
         $options = array(
             'bootstrap' => $this->getBootstrap(),
             'locale' => $locale,
+            'localeName' => $locale, //this isn't munged by Zend_Locale
             'adapter' => 'gettext',
             'disableNotices' => true,
         );

@@ -44,9 +44,15 @@ define('SCRIPTS_DIR', APP_DIR . '/scripts');
 $base_root = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https' : 'http';
 
 // Set the domain.
+if (!isset($_SERVER['HTTP_HOST'])) {
+    $_SERVER['HTTP_HOST'] = null;
+}
 $base_url = $base_root .= '://' . preg_replace('/[^a-z0-9-:._]/i', '', $_SERVER['HTTP_HOST']);
 
 // Set to port, if any.
+if (!isset($_SERVER['SERVER_PORT'])) {
+    $_SERVER['SERVER_PORT'] = null;
+}
 $port = $_SERVER['SERVER_PORT'];
 if (($base_root == 'http' && $port != '80') || ($base_root == 'https' && $port != '443')) {
     $base_url .= ":$port";

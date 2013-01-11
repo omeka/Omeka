@@ -30,7 +30,7 @@ try {
 
 // Load a core set of resources.
 $application = new Omeka_Application(APPLICATION_ENV);
-$application->bootstrap(array('Autoloader', 'Config', 'Db', 'Options', 
+$application->bootstrap(array('Autoloader', 'Config', 'Db', 'Logger', 'Options',
                               'Pluginbroker', 'Plugins', 'Jobs', 'Storage', 'Mail',
 ));
 
@@ -52,30 +52,13 @@ $processClass = $process->class;
 // Get the process arguments
 $processArgs = $process->getArguments();
 
-// Enable process logging.
-$logFile = LOGS_DIR . '/processes.log';
-$logger = null;
-if ($application->getBootstrap()->getResource('Config')->log->processes && is_writable($logFile)) {
-    // Set the writer.
-    $writer = new Zend_Log_Writer_Stream($logFile);
-    $format = '%processClass% (%processId%) %timestamp% %priorityName% (%priority%): %message%' . PHP_EOL;
-    $formatter = new Zend_Log_Formatter_Simple($format);
-    $writer->setFormatter($formatter);
-    // Set the logger.
-    $logger = new Zend_Log($writer);
-    $logger->setEventItem('processClass', $processClass);
-    $logger->setEventItem('processId', $processId);
-}
-
 // Create a custom process object
-$processObject = new $processClass($process, $logger);
+$processObject = new $processClass($process);
 
 // Run the custom process and pass in the arguments
 try {
     $processObject->run($processArgs);
 } catch (Exception $e) {
     $process->status = Process::STATUS_ERROR;
-    if ($logger instanceof Zend_Log) {
-        $logger->log($e, Zend_Log::ERR);
-    }
+    _log($e, Zend_Log::ERR);
 }
