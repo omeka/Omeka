@@ -21,7 +21,7 @@ echo flash();
         <div id="save" class="panel">
             <input type="submit" name="submit" class="big green button" id="save-changes" value="<?php echo __('Save Changes'); ?>" />
             <a href="<?php echo html_escape(public_url('collections/show/'.metadata('collection', 'id'))); ?>" class="big blue button" target="_blank"><?php echo __('View Public Page'); ?></a>
-            <?php echo link_to_collection(__('Delete'), array('class' => 'big red button'), 'delete-confirm'); ?>
+            <?php echo link_to_collection(__('Delete'), array('class' => 'big red button delete-confirm'), 'delete-confirm'); ?>
             
             <?php fire_plugin_hook("admin_collections_panel_buttons", array('view' => $this, 'collection' => $collection)); ?>
 
