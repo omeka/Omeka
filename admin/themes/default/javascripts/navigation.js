@@ -10,10 +10,11 @@ Omeka.Navigation = {};
             listType: 'ul',
             handle: '.main_link',
             items: 'li',
+            revert: 200,
             toleranceElement: '> div',
             placeholder: 'ui-sortable-highlight',
             forcePlaceholderSize: true,
-            containment: '#content',
+            containment: 'document',
         });
         
         $('div.sortable-item input[type="checkbox"]').click(function(e) {
