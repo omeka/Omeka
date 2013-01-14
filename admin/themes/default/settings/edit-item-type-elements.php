@@ -39,23 +39,14 @@ echo flash();
         </div>
     </section>
 </form>
-<div id="dialog" title="<?php echo __('Confirm Delete'); ?>">
+<div id="confirm-delete-dialog" title="<?php echo __('Confirm Delete'); ?>">
 <?php echo __('Are you sure you want to delete the selected item type elements from ' 
 . 'the database? You will lose all text related to the selected elements. This cannot ' 
 . 'be undone.'); ?>
 </div>
 <script type="text/javascript">
-//<![CDATA[
 Omeka.addReadyCallback(Omeka.ElementSets.enableElementRemoval);
-Omeka.addReadyCallback(Omeka.ElementSets.confirmDeleteElement);
-jQuery("#dialog").dialog({ autoOpen: false, modal: true, buttons: [
-    {text: <?php echo js_escape(__('Ok')); ?>, click: function () {
-        jQuery('#edit-item-type-elements').submit();
-    }}, 
-    {text: <?php echo js_escape(__('Cancel')); ?>, click: function () {
-        jQuery("#dialog").dialog('close')
-    }}
-]});
-//]]>
+Omeka.addReadyCallback(Omeka.ElementSets.confirmDeleteElement,
+    [<?php echo js_escape(__('Ok')); ?>, <?php echo js_escape(__('Cancel')); ?>]);
 </script>
 <?php echo foot(); ?>

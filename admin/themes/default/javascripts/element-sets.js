@@ -83,13 +83,19 @@ Omeka.ElementSets = {};
     /**
      * Callback for confirming a delete element.
      */
-    Omeka.ElementSets.confirmDeleteElement = function () {
-        $(document).on('click', '#submit_edit_item_type', function (event) {
-            event.preventDefault();
+    Omeka.ElementSets.confirmDeleteElement = function (okText, cancelText) {
+        $("#confirm-delete-dialog").dialog({autoOpen: false, modal: true, buttons: [
+            {text: okText, click: function () {
+                $('#edit-item-type-elements').off('submit').submit();
+            }}, 
+            {text: cancelText, click: function () {
+                $(this).dialog('close')
+            }}
+        ]});
+        $('#edit-item-type-elements').on('submit', function (event) {
             if ($('.undo-delete:visible')[0]) {
-                $( "#dialog" ).dialog('open');
-            } else {
-                $('#edit-item-type-elements').submit();
+                event.preventDefault();
+                $('#confirm-delete-dialog').dialog('open');
             }
         });
     };
