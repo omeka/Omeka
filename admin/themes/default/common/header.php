@@ -3,7 +3,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title><?php echo __('Omeka Admin'); ?>: <?php echo option('site_title'); echo isset($title) ? ' | ' . strip_formatting($title) : ''; ?></title>
+    <?php
+    if (isset($title)) {
+        $titleParts[] = strip_formatting($title);
+    }
+    $titleParts[] = option('site_title');
+    $titleParts[] = __('Omeka Admin');
+    ?>
+    <title><?php echo implode(' &middot; ', $titleParts); ?></title>
 
 <?php
     queue_css_file(array('style', 'skeleton', 'jquery-ui'));
