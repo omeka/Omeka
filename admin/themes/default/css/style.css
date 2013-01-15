@@ -49,6 +49,7 @@ body {
     background-image: url('../images/bg.jpg');
     color: #4C3939;
     font-family: "Cabin", sans-serif;
+    font-size: 14px;
     padding: 0;
     margin: 0;
 }
@@ -80,7 +81,6 @@ a:link {
     a:visited { color: #A28E8A; }
     
 p, li {
-    font-size: 14px;
     line-height: 1.5em;
 }
             
@@ -106,7 +106,6 @@ p, li {
     th {
         background-color: #D8CFB6;
         border: 1px solid #E4DECE;
-        font-size: 14px;
         padding:  .25em .625em;
         text-align: left;
         font-weight: normal;
@@ -132,7 +131,6 @@ p, li {
         
     td {
         border: 1px solid #E4E5DE;
-        font-size: 14px;
         padding: .625em;
         vertical-align: top;
     }
@@ -293,7 +291,6 @@ p, li {
             
         .field label {
             clear: left;
-            font-size: 14px;
             font-weight: bold;
             float: left;
             line-height: 1.5em;
@@ -472,7 +469,6 @@ p, li {
                 background-color: rgba(255, 255, 255, .5);
                 border: 1px solid #E7E7E7;
                 border-radius: 3px;
-                font-size: 14px;
                 margin-bottom: 20px;
                 padding: .5em;            
             }
@@ -506,7 +502,6 @@ header {
         -o-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
     color: #FFFFFF;
     font-family: "Arvo", serif;
-    font-size: 14px;
     position: fixed;
     top: 0;
     overflow: auto;
@@ -640,9 +635,6 @@ header nav {
     float: right;
 }
     
-    header li {
-        font-size: 14px;
-    }
     
 #user-nav {
     float: left;
@@ -686,7 +678,6 @@ header nav {
         -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
         -o-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
     word-wrap: break-word;
-    font-size: 14px;
     line-height: 100%;
     text-shadow: -1px -1px 1px rgba(0,0,0,1);
     overflow: hidden;
@@ -796,7 +787,6 @@ header nav {
         color: #666666;
         font-family: "Cabin", sans-serif;
         float: left;
-        font-size: 14px;
         line-height: 22px;
         list-style-type: none;
         text-align: center;
@@ -879,7 +869,6 @@ header nav {
 
     .add-new-item { 
         cursor: default; 
-        font-size: 14px;
         line-height: 1.5em;
         margin: 0;
     }
@@ -974,7 +963,6 @@ header nav {
         -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
         -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
         -o-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
-    font-size: 14px;
     line-height: 1.5em;
     margin: -2px 0 2px 0;
     overflow: auto;
@@ -1214,7 +1202,6 @@ header nav {
         border: 1px solid #E7E7E7;
         border-radius: 3px;
         color: #914E33;
-        font-size: 14px;
         margin: 0;
         padding: .5em;   
     }
@@ -1314,7 +1301,6 @@ header nav {
     display: inline-block;
     font-family: "Arvo", serif;
     font-style: italic;
-    font-size: 14px;
     text-align: center;
     margin: 16px 5px;
 }
@@ -1458,7 +1444,6 @@ header nav {
     
 .items.browse #advanced-search-link {
     float: left;
-    font-size: 14px;
     margin-bottom: 20px;
 }
     
@@ -1515,7 +1500,6 @@ header nav {
 
 #outputs {
     clear: both;
-    font-size: 14px;
     line-height: 1.5em;
 }
 
@@ -1561,7 +1545,6 @@ header nav {
     color: #666;
     display: inline-block;
     float: left;
-    font-size: 14px;
     line-height: 1.5em;
     margin: 0px 0px 20px 0px;
     padding: 0;    
@@ -1805,7 +1788,6 @@ header nav {
     
 .field .use-html {
     clear: none !important;
-    font-size: 14px;
     line-height: 2.125em;
 }
 
@@ -1870,7 +1852,6 @@ header nav {
 ================================================== */
 
 .files dt, .files dd {
-    font-size: 14px;
     line-height: 1.5em;
     margin: 0;
     padding: 0;
