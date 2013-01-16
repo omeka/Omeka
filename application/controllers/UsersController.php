@@ -11,8 +11,6 @@
  */
 class UsersController extends Omeka_Controller_AbstractActionController
 {
-    const INVALID_LOGIN_MESSAGE = 'Login information incorrect. Please try again.';
-
     /**
      * Actions that are accessible by anonymous users.
      *
@@ -391,7 +389,7 @@ class UsersController extends Omeka_Controller_AbstractActionController
             // information about valid usernames/passwords.
             case Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND:
             case Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID:
-                return __(self::INVALID_LOGIN_MESSAGE);
+                return __('Login information incorrect. Please try again.');
                 break;
             case Zend_Auth_Result::FAILURE_IDENTITY_AMBIGUOUS:
                 // There can never be ambiguous identities b/c the 'username'
