@@ -82,6 +82,8 @@ class Omeka_Form_Decorator_SavePanelAction extends Zend_Form_Decorator_Abstract
             $html .= "<a href='$recordDeleteConfirm' class='big red button'>Delete</a>";
 
         }
+        //used by SavePanelHook to locate where to insert hook content
+        $html .= "<div id='button-field-line'></div>";
         return $html;
     }
 }
