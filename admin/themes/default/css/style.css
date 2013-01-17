@@ -1447,14 +1447,14 @@ header nav {
     margin-bottom: 20px;
 }
     
-.items.browse #item-filters ul {
+ #item-filters ul {
     clear: both;
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
     
-    .items.browse #item-filters li {
+    #item-filters li {
         display: inline-block;
         background: url('../images/search.png') no-repeat;
         padding: 0 0 0 21px;
