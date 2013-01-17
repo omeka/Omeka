@@ -13,7 +13,7 @@ if ($this->pageCount > 1):
     <?php endif; ?>
     
     <li class="page-input">
-    <form action="" method="get" accept-charset="utf-8">
+    <form action="<?php echo html_escape($this->url()); ?>" method="get" accept-charset="utf-8">
     <?php
     $hiddenParams = array();
     $entries = explode('&', http_build_query($getParams));
