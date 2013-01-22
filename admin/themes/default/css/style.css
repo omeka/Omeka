@@ -529,7 +529,6 @@ header ul {
 }
     
     header li {
-        display: inline-block;
         float: left;
         margin-right: .625em;
     }
