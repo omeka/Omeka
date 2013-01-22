@@ -13,6 +13,7 @@
     <link href='http://fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic|Cabin:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
     <!-- JavaScripts -->
+    <?php queue_js_file(array('vendor/modernizr', 'vendor/selectivizr', 'vendor/respond')); ?>
     <?php echo head_js(); ?>
 
     <!-- Plugin Stuff -->
