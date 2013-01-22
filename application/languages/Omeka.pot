@@ -27,7 +27,7 @@ msgstr ""
 #. Dublin Core: Title element name
 #: admin/themes/default/collections/browse.php:22
 #: admin/themes/default/items/browse.php:40
-#: application/views/scripts/items/browse.php:19
+#: application/views/scripts/items/browse.php:17
 msgid "Title"
 msgstr ""
 
@@ -37,7 +37,7 @@ msgstr ""
 
 #. Dublin Core: Creator element name
 #: admin/themes/default/items/browse.php:41
-#: application/views/scripts/items/browse.php:20
+#: application/views/scripts/items/browse.php:18
 msgid "Creator"
 msgstr ""
 
@@ -59,7 +59,7 @@ msgstr ""
 #: admin/themes/default/item-types/show.php:14
 #: admin/themes/default/settings/edit-item-type-elements.php:27
 #: application/forms/ItemTypes.php:150
-#: application/views/scripts/collections/browse.php:16
+#: application/views/scripts/collections/browse.php:17
 msgid "Description"
 msgstr ""
 
@@ -365,7 +365,7 @@ msgstr ""
 #: admin/themes/default/settings/edit-security.php:15
 #: admin/themes/default/settings/edit-settings.php:15
 #: admin/themes/default/themes/config.php:16
-#: application/controllers/UsersController.php:212
+#: application/controllers/UsersController.php:210
 #: application/forms/ItemTypes.php:169
 msgid "Save Changes"
 msgstr ""
@@ -447,7 +447,7 @@ msgstr ""
 #: admin/themes/default/plugins/browse.php:2
 #: admin/themes/default/tags/browse.php:3
 #: admin/themes/default/users/browse.php:2
-#: application/views/scripts/items/browse.php:8
+#: application/views/scripts/items/browse.php:6
 #: application/views/scripts/search/index.php:2
 #, php-format
 msgid "(%s total)"
@@ -461,8 +461,8 @@ msgstr ""
 #: admin/themes/default/collections/browse.php:24
 #: admin/themes/default/files/show.php:55
 #: admin/themes/default/items/browse.php:43
-#: application/views/scripts/files/show.php:53
-#: application/views/scripts/items/browse.php:21
+#: application/views/scripts/files/show.php:51
+#: application/views/scripts/items/browse.php:19
 msgid "Date Added"
 msgstr ""
 
@@ -517,7 +517,7 @@ msgstr ""
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/libraries/globals.php:2491
+#: application/libraries/globals.php:2490
 #: application/views/scripts/collections/show.php:4
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
@@ -599,8 +599,8 @@ msgstr ""
 #: admin/themes/default/common/content-nav.php:21
 #: admin/themes/default/items/browse.php:94
 #: admin/themes/default/items/show.php:63
-#: application/views/scripts/items/browse.php:48
-#: application/views/scripts/items/show.php:28
+#: application/views/scripts/items/browse.php:46
+#: application/views/scripts/items/show.php:26
 msgid "Tags"
 msgstr ""
 
@@ -610,7 +610,7 @@ msgstr ""
 msgid "Delete %s"
 msgstr ""
 
-#: admin/themes/default/common/delete-confirm.php:12
+#: admin/themes/default/common/delete-confirm.php:11
 #: application/views/scripts/common/delete-confirm.php:12
 msgid "Are you sure?"
 msgstr ""
@@ -649,20 +649,20 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-#: admin/themes/default/common/header.php:6
+#: admin/themes/default/common/header.php:11
 #: admin/themes/default/upgrade/index.php:6
 #: admin/themes/default/upgrade/migrate.php:6
 #: application/views/scripts/common/admin-bar.php:11
 msgid "Omeka Admin"
 msgstr ""
 
-#: admin/themes/default/common/header.php:51
+#: admin/themes/default/common/header.php:58
 #: application/views/scripts/common/admin-bar.php:7
 #, php-format
 msgid "Welcome, %s"
 msgstr ""
 
-#: admin/themes/default/common/header.php:52
+#: admin/themes/default/common/header.php:59
 #: application/views/scripts/common/admin-bar.php:15
 msgid "Log Out"
 msgstr ""
@@ -803,53 +803,53 @@ msgid "Format Metadata"
 msgstr ""
 
 #: admin/themes/default/files/show.php:43
-#: application/views/scripts/files/show.php:23
+#: application/views/scripts/files/show.php:21
 msgid "Filename"
 msgstr ""
 
 #: admin/themes/default/files/show.php:45
-#: application/views/scripts/files/show.php:28
+#: application/views/scripts/files/show.php:26
 msgid "Original Filename"
 msgstr ""
 
 #: admin/themes/default/files/show.php:47
-#: application/views/scripts/files/show.php:33
+#: application/views/scripts/files/show.php:31
 msgid "File Size"
 msgstr ""
 
 #: admin/themes/default/files/show.php:48
-#: application/views/scripts/files/show.php:34
+#: application/views/scripts/files/show.php:32
 #, php-format
 msgid "%s bytes"
 msgstr ""
 
 #: admin/themes/default/files/show.php:53
-#: application/views/scripts/files/show.php:51
+#: application/views/scripts/files/show.php:49
 msgid "File History"
 msgstr ""
 
 #: admin/themes/default/files/show.php:57
-#: application/views/scripts/files/show.php:57
+#: application/views/scripts/files/show.php:55
 msgid "Date Modified"
 msgstr ""
 
 #: admin/themes/default/files/show.php:59
-#: application/views/scripts/files/show.php:61
+#: application/views/scripts/files/show.php:59
 msgid "Authentication"
 msgstr ""
 
 #: admin/themes/default/files/show.php:65
-#: application/views/scripts/files/show.php:39
+#: application/views/scripts/files/show.php:37
 msgid "Type Metadata"
 msgstr ""
 
 #: admin/themes/default/files/show.php:67
-#: application/views/scripts/files/show.php:41
+#: application/views/scripts/files/show.php:39
 msgid "Mime Type"
 msgstr ""
 
 #: admin/themes/default/files/show.php:69
-#: application/views/scripts/files/show.php:45
+#: application/views/scripts/files/show.php:43
 msgid "File Type / OS"
 msgstr ""
 
@@ -994,7 +994,7 @@ msgstr ""
 #: admin/themes/default/items/edit.php:41
 #: admin/themes/default/items/show.php:55
 #: application/libraries/globals.php:400
-#: application/views/scripts/items/show.php:20
+#: application/views/scripts/items/show.php:18
 msgid "Collection"
 msgstr ""
 
@@ -1120,8 +1120,8 @@ msgstr ""
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2267
-#: application/libraries/globals.php:2650
+#: application/libraries/globals.php:2266
+#: application/libraries/globals.php:2649
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr ""
@@ -1449,7 +1449,7 @@ msgid "or"
 msgstr ""
 
 #: admin/themes/default/plugins/confirm-uninstall.php:17
-#: admin/themes/default/settings/edit-item-type-elements.php:55
+#: admin/themes/default/settings/edit-item-type-elements.php:50
 msgid "Cancel"
 msgstr ""
 
@@ -1473,7 +1473,7 @@ msgid ""
 "cannot be undone."
 msgstr ""
 
-#: admin/themes/default/settings/edit-item-type-elements.php:52
+#: admin/themes/default/settings/edit-item-type-elements.php:50
 msgid "Ok"
 msgstr ""
 
@@ -2102,74 +2102,74 @@ msgstr ""
 msgid "SQL error in migration: "
 msgstr ""
 
-#: application/controllers/UsersController.php:72
+#: application/controllers/UsersController.php:70
 msgid ""
 "Unable to reset password. Please verify that the information is correct and "
 "contact an administrator if necessary."
 msgstr ""
 
-#: application/controllers/UsersController.php:110
+#: application/controllers/UsersController.php:108
 msgid "Please follow this link to reset your password:"
 msgstr ""
 
-#: application/controllers/UsersController.php:112
-#: application/controllers/UsersController.php:115
-#: application/controllers/UsersController.php:298
+#: application/controllers/UsersController.php:110
+#: application/controllers/UsersController.php:113
+#: application/controllers/UsersController.php:296
 #, php-format
 msgid "%s Administrator"
 msgstr ""
 
-#: application/controllers/UsersController.php:116
+#: application/controllers/UsersController.php:114
 #, php-format
 msgid "[%s] Reset Your Password"
 msgstr ""
 
-#: application/controllers/UsersController.php:119
+#: application/controllers/UsersController.php:117
 msgid "Please check your email for a link to reset your password."
 msgstr ""
 
-#: application/controllers/UsersController.php:137
+#: application/controllers/UsersController.php:135
 msgid "Password: The passwords do not match."
 msgstr ""
 
-#: application/controllers/UsersController.php:145
+#: application/controllers/UsersController.php:143
 msgid "You may now log in to Omeka."
 msgstr ""
 
-#: application/controllers/UsersController.php:162
+#: application/controllers/UsersController.php:160
 msgid "Add User"
 msgstr ""
 
-#: application/controllers/UsersController.php:173
+#: application/controllers/UsersController.php:171
 #, php-format
 msgid "The user \"%s\" was successfully added!"
 msgstr ""
 
-#: application/controllers/UsersController.php:177
+#: application/controllers/UsersController.php:175
 #, php-format
 msgid "The user \"%s\" was added, but the activation email could not be sent."
 msgstr ""
 
-#: application/controllers/UsersController.php:228
-#: application/controllers/UsersController.php:239
+#: application/controllers/UsersController.php:226
+#: application/controllers/UsersController.php:237
 msgid "There was an invalid entry on the form. Please try again."
 msgstr ""
 
-#: application/controllers/UsersController.php:235
+#: application/controllers/UsersController.php:233
 msgid "Password changed!"
 msgstr ""
 
-#: application/controllers/UsersController.php:246
+#: application/controllers/UsersController.php:244
 #, php-format
 msgid "The user %s was successfully changed!"
 msgstr ""
 
-#: application/controllers/UsersController.php:267
+#: application/controllers/UsersController.php:265
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
 msgstr ""
 
-#: application/controllers/UsersController.php:273
+#: application/controllers/UsersController.php:271
 #, php-format
 msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
@@ -2177,20 +2177,24 @@ msgid ""
 "this user."
 msgstr ""
 
-#: application/controllers/UsersController.php:294
+#: application/controllers/UsersController.php:292
 msgid "Welcome!"
 msgstr ""
 
-#: application/controllers/UsersController.php:296
+#: application/controllers/UsersController.php:294
 #, php-format
 msgid ""
 "Your account for the %s repository has been created. Please click the "
 "following link to activate your account:"
 msgstr ""
 
-#: application/controllers/UsersController.php:299
+#: application/controllers/UsersController.php:297
 #, php-format
 msgid "Activate your account with the %s repository"
+msgstr ""
+
+#: application/controllers/UsersController.php:392
+msgid "Login information incorrect. Please try again."
 msgstr ""
 
 #: application/forms/AppearanceSettings.php:22
@@ -2682,53 +2686,53 @@ msgstr ""
 msgid "Exact match"
 msgstr ""
 
-#: application/libraries/globals.php:1229
-#: application/libraries/globals.php:1250
+#: application/libraries/globals.php:1228
+#: application/libraries/globals.php:1249
 #, php-format
 msgid "Could not find file %s!"
 msgstr ""
 
-#: application/libraries/globals.php:1556
+#: application/libraries/globals.php:1555
 msgid "Select Below "
 msgstr ""
 
-#: application/libraries/globals.php:1598
+#: application/libraries/globals.php:1597
 msgid "Omeka RSS Feed"
 msgstr ""
 
-#: application/libraries/globals.php:1599
+#: application/libraries/globals.php:1598
 msgid "Omeka Atom Feed"
 msgstr ""
 
-#: application/libraries/globals.php:2249
+#: application/libraries/globals.php:2248
 msgid "View"
 msgstr ""
 
-#: application/libraries/globals.php:2311
+#: application/libraries/globals.php:2310
 msgid "No Collection"
 msgstr ""
 
-#: application/libraries/globals.php:2426
+#: application/libraries/globals.php:2425
 msgid "RSS"
 msgstr ""
 
-#: application/libraries/globals.php:2443
+#: application/libraries/globals.php:2442
 msgid "Next Item &rarr;"
 msgstr ""
 
-#: application/libraries/globals.php:2463
+#: application/libraries/globals.php:2462
 msgid "&larr; Previous Item"
 msgstr ""
 
-#: application/libraries/globals.php:2640
+#: application/libraries/globals.php:2639
 msgid "Browse All"
 msgstr ""
 
-#: application/libraries/globals.php:2645
+#: application/libraries/globals.php:2644
 msgid "Browse by Tag"
 msgstr ""
 
-#: application/libraries/globals.php:2907
+#: application/libraries/globals.php:2906
 msgid "No tags are available."
 msgstr ""
 
@@ -3064,11 +3068,11 @@ msgstr ""
 msgid "Invalid return value while getting record URL."
 msgstr ""
 
-#: application/views/scripts/collections/browse.php:23
+#: application/views/scripts/collections/browse.php:24
 msgid "Contributors(s)"
 msgstr ""
 
-#: application/views/scripts/collections/browse.php:30
+#: application/views/scripts/collections/browse.php:31
 #, php-format
 msgid "View the items in %s"
 msgstr ""
@@ -3077,12 +3081,12 @@ msgstr ""
 msgid "No featured collections are available."
 msgstr ""
 
-#: application/views/scripts/collections/show.php:16
+#: application/views/scripts/collections/show.php:15
 #, php-format
 msgid "Items in the %s Collection"
 msgstr ""
 
-#: application/views/scripts/collections/show.php:41
+#: application/views/scripts/collections/show.php:40
 msgid "There are currently no items within this collection."
 msgstr ""
 
@@ -3120,7 +3124,7 @@ msgstr ""
 msgid "404 Page Not Found"
 msgstr ""
 
-#: application/views/scripts/error/404.php:7
+#: application/views/scripts/error/404.php:6
 #, php-format
 msgid "%s is not a valid URL."
 msgstr ""
@@ -3133,7 +3137,7 @@ msgstr ""
 msgid "405 Method Not Allowed"
 msgstr ""
 
-#: application/views/scripts/error/405.php:7
+#: application/views/scripts/error/405.php:6
 #, php-format
 msgid "The method used to access this URL (%s) is not valid."
 msgstr ""
@@ -3165,7 +3169,7 @@ msgstr ""
 msgid "View All Items"
 msgstr ""
 
-#: application/views/scripts/items/browse.php:24
+#: application/views/scripts/items/browse.php:22
 msgid "Sort by: "
 msgstr ""
 
@@ -3173,11 +3177,11 @@ msgstr ""
 msgid "No featured items are available."
 msgstr ""
 
-#: application/views/scripts/items/show.php:12
+#: application/views/scripts/items/show.php:10
 msgid "Files"
 msgstr ""
 
-#: application/views/scripts/items/show.php:35
+#: application/views/scripts/items/show.php:33
 msgid "Citation"
 msgstr ""
 
