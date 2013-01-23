@@ -1,7 +1,6 @@
 <?php if ($this->pageCount > 1): ?>
-<div class="pagination">
+<nav class="pagination">
     <ul class="pagination_list">
-        
         <?php if ($this->first != $this->current): ?>
         <!-- First page link --> 
         <li class="pagination_first">
@@ -39,5 +38,5 @@
         </li>
         <?php endif; ?>
     </ul>
-</div>
+</nav>
 <?php endif; ?>
