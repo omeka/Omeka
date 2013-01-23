@@ -3,7 +3,6 @@ $pageTitle = __('Search Omeka ' . __('(%s total)', $total_results));
 echo head(array('title' => $pageTitle, 'bodyid' => 'search'));
 $searchRecordTypes = get_search_record_types();
 ?>
-<div id="primary">
 <?php echo search_filters(); ?>
 <?php if ($total_results): ?>
 <?php echo pagination_links(); ?>
@@ -30,5 +29,4 @@ $searchRecordTypes = get_search_record_types();
     <p>Your query returned no results.</p>
 </div>
 <?php endif; ?>
-</div>
 <?php echo foot(); ?>
