@@ -89,7 +89,11 @@ class Omeka_Navigation_Page_Uri extends Zend_Navigation_Page_Uri
                 }
                 $uri->setFragment('');
                 if ($isPath) {
-                    $uri = $uri->getPath();
+                    $uriString = $uri->getPath();
+                    if ($query = $uri->getQuery()) {
+                        $uriString .= '?' . $query; 
+                    }
+                    $uri = $uriString;
                 } else {
                     $uri = $uri->getUri();
                 }
