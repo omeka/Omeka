@@ -17,8 +17,8 @@ if ($current->image) {
     </div>
     <div id="current-info" class="five columns omega">
         <h2 id="current-theme-title"><?php echo __('Current Theme'); ?></h2>
-        <h3><a href="<?php echo html_escape($current->website); ?>"><?php echo html_escape($current->title); ?></a></h3>
-        <p class="author"><?php echo __('By %s', html_escape($current->author)); ?></p>
+        <h3><?php echo html_escape($current->title); ?></h3>
+        <p class="author"><a href="<?php echo html_escape($current->website); ?>"><?php echo __('By %s', html_escape($current->author)); ?></a></p>
         <p class="theme-description"><?php echo html_escape($current->description); ?></p>
     </div>
 </div>
