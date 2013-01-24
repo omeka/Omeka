@@ -23,6 +23,8 @@
                 <exclude name=".travis.yml"/>
                 <exclude name="**/*.po"/>
                 <exclude name="**/*.pot"/>
+                <exclude name="**/css/sass/**"/>
+                <exclude name="**/css/config.rb"/>
                 <exclude name="application/tests/**"/>
             </zipfileset>
         </zip>
