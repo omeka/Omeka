@@ -173,14 +173,10 @@ class PluginsController extends Omeka_Controller_AbstractActionController
     
     public function upgradeAction()
     {
-        $this->_helper->redirector('index');
         $plugin = $this->_getPluginByName();
-        if (!$plugin) {
-            return;
-        }
-             
-        if (!$plugin->isInstalled()) {
-            return;
+
+        if (!($plugin && $plugin->isInstalled())) {
+            throw new Omeka_Controller_Exception_404;
         }
 
         $name = $plugin->getDirectoryName();
@@ -192,17 +188,21 @@ class PluginsController extends Omeka_Controller_AbstractActionController
                 'success');
             if ($this->_pluginBroker->getHook($plugin, 'config')) {
                 $this->_helper->redirector('config', 'plugins', 'default', array('name' => $name));
+            } else {
+                $this->_helper->redirector('index');
             }
         } catch (Omeka_Plugin_Installer_Exception $e) {
             $this->_helper->flashMessenger(
                 __("The following error occurred while upgrading the %s plugin: ", $name) . $e->getMessage(),
                 'error'
             );
+            $this->_helper->redirector('index');
         } catch (Omeka_Plugin_Loader_Exception $e) {
             $this->_helper->flashMessenger(
                 __("The following error occurred while upgrading the %s plugin: ", $name) . $e->getMessage(),
                 'error'
             );
+            $this->_helper->redirector('index');
         }
     }
         
