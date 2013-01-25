@@ -1,5 +1,5 @@
 <?php
-$pageTitle = __('Search Omeka ' . __('(%s total)', $total_results));
+$pageTitle = __('Search Omeka ') . __('(%s total)', $total_results);
 echo head(array('title' => $pageTitle, 'bodyid' => 'search'));
 $searchRecordTypes = get_search_record_types();
 ?>
@@ -9,8 +9,8 @@ $searchRecordTypes = get_search_record_types();
 <table id="search-results">
     <thead>
         <tr>
-            <th>Record Type</th>
-            <th>Title</th>
+            <th><?php echo __('Record Type');?></th>
+            <th><?php echo __('Title');?></th>
         </tr>
     </thead>
     <tbody>
@@ -26,7 +26,7 @@ $searchRecordTypes = get_search_record_types();
 <?php echo pagination_links(); ?>
 <?php else: ?>
 <div id="no-results">
-    <p>Your query returned no results.</p>
+    <p><?php echo __('Your query returned no results.');?></p>
 </div>
 <?php endif; ?>
 <?php echo foot(); ?>
