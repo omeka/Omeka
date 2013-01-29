@@ -387,13 +387,16 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
                     $creator = $creators[0];
                     break;
                 case 2:
-                    $creator = "{$creators[0]} and {$creators[1]}";
+                    /// Chicago-style item citation: two authors
+                    $creator = __('%1$s and %2$s', $creators[0], $creators[1]);
                     break;
                 case 3:
-                    $creator = "{$creators[0]}, {$creators[1]}, and {$creators[2]}";
+                    /// Chicago-style item citation: three authors
+                    $creator = __('%1$s, %2$s, and %3$s', $creators[0], $creators[1], $creators[2]);
                     break;
                 default:
-                    $creator = "{$creators[0]} et al.";
+                    /// Chicago-style item citation: more than three authors
+                    $creator = __('%s et al.', $creators[0]);
             }
             $citation .= "$creator, ";
         }
@@ -408,9 +411,10 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             $citation .= "<em>$siteTitle</em>, ";
         }
         
-        $accessed = date('F j, Y');
+        $accessed = format_date(time(), Zend_Date::DATE_LONG);
         $url = html_escape(record_url($this, null, true));
-        $citation .= "accessed $accessed, $url.";
+        /// Chicago-style item citation: access date and URL
+        $citation .= __('accessed %1$s, %2$s.', $accessed, $url);
         
         return apply_filters('item_citation', $citation, array('item' => $this));
     }
