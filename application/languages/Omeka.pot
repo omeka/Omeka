@@ -2793,6 +2793,10 @@ msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
 msgstr ""
 
+#: application/models/Item.php:415
+msgid "accessed"
+msgstr ""
+
 #: application/models/Item.php:431
 msgid "Cannot add an existing file to an item!"
 msgstr ""
