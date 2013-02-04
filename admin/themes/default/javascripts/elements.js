@@ -126,7 +126,7 @@ Omeka.Elements = {};
      * @param {Element} element The element to search at and below.
      */
     Omeka.Elements.enableWysiwyg = function (element) {
-        $(element).find('div.inputs input[type="checkbox"]').each(function () {
+        $(element).find('div.inputs .use-html-checkbox').each(function () {
             var textarea = $(this).parents('.input-block').find('textarea');
             if (textarea.length) {
                 var textareaId = textarea.attr('id');

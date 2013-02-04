@@ -129,7 +129,8 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
         // Add a checkbox for the 'html' flag (always for any field)
         $html = '<label class="use-html">'
               . __('Use HTML')
-              . $this->view->formCheckbox($inputNameStem . '[html]', 1, array('checked' => $isHtml))
+              . $this->view->formCheckbox($inputNameStem . '[html]', 1, array(
+                'checked' => $isHtml, 'class' => 'use-html-checkbox'))
               . '</label>';
 
         return $html;
