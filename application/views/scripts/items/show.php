@@ -8,7 +8,7 @@
 <?php if (metadata('item', 'has files')): ?>
 <div id="itemfiles" class="element">
     <h3><?php echo __('Files'); ?></h3>
-    <div class="element-text"><?php echo files_for_item(); ?></div>
+    <div class="element-text"><?php echo item_image_gallery(); ?></div>
 </div>
 <?php endif; ?>
 
@@ -36,9 +36,11 @@
 
 <?php fire_plugin_hook('public_items_show', array('view' => $this, 'item' => $item)); ?>
 
+<nav>
 <ul class="item-pagination navigation">
     <li id="previous-item" class="previous"><?php echo link_to_previous_item_show(); ?></li>
     <li id="next-item" class="next"><?php echo link_to_next_item_show(); ?></li>
 </ul>
+</nav>
 
 <?php echo foot(); ?>
