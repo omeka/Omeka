@@ -289,8 +289,12 @@ class Omeka_File_Derivative_Image_Creator
     {
         // Use the "which" command to auto-detect the path to ImageMagick
         $cmd = 'which ' . Omeka_File_Derivative_Image_Creator::IMAGEMAGICK_CONVERT_COMMAND;
-        self::executeCommand($cmd, $status, $output, $errors);        
-        return $status == 0 ? dirname($output) : '';
+        try {
+            self::executeCommand($cmd, $status, $output, $errors);
+            return $status == 0 ? dirname($output) : '';
+        } catch (Omeka_File_Derivative_Exception $e) {
+            return '';
+        }
     }
     
     public static function executeCommand($cmd, &$status, &$output, &$errors)
