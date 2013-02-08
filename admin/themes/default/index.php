@@ -18,6 +18,22 @@ endif; ?>
     $stats[] = array(link_to('themes', null, $themeName), __('theme'));
 endif; ?>
 <?php $stats = apply_filters('admin_dashboard_stats', $stats, array('view' => $this)); ?>
+
+<?php // Retrieve the latest version of Omeka by pinging the Omeka server. ?>
+<?php $userRole = current_user()->role; ?>
+<?php if ($userRole == 'super' || $userRole == 'admin'): ?>
+<?php $latestVersion = latest_omeka_version(); ?>
+      <?php if ($latestVersion and version_compare(OMEKA_VERSION, $latestVersion, '<')): ?>
+            <div id="flash">
+                <ul>
+                    <li class="success"><?php echo __('A new version of Omeka is available for download.'); ?>
+                    <a href="http://omeka.org/download/"><?php echo __('Upgrade to %s', $latestVersion); ?></a>
+                    </li>
+                </ul>
+            </div>
+      <?php endif; ?>
+<?php endif; ?>
+
 <section id="stats">
     <?php foreach ($stats as $statInfo): ?>
     <p><span class="number"><?php echo $statInfo[0]; ?></span><br><?php echo $statInfo[1]; ?></p>
