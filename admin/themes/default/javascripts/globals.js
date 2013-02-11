@@ -74,6 +74,7 @@ if (!Omeka) {
         var advancedForm = $('#advanced-form');
         if (advancedForm) {
             $('#search-form input[type=submit]').addClass("blue button with-advanced").after('<a href="#" id="advanced-search" class="blue button">Advanced Search</a>');
+            $('#query').css('width','65%');
             advancedForm.click(function (event) {
                 event.stopPropagation();
             });
