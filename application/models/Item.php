@@ -408,9 +408,9 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             $citation .= "<em>$siteTitle</em>, ";
         }
         
-        $accessed = date('F j, Y');
+        $accessed = format_date(time(), Zend_Date::DATE_SHORT);
         $url = html_escape(record_url($this, null, true));
-        $citation .= "accessed $accessed, $url.";
+        $citation .= __("accessed") ." ". $accessed .", ". $url . ".";
         
         return apply_filters('item_citation', $citation, array('item' => $this));
     }
