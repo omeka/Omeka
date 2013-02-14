@@ -53,10 +53,7 @@ class Omeka_Controller_Action_Helper_ThemeConfiguration extends Zend_Controller_
             }
             
             return $this->_formValues;
-        } else {
-            var_dump($this->_form->getErrorMessages()); die();
         }
-
         return false;
     }
 
