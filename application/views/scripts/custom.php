@@ -17,8 +17,7 @@ add_filter(array('Display', 'Item', 'Dublin Core', 'Title'), 'show_untitled_item
 add_plugin_hook('public_head', 'theme_header_background');
 
 // If there is a current user, add admin_bar.
-
-if (apply_filters('public_show_admin_bar', (bool) current_user() )) {
+if (!is_admin_theme() && apply_filters('public_show_admin_bar', (bool) current_user() )) {
     add_plugin_hook('public_head', 'admin_bar_css');
     add_plugin_hook('public_body', 'admin_bar');
     add_filter('body_tag_attributes', 'admin_bar_class');
