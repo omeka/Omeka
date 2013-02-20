@@ -28,6 +28,7 @@ class ItemTypesController extends Omeka_Controller_AbstractActionController
                     $this->_helper->flashMessenger(__('The item type "%s" was successfully added.', $itemType->name), 'success');
                     $this->_helper->redirector('show', null, null, array('id'=>$itemType->id));
                 } catch (Omeka_Validate_Exception $e) {
+                    $itemType->delete();
                     $this->_helper->flashMessenger($e);
                 }                
             } else {
