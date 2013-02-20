@@ -5,7 +5,7 @@ if ($collectionTitle == '') {
 }
 ?>
 
-<?php echo head(array('title'=> $collectionTitle, 'bodyid'=>'collections', 'bodyclass' => 'show')); ?>
+<?php echo head(array('title'=> $collectionTitle, 'bodyclass' => 'collections show')); ?>
 
 <h1><?php echo $collectionTitle; ?></h1>
 
