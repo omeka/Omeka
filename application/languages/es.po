@@ -4,7 +4,7 @@
 # 
 # Translators:
 # Daniel Montes <danimontesgarcia@gmail.com>, 2012.
-# Fran Pérez <fperezrodri@gmail.com>, 2012.
+# Fran Pérez <fperezrodri@gmail.com>, 2012-2013.
 # John Flatness <john@zerocrates.org>, 2012.
 #   <john@zerocrates.org>, 2011.
 # Roberto Sanchez <rsanc77@yahoo.com>, 2011, 2012.
@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-01-22 17:10+0000\n"
-"Last-Translator: rubenalcaraz <rubenalcarazmartinez@gmail.com>\n"
+"PO-Revision-Date: 2013-02-11 19:34+0000\n"
+"Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/omeka/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,12 +29,13 @@ msgid ""
 "The Dublin Core metadata element set is common to all Omeka records, "
 "including items, files, and collections. For more information see, "
 "http://dublincore.org/documents/dces/."
-msgstr ""
+msgstr "El conjunto de metadatos Dublin Core es común a todos los registros Omeka, incluyendo items, archivos y colecciones. Para más información ver, http://dublincore.org/documents/dces/."
 
 #. Dublin Core: Title element name
 #: admin/themes/default/collections/browse.php:22
 #: admin/themes/default/items/browse.php:40
 #: application/views/scripts/items/browse.php:17
+#: application/views/scripts/search/index.php:13
 msgid "Title"
 msgstr "Título"
 
@@ -99,7 +100,7 @@ msgstr "Fecha"
 msgid ""
 "A point or period of time associated with an event in the lifecycle of the "
 "resource"
-msgstr ""
+msgstr "Un punto o período de tiempo asociado con un evento en el ciclo de vida del recurso"
 
 #. Dublin Core: Type element name
 #: admin/themes/default/items/browse.php:42
@@ -488,8 +489,8 @@ msgstr "(Privado)"
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:27
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
-#: admin/themes/default/files/show.php:28 admin/themes/default/index.php:38
-#: admin/themes/default/index.php:57
+#: admin/themes/default/files/show.php:28 admin/themes/default/index.php:54
+#: admin/themes/default/index.php:73
 #: admin/themes/default/item-types/browse.php:26
 #: admin/themes/default/item-types/show.php:51
 #: admin/themes/default/items/browse.php:24
@@ -524,7 +525,7 @@ msgstr "Empieza creando tu primera colección"
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/libraries/globals.php:2490
+#: application/libraries/globals.php:2489
 #: application/views/scripts/collections/show.php:4
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
@@ -606,7 +607,7 @@ msgstr "Tipo de Elemento"
 #: admin/themes/default/common/content-nav.php:21
 #: admin/themes/default/items/browse.php:94
 #: admin/themes/default/items/show.php:63
-#: application/views/scripts/items/browse.php:46
+#: application/views/scripts/items/browse.php:44
 #: application/views/scripts/items/show.php:26
 msgid "Tags"
 msgstr "Etiquetas"
@@ -663,13 +664,13 @@ msgstr "Usuarios"
 msgid "Omeka Admin"
 msgstr "Administrador de Omeka"
 
-#: admin/themes/default/common/header.php:58
+#: admin/themes/default/common/header.php:60
 #: application/views/scripts/common/admin-bar.php:7
 #, php-format
 msgid "Welcome, %s"
 msgstr "Bienvenido, %s"
 
-#: admin/themes/default/common/header.php:59
+#: admin/themes/default/common/header.php:61
 #: application/views/scripts/common/admin-bar.php:15
 msgid "Log Out"
 msgstr "Cierre de sesión"
@@ -716,7 +717,7 @@ msgstr "Nombre"
 
 #: admin/themes/default/element-sets/edit.php:5
 msgid "Edit Element Set"
-msgstr ""
+msgstr "Editar Conjunto de Elementos"
 
 #: admin/themes/default/element-sets/edit.php:17
 msgid ""
@@ -762,19 +763,19 @@ msgstr "Usted trató de acceder una página que parece no existir. A veces esto 
 msgid "If this does not help, try contacting the %s."
 msgstr "Si esto no le ayuda, trate de contactar al %s."
 
-#: admin/themes/default/error/404.php:16 admin/themes/default/index.php:30
+#: admin/themes/default/error/404.php:16 admin/themes/default/index.php:46
 msgid "Recent Items"
 msgstr "Elementos Recientes"
 
-#: admin/themes/default/error/404.php:29 admin/themes/default/index.php:43
+#: admin/themes/default/error/404.php:29 admin/themes/default/index.php:59
 msgid "Add a new item"
-msgstr ""
+msgstr "Añadir nuevo ítem"
 
-#: admin/themes/default/error/404.php:36 admin/themes/default/index.php:48
+#: admin/themes/default/error/404.php:36 admin/themes/default/index.php:64
 msgid "Recent Collections"
 msgstr "Colecciones Recientes"
 
-#: admin/themes/default/error/404.php:50 admin/themes/default/index.php:62
+#: admin/themes/default/error/404.php:50 admin/themes/default/index.php:78
 msgid "Add a new collection"
 msgstr "Añade una nueva colección"
 
@@ -892,6 +893,15 @@ msgstr "usuarios"
 
 #: admin/themes/default/index.php:18
 msgid "theme"
+msgstr "tema"
+
+#: admin/themes/default/index.php:29
+msgid "A new version of Omeka is available for download."
+msgstr ""
+
+#: admin/themes/default/index.php:30
+#, php-format
+msgid "Upgrade to %s"
 msgstr ""
 
 #: admin/themes/default/item-types/add-existing-element.php:22
@@ -908,7 +918,7 @@ msgstr "Nombre del elemento"
 
 #: admin/themes/default/item-types/add-new-element.php:22
 msgid "Element Description"
-msgstr ""
+msgstr "Descripción de Elemento"
 
 #: admin/themes/default/item-types/add.php:2
 #: application/forms/ItemTypes.php:161
@@ -978,7 +988,7 @@ msgstr "Tipo de Elemento #%s"
 
 #: admin/themes/default/item-types/show.php:25
 msgid "There are no elements."
-msgstr ""
+msgstr "No hay elementos."
 
 #: admin/themes/default/item-types/show.php:39
 msgid "There are no recently added items."
@@ -1127,8 +1137,8 @@ msgstr "Navegue los elementos"
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2266
-#: application/libraries/globals.php:2649
+#: application/libraries/globals.php:2265
+#: application/libraries/globals.php:2648
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Buscar elementos"
@@ -1155,7 +1165,7 @@ msgstr "Ocultar Detalles"
 
 #: admin/themes/default/items/browse.php:148
 msgid "You have no items."
-msgstr ""
+msgstr "No tienes items"
 
 #: admin/themes/default/items/browse.php:150
 msgid "Get started by adding your first item."
@@ -1186,7 +1196,7 @@ msgstr ""
 
 #: admin/themes/default/items/files-form.php:12
 msgid "Delete "
-msgstr ""
+msgstr "Borrar"
 
 #: admin/themes/default/items/files-form.php:21
 msgid "Add New Files"
@@ -1195,7 +1205,7 @@ msgstr "Agregue Nuevos Archivos"
 #: admin/themes/default/items/files-form.php:23
 #, php-format
 msgid "The maximum file size is %s."
-msgstr ""
+msgstr "El tamaño máximo del fichero es %s."
 
 #: admin/themes/default/items/files-form.php:26
 msgid "Find a File"
@@ -1216,7 +1226,7 @@ msgstr "Filtro Rápido"
 
 #: admin/themes/default/items/quick-filters.php:5
 msgid "View All"
-msgstr ""
+msgstr "Ver todos"
 
 #: admin/themes/default/items/quick-filters.php:7
 msgid "Private"
@@ -1319,7 +1329,7 @@ msgstr "Solo Elementos No-Destacados"
 
 #: admin/themes/default/items/search-form.php:203
 msgid "Search for items"
-msgstr ""
+msgstr "Buscar por items"
 
 #: admin/themes/default/items/show.php:8
 #, php-format
@@ -1328,11 +1338,11 @@ msgstr "Elemento #%s"
 
 #: admin/themes/default/items/show.php:30
 msgid "Prev Item"
-msgstr ""
+msgstr "Prev Ítem"
 
 #: admin/themes/default/items/show.php:35
 msgid "Next Item"
-msgstr ""
+msgstr "Próximo Ítem"
 
 #: admin/themes/default/items/show.php:71
 msgid "File Metadata"
@@ -1386,12 +1396,12 @@ msgstr "El %1$s plugin requiere que los siguientes plugins sean instalados, acti
 
 #: admin/themes/default/plugins/browse.php:32
 msgid "This is not a valid plugin."
-msgstr ""
+msgstr "No es un plugin válido."
 
 #: admin/themes/default/plugins/browse.php:57
 #, php-format
 msgid "by %s"
-msgstr ""
+msgstr "por %s"
 
 #: admin/themes/default/plugins/browse.php:66
 #, php-format
@@ -1435,17 +1445,17 @@ msgstr "No tiene ningún plugin instalado. Es necesario agregarlos al directorio
 #: admin/themes/default/plugins/config.php:2
 #, php-format
 msgid "Configure Plugin: %s"
-msgstr ""
+msgstr "Configura el Plugin: %s"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:2
 #, php-format
 msgid "Uninstall Plugin: %s"
-msgstr ""
+msgstr "Desinstalar Plugin: %s"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:7
 #, php-format
 msgid "Are you sure you want to uninstall %s?"
-msgstr ""
+msgstr "¿Estás seguro de que quieres desinstalar %s?"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:12
 msgid "Yes, I want to uninstall this plugin."
@@ -1462,41 +1472,41 @@ msgstr "Cancelar"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:12
 msgid "edit a specific item type"
-msgstr ""
+msgstr "editar un tipo de ítem específico"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:11
 #, php-format
 msgid ""
 "Customize the element descriptions below. To re-order the elements, %s."
-msgstr ""
+msgstr "Personalizar las descripciones de los siguientes elementos. Para reordenar los elementos, %s."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:42
 msgid "Confirm Delete"
-msgstr ""
+msgstr "Confirmar Eliminación"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:43
 msgid ""
 "Are you sure you want to delete the selected item type elements from the "
 "database? You will lose all text related to the selected elements. This "
 "cannot be undone."
-msgstr ""
+msgstr "¿Estás seguro que quieres eliminar los elementos del tipo de ítem seleccionado desde la base de datos? Perderás todo el texto relacionado con los elementos seleccionados. Esto no se puede deshacer."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:50
 msgid "Ok"
-msgstr ""
+msgstr "ok"
 
 #: admin/themes/default/settings/edit-search.php:10
 msgid "Search Record Types"
-msgstr ""
+msgstr "Buscar Tipos de Registro"
 
 #: admin/themes/default/settings/edit-search.php:13
 msgid "Customize which types of records will be searchable in Omeka."
-msgstr ""
+msgstr "Personalizar los tipos de registros en los que se podrán realizar búsquedas en Omeka."
 
 #: admin/themes/default/settings/edit-search.php:23
 #: admin/themes/default/settings/edit-search.php:41
 msgid "Index Records"
-msgstr ""
+msgstr "Índice de Registros"
 
 #: admin/themes/default/settings/edit-search.php:26
 msgid "Click on the \"Index Records\" button to re-index your records."
@@ -1513,19 +1523,19 @@ msgstr ""
 
 #: admin/themes/default/settings/edit-security.php:23
 msgid "Restore Default Extensions"
-msgstr ""
+msgstr "Restaurar las Extensiones Predeterminadas"
 
 #: admin/themes/default/settings/edit-security.php:28
 msgid "Restore Default Types"
-msgstr ""
+msgstr "Restaurar los Tipos Predeterminados"
 
 #: admin/themes/default/settings/edit-security.php:33
 msgid "Restore Default Elements"
-msgstr ""
+msgstr "Restaurar los Elementos Predeterminados"
 
 #: admin/themes/default/settings/edit-security.php:38
 msgid "Restore Default Attributes"
-msgstr ""
+msgstr "Restaura los Atributos Predeterminados"
 
 #: admin/themes/default/settings/edit-settings.php:23
 msgid "Test"
@@ -1533,11 +1543,11 @@ msgstr "Prueba"
 
 #: admin/themes/default/tags/browse.php:3
 msgid "Edit Tags"
-msgstr ""
+msgstr "Editar Etiquetas"
 
 #: admin/themes/default/tags/browse.php:10
 msgid "Editing Tags"
-msgstr ""
+msgstr "Editando Etiquetas"
 
 #: admin/themes/default/tags/browse.php:13
 msgid "To view all items with a tag, click the number."
@@ -1706,7 +1716,7 @@ msgstr "Papel"
 
 #: admin/themes/default/users/browse.php:30
 msgid "inactive"
-msgstr ""
+msgstr "inactivo"
 
 #: admin/themes/default/users/edit.php:8
 #, php-format
@@ -1740,7 +1750,7 @@ msgstr "Entrar al sistema"
 
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
-msgstr ""
+msgstr "(¿Perdiste tu contraseña?)"
 
 #: admin/themes/default/users/show.php:8
 #, php-format
@@ -1996,13 +2006,13 @@ msgstr "¡El %s plugin fue desactivado con éxito!"
 msgid "The following error occurred while deactivating the %s plugin: "
 msgstr "El siguiente error occurrio al desactivar el plugin %s: "
 
-#: application/controllers/PluginsController.php:191
+#: application/controllers/PluginsController.php:187
 #, php-format
 msgid "The %s plugin was successfully upgraded!"
 msgstr "¡El %s plugin fue actualizado con éxito!"
 
-#: application/controllers/PluginsController.php:198
-#: application/controllers/PluginsController.php:203
+#: application/controllers/PluginsController.php:196
+#: application/controllers/PluginsController.php:202
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
 msgstr "El siguiente error ocurrió al actualizar el plugin %s: "
@@ -2234,7 +2244,7 @@ msgstr "Restricción de tamaño para imágenes miniatura cuadradas (en píxeles)
 
 #: application/forms/AppearanceSettings.php:43
 msgid "Results Per Page (admin)"
-msgstr ""
+msgstr "Resultados por Página (admin)"
 
 #: application/forms/AppearanceSettings.php:44
 msgid ""
@@ -2275,7 +2285,7 @@ msgstr ""
 
 #: application/forms/ChangePassword.php:28
 msgid "Invalid current password"
-msgstr ""
+msgstr "Contraseña actual no válida"
 
 #: application/forms/ChangePassword.php:34
 msgid "New Password"
@@ -2654,7 +2664,7 @@ msgid ""
 "subpage of the navigation object."
 msgstr ""
 
-#: application/libraries/Omeka/Navigation/Page/Uri.php:124
+#: application/libraries/Omeka/Navigation/Page/Uri.php:128
 #, php-format
 msgid "Invalid URI for Omeka_Navigation_Page_Uri object: %s"
 msgstr ""
@@ -2698,53 +2708,53 @@ msgstr "Booleano"
 msgid "Exact match"
 msgstr ""
 
-#: application/libraries/globals.php:1228
-#: application/libraries/globals.php:1249
+#: application/libraries/globals.php:1227
+#: application/libraries/globals.php:1248
 #, php-format
 msgid "Could not find file %s!"
 msgstr "¡No se pudo encontrar el archivo %s!"
 
-#: application/libraries/globals.php:1555
+#: application/libraries/globals.php:1554
 msgid "Select Below "
 msgstr "Seleccione Debajo"
 
-#: application/libraries/globals.php:1597
+#: application/libraries/globals.php:1596
 msgid "Omeka RSS Feed"
 msgstr "Canal de RSS Omeka"
 
-#: application/libraries/globals.php:1598
+#: application/libraries/globals.php:1597
 msgid "Omeka Atom Feed"
 msgstr "Canal de Atom Omeka"
 
-#: application/libraries/globals.php:2248
+#: application/libraries/globals.php:2247
 msgid "View"
 msgstr "Vista"
 
-#: application/libraries/globals.php:2310
+#: application/libraries/globals.php:2309
 msgid "No Collection"
 msgstr "Sin Colección"
 
-#: application/libraries/globals.php:2425
+#: application/libraries/globals.php:2424
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2442
+#: application/libraries/globals.php:2441
 msgid "Next Item &rarr;"
 msgstr "Próximo elemento &rarr;"
 
-#: application/libraries/globals.php:2462
+#: application/libraries/globals.php:2461
 msgid "&larr; Previous Item"
 msgstr "&larr; Elemento Anterior"
 
-#: application/libraries/globals.php:2639
+#: application/libraries/globals.php:2638
 msgid "Browse All"
 msgstr "Navegar todo"
 
-#: application/libraries/globals.php:2644
+#: application/libraries/globals.php:2643
 msgid "Browse by Tag"
 msgstr "Navegar por Etiqueta"
 
-#: application/libraries/globals.php:2906
+#: application/libraries/globals.php:2905
 msgid "No tags are available."
 msgstr "No hay etiquetas disponibles."
 
@@ -2799,16 +2809,40 @@ msgstr "No se puede obtener la ruta de acceso para un archivo almacenado."
 msgid "\"%s\" is not a valid file derivative."
 msgstr ""
 
-#: application/models/Item.php:264
+#: application/models/Item.php:265
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
 msgstr "¡Los archivos no pueden ser unidos a un elemento que no es persistente en la base de datos!"
 
-#: application/models/Item.php:430
+#. / Chicago-style item citation: two authors
+#: application/models/Item.php:391
+#, php-format
+msgid "%1$s and %2$s"
+msgstr ""
+
+#. / Chicago-style item citation: three authors
+#: application/models/Item.php:395
+#, php-format
+msgid "%1$s, %2$s, and %3$s"
+msgstr ""
+
+#. / Chicago-style item citation: more than three authors
+#: application/models/Item.php:399
+#, php-format
+msgid "%s et al."
+msgstr ""
+
+#. / Chicago-style item citation: access date and URL
+#: application/models/Item.php:417
+#, php-format
+msgid "accessed %1$s, %2$s."
+msgstr ""
+
+#: application/models/Item.php:435
 msgid "Cannot add an existing file to an item!"
 msgstr "¡No puede añadir un archivo existente a un elemento!"
 
-#: application/models/Item.php:434
+#: application/models/Item.php:439
 msgid "File must be valid before it can be associated with an item!"
 msgstr "¡El archivo debe ser válido para que pueda estar associado con un elemento!"
 
@@ -3106,19 +3140,19 @@ msgstr ""
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
 msgstr "Tecnología de <a href=\"http://omeka.org\">Omeka</a>."
 
-#: application/views/scripts/common/pagination_control.php:8
+#: application/views/scripts/common/pagination_control.php:7
 msgid "First"
 msgstr "Primero"
 
-#: application/views/scripts/common/pagination_control.php:15
+#: application/views/scripts/common/pagination_control.php:14
 msgid "Previous"
 msgstr "Previo"
 
-#: application/views/scripts/common/pagination_control.php:31
+#: application/views/scripts/common/pagination_control.php:30
 msgid "Next"
 msgstr "Siguiente"
 
-#: application/views/scripts/common/pagination_control.php:38
+#: application/views/scripts/common/pagination_control.php:37
 msgid "Last"
 msgstr "Último"
 
@@ -3201,6 +3235,26 @@ msgstr "Citación"
 #: application/views/scripts/search/index.php:2
 msgid "Search Omeka "
 msgstr "Buscar Omeka"
+
+#: application/views/scripts/search/index.php:12
+msgid "Record Type"
+msgstr ""
+
+#: application/views/scripts/search/index.php:29
+msgid "Your query returned no results."
+msgstr ""
+
+#: application/views/scripts/search/search-filters.php:3
+msgid "Query:"
+msgstr ""
+
+#: application/views/scripts/search/search-filters.php:4
+msgid "Query type:"
+msgstr ""
+
+#: application/views/scripts/search/search-filters.php:5
+msgid "Record types:"
+msgstr ""
 
 #: application/views/scripts/search/search-form.php:6
 msgid "Search using this query type:"

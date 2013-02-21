@@ -3,20 +3,20 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Dimitar Poposki <poposkidimitar@gmail.com>, 2011, 2012.
+# Sivarajah Bagerathan <bagerathan@gmail.com>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-02-11 19:35+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
-"Language-Team: Macedonian (Macedonia) (http://www.transifex.com/projects/p/omeka/language/mk_MK/)\n"
+"PO-Revision-Date: 2013-02-18 17:39+0000\n"
+"Last-Translator: bage <bagerathan@gmail.com>\n"
+"Language-Team: Tamil (http://www.transifex.com/projects/p/omeka/language/ta/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: mk_MK\n"
-"Plural-Forms: nplurals=2; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : 1;\n"
+"Language: ta\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Dublin Core description
 msgid ""
@@ -31,7 +31,7 @@ msgstr ""
 #: application/views/scripts/items/browse.php:17
 #: application/views/scripts/search/index.php:13
 msgid "Title"
-msgstr "Наслов"
+msgstr "தலைப்பு"
 
 #. Dublin Core: Title element description
 msgid "A name given to the resource"
@@ -41,7 +41,7 @@ msgstr ""
 #: admin/themes/default/items/browse.php:41
 #: application/views/scripts/items/browse.php:18
 msgid "Creator"
-msgstr "Креирал"
+msgstr "உருவாக்கியவர்"
 
 #. Dublin Core: Creator element description
 msgid "An entity primarily responsible for making the resource"
@@ -49,7 +49,7 @@ msgstr ""
 
 #. Dublin Core: Subject element name
 msgid "Subject"
-msgstr "Subject"
+msgstr "விடயம்"
 
 #. Dublin Core: Subject element description
 msgid "The topic of the resource"
@@ -63,7 +63,7 @@ msgstr ""
 #: application/forms/ItemTypes.php:150
 #: application/views/scripts/collections/browse.php:17
 msgid "Description"
-msgstr "Опис"
+msgstr "விபரம்"
 
 #. Dublin Core: Description element description
 msgid "An account of the resource"
@@ -71,7 +71,7 @@ msgstr ""
 
 #. Dublin Core: Publisher element name
 msgid "Publisher"
-msgstr "Издавач"
+msgstr "வெளியிட்டவர்"
 
 #. Dublin Core: Publisher element description
 msgid "An entity responsible for making the resource available"
@@ -80,7 +80,7 @@ msgstr ""
 #. Dublin Core: Contributor element name
 #. User role: contributor
 msgid "Contributor"
-msgstr "Контрибутор"
+msgstr "பங்களித்தோர்"
 
 #. Dublin Core: Contributor element description
 msgid "An entity responsible for making contributions to the resource"
@@ -88,7 +88,7 @@ msgstr ""
 
 #. Dublin Core: Date element name
 msgid "Date"
-msgstr "Датум"
+msgstr "திகதி"
 
 #. Dublin Core: Date element description
 msgid ""
@@ -99,7 +99,7 @@ msgstr ""
 #. Dublin Core: Type element name
 #: admin/themes/default/items/browse.php:42
 msgid "Type"
-msgstr "Тип"
+msgstr "வகை"
 
 #. Dublin Core: Type element description
 msgid "The nature or genre of the resource"
@@ -107,7 +107,7 @@ msgstr ""
 
 #. Dublin Core: Format element name
 msgid "Format"
-msgstr "Формат"
+msgstr "வகை"
 
 #. Dublin Core: Format element description
 msgid "The file format, physical medium, or dimensions of the resource"
@@ -115,7 +115,7 @@ msgstr ""
 
 #. Dublin Core: Identifier element name
 msgid "Identifier"
-msgstr "Идентификатор"
+msgstr "குறிகாட்டி"
 
 #. Dublin Core: Identifier element description
 msgid "An unambiguous reference to the resource within a given context"
@@ -123,7 +123,7 @@ msgstr ""
 
 #. Dublin Core: Source element name
 msgid "Source"
-msgstr "Source"
+msgstr "மூலம்"
 
 #. Dublin Core: Source element description
 msgid "A related resource from which the described resource is derived"
@@ -131,7 +131,7 @@ msgstr ""
 
 #. Dublin Core: Language element name
 msgid "Language"
-msgstr "Јазик"
+msgstr "மொழி"
 
 #. Dublin Core: Language element description
 msgid "A language of the resource"
@@ -139,7 +139,7 @@ msgstr ""
 
 #. Dublin Core: Relation element name
 msgid "Relation"
-msgstr "Relation"
+msgstr "உறவு"
 
 #. Dublin Core: Relation element description
 msgid "A related resource"
@@ -147,7 +147,7 @@ msgstr ""
 
 #. Dublin Core: Coverage element name
 msgid "Coverage"
-msgstr "Покриеност"
+msgstr ""
 
 #. Dublin Core: Coverage element description
 msgid ""
@@ -157,7 +157,7 @@ msgstr ""
 
 #. Dublin Core: Rights element name
 msgid "Rights"
-msgstr "Права"
+msgstr "உரிமைகள்"
 
 #. Dublin Core: Rights element description
 msgid "Information about rights held in and over the resource"
@@ -165,17 +165,17 @@ msgstr ""
 
 #. Item Type Metadata
 msgid "Item Type Metadata"
-msgstr "Item Type Metadata"
+msgstr ""
 
 #. Item Type Metadata description
 msgid ""
 "The item type metadata element set, consisting of all item type elements "
 "bundled with Omeka and all item type elements created by an administrator."
-msgstr "The item type metadata element set, consisting of all item type elements bundled with Omeka and all item type elements created by an administrator."
+msgstr ""
 
 #. Omeka Legacy File
 msgid "Omeka Legacy File"
-msgstr "Omeka Legacy File"
+msgstr ""
 
 #. Omeka Legacy File description
 msgid ""
@@ -183,127 +183,127 @@ msgid ""
 "was included in the `files` table in previous versions of Omeka. These "
 "elements are common to all Omeka files. This set may be deprecated in future"
 " versions."
-msgstr "The metadata element set that, in addition to the Dublin Core element set, was included in the `files` table in previous versions of Omeka. These elements are common to all Omeka files. This set may be deprecated in future versions."
+msgstr ""
 
 #. Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
-msgstr "Additional Creator"
+msgstr ""
 
 #. Omeka Legacy File: Transcriber element
 msgid "Transcriber"
-msgstr "Transcriber"
+msgstr ""
 
 #. Omeka Legacy File: Producer element
 msgid "Producer"
-msgstr "Producer"
+msgstr ""
 
 #. Omeka Legacy File: Render Device element
 msgid "Render Device"
-msgstr "Render Device"
+msgstr ""
 
 #. Omeka Legacy File: Render Details element
 msgid "Render Details"
-msgstr "Render Details"
+msgstr ""
 
 #. Omeka Legacy File: Capture Date element
 msgid "Capture Date"
-msgstr "Capture Date"
+msgstr ""
 
 #. Omeka Legacy File: Capture Device element
 msgid "Capture Device"
-msgstr "Capture Device"
+msgstr ""
 
 #. Omeka Legacy File: Capture Details element
 msgid "Capture Details"
-msgstr "Capture Details"
+msgstr ""
 
 #. Omeka Legacy File: Change History element
 msgid "Change History"
-msgstr "Измени историја"
+msgstr "மாற்ற வரலாறு"
 
 #. Omeka Legacy File: Watermark element
 msgid "Watermark"
-msgstr "Воден жиг"
+msgstr ""
 
 #. Omeka Legacy File: Encryption element
 msgid "Encryption"
-msgstr "Енкрипција"
+msgstr ""
 
 #. Omeka Legacy File: Compression element
 msgid "Compression"
-msgstr "Компресија"
+msgstr ""
 
 #. Omeka Legacy File: Post Processing element
 msgid "Post Processing"
-msgstr "Пост процесуирање"
+msgstr ""
 
 #. Omeka Image File
 msgid "Omeka Image File"
-msgstr "Омека слика фајл"
+msgstr "Omeka படக்கோப்பு"
 
 #. Omeka Image File description
 msgid ""
 "The metadata element set that was included in the `files_images` table in "
 "previous versions of Omeka. These elements are common to all image files."
-msgstr "Елементот за сетот на метаподатоци беше вклучен во  `files_images` табелата  во предходните верзии на Омека. Овие елементи се заеднички за сите фајлови на слики."
+msgstr ""
 
 #. Omeka Image File: Width element
 msgid "Width"
-msgstr "Ширина"
+msgstr "அகலம்"
 
 #. Omeka Image File: Height element
 msgid "Height"
-msgstr "Висина"
+msgstr "உயரம்"
 
 #. Omeka Image File: Bit Depth element
 msgid "Bit Depth"
-msgstr "Bit Depth"
+msgstr ""
 
 #. Omeka Image File: Channels element
 msgid "Channels"
-msgstr "Канали"
+msgstr ""
 
 #. Omeka Image File: Exif String element
 msgid "Exif String"
-msgstr "Exif String"
+msgstr ""
 
 #. Omeka Image File: Exif Array element
 msgid "Exif Array"
-msgstr "Exif Array"
+msgstr ""
 
 #. Omeka Image File: IPTC String element
 msgid "IPTC String"
-msgstr "IPTC String"
+msgstr ""
 
 #. Omeka Image File: IPTC Array element
 msgid "IPTC Array"
-msgstr "IPTC Array"
+msgstr ""
 
 #. Omeka Video File
 msgid "Omeka Video File"
-msgstr "Омека видео фајл"
+msgstr "Omeka காணொளிக் கோப்பு"
 
 #. Omeka Video File description
 msgid ""
 "The metadata element set that was included in the `files_videos` table in "
 "previous versions of Omeka. These elements are common to all video files."
-msgstr "Елементот за сетот на метаподатоци беше вклучен во  `files_videos` табелата  во предходните верзии на Омека. Овие елементи се заеднички за сите видео фајлови."
+msgstr ""
 
 #. Omeka Video File: Bitrate element
 msgid "Bitrate"
-msgstr "Bitrate"
+msgstr ""
 
 # Omeka Video File: Duration element
 msgid "Duration"
-msgstr "Времетраење"
+msgstr "காலம்"
 
 #. Omeka Video File: Sample Rate element
 msgid "Sample Rate"
-msgstr "Sample Rate"
+msgstr ""
 
 #. Omeka Video File: Codec element
 msgid "Codec"
-msgstr "Кодек"
+msgstr ""
 
 #. Format (Legacy) Metadata element set
 msgid "Format (Legacy) Metadata"
@@ -311,15 +311,15 @@ msgstr ""
 
 #. User role: Super
 msgid "Super"
-msgstr "Супер"
+msgstr ""
 
 #. User role: Admin
 msgid "Admin"
-msgstr "Администратор"
+msgstr "நிருவாகி"
 
 #. User role: Researcher
 msgid "Researcher"
-msgstr "Истражувач"
+msgstr ""
 
 #: admin/themes/default/appearance/edit-navigation.php:3
 #: admin/themes/default/appearance/edit-settings.php:2
@@ -327,7 +327,7 @@ msgstr "Истражувач"
 #: admin/themes/default/themes/browse.php:2
 #: admin/themes/default/themes/config.php:3
 msgid "Appearance"
-msgstr ""
+msgstr "வெளித்தோற்றம்"
 
 #: admin/themes/default/appearance/edit-navigation.php:14
 msgid ""
@@ -349,11 +349,11 @@ msgstr ""
 #: admin/themes/default/appearance/edit-navigation.php:38
 #: application/forms/Navigation.php:133
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: admin/themes/default/appearance/edit-navigation.php:25
 msgid "Add Link"
-msgstr ""
+msgstr "தொடுப்பைச் சேர்"
 
 #: admin/themes/default/appearance/edit-navigation.php:31
 #: admin/themes/default/appearance/edit-settings.php:21
@@ -370,7 +370,7 @@ msgstr ""
 #: application/controllers/UsersController.php:210
 #: application/forms/ItemTypes.php:169
 msgid "Save Changes"
-msgstr "Зачувај ги измените"
+msgstr "மாற்றங்களை சேமி"
 
 #: admin/themes/default/appearance/edit-navigation.php:39
 #: admin/themes/default/collections/edit.php:23
@@ -378,7 +378,7 @@ msgstr "Зачувај ги измените"
 #: admin/themes/default/items/edit.php:20
 #: admin/themes/default/items/show.php:45
 msgid "View Public Page"
-msgstr "Види ја јавната страна"
+msgstr ""
 
 #: admin/themes/default/appearance/edit-navigation.php:40
 #: admin/themes/default/collections/edit.php:24
@@ -398,18 +398,18 @@ msgstr "Види ја јавната страна"
 #: admin/themes/default/users/browse.php:36
 #: admin/themes/default/users/edit.php:17
 msgid "Delete"
-msgstr "Избриши"
+msgstr "நீக்கு"
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:11
 #: admin/themes/default/collections/browse.php:64
 #: admin/themes/default/collections/browse.php:73
 msgid "Add a Collection"
-msgstr "Додади "
+msgstr "தொகுப்பொன்றை சேர்"
 
 #: admin/themes/default/collections/add.php:11
 msgid "Add Collection"
-msgstr ""
+msgstr "தொகுப்பை சேர்"
 
 #: admin/themes/default/collections/add.php:16
 #: admin/themes/default/collections/edit.php:30
@@ -420,7 +420,7 @@ msgstr ""
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:50
 msgid "Public"
-msgstr "Јавно"
+msgstr ""
 
 #: admin/themes/default/collections/add.php:19
 #: admin/themes/default/collections/edit.php:35
@@ -431,7 +431,7 @@ msgstr "Јавно"
 #: admin/themes/default/items/quick-filters.php:8
 #: admin/themes/default/items/show.php:51
 msgid "Featured"
-msgstr "вклучени"
+msgstr ""
 
 #: admin/themes/default/collections/browse.php:2
 #: application/libraries/Omeka/Navigation.php:149
@@ -441,7 +441,7 @@ msgstr "вклучени"
 #: application/tests/suite/Omeka/NavigationTest.php:950
 #: application/views/scripts/collections/browse.php:2
 msgid "Browse Collections"
-msgstr "Прелистајте колекции"
+msgstr "தொகுப்புக்களில் உலாவு"
 
 #: admin/themes/default/collections/browse.php:2
 #: admin/themes/default/item-types/browse.php:2
@@ -453,7 +453,7 @@ msgstr "Прелистајте колекции"
 #: application/views/scripts/search/index.php:2
 #, php-format
 msgid "(%s total)"
-msgstr "(%s total)"
+msgstr ""
 
 #: admin/themes/default/collections/browse.php:23
 #: admin/themes/default/collections/show.php:51
@@ -466,13 +466,13 @@ msgstr ""
 #: application/views/scripts/files/show.php:51
 #: application/views/scripts/items/browse.php:19
 msgid "Date Added"
-msgstr "Датум на вметнување"
+msgstr "சேர்க்கப்பட்ட திகதி"
 
 #: admin/themes/default/collections/browse.php:25
 #: admin/themes/default/collections/show.php:46
 #: admin/themes/default/item-types/show.php:42
 msgid "Total Number of Items"
-msgstr "Total Number of Items"
+msgstr "மொத்த உருப்படிகளின் எண்ணிக்கை"
 
 #: admin/themes/default/collections/browse.php:37
 #: admin/themes/default/items/browse.php:72
@@ -494,7 +494,7 @@ msgstr ""
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:33
 msgid "Edit"
-msgstr "Измени"
+msgstr "தொகு"
 
 #: admin/themes/default/collections/browse.php:49
 msgid "No contributors"
@@ -502,11 +502,11 @@ msgstr ""
 
 #: admin/themes/default/collections/browse.php:67
 msgid "There are no collections on this page."
-msgstr "Нема колекции на оваа страна."
+msgstr ""
 
 #: admin/themes/default/collections/browse.php:67
 msgid "View All Collections"
-msgstr "Види ги сите колекции"
+msgstr "எல்லா தொகுப்புக்களையும் பாருங்கள்"
 
 #: admin/themes/default/collections/browse.php:70
 msgid "You have no collections."
@@ -523,12 +523,12 @@ msgstr ""
 #: application/views/scripts/collections/show.php:4
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
-msgstr ""
+msgstr "[தலைப்பிடப்படாதது]"
 
 #: admin/themes/default/collections/edit.php:8
 #, php-format
 msgid "Edit Collection #%s"
-msgstr "Измени колекција #%s"
+msgstr ""
 
 #: admin/themes/default/collections/show.php:8
 #, php-format
@@ -539,7 +539,7 @@ msgstr ""
 #: admin/themes/default/item-types/show.php:30
 #: application/views/scripts/index.php:35
 msgid "Recently Added Items"
-msgstr "Неодамна додадени ставки"
+msgstr "அண்மையில் சேர்க்கப்பட்ட உருப்படிகள்"
 
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/collections/show.php:42
@@ -547,7 +547,7 @@ msgstr "Неодамна додадени ставки"
 #: admin/themes/default/items/show.php:51
 #: application/views/helpers/ItemSearchFilters.php:57
 msgid "Yes"
-msgstr ""
+msgstr "ஓம்"
 
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/collections/show.php:42
@@ -555,7 +555,7 @@ msgstr ""
 #: admin/themes/default/items/show.php:51
 #: application/views/helpers/ItemSearchFilters.php:57
 msgid "No"
-msgstr ""
+msgstr "இல்லை"
 
 #: admin/themes/default/collections/show.php:56
 msgid "No contributors."
@@ -563,7 +563,7 @@ msgstr ""
 
 #: admin/themes/default/common/appearance-nav.php:5
 msgid "Themes"
-msgstr "Теми"
+msgstr "வார்ப்புருக்கள்"
 
 #: admin/themes/default/common/appearance-nav.php:11
 msgid "Navigation"
@@ -577,26 +577,26 @@ msgstr ""
 #: admin/themes/default/settings/edit-security.php:3
 #: admin/themes/default/settings/edit-settings.php:3
 msgid "Settings"
-msgstr "Settings"
+msgstr "அமைப்புக்கள்"
 
 #: admin/themes/default/common/content-nav.php:5
 #: admin/themes/default/index.php:2
 msgid "Dashboard"
-msgstr ""
+msgstr "நிருவாக முகப்பு"
 
 #: admin/themes/default/common/content-nav.php:9
 #: admin/themes/default/items/batch-delete.php:17
 #: admin/themes/default/items/batch-edit.php:17
 msgid "Items"
-msgstr ""
+msgstr "உருப்படிகள்"
 
 #: admin/themes/default/common/content-nav.php:13
 msgid "Collections"
-msgstr "Колекции"
+msgstr "தொகுப்புக்கள்"
 
 #: admin/themes/default/common/content-nav.php:17
 msgid "Item Types"
-msgstr ""
+msgstr "உருப்படி வகைகள்"
 
 #: admin/themes/default/common/content-nav.php:21
 #: admin/themes/default/items/browse.php:94
@@ -604,7 +604,7 @@ msgstr ""
 #: application/views/scripts/items/browse.php:44
 #: application/views/scripts/items/show.php:26
 msgid "Tags"
-msgstr "Тагови"
+msgstr "குறிச்சொற்கள்"
 
 #: admin/themes/default/common/delete-confirm.php:3
 #: application/views/scripts/common/delete-confirm.php:3
@@ -615,27 +615,27 @@ msgstr ""
 #: admin/themes/default/common/delete-confirm.php:11
 #: application/views/scripts/common/delete-confirm.php:12
 msgid "Are you sure?"
-msgstr "Дали сте сигурни/на?"
+msgstr "நிச்சயமாக?"
 
 #: admin/themes/default/common/footer.php:6
 #: admin/themes/default/common/login-footer.php:7
 msgid "Powered by Omeka"
-msgstr "Придвижувано од Омека"
+msgstr ""
 
 #: admin/themes/default/common/footer.php:6
 msgid "Documentation"
-msgstr "Документација"
+msgstr ""
 
 #: admin/themes/default/common/footer.php:6
 msgid "Support Forums"
-msgstr "Форум за поддршка"
+msgstr "உதவி மன்றங்கள்"
 
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
 #: admin/themes/default/plugins/browse.php:52
 #, php-format
 msgid "Version %s"
-msgstr "Верзија %s"
+msgstr "பதிப்பு %s"
 
 #: admin/themes/default/common/footer.php:10
 #: admin/themes/default/system-info/index.php:2
@@ -645,33 +645,33 @@ msgstr ""
 #: admin/themes/default/common/global-nav.php:6
 #: admin/themes/default/plugins/browse.php:2
 msgid "Plugins"
-msgstr "Плагини"
+msgstr "நீட்சிகள்"
 
 #: admin/themes/default/common/global-nav.php:18
 msgid "Users"
-msgstr "Корисници"
+msgstr "பயனர்கள்"
 
 #: admin/themes/default/common/header.php:11
 #: admin/themes/default/upgrade/index.php:6
 #: admin/themes/default/upgrade/migrate.php:6
 #: application/views/scripts/common/admin-bar.php:11
 msgid "Omeka Admin"
-msgstr "Омека админ"
+msgstr "Omeka நிருவாகி"
 
 #: admin/themes/default/common/header.php:60
 #: application/views/scripts/common/admin-bar.php:7
 #, php-format
 msgid "Welcome, %s"
-msgstr "Добредојдовте, %s"
+msgstr "நல்வரவு, %s"
 
 #: admin/themes/default/common/header.php:61
 #: application/views/scripts/common/admin-bar.php:15
 msgid "Log Out"
-msgstr "Одјави се"
+msgstr "வெளியேறு"
 
 #: admin/themes/default/common/pagination_control.php:11
 msgid "&lt;"
-msgstr ""
+msgstr "&lt;"
 
 #: admin/themes/default/common/pagination_control.php:34
 #, php-format
@@ -680,11 +680,11 @@ msgstr ""
 
 #: admin/themes/default/common/pagination_control.php:42
 msgid "&gt;"
-msgstr ""
+msgstr "&gt;"
 
 #: admin/themes/default/common/settings-nav.php:6
 msgid "General"
-msgstr ""
+msgstr "பொதுவானது"
 
 #: admin/themes/default/common/settings-nav.php:10
 msgid "Security"
@@ -694,7 +694,7 @@ msgstr ""
 #: application/views/helpers/SearchForm.php:34
 #: application/views/scripts/items/search-form.php:186
 msgid "Search"
-msgstr "Пребарај"
+msgstr "தேடு"
 
 #: admin/themes/default/common/settings-nav.php:20
 msgid "Element Sets"
@@ -707,7 +707,7 @@ msgstr ""
 #: admin/themes/default/element-sets/browse.php:16
 #: application/forms/ItemTypes.php:141
 msgid "Name"
-msgstr "Име"
+msgstr "பெயர்"
 
 #: admin/themes/default/element-sets/edit.php:5
 msgid "Edit Element Set"
@@ -721,29 +721,29 @@ msgstr ""
 
 #: admin/themes/default/element-sets/edit.php:29
 msgid "Comment"
-msgstr ""
+msgstr "பின்னூட்டம்"
 
 #: admin/themes/default/error/403.php:2
 msgid "403: Forbidden"
-msgstr "403:Забрането"
+msgstr ""
 
 #: admin/themes/default/error/403.php:6
 msgid "Sorry, you do not have permission to access this page."
-msgstr "Извинете, Вие немате дозвола да пристапите до страната"
+msgstr "மன்னிக்கவும், இப்பக்கத்தை அணுக உங்களிடம் போதுமான அனுமதி இல்லை."
 
 #: admin/themes/default/error/403.php:10 admin/themes/default/error/404.php:9
 #: admin/themes/default/error/405.php:8
 msgid "site administrator"
-msgstr "Администратор на сајтот"
+msgstr "தள நிருவாகி"
 
 #: admin/themes/default/error/403.php:11
 #, php-format
 msgid "If you think you should have permission, try contacting the %s."
-msgstr "If you think you should have permission, try contacting the %s."
+msgstr ""
 
 #: admin/themes/default/error/404.php:2
 msgid "404: Page Not Found"
-msgstr "404: Страната не е пронајдена"
+msgstr "404: பக்கம் காணப்படவில்லை"
 
 #: admin/themes/default/error/404.php:6
 msgid ""
@@ -759,7 +759,7 @@ msgstr ""
 
 #: admin/themes/default/error/404.php:16 admin/themes/default/index.php:46
 msgid "Recent Items"
-msgstr ""
+msgstr "அண்மைய உருப்படிகள்"
 
 #: admin/themes/default/error/404.php:29 admin/themes/default/index.php:59
 msgid "Add a new item"
@@ -767,7 +767,7 @@ msgstr ""
 
 #: admin/themes/default/error/404.php:36 admin/themes/default/index.php:64
 msgid "Recent Collections"
-msgstr ""
+msgstr "அண்மைய தொகுப்புக்கள்"
 
 #: admin/themes/default/error/404.php:50 admin/themes/default/index.php:78
 msgid "Add a new collection"
@@ -793,7 +793,7 @@ msgstr ""
 #: application/views/scripts/files/show.php:9
 #, php-format
 msgid "File #%s"
-msgstr ""
+msgstr "கோப்பு #%s"
 
 #: admin/themes/default/files/show.php:36
 #: application/libraries/globals.php:398
@@ -807,17 +807,17 @@ msgstr ""
 #: admin/themes/default/files/show.php:43
 #: application/views/scripts/files/show.php:21
 msgid "Filename"
-msgstr ""
+msgstr "கோப்பின் பெயர்"
 
 #: admin/themes/default/files/show.php:45
 #: application/views/scripts/files/show.php:26
 msgid "Original Filename"
-msgstr "Оригинално име на фајлот"
+msgstr "கோப்பின் உண்மைப்பெயர்"
 
 #: admin/themes/default/files/show.php:47
 #: application/views/scripts/files/show.php:31
 msgid "File Size"
-msgstr "Големина на фајлот"
+msgstr "கோப்பு அளவு"
 
 #: admin/themes/default/files/show.php:48
 #: application/views/scripts/files/show.php:32
@@ -828,12 +828,12 @@ msgstr ""
 #: admin/themes/default/files/show.php:53
 #: application/views/scripts/files/show.php:49
 msgid "File History"
-msgstr "Историја на фајлот"
+msgstr "கோப்பு வரலாறு"
 
 #: admin/themes/default/files/show.php:57
 #: application/views/scripts/files/show.php:55
 msgid "Date Modified"
-msgstr "Дата на промени"
+msgstr "மாற்றப்பட்ட திகதி"
 
 #: admin/themes/default/files/show.php:59
 #: application/views/scripts/files/show.php:59
@@ -843,7 +843,7 @@ msgstr ""
 #: admin/themes/default/files/show.php:65
 #: application/views/scripts/files/show.php:37
 msgid "Type Metadata"
-msgstr "Тип на метаподаток"
+msgstr ""
 
 #: admin/themes/default/files/show.php:67
 #: application/views/scripts/files/show.php:39
@@ -853,7 +853,7 @@ msgstr ""
 #: admin/themes/default/files/show.php:69
 #: application/views/scripts/files/show.php:43
 msgid "File Type / OS"
-msgstr "File Type / Оперативен систем"
+msgstr "கோப்பு வகை/ OS"
 
 #: admin/themes/default/files/show.php:76
 msgid "Embedded Metadata"
@@ -904,7 +904,7 @@ msgstr ""
 #: admin/themes/default/items/tag-form.php:23
 #: application/views/helpers/ElementInput.php:113
 msgid "Remove"
-msgstr "одстрани"
+msgstr "நீக்கு"
 
 #: admin/themes/default/item-types/add-new-element.php:6
 msgid "Element Name"
@@ -917,16 +917,16 @@ msgstr ""
 #: admin/themes/default/item-types/add.php:2
 #: application/forms/ItemTypes.php:161
 msgid "Add Item Type"
-msgstr ""
+msgstr "உருப்படி வகையை சேர்"
 
 #: admin/themes/default/item-types/browse.php:2
 msgid "Browse Item Types"
-msgstr ""
+msgstr "உருப்படி வகைகளில் உலாவு"
 
 #: admin/themes/default/item-types/browse.php:7
 #: admin/themes/default/item-types/browse.php:40
 msgid "Add an Item Type"
-msgstr ""
+msgstr "ஒரு உருப்படி வகையை சேர்"
 
 #: admin/themes/default/item-types/browse.php:14
 msgid "Type Name"
@@ -934,7 +934,7 @@ msgstr ""
 
 #: admin/themes/default/item-types/browse.php:16
 msgid "Total Items"
-msgstr ""
+msgstr "மொத்த உருப்படிகள்"
 
 #: admin/themes/default/item-types/edit.php:8
 #, php-format
@@ -954,7 +954,7 @@ msgstr ""
 #: admin/themes/default/item-types/form.php:25
 #: admin/themes/default/item-types/show.php:16
 msgid "Elements"
-msgstr "Елементи"
+msgstr ""
 
 #: admin/themes/default/item-types/form.php:42
 #: admin/themes/default/items/tag-form.php:22
@@ -973,7 +973,7 @@ msgstr ""
 
 #: admin/themes/default/item-types/form.php:85
 msgid "New"
-msgstr "Нов"
+msgstr "புதிய"
 
 #: admin/themes/default/item-types/show.php:8
 #, php-format
@@ -993,11 +993,11 @@ msgstr ""
 #: admin/themes/default/items/browse.php:116
 #: admin/themes/default/items/browse.php:151
 msgid "Add an Item"
-msgstr ""
+msgstr "உருப்படியொன்றை சேர்"
 
 #: admin/themes/default/items/add.php:12
 msgid "Add Item"
-msgstr ""
+msgstr "உருப்படியை சேர்"
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit.php:89
@@ -1007,7 +1007,7 @@ msgstr ""
 #: application/libraries/globals.php:400
 #: application/views/scripts/items/show.php:18
 msgid "Collection"
-msgstr ""
+msgstr "தொகுப்பு"
 
 #: admin/themes/default/items/batch-delete.php:2
 msgid "Batch Delete Items"
@@ -1025,7 +1025,7 @@ msgstr ""
 #: admin/themes/default/items/batch-delete.php:50
 #: admin/themes/default/items/batch-edit.php:116
 msgid "Delete Items"
-msgstr ""
+msgstr "உருப்படிகளை நீக்கு"
 
 #: admin/themes/default/items/batch-edit.php:2
 msgid "Batch Edit Items"
@@ -1048,15 +1048,15 @@ msgstr ""
 #: admin/themes/default/items/batch-edit.php:78
 #: admin/themes/default/items/batch-edit.php:93
 msgid "Select Below"
-msgstr ""
+msgstr "கீழே தேர்ந்தெடு"
 
 #: admin/themes/default/items/batch-edit.php:51
 msgid "Not Public"
-msgstr "Не-јавно"
+msgstr ""
 
 #: admin/themes/default/items/batch-edit.php:61
 msgid "Featured?"
-msgstr ""
+msgstr "சிறப்பானதா?"
 
 #: admin/themes/default/items/batch-edit.php:66
 msgid "Not Featured"
@@ -1065,18 +1065,18 @@ msgstr ""
 #: admin/themes/default/items/batch-edit.php:74
 #: admin/themes/default/items/item-type-form.php:3
 msgid "Item Type"
-msgstr ""
+msgstr "உருப்படி வகை"
 
 #: admin/themes/default/items/batch-edit.php:83
 #: admin/themes/default/items/batch-edit.php:98
 msgid "Remove?"
-msgstr ""
+msgstr "நீக்கவா?"
 
 #: admin/themes/default/items/batch-edit.php:104
 #: admin/themes/default/items/tag-form.php:8
 #: admin/themes/default/items/tag-form.php:11
 msgid "Add Tags"
-msgstr ""
+msgstr "குறிச்சொற்களை சேர்"
 
 #: admin/themes/default/items/batch-edit.php:107
 #, php-format
@@ -1126,7 +1126,7 @@ msgstr ""
 #: application/views/scripts/items/browse.php:2
 #: application/views/scripts/items/tags.php:2
 msgid "Browse Items"
-msgstr ""
+msgstr "உருப்படிகளில் உலாவு"
 
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
@@ -1139,23 +1139,23 @@ msgstr ""
 
 #: admin/themes/default/items/browse.php:37
 msgid "Select"
-msgstr ""
+msgstr "தேர்ந்தெடு"
 
 #: admin/themes/default/items/browse.php:95
 msgid "No Tags"
-msgstr ""
+msgstr "குறிச்சொற்கள் இல்லை"
 
 #: admin/themes/default/items/browse.php:139
 msgid "Details"
-msgstr "Детали"
+msgstr "விபரங்கள்"
 
 #: admin/themes/default/items/browse.php:140
 msgid "Show Details"
-msgstr "Покажи детали"
+msgstr "விபரங்களைக் காட்டு"
 
 #: admin/themes/default/items/browse.php:141
 msgid "Hide Details"
-msgstr "Сокриј детали"
+msgstr "விபரங்களை மறை"
 
 #: admin/themes/default/items/browse.php:148
 msgid "You have no items."
@@ -1194,7 +1194,7 @@ msgstr ""
 
 #: admin/themes/default/items/files-form.php:21
 msgid "Add New Files"
-msgstr ""
+msgstr "புதிய கோப்புக்களை சேர்"
 
 #: admin/themes/default/items/files-form.php:23
 #, php-format
@@ -1203,15 +1203,15 @@ msgstr ""
 
 #: admin/themes/default/items/files-form.php:26
 msgid "Find a File"
-msgstr ""
+msgstr "கோப்பொன்றை கண்டுபிடி"
 
 #: admin/themes/default/items/form.php:25
 msgid "Add Another File"
-msgstr "Додај друг фајл"
+msgstr "இன்னொரு கோப்பை சேர்"
 
 #: admin/themes/default/items/item-type-form.php:15
 msgid "Pick this type"
-msgstr ""
+msgstr "இவ்வகையை தேர்ந்தெடு"
 
 #: admin/themes/default/items/quick-filters.php:2
 #: admin/themes/default/items/quick-filters.php:4
@@ -1224,12 +1224,12 @@ msgstr ""
 
 #: admin/themes/default/items/quick-filters.php:7
 msgid "Private"
-msgstr ""
+msgstr "தனிப்பட்டது"
 
 #: admin/themes/default/items/search-form.php:13
 #: application/views/scripts/items/search-form.php:13
 msgid "Search for Keywords"
-msgstr "Пребарувај по клучни зборови"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:26
 #: application/views/scripts/items/search-form.php:25
@@ -1239,32 +1239,32 @@ msgstr ""
 #: admin/themes/default/items/search-form.php:27
 #: application/views/scripts/items/search-form.php:77
 msgid "Add a Field"
-msgstr "Додади поле"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:63
 #: application/views/scripts/items/search-form.php:60
 msgid "contains"
-msgstr "содржи"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:64
 #: application/views/scripts/items/search-form.php:61
 msgid "does not contain"
-msgstr "не содржи"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:65
 #: application/views/scripts/items/search-form.php:62
 msgid "is exactly"
-msgstr "е точно"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:66
 #: application/views/scripts/items/search-form.php:63
 msgid "is empty"
-msgstr "е празно"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:67
 #: application/views/scripts/items/search-form.php:64
 msgid "is not empty"
-msgstr "не е празно"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:84
 #: application/views/scripts/items/search-form.php:81
@@ -1274,37 +1274,37 @@ msgstr ""
 #: admin/themes/default/items/search-form.php:98
 #: application/views/scripts/items/search-form.php:92
 msgid "Search By Collection"
-msgstr "Пребарај според колекција"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:114
 #: application/views/scripts/items/search-form.php:106
 msgid "Search By Type"
-msgstr "Пребарај според тип"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:131
 #: application/views/scripts/items/search-form.php:122
 msgid "Search By User"
-msgstr "Пребарај според корисник"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:148
 #: application/views/scripts/items/search-form.php:137
 msgid "Search By Tags"
-msgstr "Пребарај според тагови"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:163
 #: application/views/scripts/items/search-form.php:150
 msgid "Public/Non-Public"
-msgstr "Јавно/Не-јавно"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:172
 #: application/views/scripts/items/search-form.php:158
 msgid "Only Public Items"
-msgstr "Само јавни ајтеми"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:173
 #: application/views/scripts/items/search-form.php:159
 msgid "Only Non-Public Items"
-msgstr "Само не-јавни ајтеми"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:183
 #: application/views/scripts/items/search-form.php:168
@@ -1348,7 +1348,7 @@ msgstr ""
 
 #: admin/themes/default/items/show.php:74
 msgid "Add a File"
-msgstr ""
+msgstr "கோப்பொன்றை சேர்"
 
 #: admin/themes/default/items/show.php:78
 msgid "View File Metadata"
@@ -1361,15 +1361,15 @@ msgstr ""
 #: admin/themes/default/items/tag-form.php:10
 #, php-format
 msgid "Separate tags with %s"
-msgstr ""
+msgstr "குறிச்சொற்களை %s இனால் வேறுபடுத்து"
 
 #: admin/themes/default/items/tag-form.php:15
 msgid "All Tags"
-msgstr ""
+msgstr "எல்லா குறிச்சொற்களும்"
 
 #: admin/themes/default/items/tags.php:2
 msgid "Browse Items by Tag"
-msgstr ""
+msgstr "உருப்படிகளை குறிச்சொற்களை கொண்டு உலாவு"
 
 #: admin/themes/default/items/tags.php:9
 #: admin/themes/default/tags/browse.php:49
@@ -1404,7 +1404,7 @@ msgstr ""
 
 #: admin/themes/default/plugins/browse.php:87
 msgid "Upgrade"
-msgstr ""
+msgstr "மேம்படுத்து"
 
 #: admin/themes/default/plugins/browse.php:97
 msgid "Configure"
@@ -1412,23 +1412,23 @@ msgstr ""
 
 #: admin/themes/default/plugins/browse.php:103
 msgid "Deactivate"
-msgstr "Деактивирај"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:103
 #: admin/themes/default/users/activate.php:31
 #: application/views/scripts/users/activate.php:26
 msgid "Activate"
-msgstr "Активирај"
+msgstr "நிகழ்நிலைப்படுத்து"
 
 #: admin/themes/default/plugins/browse.php:113
 #: admin/themes/default/plugins/confirm-uninstall.php:16
 msgid "Uninstall"
-msgstr "Uninstall"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:126
 #: application/forms/Install.php:167
 msgid "Install"
-msgstr "Инсталирај"
+msgstr "நிறுவு"
 
 #: admin/themes/default/plugins/browse.php:137
 msgid ""
@@ -1453,16 +1453,16 @@ msgstr ""
 
 #: admin/themes/default/plugins/confirm-uninstall.php:12
 msgid "Yes, I want to uninstall this plugin."
-msgstr "Да, сакам да го uninstall овој плагин."
+msgstr "ஓம், இந்நீட்சியை நீக்க விரும்புகின்றேன்."
 
 #: admin/themes/default/plugins/confirm-uninstall.php:17
 msgid "or"
-msgstr "или"
+msgstr "அல்லது"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:17
 #: admin/themes/default/settings/edit-item-type-elements.php:50
 msgid "Cancel"
-msgstr "Откажи"
+msgstr "நிராகரி"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:12
 msgid "edit a specific item type"
@@ -1533,7 +1533,7 @@ msgstr ""
 
 #: admin/themes/default/settings/edit-settings.php:23
 msgid "Test"
-msgstr "Тест"
+msgstr "பரிசோதனை"
 
 #: admin/themes/default/tags/browse.php:3
 msgid "Edit Tags"
@@ -1561,7 +1561,7 @@ msgstr ""
 
 #: admin/themes/default/tags/browse.php:23
 msgid "Most"
-msgstr ""
+msgstr "அனேக"
 
 #: admin/themes/default/tags/browse.php:24
 msgid "Least"
@@ -1573,7 +1573,7 @@ msgstr ""
 
 #: admin/themes/default/tags/browse.php:26
 msgid "Recent"
-msgstr ""
+msgstr "அண்மைய"
 
 #: admin/themes/default/themes/browse.php:15
 #: admin/themes/default/themes/browse.php:42
@@ -1587,7 +1587,7 @@ msgstr ""
 
 #: admin/themes/default/themes/browse.php:19
 msgid "Current Theme"
-msgstr "Актуелна тема"
+msgstr "தற்போதைய வார்ப்புரு"
 
 #: admin/themes/default/themes/browse.php:21
 #: admin/themes/default/themes/browse.php:47
@@ -1618,7 +1618,7 @@ msgstr ""
 
 #: admin/themes/default/upgrade/index.php:32
 msgid "Upgrade Your Omeka Database"
-msgstr ""
+msgstr "உங்கள் Omeka தரவுத்தளத்தை மேம்படுத்துங்கள்"
 
 #: admin/themes/default/upgrade/index.php:34
 msgid ""
@@ -1632,7 +1632,7 @@ msgstr ""
 
 #: admin/themes/default/upgrade/index.php:37
 msgid "Upgrade Database"
-msgstr ""
+msgstr "தரவுத்தளத்தை மேம்படுத்துங்கள்"
 
 #: admin/themes/default/upgrade/migrate.php:32
 msgid "Omeka encountered an error when upgrading your installation."
@@ -1655,7 +1655,7 @@ msgstr ""
 
 #: admin/themes/default/upgrade/migrate.php:43
 msgid "Return to Dashboard"
-msgstr ""
+msgstr "நிருவாக முகப்பிற்கு திரும்பு"
 
 #: admin/themes/default/users/activate.php:2
 #: application/views/scripts/users/activate.php:2
@@ -1666,47 +1666,47 @@ msgstr ""
 #: application/forms/ResetPassword.php:23
 #: application/views/scripts/users/activate.php:13
 msgid "Create a Password"
-msgstr "Креирај лозинка"
+msgstr "கடவுச்சொல்லொன்றை உருவாக்கு"
 
 #: admin/themes/default/users/activate.php:24 application/forms/Install.php:60
 #: application/forms/ResetPassword.php:44
 #: application/views/scripts/users/activate.php:19
 msgid "Re-type the Password"
-msgstr ""
+msgstr "கடவுச்சொல்லை மீள தட்டச்சுங்கள்"
 
 #: admin/themes/default/users/add.php:2
 msgid "Add New User"
-msgstr "Додај нов корисник"
+msgstr "புதிய பயனரை சேர்"
 
 #: admin/themes/default/users/browse.php:2
 msgid "Browse Users"
-msgstr ""
+msgstr "பயனர்களை உலாவு"
 
 #: admin/themes/default/users/browse.php:8
 msgid "Add a User"
-msgstr "Додади корисник"
+msgstr "பயனரொருவரை சேர்"
 
 #: admin/themes/default/users/browse.php:17
 #: admin/themes/default/users/show.php:18 application/forms/Install.php:30
 #: application/forms/Login.php:21 application/forms/User.php:29
 msgid "Username"
-msgstr "Корисничко име"
+msgstr "பயனர்பெயர்"
 
 #: admin/themes/default/users/browse.php:18
 #: admin/themes/default/users/show.php:20
 msgid "Real Name"
-msgstr "Вистинско име"
+msgstr "உண்மைப் பெயர்"
 
 #: admin/themes/default/users/browse.php:19
 #: admin/themes/default/users/show.php:22 application/forms/Install.php:73
 #: application/forms/RecoverPassword.php:27 application/forms/User.php:95
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
-msgstr "Електронска пошта"
+msgstr "மின்னஞ்சல்"
 
 #: admin/themes/default/users/browse.php:20 application/forms/User.php:128
 msgid "Role"
-msgstr "Улога"
+msgstr "வகிபங்கு"
 
 #: admin/themes/default/users/browse.php:30
 msgid "inactive"
@@ -1730,7 +1730,7 @@ msgstr ""
 #: admin/themes/default/users/forgot-password.php:21
 #: application/views/scripts/users/forgot-password.php:18
 msgid "Submit"
-msgstr ""
+msgstr "சமர்ப்பி"
 
 #: admin/themes/default/users/forgot-password.php:25
 #: application/views/scripts/users/forgot-password.php:7
@@ -1740,7 +1740,7 @@ msgstr ""
 #: admin/themes/default/users/login.php:3 application/forms/Login.php:55
 #: application/views/scripts/users/login.php:3
 msgid "Log In"
-msgstr ""
+msgstr "உள்நுழை"
 
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
@@ -1753,7 +1753,7 @@ msgstr ""
 
 #: admin/themes/default/users/show.php:15
 msgid "Edit this User"
-msgstr ""
+msgstr "இப்பயனரை தொகு"
 
 #: application/controllers/AppearanceController.php:48
 msgid "The appearance settings have been updated."
@@ -1836,11 +1836,11 @@ msgstr ""
 
 #: application/controllers/ErrorController.php:64
 msgid "Page not found."
-msgstr "Страницата не е пронајдена"
+msgstr "பக்கம் காணப்படவில்லை"
 
 #: application/controllers/ErrorController.php:79
 msgid "Access denied."
-msgstr ""
+msgstr "அனுமதி மறுக்கப்பட்டுள்ளது."
 
 #: application/controllers/FilesController.php:64
 msgid "This will delete the file and its associated metadata."
@@ -1962,12 +1962,12 @@ msgstr ""
 #: application/controllers/PluginsController.php:70
 #, php-format
 msgid "The %s plugin has already been installed."
-msgstr ""
+msgstr "நீட்சி %s ஏலவே நிறுவப்பட்டுள்ளது."
 
 #: application/controllers/PluginsController.php:79
 #, php-format
 msgid "The %s plugin was successfully installed!"
-msgstr ""
+msgstr "நீட்சி %s வெற்றிகரமாக நிறுவப்பட்டுவிட்டது!"
 
 #: application/controllers/PluginsController.php:91
 #: application/controllers/PluginsController.php:96
@@ -1983,7 +1983,7 @@ msgstr ""
 #: application/controllers/PluginsController.php:134
 #, php-format
 msgid "The %s plugin was successfully activated!"
-msgstr ""
+msgstr "நீட்சி %s வெற்றிகரமாக நிகழ்நிலைப்படுத்தப்பட்டது!"
 
 #: application/controllers/PluginsController.php:139
 #, php-format
@@ -2100,7 +2100,7 @@ msgstr ""
 
 #: application/controllers/ThemesController.php:54
 msgid "The theme has been successfully changed."
-msgstr "Темата беше успешно променета."
+msgstr ""
 
 #: application/controllers/ThemesController.php:81
 msgid "The theme settings were successfully saved!"
@@ -2129,12 +2129,12 @@ msgstr ""
 #: application/controllers/UsersController.php:296
 #, php-format
 msgid "%s Administrator"
-msgstr "%s Администратор"
+msgstr ""
 
 #: application/controllers/UsersController.php:114
 #, php-format
 msgid "[%s] Reset Your Password"
-msgstr "[%s] Изменија лозинката"
+msgstr "[%s] உங்கள் கடவுச்சொல்லை மாற்றுங்கள்"
 
 #: application/controllers/UsersController.php:117
 msgid "Please check your email for a link to reset your password."
@@ -2142,15 +2142,15 @@ msgstr ""
 
 #: application/controllers/UsersController.php:135
 msgid "Password: The passwords do not match."
-msgstr "Лозинка: лозинките не се совпаѓаат"
+msgstr "கடவுச்சொற்கள்: கடவுச்சொற்கள் ஒன்றல்ல."
 
 #: application/controllers/UsersController.php:143
 msgid "You may now log in to Omeka."
-msgstr "Сега можете да се логирате во Омека."
+msgstr ""
 
 #: application/controllers/UsersController.php:160
 msgid "Add User"
-msgstr "Додади корисник"
+msgstr "பயனரை இணை"
 
 #: application/controllers/UsersController.php:171
 #, php-format
@@ -2169,7 +2169,7 @@ msgstr ""
 
 #: application/controllers/UsersController.php:233
 msgid "Password changed!"
-msgstr "Лозинката е променета!"
+msgstr "கடவுச்சொல் மாற்றப்பட்டது!"
 
 #: application/controllers/UsersController.php:244
 #, php-format
@@ -2191,7 +2191,7 @@ msgstr ""
 
 #: application/controllers/UsersController.php:292
 msgid "Welcome!"
-msgstr "Добредојдовте!"
+msgstr "நல்வரவு!"
 
 #: application/controllers/UsersController.php:294
 #, php-format
@@ -2212,7 +2212,7 @@ msgstr ""
 #: application/forms/AppearanceSettings.php:22
 #: application/forms/Install.php:117
 msgid "Fullsize Image Size"
-msgstr ""
+msgstr "முழுப் பட அளவு"
 
 #: application/forms/AppearanceSettings.php:23
 msgid "Maximum fullsize image size constraint (in pixels)."
@@ -2221,7 +2221,7 @@ msgstr ""
 #: application/forms/AppearanceSettings.php:29
 #: application/forms/Install.php:125
 msgid "Thumbnail Size"
-msgstr ""
+msgstr "சிறுபட அளவு"
 
 #: application/forms/AppearanceSettings.php:30
 msgid "Maximum thumbnail size constraint (in pixels)."
@@ -2270,7 +2270,7 @@ msgstr ""
 
 #: application/forms/ChangePassword.php:25
 msgid "Current Password"
-msgstr "Актуелна лозинка"
+msgstr "தற்போதைய கடவுச்சொல்"
 
 #: application/forms/ChangePassword.php:26
 #: application/forms/ChangePassword.php:36
@@ -2283,7 +2283,7 @@ msgstr ""
 
 #: application/forms/ChangePassword.php:34
 msgid "New Password"
-msgstr "Нова лозинка"
+msgstr "புதிய கடவுச்சொல்"
 
 #: application/forms/ChangePassword.php:41
 msgid "New password must be entered."
@@ -2300,31 +2300,31 @@ msgstr ""
 
 #: application/forms/ChangePassword.php:68
 msgid "Repeat New Password"
-msgstr "Повтори ја новата лозинка"
+msgstr "புதிய கடவுச்சொல் மீளவும்"
 
 #: application/forms/ChangePassword.php:75
 msgid "Save Password"
-msgstr "Зачувај лозинка"
+msgstr "கடவுச்சொல்லை சேமி"
 
 #: application/forms/ChangePassword.php:84
 msgid "Change Password"
-msgstr "Промени лозинка"
+msgstr "கடவுச்சொல்லை மாற்று"
 
 #: application/forms/GeneralSettings.php:22 application/forms/Install.php:79
 msgid "Site Title"
-msgstr "Наслов на сајтот"
+msgstr "தள தலைப்பு"
 
 #: application/forms/GeneralSettings.php:26 application/forms/Install.php:84
 msgid "Site Description"
-msgstr "Опис на сајтот"
+msgstr "தள விபரம்"
 
 #: application/forms/GeneralSettings.php:31 application/forms/Install.php:88
 msgid "Administrator Email"
-msgstr ""
+msgstr "நிருவாக மின்னஞ்சல் முகவரி"
 
 #: application/forms/GeneralSettings.php:37 application/forms/Install.php:94
 msgid "Site Copyright Information"
-msgstr ""
+msgstr "தள காப்புரிமை தகவல்"
 
 #: application/forms/GeneralSettings.php:41 application/forms/Install.php:98
 msgid "Site Author Information"
@@ -2350,7 +2350,7 @@ msgstr ""
 
 #: application/forms/Install.php:37 application/forms/Login.php:34
 msgid "Password"
-msgstr "Лозинка"
+msgstr "கடவுச்சொல்"
 
 #: application/forms/Install.php:38
 msgid "must be at least 6 characters"
@@ -2358,7 +2358,7 @@ msgstr ""
 
 #: application/forms/Install.php:61
 msgid "Confirm your password."
-msgstr "Потврдете ја Вашата лозинка."
+msgstr "உங்கள் கடவுச்சொல்லை உறுதிப்படுத்துங்கள்."
 
 #: application/forms/Install.php:103
 msgid "Separate tags using this character or string."
@@ -2404,7 +2404,7 @@ msgstr ""
 
 #: application/forms/Install.php:184
 msgid "Site Settings"
-msgstr ""
+msgstr "தள அமைப்புக்கள்"
 
 #: application/forms/ItemTypes.php:142
 msgid "The name of the item type."
@@ -2421,15 +2421,15 @@ msgstr ""
 
 #: application/forms/Login.php:27
 msgid "Username cannot be empty."
-msgstr ""
+msgstr "பயனர் பெயர் வெறுமையாயிருக்க முடியாது."
 
 #: application/forms/Login.php:40
 msgid "Password cannot be empty."
-msgstr ""
+msgstr "கடவுச்சொல் வெறுமையாயிருக்க முடியாது"
 
 #: application/forms/Login.php:48
 msgid "Remember Me?"
-msgstr ""
+msgstr "என்னை நினைவிருக்கிறதா?"
 
 #: application/forms/Navigation.php:156
 msgid "[Default]"
@@ -2462,11 +2462,11 @@ msgstr ""
 
 #: application/forms/RecoverPassword.php:36
 msgid "Email address is required."
-msgstr ""
+msgstr "மின்னஞ்சல் முகவரி கட்டாயமானது."
 
 #: application/forms/RecoverPassword.php:46
 msgid "Invalid email address given."
-msgstr ""
+msgstr "மிழையான மின்னஞ்சல் முகவரி தரப்பட்டுள்ளது."
 
 #: application/forms/RecoverPassword.php:48
 msgid "Invalid format given for email address."
@@ -2478,15 +2478,15 @@ msgstr ""
 
 #: application/forms/RecoverPassword.php:66
 msgid "Invalid email address"
-msgstr "Невалидна мејл адреса"
+msgstr "பிழையான மின்னஞ்சல் முகவரி"
 
 #: application/forms/ResetPassword.php:27
 msgid "Password is required."
-msgstr "Лозинката е задожителна."
+msgstr "கடவுச்சொல் கட்டாயமானது."
 
 #: application/forms/ResetPassword.php:33
 msgid "Typed passwords do not match."
-msgstr "Впишаните лозинки не се идентични."
+msgstr ""
 
 #: application/forms/SecuritySettings.php:24
 msgid "Disable File Upload Validation"
@@ -2508,7 +2508,7 @@ msgstr ""
 
 #: application/forms/SecuritySettings.php:42
 msgid "Allowed File Types"
-msgstr ""
+msgstr "அனுமதிக்கப்பட்ட கோப்பு வகைகள்"
 
 #: application/forms/SecuritySettings.php:43
 msgid "List of allowed MIME types for file uploads"
@@ -2574,7 +2574,7 @@ msgstr ""
 
 #: application/forms/User.php:37
 msgid "Username is required."
-msgstr ""
+msgstr "பயனர்பெயர் கட்டாயமானது."
 
 #: application/forms/User.php:45
 msgid "Username must contain only letters and numbers."
@@ -2606,11 +2606,11 @@ msgstr ""
 
 #: application/forms/User.php:93
 msgid "This email address is invalid."
-msgstr "Оваа е-мејл адреса не е валидна!"
+msgstr ""
 
 #: application/forms/User.php:101
 msgid "Email is required."
-msgstr ""
+msgstr "மின்னஞ்சல் கட்டாயமானது."
 
 #: application/forms/User.php:120
 msgid "This email address is already in use."
@@ -2706,23 +2706,23 @@ msgstr ""
 #: application/libraries/globals.php:1248
 #, php-format
 msgid "Could not find file %s!"
-msgstr ""
+msgstr "கோப்பு %s இனை கண்டுபிடிக்க முடியவில்லை!"
 
 #: application/libraries/globals.php:1554
 msgid "Select Below "
-msgstr ""
+msgstr "கீழே தேர்ந்தெடு"
 
 #: application/libraries/globals.php:1596
 msgid "Omeka RSS Feed"
-msgstr "Omeka RSS Feed"
+msgstr "Omeka RSS செய்தியோடை"
 
 #: application/libraries/globals.php:1597
 msgid "Omeka Atom Feed"
-msgstr "Omeka Atom Feed"
+msgstr "Omeka Atom செய்தியோடை"
 
 #: application/libraries/globals.php:2247
 msgid "View"
-msgstr ""
+msgstr "பார்"
 
 #: application/libraries/globals.php:2309
 msgid "No Collection"
@@ -2734,11 +2734,11 @@ msgstr "RSS"
 
 #: application/libraries/globals.php:2441
 msgid "Next Item &rarr;"
-msgstr ""
+msgstr "அடுத்தது &rarr;"
 
 #: application/libraries/globals.php:2461
 msgid "&larr; Previous Item"
-msgstr ""
+msgstr "&larr; முன்னையது"
 
 #: application/libraries/globals.php:2638
 msgid "Browse All"
@@ -2914,7 +2914,7 @@ msgstr ""
 
 #: application/models/Option.php:25 application/models/Option.php:29
 msgid "Each option must have a unique name."
-msgstr "Секоја опција мора да има уникатно име."
+msgstr ""
 
 #: application/models/Plugin.php:84
 msgid "Names of plugins must not be blank"
@@ -3080,7 +3080,7 @@ msgstr ""
 
 #: application/views/helpers/ElementInput.php:131
 msgid "Use HTML"
-msgstr "Користи HTML"
+msgstr "HTML இனை பயன்படுத்து"
 
 #: application/views/helpers/GetCurrentRecord.php:27
 #, php-format
@@ -3132,42 +3132,42 @@ msgstr ""
 
 #: application/views/scripts/common/footer.php:14
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
-msgstr "Proudly powered  <a href=\"http://omeka.org\">Omeka</a>."
+msgstr ""
 
 #: application/views/scripts/common/pagination_control.php:7
 msgid "First"
-msgstr "Прв/а"
+msgstr "முதலாவது"
 
 #: application/views/scripts/common/pagination_control.php:14
 msgid "Previous"
-msgstr "Предходен/на"
+msgstr "முன்னையது"
 
 #: application/views/scripts/common/pagination_control.php:30
 msgid "Next"
-msgstr "Следен/а"
+msgstr "அடுத்தது"
 
 #: application/views/scripts/common/pagination_control.php:37
 msgid "Last"
-msgstr "Последен/а"
+msgstr "இறுதி"
 
 #: application/views/scripts/error/403.php:2
 msgid "403 Page Forbidden"
-msgstr "403 Забранет пристап до страната"
+msgstr ""
 
 #: application/views/scripts/error/403.php:8
 msgid "You do not have permission to access this page."
-msgstr "Немате дозвола за пристап до оваа страна"
+msgstr "இப்பக்கத்தை அணுகுவதற்கான அனுமதி உங்களிடத்தில் இல்லை."
 
 #: application/views/scripts/error/404.dc.php:1
 #: application/views/scripts/error/404.php:2
 #: application/views/scripts/error/404.xml.php:1
 msgid "404 Page Not Found"
-msgstr "404 Страната не е пронајдена"
+msgstr "404 பக்கம் காணப்படவில்லை"
 
 #: application/views/scripts/error/404.php:6
 #, php-format
 msgid "%s is not a valid URL."
-msgstr "%s не е валиден URL."
+msgstr ""
 
 #: application/views/scripts/error/404.rss2.php:1
 msgid "Rss2.0 Feed Not Found!"
@@ -3200,7 +3200,7 @@ msgstr ""
 
 #: application/views/scripts/index.php:22
 msgid "Featured Collection"
-msgstr ""
+msgstr "சிறப்பு தொகுப்பு"
 
 #: application/views/scripts/index.php:67
 msgid "No recent items available."
@@ -3208,7 +3208,7 @@ msgstr ""
 
 #: application/views/scripts/index.php:71
 msgid "View All Items"
-msgstr ""
+msgstr "எல்லா உருப்படிகளையும் பார்"
 
 #: application/views/scripts/items/browse.php:22
 msgid "Sort by: "
@@ -3220,7 +3220,7 @@ msgstr ""
 
 #: application/views/scripts/items/show.php:10
 msgid "Files"
-msgstr ""
+msgstr "கோப்புக்கள்"
 
 #: application/views/scripts/items/show.php:33
 msgid "Citation"
@@ -3272,7 +3272,7 @@ msgstr ""
 
 #: application/views/scripts/users/login.php:9
 msgid "Lost your password?"
-msgstr ""
+msgstr "கடவுச்சொல் தொலைந்துவிட்டதா?"
 
 #: install/controllers/IndexController.php:25
 msgid "Could not load database resource!"
@@ -3280,20 +3280,20 @@ msgstr ""
 
 #: install/views/scripts/index/errors.phtml:1
 msgid "Installation Error"
-msgstr "Грешка при инсталација"
+msgstr "நிறுவலில் தவறு"
 
 #: install/views/scripts/index/errors.phtml:2
 msgid ""
 "Before installation can continue, the following errors must be resolved:"
-msgstr "Пред да продолжи инсталацијата, следниве грешки мора да бидат поправени"
+msgstr ""
 
 #: install/views/scripts/index/fatal-error.phtml:1
 msgid "Fatal Error"
-msgstr "Фатална грешка"
+msgstr ""
 
 #: install/views/scripts/index/index.phtml:2
 msgid "Installation Warning"
-msgstr "Предупредување при инсталација"
+msgstr ""
 
 #: install/views/scripts/index/index.phtml:4
 msgid ""
@@ -3303,7 +3303,7 @@ msgstr ""
 
 #: install/views/scripts/index/index.phtml:14
 msgid "Configure Your Site"
-msgstr "Конфигурирај го сајтот"
+msgstr ""
 
 #: install/views/scripts/index/index.phtml:16
 msgid "Form Validation Errors"

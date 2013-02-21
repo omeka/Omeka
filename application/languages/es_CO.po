@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
+# MangleRojo <administrador@manglerojo.org>, 2013.
 # MangleRojo  <administrador@manglerojo.org>, 2013.
 # Mangle Rojo <jpmoyar@gmail.com>, 2012.
 # MangleRojo  <jpmoyar@manglerojo.org>, 2012.
@@ -11,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-01-22 16:20+0000\n"
+"PO-Revision-Date: 2013-02-11 19:35+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Spanish (Colombia) (http://www.transifex.com/projects/p/omeka/language/es_CO/)\n"
 "MIME-Version: 1.0\n"
@@ -31,6 +32,7 @@ msgstr "El conjunto de metadatos Dublin Core es común a todos los recursos Omek
 #: admin/themes/default/collections/browse.php:22
 #: admin/themes/default/items/browse.php:40
 #: application/views/scripts/items/browse.php:17
+#: application/views/scripts/search/index.php:13
 msgid "Title"
 msgstr "Título"
 
@@ -484,8 +486,8 @@ msgstr "(Privado)"
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:27
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
-#: admin/themes/default/files/show.php:28 admin/themes/default/index.php:38
-#: admin/themes/default/index.php:57
+#: admin/themes/default/files/show.php:28 admin/themes/default/index.php:54
+#: admin/themes/default/index.php:73
 #: admin/themes/default/item-types/browse.php:26
 #: admin/themes/default/item-types/show.php:51
 #: admin/themes/default/items/browse.php:24
@@ -520,7 +522,7 @@ msgstr "Comience por agregar su primera colección."
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/libraries/globals.php:2490
+#: application/libraries/globals.php:2489
 #: application/views/scripts/collections/show.php:4
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
@@ -602,7 +604,7 @@ msgstr "Tipo de Registros"
 #: admin/themes/default/common/content-nav.php:21
 #: admin/themes/default/items/browse.php:94
 #: admin/themes/default/items/show.php:63
-#: application/views/scripts/items/browse.php:46
+#: application/views/scripts/items/browse.php:44
 #: application/views/scripts/items/show.php:26
 msgid "Tags"
 msgstr "Tags"
@@ -659,13 +661,13 @@ msgstr "Usuarios"
 msgid "Omeka Admin"
 msgstr "Administración Omeka"
 
-#: admin/themes/default/common/header.php:58
+#: admin/themes/default/common/header.php:60
 #: application/views/scripts/common/admin-bar.php:7
 #, php-format
 msgid "Welcome, %s"
 msgstr "Bienvenido, %s"
 
-#: admin/themes/default/common/header.php:59
+#: admin/themes/default/common/header.php:61
 #: application/views/scripts/common/admin-bar.php:15
 msgid "Log Out"
 msgstr "Finalizar Sesión"
@@ -758,19 +760,19 @@ msgstr "Usted está intentando acceder a una página que no existe. Algunas vece
 msgid "If this does not help, try contacting the %s."
 msgstr "Si esto no ayuda, trate de ponerse en contacto con %s."
 
-#: admin/themes/default/error/404.php:16 admin/themes/default/index.php:30
+#: admin/themes/default/error/404.php:16 admin/themes/default/index.php:46
 msgid "Recent Items"
 msgstr "Registros Recientes"
 
-#: admin/themes/default/error/404.php:29 admin/themes/default/index.php:43
+#: admin/themes/default/error/404.php:29 admin/themes/default/index.php:59
 msgid "Add a new item"
 msgstr "Agregar un nuevo registro"
 
-#: admin/themes/default/error/404.php:36 admin/themes/default/index.php:48
+#: admin/themes/default/error/404.php:36 admin/themes/default/index.php:64
 msgid "Recent Collections"
 msgstr "Colecciones Recientes"
 
-#: admin/themes/default/error/404.php:50 admin/themes/default/index.php:62
+#: admin/themes/default/error/404.php:50 admin/themes/default/index.php:78
 msgid "Add a new collection"
 msgstr "Agregar una nueva colección"
 
@@ -889,6 +891,15 @@ msgstr "usuarios"
 #: admin/themes/default/index.php:18
 msgid "theme"
 msgstr "tema"
+
+#: admin/themes/default/index.php:29
+msgid "A new version of Omeka is available for download."
+msgstr ""
+
+#: admin/themes/default/index.php:30
+#, php-format
+msgid "Upgrade to %s"
+msgstr ""
 
 #: admin/themes/default/item-types/add-existing-element.php:22
 #: admin/themes/default/item-types/add-new-element.php:15
@@ -1123,8 +1134,8 @@ msgstr "Ver por Registros"
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2266
-#: application/libraries/globals.php:2649
+#: application/libraries/globals.php:2265
+#: application/libraries/globals.php:2648
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Buscar Registros"
@@ -1992,13 +2003,13 @@ msgstr "¡El plugin %s fue desactivado exitosamente!"
 msgid "The following error occurred while deactivating the %s plugin: "
 msgstr "El siguiente error ocurrió desactivando el plugin %s: "
 
-#: application/controllers/PluginsController.php:191
+#: application/controllers/PluginsController.php:187
 #, php-format
 msgid "The %s plugin was successfully upgraded!"
 msgstr "¡El plugin %s fue actualizado exitosamente!"
 
-#: application/controllers/PluginsController.php:198
-#: application/controllers/PluginsController.php:203
+#: application/controllers/PluginsController.php:196
+#: application/controllers/PluginsController.php:202
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
 msgstr "El siguiente error ocurrió actualizando el plugin %s: "
@@ -2199,7 +2210,7 @@ msgstr "Active su cuenta con el repositorio %s"
 
 #: application/controllers/UsersController.php:392
 msgid "Login information incorrect. Please try again."
-msgstr ""
+msgstr "Información de Login incorrecta, Por favor intente de nuevo."
 
 #: application/forms/AppearanceSettings.php:22
 #: application/forms/Install.php:117
@@ -2650,7 +2661,7 @@ msgid ""
 "subpage of the navigation object."
 msgstr "El contenedor primario debe ser un objeto de navegación o una subpágina descendiente del objeto de navegación."
 
-#: application/libraries/Omeka/Navigation/Page/Uri.php:124
+#: application/libraries/Omeka/Navigation/Page/Uri.php:128
 #, php-format
 msgid "Invalid URI for Omeka_Navigation_Page_Uri object: %s"
 msgstr "URI inválido para el objeto Omeka_Navigation_Page_Uri: %s"
@@ -2694,53 +2705,53 @@ msgstr "Boolean"
 msgid "Exact match"
 msgstr "Coincidencia exacta"
 
-#: application/libraries/globals.php:1228
-#: application/libraries/globals.php:1249
+#: application/libraries/globals.php:1227
+#: application/libraries/globals.php:1248
 #, php-format
 msgid "Could not find file %s!"
 msgstr "¡No se puede encontrar el archivo %s!"
 
-#: application/libraries/globals.php:1555
+#: application/libraries/globals.php:1554
 msgid "Select Below "
 msgstr "Seleccionar"
 
-#: application/libraries/globals.php:1597
+#: application/libraries/globals.php:1596
 msgid "Omeka RSS Feed"
 msgstr "Omeka RSS Feed"
 
-#: application/libraries/globals.php:1598
+#: application/libraries/globals.php:1597
 msgid "Omeka Atom Feed"
 msgstr "Omeka Atom Feed"
 
-#: application/libraries/globals.php:2248
+#: application/libraries/globals.php:2247
 msgid "View"
 msgstr "Ver"
 
-#: application/libraries/globals.php:2310
+#: application/libraries/globals.php:2309
 msgid "No Collection"
 msgstr "Sin Colección"
 
-#: application/libraries/globals.php:2425
+#: application/libraries/globals.php:2424
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2442
+#: application/libraries/globals.php:2441
 msgid "Next Item &rarr;"
 msgstr "Siguiente Registro &rarr;"
 
-#: application/libraries/globals.php:2462
+#: application/libraries/globals.php:2461
 msgid "&larr; Previous Item"
 msgstr "&larr; Registro Anterior"
 
-#: application/libraries/globals.php:2639
+#: application/libraries/globals.php:2638
 msgid "Browse All"
 msgstr "Todo"
 
-#: application/libraries/globals.php:2644
+#: application/libraries/globals.php:2643
 msgid "Browse by Tag"
 msgstr "Por Tag"
 
-#: application/libraries/globals.php:2906
+#: application/libraries/globals.php:2905
 msgid "No tags are available."
 msgstr "No hay tags disponibles."
 
@@ -2795,16 +2806,40 @@ msgstr "No se puede obtener la ruta local de un archivo almacenado."
 msgid "\"%s\" is not a valid file derivative."
 msgstr "\"%s\" no es un archivo derivado válido."
 
-#: application/models/Item.php:264
+#: application/models/Item.php:265
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
 msgstr "¡Los archivos no se pueden adjuntar a un elemento que no es persistente en la base de datos!"
 
-#: application/models/Item.php:430
+#. / Chicago-style item citation: two authors
+#: application/models/Item.php:391
+#, php-format
+msgid "%1$s and %2$s"
+msgstr ""
+
+#. / Chicago-style item citation: three authors
+#: application/models/Item.php:395
+#, php-format
+msgid "%1$s, %2$s, and %3$s"
+msgstr ""
+
+#. / Chicago-style item citation: more than three authors
+#: application/models/Item.php:399
+#, php-format
+msgid "%s et al."
+msgstr ""
+
+#. / Chicago-style item citation: access date and URL
+#: application/models/Item.php:417
+#, php-format
+msgid "accessed %1$s, %2$s."
+msgstr ""
+
+#: application/models/Item.php:435
 msgid "Cannot add an existing file to an item!"
 msgstr "¡No se puede agregar un archivo ya existente a un registro!"
 
-#: application/models/Item.php:434
+#: application/models/Item.php:439
 msgid "File must be valid before it can be associated with an item!"
 msgstr "¡El archivo debe ser válido para poder ser asociado con un registro!"
 
@@ -3102,19 +3137,19 @@ msgstr "No hay registros en esta colección."
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
 msgstr "Con la tecnología de <a href=\"http://omeka.org\">Omeka</a>."
 
-#: application/views/scripts/common/pagination_control.php:8
+#: application/views/scripts/common/pagination_control.php:7
 msgid "First"
 msgstr "Primero"
 
-#: application/views/scripts/common/pagination_control.php:15
+#: application/views/scripts/common/pagination_control.php:14
 msgid "Previous"
 msgstr "Anterior"
 
-#: application/views/scripts/common/pagination_control.php:31
+#: application/views/scripts/common/pagination_control.php:30
 msgid "Next"
 msgstr "Siguiente"
 
-#: application/views/scripts/common/pagination_control.php:38
+#: application/views/scripts/common/pagination_control.php:37
 msgid "Last"
 msgstr "Último"
 
@@ -3197,6 +3232,26 @@ msgstr "Cita"
 #: application/views/scripts/search/index.php:2
 msgid "Search Omeka "
 msgstr "Búsqueda Omeka"
+
+#: application/views/scripts/search/index.php:12
+msgid "Record Type"
+msgstr ""
+
+#: application/views/scripts/search/index.php:29
+msgid "Your query returned no results."
+msgstr ""
+
+#: application/views/scripts/search/search-filters.php:3
+msgid "Query:"
+msgstr ""
+
+#: application/views/scripts/search/search-filters.php:4
+msgid "Query type:"
+msgstr ""
+
+#: application/views/scripts/search/search-filters.php:5
+msgid "Record types:"
+msgstr ""
 
 #: application/views/scripts/search/search-form.php:6
 msgid "Search using this query type:"

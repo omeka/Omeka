@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Dimitar Poposki <poposkidimitar@gmail.com>, 2011, 2012.
+# Sukma Budi <sukmabudi@yahoo.com>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
@@ -11,19 +11,19 @@ msgstr ""
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
 "PO-Revision-Date: 2013-02-11 19:35+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
-"Language-Team: Macedonian (Macedonia) (http://www.transifex.com/projects/p/omeka/language/mk_MK/)\n"
+"Language-Team: Indonesian (http://www.transifex.com/projects/p/omeka/language/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: mk_MK\n"
-"Plural-Forms: nplurals=2; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : 1;\n"
+"Language: id\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Dublin Core description
 msgid ""
 "The Dublin Core metadata element set is common to all Omeka records, "
 "including items, files, and collections. For more information see, "
 "http://dublincore.org/documents/dces/."
-msgstr ""
+msgstr "Kumpulan elemen metadata Dublin Core  sudah biasa ada dalam semua rekod Omeka, termasuk item, file, dan koleksi. Untuk informasi lebih lanjut lihat, http://dublincore.org/documents/dces/."
 
 #. Dublin Core: Title element name
 #: admin/themes/default/collections/browse.php:22
@@ -31,29 +31,29 @@ msgstr ""
 #: application/views/scripts/items/browse.php:17
 #: application/views/scripts/search/index.php:13
 msgid "Title"
-msgstr "Наслов"
+msgstr "Judul"
 
 #. Dublin Core: Title element description
 msgid "A name given to the resource"
-msgstr ""
+msgstr "Nama yang diberikan untuk sumber"
 
 #. Dublin Core: Creator element name
 #: admin/themes/default/items/browse.php:41
 #: application/views/scripts/items/browse.php:18
 msgid "Creator"
-msgstr "Креирал"
+msgstr "Pembuat"
 
 #. Dublin Core: Creator element description
 msgid "An entity primarily responsible for making the resource"
-msgstr ""
+msgstr "Sebuah entitas yang bertanggung jawab penuh untuk membuat sumber"
 
 #. Dublin Core: Subject element name
 msgid "Subject"
-msgstr "Subject"
+msgstr "Perihal"
 
 #. Dublin Core: Subject element description
 msgid "The topic of the resource"
-msgstr ""
+msgstr "Topik dari sumber"
 
 #. Dublin Core: Description element name
 #: admin/themes/default/element-sets/browse.php:17
@@ -63,119 +63,119 @@ msgstr ""
 #: application/forms/ItemTypes.php:150
 #: application/views/scripts/collections/browse.php:17
 msgid "Description"
-msgstr "Опис"
+msgstr "Deskripsi"
 
 #. Dublin Core: Description element description
 msgid "An account of the resource"
-msgstr ""
+msgstr "Sebuah akun dari sumber"
 
 #. Dublin Core: Publisher element name
 msgid "Publisher"
-msgstr "Издавач"
+msgstr "Penerbit"
 
 #. Dublin Core: Publisher element description
 msgid "An entity responsible for making the resource available"
-msgstr ""
+msgstr "Sebuah entitas yang bertanggung jawab untuk membuat sumber menjadi tersedia"
 
 #. Dublin Core: Contributor element name
 #. User role: contributor
 msgid "Contributor"
-msgstr "Контрибутор"
+msgstr "Kontributor"
 
 #. Dublin Core: Contributor element description
 msgid "An entity responsible for making contributions to the resource"
-msgstr ""
+msgstr "Sebuah entitas yang bertanggung jawab untuk membuat kontribusi ke sumber"
 
 #. Dublin Core: Date element name
 msgid "Date"
-msgstr "Датум"
+msgstr "Tanggal"
 
 #. Dublin Core: Date element description
 msgid ""
 "A point or period of time associated with an event in the lifecycle of the "
 "resource"
-msgstr ""
+msgstr "Sebuah poin atau periode waktu yang diasosiasikan dengan sebuah kejadian dalam siklus hidup dari sumber"
 
 #. Dublin Core: Type element name
 #: admin/themes/default/items/browse.php:42
 msgid "Type"
-msgstr "Тип"
+msgstr "Tipe"
 
 #. Dublin Core: Type element description
 msgid "The nature or genre of the resource"
-msgstr ""
+msgstr "Sifat alami atau genre dari sumber"
 
 #. Dublin Core: Format element name
 msgid "Format"
-msgstr "Формат"
+msgstr "Format"
 
 #. Dublin Core: Format element description
 msgid "The file format, physical medium, or dimensions of the resource"
-msgstr ""
+msgstr "Format file, media fisik, atau dimensi dari sumber"
 
 #. Dublin Core: Identifier element name
 msgid "Identifier"
-msgstr "Идентификатор"
+msgstr "Pengidentifikasi"
 
 #. Dublin Core: Identifier element description
 msgid "An unambiguous reference to the resource within a given context"
-msgstr ""
+msgstr "Sebuah referensi yang jelas untuk sumber dalam konteks tertentu"
 
 #. Dublin Core: Source element name
 msgid "Source"
-msgstr "Source"
+msgstr "Sumber"
 
 #. Dublin Core: Source element description
 msgid "A related resource from which the described resource is derived"
-msgstr ""
+msgstr "Sebuah sumber terkait dari sumber asal yang dideskripsikan."
 
 #. Dublin Core: Language element name
 msgid "Language"
-msgstr "Јазик"
+msgstr "Bahasa"
 
 #. Dublin Core: Language element description
 msgid "A language of the resource"
-msgstr ""
+msgstr "Bahasa dari sumber"
 
 #. Dublin Core: Relation element name
 msgid "Relation"
-msgstr "Relation"
+msgstr "Relasi"
 
 #. Dublin Core: Relation element description
 msgid "A related resource"
-msgstr ""
+msgstr "Sumber terkait"
 
 #. Dublin Core: Coverage element name
 msgid "Coverage"
-msgstr "Покриеност"
+msgstr "Ulasan"
 
 #. Dublin Core: Coverage element description
 msgid ""
 "The spatial or temporal topic of the resource, the spatial applicability of "
 "the resource, or the jurisdiction under which the resource is relevant"
-msgstr ""
+msgstr "Topik berarea atau berperiode dari sumber, penerapan area dari sumber, atau di bawah jurisdiksi di mana sumber tersebut relevan"
 
 #. Dublin Core: Rights element name
 msgid "Rights"
-msgstr "Права"
+msgstr "Hak cipta"
 
 #. Dublin Core: Rights element description
 msgid "Information about rights held in and over the resource"
-msgstr ""
+msgstr "Informasi tentang hak cipta berada dan melingkupi sumber"
 
 #. Item Type Metadata
 msgid "Item Type Metadata"
-msgstr "Item Type Metadata"
+msgstr "Metadata Tipe Item"
 
 #. Item Type Metadata description
 msgid ""
 "The item type metadata element set, consisting of all item type elements "
 "bundled with Omeka and all item type elements created by an administrator."
-msgstr "The item type metadata element set, consisting of all item type elements bundled with Omeka and all item type elements created by an administrator."
+msgstr "Kumpulan elemen metadata tipe item, mengandung semua elemen tipe item yang dibundel bersama Omeka dan semua elemen tipe item yang dibuat oleh seorang administrator."
 
 #. Omeka Legacy File
 msgid "Omeka Legacy File"
-msgstr "Omeka Legacy File"
+msgstr "File Warisan Omeka"
 
 #. Omeka Legacy File description
 msgid ""
@@ -183,85 +183,85 @@ msgid ""
 "was included in the `files` table in previous versions of Omeka. These "
 "elements are common to all Omeka files. This set may be deprecated in future"
 " versions."
-msgstr "The metadata element set that, in addition to the Dublin Core element set, was included in the `files` table in previous versions of Omeka. These elements are common to all Omeka files. This set may be deprecated in future versions."
+msgstr "Kumpulan elemen metadata, di samping kumpulan elemen Dublin Core, telah disertakan dalam tabel `files` di Omeka versi sebelumnya. Elemen-elemen tersebut sudah biasa ada di semua file Omeka. Kumpulan ini mungkin akan ditinggalkan pada versi selanjutnya."
 
 #. Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
-msgstr "Additional Creator"
+msgstr "Tambahan Pembuat"
 
 #. Omeka Legacy File: Transcriber element
 msgid "Transcriber"
-msgstr "Transcriber"
+msgstr "Penyunting"
 
 #. Omeka Legacy File: Producer element
 msgid "Producer"
-msgstr "Producer"
+msgstr "Produser"
 
 #. Omeka Legacy File: Render Device element
 msgid "Render Device"
-msgstr "Render Device"
+msgstr "Perangkat Render"
 
 #. Omeka Legacy File: Render Details element
 msgid "Render Details"
-msgstr "Render Details"
+msgstr "Rincian Render"
 
 #. Omeka Legacy File: Capture Date element
 msgid "Capture Date"
-msgstr "Capture Date"
+msgstr "Tanggal Tangkap"
 
 #. Omeka Legacy File: Capture Device element
 msgid "Capture Device"
-msgstr "Capture Device"
+msgstr "Perangkat Tangkap"
 
 #. Omeka Legacy File: Capture Details element
 msgid "Capture Details"
-msgstr "Capture Details"
+msgstr "Rincian Tangkap"
 
 #. Omeka Legacy File: Change History element
 msgid "Change History"
-msgstr "Измени историја"
+msgstr "Ubah Riwayat"
 
 #. Omeka Legacy File: Watermark element
 msgid "Watermark"
-msgstr "Воден жиг"
+msgstr "Watermark"
 
 #. Omeka Legacy File: Encryption element
 msgid "Encryption"
-msgstr "Енкрипција"
+msgstr "Enkripsi"
 
 #. Omeka Legacy File: Compression element
 msgid "Compression"
-msgstr "Компресија"
+msgstr "Kompresi"
 
 #. Omeka Legacy File: Post Processing element
 msgid "Post Processing"
-msgstr "Пост процесуирање"
+msgstr "Pasca Proses"
 
 #. Omeka Image File
 msgid "Omeka Image File"
-msgstr "Омека слика фајл"
+msgstr "File Gambar Omeka"
 
 #. Omeka Image File description
 msgid ""
 "The metadata element set that was included in the `files_images` table in "
 "previous versions of Omeka. These elements are common to all image files."
-msgstr "Елементот за сетот на метаподатоци беше вклучен во  `files_images` табелата  во предходните верзии на Омека. Овие елементи се заеднички за сите фајлови на слики."
+msgstr "Kumpulan elemen metadata disertakan dalam tabel `files_images` di Omeka versi sebelumnya. Elemen-elemen tersebut sudah biasa ada di semua file gambar."
 
 #. Omeka Image File: Width element
 msgid "Width"
-msgstr "Ширина"
+msgstr "Lebar"
 
 #. Omeka Image File: Height element
 msgid "Height"
-msgstr "Висина"
+msgstr "Tinggi"
 
 #. Omeka Image File: Bit Depth element
 msgid "Bit Depth"
-msgstr "Bit Depth"
+msgstr "Kedalaman Bit"
 
 #. Omeka Image File: Channels element
 msgid "Channels"
-msgstr "Канали"
+msgstr "Saluran"
 
 #. Omeka Image File: Exif String element
 msgid "Exif String"
@@ -281,13 +281,13 @@ msgstr "IPTC Array"
 
 #. Omeka Video File
 msgid "Omeka Video File"
-msgstr "Омека видео фајл"
+msgstr "File Video Omeka"
 
 #. Omeka Video File description
 msgid ""
 "The metadata element set that was included in the `files_videos` table in "
 "previous versions of Omeka. These elements are common to all video files."
-msgstr "Елементот за сетот на метаподатоци беше вклучен во  `files_videos` табелата  во предходните верзии на Омека. Овие елементи се заеднички за сите видео фајлови."
+msgstr "Kumpulan elemen metadata disertakan dalam tabel `files_videos` di Omeka versi sebelumnya. Elemen-elemen tersebut sudah biasa ada di semua file video."
 
 #. Omeka Video File: Bitrate element
 msgid "Bitrate"
@@ -295,7 +295,7 @@ msgstr "Bitrate"
 
 # Omeka Video File: Duration element
 msgid "Duration"
-msgstr "Времетраење"
+msgstr "Durasi"
 
 #. Omeka Video File: Sample Rate element
 msgid "Sample Rate"
@@ -303,23 +303,23 @@ msgstr "Sample Rate"
 
 #. Omeka Video File: Codec element
 msgid "Codec"
-msgstr "Кодек"
+msgstr "Codec"
 
 #. Format (Legacy) Metadata element set
 msgid "Format (Legacy) Metadata"
-msgstr ""
+msgstr "Format (Warisan) Metadata"
 
 #. User role: Super
 msgid "Super"
-msgstr "Супер"
+msgstr "Super"
 
 #. User role: Admin
 msgid "Admin"
-msgstr "Администратор"
+msgstr "Admin"
 
 #. User role: Researcher
 msgid "Researcher"
-msgstr "Истражувач"
+msgstr "Peneliti"
 
 #: admin/themes/default/appearance/edit-navigation.php:3
 #: admin/themes/default/appearance/edit-settings.php:2
@@ -327,33 +327,33 @@ msgstr "Истражувач"
 #: admin/themes/default/themes/browse.php:2
 #: admin/themes/default/themes/config.php:3
 msgid "Appearance"
-msgstr ""
+msgstr "Tampilan"
 
 #: admin/themes/default/appearance/edit-navigation.php:14
 msgid ""
 "Check the links to display them in the main navigation. Click and drag the "
 "links into the preferred display order."
-msgstr ""
+msgstr "Periksa tautan untuk menampilkan merekan pada navigasi utama. Klik dan seret tautan ke urutan tampilan yang diinginkan."
 
 #: admin/themes/default/appearance/edit-navigation.php:19
 msgid "Add a Link to the Navigation"
-msgstr ""
+msgstr "Tambah sebuah tautan ke Navigasi"
 
 #: admin/themes/default/appearance/edit-navigation.php:21
 #: admin/themes/default/appearance/edit-navigation.php:37
 #: application/forms/Navigation.php:132
 msgid "Label"
-msgstr ""
+msgstr "Label"
 
 #: admin/themes/default/appearance/edit-navigation.php:23
 #: admin/themes/default/appearance/edit-navigation.php:38
 #: application/forms/Navigation.php:133
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: admin/themes/default/appearance/edit-navigation.php:25
 msgid "Add Link"
-msgstr ""
+msgstr "Tambah Tautan"
 
 #: admin/themes/default/appearance/edit-navigation.php:31
 #: admin/themes/default/appearance/edit-settings.php:21
@@ -370,7 +370,7 @@ msgstr ""
 #: application/controllers/UsersController.php:210
 #: application/forms/ItemTypes.php:169
 msgid "Save Changes"
-msgstr "Зачувај ги измените"
+msgstr "Simpan Perubahan"
 
 #: admin/themes/default/appearance/edit-navigation.php:39
 #: admin/themes/default/collections/edit.php:23
@@ -378,7 +378,7 @@ msgstr "Зачувај ги измените"
 #: admin/themes/default/items/edit.php:20
 #: admin/themes/default/items/show.php:45
 msgid "View Public Page"
-msgstr "Види ја јавната страна"
+msgstr "Lihat Halaman Publik"
 
 #: admin/themes/default/appearance/edit-navigation.php:40
 #: admin/themes/default/collections/edit.php:24
@@ -398,18 +398,18 @@ msgstr "Види ја јавната страна"
 #: admin/themes/default/users/browse.php:36
 #: admin/themes/default/users/edit.php:17
 msgid "Delete"
-msgstr "Избриши"
+msgstr "Hapus"
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:11
 #: admin/themes/default/collections/browse.php:64
 #: admin/themes/default/collections/browse.php:73
 msgid "Add a Collection"
-msgstr "Додади "
+msgstr "Tambah Koleksi"
 
 #: admin/themes/default/collections/add.php:11
 msgid "Add Collection"
-msgstr ""
+msgstr "Tambah Koleksi"
 
 #: admin/themes/default/collections/add.php:16
 #: admin/themes/default/collections/edit.php:30
@@ -420,7 +420,7 @@ msgstr ""
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:50
 msgid "Public"
-msgstr "Јавно"
+msgstr "Publik"
 
 #: admin/themes/default/collections/add.php:19
 #: admin/themes/default/collections/edit.php:35
@@ -431,7 +431,7 @@ msgstr "Јавно"
 #: admin/themes/default/items/quick-filters.php:8
 #: admin/themes/default/items/show.php:51
 msgid "Featured"
-msgstr "вклучени"
+msgstr "Istimewa"
 
 #: admin/themes/default/collections/browse.php:2
 #: application/libraries/Omeka/Navigation.php:149
@@ -441,7 +441,7 @@ msgstr "вклучени"
 #: application/tests/suite/Omeka/NavigationTest.php:950
 #: application/views/scripts/collections/browse.php:2
 msgid "Browse Collections"
-msgstr "Прелистајте колекции"
+msgstr "Ramban Koleksi"
 
 #: admin/themes/default/collections/browse.php:2
 #: admin/themes/default/item-types/browse.php:2
@@ -458,7 +458,7 @@ msgstr "(%s total)"
 #: admin/themes/default/collections/browse.php:23
 #: admin/themes/default/collections/show.php:51
 msgid "Contributors"
-msgstr ""
+msgstr "Kontributor"
 
 #: admin/themes/default/collections/browse.php:24
 #: admin/themes/default/files/show.php:55
@@ -466,18 +466,18 @@ msgstr ""
 #: application/views/scripts/files/show.php:51
 #: application/views/scripts/items/browse.php:19
 msgid "Date Added"
-msgstr "Датум на вметнување"
+msgstr "Tanggal Ditambahkan"
 
 #: admin/themes/default/collections/browse.php:25
 #: admin/themes/default/collections/show.php:46
 #: admin/themes/default/item-types/show.php:42
 msgid "Total Number of Items"
-msgstr "Total Number of Items"
+msgstr "Jumlah Total Item"
 
 #: admin/themes/default/collections/browse.php:37
 #: admin/themes/default/items/browse.php:72
 msgid "(Private)"
-msgstr ""
+msgstr "(Privat)"
 
 #: admin/themes/default/collections/browse.php:40
 #: admin/themes/default/collections/show.php:32
@@ -494,27 +494,27 @@ msgstr ""
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:33
 msgid "Edit"
-msgstr "Измени"
+msgstr "Edit"
 
 #: admin/themes/default/collections/browse.php:49
 msgid "No contributors"
-msgstr ""
+msgstr "Tidak ada kontributor"
 
 #: admin/themes/default/collections/browse.php:67
 msgid "There are no collections on this page."
-msgstr "Нема колекции на оваа страна."
+msgstr "Tidak ada koleksi di halaman ini."
 
 #: admin/themes/default/collections/browse.php:67
 msgid "View All Collections"
-msgstr "Види ги сите колекции"
+msgstr "Lihat Semua Koleksi"
 
 #: admin/themes/default/collections/browse.php:70
 msgid "You have no collections."
-msgstr ""
+msgstr "Anda tidak punya koleksi."
 
 #: admin/themes/default/collections/browse.php:72
 msgid "Get started by adding your first collection."
-msgstr ""
+msgstr "Mulailah dengan menambahkan koleksi pertama anda."
 
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
@@ -523,23 +523,23 @@ msgstr ""
 #: application/views/scripts/collections/show.php:4
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
-msgstr ""
+msgstr "[Untitled]"
 
 #: admin/themes/default/collections/edit.php:8
 #, php-format
 msgid "Edit Collection #%s"
-msgstr "Измени колекција #%s"
+msgstr "Edit Koleksi #%s"
 
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Collection #%s"
-msgstr ""
+msgstr "Koleksi #%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
 #: application/views/scripts/index.php:35
 msgid "Recently Added Items"
-msgstr "Неодамна додадени ставки"
+msgstr "Item Terbaru Ditambahkan"
 
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/collections/show.php:42
@@ -547,7 +547,7 @@ msgstr "Неодамна додадени ставки"
 #: admin/themes/default/items/show.php:51
 #: application/views/helpers/ItemSearchFilters.php:57
 msgid "Yes"
-msgstr ""
+msgstr "Ya"
 
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/collections/show.php:42
@@ -555,19 +555,19 @@ msgstr ""
 #: admin/themes/default/items/show.php:51
 #: application/views/helpers/ItemSearchFilters.php:57
 msgid "No"
-msgstr ""
+msgstr "Tidak"
 
 #: admin/themes/default/collections/show.php:56
 msgid "No contributors."
-msgstr ""
+msgstr "Tidak ada kontributor."
 
 #: admin/themes/default/common/appearance-nav.php:5
 msgid "Themes"
-msgstr "Теми"
+msgstr "Tema"
 
 #: admin/themes/default/common/appearance-nav.php:11
 msgid "Navigation"
-msgstr ""
+msgstr "Navigasi"
 
 #: admin/themes/default/common/appearance-nav.php:15
 #: admin/themes/default/common/global-nav.php:24
@@ -577,26 +577,26 @@ msgstr ""
 #: admin/themes/default/settings/edit-security.php:3
 #: admin/themes/default/settings/edit-settings.php:3
 msgid "Settings"
-msgstr "Settings"
+msgstr "Setelan"
 
 #: admin/themes/default/common/content-nav.php:5
 #: admin/themes/default/index.php:2
 msgid "Dashboard"
-msgstr ""
+msgstr "Dasbor"
 
 #: admin/themes/default/common/content-nav.php:9
 #: admin/themes/default/items/batch-delete.php:17
 #: admin/themes/default/items/batch-edit.php:17
 msgid "Items"
-msgstr ""
+msgstr "Item"
 
 #: admin/themes/default/common/content-nav.php:13
 msgid "Collections"
-msgstr "Колекции"
+msgstr "Koleksi"
 
 #: admin/themes/default/common/content-nav.php:17
 msgid "Item Types"
-msgstr ""
+msgstr "Tipe Item"
 
 #: admin/themes/default/common/content-nav.php:21
 #: admin/themes/default/items/browse.php:94
@@ -604,290 +604,290 @@ msgstr ""
 #: application/views/scripts/items/browse.php:44
 #: application/views/scripts/items/show.php:26
 msgid "Tags"
-msgstr "Тагови"
+msgstr "Tag"
 
 #: admin/themes/default/common/delete-confirm.php:3
 #: application/views/scripts/common/delete-confirm.php:3
 #, php-format
 msgid "Delete %s"
-msgstr ""
+msgstr "Hapus %s"
 
 #: admin/themes/default/common/delete-confirm.php:11
 #: application/views/scripts/common/delete-confirm.php:12
 msgid "Are you sure?"
-msgstr "Дали сте сигурни/на?"
+msgstr "Anda yakin?"
 
 #: admin/themes/default/common/footer.php:6
 #: admin/themes/default/common/login-footer.php:7
 msgid "Powered by Omeka"
-msgstr "Придвижувано од Омека"
+msgstr "Powered by Omeka"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Documentation"
-msgstr "Документација"
+msgstr "Dokumentasi"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Support Forums"
-msgstr "Форум за поддршка"
+msgstr "Forum Dukungan"
 
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
 #: admin/themes/default/plugins/browse.php:52
 #, php-format
 msgid "Version %s"
-msgstr "Верзија %s"
+msgstr "Versi %s"
 
 #: admin/themes/default/common/footer.php:10
 #: admin/themes/default/system-info/index.php:2
 msgid "System Information"
-msgstr ""
+msgstr "Informasi Sistem"
 
 #: admin/themes/default/common/global-nav.php:6
 #: admin/themes/default/plugins/browse.php:2
 msgid "Plugins"
-msgstr "Плагини"
+msgstr "Plugin"
 
 #: admin/themes/default/common/global-nav.php:18
 msgid "Users"
-msgstr "Корисници"
+msgstr "Pengguna"
 
 #: admin/themes/default/common/header.php:11
 #: admin/themes/default/upgrade/index.php:6
 #: admin/themes/default/upgrade/migrate.php:6
 #: application/views/scripts/common/admin-bar.php:11
 msgid "Omeka Admin"
-msgstr "Омека админ"
+msgstr "Admin Omeka"
 
 #: admin/themes/default/common/header.php:60
 #: application/views/scripts/common/admin-bar.php:7
 #, php-format
 msgid "Welcome, %s"
-msgstr "Добредојдовте, %s"
+msgstr "Selamat datang, %s"
 
 #: admin/themes/default/common/header.php:61
 #: application/views/scripts/common/admin-bar.php:15
 msgid "Log Out"
-msgstr "Одјави се"
+msgstr "Keluar"
 
 #: admin/themes/default/common/pagination_control.php:11
 msgid "&lt;"
-msgstr ""
+msgstr "&lt;"
 
 #: admin/themes/default/common/pagination_control.php:34
 #, php-format
 msgid "%s of %s"
-msgstr ""
+msgstr "%s dari %s"
 
 #: admin/themes/default/common/pagination_control.php:42
 msgid "&gt;"
-msgstr ""
+msgstr "&gt;"
 
 #: admin/themes/default/common/settings-nav.php:6
 msgid "General"
-msgstr ""
+msgstr "Umum"
 
 #: admin/themes/default/common/settings-nav.php:10
 msgid "Security"
-msgstr ""
+msgstr "Keamanan"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: application/views/helpers/SearchForm.php:34
 #: application/views/scripts/items/search-form.php:186
 msgid "Search"
-msgstr "Пребарај"
+msgstr "Cari"
 
 #: admin/themes/default/common/settings-nav.php:20
 msgid "Element Sets"
-msgstr ""
+msgstr "Kumpulan Elemen"
 
 #: admin/themes/default/common/settings-nav.php:26
 msgid "Item Type Elements"
-msgstr ""
+msgstr "Elemen Tipe Item"
 
 #: admin/themes/default/element-sets/browse.php:16
 #: application/forms/ItemTypes.php:141
 msgid "Name"
-msgstr "Име"
+msgstr "Nama"
 
 #: admin/themes/default/element-sets/edit.php:5
 msgid "Edit Element Set"
-msgstr ""
+msgstr "Edit Kumpulan Elemen"
 
 #: admin/themes/default/element-sets/edit.php:17
 msgid ""
 "Click and drag the elements into the preferred display order. Click the "
 "right arrows to add customized comments to element descriptions."
-msgstr ""
+msgstr "Klik dan seret elemen ke urutan tampilan yang diinginkan. Klik panah kanan untuk menambah komentar sesuaian ke deskripsi elemen."
 
 #: admin/themes/default/element-sets/edit.php:29
 msgid "Comment"
-msgstr ""
+msgstr "Komentar"
 
 #: admin/themes/default/error/403.php:2
 msgid "403: Forbidden"
-msgstr "403:Забрането"
+msgstr "403: Terlarang"
 
 #: admin/themes/default/error/403.php:6
 msgid "Sorry, you do not have permission to access this page."
-msgstr "Извинете, Вие немате дозвола да пристапите до страната"
+msgstr "Maaf, anda tidak punya izin untuk mengakses halaman ini."
 
 #: admin/themes/default/error/403.php:10 admin/themes/default/error/404.php:9
 #: admin/themes/default/error/405.php:8
 msgid "site administrator"
-msgstr "Администратор на сајтот"
+msgstr "administrator situs"
 
 #: admin/themes/default/error/403.php:11
 #, php-format
 msgid "If you think you should have permission, try contacting the %s."
-msgstr "If you think you should have permission, try contacting the %s."
+msgstr "Bila menurut anda memang anda perlu punya izin, coba hubungi %s."
 
 #: admin/themes/default/error/404.php:2
 msgid "404: Page Not Found"
-msgstr "404: Страната не е пронајдена"
+msgstr "404: Halaman Tidak Ditemukan"
 
 #: admin/themes/default/error/404.php:6
 msgid ""
 "You&#8217;ve tried to access a page that does not seem to exist. Sometimes "
 "this happens. Below is a quick break-down of the items, collections, and "
 "exhibits on this site."
-msgstr ""
+msgstr "Anda&#8217; telah berusaha mengakses sebuah halaman yang tampaknya tidak ada. Terkadang hal ini terjadi. Di bawah ini adalah uraian cepat mengenai item, koleksi, dan pameran pada situs ini."
 
 #: admin/themes/default/error/404.php:10
 #, php-format
 msgid "If this does not help, try contacting the %s."
-msgstr ""
+msgstr "Bila ini tidak juga menolong, coba hubungi %s."
 
 #: admin/themes/default/error/404.php:16 admin/themes/default/index.php:46
 msgid "Recent Items"
-msgstr ""
+msgstr "Item Terbaru"
 
 #: admin/themes/default/error/404.php:29 admin/themes/default/index.php:59
 msgid "Add a new item"
-msgstr ""
+msgstr "Tambah item baru"
 
 #: admin/themes/default/error/404.php:36 admin/themes/default/index.php:64
 msgid "Recent Collections"
-msgstr ""
+msgstr "Koleksi Terbaru"
 
 #: admin/themes/default/error/404.php:50 admin/themes/default/index.php:78
 msgid "Add a new collection"
-msgstr ""
+msgstr "Tambah koleksi baru"
 
 #: admin/themes/default/error/405.php:2
 msgid "405: Method Not Allowed"
-msgstr ""
+msgstr "405: Metode Tidak Diperkenankan"
 
 #: admin/themes/default/error/405.php:9
 #, php-format
 msgid ""
 "You must use a different method to access this URL. If you reached this page"
 " by following a link or clicking a button in Omeka, please contact the %s."
-msgstr ""
+msgstr "Anda harus menggunakan metode berbeda untuk mengakses URL ini. Bila anda sampai ke halaman ini melalui sebuah tautan atau mengklik sebuah tombol di Omeka, silahkan hubungi %s."
 
 #: admin/themes/default/files/edit.php:8
 #, php-format
 msgid "Edit File #%s"
-msgstr ""
+msgstr "Edit File #%s"
 
 #: admin/themes/default/files/show.php:9
 #: application/views/scripts/files/show.php:9
 #, php-format
 msgid "File #%s"
-msgstr ""
+msgstr "File #%s"
 
 #: admin/themes/default/files/show.php:36
 #: application/libraries/globals.php:398
 msgid "Item"
-msgstr ""
+msgstr "Item"
 
 #: admin/themes/default/files/show.php:41
 msgid "Format Metadata"
-msgstr ""
+msgstr "Format Metadata"
 
 #: admin/themes/default/files/show.php:43
 #: application/views/scripts/files/show.php:21
 msgid "Filename"
-msgstr ""
+msgstr "Nama file"
 
 #: admin/themes/default/files/show.php:45
 #: application/views/scripts/files/show.php:26
 msgid "Original Filename"
-msgstr "Оригинално име на фајлот"
+msgstr "Nama Orisinil file"
 
 #: admin/themes/default/files/show.php:47
 #: application/views/scripts/files/show.php:31
 msgid "File Size"
-msgstr "Големина на фајлот"
+msgstr "Ukuran File"
 
 #: admin/themes/default/files/show.php:48
 #: application/views/scripts/files/show.php:32
 #, php-format
 msgid "%s bytes"
-msgstr ""
+msgstr "%s bytes"
 
 #: admin/themes/default/files/show.php:53
 #: application/views/scripts/files/show.php:49
 msgid "File History"
-msgstr "Историја на фајлот"
+msgstr "Riwayat File"
 
 #: admin/themes/default/files/show.php:57
 #: application/views/scripts/files/show.php:55
 msgid "Date Modified"
-msgstr "Дата на промени"
+msgstr "Tanggal Dimodifikasi"
 
 #: admin/themes/default/files/show.php:59
 #: application/views/scripts/files/show.php:59
 msgid "Authentication"
-msgstr ""
+msgstr "Autentikasi"
 
 #: admin/themes/default/files/show.php:65
 #: application/views/scripts/files/show.php:37
 msgid "Type Metadata"
-msgstr "Тип на метаподаток"
+msgstr "Metadata Tipe"
 
 #: admin/themes/default/files/show.php:67
 #: application/views/scripts/files/show.php:39
 msgid "Mime Type"
-msgstr ""
+msgstr "Mime Type"
 
 #: admin/themes/default/files/show.php:69
 #: application/views/scripts/files/show.php:43
 msgid "File Type / OS"
-msgstr "File Type / Оперативен систем"
+msgstr "Tipe File / OS"
 
 #: admin/themes/default/files/show.php:76
 msgid "Embedded Metadata"
-msgstr ""
+msgstr "Embedded Metadata"
 
 #: admin/themes/default/files/show.php:82
 #: admin/themes/default/items/browse.php:133
 #: admin/themes/default/items/show.php:86
 msgid "Output Formats"
-msgstr ""
+msgstr "Format Keluaran"
 
 #: admin/themes/default/index.php:6
 msgid "items"
-msgstr ""
+msgstr "item"
 
 #: admin/themes/default/index.php:7
 msgid "collections"
-msgstr ""
+msgstr "koleksi"
 
 #: admin/themes/default/index.php:8
 msgid "tags"
-msgstr ""
+msgstr "tag"
 
 #: admin/themes/default/index.php:11
 msgid "plugins"
-msgstr ""
+msgstr "plugin"
 
 #: admin/themes/default/index.php:14
 msgid "users"
-msgstr ""
+msgstr "pengguna"
 
 #: admin/themes/default/index.php:18
 msgid "theme"
-msgstr ""
+msgstr "tema"
 
 #: admin/themes/default/index.php:29
 msgid "A new version of Omeka is available for download."
@@ -904,100 +904,100 @@ msgstr ""
 #: admin/themes/default/items/tag-form.php:23
 #: application/views/helpers/ElementInput.php:113
 msgid "Remove"
-msgstr "одстрани"
+msgstr "Hapus"
 
 #: admin/themes/default/item-types/add-new-element.php:6
 msgid "Element Name"
-msgstr ""
+msgstr "Nama Elemen"
 
 #: admin/themes/default/item-types/add-new-element.php:22
 msgid "Element Description"
-msgstr ""
+msgstr "Deskripsi Elemen"
 
 #: admin/themes/default/item-types/add.php:2
 #: application/forms/ItemTypes.php:161
 msgid "Add Item Type"
-msgstr ""
+msgstr "Tambah Tipe Item"
 
 #: admin/themes/default/item-types/browse.php:2
 msgid "Browse Item Types"
-msgstr ""
+msgstr "Ramban Tipe Item"
 
 #: admin/themes/default/item-types/browse.php:7
 #: admin/themes/default/item-types/browse.php:40
 msgid "Add an Item Type"
-msgstr ""
+msgstr "Tambah Tipe Item"
 
 #: admin/themes/default/item-types/browse.php:14
 msgid "Type Name"
-msgstr ""
+msgstr "Nama Tipe"
 
 #: admin/themes/default/item-types/browse.php:16
 msgid "Total Items"
-msgstr ""
+msgstr "Total Item"
 
 #: admin/themes/default/item-types/edit.php:8
 #, php-format
 msgid "Edit Item Type #%s"
-msgstr ""
+msgstr "Edit Tipe Item #%s"
 
 #: admin/themes/default/item-types/form.php:14
 msgid "Item Type Information"
-msgstr ""
+msgstr "Informasi Tipe Item"
 
 #: admin/themes/default/item-types/form.php:15
 #: admin/themes/default/users/add.php:6 admin/themes/default/users/edit.php:14
 #: install/views/scripts/index/index.phtml:14
 msgid "required field"
-msgstr ""
+msgstr "field dibutuhkan"
 
 #: admin/themes/default/item-types/form.php:25
 #: admin/themes/default/item-types/show.php:16
 msgid "Elements"
-msgstr "Елементи"
+msgstr "Elemen"
 
 #: admin/themes/default/item-types/form.php:42
 #: admin/themes/default/items/tag-form.php:22
 #: admin/themes/default/settings/edit-item-type-elements.php:22
 msgid "Undo"
-msgstr ""
+msgstr "Undo"
 
 #: admin/themes/default/item-types/form.php:80
 #: admin/themes/default/item-types/form.php:87
 msgid "Add Element"
-msgstr ""
+msgstr "Tambah Elemen"
 
 #: admin/themes/default/item-types/form.php:84
 msgid "Existing"
-msgstr ""
+msgstr "Tersedia"
 
 #: admin/themes/default/item-types/form.php:85
 msgid "New"
-msgstr "Нов"
+msgstr "Baru"
 
 #: admin/themes/default/item-types/show.php:8
 #, php-format
 msgid "Item Type #%s"
-msgstr ""
+msgstr "Tipe Item #%s"
 
 #: admin/themes/default/item-types/show.php:25
 msgid "There are no elements."
-msgstr ""
+msgstr "Tidak ada elemen."
 
 #: admin/themes/default/item-types/show.php:39
 msgid "There are no recently added items."
-msgstr ""
+msgstr "Tidak ada item terbaru ditambahkan."
 
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:20
 #: admin/themes/default/items/browse.php:116
 #: admin/themes/default/items/browse.php:151
 msgid "Add an Item"
-msgstr ""
+msgstr "Tambah Item"
 
 #: admin/themes/default/items/add.php:12
 msgid "Add Item"
-msgstr ""
+msgstr "Tambah Item"
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit.php:89
@@ -1007,85 +1007,85 @@ msgstr ""
 #: application/libraries/globals.php:400
 #: application/views/scripts/items/show.php:18
 msgid "Collection"
-msgstr ""
+msgstr "Koleksi"
 
 #: admin/themes/default/items/batch-delete.php:2
 msgid "Batch Delete Items"
-msgstr ""
+msgstr "Hapus Item Serempak"
 
 #: admin/themes/default/items/batch-delete.php:38
 msgid ""
 "Some items were excluded because you do not have permission to delete them."
-msgstr ""
+msgstr "Beberapa item tidak disertakan karena anda tidak punya izin untuk menghapus mereka."
 
 #: admin/themes/default/items/batch-delete.php:41
 msgid "Checked items will be deleted."
-msgstr ""
+msgstr "Item terpilih akan dihapus."
 
 #: admin/themes/default/items/batch-delete.php:50
 #: admin/themes/default/items/batch-edit.php:116
 msgid "Delete Items"
-msgstr ""
+msgstr "Hapus Item"
 
 #: admin/themes/default/items/batch-edit.php:2
 msgid "Batch Edit Items"
-msgstr ""
+msgstr "Edit Item Serempak"
 
 #: admin/themes/default/items/batch-edit.php:36
 msgid "Changes will be applied to checked items."
-msgstr ""
+msgstr "Perubahan akan diterapkan ke item terpilih."
 
 #: admin/themes/default/items/batch-edit.php:41
 msgid "Item Metadata"
-msgstr ""
+msgstr "Metadata Item"
 
 #: admin/themes/default/items/batch-edit.php:46
 msgid "Public?"
-msgstr ""
+msgstr "Publik?"
 
 #: admin/themes/default/items/batch-edit.php:49
 #: admin/themes/default/items/batch-edit.php:64
 #: admin/themes/default/items/batch-edit.php:78
 #: admin/themes/default/items/batch-edit.php:93
 msgid "Select Below"
-msgstr ""
+msgstr "Pilih Di bawah"
 
 #: admin/themes/default/items/batch-edit.php:51
 msgid "Not Public"
-msgstr "Не-јавно"
+msgstr "Tidak Publik"
 
 #: admin/themes/default/items/batch-edit.php:61
 msgid "Featured?"
-msgstr ""
+msgstr "Istimewa?"
 
 #: admin/themes/default/items/batch-edit.php:66
 msgid "Not Featured"
-msgstr ""
+msgstr "Tidak Istimewa"
 
 #: admin/themes/default/items/batch-edit.php:74
 #: admin/themes/default/items/item-type-form.php:3
 msgid "Item Type"
-msgstr ""
+msgstr "Tipe Item"
 
 #: admin/themes/default/items/batch-edit.php:83
 #: admin/themes/default/items/batch-edit.php:98
 msgid "Remove?"
-msgstr ""
+msgstr "Hapus?"
 
 #: admin/themes/default/items/batch-edit.php:104
 #: admin/themes/default/items/tag-form.php:8
 #: admin/themes/default/items/tag-form.php:11
 msgid "Add Tags"
-msgstr ""
+msgstr "Tambah Tag"
 
 #: admin/themes/default/items/batch-edit.php:107
 #, php-format
 msgid "List of tags to add to all checked items, separated by %s."
-msgstr ""
+msgstr "Daftar tag untuk ditambahkan ke semua item terpilih, dipisahkan dengan %s."
 
 #: admin/themes/default/items/batch-edit.php:117
 msgid "Check if you wish to delete selected items."
-msgstr ""
+msgstr "Periksa bila anda ingin menghapus item terpilih."
 
 #: admin/themes/default/items/browse.php:3
 #: application/libraries/Omeka/Navigation.php:142
@@ -1126,7 +1126,7 @@ msgstr ""
 #: application/views/scripts/items/browse.php:2
 #: application/views/scripts/items/tags.php:2
 msgid "Browse Items"
-msgstr ""
+msgstr "Ramban Item"
 
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
@@ -1135,376 +1135,376 @@ msgstr ""
 #: application/libraries/globals.php:2648
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
-msgstr ""
+msgstr "Cari Item"
 
 #: admin/themes/default/items/browse.php:37
 msgid "Select"
-msgstr ""
+msgstr "Pilih"
 
 #: admin/themes/default/items/browse.php:95
 msgid "No Tags"
-msgstr ""
+msgstr "Tidak ada Tag"
 
 #: admin/themes/default/items/browse.php:139
 msgid "Details"
-msgstr "Детали"
+msgstr "Rincian"
 
 #: admin/themes/default/items/browse.php:140
 msgid "Show Details"
-msgstr "Покажи детали"
+msgstr "Tampilkan Rincian"
 
 #: admin/themes/default/items/browse.php:141
 msgid "Hide Details"
-msgstr "Сокриј детали"
+msgstr "Sembunyikan Rincian"
 
 #: admin/themes/default/items/browse.php:148
 msgid "You have no items."
-msgstr ""
+msgstr "Anda tidak punya item."
 
 #: admin/themes/default/items/browse.php:150
 msgid "Get started by adding your first item."
-msgstr ""
+msgstr "Mulailah dengan menambah item pertama anda."
 
 #: admin/themes/default/items/browse.php:154
 #, php-format
 msgid "The query searched %s items and returned no results."
-msgstr ""
+msgstr "Query mencari %s item dan tidak ada hasil."
 
 #: admin/themes/default/items/browse.php:154
 msgid "refine your search"
-msgstr ""
+msgstr "perbaiki pencarian anda"
 
 #: admin/themes/default/items/browse.php:154
 #, php-format
 msgid "Would you like to %s?"
-msgstr ""
+msgstr "Maukah anda untuk %s?"
 
 #: admin/themes/default/items/edit.php:8
 #, php-format
 msgid "Edit Item #%s"
-msgstr ""
+msgstr "Edit Item #%s"
 
 #: admin/themes/default/items/files-form.php:2
 msgid "Click and drag the files into the preferred display order."
-msgstr ""
+msgstr "Klik dan seret file ke urutan tampilan yang diinginkan."
 
 #: admin/themes/default/items/files-form.php:12
 msgid "Delete "
-msgstr ""
+msgstr "Hapus"
 
 #: admin/themes/default/items/files-form.php:21
 msgid "Add New Files"
-msgstr ""
+msgstr "Tambah File Baru"
 
 #: admin/themes/default/items/files-form.php:23
 #, php-format
 msgid "The maximum file size is %s."
-msgstr ""
+msgstr "Maksimal ukuran file %s."
 
 #: admin/themes/default/items/files-form.php:26
 msgid "Find a File"
-msgstr ""
+msgstr "Temukan File"
 
 #: admin/themes/default/items/form.php:25
 msgid "Add Another File"
-msgstr "Додај друг фајл"
+msgstr "Tambah File Lainnya"
 
 #: admin/themes/default/items/item-type-form.php:15
 msgid "Pick this type"
-msgstr ""
+msgstr "Pilih tipe ini"
 
 #: admin/themes/default/items/quick-filters.php:2
 #: admin/themes/default/items/quick-filters.php:4
 msgid "Quick Filter"
-msgstr ""
+msgstr "Saring Cepat"
 
 #: admin/themes/default/items/quick-filters.php:5
 msgid "View All"
-msgstr ""
+msgstr "Lihat Semua"
 
 #: admin/themes/default/items/quick-filters.php:7
 msgid "Private"
-msgstr ""
+msgstr "Privat"
 
 #: admin/themes/default/items/search-form.php:13
 #: application/views/scripts/items/search-form.php:13
 msgid "Search for Keywords"
-msgstr "Пребарувај по клучни зборови"
+msgstr "Mencari Kata kunci"
 
 #: admin/themes/default/items/search-form.php:26
 #: application/views/scripts/items/search-form.php:25
 msgid "Narrow by Specific Fields"
-msgstr ""
+msgstr "Dibatasi dengan Field Tertentu"
 
 #: admin/themes/default/items/search-form.php:27
 #: application/views/scripts/items/search-form.php:77
 msgid "Add a Field"
-msgstr "Додади поле"
+msgstr "Tambah Field"
 
 #: admin/themes/default/items/search-form.php:63
 #: application/views/scripts/items/search-form.php:60
 msgid "contains"
-msgstr "содржи"
+msgstr "mengandung"
 
 #: admin/themes/default/items/search-form.php:64
 #: application/views/scripts/items/search-form.php:61
 msgid "does not contain"
-msgstr "не содржи"
+msgstr "tidak mengandung"
 
 #: admin/themes/default/items/search-form.php:65
 #: application/views/scripts/items/search-form.php:62
 msgid "is exactly"
-msgstr "е точно"
+msgstr "persis"
 
 #: admin/themes/default/items/search-form.php:66
 #: application/views/scripts/items/search-form.php:63
 msgid "is empty"
-msgstr "е празно"
+msgstr "kosong"
 
 #: admin/themes/default/items/search-form.php:67
 #: application/views/scripts/items/search-form.php:64
 msgid "is not empty"
-msgstr "не е празно"
+msgstr "tidak kosong"
 
 #: admin/themes/default/items/search-form.php:84
 #: application/views/scripts/items/search-form.php:81
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
-msgstr ""
+msgstr "Cari berdasarkan rentang ID#s (contoh: 1-4, 156, 79)"
 
 #: admin/themes/default/items/search-form.php:98
 #: application/views/scripts/items/search-form.php:92
 msgid "Search By Collection"
-msgstr "Пребарај според колекција"
+msgstr "Cari Berdasarkan Koleksi"
 
 #: admin/themes/default/items/search-form.php:114
 #: application/views/scripts/items/search-form.php:106
 msgid "Search By Type"
-msgstr "Пребарај според тип"
+msgstr "Cari Berdasarkan Tipe"
 
 #: admin/themes/default/items/search-form.php:131
 #: application/views/scripts/items/search-form.php:122
 msgid "Search By User"
-msgstr "Пребарај според корисник"
+msgstr "Cari Berdasarkan Pengguna"
 
 #: admin/themes/default/items/search-form.php:148
 #: application/views/scripts/items/search-form.php:137
 msgid "Search By Tags"
-msgstr "Пребарај според тагови"
+msgstr "Cari Berdasarkan Tag"
 
 #: admin/themes/default/items/search-form.php:163
 #: application/views/scripts/items/search-form.php:150
 msgid "Public/Non-Public"
-msgstr "Јавно/Не-јавно"
+msgstr "Publik/Non-Publik"
 
 #: admin/themes/default/items/search-form.php:172
 #: application/views/scripts/items/search-form.php:158
 msgid "Only Public Items"
-msgstr "Само јавни ајтеми"
+msgstr "Hanya Item Publik"
 
 #: admin/themes/default/items/search-form.php:173
 #: application/views/scripts/items/search-form.php:159
 msgid "Only Non-Public Items"
-msgstr "Само не-јавни ајтеми"
+msgstr "Hanya Item Non-Publik"
 
 #: admin/themes/default/items/search-form.php:183
 #: application/views/scripts/items/search-form.php:168
 msgid "Featured/Non-Featured"
-msgstr ""
+msgstr "Istimewa/Tidak istimewa"
 
 #: admin/themes/default/items/search-form.php:192
 #: application/views/scripts/items/search-form.php:176
 msgid "Only Featured Items"
-msgstr ""
+msgstr "Hanya Item Istimewa"
 
 #: admin/themes/default/items/search-form.php:193
 #: application/views/scripts/items/search-form.php:177
 msgid "Only Non-Featured Items"
-msgstr ""
+msgstr "Hanya Item Tidak Istimewa"
 
 #: admin/themes/default/items/search-form.php:203
 msgid "Search for items"
-msgstr ""
+msgstr "Cari item"
 
 #: admin/themes/default/items/show.php:8
 #, php-format
 msgid "Item #%s"
-msgstr ""
+msgstr "Item #%s"
 
 #: admin/themes/default/items/show.php:30
 msgid "Prev Item"
-msgstr ""
+msgstr "Item Sblmnya"
 
 #: admin/themes/default/items/show.php:35
 msgid "Next Item"
-msgstr ""
+msgstr "Item Sdhnya"
 
 #: admin/themes/default/items/show.php:71
 msgid "File Metadata"
-msgstr ""
+msgstr "Metadata File"
 
 #: admin/themes/default/items/show.php:74
 msgid "There are no files for this item yet."
-msgstr ""
+msgstr "Belum ada file untuk item ini."
 
 #: admin/themes/default/items/show.php:74
 msgid "Add a File"
-msgstr ""
+msgstr "Tambah File"
 
 #: admin/themes/default/items/show.php:78
 msgid "View File Metadata"
-msgstr ""
+msgstr "Lihat Metadata File"
 
 #: admin/themes/default/items/show.php:91
 msgid "Bibliographic Citation"
-msgstr ""
+msgstr "Kutipan bibliografi"
 
 #: admin/themes/default/items/tag-form.php:10
 #, php-format
 msgid "Separate tags with %s"
-msgstr ""
+msgstr "Pisahkan tag dengan %s"
 
 #: admin/themes/default/items/tag-form.php:15
 msgid "All Tags"
-msgstr ""
+msgstr "Semua Tag"
 
 #: admin/themes/default/items/tags.php:2
 msgid "Browse Items by Tag"
-msgstr ""
+msgstr "Ramban Item berdasarkan Tag"
 
 #: admin/themes/default/items/tags.php:9
 #: admin/themes/default/tags/browse.php:49
 msgid "There are no tags to display. You must first tag some items."
-msgstr ""
+msgstr "Tidak ada tag untuk ditampilkan. Anda harus memberi tag beberapa item terlebih dulu."
 
 #: admin/themes/default/plugins/browse.php:26
 #, php-format
 msgid "This version of %1$s requires at least Omeka %2$s."
-msgstr ""
+msgstr "Versi %1$s ini membutuhkan sedikitnya oleh Omeka %2$s."
 
 #: admin/themes/default/plugins/browse.php:29
 #, php-format
 msgid ""
 "%1$s requires the following plugins to be installed, activated, and loaded: "
 "%2$s"
-msgstr ""
+msgstr "%1$s membutuhkan plugin berikut untuk diinstalasikan, diaktivasikan, dan dimuat: %2$s"
 
 #: admin/themes/default/plugins/browse.php:32
 msgid "This is not a valid plugin."
-msgstr ""
+msgstr "Ini bukanlah sebuah plugin yang valid."
 
 #: admin/themes/default/plugins/browse.php:57
 #, php-format
 msgid "by %s"
-msgstr ""
+msgstr "oleh %s"
 
 #: admin/themes/default/plugins/browse.php:66
 #, php-format
 msgid "You have a new version of %s. Please upgrade!"
-msgstr ""
+msgstr "Anda punya versi terbaru %s. Silahkan tingkatkan!"
 
 #: admin/themes/default/plugins/browse.php:87
 msgid "Upgrade"
-msgstr ""
+msgstr "Tingkatkan"
 
 #: admin/themes/default/plugins/browse.php:97
 msgid "Configure"
-msgstr ""
+msgstr "Konfigurasi"
 
 #: admin/themes/default/plugins/browse.php:103
 msgid "Deactivate"
-msgstr "Деактивирај"
+msgstr "Nonaktifkan"
 
 #: admin/themes/default/plugins/browse.php:103
 #: admin/themes/default/users/activate.php:31
 #: application/views/scripts/users/activate.php:26
 msgid "Activate"
-msgstr "Активирај"
+msgstr "Aktifkan"
 
 #: admin/themes/default/plugins/browse.php:113
 #: admin/themes/default/plugins/confirm-uninstall.php:16
 msgid "Uninstall"
-msgstr "Uninstall"
+msgstr "Cabut"
 
 #: admin/themes/default/plugins/browse.php:126
 #: application/forms/Install.php:167
 msgid "Install"
-msgstr "Инсталирај"
+msgstr "Instalasikan"
 
 #: admin/themes/default/plugins/browse.php:137
 msgid ""
 "You do not have any plugins installed. Add them to the plugins directory to "
 "see them listed here."
-msgstr ""
+msgstr "Anda tidak punya plugin apapun yang diinstalasikan. Tambahkan mereka ke direktori plugin untuk melihat terdaftar di sini."
 
 #: admin/themes/default/plugins/config.php:2
 #, php-format
 msgid "Configure Plugin: %s"
-msgstr ""
+msgstr "Konfigurasi Plugin: %s"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:2
 #, php-format
 msgid "Uninstall Plugin: %s"
-msgstr ""
+msgstr "Mencabut Plugin: %s"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:7
 #, php-format
 msgid "Are you sure you want to uninstall %s?"
-msgstr ""
+msgstr "Anda yakin untuk mencabut %s?"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:12
 msgid "Yes, I want to uninstall this plugin."
-msgstr "Да, сакам да го uninstall овој плагин."
+msgstr "Ya, saya ingin mencabut plugin ini."
 
 #: admin/themes/default/plugins/confirm-uninstall.php:17
 msgid "or"
-msgstr "или"
+msgstr "atau"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:17
 #: admin/themes/default/settings/edit-item-type-elements.php:50
 msgid "Cancel"
-msgstr "Откажи"
+msgstr "Batal"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:12
 msgid "edit a specific item type"
-msgstr ""
+msgstr "Mengedit tipe item tertentu"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:11
 #, php-format
 msgid ""
 "Customize the element descriptions below. To re-order the elements, %s."
-msgstr ""
+msgstr "Sesuaikan deskripsi elemen di bawah ini. Untuk mengurut-ulang elemen, %s."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:42
 msgid "Confirm Delete"
-msgstr ""
+msgstr "Konfirmasi Penghapusan"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:43
 msgid ""
 "Are you sure you want to delete the selected item type elements from the "
 "database? You will lose all text related to the selected elements. This "
 "cannot be undone."
-msgstr ""
+msgstr "Anda yakin untuk menghapus elemen tipe item terpilih dari basisdata? Anda akan kehilangan semua teks yang terkait dengan elemen terpilih tersebut. Ini tidak bisa dibatalkan."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:50
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 #: admin/themes/default/settings/edit-search.php:10
 msgid "Search Record Types"
-msgstr ""
+msgstr "Pencarian Tipe Rekod"
 
 #: admin/themes/default/settings/edit-search.php:13
 msgid "Customize which types of records will be searchable in Omeka."
-msgstr ""
+msgstr "Sesuaikan tipe rekod mana yang akan dijadikan mudah dicari di Omeka."
 
 #: admin/themes/default/settings/edit-search.php:23
 #: admin/themes/default/settings/edit-search.php:41
 msgid "Index Records"
-msgstr ""
+msgstr "Indeks Rekod"
 
 #: admin/themes/default/settings/edit-search.php:26
 msgid "Click on the \"Index Records\" button to re-index your records."
-msgstr ""
+msgstr "Klik pada tombol  \"Indeks Rekod\" indeks-ulang rekod anda."
 
 #: admin/themes/default/settings/edit-search.php:28
 msgid ""
@@ -1513,87 +1513,87 @@ msgid ""
 " are saved, but there are circumstances when your records are not indexed; "
 "for instance, when updating from an earlier version of Omeka or after you "
 "customize which records will be searchable."
-msgstr ""
+msgstr "Mengindeks berarti mengkoleksi, menguraikan, dan menyimpan data untuk memfasilitasi kecepatan dan akurasi pencarian. Omeka akan secara otomatis mengindeks rekod individu sebagaimana yang mereka simpan, tetapi ada situasi di mana rekod anda tidak diindeks; misalnya, ketika memperbarui dari versi Omeka sebelumnya atau setelah anda melakukan penyesuaian pada rekod yang akan dijadikan mudah untuk dicari."
 
 #: admin/themes/default/settings/edit-security.php:23
 msgid "Restore Default Extensions"
-msgstr ""
+msgstr "Restorasi Ekstensi Baku"
 
 #: admin/themes/default/settings/edit-security.php:28
 msgid "Restore Default Types"
-msgstr ""
+msgstr "Restorasi Tipe Baku"
 
 #: admin/themes/default/settings/edit-security.php:33
 msgid "Restore Default Elements"
-msgstr ""
+msgstr "Restorasi Elemen Baku"
 
 #: admin/themes/default/settings/edit-security.php:38
 msgid "Restore Default Attributes"
-msgstr ""
+msgstr "Restorasi Atribut Baku"
 
 #: admin/themes/default/settings/edit-settings.php:23
 msgid "Test"
-msgstr "Тест"
+msgstr "Tes"
 
 #: admin/themes/default/tags/browse.php:3
 msgid "Edit Tags"
-msgstr ""
+msgstr "Edit Tag"
 
 #: admin/themes/default/tags/browse.php:10
 msgid "Editing Tags"
-msgstr ""
+msgstr "Pengeditan Tag"
 
 #: admin/themes/default/tags/browse.php:13
 msgid "To view all items with a tag, click the number."
-msgstr ""
+msgstr "Untuk melihat semua item dengan sebuah tag, klik nomor."
 
 #: admin/themes/default/tags/browse.php:14
 msgid ""
 "To edit the tag name, click the name and begin editing, and hit \"enter\" to"
 " save. To cancel an edit, click the ESC key or click away from the tag."
-msgstr ""
+msgstr "Untuk mengedit nama tag, klik pada nama dan mulai mengedit, dan tekan \"enter\" untuk menyimpannya. Untuk membatalkan editan, klik tombol ESC atau klik jauhkan dari tag."
 
 #: admin/themes/default/tags/browse.php:15
 msgid ""
 "To delete a tag, click the X. Deleting a tag will not delete the tagged "
 "items."
-msgstr ""
+msgstr "Untuk menghapus tag, klik X. Menghapus sebuah tag tidak akan menghapus item dari tag tersebut."
 
 #: admin/themes/default/tags/browse.php:23
 msgid "Most"
-msgstr ""
+msgstr "Terbanyak"
 
 #: admin/themes/default/tags/browse.php:24
 msgid "Least"
-msgstr ""
+msgstr "Tersedikit"
 
 #: admin/themes/default/tags/browse.php:25
 msgid "Alphabetical"
-msgstr ""
+msgstr "Alfabetikal"
 
 #: admin/themes/default/tags/browse.php:26
 msgid "Recent"
-msgstr ""
+msgstr "Terbaru"
 
 #: admin/themes/default/themes/browse.php:15
 #: admin/themes/default/themes/browse.php:42
 #, php-format
 msgid "Screenshot for %s Theme"
-msgstr ""
+msgstr "Screenshot Tema %s"
 
 #: admin/themes/default/themes/browse.php:16
 msgid "Configure Theme"
-msgstr ""
+msgstr "Konfigurasi Tema"
 
 #: admin/themes/default/themes/browse.php:19
 msgid "Current Theme"
-msgstr "Актуелна тема"
+msgstr "Tema Sekarang"
 
 #: admin/themes/default/themes/browse.php:21
 #: admin/themes/default/themes/browse.php:47
 #, php-format
 msgid "By %s"
-msgstr ""
+msgstr "Oleh %s"
 
 #: admin/themes/default/themes/browse.php:26
 msgid ""
@@ -1601,163 +1601,163 @@ msgid ""
 "ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a "
 "href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" "
 "target=\"_blank\">design your own</a>!"
-msgstr ""
+msgstr "Tambahkan tema baru dengan mengunduhnya dari <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, atau <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">design your own</a>!"
 
 #: admin/themes/default/themes/browse.php:44
 msgid "Use this theme"
-msgstr ""
+msgstr "Gunakan tema ini"
 
 #: admin/themes/default/themes/config.php:10
 #, php-format
 msgid "Configure Theme: %s"
-msgstr ""
+msgstr "Konfigurasi Tema: %s"
 
 #: admin/themes/default/themes/config.php:11
 msgid "Configurations apply to this theme only."
-msgstr ""
+msgstr "Konfigurasi diterapkan ke tema ini saja."
 
 #: admin/themes/default/upgrade/index.php:32
 msgid "Upgrade Your Omeka Database"
-msgstr ""
+msgstr "Tingkatkan Basisdata Omeka Anda"
 
 #: admin/themes/default/upgrade/index.php:34
 msgid ""
 "Your Omeka database is not compatible with your current version of Omeka."
-msgstr ""
+msgstr "Basisdata Omeka anda tidak cocok dengan versi Omeka miliki anda saat ini."
 
 #: admin/themes/default/upgrade/index.php:35
 msgid ""
 "Please back up your existing database and then click the button to upgrade."
-msgstr ""
+msgstr "Silahkan cadangkan basisdata yang ada lalu klik tombol untuk meningkatkan."
 
 #: admin/themes/default/upgrade/index.php:37
 msgid "Upgrade Database"
-msgstr ""
+msgstr "Tingkatkan Basisdata"
 
 #: admin/themes/default/upgrade/migrate.php:32
 msgid "Omeka encountered an error when upgrading your installation."
-msgstr ""
+msgstr "Omeka menemukan sebuah masalah saat meningkatkan instalasi anda."
 
 #: admin/themes/default/upgrade/migrate.php:37
 msgid "Please restore from your database backup and try again."
-msgstr ""
+msgstr "Silahkan restorasi dari cadangan basisdata anda dan coba lagi."
 
 #: admin/themes/default/upgrade/migrate.php:39
 msgid ""
 "If you have any questions please refer to <a "
 "href=\"http://omeka.org/codex\">Omeka documentation</a> or post a message on"
 " the <a href=\"http://omeka.org/forums\">Omeka forums</a>."
-msgstr ""
+msgstr "Bila anda punya pertanyaan silahkan merujuk ke <a href=\"http://omeka.org/codex\">dokumentasi Omeka</a> atau kirim sebuah pesan ke <a href=\"http://omeka.org/forums\">forum Omeka</a>."
 
 #: admin/themes/default/upgrade/migrate.php:42
 msgid "Omeka has upgraded successfully."
-msgstr ""
+msgstr "Omeka berhasil ditingkatkan."
 
 #: admin/themes/default/upgrade/migrate.php:43
 msgid "Return to Dashboard"
-msgstr ""
+msgstr "Kembali ke Dasbor"
 
 #: admin/themes/default/users/activate.php:2
 #: application/views/scripts/users/activate.php:2
 msgid "User Activation"
-msgstr ""
+msgstr "Aktivasi Pengguna"
 
 #: admin/themes/default/users/activate.php:18
 #: application/forms/ResetPassword.php:23
 #: application/views/scripts/users/activate.php:13
 msgid "Create a Password"
-msgstr "Креирај лозинка"
+msgstr "Buat Password"
 
 #: admin/themes/default/users/activate.php:24 application/forms/Install.php:60
 #: application/forms/ResetPassword.php:44
 #: application/views/scripts/users/activate.php:19
 msgid "Re-type the Password"
-msgstr ""
+msgstr "Ketik-ulang password"
 
 #: admin/themes/default/users/add.php:2
 msgid "Add New User"
-msgstr "Додај нов корисник"
+msgstr "Tambah Pengguna Baru"
 
 #: admin/themes/default/users/browse.php:2
 msgid "Browse Users"
-msgstr ""
+msgstr "Ramban Pengguna"
 
 #: admin/themes/default/users/browse.php:8
 msgid "Add a User"
-msgstr "Додади корисник"
+msgstr "Tambah Pengguna"
 
 #: admin/themes/default/users/browse.php:17
 #: admin/themes/default/users/show.php:18 application/forms/Install.php:30
 #: application/forms/Login.php:21 application/forms/User.php:29
 msgid "Username"
-msgstr "Корисничко име"
+msgstr "Username"
 
 #: admin/themes/default/users/browse.php:18
 #: admin/themes/default/users/show.php:20
 msgid "Real Name"
-msgstr "Вистинско име"
+msgstr "Nama Asli"
 
 #: admin/themes/default/users/browse.php:19
 #: admin/themes/default/users/show.php:22 application/forms/Install.php:73
 #: application/forms/RecoverPassword.php:27 application/forms/User.php:95
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
-msgstr "Електронска пошта"
+msgstr "Email"
 
 #: admin/themes/default/users/browse.php:20 application/forms/User.php:128
 msgid "Role"
-msgstr "Улога"
+msgstr "Peran"
 
 #: admin/themes/default/users/browse.php:30
 msgid "inactive"
-msgstr ""
+msgstr "nonaktif"
 
 #: admin/themes/default/users/edit.php:8
 #, php-format
 msgid "Edit User #%s"
-msgstr ""
+msgstr "Edit Pengguna #%s"
 
 #: admin/themes/default/users/forgot-password.php:2
 #: application/views/scripts/users/forgot-password.php:2
 msgid "Forgot Password"
-msgstr ""
+msgstr "Lupa Password"
 
 #: admin/themes/default/users/forgot-password.php:11
 #: application/views/scripts/users/forgot-password.php:10
 msgid "Enter your email address to retrieve your password."
-msgstr ""
+msgstr "Masukkan alamat email anda untuk menerima password anda."
 
 #: admin/themes/default/users/forgot-password.php:21
 #: application/views/scripts/users/forgot-password.php:18
 msgid "Submit"
-msgstr ""
+msgstr "Kirim"
 
 #: admin/themes/default/users/forgot-password.php:25
 #: application/views/scripts/users/forgot-password.php:7
 msgid "Back to Log In"
-msgstr ""
+msgstr "Kembali Masuk"
 
 #: admin/themes/default/users/login.php:3 application/forms/Login.php:55
 #: application/views/scripts/users/login.php:3
 msgid "Log In"
-msgstr ""
+msgstr "Masuk"
 
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
-msgstr ""
+msgstr "(Lupa password anda?)"
 
 #: admin/themes/default/users/show.php:8
 #, php-format
 msgid "User #%s"
-msgstr ""
+msgstr "Pengguna #%s"
 
 #: admin/themes/default/users/show.php:15
 msgid "Edit this User"
-msgstr ""
+msgstr "Edit Pengguna ini"
 
 #: application/controllers/AppearanceController.php:48
 msgid "The appearance settings have been updated."
-msgstr ""
+msgstr "Setelan tampilan telah diperbarui."
 
 #: application/controllers/AppearanceController.php:51
 #: application/controllers/ItemTypesController.php:34
@@ -1766,47 +1766,47 @@ msgstr ""
 #: application/controllers/SettingsController.php:79
 #: install/views/scripts/index/index.phtml:17
 msgid "There were errors found in your form. Please edit and resubmit."
-msgstr ""
+msgstr "Terdapat masalah ditemukan dalam formulir anda. Silahkan edit dan kirim ulang."
 
 #: application/controllers/AppearanceController.php:66
 msgid "The navigation settings have been updated."
-msgstr ""
+msgstr "Setelan navigasi telah diperbarui."
 
 #: application/controllers/AppearanceController.php:69
 msgid ""
 "The navigation settings were not saved because of missing or invalid values."
 "  All changed values have been restored."
-msgstr ""
+msgstr "Setelan navigasi tidak disimpan karena nilai hilang atau cacat. Semua nilai perubahan direstorasi."
 
 #: application/controllers/CollectionsController.php:74
 #, php-format
 msgid "The collection \"%s\" was successfully added!"
-msgstr ""
+msgstr "Koleksi \"%s\" berhasil ditambahkan!"
 
 #: application/controllers/CollectionsController.php:76
 #, php-format
 msgid "The collection #%s was successfully added!"
-msgstr ""
+msgstr "Koleksi #%s berhasil ditambahkan!"
 
 #: application/controllers/CollectionsController.php:84
 #, php-format
 msgid "The collection \"%s\" was successfully changed!"
-msgstr ""
+msgstr "Koleksi \"%s\" berhasil diubah!"
 
 #: application/controllers/CollectionsController.php:86
 #, php-format
 msgid "The collection #%s was successfully changed!"
-msgstr ""
+msgstr "Koleksi #%s berhasil diubah!"
 
 #: application/controllers/CollectionsController.php:94
 #, php-format
 msgid "The collection \"%s\" was successfully deleted!"
-msgstr ""
+msgstr "Koleksi \"%s\" berhasil dihapus!"
 
 #: application/controllers/CollectionsController.php:96
 #, php-format
 msgid "The collection #%s was successfully deleted!"
-msgstr ""
+msgstr "Koleksi #%s berhasil dihapus!"
 
 #: application/controllers/CollectionsController.php:104
 #, php-format
@@ -1814,7 +1814,7 @@ msgid ""
 "This will delete the collection \"%s\" and its associated metadata. This "
 "will not delete any items in this collection, but will delete the reference "
 "to this collection in each item."
-msgstr ""
+msgstr "Ini akan menghapus koleksi \"%s\" dan metadata yang berasosiasi dengannya. Ini tidak akan menghapus item apapun dalam koleksi ini, tetapi akan menghapus referensi ke koleksi ini pada setiap itemnya."
 
 #: application/controllers/CollectionsController.php:108
 #, php-format
@@ -1822,39 +1822,39 @@ msgid ""
 "This will delete the collection #%s and its associated metadata. This will "
 "not delete any items in this collection, but will delete the reference to "
 "this collection in each item."
-msgstr ""
+msgstr "Ini akan menghapus koleksi \"%s\" dan metadata yang berasosiasi dengannya. Ini tidak akan menghapus item apapun dalam koleksi ini, tetapi akan menghapus referensi ke koleksi ini pada setiap itemnya."
 
 #: application/controllers/ElementSetsController.php:21
 msgid ""
 "This will delete the element set and all elements assigned to the element "
 "set. Items will lose all metadata that is specific to this element set."
-msgstr ""
+msgstr "Ini akan menghapus kumpulan elemen dan semua elemen yang didelegasikan ke kumpulan elemen. Item-item akan kehilangan semua metadata yang dispesifikasikan ke kumpulan elemen tersebut."
 
 #: application/controllers/ElementSetsController.php:65
 msgid "The element set was successfully changed!"
-msgstr ""
+msgstr "Kumpulan elemen berhasil diubah!"
 
 #: application/controllers/ErrorController.php:64
 msgid "Page not found."
-msgstr "Страницата не е пронајдена"
+msgstr "Halaman tidak ditemukan."
 
 #: application/controllers/ErrorController.php:79
 msgid "Access denied."
-msgstr ""
+msgstr "Akses ditolak."
 
 #: application/controllers/FilesController.php:64
 msgid "This will delete the file and its associated metadata."
-msgstr ""
+msgstr "Ini akan menghapus file dan metadata yang berasosiasi dengannya."
 
 #: application/controllers/ItemTypesController.php:28
 #, php-format
 msgid "The item type \"%s\" was successfully added."
-msgstr ""
+msgstr "Tipe item \"%s\" berhasil ditambahkan."
 
 #: application/controllers/ItemTypesController.php:54
 #, php-format
 msgid "The item type \"%s\" was successfully updated."
-msgstr ""
+msgstr "Tipe item \"%s\" berhasil diperbarui."
 
 #: application/controllers/ItemTypesController.php:149
 #, php-format
@@ -1862,324 +1862,324 @@ msgid ""
 "This will delete the \"%s\" item type but will not delete the elements "
 "assigned to the item type. Items that are assigned to this item type will "
 "lose all metadata that is specific to the item type."
-msgstr ""
+msgstr "Ini akan menghapus tipe item \"%s\" tetapi tidak akan menghapus elemen yang didelegasikan untuk tipe item tersebut. Item yang didelegasikan ke tipe item ini akan kehilangan semua metadata yang dispesifikasikan ke tipe item tersebut."
 
 #: application/controllers/ItemTypesController.php:157
 #, php-format
 msgid ""
 "The item type \"%s\" was successfully added!  You may now add elements to "
 "your new item type."
-msgstr ""
+msgstr "Tipe item \"%s\" berhasil ditambahkan!  Anda mungkin sekarang menambahkan elemen ke tipe item yang baru anda."
 
 #: application/controllers/ItemsController.php:95
 #, php-format
 msgid "The item \"%s\" was successfully added!"
-msgstr ""
+msgstr "Item \"%s\" berhasil ditambahkan!"
 
 #: application/controllers/ItemsController.php:97
 #, php-format
 msgid "The item #%s was successfully added!"
-msgstr ""
+msgstr "Item #%s berhasil ditambahkan!"
 
 #: application/controllers/ItemsController.php:105
 #, php-format
 msgid "The item \"%s\" was successfully changed!"
-msgstr ""
+msgstr "Item \"%s\" berhasil diubah!"
 
 #: application/controllers/ItemsController.php:107
 #, php-format
 msgid "The item #%s was successfully changed!"
-msgstr ""
+msgstr "Item #%s berhaisl diubah!"
 
 #: application/controllers/ItemsController.php:115
 #, php-format
 msgid "The item \"%s\" was successfully deleted!"
-msgstr ""
+msgstr "Item \"%s\" berhasil dihapus!"
 
 #: application/controllers/ItemsController.php:117
 #, php-format
 msgid "The item #%s was successfully deleted!"
-msgstr ""
+msgstr "Item #%s berhasil dihapus!"
 
 #: application/controllers/ItemsController.php:125
 #, php-format
 msgid ""
 "This will delete the item \"%s\" and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr ""
+msgstr "Ini akan menghapus item \"%s\" dan metadata yang berasosiasi dengannya. Juga akan menghapus semua file dan metadata file yang berasosiasi dengan item ini."
 
 #: application/controllers/ItemsController.php:129
 #, php-format
 msgid ""
 "This will delete the item #%s and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr ""
+msgstr "Ini akan menghapus item #%s dan metadata yang berasosiasi dengannya. Juga akan menghapus semua file dan metadata file yang berasosiasi dengan item ini."
 
 #: application/controllers/ItemsController.php:255
 msgid "You must choose some items to batch edit."
-msgstr ""
+msgstr "Anda harus memilih beberapa item untuk pengeditan serempak."
 
 #: application/controllers/ItemsController.php:299
 msgid "User is not allowed to modify visibility of items."
-msgstr ""
+msgstr "Pengguna tidak diperkenankan untuk memodifikasi visibilitas dari item."
 
 #: application/controllers/ItemsController.php:304
 msgid "User is not allowed to modify featured status of items."
-msgstr ""
+msgstr "Pengguna tidak diperkenankan untuk memodifikasi status istimewa dari item."
 
 #: application/controllers/ItemsController.php:311
 msgid "User is not allowed to delete selected items."
-msgstr ""
+msgstr "Pengguna tidak diperkenankan untuk menghapus item terpilih."
 
 #: application/controllers/ItemsController.php:317
 msgid "User is not allowed to edit selected items."
-msgstr ""
+msgstr "Pengguna tidak diperkenankan untuk mengedit item terpilih."
 
 #: application/controllers/ItemsController.php:322
 msgid "User is not allowed to tag selected items."
-msgstr ""
+msgstr "Pengguna tidak diperkenankan untuk memberi tag item terpilih."
 
 #: application/controllers/ItemsController.php:356
 msgid "The items were successfully deleted!"
-msgstr ""
+msgstr "Item berhasil dihapus!"
 
 #: application/controllers/ItemsController.php:358
 msgid "The items were successfully changed!"
-msgstr ""
+msgstr "Item berhasil diubah!"
 
 #: application/controllers/PluginsController.php:45
 #, php-format
 msgid ""
 "Error in configuring plugin named \"%s\". Missing config and/or config_form "
 "hook(s)."
-msgstr ""
+msgstr "Masalah dalam mengkonfigurasi plugin \"%s\". Kehilangan Config dan/atau config_form hook(s)."
 
 #: application/controllers/PluginsController.php:52
 #, php-format
 msgid "The %s plugin was successfully configured!"
-msgstr ""
+msgstr "Plugin %s berhasil dikonfigurasi!"
 
 #: application/controllers/PluginsController.php:70
 #, php-format
 msgid "The %s plugin has already been installed."
-msgstr ""
+msgstr "Plugin %s telah diinstalasikan."
 
 #: application/controllers/PluginsController.php:79
 #, php-format
 msgid "The %s plugin was successfully installed!"
-msgstr ""
+msgstr "Plugin %s berhasil diinstalasikan!"
 
 #: application/controllers/PluginsController.php:91
 #: application/controllers/PluginsController.php:96
 #, php-format
 msgid "The following error occurred while installing the %s plugin: "
-msgstr ""
+msgstr "Berikut masalah yang muncul saat menginstalasi plugin %s: "
 
 #: application/controllers/PluginsController.php:124
 #, php-format
 msgid "The following error occurred while activating the %s plugin: "
-msgstr ""
+msgstr "Masalah berikut muncul saat mengaktivasi plugin %s: "
 
 #: application/controllers/PluginsController.php:134
 #, php-format
 msgid "The %s plugin was successfully activated!"
-msgstr ""
+msgstr "Plugin %s berhasil diaktivasi!"
 
 #: application/controllers/PluginsController.php:139
 #, php-format
 msgid "The %s plugin was activated, but could not be loaded: "
-msgstr ""
+msgstr "Plugin %s telah diaktivasi, tapi tidak dapat dimuat: "
 
 #: application/controllers/PluginsController.php:163
 #, php-format
 msgid "The %s plugin was successfully deactivated!"
-msgstr ""
+msgstr "Plugin %s berhasil dinonaktifkan!"
 
 #: application/controllers/PluginsController.php:168
 #, php-format
 msgid "The following error occurred while deactivating the %s plugin: "
-msgstr ""
+msgstr "Masalah berikut muncul saat menonaktifkan plugin %s: "
 
 #: application/controllers/PluginsController.php:187
 #, php-format
 msgid "The %s plugin was successfully upgraded!"
-msgstr ""
+msgstr "Plugin %s berhasil ditingkatkan!"
 
 #: application/controllers/PluginsController.php:196
 #: application/controllers/PluginsController.php:202
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
-msgstr ""
+msgstr "Masalah berikut muncul saat meningkatkan plugin %s:"
 
 #: application/controllers/PluginsController.php:253
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
-msgstr ""
+msgstr "Plugin tidak dapat ditemukan di direktori '%s'!"
 
 #: application/controllers/PluginsController.php:262
 msgid "You must confirm the uninstall before proceeding."
-msgstr ""
+msgstr "Anda harus konfirmasi pencabutan sebelum dilaksanakan."
 
 #: application/controllers/PluginsController.php:280
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
-msgstr ""
+msgstr "Plugin %s berhasil dicabut!"
 
 #: application/controllers/PluginsController.php:285
 #: application/controllers/PluginsController.php:290
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
-msgstr ""
+msgstr "Masalah berikut muncul saat mencabut plugin %s:"
 
 #: application/controllers/PluginsController.php:317
 msgid "No plugin name given."
-msgstr ""
+msgstr "Tidak ada nama diberikan untuk plugin."
 
 #: application/controllers/PluginsController.php:330
 #, php-format
 msgid "The plugin %s must be installed."
-msgstr ""
+msgstr "Plugin %s harus diinstalasikan."
 
 #: application/controllers/SettingsController.php:44
 msgid "The general settings have been updated."
-msgstr ""
+msgstr "Setelan umum telah diperbarui."
 
 #: application/controllers/SettingsController.php:76
 msgid "The security settings have been updated."
-msgstr ""
+msgstr "Setelan keamanan telah diperbarui."
 
 #: application/controllers/SettingsController.php:95
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
-msgstr ""
+msgstr "Anda telah mengubah rekod yang telah dijadikan dapat dicari dalam Omeka. Silahkan indeks-ulang rekod tersebut menggunakan formulir di bawah ini."
 
 #: application/controllers/SettingsController.php:102
 msgid ""
 "Indexing records. This may take a while. You may continue administering your"
 " site."
-msgstr ""
+msgstr "Mengindeks rekod. Ini mungkin butuh waktu. Anda mungkin meneruskan mengelola situs anda."
 
 #: application/controllers/SettingsController.php:131
 msgid "The item type elements were successfully changed!"
-msgstr ""
+msgstr "Elemen tipe item berhasil diubah!"
 
 #: application/controllers/SettingsController.php:160
 msgid "The ImageMagick directory path works."
-msgstr ""
+msgstr "Path direktori ImageMagick bekerja."
 
 #: application/controllers/SettingsController.php:161
 msgid "The ImageMagick directory path does not work."
-msgstr ""
+msgstr "Path direktori ImageMagick tidak dapat bekerja."
 
 #: application/controllers/TagsController.php:35
 msgid "You have to be logged in to edit tags!"
-msgstr ""
+msgstr "Anda harus masuk dulu untuk mengedit tag!"
 
 #: application/controllers/TagsController.php:64
 #, php-format
 msgid "Tag named \"%1$s\" was successfully renamed to \"%2$s\"."
-msgstr ""
+msgstr "Tag \"%1$s\" berhasil diganti namanya ke \"%2$s\"."
 
 #: application/controllers/TagsController.php:91
 msgid "Invalid tagType given."
-msgstr ""
+msgstr "tagType yang diberikan cacat."
 
 #: application/controllers/ThemesController.php:25
 msgid "Invalid form submission."
-msgstr ""
+msgstr "Formulir pendaftaran cacat."
 
 #: application/controllers/ThemesController.php:33
 msgid "You have chosen an illegal theme name. Please select another theme."
-msgstr ""
+msgstr "Anda memilih nama tema yang ilegal. Silahkan pilih lainnya."
 
 #: application/controllers/ThemesController.php:40
 #, php-format
 msgid "This theme requires a newer version of Omeka (%s)."
-msgstr ""
+msgstr "Tema ini membutuhkan versi terbaru Omeka (%s)."
 
 #: application/controllers/ThemesController.php:54
 msgid "The theme has been successfully changed."
-msgstr "Темата беше успешно променета."
+msgstr "Tema berhasil diubah."
 
 #: application/controllers/ThemesController.php:81
 msgid "The theme settings were successfully saved!"
-msgstr ""
+msgstr "Setelan tema berhasil disimpan!"
 
 #: application/controllers/ThemesController.php:84
 msgid "There was an error on the form. Please try again."
-msgstr ""
+msgstr "Terdapat masalah pada formulir. Silahkan coba lagi."
 
 #: application/controllers/UpgradeController.php:49
 msgid "SQL error in migration: "
-msgstr ""
+msgstr "Masalah SQL dalam migrasi:"
 
 #: application/controllers/UsersController.php:70
 msgid ""
 "Unable to reset password. Please verify that the information is correct and "
 "contact an administrator if necessary."
-msgstr ""
+msgstr "Tidak dapat mereset password. Silahkan memverifikasinya bahwa informasi tersebut adalah benar dan hubungi administrator bila perlu."
 
 #: application/controllers/UsersController.php:108
 msgid "Please follow this link to reset your password:"
-msgstr ""
+msgstr "Silahkan ikkuti tautan ini untuk mereset password anda:"
 
 #: application/controllers/UsersController.php:110
 #: application/controllers/UsersController.php:113
 #: application/controllers/UsersController.php:296
 #, php-format
 msgid "%s Administrator"
-msgstr "%s Администратор"
+msgstr "%s Administrator"
 
 #: application/controllers/UsersController.php:114
 #, php-format
 msgid "[%s] Reset Your Password"
-msgstr "[%s] Изменија лозинката"
+msgstr "[%s] Reset Password Anda"
 
 #: application/controllers/UsersController.php:117
 msgid "Please check your email for a link to reset your password."
-msgstr ""
+msgstr "Silahkan periksa email anda untuk tautan reset password anda."
 
 #: application/controllers/UsersController.php:135
 msgid "Password: The passwords do not match."
-msgstr "Лозинка: лозинките не се совпаѓаат"
+msgstr "Password: Password tidak cocok."
 
 #: application/controllers/UsersController.php:143
 msgid "You may now log in to Omeka."
-msgstr "Сега можете да се логирате во Омека."
+msgstr "Anda sekarang bisa masuk ke Omeka,"
 
 #: application/controllers/UsersController.php:160
 msgid "Add User"
-msgstr "Додади корисник"
+msgstr "Tambah Pengguna"
 
 #: application/controllers/UsersController.php:171
 #, php-format
 msgid "The user \"%s\" was successfully added!"
-msgstr ""
+msgstr "Pengguna \"%s\" berhasil ditambahkan!"
 
 #: application/controllers/UsersController.php:175
 #, php-format
 msgid "The user \"%s\" was added, but the activation email could not be sent."
-msgstr ""
+msgstr "Pengguna \"%s\" telah ditambahkan, tetapi email aktivasi tidak dapat dikirimkan."
 
 #: application/controllers/UsersController.php:226
 #: application/controllers/UsersController.php:237
 msgid "There was an invalid entry on the form. Please try again."
-msgstr ""
+msgstr "Terdapat entri cacat pada formulir. Silahkan coba lagi."
 
 #: application/controllers/UsersController.php:233
 msgid "Password changed!"
-msgstr "Лозинката е променета!"
+msgstr "Password diubah!"
 
 #: application/controllers/UsersController.php:244
 #, php-format
 msgid "The user %s was successfully changed!"
-msgstr ""
+msgstr "Pengguna %s berhasil diubah!"
 
 #: application/controllers/UsersController.php:265
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
-msgstr ""
+msgstr "Pengguna %s berhasil dihapus!"
 
 #: application/controllers/UsersController.php:271
 #, php-format
@@ -2187,546 +2187,546 @@ msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
 "this user will remain in the system, but will no longer be associated with "
 "this user."
-msgstr ""
+msgstr "%s akan dihapus dari sistem. Item, koleksi, dan tag yang dibuat oleh pengguna ini akan tetap ada dalam sistem, tetapi tidak lagi diasosiasikan dengan pengguna ini."
 
 #: application/controllers/UsersController.php:292
 msgid "Welcome!"
-msgstr "Добредојдовте!"
+msgstr "Selamat datang!"
 
 #: application/controllers/UsersController.php:294
 #, php-format
 msgid ""
 "Your account for the %s repository has been created. Please click the "
 "following link to activate your account:"
-msgstr ""
+msgstr "Akun anda untuk repository %s telah dibuat. Silahkan klik tautan berikut untuk mengaktivasi akun anda:"
 
 #: application/controllers/UsersController.php:297
 #, php-format
 msgid "Activate your account with the %s repository"
-msgstr ""
+msgstr "Aktivasi akun anda dengan repository %s"
 
 #: application/controllers/UsersController.php:392
 msgid "Login information incorrect. Please try again."
-msgstr ""
+msgstr "Informasi masuk tidak tepat. Silahkan coba lagi."
 
 #: application/forms/AppearanceSettings.php:22
 #: application/forms/Install.php:117
 msgid "Fullsize Image Size"
-msgstr ""
+msgstr "Ukuran Gambar Penuh"
 
 #: application/forms/AppearanceSettings.php:23
 msgid "Maximum fullsize image size constraint (in pixels)."
-msgstr ""
+msgstr "Maksimal batasan ukuran gambar penuh (dalam pixel)."
 
 #: application/forms/AppearanceSettings.php:29
 #: application/forms/Install.php:125
 msgid "Thumbnail Size"
-msgstr ""
+msgstr "Ukuran Thumbnail"
 
 #: application/forms/AppearanceSettings.php:30
 msgid "Maximum thumbnail size constraint (in pixels)."
-msgstr ""
+msgstr "Maksimal batasan ukuran thumbnail (dalam pixel)."
 
 #: application/forms/AppearanceSettings.php:36
 #: application/forms/Install.php:133
 msgid "Square Thumbnail Size"
-msgstr ""
+msgstr "Ukuran Kotak Thumbnail"
 
 #: application/forms/AppearanceSettings.php:37
 msgid "Maximum square thumbnail size constraint (in pixels)."
-msgstr ""
+msgstr "Maksimal batasan ukuran thumbnail kotak (dalam pixel)."
 
 #: application/forms/AppearanceSettings.php:43
 msgid "Results Per Page (admin)"
-msgstr ""
+msgstr "Hasil Per Halaman (admin)"
 
 #: application/forms/AppearanceSettings.php:44
 msgid ""
 "Limit the number of results displayed per page in the administrative "
 "interface."
-msgstr ""
+msgstr "Batasi jumlah hasil yang ditampilkan per halaman dalam antarmuka administratif."
 
 #: application/forms/AppearanceSettings.php:50
 msgid "Results Per Page (public)"
-msgstr ""
+msgstr "Hasil Per Halaman (publik)"
 
 #: application/forms/AppearanceSettings.php:51
 msgid ""
 "Limit the number of results displayed per page in the public interface."
-msgstr ""
+msgstr "Batasi jumlah hasil yang ditampilkan per halaman dalam antarmuka publik."
 
 #: application/forms/AppearanceSettings.php:57
 #: application/forms/Install.php:157
 msgid "Show Empty Elements"
-msgstr ""
+msgstr "Tampilkan Elemen Kosong"
 
 #: application/forms/AppearanceSettings.php:66
 msgid "Derivative Size Constraints"
-msgstr ""
+msgstr "Batasan Ukuran Derivativ"
 
 #: application/forms/AppearanceSettings.php:71
 msgid "Display Settings"
-msgstr ""
+msgstr "Setelan Tampilan"
 
 #: application/forms/ChangePassword.php:25
 msgid "Current Password"
-msgstr "Актуелна лозинка"
+msgstr "Password Saat ini"
 
 #: application/forms/ChangePassword.php:26
 #: application/forms/ChangePassword.php:36
 msgid "Password must be at least 6 characters long."
-msgstr ""
+msgstr "Password harus sedikitnya 6 karakter panjangnya."
 
 #: application/forms/ChangePassword.php:28
 msgid "Invalid current password"
-msgstr ""
+msgstr "Password saat ini salah"
 
 #: application/forms/ChangePassword.php:34
 msgid "New Password"
-msgstr "Нова лозинка"
+msgstr "Password Baru"
 
 #: application/forms/ChangePassword.php:41
 msgid "New password must be entered."
-msgstr ""
+msgstr "Password baru harus dimasukkan."
 
 #: application/forms/ChangePassword.php:50
 #: application/forms/ChangePassword.php:70
 msgid "New password must be typed correctly twice."
-msgstr ""
+msgstr "Password baru harus diketik dua kali dengan benar."
 
 #: application/forms/ChangePassword.php:59
 msgid "New password must be at least %min% characters long."
-msgstr ""
+msgstr "New password must be at least %min% characters long."
 
 #: application/forms/ChangePassword.php:68
 msgid "Repeat New Password"
-msgstr "Повтори ја новата лозинка"
+msgstr "Ulangi Password Baru"
 
 #: application/forms/ChangePassword.php:75
 msgid "Save Password"
-msgstr "Зачувај лозинка"
+msgstr "Simpan Password"
 
 #: application/forms/ChangePassword.php:84
 msgid "Change Password"
-msgstr "Промени лозинка"
+msgstr "Ganti Password"
 
 #: application/forms/GeneralSettings.php:22 application/forms/Install.php:79
 msgid "Site Title"
-msgstr "Наслов на сајтот"
+msgstr "Judul Situs"
 
 #: application/forms/GeneralSettings.php:26 application/forms/Install.php:84
 msgid "Site Description"
-msgstr "Опис на сајтот"
+msgstr "Deskripsi Situs"
 
 #: application/forms/GeneralSettings.php:31 application/forms/Install.php:88
 msgid "Administrator Email"
-msgstr ""
+msgstr "Email Administrator"
 
 #: application/forms/GeneralSettings.php:37 application/forms/Install.php:94
 msgid "Site Copyright Information"
-msgstr ""
+msgstr "Informasi Hak cipta Situs"
 
 #: application/forms/GeneralSettings.php:41 application/forms/Install.php:98
 msgid "Site Author Information"
-msgstr ""
+msgstr "Informasi Pemilik Situs"
 
 #: application/forms/GeneralSettings.php:45 application/forms/Install.php:102
 msgid "Tag Delimiter"
-msgstr ""
+msgstr "Pemisah Tag"
 
 #: application/forms/GeneralSettings.php:46
 msgid ""
 "Separate tags using this character or string. Be careful when changing this "
 "setting. You run the risk of splitting tags that contain the old delimiter."
-msgstr ""
+msgstr "Pisahkan tag menggunakan karakter atau string ini. Berhati-hatilah saat mengganti setelan ini. Anda beresiko membagi tag yang mengandung pemisah lama."
 
 #: application/forms/GeneralSettings.php:59 application/forms/Install.php:163
 msgid "ImageMagick Directory Path"
-msgstr ""
+msgstr "Path Direktori ImageMagick"
 
 #: application/forms/Install.php:31
 msgid "only alphanumeric characters are allowed"
-msgstr ""
+msgstr "hanya karakter alfanumerik yang diperkenankan"
 
 #: application/forms/Install.php:37 application/forms/Login.php:34
 msgid "Password"
-msgstr "Лозинка"
+msgstr "Password"
 
 #: application/forms/Install.php:38
 msgid "must be at least 6 characters"
-msgstr ""
+msgstr "harus sedikitnya 6 karakter"
 
 #: application/forms/Install.php:61
 msgid "Confirm your password."
-msgstr "Потврдете ја Вашата лозинка."
+msgstr "Konfirmasi password anda."
 
 #: application/forms/Install.php:103
 msgid "Separate tags using this character or string."
-msgstr ""
+msgstr "Pisahkan tag menggunakan karakter atau string ini."
 
 #: application/forms/Install.php:118
 msgid "Maximum fullsize image size constraint (in pixels)"
-msgstr ""
+msgstr "Maksimal batasan ukuran gambar penuh (dalam pixel)"
 
 #: application/forms/Install.php:126
 msgid "Maximum thumbnail size constraint (in pixels)"
-msgstr ""
+msgstr "Maksimal batasan ukuran thumbnail (dalam pixel)"
 
 #: application/forms/Install.php:134
 msgid "Maximum square thumbnail size constraint (in pixels)"
-msgstr ""
+msgstr "Maksimal batasan ukuran thumbnail kotak (dalam pixel)"
 
 #: application/forms/Install.php:141
 msgid "Items Per Page (admin)"
-msgstr ""
+msgstr "Item Per Halaman (admin)"
 
 #: application/forms/Install.php:142
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
-msgstr ""
+msgstr "Batasi jumlah item yang ditampilkan per halaman di antarmuka administratif."
 
 #: application/forms/Install.php:149
 msgid "Items Per Page (public)"
-msgstr ""
+msgstr "Item Per Halaman (publik)"
 
 #: application/forms/Install.php:150
 msgid "Limit the number of items displayed per page in the public interface."
-msgstr ""
+msgstr "Batasi jumlah item yang ditampilkan per halaman pada antarmuka publik."
 
 #: application/forms/Install.php:159
 msgid "Check box to show metadata elements with no text."
-msgstr ""
+msgstr "Centang kotak untuk menampilkan elemen tanpa teks."
 
 #: application/forms/Install.php:174
 msgid "Default Superuser Account"
-msgstr ""
+msgstr "Akun Baku Superuser"
 
 #: application/forms/Install.php:184
 msgid "Site Settings"
-msgstr ""
+msgstr "Setelan Situs"
 
 #: application/forms/ItemTypes.php:142
 msgid "The name of the item type."
-msgstr ""
+msgstr "Nama dari tipe item."
 
 #: application/forms/ItemTypes.php:151
 msgid "The description of the item type."
-msgstr ""
+msgstr "Deskripsi tipe item."
 
 #: application/forms/ItemTypes.php:188 application/forms/ItemTypes.php:197
 #, php-format
 msgid "The item type cannot have more than one \"%s\" element."
-msgstr ""
+msgstr "Tipe item tidak boleh mempunyai lebih dari satu elemen \"%s\"."
 
 #: application/forms/Login.php:27
 msgid "Username cannot be empty."
-msgstr ""
+msgstr "Username tidak boleh kosong."
 
 #: application/forms/Login.php:40
 msgid "Password cannot be empty."
-msgstr ""
+msgstr "Password tidak boleh kosong."
 
 #: application/forms/Login.php:48
 msgid "Remember Me?"
-msgstr ""
+msgstr "Ingat Saya?"
 
 #: application/forms/Navigation.php:156
 msgid "[Default]"
-msgstr ""
+msgstr "[Default]"
 
 #: application/forms/Navigation.php:162
 msgid "Select a Homepage"
-msgstr ""
+msgstr "Pilih Beranda"
 
 #: application/forms/Navigation.php:244
 msgid "Cannot find parent navigation page."
-msgstr ""
+msgstr "Tidak dapat menemukan halaman navigasi induk."
 
 #: application/forms/Navigation.php:326
 msgid "All navigation links must have URIs."
-msgstr ""
+msgstr "Semua tautan navigasi harus punya URI."
 
 #: application/forms/Navigation.php:339
 msgid "All navigation links must have different URIs."
-msgstr ""
+msgstr "Semua tautan navigasi harus punya URI berbeda."
 
 #: application/forms/Navigation.php:345
 #, php-format
 msgid "Invalid URI for \"%s\" navigation link:  \"%s\""
-msgstr ""
+msgstr "URI cacat untuk \"%s\" tautan navigasi:  \"%s\""
 
 #: application/forms/Navigation.php:378
 msgid "Navigation links that have undeleteable sublinks cannot be deleted."
-msgstr ""
+msgstr "Tautan navigasi yang punya subtautan yang tidak bisa dihapus tidak dapat dihapus."
 
 #: application/forms/RecoverPassword.php:36
 msgid "Email address is required."
-msgstr ""
+msgstr "Alamat email diperlukan."
 
 #: application/forms/RecoverPassword.php:46
 msgid "Invalid email address given."
-msgstr ""
+msgstr "Alamat email cacat."
 
 #: application/forms/RecoverPassword.php:48
 msgid "Invalid format given for email address."
-msgstr ""
+msgstr "Format cacat untuk alamat email."
 
 #: application/forms/RecoverPassword.php:50
 msgid "Invalid hostname given for email address."
-msgstr ""
+msgstr "Hostname cacat untuk alamat email."
 
 #: application/forms/RecoverPassword.php:66
 msgid "Invalid email address"
-msgstr "Невалидна мејл адреса"
+msgstr "Alamat email cacat"
 
 #: application/forms/ResetPassword.php:27
 msgid "Password is required."
-msgstr "Лозинката е задожителна."
+msgstr "Password diperlukan."
 
 #: application/forms/ResetPassword.php:33
 msgid "Typed passwords do not match."
-msgstr "Впишаните лозинки не се идентични."
+msgstr "Password yang diketik tidak cocok."
 
 #: application/forms/SecuritySettings.php:24
 msgid "Disable File Upload Validation"
-msgstr ""
+msgstr "Nonaktifkan Validasi Unggah File"
 
 #: application/forms/SecuritySettings.php:26
 msgid ""
 "Check this field if you would like to allow any file to be uploaded to "
 "Omeka."
-msgstr ""
+msgstr "Centang field ini bila anda ingin memperkenankan file apapun untuk diunggahkan ke Omeka."
 
 #: application/forms/SecuritySettings.php:32
 msgid "Allowed File Extensions"
-msgstr ""
+msgstr "Ekstensi File yang Diperkenankan"
 
 #: application/forms/SecuritySettings.php:33
 msgid "List of allowed extensions for file uploads"
-msgstr ""
+msgstr "Daftar ekstensi yang diperkenankan untuk unggah file"
 
 #: application/forms/SecuritySettings.php:42
 msgid "Allowed File Types"
-msgstr ""
+msgstr "Tipe File yang Diperkenankan"
 
 #: application/forms/SecuritySettings.php:43
 msgid "List of allowed MIME types for file uploads"
-msgstr ""
+msgstr "Daftar tipe MIME yang diperkenankan untuk unggah file"
 
 #: application/forms/SecuritySettings.php:52
 msgid "ReCaptcha Public Key"
-msgstr ""
+msgstr "Key Publik ReCaptcha"
 
 #: application/forms/SecuritySettings.php:53
 msgid ""
 "Enter public key from recaptcha.net. Both this and the private key must be "
 "filled in to secure public forms."
-msgstr ""
+msgstr "Masukkan key publik dari recaptcha.net. Key publik dan key privat keduanya harus dimasukkan ke formulir publik yang aman."
 
 #: application/forms/SecuritySettings.php:60
 msgid "ReCaptcha Private Key"
-msgstr ""
+msgstr "Key Privat ReCaptcha"
 
 #: application/forms/SecuritySettings.php:61
 msgid ""
 "Enter private key from recaptcha.net. Both this and the public key must be "
 "filled in to secure public forms."
-msgstr ""
+msgstr "Masukkan key privat dari recaptcha.net. Key privat dan key publik keduanya harus dimasukkan ke formulir publik yang aman."
 
 #: application/forms/SecuritySettings.php:69
 msgid "Enable HTML Filtering"
-msgstr ""
+msgstr "Aktifkan Penyaringan HTML"
 
 #: application/forms/SecuritySettings.php:74
 msgid "Allowed HTML Elements"
-msgstr ""
+msgstr "Perkenankan Elemen HTML"
 
 #: application/forms/SecuritySettings.php:75
 msgid "List of allowed HTML elements in form input"
-msgstr ""
+msgstr "Daftar elemen HTML yang diperkenankan dalam masukan formulir"
 
 #: application/forms/SecuritySettings.php:82
 msgid "Allowed HTML Attributes"
-msgstr ""
+msgstr "Perkenankan Atribut HTML"
 
 #: application/forms/SecuritySettings.php:83
 msgid "List of allowed HTML attributes in form input"
-msgstr ""
+msgstr "Daftar atribut HTML yang diperkenankan dalam masukan formulir"
 
 #: application/forms/SecuritySettings.php:94
 msgid "File Validation"
-msgstr ""
+msgstr "Validasi File"
 
 #: application/forms/SecuritySettings.php:102
 msgid "Captcha"
-msgstr ""
+msgstr "Captcha"
 
 #: application/forms/SecuritySettings.php:111
 msgid "HTML Filtering"
-msgstr ""
+msgstr "Penyaringan HTML"
 
 #: application/forms/User.php:30
 msgid ""
 "Username must contain only letters and numbers, and be 30 characters or "
 "fewer."
-msgstr ""
+msgstr "Username harus hanya mengandung huruf dan angka saja, dan terdiri dari 30 karakter atau kurang."
 
 #: application/forms/User.php:37
 msgid "Username is required."
-msgstr ""
+msgstr "Username diperlukan."
 
 #: application/forms/User.php:45
 msgid "Username must contain only letters and numbers."
-msgstr ""
+msgstr "Username harus mengandung hanya huruf dan angka saja."
 
 #: application/forms/User.php:55
 msgid "Username must be at least %min% characters long."
-msgstr ""
+msgstr "Username must be at least %min% characters long."
 
 #: application/forms/User.php:57
 msgid "Username must be at most %max% characters long."
-msgstr ""
+msgstr "Username must be at most %max% characters long."
 
 #: application/forms/User.php:71
 msgid "This username is already in use."
-msgstr ""
+msgstr "Username ini sudah digunakan."
 
 #: application/forms/User.php:80
 msgid "Display Name"
-msgstr ""
+msgstr "Nama Tampilan"
 
 #: application/forms/User.php:81
 msgid "Name as it should be displayed on the site"
-msgstr ""
+msgstr "Nama sebagaimana yang ditayangkan pada situs"
 
 #: application/forms/User.php:87 application/models/User.php:91
 msgid "Real Name is required."
-msgstr ""
+msgstr "Nama Asli diperlukan."
 
 #: application/forms/User.php:93
 msgid "This email address is invalid."
-msgstr "Оваа е-мејл адреса не е валидна!"
+msgstr "Alamat email ini cacat."
 
 #: application/forms/User.php:101
 msgid "Email is required."
-msgstr ""
+msgstr "Email dibutuhkan."
 
 #: application/forms/User.php:120
 msgid "This email address is already in use."
-msgstr ""
+msgstr "Alamat email ini sudah digunakan."
 
 #: application/forms/User.php:129
 msgid ""
 "Roles describe the permissions a user has. See <a "
 "href='http://omeka.org/codex/User_Roles' target='_blank'>documentation</a> "
 "for details."
-msgstr ""
+msgstr "Peran menjelaskan perizinan dari seorang pengguna. Lihat <a href='http://omeka.org/codex/User_Roles' target='_blank'>dokumentasi</a> untuk rinciannya."
 
 #: application/forms/User.php:137
 msgid "Active?"
-msgstr ""
+msgstr "Aktif?"
 
 #: application/forms/User.php:138
 msgid "Inactive users cannot log in to the site."
-msgstr ""
+msgstr "User yang tidak aktif tidak dapat masuk ke situs."
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:115
 #, php-format
 msgid "The configured PHP path (%s) is invalid."
-msgstr ""
+msgstr "Path PHP yang dikonfigurasikan (%s) cacat."
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:125
 #, php-format
 msgid "The configured PHP path (%s) does not point to a PHP-CLI binary."
-msgstr ""
+msgstr "Path PHP yang dikonfigurasikan (%s) tidak merujuk pada sebuah PHP-CLI binary."
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:127
 #, php-format
 msgid ""
 "The configured PHP path (%s) points to a PHP-CLI binary with an invalid "
 "version (%s)"
-msgstr ""
+msgstr "Path PHP yang dikonfigurasikan (%s) merujuk pada sebuah PHP-CLI binary dengan versi yang cacat (%s)"
 
 #: application/libraries/Omeka/Navigation.php:214
 msgid "The page must be normalized and have a valid uid."
-msgstr ""
+msgstr "Halaman harus dinormalisasi dan punya uid yang valid."
 
 #: application/libraries/Omeka/Navigation.php:226
 msgid ""
 "The parent container must either be the navigation object or a descendant "
 "subpage of the navigation object."
-msgstr ""
+msgstr "Container induk harus menjadi objek navigasi ataupun sub halaman turunan dari objek navigasi."
 
 #: application/libraries/Omeka/Navigation/Page/Uri.php:128
 #, php-format
 msgid "Invalid URI for Omeka_Navigation_Page_Uri object: %s"
-msgstr ""
+msgstr "URI cacat untuk objek Omeka_Navigation_Page_Uri: %s"
 
 #: application/libraries/Omeka/Plugin/Ini.php:63
 #, php-format
 msgid "Path to plugin.ini for \"%s\" is not correct."
-msgstr ""
+msgstr "Path ke plugin.ini untuk \"%s\" tidak benar."
 
 #: application/libraries/Omeka/Plugin/Installer.php:77
 #, php-format
 msgid "The \"%s\" plugin must be installed and have newer files to upgrade it."
-msgstr ""
+msgstr "Plugin \"%s\" harus diinstalasikan dan memiliki file terbaru untuk meningkatkannya."
 
 #: application/libraries/Omeka/Plugin/Installer.php:114
 msgid "Plugin must have a valid directory name before it can be installed."
-msgstr ""
+msgstr "Plugin harus memiliki sebuah nama direktori yang valid sebelum ia dapat diinstalasikan."
 
 #: application/libraries/Omeka/Record/AbstractRecord.php:349
 #, php-format
 msgid "'%s' is an invalid special value."
-msgstr ""
+msgstr "'%s' adalah sebuah nilai spesial yang cacat."
 
 #: application/libraries/Omeka/Record/Iterator.php:49
 msgid "An invalid value was detected during record iteration."
-msgstr ""
+msgstr "Sebuah nilai yang cacat telah terdeteksi selama pengulangan rekod."
 
 #: application/libraries/globals.php:399
 msgid "File"
-msgstr ""
+msgstr "File"
 
 #: application/libraries/globals.php:457
 msgid "Keyword"
-msgstr ""
+msgstr "Kata kunci"
 
 #: application/libraries/globals.php:458
 msgid "Boolean"
-msgstr ""
+msgstr "Boolean"
 
 #: application/libraries/globals.php:459
 msgid "Exact match"
-msgstr ""
+msgstr "Mirip sekali"
 
 #: application/libraries/globals.php:1227
 #: application/libraries/globals.php:1248
 #, php-format
 msgid "Could not find file %s!"
-msgstr ""
+msgstr "Tidak dapat menemukan file %s!"
 
 #: application/libraries/globals.php:1554
 msgid "Select Below "
-msgstr ""
+msgstr "Pilih di Bawah"
 
 #: application/libraries/globals.php:1596
 msgid "Omeka RSS Feed"
-msgstr "Omeka RSS Feed"
+msgstr "RSS Feed Omeka"
 
 #: application/libraries/globals.php:1597
 msgid "Omeka Atom Feed"
-msgstr "Omeka Atom Feed"
+msgstr "Atom Feed Omeka"
 
 #: application/libraries/globals.php:2247
 msgid "View"
-msgstr ""
+msgstr "Lihat"
 
 #: application/libraries/globals.php:2309
 msgid "No Collection"
-msgstr ""
+msgstr "Tidak ada Koleksi"
 
 #: application/libraries/globals.php:2424
 msgid "RSS"
@@ -2734,79 +2734,79 @@ msgstr "RSS"
 
 #: application/libraries/globals.php:2441
 msgid "Next Item &rarr;"
-msgstr ""
+msgstr "Item Selanjutnya &rarr;"
 
 #: application/libraries/globals.php:2461
 msgid "&larr; Previous Item"
-msgstr ""
+msgstr "&larr; Item Sebelumnya"
 
 #: application/libraries/globals.php:2638
 msgid "Browse All"
-msgstr ""
+msgstr "Ramban Semua"
 
 #: application/libraries/globals.php:2643
 msgid "Browse by Tag"
-msgstr ""
+msgstr "Ramban berdasarkan Tag"
 
 #: application/libraries/globals.php:2905
 msgid "No tags are available."
-msgstr ""
+msgstr "Tidak ada tag tersedia."
 
 #: application/models/Builder/Item.php:256
 msgid "Must specify a file transfer type when attaching files to an item!"
-msgstr ""
+msgstr "Harus menspesifikasikan sebuah tipe transfer file ketika melampirkan file ke sebuah item!"
 
 #: application/models/Collection.php:81
 msgid "Cannot associate the collection with an unsaved user."
-msgstr ""
+msgstr "Tidak dapat mengasosiasikan koleksi tersebut dengan sebuah pengguna yang belum tersimpan."
 
 #: application/models/Element.php:141
 msgid "The element name must not be empty."
-msgstr ""
+msgstr "Nama elemen tidak boleh kosong."
 
 #: application/models/Element.php:147
 #, php-format
 msgid "An element named \"%s\" already exists for the \"%s\" element set."
-msgstr ""
+msgstr "Elemen \"%s\" sudah ada untuk kumpulan elemen \"%s\"."
 
 #: application/models/Element.php:175
 #, php-format
 msgid "Cannot set element set ID: set named \"%s\" does not exist."
-msgstr ""
+msgstr "Tidak dapat menyetel ID kumpulan elemen: kumpulan \"%s\" tidak ada."
 
 #: application/models/ElementSet.php:98
 msgid "Name of element set must be unique."
-msgstr ""
+msgstr "Nama kumpulan elemen harus unik."
 
 #: application/models/ElementSet.php:102
 msgid "Name of element set must not be empty."
-msgstr ""
+msgstr "Nama kumpulan elemen tidak boleh kosong."
 
 #: application/models/ElementText.php:28
 msgid "Invalid record ID."
-msgstr ""
+msgstr "ID rekod cacat."
 
 #: application/models/ElementText.php:31
 msgid "All element texts must have a record type."
-msgstr ""
+msgstr "Semua teks elemen harus memiliki sebuah tipe rekod."
 
 #: application/models/ElementText.php:34
 msgid "Invalid element ID."
-msgstr ""
+msgstr "ID elemen cacat."
 
 #: application/models/File.php:150
 msgid "Cannot get the local path for a stored file."
-msgstr ""
+msgstr "Tidak dapat mengambil path lokal untuk menyimpan file."
 
 #: application/models/File.php:371
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
-msgstr ""
+msgstr "\"%s\" bukan turunan file yang valid."
 
 #: application/models/Item.php:265
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
-msgstr ""
+msgstr "File tidak dapat dilampirkan ke sebuah item yang tidak tetap di basisdata!"
 
 #. / Chicago-style item citation: two authors
 #: application/models/Item.php:391
@@ -2834,160 +2834,160 @@ msgstr ""
 
 #: application/models/Item.php:435
 msgid "Cannot add an existing file to an item!"
-msgstr ""
+msgstr "Tidak dapat menambahkan file yang ada ke sebuah item!"
 
 #: application/models/Item.php:439
 msgid "File must be valid before it can be associated with an item!"
-msgstr ""
+msgstr "File harus valid sebelum ia diasosiasikan dengan sebuah item!"
 
 #: application/models/ItemType.php:67
 #, php-format
 msgid "The item type name must have between %1$s and %2$s characters."
-msgstr ""
+msgstr "Nama tipe item harus antara %1$s dan %2$s karakter."
 
 #: application/models/ItemType.php:71
 msgid "The item type name must be unique."
-msgstr ""
+msgstr "Nama tipe item haruslah unik."
 
 #: application/models/ItemType.php:150
 msgid "There are too many values in the element ordering array."
-msgstr ""
+msgstr "Terlalu banyak nilai dalam elemen array yang mengurut."
 
 #: application/models/ItemType.php:152
 msgid "There are too few values in the element ordering array."
-msgstr ""
+msgstr "Terlalu sedikit nilai dalam elemen array yang mengurut."
 
 #: application/models/ItemType.php:191
 msgid ""
 "Invalid element data. To add elements, you must either pass an element "
 "objects or an array of element metadata."
-msgstr ""
+msgstr "Data elemen cacat. Untuk menambah elemen, anda harus melewatkan sebuah objek elemen atau sebuah array dari metadata elemen."
 
 #: application/models/ItemType.php:258
 msgid ""
 "Cannot remove elements from an item type that is not persistent in the "
 "database!"
-msgstr ""
+msgstr "Tidak dapat menghapus elemen dari sebuah tipe item yang tidak tetap dalam basisdata!"
 
 #: application/models/ItemType.php:267
 #, php-format
 msgid "Cannot find element with ID %s!"
-msgstr ""
+msgstr "Tidak dapat menemukan elemen dengan ID %s!"
 
 #: application/models/ItemType.php:309
 #, php-format
 msgid "Item type does not contain an element with the ID %s!"
-msgstr ""
+msgstr " Tipe item tidak mengandung sebuah elemen dengan ID %s!"
 
 #: application/models/ItemType.php:329
 msgid ""
 "Invalid parameter. The hasElement function requires either an element object"
 " or an element id to determine if an item type has an element."
-msgstr ""
+msgstr "Parameter cacat. Fungsi hasElement membutuhkan sebuah objek elemen atau sebuah id elemen untuk untuk menentukan apakah jenis item memiliki elemen."
 
 #: application/models/Mixin/ElementText.php:270
 #, php-format
 msgid "There is no element \"%1$s\", \"%2$s\"!"
-msgstr ""
+msgstr "Tidak ada elemen \"%1$s\", \"%2$s\"!"
 
 #: application/models/Mixin/ElementText.php:289
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
-msgstr ""
+msgstr "Tidak dapat menemukan sebuah elemen dengan ID dari '%s'!"
 
 #: application/models/Mixin/ElementText.php:408
 msgid "Element texts are not formatted correctly!"
-msgstr ""
+msgstr "Teks elemen tidak diformat dengan benar!"
 
 #: application/models/Mixin/ElementText.php:554
 #, php-format
 msgid "The \"%s\" field has at least one invalid value!"
-msgstr ""
+msgstr "Field \"%s\" mengandung sedikitnya satu nilai yang cacat!"
 
 #: application/models/Mixin/ElementText.php:613
 msgid "Cannot save element text for records that are not yet persistent!"
-msgstr ""
+msgstr "Tidak dapat menyimpan teks elemen untuk rekod yang belum tetap!"
 
 #: application/models/Mixin/Tag.php:157
 msgid "A valid record ID # must be provided when tagging."
-msgstr ""
+msgstr "Rekod valid ID # harus disediakan saat memberi tag."
 
 #: application/models/Option.php:25 application/models/Option.php:29
 msgid "Each option must have a unique name."
-msgstr "Секоја опција мора да има уникатно име."
+msgstr "Setiap opsi haruslah punya nama yang unik."
 
 #: application/models/Plugin.php:84
 msgid "Names of plugins must not be blank"
-msgstr ""
+msgstr "Nama plugin tidak boleh kosong"
 
 #: application/models/Table/Collection.php:41
 #, php-format
 msgid "[Untitled] #%s"
-msgstr ""
+msgstr "[Untitled] #%s"
 
 #: application/models/Table/Item.php:159
 msgid "Invalid search type given!"
-msgstr ""
+msgstr "Tipe pencarian yang diberikan cacat!"
 
 #: application/models/Tag.php:41
 msgid "Tags must be given a name."
-msgstr ""
+msgstr "Tag harus diberi nama."
 
 #: application/models/Tag.php:45
 msgid "That name is already taken for this tag."
-msgstr ""
+msgstr "Nama tersebut sudah diambil untuk tag ini."
 
 #: application/models/User.php:48
 msgid "User may not change permissions to super-user"
-msgstr ""
+msgstr "Pengguna tidak dapat mengubah perizinan ke super-user"
 
 #: application/models/User.php:51
 msgid "User may not change roles."
-msgstr ""
+msgstr "Pengguna tidak dapat mengubah peran."
 
 #: application/models/User.php:104 application/models/User.php:143
 msgid "The user must be assigned a role."
-msgstr ""
+msgstr "Pengguna harus diberikan sebuah peran."
 
 #: application/models/User.php:109
 #, php-format
 msgid "The username \"%1$s\" must be between %2$s and %3$s characters."
-msgstr ""
+msgstr "Username \"%1$s\" harus antara %2$s dan %3$s karakter."
 
 #: application/models/User.php:111
 msgid "The username must be alphanumeric."
-msgstr ""
+msgstr "Username harus berupa alfanumerik."
 
 #: application/models/User.php:113
 #, php-format
 msgid "'%s' is already in use. Please choose another username."
-msgstr ""
+msgstr "'%s' sudah digunakan. Silahkan pilih username yang lain."
 
 #: application/models/UsersActivations.php:26
 msgid "Cannot create a user activation for non-existent user."
-msgstr ""
+msgstr "Tidak dapat membuat aktivasi pengguna untuk pengguna yang tidak ada."
 
 #: application/tests/suite/Omeka/Db/Migration/_files/migrations/20080717013526_foobar.php:18
 msgid "This migration should have been run previously (should not run again)."
-msgstr ""
+msgstr "Migrasi ini seharusnya sudah dijalankan sebelumnya (jangan dijalankan lagi)."
 
 #: application/tests/suite/Omeka/Db/Migration/_files/migrations/50000101120000_notRunYet.php:19
 msgid "This migration should not be run."
-msgstr ""
+msgstr "Migrasi ini seharusnya jangan dijalankan."
 
 #: application/tests/suite/Omeka/NavigationTest.php:752
 #: application/tests/suite/Omeka/NavigationTest.php:817
 #: application/tests/suite/Omeka/NavigationTest.php:839
 #: application/tests/suite/Omeka/NavigationTest.php:952
 msgid "Edit Items"
-msgstr ""
+msgstr "Edit Item"
 
 #: application/tests/suite/Omeka/NavigationTest.php:758
 #: application/tests/suite/Omeka/NavigationTest.php:818
 #: application/tests/suite/Omeka/NavigationTest.php:856
 #: application/tests/suite/Omeka/NavigationTest.php:953
 msgid "Edit Collections"
-msgstr ""
+msgstr "Edit Koleksi"
 
 #: application/tests/suite/Omeka/NavigationTest.php:764
 #: application/tests/suite/Omeka/NavigationTest.php:819
@@ -2995,19 +2995,19 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:954
 #: install/views/scripts/layout.phtml:6 install/views/scripts/layout.phtml:23
 msgid "Omeka"
-msgstr ""
+msgstr "Omeka"
 
 #: application/tests/suite/Omeka/NavigationTest.php:825
 #: application/tests/suite/Omeka/NavigationTest.php:951
 msgid "CHNM"
-msgstr ""
+msgstr "CHNM"
 
 #: application/tests/suite/Omeka/NavigationTest.php:982
 #: application/tests/suite/Omeka/NavigationTest.php:990
 #: application/tests/suite/Omeka/NavigationTest.php:1128
 #: application/tests/suite/Omeka/NavigationTest.php:1136
 msgid "Page "
-msgstr ""
+msgstr "Halaman"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1009
 #: application/tests/suite/Omeka/NavigationTest.php:1013
@@ -3016,7 +3016,7 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1156
 #: application/tests/suite/Omeka/NavigationTest.php:1256
 msgid "Page 1"
-msgstr ""
+msgstr "Halaman 1"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1016
 #: application/tests/suite/Omeka/NavigationTest.php:1022
@@ -3027,7 +3027,7 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1200
 #: application/tests/suite/Omeka/NavigationTest.php:1232
 msgid "Page 2"
-msgstr ""
+msgstr "Halaman 2"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1025
 #: application/tests/suite/Omeka/NavigationTest.php:1029
@@ -3038,7 +3038,7 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1193
 #: application/tests/suite/Omeka/NavigationTest.php:1255
 msgid "Page 3"
-msgstr ""
+msgstr "Halaman 3"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1032
 #: application/tests/suite/Omeka/NavigationTest.php:1041
@@ -3051,7 +3051,7 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1240
 #: application/tests/suite/Omeka/NavigationTest.php:1250
 msgid "Page 4"
-msgstr ""
+msgstr "Halaman 4"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1044
 #: application/tests/suite/Omeka/NavigationTest.php:1048
@@ -3062,129 +3062,129 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1223
 #: application/tests/suite/Omeka/NavigationTest.php:1241
 msgid "Page 5"
-msgstr ""
+msgstr "Halaman 5"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1051
 #: application/tests/suite/Omeka/NavigationTest.php:1055
 #: application/tests/suite/Omeka/NavigationTest.php:1215
 msgid "Page 6"
-msgstr ""
+msgstr "Halaman 6"
 
 #: application/views/helpers/AllElementTexts.php:101
 msgid "[no text]"
-msgstr ""
+msgstr "[no text]"
 
 #: application/views/helpers/ElementForm.php:65
 msgid "Add Input"
-msgstr ""
+msgstr "Tambah Masukan"
 
 #: application/views/helpers/ElementInput.php:131
 msgid "Use HTML"
-msgstr "Користи HTML"
+msgstr "Gunakan HTML"
 
 #: application/views/helpers/GetCurrentRecord.php:27
 #, php-format
 msgid "A current %s variable has not been set to this view."
-msgstr ""
+msgstr "Sebuah variabel %s saat ini telah disetel untuk tampilan ini."
 
 #: application/views/helpers/GetLoopRecords.php:30
 #, php-format
 msgid "A loop %s variable has not been set to this view."
-msgstr ""
+msgstr "Sebuah variabel %s perulangan telah disetel untuk tampilan ini."
 
 #: application/views/helpers/Loop.php:27
 msgid "An array of records is not available for the loop."
-msgstr ""
+msgstr "Sebuah array dari rekod tidak tersedia untuk pengulangan."
 
 #: application/views/helpers/RecordUrl.php:33
 msgid "Invalid record passed while getting record URL."
-msgstr ""
+msgstr "Rekod cacat dilewatkan saat mendapatkan URL rekod."
 
 #: application/views/helpers/RecordUrl.php:43
 msgid "Invalid action passed while getting record URL."
-msgstr ""
+msgstr "Aksi cacat dilewatkan saat mendapatkan URL rekod."
 
 #: application/views/helpers/RecordUrl.php:66
 msgid "Invalid return value while getting record URL."
-msgstr ""
+msgstr "Cacat mengembalikan nilai saat mendapatkan URL rekod."
 
 #: application/views/scripts/collections/browse.php:24
 msgid "Contributors(s)"
-msgstr ""
+msgstr "Kontributor(s)"
 
 #: application/views/scripts/collections/browse.php:31
 #, php-format
 msgid "View the items in %s"
-msgstr ""
+msgstr "Lihat item dalam %s"
 
 #: application/views/scripts/collections/random-featured.php:11
 msgid "No featured collections are available."
-msgstr ""
+msgstr "Tidak ada koleksi istimewa tersedia."
 
 #: application/views/scripts/collections/show.php:15
 #, php-format
 msgid "Items in the %s Collection"
-msgstr ""
+msgstr "Item dalam koleksi %s"
 
 #: application/views/scripts/collections/show.php:40
 msgid "There are currently no items within this collection."
-msgstr ""
+msgstr "Tidak terdapat item saat ini pada koleksi ini."
 
 #: application/views/scripts/common/footer.php:14
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
-msgstr "Proudly powered  <a href=\"http://omeka.org\">Omeka</a>."
+msgstr "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
 
 #: application/views/scripts/common/pagination_control.php:7
 msgid "First"
-msgstr "Прв/а"
+msgstr "Awal"
 
 #: application/views/scripts/common/pagination_control.php:14
 msgid "Previous"
-msgstr "Предходен/на"
+msgstr "Sebelumnya"
 
 #: application/views/scripts/common/pagination_control.php:30
 msgid "Next"
-msgstr "Следен/а"
+msgstr "Selanjutnya"
 
 #: application/views/scripts/common/pagination_control.php:37
 msgid "Last"
-msgstr "Последен/а"
+msgstr "Akhir"
 
 #: application/views/scripts/error/403.php:2
 msgid "403 Page Forbidden"
-msgstr "403 Забранет пристап до страната"
+msgstr "403 Halaman Terlarang"
 
 #: application/views/scripts/error/403.php:8
 msgid "You do not have permission to access this page."
-msgstr "Немате дозвола за пристап до оваа страна"
+msgstr "Anda tidak punya izin untuk mengakses halaman ini."
 
 #: application/views/scripts/error/404.dc.php:1
 #: application/views/scripts/error/404.php:2
 #: application/views/scripts/error/404.xml.php:1
 msgid "404 Page Not Found"
-msgstr "404 Страната не е пронајдена"
+msgstr "404 Halaman Tidak Ditemukan"
 
 #: application/views/scripts/error/404.php:6
 #, php-format
 msgid "%s is not a valid URL."
-msgstr "%s не е валиден URL."
+msgstr "%s bukan URL yang valid."
 
 #: application/views/scripts/error/404.rss2.php:1
 msgid "Rss2.0 Feed Not Found!"
-msgstr ""
+msgstr "Rss2.0 Feed Tidak Ditemukan!"
 
 #: application/views/scripts/error/405.php:2
 msgid "405 Method Not Allowed"
-msgstr ""
+msgstr "405 Metode Tidak Diperkenankan"
 
 #: application/views/scripts/error/405.php:6
 #, php-format
 msgid "The method used to access this URL (%s) is not valid."
-msgstr ""
+msgstr "Metode yang digunakan untuk mengakses URL (%s) ini tidak valid."
 
 #: application/views/scripts/error/index.php:4
 msgid "Omeka has encountered an error"
-msgstr ""
+msgstr "Omeka mengalami sebuah masalah"
 
 #: application/views/scripts/error/index.php:33
 msgid ""
@@ -3192,135 +3192,135 @@ msgid ""
 "Omeka Codex page on <a "
 "href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error "
 "messages</a>."
-msgstr ""
+msgstr "Untuk mempelajari bagaimana melihat lebih lanjut informasi rinci mengenai masalah ini, lihat halaman Omeka Codex di <a href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error messages</a>."
 
 #: application/views/scripts/index.php:14
 msgid "Featured Item"
-msgstr ""
+msgstr "Item Istimewa"
 
 #: application/views/scripts/index.php:22
 msgid "Featured Collection"
-msgstr ""
+msgstr "Koleksi Istimewa"
 
 #: application/views/scripts/index.php:67
 msgid "No recent items available."
-msgstr ""
+msgstr "Tidak ada item terbaru tersedia."
 
 #: application/views/scripts/index.php:71
 msgid "View All Items"
-msgstr ""
+msgstr "Lihat Semua Item"
 
 #: application/views/scripts/items/browse.php:22
 msgid "Sort by: "
-msgstr ""
+msgstr "Sortir berdasarkan:"
 
 #: application/views/scripts/items/random-featured.php:20
 msgid "No featured items are available."
-msgstr ""
+msgstr "Tidak ada item istimewa tersedia."
 
 #: application/views/scripts/items/show.php:10
 msgid "Files"
-msgstr ""
+msgstr "File"
 
 #: application/views/scripts/items/show.php:33
 msgid "Citation"
-msgstr ""
+msgstr "Kutipan"
 
 #: application/views/scripts/search/index.php:2
 msgid "Search Omeka "
-msgstr ""
+msgstr "Pencarian Omeka"
 
 #: application/views/scripts/search/index.php:12
 msgid "Record Type"
-msgstr ""
+msgstr "Tipe Rekod"
 
 #: application/views/scripts/search/index.php:29
 msgid "Your query returned no results."
-msgstr ""
+msgstr "Query anda tidak memberi hasil."
 
 #: application/views/scripts/search/search-filters.php:3
 msgid "Query:"
-msgstr ""
+msgstr "Query:"
 
 #: application/views/scripts/search/search-filters.php:4
 msgid "Query type:"
-msgstr ""
+msgstr "Tipe query:"
 
 #: application/views/scripts/search/search-filters.php:5
 msgid "Record types:"
-msgstr ""
+msgstr "Tipe rekod:"
 
 #: application/views/scripts/search/search-form.php:6
 msgid "Search using this query type:"
-msgstr ""
+msgstr "Cari menggunakan tipe query ini:"
 
 #: application/views/scripts/search/search-form.php:11
 msgid "Search only these record types:"
-msgstr ""
+msgstr "Cari hanya tipe rekod ini:"
 
 #: application/views/scripts/search/search-form.php:17
 msgid "Go to search settings to select record types to use."
-msgstr ""
+msgstr "Beralih ke setelan pencarian untuk memilih tipe rekod yang digunakan."
 
 #: application/views/scripts/search/search-form.php:19
 msgid "Advanced Search (Items only)"
-msgstr ""
+msgstr "Pencarian Lanjutan (Hanya item)"
 
 #: application/views/scripts/users/login.php:9
 msgid "Go to Home Page"
-msgstr ""
+msgstr "Beralih ke Beranda"
 
 #: application/views/scripts/users/login.php:9
 msgid "Lost your password?"
-msgstr ""
+msgstr "Lupa password anda?"
 
 #: install/controllers/IndexController.php:25
 msgid "Could not load database resource!"
-msgstr ""
+msgstr "Tidak dapat memuat sumber basisdata!"
 
 #: install/views/scripts/index/errors.phtml:1
 msgid "Installation Error"
-msgstr "Грешка при инсталација"
+msgstr "Galat Instalasi"
 
 #: install/views/scripts/index/errors.phtml:2
 msgid ""
 "Before installation can continue, the following errors must be resolved:"
-msgstr "Пред да продолжи инсталацијата, следниве грешки мора да бидат поправени"
+msgstr "Sebelum instalasi dilanjutkan, masalah berikut ini harus diselesaikan dulu:"
 
 #: install/views/scripts/index/fatal-error.phtml:1
 msgid "Fatal Error"
-msgstr "Фатална грешка"
+msgstr "Galat Fatal"
 
 #: install/views/scripts/index/index.phtml:2
 msgid "Installation Warning"
-msgstr "Предупредување при инсталација"
+msgstr "Peringatan Instalasi"
 
 #: install/views/scripts/index/index.phtml:4
 msgid ""
 "The following issues will not affect installation, but they may negatively "
 "affect the behavior of Omeka:"
-msgstr ""
+msgstr "Isu berikut ini tidak akan mempengaruhi instalasi, tetapi mereka akan berdampak negatif terhadap kinerja Omeka:"
 
 #: install/views/scripts/index/index.phtml:14
 msgid "Configure Your Site"
-msgstr "Конфигурирај го сајтот"
+msgstr "Konfigurasi Situs Anda"
 
 #: install/views/scripts/index/index.phtml:16
 msgid "Form Validation Errors"
-msgstr ""
+msgstr "Validasi Formulir Bermasalah"
 
 #: install/views/scripts/index/installed.phtml:1
 msgid "Success!"
-msgstr ""
+msgstr "Sukses!"
 
 #: install/views/scripts/index/installed.phtml:2
 msgid "Omeka is installed."
-msgstr ""
+msgstr "Omeka diinstalasikan."
 
 #: install/views/scripts/index/installed.phtml:3
 msgid "Public Site"
-msgstr ""
+msgstr "Situs Publik"
 
 #: install/views/scripts/index/installed.phtml:3
 msgid "Admin Dashboard"
-msgstr ""
+msgstr "Dasbor Admin"

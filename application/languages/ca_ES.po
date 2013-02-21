@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-01-23 14:58+0000\n"
-"Last-Translator: rubenalcaraz <rubenalcarazmartinez@gmail.com>\n"
+"PO-Revision-Date: 2013-02-11 19:35+0000\n"
+"Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Catalan (Spain) (http://www.transifex.com/projects/p/omeka/language/ca_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,6 +31,7 @@ msgstr "El conjunt d'elements Dublin Core és comú per a tots els registres a O
 #: admin/themes/default/collections/browse.php:22
 #: admin/themes/default/items/browse.php:40
 #: application/views/scripts/items/browse.php:17
+#: application/views/scripts/search/index.php:13
 msgid "Title"
 msgstr "Títol"
 
@@ -484,8 +485,8 @@ msgstr "(Privat)"
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:27
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
-#: admin/themes/default/files/show.php:28 admin/themes/default/index.php:38
-#: admin/themes/default/index.php:57
+#: admin/themes/default/files/show.php:28 admin/themes/default/index.php:54
+#: admin/themes/default/index.php:73
 #: admin/themes/default/item-types/browse.php:26
 #: admin/themes/default/item-types/show.php:51
 #: admin/themes/default/items/browse.php:24
@@ -520,7 +521,7 @@ msgstr "Comenceu afegint la vostra primera col·lecció."
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/libraries/globals.php:2490
+#: application/libraries/globals.php:2489
 #: application/views/scripts/collections/show.php:4
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
@@ -602,7 +603,7 @@ msgstr "Tipus d'ítems"
 #: admin/themes/default/common/content-nav.php:21
 #: admin/themes/default/items/browse.php:94
 #: admin/themes/default/items/show.php:63
-#: application/views/scripts/items/browse.php:46
+#: application/views/scripts/items/browse.php:44
 #: application/views/scripts/items/show.php:26
 msgid "Tags"
 msgstr "Etiquetes"
@@ -659,13 +660,13 @@ msgstr "Usuaris"
 msgid "Omeka Admin"
 msgstr "Administrador d'Omeka"
 
-#: admin/themes/default/common/header.php:58
+#: admin/themes/default/common/header.php:60
 #: application/views/scripts/common/admin-bar.php:7
 #, php-format
 msgid "Welcome, %s"
 msgstr "Benvingut, %s"
 
-#: admin/themes/default/common/header.php:59
+#: admin/themes/default/common/header.php:61
 #: application/views/scripts/common/admin-bar.php:15
 msgid "Log Out"
 msgstr "Sortir"
@@ -758,19 +759,19 @@ msgstr "Heu intentat accedir a una pàgina que sembla no existir. De vegades aix
 msgid "If this does not help, try contacting the %s."
 msgstr "Si l'ajuda no és suficient prova contactar amb %s."
 
-#: admin/themes/default/error/404.php:16 admin/themes/default/index.php:30
+#: admin/themes/default/error/404.php:16 admin/themes/default/index.php:46
 msgid "Recent Items"
 msgstr "Darrers ítems"
 
-#: admin/themes/default/error/404.php:29 admin/themes/default/index.php:43
+#: admin/themes/default/error/404.php:29 admin/themes/default/index.php:59
 msgid "Add a new item"
 msgstr "Afegeix un nou ítem"
 
-#: admin/themes/default/error/404.php:36 admin/themes/default/index.php:48
+#: admin/themes/default/error/404.php:36 admin/themes/default/index.php:64
 msgid "Recent Collections"
 msgstr "Darreres col·leccions"
 
-#: admin/themes/default/error/404.php:50 admin/themes/default/index.php:62
+#: admin/themes/default/error/404.php:50 admin/themes/default/index.php:78
 msgid "Add a new collection"
 msgstr "Afegeix una nova col·lecció"
 
@@ -889,6 +890,15 @@ msgstr "usuaris"
 #: admin/themes/default/index.php:18
 msgid "theme"
 msgstr "plantilla"
+
+#: admin/themes/default/index.php:29
+msgid "A new version of Omeka is available for download."
+msgstr ""
+
+#: admin/themes/default/index.php:30
+#, php-format
+msgid "Upgrade to %s"
+msgstr ""
 
 #: admin/themes/default/item-types/add-existing-element.php:22
 #: admin/themes/default/item-types/add-new-element.php:15
@@ -1123,8 +1133,8 @@ msgstr "Navega pels ítems"
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2266
-#: application/libraries/globals.php:2649
+#: application/libraries/globals.php:2265
+#: application/libraries/globals.php:2648
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Cercar ítems."
@@ -1992,13 +2002,13 @@ msgstr "El plugin %s s'ha desativat correctament!"
 msgid "The following error occurred while deactivating the %s plugin: "
 msgstr "El següent error ha ocurregut al desactivar el plugin %s :"
 
-#: application/controllers/PluginsController.php:191
+#: application/controllers/PluginsController.php:187
 #, php-format
 msgid "The %s plugin was successfully upgraded!"
 msgstr "El plugin %s ha estat actualitzat correctament!"
 
-#: application/controllers/PluginsController.php:198
-#: application/controllers/PluginsController.php:203
+#: application/controllers/PluginsController.php:196
+#: application/controllers/PluginsController.php:202
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
 msgstr "El següent error ha ocurregut a l'actualitzar el plugin %s :"
@@ -2650,7 +2660,7 @@ msgid ""
 "subpage of the navigation object."
 msgstr "El contenidor general ha de ser o bé l'objecte de navegació o bé una subpàgina associada a l'objecte de navegació."
 
-#: application/libraries/Omeka/Navigation/Page/Uri.php:124
+#: application/libraries/Omeka/Navigation/Page/Uri.php:128
 #, php-format
 msgid "Invalid URI for Omeka_Navigation_Page_Uri object: %s"
 msgstr "URI invàlida per Omeka_Navigation_Page_Uri object: %s"
@@ -2694,53 +2704,53 @@ msgstr "Booleà"
 msgid "Exact match"
 msgstr "Coincidència exacta"
 
-#: application/libraries/globals.php:1228
-#: application/libraries/globals.php:1249
+#: application/libraries/globals.php:1227
+#: application/libraries/globals.php:1248
 #, php-format
 msgid "Could not find file %s!"
 msgstr "No es pot trobar l'arxiu %s!"
 
-#: application/libraries/globals.php:1555
+#: application/libraries/globals.php:1554
 msgid "Select Below "
 msgstr "Tria a sota"
 
-#: application/libraries/globals.php:1597
+#: application/libraries/globals.php:1596
 msgid "Omeka RSS Feed"
 msgstr "Feed RSS d'Omeka"
 
-#: application/libraries/globals.php:1598
+#: application/libraries/globals.php:1597
 msgid "Omeka Atom Feed"
 msgstr "Feed Atom d'Omeka"
 
-#: application/libraries/globals.php:2248
+#: application/libraries/globals.php:2247
 msgid "View"
 msgstr "Visualitza"
 
-#: application/libraries/globals.php:2310
+#: application/libraries/globals.php:2309
 msgid "No Collection"
 msgstr "Sense col·lecció"
 
-#: application/libraries/globals.php:2425
+#: application/libraries/globals.php:2424
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2442
+#: application/libraries/globals.php:2441
 msgid "Next Item &rarr;"
 msgstr "Següent ítem &rarr;"
 
-#: application/libraries/globals.php:2462
+#: application/libraries/globals.php:2461
 msgid "&larr; Previous Item"
 msgstr "&larr; Anterior ítem"
 
-#: application/libraries/globals.php:2639
+#: application/libraries/globals.php:2638
 msgid "Browse All"
 msgstr "Navegar per tot el contingut"
 
-#: application/libraries/globals.php:2644
+#: application/libraries/globals.php:2643
 msgid "Browse by Tag"
 msgstr "Navegar per etiqueta"
 
-#: application/libraries/globals.php:2906
+#: application/libraries/globals.php:2905
 msgid "No tags are available."
 msgstr "No hi ha cap etiqueta disponible."
 
@@ -2795,16 +2805,40 @@ msgstr "No s'ha pogut obtenir la ruta d'accés per a un arxiu dipositat."
 msgid "\"%s\" is not a valid file derivative."
 msgstr "\"%s\" no és un fitxer derivat vàlid."
 
-#: application/models/Item.php:264
+#: application/models/Item.php:265
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
 msgstr "No es poden afegir arxius a ítems que no són persistents a la base de dades!"
 
-#: application/models/Item.php:430
+#. / Chicago-style item citation: two authors
+#: application/models/Item.php:391
+#, php-format
+msgid "%1$s and %2$s"
+msgstr ""
+
+#. / Chicago-style item citation: three authors
+#: application/models/Item.php:395
+#, php-format
+msgid "%1$s, %2$s, and %3$s"
+msgstr ""
+
+#. / Chicago-style item citation: more than three authors
+#: application/models/Item.php:399
+#, php-format
+msgid "%s et al."
+msgstr ""
+
+#. / Chicago-style item citation: access date and URL
+#: application/models/Item.php:417
+#, php-format
+msgid "accessed %1$s, %2$s."
+msgstr ""
+
+#: application/models/Item.php:435
 msgid "Cannot add an existing file to an item!"
 msgstr "No es pot afegir un arxiu existent a un ítem!"
 
-#: application/models/Item.php:434
+#: application/models/Item.php:439
 msgid "File must be valid before it can be associated with an item!"
 msgstr "L'arxiu ha de ser vàlid abans que pugui estar associat amb un ítem!"
 
@@ -3102,19 +3136,19 @@ msgstr "Actualment no hi ha ítems en aquesta col·lecció."
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
 msgstr "Implementat amb <a href=\"http://omeka.org\">Omeka</a>."
 
-#: application/views/scripts/common/pagination_control.php:8
+#: application/views/scripts/common/pagination_control.php:7
 msgid "First"
 msgstr "Primera"
 
-#: application/views/scripts/common/pagination_control.php:15
+#: application/views/scripts/common/pagination_control.php:14
 msgid "Previous"
 msgstr "Anterior"
 
-#: application/views/scripts/common/pagination_control.php:31
+#: application/views/scripts/common/pagination_control.php:30
 msgid "Next"
 msgstr "Següent"
 
-#: application/views/scripts/common/pagination_control.php:38
+#: application/views/scripts/common/pagination_control.php:37
 msgid "Last"
 msgstr "Darrera"
 
@@ -3197,6 +3231,26 @@ msgstr "Cita"
 #: application/views/scripts/search/index.php:2
 msgid "Search Omeka "
 msgstr "Cerca a Omeka"
+
+#: application/views/scripts/search/index.php:12
+msgid "Record Type"
+msgstr "Tipus de registre"
+
+#: application/views/scripts/search/index.php:29
+msgid "Your query returned no results."
+msgstr "La consulta no ha retornat cap resultat."
+
+#: application/views/scripts/search/search-filters.php:3
+msgid "Query:"
+msgstr "Consulta:"
+
+#: application/views/scripts/search/search-filters.php:4
+msgid "Query type:"
+msgstr "Tipus de consulta:"
+
+#: application/views/scripts/search/search-filters.php:5
+msgid "Record types:"
+msgstr "Tipus de registre:"
 
 #: application/views/scripts/search/search-form.php:6
 msgid "Search using this query type:"

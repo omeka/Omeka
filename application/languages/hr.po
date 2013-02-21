@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
+#  <digitalizacija@gkri.hr>, 2013.
 #   <digitalizacija@gkri.hr>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-01-22 16:20+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2013-02-20 17:45+0000\n"
+"Last-Translator: rijekateam <digitalizacija@gkri.hr>\n"
 "Language-Team: Croatian (http://www.transifex.com/projects/p/omeka/language/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,18 +24,19 @@ msgid ""
 "The Dublin Core metadata element set is common to all Omeka records, "
 "including items, files, and collections. For more information see, "
 "http://dublincore.org/documents/dces/."
-msgstr ""
+msgstr "Dublin Core shema elemenata metapodataka koristi se u svim zapisima Omeke, uključujući dokumente, datoteke i zbirke. Za više informacija vidi: http://dublincore.org/documents/dces/."
 
 #. Dublin Core: Title element name
 #: admin/themes/default/collections/browse.php:22
 #: admin/themes/default/items/browse.php:40
 #: application/views/scripts/items/browse.php:17
+#: application/views/scripts/search/index.php:13
 msgid "Title"
 msgstr "Naslov"
 
 #. Dublin Core: Title element description
 msgid "A name given to the resource"
-msgstr ""
+msgstr "Ime dano  izvoru"
 
 #. Dublin Core: Creator element name
 #: admin/themes/default/items/browse.php:41
@@ -44,7 +46,7 @@ msgstr "Stvaratelj"
 
 #. Dublin Core: Creator element description
 msgid "An entity primarily responsible for making the resource"
-msgstr ""
+msgstr "Entitet koji je primarno odgovoran za stvaranje izvora"
 
 #. Dublin Core: Subject element name
 msgid "Subject"
@@ -52,7 +54,7 @@ msgstr "Tema"
 
 #. Dublin Core: Subject element description
 msgid "The topic of the resource"
-msgstr ""
+msgstr "Tema izvora"
 
 #. Dublin Core: Description element name
 #: admin/themes/default/element-sets/browse.php:17
@@ -66,7 +68,7 @@ msgstr "Opis"
 
 #. Dublin Core: Description element description
 msgid "An account of the resource"
-msgstr ""
+msgstr "Opis izvora"
 
 #. Dublin Core: Publisher element name
 msgid "Publisher"
@@ -74,7 +76,7 @@ msgstr "Nakladnik"
 
 #. Dublin Core: Publisher element description
 msgid "An entity responsible for making the resource available"
-msgstr ""
+msgstr "Entitet odgovoran za stvaranje izvora dostupnim"
 
 #. Dublin Core: Contributor element name
 #. User role: contributor
@@ -83,7 +85,7 @@ msgstr "Suradnik"
 
 #. Dublin Core: Contributor element description
 msgid "An entity responsible for making contributions to the resource"
-msgstr ""
+msgstr "Entitet odgovoran za davanje doprinosa izvoru"
 
 #. Dublin Core: Date element name
 msgid "Date"
@@ -93,7 +95,7 @@ msgstr "Datum"
 msgid ""
 "A point or period of time associated with an event in the lifecycle of the "
 "resource"
-msgstr ""
+msgstr "Vermenska točka ili period povezan s događajem u životnom ciklusu izvora. "
 
 #. Dublin Core: Type element name
 #: admin/themes/default/items/browse.php:42
@@ -102,7 +104,7 @@ msgstr "Tip"
 
 #. Dublin Core: Type element description
 msgid "The nature or genre of the resource"
-msgstr ""
+msgstr "Narav ili žanr izvora"
 
 #. Dublin Core: Format element name
 msgid "Format"
@@ -110,7 +112,7 @@ msgstr "Format"
 
 #. Dublin Core: Format element description
 msgid "The file format, physical medium, or dimensions of the resource"
-msgstr ""
+msgstr "Format datoteke, fizički medij ili dimenzije izvora"
 
 #. Dublin Core: Identifier element name
 msgid "Identifier"
@@ -118,7 +120,7 @@ msgstr "Identifikator"
 
 #. Dublin Core: Identifier element description
 msgid "An unambiguous reference to the resource within a given context"
-msgstr ""
+msgstr "Jednoznačna referenca na izvor u određenom kontekstu"
 
 #. Dublin Core: Source element name
 msgid "Source"
@@ -126,7 +128,7 @@ msgstr "Izvor"
 
 #. Dublin Core: Source element description
 msgid "A related resource from which the described resource is derived"
-msgstr ""
+msgstr "Srodni izvor iz kojeg je izveden opisani izvor"
 
 #. Dublin Core: Language element name
 msgid "Language"
@@ -134,7 +136,7 @@ msgstr "Jezik"
 
 #. Dublin Core: Language element description
 msgid "A language of the resource"
-msgstr ""
+msgstr "Jezik izvora"
 
 #. Dublin Core: Relation element name
 msgid "Relation"
@@ -142,7 +144,7 @@ msgstr "Odnos"
 
 #. Dublin Core: Relation element description
 msgid "A related resource"
-msgstr ""
+msgstr "Srodni izvor"
 
 #. Dublin Core: Coverage element name
 msgid "Coverage"
@@ -152,7 +154,7 @@ msgstr "Obuhvat"
 msgid ""
 "The spatial or temporal topic of the resource, the spatial applicability of "
 "the resource, or the jurisdiction under which the resource is relevant"
-msgstr ""
+msgstr "Prostorna ili vremenska tema izvora, prostorna primjenjivost izvora ili nadležnost pod kojom je izvor relevantan"
 
 #. Dublin Core: Rights element name
 msgid "Rights"
@@ -160,7 +162,7 @@ msgstr "Vlasnička prava"
 
 #. Dublin Core: Rights element description
 msgid "Information about rights held in and over the resource"
-msgstr ""
+msgstr "Informacija o vlasničkim pravima koja se odnose na izvor"
 
 #. Item Type Metadata
 msgid "Item Type Metadata"
@@ -326,33 +328,33 @@ msgstr "Istraživač"
 #: admin/themes/default/themes/browse.php:2
 #: admin/themes/default/themes/config.php:3
 msgid "Appearance"
-msgstr ""
+msgstr "Izgled"
 
 #: admin/themes/default/appearance/edit-navigation.php:14
 msgid ""
 "Check the links to display them in the main navigation. Click and drag the "
 "links into the preferred display order."
-msgstr ""
+msgstr "Označite linkove kako bi ih prikazali u glavnoj navigaciji. Kliknite i odvucite linkove u željeni redoslijed prikaza."
 
 #: admin/themes/default/appearance/edit-navigation.php:19
 msgid "Add a Link to the Navigation"
-msgstr ""
+msgstr "Dodaj link u navigaciju"
 
 #: admin/themes/default/appearance/edit-navigation.php:21
 #: admin/themes/default/appearance/edit-navigation.php:37
 #: application/forms/Navigation.php:132
 msgid "Label"
-msgstr ""
+msgstr "Oznake"
 
 #: admin/themes/default/appearance/edit-navigation.php:23
 #: admin/themes/default/appearance/edit-navigation.php:38
 #: application/forms/Navigation.php:133
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: admin/themes/default/appearance/edit-navigation.php:25
 msgid "Add Link"
-msgstr ""
+msgstr "Dodaj link"
 
 #: admin/themes/default/appearance/edit-navigation.php:31
 #: admin/themes/default/appearance/edit-settings.php:21
@@ -408,7 +410,7 @@ msgstr "Dodaj zbirku"
 
 #: admin/themes/default/collections/add.php:11
 msgid "Add Collection"
-msgstr ""
+msgstr "Dodaj zbirku"
 
 #: admin/themes/default/collections/add.php:16
 #: admin/themes/default/collections/edit.php:30
@@ -457,7 +459,7 @@ msgstr "(%s ukupno)"
 #: admin/themes/default/collections/browse.php:23
 #: admin/themes/default/collections/show.php:51
 msgid "Contributors"
-msgstr ""
+msgstr "Suradnici"
 
 #: admin/themes/default/collections/browse.php:24
 #: admin/themes/default/files/show.php:55
@@ -476,14 +478,14 @@ msgstr "Ukupno dokumenata"
 #: admin/themes/default/collections/browse.php:37
 #: admin/themes/default/items/browse.php:72
 msgid "(Private)"
-msgstr ""
+msgstr "(Privatno)"
 
 #: admin/themes/default/collections/browse.php:40
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:27
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
-#: admin/themes/default/files/show.php:28 admin/themes/default/index.php:38
-#: admin/themes/default/index.php:57
+#: admin/themes/default/files/show.php:28 admin/themes/default/index.php:54
+#: admin/themes/default/index.php:73
 #: admin/themes/default/item-types/browse.php:26
 #: admin/themes/default/item-types/show.php:51
 #: admin/themes/default/items/browse.php:24
@@ -497,7 +499,7 @@ msgstr "Uredi"
 
 #: admin/themes/default/collections/browse.php:49
 msgid "No contributors"
-msgstr ""
+msgstr "Nema suradnika"
 
 #: admin/themes/default/collections/browse.php:67
 msgid "There are no collections on this page."
@@ -509,16 +511,16 @@ msgstr "Prikaži sve zbirke"
 
 #: admin/themes/default/collections/browse.php:70
 msgid "You have no collections."
-msgstr ""
+msgstr "Nemate zbirki."
 
 #: admin/themes/default/collections/browse.php:72
 msgid "Get started by adding your first collection."
-msgstr ""
+msgstr "Započni dodavanjem svoje prve kolekcije."
 
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/libraries/globals.php:2490
+#: application/libraries/globals.php:2489
 #: application/views/scripts/collections/show.php:4
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
@@ -532,7 +534,7 @@ msgstr "Uredi zbirku #%s"
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Collection #%s"
-msgstr ""
+msgstr "Zbirka #%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
@@ -546,7 +548,7 @@ msgstr "Nedavno dodani dokumenti"
 #: admin/themes/default/items/show.php:51
 #: application/views/helpers/ItemSearchFilters.php:57
 msgid "Yes"
-msgstr ""
+msgstr "Da"
 
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/collections/show.php:42
@@ -554,11 +556,11 @@ msgstr ""
 #: admin/themes/default/items/show.php:51
 #: application/views/helpers/ItemSearchFilters.php:57
 msgid "No"
-msgstr ""
+msgstr "Ne"
 
 #: admin/themes/default/collections/show.php:56
 msgid "No contributors."
-msgstr ""
+msgstr "Nema suradnika. "
 
 #: admin/themes/default/common/appearance-nav.php:5
 msgid "Themes"
@@ -566,7 +568,7 @@ msgstr "Teme"
 
 #: admin/themes/default/common/appearance-nav.php:11
 msgid "Navigation"
-msgstr ""
+msgstr "Navigacija"
 
 #: admin/themes/default/common/appearance-nav.php:15
 #: admin/themes/default/common/global-nav.php:24
@@ -600,7 +602,7 @@ msgstr "Vrsta dokumenta"
 #: admin/themes/default/common/content-nav.php:21
 #: admin/themes/default/items/browse.php:94
 #: admin/themes/default/items/show.php:63
-#: application/views/scripts/items/browse.php:46
+#: application/views/scripts/items/browse.php:44
 #: application/views/scripts/items/show.php:26
 msgid "Tags"
 msgstr "Oznake"
@@ -657,37 +659,37 @@ msgstr "Korisnici"
 msgid "Omeka Admin"
 msgstr "Omeka administrator"
 
-#: admin/themes/default/common/header.php:58
+#: admin/themes/default/common/header.php:60
 #: application/views/scripts/common/admin-bar.php:7
 #, php-format
 msgid "Welcome, %s"
 msgstr "Dobrodošli, %s"
 
-#: admin/themes/default/common/header.php:59
+#: admin/themes/default/common/header.php:61
 #: application/views/scripts/common/admin-bar.php:15
 msgid "Log Out"
 msgstr "Odjava"
 
 #: admin/themes/default/common/pagination_control.php:11
 msgid "&lt;"
-msgstr ""
+msgstr "&lt;"
 
 #: admin/themes/default/common/pagination_control.php:34
 #, php-format
 msgid "%s of %s"
-msgstr ""
+msgstr "%s od %s"
 
 #: admin/themes/default/common/pagination_control.php:42
 msgid "&gt;"
-msgstr ""
+msgstr "&gt;"
 
 #: admin/themes/default/common/settings-nav.php:6
 msgid "General"
-msgstr ""
+msgstr "Općenito"
 
 #: admin/themes/default/common/settings-nav.php:10
 msgid "Security"
-msgstr ""
+msgstr "Sigurnost"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: application/views/helpers/SearchForm.php:34
@@ -701,7 +703,7 @@ msgstr "Skupovi elemenata"
 
 #: admin/themes/default/common/settings-nav.php:26
 msgid "Item Type Elements"
-msgstr ""
+msgstr "Elementi vrste dokumenta"
 
 #: admin/themes/default/element-sets/browse.php:16
 #: application/forms/ItemTypes.php:141
@@ -710,17 +712,17 @@ msgstr "Ime"
 
 #: admin/themes/default/element-sets/edit.php:5
 msgid "Edit Element Set"
-msgstr ""
+msgstr "Uredit skup elemenata"
 
 #: admin/themes/default/element-sets/edit.php:17
 msgid ""
 "Click and drag the elements into the preferred display order. Click the "
 "right arrows to add customized comments to element descriptions."
-msgstr ""
+msgstr "Klikni i odvuci elemente u željeni redoslijed prikaza. Klikni na desne strelice i dodaj prilagođene komentara opisima elemenata. "
 
 #: admin/themes/default/element-sets/edit.php:29
 msgid "Comment"
-msgstr ""
+msgstr "Komentar"
 
 #: admin/themes/default/error/403.php:2
 msgid "403: Forbidden"
@@ -756,21 +758,21 @@ msgstr "Pokušali ste &#8217 pristupiti stranici koja ne postoji. Ovo se ponekad
 msgid "If this does not help, try contacting the %s."
 msgstr "Ukoliko ovo nije pomoglo, pokušajte kontaktirati %s."
 
-#: admin/themes/default/error/404.php:16 admin/themes/default/index.php:30
+#: admin/themes/default/error/404.php:16 admin/themes/default/index.php:46
 msgid "Recent Items"
 msgstr "Nedavni dokumenti"
 
-#: admin/themes/default/error/404.php:29 admin/themes/default/index.php:43
+#: admin/themes/default/error/404.php:29 admin/themes/default/index.php:59
 msgid "Add a new item"
-msgstr ""
+msgstr "Dodaj novi dokument"
 
-#: admin/themes/default/error/404.php:36 admin/themes/default/index.php:48
+#: admin/themes/default/error/404.php:36 admin/themes/default/index.php:64
 msgid "Recent Collections"
 msgstr "Nedavne zbirke"
 
-#: admin/themes/default/error/404.php:50 admin/themes/default/index.php:62
+#: admin/themes/default/error/404.php:50 admin/themes/default/index.php:78
 msgid "Add a new collection"
-msgstr ""
+msgstr "Dodaj novu zbirku"
 
 #: admin/themes/default/error/405.php:2
 msgid "405: Method Not Allowed"
@@ -797,7 +799,7 @@ msgstr "Datoteka #%s"
 #: admin/themes/default/files/show.php:36
 #: application/libraries/globals.php:398
 msgid "Item"
-msgstr ""
+msgstr "Dokument"
 
 #: admin/themes/default/files/show.php:41
 msgid "Format Metadata"
@@ -806,7 +808,7 @@ msgstr "Oblikuj metapodatke"
 #: admin/themes/default/files/show.php:43
 #: application/views/scripts/files/show.php:21
 msgid "Filename"
-msgstr ""
+msgstr "Ime datoteke"
 
 #: admin/themes/default/files/show.php:45
 #: application/views/scripts/files/show.php:26
@@ -822,7 +824,7 @@ msgstr "Veličina datoteke"
 #: application/views/scripts/files/show.php:32
 #, php-format
 msgid "%s bytes"
-msgstr ""
+msgstr "%s bajta"
 
 #: admin/themes/default/files/show.php:53
 #: application/views/scripts/files/show.php:49
@@ -847,7 +849,7 @@ msgstr "Metapodaci vrste "
 #: admin/themes/default/files/show.php:67
 #: application/views/scripts/files/show.php:39
 msgid "Mime Type"
-msgstr ""
+msgstr "Mime Type"
 
 #: admin/themes/default/files/show.php:69
 #: application/views/scripts/files/show.php:43
@@ -856,7 +858,7 @@ msgstr "Vrsta datoteke / OS"
 
 #: admin/themes/default/files/show.php:76
 msgid "Embedded Metadata"
-msgstr ""
+msgstr "Ugrađeni metapodaci"
 
 #: admin/themes/default/files/show.php:82
 #: admin/themes/default/items/browse.php:133
@@ -866,27 +868,36 @@ msgstr "Izlazni formati"
 
 #: admin/themes/default/index.php:6
 msgid "items"
-msgstr ""
+msgstr "Dokumenti"
 
 #: admin/themes/default/index.php:7
 msgid "collections"
-msgstr ""
+msgstr "zbirke"
 
 #: admin/themes/default/index.php:8
 msgid "tags"
-msgstr ""
+msgstr "oznake"
 
 #: admin/themes/default/index.php:11
 msgid "plugins"
-msgstr ""
+msgstr "dodaci"
 
 #: admin/themes/default/index.php:14
 msgid "users"
-msgstr ""
+msgstr "korisnici"
 
 #: admin/themes/default/index.php:18
 msgid "theme"
+msgstr "teme"
+
+#: admin/themes/default/index.php:29
+msgid "A new version of Omeka is available for download."
 msgstr ""
+
+#: admin/themes/default/index.php:30
+#, php-format
+msgid "Upgrade to %s"
+msgstr "Nadogradi na %s"
 
 #: admin/themes/default/item-types/add-existing-element.php:22
 #: admin/themes/default/item-types/add-new-element.php:15
@@ -902,7 +913,7 @@ msgstr "Ime elementa"
 
 #: admin/themes/default/item-types/add-new-element.php:22
 msgid "Element Description"
-msgstr ""
+msgstr "Opis elementa"
 
 #: admin/themes/default/item-types/add.php:2
 #: application/forms/ItemTypes.php:161
@@ -939,7 +950,7 @@ msgstr "Informacija o vrsti dokumenta"
 #: admin/themes/default/users/add.php:6 admin/themes/default/users/edit.php:14
 #: install/views/scripts/index/index.phtml:14
 msgid "required field"
-msgstr ""
+msgstr "obavezno polje"
 
 #: admin/themes/default/item-types/form.php:25
 #: admin/themes/default/item-types/show.php:16
@@ -950,7 +961,7 @@ msgstr "Elementi"
 #: admin/themes/default/items/tag-form.php:22
 #: admin/themes/default/settings/edit-item-type-elements.php:22
 msgid "Undo"
-msgstr ""
+msgstr "Poništi"
 
 #: admin/themes/default/item-types/form.php:80
 #: admin/themes/default/item-types/form.php:87
@@ -972,7 +983,7 @@ msgstr "Vrsta dokumenta #%s"
 
 #: admin/themes/default/item-types/show.php:25
 msgid "There are no elements."
-msgstr ""
+msgstr "Nema elemenata. "
 
 #: admin/themes/default/item-types/show.php:39
 msgid "There are no recently added items."
@@ -1001,16 +1012,16 @@ msgstr "Zbirka"
 
 #: admin/themes/default/items/batch-delete.php:2
 msgid "Batch Delete Items"
-msgstr ""
+msgstr "Skupno brisanje dokumenata"
 
 #: admin/themes/default/items/batch-delete.php:38
 msgid ""
 "Some items were excluded because you do not have permission to delete them."
-msgstr ""
+msgstr "Neki dokumenti su isključeni jer nemate dozvolu za njihovo brisanje. "
 
 #: admin/themes/default/items/batch-delete.php:41
 msgid "Checked items will be deleted."
-msgstr ""
+msgstr "Označeni dokumenti bit će pobrisani."
 
 #: admin/themes/default/items/batch-delete.php:50
 #: admin/themes/default/items/batch-edit.php:116
@@ -1121,11 +1132,11 @@ msgstr "Dokumenti"
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2266
-#: application/libraries/globals.php:2649
+#: application/libraries/globals.php:2265
+#: application/libraries/globals.php:2648
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
-msgstr ""
+msgstr "Pretraži dokumente"
 
 #: admin/themes/default/items/browse.php:37
 msgid "Select"
@@ -1149,11 +1160,11 @@ msgstr "Sakrij detalje"
 
 #: admin/themes/default/items/browse.php:148
 msgid "You have no items."
-msgstr ""
+msgstr "Nemate dokumenata. "
 
 #: admin/themes/default/items/browse.php:150
 msgid "Get started by adding your first item."
-msgstr ""
+msgstr "Započni dodavanjem svog prvog dokumenta. "
 
 #: admin/themes/default/items/browse.php:154
 #, php-format
@@ -1176,11 +1187,11 @@ msgstr "Uredi dokument #%s"
 
 #: admin/themes/default/items/files-form.php:2
 msgid "Click and drag the files into the preferred display order."
-msgstr ""
+msgstr "Klikni i odvuci datoteke u željeni redoslijed prikaza."
 
 #: admin/themes/default/items/files-form.php:12
 msgid "Delete "
-msgstr ""
+msgstr "Obriši"
 
 #: admin/themes/default/items/files-form.php:21
 msgid "Add New Files"
@@ -1189,7 +1200,7 @@ msgstr "Dodaj nove datoteke"
 #: admin/themes/default/items/files-form.php:23
 #, php-format
 msgid "The maximum file size is %s."
-msgstr ""
+msgstr "Maksimalna veličina datoteke je %s."
 
 #: admin/themes/default/items/files-form.php:26
 msgid "Find a File"
@@ -1210,7 +1221,7 @@ msgstr "Brzi filter"
 
 #: admin/themes/default/items/quick-filters.php:5
 msgid "View All"
-msgstr ""
+msgstr "Pogledaj sve"
 
 #: admin/themes/default/items/quick-filters.php:7
 msgid "Private"
@@ -1313,7 +1324,7 @@ msgstr "Samo dokumenti koji nisu preporučeni"
 
 #: admin/themes/default/items/search-form.php:203
 msgid "Search for items"
-msgstr ""
+msgstr "Traži dokumente"
 
 #: admin/themes/default/items/show.php:8
 #, php-format
@@ -1322,15 +1333,15 @@ msgstr "Dokument #%s"
 
 #: admin/themes/default/items/show.php:30
 msgid "Prev Item"
-msgstr ""
+msgstr "Prethodni dokument"
 
 #: admin/themes/default/items/show.php:35
 msgid "Next Item"
-msgstr ""
+msgstr "Sljedeći dokument"
 
 #: admin/themes/default/items/show.php:71
 msgid "File Metadata"
-msgstr ""
+msgstr "Metapodaci datoteke"
 
 #: admin/themes/default/items/show.php:74
 msgid "There are no files for this item yet."
@@ -1380,12 +1391,12 @@ msgstr "%1$s zahtijeva instalirane, aktivirane i učitane sljedeće dodatke: %2$
 
 #: admin/themes/default/plugins/browse.php:32
 msgid "This is not a valid plugin."
-msgstr ""
+msgstr "Ovo nije važeći dodatak."
 
 #: admin/themes/default/plugins/browse.php:57
 #, php-format
 msgid "by %s"
-msgstr ""
+msgstr "po %s"
 
 #: admin/themes/default/plugins/browse.php:66
 #, php-format
@@ -1429,17 +1440,17 @@ msgstr "Nema instaliranih dodataka. Dodaj ih u mapu dodataka da bi bili vidljivi
 #: admin/themes/default/plugins/config.php:2
 #, php-format
 msgid "Configure Plugin: %s"
-msgstr ""
+msgstr "Podesi dodatak: %s"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:2
 #, php-format
 msgid "Uninstall Plugin: %s"
-msgstr ""
+msgstr "Ukloni dodatak: %s"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:7
 #, php-format
 msgid "Are you sure you want to uninstall %s?"
-msgstr ""
+msgstr "Jeste li sigurni da želite deinstalirati %s?"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:12
 msgid "Yes, I want to uninstall this plugin."
@@ -1456,45 +1467,45 @@ msgstr "Odustani"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:12
 msgid "edit a specific item type"
-msgstr ""
+msgstr "uredi određenu vrstu dokumenta"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:11
 #, php-format
 msgid ""
 "Customize the element descriptions below. To re-order the elements, %s."
-msgstr ""
+msgstr "Prilagodi opise elemenata u nastavku. Za promjenu redoslijeda elemenata, %s.   "
 
 #: admin/themes/default/settings/edit-item-type-elements.php:42
 msgid "Confirm Delete"
-msgstr ""
+msgstr "Potvrdi brisanje"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:43
 msgid ""
 "Are you sure you want to delete the selected item type elements from the "
 "database? You will lose all text related to the selected elements. This "
 "cannot be undone."
-msgstr ""
+msgstr "Jeste li sigurni da želite izbrisati odabrane elemente vrste dokumenta iz baze? Izgubit ćete sav tekst koji se odnosi na odabrane elemente. To se ne može poništiti. "
 
 #: admin/themes/default/settings/edit-item-type-elements.php:50
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 #: admin/themes/default/settings/edit-search.php:10
 msgid "Search Record Types"
-msgstr ""
+msgstr "Pretraži vrste zapisa"
 
 #: admin/themes/default/settings/edit-search.php:13
 msgid "Customize which types of records will be searchable in Omeka."
-msgstr ""
+msgstr "Prilagodi koje će vrste zapisa biti pretražive u Omeki. "
 
 #: admin/themes/default/settings/edit-search.php:23
 #: admin/themes/default/settings/edit-search.php:41
 msgid "Index Records"
-msgstr ""
+msgstr "Indeksiraj zapise"
 
 #: admin/themes/default/settings/edit-search.php:26
 msgid "Click on the \"Index Records\" button to re-index your records."
-msgstr ""
+msgstr "Klikni na \"Indeksiraj zapise\" za ponovno indeksiranje svojih zapisa. "
 
 #: admin/themes/default/settings/edit-search.php:28
 msgid ""
@@ -1503,23 +1514,23 @@ msgid ""
 " are saved, but there are circumstances when your records are not indexed; "
 "for instance, when updating from an earlier version of Omeka or after you "
 "customize which records will be searchable."
-msgstr ""
+msgstr "Indeksiranje znači prikupiti, analizirati i pohraniti podatke kako bi se omogućila brza i točna pretraživanja. Omeka će automatski indeksirati pojedinačne zapise prilikom njihovog pohranjivanja, no postoje okolnosti kada se vaši podaci neće indeksirati; primjerice kod ažuriranja iz starije verzije Omeke ili nakon što prilagodite koji će zapisi biti pretraživi. "
 
 #: admin/themes/default/settings/edit-security.php:23
 msgid "Restore Default Extensions"
-msgstr ""
+msgstr "Vrati zadanje ekstenzije"
 
 #: admin/themes/default/settings/edit-security.php:28
 msgid "Restore Default Types"
-msgstr ""
+msgstr "Vrati zadane vrste"
 
 #: admin/themes/default/settings/edit-security.php:33
 msgid "Restore Default Elements"
-msgstr ""
+msgstr "Vrati zadane elemente"
 
 #: admin/themes/default/settings/edit-security.php:38
 msgid "Restore Default Attributes"
-msgstr ""
+msgstr "Vrati zadane atribute"
 
 #: admin/themes/default/settings/edit-settings.php:23
 msgid "Test"
@@ -1527,27 +1538,27 @@ msgstr "Test"
 
 #: admin/themes/default/tags/browse.php:3
 msgid "Edit Tags"
-msgstr ""
+msgstr "Uredi oznake"
 
 #: admin/themes/default/tags/browse.php:10
 msgid "Editing Tags"
-msgstr ""
+msgstr "Uređivanje oznaka"
 
 #: admin/themes/default/tags/browse.php:13
 msgid "To view all items with a tag, click the number."
-msgstr ""
+msgstr "Za prikaz svih dokumenata s oznakom, kliknite na broj. "
 
 #: admin/themes/default/tags/browse.php:14
 msgid ""
 "To edit the tag name, click the name and begin editing, and hit \"enter\" to"
 " save. To cancel an edit, click the ESC key or click away from the tag."
-msgstr ""
+msgstr "Za uređivanje imena oznake, kliknite na ime i počnite uređivati, potom pritisnite \"Enter\" za pohranjivanje.  Ako želite odustati od uređivanja, pritisnice ESC tipku ili kliknite dalje od oznake. "
 
 #: admin/themes/default/tags/browse.php:15
 msgid ""
 "To delete a tag, click the X. Deleting a tag will not delete the tagged "
 "items."
-msgstr ""
+msgstr "Za brisanje oznake, kliknite X. Brisanje oznake neće pobrisati označene dokumente. "
 
 #: admin/themes/default/tags/browse.php:23
 msgid "Most"
@@ -1573,7 +1584,7 @@ msgstr "Slika ekrana za %s temu"
 
 #: admin/themes/default/themes/browse.php:16
 msgid "Configure Theme"
-msgstr ""
+msgstr "Podesi temu"
 
 #: admin/themes/default/themes/browse.php:19
 msgid "Current Theme"
@@ -1591,16 +1602,16 @@ msgid ""
 "ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a "
 "href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" "
 "target=\"_blank\">design your own</a>!"
-msgstr ""
+msgstr "Dodaj nove teme preuzimanjem iz <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, ili<a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">dizajniraj vlastitu</a>!"
 
 #: admin/themes/default/themes/browse.php:44
 msgid "Use this theme"
-msgstr ""
+msgstr "Koristi ovu temu"
 
 #: admin/themes/default/themes/config.php:10
 #, php-format
 msgid "Configure Theme: %s"
-msgstr ""
+msgstr "Podesi temu: %s"
 
 #: admin/themes/default/themes/config.php:11
 msgid "Configurations apply to this theme only."
@@ -1700,7 +1711,7 @@ msgstr "Uloga"
 
 #: admin/themes/default/users/browse.php:30
 msgid "inactive"
-msgstr ""
+msgstr "neaktivan"
 
 #: admin/themes/default/users/edit.php:8
 #, php-format
@@ -1734,7 +1745,7 @@ msgstr "Prijavi se"
 
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
-msgstr ""
+msgstr "(Izgubljena zaporka?)"
 
 #: admin/themes/default/users/show.php:8
 #, php-format
@@ -1747,7 +1758,7 @@ msgstr "Uredi ovog korisnika"
 
 #: application/controllers/AppearanceController.php:48
 msgid "The appearance settings have been updated."
-msgstr ""
+msgstr "Postavke izgleda su ažurirane. "
 
 #: application/controllers/AppearanceController.php:51
 #: application/controllers/ItemTypesController.php:34
@@ -1760,13 +1771,13 @@ msgstr "Pronađene su greške u tvom formularu. Molimo uredi i ponovo pošalji."
 
 #: application/controllers/AppearanceController.php:66
 msgid "The navigation settings have been updated."
-msgstr ""
+msgstr "Navigacijske postavke su ažurirane. "
 
 #: application/controllers/AppearanceController.php:69
 msgid ""
 "The navigation settings were not saved because of missing or invalid values."
 "  All changed values have been restored."
-msgstr ""
+msgstr "Navigacijske postavke nisu pohranjene jer neke vrijednosti nedostaju ili su nevažeće. Sve promijenjene vrijednosti su vraćene na prethodno stanje. "
 
 #: application/controllers/CollectionsController.php:74
 #, php-format
@@ -1776,7 +1787,7 @@ msgstr "Zbirka \"%s\" je uspješno dodana!"
 #: application/controllers/CollectionsController.php:76
 #, php-format
 msgid "The collection #%s was successfully added!"
-msgstr ""
+msgstr "Zbirka #%s je uspješno dodana! "
 
 #: application/controllers/CollectionsController.php:84
 #, php-format
@@ -1786,7 +1797,7 @@ msgstr "Zbirka \"%s\" je uspješno izmijenjena!"
 #: application/controllers/CollectionsController.php:86
 #, php-format
 msgid "The collection #%s was successfully changed!"
-msgstr ""
+msgstr "Zbirka #%s je uspješno izmijenjena!"
 
 #: application/controllers/CollectionsController.php:94
 #, php-format
@@ -1796,7 +1807,7 @@ msgstr "Zbirka \"%s\" je uspješno obrisana!"
 #: application/controllers/CollectionsController.php:96
 #, php-format
 msgid "The collection #%s was successfully deleted!"
-msgstr ""
+msgstr "Zbirka #%s je uspješno obrisana!"
 
 #: application/controllers/CollectionsController.php:104
 #, php-format
@@ -1804,7 +1815,7 @@ msgid ""
 "This will delete the collection \"%s\" and its associated metadata. This "
 "will not delete any items in this collection, but will delete the reference "
 "to this collection in each item."
-msgstr ""
+msgstr "Ovo će obrisati zbirku \"%s\" i pridružene metapodatke.  Dokumenti u zbirci neće biti obrisani, ali će biti obrisana referenca ka ovoj zbirci u svakom dokumentu."
 
 #: application/controllers/CollectionsController.php:108
 #, php-format
@@ -1812,7 +1823,7 @@ msgid ""
 "This will delete the collection #%s and its associated metadata. This will "
 "not delete any items in this collection, but will delete the reference to "
 "this collection in each item."
-msgstr ""
+msgstr "Ovo će obrisati zbirku #%s i pridružene metapodatke.  Dokumenti u zbirci neće biti obrisani, ali će biti obrisana referenca ka ovoj zbirci u svakom dokumentu."
 
 #: application/controllers/ElementSetsController.php:21
 msgid ""
@@ -1822,7 +1833,7 @@ msgstr "Ovo će obrisati skup elemenata i sve elemente pridružene skupu elemena
 
 #: application/controllers/ElementSetsController.php:65
 msgid "The element set was successfully changed!"
-msgstr ""
+msgstr "Skup elemenata je uspješno promijenjen! "
 
 #: application/controllers/ErrorController.php:64
 msgid "Page not found."
@@ -1834,17 +1845,17 @@ msgstr "Odbijen pristup."
 
 #: application/controllers/FilesController.php:64
 msgid "This will delete the file and its associated metadata."
-msgstr ""
+msgstr "Ovo će pobrisati datoteku i njoj pridružene metapodatke. "
 
 #: application/controllers/ItemTypesController.php:28
 #, php-format
 msgid "The item type \"%s\" was successfully added."
-msgstr ""
+msgstr "Vrsta dokumenta \"%s\" uspješno je dodana."
 
 #: application/controllers/ItemTypesController.php:54
 #, php-format
 msgid "The item type \"%s\" was successfully updated."
-msgstr ""
+msgstr "Vrsta dokumenta \"%s\" uspješno je ažurirana."
 
 #: application/controllers/ItemTypesController.php:149
 #, php-format
@@ -1852,7 +1863,7 @@ msgid ""
 "This will delete the \"%s\" item type but will not delete the elements "
 "assigned to the item type. Items that are assigned to this item type will "
 "lose all metadata that is specific to the item type."
-msgstr ""
+msgstr "Ovo će obrisati vrstu dokumenta \"%s\", ali ne i elemente pridružene vrsti dokumenta. Dokumenti koje su pridruženi ovoj vrsti dokumenta ostat će bez svih metapodataka koji su specifični za ovu vrstu dokumenata."
 
 #: application/controllers/ItemTypesController.php:157
 #, php-format
@@ -1864,46 +1875,46 @@ msgstr "Vrsta dokumenta \"%s\" uspješno je dodana! Sada možeš dodati elemente
 #: application/controllers/ItemsController.php:95
 #, php-format
 msgid "The item \"%s\" was successfully added!"
-msgstr ""
+msgstr "Dokument \"%s\" je uspješno dodan! "
 
 #: application/controllers/ItemsController.php:97
 #, php-format
 msgid "The item #%s was successfully added!"
-msgstr ""
+msgstr "Dokument #%s je uspješno dodan!"
 
 #: application/controllers/ItemsController.php:105
 #, php-format
 msgid "The item \"%s\" was successfully changed!"
-msgstr ""
+msgstr "Dokument \"%s\" je uspješno promijenjen! "
 
 #: application/controllers/ItemsController.php:107
 #, php-format
 msgid "The item #%s was successfully changed!"
-msgstr ""
+msgstr "Dokument #%s je uspješno promijenjen! "
 
 #: application/controllers/ItemsController.php:115
 #, php-format
 msgid "The item \"%s\" was successfully deleted!"
-msgstr ""
+msgstr "Dokument \"%s\" je uspješno obrisan! "
 
 #: application/controllers/ItemsController.php:117
 #, php-format
 msgid "The item #%s was successfully deleted!"
-msgstr ""
+msgstr "Dokument #%s je uspješno obrisan! "
 
 #: application/controllers/ItemsController.php:125
 #, php-format
 msgid ""
 "This will delete the item \"%s\" and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr ""
+msgstr "Ovo će obrisati dokument \"%s i pridružene metapodatke. Također će biti obrisane sve datoteke i metapodaci pridruženi ovom dokumentu."
 
 #: application/controllers/ItemsController.php:129
 #, php-format
 msgid ""
 "This will delete the item #%s and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr ""
+msgstr "Ovo će obrisati dokument #%s i pridružene metapodatke. Također će biti obrisane sve datoteke i metapodaci pridruženi ovom dokumentu."
 
 #: application/controllers/ItemsController.php:255
 msgid "You must choose some items to batch edit."
@@ -1931,7 +1942,7 @@ msgstr "Korisnik nema ovlasti za označavanje izabranih dokumenata."
 
 #: application/controllers/ItemsController.php:356
 msgid "The items were successfully deleted!"
-msgstr ""
+msgstr "Dokumenti su uspješno obrisani!"
 
 #: application/controllers/ItemsController.php:358
 msgid "The items were successfully changed!"
@@ -1990,13 +2001,13 @@ msgstr "Dodatak %s je uspješno deaktiviran!"
 msgid "The following error occurred while deactivating the %s plugin: "
 msgstr "Sljedeća greška se javila prilikom deaktiviranja %s dodatka: "
 
-#: application/controllers/PluginsController.php:191
+#: application/controllers/PluginsController.php:187
 #, php-format
 msgid "The %s plugin was successfully upgraded!"
 msgstr "Dodatak %s je uspješno nadograđen!"
 
-#: application/controllers/PluginsController.php:198
-#: application/controllers/PluginsController.php:203
+#: application/controllers/PluginsController.php:196
+#: application/controllers/PluginsController.php:202
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
 msgstr "Sljedeća greška se javila prilikom nadogradnje %s dodatka: "
@@ -2004,7 +2015,7 @@ msgstr "Sljedeća greška se javila prilikom nadogradnje %s dodatka: "
 #: application/controllers/PluginsController.php:253
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
-msgstr ""
+msgstr "Dodatak nije pronađen u mapi '%s'!"
 
 #: application/controllers/PluginsController.php:262
 msgid "You must confirm the uninstall before proceeding."
@@ -2042,25 +2053,25 @@ msgstr "Sigurnosne postavke su ažurirane."
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
-msgstr ""
+msgstr "Promijenili ste koji su zapisi pretraživi u Omeki. Molimo ponovno indeksirajte zapise koristeći donji obrazac. "
 
 #: application/controllers/SettingsController.php:102
 msgid ""
 "Indexing records. This may take a while. You may continue administering your"
 " site."
-msgstr ""
+msgstr "Indeskiram zapise. To može potrajati. Možete nastaviti s administriranjem svoje stranice. "
 
 #: application/controllers/SettingsController.php:131
 msgid "The item type elements were successfully changed!"
-msgstr ""
+msgstr "Elementi vrste dokumenta su uspješno promijenjeni! "
 
 #: application/controllers/SettingsController.php:160
 msgid "The ImageMagick directory path works."
-msgstr ""
+msgstr "Putanja do Imagemagick mape radi. "
 
 #: application/controllers/SettingsController.php:161
 msgid "The ImageMagick directory path does not work."
-msgstr ""
+msgstr "Putanja do ImageMagick mape ne radi."
 
 #: application/controllers/TagsController.php:35
 msgid "You have to be logged in to edit tags!"
@@ -2073,7 +2084,7 @@ msgstr "Oznaka pod imenom \"%1$s\" je uspješno preimenovana u \"%2$s\"."
 
 #: application/controllers/TagsController.php:91
 msgid "Invalid tagType given."
-msgstr ""
+msgstr "Dan je nevažeći tagType. "
 
 #: application/controllers/ThemesController.php:25
 msgid "Invalid form submission."
@@ -2086,7 +2097,7 @@ msgstr "Odabrano je nedopušteno ime teme. Molimo odaberi drugu temu."
 #: application/controllers/ThemesController.php:40
 #, php-format
 msgid "This theme requires a newer version of Omeka (%s)."
-msgstr ""
+msgstr "Ova tema zahtijeva noviju verziju Omeke (%s)."
 
 #: application/controllers/ThemesController.php:54
 msgid "The theme has been successfully changed."
@@ -2098,7 +2109,7 @@ msgstr "Postavke teme su uspješno sačuvane!"
 
 #: application/controllers/ThemesController.php:84
 msgid "There was an error on the form. Please try again."
-msgstr ""
+msgstr "Pronađena je greška u obrascu. Molimo pokušajte ponovo."
 
 #: application/controllers/UpgradeController.php:49
 msgid "SQL error in migration: "
@@ -2150,12 +2161,12 @@ msgstr "Korisnik \"%s\" je uspješno dodan!"
 #: application/controllers/UsersController.php:175
 #, php-format
 msgid "The user \"%s\" was added, but the activation email could not be sent."
-msgstr ""
+msgstr "Korisnik \"%s\" je dodan, no nije bilo moguće poslati aktivacijski email."
 
 #: application/controllers/UsersController.php:226
 #: application/controllers/UsersController.php:237
 msgid "There was an invalid entry on the form. Please try again."
-msgstr ""
+msgstr "Na obrascu je pronađem neispravan unos. Molimo pokušajte ponovno. "
 
 #: application/controllers/UsersController.php:233
 msgid "Password changed!"
@@ -2177,7 +2188,7 @@ msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
 "this user will remain in the system, but will no longer be associated with "
 "this user."
-msgstr ""
+msgstr "%s će biti obrisan iz sustava. Dokumenti, zbirke i oznake koje je kreirao ovaj korisnik ostat će u sustavu, ali više neće biti povezani s tim korisnikom."
 
 #: application/controllers/UsersController.php:292
 msgid "Welcome!"
@@ -2188,12 +2199,12 @@ msgstr "Dobro došli!"
 msgid ""
 "Your account for the %s repository has been created. Please click the "
 "following link to activate your account:"
-msgstr ""
+msgstr "Tvoj korisnički račun za %s repozitorij je kreiran. Molimo slijedi link za aktivaciju svog računa:"
 
 #: application/controllers/UsersController.php:297
 #, php-format
 msgid "Activate your account with the %s repository"
-msgstr ""
+msgstr "Aktiviraj svoj korisnički račun u %s repozitoriju"
 
 #: application/controllers/UsersController.php:392
 msgid "Login information incorrect. Please try again."
@@ -2228,22 +2239,22 @@ msgstr "Maksimalna veličina četvrtaste umanjene sličice (u pikselima)."
 
 #: application/forms/AppearanceSettings.php:43
 msgid "Results Per Page (admin)"
-msgstr ""
+msgstr "Rezultati po stranici (admin)"
 
 #: application/forms/AppearanceSettings.php:44
 msgid ""
 "Limit the number of results displayed per page in the administrative "
 "interface."
-msgstr ""
+msgstr "Ograniči broj rezultata prikazanih po stranici u administratorskom sučelju."
 
 #: application/forms/AppearanceSettings.php:50
 msgid "Results Per Page (public)"
-msgstr ""
+msgstr "Broj rezultata po stranici (javno)"
 
 #: application/forms/AppearanceSettings.php:51
 msgid ""
 "Limit the number of results displayed per page in the public interface."
-msgstr ""
+msgstr "Ograniči broj rezultata prikazanih po stranici u javnom sučelju."
 
 #: application/forms/AppearanceSettings.php:57
 #: application/forms/Install.php:157
@@ -2252,11 +2263,11 @@ msgstr "Prikaži prazne elemente"
 
 #: application/forms/AppearanceSettings.php:66
 msgid "Derivative Size Constraints"
-msgstr ""
+msgstr "Ograničenja veličine izvedenica"
 
 #: application/forms/AppearanceSettings.php:71
 msgid "Display Settings"
-msgstr ""
+msgstr "Postavke prikaza"
 
 #: application/forms/ChangePassword.php:25
 msgid "Current Password"
@@ -2265,11 +2276,11 @@ msgstr "Trenutna zaporka"
 #: application/forms/ChangePassword.php:26
 #: application/forms/ChangePassword.php:36
 msgid "Password must be at least 6 characters long."
-msgstr ""
+msgstr "Zaporka mora sadržavati najmanje 6 znakova."
 
 #: application/forms/ChangePassword.php:28
 msgid "Invalid current password"
-msgstr ""
+msgstr "Nevažeća trenutna zaporka"
 
 #: application/forms/ChangePassword.php:34
 msgid "New Password"
@@ -2277,12 +2288,12 @@ msgstr "Nova zaporka"
 
 #: application/forms/ChangePassword.php:41
 msgid "New password must be entered."
-msgstr ""
+msgstr "Nova zaporka mora biti unešena."
 
 #: application/forms/ChangePassword.php:50
 #: application/forms/ChangePassword.php:70
 msgid "New password must be typed correctly twice."
-msgstr ""
+msgstr "Nova zaporka mora biti ispravno upisana dva puta. "
 
 #: application/forms/ChangePassword.php:59
 msgid "New password must be at least %min% characters long."
@@ -2332,11 +2343,11 @@ msgstr "Razdvoji oznake korištenjem ovog znaka ili stringa. Budi oprezan pri iz
 
 #: application/forms/GeneralSettings.php:59 application/forms/Install.php:163
 msgid "ImageMagick Directory Path"
-msgstr ""
+msgstr "Putanja do ImageMagick mape"
 
 #: application/forms/Install.php:31
 msgid "only alphanumeric characters are allowed"
-msgstr ""
+msgstr "dozvoljeni su samo alfaumerički znakovi"
 
 #: application/forms/Install.php:37 application/forms/Login.php:34
 msgid "Password"
@@ -2344,7 +2355,7 @@ msgstr "Zaporka"
 
 #: application/forms/Install.php:38
 msgid "must be at least 6 characters"
-msgstr ""
+msgstr "mora sadržavati najmanje 6 znakova"
 
 #: application/forms/Install.php:61
 msgid "Confirm your password."
@@ -2356,15 +2367,15 @@ msgstr "Razdvoji oznake korištenjem ovog znaka ili stringa."
 
 #: application/forms/Install.php:118
 msgid "Maximum fullsize image size constraint (in pixels)"
-msgstr ""
+msgstr "Maksimalna veličina slike (u pikselima)"
 
 #: application/forms/Install.php:126
 msgid "Maximum thumbnail size constraint (in pixels)"
-msgstr ""
+msgstr "Maksimalna veličina umanjene sličice (u pikselima)."
 
 #: application/forms/Install.php:134
 msgid "Maximum square thumbnail size constraint (in pixels)"
-msgstr ""
+msgstr "Maksimalna veličina četvrtaste umanjene sličice (u pikselima)."
 
 #: application/forms/Install.php:141
 msgid "Items Per Page (admin)"
@@ -2386,7 +2397,7 @@ msgstr "Ograniči broj dokumenata prikazanih po stranici u javnom sučelju."
 
 #: application/forms/Install.php:159
 msgid "Check box to show metadata elements with no text."
-msgstr ""
+msgstr "Označite kućicu za prikazivanje elemenata metapodataka bez teksta. "
 
 #: application/forms/Install.php:174
 msgid "Default Superuser Account"
@@ -2398,11 +2409,11 @@ msgstr "Postavke mrežne stranice"
 
 #: application/forms/ItemTypes.php:142
 msgid "The name of the item type."
-msgstr ""
+msgstr "Naziv vrste dokumenta. "
 
 #: application/forms/ItemTypes.php:151
 msgid "The description of the item type."
-msgstr ""
+msgstr "Opis vrste dokumenta. "
 
 #: application/forms/ItemTypes.php:188 application/forms/ItemTypes.php:197
 #, php-format
@@ -2423,32 +2434,32 @@ msgstr "Zapamti me?"
 
 #: application/forms/Navigation.php:156
 msgid "[Default]"
-msgstr ""
+msgstr "[Zadano]"
 
 #: application/forms/Navigation.php:162
 msgid "Select a Homepage"
-msgstr ""
+msgstr "Odaberi početnu stranicu"
 
 #: application/forms/Navigation.php:244
 msgid "Cannot find parent navigation page."
-msgstr ""
+msgstr "Ne mogu pronaći nadređenu stranicu navigacije. "
 
 #: application/forms/Navigation.php:326
 msgid "All navigation links must have URIs."
-msgstr ""
+msgstr "Svi linkovi navigacije moraju imati URI."
 
 #: application/forms/Navigation.php:339
 msgid "All navigation links must have different URIs."
-msgstr ""
+msgstr "Svi linkovi navigacije moraju imati različiti URI. "
 
 #: application/forms/Navigation.php:345
 #, php-format
 msgid "Invalid URI for \"%s\" navigation link:  \"%s\""
-msgstr ""
+msgstr "Nevažeći URI za \"%s\" navigacijski link: \"%s\""
 
 #: application/forms/Navigation.php:378
 msgid "Navigation links that have undeleteable sublinks cannot be deleted."
-msgstr ""
+msgstr "Linkovi navigacije koji sadrže neobrisive podlinkove ne mogu se pobrisati."
 
 #: application/forms/RecoverPassword.php:36
 msgid "Email address is required."
@@ -2494,7 +2505,7 @@ msgstr "Dozvoljene ekstenzije datoteka"
 
 #: application/forms/SecuritySettings.php:33
 msgid "List of allowed extensions for file uploads"
-msgstr ""
+msgstr "Popis dozvoljen ekstenzija datoteka za postavljanje (upload)"
 
 #: application/forms/SecuritySettings.php:42
 msgid "Allowed File Types"
@@ -2512,7 +2523,7 @@ msgstr "ReCaptcha javni ključ"
 msgid ""
 "Enter public key from recaptcha.net. Both this and the private key must be "
 "filled in to secure public forms."
-msgstr ""
+msgstr "Unesite javni ključ sa recaptcha.net. Ovaj i privatni ključ moraju biti upisani kako bi se osigurali javni obrasci. "
 
 #: application/forms/SecuritySettings.php:60
 msgid "ReCaptcha Private Key"
@@ -2522,45 +2533,45 @@ msgstr "ReCaptcha privatni ključ"
 msgid ""
 "Enter private key from recaptcha.net. Both this and the public key must be "
 "filled in to secure public forms."
-msgstr ""
+msgstr "Unesite privatni ključ sa recaptcha.net. Ovaj i javni ključ moraju biti upisani kako bi se osigurali javni obrasci. "
 
 #: application/forms/SecuritySettings.php:69
 msgid "Enable HTML Filtering"
-msgstr ""
+msgstr "Omogući HTML filtriranje"
 
 #: application/forms/SecuritySettings.php:74
 msgid "Allowed HTML Elements"
-msgstr ""
+msgstr "Dozvoljeni HTML elementi"
 
 #: application/forms/SecuritySettings.php:75
 msgid "List of allowed HTML elements in form input"
-msgstr ""
+msgstr "Popis dozvoljenih HTML elemenata za unos u obrazac"
 
 #: application/forms/SecuritySettings.php:82
 msgid "Allowed HTML Attributes"
-msgstr ""
+msgstr "Dozvoljeni HTML atributi"
 
 #: application/forms/SecuritySettings.php:83
 msgid "List of allowed HTML attributes in form input"
-msgstr ""
+msgstr "Popis dozvoljenih HTML atributa za unos u obrazac"
 
 #: application/forms/SecuritySettings.php:94
 msgid "File Validation"
-msgstr ""
+msgstr "Provjera datoteke"
 
 #: application/forms/SecuritySettings.php:102
 msgid "Captcha"
-msgstr ""
+msgstr "Captcha"
 
 #: application/forms/SecuritySettings.php:111
 msgid "HTML Filtering"
-msgstr ""
+msgstr "HTML filtriranje"
 
 #: application/forms/User.php:30
 msgid ""
 "Username must contain only letters and numbers, and be 30 characters or "
 "fewer."
-msgstr ""
+msgstr "Korisničko ime smije sadržavati samo slova i brojeve, i mora biti dužine manje od 30 znakova."
 
 #: application/forms/User.php:37
 msgid "Username is required."
@@ -2584,7 +2595,7 @@ msgstr "Korisničko ime već postoji."
 
 #: application/forms/User.php:80
 msgid "Display Name"
-msgstr ""
+msgstr "Prikaži ime"
 
 #: application/forms/User.php:81
 msgid "Name as it should be displayed on the site"
@@ -2592,7 +2603,7 @@ msgstr ""
 
 #: application/forms/User.php:87 application/models/User.php:91
 msgid "Real Name is required."
-msgstr ""
+msgstr "Pravo ime je obavezno. "
 
 #: application/forms/User.php:93
 msgid "This email address is invalid."
@@ -2611,7 +2622,7 @@ msgid ""
 "Roles describe the permissions a user has. See <a "
 "href='http://omeka.org/codex/User_Roles' target='_blank'>documentation</a> "
 "for details."
-msgstr ""
+msgstr "Uloge opisuju dopuštenja koja korisnik ima. Vidi  <a href='http://omeka.org/codex/User_Roles' target='_blank'>dokumentaciju</a> za detalje. "
 
 #: application/forms/User.php:137
 msgid "Active?"
@@ -2619,12 +2630,12 @@ msgstr "Aktivan?"
 
 #: application/forms/User.php:138
 msgid "Inactive users cannot log in to the site."
-msgstr ""
+msgstr "Neaktivni korisnici se ne mogu prijaviti na stranicu. "
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:115
 #, php-format
 msgid "The configured PHP path (%s) is invalid."
-msgstr ""
+msgstr "Podešena PHP putanja (%s) je nevažeća. "
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:125
 #, php-format
@@ -2648,7 +2659,7 @@ msgid ""
 "subpage of the navigation object."
 msgstr ""
 
-#: application/libraries/Omeka/Navigation/Page/Uri.php:124
+#: application/libraries/Omeka/Navigation/Page/Uri.php:128
 #, php-format
 msgid "Invalid URI for Omeka_Navigation_Page_Uri object: %s"
 msgstr ""
@@ -2678,67 +2689,67 @@ msgstr ""
 
 #: application/libraries/globals.php:399
 msgid "File"
-msgstr ""
+msgstr "Datoteka"
 
 #: application/libraries/globals.php:457
 msgid "Keyword"
-msgstr ""
+msgstr "Ključna riječ"
 
 #: application/libraries/globals.php:458
 msgid "Boolean"
-msgstr ""
+msgstr "Booleovi"
 
 #: application/libraries/globals.php:459
 msgid "Exact match"
 msgstr ""
 
-#: application/libraries/globals.php:1228
-#: application/libraries/globals.php:1249
+#: application/libraries/globals.php:1227
+#: application/libraries/globals.php:1248
 #, php-format
 msgid "Could not find file %s!"
 msgstr "Datoteka %s nije nađena!"
 
-#: application/libraries/globals.php:1555
+#: application/libraries/globals.php:1554
 msgid "Select Below "
 msgstr "Odaberi"
 
-#: application/libraries/globals.php:1597
+#: application/libraries/globals.php:1596
 msgid "Omeka RSS Feed"
 msgstr "Omeka RSS Feed"
 
-#: application/libraries/globals.php:1598
+#: application/libraries/globals.php:1597
 msgid "Omeka Atom Feed"
 msgstr "Omeka Atom Feed"
 
-#: application/libraries/globals.php:2248
+#: application/libraries/globals.php:2247
 msgid "View"
 msgstr "Pogledaj"
 
-#: application/libraries/globals.php:2310
+#: application/libraries/globals.php:2309
 msgid "No Collection"
 msgstr "Nema zbirke"
 
-#: application/libraries/globals.php:2425
+#: application/libraries/globals.php:2424
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2442
+#: application/libraries/globals.php:2441
 msgid "Next Item &rarr;"
 msgstr "Sljedeći dokument &rarr;"
 
-#: application/libraries/globals.php:2462
+#: application/libraries/globals.php:2461
 msgid "&larr; Previous Item"
 msgstr "&larr; Prethodni dokument"
 
-#: application/libraries/globals.php:2639
+#: application/libraries/globals.php:2638
 msgid "Browse All"
 msgstr "Pregledaj sve"
 
-#: application/libraries/globals.php:2644
+#: application/libraries/globals.php:2643
 msgid "Browse by Tag"
 msgstr "Pregledaj po oznakama"
 
-#: application/libraries/globals.php:2906
+#: application/libraries/globals.php:2905
 msgid "No tags are available."
 msgstr "Nisu dostupne oznake."
 
@@ -2752,7 +2763,7 @@ msgstr "Ne mogu povezati zbirku sa korisnikom koji nije pohranjen."
 
 #: application/models/Element.php:141
 msgid "The element name must not be empty."
-msgstr ""
+msgstr "Naziv elementa ne smije biti prazno."
 
 #: application/models/Element.php:147
 #, php-format
@@ -2793,16 +2804,40 @@ msgstr "Ne mogu pozvati lokalnu putanju za pohranjenu datoteku."
 msgid "\"%s\" is not a valid file derivative."
 msgstr ""
 
-#: application/models/Item.php:264
+#: application/models/Item.php:265
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
 msgstr "Datoteke ne mogu biti dodane dokumentu koji nije postojan u bazi podataka!"
 
-#: application/models/Item.php:430
+#. / Chicago-style item citation: two authors
+#: application/models/Item.php:391
+#, php-format
+msgid "%1$s and %2$s"
+msgstr ""
+
+#. / Chicago-style item citation: three authors
+#: application/models/Item.php:395
+#, php-format
+msgid "%1$s, %2$s, and %3$s"
+msgstr ""
+
+#. / Chicago-style item citation: more than three authors
+#: application/models/Item.php:399
+#, php-format
+msgid "%s et al."
+msgstr ""
+
+#. / Chicago-style item citation: access date and URL
+#: application/models/Item.php:417
+#, php-format
+msgid "accessed %1$s, %2$s."
+msgstr ""
+
+#: application/models/Item.php:435
 msgid "Cannot add an existing file to an item!"
 msgstr "Ne mogu dodati već postojeću datoteku dokumentu!"
 
-#: application/models/Item.php:434
+#: application/models/Item.php:439
 msgid "File must be valid before it can be associated with an item!"
 msgstr "Datoteka mora biti ispravna prije povezivanja sa nekim dokumentom!"
 
@@ -2946,14 +2981,14 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:839
 #: application/tests/suite/Omeka/NavigationTest.php:952
 msgid "Edit Items"
-msgstr ""
+msgstr "Uredi dokumente"
 
 #: application/tests/suite/Omeka/NavigationTest.php:758
 #: application/tests/suite/Omeka/NavigationTest.php:818
 #: application/tests/suite/Omeka/NavigationTest.php:856
 #: application/tests/suite/Omeka/NavigationTest.php:953
 msgid "Edit Collections"
-msgstr ""
+msgstr "Uredi zbirke"
 
 #: application/tests/suite/Omeka/NavigationTest.php:764
 #: application/tests/suite/Omeka/NavigationTest.php:819
@@ -2961,7 +2996,7 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:954
 #: install/views/scripts/layout.phtml:6 install/views/scripts/layout.phtml:23
 msgid "Omeka"
-msgstr ""
+msgstr "Omeka"
 
 #: application/tests/suite/Omeka/NavigationTest.php:825
 #: application/tests/suite/Omeka/NavigationTest.php:951
@@ -2973,7 +3008,7 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1128
 #: application/tests/suite/Omeka/NavigationTest.php:1136
 msgid "Page "
-msgstr ""
+msgstr "Stranica"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1009
 #: application/tests/suite/Omeka/NavigationTest.php:1013
@@ -2982,7 +3017,7 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1156
 #: application/tests/suite/Omeka/NavigationTest.php:1256
 msgid "Page 1"
-msgstr ""
+msgstr "Stranica 1"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1016
 #: application/tests/suite/Omeka/NavigationTest.php:1022
@@ -2993,7 +3028,7 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1200
 #: application/tests/suite/Omeka/NavigationTest.php:1232
 msgid "Page 2"
-msgstr ""
+msgstr "Stranica 2"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1025
 #: application/tests/suite/Omeka/NavigationTest.php:1029
@@ -3004,7 +3039,7 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1193
 #: application/tests/suite/Omeka/NavigationTest.php:1255
 msgid "Page 3"
-msgstr ""
+msgstr "Stranica 3"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1032
 #: application/tests/suite/Omeka/NavigationTest.php:1041
@@ -3017,7 +3052,7 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1240
 #: application/tests/suite/Omeka/NavigationTest.php:1250
 msgid "Page 4"
-msgstr ""
+msgstr "Stranica 4"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1044
 #: application/tests/suite/Omeka/NavigationTest.php:1048
@@ -3028,13 +3063,13 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1223
 #: application/tests/suite/Omeka/NavigationTest.php:1241
 msgid "Page 5"
-msgstr ""
+msgstr "Stranica 5"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1051
 #: application/tests/suite/Omeka/NavigationTest.php:1055
 #: application/tests/suite/Omeka/NavigationTest.php:1215
 msgid "Page 6"
-msgstr ""
+msgstr "Stranica 6"
 
 #: application/views/helpers/AllElementTexts.php:101
 msgid "[no text]"
@@ -3076,7 +3111,7 @@ msgstr ""
 
 #: application/views/scripts/collections/browse.php:24
 msgid "Contributors(s)"
-msgstr ""
+msgstr "Suradnici"
 
 #: application/views/scripts/collections/browse.php:31
 #, php-format
@@ -3100,19 +3135,19 @@ msgstr ""
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
 msgstr "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
 
-#: application/views/scripts/common/pagination_control.php:8
+#: application/views/scripts/common/pagination_control.php:7
 msgid "First"
 msgstr "Prva"
 
-#: application/views/scripts/common/pagination_control.php:15
+#: application/views/scripts/common/pagination_control.php:14
 msgid "Previous"
 msgstr "Prethodna"
 
-#: application/views/scripts/common/pagination_control.php:31
+#: application/views/scripts/common/pagination_control.php:30
 msgid "Next"
 msgstr "Sljedeća"
 
-#: application/views/scripts/common/pagination_control.php:38
+#: application/views/scripts/common/pagination_control.php:37
 msgid "Last"
 msgstr "Posljednja"
 
@@ -3194,6 +3229,26 @@ msgstr "Bibliografski navod"
 
 #: application/views/scripts/search/index.php:2
 msgid "Search Omeka "
+msgstr "Pretraži Omeku"
+
+#: application/views/scripts/search/index.php:12
+msgid "Record Type"
+msgstr ""
+
+#: application/views/scripts/search/index.php:29
+msgid "Your query returned no results."
+msgstr ""
+
+#: application/views/scripts/search/search-filters.php:3
+msgid "Query:"
+msgstr ""
+
+#: application/views/scripts/search/search-filters.php:4
+msgid "Query type:"
+msgstr ""
+
+#: application/views/scripts/search/search-filters.php:5
+msgid "Record types:"
 msgstr ""
 
 #: application/views/scripts/search/search-form.php:6
@@ -3261,7 +3316,7 @@ msgstr ""
 
 #: install/views/scripts/index/installed.phtml:2
 msgid "Omeka is installed."
-msgstr ""
+msgstr "Omeka je instalirana. "
 
 #: install/views/scripts/index/installed.phtml:3
 msgid "Public Site"
@@ -3269,4 +3324,4 @@ msgstr "Javna stranica"
 
 #: install/views/scripts/index/installed.phtml:3
 msgid "Admin Dashboard"
-msgstr ""
+msgstr "Administratorska upravljačka ploča"

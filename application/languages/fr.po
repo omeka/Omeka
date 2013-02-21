@@ -10,13 +10,14 @@
 # Stéphane Loret Sdj <stephane.loret@univ-tours.fr>, 2011, 2012.
 # Stéphane Loret <stephane.loret@univ-tours.fr>, 2012.
 #   <thierry.pasquier@emf.ccsti.eu>, 2012-2013.
+# Thierry Pasquier <thierry.pasquier@emf.ccsti.eu>, 2013.
 #   <wikitipiac@laposte.net>, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-01-22 16:20+0000\n"
+"PO-Revision-Date: 2013-02-11 19:34+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/omeka/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -36,6 +37,7 @@ msgstr "Le jeu de champs de métadonnées Dublin Core est commun à tous les enr
 #: admin/themes/default/collections/browse.php:22
 #: admin/themes/default/items/browse.php:40
 #: application/views/scripts/items/browse.php:17
+#: application/views/scripts/search/index.php:13
 msgid "Title"
 msgstr "Titre"
 
@@ -489,8 +491,8 @@ msgstr "(Réservé)"
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:27
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
-#: admin/themes/default/files/show.php:28 admin/themes/default/index.php:38
-#: admin/themes/default/index.php:57
+#: admin/themes/default/files/show.php:28 admin/themes/default/index.php:54
+#: admin/themes/default/index.php:73
 #: admin/themes/default/item-types/browse.php:26
 #: admin/themes/default/item-types/show.php:51
 #: admin/themes/default/items/browse.php:24
@@ -525,7 +527,7 @@ msgstr "Débuter par la création de votre première collection"
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/libraries/globals.php:2490
+#: application/libraries/globals.php:2489
 #: application/views/scripts/collections/show.php:4
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
@@ -607,10 +609,10 @@ msgstr "Types de contenu"
 #: admin/themes/default/common/content-nav.php:21
 #: admin/themes/default/items/browse.php:94
 #: admin/themes/default/items/show.php:63
-#: application/views/scripts/items/browse.php:46
+#: application/views/scripts/items/browse.php:44
 #: application/views/scripts/items/show.php:26
 msgid "Tags"
-msgstr "Tags"
+msgstr "Mots-clés"
 
 #: admin/themes/default/common/delete-confirm.php:3
 #: application/views/scripts/common/delete-confirm.php:3
@@ -664,13 +666,13 @@ msgstr "Utilisateurs"
 msgid "Omeka Admin"
 msgstr "Administration d'Omeka"
 
-#: admin/themes/default/common/header.php:58
+#: admin/themes/default/common/header.php:60
 #: application/views/scripts/common/admin-bar.php:7
 #, php-format
 msgid "Welcome, %s"
 msgstr "Bienvenue %s"
 
-#: admin/themes/default/common/header.php:59
+#: admin/themes/default/common/header.php:61
 #: application/views/scripts/common/admin-bar.php:15
 msgid "Log Out"
 msgstr "Se déconnecter"
@@ -763,19 +765,19 @@ msgstr "Vous avez essayé d'accéder à une page qui ne semble pas exister. Cela
 msgid "If this does not help, try contacting the %s."
 msgstr "Si cela n'aide toujours pas, essayez de contacter l'%s."
 
-#: admin/themes/default/error/404.php:16 admin/themes/default/index.php:30
+#: admin/themes/default/error/404.php:16 admin/themes/default/index.php:46
 msgid "Recent Items"
 msgstr "Contenus récents"
 
-#: admin/themes/default/error/404.php:29 admin/themes/default/index.php:43
+#: admin/themes/default/error/404.php:29 admin/themes/default/index.php:59
 msgid "Add a new item"
 msgstr "Ajouter un nouveau contenu"
 
-#: admin/themes/default/error/404.php:36 admin/themes/default/index.php:48
+#: admin/themes/default/error/404.php:36 admin/themes/default/index.php:64
 msgid "Recent Collections"
 msgstr "Collections récentes"
 
-#: admin/themes/default/error/404.php:50 admin/themes/default/index.php:62
+#: admin/themes/default/error/404.php:50 admin/themes/default/index.php:78
 msgid "Add a new collection"
 msgstr "Ajouter une nouvelle collection"
 
@@ -873,7 +875,7 @@ msgstr "Formats de sortie "
 
 #: admin/themes/default/index.php:6
 msgid "items"
-msgstr "Contenus"
+msgstr "contenus"
 
 #: admin/themes/default/index.php:7
 msgid "collections"
@@ -881,7 +883,7 @@ msgstr "collections"
 
 #: admin/themes/default/index.php:8
 msgid "tags"
-msgstr "étiquettes"
+msgstr "mots-clés"
 
 #: admin/themes/default/index.php:11
 msgid "plugins"
@@ -889,11 +891,20 @@ msgstr "extensions"
 
 #: admin/themes/default/index.php:14
 msgid "users"
-msgstr "Utilisateurs"
+msgstr "utilisateurs"
 
 #: admin/themes/default/index.php:18
 msgid "theme"
-msgstr "Thème"
+msgstr "thème"
+
+#: admin/themes/default/index.php:29
+msgid "A new version of Omeka is available for download."
+msgstr ""
+
+#: admin/themes/default/index.php:30
+#, php-format
+msgid "Upgrade to %s"
+msgstr ""
 
 #: admin/themes/default/item-types/add-existing-element.php:22
 #: admin/themes/default/item-types/add-new-element.php:15
@@ -1073,12 +1084,12 @@ msgstr "Retirer?"
 #: admin/themes/default/items/tag-form.php:8
 #: admin/themes/default/items/tag-form.php:11
 msgid "Add Tags"
-msgstr "Ajouter des tags"
+msgstr "Ajouter des mots-clés"
 
 #: admin/themes/default/items/batch-edit.php:107
 #, php-format
 msgid "List of tags to add to all checked items, separated by %s."
-msgstr "Liste des tags à ajouter à tous les contenus sélectionnés, séparés par %s."
+msgstr "Liste des mots-clés à ajouter à tous les contenus sélectionnés, séparés par %s."
 
 #: admin/themes/default/items/batch-edit.php:117
 msgid "Check if you wish to delete selected items."
@@ -1128,8 +1139,8 @@ msgstr "Parcourir les contenus"
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2266
-#: application/libraries/globals.php:2649
+#: application/libraries/globals.php:2265
+#: application/libraries/globals.php:2648
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Recherche de contenus"
@@ -1140,7 +1151,7 @@ msgstr "Selectionnez"
 
 #: admin/themes/default/items/browse.php:95
 msgid "No Tags"
-msgstr "Aucun tag"
+msgstr "Aucun mot-clé"
 
 #: admin/themes/default/items/browse.php:139
 msgid "Details"
@@ -1286,7 +1297,7 @@ msgstr "Recherche par utilisateur"
 #: admin/themes/default/items/search-form.php:148
 #: application/views/scripts/items/search-form.php:137
 msgid "Search By Tags"
-msgstr "Recherche par tags"
+msgstr "Recherche par mots-clés"
 
 #: admin/themes/default/items/search-form.php:163
 #: application/views/scripts/items/search-form.php:150
@@ -1358,20 +1369,20 @@ msgstr "Référence bibliographique"
 #: admin/themes/default/items/tag-form.php:10
 #, php-format
 msgid "Separate tags with %s"
-msgstr "Séparer les tags par %s"
+msgstr "Séparer les mots-clés par %s"
 
 #: admin/themes/default/items/tag-form.php:15
 msgid "All Tags"
-msgstr "Tous les tags"
+msgstr "Tous les mots-clés"
 
 #: admin/themes/default/items/tags.php:2
 msgid "Browse Items by Tag"
-msgstr "Parcourir les contenus par tag"
+msgstr "Parcourir les contenus par mot-clé"
 
 #: admin/themes/default/items/tags.php:9
 #: admin/themes/default/tags/browse.php:49
 msgid "There are no tags to display. You must first tag some items."
-msgstr "Il n'y a pas de tags à afficher. Vous devez d'abord tagger certains Contenus."
+msgstr "Il n'y a pas de mots-clés à afficher. Vous devez d'abord étiqueter certains contenus."
 
 #: admin/themes/default/plugins/browse.php:26
 #, php-format
@@ -1534,27 +1545,27 @@ msgstr "Test"
 
 #: admin/themes/default/tags/browse.php:3
 msgid "Edit Tags"
-msgstr "Éditer les étiquettes"
+msgstr "Éditer les mots-clés"
 
 #: admin/themes/default/tags/browse.php:10
 msgid "Editing Tags"
-msgstr "Édition des étiquettes"
+msgstr "Édition des mots-clés"
 
 #: admin/themes/default/tags/browse.php:13
 msgid "To view all items with a tag, click the number."
-msgstr "Pour visualiser tous les contenus avec une étiquette, cliquer sur le chiffre."
+msgstr "Pour visualiser tous les contenus avec un mot-clé, cliquer sur le chiffre."
 
 #: admin/themes/default/tags/browse.php:14
 msgid ""
 "To edit the tag name, click the name and begin editing, and hit \"enter\" to"
 " save. To cancel an edit, click the ESC key or click away from the tag."
-msgstr "Pour éditer l'intitulé du tag, cliquer sur son nom et modifier le, valider ensuite avec la touche \"Entrer\". Pour abonner une édition, il suffit de frapper la touche ESC ou de cliquer ailleurs que sur le tag. "
+msgstr "Pour éditer l'intitulé du mot-clé, cliquer sur son nom et modifier le, valider ensuite avec la touche \"Entrer\". Pour abonner une édition, il suffit de frapper la touche ESC ou de cliquer ailleurs que sur le mot-clé. "
 
 #: admin/themes/default/tags/browse.php:15
 msgid ""
 "To delete a tag, click the X. Deleting a tag will not delete the tagged "
 "items."
-msgstr "Pour supprimer une étiquette, cliquer la croix. La suppression d'une étiquette ne supprimera pas les contenus étiquetés."
+msgstr "Pour supprimer un mot-clé, cliquer la croix. La suppression d'un mot-clé ne supprimera pas les contenus étiquetés."
 
 #: admin/themes/default/tags/browse.php:23
 msgid "Most"
@@ -1934,7 +1945,7 @@ msgstr "L'utilisateur n'est pas autorisé à modifier les contenus sélectionné
 
 #: application/controllers/ItemsController.php:322
 msgid "User is not allowed to tag selected items."
-msgstr "L'utilisateur n'est pas autorisé à ajouter des tags aux contenus sélectionnés."
+msgstr "L'utilisateur n'est pas autorisé à ajouter des mots-clés aux contenus sélectionnés."
 
 #: application/controllers/ItemsController.php:356
 msgid "The items were successfully deleted!"
@@ -1997,13 +2008,13 @@ msgstr "L'extension %s a bien été désactivée!"
 msgid "The following error occurred while deactivating the %s plugin: "
 msgstr "L'erreur suivante s'est produite pendant la désactivation de l'extension %s :"
 
-#: application/controllers/PluginsController.php:191
+#: application/controllers/PluginsController.php:187
 #, php-format
 msgid "The %s plugin was successfully upgraded!"
 msgstr "L'extension %s a bien été mise à jour!"
 
-#: application/controllers/PluginsController.php:198
-#: application/controllers/PluginsController.php:203
+#: application/controllers/PluginsController.php:196
+#: application/controllers/PluginsController.php:202
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
 msgstr "L'erreur suivante s'est produite pendant la mise à jour de l'extension %s :"
@@ -2071,12 +2082,12 @@ msgstr "Le chemin d'accès au répertoire d'ImageMagick n'est pas bon."
 
 #: application/controllers/TagsController.php:35
 msgid "You have to be logged in to edit tags!"
-msgstr "Vous devez être identifié pour pouvoir modifier les tags!"
+msgstr "Vous devez être identifié pour pouvoir modifier les mots-clés !"
 
 #: application/controllers/TagsController.php:64
 #, php-format
 msgid "Tag named \"%1$s\" was successfully renamed to \"%2$s\"."
-msgstr "Le tag intitulé \"%1$s\" a bien été renommé en \"%2$s\"."
+msgstr "Le mot-clé \"%1$s\" a bien été renommé en \"%2$s\"."
 
 #: application/controllers/TagsController.php:91
 msgid "Invalid tagType given."
@@ -2184,7 +2195,7 @@ msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
 "this user will remain in the system, but will no longer be associated with "
 "this user."
-msgstr "%s sera supprimé du système. Les éléments, les collections et les étiquettes créés par cet utilisateur resteront dans le système, mais ne seront plus associés à cet utilisateur."
+msgstr "%s sera supprimé du système. Les éléments, les collections et les un mots-clés créés par cet utilisateur resteront dans le système, mais ne seront plus associés à cet utilisateur."
 
 #: application/controllers/UsersController.php:292
 msgid "Welcome!"
@@ -2329,13 +2340,13 @@ msgstr "Information sur l'auteur du site"
 
 #: application/forms/GeneralSettings.php:45 application/forms/Install.php:102
 msgid "Tag Delimiter"
-msgstr "Délimiteur de tag"
+msgstr "Délimiteur des mots-clés"
 
 #: application/forms/GeneralSettings.php:46
 msgid ""
 "Separate tags using this character or string. Be careful when changing this "
 "setting. You run the risk of splitting tags that contain the old delimiter."
-msgstr "Séparez les tags en utilisant ce caractère ou une chaîne de caractères. Soyez prudent en modifiant ce paramètre. Vous courrez le risque de divisez des tags qui contiennent l'ancien délimiteur."
+msgstr "Séparez les mots-clés en utilisant ce caractère ou une chaîne de caractères. Soyez prudent en modifiant ce paramètre. Vous courrez le risque de divisez des mots-clés qui contiennent l'ancien délimiteur."
 
 #: application/forms/GeneralSettings.php:59 application/forms/Install.php:163
 msgid "ImageMagick Directory Path"
@@ -2359,7 +2370,7 @@ msgstr "Confirmez votre mot de passe."
 
 #: application/forms/Install.php:103
 msgid "Separate tags using this character or string."
-msgstr "Séparez les tags en utilisant ce caractère ou cette chaîne de caractère."
+msgstr "Séparez les mots-clés en utilisant ce caractère ou cette chaîne de caractère."
 
 #: application/forms/Install.php:118
 msgid "Maximum fullsize image size constraint (in pixels)"
@@ -2655,7 +2666,7 @@ msgid ""
 "subpage of the navigation object."
 msgstr ""
 
-#: application/libraries/Omeka/Navigation/Page/Uri.php:124
+#: application/libraries/Omeka/Navigation/Page/Uri.php:128
 #, php-format
 msgid "Invalid URI for Omeka_Navigation_Page_Uri object: %s"
 msgstr "URL invalide pour Omeka_Navigation_Page_Uri : %s"
@@ -2699,55 +2710,55 @@ msgstr "Booléen"
 msgid "Exact match"
 msgstr "Correspondance exacte"
 
-#: application/libraries/globals.php:1228
-#: application/libraries/globals.php:1249
+#: application/libraries/globals.php:1227
+#: application/libraries/globals.php:1248
 #, php-format
 msgid "Could not find file %s!"
 msgstr "Ne peut trouver le fichier %s!"
 
-#: application/libraries/globals.php:1555
+#: application/libraries/globals.php:1554
 msgid "Select Below "
 msgstr "Choisir ci-dessous"
 
-#: application/libraries/globals.php:1597
+#: application/libraries/globals.php:1596
 msgid "Omeka RSS Feed"
 msgstr "Flux RSS Omeka"
 
-#: application/libraries/globals.php:1598
+#: application/libraries/globals.php:1597
 msgid "Omeka Atom Feed"
 msgstr "Flux Atom Omeka"
 
-#: application/libraries/globals.php:2248
+#: application/libraries/globals.php:2247
 msgid "View"
 msgstr "Visualiser"
 
-#: application/libraries/globals.php:2310
+#: application/libraries/globals.php:2309
 msgid "No Collection"
 msgstr "Aucune collection"
 
-#: application/libraries/globals.php:2425
+#: application/libraries/globals.php:2424
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2442
+#: application/libraries/globals.php:2441
 msgid "Next Item &rarr;"
 msgstr "Contenu suivant &rarr;"
 
-#: application/libraries/globals.php:2462
+#: application/libraries/globals.php:2461
 msgid "&larr; Previous Item"
 msgstr "&larr; Contenu précédent"
 
-#: application/libraries/globals.php:2639
+#: application/libraries/globals.php:2638
 msgid "Browse All"
 msgstr "Tout parcourir"
 
-#: application/libraries/globals.php:2644
+#: application/libraries/globals.php:2643
 msgid "Browse by Tag"
-msgstr "Parcourir par tags"
+msgstr "Parcourir par mot-clé"
 
-#: application/libraries/globals.php:2906
+#: application/libraries/globals.php:2905
 msgid "No tags are available."
-msgstr "Aucun tag n'est disponible."
+msgstr "Aucun mot-clé n'est disponible."
 
 #: application/models/Builder/Item.php:256
 msgid "Must specify a file transfer type when attaching files to an item!"
@@ -2800,16 +2811,40 @@ msgstr "Impossible d'obtenir le chemin local pour un fichier enregistré."
 msgid "\"%s\" is not a valid file derivative."
 msgstr ""
 
-#: application/models/Item.php:264
+#: application/models/Item.php:265
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
 msgstr "Les fichiers ne peuvent être attachés à un contenu qui n’est pas persistant dans la base de donnée!"
 
-#: application/models/Item.php:430
+#. / Chicago-style item citation: two authors
+#: application/models/Item.php:391
+#, php-format
+msgid "%1$s and %2$s"
+msgstr ""
+
+#. / Chicago-style item citation: three authors
+#: application/models/Item.php:395
+#, php-format
+msgid "%1$s, %2$s, and %3$s"
+msgstr ""
+
+#. / Chicago-style item citation: more than three authors
+#: application/models/Item.php:399
+#, php-format
+msgid "%s et al."
+msgstr ""
+
+#. / Chicago-style item citation: access date and URL
+#: application/models/Item.php:417
+#, php-format
+msgid "accessed %1$s, %2$s."
+msgstr ""
+
+#: application/models/Item.php:435
 msgid "Cannot add an existing file to an item!"
 msgstr "Impossible d'ajouter un fichier existant à un contenu!"
 
-#: application/models/Item.php:434
+#: application/models/Item.php:439
 msgid "File must be valid before it can be associated with an item!"
 msgstr "Le fichier doit être valide avant qu'il puisse être associé à un contenu!"
 
@@ -2883,7 +2918,7 @@ msgstr "Impossible d'enregistrer l'élément texte pour un enregistrement qui n�
 
 #: application/models/Mixin/Tag.php:157
 msgid "A valid record ID # must be provided when tagging."
-msgstr "Un identifiant d’enregistrement valide doit être fourni lors du tagging."
+msgstr "Un identifiant d’enregistrement valide doit être fourni lors de l’étiquetage."
 
 #: application/models/Option.php:25 application/models/Option.php:29
 msgid "Each option must have a unique name."
@@ -2904,11 +2939,11 @@ msgstr "Type de recherche fournie invalide."
 
 #: application/models/Tag.php:41
 msgid "Tags must be given a name."
-msgstr "Les tags doivent avoir un intitulé."
+msgstr "Les mots-clés doivent avoir un intitulé."
 
 #: application/models/Tag.php:45
 msgid "That name is already taken for this tag."
-msgstr "Cet intitulé est déjà utilisé pour ce tag."
+msgstr "Cet intitulé est déjà utilisé pour ce mot-clé."
 
 #: application/models/User.php:48
 msgid "User may not change permissions to super-user"
@@ -3107,19 +3142,19 @@ msgstr "Il n'y a actuellement pas de contenus dans cette collection."
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
 msgstr "Fièrement propulsé par <a href=\"http://omeka.org\">Omeka</a>."
 
-#: application/views/scripts/common/pagination_control.php:8
+#: application/views/scripts/common/pagination_control.php:7
 msgid "First"
 msgstr "Premier"
 
-#: application/views/scripts/common/pagination_control.php:15
+#: application/views/scripts/common/pagination_control.php:14
 msgid "Previous"
 msgstr "Précédent"
 
-#: application/views/scripts/common/pagination_control.php:31
+#: application/views/scripts/common/pagination_control.php:30
 msgid "Next"
 msgstr "Suivant"
 
-#: application/views/scripts/common/pagination_control.php:38
+#: application/views/scripts/common/pagination_control.php:37
 msgid "Last"
 msgstr "Dernier"
 
@@ -3202,6 +3237,26 @@ msgstr "Citer ce document"
 #: application/views/scripts/search/index.php:2
 msgid "Search Omeka "
 msgstr "Recherche Omeka"
+
+#: application/views/scripts/search/index.php:12
+msgid "Record Type"
+msgstr ""
+
+#: application/views/scripts/search/index.php:29
+msgid "Your query returned no results."
+msgstr ""
+
+#: application/views/scripts/search/search-filters.php:3
+msgid "Query:"
+msgstr ""
+
+#: application/views/scripts/search/search-filters.php:4
+msgid "Query type:"
+msgstr ""
+
+#: application/views/scripts/search/search-filters.php:5
+msgid "Record types:"
+msgstr ""
 
 #: application/views/scripts/search/search-form.php:6
 msgid "Search using this query type:"
