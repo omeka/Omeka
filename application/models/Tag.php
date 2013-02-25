@@ -11,18 +11,28 @@
  * 
  * @package Omeka\Record
  */
-class Tag extends Omeka_Record_AbstractRecord { 
-    
+class Tag extends Omeka_Record_AbstractRecord {
+
+    /**
+     * The tag text.
+     *
+     * @var string
+     */
     public $name;
-    
+
+    /**
+     * Use the tag text when using this record as a string.
+     *
+     * @return string
+     */
     public function __toString() {
         return $this->name;
     }
     
     /**
-     * Must also delete the taggings associated with this tag
-     *
-     * @return void
+     * Delete handling for a tag.
+     * 
+     * Delete the taggings associated with this tag.
      */
     protected function _delete()
     {
@@ -34,7 +44,12 @@ class Tag extends Omeka_Record_AbstractRecord {
             $tagging->delete();
         }
     }
-    
+
+    /**
+     * Validate this tag.
+     *
+     * The tag "name" must be non-empty and unique.
+     */
     protected function _validate()
     {
         if (trim($this->name) == '') {
@@ -47,6 +62,8 @@ class Tag extends Omeka_Record_AbstractRecord {
     }
     
     /**
+     * Check whether a field is unique.
+     * 
      * The check for unique tag names must take into account CASE SENSITIVITY, 
      * which is accomplished via COLLATE utf8_bin sql
      *
@@ -76,7 +93,6 @@ class Tag extends Omeka_Record_AbstractRecord {
      *
      * @param array $new_names Names of the tags this one should be
      *  renamed to.
-     * @return void
      */
     public function rename($new_names) 
     {

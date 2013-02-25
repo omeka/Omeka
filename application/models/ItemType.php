@@ -8,27 +8,66 @@
 
 /**
  * An item type and its metadata.
+ *
+ * Item types are like specialized element sets that only apply to Items and
+ * which can vary between items.
  * 
  * @package Omeka\Record
  */
 class ItemType extends Omeka_Record_AbstractRecord
 {
+    /**
+     * Minimum length of an ItemType name.
+     */
     const ITEM_TYPE_NAME_MIN_CHARACTERS = 1;
+
+    /**
+     * Maximum length of an ItemType name.
+     */
     const ITEM_TYPE_NAME_MAX_CHARACTERS = 255;
 
+    /**
+     * Name of this ItemType.
+     *
+     * @var string
+     */
     public $name;
+
+    /**
+     * Description for this ItemType.
+     *
+     * @var string
+     */
     public $description = '';
 
-    protected $_related = array('Elements' => 'getElements',
-                                'Items'=>'getItems');
+    /**
+     * Records related to an ItemType.
+     *
+     * @var array
+     */
+    protected $_related = array(
+        'Elements' => 'getElements',
+        'Items' => 'getItems'
+    );
 
+    /**
+     * New Elements to be added for this type.
+     *
+     * @var array
+     */
     private $_elementsToSave = array();
+
+    /**
+     * Elements to be removed from this type.
+     *
+     * @var array
+     */
     private $_elementsToRemove = array();
 
     /**
-     * Returns an array of element objects associated with this item type.
+     * Get an array of element objects associated with this item type.
      *
-     * @return array The array of element objects associated with this item type.
+     * @return array All the Element objects associated with this item type.
      */
     protected function getElements()
     {
@@ -36,11 +75,11 @@ class ItemType extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * Returns an array of item objects that have this item type.
+     * Get an array of Items that have this item type.
      *
      * @param int $count The maximum number of items to return.
-     * @param boolean $recent  Whether or not the items are recent.
-     * @return array The items associated with the item type.
+     * @param boolean $recent  Whether the most recent items should be chosen.
+     * @return array The Item objects associated with the item type.
      */
     protected function getItems($count = 10, $recent=true)
     {
@@ -53,16 +92,12 @@ class ItemType extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * Current validation rules for Type
+     * Validate this ItemType.
      *
-     * 1) 'Name' field can't be blank
-     * 2) 'Name' field must be unique
-     *
-     * @return void
+     * The name field must be between 1 and 255 characters and must be unique.
      */
     protected function _validate()
     {
-
         if (strlen($this->name) < self::ITEM_TYPE_NAME_MIN_CHARACTERS || strlen($this->name) > self::ITEM_TYPE_NAME_MAX_CHARACTERS) {
             $this->addError('name', __('The item type name must have between %1$s and %2$s characters.', self::ITEM_TYPE_NAME_MIN_CHARACTERS, self::ITEM_TYPE_NAME_MAX_CHARACTERS) );
         }
@@ -74,8 +109,6 @@ class ItemType extends Omeka_Record_AbstractRecord
 
     /**
      * Filter incoming POST data from ItemType form.
-     *
-     * @return void
      */
     protected function filterPostData($post)
     {
@@ -93,9 +126,7 @@ class ItemType extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * Delete all the ItemTypesElements joins
-     *
-     * @return void
+     * Delete all the ItemTypesElements rows joined to this type.
      */
     protected function _delete()
     {
@@ -106,12 +137,9 @@ class ItemType extends Omeka_Record_AbstractRecord
     }
 
     /**
+     * After-save hook.
+     *
      * Save Element records that are associated with this Item Type.
-     *
-     * @internal Duplication with ElementSet::afterSave().  Could resolve in
-     * future by refactoring into a mixin that handles record dependencies.
-     *
-     * @return void
      */
     protected function afterSave($args)
     {
@@ -130,12 +158,13 @@ class ItemType extends Omeka_Record_AbstractRecord
     }
 
     /**
+     * Reorder the elements for this type.
+     * 
      * This extracts the ordering for the elements from the form's POST, then uses
      * the given ordering to reorder each join record from item_types_elements into
      * a new ordering, which is then saved.
      *
-     * @param Array $elementOrderingArray An array of element_id => order pairs
-     * @return void
+     * @param array $elementOrderingArray An array of element_id => order pairs
      */
     public function reorderElements($elementOrderingArray)
     {
@@ -161,15 +190,13 @@ class ItemType extends Omeka_Record_AbstractRecord
     /**
      * Add a set of elements to the Item Type.
      *
-     * @param array $elements Either an array of elements
-     * or an array of metadata, where each entry corresponds
-     * to a new element to add to the item type.  If an element exists with the same id,
-     * it will replace the old element with the new element.
+     * @param array $elements Either an array of elements or an array of
+     * metadata, where each entry corresponds to a new element to add to the
+     * item type.  If an element exists with the same id, it will replace the
+     * old element with the new element.
      *
      * @uses Element::setArray() For details on the format for passing metadata
      * through $elementInfo.
-     *
-     * @return void
      */
     public function addElements($elements = array())
     {
@@ -208,11 +235,9 @@ class ItemType extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * Adds a new element to the item type by the id of the element
+     * Add a new element to the item type, giving the Element by its ID.
      *
-     * @param string Id of the element
-     * @return void
-     *
+     * @param int ID of the Element.
      */
     public function addElementById($elementId)
     {
@@ -231,12 +256,11 @@ class ItemType extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * Removes an array of Elements from this item type
-     * The element will not be removed until the object is saved.
+     * Remove an array of Elements from this item type
+     * 
+     * The elements will not be removed until the object is saved.
      *
-     * @since 1.2
-     * @param Array $elements An array of Element objects or element id strings
-     * @return void
+     * @param array $elements An array of Element objects or element id strings
      */
     public function removeElements($elements)
     {
@@ -247,10 +271,10 @@ class ItemType extends Omeka_Record_AbstractRecord
 
     /**
      * Remove a single Element from this item type.
+     * 
      * The element will not be removed until the object is saved.
      *
      * @param Element|string $element The element object or the element id.
-     * @return void
      */
     public function removeElement($element)
     {
@@ -293,10 +317,9 @@ class ItemType extends Omeka_Record_AbstractRecord
     }
 
      /**
-     * Removes a single Element from this item type.  It removes it immediately.
+     * Immediately remove a single Element from this item type.
      *
      * @param Element|string $element
-     * @return void
      */
     private function _removeElement($element)
     {
@@ -312,12 +335,13 @@ class ItemType extends Omeka_Record_AbstractRecord
     }
 
      /**
-     * Determines whether a saved version of the item type has an element.
-     * It does not correctly determine the presence of elements that were added or
+     * Determine whether this ItemType has a particular element.
+     * 
+     * This method does not handle elements that were added or
      * removed without saving the item type object.
      *
      * @param Element|string $element  The element object or the element id.
-     * @return boolean
+     * @return bool
      */
     public function hasElement($element)
     {
@@ -336,7 +360,7 @@ class ItemType extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * Determines the total number of items that have this item type.
+     * Get the total number of items that have this item type.
      *
      * @return int The total number of items that have this item type.
      */
@@ -349,7 +373,7 @@ class ItemType extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Returns the 'Item Type' element set.
+     * Get the 'Item Type' element set.
      *
      * @return ElementSet
      */

@@ -12,24 +12,113 @@
  * @package Omeka\Record
  */
 class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Interface 
-{ 
+{
+    /**
+     * Option name for whether the file validation is disabled.
+     */
     const DISABLE_DEFAULT_VALIDATION_OPTION = 'disable_default_file_validation';
+
+    /**
+     * File extension for all image derivatives.
+     */
     const DERIVATIVE_EXT = 'jpg';
-    
+
+    /**
+     * ID of the Item this File belongs to.
+     *
+     * @var int
+     */
     public $item_id;
+
+    /**
+     * Relative order of this File within the parent Item.
+     *
+     * @var int
+     */
     public $order;
+
+    /**
+     * Current filename, as stored.
+     *
+     * @var string
+     */
     public $filename;
+
+    /**
+     * Original filename, as uploaded.
+     *
+     * @var string
+     */
     public $original_filename;
-    public $size = '0';
+
+    /**
+     * Size of the file, in bytes.
+     *
+     * @var int
+     */
+    public $size = 0;
+
+    /**
+     * MD5 hash of the file.
+     *
+     * @var string
+     */
     public $authentication;
+
+    /**
+     * MIME type of the file.
+     *
+     * @var string
+     */
     public $mime_type;
+
+    /**
+     * Longer description of the file's type.
+     *
+     * @var string
+     */
     public $type_os;
-    public $has_derivative_image = '0';
+
+    /**
+     * Whether the file has derivative images.
+     *
+     * @var int
+     */
+    public $has_derivative_image = 0;
+
+    /**
+     * Date the file was added.
+     *
+     * @var string
+     */
     public $added;
+
+    /**
+     * Date the file was last modified.
+     *
+     * @var string
+     */
     public $modified;
-    public $stored = '0';
+
+    /**
+     * Whether the file has been moved to storage.
+     *
+     * @var int
+     */
+    public $stored = 0;
+
+    /**
+     * Embedded metadata from the file.
+     *
+     * @var array
+     */
     public $metadata;
-    
+
+    /**
+     * Folder paths for each type of files/derivatives.
+     *
+     * @var array
+     */
     static private $_pathsByType = array(
         'original' => 'original',
         'fullsize' => 'fullsize',
@@ -39,7 +128,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     
     /**
      * Get a property or special value of this record.
-     * 
+     *
      * @param string $property
      * @return mixed
      */
@@ -70,7 +159,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     }
     
     /**
-     * Initialize mixins.
+     * Initialize the mixins.
      */
     protected function _initializeMixins()
     {
@@ -96,7 +185,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     }
     
     /**
-     * Do something before saving this record.
+     * Before-save hook.
      * 
      * @param array $args
      */
@@ -108,7 +197,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     }
     
     /**
-     * Do something after saving this record.
+     * After-save hook.
      * 
      * @param array $args
      */
@@ -128,7 +217,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     }
     
     /**
-     * Retrieve the parent item of this record.
+     * Get the Item this file belongs to.
      * 
      * @return Item
      */
@@ -138,7 +227,9 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     }
     
     /**
-     * Retrieve a system path for this file.
+     * Get a system path for this file.
+     *
+     * Local paths are only available before the file is stored.
      *
      * @param string $type
      * @return string
@@ -158,7 +249,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     }
     
     /**
-     * Retrieve a web path for this file.
+     * Get a web path for this file.
      *
      * @param string $type
      * @return string
@@ -169,7 +260,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     }
     
     /**
-     * Retrieve the derivative filename.
+     * Get the filename for this file's derivative images.
      * 
      * @return string
      */
@@ -186,7 +277,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     }
     
     /**
-     * Determine whether this record has a thumbnail image.
+     * Determine whether this file has a thumbnail image.
      * 
      * @return bool
      */
@@ -197,6 +288,8 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     
     /**
      * Determine whether this record has a fullsize image.
+     *
+     * This is an alias for hasThumbnail().
      * 
      * @return bool
      */
@@ -220,7 +313,6 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      * table.
      * 
      * @param string
-     * @return void
      */
     public function setDefaults($filepath, array $options = array())
     {
@@ -282,7 +374,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     /**
      * Extract ID3 metadata associated with the file.
      * 
-     * @return boolean
+     * @return bool Whether getID3 was able to read the file.
      */
     public function extractMetadata()
     {
@@ -309,10 +401,10 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     }
     
     /**
-     * Pull down the file's extra metadata via getID3 library.
+     * Read the file's embedded metadata with the getID3 library.
      *
-     * @param string $path Path to file.
-     * @return getID3
+     * @return getID3|bool Returns getID3 object, or false if there was an
+     *  exception.
      */
     private function _getId3()
     {
@@ -333,7 +425,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     }
     
     /**
-     * Store files belonging to this record.
+     * Store the files belonging to this record.
      */
     public function storeFiles()
     {
@@ -354,7 +446,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     }
     
     /**
-     * Get the storage path.
+     * Get a storage path for the file.
      * 
      * @param string $type
      * @return string
@@ -415,7 +507,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      *
      * @uses Ownable::isOwnedBy
      * @param User $user
-     * @return boolean
+     * @return bool
      */
     public function isOwnedBy($user)
     {

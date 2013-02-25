@@ -12,38 +12,75 @@
  * @package Omeka\Record
  */
 class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Interface
-{            
+{
     /**
-     * @var boolean Whether or not the collection is publicly accessible.
+     * Whether or not the collection is publicly accessible.
+     *
+     * @var bool
      */
     public $public = 0;
     
     /**
-     * @var boolean Whether or not the collection is featured.
+     * Whether or not the collection is featured.
+     *
+     * @var bool
      */
     public $featured = 0;
     
     /**
+     * Date the collection was added.
+     *
      * @var string
      */
     public $added;
     
     /**
+     * Date the collection was last modified.
+     *
      * @var string
      */
     public $modified;
     
     /**
-     * @var integer
+     * ID for the User that created this collection.
+     *
+     * @var int
      */
     public $owner_id = 0;
-    
-    protected $_related = array('Elements'=>'getElements',
-                                'ElementTexts'=>'getElementText');
-    
+
+    /**
+     * Related records.
+     *
+     * @see Omeka_Record_AbstractRecord::__get
+     */
+    protected $_related = array(
+        'Elements' => 'getElements',
+        'ElementTexts'=>'getElementText'
+    );
+
+    /**
+     * Initialize the mixins.
+     */
+    protected function _initializeMixins()
+    {
+        $this->_mixins[] = new Mixin_PublicFeatured($this);
+        $this->_mixins[] = new Mixin_Owner($this);
+        $this->_mixins[] = new Mixin_ElementText($this);
+        $this->_mixins[] = new Mixin_Timestamp($this);
+        $this->_mixins[] = new Mixin_Search($this);
+    }
+
     /**
      * Get a property about this collection.
      *
+     * Valid properties for a Collection include:
+     * * (int) public
+     * * (int) featured
+     * * (string) added
+     * * (string) modified
+     * * (int) owner_id
+     * * (int) total_items
+     * 
      * @param string $property The property to get, always lowercase.
      * @return mixed The value of the property
      */
@@ -57,11 +94,10 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
         }
     }
     
-    
     /**
-     * Determine the total number of items associated with this collection.
+     * Get the total number of items in this collection.
      * 
-     * @return integer
+     * @return int
      */
     public function totalItems()
     {
@@ -96,28 +132,14 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
         return 'Collections';
     }
 
-
     /**
-     * Returns whether or not the collection has at least 1 contributor element text
+     * Return whether the collection has at least 1 contributor element text.
      *
-     * @return boolean
+     * @return bool
      */
     public function hasContributor()
     {
         return $this->hasElementText('Dublin Core', 'Contributor');
-    }
-
-    /**
-     * Initialize the mixins
-     *
-     */            
-    protected function _initializeMixins()
-    {
-        $this->_mixins[] = new Mixin_PublicFeatured($this);
-        $this->_mixins[] = new Mixin_Owner($this);
-        $this->_mixins[] = new Mixin_ElementText($this);
-        $this->_mixins[] = new Mixin_Timestamp($this);
-        $this->_mixins[] = new Mixin_Search($this);
     }
 
     /**
@@ -145,13 +167,20 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
     /**
      * All of the custom code for deleting an collection.
      *
+     * Delete the element texts for this record.
+     *
      * @return void
      */
     protected function _delete()
     {    
         $this->deleteElementTexts();
     }
-    
+
+    /**
+     * Before-save hook.
+     *
+     * Fire the before-save element texts code.
+     */
     protected function beforeSave($args)
     {
         if ($args['post']) {
@@ -159,7 +188,12 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
             $this->beforeSaveElements($post);
         }
     }
-    
+
+    /**
+     * After-save hook.
+     *
+     * Handle public/private status for search.
+     */
     protected function afterSave()
     {
         if (!$this->public) {

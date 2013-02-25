@@ -12,28 +12,90 @@
  * @package Omeka\Record
  */
 class User extends Omeka_Record_AbstractRecord 
-    implements Zend_Acl_Resource_Interface, Zend_Acl_Role_Interface {
-
+    implements Zend_Acl_Resource_Interface, Zend_Acl_Role_Interface
+{
+    /**
+     * This User's username.
+     *
+     * @var string
+     */
     public $username;
     
     /**
-     * @var string This field should never contain the plain-text password.  Always
+     * The hashed password.
+     *
+     * This field should never contain the plain-text password.  Always
      * use setPassword() to change the user password.
+     * 
+     * @var string 
      */
     public $password;
+
+    /**
+     * The salt for the hashed password.
+     *
+     * @var string
+     */
     public $salt;
-    public $active = '0';
+
+    /**
+     * Whether this user is active and can log in.
+     *
+     * @var int
+     */
+    public $active = 0;
+
+    /**
+     * This user's role.
+     *
+     * @var string
+     */
     public $role;
+
+    /**
+     * This user's full or display name.
+     *
+     * @var string
+     */
     public $name;
+
+    /**
+     * This user's email address.
+     *
+     * @var string
+     */
     public $email;
-    
+
+    /**
+     * Minimum username length.
+     */
     const USERNAME_MIN_LENGTH = 1;
+
+    /**
+     * Maximum username length.
+     */
     const USERNAME_MAX_LENGTH = 30;
+
+    /**
+     * Minimum password length.
+     */
     const PASSWORD_MIN_LENGTH = 6;
-    
+
+    /**
+     * Error message for an invalid email address.
+     */
     const INVALID_EMAIL_ERROR_MSG = "That email address is not valid.  A valid email address is required.";
+
+    /**
+     * Error message for an already-taken email address.
+     */
     const CLAIMED_EMAIL_ERROR_MSG = "That email address has already been claimed by a different user. Please notify an administrator if you feel this has been done in error.";
-    
+
+    /**
+     * Before-save hook.
+     *
+     * Check the current user's privileges to change user roles before saving.
+     */
     protected function beforeSave($args)
     {
         if ($args['post']) {
@@ -53,10 +115,18 @@ class User extends Omeka_Record_AbstractRecord
             }
         }
     }
-    
+
+    /**
+     * Filter form POST input.
+     *
+     * Transform usernames to lowercase alphanumeric.
+     *
+     * @param array $post
+     * @return array Cleaned POST data.
+     */
     protected function filterPostData($post)
     {
-        $options = array('inputNamespace'=>'Omeka_Filter');
+        $options = array('inputNamespace' => 'Omeka_Filter');
         
         // Alphanumeric with no whitespace allowed, lowercase
         $username_filter = array(new Zend_Filter_Alnum(false), 'StringToLower');
@@ -72,7 +142,12 @@ class User extends Omeka_Record_AbstractRecord
                 
         return $post;
     }
-    
+
+    /**
+     * Set data from POST to the record.
+     *
+     * Removes the 'password' and 'salt' entries, if passed.
+     */
     public function setPostData($post)
     {
         // potential security hole
@@ -84,7 +159,10 @@ class User extends Omeka_Record_AbstractRecord
         }
         return parent::setPostData($post);
     }
-    
+
+    /**
+     * Validate this User.
+     */
     protected function _validate()
     {
         if (!trim($this->name)) {
@@ -115,7 +193,9 @@ class User extends Omeka_Record_AbstractRecord
     }
             
     /**
-     * Upgrade the hashed password.  Does nothing if the user/password is 
+     * Upgrade the hashed password.
+     *
+     * Does nothing if the user/password is 
      * incorrect, or if same has been upgraded already.
      * 
      * @since 1.3
@@ -136,15 +216,29 @@ class User extends Omeka_Record_AbstractRecord
         $user->save();
         return true;
     }
-    
+
+    /**
+     * Get this User's role.
+     *
+     * Required by Zend_Acl_Role_Interface.
+     *
+     * @return string
+     */
     public function getRoleId()
     {
         if (!$this->role) {
             throw new RuntimeException(__('The user must be assigned a role.'));
         }
         return $this->role;
-    }  
-    
+    }
+
+    /**
+     * Get the Resource ID for the User model.
+     *
+     * Required by Zend_Acl_Resource_Interface.
+     *
+     * @return string
+     */
     public function getResourceId()
     {
         return 'Users';
@@ -156,8 +250,16 @@ class User extends Omeka_Record_AbstractRecord
     public function generateSalt()
     {
         $this->salt = substr(md5(mt_rand()), 0, 16);
-    }   
-    
+    }
+
+    /**
+     * Set a new password for the user.
+     *
+     * Always use this method to set a password, do not directly set the
+     * password or salt properties.
+     *
+     * @param string $password Plain-text password.
+     */
     public function setPassword($password)
     {
         if ($this->salt === null) {
@@ -165,7 +267,13 @@ class User extends Omeka_Record_AbstractRecord
         }
         $this->password = $this->hashPassword($password);
     }
-    
+
+    /**
+     * SHA-1 hash the given password with the current salt.
+     *
+     * @param string $password Plain-text password.
+     * @return string Salted and hashed password.
+     */
     public function hashPassword($password)
     {
         return sha1($this->salt . $password);

@@ -13,10 +13,32 @@
  */
 class ElementSet extends Omeka_Record_AbstractRecord
 {
+    /**
+     * Type of record this set applies to.
+     *
+     * @var string
+     */
     public $record_type;
+
+    /**
+     * Name for the element set.
+     *
+     * @var string
+     */
     public $name;
+
+    /**
+     * Description for the element set.
+     *
+     * @var string
+     */
     public $description;
-    
+
+    /**
+     * Child Element records to save when saving this set.
+     *
+     * @var array
+     */
     protected $_elementsToSave = array();
     
     /**
@@ -26,7 +48,12 @@ class ElementSet extends Omeka_Record_AbstractRecord
      * element set from others.
      */
     const ITEM_TYPE_NAME = 'Item Type Metadata';
-    
+
+    /**
+     * Get the Elements that are in this set.
+     *
+     * @return array
+     */
     public function getElements()
     {
         return $this->getTable('Element')->findBySet($this->name);
@@ -44,14 +71,25 @@ class ElementSet extends Omeka_Record_AbstractRecord
             $this->_elementsToSave[] = $record;
         }
     }
-    
+
+    /**
+     * Create a new Element record with the given data.
+     *
+     * @param array $options Data to set on the Element.
+     * @return Element
+     */
     private function _buildElementRecord($options)
     {
         $obj = new Element;
         $obj->setArray($options);
-        return $obj;        
+        return $obj;
     }
-    
+
+    /**
+     * After-save hook.
+     *
+     * Save the $_elementsToSave and set their orders.
+     */
     protected function afterSave($args)
     {
         $maxOrder = $this->_getNextElementOrder();
@@ -64,7 +102,7 @@ class ElementSet extends Omeka_Record_AbstractRecord
     }
     
     /**
-     * Deletes all the elements associated with an element set.
+     * Delete all the elements associated with an element set.
      * 
      * @return void
      */
@@ -76,7 +114,12 @@ class ElementSet extends Omeka_Record_AbstractRecord
             $element->delete();
         }
     }
-    
+
+    /**
+     * Get an order value to place an Element at the end of this set.
+     *
+     * @return int
+     */
     private function _getNextElementOrder()
     {
         $db = $this->getDb();
@@ -91,7 +134,12 @@ class ElementSet extends Omeka_Record_AbstractRecord
         }
         return $nextElementOrder;
     }
-    
+
+    /**
+     * Validate the element set.
+     *
+     * Tests that name is non-empty and unique.
+     */
     protected function _validate()
     {
         if (!$this->fieldIsUnique('name')) {

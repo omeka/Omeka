@@ -7,22 +7,51 @@
  */
 
 /**
- * An element and its metadata.
+ * A metadata element within an element set or item type.
  * 
  * @package Omeka\Record
  */
 class Element extends Omeka_Record_AbstractRecord
 {
+    /**
+     * ID of the ElementSet this Element belongs to.
+     * 
+     * @var int
+     */
     public $element_set_id;
+
+    /**
+     * This Element's order within the parent ElementSet.
+     * 
+     * @var int
+     */
     public $order;
+
+    /**
+     * A human-readable name
+     *
+     * @var string
+     */
     public $name = '';
+
+    /**
+     * A human-readable description
+     *
+     * @var string
+     */
     public $description = '';
+
+    /**
+     * A user-generated comment
+     *
+     * @var string
+     */
     public $comment = '';
 
     /**
-     * Set the element set for the element.
+     * Set the parent ElementSet by name.
+     * 
      * @param string $elementSetName
-     * @return void
      */
     public function setElementSet($elementSetName)
     {
@@ -30,9 +59,9 @@ class Element extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * Return the ElementSet objection for this element.
+     * Return the parent ElementSet object for this element.
      *
-     * @return ElementSet
+     * @return ElementSet|null
      */
     public function getElementSet()
     {
@@ -46,8 +75,8 @@ class Element extends Omeka_Record_AbstractRecord
 
     /**
      * Set the order of the element within its element set.
-     * @param integer $order
-     * @return void
+     * 
+     * @param int $order
      */
     public function setOrder($order)
     {
@@ -59,9 +88,9 @@ class Element extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * Set the name of the element.
+     * Set the Element's name.
+     *
      * @param string $name
-     * @return void
      */
     public function setName($name)
     {
@@ -69,33 +98,38 @@ class Element extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * Set the description for the element.
+     * Set the Element's description.
+     * 
      * @param string $description
-     * @return void
      */
     public function setDescription($description)
     {
         $this->description = (string)trim($description);
     }
-    
+
+    /**
+     * Set the Element's comment.
+     *
+     * @param string $comment
+     */
     public function setComment($comment)
     {
         $this->comment = trim($comment);
     }
 
     /**
-     * @param array|string $data If string, it's the name of the element.
-     * Otherwise, array of metadata for the element.  May contain the following
-     * keys in the array:
-     * <ul>
-     *  <li>name</li>
-     *  <li>description</li>
-     *  <li>comment</li>
-     *  <li>order</li>
-     *  <li>element_set_id</li>
-     *  <li>element_set</li>
-     * </ul>
-     * @return void
+     * Set the data for the Element in bulk.
+     * 
+     * @param array|string $data If string, the name of the element.
+     * Otherwise, array of metadata for the element.  The array may contain the
+     * following keys:
+     *
+     * * name
+     * * description
+     * * comment
+     * * order
+     * * element_set_id
+     * * element_set
      */
     public function setArray($data)
     {
@@ -132,8 +166,8 @@ class Element extends Omeka_Record_AbstractRecord
      *
      * Checks the following criteria:
      * 
-     * - Name is not empty.
-     * - Name does not already exist within the given element set.
+     * * Name is not empty.
+     * * Name does not already exist within the given element set.
      */
     protected function _validate()
     {
@@ -149,8 +183,10 @@ class Element extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * When deleting an element, cascade delete all element texts and item type 
-     * assignments associated with the element.
+     * Delete associated records when deleting the Element.
+     * 
+     * Cascade delete to all element texts and item type assignments associated
+     * with the element.
      */
     protected function _delete()
     {
@@ -165,7 +201,8 @@ class Element extends Omeka_Record_AbstractRecord
     }
 
     /**
-     * Retrieve the element set ID from the name.
+     * Get an element set ID from a name.
+     * 
      * @return int
      */
     private function _getElementSetId($elementSetName)
@@ -179,6 +216,7 @@ class Element extends Omeka_Record_AbstractRecord
 
     /**
      * Calculate whether the element's name already belongs to the current set.
+     * 
      * @return boolean
      */
     private function _nameIsInSet($elementName, $elementSetId)
