@@ -848,7 +848,7 @@ header nav {
     list-style-type: none; 
 }
 
-.ui-sortable .sortable-item, .ui-sortable .add-new, .add-new { 
+.sortable-item, .add-new { 
     background: #EBEADC;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F5F3EC), color-stop(100%,#E9E5DA));
     background: -moz-linear-gradient(center top, #F5F3EC 0%, #E9E5DA 100%);
@@ -876,6 +876,8 @@ header nav {
         line-height: 1.5em;
         margin: 0;
     }
+    
+    .sortable-item input[type=text] { margin-bottom: 0; }
 
 .ui-sortable .deleted.sortable-item {
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ad6345), color-stop(100%,#7d422a));
@@ -982,12 +984,16 @@ header nav {
 
     .drawer-contents > :first-child { 
         margin-top: 0;
-        padding-top: 0; 
     }
 
     .drawer-contents label {
         display: block;
         padding: 10px 0;
+    }
+    
+    .drawer-contents textarea { 
+        margin: 0; 
+        vertical-align: bottom;
     }
 
 
@@ -1790,7 +1796,7 @@ header nav {
 }
     
 .items input[type=text], .items textarea {
-    margin: 0 0 0 0;    
+    margin: 0;
 }
     
 .field .use-html {
