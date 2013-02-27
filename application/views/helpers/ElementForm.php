@@ -72,7 +72,8 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
             'add_input' => $addInputComponent,
             'html' => null 
         );
-        $elementSetName = $element->getElementSet()->name;
+
+        $elementSetName = $element->set_name;
         $recordType = get_class($record);
         $filterName = array('ElementForm', $recordType, $elementSetName, $element->name);
         $components = apply_filters(
