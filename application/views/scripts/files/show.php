@@ -13,8 +13,11 @@
 <h1><?php echo $fileTitle; ?></h1>
 
 <div id="primary">
+    <?php echo file_markup($file, array('imageSize'=>'fullsize')); ?>
     <?php echo all_element_texts('file'); ?>
+</div>
 
+<aside id="sidebar">
     <div id="format-metadata">
         <h2><?php echo __('Format Metadata'); ?></h2>
         <div id="filename" class="element">
@@ -62,8 +65,5 @@
     </div><!-- end file-history -->
 </div>
 
-
-<aside id="sidebar">
-    <?php echo file_markup($file, array('imageSize'=>'fullsize')); ?>
 </aside>
 <?php echo foot();?>
