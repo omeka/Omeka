@@ -335,9 +335,10 @@ class Omeka_Db_Table
         
         $select = $this->getSelect();
         $select->where( $this->getTableAlias().'.id = ?', $recordId);
-        $select->limit(1);     
+        $select->limit(1);
+        $select->reset(Zend_Db_Select::ORDER);
         
-        return $select;   
+        return $select;
     }
     
     /**
