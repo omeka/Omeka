@@ -58,6 +58,8 @@ class Table_Collection extends Omeka_Db_Table
         foreach ($pairs as $collectionId => &$name) {
             if ($name === null || $name == '') {
                 $name = __('[Untitled] #%s', $collectionId);
+            } else {
+                $name = strip_formatting($name);
             }
         }
         return $pairs;
