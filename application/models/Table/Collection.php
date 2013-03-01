@@ -21,29 +21,46 @@ class Table_Collection extends Omeka_Db_Table
             $this->filterByFeatured($select, $params['featured']);
         }
     }
-    
-    protected function _getColumnPairs()
-    {
-        // will replace the second value with the Dublin Core Title in findPairsForSelectForm()
-        return array('collections.id', 'collections.id');
-    }
-    
+
     public function findPairsForSelectForm(array $options = array())
     {
-        // replace the second value with the Dublin Core Title in findPairsForSelectForm()
-        $pairs = parent::findPairsForSelectForm($options);
-        $nPairs = array();
-        foreach($pairs as $collectionId => $v) {
-            $collection = $this->find($collectionId);
-            if ($collection) {
-                $collectionTitle = strip_formatting(metadata($collection, array('Dublin Core', 'Title')));
-                if ($collectionTitle == '') {
-                    $collectionTitle = __('[Untitled] #%s', strval($collectionId));
-                }
-                $nPairs[$collectionId] = $collectionTitle;
+        $db = $this->getDb();
+
+        $subquery = new Omeka_Db_Select;
+        $subquery->from(array('element_texts' => $db->ElementText), 'id');
+        $subquery->joinInner(
+            array('elements' => $db->Element),
+            'elements.id = element_texts.element_id',
+            array()
+        );
+        $subquery->joinInner(
+            array('element_sets' => $db->ElementSet),
+            'element_sets.id = elements.element_set_id',
+            array()
+        );
+        $subquery->where("element_sets.name = 'Dublin Core'");
+        $subquery->where("elements.name = 'Title'");
+        $subquery->where("element_texts.record_type = 'Collection'");
+        $subquery->where('element_texts.record_id = collections.id');
+        $subquery->limit(1);
+        
+        $select = $this->getSelectForFindBy($options);
+        $select->joinLeft(
+            array('element_texts' => $db->ElementText),
+            "element_texts.id = ($subquery)",
+            array()
+        );
+
+        $select->reset(Zend_Db_Select::COLUMNS);
+        $select->from(array(), array('collections.id', 'element_texts.text'));
+        
+        $pairs = $db->fetchPairs($select);
+        foreach ($pairs as $collectionId => &$name) {
+            if ($name === null || $name == '') {
+                $name = __('[Untitled] #%s', $collectionId);
             }
         }
-        return $nPairs;
+        return $pairs;
     }
     
     /**
