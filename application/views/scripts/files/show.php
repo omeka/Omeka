@@ -20,11 +20,6 @@
 <aside id="sidebar">
     <div id="format-metadata">
         <h2><?php echo __('Format Metadata'); ?></h2>
-        <div id="filename" class="element">
-            <h3><?php echo __('Filename'); ?></h3>
-            <div class="element-text"><?php echo metadata('file', 'Filename'); ?></div>
-        </div>
-    
         <div id="original-filename" class="element">
             <h3><?php echo __('Original Filename'); ?></h3>
             <div class="element-text"><?php echo metadata('file', 'Original Filename'); ?></div>
@@ -33,6 +28,11 @@
         <div id="file-size" class="element">
             <h3><?php echo __('File Size'); ?></h3>
             <div class="element-text"><?php echo __('%s bytes', metadata('file', 'Size')); ?></div>
+        </div>
+
+        <div id="authentication" class="element">
+            <h3><?php echo __('Authentication'); ?></h3>
+            <div class="element-text"><?php echo metadata('file', 'Authentication'); ?></div>
         </div>
     </div><!-- end format-metadata -->
     
@@ -47,22 +47,6 @@
             <div class="element-text"><?php echo metadata('file', 'Type OS'); ?></div>
         </div>
     </div><!-- end type-metadata -->
-    
-    <div id="file-history" class="section">
-        <h2><?php echo __('File History'); ?></h2>
-        <div id="date-added" class="element">
-            <h3><?php echo __('Date Added'); ?></h3>
-            <div class="element-text"><?php echo format_date(metadata('file', 'Added'), Zend_Date::DATE_MEDIUM); ?></div>
-        </div>
-        <div id="date-modified" class="element">
-            <h3><?php echo __('Date Modified'); ?></h3>
-            <div class="element-text"><?php echo format_date(metadata('file', 'Modified'), Zend_Date::DATE_MEDIUM); ?></div>
-        </div>
-        <div id="authentication" class="element">
-            <h3><?php echo __('Authentication'); ?></h3>
-            <div class="element-text"><?php echo metadata('file', 'Authentication'); ?></div>
-        </div>
-    </div><!-- end file-history -->
 </div>
 
 </aside>
