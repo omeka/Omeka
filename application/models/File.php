@@ -148,7 +148,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             case 'display_title':
                 $titles = $this->getElementTexts('Dublin Core', 'Title');
                 if ($titles) {
-                    $title = $titles[0]->text;
+                    $title = strip_formatting($titles[0]->text);
                 } else {
                     $title = $this->original_filename;
                 }
