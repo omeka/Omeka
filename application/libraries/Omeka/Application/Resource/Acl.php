@@ -90,8 +90,8 @@ class Omeka_Application_Resource_Acl extends Zend_Application_Resource_ResourceA
         // Contributors can add and tag items, edit or delete their own items, and see 
         // their items that are not public.
         $acl->allow('contributor', 'Items', array('add', 'tag', 'batch-edit', 'batch-edit-save', 
-                                                  'delete-confirm', 'editSelf', 'deleteSelf', 
-                                                  'showSelfNotPublic'));
+                                                  'change-type', 'delete-confirm', 'editSelf',
+                                                  'deleteSelf', 'showSelfNotPublic'));
         // Contributors can edit their own files.
         $acl->allow('contributor', 'Files', 'editSelf');
         // Contributors have access to tag autocomplete.
