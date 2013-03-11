@@ -32,9 +32,9 @@ class Omeka_Db_Select_PublicPermissions
             return;
         }
 
-        $currentUser = $bootstrap->getResource('CurrentUser');
-        $this->_allPermission = $acl->isAllowed($currentUser, $resource, 'showNotPublic');
-        $this->_selfPermission = $acl->isAllowed($currentUser, $resource, 'showSelfNotPublic');
+        $this->_currentUser = $bootstrap->getResource('CurrentUser');
+        $this->_allPermission = $acl->isAllowed($this->_currentUser, $resource, 'showNotPublic');
+        $this->_selfPermission = $acl->isAllowed($this->_currentUser, $resource, 'showSelfNotPublic');
     }
 
     /**
@@ -55,7 +55,7 @@ class Omeka_Db_Select_PublicPermissions
         }
         
         if ($ownerColumn && $this->_selfPermission) {
-            $select->where("$alias.public = 1 OR $alias.$ownerColumn = ?", $currentUser->id);
+            $select->where("$alias.public = 1 OR $alias.$ownerColumn = ?", $this->_currentUser->id);
         } else {
             $select->where("$alias.public = 1");
         }
