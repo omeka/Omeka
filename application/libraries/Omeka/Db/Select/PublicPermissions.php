@@ -15,6 +15,7 @@ class Omeka_Db_Select_PublicPermissions
 {
     protected $_allPermission;
     protected $_selfPermission;
+    protected $_currentUser;
 
     /**
      * Create the permissions object and perform the ACL checks.
