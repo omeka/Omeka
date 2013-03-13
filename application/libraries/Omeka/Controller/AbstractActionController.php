@@ -50,7 +50,6 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
                                 array $invokeArgs = array()
     ) {
         parent::__construct($request, $response, $invokeArgs);
-        $response->setHeader('Content-Type', 'text/html; charset=utf-8', true);
         $this->_setActionContexts();
     }
     

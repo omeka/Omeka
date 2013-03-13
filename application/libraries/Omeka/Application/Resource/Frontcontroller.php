@@ -52,6 +52,9 @@ class Omeka_Application_Resource_Frontcontroller extends Zend_Application_Resour
             $front->registerPlugin(
                 new Omeka_Controller_Plugin_Ssl((string)$sslConfig, $redirector, $auth));
         }
+
+        // Add a default content-type fallback.
+        $front->registerPlugin(new Omeka_Controller_Plugin_DefaultContentType);
         
         return $front;
     }
