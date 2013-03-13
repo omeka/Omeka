@@ -203,23 +203,23 @@ p, li {
         min-width: 120px;
         background: #e2e2e2; /* Fallback */
         background: url('../images/dropdown-arrow.png') no-repeat right center; /* Fallback */
+        background: url('../images/dropdown-arrow.png') no-repeat right center, -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#e2e2e2));
+        background: url('../images/dropdown-arrow.png') no-repeat right center, -webkit-linear-gradient(top, #f8f8f8, #e2e2e2);
+        background: url('../images/dropdown-arrow.png') no-repeat right center, -moz-linear-gradient(top, #f8f8f8, #e2e2e2);
+        background: url('../images/dropdown-arrow.png') no-repeat right center, -o-linear-gradient(top, #f8f8f8, #e2e2e2);
+        background: url('../images/dropdown-arrow.png') no-repeat right center, -ms-linear-gradient(top, #f8f8f8, #e2e2e2);
         background: url('../images/dropdown-arrow.png') no-repeat right center, linear-gradient(top, #f8f8f8, #e2e2e2);
-            background: url('../images/dropdown-arrow.png') no-repeat right center, -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#e2e2e2));
-            background: url('../images/dropdown-arrow.png') no-repeat right center, -webkit-linear-gradient(top, #f8f8f8, #e2e2e2);
-            background: url('../images/dropdown-arrow.png') no-repeat right center, -moz-linear-gradient(top, #f8f8f8, #e2e2e2);
-            background: url('../images/dropdown-arrow.png') no-repeat right center, -o-linear-gradient(top, #f8f8f8, #e2e2e2);
-            background: url('../images/dropdown-arrow.png') no-repeat right center, -ms-linear-gradient(top, #f8f8f8, #e2e2e2);
         border: 1px solid #D8D8D8;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        -o-border-radius: 0;
         border-radius: 0;
-            -webkit-border-radius: 0;
-            -moz-border-radius: 0;
-            -o-border-radius: 0;
         -webkit-appearance: none;
         -moz-appearance: none;
+        -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
+        -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
+        -o-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
         box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
-            -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
-            -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
-            -o-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
         font-family: "Cabin", sans-serif;
         color: #666666;
         border-radius: 0;
@@ -232,14 +232,14 @@ p, li {
         height: 30px;
         border: 1px solid #d8d8d8;
         border-radius: 0;
+        -webkit-box-shadow: 0 0 .375em #d6d6d6 inset;
+        -moz-box-shadow: 0 0 .375em #d6d6d6 inset;
+        -o-box-shadow: 0 0 .375em #d6d6d6 inset;
         box-shadow: 0 0 .375em #d6d6d6 inset;
-            -webkit-box-shadow: 0 0 .375em #d6d6d6 inset;
-            -moz-box-shadow: 0 0 .375em #d6d6d6 inset;
-            -o-box-shadow: 0 0 .375em #d6d6d6 inset;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -o-box-sizing: border-box;
         box-sizing: border-box;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            -o-box-sizing: border-box;
         color: #666666;
         font-family: "Cabin", sans-serif;
         font-size: 14px;
@@ -288,10 +288,10 @@ p, li {
         
         .inputs input[type=text], .inputs input[type=password], .inputs textarea {
             width: 100%;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -o-box-sizing: border-box;
             box-sizing: border-box;
-                -webkit-box-sizing: border-box;
-                -moz-box-sizing: border-box;
-                -o-box-sizing: border-box;
         }
             
         .inputs inputs a.button, .inputs input[type="submit"], .inputs button {
@@ -305,14 +305,14 @@ p, li {
     textarea {
         border: 1px solid #d8d8d8;
         border-radius: 0;
+        -webkit-box-shadow: 0 0 .375em #d6d6d6 inset;
+        -moz-box-shadow: 0 0 .375em #d6d6d6 inset;
+        -o-box-shadow: 0 0 .375em #d6d6d6 inset;
         box-shadow: 0 0 .375em #d6d6d6 inset;
-            -webkit-box-shadow: 0 0 .375em #d6d6d6 inset;
-            -moz-box-shadow: 0 0 .375em #d6d6d6 inset;
-            -o-box-shadow: 0 0 .375em #d6d6d6 inset;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -o-box-sizing: border-box;
         box-sizing: border-box;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            -o-box-sizing: border-box;
         color: #666666;
         font-family: "Cabin", sans-serif;
         font-size: 14px;
@@ -330,10 +330,10 @@ p, li {
             box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
             border: 1px solid #749308;
             border-radius: 0;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -o-box-sizing: border-box;
             box-sizing: border-box;
-                -webkit-box-sizing: border-box;
-                -moz-box-sizing: border-box;
-                -o-box-sizing: border-box;
             color: #ffffff;
             cursor: pointer;
             font-family: "Cabin", sans-serif;
@@ -438,15 +438,15 @@ p, li {
 header {
     width: 100%;
     background-color: #2A2520;
+    -webkit-border-image: url('../images/red-bg.jpg') 5 repeat;
+    -moz-border-image: url('../images/red-bg.jpg') 5 repeat;
+    -o-border-image: url('../images/red-bg.jpg') 5 repeat;
     border-image: url('../images/red-bg.jpg') 5 repeat;
-        -webkit-border-image: url('../images/red-bg.jpg') 5 repeat;
-        -moz-border-image: url('../images/red-bg.jpg') 5 repeat;
-        -o-border-image: url('../images/red-bg.jpg') 5 repeat;
     border-width: 0 0 .375em 0;
+    -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
+    -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
+    -o-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
     box-shadow: 0px 0px 5px #666666;
-        -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
-        -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
-        -o-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
     color: #FFFFFF;
     font-family: "Arvo", serif;
     font-size: 14px;
@@ -551,13 +551,13 @@ header nav {
 #content-nav li {
     height: 2.1875em;
     background-image: url('../images/navbg-gray.jpg');
-        border-right: 1px solid rgba(0,0,0,1);
-        border-bottom: 1px solid rgba(0,0,0,1);
-        border-left: 1px solid rgba(0,0,0,1);
+    border-right: 1px solid rgba(0,0,0,1);
+    border-bottom: 1px solid rgba(0,0,0,1);
+    border-left: 1px solid rgba(0,0,0,1);
+    -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
+    -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
+    -o-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
     box-shadow: 1px 1px 3px rgba(0,0,0,.5);
-        -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
-        -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
-        -o-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
     font-size: 14px;
     line-height: 100%;
     text-shadow: -1px -1px 1px rgba(0,0,0,1);
@@ -586,10 +586,10 @@ header nav {
 #content-nav .current {
     background-image: url('../images/navbg-blue.jpg');
     position: relative;
+    -webkit-box-shadow: 0 0 0;
+    -moz-box-shadow: 0 0 0;
+    -o-box-shadow: 0 0 0;
     box-shadow: 0 0 0;
-        -webkit-box-shadow: 0 0 0;
-        -moz-box-shadow: 0 0 0;
-        -o-box-shadow: 0 0 0;
     overflow: visible;
 }
     
@@ -626,12 +626,12 @@ header nav {
     width: 100%;
     background: #1C4E65; /* Fallback */
     background: url('../images/dropdown-arrow.png') no-repeat right center; /* Fallback */
+    background: url('../images/dropdown-arrow.png') no-repeat right center, -webkit-gradient(linear, left top, left bottom, from(#1C4E65), to(#164052));
+    background: url('../images/dropdown-arrow.png') no-repeat right center, -webkit-linear-gradient(top, #1C4E65, #164052);
+    background: url('../images/dropdown-arrow.png') no-repeat right center, -moz-linear-gradient(top, #1C4E65, #164052);
+    background: url('../images/dropdown-arrow.png') no-repeat right center, -o-linear-gradient(top, #1C4E65, #164052);
+    background: url('../images/dropdown-arrow.png') no-repeat right center, -ms-linear-gradient(top, #1C4E65, #164052);
     background: url('../images/dropdown-arrow.png') no-repeat right center, linear-gradient(top, #1C4E65, #164052);
-        background: url('../images/dropdown-arrow.png') no-repeat right center, -webkit-gradient(linear, left top, left bottom, from(#1C4E65), to(#164052));
-        background: url('../images/dropdown-arrow.png') no-repeat right center, -webkit-linear-gradient(top, #1C4E65, #164052);
-        background: url('../images/dropdown-arrow.png') no-repeat right center, -moz-linear-gradient(top, #1C4E65, #164052);
-        background: url('../images/dropdown-arrow.png') no-repeat right center, -o-linear-gradient(top, #1C4E65, #164052);
-        background: url('../images/dropdown-arrow.png') no-repeat right center, -ms-linear-gradient(top, #1C4E65, #164052);
     border: 1px solid #11303F;
     color: #f7f7f7;
     font-family: "Arvo", serif;
@@ -657,23 +657,23 @@ header nav {
         height: 25px;
         min-width: 25px;
         background: #e2e2e2; /* Fallback */
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#e2e2e2));
+        background-image: -webkit-linear-gradient(top, #f8f8f8, #e2e2e2);
+        background-image: -moz-linear-gradient(top, #f8f8f8, #e2e2e2);
+        background-image: -o-linear-gradient(top, #f8f8f8, #e2e2e2);
+        background-image: -ms-linear-gradient(top, #f8f8f8, #e2e2e2);
         background-image: linear-gradient(top, #f8f8f8, #e2e2e2);
-            background-image: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#e2e2e2));
-            background-image: -webkit-linear-gradient(top, #f8f8f8, #e2e2e2);
-            background-image: -moz-linear-gradient(top, #f8f8f8, #e2e2e2);
-            background-image: -o-linear-gradient(top, #f8f8f8, #e2e2e2);
-            background-image: -ms-linear-gradient(top, #f8f8f8, #e2e2e2);
         border: 1px solid #D8D8D8;
         -webkit-appearance: none;
         border-radius: 0;
+        -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
+        -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
+        -o-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
         box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
-            -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
-            -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
-            -o-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -o-box-sizing: border-box;
         box-sizing: border-box;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            -o-box-sizing: border-box;
         color: #666666;
         font-family: "Cabin", sans-serif;
         float: left;
@@ -705,10 +705,10 @@ header nav {
     .pagination .page-input input[type=text] {
         width: 40px;
         height: 24px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -o-box-sizing: border-box;
         box-sizing: border-box;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            -o-box-sizing: border-box;
         margin: 0 5px 0 0;
         padding: 0;            
         text-align: center;
@@ -786,15 +786,14 @@ header nav {
 
 #content { 
     background-image: url('../images/content_bg.jpg');
-    border-image: url('../images/red-bg.jpg') 5 repeat; 
-        -webkit-border-image: url('../images/red-bg.jpg') 5 repeat;
-        -moz-border-image: url('../images/red-bg.jpg') 5 repeat; 
-        -o-border-image: url('../images/red-bg.jpg') 50 repeat; 
-    border-width: .375em 0 0 0; 
+    -webkit-border-image: url('../images/red-bg.jpg') 5 repeat;
+    -moz-border-image: url('../images/red-bg.jpg') 5 repeat; 
+    -o-border-image: url('../images/red-bg.jpg') 50 repeat; 
+    border-image: url("../images/red-bg.jpg") 5 / 0.375em 0 0 repeat;
+    -webkit-box-shadow: 0 0 1px #999999; 
+    -moz-box-shadow: 0 0 1px #999999; 
+    -o-box-shadow: 0 0 1px #999999; 
     box-shadow: 0 0 1px #999999; 
-        -webkit-box-shadow: 0 0 1px #999999; 
-        -moz-box-shadow: 0 0 1px #999999; 
-        -o-box-shadow: 0 0 1px #999999; 
     margin-top: 10%;
     margin-bottom: 10%;
     padding: 20px 10px;
@@ -806,10 +805,10 @@ header nav {
         
 .panel {
     background-color: rgb(255,255,255);
+    -webkit-box-shadow: 0 0 1px rgba(0,0,0,.4) inset;
+    -moz-box-shadow: 0 0 1px rgba(0,0,0,.4) inset;
+    -o-box-shadow: 0 0 1px rgba(0,0,0,.4) inset;
     box-shadow: 0 0 1px rgba(0,0,0,.4) inset;
-        -webkit-box-shadow: 0 0 1px rgba(0,0,0,.4) inset;
-        -moz-box-shadow: 0 0 1px rgba(0,0,0,.4) inset;
-        -o-box-shadow: 0 0 1px rgba(0,0,0,.4) inset;
     border-top: 5px solid #EBEADC;
     display: block;
     margin: 10px 0;
@@ -1101,25 +1100,25 @@ header nav {
     height: 25px;
     background: #e2e2e2; /* Fallback */
     background: url('../images/dropdown-arrow.png') no-repeat right center; /* Fallback */
+    background: url('../images/dropdown-arrow.png') no-repeat right center, -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#e2e2e2));
+    background: url('../images/dropdown-arrow.png') no-repeat right center, -webkit-linear-gradient(top, #f8f8f8, #e2e2e2);
+    background: url('../images/dropdown-arrow.png') no-repeat right center, -moz-linear-gradient(top, #f8f8f8, #e2e2e2);
+    background: url('../images/dropdown-arrow.png') no-repeat right center, -o-linear-gradient(top, #f8f8f8, #e2e2e2);
+    background: url('../images/dropdown-arrow.png') no-repeat right center, -ms-linear-gradient(top, #f8f8f8, #e2e2e2);
     background: url('../images/dropdown-arrow.png') no-repeat right center, linear-gradient(top, #f8f8f8, #e2e2e2);
-        background: url('../images/dropdown-arrow.png') no-repeat right center, -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#e2e2e2));
-        background: url('../images/dropdown-arrow.png') no-repeat right center, -webkit-linear-gradient(top, #f8f8f8, #e2e2e2);
-        background: url('../images/dropdown-arrow.png') no-repeat right center, -moz-linear-gradient(top, #f8f8f8, #e2e2e2);
-        background: url('../images/dropdown-arrow.png') no-repeat right center, -o-linear-gradient(top, #f8f8f8, #e2e2e2);
-        background: url('../images/dropdown-arrow.png') no-repeat right center, -ms-linear-gradient(top, #f8f8f8, #e2e2e2);
     border: 1px solid #D8D8D8;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -o-border-radius: 0;
     border-radius: 0;
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;
-        -o-border-radius: 0;
+    -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
+    -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
+    -o-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
     box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
-        -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
-        -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
-        -o-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
     box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        -o-box-sizing: border-box;
     color: #666;
     display: inline-block;
     float: left;
@@ -1133,14 +1132,14 @@ header nav {
 .quick-filter-wrapper ul {
     background: #fff;
     border: 1px solid #D8D8D8;
+    -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
+    -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
+    -o-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
     box-shadow: 1px 1px 2px rgba(0,0,0,.1);
-        -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
-        -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
-        -o-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
     box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        -o-box-sizing: border-box;
     position:absolute; 
     left:-9999px; 
     min-width:122px;
@@ -1217,10 +1216,10 @@ header nav {
 ================================================== */
 
 #item-list {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
     box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        -o-box-sizing: border-box;
     margin-bottom: 20px;
 }
     
@@ -1303,10 +1302,10 @@ ul#section-nav, #section-nav ul {
     #section-nav .current a, 
     #section-nav a.active {
         background-image: url('../images/red-bg.jpg');
+        -webkit-box-shadow: 0px 2px 3px #cccccc;
+        -moz-box-shadow: 0px 2px 3px #cccccc;
+        -o-box-shadow: 0px 2px 3px #cccccc;
         box-shadow: 0px 2px 3px #cccccc;
-            -webkit-box-shadow: 0px 2px 3px #cccccc;
-            -moz-box-shadow: 0px 2px 3px #cccccc;
-            -o-box-shadow: 0px 2px 3px #cccccc;
         color: #ffffff !important;
         text-shadow: -1px -1px 1px rgba(0,0,0,.05);
         padding: 10px;
@@ -1350,10 +1349,10 @@ ul#section-nav, #section-nav ul {
     height: 99%;
     display: inline-block;
     margin: 0 5px 0 0;
+    -webkit-box-shadow: -1px 0px 0px 0px rgba(255,255,255,.2) inset,1px 0px -1px 1px rgba(255,255,255,.2);
+    -moz-box-shadow: -1px 0px 0px 0px rgba(255,255,255,.2) inset, 1px 0px 0px 0px rgba(255, 255, 255, 0.2);
+    -o-box-shadow: -1px 0px 0px 0px rgba(255,255,255,.2) inset, 1px 0px -1px 1px rgba(255,255,255,.2);
     box-shadow: -1px 0px 0px 0px rgba(255,255,255,.2) inset,1px 0px -1px 1px rgba(255,255,255,.2);
-        -webkit-box-shadow: -1px 0px 0px 0px rgba(255,255,255,.2) inset,1px 0px -1px 1px rgba(255,255,255,.2);
-        -moz-box-shadow: -1px 0px 0px 0px rgba(255,255,255,.2) inset, 1px 0px 0px 0px rgba(255, 255, 255, 0.2);
-        -o-box-shadow: -1px 0px 0px 0px rgba(255,255,255,.2) inset, 1px 0px -1px 1px rgba(255,255,255,.2);
 }
 
 .hTagcloud ul {
@@ -1382,11 +1381,11 @@ ul#section-nav, #section-nav ul {
         color: transparent;
         height: 24px;
         width: 22px;
+        -webkit-transform: rotatez(45deg);
+        -moz-transform: rotatez(45deg);
+        -o-transform: rotatez(45deg);
+        -ms-transform: rotatez(45deg);
         transform: rotatez(45deg);
-            -webkit-transform: rotatez(45deg);
-            -moz-transform: rotatez(45deg);
-            -o-transform: rotatez(45deg);
-            -ms-transform: rotatez(45deg);
         background: -moz-linear-gradient(-45deg, #A4C637 0%, #75940A 100%);
         background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#A4C637), color-stop(100%,#75940A));        
         border-right: 1px solid #749308;
@@ -1452,20 +1451,20 @@ ul#section-nav, #section-nav ul {
 #tags-nav span {
     height: 25px;
     background: #e2e2e2; /* Fallback */
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#e2e2e2));
+    background-image: -webkit-linear-gradient(top, #f8f8f8, #e2e2e2);
+    background-image: -moz-linear-gradient(top, #f8f8f8, #e2e2e2);
+    background-image: -o-linear-gradient(top, #f8f8f8, #e2e2e2);
+    background-image: -ms-linear-gradient(top, #f8f8f8, #e2e2e2);
     background-image: linear-gradient(top, #f8f8f8, #e2e2e2);
-        background-image: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#e2e2e2));
-        background-image: -webkit-linear-gradient(top, #f8f8f8, #e2e2e2);
-        background-image: -moz-linear-gradient(top, #f8f8f8, #e2e2e2);
-        background-image: -o-linear-gradient(top, #f8f8f8, #e2e2e2);
-        background-image: -ms-linear-gradient(top, #f8f8f8, #e2e2e2);
     border: solid #D8D8D8;
     border-width: 1px 1px 1px 0;
     -webkit-appearance: none;
     border-radius: 0;
+    -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
+    -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
+    -o-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
     box-shadow: 1px 1px 2px rgba(0,0,0,.1);
-        -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
-        -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
-        -o-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
     color: #666666;
     display: inline-block;
     font-family: "Cabin", sans-serif;
@@ -1486,16 +1485,16 @@ ul#section-nav, #section-nav ul {
         }
         
     #tags-nav span.current {
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#e8e8e8), to(#e1e1e1));
+        background-image: -webkit-linear-gradient(top, #e8e8e8, #e1e1e1);
+        background-image: -moz-linear-gradient(top, #e8e8e8, #e1e1e1);
+        background-image: -o-linear-gradient(top, #e8e8e8, #e1e1e1);
+        background-image: -ms-linear-gradient(top, #e8e8e8, #e1e1e1);
         background-image: linear-gradient(top, #e8e8e8, #e1e1e1);
-            background-image: -webkit-gradient(linear, left top, left bottom, from(#e8e8e8), to(#e1e1e1));
-            background-image: -webkit-linear-gradient(top, #e8e8e8, #e1e1e1);
-            background-image: -moz-linear-gradient(top, #e8e8e8, #e1e1e1);
-            background-image: -o-linear-gradient(top, #e8e8e8, #e1e1e1);
-            background-image: -ms-linear-gradient(top, #e8e8e8, #e1e1e1);
+        -webkit-box-shadow: 0px 0px 2px rgba(0,0,0,.1) inset, 1px 1px 2px rgba(0,0,0,.1);
+        -moz-box-shadow: 0px 0px 2px rgba(0,0,0,.1) inset, 1px 1px 2px rgba(0,0,0,.1);
+        -o-box-shadow: 0px 0px 2px rgba(0,0,0,.1) inset, 1px 1px 2px rgba(0,0,0,.1);
         box-shadow: 0px 0px 2px rgba(0,0,0,.1) inset, 1px 1px 2px rgba(0,0,0,.1);
-            -webkit-box-shadow: 0px 0px 2px rgba(0,0,0,.1) inset, 1px 1px 2px rgba(0,0,0,.1);
-            -moz-box-shadow: 0px 0px 2px rgba(0,0,0,.1) inset, 1px 1px 2px rgba(0,0,0,.1);
-            -o-box-shadow: 0px 0px 2px rgba(0,0,0,.1) inset, 1px 1px 2px rgba(0,0,0,.1);
         }
     
 .tags div.two.columns { clear: both; }
@@ -1670,10 +1669,10 @@ button.remove_search {
 
 #backtrace {
     background-color: white;
+    -webkit-box-shadow: 0 0 1px #999;
+    -moz-box-shadow: 0 0 1px #999;
+    -o-box-shadow: 0 0 1px #999;
     box-shadow: 0 0 1px #999;
-        -webkit-box-shadow: 0 0 1px #999;
-        -moz-box-shadow: 0 0 1px #999;
-        -o-box-shadow: 0 0 1px #999;
     overflow-x: scroll;
     padding: 10px;
 }
