@@ -1,4 +1,3 @@
-<?php if(is_allowed('Plugins','edit')): ?>
 <div id="global-nav">
 <?php
     $globalNav = array(
@@ -30,4 +29,3 @@
     echo nav($globalNav, 'admin_navigation_global');
 ?>    
 </div>
-<?php endif; ?>
