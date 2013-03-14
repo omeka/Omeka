@@ -231,11 +231,9 @@ class Omeka_File_Derivative_Image
      */
     protected static function _getFileName($archiveFilename)
     {
-        $filename = basename($archiveFilename);
-        $newName = explode('.', $filename);
-        //ensures that all generated files are jpeg
-        $newName[1] = self::DERIVATIVE_EXT;
-        return implode('.', $newName);
+        // Ensures that all generated files are jpeg.
+        $base = pathinfo($archiveFilename, PATHINFO_FILENAME);
+        return $base . '.' . self::DERIVATIVE_EXT;
     }
 
     /**

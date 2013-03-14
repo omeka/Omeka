@@ -131,9 +131,8 @@ class File extends Omeka_Record
     
     public function getDerivativeFilename()
     {
-        list($base, $ext) = explode('.', $this->archive_filename);
-        $fn = $base . '.' . Omeka_File_Derivative_Image::DERIVATIVE_EXT;
-        return $fn;        
+        $base = substr($this->archive_filename, 0, strrpos($this->archive_filename, '.'));
+        return $base . '.' . Omeka_File_Derivative_Image::DERIVATIVE_EXT;
     }
     
     public function hasThumbnail()
