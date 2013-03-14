@@ -1,32 +1,32 @@
 /* Table of Contents
 ==================================================
-	#Content Navigation 
-	#Content */
+    #Content Navigation 
+    #Content */
 
 
 /* Content Navigation
 ==================================================*/
 
-#content-nav {	
+#content-nav {    
     font-size: .875em; 
     }
 
-	#content-nav .current:after {
-		width: 10px;
-		height: 2.375em;
-		background: url('../../images/blue-arrow.png') no-repeat;
-		position: absolute;
-		content: "";
-		top: -1px;
-		right: -10px;
-		}
-		
+    #content-nav .current:after {
+        width: 10px;
+        height: 2.375em;
+        background: url('../../images/blue-arrow.png') no-repeat;
+        position: absolute;
+        content: "";
+        top: -1px;
+        right: -10px;
+        }
+        
 
 /* Content
 ==================================================*/
 
 .section-title { margin: 60px 0 10px 160px; }
 
-	.item-info {
-		width: 40%;
-		}
+    .item-info {
+        width: 40%;
+        }

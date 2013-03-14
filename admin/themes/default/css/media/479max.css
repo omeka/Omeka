@@ -25,10 +25,10 @@ header ul {
 
 #content {
     border: 0;
+    -webkit-box-shadow: 0 0 0 transparent;
+    -moz-box-shadow: 0 0 0 transparent;
+    -o-box-shadow: 0 0 0 transparent;
     box-shadow: 0 0 0 transparent;
-        -webkit-box-shadow: 0 0 0 transparent;
-        -moz-box-shadow: 0 0 0 transparent;
-        -o-box-shadow: 0 0 0 transparent;
     }
 
 #content-nav ul { display: none; }

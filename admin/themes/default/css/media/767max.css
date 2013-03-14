@@ -46,10 +46,10 @@ th a:after, th.desc a:after, th.asc a:after { content: ""; }
 #mobile-content-nav { display: block; }
 
 #section-nav {
+    -webkit-border-image: url('../../images/red-bg.jpg') 5 repeat;
+    -moz-border-image: url('../../images/red-bg.jpg') 5 repeat; 
+    -o-border-image: url('../../images/red-bg.jpg') 5 repeat;     
     border-image: url('../../images/red-bg.jpg') 5 repeat; 
-        -webkit-border-image: url('../../images/red-bg.jpg') 5 repeat;
-        -moz-border-image: url('../../images/red-bg.jpg') 5 repeat; 
-        -o-border-image: url('../../images/red-bg.jpg') 5 repeat;     
     border: solid #9d5b41;
     border-width: .375em 0 0 0; 
     margin: 0 0 16px 0;
@@ -75,10 +75,10 @@ th a:after, th.desc a:after, th.asc a:after { content: ""; }
     #section-nav .current a, 
     #section-nav a.active {
         background-image: none;
+        -webkit-box-shadow: 0 0 0 #000;
+        -moz-box-shadow: 0 0 0 #000;
+        -o-box-shadow: 0 0 0 #000;
         box-shadow: 0 0 0 #000;
-            -webkit-box-shadow: 0 0 0 #000;
-            -moz-box-shadow: 0 0 0 #000;
-            -o-box-shadow: 0 0 0 #000;
         color: #C76941 !important;
         font-weight: bold;
         text-shadow: 0 0 0 #000;

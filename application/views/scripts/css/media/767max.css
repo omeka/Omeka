@@ -50,10 +50,10 @@ header nav { float: left; }
     }
 
 #section-nav {
+    -webkit-border-image: url('../../images/red-bg.jpg') 5 repeat;
+    -moz-border-image: url('../../images/red-bg.jpg') 5 repeat; 
+    -o-border-image: url('../../images/red-bg.jpg') 50 repeat;     
     border-image: url('../../images/red-bg.jpg') 5 repeat; 
-        -webkit-border-image: url('../../images/red-bg.jpg') 5 repeat;
-        -moz-border-image: url('../../images/red-bg.jpg') 5 repeat; 
-        -o-border-image: url('../../images/red-bg.jpg') 50 repeat;     
     border-width: .375em 0 0 0; 
     margin: 0 0 16px 0;
 }
