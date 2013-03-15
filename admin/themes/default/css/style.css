@@ -177,7 +177,6 @@ p, li {
         width: 100%;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
-        -o-box-sizing: border-box;
         box-sizing: border-box;
     }
         
@@ -238,17 +237,14 @@ p, li {
         border: 1px solid #D8D8D8;
         -webkit-border-radius: 0;
         -moz-border-radius: 0;
-        -o-border-radius: 0;
         border-radius: 0;
         -webkit-appearance: none;
         -moz-appearance: none;
         -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
         -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
-        -o-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
         box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
         font-family: "Cabin", sans-serif;
         color: #666666;
-        border-radius: 0;
         overflow: hidden;
         font-size: 14px;
         padding: 5px 16px;
@@ -261,11 +257,9 @@ p, li {
         border-radius: 0;
         -webkit-box-shadow: 0 0 .375em #d6d6d6 inset;
         -moz-box-shadow: 0 0 .375em #d6d6d6 inset;
-        -o-box-shadow: 0 0 .375em #d6d6d6 inset;
         box-shadow: 0 0 .375em #d6d6d6 inset;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
-        -o-box-sizing: border-box;
         box-sizing: border-box;
         color: #666666;
         font-family: "Cabin", sans-serif;
@@ -324,7 +318,6 @@ p, li {
             width: 100%;
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
-            -o-box-sizing: border-box;
             box-sizing: border-box;
         }
             
@@ -342,11 +335,9 @@ p, li {
         border-radius: 0;
         -webkit-box-shadow: 0 0 .375em #d6d6d6 inset;
         -moz-box-shadow: 0 0 .375em #d6d6d6 inset;
-        -o-box-shadow: 0 0 .375em #d6d6d6 inset;
         box-shadow: 0 0 .375em #d6d6d6 inset;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
-        -o-box-sizing: border-box;
         box-sizing: border-box;
         color: #666666;
         font-family: "Cabin", sans-serif;
@@ -370,7 +361,6 @@ p, li {
             border-radius: 0;
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
-            -o-box-sizing: border-box;
             box-sizing: border-box;
             color: #ffffff;
             cursor: pointer;
@@ -572,6 +562,8 @@ footer {
         left: 0;
         padding: 0 20px 1em 20px;
         border: 1px solid #e7e7e7;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
         box-sizing: border-box;
         width: 100%;
     }
@@ -785,7 +777,6 @@ header nav {
         box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
-        -o-box-sizing: border-box;
         box-sizing: border-box;
         color: #666666;
         font-family: "Cabin", sans-serif;
@@ -826,7 +817,6 @@ header nav {
         height: 24px;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
-        -o-box-sizing: border-box;
         box-sizing: border-box;
         margin: 0 5px 0 0;
         padding: 0;            
@@ -1098,7 +1088,6 @@ header nav {
     box-shadow: 0 0 1px #999999;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
     box-sizing: border-box;
     border-top: 5px solid #EBEADC;
     display: block;
@@ -1496,7 +1485,6 @@ header nav {
     float: left;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
     box-sizing: border-box;
 }
 
@@ -1545,7 +1533,6 @@ header nav {
     border: 1px solid #D8D8D8;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
-    -o-border-radius: 0;
     border-radius: 0;
     -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
     -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
@@ -1553,7 +1540,6 @@ header nav {
     box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
     box-sizing: border-box;
     color: #666;
     display: inline-block;
@@ -1573,7 +1559,6 @@ header nav {
     box-shadow: 1px 1px 2px rgba(0,0,0,.1);
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
     box-sizing: border-box;
     position:absolute; 
     left:-9999px; 
@@ -1679,7 +1664,6 @@ header nav {
 #item-list {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
     box-sizing: border-box;
     margin-bottom: 20px;
 }
@@ -1956,7 +1940,6 @@ header nav {
     z-index: 10;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    -o-box-sizing: border-box;
     box-sizing: border-box;
 }
 
@@ -2010,7 +1993,6 @@ header nav {
     border-radius: 0;
     -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
     -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
-    -o-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
     box-shadow: 1px 1px 2px rgba(0,0,0,.1);
     color: #666666;
     display: inline-block;

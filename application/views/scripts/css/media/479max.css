@@ -25,13 +25,10 @@ header ul {
     border: 0;
     -webkit-box-shadow: 0 0 0 transparent;
     -moz-box-shadow: 0 0 0 transparent;
-    -o-box-shadow: 0 0 0 transparent;
     box-shadow: 0 0 0 transparent;
     }
 
-.section-title {
-    margin: .5em 0;
-    }
+.section-title { margin: .5em 0; }
     
 #content-nav ul { display: none; }
 
@@ -44,11 +41,7 @@ header ul {
     /* Login
     ==================================================*/
     
-    .login-content, .login-footer {
-        width: 100%;
-        }
+    .login-content, .login-footer { width: 100%; }
         
-        .login-content {
-            margin-top: 0;
-            }
+        .login-content { margin-top: 0; }
             

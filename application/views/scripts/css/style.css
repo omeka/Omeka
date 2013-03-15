@@ -160,6 +160,8 @@ p, li {
     .details {
         background-color: #fff;
         border: 1px solid #E4E5DE;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
         border-radius: 3px;
         margin-top: .5em;
         padding: .5em;
@@ -212,17 +214,14 @@ p, li {
         border: 1px solid #D8D8D8;
         -webkit-border-radius: 0;
         -moz-border-radius: 0;
-        -o-border-radius: 0;
         border-radius: 0;
         -webkit-appearance: none;
         -moz-appearance: none;
         -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
         -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
-        -o-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
         box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
         font-family: "Cabin", sans-serif;
         color: #666666;
-        border-radius: 0;
         overflow: hidden;
         font-size: 14px;
         padding: 5px 16px;
@@ -231,14 +230,14 @@ p, li {
     input[type=text], input[type=password] {
         height: 30px;
         border: 1px solid #d8d8d8;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
         border-radius: 0;
         -webkit-box-shadow: 0 0 .375em #d6d6d6 inset;
         -moz-box-shadow: 0 0 .375em #d6d6d6 inset;
-        -o-box-shadow: 0 0 .375em #d6d6d6 inset;
         box-shadow: 0 0 .375em #d6d6d6 inset;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
-        -o-box-sizing: border-box;
         box-sizing: border-box;
         color: #666666;
         font-family: "Cabin", sans-serif;
@@ -290,7 +289,6 @@ p, li {
             width: 100%;
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
-            -o-box-sizing: border-box;
             box-sizing: border-box;
         }
             
@@ -304,14 +302,14 @@ p, li {
         
     textarea {
         border: 1px solid #d8d8d8;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
         border-radius: 0;
         -webkit-box-shadow: 0 0 .375em #d6d6d6 inset;
         -moz-box-shadow: 0 0 .375em #d6d6d6 inset;
-        -o-box-shadow: 0 0 .375em #d6d6d6 inset;
         box-shadow: 0 0 .375em #d6d6d6 inset;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
-        -o-box-sizing: border-box;
         box-sizing: border-box;
         color: #666666;
         font-family: "Cabin", sans-serif;
@@ -329,6 +327,8 @@ p, li {
             -moz-box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
             box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
             border: 1px solid #749308;
+            -webkit-border-radius: 0;
+            -moz-border-radius: 0;
             border-radius: 0;
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
@@ -417,6 +417,8 @@ p, li {
             #content #flash li {
                 background-color: rgba(255, 255, 255, .5);
                 border: 1px solid #E7E7E7;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
                 border-radius: 3px;
                 font-size: 14px;
                 margin-bottom: 20px;
@@ -665,6 +667,8 @@ header nav {
         background-image: linear-gradient(top, #f8f8f8, #e2e2e2);
         border: 1px solid #D8D8D8;
         -webkit-appearance: none;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
         border-radius: 0;
         -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
         -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
@@ -870,6 +874,8 @@ header nav {
     #login .errors li {
         background-color: rgba(255, 255, 255, .5);
         border: 1px solid #E7E7E7;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
         border-radius: 3px;
         color: #914E33;
         font-size: 14px;
@@ -1109,7 +1115,6 @@ header nav {
     border: 1px solid #D8D8D8;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
-    -o-border-radius: 0;
     border-radius: 0;
     -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
     -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
@@ -1421,6 +1426,8 @@ ul#section-nav, #section-nav ul {
     width: 17px;
     background-color: rgba(0, 0, 0, .3);
     height: 17px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
     border-radius: 10px;
     margin: 0 0 0 10px;    
     position: relative;
@@ -1433,6 +1440,8 @@ ul#section-nav, #section-nav ul {
     height: 100%;
     width: 100%;
     box-shadow: 0px -1px 1px rgba(255,255,255,.3);
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
     border-radius: 20px;
     color:#769a3f;
     display: block;
@@ -1460,6 +1469,8 @@ ul#section-nav, #section-nav ul {
     border: solid #D8D8D8;
     border-width: 1px 1px 1px 0;
     -webkit-appearance: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
     border-radius: 0;
     -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
     -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
