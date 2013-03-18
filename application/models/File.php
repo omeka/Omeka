@@ -379,7 +379,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     public function extractMetadata()
     {
         if (!is_readable($this->getPath('original'))) {
-            throw new Exception('Could not extract metadata: unable to read file at the following path: "' . $this->_filePath . '"');
+            throw new Exception('Could not extract metadata: unable to read file at the following path: "' . $this->getPath('original') . '"');
         }
         // Skip if getid3 did not return a valid object.
         if (!$id3 = $this->_getId3()) {
