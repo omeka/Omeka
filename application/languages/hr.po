@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-02-20 17:45+0000\n"
+"PO-Revision-Date: 2013-03-06 13:35+0000\n"
 "Last-Translator: rijekateam <digitalizacija@gkri.hr>\n"
 "Language-Team: Croatian (http://www.transifex.com/projects/p/omeka/language/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -892,7 +892,7 @@ msgstr "teme"
 
 #: admin/themes/default/index.php:29
 msgid "A new version of Omeka is available for download."
-msgstr ""
+msgstr "Dostupna je nova verzija Omeke. "
 
 #: admin/themes/default/index.php:30
 #, php-format
@@ -2208,7 +2208,7 @@ msgstr "Aktiviraj svoj korisnički račun u %s repozitoriju"
 
 #: application/controllers/UsersController.php:392
 msgid "Login information incorrect. Please try again."
-msgstr ""
+msgstr "Neispravni podaci za prijavu. Molimo pokušajte ponovno. "
 
 #: application/forms/AppearanceSettings.php:22
 #: application/forms/Install.php:117
@@ -2599,7 +2599,7 @@ msgstr "Prikaži ime"
 
 #: application/forms/User.php:81
 msgid "Name as it should be displayed on the site"
-msgstr ""
+msgstr "Ime koje će biti prikazano na stranici"
 
 #: application/forms/User.php:87 application/models/User.php:91
 msgid "Real Name is required."
@@ -2651,7 +2651,7 @@ msgstr ""
 
 #: application/libraries/Omeka/Navigation.php:214
 msgid "The page must be normalized and have a valid uid."
-msgstr ""
+msgstr "Stranica mora biti normalizirana i imati valjani uid. "
 
 #: application/libraries/Omeka/Navigation.php:226
 msgid ""
@@ -2662,21 +2662,21 @@ msgstr ""
 #: application/libraries/Omeka/Navigation/Page/Uri.php:128
 #, php-format
 msgid "Invalid URI for Omeka_Navigation_Page_Uri object: %s"
-msgstr ""
+msgstr "Nevažeći URI za Omeka_Navigation_Page_Uri objekt: %s"
 
 #: application/libraries/Omeka/Plugin/Ini.php:63
 #, php-format
 msgid "Path to plugin.ini for \"%s\" is not correct."
-msgstr ""
+msgstr "Putanja ka plugin.ini za \"%s\" je netočna. "
 
 #: application/libraries/Omeka/Plugin/Installer.php:77
 #, php-format
 msgid "The \"%s\" plugin must be installed and have newer files to upgrade it."
-msgstr ""
+msgstr "Plugin \"%s\" mora biti instaliran i mora imati novije datoteke da bi se nadiogradio."
 
 #: application/libraries/Omeka/Plugin/Installer.php:114
 msgid "Plugin must have a valid directory name before it can be installed."
-msgstr ""
+msgstr "Plugin mora imati valjano ime mape prije nego što se može instalirati. "
 
 #: application/libraries/Omeka/Record/AbstractRecord.php:349
 #, php-format
@@ -2685,7 +2685,7 @@ msgstr "'%s' je pogrešna vrijednost."
 
 #: application/libraries/Omeka/Record/Iterator.php:49
 msgid "An invalid value was detected during record iteration."
-msgstr ""
+msgstr "Nevažeća vrijednost je otkrivena tijekom ponavljanja zapisa. "
 
 #: application/libraries/globals.php:399
 msgid "File"
@@ -2701,7 +2701,7 @@ msgstr "Booleovi"
 
 #: application/libraries/globals.php:459
 msgid "Exact match"
-msgstr ""
+msgstr "Točno podudaranje"
 
 #: application/libraries/globals.php:1227
 #: application/libraries/globals.php:1248
@@ -2768,7 +2768,7 @@ msgstr "Naziv elementa ne smije biti prazno."
 #: application/models/Element.php:147
 #, php-format
 msgid "An element named \"%s\" already exists for the \"%s\" element set."
-msgstr ""
+msgstr "Element imena \"%s\" već postoji u skupu elemenata \"%s\"."
 
 #: application/models/Element.php:175
 #, php-format
@@ -2785,15 +2785,15 @@ msgstr "Naziv skupa elemenata ne smije biti prazan."
 
 #: application/models/ElementText.php:28
 msgid "Invalid record ID."
-msgstr ""
+msgstr "Nevažeći ID zapisa."
 
 #: application/models/ElementText.php:31
 msgid "All element texts must have a record type."
-msgstr ""
+msgstr "Svi tekstovi elementa moraju imati vrstu zapisa. "
 
 #: application/models/ElementText.php:34
 msgid "Invalid element ID."
-msgstr ""
+msgstr "Nevažeći ID elementa. "
 
 #: application/models/File.php:150
 msgid "Cannot get the local path for a stored file."
@@ -2802,7 +2802,7 @@ msgstr "Ne mogu pozvati lokalnu putanju za pohranjenu datoteku."
 #: application/models/File.php:371
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
-msgstr ""
+msgstr "\"%s\" nije valjana izvedenica datoteke. "
 
 #: application/models/Item.php:265
 msgid ""
@@ -2813,25 +2813,25 @@ msgstr "Datoteke ne mogu biti dodane dokumentu koji nije postojan u bazi podatak
 #: application/models/Item.php:391
 #, php-format
 msgid "%1$s and %2$s"
-msgstr ""
+msgstr "%1$s i %2$s"
 
 #. / Chicago-style item citation: three authors
 #: application/models/Item.php:395
 #, php-format
 msgid "%1$s, %2$s, and %3$s"
-msgstr ""
+msgstr "%1$s, %2$s, i %3$s"
 
 #. / Chicago-style item citation: more than three authors
 #: application/models/Item.php:399
 #, php-format
 msgid "%s et al."
-msgstr ""
+msgstr "%s et al."
 
 #. / Chicago-style item citation: access date and URL
 #: application/models/Item.php:417
 #, php-format
 msgid "accessed %1$s, %2$s."
-msgstr ""
+msgstr "pristupljeno %1$s, %2$s."
 
 #: application/models/Item.php:435
 msgid "Cannot add an existing file to an item!"
@@ -2889,7 +2889,7 @@ msgstr "Pogrešan parametar. Funkcija hasElement zahtijeva objekt elementa ili i
 #: application/models/Mixin/ElementText.php:270
 #, php-format
 msgid "There is no element \"%1$s\", \"%2$s\"!"
-msgstr ""
+msgstr "Element \"%1$s\", \"%2$s\" ne postoji!"
 
 #: application/models/Mixin/ElementText.php:289
 #, php-format
@@ -2924,7 +2924,7 @@ msgstr "Imena dodataka ne smiju biti prazna"
 #: application/models/Table/Collection.php:41
 #, php-format
 msgid "[Untitled] #%s"
-msgstr ""
+msgstr "[Bez naslova] #%s"
 
 #: application/models/Table/Item.php:159
 msgid "Invalid search type given!"
@@ -2974,7 +2974,7 @@ msgstr ""
 
 #: application/tests/suite/Omeka/Db/Migration/_files/migrations/50000101120000_notRunYet.php:19
 msgid "This migration should not be run."
-msgstr ""
+msgstr "Ovu migraciju ne bi trebalo pokrenuti. "
 
 #: application/tests/suite/Omeka/NavigationTest.php:752
 #: application/tests/suite/Omeka/NavigationTest.php:817
@@ -3001,7 +3001,7 @@ msgstr "Omeka"
 #: application/tests/suite/Omeka/NavigationTest.php:825
 #: application/tests/suite/Omeka/NavigationTest.php:951
 msgid "CHNM"
-msgstr ""
+msgstr "CHMN"
 
 #: application/tests/suite/Omeka/NavigationTest.php:982
 #: application/tests/suite/Omeka/NavigationTest.php:990
@@ -3086,7 +3086,7 @@ msgstr "Koristi HTML"
 #: application/views/helpers/GetCurrentRecord.php:27
 #, php-format
 msgid "A current %s variable has not been set to this view."
-msgstr ""
+msgstr "Trenutna %s varijabla nije postavljena na ovome prikazu. "
 
 #: application/views/helpers/GetLoopRecords.php:30
 #, php-format
@@ -3129,7 +3129,7 @@ msgstr "Dokumenti u zbirci %s "
 
 #: application/views/scripts/collections/show.php:40
 msgid "There are currently no items within this collection."
-msgstr ""
+msgstr "Trenutno nema dokumenata u ovoj zbirci. "
 
 #: application/views/scripts/common/footer.php:14
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
@@ -3213,7 +3213,7 @@ msgstr "Pogledaj sve dokumente"
 
 #: application/views/scripts/items/browse.php:22
 msgid "Sort by: "
-msgstr ""
+msgstr "Sortiraj po:"
 
 #: application/views/scripts/items/random-featured.php:20
 msgid "No featured items are available."
@@ -3233,39 +3233,39 @@ msgstr "Pretraži Omeku"
 
 #: application/views/scripts/search/index.php:12
 msgid "Record Type"
-msgstr ""
+msgstr "Vrsta zapisa"
 
 #: application/views/scripts/search/index.php:29
 msgid "Your query returned no results."
-msgstr ""
+msgstr "Vaš upit nije našao rezultate. "
 
 #: application/views/scripts/search/search-filters.php:3
 msgid "Query:"
-msgstr ""
+msgstr "Upit:"
 
 #: application/views/scripts/search/search-filters.php:4
 msgid "Query type:"
-msgstr ""
+msgstr "Vrsta upita:"
 
 #: application/views/scripts/search/search-filters.php:5
 msgid "Record types:"
-msgstr ""
+msgstr "Vrste zapisa:"
 
 #: application/views/scripts/search/search-form.php:6
 msgid "Search using this query type:"
-msgstr ""
+msgstr "Traži koristeći ovu vrstu upita:"
 
 #: application/views/scripts/search/search-form.php:11
 msgid "Search only these record types:"
-msgstr ""
+msgstr "Pretraži samo ove vrste zapisa:"
 
 #: application/views/scripts/search/search-form.php:17
 msgid "Go to search settings to select record types to use."
-msgstr ""
+msgstr "Idi na postavke pretraživanja za odabir vrsta zapisa koji će se koristiti. "
 
 #: application/views/scripts/search/search-form.php:19
 msgid "Advanced Search (Items only)"
-msgstr ""
+msgstr "Složeno pretraživanje (samo dokumenti)"
 
 #: application/views/scripts/users/login.php:9
 msgid "Go to Home Page"
@@ -3312,7 +3312,7 @@ msgstr "Obrazac za utvrđivanje grešaka"
 
 #: install/views/scripts/index/installed.phtml:1
 msgid "Success!"
-msgstr ""
+msgstr "Uspjeh! "
 
 #: install/views/scripts/index/installed.phtml:2
 msgid "Omeka is installed."

@@ -4,13 +4,14 @@
 # 
 # Translators:
 # Daniel Alves <daniel_r_alves@hotmail.com>, 2011.
+# Vania Vicente <vv.25420@hotmail.com>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-02-11 19:35+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2013-03-06 15:04+0000\n"
+"Last-Translator: yuki_v <vv.25420@hotmail.com>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/projects/p/omeka/language/pt_PT/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -235,7 +236,7 @@ msgstr "Compressão"
 
 #. Omeka Legacy File: Post Processing element
 msgid "Post Processing"
-msgstr ""
+msgstr "Pós-processamento"
 
 #. Omeka Image File
 msgid "Omeka Image File"
@@ -694,7 +695,7 @@ msgstr ""
 #: application/views/helpers/SearchForm.php:34
 #: application/views/scripts/items/search-form.php:186
 msgid "Search"
-msgstr ""
+msgstr "Pesquisar"
 
 #: admin/themes/default/common/settings-nav.php:20
 msgid "Element Sets"
@@ -725,16 +726,16 @@ msgstr ""
 
 #: admin/themes/default/error/403.php:2
 msgid "403: Forbidden"
-msgstr ""
+msgstr "403: Proibido"
 
 #: admin/themes/default/error/403.php:6
 msgid "Sorry, you do not have permission to access this page."
-msgstr ""
+msgstr "Lamentamos, não tem permissão de acesso a esta página."
 
 #: admin/themes/default/error/403.php:10 admin/themes/default/error/404.php:9
 #: admin/themes/default/error/405.php:8
 msgid "site administrator"
-msgstr ""
+msgstr "Administrador do site"
 
 #: admin/themes/default/error/403.php:11
 #, php-format
@@ -743,7 +744,7 @@ msgstr ""
 
 #: admin/themes/default/error/404.php:2
 msgid "404: Page Not Found"
-msgstr ""
+msgstr "404: Página não encontrada"
 
 #: admin/themes/default/error/404.php:6
 msgid ""
@@ -759,7 +760,7 @@ msgstr ""
 
 #: admin/themes/default/error/404.php:16 admin/themes/default/index.php:46
 msgid "Recent Items"
-msgstr ""
+msgstr "Itens recentes"
 
 #: admin/themes/default/error/404.php:29 admin/themes/default/index.php:59
 msgid "Add a new item"
@@ -767,7 +768,7 @@ msgstr ""
 
 #: admin/themes/default/error/404.php:36 admin/themes/default/index.php:64
 msgid "Recent Collections"
-msgstr ""
+msgstr "Colecções recentes"
 
 #: admin/themes/default/error/404.php:50 admin/themes/default/index.php:78
 msgid "Add a new collection"
@@ -787,7 +788,7 @@ msgstr ""
 #: admin/themes/default/files/edit.php:8
 #, php-format
 msgid "Edit File #%s"
-msgstr ""
+msgstr "Editar Ficheiro #%s"
 
 #: admin/themes/default/files/show.php:9
 #: application/views/scripts/files/show.php:9
@@ -1007,7 +1008,7 @@ msgstr "Adicionar Item"
 #: application/libraries/globals.php:400
 #: application/views/scripts/items/show.php:18
 msgid "Collection"
-msgstr ""
+msgstr "Colecção"
 
 #: admin/themes/default/items/batch-delete.php:2
 msgid "Batch Delete Items"
@@ -1025,7 +1026,7 @@ msgstr ""
 #: admin/themes/default/items/batch-delete.php:50
 #: admin/themes/default/items/batch-edit.php:116
 msgid "Delete Items"
-msgstr ""
+msgstr "Eliminar Itens"
 
 #: admin/themes/default/items/batch-edit.php:2
 msgid "Batch Edit Items"
@@ -1041,7 +1042,7 @@ msgstr ""
 
 #: admin/themes/default/items/batch-edit.php:46
 msgid "Public?"
-msgstr ""
+msgstr "Público?"
 
 #: admin/themes/default/items/batch-edit.php:49
 #: admin/themes/default/items/batch-edit.php:64
@@ -1076,7 +1077,7 @@ msgstr ""
 #: admin/themes/default/items/tag-form.php:8
 #: admin/themes/default/items/tag-form.php:11
 msgid "Add Tags"
-msgstr ""
+msgstr "Adicionar Etiquetas"
 
 #: admin/themes/default/items/batch-edit.php:107
 #, php-format
@@ -1085,7 +1086,7 @@ msgstr ""
 
 #: admin/themes/default/items/batch-edit.php:117
 msgid "Check if you wish to delete selected items."
-msgstr ""
+msgstr "Verifique se quer eliminar os itens seleccionados."
 
 #: admin/themes/default/items/browse.php:3
 #: application/libraries/Omeka/Navigation.php:142
@@ -1126,7 +1127,7 @@ msgstr ""
 #: application/views/scripts/items/browse.php:2
 #: application/views/scripts/items/tags.php:2
 msgid "Browse Items"
-msgstr ""
+msgstr "Explorar Itens"
 
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
@@ -1139,7 +1140,7 @@ msgstr ""
 
 #: admin/themes/default/items/browse.php:37
 msgid "Select"
-msgstr ""
+msgstr "Seleccionar"
 
 #: admin/themes/default/items/browse.php:95
 msgid "No Tags"
@@ -1177,12 +1178,12 @@ msgstr ""
 #: admin/themes/default/items/browse.php:154
 #, php-format
 msgid "Would you like to %s?"
-msgstr ""
+msgstr "Gostaria de %s?"
 
 #: admin/themes/default/items/edit.php:8
 #, php-format
 msgid "Edit Item #%s"
-msgstr ""
+msgstr "Editar Item #%s"
 
 #: admin/themes/default/items/files-form.php:2
 msgid "Click and drag the files into the preferred display order."
@@ -1224,7 +1225,7 @@ msgstr ""
 
 #: admin/themes/default/items/quick-filters.php:7
 msgid "Private"
-msgstr ""
+msgstr "Privado"
 
 #: admin/themes/default/items/search-form.php:13
 #: application/views/scripts/items/search-form.php:13
@@ -1328,7 +1329,7 @@ msgstr ""
 #: admin/themes/default/items/show.php:8
 #, php-format
 msgid "Item #%s"
-msgstr ""
+msgstr "Item #%s"
 
 #: admin/themes/default/items/show.php:30
 msgid "Prev Item"
@@ -1356,7 +1357,7 @@ msgstr ""
 
 #: admin/themes/default/items/show.php:91
 msgid "Bibliographic Citation"
-msgstr ""
+msgstr "Citação Bibliográfica"
 
 #: admin/themes/default/items/tag-form.php:10
 #, php-format
@@ -1702,7 +1703,7 @@ msgstr ""
 #: application/forms/RecoverPassword.php:27 application/forms/User.php:95
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #: admin/themes/default/users/browse.php:20 application/forms/User.php:128
 msgid "Role"
@@ -1715,7 +1716,7 @@ msgstr ""
 #: admin/themes/default/users/edit.php:8
 #, php-format
 msgid "Edit User #%s"
-msgstr ""
+msgstr "Edit Utilizador #%s"
 
 #: admin/themes/default/users/forgot-password.php:2
 #: application/views/scripts/users/forgot-password.php:2
@@ -1749,11 +1750,11 @@ msgstr ""
 #: admin/themes/default/users/show.php:8
 #, php-format
 msgid "User #%s"
-msgstr ""
+msgstr "Utilizador #%s"
 
 #: admin/themes/default/users/show.php:15
 msgid "Edit this User"
-msgstr ""
+msgstr "Editar este Utilizador"
 
 #: application/controllers/AppearanceController.php:48
 msgid "The appearance settings have been updated."
@@ -1836,11 +1837,11 @@ msgstr ""
 
 #: application/controllers/ErrorController.php:64
 msgid "Page not found."
-msgstr ""
+msgstr "Página não encontrada."
 
 #: application/controllers/ErrorController.php:79
 msgid "Access denied."
-msgstr ""
+msgstr "Acesso negado."
 
 #: application/controllers/FilesController.php:64
 msgid "This will delete the file and its associated metadata."
@@ -1945,7 +1946,7 @@ msgstr ""
 
 #: application/controllers/ItemsController.php:358
 msgid "The items were successfully changed!"
-msgstr ""
+msgstr "Os itens foram modificados com sucesso."
 
 #: application/controllers/PluginsController.php:45
 #, php-format

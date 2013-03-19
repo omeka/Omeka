@@ -5,12 +5,13 @@
 # Translators:
 # MASAKI HIDANO <MasaGon@info-lounge.jp>, 2013.
 # YASUSHI INOUE <yasushi.inoue@gmail.com>, 2012.
+# Yuki Shira <shirayuking@gmail.com>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-02-20 16:30+0000\n"
+"PO-Revision-Date: 2013-03-11 10:38+0000\n"
 "Last-Translator: Masaki Hidano <MasaGon@info-lounge.jp>\n"
 "Language-Team: Japanese (http://www.transifex.com/projects/p/omeka/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -32,7 +33,7 @@ msgstr ""
 #: application/views/scripts/items/browse.php:17
 #: application/views/scripts/search/index.php:13
 msgid "Title"
-msgstr "タイトル"
+msgstr "Title (タイトル)"
 
 #. Dublin Core: Title element description
 msgid "A name given to the resource"
@@ -42,15 +43,15 @@ msgstr "リソースに与えられた名前"
 #: admin/themes/default/items/browse.php:41
 #: application/views/scripts/items/browse.php:18
 msgid "Creator"
-msgstr "制作者"
+msgstr "Creator (制作者)"
 
 #. Dublin Core: Creator element description
 msgid "An entity primarily responsible for making the resource"
-msgstr "このリソースの制作に主たる責任を持つ（人や組織などの）エンティティ"
+msgstr "リソースの制作に主たる責任を持つ（人や組織などの）エンティティ"
 
 #. Dublin Core: Subject element name
 msgid "Subject"
-msgstr "テーマ"
+msgstr "Subject (テーマ)"
 
 #. Dublin Core: Subject element description
 msgid "The topic of the resource"
@@ -64,7 +65,7 @@ msgstr "リソースのトピック"
 #: application/forms/ItemTypes.php:150
 #: application/views/scripts/collections/browse.php:17
 msgid "Description"
-msgstr "詳細"
+msgstr "Description (詳細)"
 
 #. Dublin Core: Description element description
 msgid "An account of the resource"
@@ -72,35 +73,35 @@ msgstr "リソースの内容の説明"
 
 #. Dublin Core: Publisher element name
 msgid "Publisher"
-msgstr "提供者"
+msgstr "Publisher (提供者)"
 
 #. Dublin Core: Publisher element description
 msgid "An entity responsible for making the resource available"
-msgstr "このリソースの発行に責任を持つ（人や組織などの）エンティティ"
+msgstr "リソースの発行に責任を持つ（人や組織などの）エンティティ"
 
 #. Dublin Core: Contributor element name
 #. User role: contributor
 msgid "Contributor"
-msgstr "協力者"
+msgstr "Contributor (協力者)"
 
 #. Dublin Core: Contributor element description
 msgid "An entity responsible for making contributions to the resource"
-msgstr "このリソースへの寄与に責任を持つ（人や組織などの）エンティティ"
+msgstr "リソースへの寄与に責任を持つ（人や組織などの）エンティティ"
 
 #. Dublin Core: Date element name
 msgid "Date"
-msgstr "日付"
+msgstr "Date (日付)"
 
 #. Dublin Core: Date element description
 msgid ""
 "A point or period of time associated with an event in the lifecycle of the "
 "resource"
-msgstr "このリソースのライフサイクルにおける出来事に関連する時もしくは期間"
+msgstr "リソースのライフサイクルにおける出来事に関連する時もしくは期間"
 
 #. Dublin Core: Type element name
 #: admin/themes/default/items/browse.php:42
 msgid "Type"
-msgstr "タイプ"
+msgstr "Type (タイプ)"
 
 #. Dublin Core: Type element description
 msgid "The nature or genre of the resource"
@@ -108,7 +109,7 @@ msgstr "リソースの性質もしくはジャンル"
 
 #. Dublin Core: Format element name
 msgid "Format"
-msgstr "フォーマット"
+msgstr "Format (フォーマット)"
 
 #. Dublin Core: Format element description
 msgid "The file format, physical medium, or dimensions of the resource"
@@ -116,7 +117,7 @@ msgstr "リソースのファイル形式、物理媒体、あるいはサイズ
 
 #. Dublin Core: Identifier element name
 msgid "Identifier"
-msgstr "識別子"
+msgstr "Identifier (識別子)"
 
 #. Dublin Core: Identifier element description
 msgid "An unambiguous reference to the resource within a given context"
@@ -124,7 +125,7 @@ msgstr "リソースのこの文脈における一意なレファレンス"
 
 #. Dublin Core: Source element name
 msgid "Source"
-msgstr "ソース"
+msgstr "Source (ソース)"
 
 #. Dublin Core: Source element description
 msgid "A related resource from which the described resource is derived"
@@ -132,7 +133,7 @@ msgstr "リソースの派生元リソースへの参照"
 
 #. Dublin Core: Language element name
 msgid "Language"
-msgstr "言語"
+msgstr "Language (言語)"
 
 #. Dublin Core: Language element description
 msgid "A language of the resource"
@@ -140,7 +141,7 @@ msgstr "リソースの言語"
 
 #. Dublin Core: Relation element name
 msgid "Relation"
-msgstr "関連"
+msgstr "Relation (関連)"
 
 #. Dublin Core: Relation element description
 msgid "A related resource"
@@ -148,7 +149,7 @@ msgstr "関連するリソースへの参照"
 
 #. Dublin Core: Coverage element name
 msgid "Coverage"
-msgstr "範囲"
+msgstr "Coverage (範囲)"
 
 #. Dublin Core: Coverage element description
 msgid ""
@@ -158,7 +159,7 @@ msgstr "リソースの地理的・時間的範囲、リソースが関連する
 
 #. Dublin Core: Rights element name
 msgid "Rights"
-msgstr "権利"
+msgstr "Rights (権利)"
 
 #. Dublin Core: Rights element description
 msgid "Information about rights held in and over the resource"
@@ -2130,7 +2131,7 @@ msgstr "パスワードをリセットするためには、このリンクをた
 #: application/controllers/UsersController.php:296
 #, php-format
 msgid "%s Administrator"
-msgstr ""
+msgstr "%s 管理者"
 
 #: application/controllers/UsersController.php:114
 #, php-format

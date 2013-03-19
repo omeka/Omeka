@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-02-11 19:35+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2013-03-18 14:41+0000\n"
+"Last-Translator: Alec <alec.wiki@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/omeka/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,7 +40,7 @@ msgstr "Titolo"
 
 #. Dublin Core: Title element description
 msgid "A name given to the resource"
-msgstr ""
+msgstr "Un nome dato alla risorsa"
 
 #. Dublin Core: Creator element name
 #: admin/themes/default/items/browse.php:41
@@ -58,7 +58,7 @@ msgstr "Soggetto"
 
 #. Dublin Core: Subject element description
 msgid "The topic of the resource"
-msgstr ""
+msgstr "L'argomento della risorsa"
 
 #. Dublin Core: Description element name
 #: admin/themes/default/element-sets/browse.php:17
@@ -140,7 +140,7 @@ msgstr "Lingua"
 
 #. Dublin Core: Language element description
 msgid "A language of the resource"
-msgstr ""
+msgstr "Una lingua della risorsa"
 
 #. Dublin Core: Relation element name
 msgid "Relation"
@@ -148,7 +148,7 @@ msgstr "Relazione"
 
 #. Dublin Core: Relation element description
 msgid "A related resource"
-msgstr ""
+msgstr "Una risorsa correlata"
 
 #. Dublin Core: Coverage element name
 msgid "Coverage"
@@ -332,7 +332,7 @@ msgstr ""
 #: admin/themes/default/themes/browse.php:2
 #: admin/themes/default/themes/config.php:3
 msgid "Appearance"
-msgstr ""
+msgstr "Aspetto"
 
 #: admin/themes/default/appearance/edit-navigation.php:14
 msgid ""
@@ -348,17 +348,17 @@ msgstr ""
 #: admin/themes/default/appearance/edit-navigation.php:37
 #: application/forms/Navigation.php:132
 msgid "Label"
-msgstr ""
+msgstr "Etichetta"
 
 #: admin/themes/default/appearance/edit-navigation.php:23
 #: admin/themes/default/appearance/edit-navigation.php:38
 #: application/forms/Navigation.php:133
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: admin/themes/default/appearance/edit-navigation.php:25
 msgid "Add Link"
-msgstr ""
+msgstr "Aggiungi collegamento"
 
 #: admin/themes/default/appearance/edit-navigation.php:31
 #: admin/themes/default/appearance/edit-settings.php:21
@@ -414,7 +414,7 @@ msgstr "Aggiungi una collezione"
 
 #: admin/themes/default/collections/add.php:11
 msgid "Add Collection"
-msgstr ""
+msgstr "Aggiungi collezione"
 
 #: admin/themes/default/collections/add.php:16
 #: admin/themes/default/collections/edit.php:30
@@ -482,7 +482,7 @@ msgstr "Totale documenti"
 #: admin/themes/default/collections/browse.php:37
 #: admin/themes/default/items/browse.php:72
 msgid "(Private)"
-msgstr ""
+msgstr "(Privato)"
 
 #: admin/themes/default/collections/browse.php:40
 #: admin/themes/default/collections/show.php:32
@@ -538,7 +538,7 @@ msgstr "Modifica la collezione #%s"
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Collection #%s"
-msgstr ""
+msgstr "Collezione #%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
@@ -552,7 +552,7 @@ msgstr "Novità"
 #: admin/themes/default/items/show.php:51
 #: application/views/helpers/ItemSearchFilters.php:57
 msgid "Yes"
-msgstr ""
+msgstr "Sì"
 
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/collections/show.php:42
@@ -560,7 +560,7 @@ msgstr ""
 #: admin/themes/default/items/show.php:51
 #: application/views/helpers/ItemSearchFilters.php:57
 msgid "No"
-msgstr ""
+msgstr "No"
 
 #: admin/themes/default/collections/show.php:56
 msgid "No contributors."
@@ -572,7 +572,7 @@ msgstr "Temi"
 
 #: admin/themes/default/common/appearance-nav.php:11
 msgid "Navigation"
-msgstr ""
+msgstr "Navigazione"
 
 #: admin/themes/default/common/appearance-nav.php:15
 #: admin/themes/default/common/global-nav.php:24
@@ -676,16 +676,16 @@ msgstr "Esci"
 
 #: admin/themes/default/common/pagination_control.php:11
 msgid "&lt;"
-msgstr ""
+msgstr "&lt;"
 
 #: admin/themes/default/common/pagination_control.php:34
 #, php-format
 msgid "%s of %s"
-msgstr ""
+msgstr "%s di %s"
 
 #: admin/themes/default/common/pagination_control.php:42
 msgid "&gt;"
-msgstr ""
+msgstr "&gt;"
 
 #: admin/themes/default/common/settings-nav.php:6
 msgid "General"
@@ -693,7 +693,7 @@ msgstr ""
 
 #: admin/themes/default/common/settings-nav.php:10
 msgid "Security"
-msgstr ""
+msgstr "Sicurezza"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: application/views/helpers/SearchForm.php:34
@@ -726,7 +726,7 @@ msgstr ""
 
 #: admin/themes/default/element-sets/edit.php:29
 msgid "Comment"
-msgstr ""
+msgstr "Commento"
 
 #: admin/themes/default/error/403.php:2
 msgid "403: Forbidden"
@@ -768,7 +768,7 @@ msgstr "Documenti recenti"
 
 #: admin/themes/default/error/404.php:29 admin/themes/default/index.php:59
 msgid "Add a new item"
-msgstr ""
+msgstr "Aggiungi un nuovo documento"
 
 #: admin/themes/default/error/404.php:36 admin/themes/default/index.php:64
 msgid "Recent Collections"
@@ -776,7 +776,7 @@ msgstr "Collezioni recenti"
 
 #: admin/themes/default/error/404.php:50 admin/themes/default/index.php:78
 msgid "Add a new collection"
-msgstr ""
+msgstr "Aggiungi una nuova collezione"
 
 #: admin/themes/default/error/405.php:2
 msgid "405: Method Not Allowed"
@@ -803,7 +803,7 @@ msgstr "File #%s"
 #: admin/themes/default/files/show.php:36
 #: application/libraries/globals.php:398
 msgid "Item"
-msgstr ""
+msgstr "Documento"
 
 #: admin/themes/default/files/show.php:41
 msgid "Format Metadata"
@@ -812,7 +812,7 @@ msgstr "Metadati formato"
 #: admin/themes/default/files/show.php:43
 #: application/views/scripts/files/show.php:21
 msgid "Filename"
-msgstr ""
+msgstr "Nome del file"
 
 #: admin/themes/default/files/show.php:45
 #: application/views/scripts/files/show.php:26
@@ -828,7 +828,7 @@ msgstr "Dimensione del file"
 #: application/views/scripts/files/show.php:32
 #, php-format
 msgid "%s bytes"
-msgstr ""
+msgstr "%s bytes"
 
 #: admin/themes/default/files/show.php:53
 #: application/views/scripts/files/show.php:49
@@ -853,7 +853,7 @@ msgstr "Metadati tipo"
 #: admin/themes/default/files/show.php:67
 #: application/views/scripts/files/show.php:39
 msgid "Mime Type"
-msgstr ""
+msgstr "Mime Type"
 
 #: admin/themes/default/files/show.php:69
 #: application/views/scripts/files/show.php:43
@@ -872,27 +872,27 @@ msgstr "Formati di uscita"
 
 #: admin/themes/default/index.php:6
 msgid "items"
-msgstr ""
+msgstr "documenti"
 
 #: admin/themes/default/index.php:7
 msgid "collections"
-msgstr ""
+msgstr "collezioni"
 
 #: admin/themes/default/index.php:8
 msgid "tags"
-msgstr ""
+msgstr "tag"
 
 #: admin/themes/default/index.php:11
 msgid "plugins"
-msgstr ""
+msgstr "plugin"
 
 #: admin/themes/default/index.php:14
 msgid "users"
-msgstr ""
+msgstr "utenti"
 
 #: admin/themes/default/index.php:18
 msgid "theme"
-msgstr ""
+msgstr "tema"
 
 #: admin/themes/default/index.php:29
 msgid "A new version of Omeka is available for download."
@@ -954,7 +954,7 @@ msgstr "Informazione su \"Tipo documento\""
 #: admin/themes/default/users/add.php:6 admin/themes/default/users/edit.php:14
 #: install/views/scripts/index/index.phtml:14
 msgid "required field"
-msgstr ""
+msgstr "campo obbligatorio"
 
 #: admin/themes/default/item-types/form.php:25
 #: admin/themes/default/item-types/show.php:16
@@ -1337,15 +1337,15 @@ msgstr "Documento #%s"
 
 #: admin/themes/default/items/show.php:30
 msgid "Prev Item"
-msgstr ""
+msgstr "Documento precedente"
 
 #: admin/themes/default/items/show.php:35
 msgid "Next Item"
-msgstr ""
+msgstr "Documento successivo"
 
 #: admin/themes/default/items/show.php:71
 msgid "File Metadata"
-msgstr ""
+msgstr "Metadati del file"
 
 #: admin/themes/default/items/show.php:74
 msgid "There are no files for this item yet."
@@ -1444,17 +1444,17 @@ msgstr "Non hai alcun plugin installato. Aggiungine nella directory dei plugin p
 #: admin/themes/default/plugins/config.php:2
 #, php-format
 msgid "Configure Plugin: %s"
-msgstr ""
+msgstr "Configura il plugin: %s"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:2
 #, php-format
 msgid "Uninstall Plugin: %s"
-msgstr ""
+msgstr "Disinstalla il plugin: %s"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:7
 #, php-format
 msgid "Are you sure you want to uninstall %s?"
-msgstr ""
+msgstr "Sei sicuro di voler disinstallare %s?"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:12
 msgid "Yes, I want to uninstall this plugin."
@@ -1492,7 +1492,7 @@ msgstr ""
 
 #: admin/themes/default/settings/edit-item-type-elements.php:50
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 #: admin/themes/default/settings/edit-search.php:10
 msgid "Search Record Types"
@@ -1542,7 +1542,7 @@ msgstr "Test"
 
 #: admin/themes/default/tags/browse.php:3
 msgid "Edit Tags"
-msgstr ""
+msgstr "Modifica i tag"
 
 #: admin/themes/default/tags/browse.php:10
 msgid "Editing Tags"
@@ -1588,7 +1588,7 @@ msgstr "Screenshot del tema %s"
 
 #: admin/themes/default/themes/browse.php:16
 msgid "Configure Theme"
-msgstr ""
+msgstr "Configura il tema"
 
 #: admin/themes/default/themes/browse.php:19
 msgid "Current Theme"
@@ -1598,7 +1598,7 @@ msgstr "Tema attuale"
 #: admin/themes/default/themes/browse.php:47
 #, php-format
 msgid "By %s"
-msgstr ""
+msgstr "Da %s"
 
 #: admin/themes/default/themes/browse.php:26
 msgid ""
@@ -1610,7 +1610,7 @@ msgstr ""
 
 #: admin/themes/default/themes/browse.php:44
 msgid "Use this theme"
-msgstr ""
+msgstr "Usa questo tema"
 
 #: admin/themes/default/themes/config.php:10
 #, php-format
@@ -1715,7 +1715,7 @@ msgstr "Ruolo"
 
 #: admin/themes/default/users/browse.php:30
 msgid "inactive"
-msgstr ""
+msgstr "non attivo"
 
 #: admin/themes/default/users/edit.php:8
 #, php-format
@@ -1749,7 +1749,7 @@ msgstr "Entra"
 
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
-msgstr ""
+msgstr "(Password dimenticata?)"
 
 #: admin/themes/default/users/show.php:8
 #, php-format
@@ -1762,7 +1762,7 @@ msgstr "Modifica questo utente"
 
 #: application/controllers/AppearanceController.php:48
 msgid "The appearance settings have been updated."
-msgstr ""
+msgstr "Le impostazioni dell'aspetto sono state aggiornate."
 
 #: application/controllers/AppearanceController.php:51
 #: application/controllers/ItemTypesController.php:34
@@ -3217,7 +3217,7 @@ msgstr "Tutti i documenti"
 
 #: application/views/scripts/items/browse.php:22
 msgid "Sort by: "
-msgstr ""
+msgstr "Ordina per"
 
 #: application/views/scripts/items/random-featured.php:20
 msgid "No featured items are available."
@@ -3237,23 +3237,23 @@ msgstr ""
 
 #: application/views/scripts/search/index.php:12
 msgid "Record Type"
-msgstr ""
+msgstr "Tipo di record"
 
 #: application/views/scripts/search/index.php:29
 msgid "Your query returned no results."
-msgstr ""
+msgstr "La ricerca non ha restituito alcun risultato."
 
 #: application/views/scripts/search/search-filters.php:3
 msgid "Query:"
-msgstr ""
+msgstr "Ricerca:"
 
 #: application/views/scripts/search/search-filters.php:4
 msgid "Query type:"
-msgstr ""
+msgstr "Tipo di ricerca:"
 
 #: application/views/scripts/search/search-filters.php:5
 msgid "Record types:"
-msgstr ""
+msgstr "Tipi di record:"
 
 #: application/views/scripts/search/search-form.php:6
 msgid "Search using this query type:"
@@ -3261,11 +3261,11 @@ msgstr ""
 
 #: application/views/scripts/search/search-form.php:11
 msgid "Search only these record types:"
-msgstr ""
+msgstr "Ricerca solo i seguenti tipi di record:"
 
 #: application/views/scripts/search/search-form.php:17
 msgid "Go to search settings to select record types to use."
-msgstr ""
+msgstr "Vai alle impostazioni di ricerca per selezionare i tipi di record da usare."
 
 #: application/views/scripts/search/search-form.php:19
 msgid "Advanced Search (Items only)"
