@@ -13,3 +13,6 @@
 [submodule "plugins/Coins"]
 	path = plugins/Coins
 	url = git://github.com/omeka/plugin-Coins
+[submodule "themes/berlin"]
+	path = themes/berlin
+	url = git://github.com/omeka/theme-berlin.git
