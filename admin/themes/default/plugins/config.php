@@ -11,7 +11,7 @@ echo flash();
         <div id="save" class="panel">
             <?php
             echo $this->formSubmit(
-                'install_plugin', 'Save Changes',
+                'install_plugin', __('Save Changes'),
                 array('class' => 'submit big green button'));
             ?>
         </div>
