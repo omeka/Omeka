@@ -2161,13 +2161,14 @@ button.remove_search {
 #current-theme-title {
     background-image: url('../images/beige-banner_bg.jpg');
     height: 40px;
-    display: inline-block;
+    display: block;
     font-family: "Arvo", sans-serif;
     font-weight: normal;
     font-size: 16px;
     line-height: 40px;
     margin: 0 0 16px -2px;
     text-shadow: -1px -1px 0px #f7f7f7;
+    position: relative;
 }
     
     #current-theme-title:before {
@@ -2182,6 +2183,12 @@ button.remove_search {
         margin-left: 10px;
         padding: 9px 14px 12px 14px;
         background-image: url('../images/beige-banner_right.jpg');
+        display: inline-block;
+        top: 0;
+        right: 0;
+        height: 20px;
+        position: absolute;
+        
     }
 
 .themes .group .theme { height: 300px; }
