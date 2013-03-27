@@ -27,7 +27,7 @@ Omeka.Elements = {};
                 // Make sure TinyMCE saves to the textarea before we read
                 // from it
                 if (element.is('textarea')) {
-                    var mce = tinyMCE.get(element.prop('id'));
+                    var mce = tinyMCE.get(this.id);
                     if (mce) {
                         mce.save();
                     }
