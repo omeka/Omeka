@@ -24,6 +24,14 @@ Omeka.Elements = {};
             if (element.is('[type=checkbox]')) {
                 params[this.name] = element.is(':checked') ? '1' : '0';
             } else {
+                // Make sure TinyMCE saves to the textarea before we read
+                // from it
+                if (element.is('textarea')) {
+                    var mce = tinyMCE.get(element.prop('id'));
+                    if (mce) {
+                        mce.save();
+                    }
+                }
                 params[this.name] = element.val();
             }
         });
