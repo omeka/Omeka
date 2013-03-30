@@ -211,7 +211,7 @@ class Omeka_Navigation extends Zend_Navigation
     {
         if (!$page->uid) {
             // we assume that every page has already been normalized
-            throw RuntimeException(__('The page must be normalized and have a valid uid.'));
+            throw new RuntimeException(__('The page must be normalized and have a valid uid.'));
         }
         if ($parentContainer === null) {
             $parentContainer = $this;
