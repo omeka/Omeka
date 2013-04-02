@@ -13,7 +13,7 @@
  */
 class Mixin_Timestamp extends Omeka_Record_Mixin_AbstractMixin
 {
-    const DATE_FORMAT = 'Y-m-d h:i:s';
+    const DATE_FORMAT = 'Y-m-d H:i:s';
 
     protected $_record;
     protected $_addedColumn;
