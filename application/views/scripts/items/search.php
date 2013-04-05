@@ -6,7 +6,7 @@ echo head(array('title' => $pageTitle,
 
 <h1><?php echo $pageTitle; ?></h1>
 
-<nav class="items-nav navigation" id="secondary-nav">
+<nav class="items-nav navigation secondary-nav">
     <?php echo public_nav_items(); ?>
 </nav>
 
