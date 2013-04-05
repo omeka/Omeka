@@ -1687,3 +1687,7 @@ button.remove_search {
     overflow-x: scroll;
     padding: 10px;
 }
+
+#error-message {
+    word-break: break-word;
+}
