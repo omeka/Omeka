@@ -115,7 +115,6 @@ class Table_Item extends Omeka_Db_Table
                         . ' OR '
                         . $db->quoteInto('_simple_tags.name IN (?)', $tagList);
         $select->where($whereCondition);
-        die($select);
     }
     
     /**
