@@ -174,6 +174,17 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
     protected function _delete()
     {    
         $this->deleteElementTexts();
+        $this->_dissociateItems();
+    }
+
+    /**
+     * Set items attached to this collection back to "no collection."
+     */
+    protected function _dissociateItems()
+    {
+        $db = $this->getDb();
+        $db->update($db->Item, array('collection_id' => null),
+            array('collection_id = ?' => $this->id));
     }
 
     /**
