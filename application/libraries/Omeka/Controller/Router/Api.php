@@ -87,6 +87,9 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
         preg_match('#^/api/([a-z_]+)(.+)?$#', $request->getPathInfo(), $matches);
         
         if (!$matches) {
+            if (0 === strpos($request->getPathInfo(), '/api')) {
+                throw new Zend_Controller_Router_Exception('Invalid resource');
+            }
             return false;
         }
         
