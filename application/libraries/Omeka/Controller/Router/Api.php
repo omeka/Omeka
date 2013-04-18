@@ -53,7 +53,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
     protected $_apiResources = array(
         'resources' => array(
             'controller' => 'resources', 
-            'actions' => array('index', 'get')
+            'actions' => array('index')
         ), 
         'collections' => array(
             'record' => 'Collection', 

@@ -11,7 +11,10 @@
  * 
  * @package Omeka\Record
  */
-class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Interface
+class Item 
+    extends Omeka_Record_AbstractRecord 
+    implements Zend_Acl_Resource_Interface, 
+               Omeka_Api_RecordInterface
 {
     /**
      * The ID for this Item's ItemType, if any.
@@ -75,7 +78,7 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         'Files' => 'getFiles',
         'Elements' => 'getElements',
         'ItemTypeElements' => 'getItemTypeElements',
-        'ElementTexts' => 'getElementText'
+        'ElementTexts' => 'getAllElementTexts'
     );
     
     /**
@@ -504,5 +507,64 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     public function getResourceId()
     {
         return 'Items';
+    }
+    
+    /**
+     * Get REST representation of this item.
+     * 
+     * @return array
+     */
+    public function getRepresentation()
+    {
+        $item = array(
+            'id' => $this->id, 
+            'url' => "/items/{$this->id}", 
+            'public' => $this->public, 
+            'featured' => $this->featured, 
+            'added' => $this->added, 
+            'modified' => $this->modified, 
+        );
+        if ($this->item_type_id) {
+            $item['item_type'] = array(
+                'id' => $this->item_type_id, 
+                'url' => "/item_types/{$this->item_type_id}", 
+                'name' => $this->Type->name, 
+            );
+        } else {
+            $item['item_type'] = null;
+        }
+        if ($this->collection_id) {
+            $item['collection'] = array(
+                'id' => $this->collection_id, 
+                'url' => "/collections/{$this->collection_id}", 
+            );
+        } else {
+            $item['collection'] = null;
+        }
+        if ($this->owner_id) {
+            $item['owner'] = array(
+                'id' => $this->owner_id, 
+                'url' => "/users/{$this->owner_id}", 
+            );
+        } else {
+            $item['owner'] = null;
+        }
+        if ($this->Files) {
+            $item['files'] = array(
+                'count' => count($this->Files), 
+                'url' => "/files?item={$this->id}", 
+            );
+        } else {
+            $item['files'] = null;
+        }
+        if ($this->ElementTexts) {
+            $item['element_texts'] = array(
+                'count' => count($this->ElementTexts), 
+                'url' => "/element_texts?record_type=item&record_id={$this->id}", 
+            );
+        } else {
+            $item['element_texts'] = null;
+        }
+        return $item;
     }
 }
