@@ -549,22 +549,14 @@ class Item
         } else {
             $item['owner'] = null;
         }
-        if ($this->Files) {
-            $item['files'] = array(
-                'count' => count($this->Files), 
-                'url' => "/files?item={$this->id}", 
-            );
-        } else {
-            $item['files'] = null;
-        }
-        if ($this->ElementTexts) {
-            $item['element_texts'] = array(
-                'count' => count($this->ElementTexts), 
-                'url' => "/element_texts?record_type=item&record_id={$this->id}", 
-            );
-        } else {
-            $item['element_texts'] = null;
-        }
+        $item['files'] = array(
+            'count' => count($this->Files), 
+            'url' => "/files?item={$this->id}", 
+        );
+        $item['element_texts'] = array(
+            'count' => count($this->ElementTexts), 
+            'url' => "/element_texts?record_type=item&record_id={$this->id}", 
+        );
         return $item;
     }
 }
