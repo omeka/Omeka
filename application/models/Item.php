@@ -556,8 +556,8 @@ class Item
         );
         $item['element_texts'] = array(
             'count' => $this->getTable('ElementText')
-                ->count(array('record_type' => 'item', 'record_id' => $this->id)), 
-            'url' => "/element_texts?record_type=item&record_id={$this->id}", 
+                ->count(array('record_type' => 'Item', 'record_id' => $this->id)), 
+            'url' => "/element_texts?record_type=Item&record_id={$this->id}", 
         );
         return $item;
     }

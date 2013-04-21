@@ -27,21 +27,23 @@ class ApiController extends Omeka_Controller_AbstractActionController
     public function getAction()
     {
         $params = $this->getRequest()->getParams();
-        $record = $this->_getRecord($params['api_record'], $params['api_params'][0]);
+        $record = $this->_getRecord($params['api_record_type'], $params['api_params'][0]);
         $this->_helper->json($record->getRepresentation());
     }
     
     /**
      * Return the specified record.
      * 
+     * @param string $recordType
+     * @param int $id
      * @return Omeka_Record_AbstractRecord
      */
-    protected function _getRecord($recordName, $id)
+    protected function _getRecord($recordType, $id)
     {
-        if (!class_exists($recordName)) {
-            throw new Exception('Invalid record. Record class not found.');
+        if (!class_exists($recordType)) {
+            throw new Exception('Invalid record. Record type not found.');
         }
-        $record = $this->_helper->db->getTable($recordName)->find($id);
+        $record = $this->_helper->db->getTable($recordType)->find($id);
         if (!$record) {
             throw new Exception('Invalid record. Record not found.');
         }

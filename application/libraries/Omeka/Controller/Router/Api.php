@@ -33,8 +33,8 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
      * 'your_resources' => array(
      *     // Controller associated with your resource.
      *     'controller' => 'your-resource-controller',
-     *     // Record associated with your resource.
-     *     'record' => 'YourResourceRecord',
+     *     // Type of record associated with your resource.
+     *     'record_type' => 'YourResourceRecord',
      *     // List of actions available for your resource.
      *     'actions' => array(
      *         'index',  // GET request without ID
@@ -47,8 +47,8 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
      * </code>
      * 
      * If not given, "controller" falls back to the default controller (api). 
-     * Resources using the default controller MUST include a "record". Remove 
-     * "actions" that are not wanted or not implemented.
+     * Resources using the default controller MUST include a "record_type". 
+     * Remove "actions" that are not wanted or not implemented.
      */
     protected static $_apiResources = array(
         'resources' => array(
@@ -56,15 +56,15 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
             'actions' => array('index')
         ), 
         'collections' => array(
-            'record' => 'Collection', 
+            'record_type' => 'Collection', 
             'actions' => array('index', 'get')
         ), 
         'items' => array(
-            'record' => 'Item', 
+            'record_type' => 'Item', 
             'actions' => array('index', 'get')
         ), 
         'files' => array(
-            'record' => 'File', 
+            'record_type' => 'File', 
             'actions' => array('index', 'get')
         ), 
     );
@@ -103,14 +103,14 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
         // Get all available API resources.
         $apiResources = self::getApiResources();
         
-        // Get and validate resource, record, controller, and action.
+        // Get and validate resource, record_type, controller, and action.
         $resource = $this->_getResource($resource, $apiResources);
         if (false === $resource) {
             throw new Zend_Controller_Router_Exception('Invalid resource');
         }
-        $record = $this->_getRecord($resource, $apiResources);
-        if (false === $record) {
-            throw new Zend_Controller_Router_Exception('Invalid record');
+        $recordType = $this->_getRecordType($resource, $apiResources);
+        if (false === $recordType) {
+            throw new Zend_Controller_Router_Exception('Invalid record type');
         }
         $controller = $this->_getController($resource, $apiResources);
         if (false === $controller) {
@@ -121,14 +121,14 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
             throw new Zend_Controller_Router_Exception('Invalid action');
         }
         
-        // Set the route variables. Namespace the API params to prevent 
+        // Set the route variables. Namespace the API parameters to prevent 
         // collisions with GET.
         $routeVars = array(
-            'controller'   => $controller, 
-            'action'       => $action, 
-            'api_resource' => $resource, 
-            'api_record'   => $record, 
-            'api_params'   => $params, 
+            'controller'      => $controller, 
+            'action'          => $action, 
+            'api_resource'    => $resource, 
+            'api_record_type' => $recordType, 
+            'api_params'      => $params, 
         );
         
         return $routeVars;
@@ -163,21 +163,21 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
     }
     
     /**
-     * Return this route's record.
+     * Return this route's record type.
      * 
      * @param string $resource
      * @param array $apiResources
      * @return string|null|false
      */
-    protected function _getRecord($resource, array $apiResources)
+    protected function _getRecordType($resource, array $apiResources)
     {
-        // Resources using the default controller must pass a record.
+        // Resources using the default controller must pass a record type.
         if (!isset($apiResources[$resource]['controller']) 
-            && !isset($apiResources[$resource]['record'])) {
+            && !isset($apiResources[$resource]['record_type'])) {
             return false;
         }
-        if (isset($apiResources[$resource]['record'])) {
-            return $apiResources[$resource]['record'];
+        if (isset($apiResources[$resource]['record_type'])) {
+            return $apiResources[$resource]['record_type'];
         }
         return null;
     }
@@ -219,7 +219,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
             return false;
         }
         
-        // The action must available for the record type.
+        // The action must be available for the resource.
         $legalActions = $this->_legalActions;
         if (isset($apiResources[$resource]['actions'])) {
             $legalActions = $apiResources[$resource]['actions'];
