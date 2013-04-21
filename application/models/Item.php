@@ -550,11 +550,13 @@ class Item
             $item['owner'] = null;
         }
         $item['files'] = array(
-            'count' => count($this->Files), 
+            'count' => $this->getTable('File')
+                ->count(array('item_id' => $this->id)), 
             'url' => "/files?item={$this->id}", 
         );
         $item['element_texts'] = array(
-            'count' => count($this->ElementTexts), 
+            'count' => $this->getTable('ElementText')
+                ->count(array('record_type' => 'item', 'record_id' => $this->id)), 
             'url' => "/element_texts?record_type=item&record_id={$this->id}", 
         );
         return $item;
