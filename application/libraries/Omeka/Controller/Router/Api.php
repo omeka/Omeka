@@ -46,11 +46,11 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
      * )
      * </code>
      * 
-     * If not given, controller falls back to the default controller (api). 
-     * Resources using the default controller MUST include a record. Remove 
-     * actions if they are not wanted or not implemented.
+     * If not given, "controller" falls back to the default controller (api). 
+     * Resources using the default controller MUST include a "record". Remove 
+     * "actions" that are not wanted or not implemented.
      */
-    protected $_apiResources = array(
+    protected static $_apiResources = array(
         'resources' => array(
             'controller' => 'resources', 
             'actions' => array('index')
@@ -101,7 +101,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
         }
         
         // Get all available API resources.
-        $apiResources = apply_filters('api_resources', $this->_apiResources);
+        $apiResources = self::getApiResources();
         
         // Get and validate resource, record, controller, and action.
         $resource = $this->_getResource($resource, $apiResources);
@@ -136,6 +136,16 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
     
     public function assemble($data = array(), $reset = false, $encode = false)
     {}
+    
+    /**
+     * Return all available API resources and their routing information.
+     * 
+     * @return array
+     */
+    public static function getApiResources()
+    {
+        return apply_filters('api_resources', self::$_apiResources);
+    }
     
     /**
      * Return this route's resource.

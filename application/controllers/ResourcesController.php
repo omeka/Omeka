@@ -18,6 +18,6 @@ class ResourcesController extends Omeka_Controller_AbstractActionController
      */
     public function indexAction()
     {
-        throw new Exception('Not implemented.');
+        $this->_helper->json(Omeka_Controller_Router_Api::getApiResources());
     }
 }
