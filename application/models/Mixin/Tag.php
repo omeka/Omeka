@@ -108,10 +108,14 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
         $findWith['record'] = $this->_record;
         
         $taggings = $this->_joinTable->findBy($findWith);
+        $removed = array();
         foreach ($taggings as $tagging) {
+            $removed[] = $this->_tagTable->find($tagging->tag_id);
             $tagging->delete();
         }
         
+        $nameForHook = strtolower($this->_type);
+        fire_plugin_hook("remove_{$nameForHook}_tag", array('record' => $this->_record, 'removed' => $removed));        
         return !empty($taggings);
     }
             
@@ -161,16 +165,25 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
             $tags = $this->_getTagsFromString($tags, $delimiter);
         }
         
+        $added = array();
         foreach ($tags as $key => $tagName) {
             $tag = $this->_tagTable->findOrNew(trim($tagName));
+            $join = $this->_joinTable->findForRecordAndTag($this->_record, $tag);
+            if(!$join) {
+                $join = new RecordsTags;
+                $added[] = $tag;                
+            }            
             
-            $join = new RecordsTags;
-                        
             $join->tag_id = $tag->id;
             $join->record_id = $this->_record->id;
             $join->record_type = $this->_type;
             $join->save();            
         }
+        
+        if(count($added) != 0) {
+            $nameForHook = strtolower($this->_type);
+            fire_plugin_hook("add_{$nameForHook}_tag", array('record' => $this->_record, 'added' => $added));
+        }        
     }
 
     /**
@@ -225,18 +238,13 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
 
         $tags = $this->_record->Tags;
         $diff = $this->diffTagString($string, $tags, $delimiter);
-        $nameForHook = strtolower($this->_type);
                 
         if (!empty($diff['added'])) {
             $this->addTags($diff['added']);
-            fire_plugin_hook("add_{$nameForHook}_tag", 
-                             array('record' => $this->_record, 'added' => $diff['added']));
         }
 
         if (!empty($diff['removed'])) {
             $this->deleteTags($diff['removed']);
-            fire_plugin_hook("remove_{$nameForHook}_tag", 
-                             array('record' => $this->_record, 'removed' => $diff['removed']));
         } 
     }
 }
