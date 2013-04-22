@@ -28,6 +28,10 @@
             'resource' => 'ElementSets',
             'privilege' => 'browse'
         ),
+        array(
+            'label' => __('API'),
+            'uri' => url('settings/edit-api')
+        ),
     );
     echo nav($navArray, 'admin_navigation_settings');
 ?>

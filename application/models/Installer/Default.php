@@ -123,6 +123,8 @@ class Installer_Default implements Installer_InstallerInterface
             'tag_delimiter'                 => ',',
             Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME => Omeka_Navigation::getNavigationOptionValueForInstall(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME),
             'search_record_types' => serialize(get_search_record_types()), 
+            'api_enable' => true, 
+            'api_per_page' => 50, 
         ));
         $task->install($this->_db);
     }
