@@ -394,6 +394,7 @@ class Table_Item extends Omeka_Db_Table
                     break;
 
                 case 'type':
+                case 'item_type':
                     $this->filterByItemType($select, $paramValue);
                     break;
 

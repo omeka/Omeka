@@ -18,7 +18,14 @@ class ApiController extends Omeka_Controller_AbstractActionController
      */
     public function indexAction()
     {
-        throw new Exception('Not implemented.');
+        $params = $this->getRequest()->getParams();
+        $this->_validateRecordType($params['api_record_type']);
+        $records = $this->_helper->db->getTable($params['api_record_type'])->findBy($_GET);
+        $body = array();
+        foreach ($records as $record) {
+            $body[] = $record->getRepresentation();
+        }
+        $this->_helper->json($body);
     }
     
     /**
@@ -40,16 +47,26 @@ class ApiController extends Omeka_Controller_AbstractActionController
      */
     protected function _getRecord($recordType, $id)
     {
-        if (!class_exists($recordType)) {
-            throw new Exception('Invalid record. Record type not found.');
-        }
+        $this->_validateRecordType($recordType);
         $record = $this->_helper->db->getTable($recordType)->find($id);
         if (!$record) {
             throw new Exception('Invalid record. Record not found.');
         }
-        if (!($record instanceof Omeka_Api_RecordInterface)) {
-            throw new Exception("Invalid record. Record \"$recordName\" must implement Omeka_Api_RecordInterface");
-        }
         return $record;
+    }
+    
+    /**
+     * Validate a record type.
+     * 
+     * @param string $recordType
+     */
+    protected function _validateRecordType($recordType)
+    {
+        if (!class_exists($recordType)) {
+            throw new Exception('Invalid record. Record type not found.');
+        }
+        if (!in_array('Omeka_Api_RecordInterface', class_implements($recordType))) {
+           throw new Exception("Invalid record. Record \"$recordType\" must implement Omeka_Api_RecordInterface");
+        }
     }
 }
