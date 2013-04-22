@@ -516,13 +516,18 @@ class Item
      */
     public function getRepresentation()
     {
+        // Convert dates to UTC.
+        $added = new DateTime($this->added);
+        $modified = new DateTime($this->modified);
+        $timezone = new DateTimeZone('UTC');
+        
         $item = array(
             'id' => $this->id, 
             'url' => "/items/{$this->id}", 
-            'public' => $this->public, 
-            'featured' => $this->featured, 
-            'added' => $this->added, 
-            'modified' => $this->modified, 
+            'public' => (bool) $this->public, 
+            'featured' => (bool) $this->featured, 
+            'added' => $added->setTimezone($timezone)->format('c'), 
+            'modified' => $modified->setTimezone($timezone)->format('c'), 
         );
         if ($this->item_type_id) {
             $item['item_type'] = array(
