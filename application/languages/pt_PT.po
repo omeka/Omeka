@@ -3,8 +3,8 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Daniel Alves <daniel_r_alves@hotmail.com>, 2011.
-# Vania Vicente <vv.25420@hotmail.com>, 2013.
+# Daniel Alves <daniel_r_alves@hotmail.com>, 2011
+# yuki_v <vv.25420@hotmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"

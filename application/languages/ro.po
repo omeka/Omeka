@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Nicolaie Constantinescu <kosson@gmail.com>, 2011-2013.
+# Nicolaie Constantinescu <kosson@gmail.com>, 2011-2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
