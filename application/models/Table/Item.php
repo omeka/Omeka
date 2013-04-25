@@ -358,6 +358,30 @@ class Table_Item extends Omeka_Db_Table
         $select->joinLeft(array('files'=>"$db->File"), 'files.item_id = items.id', array());
         $select->where('files.has_derivative_image = ?', $hasDerivativeImage);
     }
+    
+    /**
+     * Filter select object by date since.
+     * 
+     * @param Zend_Db_Select $select
+     * @param string $dateSince ISO 8601 formatted date
+     * @param string $dateField "added" or "modified"
+     */
+    public function filterBySince($select, $dateSince, $dateField)
+    {
+        // Reject invalid date fields.
+        if (!in_array($dateField, array('added', 'modified'))) {
+            return;
+        }
+        
+        // Accept an ISO 8601 date, set the tiemzone to the server's default 
+        // timezone, and format the date to be MySQL timestamp compatible.
+        $date = new Zend_Date($dateSince, Zend_Date::ISO_8601);
+        $date->setTimezone(date_default_timezone_get());
+        $date = $date->get('yyyy-MM-dd HH:mm:ss');
+        
+        // Select all dates that are greater than the passed date.
+        $select->where("items.$dateField > ?", $date);
+    }
 
     /**
      * Possible options: 'public','user','featured','collection','type','tag',
@@ -378,6 +402,7 @@ class Table_Item extends Omeka_Db_Table
 
             switch ($paramName) {
                 case 'user':
+                case 'owner':
                     $this->filterByUser($select, $paramValue);
                     break;
 
@@ -413,6 +438,14 @@ class Table_Item extends Omeka_Db_Table
 
                 case 'range':
                     $this->filterByRange($select, $paramValue);
+                    break;
+                
+                case 'added_since':
+                    $this->filterBySince($select, $paramValue, 'added');
+                    break;
+                
+                case 'modified_since':
+                    $this->filterBySince($select, $paramValue, 'modified');
                     break;
             }
         }
