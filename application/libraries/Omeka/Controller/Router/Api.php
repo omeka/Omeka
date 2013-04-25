@@ -24,6 +24,16 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
     protected $_legalActions = array('index', 'get', 'post', 'put', 'delete');
     
     /**
+     * @var GET parameters that are legal for all actions.
+     */
+    protected $_legalParameters = array('key', 'callback');
+    
+    /**
+     * @var GET parameters that are legal for index actions.
+     */
+    protected $_legalIndexParameters = array('page', 'per_page');
+    
+    /**
      * @var The default API resources and their routing information.
      * 
      * Use the "api_resources" filter to add resources, following this format:
@@ -61,7 +71,11 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
         ), 
         'items' => array(
             'record_type' => 'Item', 
-            'actions' => array('index', 'get')
+            'actions' => array('index', 'get'), 
+            'index_parameters' => array(
+                'collection', 'item_type', 'featured', 'public', 'added_since', 
+                'modified_since', 'owner', 
+            ), 
         ), 
         'files' => array(
             'record_type' => 'File', 
@@ -100,6 +114,8 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
         }
         
         $resource = $matches[1];
+        
+        // Extract path parameters. Not to be confused with request parameters.
         $params = array();
         if (isset($matches[2]) && '/' != $matches[2]) {
             $params = explode('/', $matches[2]);
@@ -127,8 +143,11 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
             throw new Omeka_Controller_Exception_404('Invalid action');
         }
         
+        // Validate the GET parameters.
+        $this->_validateParameters($action, $resource, $apiResources);
+        
         // Set the route variables. Namespace the API parameters to prevent 
-        // collisions with GET.
+        // collisions with the request parameters.
         $routeVars = array(
             'controller'      => $controller, 
             'action'          => $action, 
@@ -235,5 +254,31 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
         }
         
         return $action;
+    }
+    
+    /**
+     * Validate the GET parameters against the whitelist.
+     * 
+     * @param string $action
+     * @param string $resource
+     * @param array $apiResources
+     */
+    protected function _validateParameters($action, $resource, $apiResources)
+    {
+        $legalParameters = $this->_legalParameters;
+        // The index action may allow more GET parameters.
+        if ('index' == $action && isset($apiResources[$resource]['index_parameters'])) {
+            $legalParameters = array_merge(
+                $legalParameters, 
+                $this->_legalIndexParameters, 
+                $apiResources[$resource]['index_parameters']
+            );
+            $legalParameters = array_unique($legalParameters);
+        }
+        foreach ($_GET as $key => $value) {
+            if (!in_array($key, $legalParameters)) {
+                throw new Omeka_Controller_Exception_404("Invalid GET parameter: \"$key\"");
+            }
+        }
     }
 }
