@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Daniel Alves <daniel_r_alves@hotmail.com>, 2011.
-# Vania Vicente <vv.25420@hotmail.com>, 2013.
+# Daniel Alves <daniel_r_alves@hotmail.com>, 2011,2013
+# yuki_v <vv.25420@hotmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-03-06 15:04+0000\n"
-"Last-Translator: yuki_v <vv.25420@hotmail.com>\n"
+"PO-Revision-Date: 2013-04-24 22:02+0000\n"
+"Last-Translator: Daniel Alves <daniel_r_alves@hotmail.com>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/projects/p/omeka/language/pt_PT/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -166,13 +166,13 @@ msgstr ""
 
 #. Item Type Metadata
 msgid "Item Type Metadata"
-msgstr "Metadados do Tipo de Item"
+msgstr "Meta-dados do Tipo de Item"
 
 #. Item Type Metadata description
 msgid ""
 "The item type metadata element set, consisting of all item type elements "
 "bundled with Omeka and all item type elements created by an administrator."
-msgstr "O conjunto de metadados do tipo de item, composto por todos os elementos do tipo de item associados por defeito ao Omeka bem como todos os elementos do tipo de item criados por um administrador."
+msgstr "O conjunto de meta-dados do tipo de item, composto por todos os elementos do tipo de item associados por defeito ao Omeka, bem como todos os elementos do tipo de item criados por um administrador."
 
 #. Omeka Legacy File
 msgid "Omeka Legacy File"
@@ -184,15 +184,15 @@ msgid ""
 "was included in the `files` table in previous versions of Omeka. These "
 "elements are common to all Omeka files. This set may be deprecated in future"
 " versions."
-msgstr "O conjunto dos elementos dos metadados que, para além do conjunto de elementos do Dublin Core, estava incluído na tabela `files` das versões anteriores do Omeka. Estes elementos são comuns a todos os ficheiros do Omeka. Este conjunto pode tornar-se obsoleto em futuras versões."
+msgstr "O conjunto dos elementos dos meta-dados que, para além do conjunto de elementos do Dublin Core, estava incluído na tabela `files` das versões anteriores do Omeka. Estes elementos são comuns a todos os ficheiros do Omeka. Este conjunto pode tornar-se obsoleto em futuras versões."
 
 #. Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
-msgstr ""
+msgstr "Criador Adicional"
 
 #. Omeka Legacy File: Transcriber element
 msgid "Transcriber"
-msgstr ""
+msgstr "Transcritor"
 
 #. Omeka Legacy File: Producer element
 msgid "Producer"
@@ -200,31 +200,31 @@ msgstr "Produtor"
 
 #. Omeka Legacy File: Render Device element
 msgid "Render Device"
-msgstr ""
+msgstr "Dispositivo de Renderização"
 
 #. Omeka Legacy File: Render Details element
 msgid "Render Details"
-msgstr ""
+msgstr "Detalhes de Renderização"
 
 #. Omeka Legacy File: Capture Date element
 msgid "Capture Date"
-msgstr "Data de captura"
+msgstr "Data de Captura"
 
 #. Omeka Legacy File: Capture Device element
 msgid "Capture Device"
-msgstr "Dispositivo de captura"
+msgstr "Dispositivo de Captura"
 
 #. Omeka Legacy File: Capture Details element
 msgid "Capture Details"
-msgstr "Detalhes da captura"
+msgstr "Detalhes da Captura"
 
 #. Omeka Legacy File: Change History element
 msgid "Change History"
-msgstr "Histórico de alterações"
+msgstr "Histórico de Alterações"
 
 #. Omeka Legacy File: Watermark element
 msgid "Watermark"
-msgstr "Marca de água"
+msgstr "Marca-de-água"
 
 #. Omeka Legacy File: Encryption element
 msgid "Encryption"
@@ -240,7 +240,7 @@ msgstr "Pós-processamento"
 
 #. Omeka Image File
 msgid "Omeka Image File"
-msgstr "Ficheiro de imagem do Omeka"
+msgstr "Ficheiro de Imagem do Omeka"
 
 #. Omeka Image File description
 msgid ""
@@ -258,7 +258,7 @@ msgstr "Altura"
 
 #. Omeka Image File: Bit Depth element
 msgid "Bit Depth"
-msgstr ""
+msgstr "Profundidade de Bits"
 
 #. Omeka Image File: Channels element
 msgid "Channels"
@@ -288,11 +288,11 @@ msgstr ""
 msgid ""
 "The metadata element set that was included in the `files_videos` table in "
 "previous versions of Omeka. These elements are common to all video files."
-msgstr "O conjunto de elementos de metadados que estava incluído na tabela `files_videos` nas versões anteriores do Omeka. Estes elementos são comuns a todos os ficheiros de vídeo."
+msgstr "O conjunto de elementos de meta-dados que estava incluído na tabela `files_videos` nas versões anteriores do Omeka. Estes elementos são comuns a todos os ficheiros de vídeo."
 
 #. Omeka Video File: Bitrate element
 msgid "Bitrate"
-msgstr ""
+msgstr "Taxa de Bits"
 
 # Omeka Video File: Duration element
 msgid "Duration"
@@ -300,11 +300,11 @@ msgstr "Duração"
 
 #. Omeka Video File: Sample Rate element
 msgid "Sample Rate"
-msgstr ""
+msgstr "Taxa de Amostragem"
 
 #. Omeka Video File: Codec element
 msgid "Codec"
-msgstr ""
+msgstr "Codec"
 
 #. Format (Legacy) Metadata element set
 msgid "Format (Legacy) Metadata"
@@ -432,7 +432,7 @@ msgstr "Público"
 #: admin/themes/default/items/quick-filters.php:8
 #: admin/themes/default/items/show.php:51
 msgid "Featured"
-msgstr ""
+msgstr "Em destaque"
 
 #: admin/themes/default/collections/browse.php:2
 #: application/libraries/Omeka/Navigation.php:149
@@ -467,7 +467,7 @@ msgstr ""
 #: application/views/scripts/files/show.php:51
 #: application/views/scripts/items/browse.php:19
 msgid "Date Added"
-msgstr "Data de adição"
+msgstr "Data de Adição"
 
 #: admin/themes/default/collections/browse.php:25
 #: admin/themes/default/collections/show.php:46
@@ -503,7 +503,7 @@ msgstr ""
 
 #: admin/themes/default/collections/browse.php:67
 msgid "There are no collections on this page."
-msgstr " Não existem colecções nesta página"
+msgstr " Não existem colecções nesta página."
 
 #: admin/themes/default/collections/browse.php:67
 msgid "View All Collections"
@@ -524,7 +524,7 @@ msgstr ""
 #: application/views/scripts/collections/show.php:4
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
-msgstr ""
+msgstr "[Sem Título]"
 
 #: admin/themes/default/collections/edit.php:8
 #, php-format
@@ -540,7 +540,7 @@ msgstr ""
 #: admin/themes/default/item-types/show.php:30
 #: application/views/scripts/index.php:35
 msgid "Recently Added Items"
-msgstr "Itens adicionados recentemente"
+msgstr "Itens Adicionados Recentemente"
 
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/collections/show.php:42
@@ -583,7 +583,7 @@ msgstr "Definições"
 #: admin/themes/default/common/content-nav.php:5
 #: admin/themes/default/index.php:2
 msgid "Dashboard"
-msgstr ""
+msgstr "Painel de Controle"
 
 #: admin/themes/default/common/content-nav.php:9
 #: admin/themes/default/items/batch-delete.php:17
@@ -597,7 +597,7 @@ msgstr "Colecções"
 
 #: admin/themes/default/common/content-nav.php:17
 msgid "Item Types"
-msgstr "Tipo de Itens"
+msgstr "Tipos de Item"
 
 #: admin/themes/default/common/content-nav.php:21
 #: admin/themes/default/items/browse.php:94
@@ -621,7 +621,7 @@ msgstr ""
 #: admin/themes/default/common/footer.php:6
 #: admin/themes/default/common/login-footer.php:7
 msgid "Powered by Omeka"
-msgstr "Powered by Omeka"
+msgstr "Desenvolvido com o Omeka"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Documentation"
@@ -699,7 +699,7 @@ msgstr "Pesquisar"
 
 #: admin/themes/default/common/settings-nav.php:20
 msgid "Element Sets"
-msgstr ""
+msgstr "Conjuntos de Elementos"
 
 #: admin/themes/default/common/settings-nav.php:26
 msgid "Item Type Elements"
@@ -740,23 +740,23 @@ msgstr "Administrador do site"
 #: admin/themes/default/error/403.php:11
 #, php-format
 msgid "If you think you should have permission, try contacting the %s."
-msgstr ""
+msgstr "Se acha que deve ter permissão, tente entrar em contacto com o %s."
 
 #: admin/themes/default/error/404.php:2
 msgid "404: Page Not Found"
-msgstr "404: Página não encontrada"
+msgstr "404: Página Não Encontrada"
 
 #: admin/themes/default/error/404.php:6
 msgid ""
 "You&#8217;ve tried to access a page that does not seem to exist. Sometimes "
 "this happens. Below is a quick break-down of the items, collections, and "
 "exhibits on this site."
-msgstr ""
+msgstr "Você tentou aceder a uma página que não parece existir. Às vezes isso acontece. Abaixo está uma lista rápida dos itens, colecções e exposições que pode encontrar neste site."
 
 #: admin/themes/default/error/404.php:10
 #, php-format
 msgid "If this does not help, try contacting the %s."
-msgstr ""
+msgstr "Se isto não ajudar, tente contactar o %s."
 
 #: admin/themes/default/error/404.php:16 admin/themes/default/index.php:46
 msgid "Recent Items"
@@ -776,14 +776,14 @@ msgstr ""
 
 #: admin/themes/default/error/405.php:2
 msgid "405: Method Not Allowed"
-msgstr ""
+msgstr "405: Método Não Permitido"
 
 #: admin/themes/default/error/405.php:9
 #, php-format
 msgid ""
 "You must use a different method to access this URL. If you reached this page"
 " by following a link or clicking a button in Omeka, please contact the %s."
-msgstr ""
+msgstr "Deve usar um método diferente para aceder a este URL. Se chegou a esta página através de um link ou clicando num botão do Omeka, por favor contacte o %s."
 
 #: admin/themes/default/files/edit.php:8
 #, php-format
@@ -794,7 +794,7 @@ msgstr "Editar Ficheiro #%s"
 #: application/views/scripts/files/show.php:9
 #, php-format
 msgid "File #%s"
-msgstr ""
+msgstr "Ficheiro #%s"
 
 #: admin/themes/default/files/show.php:36
 #: application/libraries/globals.php:398
@@ -803,7 +803,7 @@ msgstr ""
 
 #: admin/themes/default/files/show.php:41
 msgid "Format Metadata"
-msgstr ""
+msgstr "Formatar Meta-dados"
 
 #: admin/themes/default/files/show.php:43
 #: application/views/scripts/files/show.php:21
@@ -813,12 +813,12 @@ msgstr ""
 #: admin/themes/default/files/show.php:45
 #: application/views/scripts/files/show.php:26
 msgid "Original Filename"
-msgstr ""
+msgstr "Nome Original do Ficheiro"
 
 #: admin/themes/default/files/show.php:47
 #: application/views/scripts/files/show.php:31
 msgid "File Size"
-msgstr ""
+msgstr "Tamanho do Ficheiro"
 
 #: admin/themes/default/files/show.php:48
 #: application/views/scripts/files/show.php:32
@@ -829,17 +829,17 @@ msgstr ""
 #: admin/themes/default/files/show.php:53
 #: application/views/scripts/files/show.php:49
 msgid "File History"
-msgstr ""
+msgstr "Histórico do Ficheiro"
 
 #: admin/themes/default/files/show.php:57
 #: application/views/scripts/files/show.php:55
 msgid "Date Modified"
-msgstr ""
+msgstr "Data de Modificação"
 
 #: admin/themes/default/files/show.php:59
 #: application/views/scripts/files/show.php:59
 msgid "Authentication"
-msgstr ""
+msgstr "Autenticação"
 
 #: admin/themes/default/files/show.php:65
 #: application/views/scripts/files/show.php:37
@@ -864,7 +864,7 @@ msgstr ""
 #: admin/themes/default/items/browse.php:133
 #: admin/themes/default/items/show.php:86
 msgid "Output Formats"
-msgstr ""
+msgstr "Formatos de Saída"
 
 #: admin/themes/default/index.php:6
 msgid "items"
@@ -1030,15 +1030,15 @@ msgstr "Eliminar Itens"
 
 #: admin/themes/default/items/batch-edit.php:2
 msgid "Batch Edit Items"
-msgstr ""
+msgstr "Editar Itens em Lote"
 
 #: admin/themes/default/items/batch-edit.php:36
 msgid "Changes will be applied to checked items."
-msgstr ""
+msgstr "As alterações vão ser aplicadas aos itens seleccionados."
 
 #: admin/themes/default/items/batch-edit.php:41
 msgid "Item Metadata"
-msgstr ""
+msgstr "Meta-dados do Item"
 
 #: admin/themes/default/items/batch-edit.php:46
 msgid "Public?"
@@ -1049,7 +1049,7 @@ msgstr "Público?"
 #: admin/themes/default/items/batch-edit.php:78
 #: admin/themes/default/items/batch-edit.php:93
 msgid "Select Below"
-msgstr ""
+msgstr "Seleccionar"
 
 #: admin/themes/default/items/batch-edit.php:51
 msgid "Not Public"
@@ -1057,21 +1057,21 @@ msgstr "Não Público"
 
 #: admin/themes/default/items/batch-edit.php:61
 msgid "Featured?"
-msgstr ""
+msgstr "Em Destaque?"
 
 #: admin/themes/default/items/batch-edit.php:66
 msgid "Not Featured"
-msgstr ""
+msgstr "Sem destaque"
 
 #: admin/themes/default/items/batch-edit.php:74
 #: admin/themes/default/items/item-type-form.php:3
 msgid "Item Type"
-msgstr ""
+msgstr "Tipo de Item"
 
 #: admin/themes/default/items/batch-edit.php:83
 #: admin/themes/default/items/batch-edit.php:98
 msgid "Remove?"
-msgstr ""
+msgstr "Remover?"
 
 #: admin/themes/default/items/batch-edit.php:104
 #: admin/themes/default/items/tag-form.php:8
@@ -1082,7 +1082,7 @@ msgstr "Adicionar Etiquetas"
 #: admin/themes/default/items/batch-edit.php:107
 #, php-format
 msgid "List of tags to add to all checked items, separated by %s."
-msgstr ""
+msgstr "Lista de etiquetas a aplicar a todos os itens seleccionados, separada por %s."
 
 #: admin/themes/default/items/batch-edit.php:117
 msgid "Check if you wish to delete selected items."
@@ -1144,7 +1144,7 @@ msgstr "Seleccionar"
 
 #: admin/themes/default/items/browse.php:95
 msgid "No Tags"
-msgstr ""
+msgstr "Sem Etiquetas"
 
 #: admin/themes/default/items/browse.php:139
 msgid "Details"
@@ -1169,11 +1169,11 @@ msgstr ""
 #: admin/themes/default/items/browse.php:154
 #, php-format
 msgid "The query searched %s items and returned no results."
-msgstr ""
+msgstr "A pesquisa procurou %s itens e não devolveu resultados."
 
 #: admin/themes/default/items/browse.php:154
 msgid "refine your search"
-msgstr ""
+msgstr "melhore a sua pesquisa"
 
 #: admin/themes/default/items/browse.php:154
 #, php-format
@@ -1195,7 +1195,7 @@ msgstr ""
 
 #: admin/themes/default/items/files-form.php:21
 msgid "Add New Files"
-msgstr ""
+msgstr "Adicionar Novos Ficheiros"
 
 #: admin/themes/default/items/files-form.php:23
 #, php-format
@@ -1204,7 +1204,7 @@ msgstr ""
 
 #: admin/themes/default/items/files-form.php:26
 msgid "Find a File"
-msgstr ""
+msgstr "Procure um Ficheiro"
 
 #: admin/themes/default/items/form.php:25
 msgid "Add Another File"
@@ -1212,7 +1212,7 @@ msgstr ""
 
 #: admin/themes/default/items/item-type-form.php:15
 msgid "Pick this type"
-msgstr ""
+msgstr "Escolha este tipo"
 
 #: admin/themes/default/items/quick-filters.php:2
 #: admin/themes/default/items/quick-filters.php:4
@@ -1349,11 +1349,11 @@ msgstr "Ainda não existem ficheiros para este item."
 
 #: admin/themes/default/items/show.php:74
 msgid "Add a File"
-msgstr ""
+msgstr "Adicionar um Ficheiro"
 
 #: admin/themes/default/items/show.php:78
 msgid "View File Metadata"
-msgstr ""
+msgstr "Ver Meta-dados do Ficheiro"
 
 #: admin/themes/default/items/show.php:91
 msgid "Bibliographic Citation"
@@ -1681,7 +1681,7 @@ msgstr "Adicionar Novo Utilizador"
 
 #: admin/themes/default/users/browse.php:2
 msgid "Browse Users"
-msgstr ""
+msgstr "Explorar Utilizadores"
 
 #: admin/themes/default/users/browse.php:8
 msgid "Add a User"
@@ -1691,12 +1691,12 @@ msgstr "Adicionar um utilizador"
 #: admin/themes/default/users/show.php:18 application/forms/Install.php:30
 #: application/forms/Login.php:21 application/forms/User.php:29
 msgid "Username"
-msgstr ""
+msgstr "Username"
 
 #: admin/themes/default/users/browse.php:18
 #: admin/themes/default/users/show.php:20
 msgid "Real Name"
-msgstr ""
+msgstr "Nome Real"
 
 #: admin/themes/default/users/browse.php:19
 #: admin/themes/default/users/show.php:22 application/forms/Install.php:73
@@ -1782,7 +1782,7 @@ msgstr ""
 #: application/controllers/CollectionsController.php:74
 #, php-format
 msgid "The collection \"%s\" was successfully added!"
-msgstr ""
+msgstr "A colecção \"%s\" foi adicionada com sucesso!"
 
 #: application/controllers/CollectionsController.php:76
 #, php-format
@@ -1792,7 +1792,7 @@ msgstr ""
 #: application/controllers/CollectionsController.php:84
 #, php-format
 msgid "The collection \"%s\" was successfully changed!"
-msgstr ""
+msgstr "A colecção \"%s\" foi alterada com sucesso!"
 
 #: application/controllers/CollectionsController.php:86
 #, php-format
@@ -1802,7 +1802,7 @@ msgstr ""
 #: application/controllers/CollectionsController.php:94
 #, php-format
 msgid "The collection \"%s\" was successfully deleted!"
-msgstr ""
+msgstr "A colecção \"%s\" foi eliminada com sucesso!"
 
 #: application/controllers/CollectionsController.php:96
 #, php-format
@@ -1829,7 +1829,7 @@ msgstr ""
 msgid ""
 "This will delete the element set and all elements assigned to the element "
 "set. Items will lose all metadata that is specific to this element set."
-msgstr ""
+msgstr "Isto irá apagar o conjunto de elementos e todos os elementos atribuídos ao conjunto de elementos. Os itens perderão todos os meta-dados que são específicos deste conjunto de elementos."
 
 #: application/controllers/ElementSetsController.php:65
 msgid "The element set was successfully changed!"
@@ -1870,7 +1870,7 @@ msgstr ""
 msgid ""
 "The item type \"%s\" was successfully added!  You may now add elements to "
 "your new item type."
-msgstr ""
+msgstr "O tipo de item \"%s\" foi adicionado com sucesso! Pode agora adicionar elementos ao seu novo tipo de item."
 
 #: application/controllers/ItemsController.php:95
 #, php-format
@@ -1918,11 +1918,11 @@ msgstr ""
 
 #: application/controllers/ItemsController.php:255
 msgid "You must choose some items to batch edit."
-msgstr ""
+msgstr "Tem de escolher alguns itens para uma edição em lote."
 
 #: application/controllers/ItemsController.php:299
 msgid "User is not allowed to modify visibility of items."
-msgstr ""
+msgstr "O utilizador não está autorizado a alterar a visibilidade dos itens."
 
 #: application/controllers/ItemsController.php:304
 msgid "User is not allowed to modify featured status of items."
@@ -2418,7 +2418,7 @@ msgstr ""
 #: application/forms/ItemTypes.php:188 application/forms/ItemTypes.php:197
 #, php-format
 msgid "The item type cannot have more than one \"%s\" element."
-msgstr ""
+msgstr "O tipo de item não pode ter mais do que um elemento \"%s\"."
 
 #: application/forms/Login.php:27
 msgid "Username cannot be empty."
@@ -2727,7 +2727,7 @@ msgstr ""
 
 #: application/libraries/globals.php:2309
 msgid "No Collection"
-msgstr ""
+msgstr "Sem -Colecção"
 
 #: application/libraries/globals.php:2424
 msgid "RSS"

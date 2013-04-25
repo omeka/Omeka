@@ -3,10 +3,10 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Benjamin  <benjamin@deichman.no>, 2012.
-#   <boutrosboutrosboutros@gmail.com>, 2012.
-#   <heidi.grytten@kul.oslo.kommune.no>, 2012.
-# Vidar Krumins <vidar@biblioteksvar.no>, 2012.
+# Benjamin <benjamin@deichman.no>, 2012
+# boutrosboutrosboutros <boutrosboutrosboutros@gmail.com>, 2012
+# heidig <heidi.grytten@kul.oslo.kommune.no>, 2012
+# Vidar Krumins <vidar@biblioteksvar.no>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"

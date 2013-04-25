@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-#   <gintautas@charivari.lt>, 2012.
+# pagavau13 <gintautas@charivari.lt>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"

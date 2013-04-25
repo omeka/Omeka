@@ -3,18 +3,18 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-#   <alec.wiki@gmail.com>, 2012.
-# Alessandro Leccese <alec.wiki@gmail.com>, 2013.
-# Donatella Mutti <donatella.mutti@unito.it>, 2012.
-#  <guzzettg@gmail.com>, 2013.
-#   <guzzettg@gmail.com>, 2012.
-# Stefano Costa <steko@iosa.it>, 2012.
+# Alec <alec.wiki@gmail.com>, 2012
+# Alec <alec.wiki@gmail.com>, 2013
+# Donatella Mutti <donatella.mutti@unito.it>, 2012
+# guzzettg <guzzettg@gmail.com>, 2013
+# guzzettg <guzzettg@gmail.com>, 2012
+# Stefano Costa <steko@iosa.it>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-03-18 14:41+0000\n"
+"PO-Revision-Date: 2013-03-20 10:21+0000\n"
 "Last-Translator: Alec <alec.wiki@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/omeka/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -707,7 +707,7 @@ msgstr "Insieme di elementi"
 
 #: admin/themes/default/common/settings-nav.php:26
 msgid "Item Type Elements"
-msgstr ""
+msgstr "Elementi \"Tipo documento\""
 
 #: admin/themes/default/element-sets/browse.php:16
 #: application/forms/ItemTypes.php:141
@@ -1025,7 +1025,7 @@ msgstr ""
 
 #: admin/themes/default/items/batch-delete.php:41
 msgid "Checked items will be deleted."
-msgstr ""
+msgstr "I documenti selezionati saranno eliminati."
 
 #: admin/themes/default/items/batch-delete.php:50
 #: admin/themes/default/items/batch-edit.php:116
@@ -1471,7 +1471,7 @@ msgstr "Annulla"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:12
 msgid "edit a specific item type"
-msgstr ""
+msgstr "modifica uno specifico tipo di documento"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:11
 #, php-format
@@ -2848,7 +2848,7 @@ msgstr "Il file deve essere valido prima di essere associato ad un oggetto."
 #: application/models/ItemType.php:67
 #, php-format
 msgid "The item type name must have between %1$s and %2$s characters."
-msgstr ""
+msgstr "Il tipo documento deve avere tra %1$s e %2$s carratteri."
 
 #: application/models/ItemType.php:71
 msgid "The item type name must be unique."
@@ -2985,7 +2985,7 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:839
 #: application/tests/suite/Omeka/NavigationTest.php:952
 msgid "Edit Items"
-msgstr ""
+msgstr "Modifica i documenti"
 
 #: application/tests/suite/Omeka/NavigationTest.php:758
 #: application/tests/suite/Omeka/NavigationTest.php:818
@@ -3257,7 +3257,7 @@ msgstr "Tipi di record:"
 
 #: application/views/scripts/search/search-form.php:6
 msgid "Search using this query type:"
-msgstr ""
+msgstr "Cerca utilizzando questo tipo di ricerca:"
 
 #: application/views/scripts/search/search-form.php:11
 msgid "Search only these record types:"

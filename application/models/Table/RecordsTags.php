@@ -41,4 +41,9 @@ class Table_RecordsTags extends Omeka_Db_Table
             $select->where('records_tags.record_type = ?', $type);
         }
     }
+    
+    public function findForRecordAndTag($record, $tag) {
+        $select = $this->getSelectForFindBy(array('record'=>$record, 'tag'=>$tag));
+        return $this->fetchObject($select);
+    }
 }

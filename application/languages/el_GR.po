@@ -3,9 +3,9 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Alexios Dimitropoulos <alexios.dimitropoulos@gmail.com>, 2012.
-# stauros gkinis <gkista@yahoo.gr>, 2012.
-# Stoitsis Giannis <>, 2012.
+# Alexios Dimitropoulos <alexios.dimitropoulos@gmail.com>, 2012
+# stauros gkinis <gkista@yahoo.gr>, 2012
+# Stoitsis Giannis <>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"

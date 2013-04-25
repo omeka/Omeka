@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Daniel Bourrion <>, 2011.
-# Julien Sicot <julien.sicot@gmail.com>, 2011, 2012.
-# laurence leroux <laurencelx@gmail.com>, 2012.
-# Nicolas  <boolet.is@free.fr>, 2011.
-# Stéphane Loret Sdj <stephane.loret@univ-tours.fr>, 2011, 2012.
-# Stéphane Loret <stephane.loret@univ-tours.fr>, 2012.
-#   <thierry.pasquier@emf.ccsti.eu>, 2012-2013.
-# Thierry Pasquier <thierry.pasquier@emf.ccsti.eu>, 2013.
-#   <wikitipiac@laposte.net>, 2011, 2012.
+# Daniel Bourrion <>, 2011
+# Julien Sicot <julien.sicot@gmail.com>, 2011, 2012
+# laurence leroux <laurencelx@gmail.com>, 2012
+# Nicolas <booloki@lokizone.net>, 2011
+# Stéphane Loret <stephane.loret@univ-tours.fr>, 2011, 2012
+# Stéphane Loret <stephane.loret@univ-tours.fr>, 2012
+# thierry <thierry.pasquier@emf.ccsti.eu>, 2012-2013
+# thierry <thierry.pasquier@emf.ccsti.eu>, 2013
+# symac <wikitipiac@laposte.net>, 2011, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"

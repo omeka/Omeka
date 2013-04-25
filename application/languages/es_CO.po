@@ -3,10 +3,10 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# MangleRojo <administrador@manglerojo.org>, 2013.
-# MangleRojo  <administrador@manglerojo.org>, 2013.
-# Mangle Rojo <jpmoyar@gmail.com>, 2012.
-# MangleRojo  <jpmoyar@manglerojo.org>, 2012.
+# MangleRojo <administrador@manglerojo.org>, 2013
+# MangleRojo <administrador@manglerojo.org>, 2013
+# MangleRojo <administrador@manglerojo.org>, 2012
+# MangleRojo <administrador@manglerojo.org>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"

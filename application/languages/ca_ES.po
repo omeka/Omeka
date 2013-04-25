@@ -3,16 +3,17 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-#   <rubenalcarazmartinez@gmail.com>, 2013.
-# Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>, 2013.
-#   <sergi.blanes@gmail.com>, 2013.
+# rubenalcaraz <rubenalcarazmartinez@gmail.com>, 2013
+# rubenalcaraz <rubenalcarazmartinez@gmail.com>, 2013
+# sergimontes <sergi.blanes@gmail.com>, 2013
+# sergimontes <sergi.blanes@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-02-11 19:35+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2013-04-13 12:07+0000\n"
+"Last-Translator: rubenalcaraz <rubenalcarazmartinez@gmail.com>\n"
 "Language-Team: Catalan (Spain) (http://www.transifex.com/projects/p/omeka/language/ca_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,7 +34,7 @@ msgstr "El conjunt d'elements Dublin Core és comú per a tots els registres a O
 #: application/views/scripts/items/browse.php:17
 #: application/views/scripts/search/index.php:13
 msgid "Title"
-msgstr "Títol"
+msgstr "Títol del lloc web"
 
 #. Dublin Core: Title element description
 msgid "A name given to the resource"
@@ -881,7 +882,7 @@ msgstr "etiquetes"
 
 #: admin/themes/default/index.php:11
 msgid "plugins"
-msgstr "connectors"
+msgstr "plugins"
 
 #: admin/themes/default/index.php:14
 msgid "users"
@@ -893,12 +894,12 @@ msgstr "plantilla"
 
 #: admin/themes/default/index.php:29
 msgid "A new version of Omeka is available for download."
-msgstr ""
+msgstr "Ja pots descarregar la nova versió d'Omeka."
 
 #: admin/themes/default/index.php:30
 #, php-format
 msgid "Upgrade to %s"
-msgstr ""
+msgstr "Actualitza a %s"
 
 #: admin/themes/default/item-types/add-existing-element.php:22
 #: admin/themes/default/item-types/add-new-element.php:15
@@ -1959,12 +1960,12 @@ msgstr "S'ha produït un error durant la configuració del plugin \"%s\". Manca 
 #: application/controllers/PluginsController.php:52
 #, php-format
 msgid "The %s plugin was successfully configured!"
-msgstr "El %s connector ha estat configurat amb èxit!"
+msgstr "El %s plugin ha estat configurat amb èxit!"
 
 #: application/controllers/PluginsController.php:70
 #, php-format
 msgid "The %s plugin has already been installed."
-msgstr "El %s connector ja ha estat prèviament instal·lat"
+msgstr "El %s plugin ja ha estat prèviament instal·lat"
 
 #: application/controllers/PluginsController.php:79
 #, php-format
@@ -2016,7 +2017,7 @@ msgstr "El següent error ha ocurregut a l'actualitzar el plugin %s :"
 #: application/controllers/PluginsController.php:253
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
-msgstr "No s'ha trobat el connector al directori '%s' "
+msgstr "No s'ha trobat el plugin al directori '%s' "
 
 #: application/controllers/PluginsController.php:262
 msgid "You must confirm the uninstall before proceeding."
@@ -2035,7 +2036,7 @@ msgstr "El següent error ha ocurregut al desinstal·lar el plugin %s :"
 
 #: application/controllers/PluginsController.php:317
 msgid "No plugin name given."
-msgstr "No s'ha donat cap nom al connector"
+msgstr "No s'ha donat cap nom al plugin"
 
 #: application/controllers/PluginsController.php:330
 #, php-format
@@ -2236,7 +2237,7 @@ msgstr "Mida del quadrat per a les miniatures"
 
 #: application/forms/AppearanceSettings.php:37
 msgid "Maximum square thumbnail size constraint (in pixels)."
-msgstr "Restricció de la mida per al quadrat de les miniatures (en píxels)."
+msgstr "Restricció de la mida de les miniatures quadrades (en píxels)."
 
 #: application/forms/AppearanceSettings.php:43
 msgid "Results Per Page (admin)"
@@ -2673,11 +2674,11 @@ msgstr "El path a plugin.ini per a \"%s\" no és correcte"
 #: application/libraries/Omeka/Plugin/Installer.php:77
 #, php-format
 msgid "The \"%s\" plugin must be installed and have newer files to upgrade it."
-msgstr "El connector \"%s\" ha de ser instal·lat i requereix nous fitxers per actualitzar-lo."
+msgstr "El plugin \"%s\" ha de ser instal·lat i requereix nous fitxers per actualitzar-lo."
 
 #: application/libraries/Omeka/Plugin/Installer.php:114
 msgid "Plugin must have a valid directory name before it can be installed."
-msgstr "Abans de fer la instal·lació és necessari que el connector disposi d'un directori amb un nom vàlid."
+msgstr "Abans de fer la instal·lació és necessari que el plugin disposi d'un directori amb un nom vàlid."
 
 #: application/libraries/Omeka/Record/AbstractRecord.php:349
 #, php-format
@@ -2814,25 +2815,25 @@ msgstr "No es poden afegir arxius a ítems que no són persistents a la base de 
 #: application/models/Item.php:391
 #, php-format
 msgid "%1$s and %2$s"
-msgstr ""
+msgstr "%1$s i %2$s"
 
 #. / Chicago-style item citation: three authors
 #: application/models/Item.php:395
 #, php-format
 msgid "%1$s, %2$s, and %3$s"
-msgstr ""
+msgstr "%1$s, %2$s, i %3$s"
 
 #. / Chicago-style item citation: more than three authors
 #: application/models/Item.php:399
 #, php-format
 msgid "%s et al."
-msgstr ""
+msgstr "%s et al."
 
 #. / Chicago-style item citation: access date and URL
 #: application/models/Item.php:417
 #, php-format
 msgid "accessed %1$s, %2$s."
-msgstr ""
+msgstr "consulta %1$s, %2$s."
 
 #: application/models/Item.php:435
 msgid "Cannot add an existing file to an item!"

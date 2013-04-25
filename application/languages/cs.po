@@ -3,9 +3,9 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Dana Léw <lew.dana@gmail.com>, 2011,2013.
-# Jan Černý <cernyhonza@gmail.com>, 2011-2013.
-#   <vele@centrum.cz>, 2012.
+# Dana Léw <lew.dana@gmail.com>, 2011,2013
+# Jan Černý <cernyhonza@gmail.com>, 2011-2013
+# vele <vele@centrum.cz>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
