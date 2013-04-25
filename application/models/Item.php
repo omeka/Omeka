@@ -339,7 +339,7 @@ class Item
         $options = array('inputNamespace' => 'Omeka_Filter');
         $filters = array(
             // Foreign keys
-            'type_id'       => 'ForeignKey',
+            'item_type_id'  => 'ForeignKey',
             'collection_id' => 'ForeignKey',
 
             // Booleans

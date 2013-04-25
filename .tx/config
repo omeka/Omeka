@@ -1,8 +1,9 @@
 [main]
-host = https://www.transifex.net
+host = https://www.transifex.com
 
 [omeka.core]
 file_filter = application/languages/<lang>.po
 source_file = application/languages/Omeka.pot
 source_lang = en
+minimum_perc = 10
 

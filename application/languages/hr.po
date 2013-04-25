@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-#  <digitalizacija@gkri.hr>, 2013.
-#   <digitalizacija@gkri.hr>, 2012.
+# rijekateam <digitalizacija@gkri.hr>, 2013
+# rijekateam <digitalizacija@gkri.hr>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-03-06 13:35+0000\n"
+"PO-Revision-Date: 2013-04-05 10:50+0000\n"
 "Last-Translator: rijekateam <digitalizacija@gkri.hr>\n"
 "Language-Team: Croatian (http://www.transifex.com/projects/p/omeka/language/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -158,11 +158,11 @@ msgstr "Prostorna ili vremenska tema izvora, prostorna primjenjivost izvora ili 
 
 #. Dublin Core: Rights element name
 msgid "Rights"
-msgstr "Vlasnička prava"
+msgstr "Prava"
 
 #. Dublin Core: Rights element description
 msgid "Information about rights held in and over the resource"
-msgstr "Informacija o vlasničkim pravima koja se odnose na izvor"
+msgstr "Informacija o autorskim pravima koja se odnose na izvor"
 
 #. Item Type Metadata
 msgid "Item Type Metadata"
@@ -3277,7 +3277,7 @@ msgstr "Izgubljena zaporka?"
 
 #: install/controllers/IndexController.php:25
 msgid "Could not load database resource!"
-msgstr ""
+msgstr "Ne mogu učitati izvor baze podataka!"
 
 #: install/views/scripts/index/errors.phtml:1
 msgid "Installation Error"

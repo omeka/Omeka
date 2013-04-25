@@ -3,8 +3,8 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-#   <fanw.scu@gmail.com>, 2012.
-# Hong Zhang <zhangh@unlv.nevada.edu>, 2013.
+# wfan <fanw.scu@gmail.com>, 2012
+# zhangh <zhangh@unlv.nevada.edu>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"

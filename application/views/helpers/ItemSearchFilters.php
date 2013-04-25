@@ -38,18 +38,24 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
                 switch ($key) {
                     case 'type':
                         $filter = 'Item Type';
-                        $itemtype = $db->getTable('ItemType')->find($value);
-                        $displayValue = $itemtype->name;
+                        $itemType = $db->getTable('ItemType')->find($value);
+                        if ($itemType) {
+                            $displayValue = $itemType->name;
+                        }
                         break;
                     
                     case 'collection':
                         $collection = $db->getTable('Collection')->find($value);
-                        $displayValue = strip_formatting(metadata($collection, array('Dublin Core', 'Title')));
+                        if ($collection) {
+                            $displayValue = strip_formatting(metadata($collection, array('Dublin Core', 'Title')));
+                        }
                         break;
 
                     case 'user':
                         $user = $db->getTable('User')->find($value);
-                        $displayValue = $user->name;
+                        if ($user) {
+                            $displayValue = $user->name;
+                        }
                         break;
 
                     case 'public':

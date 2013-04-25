@@ -3,10 +3,10 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-#   <daniel.takacs@gmail.com>, 2012.
-# Imre Juhász <juhasz.imr@gmail.com>, 2012.
-#   <madarasz.csaba@gmail.com>, 2012.
-# Sándor Koroknai <koroknaisandor@gmail.com>, 2012.
+# danieltakacs <daniel.takacs@gmail.com>, 2012
+# Imre Juhász <juhasz.imr@gmail.com>, 2012
+# madaraszcsaba <madarasz.csaba@gmail.com>, 2012
+# Sándor Koroknai <koroknaisandor@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"

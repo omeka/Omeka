@@ -3,8 +3,8 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Gjergj Sheldija <gjergj.sheldija@gmail.com>, 2012.
-#   <gjergj.sheldija@gmail.com>, 2011.
+# Gjergj Sheldija <inactive+gjergjsheldij8748763d3d714768@transifex.com>, 2012
+# Gjergj Sheldija <inactive+gjergjsheldij8748763d3d714768@transifex.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"

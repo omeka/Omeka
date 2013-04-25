@@ -3,15 +3,16 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Evy De Wulf <evy.dewulf@libis.kuleuven.be>, 2013.
-# Peter Baan <exnihilo@xs4all.nl>, 2011, 2012.
-# Sam Alloing <>, 2011-2012.
+# dewulfevy <evy.dewulf@libis.kuleuven.be>, 2013
+# Peter Baan <exnihilo@xs4all.nl>, 2011, 2012
+# Sam Alloing <sam.alloing@gmail.com>, 2011-2012
+# Sam Alloing <sam.alloing@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-03-15 12:38+0000\n"
+"PO-Revision-Date: 2013-04-25 13:47+0000\n"
 "Last-Translator: dewulfevy <evy.dewulf@libis.kuleuven.be>\n"
 "Language-Team: Dutch (Belgium) (http://www.transifex.com/projects/p/omeka/language/nl_BE/)\n"
 "MIME-Version: 1.0\n"
@@ -163,7 +164,7 @@ msgstr "Rechten"
 
 #. Dublin Core: Rights element description
 msgid "Information about rights held in and over the resource"
-msgstr ""
+msgstr "Informatie over de beheers- en behoudsrechten van de bron"
 
 #. Item Type Metadata
 msgid "Item Type Metadata"
@@ -859,7 +860,7 @@ msgstr "File Type / OS"
 
 #: admin/themes/default/files/show.php:76
 msgid "Embedded Metadata"
-msgstr ""
+msgstr "Ingebouwde metadata"
 
 #: admin/themes/default/files/show.php:82
 #: admin/themes/default/items/browse.php:133
@@ -1531,7 +1532,7 @@ msgstr "Standaard elementen herstellen"
 
 #: admin/themes/default/settings/edit-security.php:38
 msgid "Restore Default Attributes"
-msgstr ""
+msgstr "Standaard attributen herstellen"
 
 #: admin/themes/default/settings/edit-settings.php:23
 msgid "Test"
@@ -1778,7 +1779,7 @@ msgstr "De navigatie instellingen zijn bijgewerkt."
 msgid ""
 "The navigation settings were not saved because of missing or invalid values."
 "  All changed values have been restored."
-msgstr ""
+msgstr "De navigatie-instellingen zijn niet opgeslagen als gevolg van ontbrekende of ongeldige waarden. Alle gewijzigde waarden zijn ongedaan gemaakt."
 
 #: application/controllers/CollectionsController.php:74
 #, php-format
@@ -2054,7 +2055,7 @@ msgstr "De beveiligingsinstellingen zijn bijgewerkt."
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
-msgstr ""
+msgstr "Je hebt veranderd welke records doorzoekbaar zijn in Omeka. Gelieve de records opnieuw te indexeren via het onderstaande formulier."
 
 #: application/controllers/SettingsController.php:102
 msgid ""
@@ -2439,7 +2440,7 @@ msgstr "[Standaard]"
 
 #: application/forms/Navigation.php:162
 msgid "Select a Homepage"
-msgstr ""
+msgstr "Selecteer een homepage"
 
 #: application/forms/Navigation.php:244
 msgid "Cannot find parent navigation page."
@@ -2546,7 +2547,7 @@ msgstr "Toegestane HTML-elementen"
 
 #: application/forms/SecuritySettings.php:75
 msgid "List of allowed HTML elements in form input"
-msgstr ""
+msgstr "Lijst met toegestane HTML-elementen in formulierinvoer"
 
 #: application/forms/SecuritySettings.php:82
 msgid "Allowed HTML Attributes"
@@ -2698,7 +2699,7 @@ msgstr "Trefwoord"
 
 #: application/libraries/globals.php:458
 msgid "Boolean"
-msgstr ""
+msgstr "Booleaans"
 
 #: application/libraries/globals.php:459
 msgid "Exact match"

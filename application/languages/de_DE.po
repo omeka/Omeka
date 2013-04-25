@@ -3,8 +3,8 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-#   <martin.sauter@gmx.ch>, 2011-2012.
-# Martin Sauter <martin.sauter@gmx.ch>, 2013.
+# msauter <martin.sauter@gmx.ch>, 2011-2012
+# msauter <martin.sauter@gmx.ch>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
