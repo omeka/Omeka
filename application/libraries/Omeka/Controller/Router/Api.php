@@ -26,12 +26,12 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
     /**
      * @var GET parameters that are legal for all actions.
      */
-    protected $_legalParameters = array('key', 'callback');
+    protected $_legalParams = array('key', 'callback');
     
     /**
      * @var GET parameters that are legal for index actions.
      */
-    protected $_legalIndexParameters = array('page', 'per_page');
+    protected $_legalIndexParams = array('page', 'per_page');
     
     /**
      * @var The default API resources and their routing information.
@@ -53,6 +53,8 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
      *         'put',    // PUT request (ID is required)
      *         'delete', // DELETE request (ID is required)
      *     ), 
+     *     // List of GET parameters available for your index action.
+     *     'index_params' => array('foo', 'bar'), 
      * )
      * </code>
      * 
@@ -72,7 +74,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
         'items' => array(
             'record_type' => 'Item', 
             'actions' => array('index', 'get'), 
-            'index_parameters' => array(
+            'index_params' => array(
                 'collection', 'item_type', 'featured', 'public', 'added_since', 
                 'modified_since', 'owner', 
             ), 
@@ -144,7 +146,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
         }
         
         // Validate the GET parameters.
-        $this->_validateParameters($action, $resource, $apiResources);
+        $this->_validateParams($action, $resource, $apiResources);
         
         // Set the route variables. Namespace the API parameters to prevent 
         // collisions with the request parameters.
@@ -263,20 +265,19 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
      * @param string $resource
      * @param array $apiResources
      */
-    protected function _validateParameters($action, $resource, $apiResources)
+    protected function _validateParams($action, $resource, $apiResources)
     {
-        $legalParameters = $this->_legalParameters;
+        $legalParams = $this->_legalParams;
         // The index action may allow more GET parameters.
-        if ('index' == $action && isset($apiResources[$resource]['index_parameters'])) {
-            $legalParameters = array_merge(
-                $legalParameters, 
-                $this->_legalIndexParameters, 
-                $apiResources[$resource]['index_parameters']
-            );
-            $legalParameters = array_unique($legalParameters);
+        if ('index' == $action) {
+            $legalParams = array_merge($legalParams, $this->_legalIndexParams);
+            if (isset($apiResources[$resource]['index_params'])) {
+                $legalParams = array_merge($legalParams, $apiResources[$resource]['index_params']);
+            }
+            $legalParams = array_unique($legalParams);
         }
         foreach ($_GET as $key => $value) {
-            if (!in_array($key, $legalParameters)) {
+            if (!in_array($key, $legalParams)) {
                 throw new Omeka_Controller_Exception_404("Invalid GET parameter: \"$key\"");
             }
         }
