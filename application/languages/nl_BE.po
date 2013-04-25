@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-04-12 11:57+0000\n"
+"PO-Revision-Date: 2013-04-25 13:47+0000\n"
 "Last-Translator: dewulfevy <evy.dewulf@libis.kuleuven.be>\n"
 "Language-Team: Dutch (Belgium) (http://www.transifex.com/projects/p/omeka/language/nl_BE/)\n"
 "MIME-Version: 1.0\n"
@@ -164,7 +164,7 @@ msgstr "Rechten"
 
 #. Dublin Core: Rights element description
 msgid "Information about rights held in and over the resource"
-msgstr ""
+msgstr "Informatie over de beheers- en behoudsrechten van de bron"
 
 #. Item Type Metadata
 msgid "Item Type Metadata"
@@ -1779,7 +1779,7 @@ msgstr "De navigatie instellingen zijn bijgewerkt."
 msgid ""
 "The navigation settings were not saved because of missing or invalid values."
 "  All changed values have been restored."
-msgstr ""
+msgstr "De navigatie-instellingen zijn niet opgeslagen als gevolg van ontbrekende of ongeldige waarden. Alle gewijzigde waarden zijn ongedaan gemaakt."
 
 #: application/controllers/CollectionsController.php:74
 #, php-format
@@ -2055,7 +2055,7 @@ msgstr "De beveiligingsinstellingen zijn bijgewerkt."
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
-msgstr ""
+msgstr "Je hebt veranderd welke records doorzoekbaar zijn in Omeka. Gelieve de records opnieuw te indexeren via het onderstaande formulier."
 
 #: application/controllers/SettingsController.php:102
 msgid ""
