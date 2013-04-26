@@ -37,7 +37,7 @@ class ApiController extends Omeka_Controller_AbstractActionController
     {
         $params = $this->getRequest()->getParams();
         $record = $this->_getRecord($params['api_record_type'], $params['api_params'][0]);
-        $this->_helper->json($record->getRepresentation());
+        $this->_helper->json($this->_getRepresentation($record, $params['api_resource']));
     }
     
     /**
@@ -70,5 +70,40 @@ class ApiController extends Omeka_Controller_AbstractActionController
         if (!in_array('Omeka_Api_RecordInterface', class_implements($recordType))) {
            throw new Omeka_Controller_Exception_404("Invalid record. Record \"$recordType\" must implement Omeka_Api_RecordInterface");
         }
+    }
+    
+    /**
+     * Get the representation of a record.
+     * 
+     * @param Omeka_Record_AbstractRecord $record
+     * @param string $resource
+     */
+    protected function _getRepresentation(Omeka_Record_AbstractRecord $record, $resource)
+    {
+        $extend = array();
+        $extendTemp = apply_filters("api_extend_$resource", array(), array('record' => $record));
+        $apiResources = Omeka_Controller_Router_Api::getApiResources();
+        
+        // Validate each extended resource. Each must be registered as an API 
+        // resource and the content must contain "count" and "url".
+        foreach ($extendTemp as $extendResource => $extendContent) {
+            if (is_array($extendContent) 
+                && array_key_exists($extendResource, $apiResources) 
+                && (array_key_exists('count', $extendContent) 
+                    || array_key_exists('id', $extendContent))
+                && array_key_exists('url', $extendContent)
+            ) {
+                $extend[$extendResource] = array('url', $extendContent['url']);
+                if (array_key_exists('id', $extendContent)) {
+                    $extend[$extendResource]['id'] = $extendContent['id'];
+                } else {
+                    $extend[$extendResource]['count'] = $extendContent['count'];
+                }
+            }
+        }
+        
+        $representation = $record->getRepresentation();
+        $representation['extend'] = $extend;
+        return $representation;
     }
 }
