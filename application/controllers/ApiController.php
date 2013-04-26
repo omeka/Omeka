@@ -93,7 +93,7 @@ class ApiController extends Omeka_Controller_AbstractActionController
                     || array_key_exists('id', $extendContent))
                 && array_key_exists('url', $extendContent)
             ) {
-                $extend[$extendResource] = array('url', $extendContent['url']);
+                $extend[$extendResource] = array('url' => $extendContent['url']);
                 if (array_key_exists('id', $extendContent)) {
                     $extend[$extendResource]['id'] = $extendContent['id'];
                 } else {
