@@ -140,11 +140,31 @@ class SettingsController extends Omeka_Controller_AbstractActionController
     
     public function editApiAction()
     {
+        $keyTable = $this->_helper->db->getTable('Key');
+        
+        // Handle a form submission
         if ($this->getRequest()->isPost()) {
             set_option('api_enable', (bool) $_POST['api_enable']);
             set_option('api_per_page', (int) $_POST['api_per_page']);
+            // Create a new API key.
+            if ($this->getParam('api_key_label')) {
+                $user = current_user();
+                $key = new Key;
+                $key->user_id = $user->id;
+                $key->label = $this->getParam('api_key_label');
+                $key->key = sha1($user->username . microtime() . rand());
+                $key->save();
+            }
+            // rRescend API keys.
+            if ($this->getParam('api_key_rescind')) {
+                foreach ($this->getParam('api_key_rescind') as $keyId) {
+                    $keyTable->find($keyId)->delete();
+                }
+            }
             $this->_helper->flashMessenger(__('The API configuration was successfully changed!'), 'success');
         }
+        
+        $this->view->keys = $keyTable->findAll();
     }
     
     /**

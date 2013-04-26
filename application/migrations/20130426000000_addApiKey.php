@@ -7,16 +7,15 @@
  */
 
 /**
- * Add a 'sessions' table.
- * 
  * @package Omeka\Db\Migration
  */
-class addSessionsTable extends Omeka_Db_Migration_AbstractMigration
+class addApiKey extends Omeka_Db_Migration_AbstractMigration
 {
     public function up()
     {
+    {
         $this->db->queryBlock(<<<SQL
-CREATE TABLE IF NOT EXISTS `omeka_keys` (
+CREATE TABLE `{$this->db->prefix}keys` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL,
   `label` varchar(100) NOT NULL,
@@ -24,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `omeka_keys` (
   `ip` varbinary(16) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `key` (`key`)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 SQL
         );
     }
