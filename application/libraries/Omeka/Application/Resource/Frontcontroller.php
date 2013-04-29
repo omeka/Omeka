@@ -32,7 +32,15 @@ class Omeka_Application_Resource_Frontcontroller extends Zend_Application_Resour
             return $front;
         }
         
-        if ($front->getParam('admin')) {
+        // Flag this as an API request if the URL path info matches and not in 
+        // the admin theme.
+        $request = new Zend_Controller_Request_Http;
+        if (!$front->getParam('admin') && preg_match('#^/api/([a-z_]+)(.+)?$#', $request->getPathInfo())) {
+            $front->setParam('api', true);
+            $front->registerPlugin(new Omeka_Controller_Plugin_Api);
+        }
+        
+        if ($front->getParam('admin') && !$front->getParam('api')) {
             $front->registerPlugin(new Omeka_Controller_Plugin_Admin);
         }
         
@@ -41,7 +49,7 @@ class Omeka_Application_Resource_Frontcontroller extends Zend_Application_Resour
         if ($bootstrap->hasPluginResource('PluginBroker')) {
             $bootstrap->bootstrap('PluginBroker');
         }
-                                                        
+        
         // Action helpers
         $this->getBootstrap()->bootstrap('Helpers');
         

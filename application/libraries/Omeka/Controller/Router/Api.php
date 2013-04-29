@@ -100,6 +100,13 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
      */
     public function match($request)
     {
+        $front = Zend_Controller_Front::getInstance();
+        
+        // Check for an API request;
+        if (!$front->getParam('api')) {
+            return false;
+        }
+        
         // Extract URL components.
         preg_match('#^/api/([a-z_]+)(.+)?$#', $request->getPathInfo(), $matches);
         
