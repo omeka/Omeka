@@ -100,6 +100,9 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
     /**
      * Match the user submitted path.
      * 
+     * Via Omeka_Application_Resource_Router, this is the only available route 
+     * for API requests.
+     * 
      * @throws Omeka_Controller_Exception_403
      * @throws Omeka_Controller_Exception_404
      * @param Zend_Controller_Request_Http $request
@@ -108,11 +111,6 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
     public function match($request)
     {
         $front = Zend_Controller_Front::getInstance();
-        
-        // Check for an API request;
-        if (!$front->getParam('api')) {
-            return false;
-        }
         
         // Extract URL components.
         preg_match('#^/api/([a-z_]+)(.+)?$#', $request->getPathInfo(), $matches);

@@ -12,16 +12,16 @@
 class Omeka_Controller_Plugin_Api extends Zend_Controller_Plugin_Abstract
 {
     /**
+     * Handle API-specific controller logic.
+     * 
+     * Via Omeka_Application_Resource_Frontcontroller, this plugin is only 
+     * registered during an API request.
+     * 
      * @param Zend_Controller_Request_Abstract $request
      */
     public function routeStartup(Zend_Controller_Request_Abstract $request)
     {
         $front = Zend_Controller_Front::getInstance();
-        
-        // Check for an API request.
-        if (!$front->getParam('api')) {
-            return;
-        }
         
         // Throw an error if a key was given but there is no user identity.
         if (isset($_GET['key']) && !Zend_Auth::getInstance()->hasIdentity()) {

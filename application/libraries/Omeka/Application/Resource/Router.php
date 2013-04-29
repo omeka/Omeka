@@ -22,11 +22,16 @@ class Omeka_Application_Resource_Router extends Zend_Application_Resource_Router
     public function init()
     {
         $router = parent::init();
-        $routesIni = new Zend_Config_Ini(CONFIG_DIR . '/' . 'routes.ini', 'routes');
-        $router->addConfig($routesIni);
-        // Plugins hook into this.
-        fire_plugin_hook('define_routes', array('router' => $router));
-        $this->_addHomepageRoute($router);
+        
+        $front = $this->getBootstrap()->getResource('Frontcontroller');
+        if ($front->getParam('api')) {
+            // The API route is the only valid route for an API request.
+            $router->addRoute('api', new Omeka_Controller_Router_Api);
+        } else {
+            $router->addConfig(new Zend_Config_Ini(CONFIG_DIR . '/routes.ini', 'routes'));
+            fire_plugin_hook('define_routes', array('router' => $router));
+            $this->_addHomepageRoute($router);
+        }
         return $router;
     }
     
