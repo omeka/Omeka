@@ -13,7 +13,6 @@ class addApiKey extends Omeka_Db_Migration_AbstractMigration
 {
     public function up()
     {
-    {
         $this->db->queryBlock(<<<SQL
 CREATE TABLE `{$this->db->prefix}keys` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
