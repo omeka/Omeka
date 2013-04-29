@@ -28,7 +28,6 @@ class Omeka_Controller_Plugin_Api extends Zend_Controller_Plugin_Abstract
             throw new Omeka_Controller_Exception_403('Invalid key.');
         }
         
-        /*
         // Set the API controller directories.
         $apiControllerDirectories = array();
         $controllerDirectories = $front->getControllerDirectory();
@@ -36,7 +35,6 @@ class Omeka_Controller_Plugin_Api extends Zend_Controller_Plugin_Abstract
             $apiControllerDirectories[$module] = "$controllerDirectory/api";
         }
         $front->setControllerDirectory($apiControllerDirectories);
-        */
     }
 }
 

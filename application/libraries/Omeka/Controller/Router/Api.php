@@ -16,6 +16,11 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
     /**
      * The default controller name.
      */
+    const DEFAULT_MODULE = 'default';
+    
+    /**
+     * The default controller name.
+     */
     const DEFAULT_CONTROLLER = 'api';
     
     /**
@@ -41,6 +46,8 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
      * <code>
      * // For the path: /api/your_resources/:id
      * 'your_resources' => array(
+     *     // Module associated with your resource.
+     *     'module' => 'your-plugin-name', 
      *     // Controller associated with your resource.
      *     'controller' => 'your-resource-controller',
      *     // Type of record associated with your resource.
@@ -58,9 +65,9 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
      * )
      * </code>
      * 
-     * If not given, "controller" falls back to the default controller (api). 
-     * Resources using the default controller MUST include a "record_type". 
-     * Remove "actions" that are not wanted or not implemented.
+     * If not given, "module" and "controller" fall back to their defaults, 
+     * "default" and "api". Resources using the default controller MUST include 
+     * a "record_type". Remove "actions" that are not wanted or not implemented.
      */
     protected static $_apiResources = array(
         'resources' => array(
@@ -134,7 +141,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
         // Get all available API resources.
         $apiResources = self::getApiResources();
         
-        // Get and validate resource, record_type, controller, and action.
+        // Get and validate resource, record_type, module, controller, and action.
         $resource = $this->_getResource($resource, $apiResources);
         if (false === $resource) {
             throw new Omeka_Controller_Exception_404('Invalid resource');
@@ -142,6 +149,10 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
         $recordType = $this->_getRecordType($resource, $apiResources);
         if (false === $recordType) {
             throw new Omeka_Controller_Exception_404('Invalid record type');
+        }
+        $module = $this->_getModule($resource, $apiResources);
+        if (false === $module) {
+            throw new Omeka_Controller_Exception_404('Invalid module');
         }
         $controller = $this->_getController($resource, $apiResources);
         if (false === $controller) {
@@ -158,6 +169,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
         // Set the route variables. Namespace the API parameters to prevent 
         // collisions with the request parameters.
         $routeVars = array(
+            'module'          => $module, 
             'controller'      => $controller, 
             'action'          => $action, 
             'api_resource'    => $resource, 
@@ -214,6 +226,21 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
             return $apiResources[$resource]['record_type'];
         }
         return null;
+    }
+    
+    /**
+     * Return this route's module.
+     * 
+     * @param string $resource
+     * @param array $apiResources
+     * @return string
+     */
+    protected function _getModule($resource, array $apiResources)
+    {
+        if (isset($apiResources[$resource]['module'])) {
+            return $apiResources[$resource]['module'];
+        }
+        return self::DEFAULT_MODULE;
     }
     
     /**
