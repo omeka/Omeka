@@ -46,7 +46,8 @@ class Omeka_Application_Resource_Currentuser extends Zend_Application_Resource_R
             if ($front->getParam('api')) {
                 // Update the key row.
                 $key = $auth->getIdentity();
-                $key->ip = $request->getClientIp();
+                $key->ip = inet_pton($request->getClientIp());
+                $key->accessed = date('Y-m-d H:i:s');
                 $key->save();
                 $userId = $key->user_id;
             } else {

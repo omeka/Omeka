@@ -15,4 +15,5 @@ class Key extends Omeka_Record_AbstractRecord
     public $label;
     public $key;
     public $ip;
+    public $accessed;
 }

@@ -28,45 +28,6 @@ echo flash();
                 <?php echo $this->formText('api_per_page', get_option('api_per_page')); ?>
             </div>
         </div>
-        <h2>Create an API Key</h2>
-        <div class="field">
-            <div class="two columns alpha">
-                <label for="search_record_types"><?php echo __('New key label'); ?></label>
-            </div>
-            <div class="inputs five columns omega">
-                <p class="explanation"><?php echo __(
-                    'To create a new API key, enter a label for the key below. This '
-                  . 'key will have all your permissions. Treat this key as you would ' 
-                  . 'your password.'
-                ); ?></p>
-                <?php echo $this->formText('api_key_label'); ?>
-            </div>
-        </div>
-        <h2>API Keys</h2>
-        <?php if (!$this->keys): ?>
-        <p>You have no API keys. Use the form above to create one.</p>
-        <?php else: ?>
-        <table>
-            <thead>
-                <tr>
-                    <th>Label</th>
-                    <th>Key</th>
-                    <th>Last used IP</th>
-                    <th>Rescind</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($this->keys as $key): ?>
-                <tr>
-                    <td><?php echo $key->label; ?></td>
-                    <td><?php echo $key->key; ?></td>
-                    <td><?php echo $key->ip; ?></td>
-                    <td><?php echo $this->formCheckbox('api_key_rescind[]', $key->id) ?></td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        <?php endif; ?>
         <?php fire_plugin_hook('admin_settings_api_form', array('view' => $this)); ?>
     </section>
     <section class="three columns omega">

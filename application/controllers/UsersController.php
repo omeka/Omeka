@@ -191,21 +191,17 @@ class UsersController extends Omeka_Controller_AbstractActionController
      */
     public function editAction()
     {
-        $success = false;
-        $user = $this->_helper->db->findById();        
+        $user = $this->_helper->db->findById();
+        $currentUser = $this->getCurrentUser();
+        
         $changePasswordForm = new Omeka_Form_ChangePassword;
         $changePasswordForm->setUser($user);
-
-        $currentUser = $this->getCurrentUser();
-
+        
         // Super users don't need to know the current password.
         if ($currentUser && $currentUser->role == 'super') {
             $changePasswordForm->removeElement('current_password');
         }
         
-        $this->view->passwordForm = $changePasswordForm;
-        $this->view->user = $user;        
-
         $form = $this->_getUserForm($user);
         $form->setSubmitButtonText(__('Save Changes'));
         $form->setDefaults(array(
@@ -215,48 +211,71 @@ class UsersController extends Omeka_Controller_AbstractActionController
             'role' => $user->role,
             'active' => $user->active
         ));
-        $this->view->form = $form;
         
-        if (!$this->getRequest()->isPost()) {
-            return;
-        }
-
-        if (isset($_POST['new_password'])) {
-            if (!$changePasswordForm->isValid($_POST)) {
-                $this->_helper->flashMessenger(__('There was an invalid entry on the form. Please try again.'), 'error');
-                return;
-            }
-            
-            $values = $changePasswordForm->getValues();
-            $user->setPassword($values['new_password']);
-            $user->save();
-            $this->_helper->flashMessenger(__('Password changed!'), 'success');
-            $success = true;
-        } else {
-            if (!$form->isValid($_POST)) {
-                $this->_helper->flashMessenger(__('There was an invalid entry on the form. Please try again.'), 'error');
-                return;
-            }
-            
-            $user->setPostData($form->getValues());
-            if ($user->save(false)) {
-                $this->_helper->flashMessenger(
-                    __('The user %s was successfully changed!', $user->username),
-                    'success'
-                );
+        $keyTable = $this->_helper->db->getTable('Key');
+        
+        if ($this->getRequest()->isPost()) {
+            $success = false;
+            if (isset($_POST['update_api_keys'])) {
+                // Create a new API key.
+                if ($this->getParam('api_key_label')) {
+                    $key = new Key;
+                    $key->user_id = $user->id;
+                    $key->label = $this->getParam('api_key_label');
+                    $key->key = sha1($user->username . microtime() . rand());
+                    $key->save();
+                    $this->_helper->flashMessenger(__('A new API key was successfully created.'), 'success');
+                }
+                // Rescend API keys.
+                if ($this->getParam('api_key_rescind')) {
+                    foreach ($this->getParam('api_key_rescind') as $keyId) {
+                        $keyTable->find($keyId)->delete();
+                    }
+                    $this->_helper->flashMessenger(__('An existing API key was successfully rescinded.'), 'success');
+                }
+            } elseif (isset($_POST['new_password'])) {
+                if (!$changePasswordForm->isValid($_POST)) {
+                    $this->_helper->flashMessenger(__('There was an invalid entry on the form. Please try again.'), 'error');
+                    return;
+                }
+                
+                $values = $changePasswordForm->getValues();
+                $user->setPassword($values['new_password']);
+                $user->save();
+                $this->_helper->flashMessenger(__('Password changed!'), 'success');
                 $success = true;
             } else {
-                $this->_helper->flashMessenger($user->getErrors());
+                if (!$form->isValid($_POST)) {
+                    $this->_helper->flashMessenger(__('There was an invalid entry on the form. Please try again.'), 'error');
+                    return;
+                }
+                
+                $user->setPostData($form->getValues());
+                if ($user->save(false)) {
+                    $this->_helper->flashMessenger(
+                        __('The user %s was successfully changed!', $user->username),
+                        'success'
+                    );
+                    $success = true;
+                } else {
+                    $this->_helper->flashMessenger($user->getErrors());
+                }
+            }
+            
+            if ($success) {
+                if ($user->id == $currentUser->id) {
+                    $this->_helper->redirector->gotoUrl('/');
+                } else {
+                    $this->_helper->redirector('browse');
+                }
             }
         }
+        $this->view->passwordForm = $changePasswordForm;
+        $this->view->user = $user;
+        $this->view->form = $form;
+        $this->view->keys = $keyTable->findBy(array('user_id' => $user->id));
+        
 
-        if ($success) {
-            if ($user->id == $currentUser->id) {
-                $this->_helper->redirector->gotoUrl('/');
-            } else {
-                $this->_helper->redirector('browse');
-            }
-        }
     }
     
     protected function _getDeleteSuccessMessage($record)
