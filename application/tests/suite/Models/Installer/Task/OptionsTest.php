@@ -69,7 +69,9 @@ class Installer_Task_OptionsTest extends PHPUnit_Framework_TestCase
             'html_purifier_allowed_html_attributes' => 'bar',
             'tag_delimiter'                 => ',',
             Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME => 'foobar', 
-            'search_record_types' => 'foobar', 
+            'search_record_types' => 'foobar',
+            'api_enable' => true,
+            'api_per_page' => 50
         ));
         try {
             $task->install($this->db);
@@ -109,7 +111,9 @@ class Installer_Task_OptionsTest extends PHPUnit_Framework_TestCase
             'html_purifier_allowed_html_attributes' => 'bar',
             'tag_delimiter'                 => ',',
             Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME => 'foobar', 
-            'search_record_types' => 'foobar', 
+            'search_record_types' => 'foobar',
+            'api_enable' => true,
+            'api_per_page' => 50
         ));
         $task->install($this->db);
         $this->profilerHelper->assertDbQuery(array(

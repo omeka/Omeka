@@ -213,6 +213,11 @@ class UsersController extends Omeka_Controller_AbstractActionController
         ));
         
         $keyTable = $this->_helper->db->getTable('Key');
+
+        $this->view->passwordForm = $changePasswordForm;
+        $this->view->user = $user;
+        $this->view->form = $form;
+        $this->view->keys = $keyTable->findBy(array('user_id' => $user->id));
         
         if ($this->getRequest()->isPost()) {
             $success = false;
@@ -225,6 +230,7 @@ class UsersController extends Omeka_Controller_AbstractActionController
                     $key->key = sha1($user->username . microtime() . rand());
                     $key->save();
                     $this->_helper->flashMessenger(__('A new API key was successfully created.'), 'success');
+                    $success = true;
                 }
                 // Rescend API keys.
                 if ($this->getParam('api_key_rescind')) {
@@ -232,6 +238,7 @@ class UsersController extends Omeka_Controller_AbstractActionController
                         $keyTable->find($keyId)->delete();
                     }
                     $this->_helper->flashMessenger(__('An existing API key was successfully rescinded.'), 'success');
+                    $success = true;
                 }
             } elseif (isset($_POST['new_password'])) {
                 if (!$changePasswordForm->isValid($_POST)) {
@@ -270,12 +277,6 @@ class UsersController extends Omeka_Controller_AbstractActionController
                 }
             }
         }
-        $this->view->passwordForm = $changePasswordForm;
-        $this->view->user = $user;
-        $this->view->form = $form;
-        $this->view->keys = $keyTable->findBy(array('user_id' => $user->id));
-        
-
     }
     
     protected function _getDeleteSuccessMessage($record)
