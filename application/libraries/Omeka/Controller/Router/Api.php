@@ -38,60 +38,6 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
      */
     protected $_legalIndexParams = array('page');
     
-    /**
-     * @var The default API resources and their routing information.
-     * 
-     * Use the "api_resources" filter to add resources, following this format:
-     * 
-     * <code>
-     * // For the path: /api/your_resources/:id
-     * 'your_resources' => array(
-     *     // Module associated with your resource.
-     *     'module' => 'your-plugin-name', 
-     *     // Controller associated with your resource.
-     *     'controller' => 'your-resource-controller',
-     *     // Type of record associated with your resource.
-     *     'record_type' => 'YourResourceRecord',
-     *     // List of actions available for your resource.
-     *     'actions' => array(
-     *         'index',  // GET request without ID
-     *         'get',    // GET request with ID
-     *         'post',   // POST request
-     *         'put',    // PUT request (ID is required)
-     *         'delete', // DELETE request (ID is required)
-     *     ), 
-     *     // List of GET parameters available for your index action.
-     *     'index_params' => array('foo', 'bar'), 
-     * )
-     * </code>
-     * 
-     * If not given, "module" and "controller" fall back to their defaults, 
-     * "default" and "api". Resources using the default controller MUST include 
-     * a "record_type". Remove "actions" that are not wanted or not implemented.
-     */
-    protected static $_apiResources = array(
-        'resources' => array(
-            'controller' => 'resources', 
-            'actions' => array('index')
-        ), 
-        'collections' => array(
-            'record_type' => 'Collection', 
-            'actions' => array('index', 'get')
-        ), 
-        'items' => array(
-            'record_type' => 'Item', 
-            'actions' => array('index', 'get'), 
-            'index_params' => array(
-                'collection', 'item_type', 'featured', 'public', 'added_since', 
-                'modified_since', 'owner', 
-            ), 
-        ), 
-        'files' => array(
-            'record_type' => 'File', 
-            'actions' => array('index', 'get')
-        ), 
-    );
-    
     public static function getInstance(Zend_Config $config)
     {
         return new self;
@@ -137,7 +83,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
         }
         
         // Get all available API resources.
-        $apiResources = self::getApiResources();
+        $apiResources = $front->getParam('api_resources');
         
         // Get and validate resource, record_type, module, controller, and action.
         $resource = $this->_getResource($resource, $apiResources);
@@ -180,16 +126,6 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
     
     public function assemble($data = array(), $reset = false, $encode = false)
     {}
-    
-    /**
-     * Return all available API resources and their routing information.
-     * 
-     * @return array
-     */
-    public static function getApiResources()
-    {
-        return apply_filters('api_resources', self::$_apiResources);
-    }
     
     /**
      * Return this route's resource.

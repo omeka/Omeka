@@ -12,6 +12,60 @@
 class Omeka_Controller_Plugin_Api extends Zend_Controller_Plugin_Abstract
 {
     /**
+     * @var The default API resources and their routing information.
+     * 
+     * Use the "api_resources" filter to add resources, following this format:
+     * 
+     * <code>
+     * // For the path: /api/your_resources/:id
+     * 'your_resources' => array(
+     *     // Module associated with your resource.
+     *     'module' => 'your-plugin-name', 
+     *     // Controller associated with your resource.
+     *     'controller' => 'your-resource-controller',
+     *     // Type of record associated with your resource.
+     *     'record_type' => 'YourResourceRecord',
+     *     // List of actions available for your resource.
+     *     'actions' => array(
+     *         'index',  // GET request without ID
+     *         'get',    // GET request with ID
+     *         'post',   // POST request
+     *         'put',    // PUT request (ID is required)
+     *         'delete', // DELETE request (ID is required)
+     *     ), 
+     *     // List of GET parameters available for your index action.
+     *     'index_params' => array('foo', 'bar'), 
+     * )
+     * </code>
+     * 
+     * If not given, "module" and "controller" fall back to their defaults, 
+     * "default" and "api". Resources using the default controller MUST include 
+     * a "record_type". Remove "actions" that are not wanted or not implemented.
+     */
+    protected $_apiResources = array(
+        'resources' => array(
+            'controller' => 'resources', 
+            'actions' => array('index')
+        ), 
+        'collections' => array(
+            'record_type' => 'Collection', 
+            'actions' => array('index', 'get')
+        ), 
+        'items' => array(
+            'record_type' => 'Item', 
+            'actions' => array('index', 'get'), 
+            'index_params' => array(
+                'collection', 'item_type', 'featured', 'public', 'added_since', 
+                'modified_since', 'owner', 
+            ), 
+        ), 
+        'files' => array(
+            'record_type' => 'File', 
+            'actions' => array('index', 'get')
+        ), 
+    );
+    
+    /**
      * Handle API-specific controller logic.
      * 
      * Via Omeka_Application_Resource_Frontcontroller, this plugin is only 
@@ -28,6 +82,10 @@ class Omeka_Controller_Plugin_Api extends Zend_Controller_Plugin_Abstract
             throw new Omeka_Controller_Exception_403('Invalid key.');
         }
         
+        // Set the available API resources as a front controller param so they 
+        // are applied only once and globally accessible.
+        $front->setParam('api_resources', apply_filters('api_resources', $this->_apiResources));
+        
         // Set the API controller directories.
         $apiControllerDirectories = array();
         $controllerDirectories = $front->getControllerDirectory();
@@ -35,6 +93,16 @@ class Omeka_Controller_Plugin_Api extends Zend_Controller_Plugin_Abstract
             $apiControllerDirectories[$module] = "$controllerDirectory/api";
         }
         $front->setControllerDirectory($apiControllerDirectories);
+    }
+    
+    /**
+     * Return all available API resources and their routing information.
+     * 
+     * @return array
+     */
+    public static function getApiResources()
+    {
+        return apply_filters('api_resources', self::$_apiResources);
     }
 }
 

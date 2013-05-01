@@ -82,7 +82,7 @@ class ApiController extends Omeka_Controller_AbstractActionController
     {
         $extend = array();
         $extendTemp = apply_filters("api_extend_$resource", array(), array('record' => $record));
-        $apiResources = Omeka_Controller_Router_Api::getApiResources();
+        $apiResources = $this->getFrontController()->getParam('api_resources');
         
         // Validate each extended resource. Each must be registered as an API 
         // resource and the content must contain "id" and "url" for one resource 
