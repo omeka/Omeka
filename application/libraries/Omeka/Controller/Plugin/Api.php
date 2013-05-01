@@ -94,15 +94,5 @@ class Omeka_Controller_Plugin_Api extends Zend_Controller_Plugin_Abstract
         }
         $front->setControllerDirectory($apiControllerDirectories);
     }
-    
-    /**
-     * Return all available API resources and their routing information.
-     * 
-     * @return array
-     */
-    public static function getApiResources()
-    {
-        return apply_filters('api_resources', self::$_apiResources);
-    }
 }
 
