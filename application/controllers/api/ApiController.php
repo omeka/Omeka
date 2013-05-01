@@ -85,12 +85,12 @@ class ApiController extends Omeka_Controller_AbstractActionController
         $apiResources = Omeka_Controller_Router_Api::getApiResources();
         
         // Validate each extended resource. Each must be registered as an API 
-        // resource and the content must contain "count" and "url".
+        // resource and the content must contain "id" and "url" for one resource 
+        // or "count" and "url" for multiple resources.
         foreach ($extendTemp as $extendResource => $extendContent) {
             if (is_array($extendContent) 
                 && array_key_exists($extendResource, $apiResources) 
-                && (array_key_exists('count', $extendContent) 
-                    || array_key_exists('id', $extendContent))
+                && (array_key_exists('count', $extendContent) || array_key_exists('id', $extendContent))
                 && array_key_exists('url', $extendContent)
             ) {
                 $extend[$extendResource] = array('url' => $extendContent['url']);
@@ -103,7 +103,7 @@ class ApiController extends Omeka_Controller_AbstractActionController
         }
         
         $representation = $record->getRepresentation();
-        $representation['extend'] = $extend;
+        $representation['extended_resources'] = $extend;
         return $representation;
     }
 }
