@@ -77,14 +77,14 @@ class Omeka_Controller_Plugin_Api extends Zend_Controller_Plugin_Abstract
     {
         $front = Zend_Controller_Front::getInstance();
         
+        // Set the available API resources as a front controller param so they 
+        // are applied only once and globally accessible.
+        $front->setParam('api_resources', apply_filters('api_resources', $this->_apiResources));
+        
         // Throw an error if a key was given but there is no user identity.
         if (isset($_GET['key']) && !Zend_Auth::getInstance()->hasIdentity()) {
             throw new Omeka_Controller_Exception_403('Invalid key.');
         }
-        
-        // Set the available API resources as a front controller param so they 
-        // are applied only once and globally accessible.
-        $front->setParam('api_resources', apply_filters('api_resources', $this->_apiResources));
         
         // Set the API controller directories.
         $apiControllerDirectories = array();
