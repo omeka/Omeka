@@ -49,8 +49,6 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
      * Via Omeka_Application_Resource_Router, this is the only available route 
      * for API requests.
      * 
-     * @throws Omeka_Controller_Exception_403
-     * @throws Omeka_Controller_Exception_404
      * @param Zend_Controller_Request_Http $request
      * @return array|false
      */
@@ -63,14 +61,14 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
         
         if (!$matches) {
             if (0 === strpos($request->getPathInfo(), '/api')) {
-                throw new Omeka_Controller_Exception_404('Invalid resource');
+                throw new Omeka_Controller_Exception_Api('Invalid resource', 404);
             }
             return false;
         }
         
         // The API must be enabled.
         if (!get_option('api_enable')) {
-            throw new Omeka_Controller_Exception_403('API is disabled');
+            throw new Omeka_Controller_Exception_Api('API is disabled', 403);
         }
         
         $resource = $matches[1];
@@ -88,23 +86,23 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
         // Get and validate resource, record_type, module, controller, and action.
         $resource = $this->_getResource($resource, $apiResources);
         if (false === $resource) {
-            throw new Omeka_Controller_Exception_404('Invalid resource');
+            throw new Omeka_Controller_Exception_Api('Invalid resource', 404);
         }
         $recordType = $this->_getRecordType($resource, $apiResources);
         if (false === $recordType) {
-            throw new Omeka_Controller_Exception_404('Invalid record type');
+            throw new Omeka_Controller_Exception_Api('Invalid record type', 404);
         }
         $module = $this->_getModule($resource, $apiResources);
         if (false === $module) {
-            throw new Omeka_Controller_Exception_404('Invalid module');
+            throw new Omeka_Controller_Exception_Api('Invalid module', 404);
         }
         $controller = $this->_getController($resource, $apiResources);
         if (false === $controller) {
-            throw new Omeka_Controller_Exception_404('Invalid controller');
+            throw new Omeka_Controller_Exception_Api('Invalid controller', 404);
         }
         $action = $this->_getAction($request->getMethod(), $params, $resource, $apiResources);
         if (false === $action) {
-            throw new Omeka_Controller_Exception_404('Invalid action');
+            throw new Omeka_Controller_Exception_Api('Invalid action', 404);
         }
         
         // Validate the GET parameters.
@@ -246,7 +244,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
         }
         foreach ($_GET as $key => $value) {
             if (!in_array($key, $legalParams)) {
-                throw new Omeka_Controller_Exception_404("Invalid GET parameter: \"$key\"");
+                throw new Omeka_Controller_Exception_Api("Invalid GET parameter: \"$key\"", 404);
             }
         }
     }

@@ -83,7 +83,7 @@ class Omeka_Controller_Plugin_Api extends Zend_Controller_Plugin_Abstract
         
         // Throw an error if a key was given but there is no user identity.
         if (isset($_GET['key']) && !Zend_Auth::getInstance()->hasIdentity()) {
-            throw new Omeka_Controller_Exception_403('Invalid key.');
+            throw new Omeka_Controller_Exception_Api('Invalid key.');
         }
         
         // Set the API controller directories.

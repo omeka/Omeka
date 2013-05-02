@@ -52,7 +52,7 @@ class ApiController extends Omeka_Controller_AbstractActionController
         $this->_validateRecordType($recordType);
         $record = $this->_helper->db->getTable($recordType)->find($id);
         if (!$record) {
-            throw new Omeka_Controller_Exception_404('Invalid record. Record not found.');
+            throw new Omeka_Controller_Exception_Api('Invalid record. Record not found.', 404);
         }
         return $record;
     }
@@ -65,10 +65,10 @@ class ApiController extends Omeka_Controller_AbstractActionController
     protected function _validateRecordType($recordType)
     {
         if (!class_exists($recordType)) {
-            throw new Omeka_Controller_Exception_404('Invalid record. Record type not found.');
+            throw new Omeka_Controller_Exception_Api('Invalid record. Record type not found.', 404);
         }
         if (!in_array('Omeka_Api_RecordInterface', class_implements($recordType))) {
-           throw new Omeka_Controller_Exception_404("Invalid record. Record \"$recordType\" must implement Omeka_Api_RecordInterface");
+           throw new Omeka_Controller_Exception_Api("Invalid record. Record \"$recordType\" must implement Omeka_Api_RecordInterface", 404);
         }
     }
     
