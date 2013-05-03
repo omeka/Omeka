@@ -61,7 +61,10 @@ class Omeka_Controller_Plugin_Api extends Zend_Controller_Plugin_Abstract
         ), 
         'files' => array(
             'record_type' => 'File', 
-            'actions' => array('index', 'get')
+            'actions' => array('index', 'get'),
+            'index_params' => array('item', 'order', 'size_greater_than', 'has_derivative_image',
+                'mime_type', 'modified_since', 'added_since'
+            )
         ), 
     );
     
