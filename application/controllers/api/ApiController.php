@@ -23,11 +23,11 @@ class ApiController extends Omeka_Controller_AbstractActionController
         $records = $this->_helper->db
             ->getTable($params['api_record_type'])
             ->findBy($_GET, get_option('api_per_page'), $this->getParam('page', 1));
-        $body = array();
+        $data = array();
         foreach ($records as $record) {
-            $body[] = $this->_getRepresentation($record, $params['api_resource']);
+            $data[] = $this->_getRepresentation($record, $params['api_resource']);
         }
-        $this->_helper->json($body);
+        $this->_helper->jsonApi($data);
     }
     
     /**
@@ -37,7 +37,7 @@ class ApiController extends Omeka_Controller_AbstractActionController
     {
         $params = $this->getRequest()->getParams();
         $record = $this->_getRecord($params['api_record_type'], $params['api_params'][0]);
-        $this->_helper->json($this->_getRepresentation($record, $params['api_resource']));
+        $this->_helper->jsonApi($this->_getRepresentation($record, $params['api_resource']));
     }
     
     /**
