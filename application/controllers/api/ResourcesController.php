@@ -18,6 +18,6 @@ class ResourcesController extends Omeka_Controller_AbstractActionController
      */
     public function indexAction()
     {
-        $this->_helper->json(Omeka_Controller_Router_Api::getApiResources());
+        $this->_helper->jsonApi($this->getFrontController()->getParam('api_resources'));
     }
 }
