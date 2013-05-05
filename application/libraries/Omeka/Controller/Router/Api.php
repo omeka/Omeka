@@ -31,7 +31,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
     /**
      * @var GET parameters that are legal for all actions.
      */
-    protected $_legalParams = array('key', 'callback');
+    protected $_legalParams = array('key', 'callback', 'pretty_print');
     
     /**
      * @var GET parameters that are legal for index actions.
