@@ -26,17 +26,14 @@ class Omeka_Controller_Action_Helper_JsonApi extends Zend_Controller_Action_Help
         $json = Zend_Json::encode($data);
         
         // Pretty print the JSON if requested.
-        $bool = new Omeka_Filter_Boolean;
-        $prettyPrint = $bool->filter($request->getParam('pretty_print'));
-        if ($prettyPrint) {
+        if (isset($_GET['pretty_print'])) {
             $json = Zend_Json::prettyPrint($json);
         }
         
         // Wrap the JSON with a callback function if requested.
-        $callback = $request->getParam('callback');
-        if ($callback) {
+        if (isset($_GET['callback'])) {
             $response->setHeader('Content-Type', 'application/javascript', true);
-            $json = "$callback($json)";
+            $json = $_GET['callback'] . "($json);";
         } else {
             $response->setHeader('Content-Type', 'application/json', true);
         }
