@@ -20,9 +20,17 @@ class ApiController extends Omeka_Controller_AbstractActionController
     {
         $request = $this->getRequest();
         $this->_validateRecordType($request->getParam('api_record_type'));
+        
+        // Determine the results per page.
+        $perPage = (int) get_option('api_per_page');
+        $perPageUser = (int) $request->getQuery('per_page');
+        if ($perPage > $perPageUser) {
+            $perPage = $perPageUser;
+        }
+        
         $records = $this->_helper->db
             ->getTable($request->getParam('api_record_type'))
-            ->findBy($_GET, get_option('api_per_page'), $request->getQuery('page', 1));
+            ->findBy($_GET, $perPage, $request->getQuery('page', 1));
         $data = array();
         foreach ($records as $record) {
             $data[] = $this->_getRepresentation($record, $request->getParam('api_resource'));
