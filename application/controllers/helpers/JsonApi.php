@@ -23,6 +23,15 @@ class Omeka_Controller_Action_Helper_JsonApi extends Zend_Controller_Action_Help
         $response = $this->getResponse();
         $request = $this->getRequest();
         
+        $response->setHeader('Content-Type', 'application/json', true);
+        
+        // Add header data for JSONP requests.
+        if (isset($_GET['callback'])) {
+            $response->setHeader('Content-Type', 'application/javascript', true);
+            $headers = array('status' => $response->getHttpResponseCode());
+            $data = array('headers' => $headers, 'data' => $data);
+        }
+        
         $json = Zend_Json::encode($data);
         
         // Pretty print the JSON if requested.
@@ -32,10 +41,7 @@ class Omeka_Controller_Action_Helper_JsonApi extends Zend_Controller_Action_Help
         
         // Wrap the JSON with a callback function if requested.
         if (isset($_GET['callback'])) {
-            $response->setHeader('Content-Type', 'application/javascript', true);
             $json = $_GET['callback'] . "($json);";
-        } else {
-            $response->setHeader('Content-Type', 'application/json', true);
         }
         
         $response->setBody($json);
