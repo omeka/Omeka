@@ -18,14 +18,14 @@ class ApiController extends Omeka_Controller_AbstractActionController
      */
     public function indexAction()
     {
-        $params = $this->getRequest()->getParams();
-        $this->_validateRecordType($params['api_record_type']);
+        $request = $this->getRequest();
+        $this->_validateRecordType($request->getParam('api_record_type'));
         $records = $this->_helper->db
-            ->getTable($params['api_record_type'])
-            ->findBy($_GET, get_option('api_per_page'), $this->getParam('page', 1));
+            ->getTable($request->getParam('api_record_type'))
+            ->findBy($_GET, get_option('api_per_page'), $request->getQuery('page', 1));
         $data = array();
         foreach ($records as $record) {
-            $data[] = $this->_getRepresentation($record, $params['api_resource']);
+            $data[] = $this->_getRepresentation($record, $request->getParam('api_resource'));
         }
         $this->_helper->jsonApi($data);
     }
@@ -35,9 +35,11 @@ class ApiController extends Omeka_Controller_AbstractActionController
      */
     public function getAction()
     {
-        $params = $this->getRequest()->getParams();
-        $record = $this->_getRecord($params['api_record_type'], $params['api_params'][0]);
-        $this->_helper->jsonApi($this->_getRepresentation($record, $params['api_resource']));
+        $request = $this->getRequest();
+        $apiParams = $request->getParam('api_params');
+        $record = $this->_getRecord($request->getParam('api_record_type'), $apiParams[0]);
+        $data = $this->_getRepresentation($record, $request->getParam('api_resource'));
+        $this->_helper->jsonApi($data);
     }
     
     /**
