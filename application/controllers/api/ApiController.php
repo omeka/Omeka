@@ -18,15 +18,32 @@ class ApiController extends Omeka_Controller_AbstractActionController
      */
     public function indexAction()
     {
-        $params = $this->getRequest()->getParams();
-        $this->_validateRecordType($params['api_record_type']);
-        $records = $this->_helper->db
-            ->getTable($params['api_record_type'])
-            ->findBy($_GET, get_option('api_per_page'), $this->getParam('page', 1));
+        $request = $this->getRequest();
+        $recordType = $request->getParam('api_record_type');
+        $resource = $request->getParam('api_resource');
+        $page = $request->getQuery('page', 1);
+        
+        $this->_validateRecordType($recordType);
+        
+        // Determine the results per page.
+        $perPageMax = (int) get_option('api_per_page');
+        $perPageUser = (int) $request->getQuery('per_page');
+        $perPage = ($perPageUser < $perPageMax && $perPageUser > 0) ? $perPageUser : $perPageMax;
+        
+        // Get the records and the total record count.
+        $recordsTable = $this->_helper->db->getTable($recordType);
+        $totalCount = $recordsTable->count($_GET);
+        $records = $recordsTable->findBy($_GET, $perPage, $page);
+        
+        // Set the Link header for pagination.
+        $this->_setLinkHeader($perPage, $page, $totalCount, $resource);
+        
+        // Build the data array.
         $data = array();
         foreach ($records as $record) {
-            $data[] = $this->_getRepresentation($record, $params['api_resource']);
+            $data[] = $this->_getRepresentation($record, $resource);
         }
+        
         $this->_helper->jsonApi($data);
     }
     
@@ -35,9 +52,11 @@ class ApiController extends Omeka_Controller_AbstractActionController
      */
     public function getAction()
     {
-        $params = $this->getRequest()->getParams();
-        $record = $this->_getRecord($params['api_record_type'], $params['api_params'][0]);
-        $this->_helper->jsonApi($this->_getRepresentation($record, $params['api_resource']));
+        $request = $this->getRequest();
+        $apiParams = $request->getParam('api_params');
+        $record = $this->_getRecord($request->getParam('api_record_type'), $apiParams[0]);
+        $data = $this->_getRepresentation($record, $request->getParam('api_resource'));
+        $this->_helper->jsonApi($data);
     }
     
     /**
@@ -71,6 +90,45 @@ class ApiController extends Omeka_Controller_AbstractActionController
            throw new Omeka_Controller_Exception_Api("Invalid record. Record \"$recordType\" must implement Omeka_Api_RecordInterface", 404);
         }
     }
+    
+    /**
+     * Set the Link header for pagination.
+     * 
+     * @param int $perPage
+     * @param int $page
+     * @param int $totalCount
+     * @param string $resource
+     */
+    protected function _setLinkHeader($perPage, $page, $totalCount, $resource)
+    {
+        // Remove authentication key from query.
+        $linkGet = $_GET;
+        if (isset($linkGet['key'])) {
+            unset($linkGet['key']);
+        }
+        
+        // Calculate the first, last, prev, and next page numbers.
+        $linkPages = array(
+            'first' => 1, 
+            'last' => ceil($totalCount / $perPage), 
+        );
+        if (1 < $page) {
+            $linkPages['prev'] = $page - 1;
+        }
+        if ($page < $linkPages['last']) {
+            $linkPages['next'] = $page + 1;
+        }
+        
+        // Build the Link value.
+        $linkValues = array();
+        foreach ($linkPages as $rel => $page) {
+            $linkQuery = array_merge($linkGet, array('page' => $page, 'per_page' => $perPage));
+            $linkValues[] = "<" . absolute_url("api/$resource", $linkQuery) . ">; rel=\"$rel\"";
+        }
+        
+        $this->getResponse()->setHeader('Link', implode(', ', $linkValues));
+    }
+
     
     /**
      * Get the representation of a record.

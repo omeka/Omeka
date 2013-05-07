@@ -23,7 +23,7 @@ echo flash();
             </div>
             <div class="inputs five columns omega">
                 <p class="explanation"><?php echo __(
-                    'Limit the number of API results displayed per page.'
+                    'Maximum number of API results displayed per page.'
                 ); ?></p>
                 <?php echo $this->formText('api_per_page', get_option('api_per_page')); ?>
             </div>
