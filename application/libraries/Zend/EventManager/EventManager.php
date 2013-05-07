@@ -163,7 +163,7 @@ class Zend_EventManager_EventManager implements Zend_EventManager_EventCollectio
         if (is_array($identifiers) || $identifiers instanceof Traversable) {
             $this->identifiers = array_unique($this->identifiers + (array) $identifiers);
         } elseif ($identifiers !== null) {
-            $this->identifiers = array_unique($this->identifiers + array($identifiers));
+            $this->identifiers = array_unique(array_merge($this->identifiers, array($identifiers)));
         }
         return $this;
     }

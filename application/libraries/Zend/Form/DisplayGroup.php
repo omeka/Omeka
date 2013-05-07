@@ -25,7 +25,7 @@
  * @package    Zend_Form
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: DisplayGroup.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: DisplayGroup.php 25093 2012-11-07 20:08:05Z rob $
  */
 class Zend_Form_DisplayGroup implements Iterator,Countable
 {
@@ -974,6 +974,16 @@ class Zend_Form_DisplayGroup implements Iterator,Countable
         }
 
         return $this->_translator;
+    }
+
+    /**
+     * Does this display group have its own specific translator?
+     *
+     * @return bool
+     */
+    public function hasTranslator()
+    {
+        return (bool) $this->getTranslator();
     }
 
     /**

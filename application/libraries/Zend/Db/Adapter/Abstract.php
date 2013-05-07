@@ -17,7 +17,7 @@
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Abstract.php 24666 2012-02-27 02:17:19Z adamlundrigan $
+ * @version    $Id: Abstract.php 25229 2013-01-18 08:17:21Z frosch $
  */
 
 
@@ -156,6 +156,7 @@ abstract class Zend_Db_Adapter_Abstract
      * persistent     => (boolean) Whether to use a persistent connection or not, defaults to false
      * protocol       => (string) The network protocol, defaults to TCPIP
      * caseFolding    => (int) style of case-alteration used for identifiers
+     * socket         => (string) The socket or named pipe that should be used
      *
      * @param  array|Zend_Config $config An array or instance of Zend_Config having configuration data
      * @throws Zend_Db_Adapter_Exception

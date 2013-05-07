@@ -55,8 +55,8 @@ class Zend_Mobile_Push_Apns extends Zend_Mobile_Push_Abstract
     protected $_serverUriList = array(
         'ssl://gateway.sandbox.push.apple.com:2195',
         'ssl://gateway.push.apple.com:2195',
-        'ssl://feedback.push.apple.com:2196',
-        'ssl://feedback.sandbox.push.apple.com:2196'
+        'ssl://feedback.sandbox.push.apple.com:2196',
+        'ssl://feedback.push.apple.com:2196'
     );
 
     /**
@@ -302,7 +302,9 @@ class Zend_Mobile_Push_Apns extends Zend_Mobile_Push_Abstract
         if (!empty($alert)) {
             $payload['aps']['alert'] = $alert;
         }
-        $payload['aps']['badge'] = $message->getBadge();
+        if (!is_null($message->getBadge())) {
+            $payload['aps']['badge'] = $message->getBadge();
+        }
         $payload['aps']['sound'] = $message->getSound();
 
         foreach($message->getCustomData() as $k => $v) {

@@ -33,7 +33,7 @@ require_once 'Zend/Server/Interface.php';
  * @uses       Zend_Server_Interface
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Server.php 25033 2012-08-17 19:50:08Z matthew $
+ * @version    $Id: Server.php 25177 2012-12-22 20:54:18Z rob $
  */
 class Zend_Soap_Server implements Zend_Server_Interface
 {
@@ -896,7 +896,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
 
         // Send a fault, if we have one
         if ($fault) {
-            $this->_response = $fault;
+            $soap->fault($fault->faultcode, $fault->faultstring);
         }
 
         if (!$this->_returnResponse) {

@@ -16,7 +16,7 @@
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id: Json.php 24829 2012-05-30 12:31:39Z adamlundrigan $
+ * @version    $Id: Json.php 25091 2012-11-07 19:58:48Z rob $
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -57,17 +57,19 @@ class Zend_View_Helper_Json extends Zend_View_Helper_Abstract
     public function json($data, $keepLayouts = false, $encodeData = true)
     {
         $options = array();
-        if (is_array($keepLayouts))
-        {
-            $options     = $keepLayouts;
-            $keepLayouts = (array_key_exists('keepLayouts', $keepLayouts))
-                            ? $keepLayouts['keepLayouts']
-                            : false;
-            unset($options['keepLayouts']);
-            $encodeData  = (array_key_exists('encodeData', $keepLayouts))
-                            ? $keepLayouts['encodeData']
-                            : $encodeData;
-            unset($options['encodeData']);
+        if (is_array($keepLayouts)) {
+            $options = $keepLayouts;
+
+            $keepLayouts = false;
+            if (array_key_exists('keepLayouts', $options)) {
+                $keepLayouts = $options['keepLayouts'];
+                unset($options['keepLayouts']);
+            }
+
+            if (array_key_exists('encodeData', $options)) {
+                $encodeData = $options['encodeData'];
+                unset($options['encodeData']);
+            }
         }
 
         if ($encodeData) {

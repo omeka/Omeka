@@ -1006,7 +1006,7 @@ class Zend_Service_Rackspace_Servers extends Zend_Service_Rackspace_Abstract
             case '200' : 
             case '203' : // break intentionally omitted   
                 $backup = json_decode($result->getBody(),true);
-                return $image['backupSchedule'];
+                return $backup['backupSchedule'];
             case '503' :
                 $this->errorMsg= self::ERROR_SERVICE_UNAVAILABLE;
                 break;

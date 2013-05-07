@@ -17,7 +17,7 @@
  * @subpackage Parse_Amf3
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Serializer.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: Serializer.php 25179 2012-12-22 21:29:30Z rob $
  */
 
 /** Zend_Amf_Constants */
@@ -215,7 +215,7 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
      * @return Zend_Amf_Parse_Amf3_Serializer
      */
     protected function writeBinaryString(&$string){
-        $ref = strlen($string) << 1 | 0x01;
+        $ref = ($this->_mbStringFunctionsOverloaded ? mb_strlen($string, '8bit') : strlen($string)) << 1 | 0x01;
         $this->writeInteger($ref);
         $this->_stream->writeBytes($string);
 
@@ -230,7 +230,7 @@ class Zend_Amf_Parse_Amf3_Serializer extends Zend_Amf_Parse_Serializer
      */
     public function writeString(&$string)
     {
-        $len = strlen($string);
+        $len = $this->_mbStringFunctionsOverloaded ? mb_strlen($string, '8bit') : strlen($string);
         if(!$len){
             $this->writeInteger(0x01);
             return $this;

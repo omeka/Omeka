@@ -29,7 +29,7 @@ require_once 'Zend/Form/Element/Xhtml.php';
  * @subpackage Element
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: File.php 24848 2012-05-31 19:28:48Z rob $
+ * @version    $Id: File.php 25225 2013-01-17 15:59:16Z frosch $
  */
 class Zend_Form_Element_File extends Zend_Form_Element_Xhtml
 {
@@ -431,7 +431,7 @@ class Zend_Form_Element_File extends Zend_Form_Element_Xhtml
         } else {
             $adapter->setOptions(array('ignoreNoFile' => false), $this->getName());
             if ($this->autoInsertNotEmptyValidator() && !$this->getValidator('NotEmpty')) {
-                $this->addValidator = array('validator' => 'NotEmpty', 'breakChainOnFailure' => true);
+                $this->addValidator('NotEmpty', true);
             }
         }
 

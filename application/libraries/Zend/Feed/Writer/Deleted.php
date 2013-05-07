@@ -16,7 +16,7 @@
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Deleted.php 24710 2012-04-16 18:55:12Z bittarman $
+ * @version    $Id: Deleted.php 25160 2012-12-18 15:17:16Z matthew $
  */
 
 require_once 'Zend/Feed/Writer/Feed/FeedAbstract.php';
@@ -128,10 +128,10 @@ class Zend_Feed_Writer_Deleted
         $zdate = null;
         if ($date === null) {
             $zdate = new Zend_Date;
-        } elseif (ctype_digit((string)$date)) {
-            $zdate = new Zend_Date($date, Zend_Date::TIMESTAMP);
         } elseif ($date instanceof Zend_Date) {
             $zdate = $date;
+        } elseif (ctype_digit((string)$date)) {
+            $zdate = new Zend_Date($date, Zend_Date::TIMESTAMP);
         } else {
             require_once 'Zend/Feed/Exception.php';
             throw new Zend_Feed_Exception('Invalid Zend_Date object or UNIX Timestamp passed as parameter');
