@@ -60,10 +60,12 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
         preg_match('#^/api/([a-z_]+)(.+)?$#', $request->getPathInfo(), $matches);
         
         if (!$matches) {
-            if (0 === strpos($request->getPathInfo(), '/api')) {
-                throw new Omeka_Controller_Exception_Api('Invalid resource', 404);
-            }
             return false;
+        }
+        
+        // Throw an error if a key was given but there is no user identity.
+        if (isset($_GET['key']) && !Zend_Auth::getInstance()->hasIdentity()) {
+            throw new Omeka_Controller_Exception_Api('Invalid key.', 403);
         }
         
         // The API must be enabled.

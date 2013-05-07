@@ -14,7 +14,7 @@ class ErrorController extends Omeka_Controller_AbstractActionController
     /**
      * 404 Not Found
      */
-    const DEFAULT_HTTP_RESPONSE_CODE = 404;
+    const DEFAULT_HTTP_RESPONSE_CODE = 500;
     
     /**
      * Handle all API errors.
