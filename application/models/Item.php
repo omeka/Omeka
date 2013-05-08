@@ -11,10 +11,7 @@
  * 
  * @package Omeka\Record
  */
-class Item 
-    extends Omeka_Record_AbstractRecord 
-    implements Zend_Acl_Resource_Interface, 
-               Omeka_Api_RecordInterface
+class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Interface
 {
     /**
      * The ID for this Item's ItemType, if any.
@@ -507,63 +504,5 @@ class Item
     public function getResourceId()
     {
         return 'Items';
-    }
-    
-    /**
-     * Get REST representation of this item.
-     * 
-     * @return array
-     */
-    public function getRepresentation()
-    {
-        // Convert dates to UTC.
-        $added = new DateTime($this->added);
-        $modified = new DateTime($this->modified);
-        $timezone = new DateTimeZone('UTC');
-        
-        $item = array(
-            'id' => $this->id, 
-            'url' => "/items/{$this->id}", 
-            'public' => (bool) $this->public, 
-            'featured' => (bool) $this->featured, 
-            'added' => $added->setTimezone($timezone)->format('c'), 
-            'modified' => $modified->setTimezone($timezone)->format('c'), 
-        );
-        if ($this->item_type_id) {
-            $item['item_type'] = array(
-                'id' => $this->item_type_id, 
-                'url' => "/item_types/{$this->item_type_id}", 
-                'name' => $this->Type->name, 
-            );
-        } else {
-            $item['item_type'] = null;
-        }
-        if ($this->collection_id) {
-            $item['collection'] = array(
-                'id' => $this->collection_id, 
-                'url' => "/collections/{$this->collection_id}", 
-            );
-        } else {
-            $item['collection'] = null;
-        }
-        if ($this->owner_id) {
-            $item['owner'] = array(
-                'id' => $this->owner_id, 
-                'url' => "/users/{$this->owner_id}", 
-            );
-        } else {
-            $item['owner'] = null;
-        }
-        $item['files'] = array(
-            'count' => $this->getTable('File')
-                ->count(array('item_id' => $this->id)), 
-            'url' => "/files?item={$this->id}", 
-        );
-        $item['element_texts'] = array(
-            'count' => $this->getTable('ElementText')
-                ->count(array('record_type' => 'Item', 'record_id' => $this->id)), 
-            'url' => "/element_texts?record_type=Item&record_id={$this->id}", 
-        );
-        return $item;
     }
 }
