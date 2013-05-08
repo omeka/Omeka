@@ -11,7 +11,7 @@
  * 
  * @package Omeka\Record
  */
-class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Interface, Omeka_Api_RecordInterface
+class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Interface
 {
     /**
      * Option name for whether the file validation is disabled.
@@ -487,54 +487,6 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             $this->_storage = Zend_Registry::get('storage');
         }
         return $this->_storage;
-    }
-
-    /**
-     * Get the REST API representation for the file
-     * 
-     * @return array
-     */
-    
-    public function getRepresentation()
-    {
-        // Convert dates to UTC.
-        $added = new DateTime($this->added);
-        $modified = new DateTime($this->modified);
-        $timezone = new DateTimeZone('UTC');
-        
-        $file = array(
-                'id' => $this->id,
-                'added' => $added->setTimezone($timezone)->format('c'), 
-                'modified' => $modified->setTimezone($timezone)->format('c'),
-                'filename' => $this->filename,
-                'authentication' => $this->authentication,
-                'has_derivative_image' => (bool) $this->has_derivative_image,
-                'mime_type' => $this->mime_type,
-                'order' => $this->order,
-                'original_filename' => $this->original_filename,
-                'size' => $this->size,
-                'stored' => (bool) $this->stored,
-                'type_os' => $this->type_os
-                
-                );
-        //metadata is stored as a JSON string, so make it an array to fit into the API response
-        $metadata = json_decode($this->metadata, true);
-        
-        if(empty($metadata)) {
-            $file['metadata'] = array();            
-        } else {
-            $file['metadata'] = $metadata;
-        }
-        
-        $file['url'] = "/files/{$this->id}";
-        $file['item'] = array("id" => $this->item_id, "url"=>"/items/{$this->item_id}");
-        
-        $file['element_texts'] = array(
-                'count' => $this->getTable('ElementText')
-                ->count(array('record_type' => 'File', 'record_id' => $this->id)),
-                'url' => "/element_texts?record_type=File&record_id={$this->id}",
-                );
-        return $file;
     }
     
     /**

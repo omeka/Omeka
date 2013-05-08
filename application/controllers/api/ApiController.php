@@ -119,11 +119,16 @@ class ApiController extends Omeka_Controller_AbstractActionController
     protected function _validateRecordType($recordType)
     {
         if (!class_exists($recordType)) {
-            throw new Omeka_Controller_Exception_Api('Invalid record. Record type not found.', 404);
+            throw new Omeka_Controller_Exception_Api("Invalid record. Record type \"$recordType\" not found.", 404);
         }
-        if (!in_array('Omeka_Api_RecordInterface', class_implements($recordType))) {
-           throw new Omeka_Controller_Exception_Api("Invalid record. Record \"$recordType\" must implement Omeka_Api_RecordInterface", 404);
+        $recordAdapterClass = "Api_$recordType";
+        if (!class_exists($recordAdapterClass)) {
+           throw new Omeka_Controller_Exception_Api("Invalid record adapter. Record adapter \"$recordAdapterClass\" not found", 404);
         }
+        if (!in_array('Omeka_Record_Api_AbstractRecordAdapter', class_parents($recordAdapterClass))) {
+           throw new Omeka_Controller_Exception_Api("Invalid record adapter. Record adapter \"$recordAdapterClass\" must implement Omeka_Record_Api_AbstractRecordAdapter", 404);
+        }
+
     }
     
     /**
@@ -195,7 +200,10 @@ class ApiController extends Omeka_Controller_AbstractActionController
             }
         }
         
-        $representation = $record->getRepresentation();
+        // Get the representation from the record adapter.
+        $apiRecordClass = "Api_" . get_class($record);
+        $apiRecord = new $apiRecordClass;
+        $representation = $apiRecord->getRepresentation($record);
         $representation['extended_resources'] = $extend;
         return $representation;
     }
