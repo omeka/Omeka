@@ -356,6 +356,14 @@ abstract class Zend_Service_Rackspace_Abstract
      */
     public function authenticate()
     {
+        if (empty($this->user)) {
+            /**
+             * @see Zend_Service_Rackspace_Exception
+             */
+            require_once 'Zend/Service/Rackspace/Exception.php';
+            throw new Zend_Service_Rackspace_Exception("User has not been set");
+        }
+
         $headers = array (
             self::AUTHUSER_HEADER => $this->user,
             self::AUTHKEY_HEADER => $this->key

@@ -16,7 +16,7 @@
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Entry.php 24645 2012-02-25 21:47:06Z adamlundrigan $
+ * @version    $Id: Entry.php 25160 2012-12-18 15:17:16Z matthew $
  */
 
 /**
@@ -114,7 +114,7 @@ class Zend_Feed_Writer_Entry
          * Array notation (above) is preferred and will be the sole supported input from ZF 2.0
          */
         } else {
-            if (empty($name['name']) || !is_string($name['name'])) {
+            if (empty($name) || !is_string($name)) {
                 require_once 'Zend/Feed/Exception.php';
                 throw new Zend_Feed_Exception('Invalid parameter: "name" must be a non-empty string value');
             }
@@ -214,10 +214,10 @@ class Zend_Feed_Writer_Entry
         $zdate = null;
         if ($date === null) {
             $zdate = new Zend_Date;
-        } elseif (ctype_digit((string)$date)) {
-            $zdate = new Zend_Date($date, Zend_Date::TIMESTAMP);
         } elseif ($date instanceof Zend_Date) {
             $zdate = $date;
+        } elseif (ctype_digit((string)$date)) {
+            $zdate = new Zend_Date($date, Zend_Date::TIMESTAMP);
         } else {
             require_once 'Zend/Feed/Exception.php';
             throw new Zend_Feed_Exception('Invalid Zend_Date object or UNIX Timestamp passed as parameter');
@@ -235,10 +235,10 @@ class Zend_Feed_Writer_Entry
         $zdate = null;
         if ($date === null) {
             $zdate = new Zend_Date;
-        } elseif (ctype_digit((string)$date)) {
-            $zdate = new Zend_Date($date, Zend_Date::TIMESTAMP);
         } elseif ($date instanceof Zend_Date) {
             $zdate = $date;
+        } elseif (ctype_digit((string)$date)) {
+            $zdate = new Zend_Date($date, Zend_Date::TIMESTAMP);
         } else {
             require_once 'Zend/Feed/Exception.php';
             throw new Zend_Feed_Exception('Invalid Zend_Date object or UNIX Timestamp passed as parameter');

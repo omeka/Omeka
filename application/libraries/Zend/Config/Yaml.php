@@ -16,7 +16,7 @@
  * @package   Zend_Config
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id: Yaml.php 24807 2012-05-15 12:10:42Z adamlundrigan $
+ * @version   $Id: Yaml.php 25169 2012-12-22 12:23:11Z rob $
  */
 
 /**
@@ -375,6 +375,8 @@ class Zend_Config_Yaml extends Zend_Config
             $value = true;
         } elseif (preg_match('/^(f(alse)?|off|n(o)?)$/i', $value)) {
             $value = false;
+        } elseif (strcasecmp($value, 'null') === 0) {
+            $value = null;
         } elseif (!self::$_ignoreConstants) {
             // test for constants
             $value = self::_replaceConstants($value);

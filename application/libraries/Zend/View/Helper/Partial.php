@@ -16,7 +16,7 @@
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id: Partial.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: Partial.php 25203 2013-01-10 11:02:17Z frosch $
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -71,6 +71,10 @@ class Zend_View_Helper_Partial extends Zend_View_Helper_Abstract
         if (isset($this->partialCounter)) {
             $view->partialCounter = $this->partialCounter;
         }
+        if (isset($this->partialTotalCount)) {
+            $view->partialTotalCount = $this->partialTotalCount;
+        }
+
         if ((null !== $module) && is_string($module)) {
             require_once 'Zend/Controller/Front.php';
             $moduleDir = Zend_Controller_Front::getInstance()->getControllerDirectory($module);

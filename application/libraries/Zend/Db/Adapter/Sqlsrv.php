@@ -17,7 +17,7 @@
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Sqlsrv.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: Sqlsrv.php 25077 2012-11-06 20:06:24Z rob $
  */
 
 /**
@@ -630,9 +630,14 @@ class Zend_Db_Adapter_Sqlsrv extends Zend_Db_Adapter_Abstract
             $sql = "SELECT ROW_NUMBER() OVER ($over) AS \"ZEND_DB_ROWNUM\", * FROM ($sql) AS inner_tbl";
 
             $start = $offset + 1;
-            $end = $offset + $count;
 
-            $sql = "WITH outer_tbl AS ($sql) SELECT * FROM outer_tbl WHERE \"ZEND_DB_ROWNUM\" BETWEEN $start AND $end";
+            if ($count == PHP_INT_MAX) {
+                $sql = "WITH outer_tbl AS ($sql) SELECT * FROM outer_tbl WHERE \"ZEND_DB_ROWNUM\" >= $start";
+            }
+            else {
+                $end = $offset + $count;
+                $sql = "WITH outer_tbl AS ($sql) SELECT * FROM outer_tbl WHERE \"ZEND_DB_ROWNUM\" BETWEEN $start AND $end";
+            }
         }
 
         return $sql;

@@ -32,8 +32,8 @@ if ($this->pageCount > 1):
     }
     ?>
     <?php echo __('%s of %s', $this->formText('page', $this->current), $this->last); ?>
-    </li>
     </form>
+    </li>
     
     <?php if (isset($this->next)): ?> 
     <!-- Next page link -->

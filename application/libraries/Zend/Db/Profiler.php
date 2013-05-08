@@ -17,7 +17,7 @@
  * @subpackage Profiler
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Profiler.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: Profiler.php 25127 2012-11-16 15:17:42Z rob $
  */
 
 
@@ -225,7 +225,9 @@ class Zend_Db_Profiler
     }
 
     /**
-     * @param  integer $queryId
+     * Clone a profiler query
+     *
+     * @param  Zend_Db_Profiler_Query $query
      * @return integer or null
      */
     public function queryClone(Zend_Db_Profiler_Query $query)
@@ -287,12 +289,12 @@ class Zend_Db_Profiler
     }
 
     /**
-     * Ends a query.  Pass it the handle that was returned by queryStart().
+     * Ends a query. Pass it the handle that was returned by queryStart().
      * This will mark the query as ended and save the time.
      *
      * @param  integer $queryId
      * @throws Zend_Db_Profiler_Exception
-     * @return void
+     * @return string   Inform that a query is stored or ignored.
      */
     public function queryEnd($queryId)
     {

@@ -17,7 +17,7 @@
  * @package    Zend_Feed
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Feed.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: Feed.php 25160 2012-12-18 15:17:16Z matthew $
  */
 
 
@@ -191,7 +191,8 @@ class Zend_Feed
     public static function importString($string)
     {
         // Load the feed as an XML DOMDocument object
-        $libxml_errflag = libxml_use_internal_errors(true);
+        $libxml_errflag       = libxml_use_internal_errors(true);
+        $libxml_entity_loader = libxml_disable_entity_loader(true);
         $doc = new DOMDocument;
         if (trim($string) == '') {
             require_once 'Zend/Feed/Exception.php';
@@ -199,8 +200,8 @@ class Zend_Feed
             . ' is an Empty string or comes from an empty HTTP response');
         }
         $status = $doc->loadXML($string);
+        libxml_disable_entity_loader($libxml_entity_loader);
         libxml_use_internal_errors($libxml_errflag);
-
 
         if (!$status) {
             // prevent the class to generate an undefined variable notice (ZF-2590)

@@ -17,7 +17,7 @@
  * @package    Zend_Session
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Session.php 24819 2012-05-28 19:25:03Z rob $
+ * @version    $Id: Session.php 25121 2012-11-13 21:51:23Z matthew $
  * @since      Preview Release 0.2
  */
 
@@ -515,6 +515,14 @@ class Zend_Session extends Zend_Session_Abstract
      */
     protected static function _checkId($id)
     {
+        $saveHandler = ini_get('session.save_handler');
+        if ($saveHandler == 'cluster') { // Zend Server SC, validate only after last dash
+            $dashPos = strrpos($id, '-');
+            if ($dashPos) {
+                $id = substr($id, $dashPos + 1);
+            }
+        }
+
         $hashBitsPerChar = ini_get('session.hash_bits_per_character');
         if (!$hashBitsPerChar) {
             $hashBitsPerChar = 5; // the default value

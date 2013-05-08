@@ -15,31 +15,39 @@
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Form_Element_Submit */
-require_once 'Zend/Form/Element/Submit.php';
+/** Zend_Form_Element_Xhtml */
+require_once 'Zend/Form/Element/Xhtml.php';
 
 /**
- * Button form element
+ * Element to show an HTML note
  *
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Element
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Button.php 25189 2013-01-08 08:32:43Z frosch $
+ * @version    $Id$
  */
-class Zend_Form_Element_Button extends Zend_Form_Element_Submit
+class Zend_Form_Element_Note extends Zend_Form_Element_Xhtml
 {
     /**
-     * Use formButton view helper by default
+     * Default form view helper to use for rendering
+     *
      * @var string
      */
-    public $helper = 'formButton';
-
+    public $helper = 'formNote';
+    
+    /**
+     * Ignore flag (used when retrieving values at form level)
+     *
+     * @var bool
+     */
+    protected $_ignore = true;
+    
     /**
      * Validate element value (pseudo)
      *

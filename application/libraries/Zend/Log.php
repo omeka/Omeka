@@ -16,7 +16,7 @@
  * @package    Zend_Log
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Log.php 24703 2012-03-29 09:52:39Z andries $
+ * @version    $Id: Log.php 25131 2012-11-16 15:29:18Z rob $
  */
 
 /**
@@ -24,7 +24,7 @@
  * @package    Zend_Log
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Log.php 24703 2012-03-29 09:52:39Z andries $
+ * @version    $Id: Log.php 25131 2012-11-16 15:29:18Z rob $
  */
 class Zend_Log
 {
@@ -595,7 +595,7 @@ class Zend_Log
     {
         $errorLevel = error_reporting();
 
-        if ($errorLevel && $errno) {
+        if ($errorLevel & $errno) {
             if (isset($this->_errorHandlerMap[$errno])) {
                 $priority = $this->_errorHandlerMap[$errno];
             } else {

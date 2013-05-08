@@ -16,7 +16,7 @@
  * @package    Zend_Oauth
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Config.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: Config.php 25167 2012-12-19 16:28:01Z matthew $
  */
 
 /** Zend_Oauth */
@@ -581,6 +581,7 @@ class Zend_Oauth_Config implements Zend_Oauth_Config_ConfigInterface
                 Zend_Oauth::POST,
                 Zend_Oauth::PUT,
                 Zend_Oauth::DELETE,
+                Zend_Oauth::OPTIONS,
             ))
         ) {
             require_once 'Zend/Oauth/Exception.php';
