@@ -14,6 +14,15 @@
 class ApiController extends Omeka_Controller_AbstractActionController
 {
     /**
+     * Initialize this controller.
+     */
+    public function init()
+    {
+        // Actions should use the jsonApi action helper to render JSON data.
+        $this->_helper->viewRenderer->setNoRender();
+    }
+    
+    /**
      * Handle GET request without ID.
      */
     public function indexAction()
@@ -57,6 +66,32 @@ class ApiController extends Omeka_Controller_AbstractActionController
         $record = $this->_getRecord($request->getParam('api_record_type'), $apiParams[0]);
         $data = $this->_getRepresentation($record, $request->getParam('api_resource'));
         $this->_helper->jsonApi($data);
+    }
+    
+    /**
+     * Handle POST requests.
+     */
+    public function postAction()
+    {
+        // CHECK FOR PERMISSIONS HERE
+        
+        $request = $this->getRequest();
+        $recordType = $request->getParam('api_record_type');
+        $resource = $request->getParam('api_resource');
+        
+        $this->_validateRecordType($recordType);
+        
+        // SHOULD WE FILTER POST DATA SEPARATELY FROM setPostData()? EVEN WITH 
+        // filterPostData(), THE RECORD'S CONTROLLER SETS QUITE A BIT OF THE 
+        // POST DATA, WHICH IS INACCESSIBLE FROM THIS CONTROLLER.
+        
+        // WE COULD POSSIBLY DECOUPLE BOTH THE REPRESENTATIONS AND THE POST/PUT
+        // FILTERING FROM THE RECORD.
+        
+        $record = new $recordType;
+        $record->setPostData($request->getPost());
+        $record->save();
+        $this->_helper->jsonApi($record->id);
     }
     
     /**
