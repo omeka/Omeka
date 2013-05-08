@@ -61,4 +61,15 @@ class Api_File extends Omeka_Record_Api_AbstractRecordAdapter
         );
         return $representation;
     }
+    
+    /**
+     * Set data to an file.
+     * 
+     * @param File $data
+     * @param array $data
+     */
+    public function setData(Omeka_Record_AbstractRecord $record, array $data)
+    {
+        
+    }
 }

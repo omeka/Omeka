@@ -62,9 +62,18 @@ class ApiController extends Omeka_Controller_AbstractActionController
     public function getAction()
     {
         $request = $this->getRequest();
+        $recordType = $request->getParam('api_record_type');
+        $resource = $request->getParam('api_resource');
         $apiParams = $request->getParam('api_params');
-        $record = $this->_getRecord($request->getParam('api_record_type'), $apiParams[0]);
-        $data = $this->_getRepresentation($record, $request->getParam('api_resource'));
+        
+        $this->_validateRecordType($recordType);
+        
+        $record = $this->_helper->db->getTable($recordType)->find($apiParams[0]);
+        if (!$record) {
+            throw new Omeka_Controller_Exception_Api('Invalid record. Record not found.', 404);
+        }
+        
+        $data = $this->_getRepresentation($record, $resource);
         $this->_helper->jsonApi($data);
     }
     
@@ -73,42 +82,21 @@ class ApiController extends Omeka_Controller_AbstractActionController
      */
     public function postAction()
     {
-        // CHECK FOR PERMISSIONS HERE
-        
         $request = $this->getRequest();
         $recordType = $request->getParam('api_record_type');
         $resource = $request->getParam('api_resource');
         
         $this->_validateRecordType($recordType);
         
-        // SHOULD WE FILTER POST DATA SEPARATELY FROM setPostData()? EVEN WITH 
-        // filterPostData(), THE RECORD'S CONTROLLER SETS QUITE A BIT OF THE 
-        // POST DATA, WHICH IS INACCESSIBLE FROM THIS CONTROLLER.
-        
-        // WE COULD POSSIBLY DECOUPLE BOTH THE REPRESENTATIONS AND THE POST/PUT
-        // FILTERING FROM THE RECORD.
-        
         $record = new $recordType;
-        $record->setPostData($request->getPost());
+        $this->_validateUser($record, 'add');
+        
+        // Set the POST data using the record adapter.
+        $recordAdapter = $this->_getRecordAdapter($recordType);
+        $recordAdapter->setData($record, $request->getPost());
+        
         $record->save();
         $this->_helper->jsonApi($record->id);
-    }
-    
-    /**
-     * Return the specified record.
-     * 
-     * @param string $recordType
-     * @param int $id
-     * @return Omeka_Record_AbstractRecord
-     */
-    protected function _getRecord($recordType, $id)
-    {
-        $this->_validateRecordType($recordType);
-        $record = $this->_helper->db->getTable($recordType)->find($id);
-        if (!$record) {
-            throw new Omeka_Controller_Exception_Api('Invalid record. Record not found.', 404);
-        }
-        return $record;
     }
     
     /**
@@ -121,14 +109,46 @@ class ApiController extends Omeka_Controller_AbstractActionController
         if (!class_exists($recordType)) {
             throw new Omeka_Controller_Exception_Api("Invalid record. Record type \"$recordType\" not found.", 404);
         }
+        
+        // Records must have corresponding record adapters.
         $recordAdapterClass = "Api_$recordType";
         if (!class_exists($recordAdapterClass)) {
            throw new Omeka_Controller_Exception_Api("Invalid record adapter. Record adapter \"$recordAdapterClass\" not found", 404);
         }
         if (!in_array('Omeka_Record_Api_AbstractRecordAdapter', class_parents($recordAdapterClass))) {
-           throw new Omeka_Controller_Exception_Api("Invalid record adapter. Record adapter \"$recordAdapterClass\" must implement Omeka_Record_Api_AbstractRecordAdapter", 404);
+           throw new Omeka_Controller_Exception_Api("Invalid record adapter. Record adapter \"$recordAdapterClass\" must extend Omeka_Record_Api_AbstractRecordAdapter", 404);
         }
-
+        
+        // POST, PUT, and DELETE methods using the defualt API controller 
+        // require records to implement Zend_Acl_Resource_Interface to check 
+        // permissions.
+        if (in_array($this->getRequest()->getMethod(), array('POST', 'PUT', 'DELETE')) 
+            && !in_array('Zend_Acl_Resource_Interface', class_implements($recordType))
+        ) {
+            throw new Omeka_Controller_Exception_Api("Invalid record. Record \"$recordType\" must implement Zend_Acl_Resource_Interface", 404);
+        }
+    }
+    
+    /**
+     * Validate a user against a privilege.
+     * 
+     * @param Omeka_Record_AbstractRecord $record
+     * @param string $privilege
+     */
+    protected function _validateUser(Omeka_Record_AbstractRecord $record, $privilege)
+    {
+        $bootstrap = Zend_Registry::get('bootstrap');
+        $currentUser = $bootstrap->getResource('CurrentUser');
+        $acl = $bootstrap->getResource('Acl');
+        if (!$acl->isAllowed($currentUser, $record, $privilege)) {
+            throw new Omeka_Controller_Exception_Api('Permission denied.', 403);
+        }
+    }
+    
+    protected function _getRecordAdapter($recordType)
+    {
+        $recordAdapterClass = "Api_$recordType";
+        return new $recordAdapterClass;
     }
     
     /**
@@ -168,7 +188,6 @@ class ApiController extends Omeka_Controller_AbstractActionController
         
         $this->getResponse()->setHeader('Link', implode(', ', $linkValues));
     }
-
     
     /**
      * Get the representation of a record.
@@ -201,9 +220,8 @@ class ApiController extends Omeka_Controller_AbstractActionController
         }
         
         // Get the representation from the record adapter.
-        $apiRecordClass = "Api_" . get_class($record);
-        $apiRecord = new $apiRecordClass;
-        $representation = $apiRecord->getRepresentation($record);
+        $recordAdapter = $this->_getRecordAdapter(get_class($record));
+        $representation = $recordAdapter->getRepresentation($record);
         $representation['extended_resources'] = $extend;
         return $representation;
     }

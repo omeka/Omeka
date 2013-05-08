@@ -69,4 +69,15 @@ class Api_Item extends Omeka_Record_Api_AbstractRecordAdapter
         );
         return $representation;
     }
+    
+    /**
+     * Set data to an item.
+     * 
+     * @param Item $data
+     * @param array $data
+     */
+    public function setData(Omeka_Record_AbstractRecord $record, array $data)
+    {
+        
+    }
 }
