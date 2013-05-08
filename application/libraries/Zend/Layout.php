@@ -16,7 +16,7 @@
  * @package    Zend_Layout
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Layout.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: Layout.php 25263 2013-02-18 11:48:02Z frosch $
  */
 
 /**
@@ -174,12 +174,12 @@ class Zend_Layout
     {
         if (null === self::$_mvcInstance) {
             self::$_mvcInstance = new self($options, true);
-        }
-
-        if (is_string($options)) {
-            self::$_mvcInstance->setLayoutPath($options);
-        } elseif (is_array($options) || $options instanceof Zend_Config) {
-            self::$_mvcInstance->setOptions($options);
+        } else {
+            if (is_string($options)) {
+                self::$_mvcInstance->setLayoutPath($options);
+            } elseif (is_array($options) || $options instanceof Zend_Config) {
+                self::$_mvcInstance->setOptions($options);
+            }
         }
 
         return self::$_mvcInstance;

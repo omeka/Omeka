@@ -17,7 +17,7 @@
  * @subpackage Page
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Mvc.php 24964 2012-06-15 14:37:43Z adamlundrigan $
+ * @version    $Id: Mvc.php 25213 2013-01-11 08:19:09Z frosch $
  */
 
 /**
@@ -198,7 +198,7 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
             }
 
             foreach($myParams as $key => $value) {
-                if($value == null) {
+                if(null === $value) {
                     unset($myParams[$key]);
                 }
             }

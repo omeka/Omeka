@@ -16,7 +16,7 @@
  * @package   Zend_Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id: MimeType.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version   $Id: MimeType.php 25175 2012-12-22 20:47:08Z rob $
  */
 
 /**
@@ -150,11 +150,16 @@ class Zend_Validate_File_MimeType extends Zend_Validate_Abstract
     /**
      * Returns the actual set magicfile
      *
+     * Note that for PHP 5.3.0 or higher, we don't use $_ENV['MAGIC'] or try to
+     * find a magic file in a common location as PHP now has a built-in internal
+     * magic file.
+     *
      * @return string
      */
     public function getMagicFile()
     {
-        if (null === $this->_magicfile) {
+        if (version_compare(PHP_VERSION, '5.3.0', '<')
+            && null === $this->_magicfile) {
             if (!empty($_ENV['MAGIC'])) {
                 $this->setMagicFile($_ENV['MAGIC']);
             } elseif (

@@ -195,7 +195,7 @@ abstract class Zend_Http_UserAgent_AbstractDevice
      */
     public function hasFeature($feature)
     {
-        return (!empty($this->_aFeatures[$feature]));
+        return (isset($this->_aFeatures[$feature]) && !is_null($this->_aFeatures[$feature]));
     }
 
     /**

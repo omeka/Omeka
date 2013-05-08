@@ -332,15 +332,17 @@ class Zend_Service_Rackspace_Files extends Zend_Service_Rackspace_Abstract
         return false;
     }
     /**
-     * Store a file in a container 
+     * Store a file in a container
      *
      * @param string $container
      * @param string $object
      * @param string $content
      * @param array $metadata
+     * @param string $content_type
+     *
      * @return boolean
      */
-    public function storeObject($container,$object,$content,$metadata=array()) {
+    public function storeObject($container,$object,$content,$metadata=array(),$content_type=null) {
         if (empty($container)) {
             require_once 'Zend/Service/Rackspace/Exception.php';
             throw new Zend_Service_Rackspace_Exception(self::ERROR_PARAM_NO_NAME_CONTAINER);
@@ -352,6 +354,9 @@ class Zend_Service_Rackspace_Files extends Zend_Service_Rackspace_Abstract
         if (empty($content)) {
             require_once 'Zend/Service/Rackspace/Exception.php';
             throw new Zend_Service_Rackspace_Exception(self::ERROR_PARAM_NO_CONTENT);
+        }
+        if (!empty($content_type)) {
+           $headers[self::HEADER_CONTENT_TYPE]= $content_type;
         }
         if (!empty($metadata) && is_array($metadata)) {
             foreach ($metadata as $key => $value) {

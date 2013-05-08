@@ -42,7 +42,7 @@ require_once 'Zend/Form/Decorator/Abstract.php';
  * @subpackage Decorator
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Label.php 24846 2012-05-31 19:12:45Z rob $
+ * @version    $Id: Label.php 25243 2013-01-22 12:07:26Z frosch $
  */
 class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
 {
@@ -306,10 +306,6 @@ class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
 
         if (empty($label)) {
             return '';
-        }
-
-        if (null !== ($translator = $element->getTranslator())) {
-            $label = $translator->translate($label);
         }
 
         $optPrefix = $this->getOptPrefix();

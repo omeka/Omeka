@@ -17,7 +17,7 @@
  * @subpackage Parse_Amf0
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Serializer.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: Serializer.php 25179 2012-12-22 21:29:30Z rob $
  */
 
 /** Zend_Amf_Constants */
@@ -127,7 +127,7 @@ class Zend_Amf_Parse_Amf0_Serializer extends Zend_Amf_Parse_Serializer
                 case (is_bool($data)):
                     $markerType = Zend_Amf_Constants::AMF0_BOOLEAN;
                     break;
-                case (is_string($data) && (strlen($data) > 65536)):
+                case (is_string($data) && (($this->_mbStringFunctionsOverloaded ? mb_strlen($data, '8bit') : strlen($data)) > 65536)):
                     $markerType = Zend_Amf_Constants::AMF0_LONGSTRING;
                     break;
                 case (is_string($data)):

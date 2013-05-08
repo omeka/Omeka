@@ -121,7 +121,7 @@ class Zend_Mobile_Push_Gcm extends Zend_Mobile_Push_Abstract
      * Send Message
      *
      * @param Zend_Mobile_Push_Message_Gcm $message
-     * @return boolean
+     * @return Zend_Mobile_Push_Response_Gcm
      * @throws Zend_Mobile_Push_Exception
      */
     public function send(Zend_Mobile_Push_Message_Abstract $message)

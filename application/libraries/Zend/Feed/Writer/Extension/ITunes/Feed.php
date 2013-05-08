@@ -16,7 +16,7 @@
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Feed.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: Feed.php 25107 2012-11-07 20:42:00Z rob $
  */
 
 /**
@@ -205,7 +205,7 @@ class Zend_Feed_Writer_Extension_ITunes_Feed
     /**
      * Set "explicit" flag
      *
-     * @param  bool $value
+     * @param  string $value    Valid values: "yes", "no" or "clean"
      * @return Zend_Feed_Writer_Extension_ITunes_Feed
      */
     public function setItunesExplicit($value)

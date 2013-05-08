@@ -17,7 +17,7 @@
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Links.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: Links.php 25239 2013-01-22 09:45:01Z frosch $
  */
 
 /**
@@ -769,7 +769,7 @@ class Zend_View_Helper_Navigation_Links
             foreach ($types as $relation => $pages) {
                 foreach ($pages as $page) {
                     if ($r = $this->renderLink($page, $attrib, $relation)) {
-                        $output .= $indent . $r . self::EOL;
+                        $output .= $indent . $r . $this->getEOL();
                     }
                 }
             }

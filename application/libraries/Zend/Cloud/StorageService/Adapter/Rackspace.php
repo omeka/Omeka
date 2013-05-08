@@ -19,7 +19,7 @@
 
 require_once 'Zend/Cloud/StorageService/Adapter.php';
 require_once 'Zend/Cloud/StorageService/Exception.php';
-require_once 'Zend/Service/Rackspace/File.php';
+require_once 'Zend/Service/Rackspace/Files.php';
 require_once 'Zend/Service/Rackspace/Exception.php';
 
 /**
@@ -41,7 +41,7 @@ class Zend_Cloud_StorageService_Adapter_Rackspace
     
     /**
      * The Rackspace adapter
-     * @var Zend_Service_Rackspace_File
+     * @var Zend_Service_Rackspace_Files
      */
     protected $_rackspace;
 
@@ -68,7 +68,7 @@ class Zend_Cloud_StorageService_Adapter_Rackspace
         }
 
         try {
-            $this->_rackspace = new Zend_Service_Rackspace_File($options[self::USER], $options[self::API_KEY]);
+            $this->_rackspace = new Zend_Service_Rackspace_Files($options[self::USER], $options[self::API_KEY]);
         } catch (Zend_Service_Rackspace_Exception $e) {
             throw new Zend_Cloud_StorageService_Exception('Error on create: '.$e->getMessage(), $e->getCode(), $e);
         }
