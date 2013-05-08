@@ -36,6 +36,8 @@ class Omeka_Application_Resource_Frontcontroller extends Zend_Application_Resour
         // the admin theme.
         $request = new Zend_Controller_Request_Http;
         if (!$front->getParam('admin') && preg_match('#^/api/([a-z_]+)(.+)?$#', $request->getPathInfo())) {
+            // Hide errors from the user. Displaying errors would break clients.
+            ini_set('display_errors', 0);
             $front->setParam('api', true);
             $front->registerPlugin(new Omeka_Controller_Plugin_Api);
         }
