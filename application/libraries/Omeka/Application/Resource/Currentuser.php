@@ -30,6 +30,8 @@ class Omeka_Application_Resource_Currentuser extends Zend_Application_Resource_R
         $front = Zend_Controller_Front::getInstance();
         $request = new Zend_Controller_Request_Http;
         
+        // REST API requests require a slightly different authentication 
+        // strategy. They use non-persistant, key-based authentication 
         if ($front->getParam('api')) {
             // Authenticate against the API key in a non-persistent way.
             $auth->setStorage(new Zend_Auth_Storage_NonPersistent);
@@ -43,6 +45,7 @@ class Omeka_Application_Resource_Currentuser extends Zend_Application_Resource_R
         }
         
         try {
+            // Get the user ID for REST API or standard requests.
             if ($front->getParam('api')) {
                 // Update the key row.
                 $key = $auth->getIdentity();
