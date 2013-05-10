@@ -47,4 +47,3 @@ class Api_ItemType extends Omeka_Record_Api_AbstractRecordAdapter
         
     }    
 }
-?>
