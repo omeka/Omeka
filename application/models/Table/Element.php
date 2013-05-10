@@ -170,6 +170,10 @@ class Table_Element extends Omeka_Db_Table
                 (int)$params['item_type_id']);
         } else if (array_key_exists('exclude_item_type', $params)) {
             $select->where('element_sets.name != ?', ElementSet::ITEM_TYPE_NAME);
+        } else if(array_key_exists('only_item_type_id', $params)) {
+            $select->joinLeft(array('item_types_elements' => $db->ItemTypesElements),
+                    'item_types_elements.element_id = elements.id', array());
+            $select->where('item_types_elements.item_type_id = ? ', (int)$params['only_item_type_id']);            
         }
     }
     

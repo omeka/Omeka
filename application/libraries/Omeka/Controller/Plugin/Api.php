@@ -70,6 +70,11 @@ class Omeka_Controller_Plugin_Api extends Zend_Controller_Plugin_Abstract
                 'mime_type', 'modified_since', 'added_since'
             )
         ), 
+        'item_types' => array(
+            'record_type' => 'ItemType',
+            'actions' => array('index', 'get'),
+            'index_params' => array('name')
+            )
     );
     
     /**
