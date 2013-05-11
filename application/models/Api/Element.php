@@ -15,9 +15,9 @@ class Api_Element extends Omeka_Record_Api_AbstractRecordAdapter
 {
     
     /**
-     * Get the REST API representation for a file.
+     * Get the REST API representation for a element.
      *
-     * @param File $record
+     * @param Element $record
      * @return array
      */
         
@@ -40,9 +40,9 @@ class Api_Element extends Omeka_Record_Api_AbstractRecordAdapter
     
     
     /**
-     * Set data to an file.
+     * Set data to an Element.
      *
-     * @param File $data
+     * @param Element $data
      * @param array $data
      */
     public function setData(Omeka_Record_AbstractRecord $record, array $data)
