@@ -171,10 +171,26 @@ class Table_Element extends Omeka_Db_Table
         } else if (array_key_exists('exclude_item_type', $params)) {
             $select->where('element_sets.name != ?', ElementSet::ITEM_TYPE_NAME);
         } else if(array_key_exists('only_item_type_id', $params)) {
+            //for count data in the API for item_types
             $select->joinLeft(array('item_types_elements' => $db->ItemTypesElements),
                     'item_types_elements.element_id = elements.id', array());
             $select->where('item_types_elements.item_type_id = ? ', (int)$params['only_item_type_id']);            
         }
+        
+        //API params
+        //@TODO: see if this calls for a redo of this method using parent's method, and/or making more consistent?
+        //easy to imagine lots of fallout from doing the above todo
+        if(array_key_exists('name', $params)) {
+            $select->where("name = ?", $params['name']);
+        }
+        
+        if(array_key_exists('element_set', $params)) {
+            $select->where("element_set_id = ?", $params['element_set']);
+        }
+
+        if(array_key_exists('order', $params)) {
+            $select->where("elements.order = ?", $params['order']);
+        }        
     }
     
     /**
