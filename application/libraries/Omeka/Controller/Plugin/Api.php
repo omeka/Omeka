@@ -79,6 +79,11 @@ class Omeka_Controller_Plugin_Api extends Zend_Controller_Plugin_Abstract
             'record_type' => 'Element',
             'actions' => array('index', 'get'),
             'index_params' => array('element_set', 'order', 'name')
+            ),
+        'element_sets' => array(
+            'record_type' => 'ElementSet',
+            'actions' => array('index', 'get'),
+            'index_params' => array('name', 'record_type')
             )
     );
     
