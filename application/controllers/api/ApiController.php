@@ -225,6 +225,8 @@ class ApiController extends Omeka_Controller_AbstractActionController
             }
         }
         
+        $extend = new ArrayObject($extend);
+        
         // Get the representation from the record adapter.
         $recordAdapter = $this->_getRecordAdapter(get_class($record));
         $representation = $recordAdapter->getRepresentation($record);
