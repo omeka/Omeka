@@ -93,7 +93,7 @@ class ApiController extends Omeka_Controller_AbstractActionController
         
         // Set the POST data using the record adapter.
         $recordAdapter = $this->_getRecordAdapter($recordType);
-        $recordAdapter->setData($record, $request->getPost());
+        $recordAdapter->setData($record, json_decode($request->getRawBody()));
         
         $record->save();
         $this->_helper->jsonApi($record->id);
@@ -145,6 +145,12 @@ class ApiController extends Omeka_Controller_AbstractActionController
         }
     }
     
+    /**
+     * Get the adapter for a record type.
+     * 
+     * @param string $recordType
+     * @return Omeka_Record_Api_AbstractRecordAdapter
+     */
     protected function _getRecordAdapter($recordType)
     {
         $recordAdapterClass = "Api_$recordType";
