@@ -32,8 +32,8 @@ class Api_Collection extends Omeka_Record_Api_AbstractRecordAdapter
             'id'  => $record->owner_id,
             'url' => "/users/{$record->owner_id}",
         );
-        $representation['public'] = $record->public;
-        $representation['featured'] = $record->featured;
+        $representation['public'] = (bool) $record->public;
+        $representation['featured'] = (bool) $record->featured;
         $representation['added'] = $added->setTimezone($timezone)->format('c');
         $representation['modified'] = $modified->setTimezone($timezone)->format('c');
         $representation['items'] = array(
