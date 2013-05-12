@@ -15,8 +15,6 @@ class Table_File extends Omeka_Db_Table
 
     public function applySearchFilters($select, $params)
     {
-        parent::applySearchFilters($select, $params);
-        
         $boolean = new Omeka_Filter_Boolean;
         
         foreach ($params as $paramName => $paramValue) {
@@ -30,7 +28,11 @@ class Table_File extends Omeka_Db_Table
                     break;
                     
                 case 'order':
-                    $select->where('files.order = ?', $paramValue);
+                    if($paramValue == 'null') {
+                        $select->where('files.order IS NULL');
+                    } else {
+                        $select->where('files.order = ?', $paramValue);
+                    }
                     break;
                     
                 case 'size_greater_then':
