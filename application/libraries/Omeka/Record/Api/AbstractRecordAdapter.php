@@ -22,7 +22,7 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter
      * Set data to a record.
      * 
      * @param Omeka_Record_AbstractRecord $data
-     * @param array $data
+     * @param mixed $data
      */
-    abstract public function setData(Omeka_Record_AbstractRecord $record, array $data);
+    abstract public function setData(Omeka_Record_AbstractRecord $record, $data);
 }

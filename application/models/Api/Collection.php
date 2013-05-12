@@ -57,9 +57,9 @@ class Api_Collection extends Omeka_Record_Api_AbstractRecordAdapter
      * Set data to an Collection.
      * 
      * @param Collection $data
-     * @param array $data
+     * @param mixed $data
      */
-    public function setData(Omeka_Record_AbstractRecord $record, array $data)
+    public function setData(Omeka_Record_AbstractRecord $record, $data)
     {
         
     }
