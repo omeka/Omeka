@@ -42,12 +42,8 @@ class Api_File extends Omeka_Record_Api_AbstractRecordAdapter
         // Metadata is stored as a JSON string, so make it an array to fit into 
         // the API response
         $metadata = json_decode($record->metadata, true);
-        if (empty($metadata)) {
-            $representation['metadata'] = array();
-        } else {
-            $representation['metadata'] = $metadata;
-        }
-        
+        //use ArrayObject to make sure we always get a JSON object, even when empty
+        $representation['metadata'] = new ArrayObject($metadata);
         $representation['url'] = "/files/{$record->id}";
         $representation['item'] = array(
             "id" => $record->item_id, 
