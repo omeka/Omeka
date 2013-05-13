@@ -53,7 +53,7 @@ class Omeka_Controller_Plugin_Api extends Zend_Controller_Plugin_Abstract
         ), 
         'collections' => array(
             'record_type' => 'Collection', 
-            'actions' => array('index', 'get')
+            'actions' => array('index', 'get'), 
         ), 
         'items' => array(
             'record_type' => 'Item', 
@@ -66,25 +66,31 @@ class Omeka_Controller_Plugin_Api extends Zend_Controller_Plugin_Abstract
         'files' => array(
             'record_type' => 'File', 
             'actions' => array('index', 'get'),
-            'index_params' => array('item', 'order', 'size_greater_than', 'has_derivative_image',
-                'mime_type', 'modified_since', 'added_since'
-            )
+            'index_params' => array(
+                'item', 'order', 'size_greater_than', 'has_derivative_image',
+                'mime_type', 'modified_since', 'added_since', 
+            ), 
         ), 
         'item_types' => array(
             'record_type' => 'ItemType',
             'actions' => array('index', 'get'),
-            'index_params' => array('name')
-            ),
+            'index_params' => array('name'), 
+        ),
         'elements' => array(
             'record_type' => 'Element',
             'actions' => array('index', 'get'),
-            'index_params' => array('element_set', 'order', 'name')
-            ),
+            'index_params' => array('element_set', 'order', 'name'), 
+        ),
         'element_sets' => array(
             'record_type' => 'ElementSet',
             'actions' => array('index', 'get'),
-            'index_params' => array('name', 'record_type')
-            )
+            'index_params' => array('name', 'record_type'), 
+        ), 
+        'element_texts' => array(
+            'record_type' => 'ElementText', 
+            'actions' => array('index'), 
+            'index_params' => array('record_type', 'record_id', 'element'), 
+        ), 
     );
     
     /**
