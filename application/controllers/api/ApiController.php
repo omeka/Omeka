@@ -89,14 +89,26 @@ class ApiController extends Omeka_Controller_AbstractActionController
         $this->_validateRecordType($recordType);
         
         $record = new $recordType;
+        
+        // The user must have permission to add this record.
         $this->_validateUser($record, 'add');
         
-        // Set the POST data using the record adapter.
-        $recordAdapter = $this->_getRecordAdapter($recordType);
-        $recordAdapter->setData($record, json_decode($request->getRawBody()));
+        // The request body must be a JSON object.
+        $data = json_decode($request->getRawBody());
+        if (!($data instanceof stdClass)) {
+            throw new Omeka_Controller_Exception_Api('Invalid request. Request body must be a JSON object.', 404);
+        }
         
+        // Set the POST data to the record using the record adapter.
+        $recordAdapter = $this->_getRecordAdapter($recordType);
+        $recordAdapter->setData($record, $data);
         $record->save();
-        $this->_helper->jsonApi($record->id);
+        
+        // The client may have set invalid data to the record. This does not 
+        // always throw an error. Get the current record state directly from the 
+        // database.
+        $record = $this->_helper->db->getTable($recordType)->find($record->id);
+        $this->_helper->jsonApi($recordAdapter->getRepresentation($record));
     }
     
     /**
