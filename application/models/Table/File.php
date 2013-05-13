@@ -24,6 +24,7 @@ class Table_File extends Omeka_Db_Table
 
             switch($paramName) {
                 case 'item':
+                case 'item_id':
                     $select->where('files.item_id = ?', $paramValue);
                     break;
                     
