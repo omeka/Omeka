@@ -108,7 +108,8 @@ class ApiController extends Omeka_Controller_AbstractActionController
         // always throw an error. Get the current record state directly from the 
         // database.
         $record = $this->_helper->db->getTable($recordType)->find($record->id);
-        $this->_helper->jsonApi($recordAdapter->getRepresentation($record));
+        $data = $this->_getRepresentation($record, $resource);
+        $this->_helper->jsonApi($data);
     }
     
     /**
