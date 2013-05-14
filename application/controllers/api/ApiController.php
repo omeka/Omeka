@@ -49,8 +49,9 @@ class ApiController extends Omeka_Controller_AbstractActionController
         
         // Build the data array.
         $data = array();
+        $recordAdapter = $this->_getRecordAdapter($recordType);
         foreach ($records as $record) {
-            $data[] = $this->_getRepresentation($record, $resource);
+            $data[] = $this->_getRepresentation($recordAdapter, $record, $resource);
         }
         
         $this->_helper->jsonApi($data);
@@ -73,7 +74,7 @@ class ApiController extends Omeka_Controller_AbstractActionController
             throw new Omeka_Controller_Exception_Api('Invalid record. Record not found.', 404);
         }
         
-        $data = $this->_getRepresentation($record, $resource);
+        $data = $this->_getRepresentation($this->_getRecordAdapter($recordType), $record, $resource);
         $this->_helper->jsonApi($data);
     }
     
@@ -100,15 +101,17 @@ class ApiController extends Omeka_Controller_AbstractActionController
         }
         
         // Set the POST data to the record using the record adapter.
-        $recordAdapter = $this->_getRecordAdapter($recordType);
         $recordAdapter->setData($record, $data);
         $record->save();
         
         // The client may have set invalid data to the record. This does not 
         // always throw an error. Get the current record state directly from the 
         // database.
-        $record = $this->_helper->db->getTable($recordType)->find($record->id);
-        $data = $this->_getRepresentation($record, $resource);
+        $data = $this->_getRepresentation(
+            $this->_getRecordAdapter($recordType), 
+            $this->_helper->db->getTable($recordType)->find($record->id), 
+            $resource
+        );
         $this->_helper->jsonApi($data);
     }
     
@@ -214,8 +217,11 @@ class ApiController extends Omeka_Controller_AbstractActionController
      * @param Omeka_Record_AbstractRecord $record
      * @param string $resource
      */
-    protected function _getRepresentation(Omeka_Record_AbstractRecord $record, $resource)
-    {
+    protected function _getRepresentation(
+        Omeka_Record_Api_AbstractRecordAdapter $recordAdapter, 
+        Omeka_Record_AbstractRecord $record, 
+        $resource
+    ) {
         $extend = array();
         $extendTemp = apply_filters("api_extend_$resource", array(), array('record' => $record));
         $apiResources = $this->getFrontController()->getParam('api_resources');
@@ -241,7 +247,6 @@ class ApiController extends Omeka_Controller_AbstractActionController
         $extend = new ArrayObject($extend);
         
         // Get the representation from the record adapter.
-        $recordAdapter = $this->_getRecordAdapter(get_class($record));
         $representation = $recordAdapter->getRepresentation($record);
         $representation['extended_resources'] = $extend;
         return $representation;
