@@ -44,10 +44,10 @@ class Api_File extends Omeka_Record_Api_AbstractRecordAdapter
         $metadata = json_decode($record->metadata, true);
         //use ArrayObject to make sure we always get a JSON object, even when empty
         $representation['metadata'] = new ArrayObject($metadata);
-        $representation['url'] = "/files/{$record->id}";
+        $representation['url'] = $this->getResourceUrl("/files/{$record->id}");
         $representation['item'] = array(
             "id" => $record->item_id, 
-            "url"=>"/items/{$record->item_id}", 
+            "url"=> $this->getResourceUrl("/items/{$record->item_id}"), 
         );
         
         $representation['element_texts'] = $this->getElementTextRepresentations($record);

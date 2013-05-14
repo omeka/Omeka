@@ -18,7 +18,6 @@ class Api_Collection extends Omeka_Record_Api_AbstractRecordAdapter
      * @param Collection $record 
      * @return array 
      */
-    
     public function getRepresentation(Omeka_Record_AbstractRecord $record) {
         // Convert Dates to UTC.
         $added = new DateTime($record->added);
@@ -27,10 +26,10 @@ class Api_Collection extends Omeka_Record_Api_AbstractRecordAdapter
         
         $representation = array();
         $representation['id'] = $record->id;
-        $representation['url'] = "/collections/{$record->id}";
+        $representation['url'] = $this->getResourceUrl("/collections/{$record->id}");
         $representation['owner'] = array(
             'id'  => $record->owner_id,
-            'url' => "/users/{$record->owner_id}",
+            'url' => $this->getResourceUrl("/users/{$record->owner_id}"),
         );
         $representation['public'] = (bool) $record->public;
         $representation['featured'] = (bool) $record->featured;
@@ -38,16 +37,16 @@ class Api_Collection extends Omeka_Record_Api_AbstractRecordAdapter
         $representation['modified'] = $modified->setTimezone($timezone)->format('c');
         $representation['items'] = array(
             'count' => $record->getTable('Item')
-                              ->count(array('item_id' => $record->id)),
-            'url' => "/items?collection={$record->id}",
+                ->count(array('item_id' => $record->id)),
+            'url' => $this->getResourceUrl("/items?collection={$record->id}"),
         );
-        $representation['element_texts'] = $this->getElementTextRepresentations($record);;
+        $representation['element_texts'] = $this->getElementTextRepresentations($record);
         
         return $representation;
     }
     
     /**
-     * Set data to an Collection.
+     * Set data to a Collection.
      * 
      * @param Collection $data
      * @param mixed $data

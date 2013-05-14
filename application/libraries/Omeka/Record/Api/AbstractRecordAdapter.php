@@ -37,6 +37,17 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter
     abstract public function setData(Omeka_Record_AbstractRecord $record, $data);
     
     /**
+     * Get the absolute URL to the passed resource.
+     * 
+     * @param string $uri
+     * @return string
+     */
+    public function getResourceUrl($uri)
+    {
+        return WEB_ROOT . "/api$uri";
+    }
+    
+    /**
      * Get representations of element texts belonging to a record.
      * 
      * @param Omeka_Record_AbstractRecord $record
@@ -74,12 +85,12 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter
                 'text' => $elementText->text, 
                 'element_set' => array(
                     'id' => $elementSet['id'], 
-                    'url' => "/element_sets/{$elementSet['id']}", 
+                    'url' => $this->getResourceUrl("/element_sets/{$elementSet['id']}"), 
                     'name' => $elementSet['name'], 
                 ), 
                 'element' => array(
                     'id' => $element['id'], 
-                    'url' => "/elements/{$element['id']}", 
+                    'url' => $this->getResourceUrl("/elements/{$element['id']}"), 
                     'name' => $element['name'], 
                 )
             );
