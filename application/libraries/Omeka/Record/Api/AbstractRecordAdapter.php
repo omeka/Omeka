@@ -39,11 +39,15 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter
     /**
      * Get the absolute URL to the passed resource.
      * 
-     * @param string $uri
+     * @param string $uri The full resource URI
      * @return string
      */
     public function getResourceUrl($uri)
     {
+        // Prepend a slash if not already.
+        if ('/' != $uri[0]) {
+            $uri = "/$uri";
+        }
         return WEB_ROOT . "/api$uri";
     }
     
