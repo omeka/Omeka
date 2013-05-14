@@ -29,8 +29,8 @@ class Api_ItemType extends Omeka_Record_Api_AbstractRecordAdapter
         $representation['name'] = $record->name;
         $representation['description'] = $record->description;
         $representation['elements'] = array(
-                'count' => $record->getTable('Element')->count(array('only_item_type_id'=>$record->id)),
-                'url' => "elements/?item_type={$record->id}"
+                'count' => $record->getTable('Element')->count(array('item_type'=>$record->id)),
+                'url' => "/elements/?item_type={$record->id}"
                 );
         
         return $representation;

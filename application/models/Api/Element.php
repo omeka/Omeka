@@ -45,7 +45,7 @@ class Api_Element extends Omeka_Record_Api_AbstractRecordAdapter
      * @param Element $data
      * @param array $data
      */
-    public function setData(Omeka_Record_AbstractRecord $record, array $data)
+    public function setData(Omeka_Record_AbstractRecord $record, $data)
     {
     
     }    
