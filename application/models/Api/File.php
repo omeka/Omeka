@@ -50,11 +50,7 @@ class Api_File extends Omeka_Record_Api_AbstractRecordAdapter
             "url"=>"/items/{$record->item_id}", 
         );
         
-        $representation['element_texts'] = array(
-            'count' => $record->getTable('ElementText')
-                ->count(array('record_type' => 'File', 'record_id' => $record->id)),
-            'url' => "/element_texts?record_type=File&record_id={$record->id}",
-        );
+        $representation['element_texts'] = $this->getElementTextRepresentations($record);
         return $representation;
     }
     
