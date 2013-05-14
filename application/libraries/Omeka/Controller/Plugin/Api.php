@@ -54,6 +54,9 @@ class Omeka_Controller_Plugin_Api extends Zend_Controller_Plugin_Abstract
         'collections' => array(
             'record_type' => 'Collection', 
             'actions' => array('index', 'get'), 
+            'index_params' => array(
+	         'public','featured','added_since','modified_since','owner',
+	     ),
         ), 
         'items' => array(
             'record_type' => 'Item', 
