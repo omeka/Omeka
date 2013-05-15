@@ -16,12 +16,26 @@
 class Omeka_Controller_Exception_Api extends Exception {
     
     /**
+     * @var array
+     */
+    protected $_errors;
+    
+    /**
      * @param string $message
      * @param int $code
      * @param array $errors Custom errors
      */
-    public function __construct($message, $code)
+    public function __construct($message, $code, array $errors = array())
     {
+        $this->_errors = $errors;
         parent::__construct($message, (int) $code);
+    }
+    
+    /**
+     * @return array
+     */
+    public function getErrors()
+    {
+        return $this->_errors;
     }
 }

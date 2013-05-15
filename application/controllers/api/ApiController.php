@@ -97,12 +97,15 @@ class ApiController extends Omeka_Controller_AbstractActionController
         // The request body must be a JSON object.
         $data = json_decode($request->getRawBody());
         if (!($data instanceof stdClass)) {
-            throw new Omeka_Controller_Exception_Api('Invalid request. Request body must be a JSON object.', 404);
+            throw new Omeka_Controller_Exception_Api('Invalid request. Request body must be a JSON object.', 400);
         }
         
         // Set the POST data to the record using the record adapter.
-        $recordAdapter->setData($record, $data);
-        $record->save();
+        $this->_getRecordAdapter($recordType)->setData($record, $data);
+        if (!$record->save(false)) {
+            throw new Omeka_Controller_Exception_Api('Error when saving record.', 
+                400, $record->getErrors()->get());
+        }
         
         // The client may have set invalid data to the record. This does not 
         // always throw an error. Get the current record state directly from the 
@@ -112,6 +115,8 @@ class ApiController extends Omeka_Controller_AbstractActionController
             $this->_helper->db->getTable($recordType)->find($record->id), 
             $resource
         );
+        $this->getResponse()->setHttpResponseCode(201);
+        $this->getResponse()->setHeader('Location', $data['url']);
         $this->_helper->jsonApi($data);
     }
     

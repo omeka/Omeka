@@ -12,7 +12,7 @@
 class ErrorController extends Omeka_Controller_AbstractActionController
 {
     /**
-     * 404 Not Found
+     * 500 Internal Server Error
      */
     const DEFAULT_HTTP_RESPONSE_CODE = 500;
     
@@ -21,8 +21,10 @@ class ErrorController extends Omeka_Controller_AbstractActionController
      */
     public function errorAction()
     {
+        $data = array();
         $exception = $this->_getParam('error_handler')->exception;
         
+        // Add code and message to response.
         $code = $exception->getCode();
         if (!$code) {
             $code = self::DEFAULT_HTTP_RESPONSE_CODE;
@@ -31,7 +33,14 @@ class ErrorController extends Omeka_Controller_AbstractActionController
         if (!$message) {
             $message = Zend_Http_Response::responseCodeAsText($code);
         }
-        $message = array('message' => $message);
+        $data['message'] = $message;
+        
+        // Add errors to response.
+        if ($exception instanceof Omeka_Controller_Exception_Api) {
+            if ($errors = $exception->getErrors()) {
+                $data['errors'] = $errors;
+            }
+        }
         
         try {
             $this->getResponse()->setHttpResponseCode($code);
@@ -39,6 +48,6 @@ class ErrorController extends Omeka_Controller_AbstractActionController
             // The response code was invalid. Set the default.
             $this->getResponse()->setHttpResponseCode(self::DEFAULT_HTTP_RESPONSE_CODE);
         }
-        $this->_helper->json($message);
+        $this->_helper->json($data);
     }
 }

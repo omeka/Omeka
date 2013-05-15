@@ -430,6 +430,23 @@ class Omeka_Db_Table
     }
     
     /**
+     * Check whether a row exists in the table.
+     * 
+     * @param int $id
+     * @return bool
+     */
+    public function exists($id)
+    {
+        $alias = $this->getTableAlias();
+        $select = $this->getSelect()
+            ->reset(Zend_Db_Select::COLUMNS)
+            ->columns('id')
+            ->where("`$alias`.`id` = ?", (int) $id)
+            ->limit(1);
+        return (bool) $this->getDb()->fetchOne($select);
+    }
+    
+    /**
      * Retrieve a select object used to retrieve a count of all the table rows.
      * 
      * @param array $params optional Set of search filters.
