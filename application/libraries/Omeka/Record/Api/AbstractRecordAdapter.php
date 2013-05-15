@@ -52,6 +52,18 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter
     }
     
     /**
+     * Format a date string as an ISO 8601 date, UTC timezone.
+     * 
+     * @param string $date
+     * @return string
+     */
+    public function getDate($date)
+    {
+        $date = new DateTime($date);
+        return $date->setTimezone(new DateTimeZone('UTC'))->format('c');
+    }
+    
+    /**
      * Get representations of element texts belonging to a record.
      * 
      * @param Omeka_Record_AbstractRecord $record

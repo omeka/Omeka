@@ -19,15 +19,10 @@ class Api_File extends Omeka_Record_Api_AbstractRecordAdapter
      */
     public function getRepresentation(Omeka_Record_AbstractRecord $record)
     {
-        // Convert dates to UTC.
-        $added = new DateTime($record->added);
-        $modified = new DateTime($record->modified);
-        $timezone = new DateTimeZone('UTC');
-        
         $representation = array(
             'id' => $record->id,
-            'added' => $added->setTimezone($timezone)->format('c'), 
-            'modified' => $modified->setTimezone($timezone)->format('c'),
+            'added' => $this->getDate($record->added), 
+            'modified' => $this->getDate($record->modified),
             'filename' => $record->filename,
             'authentication' => $record->authentication,
             'has_derivative_image' => (bool) $record->has_derivative_image,
