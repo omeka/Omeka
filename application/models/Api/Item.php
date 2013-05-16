@@ -64,7 +64,7 @@ class Api_Item extends Omeka_Record_Api_AbstractRecordAdapter
     /**
      * Set data to an item.
      * 
-     * @param Item $data
+     * @param Item $record
      * @param mixed $data
      */
     public function setData(Omeka_Record_AbstractRecord $record, $data)
@@ -81,5 +81,6 @@ class Api_Item extends Omeka_Record_Api_AbstractRecordAdapter
         if (isset($data->featured)) {
             $record->featured = $data->featured;
         }
+        $this->setElementTextData($record, $data);
     }
 }

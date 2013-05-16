@@ -66,6 +66,8 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter
     /**
      * Get representations of element texts belonging to a record.
      * 
+     * The record must initialize the ElementText mixin.
+     * 
      * @param Omeka_Record_AbstractRecord $record
      * @return array
      */
@@ -114,5 +116,40 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter
         }
         
         return $representations;
+    }
+    
+    /**
+     * Set element text data to a record.
+     * 
+     * The record must initialize the ElementText mixin.
+     * 
+     * @param Omeka_Record_AbstractRecord $record
+     * @param mixed $data
+     */
+    protected function setElementTextData(Omeka_Record_AbstractRecord $record, $data)
+    {
+        if (!isset($data->element_texts) || !is_array($data->element_texts)) {
+            return;
+        }
+        $elementTexts = array();
+        foreach ($data->element_texts as $et) {
+            if (!is_object($et)) {
+                continue;
+            }
+            $elementText = array();
+            if (isset($et->element_id)) {
+                $elementText['element_id'] = $et->element_id;
+            } elseif (isset($et->element) && isset($et->element->id)) {
+                $elementText['element_id'] = $et->element->id;
+            }
+            if (isset($et->html)) {
+                $elementText['html'] = $et->html;
+            }
+            if (isset($et->text)) {
+                $elementText['text'] = $et->text;
+            }
+            $elementTexts[] = $elementText;
+        }
+        $record->addElementTextsByArray($elementTexts);
     }
 }
