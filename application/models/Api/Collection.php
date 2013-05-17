@@ -31,8 +31,7 @@ class Api_Collection extends Omeka_Record_Api_AbstractRecordAdapter
         $representation['added'] = $this->getDate($record->added);
         $representation['modified'] = $this->getDate($record->modified);
         $representation['items'] = array(
-            'count' => $record->getTable('Item')
-                ->count(array('item_id' => $record->id)),
+            'count' => $record->getTable('Item')->count(array('collection_id' => $record->id)),
             'url' => $this->getResourceUrl("/items?collection={$record->id}"),
         );
         $representation['element_texts'] = $this->getElementTextRepresentations($record);
@@ -43,11 +42,17 @@ class Api_Collection extends Omeka_Record_Api_AbstractRecordAdapter
     /**
      * Set data to a Collection.
      * 
-     * @param Collection $data
+     * @param Collection $record
      * @param mixed $data
      */
     public function setData(Omeka_Record_AbstractRecord $record, $data)
     {
-        
+        if (isset($data->public)) {
+            $record->public = $data->public;
+        }
+        if (isset($data->featured)) {
+            $record->featured = $data->featured;
+        }
+        $this->setElementTextData($record, $data);
     }
 }

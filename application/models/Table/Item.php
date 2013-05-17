@@ -403,56 +403,49 @@ class Table_Item extends Omeka_Db_Table
             switch ($paramName) {
                 case 'user':
                 case 'owner':
+                case 'user_id':
+                case 'owner_id':
                     $this->filterByUser($select, $paramValue);
                     break;
-
                 case 'public':
                     $this->filterByPublic($select, $boolean->filter($paramValue));
                     break;
-
                 case 'featured':
                     $this->filterByFeatured($select, $boolean->filter($paramValue));
                     break;
-
                 case 'collection':
+                case 'collection_id':
                     $this->filterByCollection($select, $paramValue);
                     break;
-
                 case 'type':
                 case 'item_type':
+                case 'item_type_id':
                     $this->filterByItemType($select, $paramValue);
                     break;
-
                 case 'tag':
                 case 'tags':
                     $this->filterByTags($select, $paramValue);
                     break;
-
                 case 'excludeTags':
                     $this->filterByExcludedTags($select, $paramValue);
                     break;
-
                 case 'hasImage':
                     $this->filterByHasDerivativeImage($select, $boolean->filter($paramValue));
                     break;
-
                 case 'range':
                     $this->filterByRange($select, $paramValue);
                     break;
-                
                 case 'added_since':
                     $this->filterBySince($select, $paramValue, 'added');
                     break;
-                
                 case 'modified_since':
                     $this->filterBySince($select, $paramValue, 'modified');
                     break;
             }
         }
-
         $this->filterBySearch($select, $params);
-
-        //If we returning the data itself, we need to group by the item ID
+        
+        // If we returning the data itself, we need to group by the item ID
         $select->group('items.id');
     }
 
