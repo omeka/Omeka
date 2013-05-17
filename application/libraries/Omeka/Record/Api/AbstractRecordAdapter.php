@@ -137,9 +137,7 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter
                 continue;
             }
             $elementText = array();
-            if (isset($et->element_id)) {
-                $elementText['element_id'] = $et->element_id;
-            } elseif (isset($et->element) && isset($et->element->id)) {
+            if (isset($et->element->id)) {
                 $elementText['element_id'] = $et->element->id;
             }
             if (isset($et->html)) {

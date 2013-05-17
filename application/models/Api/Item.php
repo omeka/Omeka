@@ -69,11 +69,11 @@ class Api_Item extends Omeka_Record_Api_AbstractRecordAdapter
      */
     public function setData(Omeka_Record_AbstractRecord $record, $data)
     {
-        if (isset($data->item_type_id)) {
-            $record->item_type_id = $data->item_type_id;
+        if (isset($data->item_type->id)) {
+            $record->item_type_id = $data->item_type->id;
         }
-        if (isset($data->collection_id)) {
-            $record->collection_id = $data->collection_id;
+        if (isset($data->collection->id)) {
+            $record->collection_id = $data->collection->id;
         }
         if (isset($data->public)) {
             $record->public = $data->public;
