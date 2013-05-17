@@ -21,6 +21,7 @@ class Api_File extends Omeka_Record_Api_AbstractRecordAdapter
     {
         $representation = array(
             'id' => $record->id,
+            'url' => $this->getResourceUrl("/files/{$record->id}"),
             'added' => $this->getDate($record->added), 
             'modified' => $this->getDate($record->modified),
             'filename' => $record->filename,
@@ -35,24 +36,22 @@ class Api_File extends Omeka_Record_Api_AbstractRecordAdapter
         );
         
         // Metadata is stored as a JSON string, so make it an array to fit into 
-        // the API response
-        $metadata = json_decode($record->metadata, true);
-        //use ArrayObject to make sure we always get a JSON object, even when empty
-        $representation['metadata'] = new ArrayObject($metadata);
-        $representation['url'] = $this->getResourceUrl("/files/{$record->id}");
+        // the API response. Use ArrayObject to make sure we always get a JSON 
+        // object, even when empty
+        $representation['metadata'] = new ArrayObject(json_decode($record->metadata, true));
         $representation['item'] = array(
             "id" => $record->item_id, 
             "url"=> $this->getResourceUrl("/items/{$record->item_id}"), 
         );
-        
         $representation['element_texts'] = $this->getElementTextRepresentations($record);
+        
         return $representation;
     }
     
     /**
      * Set data to a file.
      * 
-     * @param File $data
+     * @param File $record
      * @param mixed $data
      */
     public function setData(Omeka_Record_AbstractRecord $record, $data)
