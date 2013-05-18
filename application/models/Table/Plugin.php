@@ -13,6 +13,15 @@ class Table_Plugin extends Omeka_Db_Table
 {
     protected $_target = 'Plugin';
     
+    public function applySearchFilters($select, $params)
+    {
+        parent::applySearchFilters($select, $params);
+        if(isset($params['active'])) {
+            $boolean = new Omeka_Filter_Boolean;
+            $select->where("plugins.active = ?", $boolean->filter($params['active']));
+        }
+    }
+    
     public function findAllWithIniFiles()
     {
         // This loops through all the records in the plugins table, and updates the version for each plugin
