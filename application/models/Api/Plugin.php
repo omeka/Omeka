@@ -22,7 +22,7 @@ class Api_Plugin extends Omeka_Record_Api_AbstractRecordAdapter
     {
         $representation = array(
                 'id' => $record->id,
-                'url' => $this->getResourceUrl("/plugins/{$record->id}"),
+                'url' => "/plugins/{$record->id}",
                 'name' => $record->name,
                 'active' => (bool) $record->active,
                 'version' => $record->version
