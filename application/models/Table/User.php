@@ -48,7 +48,8 @@ class Table_User extends Omeka_Db_Table
         
         // Show only users who are active
         if (array_key_exists('active', $params) and $params['active'] !== '') {
-            $select->where('users.active = ?', (int)$params['active']);
+            $boolean = new Omeka_Filter_Boolean;
+            $select->where('users.active = ?', $boolean->filter($params['active']));
         }
     }
 }
