@@ -13,8 +13,8 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
 {
     private $_tagTable;
     private $_joinTable;
-
     private $_type;
+    private $_tagsToSave = array();
     
     public function __construct(Omeka_Record_AbstractRecord $record) {
         parent::__construct($record);
@@ -37,11 +37,27 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
         $this->deleteTaggings();
     }
     
-    /**
-     * Add tags to this record's search text.
-     */
     public function afterSave($args)
     {
+        // Save tag/record relations.
+        $addedTags = array();
+        foreach ($this->_tagsToSave as $tag) {
+            $join = $this->_joinTable->findForRecordAndTag($this->_record, $tag);
+            if (!$join) {
+                $join = new RecordsTags;
+                $addedTags[] = $tag;
+            }
+            $join->tag_id = $tag->id;
+            $join->record_id = $this->_record->id;
+            $join->record_type = $this->_type;
+            $join->save();
+        }
+        if ($added) {
+            $nameForHook = strtolower($this->_type);
+            fire_plugin_hook("add_{$nameForHook}_tag", array('record' => $this->_record, 'added' => $addedTags));
+        }
+        
+        // Add tags to this record's search text.
         foreach ($this->getTags() as $tag) {
             $this->_record->addSearchText($tag->name);
         }
@@ -146,44 +162,26 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
     }
     
     /**
-     * Add tags for the record
+     * Set tags to be saved to the record.
      *
      * @param array|string $tags Either an array of tags or a delimited string
      * @return void
      */    
     public function addTags($tags, $delimiter = null) {
-        // Set the tag_delimiter option if no delimiter was passed.
+        
+        // If no delimiter was passed, set the delimiter.
         if (is_null($delimiter)) {
             $delimiter = get_option('tag_delimiter');
         }
         
-        if (!$this->_record->id) {
-            throw new Omeka_Record_Exception( __('A valid record ID # must be provided when tagging.') );
-        }
-        
+        // If string was passed, build an array of tags.
         if (!is_array($tags)) {
             $tags = $this->_getTagsFromString($tags, $delimiter);
         }
         
-        $added = array();
-        foreach ($tags as $key => $tagName) {
-            $tag = $this->_tagTable->findOrNew(trim($tagName));
-            $join = $this->_joinTable->findForRecordAndTag($this->_record, $tag);
-            if(!$join) {
-                $join = new RecordsTags;
-                $added[] = $tag;                
-            }            
-            
-            $join->tag_id = $tag->id;
-            $join->record_id = $this->_record->id;
-            $join->record_type = $this->_type;
-            $join->save();            
+        foreach ($tags as $tagName) {
+            $this->_tagsToSave[] = $this->_tagTable->findOrNew(trim($tagName));
         }
-        
-        if(count($added) != 0) {
-            $nameForHook = strtolower($this->_type);
-            fire_plugin_hook("add_{$nameForHook}_tag", array('record' => $this->_record, 'added' => $added));
-        }        
     }
 
     /**

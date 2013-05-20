@@ -71,7 +71,7 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter
      * @param Omeka_Record_AbstractRecord $record
      * @return array
      */
-    protected function getElementTextRepresentations(Omeka_Record_AbstractRecord $record)
+    public function getElementTextRepresentations(Omeka_Record_AbstractRecord $record)
     {
         $representations = array();
         
@@ -126,7 +126,7 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter
      * @param Omeka_Record_AbstractRecord $record
      * @param mixed $data
      */
-    protected function setElementTextData(Omeka_Record_AbstractRecord $record, $data)
+    public function setElementTextData(Omeka_Record_AbstractRecord $record, $data)
     {
         if (!isset($data->element_texts) || !is_array($data->element_texts)) {
             return;
@@ -149,5 +149,49 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter
             $elementTexts[] = $elementText;
         }
         $record->addElementTextsByArray($elementTexts);
+    }
+    
+    /**
+     * Get representations of tags belonging to a record.
+     * 
+     * The record must initialize the Tag mixin.
+     * 
+     * @param Omeka_Record_AbstractRecord $record
+     * @return array
+     */
+    public function getTagRepresentations(Omeka_Record_AbstractRecord $record)
+    {
+        $tags = array();
+        foreach ($record->getTags() as $tag) {
+            $tags[] = array(
+                'id' => $tag->id, 
+                'url' => $this->getResourceUrl("/tags/{$tag->id}"), 
+                'name' => $tag->name, 
+            );
+        }
+        return $tags;
+    }
+    
+    /**
+     * Set tag data to a record.
+     * 
+     * The record must initialize the Tag mixin.
+     * 
+     * @param Omeka_Record_AbstractRecord $record
+     * @param mixed $data
+     */
+    public function setTagData(Omeka_Record_AbstractRecord $record, $data)
+    {
+        if (!isset($data->tags) || !is_array($data->tags)) {
+            return;
+        }
+        $tags = array();
+        foreach ($data->tags as $tag) {
+            if (!is_object($tag)) {
+                continue;
+            }
+            $tags[] = $tag->name;
+        }
+        $record->addTags($tags);
     }
 }

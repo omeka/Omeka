@@ -57,6 +57,7 @@ class Api_Item extends Omeka_Record_Api_AbstractRecordAdapter
                 ->count(array('item_id' => $record->id)), 
             'url' => $this->getResourceUrl("/files?item={$record->id}"), 
         );
+        $representation['tags'] = $this->getTagRepresentations($record);
         $representation['element_texts'] = $this->getElementTextRepresentations($record);
         return $representation;
     }
@@ -81,6 +82,7 @@ class Api_Item extends Omeka_Record_Api_AbstractRecordAdapter
         if (isset($data->featured)) {
             $record->featured = $data->featured;
         }
+        $this->setTagData($record, $data);
         $this->setElementTextData($record, $data);
     }
 }
