@@ -98,7 +98,11 @@ class Omeka_Controller_Plugin_Api extends Zend_Controller_Plugin_Abstract
             'record_type' => 'User',
             'actions' => array('index', 'get'),
             'index_params' => array('active', 'role')
-        )
+        ), 
+        'tags' => array(
+            'record_type' => 'Tag', 
+            'actions' => array('index', 'get'), 
+        ), 
     );
     
     /**
