@@ -70,6 +70,10 @@ class ApiController extends Omeka_Controller_AbstractActionController
         $this->_validateRecordType($recordType);
         
         $record = $this->_helper->db->getTable($recordType)->find($apiParams[0]);
+        
+        // The user must have permission to show this record.
+        $this->_validateUser($record, 'show');
+        
         if (!$record) {
             throw new Omeka_Controller_Exception_Api('Invalid record. Record not found.', 404);
         }
@@ -134,24 +138,21 @@ class ApiController extends Omeka_Controller_AbstractActionController
         // Records must have corresponding record adapters.
         $recordAdapterClass = "Api_$recordType";
         if (!class_exists($recordAdapterClass)) {
-           throw new Omeka_Controller_Exception_Api("Invalid record adapter. Record adapter \"$recordAdapterClass\" not found", 404);
+           throw new Omeka_Controller_Exception_Api("Invalid record adapter. Record adapter \"$recordAdapterClass\" not found.", 404);
         }
         if (!in_array('Omeka_Record_Api_AbstractRecordAdapter', class_parents($recordAdapterClass))) {
-           throw new Omeka_Controller_Exception_Api("Invalid record adapter. Record adapter \"$recordAdapterClass\" must extend Omeka_Record_Api_AbstractRecordAdapter", 404);
+           throw new Omeka_Controller_Exception_Api("Invalid record adapter. Record adapter \"$recordAdapterClass\" is invalid", 500);
         }
         
-        // POST, PUT, and DELETE methods using the defualt API controller 
-        // require records to implement Zend_Acl_Resource_Interface to check 
-        // permissions.
-        if (in_array($this->getRequest()->getMethod(), array('POST', 'PUT', 'DELETE')) 
-            && !in_array('Zend_Acl_Resource_Interface', class_implements($recordType))
-        ) {
-            throw new Omeka_Controller_Exception_Api("Invalid record. Record \"$recordType\" must implement Zend_Acl_Resource_Interface", 404);
-        }
+
     }
     
     /**
      * Validate a user against a privilege.
+     * 
+     * For GET requests, assume that records without an ACL resource do not 
+     * require a permission check. Note that for POST, PUT, and DELETE, all 
+     * records must define an ACL resource.
      * 
      * @param Omeka_Record_AbstractRecord $record
      * @param string $privilege
@@ -161,8 +162,14 @@ class ApiController extends Omeka_Controller_AbstractActionController
         $bootstrap = Zend_Registry::get('bootstrap');
         $currentUser = $bootstrap->getResource('CurrentUser');
         $acl = $bootstrap->getResource('Acl');
-        if (!$acl->isAllowed($currentUser, $record, $privilege)) {
-            throw new Omeka_Controller_Exception_Api('Permission denied.', 403);
+        
+        if ($record instanceof Zend_Acl_Resource_Interface) {
+            if (!$acl->isAllowed($currentUser, $record, $privilege)) {
+                throw new Omeka_Controller_Exception_Api('Permission denied.', 403);
+            }
+        } elseif (in_array($this->getRequest()->getMethod(), array('POST', 'PUT', 'DELETE'))) {
+            $recordType = get_class($recordType);
+            throw new Omeka_Controller_Exception_Api("Invalid record. Record \"$recordType\" must define an ACL resource.", 500);
         }
     }
     

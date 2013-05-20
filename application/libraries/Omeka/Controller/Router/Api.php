@@ -104,7 +104,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
         }
         $action = $this->_getAction($request->getMethod(), $params, $resource, $apiResources);
         if (false === $action) {
-            throw new Omeka_Controller_Exception_Api('Invalid action', 404);
+            throw new Omeka_Controller_Exception_Api('Invalid action. Method not allowed.', 405);
         }
         
         // Validate the GET parameters.
