@@ -19,22 +19,23 @@ class Api_Collection extends Omeka_Record_Api_AbstractRecordAdapter
      * @return array 
      */
     public function getRepresentation(Omeka_Record_AbstractRecord $record) {
-        $representation = array();
-        $representation['id'] = $record->id;
-        $representation['url'] = $this->getResourceUrl("/collections/{$record->id}");
-        $representation['owner'] = array(
-            'id'  => $record->owner_id,
-            'url' => $this->getResourceUrl("/users/{$record->owner_id}"),
+        $representation = array(
+            'id' => $record->id, 
+            'url' => $this->getResourceUrl("/collections/{$record->id}"), 
+            'public' => (bool) $record->public, 
+            'featured' => (bool) $record->featured, 
+            'added' => $this->getDate($record->added), 
+            'modified' => $this->getDate($record->modified), 
+            'owner' => array(
+                'id'  => $record->owner_id,
+                'url' => $this->getResourceUrl("/users/{$record->owner_id}"),
+            ), 
+            'items' => array(
+                'count' => $record->getTable('Item')->count(array('collection_id' => $record->id)),
+                'url' => $this->getResourceUrl("/items?collection={$record->id}"), 
+            ), 
+            'element_texts' => $this->getElementTextRepresentations($record), 
         );
-        $representation['public'] = (bool) $record->public;
-        $representation['featured'] = (bool) $record->featured;
-        $representation['added'] = $this->getDate($record->added);
-        $representation['modified'] = $this->getDate($record->modified);
-        $representation['items'] = array(
-            'count' => $record->getTable('Item')->count(array('collection_id' => $record->id)),
-            'url' => $this->getResourceUrl("/items?collection={$record->id}"),
-        );
-        $representation['element_texts'] = $this->getElementTextRepresentations($record);
         
         return $representation;
     }

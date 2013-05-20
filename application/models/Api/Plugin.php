@@ -18,15 +18,15 @@ class Api_Plugin extends Omeka_Record_Api_AbstractRecordAdapter
      * @param Plugin $record
      * @return array
      */
-    public function getRepresentation(Omeka_Record_AbstractRecord $record)    
+    public function getRepresentation(Omeka_Record_AbstractRecord $record)
     {
         $representation = array(
-                'id' => $record->id,
-                'url' => "/plugins/{$record->id}",
-                'name' => $record->name,
-                'active' => (bool) $record->active,
-                'version' => $record->version
-                );
+            'id' => $record->id,
+            'url' => $this->getResourceUrl("/plugins/{$record->id}"),
+            'name' => $record->name,
+            'active' => (bool) $record->active,
+            'version' => $record->version
+        );
         return $representation;
     }
     
@@ -38,6 +38,6 @@ class Api_Plugin extends Omeka_Record_Api_AbstractRecordAdapter
      */
     public function setData(Omeka_Record_AbstractRecord $record, $data)
     {
-    
-    }    
+        
+    }
 }

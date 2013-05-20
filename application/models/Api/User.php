@@ -21,14 +21,14 @@ class Api_User extends Omeka_Record_Api_AbstractRecordAdapter
     public function getRepresentation(Omeka_Record_AbstractRecord $record)    
     {
         $representation = array(
-                'id' => $record->id,
-                'url' => "/users/{$record->id}",
-                'username' => $record->username,
-                'name' => $record->name,
-                'active' => (bool) $record->active,
-                'email' => $record->email,
-                'role' => $record->role
-                );
+            'id' => $record->id,
+            'url' => $this->getResourceUrl("/users/{$record->id}"),
+            'username' => $record->username,
+            'name' => $record->name,
+            'active' => (bool) $record->active,
+            'email' => $record->email,
+            'role' => $record->role, 
+        );
         return $representation;
     }
     

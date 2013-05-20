@@ -21,20 +21,20 @@ class Api_Element extends Omeka_Record_Api_AbstractRecordAdapter
      */
     public function getRepresentation(Omeka_Record_AbstractRecord $record)
     {
-        $representation = array();
-        $representation['id'] = $record->id;
-        $representation['url'] = $this->getResourceUrl("/elements/{$record->id}");
-        $representation['element_set'] = array(
-            'id' => $record->element_set_id, 
-            'url'=> $this->getResourceUrl("/element_sets/{$record->element_set_id}"), 
-        );
-        $representation['order'] = $record->order;
-        $representation['name'] = $record->name;
-        $representation['description'] = $record->description;
-        $representation['comment'] = $record->comment;
-        $representation['element_texts'] = array(
-            'count' => $record->getTable('ElementText')->count(array('element_id'=>$record->id)),
-            'url' => $this->getResourceUrl("/element_texts?element={$record->id}"), 
+        $representation = array(
+            'id' => $record->id, 
+            'url' => $this->getResourceUrl("/elements/{$record->id}"), 
+            'name' => $record->name, 
+            'order' => $record->order, 
+            'description' => $record->description, 
+            'comment' => $record->comment, 
+            'element_set' => array(
+                'id' => $record->element_set_id, 
+                'url'=> $this->getResourceUrl("/element_sets/{$record->element_set_id}"), 
+            ), 
+            'element_texts' => array(
+                'count' => $record->getTable('ElementText')->count(array('element_id' => $record->id)),
+                'url' => $this->getResourceUrl("/element_texts?element={$record->id}"), 
         );
         return $representation;
     }

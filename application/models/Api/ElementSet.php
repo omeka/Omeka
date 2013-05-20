@@ -10,15 +10,16 @@ class API_ElementSet extends Omeka_Record_Api_AbstractRecordAdapter
      */
     public function getRepresentation(Omeka_Record_AbstractRecord $record)    
     {
-        $representation = array();
-        $representation['id'] = $record->id;
-        $representation['url'] = $this->getResourceUrl("/element_sets/{$record->id}");
-        $representation['name'] = $record->name;
-        $representation['description'] = $record->description;
-        $representation['record_type'] = $record->record_type;
-        $representation['elements'] = array(
-            'count' => $record->getTable('Element')->count(array('element_set'=> $record->id)),
-            'url' => $this->getResourceUrl("/elements?element_set={$record->id}"), 
+        $representation = array(
+            'id' => $record->id, 
+            'url' => $this->getResourceUrl("/element_sets/{$record->id}"), 
+            'name' => $record->name, 
+            'description' => $record->description, 
+            'record_type' => $record->record_type, 
+            'elements' => array(
+                'count' => $record->getTable('Element')->count(array('element_set' => $record->id)),
+                'url' => $this->getResourceUrl("/elements?element_set={$record->id}"), 
+            ), 
         );
         return $representation;
     }
