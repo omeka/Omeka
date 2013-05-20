@@ -54,6 +54,11 @@ $sortLinks[__('Date Added')] = 'added';
 
 <?php echo pagination_links(); ?>
 
+<div id="outputs">
+    <span class="outputs-label"><?php echo __('Output Formats'); ?></span>
+    <?php echo output_format_list(false); ?>
+</div>
+
 <?php fire_plugin_hook('public_items_browse', array('items'=>$items, 'view' => $this)); ?>
 
 <?php echo foot(); ?>
