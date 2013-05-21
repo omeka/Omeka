@@ -11,7 +11,7 @@
  * 
  * @package Omeka\Record
  */
-class Element extends Omeka_Record_AbstractRecord
+class Element extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Interface
 {
     /**
      * ID of the ElementSet this Element belongs to.
@@ -174,7 +174,11 @@ class Element extends Omeka_Record_AbstractRecord
         if (empty($this->name)) {
             $this->addError('name', __('The element name must not be empty.'));
         }
-
+        
+        if (!$this->getDb()->getTable('ElementSet')->exists($this->element_set_id)) {
+            $this->addError('element_set_id', __('Invalid element set.'));
+        }
+        
         // Check if the element set / element name combination already exists.
         if ($this->_nameIsInSet($this->name, $this->element_set_id)) {
             $elementSetName = $this->getElementSet()->name;
@@ -222,12 +226,24 @@ class Element extends Omeka_Record_AbstractRecord
     private function _nameIsInSet($elementName, $elementSetId)
     {
         $db = $this->getDb();
-        $sql = "SELECT COUNT(e.id) FROM $db->Element e WHERE e.name = ? AND e.element_set_id = ?";
+        $sql = "SELECT COUNT(id) FROM $db->Element WHERE name = ? AND element_set_id = ?";
         $params = array($elementName, $elementSetId);
         if ($this->exists()) {
-            $sql .= " AND e.id != ?";
+            $sql .= " AND id != ?";
             $params[] = $this->id;
         }
-        return (boolean)$db->fetchOne($sql, $params);
+        return (bool) $db->fetchOne($sql, $params);
+    }
+    
+    /**
+     * Identify Element records as relating to the Elements ACL resource.
+     *
+     * Required by Zend_Acl_Resource_Interface.
+     *
+     * @return string
+     */
+    public function getResourceId()
+    {
+        return 'Elements';
     }
 }

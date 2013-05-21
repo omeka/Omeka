@@ -52,7 +52,8 @@ class Omeka_Application_Resource_Acl extends Zend_Application_Resource_ResourceA
         
         $resources = array('Items', 'Collections', 'ElementSets', 'Files', 'Plugins', 
                            'Settings', 'Security', 'Upgrade', 'Tags', 'Themes', 
-                           'SystemInfo', 'ItemTypes', 'Users', 'Search', 'Appearance');
+                           'SystemInfo', 'ItemTypes', 'Users', 'Search', 'Appearance', 
+                           'Elements');
         foreach ($resources as $resource) {
             $acl->addResource($resource);
         }

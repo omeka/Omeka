@@ -177,20 +177,13 @@ class Table_Element extends Omeka_Db_Table
             $select->where('item_types_elements.item_type_id = ? ', (int)$params['item_type']);            
         }
         
-        //API params
-        //@TODO: see if this calls for a redo of this method using parent's method, and/or making more consistent?
-        //easy to imagine lots of fallout from doing the above todo
-        if(array_key_exists('name', $params)) {
-            $select->where("name = ?", $params['name']);
+        // REST API params.
+        if (array_key_exists('name', $params)) {
+            $select->where("elements.name = ?", $params['name']);
         }
-        
-        if(array_key_exists('element_set', $params)) {
-            $select->where("element_set_id = ?", $params['element_set']);
+        if (array_key_exists('element_set', $params)) {
+            $select->where("elements.element_set_id = ?", $params['element_set']);
         }
-
-        if(array_key_exists('order', $params)) {
-            $select->where("elements.order = ?", $params['order']);
-        }        
     }
     
     /**
