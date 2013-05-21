@@ -168,7 +168,7 @@ class ApiController extends Omeka_Controller_AbstractActionController
                 throw new Omeka_Controller_Exception_Api('Permission denied.', 403);
             }
         } elseif (in_array($this->getRequest()->getMethod(), array('POST', 'PUT', 'DELETE'))) {
-            $recordType = get_class($recordType);
+            $recordType = get_class($record);
             throw new Omeka_Controller_Exception_Api("Invalid record. Record \"$recordType\" must define an ACL resource.", 500);
         }
     }
