@@ -10,18 +10,34 @@
  * @package Omeka\Db\Table
  */
 class Table_Collection extends Omeka_Db_Table
-{    
+{
     public function applySearchFilters($select, $params)
     {
-        if(array_key_exists('public', $params)) {
-            $this->filterByPublic($select, $params['public']);
-        }
-        
-        if(array_key_exists('featured', $params)) {
-            $this->filterByFeatured($select, $params['featured']);
+        $boolean = new Omeka_Filter_Boolean;
+        foreach ($params as $key => $value) {
+            switch ($key) {
+                case 'user':
+                case 'owner':
+                case 'user_id':
+                case 'owner_id':
+                    $this->filterByUser($select, $value, 'owner_id');
+                    break;
+                case 'public':
+                    $this->filterByPublic($select, $boolean->filter($value));
+                    break;
+                case 'featured':
+                    $this->filterByFeatured($select, $boolean->filter($value));
+                    break;
+                case 'added_since':
+                    $this->filterBySince($select, $value, 'added');
+                    break;
+                case 'modified_since':
+                    $this->filterBySince($select, $value, 'modified');
+                    break;
+            }
         }
     }
-
+    
     public function findPairsForSelectForm(array $options = array())
     {
         $db = $this->getDb();
@@ -84,44 +100,6 @@ class Table_Collection extends Omeka_Db_Table
     {
         $select = $this->getSelect()->where('collections.featured = 1')->order('RAND()')->limit(1);        
         return $this->fetchObject($select);
-    }    
-    
-    /**
-     * Apply a filter to the collections based on whether or not they are public
-     * 
-     * @param Zend_Db_Select
-     * @param boolean Whether or not to retrieve only public collections
-     * @return void
-     */
-    public function filterByPublic($select, $isPublic)
-    {         
-        $isPublic = (bool) $isPublic; // this makes sure that empty strings and unset parameters are false
-
-        //Force a preview of the public collections
-        if ($isPublic) {
-            $select->where('collections.public = 1');
-        } else {
-            $select->where('collections.public = 0');
-        }
-    }
-    
-    /**
-     * Apply a filter to the collections based on whether or not they are featured
-     * 
-     * @param Zend_Db_Select
-     * @param boolean Whether or not to retrieve only public collections
-     * @return void
-     */
-    public function filterByFeatured($select, $isFeatured)
-    {
-        $isFeatured = (bool) $isFeatured; // this make sure that empty strings and unset parameters are false
-        
-        //filter items based on featured (only value of 'true' will return featured collections)
-        if ($isFeatured) {
-            $select->where('collections.featured = 1');
-        } else {
-            $select->where('collections.featured = 0');
-        }     
     }
     
     /**

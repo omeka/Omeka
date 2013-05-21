@@ -176,34 +176,7 @@ class Table_Item extends Omeka_Db_Table
             $advancedIndex++;
         }
     }
-
-    /**
-     * Apply a filter to the items based on whether or not they should be public
-     *
-     * @param Zend_Db_Select
-     * @param boolean Whether or not to retrieve only public items
-     * @return void
-     */
-    public function filterByPublic($select, $isPublic)
-    {
-        //Force a preview of the public items
-        if ($isPublic) {
-            $select->where('items.public = 1');
-        } else {
-            $select->where('items.public = 0');
-        }
-    }
-
-    public function filterByFeatured($select, $isFeatured)
-    {
-        //filter items based on featured (only value of 'true' will return featured items)
-        if ($isFeatured) {
-            $select->where('items.featured = 1');
-        } else {
-            $select->where('items.featured = 0');
-        }
-    }
-
+    
     /**
      * Filter the SELECT statement based on an item's collection
      *
@@ -298,18 +271,6 @@ class Table_Item extends Omeka_Db_Table
     }
 
     /**
-     * Filter the SELECT based on the user who owns the item
-     *
-     * @param Zend_Db_Select
-     * @param integer $userId  ID of the User to filter by
-     * @return void
-     */
-    public function filterByUser($select, $userId, $isUser=true)
-    {
-        $select->where('items.owner_id = ?', $userId);
-    }
-
-    /**
      * Filter SELECT statement based on items that are not tagged with a specific
      * set of tags
      *
@@ -360,86 +321,57 @@ class Table_Item extends Omeka_Db_Table
     }
     
     /**
-     * Filter select object by date since.
-     * 
-     * @param Zend_Db_Select $select
-     * @param string $dateSince ISO 8601 formatted date
-     * @param string $dateField "added" or "modified"
-     */
-    public function filterBySince($select, $dateSince, $dateField)
-    {
-        // Reject invalid date fields.
-        if (!in_array($dateField, array('added', 'modified'))) {
-            return;
-        }
-        
-        // Accept an ISO 8601 date, set the tiemzone to the server's default 
-        // timezone, and format the date to be MySQL timestamp compatible.
-        $date = new Zend_Date($dateSince, Zend_Date::ISO_8601);
-        $date->setTimezone(date_default_timezone_get());
-        $date = $date->get('yyyy-MM-dd HH:mm:ss');
-        
-        // Select all dates that are greater than the passed date.
-        $select->where("items.$dateField > ?", $date);
-    }
-
-    /**
-     * Possible options: 'public','user','featured','collection','type','tag',
-     * 'excludeTags', 'search', 'range', 'advanced', 'hasImage',
-     *
      * @param Omeka_Db_Select
      * @param array
      * @return void
      */
     public function applySearchFilters($select, $params)
     {
-        foreach ($params as $paramName => $paramValue) {
+        $boolean = new Omeka_Filter_Boolean;
+        foreach ($params as $key => $value) {
             if ($paramValue === null || (is_string($paramValue) && trim($paramValue) == '')) {
                 continue;
             }
-
-            $boolean = new Omeka_Filter_Boolean;
-
-            switch ($paramName) {
+            switch ($key) {
                 case 'user':
                 case 'owner':
                 case 'user_id':
                 case 'owner_id':
-                    $this->filterByUser($select, $paramValue);
+                    $this->filterByUser($select, $value, 'owner_id');
                     break;
                 case 'public':
-                    $this->filterByPublic($select, $boolean->filter($paramValue));
+                    $this->filterByPublic($select, $boolean->filter($value));
                     break;
                 case 'featured':
-                    $this->filterByFeatured($select, $boolean->filter($paramValue));
+                    $this->filterByFeatured($select, $boolean->filter($value));
                     break;
                 case 'collection':
                 case 'collection_id':
-                    $this->filterByCollection($select, $paramValue);
+                    $this->filterByCollection($select, $value);
                     break;
                 case 'type':
                 case 'item_type':
                 case 'item_type_id':
-                    $this->filterByItemType($select, $paramValue);
+                    $this->filterByItemType($select, $value);
                     break;
                 case 'tag':
                 case 'tags':
-                    $this->filterByTags($select, $paramValue);
+                    $this->filterByTags($select, $value);
                     break;
                 case 'excludeTags':
-                    $this->filterByExcludedTags($select, $paramValue);
+                    $this->filterByExcludedTags($select, $value);
                     break;
                 case 'hasImage':
-                    $this->filterByHasDerivativeImage($select, $boolean->filter($paramValue));
+                    $this->filterByHasDerivativeImage($select, $boolean->filter($value));
                     break;
                 case 'range':
-                    $this->filterByRange($select, $paramValue);
+                    $this->filterByRange($select, $value);
                     break;
                 case 'added_since':
-                    $this->filterBySince($select, $paramValue, 'added');
+                    $this->filterBySince($select, $value, 'added');
                     break;
                 case 'modified_since':
-                    $this->filterBySince($select, $paramValue, 'modified');
+                    $this->filterBySince($select, $value, 'modified');
                     break;
             }
         }
