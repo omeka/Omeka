@@ -1,6 +1,15 @@
 <?php
+/**
+ * Omeka
+ * 
+ * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
+ */
 
-class API_ElementSet extends Omeka_Record_Api_AbstractRecordAdapter
+/**
+ * @package Omeka\Record\Api
+ */
+class Api_ElementSet extends Omeka_Record_Api_AbstractRecordAdapter
 {
     /**
      * Get the REST API representation for an element set.
@@ -8,7 +17,7 @@ class API_ElementSet extends Omeka_Record_Api_AbstractRecordAdapter
      * @param ElementSet $record
      * @return array
      */
-    public function getRepresentation(Omeka_Record_AbstractRecord $record)    
+    public function getRepresentation(Omeka_Record_AbstractRecord $record)
     {
         $representation = array(
             'id' => $record->id, 
@@ -24,16 +33,22 @@ class API_ElementSet extends Omeka_Record_Api_AbstractRecordAdapter
         return $representation;
     }
     
-    
-    
     /**
      * Set data to an ElementSet.
      *
      * @param ElementSet $data
      * @param array $data
      */
-    public function setData(Omeka_Record_AbstractRecord $record, array $data)
+    public function setData(Omeka_Record_AbstractRecord $record, $data)
     {
-        
+        if (isset($data->record_type)) {
+            $record->record_type = $data->record_type;
+        }
+        if (isset($data->name)) {
+            $record->name = $data->name;
+        }
+        if (isset($data->description)) {
+            $record->description = $data->description;
+        }
     }
 }

@@ -11,7 +11,7 @@
  * 
  * @package Omeka\Record
  */
-class ElementSet extends Omeka_Record_AbstractRecord
+class ElementSet extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Interface
 {
     /**
      * Type of record this set applies to.
@@ -149,5 +149,17 @@ class ElementSet extends Omeka_Record_AbstractRecord
         if (empty($this->name)) {
             $this->addError('Name', __('Name of element set must not be empty.'));
         }
+    }
+    
+    /**
+     * Identify ElementSet records as relating to the ElementSets ACL resource.
+     *
+     * Required by Zend_Acl_Resource_Interface.
+     *
+     * @return string
+     */
+    public function getResourceId()
+    {
+        return 'ElementSets';
     }
 }
