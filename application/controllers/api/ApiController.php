@@ -70,13 +70,12 @@ class ApiController extends Omeka_Controller_AbstractActionController
         $this->_validateRecordType($recordType);
         
         $record = $this->_helper->db->getTable($recordType)->find($apiParams[0]);
-        
-        // The user must have permission to show this record.
-        $this->_validateUser($record, 'show');
-        
         if (!$record) {
             throw new Omeka_Controller_Exception_Api('Invalid record. Record not found.', 404);
         }
+        
+        // The user must have permission to show this record.
+        $this->_validateUser($record, 'show');
         
         $data = $this->_getRepresentation($this->_getRecordAdapter($recordType), $record, $resource);
         $this->_helper->jsonApi($data);
