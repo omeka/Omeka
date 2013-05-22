@@ -329,7 +329,7 @@ class Table_Item extends Omeka_Db_Table
     {
         $boolean = new Omeka_Filter_Boolean;
         foreach ($params as $key => $value) {
-            if ($paramValue === null || (is_string($paramValue) && trim($paramValue) == '')) {
+            if ($value === null || (is_string($value) && trim($value) == '')) {
                 continue;
             }
             switch ($key) {
