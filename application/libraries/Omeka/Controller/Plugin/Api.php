@@ -43,10 +43,6 @@ class Omeka_Controller_Plugin_Api extends Zend_Controller_Plugin_Abstract
      * a "record_type". Remove "actions" that are not wanted or not implemented.
      */
     protected $_apiResources = array(
-        'version' => array(
-            'controller' => 'version', 
-            'actions' => array('index')
-        ), 
         'resources' => array(
             'controller' => 'resources', 
             'actions' => array('index')
