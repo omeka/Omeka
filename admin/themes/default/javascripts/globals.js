@@ -69,6 +69,22 @@ if (!Omeka) {
             });
         }
     };
+    
+    Omeka.stickyNav = function() {
+        var $nav    = $("#content-nav"),
+            $window = $(window);
+        if ($window.height() - 50 < $nav.height()) {
+            $nav.addClass("unfix");
+        }
+        $window.resize( function() {
+            if ($window.height() - 50 < $nav.height()) {
+                $nav.addClass("unfix");
+            } else {
+                $nav.removeClass("unfix");
+            }
+        });
+    };
+    
 
     Omeka.showAdvancedForm = function () {
         var advancedForm = $('#advanced-form');
@@ -109,6 +125,7 @@ if (!Omeka) {
     Omeka.readyCallbacks = [
         [Omeka.deleteConfirm, null],
         [Omeka.saveScroll, null],
+        [Omeka.stickyNav, null],
         [Omeka.showAdvancedForm, null]
     ];
 })(jQuery);
