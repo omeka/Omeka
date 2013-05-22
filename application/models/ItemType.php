@@ -14,7 +14,7 @@
  * 
  * @package Omeka\Record
  */
-class ItemType extends Omeka_Record_AbstractRecord
+class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Interface
 {
     /**
      * Minimum length of an ItemType name.
@@ -381,5 +381,17 @@ class ItemType extends Omeka_Record_AbstractRecord
     {
         // Element should belong to the 'Item Type' element set.
         return get_db()->getTable('ElementSet')->findBySql('name = ?', array(ElementSet::ITEM_TYPE_NAME), true);
+    }
+    
+    /**
+     * Identify ItemType records as relating to the ItemTypes ACL resource.
+     *
+     * Required by Zend_Acl_Resource_Interface.
+     *
+     * @return string
+     */
+    public function getResourceId()
+    {
+        return 'ItemTypes';
     }
 }

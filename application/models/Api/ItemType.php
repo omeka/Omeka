@@ -29,6 +29,10 @@ class Api_ItemType extends Omeka_Record_Api_AbstractRecordAdapter
                 'count' => $record->getTable('Element')->count(array('item_type' => $record->id)),
                 'url' => $this->getResourceUrl("/elements/?item_type={$record->id}"), 
             ), 
+            'items' => array(
+                'count' => $record->getTable('Item')->count(array('item_type_id' => $record->id)), 
+                'url' => $this->getResourceUrl("/items/?item_type={$record->id}"), 
+            ), 
         );
         return $representation;
     } 
@@ -41,6 +45,21 @@ class Api_ItemType extends Omeka_Record_Api_AbstractRecordAdapter
      */
     public function setData(Omeka_Record_AbstractRecord $record, $data)
     {
-        
+        if (isset($data->name)) {
+            $record->name = $data->name;
+        }
+        if (isset($data->description)) {
+            $record->description = $data->description;
+        }
+        if (isset($data->elements) && is_array($data->elements)) {
+            $elements = array();
+            foreach ($data->elements as $element) {
+                if (!is_object($element)) {
+                    continue;
+                }
+                $elements[] = $record->getTable('Element')->find($element->id);
+            }
+            $record->addElements($elements);
+        }
     }
 }
