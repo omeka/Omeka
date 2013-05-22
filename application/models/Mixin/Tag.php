@@ -52,7 +52,7 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
             $join->record_type = $this->_type;
             $join->save();
         }
-        if ($added) {
+        if ($addedTags) {
             $nameForHook = strtolower($this->_type);
             fire_plugin_hook("add_{$nameForHook}_tag", array('record' => $this->_record, 'added' => $addedTags));
         }
