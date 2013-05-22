@@ -33,6 +33,7 @@ class Omeka_Helpers_GetRecordsTagTest extends Omeka_Test_AppTestCase
         }
                 
         $item->addTags($tagStrings);
+        $item->save();
     }
     
     public function testGetTagsByDefaultAndWithNoTags()

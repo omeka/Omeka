@@ -45,13 +45,13 @@ class Models_Table_CollectionTest extends PHPUnit_Framework_TestCase
     
     public function testSearchFilters()
     {
-        $publicSelect = new Zend_Db_Select($this->dbAdapter);
+        $publicSelect = new Omeka_Db_Select($this->dbAdapter);
         $this->table->applySearchFilters($publicSelect, array('public' => true));
-        $this->assertContains("(collections.public = 1)", $publicSelect->getPart('where'));
+        $this->assertContains("(`collections`.`public` = 1)", $publicSelect->getPart('where'));
         
-        $featuredSelect = new Zend_Db_Select($this->dbAdapter);
+        $featuredSelect = new Omeka_Db_Select($this->dbAdapter);
         $this->table->applySearchFilters($featuredSelect, array('featured' => true));
-        $this->assertContains("(collections.featured = 1)", $featuredSelect->getPart('where'));
+        $this->assertContains("(`collections`.`featured` = 1)", $featuredSelect->getPart('where'));
     }
     
     public function testFindRandomFeatured()

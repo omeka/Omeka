@@ -104,7 +104,6 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
             'items' => array('2', '3'),
             'metadata'  => array(
                 'item_type_id' => 1,
-                'collection_id' => 1,
                 'tags'  => 'lorem,ipsum,dolor'
             ),
         );
@@ -190,7 +189,6 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
             $item = $this->db->getTable('Item')->find($id);
             $this->assertTrue($item->isPublic());
             $this->assertTrue($item->isFeatured());
-            $this->assertEquals($item->collection_id, '1');
             $this->assertEquals($item->item_type_id, '1');
             $this->assertEquals(3, count($item->getTags()));
         }
@@ -219,7 +217,6 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
             $item = $this->db->getTable('Item')->find($id);
             $this->assertTrue($item->isPublic());
             $this->assertTrue($item->isFeatured());
-            $this->assertEquals($item->collection_id, '1');
             $this->assertEquals($item->item_type_id, '1');
             $this->assertEquals(3, count($item->getTags()));
         }
@@ -243,7 +240,6 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
             'items' => $itemIds,
             'metadata'  => array(
                 'item_type_id' => 1,
-                'collection_id' => 1,
                 'tags'  => 'lorem,ipsum,dolor'
             ),
             'batch_edit_hash' => $hash->getHash()
@@ -255,7 +251,6 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
 
         foreach ($itemIds as $id) {
             $item = $this->db->getTable('Item')->find($id);
-            $this->assertEquals($item->collection_id, '1');
             $this->assertEquals($item->item_type_id, '1');
             $this->assertEquals(3, count($item->getTags()));
         }
@@ -435,7 +430,6 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
                     'public' => 1,
                     'featured' => 1,
                     'item_type_id' => 1,
-                    'collection_id' => 1,
                     'tags'  => 'lorem,ipsum,dolor'
                 ),
                 'batch_edit_hash' => $hash->getHash()

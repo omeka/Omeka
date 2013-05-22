@@ -51,12 +51,12 @@ class Models_Table_ItemTest extends PHPUnit_Framework_TestCase
 		// Test public filter
 		$publicSelect = $this->table->getSelect();
         $this->table->applySearchFilters($publicSelect, array('public' => true));
-        $this->assertContains("(items.public = 1)", $publicSelect->getPart('where'));
+        $this->assertContains("(`items`.`public` = 1)", $publicSelect->getPart('where'));
         
 		// Test feature filter
         $featuredSelect = $this->table->getSelect();
         $this->table->applySearchFilters($featuredSelect, array('featured' => true));
-        $this->assertContains("(items.featured = 1)", $featuredSelect->getPart('where'));
+        $this->assertContains("(`items`.`featured` = 1)", $featuredSelect->getPart('where'));
 
 		// Test type filter
 		$typeSelect = $this->table->getSelect();
