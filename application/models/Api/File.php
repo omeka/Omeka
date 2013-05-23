@@ -33,15 +33,11 @@ class Api_File extends Omeka_Record_Api_AbstractRecordAdapter
             'size' => $record->size,
             'stored' => (bool) $record->stored,
             'type_os' => $record->type_os, 
+            'metadata' => json_decode($record->metadata, true) ,
         );
-        
-        // Metadata is stored as a JSON string, so make it an array to fit into 
-        // the API response. Use ArrayObject to make sure we always get a JSON 
-        // object, even when empty
-        $representation['metadata'] = new ArrayObject(json_decode($record->metadata, true));
         $representation['item'] = array(
-            "id" => $record->item_id, 
-            "url"=> $this->getResourceUrl("/items/{$record->item_id}"), 
+            'id' => $record->item_id, 
+            'url'=> $this->getResourceUrl("/items/{$record->item_id}"), 
         );
         $representation['element_texts'] = $this->getElementTextRepresentations($record);
         
@@ -56,6 +52,8 @@ class Api_File extends Omeka_Record_Api_AbstractRecordAdapter
      */
     public function setData(Omeka_Record_AbstractRecord $record, $data)
     {
-        
+        if (isset($data->order)) {
+            $record->order = $data->order;
+        }
     }
 }

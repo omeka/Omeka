@@ -142,8 +142,6 @@ class ApiController extends Omeka_Controller_AbstractActionController
         if (!in_array('Omeka_Record_Api_AbstractRecordAdapter', class_parents($recordAdapterClass))) {
            throw new Omeka_Controller_Exception_Api("Invalid record adapter. Record adapter \"$recordAdapterClass\" is invalid", 500);
         }
-        
-
     }
     
     /**
