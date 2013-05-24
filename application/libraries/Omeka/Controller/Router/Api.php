@@ -209,6 +209,11 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
             $action = $params ? 'get' : 'index';
         }
         
+        // POST method must not have parameters.
+        if ($params && 'post' == $action) {
+            return false;
+        }
+        
         // PUT and DELETE methods require parameters.
         if (!$params && in_array($action, array('put', 'delete'))) {
             return false;
