@@ -55,5 +55,6 @@ class Api_File extends Omeka_Record_Api_AbstractRecordAdapter
         if (isset($data->order)) {
             $record->order = $data->order;
         }
+        $this->setElementTextData($record, $data);
     }
 }
