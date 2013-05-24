@@ -30,6 +30,14 @@ class FilesController extends ApiController
      */
     public function postAction()
     {
+        // To avoid race conditions when saving the file record, the default job 
+        // dispatcher must be synchronous. Otherwise the data added by the api 
+        // adapter may be overwritten by the asynchronous job process.
+        $defaultDispatcher = Zend_Registry::get('bootstrap')->config->jobs->dispatcher->default;
+        if ('Omeka_Job_Dispatcher_Adapter_Synchronous' != $defaultDispatcher) {
+            throw new Omeka_Controller_Exception_Api('Invalid request. The default job dispatcher must be synchronous.', 404);
+        }
+        
         // Check for valid file.
         if (!isset($_FILES[self::FILE_KEY]['name']) || is_array($_FILES[self::FILE_KEY]['name'])) {
             throw new Omeka_Controller_Exception_Api('Invalid request. Exactly one file must be uploaded per request.', 404);
@@ -61,7 +69,7 @@ class FilesController extends ApiController
         $builder = new Builder_Item($db);
         $builder->setRecord($item);
         $files = $builder->addFiles('Upload', self::FILE_KEY);
-        $record = $files[0];
+        $record = $this->_helper->db->getTable('File')->find($files[0]->id);
         
         // Set the POST data to the record using the record adapter.
         $this->_getRecordAdapter('File')->setData($record, $data);
