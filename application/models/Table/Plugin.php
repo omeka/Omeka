@@ -15,10 +15,17 @@ class Table_Plugin extends Omeka_Db_Table
     
     public function applySearchFilters($select, $params)
     {
-        parent::applySearchFilters($select, $params);
-        if(isset($params['active'])) {
+        $alias = $this->getTableAlias();
+        if (isset($params['name'])) {
+            $select->where("`$alias`.`name` = ?", $params['name']);
+        }
+        if (isset($params['active'])) {
             $boolean = new Omeka_Filter_Boolean;
-            $select->where("plugins.active = ?", $boolean->filter($params['active']));
+            $select->where("`$alias`.`active` = ?", $boolean->filter($params['active']));
+        }
+        if (isset($params['version'])) {
+            $boolean = new Omeka_Filter_Boolean;
+            $select->where("`$alias`.`version` = ?", $params['version']);
         }
     }
     
