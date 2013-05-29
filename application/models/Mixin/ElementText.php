@@ -69,6 +69,14 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
     protected $_recordsAreLoaded = false;
     
     /**
+     * Flag to indicate whether elements added to this save will replace 
+     * existing element texts, not add them.
+     * 
+     * @var bool
+     */
+    protected $_replaceElementTexts = false;
+    
+    /**
      * Sets of Element records indexed by record type.
      * 
      * @var array 
@@ -603,6 +611,17 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
     }
     
     /**
+     * Set the flag to indicate whether elements added to this save will replace 
+     * existing element texts, not add them.
+     * 
+     * @param bool $replace
+     */
+    public function setReplaceElementTexts($replaceElementTexts = true)
+    {
+        $this->_replaceElementTexts = (bool) $replaceElementTexts;
+    }
+    
+    /**
      * Save all ElementText records that were associated with a record.
      *
      * Typically called in the afterSave() hook for a record.
@@ -621,7 +640,7 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
         $elementIdsFromForm = array_keys($this->_elementsOnForm);
 
         foreach ($this->_textsToSave as $textRecord) {
-            if (in_array($textRecord->element_id, $elementIdsFromForm)) {
+            if ($this->_replaceElementTexts || in_array($textRecord->element_id, $elementIdsFromForm)) {
                 $element_id = $textRecord->element_id;
                 if (isset($existingTexts[$element_id])
                     && ($oldText = array_shift($existingTexts[$element_id]))
@@ -637,7 +656,7 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
 
         // Delete all the remaining, un-matched old texts
         foreach ($existingTexts as $element_id => $texts) {
-            if (in_array($element_id, $elementIdsFromForm)) {
+            if ($this->_replaceElementTexts || in_array($element_id, $elementIdsFromForm)) {
                 foreach ($texts as $text) {
                     $text->delete();
                 }
@@ -646,6 +665,7 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
         
         // Cause texts to be re-loaded if accessed after save.
         $this->_recordsAreLoaded = false;
+        $this->_replaceElementTexts = false;
     }
     
     /**

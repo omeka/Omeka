@@ -9,7 +9,7 @@
 /**
  * @package Omeka\Record\Api
  */
-abstract class Omeka_Record_Api_AbstractRecordAdapter
+abstract class Omeka_Record_Api_AbstractRecordAdapter implements Omeka_Record_Api_RecordAdapterInterface
 {
     /**
      * @var array Cache of elements
@@ -22,19 +22,28 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter
     protected $_elementSetsCache = array();
     
     /**
-     * Get the REST representation of a record.
-     * 
-     * @param Omeka_Record_AbstractRecord $record
-     */
-    abstract public function getRepresentation(Omeka_Record_AbstractRecord $record);
-    
-    /**
-     * Set data to a record.
+     * Set data to a record during a POST request.
      * 
      * @param Omeka_Record_AbstractRecord $record
      * @param mixed $data
      */
-    abstract public function setData(Omeka_Record_AbstractRecord $record, $data);
+    public function setPostData(Omeka_Record_AbstractRecord $record, $data)
+    {
+        $recordType = get_class($record);
+        throw new Omeka_Controller_Exception_Api("The \"$recordType\" API record adapter does not implement setPostData");
+    }
+    
+    /**
+     * Set data to a record during a PUT request.
+     * 
+     * @param Omeka_Record_AbstractRecord $record
+     * @param mixed $data
+     */
+    public function setPutData(Omeka_Record_AbstractRecord $record, $data)
+    {
+        $recordType = get_class($record);
+        throw new Omeka_Controller_Exception_Api("The \"$recordType\" API record adapter does not implement setPutData");
+    }
     
     /**
      * Get the absolute URL to the passed resource.
@@ -149,6 +158,7 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter
             $elementTexts[] = $elementText;
         }
         $record->addElementTextsByArray($elementTexts);
+        $record->setReplaceElementTexts();
     }
     
     /**
@@ -192,6 +202,6 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter
             }
             $tags[] = $tag->name;
         }
-        $record->addTags($tags);
+        $record->applyTags($tags);
     }
 }

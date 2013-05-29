@@ -63,12 +63,12 @@ class Api_Item extends Omeka_Record_Api_AbstractRecordAdapter
     }
     
     /**
-     * Set data to an item.
+     * Set POST data to an item.
      * 
      * @param Item $record
      * @param mixed $data
      */
-    public function setData(Omeka_Record_AbstractRecord $record, $data)
+    public function setPostData(Omeka_Record_AbstractRecord $record, $data)
     {
         if (isset($data->item_type->id)) {
             $record->item_type_id = $data->item_type->id;
@@ -84,5 +84,16 @@ class Api_Item extends Omeka_Record_Api_AbstractRecordAdapter
         }
         $this->setTagData($record, $data);
         $this->setElementTextData($record, $data);
+    }
+    
+    /**
+     * Set PUT data to an item.
+     * 
+     * @param Item $record
+     * @param mixed $data
+     */
+    public function setPutData(Omeka_Record_AbstractRecord $record, $data)
+    {
+        $this->setPostData($record, $data);
     }
 }

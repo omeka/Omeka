@@ -183,49 +183,55 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
             $this->_tagsToSave[] = $this->_tagTable->findOrNew(trim($tagName));
         }
     }
-
+    
+    /**
+     * Apply tags 
+     * 
+     * @param array $inputTags
+     */
+    public function applyTags(array $inputTags)
+    {
+        $diff = $this->diffTags($inputTags);
+        if (!empty($diff['added'])) {
+            $this->addTags($diff['added']);
+        }
+        if (!empty($diff['removed'])) {
+            $this->deleteTags($diff['removed']);
+        }
+    }
+    
     /**
      * Calculate the difference between a tag string and a set of tags
      * @return array Keys('removed','added')
      */
-    public function diffTagString($string, $tags = null, $delimiter = null)
+    public function diffTags($inputTags, $tags = null)
     {
-        // Set the tag_delimiter option if no delimiter was passed.
-        if (is_null($delimiter)) {
-            $delimiter = get_option('tag_delimiter');
-        }
-        
         if (!$tags) {
             $tags = $this->_record->Tags;
         }
-        
-        $inputTags = $this->_getTagsFromString($string, $delimiter);
-        
         $existingTags = array();
-        
         foreach ($tags as $key => $tag) {
             if ($tag instanceof Tag || is_array($tag)) {
                 $existingTags[$key] = trim($tag["name"]);
             } else {
                 $existingTags[$key] = trim($tag);
-            }   
+            }
         }
-        
         if (!empty($existingTags)) {
-            $removed = array_values(array_diff($existingTags,$inputTags));
+            $removed = array_values(array_diff($existingTags, $inputTags));
         }
-        
         if (!empty($inputTags)) {
-            $added = array_values(array_diff($inputTags,$existingTags));
+            $added = array_values(array_diff($inputTags, $existingTags));
         }
         return compact('removed','added');
-    }    
+    }
     
     /**
-     * This will add tags that are in the tag string and remove those that are no longer in the tag string
+     * This will add tags that are in the tag string and remove those that are 
+     * no longer in the tag string
      *
      * @param string $string A string of tags delimited by $delimiter
-     * @return void
+     * @param string|null $delimiter
      */
     public function applyTagString($string, $delimiter = null)
     {
@@ -233,16 +239,7 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
         if (is_null($delimiter)) {
             $delimiter = get_option('tag_delimiter');
         }
-
-        $tags = $this->_record->Tags;
-        $diff = $this->diffTagString($string, $tags, $delimiter);
-                
-        if (!empty($diff['added'])) {
-            $this->addTags($diff['added']);
-        }
-
-        if (!empty($diff['removed'])) {
-            $this->deleteTags($diff['removed']);
-        } 
+        $inputTags = $this->_getTagsFromString($string, $delimiter);
+        $this->applyTags($inputTags);
     }
 }

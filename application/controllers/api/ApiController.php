@@ -124,6 +124,59 @@ class ApiController extends Omeka_Controller_AbstractActionController
     }
     
     /**
+     * Handle PUT requests.
+     */
+    public function putAction()
+    {
+        $request = $this->getRequest();
+        $recordType = $request->getParam('api_record_type');
+        $resource = $request->getParam('api_resource');
+        $apiParams = $request->getParam('api_params');
+        
+        $this->_validateRecordType($recordType);
+        
+        $record = $this->_helper->db->getTable($recordType)->find($apiParams[0]);
+        if (!$record) {
+            throw new Omeka_Controller_Exception_Api('Invalid record. Record not found.', 404);
+        }
+        
+        // The user must have permission to edit this record.
+        $this->_validateUser($record, 'edit');
+        
+        // The request body must be a JSON object.
+        $data = json_decode($request->getRawBody());
+        if (!($data instanceof stdClass)) {
+            throw new Omeka_Controller_Exception_Api('Invalid request. Request body must be a JSON object.', 400);
+        }
+        
+        // Set the PUT data to the record using the record adapter.
+        $this->_getRecordAdapter($recordType)->setPutData($record, $data);
+        if (!$record->save(false)) {
+            throw new Omeka_Controller_Exception_Api('Error when saving record.', 
+                400, $record->getErrors()->get());
+        }
+        
+        // The client may have set invalid data to the record. This does not 
+        // always throw an error. Get the current record state directly from the 
+        // database.
+        $data = $this->_getRepresentation(
+            $this->_getRecordAdapter($recordType), 
+            $this->_helper->db->getTable($recordType)->find($record->id), 
+            $resource
+        );
+        $this->getResponse()->setHttpResponseCode(200);
+        $this->_helper->jsonApi($data);
+    }
+    
+    /**
+     * Handle DELETE requests.
+     */
+    public function deleteAction()
+    {
+        var_dump($this->getRequest()->getParam('api_params'));exit;
+    }
+    
+    /**
      * Validate a record type.
      * 
      * @param string $recordType
@@ -139,7 +192,7 @@ class ApiController extends Omeka_Controller_AbstractActionController
         if (!class_exists($recordAdapterClass)) {
            throw new Omeka_Controller_Exception_Api("Invalid record adapter. Record adapter \"$recordAdapterClass\" not found.", 404);
         }
-        if (!in_array('Omeka_Record_Api_AbstractRecordAdapter', class_parents($recordAdapterClass))) {
+        if (!in_array('Omeka_Record_Api_RecordAdapterInterface', class_implements($recordAdapterClass))) {
            throw new Omeka_Controller_Exception_Api("Invalid record adapter. Record adapter \"$recordAdapterClass\" is invalid", 500);
         }
     }
