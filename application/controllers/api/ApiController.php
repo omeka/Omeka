@@ -164,7 +164,6 @@ class ApiController extends Omeka_Controller_AbstractActionController
             $this->_helper->db->getTable($recordType)->find($record->id), 
             $resource
         );
-        $this->getResponse()->setHttpResponseCode(200);
         $this->_helper->jsonApi($data);
     }
     
@@ -173,7 +172,21 @@ class ApiController extends Omeka_Controller_AbstractActionController
      */
     public function deleteAction()
     {
-        var_dump($this->getRequest()->getParam('api_params'));exit;
+        $request = $this->getRequest();
+        $recordType = $request->getParam('api_record_type');
+        $apiParams = $request->getParam('api_params');
+        
+        $this->_validateRecordType($recordType);
+        
+        $record = $this->_helper->db->getTable($recordType)->find($apiParams[0]);
+        if (!$record) {
+            throw new Omeka_Controller_Exception_Api('Invalid record. Record not found.', 404);
+        }
+        
+        // The user must have permission to delete this record.
+        $this->_validateUser($record, 'delete');
+        
+        $record->delete();
     }
     
     /**
