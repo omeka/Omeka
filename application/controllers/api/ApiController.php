@@ -104,7 +104,7 @@ class ApiController extends Omeka_Controller_AbstractActionController
         }
         
         // Set the POST data to the record using the record adapter.
-        $this->_getRecordAdapter($recordType)->setData($record, $data);
+        $this->_getRecordAdapter($recordType)->setPostData($record, $data);
         if (!$record->save(false)) {
             throw new Omeka_Controller_Exception_Api('Error when saving record.', 
                 400, $record->getErrors()->get());
