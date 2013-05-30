@@ -49,6 +49,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
      * Via Omeka_Application_Resource_Router, this is the only available route 
      * for API requests.
      * 
+     * @throws Omeka_Controller_Exception_Api
      * @param Zend_Controller_Request_Http $request
      * @return array|false
      */
@@ -87,25 +88,10 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
         
         // Get and validate resource, record_type, module, controller, and action.
         $resource = $this->_getResource($resource, $apiResources);
-        if (false === $resource) {
-            throw new Omeka_Controller_Exception_Api('Invalid resource', 404);
-        }
         $recordType = $this->_getRecordType($resource, $apiResources);
-        if (false === $recordType) {
-            throw new Omeka_Controller_Exception_Api('Invalid record type', 404);
-        }
         $module = $this->_getModule($resource, $apiResources);
-        if (false === $module) {
-            throw new Omeka_Controller_Exception_Api('Invalid module', 404);
-        }
         $controller = $this->_getController($resource, $apiResources);
-        if (false === $controller) {
-            throw new Omeka_Controller_Exception_Api('Invalid controller', 404);
-        }
         $action = $this->_getAction($request->getMethod(), $params, $resource, $apiResources);
-        if (false === $action) {
-            throw new Omeka_Controller_Exception_Api('Invalid action. Method not allowed.', 405);
-        }
         
         // Validate the GET parameters.
         $this->_validateParams($action, $resource, $apiResources);
@@ -130,14 +116,15 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
     /**
      * Return this route's resource.
      * 
+     * @throws Omeka_Controller_Exception_Api
      * @param string $resource
      * @param array $apiResources
-     * @return string|false
+     * @return string
      */
     protected function _getResource($resource, array $apiResources)
     {
         if (!array_key_exists($resource, $apiResources)) {
-            return false;
+            throw new Omeka_Controller_Exception_Api("The \"$resource\" resource is unavailable.", 404);
         }
         return $resource;
     }
@@ -145,16 +132,18 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
     /**
      * Return this route's record type.
      * 
+     * @throws Omeka_Controller_Exception_Api
      * @param string $resource
      * @param array $apiResources
-     * @return string|null|false
+     * @return string|null
      */
     protected function _getRecordType($resource, array $apiResources)
     {
-        // Resources using the default controller must pass a record type.
+        // Resources using the default controller must register a record type.
         if (!isset($apiResources[$resource]['controller']) 
-            && !isset($apiResources[$resource]['record_type'])) {
-            return false;
+            && !isset($apiResources[$resource]['record_type'])
+        ) {
+            throw new Omeka_Controller_Exception_Api('Resources using the default controller must register a record type.', 500);
         }
         if (isset($apiResources[$resource]['record_type'])) {
             return $apiResources[$resource]['record_type'];
@@ -195,11 +184,12 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
     /**
      * Return this route's action.
      * 
+     * @throws Omeka_Controller_Exception_Api
      * @param string $method
      * @param array $params
      * @param string $resource
      * @param array $apiResources
-     * @return string|false
+     * @return string
      */
     protected function _getAction($method, array $params, $resource, array $apiResources)
     {
@@ -211,12 +201,12 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
         
         // POST method must not have parameters.
         if ($params && 'post' == $action) {
-            return false;
+            throw new Omeka_Controller_Exception_Api('POST methods must not include an ID.', 404);
         }
         
         // PUT and DELETE methods require parameters.
         if (!$params && in_array($action, array('put', 'delete'))) {
-            return false;
+            throw new Omeka_Controller_Exception_Api('PUT and DELETE methods must include an ID.', 404);
         }
         
         // The action must be available for the resource.
@@ -225,7 +215,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
             $legalActions = $apiResources[$resource]['actions'];
         }
         if (!in_array($action, $legalActions)) {
-            return false;
+            throw new Omeka_Controller_Exception_Api("This resource does not implement the \"$action\" action.", 404);
         }
         
         return $action;
@@ -234,6 +224,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
     /**
      * Validate the GET parameters against the whitelist.
      * 
+     * @throws Omeka_Controller_Exception_Api
      * @param string $action
      * @param string $resource
      * @param array $apiResources
