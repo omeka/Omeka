@@ -50,7 +50,7 @@ class Api_File extends Omeka_Record_Api_AbstractRecordAdapter
      * @param File $record
      * @param mixed $data
      */
-    public function setData(Omeka_Record_AbstractRecord $record, $data)
+    public function setPostData(Omeka_Record_AbstractRecord $record, $data)
     {
         if (isset($data->order)) {
             $record->order = $data->order;

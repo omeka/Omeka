@@ -26,17 +26,4 @@ class Api_Tag extends Omeka_Record_Api_AbstractRecordAdapter
         );
         return $representation;
     }
-    
-    /**
-     * Set data to a tag.
-     * 
-     * @param Tag $record
-     * @param mixed $data
-     */
-    public function setData(Omeka_Record_AbstractRecord $record, $data)
-    {
-        if (isset($data->name)) {
-            $record->name = $data->name;
-        }
-    }
 }

@@ -74,7 +74,7 @@ class FilesController extends ApiController
         $record = $this->_helper->db->getTable('File')->find($files[0]->id);
         
         // Set the POST data to the record using the record adapter.
-        $this->_getRecordAdapter('File')->setData($record, $data);
+        $this->_getRecordAdapter('File')->setPostData($record, $data);
         if (!$record->save(false)) {
             throw new Omeka_Controller_Exception_Api('Error when saving record.', 
                 400, $record->getErrors()->get());

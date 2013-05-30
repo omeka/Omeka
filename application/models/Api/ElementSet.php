@@ -39,7 +39,7 @@ class Api_ElementSet extends Omeka_Record_Api_AbstractRecordAdapter
      * @param ElementSet $data
      * @param array $data
      */
-    public function setData(Omeka_Record_AbstractRecord $record, $data)
+    public function setPostData(Omeka_Record_AbstractRecord $record, $data)
     {
         if (isset($data->record_type)) {
             $record->record_type = $data->record_type;

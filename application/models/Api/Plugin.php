@@ -11,7 +11,6 @@
  */
 class Api_Plugin extends Omeka_Record_Api_AbstractRecordAdapter
 {
-    
     /**
      * Get the REST API representation for a plugin.
      *
@@ -28,16 +27,5 @@ class Api_Plugin extends Omeka_Record_Api_AbstractRecordAdapter
             'version' => $record->version
         );
         return $representation;
-    }
-    
-    /**
-     * Set data to a plugin.
-     *
-     * @param Plugin $record
-     * @param mixed $data
-     */
-    public function setData(Omeka_Record_AbstractRecord $record, $data)
-    {
-        
     }
 }

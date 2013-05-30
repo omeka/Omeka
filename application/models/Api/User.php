@@ -11,7 +11,6 @@
  */
 class Api_User extends Omeka_Record_Api_AbstractRecordAdapter
 {
-    
     /**
      * Get the REST API representation for a user.
      *
@@ -31,15 +30,4 @@ class Api_User extends Omeka_Record_Api_AbstractRecordAdapter
         );
         return $representation;
     }
-    
-    /**
-     * Set data to a user.
-     *
-     * @param User $record
-     * @param mixed $data
-     */
-    public function setData(Omeka_Record_AbstractRecord $record, $data)
-    {
-    
-    }    
 }

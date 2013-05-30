@@ -41,7 +41,7 @@ class Api_Element extends Omeka_Record_Api_AbstractRecordAdapter
      * @param Element $data
      * @param array $data
      */
-    public function setData(Omeka_Record_AbstractRecord $record, $data)
+    public function setPostData(Omeka_Record_AbstractRecord $record, $data)
     {
         if (isset($data->element_set->id)) {
             $record->element_set_id = $data->element_set->id;

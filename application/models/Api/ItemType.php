@@ -43,7 +43,7 @@ class Api_ItemType extends Omeka_Record_Api_AbstractRecordAdapter
      * @param ItemType $data
      * @param mixed $data
      */
-    public function setData(Omeka_Record_AbstractRecord $record, $data)
+    public function setPostData(Omeka_Record_AbstractRecord $record, $data)
     {
         if (isset($data->name)) {
             $record->name = $data->name;
