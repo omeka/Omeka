@@ -39,13 +39,16 @@ class ApiController extends Omeka_Controller_AbstractActionController
         $perPageUser = (int) $request->getQuery('per_page');
         $perPage = ($perPageUser < $perPageMax && $perPageUser > 0) ? $perPageUser : $perPageMax;
         
-        // Get the records and the total record count.
+        // Get the records and the result count.
         $recordsTable = $this->_helper->db->getTable($recordType);
-        $totalCount = $recordsTable->count($_GET);
+        $totalResults = $recordsTable->count($_GET);
         $records = $recordsTable->findBy($_GET, $perPage, $page);
         
+        // Set the non-standard Omeka-Total-Results header.
+        $this->getResponse()->setHeader('Omeka-Total-Results', $totalResults);
+        
         // Set the Link header for pagination.
-        $this->_setLinkHeader($perPage, $page, $totalCount, $resource);
+        $this->_setLinkHeader($perPage, $page, $totalResults, $resource);
         
         // Build the data array.
         $data = array();
@@ -253,10 +256,10 @@ class ApiController extends Omeka_Controller_AbstractActionController
      * 
      * @param int $perPage
      * @param int $page
-     * @param int $totalCount
+     * @param int $totalResults
      * @param string $resource
      */
-    protected function _setLinkHeader($perPage, $page, $totalCount, $resource)
+    protected function _setLinkHeader($perPage, $page, $totalResults, $resource)
     {
         // Remove authentication key from query.
         $linkGet = $_GET;
@@ -267,7 +270,7 @@ class ApiController extends Omeka_Controller_AbstractActionController
         // Calculate the first, last, prev, and next page numbers.
         $linkPages = array(
             'first' => 1, 
-            'last' => ceil($totalCount / $perPage), 
+            'last' => ceil($totalResults / $perPage), 
         );
         if (1 < $page) {
             $linkPages['prev'] = $page - 1;
