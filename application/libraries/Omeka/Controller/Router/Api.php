@@ -91,7 +91,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
         $recordType = $this->_getRecordType($resource, $apiResources);
         $module = $this->_getModule($resource, $apiResources);
         $controller = $this->_getController($resource, $apiResources);
-        $action = $this->_getAction($request->getMethod(), $params, $resource, $apiResources);
+        $action = $this->_getAction($request->getMethod(), $params, $resource, $apiResources, $request);
         
         // Validate the GET parameters.
         $this->_validateParams($action, $resource, $apiResources);
@@ -191,7 +191,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
      * @param array $apiResources
      * @return string
      */
-    protected function _getAction($method, array $params, $resource, array $apiResources)
+    protected function _getAction($method, array $params, $resource, array $apiResources, $request)
     {
         // Get the action.
         $action = strtolower($method);
@@ -199,14 +199,21 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
             $action = $params ? 'get' : 'index';
         }
         
-        // POST method must not have parameters.
+        // POST requests must not have parameters.
         if ($params && 'post' == $action) {
-            throw new Omeka_Controller_Exception_Api('POST methods must not include an ID.', 404);
+            throw new Omeka_Controller_Exception_Api('POST requests must not include an ID.', 404);
         }
         
-        // PUT and DELETE methods require parameters.
+        // PUT and DELETE requests require parameters.
         if (!$params && in_array($action, array('put', 'delete'))) {
-            throw new Omeka_Controller_Exception_Api('PUT and DELETE methods must include an ID.', 404);
+            throw new Omeka_Controller_Exception_Api('PUT and DELETE requests must include an ID.', 404);
+        }
+        
+        // POST and PUT requests require an application/json Content-Type.
+        if (in_array($action, array('post', 'put')) 
+            && 'application/json' != $request->getHeader('Content-Type')
+        ) {
+            throw new Omeka_Controller_Exception_Api('POST and PUT requests require a Content-Type of application/json.', 415);
         }
         
         // The action must be available for the resource.
@@ -242,7 +249,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
         }
         foreach ($_GET as $key => $value) {
             if (!in_array($key, $legalParams)) {
-                throw new Omeka_Controller_Exception_Api("Invalid GET parameter: \"$key\"", 404);
+                throw new Omeka_Controller_Exception_Api("Invalid GET request parameter: \"$key\"", 404);
             }
         }
     }
