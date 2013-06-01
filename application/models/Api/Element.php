@@ -36,7 +36,7 @@ class Api_Element extends Omeka_Record_Api_AbstractRecordAdapter
     }
     
     /**
-     * Set data to an Element.
+     * Set POST data to an Element.
      *
      * @param Element $data
      * @param array $data
@@ -54,6 +54,22 @@ class Api_Element extends Omeka_Record_Api_AbstractRecordAdapter
         }
         if (isset($data->description)) {
             $record->description = $data->description;
+        }
+        if (isset($data->comment)) {
+            $record->comment = $data->comment;
+        }
+    }
+    
+    /**
+     * Set PUT data to an Element.
+     *
+     * @param Element $data
+     * @param array $data
+     */
+    public function setPutData(Omeka_Record_AbstractRecord $record, $data)
+    {
+        if (isset($data->order)) {
+            $record->order = $data->order;
         }
         if (isset($data->comment)) {
             $record->comment = $data->comment;

@@ -49,7 +49,7 @@ class Omeka_Controller_Plugin_Api extends Zend_Controller_Plugin_Abstract
         ), 
         'collections' => array(
             'record_type' => 'Collection', 
-            'actions' => array('index', 'get', 'post'), 
+            'actions' => array('index', 'get', 'post', 'put'), 
             'index_params' => array(
                 'public','featured','added_since','modified_since','owner',
             ),
@@ -65,7 +65,7 @@ class Omeka_Controller_Plugin_Api extends Zend_Controller_Plugin_Abstract
         'files' => array(
             'controller' => 'files', 
             'record_type' => 'File', 
-            'actions' => array('index', 'get', 'post'),
+            'actions' => array('index', 'get', 'post', 'put'),
             'index_params' => array(
                 'item', 'order', 'size_greater_than', 'has_derivative_image',
                 'mime_type', 'modified_since', 'added_since', 
@@ -78,7 +78,7 @@ class Omeka_Controller_Plugin_Api extends Zend_Controller_Plugin_Abstract
         ),
         'elements' => array(
             'record_type' => 'Element',
-            'actions' => array('index', 'get', 'post'),
+            'actions' => array('index', 'get', 'post', 'put'),
             'index_params' => array('element_set', 'name'), 
         ),
         'element_sets' => array(

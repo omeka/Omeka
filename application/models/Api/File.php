@@ -45,7 +45,7 @@ class Api_File extends Omeka_Record_Api_AbstractRecordAdapter
     }
     
     /**
-     * Set data to a file.
+     * Set POST data to a file.
      * 
      * @param File $record
      * @param mixed $data
@@ -56,5 +56,16 @@ class Api_File extends Omeka_Record_Api_AbstractRecordAdapter
             $record->order = $data->order;
         }
         $this->setElementTextData($record, $data);
+    }
+    
+    /**
+     * Set PUT data to a file.
+     * 
+     * @param File $record
+     * @param mixed $data
+     */
+    public function setPutData(Omeka_Record_AbstractRecord $record, $data)
+    {
+        $this->setPostData($record, $data);
     }
 }

@@ -41,7 +41,7 @@ class Api_Collection extends Omeka_Record_Api_AbstractRecordAdapter
     }
     
     /**
-     * Set data to a Collection.
+     * Set POST data to a Collection.
      * 
      * @param Collection $record
      * @param mixed $data
@@ -55,5 +55,16 @@ class Api_Collection extends Omeka_Record_Api_AbstractRecordAdapter
             $record->featured = $data->featured;
         }
         $this->setElementTextData($record, $data);
+    }
+    
+    /**
+     * Set PUT data to a Collection.
+     * 
+     * @param Collection $record
+     * @param mixed $data
+     */
+    public function setPostData(Omeka_Record_AbstractRecord $record, $data)
+    {
+        $this->setPostData($record, $data);
     }
 }
