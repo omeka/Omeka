@@ -190,6 +190,9 @@ class ApiController extends Omeka_Controller_AbstractActionController
         $this->_validateUser($record, 'delete');
         
         $record->delete();
+        
+        // 204 No Content.
+        $this->getResponse()->setHttpResponseCode(204);
     }
     
     /**

@@ -35,5 +35,8 @@ class ElementSetsController extends ApiController
         $this->_validateUser($elementSet, 'delete');
         
         $elementSet->delete();
+        
+        // 204 No Content.
+        $this->getResponse()->setHttpResponseCode(204);
     }
 }

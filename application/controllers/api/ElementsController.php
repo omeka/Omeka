@@ -36,5 +36,8 @@ class ElementsController extends ApiController
         $this->_validateUser($file, 'delete');
         
         $file->delete();
+        
+        // 204 No Content.
+        $this->getResponse()->setHttpResponseCode(204);
     }
 }
