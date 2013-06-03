@@ -22,6 +22,12 @@ class Api_File extends Omeka_Record_Api_AbstractRecordAdapter
         $representation = array(
             'id' => $record->id,
             'url' => $this->getResourceUrl("/files/{$record->id}"),
+            'file_urls' => array(
+                'original' => $record->getWebPath(), 
+                'fullsize' => $record->has_derivative_image ? $record->getWebPath('fullsize') : null, 
+                'thumbnail' => $record->has_derivative_image ? $record->getWebPath('thumbnail') : null, 
+                'square_thumbnail' => $record->has_derivative_image ? $record->getWebPath('square_thumbnail') : null, 
+            ), 
             'added' => $this->getDate($record->added), 
             'modified' => $this->getDate($record->modified),
             'filename' => $record->filename,
