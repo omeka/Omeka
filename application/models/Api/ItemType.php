@@ -20,15 +20,20 @@ class Api_ItemType extends Omeka_Record_Api_AbstractRecordAdapter
      */
     public function getRepresentation(Omeka_Record_AbstractRecord $record)
     {
+        // Get the item type elements.
+        $itemTypeElements = $record->getTable('ItemTypesElements')
+            ->findBy(array('item_type_id' => $record->id, Omeka_Db_Table::SORT_PARAM => 'order'));
+        $elements = array();
+        foreach ($itemTypeElements as $element) {
+            $elements[] = array('id' => $element->element_id);
+        }
+        
         $representation = array(
             'id' => $record->id, 
             'url' => $this->getResourceUrl("/item_types/{$record->id}"), 
             'name' => $record->name, 
             'description' => $record->description, 
-            'elements' => array(
-                'count' => $record->getTable('Element')->count(array('item_type' => $record->id)),
-                'url' => $this->getResourceUrl("/elements/?item_type={$record->id}"), 
-            ), 
+            'elements' => $elements, 
             'items' => array(
                 'count' => $record->getTable('Item')->count(array('item_type_id' => $record->id)), 
                 'url' => $this->getResourceUrl("/items/?item_type={$record->id}"), 
@@ -38,7 +43,7 @@ class Api_ItemType extends Omeka_Record_Api_AbstractRecordAdapter
     } 
     
     /**
-     * Set data to an item type.
+     * Set POST data to an item type.
      *
      * @param ItemType $data
      * @param mixed $data
@@ -60,6 +65,48 @@ class Api_ItemType extends Omeka_Record_Api_AbstractRecordAdapter
                 $elements[] = $record->getTable('Element')->find($element->id);
             }
             $record->addElements($elements);
+        }
+    }
+    
+    /**
+     * Set PUT data to an item type.
+     *
+     * @param ItemType $data
+     * @param mixed $data
+     */
+    public function setPutData(Omeka_Record_AbstractRecord $record, $data)
+    {
+        if (isset($data->name)) {
+            $record->name = $data->name;
+        }
+        if (isset($data->description)) {
+            $record->description = $data->description;
+        }
+        if (isset($data->elements) && is_array($data->elements)) {
+            $db = get_db();
+            
+            // Delete the existing item type elements.
+            $sql = "DELETE FROM {$db->ItemTypesElements} WHERE item_type_id = ?";
+            $db->query($sql, $record->id);
+            
+            // Insert new item type elements.
+            $elementTable = $db->getTable('Element');
+            $i = 1;
+            foreach ($data->elements as $element) {
+                if (!is_object($element) || !isset($element->id)) {
+                    continue;
+                }
+                // Ignore if the element does not exist.
+                if (!$elementTable->exists($element->id)) {
+                    continue;
+                }
+                $itemTypesElement = new ItemTypesElements;
+                $itemTypesElement->item_type_id = $record->id;
+                $itemTypesElement->element_id = $element->id;
+                $itemTypesElement->order = $i;
+                $itemTypesElement->save();
+                $i++;
+            }
         }
     }
 }
