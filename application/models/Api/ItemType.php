@@ -25,7 +25,10 @@ class Api_ItemType extends Omeka_Record_Api_AbstractRecordAdapter
             ->findBy(array('item_type_id' => $record->id, Omeka_Db_Table::SORT_PARAM => 'order'));
         $elements = array();
         foreach ($itemTypeElements as $element) {
-            $elements[] = array('id' => $element->element_id);
+            $elements[] = array(
+                'id' => $element->element_id, 
+                'url' => self::getResourceUrl("/elements/{$element->element_id}"), 
+            );
         }
         
         $representation = array(
