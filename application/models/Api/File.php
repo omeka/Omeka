@@ -21,15 +21,15 @@ class Api_File extends Omeka_Record_Api_AbstractRecordAdapter
     {
         $representation = array(
             'id' => $record->id,
-            'url' => $this->getResourceUrl("/files/{$record->id}"),
+            'url' => self::getResourceUrl("/files/{$record->id}"),
             'file_urls' => array(
                 'original' => $record->getWebPath(), 
                 'fullsize' => $record->has_derivative_image ? $record->getWebPath('fullsize') : null, 
                 'thumbnail' => $record->has_derivative_image ? $record->getWebPath('thumbnail') : null, 
                 'square_thumbnail' => $record->has_derivative_image ? $record->getWebPath('square_thumbnail') : null, 
             ), 
-            'added' => $this->getDate($record->added), 
-            'modified' => $this->getDate($record->modified),
+            'added' => self::getDate($record->added), 
+            'modified' => self::getDate($record->modified),
             'filename' => $record->filename,
             'authentication' => $record->authentication,
             'has_derivative_image' => (bool) $record->has_derivative_image,
@@ -43,7 +43,7 @@ class Api_File extends Omeka_Record_Api_AbstractRecordAdapter
         );
         $representation['item'] = array(
             'id' => $record->item_id, 
-            'url'=> $this->getResourceUrl("/items/{$record->item_id}"), 
+            'url'=> self::getResourceUrl("/items/{$record->item_id}"), 
         );
         $representation['element_texts'] = $this->getElementTextRepresentations($record);
         

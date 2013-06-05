@@ -21,16 +21,16 @@ class Api_Item extends Omeka_Record_Api_AbstractRecordAdapter
     {
         $representation = array(
             'id' => $record->id, 
-            'url' => $this->getResourceUrl("/items/{$record->id}"), 
+            'url' => self::getResourceUrl("/items/{$record->id}"), 
             'public' => (bool) $record->public, 
             'featured' => (bool) $record->featured, 
-            'added' => $this->getDate($record->added), 
-            'modified' => $this->getDate($record->modified), 
+            'added' => self::getDate($record->added), 
+            'modified' => self::getDate($record->modified), 
         );
         if ($record->item_type_id) {
             $representation['item_type'] = array(
                 'id' => $record->item_type_id, 
-                'url' => $this->getResourceUrl("/item_types/{$record->item_type_id}"), 
+                'url' => self::getResourceUrl("/item_types/{$record->item_type_id}"), 
                 'name' => $record->Type->name, 
             );
         } else {
@@ -39,7 +39,7 @@ class Api_Item extends Omeka_Record_Api_AbstractRecordAdapter
         if ($record->collection_id) {
             $representation['collection'] = array(
                 'id' => $record->collection_id, 
-                'url' => $this->getResourceUrl("/collections/{$record->collection_id}"), 
+                'url' => self::getResourceUrl("/collections/{$record->collection_id}"), 
             );
         } else {
             $representation['collection'] = null;
@@ -47,7 +47,7 @@ class Api_Item extends Omeka_Record_Api_AbstractRecordAdapter
         if ($record->owner_id) {
             $representation['owner'] = array(
                 'id' => $record->owner_id, 
-                'url' => $this->getResourceUrl("/users/{$record->owner_id}"), 
+                'url' => self::getResourceUrl("/users/{$record->owner_id}"), 
             );
         } else {
             $representation['owner'] = null;
@@ -55,7 +55,7 @@ class Api_Item extends Omeka_Record_Api_AbstractRecordAdapter
         $representation['files'] = array(
             'count' => $record->getTable('File')
                 ->count(array('item_id' => $record->id)), 
-            'url' => $this->getResourceUrl("/files?item={$record->id}"), 
+            'url' => self::getResourceUrl("/files?item={$record->id}"), 
         );
         $representation['tags'] = $this->getTagRepresentations($record);
         $representation['element_texts'] = $this->getElementTextRepresentations($record);

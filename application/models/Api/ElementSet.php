@@ -21,13 +21,13 @@ class Api_ElementSet extends Omeka_Record_Api_AbstractRecordAdapter
     {
         $representation = array(
             'id' => $record->id, 
-            'url' => $this->getResourceUrl("/element_sets/{$record->id}"), 
+            'url' => self::getResourceUrl("/element_sets/{$record->id}"), 
             'name' => $record->name, 
             'description' => $record->description, 
             'record_type' => $record->record_type, 
             'elements' => array(
                 'count' => $record->getTable('Element')->count(array('element_set' => $record->id)),
-                'url' => $this->getResourceUrl("/elements?element_set={$record->id}"), 
+                'url' => self::getResourceUrl("/elements?element_set={$record->id}"), 
             ), 
         );
         return $representation;

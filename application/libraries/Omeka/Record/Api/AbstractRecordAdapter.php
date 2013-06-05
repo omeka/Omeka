@@ -46,33 +46,6 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter implements Omeka_Record_Ap
     }
     
     /**
-     * Get the absolute URL to the passed resource.
-     * 
-     * @param string $uri The full resource URI
-     * @return string
-     */
-    public function getResourceUrl($uri)
-    {
-        // Prepend a slash if not already.
-        if ('/' != $uri[0]) {
-            $uri = "/$uri";
-        }
-        return WEB_ROOT . "/api$uri";
-    }
-    
-    /**
-     * Format a date string as an ISO 8601 date, UTC timezone.
-     * 
-     * @param string $date
-     * @return string
-     */
-    public function getDate($date)
-    {
-        $date = new DateTime($date);
-        return $date->setTimezone(new DateTimeZone('UTC'))->format('c');
-    }
-    
-    /**
      * Get representations of element texts belonging to a record.
      * 
      * The record must initialize the ElementText mixin.
@@ -203,5 +176,32 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter implements Omeka_Record_Ap
             $tags[] = $tag->name;
         }
         $record->applyTags($tags);
+    }
+    
+    /**
+     * Get the absolute URL to the passed resource.
+     * 
+     * @param string $uri The full resource URI
+     * @return string
+     */
+    public static function getResourceUrl($uri)
+    {
+        // Prepend a slash if not already.
+        if ('/' != $uri[0]) {
+            $uri = "/$uri";
+        }
+        return WEB_ROOT . "/api$uri";
+    }
+    
+    /**
+     * Format a date string as an ISO 8601 date, UTC timezone.
+     * 
+     * @param string $date
+     * @return string
+     */
+    public static function getDate($date)
+    {
+        $date = new DateTime($date);
+        return $date->setTimezone(new DateTimeZone('UTC'))->format('c');
     }
 }

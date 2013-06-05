@@ -22,14 +22,14 @@ class Api_Element extends Omeka_Record_Api_AbstractRecordAdapter
     {
         $representation = array(
             'id' => $record->id, 
-            'url' => $this->getResourceUrl("/elements/{$record->id}"), 
+            'url' => self::getResourceUrl("/elements/{$record->id}"), 
             'order' => $record->order, 
             'name' => $record->name, 
             'description' => $record->description, 
             'comment' => $record->comment, 
             'element_set' => array(
                 'id' => $record->element_set_id, 
-                'url'=> $this->getResourceUrl("/element_sets/{$record->element_set_id}"), 
+                'url'=> self::getResourceUrl("/element_sets/{$record->element_set_id}"), 
             ), 
         );
         return $representation;

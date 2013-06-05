@@ -21,18 +21,18 @@ class Api_Collection extends Omeka_Record_Api_AbstractRecordAdapter
     public function getRepresentation(Omeka_Record_AbstractRecord $record) {
         $representation = array(
             'id' => $record->id, 
-            'url' => $this->getResourceUrl("/collections/{$record->id}"), 
+            'url' => self::getResourceUrl("/collections/{$record->id}"), 
             'public' => (bool) $record->public, 
             'featured' => (bool) $record->featured, 
-            'added' => $this->getDate($record->added), 
-            'modified' => $this->getDate($record->modified), 
+            'added' => self::getDate($record->added), 
+            'modified' => self::getDate($record->modified), 
             'owner' => array(
                 'id'  => $record->owner_id,
-                'url' => $this->getResourceUrl("/users/{$record->owner_id}"),
+                'url' => self::getResourceUrl("/users/{$record->owner_id}"),
             ), 
             'items' => array(
                 'count' => $record->getTable('Item')->count(array('collection_id' => $record->id)),
-                'url' => $this->getResourceUrl("/items?collection={$record->id}"), 
+                'url' => self::getResourceUrl("/items?collection={$record->id}"), 
             ), 
             'element_texts' => $this->getElementTextRepresentations($record), 
         );

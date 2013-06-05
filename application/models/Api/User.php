@@ -21,7 +21,7 @@ class Api_User extends Omeka_Record_Api_AbstractRecordAdapter
     {
         $representation = array(
             'id' => $record->id,
-            'url' => $this->getResourceUrl("/users/{$record->id}"),
+            'url' => self::getResourceUrl("/users/{$record->id}"),
             'username' => $record->username,
             'name' => $record->name,
             'active' => (bool) $record->active,
