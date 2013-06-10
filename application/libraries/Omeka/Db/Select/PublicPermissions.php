@@ -45,8 +45,11 @@ class Omeka_Db_Select_PublicPermissions
      * @param string $alias Table alias to query against
      * @param string $ownerColumn Optional column for checking for ownership. If
      *  falsy, the ownership check is skipped.
+     * @param string $publicColumn Optional column for storing public status. The
+     *  column must represent "public" status as the value 1.
      */
-    public function apply(Omeka_Db_Select $select, $alias, $ownerColumn = 'owner_id')
+    public function apply(Omeka_Db_Select $select, $alias, $ownerColumn = 'owner_id',
+        $publicColumn = 'public')
     {
         // If the current user has the 'all' permission, we don't need to do
         // anything. If the 'all' permission's neither true nor false, we
@@ -56,9 +59,9 @@ class Omeka_Db_Select_PublicPermissions
         }
         
         if ($ownerColumn && $this->_selfPermission) {
-            $select->where("$alias.public = 1 OR $alias.$ownerColumn = ?", $this->_currentUser->id);
+            $select->where("$alias.$publicColumn = 1 OR $alias.$ownerColumn = ?", $this->_currentUser->id);
         } else {
-            $select->where("$alias.public = 1");
+            $select->where("$alias.$publicColumn = 1");
         }
     }
 }
