@@ -18,6 +18,11 @@ class ResourcesController extends Omeka_Controller_AbstractActionController
      */
     public function indexAction()
     {
-        $this->_helper->jsonApi($this->getFrontController()->getParam('api_resources'));
+        $apiResources = $this->getFrontController()->getParam('api_resources');
+        // Add the site-specific URL to each API resource.
+        foreach ($apiResources as $resource => &$resourceInfo) {
+            $resourceInfo['url'] = Omeka_Record_Api_AbstractRecordAdapter::getResourceUrl("/$resource");
+        }
+        $this->_helper->jsonApi($apiResources);
     }
 }
