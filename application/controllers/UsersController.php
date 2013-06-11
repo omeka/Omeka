@@ -270,11 +270,8 @@ class UsersController extends Omeka_Controller_AbstractActionController
             }
             
             if ($success) {
-                if ($user->id == $currentUser->id) {
-                    $this->_helper->redirector->gotoUrl('/');
-                } else {
-                    $this->_helper->redirector('browse');
-                }
+                // Redirect to the current page
+                $this->_helper->redirector->gotoRoute();
             }
         }
     }
