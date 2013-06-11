@@ -70,16 +70,16 @@ class Omeka_Form_Decorator_SavePanelAction extends Zend_Form_Decorator_Abstract
             $attribs = $this->getOptions();
         }
     
-        $html = "<input id='save-changes' class='submit big green button' type='submit' value='Save Changes' name='submit' />";
+        $html = "<input id='save-changes' class='submit big green button' type='submit' value='" . __('Save Changes') . "' name='submit' />";
         if($record) {
             if($this->hasPublicPage() && $record->exists()) {
                 set_theme_base_url('public');
                 $publicPageUrl = record_url($record, 'show');
                 revert_theme_base_url();
-                $html .= "<a href='$publicPageUrl' class='big blue button' target='_blank'>View Public Page</a>";
+                $html .= "<a href='$publicPageUrl' class='big blue button' target='_blank'>" . __('View Public Page') . "</a>";
             }
             $recordDeleteConfirm = record_url($record, 'delete-confirm');
-            $html .= "<a href='$recordDeleteConfirm' class='big red button'>Delete</a>";
+            $html .= "<a href='$recordDeleteConfirm' class='big red button'>" . __('Delete') . "</a>";
 
         }
         //used by SavePanelHook to locate where to insert hook content
