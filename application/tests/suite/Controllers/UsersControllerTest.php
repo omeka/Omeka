@@ -113,7 +113,7 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
         ));
         $request->setMethod('post');
         $this->dispatch("users/edit/$id");
-        $this->assertRedirectTo('/users/browse');
+        $this->assertRedirectTo("/users/edit/$id");
     }
 
     public function testEditSelfRedirect()
@@ -129,6 +129,6 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
         ));
         $request->setMethod('post');
         $this->dispatch("users/edit/$id");
-        $this->assertRedirectTo('/');
+        $this->assertRedirectTo("/users/edit/$id");
     }
 }

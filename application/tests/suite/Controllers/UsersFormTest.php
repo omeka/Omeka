@@ -91,7 +91,7 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
         $this->dispatch('/users/edit/' . $this->adminUser->id);
         $newUsername = $this->db->getTable('User')->find($this->adminUser->id)->username;
         $this->assertEquals($expectedUsername, $newUsername);
-        $this->assertRedirectTo('/users/browse');
+        $this->assertRedirectTo('/users/edit/' . $this->adminUser->id);
     }
     
     public function testChangeOwnUserAccountInfo()
@@ -106,7 +106,7 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
         ));
         $this->request->setMethod('post');
         $this->dispatch('/users/edit/' . $this->currentuser->id);
-        $this->assertRedirectTo('/');
+        $this->assertRedirectTo('/users/edit/' . $this->currentuser->id);
         $changedUser = $this->db->getTable('User')->find($user->id);
         $this->assertEquals("newusername", $changedUser->username);
     }
