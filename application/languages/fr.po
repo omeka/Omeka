@@ -3240,23 +3240,23 @@ msgstr "Recherche Omeka"
 
 #: application/views/scripts/search/index.php:12
 msgid "Record Type"
-msgstr ""
+msgstr "Type d'enregistrement"
 
 #: application/views/scripts/search/index.php:29
 msgid "Your query returned no results."
-msgstr ""
+msgstr "Votre question n'a retourné aucun résultat."
 
 #: application/views/scripts/search/search-filters.php:3
 msgid "Query:"
-msgstr ""
+msgstr "Question:"
 
 #: application/views/scripts/search/search-filters.php:4
 msgid "Query type:"
-msgstr ""
+msgstr "Type de question"
 
 #: application/views/scripts/search/search-filters.php:5
 msgid "Record types:"
-msgstr ""
+msgstr "Types d'enregistrements:"
 
 #: application/views/scripts/search/search-form.php:6
 msgid "Search using this query type:"
