@@ -216,6 +216,7 @@ class UsersController extends Omeka_Controller_AbstractActionController
 
         $this->view->passwordForm = $changePasswordForm;
         $this->view->user = $user;
+        $this->view->currentUser = $currentUser;
         $this->view->form = $form;
         $this->view->keys = $keyTable->findBy(array('user_id' => $user->id));
         

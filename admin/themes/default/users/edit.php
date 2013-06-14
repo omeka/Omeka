@@ -37,7 +37,11 @@ echo head(array('title' => $userTitle, 'bodyclass' => 'users'));
     </div>
     <?php if (!$this->keys): ?>
     <div class="field">
+        <?php if ($this->user->id == $this->currentUser->id): ?>
         <p>You have no API keys. Use the form above to create one.</p>
+        <?php else: ?>
+        <p><?php echo $this->user->name; ?> has no API keys. Use the form above to create one.</p>
+        <?php endif; ?>
     </div>
     <?php else: ?>
     <table>
