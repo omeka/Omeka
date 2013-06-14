@@ -149,6 +149,7 @@ class SettingsController extends Omeka_Controller_AbstractActionController
             $this->_helper->flashMessenger(__('The API configuration was successfully changed!'), 'success');
         }
         
+        $this->view->api_resources = Omeka_Controller_Plugin_Api::getApiResources();
         $this->view->keys = $keyTable->findAll();
     }
     

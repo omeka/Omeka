@@ -42,7 +42,11 @@ class Omeka_Controller_Plugin_Api extends Zend_Controller_Plugin_Abstract
      * "default" and "api". Resources using the default controller MUST include 
      * a "record_type". Remove "actions" that are not wanted or not implemented.
      */
-    protected $_apiResources = array(
+    protected static $_apiResources = array(
+        'site' => array(
+            'controller' => 'site', 
+            'actions' => array('index'), 
+        ), 
         'resources' => array(
             'controller' => 'resources', 
             'actions' => array('index')
@@ -111,7 +115,7 @@ class Omeka_Controller_Plugin_Api extends Zend_Controller_Plugin_Abstract
         
         // Set the available API resources as a front controller param so they 
         // are applied only once and globally accessible.
-        $front->setParam('api_resources', apply_filters('api_resources', $this->_apiResources));
+        $front->setParam('api_resources', self::getApiResources());
         
         // Set the API controller directories.
         $apiControllerDirectories = array();
@@ -120,6 +124,16 @@ class Omeka_Controller_Plugin_Api extends Zend_Controller_Plugin_Abstract
             $apiControllerDirectories[$module] = "$controllerDirectory/api";
         }
         $front->setControllerDirectory($apiControllerDirectories);
+    }
+    
+    /**
+     * Get the filtered API resources.
+     * 
+     * @return array
+     */
+    public static function getApiResources()
+    {
+        return apply_filters('api_resources', self::$_apiResources);
     }
 }
 

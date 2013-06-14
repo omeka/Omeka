@@ -28,6 +28,37 @@ echo flash();
                 <?php echo $this->formText('api_per_page', get_option('api_per_page')); ?>
             </div>
         </div>
+        <p><?php echo __(
+        'After enabling the API, users may be able to show, browse, add, edit, and ' . 
+        'delete your site resources. Add, edit, and delete are protected and require key ' . 
+        'authentication. You can create keys on each user\'s %sedit page%s.', 
+        '<a href="' . url('users') . '">', '</a>'
+        ); ?></p>
+        <table>
+            <thead>
+            <tr>
+                <th><?php echo 'Resource'; ?></th>
+                <th><?php echo 'show'; ?></th>
+                <th><?php echo 'browse'; ?></th>
+                <th><?php echo 'add'; ?></th>
+                <th><?php echo 'edit'; ?></th>
+                <th><?php echo 'delete'; ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($this->api_resources as $resourceName => $resourceInfo): ?>
+            <?php if (in_array($resourceName, array('site', 'resources'))): continue; endif; ?>
+            <tr>
+                <td><?php echo $resourceName; ?></td>
+                <td style="text-align: center;"><?php if (in_array('get', $resourceInfo['actions'])): echo '&#9679;'; endif; ?></td>
+                <td style="text-align: center;"><?php if (in_array('index', $resourceInfo['actions'])): echo '&#9679;'; endif; ?></td>
+                <td style="text-align: center;"><?php if (in_array('post', $resourceInfo['actions'])): echo '&#9679;'; endif; ?></td>
+                <td style="text-align: center;"><?php if (in_array('put', $resourceInfo['actions'])): echo '&#9679;'; endif; ?></td>
+                <td style="text-align: center;"><?php if (in_array('delete', $resourceInfo['actions'])): echo '&#9679;'; endif; ?></td>
+            </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
         <?php fire_plugin_hook('admin_settings_api_form', array('view' => $this)); ?>
     </section>
     <section class="three columns omega">
