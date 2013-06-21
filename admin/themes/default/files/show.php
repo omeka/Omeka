@@ -23,10 +23,10 @@ echo flash();
 </section>
 
 <section class="three columns omega">
-    <?php if (is_allowed('Files', 'edit') or $file->getItem()->wasAddedBy(current_user())): ?>    
+    <?php if (is_allowed($file, 'edit')): ?>
     <div id="edit" class="panel">
         <?php echo link_to($file, 'edit', __('Edit'), array('class'=>'big green button')); ?>
-        <?php if (is_allowed('Files', 'delete')): ?>
+        <?php if (is_allowed($file, 'delete')): ?>
             <?php echo link_to($file, 'delete-confirm', __('Delete'), array('class' => 'big red button delete-confirm')); ?>
         <?php endif; ?>
     </div>
