@@ -21,7 +21,7 @@ echo head(array('title' => $userTitle, 'bodyclass' => 'users'));
 </section>
 <section class="ten columns alpha">
     <form method="post">
-    <h3>API Keys</h3>
+    <h3><?php echo __('API Keys'); ?></h3>
     <div class="field">
         <div class="two columns alpha">
             <label for="search_record_types"><?php echo __('New key label'); ?></label>
@@ -38,20 +38,20 @@ echo head(array('title' => $userTitle, 'bodyclass' => 'users'));
     <?php if (!$this->keys): ?>
     <div class="field">
         <?php if ($this->user->id == $this->currentUser->id): ?>
-        <p>You have no API keys. Use the form above to create one.</p>
+        <p><?php echo __('You have no API keys. Use the form above to create one.'); ?></p>
         <?php else: ?>
-        <p><?php echo $this->user->name; ?> has no API keys. Use the form above to create one.</p>
+        <p><?php echo __('%s has no API keys. Use the form above to create one.', $this->user->name); ?></p>
         <?php endif; ?>
     </div>
     <?php else: ?>
     <table>
         <thead>
             <tr>
-                <th>Label</th>
-                <th>Key</th>
-                <th>Last IP</th>
-                <th>Last accessed</th>
-                <th>Rescind</th>
+                <th><?php echo __('Label'); ?></th>
+                <th><?php echo __('Key'); ?></th>
+                <th><?php echo __('Last IP'); ?></th>
+                <th><?php echo __('Last accessed'); ?></th>
+                <th><?php echo __('Rescind'); ?></th>
             </tr>
         </thead>
         <tbody>
