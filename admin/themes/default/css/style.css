@@ -1388,7 +1388,7 @@ header nav {
     clear: left;
 }
 
-.plugin-title, .plugin-meta, .plugin-description {
+.plugin-title, .plugin-meta, .plugin-description, .plugin-support-link {
     margin: 0;
 }
 

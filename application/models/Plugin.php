@@ -349,6 +349,31 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
     }
     
     /**
+     * Get the support link url from plugin.ini
+     * 
+     * @return string
+     */
+    public function getSupportLinkUrl()
+    {
+        return $this->_support_link;
+    }
+    
+    /**
+     * Set the support link url from plugin.ini
+     * 
+     * @param string $l
+     * @return Plugin
+     */
+    public function setSupportLinkUrl($link)
+    {
+        if ( $link && !parse_url($link, PHP_URL_SCHEME) ) {
+            $link = 'http://'.$link;
+        }
+        $this->_support_link = $link;
+        return $this;
+    }        
+    
+    /**
      * Get the URL link from the plugin.ini.
      *
      * @return string
