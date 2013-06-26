@@ -23,14 +23,15 @@ echo flash();
 </section>
 
 <section class="three columns omega">
-    <?php if (is_allowed($file, 'edit')): ?>
     <div id="edit" class="panel">
-        <?php echo link_to($file, 'edit', __('Edit'), array('class'=>'big green button')); ?>
+        <?php if (is_allowed($file, 'edit')): ?>
+            <?php echo link_to($file, 'edit', __('Edit'), array('class'=>'big green button')); ?>
+        <?php endif; ?>
+        <a href="<?php echo html_escape(public_url('files/show/'.metadata('file', 'id'))); ?>" class="big blue button" target="_blank"><?php echo __('View Public Page'); ?></a>
         <?php if (is_allowed($file, 'delete')): ?>
             <?php echo link_to($file, 'delete-confirm', __('Delete'), array('class' => 'big red button delete-confirm')); ?>
         <?php endif; ?>
     </div>
-    <?php endif; ?>
     
     <div id="item-metadata" class="panel">
         <h4><?php echo __('Item'); ?></h4>
