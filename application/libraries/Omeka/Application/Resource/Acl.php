@@ -60,8 +60,9 @@ class Omeka_Application_Resource_Acl extends Zend_Application_Resource_ResourceA
         
         // Define allow rules for everyone.
         
-        // Everyone can view and browse items, item types, tags, collections, and search.
-        $acl->allow(null, array('Items', 'ItemTypes', 'Tags', 'Collections', 'Search'), 
+        // Everyone can view and browse these resources.
+        $acl->allow(null, array('Items', 'ItemTypes', 'Tags', 'Collections', 'Search', 
+                                'ElementSets', 'Elements'), 
                     array('index', 'browse', 'show'));
         // Everyone can view an item's tags and use the item search.
         $acl->allow(null, array('Items'), array('tags', 'search'));
