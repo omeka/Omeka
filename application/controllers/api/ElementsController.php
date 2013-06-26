@@ -29,7 +29,7 @@ class ElementsController extends ApiController
         
         $elementSet = $file->getTable('ElementSet')->findBy(array('name' => ElementSet::ITEM_TYPE_NAME));
         if ($element->element_set_id != $elementSet->id) {
-            throw new Omeka_Controller_Exception_Api('Invalid record. Only elements belonging to the "Item Type Metadata" element set may be deleted.', 404);
+            throw new Omeka_Controller_Exception_Api('Invalid record. Only elements belonging to the "Item Type Metadata" element set may be deleted.', 400);
         }
         
         // The user must have permission to delete this record.

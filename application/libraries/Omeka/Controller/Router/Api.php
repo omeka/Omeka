@@ -200,11 +200,11 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
         }
         
         if ($params && 'post' == $action) {
-            throw new Omeka_Controller_Exception_Api('POST requests must not include an ID.', 404);
+            throw new Omeka_Controller_Exception_Api('POST requests must not include an ID.', 405);
         }
         
         if (!$params && in_array($action, array('put', 'delete'))) {
-            throw new Omeka_Controller_Exception_Api('PUT and DELETE requests must include an ID.', 404);
+            throw new Omeka_Controller_Exception_Api('PUT and DELETE requests must include an ID.', 405);
         }
         
         // The action must be available for the resource.
@@ -213,7 +213,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
             $legalActions = $apiResources[$resource]['actions'];
         }
         if (!in_array($action, $legalActions)) {
-            throw new Omeka_Controller_Exception_Api("This resource does not implement the \"$action\" action.", 404);
+            throw new Omeka_Controller_Exception_Api("This resource does not implement the \"$action\" action.", 405);
         }
         
         return $action;
@@ -242,7 +242,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
         
         foreach ($_GET as $key => $value) {
             if (!in_array($key, $legalParams)) {
-                throw new Omeka_Controller_Exception_Api("Invalid GET request parameter: \"$key\"", 404);
+                throw new Omeka_Controller_Exception_Api("Invalid GET request parameter: \"$key\"", 400);
             }
         }
     }

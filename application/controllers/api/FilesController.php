@@ -37,17 +37,17 @@ class FilesController extends ApiController
         // adapter may be overwritten by the asynchronous job process.
         $defaultDispatcher = $bootstrap->config->jobs->dispatcher->default;
         if ('Omeka_Job_Dispatcher_Adapter_Synchronous' != $defaultDispatcher) {
-            throw new Omeka_Controller_Exception_Api('Invalid request. The default job dispatcher must be synchronous.', 404);
+            throw new Omeka_Controller_Exception_Api('Invalid request. The default job dispatcher must be synchronous.', 500);
         }
         
         // Check for valid file.
         if (!isset($_FILES[self::FILE_NAME]['name']) || is_array($_FILES[self::FILE_NAME]['name'])) {
-            throw new Omeka_Controller_Exception_Api('Invalid request. Exactly one file must be uploaded per request.', 404);
+            throw new Omeka_Controller_Exception_Api('Invalid request. Exactly one file must be uploaded per request.', 400);
         }
         
         // Check for valid JSON data.
         if (!isset($_POST[self::DATA_NAME])) {
-            throw new Omeka_Controller_Exception_Api('Invalid request. Missing JSON data.', 404);
+            throw new Omeka_Controller_Exception_Api('Invalid request. Missing JSON data.', 400);
         }
         $data = json_decode($_POST[self::DATA_NAME]);
         if (!($data instanceof stdClass)) {
@@ -58,11 +58,11 @@ class FilesController extends ApiController
         
         // Check for valid item.
         if (!isset($data->item->id) && !is_object($data->item->id)) {
-            throw new Omeka_Controller_Exception_Api('Invalid item. File must belong to an existing item.', 404);
+            throw new Omeka_Controller_Exception_Api('Invalid item. File must belong to an existing item.', 400);
         }
         $item = $db->getTable('Item')->find($data->item->id);
         if (!$item) {
-            throw new Omeka_Controller_Exception_Api('Invalid item. File must belong to an existing item.', 404);
+            throw new Omeka_Controller_Exception_Api('Invalid item. File must belong to an existing item.', 400);
         }
         
         // The user must have permission to edit the owner item.
