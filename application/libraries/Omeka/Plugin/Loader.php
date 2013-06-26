@@ -109,7 +109,7 @@ class Omeka_Plugin_Loader
     {
         $dirName = $plugin->getDirectoryName();
         if (array_key_exists($dirName, $this->_plugins) && $this->_plugins[$dirName] !== $plugin) {
-            throw new Omeka_Plugin_Loader_Exception("Plugin named '$dirName' has already been loaded/registered.");
+            throw new Omeka_Plugin_Loader_Exception(__("Plugin named '%s' has already been loaded/registered.", $dirName));
         }
         $this->_plugins[$dirName] = $plugin;
     }
@@ -150,7 +150,7 @@ class Omeka_Plugin_Loader
         $pluginDirName = $plugin->getDirectoryName();
         if (!$this->_canLoad($plugin, $force)) {
             if ($force) {
-                throw new Omeka_Plugin_Loader_Exception("The $pluginDirName plugin could not be loaded.");
+                throw new Omeka_Plugin_Loader_Exception(__("The %s plugin could not be loaded.", $pluginDirName));
             } else {
                 return;
             }
@@ -171,7 +171,7 @@ class Omeka_Plugin_Loader
                 // If we can't find one of the required plugins, loading should
                 // fail.
                 if ($force) {
-                    throw new Omeka_Plugin_Loader_Exception("The required plugin '$requiredPluginDirName' could not be found.");
+                    throw new Omeka_Plugin_Loader_Exception(__("The required plugin '%s' could not be found.", $requiredPluginDirName));
                 } else {
                     return;
                 }
@@ -244,24 +244,24 @@ class Omeka_Plugin_Loader
         $loadCriteria = array(
             array(
                 'check' => !$this->hasPluginBootstrap($plugin),
-                'exception' => "'$pluginDirName' has no valid bootstrap file."),
+                'exception' => __("'%s' has no valid bootstrap file.", $pluginDirName)),
             array(
                 'check' => !$plugin->isInstalled(),
-                'exception' => "'$pluginDirName' has not been installed."),
+                'exception' => __("'%s' has not been installed.", $pluginDirName)),
             array(
                 'check' => !$plugin->isActive(),
-                'exception' => "'$pluginDirName' has not been activated."),
+                'exception' => __("'%s' has not been activated.", $pluginDirName)),
             array(
                 'check' => !$plugin->meetsOmekaMinimumVersion(),
-                'exception' => "'$pluginDirName' requires a newer version of Omeka."),
+                'exception' => __("'%s' requires a newer version of Omeka.", $pluginDirName)),
             // Cannot upgrade a plugin if we do this check when trying to force
             // the plugin to load.
             array(
                 'check' => $plugin->hasNewVersion(),
-                'exception' => "'$pluginDirName' must be upgraded to the new version before it can be loaded."),
+                'exception' => __("'%s' must be upgraded to the new version before it can be loaded.", $pluginDirName)),
             array(
                 'check' => $plugin->isLoaded(),
-                'exception' => "'$pluginDirName' cannot be loaded twice.")
+                'exception' => __("'%s' cannot be loaded twice.", $pluginDirName))
         );
         
         foreach ($loadCriteria as $criteria) {
