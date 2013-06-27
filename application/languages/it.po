@@ -6,6 +6,7 @@
 # Alec <alec.wiki@gmail.com>, 2012
 # Alec <alec.wiki@gmail.com>, 2013
 # Donatella Mutti <donatella.mutti@unito.it>, 2012
+# fabio_t <fabio.tian@gmail.com>, 2013
 # guzzettg <guzzettg@gmail.com>, 2013
 # guzzettg <guzzettg@gmail.com>, 2012
 # Stefano Costa <steko@iosa.it>, 2012
@@ -14,7 +15,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-03-20 10:21+0000\n"
+"PO-Revision-Date: 2013-05-21 11:51+0000\n"
 "Last-Translator: Alec <alec.wiki@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/omeka/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -116,7 +117,7 @@ msgstr "Formato"
 
 #. Dublin Core: Format element description
 msgid "The file format, physical medium, or dimensions of the resource"
-msgstr ""
+msgstr "Il formato del file, il supporto fisico o le dimensioni della risorsa"
 
 #. Dublin Core: Identifier element name
 msgid "Identifier"
@@ -124,7 +125,7 @@ msgstr "Identificatore"
 
 #. Dublin Core: Identifier element description
 msgid "An unambiguous reference to the resource within a given context"
-msgstr ""
+msgstr "Un riferimento univoco alla risorsa all'interno di uno specifico contesto"
 
 #. Dublin Core: Source element name
 msgid "Source"
@@ -132,7 +133,7 @@ msgstr "Fonte"
 
 #. Dublin Core: Source element description
 msgid "A related resource from which the described resource is derived"
-msgstr ""
+msgstr "Una risorsa correlata da cui deriva la risorsa descritta  "
 
 #. Dublin Core: Language element name
 msgid "Language"
@@ -515,11 +516,11 @@ msgstr "Tutte le collezioni"
 
 #: admin/themes/default/collections/browse.php:70
 msgid "You have no collections."
-msgstr ""
+msgstr "Non hai creato delle collezioni."
 
 #: admin/themes/default/collections/browse.php:72
 msgid "Get started by adding your first collection."
-msgstr ""
+msgstr "Comincia creando la tua prima collezione."
 
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
@@ -896,7 +897,7 @@ msgstr "tema"
 
 #: admin/themes/default/index.php:29
 msgid "A new version of Omeka is available for download."
-msgstr ""
+msgstr "Una nuova versione di Omeka è disponibile."
 
 #: admin/themes/default/index.php:30
 #, php-format
@@ -1021,7 +1022,7 @@ msgstr ""
 #: admin/themes/default/items/batch-delete.php:38
 msgid ""
 "Some items were excluded because you do not have permission to delete them."
-msgstr ""
+msgstr "Alcuni documenti sono stati esclusi perché non hai i permessi per cancellarli."
 
 #: admin/themes/default/items/batch-delete.php:41
 msgid "Checked items will be deleted."
@@ -1168,7 +1169,7 @@ msgstr ""
 
 #: admin/themes/default/items/browse.php:150
 msgid "Get started by adding your first item."
-msgstr ""
+msgstr "Comincia creando il tuo primo documento."
 
 #: admin/themes/default/items/browse.php:154
 #, php-format
@@ -1177,7 +1178,7 @@ msgstr "La ricerca è stata effettuata su %s documenti, ma non è stato ritrovat
 
 #: admin/themes/default/items/browse.php:154
 msgid "refine your search"
-msgstr "raffina la tua ricerca"
+msgstr "raffinare la tua ricerca"
 
 #: admin/themes/default/items/browse.php:154
 #, php-format
@@ -1191,11 +1192,11 @@ msgstr "Modifica il documento #%s"
 
 #: admin/themes/default/items/files-form.php:2
 msgid "Click and drag the files into the preferred display order."
-msgstr ""
+msgstr "Clicca e trascina i file nell'ordine di visualizzazione che preferisci."
 
 #: admin/themes/default/items/files-form.php:12
 msgid "Delete "
-msgstr ""
+msgstr "Cancella"
 
 #: admin/themes/default/items/files-form.php:21
 msgid "Add New Files"
@@ -1204,7 +1205,7 @@ msgstr "Aggiungi nuovi file"
 #: admin/themes/default/items/files-form.php:23
 #, php-format
 msgid "The maximum file size is %s."
-msgstr ""
+msgstr "La dimensione massima del file è %s."
 
 #: admin/themes/default/items/files-form.php:26
 msgid "Find a File"
@@ -1400,7 +1401,7 @@ msgstr ""
 #: admin/themes/default/plugins/browse.php:57
 #, php-format
 msgid "by %s"
-msgstr ""
+msgstr "per %s"
 
 #: admin/themes/default/plugins/browse.php:66
 #, php-format
@@ -1481,7 +1482,7 @@ msgstr ""
 
 #: admin/themes/default/settings/edit-item-type-elements.php:42
 msgid "Confirm Delete"
-msgstr ""
+msgstr "Conferma la cancellazione"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:43
 msgid ""
@@ -1522,7 +1523,7 @@ msgstr ""
 
 #: admin/themes/default/settings/edit-security.php:23
 msgid "Restore Default Extensions"
-msgstr ""
+msgstr "Ripristina le estensioni predefinite"
 
 #: admin/themes/default/settings/edit-security.php:28
 msgid "Restore Default Types"
@@ -1606,7 +1607,7 @@ msgid ""
 "ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a "
 "href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" "
 "target=\"_blank\">design your own</a>!"
-msgstr ""
+msgstr "Ottieni nuovi temi scaricandoli dalla <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, oppure <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">crea il tuo</a>!"
 
 #: admin/themes/default/themes/browse.php:44
 msgid "Use this theme"
@@ -1665,7 +1666,7 @@ msgstr ""
 #: admin/themes/default/users/activate.php:2
 #: application/views/scripts/users/activate.php:2
 msgid "User Activation"
-msgstr ""
+msgstr "Attivazione utente"
 
 #: admin/themes/default/users/activate.php:18
 #: application/forms/ResetPassword.php:23
@@ -1791,7 +1792,7 @@ msgstr "La collezione \"%s\" è stata aggiunta!"
 #: application/controllers/CollectionsController.php:76
 #, php-format
 msgid "The collection #%s was successfully added!"
-msgstr ""
+msgstr "La collezione #%s è stata creata con successo!"
 
 #: application/controllers/CollectionsController.php:84
 #, php-format
@@ -1801,7 +1802,7 @@ msgstr "La collezione \"%s\" è stata modificata!"
 #: application/controllers/CollectionsController.php:86
 #, php-format
 msgid "The collection #%s was successfully changed!"
-msgstr ""
+msgstr "La collezione #%s è stata modificata con successo!"
 
 #: application/controllers/CollectionsController.php:94
 #, php-format
@@ -1811,7 +1812,7 @@ msgstr "La collezione \"%s\" è stata eliminata!"
 #: application/controllers/CollectionsController.php:96
 #, php-format
 msgid "The collection #%s was successfully deleted!"
-msgstr ""
+msgstr "La collezione #%s è stata cancellata con successo!"
 
 #: application/controllers/CollectionsController.php:104
 #, php-format
@@ -1819,7 +1820,7 @@ msgid ""
 "This will delete the collection \"%s\" and its associated metadata. This "
 "will not delete any items in this collection, but will delete the reference "
 "to this collection in each item."
-msgstr ""
+msgstr "Questo cancellerà la collezione \"%s\" e i metadati collegati ad essa. Non verrà cancellato alcun documento in questa collezione, ma verrà cancellato il riferimento a questa collezione da ogni documento."
 
 #: application/controllers/CollectionsController.php:108
 #, php-format
@@ -1827,7 +1828,7 @@ msgid ""
 "This will delete the collection #%s and its associated metadata. This will "
 "not delete any items in this collection, but will delete the reference to "
 "this collection in each item."
-msgstr ""
+msgstr "Questo cancellerà la collezione #%s e i metadati collegati ad essa. Non verrà cancellato alcun documento in questa collezione, ma verrà cancellato il riferimento a questa collezione da ogni documento."
 
 #: application/controllers/ElementSetsController.php:21
 msgid ""
@@ -1854,12 +1855,12 @@ msgstr ""
 #: application/controllers/ItemTypesController.php:28
 #, php-format
 msgid "The item type \"%s\" was successfully added."
-msgstr ""
+msgstr "Il tipo di documento \"%s\" è stato creato con successo."
 
 #: application/controllers/ItemTypesController.php:54
 #, php-format
 msgid "The item type \"%s\" was successfully updated."
-msgstr ""
+msgstr "Il tipo di documento \"%s\" è stato modificato con successo."
 
 #: application/controllers/ItemTypesController.php:149
 #, php-format
@@ -1879,46 +1880,46 @@ msgstr "Il tipo di documento \"%s\" è stato aggiunto correttamente!  Ora puoi a
 #: application/controllers/ItemsController.php:95
 #, php-format
 msgid "The item \"%s\" was successfully added!"
-msgstr ""
+msgstr "Il documento \"%s\" è stato creato con successo!"
 
 #: application/controllers/ItemsController.php:97
 #, php-format
 msgid "The item #%s was successfully added!"
-msgstr ""
+msgstr "Il documento #%s è stato creato con successo!"
 
 #: application/controllers/ItemsController.php:105
 #, php-format
 msgid "The item \"%s\" was successfully changed!"
-msgstr ""
+msgstr "Il documento \"%s\" è stato modificato con successo!"
 
 #: application/controllers/ItemsController.php:107
 #, php-format
 msgid "The item #%s was successfully changed!"
-msgstr ""
+msgstr "Il documento #%s è stato modificato con successo!"
 
 #: application/controllers/ItemsController.php:115
 #, php-format
 msgid "The item \"%s\" was successfully deleted!"
-msgstr ""
+msgstr "Il documento \"%s\" è stato cancellato con successo!"
 
 #: application/controllers/ItemsController.php:117
 #, php-format
 msgid "The item #%s was successfully deleted!"
-msgstr ""
+msgstr "Il documento #%s è stato cancellato con successo!"
 
 #: application/controllers/ItemsController.php:125
 #, php-format
 msgid ""
 "This will delete the item \"%s\" and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr ""
+msgstr "Questo cancellerà l'oggetto \"%s\" e i metadati collegati ad esso. Cancellerà anche tutti i file e relativi metadati collegati a quest'oggetto."
 
 #: application/controllers/ItemsController.php:129
 #, php-format
 msgid ""
 "This will delete the item #%s and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr ""
+msgstr "Questo cancellerà l'oggetto #%s e i metadati collegati ad esso. Cancellerà anche tutti i file e relativi metadati collegati a quest'oggetto."
 
 #: application/controllers/ItemsController.php:255
 msgid "You must choose some items to batch edit."
@@ -1946,7 +1947,7 @@ msgstr "L'utente non ha i diritti per indicare un tag per i documenti selezionat
 
 #: application/controllers/ItemsController.php:356
 msgid "The items were successfully deleted!"
-msgstr ""
+msgstr "I documenti sono stati cancellati con successo!"
 
 #: application/controllers/ItemsController.php:358
 msgid "The items were successfully changed!"
@@ -2071,11 +2072,11 @@ msgstr ""
 
 #: application/controllers/SettingsController.php:160
 msgid "The ImageMagick directory path works."
-msgstr ""
+msgstr "Il percorso di ImageMagick è corretto."
 
 #: application/controllers/SettingsController.php:161
 msgid "The ImageMagick directory path does not work."
-msgstr ""
+msgstr "Il percorso di ImageMagick non è corretto."
 
 #: application/controllers/TagsController.php:35
 msgid "You have to be logged in to edit tags!"
@@ -2101,7 +2102,7 @@ msgstr "Hai scelto un nome non valido per il tema. Per favore scegli un altro te
 #: application/controllers/ThemesController.php:40
 #, php-format
 msgid "This theme requires a newer version of Omeka (%s)."
-msgstr ""
+msgstr "Questo tema richiede una versione più recente di Omeka (%s)."
 
 #: application/controllers/ThemesController.php:54
 msgid "The theme has been successfully changed."
@@ -2165,7 +2166,7 @@ msgstr "L'utente \"%s\" è stato aggiunto!"
 #: application/controllers/UsersController.php:175
 #, php-format
 msgid "The user \"%s\" was added, but the activation email could not be sent."
-msgstr ""
+msgstr "L'utente \"%s\" è stato creato, ma non è stato possibile inviare l'e-mail di attivazione."
 
 #: application/controllers/UsersController.php:226
 #: application/controllers/UsersController.php:237
@@ -2249,7 +2250,7 @@ msgstr ""
 msgid ""
 "Limit the number of results displayed per page in the administrative "
 "interface."
-msgstr ""
+msgstr "Limita il numero di risultati per pagina visualizzati nell'interfaccia di amministrazione."
 
 #: application/forms/AppearanceSettings.php:50
 msgid "Results Per Page (public)"
@@ -2258,7 +2259,7 @@ msgstr ""
 #: application/forms/AppearanceSettings.php:51
 msgid ""
 "Limit the number of results displayed per page in the public interface."
-msgstr ""
+msgstr "Limita il numero di risultati per pagina visualizzati nell'interfaccia pubblica."
 
 #: application/forms/AppearanceSettings.php:57
 #: application/forms/Install.php:157
@@ -2280,11 +2281,11 @@ msgstr "Vecchia password"
 #: application/forms/ChangePassword.php:26
 #: application/forms/ChangePassword.php:36
 msgid "Password must be at least 6 characters long."
-msgstr ""
+msgstr "La password deve contenere almeno 6 caratteri."
 
 #: application/forms/ChangePassword.php:28
 msgid "Invalid current password"
-msgstr ""
+msgstr "Password attuale non valida"
 
 #: application/forms/ChangePassword.php:34
 msgid "New Password"
@@ -2292,16 +2293,16 @@ msgstr "Nuova password"
 
 #: application/forms/ChangePassword.php:41
 msgid "New password must be entered."
-msgstr ""
+msgstr "Inserire la nuova password."
 
 #: application/forms/ChangePassword.php:50
 #: application/forms/ChangePassword.php:70
 msgid "New password must be typed correctly twice."
-msgstr ""
+msgstr "Digitare correttamente due volte la nuova password."
 
 #: application/forms/ChangePassword.php:59
 msgid "New password must be at least %min% characters long."
-msgstr ""
+msgstr "La nuova password deve contenere almeno %min% caratteri."
 
 #: application/forms/ChangePassword.php:68
 msgid "Repeat New Password"
@@ -2347,11 +2348,11 @@ msgstr "Separa i tag con questo carattere o stringa di testo. Presta attenzione 
 
 #: application/forms/GeneralSettings.php:59 application/forms/Install.php:163
 msgid "ImageMagick Directory Path"
-msgstr ""
+msgstr "Percorso di ImageMagick"
 
 #: application/forms/Install.php:31
 msgid "only alphanumeric characters are allowed"
-msgstr ""
+msgstr "sono ammessi solo caratteri alfanumerici"
 
 #: application/forms/Install.php:37 application/forms/Login.php:34
 msgid "Password"
@@ -2359,7 +2360,7 @@ msgstr "Password"
 
 #: application/forms/Install.php:38
 msgid "must be at least 6 characters"
-msgstr ""
+msgstr "deve contenere almeno 6 caratteri"
 
 #: application/forms/Install.php:61
 msgid "Confirm your password."
@@ -2413,11 +2414,11 @@ msgstr "Impostazioni del sito"
 
 #: application/forms/ItemTypes.php:142
 msgid "The name of the item type."
-msgstr ""
+msgstr "Il nome del tipo di documento."
 
 #: application/forms/ItemTypes.php:151
 msgid "The description of the item type."
-msgstr ""
+msgstr "La descrizione del tipo di documento."
 
 #: application/forms/ItemTypes.php:188 application/forms/ItemTypes.php:197
 #, php-format
@@ -2509,7 +2510,7 @@ msgstr "Estensioni file consentite"
 
 #: application/forms/SecuritySettings.php:33
 msgid "List of allowed extensions for file uploads"
-msgstr ""
+msgstr "Lista delle estensioni ammesse per il caricamento dei file"
 
 #: application/forms/SecuritySettings.php:42
 msgid "Allowed File Types"
@@ -2545,7 +2546,7 @@ msgstr ""
 
 #: application/forms/SecuritySettings.php:74
 msgid "Allowed HTML Elements"
-msgstr ""
+msgstr "Elementi HTML ammessi"
 
 #: application/forms/SecuritySettings.php:75
 msgid "List of allowed HTML elements in form input"
@@ -2553,7 +2554,7 @@ msgstr ""
 
 #: application/forms/SecuritySettings.php:82
 msgid "Allowed HTML Attributes"
-msgstr ""
+msgstr "Attributi HTML ammessi"
 
 #: application/forms/SecuritySettings.php:83
 msgid "List of allowed HTML attributes in form input"
@@ -2565,7 +2566,7 @@ msgstr ""
 
 #: application/forms/SecuritySettings.php:102
 msgid "Captcha"
-msgstr ""
+msgstr "Captcha"
 
 #: application/forms/SecuritySettings.php:111
 msgid "HTML Filtering"
@@ -2575,7 +2576,7 @@ msgstr ""
 msgid ""
 "Username must contain only letters and numbers, and be 30 characters or "
 "fewer."
-msgstr ""
+msgstr "Il nome utente deve contenere solo lettere e numeri ed avere una lunghezza inferiore ai 30 caratteri."
 
 #: application/forms/User.php:37
 msgid "Username is required."
@@ -2626,7 +2627,7 @@ msgid ""
 "Roles describe the permissions a user has. See <a "
 "href='http://omeka.org/codex/User_Roles' target='_blank'>documentation</a> "
 "for details."
-msgstr ""
+msgstr "I ruoli definiscono i permessi in possesso degli utenti. Vedi la <a href='http://omeka.org/codex/User_Roles' target='_blank'>documentazione</a> per i dettagli."
 
 #: application/forms/User.php:137
 msgid "Active?"
@@ -2634,12 +2635,12 @@ msgstr ""
 
 #: application/forms/User.php:138
 msgid "Inactive users cannot log in to the site."
-msgstr ""
+msgstr "Gli utenti inattivi non possono accedere al sito."
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:115
 #, php-format
 msgid "The configured PHP path (%s) is invalid."
-msgstr ""
+msgstr "Il percorso impostato per PHP (%s) non è valido."
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:125
 #, php-format
@@ -2671,7 +2672,7 @@ msgstr ""
 #: application/libraries/Omeka/Plugin/Ini.php:63
 #, php-format
 msgid "Path to plugin.ini for \"%s\" is not correct."
-msgstr ""
+msgstr "Il percorso per plugin.ini di \"%s\" non è corretto."
 
 #: application/libraries/Omeka/Plugin/Installer.php:77
 #, php-format
@@ -2693,7 +2694,7 @@ msgstr ""
 
 #: application/libraries/globals.php:399
 msgid "File"
-msgstr ""
+msgstr "File"
 
 #: application/libraries/globals.php:457
 msgid "Keyword"
@@ -2705,7 +2706,7 @@ msgstr ""
 
 #: application/libraries/globals.php:459
 msgid "Exact match"
-msgstr ""
+msgstr "Corrispondenza esatta"
 
 #: application/libraries/globals.php:1227
 #: application/libraries/globals.php:1248
@@ -2817,13 +2818,13 @@ msgstr ""
 #: application/models/Item.php:391
 #, php-format
 msgid "%1$s and %2$s"
-msgstr ""
+msgstr "%1$s e %2$s"
 
 #. / Chicago-style item citation: three authors
 #: application/models/Item.php:395
 #, php-format
 msgid "%1$s, %2$s, and %3$s"
-msgstr ""
+msgstr "%1$s, %2$s e %3$s"
 
 #. / Chicago-style item citation: more than three authors
 #: application/models/Item.php:399
@@ -2992,7 +2993,7 @@ msgstr "Modifica i documenti"
 #: application/tests/suite/Omeka/NavigationTest.php:856
 #: application/tests/suite/Omeka/NavigationTest.php:953
 msgid "Edit Collections"
-msgstr ""
+msgstr "Modifica le collezioni"
 
 #: application/tests/suite/Omeka/NavigationTest.php:764
 #: application/tests/suite/Omeka/NavigationTest.php:819
@@ -3000,19 +3001,19 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:954
 #: install/views/scripts/layout.phtml:6 install/views/scripts/layout.phtml:23
 msgid "Omeka"
-msgstr ""
+msgstr "Omeka"
 
 #: application/tests/suite/Omeka/NavigationTest.php:825
 #: application/tests/suite/Omeka/NavigationTest.php:951
 msgid "CHNM"
-msgstr ""
+msgstr "CHNM"
 
 #: application/tests/suite/Omeka/NavigationTest.php:982
 #: application/tests/suite/Omeka/NavigationTest.php:990
 #: application/tests/suite/Omeka/NavigationTest.php:1128
 #: application/tests/suite/Omeka/NavigationTest.php:1136
 msgid "Page "
-msgstr ""
+msgstr "Pagina"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1009
 #: application/tests/suite/Omeka/NavigationTest.php:1013
@@ -3133,7 +3134,7 @@ msgstr "Oggetti nella collezione %s"
 
 #: application/views/scripts/collections/show.php:40
 msgid "There are currently no items within this collection."
-msgstr ""
+msgstr "La collezione non ha documenti al momento."
 
 #: application/views/scripts/common/footer.php:14
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
@@ -3316,11 +3317,11 @@ msgstr ""
 
 #: install/views/scripts/index/installed.phtml:1
 msgid "Success!"
-msgstr ""
+msgstr "Completato!"
 
 #: install/views/scripts/index/installed.phtml:2
 msgid "Omeka is installed."
-msgstr ""
+msgstr "Omeka è installato."
 
 #: install/views/scripts/index/installed.phtml:3
 msgid "Public Site"

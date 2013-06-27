@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-04-25 13:47+0000\n"
-"Last-Translator: dewulfevy <evy.dewulf@libis.kuleuven.be>\n"
+"PO-Revision-Date: 2013-05-01 11:51+0000\n"
+"Last-Translator: Sam Alloing <sam.alloing@gmail.com>\n"
 "Language-Team: Dutch (Belgium) (http://www.transifex.com/projects/p/omeka/language/nl_BE/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2168,7 +2168,7 @@ msgstr "De gebruiker \"%s\" werd toegevoegd, maar de e-mail om te activeren kan 
 #: application/controllers/UsersController.php:226
 #: application/controllers/UsersController.php:237
 msgid "There was an invalid entry on the form. Please try again."
-msgstr ""
+msgstr "Er stond een ongeldige invoer in het formulier. Probeer het opnieuw."
 
 #: application/controllers/UsersController.php:233
 msgid "Password changed!"
@@ -2210,7 +2210,7 @@ msgstr "Activeer uw account met de %s repository"
 
 #: application/controllers/UsersController.php:392
 msgid "Login information incorrect. Please try again."
-msgstr ""
+msgstr "Login informatie is fout. Probeer het opnieuw."
 
 #: application/forms/AppearanceSettings.php:22
 #: application/forms/Install.php:117
@@ -2265,7 +2265,7 @@ msgstr "Toon lege elementen"
 
 #: application/forms/AppearanceSettings.php:66
 msgid "Derivative Size Constraints"
-msgstr ""
+msgstr "Beperkingen in grootte van de afgeleiden"
 
 #: application/forms/AppearanceSettings.php:71
 msgid "Display Settings"
@@ -2282,7 +2282,7 @@ msgstr "Wachtwoord moet minstens 6 karakters lang zijn."
 
 #: application/forms/ChangePassword.php:28
 msgid "Invalid current password"
-msgstr ""
+msgstr "Huidig wachtwoord ongeldig"
 
 #: application/forms/ChangePassword.php:34
 msgid "New Password"
@@ -2369,15 +2369,15 @@ msgstr "Scheid tags met behulp van dit teken of deze tekenreeks."
 
 #: application/forms/Install.php:118
 msgid "Maximum fullsize image size constraint (in pixels)"
-msgstr ""
+msgstr "Beperking maximale fullsize afbeeldingsgrootte (in pixels)."
 
 #: application/forms/Install.php:126
 msgid "Maximum thumbnail size constraint (in pixels)"
-msgstr ""
+msgstr "Beperking maximale thumbnail grootte (in pixels)."
 
 #: application/forms/Install.php:134
 msgid "Maximum square thumbnail size constraint (in pixels)"
-msgstr ""
+msgstr "Beperking maximale vierkante miniatuurvoorbeeld grootte (in pixels)."
 
 #: application/forms/Install.php:141
 msgid "Items Per Page (admin)"
@@ -2399,7 +2399,7 @@ msgstr "Beperk het aantal getoonde items per pagina in de openbare interface."
 
 #: application/forms/Install.php:159
 msgid "Check box to show metadata elements with no text."
-msgstr ""
+msgstr "Vink aan om metadata elementen zonder tekst te tonen."
 
 #: application/forms/Install.php:174
 msgid "Default Superuser Account"
@@ -2444,7 +2444,7 @@ msgstr "Selecteer een homepage"
 
 #: application/forms/Navigation.php:244
 msgid "Cannot find parent navigation page."
-msgstr ""
+msgstr "Kan hoofdnavigatiepagina niet vinden."
 
 #: application/forms/Navigation.php:326
 msgid "All navigation links must have URIs."
@@ -2461,7 +2461,7 @@ msgstr "Ongeldige URI voor \"%s\" navigatie link: \"%s\""
 
 #: application/forms/Navigation.php:378
 msgid "Navigation links that have undeleteable sublinks cannot be deleted."
-msgstr ""
+msgstr "Navigatielinks die onverwijderbare sublinks hebben, kunnen niet verwijderd worden."
 
 #: application/forms/RecoverPassword.php:36
 msgid "Email address is required."
@@ -2539,7 +2539,7 @@ msgstr "Vul de publieke sleutel van recaptcha.net in. Zowel deze als de persoonl
 
 #: application/forms/SecuritySettings.php:69
 msgid "Enable HTML Filtering"
-msgstr ""
+msgstr "Schakel HTML filtering in"
 
 #: application/forms/SecuritySettings.php:74
 msgid "Allowed HTML Elements"
@@ -2555,11 +2555,11 @@ msgstr "Toegestane HTML-attributen"
 
 #: application/forms/SecuritySettings.php:83
 msgid "List of allowed HTML attributes in form input"
-msgstr ""
+msgstr "Lijst met toegestane HTML-attributen in formulierinvoer"
 
 #: application/forms/SecuritySettings.php:94
 msgid "File Validation"
-msgstr ""
+msgstr "Bestandsvalidatie"
 
 #: application/forms/SecuritySettings.php:102
 msgid "Captcha"
@@ -2567,7 +2567,7 @@ msgstr "Captcha"
 
 #: application/forms/SecuritySettings.php:111
 msgid "HTML Filtering"
-msgstr ""
+msgstr "HTML filtering"
 
 #: application/forms/User.php:30
 msgid ""
@@ -2632,7 +2632,7 @@ msgstr "Actief?"
 
 #: application/forms/User.php:138
 msgid "Inactive users cannot log in to the site."
-msgstr ""
+msgstr "Niet-actieve gebruikers kunnen niet inloggen op de site."
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:115
 #, php-format
@@ -2642,29 +2642,29 @@ msgstr "Het geconfigureerde PHP pad (%s) is ongeldig."
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:125
 #, php-format
 msgid "The configured PHP path (%s) does not point to a PHP-CLI binary."
-msgstr ""
+msgstr "Het geconfigureerde PHP-pad (%s) verwijst niet naar een PHP-CLI binair."
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:127
 #, php-format
 msgid ""
 "The configured PHP path (%s) points to a PHP-CLI binary with an invalid "
 "version (%s)"
-msgstr ""
+msgstr "Het geconfigureerde PHP-pad (%s) verwijst naar een PHP-CLI binair met een ongeldige versie (%s)"
 
 #: application/libraries/Omeka/Navigation.php:214
 msgid "The page must be normalized and have a valid uid."
-msgstr ""
+msgstr "De pagina moet genormaliseerd worden en moet een geldig uid hebben."
 
 #: application/libraries/Omeka/Navigation.php:226
 msgid ""
 "The parent container must either be the navigation object or a descendant "
 "subpage of the navigation object."
-msgstr ""
+msgstr "De bovenliggende container moet ofwel het navigatie-object of een lagerliggende subpagina van het navigatie-object zijn."
 
 #: application/libraries/Omeka/Navigation/Page/Uri.php:128
 #, php-format
 msgid "Invalid URI for Omeka_Navigation_Page_Uri object: %s"
-msgstr ""
+msgstr "Ongeldige URI voor Omeka_Navigatiepagina_Uri object: %s"
 
 #: application/libraries/Omeka/Plugin/Ini.php:63
 #, php-format
@@ -2674,7 +2674,7 @@ msgstr "Pad naar plugin.ini voor \"%s\" is niet juist."
 #: application/libraries/Omeka/Plugin/Installer.php:77
 #, php-format
 msgid "The \"%s\" plugin must be installed and have newer files to upgrade it."
-msgstr ""
+msgstr "De \"%s\" plugin moet worden geïnstalleerd en moet nieuwere bestanden hebben om te upgraden."
 
 #: application/libraries/Omeka/Plugin/Installer.php:114
 msgid "Plugin must have a valid directory name before it can be installed."
@@ -2687,7 +2687,7 @@ msgstr "\"%s\" is een ongeldige speciale waarde."
 
 #: application/libraries/Omeka/Record/Iterator.php:49
 msgid "An invalid value was detected during record iteration."
-msgstr ""
+msgstr "Een ongeldige waarde werd ontdekt tijdens record herhaling."
 
 #: application/libraries/globals.php:399
 msgid "File"
@@ -2791,7 +2791,7 @@ msgstr "Ongeldig record ID."
 
 #: application/models/ElementText.php:31
 msgid "All element texts must have a record type."
-msgstr ""
+msgstr "Alle elementteksten moeten een recordtype hebben."
 
 #: application/models/ElementText.php:34
 msgid "Invalid element ID."
@@ -2804,7 +2804,7 @@ msgstr "Kan het lokale pad voor een opgeslagen bestanden niet vinden."
 #: application/models/File.php:371
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
-msgstr ""
+msgstr "\"%s\" is geen geldige bestandsafgeleide."
 
 #: application/models/Item.php:265
 msgid ""
@@ -2833,7 +2833,7 @@ msgstr "%s enz."
 #: application/models/Item.php:417
 #, php-format
 msgid "accessed %1$s, %2$s."
-msgstr ""
+msgstr "toegankelijk %1$s, %2$s."
 
 #: application/models/Item.php:435
 msgid "Cannot add an existing file to an item!"
@@ -2972,11 +2972,11 @@ msgstr "Kan geen gebruikersactivering aanmaken voor een niet-bestaande gebruiker
 
 #: application/tests/suite/Omeka/Db/Migration/_files/migrations/20080717013526_foobar.php:18
 msgid "This migration should have been run previously (should not run again)."
-msgstr ""
+msgstr "Deze migratie zou eerder moeten uitgevoerd zijn (moet niet opnieuw uitgevoerd worden)."
 
 #: application/tests/suite/Omeka/Db/Migration/_files/migrations/50000101120000_notRunYet.php:19
 msgid "This migration should not be run."
-msgstr ""
+msgstr "Deze migratie mag niet uitgevoerd worden."
 
 #: application/tests/suite/Omeka/NavigationTest.php:752
 #: application/tests/suite/Omeka/NavigationTest.php:817
@@ -3088,28 +3088,28 @@ msgstr "HTML gebruiken"
 #: application/views/helpers/GetCurrentRecord.php:27
 #, php-format
 msgid "A current %s variable has not been set to this view."
-msgstr ""
+msgstr "Een huidige %s variabele werd niet ingesteld voor deze view."
 
 #: application/views/helpers/GetLoopRecords.php:30
 #, php-format
 msgid "A loop %s variable has not been set to this view."
-msgstr ""
+msgstr "Een loop %s variabele werd niet ingesteld voor deze view."
 
 #: application/views/helpers/Loop.php:27
 msgid "An array of records is not available for the loop."
-msgstr ""
+msgstr "Een aantal records zijn niet beschikbaar voor de loop."
 
 #: application/views/helpers/RecordUrl.php:33
 msgid "Invalid record passed while getting record URL."
-msgstr ""
+msgstr "Een ongeldig record kwam voor tijdens het binnenhalen van een record URL."
 
 #: application/views/helpers/RecordUrl.php:43
 msgid "Invalid action passed while getting record URL."
-msgstr ""
+msgstr "Een ongeldige actie kwam voor tijdens het binnenhalen van een record URL."
 
 #: application/views/helpers/RecordUrl.php:66
 msgid "Invalid return value while getting record URL."
-msgstr ""
+msgstr "Een ongeldige waarde kwam terug tijdens het binnenhalen van een record URL."
 
 #: application/views/scripts/collections/browse.php:24
 msgid "Contributors(s)"
@@ -3247,7 +3247,7 @@ msgstr "Zoekopdracht:"
 
 #: application/views/scripts/search/search-filters.php:4
 msgid "Query type:"
-msgstr ""
+msgstr "Type zoekopdracht:"
 
 #: application/views/scripts/search/search-filters.php:5
 msgid "Record types:"
@@ -3255,7 +3255,7 @@ msgstr "Record types:"
 
 #: application/views/scripts/search/search-form.php:6
 msgid "Search using this query type:"
-msgstr ""
+msgstr "Zoek via dit type zoekopdracht:"
 
 #: application/views/scripts/search/search-form.php:11
 msgid "Search only these record types:"
@@ -3263,7 +3263,7 @@ msgstr "Zoek enkel deze record types:"
 
 #: application/views/scripts/search/search-form.php:17
 msgid "Go to search settings to select record types to use."
-msgstr ""
+msgstr "Ga naar zoekinstellingen om de recordtypes die je wil gebruiken te selecteren "
 
 #: application/views/scripts/search/search-form.php:19
 msgid "Advanced Search (Items only)"
@@ -3279,7 +3279,7 @@ msgstr "Uw wachtwoord kwijt?"
 
 #: install/controllers/IndexController.php:25
 msgid "Could not load database resource!"
-msgstr ""
+msgstr "Kan databank bron niet laden!"
 
 #: install/views/scripts/index/errors.phtml:1
 msgid "Installation Error"
