@@ -57,6 +57,7 @@
             <?php endif; ?> 
         </ul>
     </div>
+    <?php fire_plugin_hook('admin_collections_show_sidebar', array('view'=>$this, 'collection'=>$collection)); ?>
 </section>
 
 <?php echo foot(); ?>
