@@ -51,10 +51,10 @@ class Controllers_AclTest extends Omeka_Test_AppTestCase
     
     public function testAclHelperBlocksAccess()
     {
-        $this->assertTrue($this->acl->has('ElementSets'));
-        $this->dispatch('element-sets');
+        $this->assertTrue($this->acl->has('Users'));
+        $this->dispatch('users');
         $this->_assertLoginRequired();
-        $this->assertFalse($this->aclHelper->isAllowed('browse', 'ElementSets'));
+        $this->assertFalse($this->aclHelper->isAllowed('browse', 'Users'));
     }
     
     /**
