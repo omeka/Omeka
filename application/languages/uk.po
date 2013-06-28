@@ -4,13 +4,14 @@
 # 
 # Translators:
 # evilinstone <evilinstone@gmail.com>, 2013
+# Izoniz <izonizne@mail.ru>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-04-06 14:42+0000\n"
-"Last-Translator: evilinstone <evilinstone@gmail.com>\n"
+"PO-Revision-Date: 2013-06-18 19:57+0000\n"
+"Last-Translator: Izoniz <izonizne@mail.ru>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/omeka/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -698,7 +699,7 @@ msgstr "Пошук"
 
 #: admin/themes/default/common/settings-nav.php:20
 msgid "Element Sets"
-msgstr ""
+msgstr "Набори елементів"
 
 #: admin/themes/default/common/settings-nav.php:26
 msgid "Item Type Elements"
@@ -1583,7 +1584,7 @@ msgstr "Копія екрану для %s теми оформлення"
 
 #: admin/themes/default/themes/browse.php:16
 msgid "Configure Theme"
-msgstr ""
+msgstr "Налаштувати тему оформлення"
 
 #: admin/themes/default/themes/browse.php:19
 msgid "Current Theme"
@@ -1806,7 +1807,7 @@ msgstr "Колекція \"%s\" успішно видалена!"
 #: application/controllers/CollectionsController.php:96
 #, php-format
 msgid "The collection #%s was successfully deleted!"
-msgstr ""
+msgstr "Колекція \"%s\" успішно видалена!"
 
 #: application/controllers/CollectionsController.php:104
 #, php-format
@@ -1849,12 +1850,12 @@ msgstr ""
 #: application/controllers/ItemTypesController.php:28
 #, php-format
 msgid "The item type \"%s\" was successfully added."
-msgstr ""
+msgstr "Тип елементу \"%s\" успішно додано!"
 
 #: application/controllers/ItemTypesController.php:54
 #, php-format
 msgid "The item type \"%s\" was successfully updated."
-msgstr ""
+msgstr "Тип елементу \"%s\" успішно оновлено!"
 
 #: application/controllers/ItemTypesController.php:149
 #, php-format
@@ -1874,32 +1875,32 @@ msgstr ""
 #: application/controllers/ItemsController.php:95
 #, php-format
 msgid "The item \"%s\" was successfully added!"
-msgstr ""
+msgstr "Елемент \"%s\" успішно додано!"
 
 #: application/controllers/ItemsController.php:97
 #, php-format
 msgid "The item #%s was successfully added!"
-msgstr ""
+msgstr "Елемент #%s успішно додано!"
 
 #: application/controllers/ItemsController.php:105
 #, php-format
 msgid "The item \"%s\" was successfully changed!"
-msgstr ""
+msgstr "Елемент \"%s\" успішно змінено!"
 
 #: application/controllers/ItemsController.php:107
 #, php-format
 msgid "The item #%s was successfully changed!"
-msgstr ""
+msgstr "Елемент #%s успішно змінено!"
 
 #: application/controllers/ItemsController.php:115
 #, php-format
 msgid "The item \"%s\" was successfully deleted!"
-msgstr ""
+msgstr "Елемент \"%s\" успішно видалений!"
 
 #: application/controllers/ItemsController.php:117
 #, php-format
 msgid "The item #%s was successfully deleted!"
-msgstr ""
+msgstr "Елемент #%s успішно видалений!"
 
 #: application/controllers/ItemsController.php:125
 #, php-format
@@ -1941,7 +1942,7 @@ msgstr "Користувач не має права ставити мітки д
 
 #: application/controllers/ItemsController.php:356
 msgid "The items were successfully deleted!"
-msgstr ""
+msgstr "Елементи успішно видалено!"
 
 #: application/controllers/ItemsController.php:358
 msgid "The items were successfully changed!"
@@ -2066,11 +2067,11 @@ msgstr ""
 
 #: application/controllers/SettingsController.php:160
 msgid "The ImageMagick directory path works."
-msgstr ""
+msgstr "Шлях до ImageMagick вірний."
 
 #: application/controllers/SettingsController.php:161
 msgid "The ImageMagick directory path does not work."
-msgstr ""
+msgstr "Шлях до ImageMagick невірний."
 
 #: application/controllers/TagsController.php:35
 msgid "You have to be logged in to edit tags!"
@@ -2238,7 +2239,7 @@ msgstr "Обмеження максимальної площи розміру м
 
 #: application/forms/AppearanceSettings.php:43
 msgid "Results Per Page (admin)"
-msgstr ""
+msgstr "Результатів на сторінці (для адміністратора)"
 
 #: application/forms/AppearanceSettings.php:44
 msgid ""
@@ -2248,7 +2249,7 @@ msgstr ""
 
 #: application/forms/AppearanceSettings.php:50
 msgid "Results Per Page (public)"
-msgstr ""
+msgstr "Результатів на сторінці (для загального доступу)"
 
 #: application/forms/AppearanceSettings.php:51
 msgid ""
@@ -2342,7 +2343,7 @@ msgstr ""
 
 #: application/forms/GeneralSettings.php:59 application/forms/Install.php:163
 msgid "ImageMagick Directory Path"
-msgstr ""
+msgstr "Шлях до ImageMagick"
 
 #: application/forms/Install.php:31
 msgid "only alphanumeric characters are allowed"
@@ -2634,7 +2635,7 @@ msgstr ""
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:115
 #, php-format
 msgid "The configured PHP path (%s) is invalid."
-msgstr ""
+msgstr "Шлях до PHP (%s) у конфігурації невірний."
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:125
 #, php-format
@@ -2758,7 +2759,7 @@ msgstr ""
 
 #: application/models/Collection.php:81
 msgid "Cannot associate the collection with an unsaved user."
-msgstr ""
+msgstr "Не можна асоціювати колекцію з незбереженим користувачем."
 
 #: application/models/Element.php:141
 msgid "The element name must not be empty."
@@ -2776,7 +2777,7 @@ msgstr ""
 
 #: application/models/ElementSet.php:98
 msgid "Name of element set must be unique."
-msgstr ""
+msgstr "Ім'я набору елемента повинно бути унікальним."
 
 #: application/models/ElementSet.php:102
 msgid "Name of element set must not be empty."
@@ -2847,7 +2848,7 @@ msgstr ""
 
 #: application/models/ItemType.php:71
 msgid "The item type name must be unique."
-msgstr ""
+msgstr "Ім'я типу елемента повинно бути унікальним."
 
 #: application/models/ItemType.php:150
 msgid "There are too many values in the element ordering array."
@@ -2888,7 +2889,7 @@ msgstr ""
 #: application/models/Mixin/ElementText.php:270
 #, php-format
 msgid "There is no element \"%1$s\", \"%2$s\"!"
-msgstr ""
+msgstr "Немає елементів \"%1$s\", \"%2$s\"!"
 
 #: application/models/Mixin/ElementText.php:289
 #, php-format
@@ -3110,7 +3111,7 @@ msgstr ""
 
 #: application/views/scripts/collections/browse.php:24
 msgid "Contributors(s)"
-msgstr ""
+msgstr "Автор(и)"
 
 #: application/views/scripts/collections/browse.php:31
 #, php-format

@@ -6,13 +6,15 @@
 # Alexios Dimitropoulos <alexios.dimitropoulos@gmail.com>, 2012
 # stauros gkinis <gkista@yahoo.gr>, 2012
 # Stoitsis Giannis <>, 2012
+# Theodosios Filippou <tf1974@gmail.com>, 2013
+# Theodosios Filippou <tf1974@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-02-11 19:35+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2013-05-13 05:01+0000\n"
+"Last-Translator: Theodosios Filippou <tf1974@gmail.com>\n"
 "Language-Team: Greek (Greece) (http://www.transifex.com/projects/p/omeka/language/el_GR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -329,7 +331,7 @@ msgstr "Researcher"
 #: admin/themes/default/themes/browse.php:2
 #: admin/themes/default/themes/config.php:3
 msgid "Appearance"
-msgstr ""
+msgstr "Εμφάνιση"
 
 #: admin/themes/default/appearance/edit-navigation.php:14
 msgid ""
@@ -345,7 +347,7 @@ msgstr ""
 #: admin/themes/default/appearance/edit-navigation.php:37
 #: application/forms/Navigation.php:132
 msgid "Label"
-msgstr ""
+msgstr "Ετικέτα"
 
 #: admin/themes/default/appearance/edit-navigation.php:23
 #: admin/themes/default/appearance/edit-navigation.php:38
@@ -355,7 +357,7 @@ msgstr ""
 
 #: admin/themes/default/appearance/edit-navigation.php:25
 msgid "Add Link"
-msgstr ""
+msgstr "Προσθήκη συνδέσμου"
 
 #: admin/themes/default/appearance/edit-navigation.php:31
 #: admin/themes/default/appearance/edit-settings.php:21
@@ -411,7 +413,7 @@ msgstr "Προσθήκη συλλογής"
 
 #: admin/themes/default/collections/add.php:11
 msgid "Add Collection"
-msgstr ""
+msgstr "Πρόσθεσε συλλογή"
 
 #: admin/themes/default/collections/add.php:16
 #: admin/themes/default/collections/edit.php:30
@@ -460,7 +462,7 @@ msgstr "(%s total)"
 #: admin/themes/default/collections/browse.php:23
 #: admin/themes/default/collections/show.php:51
 msgid "Contributors"
-msgstr ""
+msgstr "Συντελεστές"
 
 #: admin/themes/default/collections/browse.php:24
 #: admin/themes/default/files/show.php:55
@@ -479,7 +481,7 @@ msgstr "Συνολικός αριθμός αντικειμένων"
 #: admin/themes/default/collections/browse.php:37
 #: admin/themes/default/items/browse.php:72
 msgid "(Private)"
-msgstr ""
+msgstr "(Ιδιωτικό)"
 
 #: admin/themes/default/collections/browse.php:40
 #: admin/themes/default/collections/show.php:32
@@ -512,7 +514,7 @@ msgstr "Προβολή όλων των συλλογών"
 
 #: admin/themes/default/collections/browse.php:70
 msgid "You have no collections."
-msgstr ""
+msgstr "Δεν έχετε συλλογές"
 
 #: admin/themes/default/collections/browse.php:72
 msgid "Get started by adding your first collection."
@@ -569,7 +571,7 @@ msgstr "Θέματα"
 
 #: admin/themes/default/common/appearance-nav.php:11
 msgid "Navigation"
-msgstr ""
+msgstr "Πλοήγηση"
 
 #: admin/themes/default/common/appearance-nav.php:15
 #: admin/themes/default/common/global-nav.php:24
@@ -765,7 +767,7 @@ msgstr "Πρόσφατα Αντικείμενα"
 
 #: admin/themes/default/error/404.php:29 admin/themes/default/index.php:59
 msgid "Add a new item"
-msgstr ""
+msgstr "Προσθήκη νέου αντικειμένου"
 
 #: admin/themes/default/error/404.php:36 admin/themes/default/index.php:64
 msgid "Recent Collections"
@@ -773,7 +775,7 @@ msgstr "Πρόσφατες Συλλογές"
 
 #: admin/themes/default/error/404.php:50 admin/themes/default/index.php:78
 msgid "Add a new collection"
-msgstr ""
+msgstr "Πρόσθεσε μια νέα συλλογή"
 
 #: admin/themes/default/error/405.php:2
 msgid "405: Method Not Allowed"
@@ -800,7 +802,7 @@ msgstr "Αρχείο #%s"
 #: admin/themes/default/files/show.php:36
 #: application/libraries/globals.php:398
 msgid "Item"
-msgstr ""
+msgstr "Αντικείμενο"
 
 #: admin/themes/default/files/show.php:41
 msgid "Format Metadata"
@@ -809,7 +811,7 @@ msgstr "Μορφοποίηση μεταδεδομένων"
 #: admin/themes/default/files/show.php:43
 #: application/views/scripts/files/show.php:21
 msgid "Filename"
-msgstr ""
+msgstr "Όνομα αρχείου"
 
 #: admin/themes/default/files/show.php:45
 #: application/views/scripts/files/show.php:26
@@ -869,27 +871,27 @@ msgstr "Μορφή εξαγόμενων"
 
 #: admin/themes/default/index.php:6
 msgid "items"
-msgstr ""
+msgstr "αντικείμενα"
 
 #: admin/themes/default/index.php:7
 msgid "collections"
-msgstr ""
+msgstr "συλλογές"
 
 #: admin/themes/default/index.php:8
 msgid "tags"
-msgstr ""
+msgstr "ετικέττες"
 
 #: admin/themes/default/index.php:11
 msgid "plugins"
-msgstr ""
+msgstr "πρόσθετα"
 
 #: admin/themes/default/index.php:14
 msgid "users"
-msgstr ""
+msgstr "χρήστες"
 
 #: admin/themes/default/index.php:18
 msgid "theme"
-msgstr ""
+msgstr "θέμα"
 
 #: admin/themes/default/index.php:29
 msgid "A new version of Omeka is available for download."
@@ -898,7 +900,7 @@ msgstr ""
 #: admin/themes/default/index.php:30
 #, php-format
 msgid "Upgrade to %s"
-msgstr ""
+msgstr "Αναβάθμιση σε %s"
 
 #: admin/themes/default/item-types/add-existing-element.php:22
 #: admin/themes/default/item-types/add-new-element.php:15
@@ -951,7 +953,7 @@ msgstr "Πληροφορίες τύπου αντικειμένου"
 #: admin/themes/default/users/add.php:6 admin/themes/default/users/edit.php:14
 #: install/views/scripts/index/index.phtml:14
 msgid "required field"
-msgstr ""
+msgstr "υποχρεωτικό πεδίο"
 
 #: admin/themes/default/item-types/form.php:25
 #: admin/themes/default/item-types/show.php:16
@@ -1013,7 +1015,7 @@ msgstr "Συλλογή"
 
 #: admin/themes/default/items/batch-delete.php:2
 msgid "Batch Delete Items"
-msgstr ""
+msgstr "Μαζική διαγραφή αντικειμένων"
 
 #: admin/themes/default/items/batch-delete.php:38
 msgid ""
@@ -1137,7 +1139,7 @@ msgstr "Περιήγηση αντικείμενων"
 #: application/libraries/globals.php:2648
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
-msgstr ""
+msgstr "Αναζήτηση στοιχείων"
 
 #: admin/themes/default/items/browse.php:37
 msgid "Select"
@@ -1192,7 +1194,7 @@ msgstr ""
 
 #: admin/themes/default/items/files-form.php:12
 msgid "Delete "
-msgstr ""
+msgstr "Διαγραφή"
 
 #: admin/themes/default/items/files-form.php:21
 msgid "Add New Files"
@@ -1222,7 +1224,7 @@ msgstr "Γρήγορο φιλτράρισμα"
 
 #: admin/themes/default/items/quick-filters.php:5
 msgid "View All"
-msgstr ""
+msgstr "Προβολή όλων"
 
 #: admin/themes/default/items/quick-filters.php:7
 msgid "Private"
@@ -1338,7 +1340,7 @@ msgstr ""
 
 #: admin/themes/default/items/show.php:35
 msgid "Next Item"
-msgstr ""
+msgstr "Επόμενο αντικείμενο"
 
 #: admin/themes/default/items/show.php:71
 msgid "File Metadata"
@@ -1493,7 +1495,7 @@ msgstr ""
 
 #: admin/themes/default/settings/edit-search.php:10
 msgid "Search Record Types"
-msgstr ""
+msgstr "Αναζήτηση με βάση την εγγραφή"
 
 #: admin/themes/default/settings/edit-search.php:13
 msgid "Customize which types of records will be searchable in Omeka."
@@ -1712,7 +1714,7 @@ msgstr "Ρόλος"
 
 #: admin/themes/default/users/browse.php:30
 msgid "inactive"
-msgstr ""
+msgstr "Αδρανές"
 
 #: admin/themes/default/users/edit.php:8
 #, php-format
@@ -1746,7 +1748,7 @@ msgstr "Σύνδεση"
 
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
-msgstr ""
+msgstr "(Ξεχάσατε τον κωδικό σας;)"
 
 #: admin/themes/default/users/show.php:8
 #, php-format
@@ -1881,12 +1883,12 @@ msgstr ""
 #: application/controllers/ItemsController.php:97
 #, php-format
 msgid "The item #%s was successfully added!"
-msgstr ""
+msgstr "Το αντικείμενο #%s προστέθηκε με επιτυχία!"
 
 #: application/controllers/ItemsController.php:105
 #, php-format
 msgid "The item \"%s\" was successfully changed!"
-msgstr ""
+msgstr "Το αντικείμενο  \"%s\" άλλαξε με επιτυχία!"
 
 #: application/controllers/ItemsController.php:107
 #, php-format
@@ -2085,7 +2087,7 @@ msgstr "To tag με το όνομα \"%1$s\" μετονομάστηκε επιτ
 
 #: application/controllers/TagsController.php:91
 msgid "Invalid tagType given."
-msgstr ""
+msgstr "Μη εγκυρο tagType"
 
 #: application/controllers/ThemesController.php:25
 msgid "Invalid form submission."
@@ -2268,7 +2270,7 @@ msgstr ""
 
 #: application/forms/AppearanceSettings.php:71
 msgid "Display Settings"
-msgstr ""
+msgstr "Εμφάνιση Ρυθμίσεων"
 
 #: application/forms/ChangePassword.php:25
 msgid "Current Password"
@@ -2694,7 +2696,7 @@ msgstr ""
 
 #: application/libraries/globals.php:457
 msgid "Keyword"
-msgstr ""
+msgstr "Λέξη-κλειδί"
 
 #: application/libraries/globals.php:458
 msgid "Boolean"
@@ -3009,7 +3011,7 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1128
 #: application/tests/suite/Omeka/NavigationTest.php:1136
 msgid "Page "
-msgstr ""
+msgstr "Σελίδα"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1009
 #: application/tests/suite/Omeka/NavigationTest.php:1013
@@ -3018,7 +3020,7 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1156
 #: application/tests/suite/Omeka/NavigationTest.php:1256
 msgid "Page 1"
-msgstr ""
+msgstr "Σελίδα 1"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1016
 #: application/tests/suite/Omeka/NavigationTest.php:1022
@@ -3029,7 +3031,7 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1200
 #: application/tests/suite/Omeka/NavigationTest.php:1232
 msgid "Page 2"
-msgstr ""
+msgstr "Σελίδα 2"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1025
 #: application/tests/suite/Omeka/NavigationTest.php:1029
@@ -3040,7 +3042,7 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1193
 #: application/tests/suite/Omeka/NavigationTest.php:1255
 msgid "Page 3"
-msgstr ""
+msgstr "Σελίδα 3"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1032
 #: application/tests/suite/Omeka/NavigationTest.php:1041
@@ -3053,7 +3055,7 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1240
 #: application/tests/suite/Omeka/NavigationTest.php:1250
 msgid "Page 4"
-msgstr ""
+msgstr "Σελίδα 4"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1044
 #: application/tests/suite/Omeka/NavigationTest.php:1048
@@ -3064,13 +3066,13 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1223
 #: application/tests/suite/Omeka/NavigationTest.php:1241
 msgid "Page 5"
-msgstr ""
+msgstr "Σελίδα 5"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1051
 #: application/tests/suite/Omeka/NavigationTest.php:1055
 #: application/tests/suite/Omeka/NavigationTest.php:1215
 msgid "Page 6"
-msgstr ""
+msgstr "Σελίδα 6"
 
 #: application/views/helpers/AllElementTexts.php:101
 msgid "[no text]"

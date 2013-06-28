@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-03-12 12:33+0000\n"
+"PO-Revision-Date: 2013-05-30 06:42+0000\n"
 "Last-Translator: Melvik <info@melvik.se>\n"
 "Language-Team: Swedish (Sweden) (http://www.transifex.com/projects/p/omeka/language/sv_SE/)\n"
 "MIME-Version: 1.0\n"
@@ -31,7 +31,7 @@ msgstr ""
 #: application/views/scripts/items/browse.php:17
 #: application/views/scripts/search/index.php:13
 msgid "Title"
-msgstr "Titel"
+msgstr "Webbplatsens titel"
 
 #. Dublin Core: Title element description
 msgid "A name given to the resource"

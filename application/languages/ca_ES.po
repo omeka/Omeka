@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-04-13 12:07+0000\n"
+"PO-Revision-Date: 2013-06-07 09:51+0000\n"
 "Last-Translator: rubenalcaraz <rubenalcarazmartinez@gmail.com>\n"
 "Language-Team: Catalan (Spain) (http://www.transifex.com/projects/p/omeka/language/ca_ES/)\n"
 "MIME-Version: 1.0\n"
@@ -34,7 +34,7 @@ msgstr "El conjunt d'elements Dublin Core és comú per a tots els registres a O
 #: application/views/scripts/items/browse.php:17
 #: application/views/scripts/search/index.php:13
 msgid "Title"
-msgstr "Títol del lloc web"
+msgstr "Títol"
 
 #. Dublin Core: Title element description
 msgid "A name given to the resource"
