@@ -871,12 +871,12 @@ function __($string)
 {
     // Avoid getting the translate object more than once.
     static $translate;
-    
+
     if (!isset($translate)) {
         try {
             $translate = Zend_Registry::get('Zend_Translate');
         } catch (Zend_Exception $e) {
-            $translate = false;
+            $translate = null;
         }
     }
     
