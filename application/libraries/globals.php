@@ -2233,7 +2233,7 @@ function link_to($record, $action = null, $text = null, $props = array(), $query
 {
     // If we're linking directly to a record, use the URI for that record.
     if ($record instanceof Omeka_Record_AbstractRecord) {
-        $url = record_url($record, $action);
+        $url = record_url($record, $action, false, $queryParams);
     // Otherwise $record is the name of the controller to link to.
     } else {
         $urlOptions = array();
@@ -3103,11 +3103,12 @@ function is_current_url($url)
  * @param Omeka_Record_AbstractRecord|string $record
  * @param string|null $action
  * @param bool $getAbsoluteUrl
+ * @param array $queryParams
  * @return string
  */
-function record_url($record, $action = null, $getAbsoluteUrl = false)
+function record_url($record, $action = null, $getAbsoluteUrl = false, $queryParams = array())
 {
-    return get_view()->recordUrl($record, $action, $getAbsoluteUrl);
+    return get_view()->recordUrl($record, $action, $getAbsoluteUrl, $queryParams);
 }
 
 /**

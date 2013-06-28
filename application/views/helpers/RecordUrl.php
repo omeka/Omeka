@@ -21,9 +21,10 @@ class Omeka_View_Helper_RecordUrl extends Zend_View_Helper_Abstract
      * @param Omeka_Record_AbstractRecord|string $record
      * @param string|null $action
      * @param bool $getAbsoluteUrl
+     * @param array $queryParams
      * @return string
      */
-    public function recordUrl($record, $action = null, $getAbsoluteUrl = false)
+    public function recordUrl($record, $action = null, $getAbsoluteUrl = false, $queryParams = array())
     {
         // Get the current record from the view if passed as a string.
         if (is_string($record)) {
@@ -48,8 +49,16 @@ class Omeka_View_Helper_RecordUrl extends Zend_View_Helper_Abstract
             if ($getAbsoluteUrl) {
                 $url = $this->view->serverUrl() . $url;
             }
+            if ($queryParams) {
+                $query = http_build_query($queryParams);
+                // Append params if query is already part of the URL.
+                if (strpos($url, '?') === false) {
+                    $url .= '?' . $query;
+                } else {
+                    $url .= '&' . $query;
+                }
+            }
             return $url;
-        
         // Assume routing parameters if getRecordUrl() returns an array.
         } else if (is_array($url)) {
             if (isset($url['id']) && !isset($url['module'])) {
@@ -57,7 +66,7 @@ class Omeka_View_Helper_RecordUrl extends Zend_View_Helper_Abstract
             } else {
                 $route = 'default';
             }
-            $urlString = $this->view->url($url, $route);
+            $urlString = $this->view->url($url, $route, $queryParams);
             if ($getAbsoluteUrl) {
                 $urlString = $this->view->serverUrl() . $urlString;
             }
