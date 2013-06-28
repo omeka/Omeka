@@ -118,7 +118,13 @@ class TagsController extends Omeka_Controller_AbstractActionController
         //dig up the record types for filtering
         $db = get_db();
         $sql = "SELECT DISTINCT record_type FROM `$db->RecordsTag`";
-        $this->view->record_types = array_keys($db->fetchAssoc($sql));
+        $record_types = array_keys($db->fetchAssoc($sql));
+        foreach($record_types as $index => $record_type) {
+            if(!class_exists($record_type)) {
+                unset($record_types[$index]);
+            }
+        }
+        $this->view->record_types = $record_types;
         $this->view->assign(compact('tags', 'total_tags', 'browse_for', 'sort'));
     }
     
