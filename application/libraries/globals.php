@@ -1118,8 +1118,8 @@ function head_js($includeDefaults = true)
             $headScript->prependFile(src('vendor/jquery-ui', $dir, 'js'))
                        ->prependFile(src('vendor/jquery', $dir, 'js'));
         } else {
-            $headScript->prependFile('//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js')
-                       ->prependFile('//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js');
+            $headScript->prependFile('//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
+                       ->prependFile('//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js');
         }
     }
     return $headScript;
