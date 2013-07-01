@@ -2217,6 +2217,11 @@ button.remove_search {
         margin: 0;
         padding: 0;
     }
+    
+    .theme-support-link {
+        margin: 0;
+        padding: 0;
+    }
         
     .themes .theme .crop {
         height: 136px;

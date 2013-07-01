@@ -3,7 +3,13 @@ queue_js_file(array('vendor/jquery.jeditable', 'tags'));
 $pageTitle = __('Edit Tags') . ' ' .  __('(%s total)', $total_tags);
 echo head(array('title'=>$pageTitle,'bodyclass'=>'tags browse-tags'));
 echo flash();
+
 ?>
+<?php if(isset($_GET['tagType'])):?>
+<div id='search-filters'>
+    <ul><li><?php echo __(html_escape($_GET['tagType'] . 's')); ?></li></ul>
+</div>
+<?php endif; ?>
 
 <?php if ($total_tags): ?>
     <section class="three columns alpha">
@@ -17,7 +23,7 @@ echo flash();
     </section>
 
     <section class="seven columns omega">
-        <p id="tags-nav">
+        <div id="tags-nav">
             <?php
             $sortOptions = array(
                 __('Most') => array('sort_field' => 'count', 'sort_dir' => 'd'),
@@ -33,7 +39,17 @@ echo flash();
                 echo "<span $class><a href=\"$uri\">$label</a></span>";
             }
             ?>
-        </p>
+            <ul class="quick-filter-wrapper">
+                <li><a href="#" tabindex="0"><?php echo __('Record Types'); ?></a>
+                <ul class="dropdown">
+                    <li><span class="quick-filter-heading"><?php echo __('Record Types') ?></span></li>
+                    <?php foreach($record_types as $record_type): ?>
+                    <li><a href="<?php echo url('tags', array('tagType' => $record_type)); ?>"><?php echo __($record_type . 's'); ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+                </li>
+            </ul>            
+        </div>
         <ul class="tag-list">
         <?php foreach ($tags as $tag): ?>
             <li>

@@ -177,9 +177,24 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter_AdapterI
         );
     }
 
+    /**
+     * Set the path of the local directory where files are stored.
+     *
+     * @param string
+     */
     public function setLocalDir($dir)
     {
         $this->_localDir = $dir;
+    }
+
+    /**
+     * Set the web URL that corresponds with the local dir.
+     *
+     * @param string
+     */
+    public function setWebDir($dir)
+    {
+        $this->_webDir = $dir;
     }
 
     /**

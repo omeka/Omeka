@@ -19,7 +19,7 @@ class getid3_jpg extends getid3_handler
 {
 
 
-	function Analyze() {
+	public function Analyze() {
 		$info = &$this->getid3->info;
 
 		$info['fileformat']                  = 'jpg';
@@ -31,7 +31,8 @@ class getid3_jpg extends getid3_handler
 		fseek($this->getid3->fp, $info['avdataoffset'], SEEK_SET);
 
 		$imageinfo = array();
-		list($width, $height, $type) = getid3_lib::GetDataImageSize(fread($this->getid3->fp, $info['filesize']), $imageinfo);
+		//list($width, $height, $type) = getid3_lib::GetDataImageSize(fread($this->getid3->fp, $info['filesize']), $imageinfo);
+		list($width, $height, $type) = getimagesize($info['filenamepath'], $imageinfo); // http://www.getid3.org/phpBB3/viewtopic.php?t=1474
 
 
 		if (isset($imageinfo['APP13'])) {
@@ -64,7 +65,9 @@ class getid3_jpg extends getid3_handler
 				if (isset($imageinfo['APP1'])) {
 					if (function_exists('exif_read_data')) {
 						if (substr($imageinfo['APP1'], 0, 4) == 'Exif') {
-							$info['jpg']['exif'] = @exif_read_data($info['filenamepath'], '', true, false);
+//$info['warning'][] = 'known issue: https://bugs.php.net/bug.php?id=62523';
+//return false;
+							$info['jpg']['exif'] = exif_read_data($info['filenamepath'], null, true, false);
 						} else {
 							$info['warning'][] = 'exif_read_data() cannot parse non-EXIF data in APP1 (expected "Exif", found "'.substr($imageinfo['APP1'], 0, 4).'")';
 						}
@@ -135,9 +138,11 @@ class getid3_jpg extends getid3_handler
 				}
 				$info['jpg']['exif']['GPS']['computed']['longitude'] = $direction_multiplier * ($computed_longitude[0] + ($computed_longitude[1] / 60) + ($computed_longitude[2] / 3600));
 			}
-
+			if (isset($info['jpg']['exif']['GPS']['GPSAltitudeRef'])) {
+				$info['jpg']['exif']['GPS']['GPSAltitudeRef'] = ord($info['jpg']['exif']['GPS']['GPSAltitudeRef']); // 0 = above sea level; 1 = below sea level
+			}
 			if (isset($info['jpg']['exif']['GPS']['GPSAltitude'])) {
-				$direction_multiplier = ((isset($info['jpg']['exif']['GPS']['GPSAltitudeRef']) && ($info['jpg']['exif']['GPS']['GPSAltitudeRef'] === chr(1))) ? -1 : 1);
+				$direction_multiplier = (!empty($info['jpg']['exif']['GPS']['GPSAltitudeRef']) ? -1 : 1);           // 0 = above sea level; 1 = below sea level
 				$info['jpg']['exif']['GPS']['computed']['altitude'] = $direction_multiplier * getid3_lib::DecimalizeFraction($info['jpg']['exif']['GPS']['GPSAltitude']);
 			}
 
@@ -149,8 +154,12 @@ class getid3_jpg extends getid3_handler
 				$image_xmp = new Image_XMP($info['filenamepath']);
 				$xmp_raw = $image_xmp->getAllTags();
 				foreach ($xmp_raw as $key => $value) {
-					list($subsection, $tagname) = explode(':', $key);
-					$info['xmp'][$subsection][$tagname] = $this->CastAsAppropriate($value);
+					if (strpos($key, ':')) {
+						list($subsection, $tagname) = explode(':', $key);
+						$info['xmp'][$subsection][$tagname] = $this->CastAsAppropriate($value);
+					} else {
+						$info['warning'][] = 'XMP: expecting "<subsection>:<tagname>", found "'.$key.'"';
+					}
 				}
 			}
 		}
@@ -163,7 +172,7 @@ class getid3_jpg extends getid3_handler
 	}
 
 
-	function CastAsAppropriate($value) {
+	public function CastAsAppropriate($value) {
 		if (is_array($value)) {
 			return $value;
 		} elseif (preg_match('#^[0-9]+/[0-9]+$#', $value)) {
@@ -177,7 +186,7 @@ class getid3_jpg extends getid3_handler
 	}
 
 
-	function IPTCrecordName($iptc_record) {
+	public function IPTCrecordName($iptc_record) {
 		// http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/IPTC.html
 		static $IPTCrecordName = array();
 		if (empty($IPTCrecordName)) {
@@ -194,7 +203,7 @@ class getid3_jpg extends getid3_handler
 	}
 
 
-	function IPTCrecordTagName($iptc_record, $iptc_tagkey) {
+	public function IPTCrecordTagName($iptc_record, $iptc_tagkey) {
 		// http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/IPTC.html
 		static $IPTCrecordTagName = array();
 		if (empty($IPTCrecordTagName)) {
@@ -333,6 +342,3 @@ class getid3_jpg extends getid3_handler
 	}
 
 }
-
-
-?>

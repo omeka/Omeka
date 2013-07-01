@@ -8,6 +8,37 @@ echo flash();
     <?php echo link_to('users', 'add', __('Add a User'), array('class'=>'small green button')); ?>
 <?php endif; ?>
 
+<?php if(isset($_GET['search'])):?>
+<div id='search-filters'>
+    <ul>
+        <li>
+        <?php switch($_GET['search-type']) {
+                        case "name":
+                            echo __("Name") . ': ';
+                        break;
+                        case "username":
+                            echo __("Username") . ': ';
+                        break;
+                        case "email":
+                            echo __("Email") . ': ';
+                        break;
+                    }
+        ?>
+        <?php echo html_escape($_GET['search']); ?>
+        </li>
+    </ul>
+
+</div>
+<?php endif; ?>
+
+<form id='search-users' method='GET'>
+<button><?php echo __('Search users'); ?></button><input type='text' name='search'/>
+<input type='radio' name='search-type' value='username' checked='checked' /><span><?php echo __('Usernames'); ?></span>
+<input type='radio' name='search-type' value='name' /><span><?php echo __('Real names'); ?></span>
+<input type='radio' name='search-type' value='email' /><span><?php echo __('Email addresses'); ?></span>
+
+</form>
+
 <?php echo pagination_links(); ?>
 <table id="users">
     <thead>

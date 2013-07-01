@@ -187,6 +187,16 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
     }
 
     /**
+     * Return the service object being used for S3 requests.
+     *
+     * @return Zend_Service_Amazon_S3
+     */
+    public function getS3Service()
+    {
+        return $this->_s3;
+    }
+
+    /**
      * Get the name of the bucket files should be stored in.
      * 
      * @return string Bucket name

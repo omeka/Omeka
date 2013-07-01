@@ -51,5 +51,17 @@ class Table_User extends Omeka_Db_Table
             $boolean = new Omeka_Filter_Boolean;
             $select->where('users.active = ?', $boolean->filter($params['active']));
         }
+        
+        if(isset($params['name'])) {
+            $select->where('users.name LIKE ?', "%" . $params['name'] ."%");
+        }
+        
+        if(isset($params['username'])) {
+            $select->where('users.username LIKE ?', "%" . $params['username'] ."%");
+        }
+        
+        if(isset($params['email'])) {
+            $select->where('users.email = ?', $params['email']);
+        }                
     }
 }

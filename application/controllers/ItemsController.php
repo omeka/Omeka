@@ -362,21 +362,4 @@ class ItemsController extends Omeka_Controller_AbstractActionController
 
          $this->_helper->redirector('browse', 'items');
     }
-    
-    /**
-     * Goes to results page based off value in text input.
-     */
-     
-    public function paginationAction()
-    {
-        $pageNumber = (int)$_POST['page'];
-        $baseUrl = $this->getRequest()->getBaseUrl().'/items/browse/';
-    	$request = Zend_Controller_Front::getInstance()->getRequest(); 
-    	$requestArray = $request->getParams();        
-        if($currentPage = $this->current) {
-            $paginationUrl = $baseUrl.$currentPage;
-        } else {
-            $paginationUrl = $baseUrl;
-        }
-    }
 }

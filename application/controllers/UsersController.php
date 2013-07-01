@@ -277,6 +277,14 @@ class UsersController extends Omeka_Controller_AbstractActionController
         }
     }
     
+    public function browseAction()
+    {
+        if(isset($_GET['search'])) {
+            $this->setParam($_GET['search-type'], $_GET['search']);
+        }
+        parent::browseAction();
+    }
+    
     protected function _getDeleteSuccessMessage($record)
     {
         $user = $record;
