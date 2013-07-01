@@ -22,9 +22,9 @@
 class getid3_gzip extends getid3_handler {
 
 	// public: Optional file list - disable for speed.
-	var $option_gzip_parse_contents = false; // decode gzipped files, if possible, and parse recursively (.tar.gz for example)
+	public $option_gzip_parse_contents = false; // decode gzipped files, if possible, and parse recursively (.tar.gz for example)
 
-	function Analyze() {
+	public function Analyze() {
 		$info = &$this->getid3->info;
 
 		$info['fileformat'] = 'gzip';
@@ -140,8 +140,9 @@ class getid3_gzip extends getid3_handler {
 			//|...original file name, zero-terminated...|
 			//+=========================================+
 			// GZIP files may have only one file, with no filename, so assume original filename is current filename without .gz
-			$thisInfo['filename'] = preg_replace('#\.gz$#i', '', $info['filename']);
+			$thisInfo['filename'] = preg_replace('#\\.gz$#i', '', $info['filename']);
 			if ($thisInfo['flags']['filename']) {
+				$thisInfo['filename'] = '';
 				while (true) {
 					if (ord($buff[$fpointer]) == 0) {
 						$fpointer++;
@@ -245,7 +246,7 @@ class getid3_gzip extends getid3_handler {
 	}
 
 	// Converts the OS type
-	function get_os_type($key) {
+	public function get_os_type($key) {
 		static $os_type = array(
 			'0'   => 'FAT filesystem (MS-DOS, OS/2, NT/Win32)',
 			'1'   => 'Amiga',
@@ -267,7 +268,7 @@ class getid3_gzip extends getid3_handler {
 	}
 
 	// Converts the eXtra FLags
-	function get_xflag_type($key) {
+	public function get_xflag_type($key) {
 		static $xflag_type = array(
 			'0' => 'unknown',
 			'2' => 'maximum compression',
@@ -277,4 +278,3 @@ class getid3_gzip extends getid3_handler {
 	}
 }
 
-?>
