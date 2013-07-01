@@ -1657,9 +1657,9 @@ header nav {
 
     #item-images img { vertical-align: bottom; }
     
-    #item-images div { margin: 0 20px 20px 0; }
+    #item-images .admin-thumb { margin: 0 20px 20px 0; }
 
-        #item-images div:nth-of-type(4) { margin-right: 0; }
+        #item-images .admin-thumb:nth-of-type(4) { margin-right: 0; }
 
     #item-images:after {
         content: "";
