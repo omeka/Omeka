@@ -7,7 +7,7 @@
  * primary concern and you are using an opcode cache. PLEASE DO NOT EDIT THIS
  * FILE, changes will be overwritten the next time the script is run.
  *
- * @version 4.4.0
+ * @version 4.5.0
  *
  * @warning
  *      You must *not* include any other HTML Purifier files before this file,
@@ -165,6 +165,7 @@ require 'HTMLPurifier/HTMLModule/Proprietary.php';
 require 'HTMLPurifier/HTMLModule/Ruby.php';
 require 'HTMLPurifier/HTMLModule/SafeEmbed.php';
 require 'HTMLPurifier/HTMLModule/SafeObject.php';
+require 'HTMLPurifier/HTMLModule/SafeScripting.php';
 require 'HTMLPurifier/HTMLModule/Scripting.php';
 require 'HTMLPurifier/HTMLModule/StyleAttribute.php';
 require 'HTMLPurifier/HTMLModule/Tables.php';
