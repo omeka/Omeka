@@ -38,6 +38,18 @@ echo flash();
         <p><?php echo link_to_item(null, array(), 'show', $file->getItem()); ?></p>
     </div>
 
+    <div id="file-links" class="panel">
+        <h4><?php echo __('Direct Links'); ?></h4>
+        <ul>
+            <li><a href="<?php echo metadata($file, 'uri'); ?>"><?php echo __('Original'); ?></a></li>
+            <?php if ($file->has_derivative_image): ?>
+            <li><a href="<?php echo metadata($file, 'fullsize_uri'); ?>"><?php echo __('Fullsize'); ?></a></li>
+            <li><a href="<?php echo metadata($file, 'thumbnail_uri'); ?>"><?php echo __('Thumbnail'); ?></a></li>
+            <li><a href="<?php echo metadata($file, 'square_thumbnail_uri'); ?>"><?php echo __('Square Thumbnail'); ?></a></li>
+            <?php endif; ?>
+        </ul>
+    </div>
+
     <div id="format-metadata" class="panel">
         <h4><?php echo __('Format Metadata'); ?></h4>
         <dl>
