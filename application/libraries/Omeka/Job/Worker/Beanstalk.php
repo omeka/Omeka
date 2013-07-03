@@ -11,7 +11,7 @@
  */
 class Omeka_Job_Worker_Beanstalk
 {
-    public function __construct(Pheanstalk $pheanstalk,
+    public function __construct(Pheanstalk_Pheanstalk $pheanstalk,
                                 Omeka_Job_Factory $jobFactory,
                                 Omeka_Db $db
     ) {

@@ -41,8 +41,8 @@ class Omeka_Job_Dispatcher_Adapter_Beanstalk extends Omeka_Job_Dispatcher_Adapte
     {
         return $this->_pheanstalk()->put(
             $encodedJob,
-            Pheanstalk::DEFAULT_PRIORITY,
-            Pheanstalk::DEFAULT_DELAY,
+            Pheanstalk_Pheanstalk::DEFAULT_PRIORITY,
+            Pheanstalk_Pheanstalk::DEFAULT_DELAY,
             $this->getOption('ttr')
         );
     }
@@ -50,7 +50,7 @@ class Omeka_Job_Dispatcher_Adapter_Beanstalk extends Omeka_Job_Dispatcher_Adapte
     private function _pheanstalk()
     {
         if (!$this->_pheanstalk) {
-            $this->_pheanstalk = new Pheanstalk($this->getOption('host'));
+            $this->_pheanstalk = new Pheanstalk_Pheanstalk($this->getOption('host'));
         }
         return $this->_pheanstalk;
     }
