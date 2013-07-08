@@ -28,6 +28,7 @@ class Api_ElementSet extends Omeka_Record_Api_AbstractRecordAdapter
             'elements' => array(
                 'count' => $record->getTable('Element')->count(array('element_set' => $record->id)),
                 'url' => self::getResourceUrl("/elements?element_set={$record->id}"), 
+                'resource' => 'elements', 
             ), 
         );
         return $representation;

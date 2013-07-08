@@ -44,6 +44,7 @@ class Api_File extends Omeka_Record_Api_AbstractRecordAdapter
         $representation['item'] = array(
             'id' => $record->item_id, 
             'url'=> self::getResourceUrl("/items/{$record->item_id}"), 
+            'resource' => 'items', 
         );
         $representation['element_texts'] = $this->getElementTextRepresentations($record);
         

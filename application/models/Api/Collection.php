@@ -28,11 +28,13 @@ class Api_Collection extends Omeka_Record_Api_AbstractRecordAdapter
             'modified' => self::getDate($record->modified), 
             'owner' => array(
                 'id'  => $record->owner_id,
-                'url' => self::getResourceUrl("/users/{$record->owner_id}"),
+                'url' => self::getResourceUrl("/users/{$record->owner_id}"), 
+                'resource' => 'users', 
             ), 
             'items' => array(
                 'count' => $record->getTable('Item')->count(array('collection_id' => $record->id)),
                 'url' => self::getResourceUrl("/items?collection={$record->id}"), 
+                'resource' => 'items', 
             ), 
             'element_texts' => $this->getElementTextRepresentations($record), 
         );

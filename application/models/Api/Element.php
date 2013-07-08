@@ -30,6 +30,7 @@ class Api_Element extends Omeka_Record_Api_AbstractRecordAdapter
             'element_set' => array(
                 'id' => $record->element_set_id, 
                 'url'=> self::getResourceUrl("/element_sets/{$record->element_set_id}"), 
+                'resource' => 'element_sets', 
             ), 
         );
         return $representation;

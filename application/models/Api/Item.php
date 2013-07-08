@@ -32,6 +32,7 @@ class Api_Item extends Omeka_Record_Api_AbstractRecordAdapter
                 'id' => $record->item_type_id, 
                 'url' => self::getResourceUrl("/item_types/{$record->item_type_id}"), 
                 'name' => $record->Type->name, 
+                'resource' => 'item_types', 
             );
         } else {
             $representation['item_type'] = null;
@@ -40,6 +41,7 @@ class Api_Item extends Omeka_Record_Api_AbstractRecordAdapter
             $representation['collection'] = array(
                 'id' => $record->collection_id, 
                 'url' => self::getResourceUrl("/collections/{$record->collection_id}"), 
+                'resource' => 'collections', 
             );
         } else {
             $representation['collection'] = null;
@@ -48,6 +50,7 @@ class Api_Item extends Omeka_Record_Api_AbstractRecordAdapter
             $representation['owner'] = array(
                 'id' => $record->owner_id, 
                 'url' => self::getResourceUrl("/users/{$record->owner_id}"), 
+                'resource' => 'users', 
             );
         } else {
             $representation['owner'] = null;
@@ -56,6 +59,7 @@ class Api_Item extends Omeka_Record_Api_AbstractRecordAdapter
             'count' => $record->getTable('File')
                 ->count(array('item_id' => $record->id)), 
             'url' => self::getResourceUrl("/files?item={$record->id}"), 
+            'resource' => 'files', 
         );
         $representation['tags'] = $this->getTagRepresentations($record);
         $representation['element_texts'] = $this->getElementTextRepresentations($record);

@@ -87,11 +87,13 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter implements Omeka_Record_Ap
                     'id' => $elementSet['id'], 
                     'url' => $this->getResourceUrl("/element_sets/{$elementSet['id']}"), 
                     'name' => $elementSet['name'], 
+                    'resource' => 'element_sets', 
                 ), 
                 'element' => array(
                     'id' => $element['id'], 
                     'url' => $this->getResourceUrl("/elements/{$element['id']}"), 
                     'name' => $element['name'], 
+                    'resource' => 'elements', 
                 )
             );
             $representations[] = $representation;
@@ -150,6 +152,7 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter implements Omeka_Record_Ap
                 'id' => $tag->id, 
                 'url' => $this->getResourceUrl("/tags/{$tag->id}"), 
                 'name' => $tag->name, 
+                'resource' => 'tags', 
             );
         }
         return $tags;
