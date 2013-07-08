@@ -309,19 +309,16 @@ class ApiController extends Omeka_Controller_AbstractActionController
         
         // Validate each extended resource. Each must be registered as an API 
         // resource and the content must contain "id" and "url" for one resource 
-        // or "count" and "url" for multiple resources.
+        // or "count" and "url" for multiple resources. A "resource" is 
+        // recommended but not mandatory. Everything else passes through as 
+        // custom data that may be used for the client's convenience.
         foreach ($extendTemp as $extendResource => $extendContent) {
             if (is_array($extendContent) 
                 && array_key_exists($extendResource, $apiResources) 
                 && (array_key_exists('count', $extendContent) || array_key_exists('id', $extendContent))
                 && array_key_exists('url', $extendContent)
             ) {
-                $extend[$extendResource] = array('url' => $extendContent['url']);
-                if (array_key_exists('id', $extendContent)) {
-                    $extend[$extendResource]['id'] = $extendContent['id'];
-                } else {
-                    $extend[$extendResource]['count'] = $extendContent['count'];
-                }
+                $extend[$extendResource] = $extendContent;
             }
         }
         
