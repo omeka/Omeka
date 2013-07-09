@@ -111,7 +111,7 @@ class Table_Item extends Omeka_Db_Table
             array()
         );
 
-        $whereCondition = $db->quoteInto('_simple_etx.text LIKE ?', $terms)
+        $whereCondition = $db->quoteInto('_simple_etx.text LIKE ?', '%' . $terms . '%')
                         . ' OR '
                         . $db->quoteInto('_simple_tags.name IN (?)', $tagList);
         $select->where($whereCondition);
