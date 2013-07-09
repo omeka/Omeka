@@ -1,5 +1,5 @@
 <?php
-echo head(array('title' => __('Api'), 'bodyclass'=>'settings edit-api'));
+echo head(array('title' => __('Settings'), 'bodyclass'=>'settings edit-api'));
 echo common('settings-nav');
 echo flash();
 ?>
