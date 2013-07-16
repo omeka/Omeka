@@ -433,6 +433,32 @@ p, li {
             box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
             border: 1px solid #749308;
         }
+        
+            /* jQuery UI overrides 
+            ================================================== */
+            
+            button.ui-state-default {
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#A4C637), color-stop(100%,#75940A)) !important;
+                background: -moz-linear-gradient(center top, #A4C637 0%, #75940A 100%) !important;
+                filter:  progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#A4C637', endColorstr='#75940A'); 
+                    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#A4C637', endColorstr='#75940A')";
+                background: linear-gradient(to bottom, #A4C637, #75940A);
+                color: #fff !important;
+                border: 1px solid #749308 !important;
+                -webkit-border-radius: 0 !important;
+                -moz-border-radius: 0 !important;
+                border-radius: 0 !important;
+            }
+            
+            button.ui-dialog-titlebar-close {
+                top: 40% !important;
+                -webkit-box-shadow: 0 0 0 transparent;
+                -moz-box-shadow: 0 0 0 transparent;
+                box-shadow: 0 0 0 transparent;
+                border: 0 !important;
+                background-image: none !important;
+                background-color: transparent !important;
+            }
             
         /* Checkboxes 
         ================================================== */
