@@ -13,7 +13,7 @@ class addApiDefaults extends Omeka_Db_Migration_AbstractMigration
 {
     public function up()
     {
-        set_option('api_enable', true);
+        set_option('api_enable', false);
         set_option('api_per_page', 50);
     }
 }
