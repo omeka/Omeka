@@ -70,14 +70,8 @@
 
     <div class="subhead">
         <?php echo search_form(array('show_advanced' => true)); ?>
-            
         <?php if (isset($title)) : ?>
-            <?php 
-                if(strlen($title) > 80) {
-                    $title = substr($title,0,79) . '..."';
-                } 
-            ?>
-            <h1 class="section-title"><?php echo $title ?></h1>
+            <h1 class="section-title" title="<?php echo html_escape($title); ?>"><?php echo $title ?></h1>
         <?php endif; ?>
     </div>
 
