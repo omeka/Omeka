@@ -16,15 +16,13 @@ class addSessionsTable extends Omeka_Db_Migration_AbstractMigration
     public function up()
     {
         $this->db->queryBlock(<<<SQL
-CREATE TABLE IF NOT EXISTS `omeka_keys` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) unsigned NOT NULL,
-  `label` varchar(100) NOT NULL,
-  `key` char(40) NOT NULL,
-  `ip` varbinary(16) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `key` (`key`)
-) ENGINE=InnoDB;
+CREATE TABLE IF NOT EXISTS `{$this->db->prefix}sessions` (
+    `id` char(32),
+    `modified` int,
+    `lifetime` int,
+    `data` text,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDb;
 SQL
         );
     }
