@@ -83,6 +83,12 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
             array_shift($params);
         }
         
+        // Allow clients to override the HTTP method. This is helpful if the 
+        // server is configured to reject certain methods.
+        if (!$method = $request->getHeader('X-HTTP-Method-Override')) {
+            $method = $request->getMethod();
+        }
+        
         // Get all available API resources.
         $apiResources = $front->getParam('api_resources');
         
@@ -91,7 +97,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
         $recordType = $this->_getRecordType($resource, $apiResources);
         $module     = $this->_getModule($resource, $apiResources);
         $controller = $this->_getController($resource, $apiResources);
-        $action     = $this->_getAction($request->getMethod(), $params, $resource, $apiResources);
+        $action     = $this->_getAction($method, $params, $resource, $apiResources);
         
         // Validate the GET parameters.
         $this->_validateParams($action, $resource, $apiResources);
