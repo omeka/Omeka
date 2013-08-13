@@ -376,6 +376,9 @@ p, li {
         }
         
             a.button[disabled], input[type=submit][disabled], button[disabled] { 
+                -moz-box-shadow: none !important;
+                -webkit-box-shadow: none !important;
+                box-shadow: none !important;
                 cursor: default;
                 opacity: .35; 
             }
@@ -434,6 +437,31 @@ p, li {
             border: 1px solid #749308;
         }
         
+        button:active, input[type=submit]:active, a.button:active  {
+            -moz-box-shadow: 0px 1px 1px 0px #D4D4D4 !important;
+            -webkit-box-shadow: 0px 1px 1px 0px #D4D4D4 !important;
+            box-shadow: 0px 1px 1px 0px #D4D4D4 !important;
+            color: #E7E7E7 !important;
+        }
+        
+        button:hover, input[type=submit]:hover, a.button:hover, .green:hover {
+            -moz-box-shadow: 0px 1px 0px 0px #BDD662 inset, 0px -1px 0px 0px #6A821A inset, 0px 0px 10px 0px #A4C637, 0px 2px 2px 0px #D4D4D4;
+            -webkit-box-shadow: 0px 1px 0px 0px #BDD662 inset, 0px -1px 0px 0px #6A821A inset, 0px 0px 10px 0px #A4C637, 0px 2px 2px 0px #D4D4D4;
+            box-shadow: 0px 1px 0px 0px #BDD662 inset, 0px -1px 0px 0px #6A821A inset, 0px 0px 10px 0px #A4C637, 0px 2px 2px 0px #D4D4D4;
+            color: #fff;
+        }
+        
+        button.blue:hover, input[type=submit].blue:hover, a.button.blue:hover {
+            -moz-box-shadow: 0px 1px 0px 0px #526c80 inset, 0px -1px 0px 0px #142233 inset, 0px 0px 10px 0px #102d3b, 0px 2px 2px 0px #d4d4d4;
+            -webkit-box-shadow: 0px 1px 0px 0px #526c80 inset, 0px -1px 0px 0px #142233 inset, 0px 0px 10px 0px #102d3b, 0px 2px 2px 0px #d4d4d4;
+            box-shadow: 0px 1px 0px 0px #526c80 inset, 0px -1px 0px 0px #142233 inset, 0px 0px 10px 0px #102d3b, 0px 2px 2px 0px #d4d4d4;
+        }
+        
+        button.red:hover, input[type=submit].red:hover, a.button.red:hover {
+            -moz-box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 0px 10px 0px #7d422a, 0px 2px 2px 0px #d4d4d4;
+            -webkit-box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 0px 10px 0px #7d422a, 0px 2px 2px 0px #d4d4d4;
+            box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 0px 10px 0px #7d422a, 0px 2px 2px 0px #d4d4d4;        
+        }
             /* jQuery UI overrides 
             ================================================== */
             
