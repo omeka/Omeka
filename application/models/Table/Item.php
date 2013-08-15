@@ -142,7 +142,7 @@ class Table_Item extends Omeka_Db_Table
             // Determine what the WHERE clause should look like.
             switch ($type) {
                 case 'does not contain':
-                    $predicate = "LIKE " . $db->quote('%'.$value .'%');
+                    $predicate = "NOT LIKE " . $db->quote('%'.$value .'%');
                     break;
                 case 'contains':
                     $predicate = "LIKE " . $db->quote('%'.$value .'%');
