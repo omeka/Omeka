@@ -123,7 +123,7 @@ class UsersController extends Omeka_Controller_AbstractActionController
         $ua = $this->_helper->db->getTable('UsersActivations')->findBySql("url = ?", array($hash), true);
             
         if (!$ua) {
-            $this->_helper->flashMessenger('Invalid activation code given.', 'error');
+            $this->_helper->flashMessenger(__('Invalid activation code given.'), 'error');
             return $this->_helper->redirector('forgot-password', 'users');
         }
 
