@@ -27,7 +27,7 @@ msgstr ""
 #. Dublin Core: Title element name
 #: admin/themes/default/collections/browse.php:22
 #: admin/themes/default/items/browse.php:40
-#: application/views/scripts/items/browse.php:17
+#: application/views/scripts/items/browse.php:19
 #: application/views/scripts/search/index.php:13
 msgid "Title"
 msgstr ""
@@ -38,7 +38,7 @@ msgstr ""
 
 #. Dublin Core: Creator element name
 #: admin/themes/default/items/browse.php:41
-#: application/views/scripts/items/browse.php:18
+#: application/views/scripts/items/browse.php:20
 msgid "Creator"
 msgstr ""
 
@@ -468,7 +468,7 @@ msgstr ""
 #: admin/themes/default/collections/browse.php:24
 #: admin/themes/default/files/show.php:68
 #: admin/themes/default/items/browse.php:43
-#: application/views/scripts/items/browse.php:19
+#: application/views/scripts/items/browse.php:21
 msgid "Date Added"
 msgstr ""
 
@@ -606,7 +606,7 @@ msgstr ""
 #: admin/themes/default/common/content-nav.php:21
 #: admin/themes/default/items/browse.php:94
 #: admin/themes/default/items/show.php:65
-#: application/views/scripts/items/browse.php:44
+#: application/views/scripts/items/browse.php:46
 #: application/views/scripts/items/show.php:26
 msgid "Tags"
 msgstr ""
@@ -877,7 +877,7 @@ msgstr ""
 #: admin/themes/default/files/show.php:95
 #: admin/themes/default/items/browse.php:133
 #: admin/themes/default/items/show.php:88
-#: application/views/scripts/items/browse.php:58
+#: application/views/scripts/items/browse.php:60
 #: application/views/scripts/items/show.php:38
 msgid "Output Formats"
 msgstr ""
@@ -2259,6 +2259,10 @@ msgstr ""
 msgid "Please check your email for a link to reset your password."
 msgstr ""
 
+#: application/controllers/UsersController.php:126
+msgid "Invalid activation code given."
+msgstr ""
+
 #: application/controllers/UsersController.php:135
 msgid "Password: The passwords do not match."
 msgstr ""
@@ -3382,7 +3386,7 @@ msgstr ""
 msgid "View All Items"
 msgstr ""
 
-#: application/views/scripts/items/browse.php:22
+#: application/views/scripts/items/browse.php:24
 msgid "Sort by: "
 msgstr ""
 
