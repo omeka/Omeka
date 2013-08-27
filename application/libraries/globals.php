@@ -1690,6 +1690,21 @@ function get_records($recordType, $params = array(), $limit = 10)
 }
 
 /**
+ * Get a single record from the database.
+ *
+ * @package Omeka\Function\Db
+ * @uses Omeka_Db_Table::findBy
+ * @param string $recordType Type of records to get.
+ * @param array $params Array of search parameters for records.
+ * @return object An object of result records (of $recordType).
+ */
+function get_record($recordType, $params = array())
+{
+    $record = get_records($recordType, $params, 1);
+    return reset($record);
+}
+
+/**
  * Return the total number of a given type of record in the database.
  *
  * @package Omeka\Function\Db
