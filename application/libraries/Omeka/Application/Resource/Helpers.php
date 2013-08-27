@@ -40,13 +40,11 @@ class Omeka_Application_Resource_Helpers extends Zend_Application_Resource_Resou
     
     private function _initViewRenderer()
     {
+        $this->getBootstrap()->bootstrap('View');
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
-        $view = new Omeka_View();
+        $view = Zend_Registry::get('view');
         $viewRenderer->setView($view)
                      ->setViewSuffix('php');
-
-        // Register the view object so that it can be called by the view helpers.
-        Zend_Registry::set('view', $view);
     }
     
     /**

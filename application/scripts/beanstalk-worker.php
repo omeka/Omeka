@@ -71,8 +71,10 @@ if (!$pheanJob) {
     echo "Beanstalk worker timed out when reserving a job.";
     exit(0);
 }
-$application->bootstrap(array('Autoloader', 'Config', 'Db', 'Options', 
-                              'Pluginbroker', 'Plugins', 'Jobs', 'Storage', 'Mail'));
+$application->bootstrap(array(
+    'Autoloader', 'Config', 'Db', 'Options', 'Pluginbroker', 'Plugins', 'Jobs',
+    'Storage', 'Mail', 'View'
+));
 
 // resend() must send jobs to the original queue by default.
 $jobDispatcher = Zend_Registry::get('job_dispatcher');
