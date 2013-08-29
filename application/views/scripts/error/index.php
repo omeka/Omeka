@@ -11,7 +11,7 @@
     <link rel="stylesheet" media="all" href="<?php echo WEB_VIEW_SCRIPTS . '/css/style.css'; ?>">
     <link rel="stylesheet" media="all" href="<?php echo WEB_VIEW_SCRIPTS . '/css/skeleton.css'; ?>">
     <link rel="stylesheet" media="all" href="<?php echo WEB_VIEW_SCRIPTS . '/css/layout.css'; ?>">
-    <link href='http://fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic|Cabin:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic|Cabin:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 </head>
 <body id="debug">
     <div class="container container-sixteen">
