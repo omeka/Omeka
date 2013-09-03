@@ -25,8 +25,8 @@ SQL;
         $sql = <<<SQL
 UPDATE `{$this->db->Item}` i 
 LEFT JOIN `{$this->db->ItemType}` it
-ON i.collection_id = it.id 
-SET i.item_type_id = NULL 
+ON i.item_type_id = it.id
+SET i.item_type_id = NULL
 WHERE it.id IS NULL;
 SQL;
         $this->db->query($sql);
