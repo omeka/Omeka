@@ -1395,6 +1395,14 @@ header nav {
     margin: 0;
     padding: 0;
 }
+
+.index .alpha {
+    clear: left;
+}
+
+.index .omega {
+    clear: right;
+}
     
 
 /* Browse Plugins
