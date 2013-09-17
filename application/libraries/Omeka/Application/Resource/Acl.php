@@ -102,6 +102,7 @@ class Omeka_Application_Resource_Acl extends Zend_Application_Resource_ResourceA
         // see their collections that are not public.
         $acl->allow('contributor','Collections', array('add', 'delete-confirm', 'editSelf', 
                                                        'deleteSelf', 'showSelfNotPublic'));
+        $acl->allow('contributor', 'Elements', 'element-form');
         
         // Define deny rules.
         
