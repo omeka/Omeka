@@ -513,7 +513,7 @@ p, li {
             
                 .inputs ul.error { margin-top: 0; }
             
-            #content #flash li, ul.error li, #im-result {
+            #content #flash li, ul.error li, #im-result, .flash {
                 background-color: rgba(255, 255, 255, .5);
                 border: 1px solid #E7E7E7;
                 border-radius: 3px;
@@ -522,6 +522,11 @@ p, li {
             }
             
                 #im-result:empty { display: none; }
+                
+        li .flash {
+            display: block;
+            margin: 10px 0 10px -.5em;
+        }
         
         .success {
             color: #729108;
