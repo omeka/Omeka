@@ -1781,7 +1781,6 @@ header nav {
 ================================================== */
 
 #all-tags-list {
-    list-style-type: none;
     padding: 0;
 }
 
@@ -1977,10 +1976,6 @@ header nav {
     margin: .25em 0 1em -1em;
 }
 
-.edit-tag form {
-    display: inline-block;
-}
-
 .edit-tag input {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -1988,7 +1983,6 @@ header nav {
 }
 
 .tag-list {
-    list-style-type: none;
     padding: 0;
 }
 
@@ -2004,32 +1998,38 @@ header nav {
     box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
     border: 1px solid #749308;
     font-family: "Arvo", serif;
-    display:inline-block;
+    display: inline-block;
     margin: 0 0 10px 0;
-    position: relative;
     color: #ffffff;
     text-shadow: -1px -1px 1px rgba(0,0,0,.5);
     padding: 5px 10px;
 }
 
 .tag-list .count {
-    border-right: 1px solid #749308;
-    height: 99%;
-    display: inline-block;
     margin-right: 5px;
     padding-right: 10px;
+    position: relative;
+}
+
+.tag-list li .count:after {
+    content: "";
+    width: 1px;
+    position: absolute;
+    background-color: #749308;
+    bottom: -5px;
+    top: -5px;
+    right: 0;
+    -webkit-box-shadow: 0px 0px 1px #BDD662;
+    -moz-box-shadow: 0px 0px 1px #BDD662;
+    box-shadow: 0px 0px 1px #BDD662;
 }
     
 .tag-list li .tag, .tag-list li a {
-    height: 100%;
     color: #ffffff;
     display: inline-block;
 }
-
-.tag-list li .delete-tag, .tag-list li .remove-tag { display: inline-block; }
     
 .tag-list li .delete-tag a, .tag-list li .remove-tag a, .tag-list li .undo-remove-tag a {
-    display: inline-block;
     text-indent: -9999px;
     width: 17px;
     background-color: rgba(0, 0, 0, .3);
@@ -2038,18 +2038,15 @@ header nav {
     margin-left: 5px;
     position: relative;
     top: 3px;
-    padding: 0;
 }
 
 .tag-list li .delete-tag a:after, .tag-list li .remove-tag a:after {
     content: "\21";
     font-family: "icomoon";
-    height: 100%;
     width: 100%;
     box-shadow: 0px -1px 1px rgba(255,255,255,.3);
     border-radius: 20px;
     color:#99C05C;
-    display: block;
     position: relative;
     font-size: 9px;
     top: 0;
@@ -2059,10 +2056,22 @@ header nav {
     text-shadow: none;
 }
     
-#tags-nav { margin: 20px 0; }
+#tags-nav { 
+    margin: 20px 0; 
+    text-shadow: -1px -1px 1px #ffffff;
+}
 
-#tags-nav span {
-    height: 25px;
+#tags-nav .quick-filter-wrapper {
+    height: 27px;
+    padding: 0 20px 0 0;
+    border-width: 1px 0 0 1px;
+}
+
+#tags-nav .quick-filter-wrapper .dropdown li {
+    padding: 0 20px 0 0;
+}
+
+#tags-nav > span {
     background: #e2e2e2; /* Fallback */
     background-image: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#e2e2e2));
     background-image: -moz-linear-gradient(top, #f8f8f8, #e2e2e2);
@@ -2073,28 +2082,22 @@ header nav {
     border: solid #D8D8D8;
     border-width: 1px 1px 1px 0;
     -webkit-appearance: none;
-    border-radius: 0;
     -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
     -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
     box-shadow: 1px 1px 2px rgba(0,0,0,.1);
-    color: #666666;
     display: inline-block;
-    font-family: "Cabin", sans-serif;
-    font-size: 16px;
     line-height: 25px;
-    list-style-type: none;
     padding: 0 10px;    
-    text-shadow: -1px -1px 1px #ffffff;
 }
         
-    #tags-nav span:first-child {
+    #tags-nav > span:first-child {
         border-left: 1px solid #D8D8D8;
     }
             
             
     #tags-nav span a:link, #tags-nav span a:visited {
-        color: #B86644;
-        }
+        color: #666666;
+    }
         
     #tags-nav span.current {
         background-image: -webkit-gradient(linear, left top, left bottom, from(#e8e8e8), to(#e1e1e1));
@@ -2105,8 +2108,8 @@ header nav {
         background-image: linear-gradient(to bottom, #e8e8e8, #e1e1e1);
         -webkit-box-shadow: 0px 0px 2px rgba(0,0,0,.1) inset, 1px 1px 2px rgba(0,0,0,.1);
         -moz-box-shadow: 0px 0px 2px rgba(0,0,0,.1) inset, 1px 1px 2px rgba(0,0,0,.1);
-        -o-box-shadow: 0px 0px 2px rgba(0,0,0,.1) inset, 1px 1px 2px rgba(0,0,0,.1);
         box-shadow: 0px 0px 2px rgba(0,0,0,.1) inset, 1px 1px 2px rgba(0,0,0,.1);
+        text-shadow: none;
         }
     
 .tags div.two.columns { clear: both; }
