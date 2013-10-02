@@ -231,7 +231,7 @@ p, li {
         background: url('../images/dropdown-arrow.png') no-repeat right center, -webkit-linear-gradient(top, #f8f8f8, #e2e2e2);
         background: url('../images/dropdown-arrow.png') no-repeat right center, -moz-linear-gradient(top, #f8f8f8, #e2e2e2);
         background: url('../images/dropdown-arrow.png') no-repeat right center, -o-linear-gradient(top, #f8f8f8, #e2e2e2);
-        background: url('../images/dropdown-arrow.png') no-repeat right center, linear-gradient(top, #f8f8f8, #e2e2e2);
+        background: url('../images/dropdown-arrow.png') no-repeat right center, linear-gradient(to bottom, #f8f8f8, #e2e2e2);
         border: 1px solid #D8D8D8;
         -webkit-border-radius: 0;
         -moz-border-radius: 0;
@@ -351,7 +351,7 @@ p, li {
             background: -webkit-linear-gradient(top, #A4C637, #75940A);
             background: -moz-linear-gradient(top, #A4C637, #75940A);
             background: -o-linear-gradient(top, #A4C637, #75940A);
-            background: linear-gradient(top, #A4C637, #75940A);
+            background: linear-gradient(to bottom, #A4C637, #75940A);
             -webkit-box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
             -moz-box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
             box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
@@ -404,7 +404,7 @@ p, li {
             background: -webkit-linear-gradient(top, #22546b, #102d3b);
             background: -moz-linear-gradient(top, #22546b, #102d3b);
             background: -o-linear-gradient(top, #22546b, #102d3b);
-            background: linear-gradient(top, #22546b, #102d3b);
+            background: linear-gradient(to bottom, #22546b, #102d3b);
             -webkit-box-shadow: 0px 1px 0px 0px #526c80 inset, 0px -1px 0px 0px #142233 inset, 0px 2px 2px 0px #d4d4d4;
             -moz-box-shadow: 0px 1px 0px 0px #526c80 inset, 0px -1px 0px 0px #142233 inset, 0px 2px 2px 0px #d4d4d4;
             box-shadow: 0px 1px 0px 0px #526c80 inset, 0px -1px 0px 0px #142233 inset, 0px 2px 2px 0px #d4d4d4;
@@ -416,7 +416,7 @@ p, li {
             background: -webkit-linear-gradient(top, #ad6345, #7d422a);
             background: -moz-linear-gradient(top, #ad6345, #7d422a);
             background: -o-linear-gradient(top, #ad6345, #7d422a);
-            background: linear-gradient(top, #ad6345, #7d422a);
+            background: linear-gradient(to bottom, #ad6345, #7d422a);
             -webkit-box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 2px 2px 0px #d4d4d4;
             -moz-box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 2px 2px 0px #d4d4d4;
             box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 2px 2px 0px #d4d4d4;
@@ -428,7 +428,7 @@ p, li {
             background: -webkit-linear-gradient(top, #A4C637, #75940A);
             background: -moz-linear-gradient(top, #A4C637, #75940A);
             background: -o-linear-gradient(top, #A4C637, #75940A);
-            background: linear-gradient(top, #A4C637, #75940A);
+            background: linear-gradient(to bottom, #A4C637, #75940A);
             -webkit-box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
             -moz-box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
             box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
@@ -464,10 +464,11 @@ p, li {
             ================================================== */
             
             button.ui-state-default {
+                background: #A4C637;
                 background: -webkit-linear-gradient(top, #A4C637, #75940A) !important;
-                background: -moz-linear-gradient(center top, #A4C637 0%, #75940A 100%) !important;
+                background: -moz-linear-gradient(top, #A4C637, #75940A) !important;
                 background: -o-linear-gradient(top, #A4C637, #75940A) !important;
-                background: linear-gradient(top, #A4C637, #75940A) !important;
+                background: linear-gradient(to bottom, #A4C637, #75940A) !important;
                 color: #fff !important;
                 border: 1px solid #749308 !important;
                 -webkit-border-radius: 0 !important;
@@ -806,7 +807,7 @@ header nav {
     background: url('../images/dropdown-arrow.png') no-repeat right center, -webkit-linear-gradient(top, #1C4E65, #164052);
     background: url('../images/dropdown-arrow.png') no-repeat right center, -moz-linear-gradient(top, #1C4E65, #164052);
     background: url('../images/dropdown-arrow.png') no-repeat right center, -o-linear-gradient(top, #1C4E65, #164052);
-    background: url('../images/dropdown-arrow.png') no-repeat right center, linear-gradient(top, #1C4E65, #164052);
+    background: url('../images/dropdown-arrow.png') no-repeat right center, linear-gradient(to bottom, #1C4E65, #164052);
     border: 1px solid #11303F;
     color: #f7f7f7;
     font-family: "Arvo", serif;
@@ -859,7 +860,7 @@ header nav {
             background: -webkit-linear-gradient(top, #f8f8f8, #e2e2e2);
             background: -moz-linear-gradient(top, #f8f8f8, #e2e2e2);
             background: -o-linear-gradient(top, #f8f8f8, #e2e2e2);
-            background: linear-gradient(top, #f8f8f8, #e2e2e2);
+            background: linear-gradient(to bottom, #f8f8f8, #e2e2e2);
             display: block;
             padding: 0 7px;
         }
@@ -905,7 +906,7 @@ header nav {
     background: -webkit-linear-gradient(top, #F5F3EC, #E9E5DA);
     background: -moz-linear-gradient(top, #F5F3EC, #E9E5DA);
     background: -o-linear-gradient(top, #F5F3EC, #E9E5DA);
-    background: linear-gradient(top, #F5F3EC, #E9E5DA);
+    background: linear-gradient(to bottom, #F5F3EC, #E9E5DA);
     -webkit-box-shadow: 0px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
     -moz-box-shadow: 0px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
     box-shadow: 0px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
@@ -936,7 +937,7 @@ header nav {
     background: -webkit-linear-gradient(top, #ad6345, #7d422a);
     background: -moz-linear-gradient(top, #ad6345, #7d422a);
     background: -o-linear-gradient(top, #ad6345, #7d422a);
-    background: linear-gradient(top, #ad6345, #7d422a);
+    background: linear-gradient(to bottom, #ad6345, #7d422a);
     border: 1px solid #7E432C;
     border-radius: 2px;
     color: #fff;
@@ -1593,7 +1594,7 @@ header nav {
     background: url('../images/dropdown-arrow.png') no-repeat right center, -webkit-linear-gradient(top, #f8f8f8, #e2e2e2);
     background: url('../images/dropdown-arrow.png') no-repeat right center, -moz-linear-gradient(top, #f8f8f8, #e2e2e2);
     background: url('../images/dropdown-arrow.png') no-repeat right center, -o-linear-gradient(top, #f8f8f8, #e2e2e2);
-    background: url('../images/dropdown-arrow.png') no-repeat right center, linear-gradient(top, #f8f8f8, #e2e2e2);
+    background: url('../images/dropdown-arrow.png') no-repeat right center, linear-gradient(to bottom, #f8f8f8, #e2e2e2);
     border: 1px solid #D8D8D8;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
@@ -1778,7 +1779,7 @@ header nav {
     background: -webkit-linear-gradient(top, #ad6345, #7d422a);
     background: -moz-linear-gradient(top, #ad6345, #7d422a);
     background: -o-linear-gradient(top, #ad6345, #7d422a);
-    background: linear-gradient(top, #ad6345, #7d422a);
+    background: linear-gradient(to bottom, #ad6345, #7d422a);
 }
 
     .tag-list li.tag-removed:after {
@@ -1792,7 +1793,7 @@ header nav {
     background: -webkit-linear-gradient(top, #ad6345, #7d422a);
     background: -moz-linear-gradient(top, #ad6345, #7d422a);
     background: -o-linear-gradient(top, #ad6345, #7d422a);
-    background: linear-gradient(top, #ad6345, #7d422a);
+    background: linear-gradient(to bottom, #ad6345, #7d422a);
     border-top: 1px solid #7E432C;
     border-right: 1px solid #7E432C;
 }
@@ -1977,7 +1978,7 @@ header nav {
     background: -webkit-linear-gradient(top, #A4C637, #75940A);
     background: -moz-linear-gradient(top, #A4C637, #75940A);
     background: -o-linear-gradient(top, #A4C637, #75940A);
-    background: linear-gradient(top, #A4C637, #75940A);
+    background: linear-gradient(to bottom, #A4C637, #75940A);
     -webkit-box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
     -moz-box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
     box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
@@ -2061,7 +2062,7 @@ header nav {
     background: -webkit-linear-gradient(top, #f8f8f8, #e2e2e2);
     background: -moz-linear-gradient(top, #f8f8f8, #e2e2e2);
     background: -o-linear-gradient(top, #f8f8f8, #e2e2e2);
-    background: linear-gradient(top, #f8f8f8, #e2e2e2);
+    background: linear-gradient(to bottom, #f8f8f8, #e2e2e2);
     border: solid #D8D8D8;
     border-width: 1px 1px 1px 0;
     -webkit-appearance: none;
@@ -2087,7 +2088,7 @@ header nav {
         background: -webkit-linear-gradient(top, #e8e8e8, #e1e1e1);
         background: -moz-linear-gradient(top, #e8e8e8, #e1e1e1);
         background: -o-linear-gradient(top, #e8e8e8, #e1e1e1);
-        background: linear-gradient(top, #e8e8e8, #e1e1e1);
+        background: linear-gradient(to bottom, #e8e8e8, #e1e1e1);
         -webkit-box-shadow: 0px 0px 2px rgba(0,0,0,.1) inset, 1px 1px 2px rgba(0,0,0,.1);
         -moz-box-shadow: 0px 0px 2px rgba(0,0,0,.1) inset, 1px 1px 2px rgba(0,0,0,.1);
         box-shadow: 0px 0px 2px rgba(0,0,0,.1) inset, 1px 1px 2px rgba(0,0,0,.1);
