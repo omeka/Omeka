@@ -14,11 +14,15 @@ echo head(array('title'=>$pageTitle,'bodyclass'=>'tags browse-tags'));
 echo flash();
 
 ?>
-<?php if(isset($_GET['tagType'])):?>
+<?php if(isset($_GET['tagType'])) {
+          $current_tag_type = html_escape($_GET['tagType']);
+      } else {
+          $current_tag_type = 'Item';
+      } 
+?>
 <div id='search-filters'>
-    <ul><li><?php echo __(html_escape($_GET['tagType'] . 's')); ?></li></ul>
+    <ul><li><?php echo __($current_tag_type . 's'); ?></li></ul>
 </div>
-<?php endif; ?>
 
 <?php if ($total_tags): ?>
     <?php if ($canEdit): ?>
@@ -65,7 +69,11 @@ echo flash();
         <ul class="tag-list">
         <?php foreach ($tags as $tag): ?>
             <li>
+            <?php if($current_tag_type == 'Item'):?>
                 <a href="<?php echo url('items/?tag=' . $tag->name); ?>" class="count"><?php echo $tag['tagCount']; ?></a>
+            <?php else: ?>
+                <span class="count"><?php echo $tag['tagCount']; ?></span>
+            <?php endif; ?>
             <?php if ($canEdit): ?>
                 <span class="tag edit-tag" id="<?php echo $tag->id; ?>"><?php echo $tag->name; ?></span>
             <?php else: ?>
