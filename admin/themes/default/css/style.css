@@ -549,7 +549,6 @@ header {
     border-width: 0 0 .375em 0;
     -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
     -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
-    -o-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
     box-shadow: 0px 0px 5px #666666;
     color: #FFFFFF;
     font-family: "Arvo", serif;
@@ -738,7 +737,6 @@ header nav {
         border-top: 1px solid rgba(255,255,255,.1);
     -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
     -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
-    -o-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
     box-shadow: 1px 1px 3px rgba(0,0,0,.5);
     word-wrap: break-word;
     line-height: 100%;
@@ -838,7 +836,6 @@ header nav {
         border-radius: 0;
         -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
         -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
-        -o-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
         box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
@@ -1021,7 +1018,6 @@ header nav {
     border: 1px solid #D6D5C2;
     -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
     -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
-    -o-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
     box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
     line-height: 1.5em;
     margin: -2px 0 2px 0;
@@ -1128,8 +1124,7 @@ header nav {
     border-image: url('../images/red-bg.jpg') 5 repeat; 
     border-width: 5px 0 0 0; 
     -webkit-box-shadow: 0 0 1px #999999; 
-    -moz-box-shadow: 0 0 1px #999999; 
-    -o-box-shadow: 0 0 1px #999999; 
+    -moz-box-shadow: 0 0 1px #999999;
     box-shadow: 0 0 1px #999999; 
     padding: 20px 10px;
 }    
@@ -1147,7 +1142,6 @@ header nav {
     background-color: rgb(255,255,255);
     -webkit-box-shadow: 0 0 1px #999999;
     -moz-box-shadow: 0 0 1px #999999;
-    -o-box-shadow: 0 0 1px #999999;
     box-shadow: 0 0 1px #999999;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -1388,7 +1382,6 @@ header nav {
     border: 0;
     -webkit-box-shadow: 0 0 0 transparent;
     -moz-box-shadow: 0 0 0 transparent;
-    -o-box-shadow: 0 0 0 transparent;
     box-shadow: 0 0 0 transparent;
     margin: 0;
     padding: 0;
@@ -1619,7 +1612,6 @@ header nav {
     border: 1px solid #D8D8D8;
     -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
     -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
-    -o-box-shadow: 1px 1px 2px rgba(0,0,0,.1);
     box-shadow: 1px 1px 2px rgba(0,0,0,.1);
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -1897,7 +1889,6 @@ header nav {
         background-image: url('../images/red-bg.jpg');
         -webkit-box-shadow: 0px 2px 3px #cccccc;
         -moz-box-shadow: 0px 2px 3px #cccccc;
-        -o-box-shadow: 0px 2px 3px #cccccc;
         box-shadow: 0px 2px 3px #cccccc;
         color: #ffffff !important;
         text-shadow: -1px -1px 1px rgba(0,0,0,.05);
@@ -2206,7 +2197,6 @@ button.remove_search {
         border: 10px solid transparent;
         -webkit-box-shadow: 0 0 5px rgba(0,0,0,.1);
         -moz-box-shadow: 0 0 5px rgba(0,0,0,.1);
-        -o-box-shadow: 0 0 5px rgba(0,0,0,.1);
         box-shadow: 0 0 5px rgba(0,0,0,.1);
         height: 225px;
         overflow: hidden;
