@@ -56,7 +56,7 @@ endif; ?>
     </div>
 <?php endforeach; ?>
     <?php if (is_allowed('Items', 'add')): ?>
-    <div class="add-new-link"><p><a class="add-new" href="<?php echo html_escape(url('items/add')); ?>"><?php echo __('Add a new item'); ?></a></p></div>
+    <div class="add-new-link"><p><a class="add-new-item" href="<?php echo html_escape(url('items/add')); ?>"><?php echo __('Add a new item'); ?></a></p></div>
     <?php endif; ?>
 <?php $panels[] = ob_get_clean(); ?>
 

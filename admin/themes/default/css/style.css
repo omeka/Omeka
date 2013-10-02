@@ -252,6 +252,8 @@ p, li {
     input[type=text], input[type=password] {
         height: 30px;
         border: 1px solid #d8d8d8;
+        -webkit-border-radius: 0;
+        -moz-box-radius: 0;
         border-radius: 0;
         -webkit-box-shadow: 0 0 .375em #d6d6d6 inset;
         -moz-box-shadow: 0 0 .375em #d6d6d6 inset;
@@ -330,6 +332,8 @@ p, li {
     textarea {
         width: 100%;
         border: 1px solid #d8d8d8;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
         border-radius: 0;
         -webkit-box-shadow: 0 0 .375em #d6d6d6 inset;
         -moz-box-shadow: 0 0 .375em #d6d6d6 inset;
@@ -356,6 +360,8 @@ p, li {
             -moz-box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
             box-shadow: 0px 1px 0px 0px #bdd662 inset, 0px -1px 0px 0px #6a821a inset, 0px 2px 2px 0px #d4d4d4;
             border: 1px solid #749308;
+            -webkit-border-radius: 0;
+            -moz-border-radius: 0;
             border-radius: 0;
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
@@ -478,9 +484,9 @@ p, li {
             
             button.ui-dialog-titlebar-close {
                 top: 40% !important;
-                -webkit-box-shadow: 0 0 0 transparent;
-                -moz-box-shadow: 0 0 0 transparent;
-                box-shadow: 0 0 0 transparent;
+                -webkit-box-shadow: none;
+                -moz-box-shadow: none;
+                box-shadow: none;
                 border: 0 !important;
                 background-image: none !important;
                 background-color: transparent !important;
@@ -514,6 +520,8 @@ p, li {
             #content #flash li, ul.error li, #im-result, .flash {
                 background-color: rgba(255, 255, 255, .5);
                 border: 1px solid #E7E7E7;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
                 border-radius: 3px;
                 margin-bottom: 20px;
                 padding: .5em;            
@@ -830,16 +838,6 @@ header nav {
     .pagination li {
         height: 25px;
         min-width: 25px;
-        background: #e2e2e2; /* Fallback */
-        border: 1px solid #D8D8D8;
-        -webkit-appearance: none;
-        border-radius: 0;
-        -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
-        -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
-        box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
         color: #666666;
         font-family: "Cabin", sans-serif;
         float: left;
@@ -853,11 +851,19 @@ header nav {
         }
             
         .pagination li a {
+            height: 100%;
             background: #f8f8f8;
             background: -webkit-linear-gradient(top, #f8f8f8, #e2e2e2);
             background: -moz-linear-gradient(top, #f8f8f8, #e2e2e2);
             background: -o-linear-gradient(top, #f8f8f8, #e2e2e2);
             background: linear-gradient(to bottom, #f8f8f8, #e2e2e2);
+            border: 1px solid #D8D8D8;
+            -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
+            -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
+            box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
             display: block;
             padding: 0 7px;
         }
@@ -865,12 +871,6 @@ header nav {
         .pagination_next { margin: 0 0 0 10px; }
 
         .pagination_previous { margin: 0 10px 0 0; }
-
-.pagination .page-input {
-    background: transparent;
-    border: 0;
-    box-shadow: 0 0 0;
-}
     
     .pagination .page-input input[type=text] {
         width: 40px;
@@ -908,6 +908,8 @@ header nav {
     -moz-box-shadow: 0px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
     box-shadow: 0px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
     border: 1px solid #D6D5C2;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
     border-radius: 2px;
     padding: 10px;
     font-size: 14px;
@@ -920,12 +922,6 @@ header nav {
     .ui-sortable .sortable-item input {
         margin: 0;
     }
-
-    .add-new-item { 
-        cursor: default; 
-        line-height: 1.5em;
-        margin: 0;
-    }
     
     .sortable-item input[type=text] { margin-bottom: 0; }
 
@@ -936,6 +932,8 @@ header nav {
     background: -o-linear-gradient(top, #ad6345, #7d422a);
     background: linear-gradient(to bottom, #ad6345, #7d422a);
     border: 1px solid #7E432C;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
     border-radius: 2px;
     color: #fff;
     text-shadow: -1px -1px 1px rgba(0,0,0,.5);
@@ -954,9 +952,13 @@ header nav {
 .ui-sortable-highlight:empty {
     background: rgba(0,0,0,.04);
     border: 0;
-    box-shadow: 0 0 0 transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
     display: block;
     margin: 15px 0;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
     border-radius: 2px;
 }
 
@@ -1259,6 +1261,8 @@ header nav {
     #login .errors li {
         background-color: rgba(255, 255, 255, .5);
         border: 1px solid #E7E7E7;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
         border-radius: 3px;
         color: #914E33;
         margin: 0;
@@ -1377,16 +1381,6 @@ header nav {
     font-weight: normal;
 }
 
-.index .add-new {
-    background: transparent;
-    border: 0;
-    -webkit-box-shadow: 0 0 0 transparent;
-    -moz-box-shadow: 0 0 0 transparent;
-    box-shadow: 0 0 0 transparent;
-    margin: 0;
-    padding: 0;
-}
-
 .index .alpha {
     clear: left;
 }
@@ -1410,10 +1404,10 @@ header nav {
 .plugins.browse table a.button, .plugins.browse table input[type=submit], .plugins.browse table button {
     background: none;
     border: 0;
-    -webkit-box-shadow: 0 0 0;
-    -moz-box-shadow: 0 0 0;
-    box-shadow: 0 0 0;
-    text-shadow: 0 0 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    text-shadow: none;
     color: #4E7181;
     padding: 0;
     display: inline;
@@ -1589,9 +1583,6 @@ header nav {
     background: url('../images/dropdown-arrow.png') no-repeat right center, -o-linear-gradient(top, #f8f8f8, #e2e2e2);
     background: url('../images/dropdown-arrow.png') no-repeat right center, linear-gradient(to bottom, #f8f8f8, #e2e2e2);
     border: 1px solid #D8D8D8;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
     -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
     -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
     box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
@@ -1662,6 +1653,8 @@ header nav {
 
 .admin-thumb {
     width: 100px;
+    -webkit-box-shadow: 0 0 3px rgba(0,0,0,.15);
+    -moz-box-shadow: 0 0 3px rgba(0,0,0,.15);
     box-shadow: 0 0 3px rgba(0,0,0,.15);
     float: left;
 }
@@ -1794,24 +1787,6 @@ header nav {
     display: none;
     text-indent: -9999px;
 }
-
-    .undo-remove-tag a:after {
-        content: "\23";
-        font-family: "icomoon";
-        height: 100%;
-        width: 100%;
-        box-shadow: 0px -1px 1px rgba(255,255,255,.3);
-        border-radius: 20px;
-        color: #BB8282; 
-        display: block;
-        position: relative;
-        font-size: 9px;
-        top: 0;
-        float: left;
-        text-indent: 4px;
-        line-height: 17px;
-        text-shadow: none;
-    }
 
 .tag-list li.tag-removed .remove-tag {
     display: none;
@@ -2009,21 +1984,26 @@ header nav {
 .tag-list li .delete-tag a, .tag-list li .remove-tag a, .tag-list li .undo-remove-tag a {
     text-indent: -9999px;
     width: 17px;
-    background-color: rgba(0, 0, 0, .3);
     height: 17px;
-    border-radius: 10px;
     margin-left: 5px;
     position: relative;
     top: 3px;
 }
 
-.tag-list li .delete-tag a:after, .tag-list li .remove-tag a:after {
+.tag-list li .delete-tag a:after, .tag-list li .remove-tag a:after, .undo-remove-tag a:after {
     content: "\21";
     font-family: "icomoon";
+    height: 100%;
     width: 100%;
+    background-color: rgba(0, 0, 0, .3);
+    -webkit-box-shadow: 0px -1px 1px rgba(255,255,255,.3);
+    -moz-box-shadow: 0px -1px 1px rgba(255,255,255,.3);
     box-shadow: 0px -1px 1px rgba(255,255,255,.3);
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
     border-radius: 20px;
     color:#99C05C;
+    display: block;
     position: relative;
     font-size: 9px;
     top: 0;
@@ -2031,6 +2011,11 @@ header nav {
     text-indent: 4px;
     line-height: 17px;
     text-shadow: none;
+}
+
+.undo-remove-tag a:after {
+    content: "\23";
+    color: #BB8282; 
 }
     
 #tags-nav { 
