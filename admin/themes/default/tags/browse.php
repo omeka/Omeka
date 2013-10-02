@@ -14,14 +14,8 @@ echo head(array('title'=>$pageTitle,'bodyclass'=>'tags browse-tags'));
 echo flash();
 
 ?>
-<?php if(isset($_GET['tagType'])) {
-          $current_tag_type = html_escape($_GET['tagType']);
-      } else {
-          $current_tag_type = 'Item';
-      } 
-?>
 <div id='search-filters'>
-    <ul><li><?php echo __($current_tag_type . 's'); ?></li></ul>
+    <ul><li><?php echo __($browse_for . 's'); ?></li></ul>
 </div>
 
 <?php if ($total_tags): ?>
@@ -69,7 +63,7 @@ echo flash();
         <ul class="tag-list">
         <?php foreach ($tags as $tag): ?>
             <li>
-            <?php if($current_tag_type == 'Item'):?>
+            <?php if($browse_for == 'Item'):?>
                 <a href="<?php echo url('items/?tag=' . $tag->name); ?>" class="count"><?php echo $tag['tagCount']; ?></a>
             <?php else: ?>
                 <span class="count"><?php echo $tag['tagCount']; ?></span>
