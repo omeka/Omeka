@@ -158,18 +158,15 @@ p, li {
 
             .action-links li:last-child:after { content: ''; }
         
-    #batch-edit-heading {
+    .batch-edit-heading {
         width: 1%;
         text-align: center;
     }
-    
-
 
     .details {
         background-color: rgb(255,255,255);
         background-color: rgba(255,255,255,.5);
         border: 1px solid #E4E5DE;
-        display: block;
         float: left;
         margin-top: 10px;
         padding: .5em;
@@ -297,16 +294,13 @@ p, li {
             margin-bottom: 10px;
         }
         
-    .input-block {
-        overflow: auto;
-    }
-
     .inputs {
         margin: 0 0 20px 0;
     }
         
         .inputs .input-block {
             margin: 0 0 20px 0;
+            float: left;
         }
 
         .inputs select {
@@ -597,14 +591,12 @@ footer {
 
 #site-title {
     float: left;
-    display: inline-block;
     line-height: 1.5em;
 }
 
 #search-form { 
     width: 30%;
     float: left; 
-    display: inline-block; 
     position: absolute; 
     top: 0; 
     right: 0; 
@@ -637,8 +629,6 @@ footer {
     #search-form input[type=text] {
         width: 75%;
         height: 27px;
-        float: left;
-        display: inline-block;
         position: absolute;
         top: 0;
         left: 0;
@@ -652,13 +642,10 @@ footer {
     #search-form input[type=submit] {
         width: 25%;
         height: 27px;
-        display: inline-block;
-        vertical-align: top;
         padding: 0 5px;
         position: absolute;
         top: 0;
         left: 75%;
-        float: left;
     }
     
             #search-form input[type=submit].with-advanced {
@@ -669,8 +656,6 @@ footer {
         width: 10%;
         height: 27px;
         text-indent: -9999px;
-        display: inline-block;
-        float: left;
         position: absolute;
         top: 0;
         left: 90%;
@@ -747,7 +732,6 @@ header nav {
     -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
     box-shadow: 1px 1px 3px rgba(0,0,0,.5);
     word-wrap: break-word;
-    line-height: 100%;
     text-shadow: -1px -1px 1px rgba(0,0,0,1);
     overflow: hidden;
     position: relative;
@@ -774,7 +758,6 @@ header nav {
 #content-nav .active {
     background-image: url('../images/navbg-blue.jpg');
     position: relative;
-    overflow: visible;
 }
     
     #content-nav .active:hover, #content-nav .active:active {
@@ -782,28 +765,12 @@ header nav {
     }
     
     #content-nav .active a {
-        height: auto;
         background-color: transparent;
-        display: block;
     }
         
     #content-nav .active a:hover, #content-nav .active a:active {
         background-color: transparent;
     }
-        
-#content-nav li span {
-    position: absolute;
-    font-style:italic;
-    top: -9000px;
-    left: -9000px;
-    display: block;
-    width: 260%;
-}
-    
-#content-nav li:hover span, #content-nav li:focus span, #content-nav li:active span {
-    top: 0px;
-    left: 130px;
-}
     
 #mobile-content-nav {
     display: none;
@@ -1039,11 +1006,6 @@ header nav {
         margin-top: 0;
     }
 
-    .drawer-contents label {
-        display: block;
-        padding: 10px 0;
-    }
-    
     .drawer-contents textarea { 
         margin: 0; 
         vertical-align: bottom;
@@ -1720,6 +1682,10 @@ header nav {
 
 .public-featured .label { font-weight: bold; }
 
+.items.show .pagination { width: 100% }
+
+#next-item { float: right;}
+
 
 /* Batch Edit Items
 ================================================== */
@@ -2090,13 +2056,6 @@ header nav {
   margin-bottom: 20px;
 }
 
-.main_link_buttons {
-  width: 100%;
-  overflow: auto;
-}
-
-    .main_link_buttons a { margin: 10px 0 0 0; }
-
     .navigation_main_list_delete { float: right; }
     
     .navigation_main_list_visit { float: left;}
@@ -2172,13 +2131,11 @@ button.remove_search {
     width: 100%;
     font-family: "Arvo", sans-serif;
     margin: 10px 0;
-    padding: 3px 0;
 }    
 
     
     #current-image .crop {
-        background-color: rgba(255,255,255,.3);
-        background-image: url('../images/theme-bg.png');
+        background: rgba(255,255,255,.3) url('../images/theme-bg.png');
         border: 10px solid transparent;
         -webkit-box-shadow: 0 0 5px rgba(0,0,0,.1);
         -moz-box-shadow: 0 0 5px rgba(0,0,0,.1);
@@ -2240,12 +2197,10 @@ button.remove_search {
     .themes .theme .author {
         font-style: italic;
         margin: 0;
-        padding: 0;
     }
     
     .theme-support-link {
         margin: 0;
-        padding: 0;
     }
         
     .themes .theme .crop {
