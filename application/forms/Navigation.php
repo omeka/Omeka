@@ -253,9 +253,8 @@ class Omeka_Form_Navigation extends Omeka_Form
         $otherPages = $nav->getOtherPages($pageUids);                
         $expiredPages = array();
         foreach($otherPages as $otherPage) {
-            $expiredPages[] = $otherPage;
+            $nav->prunePage($otherPage);
         }
-        $nav->prunePages($expiredPages);
         return $nav;
     }
     
