@@ -102,7 +102,7 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
             }
         } else {
             $sortField = 'name';
-            $sortDir = 'a';            
+            $sortDir = 'a';
         }
         return $this->_tagTable->findBy(array('record' => $this->_record, 'sort_field' => $sortField, 'sort_dir' => $sortDir));
     }
