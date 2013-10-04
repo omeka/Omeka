@@ -91,9 +91,20 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
      * @see TagTable::applySearchFilters
      * @return array of Tag
      */
-    public function getTags($order = array('alpha'))
+    public function getTags($order = array())
     {
-        return $this->_tagTable->findBy(array('record' => $this->_record, 'sort' => $order));
+        if(isset($order['sort_field'])) {
+            $sortField = $order['sort_field'];
+            if(isset($order['sort_dir'])) {
+                $sortDir = $order['sort_dir'];
+            } else {
+                $sortDir = 'a';
+            }
+        } else {
+            $sortField = 'name';
+            $sortDir = 'a';            
+        }
+        return $this->_tagTable->findBy(array('record' => $this->_record, 'sort_field' => $sortField, 'sort_dir' => $sortDir));
     }
     
     /**
