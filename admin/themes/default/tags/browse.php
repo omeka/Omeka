@@ -15,7 +15,7 @@ echo flash();
 
 ?>
 <div id='search-filters'>
-    <ul><li><?php echo __($browse_for . 's'); ?></li></ul>
+    <ul><li><?php echo __('Record Type') . ': ' . $browse_for; ?></li></ul>
 </div>
 
 <?php if ($total_tags): ?>
@@ -54,7 +54,7 @@ echo flash();
                 <ul class="dropdown">
                     <li><span class="quick-filter-heading"><?php echo __('Record Types') ?></span></li>
                     <?php foreach($record_types as $record_type): ?>
-                    <li><a href="<?php echo url('tags', array('tagType' => $record_type)); ?>"><?php echo __($record_type . 's'); ?></a></li>
+                    <li><a href="<?php echo url('tags', array('tagType' => $record_type)); ?>"><?php echo __($record_type); ?></a></li>
                     <?php endforeach; ?>
                 </ul>
                 </li>
