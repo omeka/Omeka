@@ -3,30 +3,28 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Dana Léw <lew.dana@gmail.com>, 2011,2013
-# Jan Černý <cernyhonza@gmail.com>, 2011-2013
-# m23 <black23@gmail.com>, 2013
-# vele <vele@centrum.cz>, 2012
+# kaisa.kulasalu <a71465@ut.ee>, 2013
+# Mari.Sarv <mari@haldjas.folklore.ee>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-09-06 10:43+0000\n"
-"Last-Translator: m23 <black23@gmail.com>\n"
-"Language-Team: Czech (http://www.transifex.com/projects/p/omeka/language/cs/)\n"
+"PO-Revision-Date: 2013-09-23 09:38+0000\n"
+"Last-Translator: kaisa.kulasalu <a71465@ut.ee>\n"
+"Language-Team: Estonian (http://www.transifex.com/projects/p/omeka/language/et/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: cs\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Language: et\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Dublin Core description
 msgid ""
 "The Dublin Core metadata element set is common to all Omeka records, "
 "including items, files, and collections. For more information see, "
 "http://dublincore.org/documents/dces/."
-msgstr "Soubor metadatových prvků Dublin Core je běžný pro všechny Omeka záznamy, včetně položek, souborů a sbírek. Pro více informací navštivte http://dublincore.org/documents/dces/."
+msgstr "Dublin Core metaandmete loetelu on ühine kõigile Omeka kirjetele - ühikutele, failidele ja kogudele. Rohkem infot lehel http://dublincore.org/documents/dces/."
 
 #. Dublin Core: Title element name
 #: admin/themes/default/collections/browse.php:22
@@ -34,29 +32,29 @@ msgstr "Soubor metadatových prvků Dublin Core je běžný pro všechny Omeka z
 #: application/views/scripts/items/browse.php:19
 #: application/views/scripts/search/index.php:13
 msgid "Title"
-msgstr "Název"
+msgstr "Pealkiri"
 
 #. Dublin Core: Title element description
 msgid "A name given to the resource"
-msgstr "Jméno dané zdroji"
+msgstr "Inforessursile antud nimi"
 
 #. Dublin Core: Creator element name
 #: admin/themes/default/items/browse.php:41
 #: application/views/scripts/items/browse.php:20
 msgid "Creator"
-msgstr "Tvůrce"
+msgstr "Autor"
 
 #. Dublin Core: Creator element description
 msgid "An entity primarily responsible for making the resource"
-msgstr "Entita primárně zodpovědná za tvorbu zdroje"
+msgstr "Inforessursi peamine looja"
 
 #. Dublin Core: Subject element name
 msgid "Subject"
-msgstr "Předmět"
+msgstr "Teema"
 
 #. Dublin Core: Subject element description
 msgid "The topic of the resource"
-msgstr "Téma zdroje"
+msgstr "Inforessursi teema"
 
 #. Dublin Core: Description element name
 #: admin/themes/default/element-sets/browse.php:17
@@ -66,119 +64,119 @@ msgstr "Téma zdroje"
 #: application/forms/ItemTypes.php:150
 #: application/views/scripts/collections/browse.php:17
 msgid "Description"
-msgstr "Popis"
+msgstr "Kirjeldus"
 
 #. Dublin Core: Description element description
 msgid "An account of the resource"
-msgstr "Účet zdroje"
+msgstr "Inforessursi loomise põhjus"
 
 #. Dublin Core: Publisher element name
 msgid "Publisher"
-msgstr "Vydavatel"
+msgstr "Kirjastaja"
 
 #. Dublin Core: Publisher element description
 msgid "An entity responsible for making the resource available"
-msgstr "Entita zodpovědná za zpřístupnění zdroje"
+msgstr "Inforessursi avaldamise eest vastutav subjekt"
 
 #. Dublin Core: Contributor element name
 #. User role: contributor
 msgid "Contributor"
-msgstr "Přispěvatel"
+msgstr "Kaastööline"
 
 #. Dublin Core: Contributor element description
 msgid "An entity responsible for making contributions to the resource"
-msgstr "Entita zodpovědná za přispívání do zdroje"
+msgstr "Inforessursi sisu loomisel kaastööd teinud subjekt"
 
 #. Dublin Core: Date element name
 msgid "Date"
-msgstr "Datum"
+msgstr "Aeg"
 
 #. Dublin Core: Date element description
 msgid ""
 "A point or period of time associated with an event in the lifecycle of the "
 "resource"
-msgstr "Čas nebo období v životě zdroje asociované s událostí"
+msgstr "Inforessursi eluloo sündmusega seotud daatum(id)"
 
 #. Dublin Core: Type element name
 #: admin/themes/default/items/browse.php:42
 msgid "Type"
-msgstr "Typ"
+msgstr "Liik"
 
 #. Dublin Core: Type element description
 msgid "The nature or genre of the resource"
-msgstr "Povaha nebo žánr zdroje"
+msgstr "Inforessursi olemus või laad"
 
 #. Dublin Core: Format element name
 msgid "Format"
-msgstr "Formát"
+msgstr "Vorming"
 
 #. Dublin Core: Format element description
 msgid "The file format, physical medium, or dimensions of the resource"
-msgstr "Formát souboru, fyzické médium nebo rozmět zdroje"
+msgstr "Inforessursi failivorming, füüsiline kandja või mõõtmed"
 
 #. Dublin Core: Identifier element name
 msgid "Identifier"
-msgstr "Identifikátor/katalog. číslo"
+msgstr "Identifikaator"
 
 #. Dublin Core: Identifier element description
 msgid "An unambiguous reference to the resource within a given context"
-msgstr "Jednoznačný odkaz na zrdoj v daném kontextu"
+msgstr "Tunnus, mis antud kontekstis inforessursi üheselt identifitseerib"
 
 #. Dublin Core: Source element name
 msgid "Source"
-msgstr "Zdroj"
+msgstr "Allikas"
 
 #. Dublin Core: Source element description
 msgid "A related resource from which the described resource is derived"
-msgstr "Související zdroj ze ketereho je popisovaný zdroj odvozen."
+msgstr "Viide inforessursile, millest kirjeldatav inforessurss pärineb"
 
 #. Dublin Core: Language element name
 msgid "Language"
-msgstr "Jazyk"
+msgstr "Keel"
 
 #. Dublin Core: Language element description
 msgid "A language of the resource"
-msgstr "Jazyk zdroje"
+msgstr "Inforessursi sisu keel"
 
 #. Dublin Core: Relation element name
 msgid "Relation"
-msgstr "Vztah"
+msgstr "Seos"
 
 #. Dublin Core: Relation element description
 msgid "A related resource"
-msgstr "Příbuzný zdroj"
+msgstr "Seotud inforessurss"
 
 #. Dublin Core: Coverage element name
 msgid "Coverage"
-msgstr "Pokrytí"
+msgstr "Hõlme"
 
 #. Dublin Core: Coverage element description
 msgid ""
 "The spatial or temporal topic of the resource, the spatial applicability of "
 "the resource, or the jurisdiction under which the resource is relevant"
-msgstr "Prostorové nebo časové téma zdroje, prostorová aplikovatelnost zdroje, nebo oblast se kterou zdroj souvisí"
+msgstr "Inforessursi sisu ajaline või ruumiline teema, ruumiline kohaldatavus või võimkond, kus inforessurss on relevantne"
 
 #. Dublin Core: Rights element name
 msgid "Rights"
-msgstr "Práva"
+msgstr "Õigused"
 
 #. Dublin Core: Rights element description
 msgid "Information about rights held in and over the resource"
-msgstr "Informace o právech ke zdroji."
+msgstr "Teave inforessursiga seotud õiguste kohta"
 
 #. Item Type Metadata
 msgid "Item Type Metadata"
-msgstr "Metadata typu položky"
+msgstr "Ühikuliigi metaandmed"
 
 #. Item Type Metadata description
 msgid ""
 "The item type metadata element set, consisting of all item type elements "
 "bundled with Omeka and all item type elements created by an administrator."
-msgstr "Soubor metadat typů položka se skládá ze všech typů prvků Omeky a všemi položkami vytvořenými administrátorem."
+msgstr "Ühikuliigi metaandmete loetelu, mis koosneb kõigist Omeka ühikuliigi tunnustest ning kõikidest administraatori loodud ühikuliigi tunnustest."
 
 #. Omeka Legacy File
 msgid "Omeka Legacy File"
-msgstr "Omeka legacy soubor"
+msgstr "Omeka pärandfail"
 
 #. Omeka Legacy File description
 msgid ""
@@ -186,123 +184,123 @@ msgid ""
 "was included in the `files` table in previous versions of Omeka. These "
 "elements are common to all Omeka files. This set may be deprecated in future"
 " versions."
-msgstr "Sada metadata prvků která byla společně s Dublin Core sadou prvků obsažena v tabulce `files` v předcházející verzi Omeky. Tato sada může být zavrhnuta v budoucích verzích."
+msgstr "Metaandmete loetelu, mis oli Omeka varasemate versioonide tabelis \"failid\" lisaks Dublin Core'i tunnustele. Need tunnused on ühised kõigile Omeka failidele. Tulevastes versioonides võidakse seda loetelu vähendada."
 
 #. Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
-msgstr "Spolutvůrce"
+msgstr "Teine autor"
 
 #. Omeka Legacy File: Transcriber element
 msgid "Transcriber"
-msgstr "Přepsal"
+msgstr "Tekstistaja"
 
 #. Omeka Legacy File: Producer element
 msgid "Producer"
-msgstr "Producent"
+msgstr "Tootja"
 
 #. Omeka Legacy File: Render Device element
 msgid "Render Device"
-msgstr "Zobrazovací zařízení"
+msgstr "Visualiseerimisseade"
 
 #. Omeka Legacy File: Render Details element
 msgid "Render Details"
-msgstr "Detaily zobrazení"
+msgstr "Visualiseerimise üksikasjad"
 
 #. Omeka Legacy File: Capture Date element
 msgid "Capture Date"
-msgstr "Datum záznamu"
+msgstr "Salvestamisaeg"
 
 #. Omeka Legacy File: Capture Device element
 msgid "Capture Device"
-msgstr "Záznamové zařízení"
+msgstr "Salvesti"
 
 #. Omeka Legacy File: Capture Details element
 msgid "Capture Details"
-msgstr "Detaily snímání"
+msgstr "Salvestamise üksikasjad"
 
 #. Omeka Legacy File: Change History element
 msgid "Change History"
-msgstr "Historie změn"
+msgstr "Muutmiste ajalugu"
 
 #. Omeka Legacy File: Watermark element
 msgid "Watermark"
-msgstr "Vodotisk"
+msgstr "Vesimärk"
 
 #. Omeka Legacy File: Encryption element
 msgid "Encryption"
-msgstr "Šifrování"
+msgstr "Krüpteering"
 
 #. Omeka Legacy File: Compression element
 msgid "Compression"
-msgstr "Komprese"
+msgstr "Kompressioon"
 
 #. Omeka Legacy File: Post Processing element
 msgid "Post Processing"
-msgstr "Post processing"
+msgstr "Postituse töötlemine"
 
 #. Omeka Image File
 msgid "Omeka Image File"
-msgstr "Omeka obrazový subor"
+msgstr "Omeka pildifail"
 
 #. Omeka Image File description
 msgid ""
 "The metadata element set that was included in the `files_images` table in "
 "previous versions of Omeka. These elements are common to all image files."
-msgstr "Sada metadata prvků která byla obsažena ve `files_images` tabulce v předcházející verzi Omeky. Tyto prvky jsou společné pro všechny obrázkové soubory."
+msgstr "Metaandmete loetelu Omeka varasemate versioonide tabelis \"failid_pildid\". Need tunnused on ühised kõigile pildifailidele."
 
 #. Omeka Image File: Width element
 msgid "Width"
-msgstr "Šířka"
+msgstr "Laius"
 
 #. Omeka Image File: Height element
 msgid "Height"
-msgstr "Výška"
+msgstr "Kõrgus"
 
 #. Omeka Image File: Bit Depth element
 msgid "Bit Depth"
-msgstr "Bitová hloubka"
+msgstr "Bitisügavus"
 
 #. Omeka Image File: Channels element
 msgid "Channels"
-msgstr "Kanály"
+msgstr "Kanalid"
 
 #. Omeka Image File: Exif String element
 msgid "Exif String"
-msgstr "Exif řetězec"
+msgstr "EXIF string"
 
 #. Omeka Image File: Exif Array element
 msgid "Exif Array"
-msgstr "Exif pole"
+msgstr "EXIF massiiv"
 
 #. Omeka Image File: IPTC String element
 msgid "IPTC String"
-msgstr "IPTC řetězec"
+msgstr "IPTC string"
 
 #. Omeka Image File: IPTC Array element
 msgid "IPTC Array"
-msgstr "IPTC pole"
+msgstr "IPTC massiiv"
 
 #. Omeka Video File
 msgid "Omeka Video File"
-msgstr "Omeka video soubor"
+msgstr "Omeka videofail"
 
 #. Omeka Video File description
 msgid ""
 "The metadata element set that was included in the `files_videos` table in "
 "previous versions of Omeka. These elements are common to all video files."
-msgstr "Sada metadata prvků která byla obsažena ve `files_videos` tabulce v předcházející verzi Omeky. Tyto prvky jsou společné pro všechny video soubory."
+msgstr "Metaandmete loetelu Omeka varasemate versioonide tabelis \"failid_videod\". Need tunnused on ühised kõigile videofailidele. "
 
 #. Omeka Video File: Bitrate element
 msgid "Bitrate"
-msgstr "Datový tok (Bitrate)"
+msgstr "Bitikiirus"
 
 # Omeka Video File: Duration element
 msgid "Duration"
-msgstr "Trvání"
+msgstr "Kestus"
 
 #. Omeka Video File: Sample Rate element
 msgid "Sample Rate"
-msgstr "Vzorkovací frekvence"
+msgstr "Sämplimissagedus"
 
 #. Omeka Video File: Codec element
 msgid "Codec"
@@ -310,19 +308,19 @@ msgstr "Kodek"
 
 #. Format (Legacy) Metadata element set
 msgid "Format (Legacy) Metadata"
-msgstr "Formátovat (legacy) metadta"
+msgstr "Vorminda (varasemast versioonist pärinevat) metaandmete loetelu"
 
 #. User role: Super
 msgid "Super"
-msgstr "Super"
+msgstr "Ülemhaldaja"
 
 #. User role: Admin
 msgid "Admin"
-msgstr "Správce"
+msgstr "Haldaja"
 
 #. User role: Researcher
 msgid "Researcher"
-msgstr "Výzkumník"
+msgstr "Uurija"
 
 #: admin/themes/default/appearance/edit-navigation.php:3
 #: admin/themes/default/appearance/edit-settings.php:2
@@ -330,23 +328,23 @@ msgstr "Výzkumník"
 #: admin/themes/default/themes/browse.php:2
 #: admin/themes/default/themes/config.php:3
 msgid "Appearance"
-msgstr "Vzhled"
+msgstr "Välisilme"
 
 #: admin/themes/default/appearance/edit-navigation.php:14
 msgid ""
 "Check the links to display them in the main navigation. Click and drag the "
 "links into the preferred display order."
-msgstr "Označte odkazy pro jejich zobrazení v hlavní navigaci. Klikněte a táhněte odkazy pro jejich uspořádání do požadovaného pořadí."
+msgstr "Märgista lingid, mida soovid kuvada lingiribal. Kliki ja lohista lingid soovitud kuvamisjärjestusse."
 
 #: admin/themes/default/appearance/edit-navigation.php:19
 msgid "Add a Link to the Navigation"
-msgstr "Přidat odkaz na Navigaci"
+msgstr "Lisa link lingiribale."
 
 #: admin/themes/default/appearance/edit-navigation.php:21
 #: admin/themes/default/appearance/edit-navigation.php:37
 #: admin/themes/default/users/edit.php:50 application/forms/Navigation.php:132
 msgid "Label"
-msgstr "Štítek"
+msgstr "Märgend"
 
 #: admin/themes/default/appearance/edit-navigation.php:23
 #: admin/themes/default/appearance/edit-navigation.php:38
@@ -356,7 +354,7 @@ msgstr "URL"
 
 #: admin/themes/default/appearance/edit-navigation.php:25
 msgid "Add Link"
-msgstr "Přidat odkaz"
+msgstr "Lisa link"
 
 #: admin/themes/default/appearance/edit-navigation.php:31
 #: admin/themes/default/appearance/edit-settings.php:21
@@ -376,7 +374,7 @@ msgstr "Přidat odkaz"
 #: application/forms/ItemTypes.php:169
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:73
 msgid "Save Changes"
-msgstr "Uložit změny"
+msgstr "Salvesta muutused"
 
 #: admin/themes/default/appearance/edit-navigation.php:39
 #: admin/themes/default/collections/edit.php:23
@@ -386,7 +384,7 @@ msgstr "Uložit změny"
 #: admin/themes/default/items/show.php:45
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:79
 msgid "View Public Page"
-msgstr "Zobrazit veřejnou stránku"
+msgstr "Vaata tavakasutaja lehte"
 
 #: admin/themes/default/appearance/edit-navigation.php:40
 #: admin/themes/default/collections/edit.php:24
@@ -407,18 +405,18 @@ msgstr "Zobrazit veřejnou stránku"
 #: admin/themes/default/users/edit.php:17
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:82
 msgid "Delete"
-msgstr "Smazat"
+msgstr "Kustuta"
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:11
 #: admin/themes/default/collections/browse.php:64
 #: admin/themes/default/collections/browse.php:73
 msgid "Add a Collection"
-msgstr "Přidat sbírku"
+msgstr "Lisa kogu"
 
 #: admin/themes/default/collections/add.php:11
 msgid "Add Collection"
-msgstr "Přidat sbírku"
+msgstr "Lisa kogu"
 
 #: admin/themes/default/collections/add.php:16
 #: admin/themes/default/collections/edit.php:30
@@ -429,7 +427,7 @@ msgstr "Přidat sbírku"
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:52
 msgid "Public"
-msgstr "Veřejné"
+msgstr "Avalik"
 
 #: admin/themes/default/collections/add.php:19
 #: admin/themes/default/collections/edit.php:35
@@ -440,7 +438,7 @@ msgstr "Veřejné"
 #: admin/themes/default/items/quick-filters.php:8
 #: admin/themes/default/items/show.php:53
 msgid "Featured"
-msgstr "Doporučená"
+msgstr "Esiletõstetud"
 
 #: admin/themes/default/collections/browse.php:2
 #: application/libraries/Omeka/Navigation.php:149
@@ -450,7 +448,7 @@ msgstr "Doporučená"
 #: application/tests/suite/Omeka/NavigationTest.php:950
 #: application/views/scripts/collections/browse.php:2
 msgid "Browse Collections"
-msgstr "Prohlížet sbírky"
+msgstr "Sirvi kogusid"
 
 #: admin/themes/default/collections/browse.php:2
 #: admin/themes/default/item-types/browse.php:2
@@ -462,30 +460,30 @@ msgstr "Prohlížet sbírky"
 #: application/views/scripts/search/index.php:2
 #, php-format
 msgid "(%s total)"
-msgstr "(%s celkem)"
+msgstr "(%s kokku)"
 
 #: admin/themes/default/collections/browse.php:23
 #: admin/themes/default/collections/show.php:51
 msgid "Contributors"
-msgstr "Přispěvatelé"
+msgstr "Kaastöölised"
 
 #: admin/themes/default/collections/browse.php:24
 #: admin/themes/default/files/show.php:68
 #: admin/themes/default/items/browse.php:43
 #: application/views/scripts/items/browse.php:21
 msgid "Date Added"
-msgstr "Přidáno"
+msgstr "Lisamise aeg"
 
 #: admin/themes/default/collections/browse.php:25
 #: admin/themes/default/collections/show.php:46
 #: admin/themes/default/item-types/show.php:42
 msgid "Total Number of Items"
-msgstr "Celkový počet položek"
+msgstr "Ühikute koguarv"
 
 #: admin/themes/default/collections/browse.php:37
 #: admin/themes/default/items/browse.php:72
 msgid "(Private)"
-msgstr "(Soukromé)"
+msgstr "(Privaatne)"
 
 #: admin/themes/default/collections/browse.php:40
 #: admin/themes/default/collections/show.php:32
@@ -502,27 +500,27 @@ msgstr "(Soukromé)"
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:63
 msgid "Edit"
-msgstr "Upravit"
+msgstr "Redigeeri"
 
 #: admin/themes/default/collections/browse.php:49
 msgid "No contributors"
-msgstr "Žádní přespěvatelé"
+msgstr "Kaastöölisi pole"
 
 #: admin/themes/default/collections/browse.php:67
 msgid "There are no collections on this page."
-msgstr "Žádná sbírka k zobrazení."
+msgstr "Sellel lehel pole kogusid."
 
 #: admin/themes/default/collections/browse.php:67
 msgid "View All Collections"
-msgstr "Prohlížet všechny sbírky"
+msgstr "Vaata kõiki kogusid"
 
 #: admin/themes/default/collections/browse.php:70
 msgid "You have no collections."
-msgstr "Nemáte žádné kolekce."
+msgstr "Sul pole kogusid"
 
 #: admin/themes/default/collections/browse.php:72
 msgid "Get started by adding your first collection."
-msgstr "Začněte přidáním vaší první sbírky."
+msgstr "Tee algust ja lisa esimene kogu."
 
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
@@ -531,23 +529,23 @@ msgstr "Začněte přidáním vaší první sbírky."
 #: application/views/scripts/collections/show.php:4
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
-msgstr "[Beze jména]"
+msgstr "[Pealkirjata]"
 
 #: admin/themes/default/collections/edit.php:8
 #, php-format
 msgid "Edit Collection #%s"
-msgstr "Upravit sbírku #%s"
+msgstr "Redigeeri kogu #%s"
 
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Collection #%s"
-msgstr "Sbírka #%s"
+msgstr "Kogu #%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
 #: application/views/scripts/index.php:35
 msgid "Recently Added Items"
-msgstr "Nedávno přidané položky"
+msgstr "Hiljuti lisatud ühikud"
 
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/collections/show.php:42
@@ -555,7 +553,7 @@ msgstr "Nedávno přidané položky"
 #: admin/themes/default/items/show.php:53
 #: application/views/helpers/ItemSearchFilters.php:69
 msgid "Yes"
-msgstr "Ano"
+msgstr "Jah"
 
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/collections/show.php:42
@@ -563,19 +561,19 @@ msgstr "Ano"
 #: admin/themes/default/items/show.php:53
 #: application/views/helpers/ItemSearchFilters.php:69
 msgid "No"
-msgstr "Ne"
+msgstr "Ei"
 
 #: admin/themes/default/collections/show.php:56
 msgid "No contributors."
-msgstr "Žádní přespěvatelé"
+msgstr "Kaastöölisi pole."
 
 #: admin/themes/default/common/appearance-nav.php:5
 msgid "Themes"
-msgstr "Vzhled"
+msgstr "Teemad"
 
 #: admin/themes/default/common/appearance-nav.php:11
 msgid "Navigation"
-msgstr "Navigace"
+msgstr "Lingiriba"
 
 #: admin/themes/default/common/appearance-nav.php:15
 #: admin/themes/default/common/global-nav.php:23
@@ -586,26 +584,26 @@ msgstr "Navigace"
 #: admin/themes/default/settings/edit-security.php:3
 #: admin/themes/default/settings/edit-settings.php:3
 msgid "Settings"
-msgstr "Nastavení"
+msgstr "Sätted"
 
 #: admin/themes/default/common/content-nav.php:5
 #: admin/themes/default/index.php:2
 msgid "Dashboard"
-msgstr "Nástěnka"
+msgstr "Töölaud"
 
 #: admin/themes/default/common/content-nav.php:9
 #: admin/themes/default/items/batch-delete.php:17
 #: admin/themes/default/items/batch-edit.php:17
 msgid "Items"
-msgstr "Položky"
+msgstr "Ühikud"
 
 #: admin/themes/default/common/content-nav.php:13
 msgid "Collections"
-msgstr "Sbírky"
+msgstr "Kogud"
 
 #: admin/themes/default/common/content-nav.php:17
 msgid "Item Types"
-msgstr "Typy položek"
+msgstr "Ühikuliigid"
 
 #: admin/themes/default/common/content-nav.php:21
 #: admin/themes/default/items/browse.php:94
@@ -613,92 +611,92 @@ msgstr "Typy položek"
 #: application/views/scripts/items/browse.php:46
 #: application/views/scripts/items/show.php:26
 msgid "Tags"
-msgstr "Štítky"
+msgstr "Sildid"
 
 #: admin/themes/default/common/delete-confirm.php:3
 #: application/views/scripts/common/delete-confirm.php:3
 #, php-format
 msgid "Delete %s"
-msgstr "Smazat %s"
+msgstr "Kustuta %s"
 
 #: admin/themes/default/common/delete-confirm.php:10
 #: application/views/scripts/common/delete-confirm.php:12
 msgid "Are you sure?"
-msgstr "Jste si jist?"
+msgstr "Kas oled kindel?"
 
 #: admin/themes/default/common/footer.php:6
 #: admin/themes/default/common/login-footer.php:7
 msgid "Powered by Omeka"
-msgstr "Vyrobeno Omekou ;-)"
+msgstr "Loodud Omeka abil"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Documentation"
-msgstr "Dokumentace"
+msgstr "Dokumentatsioon"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Support Forums"
-msgstr "Fórum podpory"
+msgstr "Tugifoorumid"
 
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
 #: admin/themes/default/plugins/browse.php:52
 #, php-format
 msgid "Version %s"
-msgstr "Verze %s"
+msgstr "Versioon %s"
 
 #: admin/themes/default/common/footer.php:10
 #: admin/themes/default/system-info/index.php:2
 msgid "System Information"
-msgstr "Systémové informace"
+msgstr "Süsteemi info"
 
 #: admin/themes/default/common/global-nav.php:5
 #: admin/themes/default/plugins/browse.php:2
 msgid "Plugins"
-msgstr "Zásuvné moduly"
+msgstr "Pluginad"
 
 #: admin/themes/default/common/global-nav.php:17
 msgid "Users"
-msgstr "Uživatelé"
+msgstr "Kasutajad"
 
 #: admin/themes/default/common/header.php:11
 #: admin/themes/default/upgrade/index.php:6
 #: admin/themes/default/upgrade/migrate.php:6
 #: application/views/scripts/common/admin-bar.php:11
 msgid "Omeka Admin"
-msgstr "Omeka admin"
+msgstr "Omeka haldaja"
 
 #: admin/themes/default/common/header.php:60
 #: application/views/scripts/common/admin-bar.php:7
 #, php-format
 msgid "Welcome, %s"
-msgstr "Vítej, %s"
+msgstr "Tere tulemast, %s"
 
 #: admin/themes/default/common/header.php:61
 #: application/views/scripts/common/admin-bar.php:15
 msgid "Log Out"
-msgstr "Odhlásit"
+msgstr "Logi välja"
 
 #: admin/themes/default/common/settings-nav.php:6
 msgid "General"
-msgstr "Obecný"
+msgstr "Üldine"
 
 #: admin/themes/default/common/settings-nav.php:10
 msgid "Security"
-msgstr "Zabezpečení"
+msgstr "Turvalisus"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: application/views/helpers/SearchForm.php:34
 #: application/views/scripts/items/search-form.php:186
 msgid "Search"
-msgstr "Hledat"
+msgstr "Otsi"
 
 #: admin/themes/default/common/settings-nav.php:20
 msgid "Element Sets"
-msgstr "Sady prvků"
+msgstr "Tunnuste loetelud"
 
 #: admin/themes/default/common/settings-nav.php:26
 msgid "Item Type Elements"
-msgstr "Prvky typu položky"
+msgstr "Ühikuliigi tunnused."
 
 #: admin/themes/default/common/settings-nav.php:32
 msgid "API"
@@ -708,175 +706,175 @@ msgstr "API"
 #: admin/themes/default/users/browse.php:17
 #: application/forms/ItemTypes.php:141
 msgid "Name"
-msgstr "Jméno"
+msgstr "Nimi"
 
 #: admin/themes/default/element-sets/edit.php:5
 msgid "Edit Element Set"
-msgstr "Upravit soubor prvků"
+msgstr "Redigeeri tunnuste loetelu"
 
 #: admin/themes/default/element-sets/edit.php:17
 msgid ""
 "Click and drag the elements into the preferred display order. Click the "
 "right arrows to add customized comments to element descriptions."
-msgstr "Klikněte a táhněte prvky do požadovaného pořadí. Klikněte na šipku vpravo pro přidání vlastních komentářů do popisu prvků."
+msgstr "Kliki tunnustele ja lohista need soovitud kuvamisjärjestusse. Tunnusekirjeldustele kommentaaride lisamiseks kliki paremnooltele."
 
 #: admin/themes/default/element-sets/edit.php:29
 msgid "Comment"
-msgstr "Komentář"
+msgstr "Kommentaar"
 
 #: admin/themes/default/error/403.php:2
 msgid "403: Forbidden"
-msgstr "403: Zakázáno"
+msgstr "403: Keelatud"
 
 #: admin/themes/default/error/403.php:6
 msgid "Sorry, you do not have permission to access this page."
-msgstr "Nemáte oprávnění k přístupu na tuto stránku."
+msgstr "Vabandame, Teil ei ole õigusi selle lehe vaatamiseks."
 
 #: admin/themes/default/error/403.php:10 admin/themes/default/error/404.php:9
 #: admin/themes/default/error/405.php:8
 msgid "site administrator"
-msgstr "administrátor depositáře"
+msgstr "veebisaidi haldaja"
 
 #: admin/themes/default/error/403.php:11
 #, php-format
 msgid "If you think you should have permission, try contacting the %s."
-msgstr "Jestliže byste měli mít přístup, kontaktujte %s."
+msgstr "Kui arvad, et sul peaks olema ligipääs, siis võta ühendust %s-ga."
 
 #: admin/themes/default/error/404.php:2
 msgid "404: Page Not Found"
-msgstr "404: Stránka nenalezena"
+msgstr "404: Lehte ei leitud"
 
 #: admin/themes/default/error/404.php:6
 msgid ""
 "You&#8217;ve tried to access a page that does not seem to exist. Sometimes "
 "this happens. Below is a quick break-down of the items, collections, and "
 "exhibits on this site."
-msgstr "Vámi požadovaná stránka nejspíše neexistuje. Něco je špatně. Dole naleznete stručný přehled položek, sbírek a expozicí tohoto depositáře."
+msgstr "Proovisid jõuda lehele, mida ilmselt pole olemas. Mõnikord juhtub nii. Allpool on loetletud sellel veebisaidil olevad ühikud, kogud ja näitused."
 
 #: admin/themes/default/error/404.php:10
 #, php-format
 msgid "If this does not help, try contacting the %s."
-msgstr "Pokud to nepomůže, kontaktujte %s."
+msgstr "Kui see ei aita, võta ühendust %s-ga."
 
 #: admin/themes/default/error/404.php:16 admin/themes/default/index.php:46
 msgid "Recent Items"
-msgstr "Nedávné položky"
+msgstr "Uusimad ühikud"
 
 #: admin/themes/default/error/404.php:29 admin/themes/default/index.php:59
 msgid "Add a new item"
-msgstr "Přidat novou položku"
+msgstr "Lisa uus ühik."
 
 #: admin/themes/default/error/404.php:36 admin/themes/default/index.php:64
 msgid "Recent Collections"
-msgstr "Poslední sbírky"
+msgstr "Uusimad kogud"
 
 #: admin/themes/default/error/404.php:50 admin/themes/default/index.php:78
 msgid "Add a new collection"
-msgstr "Přidat novou sbírku"
+msgstr "Lisa uus kogu"
 
 #: admin/themes/default/error/405.php:2
 msgid "405: Method Not Allowed"
-msgstr "405: Nepovolené metoda"
+msgstr "405: Meetod pole lubatud"
 
 #: admin/themes/default/error/405.php:9
 #, php-format
 msgid ""
 "You must use a different method to access this URL. If you reached this page"
 " by following a link or clicking a button in Omeka, please contact the %s."
-msgstr "Použijte prosím jinou přístupovou metodu. Pokud jste přišli na tuto stránku skrz odkaz vedoucí z Omeky, prosím kontaktujte %s."
+msgstr "Sellele URL-le pääsemiseks peab kasutama teist viisi. Kui sa jõudsid sellele lehele Omeka lingile või nupule klõpsates, siis võta palun ühendust %s-ga."
 
 #: admin/themes/default/files/edit.php:8
 #, php-format
 msgid "Edit File #%s"
-msgstr "Upravit soubor #%s"
+msgstr "Redigeeri faili #%s"
 
 #: admin/themes/default/files/show.php:9
 #: application/views/scripts/files/show.php:9
 #, php-format
 msgid "File #%s"
-msgstr "Soubor #%s"
+msgstr "Fail #%s"
 
 #: admin/themes/default/files/show.php:37
 #: application/libraries/globals.php:398
 msgid "Item"
-msgstr "Položka"
+msgstr "Ühik"
 
 #: admin/themes/default/files/show.php:42
 msgid "Direct Links"
-msgstr "Přímé odkazy"
+msgstr "Otselingid"
 
 #: admin/themes/default/files/show.php:44
 msgid "Original"
-msgstr "Originál"
+msgstr "Originaal"
 
 #: admin/themes/default/files/show.php:46
 msgid "Fullsize"
-msgstr "Plná velikost"
+msgstr "Täismahuline"
 
 #: admin/themes/default/files/show.php:47
 msgid "Thumbnail"
-msgstr "Miniatura"
+msgstr "Pisipilt"
 
 #: admin/themes/default/files/show.php:48
 msgid "Square Thumbnail"
-msgstr "Čtvercová minuatura"
+msgstr "Ruudukujuline pisipilt"
 
 #: admin/themes/default/files/show.php:54
 #: application/views/scripts/files/show.php:22
 msgid "Format Metadata"
-msgstr "Formát metadat"
+msgstr "Vorminda metaandmeid"
 
 #: admin/themes/default/files/show.php:56
 msgid "Filename"
-msgstr "Jméno souboru"
+msgstr "Failinimi"
 
 #: admin/themes/default/files/show.php:58
 #: application/views/scripts/files/show.php:24
 msgid "Original Filename"
-msgstr "Původní jméno souboru"
+msgstr "Algne failinimi"
 
 #: admin/themes/default/files/show.php:60
 #: application/views/scripts/files/show.php:29
 msgid "File Size"
-msgstr "Velikost souboru"
+msgstr "Faili suurus"
 
 #: admin/themes/default/files/show.php:61
 #: application/views/scripts/files/show.php:30
 #, php-format
 msgid "%s bytes"
-msgstr "%s bytů"
+msgstr "%s baiti"
 
 #: admin/themes/default/files/show.php:66
 msgid "File History"
-msgstr "Historie souboru"
+msgstr "Faili ajalugu"
 
 #: admin/themes/default/files/show.php:70
 msgid "Date Modified"
-msgstr "Změněno"
+msgstr "Muutmise kuupäev"
 
 #: admin/themes/default/files/show.php:72
 #: application/views/scripts/files/show.php:34
 msgid "Authentication"
-msgstr "Autentizace "
+msgstr "Autentimine"
 
 #: admin/themes/default/files/show.php:78
 #: application/views/scripts/files/show.php:40
 msgid "Type Metadata"
-msgstr "Typ metadat"
+msgstr "Liigi metaandmed"
 
 #: admin/themes/default/files/show.php:80
 #: application/views/scripts/files/show.php:42
 msgid "Mime Type"
-msgstr "Mime typ"
+msgstr "MIME tüüp"
 
 #: admin/themes/default/files/show.php:82
 #: application/views/scripts/files/show.php:46
 msgid "File Type / OS"
-msgstr "Typ souboru / OS"
+msgstr "Failitüüp/OS"
 
 #: admin/themes/default/files/show.php:89
 msgid "Embedded Metadata"
-msgstr "Vložená metadata"
+msgstr "Manustatud metaandmed"
 
 #: admin/themes/default/files/show.php:95
 #: admin/themes/default/items/browse.php:133
@@ -884,40 +882,40 @@ msgstr "Vložená metadata"
 #: application/views/scripts/items/browse.php:60
 #: application/views/scripts/items/show.php:38
 msgid "Output Formats"
-msgstr "Výstupní formáty"
+msgstr "Väljundvormingud"
 
 #: admin/themes/default/index.php:6
 msgid "items"
-msgstr "položky"
+msgstr "ühikud"
 
 #: admin/themes/default/index.php:7
 msgid "collections"
-msgstr "sbírky"
+msgstr "kogud"
 
 #: admin/themes/default/index.php:8
 msgid "tags"
-msgstr "štítky"
+msgstr "sildid"
 
 #: admin/themes/default/index.php:11
 msgid "plugins"
-msgstr "zásuvné moduly"
+msgstr "pluginad"
 
 #: admin/themes/default/index.php:14
 msgid "users"
-msgstr "uživatelé"
+msgstr "kasutajad"
 
 #: admin/themes/default/index.php:18
 msgid "theme"
-msgstr "vzhled"
+msgstr "teema"
 
 #: admin/themes/default/index.php:29
 msgid "A new version of Omeka is available for download."
-msgstr "Nová verze Omeky je připravená pro stažení."
+msgstr "Omeka uus versioon on allalaadimiseks saadaval."
 
 #: admin/themes/default/index.php:30
 #, php-format
 msgid "Upgrade to %s"
-msgstr "Aktualizovat na %s"
+msgstr "Uuenda %sks."
 
 #: admin/themes/default/item-types/add-existing-element.php:22
 #: admin/themes/default/item-types/add-new-element.php:15
@@ -925,100 +923,100 @@ msgstr "Aktualizovat na %s"
 #: admin/themes/default/items/tag-form.php:23
 #: application/views/helpers/ElementInput.php:113
 msgid "Remove"
-msgstr "Odstranit"
+msgstr "Eemalda"
 
 #: admin/themes/default/item-types/add-new-element.php:6
 msgid "Element Name"
-msgstr "Jméno prvku"
+msgstr "Tunnuse nimi"
 
 #: admin/themes/default/item-types/add-new-element.php:22
 msgid "Element Description"
-msgstr "Popis prvku"
+msgstr "Tunnuse kirjeldus"
 
 #: admin/themes/default/item-types/add.php:2
 #: application/forms/ItemTypes.php:161
 msgid "Add Item Type"
-msgstr "Přidat typ položky"
+msgstr "Lisa ühikuliik"
 
 #: admin/themes/default/item-types/browse.php:2
 msgid "Browse Item Types"
-msgstr "Procházet typy položek"
+msgstr "Sirvi ühikuliike"
 
 #: admin/themes/default/item-types/browse.php:7
 #: admin/themes/default/item-types/browse.php:40
 msgid "Add an Item Type"
-msgstr "Přidat typ položky"
+msgstr "Lisa ühikuliik"
 
 #: admin/themes/default/item-types/browse.php:14
 msgid "Type Name"
-msgstr "Název typu"
+msgstr "Liigi nimi"
 
 #: admin/themes/default/item-types/browse.php:16
 msgid "Total Items"
-msgstr "Celkem položek"
+msgstr "Ühikuid kokku"
 
 #: admin/themes/default/item-types/edit.php:8
 #, php-format
 msgid "Edit Item Type #%s"
-msgstr "Upravit typ položky #%s"
+msgstr "Redigeeri ühikuliiki #%s"
 
 #: admin/themes/default/item-types/form.php:14
 msgid "Item Type Information"
-msgstr "Informace typu položky"
+msgstr "Ühikuliigi info"
 
 #: admin/themes/default/item-types/form.php:15
 #: admin/themes/default/users/add.php:6 admin/themes/default/users/edit.php:14
 #: install/views/scripts/index/index.phtml:14
 msgid "required field"
-msgstr "vyžadované pole"
+msgstr "kohustuslik väli"
 
 #: admin/themes/default/item-types/form.php:25
 #: admin/themes/default/item-types/show.php:16
 msgid "Elements"
-msgstr "Prvky"
+msgstr "Tunnused"
 
 #: admin/themes/default/item-types/form.php:42
 #: admin/themes/default/items/tag-form.php:22
 #: admin/themes/default/settings/edit-item-type-elements.php:22
 msgid "Undo"
-msgstr "Zpět"
+msgstr "Võta tagasi"
 
 #: admin/themes/default/item-types/form.php:80
 #: admin/themes/default/item-types/form.php:87
 msgid "Add Element"
-msgstr "Přidat prvek"
+msgstr "LIsa tunnus"
 
 #: admin/themes/default/item-types/form.php:84
 msgid "Existing"
-msgstr "Bezpečnostní nastavení"
+msgstr "Olemasolev"
 
 #: admin/themes/default/item-types/form.php:85
 msgid "New"
-msgstr "Nový"
+msgstr "Uus"
 
 #: admin/themes/default/item-types/show.php:8
 #, php-format
 msgid "Item Type #%s"
-msgstr "Typ položky #%s"
+msgstr "Ühikuliik #%s"
 
 #: admin/themes/default/item-types/show.php:25
 msgid "There are no elements."
-msgstr "Žádné prvky"
+msgstr "Tunnuseid pole."
 
 #: admin/themes/default/item-types/show.php:39
 msgid "There are no recently added items."
-msgstr "Žádná poslední přidané položky."
+msgstr "Hiljuti lisatud ühikuid ei ole."
 
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:20
 #: admin/themes/default/items/browse.php:116
 #: admin/themes/default/items/browse.php:151
 msgid "Add an Item"
-msgstr "Přidat položku"
+msgstr "Lisa ühik"
 
 #: admin/themes/default/items/add.php:12
 msgid "Add Item"
-msgstr "Přidat položku"
+msgstr "Lisa ühik"
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit.php:89
@@ -1028,85 +1026,85 @@ msgstr "Přidat položku"
 #: application/libraries/globals.php:400
 #: application/views/scripts/items/show.php:18
 msgid "Collection"
-msgstr "Sbírka"
+msgstr "Kogu"
 
 #: admin/themes/default/items/batch-delete.php:2
 msgid "Batch Delete Items"
-msgstr "Hromadné mazání položek"
+msgstr "Kustuta mitu ühikut korraga"
 
 #: admin/themes/default/items/batch-delete.php:38
 msgid ""
 "Some items were excluded because you do not have permission to delete them."
-msgstr "Některé položky byly vynechány protože nemáte oprávnění k jejich smazání."
+msgstr "Mõned ühikud jäid kustutamata, kuna Sul pole nende kustutamiseks õigusi."
 
 #: admin/themes/default/items/batch-delete.php:41
 msgid "Checked items will be deleted."
-msgstr "Označené položky budou smazány."
+msgstr "Linnukesega märgitud ühikud kustutatakse."
 
 #: admin/themes/default/items/batch-delete.php:50
 #: admin/themes/default/items/batch-edit.php:116
 msgid "Delete Items"
-msgstr "Smazat položky"
+msgstr "Kustuta ühikud"
 
 #: admin/themes/default/items/batch-edit.php:2
 msgid "Batch Edit Items"
-msgstr "Dávkově upravit položky"
+msgstr "Redigeeri mitu ühikut korraga"
 
 #: admin/themes/default/items/batch-edit.php:36
 msgid "Changes will be applied to checked items."
-msgstr "Změny budou aplikovány na označené položky."
+msgstr "Muudatused rakendatakse linnukesega märgitud ühikutele."
 
 #: admin/themes/default/items/batch-edit.php:41
 msgid "Item Metadata"
-msgstr "Metadata položky"
+msgstr "Ühiku metaandmed"
 
 #: admin/themes/default/items/batch-edit.php:46
 msgid "Public?"
-msgstr "Veřejná?"
+msgstr "Avalik?"
 
 #: admin/themes/default/items/batch-edit.php:49
 #: admin/themes/default/items/batch-edit.php:64
 #: admin/themes/default/items/batch-edit.php:78
 #: admin/themes/default/items/batch-edit.php:93
 msgid "Select Below"
-msgstr "Velikost souboru"
+msgstr "Vali allpool"
 
 #: admin/themes/default/items/batch-edit.php:51
 msgid "Not Public"
-msgstr "Neveřejné"
+msgstr "Mitteavalik"
 
 #: admin/themes/default/items/batch-edit.php:61
 msgid "Featured?"
-msgstr "Doporučená?"
+msgstr "Esiletõstetud?"
 
 #: admin/themes/default/items/batch-edit.php:66
 msgid "Not Featured"
-msgstr "Nedoporučená"
+msgstr "Esiletõsteta"
 
 #: admin/themes/default/items/batch-edit.php:74
 #: admin/themes/default/items/item-type-form.php:3
 msgid "Item Type"
-msgstr "Typ položky"
+msgstr "Ühikuliik"
 
 #: admin/themes/default/items/batch-edit.php:83
 #: admin/themes/default/items/batch-edit.php:98
 msgid "Remove?"
-msgstr "Odstranit?"
+msgstr "Eemalda?"
 
 #: admin/themes/default/items/batch-edit.php:104
 #: admin/themes/default/items/tag-form.php:8
 #: admin/themes/default/items/tag-form.php:11
 msgid "Add Tags"
-msgstr "Přidat štítky"
+msgstr "Lisa silte"
 
 #: admin/themes/default/items/batch-edit.php:107
 #, php-format
 msgid "List of tags to add to all checked items, separated by %s."
-msgstr "Seznam štítků, které budou přidány ke všem označeným položkám, oddělené %s."
+msgstr "Kõigile linnukesega märgitud ühikutele lisatavate siltide loend, eraldajaks %s."
 
 #: admin/themes/default/items/batch-edit.php:117
 msgid "Check if you wish to delete selected items."
-msgstr "Označte pokud si přejete smazat vybrané položky."
+msgstr "Ühikute kustutamiseks märgista need linnukesega"
 
 #: admin/themes/default/items/browse.php:3
 #: application/libraries/Omeka/Navigation.php:142
@@ -1147,7 +1145,7 @@ msgstr "Označte pokud si přejete smazat vybrané položky."
 #: application/views/scripts/items/browse.php:2
 #: application/views/scripts/items/tags.php:2
 msgid "Browse Items"
-msgstr "Procházet položky"
+msgstr "Sirvi ühikuid"
 
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
@@ -1156,356 +1154,356 @@ msgstr "Procházet položky"
 #: application/libraries/globals.php:2648
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
-msgstr "Hledat položky"
+msgstr "Otsi ühikuid"
 
 #: admin/themes/default/items/browse.php:37
 msgid "Select"
-msgstr "Vybrat"
+msgstr "Vali"
 
 #: admin/themes/default/items/browse.php:95
 msgid "No Tags"
-msgstr "Žádné štítky"
+msgstr "Silte pole"
 
 #: admin/themes/default/items/browse.php:139
 msgid "Details"
-msgstr "Detaily"
+msgstr "Üksikasjad"
 
 #: admin/themes/default/items/browse.php:140
 msgid "Show Details"
-msgstr "Zobrazit detaily"
+msgstr "Näita üksikasju"
 
 #: admin/themes/default/items/browse.php:141
 msgid "Hide Details"
-msgstr "Skrýt detaily"
+msgstr "Peida üksikasjad"
 
 #: admin/themes/default/items/browse.php:148
 msgid "You have no items."
-msgstr "Nemáte žádné položky."
+msgstr "Sul pole ühikuid."
 
 #: admin/themes/default/items/browse.php:150
 msgid "Get started by adding your first item."
-msgstr "Začněte přidáním vaší první položky."
+msgstr "Lisa alustuseks oma esimene ühik."
 
 #: admin/themes/default/items/browse.php:154
 #, php-format
 msgid "The query searched %s items and returned no results."
-msgstr "Hledaný řetězec %s položek nenalezen."
+msgstr "Päring otsis läbi %s ühikut ja ei leidnud ühtegi vastet."
 
 #: admin/themes/default/items/browse.php:154
 msgid "refine your search"
-msgstr "upravit hledání"
+msgstr "täpsusta otsingut"
 
 #: admin/themes/default/items/browse.php:154
 #, php-format
 msgid "Would you like to %s?"
-msgstr "Rád by jste k %s?"
+msgstr "Kas sa sooviksid %s?"
 
 #: admin/themes/default/items/edit.php:8
 #, php-format
 msgid "Edit Item #%s"
-msgstr "Upravit položku #%s"
+msgstr "Redigeeri ühikut #%s"
 
 #: admin/themes/default/items/files-form.php:2
 msgid "Click and drag the files into the preferred display order."
-msgstr "Klikněte a táhněte soubor na preferované pořadí zobrazení."
+msgstr "Kliki ja lohista failid soovitud kuvamisjärjestusse."
 
 #: admin/themes/default/items/files-form.php:12
 msgid "Delete "
-msgstr "Smazat"
+msgstr "Kustuta"
 
 #: admin/themes/default/items/files-form.php:21
 msgid "Add New Files"
-msgstr "Přidat nové soubory"
+msgstr "Lisa uusi faile"
 
 #: admin/themes/default/items/files-form.php:23
 #, php-format
 msgid "The maximum file size is %s."
-msgstr "Maximální velikost souboru je %s."
+msgstr "Faili suurim lubatud suurus on %s."
 
 #: admin/themes/default/items/files-form.php:26
 msgid "Find a File"
-msgstr "Najít soubor"
+msgstr "Leia fail"
 
 #: admin/themes/default/items/form.php:25
 msgid "Add Another File"
-msgstr "Přidat další soubor"
+msgstr "Lisa teine fail"
 
 #: admin/themes/default/items/item-type-form.php:15
 msgid "Pick this type"
-msgstr "Vybrat tento typ"
+msgstr "Vali see liik"
 
 #: admin/themes/default/items/quick-filters.php:2
 #: admin/themes/default/items/quick-filters.php:4
 msgid "Quick Filter"
-msgstr "Rychlý filtr"
+msgstr "Kiirfilter"
 
 #: admin/themes/default/items/quick-filters.php:5
 msgid "View All"
-msgstr "Zobrazit vše"
+msgstr "Vaata kõiki"
 
 #: admin/themes/default/items/quick-filters.php:7
 msgid "Private"
-msgstr "Soukromé"
+msgstr "Privaatne"
 
 #: admin/themes/default/items/search-form.php:13
 #: application/views/scripts/items/search-form.php:13
 msgid "Search for Keywords"
-msgstr "Hledat klíčová slova"
+msgstr "Otsi võtmesõnu"
 
 #: admin/themes/default/items/search-form.php:26
 #: application/views/scripts/items/search-form.php:25
 msgid "Narrow by Specific Fields"
-msgstr "SQL chyba při migraci:"
+msgstr "Kitsenda kindlate väljade alusel"
 
 #: admin/themes/default/items/search-form.php:27
 #: application/views/scripts/items/search-form.php:77
 msgid "Add a Field"
-msgstr "Přidat pole"
+msgstr "Lisa väli"
 
 #: admin/themes/default/items/search-form.php:63
 #: application/views/scripts/items/search-form.php:60
 msgid "contains"
-msgstr "obsahuje"
+msgstr "sisaldab"
 
 #: admin/themes/default/items/search-form.php:64
 #: application/views/scripts/items/search-form.php:61
 msgid "does not contain"
-msgstr "neobsahuje"
+msgstr "ei sisalda"
 
 #: admin/themes/default/items/search-form.php:65
 #: application/views/scripts/items/search-form.php:62
 msgid "is exactly"
-msgstr "je právě"
+msgstr "on täpselt"
 
 #: admin/themes/default/items/search-form.php:66
 #: application/views/scripts/items/search-form.php:63
 msgid "is empty"
-msgstr "je prázdný"
+msgstr "on tühi"
 
 #: admin/themes/default/items/search-form.php:67
 #: application/views/scripts/items/search-form.php:64
 msgid "is not empty"
-msgstr "není prázdný"
+msgstr "ei ole tühi"
 
 #: admin/themes/default/items/search-form.php:84
 #: application/views/scripts/items/search-form.php:81
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
-msgstr "Hledat podle rozsahu ID# (například 1-4, 156, 79)"
+msgstr "Otsi ID-de vahemiku järgi (näiteks 1–4, 156, 79)"
 
 #: admin/themes/default/items/search-form.php:98
 #: application/views/scripts/items/search-form.php:92
 msgid "Search By Collection"
-msgstr "Hledat podle sbírek"
+msgstr "Otsi kogude järgi"
 
 #: admin/themes/default/items/search-form.php:114
 #: application/views/scripts/items/search-form.php:106
 msgid "Search By Type"
-msgstr "Hledat polde typu"
+msgstr "Otsi liikide järgi"
 
 #: admin/themes/default/items/search-form.php:131
 #: application/views/scripts/items/search-form.php:122
 msgid "Search By User"
-msgstr "Hledat podle uživatele"
+msgstr "Otsi kasutajate järgi"
 
 #: admin/themes/default/items/search-form.php:148
 #: application/views/scripts/items/search-form.php:137
 msgid "Search By Tags"
-msgstr "Hledat podle štítků"
+msgstr "Otsi siltide järgi"
 
 #: admin/themes/default/items/search-form.php:163
 #: application/views/scripts/items/search-form.php:150
 msgid "Public/Non-Public"
-msgstr "Veřejný/Neveřejný"
+msgstr "Avalik/mitteavalik"
 
 #: admin/themes/default/items/search-form.php:172
 #: application/views/scripts/items/search-form.php:158
 msgid "Only Public Items"
-msgstr "Pouze veřejné položky"
+msgstr "Ainult avalikud ühikud."
 
 #: admin/themes/default/items/search-form.php:173
 #: application/views/scripts/items/search-form.php:159
 msgid "Only Non-Public Items"
-msgstr "Pouze neveřejné položky"
+msgstr "Ainult mitteavalikud ühikud"
 
 #: admin/themes/default/items/search-form.php:183
 #: application/views/scripts/items/search-form.php:168
 msgid "Featured/Non-Featured"
-msgstr "Doporučená/Nedoporučená"
+msgstr "Esiletõstetud/esiletõsteta"
 
 #: admin/themes/default/items/search-form.php:192
 #: application/views/scripts/items/search-form.php:176
 msgid "Only Featured Items"
-msgstr "Pouze doporučené položky"
+msgstr "Ainult esiletõstetud ühikud"
 
 #: admin/themes/default/items/search-form.php:193
 #: application/views/scripts/items/search-form.php:177
 msgid "Only Non-Featured Items"
-msgstr "Zadaná emailová adresa je neplatná."
+msgstr "Ainult esiletõsteta ühikud"
 
 #: admin/themes/default/items/search-form.php:203
 msgid "Search for items"
-msgstr "Hledat položky"
+msgstr "Otsi ühikuid"
 
 #: admin/themes/default/items/show.php:8
 #, php-format
 msgid "Item #%s"
-msgstr "Položka #%s"
+msgstr "Ühik #%s"
 
 #: admin/themes/default/items/show.php:30
 msgid "Prev Item"
-msgstr "Předchozí položka"
+msgstr "Eelmine ühik"
 
 #: admin/themes/default/items/show.php:35
 msgid "Next Item"
-msgstr "Další položka"
+msgstr "Järgmine ühik"
 
 #: admin/themes/default/items/show.php:73
 msgid "File Metadata"
-msgstr "Metadata souboru"
+msgstr "Faii metaandmestik"
 
 #: admin/themes/default/items/show.php:76
 msgid "There are no files for this item yet."
-msgstr "Pro tuto položku zde zatím nejsou žádné soubory."
+msgstr "Selle ühiku juures pole veel faile."
 
 #: admin/themes/default/items/show.php:76
 msgid "Add a File"
-msgstr "Přidat soubor"
+msgstr "Lisa fail"
 
 #: admin/themes/default/items/show.php:80
 msgid "View File Metadata"
-msgstr "Zobrazit metadata souboru"
+msgstr "Vaata faili metaandmeid"
 
 #: admin/themes/default/items/show.php:93
 msgid "Bibliographic Citation"
-msgstr "Bibliografická citace"
+msgstr "Bibliograafiline viide"
 
 #: admin/themes/default/items/tag-form.php:10
 #, php-format
 msgid "Separate tags with %s"
-msgstr "Oddělte štítky %s."
+msgstr "Eralda sildid %s-ga"
 
 #: admin/themes/default/items/tag-form.php:15
 msgid "All Tags"
-msgstr "Všechny štítky"
+msgstr "Kõik sildid"
 
 #: admin/themes/default/items/tags.php:2
 msgid "Browse Items by Tag"
-msgstr "Procházet položky podle štítků"
+msgstr "Sirvi ühikuid sildi alusel"
 
 #: admin/themes/default/items/tags.php:9
 #: admin/themes/default/tags/browse.php:65
 msgid "There are no tags to display. You must first tag some items."
-msgstr "Nejsou zde k zobrazení žádné štítky. Nejprve přidejte nové štítky k Položkám."
+msgstr "Kuvamiseks pole silte. Sa pead kõigepealt ühikutele silte lisama. "
 
 #: admin/themes/default/plugins/browse.php:26
 #, php-format
 msgid "This version of %1$s requires at least Omeka %2$s."
-msgstr "Tato verze %1$s vyžaduje minimálně verzi Omeka %2$s."
+msgstr "See %1$s versioon nõuab vähemalt Omeka versiooni %2$s."
 
 #: admin/themes/default/plugins/browse.php:29
 #, php-format
 msgid ""
 "%1$s requires the following plugins to be installed, activated, and loaded: "
 "%2$s"
-msgstr "%1$s vyžaduje aby následující zásuvné moduly byly instalovány, aktivovány a načteny: %2$s"
+msgstr "%1$s jaoks on tarvis, et paigaldatud, aktiveeritud ja laaditud oleks järgnevad pluginad: %2$s"
 
 #: admin/themes/default/plugins/browse.php:32
 msgid "This is not a valid plugin."
-msgstr "Toto není platný zásuvný modul."
+msgstr "See ei ole õige plugin."
 
 #: admin/themes/default/plugins/browse.php:57
 #, php-format
 msgid "by %s"
-msgstr "%s"
+msgstr "%s-ide kaupa"
 
 #: admin/themes/default/plugins/browse.php:65
 #: admin/themes/default/themes/browse.php:23
 #: admin/themes/default/themes/browse.php:49
 msgid "Get support"
-msgstr "Získejte podporu"
+msgstr "Abi"
 
 #: admin/themes/default/plugins/browse.php:69
 #, php-format
 msgid "You have a new version of %s. Please upgrade!"
-msgstr "Máte novou verzi %s. Prosím aktualizujte!"
+msgstr "%s-st on olemas uus versioon. Palun uuenda!"
 
 #: admin/themes/default/plugins/browse.php:90
 msgid "Upgrade"
-msgstr "Aktualizace"
+msgstr "Uuenda"
 
 #: admin/themes/default/plugins/browse.php:100
 msgid "Configure"
-msgstr "Nastavit"
+msgstr "Konfigureeri"
 
 #: admin/themes/default/plugins/browse.php:106
 msgid "Deactivate"
-msgstr "Deaktivovat"
+msgstr "Deaktiveeri"
 
 #: admin/themes/default/plugins/browse.php:106
 #: admin/themes/default/users/activate.php:31
 #: application/views/scripts/users/activate.php:26
 msgid "Activate"
-msgstr "Aktivovat"
+msgstr "Aktiveeri"
 
 #: admin/themes/default/plugins/browse.php:116
 #: admin/themes/default/plugins/confirm-uninstall.php:16
 msgid "Uninstall"
-msgstr "Odinstalovat."
+msgstr "Eemalda"
 
 #: admin/themes/default/plugins/browse.php:129
 #: application/forms/Install.php:167
 msgid "Install"
-msgstr "Instalace"
+msgstr "Paigalda"
 
 #: admin/themes/default/plugins/browse.php:140
 msgid ""
 "You do not have any plugins installed. Add them to the plugins directory to "
 "see them listed here."
-msgstr "Nemáte nainstalované žádné zásuvné moduly. Přidejte je do adresáře plugins a zde uvidíte jejich seznam."
+msgstr "Sul ei ole installitud pluginaid. Lisa need pluginate kataloogi, et need oleks siin nähtaval."
 
 #: admin/themes/default/plugins/config.php:2
 #, php-format
 msgid "Configure Plugin: %s"
-msgstr "Nastavit zásuvný modul: %s"
+msgstr "Seadista plugin: %s"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:2
 #, php-format
 msgid "Uninstall Plugin: %s"
-msgstr "Odinstalovat zásuvný modul: %s"
+msgstr "Eemalda plugin: %s"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:7
 #, php-format
 msgid "Are you sure you want to uninstall %s?"
-msgstr "Jste se jist že chcete odinstalovat %s?"
+msgstr "Kas sa oled kindel, et soovid eemaldada %s?"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:12
 msgid "Yes, I want to uninstall this plugin."
-msgstr "Ano, chci odinstalovat zásuvný modul."
+msgstr "Jah, ma soovin selle plugina eemaldada."
 
 #: admin/themes/default/plugins/confirm-uninstall.php:17
 msgid "or"
-msgstr "nebo"
+msgstr "või"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:17
 #: admin/themes/default/settings/edit-item-type-elements.php:50
 msgid "Cancel"
-msgstr "Zrušit"
+msgstr "Tühista"
 
 #: admin/themes/default/settings/edit-api.php:11
 msgid "Enable API"
-msgstr "Povolit API"
+msgstr "Luba API"
 
 #: admin/themes/default/settings/edit-api.php:15
 msgid "Enable or disable the API by checking or uncheking the box below."
-msgstr "Zapnutí nebo vypnutí API provedete zaškrtnutím nebo odšktrnutím pole."
+msgstr "API lubamiseks/keelamiseks tee linnuke allolevasse ruudukesse või vastavalt eemalda see."
 
 #: admin/themes/default/settings/edit-api.php:22
 msgid "Results per Page"
-msgstr "Výsledků na stranu"
+msgstr "Tulemusi lehel"
 
 #: admin/themes/default/settings/edit-api.php:26
 msgid "Maximum number of API results displayed per page."
-msgstr "Maximální výsledků API zobrazených na jedné straně."
+msgstr "Maksimaalne API tulemuste arv lehel."
 
 #: admin/themes/default/settings/edit-api.php:32
 #, php-format
@@ -1515,49 +1513,49 @@ msgid ""
 "adding, editing, and deleting content, is protected and requires key "
 "authentication. Each key corresponds to, and has all permissions of, an "
 "existing Omeka user. You can create keys on each user's %sedit page%s."
-msgstr ""
+msgstr "Pärast API lubamist peavad rakendused olema võimelised kuvama, sirvima, lisama, muutma ja kustutama sinu saidi materjale. Kaitstud sisu vaatamine, samuti sisu lisamine, muutmine ja kustutamine on kaitstud ja nõuab võtmega autentimist. Iga võti vastab ühele Omeka kasutajale ning tema õigustele. Võtme loomiseks tuleb minna kasutaja lehele %sedit page%s."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:12
 msgid "edit a specific item type"
-msgstr "editovat specifický typ položky"
+msgstr "redigeeri kindlat ühikuliiki"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:11
 #, php-format
 msgid ""
 "Customize the element descriptions below. To re-order the elements, %s."
-msgstr "Přizpůsobit popisy prvků níže. K přeskládání prvků, %s."
+msgstr "Kohanda tunnusekirjeldused. Tunnuste ümberjärjestamiseks %s."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:42
 msgid "Confirm Delete"
-msgstr "Potvrdit smazání"
+msgstr "Kinnita kustutamine"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:43
 msgid ""
 "Are you sure you want to delete the selected item type elements from the "
 "database? You will lose all text related to the selected elements. This "
 "cannot be undone."
-msgstr "Jste si jist že chcete smazat vybrané prvky typu položky? Přijdete o všechen tex který se k vybraným prvkům vztahuje. Tento krok je nevratný."
+msgstr "Kas oled kindel, et soovid andmebaasist kustutada kõik valitud ühikuliigi tunnused? Sellega kaotad kogu valitud tunnustega seonduva teksti. Tegevust ei saa tagasi võtta."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:50
 msgid "Ok"
-msgstr "Budiž"
+msgstr "Olgu"
 
 #: admin/themes/default/settings/edit-search.php:10
 msgid "Search Record Types"
-msgstr "Hledat typy záznamů"
+msgstr "Otsi kirjetüüpe"
 
 #: admin/themes/default/settings/edit-search.php:13
 msgid "Customize which types of records will be searchable in Omeka."
-msgstr "Nastavení typů záznamů vyhledávatelných v Omece."
+msgstr "Otsusta, millist tüüpi kirjed on Omekas otsitavad"
 
 #: admin/themes/default/settings/edit-search.php:23
 #: admin/themes/default/settings/edit-search.php:41
 msgid "Index Records"
-msgstr "Indexovat záznamy"
+msgstr "Indekseeri kirjed"
 
 #: admin/themes/default/settings/edit-search.php:26
 msgid "Click on the \"Index Records\" button to re-index your records."
-msgstr "Klikněte na tlačítko \"Indexovat záznamy\" pro indexování všech záznamů."
+msgstr "Kirjete uuesti indekseerimiseks kliki nupule \"Indekseeri kirjed\"."
 
 #: admin/themes/default/settings/edit-search.php:28
 msgid ""
@@ -1566,23 +1564,23 @@ msgid ""
 " are saved, but there are circumstances when your records are not indexed; "
 "for instance, when updating from an earlier version of Omeka or after you "
 "customize which records will be searchable."
-msgstr "Indexování znamená zběr, zpracování a uložení dat pro učely rychlého a přesného vyhledávání. Omeka automaticky indexuje jednotlivé záznamy ihned po uložení, ale nastavají situace kdy k indexování nedojde; napřiklad při aktualizaci ze starší verze Omeky nebo když nastavujete které záznamy budou vyhledávatelné."
+msgstr "Indekseerimine tähendab andmestiku kogumist, sõelumist ja säilitamist, et tagada kiireid ja täpseid otsinguid. Omeka indekseerib automaatselt kirjed siis, kui neid salvestatakse, aga on olukordi, mil su kirjeid ei indekseerita, näiteks siis, kui uuendad Omeka versiooni või pärast seda, kui muudad kirjete otsitavuse seadeid."
 
 #: admin/themes/default/settings/edit-security.php:23
 msgid "Restore Default Extensions"
-msgstr "Obnovit základní rozšíření"
+msgstr "Taasta vaikelaiendid"
 
 #: admin/themes/default/settings/edit-security.php:28
 msgid "Restore Default Types"
-msgstr "Obnovit základní typy"
+msgstr "Taasta vaiketüübid"
 
 #: admin/themes/default/settings/edit-security.php:33
 msgid "Restore Default Elements"
-msgstr "Obnovit výchozí prvky"
+msgstr "Taasta vaiketunnused"
 
 #: admin/themes/default/settings/edit-security.php:38
 msgid "Restore Default Attributes"
-msgstr "Obnovit základní atributy"
+msgstr "Taasta vaikeatribuudid"
 
 #: admin/themes/default/settings/edit-settings.php:23
 msgid "Test"
@@ -1590,72 +1588,72 @@ msgstr "Test"
 
 #: admin/themes/default/tags/browse.php:3
 msgid "Edit Tags"
-msgstr "Upravit štítky"
+msgstr "Redigeeri silte"
 
 #: admin/themes/default/tags/browse.php:16
 msgid "Editing Tags"
-msgstr "Upravit šťítky"
+msgstr "Siltide redigeerimine"
 
 #: admin/themes/default/tags/browse.php:19
 msgid "To view all items with a tag, click the number."
-msgstr "Pro zobrazení všech položek se štítky, klikněte na číslo."
+msgstr "Et vaadata kõiki sildistatud ühikuid, klõpsa numbrile."
 
 #: admin/themes/default/tags/browse.php:20
 msgid ""
 "To edit the tag name, click the name and begin editing, and hit \"enter\" to"
 " save. To cancel an edit, click the ESC key or click away from the tag."
-msgstr "Pro změnu jména štítku, klikněte na jméno a začněte upravovat, potom stiskněte \"enter\" pro uložení. Pro zrušení úprav stiskněte klávesu ESC nebo klikněte mino štítek."
+msgstr "Sildi nime redigeerimiseks kliki sildi nimele ja muuda seda; salvestamiseks vajuta enter-klahvi. Redigeerimise katkestamiseks vajuta esc-klahvi või kliki sildist väljaspool."
 
 #: admin/themes/default/tags/browse.php:21
 msgid ""
 "To delete a tag, click the X. Deleting a tag will not delete the tagged "
 "items."
-msgstr "Pro smazání štítku stiskněte X. Smazáním štítku nesmažete označenou položku."
+msgstr "Et silt kustutada, klõpsa x-le. Sildi kustutamine ei kustutad sildistatud ühikuid."
 
 #: admin/themes/default/tags/browse.php:29
 msgid "Most"
-msgstr "NejvIce"
+msgstr "Enim"
 
 #: admin/themes/default/tags/browse.php:30
 msgid "Least"
-msgstr "Smazat tento typ položky"
+msgstr "Vähim"
 
 #: admin/themes/default/tags/browse.php:31
 msgid "Alphabetical"
-msgstr "Abecedně"
+msgstr "Tähestikuline"
 
 #: admin/themes/default/tags/browse.php:32
 msgid "Recent"
-msgstr "Nedávný"
+msgstr "Hiljutine"
 
 #: admin/themes/default/tags/browse.php:43
 #: admin/themes/default/tags/browse.php:45
 msgid "Record Types"
-msgstr "Typy záznamů"
+msgstr "Kirjetüübid"
 
 #: admin/themes/default/tags/browse.php:47
 msgid "s"
-msgstr " "
+msgstr "s"
 
 #: admin/themes/default/themes/browse.php:15
 #: admin/themes/default/themes/browse.php:43
 #, php-format
 msgid "Screenshot for %s Theme"
-msgstr "Screenshot vzhledu %s"
+msgstr "Teema %s ekraanipilt."
 
 #: admin/themes/default/themes/browse.php:16
 msgid "Configure Theme"
-msgstr "Nastavení vzhledu"
+msgstr "Seadista teema."
 
 #: admin/themes/default/themes/browse.php:19
 msgid "Current Theme"
-msgstr "Aktuální vzhled"
+msgstr "Praegune teema"
 
 #: admin/themes/default/themes/browse.php:21
 #: admin/themes/default/themes/browse.php:48
 #, php-format
 msgid "By %s"
-msgstr "Od %s"
+msgstr "%s poolest"
 
 #: admin/themes/default/themes/browse.php:27
 msgid ""
@@ -1663,97 +1661,97 @@ msgid ""
 "ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a "
 "href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" "
 "target=\"_blank\">design your own</a>!"
-msgstr "Přidejte si nová témata, která jsou ke stažení na <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Omeka Theme Directory</a> nebo <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">design your own</a>!s"
+msgstr "Lisa uusi teemasid, laadides need alla <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Omeka teemakataloogist</a>, või <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">kujunda enda teema</a>!"
 
 #: admin/themes/default/themes/browse.php:45
 msgid "Use this theme"
-msgstr "Použít tento vzhled"
+msgstr "Kasuta seda teemat"
 
 #: admin/themes/default/themes/config.php:10
 #, php-format
 msgid "Configure Theme: %s"
-msgstr "Nastavit vzhled: %s"
+msgstr "Seadista teema: %s"
 
 #: admin/themes/default/themes/config.php:11
 msgid "Configurations apply to this theme only."
-msgstr "Konfigurace se projeví pouze v tomto vzhledu."
+msgstr "Seaded rakenduvad ainult sellele teemale."
 
 #: admin/themes/default/upgrade/index.php:32
 msgid "Upgrade Your Omeka Database"
-msgstr "Aktualizovat vaší Omeka databázi"
+msgstr "Uuenda oma Omeka andmebaasi"
 
 #: admin/themes/default/upgrade/index.php:34
 msgid ""
 "Your Omeka database is not compatible with your current version of Omeka."
-msgstr "Vaše Omeka databáze není kompatibilní s vaší současnou verzí Omeky."
+msgstr "Su Omeka andmebaas ei ühildu su Omeka praeguse versiooniga"
 
 #: admin/themes/default/upgrade/index.php:35
 msgid ""
 "Please back up your existing database and then click the button to upgrade."
-msgstr "Prosím zálohujte vaší současnou databázi a potom klikněte na tlačítko pro aktualizaci."
+msgstr "Palun tee turvakoopia oma andmebaasist ning kliki seejärel uuenduse käivitamiseks nupule."
 
 #: admin/themes/default/upgrade/index.php:37
 msgid "Upgrade Database"
-msgstr "Aktualizovat databázi"
+msgstr "Uuenda andmebaasi"
 
 #: admin/themes/default/upgrade/migrate.php:32
 msgid "Omeka encountered an error when upgrading your installation."
-msgstr "V Omece nastala chyba při aktualizaci vaší instalace."
+msgstr "Omekas tekkis viga paigalduse uuendamisel."
 
 #: admin/themes/default/upgrade/migrate.php:37
 msgid "Please restore from your database backup and try again."
-msgstr "Prosím obnovte databázi z vaši zálohy a opakujte proces."
+msgstr "Palun taasta oma andmebaas turvakoopialt ning proovi uuesti."
 
 #: admin/themes/default/upgrade/migrate.php:39
 msgid ""
 "If you have any questions please refer to <a "
 "href=\"http://omeka.org/codex\">Omeka documentation</a> or post a message on"
 " the <a href=\"http://omeka.org/forums\">Omeka forums</a>."
-msgstr "Pokud máte nějaké otázky přečtěte si prosím <a href=\"http://omeka.org/codex\">Omeka dokumentaci</a> nebo se zeptejte na <a href=\"http://omeka.org/forums\">Omeka fóru</a>."
+msgstr "Küsimuste tekkimisel vaata <a href=\"http://omeka.org/codex\">Omeka dokumentatsiooni </a> või küsi <a href=\"http://omeka.org/forums\">Omeka foorumist</a>."
 
 #: admin/themes/default/upgrade/migrate.php:42
 msgid "Omeka has upgraded successfully."
-msgstr "Omeka byla úspěšně aktualizována."
+msgstr "Omeka on edukalt uuendatud."
 
 #: admin/themes/default/upgrade/migrate.php:43
 msgid "Return to Dashboard"
-msgstr "Zpátky na nástěnku"
+msgstr "Tagasi töölauale"
 
 #: admin/themes/default/users/activate.php:2
 #: application/views/scripts/users/activate.php:2
 msgid "User Activation"
-msgstr "Aktivace uživatele"
+msgstr "Kasutaja aktiveerimine"
 
 #: admin/themes/default/users/activate.php:18
 #: application/forms/ResetPassword.php:23
 #: application/views/scripts/users/activate.php:13
 msgid "Create a Password"
-msgstr "Vytvořit heslo."
+msgstr "Loo salasõna"
 
 #: admin/themes/default/users/activate.php:24 application/forms/Install.php:60
 #: application/forms/ResetPassword.php:44
 #: application/views/scripts/users/activate.php:19
 msgid "Re-type the Password"
-msgstr "Opakujte heslo"
+msgstr "Sisesta salasõna veel kord"
 
 #: admin/themes/default/users/add.php:2
 msgid "Add New User"
-msgstr "Přidat uživatele"
+msgstr "Lisa uus kasutaja"
 
 #: admin/themes/default/users/browse.php:2
 msgid "Browse Users"
-msgstr "Procházet uživatele"
+msgstr "Sirvi kasutajaid"
 
 #: admin/themes/default/users/browse.php:8
 msgid "Add a User"
-msgstr "Přidat uživatele"
+msgstr "Lisa kasutaja"
 
 #: admin/themes/default/users/browse.php:20
 #: admin/themes/default/users/browse.php:47
 #: admin/themes/default/users/show.php:18 application/forms/Install.php:30
 #: application/forms/Login.php:21 application/forms/User.php:29
 msgid "Username"
-msgstr "Uživatelské jméno"
+msgstr "Kasutajanimi"
 
 #: admin/themes/default/users/browse.php:23
 #: admin/themes/default/users/browse.php:49
@@ -1761,123 +1759,123 @@ msgstr "Uživatelské jméno"
 #: application/forms/RecoverPassword.php:27 application/forms/User.php:95
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
-msgstr "Email"
+msgstr "E-post"
 
 #: admin/themes/default/users/browse.php:35
 msgid "Search users"
-msgstr "Hledat uživatele"
+msgstr "Otsi kasutajaid"
 
 #: admin/themes/default/users/browse.php:36
 msgid "Usernames"
-msgstr "Uživatelské jméno"
+msgstr "Kasutajanimed"
 
 #: admin/themes/default/users/browse.php:37
 msgid "Real names"
-msgstr "Skutečná jména"
+msgstr "Tegelikud nimed"
 
 #: admin/themes/default/users/browse.php:38
 msgid "Email addresses"
-msgstr "Adresa elektronické pošty"
+msgstr "E-posti aadressid"
 
 #: admin/themes/default/users/browse.php:48
 #: admin/themes/default/users/show.php:20
 msgid "Real Name"
-msgstr "Skutečné jméno"
+msgstr "Tegelik nimi"
 
 #: admin/themes/default/users/browse.php:50 application/forms/User.php:128
 msgid "Role"
-msgstr "Role"
+msgstr "Roll"
 
 #: admin/themes/default/users/browse.php:60
 msgid "inactive"
-msgstr "neaktivní"
+msgstr "mitteaktiivne"
 
 #: admin/themes/default/users/edit.php:8
 #, php-format
 msgid "Edit User #%s"
-msgstr "Upravit uživatele %s"
+msgstr "Redigeeri kasutajat #%s"
 
 #: admin/themes/default/users/edit.php:24
 msgid "API Keys"
-msgstr "API klíče"
+msgstr "API võtmed"
 
 #: admin/themes/default/users/edit.php:27
 msgid "New key label"
-msgstr "Nový šťítek klíče"
+msgstr "Uus võtme nimi"
 
 #: admin/themes/default/users/edit.php:31
 msgid ""
 "To create a new API key, enter a label for the key below. For example, "
 "describe for what purpose it will be used. This key will have all your "
 "permissions; treat it as you would your password."
-msgstr ""
+msgstr "Ue API võtme loomiseks sisesta võtme nimi. Näiteks kirjelda, milleks seda kasutatakse. Sellel võtmel on kõik sinu õigused; käi sellega ringi nagu salasõnaga."
 
 #: admin/themes/default/users/edit.php:41
 msgid "You have no API keys. Use the form above to create one."
-msgstr "Nemáte žádné API klíče. Použijte formulář k jejich vytvoření."
+msgstr "Sul ei ole API võtmeid. Kasuta nende loomiseks allolevat vormi."
 
 #: admin/themes/default/users/edit.php:43
 #, php-format
 msgid "%s has no API keys. Use the form above to create one."
-msgstr "%s nemá žádné klíče API. Použijte formulář k jeho vytvoření."
+msgstr "%sl pole API võtmeid. Kasuta allolevat vormi nende loomiseks."
 
 #: admin/themes/default/users/edit.php:51
 msgid "Key"
-msgstr "Klíč"
+msgstr "Võti"
 
 #: admin/themes/default/users/edit.php:52
 msgid "Last IP"
-msgstr "Poslední IP"
+msgstr "Viimane IP"
 
 #: admin/themes/default/users/edit.php:53
 msgid "Last accessed"
-msgstr "Poslední přístup"
+msgstr "Viimati külastatud"
 
 #: admin/themes/default/users/edit.php:54
 msgid "Rescind"
-msgstr "Zrušit"
+msgstr "Tühista"
 
 #: admin/themes/default/users/forgot-password.php:2
 #: application/views/scripts/users/forgot-password.php:2
 msgid "Forgot Password"
-msgstr "Zapomenuté heslo"
+msgstr "Unustasid salasõna?"
 
 #: admin/themes/default/users/forgot-password.php:11
 #: application/views/scripts/users/forgot-password.php:10
 msgid "Enter your email address to retrieve your password."
-msgstr "Zadejte vaši emailovou adresu pro získaní hesla."
+msgstr "Sisesta oma e-posti aadress salasõna meelde tuletamiseks."
 
 #: admin/themes/default/users/forgot-password.php:21
 #: application/views/scripts/users/forgot-password.php:18
 msgid "Submit"
-msgstr "Odeslat"
+msgstr "Esita"
 
 #: admin/themes/default/users/forgot-password.php:25
 #: application/views/scripts/users/forgot-password.php:7
 msgid "Back to Log In"
-msgstr "Zpět na přihlášení"
+msgstr "Tagasi sisselogimise lehele"
 
 #: admin/themes/default/users/login.php:3 application/forms/Login.php:55
 #: application/views/scripts/users/login.php:3
 msgid "Log In"
-msgstr "Přihlásit se"
+msgstr "Logi sisse"
 
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
-msgstr "(Ztracené heslo?)"
+msgstr "(Unustasid salasõna?)"
 
 #: admin/themes/default/users/show.php:8
 #, php-format
 msgid "User #%s"
-msgstr "Uživatel #%s"
+msgstr "Kasutaja #%s"
 
 #: admin/themes/default/users/show.php:15
 msgid "Edit this User"
-msgstr "Upravit tohoto uživatele"
+msgstr "Redigeeri seda kasutajat"
 
 #: application/controllers/AppearanceController.php:48
 msgid "The appearance settings have been updated."
-msgstr "Nastavení vzhledu bylo aktualizováno."
+msgstr "Välisilme sätted on uuendatud."
 
 #: application/controllers/AppearanceController.php:51
 #: application/controllers/ItemTypesController.php:35
@@ -1886,47 +1884,47 @@ msgstr "Nastavení vzhledu bylo aktualizováno."
 #: application/controllers/SettingsController.php:79
 #: install/views/scripts/index/index.phtml:17
 msgid "There were errors found in your form. Please edit and resubmit."
-msgstr "Ve vašem formuláři jsou chyby. Prosím opravte je a formulář znovu odešlete."
+msgstr "Sinu vormil on mõned vead. Palun redigeeri seda ning esita see uuesti."
 
 #: application/controllers/AppearanceController.php:66
 msgid "The navigation settings have been updated."
-msgstr "Nastavení navigace bylo aktualizováno."
+msgstr "Lingiriba sätted on uuendatud."
 
 #: application/controllers/AppearanceController.php:69
 msgid ""
 "The navigation settings were not saved because of missing or invalid values."
 "  All changed values have been restored."
-msgstr "Nastavení navigace nebude uloženo, protože obsahuje neplatné nebo nevyplněné hodnoty. Všechny změněné hodnoty budou obnoveny."
+msgstr "Lingiriba sätteid ei salvestatud puuduvate või ebakorrektsete väärtuste tõttu. Kõik muudetud väärtused on taastatud."
 
 #: application/controllers/CollectionsController.php:74
 #, php-format
 msgid "The collection \"%s\" was successfully added!"
-msgstr "Sbírka \"%s\" byla úspěšně přidána!"
+msgstr "Kogu \"%s\" on edukalt lisatud!"
 
 #: application/controllers/CollectionsController.php:76
 #, php-format
 msgid "The collection #%s was successfully added!"
-msgstr "Sbírka #%s byla úspěšně přidána!"
+msgstr "Kogu #%s on edukalt lisatud!"
 
 #: application/controllers/CollectionsController.php:84
 #, php-format
 msgid "The collection \"%s\" was successfully changed!"
-msgstr "Sbírka \"%s\" byla úspěšně změněna!"
+msgstr "Kogu \"%s\" on edukalt muudetud!"
 
 #: application/controllers/CollectionsController.php:86
 #, php-format
 msgid "The collection #%s was successfully changed!"
-msgstr "Sbírka #%s byla úspěšně změněna!"
+msgstr "Kogu #%s on edukalt muudetud!"
 
 #: application/controllers/CollectionsController.php:94
 #, php-format
 msgid "The collection \"%s\" was successfully deleted!"
-msgstr "Sbírka \"%s\" byla úspěšně smazána!"
+msgstr "Kogu \"%s\" on edukalt kustutatud!"
 
 #: application/controllers/CollectionsController.php:96
 #, php-format
 msgid "The collection #%s was successfully deleted!"
-msgstr "Sbírka #%s byla úspěšně vymazána!"
+msgstr "Kogu #%s on edukalt kustutatud!"
 
 #: application/controllers/CollectionsController.php:104
 #, php-format
@@ -1934,7 +1932,7 @@ msgid ""
 "This will delete the collection \"%s\" and its associated metadata. This "
 "will not delete any items in this collection, but will delete the reference "
 "to this collection in each item."
-msgstr "Tímto vymažete sbírku \"#%s\" a všechna s ní související metadata. Žádná z položek v kolekci nebude smazána, pouze všechny odkazy z položek vedoucí ke kolekci."
+msgstr "See kustutab kogu \"%s\" ja sellega seotud metaandmestiku. See ei kustuta sellesse kogusse kuulunud ühikuid, küll aga eemaldab viite sellele kogule kõigi ühikute juures."
 
 #: application/controllers/CollectionsController.php:108
 #, php-format
@@ -1942,39 +1940,39 @@ msgid ""
 "This will delete the collection #%s and its associated metadata. This will "
 "not delete any items in this collection, but will delete the reference to "
 "this collection in each item."
-msgstr "Tímto vymažete sbírku #%s a všechna s ní související metadata. Žádná z položek v kolekci nebude smazána, pouze všechny odkazy z položek vedoucí ke kolekci."
+msgstr "See kustutab kogu #%s ja sellega seotud metaandmestiku. See ei kustuta sellesse kogusse kuulunud ühikuid, küll aga eemaldab viite sellele kogule kõigi ühikute juures."
 
 #: application/controllers/ElementSetsController.php:21
 msgid ""
 "This will delete the element set and all elements assigned to the element "
 "set. Items will lose all metadata that is specific to this element set."
-msgstr "Tímto smažete sadu prvků a všechny prvky přiřazené do této sady. Položky ztratí všechna metadata specifická pro tuto sadu prvků."
+msgstr "See kustutab tunnuste loetelu ja kõik sellesse loetelusse kuuluvad tunnused. Ühikud kaotavad sellesse tunnuste loetellu kuuluva metaandmestiku."
 
 #: application/controllers/ElementSetsController.php:65
 msgid "The element set was successfully changed!"
-msgstr "Prvek byl úspěšně upraven!"
+msgstr "Tunnuste loetelu on edukalt muudetud!"
 
 #: application/controllers/ErrorController.php:64
 msgid "Page not found."
-msgstr "Stránka nenalezena."
+msgstr "Lehte ei leitud."
 
 #: application/controllers/ErrorController.php:79
 msgid "Access denied."
-msgstr "Přistup odepřen."
+msgstr "Ligipääs keelatud."
 
 #: application/controllers/FilesController.php:64
 msgid "This will delete the file and its associated metadata."
-msgstr "Tímto smažete soubor a s ním asociovaná metadata."
+msgstr "See kustutab faili ning sellega seotud metaandmestiku."
 
 #: application/controllers/ItemTypesController.php:28
 #, php-format
 msgid "The item type \"%s\" was successfully added."
-msgstr "Typ položky \"%s\" byl úspěšně přidán."
+msgstr "Ühikuliik \"%s\" on edukalt lisatud."
 
 #: application/controllers/ItemTypesController.php:55
 #, php-format
 msgid "The item type \"%s\" was successfully updated."
-msgstr "Typ položky \"%s\" byl úspěšně aktualizován."
+msgstr "Ühikuliik \"%s\" on edukalt uuendatud."
 
 #: application/controllers/ItemTypesController.php:150
 #, php-format
@@ -1982,340 +1980,340 @@ msgid ""
 "This will delete the \"%s\" item type but will not delete the elements "
 "assigned to the item type. Items that are assigned to this item type will "
 "lose all metadata that is specific to the item type."
-msgstr "Tímto smažete typ položky \"%s\", ale nesmažete prvky přiřazené tomuto typu. Položky přiřazené tomuto typy ztratí všechna metadata specifická tomuto typu položky."
+msgstr "See kustutab ühikuliigi \"%s\", kuid ei kustuta selle ühikuliigiga seonduvaid tunnuseid. Selle ühikuliigi alla määratud ühikud, kaotavad kogu ühikuliigile spetsiifilise metaandmestiku."
 
 #: application/controllers/ItemTypesController.php:158
 #, php-format
 msgid ""
 "The item type \"%s\" was successfully added!  You may now add elements to "
 "your new item type."
-msgstr "Typ položky \"%s\" byl úspěšně přidán!   Nyní můžete přidat prvky do vašeho nového typu položky."
+msgstr "Ühikuliik \"%s\" on edukalt lisatud! Sa saad nüüd lisada uuele ühikuliigile tunnuseid."
 
 #: application/controllers/ItemsController.php:95
 #, php-format
 msgid "The item \"%s\" was successfully added!"
-msgstr "Položka \"%s\" byla úspěšně přidána!"
+msgstr "Ühik \"%s\" on edukalt lisatud!"
 
 #: application/controllers/ItemsController.php:97
 #, php-format
 msgid "The item #%s was successfully added!"
-msgstr "Položka #%s byla úspěšně přidána!"
+msgstr "Ühik \"%s\" on edukalt lisatud!"
 
 #: application/controllers/ItemsController.php:105
 #, php-format
 msgid "The item \"%s\" was successfully changed!"
-msgstr "Položka \"%s\" byla úspěšně změněna!"
+msgstr "Ühik \"%s\" on edukalt muudetud!"
 
 #: application/controllers/ItemsController.php:107
 #, php-format
 msgid "The item #%s was successfully changed!"
-msgstr "Položka #%s byla úspěšně změněna!"
+msgstr "Ühik \"%s\" on edukalt muudetud!"
 
 #: application/controllers/ItemsController.php:115
 #, php-format
 msgid "The item \"%s\" was successfully deleted!"
-msgstr "Položka \"%s\" byla úspěšně smazána!"
+msgstr "Ühik \"%s\" on edukalt kustutatud!"
 
 #: application/controllers/ItemsController.php:117
 #, php-format
 msgid "The item #%s was successfully deleted!"
-msgstr "Položka #%s byla úspěšně smazána!"
+msgstr "Ühik \"%s\" on edukalt kustutatud!"
 
 #: application/controllers/ItemsController.php:125
 #, php-format
 msgid ""
 "This will delete the item \"%s\" and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr "Tímto smažete položku \"%s\" a s ní asociovaná metadata. Smazána budou také soubory a metadata souborů asociovaných s touto položkou."
+msgstr "See kustutab ühiku \"%s\" ja sellega seostuva metaandmestiku. See kustutab ka kõik ühikuga seotud failid ja failide metaandmestiku."
 
 #: application/controllers/ItemsController.php:129
 #, php-format
 msgid ""
 "This will delete the item #%s and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr "Tímto smažete položku #%s a s ní asociovaná metadata. Smazána budou také soubory a metadata souborů asociovaných s touto položkou."
+msgstr "See kustutab ühiku #%s ja sellega seostuva metaandmestiku. See kustutab ka kõik ühikuga seotud failid ja failide metaandmestiku."
 
 #: application/controllers/ItemsController.php:255
 msgid "You must choose some items to batch edit."
-msgstr "Procházet položky podle štítků"
+msgstr "Mitme ühiku korraga redigeerimiseks tuleb need märkida linnukesega."
 
 #: application/controllers/ItemsController.php:299
 msgid "User is not allowed to modify visibility of items."
-msgstr "Uživatel nesmí měnit viditelnost položek."
+msgstr "Kasutaja ei saa ühikute nähtavust muuta."
 
 #: application/controllers/ItemsController.php:304
 msgid "User is not allowed to modify featured status of items."
-msgstr "Uživatel nemá oprávnění upravovat doporučenost této položky."
+msgstr "Kasutaja ei saa muuta ühikute esiletõstu."
 
 #: application/controllers/ItemsController.php:311
 msgid "User is not allowed to delete selected items."
-msgstr "Uživatel nesmí mazat vybrané položky."
+msgstr "Kasutaja ei saa valitud ühikuid kustutada."
 
 #: application/controllers/ItemsController.php:317
 msgid "User is not allowed to edit selected items."
-msgstr "Uživatel nesmí upravovat vybrané položky."
+msgstr "Kasutaja ei saa valitud ühikuid toimetada."
 
 #: application/controllers/ItemsController.php:322
 msgid "User is not allowed to tag selected items."
-msgstr "Uživatel nemá oprávnění přidávat štítky k vybraným Položkám."
+msgstr "Kasutaja ei saa valitud ühikuid sildistada."
 
 #: application/controllers/ItemsController.php:356
 msgid "The items were successfully deleted!"
-msgstr "Položky byly úspěšně smazány!"
+msgstr "Ühikud on edukalt kustutatud!"
 
 #: application/controllers/ItemsController.php:358
 msgid "The items were successfully changed!"
-msgstr "Položky byly úspěšně změněny!"
+msgstr "Ühikud on edukalt muudetud!"
 
 #: application/controllers/PluginsController.php:45
 #, php-format
 msgid ""
 "Error in configuring plugin named \"%s\". Missing config and/or config_form "
 "hook(s)."
-msgstr "Chyba při konfiguraci zásuvného modulu \"%s\". Chybí config a/nebo config_form háček(ky)."
+msgstr "Viga plugina \"%s\" konfigureerimisel. Puudu on config ja/või config_form seos(ed)."
 
 #: application/controllers/PluginsController.php:52
 #, php-format
 msgid "The %s plugin was successfully configured!"
-msgstr "Zásuvný modul %s byl úspěšně konfigurován!"
+msgstr "%s plugin on edukalt konfigureeritud!"
 
 #: application/controllers/PluginsController.php:70
 #, php-format
 msgid "The %s plugin has already been installed."
-msgstr "Zásuvný modul %s je již nainstalován."
+msgstr "%s plugin on juba paigaldatud."
 
 #: application/controllers/PluginsController.php:79
 #, php-format
 msgid "The %s plugin was successfully installed!"
-msgstr "Zásuvný modul %s byl úspěšně nainstalován!"
+msgstr "%s on edukalt paigaldatud!"
 
 #: application/controllers/PluginsController.php:91
 #: application/controllers/PluginsController.php:96
 #, php-format
 msgid "The following error occurred while installing the %s plugin: "
-msgstr "Následující chyba nastala při instalaci zásuvného modulu %s: "
+msgstr "%s plugina paigaldamisel tekkis järgnev viga:"
 
 #: application/controllers/PluginsController.php:124
 #, php-format
 msgid "The following error occurred while activating the %s plugin: "
-msgstr "Následující chyba nastala při aktivaci zásuvného modulu %s: "
+msgstr "%s plugina aktiveerimisel tekkis järgnev viga:"
 
 #: application/controllers/PluginsController.php:134
 #, php-format
 msgid "The %s plugin was successfully activated!"
-msgstr "Zásuvný modul %s byl úspěšně aktivován!"
+msgstr "%s plugin on edukalt aktiveeritud!"
 
 #: application/controllers/PluginsController.php:139
 #, php-format
 msgid "The %s plugin was activated, but could not be loaded: "
-msgstr "Zásuvný modul %s byl aktivován, ale nemohl být načten: "
+msgstr "%s plugin on aktiveeritud, kuid seda ei saanud laadida:"
 
 #: application/controllers/PluginsController.php:163
 #, php-format
 msgid "The %s plugin was successfully deactivated!"
-msgstr "%s zásuvný modul byl úspěšně deaktivován!"
+msgstr "Plugin %s on edukalt deaktiveeritud!"
 
 #: application/controllers/PluginsController.php:168
 #, php-format
 msgid "The following error occurred while deactivating the %s plugin: "
-msgstr "V průběhu deaktivace %s zásuvného modulu se stala následující chyba: "
+msgstr "Plugina %s deaktiveerimisel tekkis järgmine viga:"
 
 #: application/controllers/PluginsController.php:187
 #, php-format
 msgid "The %s plugin was successfully upgraded!"
-msgstr "%s zásuvný modul byl úspěšně aktualizován!"
+msgstr "Plugin %s on edukalt uuendatud!"
 
 #: application/controllers/PluginsController.php:196
 #: application/controllers/PluginsController.php:202
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
-msgstr "V průběhu aktualizace zásuvného modulu %s se stala následující chyba: "
+msgstr "Plugina %s uuendamisel tekkis järgnev viga:"
 
 #: application/controllers/PluginsController.php:253
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
-msgstr "Zásuvný modul nebyl nalezen v adresáři '%s' !"
+msgstr "'%s' kataloogis seda pluginat ei leidunud!"
 
 #: application/controllers/PluginsController.php:262
 msgid "You must confirm the uninstall before proceeding."
-msgstr "Musíte potvrdit odinstalaci před tím než bude provedena."
+msgstr "Enne jätkamist pead kinnitama eemaldamise."
 
 #: application/controllers/PluginsController.php:280
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
-msgstr "Plugin %s byl úspěšně odinstalován!"
+msgstr "Plugin %s on edukalt eemaldatud!"
 
 #: application/controllers/PluginsController.php:285
 #: application/controllers/PluginsController.php:290
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
-msgstr "V průběhu odinstalace %s pluginu se stala následující chyba: "
+msgstr "Plugina %s eemaldamisel tekkis järgnev viga:"
 
 #: application/controllers/PluginsController.php:317
 msgid "No plugin name given."
-msgstr "Není zadáno jméno zásuvného modulu."
+msgstr "Pole antud plugina nime."
 
 #: application/controllers/PluginsController.php:330
 #, php-format
 msgid "The plugin %s must be installed."
-msgstr "Plugin %s musí být instalovaný."
+msgstr "Tuleb paigaldada plugin %s."
 
 #: application/controllers/SettingsController.php:44
 msgid "The general settings have been updated."
-msgstr "Nastavení bylo aktualizováno."
+msgstr "Üldsätted on uuendatud."
 
 #: application/controllers/SettingsController.php:76
 msgid "The security settings have been updated."
-msgstr "Bezpečnostní nastavení bylo aktualizováno."
+msgstr "Turvasätted on uuendatud."
 
 #: application/controllers/SettingsController.php:95
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
-msgstr "Soubory prohledávané Omekou byly změněny. Prosím reindexujte záznamy pomocí formuláře dole."
+msgstr "Sa muutsid seda, millised kirjed on Omekas otsitavad. Palun indekseeri kirjed üle, kasutades allolevat vormi."
 
 #: application/controllers/SettingsController.php:102
 msgid ""
 "Indexing records. This may take a while. You may continue administering your"
 " site."
-msgstr "Indexování záznamů. Může to chvilku trvat. Zatím můžete pokračovat v administraci vaší stránky."
+msgstr "Kirjete indekseerimine. Selleks võib pisut aega minna. Sa võid jätkata oma lehekülje haldamist."
 
 #: application/controllers/SettingsController.php:131
 msgid "The item type elements were successfully changed!"
-msgstr "Prvky položky typu byly úspěšně změněny!"
+msgstr "Ühikuliigi tunnused on edukalt muudetud!"
 
 #: application/controllers/SettingsController.php:149
 msgid "The API configuration was successfully changed!"
-msgstr "Nastavení API bylo úspěšně změněno!"
+msgstr "API seadistus on edukalt muudetud!"
 
 #: application/controllers/SettingsController.php:175
 msgid "The ImageMagick directory path works."
-msgstr "ImageMagick adresářová cesta pracuje."
+msgstr "ImageMagick kataloogirada töötab."
 
 #: application/controllers/SettingsController.php:176
 msgid "The ImageMagick directory path does not work."
-msgstr "ImageMagick adresářová cesta nepracuje správně."
+msgstr "ImageMagick kataloogirada ei tööta."
 
 #: application/controllers/TagsController.php:35
 msgid "You have to be logged in to edit tags!"
-msgstr "Pro editaci štítků musíte být přihlášený!"
+msgstr "Siltide redigeerimiseks pead olema sisse logitud!"
 
 #: application/controllers/TagsController.php:64
 #, php-format
 msgid "Tag named \"%1$s\" was successfully renamed to \"%2$s\"."
-msgstr "Štítek pojmenovaný \"%1$s\" byl úspěšně přejmenovaný na \"%2$s\"."
+msgstr "Silt \"%1$s\" on edukalt ümber nimetatud ja kannab nüüd nime \"%2$s\"."
 
 #: application/controllers/TagsController.php:91
 msgid "Invalid tagType given."
-msgstr "Zadán neplatný typ štítku."
+msgstr "Antud vale sildiLiik."
 
 #: application/controllers/ThemesController.php:25
 msgid "Invalid form submission."
-msgstr "Neplatné odeslání formuláře."
+msgstr "Esitati ebakorrektne vorm."
 
 #: application/controllers/ThemesController.php:33
 msgid "You have chosen an illegal theme name. Please select another theme."
-msgstr "Vybrali jste neplatné jméno vzhledu. Prosím, vyberte jiný vzhled."
+msgstr "Sa oled valinud sobimatu teema nime. Palun vali mingi muu teema."
 
 #: application/controllers/ThemesController.php:40
 #, php-format
 msgid "This theme requires a newer version of Omeka (%s)."
-msgstr "Toto téma vyžaduje novější verzi Omeky(%s)."
+msgstr "Selle teema jaoks on vaja Omeka uuemat versiooni (%s)."
 
 #: application/controllers/ThemesController.php:54
 msgid "The theme has been successfully changed."
-msgstr "Vzhled byl úspěšně změněn."
+msgstr "Teema on edukalt muudetud."
 
 #: application/controllers/ThemesController.php:81
 msgid "The theme settings were successfully saved!"
-msgstr "Nastavení vzhledu bylo úspěšně změněno!"
+msgstr "Teemasätted on edukalt salvestatud!"
 
 #: application/controllers/ThemesController.php:84
 msgid "There was an error on the form. Please try again."
-msgstr "Ve formuláři je chyba. Prosím zkuste to znovu."
+msgstr "Vormil oli viga, Palun proovi uuesti."
 
 #: application/controllers/UpgradeController.php:49
 msgid "SQL error in migration: "
-msgstr "SQL chyba při migraci:"
+msgstr "SQL viga andmete ülekandmisel:"
 
 #: application/controllers/UsersController.php:70
 msgid ""
 "Unable to reset password. Please verify that the information is correct and "
 "contact an administrator if necessary."
-msgstr "Nelze resetovat heslo. Prosím ověřte, že zadané informace jsou správné a kontaktuje administrátora, pokud je to nutné."
+msgstr "Salasõna ei saanud muuta. Palun kontrolli, kas info on õige, ning vajadusel võta ühendust haldajaga."
 
 #: application/controllers/UsersController.php:108
 msgid "Please follow this link to reset your password:"
-msgstr "Prosím, pokračujte tímto odkazem, pokud chcete resetovat vaše heslo:"
+msgstr "Salasõna muutmiseks klõpsa sellele lingile."
 
 #: application/controllers/UsersController.php:110
 #: application/controllers/UsersController.php:113
 #: application/controllers/UsersController.php:322
 #, php-format
 msgid "%s Administrator"
-msgstr "%s Administrator"
+msgstr "%s haldaja."
 
 #: application/controllers/UsersController.php:114
 #, php-format
 msgid "[%s] Reset Your Password"
-msgstr "[%s] Resetovat vaše heslo."
+msgstr "[%s] Lähtesta salasõna"
 
 #: application/controllers/UsersController.php:117
 msgid "Please check your email for a link to reset your password."
-msgstr "Prosím, zkontrolujte váš email kvůli odkazu k resetování vašeho hesla."
+msgstr "Link salasõna muutmiseks on saadetud e-posti aadressile."
 
 #: application/controllers/UsersController.php:126
 msgid "Invalid activation code given."
-msgstr "Byl zadán nesprávný aktivační kód."
+msgstr "Antud on vale aktiveerimiskood."
 
 #: application/controllers/UsersController.php:135
 msgid "Password: The passwords do not match."
-msgstr "Heslo: Heslo neodpovídá."
+msgstr "Salasõna: Salasõnad ei kattu."
 
 #: application/controllers/UsersController.php:143
 msgid "You may now log in to Omeka."
-msgstr "Teď se smíte přihlásit do Omeky."
+msgstr "Sa saad nüüd Omekasse sisse logida."
 
 #: application/controllers/UsersController.php:160
 msgid "Add User"
-msgstr "Přidat uživatele"
+msgstr "Lisa kasutaja"
 
 #: application/controllers/UsersController.php:171
 #, php-format
 msgid "The user \"%s\" was successfully added!"
-msgstr "Uživatel \"%s\" byl úspěšně přidán!"
+msgstr "Kasutaja \"%s\" on edukalt lisatud!"
 
 #: application/controllers/UsersController.php:175
 #, php-format
 msgid "The user \"%s\" was added, but the activation email could not be sent."
-msgstr "Uživatel \"%s\" byl přidán, ale aktivační e-mail mu nemohl být zaslán."
+msgstr "Kasutaja \"%s\" lisati, kuid aktiveerimiskirja saatmine ei õnnestunud."
 
 #: application/controllers/UsersController.php:233
 msgid "A new API key was successfully created."
-msgstr "Byl úspěšně vytvořen nový API klíč."
+msgstr "Uus API võti on edukalt loodud."
 
 #: application/controllers/UsersController.php:241
 msgid "An existing API key was successfully rescinded."
-msgstr "Stávající klíč API byl úspěšně zrušen."
+msgstr "Olemasolev API võti on edukalt tühistatud."
 
 #: application/controllers/UsersController.php:246
 #: application/controllers/UsersController.php:257
 msgid "There was an invalid entry on the form. Please try again."
-msgstr "Ve formuláři je chyba. Prosím zkuste to znovu."
+msgstr "Vormil oli ebakorrektne sissekanne. Palun proovi uuesti."
 
 #: application/controllers/UsersController.php:253
 msgid "Password changed!"
-msgstr "Heslo změněno!"
+msgstr "Salasõna on muudetud!"
 
 #: application/controllers/UsersController.php:264
 #, php-format
 msgid "The user %s was successfully changed!"
-msgstr "Uživatel \"%s\" byl úspěšně změněn!"
+msgstr "Kasutaja %s on edukalt muudetud!"
 
 #: application/controllers/UsersController.php:291
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
-msgstr "Uživatel \"%s\" byl úspěšně smazán!"
+msgstr "Kasutaja \"%s\" on edukalt kustutatud!"
 
 #: application/controllers/UsersController.php:297
 #, php-format
@@ -2323,376 +2321,376 @@ msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
 "this user will remain in the system, but will no longer be associated with "
 "this user."
-msgstr "%s bude smazán ze systému. Položky, sbírky a štítky vytvořené tímto uživatelem zůstanou nadále v systému, ale nebudou s ním již propojené."
+msgstr "%s kustutatakse süsteemist. Selle kasutaja loodud ühikud, kogud ja sildid jäävad süsteemi alles, kuid need pole enam selle kasutajaga seostatud."
 
 #: application/controllers/UsersController.php:318
 msgid "Welcome!"
-msgstr "Vítej!"
+msgstr "Tere tulemast!"
 
 #: application/controllers/UsersController.php:320
 #, php-format
 msgid ""
 "Your account for the %s repository has been created. Please click the "
 "following link to activate your account:"
-msgstr "Váš účet pro repositář %s byl vytvořen. Prosím klikněta na následující odkaz pro jeho aktivaci."
+msgstr "Su konto repositooriumi %s jaoks on loodud, Konto aktiveerimiseks palun kliki järgneval lingil:"
 
 #: application/controllers/UsersController.php:323
 #, php-format
 msgid "Activate your account with the %s repository"
-msgstr "Aktivuje váš účet s repositářem %s "
+msgstr "Aktiveeri oma konto %s repositooriumis."
 
 #: application/controllers/UsersController.php:418
 msgid "Login information incorrect. Please try again."
-msgstr "Nesprávné přihlašovací údaje. Prosím zkuste to znovu."
+msgstr "Sisselogimisinfo ei klapi. Palun proovi uuesti."
 
 #: application/forms/AppearanceSettings.php:22
 #: application/forms/Install.php:117
 msgid "Fullsize Image Size"
-msgstr "Velikost obrázku"
+msgstr "Täismahulise pildi suurus"
 
 #: application/forms/AppearanceSettings.php:23
 msgid "Maximum fullsize image size constraint (in pixels)."
-msgstr "Omezení na maximální rozměr obrázku (v pixelech)."
+msgstr "Täismahulise pildi suurim lubatud suurus (pikselites)."
 
 #: application/forms/AppearanceSettings.php:29
 #: application/forms/Install.php:125
 msgid "Thumbnail Size"
-msgstr "Velikost náhledu"
+msgstr "Pisipildi suurus"
 
 #: application/forms/AppearanceSettings.php:30
 msgid "Maximum thumbnail size constraint (in pixels)."
-msgstr "Maximální velikost náhledu (v pixelech)."
+msgstr "Pisipildi suurim lubatud suurus (pikselites)."
 
 #: application/forms/AppearanceSettings.php:36
 #: application/forms/Install.php:133
 msgid "Square Thumbnail Size"
-msgstr "Velikost čtvercové miniatury"
+msgstr "Ruudukujulise pisipildi suurus."
 
 #: application/forms/AppearanceSettings.php:37
 msgid "Maximum square thumbnail size constraint (in pixels)."
-msgstr "Omezení na maximální rozměr čtvercového náhledu (v pixelech)."
+msgstr "Ruudukujulise pisipildi suurim lubatud suurus (pikselites)."
 
 #: application/forms/AppearanceSettings.php:43
 msgid "Results Per Page (admin)"
-msgstr "Výsledků na stranu (admin)"
+msgstr "Tulemusi lehel (haldaja)"
 
 #: application/forms/AppearanceSettings.php:44
 msgid ""
 "Limit the number of results displayed per page in the administrative "
 "interface."
-msgstr "Omezit počet výsledků zobrazených na stranu v administračním rozhraní."
+msgstr "Piira lehel kuvatavate tulemuste arvu haldaja vaates."
 
 #: application/forms/AppearanceSettings.php:50
 msgid "Results Per Page (public)"
-msgstr "Výsledků na stranu (veřejné)"
+msgstr "Tulemusi lehel (tavakasutaja)"
 
 #: application/forms/AppearanceSettings.php:51
 msgid ""
 "Limit the number of results displayed per page in the public interface."
-msgstr "Omezení počtu výsledků zobrazených na jedné straně ve veřejném rozhraní."
+msgstr "Piira lehel kuvatavate tulemuste arvu tavakasutaja vaates."
 
 #: application/forms/AppearanceSettings.php:57
 #: application/forms/Install.php:157
 msgid "Show Empty Elements"
-msgstr "Zobrazit prázdné prvky"
+msgstr "Näita tühje tunnuseid"
 
 #: application/forms/AppearanceSettings.php:66
 msgid "Derivative Size Constraints"
-msgstr "Omezení velikosti odvozenin"
+msgstr "Tuletispiltide mahupiirangud"
 
 #: application/forms/AppearanceSettings.php:71
 msgid "Display Settings"
-msgstr "Nastavení zobrazení"
+msgstr "Kuvasätted"
 
 #: application/forms/ChangePassword.php:25
 msgid "Current Password"
-msgstr "Současné heslo"
+msgstr "Praegune salasõna"
 
 #: application/forms/ChangePassword.php:26
 #: application/forms/ChangePassword.php:36
 msgid "Password must be at least 6 characters long."
-msgstr "Heslo musí být alespoň 6 znaků dlouhé."
+msgstr "Salasõna peab olema vähemalt 6 tähemärki pikk."
 
 #: application/forms/ChangePassword.php:28
 msgid "Invalid current password"
-msgstr "Současné heslo je neplatné"
+msgstr "Praegune salasõna pole õigesti sisestatud"
 
 #: application/forms/ChangePassword.php:34
 msgid "New Password"
-msgstr "Nové heslo"
+msgstr "Uus salasõna"
 
 #: application/forms/ChangePassword.php:41
 msgid "New password must be entered."
-msgstr "Musí být zadáno nové heslo."
+msgstr "Tuleb sisestada uus salasõna."
 
 #: application/forms/ChangePassword.php:50
 #: application/forms/ChangePassword.php:70
 msgid "New password must be typed correctly twice."
-msgstr "Nové heslo musí být správně zadáno dvakrát."
+msgstr "Uus salasõna tuleb sisestada veatult kaks korda."
 
 #: application/forms/ChangePassword.php:59
 msgid "New password must be at least %min% characters long."
-msgstr "Nové heslo musí být alespoň %min% c znaků dlouhé."
+msgstr "Uus salasõna peab olema vähemalt  %min% characters tähemärgi pikkune."
 
 #: application/forms/ChangePassword.php:68
 msgid "Repeat New Password"
-msgstr "Opakujte nové heslo"
+msgstr "Uus salasõna veelkord"
 
 #: application/forms/ChangePassword.php:75
 msgid "Save Password"
-msgstr "Uložit heslo"
+msgstr "Salvesta salasõna"
 
 #: application/forms/ChangePassword.php:84
 msgid "Change Password"
-msgstr "Změnit heslo"
+msgstr "Muuda salasõna"
 
 #: application/forms/GeneralSettings.php:22 application/forms/Install.php:79
 msgid "Site Title"
-msgstr "Název depositáře"
+msgstr "Lehekülje pealkiri"
 
 #: application/forms/GeneralSettings.php:26 application/forms/Install.php:84
 msgid "Site Description"
-msgstr "Přistup odepřen."
+msgstr "Veebisaidi kirjeldus."
 
 #: application/forms/GeneralSettings.php:31 application/forms/Install.php:88
 msgid "Administrator Email"
-msgstr "Administrator email"
+msgstr "Haldaja e-post"
 
 #: application/forms/GeneralSettings.php:37 application/forms/Install.php:94
 msgid "Site Copyright Information"
-msgstr "Copyright depositáře"
+msgstr "Teave veebisaidi autoriõiguste kohta"
 
 #: application/forms/GeneralSettings.php:41 application/forms/Install.php:98
 msgid "Site Author Information"
-msgstr "Položka úspěšně smazána!"
+msgstr "Teave veebisaidi autori kohta"
 
 #: application/forms/GeneralSettings.php:45 application/forms/Install.php:102
 msgid "Tag Delimiter"
-msgstr "Oddělovač štítků"
+msgstr "Siltide eraldaja"
 
 #: application/forms/GeneralSettings.php:46
 msgid ""
 "Separate tags using this character or string. Be careful when changing this "
 "setting. You run the risk of splitting tags that contain the old delimiter."
-msgstr "Oddělte štítky s pomocí tohoto snaku nebo řetězce. Buďte opatrní při změně tohoto nastavení. Riskujete rozdělení štítků které obsahují starý oddělovač. "
+msgstr "Eralda sildid selle tähe või stringiga. Ole selle sätte muutmisel ettevaatlik: on oht, et tükeldad sildid, mis sisaldavad vana eraldajat."
 
 #: application/forms/GeneralSettings.php:59 application/forms/Install.php:163
 msgid "ImageMagick Directory Path"
-msgstr "Cesta k ImageMagick"
+msgstr "ImageMagick kataloogirada"
 
 #: application/forms/Install.php:31
 msgid "only alphanumeric characters are allowed"
-msgstr "pouze alfanumerické znaky jsou povoleny"
+msgstr "lubatud on ainult tähed ja numbrid"
 
 #: application/forms/Install.php:37 application/forms/Login.php:34
 msgid "Password"
-msgstr "Heslo"
+msgstr "Salasõna"
 
 #: application/forms/Install.php:38
 msgid "must be at least 6 characters"
-msgstr "musí být laespoň 6 znaků"
+msgstr "peab olema vähemalt 6 tähemärki pikk"
 
 #: application/forms/Install.php:61
 msgid "Confirm your password."
-msgstr "Potvrdit heslo."
+msgstr "Kinnita salasõna"
 
 #: application/forms/Install.php:103
 msgid "Separate tags using this character or string."
-msgstr "Oddělte štítky pomocí znaku nebo řetězce."
+msgstr "Eralda sildid selle tähe või stringiga."
 
 #: application/forms/Install.php:118
 msgid "Maximum fullsize image size constraint (in pixels)"
-msgstr "Omezení velikosti obrazku (v pixelech)"
+msgstr "Täismahulise pildi suurim lubatud suurus (pikselites)."
 
 #: application/forms/Install.php:126
 msgid "Maximum thumbnail size constraint (in pixels)"
-msgstr "Omezení velikosti náhledu (v pixelech)"
+msgstr "Pisipildi suurim lubatud suurus (pikselites)."
 
 #: application/forms/Install.php:134
 msgid "Maximum square thumbnail size constraint (in pixels)"
-msgstr "Omezení velikosti čtvercového náhledu (v pixelech)"
+msgstr "Ruudukujulise pisipildi suurim lubatud suurus (pikselites)."
 
 #: application/forms/Install.php:141
 msgid "Items Per Page (admin)"
-msgstr "Položek na stránku (admin)"
+msgstr "Ühikuid lehel (haldaja)"
 
 #: application/forms/Install.php:142
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
-msgstr "Omezí počet položek zobrazených na stránce v administrátorském rozhraní."
+msgstr "Piira ühikute arvu lehel haldaja vaates."
 
 #: application/forms/Install.php:149
 msgid "Items Per Page (public)"
-msgstr "Položek na stránku (veřejné)"
+msgstr "Ühikuid lehel (tavakasutaja)"
 
 #: application/forms/Install.php:150
 msgid "Limit the number of items displayed per page in the public interface."
-msgstr "Omezí počet položek zobrazených na stránce ve veřejném rozhraní."
+msgstr "Piira ühikute arvu lehel tavakasutaja vaates."
 
 #: application/forms/Install.php:159
 msgid "Check box to show metadata elements with no text."
-msgstr "Vyberte pro zobrazení prázdných metadata záznamů."
+msgstr "Ilma tekstita metaandmete kuvamiseks tee kasti linnuke."
 
 #: application/forms/Install.php:174
 msgid "Default Superuser Account"
-msgstr "Implicitní superuživatelský účet"
+msgstr "Ülemhaldaja vaikekonto"
 
 #: application/forms/Install.php:184
 msgid "Site Settings"
-msgstr "Nastavení depositáře"
+msgstr "Veebisaidi sätted"
 
 #: application/forms/ItemTypes.php:142
 msgid "The name of the item type."
-msgstr "Jméno typu položky."
+msgstr "Ühikuliigi nimi."
 
 #: application/forms/ItemTypes.php:151
 msgid "The description of the item type."
-msgstr "Popis typu položky."
+msgstr "Ühikuliigi kirjeldus."
 
 #: application/forms/ItemTypes.php:188 application/forms/ItemTypes.php:197
 #, php-format
 msgid "The item type cannot have more than one \"%s\" element."
-msgstr "Typ položky nemůže obsahovat více než jeden \"%s\" prvek."
+msgstr "Ühikuliigil ei saa olla rohkem kui üks \"%s\" tunnus."
 
 #: application/forms/Login.php:27
 msgid "Username cannot be empty."
-msgstr "Uživatelské jméno nemůže být prázdné."
+msgstr "Kasutajanime lahter ei või tühjaks jääda."
 
 #: application/forms/Login.php:40
 msgid "Password cannot be empty."
-msgstr "Heslo nemůže být prázdné."
+msgstr "Salasõna lahter ei või tühjaks jääda."
 
 #: application/forms/Login.php:48
 msgid "Remember Me?"
-msgstr "Neodhlašovat?"
+msgstr "Jäta salasõna meelde?"
 
 #: application/forms/Navigation.php:156
 msgid "[Default]"
-msgstr "[Standardní]"
+msgstr "[Vaikimisi]"
 
 #: application/forms/Navigation.php:162
 msgid "Select a Homepage"
-msgstr "Vybrat domácí stránku"
+msgstr "Vali koduleht"
 
 #: application/forms/Navigation.php:244
 msgid "Cannot find parent navigation page."
-msgstr "Nelze nalézt rodičovskou stránku v navigaci."
+msgstr "Ei suuda leida kõrgema taseme lehte."
 
 #: application/forms/Navigation.php:326
 msgid "All navigation links must have URIs."
-msgstr "Všechny odkazy v navigaci musí mít URI."
+msgstr "Kõigil lingiriba linkidel peavad olema URId."
 
 #: application/forms/Navigation.php:339
 msgid "All navigation links must have different URIs."
-msgstr "Všechny odkazy v navigaci musí mít různá URI."
+msgstr "Kõigil lingiriba linkidel peavad olema erinevad URId."
 
 #: application/forms/Navigation.php:345
 #, php-format
 msgid "Invalid URI for \"%s\" navigation link:  \"%s\""
-msgstr "Neplatný URI pro \"%s\" navigační odkaz:  \"%s\""
+msgstr "Vale URI \"%s\" lingiriba lingi jaoks:  \"%s\""
 
 #: application/forms/Navigation.php:378
 msgid "Navigation links that have undeleteable sublinks cannot be deleted."
-msgstr "Navigační odkaz který má nesmazatelné pododkazy nemůže být smazán."
+msgstr "Ei saa kustutada lingiriba linke, millel on kustutamatud alalingid,"
 
 #: application/forms/RecoverPassword.php:36
 msgid "Email address is required."
-msgstr "Emailová adresa požadována."
+msgstr "E-posti aadress on kohustuslik!"
 
 #: application/forms/RecoverPassword.php:46
 msgid "Invalid email address given."
-msgstr "Neplatná emailová adresa zadána."
+msgstr "E-posti aadress pole korrektne."
 
 #: application/forms/RecoverPassword.php:48
 msgid "Invalid format given for email address."
-msgstr "Neplatný formát pro emailovou adresu."
+msgstr "E-posti aadress on vales vormingus."
 
 #: application/forms/RecoverPassword.php:50
 msgid "Invalid hostname given for email address."
-msgstr "Neplatná doména v emailové adrese."
+msgstr "E-posti aadressi hostinimi pole korrektne."
 
 #: application/forms/RecoverPassword.php:66
 msgid "Invalid email address"
-msgstr "Neplatná emailová adresa."
+msgstr "Vale e-posti aadress."
 
 #: application/forms/ResetPassword.php:27
 msgid "Password is required."
-msgstr "Heslo je povinné."
+msgstr "Salasõna on kohustuslik."
 
 #: application/forms/ResetPassword.php:33
 msgid "Typed passwords do not match."
-msgstr "Napsané heslo neodpovídá."
+msgstr "Salasõnad ei kattu."
 
 #: application/forms/SecuritySettings.php:24
 msgid "Disable File Upload Validation"
-msgstr "Zakázat validaci při nahrávání souborů."
+msgstr "Üleslaetavate failitüüpide piiramise lõpetamine"
 
 #: application/forms/SecuritySettings.php:26
 msgid ""
 "Check this field if you would like to allow any file to be uploaded to "
 "Omeka."
-msgstr "Vyberte toto pole pokud chcete aby mohl být do Omeky načten libovolný soubor."
+msgstr "Märgi see väli linnukesega kui soovid, et Omekasse saaks lisada igat laadi faile."
 
 #: application/forms/SecuritySettings.php:32
 msgid "Allowed File Extensions"
-msgstr "Povolené přípony souborů"
+msgstr "Lubatud failinime laiendid"
 
 #: application/forms/SecuritySettings.php:33
 msgid "List of allowed extensions for file uploads"
-msgstr "Seznam povolených koncovek pro upload souborů"
+msgstr "Failide üleslaadmisel lubatud faililaiendite loend"
 
 #: application/forms/SecuritySettings.php:42
 msgid "Allowed File Types"
-msgstr "Povolené typy souborů."
+msgstr "Lubatud failitüübid"
 
 #: application/forms/SecuritySettings.php:43
 msgid "List of allowed MIME types for file uploads"
-msgstr "Seznam povolených MIME typů pro upload souborů."
+msgstr "Nimekiri failide üleslaadimiseks lubatud MIME tüüpidest"
 
 #: application/forms/SecuritySettings.php:52
 msgid "ReCaptcha Public Key"
-msgstr "ReCaptcha veřejný klíč"
+msgstr "ReCaptcha avalik võti"
 
 #: application/forms/SecuritySettings.php:53
 msgid ""
 "Enter public key from recaptcha.net. Both this and the private key must be "
 "filled in to secure public forms."
-msgstr "Vložte veřejný klíč z recaptcha.net. Oba klíče musí být zadány pro zabezpečení veřených formulářů."
+msgstr "Sisesta avalik võti lehelt recaptcha.net. Avalike vormide turvamiseks tuleb sisestada nii avalik võti kui privaatvõti."
 
 #: application/forms/SecuritySettings.php:60
 msgid "ReCaptcha Private Key"
-msgstr "ReCaptcha soukromý klíč"
+msgstr "ReCaptcha privaatvõti"
 
 #: application/forms/SecuritySettings.php:61
 msgid ""
 "Enter private key from recaptcha.net. Both this and the public key must be "
 "filled in to secure public forms."
-msgstr "Vložte soukromý klíč z recaptcha.net. Oba klíče musí být zadány pro zabezpečení veřených formulářů."
+msgstr "Sisesta privaatvõti lehelt recaptcha.net. Avalike vormide turvamiseks tuleb sisestada nii avalik võti kui privaatvõti"
 
 #: application/forms/SecuritySettings.php:69
 msgid "Enable HTML Filtering"
-msgstr "Povolit HTML filtrování"
+msgstr "Võimalda HTML filtreerimine"
 
 #: application/forms/SecuritySettings.php:74
 msgid "Allowed HTML Elements"
-msgstr "HTML prvky povoleny"
+msgstr "Lubatud HTML elemendid"
 
 #: application/forms/SecuritySettings.php:75
 msgid "List of allowed HTML elements in form input"
-msgstr "Seznam povolených HTML prvků ve formě vstupu"
+msgstr "Sisendvormil lubatud HTML elementide loend"
 
 #: application/forms/SecuritySettings.php:82
 msgid "Allowed HTML Attributes"
-msgstr "Povolené HTML atributy"
+msgstr "Lubatud HTML atribuudid"
 
 #: application/forms/SecuritySettings.php:83
 msgid "List of allowed HTML attributes in form input"
-msgstr "Seznam HTML atributů povolených ve vstupním formuláři."
+msgstr "Sisendvormil lubatud HTML atribuutide loend"
 
 #: application/forms/SecuritySettings.php:94
 msgid "File Validation"
-msgstr "Validace souboru"
+msgstr "Faili õigsuse kontroll"
 
 #: application/forms/SecuritySettings.php:102
 msgid "Captcha"
@@ -2700,214 +2698,214 @@ msgstr "Captcha"
 
 #: application/forms/SecuritySettings.php:111
 msgid "HTML Filtering"
-msgstr "HTML filtrování"
+msgstr "HTML filtreerimine"
 
 #: application/forms/User.php:30
 msgid ""
 "Username must contain only letters and numbers, and be 30 characters or "
 "fewer."
-msgstr "Uživatelské jméno může obsahovat pouze písmena a čísla a nesmí přesáhnout 30 znaků."
+msgstr "Kasutajanimi võib sisaldada ainult tähti ja numbreid, ning olla kuni 30 tähemärki pikk"
 
 #: application/forms/User.php:37
 msgid "Username is required."
-msgstr "Uživatelské jméno vyžadováno."
+msgstr "Kasutajanimi on kohustuslik."
 
 #: application/forms/User.php:45
 msgid "Username must contain only letters and numbers."
-msgstr "Uživatelské jméno smí obsahovat pouze písmena a číslice."
+msgstr "Kasutajanimi võib sisaldada ainult tähti ja numbreid."
 
 #: application/forms/User.php:55
 msgid "Username must be at least %min% characters long."
-msgstr "Uživatelské jméno musí být dlouhé alespoň %mi% znaků."
+msgstr "Kasutajanimi peab olema vähemalt %min% characters tähemärgi pikkune."
 
 #: application/forms/User.php:57
 msgid "Username must be at most %max% characters long."
-msgstr "Uživatelské jméno nesmí být delší než %max% znaků."
+msgstr "Kasutajanimi ei saa olla pikem kui %max% characters tähemärki."
 
 #: application/forms/User.php:71
 msgid "This username is already in use."
-msgstr "Toto uživatelské jméno je již používáno."
+msgstr "Kasutajanimi on juba kasutusel."
 
 #: application/forms/User.php:80
 msgid "Display Name"
-msgstr "Zobrazované jméno"
+msgstr "Kuvatav nimi"
 
 #: application/forms/User.php:81
 msgid "Name as it should be displayed on the site"
-msgstr "Jméno zobrazené na stránce"
+msgstr "Nimi sel kujul, nagu see veebisaidil kuvatakse"
 
 #: application/forms/User.php:87 application/models/User.php:169
 msgid "Real Name is required."
-msgstr "Skutečné jméno je vyžadováno."
+msgstr "Tegelik nimi on kohustuslik."
 
 #: application/forms/User.php:93
 msgid "This email address is invalid."
-msgstr "Tento email není validní."
+msgstr "See e-posti aadress on ebakorrektne."
 
 #: application/forms/User.php:101
 msgid "Email is required."
-msgstr "Email vyžadován."
+msgstr "E-posti aadress on kohustuslik."
 
 #: application/forms/User.php:120
 msgid "This email address is already in use."
-msgstr "Tato emailová adresa je již používána."
+msgstr "See e-posti aadress on juba kasutusel."
 
 #: application/forms/User.php:129
 msgid ""
 "Roles describe the permissions a user has. See <a "
 "href='http://omeka.org/codex/User_Roles' target='_blank'>documentation</a> "
 "for details."
-msgstr "Role popisuje oprávnění uživatele. Viz <a href='http://omeka.org/codex/User_Roles' target='_blank'>dokumentace</a> pro podrobnosti."
+msgstr "Rollid kirjeldavad kasutaja õigusi. Täpsem info <a href='http://omeka.org/codex/User_Roles' target='_blank'>Omeka dokumentatsiooni lehel</a> "
 
 #: application/forms/User.php:137
 msgid "Active?"
-msgstr "Aktivní?"
+msgstr "Aktiivne?"
 
 #: application/forms/User.php:138
 msgid "Inactive users cannot log in to the site."
-msgstr "Neaktivní uživatelé se nemohou přihlásit."
+msgstr "Mitteaktiivsed kasutajad ei saa veebisaidile sisse logida."
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:115
 #, php-format
 msgid "The configured PHP path (%s) is invalid."
-msgstr "Nastavená cesta k PHP (%s) je neplatná."
+msgstr "Seadistatud PHP asukohaviide (%s) pole korrektne."
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:125
 #, php-format
 msgid "The configured PHP path (%s) does not point to a PHP-CLI binary."
-msgstr "Nastavená PHP cesta (%s) neukazuje na PHP-CLI knihovnu."
+msgstr "Seadistatud PHP asukohaviide (%s) ei viita PHP-CLI koodile."
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:127
 #, php-format
 msgid ""
 "The configured PHP path (%s) points to a PHP-CLI binary with an invalid "
 "version (%s)"
-msgstr "Nastavená PHP cesta (%s) ukazuje na PHP-CLI knihovnu ve špatné verzi (%s)."
+msgstr "Konfigureeritud PHP asukohaviide (%s) viitab PHP-CLI koodi ebasobivale versioonile (%s)"
 
 #: application/libraries/Omeka/Navigation.php:214
 msgid "The page must be normalized and have a valid uid."
-msgstr "Stránka musí být normalizována a musí mít platné uid."
+msgstr "Leht peab vastama normaalkujule ning sellel peab olema kehtiv UID."
 
 #: application/libraries/Omeka/Navigation.php:226
 msgid ""
 "The parent container must either be the navigation object or a descendant "
 "subpage of the navigation object."
-msgstr "Rodičovský zásobník musí být buď navigační objekt nebo potomek navigačního objektu."
+msgstr "Kõrgema taseme ümbris peab olema kas lingiriba objekt või sellest põlvnev alaleht."
 
 #: application/libraries/Omeka/Navigation/Page/Uri.php:128
 #, php-format
 msgid "Invalid URI for Omeka_Navigation_Page_Uri object: %s"
-msgstr "Neplatné URI pro Omeka_Navigation_Page_Uri objekt: %s"
+msgstr "Omeka_Navigation_Page_Uri objekti jaoks sobimatu URI: %s"
 
 #: application/libraries/Omeka/Plugin/Ini.php:63
 #, php-format
 msgid "Path to plugin.ini for \"%s\" is not correct."
-msgstr "Cesta k plugin.ini pro \"%s\" je špatná."
+msgstr "plugin.ini asukohaviide \"%s\" jaoks ei ole korrektne."
 
 #: application/libraries/Omeka/Plugin/Installer.php:79
 #, php-format
 msgid "The \"%s\" plugin must be installed and have newer files to upgrade it."
-msgstr "Zásuvný modul \"%s\" musí být nainstalován a musí mít nové soubory aby mohl být aktualizován."
+msgstr "Plugin \"%s\" peab olema installeeritud ning olemas peavad olema ka uuemad failid plugina värskendamiseks."
 
 #: application/libraries/Omeka/Plugin/Installer.php:116
 msgid "Plugin must have a valid directory name before it can be installed."
-msgstr "Zásuvný modul musí mít platné jméno adresáře, jinak nemůže být nainstalován."
+msgstr "Pluginal peab olema kehtiv katalooginimi enne selle paigaldamist."
 
 #: application/libraries/Omeka/Plugin/Loader.php:112
 #, php-format
 msgid "Plugin named '%s' has already been loaded/registered."
-msgstr "Zásuvný modul pojmenovaný '%s' je již načten/registrován."
+msgstr "Plugin nimega '%s' on juba laetud/registreeritud."
 
 #: application/libraries/Omeka/Plugin/Loader.php:153
 #, php-format
 msgid "The %s plugin could not be loaded."
-msgstr "Zasuvný modul %s nemohl být načten.."
+msgstr "Pluginat %s ei saanud laadida."
 
 #: application/libraries/Omeka/Plugin/Loader.php:174
 #, php-format
 msgid "The required plugin '%s' could not be found."
-msgstr "Vyžadovaný zásuvný modul '%s' nebyl nalezen."
+msgstr "Vajalikku pluginat %s ei õnnestunud leida."
 
 #: application/libraries/Omeka/Plugin/Loader.php:247
 #, php-format
 msgid "'%s' has no valid bootstrap file."
-msgstr "'%s' nemá správný soubor bootstrap."
+msgstr "'%s' on ilma korrektse käivitusfailta."
 
 #: application/libraries/Omeka/Plugin/Loader.php:250
 #, php-format
 msgid "'%s' has not been installed."
-msgstr "'%s' nebyl nainstalován."
+msgstr "'%s' pole paigaldatud."
 
 #: application/libraries/Omeka/Plugin/Loader.php:253
 #, php-format
 msgid "'%s' has not been activated."
-msgstr "'%s' Nebyl aktivován."
+msgstr "'%s' ei ole aktiveeritud."
 
 #: application/libraries/Omeka/Plugin/Loader.php:256
 #, php-format
 msgid "'%s' requires a newer version of Omeka."
-msgstr "'%s' vyžaduje novější verzi Omeky."
+msgstr "'%s' jaoks on vaja Omeka uuemat versiooni."
 
 #: application/libraries/Omeka/Plugin/Loader.php:261
 #, php-format
 msgid "'%s' must be upgraded to the new version before it can be loaded."
-msgstr "'%s' musí byt aktualizován na novou verzi předtím, než bude načten."
+msgstr "'%s' tuleb paigaldada uuem versioon enne kui seda laadida saab."
 
 #: application/libraries/Omeka/Plugin/Loader.php:264
 #, php-format
 msgid "'%s' cannot be loaded twice."
-msgstr "'%s' nemůže být nahraný dvakrát."
+msgstr "'%s' ei saa kaks korda laadida."
 
 #: application/libraries/Omeka/Record/AbstractRecord.php:349
 #, php-format
 msgid "'%s' is an invalid special value."
-msgstr "'%s' je neplatná speciální hodnota."
+msgstr "'%s' on sobimatu eriväärtus."
 
 #: application/libraries/Omeka/Record/Iterator.php:49
 msgid "An invalid value was detected during record iteration."
-msgstr "Naplatná hodnota nalezena při procházení záznamů."
+msgstr "Kirje töötlemisel tuvastati kehtetu väärtus."
 
 #: application/libraries/globals.php:399
 msgid "File"
-msgstr "Soubor"
+msgstr "Fail"
 
 #: application/libraries/globals.php:457
 msgid "Keyword"
-msgstr "Klíčové slovo"
+msgstr "Võtmesõna"
 
 #: application/libraries/globals.php:458
 msgid "Boolean"
-msgstr "Boolean"
+msgstr "Kahendmuutuja"
 
 #: application/libraries/globals.php:459
 msgid "Exact match"
-msgstr "Přesná shoda"
+msgstr "Täpne vaste"
 
 #: application/libraries/globals.php:1227
 #: application/libraries/globals.php:1248
 #, php-format
 msgid "Could not find file %s!"
-msgstr "Soubor %s nenalezen!"
+msgstr "Ei leidnud faili %s!"
 
 #: application/libraries/globals.php:1554
 msgid "Select Below "
-msgstr "Vyberte z následujících"
+msgstr "Vali allpool"
 
 #: application/libraries/globals.php:1596
 msgid "Omeka RSS Feed"
-msgstr "Omeka RSS kanál"
+msgstr "Omeka RSS kanal"
 
 #: application/libraries/globals.php:1597
 msgid "Omeka Atom Feed"
-msgstr "Omeka Atom kanál"
+msgstr "Omeka Atom voog"
 
 #: application/libraries/globals.php:2247
 msgid "View"
-msgstr "Zobrazit"
+msgstr "Vaata"
 
 #: application/libraries/globals.php:2309
 msgid "No Collection"
-msgstr "Žádná sbírka"
+msgstr "Kogu pole"
 
 #: application/libraries/globals.php:2424
 msgid "RSS"
@@ -2915,268 +2913,268 @@ msgstr "RSS"
 
 #: application/libraries/globals.php:2441
 msgid "Next Item &rarr;"
-msgstr "Další položka &rarr;"
+msgstr "Järgmine ühik &rarr;"
 
 #: application/libraries/globals.php:2461
 msgid "&larr; Previous Item"
-msgstr "&larr; Předchozí položka"
+msgstr "&larr; Eelmine ühik"
 
 #: application/libraries/globals.php:2638
 msgid "Browse All"
-msgstr "Procházet vše"
+msgstr "Sirvi kõiki"
 
 #: application/libraries/globals.php:2643
 msgid "Browse by Tag"
-msgstr "Procházení podle štítků"
+msgstr "Sirvi sildi alusel"
 
 #: application/libraries/globals.php:2905
 msgid "No tags are available."
-msgstr "Žádné štítky."
+msgstr "Silte ei ole."
 
 #: application/models/Builder/Item.php:263
 msgid "Must specify a file transfer type when attaching files to an item!"
-msgstr "Je třeba zadat typ přenosu souboru při připojování souborů k položce!"
+msgstr "Enne faili sidumist ühikuga tuleb täpsustada faili edastustüüp."
 
 #: application/models/Collection.php:117
 msgid "Cannot associate the collection with an unsaved user."
-msgstr "Nelze přiřadit sbírku s neuloženým uživatelem."
+msgstr "Kogu ei saa siduda salvestamata kasutajaga."
 
 #: application/models/Element.php:175
 msgid "The element name must not be empty."
-msgstr "Jméno prvky nesmí být prázdné."
+msgstr "Tunnuse nimi ei või tühjaks jääda."
 
 #: application/models/Element.php:179
 msgid "Invalid element set."
-msgstr "Neplatný soubor prvků."
+msgstr "Ebakorrektne tunnuste loetelu."
 
 #: application/models/Element.php:185
 #, php-format
 msgid "An element named \"%s\" already exists for the \"%s\" element set."
-msgstr "Prvek %s pro sadu prvků %s již existuje."
+msgstr "Tunnus nimega \"%s\" on juba olemas \"%s\" tunnuste loetelus."
 
 #: application/models/Element.php:216
 #, php-format
 msgid "Cannot set element set ID: set named \"%s\" does not exist."
-msgstr "Nemohu nastavit ID sady prvků: sada pojmenovaná \"%s\" neexistuje."
+msgstr "Tunnuste loendile ei saa seada IDd: loendit \"%s\" pole olemas."
 
 #: application/models/ElementSet.php:146
 msgid "Name of element set must be unique."
-msgstr "Název prvku musí být jedinečný."
+msgstr "Tunnuste loetelu nimi peab olema unikaalne."
 
 #: application/models/ElementSet.php:150
 msgid "Name of element set must not be empty."
-msgstr "Název sady prvků nesmí být prázdný."
+msgstr "Tunnuste loetelu nimi ei või tühjaks jääda."
 
 #: application/models/ElementText.php:59
 msgid "Invalid record ID."
-msgstr "Neplatné ID záznamu."
+msgstr "Vale kirje ID."
 
 #: application/models/ElementText.php:62
 msgid "All element texts must have a record type."
-msgstr "Všechny prvky musí mít typ záznamu."
+msgstr "Kõikidel tunnusetekstidel peab olema kirjetüüp."
 
 #: application/models/ElementText.php:65
 msgid "Invalid element ID."
-msgstr "Neplatné ID prvku."
+msgstr "Vale tunnuse ID."
 
 #: application/models/File.php:241
 msgid "Cannot get the local path for a stored file."
-msgstr "Nelze uložit lokální cestu pro ukládaný soubor."
+msgstr "Ei leia talletatud faili kohalikku asukohaviidet."
 
 #: application/models/File.php:458
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
-msgstr "\"%s\" není platná odvozenina."
+msgstr "\"%s\" ei ole sobiv failituletis"
 
 #: application/models/Item.php:317
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
-msgstr "Soubory nemohou být připojeny k položce která není trvale zaznamenána v databázi!"
+msgstr "Faile ei saa siduda ühikuga, mis pole veel püsivalt andmebaasis!"
 
 #. / Chicago-style item citation: two authors
 #: application/models/Item.php:444
 #, php-format
 msgid "%1$s and %2$s"
-msgstr "%1$s a %2$s"
+msgstr "%1$s ja %2$s"
 
 #. / Chicago-style item citation: three authors
 #: application/models/Item.php:448
 #, php-format
 msgid "%1$s, %2$s, and %3$s"
-msgstr "%1$s, %2$s, a %3$s"
+msgstr "%1$s, %2$s ja %3$s"
 
 #. / Chicago-style item citation: more than three authors
 #: application/models/Item.php:452
 #, php-format
 msgid "%s et al."
-msgstr "%s a další"
+msgstr "%s jt."
 
 #. / Chicago-style item citation: access date and URL
 #: application/models/Item.php:470
 #, php-format
 msgid "accessed %1$s, %2$s."
-msgstr "navštíveno %1$s, %2$s."
+msgstr "vaadatud %1$s, %2$s."
 
 #: application/models/Item.php:487
 msgid "Cannot add an existing file to an item!"
-msgstr "Nelze přidat existující soubor k položce!"
+msgstr "Ühikule ei saa lisada olemasolevat faili!"
 
 #: application/models/Item.php:491
 msgid "File must be valid before it can be associated with an item!"
-msgstr "Soubor musí být nejprve platný a pak ho lze přidat k položce!"
+msgstr "Failitüüp peab olema sobiv, et seda saaks ühikuga siduda!"
 
 #: application/models/Item.php:515
 msgid "Invalid item type."
-msgstr "Neplatný typ položky."
+msgstr "Vale ühikuliik."
 
 #: application/models/Item.php:518
 msgid "Invalid collection."
-msgstr "Neplatná kolekce."
+msgstr "Ebakorrektne kogu."
 
 #: application/models/ItemType.php:102
 #, php-format
 msgid "The item type name must have between %1$s and %2$s characters."
-msgstr "Jméno typu položky musí obsahovat  %1$s až %2$s znaků."
+msgstr "Ühikuliigi nimi peab olema %1$s kuni %2$s tähemärki pikk."
 
 #: application/models/ItemType.php:106
 msgid "The item type name must be unique."
-msgstr "Jméno typu položky musí být jedinečné."
+msgstr "Ühikuliigi nimi peab olema unikaalne."
 
 #: application/models/ItemType.php:179
 msgid "There are too many values in the element ordering array."
-msgstr "Příliš mnoho hodnot pro řazení prvků pole."
+msgstr "Tunnuste järjestamise massiivis on liiga palju väärtusi."
 
 #: application/models/ItemType.php:181
 msgid "There are too few values in the element ordering array."
-msgstr "Příliš málo hodnot pro řazení prvků pole."
+msgstr "Tunnuste järjestamise massivis on liiga vähe väärtusi."
 
 #: application/models/ItemType.php:218
 msgid ""
 "Invalid element data. To add elements, you must either pass an element "
 "objects or an array of element metadata."
-msgstr "Neplatná data prvku. Pro přidání prvku musíte buď poslat objekt prvku, nebo pole metadat prvku."
+msgstr "Sobimatud tunnuse andmed. Tunnuse lisamiseks tuleb kasutada kas tunnuse objekte või tunnuse metaandmemassiivi."
 
 #: application/models/ItemType.php:282
 msgid ""
 "Cannot remove elements from an item type that is not persistent in the "
 "database!"
-msgstr "Nelze odstranit prvek z typu položky který není trvale zaznamenán v databázi!"
+msgstr "Ei saa eemaldada tunnuseid ühikuliigist, mida pole andmebaasis!"
 
 #: application/models/ItemType.php:291
 #, php-format
 msgid "Cannot find element with ID %s!"
-msgstr "Nemohu nalézt položku s ID %s!"
+msgstr "Ei leia tunnust, mille ID on %s!"
 
 #: application/models/ItemType.php:332
 #, php-format
 msgid "Item type does not contain an element with the ID %s!"
-msgstr "Typ položky neobsahuje prvek s ID %s!"
+msgstr "Ühikuliik ei sisalda tunnust, mille ID on %s!"
 
 #: application/models/ItemType.php:353
 msgid ""
 "Invalid parameter. The hasElement function requires either an element object"
 " or an element id to determine if an item type has an element."
-msgstr "Neplatný parametr. Funkce hasElement vyžaduje buď objekt prvku nebo id prvku pro určení zda mát typ položky tento prvek."
+msgstr "Vale parameeter. Funktsioon omab_tunnust nõuab, et tunnuseobjekt või tunnuse id määraks ära selle, kas ühikuliigil on tunnus."
 
 #: application/models/Mixin/ElementText.php:278
 #, php-format
 msgid "There is no element \"%1$s\", \"%2$s\"!"
-msgstr "Neexistující prvek \"%1$s\", \"%2$s\"!"
+msgstr "Pole tunnust \"%1$s\", \"%2$s\"!"
 
 #: application/models/Mixin/ElementText.php:297
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
-msgstr "Nelze najít prvek s ID  '%s'!"
+msgstr "Ei leia tunnust, mille ID-ks oleks '%s'!"
 
 #: application/models/Mixin/ElementText.php:416
 msgid "Element texts are not formatted correctly!"
-msgstr "Text není správně naformátován!"
+msgstr "Tunnusetekstide vorming pole korrektne!"
 
 #: application/models/Mixin/ElementText.php:562
 #, php-format
 msgid "The \"%s\" field has at least one invalid value!"
-msgstr "Pole \"%s\" má alespoň jednu neplatnou hodnotu!"
+msgstr "Väljal '%s' on vähemalt üks sobimatu väärtus!"
 
 #: application/models/Mixin/ElementText.php:632
 msgid "Cannot save element text for records that are not yet persistent!"
-msgstr "Nemohu uložit text prvků záznamů které ještě nejsou trvalé."
+msgstr "Ei saa salvestada tunnuseteksti kirjetele, mis pole veel andmebaasis!"
 
 #: application/models/Option.php:50 application/models/Option.php:54
 msgid "Each option must have a unique name."
-msgstr "Každá volba musí mýt jedinečné jméno."
+msgstr "Igal valikul peab olema unikaalne nimi."
 
 #: application/models/Plugin.php:133
 msgid "Names of plugins must not be blank"
-msgstr "Jména zásuvných modulů nesmí být prázdná"
+msgstr "Pluginate nimed ei saa tühjaks jääda"
 
 #: application/models/Table/Collection.php:76
 #, php-format
 msgid "[Untitled] #%s"
-msgstr "[Bez názvu] #%s"
+msgstr "[Pealkirjata]  #%s"
 
 #: application/models/Table/Item.php:161
 msgid "Invalid search type given!"
-msgstr "Neplatný typ pro vyhledávání!"
+msgstr "Sisestatud on sobimatu otsingutüüp!"
 
 #: application/models/Tag.php:56
 msgid "Tags must be given a name."
-msgstr "Štítky musí být pojmenovány."
+msgstr "Siltidele peab olema antud nimi."
 
 #: application/models/Tag.php:60
 msgid "That name is already taken for this tag."
-msgstr "Toto jméno už je zabrané jiným štítkem."
+msgstr "Selle sildi nimi on selle sildi jaoks juba kasutusel."
 
 #: application/models/User.php:110
 msgid "User may not change permissions to super-user"
-msgstr "Uživatel nesmí měnit práva superuživatele."
+msgstr "Kasutaja ei saa anda ülemhaldaja õigusi."
 
 #: application/models/User.php:113
 msgid "User may not change roles."
-msgstr "Uživatel nesmí změnit svou roli."
+msgstr "Kasutaja ei saa rolle muuta."
 
 #: application/models/User.php:182 application/models/User.php:230
 msgid "The user must be assigned a role."
-msgstr "Uživateli musí být přiřazena role."
+msgstr "Kasutajale peab olema omistatud roll."
 
 #: application/models/User.php:187
 #, php-format
 msgid "The username \"%1$s\" must be between %2$s and %3$s characters."
-msgstr "Uživatelské jméno  \"%1$s\" musí obsahovat mezi %2$s a %3$s znaky."
+msgstr "Kasutajanimi \"%1$s\" peab olema %2$s kuni %3$s tähemärki pikk."
 
 #: application/models/User.php:189
 msgid "The username must be alphanumeric."
-msgstr "Uživatelské jméno musí být alfanumerické."
+msgstr "Kasutajanimi võib sisaldada tähti ja numbreid."
 
 #: application/models/User.php:191
 #, php-format
 msgid "'%s' is already in use. Please choose another username."
-msgstr "'%s' již používáno. Prosím zvolte jiné uživatelské jméno."
+msgstr "'%s' on juba kasutusel. Palun vali teine kasutajanimi."
 
 #: application/models/UsersActivations.php:54
 msgid "Cannot create a user activation for non-existent user."
-msgstr "Nemohu vytvořit aktivaci uživatele pro neexistujícího uživatele."
+msgstr "Ei saa aktiveerida olematut kasutajat."
 
 #: application/tests/suite/Omeka/Db/Migration/_files/migrations/20080717013526_foobar.php:18
 msgid "This migration should have been run previously (should not run again)."
-msgstr "Tato migrace již proběhla (a neměla by být spuštěna znovu)."
+msgstr "See andmete ülekanne peaks olema juba varem sooritatud (seda ei peaks uuesti käivitama)."
 
 #: application/tests/suite/Omeka/Db/Migration/_files/migrations/50000101120000_notRunYet.php:19
 msgid "This migration should not be run."
-msgstr "Tato migrace by neměla být spuštěna."
+msgstr "Seda andmete ülekandmist ei peaks käivitama."
 
 #: application/tests/suite/Omeka/NavigationTest.php:752
 #: application/tests/suite/Omeka/NavigationTest.php:817
 #: application/tests/suite/Omeka/NavigationTest.php:839
 #: application/tests/suite/Omeka/NavigationTest.php:952
 msgid "Edit Items"
-msgstr "Upravit položky"
+msgstr "Redigeeri ühikuid"
 
 #: application/tests/suite/Omeka/NavigationTest.php:758
 #: application/tests/suite/Omeka/NavigationTest.php:818
 #: application/tests/suite/Omeka/NavigationTest.php:856
 #: application/tests/suite/Omeka/NavigationTest.php:953
 msgid "Edit Collections"
-msgstr "Upravit kolekce"
+msgstr "Redigeeri kogusid"
 
 #: application/tests/suite/Omeka/NavigationTest.php:764
 #: application/tests/suite/Omeka/NavigationTest.php:819
@@ -3196,7 +3194,7 @@ msgstr "CHNM"
 #: application/tests/suite/Omeka/NavigationTest.php:1128
 #: application/tests/suite/Omeka/NavigationTest.php:1136
 msgid "Page "
-msgstr "Strana"
+msgstr "Leht"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1009
 #: application/tests/suite/Omeka/NavigationTest.php:1013
@@ -3205,7 +3203,7 @@ msgstr "Strana"
 #: application/tests/suite/Omeka/NavigationTest.php:1156
 #: application/tests/suite/Omeka/NavigationTest.php:1256
 msgid "Page 1"
-msgstr "Strana 1"
+msgstr "1. leht"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1016
 #: application/tests/suite/Omeka/NavigationTest.php:1022
@@ -3216,7 +3214,7 @@ msgstr "Strana 1"
 #: application/tests/suite/Omeka/NavigationTest.php:1200
 #: application/tests/suite/Omeka/NavigationTest.php:1232
 msgid "Page 2"
-msgstr "Strana 2"
+msgstr "2. leht"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1025
 #: application/tests/suite/Omeka/NavigationTest.php:1029
@@ -3227,7 +3225,7 @@ msgstr "Strana 2"
 #: application/tests/suite/Omeka/NavigationTest.php:1193
 #: application/tests/suite/Omeka/NavigationTest.php:1255
 msgid "Page 3"
-msgstr "Strana 3"
+msgstr "3. leht"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1032
 #: application/tests/suite/Omeka/NavigationTest.php:1041
@@ -3240,7 +3238,7 @@ msgstr "Strana 3"
 #: application/tests/suite/Omeka/NavigationTest.php:1240
 #: application/tests/suite/Omeka/NavigationTest.php:1250
 msgid "Page 4"
-msgstr "Strana 4"
+msgstr "4. leht"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1044
 #: application/tests/suite/Omeka/NavigationTest.php:1048
@@ -3251,77 +3249,77 @@ msgstr "Strana 4"
 #: application/tests/suite/Omeka/NavigationTest.php:1223
 #: application/tests/suite/Omeka/NavigationTest.php:1241
 msgid "Page 5"
-msgstr "Strana 5"
+msgstr "5. leht"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1051
 #: application/tests/suite/Omeka/NavigationTest.php:1055
 #: application/tests/suite/Omeka/NavigationTest.php:1215
 msgid "Page 6"
-msgstr "Strana 6"
+msgstr "6. leht"
 
 #: application/views/helpers/AllElementTexts.php:101
 msgid "[no text]"
-msgstr "[žádný text]"
+msgstr "[teksti pole]"
 
 #: application/views/helpers/ElementForm.php:65
 msgid "Add Input"
-msgstr "Přidat vstup"
+msgstr "Lisa sisend"
 
 #: application/views/helpers/ElementInput.php:131
 msgid "Use HTML"
-msgstr "Použít HTML"
+msgstr "Kasuta HTML-i"
 
 #: application/views/helpers/GetCurrentRecord.php:27
 #, php-format
 msgid "A current %s variable has not been set to this view."
-msgstr "Proměnná %s  nebyla nastavena v tomto zobrazení."
+msgstr "Käesolev %s muutuja ei ole selle vaate jaoks seadistatud."
 
 #: application/views/helpers/GetLoopRecords.php:30
 #, php-format
 msgid "A loop %s variable has not been set to this view."
-msgstr "Cyklická proměnná %s  nebyla nastavena v tomto zobrazení."
+msgstr "Korduv %s muutuja ei ole selle vaate jaoks seadistatud."
 
 #: application/views/helpers/Loop.php:27
 msgid "An array of records is not available for the loop."
-msgstr "Pole záznamů není použitelné pro cyklus."
+msgstr "Kirjemassiiv ei ole korduvtegevusteks saadaval."
 
 #: application/views/helpers/RecordUrl.php:34
 msgid "Invalid record passed while getting record URL."
-msgstr "Při získávání URL záznamu byl zadán neplatný záznam."
+msgstr "Kirje URLi saamiseks esitati ebakorrektne kirje."
 
 #: application/views/helpers/RecordUrl.php:44
 msgid "Invalid action passed while getting record URL."
-msgstr "Při získávání URL záznamu byla zadána neplatná akce."
+msgstr "Kirje URLi saamiseks esitati ebakorrektne tegevus."
 
 #: application/views/helpers/RecordUrl.php:75
 msgid "Invalid return value while getting record URL."
-msgstr "Neplatná návratová hodnota při získávání URL záznamu."
+msgstr "Kirje URLi saamiseks esitati ebakorrektne tulemi väärtus."
 
 #: application/views/scripts/collections/browse.php:24
 msgid "Contributors(s)"
-msgstr "Přispěvatel(é)"
+msgstr "Kaastöölised"
 
 #: application/views/scripts/collections/browse.php:31
 #, php-format
 msgid "View the items in %s"
-msgstr "Zobrazit položku v %s."
+msgstr "Vaata ühikuid %s-s."
 
 #: application/views/scripts/collections/random-featured.php:11
 msgid "No featured collections are available."
-msgstr "Žádná doporučená sbírka není dostupná."
+msgstr "Esiletõstetud kogusid ei ole."
 
 #: application/views/scripts/collections/show.php:15
 #, php-format
 msgid "Items in the %s Collection"
-msgstr "Položky ve sbírce %s"
+msgstr "Ühikud kogus %s"
 
 #: application/views/scripts/collections/show.php:40
 msgid "There are currently no items within this collection."
-msgstr "Žádné položky ve sbírce"
+msgstr "Selles kogus pole praegu ühikuid."
 
 #: application/views/scripts/common/footer.php:14
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
-msgstr "Hrdě postaveno na <a href=\"http://omeka.org\">Omeka</a>."
+msgstr "Selle saidi loomiseks kasutasime suurima heameelega <a href=\"http://omeka.org\">Omeka</a> tarkvara."
 
 #: application/views/scripts/common/pagination_control.php:11
 msgid "&lt;"
@@ -3330,7 +3328,7 @@ msgstr "&lt;"
 #: application/views/scripts/common/pagination_control.php:34
 #, php-format
 msgid "%s of %s"
-msgstr "%s z %s"
+msgstr "%s %s-st"
 
 #: application/views/scripts/common/pagination_control.php:42
 msgid "&gt;"
@@ -3338,39 +3336,39 @@ msgstr "&gt;"
 
 #: application/views/scripts/error/403.php:2
 msgid "403 Page Forbidden"
-msgstr "403 Stránka zakázána"
+msgstr "403 Leht on keelatud"
 
 #: application/views/scripts/error/403.php:8
 msgid "You do not have permission to access this page."
-msgstr "Nemáte oprávnění k přístupu na tuto stránku."
+msgstr "Sul pole õigusi selle lehe vaatamiseks."
 
 #: application/views/scripts/error/404.dc.php:1
 #: application/views/scripts/error/404.php:2
 #: application/views/scripts/error/404.xml.php:1
 msgid "404 Page Not Found"
-msgstr "404 Stránka nenalezena"
+msgstr "404 Lehte ei leitud"
 
 #: application/views/scripts/error/404.php:6
 #, php-format
 msgid "%s is not a valid URL."
-msgstr "%s není platná URL."
+msgstr "%s ei ole kehtiv URL."
 
 #: application/views/scripts/error/404.rss2.php:1
 msgid "Rss2.0 Feed Not Found!"
-msgstr "Rss2.0 kanál nenalezen"
+msgstr "Rss2.0 kanalit ei leitud!"
 
 #: application/views/scripts/error/405.php:2
 msgid "405 Method Not Allowed"
-msgstr "405 Metoda není povolena"
+msgstr "405 Meetod pole lubatud"
 
 #: application/views/scripts/error/405.php:6
 #, php-format
 msgid "The method used to access this URL (%s) is not valid."
-msgstr "Metoda použitá pro přístup k této URL (%s) je neplatná."
+msgstr "Sellele URL-ile (%s) ligipääsemiseks kasutati vale meetodit."
 
 #: application/views/scripts/error/index.php:4
 msgid "Omeka has encountered an error"
-msgstr "V Omece došlo k chybě"
+msgstr "Omekas on tekkinud viga"
 
 #: application/views/scripts/error/index.php:33
 msgid ""
@@ -3378,135 +3376,135 @@ msgid ""
 "Omeka Codex page on <a "
 "href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error "
 "messages</a>."
-msgstr "Pro detailní informace o této chybě - Omeka Codex page on <a href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error messages</a>."
+msgstr "Et selle vea kohta rohkem infot leida, vaata Omeka dokumentatsioonist lehte <a href=\"http://omeka.org/codex/Retrieving_error_messages\">veateadete kuvamise</a> kohta."
 
 #: application/views/scripts/index.php:14
 msgid "Featured Item"
-msgstr "Doporučená položka."
+msgstr "Esiletõstetud ühik"
 
 #: application/views/scripts/index.php:22
 msgid "Featured Collection"
-msgstr "Doporučená sbírka"
+msgstr "Esiletõstetud kogu"
 
 #: application/views/scripts/index.php:67
 msgid "No recent items available."
-msgstr "Žádné nové položky nejsou k dispozici."
+msgstr "Pole hiljuti lisatud ühikuid."
 
 #: application/views/scripts/index.php:71
 msgid "View All Items"
-msgstr "Zobrazit všechny položky"
+msgstr "Vaata kõiki ühikuid"
 
 #: application/views/scripts/items/browse.php:24
 msgid "Sort by: "
-msgstr "Řadit dle:"
+msgstr "Sorteerimisalus:"
 
 #: application/views/scripts/items/random-featured.php:20
 msgid "No featured items are available."
-msgstr "Žádná doporučená položka není dostupná."
+msgstr "Esiletõstetud ühikuid ei ole."
 
 #: application/views/scripts/items/show.php:10
 msgid "Files"
-msgstr "Soubory"
+msgstr "Failid"
 
 #: application/views/scripts/items/show.php:33
 msgid "Citation"
-msgstr "Citace"
+msgstr "Viide"
 
 #: application/views/scripts/search/index.php:2
 msgid "Search Omeka "
-msgstr "Prohledat Omeku"
+msgstr "Otsi Omekast"
 
 #: application/views/scripts/search/index.php:12
 msgid "Record Type"
-msgstr "Typ záznamu"
+msgstr "Kirjetüüp"
 
 #: application/views/scripts/search/index.php:29
 msgid "Your query returned no results."
-msgstr "Váš dotaz navrátil žádné výsledky."
+msgstr "Su päring ei andnud tulemusi."
 
 #: application/views/scripts/search/search-filters.php:3
 msgid "Query:"
-msgstr "Dotaz:"
+msgstr "Päring:"
 
 #: application/views/scripts/search/search-filters.php:4
 msgid "Query type:"
-msgstr "Typ dotazu:"
+msgstr "Päringutüüp:"
 
 #: application/views/scripts/search/search-filters.php:5
 msgid "Record types:"
-msgstr "Typy záznamů:"
+msgstr "Kirjetüübid:"
 
 #: application/views/scripts/search/search-form.php:6
 msgid "Search using this query type:"
-msgstr "Hledat s použitím dotazu:"
+msgstr "Otsi, kasutades seda päringutüüpi:"
 
 #: application/views/scripts/search/search-form.php:11
 msgid "Search only these record types:"
-msgstr "Hledat pouze tento typ záznamů:"
+msgstr "Otsi ainult neid kirjetüüpe:"
 
 #: application/views/scripts/search/search-form.php:17
 msgid "Go to search settings to select record types to use."
-msgstr "Použité typy zásnamů lze vybrat v nastavení vyhledávání."
+msgstr "Kasutatavate kirjetüüpide valimiseks mine otsingusätetesse."
 
 #: application/views/scripts/search/search-form.php:19
 msgid "Advanced Search (Items only)"
-msgstr "Pokročilé vyhledávání (pouze položky)"
+msgstr "Täpsem otsing (ainult ühikud)"
 
 #: application/views/scripts/users/login.php:9
 msgid "Go to Home Page"
-msgstr "Jít na domovskou stránku"
+msgstr "Mine kodulehele"
 
 #: application/views/scripts/users/login.php:9
 msgid "Lost your password?"
-msgstr "Zapoměl jste heslo?"
+msgstr "Unustasid salasõna?"
 
 #: install/controllers/IndexController.php:25
 msgid "Could not load database resource!"
-msgstr "Nelze načíst databázi!"
+msgstr "Ei saanud laadida andmebaasi ressurssi!"
 
 #: install/views/scripts/index/errors.phtml:1
 msgid "Installation Error"
-msgstr "Chyba instalace"
+msgstr "Paigaldamisviga"
 
 #: install/views/scripts/index/errors.phtml:2
 msgid ""
 "Before installation can continue, the following errors must be resolved:"
-msgstr "Před pokračováním instalace je nutné vyřešit následující chyby:"
+msgstr "Enne paigaldamise jätkamist tuleb lahendada järgnevad vead:"
 
 #: install/views/scripts/index/fatal-error.phtml:1
 msgid "Fatal Error"
-msgstr "Fatální chyba"
+msgstr "Saatuslik viga"
 
 #: install/views/scripts/index/index.phtml:2
 msgid "Installation Warning"
-msgstr "Varování instalace"
+msgstr "Paigaldushoiatus"
 
 #: install/views/scripts/index/index.phtml:4
 msgid ""
 "The following issues will not affect installation, but they may negatively "
 "affect the behavior of Omeka:"
-msgstr "Následující problémy nijak neovlivní instalaci, ale můžou mýt negativní dopad na chování Omeky:"
+msgstr "Järgnevad küsimused ei mõjuta paigaldust, aga need võivad häirida Omeka toimimist:"
 
 #: install/views/scripts/index/index.phtml:14
 msgid "Configure Your Site"
-msgstr "Konfigurace vašeho depositáře"
+msgstr "Seadista oma veebisait"
 
 #: install/views/scripts/index/index.phtml:16
 msgid "Form Validation Errors"
-msgstr "Chyba validace formuláře"
+msgstr "Vormi valideerimise vead"
 
 #: install/views/scripts/index/installed.phtml:1
 msgid "Success!"
-msgstr "Úspěch!"
+msgstr "Kõik läks edukalt!"
 
 #: install/views/scripts/index/installed.phtml:2
 msgid "Omeka is installed."
-msgstr "Omeka je nainstalována."
+msgstr "Omeka on paigaldatud."
 
 #: install/views/scripts/index/installed.phtml:3
 msgid "Public Site"
-msgstr "Veřejný depositář"
+msgstr "Avalik veebisait"
 
 #: install/views/scripts/index/installed.phtml:3
 msgid "Admin Dashboard"
-msgstr "Administrační panel"
+msgstr "Haldaja töölaud"

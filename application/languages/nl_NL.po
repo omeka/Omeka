@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-08-27 14:53+0000\n"
-"Last-Translator: patrickmj <patrickmjchnm@gmail.com>\n"
+"PO-Revision-Date: 2013-10-02 10:06+0000\n"
+"Last-Translator: Iwe E.C. Muiser <e.c.muiser@utwente.nl>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/projects/p/omeka/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -137,7 +137,7 @@ msgstr "Taal"
 
 #. Dublin Core: Language element description
 msgid "A language of the resource"
-msgstr ""
+msgstr "De taal van de bron"
 
 #. Dublin Core: Relation element name
 msgid "Relation"
@@ -574,7 +574,7 @@ msgstr "Thema's"
 
 #: admin/themes/default/common/appearance-nav.php:11
 msgid "Navigation"
-msgstr ""
+msgstr "Navigatie"
 
 #: admin/themes/default/common/appearance-nav.php:15
 #: admin/themes/default/common/global-nav.php:23
@@ -679,11 +679,11 @@ msgstr "Afmelden"
 
 #: admin/themes/default/common/settings-nav.php:6
 msgid "General"
-msgstr ""
+msgstr "Algemeen"
 
 #: admin/themes/default/common/settings-nav.php:10
 msgid "Security"
-msgstr ""
+msgstr "Beveiliging"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: application/views/helpers/SearchForm.php:34
@@ -697,11 +697,11 @@ msgstr "Elementensets"
 
 #: admin/themes/default/common/settings-nav.php:26
 msgid "Item Type Elements"
-msgstr ""
+msgstr "Item Type Elementen"
 
 #: admin/themes/default/common/settings-nav.php:32
 msgid "API"
-msgstr ""
+msgstr "API"
 
 #: admin/themes/default/element-sets/browse.php:16
 #: admin/themes/default/users/browse.php:17
@@ -711,7 +711,7 @@ msgstr "Naam"
 
 #: admin/themes/default/element-sets/edit.php:5
 msgid "Edit Element Set"
-msgstr ""
+msgstr "Element Set Bewerken"
 
 #: admin/themes/default/element-sets/edit.php:17
 msgid ""
@@ -721,7 +721,7 @@ msgstr ""
 
 #: admin/themes/default/element-sets/edit.php:29
 msgid "Comment"
-msgstr ""
+msgstr "Opmerking"
 
 #: admin/themes/default/error/403.php:2
 msgid "403: Forbidden"
@@ -763,7 +763,7 @@ msgstr "Recente items"
 
 #: admin/themes/default/error/404.php:29 admin/themes/default/index.php:59
 msgid "Add a new item"
-msgstr ""
+msgstr "Een nieuw Item toevoegen"
 
 #: admin/themes/default/error/404.php:36 admin/themes/default/index.php:64
 msgid "Recent Collections"
@@ -798,27 +798,27 @@ msgstr "Bestand #%s"
 #: admin/themes/default/files/show.php:37
 #: application/libraries/globals.php:398
 msgid "Item"
-msgstr ""
+msgstr "Item"
 
 #: admin/themes/default/files/show.php:42
 msgid "Direct Links"
-msgstr ""
+msgstr "Directe Links"
 
 #: admin/themes/default/files/show.php:44
 msgid "Original"
-msgstr ""
+msgstr "Origineel"
 
 #: admin/themes/default/files/show.php:46
 msgid "Fullsize"
-msgstr ""
+msgstr "Volledige grootte"
 
 #: admin/themes/default/files/show.php:47
 msgid "Thumbnail"
-msgstr ""
+msgstr "Miniatuurweergave"
 
 #: admin/themes/default/files/show.php:48
 msgid "Square Thumbnail"
-msgstr ""
+msgstr "Vierkante Miniatuurweergave"
 
 #: admin/themes/default/files/show.php:54
 #: application/views/scripts/files/show.php:22
@@ -827,7 +827,7 @@ msgstr "Formaat Metadata"
 
 #: admin/themes/default/files/show.php:56
 msgid "Filename"
-msgstr ""
+msgstr "Bestandsnaam"
 
 #: admin/themes/default/files/show.php:58
 #: application/views/scripts/files/show.php:24
@@ -843,7 +843,7 @@ msgstr "Bestandsgrootte"
 #: application/views/scripts/files/show.php:30
 #, php-format
 msgid "%s bytes"
-msgstr ""
+msgstr "%s bytes"
 
 #: admin/themes/default/files/show.php:66
 msgid "File History"
@@ -866,7 +866,7 @@ msgstr "Type metadata"
 #: admin/themes/default/files/show.php:80
 #: application/views/scripts/files/show.php:42
 msgid "Mime Type"
-msgstr ""
+msgstr "Mime-type"
 
 #: admin/themes/default/files/show.php:82
 #: application/views/scripts/files/show.php:46
@@ -875,7 +875,7 @@ msgstr "File Type / OS"
 
 #: admin/themes/default/files/show.php:89
 msgid "Embedded Metadata"
-msgstr ""
+msgstr "Geïntegreerde Metadata"
 
 #: admin/themes/default/files/show.php:95
 #: admin/themes/default/items/browse.php:133
@@ -887,36 +887,36 @@ msgstr "Uitvoerformaten"
 
 #: admin/themes/default/index.php:6
 msgid "items"
-msgstr ""
+msgstr "Items"
 
 #: admin/themes/default/index.php:7
 msgid "collections"
-msgstr ""
+msgstr "collecties"
 
 #: admin/themes/default/index.php:8
 msgid "tags"
-msgstr ""
+msgstr "tags"
 
 #: admin/themes/default/index.php:11
 msgid "plugins"
-msgstr ""
+msgstr "plugins"
 
 #: admin/themes/default/index.php:14
 msgid "users"
-msgstr ""
+msgstr "gebruikers"
 
 #: admin/themes/default/index.php:18
 msgid "theme"
-msgstr ""
+msgstr "thema"
 
 #: admin/themes/default/index.php:29
 msgid "A new version of Omeka is available for download."
-msgstr ""
+msgstr "Een nieuwe versie van Omeka is beschikbaar om te downloaden."
 
 #: admin/themes/default/index.php:30
 #, php-format
 msgid "Upgrade to %s"
-msgstr ""
+msgstr "Upgrade naar %s"
 
 #: admin/themes/default/item-types/add-existing-element.php:22
 #: admin/themes/default/item-types/add-new-element.php:15
@@ -932,7 +932,7 @@ msgstr "Elementnaam"
 
 #: admin/themes/default/item-types/add-new-element.php:22
 msgid "Element Description"
-msgstr ""
+msgstr "Element Beschrijving"
 
 #: admin/themes/default/item-types/add.php:2
 #: application/forms/ItemTypes.php:161
@@ -969,7 +969,7 @@ msgstr "Itemtype informatie"
 #: admin/themes/default/users/add.php:6 admin/themes/default/users/edit.php:14
 #: install/views/scripts/index/index.phtml:14
 msgid "required field"
-msgstr ""
+msgstr "benodigd veld"
 
 #: admin/themes/default/item-types/form.php:25
 #: admin/themes/default/item-types/show.php:16
@@ -980,7 +980,7 @@ msgstr "Elementen"
 #: admin/themes/default/items/tag-form.php:22
 #: admin/themes/default/settings/edit-item-type-elements.php:22
 msgid "Undo"
-msgstr ""
+msgstr "Ongedaan maken"
 
 #: admin/themes/default/item-types/form.php:80
 #: admin/themes/default/item-types/form.php:87
@@ -1002,7 +1002,7 @@ msgstr "Itemtype #%s"
 
 #: admin/themes/default/item-types/show.php:25
 msgid "There are no elements."
-msgstr ""
+msgstr "Er zijn geen elementen."
 
 #: admin/themes/default/item-types/show.php:39
 msgid "There are no recently added items."
@@ -1031,16 +1031,16 @@ msgstr "Collectie"
 
 #: admin/themes/default/items/batch-delete.php:2
 msgid "Batch Delete Items"
-msgstr ""
+msgstr "Batch verwijder Items"
 
 #: admin/themes/default/items/batch-delete.php:38
 msgid ""
 "Some items were excluded because you do not have permission to delete them."
-msgstr ""
+msgstr "Sommige items werden uitgesloten omdat u geen toestemming heeft om ze te verwijderen."
 
 #: admin/themes/default/items/batch-delete.php:41
 msgid "Checked items will be deleted."
-msgstr ""
+msgstr "Aangevinkte items worden verwijderd."
 
 #: admin/themes/default/items/batch-delete.php:50
 #: admin/themes/default/items/batch-edit.php:116
@@ -1155,7 +1155,7 @@ msgstr "Blader door items"
 #: application/libraries/globals.php:2648
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
-msgstr ""
+msgstr "Items zoeken"
 
 #: admin/themes/default/items/browse.php:37
 msgid "Select"
@@ -1179,11 +1179,11 @@ msgstr "Details verbergen"
 
 #: admin/themes/default/items/browse.php:148
 msgid "You have no items."
-msgstr ""
+msgstr "U heeft geen items."
 
 #: admin/themes/default/items/browse.php:150
 msgid "Get started by adding your first item."
-msgstr ""
+msgstr "Begin door uw eerste item toe te voegen."
 
 #: admin/themes/default/items/browse.php:154
 #, php-format
@@ -1206,11 +1206,11 @@ msgstr "Bewerk item #%s"
 
 #: admin/themes/default/items/files-form.php:2
 msgid "Click and drag the files into the preferred display order."
-msgstr ""
+msgstr "Klik en sleep de bestanden in de gewenste volgorde."
 
 #: admin/themes/default/items/files-form.php:12
 msgid "Delete "
-msgstr ""
+msgstr "Verwijder"
 
 #: admin/themes/default/items/files-form.php:21
 msgid "Add New Files"
@@ -1219,7 +1219,7 @@ msgstr "Nieuwe bestanden toevoegen"
 #: admin/themes/default/items/files-form.php:23
 #, php-format
 msgid "The maximum file size is %s."
-msgstr ""
+msgstr "De maximum bestandsgrootte is %s."
 
 #: admin/themes/default/items/files-form.php:26
 msgid "Find a File"
@@ -1240,7 +1240,7 @@ msgstr "Snelfilter"
 
 #: admin/themes/default/items/quick-filters.php:5
 msgid "View All"
-msgstr ""
+msgstr "Alles bekijken"
 
 #: admin/themes/default/items/quick-filters.php:7
 msgid "Private"
@@ -1343,7 +1343,7 @@ msgstr "Alleen niet-aanbevolen items"
 
 #: admin/themes/default/items/search-form.php:203
 msgid "Search for items"
-msgstr ""
+msgstr "Items zoeken"
 
 #: admin/themes/default/items/show.php:8
 #, php-format
@@ -1352,15 +1352,15 @@ msgstr "Item #%s"
 
 #: admin/themes/default/items/show.php:30
 msgid "Prev Item"
-msgstr ""
+msgstr "Vorig Item"
 
 #: admin/themes/default/items/show.php:35
 msgid "Next Item"
-msgstr ""
+msgstr "Volgend Item"
 
 #: admin/themes/default/items/show.php:73
 msgid "File Metadata"
-msgstr ""
+msgstr "Bestand Metadata"
 
 #: admin/themes/default/items/show.php:76
 msgid "There are no files for this item yet."
@@ -1410,18 +1410,18 @@ msgstr "%1$s vereist dat de volgende plugins geïnstalleerd, geactiveerd en gela
 
 #: admin/themes/default/plugins/browse.php:32
 msgid "This is not a valid plugin."
-msgstr ""
+msgstr "Deze plugin is niet geldig."
 
 #: admin/themes/default/plugins/browse.php:57
 #, php-format
 msgid "by %s"
-msgstr ""
+msgstr "door %s"
 
 #: admin/themes/default/plugins/browse.php:65
 #: admin/themes/default/themes/browse.php:23
 #: admin/themes/default/themes/browse.php:49
 msgid "Get support"
-msgstr ""
+msgstr "Ondersteuning aanvragen"
 
 #: admin/themes/default/plugins/browse.php:69
 #, php-format
@@ -1465,17 +1465,17 @@ msgstr "U hebt nog geen plugins geïnstalleerd. Voeg ze toe aan de plugins-direc
 #: admin/themes/default/plugins/config.php:2
 #, php-format
 msgid "Configure Plugin: %s"
-msgstr ""
+msgstr "Plugin configureren: %s"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:2
 #, php-format
 msgid "Uninstall Plugin: %s"
-msgstr ""
+msgstr "Plugin deïnstalleren: %s"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:7
 #, php-format
 msgid "Are you sure you want to uninstall %s?"
-msgstr ""
+msgstr "Weet u zeker dat u %s wil deïnstalleren?"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:12
 msgid "Yes, I want to uninstall this plugin."
@@ -1492,19 +1492,19 @@ msgstr "Annuleren"
 
 #: admin/themes/default/settings/edit-api.php:11
 msgid "Enable API"
-msgstr ""
+msgstr "API aanzetten"
 
 #: admin/themes/default/settings/edit-api.php:15
 msgid "Enable or disable the API by checking or uncheking the box below."
-msgstr ""
+msgstr "Zet de API aan of uit door het selectievakje aan of uit te vinken."
 
 #: admin/themes/default/settings/edit-api.php:22
 msgid "Results per Page"
-msgstr ""
+msgstr "Resultaten per Pagina"
 
 #: admin/themes/default/settings/edit-api.php:26
 msgid "Maximum number of API results displayed per page."
-msgstr ""
+msgstr "Het maximum aantal API resultaten per pagina."
 
 #: admin/themes/default/settings/edit-api.php:32
 #, php-format
@@ -1514,49 +1514,49 @@ msgid ""
 "adding, editing, and deleting content, is protected and requires key "
 "authentication. Each key corresponds to, and has all permissions of, an "
 "existing Omeka user. You can create keys on each user's %sedit page%s."
-msgstr ""
+msgstr "Na het aanzetten van de API kunnen applicaties handelingen uitvoeren op uw website's bronnen (show, add, edit en delete). Beschermde inhoud bekijken, net als add, edit en delete, vereisen een verificatie via een sleutel. Elke sleutel komt overeen, en heeft alle permissies van, de gekoppelde Omeka gebruiker. U kunt sleutels aanmaken op de %sgebruikerspagina%s."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:12
 msgid "edit a specific item type"
-msgstr ""
+msgstr "bewerk een specifiek item type"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:11
 #, php-format
 msgid ""
 "Customize the element descriptions below. To re-order the elements, %s."
-msgstr ""
+msgstr "pas de elementbeschrijvingen hieronder aan. Om de elementen te herschikken, %s."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:42
 msgid "Confirm Delete"
-msgstr ""
+msgstr "Verwijderen bevestigen"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:43
 msgid ""
 "Are you sure you want to delete the selected item type elements from the "
 "database? You will lose all text related to the selected elements. This "
 "cannot be undone."
-msgstr ""
+msgstr "Weet u zeker dat u de geselecteerde itemtype elementen wil verwijderen uit de database? Alle teksten gerelateerd aan de geselecteerde elementen zullen verdwijnen. Deze actie kan niet ongedaan worden gemaakt!"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:50
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 #: admin/themes/default/settings/edit-search.php:10
 msgid "Search Record Types"
-msgstr ""
+msgstr "Record Types zoeken"
 
 #: admin/themes/default/settings/edit-search.php:13
 msgid "Customize which types of records will be searchable in Omeka."
-msgstr ""
+msgstr "Pas aan welke recordtypen doorzoekbaar zijn in Omeka."
 
 #: admin/themes/default/settings/edit-search.php:23
 #: admin/themes/default/settings/edit-search.php:41
 msgid "Index Records"
-msgstr ""
+msgstr "Records indexeren"
 
 #: admin/themes/default/settings/edit-search.php:26
 msgid "Click on the \"Index Records\" button to re-index your records."
-msgstr ""
+msgstr "Klik op de \"Records indexeren\"-knop om uw records te her-indexeren."
 
 #: admin/themes/default/settings/edit-search.php:28
 msgid ""
@@ -1569,19 +1569,19 @@ msgstr ""
 
 #: admin/themes/default/settings/edit-security.php:23
 msgid "Restore Default Extensions"
-msgstr ""
+msgstr "Standaard Extensies herstellen"
 
 #: admin/themes/default/settings/edit-security.php:28
 msgid "Restore Default Types"
-msgstr ""
+msgstr "Standaard types herstellen"
 
 #: admin/themes/default/settings/edit-security.php:33
 msgid "Restore Default Elements"
-msgstr ""
+msgstr "Standaard Elementen herstellen"
 
 #: admin/themes/default/settings/edit-security.php:38
 msgid "Restore Default Attributes"
-msgstr ""
+msgstr "Standaard Attributen herstellen"
 
 #: admin/themes/default/settings/edit-settings.php:23
 msgid "Test"
@@ -1589,15 +1589,15 @@ msgstr "Test"
 
 #: admin/themes/default/tags/browse.php:3
 msgid "Edit Tags"
-msgstr ""
+msgstr "Bewerk Tags"
 
 #: admin/themes/default/tags/browse.php:16
 msgid "Editing Tags"
-msgstr ""
+msgstr "Tags bewerken"
 
 #: admin/themes/default/tags/browse.php:19
 msgid "To view all items with a tag, click the number."
-msgstr ""
+msgstr "Klik op het nummer om alle items met een tag te bekijken."
 
 #: admin/themes/default/tags/browse.php:20
 msgid ""
@@ -1630,11 +1630,11 @@ msgstr "Recent"
 #: admin/themes/default/tags/browse.php:43
 #: admin/themes/default/tags/browse.php:45
 msgid "Record Types"
-msgstr ""
+msgstr "Record Types"
 
 #: admin/themes/default/tags/browse.php:47
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: admin/themes/default/themes/browse.php:15
 #: admin/themes/default/themes/browse.php:43
@@ -1764,19 +1764,19 @@ msgstr "E-mail"
 
 #: admin/themes/default/users/browse.php:35
 msgid "Search users"
-msgstr ""
+msgstr "Zoek gebruikers"
 
 #: admin/themes/default/users/browse.php:36
 msgid "Usernames"
-msgstr ""
+msgstr "Gebruikersnamen"
 
 #: admin/themes/default/users/browse.php:37
 msgid "Real names"
-msgstr ""
+msgstr "Echte namen"
 
 #: admin/themes/default/users/browse.php:38
 msgid "Email addresses"
-msgstr ""
+msgstr "E-mail adressen"
 
 #: admin/themes/default/users/browse.php:48
 #: admin/themes/default/users/show.php:20
@@ -1798,43 +1798,43 @@ msgstr "Bewerk gebruiker #%s"
 
 #: admin/themes/default/users/edit.php:24
 msgid "API Keys"
-msgstr ""
+msgstr "API Sleutels"
 
 #: admin/themes/default/users/edit.php:27
 msgid "New key label"
-msgstr ""
+msgstr "Nieuw sleutel label"
 
 #: admin/themes/default/users/edit.php:31
 msgid ""
 "To create a new API key, enter a label for the key below. For example, "
 "describe for what purpose it will be used. This key will have all your "
 "permissions; treat it as you would your password."
-msgstr ""
+msgstr "Om een nieuwe API sleutel aan te maken, vult u een label in. Dit kan bijvoorbeeld de beschrijving zijn van het doel van het gebruik van de API. Deze sleutel zal alle permissies hebben die uw gebruiker doorgaans ook heeft in Omeka. Behandel de sleutel alsof het uw wachtwoord is."
 
 #: admin/themes/default/users/edit.php:41
 msgid "You have no API keys. Use the form above to create one."
-msgstr ""
+msgstr "U heeft geen API sleutels. Gebruik het formulier hierboven om er een aan te maken."
 
 #: admin/themes/default/users/edit.php:43
 #, php-format
 msgid "%s has no API keys. Use the form above to create one."
-msgstr ""
+msgstr "%s heeft geen API sleutels. Gebruik het formulier om er een aan te maken."
 
 #: admin/themes/default/users/edit.php:51
 msgid "Key"
-msgstr ""
+msgstr "Sleutel"
 
 #: admin/themes/default/users/edit.php:52
 msgid "Last IP"
-msgstr ""
+msgstr "Laatste IP"
 
 #: admin/themes/default/users/edit.php:53
 msgid "Last accessed"
-msgstr ""
+msgstr "Laatst geopend"
 
 #: admin/themes/default/users/edit.php:54
 msgid "Rescind"
-msgstr ""
+msgstr "Herroep"
 
 #: admin/themes/default/users/forgot-password.php:2
 #: application/views/scripts/users/forgot-password.php:2
@@ -1863,7 +1863,7 @@ msgstr "Aanmelden"
 
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
-msgstr ""
+msgstr "(Paswoord kwijt?)"
 
 #: admin/themes/default/users/show.php:8
 #, php-format
@@ -1993,46 +1993,46 @@ msgstr "Het itemtype \"%s\" is met succes toegevoegd! U kunt nu elementen toevoe
 #: application/controllers/ItemsController.php:95
 #, php-format
 msgid "The item \"%s\" was successfully added!"
-msgstr ""
+msgstr "Het item \"%s\" is met succes toegevoegd!"
 
 #: application/controllers/ItemsController.php:97
 #, php-format
 msgid "The item #%s was successfully added!"
-msgstr ""
+msgstr "Het item #%s is met succes toegevoegd!"
 
 #: application/controllers/ItemsController.php:105
 #, php-format
 msgid "The item \"%s\" was successfully changed!"
-msgstr ""
+msgstr "Het item \"%s\" is met succes gewijzigd!"
 
 #: application/controllers/ItemsController.php:107
 #, php-format
 msgid "The item #%s was successfully changed!"
-msgstr ""
+msgstr "Het item #%s is met succes gewijzigd!"
 
 #: application/controllers/ItemsController.php:115
 #, php-format
 msgid "The item \"%s\" was successfully deleted!"
-msgstr ""
+msgstr "Het item \"%s\" is met succes verwijderd!"
 
 #: application/controllers/ItemsController.php:117
 #, php-format
 msgid "The item #%s was successfully deleted!"
-msgstr ""
+msgstr "Het item #%s is met succes verwijderd!"
 
 #: application/controllers/ItemsController.php:125
 #, php-format
 msgid ""
 "This will delete the item \"%s\" and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr ""
+msgstr "Dit zal het item \"%s\" en zijn verbonden metadata verwijderen. Het zal ook alle bestanden en metadata van bestanden verwijderen die met dit item zijn verbonden."
 
 #: application/controllers/ItemsController.php:129
 #, php-format
 msgid ""
 "This will delete the item #%s and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr ""
+msgstr "Dit zal het item #%s en zijn verbonden metadata verwijderen. Het zal ook alle bestanden en metadata van bestanden verwijderen die met dit item zijn verbonden."
 
 #: application/controllers/ItemsController.php:255
 msgid "You must choose some items to batch edit."
@@ -2060,7 +2060,7 @@ msgstr "Het is gebruiker niet toegestaan om geselecteerde items van een tag te v
 
 #: application/controllers/ItemsController.php:356
 msgid "The items were successfully deleted!"
-msgstr ""
+msgstr "De items zijn met succes verwijderd!"
 
 #: application/controllers/ItemsController.php:358
 msgid "The items were successfully changed!"
@@ -2133,7 +2133,7 @@ msgstr "De volgende fout trad op bij het opwaarderen van de %s plugin:"
 #: application/controllers/PluginsController.php:253
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
-msgstr ""
+msgstr "De plugin kon niet worden gevonden in de '%s' directory!"
 
 #: application/controllers/PluginsController.php:262
 msgid "You must confirm the uninstall before proceeding."
@@ -2171,29 +2171,29 @@ msgstr "De beveiligingsinstellingen zijn bijgewerkt."
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
-msgstr ""
+msgstr "U heeft de doorzoekbare records aangepast in Omeka. Her-indexeer de records door het formulier hieronder te gebruiken."
 
 #: application/controllers/SettingsController.php:102
 msgid ""
 "Indexing records. This may take a while. You may continue administering your"
 " site."
-msgstr ""
+msgstr "Records worden geïndexeerd. Dit kan enige tijd duren. U kunt ondertussen verder met administratiewerkzaamheden op uw site."
 
 #: application/controllers/SettingsController.php:131
 msgid "The item type elements were successfully changed!"
-msgstr ""
+msgstr "de itemtype-elementen zijn met succes gewijzigd!"
 
 #: application/controllers/SettingsController.php:149
 msgid "The API configuration was successfully changed!"
-msgstr ""
+msgstr "De API configuratie is met succes aangemaakt!"
 
 #: application/controllers/SettingsController.php:175
 msgid "The ImageMagick directory path works."
-msgstr ""
+msgstr "Het ImageMagick directory pad werkt."
 
 #: application/controllers/SettingsController.php:176
 msgid "The ImageMagick directory path does not work."
-msgstr ""
+msgstr "Het ImageMagick directory pad werkt niet."
 
 #: application/controllers/TagsController.php:35
 msgid "You have to be logged in to edit tags!"
@@ -2206,7 +2206,7 @@ msgstr "Tag met naam \"%1$s\" was met succes hernoemd naar \"%2$s\"."
 
 #: application/controllers/TagsController.php:91
 msgid "Invalid tagType given."
-msgstr ""
+msgstr "Ongeldig tagtype ingevoerd"
 
 #: application/controllers/ThemesController.php:25
 msgid "Invalid form submission."
@@ -2219,7 +2219,7 @@ msgstr "U hebt een niet-toegestane thema-naam gekozen. Selecteer een ander thema
 #: application/controllers/ThemesController.php:40
 #, php-format
 msgid "This theme requires a newer version of Omeka (%s)."
-msgstr ""
+msgstr "Dit thema vereist een nieuwe versie van Omeka (%s)."
 
 #: application/controllers/ThemesController.php:54
 msgid "The theme has been successfully changed."
@@ -2231,7 +2231,7 @@ msgstr "De thema-instellingen zijn goed opgeslagen!"
 
 #: application/controllers/ThemesController.php:84
 msgid "There was an error on the form. Please try again."
-msgstr ""
+msgstr "Er bevonden zich fouten in het formulier. Graag opnieuw bewerken en insturen."
 
 #: application/controllers/UpgradeController.php:49
 msgid "SQL error in migration: "
@@ -2265,7 +2265,7 @@ msgstr "Controleer uw e-mail voor een link om uw wachtwoord opnieuw in te stelle
 
 #: application/controllers/UsersController.php:126
 msgid "Invalid activation code given."
-msgstr ""
+msgstr "Ongeldige activatiecode gegeven."
 
 #: application/controllers/UsersController.php:135
 msgid "Password: The passwords do not match."
@@ -2287,20 +2287,20 @@ msgstr "De gebruiker \"%s\" is met succes toegevoegd!"
 #: application/controllers/UsersController.php:175
 #, php-format
 msgid "The user \"%s\" was added, but the activation email could not be sent."
-msgstr ""
+msgstr "De gebruiker \"%s\" is toegevoegd maar de activatie email kon niet worden verstuurd."
 
 #: application/controllers/UsersController.php:233
 msgid "A new API key was successfully created."
-msgstr ""
+msgstr "Een nieuwe API sleutel is met succes aangemaakt!"
 
 #: application/controllers/UsersController.php:241
 msgid "An existing API key was successfully rescinded."
-msgstr ""
+msgstr "Een bestaande API sleutel is met succes herroepen."
 
 #: application/controllers/UsersController.php:246
 #: application/controllers/UsersController.php:257
 msgid "There was an invalid entry on the form. Please try again."
-msgstr ""
+msgstr "Er zat een ongeldige waarden in het formulier. Graag opnieuw bewerken en insturen."
 
 #: application/controllers/UsersController.php:253
 msgid "Password changed!"
@@ -2373,7 +2373,7 @@ msgstr "Maximale grootte vierkant miniatuurvoorbeeld (in pixels)."
 
 #: application/forms/AppearanceSettings.php:43
 msgid "Results Per Page (admin)"
-msgstr ""
+msgstr "Resultaten per pagina (admin)"
 
 #: application/forms/AppearanceSettings.php:44
 msgid ""
@@ -2383,12 +2383,12 @@ msgstr ""
 
 #: application/forms/AppearanceSettings.php:50
 msgid "Results Per Page (public)"
-msgstr ""
+msgstr "Resultaten per pagina (publiek)"
 
 #: application/forms/AppearanceSettings.php:51
 msgid ""
 "Limit the number of results displayed per page in the public interface."
-msgstr ""
+msgstr "Beperk het aantal resultaten dat per pagina wordt weergegeven op de publieke site."
 
 #: application/forms/AppearanceSettings.php:57
 #: application/forms/Install.php:157
@@ -2397,11 +2397,11 @@ msgstr "Toon lege elementen"
 
 #: application/forms/AppearanceSettings.php:66
 msgid "Derivative Size Constraints"
-msgstr ""
+msgstr "Afgeleide grootte beperkingen"
 
 #: application/forms/AppearanceSettings.php:71
 msgid "Display Settings"
-msgstr ""
+msgstr "Instellingen uiterlijk"
 
 #: application/forms/ChangePassword.php:25
 msgid "Current Password"
@@ -2410,11 +2410,11 @@ msgstr "Huidige wachtwoord"
 #: application/forms/ChangePassword.php:26
 #: application/forms/ChangePassword.php:36
 msgid "Password must be at least 6 characters long."
-msgstr ""
+msgstr "Het wachtwoord moet tenminste 6 tekens lang zijn."
 
 #: application/forms/ChangePassword.php:28
 msgid "Invalid current password"
-msgstr ""
+msgstr "Ongeldig huidig wachtwoord"
 
 #: application/forms/ChangePassword.php:34
 msgid "New Password"
@@ -2422,12 +2422,12 @@ msgstr "Nieuw wachtwoord"
 
 #: application/forms/ChangePassword.php:41
 msgid "New password must be entered."
-msgstr ""
+msgstr "Nieuw wachtwoord moet worden ingevoerd."
 
 #: application/forms/ChangePassword.php:50
 #: application/forms/ChangePassword.php:70
 msgid "New password must be typed correctly twice."
-msgstr ""
+msgstr "Nieuw wachtwoord moet tweemaal correct zijn ingevoerd."
 
 #: application/forms/ChangePassword.php:59
 msgid "New password must be at least %min% characters long."
@@ -2477,11 +2477,11 @@ msgstr "Scheid tags met behulp van dit teken of deze tekenreeks. Wees voorzichti
 
 #: application/forms/GeneralSettings.php:59 application/forms/Install.php:163
 msgid "ImageMagick Directory Path"
-msgstr ""
+msgstr "ImageMagick Directory Pad"
 
 #: application/forms/Install.php:31
 msgid "only alphanumeric characters are allowed"
-msgstr ""
+msgstr "Alleen alfanumerieke tekens toegestaan "
 
 #: application/forms/Install.php:37 application/forms/Login.php:34
 msgid "Password"
@@ -2489,7 +2489,7 @@ msgstr "Wachtwoord"
 
 #: application/forms/Install.php:38
 msgid "must be at least 6 characters"
-msgstr ""
+msgstr "moet tenminste 6 tekens lang zijn"
 
 #: application/forms/Install.php:61
 msgid "Confirm your password."
@@ -2501,15 +2501,15 @@ msgstr "Scheid tags met behulp van dit teken of deze tekenreeks."
 
 #: application/forms/Install.php:118
 msgid "Maximum fullsize image size constraint (in pixels)"
-msgstr ""
+msgstr "Maximum grootte van plaatje op ware grootte (in pixels)"
 
 #: application/forms/Install.php:126
 msgid "Maximum thumbnail size constraint (in pixels)"
-msgstr ""
+msgstr "Maximum groottebeperking van miniatuurweergave (in pixels)"
 
 #: application/forms/Install.php:134
 msgid "Maximum square thumbnail size constraint (in pixels)"
-msgstr ""
+msgstr "Maximale grootte vierkante miniatuurweergave (in pixels)."
 
 #: application/forms/Install.php:141
 msgid "Items Per Page (admin)"
@@ -2531,7 +2531,7 @@ msgstr "Beperk het aantal getoonde items per pagina in de openbare interface."
 
 #: application/forms/Install.php:159
 msgid "Check box to show metadata elements with no text."
-msgstr ""
+msgstr "Aanvinken om metadata zonder tekst weer te geven."
 
 #: application/forms/Install.php:174
 msgid "Default Superuser Account"
@@ -2543,11 +2543,11 @@ msgstr "Instellingen site"
 
 #: application/forms/ItemTypes.php:142
 msgid "The name of the item type."
-msgstr ""
+msgstr "de naam van het itemtype."
 
 #: application/forms/ItemTypes.php:151
 msgid "The description of the item type."
-msgstr ""
+msgstr "De beschrijving van het itemtype."
 
 #: application/forms/ItemTypes.php:188 application/forms/ItemTypes.php:197
 #, php-format
@@ -2568,28 +2568,28 @@ msgstr "Onthoud mij?"
 
 #: application/forms/Navigation.php:156
 msgid "[Default]"
-msgstr ""
+msgstr "[Standaard]"
 
 #: application/forms/Navigation.php:162
 msgid "Select a Homepage"
-msgstr ""
+msgstr "Selecteer een startpagina"
 
 #: application/forms/Navigation.php:244
 msgid "Cannot find parent navigation page."
-msgstr ""
+msgstr "Kan geen hoofdnavigatiepagina vinden."
 
 #: application/forms/Navigation.php:326
 msgid "All navigation links must have URIs."
-msgstr ""
+msgstr "Alle navigatie links moeten een URI hebben."
 
 #: application/forms/Navigation.php:339
 msgid "All navigation links must have different URIs."
-msgstr ""
+msgstr "Alle navigatie links moeten verschillende URI's hebben."
 
 #: application/forms/Navigation.php:345
 #, php-format
 msgid "Invalid URI for \"%s\" navigation link:  \"%s\""
-msgstr ""
+msgstr "Ongeldige URI voor \"%s\" navigatie link: \"%s\""
 
 #: application/forms/Navigation.php:378
 msgid "Navigation links that have undeleteable sublinks cannot be deleted."
@@ -2815,47 +2815,47 @@ msgstr ""
 #: application/libraries/Omeka/Plugin/Loader.php:112
 #, php-format
 msgid "Plugin named '%s' has already been loaded/registered."
-msgstr ""
+msgstr "Plugin genaamd '%s' is al geladen/geregistreerd."
 
 #: application/libraries/Omeka/Plugin/Loader.php:153
 #, php-format
 msgid "The %s plugin could not be loaded."
-msgstr ""
+msgstr "De %s plugin kan niet worden geladen."
 
 #: application/libraries/Omeka/Plugin/Loader.php:174
 #, php-format
 msgid "The required plugin '%s' could not be found."
-msgstr ""
+msgstr "De benodigde plugin '%s' kan niet worden gevonden."
 
 #: application/libraries/Omeka/Plugin/Loader.php:247
 #, php-format
 msgid "'%s' has no valid bootstrap file."
-msgstr ""
+msgstr "'%s' heeft geen geldig bootstrap bestand."
 
 #: application/libraries/Omeka/Plugin/Loader.php:250
 #, php-format
 msgid "'%s' has not been installed."
-msgstr ""
+msgstr "'%s' is niet geinstalleerd."
 
 #: application/libraries/Omeka/Plugin/Loader.php:253
 #, php-format
 msgid "'%s' has not been activated."
-msgstr ""
+msgstr "'%s' is niet geactiveerd."
 
 #: application/libraries/Omeka/Plugin/Loader.php:256
 #, php-format
 msgid "'%s' requires a newer version of Omeka."
-msgstr ""
+msgstr "'%s' vereist een nieuwe versie van Omeka."
 
 #: application/libraries/Omeka/Plugin/Loader.php:261
 #, php-format
 msgid "'%s' must be upgraded to the new version before it can be loaded."
-msgstr ""
+msgstr "'%s' moet worden geüpgrade naar de nieuwe versie alvorens te worden geladen."
 
 #: application/libraries/Omeka/Plugin/Loader.php:264
 #, php-format
 msgid "'%s' cannot be loaded twice."
-msgstr ""
+msgstr "'%s' kan niet tweemaal worden geladen."
 
 #: application/libraries/Omeka/Record/AbstractRecord.php:349
 #, php-format
@@ -2946,7 +2946,7 @@ msgstr ""
 
 #: application/models/Element.php:179
 msgid "Invalid element set."
-msgstr ""
+msgstr "Ongeldige element set."
 
 #: application/models/Element.php:185
 #, php-format
@@ -2996,7 +2996,7 @@ msgstr "Bestanden kunnen niet gehecht worden aan een item dat niet constant is i
 #: application/models/Item.php:444
 #, php-format
 msgid "%1$s and %2$s"
-msgstr ""
+msgstr "%1$s en %2$s"
 
 #. / Chicago-style item citation: three authors
 #: application/models/Item.php:448
@@ -3008,7 +3008,7 @@ msgstr "%1$s, %2$s en %3$s"
 #: application/models/Item.php:452
 #, php-format
 msgid "%s et al."
-msgstr ""
+msgstr "%s et al."
 
 #. / Chicago-style item citation: access date and URL
 #: application/models/Item.php:470
@@ -3026,11 +3026,11 @@ msgstr "Bestand moet geldig zijn voor het verbonden kan worden aan een item!"
 
 #: application/models/Item.php:515
 msgid "Invalid item type."
-msgstr ""
+msgstr "Ongeldig item type."
 
 #: application/models/Item.php:518
 msgid "Invalid collection."
-msgstr ""
+msgstr "Ongeldige collectie."
 
 #: application/models/ItemType.php:102
 #, php-format
@@ -3324,16 +3324,16 @@ msgstr "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
 
 #: application/views/scripts/common/pagination_control.php:11
 msgid "&lt;"
-msgstr ""
+msgstr "&lt;"
 
 #: application/views/scripts/common/pagination_control.php:34
 #, php-format
 msgid "%s of %s"
-msgstr ""
+msgstr "%s van %s"
 
 #: application/views/scripts/common/pagination_control.php:42
 msgid "&gt;"
-msgstr ""
+msgstr "&gt;"
 
 #: application/views/scripts/error/403.php:2
 msgid "403 Page Forbidden"
@@ -3417,11 +3417,11 @@ msgstr "Doorzoek Omeka"
 
 #: application/views/scripts/search/index.php:12
 msgid "Record Type"
-msgstr ""
+msgstr "Record Type"
 
 #: application/views/scripts/search/index.php:29
 msgid "Your query returned no results."
-msgstr ""
+msgstr "Uw zoekvraag leverde geen resultaten op."
 
 #: application/views/scripts/search/search-filters.php:3
 msgid "Query:"
@@ -3433,7 +3433,7 @@ msgstr "Soort zoekvraag:"
 
 #: application/views/scripts/search/search-filters.php:5
 msgid "Record types:"
-msgstr ""
+msgstr "Record types:"
 
 #: application/views/scripts/search/search-form.php:6
 msgid "Search using this query type:"
