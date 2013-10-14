@@ -2872,10 +2872,21 @@ function text_to_id($text, $prepend = null, $delimiter = '-')
  */
 function url_to_link($str)
 {
-    $pattern = "/(\bhttps?:\/\/\S+\b)/e";
-    $replace = '"<a href=\"".htmlspecialchars("$1")."\">$1</a>"';
-    $str = preg_replace($pattern, $replace, $str);
-    return $str;
+    $pattern = "#(\bhttps?://\S+\b)#";
+    return preg_replace_callback($pattern, 'url_to_link_callback', $str);
+}
+
+/**
+ * Callback for converting URLs with url_to_link.
+ *
+ * @package Omeka\Function\Text
+ * @see url_to_link
+ * @param array $matches preg_replace_callback matches array
+ * @return string
+ */
+function url_to_link_callback($matches)
+{
+    return '<a href="' . htmlspecialchars($matches[1]) . '">' . $matches[1] . '</a>';
 }
 
 /**
