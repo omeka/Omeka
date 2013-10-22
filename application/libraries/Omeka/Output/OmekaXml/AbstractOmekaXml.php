@@ -172,14 +172,20 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
             
             // Get associated element and element set records.
             $element = get_db()->getTable('Element')->find($elementText->element_id);
+
+            // Skip texts where we can't find their Element.
+            if (!$element) {
+                continue;
+            }
+
             $elementSet = get_db()->getTable('ElementSet')->find($element->element_set_id);
 
-            // Skip over any texts where we can't find the Element or Set
-            if (!($element && $elementSet)) {
+            // Also skip if we can find the Element but not the Set (less likely)
+            if (!$elementSet) {
                 continue;
             }
             
-            // Differenciate between the element sets and the "Item Type 
+            // Differentiate between the element sets and the "Item Type 
             // Metadata" pseudo element set.
             if (ElementSet::ITEM_TYPE_NAME == $elementSet->name) {
                 $itemType['elements'][$element->id]['name'] = $element->name;
