@@ -205,6 +205,7 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter implements Omeka_Record_Ap
     public static function getDate($date)
     {
         $date = new DateTime($date);
-        return $date->setTimezone(new DateTimeZone('UTC'))->format('c');
+        $date->setTimezone(new DateTimeZone('UTC'));
+        return $date->format('c');
     }
 }
