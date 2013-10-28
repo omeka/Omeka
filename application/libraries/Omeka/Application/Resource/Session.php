@@ -91,8 +91,8 @@ class Omeka_Application_Resource_Session extends Zend_Application_Resource_Sessi
     /**
      * Check if the DB is recent enough to use DB sessions by default.
      *
-     * Recent enough means that the DB version is 1.5 or higher. We can't
-     * use the DB sessions until the upgrade is complete to 1.5+.
+     * Recent enough means that the DB version is 2.0 or higher. We can't
+     * use the DB sessions until the upgrade is complete to 2.0+.
      *
      * @param array $options
      * @return boolean
@@ -101,6 +101,6 @@ class Omeka_Application_Resource_Session extends Zend_Application_Resource_Sessi
     {
         $versionOption = Omeka_Db_Migration_Manager::VERSION_OPTION_NAME;
         return array_key_exists($versionOption, $options)
-            && version_compare($options[$versionOption], '1.5', '>=');
+            && version_compare($options[$versionOption], '2.0', '>=');
     }
 }
