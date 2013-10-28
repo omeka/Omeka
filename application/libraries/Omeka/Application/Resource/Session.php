@@ -34,7 +34,7 @@ class Omeka_Application_Resource_Session extends Zend_Application_Resource_Sessi
     private function _getSessionConfig()
     {
         $bootstrap = $this->getBootstrap();
-        $bootstrap->bootstrap(array('Config', 'Db'));
+        $bootstrap->bootstrap(array('Config', 'Db', 'Options'));
         $config = $bootstrap->getResource('Config');
         $sessionConfig = isset($config->session) 
                        ? $config->session->toArray()
@@ -47,7 +47,9 @@ class Omeka_Application_Resource_Session extends Zend_Application_Resource_Sessi
         }
         
         // Default is store sessions in the sessions table.
-        if (!array_key_exists('saveHandler', $sessionConfig)) {
+        if ($this->_canUseDbSessions($bootstrap->getResource('Options'))
+            && !array_key_exists('saveHandler', $sessionConfig)
+        ) {
             $db = $bootstrap->db;
             $sessionConfig['saveHandler'] = array(
                 'class' => "Omeka_Session_SaveHandler_DbTable",
@@ -59,12 +61,12 @@ class Omeka_Application_Resource_Session extends Zend_Application_Resource_Sessi
                     'lifetimeColumn' => "lifetime",
                 ),
             );
-        } else if (!$sessionConfig['saveHandler']) {
+        } else if (empty($sessionConfig['saveHandler'])) {
             // Set session.saveHandler = false to use the filesystem for storing
             // sessions.
             unset($sessionConfig['saveHandler']);
         }
-        
+
         return $sessionConfig;
     }
     
@@ -84,5 +86,21 @@ class Omeka_Application_Resource_Session extends Zend_Application_Resource_Sessi
     private function _setOptionsFromConfig()
     {
         $this->setOptions($this->_getSessionConfig());
+    }
+
+    /**
+     * Check if the DB is recent enough to use DB sessions by default.
+     *
+     * Recent enough means that the DB version is 1.5 or higher. We can't
+     * use the DB sessions until the upgrade is complete to 1.5+.
+     *
+     * @param array $options
+     * @return boolean
+     */
+    private function _canUseDbSessions($options)
+    {
+        $versionOption = Omeka_Db_Migration_Manager::VERSION_OPTION_NAME;
+        return array_key_exists($versionOption, $options)
+            && version_compare($options[$versionOption], '1.5', '>=');
     }
 }
