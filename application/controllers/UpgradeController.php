@@ -38,6 +38,7 @@ class UpgradeController extends Zend_Controller_Action
         
         $debugMode = (boolean)$this->getInvokeArg('bootstrap')->config->debug->exceptions;
         $this->view->debugMode = $debugMode;
+        $this->view->success = false;
         try {
             $manager->migrate();
             $manager->finalizeDbUpgrade();
