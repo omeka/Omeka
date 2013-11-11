@@ -245,6 +245,10 @@ p, li {
         padding: 5px 16px;
         margin-left: 0;
     }
+
+    select::-ms-expand {
+        display: none;
+    }
         
     input[type=text], input[type=password] {
         height: 30px;
