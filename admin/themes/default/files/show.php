@@ -13,9 +13,7 @@ echo flash();
 ?>
 
 <section class="seven columns alpha">
-    <div id="item-images">
-        <?php echo file_markup($file); ?>
-    </div>
+    <?php echo file_markup($file); ?>
     
     <?php echo all_element_texts('file'); ?>
     

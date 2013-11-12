@@ -1873,6 +1873,10 @@ header nav {
     font-weight: bold;
 }
 
+.files .item-file {
+    display: block;
+}
+
 .files dd {
     margin-bottom: 1em;
 }
