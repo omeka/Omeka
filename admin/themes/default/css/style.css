@@ -1533,7 +1533,6 @@ header nav {
 #outputs #output-format-list {
     display: inline-block;
     margin: 0;
-    padding: 20px 0;
 }
 
     #outputs #output-format-list li { display: inline-block; }

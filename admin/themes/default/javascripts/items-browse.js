@@ -7,7 +7,7 @@ Omeka.ItemsBrowse = {};
 (function ($) {
     Omeka.ItemsBrowse.setupDetails = function (detailsText, showDetailsText, hideDetailsText) {
         $('.details').hide();
-        $('.action-links').prepend('<li class="details-link">' + detailsText + '</li>');
+        $('.action-links').prepend('<li class="details-link">' + detailsText + '</li> ');
 
         $('tr.item').each(function() {
             var itemDetails = $(this).find('.details');
