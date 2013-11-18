@@ -83,8 +83,10 @@ a:link {
 p, li {
     line-height: 1.5em;
 }
-            
-        li:empty { display: none; }
+
+    li:empty { display: none; }
+
+img { border: 0; }
 
 .section-title { width: 50%; }
     
@@ -1118,7 +1120,7 @@ header nav {
     display: block;
     margin: 10px 0;
     padding: 10px 10px 0 10px;
-    overflow: auto;
+    overflow: hidden;
     word-wrap: break-word;
 }
 
