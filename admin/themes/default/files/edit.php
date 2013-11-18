@@ -13,13 +13,8 @@ echo flash();
 ?>
 <form method="post" action="">
     <section class="seven columns alpha" id="edit-form">
+        <?php echo file_markup($file); ?>
         <div id="file-metadata">
-            <?php if (file_markup($file)): ?>
-                <div id="item-images">
-                    <?php echo file_markup($file, array('imageSize' => 'square_thumbnail'), array('class' => 'admin-thumb panel')); ?>
-                </div>
-            <?php endif; ?>    
-
             <?php foreach ($elementSets as $elementSet): ?>
             <fieldset>
                 <h2><?php echo __($elementSet->name); ?></h2>    

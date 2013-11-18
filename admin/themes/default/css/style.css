@@ -1622,7 +1622,6 @@ header nav {
     -webkit-box-shadow: 0 0 3px rgba(0,0,0,.15);
     -moz-box-shadow: 0 0 3px rgba(0,0,0,.15);
     box-shadow: 0 0 3px rgba(0,0,0,.15);
-    float: left;
 }
 
 .element {
@@ -1663,11 +1662,12 @@ header nav {
         max-width: 100%;
     }
 
-#item-images { margin: 0; }
-
     #item-images img { vertical-align: bottom; }
     
-    #item-images .admin-thumb { margin: 0 20px 20px 0; }
+    #item-images .admin-thumb {
+        float: left;
+        margin: 0 20px 20px 0;
+    }
 
         #item-images .admin-thumb:nth-of-type(4) { margin-right: 0; }
 
@@ -1875,6 +1875,7 @@ header nav {
 
 .files .item-file {
     display: block;
+    margin: 0 0 20px 0;
 }
 
 .files dd {

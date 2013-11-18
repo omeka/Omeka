@@ -1189,11 +1189,6 @@ header nav {
 /* Show Item  
 ================================================== */
 
-.admin-thumb {
-    width: 100px;
-    box-shadow: 0 0 3px rgba(0,0,0,.15);
-}
-
 .element {
     clear: both;
     overflow: auto;
