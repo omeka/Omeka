@@ -46,7 +46,7 @@ $formAttributes['method'] = 'GET';
                 echo $this->formSelect(
                     "advanced[$i][element_id]",
                     @$rows['element_id'],
-                    array(),
+                    array('title' => __("Select field ($i)")),
                     get_table_options('Element', null, array(
                         'record_types' => array('Item', 'All'),
                         'sort' => 'alphaBySet')
@@ -55,7 +55,7 @@ $formAttributes['method'] = 'GET';
                 echo $this->formSelect(
                     "advanced[$i][type]",
                     @$rows['type'],
-                    array(),
+                    array('title' => __("Select filter method ($i)")),
                     label_table_options(array(
                         'contains' => __('contains'),
                         'does not contain' => __('does not contain'),
@@ -67,10 +67,13 @@ $formAttributes['method'] = 'GET';
                 echo $this->formText(
                     "advanced[$i][terms]",
                     @$rows['terms'],
-                    array('size' => '20')
+                    array(
+                        'size' => '20',
+                        'title' => __("Select filter ($i)")
+                    )
                 );
                 ?>
-                <button type="button" class="remove_search" disabled="disabled" style="display: none;">-</button>
+                <button type="button" class="remove_search" disabled="disabled" style="display: none;" title="<?php __('Remove field'); ?>">-</button>
             </div>
         <?php endforeach; ?>
         </div>

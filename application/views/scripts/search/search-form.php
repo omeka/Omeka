@@ -1,5 +1,5 @@
 <?php echo $this->form('search-form', $options['form_attributes']); ?>
-    <?php echo $this->formText('query', $filters['query']); ?>
+    <?php echo $this->formText('query', $filters['query'], array('placeholder' => __('Search Omeka'))); ?>
     <?php if ($options['show_advanced']): ?>
     <fieldset id="advanced-form">
         <fieldset id="query-types">
