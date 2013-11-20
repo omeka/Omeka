@@ -4,13 +4,14 @@
 # 
 # Translators:
 # Bogdan Trifunovic <>, 2012-2013
+# Dušan Ranđelović <randjelovic@pantype.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
-"Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
+"Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-08-27 14:53+0000\n"
-"Last-Translator: patrickmj <patrickmjchnm@gmail.com>\n"
+"PO-Revision-Date: 2013-11-20 11:02+0000\n"
+"Last-Translator: Dušan Ranđelović <randjelovic@pantype.com>\n"
 "Language-Team: Serbian (Serbia) (http://www.transifex.com/projects/p/omeka/language/sr_RS/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -333,27 +334,27 @@ msgstr "Изглед"
 msgid ""
 "Check the links to display them in the main navigation. Click and drag the "
 "links into the preferred display order."
-msgstr ""
+msgstr "Провери линкове за приказ у главној навигацији. Кликни и превуци линкове у жељени редослед приказа."
 
 #: admin/themes/default/appearance/edit-navigation.php:19
 msgid "Add a Link to the Navigation"
-msgstr ""
+msgstr "Додај навигациони линк "
 
 #: admin/themes/default/appearance/edit-navigation.php:21
 #: admin/themes/default/appearance/edit-navigation.php:37
 #: admin/themes/default/users/edit.php:50 application/forms/Navigation.php:132
 msgid "Label"
-msgstr ""
+msgstr "Име"
 
 #: admin/themes/default/appearance/edit-navigation.php:23
 #: admin/themes/default/appearance/edit-navigation.php:38
 #: application/forms/Navigation.php:133
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: admin/themes/default/appearance/edit-navigation.php:25
 msgid "Add Link"
-msgstr ""
+msgstr "Додај линк"
 
 #: admin/themes/default/appearance/edit-navigation.php:31
 #: admin/themes/default/appearance/edit-settings.php:21
@@ -415,7 +416,7 @@ msgstr "Додај колекцију"
 
 #: admin/themes/default/collections/add.php:11
 msgid "Add Collection"
-msgstr ""
+msgstr "Додај колекцију"
 
 #: admin/themes/default/collections/add.php:16
 #: admin/themes/default/collections/edit.php:30
@@ -464,7 +465,7 @@ msgstr "(%s укупно)"
 #: admin/themes/default/collections/browse.php:23
 #: admin/themes/default/collections/show.php:51
 msgid "Contributors"
-msgstr ""
+msgstr "Друга одговорна лица"
 
 #: admin/themes/default/collections/browse.php:24
 #: admin/themes/default/files/show.php:68
@@ -482,7 +483,7 @@ msgstr "Укупан број објеката"
 #: admin/themes/default/collections/browse.php:37
 #: admin/themes/default/items/browse.php:72
 msgid "(Private)"
-msgstr ""
+msgstr "(Приватно)"
 
 #: admin/themes/default/collections/browse.php:40
 #: admin/themes/default/collections/show.php:32
@@ -503,7 +504,7 @@ msgstr "Уређивање"
 
 #: admin/themes/default/collections/browse.php:49
 msgid "No contributors"
-msgstr ""
+msgstr "Нема одговорних лица"
 
 #: admin/themes/default/collections/browse.php:67
 msgid "There are no collections on this page."
@@ -515,11 +516,11 @@ msgstr "Погледај све колекције"
 
 #: admin/themes/default/collections/browse.php:70
 msgid "You have no collections."
-msgstr ""
+msgstr "Нема колекција"
 
 #: admin/themes/default/collections/browse.php:72
 msgid "Get started by adding your first collection."
-msgstr ""
+msgstr "Започните додавањем прве колекције"
 
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
@@ -538,7 +539,7 @@ msgstr "Уређивање колекције #%s"
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Collection #%s"
-msgstr ""
+msgstr "Колекција #%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
@@ -552,7 +553,7 @@ msgstr "Недавно додати објекти"
 #: admin/themes/default/items/show.php:53
 #: application/views/helpers/ItemSearchFilters.php:69
 msgid "Yes"
-msgstr ""
+msgstr "Да"
 
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/collections/show.php:42
@@ -560,11 +561,11 @@ msgstr ""
 #: admin/themes/default/items/show.php:53
 #: application/views/helpers/ItemSearchFilters.php:69
 msgid "No"
-msgstr ""
+msgstr "Не"
 
 #: admin/themes/default/collections/show.php:56
 msgid "No contributors."
-msgstr ""
+msgstr "Нема одговорних лица."
 
 #: admin/themes/default/common/appearance-nav.php:5
 msgid "Themes"
@@ -572,7 +573,7 @@ msgstr "Теме"
 
 #: admin/themes/default/common/appearance-nav.php:11
 msgid "Navigation"
-msgstr ""
+msgstr "Навигација"
 
 #: admin/themes/default/common/appearance-nav.php:15
 #: admin/themes/default/common/global-nav.php:23
@@ -677,11 +678,11 @@ msgstr "Одјава"
 
 #: admin/themes/default/common/settings-nav.php:6
 msgid "General"
-msgstr ""
+msgstr "Опште"
 
 #: admin/themes/default/common/settings-nav.php:10
 msgid "Security"
-msgstr ""
+msgstr "Безбедност"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: application/views/helpers/SearchForm.php:34
@@ -695,7 +696,7 @@ msgstr "Скупови елемената"
 
 #: admin/themes/default/common/settings-nav.php:26
 msgid "Item Type Elements"
-msgstr ""
+msgstr "Елементи врсте објеката"
 
 #: admin/themes/default/common/settings-nav.php:32
 msgid "API"
@@ -709,17 +710,17 @@ msgstr "Име"
 
 #: admin/themes/default/element-sets/edit.php:5
 msgid "Edit Element Set"
-msgstr ""
+msgstr "Уреди скуп елемената"
 
 #: admin/themes/default/element-sets/edit.php:17
 msgid ""
 "Click and drag the elements into the preferred display order. Click the "
 "right arrows to add customized comments to element descriptions."
-msgstr ""
+msgstr "Кликни и превуци елементе у жељени редослед приказа. Кликни на стрелицу да додаш коментар на опис елемента."
 
 #: admin/themes/default/element-sets/edit.php:29
 msgid "Comment"
-msgstr ""
+msgstr "Коментар"
 
 #: admin/themes/default/error/403.php:2
 msgid "403: Forbidden"
@@ -761,7 +762,7 @@ msgstr "Недавни објекти"
 
 #: admin/themes/default/error/404.php:29 admin/themes/default/index.php:59
 msgid "Add a new item"
-msgstr ""
+msgstr "Додај нови објекат"
 
 #: admin/themes/default/error/404.php:36 admin/themes/default/index.php:64
 msgid "Recent Collections"
@@ -769,7 +770,7 @@ msgstr "Недавне колекције"
 
 #: admin/themes/default/error/404.php:50 admin/themes/default/index.php:78
 msgid "Add a new collection"
-msgstr ""
+msgstr "Додај нову колекцију"
 
 #: admin/themes/default/error/405.php:2
 msgid "405: Method Not Allowed"
@@ -796,7 +797,7 @@ msgstr "Документ #%s"
 #: admin/themes/default/files/show.php:37
 #: application/libraries/globals.php:398
 msgid "Item"
-msgstr ""
+msgstr "Објекат"
 
 #: admin/themes/default/files/show.php:42
 msgid "Direct Links"
@@ -825,7 +826,7 @@ msgstr "Формат метаподатака"
 
 #: admin/themes/default/files/show.php:56
 msgid "Filename"
-msgstr ""
+msgstr "Име документа"
 
 #: admin/themes/default/files/show.php:58
 #: application/views/scripts/files/show.php:24
@@ -841,7 +842,7 @@ msgstr "Величина документа"
 #: application/views/scripts/files/show.php:30
 #, php-format
 msgid "%s bytes"
-msgstr ""
+msgstr "%s бајтова"
 
 #: admin/themes/default/files/show.php:66
 msgid "File History"
@@ -864,7 +865,7 @@ msgstr "Тип метаподатака"
 #: admin/themes/default/files/show.php:80
 #: application/views/scripts/files/show.php:42
 msgid "Mime Type"
-msgstr ""
+msgstr "Mime тип"
 
 #: admin/themes/default/files/show.php:82
 #: application/views/scripts/files/show.php:46
@@ -873,7 +874,7 @@ msgstr "Врста документа / Оперативни систем"
 
 #: admin/themes/default/files/show.php:89
 msgid "Embedded Metadata"
-msgstr ""
+msgstr "Уграђени метаподаци"
 
 #: admin/themes/default/files/show.php:95
 #: admin/themes/default/items/browse.php:133
@@ -885,27 +886,27 @@ msgstr "Излазни формат"
 
 #: admin/themes/default/index.php:6
 msgid "items"
-msgstr ""
+msgstr "објекти"
 
 #: admin/themes/default/index.php:7
 msgid "collections"
-msgstr ""
+msgstr "колекције"
 
 #: admin/themes/default/index.php:8
 msgid "tags"
-msgstr ""
+msgstr "ознаке"
 
 #: admin/themes/default/index.php:11
 msgid "plugins"
-msgstr ""
+msgstr "додаци"
 
 #: admin/themes/default/index.php:14
 msgid "users"
-msgstr ""
+msgstr "корисници"
 
 #: admin/themes/default/index.php:18
 msgid "theme"
-msgstr ""
+msgstr "тема"
 
 #: admin/themes/default/index.php:29
 msgid "A new version of Omeka is available for download."
@@ -930,7 +931,7 @@ msgstr "Име елемента"
 
 #: admin/themes/default/item-types/add-new-element.php:22
 msgid "Element Description"
-msgstr ""
+msgstr "Опис елемента"
 
 #: admin/themes/default/item-types/add.php:2
 #: application/forms/ItemTypes.php:161
@@ -967,7 +968,7 @@ msgstr "Информација о врсти објекта"
 #: admin/themes/default/users/add.php:6 admin/themes/default/users/edit.php:14
 #: install/views/scripts/index/index.phtml:14
 msgid "required field"
-msgstr ""
+msgstr "обавезно поље"
 
 #: admin/themes/default/item-types/form.php:25
 #: admin/themes/default/item-types/show.php:16
@@ -978,7 +979,7 @@ msgstr "Елементи"
 #: admin/themes/default/items/tag-form.php:22
 #: admin/themes/default/settings/edit-item-type-elements.php:22
 msgid "Undo"
-msgstr ""
+msgstr "Врати"
 
 #: admin/themes/default/item-types/form.php:80
 #: admin/themes/default/item-types/form.php:87
@@ -1000,7 +1001,7 @@ msgstr "Врста објекта #%s"
 
 #: admin/themes/default/item-types/show.php:25
 msgid "There are no elements."
-msgstr ""
+msgstr "Нема елемената."
 
 #: admin/themes/default/item-types/show.php:39
 msgid "There are no recently added items."
@@ -1029,16 +1030,16 @@ msgstr "Колекција"
 
 #: admin/themes/default/items/batch-delete.php:2
 msgid "Batch Delete Items"
-msgstr ""
+msgstr "Групно брисање објеката"
 
 #: admin/themes/default/items/batch-delete.php:38
 msgid ""
 "Some items were excluded because you do not have permission to delete them."
-msgstr ""
+msgstr "Неки објекти су изостављени јер немате дозволу да их обришете."
 
 #: admin/themes/default/items/batch-delete.php:41
 msgid "Checked items will be deleted."
-msgstr ""
+msgstr "Изабрани објекти биће избрисани."
 
 #: admin/themes/default/items/batch-delete.php:50
 #: admin/themes/default/items/batch-edit.php:116
@@ -1153,7 +1154,7 @@ msgstr "Прегледај објекте"
 #: application/libraries/globals.php:2648
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
-msgstr ""
+msgstr "Претражи објекте"
 
 #: admin/themes/default/items/browse.php:37
 msgid "Select"
@@ -1177,11 +1178,11 @@ msgstr "Сакри детаље"
 
 #: admin/themes/default/items/browse.php:148
 msgid "You have no items."
-msgstr ""
+msgstr "Нема објеката."
 
 #: admin/themes/default/items/browse.php:150
 msgid "Get started by adding your first item."
-msgstr ""
+msgstr "Започните додавањем првог објекта."
 
 #: admin/themes/default/items/browse.php:154
 #, php-format
@@ -1204,11 +1205,11 @@ msgstr "Уреди објекат #%s"
 
 #: admin/themes/default/items/files-form.php:2
 msgid "Click and drag the files into the preferred display order."
-msgstr ""
+msgstr "Кликни и превуци документе у жељени редослед приказа."
 
 #: admin/themes/default/items/files-form.php:12
 msgid "Delete "
-msgstr ""
+msgstr "Обриши"
 
 #: admin/themes/default/items/files-form.php:21
 msgid "Add New Files"
@@ -1217,7 +1218,7 @@ msgstr "Додај нове документе"
 #: admin/themes/default/items/files-form.php:23
 #, php-format
 msgid "The maximum file size is %s."
-msgstr ""
+msgstr "Максимална величина документа је %s."
 
 #: admin/themes/default/items/files-form.php:26
 msgid "Find a File"
@@ -1238,7 +1239,7 @@ msgstr "Брзи филтер"
 
 #: admin/themes/default/items/quick-filters.php:5
 msgid "View All"
-msgstr ""
+msgstr "Погледај све"
 
 #: admin/themes/default/items/quick-filters.php:7
 msgid "Private"
@@ -1341,7 +1342,7 @@ msgstr "Само објекти који нису изабрани"
 
 #: admin/themes/default/items/search-form.php:203
 msgid "Search for items"
-msgstr ""
+msgstr "Претрага објеката"
 
 #: admin/themes/default/items/show.php:8
 #, php-format
@@ -1350,15 +1351,15 @@ msgstr "Објекат #%s"
 
 #: admin/themes/default/items/show.php:30
 msgid "Prev Item"
-msgstr ""
+msgstr "Претходни објекат"
 
 #: admin/themes/default/items/show.php:35
 msgid "Next Item"
-msgstr ""
+msgstr "Следећи објекат"
 
 #: admin/themes/default/items/show.php:73
 msgid "File Metadata"
-msgstr ""
+msgstr "Метаподаци документа"
 
 #: admin/themes/default/items/show.php:76
 msgid "There are no files for this item yet."
@@ -1408,12 +1409,12 @@ msgstr "%1$s захтева инсталиране, активиране и уч
 
 #: admin/themes/default/plugins/browse.php:32
 msgid "This is not a valid plugin."
-msgstr ""
+msgstr "Додатак није валидан."
 
 #: admin/themes/default/plugins/browse.php:57
 #, php-format
 msgid "by %s"
-msgstr ""
+msgstr "према %s"
 
 #: admin/themes/default/plugins/browse.php:65
 #: admin/themes/default/themes/browse.php:23
@@ -1463,17 +1464,17 @@ msgstr "Нема инсталираних додатака. Додај их у �
 #: admin/themes/default/plugins/config.php:2
 #, php-format
 msgid "Configure Plugin: %s"
-msgstr ""
+msgstr "Подешавање додатка: %s"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:2
 #, php-format
 msgid "Uninstall Plugin: %s"
-msgstr ""
+msgstr "Деинсталирај додатак: %s"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:7
 #, php-format
 msgid "Are you sure you want to uninstall %s?"
-msgstr ""
+msgstr "Да ли заиста желиш да деинсталираш %s?"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:12
 msgid "Yes, I want to uninstall this plugin."
@@ -1516,45 +1517,45 @@ msgstr ""
 
 #: admin/themes/default/settings/edit-item-type-elements.php:12
 msgid "edit a specific item type"
-msgstr ""
+msgstr "преправи врсту објекта"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:11
 #, php-format
 msgid ""
 "Customize the element descriptions below. To re-order the elements, %s."
-msgstr ""
+msgstr "Подеси опис докумената. Да прегрупишеш елементе, %s."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:42
 msgid "Confirm Delete"
-msgstr ""
+msgstr "Потврди брисање"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:43
 msgid ""
 "Are you sure you want to delete the selected item type elements from the "
 "database? You will lose all text related to the selected elements. This "
 "cannot be undone."
-msgstr ""
+msgstr "Да ли сте сигурни да желите обрисати одабране елементе из базе? Изгубићете сав текст везан за те елементе. Ова операција није повратна."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:50
 msgid "Ok"
-msgstr ""
+msgstr "У реду"
 
 #: admin/themes/default/settings/edit-search.php:10
 msgid "Search Record Types"
-msgstr ""
+msgstr "Претрага врсте записа"
 
 #: admin/themes/default/settings/edit-search.php:13
 msgid "Customize which types of records will be searchable in Omeka."
-msgstr ""
+msgstr "Подеси које ће врсте записа бити претраживе у Омека."
 
 #: admin/themes/default/settings/edit-search.php:23
 #: admin/themes/default/settings/edit-search.php:41
 msgid "Index Records"
-msgstr ""
+msgstr "Индекс записа"
 
 #: admin/themes/default/settings/edit-search.php:26
 msgid "Click on the \"Index Records\" button to re-index your records."
-msgstr ""
+msgstr "Кликни на \"Индекс записа\" да поново индексираш записе."
 
 #: admin/themes/default/settings/edit-search.php:28
 msgid ""
@@ -1563,23 +1564,23 @@ msgid ""
 " are saved, but there are circumstances when your records are not indexed; "
 "for instance, when updating from an earlier version of Omeka or after you "
 "customize which records will be searchable."
-msgstr ""
+msgstr "Индексирање значи сакупљање, рашчлањивање и складиштење података како би олакшали и убрзали претрагу. Омека ће аутоматски индексирати појединачне записе када их снимите, али постоје ситуације у којима ваши записи неће бити индексирани; нпр. када унапредите Омеку или када подесите који ће записи бити претраживи."
 
 #: admin/themes/default/settings/edit-security.php:23
 msgid "Restore Default Extensions"
-msgstr ""
+msgstr "Врати подразумеване екстензије"
 
 #: admin/themes/default/settings/edit-security.php:28
 msgid "Restore Default Types"
-msgstr ""
+msgstr "Врати подразумеване врсте докумената"
 
 #: admin/themes/default/settings/edit-security.php:33
 msgid "Restore Default Elements"
-msgstr ""
+msgstr "Врати подразумеване елементе"
 
 #: admin/themes/default/settings/edit-security.php:38
 msgid "Restore Default Attributes"
-msgstr ""
+msgstr "Врати подразумеване атрибуте"
 
 #: admin/themes/default/settings/edit-settings.php:23
 msgid "Test"
@@ -1587,27 +1588,27 @@ msgstr "Тест"
 
 #: admin/themes/default/tags/browse.php:3
 msgid "Edit Tags"
-msgstr ""
+msgstr "Уреди ознаке"
 
 #: admin/themes/default/tags/browse.php:16
 msgid "Editing Tags"
-msgstr ""
+msgstr "Уреди ознаке"
 
 #: admin/themes/default/tags/browse.php:19
 msgid "To view all items with a tag, click the number."
-msgstr ""
+msgstr "За преглед свих објеката са ознаком, кликни број."
 
 #: admin/themes/default/tags/browse.php:20
 msgid ""
 "To edit the tag name, click the name and begin editing, and hit \"enter\" to"
 " save. To cancel an edit, click the ESC key or click away from the tag."
-msgstr ""
+msgstr "За промену имена ознаке, кликни на име за почетак промене, \"enter\" за снимање. За прекид промене кликни \"ESC\" или било где ван ознаке."
 
 #: admin/themes/default/tags/browse.php:21
 msgid ""
 "To delete a tag, click the X. Deleting a tag will not delete the tagged "
 "items."
-msgstr ""
+msgstr "За брисање ознаке кликни \"X\". Брисањем ознаке нећете обрисати означени објекат."
 
 #: admin/themes/default/tags/browse.php:29
 msgid "Most"
@@ -1642,7 +1643,7 @@ msgstr "Снимак екрана за %s тему"
 
 #: admin/themes/default/themes/browse.php:16
 msgid "Configure Theme"
-msgstr ""
+msgstr "Подеси тему"
 
 #: admin/themes/default/themes/browse.php:19
 msgid "Current Theme"
@@ -1660,16 +1661,16 @@ msgid ""
 "ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a "
 "href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" "
 "target=\"_blank\">design your own</a>!"
-msgstr ""
+msgstr "Додај нове теме преузимањем из <a href=\"http://omeka.org/add-ons/themes/\">Директоријума Омека тема</a>, или <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\">дизајнирајте сопствену тему</a>!"
 
 #: admin/themes/default/themes/browse.php:45
 msgid "Use this theme"
-msgstr ""
+msgstr "Користи ову тему"
 
 #: admin/themes/default/themes/config.php:10
 #, php-format
 msgid "Configure Theme: %s"
-msgstr ""
+msgstr "Подеси тему: %s"
 
 #: admin/themes/default/themes/config.php:11
 msgid "Configurations apply to this theme only."
@@ -1787,7 +1788,7 @@ msgstr "Улога"
 
 #: admin/themes/default/users/browse.php:60
 msgid "inactive"
-msgstr ""
+msgstr "неактиван"
 
 #: admin/themes/default/users/edit.php:8
 #, php-format
@@ -1861,7 +1862,7 @@ msgstr "Пријави се"
 
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
-msgstr ""
+msgstr "(Изгубљена лозинка?)"
 
 #: admin/themes/default/users/show.php:8
 #, php-format
@@ -1874,7 +1875,7 @@ msgstr "Уреди овог корисника"
 
 #: application/controllers/AppearanceController.php:48
 msgid "The appearance settings have been updated."
-msgstr ""
+msgstr "Подешавања изгледа су ажурирана."
 
 #: application/controllers/AppearanceController.php:51
 #: application/controllers/ItemTypesController.php:35
@@ -1887,13 +1888,13 @@ msgstr "Пронађене су грешке у твом формулару. М�
 
 #: application/controllers/AppearanceController.php:66
 msgid "The navigation settings have been updated."
-msgstr ""
+msgstr "Подешавања навигације су ажурирана."
 
 #: application/controllers/AppearanceController.php:69
 msgid ""
 "The navigation settings were not saved because of missing or invalid values."
 "  All changed values have been restored."
-msgstr ""
+msgstr "Подешавања навигације нису снимљена услед недостатка или лоших вредности. Све промене су враћене."
 
 #: application/controllers/CollectionsController.php:74
 #, php-format
@@ -1903,7 +1904,7 @@ msgstr "Колекција \"%s\" је успешно додата!"
 #: application/controllers/CollectionsController.php:76
 #, php-format
 msgid "The collection #%s was successfully added!"
-msgstr ""
+msgstr "Колекција #%s је успешно додата!"
 
 #: application/controllers/CollectionsController.php:84
 #, php-format
@@ -1913,7 +1914,7 @@ msgstr "Колекција \"%s\" је успешно измењена!"
 #: application/controllers/CollectionsController.php:86
 #, php-format
 msgid "The collection #%s was successfully changed!"
-msgstr ""
+msgstr "Колекција #%s је успешно измењена!"
 
 #: application/controllers/CollectionsController.php:94
 #, php-format
@@ -1923,7 +1924,7 @@ msgstr "Колекција \"%s\" је успешно обрисана!"
 #: application/controllers/CollectionsController.php:96
 #, php-format
 msgid "The collection #%s was successfully deleted!"
-msgstr ""
+msgstr "Колекција #%s је успешно обрисана!"
 
 #: application/controllers/CollectionsController.php:104
 #, php-format
@@ -1931,7 +1932,7 @@ msgid ""
 "This will delete the collection \"%s\" and its associated metadata. This "
 "will not delete any items in this collection, but will delete the reference "
 "to this collection in each item."
-msgstr ""
+msgstr "Ово ће обрисати колекцију  \"%s\" и придружене метаподатке.  Објекти у колекцији неће бити обрисани, али ће бити обрисана референца ка овој колекцији у сваком објекту."
 
 #: application/controllers/CollectionsController.php:108
 #, php-format
@@ -1939,7 +1940,7 @@ msgid ""
 "This will delete the collection #%s and its associated metadata. This will "
 "not delete any items in this collection, but will delete the reference to "
 "this collection in each item."
-msgstr ""
+msgstr "Ово ће обрисати колекцију #%s и придружене метаподатке.  Објекти у колекцији неће бити обрисани, али ће бити обрисана референца ка овој колекцији у сваком објекту."
 
 #: application/controllers/ElementSetsController.php:21
 msgid ""
@@ -1949,7 +1950,7 @@ msgstr "Ово ће обрисати скуп елемената и све ел�
 
 #: application/controllers/ElementSetsController.php:65
 msgid "The element set was successfully changed!"
-msgstr ""
+msgstr "Скуп елемената је успешно измењен!"
 
 #: application/controllers/ErrorController.php:64
 msgid "Page not found."
@@ -1961,7 +1962,7 @@ msgstr "Одбијен приступ."
 
 #: application/controllers/FilesController.php:64
 msgid "This will delete the file and its associated metadata."
-msgstr ""
+msgstr "Ово ће обрисати документ и придружене метаподатке."
 
 #: application/controllers/ItemTypesController.php:28
 #, php-format
@@ -3322,16 +3323,16 @@ msgstr "Поносно покреће <a href=\"http://omeka.org\">Omeka</a>."
 
 #: application/views/scripts/common/pagination_control.php:11
 msgid "&lt;"
-msgstr ""
+msgstr "&lt;"
 
 #: application/views/scripts/common/pagination_control.php:34
 #, php-format
 msgid "%s of %s"
-msgstr ""
+msgstr "%s од %s"
 
 #: application/views/scripts/common/pagination_control.php:42
 msgid "&gt;"
-msgstr ""
+msgstr "&gt;"
 
 #: application/views/scripts/error/403.php:2
 msgid "403 Page Forbidden"

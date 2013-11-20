@@ -3,27 +3,27 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Matti Lassila <matti.lassila@gmail.com>, 2012-2013
+# sloicra <sloicra@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-11-20 11:02+0000\n"
-"Last-Translator: Matti Lassila <matti.lassila@gmail.com>\n"
-"Language-Team: Finnish (Finland) (http://www.transifex.com/projects/p/omeka/language/fi_FI/)\n"
+"PO-Revision-Date: 2013-11-20 17:49+0000\n"
+"Last-Translator: sloicra <sloicra@gmail.com>\n"
+"Language-Team: Slovenian (Slovenia) (http://www.transifex.com/projects/p/omeka/language/sl_SI/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fi_FI\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: sl_SI\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. Dublin Core description
 msgid ""
 "The Dublin Core metadata element set is common to all Omeka records, "
 "including items, files, and collections. For more information see, "
 "http://dublincore.org/documents/dces/."
-msgstr "Dublin Core -metatietokenttiä käytetään kaiken Omekaan tallennetun sisällön, kuten aineistojen, tiedostojen ja kokoelmien kuvailuun. Lisätietoja osoitteessa: http://www.kansalliskirjasto.fi/julkaisuala/dublincore.html"
+msgstr ""
 
 #. Dublin Core: Title element name
 #: admin/themes/default/collections/browse.php:22
@@ -31,29 +31,29 @@ msgstr "Dublin Core -metatietokenttiä käytetään kaiken Omekaan tallennetun s
 #: application/views/scripts/items/browse.php:19
 #: application/views/scripts/search/index.php:13
 msgid "Title"
-msgstr "Nimeke"
+msgstr "Naslov"
 
 #. Dublin Core: Title element description
 msgid "A name given to the resource"
-msgstr "Tekijän tai julkaisijan antama aineiston nimi"
+msgstr ""
 
 #. Dublin Core: Creator element name
 #: admin/themes/default/items/browse.php:41
 #: application/views/scripts/items/browse.php:20
 msgid "Creator"
-msgstr "Tekijä"
+msgstr "Avtor"
 
 #. Dublin Core: Creator element description
 msgid "An entity primarily responsible for making the resource"
-msgstr "Aineiston päävastuullinen tekijä"
+msgstr ""
 
 #. Dublin Core: Subject element name
 msgid "Subject"
-msgstr "Aihe"
+msgstr "Tema"
 
 #. Dublin Core: Subject element description
 msgid "The topic of the resource"
-msgstr "Tallenteen aihealueen kuvaus, yleensä asiasanoilla tai fraaseilla kuvattuna"
+msgstr ""
 
 #. Dublin Core: Description element name
 #: admin/themes/default/element-sets/browse.php:17
@@ -63,119 +63,119 @@ msgstr "Tallenteen aihealueen kuvaus, yleensä asiasanoilla tai fraaseilla kuvat
 #: application/forms/ItemTypes.php:150
 #: application/views/scripts/collections/browse.php:17
 msgid "Description"
-msgstr "Kuvaus"
+msgstr ""
 
 #. Dublin Core: Description element description
 msgid "An account of the resource"
-msgstr "Aineiston sisällön kuvaus vapaatekstinä. "
+msgstr ""
 
 #. Dublin Core: Publisher element name
 msgid "Publisher"
-msgstr "Julkaisija"
+msgstr "Založnik"
 
 #. Dublin Core: Publisher element description
 msgid "An entity responsible for making the resource available"
-msgstr "Aineiston julkaisija"
+msgstr ""
 
 #. Dublin Core: Contributor element name
 #. User role: contributor
 msgid "Contributor"
-msgstr "Muu tekijä"
+msgstr "Sodelavec"
 
 #. Dublin Core: Contributor element description
 msgid "An entity responsible for making contributions to the resource"
-msgstr "Henkilö tai organisaatio joka on osallistunut aineiston luomiseen, mutta jonka panos on ollut toissijainen."
+msgstr ""
 
 #. Dublin Core: Date element name
 msgid "Date"
-msgstr "Aikamääre"
+msgstr "Datum"
 
 #. Dublin Core: Date element description
 msgid ""
 "A point or period of time associated with an event in the lifecycle of the "
 "resource"
-msgstr "Aineiston elinkaareen liittyvä ajanhenki"
+msgstr ""
 
 #. Dublin Core: Type element name
 #: admin/themes/default/items/browse.php:42
 msgid "Type"
-msgstr "Laji"
+msgstr "Zvrst"
 
 #. Dublin Core: Type element description
 msgid "The nature or genre of the resource"
-msgstr "Aineiston genre tai muu olemuksen luonnehdinta"
+msgstr ""
 
 #. Dublin Core: Format element name
 msgid "Format"
-msgstr "Formaatti"
+msgstr "Format"
 
 #. Dublin Core: Format element description
 msgid "The file format, physical medium, or dimensions of the resource"
-msgstr "Aineiston fyysinen tai digitaalinen ilmiasu. Esimerkiksi tiedostomuoto tai kesto minuutteina.."
+msgstr ""
 
 #. Dublin Core: Identifier element name
 msgid "Identifier"
-msgstr "Identifiointitunnus"
+msgstr "Identifikator"
 
 #. Dublin Core: Identifier element description
 msgid "An unambiguous reference to the resource within a given context"
-msgstr "Tunnus (merkkijono tai numero), joka yksiselitteisesti identifioi aineiston"
+msgstr ""
 
 #. Dublin Core: Source element name
 msgid "Source"
-msgstr "Lähde"
+msgstr "Vir"
 
 #. Dublin Core: Source element description
 msgid "A related resource from which the described resource is derived"
-msgstr "Toisen aineiston identifikaatiotunnus, joka on jossakin suhteessa kuvailtavaan aineistoon"
+msgstr ""
 
 #. Dublin Core: Language element name
 msgid "Language"
-msgstr "Kieli"
+msgstr "Jezik"
 
 #. Dublin Core: Language element description
 msgid "A language of the resource"
-msgstr "Aineiston kieli"
+msgstr ""
 
 #. Dublin Core: Relation element name
 msgid "Relation"
-msgstr "Suhde"
+msgstr "Odnos"
 
 #. Dublin Core: Relation element description
 msgid "A related resource"
-msgstr "Liittyvä aineisto"
+msgstr ""
 
 #. Dublin Core: Coverage element name
 msgid "Coverage"
-msgstr "Kattavuus"
+msgstr "Pokrivanje"
 
 #. Dublin Core: Coverage element description
 msgid ""
 "The spatial or temporal topic of the resource, the spatial applicability of "
 "the resource, or the jurisdiction under which the resource is relevant"
-msgstr "Aineiston ajallinen tai maantieteellinen kate. Ajallinen kate viittaa lähinnä aineiston asiasisältöön, ei siihen koska se on luotu tai asetettu saataville."
+msgstr ""
 
 #. Dublin Core: Rights element name
 msgid "Rights"
-msgstr "Oikeudet"
+msgstr "Avtorske pravice"
 
 #. Dublin Core: Rights element description
 msgid "Information about rights held in and over the resource"
-msgstr "Aineiston tekijänoikeustiedot"
+msgstr ""
 
 #. Item Type Metadata
 msgid "Item Type Metadata"
-msgstr "Aineistotyypin metatiedot"
+msgstr "Metapodatki vrste dokumenta"
 
 #. Item Type Metadata description
 msgid ""
 "The item type metadata element set, consisting of all item type elements "
 "bundled with Omeka and all item type elements created by an administrator."
-msgstr "Aineistotyypin metatiedot koostuen kaikista oletusarvoisesti Omekan mukana tulevista elementeistä ja ylläpitäjän luomista elementeistä."
+msgstr ""
 
 #. Omeka Legacy File
 msgid "Omeka Legacy File"
-msgstr "Vanhamuotoinen Omeka-tiedosto"
+msgstr ""
 
 #. Omeka Legacy File description
 msgid ""
@@ -183,143 +183,143 @@ msgid ""
 "was included in the `files` table in previous versions of Omeka. These "
 "elements are common to all Omeka files. This set may be deprecated in future"
 " versions."
-msgstr "Aiemmat Omekan versiot sisällyttivät Dublin Core .kenttien ohella muita metatietokenttiä tietokannan `files`-tauluun ja ne ovat yhteisiä kaikille järjestelmän tiedostoille. Nämä metatiedot voivat poistua käytöstä Omekan tulevissa versiossa. "
+msgstr ""
 
 #. Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
-msgstr "Muu tekijä"
+msgstr "Ostali avtorji"
 
 #. Omeka Legacy File: Transcriber element
 msgid "Transcriber"
-msgstr "Transkriboija"
+msgstr ""
 
 #. Omeka Legacy File: Producer element
 msgid "Producer"
-msgstr "Tuottaja"
+msgstr ""
 
 #. Omeka Legacy File: Render Device element
 msgid "Render Device"
-msgstr "Toistolaite"
+msgstr ""
 
 #. Omeka Legacy File: Render Details element
 msgid "Render Details"
-msgstr "Toistotiedot"
+msgstr ""
 
 #. Omeka Legacy File: Capture Date element
 msgid "Capture Date"
-msgstr "Tallennuspäivä"
+msgstr ""
 
 #. Omeka Legacy File: Capture Device element
 msgid "Capture Device"
-msgstr "Tallennuslaite"
+msgstr ""
 
 #. Omeka Legacy File: Capture Details element
 msgid "Capture Details"
-msgstr "Tallennustiedot"
+msgstr ""
 
 #. Omeka Legacy File: Change History element
 msgid "Change History"
-msgstr "Muutoshistoria"
+msgstr ""
 
 #. Omeka Legacy File: Watermark element
 msgid "Watermark"
-msgstr "Vesileima"
+msgstr "Vodni žig"
 
 #. Omeka Legacy File: Encryption element
 msgid "Encryption"
-msgstr "Salaus"
+msgstr ""
 
 #. Omeka Legacy File: Compression element
 msgid "Compression"
-msgstr "Pakkaus"
+msgstr ""
 
 #. Omeka Legacy File: Post Processing element
 msgid "Post Processing"
-msgstr "Jälkikäsittely"
+msgstr ""
 
 #. Omeka Image File
 msgid "Omeka Image File"
-msgstr "Kuvatiedostot"
+msgstr ""
 
 #. Omeka Image File description
 msgid ""
 "The metadata element set that was included in the `files_images` table in "
 "previous versions of Omeka. These elements are common to all image files."
-msgstr "Metatietokenttien ryhmä, joka on sisällytetty tietokannan `files_images`-tauluun Omekan aiemmissa versiossa. Nämä kentät ovat yhteisiä kaikille kuvatiedostoilllle. "
+msgstr ""
 
 #. Omeka Image File: Width element
 msgid "Width"
-msgstr "Leveys"
+msgstr "Širina"
 
 #. Omeka Image File: Height element
 msgid "Height"
-msgstr "Korkeus"
+msgstr "Višina"
 
 #. Omeka Image File: Bit Depth element
 msgid "Bit Depth"
-msgstr "Bittitarkkuus"
+msgstr "Bitna globina"
 
 #. Omeka Image File: Channels element
 msgid "Channels"
-msgstr "Kuvakanavat"
+msgstr "Kanali"
 
 #. Omeka Image File: Exif String element
 msgid "Exif String"
-msgstr "EXIF-merkkijono"
+msgstr ""
 
 #. Omeka Image File: Exif Array element
 msgid "Exif Array"
-msgstr "EXIF-taulukko"
+msgstr ""
 
 #. Omeka Image File: IPTC String element
 msgid "IPTC String"
-msgstr "IPTC-merkkijono"
+msgstr ""
 
 #. Omeka Image File: IPTC Array element
 msgid "IPTC Array"
-msgstr "IPTC-taulukko"
+msgstr ""
 
 #. Omeka Video File
 msgid "Omeka Video File"
-msgstr "Videotiedosto"
+msgstr ""
 
 #. Omeka Video File description
 msgid ""
 "The metadata element set that was included in the `files_videos` table in "
 "previous versions of Omeka. These elements are common to all video files."
-msgstr "Metatietokenttien ryhmä, joka on sisällytetty tietokannan `files_videos`-tauluun Omekan aiemmissa versiossa. Nämä kentät ovat yhteisiä kaikille videotiedostoille. "
+msgstr ""
 
 #. Omeka Video File: Bitrate element
 msgid "Bitrate"
-msgstr "Bittinopeus"
+msgstr ""
 
 # Omeka Video File: Duration element
 msgid "Duration"
-msgstr "Kesto"
+msgstr ""
 
 #. Omeka Video File: Sample Rate element
 msgid "Sample Rate"
-msgstr "Näytteistystaajuus"
+msgstr ""
 
 #. Omeka Video File: Codec element
 msgid "Codec"
-msgstr "Koodekki"
+msgstr ""
 
 #. Format (Legacy) Metadata element set
 msgid "Format (Legacy) Metadata"
-msgstr "Vanhamuotoisen formaatin metatiedot"
+msgstr ""
 
 #. User role: Super
 msgid "Super"
-msgstr "Pääkäyttäjä"
+msgstr ""
 
 #. User role: Admin
 msgid "Admin"
-msgstr "Ylläpitäjä"
+msgstr ""
 
 #. User role: Researcher
 msgid "Researcher"
-msgstr "Tutkija"
+msgstr ""
 
 #: admin/themes/default/appearance/edit-navigation.php:3
 #: admin/themes/default/appearance/edit-settings.php:2
@@ -327,33 +327,33 @@ msgstr "Tutkija"
 #: admin/themes/default/themes/browse.php:2
 #: admin/themes/default/themes/config.php:3
 msgid "Appearance"
-msgstr "Ulkoasu"
+msgstr ""
 
 #: admin/themes/default/appearance/edit-navigation.php:14
 msgid ""
 "Check the links to display them in the main navigation. Click and drag the "
 "links into the preferred display order."
-msgstr "Valitse päänavigoinnissa näytettävät linkit. Vedä ja pudota linkit haluttuun järjestykseen."
+msgstr ""
 
 #: admin/themes/default/appearance/edit-navigation.php:19
 msgid "Add a Link to the Navigation"
-msgstr "Lisää linkki navigointiin"
+msgstr ""
 
 #: admin/themes/default/appearance/edit-navigation.php:21
 #: admin/themes/default/appearance/edit-navigation.php:37
 #: admin/themes/default/users/edit.php:50 application/forms/Navigation.php:132
 msgid "Label"
-msgstr "Linkkiteksti"
+msgstr ""
 
 #: admin/themes/default/appearance/edit-navigation.php:23
 #: admin/themes/default/appearance/edit-navigation.php:38
 #: application/forms/Navigation.php:133
 msgid "URL"
-msgstr "URL"
+msgstr ""
 
 #: admin/themes/default/appearance/edit-navigation.php:25
 msgid "Add Link"
-msgstr "Lisää linkki"
+msgstr ""
 
 #: admin/themes/default/appearance/edit-navigation.php:31
 #: admin/themes/default/appearance/edit-settings.php:21
@@ -373,7 +373,7 @@ msgstr "Lisää linkki"
 #: application/forms/ItemTypes.php:169
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:73
 msgid "Save Changes"
-msgstr "Tallenna muutokset"
+msgstr "Shrani spremembe"
 
 #: admin/themes/default/appearance/edit-navigation.php:39
 #: admin/themes/default/collections/edit.php:23
@@ -383,7 +383,7 @@ msgstr "Tallenna muutokset"
 #: admin/themes/default/items/show.php:45
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:79
 msgid "View Public Page"
-msgstr "Näytä julkinen sivu"
+msgstr ""
 
 #: admin/themes/default/appearance/edit-navigation.php:40
 #: admin/themes/default/collections/edit.php:24
@@ -404,18 +404,18 @@ msgstr "Näytä julkinen sivu"
 #: admin/themes/default/users/edit.php:17
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:82
 msgid "Delete"
-msgstr "Poista"
+msgstr "Zbriši"
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:11
 #: admin/themes/default/collections/browse.php:64
 #: admin/themes/default/collections/browse.php:73
 msgid "Add a Collection"
-msgstr "Lisää kokoelma"
+msgstr "Dodaj zbirko"
 
 #: admin/themes/default/collections/add.php:11
 msgid "Add Collection"
-msgstr "Lisää kokoelma"
+msgstr ""
 
 #: admin/themes/default/collections/add.php:16
 #: admin/themes/default/collections/edit.php:30
@@ -426,7 +426,7 @@ msgstr "Lisää kokoelma"
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:52
 msgid "Public"
-msgstr "Julkinen"
+msgstr "Javno"
 
 #: admin/themes/default/collections/add.php:19
 #: admin/themes/default/collections/edit.php:35
@@ -437,7 +437,7 @@ msgstr "Julkinen"
 #: admin/themes/default/items/quick-filters.php:8
 #: admin/themes/default/items/show.php:53
 msgid "Featured"
-msgstr "Nostettu etusivulle"
+msgstr "Priporočeno"
 
 #: admin/themes/default/collections/browse.php:2
 #: application/libraries/Omeka/Navigation.php:149
@@ -447,7 +447,7 @@ msgstr "Nostettu etusivulle"
 #: application/tests/suite/Omeka/NavigationTest.php:950
 #: application/views/scripts/collections/browse.php:2
 msgid "Browse Collections"
-msgstr "Selaa kokoelmia"
+msgstr "Zbirke"
 
 #: admin/themes/default/collections/browse.php:2
 #: admin/themes/default/item-types/browse.php:2
@@ -459,30 +459,30 @@ msgstr "Selaa kokoelmia"
 #: application/views/scripts/search/index.php:2
 #, php-format
 msgid "(%s total)"
-msgstr "(yhteensä %s)"
+msgstr "(%s skupno)"
 
 #: admin/themes/default/collections/browse.php:23
 #: admin/themes/default/collections/show.php:51
 msgid "Contributors"
-msgstr "Osallistujat"
+msgstr ""
 
 #: admin/themes/default/collections/browse.php:24
 #: admin/themes/default/files/show.php:68
 #: admin/themes/default/items/browse.php:43
 #: application/views/scripts/items/browse.php:21
 msgid "Date Added"
-msgstr "Luontipäivä"
+msgstr "Datum vnosa"
 
 #: admin/themes/default/collections/browse.php:25
 #: admin/themes/default/collections/show.php:46
 #: admin/themes/default/item-types/show.php:42
 msgid "Total Number of Items"
-msgstr "Aineistoja yhteensä"
+msgstr "Skupno število dokumentov"
 
 #: admin/themes/default/collections/browse.php:37
 #: admin/themes/default/items/browse.php:72
 msgid "(Private)"
-msgstr "(Yksityinen)"
+msgstr ""
 
 #: admin/themes/default/collections/browse.php:40
 #: admin/themes/default/collections/show.php:32
@@ -499,27 +499,27 @@ msgstr "(Yksityinen)"
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:63
 msgid "Edit"
-msgstr "Muokkaa"
+msgstr "Uredi"
 
 #: admin/themes/default/collections/browse.php:49
 msgid "No contributors"
-msgstr "Ei osallistujia"
+msgstr ""
 
 #: admin/themes/default/collections/browse.php:67
 msgid "There are no collections on this page."
-msgstr "Sivulla ei ole kokoelmia."
+msgstr ""
 
 #: admin/themes/default/collections/browse.php:67
 msgid "View All Collections"
-msgstr "Näytä kaikki kokoelmat"
+msgstr "Prikaži vse zbirke"
 
 #: admin/themes/default/collections/browse.php:70
 msgid "You have no collections."
-msgstr "Ei kokoelmia."
+msgstr ""
 
 #: admin/themes/default/collections/browse.php:72
 msgid "Get started by adding your first collection."
-msgstr "Aloita luomalla ensimmäinen kokoelma."
+msgstr ""
 
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
@@ -528,23 +528,23 @@ msgstr "Aloita luomalla ensimmäinen kokoelma."
 #: application/views/scripts/collections/show.php:4
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
-msgstr "[Ei nimekettä]"
+msgstr ""
 
 #: admin/themes/default/collections/edit.php:8
 #, php-format
 msgid "Edit Collection #%s"
-msgstr "Muokkaa kokoelmaa #%s"
+msgstr ""
 
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Collection #%s"
-msgstr "Kokoelma #%s"
+msgstr ""
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
 #: application/views/scripts/index.php:35
 msgid "Recently Added Items"
-msgstr "Vasta lisätyt aineistot"
+msgstr "Nedavno dodani dokumenti"
 
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/collections/show.php:42
@@ -552,7 +552,7 @@ msgstr "Vasta lisätyt aineistot"
 #: admin/themes/default/items/show.php:53
 #: application/views/helpers/ItemSearchFilters.php:69
 msgid "Yes"
-msgstr "Kyllä"
+msgstr "Da"
 
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/collections/show.php:42
@@ -560,19 +560,19 @@ msgstr "Kyllä"
 #: admin/themes/default/items/show.php:53
 #: application/views/helpers/ItemSearchFilters.php:69
 msgid "No"
-msgstr "Ei"
+msgstr "Ne"
 
 #: admin/themes/default/collections/show.php:56
 msgid "No contributors."
-msgstr "Ei osallistujia."
+msgstr ""
 
 #: admin/themes/default/common/appearance-nav.php:5
 msgid "Themes"
-msgstr "Teemat"
+msgstr "Teme"
 
 #: admin/themes/default/common/appearance-nav.php:11
 msgid "Navigation"
-msgstr "Navigointi"
+msgstr ""
 
 #: admin/themes/default/common/appearance-nav.php:15
 #: admin/themes/default/common/global-nav.php:23
@@ -583,26 +583,26 @@ msgstr "Navigointi"
 #: admin/themes/default/settings/edit-security.php:3
 #: admin/themes/default/settings/edit-settings.php:3
 msgid "Settings"
-msgstr "Asetukset"
+msgstr "Nastavitve"
 
 #: admin/themes/default/common/content-nav.php:5
 #: admin/themes/default/index.php:2
 msgid "Dashboard"
-msgstr "Ylläpito"
+msgstr "Nadzorna plošča"
 
 #: admin/themes/default/common/content-nav.php:9
 #: admin/themes/default/items/batch-delete.php:17
 #: admin/themes/default/items/batch-edit.php:17
 msgid "Items"
-msgstr "Aineistot"
+msgstr "Dokumenti"
 
 #: admin/themes/default/common/content-nav.php:13
 msgid "Collections"
-msgstr "Kokoelmat"
+msgstr "Zbirke"
 
 #: admin/themes/default/common/content-nav.php:17
 msgid "Item Types"
-msgstr "Aineistotyypit"
+msgstr "Vrste dokumentov"
 
 #: admin/themes/default/common/content-nav.php:21
 #: admin/themes/default/items/browse.php:94
@@ -610,270 +610,270 @@ msgstr "Aineistotyypit"
 #: application/views/scripts/items/browse.php:46
 #: application/views/scripts/items/show.php:26
 msgid "Tags"
-msgstr "Avainsanat"
+msgstr "Označevalci"
 
 #: admin/themes/default/common/delete-confirm.php:3
 #: application/views/scripts/common/delete-confirm.php:3
 #, php-format
 msgid "Delete %s"
-msgstr "Poista %s"
+msgstr ""
 
 #: admin/themes/default/common/delete-confirm.php:10
 #: application/views/scripts/common/delete-confirm.php:12
 msgid "Are you sure?"
-msgstr "Oletko varma?"
+msgstr ""
 
 #: admin/themes/default/common/footer.php:6
 #: admin/themes/default/common/login-footer.php:7
 msgid "Powered by Omeka"
-msgstr "Omekan voimin"
+msgstr ""
 
 #: admin/themes/default/common/footer.php:6
 msgid "Documentation"
-msgstr "Dokumentointi"
+msgstr ""
 
 #: admin/themes/default/common/footer.php:6
 msgid "Support Forums"
-msgstr "Tukifoorumi"
+msgstr ""
 
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
 #: admin/themes/default/plugins/browse.php:52
 #, php-format
 msgid "Version %s"
-msgstr "Versio %s"
+msgstr ""
 
 #: admin/themes/default/common/footer.php:10
 #: admin/themes/default/system-info/index.php:2
 msgid "System Information"
-msgstr "Järjestelmätiedot"
+msgstr ""
 
 #: admin/themes/default/common/global-nav.php:5
 #: admin/themes/default/plugins/browse.php:2
 msgid "Plugins"
-msgstr "Lisäosat"
+msgstr "Vtičniki"
 
 #: admin/themes/default/common/global-nav.php:17
 msgid "Users"
-msgstr "Käyttäjät"
+msgstr "Uporabniki"
 
 #: admin/themes/default/common/header.php:11
 #: admin/themes/default/upgrade/index.php:6
 #: admin/themes/default/upgrade/migrate.php:6
 #: application/views/scripts/common/admin-bar.php:11
 msgid "Omeka Admin"
-msgstr "Ylläpito"
+msgstr ""
 
 #: admin/themes/default/common/header.php:60
 #: application/views/scripts/common/admin-bar.php:7
 #, php-format
 msgid "Welcome, %s"
-msgstr "Tervetuloa %s"
+msgstr "Dobrodošli, %s"
 
 #: admin/themes/default/common/header.php:61
 #: application/views/scripts/common/admin-bar.php:15
 msgid "Log Out"
-msgstr "Kirjaudu ulos"
+msgstr "Odjava"
 
 #: admin/themes/default/common/settings-nav.php:6
 msgid "General"
-msgstr "Yleisasetukset"
+msgstr ""
 
 #: admin/themes/default/common/settings-nav.php:10
 msgid "Security"
-msgstr "Turvallisuus"
+msgstr ""
 
 #: admin/themes/default/common/settings-nav.php:16
 #: application/views/helpers/SearchForm.php:34
 #: application/views/scripts/items/search-form.php:186
 msgid "Search"
-msgstr "Haku"
+msgstr ""
 
 #: admin/themes/default/common/settings-nav.php:20
 msgid "Element Sets"
-msgstr "Metatietokentät"
+msgstr ""
 
 #: admin/themes/default/common/settings-nav.php:26
 msgid "Item Type Elements"
-msgstr "Aineistotyypin metatiedot"
+msgstr ""
 
 #: admin/themes/default/common/settings-nav.php:32
 msgid "API"
-msgstr "API"
+msgstr ""
 
 #: admin/themes/default/element-sets/browse.php:16
 #: admin/themes/default/users/browse.php:17
 #: application/forms/ItemTypes.php:141
 msgid "Name"
-msgstr "Nimi"
+msgstr "Ime"
 
 #: admin/themes/default/element-sets/edit.php:5
 msgid "Edit Element Set"
-msgstr "Muokkaa metatietokenttiä"
+msgstr ""
 
 #: admin/themes/default/element-sets/edit.php:17
 msgid ""
 "Click and drag the elements into the preferred display order. Click the "
 "right arrows to add customized comments to element descriptions."
-msgstr "Vedä ja pudota kentät haluamaasi järjestykseen. Klikkaa nuolta lisätäksesi ohjeita ja kommentteja kenttien kuvauksiin."
+msgstr ""
 
 #: admin/themes/default/element-sets/edit.php:29
 msgid "Comment"
-msgstr "Kommentti"
+msgstr ""
 
 #: admin/themes/default/error/403.php:2
 msgid "403: Forbidden"
-msgstr "403 - Ei pääsyä"
+msgstr "403: Dostop zavrnjen"
 
 #: admin/themes/default/error/403.php:6
 msgid "Sorry, you do not have permission to access this page."
-msgstr "Käyttöoikeutesi eivät riitä tälle sivulle."
+msgstr "Oprostite, nimate dovoljenja za dostop do te strani."
 
 #: admin/themes/default/error/403.php:10 admin/themes/default/error/404.php:9
 #: admin/themes/default/error/405.php:8
 msgid "site administrator"
-msgstr "ylläpitäjä"
+msgstr "administrator"
 
 #: admin/themes/default/error/403.php:11
 #, php-format
 msgid "If you think you should have permission, try contacting the %s."
-msgstr "Jos koet, että käyttöoikeuksissa on virhe, ota yhteyttä henkilöön %s."
+msgstr ""
 
 #: admin/themes/default/error/404.php:2
 msgid "404: Page Not Found"
-msgstr "404 - Sivua ei löydy"
+msgstr ""
 
 #: admin/themes/default/error/404.php:6
 msgid ""
 "You&#8217;ve tried to access a page that does not seem to exist. Sometimes "
 "this happens. Below is a quick break-down of the items, collections, and "
 "exhibits on this site."
-msgstr "Yritit sivulle, jota ei näyttäisi olevan olemassa. "
+msgstr ""
 
 #: admin/themes/default/error/404.php:10
 #, php-format
 msgid "If this does not help, try contacting the %s."
-msgstr "Jos tästä ei ole apua, %s saattaa voida auttaa."
+msgstr ""
 
 #: admin/themes/default/error/404.php:16 admin/themes/default/index.php:46
 msgid "Recent Items"
-msgstr "Uusimmat aineistot"
+msgstr "Nedavni dokumenti"
 
 #: admin/themes/default/error/404.php:29 admin/themes/default/index.php:59
 msgid "Add a new item"
-msgstr "Lisää aineisto"
+msgstr ""
 
 #: admin/themes/default/error/404.php:36 admin/themes/default/index.php:64
 msgid "Recent Collections"
-msgstr "Uusimmat kokoelmat"
+msgstr "Nedavne zbirke"
 
 #: admin/themes/default/error/404.php:50 admin/themes/default/index.php:78
 msgid "Add a new collection"
-msgstr "Lisää kokoelma"
+msgstr ""
 
 #: admin/themes/default/error/405.php:2
 msgid "405: Method Not Allowed"
-msgstr "405: Menetelmä ei ole sallittu"
+msgstr ""
 
 #: admin/themes/default/error/405.php:9
 #, php-format
 msgid ""
 "You must use a different method to access this URL. If you reached this page"
 " by following a link or clicking a button in Omeka, please contact the %s."
-msgstr "Tavoittelemasi URL-osoite ei tue tätä pääsymenetelmää. Jos päädyit tälle sivulle klikattuasi Omekan sisällä olevaa linkkiä tai painiketta, %s on taho jolle voit ilmoittaa asiasta."
+msgstr ""
 
 #: admin/themes/default/files/edit.php:8
 #, php-format
 msgid "Edit File #%s"
-msgstr "Muokkaa tiedostoa #%s"
+msgstr ""
 
 #: admin/themes/default/files/show.php:9
 #: application/views/scripts/files/show.php:9
 #, php-format
 msgid "File #%s"
-msgstr "Tiedosto #%s"
+msgstr ""
 
 #: admin/themes/default/files/show.php:37
 #: application/libraries/globals.php:398
 msgid "Item"
-msgstr "Aineisto"
+msgstr ""
 
 #: admin/themes/default/files/show.php:42
 msgid "Direct Links"
-msgstr "Suorat linkit"
+msgstr ""
 
 #: admin/themes/default/files/show.php:44
 msgid "Original"
-msgstr "Alkuperäinen"
+msgstr ""
 
 #: admin/themes/default/files/show.php:46
 msgid "Fullsize"
-msgstr "Täysi tarkkuus"
+msgstr ""
 
 #: admin/themes/default/files/show.php:47
 msgid "Thumbnail"
-msgstr "Esikatselukuva"
+msgstr ""
 
 #: admin/themes/default/files/show.php:48
 msgid "Square Thumbnail"
-msgstr "Neliöity esikatselukuva"
+msgstr ""
 
 #: admin/themes/default/files/show.php:54
 #: application/views/scripts/files/show.php:22
 msgid "Format Metadata"
-msgstr "Tiedostomuodon metatiedot"
+msgstr ""
 
 #: admin/themes/default/files/show.php:56
 msgid "Filename"
-msgstr "Tiedostonimi"
+msgstr ""
 
 #: admin/themes/default/files/show.php:58
 #: application/views/scripts/files/show.php:24
 msgid "Original Filename"
-msgstr "Alkuperäinen tiedostonimi"
+msgstr ""
 
 #: admin/themes/default/files/show.php:60
 #: application/views/scripts/files/show.php:29
 msgid "File Size"
-msgstr "Tiedoston koko"
+msgstr ""
 
 #: admin/themes/default/files/show.php:61
 #: application/views/scripts/files/show.php:30
 #, php-format
 msgid "%s bytes"
-msgstr "%s tavua"
+msgstr ""
 
 #: admin/themes/default/files/show.php:66
 msgid "File History"
-msgstr "Tiedoston historia"
+msgstr ""
 
 #: admin/themes/default/files/show.php:70
 msgid "Date Modified"
-msgstr "Muokkauspäivä"
+msgstr "Datum spremembe"
 
 #: admin/themes/default/files/show.php:72
 #: application/views/scripts/files/show.php:34
 msgid "Authentication"
-msgstr "MD5-tarkistussumma"
+msgstr ""
 
 #: admin/themes/default/files/show.php:78
 #: application/views/scripts/files/show.php:40
 msgid "Type Metadata"
-msgstr "MIME-tyypin metatiedot"
+msgstr ""
 
 #: admin/themes/default/files/show.php:80
 #: application/views/scripts/files/show.php:42
 msgid "Mime Type"
-msgstr "Mime-tyyppi"
+msgstr ""
 
 #: admin/themes/default/files/show.php:82
 #: application/views/scripts/files/show.php:46
 msgid "File Type / OS"
-msgstr "Tiedostomuoto / käyttöjärjestelmä"
+msgstr ""
 
 #: admin/themes/default/files/show.php:89
 msgid "Embedded Metadata"
-msgstr "Upotettu metadata"
+msgstr ""
 
 #: admin/themes/default/files/show.php:95
 #: admin/themes/default/items/browse.php:133
@@ -881,40 +881,40 @@ msgstr "Upotettu metadata"
 #: application/views/scripts/items/browse.php:60
 #: application/views/scripts/items/show.php:38
 msgid "Output Formats"
-msgstr "Koneluettavat metatiedot"
+msgstr ""
 
 #: admin/themes/default/index.php:6
 msgid "items"
-msgstr "aineistoja"
+msgstr ""
 
 #: admin/themes/default/index.php:7
 msgid "collections"
-msgstr "kokoelmia"
+msgstr ""
 
 #: admin/themes/default/index.php:8
 msgid "tags"
-msgstr "avainsanoja"
+msgstr ""
 
 #: admin/themes/default/index.php:11
 msgid "plugins"
-msgstr "lisäosia"
+msgstr ""
 
 #: admin/themes/default/index.php:14
 msgid "users"
-msgstr "käyttäjiä"
+msgstr "uporabniki"
 
 #: admin/themes/default/index.php:18
 msgid "theme"
-msgstr "ulkoasu"
+msgstr ""
 
 #: admin/themes/default/index.php:29
 msgid "A new version of Omeka is available for download."
-msgstr "Omekan uusi versio on saatavilla."
+msgstr ""
 
 #: admin/themes/default/index.php:30
 #, php-format
 msgid "Upgrade to %s"
-msgstr "Päivitä versioon %s"
+msgstr ""
 
 #: admin/themes/default/item-types/add-existing-element.php:22
 #: admin/themes/default/item-types/add-new-element.php:15
@@ -922,100 +922,100 @@ msgstr "Päivitä versioon %s"
 #: admin/themes/default/items/tag-form.php:23
 #: application/views/helpers/ElementInput.php:113
 msgid "Remove"
-msgstr "Poista"
+msgstr "Izbriši"
 
 #: admin/themes/default/item-types/add-new-element.php:6
 msgid "Element Name"
-msgstr "Metatietoelementin nimi"
+msgstr ""
 
 #: admin/themes/default/item-types/add-new-element.php:22
 msgid "Element Description"
-msgstr "Kuvaus"
+msgstr ""
 
 #: admin/themes/default/item-types/add.php:2
 #: application/forms/ItemTypes.php:161
 msgid "Add Item Type"
-msgstr "Lisää aineistotyyppi"
+msgstr ""
 
 #: admin/themes/default/item-types/browse.php:2
 msgid "Browse Item Types"
-msgstr "Selaa aineistotyyppejä"
+msgstr ""
 
 #: admin/themes/default/item-types/browse.php:7
 #: admin/themes/default/item-types/browse.php:40
 msgid "Add an Item Type"
-msgstr "Luo aineistotyyppi"
+msgstr ""
 
 #: admin/themes/default/item-types/browse.php:14
 msgid "Type Name"
-msgstr "Aineistotyypin nimi"
+msgstr ""
 
 #: admin/themes/default/item-types/browse.php:16
 msgid "Total Items"
-msgstr "Aineistoja yhteensä"
+msgstr ""
 
 #: admin/themes/default/item-types/edit.php:8
 #, php-format
 msgid "Edit Item Type #%s"
-msgstr "Muokkaa aineistotyyppiä #%s"
+msgstr ""
 
 #: admin/themes/default/item-types/form.php:14
 msgid "Item Type Information"
-msgstr "Aineistotyypin tiedot"
+msgstr ""
 
 #: admin/themes/default/item-types/form.php:15
 #: admin/themes/default/users/add.php:6 admin/themes/default/users/edit.php:14
 #: install/views/scripts/index/index.phtml:14
 msgid "required field"
-msgstr "vaadittu kenttä"
+msgstr ""
 
 #: admin/themes/default/item-types/form.php:25
 #: admin/themes/default/item-types/show.php:16
 msgid "Elements"
-msgstr "Metatietoelementit"
+msgstr ""
 
 #: admin/themes/default/item-types/form.php:42
 #: admin/themes/default/items/tag-form.php:22
 #: admin/themes/default/settings/edit-item-type-elements.php:22
 msgid "Undo"
-msgstr "Peru"
+msgstr ""
 
 #: admin/themes/default/item-types/form.php:80
 #: admin/themes/default/item-types/form.php:87
 msgid "Add Element"
-msgstr "Lisää metatietokenttä"
+msgstr ""
 
 #: admin/themes/default/item-types/form.php:84
 msgid "Existing"
-msgstr "Olemassaoleva"
+msgstr ""
 
 #: admin/themes/default/item-types/form.php:85
 msgid "New"
-msgstr "Uusi"
+msgstr ""
 
 #: admin/themes/default/item-types/show.php:8
 #, php-format
 msgid "Item Type #%s"
-msgstr "Aineistotyyppi #%s"
+msgstr ""
 
 #: admin/themes/default/item-types/show.php:25
 msgid "There are no elements."
-msgstr "Ei kenttiä."
+msgstr ""
 
 #: admin/themes/default/item-types/show.php:39
 msgid "There are no recently added items."
-msgstr "Ei vastikään lisättyjä aineistoja."
+msgstr "Ni nobenih nedavno dodanih dokumentov."
 
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:20
 #: admin/themes/default/items/browse.php:116
 #: admin/themes/default/items/browse.php:151
 msgid "Add an Item"
-msgstr "Lisää aineisto"
+msgstr ""
 
 #: admin/themes/default/items/add.php:12
 msgid "Add Item"
-msgstr "Lisää aineisto"
+msgstr ""
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit.php:89
@@ -1025,85 +1025,85 @@ msgstr "Lisää aineisto"
 #: application/libraries/globals.php:400
 #: application/views/scripts/items/show.php:18
 msgid "Collection"
-msgstr "Kokoelma"
+msgstr "Zbirka"
 
 #: admin/themes/default/items/batch-delete.php:2
 msgid "Batch Delete Items"
-msgstr "Poista useita aineistoja"
+msgstr ""
 
 #: admin/themes/default/items/batch-delete.php:38
 msgid ""
 "Some items were excluded because you do not have permission to delete them."
-msgstr "Joitain aineistoja ei voitu poistaa sillä käyttöoikeudet eivät riittäneet."
+msgstr ""
 
 #: admin/themes/default/items/batch-delete.php:41
 msgid "Checked items will be deleted."
-msgstr "Valitut aineistot poistetaan."
+msgstr ""
 
 #: admin/themes/default/items/batch-delete.php:50
 #: admin/themes/default/items/batch-edit.php:116
 msgid "Delete Items"
-msgstr "Poista aineistoja"
+msgstr "Izbriši dokumente"
 
 #: admin/themes/default/items/batch-edit.php:2
 msgid "Batch Edit Items"
-msgstr "Muokkaa useita aineistoja"
+msgstr ""
 
 #: admin/themes/default/items/batch-edit.php:36
 msgid "Changes will be applied to checked items."
-msgstr "Muutokset vaikuttavat merkittyihin aineistoihin."
+msgstr ""
 
 #: admin/themes/default/items/batch-edit.php:41
 msgid "Item Metadata"
-msgstr "Aineiston metatiedot"
+msgstr ""
 
 #: admin/themes/default/items/batch-edit.php:46
 msgid "Public?"
-msgstr "Julkinen"
+msgstr ""
 
 #: admin/themes/default/items/batch-edit.php:49
 #: admin/themes/default/items/batch-edit.php:64
 #: admin/themes/default/items/batch-edit.php:78
 #: admin/themes/default/items/batch-edit.php:93
 msgid "Select Below"
-msgstr "Valitse"
+msgstr ""
 
 #: admin/themes/default/items/batch-edit.php:51
 msgid "Not Public"
-msgstr "Ei julkinen"
+msgstr "Ni javno"
 
 #: admin/themes/default/items/batch-edit.php:61
 msgid "Featured?"
-msgstr "Etusivunosto"
+msgstr ""
 
 #: admin/themes/default/items/batch-edit.php:66
 msgid "Not Featured"
-msgstr "Ei nostettu"
+msgstr "Ni priporočeno"
 
 #: admin/themes/default/items/batch-edit.php:74
 #: admin/themes/default/items/item-type-form.php:3
 msgid "Item Type"
-msgstr "Aineistotyyppi"
+msgstr ""
 
 #: admin/themes/default/items/batch-edit.php:83
 #: admin/themes/default/items/batch-edit.php:98
 msgid "Remove?"
-msgstr "Poista?"
+msgstr ""
 
 #: admin/themes/default/items/batch-edit.php:104
 #: admin/themes/default/items/tag-form.php:8
 #: admin/themes/default/items/tag-form.php:11
 msgid "Add Tags"
-msgstr "Lisää avainsanoja"
+msgstr "Dodaj označevalce"
 
 #: admin/themes/default/items/batch-edit.php:107
 #, php-format
 msgid "List of tags to add to all checked items, separated by %s."
-msgstr "Kaikkiin merkittyihin aineistoihin liitettävät avainsanat, erotettuna %s -merkillä."
+msgstr ""
 
 #: admin/themes/default/items/batch-edit.php:117
 msgid "Check if you wish to delete selected items."
-msgstr "Valitse jos haluat poistaa merkityt aineistot."
+msgstr ""
 
 #: admin/themes/default/items/browse.php:3
 #: application/libraries/Omeka/Navigation.php:142
@@ -1144,7 +1144,7 @@ msgstr "Valitse jos haluat poistaa merkityt aineistot."
 #: application/views/scripts/items/browse.php:2
 #: application/views/scripts/items/tags.php:2
 msgid "Browse Items"
-msgstr "Selaa aineistoja"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
@@ -1153,356 +1153,356 @@ msgstr "Selaa aineistoja"
 #: application/libraries/globals.php:2648
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
-msgstr "Hae aineistoja"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:37
 msgid "Select"
-msgstr "Valitse"
+msgstr "Izberi"
 
 #: admin/themes/default/items/browse.php:95
 msgid "No Tags"
-msgstr "Ei avainsanoja"
+msgstr "Ni označevalcev"
 
 #: admin/themes/default/items/browse.php:139
 msgid "Details"
-msgstr "Yksityiskohdat"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:140
 msgid "Show Details"
-msgstr "Tarkat tiedot"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:141
 msgid "Hide Details"
-msgstr "Perustiedot"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:148
 msgid "You have no items."
-msgstr "Ei aineistoja."
+msgstr ""
 
 #: admin/themes/default/items/browse.php:150
 msgid "Get started by adding your first item."
-msgstr "Aloita lisäämällä ensimmäinen aineisto."
+msgstr ""
 
 #: admin/themes/default/items/browse.php:154
 #, php-format
 msgid "The query searched %s items and returned no results."
-msgstr "Haettiin yhteensä  %s aineistosta, mutta haku ei tuottanut tuloksia."
+msgstr ""
 
 #: admin/themes/default/items/browse.php:154
 msgid "refine your search"
-msgstr "muotoilla haun uudelleen"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:154
 #, php-format
 msgid "Would you like to %s?"
-msgstr "Haluaisitko %s?"
+msgstr ""
 
 #: admin/themes/default/items/edit.php:8
 #, php-format
 msgid "Edit Item #%s"
-msgstr "Muokkaa aineistoa #%s"
+msgstr ""
 
 #: admin/themes/default/items/files-form.php:2
 msgid "Click and drag the files into the preferred display order."
-msgstr "Veda ja pudota tiedostot haluamaasi järjestykseen."
+msgstr ""
 
 #: admin/themes/default/items/files-form.php:12
 msgid "Delete "
-msgstr "Poista"
+msgstr ""
 
 #: admin/themes/default/items/files-form.php:21
 msgid "Add New Files"
-msgstr "Lisää tiedostoja"
+msgstr ""
 
 #: admin/themes/default/items/files-form.php:23
 #, php-format
 msgid "The maximum file size is %s."
-msgstr "Tiedoston enimmäiskoko on %s"
+msgstr ""
 
 #: admin/themes/default/items/files-form.php:26
 msgid "Find a File"
-msgstr "Etsi tiedosto"
+msgstr ""
 
 #: admin/themes/default/items/form.php:25
 msgid "Add Another File"
-msgstr "Lisää muita tiedostoja"
+msgstr ""
 
 #: admin/themes/default/items/item-type-form.php:15
 msgid "Pick this type"
-msgstr "Valitse tyyppi"
+msgstr ""
 
 #: admin/themes/default/items/quick-filters.php:2
 #: admin/themes/default/items/quick-filters.php:4
 msgid "Quick Filter"
-msgstr "Näytä"
+msgstr ""
 
 #: admin/themes/default/items/quick-filters.php:5
 msgid "View All"
-msgstr "Kaikki"
+msgstr ""
 
 #: admin/themes/default/items/quick-filters.php:7
 msgid "Private"
-msgstr "Yksityinen"
+msgstr "Zasebno"
 
 #: admin/themes/default/items/search-form.php:13
 #: application/views/scripts/items/search-form.php:13
 msgid "Search for Keywords"
-msgstr "Vapaateksti"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:26
 #: application/views/scripts/items/search-form.php:25
 msgid "Narrow by Specific Fields"
-msgstr "Kohdista haku kenttään"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:27
 #: application/views/scripts/items/search-form.php:77
 msgid "Add a Field"
-msgstr "Lisää hakuehto"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:63
 #: application/views/scripts/items/search-form.php:60
 msgid "contains"
-msgstr "sisältää"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:64
 #: application/views/scripts/items/search-form.php:61
 msgid "does not contain"
-msgstr "ei sisällä"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:65
 #: application/views/scripts/items/search-form.php:62
 msgid "is exactly"
-msgstr "on tarkasti"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:66
 #: application/views/scripts/items/search-form.php:63
 msgid "is empty"
-msgstr "on tyhjä"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:67
 #: application/views/scripts/items/search-form.php:64
 msgid "is not empty"
-msgstr "ei ole tyhjä"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:84
 #: application/views/scripts/items/search-form.php:81
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
-msgstr "Hae tunnisteiden mukaan (esimerkiksi 1-4. 156, 79)"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:98
 #: application/views/scripts/items/search-form.php:92
 msgid "Search By Collection"
-msgstr "Kokoelma"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:114
 #: application/views/scripts/items/search-form.php:106
 msgid "Search By Type"
-msgstr "Aineistolaji"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:131
 #: application/views/scripts/items/search-form.php:122
 msgid "Search By User"
-msgstr "Käyttäjä"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:148
 #: application/views/scripts/items/search-form.php:137
 msgid "Search By Tags"
-msgstr "Avainsana"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:163
 #: application/views/scripts/items/search-form.php:150
 msgid "Public/Non-Public"
-msgstr "Julkisuus"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:172
 #: application/views/scripts/items/search-form.php:158
 msgid "Only Public Items"
-msgstr "Vain julkiset"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:173
 #: application/views/scripts/items/search-form.php:159
 msgid "Only Non-Public Items"
-msgstr "Vain yksityiset"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:183
 #: application/views/scripts/items/search-form.php:168
 msgid "Featured/Non-Featured"
-msgstr "Nostettu etusivulle"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:192
 #: application/views/scripts/items/search-form.php:176
 msgid "Only Featured Items"
-msgstr "kyllä"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:193
 #: application/views/scripts/items/search-form.php:177
 msgid "Only Non-Featured Items"
-msgstr "ei"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:203
 msgid "Search for items"
-msgstr "Hae aineistoja"
+msgstr ""
 
 #: admin/themes/default/items/show.php:8
 #, php-format
 msgid "Item #%s"
-msgstr "Aineisto #%s"
+msgstr ""
 
 #: admin/themes/default/items/show.php:30
 msgid "Prev Item"
-msgstr "Edellinen"
+msgstr ""
 
 #: admin/themes/default/items/show.php:35
 msgid "Next Item"
-msgstr "Seuraava"
+msgstr ""
 
 #: admin/themes/default/items/show.php:73
 msgid "File Metadata"
-msgstr "Tiedoston metatiedot"
+msgstr ""
 
 #: admin/themes/default/items/show.php:76
 msgid "There are no files for this item yet."
-msgstr "Aineistoon ei ole liitetty tiedostoja."
+msgstr ""
 
 #: admin/themes/default/items/show.php:76
 msgid "Add a File"
-msgstr "Lisää tiedosto"
+msgstr ""
 
 #: admin/themes/default/items/show.php:80
 msgid "View File Metadata"
-msgstr "Tiedoston metatiedot"
+msgstr ""
 
 #: admin/themes/default/items/show.php:93
 msgid "Bibliographic Citation"
-msgstr "Lähdeviittaus"
+msgstr ""
 
 #: admin/themes/default/items/tag-form.php:10
 #, php-format
 msgid "Separate tags with %s"
-msgstr "Erota avainsanat %s -merkillä"
+msgstr ""
 
 #: admin/themes/default/items/tag-form.php:15
 msgid "All Tags"
-msgstr "Kaikki avainsanat"
+msgstr ""
 
 #: admin/themes/default/items/tags.php:2
 msgid "Browse Items by Tag"
-msgstr "Selaa aineistoja avainsanojen mukaan"
+msgstr ""
 
 #: admin/themes/default/items/tags.php:9
 #: admin/themes/default/tags/browse.php:65
 msgid "There are no tags to display. You must first tag some items."
-msgstr "Ei avainsanoja. "
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:26
 #, php-format
 msgid "This version of %1$s requires at least Omeka %2$s."
-msgstr "Lisäosan %1$s versio vaatii vähintaan Omeka-version %2$s."
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:29
 #, php-format
 msgid ""
 "%1$s requires the following plugins to be installed, activated, and loaded: "
 "%2$s"
-msgstr "%1$s asennus vaatii seuraavien lisäosien käyttöönottoa: %2$s"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:32
 msgid "This is not a valid plugin."
-msgstr "Lisäosa on virheellinen."
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:57
 #, php-format
 msgid "by %s"
-msgstr "julkaisija %s"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:65
 #: admin/themes/default/themes/browse.php:23
 #: admin/themes/default/themes/browse.php:49
 msgid "Get support"
-msgstr "Hanki apua"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:69
 #, php-format
 msgid "You have a new version of %s. Please upgrade!"
-msgstr "Lisäosalle %s on saatavissa päivitys. "
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:90
 msgid "Upgrade"
-msgstr "Päivitä"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:100
 msgid "Configure"
-msgstr "Asetukset"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:106
 msgid "Deactivate"
-msgstr "Poista käytöstä"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:106
 #: admin/themes/default/users/activate.php:31
 #: application/views/scripts/users/activate.php:26
 msgid "Activate"
-msgstr "Ota käyttöön"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:116
 #: admin/themes/default/plugins/confirm-uninstall.php:16
 msgid "Uninstall"
-msgstr "Poista asennus"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:129
 #: application/forms/Install.php:167
 msgid "Install"
-msgstr "Asenna"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:140
 msgid ""
 "You do not have any plugins installed. Add them to the plugins directory to "
 "see them listed here."
-msgstr "Et ole asentanut yhtään lisäosaa. Pura lisäosan sisältävä paketti plugins-hakemistoon, nähdäksesi lisäosan tiedot tässä näkymässä."
+msgstr ""
 
 #: admin/themes/default/plugins/config.php:2
 #, php-format
 msgid "Configure Plugin: %s"
-msgstr "Lisäosan %s asetukset"
+msgstr ""
 
 #: admin/themes/default/plugins/confirm-uninstall.php:2
 #, php-format
 msgid "Uninstall Plugin: %s"
-msgstr "Poista lisäosa %s"
+msgstr ""
 
 #: admin/themes/default/plugins/confirm-uninstall.php:7
 #, php-format
 msgid "Are you sure you want to uninstall %s?"
-msgstr "Haluatko varmasti poistaa lisäosan %s?"
+msgstr ""
 
 #: admin/themes/default/plugins/confirm-uninstall.php:12
 msgid "Yes, I want to uninstall this plugin."
-msgstr "Kyllä, haluan poistaa lisäosan."
+msgstr "Da, rad bi odstranil ta vtičnik."
 
 #: admin/themes/default/plugins/confirm-uninstall.php:17
 msgid "or"
-msgstr "tai"
+msgstr ""
 
 #: admin/themes/default/plugins/confirm-uninstall.php:17
 #: admin/themes/default/settings/edit-item-type-elements.php:50
 msgid "Cancel"
-msgstr "Peruuta"
+msgstr ""
 
 #: admin/themes/default/settings/edit-api.php:11
 msgid "Enable API"
-msgstr "REST API"
+msgstr ""
 
 #: admin/themes/default/settings/edit-api.php:15
 msgid "Enable or disable the API by checking or uncheking the box below."
-msgstr "Valinta aktivoi tai poistaa käytöstä Omekan REST-rajapinnan."
+msgstr ""
 
 #: admin/themes/default/settings/edit-api.php:22
 msgid "Results per Page"
-msgstr "Tuloksia sivua kohti"
+msgstr ""
 
 #: admin/themes/default/settings/edit-api.php:26
 msgid "Maximum number of API results displayed per page."
-msgstr "REST-rajapinnan kautta tehtyjen hakujen tulosten enimmäismäärä sivua kohti."
+msgstr ""
 
 #: admin/themes/default/settings/edit-api.php:32
 #, php-format
@@ -1512,49 +1512,49 @@ msgid ""
 "adding, editing, and deleting content, is protected and requires key "
 "authentication. Each key corresponds to, and has all permissions of, an "
 "existing Omeka user. You can create keys on each user's %sedit page%s."
-msgstr "Rajapinnan käyttöönoton myötä ulkopuoliset sovellukset voivat näyttää, selata, lisätä, muokata ja poistaa sivustolle tallennettuja sisältöjä. Julkasemattoman sisällön näyttäminen, kuten sisältöjen lisääminen, muokkaaminen ja poistaminen vaatii API-avaimeen perustuvan tunnistautumisen. API-avain on käyttäjäkohtainen ja sen voi ottaa käyttöön käyttäjätietojen %smuokkaussivulla%s."
+msgstr ""
 
 #: admin/themes/default/settings/edit-item-type-elements.php:12
 msgid "edit a specific item type"
-msgstr "muokkaa aineistotyyppiä"
+msgstr ""
 
 #: admin/themes/default/settings/edit-item-type-elements.php:11
 #, php-format
 msgid ""
 "Customize the element descriptions below. To re-order the elements, %s."
-msgstr "Muokkaa metatietokenttien kuvauksia. Järjestä kentät uudelleen, %s."
+msgstr ""
 
 #: admin/themes/default/settings/edit-item-type-elements.php:42
 msgid "Confirm Delete"
-msgstr "Vahvista poisto"
+msgstr ""
 
 #: admin/themes/default/settings/edit-item-type-elements.php:43
 msgid ""
 "Are you sure you want to delete the selected item type elements from the "
 "database? You will lose all text related to the selected elements. This "
 "cannot be undone."
-msgstr "Oletko varma, että haluat poistaa valitsemasi kentät tietokannasta? Kaikki kenttiin tallennettu sisältö poistetaan. Toimintoa ei voi perua."
+msgstr ""
 
 #: admin/themes/default/settings/edit-item-type-elements.php:50
 msgid "Ok"
-msgstr "OK"
+msgstr ""
 
 #: admin/themes/default/settings/edit-search.php:10
 msgid "Search Record Types"
-msgstr "Haun kohdistuminen"
+msgstr ""
 
 #: admin/themes/default/settings/edit-search.php:13
 msgid "Customize which types of records will be searchable in Omeka."
-msgstr "Valitse mitkä sisällöt ovat haettavissa "
+msgstr ""
 
 #: admin/themes/default/settings/edit-search.php:23
 #: admin/themes/default/settings/edit-search.php:41
 msgid "Index Records"
-msgstr "Indeksoi"
+msgstr ""
 
 #: admin/themes/default/settings/edit-search.php:26
 msgid "Click on the \"Index Records\" button to re-index your records."
-msgstr "Klikkaa \"Indeksoi\" -painiketta käynnistääksesi sisältöjen uudelleenindeksoinnin."
+msgstr ""
 
 #: admin/themes/default/settings/edit-search.php:28
 msgid ""
@@ -1563,96 +1563,96 @@ msgid ""
 " are saved, but there are circumstances when your records are not indexed; "
 "for instance, when updating from an earlier version of Omeka or after you "
 "customize which records will be searchable."
-msgstr "Indeksointi mahdollistaa Omekaan tallennettujen sisältöjen hakemisen. Omeka indeksoi tallennetut aineistot tallennettaessa, mutta on tilanteita jolloin sisällöt eivät indeksoidu automaattisesti; esimerkiksi silloin kun Omekaan on tehty versiopäivitys tai haun sisältöasetuksiin on tehty muutoksia."
+msgstr ""
 
 #: admin/themes/default/settings/edit-security.php:23
 msgid "Restore Default Extensions"
-msgstr "Palauta oletuslisäosat"
+msgstr ""
 
 #: admin/themes/default/settings/edit-security.php:28
 msgid "Restore Default Types"
-msgstr "Palauta oletusaineistotyypit"
+msgstr ""
 
 #: admin/themes/default/settings/edit-security.php:33
 msgid "Restore Default Elements"
-msgstr "Palauta metatietokenttien oletusasetukset"
+msgstr ""
 
 #: admin/themes/default/settings/edit-security.php:38
 msgid "Restore Default Attributes"
-msgstr "Palauta oletusattribuutit"
+msgstr ""
 
 #: admin/themes/default/settings/edit-settings.php:23
 msgid "Test"
-msgstr "Testi"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:3
 msgid "Edit Tags"
-msgstr "Muokkaa avainsanoja"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:16
 msgid "Editing Tags"
-msgstr "Muokataan  avainsanoja"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:19
 msgid "To view all items with a tag, click the number."
-msgstr "Listaa kaikki avainsanaan liittyvät aineistot numeroa klikkaamalla."
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:20
 msgid ""
 "To edit the tag name, click the name and begin editing, and hit \"enter\" to"
 " save. To cancel an edit, click the ESC key or click away from the tag."
-msgstr "Muokkaa avainsanaa klikkaamalla, tee muutokset ja tallenna muutokset painamalla \"Enter\". Peru muokkaus painamalla ESC tai klikkaamalla muokkauskentän ulkopuolelle."
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:21
 msgid ""
 "To delete a tag, click the X. Deleting a tag will not delete the tagged "
 "items."
-msgstr "Poista avainsana klikkaamalla X-painiketta. Avainsanan poistaminen ei poista aineistoja."
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:29
 msgid "Most"
-msgstr "Laskeva"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:30
 msgid "Least"
-msgstr "Nouseva"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:31
 msgid "Alphabetical"
-msgstr "Aakkosjärjestys"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:32
 msgid "Recent"
-msgstr "Uusin ensin"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:43
 #: admin/themes/default/tags/browse.php:45
 msgid "Record Types"
-msgstr "Aineistotyypit"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:47
 msgid "s"
-msgstr "s"
+msgstr ""
 
 #: admin/themes/default/themes/browse.php:15
 #: admin/themes/default/themes/browse.php:43
 #, php-format
 msgid "Screenshot for %s Theme"
-msgstr "Teeman %s ruudunkaappaus"
+msgstr ""
 
 #: admin/themes/default/themes/browse.php:16
 msgid "Configure Theme"
-msgstr "Teeman asetukset"
+msgstr ""
 
 #: admin/themes/default/themes/browse.php:19
 msgid "Current Theme"
-msgstr "Valittu teema"
+msgstr ""
 
 #: admin/themes/default/themes/browse.php:21
 #: admin/themes/default/themes/browse.php:48
 #, php-format
 msgid "By %s"
-msgstr "%s"
+msgstr ""
 
 #: admin/themes/default/themes/browse.php:27
 msgid ""
@@ -1660,97 +1660,97 @@ msgid ""
 "ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a "
 "href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" "
 "target=\"_blank\">design your own</a>!"
-msgstr "Lisää uusia teemoja <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Omekan teemaluettelosta</a> tai <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">tai suunnittele kokonaan oma teema</a>!"
+msgstr ""
 
 #: admin/themes/default/themes/browse.php:45
 msgid "Use this theme"
-msgstr "Valitse teema"
+msgstr ""
 
 #: admin/themes/default/themes/config.php:10
 #, php-format
 msgid "Configure Theme: %s"
-msgstr "Teeman %s asetukset"
+msgstr ""
 
 #: admin/themes/default/themes/config.php:11
 msgid "Configurations apply to this theme only."
-msgstr "Asetukset vaikuttavat vain tähän teemaan."
+msgstr ""
 
 #: admin/themes/default/upgrade/index.php:32
 msgid "Upgrade Your Omeka Database"
-msgstr "Päivitä Omekan tietokanta."
+msgstr ""
 
 #: admin/themes/default/upgrade/index.php:34
 msgid ""
 "Your Omeka database is not compatible with your current version of Omeka."
-msgstr "Nykyinen tietokanta ei ole yhteensopiva käytössä olevan Omeka-version kanssa."
+msgstr ""
 
 #: admin/themes/default/upgrade/index.php:35
 msgid ""
 "Please back up your existing database and then click the button to upgrade."
-msgstr "Varmuuskopioi aluksi tietokanta ja sen jälkeen päivitä tietokanta yhteensopivaan muotoon."
+msgstr ""
 
 #: admin/themes/default/upgrade/index.php:37
 msgid "Upgrade Database"
-msgstr "Päivitä tietokanta"
+msgstr ""
 
 #: admin/themes/default/upgrade/migrate.php:32
 msgid "Omeka encountered an error when upgrading your installation."
-msgstr "Omeka-päivityksessä tapahtui virhe"
+msgstr ""
 
 #: admin/themes/default/upgrade/migrate.php:37
 msgid "Please restore from your database backup and try again."
-msgstr "Palauta tietokanta varmuuskopiosta ja yritä uudelleen"
+msgstr ""
 
 #: admin/themes/default/upgrade/migrate.php:39
 msgid ""
 "If you have any questions please refer to <a "
 "href=\"http://omeka.org/codex\">Omeka documentation</a> or post a message on"
 " the <a href=\"http://omeka.org/forums\">Omeka forums</a>."
-msgstr "Apua ja lisätietoja on saatavissa <a href=\"http://omeka.org/codex\">Omekan dokumentaatiosta</a> ja käyttäjäyhteisön <a href=\"http://omeka.org/forums\">keskustelufoorumilta</a>."
+msgstr ""
 
 #: admin/themes/default/upgrade/migrate.php:42
 msgid "Omeka has upgraded successfully."
-msgstr "Omekan päivitys onnistui"
+msgstr ""
 
 #: admin/themes/default/upgrade/migrate.php:43
 msgid "Return to Dashboard"
-msgstr "Palaa ylläpitonäkymään"
+msgstr "Nazaj na nadzorno ploščo"
 
 #: admin/themes/default/users/activate.php:2
 #: application/views/scripts/users/activate.php:2
 msgid "User Activation"
-msgstr "Käyttäjätunnuksen aktivointi"
+msgstr ""
 
 #: admin/themes/default/users/activate.php:18
 #: application/forms/ResetPassword.php:23
 #: application/views/scripts/users/activate.php:13
 msgid "Create a Password"
-msgstr "Luo salasana"
+msgstr ""
 
 #: admin/themes/default/users/activate.php:24 application/forms/Install.php:60
 #: application/forms/ResetPassword.php:44
 #: application/views/scripts/users/activate.php:19
 msgid "Re-type the Password"
-msgstr "Kirjoita salasana uudelleen"
+msgstr ""
 
 #: admin/themes/default/users/add.php:2
 msgid "Add New User"
-msgstr "Lisää uusi käyttäjä"
+msgstr ""
 
 #: admin/themes/default/users/browse.php:2
 msgid "Browse Users"
-msgstr "Selaa käyttäjiä"
+msgstr "Uporabniki"
 
 #: admin/themes/default/users/browse.php:8
 msgid "Add a User"
-msgstr "Lisää käyttäjä"
+msgstr "Dodaj uporabnika"
 
 #: admin/themes/default/users/browse.php:20
 #: admin/themes/default/users/browse.php:47
 #: admin/themes/default/users/show.php:18 application/forms/Install.php:30
 #: application/forms/Login.php:21 application/forms/User.php:29
 msgid "Username"
-msgstr "Käyttäjätunnus"
+msgstr ""
 
 #: admin/themes/default/users/browse.php:23
 #: admin/themes/default/users/browse.php:49
@@ -1758,123 +1758,123 @@ msgstr "Käyttäjätunnus"
 #: application/forms/RecoverPassword.php:27 application/forms/User.php:95
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
-msgstr "Sähköposti"
+msgstr ""
 
 #: admin/themes/default/users/browse.php:35
 msgid "Search users"
-msgstr "Hae käyttäjiä"
+msgstr "Išči uporabnike"
 
 #: admin/themes/default/users/browse.php:36
 msgid "Usernames"
-msgstr "Käyttäjätunnukset"
+msgstr ""
 
 #: admin/themes/default/users/browse.php:37
 msgid "Real names"
-msgstr "Henkilön nimi"
+msgstr ""
 
 #: admin/themes/default/users/browse.php:38
 msgid "Email addresses"
-msgstr "Sähköpostiosoite"
+msgstr ""
 
 #: admin/themes/default/users/browse.php:48
 #: admin/themes/default/users/show.php:20
 msgid "Real Name"
-msgstr "Henkilön nimi"
+msgstr ""
 
 #: admin/themes/default/users/browse.php:50 application/forms/User.php:128
 msgid "Role"
-msgstr "Rooli"
+msgstr ""
 
 #: admin/themes/default/users/browse.php:60
 msgid "inactive"
-msgstr "ei käytössä"
+msgstr ""
 
 #: admin/themes/default/users/edit.php:8
 #, php-format
 msgid "Edit User #%s"
-msgstr "Muokkaa käyttäjää #%s"
+msgstr ""
 
 #: admin/themes/default/users/edit.php:24
 msgid "API Keys"
-msgstr "API-avaimet"
+msgstr ""
 
 #: admin/themes/default/users/edit.php:27
 msgid "New key label"
-msgstr "Uusi avaimen nimi"
+msgstr ""
 
 #: admin/themes/default/users/edit.php:31
 msgid ""
 "To create a new API key, enter a label for the key below. For example, "
 "describe for what purpose it will be used. This key will have all your "
 "permissions; treat it as you would your password."
-msgstr "Luo uusi API-avain antamalla sille nimi allaolevaan kenttään. Avaimen voi nimetä esimerkiksi käyttötarkoituksen mukaan. API-avaimella on kaikki käyttäjätunnukseen liittyvät oikeudet."
+msgstr ""
 
 #: admin/themes/default/users/edit.php:41
 msgid "You have no API keys. Use the form above to create one."
-msgstr "Tunnukseesi ei liity API-avaimia. Luo uusi avain oheisella lomakkeella."
+msgstr ""
 
 #: admin/themes/default/users/edit.php:43
 #, php-format
 msgid "%s has no API keys. Use the form above to create one."
-msgstr "%s ei ole API-avaimia. Luo uusi avain oheisella lomakkeella."
+msgstr ""
 
 #: admin/themes/default/users/edit.php:51
 msgid "Key"
-msgstr "Avain"
+msgstr ""
 
 #: admin/themes/default/users/edit.php:52
 msgid "Last IP"
-msgstr "Viimeisin IP"
+msgstr ""
 
 #: admin/themes/default/users/edit.php:53
 msgid "Last accessed"
-msgstr "Käytetty viimeksi"
+msgstr ""
 
 #: admin/themes/default/users/edit.php:54
 msgid "Rescind"
-msgstr "Poista käytöstä"
+msgstr ""
 
 #: admin/themes/default/users/forgot-password.php:2
 #: application/views/scripts/users/forgot-password.php:2
 msgid "Forgot Password"
-msgstr "Unohdin salasanani"
+msgstr ""
 
 #: admin/themes/default/users/forgot-password.php:11
 #: application/views/scripts/users/forgot-password.php:10
 msgid "Enter your email address to retrieve your password."
-msgstr "Kirjoita sähköpostiosoitteesi"
+msgstr ""
 
 #: admin/themes/default/users/forgot-password.php:21
 #: application/views/scripts/users/forgot-password.php:18
 msgid "Submit"
-msgstr "Lähetä"
+msgstr ""
 
 #: admin/themes/default/users/forgot-password.php:25
 #: application/views/scripts/users/forgot-password.php:7
 msgid "Back to Log In"
-msgstr "Takaisin kirjautumiseen"
+msgstr ""
 
 #: admin/themes/default/users/login.php:3 application/forms/Login.php:55
 #: application/views/scripts/users/login.php:3
 msgid "Log In"
-msgstr "Kirjaudu"
+msgstr ""
 
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
-msgstr "Unohtunut salasana?"
+msgstr ""
 
 #: admin/themes/default/users/show.php:8
 #, php-format
 msgid "User #%s"
-msgstr "Käyttäjä #%s"
+msgstr ""
 
 #: admin/themes/default/users/show.php:15
 msgid "Edit this User"
-msgstr "Muokkaa tätä käyttäjää"
+msgstr ""
 
 #: application/controllers/AppearanceController.php:48
 msgid "The appearance settings have been updated."
-msgstr "Ulkoasuasetukset päivitettiin."
+msgstr ""
 
 #: application/controllers/AppearanceController.php:51
 #: application/controllers/ItemTypesController.php:35
@@ -1883,47 +1883,47 @@ msgstr "Ulkoasuasetukset päivitettiin."
 #: application/controllers/SettingsController.php:79
 #: install/views/scripts/index/index.phtml:17
 msgid "There were errors found in your form. Please edit and resubmit."
-msgstr "Lomakkeella on virheitä. Ole hyvä ja lähetä lomake uudelleen korjattuasi virheet."
+msgstr ""
 
 #: application/controllers/AppearanceController.php:66
 msgid "The navigation settings have been updated."
-msgstr "Navigointiasetukset päivitettiin."
+msgstr ""
 
 #: application/controllers/AppearanceController.php:69
 msgid ""
 "The navigation settings were not saved because of missing or invalid values."
 "  All changed values have been restored."
-msgstr "Navigointiasetuksia ei voitu tallentaa virheiden vuoksi. Alkuperäiset asetukset on palautettu."
+msgstr ""
 
 #: application/controllers/CollectionsController.php:74
 #, php-format
 msgid "The collection \"%s\" was successfully added!"
-msgstr "Kokoelman \"%s\" lisääminen onnistui."
+msgstr ""
 
 #: application/controllers/CollectionsController.php:76
 #, php-format
 msgid "The collection #%s was successfully added!"
-msgstr "Kokoelman #%s lisääminen onnistui."
+msgstr ""
 
 #: application/controllers/CollectionsController.php:84
 #, php-format
 msgid "The collection \"%s\" was successfully changed!"
-msgstr "Kokoelman \"%s\" muokkaus onnistui."
+msgstr ""
 
 #: application/controllers/CollectionsController.php:86
 #, php-format
 msgid "The collection #%s was successfully changed!"
-msgstr "Kokoelman #%s muokkaus onnistui."
+msgstr ""
 
 #: application/controllers/CollectionsController.php:94
 #, php-format
 msgid "The collection \"%s\" was successfully deleted!"
-msgstr "Kokoelman \"%s\" poisto onnistui."
+msgstr ""
 
 #: application/controllers/CollectionsController.php:96
 #, php-format
 msgid "The collection #%s was successfully deleted!"
-msgstr "Kokoelma #%s on poistettu."
+msgstr ""
 
 #: application/controllers/CollectionsController.php:104
 #, php-format
@@ -1931,7 +1931,7 @@ msgid ""
 "This will delete the collection \"%s\" and its associated metadata. This "
 "will not delete any items in this collection, but will delete the reference "
 "to this collection in each item."
-msgstr "Olet poistamassa kokoelman \"%s\" ja siihen liittyvät metatiedot. Kokoelman poistaminen ei poista siihen kuuluvia aineistoja, mutta poistaa aineistosta viittauksen kokoelmaan."
+msgstr ""
 
 #: application/controllers/CollectionsController.php:108
 #, php-format
@@ -1939,39 +1939,39 @@ msgid ""
 "This will delete the collection #%s and its associated metadata. This will "
 "not delete any items in this collection, but will delete the reference to "
 "this collection in each item."
-msgstr "Olet poistamassa kokoelman #%s ja siihen liittyvät metatiedot. Kokoelman poistaminen ei poista siihen kuuluvia aineistoja, mutta poistaa aineistosta viittauksen kokoelmaan."
+msgstr ""
 
 #: application/controllers/ElementSetsController.php:21
 msgid ""
 "This will delete the element set and all elements assigned to the element "
 "set. Items will lose all metadata that is specific to this element set."
-msgstr "Olet poistamassa kenttäryhmän ja kaikki ryhmään kuuluvat kentät. Kenttäryhmän määrittelemät metatiedot poistetaan myös aineistoista."
+msgstr ""
 
 #: application/controllers/ElementSetsController.php:65
 msgid "The element set was successfully changed!"
-msgstr "Metatietokenttien muokkaus onnistu."
+msgstr ""
 
 #: application/controllers/ErrorController.php:64
 msgid "Page not found."
-msgstr "Sivua ei löytynyt."
+msgstr ""
 
 #: application/controllers/ErrorController.php:79
 msgid "Access denied."
-msgstr "Ei käyttöoikeutta."
+msgstr ""
 
 #: application/controllers/FilesController.php:64
 msgid "This will delete the file and its associated metadata."
-msgstr "Poistaa tiedoston ja siihen liittyvät metatiedot"
+msgstr ""
 
 #: application/controllers/ItemTypesController.php:28
 #, php-format
 msgid "The item type \"%s\" was successfully added."
-msgstr "Luotiin aineistotyyppi \"%s\" "
+msgstr ""
 
 #: application/controllers/ItemTypesController.php:55
 #, php-format
 msgid "The item type \"%s\" was successfully updated."
-msgstr "Päivitettiin aineistotyyppi \"%s\"."
+msgstr ""
 
 #: application/controllers/ItemTypesController.php:150
 #, php-format
@@ -1979,340 +1979,340 @@ msgid ""
 "This will delete the \"%s\" item type but will not delete the elements "
 "assigned to the item type. Items that are assigned to this item type will "
 "lose all metadata that is specific to the item type."
-msgstr "Olet poistamassa aineistotyypin \"%s\". Aineistotyyppiin liittyvät metatietokentät säilyvät mutta kaikki aineistotyypin mukaiset sisällöt menettävät aineistotyypinmukaiset metatiedot."
+msgstr ""
 
 #: application/controllers/ItemTypesController.php:158
 #, php-format
 msgid ""
 "The item type \"%s\" was successfully added!  You may now add elements to "
 "your new item type."
-msgstr "Aineistoyyppi \"%s\"  lisättiin järjestelmään. Seuraavaksi voit liittää aineistotyyppiin metatietokenttiä."
+msgstr ""
 
 #: application/controllers/ItemsController.php:95
 #, php-format
 msgid "The item \"%s\" was successfully added!"
-msgstr "Luotiin aineisto \"%s\" "
+msgstr ""
 
 #: application/controllers/ItemsController.php:97
 #, php-format
 msgid "The item #%s was successfully added!"
-msgstr "Luotiin aineisto #%s."
+msgstr ""
 
 #: application/controllers/ItemsController.php:105
 #, php-format
 msgid "The item \"%s\" was successfully changed!"
-msgstr "Muokattiin aineistoa \"%s\"."
+msgstr ""
 
 #: application/controllers/ItemsController.php:107
 #, php-format
 msgid "The item #%s was successfully changed!"
-msgstr "Muokattiin aineistoa #%s."
+msgstr ""
 
 #: application/controllers/ItemsController.php:115
 #, php-format
 msgid "The item \"%s\" was successfully deleted!"
-msgstr "Poistettiin aineisto \"%s\"."
+msgstr ""
 
 #: application/controllers/ItemsController.php:117
 #, php-format
 msgid "The item #%s was successfully deleted!"
-msgstr "Poistettiin aineisto #%s."
+msgstr ""
 
 #: application/controllers/ItemsController.php:125
 #, php-format
 msgid ""
 "This will delete the item \"%s\" and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr "Olet poistamassa aineiston \"%s\" ja sen metatiedot. Samalla poistetaan kaikki aineistoon liittyvät tiedostot ja tiedostojen metatiedot."
+msgstr ""
 
 #: application/controllers/ItemsController.php:129
 #, php-format
 msgid ""
 "This will delete the item #%s and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr "Olet poistamassa aineiston #%s ja sen metatiedot. Samalla poistetaan kaikki aineistoon liittyvät tiedostot ja tiedostojen metatiedot."
+msgstr ""
 
 #: application/controllers/ItemsController.php:255
 msgid "You must choose some items to batch edit."
-msgstr "Valitse aluksi aineistoja joukkomuokkausta varten."
+msgstr ""
 
 #: application/controllers/ItemsController.php:299
 msgid "User is not allowed to modify visibility of items."
-msgstr "Käyttäjällä ei ole oikeutta muokata aineistojen näkyvyyttä."
+msgstr ""
 
 #: application/controllers/ItemsController.php:304
 msgid "User is not allowed to modify featured status of items."
-msgstr "Käyttäjällä ei ole oikeutta nostaa aineistoja etusivulle."
+msgstr ""
 
 #: application/controllers/ItemsController.php:311
 msgid "User is not allowed to delete selected items."
-msgstr "Käyttäjällä ei ole oikeutta poistaa"
+msgstr ""
 
 #: application/controllers/ItemsController.php:317
 msgid "User is not allowed to edit selected items."
-msgstr "Käyttäjällä ei ole oikeuksia muokata valittuja aineistoja."
+msgstr ""
 
 #: application/controllers/ItemsController.php:322
 msgid "User is not allowed to tag selected items."
-msgstr "Käyttäjällä ei ole oikeuksia liittää valittuihin aineistoihin avainsanoja."
+msgstr ""
 
 #: application/controllers/ItemsController.php:356
 msgid "The items were successfully deleted!"
-msgstr "Poistettiin aineistot."
+msgstr ""
 
 #: application/controllers/ItemsController.php:358
 msgid "The items were successfully changed!"
-msgstr "Tietojen muuttaminen onnistui."
+msgstr ""
 
 #: application/controllers/PluginsController.php:45
 #, php-format
 msgid ""
 "Error in configuring plugin named \"%s\". Missing config and/or config_form "
 "hook(s)."
-msgstr "Virhe lisäosan \"%s\" asetuksissa. Lisäosasta puuttuu tarvittavat confing ja/tai config_form -funktiot."
+msgstr ""
 
 #: application/controllers/PluginsController.php:52
 #, php-format
 msgid "The %s plugin was successfully configured!"
-msgstr "Lisäosan %s asetukset on nyt määritelty."
+msgstr ""
 
 #: application/controllers/PluginsController.php:70
 #, php-format
 msgid "The %s plugin has already been installed."
-msgstr "Lisäosa %s on jo asennettu."
+msgstr ""
 
 #: application/controllers/PluginsController.php:79
 #, php-format
 msgid "The %s plugin was successfully installed!"
-msgstr "Lisäosa %s asennettiin onnistuneesti."
+msgstr ""
 
 #: application/controllers/PluginsController.php:91
 #: application/controllers/PluginsController.php:96
 #, php-format
 msgid "The following error occurred while installing the %s plugin: "
-msgstr "Lisäosaa %s asennettaessa tapahtui virhe:"
+msgstr ""
 
 #: application/controllers/PluginsController.php:124
 #, php-format
 msgid "The following error occurred while activating the %s plugin: "
-msgstr "Lisäosan %s käyttöönotossa tapahtui virhe:"
+msgstr ""
 
 #: application/controllers/PluginsController.php:134
 #, php-format
 msgid "The %s plugin was successfully activated!"
-msgstr "Lisäosa %s otettiin käyttöön."
+msgstr ""
 
 #: application/controllers/PluginsController.php:139
 #, php-format
 msgid "The %s plugin was activated, but could not be loaded: "
-msgstr "Lisäosa %s otettiin käyttöön, mutta sitä voitu käynnistää:"
+msgstr ""
 
 #: application/controllers/PluginsController.php:163
 #, php-format
 msgid "The %s plugin was successfully deactivated!"
-msgstr "Lisäosa %s poistettiin käytöstä."
+msgstr ""
 
 #: application/controllers/PluginsController.php:168
 #, php-format
 msgid "The following error occurred while deactivating the %s plugin: "
-msgstr "Lisäosan %s käytöstä poistamisessa tapahtui virhe:"
+msgstr ""
 
 #: application/controllers/PluginsController.php:187
 #, php-format
 msgid "The %s plugin was successfully upgraded!"
-msgstr "Lisäosan %s päivitys onnistui."
+msgstr ""
 
 #: application/controllers/PluginsController.php:196
 #: application/controllers/PluginsController.php:202
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
-msgstr "Lisäosan %s päivityksessä tapahtui virhe:"
+msgstr ""
 
 #: application/controllers/PluginsController.php:253
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
-msgstr "Lisäosaa ei löydy hakemistosta '%s'."
+msgstr ""
 
 #: application/controllers/PluginsController.php:262
 msgid "You must confirm the uninstall before proceeding."
-msgstr "Vahvista poisto."
+msgstr ""
 
 #: application/controllers/PluginsController.php:280
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
-msgstr "Lisäosa %s poistettiin järjestelmästä."
+msgstr ""
 
 #: application/controllers/PluginsController.php:285
 #: application/controllers/PluginsController.php:290
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
-msgstr "Lisäosan %s poistossa tapahtui virhe:"
+msgstr ""
 
 #: application/controllers/PluginsController.php:317
 msgid "No plugin name given."
-msgstr "Lisäosan nimi ei ole tiedossa."
+msgstr ""
 
 #: application/controllers/PluginsController.php:330
 #, php-format
 msgid "The plugin %s must be installed."
-msgstr "Lisäosan %s tulee olla asennettuna."
+msgstr ""
 
 #: application/controllers/SettingsController.php:44
 msgid "The general settings have been updated."
-msgstr "Yleisasetukset päivitettiin."
+msgstr ""
 
 #: application/controllers/SettingsController.php:76
 msgid "The security settings have been updated."
-msgstr "Turvallisuusasetukset päivitettiin."
+msgstr ""
 
 #: application/controllers/SettingsController.php:95
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
-msgstr "Haun kohteita on muutettu. Uudelleenindeksoi sisällöt käyttäen alla olevaa lomaketta."
+msgstr ""
 
 #: application/controllers/SettingsController.php:102
 msgid ""
 "Indexing records. This may take a while. You may continue administering your"
 " site."
-msgstr "Indeksoidaan sisältöjä. Voit jatkaa ylläpitotoimia indeksoinnin ollessa käynnissä."
+msgstr ""
 
 #: application/controllers/SettingsController.php:131
 msgid "The item type elements were successfully changed!"
-msgstr "Muokattiin aineistotyypin metatietokenttiä."
+msgstr ""
 
 #: application/controllers/SettingsController.php:149
 msgid "The API configuration was successfully changed!"
-msgstr "API-asetusten muokkaaminen onnistui"
+msgstr ""
 
 #: application/controllers/SettingsController.php:175
 msgid "The ImageMagick directory path works."
-msgstr "ImageMagick -hakemistopolku on oikein."
+msgstr ""
 
 #: application/controllers/SettingsController.php:176
 msgid "The ImageMagick directory path does not work."
-msgstr "ImageMagick -hakemistopolku on virheellinen."
+msgstr ""
 
 #: application/controllers/TagsController.php:35
 msgid "You have to be logged in to edit tags!"
-msgstr "Avainsanojen muokkaaminen vaatii kirjautumisen."
+msgstr ""
 
 #: application/controllers/TagsController.php:64
 #, php-format
 msgid "Tag named \"%1$s\" was successfully renamed to \"%2$s\"."
-msgstr "Avainsanan \"%1$s\" uusi muoto on \"%2$s\"."
+msgstr ""
 
 #: application/controllers/TagsController.php:91
 msgid "Invalid tagType given."
-msgstr "Virheellinen tagType."
+msgstr ""
 
 #: application/controllers/ThemesController.php:25
 msgid "Invalid form submission."
-msgstr "Lomakkeella on virhe."
+msgstr ""
 
 #: application/controllers/ThemesController.php:33
 msgid "You have chosen an illegal theme name. Please select another theme."
-msgstr "Teeman nimi sisältää kiellettyjä merkkejä. Ole hyvä, ja valitse toinen teema."
+msgstr ""
 
 #: application/controllers/ThemesController.php:40
 #, php-format
 msgid "This theme requires a newer version of Omeka (%s)."
-msgstr "Teeman käyttöönotto vaatii uudemman Omeka-version (%s)."
+msgstr ""
 
 #: application/controllers/ThemesController.php:54
 msgid "The theme has been successfully changed."
-msgstr "Teeman muokkaus onnistui."
+msgstr ""
 
 #: application/controllers/ThemesController.php:81
 msgid "The theme settings were successfully saved!"
-msgstr "Teeman asetukset tallennettu."
+msgstr ""
 
 #: application/controllers/ThemesController.php:84
 msgid "There was an error on the form. Please try again."
-msgstr "Lomakkeella oli virhe. Yritä uudelleen."
+msgstr ""
 
 #: application/controllers/UpgradeController.php:49
 msgid "SQL error in migration: "
-msgstr "SQL-virhe tietojen siirrossa:"
+msgstr ""
 
 #: application/controllers/UsersController.php:70
 msgid ""
 "Unable to reset password. Please verify that the information is correct and "
 "contact an administrator if necessary."
-msgstr "Salasanaa ei voitu asettaa uudelleen. Ole hyvä ja tarkasta että tiedot ovat oikein ja ota yhteyttä ylläpitoon, mikäli tarpeen."
+msgstr ""
 
 #: application/controllers/UsersController.php:108
 msgid "Please follow this link to reset your password:"
-msgstr "Vaihda salasanasi tästä linkistä: "
+msgstr ""
 
 #: application/controllers/UsersController.php:110
 #: application/controllers/UsersController.php:113
 #: application/controllers/UsersController.php:322
 #, php-format
 msgid "%s Administrator"
-msgstr "%s ylläpitäjä"
+msgstr ""
 
 #: application/controllers/UsersController.php:114
 #, php-format
 msgid "[%s] Reset Your Password"
-msgstr "[%s] Aseta salasana uudelleen"
+msgstr ""
 
 #: application/controllers/UsersController.php:117
 msgid "Please check your email for a link to reset your password."
-msgstr "Sinulle on lähetetty sähköposti, jossa on linkki salasanan asettamiseksi uudelleen."
+msgstr ""
 
 #: application/controllers/UsersController.php:126
 msgid "Invalid activation code given."
-msgstr "Virheellinen aktivointikoodi."
+msgstr ""
 
 #: application/controllers/UsersController.php:135
 msgid "Password: The passwords do not match."
-msgstr "Salasanat eivät täsmää."
+msgstr ""
 
 #: application/controllers/UsersController.php:143
 msgid "You may now log in to Omeka."
-msgstr "Voit nyt kirjautua Omekaan."
+msgstr ""
 
 #: application/controllers/UsersController.php:160
 msgid "Add User"
-msgstr "Lisää käyttäjä"
+msgstr ""
 
 #: application/controllers/UsersController.php:171
 #, php-format
 msgid "The user \"%s\" was successfully added!"
-msgstr "Käyttäjän \"%s\" lisäämine onnistui."
+msgstr ""
 
 #: application/controllers/UsersController.php:175
 #, php-format
 msgid "The user \"%s\" was added, but the activation email could not be sent."
-msgstr "Käyttäjän \"%s\" tunnus luotiin, mutta käyttäjätunnuksen aktivointiviestiä ei voitu lähettää."
+msgstr ""
 
 #: application/controllers/UsersController.php:233
 msgid "A new API key was successfully created."
-msgstr "API-avain luotiin onnistuneesti."
+msgstr ""
 
 #: application/controllers/UsersController.php:241
 msgid "An existing API key was successfully rescinded."
-msgstr "API-avain poistettiin käytöstä."
+msgstr ""
 
 #: application/controllers/UsersController.php:246
 #: application/controllers/UsersController.php:257
 msgid "There was an invalid entry on the form. Please try again."
-msgstr "Lomakkeen jossain kentässä on virhe. Yritä uudelleen."
+msgstr ""
 
 #: application/controllers/UsersController.php:253
 msgid "Password changed!"
-msgstr "Salasana on vaihdettu."
+msgstr ""
 
 #: application/controllers/UsersController.php:264
 #, php-format
 msgid "The user %s was successfully changed!"
-msgstr "Käyttäjän %s tietojen muokkaus onnistui."
+msgstr ""
 
 #: application/controllers/UsersController.php:291
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
-msgstr "Käyttäjän \"%s\" tunnus on poistettu."
+msgstr ""
 
 #: application/controllers/UsersController.php:297
 #, php-format
@@ -2320,860 +2320,860 @@ msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
 "this user will remain in the system, but will no longer be associated with "
 "this user."
-msgstr "%s poistetaan järjestelmästä. Käyttäjän luomat aineistot, kokoelmat ja avainsanat säilyvät, mutta eivät liity enää tähän käyttäjään."
+msgstr ""
 
 #: application/controllers/UsersController.php:318
 msgid "Welcome!"
-msgstr "Tervetuloa!"
+msgstr "Dobrodošli!"
 
 #: application/controllers/UsersController.php:320
 #, php-format
 msgid ""
 "Your account for the %s repository has been created. Please click the "
 "following link to activate your account:"
-msgstr "Sinulle on luotu käyttäjätunnus %s -sivustolle. Klikkaa seuraavaa linkkiä käyttäjätunnuksen aktivoimiseksi: "
+msgstr ""
 
 #: application/controllers/UsersController.php:323
 #, php-format
 msgid "Activate your account with the %s repository"
-msgstr "Ota käyttöön tunnuksesi %s -palvelussa."
+msgstr ""
 
 #: application/controllers/UsersController.php:418
 msgid "Login information incorrect. Please try again."
-msgstr "Väärä käyttäjätunnus tai salasana. Yritä uudelleen."
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:22
 #: application/forms/Install.php:117
 msgid "Fullsize Image Size"
-msgstr "Täyden tarkkuuden kuvan koko"
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:23
 msgid "Maximum fullsize image size constraint (in pixels)."
-msgstr "Täyden tarkkuuden kuvan koon yläraja pikseleinä"
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:29
 #: application/forms/Install.php:125
 msgid "Thumbnail Size"
-msgstr "Esikatselukuvan koko"
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:30
 msgid "Maximum thumbnail size constraint (in pixels)."
-msgstr "Esikatselukuvan koon yläraja pikseleinä"
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:36
 #: application/forms/Install.php:133
 msgid "Square Thumbnail Size"
-msgstr "Neliöidyn esikatselukuvan koko"
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:37
 msgid "Maximum square thumbnail size constraint (in pixels)."
-msgstr "Neliöidyn esikatselukuvan koon yläraja pikseleinä"
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:43
 msgid "Results Per Page (admin)"
-msgstr "Tuloksia sivua kohti (ylläpitonäkymä)"
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:44
 msgid ""
 "Limit the number of results displayed per page in the administrative "
 "interface."
-msgstr "Sivulla näytettävien aineistojen lukumäärä ylläpitonäkymässä."
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:50
 msgid "Results Per Page (public)"
-msgstr "Tulkosia sivua kohti (julkinen näkymä)"
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:51
 msgid ""
 "Limit the number of results displayed per page in the public interface."
-msgstr "Sivulla näytettävien aineistojen lukumäärä julkisessa näkymässä."
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:57
 #: application/forms/Install.php:157
 msgid "Show Empty Elements"
-msgstr "Näytä tyhjät metatietokentät"
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:66
 msgid "Derivative Size Constraints"
-msgstr "Kuvien kokorajat"
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:71
 msgid "Display Settings"
-msgstr "Näyttöasetukset"
+msgstr ""
 
 #: application/forms/ChangePassword.php:25
 msgid "Current Password"
-msgstr "Nykyinen salasana"
+msgstr ""
 
 #: application/forms/ChangePassword.php:26
 #: application/forms/ChangePassword.php:36
 msgid "Password must be at least 6 characters long."
-msgstr "Salasanassa tulee olla vähintään 6 merkkiä."
+msgstr ""
 
 #: application/forms/ChangePassword.php:28
 msgid "Invalid current password"
-msgstr "Virheellinen nykyinen salasana"
+msgstr ""
 
 #: application/forms/ChangePassword.php:34
 msgid "New Password"
-msgstr "Uusi salasana"
+msgstr ""
 
 #: application/forms/ChangePassword.php:41
 msgid "New password must be entered."
-msgstr "Anna uusi salasana."
+msgstr ""
 
 #: application/forms/ChangePassword.php:50
 #: application/forms/ChangePassword.php:70
 msgid "New password must be typed correctly twice."
-msgstr "Uusi salasana tulee kirjoittaa kahteen kertaan."
+msgstr ""
 
 #: application/forms/ChangePassword.php:59
 msgid "New password must be at least %min% characters long."
-msgstr "Uuden salasanan tulee olla vähintään %min% merkkiä pitkä."
+msgstr ""
 
 #: application/forms/ChangePassword.php:68
 msgid "Repeat New Password"
-msgstr "Uusi salasana uudelleen"
+msgstr ""
 
 #: application/forms/ChangePassword.php:75
 msgid "Save Password"
-msgstr "Tallenna salasana"
+msgstr ""
 
 #: application/forms/ChangePassword.php:84
 msgid "Change Password"
-msgstr "Vaihda salasanaa"
+msgstr ""
 
 #: application/forms/GeneralSettings.php:22 application/forms/Install.php:79
 msgid "Site Title"
-msgstr "Sivuston otsikko"
+msgstr ""
 
 #: application/forms/GeneralSettings.php:26 application/forms/Install.php:84
 msgid "Site Description"
-msgstr "Sivuston kuvaus"
+msgstr ""
 
 #: application/forms/GeneralSettings.php:31 application/forms/Install.php:88
 msgid "Administrator Email"
-msgstr "Ylläpitäjän sähköposti"
+msgstr ""
 
 #: application/forms/GeneralSettings.php:37 application/forms/Install.php:94
 msgid "Site Copyright Information"
-msgstr "Sivuston tekijänoikeustiedot"
+msgstr ""
 
 #: application/forms/GeneralSettings.php:41 application/forms/Install.php:98
 msgid "Site Author Information"
-msgstr "Sivuston tekijätiedot"
+msgstr ""
 
 #: application/forms/GeneralSettings.php:45 application/forms/Install.php:102
 msgid "Tag Delimiter"
-msgstr "Avainsanojen erotinmerkki"
+msgstr ""
 
 #: application/forms/GeneralSettings.php:46
 msgid ""
 "Separate tags using this character or string. Be careful when changing this "
 "setting. You run the risk of splitting tags that contain the old delimiter."
-msgstr "Erota avainsanat käyttäen tätä merkkiä tai merkkijonoa. Käytä harkintaa muokatessasi tätä asetusta. On mahdollista, että järjestelmään jo syötetyt avainsanat rikkoutuvat, mikäli ne sisältävät tässä määritellyn erotinmerkit."
+msgstr ""
 
 #: application/forms/GeneralSettings.php:59 application/forms/Install.php:163
 msgid "ImageMagick Directory Path"
-msgstr "ImageMagick-asennushakemisto"
+msgstr ""
 
 #: application/forms/Install.php:31
 msgid "only alphanumeric characters are allowed"
-msgstr "vain kirjaimet ja numerot ovat sallittu"
+msgstr ""
 
 #: application/forms/Install.php:37 application/forms/Login.php:34
 msgid "Password"
-msgstr "Salasana"
+msgstr ""
 
 #: application/forms/Install.php:38
 msgid "must be at least 6 characters"
-msgstr "vähintään 6 merkkiä tarvitaan"
+msgstr ""
 
 #: application/forms/Install.php:61
 msgid "Confirm your password."
-msgstr "Vahvista salasana."
+msgstr ""
 
 #: application/forms/Install.php:103
 msgid "Separate tags using this character or string."
-msgstr "Erota avainsanat käyttäen tätä merkkiä."
+msgstr ""
 
 #: application/forms/Install.php:118
 msgid "Maximum fullsize image size constraint (in pixels)"
-msgstr "Täysikokoisen kuvan kokorajoitus (pikseleitä)"
+msgstr ""
 
 #: application/forms/Install.php:126
 msgid "Maximum thumbnail size constraint (in pixels)"
-msgstr "Esikatselukuvan kokorajoitus (pikseleitä)"
+msgstr ""
 
 #: application/forms/Install.php:134
 msgid "Maximum square thumbnail size constraint (in pixels)"
-msgstr "Neliöidyn esikatselukuvan kokorajoitus (pikseleitä)"
+msgstr ""
 
 #: application/forms/Install.php:141
 msgid "Items Per Page (admin)"
-msgstr "Aineistoja yhdellä sivulla (ylläpitonäkymä)"
+msgstr ""
 
 #: application/forms/Install.php:142
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
-msgstr " Ylläpitonäkymässä kerrallaan näytettävien aineistojen lukumaara."
+msgstr ""
 
 #: application/forms/Install.php:149
 msgid "Items Per Page (public)"
-msgstr "Aineistoja yhdellä sivulla (julkinen sivusto)"
+msgstr ""
 
 #: application/forms/Install.php:150
 msgid "Limit the number of items displayed per page in the public interface."
-msgstr "Julkisilla sivuilla kerrallaan näytettävien aineistojen lukumaara."
+msgstr ""
 
 #: application/forms/Install.php:159
 msgid "Check box to show metadata elements with no text."
-msgstr "Näytä myös tyhjät metatietokentät."
+msgstr ""
 
 #: application/forms/Install.php:174
 msgid "Default Superuser Account"
-msgstr "Pääkäyttäjän oletustunnus"
+msgstr ""
 
 #: application/forms/Install.php:184
 msgid "Site Settings"
-msgstr "Sivuston asetukset"
+msgstr ""
 
 #: application/forms/ItemTypes.php:142
 msgid "The name of the item type."
-msgstr "Aineistotyypin nimi."
+msgstr ""
 
 #: application/forms/ItemTypes.php:151
 msgid "The description of the item type."
-msgstr "Aineistotyypin kuvaus."
+msgstr ""
 
 #: application/forms/ItemTypes.php:188 application/forms/ItemTypes.php:197
 #, php-format
 msgid "The item type cannot have more than one \"%s\" element."
-msgstr "Aineistotyypillä voi olla vain yksi \"%s\" metatietokenttä."
+msgstr ""
 
 #: application/forms/Login.php:27
 msgid "Username cannot be empty."
-msgstr "Käyttäjätunnus ei voi olla tyhjä."
+msgstr ""
 
 #: application/forms/Login.php:40
 msgid "Password cannot be empty."
-msgstr "Salasana ei voi olla tyhjä."
+msgstr ""
 
 #: application/forms/Login.php:48
 msgid "Remember Me?"
-msgstr "Muista kirjautuminen"
+msgstr ""
 
 #: application/forms/Navigation.php:156
 msgid "[Default]"
-msgstr "[Oletus]"
+msgstr ""
 
 #: application/forms/Navigation.php:162
 msgid "Select a Homepage"
-msgstr "Etusivu"
+msgstr ""
 
 #: application/forms/Navigation.php:244
 msgid "Cannot find parent navigation page."
-msgstr "Navigointihierarkiassa ylempää sivua ei löydy."
+msgstr ""
 
 #: application/forms/Navigation.php:326
 msgid "All navigation links must have URIs."
-msgstr "Jokaisella navigaatiolinkillä tulee olla URL."
+msgstr ""
 
 #: application/forms/Navigation.php:339
 msgid "All navigation links must have different URIs."
-msgstr "Navigaatiolinkkien URL-osoitteiden tulee olla uniikkeja."
+msgstr ""
 
 #: application/forms/Navigation.php:345
 #, php-format
 msgid "Invalid URI for \"%s\" navigation link:  \"%s\""
-msgstr "Navigaatiolinkin \"%s\" URL on virheellinen. Virheellinen URL: \"%s\"."
+msgstr ""
 
 #: application/forms/Navigation.php:378
 msgid "Navigation links that have undeleteable sublinks cannot be deleted."
-msgstr "Navigaatiolinkillä on alilinkkejä joita ei voi poistaa."
+msgstr ""
 
 #: application/forms/RecoverPassword.php:36
 msgid "Email address is required."
-msgstr "Sähköpostiosoite vaaditaan."
+msgstr ""
 
 #: application/forms/RecoverPassword.php:46
 msgid "Invalid email address given."
-msgstr "Virheellinen sähköpostiosoite."
+msgstr ""
 
 #: application/forms/RecoverPassword.php:48
 msgid "Invalid format given for email address."
-msgstr "Sähköpostiosoite on virheellistä muotoa."
+msgstr ""
 
 #: application/forms/RecoverPassword.php:50
 msgid "Invalid hostname given for email address."
-msgstr "Sähköpostiosoitteen @-merkin jälkeinen osa on virheellinen."
+msgstr ""
 
 #: application/forms/RecoverPassword.php:66
 msgid "Invalid email address"
-msgstr "Virheellinen sähköpostiosoite"
+msgstr ""
 
 #: application/forms/ResetPassword.php:27
 msgid "Password is required."
-msgstr "Salasana vaaditaan."
+msgstr ""
 
 #: application/forms/ResetPassword.php:33
 msgid "Typed passwords do not match."
-msgstr "Salasanat eivät täsmää."
+msgstr ""
 
 #: application/forms/SecuritySettings.php:24
 msgid "Disable File Upload Validation"
-msgstr "Älä tarkasta palvelimelle ladattuja tiedostoja"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:26
 msgid ""
 "Check this field if you would like to allow any file to be uploaded to "
 "Omeka."
-msgstr "Valitse tämä jos haluat, että Omekaan voi tallentaa mitä tahansa tiedostoja."
+msgstr ""
 
 #: application/forms/SecuritySettings.php:32
 msgid "Allowed File Extensions"
-msgstr "Sallitut tiedostomuotojen päätteet"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:33
 msgid "List of allowed extensions for file uploads"
-msgstr "Sallitut tiedostopäätteet"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:42
 msgid "Allowed File Types"
-msgstr "Sallitut tiedostomuodot"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:43
 msgid "List of allowed MIME types for file uploads"
-msgstr "Listaus sallituista MIME-tyypeistä"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:52
 msgid "ReCaptcha Public Key"
-msgstr "ReCaptchan julkinen avain"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:53
 msgid ""
 "Enter public key from recaptcha.net. Both this and the private key must be "
 "filled in to secure public forms."
-msgstr "Recaptcha.net -palvelun julkinen avain. Sivuston julkisten lomakkeiden turvaaminen vaatii sekä julkisen että yksityisen avaimen tallentamisen asetuksiin."
+msgstr ""
 
 #: application/forms/SecuritySettings.php:60
 msgid "ReCaptcha Private Key"
-msgstr "ReCaptchan yksityinen avain"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:61
 msgid ""
 "Enter private key from recaptcha.net. Both this and the public key must be "
 "filled in to secure public forms."
-msgstr "Recaptcha.net -palvelun yksityinen avain. Sivuston julkisten lomakkeiden turvaaminen vaatii sekä julkisen että yksityisen avaimen tallentamisen asetuksiin."
+msgstr ""
 
 #: application/forms/SecuritySettings.php:69
 msgid "Enable HTML Filtering"
-msgstr "Käytä HTML-suodatusta"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:74
 msgid "Allowed HTML Elements"
-msgstr "Sallitut HTML-elementit"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:75
 msgid "List of allowed HTML elements in form input"
-msgstr "Lomakkeiden tekstikentissä sallitut HTML-elementit."
+msgstr ""
 
 #: application/forms/SecuritySettings.php:82
 msgid "Allowed HTML Attributes"
-msgstr "Sallitut HTML-attribuutit."
+msgstr ""
 
 #: application/forms/SecuritySettings.php:83
 msgid "List of allowed HTML attributes in form input"
-msgstr "Lomakkeiden tekstikentissä sallitut HTML-attribuutit."
+msgstr ""
 
 #: application/forms/SecuritySettings.php:94
 msgid "File Validation"
-msgstr "Tiedostovalidointi"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:102
 msgid "Captcha"
-msgstr "Captcha"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:111
 msgid "HTML Filtering"
-msgstr "HTML-suodatus"
+msgstr ""
 
 #: application/forms/User.php:30
 msgid ""
 "Username must contain only letters and numbers, and be 30 characters or "
 "fewer."
-msgstr "Käyttäjätunnus saa sisältää ainoastaan kirjaimia ja numeroita sen tulee olla pituudeltaan 30 merkkiä tai vähemmän."
+msgstr ""
 
 #: application/forms/User.php:37
 msgid "Username is required."
-msgstr "Käyttäjätunnus vaaditaan."
+msgstr ""
 
 #: application/forms/User.php:45
 msgid "Username must contain only letters and numbers."
-msgstr "Käyttäjätunnus voi sisältää vain kirjaimia ja numeroita."
+msgstr ""
 
 #: application/forms/User.php:55
 msgid "Username must be at least %min% characters long."
-msgstr "Käyttäjätunnuksen tulee sisältää vähintään %min% merkkiä."
+msgstr ""
 
 #: application/forms/User.php:57
 msgid "Username must be at most %max% characters long."
-msgstr "Käyttäjätunnus voi sisältää enintään %max% merkkiä."
+msgstr ""
 
 #: application/forms/User.php:71
 msgid "This username is already in use."
-msgstr "Käyttäjätunnus on jo varattu."
+msgstr ""
 
 #: application/forms/User.php:80
 msgid "Display Name"
-msgstr "Näytettävä käyttäjätunnus"
+msgstr ""
 
 #: application/forms/User.php:81
 msgid "Name as it should be displayed on the site"
-msgstr "Nimi sivustolla näytettävässä muodossa."
+msgstr ""
 
 #: application/forms/User.php:87 application/models/User.php:169
 msgid "Real Name is required."
-msgstr "Koko nimi vaaditaan."
+msgstr ""
 
 #: application/forms/User.php:93
 msgid "This email address is invalid."
-msgstr "Sähköpostiosoite on virheellinen"
+msgstr ""
 
 #: application/forms/User.php:101
 msgid "Email is required."
-msgstr "Sähköposti vaaditaan"
+msgstr ""
 
 #: application/forms/User.php:120
 msgid "This email address is already in use."
-msgstr "Sähköpostiosoite liittyy jo toiseen käyttäjätunnukseen."
+msgstr ""
 
 #: application/forms/User.php:129
 msgid ""
 "Roles describe the permissions a user has. See <a "
 "href='http://omeka.org/codex/User_Roles' target='_blank'>documentation</a> "
 "for details."
-msgstr "Roolit määrittävät käyttäjäoikeudet. <a href='http://omeka.org/codex/User_Roles' target='_blank'>documentation>Dokumentaatio</a> kuvaa käyttäjäoikeudet yksityiskohtaisesti."
+msgstr ""
 
 #: application/forms/User.php:137
 msgid "Active?"
-msgstr "Aktiivinen?"
+msgstr ""
 
 #: application/forms/User.php:138
 msgid "Inactive users cannot log in to the site."
-msgstr "Jäädyttyä käyttäjätunnusta ei voi käyttää."
+msgstr ""
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:115
 #, php-format
 msgid "The configured PHP path (%s) is invalid."
-msgstr "PHP-polku (%s) on virheellinen."
+msgstr ""
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:125
 #, php-format
 msgid "The configured PHP path (%s) does not point to a PHP-CLI binary."
-msgstr "PHP-polku (%s) ei osoita PHP-CLI -ohjelmaan."
+msgstr ""
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:127
 #, php-format
 msgid ""
 "The configured PHP path (%s) points to a PHP-CLI binary with an invalid "
 "version (%s)"
-msgstr "PHP-polku (%s) osoittaa PHP-CLI-ohjelmaan jonka versio on väärä (%s)"
+msgstr ""
 
 #: application/libraries/Omeka/Navigation.php:214
 msgid "The page must be normalized and have a valid uid."
-msgstr "Sivun tulee olla normalisoitu ja sillä on oltava UID."
+msgstr ""
 
 #: application/libraries/Omeka/Navigation.php:226
 msgid ""
 "The parent container must either be the navigation object or a descendant "
 "subpage of the navigation object."
-msgstr "Kontainerin tulee olla navigaatio-objekti tai navigaatio-objektin alisivu."
+msgstr ""
 
 #: application/libraries/Omeka/Navigation/Page/Uri.php:128
 #, php-format
 msgid "Invalid URI for Omeka_Navigation_Page_Uri object: %s"
-msgstr "Virheellinen URI Omeka_Navigation_Page_Uri objekti:%s"
+msgstr ""
 
 #: application/libraries/Omeka/Plugin/Ini.php:63
 #, php-format
 msgid "Path to plugin.ini for \"%s\" is not correct."
-msgstr "Polku lisäosan \"%s\" plugin.ini -tiedostoon on virheellinen."
+msgstr ""
 
 #: application/libraries/Omeka/Plugin/Installer.php:79
 #, php-format
 msgid "The \"%s\" plugin must be installed and have newer files to upgrade it."
-msgstr "Lisäosan \"%s\" tulee olla asennettuna ja sisältää uudempia tiedostoja päivittämistä varten."
+msgstr ""
 
 #: application/libraries/Omeka/Plugin/Installer.php:116
 msgid "Plugin must have a valid directory name before it can be installed."
-msgstr "Lisäosalla tulee olla oikea hakemistonimi ennen asentamista."
+msgstr ""
 
 #: application/libraries/Omeka/Plugin/Loader.php:112
 #, php-format
 msgid "Plugin named '%s' has already been loaded/registered."
-msgstr "Lisäosa '%s' on jo otettu käyttöön."
+msgstr ""
 
 #: application/libraries/Omeka/Plugin/Loader.php:153
 #, php-format
 msgid "The %s plugin could not be loaded."
-msgstr "Lisäosaa %s ei voitu käynnistää."
+msgstr ""
 
 #: application/libraries/Omeka/Plugin/Loader.php:174
 #, php-format
 msgid "The required plugin '%s' could not be found."
-msgstr "Vaadittua lisäosaa '%s' ei löydy."
+msgstr ""
 
 #: application/libraries/Omeka/Plugin/Loader.php:247
 #, php-format
 msgid "'%s' has no valid bootstrap file."
-msgstr "Lisäosan '%s' bootstrap-tiedosto puuttuu."
+msgstr ""
 
 #: application/libraries/Omeka/Plugin/Loader.php:250
 #, php-format
 msgid "'%s' has not been installed."
-msgstr "Lisäosaa '%s' ei ole asennettu."
+msgstr ""
 
 #: application/libraries/Omeka/Plugin/Loader.php:253
 #, php-format
 msgid "'%s' has not been activated."
-msgstr "Lisäosaa '%s' ei ole otettu käyttöön."
+msgstr ""
 
 #: application/libraries/Omeka/Plugin/Loader.php:256
 #, php-format
 msgid "'%s' requires a newer version of Omeka."
-msgstr "Lisäosa '%s' vaatii Omekan uudemman version."
+msgstr ""
 
 #: application/libraries/Omeka/Plugin/Loader.php:261
 #, php-format
 msgid "'%s' must be upgraded to the new version before it can be loaded."
-msgstr "Lisäosa '%s' tulee päivittää uudempaan versioon ennen käyttöönottoa."
+msgstr ""
 
 #: application/libraries/Omeka/Plugin/Loader.php:264
 #, php-format
 msgid "'%s' cannot be loaded twice."
-msgstr "Lisäosaa '%s' ei voi ottaa käyttöön useita kertoja kerrallaan."
+msgstr ""
 
 #: application/libraries/Omeka/Record/AbstractRecord.php:349
 #, php-format
 msgid "'%s' is an invalid special value."
-msgstr "'%s' on virheellinen erikoisarvo."
+msgstr ""
 
 #: application/libraries/Omeka/Record/Iterator.php:49
 msgid "An invalid value was detected during record iteration."
-msgstr "Tietueiden käsittelyssä tunnistettiin virheellinen arvo."
+msgstr ""
 
 #: application/libraries/globals.php:399
 msgid "File"
-msgstr "Tiedosto"
+msgstr ""
 
 #: application/libraries/globals.php:457
 msgid "Keyword"
-msgstr "Avainsana"
+msgstr ""
 
 #: application/libraries/globals.php:458
 msgid "Boolean"
-msgstr "Boolen-haku"
+msgstr ""
 
 #: application/libraries/globals.php:459
 msgid "Exact match"
-msgstr "Tarkka osuma"
+msgstr ""
 
 #: application/libraries/globals.php:1227
 #: application/libraries/globals.php:1248
 #, php-format
 msgid "Could not find file %s!"
-msgstr "Tiedostoa %s ei löydy."
+msgstr ""
 
 #: application/libraries/globals.php:1554
 msgid "Select Below "
-msgstr "Valitse"
+msgstr ""
 
 #: application/libraries/globals.php:1596
 msgid "Omeka RSS Feed"
-msgstr "Omeka RSS-syöte"
+msgstr ""
 
 #: application/libraries/globals.php:1597
 msgid "Omeka Atom Feed"
-msgstr "Omeka Atom-syöte"
+msgstr ""
 
 #: application/libraries/globals.php:2247
 msgid "View"
-msgstr "Näytä"
+msgstr ""
 
 #: application/libraries/globals.php:2309
 msgid "No Collection"
-msgstr "Ei kokoelmaa"
+msgstr ""
 
 #: application/libraries/globals.php:2424
 msgid "RSS"
-msgstr "RSS"
+msgstr ""
 
 #: application/libraries/globals.php:2441
 msgid "Next Item &rarr;"
-msgstr "Seuraava &rarr;"
+msgstr ""
 
 #: application/libraries/globals.php:2461
 msgid "&larr; Previous Item"
-msgstr "&larr; Edellinen"
+msgstr ""
 
 #: application/libraries/globals.php:2638
 msgid "Browse All"
-msgstr "Selaa"
+msgstr ""
 
 #: application/libraries/globals.php:2643
 msgid "Browse by Tag"
-msgstr "Selaa avainsanan"
+msgstr "Brskaj po oznakah"
 
 #: application/libraries/globals.php:2905
 msgid "No tags are available."
-msgstr "Ei avainsanoja"
+msgstr ""
 
 #: application/models/Builder/Item.php:263
 msgid "Must specify a file transfer type when attaching files to an item!"
-msgstr "Tiedostoja siirrettäessä on välttämätöntä määrittää tiedonsiirron tapa."
+msgstr ""
 
 #: application/models/Collection.php:117
 msgid "Cannot associate the collection with an unsaved user."
-msgstr "Kokoelmaa ei voitu yhdistää käyttäjään jonka tietoja ei ole tallennettu."
+msgstr ""
 
 #: application/models/Element.php:175
 msgid "The element name must not be empty."
-msgstr "Kentän nimi ei saa olla tyhjä."
+msgstr ""
 
 #: application/models/Element.php:179
 msgid "Invalid element set."
-msgstr "Virheellinen metatietokenttäjoukko."
+msgstr ""
 
 #: application/models/Element.php:185
 #, php-format
 msgid "An element named \"%s\" already exists for the \"%s\" element set."
-msgstr "Kenttä \"%s\" on jo olemassa\"%s\" kenttäjoukossa."
+msgstr ""
 
 #: application/models/Element.php:216
 #, php-format
 msgid "Cannot set element set ID: set named \"%s\" does not exist."
-msgstr "Kenttäryhmän ID:tä ei voi asettaa: ryhmää \"%s\" ei ole olemassa."
+msgstr ""
 
 #: application/models/ElementSet.php:146
 msgid "Name of element set must be unique."
-msgstr "Kenttäyhmällä tulee olla yksilöllinen nimi."
+msgstr ""
 
 #: application/models/ElementSet.php:150
 msgid "Name of element set must not be empty."
-msgstr "Kenttäryhmällä tulee olla nimi."
+msgstr ""
 
 #: application/models/ElementText.php:59
 msgid "Invalid record ID."
-msgstr "Virheellinen tietue-ID."
+msgstr ""
 
 #: application/models/ElementText.php:62
 msgid "All element texts must have a record type."
-msgstr "Kaikilla kentillä tulee olla tietuetyyppi."
+msgstr ""
 
 #: application/models/ElementText.php:65
 msgid "Invalid element ID."
-msgstr "Virheellinen metatietokentän ID."
+msgstr ""
 
 #: application/models/File.php:241
 msgid "Cannot get the local path for a stored file."
-msgstr "Tedostoon ei löydy polkua."
+msgstr ""
 
 #: application/models/File.php:458
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
-msgstr "\"%s\" ei ole oikeellinen tiedostojohdos."
+msgstr ""
 
 #: application/models/Item.php:317
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
-msgstr "Tiedostoja ei voida liittää väliaikaisesti tallennettuun tietueeseen."
+msgstr ""
 
 #. / Chicago-style item citation: two authors
 #: application/models/Item.php:444
 #, php-format
 msgid "%1$s and %2$s"
-msgstr "%1$s &amp; %2$s "
+msgstr ""
 
 #. / Chicago-style item citation: three authors
 #: application/models/Item.php:448
 #, php-format
 msgid "%1$s, %2$s, and %3$s"
-msgstr "%1$s, %2$s &amp; %3$s"
+msgstr ""
 
 #. / Chicago-style item citation: more than three authors
 #: application/models/Item.php:452
 #, php-format
 msgid "%s et al."
-msgstr "%s et al."
+msgstr ""
 
 #. / Chicago-style item citation: access date and URL
 #: application/models/Item.php:470
 #, php-format
 msgid "accessed %1$s, %2$s."
-msgstr "viitattu %1$s, %2$s."
+msgstr ""
 
 #: application/models/Item.php:487
 msgid "Cannot add an existing file to an item!"
-msgstr "Tiedostoa ei voitu liittää, sillä se on tallennettu järjestelmään jo aiemmin."
+msgstr ""
 
 #: application/models/Item.php:491
 msgid "File must be valid before it can be associated with an item!"
-msgstr "Aineistoon liitettävän tiedoston tulee olla oikeaa muotoa."
+msgstr ""
 
 #: application/models/Item.php:515
 msgid "Invalid item type."
-msgstr "Virheellinen aineistotyyppi."
+msgstr ""
 
 #: application/models/Item.php:518
 msgid "Invalid collection."
-msgstr "Virheellinen kokoelma."
+msgstr ""
 
 #: application/models/ItemType.php:102
 #, php-format
 msgid "The item type name must have between %1$s and %2$s characters."
-msgstr "Aineiston nimessä tulee olla vähintään  %1$s ja enintään %2$s merkkiä."
+msgstr ""
 
 #: application/models/ItemType.php:106
 msgid "The item type name must be unique."
-msgstr "Aineistotyypillä tulee olla yksisöllinen nimi."
+msgstr ""
 
 #: application/models/ItemType.php:179
 msgid "There are too many values in the element ordering array."
-msgstr "Kenttien järjestystaulukossa on liian monta arvoa."
+msgstr ""
 
 #: application/models/ItemType.php:181
 msgid "There are too few values in the element ordering array."
-msgstr "Kenttien järjestystaulukossa on liian vähän arvoja."
+msgstr ""
 
 #: application/models/ItemType.php:218
 msgid ""
 "Invalid element data. To add elements, you must either pass an element "
 "objects or an array of element metadata."
-msgstr "Virheellinen metatietokentän tieto. Välitä kenttäobjekti tai taulukko kenttiä kentän lisäämistä varten."
+msgstr ""
 
 #: application/models/ItemType.php:282
 msgid ""
 "Cannot remove elements from an item type that is not persistent in the "
 "database!"
-msgstr "Tietokantaan väliaikaisisti tallennetun aineistotyypin metatietokenttiä ei voi poistaa."
+msgstr ""
 
 #: application/models/ItemType.php:291
 #, php-format
 msgid "Cannot find element with ID %s!"
-msgstr "Tunnisteella %s ei löydy kenttää."
+msgstr ""
 
 #: application/models/ItemType.php:332
 #, php-format
 msgid "Item type does not contain an element with the ID %s!"
-msgstr "Aineistotyyppi ei sisällä kenttää, jonka tunniste on %s."
+msgstr ""
 
 #: application/models/ItemType.php:353
 msgid ""
 "Invalid parameter. The hasElement function requires either an element object"
 " or an element id to determine if an item type has an element."
-msgstr "Invalid parameter. The hasElement function requires either an element object or an element id to determine if an item type has an element."
+msgstr ""
 
 #: application/models/Mixin/ElementText.php:278
 #, php-format
 msgid "There is no element \"%1$s\", \"%2$s\"!"
-msgstr "Kenttää  \"%1$s\", \"%2$s\" ei ole olemassa."
+msgstr ""
 
 #: application/models/Mixin/ElementText.php:297
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
-msgstr "Kenttää jonka ID on '%s' ei löydy."
+msgstr ""
 
 #: application/models/Mixin/ElementText.php:416
 msgid "Element texts are not formatted correctly!"
-msgstr "Kentän teksti on muotoiltu virheellisesti."
+msgstr ""
 
 #: application/models/Mixin/ElementText.php:562
 #, php-format
 msgid "The \"%s\" field has at least one invalid value!"
-msgstr "Kenttä \"%s\"  sisältää yhden tai useamman virheen."
+msgstr ""
 
 #: application/models/Mixin/ElementText.php:632
 msgid "Cannot save element text for records that are not yet persistent!"
-msgstr "Kentän tekstiä ei voi tallentaa väliaikaisesti tallennettuun tietueeseen."
+msgstr ""
 
 #: application/models/Option.php:50 application/models/Option.php:54
 msgid "Each option must have a unique name."
-msgstr "Jokaisella vaihtoehdolla tulee olla yksilöivä nimi."
+msgstr ""
 
 #: application/models/Plugin.php:133
 msgid "Names of plugins must not be blank"
-msgstr "Lisäosan nimi ei voi olla tyhjä."
+msgstr ""
 
 #: application/models/Table/Collection.php:76
 #, php-format
 msgid "[Untitled] #%s"
-msgstr "[Nimetön] #%s"
+msgstr ""
 
 #: application/models/Table/Item.php:161
 msgid "Invalid search type given!"
-msgstr "Väärä hakutapa."
+msgstr ""
 
 #: application/models/Tag.php:56
 msgid "Tags must be given a name."
-msgstr "Avainsana ei voi olla tyhjä."
+msgstr ""
 
 #: application/models/Tag.php:60
 msgid "That name is already taken for this tag."
-msgstr "Identtinen avainsana on jo olemassa."
+msgstr ""
 
 #: application/models/User.php:110
 msgid "User may not change permissions to super-user"
-msgstr "Käyttäjä ei voi saada pääkäyttäjäoikeuksia."
+msgstr ""
 
 #: application/models/User.php:113
 msgid "User may not change roles."
-msgstr "Käyttäjä ei voi vaihtaa roolia."
+msgstr ""
 
 #: application/models/User.php:182 application/models/User.php:230
 msgid "The user must be assigned a role."
-msgstr "Käyttäjälle tulee valita rooli."
+msgstr ""
 
 #: application/models/User.php:187
 #, php-format
 msgid "The username \"%1$s\" must be between %2$s and %3$s characters."
-msgstr "Käyttäjätunnuksen \"%1$s\" tulee sisältää vähintään %2$s  ja enentään %3$s merkkiä."
+msgstr ""
 
 #: application/models/User.php:189
 msgid "The username must be alphanumeric."
-msgstr "Käyttäjätunnus voi sisältää vain kirjaimia ja numeroita."
+msgstr ""
 
 #: application/models/User.php:191
 #, php-format
 msgid "'%s' is already in use. Please choose another username."
-msgstr "Käyttäjätunnus '%s' on jo varattu. Ole hyvä ja valitse toinen käyttäjätunnus."
+msgstr ""
 
 #: application/models/UsersActivations.php:54
 msgid "Cannot create a user activation for non-existent user."
-msgstr "Käyttäjätunnusta ei voi aktivoida, koska sitä ei ole olemassa."
+msgstr ""
 
 #: application/tests/suite/Omeka/Db/Migration/_files/migrations/20080717013526_foobar.php:18
 msgid "This migration should have been run previously (should not run again)."
-msgstr "Siirto on jo toteutettu eikä sitä tulisi tehdä uudelleen."
+msgstr ""
 
 #: application/tests/suite/Omeka/Db/Migration/_files/migrations/50000101120000_notRunYet.php:19
 msgid "This migration should not be run."
-msgstr "Siirtoa ei tulisi toteuttaa uudelleen."
+msgstr ""
 
 #: application/tests/suite/Omeka/NavigationTest.php:752
 #: application/tests/suite/Omeka/NavigationTest.php:817
 #: application/tests/suite/Omeka/NavigationTest.php:839
 #: application/tests/suite/Omeka/NavigationTest.php:952
 msgid "Edit Items"
-msgstr "Muokkaa aineistoja"
+msgstr ""
 
 #: application/tests/suite/Omeka/NavigationTest.php:758
 #: application/tests/suite/Omeka/NavigationTest.php:818
 #: application/tests/suite/Omeka/NavigationTest.php:856
 #: application/tests/suite/Omeka/NavigationTest.php:953
 msgid "Edit Collections"
-msgstr "Muokkaa kokoelmia"
+msgstr ""
 
 #: application/tests/suite/Omeka/NavigationTest.php:764
 #: application/tests/suite/Omeka/NavigationTest.php:819
@@ -3181,19 +3181,19 @@ msgstr "Muokkaa kokoelmia"
 #: application/tests/suite/Omeka/NavigationTest.php:954
 #: install/views/scripts/layout.phtml:6 install/views/scripts/layout.phtml:23
 msgid "Omeka"
-msgstr "Omeka"
+msgstr ""
 
 #: application/tests/suite/Omeka/NavigationTest.php:825
 #: application/tests/suite/Omeka/NavigationTest.php:951
 msgid "CHNM"
-msgstr "CHNM"
+msgstr ""
 
 #: application/tests/suite/Omeka/NavigationTest.php:982
 #: application/tests/suite/Omeka/NavigationTest.php:990
 #: application/tests/suite/Omeka/NavigationTest.php:1128
 #: application/tests/suite/Omeka/NavigationTest.php:1136
 msgid "Page "
-msgstr "Sivu"
+msgstr ""
 
 #: application/tests/suite/Omeka/NavigationTest.php:1009
 #: application/tests/suite/Omeka/NavigationTest.php:1013
@@ -3202,7 +3202,7 @@ msgstr "Sivu"
 #: application/tests/suite/Omeka/NavigationTest.php:1156
 #: application/tests/suite/Omeka/NavigationTest.php:1256
 msgid "Page 1"
-msgstr "Sivu 1"
+msgstr ""
 
 #: application/tests/suite/Omeka/NavigationTest.php:1016
 #: application/tests/suite/Omeka/NavigationTest.php:1022
@@ -3213,7 +3213,7 @@ msgstr "Sivu 1"
 #: application/tests/suite/Omeka/NavigationTest.php:1200
 #: application/tests/suite/Omeka/NavigationTest.php:1232
 msgid "Page 2"
-msgstr "Sivu 2"
+msgstr ""
 
 #: application/tests/suite/Omeka/NavigationTest.php:1025
 #: application/tests/suite/Omeka/NavigationTest.php:1029
@@ -3224,7 +3224,7 @@ msgstr "Sivu 2"
 #: application/tests/suite/Omeka/NavigationTest.php:1193
 #: application/tests/suite/Omeka/NavigationTest.php:1255
 msgid "Page 3"
-msgstr "Sivu 3"
+msgstr ""
 
 #: application/tests/suite/Omeka/NavigationTest.php:1032
 #: application/tests/suite/Omeka/NavigationTest.php:1041
@@ -3237,7 +3237,7 @@ msgstr "Sivu 3"
 #: application/tests/suite/Omeka/NavigationTest.php:1240
 #: application/tests/suite/Omeka/NavigationTest.php:1250
 msgid "Page 4"
-msgstr "Sivu 4"
+msgstr ""
 
 #: application/tests/suite/Omeka/NavigationTest.php:1044
 #: application/tests/suite/Omeka/NavigationTest.php:1048
@@ -3248,126 +3248,126 @@ msgstr "Sivu 4"
 #: application/tests/suite/Omeka/NavigationTest.php:1223
 #: application/tests/suite/Omeka/NavigationTest.php:1241
 msgid "Page 5"
-msgstr "Sivu 5"
+msgstr ""
 
 #: application/tests/suite/Omeka/NavigationTest.php:1051
 #: application/tests/suite/Omeka/NavigationTest.php:1055
 #: application/tests/suite/Omeka/NavigationTest.php:1215
 msgid "Page 6"
-msgstr "Sivu 6"
+msgstr ""
 
 #: application/views/helpers/AllElementTexts.php:101
 msgid "[no text]"
-msgstr "[ei tekstiä]"
+msgstr ""
 
 #: application/views/helpers/ElementForm.php:65
 msgid "Add Input"
-msgstr "Lisää kenttä"
+msgstr ""
 
 #: application/views/helpers/ElementInput.php:131
 msgid "Use HTML"
-msgstr "Käytä HTML-muotoa"
+msgstr ""
 
 #: application/views/helpers/GetCurrentRecord.php:27
 #, php-format
 msgid "A current %s variable has not been set to this view."
-msgstr "Näkymään ei ole asetettu %s muuttujaa."
+msgstr ""
 
 #: application/views/helpers/GetLoopRecords.php:30
 #, php-format
 msgid "A loop %s variable has not been set to this view."
-msgstr "Silmukkamuuttujaan %s ei ole asetettu näkymää varten."
+msgstr ""
 
 #: application/views/helpers/Loop.php:27
 msgid "An array of records is not available for the loop."
-msgstr "Listaa tietueista ei ole saatavissa."
+msgstr ""
 
 #: application/views/helpers/RecordUrl.php:34
 msgid "Invalid record passed while getting record URL."
-msgstr "Virheellinen tietue haettaessa tietueen URL-osoitetta."
+msgstr ""
 
 #: application/views/helpers/RecordUrl.php:44
 msgid "Invalid action passed while getting record URL."
-msgstr "Virheellinen toiminto haettaessa tietueen URL-osoitetta."
+msgstr ""
 
 #: application/views/helpers/RecordUrl.php:75
 msgid "Invalid return value while getting record URL."
-msgstr "Virheellinen paluuarvo haettaessa tietueen URL-osoitetta."
+msgstr ""
 
 #: application/views/scripts/collections/browse.php:24
 msgid "Contributors(s)"
-msgstr "Osallistuja(t)"
+msgstr ""
 
 #: application/views/scripts/collections/browse.php:31
 #, php-format
 msgid "View the items in %s"
-msgstr "Näytä kokoelman %s aineistot"
+msgstr ""
 
 #: application/views/scripts/collections/random-featured.php:11
 msgid "No featured collections are available."
-msgstr "Ei nostettuja kokoelmia."
+msgstr ""
 
 #: application/views/scripts/collections/show.php:15
 #, php-format
 msgid "Items in the %s Collection"
-msgstr "Kokoelman %s aineistot."
+msgstr ""
 
 #: application/views/scripts/collections/show.php:40
 msgid "There are currently no items within this collection."
-msgstr "Kokoelmassa ei ole aineistoja"
+msgstr ""
 
 #: application/views/scripts/common/footer.php:14
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
-msgstr "<a href=\"http://omeka.org\">Omekan</a> voimalla."
+msgstr ""
 
 #: application/views/scripts/common/pagination_control.php:11
 msgid "&lt;"
-msgstr "&lt;"
+msgstr ""
 
 #: application/views/scripts/common/pagination_control.php:34
 #, php-format
 msgid "%s of %s"
-msgstr "%s / %s"
+msgstr ""
 
 #: application/views/scripts/common/pagination_control.php:42
 msgid "&gt;"
-msgstr "&gt;"
+msgstr ""
 
 #: application/views/scripts/error/403.php:2
 msgid "403 Page Forbidden"
-msgstr "403 Ei pääsyä"
+msgstr ""
 
 #: application/views/scripts/error/403.php:8
 msgid "You do not have permission to access this page."
-msgstr "Ei käyttöoikeutta sivulle"
+msgstr ""
 
 #: application/views/scripts/error/404.dc.php:1
 #: application/views/scripts/error/404.php:2
 #: application/views/scripts/error/404.xml.php:1
 msgid "404 Page Not Found"
-msgstr "404 Sivua ei löytynyt"
+msgstr ""
 
 #: application/views/scripts/error/404.php:6
 #, php-format
 msgid "%s is not a valid URL."
-msgstr "%s ei ole toimiva osoite."
+msgstr ""
 
 #: application/views/scripts/error/404.rss2.php:1
 msgid "Rss2.0 Feed Not Found!"
-msgstr "RSS 2.0 -virtaa ei löytynyt."
+msgstr ""
 
 #: application/views/scripts/error/405.php:2
 msgid "405 Method Not Allowed"
-msgstr "405 Menetelmä ei ole sallittu"
+msgstr ""
 
 #: application/views/scripts/error/405.php:6
 #, php-format
 msgid "The method used to access this URL (%s) is not valid."
-msgstr "Käytetty pääsymenetelmä URL-osoitteeseen %s on virheellinen."
+msgstr ""
 
 #: application/views/scripts/error/index.php:4
 msgid "Omeka has encountered an error"
-msgstr "Omeka on kompastunut virheeseen"
+msgstr ""
 
 #: application/views/scripts/error/index.php:33
 msgid ""
@@ -3375,135 +3375,135 @@ msgid ""
 "Omeka Codex page on <a "
 "href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error "
 "messages</a>."
-msgstr "Ohjeita yksityiskohtaisten virhetietojen selvittämiseksi löytyy <a href=\"http://omeka.org/codex/Retrieving_error_messages\">Omeka Codex</a>-sivuilta."
+msgstr ""
 
 #: application/views/scripts/index.php:14
 msgid "Featured Item"
-msgstr "Nostettu aineisto"
+msgstr ""
 
 #: application/views/scripts/index.php:22
 msgid "Featured Collection"
-msgstr "Nostettu kokoelma"
+msgstr ""
 
 #: application/views/scripts/index.php:67
 msgid "No recent items available."
-msgstr "Ei uusia aineistoja."
+msgstr ""
 
 #: application/views/scripts/index.php:71
 msgid "View All Items"
-msgstr "Näytä kaikki aineistot"
+msgstr "Preglej vse dokumente"
 
 #: application/views/scripts/items/browse.php:24
 msgid "Sort by: "
-msgstr "Järjestys:"
+msgstr ""
 
 #: application/views/scripts/items/random-featured.php:20
 msgid "No featured items are available."
-msgstr "Ei etusivulle nostettuja aineistoja."
+msgstr ""
 
 #: application/views/scripts/items/show.php:10
 msgid "Files"
-msgstr "Tiedostot"
+msgstr ""
 
 #: application/views/scripts/items/show.php:33
 msgid "Citation"
-msgstr "Viittaus"
+msgstr ""
 
 #: application/views/scripts/search/index.php:2
 msgid "Search Omeka "
-msgstr "Hae Omekasta"
+msgstr ""
 
 #: application/views/scripts/search/index.php:12
 msgid "Record Type"
-msgstr "Haun kohde"
+msgstr ""
 
 #: application/views/scripts/search/index.php:29
 msgid "Your query returned no results."
-msgstr "Haku ei tuottanut tuloksia."
+msgstr ""
 
 #: application/views/scripts/search/search-filters.php:3
 msgid "Query:"
-msgstr "Hakulause:"
+msgstr ""
 
 #: application/views/scripts/search/search-filters.php:4
 msgid "Query type:"
-msgstr "Haun tyyppi:"
+msgstr ""
 
 #: application/views/scripts/search/search-filters.php:5
 msgid "Record types:"
-msgstr "Haun kohteet:"
+msgstr ""
 
 #: application/views/scripts/search/search-form.php:6
 msgid "Search using this query type:"
-msgstr "Haun tyyppi:"
+msgstr ""
 
 #: application/views/scripts/search/search-form.php:11
 msgid "Search only these record types:"
-msgstr "Haun kohde:"
+msgstr ""
 
 #: application/views/scripts/search/search-form.php:17
 msgid "Go to search settings to select record types to use."
-msgstr "Hakuasetuksista voi valita käytettävät aineistolajit."
+msgstr ""
 
 #: application/views/scripts/search/search-form.php:19
 msgid "Advanced Search (Items only)"
-msgstr "Edistynyt haku (vain aineistoille)"
+msgstr ""
 
 #: application/views/scripts/users/login.php:9
 msgid "Go to Home Page"
-msgstr "Palaa etusivulle"
+msgstr ""
 
 #: application/views/scripts/users/login.php:9
 msgid "Lost your password?"
-msgstr "Unohtunut salasana?"
+msgstr ""
 
 #: install/controllers/IndexController.php:25
 msgid "Could not load database resource!"
-msgstr "Tietokantaresurssia ei voitu ladata."
+msgstr ""
 
 #: install/views/scripts/index/errors.phtml:1
 msgid "Installation Error"
-msgstr "Asennusvirhe"
+msgstr ""
 
 #: install/views/scripts/index/errors.phtml:2
 msgid ""
 "Before installation can continue, the following errors must be resolved:"
-msgstr "Seuraavat ongelmat tulee selvittää ennen kuin asennusta voidaan jatkaa:"
+msgstr ""
 
 #: install/views/scripts/index/fatal-error.phtml:1
 msgid "Fatal Error"
-msgstr "Vakava virhe"
+msgstr ""
 
 #: install/views/scripts/index/index.phtml:2
 msgid "Installation Warning"
-msgstr "Asennukseen liittyvät varoitukset"
+msgstr ""
 
 #: install/views/scripts/index/index.phtml:4
 msgid ""
 "The following issues will not affect installation, but they may negatively "
 "affect the behavior of Omeka:"
-msgstr "Seuraavat ongelmat eivät vaikuta asennukseen, mutta voivat haitata Omekan käyttöä:"
+msgstr ""
 
 #: install/views/scripts/index/index.phtml:14
 msgid "Configure Your Site"
-msgstr "Määrittele sivuston asetukset"
+msgstr ""
 
 #: install/views/scripts/index/index.phtml:16
 msgid "Form Validation Errors"
-msgstr "Lomakkeen virheet"
+msgstr ""
 
 #: install/views/scripts/index/installed.phtml:1
 msgid "Success!"
-msgstr "Onnistui!"
+msgstr ""
 
 #: install/views/scripts/index/installed.phtml:2
 msgid "Omeka is installed."
-msgstr "Omeka on asennettu."
+msgstr ""
 
 #: install/views/scripts/index/installed.phtml:3
 msgid "Public Site"
-msgstr "Julkinen sivusto"
+msgstr ""
 
 #: install/views/scripts/index/installed.phtml:3
 msgid "Admin Dashboard"
-msgstr "Ylläpito"
+msgstr "Administratorska nadzorna plošča"

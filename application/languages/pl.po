@@ -3,16 +3,17 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
+# tombeczka <dominik@broniszewski.pl>, 2013
 # platanus <marcin.mielnicki@gmail.com>, 2013
 # miniol <michal.seweryniak@gmail.com>, 2012
 # p <poczciwiec@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
-"Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
+"Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-08-27 14:53+0000\n"
-"Last-Translator: patrickmj <patrickmjchnm@gmail.com>\n"
+"PO-Revision-Date: 2013-11-20 11:02+0000\n"
+"Last-Translator: tombeczka <dominik@broniszewski.pl>\n"
 "Language-Team: Polish (http://www.transifex.com/projects/p/omeka/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -701,7 +702,7 @@ msgstr ""
 
 #: admin/themes/default/common/settings-nav.php:32
 msgid "API"
-msgstr ""
+msgstr "API"
 
 #: admin/themes/default/element-sets/browse.php:16
 #: admin/themes/default/users/browse.php:17
@@ -802,23 +803,23 @@ msgstr "Publikacja"
 
 #: admin/themes/default/files/show.php:42
 msgid "Direct Links"
-msgstr ""
+msgstr "Linki bezpośrednie"
 
 #: admin/themes/default/files/show.php:44
 msgid "Original"
-msgstr ""
+msgstr "Oryginał"
 
 #: admin/themes/default/files/show.php:46
 msgid "Fullsize"
-msgstr ""
+msgstr "Pełna wielkość"
 
 #: admin/themes/default/files/show.php:47
 msgid "Thumbnail"
-msgstr ""
+msgstr "Miniatura"
 
 #: admin/themes/default/files/show.php:48
 msgid "Square Thumbnail"
-msgstr ""
+msgstr "Miniatura kwadratowa"
 
 #: admin/themes/default/files/show.php:54
 #: application/views/scripts/files/show.php:22
@@ -911,7 +912,7 @@ msgstr "szablon"
 
 #: admin/themes/default/index.php:29
 msgid "A new version of Omeka is available for download."
-msgstr ""
+msgstr "Nowa wersja Omeki jest dostępna do pobrania."
 
 #: admin/themes/default/index.php:30
 #, php-format
@@ -1179,11 +1180,11 @@ msgstr "Ukryj szczegóły"
 
 #: admin/themes/default/items/browse.php:148
 msgid "You have no items."
-msgstr ""
+msgstr "Nie ma publikacji."
 
 #: admin/themes/default/items/browse.php:150
 msgid "Get started by adding your first item."
-msgstr ""
+msgstr "Rozpocznij dodając pierwszą publikację."
 
 #: admin/themes/default/items/browse.php:154
 #, php-format
@@ -1343,7 +1344,7 @@ msgstr "Tylko zwykłe publikacje"
 
 #: admin/themes/default/items/search-form.php:203
 msgid "Search for items"
-msgstr ""
+msgstr "Szukaj publikacji"
 
 #: admin/themes/default/items/show.php:8
 #, php-format
@@ -1421,7 +1422,7 @@ msgstr ""
 #: admin/themes/default/themes/browse.php:23
 #: admin/themes/default/themes/browse.php:49
 msgid "Get support"
-msgstr ""
+msgstr "Uzyskaj wsparcie"
 
 #: admin/themes/default/plugins/browse.php:69
 #, php-format
@@ -1492,11 +1493,11 @@ msgstr "Anuluj"
 
 #: admin/themes/default/settings/edit-api.php:11
 msgid "Enable API"
-msgstr ""
+msgstr "Włącz API"
 
 #: admin/themes/default/settings/edit-api.php:15
 msgid "Enable or disable the API by checking or uncheking the box below."
-msgstr ""
+msgstr "Włącz lub wyłącz API zaznaczając lub odznaczając pole poniżej."
 
 #: admin/themes/default/settings/edit-api.php:22
 msgid "Results per Page"
@@ -1644,7 +1645,7 @@ msgstr "Wygląd szablonu „%s”"
 
 #: admin/themes/default/themes/browse.php:16
 msgid "Configure Theme"
-msgstr ""
+msgstr "Konfiguracja szablonu"
 
 #: admin/themes/default/themes/browse.php:19
 msgid "Current Theme"
@@ -1666,12 +1667,12 @@ msgstr ""
 
 #: admin/themes/default/themes/browse.php:45
 msgid "Use this theme"
-msgstr ""
+msgstr "Użyj tego szablonu"
 
 #: admin/themes/default/themes/config.php:10
 #, php-format
 msgid "Configure Theme: %s"
-msgstr ""
+msgstr "Konfiguracja szablonu: %s"
 
 #: admin/themes/default/themes/config.php:11
 msgid "Configurations apply to this theme only."
@@ -2060,7 +2061,7 @@ msgstr "Użytkownik nie ma uprawnień do etykietowania wybranych publikacji."
 
 #: application/controllers/ItemsController.php:356
 msgid "The items were successfully deleted!"
-msgstr ""
+msgstr "Publikacje zostały usunięte!"
 
 #: application/controllers/ItemsController.php:358
 msgid "The items were successfully changed!"
@@ -2373,7 +2374,7 @@ msgstr "Maksymalny rozmiar kwadratowych miniaturek (w pikselach)."
 
 #: application/forms/AppearanceSettings.php:43
 msgid "Results Per Page (admin)"
-msgstr ""
+msgstr "Wyniki na stronie (admin)"
 
 #: application/forms/AppearanceSettings.php:44
 msgid ""
@@ -2383,7 +2384,7 @@ msgstr ""
 
 #: application/forms/AppearanceSettings.php:50
 msgid "Results Per Page (public)"
-msgstr ""
+msgstr "Wyniki na stronie (użytkownicy)"
 
 #: application/forms/AppearanceSettings.php:51
 msgid ""
@@ -2489,7 +2490,7 @@ msgstr "Hasło"
 
 #: application/forms/Install.php:38
 msgid "must be at least 6 characters"
-msgstr ""
+msgstr "musi zawierać co najmniej 6 znaków"
 
 #: application/forms/Install.php:61
 msgid "Confirm your password."
@@ -2501,11 +2502,11 @@ msgstr "Etykiety będą odzielane od siebie tym znakiem (lub ciągiem znaków)."
 
 #: application/forms/Install.php:118
 msgid "Maximum fullsize image size constraint (in pixels)"
-msgstr ""
+msgstr "Ograniczenie maksymalnej wielkości pełnowymiarowego obrazu (w pixelach)"
 
 #: application/forms/Install.php:126
 msgid "Maximum thumbnail size constraint (in pixels)"
-msgstr ""
+msgstr "Ograniczenie maksymalnej wielkości miniatury (w pixelach)"
 
 #: application/forms/Install.php:134
 msgid "Maximum square thumbnail size constraint (in pixels)"
@@ -2572,7 +2573,7 @@ msgstr ""
 
 #: application/forms/Navigation.php:162
 msgid "Select a Homepage"
-msgstr ""
+msgstr "Wybierz stronę domową"
 
 #: application/forms/Navigation.php:244
 msgid "Cannot find parent navigation page."
@@ -3449,7 +3450,7 @@ msgstr ""
 
 #: application/views/scripts/search/search-form.php:19
 msgid "Advanced Search (Items only)"
-msgstr ""
+msgstr "Wyszukiwanie zaawansowane (tylko publikacje)"
 
 #: application/views/scripts/users/login.php:9
 msgid "Go to Home Page"
@@ -3461,7 +3462,7 @@ msgstr "Zapomniałeś hasła?"
 
 #: install/controllers/IndexController.php:25
 msgid "Could not load database resource!"
-msgstr ""
+msgstr "Nie można załadować zasobu bazy danych!"
 
 #: install/views/scripts/index/errors.phtml:1
 msgid "Installation Error"
@@ -3496,11 +3497,11 @@ msgstr "Błędy sprawdzania formularza"
 
 #: install/views/scripts/index/installed.phtml:1
 msgid "Success!"
-msgstr ""
+msgstr "Sukces!"
 
 #: install/views/scripts/index/installed.phtml:2
 msgid "Omeka is installed."
-msgstr ""
+msgstr "Omeka jest zainstalowana!"
 
 #: install/views/scripts/index/installed.phtml:3
 msgid "Public Site"

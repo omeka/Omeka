@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
+# MAngel <ma.serra@gmail.com>, 2013
 # rubenalcaraz <rubenalcarazmartinez@gmail.com>, 2013
 # rubenalcaraz <rubenalcarazmartinez@gmail.com>, 2013
 # sergimontes <sergi.blanes@gmail.com>, 2013
@@ -10,10 +11,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
-"Report-Msgid-Bugs-To: https://github.com/omeka/Omeka/issues\n"
+"Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-09-29 14:58+0000\n"
-"Last-Translator: rubenalcaraz <rubenalcarazmartinez@gmail.com>\n"
+"PO-Revision-Date: 2013-11-20 11:02+0000\n"
+"Last-Translator: MAngel <ma.serra@gmail.com>\n"
 "Language-Team: Catalan (Spain) (http://www.transifex.com/projects/p/omeka/language/ca_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1007,7 +1008,7 @@ msgstr "No hi ha elements."
 
 #: admin/themes/default/item-types/show.php:39
 msgid "There are no recently added items."
-msgstr "No hi han"
+msgstr "No hi ha ítems afegits recentment"
 
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:20
