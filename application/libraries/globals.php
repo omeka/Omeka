@@ -2080,9 +2080,10 @@ function file_image($imageType, $props = array(), $file = null)
  * @param boolean $filesShow Whether to link to the files/show. Defaults to
  *  false, links to the original file.
  * @param Item $item The Item to use, the current item if omitted.
+ * @param boolean $sort Wheter to sort files by original_filename before display. Defaults to false, sorted as returned by $item->Files
  * @return string
  */
-function item_image_gallery($attrs = array(), $imageType = 'square_thumbnail', $filesShow = false, $item = null)
+function item_image_gallery($attrs = array(), $imageType = 'square_thumbnail', $filesShow = false, $item = null, $sort = false)
 {
     if (!$item) {
         $item = get_current_record('item');
@@ -2091,6 +2092,14 @@ function item_image_gallery($attrs = array(), $imageType = 'square_thumbnail', $
     $files = $item->Files;
     if (!$files) {
         return '';
+    }
+
+    if ($sort)
+    {
+        usort($files, function($a, $b)
+        {
+            return strcmp($a->getProperty("original_filename"), $b->getProperty("original_filename"));
+        });
     }
 
     $defaultAttrs = array(
