@@ -30,19 +30,24 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
     public function editSettingsAction()
     {
         // TODO Integrate storage paths and constraints with other base options.
-        $storage_paths = get_option('storage_paths');
-        if (empty($storage_paths)) {
-            $storage_paths = array(
-                'original' => 'original',
-                'fullsize' => 'fullsize',
-                'thumbnail' => 'thumbnails',
-                'square_thumbnail' => 'square_thumbnails',
+        $derivative_types = get_option('derivative_types');
+        if (empty($derivative_types)) {
+            $derivative_types = array(
+                'original',
+                'fullsize',
+                'thumbnail',
+                'square_thumbnail',
             );
-            set_option('storage_paths', serialize($storage_paths));
+            set_option('derivative_types', serialize($derivative_types));
+            set_option('original_path', 'original');
+            set_option('fullsize_path', 'fullsize');
+            set_option('thumbnail_path', 'thumbnails');
+            set_option('square_thumbnail_path', 'square_thumbnails');
             set_option('square_thumbnail_constraint_square', true);
+            delete_option('storage_paths');
         }
         else {
-            $storage_paths = unserialize($storage_paths);
+            $derivative_types = unserialize($derivative_types);
         }
 
         require_once APP_DIR . '/forms/AppearanceSettings.php';
@@ -50,13 +55,12 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
         $form->setDefaults($this->getInvokeArg('bootstrap')->getResource('Options'));
 
         // TODO Integrate storage paths and constraints with other base options.
-        $storage_paths_defaults = array();
-        foreach ($storage_paths as $type => $path) {
+        foreach ($derivative_types as $type) {
+            $form->setDefault($type . '_path', get_option($type . '_path'));
             $form->setDefault($type . '_constraint', get_option($type . '_constraint'));
             $form->setDefault($type . '_constraint_square', get_option($type . '_constraint_square'));
-            $storage_paths_defaults[] = $type . ' = ' . $path;
         }
-        $form->setDefault('storage_paths', implode('; ', $storage_paths_defaults));
+        $form->setDefault('derivative_types', implode('; ', $derivative_types));
 
         $form->removeDecorator('Form');
         fire_plugin_hook('appearance_settings_form', array('form' => $form));
@@ -69,15 +73,11 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
                 // valid option in the database.
                 unset($options['settings_submit']);
                 foreach ($options as $key => $value) {
-                    // Serialize storage paths before saving.
-                    if ($key == 'storage_paths') {
-                        $storagePaths = explode(';', $value);
-                        $value = array();
-                        foreach ($storagePaths as $storage) {
-                            $storage = explode('=', $storage);
-                            $value[trim($storage[0])] = trim($storage[1]);
-                        }
-                        $value = serialize($value);
+                    // Serialize derivative types before saving.
+                    if ($key == 'derivative_types') {
+                        $values = explode(';', $value);
+                        $values = array_map('trim', $values);
+                        $value = serialize($values);
                     }
                     set_option($key, $value);
                 }
@@ -117,11 +117,16 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
      */
     private function _addNewStoragePaths()
     {
-        $storage_paths = unserialize(get_option('storage_paths'));
-        foreach ($storage_paths as $type => $path) {
-            $dirpath = FILES_DIR . DIRECTORY_SEPARATOR . $path;
+        $derivative_types = unserialize(get_option('derivative_types'));
+        foreach ($derivative_types as $type) {
+            $dirpath = FILES_DIR . DIRECTORY_SEPARATOR . get_option($type . '_path');
             if (!realpath($dirpath)) {
                 $this->_createFolder($dirpath);
+                // For security reason, an index.html is added.
+                copy(
+                    FILES_DIR . DIRECTORY_SEPARATOR . 'original' . DIRECTORY_SEPARATOR . 'index.html',
+                    $dirpath . DIRECTORY_SEPARATOR . 'index.html'
+                );
             }
         }
     }

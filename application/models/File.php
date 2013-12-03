@@ -350,10 +350,11 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             return;
         }
         $creator = new Omeka_File_Derivative_Image_Creator($convertDir);
-        $storage_paths = unserialize(get_option('storage_paths'));
-        unset($storage_paths['original']);
-        foreach ($storage_paths as $type => $path) {
-            $creator->addDerivative($type, get_option($type . '_constraint'), (boolean) get_option($type . '_constraint_square'));
+        $derivative_types = unserialize(get_option('derivative_types'));
+        foreach ($derivative_types as $type) {
+            if ($type != 'original') {
+                $creator->addDerivative($type, get_option($type . '_constraint'), (boolean) get_option($type . '_constraint_square'));
+            }
         }
         if ($creator->create($this->getPath('original'),
                              $this->getDerivativeFilename(),
@@ -447,15 +448,30 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     public function getStoragePathsByType()
     {
         if (is_null(self::$_pathsByType)) {
-            self::$_pathsByType = unserialize(get_option('storage_paths'));
             // TODO To be removed once the patch will be integrated in install.
-            if (empty(self::$_pathsByType)) {
-                self::$_pathsByType = array(
-                    'original' => 'original',
-                    'fullsize' => 'fullsize',
-                    'thumbnail' => 'thumbnails',
-                    'square_thumbnail' => 'square_thumbnails',
+            $derivative_types = get_option('derivative_types');
+            if (empty($derivative_types)) {
+                $derivative_types = array(
+                    'original',
+                    'fullsize',
+                    'thumbnail',
+                    'square_thumbnail',
                 );
+                set_option('derivative_types', serialize($derivative_types));
+                set_option('original_path', 'original');
+                set_option('fullsize_path', 'fullsize');
+                set_option('thumbnail_path', 'thumbnails');
+                set_option('square_thumbnail_path', 'square_thumbnails');
+                set_option('square_thumbnail_constraint_square', true);
+                delete_option('storage_paths');
+            }
+            else {
+                $derivative_types = unserialize($derivative_types);
+            }
+
+            self::$_pathsByType = array();
+            foreach ($derivative_types as $type) {
+                self::$_pathsByType[$type] = get_option($type . '_path');
             }
         }
         return self::$_pathsByType;
