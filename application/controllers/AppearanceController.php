@@ -33,7 +33,6 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
         $derivative_types = get_option('derivative_types');
         if (empty($derivative_types)) {
             $derivative_types = array(
-                'original',
                 'fullsize',
                 'thumbnail',
                 'square_thumbnail',
@@ -45,9 +44,16 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
             set_option('square_thumbnail_path', 'square_thumbnails');
             set_option('square_thumbnail_constraint_square', true);
             delete_option('storage_paths');
+            delete_option('original_constraint');
+            delete_option('original_constraint_square');
         }
         else {
             $derivative_types = unserialize($derivative_types);
+            // Original is not a derivative!
+            unset($derivative_types['original']);
+            set_option('derivative_types', serialize($derivative_types));
+            delete_option('original_constraint');
+            delete_option('original_constraint_square');
         }
 
         require_once APP_DIR . '/forms/AppearanceSettings.php';
@@ -55,6 +61,7 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
         $form->setDefaults($this->getInvokeArg('bootstrap')->getResource('Options'));
 
         // TODO Integrate storage paths and constraints with other base options.
+        $form->setDefault('original_path', get_option('original_path'));
         foreach ($derivative_types as $type) {
             $form->setDefault($type . '_path', get_option($type . '_path'));
             $form->setDefault($type . '_constraint', get_option($type . '_constraint'));

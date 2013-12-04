@@ -130,9 +130,9 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     public function getProperty($property)
     {
         if (substr($property, -4) == '_uri') {
-            $storagePaths = $this->getStoragePathsByType();
+            $derivativePaths = $this->_getDerivativePathsByType();
             $path = substr($property, 0, -4);
-            if (isset($storagePaths[$path])) {
+            if (isset($derivativePaths[$path])) {
                 return $this->getWebPath($path);
             }
         };
@@ -321,13 +321,12 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         $storage = $this->getStorage();
         $files = array($this->getStoragePath('original'));
         if ($this->has_derivative_image) {
-            $storagePaths = $this->getStoragePathsByType();
-            unset($storagePaths['original']);
-            foreach($storagePaths as $type => $path) {
+            $derivativePaths = $this->_getDerivativePathsByType();
+            foreach ($derivativePaths as $type => $path) {
                 $files[] = $this->getStoragePath($type);
             }
         }
-        foreach($files as $file) {
+        foreach ($files as $file) {
             $storage->delete($file);
         }
     }
@@ -352,9 +351,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         $creator = new Omeka_File_Derivative_Image_Creator($convertDir);
         $derivative_types = unserialize(get_option('derivative_types'));
         foreach ($derivative_types as $type) {
-            if ($type != 'original') {
-                $creator->addDerivative($type, get_option($type . '_constraint'), (boolean) get_option($type . '_constraint_square'));
-            }
+            $creator->addDerivative($type, get_option($type . '_constraint'), (boolean) get_option($type . '_constraint_square'));
         }
         if ($creator->create($this->getPath('original'),
                              $this->getDerivativeFilename(),
@@ -384,7 +381,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             'mime_type', 'audio', 'video', 'comments', 'comments_html',
             'iptc', 'jpg'
         );
-        foreach($keys as $key) {
+        foreach ($keys as $key) {
             if (array_key_exists($key, $id3->info)) {
                 $metadata[$key] = $id3->info[$key];
             }
@@ -428,11 +425,9 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         $derivativeFilename = $this->getDerivativeFilename();
         $storage->store($this->getPath('original'), $this->getStoragePath('original'));
         if ($this->has_derivative_image) {
-            $types = array_keys($this->getStoragePathsByType());
+            $types = array_keys($this->_getDerivativePathsByType());
             foreach ($types as $type) {
-                if ($type != 'original') {
-                    $storage->store($this->getPath($type), $this->getStoragePath($type));
-                }
+                $storage->store($this->getPath($type), $this->getStoragePath($type));
             }
         }
         $this->stored = '1';
@@ -440,7 +435,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     }
 
     /**
-     * Get list of storage paths (original and derivatives) by type.
+     * Get list of storage paths of files (original and derivative) by type.
      *
      * @return array
      *   Associative array of paths for original and derivatives by type.
@@ -452,7 +447,6 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             $derivative_types = get_option('derivative_types');
             if (empty($derivative_types)) {
                 $derivative_types = array(
-                    'original',
                     'fullsize',
                     'thumbnail',
                     'square_thumbnail',
@@ -469,12 +463,28 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
                 $derivative_types = unserialize($derivative_types);
             }
 
-            self::$_pathsByType = array();
+            self::$_pathsByType = array(
+                'original' => get_option('original_path'),
+            );
             foreach ($derivative_types as $type) {
                 self::$_pathsByType[$type] = get_option($type . '_path');
             }
         }
+
         return self::$_pathsByType;
+    }
+
+    /**
+     * Get list of storage paths of derivative files by type.
+     *
+     * @return array
+     *   Associative array of paths for derivative files by type.
+     */
+    protected function _getDerivativePathsByType()
+    {
+        $storagePaths = $this->getStoragePathsByType();
+        unset($storagePaths['original']);
+        return $storagePaths;
     }
 
     /**

@@ -21,8 +21,8 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
         $this->addElement('text', 'derivative_types', array(
             'label' => __('Derivative types'),
             'description' => __('This list contains the derivative types used by Omeka.')
-                . ' ' . __('Default is "%soriginal; fullsize; thumbnail; square_thumbnail%s".', '<em>', '</em>')
-                . ' ' . __('Other derivative types can be added.')
+                . ' ' . __('Default is "%sfullsize; thumbnail; square_thumbnail%s".', '<em>', '</em>')
+                . ' ' . __('Other derivative types can be added (not the original).')
                 . ' ' . __("Once this option saved, don't forget to set the path and the constraint values below for new derivative types."),
             'validators' => array(
                 array('validator' => 'Regex', 'breakChainOnFailure' => true, 'options' =>
@@ -34,21 +34,39 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
                         ),
                     ),
                 ),
-                array('validator' => 'Regex', 'breakChainOnFailure' => true, 'options' =>
-                    array(
-                        'pattern' => '/original/',
-                        'messages' => array(
-                            Zend_Validate_Regex::NOT_MATCH =>
-                               __('Derivatives must contain the type "original". Other default types are recommanded.'),
-                        ),
-                    ),
-                ),
             ),
             'required' => true,
         ));
 
         $derivative_types = unserialize(get_option('derivative_types'));
         $storageDisplayGroup = array();
+
+        $type = 'original';
+        $this->addElement('text', $type . '_path', array(
+            'label' => '"' . $type . '"',
+            'description' => __('Subfolder where "%s" files will be saved.', $type),
+            'validators' => array(
+                array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
+                    array(
+                        'messages' => array(
+                            Zend_Validate_NotEmpty::IS_EMPTY => __('This path cannot be empty.')
+                        )
+                    )
+                ),
+                array('validator' => 'Regex', 'breakChainOnFailure' => true, 'options' =>
+                    array(
+                        'pattern' => '/^[\w\_]+$/',
+                        'messages' => array(
+                            Zend_Validate_Regex::NOT_MATCH =>
+                               __('Path must contain only letters, numbers, and "_".'),
+                        ),
+                    ),
+                ),
+            ),
+            'required' => true,
+        ));
+        $storageDisplayGroup[] = $type . '_path';
+
         foreach ($derivative_types as $type) {
             $this->addElement('text', $type . '_path', array(
                 'label' => '"' . $type . '"',
@@ -74,19 +92,18 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
                 'required' => true,
             ));
             $storageDisplayGroup[] = $type . '_path';
-            if ($type != 'original') {
-                $this->addElement('text', $type . '_constraint', array(
-                    'description' => __('Maximum image size constraint (in pixels) or escaped ImageMagick parameters.'),
-                    'required' => true,
-                ));
-                $storageDisplayGroup[] = $type . '_constraint';
 
-                $this->addElement('checkbox', $type . '_constraint_square', array(
-                    'description' => __('Check if "%s" is a square derivative.', $type),
-                    'class' => 'checkbox',
-                ));
-                $storageDisplayGroup[] = $type . '_constraint_square';
-            }
+            $this->addElement('text', $type . '_constraint', array(
+                'description' => __('Maximum image size constraint (in pixels) or escaped ImageMagick parameters.'),
+                'required' => true,
+            ));
+            $storageDisplayGroup[] = $type . '_constraint';
+
+            $this->addElement('checkbox', $type . '_constraint_square', array(
+                'description' => __('Check if "%s" is a square derivative.', $type),
+                'class' => 'checkbox',
+            ));
+            $storageDisplayGroup[] = $type . '_constraint_square';
         }
 
         $this->addElement('text', 'per_page_admin', array(
