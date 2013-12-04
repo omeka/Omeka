@@ -11,14 +11,15 @@
 # Stéphane Loret <stephane.loret@univ-tours.fr>, 2012
 # thierry <thierry.pasquier@emf.ccsti.eu>, 2012-2013
 # thierry <thierry.pasquier@emf.ccsti.eu>, 2013
+# symac <wikitipiac@laposte.net>, 2013
 # symac <wikitipiac@laposte.net>, 2011, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-11-20 11:02+0000\n"
-"Last-Translator: patrickmj <patrickmjchnm@gmail.com>\n"
+"PO-Revision-Date: 2013-11-27 15:35+0000\n"
+"Last-Translator: symac <wikitipiac@laposte.net>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/omeka/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -707,7 +708,7 @@ msgstr "Éléments des types de contenus"
 
 #: admin/themes/default/common/settings-nav.php:32
 msgid "API"
-msgstr ""
+msgstr "API"
 
 #: admin/themes/default/element-sets/browse.php:16
 #: admin/themes/default/users/browse.php:17
@@ -808,23 +809,23 @@ msgstr "Contenu"
 
 #: admin/themes/default/files/show.php:42
 msgid "Direct Links"
-msgstr ""
+msgstr "Lien direct"
 
 #: admin/themes/default/files/show.php:44
 msgid "Original"
-msgstr ""
+msgstr "Original"
 
 #: admin/themes/default/files/show.php:46
 msgid "Fullsize"
-msgstr ""
+msgstr "Taille originale"
 
 #: admin/themes/default/files/show.php:47
 msgid "Thumbnail"
-msgstr ""
+msgstr "Vignette"
 
 #: admin/themes/default/files/show.php:48
 msgid "Square Thumbnail"
-msgstr ""
+msgstr "Vignette \"carré\""
 
 #: admin/themes/default/files/show.php:54
 #: application/views/scripts/files/show.php:22
@@ -1427,7 +1428,7 @@ msgstr "par %s"
 #: admin/themes/default/themes/browse.php:23
 #: admin/themes/default/themes/browse.php:49
 msgid "Get support"
-msgstr ""
+msgstr "Obtenir de l'aide"
 
 #: admin/themes/default/plugins/browse.php:69
 #, php-format
@@ -1498,19 +1499,19 @@ msgstr "Annuler"
 
 #: admin/themes/default/settings/edit-api.php:11
 msgid "Enable API"
-msgstr ""
+msgstr "Activer l'API"
 
 #: admin/themes/default/settings/edit-api.php:15
 msgid "Enable or disable the API by checking or uncheking the box below."
-msgstr ""
+msgstr "Activez ou désactivez l'API en cochant / décochant la case ci-dessous"
 
 #: admin/themes/default/settings/edit-api.php:22
 msgid "Results per Page"
-msgstr ""
+msgstr "Résultats par page"
 
 #: admin/themes/default/settings/edit-api.php:26
 msgid "Maximum number of API results displayed per page."
-msgstr ""
+msgstr "Nombre maximum d'éléments par page affichés par l'API"
 
 #: admin/themes/default/settings/edit-api.php:32
 #, php-format
@@ -1520,7 +1521,7 @@ msgid ""
 "adding, editing, and deleting content, is protected and requires key "
 "authentication. Each key corresponds to, and has all permissions of, an "
 "existing Omeka user. You can create keys on each user's %sedit page%s."
-msgstr ""
+msgstr "Une fois l'API activée, les applications pourront afficher, parcourir, ajouter, éditer et supprimer les contenus de votre site. L'affichage des contenus protégés, tout comme l'ajout, l'édition et la suppression de contenus, est protégé et nécessite une clé d'authentification. Chaque clé correspond à un utilisateur Omeka existant (et dispose des mêmes privilèges que l'utilisateur). Vous pouvez créer les clés sur les %s pages de modification des utilisateurs%s."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:12
 msgid "edit a specific item type"
@@ -1636,11 +1637,11 @@ msgstr "Récent"
 #: admin/themes/default/tags/browse.php:43
 #: admin/themes/default/tags/browse.php:45
 msgid "Record Types"
-msgstr ""
+msgstr "Types d'enregistrement"
 
 #: admin/themes/default/tags/browse.php:47
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: admin/themes/default/themes/browse.php:15
 #: admin/themes/default/themes/browse.php:43
@@ -1770,19 +1771,19 @@ msgstr "Adresse de messagerie"
 
 #: admin/themes/default/users/browse.php:35
 msgid "Search users"
-msgstr ""
+msgstr "Chercher un utilisateur"
 
 #: admin/themes/default/users/browse.php:36
 msgid "Usernames"
-msgstr ""
+msgstr "Noms d'utilisateur"
 
 #: admin/themes/default/users/browse.php:37
 msgid "Real names"
-msgstr ""
+msgstr "Nom réel"
 
 #: admin/themes/default/users/browse.php:38
 msgid "Email addresses"
-msgstr ""
+msgstr "Adresse de courriel"
 
 #: admin/themes/default/users/browse.php:48
 #: admin/themes/default/users/show.php:20
@@ -1804,43 +1805,43 @@ msgstr "Modifier l'utilisateur #%s"
 
 #: admin/themes/default/users/edit.php:24
 msgid "API Keys"
-msgstr ""
+msgstr "Clé d'API"
 
 #: admin/themes/default/users/edit.php:27
 msgid "New key label"
-msgstr ""
+msgstr "Nouvel libellé de clé"
 
 #: admin/themes/default/users/edit.php:31
 msgid ""
 "To create a new API key, enter a label for the key below. For example, "
 "describe for what purpose it will be used. This key will have all your "
 "permissions; treat it as you would your password."
-msgstr ""
+msgstr "Pour créer une clé d'API, saisissez ci-dessous un libellé pour cette clé. Par exemple, décrivez dans quel but cette clé sera utilisée. Cette clé aura les mêmes autorisations que vous, prenez-en soin comme si c'était votre mot de passe."
 
 #: admin/themes/default/users/edit.php:41
 msgid "You have no API keys. Use the form above to create one."
-msgstr ""
+msgstr "Vous n'avez pas de clé d'API. Utilisez le formulaire ci-dessous pour en créer une."
 
 #: admin/themes/default/users/edit.php:43
 #, php-format
 msgid "%s has no API keys. Use the form above to create one."
-msgstr ""
+msgstr "%s n'a pas de clé d'API. Utilisez le formulaire ci-dessous pour en créer une."
 
 #: admin/themes/default/users/edit.php:51
 msgid "Key"
-msgstr ""
+msgstr "Clé"
 
 #: admin/themes/default/users/edit.php:52
 msgid "Last IP"
-msgstr ""
+msgstr "Dernière IP"
 
 #: admin/themes/default/users/edit.php:53
 msgid "Last accessed"
-msgstr ""
+msgstr "Dernière utilisation"
 
 #: admin/themes/default/users/edit.php:54
 msgid "Rescind"
-msgstr ""
+msgstr "Supprimer"
 
 #: admin/themes/default/users/forgot-password.php:2
 #: application/views/scripts/users/forgot-password.php:2
@@ -2191,7 +2192,7 @@ msgstr "Les éléments des types de contenus ont été modifiés avec succès !"
 
 #: application/controllers/SettingsController.php:149
 msgid "The API configuration was successfully changed!"
-msgstr ""
+msgstr "La configuration de l'API a été modifiée avec succès !"
 
 #: application/controllers/SettingsController.php:175
 msgid "The ImageMagick directory path works."
@@ -2271,7 +2272,7 @@ msgstr "Consulter votre messagerie afin d'y trouver le lien qui vous permettra d
 
 #: application/controllers/UsersController.php:126
 msgid "Invalid activation code given."
-msgstr ""
+msgstr "Code d'activation non valide."
 
 #: application/controllers/UsersController.php:135
 msgid "Password: The passwords do not match."
@@ -2297,11 +2298,11 @@ msgstr "L'utilisateur \"%s\" a été ajouté, mais le mail d'activation n'a pas 
 
 #: application/controllers/UsersController.php:233
 msgid "A new API key was successfully created."
-msgstr ""
+msgstr "Une nouvelle clé d'API a été créée avec succès."
 
 #: application/controllers/UsersController.php:241
 msgid "An existing API key was successfully rescinded."
-msgstr ""
+msgstr "Une clé d'API existante a été supprimée avec succès."
 
 #: application/controllers/UsersController.php:246
 #: application/controllers/UsersController.php:257
@@ -2821,47 +2822,47 @@ msgstr "L'extension doit avoir un nom de répertoire valide avant d'être instal
 #: application/libraries/Omeka/Plugin/Loader.php:112
 #, php-format
 msgid "Plugin named '%s' has already been loaded/registered."
-msgstr ""
+msgstr "Le plugin '%s' est déjà chargé / enregistré."
 
 #: application/libraries/Omeka/Plugin/Loader.php:153
 #, php-format
 msgid "The %s plugin could not be loaded."
-msgstr ""
+msgstr "Le plugin '%s' n'a pas pu être chargé."
 
 #: application/libraries/Omeka/Plugin/Loader.php:174
 #, php-format
 msgid "The required plugin '%s' could not be found."
-msgstr ""
+msgstr "Le plugin requis '%s' n'a pu être trouvé."
 
 #: application/libraries/Omeka/Plugin/Loader.php:247
 #, php-format
 msgid "'%s' has no valid bootstrap file."
-msgstr ""
+msgstr "'%s' n'a pas de fichier \"bootstrap\" valide."
 
 #: application/libraries/Omeka/Plugin/Loader.php:250
 #, php-format
 msgid "'%s' has not been installed."
-msgstr ""
+msgstr "'%s' n'a pas été installé."
 
 #: application/libraries/Omeka/Plugin/Loader.php:253
 #, php-format
 msgid "'%s' has not been activated."
-msgstr ""
+msgstr "'%s' n'a pas été activé."
 
 #: application/libraries/Omeka/Plugin/Loader.php:256
 #, php-format
 msgid "'%s' requires a newer version of Omeka."
-msgstr ""
+msgstr "'%s' nécessite une version plus récente d'Omeka."
 
 #: application/libraries/Omeka/Plugin/Loader.php:261
 #, php-format
 msgid "'%s' must be upgraded to the new version before it can be loaded."
-msgstr ""
+msgstr "'%s' doit être mis à jour avant de pouvoir être chargé."
 
 #: application/libraries/Omeka/Plugin/Loader.php:264
 #, php-format
 msgid "'%s' cannot be loaded twice."
-msgstr ""
+msgstr "'%s' ne peut être chargé deux fois."
 
 #: application/libraries/Omeka/Record/AbstractRecord.php:349
 #, php-format
@@ -2952,7 +2953,7 @@ msgstr "Le nom de l'élément ne doit pas être vide."
 
 #: application/models/Element.php:179
 msgid "Invalid element set."
-msgstr ""
+msgstr "Le jeu d'éléments n'est pas valide."
 
 #: application/models/Element.php:185
 #, php-format
@@ -3032,11 +3033,11 @@ msgstr "Le fichier doit être valide avant qu'il puisse être associé à un con
 
 #: application/models/Item.php:515
 msgid "Invalid item type."
-msgstr ""
+msgstr "Type de contenu non valide."
 
 #: application/models/Item.php:518
 msgid "Invalid collection."
-msgstr ""
+msgstr "Collection non valide."
 
 #: application/models/ItemType.php:102
 #, php-format

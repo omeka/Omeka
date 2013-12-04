@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-11-20 17:49+0000\n"
+"PO-Revision-Date: 2013-12-02 18:02+0000\n"
 "Last-Translator: sloicra <sloicra@gmail.com>\n"
 "Language-Team: Slovenian (Slovenia) (http://www.transifex.com/projects/p/omeka/language/sl_SI/)\n"
 "MIME-Version: 1.0\n"
@@ -175,7 +175,7 @@ msgstr ""
 
 #. Omeka Legacy File
 msgid "Omeka Legacy File"
-msgstr ""
+msgstr "Omeka podedovane datoteke"
 
 #. Omeka Legacy File description
 msgid ""
@@ -211,7 +211,7 @@ msgstr ""
 
 #. Omeka Legacy File: Capture Device element
 msgid "Capture Device"
-msgstr ""
+msgstr "Naprava za zajem"
 
 #. Omeka Legacy File: Capture Details element
 msgid "Capture Details"
@@ -227,15 +227,15 @@ msgstr "Vodni žig"
 
 #. Omeka Legacy File: Encryption element
 msgid "Encryption"
-msgstr ""
+msgstr "Šifriranje"
 
 #. Omeka Legacy File: Compression element
 msgid "Compression"
-msgstr ""
+msgstr "Stiskanje"
 
 #. Omeka Legacy File: Post Processing element
 msgid "Post Processing"
-msgstr ""
+msgstr "Poobdelava"
 
 #. Omeka Image File
 msgid "Omeka Image File"
@@ -291,19 +291,19 @@ msgstr ""
 
 #. Omeka Video File: Bitrate element
 msgid "Bitrate"
-msgstr ""
+msgstr "Bitna hitrost"
 
 # Omeka Video File: Duration element
 msgid "Duration"
-msgstr ""
+msgstr "Trajanje"
 
 #. Omeka Video File: Sample Rate element
 msgid "Sample Rate"
-msgstr ""
+msgstr "Frekvenca vzorčenja"
 
 #. Omeka Video File: Codec element
 msgid "Codec"
-msgstr ""
+msgstr "Kodek"
 
 #. Format (Legacy) Metadata element set
 msgid "Format (Legacy) Metadata"
@@ -626,7 +626,7 @@ msgstr ""
 #: admin/themes/default/common/footer.php:6
 #: admin/themes/default/common/login-footer.php:7
 msgid "Powered by Omeka"
-msgstr ""
+msgstr "Stran poganja Omeka"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Documentation"
@@ -773,7 +773,7 @@ msgstr ""
 
 #: admin/themes/default/error/405.php:2
 msgid "405: Method Not Allowed"
-msgstr ""
+msgstr "405: Način ni dovoljen"
 
 #: admin/themes/default/error/405.php:9
 #, php-format
@@ -845,7 +845,7 @@ msgstr ""
 
 #: admin/themes/default/files/show.php:66
 msgid "File History"
-msgstr ""
+msgstr "Zgodovina datoteke"
 
 #: admin/themes/default/files/show.php:70
 msgid "Date Modified"
@@ -854,7 +854,7 @@ msgstr "Datum spremembe"
 #: admin/themes/default/files/show.php:72
 #: application/views/scripts/files/show.php:34
 msgid "Authentication"
-msgstr ""
+msgstr "Preverjanje pristnosti"
 
 #: admin/themes/default/files/show.php:78
 #: application/views/scripts/files/show.php:40

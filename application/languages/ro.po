@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-11-20 11:02+0000\n"
-"Last-Translator: patrickmj <patrickmjchnm@gmail.com>\n"
+"PO-Revision-Date: 2013-11-27 09:27+0000\n"
+"Last-Translator: Nicolaie Constantinescu <kosson@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/projects/p/omeka/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -699,7 +699,7 @@ msgstr "Elemente proprii unui tip de resursă"
 
 #: admin/themes/default/common/settings-nav.php:32
 msgid "API"
-msgstr ""
+msgstr "API"
 
 #: admin/themes/default/element-sets/browse.php:16
 #: admin/themes/default/users/browse.php:17
@@ -800,23 +800,23 @@ msgstr "Resursă"
 
 #: admin/themes/default/files/show.php:42
 msgid "Direct Links"
-msgstr ""
+msgstr "Linkuri directe"
 
 #: admin/themes/default/files/show.php:44
 msgid "Original"
-msgstr ""
+msgstr "Original"
 
 #: admin/themes/default/files/show.php:46
 msgid "Fullsize"
-msgstr ""
+msgstr "Dimensiunea reală"
 
 #: admin/themes/default/files/show.php:47
 msgid "Thumbnail"
-msgstr ""
+msgstr "Pictogramă"
 
 #: admin/themes/default/files/show.php:48
 msgid "Square Thumbnail"
-msgstr ""
+msgstr "Pictogramă pătrat"
 
 #: admin/themes/default/files/show.php:54
 #: application/views/scripts/files/show.php:22
@@ -909,12 +909,12 @@ msgstr "temă"
 
 #: admin/themes/default/index.php:29
 msgid "A new version of Omeka is available for download."
-msgstr ""
+msgstr "Există o nouă versiune de Omeka gata pentru descărcare."
 
 #: admin/themes/default/index.php:30
 #, php-format
 msgid "Upgrade to %s"
-msgstr ""
+msgstr "Actualizează la %s"
 
 #: admin/themes/default/item-types/add-existing-element.php:22
 #: admin/themes/default/item-types/add-new-element.php:15
@@ -1419,7 +1419,7 @@ msgstr "de %s"
 #: admin/themes/default/themes/browse.php:23
 #: admin/themes/default/themes/browse.php:49
 msgid "Get support"
-msgstr ""
+msgstr "Caută ajutor"
 
 #: admin/themes/default/plugins/browse.php:69
 #, php-format
@@ -1490,19 +1490,19 @@ msgstr "Anulează"
 
 #: admin/themes/default/settings/edit-api.php:11
 msgid "Enable API"
-msgstr ""
+msgstr "Activează API-ul"
 
 #: admin/themes/default/settings/edit-api.php:15
 msgid "Enable or disable the API by checking or uncheking the box below."
-msgstr ""
+msgstr "Activează sau dezactivează API-ul prin bifare sau debifare mai jos."
 
 #: admin/themes/default/settings/edit-api.php:22
 msgid "Results per Page"
-msgstr ""
+msgstr "Rezultate per pagină"
 
 #: admin/themes/default/settings/edit-api.php:26
 msgid "Maximum number of API results displayed per page."
-msgstr ""
+msgstr "Numărul maxim de rezultate afișate în pagină de către API."
 
 #: admin/themes/default/settings/edit-api.php:32
 #, php-format
@@ -1628,11 +1628,11 @@ msgstr "Recent"
 #: admin/themes/default/tags/browse.php:43
 #: admin/themes/default/tags/browse.php:45
 msgid "Record Types"
-msgstr ""
+msgstr "Tipuri de resurse"
 
 #: admin/themes/default/tags/browse.php:47
 msgid "s"
-msgstr ""
+msgstr "uri"
 
 #: admin/themes/default/themes/browse.php:15
 #: admin/themes/default/themes/browse.php:43
@@ -1762,19 +1762,19 @@ msgstr "Email"
 
 #: admin/themes/default/users/browse.php:35
 msgid "Search users"
-msgstr ""
+msgstr "Caută utilizator"
 
 #: admin/themes/default/users/browse.php:36
 msgid "Usernames"
-msgstr ""
+msgstr "Nume de utilizator"
 
 #: admin/themes/default/users/browse.php:37
 msgid "Real names"
-msgstr ""
+msgstr "Nume real"
 
 #: admin/themes/default/users/browse.php:38
 msgid "Email addresses"
-msgstr ""
+msgstr "Adresă email"
 
 #: admin/themes/default/users/browse.php:48
 #: admin/themes/default/users/show.php:20
@@ -1796,43 +1796,43 @@ msgstr "Editează utilizatorul #%s"
 
 #: admin/themes/default/users/edit.php:24
 msgid "API Keys"
-msgstr ""
+msgstr "Chei API"
 
 #: admin/themes/default/users/edit.php:27
 msgid "New key label"
-msgstr ""
+msgstr "Etichetă nouă pentru cheie"
 
 #: admin/themes/default/users/edit.php:31
 msgid ""
 "To create a new API key, enter a label for the key below. For example, "
 "describe for what purpose it will be used. This key will have all your "
 "permissions; treat it as you would your password."
-msgstr ""
+msgstr "Pentru a crea o nouă cheiei API, introdu o etichetă pentru cea de mai jos. De exemplu, descrie în ce scop va fi utilizată aceasta. Această cheie va beneficia de toate permisiunile. Ai grijă de ea ca și de o parolă."
 
 #: admin/themes/default/users/edit.php:41
 msgid "You have no API keys. Use the form above to create one."
-msgstr ""
+msgstr "Nu ai nicio cheie API. Folosește formularul de mai sus pentru a genera una."
 
 #: admin/themes/default/users/edit.php:43
 #, php-format
 msgid "%s has no API keys. Use the form above to create one."
-msgstr ""
+msgstr "%s nu are chei API. Folosește formularul de mai sus pentru a genera una."
 
 #: admin/themes/default/users/edit.php:51
 msgid "Key"
-msgstr ""
+msgstr "Cheie"
 
 #: admin/themes/default/users/edit.php:52
 msgid "Last IP"
-msgstr ""
+msgstr "Ultimul IP"
 
 #: admin/themes/default/users/edit.php:53
 msgid "Last accessed"
-msgstr ""
+msgstr "Ultima accesare"
 
 #: admin/themes/default/users/edit.php:54
 msgid "Rescind"
-msgstr ""
+msgstr "Revocă"
 
 #: admin/themes/default/users/forgot-password.php:2
 #: application/views/scripts/users/forgot-password.php:2
@@ -2183,7 +2183,7 @@ msgstr "Elementele pentru tipul de resursă au fost modificate fără probleme!"
 
 #: application/controllers/SettingsController.php:149
 msgid "The API configuration was successfully changed!"
-msgstr ""
+msgstr "Configurarea API-ului a fost modificată cu succes!"
 
 #: application/controllers/SettingsController.php:175
 msgid "The ImageMagick directory path works."
@@ -2289,11 +2289,11 @@ msgstr "Utilizatorul \"%s\" a fost adăugat dar emailul pentru activare nu a put
 
 #: application/controllers/UsersController.php:233
 msgid "A new API key was successfully created."
-msgstr ""
+msgstr "A fost creată o cheie API fără probleme."
 
 #: application/controllers/UsersController.php:241
 msgid "An existing API key was successfully rescinded."
-msgstr ""
+msgstr "O cheie API existentă a fost revocată fără probleme."
 
 #: application/controllers/UsersController.php:246
 #: application/controllers/UsersController.php:257
@@ -2813,47 +2813,47 @@ msgstr "Pluginul trebuie să aibe un nume de director valid înainte de a-l inst
 #: application/libraries/Omeka/Plugin/Loader.php:112
 #, php-format
 msgid "Plugin named '%s' has already been loaded/registered."
-msgstr ""
+msgstr "Pluginul %s a fost deja instalat/înregistrat."
 
 #: application/libraries/Omeka/Plugin/Loader.php:153
 #, php-format
 msgid "The %s plugin could not be loaded."
-msgstr ""
+msgstr "Pluginul %s nu a putut fi încărcat."
 
 #: application/libraries/Omeka/Plugin/Loader.php:174
 #, php-format
 msgid "The required plugin '%s' could not be found."
-msgstr ""
+msgstr "Pluginul cerut, '%s' nu a fost găsit. "
 
 #: application/libraries/Omeka/Plugin/Loader.php:247
 #, php-format
 msgid "'%s' has no valid bootstrap file."
-msgstr ""
+msgstr "'%s' nu are un fișier de bootstrap valid."
 
 #: application/libraries/Omeka/Plugin/Loader.php:250
 #, php-format
 msgid "'%s' has not been installed."
-msgstr ""
+msgstr "'%s' nu a fost instalat."
 
 #: application/libraries/Omeka/Plugin/Loader.php:253
 #, php-format
 msgid "'%s' has not been activated."
-msgstr ""
+msgstr "'%s' nu a fost activat."
 
 #: application/libraries/Omeka/Plugin/Loader.php:256
 #, php-format
 msgid "'%s' requires a newer version of Omeka."
-msgstr ""
+msgstr "'%s' necesită o nouă versiune de Omeka."
 
 #: application/libraries/Omeka/Plugin/Loader.php:261
 #, php-format
 msgid "'%s' must be upgraded to the new version before it can be loaded."
-msgstr ""
+msgstr "'%s' trebuie să fie actualizate la o nouă versiune înainte de a fi încărcat."
 
 #: application/libraries/Omeka/Plugin/Loader.php:264
 #, php-format
 msgid "'%s' cannot be loaded twice."
-msgstr ""
+msgstr "'%s' nu poate fi încărcat de două ori."
 
 #: application/libraries/Omeka/Record/AbstractRecord.php:349
 #, php-format
@@ -2994,25 +2994,25 @@ msgstr "Fișierele nu pot fi atașate unei resurse care nu este fixată (persist
 #: application/models/Item.php:444
 #, php-format
 msgid "%1$s and %2$s"
-msgstr ""
+msgstr "%1$s și %2$s"
 
 #. / Chicago-style item citation: three authors
 #: application/models/Item.php:448
 #, php-format
 msgid "%1$s, %2$s, and %3$s"
-msgstr ""
+msgstr "%1$s, %2$s și %3$s"
 
 #. / Chicago-style item citation: more than three authors
 #: application/models/Item.php:452
 #, php-format
 msgid "%s et al."
-msgstr ""
+msgstr "%s et al."
 
 #. / Chicago-style item citation: access date and URL
 #: application/models/Item.php:470
 #, php-format
 msgid "accessed %1$s, %2$s."
-msgstr ""
+msgstr "a accesat %1$s, %2$s."
 
 #: application/models/Item.php:487
 msgid "Cannot add an existing file to an item!"
