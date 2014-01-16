@@ -311,6 +311,13 @@ class Omeka_Db_Table
         if ($sortParams) {
             list($sortField, $sortDir) = $sortParams;
             $this->applySorting($select, $sortField, $sortDir);
+
+            if ($select->getPart(Zend_Db_Select::ORDER)
+                && $sortField != 'id'
+            ) {
+                $alias = $this->getTableAlias();
+                $select->order("$alias.id $sortDir");
+            }
         }
         
         $this->applySearchFilters($select, $params);
