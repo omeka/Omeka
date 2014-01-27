@@ -1009,6 +1009,12 @@ header nav {
         margin: 0; 
         vertical-align: bottom;
     }
+    
+    .drawer-contents label {
+        display: block;
+        font-weight: bold;
+        padding-bottom: 10px;
+    }
 
 
 
@@ -2116,6 +2122,12 @@ button.remove_search {
 ================================================== */
 
 .element-set-name { width: 20%; }
+
+.element-sets .drawer-contents label {
+    border-top: 1px solid #ccc;
+    margin-top: 10px;
+    padding: 9px 0 10px;
+}
 
 
 /* Edit Item Type Metadata
