@@ -21,7 +21,7 @@ echo head(array('title'=>$pageTitle,'bodyclass' => 'collections browse'));
 
     <?php if ($collection->hasContributor()): ?>
     <div class="element">
-        <h3><?php echo __('Contributor(s)'); ?></h3>
+        <h3><?php echo __('Contributors'); ?></h3>
         <div class="element-text">
             <p><?php echo metadata('collection', array('Dublin Core', 'Contributor'), array('all'=>true, 'delimiter'=>', ')); ?></p>
         </div>
