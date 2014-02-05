@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Nicolaie Constantinescu <kosson@gmail.com>, 2011-2013
+# Nicolaie Constantinescu <kosson@gmail.com>, 2011-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-11-27 09:27+0000\n"
+"PO-Revision-Date: 2014-01-31 18:47+0000\n"
 "Last-Translator: Nicolaie Constantinescu <kosson@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/projects/p/omeka/language/ro/)\n"
 "MIME-Version: 1.0\n"
@@ -359,7 +359,7 @@ msgstr "Adaugă un link"
 #: admin/themes/default/appearance/edit-settings.php:21
 #: admin/themes/default/collections/edit.php:22
 #: admin/themes/default/element-sets/edit.php:41
-#: admin/themes/default/files/edit.php:35
+#: admin/themes/default/files/edit.php:30
 #: admin/themes/default/items/batch-edit.php:130
 #: admin/themes/default/items/edit.php:19
 #: admin/themes/default/plugins/config.php:14
@@ -378,7 +378,7 @@ msgstr "Salvează modificările"
 #: admin/themes/default/appearance/edit-navigation.php:39
 #: admin/themes/default/collections/edit.php:23
 #: admin/themes/default/collections/show.php:34
-#: admin/themes/default/files/show.php:30
+#: admin/themes/default/files/show.php:28
 #: admin/themes/default/items/edit.php:20
 #: admin/themes/default/items/show.php:45
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:79
@@ -389,8 +389,8 @@ msgstr "Vizualizează pagina publică"
 #: admin/themes/default/collections/edit.php:24
 #: admin/themes/default/collections/show.php:36
 #: admin/themes/default/element-sets/browse.php:29
-#: admin/themes/default/files/edit.php:37
-#: admin/themes/default/files/show.php:32
+#: admin/themes/default/files/edit.php:32
+#: admin/themes/default/files/show.php:30
 #: admin/themes/default/item-types/edit.php:20
 #: admin/themes/default/item-types/show.php:54
 #: admin/themes/default/items/batch-edit.php:119
@@ -453,7 +453,7 @@ msgstr "Vezi colecțiile"
 #: admin/themes/default/item-types/browse.php:2
 #: admin/themes/default/items/browse.php:3
 #: admin/themes/default/plugins/browse.php:2
-#: admin/themes/default/tags/browse.php:3
+#: admin/themes/default/tags/browse.php:12
 #: admin/themes/default/users/browse.php:2
 #: application/views/scripts/items/browse.php:6
 #: application/views/scripts/search/index.php:2
@@ -463,11 +463,12 @@ msgstr "(%s total)"
 
 #: admin/themes/default/collections/browse.php:23
 #: admin/themes/default/collections/show.php:51
+#: application/views/scripts/collections/browse.php:24
 msgid "Contributors"
 msgstr "Contribuitori"
 
 #: admin/themes/default/collections/browse.php:24
-#: admin/themes/default/files/show.php:68
+#: admin/themes/default/files/show.php:66
 #: admin/themes/default/items/browse.php:43
 #: application/views/scripts/items/browse.php:21
 msgid "Date Added"
@@ -488,7 +489,7 @@ msgstr "(Privat)"
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:27
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
-#: admin/themes/default/files/show.php:28 admin/themes/default/index.php:54
+#: admin/themes/default/files/show.php:26 admin/themes/default/index.php:54
 #: admin/themes/default/index.php:73
 #: admin/themes/default/item-types/browse.php:26
 #: admin/themes/default/item-types/show.php:51
@@ -524,7 +525,7 @@ msgstr "Începe prin adăugarea primei tale colecții."
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/libraries/globals.php:2489
+#: application/libraries/globals.php:2504
 #: application/views/scripts/collections/show.php:4
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
@@ -542,7 +543,7 @@ msgstr "Colecția #%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
-#: application/views/scripts/index.php:35
+#: application/views/scripts/index.php:37
 msgid "Recently Added Items"
 msgstr "Resurse adăugate recent"
 
@@ -685,7 +686,8 @@ msgstr "Securitate"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: application/views/helpers/SearchForm.php:34
-#: application/views/scripts/items/search-form.php:186
+#: application/views/scripts/items/search-form.php:189
+#: application/views/scripts/search/search-form.php:2
 msgid "Search"
 msgstr "Caută"
 
@@ -793,89 +795,89 @@ msgstr "Editează fișierul #%s"
 msgid "File #%s"
 msgstr "Fișierul #$%s"
 
-#: admin/themes/default/files/show.php:37
+#: admin/themes/default/files/show.php:35
 #: application/libraries/globals.php:398
 msgid "Item"
 msgstr "Resursă"
 
-#: admin/themes/default/files/show.php:42
+#: admin/themes/default/files/show.php:40
 msgid "Direct Links"
 msgstr "Linkuri directe"
 
-#: admin/themes/default/files/show.php:44
+#: admin/themes/default/files/show.php:42
 msgid "Original"
 msgstr "Original"
 
-#: admin/themes/default/files/show.php:46
+#: admin/themes/default/files/show.php:44
 msgid "Fullsize"
 msgstr "Dimensiunea reală"
 
-#: admin/themes/default/files/show.php:47
+#: admin/themes/default/files/show.php:45
 msgid "Thumbnail"
 msgstr "Pictogramă"
 
-#: admin/themes/default/files/show.php:48
+#: admin/themes/default/files/show.php:46
 msgid "Square Thumbnail"
 msgstr "Pictogramă pătrat"
 
-#: admin/themes/default/files/show.php:54
+#: admin/themes/default/files/show.php:52
 #: application/views/scripts/files/show.php:22
 msgid "Format Metadata"
 msgstr "Formatare metadate"
 
-#: admin/themes/default/files/show.php:56
+#: admin/themes/default/files/show.php:54
 msgid "Filename"
 msgstr "Nume de fișier"
 
-#: admin/themes/default/files/show.php:58
+#: admin/themes/default/files/show.php:56
 #: application/views/scripts/files/show.php:24
 msgid "Original Filename"
 msgstr "Numele original al fișierului"
 
-#: admin/themes/default/files/show.php:60
+#: admin/themes/default/files/show.php:58
 #: application/views/scripts/files/show.php:29
 msgid "File Size"
 msgstr "Dimensiune fișier"
 
-#: admin/themes/default/files/show.php:61
+#: admin/themes/default/files/show.php:59
 #: application/views/scripts/files/show.php:30
 #, php-format
 msgid "%s bytes"
 msgstr "%s bytes"
 
-#: admin/themes/default/files/show.php:66
+#: admin/themes/default/files/show.php:64
 msgid "File History"
 msgstr "Istoricul fișierului"
 
-#: admin/themes/default/files/show.php:70
+#: admin/themes/default/files/show.php:68
 msgid "Date Modified"
 msgstr "Data modificării"
 
-#: admin/themes/default/files/show.php:72
+#: admin/themes/default/files/show.php:70
 #: application/views/scripts/files/show.php:34
 msgid "Authentication"
 msgstr "Autentificare"
 
-#: admin/themes/default/files/show.php:78
+#: admin/themes/default/files/show.php:76
 #: application/views/scripts/files/show.php:40
 msgid "Type Metadata"
 msgstr "Metadate aferente tip"
 
-#: admin/themes/default/files/show.php:80
+#: admin/themes/default/files/show.php:78
 #: application/views/scripts/files/show.php:42
 msgid "Mime Type"
 msgstr "Mime Type"
 
-#: admin/themes/default/files/show.php:82
+#: admin/themes/default/files/show.php:80
 #: application/views/scripts/files/show.php:46
 msgid "File Type / OS"
 msgstr "Tip fișier / OS"
 
-#: admin/themes/default/files/show.php:89
+#: admin/themes/default/files/show.php:87
 msgid "Embedded Metadata"
 msgstr "Metadate incorporate"
 
-#: admin/themes/default/files/show.php:95
+#: admin/themes/default/files/show.php:93
 #: admin/themes/default/items/browse.php:133
 #: admin/themes/default/items/show.php:88
 #: application/views/scripts/items/browse.php:60
@@ -1149,8 +1151,8 @@ msgstr "Vezi resursele"
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2265
-#: application/libraries/globals.php:2648
+#: application/libraries/globals.php:2280
+#: application/libraries/globals.php:2663
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Caută resurse"
@@ -1255,7 +1257,7 @@ msgid "Narrow by Specific Fields"
 msgstr "Filtrează după anumite câmpuri"
 
 #: admin/themes/default/items/search-form.php:27
-#: application/views/scripts/items/search-form.php:77
+#: application/views/scripts/items/search-form.php:80
 msgid "Add a Field"
 msgstr "Adaugă un câmp"
 
@@ -1285,57 +1287,57 @@ msgid "is not empty"
 msgstr "nu este gol"
 
 #: admin/themes/default/items/search-form.php:84
-#: application/views/scripts/items/search-form.php:81
+#: application/views/scripts/items/search-form.php:84
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
 msgstr "Caută după o gamă de ID#uri (exemplu: 1-4, 156, 79)"
 
 #: admin/themes/default/items/search-form.php:98
-#: application/views/scripts/items/search-form.php:92
+#: application/views/scripts/items/search-form.php:95
 msgid "Search By Collection"
 msgstr "Caută după colecție"
 
 #: admin/themes/default/items/search-form.php:114
-#: application/views/scripts/items/search-form.php:106
+#: application/views/scripts/items/search-form.php:109
 msgid "Search By Type"
 msgstr "Caută după tip"
 
 #: admin/themes/default/items/search-form.php:131
-#: application/views/scripts/items/search-form.php:122
+#: application/views/scripts/items/search-form.php:125
 msgid "Search By User"
 msgstr "Caută după utilizator"
 
 #: admin/themes/default/items/search-form.php:148
-#: application/views/scripts/items/search-form.php:137
+#: application/views/scripts/items/search-form.php:140
 msgid "Search By Tags"
 msgstr "Caută după etichete"
 
 #: admin/themes/default/items/search-form.php:163
-#: application/views/scripts/items/search-form.php:150
+#: application/views/scripts/items/search-form.php:153
 msgid "Public/Non-Public"
 msgstr "Public/Privat"
 
 #: admin/themes/default/items/search-form.php:172
-#: application/views/scripts/items/search-form.php:158
+#: application/views/scripts/items/search-form.php:161
 msgid "Only Public Items"
 msgstr "Doar resurse publice"
 
 #: admin/themes/default/items/search-form.php:173
-#: application/views/scripts/items/search-form.php:159
+#: application/views/scripts/items/search-form.php:162
 msgid "Only Non-Public Items"
 msgstr "Doar resurse private"
 
 #: admin/themes/default/items/search-form.php:183
-#: application/views/scripts/items/search-form.php:168
+#: application/views/scripts/items/search-form.php:171
 msgid "Featured/Non-Featured"
 msgstr "Evidențiate/Neevidențiate"
 
 #: admin/themes/default/items/search-form.php:192
-#: application/views/scripts/items/search-form.php:176
+#: application/views/scripts/items/search-form.php:179
 msgid "Only Featured Items"
 msgstr "Doar resurse evidențiate"
 
 #: admin/themes/default/items/search-form.php:193
-#: application/views/scripts/items/search-form.php:177
+#: application/views/scripts/items/search-form.php:180
 msgid "Only Non-Featured Items"
 msgstr "Doar resurse neevidențiate"
 
@@ -1390,7 +1392,7 @@ msgid "Browse Items by Tag"
 msgstr "Răsfoiește resursele după etichete"
 
 #: admin/themes/default/items/tags.php:9
-#: admin/themes/default/tags/browse.php:65
+#: admin/themes/default/tags/browse.php:85
 msgid "There are no tags to display. You must first tag some items."
 msgstr "Nu există etichete care să fie afișate. Mai întâi trebuie să etichetezi câteva resurse."
 
@@ -1512,7 +1514,7 @@ msgid ""
 "adding, editing, and deleting content, is protected and requires key "
 "authentication. Each key corresponds to, and has all permissions of, an "
 "existing Omeka user. You can create keys on each user's %sedit page%s."
-msgstr ""
+msgstr "După activarea API-ului, aplicațiile trebuie să poată afișa, naviga, adăuga, edita și șterge resursele de pe site-ul vostru. Vizualizarea conținutului protejat, precum și adăugarea, editarea și ștergerea conținutului sunt protejate și necesită o cheie de autentificare. Fiecare cheie corespunde și oferă toate permisiunile necesare unui utilizator al Omeka. Poți crea chei pentru fiecare %sepagină pentru editare%s a utilizatorilor."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:12
 msgid "edit a specific item type"
@@ -1585,54 +1587,59 @@ msgstr "Restaurează atributele originale"
 msgid "Test"
 msgstr "Test"
 
-#: admin/themes/default/tags/browse.php:3
+#: admin/themes/default/tags/browse.php:7
 msgid "Edit Tags"
 msgstr "Editează etichetele"
 
-#: admin/themes/default/tags/browse.php:16
+#: admin/themes/default/tags/browse.php:9
+msgid "Browse Tags"
+msgstr "Vezi etichetele"
+
+#: admin/themes/default/tags/browse.php:18
+#: application/views/scripts/search/index.php:12
+msgid "Record Type"
+msgstr "Tipul resursei"
+
+#: admin/themes/default/tags/browse.php:24
 msgid "Editing Tags"
 msgstr "Etichete în editare"
 
-#: admin/themes/default/tags/browse.php:19
+#: admin/themes/default/tags/browse.php:27
 msgid "To view all items with a tag, click the number."
 msgstr "Pentru a vedea toate resursele care au o etichetă, apasă un număr."
 
-#: admin/themes/default/tags/browse.php:20
+#: admin/themes/default/tags/browse.php:28
 msgid ""
 "To edit the tag name, click the name and begin editing, and hit \"enter\" to"
 " save. To cancel an edit, click the ESC key or click away from the tag."
 msgstr "Pentru a edita numele etichetei, dă clic pe nume și apasă pe „enter” ca să salvezi. Pentru a anula editarea apasă tasta ESC sau dă clic pe altceva."
 
-#: admin/themes/default/tags/browse.php:21
+#: admin/themes/default/tags/browse.php:29
 msgid ""
 "To delete a tag, click the X. Deleting a tag will not delete the tagged "
 "items."
 msgstr "Pentru a șterge o etichetă, dă clic pe X. Ștergând o etichetă nu se va șterge și resursa la care este."
 
-#: admin/themes/default/tags/browse.php:29
+#: admin/themes/default/tags/browse.php:39
 msgid "Most"
 msgstr "Frecvent"
 
-#: admin/themes/default/tags/browse.php:30
+#: admin/themes/default/tags/browse.php:40
 msgid "Least"
 msgstr "Rar"
 
-#: admin/themes/default/tags/browse.php:31
+#: admin/themes/default/tags/browse.php:41
 msgid "Alphabetical"
 msgstr "Alfabetic"
 
-#: admin/themes/default/tags/browse.php:32
+#: admin/themes/default/tags/browse.php:42
 msgid "Recent"
 msgstr "Recent"
 
-#: admin/themes/default/tags/browse.php:43
-#: admin/themes/default/tags/browse.php:45
+#: admin/themes/default/tags/browse.php:53
+#: admin/themes/default/tags/browse.php:55
 msgid "Record Types"
 msgstr "Tipuri de resurse"
-
-#: admin/themes/default/tags/browse.php:47
-msgid "s"
-msgstr "uri"
 
 #: admin/themes/default/themes/browse.php:15
 #: admin/themes/default/themes/browse.php:43
@@ -2231,7 +2238,7 @@ msgstr "Setările temei au fost salvate fără probleme!"
 msgid "There was an error on the form. Please try again."
 msgstr "Există o eroare în formular. Încearcă din nou."
 
-#: application/controllers/UpgradeController.php:49
+#: application/controllers/UpgradeController.php:50
 msgid "SQL error in migration: "
 msgstr "Eroare SQL la migrare:"
 
@@ -2263,7 +2270,7 @@ msgstr "Verifică mailul pentru linkul de resetare a parolei."
 
 #: application/controllers/UsersController.php:126
 msgid "Invalid activation code given."
-msgstr ""
+msgstr "Cod de activare nevalid."
 
 #: application/controllers/UsersController.php:135
 msgid "Password: The passwords do not match."
@@ -2576,20 +2583,20 @@ msgstr "Selectează o pagină Home"
 msgid "Cannot find parent navigation page."
 msgstr "Nu pot găsi pagina de navigare părinte."
 
-#: application/forms/Navigation.php:326
+#: application/forms/Navigation.php:325
 msgid "All navigation links must have URIs."
 msgstr "Toate linkurile pentru navigare trebuie să aibe URIuri"
 
-#: application/forms/Navigation.php:339
+#: application/forms/Navigation.php:338
 msgid "All navigation links must have different URIs."
 msgstr "Toate linkurile de navigare trebuie să aibe URI-uri diferite."
 
-#: application/forms/Navigation.php:345
+#: application/forms/Navigation.php:344
 #, php-format
 msgid "Invalid URI for \"%s\" navigation link:  \"%s\""
 msgstr "URI nevalid pentru link de navigare \"%s\": \"%s\""
 
-#: application/forms/Navigation.php:378
+#: application/forms/Navigation.php:377
 msgid "Navigation links that have undeleteable sublinks cannot be deleted."
 msgstr "Linkuri de navigare care au sublinkuri care nu pot fi șterse."
 
@@ -2898,35 +2905,35 @@ msgstr "Flux RSS Omeka"
 msgid "Omeka Atom Feed"
 msgstr "Flux Atom Omeka"
 
-#: application/libraries/globals.php:2247
+#: application/libraries/globals.php:2262
 msgid "View"
 msgstr "Vezi"
 
-#: application/libraries/globals.php:2309
+#: application/libraries/globals.php:2324
 msgid "No Collection"
 msgstr "Nicio colecție"
 
-#: application/libraries/globals.php:2424
+#: application/libraries/globals.php:2439
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2441
+#: application/libraries/globals.php:2456
 msgid "Next Item &rarr;"
 msgstr "Următoarea resursă &rarr;"
 
-#: application/libraries/globals.php:2461
+#: application/libraries/globals.php:2476
 msgid "&larr; Previous Item"
 msgstr "&larr; Resursa anterioară"
 
-#: application/libraries/globals.php:2638
+#: application/libraries/globals.php:2653
 msgid "Browse All"
 msgstr "Treci prin toate"
 
-#: application/libraries/globals.php:2643
+#: application/libraries/globals.php:2658
 msgid "Browse by Tag"
 msgstr "Răsfoiește după etichetă"
 
-#: application/libraries/globals.php:2905
+#: application/libraries/globals.php:2931
 msgid "No tags are available."
 msgstr "Nu există etichete."
 
@@ -2944,7 +2951,7 @@ msgstr "Elementul nu trebuie să fie gol."
 
 #: application/models/Element.php:179
 msgid "Invalid element set."
-msgstr ""
+msgstr "Set de element nevalide"
 
 #: application/models/Element.php:185
 #, php-format
@@ -3024,11 +3031,11 @@ msgstr "Fișierul trebuie să fie valid înainte de a-l asocia unei resurse!"
 
 #: application/models/Item.php:515
 msgid "Invalid item type."
-msgstr ""
+msgstr "Tip de element nevalid"
 
 #: application/models/Item.php:518
 msgid "Invalid collection."
-msgstr ""
+msgstr "Colecție nevalidă"
 
 #: application/models/ItemType.php:102
 #, php-format
@@ -3294,10 +3301,6 @@ msgstr "A fost pasată o acțiune în timp ce a fost obținut URL-ul unei resurs
 msgid "Invalid return value while getting record URL."
 msgstr "Valoare returnată nevalidă în timp ce a fost obținut URL-ul unei resurse."
 
-#: application/views/scripts/collections/browse.php:24
-msgid "Contributors(s)"
-msgstr "Contribuitor(i)"
-
 #: application/views/scripts/collections/browse.php:31
 #, php-format
 msgid "View the items in %s"
@@ -3377,19 +3380,19 @@ msgid ""
 "messages</a>."
 msgstr "Pentru a vedea mai multe despre această eroare, vezi pagina Omeka Codex la <a href=\"http://omeka.org/codex/Retrieving_error_messages\">găsirea mesajelor de eroare</a>"
 
-#: application/views/scripts/index.php:14
+#: application/views/scripts/index.php:16
 msgid "Featured Item"
 msgstr "Resursă în prim-plan"
 
-#: application/views/scripts/index.php:22
+#: application/views/scripts/index.php:24
 msgid "Featured Collection"
 msgstr "Colecții evidențiate"
 
-#: application/views/scripts/index.php:67
+#: application/views/scripts/index.php:69
 msgid "No recent items available."
 msgstr "Nu sunt disponibile resurse recente."
 
-#: application/views/scripts/index.php:71
+#: application/views/scripts/index.php:73
 msgid "View All Items"
 msgstr "Vezi toate resursele"
 
@@ -3400,6 +3403,10 @@ msgstr "Sortează după: "
 #: application/views/scripts/items/random-featured.php:20
 msgid "No featured items are available."
 msgstr "Nu sunt disponibile resurse evidențiate."
+
+#: application/views/scripts/items/search-form.php:76
+msgid "Remove field"
+msgstr "Câmp eliminat"
 
 #: application/views/scripts/items/show.php:10
 msgid "Files"
@@ -3412,10 +3419,6 @@ msgstr "Citat"
 #: application/views/scripts/search/index.php:2
 msgid "Search Omeka "
 msgstr "Caută în Omeka "
-
-#: application/views/scripts/search/index.php:12
-msgid "Record Type"
-msgstr "Tipul resursei"
 
 #: application/views/scripts/search/index.php:29
 msgid "Your query returned no results."

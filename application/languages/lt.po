@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-11-20 11:02+0000\n"
-"Last-Translator: patrickmj <patrickmjchnm@gmail.com>\n"
+"PO-Revision-Date: 2014-01-31 18:39+0000\n"
+"Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/projects/p/omeka/language/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -220,11 +220,11 @@ msgstr ""
 
 #. Omeka Legacy File: Change History element
 msgid "Change History"
-msgstr ""
+msgstr "Pakeisti istoriją"
 
 #. Omeka Legacy File: Watermark element
 msgid "Watermark"
-msgstr ""
+msgstr "Vandens ženklas"
 
 #. Omeka Legacy File: Encryption element
 msgid "Encryption"
@@ -232,7 +232,7 @@ msgstr ""
 
 #. Omeka Legacy File: Compression element
 msgid "Compression"
-msgstr ""
+msgstr "Kompresija"
 
 #. Omeka Legacy File: Post Processing element
 msgid "Post Processing"
@@ -360,7 +360,7 @@ msgstr "Pridėti nuorodą"
 #: admin/themes/default/appearance/edit-settings.php:21
 #: admin/themes/default/collections/edit.php:22
 #: admin/themes/default/element-sets/edit.php:41
-#: admin/themes/default/files/edit.php:35
+#: admin/themes/default/files/edit.php:30
 #: admin/themes/default/items/batch-edit.php:130
 #: admin/themes/default/items/edit.php:19
 #: admin/themes/default/plugins/config.php:14
@@ -379,7 +379,7 @@ msgstr "Išsaugoti pakeitimus"
 #: admin/themes/default/appearance/edit-navigation.php:39
 #: admin/themes/default/collections/edit.php:23
 #: admin/themes/default/collections/show.php:34
-#: admin/themes/default/files/show.php:30
+#: admin/themes/default/files/show.php:28
 #: admin/themes/default/items/edit.php:20
 #: admin/themes/default/items/show.php:45
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:79
@@ -390,8 +390,8 @@ msgstr "Žiūrėti išpublikuotą puslapį"
 #: admin/themes/default/collections/edit.php:24
 #: admin/themes/default/collections/show.php:36
 #: admin/themes/default/element-sets/browse.php:29
-#: admin/themes/default/files/edit.php:37
-#: admin/themes/default/files/show.php:32
+#: admin/themes/default/files/edit.php:32
+#: admin/themes/default/files/show.php:30
 #: admin/themes/default/item-types/edit.php:20
 #: admin/themes/default/item-types/show.php:54
 #: admin/themes/default/items/batch-edit.php:119
@@ -448,13 +448,13 @@ msgstr "Išskirta"
 #: application/tests/suite/Omeka/NavigationTest.php:950
 #: application/views/scripts/collections/browse.php:2
 msgid "Browse Collections"
-msgstr ""
+msgstr "Naršyti kolekcijose"
 
 #: admin/themes/default/collections/browse.php:2
 #: admin/themes/default/item-types/browse.php:2
 #: admin/themes/default/items/browse.php:3
 #: admin/themes/default/plugins/browse.php:2
-#: admin/themes/default/tags/browse.php:3
+#: admin/themes/default/tags/browse.php:12
 #: admin/themes/default/users/browse.php:2
 #: application/views/scripts/items/browse.php:6
 #: application/views/scripts/search/index.php:2
@@ -464,11 +464,12 @@ msgstr "(Iš viso: %s)"
 
 #: admin/themes/default/collections/browse.php:23
 #: admin/themes/default/collections/show.php:51
+#: application/views/scripts/collections/browse.php:24
 msgid "Contributors"
 msgstr ""
 
 #: admin/themes/default/collections/browse.php:24
-#: admin/themes/default/files/show.php:68
+#: admin/themes/default/files/show.php:66
 #: admin/themes/default/items/browse.php:43
 #: application/views/scripts/items/browse.php:21
 msgid "Date Added"
@@ -478,7 +479,7 @@ msgstr "Įvesta"
 #: admin/themes/default/collections/show.php:46
 #: admin/themes/default/item-types/show.php:42
 msgid "Total Number of Items"
-msgstr ""
+msgstr "Iš viso elementų"
 
 #: admin/themes/default/collections/browse.php:37
 #: admin/themes/default/items/browse.php:72
@@ -489,7 +490,7 @@ msgstr "(Privatus)"
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:27
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
-#: admin/themes/default/files/show.php:28 admin/themes/default/index.php:54
+#: admin/themes/default/files/show.php:26 admin/themes/default/index.php:54
 #: admin/themes/default/index.php:73
 #: admin/themes/default/item-types/browse.php:26
 #: admin/themes/default/item-types/show.php:51
@@ -508,7 +509,7 @@ msgstr ""
 
 #: admin/themes/default/collections/browse.php:67
 msgid "There are no collections on this page."
-msgstr ""
+msgstr "Šiame puslapyje nėra kolekcijų"
 
 #: admin/themes/default/collections/browse.php:67
 msgid "View All Collections"
@@ -525,7 +526,7 @@ msgstr ""
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/libraries/globals.php:2489
+#: application/libraries/globals.php:2504
 #: application/views/scripts/collections/show.php:4
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
@@ -543,9 +544,9 @@ msgstr ""
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
-#: application/views/scripts/index.php:35
+#: application/views/scripts/index.php:37
 msgid "Recently Added Items"
-msgstr ""
+msgstr "Neseniai pridėti elementai"
 
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/collections/show.php:42
@@ -595,7 +596,7 @@ msgstr "Skydelis"
 #: admin/themes/default/items/batch-delete.php:17
 #: admin/themes/default/items/batch-edit.php:17
 msgid "Items"
-msgstr ""
+msgstr "Elementai"
 
 #: admin/themes/default/common/content-nav.php:13
 msgid "Collections"
@@ -603,7 +604,7 @@ msgstr "Kolekcijos"
 
 #: admin/themes/default/common/content-nav.php:17
 msgid "Item Types"
-msgstr ""
+msgstr "Elemento rūšys"
 
 #: admin/themes/default/common/content-nav.php:21
 #: admin/themes/default/items/browse.php:94
@@ -622,7 +623,7 @@ msgstr "Ištrinti %s"
 #: admin/themes/default/common/delete-confirm.php:10
 #: application/views/scripts/common/delete-confirm.php:12
 msgid "Are you sure?"
-msgstr ""
+msgstr "Ar tikrai?"
 
 #: admin/themes/default/common/footer.php:6
 #: admin/themes/default/common/login-footer.php:7
@@ -686,7 +687,8 @@ msgstr "Apsauga"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: application/views/helpers/SearchForm.php:34
-#: application/views/scripts/items/search-form.php:186
+#: application/views/scripts/items/search-form.php:189
+#: application/views/scripts/search/search-form.php:2
 msgid "Search"
 msgstr "Paieška"
 
@@ -700,13 +702,13 @@ msgstr ""
 
 #: admin/themes/default/common/settings-nav.php:32
 msgid "API"
-msgstr ""
+msgstr "API"
 
 #: admin/themes/default/element-sets/browse.php:16
 #: admin/themes/default/users/browse.php:17
 #: application/forms/ItemTypes.php:141
 msgid "Name"
-msgstr ""
+msgstr "Vardas"
 
 #: admin/themes/default/element-sets/edit.php:5
 msgid "Edit Element Set"
@@ -720,7 +722,7 @@ msgstr ""
 
 #: admin/themes/default/element-sets/edit.php:29
 msgid "Comment"
-msgstr ""
+msgstr "Komentuoti"
 
 #: admin/themes/default/error/403.php:2
 msgid "403: Forbidden"
@@ -738,7 +740,7 @@ msgstr "puslapio administratorius"
 #: admin/themes/default/error/403.php:11
 #, php-format
 msgid "If you think you should have permission, try contacting the %s."
-msgstr ""
+msgstr "Jeigu manote, kad Jūs turite turėti teises, bandykite kreiptis %s."
 
 #: admin/themes/default/error/404.php:2
 msgid "404: Page Not Found"
@@ -770,7 +772,7 @@ msgstr ""
 
 #: admin/themes/default/error/404.php:50 admin/themes/default/index.php:78
 msgid "Add a new collection"
-msgstr ""
+msgstr "Sukurti naują kolekciją"
 
 #: admin/themes/default/error/405.php:2
 msgid "405: Method Not Allowed"
@@ -794,89 +796,89 @@ msgstr "Redaguoti dokumentą #%s"
 msgid "File #%s"
 msgstr "Dokumentas #%s"
 
-#: admin/themes/default/files/show.php:37
+#: admin/themes/default/files/show.php:35
 #: application/libraries/globals.php:398
 msgid "Item"
 msgstr ""
 
-#: admin/themes/default/files/show.php:42
+#: admin/themes/default/files/show.php:40
 msgid "Direct Links"
-msgstr ""
+msgstr "Tiesioginės nuorodos"
 
-#: admin/themes/default/files/show.php:44
+#: admin/themes/default/files/show.php:42
 msgid "Original"
 msgstr ""
 
-#: admin/themes/default/files/show.php:46
+#: admin/themes/default/files/show.php:44
 msgid "Fullsize"
-msgstr ""
+msgstr "Originalus dydis"
 
-#: admin/themes/default/files/show.php:47
+#: admin/themes/default/files/show.php:45
 msgid "Thumbnail"
-msgstr ""
+msgstr "Miniatiūra"
 
-#: admin/themes/default/files/show.php:48
+#: admin/themes/default/files/show.php:46
 msgid "Square Thumbnail"
 msgstr ""
 
-#: admin/themes/default/files/show.php:54
+#: admin/themes/default/files/show.php:52
 #: application/views/scripts/files/show.php:22
 msgid "Format Metadata"
 msgstr ""
 
-#: admin/themes/default/files/show.php:56
+#: admin/themes/default/files/show.php:54
 msgid "Filename"
 msgstr "Dokumento vardas"
 
-#: admin/themes/default/files/show.php:58
+#: admin/themes/default/files/show.php:56
 #: application/views/scripts/files/show.php:24
 msgid "Original Filename"
-msgstr ""
+msgstr "Originalus failo pavadinimas"
 
-#: admin/themes/default/files/show.php:60
+#: admin/themes/default/files/show.php:58
 #: application/views/scripts/files/show.php:29
 msgid "File Size"
 msgstr "Dokumento dydis"
 
-#: admin/themes/default/files/show.php:61
+#: admin/themes/default/files/show.php:59
 #: application/views/scripts/files/show.php:30
 #, php-format
 msgid "%s bytes"
 msgstr ""
 
-#: admin/themes/default/files/show.php:66
+#: admin/themes/default/files/show.php:64
 msgid "File History"
 msgstr "Redaguoti istorija"
 
-#: admin/themes/default/files/show.php:70
+#: admin/themes/default/files/show.php:68
 msgid "Date Modified"
 msgstr "Redagavimo data"
 
-#: admin/themes/default/files/show.php:72
+#: admin/themes/default/files/show.php:70
 #: application/views/scripts/files/show.php:34
 msgid "Authentication"
-msgstr ""
+msgstr "Prisijungimas"
 
-#: admin/themes/default/files/show.php:78
+#: admin/themes/default/files/show.php:76
 #: application/views/scripts/files/show.php:40
 msgid "Type Metadata"
 msgstr ""
 
-#: admin/themes/default/files/show.php:80
+#: admin/themes/default/files/show.php:78
 #: application/views/scripts/files/show.php:42
 msgid "Mime Type"
-msgstr ""
+msgstr "Mime Type"
 
-#: admin/themes/default/files/show.php:82
+#: admin/themes/default/files/show.php:80
 #: application/views/scripts/files/show.php:46
 msgid "File Type / OS"
 msgstr ""
 
-#: admin/themes/default/files/show.php:89
+#: admin/themes/default/files/show.php:87
 msgid "Embedded Metadata"
 msgstr ""
 
-#: admin/themes/default/files/show.php:95
+#: admin/themes/default/files/show.php:93
 #: admin/themes/default/items/browse.php:133
 #: admin/themes/default/items/show.php:88
 #: application/views/scripts/items/browse.php:60
@@ -902,7 +904,7 @@ msgstr "įskiepiai"
 
 #: admin/themes/default/index.php:14
 msgid "users"
-msgstr ""
+msgstr "vartotojai"
 
 #: admin/themes/default/index.php:18
 msgid "theme"
@@ -910,12 +912,12 @@ msgstr "Tema"
 
 #: admin/themes/default/index.php:29
 msgid "A new version of Omeka is available for download."
-msgstr ""
+msgstr "Jau yra nauja Omeka versija."
 
 #: admin/themes/default/index.php:30
 #, php-format
 msgid "Upgrade to %s"
-msgstr ""
+msgstr "Atnaujinti į %s"
 
 #: admin/themes/default/item-types/add-existing-element.php:22
 #: admin/themes/default/item-types/add-new-element.php:15
@@ -931,7 +933,7 @@ msgstr ""
 
 #: admin/themes/default/item-types/add-new-element.php:22
 msgid "Element Description"
-msgstr ""
+msgstr "Elemento aprašymas"
 
 #: admin/themes/default/item-types/add.php:2
 #: application/forms/ItemTypes.php:161
@@ -953,7 +955,7 @@ msgstr ""
 
 #: admin/themes/default/item-types/browse.php:16
 msgid "Total Items"
-msgstr ""
+msgstr "Iš viso elementų"
 
 #: admin/themes/default/item-types/edit.php:8
 #, php-format
@@ -968,23 +970,23 @@ msgstr ""
 #: admin/themes/default/users/add.php:6 admin/themes/default/users/edit.php:14
 #: install/views/scripts/index/index.phtml:14
 msgid "required field"
-msgstr ""
+msgstr "būtinas laukas"
 
 #: admin/themes/default/item-types/form.php:25
 #: admin/themes/default/item-types/show.php:16
 msgid "Elements"
-msgstr ""
+msgstr "Elementai"
 
 #: admin/themes/default/item-types/form.php:42
 #: admin/themes/default/items/tag-form.php:22
 #: admin/themes/default/settings/edit-item-type-elements.php:22
 msgid "Undo"
-msgstr ""
+msgstr "Atšaukti"
 
 #: admin/themes/default/item-types/form.php:80
 #: admin/themes/default/item-types/form.php:87
 msgid "Add Element"
-msgstr ""
+msgstr "Pridėti elementą"
 
 #: admin/themes/default/item-types/form.php:84
 msgid "Existing"
@@ -1044,7 +1046,7 @@ msgstr ""
 #: admin/themes/default/items/batch-delete.php:50
 #: admin/themes/default/items/batch-edit.php:116
 msgid "Delete Items"
-msgstr ""
+msgstr "Ištrinti elementą"
 
 #: admin/themes/default/items/batch-edit.php:2
 msgid "Batch Edit Items"
@@ -1056,11 +1058,11 @@ msgstr ""
 
 #: admin/themes/default/items/batch-edit.php:41
 msgid "Item Metadata"
-msgstr ""
+msgstr "Elemento metadata"
 
 #: admin/themes/default/items/batch-edit.php:46
 msgid "Public?"
-msgstr ""
+msgstr "Ar publikuoti?"
 
 #: admin/themes/default/items/batch-edit.php:49
 #: admin/themes/default/items/batch-edit.php:64
@@ -1075,7 +1077,7 @@ msgstr "Nepublikuota"
 
 #: admin/themes/default/items/batch-edit.php:61
 msgid "Featured?"
-msgstr ""
+msgstr "Išskirti?"
 
 #: admin/themes/default/items/batch-edit.php:66
 msgid "Not Featured"
@@ -1084,7 +1086,7 @@ msgstr "Neišskirta"
 #: admin/themes/default/items/batch-edit.php:74
 #: admin/themes/default/items/item-type-form.php:3
 msgid "Item Type"
-msgstr ""
+msgstr "Elemento rūšis"
 
 #: admin/themes/default/items/batch-edit.php:83
 #: admin/themes/default/items/batch-edit.php:98
@@ -1104,7 +1106,7 @@ msgstr ""
 
 #: admin/themes/default/items/batch-edit.php:117
 msgid "Check if you wish to delete selected items."
-msgstr ""
+msgstr "Pažymėkite, jeigu norite panaikinti pažymėtus elementus."
 
 #: admin/themes/default/items/browse.php:3
 #: application/libraries/Omeka/Navigation.php:142
@@ -1145,13 +1147,13 @@ msgstr ""
 #: application/views/scripts/items/browse.php:2
 #: application/views/scripts/items/tags.php:2
 msgid "Browse Items"
-msgstr ""
+msgstr "Naršyti elementuose"
 
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2265
-#: application/libraries/globals.php:2648
+#: application/libraries/globals.php:2280
+#: application/libraries/globals.php:2663
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr ""
@@ -1191,7 +1193,7 @@ msgstr ""
 
 #: admin/themes/default/items/browse.php:154
 msgid "refine your search"
-msgstr ""
+msgstr "Patikslinkite savo paieška"
 
 #: admin/themes/default/items/browse.php:154
 #, php-format
@@ -1201,7 +1203,7 @@ msgstr ""
 #: admin/themes/default/items/edit.php:8
 #, php-format
 msgid "Edit Item #%s"
-msgstr ""
+msgstr "Redaguoti elementą #%s"
 
 #: admin/themes/default/items/files-form.php:2
 msgid "Click and drag the files into the preferred display order."
@@ -1218,7 +1220,7 @@ msgstr "Pridėti naujus dokumentus"
 #: admin/themes/default/items/files-form.php:23
 #, php-format
 msgid "The maximum file size is %s."
-msgstr ""
+msgstr "Maksimalus dokumento dydis yra %s."
 
 #: admin/themes/default/items/files-form.php:26
 msgid "Find a File"
@@ -1230,7 +1232,7 @@ msgstr "Pridėti kitą dokumentą"
 
 #: admin/themes/default/items/item-type-form.php:15
 msgid "Pick this type"
-msgstr ""
+msgstr "Pasirinkti šią rūšį"
 
 #: admin/themes/default/items/quick-filters.php:2
 #: admin/themes/default/items/quick-filters.php:4
@@ -1243,7 +1245,7 @@ msgstr "Žiūrėti visus"
 
 #: admin/themes/default/items/quick-filters.php:7
 msgid "Private"
-msgstr ""
+msgstr "Privatus"
 
 #: admin/themes/default/items/search-form.php:13
 #: application/views/scripts/items/search-form.php:13
@@ -1256,7 +1258,7 @@ msgid "Narrow by Specific Fields"
 msgstr ""
 
 #: admin/themes/default/items/search-form.php:27
-#: application/views/scripts/items/search-form.php:77
+#: application/views/scripts/items/search-form.php:80
 msgid "Add a Field"
 msgstr ""
 
@@ -1286,57 +1288,57 @@ msgid "is not empty"
 msgstr ""
 
 #: admin/themes/default/items/search-form.php:84
-#: application/views/scripts/items/search-form.php:81
+#: application/views/scripts/items/search-form.php:84
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
 msgstr ""
 
 #: admin/themes/default/items/search-form.php:98
-#: application/views/scripts/items/search-form.php:92
+#: application/views/scripts/items/search-form.php:95
 msgid "Search By Collection"
 msgstr "Ieškoti pagal kolekciją"
 
 #: admin/themes/default/items/search-form.php:114
-#: application/views/scripts/items/search-form.php:106
+#: application/views/scripts/items/search-form.php:109
 msgid "Search By Type"
 msgstr ""
 
 #: admin/themes/default/items/search-form.php:131
-#: application/views/scripts/items/search-form.php:122
+#: application/views/scripts/items/search-form.php:125
 msgid "Search By User"
 msgstr "Ieškoti pagal vartotoją"
 
 #: admin/themes/default/items/search-form.php:148
-#: application/views/scripts/items/search-form.php:137
+#: application/views/scripts/items/search-form.php:140
 msgid "Search By Tags"
-msgstr ""
+msgstr "Ieškoti pagal žymas"
 
 #: admin/themes/default/items/search-form.php:163
-#: application/views/scripts/items/search-form.php:150
+#: application/views/scripts/items/search-form.php:153
 msgid "Public/Non-Public"
-msgstr ""
+msgstr "Publikuota/Nepublikuota"
 
 #: admin/themes/default/items/search-form.php:172
-#: application/views/scripts/items/search-form.php:158
+#: application/views/scripts/items/search-form.php:161
 msgid "Only Public Items"
 msgstr ""
 
 #: admin/themes/default/items/search-form.php:173
-#: application/views/scripts/items/search-form.php:159
+#: application/views/scripts/items/search-form.php:162
 msgid "Only Non-Public Items"
 msgstr ""
 
 #: admin/themes/default/items/search-form.php:183
-#: application/views/scripts/items/search-form.php:168
+#: application/views/scripts/items/search-form.php:171
 msgid "Featured/Non-Featured"
 msgstr ""
 
 #: admin/themes/default/items/search-form.php:192
-#: application/views/scripts/items/search-form.php:176
+#: application/views/scripts/items/search-form.php:179
 msgid "Only Featured Items"
 msgstr ""
 
 #: admin/themes/default/items/search-form.php:193
-#: application/views/scripts/items/search-form.php:177
+#: application/views/scripts/items/search-form.php:180
 msgid "Only Non-Featured Items"
 msgstr ""
 
@@ -1391,7 +1393,7 @@ msgid "Browse Items by Tag"
 msgstr ""
 
 #: admin/themes/default/items/tags.php:9
-#: admin/themes/default/tags/browse.php:65
+#: admin/themes/default/tags/browse.php:85
 msgid "There are no tags to display. You must first tag some items."
 msgstr ""
 
@@ -1420,7 +1422,7 @@ msgstr ""
 #: admin/themes/default/themes/browse.php:23
 #: admin/themes/default/themes/browse.php:49
 msgid "Get support"
-msgstr ""
+msgstr "Pagalba"
 
 #: admin/themes/default/plugins/browse.php:69
 #, php-format
@@ -1433,7 +1435,7 @@ msgstr "Atnaujinti"
 
 #: admin/themes/default/plugins/browse.php:100
 msgid "Configure"
-msgstr ""
+msgstr "Konfiguruoti"
 
 #: admin/themes/default/plugins/browse.php:106
 msgid "Deactivate"
@@ -1464,7 +1466,7 @@ msgstr "Jūs dar neturite įdiegę įskiepių. Įdėkite juos į įskiepių kata
 #: admin/themes/default/plugins/config.php:2
 #, php-format
 msgid "Configure Plugin: %s"
-msgstr ""
+msgstr "Konfiguruoti įskiepį: %s"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:2
 #, php-format
@@ -1491,7 +1493,7 @@ msgstr "Atšaukti"
 
 #: admin/themes/default/settings/edit-api.php:11
 msgid "Enable API"
-msgstr ""
+msgstr "Įjungti API"
 
 #: admin/themes/default/settings/edit-api.php:15
 msgid "Enable or disable the API by checking or uncheking the box below."
@@ -1586,53 +1588,58 @@ msgstr ""
 msgid "Test"
 msgstr "Testuoti"
 
-#: admin/themes/default/tags/browse.php:3
+#: admin/themes/default/tags/browse.php:7
 msgid "Edit Tags"
 msgstr "Redaguoti žymes"
 
-#: admin/themes/default/tags/browse.php:16
+#: admin/themes/default/tags/browse.php:9
+msgid "Browse Tags"
+msgstr ""
+
+#: admin/themes/default/tags/browse.php:18
+#: application/views/scripts/search/index.php:12
+msgid "Record Type"
+msgstr ""
+
+#: admin/themes/default/tags/browse.php:24
 msgid "Editing Tags"
 msgstr "Žymių redagavimas"
 
-#: admin/themes/default/tags/browse.php:19
+#: admin/themes/default/tags/browse.php:27
 msgid "To view all items with a tag, click the number."
 msgstr ""
 
-#: admin/themes/default/tags/browse.php:20
+#: admin/themes/default/tags/browse.php:28
 msgid ""
 "To edit the tag name, click the name and begin editing, and hit \"enter\" to"
 " save. To cancel an edit, click the ESC key or click away from the tag."
 msgstr ""
 
-#: admin/themes/default/tags/browse.php:21
+#: admin/themes/default/tags/browse.php:29
 msgid ""
 "To delete a tag, click the X. Deleting a tag will not delete the tagged "
 "items."
 msgstr ""
 
-#: admin/themes/default/tags/browse.php:29
+#: admin/themes/default/tags/browse.php:39
 msgid "Most"
 msgstr ""
 
-#: admin/themes/default/tags/browse.php:30
+#: admin/themes/default/tags/browse.php:40
 msgid "Least"
 msgstr ""
 
-#: admin/themes/default/tags/browse.php:31
+#: admin/themes/default/tags/browse.php:41
 msgid "Alphabetical"
 msgstr ""
 
-#: admin/themes/default/tags/browse.php:32
+#: admin/themes/default/tags/browse.php:42
 msgid "Recent"
 msgstr ""
 
-#: admin/themes/default/tags/browse.php:43
-#: admin/themes/default/tags/browse.php:45
+#: admin/themes/default/tags/browse.php:53
+#: admin/themes/default/tags/browse.php:55
 msgid "Record Types"
-msgstr ""
-
-#: admin/themes/default/tags/browse.php:47
-msgid "s"
 msgstr ""
 
 #: admin/themes/default/themes/browse.php:15
@@ -1643,7 +1650,7 @@ msgstr ""
 
 #: admin/themes/default/themes/browse.php:16
 msgid "Configure Theme"
-msgstr ""
+msgstr "Temos konfiguravimas"
 
 #: admin/themes/default/themes/browse.php:19
 msgid "Current Theme"
@@ -1670,7 +1677,7 @@ msgstr "Naudoti šią temą"
 #: admin/themes/default/themes/config.php:10
 #, php-format
 msgid "Configure Theme: %s"
-msgstr ""
+msgstr "Tvarkyti temą: %s"
 
 #: admin/themes/default/themes/config.php:11
 msgid "Configurations apply to this theme only."
@@ -1683,12 +1690,12 @@ msgstr "Atnaujinti Omeka duomenų bazę"
 #: admin/themes/default/upgrade/index.php:34
 msgid ""
 "Your Omeka database is not compatible with your current version of Omeka."
-msgstr ""
+msgstr "Omekos duomenų bazė nėra suderinama su dabartinės Omekos versija."
 
 #: admin/themes/default/upgrade/index.php:35
 msgid ""
 "Please back up your existing database and then click the button to upgrade."
-msgstr ""
+msgstr "Prašome atlikti duomenų bazės kopiją ir tada spausti mygtuką atnaujinti."
 
 #: admin/themes/default/upgrade/index.php:37
 msgid "Upgrade Database"
@@ -1696,11 +1703,11 @@ msgstr "Atnaujinti duomenų bazę"
 
 #: admin/themes/default/upgrade/migrate.php:32
 msgid "Omeka encountered an error when upgrading your installation."
-msgstr ""
+msgstr "Omeka "
 
 #: admin/themes/default/upgrade/migrate.php:37
 msgid "Please restore from your database backup and try again."
-msgstr ""
+msgstr "Prašome atnaujinti iš duomenų bazės ir bandyti vėl."
 
 #: admin/themes/default/upgrade/migrate.php:39
 msgid ""
@@ -1763,11 +1770,11 @@ msgstr "El. paštas"
 
 #: admin/themes/default/users/browse.php:35
 msgid "Search users"
-msgstr ""
+msgstr "Ieškoti vartotojų"
 
 #: admin/themes/default/users/browse.php:36
 msgid "Usernames"
-msgstr ""
+msgstr "Vartotojai vardai"
 
 #: admin/themes/default/users/browse.php:37
 msgid "Real names"
@@ -1775,12 +1782,12 @@ msgstr ""
 
 #: admin/themes/default/users/browse.php:38
 msgid "Email addresses"
-msgstr ""
+msgstr "El. pašto adresai"
 
 #: admin/themes/default/users/browse.php:48
 #: admin/themes/default/users/show.php:20
 msgid "Real Name"
-msgstr ""
+msgstr "Vartotojo vardas"
 
 #: admin/themes/default/users/browse.php:50 application/forms/User.php:128
 msgid "Role"
@@ -1793,7 +1800,7 @@ msgstr "Neaktyvi"
 #: admin/themes/default/users/edit.php:8
 #, php-format
 msgid "Edit User #%s"
-msgstr ""
+msgstr "Redaguoti vartotoją #%s"
 
 #: admin/themes/default/users/edit.php:24
 msgid "API Keys"
@@ -1825,7 +1832,7 @@ msgstr ""
 
 #: admin/themes/default/users/edit.php:52
 msgid "Last IP"
-msgstr ""
+msgstr "Paskutinis IP"
 
 #: admin/themes/default/users/edit.php:53
 msgid "Last accessed"
@@ -1843,7 +1850,7 @@ msgstr "Pamiršote slaptažodį"
 #: admin/themes/default/users/forgot-password.php:11
 #: application/views/scripts/users/forgot-password.php:10
 msgid "Enter your email address to retrieve your password."
-msgstr ""
+msgstr "Įveskite el. pašto adresą, kuriuo Jums bus atsiųstas slaptažodis."
 
 #: admin/themes/default/users/forgot-password.php:21
 #: application/views/scripts/users/forgot-password.php:18
@@ -1867,7 +1874,7 @@ msgstr "(Pamiršote slaptažodį?)"
 #: admin/themes/default/users/show.php:8
 #, php-format
 msgid "User #%s"
-msgstr ""
+msgstr "Vartotojas #%s"
 
 #: admin/themes/default/users/show.php:15
 msgid "Edit this User"
@@ -2007,17 +2014,17 @@ msgstr ""
 #: application/controllers/ItemsController.php:107
 #, php-format
 msgid "The item #%s was successfully changed!"
-msgstr ""
+msgstr "Elementas #%s sėkmingai pakeistas!"
 
 #: application/controllers/ItemsController.php:115
 #, php-format
 msgid "The item \"%s\" was successfully deleted!"
-msgstr ""
+msgstr "Elementas \"%s\" sėkmingai panaikintas!"
 
 #: application/controllers/ItemsController.php:117
 #, php-format
 msgid "The item #%s was successfully deleted!"
-msgstr ""
+msgstr "Elementas #%s sėkmingai panaikintas!"
 
 #: application/controllers/ItemsController.php:125
 #, php-format
@@ -2059,7 +2066,7 @@ msgstr ""
 
 #: application/controllers/ItemsController.php:356
 msgid "The items were successfully deleted!"
-msgstr ""
+msgstr "Elementai sėkmingai panaikintas!javascript:;"
 
 #: application/controllers/ItemsController.php:358
 msgid "The items were successfully changed!"
@@ -2132,7 +2139,7 @@ msgstr ""
 #: application/controllers/PluginsController.php:253
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
-msgstr ""
+msgstr "Įskiepis nerastas '%s' direktorijoje!"
 
 #: application/controllers/PluginsController.php:262
 msgid "You must confirm the uninstall before proceeding."
@@ -2188,11 +2195,11 @@ msgstr ""
 
 #: application/controllers/SettingsController.php:175
 msgid "The ImageMagick directory path works."
-msgstr ""
+msgstr "The ImageMagick kelias veikia."
 
 #: application/controllers/SettingsController.php:176
 msgid "The ImageMagick directory path does not work."
-msgstr ""
+msgstr "The ImageMagick kelias neveikia."
 
 #: application/controllers/TagsController.php:35
 msgid "You have to be logged in to edit tags!"
@@ -2232,7 +2239,7 @@ msgstr "Temos nustatymai buvo sėkmingai išsaugoti!"
 msgid "There was an error on the form. Please try again."
 msgstr ""
 
-#: application/controllers/UpgradeController.php:49
+#: application/controllers/UpgradeController.php:50
 msgid "SQL error in migration: "
 msgstr "SQL klaida:"
 
@@ -2264,7 +2271,7 @@ msgstr "Įveskite el. pašto adresą, Jums bus atsiųsta nuoroda, kuri leis suku
 
 #: application/controllers/UsersController.php:126
 msgid "Invalid activation code given."
-msgstr ""
+msgstr "Netinkamas aktivacijos kodas."
 
 #: application/controllers/UsersController.php:135
 msgid "Password: The passwords do not match."
@@ -2281,7 +2288,7 @@ msgstr "Pridėti vartotoją"
 #: application/controllers/UsersController.php:171
 #, php-format
 msgid "The user \"%s\" was successfully added!"
-msgstr ""
+msgstr "Vartotojas \"%s\" sėkmingai sukurtas!"
 
 #: application/controllers/UsersController.php:175
 #, php-format
@@ -2308,12 +2315,12 @@ msgstr "Slaptažodis pakeistas!"
 #: application/controllers/UsersController.php:264
 #, php-format
 msgid "The user %s was successfully changed!"
-msgstr ""
+msgstr "Vartojas %s sėkmingai pakeistas!"
 
 #: application/controllers/UsersController.php:291
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
-msgstr ""
+msgstr "Vartotojas \"%s\" sėkmingai panaikintas!"
 
 #: application/controllers/UsersController.php:297
 #, php-format
@@ -2325,7 +2332,7 @@ msgstr ""
 
 #: application/controllers/UsersController.php:318
 msgid "Welcome!"
-msgstr ""
+msgstr "Sveiki!"
 
 #: application/controllers/UsersController.php:320
 #, php-format
@@ -2341,7 +2348,7 @@ msgstr ""
 
 #: application/controllers/UsersController.php:418
 msgid "Login information incorrect. Please try again."
-msgstr ""
+msgstr "Netinkamas prisijungimo vardas. Bandykite dar kartą."
 
 #: application/forms/AppearanceSettings.php:22
 #: application/forms/Install.php:117
@@ -2355,7 +2362,7 @@ msgstr ""
 #: application/forms/AppearanceSettings.php:29
 #: application/forms/Install.php:125
 msgid "Thumbnail Size"
-msgstr ""
+msgstr "Miniatiūros dydis"
 
 #: application/forms/AppearanceSettings.php:30
 msgid "Maximum thumbnail size constraint (in pixels)."
@@ -2409,11 +2416,11 @@ msgstr "Dabartinis slaptažodis"
 #: application/forms/ChangePassword.php:26
 #: application/forms/ChangePassword.php:36
 msgid "Password must be at least 6 characters long."
-msgstr ""
+msgstr "Slaptažodis turi būti ne trumpesnis, nei 6 simboliai."
 
 #: application/forms/ChangePassword.php:28
 msgid "Invalid current password"
-msgstr ""
+msgstr "Neteisingas slaptažodis"
 
 #: application/forms/ChangePassword.php:34
 msgid "New Password"
@@ -2421,16 +2428,16 @@ msgstr "Naujas slaptažodis"
 
 #: application/forms/ChangePassword.php:41
 msgid "New password must be entered."
-msgstr ""
+msgstr "Naujas slaptažodis turi būti įvestas."
 
 #: application/forms/ChangePassword.php:50
 #: application/forms/ChangePassword.php:70
 msgid "New password must be typed correctly twice."
-msgstr ""
+msgstr "Naujas slaptažodis turi būti įvestas du kartus teisingai."
 
 #: application/forms/ChangePassword.php:59
 msgid "New password must be at least %min% characters long."
-msgstr ""
+msgstr "Naujas slaptažodis turi būti ne trumpesnis, nei %min% simboliai."
 
 #: application/forms/ChangePassword.php:68
 msgid "Repeat New Password"
@@ -2476,7 +2483,7 @@ msgstr ""
 
 #: application/forms/GeneralSettings.php:59 application/forms/Install.php:163
 msgid "ImageMagick Directory Path"
-msgstr ""
+msgstr "ImageMagick kelias"
 
 #: application/forms/Install.php:31
 msgid "only alphanumeric characters are allowed"
@@ -2488,7 +2495,7 @@ msgstr "Slaptažodis"
 
 #: application/forms/Install.php:38
 msgid "must be at least 6 characters"
-msgstr ""
+msgstr "ne trumpesnis, nei 6 simboliai"
 
 #: application/forms/Install.php:61
 msgid "Confirm your password."
@@ -2567,48 +2574,48 @@ msgstr "Prisiminti duomenis?"
 
 #: application/forms/Navigation.php:156
 msgid "[Default]"
-msgstr ""
+msgstr "[Numatytas]"
 
 #: application/forms/Navigation.php:162
 msgid "Select a Homepage"
-msgstr ""
+msgstr "Pasirinkti titulinį puslapį"
 
 #: application/forms/Navigation.php:244
 msgid "Cannot find parent navigation page."
 msgstr ""
 
-#: application/forms/Navigation.php:326
+#: application/forms/Navigation.php:325
 msgid "All navigation links must have URIs."
 msgstr ""
 
-#: application/forms/Navigation.php:339
+#: application/forms/Navigation.php:338
 msgid "All navigation links must have different URIs."
 msgstr ""
 
-#: application/forms/Navigation.php:345
+#: application/forms/Navigation.php:344
 #, php-format
 msgid "Invalid URI for \"%s\" navigation link:  \"%s\""
 msgstr ""
 
-#: application/forms/Navigation.php:378
+#: application/forms/Navigation.php:377
 msgid "Navigation links that have undeleteable sublinks cannot be deleted."
 msgstr ""
 
 #: application/forms/RecoverPassword.php:36
 msgid "Email address is required."
-msgstr ""
+msgstr "Būtinas el. pašto adresas."
 
 #: application/forms/RecoverPassword.php:46
 msgid "Invalid email address given."
-msgstr ""
+msgstr "Netinkamas el. pašto adresas."
 
 #: application/forms/RecoverPassword.php:48
 msgid "Invalid format given for email address."
-msgstr ""
+msgstr "Netinkamas formatas nurodyto el. pašto adreso."
 
 #: application/forms/RecoverPassword.php:50
 msgid "Invalid hostname given for email address."
-msgstr ""
+msgstr "Netinkamas hostname duoto el. pašto adreso."
 
 #: application/forms/RecoverPassword.php:66
 msgid "Invalid email address"
@@ -2620,7 +2627,7 @@ msgstr "Reikalingas slaptažodis"
 
 #: application/forms/ResetPassword.php:33
 msgid "Typed passwords do not match."
-msgstr ""
+msgstr "Nesutampa slaptažodžiai."
 
 #: application/forms/SecuritySettings.php:24
 msgid "Disable File Upload Validation"
@@ -2670,11 +2677,11 @@ msgstr ""
 
 #: application/forms/SecuritySettings.php:69
 msgid "Enable HTML Filtering"
-msgstr ""
+msgstr "Įjungti HTML filtrą"
 
 #: application/forms/SecuritySettings.php:74
 msgid "Allowed HTML Elements"
-msgstr ""
+msgstr "Leidžiamos HTML žymos ir atributai"
 
 #: application/forms/SecuritySettings.php:75
 msgid "List of allowed HTML elements in form input"
@@ -2694,11 +2701,11 @@ msgstr ""
 
 #: application/forms/SecuritySettings.php:102
 msgid "Captcha"
-msgstr ""
+msgstr "Captcha"
 
 #: application/forms/SecuritySettings.php:111
 msgid "HTML Filtering"
-msgstr ""
+msgstr "HTML filtras"
 
 #: application/forms/User.php:30
 msgid ""
@@ -2736,7 +2743,7 @@ msgstr ""
 
 #: application/forms/User.php:87 application/models/User.php:169
 msgid "Real Name is required."
-msgstr ""
+msgstr "Vartotojo vardas būtinas."
 
 #: application/forms/User.php:93
 msgid "This email address is invalid."
@@ -2814,17 +2821,17 @@ msgstr ""
 #: application/libraries/Omeka/Plugin/Loader.php:112
 #, php-format
 msgid "Plugin named '%s' has already been loaded/registered."
-msgstr ""
+msgstr "Įskiepis, pavadintas '%s' – jau paleistas."
 
 #: application/libraries/Omeka/Plugin/Loader.php:153
 #, php-format
 msgid "The %s plugin could not be loaded."
-msgstr ""
+msgstr "Įskiepis %s negali būti paleistas."
 
 #: application/libraries/Omeka/Plugin/Loader.php:174
 #, php-format
 msgid "The required plugin '%s' could not be found."
-msgstr ""
+msgstr "Nerastas reikalingas įskiepis %s."
 
 #: application/libraries/Omeka/Plugin/Loader.php:247
 #, php-format
@@ -2834,27 +2841,27 @@ msgstr ""
 #: application/libraries/Omeka/Plugin/Loader.php:250
 #, php-format
 msgid "'%s' has not been installed."
-msgstr ""
+msgstr "'%s' nebuvo įdiegtas. "
 
 #: application/libraries/Omeka/Plugin/Loader.php:253
 #, php-format
 msgid "'%s' has not been activated."
-msgstr ""
+msgstr "'%s' nebuvo aktyvuota."
 
 #: application/libraries/Omeka/Plugin/Loader.php:256
 #, php-format
 msgid "'%s' requires a newer version of Omeka."
-msgstr ""
+msgstr "'%s' reikalinga nauja Omeka versija."
 
 #: application/libraries/Omeka/Plugin/Loader.php:261
 #, php-format
 msgid "'%s' must be upgraded to the new version before it can be loaded."
-msgstr ""
+msgstr "Prieš paleidžiant '%s' privalo būti atnaujinta į naują versiją,"
 
 #: application/libraries/Omeka/Plugin/Loader.php:264
 #, php-format
 msgid "'%s' cannot be loaded twice."
-msgstr ""
+msgstr "'%s' negalima paleisti du kartus."
 
 #: application/libraries/Omeka/Record/AbstractRecord.php:349
 #, php-format
@@ -2871,7 +2878,7 @@ msgstr ""
 
 #: application/libraries/globals.php:457
 msgid "Keyword"
-msgstr ""
+msgstr "Raktažodis"
 
 #: application/libraries/globals.php:458
 msgid "Boolean"
@@ -2899,35 +2906,35 @@ msgstr "Omeka RSS srautas"
 msgid "Omeka Atom Feed"
 msgstr ""
 
-#: application/libraries/globals.php:2247
+#: application/libraries/globals.php:2262
 msgid "View"
 msgstr ""
 
-#: application/libraries/globals.php:2309
+#: application/libraries/globals.php:2324
 msgid "No Collection"
-msgstr ""
+msgstr "Nėra kolekcijos"
 
-#: application/libraries/globals.php:2424
+#: application/libraries/globals.php:2439
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2441
+#: application/libraries/globals.php:2456
 msgid "Next Item &rarr;"
 msgstr ""
 
-#: application/libraries/globals.php:2461
+#: application/libraries/globals.php:2476
 msgid "&larr; Previous Item"
 msgstr ""
 
-#: application/libraries/globals.php:2638
+#: application/libraries/globals.php:2653
 msgid "Browse All"
 msgstr ""
 
-#: application/libraries/globals.php:2643
+#: application/libraries/globals.php:2658
 msgid "Browse by Tag"
 msgstr ""
 
-#: application/libraries/globals.php:2905
+#: application/libraries/globals.php:2931
 msgid "No tags are available."
 msgstr "Nėra žymų."
 
@@ -2967,7 +2974,7 @@ msgstr ""
 
 #: application/models/ElementText.php:59
 msgid "Invalid record ID."
-msgstr ""
+msgstr "Netinkamas įrašo ID."
 
 #: application/models/ElementText.php:62
 msgid "All element texts must have a record type."
@@ -2975,7 +2982,7 @@ msgstr ""
 
 #: application/models/ElementText.php:65
 msgid "Invalid element ID."
-msgstr ""
+msgstr "Netinkamas elemento ID."
 
 #: application/models/File.php:241
 msgid "Cannot get the local path for a stored file."
@@ -3029,7 +3036,7 @@ msgstr ""
 
 #: application/models/Item.php:518
 msgid "Invalid collection."
-msgstr ""
+msgstr "Netinkama kolekcija."
 
 #: application/models/ItemType.php:102
 #, php-format
@@ -3167,14 +3174,14 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:839
 #: application/tests/suite/Omeka/NavigationTest.php:952
 msgid "Edit Items"
-msgstr ""
+msgstr "Redaguoti elementus"
 
 #: application/tests/suite/Omeka/NavigationTest.php:758
 #: application/tests/suite/Omeka/NavigationTest.php:818
 #: application/tests/suite/Omeka/NavigationTest.php:856
 #: application/tests/suite/Omeka/NavigationTest.php:953
 msgid "Edit Collections"
-msgstr ""
+msgstr "Redaguoti kolekcijas"
 
 #: application/tests/suite/Omeka/NavigationTest.php:764
 #: application/tests/suite/Omeka/NavigationTest.php:819
@@ -3182,19 +3189,19 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:954
 #: install/views/scripts/layout.phtml:6 install/views/scripts/layout.phtml:23
 msgid "Omeka"
-msgstr ""
+msgstr "Omeka"
 
 #: application/tests/suite/Omeka/NavigationTest.php:825
 #: application/tests/suite/Omeka/NavigationTest.php:951
 msgid "CHNM"
-msgstr ""
+msgstr "CHNM"
 
 #: application/tests/suite/Omeka/NavigationTest.php:982
 #: application/tests/suite/Omeka/NavigationTest.php:990
 #: application/tests/suite/Omeka/NavigationTest.php:1128
 #: application/tests/suite/Omeka/NavigationTest.php:1136
 msgid "Page "
-msgstr ""
+msgstr "Puslapis"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1009
 #: application/tests/suite/Omeka/NavigationTest.php:1013
@@ -3203,7 +3210,7 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1156
 #: application/tests/suite/Omeka/NavigationTest.php:1256
 msgid "Page 1"
-msgstr ""
+msgstr "Puslapis 1"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1016
 #: application/tests/suite/Omeka/NavigationTest.php:1022
@@ -3214,7 +3221,7 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1200
 #: application/tests/suite/Omeka/NavigationTest.php:1232
 msgid "Page 2"
-msgstr ""
+msgstr "Puslapis 2"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1025
 #: application/tests/suite/Omeka/NavigationTest.php:1029
@@ -3225,7 +3232,7 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1193
 #: application/tests/suite/Omeka/NavigationTest.php:1255
 msgid "Page 3"
-msgstr ""
+msgstr "Puslapis 3"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1032
 #: application/tests/suite/Omeka/NavigationTest.php:1041
@@ -3238,7 +3245,7 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1240
 #: application/tests/suite/Omeka/NavigationTest.php:1250
 msgid "Page 4"
-msgstr ""
+msgstr "Puslapis 4"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1044
 #: application/tests/suite/Omeka/NavigationTest.php:1048
@@ -3249,13 +3256,13 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1223
 #: application/tests/suite/Omeka/NavigationTest.php:1241
 msgid "Page 5"
-msgstr ""
+msgstr "Puslapis 5"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1051
 #: application/tests/suite/Omeka/NavigationTest.php:1055
 #: application/tests/suite/Omeka/NavigationTest.php:1215
 msgid "Page 6"
-msgstr ""
+msgstr "Puslapis 6"
 
 #: application/views/helpers/AllElementTexts.php:101
 msgid "[no text]"
@@ -3293,10 +3300,6 @@ msgstr ""
 
 #: application/views/helpers/RecordUrl.php:75
 msgid "Invalid return value while getting record URL."
-msgstr ""
-
-#: application/views/scripts/collections/browse.php:24
-msgid "Contributors(s)"
 msgstr ""
 
 #: application/views/scripts/collections/browse.php:31
@@ -3378,28 +3381,32 @@ msgid ""
 "messages</a>."
 msgstr ""
 
-#: application/views/scripts/index.php:14
+#: application/views/scripts/index.php:16
 msgid "Featured Item"
 msgstr ""
 
-#: application/views/scripts/index.php:22
+#: application/views/scripts/index.php:24
 msgid "Featured Collection"
 msgstr ""
 
-#: application/views/scripts/index.php:67
+#: application/views/scripts/index.php:69
 msgid "No recent items available."
 msgstr ""
 
-#: application/views/scripts/index.php:71
+#: application/views/scripts/index.php:73
 msgid "View All Items"
-msgstr ""
+msgstr "Žiūrėti visus elementus"
 
 #: application/views/scripts/items/browse.php:24
 msgid "Sort by: "
-msgstr ""
+msgstr "Rūšiuoti pagal:"
 
 #: application/views/scripts/items/random-featured.php:20
 msgid "No featured items are available."
+msgstr ""
+
+#: application/views/scripts/items/search-form.php:76
+msgid "Remove field"
 msgstr ""
 
 #: application/views/scripts/items/show.php:10
@@ -3412,10 +3419,6 @@ msgstr "Citata"
 
 #: application/views/scripts/search/index.php:2
 msgid "Search Omeka "
-msgstr ""
-
-#: application/views/scripts/search/index.php:12
-msgid "Record Type"
 msgstr ""
 
 #: application/views/scripts/search/index.php:29
@@ -3448,7 +3451,7 @@ msgstr ""
 
 #: application/views/scripts/search/search-form.php:19
 msgid "Advanced Search (Items only)"
-msgstr ""
+msgstr "Išsami paieška (tik elementai)"
 
 #: application/views/scripts/users/login.php:9
 msgid "Go to Home Page"
@@ -3477,7 +3480,7 @@ msgstr ""
 
 #: install/views/scripts/index/index.phtml:2
 msgid "Installation Warning"
-msgstr ""
+msgstr "Nepavykęs diegimas."
 
 #: install/views/scripts/index/index.phtml:4
 msgid ""
@@ -3487,7 +3490,7 @@ msgstr ""
 
 #: install/views/scripts/index/index.phtml:14
 msgid "Configure Your Site"
-msgstr ""
+msgstr "Konfiguruoti savo tinklalapį"
 
 #: install/views/scripts/index/index.phtml:16
 msgid "Form Validation Errors"
@@ -3499,7 +3502,7 @@ msgstr ""
 
 #: install/views/scripts/index/installed.phtml:2
 msgid "Omeka is installed."
-msgstr ""
+msgstr "Įdiegta Omeka."
 
 #: install/views/scripts/index/installed.phtml:3
 msgid "Public Site"
@@ -3507,4 +3510,4 @@ msgstr ""
 
 #: install/views/scripts/index/installed.phtml:3
 msgid "Admin Dashboard"
-msgstr ""
+msgstr "Skydelis"

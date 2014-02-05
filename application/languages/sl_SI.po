@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-12-02 18:02+0000\n"
-"Last-Translator: sloicra <sloicra@gmail.com>\n"
+"PO-Revision-Date: 2014-01-31 18:39+0000\n"
+"Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Slovenian (Slovenia) (http://www.transifex.com/projects/p/omeka/language/sl_SI/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -219,7 +219,7 @@ msgstr ""
 
 #. Omeka Legacy File: Change History element
 msgid "Change History"
-msgstr ""
+msgstr "Zgodovina sprememb"
 
 #. Omeka Legacy File: Watermark element
 msgid "Watermark"
@@ -239,7 +239,7 @@ msgstr "Poobdelava"
 
 #. Omeka Image File
 msgid "Omeka Image File"
-msgstr ""
+msgstr "Omeka slikovna datoteka"
 
 #. Omeka Image File description
 msgid ""
@@ -359,7 +359,7 @@ msgstr ""
 #: admin/themes/default/appearance/edit-settings.php:21
 #: admin/themes/default/collections/edit.php:22
 #: admin/themes/default/element-sets/edit.php:41
-#: admin/themes/default/files/edit.php:35
+#: admin/themes/default/files/edit.php:30
 #: admin/themes/default/items/batch-edit.php:130
 #: admin/themes/default/items/edit.php:19
 #: admin/themes/default/plugins/config.php:14
@@ -378,19 +378,19 @@ msgstr "Shrani spremembe"
 #: admin/themes/default/appearance/edit-navigation.php:39
 #: admin/themes/default/collections/edit.php:23
 #: admin/themes/default/collections/show.php:34
-#: admin/themes/default/files/show.php:30
+#: admin/themes/default/files/show.php:28
 #: admin/themes/default/items/edit.php:20
 #: admin/themes/default/items/show.php:45
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:79
 msgid "View Public Page"
-msgstr ""
+msgstr "Prikaži javno stran"
 
 #: admin/themes/default/appearance/edit-navigation.php:40
 #: admin/themes/default/collections/edit.php:24
 #: admin/themes/default/collections/show.php:36
 #: admin/themes/default/element-sets/browse.php:29
-#: admin/themes/default/files/edit.php:37
-#: admin/themes/default/files/show.php:32
+#: admin/themes/default/files/edit.php:32
+#: admin/themes/default/files/show.php:30
 #: admin/themes/default/item-types/edit.php:20
 #: admin/themes/default/item-types/show.php:54
 #: admin/themes/default/items/batch-edit.php:119
@@ -453,7 +453,7 @@ msgstr "Zbirke"
 #: admin/themes/default/item-types/browse.php:2
 #: admin/themes/default/items/browse.php:3
 #: admin/themes/default/plugins/browse.php:2
-#: admin/themes/default/tags/browse.php:3
+#: admin/themes/default/tags/browse.php:12
 #: admin/themes/default/users/browse.php:2
 #: application/views/scripts/items/browse.php:6
 #: application/views/scripts/search/index.php:2
@@ -463,11 +463,12 @@ msgstr "(%s skupno)"
 
 #: admin/themes/default/collections/browse.php:23
 #: admin/themes/default/collections/show.php:51
+#: application/views/scripts/collections/browse.php:24
 msgid "Contributors"
 msgstr ""
 
 #: admin/themes/default/collections/browse.php:24
-#: admin/themes/default/files/show.php:68
+#: admin/themes/default/files/show.php:66
 #: admin/themes/default/items/browse.php:43
 #: application/views/scripts/items/browse.php:21
 msgid "Date Added"
@@ -488,7 +489,7 @@ msgstr ""
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:27
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
-#: admin/themes/default/files/show.php:28 admin/themes/default/index.php:54
+#: admin/themes/default/files/show.php:26 admin/themes/default/index.php:54
 #: admin/themes/default/index.php:73
 #: admin/themes/default/item-types/browse.php:26
 #: admin/themes/default/item-types/show.php:51
@@ -507,7 +508,7 @@ msgstr ""
 
 #: admin/themes/default/collections/browse.php:67
 msgid "There are no collections on this page."
-msgstr ""
+msgstr "Na tej strani ni zbirk."
 
 #: admin/themes/default/collections/browse.php:67
 msgid "View All Collections"
@@ -524,7 +525,7 @@ msgstr ""
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/libraries/globals.php:2489
+#: application/libraries/globals.php:2504
 #: application/views/scripts/collections/show.php:4
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
@@ -533,7 +534,7 @@ msgstr ""
 #: admin/themes/default/collections/edit.php:8
 #, php-format
 msgid "Edit Collection #%s"
-msgstr ""
+msgstr "Uredi zbirko #%s"
 
 #: admin/themes/default/collections/show.php:8
 #, php-format
@@ -542,7 +543,7 @@ msgstr ""
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
-#: application/views/scripts/index.php:35
+#: application/views/scripts/index.php:37
 msgid "Recently Added Items"
 msgstr "Nedavno dodani dokumenti"
 
@@ -630,18 +631,18 @@ msgstr "Stran poganja Omeka"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Documentation"
-msgstr ""
+msgstr "Dokumentacija"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Support Forums"
-msgstr ""
+msgstr "Podporni forumi"
 
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
 #: admin/themes/default/plugins/browse.php:52
 #, php-format
 msgid "Version %s"
-msgstr ""
+msgstr "Različica %s"
 
 #: admin/themes/default/common/footer.php:10
 #: admin/themes/default/system-info/index.php:2
@@ -662,7 +663,7 @@ msgstr "Uporabniki"
 #: admin/themes/default/upgrade/migrate.php:6
 #: application/views/scripts/common/admin-bar.php:11
 msgid "Omeka Admin"
-msgstr ""
+msgstr "Omeka skrbnik"
 
 #: admin/themes/default/common/header.php:60
 #: application/views/scripts/common/admin-bar.php:7
@@ -685,7 +686,8 @@ msgstr ""
 
 #: admin/themes/default/common/settings-nav.php:16
 #: application/views/helpers/SearchForm.php:34
-#: application/views/scripts/items/search-form.php:186
+#: application/views/scripts/items/search-form.php:189
+#: application/views/scripts/search/search-form.php:2
 msgid "Search"
 msgstr ""
 
@@ -737,11 +739,11 @@ msgstr "administrator"
 #: admin/themes/default/error/403.php:11
 #, php-format
 msgid "If you think you should have permission, try contacting the %s."
-msgstr ""
+msgstr "Če mislite, da bi morali imeti dovoljenje, poskusite kontaktirati z %s."
 
 #: admin/themes/default/error/404.php:2
 msgid "404: Page Not Found"
-msgstr ""
+msgstr "404: Strani ni mogoče najti"
 
 #: admin/themes/default/error/404.php:6
 msgid ""
@@ -753,7 +755,7 @@ msgstr ""
 #: admin/themes/default/error/404.php:10
 #, php-format
 msgid "If this does not help, try contacting the %s."
-msgstr ""
+msgstr "Če to ne pomaga, poskusite kontaktirati z %s."
 
 #: admin/themes/default/error/404.php:16 admin/themes/default/index.php:46
 msgid "Recent Items"
@@ -780,108 +782,108 @@ msgstr "405: Način ni dovoljen"
 msgid ""
 "You must use a different method to access this URL. If you reached this page"
 " by following a link or clicking a button in Omeka, please contact the %s."
-msgstr ""
+msgstr "Za dostop do tega URL-ja morate uporabiti drugačno metodo. Če ste do te strani prišli preko povezave ali klika na gumb v Omeki, prosimo kontaktirajte %s."
 
 #: admin/themes/default/files/edit.php:8
 #, php-format
 msgid "Edit File #%s"
-msgstr ""
+msgstr "Uredi datoteko #%s"
 
 #: admin/themes/default/files/show.php:9
 #: application/views/scripts/files/show.php:9
 #, php-format
 msgid "File #%s"
-msgstr ""
+msgstr "Datoteka #%s"
 
-#: admin/themes/default/files/show.php:37
+#: admin/themes/default/files/show.php:35
 #: application/libraries/globals.php:398
 msgid "Item"
 msgstr ""
 
-#: admin/themes/default/files/show.php:42
+#: admin/themes/default/files/show.php:40
 msgid "Direct Links"
 msgstr ""
 
-#: admin/themes/default/files/show.php:44
+#: admin/themes/default/files/show.php:42
 msgid "Original"
 msgstr ""
 
-#: admin/themes/default/files/show.php:46
+#: admin/themes/default/files/show.php:44
 msgid "Fullsize"
-msgstr ""
+msgstr "Izvorna velikost"
 
-#: admin/themes/default/files/show.php:47
+#: admin/themes/default/files/show.php:45
 msgid "Thumbnail"
-msgstr ""
+msgstr "Sličica"
 
-#: admin/themes/default/files/show.php:48
+#: admin/themes/default/files/show.php:46
 msgid "Square Thumbnail"
-msgstr ""
+msgstr "Kvadratna sličica"
 
-#: admin/themes/default/files/show.php:54
+#: admin/themes/default/files/show.php:52
 #: application/views/scripts/files/show.php:22
 msgid "Format Metadata"
 msgstr ""
 
-#: admin/themes/default/files/show.php:56
+#: admin/themes/default/files/show.php:54
 msgid "Filename"
 msgstr ""
 
-#: admin/themes/default/files/show.php:58
+#: admin/themes/default/files/show.php:56
 #: application/views/scripts/files/show.php:24
 msgid "Original Filename"
-msgstr ""
+msgstr "Izvirno ime datoteke"
 
-#: admin/themes/default/files/show.php:60
+#: admin/themes/default/files/show.php:58
 #: application/views/scripts/files/show.php:29
 msgid "File Size"
-msgstr ""
+msgstr "Velikost datoteke"
 
-#: admin/themes/default/files/show.php:61
+#: admin/themes/default/files/show.php:59
 #: application/views/scripts/files/show.php:30
 #, php-format
 msgid "%s bytes"
 msgstr ""
 
-#: admin/themes/default/files/show.php:66
+#: admin/themes/default/files/show.php:64
 msgid "File History"
 msgstr "Zgodovina datoteke"
 
-#: admin/themes/default/files/show.php:70
+#: admin/themes/default/files/show.php:68
 msgid "Date Modified"
 msgstr "Datum spremembe"
 
-#: admin/themes/default/files/show.php:72
+#: admin/themes/default/files/show.php:70
 #: application/views/scripts/files/show.php:34
 msgid "Authentication"
 msgstr "Preverjanje pristnosti"
 
-#: admin/themes/default/files/show.php:78
+#: admin/themes/default/files/show.php:76
 #: application/views/scripts/files/show.php:40
 msgid "Type Metadata"
 msgstr ""
 
-#: admin/themes/default/files/show.php:80
+#: admin/themes/default/files/show.php:78
 #: application/views/scripts/files/show.php:42
 msgid "Mime Type"
 msgstr ""
 
-#: admin/themes/default/files/show.php:82
+#: admin/themes/default/files/show.php:80
 #: application/views/scripts/files/show.php:46
 msgid "File Type / OS"
 msgstr ""
 
-#: admin/themes/default/files/show.php:89
+#: admin/themes/default/files/show.php:87
 msgid "Embedded Metadata"
 msgstr ""
 
-#: admin/themes/default/files/show.php:95
+#: admin/themes/default/files/show.php:93
 #: admin/themes/default/items/browse.php:133
 #: admin/themes/default/items/show.php:88
 #: application/views/scripts/items/browse.php:60
 #: application/views/scripts/items/show.php:38
 msgid "Output Formats"
-msgstr ""
+msgstr "Izhodne oblike"
 
 #: admin/themes/default/index.php:6
 msgid "items"
@@ -1011,11 +1013,11 @@ msgstr "Ni nobenih nedavno dodanih dokumentov."
 #: admin/themes/default/items/browse.php:116
 #: admin/themes/default/items/browse.php:151
 msgid "Add an Item"
-msgstr ""
+msgstr "Dodaj nov dokument"
 
 #: admin/themes/default/items/add.php:12
 msgid "Add Item"
-msgstr ""
+msgstr "Dodaj dokument"
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit.php:89
@@ -1059,14 +1061,14 @@ msgstr ""
 
 #: admin/themes/default/items/batch-edit.php:46
 msgid "Public?"
-msgstr ""
+msgstr "Javno?"
 
 #: admin/themes/default/items/batch-edit.php:49
 #: admin/themes/default/items/batch-edit.php:64
 #: admin/themes/default/items/batch-edit.php:78
 #: admin/themes/default/items/batch-edit.php:93
 msgid "Select Below"
-msgstr ""
+msgstr "Izberi spodaj"
 
 #: admin/themes/default/items/batch-edit.php:51
 msgid "Not Public"
@@ -1088,7 +1090,7 @@ msgstr ""
 #: admin/themes/default/items/batch-edit.php:83
 #: admin/themes/default/items/batch-edit.php:98
 msgid "Remove?"
-msgstr ""
+msgstr "Odstrani?"
 
 #: admin/themes/default/items/batch-edit.php:104
 #: admin/themes/default/items/tag-form.php:8
@@ -1149,8 +1151,8 @@ msgstr ""
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2265
-#: application/libraries/globals.php:2648
+#: application/libraries/globals.php:2280
+#: application/libraries/globals.php:2663
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr ""
@@ -1255,7 +1257,7 @@ msgid "Narrow by Specific Fields"
 msgstr ""
 
 #: admin/themes/default/items/search-form.php:27
-#: application/views/scripts/items/search-form.php:77
+#: application/views/scripts/items/search-form.php:80
 msgid "Add a Field"
 msgstr ""
 
@@ -1285,57 +1287,57 @@ msgid "is not empty"
 msgstr ""
 
 #: admin/themes/default/items/search-form.php:84
-#: application/views/scripts/items/search-form.php:81
+#: application/views/scripts/items/search-form.php:84
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
 msgstr ""
 
 #: admin/themes/default/items/search-form.php:98
-#: application/views/scripts/items/search-form.php:92
+#: application/views/scripts/items/search-form.php:95
 msgid "Search By Collection"
 msgstr ""
 
 #: admin/themes/default/items/search-form.php:114
-#: application/views/scripts/items/search-form.php:106
+#: application/views/scripts/items/search-form.php:109
 msgid "Search By Type"
 msgstr ""
 
 #: admin/themes/default/items/search-form.php:131
-#: application/views/scripts/items/search-form.php:122
+#: application/views/scripts/items/search-form.php:125
 msgid "Search By User"
 msgstr ""
 
 #: admin/themes/default/items/search-form.php:148
-#: application/views/scripts/items/search-form.php:137
+#: application/views/scripts/items/search-form.php:140
 msgid "Search By Tags"
 msgstr ""
 
 #: admin/themes/default/items/search-form.php:163
-#: application/views/scripts/items/search-form.php:150
+#: application/views/scripts/items/search-form.php:153
 msgid "Public/Non-Public"
 msgstr ""
 
 #: admin/themes/default/items/search-form.php:172
-#: application/views/scripts/items/search-form.php:158
+#: application/views/scripts/items/search-form.php:161
 msgid "Only Public Items"
 msgstr ""
 
 #: admin/themes/default/items/search-form.php:173
-#: application/views/scripts/items/search-form.php:159
+#: application/views/scripts/items/search-form.php:162
 msgid "Only Non-Public Items"
 msgstr ""
 
 #: admin/themes/default/items/search-form.php:183
-#: application/views/scripts/items/search-form.php:168
+#: application/views/scripts/items/search-form.php:171
 msgid "Featured/Non-Featured"
 msgstr ""
 
 #: admin/themes/default/items/search-form.php:192
-#: application/views/scripts/items/search-form.php:176
+#: application/views/scripts/items/search-form.php:179
 msgid "Only Featured Items"
 msgstr ""
 
 #: admin/themes/default/items/search-form.php:193
-#: application/views/scripts/items/search-form.php:177
+#: application/views/scripts/items/search-form.php:180
 msgid "Only Non-Featured Items"
 msgstr ""
 
@@ -1390,7 +1392,7 @@ msgid "Browse Items by Tag"
 msgstr ""
 
 #: admin/themes/default/items/tags.php:9
-#: admin/themes/default/tags/browse.php:65
+#: admin/themes/default/tags/browse.php:85
 msgid "There are no tags to display. You must first tag some items."
 msgstr ""
 
@@ -1585,53 +1587,58 @@ msgstr ""
 msgid "Test"
 msgstr ""
 
-#: admin/themes/default/tags/browse.php:3
+#: admin/themes/default/tags/browse.php:7
 msgid "Edit Tags"
 msgstr ""
 
-#: admin/themes/default/tags/browse.php:16
+#: admin/themes/default/tags/browse.php:9
+msgid "Browse Tags"
+msgstr ""
+
+#: admin/themes/default/tags/browse.php:18
+#: application/views/scripts/search/index.php:12
+msgid "Record Type"
+msgstr ""
+
+#: admin/themes/default/tags/browse.php:24
 msgid "Editing Tags"
 msgstr ""
 
-#: admin/themes/default/tags/browse.php:19
+#: admin/themes/default/tags/browse.php:27
 msgid "To view all items with a tag, click the number."
 msgstr ""
 
-#: admin/themes/default/tags/browse.php:20
+#: admin/themes/default/tags/browse.php:28
 msgid ""
 "To edit the tag name, click the name and begin editing, and hit \"enter\" to"
 " save. To cancel an edit, click the ESC key or click away from the tag."
 msgstr ""
 
-#: admin/themes/default/tags/browse.php:21
+#: admin/themes/default/tags/browse.php:29
 msgid ""
 "To delete a tag, click the X. Deleting a tag will not delete the tagged "
 "items."
 msgstr ""
 
-#: admin/themes/default/tags/browse.php:29
+#: admin/themes/default/tags/browse.php:39
 msgid "Most"
 msgstr ""
 
-#: admin/themes/default/tags/browse.php:30
+#: admin/themes/default/tags/browse.php:40
 msgid "Least"
 msgstr ""
 
-#: admin/themes/default/tags/browse.php:31
+#: admin/themes/default/tags/browse.php:41
 msgid "Alphabetical"
 msgstr ""
 
-#: admin/themes/default/tags/browse.php:32
+#: admin/themes/default/tags/browse.php:42
 msgid "Recent"
 msgstr ""
 
-#: admin/themes/default/tags/browse.php:43
-#: admin/themes/default/tags/browse.php:45
+#: admin/themes/default/tags/browse.php:53
+#: admin/themes/default/tags/browse.php:55
 msgid "Record Types"
-msgstr ""
-
-#: admin/themes/default/tags/browse.php:47
-msgid "s"
 msgstr ""
 
 #: admin/themes/default/themes/browse.php:15
@@ -2231,7 +2238,7 @@ msgstr ""
 msgid "There was an error on the form. Please try again."
 msgstr ""
 
-#: application/controllers/UpgradeController.php:49
+#: application/controllers/UpgradeController.php:50
 msgid "SQL error in migration: "
 msgstr ""
 
@@ -2345,11 +2352,11 @@ msgstr ""
 #: application/forms/AppearanceSettings.php:22
 #: application/forms/Install.php:117
 msgid "Fullsize Image Size"
-msgstr ""
+msgstr "Izvorna velikost slike"
 
 #: application/forms/AppearanceSettings.php:23
 msgid "Maximum fullsize image size constraint (in pixels)."
-msgstr ""
+msgstr "Največja velikost slike (v slikovnih pikah)."
 
 #: application/forms/AppearanceSettings.php:29
 #: application/forms/Install.php:125
@@ -2499,7 +2506,7 @@ msgstr ""
 
 #: application/forms/Install.php:118
 msgid "Maximum fullsize image size constraint (in pixels)"
-msgstr ""
+msgstr "Največja velikost slike (v slikovnih pikah)."
 
 #: application/forms/Install.php:126
 msgid "Maximum thumbnail size constraint (in pixels)"
@@ -2576,20 +2583,20 @@ msgstr ""
 msgid "Cannot find parent navigation page."
 msgstr ""
 
-#: application/forms/Navigation.php:326
+#: application/forms/Navigation.php:325
 msgid "All navigation links must have URIs."
 msgstr ""
 
-#: application/forms/Navigation.php:339
+#: application/forms/Navigation.php:338
 msgid "All navigation links must have different URIs."
 msgstr ""
 
-#: application/forms/Navigation.php:345
+#: application/forms/Navigation.php:344
 #, php-format
 msgid "Invalid URI for \"%s\" navigation link:  \"%s\""
 msgstr ""
 
-#: application/forms/Navigation.php:378
+#: application/forms/Navigation.php:377
 msgid "Navigation links that have undeleteable sublinks cannot be deleted."
 msgstr ""
 
@@ -2898,35 +2905,35 @@ msgstr ""
 msgid "Omeka Atom Feed"
 msgstr ""
 
-#: application/libraries/globals.php:2247
+#: application/libraries/globals.php:2262
 msgid "View"
 msgstr ""
 
-#: application/libraries/globals.php:2309
+#: application/libraries/globals.php:2324
 msgid "No Collection"
 msgstr ""
 
-#: application/libraries/globals.php:2424
+#: application/libraries/globals.php:2439
 msgid "RSS"
 msgstr ""
 
-#: application/libraries/globals.php:2441
+#: application/libraries/globals.php:2456
 msgid "Next Item &rarr;"
 msgstr ""
 
-#: application/libraries/globals.php:2461
+#: application/libraries/globals.php:2476
 msgid "&larr; Previous Item"
 msgstr ""
 
-#: application/libraries/globals.php:2638
+#: application/libraries/globals.php:2653
 msgid "Browse All"
 msgstr ""
 
-#: application/libraries/globals.php:2643
+#: application/libraries/globals.php:2658
 msgid "Browse by Tag"
 msgstr "Brskaj po oznakah"
 
-#: application/libraries/globals.php:2905
+#: application/libraries/globals.php:2931
 msgid "No tags are available."
 msgstr ""
 
@@ -3294,10 +3301,6 @@ msgstr ""
 msgid "Invalid return value while getting record URL."
 msgstr ""
 
-#: application/views/scripts/collections/browse.php:24
-msgid "Contributors(s)"
-msgstr ""
-
 #: application/views/scripts/collections/browse.php:31
 #, php-format
 msgid "View the items in %s"
@@ -3377,19 +3380,19 @@ msgid ""
 "messages</a>."
 msgstr ""
 
-#: application/views/scripts/index.php:14
+#: application/views/scripts/index.php:16
 msgid "Featured Item"
 msgstr ""
 
-#: application/views/scripts/index.php:22
+#: application/views/scripts/index.php:24
 msgid "Featured Collection"
 msgstr ""
 
-#: application/views/scripts/index.php:67
+#: application/views/scripts/index.php:69
 msgid "No recent items available."
 msgstr ""
 
-#: application/views/scripts/index.php:71
+#: application/views/scripts/index.php:73
 msgid "View All Items"
 msgstr "Preglej vse dokumente"
 
@@ -3399,6 +3402,10 @@ msgstr ""
 
 #: application/views/scripts/items/random-featured.php:20
 msgid "No featured items are available."
+msgstr ""
+
+#: application/views/scripts/items/search-form.php:76
+msgid "Remove field"
 msgstr ""
 
 #: application/views/scripts/items/show.php:10
@@ -3411,10 +3418,6 @@ msgstr ""
 
 #: application/views/scripts/search/index.php:2
 msgid "Search Omeka "
-msgstr ""
-
-#: application/views/scripts/search/index.php:12
-msgid "Record Type"
 msgstr ""
 
 #: application/views/scripts/search/index.php:29

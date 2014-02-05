@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2013-11-20 11:02+0000\n"
-"Last-Translator: patrickmj <patrickmjchnm@gmail.com>\n"
+"PO-Revision-Date: 2014-01-31 18:39+0000\n"
+"Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/omeka/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -360,7 +360,7 @@ msgstr "添加链接"
 #: admin/themes/default/appearance/edit-settings.php:21
 #: admin/themes/default/collections/edit.php:22
 #: admin/themes/default/element-sets/edit.php:41
-#: admin/themes/default/files/edit.php:35
+#: admin/themes/default/files/edit.php:30
 #: admin/themes/default/items/batch-edit.php:130
 #: admin/themes/default/items/edit.php:19
 #: admin/themes/default/plugins/config.php:14
@@ -379,7 +379,7 @@ msgstr "保存更改"
 #: admin/themes/default/appearance/edit-navigation.php:39
 #: admin/themes/default/collections/edit.php:23
 #: admin/themes/default/collections/show.php:34
-#: admin/themes/default/files/show.php:30
+#: admin/themes/default/files/show.php:28
 #: admin/themes/default/items/edit.php:20
 #: admin/themes/default/items/show.php:45
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:79
@@ -390,8 +390,8 @@ msgstr "浏览公开页"
 #: admin/themes/default/collections/edit.php:24
 #: admin/themes/default/collections/show.php:36
 #: admin/themes/default/element-sets/browse.php:29
-#: admin/themes/default/files/edit.php:37
-#: admin/themes/default/files/show.php:32
+#: admin/themes/default/files/edit.php:32
+#: admin/themes/default/files/show.php:30
 #: admin/themes/default/item-types/edit.php:20
 #: admin/themes/default/item-types/show.php:54
 #: admin/themes/default/items/batch-edit.php:119
@@ -454,7 +454,7 @@ msgstr "浏览馆藏"
 #: admin/themes/default/item-types/browse.php:2
 #: admin/themes/default/items/browse.php:3
 #: admin/themes/default/plugins/browse.php:2
-#: admin/themes/default/tags/browse.php:3
+#: admin/themes/default/tags/browse.php:12
 #: admin/themes/default/users/browse.php:2
 #: application/views/scripts/items/browse.php:6
 #: application/views/scripts/search/index.php:2
@@ -464,11 +464,12 @@ msgstr "(总共%s)"
 
 #: admin/themes/default/collections/browse.php:23
 #: admin/themes/default/collections/show.php:51
+#: application/views/scripts/collections/browse.php:24
 msgid "Contributors"
 msgstr "其它责任人"
 
 #: admin/themes/default/collections/browse.php:24
-#: admin/themes/default/files/show.php:68
+#: admin/themes/default/files/show.php:66
 #: admin/themes/default/items/browse.php:43
 #: application/views/scripts/items/browse.php:21
 msgid "Date Added"
@@ -489,7 +490,7 @@ msgstr "(私有的)"
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:27
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
-#: admin/themes/default/files/show.php:28 admin/themes/default/index.php:54
+#: admin/themes/default/files/show.php:26 admin/themes/default/index.php:54
 #: admin/themes/default/index.php:73
 #: admin/themes/default/item-types/browse.php:26
 #: admin/themes/default/item-types/show.php:51
@@ -525,7 +526,7 @@ msgstr "从添加您的第一个馆藏开始。"
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/libraries/globals.php:2489
+#: application/libraries/globals.php:2504
 #: application/views/scripts/collections/show.php:4
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
@@ -543,7 +544,7 @@ msgstr "馆藏#%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
-#: application/views/scripts/index.php:35
+#: application/views/scripts/index.php:37
 msgid "Recently Added Items"
 msgstr "新近添加的条目"
 
@@ -686,7 +687,8 @@ msgstr "安全"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: application/views/helpers/SearchForm.php:34
-#: application/views/scripts/items/search-form.php:186
+#: application/views/scripts/items/search-form.php:189
+#: application/views/scripts/search/search-form.php:2
 msgid "Search"
 msgstr "搜索"
 
@@ -794,89 +796,89 @@ msgstr "编辑文件#%s"
 msgid "File #%s"
 msgstr "文件#%s"
 
-#: admin/themes/default/files/show.php:37
+#: admin/themes/default/files/show.php:35
 #: application/libraries/globals.php:398
 msgid "Item"
 msgstr "条目"
 
-#: admin/themes/default/files/show.php:42
+#: admin/themes/default/files/show.php:40
 msgid "Direct Links"
 msgstr ""
 
-#: admin/themes/default/files/show.php:44
+#: admin/themes/default/files/show.php:42
 msgid "Original"
 msgstr ""
 
-#: admin/themes/default/files/show.php:46
+#: admin/themes/default/files/show.php:44
 msgid "Fullsize"
 msgstr ""
 
-#: admin/themes/default/files/show.php:47
+#: admin/themes/default/files/show.php:45
 msgid "Thumbnail"
 msgstr ""
 
-#: admin/themes/default/files/show.php:48
+#: admin/themes/default/files/show.php:46
 msgid "Square Thumbnail"
 msgstr ""
 
-#: admin/themes/default/files/show.php:54
+#: admin/themes/default/files/show.php:52
 #: application/views/scripts/files/show.php:22
 msgid "Format Metadata"
 msgstr "格式元数据"
 
-#: admin/themes/default/files/show.php:56
+#: admin/themes/default/files/show.php:54
 msgid "Filename"
 msgstr "文件名"
 
-#: admin/themes/default/files/show.php:58
+#: admin/themes/default/files/show.php:56
 #: application/views/scripts/files/show.php:24
 msgid "Original Filename"
 msgstr "原始文件名"
 
-#: admin/themes/default/files/show.php:60
+#: admin/themes/default/files/show.php:58
 #: application/views/scripts/files/show.php:29
 msgid "File Size"
 msgstr "文件大小"
 
-#: admin/themes/default/files/show.php:61
+#: admin/themes/default/files/show.php:59
 #: application/views/scripts/files/show.php:30
 #, php-format
 msgid "%s bytes"
 msgstr "%s字节"
 
-#: admin/themes/default/files/show.php:66
+#: admin/themes/default/files/show.php:64
 msgid "File History"
 msgstr "文件历史"
 
-#: admin/themes/default/files/show.php:70
+#: admin/themes/default/files/show.php:68
 msgid "Date Modified"
 msgstr "修改日期"
 
-#: admin/themes/default/files/show.php:72
+#: admin/themes/default/files/show.php:70
 #: application/views/scripts/files/show.php:34
 msgid "Authentication"
 msgstr "身份验证"
 
-#: admin/themes/default/files/show.php:78
+#: admin/themes/default/files/show.php:76
 #: application/views/scripts/files/show.php:40
 msgid "Type Metadata"
 msgstr "类型元数据"
 
-#: admin/themes/default/files/show.php:80
+#: admin/themes/default/files/show.php:78
 #: application/views/scripts/files/show.php:42
 msgid "Mime Type"
 msgstr "Mime类型"
 
-#: admin/themes/default/files/show.php:82
+#: admin/themes/default/files/show.php:80
 #: application/views/scripts/files/show.php:46
 msgid "File Type / OS"
 msgstr "文件类型/OS"
 
-#: admin/themes/default/files/show.php:89
+#: admin/themes/default/files/show.php:87
 msgid "Embedded Metadata"
 msgstr "内嵌元数据"
 
-#: admin/themes/default/files/show.php:95
+#: admin/themes/default/files/show.php:93
 #: admin/themes/default/items/browse.php:133
 #: admin/themes/default/items/show.php:88
 #: application/views/scripts/items/browse.php:60
@@ -1150,8 +1152,8 @@ msgstr "浏览条目"
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2265
-#: application/libraries/globals.php:2648
+#: application/libraries/globals.php:2280
+#: application/libraries/globals.php:2663
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "搜索条目"
@@ -1256,7 +1258,7 @@ msgid "Narrow by Specific Fields"
 msgstr "指定具体字段"
 
 #: admin/themes/default/items/search-form.php:27
-#: application/views/scripts/items/search-form.php:77
+#: application/views/scripts/items/search-form.php:80
 msgid "Add a Field"
 msgstr "添加一个字段"
 
@@ -1286,57 +1288,57 @@ msgid "is not empty"
 msgstr "不是空的"
 
 #: admin/themes/default/items/search-form.php:84
-#: application/views/scripts/items/search-form.php:81
+#: application/views/scripts/items/search-form.php:84
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
 msgstr "按标识符#s区间搜索(例如,1-4, 156, 79)"
 
 #: admin/themes/default/items/search-form.php:98
-#: application/views/scripts/items/search-form.php:92
+#: application/views/scripts/items/search-form.php:95
 msgid "Search By Collection"
 msgstr "按馆藏搜索"
 
 #: admin/themes/default/items/search-form.php:114
-#: application/views/scripts/items/search-form.php:106
+#: application/views/scripts/items/search-form.php:109
 msgid "Search By Type"
 msgstr "按类型搜索"
 
 #: admin/themes/default/items/search-form.php:131
-#: application/views/scripts/items/search-form.php:122
+#: application/views/scripts/items/search-form.php:125
 msgid "Search By User"
 msgstr "按用户搜索"
 
 #: admin/themes/default/items/search-form.php:148
-#: application/views/scripts/items/search-form.php:137
+#: application/views/scripts/items/search-form.php:140
 msgid "Search By Tags"
 msgstr "按标签搜索"
 
 #: admin/themes/default/items/search-form.php:163
-#: application/views/scripts/items/search-form.php:150
+#: application/views/scripts/items/search-form.php:153
 msgid "Public/Non-Public"
 msgstr "公开/不公开"
 
 #: admin/themes/default/items/search-form.php:172
-#: application/views/scripts/items/search-form.php:158
+#: application/views/scripts/items/search-form.php:161
 msgid "Only Public Items"
 msgstr "仅公开条目"
 
 #: admin/themes/default/items/search-form.php:173
-#: application/views/scripts/items/search-form.php:159
+#: application/views/scripts/items/search-form.php:162
 msgid "Only Non-Public Items"
 msgstr "仅非公开条目"
 
 #: admin/themes/default/items/search-form.php:183
-#: application/views/scripts/items/search-form.php:168
+#: application/views/scripts/items/search-form.php:171
 msgid "Featured/Non-Featured"
 msgstr "专题/非专题"
 
 #: admin/themes/default/items/search-form.php:192
-#: application/views/scripts/items/search-form.php:176
+#: application/views/scripts/items/search-form.php:179
 msgid "Only Featured Items"
 msgstr "仅专题条目"
 
 #: admin/themes/default/items/search-form.php:193
-#: application/views/scripts/items/search-form.php:177
+#: application/views/scripts/items/search-form.php:180
 msgid "Only Non-Featured Items"
 msgstr "仅非专题条目"
 
@@ -1391,7 +1393,7 @@ msgid "Browse Items by Tag"
 msgstr "通过标签浏览条目"
 
 #: admin/themes/default/items/tags.php:9
-#: admin/themes/default/tags/browse.php:65
+#: admin/themes/default/tags/browse.php:85
 msgid "There are no tags to display. You must first tag some items."
 msgstr "没有标签可以显示。您必须先给一些条目添加标签。"
 
@@ -1586,53 +1588,58 @@ msgstr "恢复默认属性"
 msgid "Test"
 msgstr "测试"
 
-#: admin/themes/default/tags/browse.php:3
+#: admin/themes/default/tags/browse.php:7
 msgid "Edit Tags"
 msgstr "编辑标签"
 
-#: admin/themes/default/tags/browse.php:16
+#: admin/themes/default/tags/browse.php:9
+msgid "Browse Tags"
+msgstr ""
+
+#: admin/themes/default/tags/browse.php:18
+#: application/views/scripts/search/index.php:12
+msgid "Record Type"
+msgstr "记录类型"
+
+#: admin/themes/default/tags/browse.php:24
 msgid "Editing Tags"
 msgstr "正在编辑标签"
 
-#: admin/themes/default/tags/browse.php:19
+#: admin/themes/default/tags/browse.php:27
 msgid "To view all items with a tag, click the number."
 msgstr "要浏览所有带标签的条目，请点击数字。"
 
-#: admin/themes/default/tags/browse.php:20
+#: admin/themes/default/tags/browse.php:28
 msgid ""
 "To edit the tag name, click the name and begin editing, and hit \"enter\" to"
 " save. To cancel an edit, click the ESC key or click away from the tag."
 msgstr "要编辑一个标签名时，点击标签名称开始编辑，点击“回车”保存。要取消编辑时，点击ESC键或者点击标签外区域。"
 
-#: admin/themes/default/tags/browse.php:21
+#: admin/themes/default/tags/browse.php:29
 msgid ""
 "To delete a tag, click the X. Deleting a tag will not delete the tagged "
 "items."
 msgstr "要删除标签，点击X。删除一个标签不会删除被该标签标记的条目。"
 
-#: admin/themes/default/tags/browse.php:29
+#: admin/themes/default/tags/browse.php:39
 msgid "Most"
 msgstr "最多"
 
-#: admin/themes/default/tags/browse.php:30
+#: admin/themes/default/tags/browse.php:40
 msgid "Least"
 msgstr "最少"
 
-#: admin/themes/default/tags/browse.php:31
+#: admin/themes/default/tags/browse.php:41
 msgid "Alphabetical"
 msgstr "字母顺序"
 
-#: admin/themes/default/tags/browse.php:32
+#: admin/themes/default/tags/browse.php:42
 msgid "Recent"
 msgstr "新近"
 
-#: admin/themes/default/tags/browse.php:43
-#: admin/themes/default/tags/browse.php:45
+#: admin/themes/default/tags/browse.php:53
+#: admin/themes/default/tags/browse.php:55
 msgid "Record Types"
-msgstr ""
-
-#: admin/themes/default/tags/browse.php:47
-msgid "s"
 msgstr ""
 
 #: admin/themes/default/themes/browse.php:15
@@ -2232,7 +2239,7 @@ msgstr "主题配置保存成功！"
 msgid "There was an error on the form. Please try again."
 msgstr "表单有个错误。请再次尝试。"
 
-#: application/controllers/UpgradeController.php:49
+#: application/controllers/UpgradeController.php:50
 msgid "SQL error in migration: "
 msgstr "迁移时的SQL错误："
 
@@ -2577,20 +2584,20 @@ msgstr "选择一个主页"
 msgid "Cannot find parent navigation page."
 msgstr "无法找到上一层导航页。"
 
-#: application/forms/Navigation.php:326
+#: application/forms/Navigation.php:325
 msgid "All navigation links must have URIs."
 msgstr "所有导航链接必须有URI。"
 
-#: application/forms/Navigation.php:339
+#: application/forms/Navigation.php:338
 msgid "All navigation links must have different URIs."
 msgstr "所有导航链接必须有不同的URI。"
 
-#: application/forms/Navigation.php:345
+#: application/forms/Navigation.php:344
 #, php-format
 msgid "Invalid URI for \"%s\" navigation link:  \"%s\""
 msgstr "\"%s\"导航链接的无效URI： \"%s\""
 
-#: application/forms/Navigation.php:378
+#: application/forms/Navigation.php:377
 msgid "Navigation links that have undeleteable sublinks cannot be deleted."
 msgstr "含有无法删除的子链接的导航链接是不能被删除的。"
 
@@ -2899,35 +2906,35 @@ msgstr "Omeka RSS摘要"
 msgid "Omeka Atom Feed"
 msgstr "Omkea Atom摘要"
 
-#: application/libraries/globals.php:2247
+#: application/libraries/globals.php:2262
 msgid "View"
 msgstr "视图"
 
-#: application/libraries/globals.php:2309
+#: application/libraries/globals.php:2324
 msgid "No Collection"
 msgstr "无馆藏"
 
-#: application/libraries/globals.php:2424
+#: application/libraries/globals.php:2439
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2441
+#: application/libraries/globals.php:2456
 msgid "Next Item &rarr;"
 msgstr "下一个条目&rarr;"
 
-#: application/libraries/globals.php:2461
+#: application/libraries/globals.php:2476
 msgid "&larr; Previous Item"
 msgstr "&larr;上一个条目"
 
-#: application/libraries/globals.php:2638
+#: application/libraries/globals.php:2653
 msgid "Browse All"
 msgstr "浏览所有"
 
-#: application/libraries/globals.php:2643
+#: application/libraries/globals.php:2658
 msgid "Browse by Tag"
 msgstr "标签浏览"
 
-#: application/libraries/globals.php:2905
+#: application/libraries/globals.php:2931
 msgid "No tags are available."
 msgstr "无标签可用。"
 
@@ -3295,10 +3302,6 @@ msgstr "获取记录URL时传递了无效操作。"
 msgid "Invalid return value while getting record URL."
 msgstr "获取记录URL时出现无效返回值。"
 
-#: application/views/scripts/collections/browse.php:24
-msgid "Contributors(s)"
-msgstr "其它责任人"
-
 #: application/views/scripts/collections/browse.php:31
 #, php-format
 msgid "View the items in %s"
@@ -3378,19 +3381,19 @@ msgid ""
 "messages</a>."
 msgstr "了解该错误更多详细信息，请参见Omeka Codex页面，<a href=\"http://omeka.org/codex/Retrieving_error_messages\">获取错误信息</a>。"
 
-#: application/views/scripts/index.php:14
+#: application/views/scripts/index.php:16
 msgid "Featured Item"
 msgstr "专题条目"
 
-#: application/views/scripts/index.php:22
+#: application/views/scripts/index.php:24
 msgid "Featured Collection"
 msgstr "专题馆藏"
 
-#: application/views/scripts/index.php:67
+#: application/views/scripts/index.php:69
 msgid "No recent items available."
 msgstr "无新近条目"
 
-#: application/views/scripts/index.php:71
+#: application/views/scripts/index.php:73
 msgid "View All Items"
 msgstr "查看所有条目"
 
@@ -3401,6 +3404,10 @@ msgstr "以此分类："
 #: application/views/scripts/items/random-featured.php:20
 msgid "No featured items are available."
 msgstr "无专题条目可用。"
+
+#: application/views/scripts/items/search-form.php:76
+msgid "Remove field"
+msgstr ""
 
 #: application/views/scripts/items/show.php:10
 msgid "Files"
@@ -3413,10 +3420,6 @@ msgstr "引用"
 #: application/views/scripts/search/index.php:2
 msgid "Search Omeka "
 msgstr "搜索Omeka"
-
-#: application/views/scripts/search/index.php:12
-msgid "Record Type"
-msgstr "记录类型"
 
 #: application/views/scripts/search/index.php:29
 msgid "Your query returned no results."
