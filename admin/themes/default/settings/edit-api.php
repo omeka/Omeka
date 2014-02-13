@@ -8,13 +8,26 @@ echo flash();
     <section class="seven columns alpha">
         <div class="field">
             <div class="two columns alpha">
-                <label for="search_record_types"><?php echo __('Enable API'); ?></label>
+                <label for="api_enable"><?php echo __('Enable API'); ?></label>
             </div>
             <div class="inputs five columns omega">
                 <p class="explanation"><?php echo __(
                     'Enable or disable the API by checking or uncheking the box below.'
                 ); ?></p>
                 <?php echo $this->formCheckbox('api_enable', null, array('checked' => (bool) get_option('api_enable'))); ?>
+            </div>
+        </div>
+        <div class="field">
+            <div class="two columns alpha">
+                <label for="api_filter_element_texts"><?php echo __('Filter Element Texts'); ?></label>
+            </div>
+            <div class="inputs five columns omega">
+                <p class="explanation"><?php echo __(
+                    'Filter element texts by checking the box below. When checked, the ' .
+                    'API will respect the display element and element text filters when ' .
+                    'outputting element text representations.'
+                ); ?></p>
+                <?php echo $this->formCheckbox('api_filter_element_texts', null, array('checked' => (bool) get_option('api_filter_element_texts'))); ?>
             </div>
         </div>
         <div class="field">
