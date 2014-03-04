@@ -31,6 +31,12 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
     protected $_showEmptyElements = true;
 
     /**
+     * Whether to include a heading for each Element Set.
+     * @var boolean
+     */
+    protected $_showElementSetHeadings = true;
+
+    /**
      * String to display if elements without text are shown.
      * @see self::$_showEmptyElements
      * @var string
@@ -96,8 +102,9 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
      */
     protected function _setOptions(array $options)
     {
-        // Set a default for show_empty_elements based on site setting
+        // Set default options based on site settings
         $this->_showEmptyElements = (bool) get_option('show_empty_elements');
+        $this->_showElementSetHeadings = (bool) get_option('show_element_set_headings');
         $this->_emptyElementString = __('[no text]');
 
         // Handle show_empty_elements option
@@ -107,6 +114,10 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
             } else {
                 $this->_showEmptyElements = (bool) $options['show_empty_elements'];
             }
+        }
+
+        if (array_key_exists('show_element_set_headings', $options)) {
+            $this->_showElementSetHeadings = (bool) $options['show_element_set_headings'];
         }
 
         if (array_key_exists('show_element_sets', $options)) {
@@ -251,7 +262,8 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
         // We're done preparing the data for display, so display it.
         return $this->_loadViewPartial(array(
             'elementsForDisplay' => $elementsForDisplay,
-            'record' => $this->_record
+            'record' => $this->_record,
+            'showElementSetHeadings' => $this->_showElementSetHeadings
         ));
     }
 

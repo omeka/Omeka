@@ -57,6 +57,11 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
             'label' => __('Show Empty Elements'),
             'class' => 'checkbox',
         ));
+
+        $this->addElement('checkbox', 'show_element_set_headings', array(
+            'label' => __('Show Element Set Headings'),
+            'class' => 'checkbox',
+        ));
         
         $this->addDisplayGroup(
             array(
@@ -67,7 +72,10 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
         );
 
         $this->addDisplayGroup(
-            array('per_page_admin', 'per_page_public', 'show_empty_elements'),
+            array(
+                'per_page_admin', 'per_page_public', 'show_empty_elements',
+                'show_element_set_headings',
+            ),
             'display-settings', array('legend' => __('Display Settings'))
         );
 
