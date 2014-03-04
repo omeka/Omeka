@@ -145,6 +145,7 @@ class SettingsController extends Omeka_Controller_AbstractActionController
         // Handle a form submission
         if ($this->getRequest()->isPost()) {
             set_option('api_enable', (bool) $_POST['api_enable']);
+            set_option('api_filter_element_texts', (bool) $_POST['api_filter_element_texts']);
             set_option('api_per_page', (int) $_POST['api_per_page']);
             $this->_helper->flashMessenger(__('The API configuration was successfully changed!'), 'success');
         }
