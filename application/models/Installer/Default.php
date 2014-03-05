@@ -124,7 +124,8 @@ class Installer_Default implements Installer_InstallerInterface
             Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME => Omeka_Navigation::getNavigationOptionValueForInstall(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME),
             'search_record_types' => serialize(get_search_record_types()), 
             'api_enable' => false, 
-            'api_per_page' => 50, 
+            'api_per_page' => 50,
+            'show_element_set_headings' => 1
         ));
         $task->install($this->_db);
     }

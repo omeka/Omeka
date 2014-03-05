@@ -71,7 +71,8 @@ class Installer_Task_OptionsTest extends PHPUnit_Framework_TestCase
             Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME => 'foobar', 
             'search_record_types' => 'foobar',
             'api_enable' => true,
-            'api_per_page' => 50
+            'api_per_page' => 50,
+            'show_element_set_headings' => '1',
         ));
         try {
             $task->install($this->db);
@@ -113,7 +114,8 @@ class Installer_Task_OptionsTest extends PHPUnit_Framework_TestCase
             Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME => 'foobar', 
             'search_record_types' => 'foobar',
             'api_enable' => true,
-            'api_per_page' => 50
+            'api_per_page' => 50,
+            'show_element_set_headings' => '1',
         ));
         $task->install($this->db);
         $this->profilerHelper->assertDbQuery(array(

@@ -40,7 +40,8 @@ class Installer_Task_Options implements Installer_TaskInterface
         Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME,
         'search_record_types',
         'api_enable',
-        'api_per_page'
+        'api_per_page',
+        'show_element_set_headings'
     );
     
     private $_options = array();
