@@ -297,6 +297,24 @@ function add_file_display_callback($fileIdentifiers, $callback, array $options =
 }
 
 /**
+ * Add a fallback image for files of the given mime type or type family.
+ *
+ * The fallback is used when there are no generated derivative images and one
+ * is requested (for example, by a call to file_image()).
+ *
+ * @package Omeka\Function\Plugin
+ * @uses Omeka_View_Helper_FileMarkup::addFallbackImage()
+ * @param string $mimeType The mime type this fallback is for, or the mime
+ *  "prefix" it is for (video, audio, etc.)
+ * @param string $image The name of the image to use, as would be passed to
+ *  img()
+ */
+function add_file_fallback_image($mimeType, $image)
+{
+    Omeka_View_Helper_FileMarkup::addFallbackImage($mimeType, $image);
+}
+
+/**
  * Apply a set of plugin filters to a given value.
  *
  * @package Omeka\Function\Plugin

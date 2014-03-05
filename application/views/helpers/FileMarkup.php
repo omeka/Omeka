@@ -224,7 +224,25 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
             'filenameAttributes' => array()
             )
         );
-      
+
+    /**
+     * Images to show when a file has no derivative.
+     *
+     * @var array
+     */
+    static protected $_fallbackImages = array(
+        'audio' => 'fallback-audio.png',
+        'image' => 'fallback-image.png',
+        'video' => 'fallback-video.png',
+    );
+
+    /**
+     * Fallback image used when no other fallbacks are appropriate.
+     *
+     * @var string
+     */
+    const GENERIC_FALLBACK_IMAGE = 'fallback-file.png';
+
     /**
      * Add MIME types and/or file extensions and associated callbacks to the 
      * list.
@@ -307,6 +325,19 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         // Add this callback's default options to the list.
         $key = self::_getCallbackKey($callback);
         self::$_callbackOptions[$key] = $defaultOptions;
+    }
+
+    /**
+     * Add a fallback image for the given mime type or type family.
+     *
+     * @param string $mimeType The mime type this fallback is for, or the mime
+     *  "prefix" it is for (video, audio, etc.)
+     * @param string $image The name of the image to use, as would be passed to
+     *  img()
+     */
+    public static function addFallbackImage($mimeType, $image)
+    {
+        self::$_fallbackImages[$mimeType] = $image;
     }
     
     /**
@@ -785,7 +816,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         if ($file->hasThumbnail()) {
             $uri = html_escape($file->getWebPath($format));
         } else {
-            $uri = img('fallback-file.png');
+            $uri = img($this->_getFallbackImage($file));
         }
         
         /** 
@@ -816,6 +847,30 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         $html = '<img src="' . $uri . '" '.tag_attributes($props) . '/>' . "\n";
         
         return $html;
+    }
+
+    /**
+     * Get the name of a fallback image to use for this file.
+     *
+     * The fallback used depends on the file's mime type.
+     *
+     * @see self::addFallbackImage()
+     * @param File $file The file to get a fallback for.
+     * @return string Name of the image to use.
+     */
+    protected function _getFallbackImage($file)
+    {
+        $mimeType = $file->mime_type;
+        if (isset(self::$_fallbackImages[$mimeType])) {
+            return self::$_fallbackImages[$mimeType];
+        }
+
+        $mimePrefix = substr($mimeType, 0, strpos($mimeType, '/'));
+        if (isset(self::$_fallbackImages[$mimePrefix])) {
+            return self::$_fallbackImages[$mimePrefix];
+        }
+
+        return self::GENERIC_FALLBACK_IMAGE;
     }
 
     /**
