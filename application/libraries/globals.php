@@ -2079,7 +2079,7 @@ function item_image($imageType, $props = array(), $index = 0, $item = null)
     if (!$item) {
         $item = get_current_record('item');
     }
-    $imageFile = get_db()->getTable('File')->findWithImages($item->id, $index);
+    $imageFile = $item->getFile($index);
     $fileMarkup = new Omeka_View_Helper_FileMarkup;
     return $fileMarkup->image_tag($imageFile, $props, $imageType);
 }

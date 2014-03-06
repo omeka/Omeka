@@ -134,6 +134,19 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     {
         return $this->getTable('File')->findByItem($this->id);
     }
+
+    /**
+     * Get a single File associated with this Item, by index.
+     *
+     * The default is to get the first file.
+     *
+     * @param integer $index
+     * @return File
+     */
+    public function getFile($index)
+    {
+        return $this->getTable('File')->findOneByItem($this->id, $index);
+    }
     
     /**
      * Get a set of Elements associated with this Item's ItemType.

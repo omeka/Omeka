@@ -61,7 +61,7 @@ echo item_search_filters();
                 <td class="item-info">
                 <?php endif; ?>
 
-                    <?php if (metadata('item', 'has thumbnail')): ?>
+                    <?php if (metadata('item', 'has files')): ?>
                     <?php echo link_to_item(item_image('square_thumbnail', array(), 0, $item), array('class' => 'item-thumbnail'), 'show', $item); ?>
                     <?php endif; ?>
 

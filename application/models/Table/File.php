@@ -152,6 +152,26 @@ class Table_File extends Omeka_Db_Table
     }
 
     /**
+     * Get a single file associated with an item, by index.
+     *
+     * @param integer $itemId
+     * @param integer $index
+     * @param string $sort The manner by which to order the files. For example:
+     *  'id': file id, 'filename' = alphabetical by filename. The default is
+     *  'order', following the user's specified order.
+     * @return File|null
+     */
+    public function findOneByItem($itemId, $index = 0, $sort = 'order')
+    {
+        $select = $this->getSelect();
+        $select->where('files.item_id = ?');
+        $this->_orderFilesBy($select, $sort);
+        $select->limit(1, $index);
+
+        return $this->fetchObject($select, array($itemId));
+    }
+
+    /**
      * Retrieve files for an item that has derivative images.
      *
      * @param integer $itemId The ID of the item to get images for.
