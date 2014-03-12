@@ -202,19 +202,24 @@ class Table_Element extends Omeka_Db_Table
         if (!array_key_exists('record_types', $options)) {
             $options['record_types'] = array('Item', 'All');
         }
-        $select = $this->getSelectForFindBy($options);
-        $select->reset(Zend_Db_Select::COLUMNS);
-        $select->from(array(), array(
-            'id' => 'elements.id', 
-            'name' => 'elements.name',
-            'set_name' => 'element_sets.name',
-        ));
+        if (get_option('show_element_set_headings')) {
+            $select = $this->getSelectForFindBy($options);
+            $select->reset(Zend_Db_Select::COLUMNS);
+            $select->from(array(), array(
+                'id' => 'elements.id',
+                'name' => 'elements.name',
+                'set_name' => 'element_sets.name',
+            ));
 
-        $elements = $this->fetchAll($select);
-        $options = array();
-        foreach ($elements as $element) {
-            $options[__($element['set_name'])][$element['id']] = __($element['name']);
+            $elements = $this->fetchAll($select);
+            $selectOptions = array();
+            foreach ($elements as $element) {
+                $selectOptions[__($element['set_name'])][$element['id']] = __($element['name']);
+            }
+        } else {
+            $selectOptions = parent::findPairsForSelectForm($options);
         }
-        return $options;
+
+        return $selectOptions;
     }
 }
