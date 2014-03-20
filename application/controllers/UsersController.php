@@ -166,6 +166,9 @@ class UsersController extends Omeka_Controller_AbstractActionController
         
         $user->setPostData($_POST);
         if ($user->save(false)) {
+            $ua = new UsersActivations;
+            $ua->user_id = $user->id;
+            $ua->save();
             if ($this->sendActivationEmail($user)) {
                 $this->_helper->flashMessenger(
                     __('The user "%s" was successfully added!', $user->username),
@@ -313,10 +316,7 @@ class UsersController extends Omeka_Controller_AbstractActionController
      */
     protected function sendActivationEmail($user)
     {
-        $ua = new UsersActivations;
-        $ua->user_id = $user->id;
-        $ua->save();
-        
+        $ua = $this->_helper->db->getTable('UsersActivations')->findByUser($user);
         // send the user an email telling them about their new user account
         $siteTitle  = get_option('site_title');
         $from       = get_option('administrator_email');
