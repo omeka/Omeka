@@ -137,6 +137,13 @@ class Omeka_Form_User extends Omeka_Form
                 'label' => __('Active?'),
                 'description' => __('Inactive users cannot log in to the site.')
             ));
+
+            if ($this->_user->active !== 1 ) {
+                $this->addElement('checkbox', 'resend_activation_email', array(
+                    'label' => __('Resend activation email?'),
+                    'description' => __('User activation email will be resent.')
+                ));
+            }
         }
         
         $this->addElement('submit', 'submit', array(

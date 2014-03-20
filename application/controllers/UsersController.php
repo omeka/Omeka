@@ -259,6 +259,11 @@ class UsersController extends Omeka_Controller_AbstractActionController
                 }
                 
                 $user->setPostData($form->getValues());
+                
+                if(isset($_POST['resend_activation_email'])) {
+                    $this->sendActivationEmail($user);
+                }
+                
                 if ($user->save(false)) {
                     $this->_helper->flashMessenger(
                         __('The user %s was successfully changed!', $user->username),
