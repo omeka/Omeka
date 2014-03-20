@@ -253,9 +253,10 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
                 $elementTextContainerElement = $this->_createElement('elementTextContainer');
                 foreach ($element['elementTexts'] as $elementTextId => $elementText) {
                     // elementText
-                    $elementText['text'] = str_replace("\f","&#xc;",$elementText['text']);
                     $elementTextElement = $this->_createElement('elementText', null, $elementTextId);
-                    $textElement = $this->_createElement('text', $elementText['text'], null, $elementTextElement);
+                    // Replace invalid control characters
+                    $text = preg_replace('#[\x00-\x08\x0B\x0C\x0E-\x1F]#', "\xef\xbf\xbd", $elementText['text']);
+                    $textElement = $this->_createElement('text', $text, null, $elementTextElement);
                     $elementTextContainerElement->appendChild($elementTextElement);
                 }
                 $elementElement->appendChild($elementTextContainerElement);
