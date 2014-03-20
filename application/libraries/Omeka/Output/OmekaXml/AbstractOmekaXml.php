@@ -253,6 +253,7 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
                 $elementTextContainerElement = $this->_createElement('elementTextContainer');
                 foreach ($element['elementTexts'] as $elementTextId => $elementText) {
                     // elementText
+                    $elementText['text'] = str_replace("\f","&#xc;",$elementText['text']);
                     $elementTextElement = $this->_createElement('elementText', null, $elementTextId);
                     $textElement = $this->_createElement('text', $elementText['text'], null, $elementTextElement);
                     $elementTextContainerElement->appendChild($elementTextElement);
