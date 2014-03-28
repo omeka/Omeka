@@ -350,10 +350,10 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      */
     public function createDerivatives()
     {        
-        if (!($convertDir = get_option('path_to_convert'))) {
+        if (!Zend_Registry::isRegistered('file_derivative_creator')) {
             return;
         }
-        $creator = new Omeka_File_Derivative_Image_Creator($convertDir);
+        $creator = Zend_Registry::get('file_derivative_creator');
         $creator->addDerivative('fullsize', get_option('fullsize_constraint'));
         $creator->addDerivative('thumbnail', get_option('thumbnail_constraint'));
         $creator->addDerivative('square_thumbnail', get_option('square_thumbnail_constraint'), true);

@@ -14,12 +14,20 @@
 class Omeka_File_Derivative_Image_Creator
 {
     const IMAGEMAGICK_CONVERT_COMMAND = 'convert';
-    const IMAGEMAGICK_IDENTIFY_COMMAND = 'identify';
 
     private $_convertPath; // path to the ImageMagick convert binary
-    private $_identifyPath; // path to the ImageMagick identify binary
     
     private $_derivatives = array();
+
+    /**
+     * @var array|null
+     */
+    private $_typeBlacklist;
+
+    /**
+     * @var array|null
+     */
+    private $_typeWhitelist;
         
     public function __construct($imDirPath)
     {
@@ -39,7 +47,6 @@ class Omeka_File_Derivative_Image_Creator
         if (($imDirPathClean = realpath($imDirPath)) && is_dir($imDirPath)) {
             $imDirPathClean = rtrim($imDirPathClean, DIRECTORY_SEPARATOR);
             $this->_convertPath = $imDirPathClean . DIRECTORY_SEPARATOR . self::IMAGEMAGICK_CONVERT_COMMAND;
-            $this->_identifyPath = $imDirPathClean . DIRECTORY_SEPARATOR . self::IMAGEMAGICK_IDENTIFY_COMMAND;
         } else {
             throw new Omeka_File_Derivative_Exception('ImageMagick is not properly configured: invalid directory given for the ImageMagick command!');
         }
@@ -53,16 +60,6 @@ class Omeka_File_Derivative_Image_Creator
     public function getConvertPath()
     {
         return $this->_convertPath;
-    }
-    
-    /**
-     * Get the full path to the ImageMagick 'identify' command.
-     *
-     * @return string
-     */
-    public function getIdentifyPath()
-    {
-        return $this->_identifyPath;
     }
     
     /**
@@ -83,7 +80,7 @@ class Omeka_File_Derivative_Image_Creator
             throw new RuntimeException("File at '$fromFilePath' is not readable.");
         }
         
-        if (!$this->_isDerivable($fromFilePath)) {
+        if (!$this->_isDerivable($fromFilePath, $mimeType)) {
             return false;
         }
         
@@ -141,6 +138,27 @@ class Omeka_File_Derivative_Image_Creator
     }
 
     /**
+     * Set the type blacklist.
+     *
+     * @param array|null $blacklist An array of mime types to blacklist.
+     */
+    public function setTypeBlacklist($blacklist)
+    {
+        $this->_typeBlacklist = $blacklist;
+    }
+
+    /**
+     * Set the type whitelist.
+     *
+     * @param array|null $whitelist An array of mime types to whitelist.
+     */
+    public function setTypeWhitelist($whitelist)
+    {
+        $this->_typeWhitelist = $whitelist;
+    }
+
+
+    /**
      * Generate a derivative image from an existing file stored in Omeka.  
      * 
      * This image will be generated based on a constraint given in pixels.  For 
@@ -149,11 +167,10 @@ class Omeka_File_Derivative_Image_Creator
      * sides, the image will not be resized.
      * 
      * Derivative images will only be generated for files with mime types
-     * that can be identified with ImageMagick's 'identify' command
+     * that pass any configured blacklist and/or whitelist and can be processed
+     * by the convert binary.
      * 
      * @throws Omeka_File_Derivative_Exception
-     * @param string Path to original file.
-     * @param string Path to newly generated derivative file.
      * @param string Command line arguments to the ImageMagick binary. 
      * It assumes these command line arguments are already escaped as shell arguments
      */
@@ -169,7 +186,7 @@ class Omeka_File_Derivative_Image_Creator
         self::executeCommand($cmd, $status, $output, $errors);
         
         if ($status) {
-            throw new Omeka_File_Derivative_Exception("ImageMagick failed with status code $status. Error output:\n$errors");
+            _log("ImageMagick failed with status code $status.", Zend_Log::ERR);
         }
         if (!empty($errors)) {
             _log("Error output from ImageMagick:\n$errors", Zend_Log::WARN);
@@ -201,46 +218,59 @@ class Omeka_File_Derivative_Image_Creator
     }
 
     /**
-     * Returns true only if ImageMagick is able to make derivative images of that file based
-     * upon whether or not it can be identified by ImageMagick's 'identify' binary. Otherwise returns false. 
+     * Returns whether Omeka can make derivatives of the given file.
+     *
+     * The file must be readable and pass the mime whitelist/blacklist.
      * 
      * @param string $filePath
+     * @param string $mimeType
      * @return boolean
      */
-    private function _isDerivable($filePath)
+    private function _isDerivable($filePath, $mimeType)
     {
-        // Next we'll check that it is identifiable by ImageMagick, and isn't on a blacklist
-        return (file_exists($filePath) 
-                && is_readable($filePath) 
-                && $this->_isIdentifiable($filePath));
+        return (is_readable($filePath) 
+                && $this->_passesBlacklist($mimeType)
+                && $this->_passesWhitelist($mimeType));
     }
 
+    /**
+     * Return whether the given type is allowed by the blacklist.
+     *
+     * If no blacklist is specified all types will pass.
+     *
+     * @param string $mimeType
+     * @return bool
+     */
+    private function _passesBlacklist($mimeType)
+    {
+        if (!isset($this->_typeBlacklist)) {
+            return true;
+        }
+
+        return !in_array($mimeType, $this->_typeBlacklist);
+    }
 
     /**
-     * Returns true only if the file can be identified by ImageMagick's 'identify' binary 
-     * 
-     * @param string $filePath
-     * @return boolean
+     * Return whether the given type is allowed by the whitelist.
+     *
+     * If no whitelist is specified all types will pass, but an
+     * empty whitelist will reject all types.
+     *
+     * @param string $mimeType
+     * @return bool
      */
-    private function _isIdentifiable($filePath)
+    private function _passesWhitelist($mimeType)
     {
-        $cmd = join(' ', array(
-            escapeshellcmd($this->_identifyPath),
-            escapeshellarg($filePath . '[0]'), // first page of multi-page images.
-        ));
-        
-        self::executeCommand($cmd, $status, $output, $errors);
-        
-        if (!empty($errors)) {
-            _log("Error output from ImageMagick:\n$errors", Zend_Log::WARN);
+        if (!isset($this->_typeWhitelist)) {
+            return true;
         }
-        
-        return ($status == 0);
+
+        return in_array($mimeType, $this->_typeWhitelist);
     }
 
     /**
      * Determine whether or not the path given to ImageMagick is valid.
-     * Both the convert and identify binaries must be within the directory and executable.
+     * The convert binary must be within the directory and executable.
      * 
      * @param string
      * @return boolean
@@ -253,31 +283,26 @@ class Omeka_File_Derivative_Image_Creator
         
         // Append the convert binary to the given path.
         $imPath = rtrim($dirToIm, DIRECTORY_SEPARATOR);
-        $convertPath = $imPath . DIRECTORY_SEPARATOR . Omeka_File_Derivative_Image_Creator::IMAGEMAGICK_CONVERT_COMMAND;
-        $identifyPath = $imPath . DIRECTORY_SEPARATOR . Omeka_File_Derivative_Image_Creator::IMAGEMAGICK_IDENTIFY_COMMAND;
+        $convertPath = $imPath . DIRECTORY_SEPARATOR . self::IMAGEMAGICK_CONVERT_COMMAND;
         
-        //Make sure the convert and identify files are both executable
-        if (!is_executable($convertPath) || !is_executable($identifyPath)) {
+        // Make sure the convert file is executable
+        if (!is_executable($convertPath)) {
             return false;
         }
                         
         // Attempt to run the ImageMagick binary with the version argument
         // If you try to run it without any arguments, it returns an error code
-        $cmd_convert = $convertPath . ' -version';
-        $cmd_identify = $identifyPath . ' -version';
+        $cmd = $convertPath . ' -version';
         
-        self::executeCommand($cmd_convert, $status_convert, $output_convert, $errors_convert);
-        self::executeCommand($cmd_identify, $status_identify, $output_identify, $errors_identify);        
+        self::executeCommand($cmd, $status, $output, $errors);
         
-        
-        // A return value of 0 indicates the convert and identify binaries are working correctly.
-        return ($status_convert == 0 && $status_identify == 0);
+        // A return value of 0 indicates the convert binary is working correctly.
+        return $status == 0;
     }
 
 
     /**
      * Retrieve the path to the directory containing ImageMagick's convert utility.
-     * Th
      * 
      * Uses the 'which' command-line utility to detect the path to 'convert'. 
      * Note that this will only work if the convert utility is in PHP's PATH and
