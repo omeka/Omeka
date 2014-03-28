@@ -13,6 +13,8 @@
  */
 class Omeka_Application_Resource_Filederivatives extends Zend_Application_Resource_ResourceAbstract
 {
+    const DEFAULT_STRATEGY = 'Omeka_File_Derivative_Strategy_ExternalImageMagick';
+
     public function init()
     {
         $bootstrap = $this->getBootstrap();
@@ -28,11 +30,24 @@ class Omeka_Application_Resource_Filederivatives extends Zend_Application_Resour
             $derivativeOptions = array();
         }
 
-        if (!($convertPath = get_option('path_to_convert'))) {
-            return null;
+        $strategyClass = empty($config->strategy) ? self::DEFAULT_STRATEGY : $config->strategy;
+        $strategyOptions = empty($config->strategyOptions) ? array() : $config->strategyOptions->toArray();
+
+        if ($strategyClass == self::DEFAULT_STRATEGY) {
+            if (!($convertPath = get_option('path_to_convert'))) {
+                return null;
+            }
+            $strategyOptions['path_to_convert'] = $convertPath;
         }
 
-        $creator = new Omeka_File_Derivative_Image_Creator($convertPath);
+        $strategy = new $strategyClass;
+        if (!$strategy instanceof Omeka_File_Derivative_StrategyInterface) {
+            throw new Omeka_File_Derivative_Exception('Invalid strategy configured.');
+        }
+        $strategy->setOptions($strategyOptions);
+
+        $creator = new Omeka_File_Derivative_Creator;
+        $creator->setStrategy($strategy);
 
         if (isset($config->typeBlacklist)) {
             $creator->setTypeBlacklist($config->typeBlacklist->toArray());
