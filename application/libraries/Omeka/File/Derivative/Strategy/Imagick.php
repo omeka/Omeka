@@ -54,5 +54,6 @@ class Omeka_File_Derivative_Strategy_Imagick
         }
 
         $imagick->writeImage($destPath);
+        $imagick->clear();
     }
 }
