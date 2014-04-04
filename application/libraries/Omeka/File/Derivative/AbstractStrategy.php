@@ -35,13 +35,16 @@ abstract class Omeka_File_Derivative_AbstractStrategy
     /**
      * Get the value for the specified option.
      *
+     * @param string $name Name of the option to get
+     * @param mixed $default Default value to return if the option is missing.
+     *  Defaults to null.
      * @return mixed
      */
-    public function getOption($name) {
+    public function getOption($name, $default = null) {
         if (array_key_exists($name, $this->_options)) {
             return $this->_options[$name];
         } else {
-            return null;
+            return $default;
         }
     }
 }
