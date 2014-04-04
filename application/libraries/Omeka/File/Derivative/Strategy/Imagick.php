@@ -37,7 +37,7 @@ class Omeka_File_Derivative_Strategy_Imagick
             $imagick = new Imagick($sourcePath . '[0]');
         } catch (ImagickException $e) {
             _log("Imagick failed to open the file. Details:\n$e", Zend_Log::ERR);
-            return;
+            return false;
         }
 
         $imagick->setBackgroundColor('white');
@@ -55,5 +55,6 @@ class Omeka_File_Derivative_Strategy_Imagick
 
         $imagick->writeImage($destPath);
         $imagick->clear();
+        return true;
     }
 }

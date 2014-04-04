@@ -73,7 +73,9 @@ class Omeka_File_Derivative_Creator
         foreach ($this->_derivatives as $type => $sizeConstraint) {
             $destPath = rtrim($workingDir, DIRECTORY_SEPARATOR ) 
                          . DIRECTORY_SEPARATOR . $type . '_' . $derivFilename;
-            $this->_strategy->createImage($sourcePath, $destPath, $type, $sizeConstraint, $mimeType);
+            if (!$this->_strategy->createImage($sourcePath, $destPath, $type, $sizeConstraint, $mimeType)) {
+                return false;
+            }
         }
         
         return true;

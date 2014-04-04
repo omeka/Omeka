@@ -46,13 +46,17 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick
         ));
         
         self::executeCommand($cmd, $status, $output, $errors);
-        
-        if ($status) {
-            _log("ImageMagick failed with status code $status.", Zend_Log::ERR);
-        }
+
         if (!empty($errors)) {
             _log("Error output from ImageMagick:\n$errors", Zend_Log::WARN);
         }
+
+        if ($status) {
+            _log("ImageMagick failed with status code $status.", Zend_Log::ERR);
+            return false;
+        }
+
+        return true;
     }
     
     /**
