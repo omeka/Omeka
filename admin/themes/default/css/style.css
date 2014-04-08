@@ -1838,7 +1838,14 @@ header nav {
         color: #ffffff !important;
         text-shadow: -1px -1px 1px rgba(0,0,0,.05);
     }
-                
+
+#file-list img {
+    max-height: 24px;
+    width: auto;
+    float: left;
+    margin: -3px 10px 0 0;
+    border: 1px solid #D6D5C2;
+}
 
 /* Edit Item Types
 ================================================== */

@@ -5,6 +5,7 @@
         <?php foreach( $item->Files as $key => $file ): ?>
             <li class="file">
                 <div class="sortable-item">
+                    <?php echo file_image('square_thumbnail', array(), $file); ?>
                     <?php echo link_to($file, 'show', html_escape($file->original_filename), array()); ?>
                     <?php echo $this->formHidden("order[{$file->id}]", $file->order, array('class' => 'file-order')); ?>
                     <ul class="action-links">
