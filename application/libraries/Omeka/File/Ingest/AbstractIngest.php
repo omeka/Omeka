@@ -244,14 +244,18 @@ abstract class Omeka_File_Ingest_AbstractIngest
         // static $mimeType property during validation. If that validator has 
         // been disabled (from the admin settings menu, for example), set the 
         // MIME type here.
-        if (!self::$mimeType) {
+        if (self::$mimeType) {
+            $mimeType = self::$mimeType;
+            // Make sure types don't leak between files.
+            self::$mimeType = null;
+        } else {
             $detect = new Omeka_File_MimeType_Detect($newFilePath);
-            self::$mimeType = $detect->detect();
+            $mimeType = $detect->detect();
         }
         $file = new File;
         try {
             $file->original_filename = $oldFilename;
-            $file->mime_type = self::$mimeType;
+            $file->mime_type = $mimeType;
             
             $file->setDefaults($newFilePath);
             
