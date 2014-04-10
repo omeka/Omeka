@@ -3291,7 +3291,7 @@ function theme_logo()
     if ($logo) {
         $storage = Zend_Registry::get('storage');
         $uri = $storage->getUri($storage->getPathByType($logo, 'theme_uploads'));
-        return '<img src="' . $uri . '" title="' . option('site_title') . '" />';
+        return '<img src="' . $uri . '" alt="' . option('site_title') . '" />';
     }
 }
 
