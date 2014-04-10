@@ -2,13 +2,12 @@
 if ($this->pageCount > 1):
     $getParams = $_GET;
 ?>
-
-<ul class="pagination">
+<ul class="pagination" role="navigation" aria-label="<?php __('Pagination'); ?>">
     <?php if (isset($this->previous)): ?>
     <!-- Previous page link --> 
     <li class="pagination_previous">
         <?php $getParams['page'] = $previous; ?>
-        <a href="<?php echo html_escape($this->url(array(), null, $getParams)); ?>"><?php echo __('&lt;'); ?></a>
+        <a rel="prev" href="<?php echo html_escape($this->url(array(), null, $getParams)); ?>"><?php echo __('Previous Page'); ?></a>
     </li>
     <?php endif; ?>
     
@@ -30,8 +29,14 @@ if ($this->pageCount > 1):
             echo $this->formHidden($key,$value);
         }
     }
+
+    // Manually create this input to allow an omitted ID
+    $pageInput = '<input type="text" name="page" title="'
+                . html_escape(__('Current Page'))
+                . '" value="'
+                . html_escape($this->current) . '">';
+    echo __('%s of %s', $pageInput, $this->last);
     ?>
-    <?php echo __('%s of %s', $this->formText('page', $this->current), $this->last); ?>
     </form>
     </li>
     
@@ -39,7 +44,7 @@ if ($this->pageCount > 1):
     <!-- Next page link -->
     <li class="pagination_next">
         <?php $getParams['page'] = $next; ?>
-        <a href="<?php echo html_escape($this->url(array(), null, $getParams)); ?>"><?php echo __('&gt;'); ?></a>
+        <a rel="next" href="<?php echo html_escape($this->url(array(), null, $getParams)); ?>"><?php echo __('Next Page'); ?></a>
     </li>
     <?php endif; ?>
 </ul>
