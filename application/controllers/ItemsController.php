@@ -81,8 +81,7 @@ class ItemsController extends Omeka_Controller_AbstractActionController
     {
         // Get all the element sets that apply to the item.
         $this->view->elementSets = $this->_getItemElementSets();
-        $pathToConvert = get_option('path_to_convert');
-        if (empty($pathToConvert) && is_allowed('Settings', 'edit')) {
+        if (!Zend_Registry::isRegistered('file_derivative_creator') && is_allowed('Settings', 'edit')) {
             $this->_helper->flashMessenger('The path to Image Magick has not been set. No derivative images will be created. If you would like Omeka to create derivative images, please add the path to your settings form.');
         }
         parent::editAction();
@@ -142,8 +141,7 @@ class ItemsController extends Omeka_Controller_AbstractActionController
     {
         // Get all the element sets that apply to the item.
         $this->view->elementSets = $this->_getItemElementSets();
-        $pathToConvert = get_option('path_to_convert');
-        if (empty($pathToConvert) && is_allowed('Settings', 'edit')) {
+        if (!Zend_Registry::isRegistered('file_derivative_creator') && is_allowed('Settings', 'edit')) {
             $this->_helper->flashMessenger('The path to Image Magick has not been set. No derivative images will be created. If you would like Omeka to create derivative images, please add the path to your settings form.');
         }
         return parent::addAction();

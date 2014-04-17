@@ -171,7 +171,7 @@ class SettingsController extends Omeka_Controller_AbstractActionController
     {
         $this->_helper->viewRenderer->setNoRender(true);
         $imPath = $this->_getParam('path-to-convert');
-        $isValid = Omeka_File_Derivative_Image_Creator::isValidImageMagickPath($imPath);
+        $isValid = Omeka_File_Derivative_Strategy_ExternalImageMagick::isValidImageMagickPath($imPath);
         $this->getResponse()->setBody(
             $isValid ? '<div class="success">' . __('The ImageMagick directory path works.') . '</div>' 
                      : '<div class="error">' . __('The ImageMagick directory path does not work.') . '</div>');
