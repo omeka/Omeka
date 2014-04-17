@@ -18,9 +18,7 @@ $_SERVER['SCRIPT_NAME'] = '';
 require_once (dirname(dirname(dirname(__FILE__))) . '/bootstrap.php');
 require_once 'globals.php';
 
-// Workaround for outdated ZF test code and PHP 5.4+
-// On older versions, this is equivalent to E_ALL
-error_reporting(E_ALL & ~E_STRICT);
+error_reporting(E_ALL);
 
 ini_set('display_errors', '1');
 
