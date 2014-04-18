@@ -3357,3 +3357,15 @@ function is_allowed($resource, $privilege)
     // User implements Zend_Acl_Role_Interface, so it can be checked directly by the ACL.
     return $acl->isAllowed($user, $resource, $privilege);
 }
+
+/**
+ * Add a shortcode
+ *
+ * @uses Omeka_View_Helper_Shortcodes::shortcodeCallbacks()
+ * @param $callback shortcode name
+ * @param $function function name
+ */
+function add_shortcode($shortcodeName, $function)
+{
+    return Omeka_View_Helper_Shortcodes::addShortcode($shortcodeName, $function);
+}
