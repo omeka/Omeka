@@ -228,6 +228,10 @@ img { border: 0; }
         font-size: 100%;
     }
 
+    input.color {
+        font-family: monospace;
+    }
+
     select {
         min-width: 120px;
         background: #e2e2e2; /* Fallback */
