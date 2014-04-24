@@ -45,8 +45,14 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
         if (file_exists($themeConfigIni) && is_readable($themeConfigIni)) {
 
             // get the theme configuration form specification
-            $formElementsIni = new Zend_Config_Ini($themeConfigIni, 'config');
-            $configIni = new Zend_Config(array('elements' => $formElementsIni));
+            $formIni = new Zend_Config_Ini($themeConfigIni);
+            $configSource = array(
+                'elements' => $formIni->config
+            );
+            if (isset($formIni->groups)) {
+                $configSource['displayGroups'] = $formIni->groups;
+            }
+            $configIni = new Zend_Config($configSource);
 
             // create an omeka form from the configuration file
             $this->setConfig($configIni);
@@ -62,7 +68,7 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
                 if ($element instanceof Zend_Form_Element_File) {
                     $this->_processFileElement($element);
                 }
-            }        
+            }
 
             // set all of the form element values            
             foreach($themeConfigValues as $key => $value) {
