@@ -16,7 +16,7 @@ class Omeka_Validate_HexColor extends Zend_Validate_Abstract
     const MSG_BAD_COLOR = 'msgUri';
 
     protected $_messageTemplates = array(
-        self::MSG_BAD_COLOR => '"%value" is not a valid color. A color must be a hash (#) followed by 6 hex digits.',
+        self::MSG_BAD_COLOR => '"%value%" is not a valid color. A color must be a hash (#) followed by 6 hex digits.',
     );
 
     public function isValid($value)
