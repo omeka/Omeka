@@ -21,6 +21,8 @@ class Omeka_Form_User extends Omeka_Form
     
     private $_user;
     
+    private $_usersActivations;
+    
     public function init()
     {
         parent::init();
@@ -139,10 +141,14 @@ class Omeka_Form_User extends Omeka_Form
             ));
 
             if ($this->_user->active !== 1 ) {
-                $this->addElement('checkbox', 'resend_activation_email', array(
-                    'label' => __('Resend activation email?'),
-                    'description' => __('User activation email will be resent.')
-                ));
+                $options = array('label' => __('Resend activation email?'));
+                if($this->_usersActivations) {
+                    $added = new DateTime($this->_usersActivations->added);
+                    $options['description'] = __('User activation email will be resent. (Activation has been pending since %s.)', $added->format('r')); 
+                } else {
+                    $options['description'] = __('User activation email will be resent.');
+                }
+                $this->addElement('checkbox', 'resend_activation_email', $options);
             }
         }
         
@@ -173,5 +179,10 @@ class Omeka_Form_User extends Omeka_Form
     public function setUser(User $user)
     {
         $this->_user = $user;
+    }
+    
+    public function setUsersActivations($ua)
+    {
+        $this->_usersActivations = $ua;
     }
 }
