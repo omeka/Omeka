@@ -9,7 +9,7 @@ env:
 
 install:
   - pear config-set auto_discover 1
-  - pear install pear.phpunit.de/PHPUnit-3.7.35
+  - if [ "${TRAVIS_PHP_VERSION:0:3}" != "5.2" ]; then pear install pear.phpunit.de/PHPUnit-3.7.35; fi
   - phpenv rehash
 
 before_script:
