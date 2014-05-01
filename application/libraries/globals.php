@@ -1275,10 +1275,13 @@ function web_path_to($file)
  */
 function random_featured_collection()
 {
-    return get_view()->partial(
-        'collections/random-featured.php', 
-        array('collection' => get_random_featured_collection())
-    );
+    $collection = get_random_featured_collection();
+    if ($collection) {
+        $html = get_view()->partial('collections/single.php', array('collection' => $collection));
+    } else {
+        $html = '<p>' . __('No featured collections are available.') . '</p>';
+    }
+    return $html;
 }
 
 /**
@@ -2221,10 +2224,16 @@ function get_random_featured_items($num = 5, $hasImage = null)
  */
 function random_featured_items($count = 5, $hasImage = null)
 {
-    return get_view()->partial(
-        'items/random-featured.php', 
-        array('items' => get_random_featured_items($count, $hasImage), 'count' => $count)
-    );
+    $items = get_random_featured_items($count, $hasImage);
+    if ($items) {
+        $html = '';
+        foreach ($items as $item) {
+            $html .= get_view()->partial('items/single.php', array('item' => $item));
+        }
+    } else {
+        $html = '<p>' . __('No featured items are available.') . '</p>';
+    }
+    return $html;
 }
 
 /**
