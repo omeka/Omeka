@@ -9,7 +9,7 @@ env:
 
 install:
   - pear channel-discover pear.phpunit.de
-  - pear install pear.phpunit.de/PHPUnit
+  - pear install pear.phpunit.de/PHPUnit-3.7.35
   - phpenv rehash
 
 before_script:
