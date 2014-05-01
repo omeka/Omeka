@@ -2211,6 +2211,27 @@ function get_random_featured_items($num = 5, $hasImage = null)
 }
 
 /**
+ * Return HTML for recent items.
+ *
+ * @package Omeka\Function\View\Item
+ * @uses get_random_featured_items()
+ * @param int $count
+ * @return string
+ */
+function recent_items($count = 10)
+{
+    $items = get_recent_items($count);
+    if ($items) {
+        $html = '';
+        foreach ($items as $item) {
+            $html .= get_view()->partial('items/single.php', array('item' => $item));
+        }
+    } else {
+        $html = '<p>' . __('No recent items available.') . '</p>';
+    }
+    return $html;
+}
+/**
  * Return HTML for random featured items.
  * 
  * @package Omeka\Function\View\Item
