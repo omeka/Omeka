@@ -7,6 +7,11 @@ php:
 env:
   - DB=mysql
 
+install:
+  - pear channel-discover pear.phpunit.de
+  - pear install pear.phpunit.de/PHPUnit
+  - phpenv rehash
+
 before_script:
   - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS omeka_test;" -uroot; fi
   - mv application/config/config.ini.changeme application/config/config.ini
