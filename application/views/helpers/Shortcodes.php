@@ -20,8 +20,9 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
      */
     protected static $shortcodeCallbacks = array(
         'recent_items' => 'Omeka_View_Helper_Shortcodes::shortcodeRecentItems',
-        'featured_item' => 'Omeka_View_Helper_Shortcodes::shortcodeFeaturedItem',
-        'items' => 'Omeka_View_Helper_Shortcodes::shortcodeItem',
+        'featured_items' => 'Omeka_View_Helper_Shortcodes::shortcodeFeaturedItems',
+        'items' => 'Omeka_View_Helper_Shortcodes::shortcodeItems',
+        'collections' => 'Omeka_View_Helper_Shortcodes::shortcodeCollections',
         );
 
     /**
@@ -135,31 +136,17 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
      * @param array $args
      * @return string
      */
-    public static function shortcodeRecentItems($args)
+    public static function shortcodeRecentItems($args, $view)
     {
         if (!isset($args['num'])) {
             $args['num'] = '5';
         }
-        set_loop_records('items', get_recent_items($args['num']));
-        if (has_loop_records('items')) {
-            $recentItems = '<div id="recent-items">';
-            $recentItems .= '<div class="items-list">';
-            foreach (loop('items') as $item) {
-                $recentItems .= '<div class="item">';
-                $recentItems .= '<h3>' . link_to_item() . '</h3>';
-                if (metadata('item', 'has thumbnail')) {
-                    $recentItems .= '<div class="item-img">' . item_image('square_thumbnail') . '</div>';
-                }
-                if ($desc = metadata('item', array('Dublin Core', 'Description'), array('snippet'=>150))) {
-                    $recentItems .= '<div class="item-description">' . $desc  . link_to_item('see more',(array('class'=>'show'))) . '</div>';
-                }
-                $recentItems .= '</div><!--end item-->';
-            }
-            $recentItems .= '</div><!-- end items-list-->';
-            $recentItems .= '</div><!--end recent-items-->';
-            return $recentItems;
-        }
-        else return 'No recent items.';
+
+        $args['sort'] = 'added';
+
+        $args['order'] = 'd';
+
+        return self::shortcodeItems($args, $view);
     }
 
     /**
@@ -168,7 +155,7 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
      * @param array $args
      * @return string
      */
-    public static function shortcodeFeaturedItem($args)
+    public static function shortcodeFeaturedItems($args, $view)
     {
         if (!isset($args['num'])) {
             $args['num'] = '1';
@@ -178,13 +165,17 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
         }
         $args['is_featured'] = 1;
 
-        $featuredItem = '<div id="featured-item">';
-        $featuredItem .= random_featured_items($args['num'], $args['has_image']);
-        $featuredItem .= '</div><!--end featured-item-->';
-        return $featuredItem;
+        return self::shortcodeItems($args, $view);
     }
 
-    public static function shortcodeItem($args)
+    /**
+     * Shortcode for printing one or more items
+     *
+     * @param array $args
+     * @return string
+     */
+
+    public static function shortcodeItems($args, $view)
     {
         $params = array();
 
@@ -212,6 +203,14 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
             $params['range'] = $args['ids'];
         }
 
+        if (isset($args['sort'])) {
+            $params['sort_field'] = $args['sort'];
+        }
+
+        if (isset($args['order'])) {
+            $params['sort_dir'] = $args['order'];
+        }
+
         if (isset($args['num'])) {
             $limit = $args['num'];
         } else {
@@ -220,11 +219,69 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
 
         $items = get_records('Item', $params, $limit);
 
-        $foo = '';
+        $content = '';
         foreach ($items as $item) {
-           $foo .= $item->id;
+           $content .= $view->partial('items/single.php', array('item' => $item));
         }
 
-        return $foo;
+        return $content;
+    }
+
+    /**
+     * Shortcode for printing one or more collections
+     *
+     * @param array $args
+     * @return string
+     */
+
+    public static function shortcodeCollections($args) {
+
+        $params = array();
+
+        if (isset($args['sort'])) {
+            $params['sort_field'] = $args['sort'];
+        }
+
+        if (isset($args['order'])) {
+            $params['sort_dir'] = $args['order'];
+        }
+
+        if (isset($args['ids'])) {
+            $params['range'] = $args['ids'];
+        }
+
+        if (isset($args['is_featured'])) {
+            $params['featured'] = $args['is_featured'];
+        }
+
+        if (isset($args['num'])) {
+            $limit = $args['num'];
+        } else {
+            $limit = 10; 
+        }
+
+        $collections = get_records('Collection', $params, $limit);
+
+        $content = '';
+        foreach ($collections as $collection) {
+            
+        }
+    }
+
+    /**
+     * Shortcode for printing recent collections
+     *
+     * @param array $args
+     * @return string
+     * @uses  shortcodeCollections()
+     */
+
+    public static function shortcodeRecentCollections($args) {
+
+        $args['sort'] = 'added';
+
+        $args['order'] = 'd';
+
+        return self::shortcodeCollections($args);
     }
 }
