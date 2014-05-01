@@ -21,6 +21,7 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
     protected static $shortcodeCallbacks = array(
         'recent_items' => 'Omeka_View_Helper_Shortcodes::shortcodeRecentItems',
         'featured_item' => 'Omeka_View_Helper_Shortcodes::shortcodeFeaturedItem',
+        'items' => 'Omeka_View_Helper_Shortcodes::shortcodeItem',
         );
 
     /**
@@ -73,7 +74,7 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
         }
         $args = $this->parseShortcodeAttributes($matches[2]);
 
-        return call_user_func(self::$shortcodeCallbacks[$shortcodeName], $args);
+        return call_user_func(self::$shortcodeCallbacks[$shortcodeName], $args, $this->view);
     }
 
     /**
@@ -136,7 +137,10 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
      */
     public static function shortcodeRecentItems($args)
     {
-        set_loop_records('items', get_recent_items($args['limit']));
+        if (!isset($args['num'])) {
+            $args['num'] = '5';
+        }
+        set_loop_records('items', get_recent_items($args['num']));
         if (has_loop_records('items')) {
             $recentItems = '<div id="recent-items">';
             $recentItems .= '<div class="items-list">';
@@ -172,9 +176,55 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
         if (!isset($args['has_image'])) {
             $args['has_image'] = null;
         }
+        $args['is_featured'] = 1;
+
         $featuredItem = '<div id="featured-item">';
         $featuredItem .= random_featured_items($args['num'], $args['has_image']);
         $featuredItem .= '</div><!--end featured-item-->';
         return $featuredItem;
+    }
+
+    public static function shortcodeItem($args)
+    {
+        $params = array();
+
+        if (isset($args['is_featured'])) {
+            $params['featured'] = $args['is_featured'];
+        }
+
+        if (isset($args['has_image'])) {
+            $params['hasImage'] = $args['has_image'];
+        }
+
+        if (isset($args['collection'])) {
+            $params['collection'] = $args['collection'];
+        }
+
+        if (isset($args['tags'])) {
+            $params['tags'] = $args['tags'];
+        }
+
+        if (isset($args['user'])) {
+            $params['users'] = $args['user'];
+        }
+
+        if (isset($args['ids'])) {
+            $params['range'] = $args['ids'];
+        }
+
+        if (isset($args['num'])) {
+            $limit = $args['num'];
+        } else {
+            $limit = 10; 
+        }
+
+        $items = get_records('Item', $params, $limit);
+
+        $foo = '';
+        foreach ($items as $item) {
+           $foo .= $item->id;
+        }
+
+        return $foo;
     }
 }
