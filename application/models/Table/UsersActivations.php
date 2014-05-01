@@ -16,4 +16,12 @@ class Table_UsersActivations extends Omeka_Db_Table
     {
         return $this->fetchObject($this->getSelect()->where('url = ?', $url)->limit(1));
     }
+    
+    public function findByUser($user)
+    {
+        $select = $this->getSelect();
+        $select->where('user_id = ?', $user->id);
+        $select->limit(1);
+        return $this->fetchObject($select);
+    }
 }

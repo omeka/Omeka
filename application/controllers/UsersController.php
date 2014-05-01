@@ -192,6 +192,7 @@ class UsersController extends Omeka_Controller_AbstractActionController
     public function editAction()
     {
         $user = $this->_helper->db->findById();
+        $ua = $this->_helper->db->getTable('UsersActivations')->findByUser($user);
         $currentUser = $this->getCurrentUser();
         
         $changePasswordForm = new Omeka_Form_ChangePassword;
@@ -202,7 +203,7 @@ class UsersController extends Omeka_Controller_AbstractActionController
             $changePasswordForm->removeElement('current_password');
         }
         
-        $form = $this->_getUserForm($user);
+        $form = $this->_getUserForm($user, $ua);
         $form->setSubmitButtonText(__('Save Changes'));
         $form->setDefaults(array(
             'username' => $user->username,
@@ -257,8 +258,27 @@ class UsersController extends Omeka_Controller_AbstractActionController
                     $this->_helper->flashMessenger(__('There was an invalid entry on the form. Please try again.'), 'error');
                     return;
                 }
+                //check to see if user has been manually deactivated. if so, delete ua (if exists)
+                if($user->active == 1 && ($form->getValue('active') == 0)) {
+                    //couldn't really do a migration to remove useless ua's, so just to be safe double-check
+                    //that the ua exists
+                    if($ua) {
+                        $ua->delete();
+                    }
+                }
+                //reverse situation from above. If manually activating, also delete the ua
+                if($user->active == 0 && ($form->getValue('active') == 1)) {
+                    if($ua) {
+                        $ua->delete();
+                    }
+                }
                 
                 $user->setPostData($form->getValues());
+                
+                if(isset($_POST['resend_activation_email']) && $_POST['resend_activation_email'] == 1) {
+                    $this->sendActivationEmail($user);
+                }
+                
                 if ($user->save(false)) {
                     $this->_helper->flashMessenger(
                         __('The user %s was successfully changed!', $user->username),
@@ -285,6 +305,14 @@ class UsersController extends Omeka_Controller_AbstractActionController
         parent::browseAction();
     }
     
+    public function deleteAction()
+    {
+        $user = $this->_helper->db->findById();
+        $ua = $this->_helper->db->getTable('UsersActivations')->findByUser($user);
+        $ua->delete();
+        parent::deleteAction();
+    }
+    
     protected function _getDeleteSuccessMessage($record)
     {
         $user = $record;
@@ -308,10 +336,14 @@ class UsersController extends Omeka_Controller_AbstractActionController
      */
     protected function sendActivationEmail($user)
     {
+        
+        $ua = $this->_helper->db->getTable('UsersActivations')->findByUser($user);
+        if($ua) {
+            $ua->delete();
+        }
         $ua = new UsersActivations;
         $ua->user_id = $user->id;
         $ua->save();
-        
         // send the user an email telling them about their new user account
         $siteTitle  = get_option('site_title');
         $from       = get_option('administrator_email');
@@ -439,7 +471,7 @@ class UsersController extends Omeka_Controller_AbstractActionController
         $this->_helper->redirector->gotoUrl('');
     }
     
-    protected function _getUserForm(User $user)
+    protected function _getUserForm(User $user, $ua = null)
     {
         $hasActiveElement = $user->exists()
             && $this->_helper->acl->isAllowed('change-status', $user);
@@ -447,7 +479,8 @@ class UsersController extends Omeka_Controller_AbstractActionController
         $form = new Omeka_Form_User(array(
             'hasRoleElement'    => $this->_helper->acl->isAllowed('change-role', $user),
             'hasActiveElement'  => $hasActiveElement,
-            'user'              => $user
+            'user'              => $user,
+            'usersActivations'  => $ua
         ));
         fire_plugin_hook('users_form', array('form' => $form, 'user' => $user));
         return $form;
