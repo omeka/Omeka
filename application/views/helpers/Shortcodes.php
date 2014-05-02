@@ -19,10 +19,12 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
      * @var array
      */
     protected static $shortcodeCallbacks = array(
+        'items' => 'Omeka_View_Helper_Shortcodes::shortcodeItems',
         'recent_items' => 'Omeka_View_Helper_Shortcodes::shortcodeRecentItems',
         'featured_items' => 'Omeka_View_Helper_Shortcodes::shortcodeFeaturedItems',
-        'items' => 'Omeka_View_Helper_Shortcodes::shortcodeItems',
         'collections' => 'Omeka_View_Helper_Shortcodes::shortcodeCollections',
+        'recent_collections' => 'Omeka_View_Helper_Shortcodes::shortcodeRecentCollections',
+        'featured_collections' => 'Omeka_View_Helper_Shortcodes::shortcodeFeaturedCollections',
         );
 
     /**
@@ -236,7 +238,7 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
      * @return string
      */
 
-    public static function shortcodeCollections($args) {
+    public static function shortcodeCollections($args, $view) {
 
         $params = array();
 
@@ -266,8 +268,10 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
 
         $content = '';
         foreach ($collections as $collection) {
-            
+            $content .= $view->partial('collections/single.php', array('collection' => $collection));
         }
+
+        return $content;
     }
 
     /**
@@ -278,12 +282,37 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
      * @uses  shortcodeCollections()
      */
 
-    public static function shortcodeRecentCollections($args) {
-
+    public static function shortcodeRecentCollections($args, $view) {
+        
+        if (!isset($args['num'])) {
+            $args['num'] = '5';
+        }
+        
         $args['sort'] = 'added';
 
         $args['order'] = 'd';
 
-        return self::shortcodeCollections($args);
+        return self::shortcodeCollections($args, $view);
+    }
+
+        /**
+     * Shortcode for printing featured collections
+     *
+     * @param array $args
+     * @return string
+     * @uses  shortcodeCollections()
+     */
+    
+    public static function shortcodeFeaturedCollections($args, $view) {
+
+        if (!isset($args['num'])) {
+            $args['num'] = '1';
+        }
+
+        $args['is_featured'] = '1';
+
+        $args['sort'] = 'random';
+
+        return self::shortcodeCollections($args, $view);
     }
 }
