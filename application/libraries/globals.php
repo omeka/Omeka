@@ -1278,6 +1278,7 @@ function random_featured_collection()
     $collection = get_random_featured_collection();
     if ($collection) {
         $html = get_view()->partial('collections/single.php', array('collection' => $collection));
+        release_object($collection);
     } else {
         $html = '<p>' . __('No featured collections are available.') . '</p>';
     }
@@ -2225,6 +2226,7 @@ function recent_items($count = 10)
         $html = '';
         foreach ($items as $item) {
             $html .= get_view()->partial('items/single.php', array('item' => $item));
+            release_object($item);
         }
     } else {
         $html = '<p>' . __('No recent items available.') . '</p>';
@@ -2250,6 +2252,7 @@ function random_featured_items($count = 5, $hasImage = null)
         $html = '';
         foreach ($items as $item) {
             $html .= get_view()->partial('items/single.php', array('item' => $item));
+            release_object($item);
         }
     } else {
         $html = '<p>' . __('No featured items are available.') . '</p>';
