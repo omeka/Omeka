@@ -165,6 +165,8 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
         }
         $args['is_featured'] = 1;
 
+        $args['sort'] = 'random';
+
         return self::shortcodeItems($args, $view);
     }
 
