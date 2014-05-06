@@ -947,7 +947,7 @@ header nav {
         text-align: center;
     }
     
-    .drawer:after { content: "\f112"; }
+    .drawer:after { content: "\f0da"; }
         
         .delete-element:link, .delete-element:active,
         .delete-element:hover, .delete-element:visited,
@@ -965,14 +965,14 @@ header nav {
 
 .delete-element { display: inline-block; }
 
-    .delete-element:after { content: "\e678"; }
+    .delete-element:after { content: "\f00d"; }
     
 .undo-delete { display: none; }
 
     .undo-delete:after { 
         content: "\f112"; 
         font-size: 12px;
-        line-height: 1.8125em;
+        line-height: 2em;
         color: #fff;
     }
 
