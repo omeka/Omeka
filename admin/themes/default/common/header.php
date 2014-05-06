@@ -13,7 +13,7 @@
     <title><?php echo implode(' &middot; ', $titleParts); ?></title>
 
 <?php
-    queue_css_file(array('style', 'skeleton', 'jquery-ui'));
+    queue_css_file(array('iconfonts','style', 'skeleton', 'jquery-ui'));
     queue_css_file('media/960min', 'only screen and (min-width: 960px)');
     queue_css_file('media/768min', 'only screen and (min-width: 768px) and (max-width: 959px)');
     queue_css_file('media/767max', 'only screen and (max-width: 767px)');

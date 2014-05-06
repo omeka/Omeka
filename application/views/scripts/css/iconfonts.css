@@ -1,0 +1,7 @@
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('iconfonts/fontawesome-webfont.eot?v=4.0.3');
+    src: url('iconfonts/fontawesome-webfont.eot?#iefix&v=4.0.3') format('embedded-opentype'), url('iconfonts/fontawesome-webfont.woff?v=4.0.3') format('woff'), url('iconfonts/fontawesome-webfont.ttf?v=4.0.3') format('truetype'), url('iconfonts/fontawesome-webfont.svg?v=4.0.3#fontawesomeregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
