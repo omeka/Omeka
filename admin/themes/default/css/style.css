@@ -28,19 +28,21 @@
         #Browse Element Sets
         #Edit Element Sets
         #Browse Themes
-        #System Information */
+        #System Information 
+        #Upgrade
+    #Iconfonts */
 
 
 /* Basic Styles
 ================================================== */
 
 @font-face {
-    font-family: 'icomoon';
-    src:url('iconfonts/icomoon.eot');
-    src:url('iconfonts/icomoon.eot?#iefix') format('embedded-opentype'),
-        url('iconfonts/icomoon.woff') format('woff'),
-        url('iconfonts/icomoon.ttf') format('truetype'),
-        url('iconfonts/icomoon.svg#icomoon') format('svg');
+    font-family: 'entypo';
+    src:url('iconfonts/entypo.eot');
+    src:url('iconfonts/entypo.eot?#iefix') format('embedded-opentype'),
+        url('iconfonts/entypo.woff') format('woff'),
+        url('iconfonts/entypo.ttf') format('truetype'),
+        url('iconfonts/entypo.svg#entypo') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -665,13 +667,13 @@ footer {
     }
 
     #advanced-search:after {
-        content: "\22";
-        font-family: "icomoon";
-        font-size: 9px;
+        content: "\e680";
+        font-family: "entypo";
+        font-size: 12px;
         display: block;
         text-indent: 0;
         text-align: center;
-        margin-top: -1.3125em;
+        margin: -1.125em 0 0 -.25em;
     }
 
 .subhead {
@@ -947,8 +949,8 @@ header nav {
 
     .drawer:after, .delete-element:after, .undo-delete:after {
         display: inline-block;
-        font-family: "icomoon";
-        font-size: 10px;
+        font-family: "entypo";
+        font-size: 16px;
         height: 20px;
         width: 20px;
         text-indent: 0;
@@ -956,7 +958,7 @@ header nav {
         text-align: center;
     }
     
-    .drawer:after { content: "\27"; }
+    .drawer:after { content: "\e6cc"; }
         
         .delete-element:link, .delete-element:active,
         .delete-element:hover, .delete-element:visited,
@@ -974,13 +976,13 @@ header nav {
 
 .delete-element { display: inline-block; }
 
-    .delete-element:after { content: "\21"; }
+    .delete-element:after { content: "\e678"; }
     
 .undo-delete { display: none; }
 
     .undo-delete:after { 
-        content: "\23"; 
-        font-size: 13px;
+        content: "\e60a"; 
+        font-size: 12px;
         line-height: 1.8125em;
         color: #fff;
     }
@@ -1977,8 +1979,8 @@ header nav {
 }
 
 .tag-list li .delete-tag a:after, .tag-list li .remove-tag a:after, .undo-remove-tag a:after {
-    content: "\21";
-    font-family: "icomoon";
+    content: "\e678";
+    font-family: "entypo";
     height: 100%;
     width: 100%;
     background-color: rgba(0, 0, 0, .3);
@@ -1991,17 +1993,20 @@ header nav {
     color:#99C05C;
     display: block;
     position: relative;
-    font-size: 9px;
+    font-size: 16px;
     top: 0;
     float: left;
-    text-indent: 4px;
-    line-height: 17px;
+    text-indent: .5px;
+    line-height: 18px;
     text-shadow: none;
 }
 
 .undo-remove-tag a:after {
-    content: "\23";
+    content: "\e60a";
     color: #BB8282; 
+    font-size: 12px;
+    text-indent: 2px;
+    line-height: 17px;
 }
     
 #tags-nav { 
