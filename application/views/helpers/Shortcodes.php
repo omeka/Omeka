@@ -238,7 +238,8 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
      * @return string
      */
 
-    public static function shortcodeCollections($args, $view) {
+    public static function shortcodeCollections($args, $view) 
+    {
 
         $params = array();
 
@@ -282,7 +283,8 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
      * @uses  shortcodeCollections()
      */
 
-    public static function shortcodeRecentCollections($args, $view) {
+    public static function shortcodeRecentCollections($args, $view) 
+    {
         
         if (!isset($args['num'])) {
             $args['num'] = '5';
@@ -303,7 +305,8 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
      * @uses  shortcodeCollections()
      */
     
-    public static function shortcodeFeaturedCollections($args, $view) {
+    public static function shortcodeFeaturedCollections($args, $view) 
+    {
 
         if (!isset($args['num'])) {
             $args['num'] = '1';
