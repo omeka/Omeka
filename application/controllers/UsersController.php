@@ -95,7 +95,7 @@ class UsersController extends Omeka_Controller_AbstractActionController
     {
         $siteTitle = get_option('site_title');
         
-        $mail = new Zend_Mail();
+        $mail = new Zend_Mail('UTF-8');
         $mail->addTo($toEmail);                
         $mail->addHeader('X-Mailer', 'PHP/' . phpversion());
         
@@ -354,7 +354,7 @@ class UsersController extends Omeka_Controller_AbstractActionController
                     . __('%s Administrator', $siteTitle);
         $subject    = __('Activate your account with the %s repository', $siteTitle);
         
-        $mail = new Zend_Mail();
+        $mail = new Zend_Mail('UTF-8');
         $mail->setBodyText($body);
         $mail->setFrom($from, "$siteTitle Administrator");
         $mail->addTo($user->email, $user->name);
