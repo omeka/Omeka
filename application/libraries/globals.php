@@ -1127,18 +1127,11 @@ function head_js($includeDefaults = true)
 
     if ($includeDefaults) {
         $dir = 'javascripts';
-        $config = Zend_Registry::get('bootstrap')->getResource('Config');
-        $useInternalAssets = isset($config->theme->useInternalAssets)
-                       ? (bool) $config->theme->useInternalAssets
-                       : false;
-        $headScript->prependScript('jQuery.noConflict();');
-        if ($useInternalAssets) {
-            $headScript->prependFile(src('vendor/jquery-ui', $dir, 'js'))
-                       ->prependFile(src('vendor/jquery', $dir, 'js'));
-        } else {
-            $headScript->prependFile('//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
-                       ->prependFile('//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js');
-        }
+        $headScript->prependScript('jQuery.noConflict();')
+                   ->prependScript('window.jQuery.ui || document.write(' . js_escape(js_tag('vendor/jquery-ui')) . ')')
+                   ->prependFile('//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js')
+                   ->prependScript('window.jQuery || document.write(' . js_escape(js_tag('vendor/jquery')) . ')')
+                   ->prependFile('//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js');
     }
     return $headScript;
 }
@@ -1200,7 +1193,7 @@ function img($file, $dir = 'images')
 function js_tag($file, $dir = 'javascripts')
 {
     $href = src($file, $dir, 'js');
-    return '<script type="text/javascript" src="' . html_escape($href) . '" charset="utf-8"></script>'."\n";
+    return '<script type="text/javascript" src="' . html_escape($href) . '" charset="utf-8"></script>';
 }
 
 /**

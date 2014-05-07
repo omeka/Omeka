@@ -19,16 +19,7 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
     public $internalDefaults;
 
     public function setUp()
-    { 
-        $this->externalDefaults = array(
-            '//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js',
-            '//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js'
-        );
-        $this->internalDefaults = array(
-            self::ASSET_PATH_ROOT . '/javascripts/vendor/jquery.js',
-            self::ASSET_PATH_ROOT . '/javascripts/vendor/jquery-ui.js',
-        );
-        
+    {
         // Load a view object to allow get_view() to work.
         $this->view = new Omeka_View;
         Zend_Registry::set('view', $this->view);
@@ -68,19 +59,6 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals('', $this->_getJsOutput(false));
         
-    }
-
-    public function testDefaults()
-    {
-        $this->_assertScriptsIncluded($this->_getJsOutput(), $this->externalDefaults);
-    }
-
-    public function testInternalDefaults()
-    {
-        $configArray['theme']['useInternalAssets'] = true;
-        Zend_Registry::get('bootstrap')->getContainer()->config = new Zend_Config($configArray);
-
-        $this->_assertScriptsIncluded($this->_getJsOutput(), $this->internalDefaults);
     }
 
     public function testQueueJs()
