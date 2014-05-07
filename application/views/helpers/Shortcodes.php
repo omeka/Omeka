@@ -25,6 +25,7 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
         'collections' => 'Omeka_View_Helper_Shortcodes::shortcodeCollections',
         'recent_collections' => 'Omeka_View_Helper_Shortcodes::shortcodeRecentCollections',
         'featured_collections' => 'Omeka_View_Helper_Shortcodes::shortcodeFeaturedCollections',
+        'file' => 'Omeka_View_Helper_Shortcodes::shortcodeFile',
         );
 
     /**
@@ -317,5 +318,32 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
         $args['sort'] = 'random';
 
         return self::shortcodeCollections($args, $view);
+    }
+
+    public static function shortcodeFile($args)
+    {
+        $recordId = $args['id'];
+
+        $props = array();
+
+        if (isset($args['size'])) {
+            $props['imageSize'] = $args['size'];
+        }
+
+        if (isset($args['link_file'])) {
+            $props['linkToFile'] = $args['link_file'];
+        }
+
+        if (isset($args['width'])) {
+            $props['width'] = $args['width'];
+        }
+
+        if (isset($args['height'])) {
+            $props['height'] = $args['height'];
+        }
+
+        $file = get_record_by_id('File', $recordId);
+
+        return file_markup($file, $props);
     }
 }
