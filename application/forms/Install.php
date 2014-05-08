@@ -28,8 +28,20 @@ class Omeka_Form_Install extends Omeka_Form
             
         $this->addElement('text', 'username', array(
             'label' => __('Username'),
-            'description' => __('only alphanumeric characters are allowed'), 
-            'validators' => array(array('StringLength', false, array(User::USERNAME_MIN_LENGTH, User::USERNAME_MAX_LENGTH)), 'Alnum'), 
+            'description' => __('only alphanumeric characters or email addresses are allowed'), 
+            'validators' => array(
+                array('StringLength', false, array(User::USERNAME_MIN_LENGTH, User::USERNAME_MAX_LENGTH)), 
+                array('validator' => 'Regex', 'breakChainOnFailure' => true, 'options' =>
+                    array(
+                        //pattern via http://stackoverflow.com/questions/15650336/regex-for-valid-email-address-or-valid-alpha-numeric-check
+                        'pattern' => "/^([_a-zA-Z0-9\'-]+(\.[_a-zA-Z0-9\'-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.(([0-9]{1,3})|([a-zA-Z]{2,3})|(name))|[a-zA-Z0-9]+)$/",
+                        'messages' => array(
+                            Zend_Validate_Regex::NOT_MATCH =>
+                                __('Username must contain only letters and numbers, or be an email address.')
+                        )
+                    )
+                )
+            ), 
             'required' => true
         ));
         
