@@ -2062,6 +2062,31 @@ function get_previous_item($item=null)
 }
 
 /**
+ * Return an image tag for a record.
+ *
+ * @package Omeka\Function\View
+ * @uses Omeka_View_Helper_FileMarkup::image_tag()
+ * @param Omeka_Record_AbstractRecord|string $record
+ * @param string $imageType
+ * @param array $props
+ * @return string
+ */
+function record_image($record, $imageType, $props = array())
+{
+    if (is_string($record)) {
+        $record = get_current_record($record);
+    }
+
+    if (!($record instanceof Omeka_Record_AbstractRecord)) {
+        throw new InvalidArgumentException('An Omeka record must be passed to record_image.');
+    }
+
+    $imageFile = $record->getFile();
+    $fileMarkup = new Omeka_View_Helper_FileMarkup;
+    return $fileMarkup->image_tag($imageFile, $props, $imageType);
+}
+
+/**
  * Return a customized item image tag.
  *
  * @package Omeka\Function\View\Item
