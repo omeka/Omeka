@@ -19,5 +19,5 @@
         <p><?php echo link_to_item_search(__('Advanced Search (Items only)')); ?></p>
     </fieldset>
     <?php endif; ?>
-    <?php echo $this->formButton('submit_search', 'Search', array('type' => 'submit')); ?>
+    <?php echo $this->formButton('submit_search', __('Search'), array('type' => 'submit')); ?>
 </form>
