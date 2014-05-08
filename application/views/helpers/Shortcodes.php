@@ -344,6 +344,8 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
 
         $file = get_record_by_id('File', $recordId);
 
-        return file_markup($file, $props);
+        if ($file){
+            return file_markup($file, $props);
+        }
     }
 }
