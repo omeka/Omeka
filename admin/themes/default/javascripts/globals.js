@@ -88,27 +88,24 @@ if (!Omeka) {
 
     Omeka.showAdvancedForm = function () {
         var advancedForm = $('#advanced-form');
-        if (advancedForm) {
-            $('#search-form button').addClass("blue button with-advanced").after('<a href="#" id="advanced-search" class="blue button">Advanced Search</a>');
-            $('#query').css('width','65%');
-            advancedForm.click(function (event) {
-                event.stopPropagation();
+        $('#search-form').addClass("with-advanced");
+        $('#search-form button').addClass("blue button");
+        advancedForm.before('<a href="#" id="advanced-search" class="blue button">Advanced Search</a>');
+        advancedForm.click(function (event) {
+            event.stopPropagation();
+        });
+        $("#advanced-search").click(function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            advancedForm.fadeToggle();
+            $(document).click(function (event) {
+                if (event.target.id == 'query') {
+                    return;
+                }
+                advancedForm.fadeOut();
+                $(this).unbind(event);
             });
-            $("#advanced-search").click(function (event) {
-                event.preventDefault();
-                event.stopPropagation();
-                advancedForm.fadeToggle();
-                $(document).click(function (event) {
-                    if (event.target.id == 'query') {
-                        return;
-                    }
-                    advancedForm.fadeOut();
-                    $(this).unbind(event);
-                });
-            });
-        } else {
-            $('#search-form input[type=submit]').addClass("blue button");
-        }
+        });
     };
 
     Omeka.addReadyCallback = function (callback, params) {
