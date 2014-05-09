@@ -322,6 +322,8 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
 
     public static function shortcodeFile($args)
     {
+        $ZendBooleanFilter = new Zend_Filter_Boolean(Zend_Filter_Boolean::FALSE_STRING);
+
         $recordId = $args['id'];
 
         $props = array();
@@ -331,7 +333,7 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
         }
 
         if (isset($args['link_file'])) {
-            $props['linkToFile'] = $args['link_file'];
+            $props['linkToFile'] = $ZendBooleanFilter->filter($args['link_file']);
         }
 
         if (isset($args['width'])) {
