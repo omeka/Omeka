@@ -137,6 +137,7 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
      * Shortcode for printing recently added items.
      *
      * @param array $args
+     * @param Omeka_View $view
      * @return string
      */
     public static function shortcodeRecentItems($args, $view)
@@ -156,6 +157,7 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
      * Shortcode for printing featured items.
      *
      * @param array $args
+     * @param Omeka_View $view
      * @return string
      */
     public static function shortcodeFeaturedItems($args, $view)
@@ -177,9 +179,9 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
      * Shortcode for printing one or more items
      *
      * @param array $args
+     * @param Omeka_View $view
      * @return string
      */
-
     public static function shortcodeItems($args, $view)
     {
         $params = array();
@@ -236,12 +238,11 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
      * Shortcode for printing one or more collections
      *
      * @param array $args
+     * @param Omeka_View $view
      * @return string
      */
-
     public static function shortcodeCollections($args, $view) 
     {
-
         $params = array();
 
         if (isset($args['sort'])) {
@@ -279,14 +280,13 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
     /**
      * Shortcode for printing recent collections
      *
+     * @uses self::shortcodeCollections()
      * @param array $args
+     * @param Omeka_View $view
      * @return string
-     * @uses  shortcodeCollections()
      */
-
     public static function shortcodeRecentCollections($args, $view) 
     {
-        
         if (!isset($args['num'])) {
             $args['num'] = '5';
         }
@@ -298,17 +298,16 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
         return self::shortcodeCollections($args, $view);
     }
 
-        /**
+    /**
      * Shortcode for printing featured collections
      *
+     * @uses self::shortcodeCollections()
      * @param array $args
+     * @param Omeka_View $view
      * @return string
-     * @uses  shortcodeCollections()
      */
-    
     public static function shortcodeFeaturedCollections($args, $view) 
     {
-
         if (!isset($args['num'])) {
             $args['num'] = '1';
         }
@@ -320,7 +319,14 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
         return self::shortcodeCollections($args, $view);
     }
 
-    public static function shortcodeFile($args)
+    /**
+     * Shortcode for displaying a single file.
+     *
+     * @param array $args
+     * @param Omeka_View $view
+     * @return string
+     */
+    public static function shortcodeFile($args, $view)
     {
         $recordId = $args['id'];
 
@@ -331,16 +337,16 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
         }
 
         if (isset($args['link_file'])) {
-
-            if ( $args['link_file'] == 'false') {
-                $args['link_file'] = false;
+            switch ($args['link_file']) {
+                case 'true':
+                    $props['linkToFile'] = true;
+                    break;
+                case 'false':
+                    $props['linkToFile'] = false;
+                    break;
+                default:
+                    $props['linkToFile'] = $args['link_file'];
             }
-
-            if ( $args['link_file'] == 'true') {
-                $args['link_file'] = true;
-            }
-
-            $props['linkToFile'] = $args['link_file'];
         }
 
         if (isset($args['width'])) {
