@@ -89,7 +89,7 @@ if (!Omeka) {
     Omeka.showAdvancedForm = function () {
         var advancedForm = $('#advanced-form');
         if (advancedForm) {
-            $('#search-form input[type=submit]').addClass("blue button with-advanced").after('<a href="#" id="advanced-search" class="blue button">Advanced Search</a>');
+            $('#search-form button').addClass("blue button with-advanced").after('<a href="#" id="advanced-search" class="blue button">Advanced Search</a>');
             $('#query').css('width','65%');
             advancedForm.click(function (event) {
                 event.stopPropagation();

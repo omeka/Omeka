@@ -633,7 +633,7 @@ footer {
                 width: 65%;
             }
     
-    #search-form input[type=submit] {
+    #search-form button {
         width: 25%;
         height: 27px;
         padding: 0 5px;
@@ -642,7 +642,7 @@ footer {
         left: 75%;
     }
     
-            #search-form input[type=submit].with-advanced {
+            #search-form button.with-advanced {
                 left: 65%;
             }
     
