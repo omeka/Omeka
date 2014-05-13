@@ -203,7 +203,7 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
         }
 
         if (isset($args['user'])) {
-            $params['users'] = $args['user'];
+            $params['user'] = $args['user'];
         }
 
         if (isset($args['ids'])) {
@@ -251,10 +251,6 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
 
         if (isset($args['order'])) {
             $params['sort_dir'] = $args['order'];
-        }
-
-        if (isset($args['ids'])) {
-            $params['range'] = $args['ids'];
         }
 
         if (isset($args['is_featured'])) {
