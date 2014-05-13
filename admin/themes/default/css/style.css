@@ -846,6 +846,35 @@ header nav {
             padding: 0 7px;
         }
         
+        .pagination_next a,
+        .pagination_previous a {
+            text-indent: -9999px;
+            position: relative;
+            height: 24px;
+            width: 24px;
+        }
+        
+        .pagination_next a:after,
+        .pagination_previous a:after {
+            font-family: "FontAwesome";
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 24px;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .pagination_next a:after {
+            text-indent: 0;
+            content: "\f105";
+        }
+        
+        .pagination_previous a:after {
+            text-indent: -3px;
+            content: "\f104";
+        }
+        
         .pagination_next { margin: 0 0 0 10px; }
 
         .pagination_previous { margin: 0 10px 0 0; }
