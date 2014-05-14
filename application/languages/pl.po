@@ -6,7 +6,7 @@
 # tombeczka <dominik@broniszewski.pl>, 2013
 # platanus <marcin.mielnicki@gmail.com>, 2013
 # miniol <michal.seweryniak@gmail.com>, 2012
-# p <poczciwiec@gmail.com>, 2012
+# Jan Nowak <inactive+poczciwiec@transifex.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"

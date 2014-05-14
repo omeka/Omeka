@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2014-02-04 10:21+0000\n"
+"PO-Revision-Date: 2014-03-04 07:47+0000\n"
 "Last-Translator: Shvar <Shvar@rsl.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/omeka/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -65,7 +65,7 @@ msgstr "Тема ресурса"
 #: application/forms/ItemTypes.php:150
 #: application/views/scripts/collections/browse.php:17
 msgid "Description"
-msgstr "описание"
+msgstr "Описание"
 
 #. Dublin Core: Description element description
 msgid "An account of the resource"
@@ -129,7 +129,7 @@ msgstr "Источник"
 
 #. Dublin Core: Source element description
 msgid "A related resource from which the described resource is derived"
-msgstr "Ресурс, связанный с описанным ресурсом, получен"
+msgstr "Связанный ресурс, из которого получен описываемый ресурс"
 
 #. Dublin Core: Language element name
 msgid "Language"
@@ -439,7 +439,7 @@ msgstr "Общественный"
 #: admin/themes/default/items/quick-filters.php:8
 #: admin/themes/default/items/show.php:53
 msgid "Featured"
-msgstr "Характерный"
+msgstr "Отмеченный"
 
 #: admin/themes/default/collections/browse.php:2
 #: application/libraries/Omeka/Navigation.php:149
@@ -1078,11 +1078,11 @@ msgstr "Не общественный"
 
 #: admin/themes/default/items/batch-edit.php:61
 msgid "Featured?"
-msgstr "обработанный?"
+msgstr "Отмеченный?"
 
 #: admin/themes/default/items/batch-edit.php:66
 msgid "Not Featured"
-msgstr "Не характерный"
+msgstr "Не отмеченный"
 
 #: admin/themes/default/items/batch-edit.php:74
 #: admin/themes/default/items/item-type-form.php:3
@@ -1331,17 +1331,17 @@ msgstr "Только закрытые документы"
 #: admin/themes/default/items/search-form.php:183
 #: application/views/scripts/items/search-form.php:171
 msgid "Featured/Non-Featured"
-msgstr "Популярные/Непопулярные"
+msgstr "Отмеченные/Неотмеченные"
 
 #: admin/themes/default/items/search-form.php:192
 #: application/views/scripts/items/search-form.php:179
 msgid "Only Featured Items"
-msgstr "Только популярные документы"
+msgstr "Только отмеченные документы"
 
 #: admin/themes/default/items/search-form.php:193
 #: application/views/scripts/items/search-form.php:180
 msgid "Only Non-Featured Items"
-msgstr "Только непопулярные документы"
+msgstr "Только не отмеченные документы"
 
 #: admin/themes/default/items/search-form.php:203
 msgid "Search for items"
@@ -1520,7 +1520,7 @@ msgstr "После включения API, приложения могут по�
 
 #: admin/themes/default/settings/edit-item-type-elements.php:12
 msgid "edit a specific item type"
-msgstr "редактировать особый тип документа"
+msgstr "Редактировать особый тип документа"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:11
 #, php-format
@@ -1554,7 +1554,7 @@ msgstr "Настроить, какие типы записей будут дос
 #: admin/themes/default/settings/edit-search.php:23
 #: admin/themes/default/settings/edit-search.php:41
 msgid "Index Records"
-msgstr "Индексные записи"
+msgstr "Индексировать записи"
 
 #: admin/themes/default/settings/edit-search.php:26
 msgid "Click on the \"Index Records\" button to re-index your records."
@@ -2051,7 +2051,7 @@ msgstr "Пользователю не разрешено изменять дос
 
 #: application/controllers/ItemsController.php:304
 msgid "User is not allowed to modify featured status of items."
-msgstr "Пользователь не может изменять особенности статуса документов."
+msgstr "Пользователь не может изменять статус отменченных документов."
 
 #: application/controllers/ItemsController.php:311
 msgid "User is not allowed to delete selected items."
@@ -3310,7 +3310,7 @@ msgstr "Просмотреть документ в %s"
 
 #: application/views/scripts/collections/random-featured.php:11
 msgid "No featured collections are available."
-msgstr "Избранные коллекции отсутствуют."
+msgstr "Отмеченные коллекции отсутствуют."
 
 #: application/views/scripts/collections/show.php:15
 #, php-format
@@ -3384,11 +3384,11 @@ msgstr "Чтобы узнать более детальную информаци
 
 #: application/views/scripts/index.php:16
 msgid "Featured Item"
-msgstr "Избранный документ"
+msgstr "Отмеченный документ"
 
 #: application/views/scripts/index.php:24
 msgid "Featured Collection"
-msgstr "Избранная коллекция"
+msgstr "Отмеченная коллекция"
 
 #: application/views/scripts/index.php:69
 msgid "No recent items available."
@@ -3404,7 +3404,7 @@ msgstr "Сортировать по:"
 
 #: application/views/scripts/items/random-featured.php:20
 msgid "No featured items are available."
-msgstr "Избранные документы отсутствуют."
+msgstr "Отмеченные документы отсутствуют."
 
 #: application/views/scripts/items/search-form.php:76
 msgid "Remove field"

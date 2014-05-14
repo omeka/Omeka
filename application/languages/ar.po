@@ -7,7 +7,7 @@
 # Julien Sicot <julien.sicot@gmail.com>, 2011, 2012
 # laurence leroux <laurencelx@gmail.com>, 2012
 # Nicolas <booloki@lokizone.net>, 2011
-# Stéphane Loret <stephane.loret@univ-tours.fr>, 2011, 2012
+# Stéphane Loret <stephane.loret@univ-nantes.fr>, 2011, 2012
 # thierry <thierry.pasquier@emf.ccsti.eu>, 2012
 # symac <wikitipiac@laposte.net>, 2011, 2012
 msgid ""
