@@ -36,6 +36,10 @@ class Table_File extends Omeka_Db_Table
                     }
                     break;
                     
+                case 'original_filename':
+                    $select->where('files.original_filename = ?', $paramValue);
+                    break;
+
                 case 'size_greater_then':
                     $select->where('files.size > ?', $paramValue);
                     break;
