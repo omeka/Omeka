@@ -33,6 +33,9 @@ echo flash();
                 <?php foreach (loop('Collection') as $collection): ?>
                 <tr class="collection<?php if(++$key%2==1) echo ' odd'; else echo ' even'; ?>">
                     <td class="title<?php if ($collection->featured) { echo ' featured';} ?>">
+                        <?php if ($collectionImage = record_image('collection', 'square_thumbnail')): ?>
+                            <?php echo link_to_collection($collectionImage, array('class' => 'collection record-image')); ?>
+                        <?php endif; ?>
                         <?php echo link_to_collection(); ?>
                         <?php if (!$collection->public) echo __('(Private)'); ?>
                         <?php if (is_allowed($collection, 'edit')): ?>
