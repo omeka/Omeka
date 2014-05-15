@@ -193,15 +193,6 @@ class UsersController extends Omeka_Controller_AbstractActionController
     {
         $user = $this->_helper->db->findById();
         $ua = $this->_helper->db->getTable('UsersActivations')->findByUser($user);
-        $currentUser = $this->getCurrentUser();
-        
-        $changePasswordForm = new Omeka_Form_ChangePassword;
-        $changePasswordForm->setUser($user);
-        
-        // Super users don't need to know the current password.
-        if ($currentUser && $currentUser->role == 'super') {
-            $changePasswordForm->removeElement('current_password');
-        }
         
         $form = $this->_getUserForm($user, $ua);
         $form->setSubmitButtonText(__('Save Changes'));
@@ -212,88 +203,105 @@ class UsersController extends Omeka_Controller_AbstractActionController
             'role' => $user->role,
             'active' => $user->active
         ));
-        
+
+        $this->view->user = $user;
+        $this->view->form = $form;
+
+        if ($this->getRequest()->isPost()) {
+            if (!$form->isValid($_POST)) {
+                $this->_helper->flashMessenger(__('There was an invalid entry on the form. Please try again.'), 'error');
+                return;
+            }
+            //check to see if user has been manually deactivated. if so, delete ua (if exists)
+            if($user->active == 1 && ($form->getValue('active') == 0)) {
+                //couldn't really do a migration to remove useless ua's, so just to be safe double-check
+                //that the ua exists
+                if($ua) {
+                    $ua->delete();
+                }
+            }
+            //reverse situation from above. If manually activating, also delete the ua
+            if($user->active == 0 && ($form->getValue('active') == 1)) {
+                if($ua) {
+                    $ua->delete();
+                }
+            }
+
+            $user->setPostData($form->getValues());
+
+            if(isset($_POST['resend_activation_email']) && $_POST['resend_activation_email'] == 1) {
+                $this->sendActivationEmail($user);
+            }
+
+            if ($user->save(false)) {
+                $this->_helper->flashMessenger(
+                    __('The user %s was successfully changed!', $user->username),
+                    'success'
+                );
+                $this->_helper->redirector->gotoRoute();
+            } else {
+                $this->_helper->flashMessenger($user->getErrors());
+            }
+        }
+    }
+
+    public function changePasswordAction()
+    {
+        $user = $this->_helper->db->findById();
+        $currentUser = $this->getCurrentUser();
+
+        $form = new Omeka_Form_ChangePassword;
+        $form->setUser($user);
+
+        // Super users don't need to know the current password.
+        if ($currentUser && $currentUser->role == 'super') {
+            $form->removeElement('current_password');
+        }
+
+        $this->view->user = $user;
+        $this->view->form = $form;
+
+        if ($this->getRequest()->isPost()) {
+            if (!$form->isValid($_POST)) {
+                $this->_helper->flashMessenger(__('There was an invalid entry on the form. Please try again.'), 'error');
+                return;
+            }
+
+            $values = $form->getValues();
+            $user->setPassword($values['new_password']);
+            $user->save();
+            $this->_helper->flashMessenger(__('Password changed!'), 'success');
+            $this->_helper->redirector->gotoRoute(array('action' => 'edit'));
+        }
+    }
+
+    public function apiKeysAction()
+    {
+        $user = $this->_helper->db->findById();
         $keyTable = $this->_helper->db->getTable('Key');
 
-        $this->view->passwordForm = $changePasswordForm;
         $this->view->user = $user;
-        $this->view->currentUser = $currentUser;
-        $this->view->form = $form;
+        $this->view->currentUser = $this->getCurrentUser();
         $this->view->keys = $keyTable->findBy(array('user_id' => $user->id));
-        
+
         if ($this->getRequest()->isPost()) {
-            $success = false;
-            if (isset($_POST['update_api_keys'])) {
-                // Create a new API key.
-                if ($this->getParam('api_key_label')) {
-                    $key = new Key;
-                    $key->user_id = $user->id;
-                    $key->label = $this->getParam('api_key_label');
-                    $key->key = sha1($user->username . microtime() . rand());
-                    $key->save();
-                    $this->_helper->flashMessenger(__('A new API key was successfully created.'), 'success');
-                    $success = true;
-                }
-                // Rescend API keys.
-                if ($this->getParam('api_key_rescind')) {
-                    foreach ($this->getParam('api_key_rescind') as $keyId) {
-                        $keyTable->find($keyId)->delete();
-                    }
-                    $this->_helper->flashMessenger(__('An existing API key was successfully rescinded.'), 'success');
-                    $success = true;
-                }
-            } elseif (isset($_POST['new_password'])) {
-                if (!$changePasswordForm->isValid($_POST)) {
-                    $this->_helper->flashMessenger(__('There was an invalid entry on the form. Please try again.'), 'error');
-                    return;
-                }
-                
-                $values = $changePasswordForm->getValues();
-                $user->setPassword($values['new_password']);
-                $user->save();
-                $this->_helper->flashMessenger(__('Password changed!'), 'success');
-                $success = true;
-            } else {
-                if (!$form->isValid($_POST)) {
-                    $this->_helper->flashMessenger(__('There was an invalid entry on the form. Please try again.'), 'error');
-                    return;
-                }
-                //check to see if user has been manually deactivated. if so, delete ua (if exists)
-                if($user->active == 1 && ($form->getValue('active') == 0)) {
-                    //couldn't really do a migration to remove useless ua's, so just to be safe double-check
-                    //that the ua exists
-                    if($ua) {
-                        $ua->delete();
-                    }
-                }
-                //reverse situation from above. If manually activating, also delete the ua
-                if($user->active == 0 && ($form->getValue('active') == 1)) {
-                    if($ua) {
-                        $ua->delete();
-                    }
-                }
-                
-                $user->setPostData($form->getValues());
-                
-                if(isset($_POST['resend_activation_email']) && $_POST['resend_activation_email'] == 1) {
-                    $this->sendActivationEmail($user);
-                }
-                
-                if ($user->save(false)) {
-                    $this->_helper->flashMessenger(
-                        __('The user %s was successfully changed!', $user->username),
-                        'success'
-                    );
-                    $success = true;
-                } else {
-                    $this->_helper->flashMessenger($user->getErrors());
-                }
+            // Create a new API key.
+            if ($this->getParam('api_key_label')) {
+                $key = new Key;
+                $key->user_id = $user->id;
+                $key->label = $this->getParam('api_key_label');
+                $key->key = sha1($user->username . microtime() . rand());
+                $key->save();
+                $this->_helper->flashMessenger(__('A new API key was successfully created.'), 'success');
             }
-            
-            if ($success) {
-                // Redirect to the current page
-                $this->_helper->redirector->gotoRoute();
+            // Rescend API keys.
+            if ($this->getParam('api_key_rescind')) {
+                foreach ($this->getParam('api_key_rescind') as $keyId) {
+                    $keyTable->find($keyId)->delete();
+                }
+                $this->_helper->flashMessenger(__('An existing API key was successfully rescinded.'), 'success');
             }
+            $this->_helper->redirector->gotoRoute();
         }
     }
     

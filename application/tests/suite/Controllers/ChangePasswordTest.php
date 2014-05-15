@@ -13,7 +13,7 @@
  */
 class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
 {    
-    const FORM_URL = '/users/edit/1';
+    const FORM_URL = '/users/change-password/1';
     
     public function setUp()
     {
@@ -44,7 +44,7 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
     {
         $this->dispatch(self::FORM_URL);
         $this->assertController('users');
-        $this->assertAction('edit');
+        $this->assertAction('change-password');
         $this->assertNotRedirect();
         $this->assertQuery('form#change-password input#current_password');
         $this->assertQuery('form#change-password input#new_password');
@@ -65,7 +65,7 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
     public function testAdminUserCannotChangePasswordForAnotherUser()
     {
         $newUser = $this->_addNewUserWithRole('contributor');
-        $this->dispatch('/users/edit/' . $newUser->id);
+        $this->dispatch('/users/change-password/' . $newUser->id);
         $this->assertNotController('users');
         $this->assertNotAction('edit');
     }
@@ -75,9 +75,9 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
         $this->user->role = 'super';
         $this->user->save();
         $newUser = $this->_addNewUserWithRole('admin');
-        $this->dispatch('/users/edit/' . $newUser->id);
+        $this->dispatch('/users/change-password/' . $newUser->id);
         $this->assertController('users');
-        $this->assertAction('edit');
+        $this->assertAction('change-password');
     }
     
     public function testChangingPassword()

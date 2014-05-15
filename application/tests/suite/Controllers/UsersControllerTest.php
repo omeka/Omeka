@@ -108,8 +108,10 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
 
         $request = $this->getRequest();
         $request->setPost(array(
-            'new_password' => 'password',
-            'new_password_confirm' => 'password'
+            'username' => 'differentuser',
+            'name' => 'Different User',
+            'email' => $this->email,
+            'role' => 'super'
         ));
         $request->setMethod('post');
         $this->dispatch("users/edit/$id");
@@ -124,8 +126,10 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
 
         $request = $this->getRequest();
         $request->setPost(array(
-            'new_password' => 'password',
-            'new_password_confirm' => 'password'
+            'username' => 'differentuser',
+            'name' => 'Different User',
+            'email' => $this->email,
+            'role' => 'super'
         ));
         $request->setMethod('post');
         $this->dispatch("users/edit/$id");

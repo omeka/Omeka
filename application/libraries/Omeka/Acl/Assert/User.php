@@ -18,6 +18,7 @@ class Omeka_Acl_Assert_User implements Zend_Acl_Assert_Interface
         'show',
         'edit',
         'change-password',
+        'api-keys'
     );
 
     private $_denySelf = array(
