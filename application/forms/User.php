@@ -29,7 +29,7 @@ class Omeka_Form_User extends Omeka_Form
         
         $this->addElement('text', 'username', array(
             'label'         => __('Username'),
-            'description'   => __('Username must contain only letters and numbers or be an email address, and be 30 characters or fewer.'),
+            'description'   => __('Username must be 30 characters or fewer. Whitespace is not allowed.'),
             'required'      => true,
             'size'          => '30',
             'validators' => array(
@@ -42,11 +42,10 @@ class Omeka_Form_User extends Omeka_Form
                 ),
                 array('validator' => 'Regex', 'breakChainOnFailure' => true, 'options' =>
                     array(
-                        //pattern via http://stackoverflow.com/questions/15650336/regex-for-valid-email-address-or-valid-alpha-numeric-check
-                        'pattern' => "/^([_a-zA-Z0-9\'-]+(\.[_a-zA-Z0-9\'-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.(([0-9]{1,3})|([a-zA-Z]{2,3})|(name))|[a-zA-Z0-9]+)$/",
+                        'pattern' => '#^[a-zA-Z0-9.*@+!\-_%\#\^&$]*$#u',
                         'messages' => array(
                             Zend_Validate_Regex::NOT_MATCH =>
-                                __('Username must contain only letters and numbers, or be an email address.')
+                                __('Whitespace is not allowed. Only these special characters may be used: %s', ' + ! @ # $ % ^ & * . - _' )
                         )
                     )
                 ),
