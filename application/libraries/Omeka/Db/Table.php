@@ -384,6 +384,8 @@ class Omeka_Db_Table
         if (in_array($sortField, $this->getColumns())) {
             $alias = $this->getTableAlias();
             $select->order("$alias.$sortField $sortDir");
+        } else if ($sortField == 'random') {
+            $select->order('RAND()');
         }
     }
     

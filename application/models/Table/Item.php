@@ -404,10 +404,6 @@ class Table_Item extends Omeka_Db_Table
                        ->order(array("IF(ISNULL(et_sort.text), 1, 0) $sortDir",
                                      "et_sort.text $sortDir"));
             }
-        } else {
-            if ($sortField == 'random') {
-                $select->order('RAND()');
-            }
         }
     }
 
