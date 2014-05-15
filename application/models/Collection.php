@@ -211,4 +211,25 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
             $this->setSearchTextPrivate();
         }
     }
+
+    /**
+     * Get a representative file for this Collection.
+     *
+     * @return File|null
+     */
+    public function getFile()
+    {
+        $itemTable = $this->getDb()->getTable('Item');
+        $itemArray = $itemTable->findBy(array(
+            'collection' => $this->id,
+            'hasImage' => true,
+            'sort_field' => 'featured',
+            'sort_dir' => 'd'
+        ), 1);
+        if ($itemArray) {
+            return ($itemArray[0]->getFile());
+        } else {
+            return null;
+        }
+    }
 }

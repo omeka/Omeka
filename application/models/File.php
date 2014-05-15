@@ -512,4 +512,14 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             return false;
         }
     }
+
+    /**
+     * Return the representative File for the record (this File itself).
+     *
+     * @return File
+     */
+    public function getFile()
+    {
+        return $this;
+    }
 }

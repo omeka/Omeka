@@ -143,7 +143,7 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      * @param integer $index
      * @return File
      */
-    public function getFile($index)
+    public function getFile($index = 0)
     {
         return $this->getTable('File')->findOneByItem($this->id, $index);
     }

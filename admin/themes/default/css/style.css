@@ -28,6 +28,7 @@
         #Browse Element Sets
         #Edit Element Sets
         #Browse Themes
+
         #System Information 
         #Upgrade
     #Iconfonts */
@@ -1207,6 +1208,10 @@ header nav {
 /* Site-wide Search Settings  
 ================================================== */
 
+#search-results td:first-of-type {
+    width: 15%;
+}
+
 #search-filters ul {
     clear: both;
     list-style-type: none;
@@ -1248,6 +1253,33 @@ header nav {
     
 #no-results {
     clear: both;
+}
+
+.record-image {
+    display: block;
+    overflow: visible;
+    float: left;
+    margin-right: 14px;
+}
+
+.collection.record-image {
+    -webkit-box-shadow: -6px -6px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: -6px -6px rgba(0, 0, 0, 0.1);
+    box-shadow: -6px -6px rgba(0, 0, 0, 0.1);
+    margin: 6px 10px 0 6px;
+}
+
+.collection.record-image img {
+    width: 48px;
+    -webkit-box-shadow: -3px -3px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: -3px -3px rgba(0, 0, 0, 0.2);
+    box-shadow: -3px -3px rgba(0, 0, 0, 0.2);
+}
+
+.record-image img {
+    width: 50px;
+    height: auto;
+    float: left;
 }
 
 /* Login  
@@ -2309,7 +2341,6 @@ button.remove_search {
 }
 
 .theme-file .button { float: left; }
-
 
 /* System Information
 ================================================== */

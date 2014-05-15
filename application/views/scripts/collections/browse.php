@@ -20,6 +20,10 @@ $sortLinks[__('Date Added')] = 'added';
 
     <h2><?php echo link_to_collection(); ?></h2>
 
+    <?php if ($collectionImage = record_image('collection', 'square_thumbnail')): ?>
+        <?php echo link_to_collection($collectionImage, array('class' => 'collection record-image')); ?>
+    <?php endif; ?>
+
     <?php if (metadata('collection', array('Dublin Core', 'Description'))): ?>
     <div class="element">
         <h3><?php echo __('Description'); ?></h3>
