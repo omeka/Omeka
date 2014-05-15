@@ -78,8 +78,10 @@ class Omeka_Form_Decorator_SavePanelAction extends Zend_Form_Decorator_Abstract
                 revert_theme_base_url();
                 $html .= "<a href='$publicPageUrl' class='big blue button' target='_blank'>" . __('View Public Page') . "</a>";
             }
-            $recordDeleteConfirm = record_url($record, 'delete-confirm');
-            $html .= "<a href='$recordDeleteConfirm' class='big red button delete-confirm'>" . __('Delete') . "</a>";
+            if (is_allowed($record, 'delete')) {
+                $recordDeleteConfirm = record_url($record, 'delete-confirm');
+                $html .= "<a href='$recordDeleteConfirm' class='big red button delete-confirm'>" . __('Delete') . "</a>";
+            }
 
         }
         //used by SavePanelHook to locate where to insert hook content
