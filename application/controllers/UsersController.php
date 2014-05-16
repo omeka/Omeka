@@ -193,7 +193,7 @@ class UsersController extends Omeka_Controller_AbstractActionController
     {
         $user = $this->_helper->db->findById();
         $ua = $this->_helper->db->getTable('UsersActivations')->findByUser($user);
-        
+
         $form = $this->_getUserForm($user, $ua);
         $form->setSubmitButtonText(__('Save Changes'));
         $form->setDefaults(array(
@@ -208,6 +208,27 @@ class UsersController extends Omeka_Controller_AbstractActionController
         $this->view->form = $form;
 
         if ($this->getRequest()->isPost()) {
+            //handle resending activation email
+            if(isset($_POST['resend_activation_email'])) {
+                if($this->sendActivationEmail($user)) {
+                    $this->_helper->flashMessenger(__('User activation email has been sent.'), 'success');
+                } else {
+                    $this->_helper->flashMessenger(__('User activation email could not be sent.'), 'error');
+                }
+                //rebuild the form with new ua
+                $ua = $this->_helper->db->getTable('UsersActivations')->findByUser($user);
+                $form = $this->_getUserForm($user, $ua);
+                $form->setSubmitButtonText(__('Save Changes'));
+                $form->setDefaults(array(
+                    'username' => $user->username,
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'role' => $user->role,
+                    'active' => $user->active
+                ));
+                $this->view->form = $form;
+                return;
+            }
             if (!$form->isValid($_POST)) {
                 $this->_helper->flashMessenger(__('There was an invalid entry on the form. Please try again.'), 'error');
                 return;
@@ -228,10 +249,6 @@ class UsersController extends Omeka_Controller_AbstractActionController
             }
 
             $user->setPostData($form->getValues());
-
-            if(isset($_POST['resend_activation_email']) && $_POST['resend_activation_email'] == 1) {
-                $this->sendActivationEmail($user);
-            }
 
             if ($user->save(false)) {
                 $this->_helper->flashMessenger(

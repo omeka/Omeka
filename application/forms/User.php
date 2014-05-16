@@ -134,24 +134,21 @@ class Omeka_Form_User extends Omeka_Form
                 'required' => true
             ));
         }
-        
+
         if ($this->_hasActiveElement) {
+            $description = __('Inactive users cannot log in to the site.');
+            if( ($this->_user->active == 0) && ($this->_usersActivations)) {
+                $description .= ' ' . __('Activation has been pending since %s.', format_date($this->_usersActivations->added));    
+            }
             $this->addElement('checkbox', 'active', array(
                 'label' => __('Active?'),
-                'description' => __('Inactive users cannot log in to the site.')
+                'description' => $description 
             ));
-
-            if ($this->_user->active !== 1 ) {
-                $options = array('label' => __('Resend activation email?'));
-                if($this->_usersActivations) {
-                    $options['description'] = __('User activation email will be resent. (Activation has been pending since %s.)', format_date($this->_usersActivations->added)); 
-                } else {
-                    $options['description'] = __('User activation email will be resent.');
-                }
-                $this->addElement('checkbox', 'resend_activation_email', $options);
+            if($this->_user->active == 0) {
+                $this->addElement('submit', 'resend_activation_email', array('label' => __('Resend Activation Email')));
             }
         }
-        
+
         $this->addElement('submit', 'submit', array(
             'label' => $this->_submitButtonText
         ));
