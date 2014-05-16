@@ -334,7 +334,9 @@ class UsersController extends Omeka_Controller_AbstractActionController
     {
         $user = $this->_helper->db->findById();
         $ua = $this->_helper->db->getTable('UsersActivations')->findByUser($user);
-        $ua->delete();
+        if($ua) {
+            $ua->delete();
+        }
         parent::deleteAction();
     }
     
