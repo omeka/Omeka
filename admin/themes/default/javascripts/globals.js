@@ -22,6 +22,7 @@ if (!Omeka) {
             theme_advanced_buttons1: "bold,italic,underline,|,justifyleft,justifycenter,justifyright,|,bullist,numlist,|,link,formatselect,code",
             theme_advanced_buttons2: "",
             theme_advanced_buttons3: "",
+            theme_advanced_blockformats: "p,address,pre,h1,h2,h3,h4,h5,h6,blockquote,address,div",
             plugins: "paste,inlinepopups,media",
             media_strict: false,
             width: "100%"
