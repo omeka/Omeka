@@ -36,7 +36,7 @@ class Omeka_Form_Install extends Omeka_Form
                         'pattern' => '#^[a-zA-Z0-9.*@+!\-_%\#\^&$]*$#u',
                         'messages' => array(
                             Zend_Validate_Regex::NOT_MATCH =>
-                                __('Username must contain only letters and numbers, or be an email address.')
+                                __('Whitespace is not allowed. Only these special characters may be used: %s', ' + ! @ # $ % ^ & * . - _' )
                         )
                     )
                 )
