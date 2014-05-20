@@ -269,6 +269,7 @@ class UsersController extends Omeka_Controller_AbstractActionController
 
         $form = new Omeka_Form_ChangePassword;
         $form->setUser($user);
+        $form->removeDecorator('Form');
 
         // Super users don't need to know the current password.
         if ($currentUser && $currentUser->role == 'super') {
@@ -509,6 +510,7 @@ class UsersController extends Omeka_Controller_AbstractActionController
             'user'              => $user,
             'usersActivations'  => $ua
         ));
+        $form->removeDecorator('Form');
         fire_plugin_hook('users_form', array('form' => $form, 'user' => $user));
         return $form;
     }

@@ -138,20 +138,13 @@ class Omeka_Form_User extends Omeka_Form
         if ($this->_hasActiveElement) {
             $description = __('Inactive users cannot log in to the site.');
             if( ($this->_user->active == 0) && ($this->_usersActivations)) {
-                $description .= ' ' . __('Activation has been pending since %s.', format_date($this->_usersActivations->added));    
+                $description .= '<br>' . __('Activation has been pending since %s.', format_date($this->_usersActivations->added));
             }
             $this->addElement('checkbox', 'active', array(
                 'label' => __('Active?'),
                 'description' => $description 
             ));
-            if($this->_user->active == 0) {
-                $this->addElement('submit', 'resend_activation_email', array('label' => __('Resend Activation Email')));
-            }
         }
-
-        $this->addElement('submit', 'submit', array(
-            'label' => $this->_submitButtonText
-        ));
     }
     
     public function setHasRoleElement($flag)

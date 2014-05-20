@@ -70,16 +70,10 @@ class Omeka_Form_ChangePassword extends Omeka_Form
                 'errorMessages' => array(__('New password must be typed correctly twice.'))
             )
         );
-        $this->addElement('submit', 'submit',
-            array(
-                'label'         => __('Save Password')
-            )
-        );
         
         $this->addDisplayGroup(array('current_password', 
                                      'new_password', 
-                                     'new_password_confirm', 
-                                     'submit'), 
+                                     'new_password_confirm'), 
                                'change_password', 
                                array("legend" => __("Change Password")));
     }
