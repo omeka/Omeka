@@ -8,7 +8,7 @@
             'privilege' => 'edit'
         ),
         array(
-            'label' => __('Password'),
+            'label' => __('Change Password'),
             'uri' => record_url($user, 'change-password'),
             'resource' => $user,
             'privilege' => 'change-password'
