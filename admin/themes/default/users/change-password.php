@@ -10,7 +10,7 @@ echo head(array('title' => $userTitle, 'bodyclass' => 'users'));
 echo common('users-nav', array('user' => $user));
 echo flash();
 ?>
-<form method="post">
+<form id="change-password" method="post">
 <section class="seven columns alpha">
     <p class='explanation'>* <?php echo __('required field'); ?></p>
     <?php echo $this->form; ?>
