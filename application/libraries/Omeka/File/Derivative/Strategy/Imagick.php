@@ -33,8 +33,9 @@ class Omeka_File_Derivative_Strategy_Imagick
      */
     public function createImage($sourcePath, $destPath, $type, $sizeConstraint, $mimeType)
     {
+        $page = (int) $this->getOption('page', 0);
         try {
-            $imagick = new Imagick($sourcePath . '[0]');
+            $imagick = new Imagick($sourcePath . '[' . $page . ']');
         } catch (ImagickException $e) {
             _log("Imagick failed to open the file. Details:\n$e", Zend_Log::ERR);
             return false;

@@ -38,9 +38,10 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick
     {
         $convertPath = $this->_getConvertPath();
         $convertArgs = $this->_getConvertArgs($type, $sizeConstraint);
+        $page = (int) $this->getOption('page', 0);
         $cmd = join(' ', array(
             escapeshellcmd($convertPath),
-            escapeshellarg($sourcePath . '[0]'), // first page of multi-page images.
+            escapeshellarg($sourcePath . '[' . $page . ']'),
             $convertArgs,
             escapeshellarg($destPath)
         ));
