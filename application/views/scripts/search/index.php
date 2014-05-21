@@ -14,11 +14,12 @@ $searchRecordTypes = get_search_record_types();
         </tr>
     </thead>
     <tbody>
+        <?php $filter = new Zend_Filter_Word_CamelCaseToDash; ?>
         <?php foreach (loop('search_texts') as $searchText): ?>
         <?php $record = get_record_by_id($searchText['record_type'], $searchText['record_id']); ?>
-        <tr>
-            <?php $recordType = $searchText['record_type']; ?>
-            <?php set_current_record($recordType, $record); ?>
+        <?php $recordType = $searchText['record_type']; ?>
+        <?php set_current_record($recordType, $record); ?>
+        <tr class="<?php echo strtolower($filter->filter($recordType)); ?>">
             <td>
                 <?php echo $searchRecordTypes[$recordType]; ?>
             </td>
