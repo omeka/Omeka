@@ -243,3 +243,42 @@ mail.transport.type = "Sendmail"
 ; 'post_max_size' or 'upload_max_filesize' core php.ini directives.
 ;
 ;upload.maxFileSize = "10M"
+
+;;;;;;;;;;;;;;;;;;;;;
+; Derivative Images ;
+;;;;;;;;;;;;;;;;;;;;;
+
+; fileDerivatives.strategy
+; Controls what method Omeka uses to create derivative images.
+; default: Omeka_File_Derivative_Strategy_ExternalImageMagick
+;
+; The built-in strategies are ExternalImageMagick (the old default) and
+; Imagick (requires PECL ext/imagick), but others can be added by plugins.
+;
+;fileDerivatives.strategy = "Omeka_File_Derivative_Strategy_ExternalImageMagick"
+
+; fileDerivatives.strategyOptions
+; Specific settings for the configured derivative strategy.
+;
+; Subkeys to this entry specify each option.
+;
+; fileDerivatives.strategyOptions.page = "0"
+
+; fileDerivatives.typeWhitelist[]
+; If set, Omeka will only attempt to create derivatives for files with the
+; given MIME types.
+;
+; This entry can be specified multiple times, once for each type in the list.
+;
+;fileDerivatives.typeWhitelist[] = "image/jpeg"
+
+; fileDerivatives.typeBlacklist[]
+; If set, Omeka will not attempt to create derivatives for files with the
+; given MIME types.
+;
+; Both this blacklist and the whitelist can be set at the same time, but the
+; whitelist will control.
+;
+; This entry can be specified multiple times, once for each type in the list.
+;
+;fileDerivatives.typeBlacklist[] = "image/jpeg"
