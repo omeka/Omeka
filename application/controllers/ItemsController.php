@@ -82,7 +82,7 @@ class ItemsController extends Omeka_Controller_AbstractActionController
         // Get all the element sets that apply to the item.
         $this->view->elementSets = $this->_getItemElementSets();
         if (!Zend_Registry::isRegistered('file_derivative_creator') && is_allowed('Settings', 'edit')) {
-            $this->_helper->flashMessenger('The path to Image Magick has not been set. No derivative images will be created. If you would like Omeka to create derivative images, please add the path to your settings form.');
+            $this->_helper->flashMessenger(__('The path to Image Magick has not been set. No derivative images will be created. If you would like Omeka to create derivative images, please add the path to your settings form.'));
         }
         parent::editAction();
     }
@@ -142,7 +142,7 @@ class ItemsController extends Omeka_Controller_AbstractActionController
         // Get all the element sets that apply to the item.
         $this->view->elementSets = $this->_getItemElementSets();
         if (!Zend_Registry::isRegistered('file_derivative_creator') && is_allowed('Settings', 'edit')) {
-            $this->_helper->flashMessenger('The path to Image Magick has not been set. No derivative images will be created. If you would like Omeka to create derivative images, please add the path to your settings form.');
+            $this->_helper->flashMessenger(__('The path to Image Magick has not been set. No derivative images will be created. If you would like Omeka to create derivative images, please add the path to your settings form.'));
         }
         return parent::addAction();
     }
@@ -175,7 +175,7 @@ class ItemsController extends Omeka_Controller_AbstractActionController
 
         //Must be logged in to view items specific to certain users
         if ($this->_getParam('user') && !$this->_helper->acl->isAllowed('browse', 'Users')) {
-            $this->_helper->flashMessenger('May not browse by specific users.');
+            $this->_helper->flashMessenger(__('May not browse by specific users.'));
             $this->_setParam('user', null);
         }
         
