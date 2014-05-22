@@ -372,7 +372,7 @@ msgstr ""
 #: admin/themes/default/themes/config.php:16
 #: admin/themes/default/users/edit.php:21
 #: application/controllers/UsersController.php:198
-#: application/controllers/UsersController.php:224
+#: application/controllers/UsersController.php:221
 #: application/forms/ItemTypes.php:169
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:73
 msgid "Save Changes"
@@ -2035,6 +2035,14 @@ msgid ""
 "your new item type."
 msgstr ""
 
+#: application/controllers/ItemsController.php:85
+#: application/controllers/ItemsController.php:145
+msgid ""
+"The ImageMagick directory path has not been set. No derivative images will "
+"be created. If you would like Omeka to create derivative images, please set "
+"the path in Settings."
+msgstr ""
+
 #: application/controllers/ItemsController.php:94
 #, php-format
 msgid "The item \"%s\" was successfully added!"
@@ -2079,35 +2087,35 @@ msgid ""
 "delete all files and file metadata associated with this item."
 msgstr ""
 
-#: application/controllers/ItemsController.php:253
+#: application/controllers/ItemsController.php:255
 msgid "You must choose some items to batch edit."
 msgstr ""
 
-#: application/controllers/ItemsController.php:297
+#: application/controllers/ItemsController.php:299
 msgid "User is not allowed to modify visibility of items."
 msgstr ""
 
-#: application/controllers/ItemsController.php:302
+#: application/controllers/ItemsController.php:304
 msgid "User is not allowed to modify featured status of items."
 msgstr ""
 
-#: application/controllers/ItemsController.php:309
+#: application/controllers/ItemsController.php:311
 msgid "User is not allowed to delete selected items."
 msgstr ""
 
-#: application/controllers/ItemsController.php:315
+#: application/controllers/ItemsController.php:317
 msgid "User is not allowed to edit selected items."
 msgstr ""
 
-#: application/controllers/ItemsController.php:320
+#: application/controllers/ItemsController.php:322
 msgid "User is not allowed to tag selected items."
 msgstr ""
 
-#: application/controllers/ItemsController.php:354
+#: application/controllers/ItemsController.php:356
 msgid "The items were successfully deleted!"
 msgstr ""
 
-#: application/controllers/ItemsController.php:356
+#: application/controllers/ItemsController.php:358
 msgid "The items were successfully changed!"
 msgstr ""
 
@@ -2294,7 +2302,7 @@ msgstr ""
 
 #: application/controllers/UsersController.php:110
 #: application/controllers/UsersController.php:113
-#: application/controllers/UsersController.php:385
+#: application/controllers/UsersController.php:382
 #, php-format
 msgid "%s Administrator"
 msgstr ""
@@ -2330,42 +2338,42 @@ msgstr ""
 msgid "The user \"%s\" was added, but the activation email could not be sent."
 msgstr ""
 
-#: application/controllers/UsersController.php:217
+#: application/controllers/UsersController.php:214
 msgid "User activation email has been sent."
 msgstr ""
 
-#: application/controllers/UsersController.php:219
+#: application/controllers/UsersController.php:216
 msgid "User activation email could not be sent."
 msgstr ""
 
-#: application/controllers/UsersController.php:236
-#: application/controllers/UsersController.php:287
+#: application/controllers/UsersController.php:233
+#: application/controllers/UsersController.php:284
 msgid "There was an invalid entry on the form. Please try again."
 msgstr ""
 
-#: application/controllers/UsersController.php:258
+#: application/controllers/UsersController.php:255
 #, php-format
 msgid "The user %s was successfully changed!"
 msgstr ""
 
-#: application/controllers/UsersController.php:294
+#: application/controllers/UsersController.php:291
 msgid "Password changed!"
 msgstr ""
 
-#: application/controllers/UsersController.php:316
+#: application/controllers/UsersController.php:313
 msgid "A new API key was successfully created."
 msgstr ""
 
-#: application/controllers/UsersController.php:323
+#: application/controllers/UsersController.php:320
 msgid "An existing API key was successfully rescinded."
 msgstr ""
 
-#: application/controllers/UsersController.php:350
+#: application/controllers/UsersController.php:347
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
 msgstr ""
 
-#: application/controllers/UsersController.php:356
+#: application/controllers/UsersController.php:353
 #, php-format
 msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
@@ -2373,23 +2381,23 @@ msgid ""
 "this user."
 msgstr ""
 
-#: application/controllers/UsersController.php:381
+#: application/controllers/UsersController.php:378
 msgid "Welcome!"
 msgstr ""
 
-#: application/controllers/UsersController.php:383
+#: application/controllers/UsersController.php:380
 #, php-format
 msgid ""
 "Your account for the %s repository has been created. Please click the "
 "following link to activate your account:"
 msgstr ""
 
-#: application/controllers/UsersController.php:386
+#: application/controllers/UsersController.php:383
 #, php-format
 msgid "Activate your account with the %s repository"
 msgstr ""
 
-#: application/controllers/UsersController.php:481
+#: application/controllers/UsersController.php:478
 msgid "Login information incorrect. Please try again."
 msgstr ""
 
@@ -3472,7 +3480,7 @@ msgstr ""
 msgid "Search Omeka "
 msgstr ""
 
-#: application/views/scripts/search/index.php:38
+#: application/views/scripts/search/index.php:39
 msgid "Your query returned no results."
 msgstr ""
 
