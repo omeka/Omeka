@@ -69,6 +69,7 @@ class Table_Collection extends Omeka_Db_Table
 
         $select->reset(Zend_Db_Select::COLUMNS);
         $select->from(array(), array('collections.id', 'element_texts.text'));
+        $select->order('element_texts.text');
         
         $pairs = $db->fetchPairs($select);
         foreach ($pairs as $collectionId => &$name) {
