@@ -175,8 +175,10 @@ class ItemsController extends Omeka_Controller_AbstractActionController
 
         //Must be logged in to view items specific to certain users
         if ($this->_getParam('user') && !$this->_helper->acl->isAllowed('browse', 'Users')) {
-            $this->_helper->flashMessenger(__('May not browse by specific users.'));
             $this->_setParam('user', null);
+            // Zend re-reads from GET/POST on every getParams() so we need to
+            // also remove these.
+            unset($_GET['user'], $_POST['user']);
         }
         
         parent::browseAction();
