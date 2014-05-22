@@ -82,7 +82,7 @@ class ItemsController extends Omeka_Controller_AbstractActionController
         // Get all the element sets that apply to the item.
         $this->view->elementSets = $this->_getItemElementSets();
         if (!Zend_Registry::isRegistered('file_derivative_creator') && is_allowed('Settings', 'edit')) {
-            $this->_helper->flashMessenger(__('The path to Image Magick has not been set. No derivative images will be created. If you would like Omeka to create derivative images, please add the path to your settings form.'));
+            $this->_helper->flashMessenger(__('The ImageMagick directory path has not been set. No derivative images will be created. If you would like Omeka to create derivative images, please set the path in Settings.'));
         }
         parent::editAction();
     }
@@ -142,7 +142,7 @@ class ItemsController extends Omeka_Controller_AbstractActionController
         // Get all the element sets that apply to the item.
         $this->view->elementSets = $this->_getItemElementSets();
         if (!Zend_Registry::isRegistered('file_derivative_creator') && is_allowed('Settings', 'edit')) {
-            $this->_helper->flashMessenger(__('The path to Image Magick has not been set. No derivative images will be created. If you would like Omeka to create derivative images, please add the path to your settings form.'));
+            $this->_helper->flashMessenger(__('The ImageMagick directory path has not been set. No derivative images will be created. If you would like Omeka to create derivative images, please set the path in Settings.'));
         }
         return parent::addAction();
     }
