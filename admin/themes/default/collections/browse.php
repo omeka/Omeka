@@ -34,7 +34,7 @@ echo flash();
                 <tr class="collection<?php if(++$key%2==1) echo ' odd'; else echo ' even'; ?>">
                     <td class="title<?php if ($collection->featured) { echo ' featured';} ?>">
                         <?php if ($collectionImage = record_image('collection', 'square_thumbnail')): ?>
-                            <?php echo link_to_collection($collectionImage, array('class' => 'collection record-image')); ?>
+                            <?php echo link_to_collection($collectionImage, array('class' => 'image')); ?>
                         <?php endif; ?>
                         <?php echo link_to_collection(); ?>
                         <?php if (!$collection->public) echo __('(Private)'); ?>

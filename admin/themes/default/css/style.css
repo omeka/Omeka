@@ -1255,28 +1255,30 @@ header nav {
     clear: both;
 }
 
-.record-image {
+.image {
     display: block;
     overflow: visible;
     float: left;
     margin-right: 14px;
 }
 
-.collection.record-image {
+.exhibit .image,
+.collection .image {
     -webkit-box-shadow: -6px -6px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: -6px -6px rgba(0, 0, 0, 0.1);
     box-shadow: -6px -6px rgba(0, 0, 0, 0.1);
     margin: 6px 10px 0 6px;
 }
 
-.collection.record-image img {
+.collection .image img,
+.exhibit .image img {
     width: 48px;
     -webkit-box-shadow: -3px -3px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: -3px -3px rgba(0, 0, 0, 0.2);
     box-shadow: -3px -3px rgba(0, 0, 0, 0.2);
 }
 
-.record-image img {
+.image img {
     width: 50px;
     height: auto;
     float: left;
