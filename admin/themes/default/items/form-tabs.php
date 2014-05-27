@@ -22,20 +22,13 @@ foreach ($elementSets as $key => $elementSet) {
     }
 }
 
-foreach (array('Files', 'Tags') as $tabName) {
-    ob_start();
-    switch ($tabName) {
-        case 'Files':
-            require 'files-form.php';
-            break;
-        case 'Tags':
-            require 'tag-form.php';
-            break;
-    }
-    $tabs[$tabName] = ob_get_contents();
-    ob_end_clean();
-} 
-
+ob_start();
+require 'files-form.php';
+$tabs['Files'] = ob_get_contents();
+ob_clean();
+require 'tag-form.php';
+$tabs['Tags'] = ob_get_contents();
+ob_end_clean();
 
 $tabs = apply_filters('admin_items_form_tabs', $tabs, array('item' => $item));
 ?>
