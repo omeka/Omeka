@@ -46,7 +46,11 @@ $formAttributes['method'] = 'GET';
                 echo $this->formSelect(
                     "advanced[$i][element_id]",
                     @$rows['element_id'],
-                    array('title' => __("Select field ($i)")),
+                    array(
+                        'title' => __("Select field ($i)"),
+                        'id' => null,
+                        'class' => 'advanced-search-element'
+                    ),
                     get_table_options('Element', null, array(
                         'record_types' => array('Item', 'All'),
                         'sort' => 'alphaBySet')
@@ -55,7 +59,11 @@ $formAttributes['method'] = 'GET';
                 echo $this->formSelect(
                     "advanced[$i][type]",
                     @$rows['type'],
-                    array('title' => __("Select filter method ($i)")),
+                    array(
+                        'title' => __("Select filter method ($i)"),
+                        'id' => null,
+                        'class' => 'advanced-search-type'
+                    ),
                     label_table_options(array(
                         'contains' => __('contains'),
                         'does not contain' => __('does not contain'),
@@ -69,7 +77,9 @@ $formAttributes['method'] = 'GET';
                     @$rows['terms'],
                     array(
                         'size' => '20',
-                        'title' => __("Select filter ($i)")
+                        'title' => __("Select filter ($i)"),
+                        'id' => null,
+                        'class' => 'advanced-search-terms'
                     )
                 );
                 ?>

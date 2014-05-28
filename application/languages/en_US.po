@@ -1,0 +1,3711 @@
+# Translation template for Omeka.
+# Copyright (C) 2011 Roy Rosenzweig Center for History and New Media
+# This file is distributed under the same license as the Omeka package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Omeka 2.0\n"
+"Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
+"POT-Creation-Date: 2012-11-26 14:33-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Dublin Core description
+msgid ""
+"The Dublin Core metadata element set is common to all Omeka records, "
+"including items, files, and collections. For more information see, http://"
+"dublincore.org/documents/dces/."
+msgstr ""
+"Ŧħḗ Ḓŭƀŀīƞ Ƈǿřḗ ḿḗŧȧḓȧŧȧ ḗŀḗḿḗƞŧ şḗŧ īş ƈǿḿḿǿƞ ŧǿ ȧŀŀ Ǿḿḗķȧ řḗƈǿřḓş, "
+"īƞƈŀŭḓīƞɠ īŧḗḿş, ƒīŀḗş, ȧƞḓ ƈǿŀŀḗƈŧīǿƞş. Ƒǿř ḿǿřḗ īƞƒǿřḿȧŧīǿƞ şḗḗ, "
+"http://dublincore.org/documents/dces/."
+
+#. Dublin Core: Title element name
+#: admin/themes/default/collections/browse.php:22
+#: admin/themes/default/items/browse.php:40
+#: application/views/scripts/collections/browse.php:10
+#: application/views/scripts/items/browse.php:19
+#: application/views/scripts/search/index.php:13
+msgid "Title"
+msgstr "Ŧīŧŀḗ"
+
+#. Dublin Core: Title element description
+msgid "A name given to the resource"
+msgstr "Ȧ ƞȧḿḗ ɠīṽḗƞ ŧǿ ŧħḗ řḗşǿŭřƈḗ"
+
+#. Dublin Core: Creator element name
+#: admin/themes/default/items/browse.php:41
+#: application/views/scripts/items/browse.php:20
+msgid "Creator"
+msgstr "Ƈřḗȧŧǿř"
+
+#. Dublin Core: Creator element description
+msgid "An entity primarily responsible for making the resource"
+msgstr "Ȧƞ ḗƞŧīŧẏ ƥřīḿȧřīŀẏ řḗşƥǿƞşīƀŀḗ ƒǿř ḿȧķīƞɠ ŧħḗ řḗşǿŭřƈḗ"
+
+#. Dublin Core: Subject element name
+msgid "Subject"
+msgstr "Şŭƀĵḗƈŧ"
+
+#. Dublin Core: Subject element description
+msgid "The topic of the resource"
+msgstr "Ŧħḗ ŧǿƥīƈ ǿƒ ŧħḗ řḗşǿŭřƈḗ"
+
+#. Dublin Core: Description element name
+#: admin/themes/default/element-sets/browse.php:17
+#: admin/themes/default/item-types/browse.php:15
+#: admin/themes/default/item-types/show.php:14
+#: admin/themes/default/settings/edit-item-type-elements.php:27
+#: application/forms/ItemTypes.php:150
+#: application/views/scripts/collections/browse.php:29
+msgid "Description"
+msgstr "Ḓḗşƈřīƥŧīǿƞ"
+
+#. Dublin Core: Description element description
+msgid "An account of the resource"
+msgstr "Ȧƞ ȧƈƈǿŭƞŧ ǿƒ ŧħḗ řḗşǿŭřƈḗ"
+
+#. Dublin Core: Publisher element name
+msgid "Publisher"
+msgstr "Ƥŭƀŀīşħḗř"
+
+#. Dublin Core: Publisher element description
+msgid "An entity responsible for making the resource available"
+msgstr "Ȧƞ ḗƞŧīŧẏ řḗşƥǿƞşīƀŀḗ ƒǿř ḿȧķīƞɠ ŧħḗ řḗşǿŭřƈḗ ȧṽȧīŀȧƀŀḗ"
+
+#. Dublin Core: Contributor element name
+#. User role: contributor
+msgid "Contributor"
+msgstr "Ƈǿƞŧřīƀŭŧǿř"
+
+#. Dublin Core: Contributor element description
+msgid "An entity responsible for making contributions to the resource"
+msgstr "Ȧƞ ḗƞŧīŧẏ řḗşƥǿƞşīƀŀḗ ƒǿř ḿȧķīƞɠ ƈǿƞŧřīƀŭŧīǿƞş ŧǿ ŧħḗ řḗşǿŭřƈḗ"
+
+#. Dublin Core: Date element name
+msgid "Date"
+msgstr "Ḓȧŧḗ"
+
+#. Dublin Core: Date element description
+msgid ""
+"A point or period of time associated with an event in the lifecycle of the "
+"resource"
+msgstr ""
+"Ȧ ƥǿīƞŧ ǿř ƥḗřīǿḓ ǿƒ ŧīḿḗ ȧşşǿƈīȧŧḗḓ ẇīŧħ ȧƞ ḗṽḗƞŧ īƞ ŧħḗ ŀīƒḗƈẏƈŀḗ ǿƒ ŧħḗ "
+"řḗşǿŭřƈḗ"
+
+#. Dublin Core: Type element name
+#: admin/themes/default/items/browse.php:42
+msgid "Type"
+msgstr "Ŧẏƥḗ"
+
+#. Dublin Core: Type element description
+msgid "The nature or genre of the resource"
+msgstr "Ŧħḗ ƞȧŧŭřḗ ǿř ɠḗƞřḗ ǿƒ ŧħḗ řḗşǿŭřƈḗ"
+
+#. Dublin Core: Format element name
+msgid "Format"
+msgstr "Ƒǿřḿȧŧ"
+
+#. Dublin Core: Format element description
+msgid "The file format, physical medium, or dimensions of the resource"
+msgstr "Ŧħḗ ƒīŀḗ ƒǿřḿȧŧ, ƥħẏşīƈȧŀ ḿḗḓīŭḿ, ǿř ḓīḿḗƞşīǿƞş ǿƒ ŧħḗ řḗşǿŭřƈḗ"
+
+#. Dublin Core: Identifier element name
+msgid "Identifier"
+msgstr "Īḓḗƞŧīƒīḗř"
+
+#. Dublin Core: Identifier element description
+msgid "An unambiguous reference to the resource within a given context"
+msgstr "Ȧƞ ŭƞȧḿƀīɠŭǿŭş řḗƒḗřḗƞƈḗ ŧǿ ŧħḗ řḗşǿŭřƈḗ ẇīŧħīƞ ȧ ɠīṽḗƞ ƈǿƞŧḗẋŧ"
+
+#. Dublin Core: Source element name
+msgid "Source"
+msgstr "Şǿŭřƈḗ"
+
+#. Dublin Core: Source element description
+msgid "A related resource from which the described resource is derived"
+msgstr "Ȧ řḗŀȧŧḗḓ řḗşǿŭřƈḗ ƒřǿḿ ẇħīƈħ ŧħḗ ḓḗşƈřīƀḗḓ řḗşǿŭřƈḗ īş ḓḗřīṽḗḓ"
+
+#. Dublin Core: Language element name
+msgid "Language"
+msgstr "Ŀȧƞɠŭȧɠḗ"
+
+#. Dublin Core: Language element description
+msgid "A language of the resource"
+msgstr "Ȧ ŀȧƞɠŭȧɠḗ ǿƒ ŧħḗ řḗşǿŭřƈḗ"
+
+#. Dublin Core: Relation element name
+msgid "Relation"
+msgstr "Řḗŀȧŧīǿƞ"
+
+#. Dublin Core: Relation element description
+msgid "A related resource"
+msgstr "Ȧ řḗŀȧŧḗḓ řḗşǿŭřƈḗ"
+
+#. Dublin Core: Coverage element name
+msgid "Coverage"
+msgstr "Ƈǿṽḗřȧɠḗ"
+
+#. Dublin Core: Coverage element description
+msgid ""
+"The spatial or temporal topic of the resource, the spatial applicability of "
+"the resource, or the jurisdiction under which the resource is relevant"
+msgstr ""
+"Ŧħḗ şƥȧŧīȧŀ ǿř ŧḗḿƥǿřȧŀ ŧǿƥīƈ ǿƒ ŧħḗ řḗşǿŭřƈḗ, ŧħḗ şƥȧŧīȧŀ ȧƥƥŀīƈȧƀīŀīŧẏ ǿƒ "
+"ŧħḗ řḗşǿŭřƈḗ, ǿř ŧħḗ ĵŭřīşḓīƈŧīǿƞ ŭƞḓḗř ẇħīƈħ ŧħḗ řḗşǿŭřƈḗ īş řḗŀḗṽȧƞŧ"
+
+#. Dublin Core: Rights element name
+msgid "Rights"
+msgstr "Řīɠħŧş"
+
+#. Dublin Core: Rights element description
+msgid "Information about rights held in and over the resource"
+msgstr "Īƞƒǿřḿȧŧīǿƞ ȧƀǿŭŧ řīɠħŧş ħḗŀḓ īƞ ȧƞḓ ǿṽḗř ŧħḗ řḗşǿŭřƈḗ"
+
+#. Item Type Metadata
+msgid "Item Type Metadata"
+msgstr "Īŧḗḿ Ŧẏƥḗ Ḿḗŧȧḓȧŧȧ"
+
+#. Item Type Metadata description
+msgid ""
+"The item type metadata element set, consisting of all item type elements "
+"bundled with Omeka and all item type elements created by an administrator."
+msgstr ""
+"Ŧħḗ īŧḗḿ ŧẏƥḗ ḿḗŧȧḓȧŧȧ ḗŀḗḿḗƞŧ şḗŧ, ƈǿƞşīşŧīƞɠ ǿƒ ȧŀŀ īŧḗḿ ŧẏƥḗ ḗŀḗḿḗƞŧş "
+"ƀŭƞḓŀḗḓ ẇīŧħ Ǿḿḗķȧ ȧƞḓ ȧŀŀ īŧḗḿ ŧẏƥḗ ḗŀḗḿḗƞŧş ƈřḗȧŧḗḓ ƀẏ ȧƞ ȧḓḿīƞīşŧřȧŧǿř."
+
+#. Omeka Legacy File
+msgid "Omeka Legacy File"
+msgstr "Ǿḿḗķȧ Ŀḗɠȧƈẏ Ƒīŀḗ"
+
+#. Omeka Legacy File description
+msgid ""
+"The metadata element set that, in addition to the Dublin Core element set, "
+"was included in the `files` table in previous versions of Omeka. These "
+"elements are common to all Omeka files. This set may be deprecated in future "
+"versions."
+msgstr ""
+"Ŧħḗ ḿḗŧȧḓȧŧȧ ḗŀḗḿḗƞŧ şḗŧ ŧħȧŧ, īƞ ȧḓḓīŧīǿƞ ŧǿ ŧħḗ Ḓŭƀŀīƞ Ƈǿřḗ ḗŀḗḿḗƞŧ şḗŧ, "
+"ẇȧş īƞƈŀŭḓḗḓ īƞ ŧħḗ `ƒīŀḗş` ŧȧƀŀḗ īƞ ƥřḗṽīǿŭş ṽḗřşīǿƞş ǿƒ Ǿḿḗķȧ. Ŧħḗşḗ "
+"ḗŀḗḿḗƞŧş ȧřḗ ƈǿḿḿǿƞ ŧǿ ȧŀŀ Ǿḿḗķȧ ƒīŀḗş. Ŧħīş şḗŧ ḿȧẏ ƀḗ ḓḗƥřḗƈȧŧḗḓ īƞ ƒŭŧŭřḗ "
+"ṽḗřşīǿƞş."
+
+#. Omeka Legacy File: Additional Creator element
+msgid "Additional Creator"
+msgstr "Ȧḓḓīŧīǿƞȧŀ Ƈřḗȧŧǿř"
+
+#. Omeka Legacy File: Transcriber element
+msgid "Transcriber"
+msgstr "Ŧřȧƞşƈřīƀḗř"
+
+#. Omeka Legacy File: Producer element
+msgid "Producer"
+msgstr "Ƥřǿḓŭƈḗř"
+
+#. Omeka Legacy File: Render Device element
+msgid "Render Device"
+msgstr "Řḗƞḓḗř Ḓḗṽīƈḗ"
+
+#. Omeka Legacy File: Render Details element
+msgid "Render Details"
+msgstr "Řḗƞḓḗř Ḓḗŧȧīŀş"
+
+#. Omeka Legacy File: Capture Date element
+msgid "Capture Date"
+msgstr "Ƈȧƥŧŭřḗ Ḓȧŧḗ"
+
+#. Omeka Legacy File: Capture Device element
+msgid "Capture Device"
+msgstr "Ƈȧƥŧŭřḗ Ḓḗṽīƈḗ"
+
+#. Omeka Legacy File: Capture Details element
+msgid "Capture Details"
+msgstr "Ƈȧƥŧŭřḗ Ḓḗŧȧīŀş"
+
+#. Omeka Legacy File: Change History element
+msgid "Change History"
+msgstr "Ƈħȧƞɠḗ Ħīşŧǿřẏ"
+
+#. Omeka Legacy File: Watermark element
+msgid "Watermark"
+msgstr "Ẇȧŧḗřḿȧřķ"
+
+#. Omeka Legacy File: Encryption element
+msgid "Encryption"
+msgstr "Ḗƞƈřẏƥŧīǿƞ"
+
+#. Omeka Legacy File: Compression element
+msgid "Compression"
+msgstr "Ƈǿḿƥřḗşşīǿƞ"
+
+#. Omeka Legacy File: Post Processing element
+msgid "Post Processing"
+msgstr "Ƥǿşŧ Ƥřǿƈḗşşīƞɠ"
+
+#. Omeka Image File
+msgid "Omeka Image File"
+msgstr "Ǿḿḗķȧ Īḿȧɠḗ Ƒīŀḗ"
+
+#. Omeka Image File description
+msgid ""
+"The metadata element set that was included in the `files_images` table in "
+"previous versions of Omeka. These elements are common to all image files."
+msgstr ""
+"Ŧħḗ ḿḗŧȧḓȧŧȧ ḗŀḗḿḗƞŧ şḗŧ ŧħȧŧ ẇȧş īƞƈŀŭḓḗḓ īƞ ŧħḗ `ƒīŀḗş_īḿȧɠḗş` ŧȧƀŀḗ īƞ "
+"ƥřḗṽīǿŭş ṽḗřşīǿƞş ǿƒ Ǿḿḗķȧ. Ŧħḗşḗ ḗŀḗḿḗƞŧş ȧřḗ ƈǿḿḿǿƞ ŧǿ ȧŀŀ īḿȧɠḗ ƒīŀḗş."
+
+#. Omeka Image File: Width element
+msgid "Width"
+msgstr "Ẇīḓŧħ"
+
+#. Omeka Image File: Height element
+msgid "Height"
+msgstr "Ħḗīɠħŧ"
+
+#. Omeka Image File: Bit Depth element
+msgid "Bit Depth"
+msgstr "Ɓīŧ Ḓḗƥŧħ"
+
+#. Omeka Image File: Channels element
+msgid "Channels"
+msgstr "Ƈħȧƞƞḗŀş"
+
+#. Omeka Image File: Exif String element
+msgid "Exif String"
+msgstr "Ḗẋīƒ Şŧřīƞɠ"
+
+#. Omeka Image File: Exif Array element
+msgid "Exif Array"
+msgstr "Ḗẋīƒ Ȧřřȧẏ"
+
+#. Omeka Image File: IPTC String element
+msgid "IPTC String"
+msgstr "ĪƤŦƇ Şŧřīƞɠ"
+
+#. Omeka Image File: IPTC Array element
+msgid "IPTC Array"
+msgstr "ĪƤŦƇ Ȧřřȧẏ"
+
+#. Omeka Video File
+msgid "Omeka Video File"
+msgstr "Ǿḿḗķȧ Ṽīḓḗǿ Ƒīŀḗ"
+
+#. Omeka Video File description
+msgid ""
+"The metadata element set that was included in the `files_videos` table in "
+"previous versions of Omeka. These elements are common to all video files."
+msgstr ""
+"Ŧħḗ ḿḗŧȧḓȧŧȧ ḗŀḗḿḗƞŧ şḗŧ ŧħȧŧ ẇȧş īƞƈŀŭḓḗḓ īƞ ŧħḗ `ƒīŀḗş_ṽīḓḗǿş` ŧȧƀŀḗ īƞ "
+"ƥřḗṽīǿŭş ṽḗřşīǿƞş ǿƒ Ǿḿḗķȧ. Ŧħḗşḗ ḗŀḗḿḗƞŧş ȧřḗ ƈǿḿḿǿƞ ŧǿ ȧŀŀ ṽīḓḗǿ ƒīŀḗş."
+
+#. Omeka Video File: Bitrate element
+msgid "Bitrate"
+msgstr "Ɓīŧřȧŧḗ"
+
+# Omeka Video File: Duration element
+msgid "Duration"
+msgstr "Ḓŭřȧŧīǿƞ"
+
+#. Omeka Video File: Sample Rate element
+msgid "Sample Rate"
+msgstr "Şȧḿƥŀḗ Řȧŧḗ"
+
+#. Omeka Video File: Codec element
+msgid "Codec"
+msgstr "Ƈǿḓḗƈ"
+
+#. Format (Legacy) Metadata element set
+msgid "Format (Legacy) Metadata"
+msgstr "Ƒǿřḿȧŧ (Ŀḗɠȧƈẏ) Ḿḗŧȧḓȧŧȧ"
+
+#. User role: Super
+msgid "Super"
+msgstr "Şŭƥḗř"
+
+#. User role: Admin
+msgid "Admin"
+msgstr "Ȧḓḿīƞ"
+
+#. User role: Researcher
+msgid "Researcher"
+msgstr "Řḗşḗȧřƈħḗř"
+
+#: admin/themes/default/appearance/edit-navigation.php:3
+#: admin/themes/default/appearance/edit-settings.php:2
+#: admin/themes/default/common/global-nav.php:11
+#: admin/themes/default/themes/browse.php:2
+#: admin/themes/default/themes/config.php:3
+msgid "Appearance"
+msgstr "Ȧƥƥḗȧřȧƞƈḗ"
+
+#: admin/themes/default/appearance/edit-navigation.php:14
+msgid ""
+"Check the links to display them in the main navigation. Click and drag the "
+"links into the preferred display order."
+msgstr ""
+"Ƈħḗƈķ ŧħḗ ŀīƞķş ŧǿ ḓīşƥŀȧẏ ŧħḗḿ īƞ ŧħḗ ḿȧīƞ ƞȧṽīɠȧŧīǿƞ. Ƈŀīƈķ ȧƞḓ ḓřȧɠ ŧħḗ "
+"ŀīƞķş īƞŧǿ ŧħḗ ƥřḗƒḗřřḗḓ ḓīşƥŀȧẏ ǿřḓḗř."
+
+#: admin/themes/default/appearance/edit-navigation.php:19
+msgid "Add a Link to the Navigation"
+msgstr "Ȧḓḓ ȧ Ŀīƞķ ŧǿ ŧħḗ Ƞȧṽīɠȧŧīǿƞ"
+
+#: admin/themes/default/appearance/edit-navigation.php:21
+#: admin/themes/default/appearance/edit-navigation.php:37
+#: admin/themes/default/users/api-keys.php:40
+#: application/forms/Navigation.php:132
+msgid "Label"
+msgstr "Ŀȧƀḗŀ"
+
+#: admin/themes/default/appearance/edit-navigation.php:23
+#: admin/themes/default/appearance/edit-navigation.php:38
+#: application/forms/Navigation.php:133
+msgid "URL"
+msgstr "ŬŘĿ"
+
+#: admin/themes/default/appearance/edit-navigation.php:25
+msgid "Add Link"
+msgstr "Ȧḓḓ Ŀīƞķ"
+
+#: admin/themes/default/appearance/edit-navigation.php:31
+#: admin/themes/default/appearance/edit-settings.php:21
+#: admin/themes/default/collections/edit.php:22
+#: admin/themes/default/element-sets/edit.php:41
+#: admin/themes/default/files/edit.php:30
+#: admin/themes/default/items/batch-edit.php:130
+#: admin/themes/default/items/edit.php:19
+#: admin/themes/default/plugins/config.php:14
+#: admin/themes/default/settings/edit-api.php:81
+#: admin/themes/default/settings/edit-item-type-elements.php:38
+#: admin/themes/default/settings/edit-search.php:40
+#: admin/themes/default/settings/edit-security.php:15
+#: admin/themes/default/settings/edit-settings.php:15
+#: admin/themes/default/themes/config.php:16
+#: admin/themes/default/users/edit.php:21
+#: application/controllers/UsersController.php:198
+#: application/controllers/UsersController.php:221
+#: application/forms/ItemTypes.php:169
+#: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:73
+msgid "Save Changes"
+msgstr "Şȧṽḗ Ƈħȧƞɠḗş"
+
+#: admin/themes/default/appearance/edit-navigation.php:39
+#: admin/themes/default/collections/edit.php:23
+#: admin/themes/default/collections/show.php:34
+#: admin/themes/default/files/show.php:28
+#: admin/themes/default/items/edit.php:20
+#: admin/themes/default/items/show.php:45
+#: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:79
+msgid "View Public Page"
+msgstr "Ṽīḗẇ Ƥŭƀŀīƈ Ƥȧɠḗ"
+
+#: admin/themes/default/appearance/edit-navigation.php:40
+#: admin/themes/default/collections/edit.php:24
+#: admin/themes/default/collections/show.php:36
+#: admin/themes/default/element-sets/browse.php:29
+#: admin/themes/default/files/edit.php:32
+#: admin/themes/default/files/show.php:30
+#: admin/themes/default/item-types/edit.php:20
+#: admin/themes/default/item-types/show.php:54
+#: admin/themes/default/items/batch-edit.php:119
+#: admin/themes/default/items/browse.php:27
+#: admin/themes/default/items/browse.php:81
+#: admin/themes/default/items/browse.php:123
+#: admin/themes/default/items/edit.php:21
+#: admin/themes/default/items/show.php:47
+#: admin/themes/default/settings/edit-item-type-elements.php:23
+#: admin/themes/default/users/browse.php:66
+#: admin/themes/default/users/edit.php:26
+#: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:83
+msgid "Delete"
+msgstr "Ḓḗŀḗŧḗ"
+
+#: admin/themes/default/collections/add.php:2
+#: admin/themes/default/collections/browse.php:11
+#: admin/themes/default/collections/browse.php:67
+#: admin/themes/default/collections/browse.php:76
+msgid "Add a Collection"
+msgstr "Ȧḓḓ ȧ Ƈǿŀŀḗƈŧīǿƞ"
+
+#: admin/themes/default/collections/add.php:11
+msgid "Add Collection"
+msgstr "Ȧḓḓ Ƈǿŀŀḗƈŧīǿƞ"
+
+#: admin/themes/default/collections/add.php:16
+#: admin/themes/default/collections/edit.php:30
+#: admin/themes/default/collections/show.php:41
+#: admin/themes/default/items/add.php:19
+#: admin/themes/default/items/batch-edit.php:50
+#: admin/themes/default/items/edit.php:28
+#: admin/themes/default/items/quick-filters.php:6
+#: admin/themes/default/items/show.php:52
+msgid "Public"
+msgstr "Ƥŭƀŀīƈ"
+
+#: admin/themes/default/collections/add.php:19
+#: admin/themes/default/collections/edit.php:35
+#: admin/themes/default/collections/show.php:42
+#: admin/themes/default/items/add.php:25
+#: admin/themes/default/items/batch-edit.php:65
+#: admin/themes/default/items/edit.php:34
+#: admin/themes/default/items/quick-filters.php:8
+#: admin/themes/default/items/show.php:53
+msgid "Featured"
+msgstr "Ƒḗȧŧŭřḗḓ"
+
+#: admin/themes/default/collections/browse.php:2
+#: application/libraries/Omeka/Navigation.php:149
+#: application/tests/suite/Omeka/NavigationTest.php:747
+#: application/tests/suite/Omeka/NavigationTest.php:816
+#: application/tests/suite/Omeka/NavigationTest.php:831
+#: application/tests/suite/Omeka/NavigationTest.php:950
+#: application/views/scripts/collections/browse.php:2
+msgid "Browse Collections"
+msgstr "Ɓřǿẇşḗ Ƈǿŀŀḗƈŧīǿƞş"
+
+#: admin/themes/default/collections/browse.php:2
+#: admin/themes/default/item-types/browse.php:2
+#: admin/themes/default/items/browse.php:3
+#: admin/themes/default/plugins/browse.php:2
+#: admin/themes/default/tags/browse.php:12
+#: admin/themes/default/users/browse.php:2
+#: application/views/scripts/collections/browse.php:6
+#: application/views/scripts/items/browse.php:6
+#: application/views/scripts/search/index.php:2
+#, php-format
+msgid "(%s total)"
+msgstr "(%s ŧǿŧȧŀ)"
+
+#: admin/themes/default/collections/browse.php:23
+#: admin/themes/default/collections/show.php:51
+#: application/views/scripts/collections/browse.php:36
+msgid "Contributors"
+msgstr "Ƈǿƞŧřīƀŭŧǿřş"
+
+#: admin/themes/default/collections/browse.php:24
+#: admin/themes/default/files/show.php:66
+#: admin/themes/default/items/browse.php:43
+#: application/views/scripts/collections/browse.php:11
+#: application/views/scripts/items/browse.php:21
+msgid "Date Added"
+msgstr "Ḓȧŧḗ Ȧḓḓḗḓ"
+
+#: admin/themes/default/collections/browse.php:25
+#: admin/themes/default/collections/show.php:46
+#: admin/themes/default/item-types/show.php:42
+msgid "Total Number of Items"
+msgstr "Ŧǿŧȧŀ Ƞŭḿƀḗř ǿƒ Īŧḗḿş"
+
+#: admin/themes/default/collections/browse.php:40
+#: admin/themes/default/items/browse.php:72
+msgid "(Private)"
+msgstr "(Ƥřīṽȧŧḗ)"
+
+#: admin/themes/default/collections/browse.php:43
+#: admin/themes/default/collections/show.php:32
+#: admin/themes/default/element-sets/browse.php:27
+#: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
+#: admin/themes/default/files/show.php:26 admin/themes/default/index.php:54
+#: admin/themes/default/index.php:73
+#: admin/themes/default/item-types/browse.php:26
+#: admin/themes/default/item-types/show.php:51
+#: admin/themes/default/items/browse.php:24
+#: admin/themes/default/items/browse.php:77
+#: admin/themes/default/items/browse.php:120
+#: admin/themes/default/items/files-form.php:12
+#: admin/themes/default/items/show.php:43
+#: admin/themes/default/users/browse.php:63
+msgid "Edit"
+msgstr "Ḗḓīŧ"
+
+#: admin/themes/default/collections/browse.php:52
+msgid "No contributors"
+msgstr "Ƞǿ ƈǿƞŧřīƀŭŧǿřş"
+
+#: admin/themes/default/collections/browse.php:70
+msgid "There are no collections on this page."
+msgstr "Ŧħḗřḗ ȧřḗ ƞǿ ƈǿŀŀḗƈŧīǿƞş ǿƞ ŧħīş ƥȧɠḗ."
+
+#: admin/themes/default/collections/browse.php:70
+msgid "View All Collections"
+msgstr "Ṽīḗẇ Ȧŀŀ Ƈǿŀŀḗƈŧīǿƞş"
+
+#: admin/themes/default/collections/browse.php:73
+msgid "You have no collections."
+msgstr "Ẏǿŭ ħȧṽḗ ƞǿ ƈǿŀŀḗƈŧīǿƞş."
+
+#: admin/themes/default/collections/browse.php:75
+msgid "Get started by adding your first collection."
+msgstr "Ɠḗŧ şŧȧřŧḗḓ ƀẏ ȧḓḓīƞɠ ẏǿŭř ƒīřşŧ ƈǿŀŀḗƈŧīǿƞ."
+
+#: admin/themes/default/collections/edit.php:3
+#: admin/themes/default/collections/show.php:3
+#: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
+#: application/libraries/globals.php:2573
+#: application/views/scripts/collections/show.php:4
+#: application/views/scripts/functions.php:14
+msgid "[Untitled]"
+msgstr "[Ŭƞŧīŧŀḗḓ]"
+
+#: admin/themes/default/collections/edit.php:8
+#, php-format
+msgid "Edit Collection #%s"
+msgstr "Ḗḓīŧ Ƈǿŀŀḗƈŧīǿƞ #%s"
+
+#: admin/themes/default/collections/show.php:8
+#, php-format
+msgid "Collection #%s"
+msgstr "Ƈǿŀŀḗƈŧīǿƞ #%s"
+
+#: admin/themes/default/collections/show.php:18
+#: admin/themes/default/item-types/show.php:30
+#: application/views/scripts/index.php:40
+msgid "Recently Added Items"
+msgstr "Řḗƈḗƞŧŀẏ Ȧḓḓḗḓ Īŧḗḿş"
+
+#: admin/themes/default/collections/show.php:41
+#: admin/themes/default/collections/show.php:42
+#: admin/themes/default/items/show.php:52
+#: admin/themes/default/items/show.php:53
+#: application/views/helpers/ItemSearchFilters.php:69
+msgid "Yes"
+msgstr "Ẏḗş"
+
+#: admin/themes/default/collections/show.php:41
+#: admin/themes/default/collections/show.php:42
+#: admin/themes/default/items/show.php:52
+#: admin/themes/default/items/show.php:53
+#: application/views/helpers/ItemSearchFilters.php:69
+msgid "No"
+msgstr "Ƞǿ"
+
+#: admin/themes/default/collections/show.php:56
+msgid "No contributors."
+msgstr "Ƞǿ ƈǿƞŧřīƀŭŧǿřş."
+
+#: admin/themes/default/common/appearance-nav.php:5
+msgid "Themes"
+msgstr "Ŧħḗḿḗş"
+
+#: admin/themes/default/common/appearance-nav.php:11
+msgid "Navigation"
+msgstr "Ƞȧṽīɠȧŧīǿƞ"
+
+#: admin/themes/default/common/appearance-nav.php:15
+#: admin/themes/default/common/global-nav.php:23
+#: admin/themes/default/element-sets/browse.php:6
+#: admin/themes/default/settings/edit-api.php:2
+#: admin/themes/default/settings/edit-item-type-elements.php:3
+#: admin/themes/default/settings/edit-search.php:2
+#: admin/themes/default/settings/edit-security.php:3
+#: admin/themes/default/settings/edit-settings.php:3
+msgid "Settings"
+msgstr "Şḗŧŧīƞɠş"
+
+#: admin/themes/default/common/content-nav.php:5
+#: admin/themes/default/index.php:2
+msgid "Dashboard"
+msgstr "Ḓȧşħƀǿȧřḓ"
+
+#: admin/themes/default/common/content-nav.php:9
+#: admin/themes/default/items/batch-delete.php:17
+#: admin/themes/default/items/batch-edit.php:17
+msgid "Items"
+msgstr "Īŧḗḿş"
+
+#: admin/themes/default/common/content-nav.php:13
+msgid "Collections"
+msgstr "Ƈǿŀŀḗƈŧīǿƞş"
+
+#: admin/themes/default/common/content-nav.php:17
+msgid "Item Types"
+msgstr "Īŧḗḿ Ŧẏƥḗş"
+
+#: admin/themes/default/common/content-nav.php:21
+#: admin/themes/default/items/browse.php:94
+#: admin/themes/default/items/show.php:65
+#: application/views/scripts/items/browse.php:46
+#: application/views/scripts/items/show.php:26
+msgid "Tags"
+msgstr "Ŧȧɠş"
+
+#: admin/themes/default/common/delete-confirm.php:3
+#: application/views/scripts/common/delete-confirm.php:3
+#, php-format
+msgid "Delete %s"
+msgstr "Ḓḗŀḗŧḗ %s"
+
+#: admin/themes/default/common/delete-confirm.php:10
+#: application/views/scripts/common/delete-confirm.php:12
+msgid "Are you sure?"
+msgstr "Ȧřḗ ẏǿŭ şŭřḗ?"
+
+#: admin/themes/default/common/footer.php:6
+#: admin/themes/default/common/login-footer.php:7
+msgid "Powered by Omeka"
+msgstr "Ƥǿẇḗřḗḓ ƀẏ Ǿḿḗķȧ"
+
+#: admin/themes/default/common/footer.php:6
+msgid "Documentation"
+msgstr "Ḓǿƈŭḿḗƞŧȧŧīǿƞ"
+
+#: admin/themes/default/common/footer.php:6
+msgid "Support Forums"
+msgstr "Şŭƥƥǿřŧ Ƒǿřŭḿş"
+
+#: admin/themes/default/common/footer.php:8
+#: admin/themes/default/common/login-footer.php:8
+#: admin/themes/default/plugins/browse.php:52
+#, php-format
+msgid "Version %s"
+msgstr "Ṽḗřşīǿƞ %s"
+
+#: admin/themes/default/common/footer.php:10
+#: admin/themes/default/system-info/index.php:2
+msgid "System Information"
+msgstr "Şẏşŧḗḿ Īƞƒǿřḿȧŧīǿƞ"
+
+#: admin/themes/default/common/global-nav.php:5
+#: admin/themes/default/plugins/browse.php:2
+msgid "Plugins"
+msgstr "Ƥŀŭɠīƞş"
+
+#: admin/themes/default/common/global-nav.php:17
+msgid "Users"
+msgstr "Ŭşḗřş"
+
+#: admin/themes/default/common/header.php:11
+#: admin/themes/default/upgrade/index.php:6
+#: admin/themes/default/upgrade/migrate.php:6
+#: application/views/scripts/common/admin-bar.php:11
+msgid "Omeka Admin"
+msgstr "Ǿḿḗķȧ Ȧḓḿīƞ"
+
+#: admin/themes/default/common/header.php:60
+#: application/views/scripts/common/admin-bar.php:7
+#, php-format
+msgid "Welcome, %s"
+msgstr "Ẇḗŀƈǿḿḗ, %s"
+
+#: admin/themes/default/common/header.php:61
+#: application/views/scripts/common/admin-bar.php:15
+msgid "Log Out"
+msgstr "Ŀǿɠ Ǿŭŧ"
+
+#: admin/themes/default/common/settings-nav.php:6
+#: admin/themes/default/common/users-nav.php:5
+msgid "General"
+msgstr "Ɠḗƞḗřȧŀ"
+
+#: admin/themes/default/common/settings-nav.php:10
+msgid "Security"
+msgstr "Şḗƈŭřīŧẏ"
+
+#: admin/themes/default/common/settings-nav.php:16
+#: application/views/helpers/SearchForm.php:34
+#: application/views/scripts/items/search-form.php:189
+#: application/views/scripts/search/search-form.php:2
+#: application/views/scripts/search/search-form.php:22
+msgid "Search"
+msgstr "Şḗȧřƈħ"
+
+#: admin/themes/default/common/settings-nav.php:20
+msgid "Element Sets"
+msgstr "Ḗŀḗḿḗƞŧ Şḗŧş"
+
+#: admin/themes/default/common/settings-nav.php:26
+msgid "Item Type Elements"
+msgstr "Īŧḗḿ Ŧẏƥḗ Ḗŀḗḿḗƞŧş"
+
+#: admin/themes/default/common/settings-nav.php:32
+msgid "API"
+msgstr "ȦƤĪ"
+
+#: admin/themes/default/common/users-nav.php:11
+#: application/forms/ChangePassword.php:78
+msgid "Change Password"
+msgstr "Ƈħȧƞɠḗ Ƥȧşşẇǿřḓ"
+
+#: admin/themes/default/common/users-nav.php:17
+#: admin/themes/default/users/api-keys.php:14
+msgid "API Keys"
+msgstr "ȦƤĪ Ķḗẏş"
+
+#: admin/themes/default/element-sets/browse.php:16
+#: admin/themes/default/users/browse.php:17
+#: application/forms/ItemTypes.php:141
+msgid "Name"
+msgstr "Ƞȧḿḗ"
+
+#: admin/themes/default/element-sets/edit.php:5
+msgid "Edit Element Set"
+msgstr "Ḗḓīŧ Ḗŀḗḿḗƞŧ Şḗŧ"
+
+#: admin/themes/default/element-sets/edit.php:17
+msgid ""
+"Click and drag the elements into the preferred display order. Click the "
+"right arrows to add customized comments to element descriptions."
+msgstr ""
+"Ƈŀīƈķ ȧƞḓ ḓřȧɠ ŧħḗ ḗŀḗḿḗƞŧş īƞŧǿ ŧħḗ ƥřḗƒḗřřḗḓ ḓīşƥŀȧẏ ǿřḓḗř. Ƈŀīƈķ ŧħḗ "
+"řīɠħŧ ȧřřǿẇş ŧǿ ȧḓḓ ƈŭşŧǿḿīzḗḓ ƈǿḿḿḗƞŧş ŧǿ ḗŀḗḿḗƞŧ ḓḗşƈřīƥŧīǿƞş."
+
+#: admin/themes/default/element-sets/edit.php:29
+msgid "Comment"
+msgstr "Ƈǿḿḿḗƞŧ"
+
+#: admin/themes/default/error/403.php:2
+msgid "403: Forbidden"
+msgstr "403: Ƒǿřƀīḓḓḗƞ"
+
+#: admin/themes/default/error/403.php:6
+msgid "Sorry, you do not have permission to access this page."
+msgstr "Şǿřřẏ, ẏǿŭ ḓǿ ƞǿŧ ħȧṽḗ ƥḗřḿīşşīǿƞ ŧǿ ȧƈƈḗşş ŧħīş ƥȧɠḗ."
+
+#: admin/themes/default/error/403.php:10 admin/themes/default/error/404.php:9
+#: admin/themes/default/error/405.php:8
+msgid "site administrator"
+msgstr "şīŧḗ ȧḓḿīƞīşŧřȧŧǿř"
+
+#: admin/themes/default/error/403.php:11
+#, php-format
+msgid "If you think you should have permission, try contacting the %s."
+msgstr "Īƒ ẏǿŭ ŧħīƞķ ẏǿŭ şħǿŭŀḓ ħȧṽḗ ƥḗřḿīşşīǿƞ, ŧřẏ ƈǿƞŧȧƈŧīƞɠ ŧħḗ %s."
+
+#: admin/themes/default/error/404.php:2
+msgid "404: Page Not Found"
+msgstr "404: Ƥȧɠḗ Ƞǿŧ Ƒǿŭƞḓ"
+
+#: admin/themes/default/error/404.php:6
+msgid ""
+"You&#8217;ve tried to access a page that does not seem to exist. Sometimes "
+"this happens. Below is a quick break-down of the items, collections, and "
+"exhibits on this site."
+msgstr ""
+"Ẏǿŭ&#8217;ṽḗ ŧřīḗḓ ŧǿ ȧƈƈḗşş ȧ ƥȧɠḗ ŧħȧŧ ḓǿḗş ƞǿŧ şḗḗḿ ŧǿ ḗẋīşŧ. Şǿḿḗŧīḿḗş "
+"ŧħīş ħȧƥƥḗƞş. Ɓḗŀǿẇ īş ȧ ɋŭīƈķ ƀřḗȧķ-ḓǿẇƞ ǿƒ ŧħḗ īŧḗḿş, ƈǿŀŀḗƈŧīǿƞş, ȧƞḓ "
+"ḗẋħīƀīŧş ǿƞ ŧħīş şīŧḗ."
+
+#: admin/themes/default/error/404.php:10
+#, php-format
+msgid "If this does not help, try contacting the %s."
+msgstr "Īƒ ŧħīş ḓǿḗş ƞǿŧ ħḗŀƥ, ŧřẏ ƈǿƞŧȧƈŧīƞɠ ŧħḗ %s."
+
+#: admin/themes/default/error/404.php:16 admin/themes/default/index.php:46
+msgid "Recent Items"
+msgstr "Řḗƈḗƞŧ Īŧḗḿş"
+
+#: admin/themes/default/error/404.php:29 admin/themes/default/index.php:59
+msgid "Add a new item"
+msgstr "Ȧḓḓ ȧ ƞḗẇ īŧḗḿ"
+
+#: admin/themes/default/error/404.php:36 admin/themes/default/index.php:64
+msgid "Recent Collections"
+msgstr "Řḗƈḗƞŧ Ƈǿŀŀḗƈŧīǿƞş"
+
+#: admin/themes/default/error/404.php:50 admin/themes/default/index.php:78
+msgid "Add a new collection"
+msgstr "Ȧḓḓ ȧ ƞḗẇ ƈǿŀŀḗƈŧīǿƞ"
+
+#: admin/themes/default/error/405.php:2
+msgid "405: Method Not Allowed"
+msgstr "405: Ḿḗŧħǿḓ Ƞǿŧ Ȧŀŀǿẇḗḓ"
+
+#: admin/themes/default/error/405.php:9
+#, php-format
+msgid ""
+"You must use a different method to access this URL. If you reached this page "
+"by following a link or clicking a button in Omeka, please contact the %s."
+msgstr ""
+"Ẏǿŭ ḿŭşŧ ŭşḗ ȧ ḓīƒƒḗřḗƞŧ ḿḗŧħǿḓ ŧǿ ȧƈƈḗşş ŧħīş ŬŘĿ. Īƒ ẏǿŭ řḗȧƈħḗḓ ŧħīş ƥȧɠḗ "
+"ƀẏ ƒǿŀŀǿẇīƞɠ ȧ ŀīƞķ ǿř ƈŀīƈķīƞɠ ȧ ƀŭŧŧǿƞ īƞ Ǿḿḗķȧ, ƥŀḗȧşḗ ƈǿƞŧȧƈŧ ŧħḗ %s."
+
+#: admin/themes/default/files/edit.php:8
+#, php-format
+msgid "Edit File #%s"
+msgstr "Ḗḓīŧ Ƒīŀḗ #%s"
+
+#: admin/themes/default/files/show.php:9
+#: application/views/scripts/files/show.php:9
+#, php-format
+msgid "File #%s"
+msgstr "Ƒīŀḗ #%s"
+
+#: admin/themes/default/files/show.php:35
+#: application/libraries/globals.php:416
+msgid "Item"
+msgstr "Īŧḗḿ"
+
+#: admin/themes/default/files/show.php:40
+msgid "Direct Links"
+msgstr "Ḓīřḗƈŧ Ŀīƞķş"
+
+#: admin/themes/default/files/show.php:42
+msgid "Original"
+msgstr "Ǿřīɠīƞȧŀ"
+
+#: admin/themes/default/files/show.php:44
+msgid "Fullsize"
+msgstr "Ƒŭŀŀşīzḗ"
+
+#: admin/themes/default/files/show.php:45
+msgid "Thumbnail"
+msgstr "Ŧħŭḿƀƞȧīŀ"
+
+#: admin/themes/default/files/show.php:46
+msgid "Square Thumbnail"
+msgstr "Şɋŭȧřḗ Ŧħŭḿƀƞȧīŀ"
+
+#: admin/themes/default/files/show.php:52
+#: application/views/scripts/files/show.php:22
+msgid "Format Metadata"
+msgstr "Ƒǿřḿȧŧ Ḿḗŧȧḓȧŧȧ"
+
+#: admin/themes/default/files/show.php:54
+msgid "Filename"
+msgstr "Ƒīŀḗƞȧḿḗ"
+
+#: admin/themes/default/files/show.php:56
+#: application/views/scripts/files/show.php:24
+msgid "Original Filename"
+msgstr "Ǿřīɠīƞȧŀ Ƒīŀḗƞȧḿḗ"
+
+#: admin/themes/default/files/show.php:58
+#: application/views/scripts/files/show.php:29
+msgid "File Size"
+msgstr "Ƒīŀḗ Şīzḗ"
+
+#: admin/themes/default/files/show.php:59
+#: application/views/scripts/files/show.php:30
+#, php-format
+msgid "%s bytes"
+msgstr "%s ƀẏŧḗş"
+
+#: admin/themes/default/files/show.php:64
+msgid "File History"
+msgstr "Ƒīŀḗ Ħīşŧǿřẏ"
+
+#: admin/themes/default/files/show.php:68
+msgid "Date Modified"
+msgstr "Ḓȧŧḗ Ḿǿḓīƒīḗḓ"
+
+#: admin/themes/default/files/show.php:70
+#: application/views/scripts/files/show.php:34
+msgid "Authentication"
+msgstr "Ȧŭŧħḗƞŧīƈȧŧīǿƞ"
+
+#: admin/themes/default/files/show.php:76
+#: application/views/scripts/files/show.php:40
+msgid "Type Metadata"
+msgstr "Ŧẏƥḗ Ḿḗŧȧḓȧŧȧ"
+
+#: admin/themes/default/files/show.php:78
+#: application/views/scripts/files/show.php:42
+msgid "Mime Type"
+msgstr "Ḿīḿḗ Ŧẏƥḗ"
+
+#: admin/themes/default/files/show.php:80
+#: application/views/scripts/files/show.php:46
+msgid "File Type / OS"
+msgstr "Ƒīŀḗ Ŧẏƥḗ / ǾŞ"
+
+#: admin/themes/default/files/show.php:87
+msgid "Embedded Metadata"
+msgstr "Ḗḿƀḗḓḓḗḓ Ḿḗŧȧḓȧŧȧ"
+
+#: admin/themes/default/files/show.php:93
+#: admin/themes/default/items/browse.php:133
+#: admin/themes/default/items/show.php:88
+#: application/views/scripts/items/browse.php:60
+#: application/views/scripts/items/show.php:38
+msgid "Output Formats"
+msgstr "Ǿŭŧƥŭŧ Ƒǿřḿȧŧş"
+
+#: admin/themes/default/index.php:6
+msgid "items"
+msgstr "īŧḗḿş"
+
+#: admin/themes/default/index.php:7
+msgid "collections"
+msgstr "ƈǿŀŀḗƈŧīǿƞş"
+
+#: admin/themes/default/index.php:8
+msgid "tags"
+msgstr "ŧȧɠş"
+
+#: admin/themes/default/index.php:11
+msgid "plugins"
+msgstr "ƥŀŭɠīƞş"
+
+#: admin/themes/default/index.php:14
+msgid "users"
+msgstr "ŭşḗřş"
+
+#: admin/themes/default/index.php:18
+msgid "theme"
+msgstr "ŧħḗḿḗ"
+
+#: admin/themes/default/index.php:29
+msgid "A new version of Omeka is available for download."
+msgstr "Ȧ ƞḗẇ ṽḗřşīǿƞ ǿƒ Ǿḿḗķȧ īş ȧṽȧīŀȧƀŀḗ ƒǿř ḓǿẇƞŀǿȧḓ."
+
+#: admin/themes/default/index.php:30
+#, php-format
+msgid "Upgrade to %s"
+msgstr "Ŭƥɠřȧḓḗ ŧǿ %s"
+
+#: admin/themes/default/item-types/add-existing-element.php:22
+#: admin/themes/default/item-types/add-new-element.php:15
+#: admin/themes/default/item-types/form.php:43
+#: admin/themes/default/items/tag-form.php:23
+#: application/views/helpers/ElementInput.php:113
+msgid "Remove"
+msgstr "Řḗḿǿṽḗ"
+
+#: admin/themes/default/item-types/add-new-element.php:6
+msgid "Element Name"
+msgstr "Ḗŀḗḿḗƞŧ Ƞȧḿḗ"
+
+#: admin/themes/default/item-types/add-new-element.php:22
+msgid "Element Description"
+msgstr "Ḗŀḗḿḗƞŧ Ḓḗşƈřīƥŧīǿƞ"
+
+#: admin/themes/default/item-types/add.php:2
+#: application/forms/ItemTypes.php:161
+msgid "Add Item Type"
+msgstr "Ȧḓḓ Īŧḗḿ Ŧẏƥḗ"
+
+#: admin/themes/default/item-types/browse.php:2
+msgid "Browse Item Types"
+msgstr "Ɓřǿẇşḗ Īŧḗḿ Ŧẏƥḗş"
+
+#: admin/themes/default/item-types/browse.php:7
+#: admin/themes/default/item-types/browse.php:40
+msgid "Add an Item Type"
+msgstr "Ȧḓḓ ȧƞ Īŧḗḿ Ŧẏƥḗ"
+
+#: admin/themes/default/item-types/browse.php:14
+msgid "Type Name"
+msgstr "Ŧẏƥḗ Ƞȧḿḗ"
+
+#: admin/themes/default/item-types/browse.php:16
+msgid "Total Items"
+msgstr "Ŧǿŧȧŀ Īŧḗḿş"
+
+#: admin/themes/default/item-types/edit.php:8
+#, php-format
+msgid "Edit Item Type #%s"
+msgstr "Ḗḓīŧ Īŧḗḿ Ŧẏƥḗ #%s"
+
+#: admin/themes/default/item-types/form.php:14
+msgid "Item Type Information"
+msgstr "Īŧḗḿ Ŧẏƥḗ Īƞƒǿřḿȧŧīǿƞ"
+
+#: admin/themes/default/item-types/form.php:15
+#: admin/themes/default/users/add.php:7
+#: admin/themes/default/users/change-password.php:15
+#: admin/themes/default/users/edit.php:15
+#: install/views/scripts/index/index.phtml:14
+msgid "required field"
+msgstr "řḗɋŭīřḗḓ ƒīḗŀḓ"
+
+#: admin/themes/default/item-types/form.php:25
+#: admin/themes/default/item-types/show.php:16
+msgid "Elements"
+msgstr "Ḗŀḗḿḗƞŧş"
+
+#: admin/themes/default/item-types/form.php:42
+#: admin/themes/default/items/tag-form.php:22
+#: admin/themes/default/settings/edit-item-type-elements.php:22
+msgid "Undo"
+msgstr "Ŭƞḓǿ"
+
+#: admin/themes/default/item-types/form.php:80
+#: admin/themes/default/item-types/form.php:87
+msgid "Add Element"
+msgstr "Ȧḓḓ Ḗŀḗḿḗƞŧ"
+
+#: admin/themes/default/item-types/form.php:84
+msgid "Existing"
+msgstr "Ḗẋīşŧīƞɠ"
+
+#: admin/themes/default/item-types/form.php:85
+msgid "New"
+msgstr "Ƞḗẇ"
+
+#: admin/themes/default/item-types/show.php:8
+#, php-format
+msgid "Item Type #%s"
+msgstr "Īŧḗḿ Ŧẏƥḗ #%s"
+
+#: admin/themes/default/item-types/show.php:25
+msgid "There are no elements."
+msgstr "Ŧħḗřḗ ȧřḗ ƞǿ ḗŀḗḿḗƞŧş."
+
+#: admin/themes/default/item-types/show.php:39
+msgid "There are no recently added items."
+msgstr "Ŧħḗřḗ ȧřḗ ƞǿ řḗƈḗƞŧŀẏ ȧḓḓḗḓ īŧḗḿş."
+
+#: admin/themes/default/items/add.php:2
+#: admin/themes/default/items/browse.php:20
+#: admin/themes/default/items/browse.php:116
+#: admin/themes/default/items/browse.php:151
+msgid "Add an Item"
+msgstr "Ȧḓḓ ȧƞ Īŧḗḿ"
+
+#: admin/themes/default/items/add.php:12
+msgid "Add Item"
+msgstr "Ȧḓḓ Īŧḗḿ"
+
+#: admin/themes/default/items/add.php:32
+#: admin/themes/default/items/batch-edit.php:89
+#: admin/themes/default/items/browse.php:90
+#: admin/themes/default/items/edit.php:41
+#: admin/themes/default/items/show.php:57
+#: application/libraries/globals.php:418
+#: application/views/scripts/items/show.php:18
+msgid "Collection"
+msgstr "Ƈǿŀŀḗƈŧīǿƞ"
+
+#: admin/themes/default/items/batch-delete.php:2
+msgid "Batch Delete Items"
+msgstr "Ɓȧŧƈħ Ḓḗŀḗŧḗ Īŧḗḿş"
+
+#: admin/themes/default/items/batch-delete.php:38
+msgid ""
+"Some items were excluded because you do not have permission to delete them."
+msgstr ""
+"Şǿḿḗ īŧḗḿş ẇḗřḗ ḗẋƈŀŭḓḗḓ ƀḗƈȧŭşḗ ẏǿŭ ḓǿ ƞǿŧ ħȧṽḗ ƥḗřḿīşşīǿƞ ŧǿ ḓḗŀḗŧḗ ŧħḗḿ."
+
+#: admin/themes/default/items/batch-delete.php:41
+msgid "Checked items will be deleted."
+msgstr "Ƈħḗƈķḗḓ īŧḗḿş ẇīŀŀ ƀḗ ḓḗŀḗŧḗḓ."
+
+#: admin/themes/default/items/batch-delete.php:50
+#: admin/themes/default/items/batch-edit.php:116
+msgid "Delete Items"
+msgstr "Ḓḗŀḗŧḗ Īŧḗḿş"
+
+#: admin/themes/default/items/batch-edit.php:2
+msgid "Batch Edit Items"
+msgstr "Ɓȧŧƈħ Ḗḓīŧ Īŧḗḿş"
+
+#: admin/themes/default/items/batch-edit.php:36
+msgid "Changes will be applied to checked items."
+msgstr "Ƈħȧƞɠḗş ẇīŀŀ ƀḗ ȧƥƥŀīḗḓ ŧǿ ƈħḗƈķḗḓ īŧḗḿş."
+
+#: admin/themes/default/items/batch-edit.php:41
+msgid "Item Metadata"
+msgstr "Īŧḗḿ Ḿḗŧȧḓȧŧȧ"
+
+#: admin/themes/default/items/batch-edit.php:46
+msgid "Public?"
+msgstr "Ƥŭƀŀīƈ?"
+
+#: admin/themes/default/items/batch-edit.php:49
+#: admin/themes/default/items/batch-edit.php:64
+#: admin/themes/default/items/batch-edit.php:78
+#: admin/themes/default/items/batch-edit.php:93
+msgid "Select Below"
+msgstr "Şḗŀḗƈŧ Ɓḗŀǿẇ"
+
+#: admin/themes/default/items/batch-edit.php:51
+msgid "Not Public"
+msgstr "Ƞǿŧ Ƥŭƀŀīƈ"
+
+#: admin/themes/default/items/batch-edit.php:61
+msgid "Featured?"
+msgstr "Ƒḗȧŧŭřḗḓ?"
+
+#: admin/themes/default/items/batch-edit.php:66
+msgid "Not Featured"
+msgstr "Ƞǿŧ Ƒḗȧŧŭřḗḓ"
+
+#: admin/themes/default/items/batch-edit.php:74
+#: admin/themes/default/items/item-type-form.php:3
+msgid "Item Type"
+msgstr "Īŧḗḿ Ŧẏƥḗ"
+
+#: admin/themes/default/items/batch-edit.php:83
+#: admin/themes/default/items/batch-edit.php:98
+msgid "Remove?"
+msgstr "Řḗḿǿṽḗ?"
+
+#: admin/themes/default/items/batch-edit.php:104
+#: admin/themes/default/items/tag-form.php:8
+#: admin/themes/default/items/tag-form.php:11
+msgid "Add Tags"
+msgstr "Ȧḓḓ Ŧȧɠş"
+
+#: admin/themes/default/items/batch-edit.php:107
+#, php-format
+msgid "List of tags to add to all checked items, separated by %s."
+msgstr "Ŀīşŧ ǿƒ ŧȧɠş ŧǿ ȧḓḓ ŧǿ ȧŀŀ ƈħḗƈķḗḓ īŧḗḿş, şḗƥȧřȧŧḗḓ ƀẏ %s."
+
+#: admin/themes/default/items/batch-edit.php:117
+msgid "Check if you wish to delete selected items."
+msgstr "Ƈħḗƈķ īƒ ẏǿŭ ẇīşħ ŧǿ ḓḗŀḗŧḗ şḗŀḗƈŧḗḓ īŧḗḿş."
+
+#: admin/themes/default/items/browse.php:3
+#: application/libraries/Omeka/Navigation.php:142
+#: application/tests/suite/Omeka/NavigationTest.php:37
+#: application/tests/suite/Omeka/NavigationTest.php:56
+#: application/tests/suite/Omeka/NavigationTest.php:79
+#: application/tests/suite/Omeka/NavigationTest.php:97
+#: application/tests/suite/Omeka/NavigationTest.php:120
+#: application/tests/suite/Omeka/NavigationTest.php:139
+#: application/tests/suite/Omeka/NavigationTest.php:162
+#: application/tests/suite/Omeka/NavigationTest.php:185
+#: application/tests/suite/Omeka/NavigationTest.php:214
+#: application/tests/suite/Omeka/NavigationTest.php:236
+#: application/tests/suite/Omeka/NavigationTest.php:265
+#: application/tests/suite/Omeka/NavigationTest.php:288
+#: application/tests/suite/Omeka/NavigationTest.php:317
+#: application/tests/suite/Omeka/NavigationTest.php:339
+#: application/tests/suite/Omeka/NavigationTest.php:367
+#: application/tests/suite/Omeka/NavigationTest.php:388
+#: application/tests/suite/Omeka/NavigationTest.php:416
+#: application/tests/suite/Omeka/NavigationTest.php:438
+#: application/tests/suite/Omeka/NavigationTest.php:466
+#: application/tests/suite/Omeka/NavigationTest.php:483
+#: application/tests/suite/Omeka/NavigationTest.php:511
+#: application/tests/suite/Omeka/NavigationTest.php:527
+#: application/tests/suite/Omeka/NavigationTest.php:555
+#: application/tests/suite/Omeka/NavigationTest.php:572
+#: application/tests/suite/Omeka/NavigationTest.php:600
+#: application/tests/suite/Omeka/NavigationTest.php:621
+#: application/tests/suite/Omeka/NavigationTest.php:647
+#: application/tests/suite/Omeka/NavigationTest.php:667
+#: application/tests/suite/Omeka/NavigationTest.php:693
+#: application/tests/suite/Omeka/NavigationTest.php:714
+#: application/tests/suite/Omeka/NavigationTest.php:740
+#: application/tests/suite/Omeka/NavigationTest.php:815
+#: application/tests/suite/Omeka/NavigationTest.php:845
+#: application/tests/suite/Omeka/NavigationTest.php:949
+#: application/views/scripts/items/browse.php:2
+#: application/views/scripts/items/tags.php:2
+msgid "Browse Items"
+msgstr "Ɓřǿẇşḗ Īŧḗḿş"
+
+#: admin/themes/default/items/browse.php:22
+#: admin/themes/default/items/browse.php:118
+#: admin/themes/default/items/search.php:2
+#: application/libraries/globals.php:2349
+#: application/libraries/globals.php:2732
+#: application/views/scripts/items/search.php:2
+msgid "Search Items"
+msgstr "Şḗȧřƈħ Īŧḗḿş"
+
+#: admin/themes/default/items/browse.php:37
+msgid "Select"
+msgstr "Şḗŀḗƈŧ"
+
+#: admin/themes/default/items/browse.php:95
+msgid "No Tags"
+msgstr "Ƞǿ Ŧȧɠş"
+
+#: admin/themes/default/items/browse.php:139
+msgid "Details"
+msgstr "Ḓḗŧȧīŀş"
+
+#: admin/themes/default/items/browse.php:140
+msgid "Show Details"
+msgstr "Şħǿẇ Ḓḗŧȧīŀş"
+
+#: admin/themes/default/items/browse.php:141
+msgid "Hide Details"
+msgstr "Ħīḓḗ Ḓḗŧȧīŀş"
+
+#: admin/themes/default/items/browse.php:148
+msgid "You have no items."
+msgstr "Ẏǿŭ ħȧṽḗ ƞǿ īŧḗḿş."
+
+#: admin/themes/default/items/browse.php:150
+msgid "Get started by adding your first item."
+msgstr "Ɠḗŧ şŧȧřŧḗḓ ƀẏ ȧḓḓīƞɠ ẏǿŭř ƒīřşŧ īŧḗḿ."
+
+#: admin/themes/default/items/browse.php:154
+#, php-format
+msgid "The query searched %s items and returned no results."
+msgstr "Ŧħḗ ɋŭḗřẏ şḗȧřƈħḗḓ %s īŧḗḿş ȧƞḓ řḗŧŭřƞḗḓ ƞǿ řḗşŭŀŧş."
+
+#: admin/themes/default/items/browse.php:154
+msgid "refine your search"
+msgstr "řḗƒīƞḗ ẏǿŭř şḗȧřƈħ"
+
+#: admin/themes/default/items/browse.php:154
+#, php-format
+msgid "Would you like to %s?"
+msgstr "Ẇǿŭŀḓ ẏǿŭ ŀīķḗ ŧǿ %s?"
+
+#: admin/themes/default/items/edit.php:8
+#, php-format
+msgid "Edit Item #%s"
+msgstr "Ḗḓīŧ Īŧḗḿ #%s"
+
+#: admin/themes/default/items/files-form.php:2
+msgid "Click and drag the files into the preferred display order."
+msgstr "Ƈŀīƈķ ȧƞḓ ḓřȧɠ ŧħḗ ƒīŀḗş īƞŧǿ ŧħḗ ƥřḗƒḗřřḗḓ ḓīşƥŀȧẏ ǿřḓḗř."
+
+#: admin/themes/default/items/files-form.php:13
+msgid "Delete "
+msgstr "Ḓḗŀḗŧḗ "
+
+#: admin/themes/default/items/files-form.php:22
+msgid "Add New Files"
+msgstr "Ȧḓḓ Ƞḗẇ Ƒīŀḗş"
+
+#: admin/themes/default/items/files-form.php:24
+#, php-format
+msgid "The maximum file size is %s."
+msgstr "Ŧħḗ ḿȧẋīḿŭḿ ƒīŀḗ şīzḗ īş %s."
+
+#: admin/themes/default/items/files-form.php:27
+msgid "Find a File"
+msgstr "Ƒīƞḓ ȧ Ƒīŀḗ"
+
+#: admin/themes/default/items/form.php:25
+msgid "Add Another File"
+msgstr "Ȧḓḓ Ȧƞǿŧħḗř Ƒīŀḗ"
+
+#: admin/themes/default/items/item-type-form.php:15
+msgid "Pick this type"
+msgstr "Ƥīƈķ ŧħīş ŧẏƥḗ"
+
+#: admin/themes/default/items/quick-filters.php:2
+#: admin/themes/default/items/quick-filters.php:4
+msgid "Quick Filter"
+msgstr "Ɋŭīƈķ Ƒīŀŧḗř"
+
+#: admin/themes/default/items/quick-filters.php:5
+msgid "View All"
+msgstr "Ṽīḗẇ Ȧŀŀ"
+
+#: admin/themes/default/items/quick-filters.php:7
+msgid "Private"
+msgstr "Ƥřīṽȧŧḗ"
+
+#: admin/themes/default/items/search-form.php:13
+#: application/views/scripts/items/search-form.php:13
+msgid "Search for Keywords"
+msgstr "Şḗȧřƈħ ƒǿř Ķḗẏẇǿřḓş"
+
+#: admin/themes/default/items/search-form.php:26
+#: application/views/scripts/items/search-form.php:25
+msgid "Narrow by Specific Fields"
+msgstr "Ƞȧřřǿẇ ƀẏ Şƥḗƈīƒīƈ Ƒīḗŀḓş"
+
+#: admin/themes/default/items/search-form.php:27
+#: application/views/scripts/items/search-form.php:80
+msgid "Add a Field"
+msgstr "Ȧḓḓ ȧ Ƒīḗŀḓ"
+
+#: admin/themes/default/items/search-form.php:63
+#: application/views/scripts/items/search-form.php:60
+msgid "contains"
+msgstr "ƈǿƞŧȧīƞş"
+
+#: admin/themes/default/items/search-form.php:64
+#: application/views/scripts/items/search-form.php:61
+msgid "does not contain"
+msgstr "ḓǿḗş ƞǿŧ ƈǿƞŧȧīƞ"
+
+#: admin/themes/default/items/search-form.php:65
+#: application/views/scripts/items/search-form.php:62
+msgid "is exactly"
+msgstr "īş ḗẋȧƈŧŀẏ"
+
+#: admin/themes/default/items/search-form.php:66
+#: application/views/scripts/items/search-form.php:63
+msgid "is empty"
+msgstr "īş ḗḿƥŧẏ"
+
+#: admin/themes/default/items/search-form.php:67
+#: application/views/scripts/items/search-form.php:64
+msgid "is not empty"
+msgstr "īş ƞǿŧ ḗḿƥŧẏ"
+
+#: admin/themes/default/items/search-form.php:84
+#: application/views/scripts/items/search-form.php:84
+msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
+msgstr "Şḗȧřƈħ ƀẏ ȧ řȧƞɠḗ ǿƒ ĪḒ#ş (ḗẋȧḿƥŀḗ: 1-4, 156, 79)"
+
+#: admin/themes/default/items/search-form.php:98
+#: application/views/scripts/items/search-form.php:95
+msgid "Search By Collection"
+msgstr "Şḗȧřƈħ Ɓẏ Ƈǿŀŀḗƈŧīǿƞ"
+
+#: admin/themes/default/items/search-form.php:114
+#: application/views/scripts/items/search-form.php:109
+msgid "Search By Type"
+msgstr "Şḗȧřƈħ Ɓẏ Ŧẏƥḗ"
+
+#: admin/themes/default/items/search-form.php:131
+#: application/views/scripts/items/search-form.php:125
+msgid "Search By User"
+msgstr "Şḗȧřƈħ Ɓẏ Ŭşḗř"
+
+#: admin/themes/default/items/search-form.php:148
+#: application/views/scripts/items/search-form.php:140
+msgid "Search By Tags"
+msgstr "Şḗȧřƈħ Ɓẏ Ŧȧɠş"
+
+#: admin/themes/default/items/search-form.php:163
+#: application/views/scripts/items/search-form.php:153
+msgid "Public/Non-Public"
+msgstr "Ƥŭƀŀīƈ/Non-Public"
+
+#: admin/themes/default/items/search-form.php:172
+#: application/views/scripts/items/search-form.php:161
+msgid "Only Public Items"
+msgstr "Ǿƞŀẏ Ƥŭƀŀīƈ Īŧḗḿş"
+
+#: admin/themes/default/items/search-form.php:173
+#: application/views/scripts/items/search-form.php:162
+msgid "Only Non-Public Items"
+msgstr "Ǿƞŀẏ Ƞǿƞ-Ƥŭƀŀīƈ Īŧḗḿş"
+
+#: admin/themes/default/items/search-form.php:183
+#: application/views/scripts/items/search-form.php:171
+msgid "Featured/Non-Featured"
+msgstr "Ƒḗȧŧŭřḗḓ/Non-Featured"
+
+#: admin/themes/default/items/search-form.php:192
+#: application/views/scripts/items/search-form.php:179
+msgid "Only Featured Items"
+msgstr "Ǿƞŀẏ Ƒḗȧŧŭřḗḓ Īŧḗḿş"
+
+#: admin/themes/default/items/search-form.php:193
+#: application/views/scripts/items/search-form.php:180
+msgid "Only Non-Featured Items"
+msgstr "Ǿƞŀẏ Ƞǿƞ-Ƒḗȧŧŭřḗḓ Īŧḗḿş"
+
+#: admin/themes/default/items/search-form.php:203
+msgid "Search for items"
+msgstr "Şḗȧřƈħ ƒǿř īŧḗḿş"
+
+#: admin/themes/default/items/show.php:8
+#, php-format
+msgid "Item #%s"
+msgstr "Īŧḗḿ #%s"
+
+#: admin/themes/default/items/show.php:30
+msgid "Prev Item"
+msgstr "Ƥřḗṽ Īŧḗḿ"
+
+#: admin/themes/default/items/show.php:35
+msgid "Next Item"
+msgstr "Ƞḗẋŧ Īŧḗḿ"
+
+#: admin/themes/default/items/show.php:73
+msgid "File Metadata"
+msgstr "Ƒīŀḗ Ḿḗŧȧḓȧŧȧ"
+
+#: admin/themes/default/items/show.php:76
+msgid "There are no files for this item yet."
+msgstr "Ŧħḗřḗ ȧřḗ ƞǿ ƒīŀḗş ƒǿř ŧħīş īŧḗḿ ẏḗŧ."
+
+#: admin/themes/default/items/show.php:76
+msgid "Add a File"
+msgstr "Ȧḓḓ ȧ Ƒīŀḗ"
+
+#: admin/themes/default/items/show.php:80
+msgid "View File Metadata"
+msgstr "Ṽīḗẇ Ƒīŀḗ Ḿḗŧȧḓȧŧȧ"
+
+#: admin/themes/default/items/show.php:93
+msgid "Bibliographic Citation"
+msgstr "Ɓīƀŀīǿɠřȧƥħīƈ Ƈīŧȧŧīǿƞ"
+
+#: admin/themes/default/items/tag-form.php:10
+#, php-format
+msgid "Separate tags with %s"
+msgstr "Şḗƥȧřȧŧḗ ŧȧɠş ẇīŧħ %s"
+
+#: admin/themes/default/items/tag-form.php:15
+msgid "All Tags"
+msgstr "Ȧŀŀ Ŧȧɠş"
+
+#: admin/themes/default/items/tags.php:2
+msgid "Browse Items by Tag"
+msgstr "Ɓřǿẇşḗ Īŧḗḿş ƀẏ Ŧȧɠ"
+
+#: admin/themes/default/items/tags.php:9
+#: admin/themes/default/tags/browse.php:85
+msgid "There are no tags to display. You must first tag some items."
+msgstr "Ŧħḗřḗ ȧřḗ ƞǿ ŧȧɠş ŧǿ ḓīşƥŀȧẏ. Ẏǿŭ ḿŭşŧ ƒīřşŧ ŧȧɠ şǿḿḗ īŧḗḿş."
+
+#: admin/themes/default/plugins/browse.php:26
+#, php-format
+msgid "This version of %1$s requires at least Omeka %2$s."
+msgstr "Ŧħīş ṽḗřşīǿƞ ǿƒ %1$s řḗɋŭīřḗş ȧŧ ŀḗȧşŧ Ǿḿḗķȧ %2$s."
+
+#: admin/themes/default/plugins/browse.php:29
+#, php-format
+msgid ""
+"%1$s requires the following plugins to be installed, activated, and loaded: "
+"%2$s"
+msgstr ""
+"%1$s řḗɋŭīřḗş ŧħḗ ƒǿŀŀǿẇīƞɠ ƥŀŭɠīƞş ŧǿ ƀḗ īƞşŧȧŀŀḗḓ, ȧƈŧīṽȧŧḗḓ, ȧƞḓ ŀǿȧḓḗḓ: "
+"%2$s"
+
+#: admin/themes/default/plugins/browse.php:32
+msgid "This is not a valid plugin."
+msgstr "Ŧħīş īş ƞǿŧ ȧ ṽȧŀīḓ ƥŀŭɠīƞ."
+
+#: admin/themes/default/plugins/browse.php:57
+#, php-format
+msgid "by %s"
+msgstr "ƀẏ %s"
+
+#: admin/themes/default/plugins/browse.php:65
+#: admin/themes/default/themes/browse.php:23
+#: admin/themes/default/themes/browse.php:49
+msgid "Get support"
+msgstr "Ɠḗŧ şŭƥƥǿřŧ"
+
+#: admin/themes/default/plugins/browse.php:69
+#, php-format
+msgid "You have a new version of %s. Please upgrade!"
+msgstr "Ẏǿŭ ħȧṽḗ ȧ ƞḗẇ ṽḗřşīǿƞ ǿƒ %s. Ƥŀḗȧşḗ ŭƥɠřȧḓḗ!"
+
+#: admin/themes/default/plugins/browse.php:90
+msgid "Upgrade"
+msgstr "Ŭƥɠřȧḓḗ"
+
+#: admin/themes/default/plugins/browse.php:100
+msgid "Configure"
+msgstr "Ƈǿƞƒīɠŭřḗ"
+
+#: admin/themes/default/plugins/browse.php:106
+msgid "Deactivate"
+msgstr "Ḓḗȧƈŧīṽȧŧḗ"
+
+#: admin/themes/default/plugins/browse.php:106
+#: admin/themes/default/users/activate.php:31
+#: application/views/scripts/users/activate.php:27
+msgid "Activate"
+msgstr "Ȧƈŧīṽȧŧḗ"
+
+#: admin/themes/default/plugins/browse.php:116
+#: admin/themes/default/plugins/confirm-uninstall.php:16
+msgid "Uninstall"
+msgstr "Ŭƞīƞşŧȧŀŀ"
+
+#: admin/themes/default/plugins/browse.php:129
+#: application/forms/Install.php:178
+msgid "Install"
+msgstr "Īƞşŧȧŀŀ"
+
+#: admin/themes/default/plugins/browse.php:140
+msgid ""
+"You do not have any plugins installed. Add them to the plugins directory to "
+"see them listed here."
+msgstr ""
+"Ẏǿŭ ḓǿ ƞǿŧ ħȧṽḗ ȧƞẏ ƥŀŭɠīƞş īƞşŧȧŀŀḗḓ. Ȧḓḓ ŧħḗḿ ŧǿ ŧħḗ ƥŀŭɠīƞş ḓīřḗƈŧǿřẏ ŧǿ "
+"şḗḗ ŧħḗḿ ŀīşŧḗḓ ħḗřḗ."
+
+#: admin/themes/default/plugins/config.php:2
+#, php-format
+msgid "Configure Plugin: %s"
+msgstr "Ƈǿƞƒīɠŭřḗ Ƥŀŭɠīƞ: %s"
+
+#: admin/themes/default/plugins/confirm-uninstall.php:2
+#, php-format
+msgid "Uninstall Plugin: %s"
+msgstr "Ŭƞīƞşŧȧŀŀ Ƥŀŭɠīƞ: %s"
+
+#: admin/themes/default/plugins/confirm-uninstall.php:7
+#, php-format
+msgid "Are you sure you want to uninstall %s?"
+msgstr "Ȧřḗ ẏǿŭ şŭřḗ ẏǿŭ ẇȧƞŧ ŧǿ ŭƞīƞşŧȧŀŀ %s?"
+
+#: admin/themes/default/plugins/confirm-uninstall.php:12
+msgid "Yes, I want to uninstall this plugin."
+msgstr "Ẏḗş, Ī ẇȧƞŧ ŧǿ ŭƞīƞşŧȧŀŀ ŧħīş ƥŀŭɠīƞ."
+
+#: admin/themes/default/plugins/confirm-uninstall.php:17
+msgid "or"
+msgstr "ǿř"
+
+#: admin/themes/default/plugins/confirm-uninstall.php:17
+#: admin/themes/default/settings/edit-item-type-elements.php:50
+msgid "Cancel"
+msgstr "Ƈȧƞƈḗŀ"
+
+#: admin/themes/default/settings/edit-api.php:11
+msgid "Enable API"
+msgstr "Ḗƞȧƀŀḗ ȦƤĪ"
+
+#: admin/themes/default/settings/edit-api.php:15
+msgid "Enable or disable the API by checking or uncheking the box below."
+msgstr "Ḗƞȧƀŀḗ ǿř ḓīşȧƀŀḗ ŧħḗ ȦƤĪ ƀẏ ƈħḗƈķīƞɠ ǿř ŭƞƈħḗķīƞɠ ŧħḗ ƀǿẋ ƀḗŀǿẇ."
+
+#: admin/themes/default/settings/edit-api.php:22
+msgid "Filter Element Texts"
+msgstr "Ƒīŀŧḗř Ḗŀḗḿḗƞŧ Ŧḗẋŧş"
+
+#: admin/themes/default/settings/edit-api.php:26
+msgid ""
+"Filter element texts by checking the box below. When checked, the API will "
+"respect the display element and element text filters when outputting element "
+"text representations."
+msgstr ""
+"Ƒīŀŧḗř ḗŀḗḿḗƞŧ ŧḗẋŧş ƀẏ ƈħḗƈķīƞɠ ŧħḗ ƀǿẋ ƀḗŀǿẇ. Ẇħḗƞ ƈħḗƈķḗḓ, ŧħḗ ȦƤĪ ẇīŀŀ "
+"řḗşƥḗƈŧ ŧħḗ ḓīşƥŀȧẏ ḗŀḗḿḗƞŧ ȧƞḓ ḗŀḗḿḗƞŧ ŧḗẋŧ ƒīŀŧḗřş ẇħḗƞ ǿŭŧƥŭŧŧīƞɠ ḗŀḗḿḗƞŧ "
+"ŧḗẋŧ řḗƥřḗşḗƞŧȧŧīǿƞş."
+
+#: admin/themes/default/settings/edit-api.php:35
+msgid "Results per Page"
+msgstr "Řḗşŭŀŧş ƥḗř Ƥȧɠḗ"
+
+#: admin/themes/default/settings/edit-api.php:39
+msgid "Maximum number of API results displayed per page."
+msgstr "Ḿȧẋīḿŭḿ ƞŭḿƀḗř ǿƒ ȦƤĪ řḗşŭŀŧş ḓīşƥŀȧẏḗḓ ƥḗř ƥȧɠḗ."
+
+#: admin/themes/default/settings/edit-api.php:45
+#, php-format
+msgid ""
+"After enabling the API, applications may be able to show, browse, add, edit, "
+"and delete your site resources. Viewing protected content, as well as "
+"adding, editing, and deleting content, is protected and requires key "
+"authentication. Each key corresponds to, and has all permissions of, an "
+"existing Omeka user. You can create keys on each user's %sedit page%s."
+msgstr ""
+"Ȧƒŧḗř ḗƞȧƀŀīƞɠ ŧħḗ ȦƤĪ, ȧƥƥŀīƈȧŧīǿƞş ḿȧẏ ƀḗ ȧƀŀḗ ŧǿ şħǿẇ, ƀřǿẇşḗ, ȧḓḓ, ḗḓīŧ, "
+"ȧƞḓ ḓḗŀḗŧḗ ẏǿŭř şīŧḗ řḗşǿŭřƈḗş. Ṽīḗẇīƞɠ ƥřǿŧḗƈŧḗḓ ƈǿƞŧḗƞŧ, ȧş ẇḗŀŀ ȧş "
+"ȧḓḓīƞɠ, ḗḓīŧīƞɠ, ȧƞḓ ḓḗŀḗŧīƞɠ ƈǿƞŧḗƞŧ, īş ƥřǿŧḗƈŧḗḓ ȧƞḓ řḗɋŭīřḗş ķḗẏ "
+"ȧŭŧħḗƞŧīƈȧŧīǿƞ. Ḗȧƈħ ķḗẏ ƈǿřřḗşƥǿƞḓş ŧǿ, ȧƞḓ ħȧş ȧŀŀ ƥḗřḿīşşīǿƞş ǿƒ, ȧƞ "
+"ḗẋīşŧīƞɠ Ǿḿḗķȧ ŭşḗř. Ẏǿŭ ƈȧƞ ƈřḗȧŧḗ ķḗẏş ǿƞ ḗȧƈħ ŭşḗř'ş %sḗḓīŧ ƥȧɠḗ%s."
+
+#: admin/themes/default/settings/edit-item-type-elements.php:12
+msgid "edit a specific item type"
+msgstr "ḗḓīŧ ȧ şƥḗƈīƒīƈ īŧḗḿ ŧẏƥḗ"
+
+#: admin/themes/default/settings/edit-item-type-elements.php:11
+#, php-format
+msgid "Customize the element descriptions below. To re-order the elements, %s."
+msgstr "Ƈŭşŧǿḿīzḗ ŧħḗ ḗŀḗḿḗƞŧ ḓḗşƈřīƥŧīǿƞş ƀḗŀǿẇ. Ŧǿ řḗ-ǿřḓḗř ŧħḗ ḗŀḗḿḗƞŧş, %s."
+
+#: admin/themes/default/settings/edit-item-type-elements.php:42
+msgid "Confirm Delete"
+msgstr "Ƈǿƞƒīřḿ Ḓḗŀḗŧḗ"
+
+#: admin/themes/default/settings/edit-item-type-elements.php:43
+msgid ""
+"Are you sure you want to delete the selected item type elements from the "
+"database? You will lose all text related to the selected elements. This "
+"cannot be undone."
+msgstr ""
+"Ȧřḗ ẏǿŭ şŭřḗ ẏǿŭ ẇȧƞŧ ŧǿ ḓḗŀḗŧḗ ŧħḗ şḗŀḗƈŧḗḓ īŧḗḿ ŧẏƥḗ ḗŀḗḿḗƞŧş ƒřǿḿ ŧħḗ "
+"ḓȧŧȧƀȧşḗ? Ẏǿŭ ẇīŀŀ ŀǿşḗ ȧŀŀ ŧḗẋŧ řḗŀȧŧḗḓ ŧǿ ŧħḗ şḗŀḗƈŧḗḓ ḗŀḗḿḗƞŧş. Ŧħīş "
+"ƈȧƞƞǿŧ ƀḗ ŭƞḓǿƞḗ."
+
+#: admin/themes/default/settings/edit-item-type-elements.php:50
+msgid "Ok"
+msgstr "Ǿķ"
+
+#: admin/themes/default/settings/edit-search.php:10
+msgid "Search Record Types"
+msgstr "Şḗȧřƈħ Řḗƈǿřḓ Ŧẏƥḗş"
+
+#: admin/themes/default/settings/edit-search.php:13
+msgid "Customize which types of records will be searchable in Omeka."
+msgstr "Ƈŭşŧǿḿīzḗ ẇħīƈħ ŧẏƥḗş ǿƒ řḗƈǿřḓş ẇīŀŀ ƀḗ şḗȧřƈħȧƀŀḗ īƞ Ǿḿḗķȧ."
+
+#: admin/themes/default/settings/edit-search.php:23
+#: admin/themes/default/settings/edit-search.php:41
+msgid "Index Records"
+msgstr "Īƞḓḗẋ Řḗƈǿřḓş"
+
+#: admin/themes/default/settings/edit-search.php:26
+msgid "Click on the \"Index Records\" button to re-index your records."
+msgstr "Ƈŀīƈķ ǿƞ ŧħḗ \"Īƞḓḗẋ Řḗƈǿřḓş\" ƀŭŧŧǿƞ ŧǿ řḗ-īƞḓḗẋ ẏǿŭř řḗƈǿřḓş."
+
+#: admin/themes/default/settings/edit-search.php:28
+msgid ""
+"Indexing means to collect, parse, and store data to facilitate fast and "
+"accurate searches. Omeka will automatically index individual records as they "
+"are saved, but there are circumstances when your records are not indexed; "
+"for instance, when updating from an earlier version of Omeka or after you "
+"customize which records will be searchable."
+msgstr ""
+"Īƞḓḗẋīƞɠ ḿḗȧƞş ŧǿ ƈǿŀŀḗƈŧ, ƥȧřşḗ, ȧƞḓ şŧǿřḗ ḓȧŧȧ ŧǿ ƒȧƈīŀīŧȧŧḗ ƒȧşŧ ȧƞḓ "
+"ȧƈƈŭřȧŧḗ şḗȧřƈħḗş. Ǿḿḗķȧ ẇīŀŀ ȧŭŧǿḿȧŧīƈȧŀŀẏ īƞḓḗẋ īƞḓīṽīḓŭȧŀ řḗƈǿřḓş ȧş ŧħḗẏ "
+"ȧřḗ şȧṽḗḓ, ƀŭŧ ŧħḗřḗ ȧřḗ ƈīřƈŭḿşŧȧƞƈḗş ẇħḗƞ ẏǿŭř řḗƈǿřḓş ȧřḗ ƞǿŧ īƞḓḗẋḗḓ; "
+"ƒǿř īƞşŧȧƞƈḗ, ẇħḗƞ ŭƥḓȧŧīƞɠ ƒřǿḿ ȧƞ ḗȧřŀīḗř ṽḗřşīǿƞ ǿƒ Ǿḿḗķȧ ǿř ȧƒŧḗř ẏǿŭ "
+"ƈŭşŧǿḿīzḗ ẇħīƈħ řḗƈǿřḓş ẇīŀŀ ƀḗ şḗȧřƈħȧƀŀḗ."
+
+#: admin/themes/default/settings/edit-security.php:23
+msgid "Restore Default Extensions"
+msgstr "Řḗşŧǿřḗ Ḓḗƒȧŭŀŧ Ḗẋŧḗƞşīǿƞş"
+
+#: admin/themes/default/settings/edit-security.php:28
+msgid "Restore Default Types"
+msgstr "Řḗşŧǿřḗ Ḓḗƒȧŭŀŧ Ŧẏƥḗş"
+
+#: admin/themes/default/settings/edit-security.php:33
+msgid "Restore Default Elements"
+msgstr "Řḗşŧǿřḗ Ḓḗƒȧŭŀŧ Ḗŀḗḿḗƞŧş"
+
+#: admin/themes/default/settings/edit-security.php:38
+msgid "Restore Default Attributes"
+msgstr "Řḗşŧǿřḗ Ḓḗƒȧŭŀŧ Ȧŧŧřīƀŭŧḗş"
+
+#: admin/themes/default/settings/edit-settings.php:23
+msgid "Test"
+msgstr "Ŧḗşŧ"
+
+#: admin/themes/default/tags/browse.php:7
+msgid "Edit Tags"
+msgstr "Ḗḓīŧ Ŧȧɠş"
+
+#: admin/themes/default/tags/browse.php:9
+msgid "Browse Tags"
+msgstr "Ɓřǿẇşḗ Ŧȧɠş"
+
+#: admin/themes/default/tags/browse.php:18
+#: application/views/scripts/search/index.php:12
+msgid "Record Type"
+msgstr "Řḗƈǿřḓ Ŧẏƥḗ"
+
+#: admin/themes/default/tags/browse.php:24
+msgid "Editing Tags"
+msgstr "Ḗḓīŧīƞɠ Ŧȧɠş"
+
+#: admin/themes/default/tags/browse.php:27
+msgid "To view all items with a tag, click the number."
+msgstr "Ŧǿ ṽīḗẇ ȧŀŀ īŧḗḿş ẇīŧħ ȧ ŧȧɠ, ƈŀīƈķ ŧħḗ ƞŭḿƀḗř."
+
+#: admin/themes/default/tags/browse.php:28
+msgid ""
+"To edit the tag name, click the name and begin editing, and hit \"enter\" to "
+"save. To cancel an edit, click the ESC key or click away from the tag."
+msgstr ""
+"Ŧǿ ḗḓīŧ ŧħḗ ŧȧɠ ƞȧḿḗ, ƈŀīƈķ ŧħḗ ƞȧḿḗ ȧƞḓ ƀḗɠīƞ ḗḓīŧīƞɠ, ȧƞḓ ħīŧ \"ḗƞŧḗř\" ŧǿ "
+"şȧṽḗ. Ŧǿ ƈȧƞƈḗŀ ȧƞ ḗḓīŧ, ƈŀīƈķ ŧħḗ ḖŞƇ ķḗẏ ǿř ƈŀīƈķ ȧẇȧẏ ƒřǿḿ ŧħḗ ŧȧɠ."
+
+#: admin/themes/default/tags/browse.php:29
+msgid ""
+"To delete a tag, click the X. Deleting a tag will not delete the tagged "
+"items."
+msgstr ""
+"Ŧǿ ḓḗŀḗŧḗ ȧ ŧȧɠ, ƈŀīƈķ ŧħḗ Ẋ. Ḓḗŀḗŧīƞɠ ȧ ŧȧɠ ẇīŀŀ ƞǿŧ ḓḗŀḗŧḗ ŧħḗ ŧȧɠɠḗḓ "
+"īŧḗḿş."
+
+#: admin/themes/default/tags/browse.php:39
+msgid "Most"
+msgstr "Ḿǿşŧ"
+
+#: admin/themes/default/tags/browse.php:40
+msgid "Least"
+msgstr "Ŀḗȧşŧ"
+
+#: admin/themes/default/tags/browse.php:41
+msgid "Alphabetical"
+msgstr "Ȧŀƥħȧƀḗŧīƈȧŀ"
+
+#: admin/themes/default/tags/browse.php:42
+msgid "Recent"
+msgstr "Řḗƈḗƞŧ"
+
+#: admin/themes/default/tags/browse.php:53
+#: admin/themes/default/tags/browse.php:55
+msgid "Record Types"
+msgstr "Řḗƈǿřḓ Ŧẏƥḗş"
+
+#: admin/themes/default/themes/browse.php:15
+#: admin/themes/default/themes/browse.php:43
+#, php-format
+msgid "Screenshot for %s Theme"
+msgstr "Şƈřḗḗƞşħǿŧ ƒǿř %s Ŧħḗḿḗ"
+
+#: admin/themes/default/themes/browse.php:16
+msgid "Configure Theme"
+msgstr "Ƈǿƞƒīɠŭřḗ Ŧħḗḿḗ"
+
+#: admin/themes/default/themes/browse.php:19
+msgid "Current Theme"
+msgstr "Ƈŭřřḗƞŧ Ŧħḗḿḗ"
+
+#: admin/themes/default/themes/browse.php:21
+#: admin/themes/default/themes/browse.php:48
+#, php-format
+msgid "By %s"
+msgstr "Ɓẏ %s"
+
+#: admin/themes/default/themes/browse.php:27
+msgid ""
+"Add new themes by downloading them from the <a href=\"http://omeka.org/add-"
+"ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a href="
+"\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank"
+"\">design your own</a>!"
+msgstr ""
+"Ȧḓḓ ƞḗẇ ŧħḗḿḗş ƀẏ ḓǿẇƞŀǿȧḓīƞɠ ŧħḗḿ ƒřǿḿ ŧħḗ <a href=\"http://omeka.org/add-"
+"ons/themes/\" target=\"_blank\">Ǿḿḗķȧ Ŧħḗḿḗ Ḓīřḗƈŧǿřẏ</a>, ǿř <a "
+"href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" "
+"target=\"_blank\">ḓḗşīɠƞ ẏǿŭř ǿẇƞ</a>!"
+
+#: admin/themes/default/themes/browse.php:45
+msgid "Use this theme"
+msgstr "Ŭşḗ ŧħīş ŧħḗḿḗ"
+
+#: admin/themes/default/themes/config.php:10
+#, php-format
+msgid "Configure Theme: %s"
+msgstr "Ƈǿƞƒīɠŭřḗ Ŧħḗḿḗ: %s"
+
+#: admin/themes/default/themes/config.php:11
+msgid "Configurations apply to this theme only."
+msgstr "Ƈǿƞƒīɠŭřȧŧīǿƞş ȧƥƥŀẏ ŧǿ ŧħīş ŧħḗḿḗ ǿƞŀẏ."
+
+#: admin/themes/default/upgrade/index.php:32
+msgid "Upgrade Your Omeka Database"
+msgstr "Ŭƥɠřȧḓḗ Ẏǿŭř Ǿḿḗķȧ Ḓȧŧȧƀȧşḗ"
+
+#: admin/themes/default/upgrade/index.php:34
+msgid ""
+"Your Omeka database is not compatible with your current version of Omeka."
+msgstr ""
+"Ẏǿŭř Ǿḿḗķȧ ḓȧŧȧƀȧşḗ īş ƞǿŧ ƈǿḿƥȧŧīƀŀḗ ẇīŧħ ẏǿŭř ƈŭřřḗƞŧ ṽḗřşīǿƞ ǿƒ Ǿḿḗķȧ."
+
+#: admin/themes/default/upgrade/index.php:35
+msgid ""
+"Please back up your existing database and then click the button to upgrade."
+msgstr ""
+"Ƥŀḗȧşḗ ƀȧƈķ ŭƥ ẏǿŭř ḗẋīşŧīƞɠ ḓȧŧȧƀȧşḗ ȧƞḓ ŧħḗƞ ƈŀīƈķ ŧħḗ ƀŭŧŧǿƞ ŧǿ ŭƥɠřȧḓḗ."
+
+#: admin/themes/default/upgrade/index.php:37
+msgid "Upgrade Database"
+msgstr "Ŭƥɠřȧḓḗ Ḓȧŧȧƀȧşḗ"
+
+#: admin/themes/default/upgrade/migrate.php:32
+msgid "Omeka encountered an error when upgrading your installation."
+msgstr "Ǿḿḗķȧ ḗƞƈǿŭƞŧḗřḗḓ ȧƞ ḗřřǿř ẇħḗƞ ŭƥɠřȧḓīƞɠ ẏǿŭř īƞşŧȧŀŀȧŧīǿƞ."
+
+#: admin/themes/default/upgrade/migrate.php:37
+msgid "Please restore from your database backup and try again."
+msgstr "Ƥŀḗȧşḗ řḗşŧǿřḗ ƒřǿḿ ẏǿŭř ḓȧŧȧƀȧşḗ ƀȧƈķŭƥ ȧƞḓ ŧřẏ ȧɠȧīƞ."
+
+#: admin/themes/default/upgrade/migrate.php:39
+msgid ""
+"If you have any questions please refer to <a href=\"http://omeka.org/codex"
+"\">Omeka documentation</a> or post a message on the <a href=\"http://omeka."
+"org/forums\">Omeka forums</a>."
+msgstr ""
+"Īƒ ẏǿŭ ħȧṽḗ ȧƞẏ ɋŭḗşŧīǿƞş ƥŀḗȧşḗ řḗƒḗř ŧǿ <a "
+"href=\"http://omeka.org/codex\">Ǿḿḗķȧ ḓǿƈŭḿḗƞŧȧŧīǿƞ</a> ǿř ƥǿşŧ ȧ ḿḗşşȧɠḗ ǿƞ "
+"ŧħḗ <a href=\"http://omeka.org/forums\">Ǿḿḗķȧ ƒǿřŭḿş</a>."
+
+#: admin/themes/default/upgrade/migrate.php:42
+msgid "Omeka has upgraded successfully."
+msgstr "Ǿḿḗķȧ ħȧş ŭƥɠřȧḓḗḓ şŭƈƈḗşşƒŭŀŀẏ."
+
+#: admin/themes/default/upgrade/migrate.php:43
+msgid "Return to Dashboard"
+msgstr "Řḗŧŭřƞ ŧǿ Ḓȧşħƀǿȧřḓ"
+
+#: admin/themes/default/users/activate.php:2
+#: application/views/scripts/users/activate.php:2
+msgid "User Activation"
+msgstr "Ŭşḗř Ȧƈŧīṽȧŧīǿƞ"
+
+#: admin/themes/default/users/activate.php:18
+#: application/forms/ResetPassword.php:23
+#: application/views/scripts/users/activate.php:14
+msgid "Create a Password"
+msgstr "Ƈřḗȧŧḗ ȧ Ƥȧşşẇǿřḓ"
+
+#: admin/themes/default/users/activate.php:24 application/forms/Install.php:71
+#: application/forms/ResetPassword.php:44
+#: application/views/scripts/users/activate.php:20
+msgid "Re-type the Password"
+msgstr "Řḗ-ŧẏƥḗ ŧħḗ Ƥȧşşẇǿřḓ"
+
+#: admin/themes/default/users/add.php:2
+msgid "Add New User"
+msgstr "Ȧḓḓ Ƞḗẇ Ŭşḗř"
+
+#: admin/themes/default/users/add.php:13
+#: application/controllers/UsersController.php:160
+msgid "Add User"
+msgstr "Ȧḓḓ Ŭşḗř"
+
+#: admin/themes/default/users/api-keys.php:8
+#: admin/themes/default/users/change-password.php:8
+#: admin/themes/default/users/edit.php:8
+#, php-format
+msgid "Edit User #%s"
+msgstr "Ḗḓīŧ Ŭşḗř #%s"
+
+#: admin/themes/default/users/api-keys.php:17
+msgid "New key label"
+msgstr "Ƞḗẇ ķḗẏ ŀȧƀḗŀ"
+
+#: admin/themes/default/users/api-keys.php:21
+msgid ""
+"To create a new API key, enter a label for the key below. For example, "
+"describe for what purpose it will be used. This key will have all your "
+"permissions; treat it as you would your password."
+msgstr ""
+"Ŧǿ ƈřḗȧŧḗ ȧ ƞḗẇ ȦƤĪ ķḗẏ, ḗƞŧḗř ȧ ŀȧƀḗŀ ƒǿř ŧħḗ ķḗẏ ƀḗŀǿẇ. Ƒǿř ḗẋȧḿƥŀḗ, "
+"ḓḗşƈřīƀḗ ƒǿř ẇħȧŧ ƥŭřƥǿşḗ īŧ ẇīŀŀ ƀḗ ŭşḗḓ. Ŧħīş ķḗẏ ẇīŀŀ ħȧṽḗ ȧŀŀ ẏǿŭř "
+"ƥḗřḿīşşīǿƞş; ŧřḗȧŧ īŧ ȧş ẏǿŭ ẇǿŭŀḓ ẏǿŭř ƥȧşşẇǿřḓ."
+
+#: admin/themes/default/users/api-keys.php:31
+msgid "You have no API keys. Use the form above to create one."
+msgstr "Ẏǿŭ ħȧṽḗ ƞǿ ȦƤĪ ķḗẏş. Ŭşḗ ŧħḗ ƒǿřḿ ȧƀǿṽḗ ŧǿ ƈřḗȧŧḗ ǿƞḗ."
+
+#: admin/themes/default/users/api-keys.php:33
+#, php-format
+msgid "%s has no API keys. Use the form above to create one."
+msgstr "%s ħȧş ƞǿ ȦƤĪ ķḗẏş. Ŭşḗ ŧħḗ ƒǿřḿ ȧƀǿṽḗ ŧǿ ƈřḗȧŧḗ ǿƞḗ."
+
+#: admin/themes/default/users/api-keys.php:41
+msgid "Key"
+msgstr "Ķḗẏ"
+
+#: admin/themes/default/users/api-keys.php:42
+msgid "Last IP"
+msgstr "Ŀȧşŧ ĪƤ"
+
+#: admin/themes/default/users/api-keys.php:43
+msgid "Last accessed"
+msgstr "Ŀȧşŧ ȧƈƈḗşşḗḓ"
+
+#: admin/themes/default/users/api-keys.php:44
+msgid "Rescind"
+msgstr "Řḗşƈīƞḓ"
+
+#: admin/themes/default/users/browse.php:2
+msgid "Browse Users"
+msgstr "Ɓřǿẇşḗ Ŭşḗřş"
+
+#: admin/themes/default/users/browse.php:8
+msgid "Add a User"
+msgstr "Ȧḓḓ ȧ Ŭşḗř"
+
+#: admin/themes/default/users/browse.php:20
+#: admin/themes/default/users/browse.php:47
+#: admin/themes/default/users/show.php:18 application/forms/Install.php:30
+#: application/forms/Login.php:21 application/forms/User.php:31
+msgid "Username"
+msgstr "Ŭşḗřƞȧḿḗ"
+
+#: admin/themes/default/users/browse.php:23
+#: admin/themes/default/users/browse.php:49
+#: admin/themes/default/users/show.php:22 application/forms/Install.php:84
+#: application/forms/RecoverPassword.php:27 application/forms/User.php:98
+#: application/views/scripts/users/forgot-password.php:14
+msgid "Email"
+msgstr "Ḗḿȧīŀ"
+
+#: admin/themes/default/users/browse.php:35
+msgid "Search users"
+msgstr "Şḗȧřƈħ ŭşḗřş"
+
+#: admin/themes/default/users/browse.php:36
+msgid "Usernames"
+msgstr "Ŭşḗřƞȧḿḗş"
+
+#: admin/themes/default/users/browse.php:37
+msgid "Real names"
+msgstr "Řḗȧŀ ƞȧḿḗş"
+
+#: admin/themes/default/users/browse.php:38
+msgid "Email addresses"
+msgstr "Ḗḿȧīŀ ȧḓḓřḗşşḗş"
+
+#: admin/themes/default/users/browse.php:48
+#: admin/themes/default/users/show.php:20
+msgid "Real Name"
+msgstr "Řḗȧŀ Ƞȧḿḗ"
+
+#: admin/themes/default/users/browse.php:50 application/forms/User.php:131
+msgid "Role"
+msgstr "Řǿŀḗ"
+
+#: admin/themes/default/users/browse.php:60
+msgid "inactive"
+msgstr "īƞȧƈŧīṽḗ"
+
+#: admin/themes/default/users/change-password.php:20
+msgid "Save Password"
+msgstr "Şȧṽḗ Ƥȧşşẇǿřḓ"
+
+#: admin/themes/default/users/edit.php:23
+msgid "Resend Activation Email"
+msgstr "Řḗşḗƞḓ Ȧƈŧīṽȧŧīǿƞ Ḗḿȧīŀ"
+
+#: admin/themes/default/users/forgot-password.php:2
+#: application/views/scripts/users/forgot-password.php:2
+msgid "Forgot Password"
+msgstr "Ƒǿřɠǿŧ Ƥȧşşẇǿřḓ"
+
+#: admin/themes/default/users/forgot-password.php:11
+#: application/views/scripts/users/forgot-password.php:10
+msgid "Enter your email address to retrieve your password."
+msgstr "Ḗƞŧḗř ẏǿŭř ḗḿȧīŀ ȧḓḓřḗşş ŧǿ řḗŧřīḗṽḗ ẏǿŭř ƥȧşşẇǿřḓ."
+
+#: admin/themes/default/users/forgot-password.php:21
+#: application/views/scripts/users/forgot-password.php:18
+msgid "Submit"
+msgstr "Şŭƀḿīŧ"
+
+#: admin/themes/default/users/forgot-password.php:25
+#: application/views/scripts/users/forgot-password.php:7
+msgid "Back to Log In"
+msgstr "Ɓȧƈķ ŧǿ Ŀǿɠ Īƞ"
+
+#: admin/themes/default/users/login.php:3 application/forms/Login.php:55
+#: application/views/scripts/users/login.php:3
+msgid "Log In"
+msgstr "Ŀǿɠ Īƞ"
+
+#: admin/themes/default/users/login.php:17
+msgid "(Lost your password?)"
+msgstr "(Ŀǿşŧ ẏǿŭř ƥȧşşẇǿřḓ?)"
+
+#: admin/themes/default/users/show.php:8
+#, php-format
+msgid "User #%s"
+msgstr "Ŭşḗř #%s"
+
+#: admin/themes/default/users/show.php:15
+msgid "Edit this User"
+msgstr "Ḗḓīŧ ŧħīş Ŭşḗř"
+
+#: application/controllers/AppearanceController.php:48
+msgid "The appearance settings have been updated."
+msgstr "Ŧħḗ ȧƥƥḗȧřȧƞƈḗ şḗŧŧīƞɠş ħȧṽḗ ƀḗḗƞ ŭƥḓȧŧḗḓ."
+
+#: application/controllers/AppearanceController.php:51
+#: application/controllers/ItemTypesController.php:35
+#: application/controllers/ItemTypesController.php:61
+#: application/controllers/SettingsController.php:47
+#: application/controllers/SettingsController.php:79
+#: install/views/scripts/index/index.phtml:17
+msgid "There were errors found in your form. Please edit and resubmit."
+msgstr "Ŧħḗřḗ ẇḗřḗ ḗřřǿřş ƒǿŭƞḓ īƞ ẏǿŭř ƒǿřḿ. Ƥŀḗȧşḗ ḗḓīŧ ȧƞḓ řḗşŭƀḿīŧ."
+
+#: application/controllers/AppearanceController.php:66
+msgid "The navigation settings have been updated."
+msgstr "Ŧħḗ ƞȧṽīɠȧŧīǿƞ şḗŧŧīƞɠş ħȧṽḗ ƀḗḗƞ ŭƥḓȧŧḗḓ."
+
+#: application/controllers/AppearanceController.php:69
+msgid ""
+"The navigation settings were not saved because of missing or invalid "
+"values.  All changed values have been restored."
+msgstr ""
+"Ŧħḗ ƞȧṽīɠȧŧīǿƞ şḗŧŧīƞɠş ẇḗřḗ ƞǿŧ şȧṽḗḓ ƀḗƈȧŭşḗ ǿƒ ḿīşşīƞɠ ǿř īƞṽȧŀīḓ ṽȧŀŭḗş. "
+" Ȧŀŀ ƈħȧƞɠḗḓ ṽȧŀŭḗş ħȧṽḗ ƀḗḗƞ řḗşŧǿřḗḓ."
+
+#: application/controllers/CollectionsController.php:74
+#, php-format
+msgid "The collection \"%s\" was successfully added!"
+msgstr "Ŧħḗ ƈǿŀŀḗƈŧīǿƞ \"%s\" ẇȧş şŭƈƈḗşşƒŭŀŀẏ ȧḓḓḗḓ!"
+
+#: application/controllers/CollectionsController.php:76
+#, php-format
+msgid "The collection #%s was successfully added!"
+msgstr "Ŧħḗ ƈǿŀŀḗƈŧīǿƞ #%s ẇȧş şŭƈƈḗşşƒŭŀŀẏ ȧḓḓḗḓ!"
+
+#: application/controllers/CollectionsController.php:84
+#, php-format
+msgid "The collection \"%s\" was successfully changed!"
+msgstr "Ŧħḗ ƈǿŀŀḗƈŧīǿƞ \"%s\" ẇȧş şŭƈƈḗşşƒŭŀŀẏ ƈħȧƞɠḗḓ!"
+
+#: application/controllers/CollectionsController.php:86
+#, php-format
+msgid "The collection #%s was successfully changed!"
+msgstr "Ŧħḗ ƈǿŀŀḗƈŧīǿƞ #%s ẇȧş şŭƈƈḗşşƒŭŀŀẏ ƈħȧƞɠḗḓ!"
+
+#: application/controllers/CollectionsController.php:94
+#, php-format
+msgid "The collection \"%s\" was successfully deleted!"
+msgstr "Ŧħḗ ƈǿŀŀḗƈŧīǿƞ \"%s\" ẇȧş şŭƈƈḗşşƒŭŀŀẏ ḓḗŀḗŧḗḓ!"
+
+#: application/controllers/CollectionsController.php:96
+#, php-format
+msgid "The collection #%s was successfully deleted!"
+msgstr "Ŧħḗ ƈǿŀŀḗƈŧīǿƞ #%s ẇȧş şŭƈƈḗşşƒŭŀŀẏ ḓḗŀḗŧḗḓ!"
+
+#: application/controllers/CollectionsController.php:104
+#, php-format
+msgid ""
+"This will delete the collection \"%s\" and its associated metadata. This "
+"will not delete any items in this collection, but will delete the reference "
+"to this collection in each item."
+msgstr ""
+"Ŧħīş ẇīŀŀ ḓḗŀḗŧḗ ŧħḗ ƈǿŀŀḗƈŧīǿƞ \"%s\" ȧƞḓ īŧş ȧşşǿƈīȧŧḗḓ ḿḗŧȧḓȧŧȧ. Ŧħīş ẇīŀŀ "
+"ƞǿŧ ḓḗŀḗŧḗ ȧƞẏ īŧḗḿş īƞ ŧħīş ƈǿŀŀḗƈŧīǿƞ, ƀŭŧ ẇīŀŀ ḓḗŀḗŧḗ ŧħḗ řḗƒḗřḗƞƈḗ ŧǿ "
+"ŧħīş ƈǿŀŀḗƈŧīǿƞ īƞ ḗȧƈħ īŧḗḿ."
+
+#: application/controllers/CollectionsController.php:108
+#, php-format
+msgid ""
+"This will delete the collection #%s and its associated metadata. This will "
+"not delete any items in this collection, but will delete the reference to "
+"this collection in each item."
+msgstr ""
+"Ŧħīş ẇīŀŀ ḓḗŀḗŧḗ ŧħḗ ƈǿŀŀḗƈŧīǿƞ #%s ȧƞḓ īŧş ȧşşǿƈīȧŧḗḓ ḿḗŧȧḓȧŧȧ. Ŧħīş ẇīŀŀ "
+"ƞǿŧ ḓḗŀḗŧḗ ȧƞẏ īŧḗḿş īƞ ŧħīş ƈǿŀŀḗƈŧīǿƞ, ƀŭŧ ẇīŀŀ ḓḗŀḗŧḗ ŧħḗ řḗƒḗřḗƞƈḗ ŧǿ "
+"ŧħīş ƈǿŀŀḗƈŧīǿƞ īƞ ḗȧƈħ īŧḗḿ."
+
+#: application/controllers/ElementSetsController.php:21
+msgid ""
+"This will delete the element set and all elements assigned to the element "
+"set. Items will lose all metadata that is specific to this element set."
+msgstr ""
+"Ŧħīş ẇīŀŀ ḓḗŀḗŧḗ ŧħḗ ḗŀḗḿḗƞŧ şḗŧ ȧƞḓ ȧŀŀ ḗŀḗḿḗƞŧş ȧşşīɠƞḗḓ ŧǿ ŧħḗ ḗŀḗḿḗƞŧ "
+"şḗŧ. Īŧḗḿş ẇīŀŀ ŀǿşḗ ȧŀŀ ḿḗŧȧḓȧŧȧ ŧħȧŧ īş şƥḗƈīƒīƈ ŧǿ ŧħīş ḗŀḗḿḗƞŧ şḗŧ."
+
+#: application/controllers/ElementSetsController.php:65
+msgid "The element set was successfully changed!"
+msgstr "Ŧħḗ ḗŀḗḿḗƞŧ şḗŧ ẇȧş şŭƈƈḗşşƒŭŀŀẏ ƈħȧƞɠḗḓ!"
+
+#: application/controllers/ErrorController.php:64
+msgid "Page not found."
+msgstr "Ƥȧɠḗ ƞǿŧ ƒǿŭƞḓ."
+
+#: application/controllers/ErrorController.php:79
+msgid "Access denied."
+msgstr "Ȧƈƈḗşş ḓḗƞīḗḓ."
+
+#: application/controllers/FilesController.php:64
+msgid "This will delete the file and its associated metadata."
+msgstr "Ŧħīş ẇīŀŀ ḓḗŀḗŧḗ ŧħḗ ƒīŀḗ ȧƞḓ īŧş ȧşşǿƈīȧŧḗḓ ḿḗŧȧḓȧŧȧ."
+
+#: application/controllers/ItemTypesController.php:28
+#, php-format
+msgid "The item type \"%s\" was successfully added."
+msgstr "Ŧħḗ īŧḗḿ ŧẏƥḗ \"%s\" ẇȧş şŭƈƈḗşşƒŭŀŀẏ ȧḓḓḗḓ."
+
+#: application/controllers/ItemTypesController.php:55
+#, php-format
+msgid "The item type \"%s\" was successfully updated."
+msgstr "Ŧħḗ īŧḗḿ ŧẏƥḗ \"%s\" ẇȧş şŭƈƈḗşşƒŭŀŀẏ ŭƥḓȧŧḗḓ."
+
+#: application/controllers/ItemTypesController.php:150
+#, php-format
+msgid ""
+"This will delete the \"%s\" item type but will not delete the elements "
+"assigned to the item type. Items that are assigned to this item type will "
+"lose all metadata that is specific to the item type."
+msgstr ""
+"Ŧħīş ẇīŀŀ ḓḗŀḗŧḗ ŧħḗ \"%s\" īŧḗḿ ŧẏƥḗ ƀŭŧ ẇīŀŀ ƞǿŧ ḓḗŀḗŧḗ ŧħḗ ḗŀḗḿḗƞŧş "
+"ȧşşīɠƞḗḓ ŧǿ ŧħḗ īŧḗḿ ŧẏƥḗ. Īŧḗḿş ŧħȧŧ ȧřḗ ȧşşīɠƞḗḓ ŧǿ ŧħīş īŧḗḿ ŧẏƥḗ ẇīŀŀ "
+"ŀǿşḗ ȧŀŀ ḿḗŧȧḓȧŧȧ ŧħȧŧ īş şƥḗƈīƒīƈ ŧǿ ŧħḗ īŧḗḿ ŧẏƥḗ."
+
+#: application/controllers/ItemTypesController.php:158
+#, php-format
+msgid ""
+"The item type \"%s\" was successfully added!  You may now add elements to "
+"your new item type."
+msgstr ""
+"Ŧħḗ īŧḗḿ ŧẏƥḗ \"%s\" ẇȧş şŭƈƈḗşşƒŭŀŀẏ ȧḓḓḗḓ!  Ẏǿŭ ḿȧẏ ƞǿẇ ȧḓḓ ḗŀḗḿḗƞŧş ŧǿ ẏǿŭř "
+"ƞḗẇ īŧḗḿ ŧẏƥḗ."
+
+#: application/controllers/ItemsController.php:85
+#: application/controllers/ItemsController.php:145
+msgid ""
+"The ImageMagick directory path has not been set. No derivative images will "
+"be created. If you would like Omeka to create derivative images, please set "
+"the path in Settings."
+msgstr ""
+"Ŧħḗ ĪḿȧɠḗḾȧɠīƈķ ḓīřḗƈŧǿřẏ ƥȧŧħ ħȧş ƞǿŧ ƀḗḗƞ şḗŧ. Ƞǿ ḓḗřīṽȧŧīṽḗ īḿȧɠḗş ẇīŀŀ "
+"ƀḗ ƈřḗȧŧḗḓ. Īƒ ẏǿŭ ẇǿŭŀḓ ŀīķḗ Ǿḿḗķȧ ŧǿ ƈřḗȧŧḗ ḓḗřīṽȧŧīṽḗ īḿȧɠḗş, ƥŀḗȧşḗ şḗŧ "
+"ŧħḗ ƥȧŧħ īƞ Şḗŧŧīƞɠş."
+
+#: application/controllers/ItemsController.php:94
+#, php-format
+msgid "The item \"%s\" was successfully added!"
+msgstr "Ŧħḗ īŧḗḿ \"%s\" ẇȧş şŭƈƈḗşşƒŭŀŀẏ ȧḓḓḗḓ!"
+
+#: application/controllers/ItemsController.php:96
+#, php-format
+msgid "The item #%s was successfully added!"
+msgstr "Ŧħḗ īŧḗḿ #%s ẇȧş şŭƈƈḗşşƒŭŀŀẏ ȧḓḓḗḓ!"
+
+#: application/controllers/ItemsController.php:104
+#, php-format
+msgid "The item \"%s\" was successfully changed!"
+msgstr "Ŧħḗ īŧḗḿ \"%s\" ẇȧş şŭƈƈḗşşƒŭŀŀẏ ƈħȧƞɠḗḓ!"
+
+#: application/controllers/ItemsController.php:106
+#, php-format
+msgid "The item #%s was successfully changed!"
+msgstr "Ŧħḗ īŧḗḿ #%s ẇȧş şŭƈƈḗşşƒŭŀŀẏ ƈħȧƞɠḗḓ!"
+
+#: application/controllers/ItemsController.php:114
+#, php-format
+msgid "The item \"%s\" was successfully deleted!"
+msgstr "Ŧħḗ īŧḗḿ \"%s\" ẇȧş şŭƈƈḗşşƒŭŀŀẏ ḓḗŀḗŧḗḓ!"
+
+#: application/controllers/ItemsController.php:116
+#, php-format
+msgid "The item #%s was successfully deleted!"
+msgstr "Ŧħḗ īŧḗḿ #%s ẇȧş şŭƈƈḗşşƒŭŀŀẏ ḓḗŀḗŧḗḓ!"
+
+#: application/controllers/ItemsController.php:124
+#, php-format
+msgid ""
+"This will delete the item \"%s\" and its associated metadata. It will also "
+"delete all files and file metadata associated with this item."
+msgstr ""
+"Ŧħīş ẇīŀŀ ḓḗŀḗŧḗ ŧħḗ īŧḗḿ \"%s\" ȧƞḓ īŧş ȧşşǿƈīȧŧḗḓ ḿḗŧȧḓȧŧȧ. Īŧ ẇīŀŀ ȧŀşǿ "
+"ḓḗŀḗŧḗ ȧŀŀ ƒīŀḗş ȧƞḓ ƒīŀḗ ḿḗŧȧḓȧŧȧ ȧşşǿƈīȧŧḗḓ ẇīŧħ ŧħīş īŧḗḿ."
+
+#: application/controllers/ItemsController.php:128
+#, php-format
+msgid ""
+"This will delete the item #%s and its associated metadata. It will also "
+"delete all files and file metadata associated with this item."
+msgstr ""
+"Ŧħīş ẇīŀŀ ḓḗŀḗŧḗ ŧħḗ īŧḗḿ #%s ȧƞḓ īŧş ȧşşǿƈīȧŧḗḓ ḿḗŧȧḓȧŧȧ. Īŧ ẇīŀŀ ȧŀşǿ "
+"ḓḗŀḗŧḗ ȧŀŀ ƒīŀḗş ȧƞḓ ƒīŀḗ ḿḗŧȧḓȧŧȧ ȧşşǿƈīȧŧḗḓ ẇīŧħ ŧħīş īŧḗḿ."
+
+#: application/controllers/ItemsController.php:255
+msgid "You must choose some items to batch edit."
+msgstr "Ẏǿŭ ḿŭşŧ ƈħǿǿşḗ şǿḿḗ īŧḗḿş ŧǿ ƀȧŧƈħ ḗḓīŧ."
+
+#: application/controllers/ItemsController.php:299
+msgid "User is not allowed to modify visibility of items."
+msgstr "Ŭşḗř īş ƞǿŧ ȧŀŀǿẇḗḓ ŧǿ ḿǿḓīƒẏ ṽīşīƀīŀīŧẏ ǿƒ īŧḗḿş."
+
+#: application/controllers/ItemsController.php:304
+msgid "User is not allowed to modify featured status of items."
+msgstr "Ŭşḗř īş ƞǿŧ ȧŀŀǿẇḗḓ ŧǿ ḿǿḓīƒẏ ƒḗȧŧŭřḗḓ şŧȧŧŭş ǿƒ īŧḗḿş."
+
+#: application/controllers/ItemsController.php:311
+msgid "User is not allowed to delete selected items."
+msgstr "Ŭşḗř īş ƞǿŧ ȧŀŀǿẇḗḓ ŧǿ ḓḗŀḗŧḗ şḗŀḗƈŧḗḓ īŧḗḿş."
+
+#: application/controllers/ItemsController.php:317
+msgid "User is not allowed to edit selected items."
+msgstr "Ŭşḗř īş ƞǿŧ ȧŀŀǿẇḗḓ ŧǿ ḗḓīŧ şḗŀḗƈŧḗḓ īŧḗḿş."
+
+#: application/controllers/ItemsController.php:322
+msgid "User is not allowed to tag selected items."
+msgstr "Ŭşḗř īş ƞǿŧ ȧŀŀǿẇḗḓ ŧǿ ŧȧɠ şḗŀḗƈŧḗḓ īŧḗḿş."
+
+#: application/controllers/ItemsController.php:356
+msgid "The items were successfully deleted!"
+msgstr "Ŧħḗ īŧḗḿş ẇḗřḗ şŭƈƈḗşşƒŭŀŀẏ ḓḗŀḗŧḗḓ!"
+
+#: application/controllers/ItemsController.php:358
+msgid "The items were successfully changed!"
+msgstr "Ŧħḗ īŧḗḿş ẇḗřḗ şŭƈƈḗşşƒŭŀŀẏ ƈħȧƞɠḗḓ!"
+
+#: application/controllers/PluginsController.php:45
+#, php-format
+msgid ""
+"Error in configuring plugin named \"%s\". Missing config and/or config_form "
+"hook(s)."
+msgstr ""
+"Ḗřřǿř īƞ ƈǿƞƒīɠŭřīƞɠ ƥŀŭɠīƞ ƞȧḿḗḓ \"%s\". Ḿīşşīƞɠ ƈǿƞƒīɠ ȧƞḓ/ǿř ƈǿƞƒīɠ_ƒǿřḿ "
+"ħǿǿķ(ş)."
+
+#: application/controllers/PluginsController.php:52
+#, php-format
+msgid "The %s plugin was successfully configured!"
+msgstr "Ŧħḗ %s ƥŀŭɠīƞ ẇȧş şŭƈƈḗşşƒŭŀŀẏ ƈǿƞƒīɠŭřḗḓ!"
+
+#: application/controllers/PluginsController.php:70
+#, php-format
+msgid "The %s plugin has already been installed."
+msgstr "Ŧħḗ %s ƥŀŭɠīƞ ħȧş ȧŀřḗȧḓẏ ƀḗḗƞ īƞşŧȧŀŀḗḓ."
+
+#: application/controllers/PluginsController.php:79
+#, php-format
+msgid "The %s plugin was successfully installed!"
+msgstr "Ŧħḗ %s ƥŀŭɠīƞ ẇȧş şŭƈƈḗşşƒŭŀŀẏ īƞşŧȧŀŀḗḓ!"
+
+#: application/controllers/PluginsController.php:91
+#: application/controllers/PluginsController.php:96
+#, php-format
+msgid "The following error occurred while installing the %s plugin: "
+msgstr "Ŧħḗ ƒǿŀŀǿẇīƞɠ ḗřřǿř ǿƈƈŭřřḗḓ ẇħīŀḗ īƞşŧȧŀŀīƞɠ ŧħḗ %s ƥŀŭɠīƞ: "
+
+#: application/controllers/PluginsController.php:124
+#, php-format
+msgid "The following error occurred while activating the %s plugin: "
+msgstr "Ŧħḗ ƒǿŀŀǿẇīƞɠ ḗřřǿř ǿƈƈŭřřḗḓ ẇħīŀḗ ȧƈŧīṽȧŧīƞɠ ŧħḗ %s ƥŀŭɠīƞ: "
+
+#: application/controllers/PluginsController.php:134
+#, php-format
+msgid "The %s plugin was successfully activated!"
+msgstr "Ŧħḗ %s ƥŀŭɠīƞ ẇȧş şŭƈƈḗşşƒŭŀŀẏ ȧƈŧīṽȧŧḗḓ!"
+
+#: application/controllers/PluginsController.php:139
+#, php-format
+msgid "The %s plugin was activated, but could not be loaded: "
+msgstr "Ŧħḗ %s ƥŀŭɠīƞ ẇȧş ȧƈŧīṽȧŧḗḓ, ƀŭŧ ƈǿŭŀḓ ƞǿŧ ƀḗ ŀǿȧḓḗḓ: "
+
+#: application/controllers/PluginsController.php:163
+#, php-format
+msgid "The %s plugin was successfully deactivated!"
+msgstr "Ŧħḗ %s ƥŀŭɠīƞ ẇȧş şŭƈƈḗşşƒŭŀŀẏ ḓḗȧƈŧīṽȧŧḗḓ!"
+
+#: application/controllers/PluginsController.php:168
+#, php-format
+msgid "The following error occurred while deactivating the %s plugin: "
+msgstr "Ŧħḗ ƒǿŀŀǿẇīƞɠ ḗřřǿř ǿƈƈŭřřḗḓ ẇħīŀḗ ḓḗȧƈŧīṽȧŧīƞɠ ŧħḗ %s ƥŀŭɠīƞ: "
+
+#: application/controllers/PluginsController.php:187
+#, php-format
+msgid "The %s plugin was successfully upgraded!"
+msgstr "Ŧħḗ %s ƥŀŭɠīƞ ẇȧş şŭƈƈḗşşƒŭŀŀẏ ŭƥɠřȧḓḗḓ!"
+
+#: application/controllers/PluginsController.php:196
+#: application/controllers/PluginsController.php:202
+#, php-format
+msgid "The following error occurred while upgrading the %s plugin: "
+msgstr "Ŧħḗ ƒǿŀŀǿẇīƞɠ ḗřřǿř ǿƈƈŭřřḗḓ ẇħīŀḗ ŭƥɠřȧḓīƞɠ ŧħḗ %s ƥŀŭɠīƞ: "
+
+#: application/controllers/PluginsController.php:253
+#, php-format
+msgid "The plugin could not be found in the '%s' directory!"
+msgstr "Ŧħḗ ƥŀŭɠīƞ ƈǿŭŀḓ ƞǿŧ ƀḗ ƒǿŭƞḓ īƞ ŧħḗ '%s' ḓīřḗƈŧǿřẏ!"
+
+#: application/controllers/PluginsController.php:262
+msgid "You must confirm the uninstall before proceeding."
+msgstr "Ẏǿŭ ḿŭşŧ ƈǿƞƒīřḿ ŧħḗ ŭƞīƞşŧȧŀŀ ƀḗƒǿřḗ ƥřǿƈḗḗḓīƞɠ."
+
+#: application/controllers/PluginsController.php:280
+#, php-format
+msgid "The %s plugin was successfully uninstalled!"
+msgstr "Ŧħḗ %s ƥŀŭɠīƞ ẇȧş şŭƈƈḗşşƒŭŀŀẏ ŭƞīƞşŧȧŀŀḗḓ!"
+
+#: application/controllers/PluginsController.php:285
+#: application/controllers/PluginsController.php:290
+#, php-format
+msgid "The following error occurred while uninstalling the %s plugin: "
+msgstr "Ŧħḗ ƒǿŀŀǿẇīƞɠ ḗřřǿř ǿƈƈŭřřḗḓ ẇħīŀḗ ŭƞīƞşŧȧŀŀīƞɠ ŧħḗ %s ƥŀŭɠīƞ: "
+
+#: application/controllers/PluginsController.php:317
+msgid "No plugin name given."
+msgstr "Ƞǿ ƥŀŭɠīƞ ƞȧḿḗ ɠīṽḗƞ."
+
+#: application/controllers/PluginsController.php:330
+#, php-format
+msgid "The plugin %s must be installed."
+msgstr "Ŧħḗ ƥŀŭɠīƞ %s ḿŭşŧ ƀḗ īƞşŧȧŀŀḗḓ."
+
+#: application/controllers/SettingsController.php:44
+msgid "The general settings have been updated."
+msgstr "Ŧħḗ ɠḗƞḗřȧŀ şḗŧŧīƞɠş ħȧṽḗ ƀḗḗƞ ŭƥḓȧŧḗḓ."
+
+#: application/controllers/SettingsController.php:76
+msgid "The security settings have been updated."
+msgstr "Ŧħḗ şḗƈŭřīŧẏ şḗŧŧīƞɠş ħȧṽḗ ƀḗḗƞ ŭƥḓȧŧḗḓ."
+
+#: application/controllers/SettingsController.php:95
+msgid ""
+"You have changed which records are searchable in Omeka. Please re-index the "
+"records using the form below."
+msgstr ""
+"Ẏǿŭ ħȧṽḗ ƈħȧƞɠḗḓ ẇħīƈħ řḗƈǿřḓş ȧřḗ şḗȧřƈħȧƀŀḗ īƞ Ǿḿḗķȧ. Ƥŀḗȧşḗ řḗ-īƞḓḗẋ ŧħḗ "
+"řḗƈǿřḓş ŭşīƞɠ ŧħḗ ƒǿřḿ ƀḗŀǿẇ."
+
+#: application/controllers/SettingsController.php:102
+msgid ""
+"Indexing records. This may take a while. You may continue administering your "
+"site."
+msgstr ""
+"Īƞḓḗẋīƞɠ řḗƈǿřḓş. Ŧħīş ḿȧẏ ŧȧķḗ ȧ ẇħīŀḗ. Ẏǿŭ ḿȧẏ ƈǿƞŧīƞŭḗ ȧḓḿīƞīşŧḗřīƞɠ ẏǿŭř "
+"şīŧḗ."
+
+#: application/controllers/SettingsController.php:131
+msgid "The item type elements were successfully changed!"
+msgstr "Ŧħḗ īŧḗḿ ŧẏƥḗ ḗŀḗḿḗƞŧş ẇḗřḗ şŭƈƈḗşşƒŭŀŀẏ ƈħȧƞɠḗḓ!"
+
+#: application/controllers/SettingsController.php:150
+msgid "The API configuration was successfully changed!"
+msgstr "Ŧħḗ ȦƤĪ ƈǿƞƒīɠŭřȧŧīǿƞ ẇȧş şŭƈƈḗşşƒŭŀŀẏ ƈħȧƞɠḗḓ!"
+
+#: application/controllers/SettingsController.php:176
+msgid "The ImageMagick directory path works."
+msgstr "Ŧħḗ ĪḿȧɠḗḾȧɠīƈķ ḓīřḗƈŧǿřẏ ƥȧŧħ ẇǿřķş."
+
+#: application/controllers/SettingsController.php:177
+msgid "The ImageMagick directory path does not work."
+msgstr "Ŧħḗ ĪḿȧɠḗḾȧɠīƈķ ḓīřḗƈŧǿřẏ ƥȧŧħ ḓǿḗş ƞǿŧ ẇǿřķ."
+
+#: application/controllers/TagsController.php:35
+msgid "You have to be logged in to edit tags!"
+msgstr "Ẏǿŭ ħȧṽḗ ŧǿ ƀḗ ŀǿɠɠḗḓ īƞ ŧǿ ḗḓīŧ ŧȧɠş!"
+
+#: application/controllers/TagsController.php:64
+#, php-format
+msgid "Tag named \"%1$s\" was successfully renamed to \"%2$s\"."
+msgstr "Ŧȧɠ ƞȧḿḗḓ \"%1$s\" ẇȧş şŭƈƈḗşşƒŭŀŀẏ řḗƞȧḿḗḓ ŧǿ \"%2$s\"."
+
+#: application/controllers/TagsController.php:91
+msgid "Invalid tagType given."
+msgstr "Īƞṽȧŀīḓ ŧȧɠŦẏƥḗ ɠīṽḗƞ."
+
+#: application/controllers/ThemesController.php:25
+msgid "Invalid form submission."
+msgstr "Īƞṽȧŀīḓ ƒǿřḿ şŭƀḿīşşīǿƞ."
+
+#: application/controllers/ThemesController.php:33
+msgid "You have chosen an illegal theme name. Please select another theme."
+msgstr "Ẏǿŭ ħȧṽḗ ƈħǿşḗƞ ȧƞ īŀŀḗɠȧŀ ŧħḗḿḗ ƞȧḿḗ. Ƥŀḗȧşḗ şḗŀḗƈŧ ȧƞǿŧħḗř ŧħḗḿḗ."
+
+#: application/controllers/ThemesController.php:40
+#, php-format
+msgid "This theme requires a newer version of Omeka (%s)."
+msgstr "Ŧħīş ŧħḗḿḗ řḗɋŭīřḗş ȧ ƞḗẇḗř ṽḗřşīǿƞ ǿƒ Ǿḿḗķȧ (%s)."
+
+#: application/controllers/ThemesController.php:54
+msgid "The theme has been successfully changed."
+msgstr "Ŧħḗ ŧħḗḿḗ ħȧş ƀḗḗƞ şŭƈƈḗşşƒŭŀŀẏ ƈħȧƞɠḗḓ."
+
+#: application/controllers/ThemesController.php:81
+msgid "The theme settings were successfully saved!"
+msgstr "Ŧħḗ ŧħḗḿḗ şḗŧŧīƞɠş ẇḗřḗ şŭƈƈḗşşƒŭŀŀẏ şȧṽḗḓ!"
+
+#: application/controllers/ThemesController.php:84
+msgid "There was an error on the form. Please try again."
+msgstr "Ŧħḗřḗ ẇȧş ȧƞ ḗřřǿř ǿƞ ŧħḗ ƒǿřḿ. Ƥŀḗȧşḗ ŧřẏ ȧɠȧīƞ."
+
+#: application/controllers/UpgradeController.php:50
+msgid "SQL error in migration: "
+msgstr "ŞɊĿ ḗřřǿř īƞ ḿīɠřȧŧīǿƞ: "
+
+#: application/controllers/UsersController.php:70
+msgid ""
+"Unable to reset password. Please verify that the information is correct and "
+"contact an administrator if necessary."
+msgstr ""
+"Ŭƞȧƀŀḗ ŧǿ řḗşḗŧ ƥȧşşẇǿřḓ. Ƥŀḗȧşḗ ṽḗřīƒẏ ŧħȧŧ ŧħḗ īƞƒǿřḿȧŧīǿƞ īş ƈǿřřḗƈŧ ȧƞḓ "
+"ƈǿƞŧȧƈŧ ȧƞ ȧḓḿīƞīşŧřȧŧǿř īƒ ƞḗƈḗşşȧřẏ."
+
+#: application/controllers/UsersController.php:108
+msgid "Please follow this link to reset your password:"
+msgstr "Ƥŀḗȧşḗ ƒǿŀŀǿẇ ŧħīş ŀīƞķ ŧǿ řḗşḗŧ ẏǿŭř ƥȧşşẇǿřḓ:"
+
+#: application/controllers/UsersController.php:110
+#: application/controllers/UsersController.php:113
+#: application/controllers/UsersController.php:382
+#, php-format
+msgid "%s Administrator"
+msgstr "%s Ȧḓḿīƞīşŧřȧŧǿř"
+
+#: application/controllers/UsersController.php:114
+#, php-format
+msgid "[%s] Reset Your Password"
+msgstr "[%s] Řḗşḗŧ Ẏǿŭř Ƥȧşşẇǿřḓ"
+
+#: application/controllers/UsersController.php:117
+msgid "Please check your email for a link to reset your password."
+msgstr "Ƥŀḗȧşḗ ƈħḗƈķ ẏǿŭř ḗḿȧīŀ ƒǿř ȧ ŀīƞķ ŧǿ řḗşḗŧ ẏǿŭř ƥȧşşẇǿřḓ."
+
+#: application/controllers/UsersController.php:126
+msgid "Invalid activation code given."
+msgstr "Īƞṽȧŀīḓ ȧƈŧīṽȧŧīǿƞ ƈǿḓḗ ɠīṽḗƞ."
+
+#: application/controllers/UsersController.php:135
+msgid "Password: The passwords do not match."
+msgstr "Ƥȧşşẇǿřḓ: Ŧħḗ ƥȧşşẇǿřḓş ḓǿ ƞǿŧ ḿȧŧƈħ."
+
+#: application/controllers/UsersController.php:143
+msgid "You may now log in to Omeka."
+msgstr "Ẏǿŭ ḿȧẏ ƞǿẇ ŀǿɠ īƞ ŧǿ Ǿḿḗķȧ."
+
+#: application/controllers/UsersController.php:171
+#, php-format
+msgid "The user \"%s\" was successfully added!"
+msgstr "Ŧħḗ ŭşḗř \"%s\" ẇȧş şŭƈƈḗşşƒŭŀŀẏ ȧḓḓḗḓ!"
+
+#: application/controllers/UsersController.php:175
+#, php-format
+msgid "The user \"%s\" was added, but the activation email could not be sent."
+msgstr "Ŧħḗ ŭşḗř \"%s\" ẇȧş ȧḓḓḗḓ, ƀŭŧ ŧħḗ ȧƈŧīṽȧŧīǿƞ ḗḿȧīŀ ƈǿŭŀḓ ƞǿŧ ƀḗ şḗƞŧ."
+
+#: application/controllers/UsersController.php:214
+msgid "User activation email has been sent."
+msgstr "Ŭşḗř ȧƈŧīṽȧŧīǿƞ ḗḿȧīŀ ħȧş ƀḗḗƞ şḗƞŧ."
+
+#: application/controllers/UsersController.php:216
+msgid "User activation email could not be sent."
+msgstr "Ŭşḗř ȧƈŧīṽȧŧīǿƞ ḗḿȧīŀ ƈǿŭŀḓ ƞǿŧ ƀḗ şḗƞŧ."
+
+#: application/controllers/UsersController.php:233
+#: application/controllers/UsersController.php:284
+msgid "There was an invalid entry on the form. Please try again."
+msgstr "Ŧħḗřḗ ẇȧş ȧƞ īƞṽȧŀīḓ ḗƞŧřẏ ǿƞ ŧħḗ ƒǿřḿ. Ƥŀḗȧşḗ ŧřẏ ȧɠȧīƞ."
+
+#: application/controllers/UsersController.php:255
+#, php-format
+msgid "The user %s was successfully changed!"
+msgstr "Ŧħḗ ŭşḗř %s ẇȧş şŭƈƈḗşşƒŭŀŀẏ ƈħȧƞɠḗḓ!"
+
+#: application/controllers/UsersController.php:291
+msgid "Password changed!"
+msgstr "Ƥȧşşẇǿřḓ ƈħȧƞɠḗḓ!"
+
+#: application/controllers/UsersController.php:313
+msgid "A new API key was successfully created."
+msgstr "Ȧ ƞḗẇ ȦƤĪ ķḗẏ ẇȧş şŭƈƈḗşşƒŭŀŀẏ ƈřḗȧŧḗḓ."
+
+#: application/controllers/UsersController.php:320
+msgid "An existing API key was successfully rescinded."
+msgstr "Ȧƞ ḗẋīşŧīƞɠ ȦƤĪ ķḗẏ ẇȧş şŭƈƈḗşşƒŭŀŀẏ řḗşƈīƞḓḗḓ."
+
+#: application/controllers/UsersController.php:347
+#, php-format
+msgid "The user \"%s\" was successfully deleted!"
+msgstr "Ŧħḗ ŭşḗř \"%s\" ẇȧş şŭƈƈḗşşƒŭŀŀẏ ḓḗŀḗŧḗḓ!"
+
+#: application/controllers/UsersController.php:353
+#, php-format
+msgid ""
+"%s will be deleted from the system. Items, collections, and tags created by "
+"this user will remain in the system, but will no longer be associated with "
+"this user."
+msgstr ""
+"%s ẇīŀŀ ƀḗ ḓḗŀḗŧḗḓ ƒřǿḿ ŧħḗ şẏşŧḗḿ. Īŧḗḿş, ƈǿŀŀḗƈŧīǿƞş, ȧƞḓ ŧȧɠş ƈřḗȧŧḗḓ ƀẏ "
+"ŧħīş ŭşḗř ẇīŀŀ řḗḿȧīƞ īƞ ŧħḗ şẏşŧḗḿ, ƀŭŧ ẇīŀŀ ƞǿ ŀǿƞɠḗř ƀḗ ȧşşǿƈīȧŧḗḓ ẇīŧħ "
+"ŧħīş ŭşḗř."
+
+#: application/controllers/UsersController.php:378
+msgid "Welcome!"
+msgstr "Ẇḗŀƈǿḿḗ!"
+
+#: application/controllers/UsersController.php:380
+#, php-format
+msgid ""
+"Your account for the %s repository has been created. Please click the "
+"following link to activate your account:"
+msgstr ""
+"Ẏǿŭř ȧƈƈǿŭƞŧ ƒǿř ŧħḗ %s řḗƥǿşīŧǿřẏ ħȧş ƀḗḗƞ ƈřḗȧŧḗḓ. Ƥŀḗȧşḗ ƈŀīƈķ ŧħḗ "
+"ƒǿŀŀǿẇīƞɠ ŀīƞķ ŧǿ ȧƈŧīṽȧŧḗ ẏǿŭř ȧƈƈǿŭƞŧ:"
+
+#: application/controllers/UsersController.php:383
+#, php-format
+msgid "Activate your account with the %s repository"
+msgstr "Ȧƈŧīṽȧŧḗ ẏǿŭř ȧƈƈǿŭƞŧ ẇīŧħ ŧħḗ %s řḗƥǿşīŧǿřẏ"
+
+#: application/controllers/UsersController.php:478
+msgid "Login information incorrect. Please try again."
+msgstr "Ŀǿɠīƞ īƞƒǿřḿȧŧīǿƞ īƞƈǿřřḗƈŧ. Ƥŀḗȧşḗ ŧřẏ ȧɠȧīƞ."
+
+#: application/forms/AppearanceSettings.php:22
+#: application/forms/Install.php:128
+msgid "Fullsize Image Size"
+msgstr "Ƒŭŀŀşīzḗ Īḿȧɠḗ Şīzḗ"
+
+#: application/forms/AppearanceSettings.php:23
+msgid "Maximum fullsize image size constraint (in pixels)."
+msgstr "Ḿȧẋīḿŭḿ ƒŭŀŀşīzḗ īḿȧɠḗ şīzḗ ƈǿƞşŧřȧīƞŧ (īƞ ƥīẋḗŀş)."
+
+#: application/forms/AppearanceSettings.php:29
+#: application/forms/Install.php:136
+msgid "Thumbnail Size"
+msgstr "Ŧħŭḿƀƞȧīŀ Şīzḗ"
+
+#: application/forms/AppearanceSettings.php:30
+msgid "Maximum thumbnail size constraint (in pixels)."
+msgstr "Ḿȧẋīḿŭḿ ŧħŭḿƀƞȧīŀ şīzḗ ƈǿƞşŧřȧīƞŧ (īƞ ƥīẋḗŀş)."
+
+#: application/forms/AppearanceSettings.php:36
+#: application/forms/Install.php:144
+msgid "Square Thumbnail Size"
+msgstr "Şɋŭȧřḗ Ŧħŭḿƀƞȧīŀ Şīzḗ"
+
+#: application/forms/AppearanceSettings.php:37
+msgid "Maximum square thumbnail size constraint (in pixels)."
+msgstr "Ḿȧẋīḿŭḿ şɋŭȧřḗ ŧħŭḿƀƞȧīŀ şīzḗ ƈǿƞşŧřȧīƞŧ (īƞ ƥīẋḗŀş)."
+
+#: application/forms/AppearanceSettings.php:43
+msgid "Results Per Page (admin)"
+msgstr "Řḗşŭŀŧş Ƥḗř Ƥȧɠḗ (ȧḓḿīƞ)"
+
+#: application/forms/AppearanceSettings.php:44
+msgid ""
+"Limit the number of results displayed per page in the administrative "
+"interface."
+msgstr ""
+"Ŀīḿīŧ ŧħḗ ƞŭḿƀḗř ǿƒ řḗşŭŀŧş ḓīşƥŀȧẏḗḓ ƥḗř ƥȧɠḗ īƞ ŧħḗ ȧḓḿīƞīşŧřȧŧīṽḗ "
+"īƞŧḗřƒȧƈḗ."
+
+#: application/forms/AppearanceSettings.php:50
+msgid "Results Per Page (public)"
+msgstr "Řḗşŭŀŧş Ƥḗř Ƥȧɠḗ (ƥŭƀŀīƈ)"
+
+#: application/forms/AppearanceSettings.php:51
+msgid "Limit the number of results displayed per page in the public interface."
+msgstr "Ŀīḿīŧ ŧħḗ ƞŭḿƀḗř ǿƒ řḗşŭŀŧş ḓīşƥŀȧẏḗḓ ƥḗř ƥȧɠḗ īƞ ŧħḗ ƥŭƀŀīƈ īƞŧḗřƒȧƈḗ."
+
+#: application/forms/AppearanceSettings.php:57
+#: application/forms/Install.php:168
+msgid "Show Empty Elements"
+msgstr "Şħǿẇ Ḗḿƥŧẏ Ḗŀḗḿḗƞŧş"
+
+#: application/forms/AppearanceSettings.php:62
+msgid "Show Element Set Headings"
+msgstr "Şħǿẇ Ḗŀḗḿḗƞŧ Şḗŧ Ħḗȧḓīƞɠş"
+
+#: application/forms/AppearanceSettings.php:71
+msgid "Derivative Size Constraints"
+msgstr "Ḓḗřīṽȧŧīṽḗ Şīzḗ Ƈǿƞşŧřȧīƞŧş"
+
+#: application/forms/AppearanceSettings.php:79
+msgid "Display Settings"
+msgstr "Ḓīşƥŀȧẏ Şḗŧŧīƞɠş"
+
+#: application/forms/ChangePassword.php:25
+msgid "Current Password"
+msgstr "Ƈŭřřḗƞŧ Ƥȧşşẇǿřḓ"
+
+#: application/forms/ChangePassword.php:26
+#: application/forms/ChangePassword.php:36
+msgid "Password must be at least 6 characters long."
+msgstr "Ƥȧşşẇǿřḓ ḿŭşŧ ƀḗ ȧŧ ŀḗȧşŧ 6 ƈħȧřȧƈŧḗřş ŀǿƞɠ."
+
+#: application/forms/ChangePassword.php:28
+msgid "Invalid current password"
+msgstr "Īƞṽȧŀīḓ ƈŭřřḗƞŧ ƥȧşşẇǿřḓ"
+
+#: application/forms/ChangePassword.php:34
+msgid "New Password"
+msgstr "Ƞḗẇ Ƥȧşşẇǿřḓ"
+
+#: application/forms/ChangePassword.php:41
+msgid "New password must be entered."
+msgstr "Ƞḗẇ ƥȧşşẇǿřḓ ḿŭşŧ ƀḗ ḗƞŧḗřḗḓ."
+
+#: application/forms/ChangePassword.php:50
+#: application/forms/ChangePassword.php:70
+msgid "New password must be typed correctly twice."
+msgstr "Ƞḗẇ ƥȧşşẇǿřḓ ḿŭşŧ ƀḗ ŧẏƥḗḓ ƈǿřřḗƈŧŀẏ ŧẇīƈḗ."
+
+#: application/forms/ChangePassword.php:59
+msgid "New password must be at least %min% characters long."
+msgstr "Ƞḗẇ ƥȧşşẇǿřḓ ḿŭşŧ ƀḗ ȧŧ ŀḗȧşŧ %ḿīƞ% cħȧřȧƈŧḗřş ŀǿƞɠ."
+
+#: application/forms/ChangePassword.php:68
+msgid "Repeat New Password"
+msgstr "Řḗƥḗȧŧ Ƞḗẇ Ƥȧşşẇǿřḓ"
+
+#: application/forms/GeneralSettings.php:22 application/forms/Install.php:90
+msgid "Site Title"
+msgstr "Şīŧḗ Ŧīŧŀḗ"
+
+#: application/forms/GeneralSettings.php:26 application/forms/Install.php:95
+msgid "Site Description"
+msgstr "Şīŧḗ Ḓḗşƈřīƥŧīǿƞ"
+
+#: application/forms/GeneralSettings.php:31 application/forms/Install.php:99
+msgid "Administrator Email"
+msgstr "Ȧḓḿīƞīşŧřȧŧǿř Ḗḿȧīŀ"
+
+#: application/forms/GeneralSettings.php:37 application/forms/Install.php:105
+msgid "Site Copyright Information"
+msgstr "Şīŧḗ Ƈǿƥẏřīɠħŧ Īƞƒǿřḿȧŧīǿƞ"
+
+#: application/forms/GeneralSettings.php:41 application/forms/Install.php:109
+msgid "Site Author Information"
+msgstr "Şīŧḗ Ȧŭŧħǿř Īƞƒǿřḿȧŧīǿƞ"
+
+#: application/forms/GeneralSettings.php:45 application/forms/Install.php:113
+msgid "Tag Delimiter"
+msgstr "Ŧȧɠ Ḓḗŀīḿīŧḗř"
+
+#: application/forms/GeneralSettings.php:46
+msgid ""
+"Separate tags using this character or string. Be careful when changing this "
+"setting. You run the risk of splitting tags that contain the old delimiter."
+msgstr ""
+"Şḗƥȧřȧŧḗ ŧȧɠş ŭşīƞɠ ŧħīş ƈħȧřȧƈŧḗř ǿř şŧřīƞɠ. Ɓḗ ƈȧřḗƒŭŀ ẇħḗƞ ƈħȧƞɠīƞɠ ŧħīş "
+"şḗŧŧīƞɠ. Ẏǿŭ řŭƞ ŧħḗ řīşķ ǿƒ şƥŀīŧŧīƞɠ ŧȧɠş ŧħȧŧ ƈǿƞŧȧīƞ ŧħḗ ǿŀḓ ḓḗŀīḿīŧḗř."
+
+#: application/forms/GeneralSettings.php:59 application/forms/Install.php:174
+msgid "ImageMagick Directory Path"
+msgstr "ĪḿȧɠḗḾȧɠīƈķ Ḓīřḗƈŧǿřẏ Ƥȧŧħ"
+
+#: application/forms/Install.php:31
+msgid "must be 30 characters or fewer with no whitespace"
+msgstr "ḿŭşŧ ƀḗ 30 ƈħȧřȧƈŧḗřş ǿř ƒḗẇḗř ẇīŧħ ƞǿ ẇħīŧḗşƥȧƈḗ"
+
+#: application/forms/Install.php:39 application/forms/User.php:48
+#: application/models/User.php:189
+#, php-format
+msgid ""
+"Whitespace is not allowed. Only these special characters may be used: %s"
+msgstr ""
+"Ẇħīŧḗşƥȧƈḗ īş ƞǿŧ ȧŀŀǿẇḗḓ. Ǿƞŀẏ ŧħḗşḗ şƥḗƈīȧŀ ƈħȧřȧƈŧḗřş ḿȧẏ ƀḗ ŭşḗḓ: %s"
+
+#: application/forms/Install.php:48 application/forms/Login.php:34
+msgid "Password"
+msgstr "Ƥȧşşẇǿřḓ"
+
+#: application/forms/Install.php:49
+msgid "must be at least 6 characters"
+msgstr "ḿŭşŧ ƀḗ ȧŧ ŀḗȧşŧ 6 ƈħȧřȧƈŧḗřş"
+
+#: application/forms/Install.php:72
+msgid "Confirm your password."
+msgstr "Ƈǿƞƒīřḿ ẏǿŭř ƥȧşşẇǿřḓ."
+
+#: application/forms/Install.php:114
+msgid "Separate tags using this character or string."
+msgstr "Şḗƥȧřȧŧḗ ŧȧɠş ŭşīƞɠ ŧħīş ƈħȧřȧƈŧḗř ǿř şŧřīƞɠ."
+
+#: application/forms/Install.php:129
+msgid "Maximum fullsize image size constraint (in pixels)"
+msgstr "Ḿȧẋīḿŭḿ ƒŭŀŀşīzḗ īḿȧɠḗ şīzḗ ƈǿƞşŧřȧīƞŧ (īƞ ƥīẋḗŀş)"
+
+#: application/forms/Install.php:137
+msgid "Maximum thumbnail size constraint (in pixels)"
+msgstr "Ḿȧẋīḿŭḿ ŧħŭḿƀƞȧīŀ şīzḗ ƈǿƞşŧřȧīƞŧ (īƞ ƥīẋḗŀş)"
+
+#: application/forms/Install.php:145
+msgid "Maximum square thumbnail size constraint (in pixels)"
+msgstr "Ḿȧẋīḿŭḿ şɋŭȧřḗ ŧħŭḿƀƞȧīŀ şīzḗ ƈǿƞşŧřȧīƞŧ (īƞ ƥīẋḗŀş)"
+
+#: application/forms/Install.php:152
+msgid "Items Per Page (admin)"
+msgstr "Īŧḗḿş Ƥḗř Ƥȧɠḗ (ȧḓḿīƞ)"
+
+#: application/forms/Install.php:153
+msgid ""
+"Limit the number of items displayed per page in the administrative interface."
+msgstr ""
+"Ŀīḿīŧ ŧħḗ ƞŭḿƀḗř ǿƒ īŧḗḿş ḓīşƥŀȧẏḗḓ ƥḗř ƥȧɠḗ īƞ ŧħḗ ȧḓḿīƞīşŧřȧŧīṽḗ "
+"īƞŧḗřƒȧƈḗ."
+
+#: application/forms/Install.php:160
+msgid "Items Per Page (public)"
+msgstr "Īŧḗḿş Ƥḗř Ƥȧɠḗ (ƥŭƀŀīƈ)"
+
+#: application/forms/Install.php:161
+msgid "Limit the number of items displayed per page in the public interface."
+msgstr "Ŀīḿīŧ ŧħḗ ƞŭḿƀḗř ǿƒ īŧḗḿş ḓīşƥŀȧẏḗḓ ƥḗř ƥȧɠḗ īƞ ŧħḗ ƥŭƀŀīƈ īƞŧḗřƒȧƈḗ."
+
+#: application/forms/Install.php:170
+msgid "Check box to show metadata elements with no text."
+msgstr "Ƈħḗƈķ ƀǿẋ ŧǿ şħǿẇ ḿḗŧȧḓȧŧȧ ḗŀḗḿḗƞŧş ẇīŧħ ƞǿ ŧḗẋŧ."
+
+#: application/forms/Install.php:185
+msgid "Default Superuser Account"
+msgstr "Ḓḗƒȧŭŀŧ Şŭƥḗřŭşḗř Ȧƈƈǿŭƞŧ"
+
+#: application/forms/Install.php:195
+msgid "Site Settings"
+msgstr "Şīŧḗ Şḗŧŧīƞɠş"
+
+#: application/forms/ItemTypes.php:142
+msgid "The name of the item type."
+msgstr "Ŧħḗ ƞȧḿḗ ǿƒ ŧħḗ īŧḗḿ ŧẏƥḗ."
+
+#: application/forms/ItemTypes.php:151
+msgid "The description of the item type."
+msgstr "Ŧħḗ ḓḗşƈřīƥŧīǿƞ ǿƒ ŧħḗ īŧḗḿ ŧẏƥḗ."
+
+#: application/forms/ItemTypes.php:188 application/forms/ItemTypes.php:197
+#, php-format
+msgid "The item type cannot have more than one \"%s\" element."
+msgstr "Ŧħḗ īŧḗḿ ŧẏƥḗ ƈȧƞƞǿŧ ħȧṽḗ ḿǿřḗ ŧħȧƞ ǿƞḗ \"%s\" ḗŀḗḿḗƞŧ."
+
+#: application/forms/Login.php:27
+msgid "Username cannot be empty."
+msgstr "Ŭşḗřƞȧḿḗ ƈȧƞƞǿŧ ƀḗ ḗḿƥŧẏ."
+
+#: application/forms/Login.php:40
+msgid "Password cannot be empty."
+msgstr "Ƥȧşşẇǿřḓ ƈȧƞƞǿŧ ƀḗ ḗḿƥŧẏ."
+
+#: application/forms/Login.php:48
+msgid "Remember Me?"
+msgstr "Řḗḿḗḿƀḗř Ḿḗ?"
+
+#: application/forms/Navigation.php:156
+msgid "[Default]"
+msgstr "[Ḓḗƒȧŭŀŧ]"
+
+#: application/forms/Navigation.php:162
+msgid "Select a Homepage"
+msgstr "Şḗŀḗƈŧ ȧ Ħǿḿḗƥȧɠḗ"
+
+#: application/forms/Navigation.php:244
+msgid "Cannot find parent navigation page."
+msgstr "Ƈȧƞƞǿŧ ƒīƞḓ ƥȧřḗƞŧ ƞȧṽīɠȧŧīǿƞ ƥȧɠḗ."
+
+#: application/forms/Navigation.php:325
+msgid "All navigation links must have URIs."
+msgstr "Ȧŀŀ ƞȧṽīɠȧŧīǿƞ ŀīƞķş ḿŭşŧ ħȧṽḗ ŬŘĪş."
+
+#: application/forms/Navigation.php:338
+msgid "All navigation links must have different URIs."
+msgstr "Ȧŀŀ ƞȧṽīɠȧŧīǿƞ ŀīƞķş ḿŭşŧ ħȧṽḗ ḓīƒƒḗřḗƞŧ ŬŘĪş."
+
+#: application/forms/Navigation.php:344
+#, php-format
+msgid "Invalid URI for \"%s\" navigation link:  \"%s\""
+msgstr "Īƞṽȧŀīḓ ŬŘĪ ƒǿř \"%s\" ƞȧṽīɠȧŧīǿƞ ŀīƞķ:  \"%s\""
+
+#: application/forms/Navigation.php:377
+msgid "Navigation links that have undeleteable sublinks cannot be deleted."
+msgstr "Ƞȧṽīɠȧŧīǿƞ ŀīƞķş ŧħȧŧ ħȧṽḗ ŭƞḓḗŀḗŧḗȧƀŀḗ şŭƀŀīƞķş ƈȧƞƞǿŧ ƀḗ ḓḗŀḗŧḗḓ."
+
+#: application/forms/RecoverPassword.php:36
+msgid "Email address is required."
+msgstr "Ḗḿȧīŀ ȧḓḓřḗşş īş řḗɋŭīřḗḓ."
+
+#: application/forms/RecoverPassword.php:46
+msgid "Invalid email address given."
+msgstr "Īƞṽȧŀīḓ ḗḿȧīŀ ȧḓḓřḗşş ɠīṽḗƞ."
+
+#: application/forms/RecoverPassword.php:48
+msgid "Invalid format given for email address."
+msgstr "Īƞṽȧŀīḓ ƒǿřḿȧŧ ɠīṽḗƞ ƒǿř ḗḿȧīŀ ȧḓḓřḗşş."
+
+#: application/forms/RecoverPassword.php:50
+msgid "Invalid hostname given for email address."
+msgstr "Īƞṽȧŀīḓ ħǿşŧƞȧḿḗ ɠīṽḗƞ ƒǿř ḗḿȧīŀ ȧḓḓřḗşş."
+
+#: application/forms/RecoverPassword.php:66
+msgid "Invalid email address"
+msgstr "Īƞṽȧŀīḓ ḗḿȧīŀ ȧḓḓřḗşş"
+
+#: application/forms/ResetPassword.php:27
+msgid "Password is required."
+msgstr "Ƥȧşşẇǿřḓ īş řḗɋŭīřḗḓ."
+
+#: application/forms/ResetPassword.php:33
+msgid "Typed passwords do not match."
+msgstr "Ŧẏƥḗḓ ƥȧşşẇǿřḓş ḓǿ ƞǿŧ ḿȧŧƈħ."
+
+#: application/forms/SecuritySettings.php:24
+msgid "Disable File Upload Validation"
+msgstr "Ḓīşȧƀŀḗ Ƒīŀḗ Ŭƥŀǿȧḓ Ṽȧŀīḓȧŧīǿƞ"
+
+#: application/forms/SecuritySettings.php:26
+msgid ""
+"Check this field if you would like to allow any file to be uploaded to Omeka."
+msgstr ""
+"Ƈħḗƈķ ŧħīş ƒīḗŀḓ īƒ ẏǿŭ ẇǿŭŀḓ ŀīķḗ ŧǿ ȧŀŀǿẇ ȧƞẏ ƒīŀḗ ŧǿ ƀḗ ŭƥŀǿȧḓḗḓ ŧǿ "
+"Ǿḿḗķȧ."
+
+#: application/forms/SecuritySettings.php:32
+msgid "Allowed File Extensions"
+msgstr "Ȧŀŀǿẇḗḓ Ƒīŀḗ Ḗẋŧḗƞşīǿƞş"
+
+#: application/forms/SecuritySettings.php:33
+msgid "List of allowed extensions for file uploads"
+msgstr "Ŀīşŧ ǿƒ ȧŀŀǿẇḗḓ ḗẋŧḗƞşīǿƞş ƒǿř ƒīŀḗ ŭƥŀǿȧḓş"
+
+#: application/forms/SecuritySettings.php:42
+msgid "Allowed File Types"
+msgstr "Ȧŀŀǿẇḗḓ Ƒīŀḗ Ŧẏƥḗş"
+
+#: application/forms/SecuritySettings.php:43
+msgid "List of allowed MIME types for file uploads"
+msgstr "Ŀīşŧ ǿƒ ȧŀŀǿẇḗḓ ḾĪḾḖ ŧẏƥḗş ƒǿř ƒīŀḗ ŭƥŀǿȧḓş"
+
+#: application/forms/SecuritySettings.php:52
+msgid "ReCaptcha Public Key"
+msgstr "ŘḗƇȧƥŧƈħȧ Ƥŭƀŀīƈ Ķḗẏ"
+
+#: application/forms/SecuritySettings.php:53
+msgid ""
+"Enter public key from recaptcha.net. Both this and the private key must be "
+"filled in to secure public forms."
+msgstr ""
+"Ḗƞŧḗř ƥŭƀŀīƈ ķḗẏ ƒřǿḿ řḗƈȧƥŧƈħȧ.ƞḗŧ. Ɓǿŧħ ŧħīş ȧƞḓ ŧħḗ ƥřīṽȧŧḗ ķḗẏ ḿŭşŧ ƀḗ "
+"ƒīŀŀḗḓ īƞ ŧǿ şḗƈŭřḗ ƥŭƀŀīƈ ƒǿřḿş."
+
+#: application/forms/SecuritySettings.php:60
+msgid "ReCaptcha Private Key"
+msgstr "ŘḗƇȧƥŧƈħȧ Ƥřīṽȧŧḗ Ķḗẏ"
+
+#: application/forms/SecuritySettings.php:61
+msgid ""
+"Enter private key from recaptcha.net. Both this and the public key must be "
+"filled in to secure public forms."
+msgstr ""
+"Ḗƞŧḗř ƥřīṽȧŧḗ ķḗẏ ƒřǿḿ řḗƈȧƥŧƈħȧ.ƞḗŧ. Ɓǿŧħ ŧħīş ȧƞḓ ŧħḗ ƥŭƀŀīƈ ķḗẏ ḿŭşŧ ƀḗ "
+"ƒīŀŀḗḓ īƞ ŧǿ şḗƈŭřḗ ƥŭƀŀīƈ ƒǿřḿş."
+
+#: application/forms/SecuritySettings.php:68
+msgid ""
+"Check this field if you would like to filter HTML elements or attributes "
+"from form input."
+msgstr ""
+"Ƈħḗƈķ ŧħīş ƒīḗŀḓ īƒ ẏǿŭ ẇǿŭŀḓ ŀīķḗ ŧǿ ƒīŀŧḗř ĦŦḾĿ ḗŀḗḿḗƞŧş ǿř ȧŧŧřīƀŭŧḗş "
+"ƒřǿḿ ƒǿřḿ īƞƥŭŧ."
+
+#: application/forms/SecuritySettings.php:69
+msgid "Enable HTML Filtering"
+msgstr "Ḗƞȧƀŀḗ ĦŦḾĿ Ƒīŀŧḗřīƞɠ"
+
+#: application/forms/SecuritySettings.php:74
+msgid "Allowed HTML Elements"
+msgstr "Ȧŀŀǿẇḗḓ ĦŦḾĿ Ḗŀḗḿḗƞŧş"
+
+#: application/forms/SecuritySettings.php:75
+msgid "List of allowed HTML elements in form input"
+msgstr "Ŀīşŧ ǿƒ ȧŀŀǿẇḗḓ ĦŦḾĿ ḗŀḗḿḗƞŧş īƞ ƒǿřḿ īƞƥŭŧ"
+
+#: application/forms/SecuritySettings.php:82
+msgid "Allowed HTML Attributes"
+msgstr "Ȧŀŀǿẇḗḓ ĦŦḾĿ Ȧŧŧřīƀŭŧḗş"
+
+#: application/forms/SecuritySettings.php:83
+msgid "List of allowed HTML attributes in form input"
+msgstr "Ŀīşŧ ǿƒ ȧŀŀǿẇḗḓ ĦŦḾĿ ȧŧŧřīƀŭŧḗş īƞ ƒǿřḿ īƞƥŭŧ"
+
+#: application/forms/SecuritySettings.php:94
+msgid "File Validation"
+msgstr "Ƒīŀḗ Ṽȧŀīḓȧŧīǿƞ"
+
+#: application/forms/SecuritySettings.php:102
+msgid "Captcha"
+msgstr "Ƈȧƥŧƈħȧ"
+
+#: application/forms/SecuritySettings.php:111
+msgid "HTML Filtering"
+msgstr "ĦŦḾĿ Ƒīŀŧḗřīƞɠ"
+
+#: application/forms/User.php:32
+msgid "Username must be 30 characters or fewer. Whitespace is not allowed."
+msgstr "Ŭşḗřƞȧḿḗ ḿŭşŧ ƀḗ 30 ƈħȧřȧƈŧḗřş ǿř ƒḗẇḗř. Ẇħīŧḗşƥȧƈḗ īş ƞǿŧ ȧŀŀǿẇḗḓ."
+
+#: application/forms/User.php:39
+msgid "Username is required."
+msgstr "Ŭşḗřƞȧḿḗ īş řḗɋŭīřḗḓ."
+
+#: application/forms/User.php:58
+msgid "Username must be at least %min% characters long."
+msgstr "Ŭşḗřƞȧḿḗ ḿŭşŧ ƀḗ ȧŧ ŀḗȧşŧ %ḿīƞ% cħȧřȧƈŧḗřş ŀǿƞɠ."
+
+#: application/forms/User.php:60
+msgid "Username must be at most %max% characters long."
+msgstr "Ŭşḗřƞȧḿḗ ḿŭşŧ ƀḗ ȧŧ ḿǿşŧ %ḿȧẋ% cħȧřȧƈŧḗřş ŀǿƞɠ."
+
+#: application/forms/User.php:74
+msgid "This username is already in use."
+msgstr "Ŧħīş ŭşḗřƞȧḿḗ īş ȧŀřḗȧḓẏ īƞ ŭşḗ."
+
+#: application/forms/User.php:83
+msgid "Display Name"
+msgstr "Ḓīşƥŀȧẏ Ƞȧḿḗ"
+
+#: application/forms/User.php:84
+msgid "Name as it should be displayed on the site"
+msgstr "Ƞȧḿḗ ȧş īŧ şħǿŭŀḓ ƀḗ ḓīşƥŀȧẏḗḓ ǿƞ ŧħḗ şīŧḗ"
+
+#: application/forms/User.php:90 application/models/User.php:169
+msgid "Real Name is required."
+msgstr "Řḗȧŀ Ƞȧḿḗ īş řḗɋŭīřḗḓ."
+
+#: application/forms/User.php:96
+msgid "This email address is invalid."
+msgstr "Ŧħīş ḗḿȧīŀ ȧḓḓřḗşş īş īƞṽȧŀīḓ."
+
+#: application/forms/User.php:104
+msgid "Email is required."
+msgstr "Ḗḿȧīŀ īş řḗɋŭīřḗḓ."
+
+#: application/forms/User.php:123
+msgid "This email address is already in use."
+msgstr "Ŧħīş ḗḿȧīŀ ȧḓḓřḗşş īş ȧŀřḗȧḓẏ īƞ ŭşḗ."
+
+#: application/forms/User.php:132
+msgid ""
+"Roles describe the permissions a user has. See <a href='http://omeka.org/"
+"codex/User_Roles' target='_blank'>documentation</a> for details."
+msgstr ""
+"Řǿŀḗş ḓḗşƈřīƀḗ ŧħḗ ƥḗřḿīşşīǿƞş ȧ ŭşḗř ħȧş. Şḗḗ <a "
+"href='http://omeka.org/codex/User_Roles' target='_blank'>ḓǿƈŭḿḗƞŧȧŧīǿƞ</a> "
+"ƒǿř ḓḗŧȧīŀş."
+
+#: application/forms/User.php:139
+msgid "Inactive users cannot log in to the site."
+msgstr "Īƞȧƈŧīṽḗ ŭşḗřş ƈȧƞƞǿŧ ŀǿɠ īƞ ŧǿ ŧħḗ şīŧḗ."
+
+#: application/forms/User.php:141
+#, php-format
+msgid "Activation has been pending since %s."
+msgstr "Ȧƈŧīṽȧŧīǿƞ ħȧş ƀḗḗƞ ƥḗƞḓīƞɠ şīƞƈḗ %s."
+
+#: application/forms/User.php:144
+msgid "Active?"
+msgstr "Ȧƈŧīṽḗ?"
+
+#: application/libraries/Omeka/Job/Process/Dispatcher.php:115
+#, php-format
+msgid "The configured PHP path (%s) is invalid."
+msgstr "Ŧħḗ ƈǿƞƒīɠŭřḗḓ ƤĦƤ ƥȧŧħ (%s) īş īƞṽȧŀīḓ."
+
+#: application/libraries/Omeka/Job/Process/Dispatcher.php:125
+#, php-format
+msgid "The configured PHP path (%s) does not point to a PHP-CLI binary."
+msgstr "Ŧħḗ ƈǿƞƒīɠŭřḗḓ ƤĦƤ ƥȧŧħ (%s) ḓǿḗş ƞǿŧ ƥǿīƞŧ ŧǿ ȧ ƤĦƤ-ƇĿĪ ƀīƞȧřẏ."
+
+#: application/libraries/Omeka/Job/Process/Dispatcher.php:127
+#, php-format
+msgid ""
+"The configured PHP path (%s) points to a PHP-CLI binary with an invalid "
+"version (%s)"
+msgstr ""
+"Ŧħḗ ƈǿƞƒīɠŭřḗḓ ƤĦƤ ƥȧŧħ (%s) ƥǿīƞŧş ŧǿ ȧ ƤĦƤ-ƇĿĪ ƀīƞȧřẏ ẇīŧħ ȧƞ īƞṽȧŀīḓ "
+"ṽḗřşīǿƞ (%s)"
+
+#: application/libraries/Omeka/Navigation.php:214
+msgid "The page must be normalized and have a valid uid."
+msgstr "Ŧħḗ ƥȧɠḗ ḿŭşŧ ƀḗ ƞǿřḿȧŀīzḗḓ ȧƞḓ ħȧṽḗ ȧ ṽȧŀīḓ ŭīḓ."
+
+#: application/libraries/Omeka/Navigation.php:226
+msgid ""
+"The parent container must either be the navigation object or a descendant "
+"subpage of the navigation object."
+msgstr ""
+"Ŧħḗ ƥȧřḗƞŧ ƈǿƞŧȧīƞḗř ḿŭşŧ ḗīŧħḗř ƀḗ ŧħḗ ƞȧṽīɠȧŧīǿƞ ǿƀĵḗƈŧ ǿř ȧ ḓḗşƈḗƞḓȧƞŧ "
+"şŭƀƥȧɠḗ ǿƒ ŧħḗ ƞȧṽīɠȧŧīǿƞ ǿƀĵḗƈŧ."
+
+#: application/libraries/Omeka/Navigation/Page/Uri.php:128
+#, php-format
+msgid "Invalid URI for Omeka_Navigation_Page_Uri object: %s"
+msgstr "Īƞṽȧŀīḓ ŬŘĪ ƒǿř Ǿḿḗķȧ_Ƞȧṽīɠȧŧīǿƞ_Ƥȧɠḗ_Ŭřī ǿƀĵḗƈŧ: %s"
+
+#: application/libraries/Omeka/Plugin/Ini.php:63
+#, php-format
+msgid "Path to plugin.ini for \"%s\" is not correct."
+msgstr "Ƥȧŧħ ŧǿ ƥŀŭɠīƞ.īƞī ƒǿř \"%s\" īş ƞǿŧ ƈǿřřḗƈŧ."
+
+#: application/libraries/Omeka/Plugin/Installer.php:79
+#, php-format
+msgid "The \"%s\" plugin must be installed and have newer files to upgrade it."
+msgstr "Ŧħḗ \"%s\" ƥŀŭɠīƞ ḿŭşŧ ƀḗ īƞşŧȧŀŀḗḓ ȧƞḓ ħȧṽḗ ƞḗẇḗř ƒīŀḗş ŧǿ ŭƥɠřȧḓḗ īŧ."
+
+#: application/libraries/Omeka/Plugin/Installer.php:116
+msgid "Plugin must have a valid directory name before it can be installed."
+msgstr "Ƥŀŭɠīƞ ḿŭşŧ ħȧṽḗ ȧ ṽȧŀīḓ ḓīřḗƈŧǿřẏ ƞȧḿḗ ƀḗƒǿřḗ īŧ ƈȧƞ ƀḗ īƞşŧȧŀŀḗḓ."
+
+#: application/libraries/Omeka/Plugin/Loader.php:112
+#, php-format
+msgid "Plugin named '%s' has already been loaded/registered."
+msgstr "Ƥŀŭɠīƞ ƞȧḿḗḓ '%s' ħȧş ȧŀřḗȧḓẏ ƀḗḗƞ ŀǿȧḓḗḓ/registered."
+
+#: application/libraries/Omeka/Plugin/Loader.php:153
+#, php-format
+msgid "The %s plugin could not be loaded."
+msgstr "Ŧħḗ %s ƥŀŭɠīƞ ƈǿŭŀḓ ƞǿŧ ƀḗ ŀǿȧḓḗḓ."
+
+#: application/libraries/Omeka/Plugin/Loader.php:174
+#, php-format
+msgid "The required plugin '%s' could not be found."
+msgstr "Ŧħḗ řḗɋŭīřḗḓ ƥŀŭɠīƞ '%s' ƈǿŭŀḓ ƞǿŧ ƀḗ ƒǿŭƞḓ."
+
+#: application/libraries/Omeka/Plugin/Loader.php:247
+#, php-format
+msgid "'%s' has no valid bootstrap file."
+msgstr "'%s' ħȧş ƞǿ ṽȧŀīḓ ƀǿǿŧşŧřȧƥ ƒīŀḗ."
+
+#: application/libraries/Omeka/Plugin/Loader.php:250
+#, php-format
+msgid "'%s' has not been installed."
+msgstr "'%s' ħȧş ƞǿŧ ƀḗḗƞ īƞşŧȧŀŀḗḓ."
+
+#: application/libraries/Omeka/Plugin/Loader.php:253
+#, php-format
+msgid "'%s' has not been activated."
+msgstr "'%s' ħȧş ƞǿŧ ƀḗḗƞ ȧƈŧīṽȧŧḗḓ."
+
+#: application/libraries/Omeka/Plugin/Loader.php:256
+#, php-format
+msgid "'%s' requires a newer version of Omeka."
+msgstr "'%s' řḗɋŭīřḗş ȧ ƞḗẇḗř ṽḗřşīǿƞ ǿƒ Ǿḿḗķȧ."
+
+#: application/libraries/Omeka/Plugin/Loader.php:261
+#, php-format
+msgid "'%s' must be upgraded to the new version before it can be loaded."
+msgstr "'%s' ḿŭşŧ ƀḗ ŭƥɠřȧḓḗḓ ŧǿ ŧħḗ ƞḗẇ ṽḗřşīǿƞ ƀḗƒǿřḗ īŧ ƈȧƞ ƀḗ ŀǿȧḓḗḓ."
+
+#: application/libraries/Omeka/Plugin/Loader.php:264
+#, php-format
+msgid "'%s' cannot be loaded twice."
+msgstr "'%s' ƈȧƞƞǿŧ ƀḗ ŀǿȧḓḗḓ ŧẇīƈḗ."
+
+#: application/libraries/Omeka/Record/AbstractRecord.php:349
+#, php-format
+msgid "'%s' is an invalid special value."
+msgstr "'%s' īş ȧƞ īƞṽȧŀīḓ şƥḗƈīȧŀ ṽȧŀŭḗ."
+
+#: application/libraries/Omeka/Record/Iterator.php:49
+msgid "An invalid value was detected during record iteration."
+msgstr "Ȧƞ īƞṽȧŀīḓ ṽȧŀŭḗ ẇȧş ḓḗŧḗƈŧḗḓ ḓŭřīƞɠ řḗƈǿřḓ īŧḗřȧŧīǿƞ."
+
+#: application/libraries/globals.php:417
+msgid "File"
+msgstr "Ƒīŀḗ"
+
+#: application/libraries/globals.php:475
+msgid "Keyword"
+msgstr "Ķḗẏẇǿřḓ"
+
+#: application/libraries/globals.php:476
+msgid "Boolean"
+msgstr "Ɓǿǿŀḗȧƞ"
+
+#: application/libraries/globals.php:477
+msgid "Exact match"
+msgstr "Ḗẋȧƈŧ ḿȧŧƈħ"
+
+#: application/libraries/globals.php:1238
+#: application/libraries/globals.php:1259
+#, php-format
+msgid "Could not find file %s!"
+msgstr "Ƈǿŭŀḓ ƞǿŧ ƒīƞḓ ƒīŀḗ %s!"
+
+#: application/libraries/globals.php:1276
+msgid "No featured collections are available."
+msgstr "Ƞǿ ƒḗȧŧŭřḗḓ ƈǿŀŀḗƈŧīǿƞş ȧřḗ ȧṽȧīŀȧƀŀḗ."
+
+#: application/libraries/globals.php:1569
+msgid "Select Below "
+msgstr "Şḗŀḗƈŧ Ɓḗŀǿẇ "
+
+#: application/libraries/globals.php:1611
+msgid "Omeka RSS Feed"
+msgstr "Ǿḿḗķȧ ŘŞŞ Ƒḗḗḓ"
+
+#: application/libraries/globals.php:1612
+msgid "Omeka Atom Feed"
+msgstr "Ǿḿḗķȧ Ȧŧǿḿ Ƒḗḗḓ"
+
+#: application/libraries/globals.php:2250
+msgid "No recent items available."
+msgstr "Ƞǿ řḗƈḗƞŧ īŧḗḿş ȧṽȧīŀȧƀŀḗ."
+
+#: application/libraries/globals.php:2276
+msgid "No featured items are available."
+msgstr "Ƞǿ ƒḗȧŧŭřḗḓ īŧḗḿş ȧřḗ ȧṽȧīŀȧƀŀḗ."
+
+#: application/libraries/globals.php:2331
+msgid "View"
+msgstr "Ṽīḗẇ"
+
+#: application/libraries/globals.php:2393
+msgid "No Collection"
+msgstr "Ƞǿ Ƈǿŀŀḗƈŧīǿƞ"
+
+#: application/libraries/globals.php:2508
+msgid "RSS"
+msgstr "ŘŞŞ"
+
+#: application/libraries/globals.php:2525
+msgid "Next Item &rarr;"
+msgstr "Ƞḗẋŧ Īŧḗḿ &rarr;"
+
+#: application/libraries/globals.php:2545
+msgid "&larr; Previous Item"
+msgstr "&larr; Ƥřḗṽīǿŭş Īŧḗḿ"
+
+#: application/libraries/globals.php:2722
+msgid "Browse All"
+msgstr "Ɓřǿẇşḗ Ȧŀŀ"
+
+#: application/libraries/globals.php:2727
+msgid "Browse by Tag"
+msgstr "Ɓřǿẇşḗ ƀẏ Ŧȧɠ"
+
+#: application/libraries/globals.php:3000
+msgid "No tags are available."
+msgstr "Ƞǿ ŧȧɠş ȧřḗ ȧṽȧīŀȧƀŀḗ."
+
+#: application/models/Builder/Item.php:263
+msgid "Must specify a file transfer type when attaching files to an item!"
+msgstr "Ḿŭşŧ şƥḗƈīƒẏ ȧ ƒīŀḗ ŧřȧƞşƒḗř ŧẏƥḗ ẇħḗƞ ȧŧŧȧƈħīƞɠ ƒīŀḗş ŧǿ ȧƞ īŧḗḿ!"
+
+#: application/models/Collection.php:117
+msgid "Cannot associate the collection with an unsaved user."
+msgstr "Ƈȧƞƞǿŧ ȧşşǿƈīȧŧḗ ŧħḗ ƈǿŀŀḗƈŧīǿƞ ẇīŧħ ȧƞ ŭƞşȧṽḗḓ ŭşḗř."
+
+#: application/models/Element.php:175
+msgid "The element name must not be empty."
+msgstr "Ŧħḗ ḗŀḗḿḗƞŧ ƞȧḿḗ ḿŭşŧ ƞǿŧ ƀḗ ḗḿƥŧẏ."
+
+#: application/models/Element.php:179
+msgid "Invalid element set."
+msgstr "Īƞṽȧŀīḓ ḗŀḗḿḗƞŧ şḗŧ."
+
+#: application/models/Element.php:185
+#, php-format
+msgid "An element named \"%s\" already exists for the \"%s\" element set."
+msgstr "Ȧƞ ḗŀḗḿḗƞŧ ƞȧḿḗḓ \"%s\" ȧŀřḗȧḓẏ ḗẋīşŧş ƒǿř ŧħḗ \"%s\" ḗŀḗḿḗƞŧ şḗŧ."
+
+#: application/models/Element.php:216
+#, php-format
+msgid "Cannot set element set ID: set named \"%s\" does not exist."
+msgstr "Ƈȧƞƞǿŧ şḗŧ ḗŀḗḿḗƞŧ şḗŧ ĪḒ: şḗŧ ƞȧḿḗḓ \"%s\" ḓǿḗş ƞǿŧ ḗẋīşŧ."
+
+#: application/models/ElementSet.php:146
+msgid "Name of element set must be unique."
+msgstr "Ƞȧḿḗ ǿƒ ḗŀḗḿḗƞŧ şḗŧ ḿŭşŧ ƀḗ ŭƞīɋŭḗ."
+
+#: application/models/ElementSet.php:150
+msgid "Name of element set must not be empty."
+msgstr "Ƞȧḿḗ ǿƒ ḗŀḗḿḗƞŧ şḗŧ ḿŭşŧ ƞǿŧ ƀḗ ḗḿƥŧẏ."
+
+#: application/models/ElementText.php:59
+msgid "Invalid record ID."
+msgstr "Īƞṽȧŀīḓ řḗƈǿřḓ ĪḒ."
+
+#: application/models/ElementText.php:62
+msgid "All element texts must have a record type."
+msgstr "Ȧŀŀ ḗŀḗḿḗƞŧ ŧḗẋŧş ḿŭşŧ ħȧṽḗ ȧ řḗƈǿřḓ ŧẏƥḗ."
+
+#: application/models/ElementText.php:65
+msgid "Invalid element ID."
+msgstr "Īƞṽȧŀīḓ ḗŀḗḿḗƞŧ ĪḒ."
+
+#: application/models/File.php:241
+msgid "Cannot get the local path for a stored file."
+msgstr "Ƈȧƞƞǿŧ ɠḗŧ ŧħḗ ŀǿƈȧŀ ƥȧŧħ ƒǿř ȧ şŧǿřḗḓ ƒīŀḗ."
+
+#: application/models/File.php:458
+#, php-format
+msgid "\"%s\" is not a valid file derivative."
+msgstr "\"%s\" īş ƞǿŧ ȧ ṽȧŀīḓ ƒīŀḗ ḓḗřīṽȧŧīṽḗ."
+
+#: application/models/Item.php:330
+msgid ""
+"Files cannot be attached to an item that is not persistent in the database!"
+msgstr ""
+"Ƒīŀḗş ƈȧƞƞǿŧ ƀḗ ȧŧŧȧƈħḗḓ ŧǿ ȧƞ īŧḗḿ ŧħȧŧ īş ƞǿŧ ƥḗřşīşŧḗƞŧ īƞ ŧħḗ ḓȧŧȧƀȧşḗ!"
+
+#. / Chicago-style item citation: two authors
+#: application/models/Item.php:457
+#, php-format
+msgid "%1$s and %2$s"
+msgstr "%1$s ȧƞḓ %2$s"
+
+#. / Chicago-style item citation: three authors
+#: application/models/Item.php:461
+#, php-format
+msgid "%1$s, %2$s, and %3$s"
+msgstr "%1$s, %2$s, ȧƞḓ %3$s"
+
+#. / Chicago-style item citation: more than three authors
+#: application/models/Item.php:465
+#, php-format
+msgid "%s et al."
+msgstr "%s ḗŧ ȧŀ."
+
+#. / Chicago-style item citation: access date and URL
+#: application/models/Item.php:483
+#, php-format
+msgid "accessed %1$s, %2$s."
+msgstr "ȧƈƈḗşşḗḓ %1$s, %2$s."
+
+#: application/models/Item.php:500
+msgid "Cannot add an existing file to an item!"
+msgstr "Ƈȧƞƞǿŧ ȧḓḓ ȧƞ ḗẋīşŧīƞɠ ƒīŀḗ ŧǿ ȧƞ īŧḗḿ!"
+
+#: application/models/Item.php:504
+msgid "File must be valid before it can be associated with an item!"
+msgstr "Ƒīŀḗ ḿŭşŧ ƀḗ ṽȧŀīḓ ƀḗƒǿřḗ īŧ ƈȧƞ ƀḗ ȧşşǿƈīȧŧḗḓ ẇīŧħ ȧƞ īŧḗḿ!"
+
+#: application/models/Item.php:528
+msgid "Invalid item type."
+msgstr "Īƞṽȧŀīḓ īŧḗḿ ŧẏƥḗ."
+
+#: application/models/Item.php:531
+msgid "Invalid collection."
+msgstr "Īƞṽȧŀīḓ ƈǿŀŀḗƈŧīǿƞ."
+
+#: application/models/ItemType.php:102
+#, php-format
+msgid "The item type name must have between %1$s and %2$s characters."
+msgstr "Ŧħḗ īŧḗḿ ŧẏƥḗ ƞȧḿḗ ḿŭşŧ ħȧṽḗ ƀḗŧẇḗḗƞ %1$s ȧƞḓ %2$s ƈħȧřȧƈŧḗřş."
+
+#: application/models/ItemType.php:106
+msgid "The item type name must be unique."
+msgstr "Ŧħḗ īŧḗḿ ŧẏƥḗ ƞȧḿḗ ḿŭşŧ ƀḗ ŭƞīɋŭḗ."
+
+#: application/models/ItemType.php:179
+msgid "There are too many values in the element ordering array."
+msgstr "Ŧħḗřḗ ȧřḗ ŧǿǿ ḿȧƞẏ ṽȧŀŭḗş īƞ ŧħḗ ḗŀḗḿḗƞŧ ǿřḓḗřīƞɠ ȧřřȧẏ."
+
+#: application/models/ItemType.php:181
+msgid "There are too few values in the element ordering array."
+msgstr "Ŧħḗřḗ ȧřḗ ŧǿǿ ƒḗẇ ṽȧŀŭḗş īƞ ŧħḗ ḗŀḗḿḗƞŧ ǿřḓḗřīƞɠ ȧřřȧẏ."
+
+#: application/models/ItemType.php:218
+msgid ""
+"Invalid element data. To add elements, you must either pass an element "
+"objects or an array of element metadata."
+msgstr ""
+"Īƞṽȧŀīḓ ḗŀḗḿḗƞŧ ḓȧŧȧ. Ŧǿ ȧḓḓ ḗŀḗḿḗƞŧş, ẏǿŭ ḿŭşŧ ḗīŧħḗř ƥȧşş ȧƞ ḗŀḗḿḗƞŧ "
+"ǿƀĵḗƈŧş ǿř ȧƞ ȧřřȧẏ ǿƒ ḗŀḗḿḗƞŧ ḿḗŧȧḓȧŧȧ."
+
+#: application/models/ItemType.php:282
+msgid ""
+"Cannot remove elements from an item type that is not persistent in the "
+"database!"
+msgstr ""
+"Ƈȧƞƞǿŧ řḗḿǿṽḗ ḗŀḗḿḗƞŧş ƒřǿḿ ȧƞ īŧḗḿ ŧẏƥḗ ŧħȧŧ īş ƞǿŧ ƥḗřşīşŧḗƞŧ īƞ ŧħḗ "
+"ḓȧŧȧƀȧşḗ!"
+
+#: application/models/ItemType.php:291
+#, php-format
+msgid "Cannot find element with ID %s!"
+msgstr "Ƈȧƞƞǿŧ ƒīƞḓ ḗŀḗḿḗƞŧ ẇīŧħ ĪḒ %s!"
+
+#: application/models/ItemType.php:332
+#, php-format
+msgid "Item type does not contain an element with the ID %s!"
+msgstr "Īŧḗḿ ŧẏƥḗ ḓǿḗş ƞǿŧ ƈǿƞŧȧīƞ ȧƞ ḗŀḗḿḗƞŧ ẇīŧħ ŧħḗ ĪḒ %s!"
+
+#: application/models/ItemType.php:353
+msgid ""
+"Invalid parameter. The hasElement function requires either an element object "
+"or an element id to determine if an item type has an element."
+msgstr ""
+"Īƞṽȧŀīḓ ƥȧřȧḿḗŧḗř. Ŧħḗ ħȧşḖŀḗḿḗƞŧ ƒŭƞƈŧīǿƞ řḗɋŭīřḗş ḗīŧħḗř ȧƞ ḗŀḗḿḗƞŧ ǿƀĵḗƈŧ "
+"ǿř ȧƞ ḗŀḗḿḗƞŧ īḓ ŧǿ ḓḗŧḗřḿīƞḗ īƒ ȧƞ īŧḗḿ ŧẏƥḗ ħȧş ȧƞ ḗŀḗḿḗƞŧ."
+
+#: application/models/Mixin/ElementText.php:278
+#, php-format
+msgid "There is no element \"%1$s\", \"%2$s\"!"
+msgstr "Ŧħḗřḗ īş ƞǿ ḗŀḗḿḗƞŧ \"%1$s\", \"%2$s\"!"
+
+#: application/models/Mixin/ElementText.php:297
+#, php-format
+msgid "Cannot find an element with an ID of '%s'!"
+msgstr "Ƈȧƞƞǿŧ ƒīƞḓ ȧƞ ḗŀḗḿḗƞŧ ẇīŧħ ȧƞ ĪḒ ǿƒ '%s'!"
+
+#: application/models/Mixin/ElementText.php:416
+msgid "Element texts are not formatted correctly!"
+msgstr "Ḗŀḗḿḗƞŧ ŧḗẋŧş ȧřḗ ƞǿŧ ƒǿřḿȧŧŧḗḓ ƈǿřřḗƈŧŀẏ!"
+
+#: application/models/Mixin/ElementText.php:562
+#, php-format
+msgid "The \"%s\" field has at least one invalid value!"
+msgstr "Ŧħḗ \"%s\" ƒīḗŀḓ ħȧş ȧŧ ŀḗȧşŧ ǿƞḗ īƞṽȧŀīḓ ṽȧŀŭḗ!"
+
+#: application/models/Mixin/ElementText.php:632
+msgid "Cannot save element text for records that are not yet persistent!"
+msgstr "Ƈȧƞƞǿŧ şȧṽḗ ḗŀḗḿḗƞŧ ŧḗẋŧ ƒǿř řḗƈǿřḓş ŧħȧŧ ȧřḗ ƞǿŧ ẏḗŧ ƥḗřşīşŧḗƞŧ!"
+
+#: application/models/Option.php:50 application/models/Option.php:54
+msgid "Each option must have a unique name."
+msgstr "Ḗȧƈħ ǿƥŧīǿƞ ḿŭşŧ ħȧṽḗ ȧ ŭƞīɋŭḗ ƞȧḿḗ."
+
+#: application/models/Plugin.php:133
+msgid "Names of plugins must not be blank"
+msgstr "Ƞȧḿḗş ǿƒ ƥŀŭɠīƞş ḿŭşŧ ƞǿŧ ƀḗ ƀŀȧƞķ"
+
+#: application/models/Table/Collection.php:76
+#, php-format
+msgid "[Untitled] #%s"
+msgstr "[Ŭƞŧīŧŀḗḓ] #%s"
+
+#: application/models/Table/Item.php:161
+msgid "Invalid search type given!"
+msgstr "Īƞṽȧŀīḓ şḗȧřƈħ ŧẏƥḗ ɠīṽḗƞ!"
+
+#: application/models/Tag.php:56
+msgid "Tags must be given a name."
+msgstr "Ŧȧɠş ḿŭşŧ ƀḗ ɠīṽḗƞ ȧ ƞȧḿḗ."
+
+#: application/models/Tag.php:60
+msgid "That name is already taken for this tag."
+msgstr "Ŧħȧŧ ƞȧḿḗ īş ȧŀřḗȧḓẏ ŧȧķḗƞ ƒǿř ŧħīş ŧȧɠ."
+
+#: application/models/User.php:110
+msgid "User may not change permissions to super-user"
+msgstr "Ŭşḗř ḿȧẏ ƞǿŧ ƈħȧƞɠḗ ƥḗřḿīşşīǿƞş ŧǿ şŭƥḗř-ŭşḗř"
+
+#: application/models/User.php:113
+msgid "User may not change roles."
+msgstr "Ŭşḗř ḿȧẏ ƞǿŧ ƈħȧƞɠḗ řǿŀḗş."
+
+#: application/models/User.php:182 application/models/User.php:230
+msgid "The user must be assigned a role."
+msgstr "Ŧħḗ ŭşḗř ḿŭşŧ ƀḗ ȧşşīɠƞḗḓ ȧ řǿŀḗ."
+
+#: application/models/User.php:187
+#, php-format
+msgid "The username \"%1$s\" must be between %2$s and %3$s characters."
+msgstr "Ŧħḗ ŭşḗřƞȧḿḗ \"%1$s\" ḿŭşŧ ƀḗ ƀḗŧẇḗḗƞ %2$s ȧƞḓ %3$s ƈħȧřȧƈŧḗřş."
+
+#: application/models/User.php:191
+#, php-format
+msgid "'%s' is already in use. Please choose another username."
+msgstr "'%s' īş ȧŀřḗȧḓẏ īƞ ŭşḗ. Ƥŀḗȧşḗ ƈħǿǿşḗ ȧƞǿŧħḗř ŭşḗřƞȧḿḗ."
+
+#: application/models/UsersActivations.php:54
+msgid "Cannot create a user activation for non-existent user."
+msgstr "Ƈȧƞƞǿŧ ƈřḗȧŧḗ ȧ ŭşḗř ȧƈŧīṽȧŧīǿƞ ƒǿř ƞǿƞ-ḗẋīşŧḗƞŧ ŭşḗř."
+
+#: application/tests/suite/Omeka/Db/Migration/_files/migrations/20080717013526_foobar.php:18
+msgid "This migration should have been run previously (should not run again)."
+msgstr "Ŧħīş ḿīɠřȧŧīǿƞ şħǿŭŀḓ ħȧṽḗ ƀḗḗƞ řŭƞ ƥřḗṽīǿŭşŀẏ (şħǿŭŀḓ ƞǿŧ řŭƞ ȧɠȧīƞ)."
+
+#: application/tests/suite/Omeka/Db/Migration/_files/migrations/50000101120000_notRunYet.php:19
+msgid "This migration should not be run."
+msgstr "Ŧħīş ḿīɠřȧŧīǿƞ şħǿŭŀḓ ƞǿŧ ƀḗ řŭƞ."
+
+#: application/tests/suite/Omeka/NavigationTest.php:752
+#: application/tests/suite/Omeka/NavigationTest.php:817
+#: application/tests/suite/Omeka/NavigationTest.php:839
+#: application/tests/suite/Omeka/NavigationTest.php:952
+msgid "Edit Items"
+msgstr "Ḗḓīŧ Īŧḗḿş"
+
+#: application/tests/suite/Omeka/NavigationTest.php:758
+#: application/tests/suite/Omeka/NavigationTest.php:818
+#: application/tests/suite/Omeka/NavigationTest.php:856
+#: application/tests/suite/Omeka/NavigationTest.php:953
+msgid "Edit Collections"
+msgstr "Ḗḓīŧ Ƈǿŀŀḗƈŧīǿƞş"
+
+#: application/tests/suite/Omeka/NavigationTest.php:764
+#: application/tests/suite/Omeka/NavigationTest.php:819
+#: application/tests/suite/Omeka/NavigationTest.php:862
+#: application/tests/suite/Omeka/NavigationTest.php:954
+#: install/views/scripts/layout.phtml:6 install/views/scripts/layout.phtml:23
+msgid "Omeka"
+msgstr "Ǿḿḗķȧ"
+
+#: application/tests/suite/Omeka/NavigationTest.php:825
+#: application/tests/suite/Omeka/NavigationTest.php:951
+msgid "CHNM"
+msgstr "ƇĦȠḾ"
+
+#: application/tests/suite/Omeka/NavigationTest.php:982
+#: application/tests/suite/Omeka/NavigationTest.php:990
+#: application/tests/suite/Omeka/NavigationTest.php:1128
+#: application/tests/suite/Omeka/NavigationTest.php:1136
+msgid "Page "
+msgstr "Ƥȧɠḗ "
+
+#: application/tests/suite/Omeka/NavigationTest.php:1009
+#: application/tests/suite/Omeka/NavigationTest.php:1013
+#: application/tests/suite/Omeka/NavigationTest.php:1071
+#: application/tests/suite/Omeka/NavigationTest.php:1076
+#: application/tests/suite/Omeka/NavigationTest.php:1156
+#: application/tests/suite/Omeka/NavigationTest.php:1256
+msgid "Page 1"
+msgstr "Ƥȧɠḗ 1"
+
+#: application/tests/suite/Omeka/NavigationTest.php:1016
+#: application/tests/suite/Omeka/NavigationTest.php:1022
+#: application/tests/suite/Omeka/NavigationTest.php:1079
+#: application/tests/suite/Omeka/NavigationTest.php:1082
+#: application/tests/suite/Omeka/NavigationTest.php:1163
+#: application/tests/suite/Omeka/NavigationTest.php:1182
+#: application/tests/suite/Omeka/NavigationTest.php:1200
+#: application/tests/suite/Omeka/NavigationTest.php:1232
+msgid "Page 2"
+msgstr "Ƥȧɠḗ 2"
+
+#: application/tests/suite/Omeka/NavigationTest.php:1025
+#: application/tests/suite/Omeka/NavigationTest.php:1029
+#: application/tests/suite/Omeka/NavigationTest.php:1085
+#: application/tests/suite/Omeka/NavigationTest.php:1089
+#: application/tests/suite/Omeka/NavigationTest.php:1164
+#: application/tests/suite/Omeka/NavigationTest.php:1183
+#: application/tests/suite/Omeka/NavigationTest.php:1193
+#: application/tests/suite/Omeka/NavigationTest.php:1255
+msgid "Page 3"
+msgstr "Ƥȧɠḗ 3"
+
+#: application/tests/suite/Omeka/NavigationTest.php:1032
+#: application/tests/suite/Omeka/NavigationTest.php:1041
+#: application/tests/suite/Omeka/NavigationTest.php:1092
+#: application/tests/suite/Omeka/NavigationTest.php:1096
+#: application/tests/suite/Omeka/NavigationTest.php:1165
+#: application/tests/suite/Omeka/NavigationTest.php:1184
+#: application/tests/suite/Omeka/NavigationTest.php:1201
+#: application/tests/suite/Omeka/NavigationTest.php:1222
+#: application/tests/suite/Omeka/NavigationTest.php:1240
+#: application/tests/suite/Omeka/NavigationTest.php:1250
+msgid "Page 4"
+msgstr "Ƥȧɠḗ 4"
+
+#: application/tests/suite/Omeka/NavigationTest.php:1044
+#: application/tests/suite/Omeka/NavigationTest.php:1048
+#: application/tests/suite/Omeka/NavigationTest.php:1099
+#: application/tests/suite/Omeka/NavigationTest.php:1103
+#: application/tests/suite/Omeka/NavigationTest.php:1166
+#: application/tests/suite/Omeka/NavigationTest.php:1175
+#: application/tests/suite/Omeka/NavigationTest.php:1223
+#: application/tests/suite/Omeka/NavigationTest.php:1241
+msgid "Page 5"
+msgstr "Ƥȧɠḗ 5"
+
+#: application/tests/suite/Omeka/NavigationTest.php:1051
+#: application/tests/suite/Omeka/NavigationTest.php:1055
+#: application/tests/suite/Omeka/NavigationTest.php:1215
+msgid "Page 6"
+msgstr "Ƥȧɠḗ 6"
+
+#: application/views/helpers/AllElementTexts.php:108
+msgid "[no text]"
+msgstr "[ƞǿ ŧḗẋŧ]"
+
+#: application/views/helpers/ElementForm.php:65
+msgid "Add Input"
+msgstr "Ȧḓḓ Īƞƥŭŧ"
+
+#: application/views/helpers/ElementInput.php:131
+msgid "Use HTML"
+msgstr "Ŭşḗ ĦŦḾĿ"
+
+#: application/views/helpers/GetCurrentRecord.php:27
+#, php-format
+msgid "A current %s variable has not been set to this view."
+msgstr "Ȧ ƈŭřřḗƞŧ %s ṽȧřīȧƀŀḗ ħȧş ƞǿŧ ƀḗḗƞ şḗŧ ŧǿ ŧħīş ṽīḗẇ."
+
+#: application/views/helpers/GetLoopRecords.php:30
+#, php-format
+msgid "A loop %s variable has not been set to this view."
+msgstr "Ȧ ŀǿǿƥ %s ṽȧřīȧƀŀḗ ħȧş ƞǿŧ ƀḗḗƞ şḗŧ ŧǿ ŧħīş ṽīḗẇ."
+
+#: application/views/helpers/Loop.php:27
+msgid "An array of records is not available for the loop."
+msgstr "Ȧƞ ȧřřȧẏ ǿƒ řḗƈǿřḓş īş ƞǿŧ ȧṽȧīŀȧƀŀḗ ƒǿř ŧħḗ ŀǿǿƥ."
+
+#: application/views/helpers/RecordUrl.php:34
+msgid "Invalid record passed while getting record URL."
+msgstr "Īƞṽȧŀīḓ řḗƈǿřḓ ƥȧşşḗḓ ẇħīŀḗ ɠḗŧŧīƞɠ řḗƈǿřḓ ŬŘĿ."
+
+#: application/views/helpers/RecordUrl.php:44
+msgid "Invalid action passed while getting record URL."
+msgstr "Īƞṽȧŀīḓ ȧƈŧīǿƞ ƥȧşşḗḓ ẇħīŀḗ ɠḗŧŧīƞɠ řḗƈǿřḓ ŬŘĿ."
+
+#: application/views/helpers/RecordUrl.php:75
+msgid "Invalid return value while getting record URL."
+msgstr "Īƞṽȧŀīḓ řḗŧŭřƞ ṽȧŀŭḗ ẇħīŀḗ ɠḗŧŧīƞɠ řḗƈǿřḓ ŬŘĿ."
+
+#: application/views/scripts/collections/browse.php:14
+#: application/views/scripts/items/browse.php:24
+msgid "Sort by: "
+msgstr "Şǿřŧ ƀẏ: "
+
+#: application/views/scripts/collections/browse.php:43
+#, php-format
+msgid "View the items in %s"
+msgstr "Ṽīḗẇ ŧħḗ īŧḗḿş īƞ %s"
+
+#: application/views/scripts/collections/show.php:15
+#, php-format
+msgid "Items in the %s Collection"
+msgstr "Īŧḗḿş īƞ ŧħḗ %s Ƈǿŀŀḗƈŧīǿƞ"
+
+#: application/views/scripts/collections/show.php:40
+msgid "There are currently no items within this collection."
+msgstr "Ŧħḗřḗ ȧřḗ ƈŭřřḗƞŧŀẏ ƞǿ īŧḗḿş ẇīŧħīƞ ŧħīş ƈǿŀŀḗƈŧīǿƞ."
+
+#: application/views/scripts/common/footer.php:14
+msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
+msgstr "Ƥřǿŭḓŀẏ ƥǿẇḗřḗḓ ƀẏ <a href=\"http://omeka.org\">Ǿḿḗķȧ</a>."
+
+#: application/views/scripts/common/pagination_control.php:5
+msgid "Pagination"
+msgstr "Ƥȧɠīƞȧŧīǿƞ"
+
+#: application/views/scripts/common/pagination_control.php:11
+msgid "Previous Page"
+msgstr "Ƥřḗṽīǿŭş Ƥȧɠḗ"
+
+#: application/views/scripts/common/pagination_control.php:36
+msgid "Current Page"
+msgstr "Ƈŭřřḗƞŧ Ƥȧɠḗ"
+
+#: application/views/scripts/common/pagination_control.php:39
+#, php-format
+msgid "%s of %s"
+msgstr "%s ǿƒ %s"
+
+#: application/views/scripts/common/pagination_control.php:48
+msgid "Next Page"
+msgstr "Ƞḗẋŧ Ƥȧɠḗ"
+
+#: application/views/scripts/error/403.php:2
+msgid "403 Page Forbidden"
+msgstr "403 Ƥȧɠḗ Ƒǿřƀīḓḓḗƞ"
+
+#: application/views/scripts/error/403.php:8
+msgid "You do not have permission to access this page."
+msgstr "Ẏǿŭ ḓǿ ƞǿŧ ħȧṽḗ ƥḗřḿīşşīǿƞ ŧǿ ȧƈƈḗşş ŧħīş ƥȧɠḗ."
+
+#: application/views/scripts/error/404.dc.php:1
+#: application/views/scripts/error/404.php:2
+#: application/views/scripts/error/404.xml.php:1
+msgid "404 Page Not Found"
+msgstr "404 Ƥȧɠḗ Ƞǿŧ Ƒǿŭƞḓ"
+
+#: application/views/scripts/error/404.php:6
+#, php-format
+msgid "%s is not a valid URL."
+msgstr "%s īş ƞǿŧ ȧ ṽȧŀīḓ ŬŘĿ."
+
+#: application/views/scripts/error/404.rss2.php:1
+msgid "Rss2.0 Feed Not Found!"
+msgstr "Řşş2.0 Ƒḗḗḓ Ƞǿŧ Ƒǿŭƞḓ!"
+
+#: application/views/scripts/error/405.php:2
+msgid "405 Method Not Allowed"
+msgstr "405 Ḿḗŧħǿḓ Ƞǿŧ Ȧŀŀǿẇḗḓ"
+
+#: application/views/scripts/error/405.php:6
+#, php-format
+msgid "The method used to access this URL (%s) is not valid."
+msgstr "Ŧħḗ ḿḗŧħǿḓ ŭşḗḓ ŧǿ ȧƈƈḗşş ŧħīş ŬŘĿ (%s) īş ƞǿŧ ṽȧŀīḓ."
+
+#: application/views/scripts/error/index.php:4
+msgid "Omeka has encountered an error"
+msgstr "Ǿḿḗķȧ ħȧş ḗƞƈǿŭƞŧḗřḗḓ ȧƞ ḗřřǿř"
+
+#: application/views/scripts/error/index.php:33
+msgid ""
+"To learn how to see more detailed information about this error, see the "
+"Omeka Codex page on <a href=\"http://omeka.org/codex/"
+"Retrieving_error_messages\">retrieving error messages</a>."
+msgstr ""
+"Ŧǿ ŀḗȧřƞ ħǿẇ ŧǿ şḗḗ ḿǿřḗ ḓḗŧȧīŀḗḓ īƞƒǿřḿȧŧīǿƞ ȧƀǿŭŧ ŧħīş ḗřřǿř, şḗḗ ŧħḗ "
+"Ǿḿḗķȧ Ƈǿḓḗẋ ƥȧɠḗ ǿƞ <a "
+"href=\"http://omeka.org/codex/Retrieving_error_messages\">řḗŧřīḗṽīƞɠ ḗřřǿř "
+"ḿḗşşȧɠḗş</a>."
+
+#: application/views/scripts/index.php:10
+msgid "Featured Item"
+msgstr "Ƒḗȧŧŭřḗḓ Īŧḗḿ"
+
+#: application/views/scripts/index.php:18
+msgid "Featured Collection"
+msgstr "Ƒḗȧŧŭřḗḓ Ƈǿŀŀḗƈŧīǿƞ"
+
+#: application/views/scripts/index.php:42
+msgid "View All Items"
+msgstr "Ṽīḗẇ Ȧŀŀ Īŧḗḿş"
+
+#: application/views/scripts/items/search-form.php:76
+msgid "Remove field"
+msgstr "Řḗḿǿṽḗ ƒīḗŀḓ"
+
+#: application/views/scripts/items/show.php:10
+msgid "Files"
+msgstr "Ƒīŀḗş"
+
+#: application/views/scripts/items/show.php:33
+msgid "Citation"
+msgstr "Ƈīŧȧŧīǿƞ"
+
+#: application/views/scripts/search/index.php:2
+msgid "Search Omeka "
+msgstr "Şḗȧřƈħ Ǿḿḗķȧ "
+
+#: application/views/scripts/search/index.php:39
+msgid "Your query returned no results."
+msgstr "Ẏǿŭř ɋŭḗřẏ řḗŧŭřƞḗḓ ƞǿ řḗşŭŀŧş."
+
+#: application/views/scripts/search/search-filters.php:3
+msgid "Query:"
+msgstr "Ɋŭḗřẏ:"
+
+#: application/views/scripts/search/search-filters.php:4
+msgid "Query type:"
+msgstr "Ɋŭḗřẏ ŧẏƥḗ:"
+
+#: application/views/scripts/search/search-filters.php:5
+msgid "Record types:"
+msgstr "Řḗƈǿřḓ ŧẏƥḗş:"
+
+#: application/views/scripts/search/search-form.php:6
+msgid "Search using this query type:"
+msgstr "Şḗȧřƈħ ŭşīƞɠ ŧħīş ɋŭḗřẏ ŧẏƥḗ:"
+
+#: application/views/scripts/search/search-form.php:11
+msgid "Search only these record types:"
+msgstr "Şḗȧřƈħ ǿƞŀẏ ŧħḗşḗ řḗƈǿřḓ ŧẏƥḗş:"
+
+#: application/views/scripts/search/search-form.php:17
+msgid "Go to search settings to select record types to use."
+msgstr "Ɠǿ ŧǿ şḗȧřƈħ şḗŧŧīƞɠş ŧǿ şḗŀḗƈŧ řḗƈǿřḓ ŧẏƥḗş ŧǿ ŭşḗ."
+
+#: application/views/scripts/search/search-form.php:19
+msgid "Advanced Search (Items only)"
+msgstr "Ȧḓṽȧƞƈḗḓ Şḗȧřƈħ (Īŧḗḿş ǿƞŀẏ)"
+
+#: application/views/scripts/users/activate.php:8
+#, php-format
+msgid "Hello %s. Your username is %s"
+msgstr "Ħḗŀŀǿ %s. Ẏǿŭř ŭşḗřƞȧḿḗ īş %s"
+
+#: application/views/scripts/users/login.php:9
+msgid "Go to Home Page"
+msgstr "Ɠǿ ŧǿ Ħǿḿḗ Ƥȧɠḗ"
+
+#: application/views/scripts/users/login.php:9
+msgid "Lost your password?"
+msgstr "Ŀǿşŧ ẏǿŭř ƥȧşşẇǿřḓ?"
+
+#: install/controllers/IndexController.php:25
+msgid "Could not load database resource!"
+msgstr "Ƈǿŭŀḓ ƞǿŧ ŀǿȧḓ ḓȧŧȧƀȧşḗ řḗşǿŭřƈḗ!"
+
+#: install/views/scripts/index/errors.phtml:1
+msgid "Installation Error"
+msgstr "Īƞşŧȧŀŀȧŧīǿƞ Ḗřřǿř"
+
+#: install/views/scripts/index/errors.phtml:2
+msgid ""
+"Before installation can continue, the following errors must be resolved:"
+msgstr ""
+"Ɓḗƒǿřḗ īƞşŧȧŀŀȧŧīǿƞ ƈȧƞ ƈǿƞŧīƞŭḗ, ŧħḗ ƒǿŀŀǿẇīƞɠ ḗřřǿřş ḿŭşŧ ƀḗ řḗşǿŀṽḗḓ:"
+
+#: install/views/scripts/index/fatal-error.phtml:1
+msgid "Fatal Error"
+msgstr "Ƒȧŧȧŀ Ḗřřǿř"
+
+#: install/views/scripts/index/index.phtml:2
+msgid "Installation Warning"
+msgstr "Īƞşŧȧŀŀȧŧīǿƞ Ẇȧřƞīƞɠ"
+
+#: install/views/scripts/index/index.phtml:4
+msgid ""
+"The following issues will not affect installation, but they may negatively "
+"affect the behavior of Omeka:"
+msgstr ""
+"Ŧħḗ ƒǿŀŀǿẇīƞɠ īşşŭḗş ẇīŀŀ ƞǿŧ ȧƒƒḗƈŧ īƞşŧȧŀŀȧŧīǿƞ, ƀŭŧ ŧħḗẏ ḿȧẏ ƞḗɠȧŧīṽḗŀẏ "
+"ȧƒƒḗƈŧ ŧħḗ ƀḗħȧṽīǿř ǿƒ Ǿḿḗķȧ:"
+
+#: install/views/scripts/index/index.phtml:14
+msgid "Configure Your Site"
+msgstr "Ƈǿƞƒīɠŭřḗ Ẏǿŭř Şīŧḗ"
+
+#: install/views/scripts/index/index.phtml:16
+msgid "Form Validation Errors"
+msgstr "Ƒǿřḿ Ṽȧŀīḓȧŧīǿƞ Ḗřřǿřş"
+
+#: install/views/scripts/index/installed.phtml:1
+msgid "Success!"
+msgstr "Şŭƈƈḗşş!"
+
+#: install/views/scripts/index/installed.phtml:2
+msgid "Omeka is installed."
+msgstr "Ǿḿḗķȧ īş īƞşŧȧŀŀḗḓ."
+
+#: install/views/scripts/index/installed.phtml:3
+msgid "Public Site"
+msgstr "Ƥŭƀŀīƈ Şīŧḗ"
+
+#: install/views/scripts/index/installed.phtml:3
+msgid "Admin Dashboard"
+msgstr "Ȧḓḿīƞ Ḓȧşħƀǿȧřḓ"

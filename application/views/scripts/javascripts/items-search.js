@@ -51,6 +51,7 @@ Omeka.Search = {};
                 return this.name.replace(/\d+/, newIndex);
             });
 
+            div.find('.advanced-search-terms').prop('disabled', false);
             //Add the event listener.
             div.find('button.remove_search').click(function () {
                 removeAdvancedSearch(this);
@@ -81,6 +82,19 @@ Omeka.Search = {};
                 removeButtons.removeAttr('disabled').show();
             }
         }
+
+        /**
+         * Disable term input when the search type doesn't take a term.
+         */
+        function disableTermInput() {
+            var value = $(this).val();
+            var disable = value === 'is empty' || value === 'is not empty';
+            $(this).siblings('.advanced-search-terms').prop('disabled', disable);
+        }
+
+        $('#search-narrow-by-fields')
+            .on('change', '.advanced-search-type', disableTermInput)
+            .find('.advanced-search-type').each(disableTermInput);
 
         //Make each button respond to clicks
         addButton.click(function () {
