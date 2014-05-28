@@ -50,7 +50,7 @@ $formAttributes['method'] = 'GET';
                     "advanced[$i][element_id]",
                     @$rows['element_id'],
                     array(
-                        'title' => __("Select field ($i)"),
+                        'title' => __("Search Field"),
                         'id' => null,
                         'class' => 'advanced-search-element'
                     ),
@@ -63,7 +63,7 @@ $formAttributes['method'] = 'GET';
                     "advanced[$i][type]",
                     @$rows['type'],
                     array(
-                        'title' => __("Select filter method ($i)"),
+                        'title' => __("Search Type"),
                         'id' => null,
                         'class' => 'advanced-search-type'
                     ),
@@ -80,7 +80,7 @@ $formAttributes['method'] = 'GET';
                     @$rows['terms'],
                     array(
                         'size' => '20',
-                        'title' => __("Select filter ($i)"),
+                        'title' => __("Search Terms"),
                         'id' => null,
                         'class' => 'advanced-search-terms'
                     )
