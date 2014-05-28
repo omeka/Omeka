@@ -27,9 +27,10 @@ msgstr ""
 #. Dublin Core: Title element name
 #: admin/themes/default/collections/browse.php:22
 #: admin/themes/default/items/browse.php:40
+#: admin/themes/default/search/index.php:13
 #: application/views/scripts/collections/browse.php:10
 #: application/views/scripts/items/browse.php:19
-#: application/views/scripts/search/index.php:13
+#: application/views/scripts/search/index.php:14
 msgid "Title"
 msgstr ""
 
@@ -456,6 +457,7 @@ msgstr ""
 #: admin/themes/default/item-types/browse.php:2
 #: admin/themes/default/items/browse.php:3
 #: admin/themes/default/plugins/browse.php:2
+#: admin/themes/default/search/index.php:2
 #: admin/themes/default/tags/browse.php:12
 #: admin/themes/default/users/browse.php:2
 #: application/views/scripts/collections/browse.php:6
@@ -692,7 +694,7 @@ msgstr ""
 
 #: admin/themes/default/common/settings-nav.php:16
 #: application/views/helpers/SearchForm.php:34
-#: application/views/scripts/items/search-form.php:189
+#: application/views/scripts/items/search-form.php:199
 #: application/views/scripts/search/search-form.php:2
 #: application/views/scripts/search/search-form.php:22
 msgid "Search"
@@ -1276,91 +1278,111 @@ msgid "Narrow by Specific Fields"
 msgstr ""
 
 #: admin/themes/default/items/search-form.php:27
-#: application/views/scripts/items/search-form.php:80
+#: application/views/scripts/items/search-form.php:90
 msgid "Add a Field"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:63
-#: application/views/scripts/items/search-form.php:60
-msgid "contains"
-msgstr ""
-
-#: admin/themes/default/items/search-form.php:64
-#: application/views/scripts/items/search-form.php:61
-msgid "does not contain"
-msgstr ""
-
-#: admin/themes/default/items/search-form.php:65
-#: application/views/scripts/items/search-form.php:62
-msgid "is exactly"
+#: admin/themes/default/items/search-form.php:53
+#: application/views/scripts/items/search-form.php:50
+msgid "Search Field"
 msgstr ""
 
 #: admin/themes/default/items/search-form.php:66
 #: application/views/scripts/items/search-form.php:63
+msgid "Search Type"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:71
+#: application/views/scripts/items/search-form.php:68
+msgid "contains"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:72
+#: application/views/scripts/items/search-form.php:69
+msgid "does not contain"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:73
+#: application/views/scripts/items/search-form.php:70
+msgid "is exactly"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:74
+#: application/views/scripts/items/search-form.php:71
 msgid "is empty"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:67
-#: application/views/scripts/items/search-form.php:64
+#: admin/themes/default/items/search-form.php:75
+#: application/views/scripts/items/search-form.php:72
 msgid "is not empty"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:84
-#: application/views/scripts/items/search-form.php:84
+#: admin/themes/default/items/search-form.php:83
+#: application/views/scripts/items/search-form.php:80
+msgid "Search Terms"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:89
+#: application/views/scripts/items/search-form.php:86
+msgid "Remove field"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:97
+#: application/views/scripts/items/search-form.php:94
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:98
-#: application/views/scripts/items/search-form.php:95
+#: admin/themes/default/items/search-form.php:111
+#: application/views/scripts/items/search-form.php:105
 msgid "Search By Collection"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:114
-#: application/views/scripts/items/search-form.php:109
+#: admin/themes/default/items/search-form.php:127
+#: application/views/scripts/items/search-form.php:119
 msgid "Search By Type"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:131
-#: application/views/scripts/items/search-form.php:125
+#: admin/themes/default/items/search-form.php:144
+#: application/views/scripts/items/search-form.php:135
 msgid "Search By User"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:148
-#: application/views/scripts/items/search-form.php:140
+#: admin/themes/default/items/search-form.php:161
+#: application/views/scripts/items/search-form.php:150
 msgid "Search By Tags"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:163
-#: application/views/scripts/items/search-form.php:153
+#: admin/themes/default/items/search-form.php:176
+#: application/views/scripts/items/search-form.php:163
 msgid "Public/Non-Public"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:172
-#: application/views/scripts/items/search-form.php:161
+#: admin/themes/default/items/search-form.php:185
+#: application/views/scripts/items/search-form.php:171
 msgid "Only Public Items"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:173
-#: application/views/scripts/items/search-form.php:162
+#: admin/themes/default/items/search-form.php:186
+#: application/views/scripts/items/search-form.php:172
 msgid "Only Non-Public Items"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:183
-#: application/views/scripts/items/search-form.php:171
+#: admin/themes/default/items/search-form.php:196
+#: application/views/scripts/items/search-form.php:181
 msgid "Featured/Non-Featured"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:192
-#: application/views/scripts/items/search-form.php:179
+#: admin/themes/default/items/search-form.php:205
+#: application/views/scripts/items/search-form.php:189
 msgid "Only Featured Items"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:193
-#: application/views/scripts/items/search-form.php:180
+#: admin/themes/default/items/search-form.php:206
+#: application/views/scripts/items/search-form.php:190
 msgid "Only Non-Featured Items"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:203
+#: admin/themes/default/items/search-form.php:216
 msgid "Search for items"
 msgstr ""
 
@@ -1509,6 +1531,22 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
+#: admin/themes/default/search/index.php:2
+#: application/views/scripts/search/index.php:2
+msgid "Search Omeka "
+msgstr ""
+
+#: admin/themes/default/search/index.php:12
+#: admin/themes/default/tags/browse.php:18
+#: application/views/scripts/search/index.php:13
+msgid "Record Type"
+msgstr ""
+
+#: admin/themes/default/search/index.php:39
+#: application/views/scripts/search/index.php:40
+msgid "Your query returned no results."
+msgstr ""
+
 #: admin/themes/default/settings/edit-api.php:11
 msgid "Enable API"
 msgstr ""
@@ -1622,11 +1660,6 @@ msgstr ""
 
 #: admin/themes/default/tags/browse.php:9
 msgid "Browse Tags"
-msgstr ""
-
-#: admin/themes/default/tags/browse.php:18
-#: application/views/scripts/search/index.php:12
-msgid "Record Type"
 msgstr ""
 
 #: admin/themes/default/tags/browse.php:24
@@ -3181,7 +3214,7 @@ msgstr ""
 msgid "Names of plugins must not be blank"
 msgstr ""
 
-#: application/models/Table/Collection.php:76
+#: application/models/Table/Collection.php:77
 #, php-format
 msgid "[Untitled] #%s"
 msgstr ""
@@ -3464,24 +3497,12 @@ msgstr ""
 msgid "View All Items"
 msgstr ""
 
-#: application/views/scripts/items/search-form.php:76
-msgid "Remove field"
-msgstr ""
-
 #: application/views/scripts/items/show.php:10
 msgid "Files"
 msgstr ""
 
 #: application/views/scripts/items/show.php:33
 msgid "Citation"
-msgstr ""
-
-#: application/views/scripts/search/index.php:2
-msgid "Search Omeka "
-msgstr ""
-
-#: application/views/scripts/search/index.php:39
-msgid "Your query returned no results."
 msgstr ""
 
 #: application/views/scripts/search/search-filters.php:3
