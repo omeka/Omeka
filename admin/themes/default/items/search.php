@@ -9,7 +9,8 @@ echo head(
 );
 echo $this->partial('items/search-form.php',
     array(
-        'formAttributes' => array('id'=>'advanced-search-form')
+        'formAttributes' => array('id'=>'advanced-search-form'),
+        'useSidebar' => true
     )
 );
 echo foot();

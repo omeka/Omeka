@@ -8,6 +8,7 @@ $formAttributes['method'] = 'GET';
 ?>
 
 <form <?php echo tag_attributes($formAttributes); ?>>
+    <div class="seven columns alpha">
     <div id="search-keywords" class="field">
         <div class="two columns alpha">
             <?php echo $this->formLabel('keyword-search', __('Search for Keywords')); ?>
@@ -209,11 +210,17 @@ $formAttributes['method'] = 'GET';
         ?>
         </div>
     </div>
-    
-    <div class="seven columns alpha">
     <?php fire_plugin_hook('admin_items_search', array('view' => $this)); ?>
     </div>
+    <?php if (isset($useSidebar) && $useSidebar): ?>
+    <div class="three columns omega">
+        <div id="save" class="panel">
+            <input type="submit" class="submit big green button" name="submit_search" id="submit_search_advanced" value="<?php echo __('Search for items'); ?>" />
+        </div>
+    </div>
+    <?php else: ?>
     <input type="submit" class="submit big green button" name="submit_search" id="submit_search_advanced" value="<?php echo __('Search for items'); ?>" />
+    <?php endif; ?>
 </form>
 
 <?php echo js_tag('items-search'); ?>
