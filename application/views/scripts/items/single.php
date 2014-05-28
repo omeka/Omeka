@@ -1,4 +1,4 @@
-<div class="item">
+<div class="item record">
     <?php
     $title = metadata($item, array('Dublin Core', 'Title'));
     $description = metadata($item, array('Dublin Core', 'Description'), array('snippet' => 150));
