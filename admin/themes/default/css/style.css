@@ -1165,7 +1165,7 @@ header nav {
     word-wrap: break-word;
 }
 
-    .panel img {
+    .admin-thumb.panel img {
         max-width: 100%;
         padding-bottom: 10px;
         vertical-align: bottom;
