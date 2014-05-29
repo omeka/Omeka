@@ -364,7 +364,12 @@ class Omeka_Db_Table
         $columns = $this->getColumns();
         foreach($columns as $column) {
             if(array_key_exists($column, $params)) {
-                $select->where("$column = ?", $params[$column]);
+                if (is_array($params[$column])) {
+                    $select->where("$column IN (?)", $params[$column]);
+                }
+                else {
+                    $select->where("$column = ?", $params[$column]);
+                }
             }
         }
     }
