@@ -28,7 +28,7 @@ endif;
                     if (!is_allowed($item, 'edit') || !is_allowed($item, 'delete')) {
                         $showItemFields = false;
                     }
-                    $itemCheckboxes[$id] = metadata($item, array('Dublin Core', 'Title'));
+                    $itemCheckboxes[$id] = strip_formatting(metadata($item, array('Dublin Core', 'Title')));
                     release_object($item);
                 }
                 echo '<li>' . $this->formMultiCheckbox('items[]', null, array('checked' => 'checked'), $itemCheckboxes, '</li><li>') . '</li>'; ?>
