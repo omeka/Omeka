@@ -366,8 +366,7 @@ class Omeka_Db_Table
             if(array_key_exists($column, $params)) {
                 if (is_array($params[$column])) {
                     $select->where("$column IN (?)", $params[$column]);
-                }
-                else {
+                } else {
                     $select->where("$column = ?", $params[$column]);
                 }
             }
