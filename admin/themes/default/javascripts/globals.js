@@ -23,9 +23,10 @@ if (!Omeka) {
             theme_advanced_buttons2: "",
             theme_advanced_buttons3: "",
             theme_advanced_blockformats: "p,address,pre,h1,h2,h3,h4,h5,h6,blockquote,address,div",
-            plugins: "paste,inlinepopups,media",
+            plugins: "paste,inlinepopups,media,autoresize",
             media_strict: false,
-            width: "100%"
+            width: "100%",
+            autoresize_max_height: 500
         };
 
         tinyMCE.init($.extend(initParams, params));
