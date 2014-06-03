@@ -33,7 +33,7 @@ class Omeka_Application_Resource_Filederivatives extends Zend_Application_Resour
         $strategyClass = empty($config->strategy) ? self::DEFAULT_STRATEGY : $config->strategy;
         $strategyOptions = empty($config->strategyOptions) ? array() : $config->strategyOptions->toArray();
 
-        if ($strategyClass == self::DEFAULT_STRATEGY) {
+        if ($strategyClass == self::DEFAULT_STRATEGY && empty($strategyOptions['path_to_convert'])) {
             if (!($convertPath = get_option('path_to_convert'))) {
                 return null;
             }
