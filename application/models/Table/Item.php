@@ -139,16 +139,19 @@ class Table_Item extends Omeka_Db_Table
             $elementId = (int) $v['element_id'];
 
             $inner = true;
+            $orCondition = '';
             // Determine what the WHERE clause should look like.
             switch ($type) {
-                case 'does not contain':
-                    $predicate = "NOT LIKE " . $db->quote('%'.$value .'%');
-                    break;
                 case 'contains':
                     $predicate = "LIKE " . $db->quote('%'.$value .'%');
                     break;
                 case 'is exactly':
                     $predicate = ' = ' . $db->quote($value);
+                    break;
+                case 'does not contain':
+                    $inner = false;
+                    $predicate = "NOT LIKE " . $db->quote('%' . $value .'%');
+                    $orCondition = 'IS NULL';
                     break;
                 case 'is empty':
                     $inner = false;
@@ -160,7 +163,7 @@ class Table_Item extends Omeka_Db_Table
                 default:
                     throw new Omeka_Record_Exception(__('Invalid search type given!'));
             }
-            
+
             $alias = "_advanced_{$advancedIndex}";
 
             // Note that $elementId was earlier forced to int, so manual quoting
@@ -171,7 +174,8 @@ class Table_Item extends Omeka_Db_Table
             } else {
                 $select->joinLeft(array($alias => $db->ElementText), $joinCondition, array());
             }
-            $select->where("{$alias}.text {$predicate}");
+            $orCondition = empty($orCondition) ? '' : " OR {$alias}.text {$orCondition}";
+            $select->where("{$alias}.text {$predicate}{$orCondition}");
 
             $advancedIndex++;
         }
