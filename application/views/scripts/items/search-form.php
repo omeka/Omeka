@@ -196,7 +196,8 @@ $formAttributes['method'] = 'GET';
 
     <?php fire_plugin_hook('public_items_search', array('view' => $this)); ?>
     <div>
-        <input type="submit" class="submit" name="submit_search" id="submit_search_advanced" value="<?php echo __('Search'); ?>" />
+        <?php if (!isset($buttonText)) $buttonText = __('Search for items'); ?>
+        <input type="submit" class="submit" name="submit_search" id="submit_search_advanced" value="<?php echo $buttonText ?>">
     </div>
 </form>
 

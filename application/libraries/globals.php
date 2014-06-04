@@ -2190,13 +2190,14 @@ function item_image_gallery($attrs = array(), $imageType = 'square_thumbnail', $
  * @uses Zend_View_Helper_Partial::partial()
  * @param array $props
  * @param string $formActionUri
+ * @param string $buttonText
  * @return string
  */
-function items_search_form($props = array(), $formActionUri = null)
+function items_search_form($props = array(), $formActionUri = null, $buttonText = null)
 {
     return get_view()->partial(
         'items/search-form.php', 
-        array('formAttributes' => $props, 'formActionUri' => $formActionUri)
+        array('formAttributes' => $props, 'formActionUri' => $formActionUri, 'buttonText' => $buttonText)
     );
 }
 
