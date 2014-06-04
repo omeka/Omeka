@@ -157,7 +157,6 @@ class UsersController extends Omeka_Controller_AbstractActionController
         $user = new User();
         
         $form = $this->_getUserForm($user);
-        $form->setSubmitButtonText(__('Add User'));
         $this->view->form = $form;
         $this->view->user = $user;
         
@@ -196,7 +195,6 @@ class UsersController extends Omeka_Controller_AbstractActionController
         $ua = $this->_helper->db->getTable('UsersActivations')->findByUser($user);
 
         $form = $this->_getUserForm($user, $ua);
-        $form->setSubmitButtonText(__('Save Changes'));
         $form->setDefaults(array(
             'username' => $user->username,
             'name' => $user->name,
@@ -219,7 +217,6 @@ class UsersController extends Omeka_Controller_AbstractActionController
                 //rebuild the form with new ua
                 $ua = $this->_helper->db->getTable('UsersActivations')->findByUser($user);
                 $form = $this->_getUserForm($user, $ua);
-                $form->setSubmitButtonText(__('Save Changes'));
                 $form->setDefaults(array(
                     'username' => $user->username,
                     'name' => $user->name,
