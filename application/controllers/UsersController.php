@@ -159,6 +159,7 @@ class UsersController extends Omeka_Controller_AbstractActionController
         $form = $this->_getUserForm($user);
         $form->setSubmitButtonText(__('Add User'));
         $this->view->form = $form;
+        $this->view->user = $user;
         
         if (!$this->getRequest()->isPost() || !$form->isValid($_POST)) {
             return;
