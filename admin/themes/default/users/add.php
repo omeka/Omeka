@@ -11,6 +11,7 @@ echo flash();
 <section class="three columns omega">
     <div id="save" class="panel">
         <?php echo $this->formSubmit('submit', __('Add User'), array('class' => 'submit big green button')); ?>
+        <?php fire_plugin_hook('admin_users_panel_buttons', array('user' => $user, 'view' => $this)); ?>
     </div>
 </section>
 </form>
