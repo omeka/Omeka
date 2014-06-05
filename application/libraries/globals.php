@@ -2617,14 +2617,15 @@ function link_to_admin_home_page($text = null, $props = array())
  * @param array $navLinks The array of links for the navigation.
  * @param string $name Optionally, the name of a filter to pass the links
  *  through before using them.
+ * @param array $args Optionally, arguments to pass to the filter
  *
  * @return Zend_View_Helper_Navigation_Menu The navigation menu object. Can
  *  generally be treated simply as a string.
  */
-function nav(array $navLinks, $name = null) 
+function nav(array $navLinks, $name = null, array $args = array())
 {
     if ($name !== null) {
-        $navLinks = apply_filters($name, $navLinks);
+        $navLinks = apply_filters($name, $navLinks, $args);
     }
 
     $menu = get_view()->navigation()->menu(new Omeka_Navigation($navLinks));

@@ -20,6 +20,6 @@
             'privilege' => 'api-keys'
         ),
     );
-    echo nav($navArray, 'admin_navigation_users');
+    echo nav($navArray, 'admin_navigation_users', array('user' => $user));
 ?>
 </div>
