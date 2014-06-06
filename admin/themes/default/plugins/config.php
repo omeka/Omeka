@@ -5,7 +5,7 @@ echo flash();
 ?>
 <form method="post">
     <section class="seven columns alpha">
-        <?php echo $pluginBroker->callHook('config_form', array(), $plugin); ?>
+        <?php echo $pluginBroker->callHook('config_form', array('view' => $this), $plugin); ?>
     </section>
     <section class="three columns omega">
         <div id="save" class="panel">
