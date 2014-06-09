@@ -33,9 +33,9 @@ echo flash();
 
 <form id='search-users' method='GET'>
 <button><?php echo __('Search users'); ?></button><input type='text' name='search'/>
-<input type='radio' name='search-type' value='username' checked='checked' /><span><?php echo __('Usernames'); ?></span>
-<input type='radio' name='search-type' value='name' /><span><?php echo __('Real names'); ?></span>
-<input type='radio' name='search-type' value='email' /><span><?php echo __('Email addresses'); ?></span>
+<input type='radio' name='search-type' value='username' checked='checked' /><span><?php echo __('Username'); ?></span>
+<input type='radio' name='search-type' value='name' /><span><?php echo __('Display Name'); ?></span>
+<input type='radio' name='search-type' value='email' /><span><?php echo __('Email'); ?></span>
 
 </form>
 
@@ -45,7 +45,7 @@ echo flash();
         <tr>
         <?php $sortLinks = array(
                 __('Username') => 'username',
-                __('Real Name') => 'name',
+                __('Display Name') => 'name',
                 __('Email') => 'email',
                 __('Role') => 'role'
                 );

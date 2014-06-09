@@ -62,7 +62,6 @@ msgstr ""
 #: admin/themes/default/item-types/show.php:14
 #: admin/themes/default/settings/edit-item-type-elements.php:27
 #: application/forms/ItemTypes.php:150
-#: application/views/scripts/collections/browse.php:29
 msgid "Description"
 msgstr ""
 
@@ -361,7 +360,7 @@ msgstr ""
 #: admin/themes/default/appearance/edit-settings.php:21
 #: admin/themes/default/collections/edit.php:22
 #: admin/themes/default/element-sets/edit.php:41
-#: admin/themes/default/files/edit.php:30
+#: admin/themes/default/files/edit.php:35
 #: admin/themes/default/items/batch-edit.php:130
 #: admin/themes/default/items/edit.php:19
 #: admin/themes/default/plugins/config.php:14
@@ -371,10 +370,7 @@ msgstr ""
 #: admin/themes/default/settings/edit-security.php:15
 #: admin/themes/default/settings/edit-settings.php:15
 #: admin/themes/default/themes/config.php:16
-#: admin/themes/default/users/edit.php:21
-#: application/controllers/UsersController.php:198
-#: application/controllers/UsersController.php:221
-#: application/forms/ItemTypes.php:169
+#: admin/themes/default/users/edit.php:21 application/forms/ItemTypes.php:169
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:73
 msgid "Save Changes"
 msgstr ""
@@ -393,7 +389,7 @@ msgstr ""
 #: admin/themes/default/collections/edit.php:24
 #: admin/themes/default/collections/show.php:36
 #: admin/themes/default/element-sets/browse.php:29
-#: admin/themes/default/files/edit.php:32
+#: admin/themes/default/files/edit.php:37
 #: admin/themes/default/files/show.php:30
 #: admin/themes/default/item-types/edit.php:20
 #: admin/themes/default/item-types/show.php:54
@@ -532,7 +528,7 @@ msgstr ""
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/libraries/globals.php:2573
+#: application/libraries/globals.php:2574
 #: application/views/scripts/collections/show.php:4
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
@@ -694,7 +690,6 @@ msgstr ""
 
 #: admin/themes/default/common/settings-nav.php:16
 #: application/views/helpers/SearchForm.php:34
-#: application/views/scripts/items/search-form.php:199
 #: application/views/scripts/search/search-form.php:2
 #: application/views/scripts/search/search-form.php:22
 msgid "Search"
@@ -1172,8 +1167,8 @@ msgstr ""
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2349
-#: application/libraries/globals.php:2732
+#: application/libraries/globals.php:2350
+#: application/libraries/globals.php:2734
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr ""
@@ -1267,122 +1262,123 @@ msgstr ""
 msgid "Private"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:13
+#: admin/themes/default/items/search-form.php:14
 #: application/views/scripts/items/search-form.php:13
 msgid "Search for Keywords"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:26
+#: admin/themes/default/items/search-form.php:27
 #: application/views/scripts/items/search-form.php:25
 msgid "Narrow by Specific Fields"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:27
+#: admin/themes/default/items/search-form.php:28
 #: application/views/scripts/items/search-form.php:90
 msgid "Add a Field"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:53
+#: admin/themes/default/items/search-form.php:54
 #: application/views/scripts/items/search-form.php:50
 msgid "Search Field"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:66
+#: admin/themes/default/items/search-form.php:67
 #: application/views/scripts/items/search-form.php:63
 msgid "Search Type"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:71
+#: admin/themes/default/items/search-form.php:72
 #: application/views/scripts/items/search-form.php:68
 msgid "contains"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:72
+#: admin/themes/default/items/search-form.php:73
 #: application/views/scripts/items/search-form.php:69
 msgid "does not contain"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:73
+#: admin/themes/default/items/search-form.php:74
 #: application/views/scripts/items/search-form.php:70
 msgid "is exactly"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:74
+#: admin/themes/default/items/search-form.php:75
 #: application/views/scripts/items/search-form.php:71
 msgid "is empty"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:75
+#: admin/themes/default/items/search-form.php:76
 #: application/views/scripts/items/search-form.php:72
 msgid "is not empty"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:83
+#: admin/themes/default/items/search-form.php:84
 #: application/views/scripts/items/search-form.php:80
 msgid "Search Terms"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:89
+#: admin/themes/default/items/search-form.php:90
 #: application/views/scripts/items/search-form.php:86
 msgid "Remove field"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:97
+#: admin/themes/default/items/search-form.php:98
 #: application/views/scripts/items/search-form.php:94
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:111
+#: admin/themes/default/items/search-form.php:112
 #: application/views/scripts/items/search-form.php:105
 msgid "Search By Collection"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:127
+#: admin/themes/default/items/search-form.php:128
 #: application/views/scripts/items/search-form.php:119
 msgid "Search By Type"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:144
+#: admin/themes/default/items/search-form.php:145
 #: application/views/scripts/items/search-form.php:135
 msgid "Search By User"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:161
+#: admin/themes/default/items/search-form.php:162
 #: application/views/scripts/items/search-form.php:150
 msgid "Search By Tags"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:176
+#: admin/themes/default/items/search-form.php:177
 #: application/views/scripts/items/search-form.php:163
 msgid "Public/Non-Public"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:185
+#: admin/themes/default/items/search-form.php:186
 #: application/views/scripts/items/search-form.php:171
 msgid "Only Public Items"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:186
+#: admin/themes/default/items/search-form.php:187
 #: application/views/scripts/items/search-form.php:172
 msgid "Only Non-Public Items"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:196
+#: admin/themes/default/items/search-form.php:197
 #: application/views/scripts/items/search-form.php:181
 msgid "Featured/Non-Featured"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:205
+#: admin/themes/default/items/search-form.php:206
 #: application/views/scripts/items/search-form.php:189
 msgid "Only Featured Items"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:206
+#: admin/themes/default/items/search-form.php:207
 #: application/views/scripts/items/search-form.php:190
 msgid "Only Non-Featured Items"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:216
+#: admin/themes/default/items/search-form.php:215
+#: application/views/scripts/items/search-form.php:199
 msgid "Search for items"
 msgstr ""
 
@@ -1391,11 +1387,11 @@ msgstr ""
 msgid "Item #%s"
 msgstr ""
 
-#: admin/themes/default/items/show.php:30
+#: admin/themes/default/items/show.php:28
 msgid "Prev Item"
 msgstr ""
 
-#: admin/themes/default/items/show.php:35
+#: admin/themes/default/items/show.php:33
 msgid "Next Item"
 msgstr ""
 
@@ -1807,7 +1803,6 @@ msgid "Add New User"
 msgstr ""
 
 #: admin/themes/default/users/add.php:13
-#: application/controllers/UsersController.php:160
 msgid "Add User"
 msgstr ""
 
@@ -1863,16 +1858,18 @@ msgid "Add a User"
 msgstr ""
 
 #: admin/themes/default/users/browse.php:20
+#: admin/themes/default/users/browse.php:36
 #: admin/themes/default/users/browse.php:47
 #: admin/themes/default/users/show.php:18 application/forms/Install.php:30
-#: application/forms/Login.php:21 application/forms/User.php:31
+#: application/forms/Login.php:21 application/forms/User.php:29
 msgid "Username"
 msgstr ""
 
 #: admin/themes/default/users/browse.php:23
+#: admin/themes/default/users/browse.php:38
 #: admin/themes/default/users/browse.php:49
 #: admin/themes/default/users/show.php:22 application/forms/Install.php:84
-#: application/forms/RecoverPassword.php:27 application/forms/User.php:98
+#: application/forms/RecoverPassword.php:27 application/forms/User.php:96
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
 msgstr ""
@@ -1881,24 +1878,13 @@ msgstr ""
 msgid "Search users"
 msgstr ""
 
-#: admin/themes/default/users/browse.php:36
-msgid "Usernames"
-msgstr ""
-
 #: admin/themes/default/users/browse.php:37
-msgid "Real names"
-msgstr ""
-
-#: admin/themes/default/users/browse.php:38
-msgid "Email addresses"
-msgstr ""
-
 #: admin/themes/default/users/browse.php:48
-#: admin/themes/default/users/show.php:20
-msgid "Real Name"
+#: admin/themes/default/users/show.php:20 application/forms/User.php:81
+msgid "Display Name"
 msgstr ""
 
-#: admin/themes/default/users/browse.php:50 application/forms/User.php:131
+#: admin/themes/default/users/browse.php:50 application/forms/User.php:129
 msgid "Role"
 msgstr ""
 
@@ -2335,7 +2321,7 @@ msgstr ""
 
 #: application/controllers/UsersController.php:110
 #: application/controllers/UsersController.php:113
-#: application/controllers/UsersController.php:382
+#: application/controllers/UsersController.php:380
 #, php-format
 msgid "%s Administrator"
 msgstr ""
@@ -2371,42 +2357,42 @@ msgstr ""
 msgid "The user \"%s\" was added, but the activation email could not be sent."
 msgstr ""
 
-#: application/controllers/UsersController.php:214
+#: application/controllers/UsersController.php:213
 msgid "User activation email has been sent."
 msgstr ""
 
-#: application/controllers/UsersController.php:216
+#: application/controllers/UsersController.php:215
 msgid "User activation email could not be sent."
 msgstr ""
 
-#: application/controllers/UsersController.php:233
-#: application/controllers/UsersController.php:284
+#: application/controllers/UsersController.php:231
+#: application/controllers/UsersController.php:282
 msgid "There was an invalid entry on the form. Please try again."
 msgstr ""
 
-#: application/controllers/UsersController.php:255
+#: application/controllers/UsersController.php:253
 #, php-format
 msgid "The user %s was successfully changed!"
 msgstr ""
 
-#: application/controllers/UsersController.php:291
+#: application/controllers/UsersController.php:289
 msgid "Password changed!"
 msgstr ""
 
-#: application/controllers/UsersController.php:313
+#: application/controllers/UsersController.php:311
 msgid "A new API key was successfully created."
 msgstr ""
 
-#: application/controllers/UsersController.php:320
+#: application/controllers/UsersController.php:318
 msgid "An existing API key was successfully rescinded."
 msgstr ""
 
-#: application/controllers/UsersController.php:347
+#: application/controllers/UsersController.php:345
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
 msgstr ""
 
-#: application/controllers/UsersController.php:353
+#: application/controllers/UsersController.php:351
 #, php-format
 msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
@@ -2414,23 +2400,23 @@ msgid ""
 "this user."
 msgstr ""
 
-#: application/controllers/UsersController.php:378
+#: application/controllers/UsersController.php:376
 msgid "Welcome!"
 msgstr ""
 
-#: application/controllers/UsersController.php:380
+#: application/controllers/UsersController.php:378
 #, php-format
 msgid ""
 "Your account for the %s repository has been created. Please click the "
 "following link to activate your account:"
 msgstr ""
 
-#: application/controllers/UsersController.php:383
+#: application/controllers/UsersController.php:381
 #, php-format
 msgid "Activate your account with the %s repository"
 msgstr ""
 
-#: application/controllers/UsersController.php:478
+#: application/controllers/UsersController.php:476
 msgid "Login information incorrect. Please try again."
 msgstr ""
 
@@ -2568,7 +2554,7 @@ msgstr ""
 msgid "must be 30 characters or fewer with no whitespace"
 msgstr ""
 
-#: application/forms/Install.php:39 application/forms/User.php:48
+#: application/forms/Install.php:39 application/forms/User.php:46
 #: application/models/User.php:189
 #, php-format
 msgid ""
@@ -2797,66 +2783,62 @@ msgstr ""
 msgid "HTML Filtering"
 msgstr ""
 
-#: application/forms/User.php:32
+#: application/forms/User.php:30
 msgid "Username must be 30 characters or fewer. Whitespace is not allowed."
 msgstr ""
 
-#: application/forms/User.php:39
+#: application/forms/User.php:37
 msgid "Username is required."
 msgstr ""
 
-#: application/forms/User.php:58
+#: application/forms/User.php:56
 msgid "Username must be at least %min% characters long."
 msgstr ""
 
-#: application/forms/User.php:60
+#: application/forms/User.php:58
 msgid "Username must be at most %max% characters long."
 msgstr ""
 
-#: application/forms/User.php:74
+#: application/forms/User.php:72
 msgid "This username is already in use."
 msgstr ""
 
-#: application/forms/User.php:83
-msgid "Display Name"
-msgstr ""
-
-#: application/forms/User.php:84
+#: application/forms/User.php:82
 msgid "Name as it should be displayed on the site"
 msgstr ""
 
-#: application/forms/User.php:90 application/models/User.php:169
+#: application/forms/User.php:88 application/models/User.php:169
 msgid "Real Name is required."
 msgstr ""
 
-#: application/forms/User.php:96
+#: application/forms/User.php:94
 msgid "This email address is invalid."
 msgstr ""
 
-#: application/forms/User.php:104
+#: application/forms/User.php:102
 msgid "Email is required."
 msgstr ""
 
-#: application/forms/User.php:123
+#: application/forms/User.php:121
 msgid "This email address is already in use."
 msgstr ""
 
-#: application/forms/User.php:132
+#: application/forms/User.php:130
 msgid ""
 "Roles describe the permissions a user has. See <a href='http://omeka.org/"
 "codex/User_Roles' target='_blank'>documentation</a> for details."
 msgstr ""
 
-#: application/forms/User.php:139
+#: application/forms/User.php:137
 msgid "Inactive users cannot log in to the site."
 msgstr ""
 
-#: application/forms/User.php:141
+#: application/forms/User.php:139
 #, php-format
 msgid "Activation has been pending since %s."
 msgstr ""
 
-#: application/forms/User.php:144
+#: application/forms/User.php:142
 msgid "Active?"
 msgstr ""
 
@@ -2998,43 +2980,43 @@ msgstr ""
 msgid "Omeka Atom Feed"
 msgstr ""
 
-#: application/libraries/globals.php:2250
+#: application/libraries/globals.php:2251
 msgid "No recent items available."
 msgstr ""
 
-#: application/libraries/globals.php:2276
+#: application/libraries/globals.php:2277
 msgid "No featured items are available."
 msgstr ""
 
-#: application/libraries/globals.php:2331
+#: application/libraries/globals.php:2332
 msgid "View"
 msgstr ""
 
-#: application/libraries/globals.php:2393
+#: application/libraries/globals.php:2394
 msgid "No Collection"
 msgstr ""
 
-#: application/libraries/globals.php:2508
+#: application/libraries/globals.php:2509
 msgid "RSS"
 msgstr ""
 
-#: application/libraries/globals.php:2525
+#: application/libraries/globals.php:2526
 msgid "Next Item &rarr;"
 msgstr ""
 
-#: application/libraries/globals.php:2545
+#: application/libraries/globals.php:2546
 msgid "&larr; Previous Item"
 msgstr ""
 
-#: application/libraries/globals.php:2722
+#: application/libraries/globals.php:2724
 msgid "Browse All"
 msgstr ""
 
-#: application/libraries/globals.php:2727
+#: application/libraries/globals.php:2729
 msgid "Browse by Tag"
 msgstr ""
 
-#: application/libraries/globals.php:3000
+#: application/libraries/globals.php:3002
 msgid "No tags are available."
 msgstr ""
 
@@ -3219,7 +3201,7 @@ msgstr ""
 msgid "[Untitled] #%s"
 msgstr ""
 
-#: application/models/Table/Item.php:161
+#: application/models/Table/Item.php:164
 msgid "Invalid search type given!"
 msgstr ""
 
@@ -3403,7 +3385,7 @@ msgstr ""
 msgid "Sort by: "
 msgstr ""
 
-#: application/views/scripts/collections/browse.php:43
+#: application/views/scripts/collections/browse.php:42
 #, php-format
 msgid "View the items in %s"
 msgstr ""
