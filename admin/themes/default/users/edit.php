@@ -26,7 +26,8 @@ echo flash();
             echo link_to($user, 'delete-confirm', __('Delete'), array('class' => 'big red button delete-confirm'));
         endif;
         ?>
-        <?php fire_plugin_hook('admin_users_panel_buttons', array('user' => $user, 'view' => $this)); ?>
+        <?php fire_plugin_hook('admin_users_panel_buttons', array('record' => $user, 'view' => $this)); ?>
+        <?php fire_plugin_hook('admin_users_panel_fields', array('record' => $user, 'view' => $this)); ?>
     </div>
 </section>
 </form>
