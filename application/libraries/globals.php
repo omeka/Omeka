@@ -3415,8 +3415,8 @@ function is_allowed($resource, $privilege)
  * Add a shortcode
  *
  * @uses Omeka_View_Helper_Shortcodes::shortcodeCallbacks()
- * @param $callback shortcode name
- * @param $function function name
+ * @param string $shortcodeName Name of the new shortcode.
+ * @param callback $function Callback to execute for this shortcode.
  */
 function add_shortcode($shortcodeName, $function)
 {
