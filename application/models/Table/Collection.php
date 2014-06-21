@@ -37,6 +37,8 @@ class Table_Collection extends Omeka_Db_Table
                 case 'range':
                     $this->filterByRange($select, $value);
                     break;
+                default:
+                    parent::applySearchFilters($select, array($key => $value));
             }
         }
     }

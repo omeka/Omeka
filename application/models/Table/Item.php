@@ -428,6 +428,8 @@ class Table_Item extends Omeka_Db_Table
                 case 'modified_since':
                     $this->filterBySince($select, $value, 'modified');
                     break;
+                default:
+                    parent::applySearchFilters($select, array($key => $value));
             }
         }
         $this->filterBySearch($select, $params);

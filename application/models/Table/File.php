@@ -59,6 +59,9 @@ class Table_File extends Omeka_Db_Table
                 case 'modified_since':
                     $this->filterBySince($select, $paramValue, 'modified');
                     break;
+
+                default:
+                    parent::applySearchFilters($select, array($key => $value));
             }
         }
     }
