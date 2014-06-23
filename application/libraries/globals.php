@@ -281,8 +281,7 @@ function get_plugin_ini($pluginDirName, $iniKeyName)
 }
 
 /**
- * Declare a callback function that will be used to display files with a given
- * MIME type and/or file extension.
+ * Declare a callback to display files with a given MIME type and/or file extension.
  *
  * @package Omeka\Function\Plugin
  * @uses Omeka_View_Helper_FileMarkup::addMimeTypes() See for info on usage.
@@ -381,8 +380,7 @@ function get_acl()
 }
 
 /**
- * Determine whether or not the script is being executed through the
- * administrative interface.
+ * Determine whether the script is being executed through the admin interface.
  *
  * Can be used to branch behavior based on whether or not the admin theme is
  * being accessed, but should not be relied upon in place of using the ACL for
@@ -1025,8 +1023,7 @@ function queue_js_url($url, $options = array())
 }
 
 /**
- * Declare a JavaScript string to be used on the page and included in the page's 
- * head.
+ * Declare a JavaScript string to be used on the page. 
  *
  * This needs to be called either before head() or in a plugin_header hook.
  *
@@ -1068,8 +1065,7 @@ function queue_css_file($file, $media = 'all', $conditional = false, $dir = 'css
 }
 
 /**
- * Declare a URL to a stylesheet to be used on the page and included in the
- * page's head.
+ * Declare a URL to a stylesheet to be used on the page.
  *
  * This needs to be called either before head() or in a plugin_header hook.
  *
@@ -1218,8 +1214,7 @@ function src($file, $dir = null, $ext = null)
 }
 
 /**
- * Return the physical path for an asset/resource within the theme (or plugins, 
- * shared, etc.)
+ * Return the physical path for an asset/resource. 
  *
  * @package Omeka\Function\View\Asset
  * @throws InvalidArgumentException
@@ -1319,8 +1314,7 @@ function get_random_featured_collection()
 }
 
 /**
- * Return the latest available version of Omeka by accessing the appropriate
- * URI on omeka.org.
+ * Return the latest available version of Omeka.
  *
  * @package Omeka\Function\Utility
  * @return string|false The latest available version of Omeka, or false if the
@@ -1614,8 +1608,7 @@ function auto_discovery_link_tags() {
 }
 
 /**
- * Return HTML from a file in the common/ directory, passing variables into that 
- * script.
+ * Return HTML from a file in the common/ directory. 
  *
  * @package Omeka\Function\View\Layout
  * @uses Zend_View_Helper_Partial::partial()
@@ -1669,8 +1662,7 @@ function flash()
 }
 
 /**
- * Return the value of a particular site setting.  This can be used to display
- * any option that would be retrieved with get_option().
+ * Return the value of a particular site setting.
  *
  * Content for any specific option can be filtered by using a filter named
  * 'display_option_(option)' where (option) is the name of the option, e.g.
@@ -1850,8 +1842,7 @@ function get_current_action_contexts()
 }
 
 /**
- * Return an HTML list containing all available output format contexts for the
- * current action.
+ * Return an HTML list containing output format contexts for the current action.
  *
  * @package Omeka\Function\View\OutputFormat
  * @uses get_current_action_contexts()
