@@ -7,11 +7,6 @@ php:
 env:
   - DB=mysql
 
-install:
-  - pear config-set auto_discover 1
-  - if [ "${TRAVIS_PHP_VERSION:0:3}" != "5.2" ]; then pear install pear.phpunit.de/PHPUnit-3.7.35; fi
-  - phpenv rehash
-
 before_script:
   - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS omeka_test;" -uroot; fi
   - mv application/config/config.ini.changeme application/config/config.ini
