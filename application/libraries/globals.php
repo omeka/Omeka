@@ -301,6 +301,7 @@ function add_file_display_callback($fileIdentifiers, $callback, array $options =
  * The fallback is used when there are no generated derivative images and one
  * is requested (for example, by a call to file_image()).
  *
+ * @since 2.2
  * @package Omeka\Function\Plugin
  * @uses Omeka_View_Helper_FileMarkup::addFallbackImage()
  * @param string $mimeType The mime type this fallback is for, or the mime
@@ -1711,6 +1712,7 @@ function get_records($recordType, $params = array(), $limit = 10)
 /**
  * Get a single record from the database.
  *
+ * @since 2.1
  * @package Omeka\Function\Db
  * @uses Omeka_Db_Table::findBy
  * @param string $recordType Type of records to get.
@@ -2075,7 +2077,7 @@ function get_previous_item($item = null)
 }
 
 /**
- * Return an image tag for a record.
+ * Get an image tag for a record.
  *
  * @package Omeka\Function\View
  * @throws InvalidArgumentException If an invalid record is passed.
@@ -2124,6 +2126,7 @@ function item_image($imageType, $props = array(), $index = 0, $item = null)
 /**
  * Get a customized file image tag.
  *
+ * @since 2.2
  * @package Omeka\Function\View\File
  * @uses Omeka_View_Helper_FileMarkup::image_tag()
  * @param string $imageType Image size: thumbnail, square thumbnail, fullsize
@@ -2250,6 +2253,7 @@ function get_random_featured_items($num = 5, $hasImage = null)
 /**
  * Get HTML for recent items.
  *
+ * @since 2.2
  * @package Omeka\Function\View\Item
  * @uses get_random_featured_items()
  * @param int $count Maximum number of recent items to show.
@@ -3429,6 +3433,7 @@ function is_allowed($resource, $privilege)
 /**
  * Add a shortcode.
  *
+ * @since 2.2
  * @package Omeka\Function\View
  * @uses Omeka_View_Helper_Shortcodes::shortcodeCallbacks()
  * @param string $shortcodeName Name of the new shortcode.
