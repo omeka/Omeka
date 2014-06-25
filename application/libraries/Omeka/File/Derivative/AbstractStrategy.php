@@ -8,6 +8,8 @@
 
 /**
  * Abstract class for pluggable file derivative creation strategies.
+ *
+ * @package Omeka\File\Derivative\Strategy
  */
 abstract class Omeka_File_Derivative_AbstractStrategy
     implements Omeka_File_Derivative_StrategyInterface

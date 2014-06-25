@@ -8,6 +8,8 @@
 
 /**
  * Interface for pluggable file derivative creation strategies.
+ *
+ * @package Omeka\File\Derivative\Strategy
  */
 interface Omeka_File_Derivative_StrategyInterface
 {
