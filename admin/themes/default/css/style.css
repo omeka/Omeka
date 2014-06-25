@@ -718,12 +718,10 @@ header nav {
     box-shadow: 1px 1px 3px rgba(0,0,0,.5);
     word-wrap: break-word;
     text-shadow: -1px -1px 1px rgba(0,0,0,1);
-    overflow: hidden;
-    position: relative;
     z-index: 1000;
 }
     
-    #content-nav li:hover, #content-nav li:active {
+    #content-nav li:hover {
         background-image: url('../images/navbg-gray2.jpg');
     }
                 
@@ -740,15 +738,10 @@ header nav {
         text-shadow: -1px -1px 1px rgba(0,0,0,.75)
     }
         
-#content-nav .active {
+#content-nav .active, #content-nav .active:hover {
     background-image: url('../images/navbg-blue.jpg');
-    position: relative;
 }
-    
-    #content-nav .active:hover, #content-nav .active:active {
-        background-image: url('../images/navbg-blue.jpg');
-    }
-    
+
     #content-nav .active a {
         background-color: transparent;
     }
