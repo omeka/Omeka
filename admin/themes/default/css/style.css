@@ -223,33 +223,6 @@ img { border: 0; }
     input.color {
         font-family: monospace;
     }
-
-    select {
-        min-width: 120px;
-        background: #e2e2e2; /* Fallback */
-        background: url('../images/dropdown-arrow.png') no-repeat right center #f8f8f8; /* Fallback */
-        background: url('../images/dropdown-arrow.png') no-repeat right center, -webkit-linear-gradient(top, #f8f8f8, #e2e2e2);
-        background: url('../images/dropdown-arrow.png') no-repeat right center, -moz-linear-gradient(top, #f8f8f8, #e2e2e2);
-        background: url('../images/dropdown-arrow.png') no-repeat right center, -o-linear-gradient(top, #f8f8f8, #e2e2e2);
-        background: url('../images/dropdown-arrow.png') no-repeat right center, linear-gradient(to bottom, #f8f8f8, #e2e2e2);
-        border: 1px solid #D8D8D8;
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;
-        border-radius: 0;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
-        -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
-        box-shadow: 1px 1px 2px rgba(0,0,0,.1), 0 -1px 0 0 rgba(0,0,0,.07) inset;
-        color: #666666;
-        overflow: hidden;
-        padding: 5px 16px;
-        margin-left: 0;
-    }
-
-    select::-ms-expand {
-        display: none;
-    }
         
     input[type=text], input[type=password] {
         height: 30px;

@@ -36,7 +36,7 @@
     padding: 0 1em 0 0;
     font-family:Arvo, serif !important; /* Ensure unform font family across themes.*/
     font-size:1em; /* Ensure uniform font size across themes. */
-    text-decoration: 0;
+    display: inline-block;
     border: 0;
 }
 
