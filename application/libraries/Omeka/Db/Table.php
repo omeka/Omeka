@@ -361,13 +361,14 @@ class Omeka_Db_Table
      */
     public function applySearchFilters($select, $params)
     {
+        $alias = $this->getTableAlias();
         $columns = $this->getColumns();
         foreach($columns as $column) {
             if(array_key_exists($column, $params)) {
                 if (is_array($params[$column])) {
-                    $select->where("$column IN (?)", $params[$column]);
+                    $select->where("`$alias`.`$column` IN (?)", $params[$column]);
                 } else {
-                    $select->where("$column = ?", $params[$column]);
+                    $select->where("`$alias`.`$column` = ?", $params[$column]);
                 }
             }
         }
