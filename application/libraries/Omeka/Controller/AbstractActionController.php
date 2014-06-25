@@ -68,7 +68,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
      *
      * Using this action requires some setup:
      * 
-     * - In your controller's ``init()``, set the default model name: 
+     * - In your controller's ``init()``, set the default model name 
      *     ``$this->_helper->db->setDefaultModelName('YourRecord');``
      * - In your controller, set the records per page and return them using: 
      *     ``protected function _getBrowseRecordsPerPage();``
