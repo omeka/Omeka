@@ -8,6 +8,8 @@
 
 /**
  * HTML5 input form element
+ * 
+ * @package Omeka\Form
  */
 class Omeka_Form_Element_Input extends Zend_Form_Element_Xhtml
 {

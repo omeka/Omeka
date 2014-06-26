@@ -13,6 +13,8 @@
  * This has to be done here because Zend allows header duplication, the
  * output contexts don't overwrite headers of the same name, and some servers
  * (FastCGI) choke when they see two Content-Type headers.
+ * 
+ * @package Omeka\Controller\Plugin
  */
 class Omeka_Controller_Plugin_DefaultContentType extends Zend_Controller_Plugin_Abstract
 {
