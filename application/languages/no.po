@@ -4,8 +4,8 @@
 # 
 # Translators:
 # Benjamin <benjamin@deichman.no>, 2012
-# Petter Goksøyr Åsen <boutrosboutrosboutros@gmail.com>, 2013
-# Petter Goksøyr Åsen <boutrosboutrosboutros@gmail.com>, 2012
+# boutrosboutrosboutros <boutrosboutrosboutros@gmail.com>, 2013
+# boutrosboutrosboutros <boutrosboutrosboutros@gmail.com>, 2012
 # heidig <heidi.grytten@kul.oslo.kommune.no>, 2012
 # Vidar Krumins <vidar@biblioteksvar.no>, 2012
 msgid ""
@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2014-01-31 18:39+0000\n"
+"PO-Revision-Date: 2014-06-09 19:07+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Norwegian (http://www.transifex.com/projects/p/omeka/language/no/)\n"
 "MIME-Version: 1.0\n"
@@ -32,8 +32,10 @@ msgstr "Dublin Core er et metadatasett som er felles for alle Omeka-ressurser, i
 #. Dublin Core: Title element name
 #: admin/themes/default/collections/browse.php:22
 #: admin/themes/default/items/browse.php:40
+#: admin/themes/default/search/index.php:13
+#: application/views/scripts/collections/browse.php:10
 #: application/views/scripts/items/browse.php:19
-#: application/views/scripts/search/index.php:13
+#: application/views/scripts/search/index.php:14
 msgid "Title"
 msgstr "Tittel"
 
@@ -65,7 +67,6 @@ msgstr "Ressursens tema"
 #: admin/themes/default/item-types/show.php:14
 #: admin/themes/default/settings/edit-item-type-elements.php:27
 #: application/forms/ItemTypes.php:150
-#: application/views/scripts/collections/browse.php:17
 msgid "Description"
 msgstr "Beskrivelse"
 
@@ -345,7 +346,8 @@ msgstr "Legg til navigasjonslink"
 
 #: admin/themes/default/appearance/edit-navigation.php:21
 #: admin/themes/default/appearance/edit-navigation.php:37
-#: admin/themes/default/users/edit.php:50 application/forms/Navigation.php:132
+#: admin/themes/default/users/api-keys.php:40
+#: application/forms/Navigation.php:132
 msgid "Label"
 msgstr "Etikett"
 
@@ -363,18 +365,17 @@ msgstr "Legg til link"
 #: admin/themes/default/appearance/edit-settings.php:21
 #: admin/themes/default/collections/edit.php:22
 #: admin/themes/default/element-sets/edit.php:41
-#: admin/themes/default/files/edit.php:30
+#: admin/themes/default/files/edit.php:35
 #: admin/themes/default/items/batch-edit.php:130
 #: admin/themes/default/items/edit.php:19
 #: admin/themes/default/plugins/config.php:14
-#: admin/themes/default/settings/edit-api.php:68
+#: admin/themes/default/settings/edit-api.php:81
 #: admin/themes/default/settings/edit-item-type-elements.php:38
 #: admin/themes/default/settings/edit-search.php:40
 #: admin/themes/default/settings/edit-security.php:15
 #: admin/themes/default/settings/edit-settings.php:15
 #: admin/themes/default/themes/config.php:16
-#: application/controllers/UsersController.php:206
-#: application/forms/ItemTypes.php:169
+#: admin/themes/default/users/edit.php:21 application/forms/ItemTypes.php:169
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:73
 msgid "Save Changes"
 msgstr "Lagre endringer"
@@ -393,7 +394,7 @@ msgstr "Se offentlig side"
 #: admin/themes/default/collections/edit.php:24
 #: admin/themes/default/collections/show.php:36
 #: admin/themes/default/element-sets/browse.php:29
-#: admin/themes/default/files/edit.php:32
+#: admin/themes/default/files/edit.php:37
 #: admin/themes/default/files/show.php:30
 #: admin/themes/default/item-types/edit.php:20
 #: admin/themes/default/item-types/show.php:54
@@ -405,15 +406,15 @@ msgstr "Se offentlig side"
 #: admin/themes/default/items/show.php:47
 #: admin/themes/default/settings/edit-item-type-elements.php:23
 #: admin/themes/default/users/browse.php:66
-#: admin/themes/default/users/edit.php:17
-#: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:82
+#: admin/themes/default/users/edit.php:26
+#: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:83
 msgid "Delete"
 msgstr "Slett"
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:11
-#: admin/themes/default/collections/browse.php:64
-#: admin/themes/default/collections/browse.php:73
+#: admin/themes/default/collections/browse.php:67
+#: admin/themes/default/collections/browse.php:76
 msgid "Add a Collection"
 msgstr "Legg til en samling"
 
@@ -457,8 +458,10 @@ msgstr "Søk i samlinger"
 #: admin/themes/default/item-types/browse.php:2
 #: admin/themes/default/items/browse.php:3
 #: admin/themes/default/plugins/browse.php:2
+#: admin/themes/default/search/index.php:2
 #: admin/themes/default/tags/browse.php:12
 #: admin/themes/default/users/browse.php:2
+#: application/views/scripts/collections/browse.php:6
 #: application/views/scripts/items/browse.php:6
 #: application/views/scripts/search/index.php:2
 #, php-format
@@ -467,13 +470,14 @@ msgstr "(%s totalt)"
 
 #: admin/themes/default/collections/browse.php:23
 #: admin/themes/default/collections/show.php:51
-#: application/views/scripts/collections/browse.php:24
+#: application/views/scripts/collections/browse.php:36
 msgid "Contributors"
 msgstr "Bidragsytere"
 
 #: admin/themes/default/collections/browse.php:24
 #: admin/themes/default/files/show.php:66
 #: admin/themes/default/items/browse.php:43
+#: application/views/scripts/collections/browse.php:11
 #: application/views/scripts/items/browse.php:21
 msgid "Date Added"
 msgstr "Lagt til dato"
@@ -484,12 +488,12 @@ msgstr "Lagt til dato"
 msgid "Total Number of Items"
 msgstr "Totalt antall ressurser"
 
-#: admin/themes/default/collections/browse.php:37
+#: admin/themes/default/collections/browse.php:40
 #: admin/themes/default/items/browse.php:72
 msgid "(Private)"
 msgstr "(Privat)"
 
-#: admin/themes/default/collections/browse.php:40
+#: admin/themes/default/collections/browse.php:43
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:27
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
@@ -500,36 +504,36 @@ msgstr "(Privat)"
 #: admin/themes/default/items/browse.php:24
 #: admin/themes/default/items/browse.php:77
 #: admin/themes/default/items/browse.php:120
-#: admin/themes/default/items/files-form.php:11
+#: admin/themes/default/items/files-form.php:12
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:63
 msgid "Edit"
 msgstr "Endre"
 
-#: admin/themes/default/collections/browse.php:49
+#: admin/themes/default/collections/browse.php:52
 msgid "No contributors"
 msgstr "Ingen bidragsytere"
 
-#: admin/themes/default/collections/browse.php:67
+#: admin/themes/default/collections/browse.php:70
 msgid "There are no collections on this page."
 msgstr "Det er ingen samlinger på denne siden."
 
-#: admin/themes/default/collections/browse.php:67
+#: admin/themes/default/collections/browse.php:70
 msgid "View All Collections"
 msgstr "Se alle samlingene"
 
-#: admin/themes/default/collections/browse.php:70
+#: admin/themes/default/collections/browse.php:73
 msgid "You have no collections."
 msgstr "Du har ingen samlinger."
 
-#: admin/themes/default/collections/browse.php:72
+#: admin/themes/default/collections/browse.php:75
 msgid "Get started by adding your first collection."
 msgstr "Kom i gang med å lage din første samling."
 
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/libraries/globals.php:2504
+#: application/libraries/globals.php:2574
 #: application/views/scripts/collections/show.php:4
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
@@ -547,7 +551,7 @@ msgstr "Samling #%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
-#: application/views/scripts/index.php:37
+#: application/views/scripts/index.php:40
 msgid "Recently Added Items"
 msgstr "Nylige ressurser lagt til"
 
@@ -681,6 +685,7 @@ msgid "Log Out"
 msgstr "Logg ut"
 
 #: admin/themes/default/common/settings-nav.php:6
+#: admin/themes/default/common/users-nav.php:5
 msgid "General"
 msgstr "Generelt"
 
@@ -690,8 +695,8 @@ msgstr "Sikkerthet"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: application/views/helpers/SearchForm.php:34
-#: application/views/scripts/items/search-form.php:189
 #: application/views/scripts/search/search-form.php:2
+#: application/views/scripts/search/search-form.php:22
 msgid "Search"
 msgstr "Søk"
 
@@ -705,6 +710,16 @@ msgstr "Ressurstype elementer"
 
 #: admin/themes/default/common/settings-nav.php:32
 msgid "API"
+msgstr ""
+
+#: admin/themes/default/common/users-nav.php:11
+#: application/forms/ChangePassword.php:78
+msgid "Change Password"
+msgstr "Endre passord"
+
+#: admin/themes/default/common/users-nav.php:17
+#: admin/themes/default/users/api-keys.php:14
+msgid "API Keys"
 msgstr ""
 
 #: admin/themes/default/element-sets/browse.php:16
@@ -800,7 +815,7 @@ msgid "File #%s"
 msgstr "Fil #%s"
 
 #: admin/themes/default/files/show.php:35
-#: application/libraries/globals.php:398
+#: application/libraries/globals.php:416
 msgid "Item"
 msgstr "Element"
 
@@ -970,7 +985,9 @@ msgid "Item Type Information"
 msgstr "Informasjon om ressurstype"
 
 #: admin/themes/default/item-types/form.php:15
-#: admin/themes/default/users/add.php:6 admin/themes/default/users/edit.php:14
+#: admin/themes/default/users/add.php:7
+#: admin/themes/default/users/change-password.php:15
+#: admin/themes/default/users/edit.php:15
 #: install/views/scripts/index/index.phtml:14
 msgid "required field"
 msgstr "påkrevd felt"
@@ -1028,7 +1045,7 @@ msgstr "Legg til ressurs"
 #: admin/themes/default/items/browse.php:90
 #: admin/themes/default/items/edit.php:41
 #: admin/themes/default/items/show.php:57
-#: application/libraries/globals.php:400
+#: application/libraries/globals.php:418
 #: application/views/scripts/items/show.php:18
 msgid "Collection"
 msgstr "Samling"
@@ -1155,8 +1172,8 @@ msgstr "Bla i ressurser"
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2280
-#: application/libraries/globals.php:2663
+#: application/libraries/globals.php:2350
+#: application/libraries/globals.php:2734
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Søk etter elementer"
@@ -1212,20 +1229,20 @@ msgstr "Endre ressurs #%s"
 msgid "Click and drag the files into the preferred display order."
 msgstr "Klikk og dra filene i den rekkefølgen du vil ha dem i."
 
-#: admin/themes/default/items/files-form.php:12
+#: admin/themes/default/items/files-form.php:13
 msgid "Delete "
 msgstr "Slett"
 
-#: admin/themes/default/items/files-form.php:21
+#: admin/themes/default/items/files-form.php:22
 msgid "Add New Files"
 msgstr "Legg til en ny fil"
 
-#: admin/themes/default/items/files-form.php:23
+#: admin/themes/default/items/files-form.php:24
 #, php-format
 msgid "The maximum file size is %s."
 msgstr "Maks filstørrelse er %s."
 
-#: admin/themes/default/items/files-form.php:26
+#: admin/themes/default/items/files-form.php:27
 msgid "Find a File"
 msgstr "Finn en fil"
 
@@ -1250,102 +1267,123 @@ msgstr "Vis alle"
 msgid "Private"
 msgstr "Privat"
 
-#: admin/themes/default/items/search-form.php:13
+#: admin/themes/default/items/search-form.php:14
 #: application/views/scripts/items/search-form.php:13
 msgid "Search for Keywords"
 msgstr "Søk etter nøkkelord"
 
-#: admin/themes/default/items/search-form.php:26
+#: admin/themes/default/items/search-form.php:27
 #: application/views/scripts/items/search-form.php:25
 msgid "Narrow by Specific Fields"
 msgstr "Begrens ved spesifikke feilter"
 
-#: admin/themes/default/items/search-form.php:27
-#: application/views/scripts/items/search-form.php:80
+#: admin/themes/default/items/search-form.php:28
+#: application/views/scripts/items/search-form.php:90
 msgid "Add a Field"
 msgstr "Legg til et felt"
 
-#: admin/themes/default/items/search-form.php:63
-#: application/views/scripts/items/search-form.php:60
+#: admin/themes/default/items/search-form.php:54
+#: application/views/scripts/items/search-form.php:50
+msgid "Search Field"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:67
+#: application/views/scripts/items/search-form.php:63
+msgid "Search Type"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:72
+#: application/views/scripts/items/search-form.php:68
 msgid "contains"
 msgstr "inneholder"
 
-#: admin/themes/default/items/search-form.php:64
-#: application/views/scripts/items/search-form.php:61
+#: admin/themes/default/items/search-form.php:73
+#: application/views/scripts/items/search-form.php:69
 msgid "does not contain"
 msgstr "inneholder ikke"
 
-#: admin/themes/default/items/search-form.php:65
-#: application/views/scripts/items/search-form.php:62
+#: admin/themes/default/items/search-form.php:74
+#: application/views/scripts/items/search-form.php:70
 msgid "is exactly"
 msgstr "er nøyaktig"
 
-#: admin/themes/default/items/search-form.php:66
-#: application/views/scripts/items/search-form.php:63
+#: admin/themes/default/items/search-form.php:75
+#: application/views/scripts/items/search-form.php:71
 msgid "is empty"
 msgstr "er tom"
 
-#: admin/themes/default/items/search-form.php:67
-#: application/views/scripts/items/search-form.php:64
+#: admin/themes/default/items/search-form.php:76
+#: application/views/scripts/items/search-form.php:72
 msgid "is not empty"
 msgstr "er  ikke tom"
 
 #: admin/themes/default/items/search-form.php:84
-#: application/views/scripts/items/search-form.php:84
+#: application/views/scripts/items/search-form.php:80
+msgid "Search Terms"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:90
+#: application/views/scripts/items/search-form.php:86
+msgid "Remove field"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:98
+#: application/views/scripts/items/search-form.php:94
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
 msgstr "Søk i ID#-intervall (for eksempel: 1-4, 156, 79)"
 
-#: admin/themes/default/items/search-form.php:98
-#: application/views/scripts/items/search-form.php:95
+#: admin/themes/default/items/search-form.php:112
+#: application/views/scripts/items/search-form.php:105
 msgid "Search By Collection"
 msgstr "Søk etter samling"
 
-#: admin/themes/default/items/search-form.php:114
-#: application/views/scripts/items/search-form.php:109
+#: admin/themes/default/items/search-form.php:128
+#: application/views/scripts/items/search-form.php:119
 msgid "Search By Type"
 msgstr "Søk etter type"
 
-#: admin/themes/default/items/search-form.php:131
-#: application/views/scripts/items/search-form.php:125
+#: admin/themes/default/items/search-form.php:145
+#: application/views/scripts/items/search-form.php:135
 msgid "Search By User"
 msgstr "Søk etter bruker"
 
-#: admin/themes/default/items/search-form.php:148
-#: application/views/scripts/items/search-form.php:140
+#: admin/themes/default/items/search-form.php:162
+#: application/views/scripts/items/search-form.php:150
 msgid "Search By Tags"
 msgstr "Søk etter stikkord"
 
-#: admin/themes/default/items/search-form.php:163
-#: application/views/scripts/items/search-form.php:153
+#: admin/themes/default/items/search-form.php:177
+#: application/views/scripts/items/search-form.php:163
 msgid "Public/Non-Public"
 msgstr "Vises/Vises ikke"
 
-#: admin/themes/default/items/search-form.php:172
-#: application/views/scripts/items/search-form.php:161
+#: admin/themes/default/items/search-form.php:186
+#: application/views/scripts/items/search-form.php:171
 msgid "Only Public Items"
 msgstr "Kun bilder som vises"
 
-#: admin/themes/default/items/search-form.php:173
-#: application/views/scripts/items/search-form.php:162
+#: admin/themes/default/items/search-form.php:187
+#: application/views/scripts/items/search-form.php:172
 msgid "Only Non-Public Items"
 msgstr "Kun bilder som ikke vises"
 
-#: admin/themes/default/items/search-form.php:183
-#: application/views/scripts/items/search-form.php:171
+#: admin/themes/default/items/search-form.php:197
+#: application/views/scripts/items/search-form.php:181
 msgid "Featured/Non-Featured"
 msgstr "Utvalgt/Ikke-utvalgt"
 
-#: admin/themes/default/items/search-form.php:192
-#: application/views/scripts/items/search-form.php:179
+#: admin/themes/default/items/search-form.php:206
+#: application/views/scripts/items/search-form.php:189
 msgid "Only Featured Items"
 msgstr "Bare utvalgte elementer"
 
-#: admin/themes/default/items/search-form.php:193
-#: application/views/scripts/items/search-form.php:180
+#: admin/themes/default/items/search-form.php:207
+#: application/views/scripts/items/search-form.php:190
 msgid "Only Non-Featured Items"
 msgstr "Bare ikke-utvalgte elementer"
 
-#: admin/themes/default/items/search-form.php:203
+#: admin/themes/default/items/search-form.php:215
+#: application/views/scripts/items/search-form.php:199
 msgid "Search for items"
 msgstr "Søk etter elementer"
 
@@ -1354,11 +1392,11 @@ msgstr "Søk etter elementer"
 msgid "Item #%s"
 msgstr "Ressurs #%s"
 
-#: admin/themes/default/items/show.php:30
+#: admin/themes/default/items/show.php:28
 msgid "Prev Item"
 msgstr "Forrige element"
 
-#: admin/themes/default/items/show.php:35
+#: admin/themes/default/items/show.php:33
 msgid "Next Item"
 msgstr "Neste element"
 
@@ -1446,7 +1484,7 @@ msgstr "Deaktiver"
 
 #: admin/themes/default/plugins/browse.php:106
 #: admin/themes/default/users/activate.php:31
-#: application/views/scripts/users/activate.php:26
+#: application/views/scripts/users/activate.php:27
 msgid "Activate"
 msgstr "Aktiver"
 
@@ -1456,7 +1494,7 @@ msgid "Uninstall"
 msgstr "Avinstaller"
 
 #: admin/themes/default/plugins/browse.php:129
-#: application/forms/Install.php:167
+#: application/forms/Install.php:178
 msgid "Install"
 msgstr "Installer"
 
@@ -1494,6 +1532,22 @@ msgstr "eller"
 msgid "Cancel"
 msgstr "Avbryt"
 
+#: admin/themes/default/search/index.php:2
+#: application/views/scripts/search/index.php:2
+msgid "Search Omeka "
+msgstr "Søk i Omeka"
+
+#: admin/themes/default/search/index.php:12
+#: admin/themes/default/tags/browse.php:18
+#: application/views/scripts/search/index.php:13
+msgid "Record Type"
+msgstr "Objekttype"
+
+#: admin/themes/default/search/index.php:39
+#: application/views/scripts/search/index.php:40
+msgid "Your query returned no results."
+msgstr "Spørringen ga ingen resultater."
+
 #: admin/themes/default/settings/edit-api.php:11
 msgid "Enable API"
 msgstr ""
@@ -1503,14 +1557,25 @@ msgid "Enable or disable the API by checking or uncheking the box below."
 msgstr ""
 
 #: admin/themes/default/settings/edit-api.php:22
-msgid "Results per Page"
+msgid "Filter Element Texts"
 msgstr ""
 
 #: admin/themes/default/settings/edit-api.php:26
+msgid ""
+"Filter element texts by checking the box below. When checked, the API will "
+"respect the display element and element text filters when outputting element"
+" text representations."
+msgstr ""
+
+#: admin/themes/default/settings/edit-api.php:35
+msgid "Results per Page"
+msgstr ""
+
+#: admin/themes/default/settings/edit-api.php:39
 msgid "Maximum number of API results displayed per page."
 msgstr ""
 
-#: admin/themes/default/settings/edit-api.php:32
+#: admin/themes/default/settings/edit-api.php:45
 #, php-format
 msgid ""
 "After enabling the API, applications may be able to show, browse, add, edit,"
@@ -1598,11 +1663,6 @@ msgstr "Redigere stikkord"
 #: admin/themes/default/tags/browse.php:9
 msgid "Browse Tags"
 msgstr ""
-
-#: admin/themes/default/tags/browse.php:18
-#: application/views/scripts/search/index.php:12
-msgid "Record Type"
-msgstr "Objekttype"
 
 #: admin/themes/default/tags/browse.php:24
 msgid "Editing Tags"
@@ -1734,19 +1794,66 @@ msgstr "Brukeraktivering"
 
 #: admin/themes/default/users/activate.php:18
 #: application/forms/ResetPassword.php:23
-#: application/views/scripts/users/activate.php:13
+#: application/views/scripts/users/activate.php:14
 msgid "Create a Password"
 msgstr "Lag et passord"
 
-#: admin/themes/default/users/activate.php:24 application/forms/Install.php:60
+#: admin/themes/default/users/activate.php:24 application/forms/Install.php:71
 #: application/forms/ResetPassword.php:44
-#: application/views/scripts/users/activate.php:19
+#: application/views/scripts/users/activate.php:20
 msgid "Re-type the Password"
 msgstr "Skriv inn passordet på nytt"
 
 #: admin/themes/default/users/add.php:2
 msgid "Add New User"
 msgstr "Legg til ny bruker"
+
+#: admin/themes/default/users/add.php:13
+msgid "Add User"
+msgstr "Legg til bruker"
+
+#: admin/themes/default/users/api-keys.php:8
+#: admin/themes/default/users/change-password.php:8
+#: admin/themes/default/users/edit.php:8
+#, php-format
+msgid "Edit User #%s"
+msgstr "Rediger bruker #%s"
+
+#: admin/themes/default/users/api-keys.php:17
+msgid "New key label"
+msgstr ""
+
+#: admin/themes/default/users/api-keys.php:21
+msgid ""
+"To create a new API key, enter a label for the key below. For example, "
+"describe for what purpose it will be used. This key will have all your "
+"permissions; treat it as you would your password."
+msgstr ""
+
+#: admin/themes/default/users/api-keys.php:31
+msgid "You have no API keys. Use the form above to create one."
+msgstr ""
+
+#: admin/themes/default/users/api-keys.php:33
+#, php-format
+msgid "%s has no API keys. Use the form above to create one."
+msgstr ""
+
+#: admin/themes/default/users/api-keys.php:41
+msgid "Key"
+msgstr ""
+
+#: admin/themes/default/users/api-keys.php:42
+msgid "Last IP"
+msgstr ""
+
+#: admin/themes/default/users/api-keys.php:43
+msgid "Last accessed"
+msgstr ""
+
+#: admin/themes/default/users/api-keys.php:44
+msgid "Rescind"
+msgstr ""
 
 #: admin/themes/default/users/browse.php:2
 msgid "Browse Users"
@@ -1757,6 +1864,7 @@ msgid "Add a User"
 msgstr "Legg til en bruker"
 
 #: admin/themes/default/users/browse.php:20
+#: admin/themes/default/users/browse.php:36
 #: admin/themes/default/users/browse.php:47
 #: admin/themes/default/users/show.php:18 application/forms/Install.php:30
 #: application/forms/Login.php:21 application/forms/User.php:29
@@ -1764,9 +1872,10 @@ msgid "Username"
 msgstr "Brukernavn"
 
 #: admin/themes/default/users/browse.php:23
+#: admin/themes/default/users/browse.php:38
 #: admin/themes/default/users/browse.php:49
-#: admin/themes/default/users/show.php:22 application/forms/Install.php:73
-#: application/forms/RecoverPassword.php:27 application/forms/User.php:95
+#: admin/themes/default/users/show.php:22 application/forms/Install.php:84
+#: application/forms/RecoverPassword.php:27 application/forms/User.php:96
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
 msgstr "E-postadresse"
@@ -1775,24 +1884,13 @@ msgstr "E-postadresse"
 msgid "Search users"
 msgstr ""
 
-#: admin/themes/default/users/browse.php:36
-msgid "Usernames"
-msgstr ""
-
 #: admin/themes/default/users/browse.php:37
-msgid "Real names"
-msgstr ""
-
-#: admin/themes/default/users/browse.php:38
-msgid "Email addresses"
-msgstr ""
-
 #: admin/themes/default/users/browse.php:48
-#: admin/themes/default/users/show.php:20
-msgid "Real Name"
-msgstr "Virkelige navn"
+#: admin/themes/default/users/show.php:20 application/forms/User.php:81
+msgid "Display Name"
+msgstr "Visningsnavn"
 
-#: admin/themes/default/users/browse.php:50 application/forms/User.php:128
+#: admin/themes/default/users/browse.php:50 application/forms/User.php:129
 msgid "Role"
 msgstr "Rolle"
 
@@ -1800,49 +1898,12 @@ msgstr "Rolle"
 msgid "inactive"
 msgstr "inaktiv"
 
-#: admin/themes/default/users/edit.php:8
-#, php-format
-msgid "Edit User #%s"
-msgstr "Rediger bruker #%s"
+#: admin/themes/default/users/change-password.php:20
+msgid "Save Password"
+msgstr "Lagre passord"
 
-#: admin/themes/default/users/edit.php:24
-msgid "API Keys"
-msgstr ""
-
-#: admin/themes/default/users/edit.php:27
-msgid "New key label"
-msgstr ""
-
-#: admin/themes/default/users/edit.php:31
-msgid ""
-"To create a new API key, enter a label for the key below. For example, "
-"describe for what purpose it will be used. This key will have all your "
-"permissions; treat it as you would your password."
-msgstr ""
-
-#: admin/themes/default/users/edit.php:41
-msgid "You have no API keys. Use the form above to create one."
-msgstr ""
-
-#: admin/themes/default/users/edit.php:43
-#, php-format
-msgid "%s has no API keys. Use the form above to create one."
-msgstr ""
-
-#: admin/themes/default/users/edit.php:51
-msgid "Key"
-msgstr ""
-
-#: admin/themes/default/users/edit.php:52
-msgid "Last IP"
-msgstr ""
-
-#: admin/themes/default/users/edit.php:53
-msgid "Last accessed"
-msgstr ""
-
-#: admin/themes/default/users/edit.php:54
-msgid "Rescind"
+#: admin/themes/default/users/edit.php:23
+msgid "Resend Activation Email"
 msgstr ""
 
 #: admin/themes/default/users/forgot-password.php:2
@@ -1999,44 +2060,52 @@ msgid ""
 "your new item type."
 msgstr "Ressurstypen \"%s\" ble lagt til!  Du kan nå legge til nye elementer til din nye ressurstype."
 
-#: application/controllers/ItemsController.php:95
+#: application/controllers/ItemsController.php:85
+#: application/controllers/ItemsController.php:145
+msgid ""
+"The ImageMagick directory path has not been set. No derivative images will "
+"be created. If you would like Omeka to create derivative images, please set "
+"the path in Settings."
+msgstr ""
+
+#: application/controllers/ItemsController.php:94
 #, php-format
 msgid "The item \"%s\" was successfully added!"
 msgstr "Ressursen \"%s\" er nå lagt til."
 
-#: application/controllers/ItemsController.php:97
+#: application/controllers/ItemsController.php:96
 #, php-format
 msgid "The item #%s was successfully added!"
 msgstr "Ressursen #%s er nå lagt til."
 
-#: application/controllers/ItemsController.php:105
+#: application/controllers/ItemsController.php:104
 #, php-format
 msgid "The item \"%s\" was successfully changed!"
 msgstr "Ressursen \"%s\" er nå endret."
 
-#: application/controllers/ItemsController.php:107
+#: application/controllers/ItemsController.php:106
 #, php-format
 msgid "The item #%s was successfully changed!"
 msgstr "Ressursen #%s er nå endret."
 
-#: application/controllers/ItemsController.php:115
+#: application/controllers/ItemsController.php:114
 #, php-format
 msgid "The item \"%s\" was successfully deleted!"
 msgstr "Ressursen \"%s\" er nå slettet."
 
-#: application/controllers/ItemsController.php:117
+#: application/controllers/ItemsController.php:116
 #, php-format
 msgid "The item #%s was successfully deleted!"
 msgstr "Ressursen #%s er nå slettet."
 
-#: application/controllers/ItemsController.php:125
+#: application/controllers/ItemsController.php:124
 #, php-format
 msgid ""
 "This will delete the item \"%s\" and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
 msgstr "Dette vil slette ressursen \"%s\" og all dens metadata. Det vil også slette alle filer og metadata assosiert med ressursen."
 
-#: application/controllers/ItemsController.php:129
+#: application/controllers/ItemsController.php:128
 #, php-format
 msgid ""
 "This will delete the item #%s and its associated metadata. It will also "
@@ -2192,15 +2261,15 @@ msgstr "Indekserer ressurser. Dette kan ta litt tid. Du kan forsette med å jobb
 msgid "The item type elements were successfully changed!"
 msgstr "Ressurstypen elementer er nå endret."
 
-#: application/controllers/SettingsController.php:149
+#: application/controllers/SettingsController.php:150
 msgid "The API configuration was successfully changed!"
 msgstr ""
 
-#: application/controllers/SettingsController.php:175
+#: application/controllers/SettingsController.php:176
 msgid "The ImageMagick directory path works."
 msgstr "ImageMagick's mappesti er korrekt."
 
-#: application/controllers/SettingsController.php:176
+#: application/controllers/SettingsController.php:177
 msgid "The ImageMagick directory path does not work."
 msgstr "ImageMagick's mappesti er ikke riktig."
 
@@ -2258,7 +2327,7 @@ msgstr "Vennligst bruk følgende lenke for å nullstille passordet ditt:"
 
 #: application/controllers/UsersController.php:110
 #: application/controllers/UsersController.php:113
-#: application/controllers/UsersController.php:322
+#: application/controllers/UsersController.php:380
 #, php-format
 msgid "%s Administrator"
 msgstr "%s Administrator"
@@ -2284,10 +2353,6 @@ msgstr "Passord: De to passordene er ikke like."
 msgid "You may now log in to Omeka."
 msgstr "Du kan nå logge deg på Omeka."
 
-#: application/controllers/UsersController.php:160
-msgid "Add User"
-msgstr "Legg til bruker"
-
 #: application/controllers/UsersController.php:171
 #, php-format
 msgid "The user \"%s\" was successfully added!"
@@ -2298,34 +2363,42 @@ msgstr "Brukeren \"%s\" er nå lagt til!"
 msgid "The user \"%s\" was added, but the activation email could not be sent."
 msgstr "Brukeren \"%s\" er lagt til, men bekreftelses-eposten ble ikke sendt."
 
-#: application/controllers/UsersController.php:233
-msgid "A new API key was successfully created."
+#: application/controllers/UsersController.php:213
+msgid "User activation email has been sent."
 msgstr ""
 
-#: application/controllers/UsersController.php:241
-msgid "An existing API key was successfully rescinded."
+#: application/controllers/UsersController.php:215
+msgid "User activation email could not be sent."
 msgstr ""
 
-#: application/controllers/UsersController.php:246
-#: application/controllers/UsersController.php:257
+#: application/controllers/UsersController.php:231
+#: application/controllers/UsersController.php:282
 msgid "There was an invalid entry on the form. Please try again."
 msgstr "Det var en feil i skjemaet. Vennligst prøv på nytt."
 
 #: application/controllers/UsersController.php:253
-msgid "Password changed!"
-msgstr "Passord endret!"
-
-#: application/controllers/UsersController.php:264
 #, php-format
 msgid "The user %s was successfully changed!"
 msgstr "Brukeren %s ble endret!"
 
-#: application/controllers/UsersController.php:291
+#: application/controllers/UsersController.php:289
+msgid "Password changed!"
+msgstr "Passord endret!"
+
+#: application/controllers/UsersController.php:311
+msgid "A new API key was successfully created."
+msgstr ""
+
+#: application/controllers/UsersController.php:318
+msgid "An existing API key was successfully rescinded."
+msgstr ""
+
+#: application/controllers/UsersController.php:345
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
 msgstr "Brukeren \"%s\" er nå slettet!"
 
-#: application/controllers/UsersController.php:297
+#: application/controllers/UsersController.php:351
 #, php-format
 msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
@@ -2333,28 +2406,28 @@ msgid ""
 "this user."
 msgstr "%s vil slettes fra systemet. Alle ressurser, samlinger og stikkord laget av brukeren vil forbli i systemet, men vil ikke lenger være assosiert med denne brukeren."
 
-#: application/controllers/UsersController.php:318
+#: application/controllers/UsersController.php:376
 msgid "Welcome!"
 msgstr "Velkommen!"
 
-#: application/controllers/UsersController.php:320
+#: application/controllers/UsersController.php:378
 #, php-format
 msgid ""
 "Your account for the %s repository has been created. Please click the "
 "following link to activate your account:"
 msgstr "Din brukerkonto for %s deponiet er opprettet. Vennligst klikk på følgene lenke for å aktivere kontoen: "
 
-#: application/controllers/UsersController.php:323
+#: application/controllers/UsersController.php:381
 #, php-format
 msgid "Activate your account with the %s repository"
 msgstr "Aktiver brukerkontoen din til %s deponiet"
 
-#: application/controllers/UsersController.php:418
+#: application/controllers/UsersController.php:476
 msgid "Login information incorrect. Please try again."
 msgstr "Ugyldig inloggingsinformasjon. Venglist prøv igjen."
 
 #: application/forms/AppearanceSettings.php:22
-#: application/forms/Install.php:117
+#: application/forms/Install.php:128
 msgid "Fullsize Image Size"
 msgstr "Størrelse på bilde i fullstørrelse"
 
@@ -2363,7 +2436,7 @@ msgid "Maximum fullsize image size constraint (in pixels)."
 msgstr "Maks fullstørrelse bildestørrelse (i piksler)"
 
 #: application/forms/AppearanceSettings.php:29
-#: application/forms/Install.php:125
+#: application/forms/Install.php:136
 msgid "Thumbnail Size"
 msgstr "Størrelse på miniatyrbilder"
 
@@ -2372,7 +2445,7 @@ msgid "Maximum thumbnail size constraint (in pixels)."
 msgstr "Maks størrelse på miniatyrbilder (målt i piksler)."
 
 #: application/forms/AppearanceSettings.php:36
-#: application/forms/Install.php:133
+#: application/forms/Install.php:144
 msgid "Square Thumbnail Size"
 msgstr "Størrelse på kvadratisk miniatyrbilde"
 
@@ -2400,15 +2473,19 @@ msgid ""
 msgstr "Angi antall resultater per side i det offentlige brukergrensesnittet."
 
 #: application/forms/AppearanceSettings.php:57
-#: application/forms/Install.php:157
+#: application/forms/Install.php:168
 msgid "Show Empty Elements"
 msgstr "Vis tomme elementer"
 
-#: application/forms/AppearanceSettings.php:66
+#: application/forms/AppearanceSettings.php:62
+msgid "Show Element Set Headings"
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:71
 msgid "Derivative Size Constraints"
 msgstr "Avledete størrelsesbegrensninger"
 
-#: application/forms/AppearanceSettings.php:71
+#: application/forms/AppearanceSettings.php:79
 msgid "Display Settings"
 msgstr "Visningsinnstillinger"
 
@@ -2446,35 +2523,27 @@ msgstr "Nytt passord må bestå av minst %min% ctegn."
 msgid "Repeat New Password"
 msgstr "Gjenta nytt passord"
 
-#: application/forms/ChangePassword.php:75
-msgid "Save Password"
-msgstr "Lagre passord"
-
-#: application/forms/ChangePassword.php:84
-msgid "Change Password"
-msgstr "Endre passord"
-
-#: application/forms/GeneralSettings.php:22 application/forms/Install.php:79
+#: application/forms/GeneralSettings.php:22 application/forms/Install.php:90
 msgid "Site Title"
 msgstr "Tittel på siden"
 
-#: application/forms/GeneralSettings.php:26 application/forms/Install.php:84
+#: application/forms/GeneralSettings.php:26 application/forms/Install.php:95
 msgid "Site Description"
 msgstr "Beskrivelse av siden"
 
-#: application/forms/GeneralSettings.php:31 application/forms/Install.php:88
+#: application/forms/GeneralSettings.php:31 application/forms/Install.php:99
 msgid "Administrator Email"
 msgstr "Administrator e-postadresse"
 
-#: application/forms/GeneralSettings.php:37 application/forms/Install.php:94
+#: application/forms/GeneralSettings.php:37 application/forms/Install.php:105
 msgid "Site Copyright Information"
 msgstr "Opphavsrett for siden"
 
-#: application/forms/GeneralSettings.php:41 application/forms/Install.php:98
+#: application/forms/GeneralSettings.php:41 application/forms/Install.php:109
 msgid "Site Author Information"
 msgstr "Informasjon om forfatter av siden"
 
-#: application/forms/GeneralSettings.php:45 application/forms/Install.php:102
+#: application/forms/GeneralSettings.php:45 application/forms/Install.php:113
 msgid "Tag Delimiter"
 msgstr "Skilletegn for stikkord"
 
@@ -2484,69 +2553,76 @@ msgid ""
 "setting. You run the risk of splitting tags that contain the old delimiter."
 msgstr "Skill stikkordene med dette tegnet eller tekststrengen. Vær varsom hvis du endrer denne innstillingen; du kan risikere å splitte stikkord som inneholder det opprinnelige skilletegnet."
 
-#: application/forms/GeneralSettings.php:59 application/forms/Install.php:163
+#: application/forms/GeneralSettings.php:59 application/forms/Install.php:174
 msgid "ImageMagick Directory Path"
 msgstr "Filsti til Imagemagick"
 
 #: application/forms/Install.php:31
-msgid "only alphanumeric characters are allowed"
-msgstr "kun alfanumeriske tegn er tillatt"
+msgid "must be 30 characters or fewer with no whitespace"
+msgstr ""
 
-#: application/forms/Install.php:37 application/forms/Login.php:34
+#: application/forms/Install.php:39 application/forms/User.php:46
+#: application/models/User.php:189
+#, php-format
+msgid ""
+"Whitespace is not allowed. Only these special characters may be used: %s"
+msgstr ""
+
+#: application/forms/Install.php:48 application/forms/Login.php:34
 msgid "Password"
 msgstr "Passord"
 
-#: application/forms/Install.php:38
+#: application/forms/Install.php:49
 msgid "must be at least 6 characters"
 msgstr "må være minst 6 tegn"
 
-#: application/forms/Install.php:61
+#: application/forms/Install.php:72
 msgid "Confirm your password."
 msgstr "Bekreft passord"
 
-#: application/forms/Install.php:103
+#: application/forms/Install.php:114
 msgid "Separate tags using this character or string."
 msgstr "Skill stikkord med dette tegnet eller tekststreng."
 
-#: application/forms/Install.php:118
+#: application/forms/Install.php:129
 msgid "Maximum fullsize image size constraint (in pixels)"
 msgstr "Maks bildestørrelse (i piksler)"
 
-#: application/forms/Install.php:126
+#: application/forms/Install.php:137
 msgid "Maximum thumbnail size constraint (in pixels)"
 msgstr "Maks størrelse på miniatyrbilde (i piksler)"
 
-#: application/forms/Install.php:134
+#: application/forms/Install.php:145
 msgid "Maximum square thumbnail size constraint (in pixels)"
 msgstr "Maks størrelse på kvadratiske miniatyrbilde (i piksler)"
 
-#: application/forms/Install.php:141
+#: application/forms/Install.php:152
 msgid "Items Per Page (admin)"
 msgstr "Elementer per side (admin)"
 
-#: application/forms/Install.php:142
+#: application/forms/Install.php:153
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
 msgstr "Avgrens hvor mange elementer som vises per side i administrasjonsgrensesnittet."
 
-#: application/forms/Install.php:149
+#: application/forms/Install.php:160
 msgid "Items Per Page (public)"
 msgstr "Bilder per side (vises)"
 
-#: application/forms/Install.php:150
+#: application/forms/Install.php:161
 msgid "Limit the number of items displayed per page in the public interface."
 msgstr "Avgrens hvor mange elementer som vises per side i det alment tilgjengelige grensesnittet."
 
-#: application/forms/Install.php:159
+#: application/forms/Install.php:170
 msgid "Check box to show metadata elements with no text."
 msgstr "Avkryssningsboks for å vise metadataelementer uten tekst."
 
-#: application/forms/Install.php:174
+#: application/forms/Install.php:185
 msgid "Default Superuser Account"
 msgstr "Standard superbruker-konto"
 
-#: application/forms/Install.php:184
+#: application/forms/Install.php:195
 msgid "Site Settings"
 msgstr "Nettstedets innstillinger"
 
@@ -2678,6 +2754,12 @@ msgid ""
 "filled in to secure public forms."
 msgstr "Skriv inn privat nøkkel fra recaptcha.net. Både denne og den offentlige nøkkelen må fylles inn for å sikre offentlige skjemaer."
 
+#: application/forms/SecuritySettings.php:68
+msgid ""
+"Check this field if you would like to filter HTML elements or attributes "
+"from form input."
+msgstr ""
+
 #: application/forms/SecuritySettings.php:69
 msgid "Enable HTML Filtering"
 msgstr "Bruk HTML-filtrering"
@@ -2711,56 +2793,46 @@ msgid "HTML Filtering"
 msgstr "HTML-filtrering"
 
 #: application/forms/User.php:30
-msgid ""
-"Username must contain only letters and numbers, and be 30 characters or "
-"fewer."
-msgstr "Brukernavn må kun inneholde bokstaver og tall, og ikke overstige 30 tegn."
+msgid "Username must be 30 characters or fewer. Whitespace is not allowed."
+msgstr ""
 
 #: application/forms/User.php:37
 msgid "Username is required."
 msgstr "Brukernavn er påkrevd."
 
-#: application/forms/User.php:45
-msgid "Username must contain only letters and numbers."
-msgstr "Brukernavnet må kun inneholde bokstaver og tall"
-
-#: application/forms/User.php:55
+#: application/forms/User.php:56
 msgid "Username must be at least %min% characters long."
 msgstr "Brukernavn må være minst %min% tegn."
 
-#: application/forms/User.php:57
+#: application/forms/User.php:58
 msgid "Username must be at most %max% characters long."
 msgstr "Brukernavn kan være maks %max% tegn."
 
-#: application/forms/User.php:71
+#: application/forms/User.php:72
 msgid "This username is already in use."
 msgstr "Dette brukernavnet er allerede i bruk"
 
-#: application/forms/User.php:80
-msgid "Display Name"
-msgstr "Visningsnavn"
-
-#: application/forms/User.php:81
+#: application/forms/User.php:82
 msgid "Name as it should be displayed on the site"
 msgstr "Navn slik det vil vises på siden"
 
-#: application/forms/User.php:87 application/models/User.php:169
+#: application/forms/User.php:88 application/models/User.php:169
 msgid "Real Name is required."
 msgstr "Ekte navn er påkrevd."
 
-#: application/forms/User.php:93
+#: application/forms/User.php:94
 msgid "This email address is invalid."
 msgstr "E-postadressen er ugyldig"
 
-#: application/forms/User.php:101
+#: application/forms/User.php:102
 msgid "Email is required."
 msgstr "E-postadresse er påkrevd"
 
-#: application/forms/User.php:120
+#: application/forms/User.php:121
 msgid "This email address is already in use."
 msgstr "Denne e-postadressen er i bruk"
 
-#: application/forms/User.php:129
+#: application/forms/User.php:130
 msgid ""
 "Roles describe the permissions a user has. See <a "
 "href='http://omeka.org/codex/User_Roles' target='_blank'>documentation</a> "
@@ -2768,12 +2840,17 @@ msgid ""
 msgstr "Roller beskriver hvilke rettigheter brukeren har. Se <a href='http://omeka.org/codex/User_Roles' target='_blank'>dokumentasjonen</a> for detaljer."
 
 #: application/forms/User.php:137
-msgid "Active?"
-msgstr "Aktiv?"
-
-#: application/forms/User.php:138
 msgid "Inactive users cannot log in to the site."
 msgstr "Inaktive brukere kan ikke logge inn på siden."
+
+#: application/forms/User.php:139
+#, php-format
+msgid "Activation has been pending since %s."
+msgstr ""
+
+#: application/forms/User.php:142
+msgid "Active?"
+msgstr "Aktiv?"
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:115
 #, php-format
@@ -2875,69 +2952,81 @@ msgstr "'%s' er en ugyldig spesialverdi."
 msgid "An invalid value was detected during record iteration."
 msgstr "Det ble funnet en ugyldig verdi under gjennomgangen."
 
-#: application/libraries/globals.php:399
+#: application/libraries/globals.php:417
 msgid "File"
 msgstr "Fil"
 
-#: application/libraries/globals.php:457
+#: application/libraries/globals.php:475
 msgid "Keyword"
 msgstr "Nøkkelord"
 
-#: application/libraries/globals.php:458
+#: application/libraries/globals.php:476
 msgid "Boolean"
 msgstr "Boolsk"
 
-#: application/libraries/globals.php:459
+#: application/libraries/globals.php:477
 msgid "Exact match"
 msgstr "Eksakt treff"
 
-#: application/libraries/globals.php:1227
-#: application/libraries/globals.php:1248
+#: application/libraries/globals.php:1238
+#: application/libraries/globals.php:1259
 #, php-format
 msgid "Could not find file %s!"
 msgstr "Kunne ikke finne filen %s!"
 
-#: application/libraries/globals.php:1554
+#: application/libraries/globals.php:1276
+msgid "No featured collections are available."
+msgstr "Ingen fremhevede samlinger er tilgjengelige,"
+
+#: application/libraries/globals.php:1569
 msgid "Select Below "
 msgstr "Velg under"
 
-#: application/libraries/globals.php:1596
+#: application/libraries/globals.php:1611
 msgid "Omeka RSS Feed"
 msgstr "Omeka RSS-feed"
 
-#: application/libraries/globals.php:1597
+#: application/libraries/globals.php:1612
 msgid "Omeka Atom Feed"
 msgstr "Omeka Atom-feed"
 
-#: application/libraries/globals.php:2262
+#: application/libraries/globals.php:2251
+msgid "No recent items available."
+msgstr "Ingen nylige ressurser tilgjengelig."
+
+#: application/libraries/globals.php:2277
+msgid "No featured items are available."
+msgstr "Ingen fremhevede ressurser"
+
+#: application/libraries/globals.php:2332
 msgid "View"
 msgstr "Vis"
 
-#: application/libraries/globals.php:2324
+#: application/libraries/globals.php:2394
 msgid "No Collection"
 msgstr "Ingen samling"
 
-#: application/libraries/globals.php:2439
+#: application/libraries/globals.php:2509
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2456
+#: application/libraries/globals.php:2526
 msgid "Next Item &rarr;"
 msgstr "Neste ressurs &rarr;"
 
-#: application/libraries/globals.php:2476
+#: application/libraries/globals.php:2546
 msgid "&larr; Previous Item"
 msgstr "&larr; Forrige ressurs"
 
-#: application/libraries/globals.php:2653
+#: application/libraries/globals.php:2724
 msgid "Browse All"
 msgstr "Bla i alle"
 
-#: application/libraries/globals.php:2658
+#: application/libraries/globals.php:2729
 msgid "Browse by Tag"
 msgstr "Bla i stikkord"
 
-#: application/libraries/globals.php:2931
+#: application/libraries/globals.php:3002
 msgid "No tags are available."
 msgstr "Ingen stikkord tilgjengelig"
 
@@ -2996,48 +3085,48 @@ msgstr "Finner ikke den lokale stien til en lagret fil."
 msgid "\"%s\" is not a valid file derivative."
 msgstr "\"%s\" er ikke et gyldig filderivat."
 
-#: application/models/Item.php:317
+#: application/models/Item.php:330
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
 msgstr "Kan ikke legge til filer til elementer som ikke er lagret i databasen!"
 
 #. / Chicago-style item citation: two authors
-#: application/models/Item.php:444
+#: application/models/Item.php:457
 #, php-format
 msgid "%1$s and %2$s"
 msgstr "%1$s og %2$s"
 
 #. / Chicago-style item citation: three authors
-#: application/models/Item.php:448
+#: application/models/Item.php:461
 #, php-format
 msgid "%1$s, %2$s, and %3$s"
 msgstr "%1$s, %2$s og %3$s"
 
 #. / Chicago-style item citation: more than three authors
-#: application/models/Item.php:452
+#: application/models/Item.php:465
 #, php-format
 msgid "%s et al."
 msgstr "%s m fl."
 
 #. / Chicago-style item citation: access date and URL
-#: application/models/Item.php:470
+#: application/models/Item.php:483
 #, php-format
 msgid "accessed %1$s, %2$s."
 msgstr "besøkt %1$s, %2$s."
 
-#: application/models/Item.php:487
+#: application/models/Item.php:500
 msgid "Cannot add an existing file to an item!"
 msgstr "Kan ikke legg til en eksisterende fil til et element!"
 
-#: application/models/Item.php:491
+#: application/models/Item.php:504
 msgid "File must be valid before it can be associated with an item!"
 msgstr "Filen må være gyldig før den kan assosieres med et element!"
 
-#: application/models/Item.php:515
+#: application/models/Item.php:528
 msgid "Invalid item type."
 msgstr ""
 
-#: application/models/Item.php:518
+#: application/models/Item.php:531
 msgid "Invalid collection."
 msgstr ""
 
@@ -3117,12 +3206,12 @@ msgstr "Hvert alternativ må ha et unikt navn."
 msgid "Names of plugins must not be blank"
 msgstr "Programtillegg må ha navn"
 
-#: application/models/Table/Collection.php:76
+#: application/models/Table/Collection.php:77
 #, php-format
 msgid "[Untitled] #%s"
 msgstr "[Uten tittel] #%s"
 
-#: application/models/Table/Item.php:161
+#: application/models/Table/Item.php:164
 msgid "Invalid search type given!"
 msgstr "Ugyldig søketype!"
 
@@ -3150,10 +3239,6 @@ msgstr "Brukeren må få tildelt en rolle."
 #, php-format
 msgid "The username \"%1$s\" must be between %2$s and %3$s characters."
 msgstr "Brukernavnet \"%1$s\" må være melleom %2$s og %3$s tegn."
-
-#: application/models/User.php:189
-msgid "The username must be alphanumeric."
-msgstr "Brukernavnet kan kun bestå av bokstaver og tall"
 
 #: application/models/User.php:191
 #, php-format
@@ -3267,7 +3352,7 @@ msgstr "Side 5"
 msgid "Page 6"
 msgstr "Side 6"
 
-#: application/views/helpers/AllElementTexts.php:101
+#: application/views/helpers/AllElementTexts.php:108
 msgid "[no text]"
 msgstr "[ingen tekst]"
 
@@ -3305,14 +3390,15 @@ msgstr "Ugyldig handling ved forsøk på å få tak i objektets URL"
 msgid "Invalid return value while getting record URL."
 msgstr "Ugyldig returverdi ved forsøk på å få tak i objektets URL."
 
-#: application/views/scripts/collections/browse.php:31
+#: application/views/scripts/collections/browse.php:14
+#: application/views/scripts/items/browse.php:24
+msgid "Sort by: "
+msgstr "Sorter etter:"
+
+#: application/views/scripts/collections/browse.php:42
 #, php-format
 msgid "View the items in %s"
 msgstr "Se ressursene i %s"
-
-#: application/views/scripts/collections/random-featured.php:11
-msgid "No featured collections are available."
-msgstr "Ingen fremhevede samlinger er tilgjengelige,"
 
 #: application/views/scripts/collections/show.php:15
 #, php-format
@@ -3327,18 +3413,26 @@ msgstr "Det finnes ingen ressurser i den samlingen."
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
 msgstr "Kjører på <a href=\"http://omeka.org\">Omeka</a>."
 
-#: application/views/scripts/common/pagination_control.php:11
-msgid "&lt;"
-msgstr "&lt;"
+#: application/views/scripts/common/pagination_control.php:5
+msgid "Pagination"
+msgstr ""
 
-#: application/views/scripts/common/pagination_control.php:34
+#: application/views/scripts/common/pagination_control.php:11
+msgid "Previous Page"
+msgstr ""
+
+#: application/views/scripts/common/pagination_control.php:36
+msgid "Current Page"
+msgstr ""
+
+#: application/views/scripts/common/pagination_control.php:39
 #, php-format
 msgid "%s of %s"
 msgstr "%s av %s"
 
-#: application/views/scripts/common/pagination_control.php:42
-msgid "&gt;"
-msgstr "&gt;"
+#: application/views/scripts/common/pagination_control.php:48
+msgid "Next Page"
+msgstr ""
 
 #: application/views/scripts/error/403.php:2
 msgid "403 Page Forbidden"
@@ -3384,33 +3478,17 @@ msgid ""
 "messages</a>."
 msgstr "For å få mer utfyllende informasjon om denne feilen, se Omeka Codex siden om å <a href=\"http://omeka.org/codex/Retrieving_error_messages\">spore feilmeldinger</a>."
 
-#: application/views/scripts/index.php:16
+#: application/views/scripts/index.php:10
 msgid "Featured Item"
 msgstr "Fremhevet ressurs"
 
-#: application/views/scripts/index.php:24
+#: application/views/scripts/index.php:18
 msgid "Featured Collection"
 msgstr "Fremhevet samling"
 
-#: application/views/scripts/index.php:69
-msgid "No recent items available."
-msgstr "Ingen nylige ressurser tilgjengelig."
-
-#: application/views/scripts/index.php:73
+#: application/views/scripts/index.php:42
 msgid "View All Items"
 msgstr "Vis alle bilder"
-
-#: application/views/scripts/items/browse.php:24
-msgid "Sort by: "
-msgstr "Sorter etter:"
-
-#: application/views/scripts/items/random-featured.php:20
-msgid "No featured items are available."
-msgstr "Ingen fremhevede ressurser"
-
-#: application/views/scripts/items/search-form.php:76
-msgid "Remove field"
-msgstr ""
 
 #: application/views/scripts/items/show.php:10
 msgid "Files"
@@ -3419,14 +3497,6 @@ msgstr "Filer"
 #: application/views/scripts/items/show.php:33
 msgid "Citation"
 msgstr "Sitering"
-
-#: application/views/scripts/search/index.php:2
-msgid "Search Omeka "
-msgstr "Søk i Omeka"
-
-#: application/views/scripts/search/index.php:29
-msgid "Your query returned no results."
-msgstr "Spørringen ga ingen resultater."
 
 #: application/views/scripts/search/search-filters.php:3
 msgid "Query:"
@@ -3455,6 +3525,11 @@ msgstr "Gå til søkeinstillingene for å velge hvilke objekttyper som skal bruk
 #: application/views/scripts/search/search-form.php:19
 msgid "Advanced Search (Items only)"
 msgstr "Avansert søk (kun ressurser)"
+
+#: application/views/scripts/users/activate.php:8
+#, php-format
+msgid "Hello %s. Your username is %s"
+msgstr ""
 
 #: application/views/scripts/users/login.php:9
 msgid "Go to Home Page"

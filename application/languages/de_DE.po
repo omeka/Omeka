@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# msauter <martin.sauter@gmx.ch>, 2011-2012
-# msauter <martin.sauter@gmx.ch>, 2013
+# Martin Sauter <martin.sauter@gmx.ch>, 2011-2012
+# Martin Sauter <martin.sauter@gmx.ch>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2014-01-31 18:39+0000\n"
+"PO-Revision-Date: 2014-06-09 19:07+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: German (Germany) (http://www.transifex.com/projects/p/omeka/language/de_DE/)\n"
 "MIME-Version: 1.0\n"
@@ -29,8 +29,10 @@ msgstr "Das Dublin Core Metadata Element Set gilt für alle Datensätze in Omeka
 #. Dublin Core: Title element name
 #: admin/themes/default/collections/browse.php:22
 #: admin/themes/default/items/browse.php:40
+#: admin/themes/default/search/index.php:13
+#: application/views/scripts/collections/browse.php:10
 #: application/views/scripts/items/browse.php:19
-#: application/views/scripts/search/index.php:13
+#: application/views/scripts/search/index.php:14
 msgid "Title"
 msgstr "Titel"
 
@@ -62,7 +64,6 @@ msgstr "Thema der Ressource"
 #: admin/themes/default/item-types/show.php:14
 #: admin/themes/default/settings/edit-item-type-elements.php:27
 #: application/forms/ItemTypes.php:150
-#: application/views/scripts/collections/browse.php:17
 msgid "Description"
 msgstr "Beschreibung"
 
@@ -342,7 +343,8 @@ msgstr "Link zur Navigation hinzufügen"
 
 #: admin/themes/default/appearance/edit-navigation.php:21
 #: admin/themes/default/appearance/edit-navigation.php:37
-#: admin/themes/default/users/edit.php:50 application/forms/Navigation.php:132
+#: admin/themes/default/users/api-keys.php:40
+#: application/forms/Navigation.php:132
 msgid "Label"
 msgstr "Beschriftung"
 
@@ -360,18 +362,17 @@ msgstr "Link hinzufügen"
 #: admin/themes/default/appearance/edit-settings.php:21
 #: admin/themes/default/collections/edit.php:22
 #: admin/themes/default/element-sets/edit.php:41
-#: admin/themes/default/files/edit.php:30
+#: admin/themes/default/files/edit.php:35
 #: admin/themes/default/items/batch-edit.php:130
 #: admin/themes/default/items/edit.php:19
 #: admin/themes/default/plugins/config.php:14
-#: admin/themes/default/settings/edit-api.php:68
+#: admin/themes/default/settings/edit-api.php:81
 #: admin/themes/default/settings/edit-item-type-elements.php:38
 #: admin/themes/default/settings/edit-search.php:40
 #: admin/themes/default/settings/edit-security.php:15
 #: admin/themes/default/settings/edit-settings.php:15
 #: admin/themes/default/themes/config.php:16
-#: application/controllers/UsersController.php:206
-#: application/forms/ItemTypes.php:169
+#: admin/themes/default/users/edit.php:21 application/forms/ItemTypes.php:169
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:73
 msgid "Save Changes"
 msgstr "Änderungen übernehmen"
@@ -390,7 +391,7 @@ msgstr "Öffentliche Seite anzeigen"
 #: admin/themes/default/collections/edit.php:24
 #: admin/themes/default/collections/show.php:36
 #: admin/themes/default/element-sets/browse.php:29
-#: admin/themes/default/files/edit.php:32
+#: admin/themes/default/files/edit.php:37
 #: admin/themes/default/files/show.php:30
 #: admin/themes/default/item-types/edit.php:20
 #: admin/themes/default/item-types/show.php:54
@@ -402,15 +403,15 @@ msgstr "Öffentliche Seite anzeigen"
 #: admin/themes/default/items/show.php:47
 #: admin/themes/default/settings/edit-item-type-elements.php:23
 #: admin/themes/default/users/browse.php:66
-#: admin/themes/default/users/edit.php:17
-#: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:82
+#: admin/themes/default/users/edit.php:26
+#: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:83
 msgid "Delete"
 msgstr "Löschen"
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:11
-#: admin/themes/default/collections/browse.php:64
-#: admin/themes/default/collections/browse.php:73
+#: admin/themes/default/collections/browse.php:67
+#: admin/themes/default/collections/browse.php:76
 msgid "Add a Collection"
 msgstr "Sammlung hinzufügen"
 
@@ -454,8 +455,10 @@ msgstr "Sammlungen durchsuchen"
 #: admin/themes/default/item-types/browse.php:2
 #: admin/themes/default/items/browse.php:3
 #: admin/themes/default/plugins/browse.php:2
+#: admin/themes/default/search/index.php:2
 #: admin/themes/default/tags/browse.php:12
 #: admin/themes/default/users/browse.php:2
+#: application/views/scripts/collections/browse.php:6
 #: application/views/scripts/items/browse.php:6
 #: application/views/scripts/search/index.php:2
 #, php-format
@@ -464,13 +467,14 @@ msgstr "(%s total)"
 
 #: admin/themes/default/collections/browse.php:23
 #: admin/themes/default/collections/show.php:51
-#: application/views/scripts/collections/browse.php:24
+#: application/views/scripts/collections/browse.php:36
 msgid "Contributors"
 msgstr "Mitarbeiter"
 
 #: admin/themes/default/collections/browse.php:24
 #: admin/themes/default/files/show.php:66
 #: admin/themes/default/items/browse.php:43
+#: application/views/scripts/collections/browse.php:11
 #: application/views/scripts/items/browse.php:21
 msgid "Date Added"
 msgstr "hinzugefügt am"
@@ -481,12 +485,12 @@ msgstr "hinzugefügt am"
 msgid "Total Number of Items"
 msgstr "Anzahl Objekte total"
 
-#: admin/themes/default/collections/browse.php:37
+#: admin/themes/default/collections/browse.php:40
 #: admin/themes/default/items/browse.php:72
 msgid "(Private)"
 msgstr "(Privat)"
 
-#: admin/themes/default/collections/browse.php:40
+#: admin/themes/default/collections/browse.php:43
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:27
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
@@ -497,36 +501,36 @@ msgstr "(Privat)"
 #: admin/themes/default/items/browse.php:24
 #: admin/themes/default/items/browse.php:77
 #: admin/themes/default/items/browse.php:120
-#: admin/themes/default/items/files-form.php:11
+#: admin/themes/default/items/files-form.php:12
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:63
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: admin/themes/default/collections/browse.php:49
+#: admin/themes/default/collections/browse.php:52
 msgid "No contributors"
 msgstr "Keine Mitarbeiter"
 
-#: admin/themes/default/collections/browse.php:67
+#: admin/themes/default/collections/browse.php:70
 msgid "There are no collections on this page."
 msgstr "Es existieren keine Sammlungen auf dieser Seite."
 
-#: admin/themes/default/collections/browse.php:67
+#: admin/themes/default/collections/browse.php:70
 msgid "View All Collections"
 msgstr "Alle Sammlungen anzeigen"
 
-#: admin/themes/default/collections/browse.php:70
+#: admin/themes/default/collections/browse.php:73
 msgid "You have no collections."
 msgstr "Sie haben keine Sammlungen."
 
-#: admin/themes/default/collections/browse.php:72
+#: admin/themes/default/collections/browse.php:75
 msgid "Get started by adding your first collection."
 msgstr "Beginnen Sie, indem Sie Ihre erste Sammlung anlegen."
 
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/libraries/globals.php:2504
+#: application/libraries/globals.php:2574
 #: application/views/scripts/collections/show.php:4
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
@@ -544,7 +548,7 @@ msgstr "Sammlung #%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
-#: application/views/scripts/index.php:37
+#: application/views/scripts/index.php:40
 msgid "Recently Added Items"
 msgstr "Kürzlich hinzugefügte Objekte"
 
@@ -678,6 +682,7 @@ msgid "Log Out"
 msgstr "Abmelden"
 
 #: admin/themes/default/common/settings-nav.php:6
+#: admin/themes/default/common/users-nav.php:5
 msgid "General"
 msgstr "Allgemein"
 
@@ -687,8 +692,8 @@ msgstr "Sicherheit"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: application/views/helpers/SearchForm.php:34
-#: application/views/scripts/items/search-form.php:189
 #: application/views/scripts/search/search-form.php:2
+#: application/views/scripts/search/search-form.php:22
 msgid "Search"
 msgstr "Suchen"
 
@@ -702,6 +707,16 @@ msgstr "Elemente des Objekttyps"
 
 #: admin/themes/default/common/settings-nav.php:32
 msgid "API"
+msgstr ""
+
+#: admin/themes/default/common/users-nav.php:11
+#: application/forms/ChangePassword.php:78
+msgid "Change Password"
+msgstr "Passwort ändern"
+
+#: admin/themes/default/common/users-nav.php:17
+#: admin/themes/default/users/api-keys.php:14
+msgid "API Keys"
 msgstr ""
 
 #: admin/themes/default/element-sets/browse.php:16
@@ -797,7 +812,7 @@ msgid "File #%s"
 msgstr "Datei #%s"
 
 #: admin/themes/default/files/show.php:35
-#: application/libraries/globals.php:398
+#: application/libraries/globals.php:416
 msgid "Item"
 msgstr "Objekt"
 
@@ -967,7 +982,9 @@ msgid "Item Type Information"
 msgstr "Objekttyp-Information"
 
 #: admin/themes/default/item-types/form.php:15
-#: admin/themes/default/users/add.php:6 admin/themes/default/users/edit.php:14
+#: admin/themes/default/users/add.php:7
+#: admin/themes/default/users/change-password.php:15
+#: admin/themes/default/users/edit.php:15
 #: install/views/scripts/index/index.phtml:14
 msgid "required field"
 msgstr "Pflichtfeld"
@@ -1025,7 +1042,7 @@ msgstr "Objekt hinzufügen"
 #: admin/themes/default/items/browse.php:90
 #: admin/themes/default/items/edit.php:41
 #: admin/themes/default/items/show.php:57
-#: application/libraries/globals.php:400
+#: application/libraries/globals.php:418
 #: application/views/scripts/items/show.php:18
 msgid "Collection"
 msgstr "Sammlung"
@@ -1152,8 +1169,8 @@ msgstr "Objekte durchsuchen"
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2280
-#: application/libraries/globals.php:2663
+#: application/libraries/globals.php:2350
+#: application/libraries/globals.php:2734
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Objekte suchen"
@@ -1209,20 +1226,20 @@ msgstr "Objekt #%s bearbeiten"
 msgid "Click and drag the files into the preferred display order."
 msgstr "Klicken und ziehen Sie die Dateien in die gewünschte Darstellungsreihenfolge."
 
-#: admin/themes/default/items/files-form.php:12
+#: admin/themes/default/items/files-form.php:13
 msgid "Delete "
 msgstr "Löschen"
 
-#: admin/themes/default/items/files-form.php:21
+#: admin/themes/default/items/files-form.php:22
 msgid "Add New Files"
 msgstr "Neue Dateien hinzufügen"
 
-#: admin/themes/default/items/files-form.php:23
+#: admin/themes/default/items/files-form.php:24
 #, php-format
 msgid "The maximum file size is %s."
 msgstr "Die maximale Dateigrösse ist %s."
 
-#: admin/themes/default/items/files-form.php:26
+#: admin/themes/default/items/files-form.php:27
 msgid "Find a File"
 msgstr "Datei finden"
 
@@ -1247,102 +1264,123 @@ msgstr "Alle anzeigen"
 msgid "Private"
 msgstr "Privat"
 
-#: admin/themes/default/items/search-form.php:13
+#: admin/themes/default/items/search-form.php:14
 #: application/views/scripts/items/search-form.php:13
 msgid "Search for Keywords"
 msgstr "Nach Stichwörtern suchen"
 
-#: admin/themes/default/items/search-form.php:26
+#: admin/themes/default/items/search-form.php:27
 #: application/views/scripts/items/search-form.php:25
 msgid "Narrow by Specific Fields"
 msgstr "Über bestimmte Felder eingrenzen"
 
-#: admin/themes/default/items/search-form.php:27
-#: application/views/scripts/items/search-form.php:80
+#: admin/themes/default/items/search-form.php:28
+#: application/views/scripts/items/search-form.php:90
 msgid "Add a Field"
 msgstr "Feld hinzufügen"
 
-#: admin/themes/default/items/search-form.php:63
-#: application/views/scripts/items/search-form.php:60
+#: admin/themes/default/items/search-form.php:54
+#: application/views/scripts/items/search-form.php:50
+msgid "Search Field"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:67
+#: application/views/scripts/items/search-form.php:63
+msgid "Search Type"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:72
+#: application/views/scripts/items/search-form.php:68
 msgid "contains"
 msgstr "enthält"
 
-#: admin/themes/default/items/search-form.php:64
-#: application/views/scripts/items/search-form.php:61
+#: admin/themes/default/items/search-form.php:73
+#: application/views/scripts/items/search-form.php:69
 msgid "does not contain"
 msgstr "enthält nicht"
 
-#: admin/themes/default/items/search-form.php:65
-#: application/views/scripts/items/search-form.php:62
+#: admin/themes/default/items/search-form.php:74
+#: application/views/scripts/items/search-form.php:70
 msgid "is exactly"
 msgstr "ist genau"
 
-#: admin/themes/default/items/search-form.php:66
-#: application/views/scripts/items/search-form.php:63
+#: admin/themes/default/items/search-form.php:75
+#: application/views/scripts/items/search-form.php:71
 msgid "is empty"
 msgstr "ist leer"
 
-#: admin/themes/default/items/search-form.php:67
-#: application/views/scripts/items/search-form.php:64
+#: admin/themes/default/items/search-form.php:76
+#: application/views/scripts/items/search-form.php:72
 msgid "is not empty"
 msgstr "ist nicht leer"
 
 #: admin/themes/default/items/search-form.php:84
-#: application/views/scripts/items/search-form.php:84
+#: application/views/scripts/items/search-form.php:80
+msgid "Search Terms"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:90
+#: application/views/scripts/items/search-form.php:86
+msgid "Remove field"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:98
+#: application/views/scripts/items/search-form.php:94
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
 msgstr "Nach einer Reihe von IDs suchen (Beispiel: 1-4, 156, 79)"
 
-#: admin/themes/default/items/search-form.php:98
-#: application/views/scripts/items/search-form.php:95
+#: admin/themes/default/items/search-form.php:112
+#: application/views/scripts/items/search-form.php:105
 msgid "Search By Collection"
 msgstr "Nach Sammlungen suchen"
 
-#: admin/themes/default/items/search-form.php:114
-#: application/views/scripts/items/search-form.php:109
+#: admin/themes/default/items/search-form.php:128
+#: application/views/scripts/items/search-form.php:119
 msgid "Search By Type"
 msgstr "Nach Typen suchen"
 
-#: admin/themes/default/items/search-form.php:131
-#: application/views/scripts/items/search-form.php:125
+#: admin/themes/default/items/search-form.php:145
+#: application/views/scripts/items/search-form.php:135
 msgid "Search By User"
 msgstr "Nach Benutzern suchen"
 
-#: admin/themes/default/items/search-form.php:148
-#: application/views/scripts/items/search-form.php:140
+#: admin/themes/default/items/search-form.php:162
+#: application/views/scripts/items/search-form.php:150
 msgid "Search By Tags"
 msgstr "Nach Schlagwörtern durchsuchen"
 
-#: admin/themes/default/items/search-form.php:163
-#: application/views/scripts/items/search-form.php:153
+#: admin/themes/default/items/search-form.php:177
+#: application/views/scripts/items/search-form.php:163
 msgid "Public/Non-Public"
 msgstr "Öffentlich / Nicht-öffentlich"
 
-#: admin/themes/default/items/search-form.php:172
-#: application/views/scripts/items/search-form.php:161
+#: admin/themes/default/items/search-form.php:186
+#: application/views/scripts/items/search-form.php:171
 msgid "Only Public Items"
 msgstr "Nur öffentliche Objekte"
 
-#: admin/themes/default/items/search-form.php:173
-#: application/views/scripts/items/search-form.php:162
+#: admin/themes/default/items/search-form.php:187
+#: application/views/scripts/items/search-form.php:172
 msgid "Only Non-Public Items"
 msgstr "Nur nicht-öffentliche Objekte"
 
-#: admin/themes/default/items/search-form.php:183
-#: application/views/scripts/items/search-form.php:171
+#: admin/themes/default/items/search-form.php:197
+#: application/views/scripts/items/search-form.php:181
 msgid "Featured/Non-Featured"
 msgstr "Hervorgehoben / nicht hervorgehoben"
 
-#: admin/themes/default/items/search-form.php:192
-#: application/views/scripts/items/search-form.php:179
+#: admin/themes/default/items/search-form.php:206
+#: application/views/scripts/items/search-form.php:189
 msgid "Only Featured Items"
 msgstr "Nur hervorgehobene Objekte"
 
-#: admin/themes/default/items/search-form.php:193
-#: application/views/scripts/items/search-form.php:180
+#: admin/themes/default/items/search-form.php:207
+#: application/views/scripts/items/search-form.php:190
 msgid "Only Non-Featured Items"
 msgstr "Nur nicht-hervorgehobene Objekte"
 
-#: admin/themes/default/items/search-form.php:203
+#: admin/themes/default/items/search-form.php:215
+#: application/views/scripts/items/search-form.php:199
 msgid "Search for items"
 msgstr "Objekte suchen"
 
@@ -1351,11 +1389,11 @@ msgstr "Objekte suchen"
 msgid "Item #%s"
 msgstr "Objekt #%s"
 
-#: admin/themes/default/items/show.php:30
+#: admin/themes/default/items/show.php:28
 msgid "Prev Item"
 msgstr "Vorangehendes Objekt"
 
-#: admin/themes/default/items/show.php:35
+#: admin/themes/default/items/show.php:33
 msgid "Next Item"
 msgstr "Nächstes Objekt"
 
@@ -1443,7 +1481,7 @@ msgstr "Deaktivieren"
 
 #: admin/themes/default/plugins/browse.php:106
 #: admin/themes/default/users/activate.php:31
-#: application/views/scripts/users/activate.php:26
+#: application/views/scripts/users/activate.php:27
 msgid "Activate"
 msgstr "Aktivieren"
 
@@ -1453,7 +1491,7 @@ msgid "Uninstall"
 msgstr "Deinstallieren"
 
 #: admin/themes/default/plugins/browse.php:129
-#: application/forms/Install.php:167
+#: application/forms/Install.php:178
 msgid "Install"
 msgstr "Jetzt installieren"
 
@@ -1491,6 +1529,22 @@ msgstr "oder"
 msgid "Cancel"
 msgstr "Abbrechen"
 
+#: admin/themes/default/search/index.php:2
+#: application/views/scripts/search/index.php:2
+msgid "Search Omeka "
+msgstr "Omeka durchsuchen"
+
+#: admin/themes/default/search/index.php:12
+#: admin/themes/default/tags/browse.php:18
+#: application/views/scripts/search/index.php:13
+msgid "Record Type"
+msgstr "Datensatz-Typ"
+
+#: admin/themes/default/search/index.php:39
+#: application/views/scripts/search/index.php:40
+msgid "Your query returned no results."
+msgstr "Ihre Anfrage ergibt keine Treffer."
+
 #: admin/themes/default/settings/edit-api.php:11
 msgid "Enable API"
 msgstr ""
@@ -1500,14 +1554,25 @@ msgid "Enable or disable the API by checking or uncheking the box below."
 msgstr ""
 
 #: admin/themes/default/settings/edit-api.php:22
-msgid "Results per Page"
+msgid "Filter Element Texts"
 msgstr ""
 
 #: admin/themes/default/settings/edit-api.php:26
+msgid ""
+"Filter element texts by checking the box below. When checked, the API will "
+"respect the display element and element text filters when outputting element"
+" text representations."
+msgstr ""
+
+#: admin/themes/default/settings/edit-api.php:35
+msgid "Results per Page"
+msgstr ""
+
+#: admin/themes/default/settings/edit-api.php:39
 msgid "Maximum number of API results displayed per page."
 msgstr ""
 
-#: admin/themes/default/settings/edit-api.php:32
+#: admin/themes/default/settings/edit-api.php:45
 #, php-format
 msgid ""
 "After enabling the API, applications may be able to show, browse, add, edit,"
@@ -1595,11 +1660,6 @@ msgstr "Schlagwörter bearbeiten"
 #: admin/themes/default/tags/browse.php:9
 msgid "Browse Tags"
 msgstr ""
-
-#: admin/themes/default/tags/browse.php:18
-#: application/views/scripts/search/index.php:12
-msgid "Record Type"
-msgstr "Datensatz-Typ"
 
 #: admin/themes/default/tags/browse.php:24
 msgid "Editing Tags"
@@ -1731,19 +1791,66 @@ msgstr "Benutzeraktivierung"
 
 #: admin/themes/default/users/activate.php:18
 #: application/forms/ResetPassword.php:23
-#: application/views/scripts/users/activate.php:13
+#: application/views/scripts/users/activate.php:14
 msgid "Create a Password"
 msgstr "Passwort wählen"
 
-#: admin/themes/default/users/activate.php:24 application/forms/Install.php:60
+#: admin/themes/default/users/activate.php:24 application/forms/Install.php:71
 #: application/forms/ResetPassword.php:44
-#: application/views/scripts/users/activate.php:19
+#: application/views/scripts/users/activate.php:20
 msgid "Re-type the Password"
 msgstr "Passwort nochmals eingeben"
 
 #: admin/themes/default/users/add.php:2
 msgid "Add New User"
 msgstr "Neuen Benutzer hinzufügen"
+
+#: admin/themes/default/users/add.php:13
+msgid "Add User"
+msgstr "Benutzer hinzufügen"
+
+#: admin/themes/default/users/api-keys.php:8
+#: admin/themes/default/users/change-password.php:8
+#: admin/themes/default/users/edit.php:8
+#, php-format
+msgid "Edit User #%s"
+msgstr "Benutzer #%s bearbeiten"
+
+#: admin/themes/default/users/api-keys.php:17
+msgid "New key label"
+msgstr ""
+
+#: admin/themes/default/users/api-keys.php:21
+msgid ""
+"To create a new API key, enter a label for the key below. For example, "
+"describe for what purpose it will be used. This key will have all your "
+"permissions; treat it as you would your password."
+msgstr ""
+
+#: admin/themes/default/users/api-keys.php:31
+msgid "You have no API keys. Use the form above to create one."
+msgstr ""
+
+#: admin/themes/default/users/api-keys.php:33
+#, php-format
+msgid "%s has no API keys. Use the form above to create one."
+msgstr ""
+
+#: admin/themes/default/users/api-keys.php:41
+msgid "Key"
+msgstr ""
+
+#: admin/themes/default/users/api-keys.php:42
+msgid "Last IP"
+msgstr ""
+
+#: admin/themes/default/users/api-keys.php:43
+msgid "Last accessed"
+msgstr ""
+
+#: admin/themes/default/users/api-keys.php:44
+msgid "Rescind"
+msgstr ""
 
 #: admin/themes/default/users/browse.php:2
 msgid "Browse Users"
@@ -1754,6 +1861,7 @@ msgid "Add a User"
 msgstr "Benutzer hinzufügen"
 
 #: admin/themes/default/users/browse.php:20
+#: admin/themes/default/users/browse.php:36
 #: admin/themes/default/users/browse.php:47
 #: admin/themes/default/users/show.php:18 application/forms/Install.php:30
 #: application/forms/Login.php:21 application/forms/User.php:29
@@ -1761,9 +1869,10 @@ msgid "Username"
 msgstr "Benutzername"
 
 #: admin/themes/default/users/browse.php:23
+#: admin/themes/default/users/browse.php:38
 #: admin/themes/default/users/browse.php:49
-#: admin/themes/default/users/show.php:22 application/forms/Install.php:73
-#: application/forms/RecoverPassword.php:27 application/forms/User.php:95
+#: admin/themes/default/users/show.php:22 application/forms/Install.php:84
+#: application/forms/RecoverPassword.php:27 application/forms/User.php:96
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
 msgstr "E-Mail-Adresse"
@@ -1772,24 +1881,13 @@ msgstr "E-Mail-Adresse"
 msgid "Search users"
 msgstr ""
 
-#: admin/themes/default/users/browse.php:36
-msgid "Usernames"
-msgstr ""
-
 #: admin/themes/default/users/browse.php:37
-msgid "Real names"
-msgstr ""
-
-#: admin/themes/default/users/browse.php:38
-msgid "Email addresses"
-msgstr ""
-
 #: admin/themes/default/users/browse.php:48
-#: admin/themes/default/users/show.php:20
-msgid "Real Name"
-msgstr "Echter Name"
+#: admin/themes/default/users/show.php:20 application/forms/User.php:81
+msgid "Display Name"
+msgstr "Angezeigter Name"
 
-#: admin/themes/default/users/browse.php:50 application/forms/User.php:128
+#: admin/themes/default/users/browse.php:50 application/forms/User.php:129
 msgid "Role"
 msgstr "Rolle"
 
@@ -1797,49 +1895,12 @@ msgstr "Rolle"
 msgid "inactive"
 msgstr "inaktiv"
 
-#: admin/themes/default/users/edit.php:8
-#, php-format
-msgid "Edit User #%s"
-msgstr "Benutzer #%s bearbeiten"
+#: admin/themes/default/users/change-password.php:20
+msgid "Save Password"
+msgstr "Passwort speichern"
 
-#: admin/themes/default/users/edit.php:24
-msgid "API Keys"
-msgstr ""
-
-#: admin/themes/default/users/edit.php:27
-msgid "New key label"
-msgstr ""
-
-#: admin/themes/default/users/edit.php:31
-msgid ""
-"To create a new API key, enter a label for the key below. For example, "
-"describe for what purpose it will be used. This key will have all your "
-"permissions; treat it as you would your password."
-msgstr ""
-
-#: admin/themes/default/users/edit.php:41
-msgid "You have no API keys. Use the form above to create one."
-msgstr ""
-
-#: admin/themes/default/users/edit.php:43
-#, php-format
-msgid "%s has no API keys. Use the form above to create one."
-msgstr ""
-
-#: admin/themes/default/users/edit.php:51
-msgid "Key"
-msgstr ""
-
-#: admin/themes/default/users/edit.php:52
-msgid "Last IP"
-msgstr ""
-
-#: admin/themes/default/users/edit.php:53
-msgid "Last accessed"
-msgstr ""
-
-#: admin/themes/default/users/edit.php:54
-msgid "Rescind"
+#: admin/themes/default/users/edit.php:23
+msgid "Resend Activation Email"
 msgstr ""
 
 #: admin/themes/default/users/forgot-password.php:2
@@ -1996,44 +2057,52 @@ msgid ""
 "your new item type."
 msgstr "Der Objekttyp \"%s\" wurde erfolgreich hinzugefügt!  Sie können nun Elemente zu Ihrem neuen Objekttyp hinzufügen."
 
-#: application/controllers/ItemsController.php:95
+#: application/controllers/ItemsController.php:85
+#: application/controllers/ItemsController.php:145
+msgid ""
+"The ImageMagick directory path has not been set. No derivative images will "
+"be created. If you would like Omeka to create derivative images, please set "
+"the path in Settings."
+msgstr ""
+
+#: application/controllers/ItemsController.php:94
 #, php-format
 msgid "The item \"%s\" was successfully added!"
 msgstr "Das Objekt \"%s\" wurde erfolgreich hinzugefügt!"
 
-#: application/controllers/ItemsController.php:97
+#: application/controllers/ItemsController.php:96
 #, php-format
 msgid "The item #%s was successfully added!"
 msgstr "Das Objekt #%s wurde erfolgreich hinzugefügt!"
 
-#: application/controllers/ItemsController.php:105
+#: application/controllers/ItemsController.php:104
 #, php-format
 msgid "The item \"%s\" was successfully changed!"
 msgstr "Das Objekt \"%s\" wurde erfolgreich geändert!"
 
-#: application/controllers/ItemsController.php:107
+#: application/controllers/ItemsController.php:106
 #, php-format
 msgid "The item #%s was successfully changed!"
 msgstr "Das Objekt #%s wurde erfolgreich geändert!"
 
-#: application/controllers/ItemsController.php:115
+#: application/controllers/ItemsController.php:114
 #, php-format
 msgid "The item \"%s\" was successfully deleted!"
 msgstr "Das Objekt \"%s\" wurde erfolgreich gelöscht!"
 
-#: application/controllers/ItemsController.php:117
+#: application/controllers/ItemsController.php:116
 #, php-format
 msgid "The item #%s was successfully deleted!"
 msgstr "Das Objekt #%s wurde erfolgreich gelöscht!"
 
-#: application/controllers/ItemsController.php:125
+#: application/controllers/ItemsController.php:124
 #, php-format
 msgid ""
 "This will delete the item \"%s\" and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
 msgstr "Dadurch werden das Objekt \"%s\" und die ihm zugeordneten Metadaten gelöscht. Ausserdem werden alle Dateien und deren Metadaten gelöscht, welche zu diesem Objekt gehören."
 
-#: application/controllers/ItemsController.php:129
+#: application/controllers/ItemsController.php:128
 #, php-format
 msgid ""
 "This will delete the item #%s and its associated metadata. It will also "
@@ -2189,15 +2258,15 @@ msgstr "Die Datensätze werden jetzt indexiert. Dies kann eine Weile dauern. Sie
 msgid "The item type elements were successfully changed!"
 msgstr "Die Objekttyp-Elemente wurden erfolgreich geändert!"
 
-#: application/controllers/SettingsController.php:149
+#: application/controllers/SettingsController.php:150
 msgid "The API configuration was successfully changed!"
 msgstr ""
 
-#: application/controllers/SettingsController.php:175
+#: application/controllers/SettingsController.php:176
 msgid "The ImageMagick directory path works."
 msgstr "Der Pfad zum ImageMagick-Verzeichnis funktioniert."
 
-#: application/controllers/SettingsController.php:176
+#: application/controllers/SettingsController.php:177
 msgid "The ImageMagick directory path does not work."
 msgstr "Der Pfad zum ImageMagick-Verzeichnis funktioniert nicht."
 
@@ -2255,7 +2324,7 @@ msgstr "Bitte folgen Sie diesem Link, um Ihr Passwort zurückzusetzen:"
 
 #: application/controllers/UsersController.php:110
 #: application/controllers/UsersController.php:113
-#: application/controllers/UsersController.php:322
+#: application/controllers/UsersController.php:380
 #, php-format
 msgid "%s Administrator"
 msgstr "%s Administrator"
@@ -2281,10 +2350,6 @@ msgstr "Passwort: Die Passwörter stimmen nicht überein."
 msgid "You may now log in to Omeka."
 msgstr "Sie können sich nun bei Omeka anmelden."
 
-#: application/controllers/UsersController.php:160
-msgid "Add User"
-msgstr "Benutzer hinzufügen"
-
 #: application/controllers/UsersController.php:171
 #, php-format
 msgid "The user \"%s\" was successfully added!"
@@ -2295,34 +2360,42 @@ msgstr "Der Benutzer \"%s\" wurde erfolgreich hinzugefügt!"
 msgid "The user \"%s\" was added, but the activation email could not be sent."
 msgstr "Der Benutzer \"%s\" wurde hinzugefügt, aber das Aktivierungs-E-Mail konnte nicht verschickt werden."
 
-#: application/controllers/UsersController.php:233
-msgid "A new API key was successfully created."
+#: application/controllers/UsersController.php:213
+msgid "User activation email has been sent."
 msgstr ""
 
-#: application/controllers/UsersController.php:241
-msgid "An existing API key was successfully rescinded."
+#: application/controllers/UsersController.php:215
+msgid "User activation email could not be sent."
 msgstr ""
 
-#: application/controllers/UsersController.php:246
-#: application/controllers/UsersController.php:257
+#: application/controllers/UsersController.php:231
+#: application/controllers/UsersController.php:282
 msgid "There was an invalid entry on the form. Please try again."
 msgstr "Dieses Formular enthält eine ungültige Eingabe. Bitte versuchen Sie es erneut."
 
 #: application/controllers/UsersController.php:253
-msgid "Password changed!"
-msgstr "Passwort geändert!"
-
-#: application/controllers/UsersController.php:264
 #, php-format
 msgid "The user %s was successfully changed!"
 msgstr "Der Benutzer %s wurde erfolgreich geändert!"
 
-#: application/controllers/UsersController.php:291
+#: application/controllers/UsersController.php:289
+msgid "Password changed!"
+msgstr "Passwort geändert!"
+
+#: application/controllers/UsersController.php:311
+msgid "A new API key was successfully created."
+msgstr ""
+
+#: application/controllers/UsersController.php:318
+msgid "An existing API key was successfully rescinded."
+msgstr ""
+
+#: application/controllers/UsersController.php:345
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
 msgstr "Der Benutzer \"%s\" wurde erfolgreich gelöscht!"
 
-#: application/controllers/UsersController.php:297
+#: application/controllers/UsersController.php:351
 #, php-format
 msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
@@ -2330,28 +2403,28 @@ msgid ""
 "this user."
 msgstr "%s wird aus dem System gelöscht. Objekte, Sammlungen und Schlagwörter dieses Benutzers verbleiben im System, sind aber nicht länger diesem Benutzer zugeordnet."
 
-#: application/controllers/UsersController.php:318
+#: application/controllers/UsersController.php:376
 msgid "Welcome!"
 msgstr "Willkommen!"
 
-#: application/controllers/UsersController.php:320
+#: application/controllers/UsersController.php:378
 #, php-format
 msgid ""
 "Your account for the %s repository has been created. Please click the "
 "following link to activate your account:"
 msgstr "Ihr Konto für das %s Repository wurde angelegt. Bitte klicken Sie den folgenden Link, um Ihr Konto zu aktivieren:"
 
-#: application/controllers/UsersController.php:323
+#: application/controllers/UsersController.php:381
 #, php-format
 msgid "Activate your account with the %s repository"
 msgstr "Aktivieren Sie Ihr Konto im %s Repository"
 
-#: application/controllers/UsersController.php:418
+#: application/controllers/UsersController.php:476
 msgid "Login information incorrect. Please try again."
 msgstr "Die Login-Informationen sind nicht korrekt. Bitte versuchen Sie es erneut."
 
 #: application/forms/AppearanceSettings.php:22
-#: application/forms/Install.php:117
+#: application/forms/Install.php:128
 msgid "Fullsize Image Size"
 msgstr "Grösse der Bilder-Detailansicht"
 
@@ -2360,7 +2433,7 @@ msgid "Maximum fullsize image size constraint (in pixels)."
 msgstr "Maximale Grösse der Bilder-Detailansicht (in Pixel)."
 
 #: application/forms/AppearanceSettings.php:29
-#: application/forms/Install.php:125
+#: application/forms/Install.php:136
 msgid "Thumbnail Size"
 msgstr "Grösse der Vorschaubilder"
 
@@ -2369,7 +2442,7 @@ msgid "Maximum thumbnail size constraint (in pixels)."
 msgstr "Maximale Grösse der Vorschaubilder (in Pixel)."
 
 #: application/forms/AppearanceSettings.php:36
-#: application/forms/Install.php:133
+#: application/forms/Install.php:144
 msgid "Square Thumbnail Size"
 msgstr "Grösse der quadratischen Vorschaubilder"
 
@@ -2397,15 +2470,19 @@ msgid ""
 msgstr "Begrenzen Sie die Anzahl der pro Seite angezeigten Resultate im öffentlich zugänglichen Bereich."
 
 #: application/forms/AppearanceSettings.php:57
-#: application/forms/Install.php:157
+#: application/forms/Install.php:168
 msgid "Show Empty Elements"
 msgstr "Leere Elemente anzeigen"
 
-#: application/forms/AppearanceSettings.php:66
+#: application/forms/AppearanceSettings.php:62
+msgid "Show Element Set Headings"
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:71
 msgid "Derivative Size Constraints"
 msgstr "Derivative Grössenbeschränkungen"
 
-#: application/forms/AppearanceSettings.php:71
+#: application/forms/AppearanceSettings.php:79
 msgid "Display Settings"
 msgstr "Anzeigeeinstellungen"
 
@@ -2443,35 +2520,27 @@ msgstr "Das neue Passwort muss mindestens %min% Zeichen lang sein."
 msgid "Repeat New Password"
 msgstr "Neues Passwort wiederholen"
 
-#: application/forms/ChangePassword.php:75
-msgid "Save Password"
-msgstr "Passwort speichern"
-
-#: application/forms/ChangePassword.php:84
-msgid "Change Password"
-msgstr "Passwort ändern"
-
-#: application/forms/GeneralSettings.php:22 application/forms/Install.php:79
+#: application/forms/GeneralSettings.php:22 application/forms/Install.php:90
 msgid "Site Title"
 msgstr "Blogtitel"
 
-#: application/forms/GeneralSettings.php:26 application/forms/Install.php:84
+#: application/forms/GeneralSettings.php:26 application/forms/Install.php:95
 msgid "Site Description"
 msgstr "Beschreibung der Website"
 
-#: application/forms/GeneralSettings.php:31 application/forms/Install.php:88
+#: application/forms/GeneralSettings.php:31 application/forms/Install.php:99
 msgid "Administrator Email"
 msgstr "E-Mail-Adresse des Administrators"
 
-#: application/forms/GeneralSettings.php:37 application/forms/Install.php:94
+#: application/forms/GeneralSettings.php:37 application/forms/Install.php:105
 msgid "Site Copyright Information"
 msgstr "Urheberrechtsinformationen der Website"
 
-#: application/forms/GeneralSettings.php:41 application/forms/Install.php:98
+#: application/forms/GeneralSettings.php:41 application/forms/Install.php:109
 msgid "Site Author Information"
 msgstr "Informationen über den Website-Autor"
 
-#: application/forms/GeneralSettings.php:45 application/forms/Install.php:102
+#: application/forms/GeneralSettings.php:45 application/forms/Install.php:113
 msgid "Tag Delimiter"
 msgstr "Schlagwortbegrenzer"
 
@@ -2481,69 +2550,76 @@ msgid ""
 "setting. You run the risk of splitting tags that contain the old delimiter."
 msgstr "Trennen Sie Schlagwörter mit diesem Zeichen oder dieser Zeichenfolge. Vorsicht beim Ändern dieser Einstellung: Sie riskieren, dass Schlagwörter getrennt werden, die das bisherige Trennzeichen enthalten."
 
-#: application/forms/GeneralSettings.php:59 application/forms/Install.php:163
+#: application/forms/GeneralSettings.php:59 application/forms/Install.php:174
 msgid "ImageMagick Directory Path"
 msgstr "Pfad zum ImageMagick-Verzeichnis"
 
 #: application/forms/Install.php:31
-msgid "only alphanumeric characters are allowed"
-msgstr "nur alphanumerische Zeichen sind erlaubt"
+msgid "must be 30 characters or fewer with no whitespace"
+msgstr ""
 
-#: application/forms/Install.php:37 application/forms/Login.php:34
+#: application/forms/Install.php:39 application/forms/User.php:46
+#: application/models/User.php:189
+#, php-format
+msgid ""
+"Whitespace is not allowed. Only these special characters may be used: %s"
+msgstr ""
+
+#: application/forms/Install.php:48 application/forms/Login.php:34
 msgid "Password"
 msgstr "Passwort"
 
-#: application/forms/Install.php:38
+#: application/forms/Install.php:49
 msgid "must be at least 6 characters"
 msgstr "muss mindestens 6 Zeichen lang sein"
 
-#: application/forms/Install.php:61
+#: application/forms/Install.php:72
 msgid "Confirm your password."
 msgstr "Bestätigen Sie Ihr Passwort."
 
-#: application/forms/Install.php:103
+#: application/forms/Install.php:114
 msgid "Separate tags using this character or string."
 msgstr "Trennen Sie Schlagwörter mit diesem Zeichen bzw. mit dieser Zeichenfolge."
 
-#: application/forms/Install.php:118
+#: application/forms/Install.php:129
 msgid "Maximum fullsize image size constraint (in pixels)"
 msgstr "Maximale Bildgrösse für Detailansicht (in Pixel)"
 
-#: application/forms/Install.php:126
+#: application/forms/Install.php:137
 msgid "Maximum thumbnail size constraint (in pixels)"
 msgstr "Maximale Bildgrösse für Vorschau (in Pixel)"
 
-#: application/forms/Install.php:134
+#: application/forms/Install.php:145
 msgid "Maximum square thumbnail size constraint (in pixels)"
 msgstr "Maximale Bildgrösse für quadratische Vorschau (in Pixel)"
 
-#: application/forms/Install.php:141
+#: application/forms/Install.php:152
 msgid "Items Per Page (admin)"
 msgstr "Objekte pro Seite (Administrationsbereich)"
 
-#: application/forms/Install.php:142
+#: application/forms/Install.php:153
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
 msgstr "Beschränken Sie die Anzahl der Objekte pro Seite, welche im Administrationsbereich angezeigt werden."
 
-#: application/forms/Install.php:149
+#: application/forms/Install.php:160
 msgid "Items Per Page (public)"
 msgstr "Objekte pro Seite (Öffentlicher Bereich)"
 
-#: application/forms/Install.php:150
+#: application/forms/Install.php:161
 msgid "Limit the number of items displayed per page in the public interface."
 msgstr "Beschränken Sie die Anzahl der Objekte pro Seite, welche im öffentlichen Bereich der Website angezeigt werden."
 
-#: application/forms/Install.php:159
+#: application/forms/Install.php:170
 msgid "Check box to show metadata elements with no text."
 msgstr "Box anwählen, um Metadaten-Elemente ohne Text anzuzeigen."
 
-#: application/forms/Install.php:174
+#: application/forms/Install.php:185
 msgid "Default Superuser Account"
 msgstr "Standardkonto für Super-User"
 
-#: application/forms/Install.php:184
+#: application/forms/Install.php:195
 msgid "Site Settings"
 msgstr "Website-Einstellungen"
 
@@ -2675,6 +2751,12 @@ msgid ""
 "filled in to secure public forms."
 msgstr "Geben Sie den privaten Schlüssel (Private Key) von recaptcha.net ein. Sowohl dieser als auch der öffentliche Schlüssel sind erforderlich, um öffentlich zugängliche Formulare zu schützen."
 
+#: application/forms/SecuritySettings.php:68
+msgid ""
+"Check this field if you would like to filter HTML elements or attributes "
+"from form input."
+msgstr ""
+
 #: application/forms/SecuritySettings.php:69
 msgid "Enable HTML Filtering"
 msgstr "HTML-Filter aktivieren"
@@ -2708,56 +2790,46 @@ msgid "HTML Filtering"
 msgstr "HTML-Filter"
 
 #: application/forms/User.php:30
-msgid ""
-"Username must contain only letters and numbers, and be 30 characters or "
-"fewer."
-msgstr "Benutzername darf nur Buchstaben und Ziffern enthalten und darf höchstens 30 Zeichen lang sein."
+msgid "Username must be 30 characters or fewer. Whitespace is not allowed."
+msgstr ""
 
 #: application/forms/User.php:37
 msgid "Username is required."
 msgstr "Es ist ein Benutzername erforderlich."
 
-#: application/forms/User.php:45
-msgid "Username must contain only letters and numbers."
-msgstr "Benutzernamen dürfen nur aus Buchstaben und Ziffern bestehen."
-
-#: application/forms/User.php:55
+#: application/forms/User.php:56
 msgid "Username must be at least %min% characters long."
 msgstr "Benutzernamen müssen mindestens %min% Zeichen lang sein."
 
-#: application/forms/User.php:57
+#: application/forms/User.php:58
 msgid "Username must be at most %max% characters long."
 msgstr "Benutzernamen dürfen höchstens %min% Zeichen lang sein."
 
-#: application/forms/User.php:71
+#: application/forms/User.php:72
 msgid "This username is already in use."
 msgstr "Dieser Benutzername ist bereits vergeben."
 
-#: application/forms/User.php:80
-msgid "Display Name"
-msgstr "Angezeigter Name"
-
-#: application/forms/User.php:81
+#: application/forms/User.php:82
 msgid "Name as it should be displayed on the site"
 msgstr "Name, der auf der Website angezeigt wird"
 
-#: application/forms/User.php:87 application/models/User.php:169
+#: application/forms/User.php:88 application/models/User.php:169
 msgid "Real Name is required."
 msgstr "Der echte Name ist erforderlich."
 
-#: application/forms/User.php:93
+#: application/forms/User.php:94
 msgid "This email address is invalid."
 msgstr "Diese E-Mail-Adresse ist ungültig."
 
-#: application/forms/User.php:101
+#: application/forms/User.php:102
 msgid "Email is required."
 msgstr "Die E-Mail-Adresse ist zwingend erforderlich."
 
-#: application/forms/User.php:120
+#: application/forms/User.php:121
 msgid "This email address is already in use."
 msgstr "Diese E-Mail-Adresse ist bereits in Gebrauch."
 
-#: application/forms/User.php:129
+#: application/forms/User.php:130
 msgid ""
 "Roles describe the permissions a user has. See <a "
 "href='http://omeka.org/codex/User_Roles' target='_blank'>documentation</a> "
@@ -2765,12 +2837,17 @@ msgid ""
 msgstr "Rollen beschreiben die Berechtigungen eines Benutzers. Für Details konsultieren Sie bitte die <a href='http://omeka.org/codex/User_Roles' target='_blank'>Dokumentation</a>."
 
 #: application/forms/User.php:137
-msgid "Active?"
-msgstr "Aktiv?"
-
-#: application/forms/User.php:138
 msgid "Inactive users cannot log in to the site."
 msgstr "Inaktive Benutzer können sich nicht an der Website anmelden."
+
+#: application/forms/User.php:139
+#, php-format
+msgid "Activation has been pending since %s."
+msgstr ""
+
+#: application/forms/User.php:142
+msgid "Active?"
+msgstr "Aktiv?"
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:115
 #, php-format
@@ -2872,69 +2949,81 @@ msgstr "'%s' ist ein ungültiger Spezialwert."
 msgid "An invalid value was detected during record iteration."
 msgstr "Bei der Record Iteration wurde ein ungültiger Wert festgestellt."
 
-#: application/libraries/globals.php:399
+#: application/libraries/globals.php:417
 msgid "File"
 msgstr "Datei"
 
-#: application/libraries/globals.php:457
+#: application/libraries/globals.php:475
 msgid "Keyword"
 msgstr "Schlüsselwort"
 
-#: application/libraries/globals.php:458
+#: application/libraries/globals.php:476
 msgid "Boolean"
 msgstr "Boolean"
 
-#: application/libraries/globals.php:459
+#: application/libraries/globals.php:477
 msgid "Exact match"
 msgstr "Exakte Übereinstimmung"
 
-#: application/libraries/globals.php:1227
-#: application/libraries/globals.php:1248
+#: application/libraries/globals.php:1238
+#: application/libraries/globals.php:1259
 #, php-format
 msgid "Could not find file %s!"
 msgstr "Die Datei %s wurde nicht gefunden!"
 
-#: application/libraries/globals.php:1554
+#: application/libraries/globals.php:1276
+msgid "No featured collections are available."
+msgstr "Es sind keine hervorgehobenen Sammlungen vorhanden."
+
+#: application/libraries/globals.php:1569
 msgid "Select Below "
 msgstr "Unten auswählen"
 
-#: application/libraries/globals.php:1596
+#: application/libraries/globals.php:1611
 msgid "Omeka RSS Feed"
 msgstr "Omeka RSS Feed"
 
-#: application/libraries/globals.php:1597
+#: application/libraries/globals.php:1612
 msgid "Omeka Atom Feed"
 msgstr "Omeka Atom Feed"
 
-#: application/libraries/globals.php:2262
+#: application/libraries/globals.php:2251
+msgid "No recent items available."
+msgstr " Es sind keine neuen Objekte vorhanden."
+
+#: application/libraries/globals.php:2277
+msgid "No featured items are available."
+msgstr "Es sind keine hervorgehobenen Sammlungen vorhanden."
+
+#: application/libraries/globals.php:2332
 msgid "View"
 msgstr "Ansehen"
 
-#: application/libraries/globals.php:2324
+#: application/libraries/globals.php:2394
 msgid "No Collection"
 msgstr "Keine Sammlung"
 
-#: application/libraries/globals.php:2439
+#: application/libraries/globals.php:2509
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2456
+#: application/libraries/globals.php:2526
 msgid "Next Item &rarr;"
 msgstr "Nächstes Objekt &rarr;"
 
-#: application/libraries/globals.php:2476
+#: application/libraries/globals.php:2546
 msgid "&larr; Previous Item"
 msgstr "&larr; Vorangehendes Objekt"
 
-#: application/libraries/globals.php:2653
+#: application/libraries/globals.php:2724
 msgid "Browse All"
 msgstr "Alle durchsuchen"
 
-#: application/libraries/globals.php:2658
+#: application/libraries/globals.php:2729
 msgid "Browse by Tag"
 msgstr "Nach Schlagwörtern durchsuchen"
 
-#: application/libraries/globals.php:2931
+#: application/libraries/globals.php:3002
 msgid "No tags are available."
 msgstr "Es sind keine Schlagwörter vorhanden."
 
@@ -2993,48 +3082,48 @@ msgstr "Der lokale Pfad für eine gespeicherte Datei konnte nicht gefunden werde
 msgid "\"%s\" is not a valid file derivative."
 msgstr "\"%s\" ist kein gültiges File Derivative."
 
-#: application/models/Item.php:317
+#: application/models/Item.php:330
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
 msgstr "Es können keine Dateien zu Objekten hinzugefügt werden, welche nicht persistent in der Datenbank sind!"
 
 #. / Chicago-style item citation: two authors
-#: application/models/Item.php:444
+#: application/models/Item.php:457
 #, php-format
 msgid "%1$s and %2$s"
 msgstr "%1$s und %2$s"
 
 #. / Chicago-style item citation: three authors
-#: application/models/Item.php:448
+#: application/models/Item.php:461
 #, php-format
 msgid "%1$s, %2$s, and %3$s"
 msgstr "%1$s, %2$s und %3$s"
 
 #. / Chicago-style item citation: more than three authors
-#: application/models/Item.php:452
+#: application/models/Item.php:465
 #, php-format
 msgid "%s et al."
 msgstr "%s et al."
 
 #. / Chicago-style item citation: access date and URL
-#: application/models/Item.php:470
+#: application/models/Item.php:483
 #, php-format
 msgid "accessed %1$s, %2$s."
 msgstr "accessed %1$s, %2$s."
 
-#: application/models/Item.php:487
+#: application/models/Item.php:500
 msgid "Cannot add an existing file to an item!"
 msgstr "Einem Objekt konnte eine existierende Datei nicht hinzugefügt werden."
 
-#: application/models/Item.php:491
+#: application/models/Item.php:504
 msgid "File must be valid before it can be associated with an item!"
 msgstr "Eine Datei muss gültig sein bevor sie mit einem Objekt zugewiesen werden kann."
 
-#: application/models/Item.php:515
+#: application/models/Item.php:528
 msgid "Invalid item type."
 msgstr ""
 
-#: application/models/Item.php:518
+#: application/models/Item.php:531
 msgid "Invalid collection."
 msgstr ""
 
@@ -3114,12 +3203,12 @@ msgstr "Jede Option muss einen eindeutigen Namen haben."
 msgid "Names of plugins must not be blank"
 msgstr "Namen von Plugins dürfen nicht leer sein"
 
-#: application/models/Table/Collection.php:76
+#: application/models/Table/Collection.php:77
 #, php-format
 msgid "[Untitled] #%s"
 msgstr "[Untitled] #%s"
 
-#: application/models/Table/Item.php:161
+#: application/models/Table/Item.php:164
 msgid "Invalid search type given!"
 msgstr "Ungültiger Suchtyp!"
 
@@ -3147,10 +3236,6 @@ msgstr "Dem Benutzer muss eine Rolle zugewiesen werden."
 #, php-format
 msgid "The username \"%1$s\" must be between %2$s and %3$s characters."
 msgstr "Der Benutzername \"%1$s\" muss zwischen %2$s und %3$s Zeichen lang sein."
-
-#: application/models/User.php:189
-msgid "The username must be alphanumeric."
-msgstr "Der Benutzername muss alphanumerisch sein."
 
 #: application/models/User.php:191
 #, php-format
@@ -3264,7 +3349,7 @@ msgstr "Seite 5"
 msgid "Page 6"
 msgstr "Seite 6"
 
-#: application/views/helpers/AllElementTexts.php:101
+#: application/views/helpers/AllElementTexts.php:108
 msgid "[no text]"
 msgstr "[kein Text]"
 
@@ -3302,14 +3387,15 @@ msgstr "Beim Abruf der Datensatz-URL wurde ein ungültiger Befehl festgestellt."
 msgid "Invalid return value while getting record URL."
 msgstr "Beim Abruf der Datensatz-URL wurde ein ungültiger Rückgabewert festgestellt."
 
-#: application/views/scripts/collections/browse.php:31
+#: application/views/scripts/collections/browse.php:14
+#: application/views/scripts/items/browse.php:24
+msgid "Sort by: "
+msgstr "Sortieren nach:"
+
+#: application/views/scripts/collections/browse.php:42
 #, php-format
 msgid "View the items in %s"
 msgstr "Objekte in %s anzeigen"
-
-#: application/views/scripts/collections/random-featured.php:11
-msgid "No featured collections are available."
-msgstr "Es sind keine hervorgehobenen Sammlungen vorhanden."
 
 #: application/views/scripts/collections/show.php:15
 #, php-format
@@ -3324,18 +3410,26 @@ msgstr "Es gibt momentan keine Objekte in dieser Sammlung."
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
 msgstr "Erstellt mit <a href=\"http://omeka.org\">Omeka</a>."
 
-#: application/views/scripts/common/pagination_control.php:11
-msgid "&lt;"
-msgstr "&lt;"
+#: application/views/scripts/common/pagination_control.php:5
+msgid "Pagination"
+msgstr ""
 
-#: application/views/scripts/common/pagination_control.php:34
+#: application/views/scripts/common/pagination_control.php:11
+msgid "Previous Page"
+msgstr ""
+
+#: application/views/scripts/common/pagination_control.php:36
+msgid "Current Page"
+msgstr ""
+
+#: application/views/scripts/common/pagination_control.php:39
 #, php-format
 msgid "%s of %s"
 msgstr "%s von %s"
 
-#: application/views/scripts/common/pagination_control.php:42
-msgid "&gt;"
-msgstr "&gt;"
+#: application/views/scripts/common/pagination_control.php:48
+msgid "Next Page"
+msgstr ""
 
 #: application/views/scripts/error/403.php:2
 msgid "403 Page Forbidden"
@@ -3381,33 +3475,17 @@ msgid ""
 "messages</a>."
 msgstr "Um zu erfahren, wie Sie detailliertere Informationen über diesen Fehler erhalten, lesen Sie bitte im Omeka Codex die Seite <a href=\"http://omeka.org/codex/Retrieving_error_messages\">Retrieving Error Messages</a>."
 
-#: application/views/scripts/index.php:16
+#: application/views/scripts/index.php:10
 msgid "Featured Item"
 msgstr "Hervorgehobenes Objekt"
 
-#: application/views/scripts/index.php:24
+#: application/views/scripts/index.php:18
 msgid "Featured Collection"
 msgstr "Hervorgehobene Sammlung"
 
-#: application/views/scripts/index.php:69
-msgid "No recent items available."
-msgstr " Es sind keine neuen Objekte vorhanden."
-
-#: application/views/scripts/index.php:73
+#: application/views/scripts/index.php:42
 msgid "View All Items"
 msgstr "Alle Objekte anzeigen"
-
-#: application/views/scripts/items/browse.php:24
-msgid "Sort by: "
-msgstr "Sortieren nach:"
-
-#: application/views/scripts/items/random-featured.php:20
-msgid "No featured items are available."
-msgstr "Es sind keine hervorgehobenen Sammlungen vorhanden."
-
-#: application/views/scripts/items/search-form.php:76
-msgid "Remove field"
-msgstr ""
 
 #: application/views/scripts/items/show.php:10
 msgid "Files"
@@ -3416,14 +3494,6 @@ msgstr "Dateien"
 #: application/views/scripts/items/show.php:33
 msgid "Citation"
 msgstr "Zitat"
-
-#: application/views/scripts/search/index.php:2
-msgid "Search Omeka "
-msgstr "Omeka durchsuchen"
-
-#: application/views/scripts/search/index.php:29
-msgid "Your query returned no results."
-msgstr "Ihre Anfrage ergibt keine Treffer."
 
 #: application/views/scripts/search/search-filters.php:3
 msgid "Query:"
@@ -3452,6 +3522,11 @@ msgstr "Gehe zu Sucheinstellungen um die zu benutzenden Datensatztypen auszuwäh
 #: application/views/scripts/search/search-form.php:19
 msgid "Advanced Search (Items only)"
 msgstr "Erweiterte Suche (nur Objekte)"
+
+#: application/views/scripts/users/activate.php:8
+#, php-format
+msgid "Hello %s. Your username is %s"
+msgstr ""
 
 #: application/views/scripts/users/login.php:9
 msgid "Go to Home Page"
