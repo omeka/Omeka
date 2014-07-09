@@ -38,11 +38,17 @@ class Api_Item extends Omeka_Record_Api_AbstractRecordAdapter
             $representation['item_type'] = null;
         }
         if ($record->collection_id) {
-            $representation['collection'] = array(
-                'id' => $record->collection_id, 
-                'url' => self::getResourceUrl("/collections/{$record->collection_id}"), 
-                'resource' => 'collections', 
-            );
+            //check that user has access to the collection
+            $collection = $record->getCollection();
+            if (is_allowed($collection, 'show')) {
+                $representation['collection'] = array(
+                    'id' => $record->collection_id, 
+                    'url' => self::getResourceUrl("/collections/{$record->collection_id}"), 
+                    'resource' => 'collections', 
+                );
+            } else {
+                $representation['collection'] = null;
+            }
         } else {
             $representation['collection'] = null;
         }
