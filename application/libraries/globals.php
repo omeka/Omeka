@@ -2603,7 +2603,7 @@ function link_to_collection($text = null, $props = array(), $action = 'show', $c
     }
 
     $collectionTitle = metadata($collectionObj, array('Dublin Core', 'Title'));
-    $text = (!empty($text) ? $text : (!empty($collectionTitle) ? $collectionTitle : __('[Untitled]')));
+    $text = !empty($text) ? $text : $collectionTitle;
     return link_to($collectionObj, $action, $text, $props);
 }
 
