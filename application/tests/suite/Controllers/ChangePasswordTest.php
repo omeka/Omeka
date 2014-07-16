@@ -143,6 +143,9 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
     
     private function _dispatchChangePassword(array $form)
     {
+        $hash = new Zend_Form_Element_Hash('password_csrf');
+        $hash->initCsrfToken();
+        $form['password_csrf'] = $hash->getHash();
         $this->getRequest()->setPost($form);
         $this->getRequest()->setMethod('post');
         $this->dispatch(self::FORM_URL);
