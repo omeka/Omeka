@@ -70,6 +70,8 @@ class Omeka_Form_ChangePassword extends Omeka_Form
                 'errorMessages' => array(__('New password must be typed correctly twice.'))
             )
         );
+
+        $this->addElement('hash', 'password_csrf');
         
         $this->addDisplayGroup(array('current_password', 
                                      'new_password', 

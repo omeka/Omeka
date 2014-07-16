@@ -160,7 +160,12 @@ class UsersController extends Omeka_Controller_AbstractActionController
         $this->view->form = $form;
         $this->view->user = $user;
         
-        if (!$this->getRequest()->isPost() || !$form->isValid($_POST)) {
+        if (!$this->getRequest()->isPost()) {
+            return;
+        }
+
+        if (!$form->isValid($_POST)) {
+            $this->_helper->flashMessenger(__('There was an invalid entry on the form. Please try again.'), 'error');
             return;
         }
         

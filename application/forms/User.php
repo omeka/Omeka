@@ -143,6 +143,8 @@ class Omeka_Form_User extends Omeka_Form
                 'description' => $description 
             ));
         }
+
+        $this->addElement('hash', 'user_csrf');
     }
     
     public function setHasRoleElement($flag)
