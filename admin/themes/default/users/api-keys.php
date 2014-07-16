@@ -47,7 +47,7 @@ echo flash();
     <tbody>
         <?php foreach ($this->keys as $key): ?>
         <tr>
-            <td><?php echo $key->label; ?></td>
+            <td><?php echo html_escape($key->label); ?></td>
             <td style="font-family: monospace;"><?php echo $key->key; ?></td>
             <td><?php echo $key->ip ? inet_ntop($key->ip) : ''; ?></td>
             <td><?php echo $key->accessed; ?></td>
