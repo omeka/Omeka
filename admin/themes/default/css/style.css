@@ -2287,14 +2287,12 @@ button.remove_search {
     }
     
     .themes .theme img { width: 100%; }
-        
-    .themes .theme input[type=radio] { display: none; }
     
 .type { font-weight: bold; }
     
 .use-theme {
     width: 100%;
-    margin: 0;
+    margin: 0 5px 20px 0;
     padding: 0 !important;
 }
 

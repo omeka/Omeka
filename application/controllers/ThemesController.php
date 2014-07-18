@@ -13,15 +13,18 @@ class ThemesController extends Omeka_Controller_AbstractActionController
 {
     public function browseAction()
     {
+        $csrfForm = new Omeka_Form_Csrf(array('hashName' => 'theme_switch_csrf'));
         $themes = apply_filters('browse_themes', Theme::getAllThemes());
         $public = get_option(Theme::PUBLIC_THEME_OPTION);
         $this->view->themes = $themes;
         $this->view->current = $themes[$public];
+        $this->view->csrf = $csrfForm;
     }
     
     public function switchAction()
     {
-        if (!$this->getRequest()->isPost()) {
+        $csrfForm = new Omeka_Form_Csrf(array('hashName' => 'theme_switch_csrf'));
+        if (!$this->getRequest()->isPost() || !$csrfForm->isValid($_POST)) {
             $this->_helper->flashMessenger(__('Invalid form submission.'), 'error');
             $this->_helper->redirector('browse');
             return;
