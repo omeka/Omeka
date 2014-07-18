@@ -74,6 +74,11 @@ class Omeka_Form_Navigation extends Omeka_Form
         $this->clearElements();
         $this->_addHiddenElement();
         $this->_addHomepageSelectElement();
+        $this->addElement('hash', 'navigation_csrf',
+            array('decorators' =>
+                array('ViewHelper')
+            )
+        );
     }
     
     /**

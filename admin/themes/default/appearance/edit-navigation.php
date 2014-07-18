@@ -32,6 +32,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'settings')); ?>
         <?php echo $this->form->getDisplayGroup(Omeka_Form_Navigation::HOMEPAGE_SELECT_DISPLAY_ELEMENT_ID); ?>
     </div>
 </section>
+<?php echo $this->form->getElement('navigation_csrf'); ?>
 </form>
 <script type="text/javascript">
     Omeka.Navigation.labelText = <?php echo js_escape(__('Label')); ?>;
