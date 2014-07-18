@@ -100,6 +100,7 @@ class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
         $this->dispatch('themes/config');
 
         $actualOptions = Theme::getOptions(self::THEME);
+        $this->assertArrayNotHasKey('theme_config_csrf', $actualOptions);
         foreach($themeOptions as $name => $value) {
             $this->assertArrayHasKey($name, $actualOptions);
             $this->assertEquals($actualOptions[$name], $value, "Option '$name' was not correctly set.");

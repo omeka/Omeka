@@ -44,6 +44,10 @@ class Omeka_Controller_Action_Helper_ThemeConfiguration extends Zend_Controller_
         // validate the form (note: this will populate the form with the post values)
         if ($this->_form->isValid($data)) {
             $this->_formValues = $this->_form->getValues();
+
+            // CSRF token should not be saved as an setting
+            unset($this->_formValues['theme_config_csrf']);
+
             $this->_themeOptions = $originalOptions;
             
             foreach($elements as $element) {
