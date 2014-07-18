@@ -100,7 +100,8 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
             'email' => 'admin' . mt_rand() . '@example.com',
             'institution' => 'School of Hard Knocks',
             'role' => 'admin',
-            'active' => '1'
+            'active' => '1',
+            'user_csrf'   => $this->_getCsrfToken()
         ));
         $this->request->setMethod('post');
         $this->dispatch('/users/edit/' . $this->adminUser->id);
@@ -120,6 +121,7 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
             'email' => 'foobar' . mt_rand() . '@example.com',
             'institution' => 'School of Hard Knocks',
             'active' => '1',
+            'user_csrf'   => $this->_getCsrfToken()
         ));
         $this->request->setMethod('post');
         $this->dispatch('/users/edit/' . $this->currentuser->id);
@@ -138,7 +140,8 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
             'email' => 'invalid.email',
             'institution' => 'School of Hard Knocks',
             'role' => 'super',
-            'active' => '1'
+            'active' => '1',
+            'user_csrf'   => $this->_getCsrfToken()
         ));
         $this->request->setMethod('post');
         $this->dispatch('/users/edit/' . $this->adminUser->id);
@@ -157,7 +160,8 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
             'email' => 'foobar@example.com',
             'institution' => 'School of Hard Knocks',
             'role' => 'super',
-            'active' => '0'
+            'active' => '0',
+            'user_csrf'   => $this->_getCsrfToken()
         ));
         $this->request->setMethod('post');
         $this->dispatch('/users/edit/' . $this->adminUser->id);
@@ -180,7 +184,8 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
             'active' => '1',
             'entity_id' => '5000',
             'salt' => 'foobar',
-            'password' => 'some-arbitrary-hash'
+            'password' => 'some-arbitrary-hash',
+            'user_csrf'   => $this->_getCsrfToken()
         ));
         $this->request->setMethod('post');
         $this->dispatch('/users/edit/' . $this->currentuser->id);
@@ -217,5 +222,12 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
     private function _getUser($username)
     {
         return $this->db->getTable('User')->findBySql("username = ?", array($username), true);
+    }
+
+    private function _getCsrfToken()
+    {
+        $hash = new Zend_Form_Element_Hash('user_csrf');
+        $hash->initCsrfToken();
+        return $hash->getHash();
     }
 }
