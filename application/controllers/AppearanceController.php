@@ -36,12 +36,12 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
         fire_plugin_hook('appearance_settings_form', array('form' => $form));
         $this->view->form = $form;
         
-        if (isset($_POST['appearance_submit'])) {
+        if ($this->getRequest()->isPost()) {
             if ($form->isValid($_POST)) {
                 $options = $form->getValues();
-                // Everything except the submit button should correspond to a 
+                // Everything except the CSRF hash should correspond to a
                 // valid option in the database.
-                unset($options['settings_submit']);
+                unset($options['appearance_csrf']);
                 foreach ($options as $key => $value) {
                     set_option($key, $value);
                 }
@@ -60,7 +60,7 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
         fire_plugin_hook('navigation_form', array('form' => $form));
         $this->view->form = $form;
 
-        if (isset($_POST['submit'])) {
+        if ($this->getRequest()->isPost()) {
             if ($form->isValid($_POST)) {
                 $form->saveFromPost();
                 $this->_helper->flashMessenger(__('The navigation settings have been updated.'), 'success');

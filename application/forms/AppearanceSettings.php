@@ -62,6 +62,8 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
             'label' => __('Show Element Set Headings'),
             'class' => 'checkbox',
         ));
+
+        $this->addElement('hash', 'appearance_csrf');
         
         $this->addDisplayGroup(
             array(
