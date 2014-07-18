@@ -69,23 +69,25 @@ class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
         
         // specify the theme options for the post
         $themeOptions = array(
-          'custom_header_navigation' => '',
           'display_featured_item' => '1',
           'display_featured_collection' => '1',
           'display_featured_exhibit' => '1',
           'homepage_recent_items' => '',
           'homepage_text' => '',
-          'display_dublin_core_fields' => '',
           'footer_text' => '',
           'display_footer_copyright' => '0'
         );
+
+        $csrf = new Zend_Form_Element_Hash('theme_config_csrf');
+        $csrf->initCsrfToken();
         
         // specify other post data
         $otherPostData = array(
           'hidden_file_logo' => '',
           'hidden_file_header_background' => '',  
           'MAX_FILE_SIZE' => '33554432',
-          'submit' => 'Save Changes'
+          'submit' => 'Save Changes',
+          'theme_config_csrf' => $csrf->getHash()
         );
         
         // set the the post data
@@ -98,10 +100,9 @@ class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
         $this->dispatch('themes/config');
 
         $actualOptions = Theme::getOptions(self::THEME);
-        foreach($actualOptions as $name => $value) {
-            if (isset($themeOptions[$name])) {
-                $this->assertEquals($themeOptions[$name], $value, "Option '$name' was not correctly set.");
-            }
+        foreach($themeOptions as $name => $value) {
+            $this->assertArrayHasKey($name, $actualOptions);
+            $this->assertEquals($actualOptions[$name], $value, "Option '$name' was not correctly set.");
         }
         
         // verify that logo is empty
