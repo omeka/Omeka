@@ -26,7 +26,7 @@ RewriteEngine on
 
 # Allow direct access to files (except PHP files)
 RewriteCond %{REQUEST_FILENAME} -f
-RewriteRule !\.php$ - [C]
+RewriteRule !\.(php[0-9]?|phtml|phps)$ - [C]
 RewriteRule .* - [L]
 
 RewriteRule ^install/.*$ install/install.php [L]
