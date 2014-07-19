@@ -178,8 +178,13 @@ class UsersController extends Omeka_Controller_Action
         $form = $this->_getUserForm($user);
         $form->setSubmitButtonText(__('Add User'));
         $this->view->form = $form;
-        
-        if (!$this->getRequest()->isPost() || !$form->isValid($_POST)) {
+
+        if (!$this->getRequest()->isPost()) {
+            return;
+        }
+
+        if (!$form->isValid($_POST)) {
+            $this->flashError(__('There was an invalid entry on the form. Please try again.'));
             return;
         }
         

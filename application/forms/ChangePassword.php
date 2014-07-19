@@ -86,6 +86,8 @@ class Omeka_Form_ChangePassword extends Omeka_Form
                 'label'         => __('Save Password')
             )
         );
+
+        $this->addElement('hash', 'password_csrf');
         
         $this->addDisplayGroup(array('current_password', 
                                      'new_password', 

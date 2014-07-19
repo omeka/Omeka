@@ -10,7 +10,7 @@
 /**
  * Define the current version of Omeka.
  */ 
-define('OMEKA_VERSION', '1.5.3');
+define('OMEKA_VERSION', '1.5.4');
 
 defined('APPLICATION_ENV')
     || define('APPLICATION_ENV',
