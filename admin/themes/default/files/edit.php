@@ -29,7 +29,7 @@ echo flash();
         </div> <!-- end file-metadata div -->
         <?php fire_plugin_hook('admin_files_form', array('file' => $file, 'view' => $this)); ?>
     </section>
-
+    <?php echo $csrf; ?>
     <section class="three columns omega">
         <div id="save" class="panel">
             <input type="submit" name="submit" class="submit big green button" value="<?php echo __('Save Changes'); ?>" id="file_edit" /> 
