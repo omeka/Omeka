@@ -16,5 +16,6 @@ echo flash();
             ?>
         </div>
     </section>
+    <?php echo $csrf; ?>
 </form>
 <?php echo foot(); ?>

@@ -16,6 +16,7 @@ echo flash();
             <input type="submit" class="uninstall small red button" name="uninstall-confirm" class="foo" value="<?php echo __('Uninstall'); ?>" />
             <span><?php echo __('or'); ?> <?php echo link_to('plugins', 'browse', __('Cancel')); ?></span>
         </p>
+        <?php echo $csrf; ?>
     </form>
 </section>
 

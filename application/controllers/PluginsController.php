@@ -44,8 +44,15 @@ class PluginsController extends Omeka_Controller_AbstractActionController
          || !$this->_pluginBroker->getHook($plugin, 'config')) {
             throw new RuntimeException(__('Error in configuring plugin named "%s". Missing config and/or config_form hook(s).', $plugin->getDisplayName()));
         }
-        
+
+        $csrf = new Omeka_Form_SessionCsrf;
         if ($this->getRequest()->isPost()) {
+            if (!$csrf->isValid($_POST)) {
+                $this->_helper->_flashMessenger(__('There was an error on the form. Please try again.'), 'error');
+                $this->_helper->redirector('index');
+                return;
+            }
+
             try {
                 $this->_pluginBroker->callHook('config', array('post' => $_POST), $plugin);
                 $this->_helper->flashMessenger(
@@ -58,10 +65,22 @@ class PluginsController extends Omeka_Controller_AbstractActionController
             }
         }
         $this->view->plugin = $plugin;
+        $this->view->csrf = $csrf;
     }
     
     public function installAction()
     {
+        if (!$this->getRequest()->isPost()) {
+            return $this->_forward('method-not-allowed', 'error');
+        }
+
+        $csrf = new Omeka_Form_SessionCsrf;
+        if (!$csrf->isValid($_POST)) {
+            $this->_helper->_flashMessenger(__('There was an error on the form. Please try again.'), 'error');
+            $this->_helper->redirector('index');
+            return;
+        }
+
         // Create a new plugin with the name given by the POST 'name' param.
         $plugin = $this->_getPluginByName(true);
     
@@ -71,6 +90,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
                 'error'
             );
             $this->_helper->redirector('index');
+            return;
         }
              
         try {
@@ -108,7 +128,17 @@ class PluginsController extends Omeka_Controller_AbstractActionController
      */
     public function activateAction()
     {
+        if (!$this->getRequest()->isPost()) {
+            return $this->_forward('method-not-allowed', 'error');
+        }
+
         $this->_helper->redirector('index');
+
+        $csrf = new Omeka_Form_SessionCsrf;
+        if (!$csrf->isValid($_POST)) {
+            $this->_helper->_flashMessenger(__('There was an error on the form. Please try again.'), 'error');
+            return;
+        }
         
         $plugin = $this->_getPluginByName();
         if (!$plugin) {
@@ -149,7 +179,18 @@ class PluginsController extends Omeka_Controller_AbstractActionController
      */
     public function deactivateAction()
     {
+        if (!$this->getRequest()->isPost()) {
+            return $this->_forward('method-not-allowed', 'error');
+        }
+
         $this->_helper->redirector('index');
+
+        $csrf = new Omeka_Form_SessionCsrf;
+        if (!$csrf->isValid($_POST)) {
+            $this->_helper->_flashMessenger(__('There was an error on the form. Please try again.'), 'error');
+            return;
+        }
+
         $plugin = $this->_getPluginByName();
         if (!$plugin) {
             return;
@@ -173,6 +214,17 @@ class PluginsController extends Omeka_Controller_AbstractActionController
     
     public function upgradeAction()
     {
+        if (!$this->getRequest()->isPost()) {
+            return $this->_forward('method-not-allowed', 'error');
+        }
+
+        $csrf = new Omeka_Form_SessionCsrf;
+        if (!$csrf->isValid($_POST)) {
+            $this->_helper->_flashMessenger(__('There was an error on the form. Please try again.'), 'error');
+            $this->_helper->redirector('index');
+            return;
+        }
+
         $plugin = $this->_getPluginByName();
 
         if (!($plugin && $plugin->isInstalled())) {
@@ -232,6 +284,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
         $this->view->plugins = $allPlugins;
         $this->view->loader = $this->_pluginLoader;
         $this->view->plugin_count = count($allPlugins);
+        $this->view->csrf = new Omeka_Form_SessionCsrf;
     }
 
     /**
@@ -241,6 +294,10 @@ class PluginsController extends Omeka_Controller_AbstractActionController
      */
     public function uninstallAction()
     {
+        if (!$this->getRequest()->isPost()) {
+            return $this->_forward('method-not-allowed', 'error');
+        }
+
         $this->_helper->redirector('index');
         $plugin = $this->_getPluginByName();
         if (!$plugin) {
@@ -253,8 +310,11 @@ class PluginsController extends Omeka_Controller_AbstractActionController
                 __("The plugin could not be found in the '%s' directory!", $plugin->getDirectoryName()),
                 'error'
             );
+            return;
         }
-        
+
+        $csrf = new Omeka_Form_SessionCsrf;
+
         // Confirm the uninstall.
         if (!$this->_getParam('confirm')) {
             if ($this->_getParam('uninstall-confirm')) {
@@ -268,11 +328,16 @@ class PluginsController extends Omeka_Controller_AbstractActionController
             // plugin, if it exists.
             $message = get_specific_plugin_hook_output($plugin, 'uninstall_message');
             
-            $this->view->assign(compact('plugin', 'message'));
+            $this->view->assign(compact('plugin', 'message', 'csrf'));
             // Cancel the redirect here.
             $this->getResponse()->clearHeader('Location')->setHttpResponseCode(200);
             $this->render('confirm-uninstall');
         } else {
+            if (!$csrf->isValid($_POST)) {
+                $this->_helper->_flashMessenger(__('There was an error on the form. Please try again.'), 'error');
+                return;
+            }
+
             // Attempt to uninstall the plugin.
             try {
                 $this->_pluginInstaller->uninstall($plugin);
@@ -307,8 +372,8 @@ class PluginsController extends Omeka_Controller_AbstractActionController
     /**
      * Retrieve the Plugin record based on the name passed via the request.
      *
-     * @param boolean $create Whether or not the plugin object should be 
-     * created if it has not already been loaded.  
+     * @param boolean $create Whether or not the plugin object should be
+     * created if it has not already been loaded.
      */
     protected function _getPluginByName($create = false)
     {
