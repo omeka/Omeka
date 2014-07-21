@@ -13,17 +13,41 @@
  */
 class Omeka_Form_Csrf extends Omeka_Form
 {
-    private $_hashName = 'csrf';
+    /**
+     * Name of the element that stores the CSRF token.
+     *
+     * This should be unique across the application, but we do provide a
+     * default of "csrf".
+     *
+     * @var string
+     */
+    protected $_hashName = 'csrf';
+
+    /**
+     * Time the token is valid, in seconds. The default setting here is an hour.
+     *
+     * @var int
+     */
+    protected $_timeout = 3600;
         
     public function init()
     {
         parent::init();
-        $this->removeDecorator('Form');
-        $this->addElement('hash', $this->_hashName);
+        $this->addElement('hash', $this->_hashName, array('timeout' => $this->_timeout));
+    }
+
+    public function loadDefaultDecorators()
+    {
+        $this->setDecorators(array('FormElements'));
     }
 
     public function setHashName($hashName)
     {
         $this->_hashName = $hashName;
+    }
+
+    public function setTimeout($timeout)
+    {
+        $this->_timeout = $timeout;
     }
 }
