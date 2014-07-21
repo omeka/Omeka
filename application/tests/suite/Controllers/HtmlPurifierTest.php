@@ -150,11 +150,13 @@ class Omeka_Controllers_HtmlPurifierTest extends Omeka_Test_AppTestCase
     protected function _addElementTextWithDirtyHtmlToPost($dirtyHtml, $elementSetName, $elementName, $post=array())
     {
         $titleElement = $this->db->getTable('Element')->findByElementSetNameAndElementName($elementSetName, $elementName);
-        
+
         $elementsArray = array();
         $elementsArray[strval($titleElement->id)] = array(array('text' => $dirtyHtml, 'html' => 1));
         $post['Elements'] = $elementsArray;
-        
+
+        $csrf = new Omeka_Form_Element_SessionCsrfToken('csrf_token');
+        $post['csrf_token'] = $csrf->getToken();
         return $post;
     }
 }
