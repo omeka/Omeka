@@ -31,11 +31,11 @@ class Omeka_Form_Element_SessionCsrfToken extends Zend_Form_Element_Xhtml
     protected $_disableLoadDefaultDecorators = true;
 
     /**
-     * Actual hash used.
+     * Actual token used.
      *
      * @var mixed
      */
-    protected $_hash;
+    protected $_token;
 
     /**
      * @var Zend_Session_Namespace
@@ -63,7 +63,7 @@ class Omeka_Form_Element_SessionCsrfToken extends Zend_Form_Element_Xhtml
      * Set session object
      *
      * @param  Zend_Session_Namespace $session
-     * @return Zend_Form_Element_Hash
+     * @return self
      */
     public function setSession($session)
     {
@@ -91,9 +91,9 @@ class Omeka_Form_Element_SessionCsrfToken extends Zend_Form_Element_Xhtml
      *
      * @return string
      */
-    public function getHash()
+    public function getToken()
     {
-        return $this->_hash;
+        return $this->_token;
     }
 
     /**
@@ -104,7 +104,7 @@ class Omeka_Form_Element_SessionCsrfToken extends Zend_Form_Element_Xhtml
      */
     public function render(Zend_View_Interface $view = null)
     {
-        $this->setValue($this->_hash);
+        $this->setValue($this->_token);
         return parent::render($view);
     }
 
@@ -129,10 +129,10 @@ class Omeka_Form_Element_SessionCsrfToken extends Zend_Form_Element_Xhtml
     protected function _initToken()
     {
         $session = $this->getSession();
-        if (isset($session->hash)) {
-            $this->_hash = $session->hash;
+        if (isset($session->token)) {
+            $this->_token = $session->token;
         } else {
-            $this->_hash = $session->hash = $this->_generateHash();
+            $this->_token = $session->token = $this->_generateToken();
         }
         return $this;
     }
@@ -140,24 +140,21 @@ class Omeka_Form_Element_SessionCsrfToken extends Zend_Form_Element_Xhtml
     /**
      * Initialize CSRF validator
      *
-     * @return Zend_Form_Element_Hash
+     * @return self
      */
     protected function _initCsrfValidator()
     {
-        $rightHash = $this->_hash;
-        $this->addValidator('Identical', true, array($rightHash));
+        $rightToken = $this->_token;
+        $this->addValidator('Identical', true, array($rightToken));
         return $this;
     }
 
     /**
      * Generate CSRF token
      *
-     * Generates CSRF token and stores both in {@link $_hash} and element
-     * value.
-     *
      * @return void
      */
-    protected function _generateHash()
+    protected function _generateToken()
     {
         return md5(
             mt_rand(1,1000000)
