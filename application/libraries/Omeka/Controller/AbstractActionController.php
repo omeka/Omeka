@@ -27,6 +27,20 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
     protected $_browseRecordsPerPage;
 
     /**
+     * Whether to automatically generate and check for a CSRF token on
+     * add and edit.
+     *
+     * If set to true, a variable $csrf will be assigned to the add and edit
+     * views, you must echo it inside the form on those pages, or else the
+     * requests will fail.
+     *
+     * Note: default deletion always uses a token, regardless of this setting.
+     *
+     * @var boolean
+     */
+    protected $_autoCsrfProtection = false;
+
+    /**
      * Base controller constructor.
      *
      * Does the following things:
@@ -137,9 +151,19 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
     {
         $class = $this->_helper->db->getDefaultModelName();
         $varName = $this->view->singularize($class);
+
+        if ($this->_autoCsrfProtection) {
+            $csrf = new Omeka_Form_SessionCsrf;
+            $this->view->csrf = $csrf;
+        }
         
         $record = new $class();
         if ($this->getRequest()->isPost()) {
+            if ($this->_autoCsrfProtection && !$csrf->isValid($_POST)) {
+                $this->_helper->_flashMessenger(__('There was an error on the form. Please try again.'), 'error');
+                $this->view->$varName = $record;
+                return;
+            }
             $record->setPostData($_POST);
             if ($record->save(false)) {
                 $successMessage = $this->_getAddSuccessMessage($record);
@@ -169,8 +193,18 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
         $varName = $this->view->singularize($this->_helper->db->getDefaultModelName());
         
         $record = $this->_helper->db->findById();
+
+        if ($this->_autoCsrfProtection) {
+            $csrf = new Omeka_Form_SessionCsrf;
+            $this->view->csrf = $csrf;
+        }
         
         if ($this->getRequest()->isPost()) {
+            if ($this->_autoCsrfProtection && !$csrf->isValid($_POST)) {
+                $this->_helper->_flashMessenger(__('There was an error on the form. Please try again.'), 'error');
+                $this->view->$varName = $record;
+                return;
+            }
             $record->setPostData($_POST);
             if ($record->save(false)) {
                 $successMessage = $this->_getEditSuccessMessage($record);
