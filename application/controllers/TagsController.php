@@ -15,58 +15,15 @@ class TagsController extends Omeka_Controller_AbstractActionController
     {
         $this->_helper->db->setDefaultModelName('Tag');
     }
-    
+
+    public function addAction()
+    {
+        $this->_helper->redirector('');
+    }
+
     public function editAction()
     {
-        if (!empty($_POST)) {
-            $this->editTags();
-        }
-        
-        $tags = $this->getTagsForAdministration();
-        
-        $this->view->assign(compact('tags'));
-    }
-    
-    protected function getTagsForAdministration()
-    {
-        $user = $this->getCurrentUser();
-        
-        if (!$user) {
-            throw new Zend_Acl_Exception( __('You have to be logged in to edit tags!') );
-        }
-        
-        $criteria = array('sort' => 'alpha');
-        
-        $tags = $this->_helper->db->findBy($criteria);
-        
-        return $tags;    
-    }
-    
-    protected function editTags()
-    {
-        $oldTagId = $_POST['old_tag'];
-        
-        //Explode and sanitize the new tags
-        $newTags = explode(get_option('tag_delimiter'), $_POST['new_tag']);
-        foreach ($newTags as $k => $t) {
-            $newTags[$k] = trim($t);
-        }
-        $newTags = array_diff($newTags, array(''));
-        
-        $oldTag = $this->_helper->db->find($oldTagId);
-        
-        $oldName = $oldTag->name;
-        $newNames = $_POST['new_tag'];
-        
-        try {
-            $oldTag->rename($newTags);
-            $this->_helper->flashMessenger(
-                __('Tag named "%1$s" was successfully renamed to "%2$s".', $oldName, $newNames),
-                'success'
-            );
-        } catch (Omeka_Validate_Exception $e) {
-            $this->_helper->flashMessenger($e);
-        }
+        $this->_helper->redirector('');
     }
     
     /**
