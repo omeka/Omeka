@@ -8,7 +8,7 @@ echo flash();
     <?php include 'form.php'; ?>
     <section class="three columns omega">
         <div id="save" class="panel">
-            <?php echo $form->getElement(Omeka_Form_ItemTypes::SUBMIT_ADD_ELEMENT_ID); ?>
+            <input type="submit" class="big green button" name="submit" value="<?php echo __('Add Item Type'); ?>">
             <?php fire_plugin_hook("admin_item_types_panel_buttons", array('view'=>$this, 'record'=>$item_type)); ?>
             <?php fire_plugin_hook("admin_item_types_panel_fields", array('view'=>$this, 'record'=>$item_type)); ?>            
         </div>

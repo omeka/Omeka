@@ -91,6 +91,6 @@ jQuery(document).ready(function () {
             <?php echo $this->form->getElement(Omeka_Form_ItemTypes::REMOVE_HIDDEN_ELEMENT_ID); ?>
         </div>
     </fieldset>
-
+    <?php echo $this->form->getElement('csrf_token') ?>
     <?php fire_plugin_hook('admin_item_types_form', array('item_type' => $item_type, 'view' => $this)); ?>
 </section>

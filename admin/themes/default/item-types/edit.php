@@ -15,7 +15,7 @@ echo flash();
     <?php include 'form.php';?>
     <section class="three columns omega">
         <div id="save" class="panel">
-            <?php echo $form->getElement(Omeka_Form_ItemTypes::SUBMIT_EDIT_ELEMENT_ID); ?>
+            <input type="submit" class="big green button" name="submit" value="<?php echo __('Save Changes'); ?>">
             <?php if (is_allowed('ItemTypes', 'delete')): ?>
                 <?php echo link_to($item_type, 'delete-confirm', __('Delete'), array('class' => 'big red button delete-confirm')); ?>
             <?php endif; ?>

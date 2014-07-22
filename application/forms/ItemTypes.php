@@ -156,22 +156,7 @@ class Omeka_Form_ItemTypes extends Omeka_Form
         );
         
         $this->addElement('hidden', self::REMOVE_HIDDEN_ELEMENT_ID, array('value' => ''));
-        
-        $this->addElement('submit', self::SUBMIT_ADD_ELEMENT_ID, array(
-            'label' => __('Add Item Type'),
-            'class' => 'big green button',
-            'decorators' =>  array(
-                        'ViewHelper',
-                        'Errors',)
-        ));
-                
-        $this->addElement('submit', self::SUBMIT_EDIT_ELEMENT_ID, array(
-            'label' => __('Save Changes'),
-            'class' => 'big green button',
-            'decorators' =>  array(
-                        'ViewHelper',
-                        'Errors',)
-        ));
+        $this->addElement('sessionCsrfToken', 'csrf_token');
     }
     
     private function _checkForDuplicateElements()

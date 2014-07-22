@@ -35,6 +35,7 @@ echo flash();
         </div>
         <?php fire_plugin_hook('admin_settings_search_form', array('view' => $this)); ?>
     </section>
+    <?php echo $csrf; ?>
     <section class="three columns omega">
         <div id="save" class="panel">
             <?php echo $this->formSubmit('submit_save_changes', __('Save Changes'), array('class'=>'submit big green button')); ?>

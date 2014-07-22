@@ -37,15 +37,22 @@ class ElementSetsController extends Omeka_Controller_AbstractActionController
     {
         $elementSet = $this->_helper->db->findById();
         $db = $this->_helper->db;
-        
+        $csrf = new Omeka_Form_SessionCsrf;
+
         // Do not process the item type element set.
         if (ElementSet::ITEM_TYPE_NAME == $elementSet->name) {
              throw new Omeka_Controller_Exception_403();
         }
-        
+
+        $this->view->element_set = $elementSet;
+        $this->view->csrf = $csrf;
+
         // Handle a submitted edit form.
         if ($this->getRequest()->isPost()) {
-            
+            if (!$csrf->isValid($_POST)) {
+                $this->_helper->_flashMessenger(__('There was an error on the form. Please try again.'), 'error');
+                return;
+            }
             // Delete existing element order to prevent duplicate indices.
             $db->getDb()->update(
                 $db->getDb()->Element, 
@@ -68,8 +75,6 @@ class ElementSetsController extends Omeka_Controller_AbstractActionController
                 $this->_helper->flashMessenger($e);
             }
         }
-        
-        $this->view->element_set = $elementSet;
     }
     
     protected function _redirectAfterEdit($record)

@@ -33,6 +33,7 @@ echo flash();
         </ul>
         <?php fire_plugin_hook('admin_settings_item_type_form', array('element_set' => $element_set, 'view' => $this)); ?>
      </section>
+    <?php echo $csrf; ?>
     <section class="three columns omega">
         <div id="save" class="panel">
             <?php echo $this->formSubmit('submit_edit_item_type', __('Save Changes'), array('class' => 'big green button')); ?>
