@@ -81,6 +81,9 @@ class TagsController extends Omeka_Controller_AbstractActionController
                 unset($record_types[$index]);
             }
         }
+
+        $csrf = new Omeka_Form_Element_SessionCsrfToken('csrf_token');
+        $this->view->csrfToken = $csrf->getToken();
         $this->view->record_types = $record_types;
         $this->view->assign(compact('tags', 'total_tags', 'browse_for', 'sort'));
     }
@@ -97,6 +100,7 @@ class TagsController extends Omeka_Controller_AbstractActionController
     
     public function renameAjaxAction()
     {
+        $csrf = new Omeka_Form_SessionCsrf;
         $oldTagId = $_POST['id'];
         $oldTag = $this->_helper->db->findById($oldTagId);
         $oldName = $oldTag->name;
@@ -104,9 +108,10 @@ class TagsController extends Omeka_Controller_AbstractActionController
 
         $oldTag->name = $newName;
         $this->_helper->viewRenderer->setNoRender();
-        if ($oldTag->save(false)) {
+        if ($csrf->isValid($_POST) && $oldTag->save(false)) {
             $this->getResponse()->setBody($newName);
         } else {
+            $this->getResponse()->setHttpResponseCode(500);
             $this->getResponse()->setBody($oldName);
         }
     }

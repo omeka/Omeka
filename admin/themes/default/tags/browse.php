@@ -90,7 +90,8 @@ echo flash();
 jQuery(document).ready(function () {
     var editableURL = '<?php echo url('tags/rename-ajax'); ?>';
     var tagURLBase = '<?php echo url('items/?tag='); ?>';
-    Omeka.Tags.enableEditInPlace(editableURL, tagURLBase);
+    var csrfToken = <?php echo js_escape($csrfToken); ?>;
+    Omeka.Tags.enableEditInPlace(editableURL, tagURLBase, csrfToken);
 });
 </script>
 <?php endif; ?>
