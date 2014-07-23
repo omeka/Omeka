@@ -5,8 +5,8 @@
 # Translators:
 # Bogdan Trifunovic <>, 2012-2014
 # Dušan Ranđelović <randjelovic@pantype.com>, 2013
-# Predrag Djukic <predragd@bgb.rs>, 2014
-# Predrag Djukic <predragd@bgb.rs>, 2014
+# Predrag Djukic <djukic.predrag@gmail.com>, 2014
+# Predrag Djukic <djukic.predrag@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"

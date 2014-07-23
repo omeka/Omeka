@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Bryndís Zoega <bryndisz@skagafjordur.is>, 2014
+# Bryndís Zoega <inactive+bryndiszoega@transifex.com>, 2014
 # solborg <supalsdottir@gmail.com>, 2014
 msgid ""
 msgstr ""
@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
 "PO-Revision-Date: 2014-06-27 14:39+0000\n"
-"Last-Translator: Bryndís Zoega <bryndisz@skagafjordur.is>\n"
+"Last-Translator: Bryndís Zoega <inactive+bryndiszoega@transifex.com>\n"
 "Language-Team: Icelandic (http://www.transifex.com/projects/p/omeka/language/is/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"

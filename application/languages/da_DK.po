@@ -3,21 +3,20 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Somsak Sriborisutsakul <somsak.sr@chula.ac.th>, 2014
-# iteau <songphan@gmail.com>, 2014
+# Per-Olof Olofsson <poo@bornholmsmuseum.dk>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2014-07-15 06:18+0000\n"
-"Last-Translator: Somsak Sriborisutsakul <somsak.sr@chula.ac.th>\n"
-"Language-Team: Thai (http://www.transifex.com/projects/p/omeka/language/th/)\n"
+"PO-Revision-Date: 2014-07-19 18:18+0000\n"
+"Last-Translator: Per-Olof Olofsson <poo@bornholmsmuseum.dk>\n"
+"Language-Team: Danish (Denmark) (http://www.transifex.com/projects/p/omeka/language/da_DK/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: th\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: da_DK\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Dublin Core description
 msgid ""
@@ -34,29 +33,29 @@ msgstr ""
 #: application/views/scripts/items/browse.php:19
 #: application/views/scripts/search/index.php:14
 msgid "Title"
-msgstr "ชื่อเรื่อง"
+msgstr "Titel"
 
 #. Dublin Core: Title element description
 msgid "A name given to the resource"
-msgstr "ชื่อที่กำหนดให้กับทรัพยากร"
+msgstr ""
 
 #. Dublin Core: Creator element name
 #: admin/themes/default/items/browse.php:41
 #: application/views/scripts/items/browse.php:20
 msgid "Creator"
-msgstr "ผู้สร้าง"
+msgstr "Forfatter"
 
 #. Dublin Core: Creator element description
 msgid "An entity primarily responsible for making the resource"
-msgstr "เอนทิติหลักเพื่อการสร้างทรัพยากร"
+msgstr ""
 
 #. Dublin Core: Subject element name
 msgid "Subject"
-msgstr "หัวเรื่อง"
+msgstr "Emne"
 
 #. Dublin Core: Subject element description
 msgid "The topic of the resource"
-msgstr "หัวข้อเรื่องของทรัพยากร"
+msgstr ""
 
 #. Dublin Core: Description element name
 #: admin/themes/default/element-sets/browse.php:17
@@ -65,59 +64,59 @@ msgstr "หัวข้อเรื่องของทรัพยากร"
 #: admin/themes/default/settings/edit-item-type-elements.php:27
 #: application/forms/ItemTypes.php:150
 msgid "Description"
-msgstr "คำบรรยาย"
+msgstr "Beskrivelse"
 
 #. Dublin Core: Description element description
 msgid "An account of the resource"
-msgstr "บัญชีผู้ใช้ทรัพยากร"
+msgstr ""
 
 #. Dublin Core: Publisher element name
 msgid "Publisher"
-msgstr "ผู้เผยแพร่"
+msgstr "Udgivere"
 
 #. Dublin Core: Publisher element description
 msgid "An entity responsible for making the resource available"
-msgstr "เอนทิติเพื่อการสร้างทรัพยากรที่หามาได้"
+msgstr ""
 
 #. Dublin Core: Contributor element name
 #. User role: contributor
 msgid "Contributor"
-msgstr "ผู้มีส่วน"
+msgstr "Bidragyder"
 
 #. Dublin Core: Contributor element description
 msgid "An entity responsible for making contributions to the resource"
-msgstr "เอนทิติเพื่อการสร้างส่วนเสริมให้กับทรัพยากร"
+msgstr ""
 
 #. Dublin Core: Date element name
 msgid "Date"
-msgstr "วันที่"
+msgstr "Dato"
 
 #. Dublin Core: Date element description
 msgid ""
 "A point or period of time associated with an event in the lifecycle of the "
 "resource"
-msgstr "จุดหนึ่งหรือช่วงเวลาที่เกี่ยวข้องกับเหตุการณ์ในวงจรชีวิตของทรัพยากร"
+msgstr ""
 
 #. Dublin Core: Type element name
 #: admin/themes/default/items/browse.php:42
 msgid "Type"
-msgstr "ประเภท"
+msgstr "Type"
 
 #. Dublin Core: Type element description
 msgid "The nature or genre of the resource"
-msgstr "สภาพหรือประเภทของทรัพยากร"
+msgstr ""
 
 #. Dublin Core: Format element name
 msgid "Format"
-msgstr "รูปแบบ"
+msgstr "Format"
 
 #. Dublin Core: Format element description
 msgid "The file format, physical medium, or dimensions of the resource"
-msgstr "รูปแบบแฟ้มข้อมูล สื่อเชิงกายภาพ หรือมิติของทรัพยากร"
+msgstr ""
 
 #. Dublin Core: Identifier element name
 msgid "Identifier"
-msgstr "ตัวระบุ"
+msgstr "Identifiere"
 
 #. Dublin Core: Identifier element description
 msgid "An unambiguous reference to the resource within a given context"
@@ -125,7 +124,7 @@ msgstr ""
 
 #. Dublin Core: Source element name
 msgid "Source"
-msgstr "แหล่งที่มา"
+msgstr "Kilde"
 
 #. Dublin Core: Source element description
 msgid "A related resource from which the described resource is derived"
@@ -133,23 +132,23 @@ msgstr ""
 
 #. Dublin Core: Language element name
 msgid "Language"
-msgstr "ภาษา"
+msgstr "Sprog"
 
 #. Dublin Core: Language element description
 msgid "A language of the resource"
-msgstr "ภาษาของทรัพยากร"
+msgstr ""
 
 #. Dublin Core: Relation element name
 msgid "Relation"
-msgstr "ความสัมพันธ์"
+msgstr "Relation"
 
 #. Dublin Core: Relation element description
 msgid "A related resource"
-msgstr "ทรัพยากรที่สัมพันธ์กัน"
+msgstr ""
 
 #. Dublin Core: Coverage element name
 msgid "Coverage"
-msgstr "ความครอบคลุม"
+msgstr "Dækning"
 
 #. Dublin Core: Coverage element description
 msgid ""
@@ -159,15 +158,15 @@ msgstr ""
 
 #. Dublin Core: Rights element name
 msgid "Rights"
-msgstr "สิทธิ"
+msgstr "Rettigheder"
 
 #. Dublin Core: Rights element description
 msgid "Information about rights held in and over the resource"
-msgstr "สารสนเทศเกี่ยวกับสิทธิในการใช้หรือครอบครองทรัพยากร"
+msgstr ""
 
 #. Item Type Metadata
 msgid "Item Type Metadata"
-msgstr "เมทาดาทาประเภทของรายการ"
+msgstr ""
 
 #. Item Type Metadata description
 msgid ""
@@ -177,7 +176,7 @@ msgstr ""
 
 #. Omeka Legacy File
 msgid "Omeka Legacy File"
-msgstr "ไฟล์มรดก Omeka"
+msgstr ""
 
 #. Omeka Legacy File description
 msgid ""
@@ -189,59 +188,59 @@ msgstr ""
 
 #. Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
-msgstr "ผู้สร้างร่วม"
+msgstr "Ytteligare Forfatter"
 
 #. Omeka Legacy File: Transcriber element
 msgid "Transcriber"
-msgstr "ผู้ถอดความ"
+msgstr ""
 
 #. Omeka Legacy File: Producer element
 msgid "Producer"
-msgstr "โปรดิวเซอร์"
+msgstr "Producent"
 
 #. Omeka Legacy File: Render Device element
 msgid "Render Device"
-msgstr "อุปกรณ์แปลง"
+msgstr ""
 
 #. Omeka Legacy File: Render Details element
 msgid "Render Details"
-msgstr "รายละเอียดการแปลง"
+msgstr ""
 
 #. Omeka Legacy File: Capture Date element
 msgid "Capture Date"
-msgstr "วันที่บันทึก"
+msgstr ""
 
 #. Omeka Legacy File: Capture Device element
 msgid "Capture Device"
-msgstr "อุปกรณ์บันทึก"
+msgstr ""
 
 #. Omeka Legacy File: Capture Details element
 msgid "Capture Details"
-msgstr "รายละเอียดการบันทึก"
+msgstr ""
 
 #. Omeka Legacy File: Change History element
 msgid "Change History"
-msgstr "ประวัติการเปลี่ยนแปลง"
+msgstr ""
 
 #. Omeka Legacy File: Watermark element
 msgid "Watermark"
-msgstr "ลายน้ำ"
+msgstr ""
 
 #. Omeka Legacy File: Encryption element
 msgid "Encryption"
-msgstr "การเข้ารหัส"
+msgstr "Kryptering"
 
 #. Omeka Legacy File: Compression element
 msgid "Compression"
-msgstr "การบีบอัดไฟล์"
+msgstr "Kompression"
 
 #. Omeka Legacy File: Post Processing element
 msgid "Post Processing"
-msgstr "กระบวนการหลังการผลิต"
+msgstr ""
 
 #. Omeka Image File
 msgid "Omeka Image File"
-msgstr "ไฟล์รูปภาพ Omeka"
+msgstr "Omeka Billede Fil"
 
 #. Omeka Image File description
 msgid ""
@@ -251,39 +250,39 @@ msgstr ""
 
 #. Omeka Image File: Width element
 msgid "Width"
-msgstr "ความกว้าง"
+msgstr "Bredde"
 
 #. Omeka Image File: Height element
 msgid "Height"
-msgstr "ความสูง"
+msgstr "Højde"
 
 #. Omeka Image File: Bit Depth element
 msgid "Bit Depth"
-msgstr "ความละเอียด"
+msgstr "Bit Dybde"
 
 #. Omeka Image File: Channels element
 msgid "Channels"
-msgstr "ช่องทาง"
+msgstr "Kanaler"
 
 #. Omeka Image File: Exif String element
 msgid "Exif String"
-msgstr "สายอักขระ Exif"
+msgstr ""
 
 #. Omeka Image File: Exif Array element
 msgid "Exif Array"
-msgstr "แถวข้อมูล Exif"
+msgstr ""
 
 #. Omeka Image File: IPTC String element
 msgid "IPTC String"
-msgstr "สายอักขระ IPTC"
+msgstr ""
 
 #. Omeka Image File: IPTC Array element
 msgid "IPTC Array"
-msgstr "แถวข้อมูล IPTC"
+msgstr ""
 
 #. Omeka Video File
 msgid "Omeka Video File"
-msgstr "ไฟล์วิดีโอ Omeka"
+msgstr ""
 
 #. Omeka Video File description
 msgid ""
@@ -293,23 +292,23 @@ msgstr ""
 
 #. Omeka Video File: Bitrate element
 msgid "Bitrate"
-msgstr "บิทเรท"
+msgstr ""
 
 # Omeka Video File: Duration element
 msgid "Duration"
-msgstr "ความยาว"
+msgstr "Varighed"
 
 #. Omeka Video File: Sample Rate element
 msgid "Sample Rate"
-msgstr "อัตราการสุ่ม"
+msgstr ""
 
 #. Omeka Video File: Codec element
 msgid "Codec"
-msgstr "ตัวแปลงสัญญาณ"
+msgstr "Codec"
 
 #. Format (Legacy) Metadata element set
 msgid "Format (Legacy) Metadata"
-msgstr "เมทาดาทารูปแบบ (มรดก)"
+msgstr ""
 
 #. User role: Super
 msgid "Super"
@@ -317,11 +316,11 @@ msgstr ""
 
 #. User role: Admin
 msgid "Admin"
-msgstr "ผู้ดูแลระบบ"
+msgstr ""
 
 #. User role: Researcher
 msgid "Researcher"
-msgstr "นักวิจัย"
+msgstr ""
 
 #: admin/themes/default/appearance/edit-navigation.php:3
 #: admin/themes/default/appearance/edit-settings.php:2
@@ -346,17 +345,17 @@ msgstr ""
 #: admin/themes/default/users/api-keys.php:40
 #: application/forms/Navigation.php:132
 msgid "Label"
-msgstr "ป้ายระบุ"
+msgstr ""
 
 #: admin/themes/default/appearance/edit-navigation.php:23
 #: admin/themes/default/appearance/edit-navigation.php:38
 #: application/forms/Navigation.php:133
 msgid "URL"
-msgstr "ยูอาร์แอล"
+msgstr ""
 
 #: admin/themes/default/appearance/edit-navigation.php:25
 msgid "Add Link"
-msgstr "เพิ่มลิ้งค์"
+msgstr ""
 
 #: admin/themes/default/appearance/edit-navigation.php:31
 #: admin/themes/default/appearance/edit-settings.php:21
@@ -375,7 +374,7 @@ msgstr "เพิ่มลิ้งค์"
 #: admin/themes/default/users/edit.php:21 application/forms/ItemTypes.php:169
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:73
 msgid "Save Changes"
-msgstr "แก้ไขการเปลี่ยนแปลง"
+msgstr "Gem ændringer"
 
 #: admin/themes/default/appearance/edit-navigation.php:39
 #: admin/themes/default/collections/edit.php:23
@@ -385,7 +384,7 @@ msgstr "แก้ไขการเปลี่ยนแปลง"
 #: admin/themes/default/items/show.php:45
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:79
 msgid "View Public Page"
-msgstr "ดูหน้าสาธารณะ"
+msgstr "Se Offentlig Side"
 
 #: admin/themes/default/appearance/edit-navigation.php:40
 #: admin/themes/default/collections/edit.php:24
@@ -406,18 +405,18 @@ msgstr "ดูหน้าสาธารณะ"
 #: admin/themes/default/users/edit.php:26
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:83
 msgid "Delete"
-msgstr "ลบ"
+msgstr "Slet"
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:11
 #: admin/themes/default/collections/browse.php:67
 #: admin/themes/default/collections/browse.php:76
 msgid "Add a Collection"
-msgstr "เพิ่มคอลเลกชั่น"
+msgstr "Tilføj en Samling"
 
 #: admin/themes/default/collections/add.php:11
 msgid "Add Collection"
-msgstr "เพิ่มคอลเล็คชั่น"
+msgstr ""
 
 #: admin/themes/default/collections/add.php:16
 #: admin/themes/default/collections/edit.php:30
@@ -428,7 +427,7 @@ msgstr "เพิ่มคอลเล็คชั่น"
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:52
 msgid "Public"
-msgstr "สาธารณะ"
+msgstr "Offentlig"
 
 #: admin/themes/default/collections/add.php:19
 #: admin/themes/default/collections/edit.php:35
@@ -439,7 +438,7 @@ msgstr "สาธารณะ"
 #: admin/themes/default/items/quick-filters.php:8
 #: admin/themes/default/items/show.php:53
 msgid "Featured"
-msgstr "แนะนำ"
+msgstr "Udvalgte"
 
 #: admin/themes/default/collections/browse.php:2
 #: application/libraries/Omeka/Navigation.php:149
@@ -449,7 +448,7 @@ msgstr "แนะนำ"
 #: application/tests/suite/Omeka/NavigationTest.php:950
 #: application/views/scripts/collections/browse.php:2
 msgid "Browse Collections"
-msgstr "เลือกดูคอลเลกชั่น"
+msgstr "Gennemse Samlinger"
 
 #: admin/themes/default/collections/browse.php:2
 #: admin/themes/default/item-types/browse.php:2
@@ -463,13 +462,13 @@ msgstr "เลือกดูคอลเลกชั่น"
 #: application/views/scripts/search/index.php:2
 #, php-format
 msgid "(%s total)"
-msgstr "(%s ทั้งหมด)"
+msgstr "(%s totalt)"
 
 #: admin/themes/default/collections/browse.php:23
 #: admin/themes/default/collections/show.php:51
 #: application/views/scripts/collections/browse.php:36
 msgid "Contributors"
-msgstr "ผู้มีส่วนร่วม"
+msgstr ""
 
 #: admin/themes/default/collections/browse.php:24
 #: admin/themes/default/files/show.php:66
@@ -477,18 +476,18 @@ msgstr "ผู้มีส่วนร่วม"
 #: application/views/scripts/collections/browse.php:11
 #: application/views/scripts/items/browse.php:21
 msgid "Date Added"
-msgstr "วันที่เพิ่ม"
+msgstr ""
 
 #: admin/themes/default/collections/browse.php:25
 #: admin/themes/default/collections/show.php:46
 #: admin/themes/default/item-types/show.php:42
 msgid "Total Number of Items"
-msgstr "จำนวนรายการทั้งหมด"
+msgstr "Samlet Antal Objekt"
 
 #: admin/themes/default/collections/browse.php:40
 #: admin/themes/default/items/browse.php:72
 msgid "(Private)"
-msgstr "(ส่วนตัว)"
+msgstr ""
 
 #: admin/themes/default/collections/browse.php:43
 #: admin/themes/default/collections/show.php:32
@@ -505,7 +504,7 @@ msgstr "(ส่วนตัว)"
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:63
 msgid "Edit"
-msgstr "แก้ไข"
+msgstr "Redigere"
 
 #: admin/themes/default/collections/browse.php:52
 msgid "No contributors"
@@ -513,19 +512,19 @@ msgstr ""
 
 #: admin/themes/default/collections/browse.php:70
 msgid "There are no collections on this page."
-msgstr "ไม่ปรากฏคอลเลกชั่นในหน้านี้"
+msgstr "Der er ingen samlinger på denne side."
 
 #: admin/themes/default/collections/browse.php:70
 msgid "View All Collections"
-msgstr "ดูคอลเลกชั่นทั้งหมด"
+msgstr "Vis Alle Samlinger"
 
 #: admin/themes/default/collections/browse.php:73
 msgid "You have no collections."
-msgstr "คุณยังไม่มีคอลเล็คชั่น"
+msgstr ""
 
 #: admin/themes/default/collections/browse.php:75
 msgid "Get started by adding your first collection."
-msgstr "เริ่มด้วยการเพิ่มคอลเล็คชั่นแรกของคุณ"
+msgstr ""
 
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
@@ -534,23 +533,23 @@ msgstr "เริ่มด้วยการเพิ่มคอลเล็ค
 #: application/views/scripts/collections/show.php:4
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
-msgstr "[ไม่มีชื่อ]"
+msgstr "[Untitled]"
 
 #: admin/themes/default/collections/edit.php:8
 #, php-format
 msgid "Edit Collection #%s"
-msgstr "แก้ไขคอลเลกชั่น #%s"
+msgstr "Redigere Samling #%s"
 
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Collection #%s"
-msgstr "คอลเล็คชั่น #%s"
+msgstr ""
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
 #: application/views/scripts/index.php:40
 msgid "Recently Added Items"
-msgstr "รายการที่เพิ่มล่าสุด"
+msgstr "Nyligt Tilføjede Objekt"
 
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/collections/show.php:42
@@ -558,7 +557,7 @@ msgstr "รายการที่เพิ่มล่าสุด"
 #: admin/themes/default/items/show.php:53
 #: application/views/helpers/ItemSearchFilters.php:69
 msgid "Yes"
-msgstr "ใช่"
+msgstr ""
 
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/collections/show.php:42
@@ -566,7 +565,7 @@ msgstr "ใช่"
 #: admin/themes/default/items/show.php:53
 #: application/views/helpers/ItemSearchFilters.php:69
 msgid "No"
-msgstr "ไม่ใช่"
+msgstr ""
 
 #: admin/themes/default/collections/show.php:56
 msgid "No contributors."
@@ -574,7 +573,7 @@ msgstr ""
 
 #: admin/themes/default/common/appearance-nav.php:5
 msgid "Themes"
-msgstr "ธีม"
+msgstr "Temaer"
 
 #: admin/themes/default/common/appearance-nav.php:11
 msgid "Navigation"
@@ -589,26 +588,26 @@ msgstr ""
 #: admin/themes/default/settings/edit-security.php:3
 #: admin/themes/default/settings/edit-settings.php:3
 msgid "Settings"
-msgstr "การตั้งค่า"
+msgstr "Indstillinger"
 
 #: admin/themes/default/common/content-nav.php:5
 #: admin/themes/default/index.php:2
 msgid "Dashboard"
-msgstr "หน้าปัด"
+msgstr ""
 
 #: admin/themes/default/common/content-nav.php:9
 #: admin/themes/default/items/batch-delete.php:17
 #: admin/themes/default/items/batch-edit.php:17
 msgid "Items"
-msgstr "รายการ"
+msgstr "Objekt"
 
 #: admin/themes/default/common/content-nav.php:13
 msgid "Collections"
-msgstr "คอลเลกชั่น"
+msgstr "Samlinger"
 
 #: admin/themes/default/common/content-nav.php:17
 msgid "Item Types"
-msgstr "ประเภทรายการ"
+msgstr "Objekt Typer"
 
 #: admin/themes/default/common/content-nav.php:21
 #: admin/themes/default/items/browse.php:94
@@ -616,70 +615,70 @@ msgstr "ประเภทรายการ"
 #: application/views/scripts/items/browse.php:46
 #: application/views/scripts/items/show.php:26
 msgid "Tags"
-msgstr "ป้ายแท็ก"
+msgstr "Tags"
 
 #: admin/themes/default/common/delete-confirm.php:3
 #: application/views/scripts/common/delete-confirm.php:3
 #, php-format
 msgid "Delete %s"
-msgstr "ลบ %s"
+msgstr ""
 
 #: admin/themes/default/common/delete-confirm.php:10
 #: application/views/scripts/common/delete-confirm.php:12
 msgid "Are you sure?"
-msgstr "คุณแน่ใจหรือไม่?"
+msgstr ""
 
 #: admin/themes/default/common/footer.php:6
 #: admin/themes/default/common/login-footer.php:7
 msgid "Powered by Omeka"
-msgstr "ขับเคลื่อนโดย Omeka"
+msgstr "Powered by Omeka"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Documentation"
-msgstr "เอกสารอ้างอิง"
+msgstr "Dokumentation"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Support Forums"
-msgstr "ฟอรั่มช่วยเหลือ"
+msgstr "Support Forum"
 
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
 #: admin/themes/default/plugins/browse.php:52
 #, php-format
 msgid "Version %s"
-msgstr "รุ่น %s"
+msgstr "Version %s"
 
 #: admin/themes/default/common/footer.php:10
 #: admin/themes/default/system-info/index.php:2
 msgid "System Information"
-msgstr "ข้อมูลระบบ"
+msgstr ""
 
 #: admin/themes/default/common/global-nav.php:5
 #: admin/themes/default/plugins/browse.php:2
 msgid "Plugins"
-msgstr "ปลั๊กอิน"
+msgstr "Plugins"
 
 #: admin/themes/default/common/global-nav.php:17
 msgid "Users"
-msgstr "ผู้ใช้"
+msgstr "Brugare"
 
 #: admin/themes/default/common/header.php:11
 #: admin/themes/default/upgrade/index.php:6
 #: admin/themes/default/upgrade/migrate.php:6
 #: application/views/scripts/common/admin-bar.php:11
 msgid "Omeka Admin"
-msgstr "ผู้ดูแล Omeka"
+msgstr "Omeka Admin"
 
 #: admin/themes/default/common/header.php:60
 #: application/views/scripts/common/admin-bar.php:7
 #, php-format
 msgid "Welcome, %s"
-msgstr "ยินดีต้อนรับ %s"
+msgstr "Velkommen, %s"
 
 #: admin/themes/default/common/header.php:61
 #: application/views/scripts/common/admin-bar.php:15
 msgid "Log Out"
-msgstr "ออกจากระบบ"
+msgstr "Log ud"
 
 #: admin/themes/default/common/settings-nav.php:6
 #: admin/themes/default/common/users-nav.php:5
@@ -688,22 +687,22 @@ msgstr ""
 
 #: admin/themes/default/common/settings-nav.php:10
 msgid "Security"
-msgstr "ความปลอดภัย"
+msgstr ""
 
 #: admin/themes/default/common/settings-nav.php:16
 #: application/views/helpers/SearchForm.php:34
 #: application/views/scripts/search/search-form.php:2
 #: application/views/scripts/search/search-form.php:22
 msgid "Search"
-msgstr "สืบค้น"
+msgstr ""
 
 #: admin/themes/default/common/settings-nav.php:20
 msgid "Element Sets"
-msgstr "ชุดส่วนประกอบ"
+msgstr "Element Sæt"
 
 #: admin/themes/default/common/settings-nav.php:26
 msgid "Item Type Elements"
-msgstr "องค์ประกอบที่แสดงประเภทของรายการ"
+msgstr ""
 
 #: admin/themes/default/common/settings-nav.php:32
 msgid "API"
@@ -712,7 +711,7 @@ msgstr ""
 #: admin/themes/default/common/users-nav.php:11
 #: application/forms/ChangePassword.php:78
 msgid "Change Password"
-msgstr "เปลี่ยนรหัสผ่าน"
+msgstr ""
 
 #: admin/themes/default/common/users-nav.php:17
 #: admin/themes/default/users/api-keys.php:14
@@ -723,75 +722,75 @@ msgstr ""
 #: admin/themes/default/users/browse.php:17
 #: application/forms/ItemTypes.php:141
 msgid "Name"
-msgstr "ชื่อ"
+msgstr "Navn"
 
 #: admin/themes/default/element-sets/edit.php:5
 msgid "Edit Element Set"
-msgstr "แก้ไขชุดขององค์ประกอบ"
+msgstr ""
 
 #: admin/themes/default/element-sets/edit.php:17
 msgid ""
 "Click and drag the elements into the preferred display order. Click the "
 "right arrows to add customized comments to element descriptions."
-msgstr "คลิกและลากองค์ประกอบต่างๆ ตามลำดับการแสดงผลที่คุณต้องการ คลิกที่ลูกศรขวามือเพื่อเพิ่มเติมข้อมูลในส่วนคำบรรยายของแต่ละองค์ประกอบ"
+msgstr ""
 
 #: admin/themes/default/element-sets/edit.php:29
 msgid "Comment"
-msgstr "ข้อมูลเพิ่มเติม"
+msgstr ""
 
 #: admin/themes/default/error/403.php:2
 msgid "403: Forbidden"
-msgstr ""
+msgstr "403: Forbudt"
 
 #: admin/themes/default/error/403.php:6
 msgid "Sorry, you do not have permission to access this page."
-msgstr "ขอโทษด้วยค่ะ คุณไม่ได้รับอนุญาตให้เข้าถึงหน้านี้"
+msgstr "Beklager, men du har ikke tilladelse til adgang til denne side."
 
 #: admin/themes/default/error/403.php:10 admin/themes/default/error/404.php:9
 #: admin/themes/default/error/405.php:8
 msgid "site administrator"
-msgstr "ผู้ดูแลไซต์"
+msgstr "Administrator"
 
 #: admin/themes/default/error/403.php:11
 #, php-format
 msgid "If you think you should have permission, try contacting the %s."
-msgstr "ถ้าคุณคิดว่าคุณควรได้รับสิทธิ ลองติดต่อ %s"
+msgstr ""
 
 #: admin/themes/default/error/404.php:2
 msgid "404: Page Not Found"
-msgstr ""
+msgstr "404: Siden blev ikke fundet"
 
 #: admin/themes/default/error/404.php:6
 msgid ""
 "You&#8217;ve tried to access a page that does not seem to exist. Sometimes "
 "this happens. Below is a quick break-down of the items, collections, and "
 "exhibits on this site."
-msgstr "ดูเหมือนว่าคุณกำลังพยายามเข้าถึงหน้าที่ไม่มีในระบบ เหตุการณ์เช่นนี้เกิดขึ้นได้ ข้างล่างนี้เป็นรายการ คอลเลกชั่น และนิทรรศการบนเว็บไซต์นี้"
+msgstr ""
 
 #: admin/themes/default/error/404.php:10
 #, php-format
 msgid "If this does not help, try contacting the %s."
-msgstr "ถ้ายังต้องการความช่วยเหลือ โปรดติดต่อ %s"
+msgstr ""
 
 #: admin/themes/default/error/404.php:16 admin/themes/default/index.php:46
 msgid "Recent Items"
-msgstr "รายการล่าสุด"
+msgstr "Seneste Objekt"
 
 #: admin/themes/default/error/404.php:29 admin/themes/default/index.php:59
 msgid "Add a new item"
-msgstr "เพิ่มรายการใหม่"
+msgstr ""
 
 #: admin/themes/default/error/404.php:36 admin/themes/default/index.php:64
 msgid "Recent Collections"
-msgstr "คอลเลกชั่นล่าสุด"
+msgstr "Seneste Samlinger"
 
 #: admin/themes/default/error/404.php:50 admin/themes/default/index.php:78
 msgid "Add a new collection"
-msgstr "เพิ่มคอลเล็คชั่นใหม่"
+msgstr ""
 
 #: admin/themes/default/error/405.php:2
 msgid "405: Method Not Allowed"
-msgstr ""
+msgstr "405: Metode ikke tilladt"
 
 #: admin/themes/default/error/405.php:9
 #, php-format
@@ -803,18 +802,18 @@ msgstr ""
 #: admin/themes/default/files/edit.php:8
 #, php-format
 msgid "Edit File #%s"
-msgstr "แก้ไขไฟล์ #%s"
+msgstr "Redigere File #%s"
 
 #: admin/themes/default/files/show.php:9
 #: application/views/scripts/files/show.php:9
 #, php-format
 msgid "File #%s"
-msgstr "ไฟล์ #%s"
+msgstr "Fil #%s"
 
 #: admin/themes/default/files/show.php:35
 #: application/libraries/globals.php:416
 msgid "Item"
-msgstr "รายการ"
+msgstr ""
 
 #: admin/themes/default/files/show.php:40
 msgid "Direct Links"
@@ -839,45 +838,45 @@ msgstr ""
 #: admin/themes/default/files/show.php:52
 #: application/views/scripts/files/show.php:22
 msgid "Format Metadata"
-msgstr "เมทาดาทารูปแบบ"
+msgstr ""
 
 #: admin/themes/default/files/show.php:54
 msgid "Filename"
-msgstr "ชื่อไฟล์"
+msgstr ""
 
 #: admin/themes/default/files/show.php:56
 #: application/views/scripts/files/show.php:24
 msgid "Original Filename"
-msgstr "ชื่อไฟล์ต้นฉบับ"
+msgstr "Original Filnavn"
 
 #: admin/themes/default/files/show.php:58
 #: application/views/scripts/files/show.php:29
 msgid "File Size"
-msgstr "ขนาดไฟล์"
+msgstr "Fil Størrelse"
 
 #: admin/themes/default/files/show.php:59
 #: application/views/scripts/files/show.php:30
 #, php-format
 msgid "%s bytes"
-msgstr "%s ไบต์"
+msgstr ""
 
 #: admin/themes/default/files/show.php:64
 msgid "File History"
-msgstr "ประวัติไฟล์"
+msgstr ""
 
 #: admin/themes/default/files/show.php:68
 msgid "Date Modified"
-msgstr "วันที่แก้ไข"
+msgstr ""
 
 #: admin/themes/default/files/show.php:70
 #: application/views/scripts/files/show.php:34
 msgid "Authentication"
-msgstr "การระบุตัวตน"
+msgstr ""
 
 #: admin/themes/default/files/show.php:76
 #: application/views/scripts/files/show.php:40
 msgid "Type Metadata"
-msgstr "เมทาดาทาประเภท"
+msgstr ""
 
 #: admin/themes/default/files/show.php:78
 #: application/views/scripts/files/show.php:42
@@ -887,11 +886,11 @@ msgstr ""
 #: admin/themes/default/files/show.php:80
 #: application/views/scripts/files/show.php:46
 msgid "File Type / OS"
-msgstr "ประเภทไฟล์/ระบบปฏิบัติการ"
+msgstr ""
 
 #: admin/themes/default/files/show.php:87
 msgid "Embedded Metadata"
-msgstr "เมทาดาทาแบบฝังตัว"
+msgstr ""
 
 #: admin/themes/default/files/show.php:93
 #: admin/themes/default/items/browse.php:133
@@ -899,11 +898,11 @@ msgstr "เมทาดาทาแบบฝังตัว"
 #: application/views/scripts/items/browse.php:60
 #: application/views/scripts/items/show.php:38
 msgid "Output Formats"
-msgstr "ประเภทผลลัพธ์"
+msgstr ""
 
 #: admin/themes/default/index.php:6
 msgid "items"
-msgstr "รายการ"
+msgstr ""
 
 #: admin/themes/default/index.php:7
 msgid "collections"
@@ -911,23 +910,23 @@ msgstr ""
 
 #: admin/themes/default/index.php:8
 msgid "tags"
-msgstr "ป้ายแท็ก"
+msgstr ""
 
 #: admin/themes/default/index.php:11
 msgid "plugins"
-msgstr "ปลั๊กอิน"
+msgstr ""
 
 #: admin/themes/default/index.php:14
 msgid "users"
-msgstr "ผู้ใช้"
+msgstr ""
 
 #: admin/themes/default/index.php:18
 msgid "theme"
-msgstr "แนวเรื่อง"
+msgstr ""
 
 #: admin/themes/default/index.php:29
 msgid "A new version of Omeka is available for download."
-msgstr "มี Omeka รุ่นใหม่ให้ดาวน์โหลด"
+msgstr ""
 
 #: admin/themes/default/index.php:30
 #, php-format
@@ -940,46 +939,46 @@ msgstr ""
 #: admin/themes/default/items/tag-form.php:23
 #: application/views/helpers/ElementInput.php:113
 msgid "Remove"
-msgstr "ลบทิ้ง"
+msgstr "Fjern"
 
 #: admin/themes/default/item-types/add-new-element.php:6
 msgid "Element Name"
-msgstr "ชื่อ Element"
+msgstr ""
 
 #: admin/themes/default/item-types/add-new-element.php:22
 msgid "Element Description"
-msgstr "คำบรรยายองค์ประกอบ"
+msgstr ""
 
 #: admin/themes/default/item-types/add.php:2
 #: application/forms/ItemTypes.php:161
 msgid "Add Item Type"
-msgstr "เพิ่มประเภทรายการ"
+msgstr "Tilføj Objekt Type"
 
 #: admin/themes/default/item-types/browse.php:2
 msgid "Browse Item Types"
-msgstr "เลือกดูประเภทรายการ"
+msgstr "Gennemse Objekt Typer"
 
 #: admin/themes/default/item-types/browse.php:7
 #: admin/themes/default/item-types/browse.php:40
 msgid "Add an Item Type"
-msgstr "เพื่อรายการ"
+msgstr "Tilføj en Objekt Type"
 
 #: admin/themes/default/item-types/browse.php:14
 msgid "Type Name"
-msgstr "ชื่อประเภท"
+msgstr ""
 
 #: admin/themes/default/item-types/browse.php:16
 msgid "Total Items"
-msgstr "รายการทั้งหมด"
+msgstr "Samlet antal Objekt"
 
 #: admin/themes/default/item-types/edit.php:8
 #, php-format
 msgid "Edit Item Type #%s"
-msgstr "แก้ไขประเภทรายการ #%s"
+msgstr ""
 
 #: admin/themes/default/item-types/form.php:14
 msgid "Item Type Information"
-msgstr "ข้อมูลประเภทรายการ"
+msgstr ""
 
 #: admin/themes/default/item-types/form.php:15
 #: admin/themes/default/users/add.php:7
@@ -987,55 +986,55 @@ msgstr "ข้อมูลประเภทรายการ"
 #: admin/themes/default/users/edit.php:15
 #: install/views/scripts/index/index.phtml:14
 msgid "required field"
-msgstr "เขตข้อมูลบังคับ"
+msgstr ""
 
 #: admin/themes/default/item-types/form.php:25
 #: admin/themes/default/item-types/show.php:16
 msgid "Elements"
-msgstr "องค์ประกอบ"
+msgstr ""
 
 #: admin/themes/default/item-types/form.php:42
 #: admin/themes/default/items/tag-form.php:22
 #: admin/themes/default/settings/edit-item-type-elements.php:22
 msgid "Undo"
-msgstr "ยกเลิก"
+msgstr ""
 
 #: admin/themes/default/item-types/form.php:80
 #: admin/themes/default/item-types/form.php:87
 msgid "Add Element"
-msgstr "เพิ่ม Element"
+msgstr ""
 
 #: admin/themes/default/item-types/form.php:84
 msgid "Existing"
-msgstr "ยังมีอยู่"
+msgstr ""
 
 #: admin/themes/default/item-types/form.php:85
 msgid "New"
-msgstr "ใหม่"
+msgstr "Ny"
 
 #: admin/themes/default/item-types/show.php:8
 #, php-format
 msgid "Item Type #%s"
-msgstr "ประเภทรายการ #%s"
+msgstr ""
 
 #: admin/themes/default/item-types/show.php:25
 msgid "There are no elements."
-msgstr "ไม่มีองค์ประกอบใดๆ"
+msgstr ""
 
 #: admin/themes/default/item-types/show.php:39
 msgid "There are no recently added items."
-msgstr "ไม่มีรายการที่เพิ่มล่าสุด"
+msgstr ""
 
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:20
 #: admin/themes/default/items/browse.php:116
 #: admin/themes/default/items/browse.php:151
 msgid "Add an Item"
-msgstr "เพิ่มรายการ"
+msgstr "Tilføj et Objekt"
 
 #: admin/themes/default/items/add.php:12
 msgid "Add Item"
-msgstr "เพิ่มรายการ"
+msgstr "Tilføj Objekt"
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit.php:89
@@ -1045,7 +1044,7 @@ msgstr "เพิ่มรายการ"
 #: application/libraries/globals.php:418
 #: application/views/scripts/items/show.php:18
 msgid "Collection"
-msgstr "คอลเลกชั่น"
+msgstr "Samling"
 
 #: admin/themes/default/items/batch-delete.php:2
 msgid "Batch Delete Items"
@@ -1054,76 +1053,76 @@ msgstr ""
 #: admin/themes/default/items/batch-delete.php:38
 msgid ""
 "Some items were excluded because you do not have permission to delete them."
-msgstr "บางรายการถูกตัดออกไปเนื่องจากคุณไม่ได้รับอนุญาตให้ลบรายการนั้นๆ ได้"
+msgstr ""
 
 #: admin/themes/default/items/batch-delete.php:41
 msgid "Checked items will be deleted."
-msgstr "รายการที่เลือกไว้จะถูกลบ"
+msgstr ""
 
 #: admin/themes/default/items/batch-delete.php:50
 #: admin/themes/default/items/batch-edit.php:116
 msgid "Delete Items"
-msgstr "รายการที่ลบ"
+msgstr "Slet Objekt"
 
 #: admin/themes/default/items/batch-edit.php:2
 msgid "Batch Edit Items"
-msgstr "แก้ไขหลายรายการพร้อมกัน"
+msgstr "Batch Tilføj Objekt"
 
 #: admin/themes/default/items/batch-edit.php:36
 msgid "Changes will be applied to checked items."
-msgstr "การเปลี่ยนแปลงจะเกิดขึ้นกับรายการที่เลือก"
+msgstr ""
 
 #: admin/themes/default/items/batch-edit.php:41
 msgid "Item Metadata"
-msgstr "เมทาดาทารายการ"
+msgstr "Objekt Metadata"
 
 #: admin/themes/default/items/batch-edit.php:46
 msgid "Public?"
-msgstr "สาธารณะ?"
+msgstr "Offentlig?"
 
 #: admin/themes/default/items/batch-edit.php:49
 #: admin/themes/default/items/batch-edit.php:64
 #: admin/themes/default/items/batch-edit.php:78
 #: admin/themes/default/items/batch-edit.php:93
 msgid "Select Below"
-msgstr "เลือกข้างล่าง"
+msgstr "Vælg Nedenfor"
 
 #: admin/themes/default/items/batch-edit.php:51
 msgid "Not Public"
-msgstr "ไม่สาธารณะ"
+msgstr "Ikke Offentlig"
 
 #: admin/themes/default/items/batch-edit.php:61
 msgid "Featured?"
-msgstr "แนะนำ?"
+msgstr "Føretrukken?"
 
 #: admin/themes/default/items/batch-edit.php:66
 msgid "Not Featured"
-msgstr "ไม่แนะนำ"
+msgstr "Ikke Udvalgte"
 
 #: admin/themes/default/items/batch-edit.php:74
 #: admin/themes/default/items/item-type-form.php:3
 msgid "Item Type"
-msgstr "ประเภทรายการ"
+msgstr ""
 
 #: admin/themes/default/items/batch-edit.php:83
 #: admin/themes/default/items/batch-edit.php:98
 msgid "Remove?"
-msgstr "ลบทิ้ง?"
+msgstr "Fjern?"
 
 #: admin/themes/default/items/batch-edit.php:104
 #: admin/themes/default/items/tag-form.php:8
 #: admin/themes/default/items/tag-form.php:11
 msgid "Add Tags"
-msgstr "เพิ่มป้ายแท็ก"
+msgstr "Tilføj tags"
 
 #: admin/themes/default/items/batch-edit.php:107
 #, php-format
 msgid "List of tags to add to all checked items, separated by %s."
-msgstr "ป้ายแท็กที่จะเพิ่มในรายการที่เลือก จำแนกตาม %s"
+msgstr ""
 
 #: admin/themes/default/items/batch-edit.php:117
 msgid "Check if you wish to delete selected items."
-msgstr "เลือกถ้าคุณต้องการที่จะลบรายการเหล่านี้"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:3
 #: application/libraries/Omeka/Navigation.php:142
@@ -1164,7 +1163,7 @@ msgstr "เลือกถ้าคุณต้องการที่จะล
 #: application/views/scripts/items/browse.php:2
 #: application/views/scripts/items/tags.php:2
 msgid "Browse Items"
-msgstr "เลือกดูรายการ"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
@@ -1173,288 +1172,288 @@ msgstr "เลือกดูรายการ"
 #: application/libraries/globals.php:2734
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
-msgstr "สืบค้นรายการ"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:37
 msgid "Select"
-msgstr "เลือก"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:95
 msgid "No Tags"
-msgstr "ไม่มีป้ายแท็ก"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:139
 msgid "Details"
-msgstr "รายละเอียด"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:140
 msgid "Show Details"
-msgstr "แสดงรายละเอียด"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:141
 msgid "Hide Details"
-msgstr "ซ่อนรายละเอียด"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:148
 msgid "You have no items."
-msgstr "คุณไม่มีรายการใดๆ"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:150
 msgid "Get started by adding your first item."
-msgstr "เริ่มด้วยการเพิ่มรายการแรกของคุณ"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:154
 #, php-format
 msgid "The query searched %s items and returned no results."
-msgstr "คำสั่งนี้สืบค้น %s รายการและไม่ปรากฏผลการค้นที่เกี่ยวข้อง"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:154
 msgid "refine your search"
-msgstr "ปรับแต่งการสืบค้น"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:154
 #, php-format
 msgid "Would you like to %s?"
-msgstr "คุณต้องการที่จะ %s หรือไม่?"
+msgstr ""
 
 #: admin/themes/default/items/edit.php:8
 #, php-format
 msgid "Edit Item #%s"
-msgstr "แก้ไขรายการ #%s"
+msgstr "Redigere Objekt #%s"
 
 #: admin/themes/default/items/files-form.php:2
 msgid "Click and drag the files into the preferred display order."
-msgstr "คลิกและลากไฟล์ตามลำดับการแสดงผลที่คุณต้องการ"
+msgstr ""
 
 #: admin/themes/default/items/files-form.php:13
 msgid "Delete "
-msgstr "ลบ"
+msgstr ""
 
 #: admin/themes/default/items/files-form.php:22
 msgid "Add New Files"
-msgstr "เพิ่มไฟล์ใหม่"
+msgstr "Tilføj Nye Filer "
 
 #: admin/themes/default/items/files-form.php:24
 #, php-format
 msgid "The maximum file size is %s."
-msgstr "ขนาดไฟล์สูงสุดคือ %s "
+msgstr ""
 
 #: admin/themes/default/items/files-form.php:27
 msgid "Find a File"
-msgstr "ค้นหาไฟล์"
+msgstr "Find en fil"
 
 #: admin/themes/default/items/form.php:25
 msgid "Add Another File"
-msgstr "เพิ่มไฟล์อื่น"
+msgstr ""
 
 #: admin/themes/default/items/item-type-form.php:15
 msgid "Pick this type"
-msgstr "เลือกประเภทนี้"
+msgstr ""
 
 #: admin/themes/default/items/quick-filters.php:2
 #: admin/themes/default/items/quick-filters.php:4
 msgid "Quick Filter"
-msgstr "ตัวกรองอย่างรวดเร็ว"
+msgstr ""
 
 #: admin/themes/default/items/quick-filters.php:5
 msgid "View All"
-msgstr "ดูทั้งหมด"
+msgstr ""
 
 #: admin/themes/default/items/quick-filters.php:7
 msgid "Private"
-msgstr "เฉพาะภายใน"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:14
 #: application/views/scripts/items/search-form.php:13
 msgid "Search for Keywords"
-msgstr "สืบค้นคำสำคัญ"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:27
 #: application/views/scripts/items/search-form.php:25
 msgid "Narrow by Specific Fields"
-msgstr "จำกัดด้วยเขตข้อมูลเฉพาะ"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:28
 #: application/views/scripts/items/search-form.php:90
 msgid "Add a Field"
-msgstr "เพิ่มเขตข้อมูล"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:54
 #: application/views/scripts/items/search-form.php:50
 msgid "Search Field"
-msgstr "เขตข้อมูลสืบค้น"
+msgstr "Søg Felt"
 
 #: admin/themes/default/items/search-form.php:67
 #: application/views/scripts/items/search-form.php:63
 msgid "Search Type"
-msgstr "ประเภทการสืบค้น"
+msgstr "Søg Typ"
 
 #: admin/themes/default/items/search-form.php:72
 #: application/views/scripts/items/search-form.php:68
 msgid "contains"
-msgstr "ประกอบด้วย"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:73
 #: application/views/scripts/items/search-form.php:69
 msgid "does not contain"
-msgstr "ไม่มีอยู่"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:74
 #: application/views/scripts/items/search-form.php:70
 msgid "is exactly"
-msgstr "ตรงกัน"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:75
 #: application/views/scripts/items/search-form.php:71
 msgid "is empty"
-msgstr "ยังไม่มีข้อมูล"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:76
 #: application/views/scripts/items/search-form.php:72
 msgid "is not empty"
-msgstr "มีข้อมูลแล้ว"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:84
 #: application/views/scripts/items/search-form.php:80
 msgid "Search Terms"
-msgstr "คำค้น"
+msgstr "Søg Vilkår"
 
 #: admin/themes/default/items/search-form.php:90
 #: application/views/scripts/items/search-form.php:86
 msgid "Remove field"
-msgstr ""
+msgstr "Slet felt"
 
 #: admin/themes/default/items/search-form.php:98
 #: application/views/scripts/items/search-form.php:94
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
-msgstr "สืบค้นด้วยขอบเขตของ ID#s (เช่น 1-4, 156, 79)"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:112
 #: application/views/scripts/items/search-form.php:105
 msgid "Search By Collection"
-msgstr "สืบค้นตามคอลเลกชั่น"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:128
 #: application/views/scripts/items/search-form.php:119
 msgid "Search By Type"
-msgstr "สืบค้นตามประเภท"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:145
 #: application/views/scripts/items/search-form.php:135
 msgid "Search By User"
-msgstr "สืบค้นตามผู้ใช้"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:162
 #: application/views/scripts/items/search-form.php:150
 msgid "Search By Tags"
-msgstr "สืบค้นตามป้ายแท็ก"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:177
 #: application/views/scripts/items/search-form.php:163
 msgid "Public/Non-Public"
-msgstr "สาธารณะ/ไม่สาธารณะ"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:186
 #: application/views/scripts/items/search-form.php:171
 msgid "Only Public Items"
-msgstr "เฉพาะรายการสาธารณะเท่านั้น"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:187
 #: application/views/scripts/items/search-form.php:172
 msgid "Only Non-Public Items"
-msgstr "เฉพาะรายการไม่สาธารณะเท่านั้น"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:197
 #: application/views/scripts/items/search-form.php:181
 msgid "Featured/Non-Featured"
-msgstr "แนะนำ/ไม่ได้รับการแนะนำ"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:206
 #: application/views/scripts/items/search-form.php:189
 msgid "Only Featured Items"
-msgstr "เฉพาะรายการแนะนำเท่านั้น"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:207
 #: application/views/scripts/items/search-form.php:190
 msgid "Only Non-Featured Items"
-msgstr "เฉพาะรายการที่ไม่ได้รับการแนะนำเท่านั้น"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:215
 #: application/views/scripts/items/search-form.php:199
 msgid "Search for items"
-msgstr "สืบค้นรายการ"
+msgstr ""
 
 #: admin/themes/default/items/show.php:8
 #, php-format
 msgid "Item #%s"
-msgstr "รายการ #%s"
+msgstr "Objekt #%s"
 
 #: admin/themes/default/items/show.php:28
 msgid "Prev Item"
-msgstr "รายการก่อนหน้านี้"
+msgstr ""
 
 #: admin/themes/default/items/show.php:33
 msgid "Next Item"
-msgstr "รายการถัดไป"
+msgstr ""
 
 #: admin/themes/default/items/show.php:73
 msgid "File Metadata"
-msgstr "เมทาดาทาของไฟล์"
+msgstr ""
 
 #: admin/themes/default/items/show.php:76
 msgid "There are no files for this item yet."
-msgstr "ไม่มีไฟล์สำหรับรายการนี้"
+msgstr ""
 
 #: admin/themes/default/items/show.php:76
 msgid "Add a File"
-msgstr "เพิ่มไฟล์"
+msgstr "Tilføj en Fil"
 
 #: admin/themes/default/items/show.php:80
 msgid "View File Metadata"
-msgstr "ดูเมดาดาทาของไฟล์"
+msgstr ""
 
 #: admin/themes/default/items/show.php:93
 msgid "Bibliographic Citation"
-msgstr "รายการบรรณานุกรม"
+msgstr ""
 
 #: admin/themes/default/items/tag-form.php:10
 #, php-format
 msgid "Separate tags with %s"
-msgstr "จำแนกป้ายแท็กด้วย %s"
+msgstr ""
 
 #: admin/themes/default/items/tag-form.php:15
 msgid "All Tags"
-msgstr "ป้ายแท็กทั้งหมด"
+msgstr "Alle Tags"
 
 #: admin/themes/default/items/tags.php:2
 msgid "Browse Items by Tag"
-msgstr "เลือกดูรายการตามป้ายแท็ก"
+msgstr "Gennemse Objekt med Tag"
 
 #: admin/themes/default/items/tags.php:9
 #: admin/themes/default/tags/browse.php:85
 msgid "There are no tags to display. You must first tag some items."
-msgstr "ไม่มีป้ายแท็กที่จะแสดง คุณจะต้องติดป้ายแท็กก่อน"
+msgstr "Der er ingen Tags at vise. Du skal først tilføje tag til nogle Objekt."
 
 #: admin/themes/default/plugins/browse.php:26
 #, php-format
 msgid "This version of %1$s requires at least Omeka %2$s."
-msgstr "%1$s รุ่นนี้ต้องใช้ Omeka อย่างน้อยรุ่น %2$s"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:29
 #, php-format
 msgid ""
 "%1$s requires the following plugins to be installed, activated, and loaded: "
 "%2$s"
-msgstr "ปลั๊กอินเหล่านี้จำเป็นจะต้องได้รับการติดตั้ง เริ่มการใช้งาน และดึงมาใช้ก่อนการใช้งาน %1$s : %2$s"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:32
 msgid "This is not a valid plugin."
-msgstr "ปลั๊กอินนี้ไม่ถูกต้อง"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:57
 #, php-format
 msgid "by %s"
-msgstr "โดย %s"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:65
 #: admin/themes/default/themes/browse.php:23
@@ -1465,74 +1464,74 @@ msgstr ""
 #: admin/themes/default/plugins/browse.php:69
 #, php-format
 msgid "You have a new version of %s. Please upgrade!"
-msgstr "คุณมี %s รุ่นใหม่ กรุณาอัพเกรด"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:90
 msgid "Upgrade"
-msgstr "อัพเกรด"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:100
 msgid "Configure"
-msgstr "ตั้งค่า"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:106
 msgid "Deactivate"
-msgstr "ปิดการใช้งาน"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:106
 #: admin/themes/default/users/activate.php:31
 #: application/views/scripts/users/activate.php:27
 msgid "Activate"
-msgstr "เริ่มใช้งาน"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:116
 #: admin/themes/default/plugins/confirm-uninstall.php:16
 msgid "Uninstall"
-msgstr "ถอนการติดตั้ง"
+msgstr "Afinstaller"
 
 #: admin/themes/default/plugins/browse.php:129
 #: application/forms/Install.php:178
 msgid "Install"
-msgstr "ติดตั้ง"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:140
 msgid ""
 "You do not have any plugins installed. Add them to the plugins directory to "
 "see them listed here."
-msgstr "คุณยังไม่ได้ติดตั้งปลั๊กอิน เพิ่มปลั๊กอินลงในโฟลเดอร์ปลัํกอินเพื่อเพิ่มรายชื่อในนี้"
+msgstr ""
 
 #: admin/themes/default/plugins/config.php:2
 #, php-format
 msgid "Configure Plugin: %s"
-msgstr "ตั้งค่าปลั๊กอิน %s"
+msgstr ""
 
 #: admin/themes/default/plugins/confirm-uninstall.php:2
 #, php-format
 msgid "Uninstall Plugin: %s"
-msgstr "ถอนการติดตั้งปลั๊กอิน %s"
+msgstr ""
 
 #: admin/themes/default/plugins/confirm-uninstall.php:7
 #, php-format
 msgid "Are you sure you want to uninstall %s?"
-msgstr "แน่ใจว่าคุณต้องการที่จะถอนการติดตั้ง %s? "
+msgstr ""
 
 #: admin/themes/default/plugins/confirm-uninstall.php:12
 msgid "Yes, I want to uninstall this plugin."
-msgstr "ใช่ ฉันต้องการถอนการติดตั้งปลั๊กอินนี้"
+msgstr ""
 
 #: admin/themes/default/plugins/confirm-uninstall.php:17
 msgid "or"
-msgstr "หรือ"
+msgstr "eller"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:17
 #: admin/themes/default/settings/edit-item-type-elements.php:50
 msgid "Cancel"
-msgstr "ยกเลิก"
+msgstr "Annuller"
 
 #: admin/themes/default/search/index.php:2
 #: application/views/scripts/search/index.php:2
 msgid "Search Omeka "
-msgstr "สืบค้น Omeka"
+msgstr ""
 
 #: admin/themes/default/search/index.php:12
 #: admin/themes/default/tags/browse.php:18
@@ -1584,45 +1583,45 @@ msgstr ""
 
 #: admin/themes/default/settings/edit-item-type-elements.php:12
 msgid "edit a specific item type"
-msgstr "แก้ไขประเภทรายการโดยเฉพาะ"
+msgstr ""
 
 #: admin/themes/default/settings/edit-item-type-elements.php:11
 #, php-format
 msgid ""
 "Customize the element descriptions below. To re-order the elements, %s."
-msgstr "ปรับเปลี่ยนคำบรรยายองค์ประกอบข้างล่างตามต้องการ เพื่อจัดลำดับองค์ประกอบอีกครั้ง  %s"
+msgstr ""
 
 #: admin/themes/default/settings/edit-item-type-elements.php:42
 msgid "Confirm Delete"
-msgstr "ยืนยันที่จะลบ"
+msgstr ""
 
 #: admin/themes/default/settings/edit-item-type-elements.php:43
 msgid ""
 "Are you sure you want to delete the selected item type elements from the "
 "database? You will lose all text related to the selected elements. This "
 "cannot be undone."
-msgstr "แน่ใจว่าคุณต้องการที่จะลบองค์ประกอบของประเภทรายการที่เลือกไว้ออกไปจากฐานข้อมูล? ข้อมูลทั้งหมดในองค์ประกอบนั้นๆ จะถูกลบออกไปทั้งหมด และไม่สามารถกู้คืนได้"
+msgstr ""
 
 #: admin/themes/default/settings/edit-item-type-elements.php:50
 msgid "Ok"
-msgstr "ตกลง"
+msgstr ""
 
 #: admin/themes/default/settings/edit-search.php:10
 msgid "Search Record Types"
-msgstr "สืบค้นประเภทระเบียน"
+msgstr ""
 
 #: admin/themes/default/settings/edit-search.php:13
 msgid "Customize which types of records will be searchable in Omeka."
-msgstr "ปรับแต่งประเภทของระเบียนที่สามารถสืบค้นได้ใน Omeka"
+msgstr ""
 
 #: admin/themes/default/settings/edit-search.php:23
 #: admin/themes/default/settings/edit-search.php:41
 msgid "Index Records"
-msgstr "ระเบียนดัชนี"
+msgstr ""
 
 #: admin/themes/default/settings/edit-search.php:26
 msgid "Click on the \"Index Records\" button to re-index your records."
-msgstr "คลิกที่ปุ่ม \"ระเบียนดัชนี\" เพื่อจัดทำดัชนีให้กับระเบียนของคุณขึ้นมาใหม่"
+msgstr ""
 
 #: admin/themes/default/settings/edit-search.php:28
 msgid ""
@@ -1631,71 +1630,71 @@ msgid ""
 " are saved, but there are circumstances when your records are not indexed; "
 "for instance, when updating from an earlier version of Omeka or after you "
 "customize which records will be searchable."
-msgstr "การทำดรรชนีหมายถึงการรวบรวม ประมวล และบันทึกข้อมูลเพื่อสนับสนุนการสืบค้นที่รวดเร็วและถูกต้อง Omeka จะจัดทำดรรชนี้สำหรับระเบียนข้อมูลทุกรายการเมื่อถูกบันทึก แต่มีบางกรณีที่ระเบียนของคุณอาจไม่ได้รับการทำดรรชนี้ ยกตัวอย่างเช่น เมื่อปรับปรุง Omeka รุ่นก่อนหน้านี้หรือหลังจากที่คุณแก้ไขว่าระเบียนใดที่สามารถสืบค้นได้"
+msgstr ""
 
 #: admin/themes/default/settings/edit-security.php:23
 msgid "Restore Default Extensions"
-msgstr "กลับคืนส่วนขยายที่เป็นค่าตั้งต้น"
+msgstr ""
 
 #: admin/themes/default/settings/edit-security.php:28
 msgid "Restore Default Types"
-msgstr "กลับคืนประเภทที่เป็นค่าตั้งต้น"
+msgstr ""
 
 #: admin/themes/default/settings/edit-security.php:33
 msgid "Restore Default Elements"
-msgstr "กลับคืนองค์ประกอบที่เป็นค่าตั้งต้น"
+msgstr ""
 
 #: admin/themes/default/settings/edit-security.php:38
 msgid "Restore Default Attributes"
-msgstr "กลับคืนลักษณะประจำที่เป็นค่าตั้งต้น"
+msgstr ""
 
 #: admin/themes/default/settings/edit-settings.php:23
 msgid "Test"
-msgstr "ทดสอบ"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:7
 msgid "Edit Tags"
-msgstr "แก้ไขป้ายแท็ก"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:9
 msgid "Browse Tags"
-msgstr "เลือกดูป้ายแท็ก"
+msgstr "Gennemse Tags"
 
 #: admin/themes/default/tags/browse.php:24
 msgid "Editing Tags"
-msgstr "แก้ไขป้ายแท็ก"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:27
 msgid "To view all items with a tag, click the number."
-msgstr "เพื่อดูรายการที่มีป้ายแท็ก เลือกตัวเลข"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:28
 msgid ""
 "To edit the tag name, click the name and begin editing, and hit \"enter\" to"
 " save. To cancel an edit, click the ESC key or click away from the tag."
-msgstr "เพื่อแก้ไขชื่อป้ายแท็ก เลือกชื่อและเริ่มแก้ไข และกดปุ่ม enter เพื่อบันทึก หากต้องการยกเลิกการแก้ไข กดปุ่ม ESC หรือคลิกบริเวณนอกป้ายแท็ก"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:29
 msgid ""
 "To delete a tag, click the X. Deleting a tag will not delete the tagged "
 "items."
-msgstr "หากต้องการลบ คลิก X รายการที่มีป้ายแท็กจะไม่ได้ถูกลบทิ้งตามป้ายแท็กที่ถูกลบ"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:39
 msgid "Most"
-msgstr "มากที่สุด"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:40
 msgid "Least"
-msgstr "้น้อยที่สุด"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:41
 msgid "Alphabetical"
-msgstr "เรียงตามตัวอักษร"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:42
 msgid "Recent"
-msgstr "ล่าสุด"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:53
 #: admin/themes/default/tags/browse.php:55
@@ -1706,21 +1705,21 @@ msgstr ""
 #: admin/themes/default/themes/browse.php:43
 #, php-format
 msgid "Screenshot for %s Theme"
-msgstr "หน้าจอตัวอย่างสำหรับธีม %s"
+msgstr ""
 
 #: admin/themes/default/themes/browse.php:16
 msgid "Configure Theme"
-msgstr "ตั้งค่าธีม"
+msgstr ""
 
 #: admin/themes/default/themes/browse.php:19
 msgid "Current Theme"
-msgstr "ธีมปัจจุบัน"
+msgstr ""
 
 #: admin/themes/default/themes/browse.php:21
 #: admin/themes/default/themes/browse.php:48
 #, php-format
 msgid "By %s"
-msgstr "โดย %s"
+msgstr ""
 
 #: admin/themes/default/themes/browse.php:27
 msgid ""
@@ -1737,84 +1736,84 @@ msgstr ""
 #: admin/themes/default/themes/config.php:10
 #, php-format
 msgid "Configure Theme: %s"
-msgstr "ตั้งค่าธีม %s"
+msgstr ""
 
 #: admin/themes/default/themes/config.php:11
 msgid "Configurations apply to this theme only."
-msgstr "การตั้งค่าใช้ได้กับธีมนี้เท่านั้น"
+msgstr ""
 
 #: admin/themes/default/upgrade/index.php:32
 msgid "Upgrade Your Omeka Database"
-msgstr "อัพเกรดฐานข้อมูล Omeka ของคุณ"
+msgstr ""
 
 #: admin/themes/default/upgrade/index.php:34
 msgid ""
 "Your Omeka database is not compatible with your current version of Omeka."
-msgstr "ฐานข้อมูล Omeka ของคุณไม่สามารถร่วมกับ Omeka รุ่นปัจจุบันของคุณ"
+msgstr ""
 
 #: admin/themes/default/upgrade/index.php:35
 msgid ""
 "Please back up your existing database and then click the button to upgrade."
-msgstr "กรุณาสำรองฐานข้อมูลปัจจุบันและคลิกปุ่นเพื่ออัพเกรด"
+msgstr ""
 
 #: admin/themes/default/upgrade/index.php:37
 msgid "Upgrade Database"
-msgstr "อัพเกรดฐานข้อมูล"
+msgstr ""
 
 #: admin/themes/default/upgrade/migrate.php:32
 msgid "Omeka encountered an error when upgrading your installation."
-msgstr "Omeka พบข้อผิดพลาดในขณะที่อัพเกรดการติดตั้งของคุณ"
+msgstr ""
 
 #: admin/themes/default/upgrade/migrate.php:37
 msgid "Please restore from your database backup and try again."
-msgstr "กรูณากลับไปใช้ฐานข้อมูลสำรองและลองใหม่อีกครั้ง"
+msgstr ""
 
 #: admin/themes/default/upgrade/migrate.php:39
 msgid ""
 "If you have any questions please refer to <a "
 "href=\"http://omeka.org/codex\">Omeka documentation</a> or post a message on"
 " the <a href=\"http://omeka.org/forums\">Omeka forums</a>."
-msgstr "หากคุณมีคำถาม กรุณาตรวจสอบ <a href=\"http://omeka.org/codex\">เอกสารอ้างอิงของ Omeka</a> หรือส่งข้อความไปยัง <a href=\"http://omeka.org/forums\">Omeka forums</a>."
+msgstr ""
 
 #: admin/themes/default/upgrade/migrate.php:42
 msgid "Omeka has upgraded successfully."
-msgstr "อัพเกด Omeka เรียบร้อยแล้ว"
+msgstr ""
 
 #: admin/themes/default/upgrade/migrate.php:43
 msgid "Return to Dashboard"
-msgstr "กลับไปที่หน้าปัด"
+msgstr ""
 
 #: admin/themes/default/users/activate.php:2
 #: application/views/scripts/users/activate.php:2
 msgid "User Activation"
-msgstr "เริ่มใช้งานผู้ใช้"
+msgstr ""
 
 #: admin/themes/default/users/activate.php:18
 #: application/forms/ResetPassword.php:23
 #: application/views/scripts/users/activate.php:14
 msgid "Create a Password"
-msgstr "สร้างรหัสผ่าน"
+msgstr ""
 
 #: admin/themes/default/users/activate.php:24 application/forms/Install.php:71
 #: application/forms/ResetPassword.php:44
 #: application/views/scripts/users/activate.php:20
 msgid "Re-type the Password"
-msgstr "ป้อนรหัสผ่านอีกครั้ง"
+msgstr ""
 
 #: admin/themes/default/users/add.php:2
 msgid "Add New User"
-msgstr "เพิ่มผู้ใช้ใหม่"
+msgstr ""
 
 #: admin/themes/default/users/add.php:13
 msgid "Add User"
-msgstr "เพิ่มผู้ใช"
+msgstr ""
 
 #: admin/themes/default/users/api-keys.php:8
 #: admin/themes/default/users/change-password.php:8
 #: admin/themes/default/users/edit.php:8
 #, php-format
 msgid "Edit User #%s"
-msgstr "แก้ไขผู้ใช้ #%s"
+msgstr ""
 
 #: admin/themes/default/users/api-keys.php:17
 msgid "New key label"
@@ -1854,11 +1853,11 @@ msgstr ""
 
 #: admin/themes/default/users/browse.php:2
 msgid "Browse Users"
-msgstr "เลือกดูผู้ใช้"
+msgstr "Gennemse Brugere"
 
 #: admin/themes/default/users/browse.php:8
 msgid "Add a User"
-msgstr "เพิ่มผู้ใช้"
+msgstr "Tilføj Brugere"
 
 #: admin/themes/default/users/browse.php:20
 #: admin/themes/default/users/browse.php:36
@@ -1866,7 +1865,7 @@ msgstr "เพิ่มผู้ใช้"
 #: admin/themes/default/users/show.php:18 application/forms/Install.php:30
 #: application/forms/Login.php:21 application/forms/User.php:29
 msgid "Username"
-msgstr "ชื่อผู้ใช้"
+msgstr ""
 
 #: admin/themes/default/users/browse.php:23
 #: admin/themes/default/users/browse.php:38
@@ -1875,11 +1874,11 @@ msgstr "ชื่อผู้ใช้"
 #: application/forms/RecoverPassword.php:27 application/forms/User.php:96
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
-msgstr "อีเมล์"
+msgstr ""
 
 #: admin/themes/default/users/browse.php:35
 msgid "Search users"
-msgstr "สืบค้นผู้ใช้"
+msgstr ""
 
 #: admin/themes/default/users/browse.php:37
 #: admin/themes/default/users/browse.php:48
@@ -1889,57 +1888,57 @@ msgstr ""
 
 #: admin/themes/default/users/browse.php:50 application/forms/User.php:129
 msgid "Role"
-msgstr "บทบาท"
+msgstr ""
 
 #: admin/themes/default/users/browse.php:60
 msgid "inactive"
-msgstr "ไม่ทำงาน"
+msgstr ""
 
 #: admin/themes/default/users/change-password.php:20
 msgid "Save Password"
-msgstr "บันทึกรหัสผ่าน"
+msgstr ""
 
 #: admin/themes/default/users/edit.php:23
 msgid "Resend Activation Email"
-msgstr ""
+msgstr "Gensend Aktiverings Email"
 
 #: admin/themes/default/users/forgot-password.php:2
 #: application/views/scripts/users/forgot-password.php:2
 msgid "Forgot Password"
-msgstr "ลืมรหัสผ่าน"
+msgstr ""
 
 #: admin/themes/default/users/forgot-password.php:11
 #: application/views/scripts/users/forgot-password.php:10
 msgid "Enter your email address to retrieve your password."
-msgstr "ป้อนที่อยู่อีเมล์ของคุณเพื่อค้นคืนรหัสผ่านของคุณ"
+msgstr ""
 
 #: admin/themes/default/users/forgot-password.php:21
 #: application/views/scripts/users/forgot-password.php:18
 msgid "Submit"
-msgstr "ส่ง"
+msgstr ""
 
 #: admin/themes/default/users/forgot-password.php:25
 #: application/views/scripts/users/forgot-password.php:7
 msgid "Back to Log In"
-msgstr "กลับไปที่หน้าเข้าสู่ระบบ"
+msgstr ""
 
 #: admin/themes/default/users/login.php:3 application/forms/Login.php:55
 #: application/views/scripts/users/login.php:3
 msgid "Log In"
-msgstr "เข้าระบบ"
+msgstr ""
 
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
-msgstr "(ทำรหัสผ่านหาย?)"
+msgstr ""
 
 #: admin/themes/default/users/show.php:8
 #, php-format
 msgid "User #%s"
-msgstr "ผู้ใช้ #%s"
+msgstr ""
 
 #: admin/themes/default/users/show.php:15
 msgid "Edit this User"
-msgstr "แก้ไขผู้ใช้รายนี้"
+msgstr ""
 
 #: application/controllers/AppearanceController.php:48
 msgid "The appearance settings have been updated."
@@ -1952,7 +1951,7 @@ msgstr ""
 #: application/controllers/SettingsController.php:79
 #: install/views/scripts/index/index.phtml:17
 msgid "There were errors found in your form. Please edit and resubmit."
-msgstr "มีข้อผิดพลาดในแปบบฟอร์มของคุณ กรุณาแก้ไขและส่งอีกครั้ง"
+msgstr ""
 
 #: application/controllers/AppearanceController.php:66
 msgid "The navigation settings have been updated."
@@ -1967,32 +1966,32 @@ msgstr ""
 #: application/controllers/CollectionsController.php:74
 #, php-format
 msgid "The collection \"%s\" was successfully added!"
-msgstr "เพิ่มคอลเลกชั่น \"%s\" เรียบร้อยแล้ว!"
+msgstr ""
 
 #: application/controllers/CollectionsController.php:76
 #, php-format
 msgid "The collection #%s was successfully added!"
-msgstr "ได้เพิ่ม #%s คอลเล็คชั่นสำเร็จแล้ว"
+msgstr ""
 
 #: application/controllers/CollectionsController.php:84
 #, php-format
 msgid "The collection \"%s\" was successfully changed!"
-msgstr "แก้ไขคอลเลกชั่น \"%s\" เรียบร้อยแล้ว!"
+msgstr ""
 
 #: application/controllers/CollectionsController.php:86
 #, php-format
 msgid "The collection #%s was successfully changed!"
-msgstr "ได้เปลี่ยนแปลง #%s คอลเล็คชั่นสำเร็จแล้ว"
+msgstr ""
 
 #: application/controllers/CollectionsController.php:94
 #, php-format
 msgid "The collection \"%s\" was successfully deleted!"
-msgstr "ลบคอลเลกชั่น \"%s\" เรียบร้อยแล้ว!"
+msgstr ""
 
 #: application/controllers/CollectionsController.php:96
 #, php-format
 msgid "The collection #%s was successfully deleted!"
-msgstr "ได้ลบ  #%s คอลเล็คชั่นสำเร็จแล้ว"
+msgstr ""
 
 #: application/controllers/CollectionsController.php:104
 #, php-format
@@ -2018,29 +2017,29 @@ msgstr ""
 
 #: application/controllers/ElementSetsController.php:65
 msgid "The element set was successfully changed!"
-msgstr "ได้เปลี่ยนแปลงชุดองค์ประกอบนี้สำเร็จแล้ว"
+msgstr ""
 
 #: application/controllers/ErrorController.php:64
 msgid "Page not found."
-msgstr "ไม่พบหน้าที่คุณต้องการ"
+msgstr ""
 
 #: application/controllers/ErrorController.php:79
 msgid "Access denied."
-msgstr "ปฏิเสธการเข้าถึง"
+msgstr ""
 
 #: application/controllers/FilesController.php:64
 msgid "This will delete the file and its associated metadata."
-msgstr "ต่อไปนี้จะลบแฟ้มข้อมูลและเมทาดาทาที่เกี่ยวข้อง"
+msgstr ""
 
 #: application/controllers/ItemTypesController.php:28
 #, php-format
 msgid "The item type \"%s\" was successfully added."
-msgstr "ได้เพิ่ม \"%s\" ประเภทรายการสำเร็จแล้ว"
+msgstr ""
 
 #: application/controllers/ItemTypesController.php:55
 #, php-format
 msgid "The item type \"%s\" was successfully updated."
-msgstr "ได้ปรับ \"%s\" ประเภทรายการให้เป็นปัจจุบันสำเร็จแล้ว "
+msgstr ""
 
 #: application/controllers/ItemTypesController.php:150
 #, php-format
@@ -2055,7 +2054,7 @@ msgstr ""
 msgid ""
 "The item type \"%s\" was successfully added!  You may now add elements to "
 "your new item type."
-msgstr "เพิ่มประเภทรายการ \"%s\" เรียบร้อยแล้ว คุณอาจเพิ่มเอลิเมนต์ในประเภทรายการใหม่ของคุณ"
+msgstr ""
 
 #: application/controllers/ItemsController.php:85
 #: application/controllers/ItemsController.php:145
@@ -2068,7 +2067,7 @@ msgstr ""
 #: application/controllers/ItemsController.php:94
 #, php-format
 msgid "The item \"%s\" was successfully added!"
-msgstr "ได้เพิ่ม \"%s\" รายการสำเร็จแล้ว  "
+msgstr ""
 
 #: application/controllers/ItemsController.php:96
 #, php-format
@@ -2111,27 +2110,27 @@ msgstr ""
 
 #: application/controllers/ItemsController.php:255
 msgid "You must choose some items to batch edit."
-msgstr "คุณต้องเลือกรายการเพื่อทำการแก้ไขพร้อมกัน"
+msgstr ""
 
 #: application/controllers/ItemsController.php:299
 msgid "User is not allowed to modify visibility of items."
-msgstr "ผู้ใช้ได้รับอนุญาตให้แก้ไขการแสดงของรายการเหล่านี้"
+msgstr ""
 
 #: application/controllers/ItemsController.php:304
 msgid "User is not allowed to modify featured status of items."
-msgstr "ผู้ใช้ไม่ได้รับอนุญาตให้แก้ไขสถานะการแนะนำของรายการเหล่านี้"
+msgstr ""
 
 #: application/controllers/ItemsController.php:311
 msgid "User is not allowed to delete selected items."
-msgstr "ผู้ใช้ไม่ได้รับอนุญาตให้ลบรายการที่เลือก"
+msgstr ""
 
 #: application/controllers/ItemsController.php:317
 msgid "User is not allowed to edit selected items."
-msgstr "ผู้ใช้ไม่ได้รับอนุญาตให้แก้ไขรายการที่เลือก"
+msgstr ""
 
 #: application/controllers/ItemsController.php:322
 msgid "User is not allowed to tag selected items."
-msgstr "ผู้ใช้ไม่ได้รับอนุญาตให้ติดป้ายแท็กรายการที่เลือก"
+msgstr ""
 
 #: application/controllers/ItemsController.php:356
 msgid "The items were successfully deleted!"
@@ -2139,7 +2138,7 @@ msgstr ""
 
 #: application/controllers/ItemsController.php:358
 msgid "The items were successfully changed!"
-msgstr "รายการเหล่านี้ได้รับการเปลี่ยนแปลงเรียบร้อยแล้ว!"
+msgstr ""
 
 #: application/controllers/PluginsController.php:45
 #, php-format
@@ -2151,59 +2150,59 @@ msgstr ""
 #: application/controllers/PluginsController.php:52
 #, php-format
 msgid "The %s plugin was successfully configured!"
-msgstr "การตั้งค่าปลั๊กอิน %s เรียบร้อยแล้ว!"
+msgstr ""
 
 #: application/controllers/PluginsController.php:70
 #, php-format
 msgid "The %s plugin has already been installed."
-msgstr "ปลั๊กอิน %s ได้รับการติดตั้งอยู่แล้ว"
+msgstr ""
 
 #: application/controllers/PluginsController.php:79
 #, php-format
 msgid "The %s plugin was successfully installed!"
-msgstr "ติดตั้งปลั๊กอิน %s เรียบร้อยแล้ว!"
+msgstr ""
 
 #: application/controllers/PluginsController.php:91
 #: application/controllers/PluginsController.php:96
 #, php-format
 msgid "The following error occurred while installing the %s plugin: "
-msgstr "เกิดข้อผิดเหล่านี้ในระหว่างการติดตั้งปลั๊กอิน %s"
+msgstr ""
 
 #: application/controllers/PluginsController.php:124
 #, php-format
 msgid "The following error occurred while activating the %s plugin: "
-msgstr "เกิดข้อผิดพลาดเหล่านี้ในระหว่างการเริ่มการใช้งานปลั๊กอิน %s"
+msgstr ""
 
 #: application/controllers/PluginsController.php:134
 #, php-format
 msgid "The %s plugin was successfully activated!"
-msgstr "ปลั๊กอิน %s เริ่มใช้งานได้แล้ว!"
+msgstr ""
 
 #: application/controllers/PluginsController.php:139
 #, php-format
 msgid "The %s plugin was activated, but could not be loaded: "
-msgstr "ปลั๊กอิน %s เริ่มใช้งานได้แล้ว แต่ไม่สามารถดึงออกมาใช้งานได้"
+msgstr ""
 
 #: application/controllers/PluginsController.php:163
 #, php-format
 msgid "The %s plugin was successfully deactivated!"
-msgstr "ปิดการใช้งานปลั๊กอิน %s เรียบร้อยแล้ว"
+msgstr ""
 
 #: application/controllers/PluginsController.php:168
 #, php-format
 msgid "The following error occurred while deactivating the %s plugin: "
-msgstr "เกิดข้อผิดพลาดเหล่านี้ในระหว่างการปิดการใช้งานปลั๊กอิน %s"
+msgstr ""
 
 #: application/controllers/PluginsController.php:187
 #, php-format
 msgid "The %s plugin was successfully upgraded!"
-msgstr "อัพเกรดปลั๊กอิน %s เรียบร้อยแล้ว"
+msgstr ""
 
 #: application/controllers/PluginsController.php:196
 #: application/controllers/PluginsController.php:202
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
-msgstr "เกิดข้อผิดพลาดเหล่านี้ในระหว่างการอัพเกรดปลั๊กอิน %s"
+msgstr ""
 
 #: application/controllers/PluginsController.php:253
 #, php-format
@@ -2212,41 +2211,41 @@ msgstr ""
 
 #: application/controllers/PluginsController.php:262
 msgid "You must confirm the uninstall before proceeding."
-msgstr "คุณจะต้องยืนยันการถอนการติดตั้งก่อนดำเนินการต่อไป"
+msgstr ""
 
 #: application/controllers/PluginsController.php:280
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
-msgstr "ถอนการติดตั้งปลั๊กอิน %s เรียบร้อยแล้ว!"
+msgstr ""
 
 #: application/controllers/PluginsController.php:285
 #: application/controllers/PluginsController.php:290
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
-msgstr "เกิดข้อผิดพลาดเหล่านี้ในระหว่างการเริ่มการถอนการติดตั้งปลั๊กอิน %s"
+msgstr ""
 
 #: application/controllers/PluginsController.php:317
 msgid "No plugin name given."
-msgstr "ไม่มีชื่อปลั๊กอินดังกล่าว"
+msgstr ""
 
 #: application/controllers/PluginsController.php:330
 #, php-format
 msgid "The plugin %s must be installed."
-msgstr "ปลั๊กอิน %s จะต้องได้รับการติดตั้ง"
+msgstr ""
 
 #: application/controllers/SettingsController.php:44
 msgid "The general settings have been updated."
-msgstr "ปรับปรุงการตั้งค่าทั่วไปเรียบร้อยแล้ว"
+msgstr ""
 
 #: application/controllers/SettingsController.php:76
 msgid "The security settings have been updated."
-msgstr "ปรับปรุงการตั้งค่าความปลอดภัยเรียบร้อยแล้ว"
+msgstr ""
 
 #: application/controllers/SettingsController.php:95
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
-msgstr "คุณได้เปลี่ยนแปลงระเบียนข้อมูลที่สามารถสืบค้นได้ใน Omeka โปรดทำดรรชนีระเบียนเหล่านี้อีกครั้งโดยใช้แบบฟอร์มด้านล่าง"
+msgstr ""
 
 #: application/controllers/SettingsController.php:102
 msgid ""
@@ -2260,7 +2259,7 @@ msgstr ""
 
 #: application/controllers/SettingsController.php:150
 msgid "The API configuration was successfully changed!"
-msgstr "เปลี่ยนแปลงการตั้งค่า API เรียบร้อยแล้ว "
+msgstr ""
 
 #: application/controllers/SettingsController.php:176
 msgid "The ImageMagick directory path works."
@@ -2272,41 +2271,41 @@ msgstr ""
 
 #: application/controllers/TagsController.php:35
 msgid "You have to be logged in to edit tags!"
-msgstr "คุณจะต้องเข้าระบบเพื่อแก้ไขป้ายแท็ก"
+msgstr ""
 
 #: application/controllers/TagsController.php:64
 #, php-format
 msgid "Tag named \"%1$s\" was successfully renamed to \"%2$s\"."
-msgstr "ป้ายแท็กชื่อ \"%1$s\" ได้รับการเปลี่ยนชื่อเป็น \"%2$s\" เรียบร้อยแล้ว"
+msgstr ""
 
 #: application/controllers/TagsController.php:91
 msgid "Invalid tagType given."
-msgstr "ประเภทป้ายแท็กไม่ถูกต้อง"
+msgstr ""
 
 #: application/controllers/ThemesController.php:25
 msgid "Invalid form submission."
-msgstr "การส่งแบบฟอร์มไม่ถูกต้อง"
+msgstr ""
 
 #: application/controllers/ThemesController.php:33
 msgid "You have chosen an illegal theme name. Please select another theme."
-msgstr "คุณเลือกชื่อธีมที่ผิดกฎหมาย กรุณาเลือกธีมใหม่"
+msgstr ""
 
 #: application/controllers/ThemesController.php:40
 #, php-format
 msgid "This theme requires a newer version of Omeka (%s)."
-msgstr "ธีมนี้ต้องใช้กับ Omeka รุ่นใหม่กว่า (%s)"
+msgstr ""
 
 #: application/controllers/ThemesController.php:54
 msgid "The theme has been successfully changed."
-msgstr "เปลี่ยนธีมสำเร็จแล้ว"
+msgstr ""
 
 #: application/controllers/ThemesController.php:81
 msgid "The theme settings were successfully saved!"
-msgstr "บันทึกการตั้งค่าธีมสำเร็จ!"
+msgstr ""
 
 #: application/controllers/ThemesController.php:84
 msgid "There was an error on the form. Please try again."
-msgstr "มีข้อผิดพลาดบนแบบฟอร์ม กรุณาลองใหม่อีกครั้ง"
+msgstr ""
 
 #: application/controllers/UpgradeController.php:50
 msgid "SQL error in migration: "
@@ -2316,27 +2315,27 @@ msgstr ""
 msgid ""
 "Unable to reset password. Please verify that the information is correct and "
 "contact an administrator if necessary."
-msgstr "ไม่สามารถตั้งรหัสผ่านใหม่ได้ กรุณาตรวจสอบข้อมูลให้ถูกต้องและติดต่อผู้ดูแลระบบ หากจำเป็น"
+msgstr ""
 
 #: application/controllers/UsersController.php:108
 msgid "Please follow this link to reset your password:"
-msgstr "กรุณาตามลิงค์นี้เพื่อตั้งรหัสผ่านใหม่"
+msgstr ""
 
 #: application/controllers/UsersController.php:110
 #: application/controllers/UsersController.php:113
 #: application/controllers/UsersController.php:380
 #, php-format
 msgid "%s Administrator"
-msgstr "%s ผู้ดูแลระบบ"
+msgstr ""
 
 #: application/controllers/UsersController.php:114
 #, php-format
 msgid "[%s] Reset Your Password"
-msgstr "[%s] ตั้งรหัสผ่านใหม่"
+msgstr ""
 
 #: application/controllers/UsersController.php:117
 msgid "Please check your email for a link to reset your password."
-msgstr "กรุณาตรวจสอบอีเมล์ของคุณสำหรับลิงค์ที่ใช้ในการตั้งรหัสผ่านใหม่"
+msgstr ""
 
 #: application/controllers/UsersController.php:126
 msgid "Invalid activation code given."
@@ -2344,16 +2343,16 @@ msgstr ""
 
 #: application/controllers/UsersController.php:135
 msgid "Password: The passwords do not match."
-msgstr "รหัสผ่าน: รหัสผ่านไม่ตรงกัน"
+msgstr ""
 
 #: application/controllers/UsersController.php:143
 msgid "You may now log in to Omeka."
-msgstr "คุณสามารถเข้าระบบ Omeka ได้แล้ว"
+msgstr ""
 
 #: application/controllers/UsersController.php:171
 #, php-format
 msgid "The user \"%s\" was successfully added!"
-msgstr "เพิ่มผู้ใช้ \"%s\" สำเร็จแล้ว!"
+msgstr ""
 
 #: application/controllers/UsersController.php:175
 #, php-format
@@ -2376,11 +2375,11 @@ msgstr ""
 #: application/controllers/UsersController.php:253
 #, php-format
 msgid "The user %s was successfully changed!"
-msgstr "แก้ไขผู้ใช้ \"%s\" สำเร็จแล้ว!"
+msgstr ""
 
 #: application/controllers/UsersController.php:289
 msgid "Password changed!"
-msgstr "เปลี่ยนรหัสผ่านแล้ว!"
+msgstr ""
 
 #: application/controllers/UsersController.php:311
 msgid "A new API key was successfully created."
@@ -2393,7 +2392,7 @@ msgstr ""
 #: application/controllers/UsersController.php:345
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
-msgstr "ลบผู้ใช้ \"%s\" สำเร็จแล้ว!"
+msgstr ""
 
 #: application/controllers/UsersController.php:351
 #, php-format
@@ -2401,11 +2400,11 @@ msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
 "this user will remain in the system, but will no longer be associated with "
 "this user."
-msgstr "%s จะถูกลบทิ้งจากระบบ รายการ คอลเลกชั่นและป้ายแท็กจากผู้ใช้รายนี้จะยังอยู่ในระบบ แต่จะไม่เชื่อมโยงกับผู้ใช้รายนี้"
+msgstr ""
 
 #: application/controllers/UsersController.php:376
 msgid "Welcome!"
-msgstr "ยินดีต้อนรับ!"
+msgstr ""
 
 #: application/controllers/UsersController.php:378
 #, php-format
@@ -2426,53 +2425,53 @@ msgstr ""
 #: application/forms/AppearanceSettings.php:22
 #: application/forms/Install.php:128
 msgid "Fullsize Image Size"
-msgstr "ขนาดรูปภาพเต็มขนาด"
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:23
 msgid "Maximum fullsize image size constraint (in pixels)."
-msgstr "จำกัดขนาดรูปภาพเต็มขนาดสูงสุด (พิกเซล)"
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:29
 #: application/forms/Install.php:136
 msgid "Thumbnail Size"
-msgstr "ขนาดของภาพย่อ"
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:30
 msgid "Maximum thumbnail size constraint (in pixels)."
-msgstr "จำกัดขนาดรูปภาพย่อ (พิกเซล)"
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:36
 #: application/forms/Install.php:144
 msgid "Square Thumbnail Size"
-msgstr "ขนาดรูปย่อจัตุรัส"
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:37
 msgid "Maximum square thumbnail size constraint (in pixels)."
-msgstr "จำกัดขนาดรูปย่อจัตุรัส (พิกเซล)"
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:43
 msgid "Results Per Page (admin)"
-msgstr "จำนวนผลลัพธ์ ต่อ หน้า (ผู่้ดูแลฯ)"
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:44
 msgid ""
 "Limit the number of results displayed per page in the administrative "
 "interface."
-msgstr "จำกัดจำนวนผลลัพธ์ที่แสดงต่อหน้า บนหน้าจอของผู้ดูแลระบบ"
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:50
 msgid "Results Per Page (public)"
-msgstr "จำนวนผลลัพธ์ ต่อ หน้า (ผู้ใช้ทั่วไป)"
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:51
 msgid ""
 "Limit the number of results displayed per page in the public interface."
-msgstr "จำกัดจำนวนผลลัพธ์ที่แสดงต่อหน้า บนหน้าจอของผู้ใช้ทั่วไป"
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:57
 #: application/forms/Install.php:168
 msgid "Show Empty Elements"
-msgstr "แสดงเอลิเมนต์ว่าง"
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:62
 msgid "Show Element Set Headings"
@@ -2484,75 +2483,75 @@ msgstr ""
 
 #: application/forms/AppearanceSettings.php:79
 msgid "Display Settings"
-msgstr "การกำหนดการแสดงผล"
+msgstr ""
 
 #: application/forms/ChangePassword.php:25
 msgid "Current Password"
-msgstr "รหัสผ่านปัจจุบัน"
+msgstr ""
 
 #: application/forms/ChangePassword.php:26
 #: application/forms/ChangePassword.php:36
 msgid "Password must be at least 6 characters long."
-msgstr "รหัสผ่านต้องมีความยาวอย่างน้อย 6 ตัวอักษร"
+msgstr ""
 
 #: application/forms/ChangePassword.php:28
 msgid "Invalid current password"
-msgstr "รหัสผ่านปัจจุบันไม่ถูกต้อง"
+msgstr ""
 
 #: application/forms/ChangePassword.php:34
 msgid "New Password"
-msgstr "รหัสผ่านใหม่"
+msgstr ""
 
 #: application/forms/ChangePassword.php:41
 msgid "New password must be entered."
-msgstr "ต้องใส่รหัสผ่านใหม่"
+msgstr ""
 
 #: application/forms/ChangePassword.php:50
 #: application/forms/ChangePassword.php:70
 msgid "New password must be typed correctly twice."
-msgstr "ต้องพิมพ์รหัสผ่านใหม่ให้ถูกต้องสองครั้ง"
+msgstr ""
 
 #: application/forms/ChangePassword.php:59
 msgid "New password must be at least %min% characters long."
-msgstr "รหัสผ่านใหม่ต้องมีความยาวไม่น้อยกว่า  %min% ตัวอักษร"
+msgstr ""
 
 #: application/forms/ChangePassword.php:68
 msgid "Repeat New Password"
-msgstr "ป้อนรหัสผ่านใหม่อีกครั้ง"
+msgstr ""
 
 #: application/forms/GeneralSettings.php:22 application/forms/Install.php:90
 msgid "Site Title"
-msgstr "ชื่อเว็บไซต์"
+msgstr ""
 
 #: application/forms/GeneralSettings.php:26 application/forms/Install.php:95
 msgid "Site Description"
-msgstr "รายละเอียดเว็บไซต์"
+msgstr ""
 
 #: application/forms/GeneralSettings.php:31 application/forms/Install.php:99
 msgid "Administrator Email"
-msgstr "อีเมล์ผู้ดูแลระบบ"
+msgstr ""
 
 #: application/forms/GeneralSettings.php:37 application/forms/Install.php:105
 msgid "Site Copyright Information"
-msgstr "ข้อมูลลิขสิทธิ์ของเว็บไซต์"
+msgstr ""
 
 #: application/forms/GeneralSettings.php:41 application/forms/Install.php:109
 msgid "Site Author Information"
-msgstr "ข้อมูลผู้สร้างเว็บไซต์"
+msgstr ""
 
 #: application/forms/GeneralSettings.php:45 application/forms/Install.php:113
 msgid "Tag Delimiter"
-msgstr "ตัวคั่นป้ายแท็ก"
+msgstr ""
 
 #: application/forms/GeneralSettings.php:46
 msgid ""
 "Separate tags using this character or string. Be careful when changing this "
 "setting. You run the risk of splitting tags that contain the old delimiter."
-msgstr "แยกป้ายแท็กด้วยตัวอักษรหรือสายอักขระนี้ โปรดระมัดระวังเมื่อแก้ไขการตั้งค่านี้ คุณอาจเสี่ยงที่จะแยกป้ายแท็กที่ใช้ตัวคั่นเดิม"
+msgstr ""
 
 #: application/forms/GeneralSettings.php:59 application/forms/Install.php:174
 msgid "ImageMagick Directory Path"
-msgstr "วิถีสารบบอิเมจเมจิก"
+msgstr ""
 
 #: application/forms/Install.php:31
 msgid "must be 30 characters or fewer with no whitespace"
@@ -2567,19 +2566,19 @@ msgstr ""
 
 #: application/forms/Install.php:48 application/forms/Login.php:34
 msgid "Password"
-msgstr "รหัสผ่าน"
+msgstr ""
 
 #: application/forms/Install.php:49
 msgid "must be at least 6 characters"
-msgstr "ต้องมีอย่างน้อย 6 ตัวอักษร"
+msgstr ""
 
 #: application/forms/Install.php:72
 msgid "Confirm your password."
-msgstr "ยืนยันรหัสผ่านปัจจุบัน"
+msgstr ""
 
 #: application/forms/Install.php:114
 msgid "Separate tags using this character or string."
-msgstr "แยกป้ายแท็กด้วยตัวอักษรหรือสายอักขระนี้"
+msgstr ""
 
 #: application/forms/Install.php:129
 msgid "Maximum fullsize image size constraint (in pixels)"
@@ -2595,21 +2594,21 @@ msgstr ""
 
 #: application/forms/Install.php:152
 msgid "Items Per Page (admin)"
-msgstr "รายการต่อหน้า (ผู้ดูแลระบบ)"
+msgstr ""
 
 #: application/forms/Install.php:153
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
-msgstr "จำกัดจำนวนรายการที่แสดงต่อหน้าในหน้าจอดูแลระบบ"
+msgstr ""
 
 #: application/forms/Install.php:160
 msgid "Items Per Page (public)"
-msgstr "รายการต่อหน้า (สาธารณะ)"
+msgstr ""
 
 #: application/forms/Install.php:161
 msgid "Limit the number of items displayed per page in the public interface."
-msgstr "จำกัดจำนวนรายการต่อหน้าที่แสดงในหน้าจอสาธารณะ"
+msgstr ""
 
 #: application/forms/Install.php:170
 msgid "Check box to show metadata elements with no text."
@@ -2617,36 +2616,36 @@ msgstr ""
 
 #: application/forms/Install.php:185
 msgid "Default Superuser Account"
-msgstr "บัญชีผู้ใช้ Superuser หลัก"
+msgstr ""
 
 #: application/forms/Install.php:195
 msgid "Site Settings"
-msgstr "การตั้งค่าเว็บไซต์"
+msgstr ""
 
 #: application/forms/ItemTypes.php:142
 msgid "The name of the item type."
-msgstr "ชื่อของประเภทรายการ"
+msgstr ""
 
 #: application/forms/ItemTypes.php:151
 msgid "The description of the item type."
-msgstr "คำบรรยายของประเภทรายการ"
+msgstr ""
 
 #: application/forms/ItemTypes.php:188 application/forms/ItemTypes.php:197
 #, php-format
 msgid "The item type cannot have more than one \"%s\" element."
-msgstr "ประเภทรายการไม่สามารถมีเอลิเมนต์ \"%s\" ได้มากกว่าหนึ่งเอลิเมนต์"
+msgstr ""
 
 #: application/forms/Login.php:27
 msgid "Username cannot be empty."
-msgstr "ชื่อผู้ใช้ไม่สามารถเว้นว่างได้"
+msgstr ""
 
 #: application/forms/Login.php:40
 msgid "Password cannot be empty."
-msgstr "รหัสผ่านไม่สามารถเว้นว่างได้"
+msgstr ""
 
 #: application/forms/Login.php:48
 msgid "Remember Me?"
-msgstr "จำฉัน?"
+msgstr ""
 
 #: application/forms/Navigation.php:156
 msgid "[Default]"
@@ -2679,31 +2678,31 @@ msgstr ""
 
 #: application/forms/RecoverPassword.php:36
 msgid "Email address is required."
-msgstr "จำเป็นต้องใช้ที่อยู่อีเมล์"
+msgstr ""
 
 #: application/forms/RecoverPassword.php:46
 msgid "Invalid email address given."
-msgstr "ที่อยู่อีเมล์ไม่ถูกต้อง"
+msgstr ""
 
 #: application/forms/RecoverPassword.php:48
 msgid "Invalid format given for email address."
-msgstr "รูปแบบของที่อยู่อีเมล์ไม่ถูกต้อง"
+msgstr ""
 
 #: application/forms/RecoverPassword.php:50
 msgid "Invalid hostname given for email address."
-msgstr "ชื่อโฮสต์สำหรับที่อยู่อีเมล์ไม่ถูกต้อง"
+msgstr ""
 
 #: application/forms/RecoverPassword.php:66
 msgid "Invalid email address"
-msgstr "ที่อยู่อีเมล์ไม่ถูกต้อง"
+msgstr ""
 
 #: application/forms/ResetPassword.php:27
 msgid "Password is required."
-msgstr "จำเป็นต้องใช้รหัสผ่าน"
+msgstr ""
 
 #: application/forms/ResetPassword.php:33
 msgid "Typed passwords do not match."
-msgstr "รหัสผ่านที่ป้อนไม่ตรงกัน"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:24
 msgid "Disable File Upload Validation"
@@ -2713,11 +2712,11 @@ msgstr ""
 msgid ""
 "Check this field if you would like to allow any file to be uploaded to "
 "Omeka."
-msgstr "เลือกเขตข้อมูลนี้หากคุณต้องการอนุญาตให้ไฟล์ใด ๆ นำเข้าสู่ Omeka"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:32
 msgid "Allowed File Extensions"
-msgstr "นามสกุลไฟล์ที่ได้รับอนุญาต"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:33
 msgid "List of allowed extensions for file uploads"
@@ -2725,11 +2724,11 @@ msgstr ""
 
 #: application/forms/SecuritySettings.php:42
 msgid "Allowed File Types"
-msgstr "ประเภทของไฟล์ที่ได้รับอนุญาต"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:43
 msgid "List of allowed MIME types for file uploads"
-msgstr "รายชื่อ MIME type สำหรับการนำไฟล์เข้าระบบที่ได้รับอนุญาต"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:52
 msgid "ReCaptcha Public Key"
@@ -2791,23 +2790,23 @@ msgstr ""
 
 #: application/forms/User.php:30
 msgid "Username must be 30 characters or fewer. Whitespace is not allowed."
-msgstr ""
+msgstr "Brugernavn skal være 30 tegn eller færre. Tomrum er ikke tilladt."
 
 #: application/forms/User.php:37
 msgid "Username is required."
-msgstr "จำเป็นต้องใส่ชื่อผู้ใช้"
+msgstr ""
 
 #: application/forms/User.php:56
 msgid "Username must be at least %min% characters long."
-msgstr "ชื่อผู้ใช้จะต้องมีอย่างน้อย %min% ตัวอักษร"
+msgstr ""
 
 #: application/forms/User.php:58
 msgid "Username must be at most %max% characters long."
-msgstr "ชื่อผู้ใช้มีความยากมากที่สุดที่ %max% ตัวอักษร"
+msgstr ""
 
 #: application/forms/User.php:72
 msgid "This username is already in use."
-msgstr "ชื่อผู้ใช้นี้ถูกใช้ไปแล้ว"
+msgstr ""
 
 #: application/forms/User.php:82
 msgid "Name as it should be displayed on the site"
@@ -2819,15 +2818,15 @@ msgstr ""
 
 #: application/forms/User.php:94
 msgid "This email address is invalid."
-msgstr "ที่อยู่อีเมล์ไม่ถูกต้อง"
+msgstr ""
 
 #: application/forms/User.php:102
 msgid "Email is required."
-msgstr "จำเป็นต้องป้องอีเมล์"
+msgstr ""
 
 #: application/forms/User.php:121
 msgid "This email address is already in use."
-msgstr "อีเมล์นี้มีการใช้งานแล้ว"
+msgstr ""
 
 #: application/forms/User.php:130
 msgid ""
@@ -2847,7 +2846,7 @@ msgstr ""
 
 #: application/forms/User.php:142
 msgid "Active?"
-msgstr "ใช้งานได้?"
+msgstr ""
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:115
 #, php-format
@@ -2928,12 +2927,12 @@ msgstr ""
 #: application/libraries/Omeka/Plugin/Loader.php:256
 #, php-format
 msgid "'%s' requires a newer version of Omeka."
-msgstr "'%s' ต้องใช้กับ Omeka รุ่นใหม่กว่านี้"
+msgstr ""
 
 #: application/libraries/Omeka/Plugin/Loader.php:261
 #, php-format
 msgid "'%s' must be upgraded to the new version before it can be loaded."
-msgstr "ต้องอัพเกรด '%s' เป็นรุ่นใหม่ ก่อนที่จะดึงมาใช้งานได้ "
+msgstr ""
 
 #: application/libraries/Omeka/Plugin/Loader.php:264
 #, php-format
@@ -2943,7 +2942,7 @@ msgstr ""
 #: application/libraries/Omeka/Record/AbstractRecord.php:349
 #, php-format
 msgid "'%s' is an invalid special value."
-msgstr "'%s' เป็นค่าพิเศษที่ไม่ถูกต้อง"
+msgstr ""
 
 #: application/libraries/Omeka/Record/Iterator.php:49
 msgid "An invalid value was detected during record iteration."
@@ -2969,15 +2968,15 @@ msgstr ""
 #: application/libraries/globals.php:1259
 #, php-format
 msgid "Could not find file %s!"
-msgstr "ไม่สามารถหาไฟล์ %s ได้!"
+msgstr ""
 
 #: application/libraries/globals.php:1276
 msgid "No featured collections are available."
-msgstr "ไม่มีคอลเลกชั่นแนะนำ"
+msgstr ""
 
 #: application/libraries/globals.php:1569
 msgid "Select Below "
-msgstr "เลือกด้านล่าง"
+msgstr ""
 
 #: application/libraries/globals.php:1611
 msgid "Omeka RSS Feed"
@@ -2989,19 +2988,19 @@ msgstr ""
 
 #: application/libraries/globals.php:2251
 msgid "No recent items available."
-msgstr "ไม่มีรายการล่าสุด"
+msgstr ""
 
 #: application/libraries/globals.php:2277
 msgid "No featured items are available."
-msgstr "ไม่มีรายการแนะนำ"
+msgstr ""
 
 #: application/libraries/globals.php:2332
 msgid "View"
-msgstr "ดู"
+msgstr ""
 
 #: application/libraries/globals.php:2394
 msgid "No Collection"
-msgstr "ไม่มีคอลเลกชั่น"
+msgstr ""
 
 #: application/libraries/globals.php:2509
 msgid "RSS"
@@ -3009,23 +3008,23 @@ msgstr ""
 
 #: application/libraries/globals.php:2526
 msgid "Next Item &rarr;"
-msgstr "รายการต่อไป &rarr;"
+msgstr ""
 
 #: application/libraries/globals.php:2546
 msgid "&larr; Previous Item"
-msgstr "&larr; รายการก่อนหน้า"
+msgstr ""
 
 #: application/libraries/globals.php:2724
 msgid "Browse All"
-msgstr "เลือกดูทั้งหมด"
+msgstr ""
 
 #: application/libraries/globals.php:2729
 msgid "Browse by Tag"
-msgstr "เลือกดูตามป้ายแทก"
+msgstr ""
 
 #: application/libraries/globals.php:3002
 msgid "No tags are available."
-msgstr "ไม่มีป้ายแท็ก"
+msgstr ""
 
 #: application/models/Builder/Item.php:263
 msgid "Must specify a file transfer type when attaching files to an item!"
@@ -3033,7 +3032,7 @@ msgstr ""
 
 #: application/models/Collection.php:117
 msgid "Cannot associate the collection with an unsaved user."
-msgstr "ไม่สามารถเชื่อมโยงคอลเลกชั่นกับผู้ใช้ที่ไม่ได้บันทึก"
+msgstr ""
 
 #: application/models/Element.php:175
 msgid "The element name must not be empty."
@@ -3130,11 +3129,11 @@ msgstr ""
 #: application/models/ItemType.php:102
 #, php-format
 msgid "The item type name must have between %1$s and %2$s characters."
-msgstr "ชื่อประเภทของรายการต้องมีจำนวนระหว่าง %1$s และ %2$s ตัวอักษร"
+msgstr ""
 
 #: application/models/ItemType.php:106
 msgid "The item type name must be unique."
-msgstr "ชื่อประเภทของรายการต้องเฉพาะเจาะจง"
+msgstr ""
 
 #: application/models/ItemType.php:179
 msgid "There are too many values in the element ordering array."
@@ -3159,7 +3158,7 @@ msgstr ""
 #: application/models/ItemType.php:291
 #, php-format
 msgid "Cannot find element with ID %s!"
-msgstr "ไม่สามารถหาองค์ประกอบด้วยรหัส %s!"
+msgstr ""
 
 #: application/models/ItemType.php:332
 #, php-format
@@ -3189,7 +3188,7 @@ msgstr ""
 #: application/models/Mixin/ElementText.php:562
 #, php-format
 msgid "The \"%s\" field has at least one invalid value!"
-msgstr "เขตข้อมูล \"%s\" มีข้อมูลที่ไม่ถูกต้อง"
+msgstr ""
 
 #: application/models/Mixin/ElementText.php:632
 msgid "Cannot save element text for records that are not yet persistent!"
@@ -3197,11 +3196,11 @@ msgstr ""
 
 #: application/models/Option.php:50 application/models/Option.php:54
 msgid "Each option must have a unique name."
-msgstr "แต่ละตัวเลือกต้องมีชื่อเฉพาะ"
+msgstr ""
 
 #: application/models/Plugin.php:133
 msgid "Names of plugins must not be blank"
-msgstr "ชื่อปลั๊กอินไม่สามารถเว้นว่างได้"
+msgstr ""
 
 #: application/models/Table/Collection.php:77
 #, php-format
@@ -3210,41 +3209,41 @@ msgstr ""
 
 #: application/models/Table/Item.php:164
 msgid "Invalid search type given!"
-msgstr "ประเภทการสืบค้นนี้ไม่ถูกต้อง"
+msgstr ""
 
 #: application/models/Tag.php:56
 msgid "Tags must be given a name."
-msgstr "ป้ายแท็กจะต้องมีชื่อ"
+msgstr ""
 
 #: application/models/Tag.php:60
 msgid "That name is already taken for this tag."
-msgstr "ชื่อนี้ได้ใช้ไปแล้วในป้ายแท็กนี้"
+msgstr ""
 
 #: application/models/User.php:110
 msgid "User may not change permissions to super-user"
-msgstr "ผู้ใช้ไม่สามารถเปลี่ยนการตั้งค่าอนุญาตให้แก่ superuser ได้"
+msgstr ""
 
 #: application/models/User.php:113
 msgid "User may not change roles."
-msgstr "ผู้ใช้อาจเปลี่ยนบทบาทไม่ได้"
+msgstr ""
 
 #: application/models/User.php:182 application/models/User.php:230
 msgid "The user must be assigned a role."
-msgstr "ผู้ใช้จะต้องได้รับการกำหนดบทบาท"
+msgstr ""
 
 #: application/models/User.php:187
 #, php-format
 msgid "The username \"%1$s\" must be between %2$s and %3$s characters."
-msgstr "ชื่อผู้ใช้ \"%1$s\" จะต้องอยู่ระหว่าง %2$s ถึง %3$s ตัวอักษรเท่านั้น "
+msgstr ""
 
 #: application/models/User.php:191
 #, php-format
 msgid "'%s' is already in use. Please choose another username."
-msgstr "'%s' ได้ถูกใช้ไปแล้ว กรุณาเลือกชื่ออื่น"
+msgstr ""
 
 #: application/models/UsersActivations.php:54
 msgid "Cannot create a user activation for non-existent user."
-msgstr "ไม่สามารถดำเนินการให้กับผู้ใช้ที่ยังไม่ได้ลงทะเบียน"
+msgstr ""
 
 #: application/tests/suite/Omeka/Db/Migration/_files/migrations/20080717013526_foobar.php:18
 msgid "This migration should have been run previously (should not run again)."
@@ -3351,15 +3350,15 @@ msgstr ""
 
 #: application/views/helpers/AllElementTexts.php:108
 msgid "[no text]"
-msgstr "[ไม่มีตัวหนังสือ]"
+msgstr ""
 
 #: application/views/helpers/ElementForm.php:65
 msgid "Add Input"
-msgstr "เพิ่มการนำเข้า"
+msgstr ""
 
 #: application/views/helpers/ElementInput.php:131
 msgid "Use HTML"
-msgstr "ใช้ HTML"
+msgstr ""
 
 #: application/views/helpers/GetCurrentRecord.php:27
 #, php-format
@@ -3395,12 +3394,12 @@ msgstr ""
 #: application/views/scripts/collections/browse.php:42
 #, php-format
 msgid "View the items in %s"
-msgstr "ดูรายการใน %s"
+msgstr ""
 
 #: application/views/scripts/collections/show.php:15
 #, php-format
 msgid "Items in the %s Collection"
-msgstr "รายการในคอลเลกชั่น %s"
+msgstr ""
 
 #: application/views/scripts/collections/show.php:40
 msgid "There are currently no items within this collection."
@@ -3408,7 +3407,7 @@ msgstr ""
 
 #: application/views/scripts/common/footer.php:14
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
-msgstr "ภูมิใจนำเสนอโดย <a href=\"http://omeka.org\">Omeka</a>"
+msgstr ""
 
 #: application/views/scripts/common/pagination_control.php:5
 msgid "Pagination"
@@ -3416,11 +3415,11 @@ msgstr ""
 
 #: application/views/scripts/common/pagination_control.php:11
 msgid "Previous Page"
-msgstr ""
+msgstr "Forrige side"
 
 #: application/views/scripts/common/pagination_control.php:36
 msgid "Current Page"
-msgstr ""
+msgstr "Aktuel side"
 
 #: application/views/scripts/common/pagination_control.php:39
 #, php-format
@@ -3429,7 +3428,7 @@ msgstr ""
 
 #: application/views/scripts/common/pagination_control.php:48
 msgid "Next Page"
-msgstr ""
+msgstr "Næste Side"
 
 #: application/views/scripts/error/403.php:2
 msgid "403 Page Forbidden"
@@ -3437,7 +3436,7 @@ msgstr ""
 
 #: application/views/scripts/error/403.php:8
 msgid "You do not have permission to access this page."
-msgstr "คุณไม่ได้รับอนุญาตให้เข้าถึงเว็บเพจนี้"
+msgstr ""
 
 #: application/views/scripts/error/404.dc.php:1
 #: application/views/scripts/error/404.php:2
@@ -3448,11 +3447,11 @@ msgstr ""
 #: application/views/scripts/error/404.php:6
 #, php-format
 msgid "%s is not a valid URL."
-msgstr "%s ไม่ใช่ยูอาร์แอลที่ถูกต้อง"
+msgstr ""
 
 #: application/views/scripts/error/404.rss2.php:1
 msgid "Rss2.0 Feed Not Found!"
-msgstr "ไม่พบตัวป้อนอาร์เอสเอส 2.0"
+msgstr ""
 
 #: application/views/scripts/error/405.php:2
 msgid "405 Method Not Allowed"
@@ -3461,11 +3460,11 @@ msgstr ""
 #: application/views/scripts/error/405.php:6
 #, php-format
 msgid "The method used to access this URL (%s) is not valid."
-msgstr "วิธีการเข้าถึงยูอาร์แอลนี้ (%s) ไม่ถูกต้อง"
+msgstr ""
 
 #: application/views/scripts/error/index.php:4
 msgid "Omeka has encountered an error"
-msgstr "มีข้อผิดพลาดเกิดขึ้นในโปรแกรม Omeka"
+msgstr ""
 
 #: application/views/scripts/error/index.php:33
 msgid ""
@@ -3473,27 +3472,27 @@ msgid ""
 "Omeka Codex page on <a "
 "href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error "
 "messages</a>."
-msgstr "หากต้องการศึกษาในรายละเอียดเกี่ยวกับข้อผิดพลาดนี้ กรุณาตรวจสอบที่ Omeka Codex หัวข้อ <a href=\"http://omeka.org/codex/Retrieving_error_messages\">ค้นretrieving error messages</a>."
+msgstr ""
 
 #: application/views/scripts/index.php:10
 msgid "Featured Item"
-msgstr "รายการแนะนำ"
+msgstr ""
 
 #: application/views/scripts/index.php:18
 msgid "Featured Collection"
-msgstr "คอลเลกชั่นแนะนำ"
+msgstr ""
 
 #: application/views/scripts/index.php:42
 msgid "View All Items"
-msgstr "ดูรายการทั้งหมด"
+msgstr "Vis Alle Objekt"
 
 #: application/views/scripts/items/show.php:10
 msgid "Files"
-msgstr "ไฟล์"
+msgstr ""
 
 #: application/views/scripts/items/show.php:33
 msgid "Citation"
-msgstr "การอ้างอิง"
+msgstr ""
 
 #: application/views/scripts/search/search-filters.php:3
 msgid "Query:"
@@ -3509,32 +3508,32 @@ msgstr ""
 
 #: application/views/scripts/search/search-form.php:6
 msgid "Search using this query type:"
-msgstr "สืบค้นด้วยแบบสอบถามประเภทนี้"
+msgstr ""
 
 #: application/views/scripts/search/search-form.php:11
 msgid "Search only these record types:"
-msgstr "สืบค้นเฉพาะระเบียนข้อมูลประเภทเหล่านี"
+msgstr ""
 
 #: application/views/scripts/search/search-form.php:17
 msgid "Go to search settings to select record types to use."
-msgstr "ไปที่การตั้งค่าการสืบค้นเพื่อเลือกประเภทระเบียนข้อมูลเพื่อใช้งาน"
+msgstr ""
 
 #: application/views/scripts/search/search-form.php:19
 msgid "Advanced Search (Items only)"
-msgstr "การสืบค้นขั้นสูง (เฉพาะรายการเท่านั้น)"
+msgstr ""
 
 #: application/views/scripts/users/activate.php:8
 #, php-format
 msgid "Hello %s. Your username is %s"
-msgstr ""
+msgstr "Hej %s. Dit brugernavn er %s"
 
 #: application/views/scripts/users/login.php:9
 msgid "Go to Home Page"
-msgstr "ไปที่หน้าหลัก"
+msgstr ""
 
 #: application/views/scripts/users/login.php:9
 msgid "Lost your password?"
-msgstr "รหัสผ่านหาย?"
+msgstr ""
 
 #: install/controllers/IndexController.php:25
 msgid "Could not load database resource!"
@@ -3542,34 +3541,34 @@ msgstr ""
 
 #: install/views/scripts/index/errors.phtml:1
 msgid "Installation Error"
-msgstr "ข้อผิดพลาดจากการติดตั้ง"
+msgstr ""
 
 #: install/views/scripts/index/errors.phtml:2
 msgid ""
 "Before installation can continue, the following errors must be resolved:"
-msgstr "ก่อนการติดตั้งจะดำเนินต่อไป ข้อผิดพลาดเหล่านี้จะต้องได้รับการแก้ไข"
+msgstr ""
 
 #: install/views/scripts/index/fatal-error.phtml:1
 msgid "Fatal Error"
-msgstr "ผิดพลาดร้ายแรง"
+msgstr ""
 
 #: install/views/scripts/index/index.phtml:2
 msgid "Installation Warning"
-msgstr "คำเตือนการติดตั้ง"
+msgstr ""
 
 #: install/views/scripts/index/index.phtml:4
 msgid ""
 "The following issues will not affect installation, but they may negatively "
 "affect the behavior of Omeka:"
-msgstr "ปัญหาเหล่านี้จะไม่กระทบการติดตั้ง แต่อาจมีผลเสียต่อพฤติกรรมของ Omeka"
+msgstr ""
 
 #: install/views/scripts/index/index.phtml:14
 msgid "Configure Your Site"
-msgstr "ตั้งค่าเว็บไซต์ของคุณ"
+msgstr ""
 
 #: install/views/scripts/index/index.phtml:16
 msgid "Form Validation Errors"
-msgstr "ข้อผิดพลาดจากการตรวจสอบแบบฟอร์ม"
+msgstr ""
 
 #: install/views/scripts/index/installed.phtml:1
 msgid "Success!"
@@ -3581,7 +3580,7 @@ msgstr ""
 
 #: install/views/scripts/index/installed.phtml:3
 msgid "Public Site"
-msgstr "เว็บไซต์สาธารณะ"
+msgstr ""
 
 #: install/views/scripts/index/installed.phtml:3
 msgid "Admin Dashboard"
