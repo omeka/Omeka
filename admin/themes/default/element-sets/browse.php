@@ -26,7 +26,7 @@ echo flash();
                 <ul class="action-links">
                     <li><?php echo link_to($elementSet, 'edit', __('Edit')); ?></li>
                     <?php if (!in_array($elementSet->name, $doNotDelete)): ?>
-                    <li><?php echo link_to($elementSet, 'delete-confirm', __('Delete'), array('class' => 'delete')); ?></li>
+                    <li><?php echo link_to($elementSet, 'delete-confirm', __('Delete'), array('class' => 'delete-confirm')); ?></li>
                     <?php endif; ?>
                 </ul>
                 <?php fire_plugin_hook('admin_element_sets_browse_each', array('element_set' => $elementSet, 'view' => $this)); ?>
