@@ -10,7 +10,8 @@
  * Quasi-form for adding CSRF token checking to manually-created forms.
  *
  * This version uses a per-session token.
- * 
+ *
+ * @version 2.2.2
  * @package Omeka\Form
  */
 class Omeka_Form_SessionCsrf extends Omeka_Form

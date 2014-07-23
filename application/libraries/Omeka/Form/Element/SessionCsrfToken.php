@@ -12,7 +12,9 @@
  * This class is an adaptation of ZF's Hash element that uses a per-session
  * token.
  *
- * @see Zend_Form_Element_Hash 
+ * @version 2.2.2
+ * @see Zend_Form_Element_Hash
+ * @package Omeka\Form
  */
 class Omeka_Form_Element_SessionCsrfToken extends Zend_Form_Element_Xhtml
 {
