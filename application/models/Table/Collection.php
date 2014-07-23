@@ -34,6 +34,9 @@ class Table_Collection extends Omeka_Db_Table
                 case 'modified_since':
                     $this->filterBySince($select, $value, 'modified');
                     break;
+                case 'range':
+                    $this->filterByRange($select, $value);
+                    break;
             }
         }
     }

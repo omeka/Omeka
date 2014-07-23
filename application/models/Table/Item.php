@@ -12,45 +12,6 @@
 class Table_Item extends Omeka_Db_Table
 {
     /**
-     * Can specify a range of valid Item IDs or an individual ID
-     *
-     * @param Omeka_Db_Select $select
-     * @param string $range Example: 1-4, 75, 89
-     * @return void
-     */
-    public function filterByRange($select, $range)
-    {
-        // Comma-separated expressions should be treated individually
-        $exprs = explode(',', $range);
-
-        // Construct a SQL clause where every entry in this array is linked by 'OR'
-        $wheres = array();
-
-        foreach ($exprs as $expr) {
-            // If it has a '-' in it, it is a range of item IDs.  Otherwise it is
-            // a single item ID
-            if (strpos($expr, '-') !== false) {
-                list($start, $finish) = explode('-', $expr);
-
-                // Naughty naughty koolaid, no SQL injection for you
-                $start  = (int) trim($start);
-                $finish = (int) trim($finish);
-
-                $wheres[] = "(items.id BETWEEN $start AND $finish)";
-
-                //It is a single item ID
-            } else {
-                $id = (int) trim($expr);
-                $wheres[] = "(items.id = $id)";
-            }
-        }
-
-        $where = join(' OR ', $wheres);
-
-        $select->where('('.$where.')');
-    }
-
-    /**
      * Run the search filter on the SELECT statement
      *
      * @param Zend_Db_Select

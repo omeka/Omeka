@@ -245,6 +245,10 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
     {
         $params = array();
 
+        if (isset($args['ids'])) {
+            $params['range'] = $args['ids'];
+        }
+
         if (isset($args['sort'])) {
             $params['sort_field'] = $args['sort'];
         }
