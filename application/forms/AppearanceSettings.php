@@ -63,7 +63,9 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
             'class' => 'checkbox',
         ));
 
-        $this->addElement('hash', 'appearance_csrf');
+        $this->addElement('hash', 'appearance_csrf', array(
+            'timeout' => 3600
+        ));
         
         $this->addDisplayGroup(
             array(

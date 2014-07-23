@@ -59,7 +59,9 @@ class Omeka_Form_GeneralSettings extends Omeka_Form
             'label' => __('ImageMagick Directory Path')
         ));
 
-        $this->addElement('hash', 'settings_csrf');
+        $this->addElement('hash', 'settings_csrf', array(
+            'timeout' => 3600
+        ));
         
         $this->addDisplayGroup(
             array('administrator_email', 'site_title', 'description', 

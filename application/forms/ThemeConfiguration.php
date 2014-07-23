@@ -77,7 +77,9 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
                 }
             }
         }
-        $this->addElement('hash', 'theme_config_csrf');
+        $this->addElement('hash', 'theme_config_csrf', array(
+            'timeout' => 3600
+        ));
     }
     
     public function setThemeName($themeName)
