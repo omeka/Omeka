@@ -12,7 +12,7 @@ echo flash();
         </a>
     <?php endif; ?>
     </div>
-    <div class="pagination"><?php echo pagination_links(); ?></div>
+    <?php echo pagination_links(); ?>
     <?php if (has_loop_records('collections')): ?>
         <table id="collections" cellspacing="0" cellpadding="0">
             <thead>
