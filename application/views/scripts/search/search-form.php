@@ -10,7 +10,7 @@
         <fieldset id="record-types">
             <legend><?php echo __('Search only these record types:'); ?></legend>
             <?php foreach ($record_types as $key => $value): ?>
-            <?php echo $this->formCheckbox('record_types[]', $key, in_array($key, $filters['record_types']) ? array('checked' => true, 'id' => 'record_types-' . $key) : null); ?> <?php echo "<label for='record_types-" . $key . "'>" . $value . "</label>" ?><br>
+            <?php echo $this->formCheckbox('record_types[]', $key, in_array($key, $filters['record_types']) ? array('checked' => true, 'id' => 'record_types-' . $key) : null); ?> <?php echo $this->formLabel('record_types-' . $key, $value);?><br>
             <?php endforeach; ?>
         </fieldset>
         <?php elseif (is_admin_theme()): ?>
