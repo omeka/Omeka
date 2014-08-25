@@ -383,6 +383,8 @@ class Table_Item extends Omeka_Db_Table
     public function applySearchFilters($select, $params)
     {
         $boolean = new Omeka_Filter_Boolean;
+        $genericParams = array();
+
         foreach ($params as $key => $value) {
             if ($value === null || (is_string($value) && trim($value) == '')) {
                 continue;
@@ -429,10 +431,14 @@ class Table_Item extends Omeka_Db_Table
                     $this->filterBySince($select, $value, 'modified');
                     break;
                 default:
-                    parent::applySearchFilters($select, array($key => $value));
+                    $genericParams[$key] = $value;
             }
         }
         $this->filterBySearch($select, $params);
+
+        if (!empty($genericParams)) {
+            parent::applySearchFilters($select, $genericParams);
+        }
 
         // If we returning the data itself, we need to group by the item ID
         $select->group('items.id');

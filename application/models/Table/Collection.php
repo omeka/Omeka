@@ -14,6 +14,7 @@ class Table_Collection extends Omeka_Db_Table
     public function applySearchFilters($select, $params)
     {
         $boolean = new Omeka_Filter_Boolean;
+        $genericParams = array();
         foreach ($params as $key => $value) {
             switch ($key) {
                 case 'user':
@@ -38,8 +39,12 @@ class Table_Collection extends Omeka_Db_Table
                     $this->filterByRange($select, $value);
                     break;
                 default:
-                    parent::applySearchFilters($select, array($key => $value));
+                    $genericParams[$key] = $value;
             }
+        }
+
+        if (!empty($genericParams)) {
+            parent::applySearchFilters($select, $genericParams);
         }
     }
 
