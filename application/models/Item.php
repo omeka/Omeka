@@ -478,7 +478,7 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         }
         
         $accessed = format_date(time(), Zend_Date::DATE_LONG);
-        $url = html_escape(record_url($this, null, true));
+        $url = '<span class="citation-url">'.html_escape(record_url($this, null, true)).'</span>';
         /// Chicago-style item citation: access date and URL
         $citation .= __('accessed %1$s, %2$s.', $accessed, $url);
         
