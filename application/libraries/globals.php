@@ -1160,9 +1160,9 @@ function head_js($includeDefaults = true)
         } else {
             $headScript->prependScript('jQuery.noConflict();')
                 ->prependScript('window.jQuery.ui || document.write(' . js_escape(js_tag('vendor/jquery-ui')) . ')')
-                ->prependFile('//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js')
+                ->prependFile('//code.jquery.com/ui/1.11.2/jquery-ui.min.js')
                 ->prependScript('window.jQuery || document.write(' . js_escape(js_tag('vendor/jquery')) . ')')
-                ->prependFile('//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js');
+                ->prependFile('//code.jquery.com/jquery-1.12.4.min.js');
         }
     }
     return $headScript;
