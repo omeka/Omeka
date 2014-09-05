@@ -248,6 +248,16 @@ mail.transport.type = "Sendmail"
 ; Derivative Images ;
 ;;;;;;;;;;;;;;;;;;;;;
 
+; fileDerivatives.paths
+;
+; Set paths of original and derivative files types.
+; Types original, fullsize, thumbnail and square_thumbnail shouldn't be removed,
+; but path can be changed.
+fileDerivatives.paths.original = "original"
+fileDerivatives.paths.fullsize = "fullsize"
+fileDerivatives.paths.thumbnail = "thumbnails"
+fileDerivatives.paths.square_thumbnail = "square_thumbnails"
+
 ; fileDerivatives.strategy
 ; Controls what method Omeka uses to create derivative images.
 ; default: Omeka_File_Derivative_Strategy_ExternalImageMagick

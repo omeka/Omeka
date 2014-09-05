@@ -119,12 +119,25 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      *
      * @var array
      */
-    private static $_pathsByType = array(
+    private $_pathsByType = array(
         'original' => 'original',
         'fullsize' => 'fullsize',
         'thumbnail' => 'thumbnails',
-        'square_thumbnail' => 'square_thumbnails'
+        'square_thumbnail' => 'square_thumbnails',
     );
+
+    /**
+     * Prepare record.
+     *
+     * @return void
+     */
+    protected function construct()
+    {
+        $fileDerivatives = Zend_Registry::get('bootstrap')->getResource('Config')->fileDerivatives;
+        if (!empty($fileDerivatives) && !empty($fileDerivatives->paths)) {
+            $this->_pathsByType = $fileDerivatives->paths->toArray();
+        }
+    }
 
     /**
      * Get a property or special value of this record.
@@ -137,12 +150,11 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         switch ($property) {
             case 'uri':
                 return $this->getWebPath('original');
-            case 'fullsize_uri':
-                return $this->getWebPath('fullsize');
-            case 'thumbnail_uri':
-                return $this->getWebPath('thumbnail');
-            case 'square_thumbnail_uri':
-                return $this->getWebPath('square_thumbnail');
+            case (substr($property, -4) == '_uri'):
+                $type = substr($property, 0, -4);
+                return isset($this->_pathsByType[$type])
+                    ? $this->getWebPath($type)
+                    : parent::getProperty($property);
             case 'permalink':
                 return absolute_url(array('controller' => 'files', 'action' => 'show', 'id' => $this->id));
             case 'display_title':
@@ -319,9 +331,9 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         $storage = $this->getStorage();
         $files = array($this->getStoragePath('original'));
         if ($this->has_derivative_image) {
-            $types = self::$_pathsByType;
-            unset($types['original']);
-            foreach ($types as $type => $path) {
+            $pathsByType = $this->_pathsByType;
+            unset($pathsByType['original']);
+            foreach($pathsByType as $type => $path) {
                 $files[] = $this->getStoragePath($type);
             }
         }
@@ -348,9 +360,11 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             return;
         }
         $creator = Zend_Registry::get('file_derivative_creator');
-        $creator->addDerivative('fullsize', get_option('fullsize_constraint'));
-        $creator->addDerivative('thumbnail', get_option('thumbnail_constraint'));
-        $creator->addDerivative('square_thumbnail', get_option('square_thumbnail_constraint'));
+        $pathsByType = $this->_pathsByType;
+        unset($pathsByType['original']);
+        foreach($pathsByType as $type => $path) {
+            $creator->addDerivative($type, get_option($type . '_constraint'));
+        }
         if ($creator->create($this->getPath('original'),
                              $this->getDerivativeFilename(),
                              $this->mime_type)) {
@@ -423,11 +437,10 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         $derivativeFilename = $this->getDerivativeFilename();
         $storage->store($this->getPath('original'), $this->getStoragePath('original'));
         if ($this->has_derivative_image) {
-            $types = array_keys(self::$_pathsByType);
-            foreach ($types as $type) {
-                if ($type != 'original') {
-                    $storage->store($this->getPath($type), $this->getStoragePath($type));
-                }
+            $pathsByType = $this->_pathsByType;
+            unset($pathsByType['original']);
+            foreach($pathsByType as $type => $path) {
+                $storage->store($this->getPath($type), $this->getStoragePath($type));
             }
         }
         $this->stored = '1';
@@ -442,16 +455,16 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      */
     public function getStoragePath($type = 'original')
     {
+        if (!isset($this->_pathsByType[$type])) {
+            throw new RuntimeException(__('"%s" is not a valid file derivative.', $type));
+        }
         $storage = $this->getStorage();
         if ($type == 'original') {
             $fn = $this->filename;
         } else {
             $fn = $this->getDerivativeFilename();
         }
-        if (!isset(self::$_pathsByType[$type])) {
-            throw new RuntimeException(__('"%s" is not a valid file derivative.', $type));
-        }
-        return $storage->getPathByType($fn, self::$_pathsByType[$type]);
+        return $storage->getPathByType($fn, $this->_pathsByType[$type]);
     }
 
     /**

@@ -44,6 +44,15 @@ echo flash();
             <li><a href="<?php echo metadata($file, 'fullsize_uri'); ?>"><?php echo __('Fullsize'); ?></a></li>
             <li><a href="<?php echo metadata($file, 'thumbnail_uri'); ?>"><?php echo __('Thumbnail'); ?></a></li>
             <li><a href="<?php echo metadata($file, 'square_thumbnail_uri'); ?>"><?php echo __('Square Thumbnail'); ?></a></li>
+                <?php
+                $fileDerivatives = Zend_Registry::get('bootstrap')->getResource('Config')->fileDerivatives;
+                if (!empty($fileDerivatives) && !empty($fileDerivatives->paths)):
+                    $defaultTypes = array('original', 'fullsize', 'thumbnail', 'square_thumbnail');
+                    $pathsByType = array_diff_key($fileDerivatives->paths->toArray(), array_flip($defaultTypes));
+                    foreach ($pathsByType as $type => $path): ?>
+            <li><a href="<?php echo metadata($file, $type . '_uri'); ?>"><?php echo $type; ?></a></li>
+                    <?php endforeach;
+                endif; ?>
             <?php endif; ?>
         </ul>
     </div>
