@@ -42,16 +42,12 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
         return ob_get_clean();
     }
 
-    private function _assertScriptsIncluded($output, $scriptPaths) {
+    private function _assertScriptsIncluded($output, $scriptPaths)
+    {
+        $dom = new Zend_Dom_Query('<fake>' . $output . '</fake>');
         foreach ($scriptPaths as $scriptPath) {
-            $matcher = array(
-                'tag' => 'script',
-                'attributes' => array(
-                    'type' => 'text/javascript',
-                    'src' => $scriptPath
-                )
-            );
-            $this->assertTag($matcher, $output, "Script tag for '$scriptPath' not found.");
+            $result = $dom->queryXpath("//script[@type='text/javascript' and @src='$scriptPath']");
+            $this->assertCount(1, $result, "Script tag for '$scriptPath' not found.");
         }
     }
 
@@ -86,9 +82,10 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
         );
 
         $output = $this->_getJsOutput(false);
+        $dom = new Zend_Dom_Query('<fake>' . $output . '</fake>');
+        $result = $dom->queryXpath("//script[@type='text/javascript']");
 
-        $this->assertTag($matcher, $output,
-            "Script tag for inline script not found.");
+        $this->assertCount(1, $result, "Script tag for inline script not found.");
         $this->assertContains($script, $output);
     }
 

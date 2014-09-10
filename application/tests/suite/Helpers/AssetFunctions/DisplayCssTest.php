@@ -35,21 +35,15 @@ class Omeka_Helper_DisplayCssTest extends PHPUnit_Framework_TestCase
         return ob_get_clean();
     }
 
-    private function _assertStyleLink($output, $path, $media = null) {
-        $matcher = array(
-            'tag' => 'link',
-            'attributes' => array(
-                'type' => 'text/css',
-                'href' => $path
-            )
-        );
-
+    private function _assertStyleLink($output, $path, $media = null)
+    {
+        $dom = new Zend_Dom_Query('<fake>' . $output . '</fake>');
+        $attribQuery = "@type='text/css' and @href='$path'";
         if ($media) {
-            $matcher['attributes']['media'] = $media;
+            $attribQuery .= " and @media='$media'";
         }
-
-        $this->assertTag($matcher, $output,
-            "Link tag for '$path' not found.");
+        $result = $dom->queryXpath("//link[$attribQuery]");
+        $this->assertCount(1, $result, "Link tag for '$path' not found.");
     }
 
     private function _assertStylesheets($output, $cssPaths) {
@@ -111,8 +105,9 @@ class Omeka_Helper_DisplayCssTest extends PHPUnit_Framework_TestCase
 
         $output = $this->_getCssOutput();
 
-        $this->assertTag($matcher, $output,
-            "Style tag for inline stylesheet not found.");
+        $dom = new Zend_Dom_Query('<fake>' . $output . '</fake>');
+        $result = $dom->queryXpath("//style[@type='text/css' and @media='screen']");
+        $this->assertCount(1, $result, "Style tag for inline stylesheet not found.");
         $this->assertContains($style, $output);
     }
 }
