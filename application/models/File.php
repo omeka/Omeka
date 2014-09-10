@@ -446,7 +446,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      * @param string $type
      * @return string
      */
-    public function getStoragePath($type = 'fullsize')
+    public function getStoragePath($type = 'original')
     {
         $storage = $this->getStorage();
         if ($type == 'original') {
