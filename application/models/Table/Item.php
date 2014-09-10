@@ -98,9 +98,10 @@ class Table_Item extends Omeka_Db_Table
             $value = isset($v['terms']) ? $v['terms'] : null;
             $type = $v['type'];
             $elementId = (int) $v['element_id'];
+            $alias = "_advanced_{$advancedIndex}";
 
             $inner = true;
-            $orCondition = '';
+            $extraJoinCondition = '';
             // Determine what the WHERE clause should look like.
             switch ($type) {
                 case 'contains':
@@ -110,10 +111,7 @@ class Table_Item extends Omeka_Db_Table
                     $predicate = ' = ' . $db->quote($value);
                     break;
                 case 'does not contain':
-                    $inner = false;
-                    $predicate = "NOT LIKE " . $db->quote('%' . $value .'%');
-                    $orCondition = 'IS NULL';
-                    break;
+                    $extraJoinCondition = "AND {$alias}.text LIKE " . $db->quote('%'.$value .'%');
                 case 'is empty':
                     $inner = false;
                     $predicate = "IS NULL";
@@ -125,18 +123,18 @@ class Table_Item extends Omeka_Db_Table
                     throw new Omeka_Record_Exception(__('Invalid search type given!'));
             }
 
-            $alias = "_advanced_{$advancedIndex}";
-
             // Note that $elementId was earlier forced to int, so manual quoting
             // is unnecessary here
             $joinCondition = "{$alias}.record_id = items.id AND {$alias}.record_type = 'Item' AND {$alias}.element_id = $elementId";
+            if ($extraJoinCondition) {
+                $joinCondition .= ' ' . $extraJoinCondition;
+            }
             if ($inner) {
                 $select->joinInner(array($alias => $db->ElementText), $joinCondition, array());
             } else {
                 $select->joinLeft(array($alias => $db->ElementText), $joinCondition, array());
             }
-            $orCondition = empty($orCondition) ? '' : " OR {$alias}.text {$orCondition}";
-            $select->where("{$alias}.text {$predicate}{$orCondition}");
+            $select->where("{$alias}.text {$predicate}");
 
             $advancedIndex++;
         }
