@@ -147,14 +147,17 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      */
     public function getProperty($property)
     {
+        // Manage uri for derivatives.
+        if (substr($property, -4) == '_uri') {
+            $type = substr($property, 0, -4);
+            if (isset($this->_pathsByType[$type])) {
+                return $this->getWebPath($type);
+            }
+        }
+
         switch ($property) {
             case 'uri':
                 return $this->getWebPath('original');
-            case (substr($property, -4) == '_uri'):
-                $type = substr($property, 0, -4);
-                return isset($this->_pathsByType[$type])
-                    ? $this->getWebPath($type)
-                    : parent::getProperty($property);
             case 'permalink':
                 return absolute_url(array('controller' => 'files', 'action' => 'show', 'id' => $this->id));
             case 'display_title':
