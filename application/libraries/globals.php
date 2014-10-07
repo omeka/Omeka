@@ -1944,7 +1944,7 @@ function browse_sort_links($links, $wrapperTags = array())
                     $urlParams[$sortDirParam] = 'd';
                 }
             }
-            $url = url(array(), null, $urlParams);
+            $url = html_escape(url(array(), null, $urlParams));
             if ($sortlistWrappers['link_tag'] !== '') {
                 $sortlist .= "<{$sortlistWrappers['link_tag']} $class $linkAttr><a href=\"$url\">$label</a></{$sortlistWrappers['link_tag']}>";
             } else {
