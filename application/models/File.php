@@ -115,7 +115,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     public $metadata;
 
     /**
-     * Folder paths for each type of files/derivatives.
+     * Default folder paths for each default type of files/derivatives.
      *
      * @var array
      */
@@ -133,9 +133,10 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      */
     protected function construct()
     {
+        // Derivatives are default and specific ones.
         $fileDerivatives = Zend_Registry::get('bootstrap')->getResource('Config')->fileDerivatives;
         if (!empty($fileDerivatives) && !empty($fileDerivatives->paths)) {
-            $this->_pathsByType = $fileDerivatives->paths->toArray();
+            $this->_pathsByType = array_merge($this->_pathsByType, $fileDerivatives->paths->toArray());
         }
     }
 
