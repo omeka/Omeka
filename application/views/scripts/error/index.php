@@ -27,7 +27,7 @@
                         <p><?php echo nl2br(htmlspecialchars($e->getMessage())); ?></p>
                     </dd>
                 </dl>
-                <pre id="backtrace"><?php echo htmlspecialchars($e->getTraceAsString()); ?></pre>
+                <pre id="backtrace"><?php echo htmlspecialchars($e); ?></pre>
                 <?php endif; ?>
             <?php else: ?>
                 <p><?php echo __('To learn how to see more detailed information about this error, see the Omeka Codex page on <a href="http://omeka.org/codex/Retrieving_error_messages">retrieving error messages</a>.'); ?>
