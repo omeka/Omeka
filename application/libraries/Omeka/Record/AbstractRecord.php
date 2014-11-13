@@ -800,7 +800,6 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
      * incorrect.
      * 
      * @param string $action
-     * @param null|string $controller
      * @return string|array A URL string or a routing array.
      */
     public function getRecordUrl($action = 'show')
