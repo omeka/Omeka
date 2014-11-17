@@ -9,8 +9,6 @@
 /**
  * Strategy for making derivatives with the GD PHP library (default since 4.3).
  *
- * @todo Manage gravity for square thumbnails.
- *
  * @package Omeka\File\Derivative\Strategy
  */
 class Omeka_File_Derivative_Strategy_GD
@@ -130,8 +128,6 @@ class Omeka_File_Derivative_Strategy_GD
     /**
      * Make a square thumbnail from source and save it at destination.
      *
-     * @todo Use gravity.
-     *
      * @param string $source Path of the source.
      * @param string $destination Path of the destination.
      * @param integer $sizeConstraint Maximum size in pixels.
@@ -139,9 +135,6 @@ class Omeka_File_Derivative_Strategy_GD
      */
     protected function _makeSquareThumbnail($source, $destination, $sizeConstraint)
     {
-        // Gravity is not used currently.
-        // $gravity = strtolower($this->getOption('gravity', 'center'));
-
         $sourceGD = $this->_loadImageResource($source);
         if (empty($sourceGD)) {
             return false;
@@ -154,7 +147,7 @@ class Omeka_File_Derivative_Strategy_GD
         if ($sourceWidth > $sourceHeight) {
             $destinationWidth = round($sourceWidth * $sizeConstraint / $sourceHeight);
             $destinationHeight = $sizeConstraint;
-            $sourceX = ceil(($sourceWidth - $sourceHeight) / 2);
+            $sourceX = $this->_getCropOffsetX($destinationWidth, $sizeConstraint);
             $sourceY = 0;
         }
         // Source is portrait.
@@ -162,7 +155,7 @@ class Omeka_File_Derivative_Strategy_GD
             $destinationHeight = round($sourceHeight * $sizeConstraint / $sourceWidth);
             $destinationWidth = $sizeConstraint;
             $sourceX = 0;
-            $sourceY = ceil(($sourceHeight - $sourceWidth) / 2);
+            $sourceY = $this->_getCropOffsetY($destinationHeight, $sizeConstraint);
         }
         // Source is square.
         else {
@@ -183,5 +176,67 @@ class Omeka_File_Derivative_Strategy_GD
         imagedestroy($sourceGD);
         imagedestroy($destinationGD);
         return $result;
+    }
+
+    /**
+     * Get the required crop offset on the X axis.
+     *
+     * This respects the Imagick 'gravity' setting.
+     *
+     * @param int $resizedX Pre-crop image width
+     * @param int $sizeConstraint
+     * @return int
+     */
+    protected function _getCropOffsetX($resizedX, $sizeConstraint)
+    {
+        $gravity = strtolower($this->getOption('gravity', 'center'));
+        switch ($gravity) {
+            case 'northwest':
+            case 'west':
+            case 'southwest':
+                return 0;
+
+            case 'northeast':
+            case 'east':
+            case 'southeast':
+                return $resizedX - $sizeConstraint;
+
+            case 'north':
+            case 'center':
+            case 'south':
+            default:
+                return (int) (($resizedX - $sizeConstraint) / 2);
+        }
+    }
+
+    /**
+     * Get the required crop offset on the Y axis.
+     *
+     * This respects the Imagick 'gravity' setting.
+     *
+     * @param int $resizedY Pre-crop image height
+     * @param int $sizeConstraint
+     * @return int
+     */
+    protected function _getCropOffsetY($resizedY, $sizeConstraint)
+    {
+        $gravity = strtolower($this->getOption('gravity', 'center'));
+        switch ($gravity) {
+            case 'northwest':
+            case 'north':
+            case 'northeast':
+                return 0;
+
+            case 'southwest':
+            case 'south':
+            case 'southeast':
+                return $resizedY - $sizeConstraint;
+
+            case 'west':
+            case 'center':
+            case 'east':
+            default:
+                return (int) (($resizedY - $sizeConstraint) / 2);
+        }
     }
 }

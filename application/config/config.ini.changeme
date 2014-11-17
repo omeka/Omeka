@@ -264,6 +264,7 @@ mail.transport.type = "Sendmail"
 ; Subkeys to this entry specify each option.
 ;
 ; fileDerivatives.strategyOptions.page = "0"
+; fileDerivatives.strategyOptions.gravity = "center"
 
 ; fileDerivatives.typeWhitelist[]
 ; If set, Omeka will only attempt to create derivatives for files with the
