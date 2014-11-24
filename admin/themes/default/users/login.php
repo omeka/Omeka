@@ -5,7 +5,7 @@ echo head(array('bodyclass' => 'login', 'title' => $pageTitle), $header);
 ?>
 <h1>Omeka</h1>
 
-<h2><?php echo link_to_admin_home_page(); ?></h2>
+<h2><?php echo link_to_home_page(option('site_title'), array("title" => __('Go to the public site'))); ?></h2>
 
 <?php echo flash(); ?>
 
