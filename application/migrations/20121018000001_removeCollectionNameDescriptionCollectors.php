@@ -79,7 +79,7 @@ class removeCollectionNameDescriptionCollectors extends Omeka_Db_Migration_Abstr
     protected function _addTitleElement($collection)
     {
         $titleElementId = $this->_getElementId('Dublin Core', 'Title'); 
-        $this->_addElementText($collection['id'], 'Collection', $titleElementId, false, $collection['name']);
+        $this->_addElementText($collection['id'], 'Collection', $titleElementId, '0', $collection['name']);
     }
     
     /**
@@ -90,7 +90,7 @@ class removeCollectionNameDescriptionCollectors extends Omeka_Db_Migration_Abstr
     protected function _addDescriptionElement($collection)
     {
         $descriptionElementId = $this->_getElementId('Dublin Core', 'Description');
-        $this->_addElementText($collection['id'], 'Collection', $descriptionElementId, false, $collection['description']);
+        $this->_addElementText($collection['id'], 'Collection', $descriptionElementId, '0', $collection['description']);
     }
     
     /**
@@ -105,7 +105,7 @@ class removeCollectionNameDescriptionCollectors extends Omeka_Db_Migration_Abstr
         if (count($collectorNames)) {            
             $contributorElementId = $this->_getElementId('Dublin Core', 'Contributor');
             foreach($collectorNames as $collectorName) {
-                $this->_addElementText($collection['id'], 'Collection', $contributorElementId, false, $collectorName);
+                $this->_addElementText($collection['id'], 'Collection', $contributorElementId, '0', $collectorName);
             }
         }
     }
