@@ -1948,7 +1948,7 @@ function browse_sort_links($links, $wrapperTags = array())
             if ($sortlistWrappers['link_tag'] !== '') {
                 $sortlist .= "<{$sortlistWrappers['link_tag']} $class $linkAttr><a href=\"$url\">$label</a></{$sortlistWrappers['link_tag']}>";
             } else {
-                $sortlist .= "<a href=\"$url\" $class {$sortlistWrappers['link_attr']}\">$label</a>";
+                $sortlist .= "<a href=\"$url\" $class $linkAttr>$label</a>";
             }
         } else {
             $sortlist .= "<{$sortlistWrappers['link_tag']}>$label</{$sortlistWrappers['link_tag']}>";
