@@ -57,7 +57,7 @@ echo flash();
     </tbody>
 </table>
 <?php endif; ?>
-<?php echo $this->formSubmit('update_api_keys', 'Update API Keys'); ?>
+<?php echo $this->formSubmit('update_api_keys', __('Update API Keys')); ?>
 </form>
 
 <?php echo foot();?>
