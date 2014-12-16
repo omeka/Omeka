@@ -31,6 +31,12 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'settings')); ?>
         <?php echo $this->formSubmit('submit', __('Save Changes'), array('class'=>'submit big green button')); ?>
         <?php echo $this->form->getDisplayGroup(Omeka_Form_Navigation::HOMEPAGE_SELECT_DISPLAY_ELEMENT_ID); ?>
     </div>
+    <div id="reset" class="panel">
+        <label for='nav-reset'><?php echo __("Reset to original navigation settings?"); ?></label>
+        <p class='warning'><?php echo __("WARNING: Any changes you have ever made to navigation will be 
+                deleted, and all labels, links, and orders you have set will be permanently lost."); ?></p>
+        <?php echo __("Check to reset"); ?> <input name="main-nav-reset" type='checkbox' />
+    </div>
 </section>
 <?php echo $this->form->getElement('navigation_csrf'); ?>
 </form>
