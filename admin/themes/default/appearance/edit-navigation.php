@@ -33,8 +33,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'settings')); ?>
     </div>
     <div id="reset" class="panel">
         <label for='nav-reset'><?php echo __("Reset to original navigation settings?"); ?></label>
-        <p class='warning'><?php echo __("WARNING: Any changes you have ever made to navigation will be 
-                deleted, and all labels, links, and orders you have set will be permanently lost."); ?></p>
+        <p class='warning'><?php echo __("WARNING: Any changes you have made to the navigation will be permanently lost."); ?></p>
         <?php echo __("Check to reset"); ?> <input name="main-nav-reset" type='checkbox' />
     </div>
 </section>
