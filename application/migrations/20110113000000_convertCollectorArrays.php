@@ -24,7 +24,7 @@ class convertCollectorArrays extends Omeka_Db_Migration_AbstractMigration
             $array = @unserialize($column);
             if(is_array($array)) {
                 $id = (int) $id;
-                $db->update($db->Collection, array('collectors' => implode(Collection::COLLECTOR_DELIMITER, $array)), "id = $id");
+                $db->update($db->Collection, array('collectors' => implode("\n", $array)), "id = $id");
             }
         }
     }

@@ -132,7 +132,7 @@ COLLECTORS
         }
 
         foreach ($indexedCollectors as $collectionId => $collectorArray) {
-            $db->update("$db->Collection", array('collectors' => implode(Collection::COLLECTOR_DELIMITER, $collectorArray)), 'id = ' . (int)$collectionId);
+            $db->update($db->Collection, array('collectors' => implode("\n", $collectorArray)), 'id = ' . (int)$collectionId);
         }    
     }
 }
