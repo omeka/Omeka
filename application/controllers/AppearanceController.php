@@ -64,7 +64,7 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
             if (isset($_POST['main-nav-reset'])) {
                 set_option(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME, 
                            Omeka_Navigation::getNavigationOptionValueForInstall(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME));
-                $this->_helper->flashMessenger(__('The navigation settings have been updated.'), 'success');
+                $this->_helper->flashMessenger(__('The navigation settings have been reset.'), 'success');
                 $this->_helper->redirector('edit-navigation');
             }
             if ($form->isValid($_POST)) {
