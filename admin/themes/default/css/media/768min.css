@@ -4,7 +4,9 @@
     #Content
         #Dashboard
         #Browse Items
-        #Browse Themes */
+        #Browse Themes 
+        #Browse Plugins
+*/
 
 
 /* Form Elements
@@ -55,3 +57,12 @@ a.button.big, input[type=submit].big, button.big {
     #current-image .crop { height: 175px; }
 
     .themes .theme .crop { height: 106px; }
+
+
+    /* Browse Themes
+    ==================================================*/
+    
+    .plugins.browse .container-twelve .plugin .columns {
+        width: 100%;
+        margin: 0;
+    }

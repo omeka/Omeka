@@ -1462,17 +1462,21 @@ header nav {
 }
 
 .plugins.browse .plugin {
-    overflow: auto;
+    overflow: hidden;
     border-bottom: 1px solid #E4E5DE;
     margin-left: -10px;
     width: 100%;
     padding: 20px 10px;
 }
 
-.plugins.browse #content > div:first-of-type { padding-top: 0; }
+.plugins.browse #content > div:first-of-type { 
+    margin-top: -20px;
+    padding-top: 20px; 
+}
 
 .plugins.browse #content > div:last-of-type { 
-    padding-bottom: 0; 
+    padding-bottom: 20px; 
+    margin-bottom: -20px;
     border-bottom: 0; 
 }
 
@@ -1494,7 +1498,14 @@ header nav {
     vertical-align: top;
 }
 
-.plugins.browse button, .plugins.browse a.button, .plugins.browse input[type=submit] { width: 100%; }
+.plugins.browse button, 
+.plugins.browse a.button, 
+.plugins.browse input[type=submit] { 
+    width: 100%;
+    font-size: 12px;
+    line-height: 24px;
+    height: 36px;
+}
 
 .plugins.browse .action-links li:after { content: none; }
 
