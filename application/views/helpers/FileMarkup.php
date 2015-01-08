@@ -798,16 +798,18 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
             return false;
         }
 
-        // Use the representative file.
-        if (!method_exists($record, 'getFile')) {
+        // Use the default representative file.
+        if ($record instanceof Omeka_Record_AbstractRecord) {
+            $file = $record->getFile();
+            if (!$file) {
+                return false;
+            }
+            $filename = $file->getDerivativeFilename();
+        } else {
+            // throw some exception?
             return '';
         }
 
-        $file = $record->getFile();
-        if (!$file) {
-            return '';
-        }
-        
         if ($file->hasThumbnail()) {
             $uri = html_escape($file->getWebPath($format));
         } else {
