@@ -113,7 +113,7 @@ class Omeka_File_Derivative_Strategy_GD
         $sourceY = 0;
 
         $destinationGD = imagecreatetruecolor($destinationWidth, $destinationHeight);
-        $result = imagecopyresized($destinationGD, $sourceGD, 0, 0, $sourceX, $sourceY, $destinationWidth, $destinationHeight, $sourceWidth, $sourceHeight);
+        $result = imagecopyresampled($destinationGD, $sourceGD, 0, 0, $sourceX, $sourceY, $destinationWidth, $destinationHeight, $sourceWidth, $sourceHeight);
 
         // Save resulted resource.
         if ($result) {
