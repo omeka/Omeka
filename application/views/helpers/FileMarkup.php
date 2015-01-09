@@ -797,13 +797,10 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         if (!$record) {
             return false;
         }
-        
-        if ($record instanceof File) {
-            $filename = $record->getDerivativeFilename();
-            $file = $record;
-        } else if ($record instanceof Item) {
-            $item = $record;
-            $file = get_db()->getTable('File')->getRandomFileWithImage($item->id);
+
+        // Use the default representative file.
+        if ($record instanceof Omeka_Record_AbstractRecord) {
+            $file = $record->getFile();
             if (!$file) {
                 return false;
             }
@@ -812,7 +809,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
             // throw some exception?
             return '';
         }
-        
+
         if ($file->hasThumbnail()) {
             $uri = html_escape($file->getWebPath($format));
         } else {
@@ -824,8 +821,8 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
          * Should use the following in this order:
          * 1. alt option 
          * 2. file description
-         * 3. file title 
-         * 4. item title
+         * 3. file title
+         * 4. record title
          */
         $alt = '';
         if (isset($props['alt'])) {
