@@ -2097,9 +2097,8 @@ function record_image($record, $imageType, $props = array())
         throw new InvalidArgumentException('An Omeka record must be passed to record_image.');
     }
 
-    $imageFile = $record->getFile();
     $fileMarkup = new Omeka_View_Helper_FileMarkup;
-    return $fileMarkup->image_tag($imageFile, $props, $imageType);
+    return $fileMarkup->image_tag($record, $props, $imageType);
 }
 
 /**

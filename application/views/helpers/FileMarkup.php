@@ -787,42 +787,36 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
     /**
      * Return a valid img tag for an image.
      *
-     * @param File|Item $record
-     * @param array $props
-     * @param string $format
+     * @param Omeka_Record_AbstractRecord $record
+     * @param array $props Image tag attributes
+     * @param string $format Derivative image type (thumbnail, etc.)
      * @return string
      */
     public function image_tag($record, $props, $format)
     {
-        if (!$record) {
+        if (!($record && $record instanceof Omeka_Record_AbstractRecord)) {
             return false;
         }
 
         // Use the default representative file.
-        if ($record instanceof Omeka_Record_AbstractRecord) {
-            $file = $record->getFile();
-            if (!$file) {
-                return false;
-            }
-            $filename = $file->getDerivativeFilename();
-        } else {
-            // throw some exception?
-            return '';
+        $file = $record->getFile();
+        if (!$file) {
+            return false;
         }
 
         if ($file->hasThumbnail()) {
-            $uri = html_escape($file->getWebPath($format));
+            $uri = $file->getWebPath($format);
         } else {
             $uri = img($this->_getFallbackImage($file));
         }
-        
+        $props['src'] = $uri;
+
         /** 
          * Determine alt attribute for images
          * Should use the following in this order:
-         * 1. alt option 
-         * 2. file description
-         * 3. file title
-         * 4. record title
+         * 1. passed 'alt' prop
+         * 2. first Dublin Core Title for $file
+         * 3. original filename for $file
          */
         $alt = '';
         if (isset($props['alt'])) {
@@ -841,9 +835,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         $props['title'] = $title;
         
         // Build the img tag
-        $html = '<img src="' . $uri . '" '.tag_attributes($props) . '/>' . "\n";
-        
-        return $html;
+        return '<img ' . tag_attributes($props) . '>';
     }
 
     /**
