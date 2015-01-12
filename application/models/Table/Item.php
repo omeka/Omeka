@@ -156,9 +156,7 @@ class Table_Item extends Omeka_Db_Table
         if ($collection instanceof Collection) {
             $select->where('collections.id = ?', $collection->id);
         } else if (is_numeric($collection)) {
-            $select->where('collections.id = ?', $collection);
-        } else {
-            $select->where('collections.name = ?', $collection);
+            $select->where('collections.id = ?', (int) $collection);
         }
     }
 
