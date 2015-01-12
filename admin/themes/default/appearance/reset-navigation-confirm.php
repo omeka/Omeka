@@ -7,7 +7,7 @@ endif;
 ?>
 <div title="<?php echo $pageTitle; ?>">
     <h2><?php echo __('Are you sure?'); ?></h2>
-    <?php echo text_to_paragraphs(html_escape("All customizations will be lost.")); ?>
+    <?php echo __("All customizations will be lost. Order and labels will revert to Omeka defaults. Custom links will be lost."); ?>
     <?php echo $form; ?>
 </div>
 <?php

@@ -80,7 +80,7 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
         $form = $this->_getResetForm();
 
         $this->view->assign(compact('isPartial', 'form'));
-        $this->render('appearance/reset-navigation', null, true);
+        $this->render('appearance/reset-navigation-confirm', null, true);
     }
 
     public function resetNavigationAction()
