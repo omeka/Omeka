@@ -61,12 +61,6 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
         $this->view->form = $form;
 
         if ($this->getRequest()->isPost()) {
-            if (isset($_POST['main-nav-reset'])) {
-                set_option(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME, 
-                           Omeka_Navigation::getNavigationOptionValueForInstall());
-                $this->_helper->flashMessenger(__('The navigation settings have been reset.'), 'success');
-                $this->_helper->redirector('edit-navigation');
-            }
             if ($form->isValid($_POST)) {
                 $form->saveFromPost();
                 $this->_helper->flashMessenger(__('The navigation settings have been updated.'), 'success');
@@ -78,6 +72,42 @@ class AppearanceController extends Omeka_Controller_AbstractActionController
                 }
             }
         }
-        
+    }
+
+    public function resetNavigationConfirmAction()
+    {
+        $isPartial = $this->getRequest()->isXmlHttpRequest();
+        $form = $this->_getResetForm();
+
+        $this->view->assign(compact('isPartial', 'form'));
+        $this->render('appearance/reset-navigation', null, true);
+    }
+
+    public function resetNavigationAction()
+    {
+        if (!$this->getRequest()->isPost()) {
+            $this->_forward('method-not-allowed', 'error', 'default');
+            return;
+        }
+        $form = $this->_getResetForm();
+        if ($form->isValid($_POST)) {
+            set_option(Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME, 
+                       Omeka_Navigation::getNavigationOptionValueForInstall());
+            $this->_helper->flashMessenger(__('The navigation settings have been reset.'), 'success');
+            $this->_helper->redirector('edit-navigation');
+        } else {
+            throw new Omeka_Controller_Exception_404;
+        }
+    }
+
+    protected function _getResetForm()
+    {
+        $form = new Zend_Form();
+        $form->setElementDecorators(array('ViewHelper'));
+        $form->removeDecorator('HtmlTag');
+        $form->addElement('hash', 'confirm_reset_hash');
+        $form->addElement('submit', 'Reset', array('class' => 'delete red button'));
+        $form->setAction($this->view->url(array('action' => 'reset-navigation')));
+        return $form;
     }
 }
