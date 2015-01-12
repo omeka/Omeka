@@ -68,7 +68,7 @@ class Models_Table_ItemTest extends PHPUnit_Framework_TestCase
 		$collectionSelect = $this->table->getSelect();
 		$this->table->applySearchFilters($collectionSelect, array('collection' => '2'));
 		$this->assertContains("INNER JOIN omeka_collections AS collections ON items.collection_id = collections.id", (string)$collectionSelect);
-		$this->assertContains("(collections.id = '2')", $collectionSelect->getPart('where'));
+		$this->assertContains("(collections.id = 2)", $collectionSelect->getPart('where'));
 		
 		// Test hasImage filter
         $hasDerivativeImageSelect = $this->table->getSelect();
