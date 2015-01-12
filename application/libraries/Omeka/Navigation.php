@@ -420,19 +420,14 @@ class Omeka_Navigation extends Zend_Navigation
     /**
      * Returns the option value associated with the default navigation during installation 
      *
-     * @param String $optionName The option name for a stored navigation object.
      * @return String The option value associated with the default navigation during installation.
      * If no option is found for the option name, then it returns an empty string.
      */
-    public static function getNavigationOptionValueForInstall($optionName) 
+    public static function getNavigationOptionValueForInstall() 
     {        
         $value = '';
         $nav = new Omeka_Navigation();
-        switch($optionName) {
-            case self::PUBLIC_NAVIGATION_MAIN_OPTION_NAME:
-                $nav->addPagesFromFilter(self::PUBLIC_NAVIGATION_MAIN_FILTER_NAME);
-            break;
-        }
+        $nav->addPagesFromFilter(self::PUBLIC_NAVIGATION_MAIN_FILTER_NAME);
         if ($nav->count()) {
             $value = json_encode($nav->toArray());
         }
