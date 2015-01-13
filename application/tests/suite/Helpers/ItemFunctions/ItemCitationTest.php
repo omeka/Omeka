@@ -59,7 +59,7 @@ class Omeka_Helper_ItemCitationTest extends Omeka_Test_AppTestCase
         $dateAccessed = format_date(time(), Zend_Date::DATE_LONG);
         $itemUrl = record_url('item', null, true);
         
-        $citationHtml = "&#8220;$title,&#8221; <em>$siteTitle</em>, accessed $dateAccessed, $itemUrl.";
+        $citationHtml = "&#8220;$title,&#8221; <em>$siteTitle</em>, accessed $dateAccessed, <span class=\"citation-url\">$itemUrl</span>.";
         
         if ($creator) {
             $citationHtml = "$creator, $citationHtml";
