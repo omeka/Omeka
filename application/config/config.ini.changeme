@@ -252,8 +252,9 @@ mail.transport.type = "Sendmail"
 ; Controls what method Omeka uses to create derivative images.
 ; default: Omeka_File_Derivative_Strategy_ExternalImageMagick
 ;
-; The built-in strategies are ExternalImageMagick (the old default) and
-; Imagick (requires PECL ext/imagick), but others can be added by plugins.
+; The built-in strategies are ExternalImageMagick (the old default), Imagick
+; (requires PECL ext/imagick), and GD (generally installed by default with PHP,
+; but handles fewer formats). Others can be added by plugins.
 ;
 ;fileDerivatives.strategy = "Omeka_File_Derivative_Strategy_ExternalImageMagick"
 
@@ -263,6 +264,7 @@ mail.transport.type = "Sendmail"
 ; Subkeys to this entry specify each option.
 ;
 ; fileDerivatives.strategyOptions.page = "0"
+; fileDerivatives.strategyOptions.gravity = "center"
 
 ; fileDerivatives.typeWhitelist[]
 ; If set, Omeka will only attempt to create derivatives for files with the
