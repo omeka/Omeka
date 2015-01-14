@@ -78,103 +78,42 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
         $moduleName = $request->getModuleName();
         $isPluginModule = !in_array($moduleName, array('default', null));
         $themeType = is_admin_theme() ? 'admin' : 'public';
-        
-        
-        if ($isPluginModule) {
-            // Make it so that plugin view/assets load before the theme (and only for the specific plugin/theme).
-            $this->_setupPathsForPlugin($moduleName, $themeType);
-        } else {
-            // Make it so that plugin view/assets load after the theme (and for all possibly plugins).
-            $this->_setupPathsForTheme($themeType);
+
+        $pluginScriptDirs = $this->_pluginMvc->getViewScriptDirs($themeType);
+
+        // Remove the current plugin, if any, from the set of "normal" plugin paths
+        if ($isPluginModule && isset($pluginScriptDirs[$moduleName])) {
+            $currentPluginScriptDirs = $pluginScriptDirs[$moduleName];
+            unset($pluginScriptDirs[$moduleName]);
         }
-    }
 
-    /**
-     * Set up the asset paths for a plugin.
-     *  
-     * If you're in a plugin, check in this order:
-     *    1. plugin view scripts (only for that plugin)
-     *    2. plugin view scripts for other plugins
-     *    3. theme view scripts
-     * 
-     * This means that it needs to add the paths in the reverse order of what needs
-     * to be checked first, so theme paths first and then plugin paths.
-     * 
-     * @param string $pluginModuleName The module name for the plugin.
-     * @param string $themeType The type of theme: 'admin' or 'public'.
-     * @return void
-     */
-    protected function _setupPathsForPlugin($pluginModuleName, $themeType)
-    {
-        $this->_addThemePaths($themeType);        
-        $this->_addPluginPaths($themeType, $pluginModuleName);
-    }
+        // Add all the "normal" plugin paths
+        foreach ($pluginScriptDirs as $modulePaths) {
+            $this->_addPathsToView($modulePaths);
+        }
 
-    /**
-     * Set up the asset paths for the theme.
-     * 
-     * If you're in one of the themes, check in this order:
-     *    1. theme view scripts
-     *    2. all plugin view scripts
-     * 
-     * @param string $themeType The type of theme: 'admin' or 'public'.
-     * @return void
-     */
-    protected function _setupPathsForTheme($themeType)
-    {
-        $this->_addPluginPaths($themeType);        
+        // Add the theme and core paths
         $this->_addThemePaths($themeType);
-    }
-    
-    /**
-     * Add asset paths for a plugin.
-     * 
-     * @param string $pluginModuleName The module name for the plugin.
-     * @param string $themeType The type of theme: 'admin' or 'public'.
-     * @return void
-     */
-    protected function _addPluginPaths($themeType, $pluginModuleName = null)
-    {                
-        // If we have chosen a specific module to add paths for.
-        if ($pluginModuleName) {
-            
-            // We need to add the scripts in reverse order if how they will be found.
-             
-            // add the scripts from the other modules
-            $otherPluginScriptDirs = $this->_pluginMvc->getModuleViewScriptDirs(null);
-            foreach ($otherPluginScriptDirs as $otherPluginModuleName => $scriptPathSet) {
-                if ($otherPluginModuleName != $pluginModuleName && isset($scriptPathSet[$themeType])) {
-                    foreach ($scriptPathSet[$themeType] as $scriptPath) {
-                        $this->_addPathToView($scriptPath);
-                    }
-                }
-            }
-            
-            // add the scripts from the first module
-            $pluginScriptDirs = $this->_pluginMvc->getModuleViewScriptDirs($pluginModuleName);
-            if (isset($pluginScriptDirs[$themeType])) {
-                foreach ($pluginScriptDirs[$themeType] as $scriptPath) {
-                    $this->_addPathToView($scriptPath);
-                }
-            }
 
-            // Adds plugin-specific scripts for themes (these take precedence over everything)
-            $this->_addOverridePathForPlugin($themeType, $pluginModuleName);
-            
-        } else {
-            // We have not chosen a specific module to add paths for, so just add
-            // them all (for the specific theme type, 'admin' or 'public').
-            $pluginScriptDirs = $this->_pluginMvc->getModuleViewScriptDirs(null);
-            foreach ($pluginScriptDirs as $moduleName => $scriptPathSet) {
-                if (array_key_exists($themeType, $scriptPathSet)) {
-                    foreach ($scriptPathSet[$themeType] as $scriptPath) {
-                        $this->_addPathToView($scriptPath);
-                    }
-                }
-            }
+        // Add plugin and theme-override paths for current plugin
+        if ($isPluginModule) {
+            $this->_addPathsToView($currentPluginScriptDirs);
+            $this->_addOverridePathForPlugin($themeType, $moduleName);
         }
     }
-    
+
+    /**
+     * Add multiple script paths.
+     * 
+     * @param array $paths The paths to add.
+     */
+    protected function _addPathsToView($paths)
+    {
+        foreach ($paths as $path) {
+            $this->_addPathToView($path);
+        }
+    }
+
     /**
      * Add a new script path for a plugin to the view.
      *
