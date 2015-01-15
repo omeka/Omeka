@@ -15,12 +15,17 @@
  */
 abstract class Omeka_Controller_AbstractActionController extends Zend_Controller_Action
 {
+    const RECORDS_PER_PAGE_SETTING = 'records_per_page_setting';
+
     /**
      * The number of records to browse per page.
      * 
      * If this is left null, then results will not paginate. This is partially 
      * because not every controller will want to paginate records and also to 
      * avoid BC breaks for plugins.
+     *
+     * Setting this to self::RECORDS_PER_PAGE_SETTING will cause the
+     * admin-configured page limits to be used (which is often what you want).
      *
      * @var string
      */
@@ -299,14 +304,45 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
     /**
      * Return the number of records to display per page.
      *
-     * By default this will return null, disabling pagination. This can be 
-     * overridden in subclasses by redefining this method.
+     * By default this will read from the _browseRecordsPerPage property, which
+     * in turn defaults to null, disabling pagination. This can be 
+     * overridden in subclasses by redefining the property or this method.
+     *
+     * Setting the property to self::RECORDS_PER_PAGE_SETTING will enable
+     * pagination using the admin-configued page limits.
      *
      * @return integer|null
      */
     protected function _getBrowseRecordsPerPage()
     {
-        return $this->_browseRecordsPerPage;
+        $perPage = $this->_browseRecordsPerPage;
+
+        // Use the user-configured page
+        if ($perPage === self::RECORDS_PER_PAGE_SETTING) {
+            $options = $this->getFrontController()->getParam('bootstrap')
+                ->getResource('Options');
+
+            if (is_admin_theme()) {
+                $perPage = (int) $options['per_page_admin'];
+            } else {
+                $perPage = (int) $options['per_page_public'];
+            }
+        }
+
+        // If users are allowed to modify the # of items displayed per page,
+        // then they can pass the 'per_page' query parameter to change that.
+        if ($this->_helper->acl->isAllowed('modifyPerPage')
+            && ($queryPerPage = $this->getRequest()->get('per_page'))
+        ) {
+            $perPage = (int) $queryPerPage;
+        }
+
+        // Any integer zero or below disables pagination.
+        if ($perPage < 1) {
+            $perPage = null;
+        }
+
+        return $perPage;
     }
 
     /**

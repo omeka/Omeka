@@ -13,6 +13,8 @@ class ItemsController extends Omeka_Controller_AbstractActionController
 {
     protected $_autoCsrfProtection = true;
 
+    protected $_browseRecordsPerPage = self::RECORDS_PER_PAGE_SETTING;
+
     public $contexts = array(
             'browse' => array('json', 'dcmes-xml', 'rss2', 'omeka-xml', 'omeka-json', 'atom'),
             'show'   => array('json', 'dcmes-xml', 'omeka-xml', 'omeka-json', 'atom')
@@ -179,38 +181,6 @@ class ItemsController extends Omeka_Controller_AbstractActionController
         }
         
         parent::browseAction();
-    }
-
-    /**
-     * Retrieve the number of items to display on any given browse page.
-     * This can be modified as a query parameter provided that a user is
-     * actually logged in.
-     *
-     * @return integer
-     */
-    public function _getBrowseRecordsPerPage()
-    {
-        //Retrieve the number from the options table
-        $options = $this->getFrontController()->getParam('bootstrap')
-                          ->getResource('Options');
-
-        if (is_admin_theme()) {
-            $perPage = (int) $options['per_page_admin'];
-        } else {
-            $perPage = (int) $options['per_page_public'];
-        }
-        
-        // If users are allowed to modify the # of items displayed per page,
-        // then they can pass the 'per_page' query parameter to change that.
-        if ($this->_helper->acl->isAllowed('modifyPerPage', 'Items') && ($queryPerPage = $this->getRequest()->get('per_page'))) {
-            $perPage = $queryPerPage;
-        }
-
-        if ($perPage < 1) {
-            $perPage = null;
-        }
-
-        return $perPage;
     }
 
     protected function _getBrowseDefaultSort()
