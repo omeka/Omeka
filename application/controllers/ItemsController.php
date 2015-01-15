@@ -170,11 +170,6 @@ class ItemsController extends Omeka_Controller_AbstractActionController
      */
     public function browseAction()
     {
-        if (!$this->_getParam('sort_field')) {
-            $this->_setParam('sort_field', 'added');
-            $this->_setParam('sort_dir', 'd');
-        }
-
         //Must be logged in to view items specific to certain users
         if ($this->_getParam('user') && !$this->_helper->acl->isAllowed('browse', 'Users')) {
             $this->_setParam('user', null);
@@ -216,6 +211,11 @@ class ItemsController extends Omeka_Controller_AbstractActionController
         }
 
         return $perPage;
+    }
+
+    protected function _getBrowseDefaultSort()
+    {
+        return array('added', 'd');
     }
     
     ///// AJAX ACTIONS /////

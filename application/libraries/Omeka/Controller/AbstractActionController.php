@@ -99,6 +99,21 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
         
         // Inflect the record type from the model name.
         $pluralName = $this->view->pluralize($this->_helper->db->getDefaultModelName());
+
+        // Apply controller-provided default sort parameters
+        if (!$this->_getParam('sort_field')) {
+            $defaultSort = apply_filters("{$pluralName}_browse_default_sort",
+                $this->_getBrowseDefaultSort(),
+                array('params' => $this->getAllParams())
+            );
+            if (is_array($defaultSort) && isset($defaultSort[0])) {
+                $this->setParam('sort_field', $defaultSort[0]);
+
+                if (isset($defaultSort[1])) {
+                    $this->setParam('sort_dir', $defaultSort[1]);
+                }
+            }
+        }
         
         $params = $this->getAllParams();
         $recordsPerPage = $this->_getBrowseRecordsPerPage();
@@ -292,6 +307,17 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
     protected function _getBrowseRecordsPerPage()
     {
         return $this->_browseRecordsPerPage;
+    }
+
+    /**
+     * Return the default sorting parameters to use when none are specified.
+     *
+     * @return array|null Array of parameters, with the first element being the
+     *  sort_field parameter, and the second (optionally) the sort_dir.
+     */
+    protected function _getBrowseDefaultSort()
+    {
+        return null;
     }
 
     /**
