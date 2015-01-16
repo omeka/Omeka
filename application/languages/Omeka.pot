@@ -377,7 +377,8 @@ msgid "Save Changes"
 msgstr ""
 
 #: admin/themes/default/appearance/edit-navigation.php:35
-msgid "Reset Settings"
+#: admin/themes/default/appearance/reset-navigation-confirm.php:2
+msgid "Reset Navigation"
 msgstr ""
 
 #: admin/themes/default/appearance/edit-navigation.php:43
@@ -409,10 +410,6 @@ msgstr ""
 #: admin/themes/default/users/edit.php:26
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:83
 msgid "Delete"
-msgstr ""
-
-#: admin/themes/default/appearance/reset-navigation-confirm.php:2
-msgid "Reset Navigation"
 msgstr ""
 
 #: admin/themes/default/appearance/reset-navigation-confirm.php:9
@@ -2046,8 +2043,8 @@ msgstr ""
 #: application/controllers/SettingsController.php:132
 #: application/controllers/SettingsController.php:169
 #: application/controllers/ThemesController.php:87
-#: application/libraries/Omeka/Controller/AbstractActionController.php:163
-#: application/libraries/Omeka/Controller/AbstractActionController.php:204
+#: application/libraries/Omeka/Controller/AbstractActionController.php:183
+#: application/libraries/Omeka/Controller/AbstractActionController.php:224
 msgid "There was an error on the form. Please try again."
 msgstr ""
 
@@ -2092,87 +2089,87 @@ msgid ""
 "your new item type."
 msgstr ""
 
-#: application/controllers/ItemsController.php:87
-#: application/controllers/ItemsController.php:147
+#: application/controllers/ItemsController.php:89
+#: application/controllers/ItemsController.php:149
 msgid ""
 "The ImageMagick directory path has not been set. No derivative images will "
 "be created. If you would like Omeka to create derivative images, please set "
 "the path in Settings."
 msgstr ""
 
-#: application/controllers/ItemsController.php:96
+#: application/controllers/ItemsController.php:98
 #, php-format
 msgid "The item \"%s\" was successfully added!"
 msgstr ""
 
-#: application/controllers/ItemsController.php:98
+#: application/controllers/ItemsController.php:100
 #, php-format
 msgid "The item #%s was successfully added!"
 msgstr ""
 
-#: application/controllers/ItemsController.php:106
+#: application/controllers/ItemsController.php:108
 #, php-format
 msgid "The item \"%s\" was successfully changed!"
 msgstr ""
 
-#: application/controllers/ItemsController.php:108
+#: application/controllers/ItemsController.php:110
 #, php-format
 msgid "The item #%s was successfully changed!"
 msgstr ""
 
-#: application/controllers/ItemsController.php:116
+#: application/controllers/ItemsController.php:118
 #, php-format
 msgid "The item \"%s\" was successfully deleted!"
 msgstr ""
 
-#: application/controllers/ItemsController.php:118
+#: application/controllers/ItemsController.php:120
 #, php-format
 msgid "The item #%s was successfully deleted!"
 msgstr ""
 
-#: application/controllers/ItemsController.php:126
+#: application/controllers/ItemsController.php:128
 #, php-format
 msgid ""
 "This will delete the item \"%s\" and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
 msgstr ""
 
-#: application/controllers/ItemsController.php:130
+#: application/controllers/ItemsController.php:132
 #, php-format
 msgid ""
 "This will delete the item #%s and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
 msgstr ""
 
-#: application/controllers/ItemsController.php:257
+#: application/controllers/ItemsController.php:227
 msgid "You must choose some items to batch edit."
 msgstr ""
 
-#: application/controllers/ItemsController.php:301
+#: application/controllers/ItemsController.php:271
 msgid "User is not allowed to modify visibility of items."
 msgstr ""
 
-#: application/controllers/ItemsController.php:306
+#: application/controllers/ItemsController.php:276
 msgid "User is not allowed to modify featured status of items."
 msgstr ""
 
-#: application/controllers/ItemsController.php:313
+#: application/controllers/ItemsController.php:283
 msgid "User is not allowed to delete selected items."
 msgstr ""
 
-#: application/controllers/ItemsController.php:319
+#: application/controllers/ItemsController.php:289
 msgid "User is not allowed to edit selected items."
 msgstr ""
 
-#: application/controllers/ItemsController.php:324
+#: application/controllers/ItemsController.php:294
 msgid "User is not allowed to tag selected items."
 msgstr ""
 
-#: application/controllers/ItemsController.php:358
+#: application/controllers/ItemsController.php:328
 msgid "The items were successfully deleted!"
 msgstr ""
 
-#: application/controllers/ItemsController.php:360
+#: application/controllers/ItemsController.php:330
 msgid "The items were successfully changed!"
 msgstr ""
 
