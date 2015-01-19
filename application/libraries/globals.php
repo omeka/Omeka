@@ -220,14 +220,8 @@ function get_plugin_hook_output($name, array $args = array())
  * @param mixed $args Any arguments to be passed to the hook implementation.
  * @return string|null
  */
-function get_specific_plugin_hook_output()
+function get_specific_plugin_hook_output($pluginName, $hookName, $args)
 {
-    $args = func_get_args();
-
-    // Get the plugin name (1st arg) and hook name (2nd arg).
-    $pluginName = array_shift($args);
-    $hookName = array_shift($args);
-
     // Get the specific hook.
     $pluginBroker = get_plugin_broker();
     $hookNameSpecific = $pluginBroker->getHook($pluginName, $hookName);
@@ -240,7 +234,7 @@ function get_specific_plugin_hook_output()
     // Buffer and return any output originating from the hook.
     ob_start();
     foreach ($hookNameSpecific as $cb) {
-        call_user_func_array($cb, $args);
+        call_user_func($cb, $args);
     }
     $content = ob_get_contents();
     ob_end_clean();
