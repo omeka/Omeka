@@ -220,7 +220,7 @@ function get_plugin_hook_output($name, array $args = array())
  * @param mixed $args Any arguments to be passed to the hook implementation.
  * @return string|null
  */
-function get_specific_plugin_hook_output($pluginName, $hookName, $args)
+function get_specific_plugin_hook_output($pluginName, $hookName, $args = array())
 {
     // Get the specific hook.
     $pluginBroker = get_plugin_broker();
