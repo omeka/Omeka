@@ -1434,10 +1434,9 @@ function get_recent_files($num = 10)
  * @package Omeka\Function\View
  * @param array|string $attributes Attributes for the tag.  If this is a string,
  * it will assign both 'name' and 'id' attributes that value for the tag.
- * @param string $value
  * @return string
  */
-function tag_attributes($attributes, $value=null)
+function tag_attributes($attributes)
 {
     if (is_string($attributes)) {
         $toProcess['name'] = $attributes;
