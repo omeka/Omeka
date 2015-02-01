@@ -97,7 +97,9 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
 
         // Add plugin and theme-override paths for current plugin
         if ($isPluginModule) {
-            $this->_addPathsToView($currentPluginScriptDirs);
+            if (isset($currentPluginScriptDirs)) {
+                $this->_addPathsToView($currentPluginScriptDirs);
+            }
             $this->_addOverridePathForPlugin($themeType, $moduleName);
         }
     }
