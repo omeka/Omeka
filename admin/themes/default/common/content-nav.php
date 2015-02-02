@@ -1,4 +1,4 @@
-<nav id="content-nav" class="two columns">
+<nav id="content-nav" class="two columns" role="navigation" aria-labelledby="content_navigation">
     <?php
         $mainNav = array(
             array(
@@ -32,5 +32,5 @@
         <li><a href="#" tabindex="0"><?php echo $title; ?></a>
         <?php echo $nav->setUlClass('dropdown'); ?>
         </li>
-    </ul>    
+    </ul>
 </nav>
