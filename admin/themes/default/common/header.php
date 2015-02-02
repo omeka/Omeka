@@ -46,7 +46,7 @@
 
         <nav>
             <?php echo common('global-nav'); ?>
-            
+
             <ul id="user-nav">
             <?php if ($user = current_user()): ?>
                 <?php
@@ -75,4 +75,4 @@
         <?php endif; ?>
     </div>
 
-    <div id="content" class="ten columns offset-by-two omega">
+    <div id="content" class="ten columns offset-by-two omega" role="main">
