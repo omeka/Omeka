@@ -25,9 +25,17 @@ class SettingsController extends Omeka_Controller_AbstractActionController
     
     public function editSettingsAction() 
     {
-        require_once APP_DIR . '/forms/GeneralSettings.php';
         $form = new Omeka_Form_GeneralSettings;
-        $form->setDefaults($this->getInvokeArg('bootstrap')->getResource('Options'));
+        $bootstrap = $this->getInvokeArg('bootstrap');
+        $derivatives = $bootstrap->getResource('Filederivatives');
+
+        if (isset($derivatives)
+            && !($derivatives->getStrategy() instanceof Omeka_File_Derivative_Strategy_ExternalImageMagick)
+        ) {
+            $form->removeElement('path_to_convert');
+        }
+
+        $form->setDefaults($bootstrap->getResource('Options'));
         fire_plugin_hook('general_settings_form', array('form' => $form));
         $form->removeDecorator('Form');
         $this->view->form = $form;
