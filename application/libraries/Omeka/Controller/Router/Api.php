@@ -36,7 +36,7 @@ class Omeka_Controller_Router_Api extends Zend_Controller_Router_Route_Abstract
     /**
      * @var GET parameters that are legal for index actions.
      */
-    protected $_legalIndexParams = array('page', 'per_page');
+    protected $_legalIndexParams = array('page', 'per_page', 'sort_field', 'sort_dir');
     
     public static function getInstance(Zend_Config $config)
     {
