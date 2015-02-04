@@ -43,13 +43,13 @@
             </div><!-- end search -->
 
             <div id="site-title"><?php echo link_to_home_page(theme_logo()); ?></div>
-            
-            <nav id="top-nav">
+
+            <nav id="top-nav" role="navigation">
                 <?php echo public_nav_main(); ?>
             </nav>
 
         </header>
-        
-        <article id="content">
-        
+
+        <article id="content" role="main">
+
             <?php fire_plugin_hook('public_content_top', array('view'=>$this)); ?>
