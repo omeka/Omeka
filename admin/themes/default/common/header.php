@@ -20,7 +20,7 @@
     queue_css_file('media/479max', 'only screen and (max-width: 479px)');
     queue_css_url('//fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic|Cabin:400,700,400italic,700italic');
 
-    queue_js_file(array('vendor/respond', 'vendor/modernizr'));
+    queue_js_file(array('vendor/respond', 'vendor/modernizr', 'vendor/jquery'));
     queue_js_file('vendor/selectivizr', 'javascripts', array('conditional' => '(gte IE 6)&(lte IE 8)'));
     queue_js_file('globals');
 ?>
@@ -37,7 +37,7 @@
 </head>
 
 <?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass)); ?>
-
+<a href="#content" id="skipnav">Skip to main content</a>
 <header>
     <div class="container">
         <div id="site-title" class="two columns">
@@ -46,7 +46,7 @@
 
         <nav>
             <?php echo common('global-nav'); ?>
-            
+
             <ul id="user-nav">
             <?php if ($user = current_user()): ?>
                 <?php
@@ -75,4 +75,4 @@
         <?php endif; ?>
     </div>
 
-    <div id="content" class="ten columns offset-by-two omega">
+    <div id="content" class="ten columns offset-by-two omega" tabindex="-1">
