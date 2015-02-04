@@ -25,13 +25,16 @@
     ?>
 
     <!-- JavaScripts -->
-    <?php echo head_js(); ?>
+    <?php
+      queue_js_file(array('vendor/jquery'));
+      echo head_js();
+    ?>
 </head>
 
 <?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass)); ?>
+  <a href="#content" id="skipnav">Skip to main content</a>
     <?php fire_plugin_hook('public_body', array('view'=>$this)); ?>
     <div id="wrap">
-
         <header role="banner">
 
             <?php fire_plugin_hook('public_header', array('view'=>$this)); ?>
@@ -43,13 +46,13 @@
             </div><!-- end search -->
 
             <div id="site-title"><?php echo link_to_home_page(theme_logo()); ?></div>
-            
+
             <nav id="top-nav">
                 <?php echo public_nav_main(); ?>
             </nav>
 
         </header>
-        
-        <article id="content">
-        
+
+        <article id="content" tabindex="-1">
+
             <?php fire_plugin_hook('public_content_top', array('view'=>$this)); ?>
