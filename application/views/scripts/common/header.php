@@ -41,7 +41,7 @@
 
             <?php echo theme_header_image(); ?>
 
-            <div id="search-container">
+            <div id="search-container" role="search">
                 <?php echo search_form(); ?>
             </div><!-- end search -->
 
