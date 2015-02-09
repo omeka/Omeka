@@ -125,6 +125,6 @@ if (!Omeka) {
         [Omeka.deleteConfirm, null],
         [Omeka.saveScroll, null],
         [Omeka.stickyNav, null],
-        [Omeka.showAdvancedForm, null]
+        [Omeka.showAdvancedForm, null] 
     ];
 })(jQuery);
