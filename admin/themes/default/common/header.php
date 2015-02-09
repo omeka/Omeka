@@ -39,12 +39,12 @@
 <?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass)); ?>
 <a href="#content" id="skipnav">Skip to main content</a>
 <header>
-    <div class="container">
+    <div class="container" role="banner">
         <div id="site-title" class="two columns">
             <?php echo link_to_home_page(option('site_title'), array('target' => '_blank')); ?>
         </div>
 
-        <nav>
+        <nav role="navigation" aria-label="Admin Navigation">
             <?php echo common('global-nav'); ?>
 
             <ul id="user-nav">
