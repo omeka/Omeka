@@ -75,8 +75,4 @@
         <?php endif; ?>
     </div>
 
-<<<<<<< HEAD
-    <div id="content" class="ten columns offset-by-two omega" tabindex="-1">
-=======
-    <div id="content" class="ten columns offset-by-two omega" role="main">
->>>>>>> 0496afe5238af835306a9e269dcacac694eb7a81
+    <div id="content" class="ten columns offset-by-two omega" role="main" tabindex="-1">
