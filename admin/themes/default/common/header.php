@@ -38,13 +38,13 @@
 
 <?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass)); ?>
 <a href="#content" id="skipnav">Skip to main content</a>
-<header>
-    <div class="container" role="banner">
+<header role="banner">
+    <div class="container">
         <div id="site-title" class="two columns">
             <?php echo link_to_home_page(option('site_title'), array('target' => '_blank')); ?>
         </div>
 
-        <nav role="navigation" aria-label="Admin Navigation">
+        <nav role="navigation" aria-label="Website admin">
             <?php echo common('global-nav'); ?>
 
             <ul id="user-nav">

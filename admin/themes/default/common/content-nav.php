@@ -1,4 +1,4 @@
-<nav id="content-nav" class="two columns" role="navigation" aria-label="Content Navigation">
+<nav id="content-nav" class="two columns" role="navigation" aria-label="Website content">
     <?php
         $mainNav = array(
             array(
@@ -27,7 +27,7 @@
     ?>
 </nav>
 
-<nav role="navigation" aria-label="Mobile Content Navigation">
+<nav>
     <ul id="mobile-content-nav" class="quick-filter-wrapper">
         <li><a href="#" tabindex="0"><?php echo $title; ?></a>
         <?php echo $nav->setUlClass('dropdown'); ?>
