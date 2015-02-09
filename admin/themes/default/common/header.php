@@ -44,7 +44,7 @@
             <?php echo link_to_home_page(option('site_title'), array('target' => '_blank')); ?>
         </div>
 
-        <nav role="navigation" aria-label="Website admin">
+        <nav role="navigation" aria-label="Admin">
             <?php echo common('global-nav'); ?>
 
             <ul id="user-nav">
