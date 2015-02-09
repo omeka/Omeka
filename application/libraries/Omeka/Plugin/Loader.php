@@ -109,7 +109,7 @@ class Omeka_Plugin_Loader
     {
         $dirName = $plugin->getDirectoryName();
         if (array_key_exists($dirName, $this->_plugins) && $this->_plugins[$dirName] !== $plugin) {
-            throw new Omeka_Plugin_Loader_Exception(__("Plugin named '%s' has already been loaded/registered.", $dirName));
+            throw new Omeka_Plugin_Loader_Exception(sprintf("Plugin named '%s' has already been loaded/registered.", $dirName));
         }
         $this->_plugins[$dirName] = $plugin;
     }
@@ -150,7 +150,7 @@ class Omeka_Plugin_Loader
         $pluginDirName = $plugin->getDirectoryName();
         if (!$this->_canLoad($plugin, $force)) {
             if ($force) {
-                throw new Omeka_Plugin_Loader_Exception(__("The %s plugin could not be loaded.", $pluginDirName));
+                throw new Omeka_Plugin_Loader_Exception(sprintf("The %s plugin could not be loaded.", $pluginDirName));
             } else {
                 return;
             }
@@ -171,7 +171,7 @@ class Omeka_Plugin_Loader
                 // If we can't find one of the required plugins, loading should
                 // fail.
                 if ($force) {
-                    throw new Omeka_Plugin_Loader_Exception(__("The required plugin '%s' could not be found.", $requiredPluginDirName));
+                    throw new Omeka_Plugin_Loader_Exception(sprintf("The required plugin '%s' could not be found.", $requiredPluginDirName));
                 } else {
                     return;
                 }
@@ -240,43 +240,33 @@ class Omeka_Plugin_Loader
      */
     protected function _canLoad($plugin, $force)
     {
-        $pluginDirName = $plugin->getDirectoryName(); 
-        $loadCriteria = array(
-            array(
-                'check' => !$this->hasPluginBootstrap($plugin),
-                'exception' => __("'%s' has no valid bootstrap file.", $pluginDirName)),
-            array(
-                'check' => !$plugin->isInstalled(),
-                'exception' => __("'%s' has not been installed.", $pluginDirName)),
-            array(
-                'check' => !$plugin->isActive(),
-                'exception' => __("'%s' has not been activated.", $pluginDirName)),
-            array(
-                'check' => !$plugin->meetsOmekaMinimumVersion(),
-                'exception' => __("'%s' requires a newer version of Omeka.", $pluginDirName)),
-            // Cannot upgrade a plugin if we do this check when trying to force
-            // the plugin to load.
-            array(
-                'check' => $plugin->hasNewVersion(),
-                'exception' => __("'%s' must be upgraded to the new version before it can be loaded.", $pluginDirName)),
-            array(
-                'check' => $plugin->isLoaded(),
-                'exception' => __("'%s' cannot be loaded twice.", $pluginDirName))
-        );
-        
-        foreach ($loadCriteria as $criteria) {
-            if ($criteria['check']) {
-                if ($force) {
-                    throw new Omeka_Plugin_Loader_Exception($criteria['exception']);
-                } else {
-                    return false;
-                }
-            }
+        $pluginDirName = $plugin->getDirectoryName();
+
+        $error = false;
+
+        if (!$this->hasPluginBootstrap($plugin)) {
+            $error = "'%s' has no valid bootstrap file.";
+        } else if (!$plugin->isInstalled()) {
+            $error = "'%s' has not been installed.";
+        } else if (!$plugin->isActive()) {
+            $error = "'%s' has not been activated.";
+        } else if (!$plugin->meetsOmekaMinimumVersion()) {
+            $error = "'%s' requires a newer version of Omeka.";
+        } else if ($plugin->hasNewVersion()) {
+            $error = "'%s' must be upgraded to the new version before it can be loaded.";
+        } else if ($plugin->isLoaded()) {
+            $error = "'%s' cannot be loaded twice.";
         }
-        
-        return true;
+
+        if ($error && $force) {
+            throw new Omeka_Plugin_Loader_Exception(
+                sprintf($error, $plugin->getDirectoryName())
+            );
+        } else {
+            return !$error;
+        }
     }
-                        
+
     /**
      * Check whether a plugin has a bootstrap file.
      * 
