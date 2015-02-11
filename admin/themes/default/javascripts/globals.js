@@ -109,6 +109,15 @@ if (!Omeka) {
             });
         });
     };
+    
+    Omeka.skipNav = function () {
+      $("a[href^='#']").click(function() {
+        // get the href attribute of the internal link
+        // then strip the first character off it (#)
+        // leaving the corresponding id attribute
+        $("#"+$(this).attr("href").slice(1)+"").focus();
+      });
+    };
 
     Omeka.addReadyCallback = function (callback, params) {
         this.readyCallbacks.push([callback, params]);
@@ -125,6 +134,7 @@ if (!Omeka) {
         [Omeka.deleteConfirm, null],
         [Omeka.saveScroll, null],
         [Omeka.stickyNav, null],
-        [Omeka.showAdvancedForm, null] 
+        [Omeka.showAdvancedForm, null], 
+        [Omeka.skipNav, null] 
     ];
 })(jQuery);
