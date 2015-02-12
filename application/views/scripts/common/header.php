@@ -25,10 +25,7 @@
     ?>
 
     <!-- JavaScripts -->
-    <?php
-      queue_js_file(array('vendor/jquery'));
-      echo head_js();
-    ?>
+    <?php echo head_js(); ?>
 </head>
 
 <?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass)); ?>
