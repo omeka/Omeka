@@ -96,6 +96,17 @@ img { border: 0; }
     position: absolute;
     width: 1px;
 }
+#skipnav:focus {
+  position:absolute;
+  top:0;
+  z-index:9999;
+  clip:initial;
+  height:auto;
+  width:auto;
+  padding:.5em;
+  border:1px blue dashed;
+  background:#000;
+}
 
     /* Tables
     ================================================== */
