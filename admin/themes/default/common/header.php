@@ -71,7 +71,7 @@
     <div class="subhead">
         <?php echo search_form(array('show_advanced' => true)); ?>
         <?php if (isset($title)) : ?>
-            <h1 class="section-title" title="<?php echo html_escape($title); ?>"><?php echo $title ?></h1>
+            <h1 class="section-title" title="<?php echo $title; ?>"><?php echo $title ?></h1>
         <?php endif; ?>
     </div>
 

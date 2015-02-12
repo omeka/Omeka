@@ -821,7 +821,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         $alt = '';
         if (isset($props['alt'])) {
             $alt = $props['alt'];
-        } else if ($fileTitle = metadata($file, 'display title')) {
+        } else if ($fileTitle = metadata($file, 'display title', array('no_escape' => true))) {
             $alt = $fileTitle;
         }
         $props['alt'] = $alt;
