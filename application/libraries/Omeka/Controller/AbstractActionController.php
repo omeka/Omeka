@@ -121,7 +121,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
         }
         
         $params = $this->getAllParams();
-        $recordsPerPage = $this->_getBrowseRecordsPerPage();
+        $recordsPerPage = $this->_getBrowseRecordsPerPage($pluralName);
         $currentPage = $this->getParam('page', 1);
         
         // Get the records filtered to Omeka_Db_Table::applySearchFilters().
@@ -311,9 +311,10 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
      * Setting the property to self::RECORDS_PER_PAGE_SETTING will enable
      * pagination using the admin-configued page limits.
      *
+     * @param string|null $pluralName
      * @return integer|null
      */
-    protected function _getBrowseRecordsPerPage()
+    protected function _getBrowseRecordsPerPage($pluralName = null)
     {
         $perPage = $this->_browseRecordsPerPage;
 
@@ -342,6 +343,10 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
             $perPage = null;
         }
 
+        if ($pluralName) {
+            apply_filters("{$pluralName}_browse_per_page", $perPage,
+                array('controller' => $this));
+        }
         return $perPage;
     }
 
