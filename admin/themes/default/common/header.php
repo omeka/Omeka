@@ -37,14 +37,14 @@
 </head>
 
 <?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass)); ?>
-<a href="#content" id="skipnav">Skip to main content</a>
+<a href="#content" id="skipnav"><?php echo __('Skip to main content'); ?></a>
 <header role="banner">
     <div class="container">
         <div id="site-title" class="two columns">
             <?php echo link_to_home_page(option('site_title'), array('target' => '_blank')); ?>
         </div>
 
-        <nav role="navigation" aria-label="Admin">
+        <nav>
             <?php echo common('global-nav'); ?>
 
             <ul id="user-nav">
@@ -69,10 +69,10 @@
     <?php echo common('content-nav', array('title' => $title)); ?>
 
     <div class="subhead">
-        <?php echo search_form(array('show_advanced' => true)); ?>
+        <?php echo search_form(array('show_advanced' => true, 'form_attributes'=> array('role'=>'search'))); ?>
         <?php if (isset($title)) : ?>
-            <h1 class="section-title" title="<?php echo $title; ?>"><?php echo $title ?></h1>
+            <h1 id="content-heading" class="section-title" title="<?php echo $title; ?>"><?php echo $title ?></h1>
         <?php endif; ?>
     </div>
 
-    <div id="content" class="ten columns offset-by-two omega" role="main" tabindex="-1">
+    <div id="content" class="ten columns offset-by-two omega" role="main" aria-labelledby="content-heading" tabindex="-1">

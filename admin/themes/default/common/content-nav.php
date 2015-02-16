@@ -1,4 +1,4 @@
-<nav id="content-nav" class="two columns" role="navigation" aria-label="Content">
+<nav id="content-nav" class="two columns" role="navigation" aria-label="<?php echo __('Main Menu'); ?>">
     <?php
         $mainNav = array(
             array(
