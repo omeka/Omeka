@@ -86,6 +86,26 @@ img { border: 0; }
     
 .left { float: left; }
 
+#skipnav {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+#skipnav:focus {
+    top:0;
+    z-index:9999;
+    clip:initial;
+    height:auto;
+    width:auto;
+    padding:.5em;
+    border:1px blue dashed;
+    background:#000;
+}
 
     /* Tables 
     ================================================== */

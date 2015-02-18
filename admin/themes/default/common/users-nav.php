@@ -1,4 +1,4 @@
-<div id="section-nav">
+<div id="section-nav" role="navigation">
 <?php
     $navArray = array(
         array(

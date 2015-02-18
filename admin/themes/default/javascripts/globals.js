@@ -110,6 +110,12 @@ if (!Omeka) {
         });
     };
 
+    Omeka.skipNav = function () {
+        $("#skipnav").click(function() {
+            $("#content").focus();
+        });
+    };
+
     Omeka.addReadyCallback = function (callback, params) {
         this.readyCallbacks.push([callback, params]);
     };
@@ -125,6 +131,7 @@ if (!Omeka) {
         [Omeka.deleteConfirm, null],
         [Omeka.saveScroll, null],
         [Omeka.stickyNav, null],
-        [Omeka.showAdvancedForm, null]
+        [Omeka.showAdvancedForm, null],
+        [Omeka.skipNav, null]
     ];
 })(jQuery);

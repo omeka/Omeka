@@ -29,6 +29,7 @@
 </head>
 
 <?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass)); ?>
+    <a href="#content" id="skipnav"><?php echo __('Skip to main content'); ?></a>
     <?php fire_plugin_hook('public_body', array('view'=>$this)); ?>
     <div id="wrap">
 
@@ -38,18 +39,18 @@
 
             <?php echo theme_header_image(); ?>
 
-            <div id="search-container">
+            <div id="search-container" role="search">
                 <?php echo search_form(); ?>
             </div><!-- end search -->
 
             <div id="site-title"><?php echo link_to_home_page(theme_logo()); ?></div>
             
-            <nav id="top-nav">
+            <nav id="top-nav" role="navigation">
                 <?php echo public_nav_main(); ?>
             </nav>
 
         </header>
         
-        <article id="content">
+        <article id="content" role="main" tabindex="-1">
         
             <?php fire_plugin_hook('public_content_top', array('view'=>$this)); ?>
