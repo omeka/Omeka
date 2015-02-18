@@ -1,6 +1,6 @@
         </article>
 
-        <footer>
+        <footer role="contentinfo">
 
             <nav id="bottom-nav">
                 <?php echo public_nav_main(); ?>
@@ -18,6 +18,6 @@
 
         </footer>
 
-    </div><!-- end wrap -->
+    </div>
 </body>
 </html>
