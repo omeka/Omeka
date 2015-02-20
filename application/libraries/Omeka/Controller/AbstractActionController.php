@@ -344,7 +344,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
         }
 
         if ($pluralName) {
-            apply_filters("{$pluralName}_browse_per_page", $perPage,
+            $perPage = apply_filters("{$pluralName}_browse_per_page", $perPage,
                 array('controller' => $this));
         }
         return $perPage;
