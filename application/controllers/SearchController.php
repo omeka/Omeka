@@ -28,7 +28,7 @@ class SearchController extends Omeka_Controller_AbstractActionController
      *
      * @return int
      */
-    protected function _getBrowseRecordsPerPage()
+    protected function _getBrowseRecordsPerPage($pluralName = null)
     {
         // Return the per page if the current user has permission to modify it.
         if ($this->_helper->acl->isAllowed('modifyPerPage', 'Search')) {
