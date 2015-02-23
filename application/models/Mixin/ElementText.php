@@ -227,6 +227,20 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
 
         return $this->_textsByNaturalOrder;
     }
+
+    /**
+     * Retrieve all of the record's ElementTexts, indexed by element ID.
+     *
+     * @return array Set of ElementText records, indexed by element_id.
+     */
+    public function getAllElementTextsByElement()
+    {
+        if (!$this->_recordsAreLoaded) {
+            $this->loadElementsAndTexts();
+        }
+
+        return $this->_textsByElementId();
+    }
     
     /**
      * Retrieve the Element records for the given ElementSet.
