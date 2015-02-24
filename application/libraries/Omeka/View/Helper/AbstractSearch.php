@@ -29,17 +29,17 @@ abstract class Omeka_View_Helper_AbstractSearch extends Zend_View_Helper_Abstrac
         if (isset($_GET['query'])) {
             $filters['query'] = $_GET['query'];
         } else {
-            $filters['query'] = '';
+            $filters['query'] = apply_filters('search_default_query', '');
         }
         if (isset($_GET['query_type']) && array_key_exists($_GET['query_type'], $this->_validQueryTypes)) {
             $filters['query_type'] = $_GET['query_type'];
         } else {
-            $filters['query_type'] = 'keyword';
+            $filters['query_type'] = apply_filters('search_default_query_type', 'keyword');
         }
         if (isset($_GET['record_types'])) {
             $filters['record_types'] = $_GET['record_types'];
         } else {
-            $filters['record_types'] = array_keys($this->_validRecordTypes);
+            $filters['record_types'] = apply_filters('search_default_record_types', array_keys($this->_validRecordTypes));
         }
         $this->_filters = $filters;
     }
