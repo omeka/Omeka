@@ -594,6 +594,10 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
+#: admin/themes/default/common/content-nav.php:1
+msgid "Main Menu"
+msgstr ""
+
 #: admin/themes/default/common/content-nav.php:5
 #: admin/themes/default/index.php:2
 msgid "Dashboard"
@@ -652,6 +656,10 @@ msgstr ""
 msgid "System Information"
 msgstr ""
 
+#: admin/themes/default/common/global-nav.php:1
+msgid "Manage Site"
+msgstr ""
+
 #: admin/themes/default/common/global-nav.php:5
 #: admin/themes/default/plugins/browse.php:2
 msgid "Plugins"
@@ -666,6 +674,11 @@ msgstr ""
 #: admin/themes/default/upgrade/migrate.php:6
 #: application/views/scripts/common/admin-bar.php:11
 msgid "Omeka Admin"
+msgstr ""
+
+#: admin/themes/default/common/header.php:40
+#: application/views/scripts/common/header.php:32
+msgid "Skip to main content"
 msgstr ""
 
 #: admin/themes/default/common/header.php:60
@@ -689,7 +702,9 @@ msgid "Security"
 msgstr ""
 
 #: admin/themes/default/common/settings-nav.php:16
+#: admin/themes/default/search/index.php:2
 #: application/views/helpers/SearchForm.php:34
+#: application/views/scripts/search/index.php:2
 #: application/views/scripts/search/search-form.php:2
 #: application/views/scripts/search/search-form.php:22
 msgid "Search"
@@ -810,7 +825,7 @@ msgid "File #%s"
 msgstr ""
 
 #: admin/themes/default/files/show.php:35
-#: application/libraries/globals.php:415
+#: application/libraries/globals.php:409
 msgid "Item"
 msgstr ""
 
@@ -1040,7 +1055,7 @@ msgstr ""
 #: admin/themes/default/items/browse.php:90
 #: admin/themes/default/items/edit.php:41
 #: admin/themes/default/items/show.php:57
-#: application/libraries/globals.php:417
+#: application/libraries/globals.php:411
 #: application/views/scripts/items/show.php:18
 msgid "Collection"
 msgstr ""
@@ -1167,8 +1182,8 @@ msgstr ""
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2374
-#: application/libraries/globals.php:2764
+#: application/libraries/globals.php:2367
+#: application/libraries/globals.php:2757
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr ""
@@ -1530,11 +1545,6 @@ msgstr ""
 #: admin/themes/default/plugins/confirm-uninstall.php:17
 #: admin/themes/default/settings/edit-item-type-elements.php:51
 msgid "Cancel"
-msgstr ""
-
-#: admin/themes/default/search/index.php:2
-#: application/views/scripts/search/index.php:2
-msgid "Search Omeka "
 msgstr ""
 
 #: admin/themes/default/search/index.php:12
@@ -1960,8 +1970,8 @@ msgstr ""
 #: application/controllers/AppearanceController.php:51
 #: application/controllers/ItemTypesController.php:35
 #: application/controllers/ItemTypesController.php:61
-#: application/controllers/SettingsController.php:47
-#: application/controllers/SettingsController.php:80
+#: application/controllers/SettingsController.php:55
+#: application/controllers/SettingsController.php:88
 #: install/views/scripts/index/index.phtml:17
 msgid "There were errors found in your form. Please edit and resubmit."
 msgstr ""
@@ -2039,9 +2049,9 @@ msgstr ""
 #: application/controllers/PluginsController.php:190
 #: application/controllers/PluginsController.php:223
 #: application/controllers/PluginsController.php:337
-#: application/controllers/SettingsController.php:96
-#: application/controllers/SettingsController.php:132
-#: application/controllers/SettingsController.php:169
+#: application/controllers/SettingsController.php:104
+#: application/controllers/SettingsController.php:140
+#: application/controllers/SettingsController.php:177
 #: application/controllers/ThemesController.php:87
 #: application/libraries/Omeka/Controller/AbstractActionController.php:183
 #: application/libraries/Omeka/Controller/AbstractActionController.php:224
@@ -2062,6 +2072,10 @@ msgstr ""
 
 #: application/controllers/FilesController.php:66
 msgid "This will delete the file and its associated metadata."
+msgstr ""
+
+#: application/controllers/FilesController.php:72
+msgid "The file was successfully deleted."
 msgstr ""
 
 #: application/controllers/ItemTypesController.php:28
@@ -2266,39 +2280,39 @@ msgstr ""
 msgid "The plugin %s must be installed."
 msgstr ""
 
-#: application/controllers/SettingsController.php:44
+#: application/controllers/SettingsController.php:52
 msgid "The general settings have been updated."
 msgstr ""
 
-#: application/controllers/SettingsController.php:77
+#: application/controllers/SettingsController.php:85
 msgid "The security settings have been updated."
 msgstr ""
 
-#: application/controllers/SettingsController.php:106
+#: application/controllers/SettingsController.php:114
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
 msgstr ""
 
-#: application/controllers/SettingsController.php:113
+#: application/controllers/SettingsController.php:121
 msgid ""
 "Indexing records. This may take a while. You may continue administering your "
 "site."
 msgstr ""
 
-#: application/controllers/SettingsController.php:148
+#: application/controllers/SettingsController.php:156
 msgid "The item type elements were successfully changed!"
 msgstr ""
 
-#: application/controllers/SettingsController.php:175
+#: application/controllers/SettingsController.php:183
 msgid "The API configuration was successfully changed!"
 msgstr ""
 
-#: application/controllers/SettingsController.php:198
+#: application/controllers/SettingsController.php:206
 msgid "The ImageMagick directory path works."
 msgstr ""
 
-#: application/controllers/SettingsController.php:199
+#: application/controllers/SettingsController.php:207
 msgid "The ImageMagick directory path does not work."
 msgstr ""
 
@@ -2911,51 +2925,6 @@ msgstr ""
 msgid "Plugin must have a valid directory name before it can be installed."
 msgstr ""
 
-#: application/libraries/Omeka/Plugin/Loader.php:112
-#, php-format
-msgid "Plugin named '%s' has already been loaded/registered."
-msgstr ""
-
-#: application/libraries/Omeka/Plugin/Loader.php:153
-#, php-format
-msgid "The %s plugin could not be loaded."
-msgstr ""
-
-#: application/libraries/Omeka/Plugin/Loader.php:174
-#, php-format
-msgid "The required plugin '%s' could not be found."
-msgstr ""
-
-#: application/libraries/Omeka/Plugin/Loader.php:247
-#, php-format
-msgid "'%s' has no valid bootstrap file."
-msgstr ""
-
-#: application/libraries/Omeka/Plugin/Loader.php:250
-#, php-format
-msgid "'%s' has not been installed."
-msgstr ""
-
-#: application/libraries/Omeka/Plugin/Loader.php:253
-#, php-format
-msgid "'%s' has not been activated."
-msgstr ""
-
-#: application/libraries/Omeka/Plugin/Loader.php:256
-#, php-format
-msgid "'%s' requires a newer version of Omeka."
-msgstr ""
-
-#: application/libraries/Omeka/Plugin/Loader.php:261
-#, php-format
-msgid "'%s' must be upgraded to the new version before it can be loaded."
-msgstr ""
-
-#: application/libraries/Omeka/Plugin/Loader.php:264
-#, php-format
-msgid "'%s' cannot be loaded twice."
-msgstr ""
-
 #: application/libraries/Omeka/Record/AbstractRecord.php:349
 #, php-format
 msgid "'%s' is an invalid special value."
@@ -2965,81 +2934,81 @@ msgstr ""
 msgid "An invalid value was detected during record iteration."
 msgstr ""
 
-#: application/libraries/globals.php:416
+#: application/libraries/globals.php:410
 msgid "File"
 msgstr ""
 
-#: application/libraries/globals.php:474
+#: application/libraries/globals.php:468
 msgid "Keyword"
 msgstr ""
 
-#: application/libraries/globals.php:475
+#: application/libraries/globals.php:469
 msgid "Boolean"
 msgstr ""
 
-#: application/libraries/globals.php:476
+#: application/libraries/globals.php:470
 msgid "Exact match"
 msgstr ""
 
-#: application/libraries/globals.php:1240
-#: application/libraries/globals.php:1261
+#: application/libraries/globals.php:1234
+#: application/libraries/globals.php:1255
 #, php-format
 msgid "Could not find file %s!"
 msgstr ""
 
-#: application/libraries/globals.php:1278
+#: application/libraries/globals.php:1272
 msgid "No featured collections are available."
 msgstr ""
 
-#: application/libraries/globals.php:1571
+#: application/libraries/globals.php:1564
 msgid "Select Below "
 msgstr ""
 
-#: application/libraries/globals.php:1614
+#: application/libraries/globals.php:1607
 msgid "Omeka RSS Feed"
 msgstr ""
 
-#: application/libraries/globals.php:1615
+#: application/libraries/globals.php:1608
 msgid "Omeka Atom Feed"
 msgstr ""
 
-#: application/libraries/globals.php:2271
+#: application/libraries/globals.php:2264
 msgid "No recent items available."
 msgstr ""
 
-#: application/libraries/globals.php:2297
+#: application/libraries/globals.php:2290
 msgid "No featured items are available."
 msgstr ""
 
-#: application/libraries/globals.php:2356
+#: application/libraries/globals.php:2349
 msgid "View"
 msgstr ""
 
-#: application/libraries/globals.php:2418
+#: application/libraries/globals.php:2411
 msgid "No Collection"
 msgstr ""
 
-#: application/libraries/globals.php:2536
+#: application/libraries/globals.php:2529
 msgid "RSS"
 msgstr ""
 
-#: application/libraries/globals.php:2553
+#: application/libraries/globals.php:2546
 msgid "Next Item &rarr;"
 msgstr ""
 
-#: application/libraries/globals.php:2573
+#: application/libraries/globals.php:2566
 msgid "&larr; Previous Item"
 msgstr ""
 
-#: application/libraries/globals.php:2754
+#: application/libraries/globals.php:2747
 msgid "Browse All"
 msgstr ""
 
-#: application/libraries/globals.php:2759
+#: application/libraries/globals.php:2752
 msgid "Browse by Tag"
 msgstr ""
 
-#: application/libraries/globals.php:3028
+#: application/libraries/globals.php:3021
 msgid "No tags are available."
 msgstr ""
 
@@ -3089,11 +3058,11 @@ msgstr ""
 msgid "Invalid element ID."
 msgstr ""
 
-#: application/models/File.php:241
+#: application/models/File.php:235
 msgid "Cannot get the local path for a stored file."
 msgstr ""
 
-#: application/models/File.php:458
+#: application/models/File.php:452
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
 msgstr ""
@@ -3188,26 +3157,26 @@ msgid ""
 "or an element id to determine if an item type has an element."
 msgstr ""
 
-#: application/models/Mixin/ElementText.php:278
+#: application/models/Mixin/ElementText.php:292
 #, php-format
 msgid "There is no element \"%1$s\", \"%2$s\"!"
 msgstr ""
 
-#: application/models/Mixin/ElementText.php:297
+#: application/models/Mixin/ElementText.php:311
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
 msgstr ""
 
-#: application/models/Mixin/ElementText.php:416
+#: application/models/Mixin/ElementText.php:430
 msgid "Element texts are not formatted correctly!"
 msgstr ""
 
-#: application/models/Mixin/ElementText.php:564
+#: application/models/Mixin/ElementText.php:578
 #, php-format
 msgid "The \"%s\" field has at least one invalid value!"
 msgstr ""
 
-#: application/models/Mixin/ElementText.php:634
+#: application/models/Mixin/ElementText.php:648
 msgid "Cannot save element text for records that are not yet persistent!"
 msgstr ""
 
