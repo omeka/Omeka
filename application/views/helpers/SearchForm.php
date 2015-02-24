@@ -46,13 +46,16 @@ class Omeka_View_Helper_SearchForm extends Omeka_View_Helper_AbstractSearch
             $options['form_attributes']['id'] = 'search-form';
         }
         $options['form_attributes']['method'] = 'get';
-        
-        return $this->view->partial(
-            'search/search-form.php', 
-            array('options'      => $options, 
-                  'filters'      => $this->_filters, 
-                  'query_types'  => $this->_validQueryTypes, 
-                  'record_types' => $this->_validRecordTypes)
+
+        $formParams = array(
+            'options'      => $options,
+            'filters'      => $this->_filters,
+            'query_types'  => $this->_validQueryTypes,
+            'record_types' => $this->_validRecordTypes
         );
+
+        $form = $this->view->partial('search/search-form.php', $formParams);
+
+        return apply_filters('search_form', $form, $formParams);
     }
 }
