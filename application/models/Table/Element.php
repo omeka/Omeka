@@ -151,6 +151,8 @@ class Table_Element extends Omeka_Db_Table
                 $select->order('elements.name ASC');
             } else if ($params['sort'] == 'alphaBySet') {
                 $select->order('element_sets.name ASC')->order('elements.name ASC');
+            } else if ($params['sort'] == 'orderBySet') {
+                $this->orderElements($select);
             }
         }
         

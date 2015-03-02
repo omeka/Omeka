@@ -57,7 +57,7 @@ $formAttributes['method'] = 'GET';
                     ),
                     get_table_options('Element', null, array(
                         'record_types' => array('Item', 'All'),
-                        'sort' => 'alphaBySet')
+                        'sort' => 'orderBySet')
                     )
                 );
                 echo $this->formSelect(
