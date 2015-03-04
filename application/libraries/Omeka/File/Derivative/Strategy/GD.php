@@ -113,6 +113,8 @@ class Omeka_File_Derivative_Strategy_GD
         $sourceY = 0;
 
         $destinationGD = imagecreatetruecolor($destinationWidth, $destinationHeight);
+        $white = imagecolorallocate($destinationGD, 255, 255, 255);
+        imagefill($destinationGD, 0, 0, $white);
         $result = imagecopyresampled($destinationGD, $sourceGD, 0, 0, $sourceX, $sourceY, $destinationWidth, $destinationHeight, $sourceWidth, $sourceHeight);
 
         // Save resulted resource.
@@ -166,6 +168,8 @@ class Omeka_File_Derivative_Strategy_GD
         }
 
         $destinationGD = imagecreatetruecolor($sizeConstraint, $sizeConstraint);
+        $white = imagecolorallocate($destinationGD, 255, 255, 255);
+        imagefill($destinationGD, 0, 0, $white);
         $result = imagecopyresampled($destinationGD, $sourceGD, 0, 0, $sourceX, $sourceY, $destinationWidth, $destinationHeight, $sourceWidth, $sourceHeight);
 
         // Save resulted resource.
