@@ -32,8 +32,8 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
         $db = get_db();
         $displayArray = array();
         foreach ($requestArray as $key => $value) {
-            $filter = $key;
             if($value != null) {
+                $filter = ucfirst($key);
                 $displayValue = null;
                 switch ($key) {
                     case 'type':
@@ -109,7 +109,8 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
             $html .= '<div id="item-filters">';
             $html .= '<ul>';
             foreach($displayArray as $name => $query) {
-                $html .= '<li class="' . $name . '">' . html_escape(ucfirst($name)) . ': ' . html_escape($query) . '</li>';
+                $class = html_escape(strtolower(str_replace(' ', '-', $name)));
+                $html .= '<li class="' . $class . '">' . html_escape(__($name)) . ': ' . html_escape($query) . '</li>';
             }
             if(!empty($advancedArray)) {
                 foreach($advancedArray as $j => $advanced) {
