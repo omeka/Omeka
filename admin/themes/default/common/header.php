@@ -75,4 +75,4 @@
         <?php endif; ?>
     </div>
 
-    <div id="content" class="ten columns offset-by-two omega" role="main" aria-labelledby="content-heading" tabindex="-1">
+    <div id="content" class="ten columns offset-by-two omega" role="main" aria-labelledby="content-heading">

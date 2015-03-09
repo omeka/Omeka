@@ -112,7 +112,11 @@ if (!Omeka) {
 
     Omeka.skipNav = function () {
         $("#skipnav").click(function() {
-            $("#content").focus();
+            $("#content").attr("tabindex", -1).focus();
+        });
+
+        $("#content").on("blur focusout", function () {
+            $(this).removeAttr("tabindex");
         });
     };
 

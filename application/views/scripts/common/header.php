@@ -51,6 +51,6 @@
 
         </header>
         
-        <article id="content" role="main" tabindex="-1">
+        <article id="content" role="main">
         
             <?php fire_plugin_hook('public_content_top', array('view'=>$this)); ?>
