@@ -126,7 +126,10 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
     }
 
     /**
-     * Delete all the ItemTypesElements rows joined to this type.
+     * Clean up the associated records for this Item Type.
+     *
+     * Delete all the ItemTypesElements rows joined to this type, and remove the
+     * type ID from any associated items.
      */
     protected function _delete()
     {
@@ -134,6 +137,7 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
         foreach ($tm_objs as $tm) {
             $tm->delete();
         }
+        $this->_dissociateItems();
     }
 
     /**
@@ -393,5 +397,15 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
     public function getResourceId()
     {
         return 'ItemTypes';
+    }
+
+    /**
+     * Set items attached to this item type back to null.
+     */
+    protected function _dissociateItems()
+    {
+        $db = $this->getDb();
+        $db->update($db->Item, array('item_type_id' => null),
+            array('item_type_id = ?' => $this->id));
     }
 }
