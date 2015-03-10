@@ -1,6 +1,6 @@
 # Welcome to Omeka
 
-&copy; 2008-2012 [Roy Rosenzweig Center for History and New Media](http://chnm.gmu.edu/)
+© 2008-2015 [Roy Rosenzweig Center for History and New Media](http://chnm.gmu.edu/)
 
 This program is free software: you can redistribute it and/or modify it under 
 the terms of the GNU General Public License as published by the Free Software 
