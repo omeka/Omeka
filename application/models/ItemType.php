@@ -1,7 +1,7 @@
 <?php
 /**
  * Omeka
- * 
+ *
  * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
  * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
@@ -11,7 +11,7 @@
  *
  * Item types are like specialized element sets that only apply to Items and
  * which can vary between items.
- * 
+ *
  * @package Omeka\Record
  */
 class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Interface
@@ -159,7 +159,7 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
 
     /**
      * Reorder the elements for this type.
-     * 
+     *
      * This extracts the ordering for the elements from the form's POST, then uses
      * the given ordering to reorder each join record from item_types_elements into
      * a new ordering, which is then saved.
@@ -180,7 +180,7 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
         } else if (count($elementOrderingArray) < count($joinRecordArray)) {
             throw new Omeka_Record_Exception(__('There are too few values in the element ordering array.'));
         }
-        
+
         foreach ($joinRecordArray as $key => $joinRecord) {
             $joinRecord->order = $elementOrderingArray[$joinRecord->element_id];
             $joinRecord->save();
@@ -257,7 +257,7 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
 
     /**
      * Remove an array of Elements from this item type
-     * 
+     *
      * The elements will not be removed until the object is saved.
      *
      * @param array $elements An array of Element objects or element id strings
@@ -271,7 +271,7 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
 
     /**
      * Remove a single Element from this item type.
-     * 
+     *
      * The element will not be removed until the object is saved.
      *
      * @param Element|string $element The element object or the element id.
@@ -313,10 +313,10 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
             if ($element) {
                 $this->_elementsToRemove[] = $element;
             }
-        }        
+        }
     }
 
-     /**
+    /**
      * Immediately remove a single Element from this item type.
      *
      * @param Element|string $element
@@ -334,9 +334,9 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
         $iteJoin->delete();
     }
 
-     /**
+    /**
      * Determine whether this ItemType has a particular element.
-     * 
+     *
      * This method does not handle elements that were added or
      * removed without saving the item type object.
      *
@@ -382,7 +382,7 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
         // Element should belong to the 'Item Type' element set.
         return get_db()->getTable('ElementSet')->findBySql('name = ?', array(ElementSet::ITEM_TYPE_NAME), true);
     }
-    
+
     /**
      * Identify ItemType records as relating to the ItemTypes ACL resource.
      *
