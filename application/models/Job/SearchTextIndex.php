@@ -45,7 +45,14 @@ class Job_SearchTextIndex extends Omeka_Job_AbstractJob
             while ($recordObjects = $recordTable->fetchObjects($recordTable->getSelect()->limitPage($pageNumber, 100))) {
                 foreach ($recordObjects as $recordObject) {
                     // Save the record object, which indexes its search text.
-                    $recordObject->save();
+                    try {
+                        $recordObject->save();
+                    } catch (Omeka_Validate_Exception $e) {
+                        _log($e, Zend_Log::ERR);
+                        _log(sprintf('Failed to index %s #%s',
+                                get_class($recordObject), $recordObject->id),
+                            Zend_Log::ERR);
+                    }
                     release_object($recordObject);
                 }
                 $pageNumber++;
