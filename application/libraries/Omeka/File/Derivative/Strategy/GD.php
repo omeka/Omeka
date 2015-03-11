@@ -156,6 +156,7 @@ class Omeka_File_Derivative_Strategy_GD
         }
         // Source is square.
         else {
+            $sourceSize = $sourceWidth;
             $sourceX = 0;
             $sourceY = 0;
         }
