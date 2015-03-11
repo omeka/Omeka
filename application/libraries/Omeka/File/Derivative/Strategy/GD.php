@@ -58,9 +58,6 @@ class Omeka_File_Derivative_Strategy_GD
      */
     protected function _loadImageResource($source)
     {
-        // Page is not managed by GD.
-        // $page = (int) $this->getOption('page', 0);
-
         if (empty($source) || !is_readable($source)) {
             return false;
         }
@@ -147,22 +144,18 @@ class Omeka_File_Derivative_Strategy_GD
 
         // Source is landscape.
         if ($sourceWidth > $sourceHeight) {
-            $destinationWidth = round($sourceWidth * $sizeConstraint / $sourceHeight);
-            $destinationHeight = $sizeConstraint;
-            $sourceX = $this->_getCropOffsetX($destinationWidth, $sizeConstraint);
+            $sourceSize = $sourceHeight;
+            $sourceX = $this->_getOffsetX($sourceWidth, $sourceSize);
             $sourceY = 0;
         }
         // Source is portrait.
         elseif ($sourceWidth < $sourceHeight) {
-            $destinationHeight = round($sourceHeight * $sizeConstraint / $sourceWidth);
-            $destinationWidth = $sizeConstraint;
+            $sourceSize = $sourceWidth;
             $sourceX = 0;
-            $sourceY = $this->_getCropOffsetY($destinationHeight, $sizeConstraint);
+            $sourceY = $this->_getOffsetY($sourceHeight, $sourceSize);
         }
         // Source is square.
         else {
-            $destinationWidth = $sizeConstraint;
-            $destinationHeight = $sizeConstraint;
             $sourceX = 0;
             $sourceY = 0;
         }
@@ -170,7 +163,7 @@ class Omeka_File_Derivative_Strategy_GD
         $destinationGD = imagecreatetruecolor($sizeConstraint, $sizeConstraint);
         $white = imagecolorallocate($destinationGD, 255, 255, 255);
         imagefill($destinationGD, 0, 0, $white);
-        $result = imagecopyresampled($destinationGD, $sourceGD, 0, 0, $sourceX, $sourceY, $destinationWidth, $destinationHeight, $sourceWidth, $sourceHeight);
+        $result = imagecopyresampled($destinationGD, $sourceGD, 0, 0, $sourceX, $sourceY, $sizeConstraint, $sizeConstraint, $sourceSize, $sourceSize);
 
         // Save resulted resource.
         if ($result) {
@@ -183,15 +176,15 @@ class Omeka_File_Derivative_Strategy_GD
     }
 
     /**
-     * Get the required crop offset on the X axis.
+     * Get the required offset on the X axis.
      *
-     * This respects the Imagick 'gravity' setting.
+     * This respects the 'gravity' setting.
      *
-     * @param int $resizedX Pre-crop image width
-     * @param int $sizeConstraint
+     * @param int $width Original image width
+     * @param int $size Side size of the square region being selected
      * @return int
      */
-    protected function _getCropOffsetX($resizedX, $sizeConstraint)
+    protected function _getOffsetX($width, $size)
     {
         $gravity = strtolower($this->getOption('gravity', 'center'));
         switch ($gravity) {
@@ -203,26 +196,26 @@ class Omeka_File_Derivative_Strategy_GD
             case 'northeast':
             case 'east':
             case 'southeast':
-                return $resizedX - $sizeConstraint;
+                return $width - $size;
 
             case 'north':
             case 'center':
             case 'south':
             default:
-                return (int) (($resizedX - $sizeConstraint) / 2);
+                return (int) (($width - $size) / 2);
         }
     }
 
     /**
-     * Get the required crop offset on the Y axis.
+     * Get the required offset on the Y axis.
      *
-     * This respects the Imagick 'gravity' setting.
+     * This respects the 'gravity' setting.
      *
-     * @param int $resizedY Pre-crop image height
-     * @param int $sizeConstraint
+     * @param int $height Original image height
+     * @param int $size Side size of square region being selected
      * @return int
      */
-    protected function _getCropOffsetY($resizedY, $sizeConstraint)
+    protected function _getOffsetY($height, $size)
     {
         $gravity = strtolower($this->getOption('gravity', 'center'));
         switch ($gravity) {
@@ -234,13 +227,13 @@ class Omeka_File_Derivative_Strategy_GD
             case 'southwest':
             case 'south':
             case 'southeast':
-                return $resizedY - $sizeConstraint;
+                return $height - $size;
 
             case 'west':
             case 'center':
             case 'east':
             default:
-                return (int) (($resizedY - $sizeConstraint) / 2);
+                return (int) (($height - $size) / 2);
         }
     }
 }
