@@ -44,7 +44,7 @@ class CollectionsController extends Omeka_Controller_AbstractActionController
     {
         parent::showAction();
         $this->view->items = $this->_helper->db->getTable('Item')->findBy(
-            array('collection' => $this->view->collection->id), is_admin_theme() ? 10 : 5);
+            array('collection' => $this->view->collection->id), $this->_getBrowseRecordsPerPage());
     }
     
     /**
