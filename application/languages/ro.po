@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Nicolaie Constantinescu <kosson@gmail.com>, 2011-2014
+# Doru  DEACONU <dumitrudeaconu@yahoo.com>, 2014
+# Nicolaie Constantinescu <kosson@gmail.com>, 2011-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2014-06-09 19:07+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2015-02-26 10:53+0000\n"
+"Last-Translator: Nicolaie Constantinescu <kosson@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/projects/p/omeka/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -341,15 +342,15 @@ msgid "Add a Link to the Navigation"
 msgstr "Adaugă un link la navigare."
 
 #: admin/themes/default/appearance/edit-navigation.php:21
-#: admin/themes/default/appearance/edit-navigation.php:37
+#: admin/themes/default/appearance/edit-navigation.php:41
 #: admin/themes/default/users/api-keys.php:40
-#: application/forms/Navigation.php:132
+#: application/forms/Navigation.php:138
 msgid "Label"
 msgstr "Etichetă"
 
 #: admin/themes/default/appearance/edit-navigation.php:23
-#: admin/themes/default/appearance/edit-navigation.php:38
-#: application/forms/Navigation.php:133
+#: admin/themes/default/appearance/edit-navigation.php:42
+#: application/forms/Navigation.php:139
 msgid "URL"
 msgstr "URL"
 
@@ -362,21 +363,27 @@ msgstr "Adaugă un link"
 #: admin/themes/default/collections/edit.php:22
 #: admin/themes/default/element-sets/edit.php:41
 #: admin/themes/default/files/edit.php:35
+#: admin/themes/default/item-types/edit.php:18
 #: admin/themes/default/items/batch-edit.php:130
 #: admin/themes/default/items/edit.php:19
 #: admin/themes/default/plugins/config.php:14
-#: admin/themes/default/settings/edit-api.php:81
-#: admin/themes/default/settings/edit-item-type-elements.php:38
-#: admin/themes/default/settings/edit-search.php:40
+#: admin/themes/default/settings/edit-api.php:82
+#: admin/themes/default/settings/edit-item-type-elements.php:39
+#: admin/themes/default/settings/edit-search.php:41
 #: admin/themes/default/settings/edit-security.php:15
 #: admin/themes/default/settings/edit-settings.php:15
 #: admin/themes/default/themes/config.php:16
-#: admin/themes/default/users/edit.php:21 application/forms/ItemTypes.php:169
+#: admin/themes/default/users/edit.php:21
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:73
 msgid "Save Changes"
 msgstr "Salvează modificările"
 
-#: admin/themes/default/appearance/edit-navigation.php:39
+#: admin/themes/default/appearance/edit-navigation.php:35
+#: admin/themes/default/appearance/reset-navigation-confirm.php:2
+msgid "Reset Navigation"
+msgstr "Resetează navigarea"
+
+#: admin/themes/default/appearance/edit-navigation.php:43
 #: admin/themes/default/collections/edit.php:23
 #: admin/themes/default/collections/show.php:34
 #: admin/themes/default/files/show.php:28
@@ -386,7 +393,7 @@ msgstr "Salvează modificările"
 msgid "View Public Page"
 msgstr "Vizualizează pagina publică"
 
-#: admin/themes/default/appearance/edit-navigation.php:40
+#: admin/themes/default/appearance/edit-navigation.php:44
 #: admin/themes/default/collections/edit.php:24
 #: admin/themes/default/collections/show.php:36
 #: admin/themes/default/element-sets/browse.php:29
@@ -406,6 +413,18 @@ msgstr "Vizualizează pagina publică"
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:83
 msgid "Delete"
 msgstr "Șterge"
+
+#: admin/themes/default/appearance/reset-navigation-confirm.php:9
+#: admin/themes/default/common/delete-confirm.php:10
+#: application/views/scripts/common/delete-confirm.php:12
+msgid "Are you sure?"
+msgstr "Ești sigur?"
+
+#: admin/themes/default/appearance/reset-navigation-confirm.php:10
+msgid ""
+"All customizations will be lost. Order and labels will revert to Omeka "
+"defaults. Custom links will be lost."
+msgstr "Toate particularizările configurate vor fi pierdute. Ordinea și etichetele vor reveni la setările inițiale ale Omekăi. Configurările linkurilor vor fi pierdute."
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:11
@@ -438,7 +457,7 @@ msgstr "Public"
 #: admin/themes/default/items/quick-filters.php:8
 #: admin/themes/default/items/show.php:53
 msgid "Featured"
-msgstr "Evidențiat"
+msgstr "Prezentat"
 
 #: admin/themes/default/collections/browse.php:2
 #: application/libraries/Omeka/Navigation.php:149
@@ -526,24 +545,11 @@ msgstr "Nu ai nicio colecție"
 msgid "Get started by adding your first collection."
 msgstr "Începe prin adăugarea primei tale colecții."
 
-#: admin/themes/default/collections/edit.php:3
-#: admin/themes/default/collections/show.php:3
-#: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/libraries/globals.php:2574
-#: application/views/scripts/collections/show.php:4
-#: application/views/scripts/functions.php:14
-msgid "[Untitled]"
-msgstr "[Fără titlu]"
-
 #: admin/themes/default/collections/edit.php:8
+#: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Edit Collection #%s"
 msgstr "Editează colecția #%s"
-
-#: admin/themes/default/collections/show.php:8
-#, php-format
-msgid "Collection #%s"
-msgstr "Colecția #%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
@@ -590,6 +596,10 @@ msgstr "Navigare"
 msgid "Settings"
 msgstr "Setări"
 
+#: admin/themes/default/common/content-nav.php:1
+msgid "Main Menu"
+msgstr "Meniu principal"
+
 #: admin/themes/default/common/content-nav.php:5
 #: admin/themes/default/index.php:2
 msgid "Dashboard"
@@ -623,11 +633,6 @@ msgstr "Etichete"
 msgid "Delete %s"
 msgstr "Șterge %s"
 
-#: admin/themes/default/common/delete-confirm.php:10
-#: application/views/scripts/common/delete-confirm.php:12
-msgid "Are you sure?"
-msgstr "Ești sigur?"
-
 #: admin/themes/default/common/footer.php:6
 #: admin/themes/default/common/login-footer.php:7
 msgid "Powered by Omeka"
@@ -653,6 +658,10 @@ msgstr "Versiunea %s"
 msgid "System Information"
 msgstr "Informații de sistem"
 
+#: admin/themes/default/common/global-nav.php:1
+msgid "Manage Site"
+msgstr "Gestionează siteul"
+
 #: admin/themes/default/common/global-nav.php:5
 #: admin/themes/default/plugins/browse.php:2
 msgid "Plugins"
@@ -668,6 +677,11 @@ msgstr "Utilizatori"
 #: application/views/scripts/common/admin-bar.php:11
 msgid "Omeka Admin"
 msgstr "Administratorul Omeka"
+
+#: admin/themes/default/common/header.php:40
+#: application/views/scripts/common/header.php:32
+msgid "Skip to main content"
+msgstr "Treci la conținutul principal"
 
 #: admin/themes/default/common/header.php:60
 #: application/views/scripts/common/admin-bar.php:7
@@ -690,7 +704,9 @@ msgid "Security"
 msgstr "Securitate"
 
 #: admin/themes/default/common/settings-nav.php:16
+#: admin/themes/default/search/index.php:2
 #: application/views/helpers/SearchForm.php:34
+#: application/views/scripts/search/index.php:2
 #: application/views/scripts/search/search-form.php:2
 #: application/views/scripts/search/search-form.php:22
 msgid "Search"
@@ -709,7 +725,7 @@ msgid "API"
 msgstr "API"
 
 #: admin/themes/default/common/users-nav.php:11
-#: application/forms/ChangePassword.php:78
+#: application/forms/ChangePassword.php:80
 msgid "Change Password"
 msgstr "Modifică parola"
 
@@ -811,7 +827,7 @@ msgid "File #%s"
 msgstr "Fișierul #$%s"
 
 #: admin/themes/default/files/show.php:35
-#: application/libraries/globals.php:416
+#: application/libraries/globals.php:409
 msgid "Item"
 msgstr "Resursă"
 
@@ -950,7 +966,7 @@ msgid "Element Description"
 msgstr "Descrierea Resursei"
 
 #: admin/themes/default/item-types/add.php:2
-#: application/forms/ItemTypes.php:161
+#: admin/themes/default/item-types/add.php:11
 msgid "Add Item Type"
 msgstr "Adaugă tip de resursă"
 
@@ -1041,7 +1057,7 @@ msgstr "Adaugă resursă"
 #: admin/themes/default/items/browse.php:90
 #: admin/themes/default/items/edit.php:41
 #: admin/themes/default/items/show.php:57
-#: application/libraries/globals.php:418
+#: application/libraries/globals.php:411
 #: application/views/scripts/items/show.php:18
 msgid "Collection"
 msgstr "Colecție"
@@ -1093,11 +1109,11 @@ msgstr "Privat"
 
 #: admin/themes/default/items/batch-edit.php:61
 msgid "Featured?"
-msgstr "Evidențiat?"
+msgstr "Prezentat?"
 
 #: admin/themes/default/items/batch-edit.php:66
 msgid "Not Featured"
-msgstr "Neevidențiat"
+msgstr "Neprezentat"
 
 #: admin/themes/default/items/batch-edit.php:74
 #: admin/themes/default/items/item-type-form.php:3
@@ -1168,8 +1184,8 @@ msgstr "Vezi resursele"
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2350
-#: application/libraries/globals.php:2734
+#: application/libraries/globals.php:2367
+#: application/libraries/globals.php:2757
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Caută resurse"
@@ -1215,6 +1231,11 @@ msgstr "detaliază căutarea"
 #, php-format
 msgid "Would you like to %s?"
 msgstr "Dorești să %s?"
+
+#: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
+#: application/views/scripts/functions.php:14
+msgid "[Untitled]"
+msgstr "[Fără titlu]"
 
 #: admin/themes/default/items/edit.php:8
 #, php-format
@@ -1281,12 +1302,12 @@ msgstr "Adaugă un câmp"
 #: admin/themes/default/items/search-form.php:54
 #: application/views/scripts/items/search-form.php:50
 msgid "Search Field"
-msgstr ""
+msgstr "Caută câmp"
 
 #: admin/themes/default/items/search-form.php:67
 #: application/views/scripts/items/search-form.php:63
 msgid "Search Type"
-msgstr ""
+msgstr "Caută tip"
 
 #: admin/themes/default/items/search-form.php:72
 #: application/views/scripts/items/search-form.php:68
@@ -1316,7 +1337,7 @@ msgstr "nu este gol"
 #: admin/themes/default/items/search-form.php:84
 #: application/views/scripts/items/search-form.php:80
 msgid "Search Terms"
-msgstr ""
+msgstr "Caută termeni"
 
 #: admin/themes/default/items/search-form.php:90
 #: application/views/scripts/items/search-form.php:86
@@ -1366,17 +1387,17 @@ msgstr "Doar resurse private"
 #: admin/themes/default/items/search-form.php:197
 #: application/views/scripts/items/search-form.php:181
 msgid "Featured/Non-Featured"
-msgstr "Evidențiate/Neevidențiate"
+msgstr "Prezentate/Neprezentate"
 
 #: admin/themes/default/items/search-form.php:206
 #: application/views/scripts/items/search-form.php:189
 msgid "Only Featured Items"
-msgstr "Doar resurse evidențiate"
+msgstr "Doar resurse prezentate"
 
 #: admin/themes/default/items/search-form.php:207
 #: application/views/scripts/items/search-form.php:190
 msgid "Only Non-Featured Items"
-msgstr "Doar resurse neevidențiate"
+msgstr "Doar resurse neprezentate"
 
 #: admin/themes/default/items/search-form.php:215
 #: application/views/scripts/items/search-form.php:199
@@ -1457,7 +1478,7 @@ msgstr "de %s"
 
 #: admin/themes/default/plugins/browse.php:65
 #: admin/themes/default/themes/browse.php:23
-#: admin/themes/default/themes/browse.php:49
+#: admin/themes/default/themes/browse.php:48
 msgid "Get support"
 msgstr "Caută ajutor"
 
@@ -1470,31 +1491,31 @@ msgstr "Există o versiune nouă a lui %s. Actualizează!"
 msgid "Upgrade"
 msgstr "Actualizează"
 
-#: admin/themes/default/plugins/browse.php:100
+#: admin/themes/default/plugins/browse.php:101
 msgid "Configure"
 msgstr "Configurează"
 
-#: admin/themes/default/plugins/browse.php:106
+#: admin/themes/default/plugins/browse.php:107
 msgid "Deactivate"
 msgstr "Dezactivează"
 
-#: admin/themes/default/plugins/browse.php:106
-#: admin/themes/default/users/activate.php:31
+#: admin/themes/default/plugins/browse.php:107
+#: admin/themes/default/users/activate.php:30
 #: application/views/scripts/users/activate.php:27
 msgid "Activate"
 msgstr "Activează"
 
-#: admin/themes/default/plugins/browse.php:116
+#: admin/themes/default/plugins/browse.php:118
 #: admin/themes/default/plugins/confirm-uninstall.php:16
 msgid "Uninstall"
 msgstr "Dezinstalează"
 
-#: admin/themes/default/plugins/browse.php:129
+#: admin/themes/default/plugins/browse.php:131
 #: application/forms/Install.php:178
 msgid "Install"
 msgstr "Instalează"
 
-#: admin/themes/default/plugins/browse.php:140
+#: admin/themes/default/plugins/browse.php:143
 msgid ""
 "You do not have any plugins installed. Add them to the plugins directory to "
 "see them listed here."
@@ -1524,14 +1545,9 @@ msgid "or"
 msgstr "sau"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:17
-#: admin/themes/default/settings/edit-item-type-elements.php:50
+#: admin/themes/default/settings/edit-item-type-elements.php:51
 msgid "Cancel"
 msgstr "Anulează"
-
-#: admin/themes/default/search/index.php:2
-#: application/views/scripts/search/index.php:2
-msgid "Search Omeka "
-msgstr "Caută în Omeka "
 
 #: admin/themes/default/search/index.php:12
 #: admin/themes/default/tags/browse.php:18
@@ -1591,18 +1607,18 @@ msgid ""
 "Customize the element descriptions below. To re-order the elements, %s."
 msgstr "Adaptează cum vrei descrierile elementelor de mai jos. Pentru a reordona elementele %s."
 
-#: admin/themes/default/settings/edit-item-type-elements.php:42
+#: admin/themes/default/settings/edit-item-type-elements.php:43
 msgid "Confirm Delete"
 msgstr "Confirmă ștergerea"
 
-#: admin/themes/default/settings/edit-item-type-elements.php:43
+#: admin/themes/default/settings/edit-item-type-elements.php:44
 msgid ""
 "Are you sure you want to delete the selected item type elements from the "
 "database? You will lose all text related to the selected elements. This "
 "cannot be undone."
 msgstr "Ești sigur/ă că vrei să ștergi elementele corespunzătoare tipului de resursă selectat din baza de date? Vei pierde tot textul legat de resursele selectate. Acest lucru nu este definitiv."
 
-#: admin/themes/default/settings/edit-item-type-elements.php:50
+#: admin/themes/default/settings/edit-item-type-elements.php:51
 msgid "Ok"
 msgstr "Ok"
 
@@ -1615,7 +1631,7 @@ msgid "Customize which types of records will be searchable in Omeka."
 msgstr "Particularizează care tipuri de resuse vor putea fi utilizate pentru căutare în Omeka."
 
 #: admin/themes/default/settings/edit-search.php:23
-#: admin/themes/default/settings/edit-search.php:41
+#: admin/themes/default/settings/edit-search.php:42
 msgid "Index Records"
 msgstr "Indexează resursele"
 
@@ -1702,7 +1718,7 @@ msgid "Record Types"
 msgstr "Tipuri de resurse"
 
 #: admin/themes/default/themes/browse.php:15
-#: admin/themes/default/themes/browse.php:43
+#: admin/themes/default/themes/browse.php:42
 #, php-format
 msgid "Screenshot for %s Theme"
 msgstr "Captură de ecran pentru tema %s"
@@ -1716,7 +1732,7 @@ msgid "Current Theme"
 msgstr "Tema utilizată"
 
 #: admin/themes/default/themes/browse.php:21
-#: admin/themes/default/themes/browse.php:48
+#: admin/themes/default/themes/browse.php:47
 #, php-format
 msgid "By %s"
 msgstr "De %s"
@@ -1729,7 +1745,7 @@ msgid ""
 "target=\"_blank\">design your own</a>!"
 msgstr "Adaugă teme noi descărcându-le de la <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Catalogul de teme Omeka</a> sau <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">elaborează tu una</a>!"
 
-#: admin/themes/default/themes/browse.php:45
+#: admin/themes/default/themes/browse.php:44
 msgid "Use this theme"
 msgstr "Folosește această temă"
 
@@ -1788,13 +1804,19 @@ msgstr "Înapoi la Panoul de operare"
 msgid "User Activation"
 msgstr "Activarea utilizatorilor"
 
-#: admin/themes/default/users/activate.php:18
+#: admin/themes/default/users/activate.php:12
+#: application/views/scripts/users/activate.php:8
+#, php-format
+msgid "Hello %s. Your username is %s"
+msgstr "Bună %s. Numele de utilizator este %s"
+
+#: admin/themes/default/users/activate.php:17
 #: application/forms/ResetPassword.php:23
 #: application/views/scripts/users/activate.php:14
 msgid "Create a Password"
 msgstr "Pune o parolă!"
 
-#: admin/themes/default/users/activate.php:24 application/forms/Install.php:71
+#: admin/themes/default/users/activate.php:23 application/forms/Install.php:71
 #: application/forms/ResetPassword.php:44
 #: application/views/scripts/users/activate.php:20
 msgid "Re-type the Password"
@@ -1850,6 +1872,10 @@ msgstr "Ultima accesare"
 #: admin/themes/default/users/api-keys.php:44
 msgid "Rescind"
 msgstr "Revocă"
+
+#: admin/themes/default/users/api-keys.php:60
+msgid "Update API Keys"
+msgstr "Actualizează cheile API"
 
 #: admin/themes/default/users/browse.php:2
 msgid "Browse Users"
@@ -1947,8 +1973,8 @@ msgstr "Setările privind înfățișarea au fost actualizate."
 #: application/controllers/AppearanceController.php:51
 #: application/controllers/ItemTypesController.php:35
 #: application/controllers/ItemTypesController.php:61
-#: application/controllers/SettingsController.php:47
-#: application/controllers/SettingsController.php:79
+#: application/controllers/SettingsController.php:55
+#: application/controllers/SettingsController.php:88
 #: install/views/scripts/index/index.phtml:17
 msgid "There were errors found in your form. Please edit and resubmit."
 msgstr "Au fost descoperite erori în formular. Editează și trimite din nou."
@@ -1963,37 +1989,41 @@ msgid ""
 "  All changed values have been restored."
 msgstr "Setările privind navigarea nu au fost salvate deoarece valoril lipsesc sau sunt nevalide. Toate valorile modificate au fost restaurate."
 
-#: application/controllers/CollectionsController.php:74
+#: application/controllers/AppearanceController.php:97
+msgid "The navigation settings have been reset."
+msgstr "Setările privind navigarea au fost actualizate."
+
+#: application/controllers/CollectionsController.php:76
 #, php-format
 msgid "The collection \"%s\" was successfully added!"
 msgstr "Colecția \"%s\" a fost adăugată cu succes!"
 
-#: application/controllers/CollectionsController.php:76
+#: application/controllers/CollectionsController.php:78
 #, php-format
 msgid "The collection #%s was successfully added!"
 msgstr "Colecția #%s a fost adăugată cu succes!"
 
-#: application/controllers/CollectionsController.php:84
+#: application/controllers/CollectionsController.php:86
 #, php-format
 msgid "The collection \"%s\" was successfully changed!"
 msgstr "Colecția \"%s\" a fost modificată cu succes!"
 
-#: application/controllers/CollectionsController.php:86
+#: application/controllers/CollectionsController.php:88
 #, php-format
 msgid "The collection #%s was successfully changed!"
 msgstr "Colecția #%s a fost modificată cu succes!"
 
-#: application/controllers/CollectionsController.php:94
+#: application/controllers/CollectionsController.php:96
 #, php-format
 msgid "The collection \"%s\" was successfully deleted!"
 msgstr "Colecția \"%s\" a fost ștearsă fără probleme!"
 
-#: application/controllers/CollectionsController.php:96
+#: application/controllers/CollectionsController.php:98
 #, php-format
 msgid "The collection #%s was successfully deleted!"
 msgstr "Colecția #%s a fost ștearsă fără probleme!"
 
-#: application/controllers/CollectionsController.php:104
+#: application/controllers/CollectionsController.php:106
 #, php-format
 msgid ""
 "This will delete the collection \"%s\" and its associated metadata. This "
@@ -2001,7 +2031,7 @@ msgid ""
 "to this collection in each item."
 msgstr "Acest lucru se va solda cu ștergerea colecției #%s și a metadatelor asociate. Nu vor fi șterse și resursele acestei colecții, dar se vor șterge referințele către această colecție din fiecare."
 
-#: application/controllers/CollectionsController.php:108
+#: application/controllers/CollectionsController.php:110
 #, php-format
 msgid ""
 "This will delete the collection #%s and its associated metadata. This will "
@@ -2015,7 +2045,23 @@ msgid ""
 "set. Items will lose all metadata that is specific to this element set."
 msgstr "Aceasta va șterge setul de elemente și toate elementele atribuite acestuia. Înregistrările vor pierde toate metadatele care sunt specifice acestui set de elemente."
 
-#: application/controllers/ElementSetsController.php:65
+#: application/controllers/ElementSetsController.php:53
+#: application/controllers/PluginsController.php:51
+#: application/controllers/PluginsController.php:79
+#: application/controllers/PluginsController.php:139
+#: application/controllers/PluginsController.php:190
+#: application/controllers/PluginsController.php:223
+#: application/controllers/PluginsController.php:337
+#: application/controllers/SettingsController.php:104
+#: application/controllers/SettingsController.php:140
+#: application/controllers/SettingsController.php:177
+#: application/controllers/ThemesController.php:87
+#: application/libraries/Omeka/Controller/AbstractActionController.php:183
+#: application/libraries/Omeka/Controller/AbstractActionController.php:224
+msgid "There was an error on the form. Please try again."
+msgstr "Există o eroare în formular. Încearcă din nou."
+
+#: application/controllers/ElementSetsController.php:72
 msgid "The element set was successfully changed!"
 msgstr "Setul de resurse a fost modificat  fără probleme!"
 
@@ -2027,9 +2073,13 @@ msgstr "Pagină inexistentă."
 msgid "Access denied."
 msgstr "Acces interzis."
 
-#: application/controllers/FilesController.php:64
+#: application/controllers/FilesController.php:66
 msgid "This will delete the file and its associated metadata."
 msgstr "Acest lucru va șterge fișierul, precum și metadatele asociate lui."
+
+#: application/controllers/FilesController.php:72
+msgid "The file was successfully deleted."
+msgstr "Fișierul a fost șters fără probleme."
 
 #: application/controllers/ItemTypesController.php:28
 #, php-format
@@ -2056,87 +2106,87 @@ msgid ""
 "your new item type."
 msgstr "Tipul de resursă \"%s\" a fost adăugată cu succes! În acest moment poți adăuga elemente noi la noul tău tip de resursă."
 
-#: application/controllers/ItemsController.php:85
-#: application/controllers/ItemsController.php:145
+#: application/controllers/ItemsController.php:89
+#: application/controllers/ItemsController.php:149
 msgid ""
 "The ImageMagick directory path has not been set. No derivative images will "
 "be created. If you would like Omeka to create derivative images, please set "
 "the path in Settings."
 msgstr "Calea directorului către ImageMagick nu a fost setată. Nu vor fi create alte imagini. Dacă dorești ca Omeka să creeze imagini derivate, setează calea în Setări."
 
-#: application/controllers/ItemsController.php:94
+#: application/controllers/ItemsController.php:98
 #, php-format
 msgid "The item \"%s\" was successfully added!"
 msgstr "Tipul de resursă \"%s\" a fost adăugat fără probleme!"
 
-#: application/controllers/ItemsController.php:96
+#: application/controllers/ItemsController.php:100
 #, php-format
 msgid "The item #%s was successfully added!"
 msgstr "Tipul de resursă \"%s\" a fost adăugat fără probleme!"
 
-#: application/controllers/ItemsController.php:104
+#: application/controllers/ItemsController.php:108
 #, php-format
 msgid "The item \"%s\" was successfully changed!"
 msgstr "Tipul de resursă \"%s\" a fost modificat fără probleme!"
 
-#: application/controllers/ItemsController.php:106
+#: application/controllers/ItemsController.php:110
 #, php-format
 msgid "The item #%s was successfully changed!"
 msgstr "Tipul de resursă \"%s\" a fost modificat fără probleme!"
 
-#: application/controllers/ItemsController.php:114
+#: application/controllers/ItemsController.php:118
 #, php-format
 msgid "The item \"%s\" was successfully deleted!"
 msgstr "Tipul de resursă \"%s\" a fost șters fără probleme!"
 
-#: application/controllers/ItemsController.php:116
+#: application/controllers/ItemsController.php:120
 #, php-format
 msgid "The item #%s was successfully deleted!"
 msgstr "Tipul de resursă \"%s\" a fost șters fără probleme!"
 
-#: application/controllers/ItemsController.php:124
+#: application/controllers/ItemsController.php:128
 #, php-format
 msgid ""
 "This will delete the item \"%s\" and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
 msgstr "Acest lucru va avea drept efect ștergerea resursei  \"%s\" și a metadatelor asociate. Va șterge și toate fițierele și fițierele de metadate asociate resursei."
 
-#: application/controllers/ItemsController.php:128
+#: application/controllers/ItemsController.php:132
 #, php-format
 msgid ""
 "This will delete the item #%s and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
 msgstr "Acest lucru va șterge resursa  #%s și metadatele asociate. Va șterge și toate fițierele și fișierele de metadate asociate acestei resurse."
 
-#: application/controllers/ItemsController.php:255
+#: application/controllers/ItemsController.php:227
 msgid "You must choose some items to batch edit."
 msgstr "Trebuie să alegi câteva resurse pentru a le edita în grup."
 
-#: application/controllers/ItemsController.php:299
+#: application/controllers/ItemsController.php:271
 msgid "User is not allowed to modify visibility of items."
 msgstr "Utilizatorului nu îi este permisă modificarea vizibilității resurselor."
 
-#: application/controllers/ItemsController.php:304
+#: application/controllers/ItemsController.php:276
 msgid "User is not allowed to modify featured status of items."
-msgstr "Utilizatorului nu îi este permisă modificarea stării de evidențiere a unei resurse"
+msgstr "Utilizatorului nu îi este permisă modificarea stării ca prezentată sau nu a unei resurse"
 
-#: application/controllers/ItemsController.php:311
+#: application/controllers/ItemsController.php:283
 msgid "User is not allowed to delete selected items."
 msgstr "Utilizatorului nu îi este permisă ștergerea elementelor selectate."
 
-#: application/controllers/ItemsController.php:317
+#: application/controllers/ItemsController.php:289
 msgid "User is not allowed to edit selected items."
 msgstr "Utilizatorului nu îi este permisă editarea înregistrărilor selectate."
 
-#: application/controllers/ItemsController.php:322
+#: application/controllers/ItemsController.php:294
 msgid "User is not allowed to tag selected items."
 msgstr "Utilizatorului nu îi este permisă etichetarea înregistrărilor selectate."
 
-#: application/controllers/ItemsController.php:356
+#: application/controllers/ItemsController.php:328
 msgid "The items were successfully deleted!"
 msgstr "Resursele au fost șterse fără probleme!"
 
-#: application/controllers/ItemsController.php:358
+#: application/controllers/ItemsController.php:330
 msgid "The items were successfully changed!"
 msgstr "Înregistrările au fost modificate cu succes!"
 
@@ -2147,165 +2197,152 @@ msgid ""
 "hook(s)."
 msgstr "A apărut o eroare la configurarea pluginului numit \"%s\". Configurări lipsă sau cuplă(e) config_form."
 
-#: application/controllers/PluginsController.php:52
+#: application/controllers/PluginsController.php:59
 #, php-format
 msgid "The %s plugin was successfully configured!"
 msgstr "Pluginul %s a fost configurat cu succes!"
 
-#: application/controllers/PluginsController.php:70
+#: application/controllers/PluginsController.php:89
 #, php-format
 msgid "The %s plugin has already been installed."
 msgstr "Pluginul %s a fost deja instalat."
 
-#: application/controllers/PluginsController.php:79
+#: application/controllers/PluginsController.php:99
 #, php-format
 msgid "The %s plugin was successfully installed!"
 msgstr "Pluginul %s a fost instalat cu succes!"
 
-#: application/controllers/PluginsController.php:91
-#: application/controllers/PluginsController.php:96
+#: application/controllers/PluginsController.php:111
+#: application/controllers/PluginsController.php:116
 #, php-format
 msgid "The following error occurred while installing the %s plugin: "
 msgstr "La instalarea pluginului %s au apărut următoarele erori:"
 
-#: application/controllers/PluginsController.php:124
+#: application/controllers/PluginsController.php:154
 #, php-format
 msgid "The following error occurred while activating the %s plugin: "
 msgstr "A apărut următoarea eroare la activarea pluginului %s:"
 
-#: application/controllers/PluginsController.php:134
+#: application/controllers/PluginsController.php:164
 #, php-format
 msgid "The %s plugin was successfully activated!"
 msgstr "Pluginul %s a fost activat cu succes!"
 
-#: application/controllers/PluginsController.php:139
+#: application/controllers/PluginsController.php:169
 #, php-format
 msgid "The %s plugin was activated, but could not be loaded: "
 msgstr "Pluginul %s a fost activat, dar nu a putut fi încărcat:"
 
-#: application/controllers/PluginsController.php:163
+#: application/controllers/PluginsController.php:204
 #, php-format
 msgid "The %s plugin was successfully deactivated!"
 msgstr "Pluginul %s a fost dezactivat fără probleme!"
 
-#: application/controllers/PluginsController.php:168
+#: application/controllers/PluginsController.php:209
 #, php-format
 msgid "The following error occurred while deactivating the %s plugin: "
 msgstr "În timp ce pluginul %s era dezactivat, a apărut următoarea problemă:"
 
-#: application/controllers/PluginsController.php:187
+#: application/controllers/PluginsController.php:239
 #, php-format
 msgid "The %s plugin was successfully upgraded!"
 msgstr "Pluginul %s a fost actualizat cu succes!"
 
-#: application/controllers/PluginsController.php:196
-#: application/controllers/PluginsController.php:202
+#: application/controllers/PluginsController.php:248
+#: application/controllers/PluginsController.php:254
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
 msgstr "La actualizarea pluginului %s a apărut următoarea eroare:"
 
-#: application/controllers/PluginsController.php:253
+#: application/controllers/PluginsController.php:310
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
 msgstr "Acest plugin nu a putut fi găsit în directorul  '%s'!"
 
-#: application/controllers/PluginsController.php:262
+#: application/controllers/PluginsController.php:322
 msgid "You must confirm the uninstall before proceeding."
 msgstr "Trebuie să confirmi dezinstalarea înainte de a proceda."
 
-#: application/controllers/PluginsController.php:280
+#: application/controllers/PluginsController.php:345
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
 msgstr "Pluginul %s a fost dezinstalat fără probleme!"
 
-#: application/controllers/PluginsController.php:285
-#: application/controllers/PluginsController.php:290
+#: application/controllers/PluginsController.php:350
+#: application/controllers/PluginsController.php:355
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
 msgstr "A apărut următoarea eroare la momentul dezinstalării pluginului %s:"
 
-#: application/controllers/PluginsController.php:317
+#: application/controllers/PluginsController.php:382
 msgid "No plugin name given."
 msgstr "Nu a fost dat niciun nume pentru plugin."
 
-#: application/controllers/PluginsController.php:330
+#: application/controllers/PluginsController.php:395
 #, php-format
 msgid "The plugin %s must be installed."
 msgstr "Pluginul %s trebuie instalat."
 
-#: application/controllers/SettingsController.php:44
+#: application/controllers/SettingsController.php:52
 msgid "The general settings have been updated."
 msgstr "Setările generale au fost actualizate."
 
-#: application/controllers/SettingsController.php:76
+#: application/controllers/SettingsController.php:85
 msgid "The security settings have been updated."
 msgstr "Setările de securitate au fost actualizate."
 
-#: application/controllers/SettingsController.php:95
+#: application/controllers/SettingsController.php:114
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
 msgstr "Ai modificat care resurse să fie regăsite de Omeka. Reindexați resursele utilizând formularul de mai jos."
 
-#: application/controllers/SettingsController.php:102
+#: application/controllers/SettingsController.php:121
 msgid ""
 "Indexing records. This may take a while. You may continue administering your"
 " site."
 msgstr "Indexez resurse. E posibil să dureze. Poți merge mai departe cu administrarea între timp."
 
-#: application/controllers/SettingsController.php:131
+#: application/controllers/SettingsController.php:156
 msgid "The item type elements were successfully changed!"
 msgstr "Elementele pentru tipul de resursă au fost modificate fără probleme!"
 
-#: application/controllers/SettingsController.php:150
+#: application/controllers/SettingsController.php:183
 msgid "The API configuration was successfully changed!"
 msgstr "Configurarea API-ului a fost modificată cu succes!"
 
-#: application/controllers/SettingsController.php:176
+#: application/controllers/SettingsController.php:206
 msgid "The ImageMagick directory path works."
 msgstr "Calea către ImageMagick funcționează."
 
-#: application/controllers/SettingsController.php:177
+#: application/controllers/SettingsController.php:207
 msgid "The ImageMagick directory path does not work."
 msgstr "Calea către ImageMagick nu funcționează."
 
-#: application/controllers/TagsController.php:35
-msgid "You have to be logged in to edit tags!"
-msgstr "Trebuie să fii logat pentru a edita etichetele!"
-
-#: application/controllers/TagsController.php:64
-#, php-format
-msgid "Tag named \"%1$s\" was successfully renamed to \"%2$s\"."
-msgstr "Eticheta numită \"%1$s\" s fost redenumită în \"%2$s\" fără probleme."
-
-#: application/controllers/TagsController.php:91
+#: application/controllers/TagsController.php:48
 msgid "Invalid tagType given."
 msgstr "Ai dat un tagType eronat."
 
-#: application/controllers/ThemesController.php:25
+#: application/controllers/ThemesController.php:28
 msgid "Invalid form submission."
 msgstr "A fost trimis un formular nevalid."
 
-#: application/controllers/ThemesController.php:33
+#: application/controllers/ThemesController.php:36
 msgid "You have chosen an illegal theme name. Please select another theme."
 msgstr "Ai ales o denumire nevalidă pentru numele temei. Selectează o altă temă."
 
-#: application/controllers/ThemesController.php:40
+#: application/controllers/ThemesController.php:43
 #, php-format
 msgid "This theme requires a newer version of Omeka (%s)."
 msgstr "Această temă cere o nouă versiune Omeka (%s)."
 
-#: application/controllers/ThemesController.php:54
+#: application/controllers/ThemesController.php:57
 msgid "The theme has been successfully changed."
 msgstr "Tema a fost modificată fără probleme."
 
-#: application/controllers/ThemesController.php:81
+#: application/controllers/ThemesController.php:84
 msgid "The theme settings were successfully saved!"
 msgstr "Setările temei au fost salvate fără probleme!"
-
-#: application/controllers/ThemesController.php:84
-msgid "There was an error on the form. Please try again."
-msgstr "Există o eroare în formular. Încearcă din nou."
 
 #: application/controllers/UpgradeController.php:50
 msgid "SQL error in migration: "
@@ -2323,7 +2360,7 @@ msgstr "Urmează acest link pentru a reseta parola:"
 
 #: application/controllers/UsersController.php:110
 #: application/controllers/UsersController.php:113
-#: application/controllers/UsersController.php:380
+#: application/controllers/UsersController.php:385
 #, php-format
 msgid "%s Administrator"
 msgstr "%s Administrator"
@@ -2349,52 +2386,53 @@ msgstr "Parolă: această parolă nu se potrivește."
 msgid "You may now log in to Omeka."
 msgstr "Acum te poți loga la Omeka."
 
-#: application/controllers/UsersController.php:171
+#: application/controllers/UsersController.php:168
+#: application/controllers/UsersController.php:236
+#: application/controllers/UsersController.php:287
+msgid "There was an invalid entry on the form. Please try again."
+msgstr "Există o informației nevalidă în formular. Încearcă din nou."
+
+#: application/controllers/UsersController.php:176
 #, php-format
 msgid "The user \"%s\" was successfully added!"
 msgstr "Utilizatorul \"%s\" a fost adăugat cu succes!"
 
-#: application/controllers/UsersController.php:175
+#: application/controllers/UsersController.php:180
 #, php-format
 msgid "The user \"%s\" was added, but the activation email could not be sent."
 msgstr "Utilizatorul \"%s\" a fost adăugat dar emailul pentru activare nu a putut fi trimis."
 
-#: application/controllers/UsersController.php:213
+#: application/controllers/UsersController.php:218
 msgid "User activation email has been sent."
 msgstr "Emailul pentru activare a fost trimis"
 
-#: application/controllers/UsersController.php:215
+#: application/controllers/UsersController.php:220
 msgid "User activation email could not be sent."
 msgstr "Nu a putut fi trimis un email de confirmare."
 
-#: application/controllers/UsersController.php:231
-#: application/controllers/UsersController.php:282
-msgid "There was an invalid entry on the form. Please try again."
-msgstr "Există o informației nevalidă în formular. Încearcă din nou."
-
-#: application/controllers/UsersController.php:253
+#: application/controllers/UsersController.php:258
 #, php-format
 msgid "The user %s was successfully changed!"
 msgstr "Utilizatorul %s a fost modificat fără probleme!"
 
-#: application/controllers/UsersController.php:289
+#: application/controllers/UsersController.php:294
 msgid "Password changed!"
 msgstr "Parola a fost modificată!"
 
-#: application/controllers/UsersController.php:311
+#: application/controllers/UsersController.php:316
 msgid "A new API key was successfully created."
 msgstr "A fost creată o cheie API fără probleme."
 
-#: application/controllers/UsersController.php:318
+#: application/controllers/UsersController.php:323
 msgid "An existing API key was successfully rescinded."
 msgstr "O cheie API existentă a fost revocată fără probleme."
 
-#: application/controllers/UsersController.php:345
+#: application/controllers/UsersController.php:350
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
 msgstr "Utilizatorul \"%s\" a fost șters fără probleme!"
 
-#: application/controllers/UsersController.php:351
+#: application/controllers/UsersController.php:356
 #, php-format
 msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
@@ -2402,23 +2440,23 @@ msgid ""
 "this user."
 msgstr "%s vor fi șterse din sistem. Resursele, colecțiile și etichetele create de acest utilizator vor rămâne în sistem, dar nu vor mai putea fi asociate cu acest utilizator."
 
-#: application/controllers/UsersController.php:376
+#: application/controllers/UsersController.php:381
 msgid "Welcome!"
 msgstr "Bine ai venit!"
 
-#: application/controllers/UsersController.php:378
+#: application/controllers/UsersController.php:383
 #, php-format
 msgid ""
 "Your account for the %s repository has been created. Please click the "
 "following link to activate your account:"
 msgstr "Contul pentru colecția digitală  %s a fost creat. Apasă pe linkul următor pentru a activa contul:"
 
-#: application/controllers/UsersController.php:381
+#: application/controllers/UsersController.php:386
 #, php-format
 msgid "Activate your account with the %s repository"
 msgstr "Activează-ți contrul propriu pentru colecția digitală %s"
 
-#: application/controllers/UsersController.php:476
+#: application/controllers/UsersController.php:481
 msgid "Login information incorrect. Please try again."
 msgstr "Informații incorecte la logare. Încearcă încă o dată."
 
@@ -2477,11 +2515,11 @@ msgstr "Arată elementele goale"
 msgid "Show Element Set Headings"
 msgstr "Afișează titlurile Setului de Elemente"
 
-#: application/forms/AppearanceSettings.php:71
+#: application/forms/AppearanceSettings.php:75
 msgid "Derivative Size Constraints"
 msgstr "Contrângeri derivate legate de dimensiune "
 
-#: application/forms/AppearanceSettings.php:79
+#: application/forms/AppearanceSettings.php:83
 msgid "Display Settings"
 msgstr "Setări de afișate"
 
@@ -2630,7 +2668,7 @@ msgstr "Numele tipului de resursă."
 msgid "The description of the item type."
 msgstr "Descrierea tipului de resursă."
 
-#: application/forms/ItemTypes.php:188 application/forms/ItemTypes.php:197
+#: application/forms/ItemTypes.php:173 application/forms/ItemTypes.php:182
 #, php-format
 msgid "The item type cannot have more than one \"%s\" element."
 msgstr "Tipul de resursă nu poate avea mai mult de o resursă „%s”. "
@@ -2647,32 +2685,32 @@ msgstr "Introdu o parolă!"
 msgid "Remember Me?"
 msgstr "Ține-mă minte!"
 
-#: application/forms/Navigation.php:156
+#: application/forms/Navigation.php:162
 msgid "[Default]"
 msgstr "[Default]"
 
-#: application/forms/Navigation.php:162
+#: application/forms/Navigation.php:168
 msgid "Select a Homepage"
 msgstr "Selectează o pagină Home"
 
-#: application/forms/Navigation.php:244
+#: application/forms/Navigation.php:250
 msgid "Cannot find parent navigation page."
 msgstr "Nu pot găsi pagina de navigare părinte."
 
-#: application/forms/Navigation.php:325
+#: application/forms/Navigation.php:331
 msgid "All navigation links must have URIs."
 msgstr "Toate linkurile pentru navigare trebuie să aibe URIuri"
 
-#: application/forms/Navigation.php:338
+#: application/forms/Navigation.php:344
 msgid "All navigation links must have different URIs."
 msgstr "Toate linkurile de navigare trebuie să aibe URI-uri diferite."
 
-#: application/forms/Navigation.php:344
+#: application/forms/Navigation.php:350
 #, php-format
 msgid "Invalid URI for \"%s\" navigation link:  \"%s\""
 msgstr "URI nevalid pentru link de navigare \"%s\": \"%s\""
 
-#: application/forms/Navigation.php:377
+#: application/forms/Navigation.php:383
 msgid "Navigation links that have undeleteable sublinks cannot be deleted."
 msgstr "Linkuri de navigare care au sublinkuri care nu pot fi șterse."
 
@@ -2776,15 +2814,15 @@ msgstr "Atributele HTML permise"
 msgid "List of allowed HTML attributes in form input"
 msgstr "Lista atributelor HTML permise în formularul pentru introducere"
 
-#: application/forms/SecuritySettings.php:94
+#: application/forms/SecuritySettings.php:98
 msgid "File Validation"
 msgstr "Validarea fișierului"
 
-#: application/forms/SecuritySettings.php:102
+#: application/forms/SecuritySettings.php:106
 msgid "Captcha"
 msgstr "Captcha"
 
-#: application/forms/SecuritySettings.php:111
+#: application/forms/SecuritySettings.php:115
 msgid "HTML Filtering"
 msgstr "Filtrare HTML"
 
@@ -2894,51 +2932,6 @@ msgstr "Pluginul  \"%s\" trebuie instalat și are noi fișiere gata să fie actu
 msgid "Plugin must have a valid directory name before it can be installed."
 msgstr "Pluginul trebuie să aibe un nume de director valid înainte de a-l instala."
 
-#: application/libraries/Omeka/Plugin/Loader.php:112
-#, php-format
-msgid "Plugin named '%s' has already been loaded/registered."
-msgstr "Pluginul %s a fost deja instalat/înregistrat."
-
-#: application/libraries/Omeka/Plugin/Loader.php:153
-#, php-format
-msgid "The %s plugin could not be loaded."
-msgstr "Pluginul %s nu a putut fi încărcat."
-
-#: application/libraries/Omeka/Plugin/Loader.php:174
-#, php-format
-msgid "The required plugin '%s' could not be found."
-msgstr "Pluginul cerut, '%s' nu a fost găsit. "
-
-#: application/libraries/Omeka/Plugin/Loader.php:247
-#, php-format
-msgid "'%s' has no valid bootstrap file."
-msgstr "'%s' nu are un fișier de bootstrap valid."
-
-#: application/libraries/Omeka/Plugin/Loader.php:250
-#, php-format
-msgid "'%s' has not been installed."
-msgstr "'%s' nu a fost instalat."
-
-#: application/libraries/Omeka/Plugin/Loader.php:253
-#, php-format
-msgid "'%s' has not been activated."
-msgstr "'%s' nu a fost activat."
-
-#: application/libraries/Omeka/Plugin/Loader.php:256
-#, php-format
-msgid "'%s' requires a newer version of Omeka."
-msgstr "'%s' necesită o nouă versiune de Omeka."
-
-#: application/libraries/Omeka/Plugin/Loader.php:261
-#, php-format
-msgid "'%s' must be upgraded to the new version before it can be loaded."
-msgstr "'%s' trebuie să fie actualizate la o nouă versiune înainte de a fi încărcat."
-
-#: application/libraries/Omeka/Plugin/Loader.php:264
-#, php-format
-msgid "'%s' cannot be loaded twice."
-msgstr "'%s' nu poate fi încărcat de două ori."
-
 #: application/libraries/Omeka/Record/AbstractRecord.php:349
 #, php-format
 msgid "'%s' is an invalid special value."
@@ -2948,81 +2941,81 @@ msgstr "'%s' este o valoare specială nevalidă"
 msgid "An invalid value was detected during record iteration."
 msgstr "A fost detectată o valoare nevalidă în timpul iterării resurselor."
 
-#: application/libraries/globals.php:417
+#: application/libraries/globals.php:410
 msgid "File"
 msgstr "Fișier"
 
-#: application/libraries/globals.php:475
+#: application/libraries/globals.php:468
 msgid "Keyword"
 msgstr "Cuvânt cheie"
 
-#: application/libraries/globals.php:476
+#: application/libraries/globals.php:469
 msgid "Boolean"
 msgstr "Boolean"
 
-#: application/libraries/globals.php:477
+#: application/libraries/globals.php:470
 msgid "Exact match"
 msgstr "Potrivire exactă"
 
-#: application/libraries/globals.php:1238
-#: application/libraries/globals.php:1259
+#: application/libraries/globals.php:1234
+#: application/libraries/globals.php:1255
 #, php-format
 msgid "Could not find file %s!"
 msgstr "Nu pot găsi fișierul %s!"
 
-#: application/libraries/globals.php:1276
+#: application/libraries/globals.php:1272
 msgid "No featured collections are available."
-msgstr "Nu există colecții evidențiate."
+msgstr "Nu există colecții prezentate."
 
-#: application/libraries/globals.php:1569
+#: application/libraries/globals.php:1564
 msgid "Select Below "
 msgstr "Selectează de mai jos"
 
-#: application/libraries/globals.php:1611
+#: application/libraries/globals.php:1607
 msgid "Omeka RSS Feed"
 msgstr "Flux RSS Omeka"
 
-#: application/libraries/globals.php:1612
+#: application/libraries/globals.php:1608
 msgid "Omeka Atom Feed"
 msgstr "Flux Atom Omeka"
 
-#: application/libraries/globals.php:2251
+#: application/libraries/globals.php:2264
 msgid "No recent items available."
 msgstr "Nu sunt disponibile resurse recente."
 
-#: application/libraries/globals.php:2277
+#: application/libraries/globals.php:2290
 msgid "No featured items are available."
-msgstr "Nu sunt disponibile resurse evidențiate."
+msgstr "Nu sunt disponibile resurse prezentate."
 
-#: application/libraries/globals.php:2332
+#: application/libraries/globals.php:2349
 msgid "View"
 msgstr "Vezi"
 
-#: application/libraries/globals.php:2394
+#: application/libraries/globals.php:2411
 msgid "No Collection"
 msgstr "Nicio colecție"
 
-#: application/libraries/globals.php:2509
+#: application/libraries/globals.php:2529
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2526
+#: application/libraries/globals.php:2546
 msgid "Next Item &rarr;"
 msgstr "Următoarea resursă &rarr;"
 
-#: application/libraries/globals.php:2546
+#: application/libraries/globals.php:2566
 msgid "&larr; Previous Item"
 msgstr "&larr; Resursa anterioară"
 
-#: application/libraries/globals.php:2724
+#: application/libraries/globals.php:2747
 msgid "Browse All"
 msgstr "Treci prin toate"
 
-#: application/libraries/globals.php:2729
+#: application/libraries/globals.php:2752
 msgid "Browse by Tag"
 msgstr "Răsfoiește după etichetă"
 
-#: application/libraries/globals.php:3002
+#: application/libraries/globals.php:3021
 msgid "No tags are available."
 msgstr "Nu există etichete."
 
@@ -3072,11 +3065,11 @@ msgstr "Toate resursele text trebuie să aibe un anumit tip de resursă."
 msgid "Invalid element ID."
 msgstr "ID de resursă nevalid."
 
-#: application/models/File.php:241
+#: application/models/File.php:235
 msgid "Cannot get the local path for a stored file."
 msgstr "Nu pot obține calea locală pentru un fișier introdus."
 
-#: application/models/File.php:458
+#: application/models/File.php:452
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
 msgstr "\"%s\" nu este un fișier valid derivat."
@@ -3171,26 +3164,26 @@ msgid ""
 " or an element id to determine if an item type has an element."
 msgstr "Parametru nevalid. Funcția hasElement necesită, fie un element obiect sau in id de element pentru a determina dacă o resursă are un element."
 
-#: application/models/Mixin/ElementText.php:278
+#: application/models/Mixin/ElementText.php:292
 #, php-format
 msgid "There is no element \"%1$s\", \"%2$s\"!"
 msgstr "Nu există elementul \"%1$s\", \"%2$s\"!"
 
-#: application/models/Mixin/ElementText.php:297
+#: application/models/Mixin/ElementText.php:311
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
 msgstr "Nu pot găsi un element cu un ID de „%s”!"
 
-#: application/models/Mixin/ElementText.php:416
+#: application/models/Mixin/ElementText.php:430
 msgid "Element texts are not formatted correctly!"
 msgstr "Textele cuprinse în elemente nu sunt formatate corepunzător!"
 
-#: application/models/Mixin/ElementText.php:562
+#: application/models/Mixin/ElementText.php:578
 #, php-format
 msgid "The \"%s\" field has at least one invalid value!"
 msgstr "Câmpul \"%s\" are cel puțin o valoare nevalidă!"
 
-#: application/models/Mixin/ElementText.php:632
+#: application/models/Mixin/ElementText.php:648
 msgid "Cannot save element text for records that are not yet persistent!"
 msgstr "Nu pot salva textul elementului pentru înregistrările care nu sunt încă fixate!"
 
@@ -3202,12 +3195,12 @@ msgstr "Fiecare opțiune trebui să aibe un nume unic."
 msgid "Names of plugins must not be blank"
 msgstr "Numele pluginurilor nu trebuie să fie goale"
 
-#: application/models/Table/Collection.php:77
+#: application/models/Table/Collection.php:80
 #, php-format
 msgid "[Untitled] #%s"
 msgstr "[Fără nume] #%s"
 
-#: application/models/Table/Item.php:164
+#: application/models/Table/Item.php:123
 msgid "Invalid search type given!"
 msgstr "A fost introdus un tip nevalid pentru căutare!"
 
@@ -3396,12 +3389,12 @@ msgstr "Sortează după: "
 msgid "View the items in %s"
 msgstr "Vezi resursele din %s"
 
-#: application/views/scripts/collections/show.php:15
+#: application/views/scripts/collections/show.php:12
 #, php-format
 msgid "Items in the %s Collection"
 msgstr "Resursele din colecția %s"
 
-#: application/views/scripts/collections/show.php:40
+#: application/views/scripts/collections/show.php:37
 msgid "There are currently no items within this collection."
 msgstr "În acest moment nu există resurse în această colecție."
 
@@ -3476,11 +3469,11 @@ msgstr "Pentru a vedea mai multe despre această eroare, vezi pagina Omeka Codex
 
 #: application/views/scripts/index.php:10
 msgid "Featured Item"
-msgstr "Resursă în prim-plan"
+msgstr "Resursă prezentată"
 
 #: application/views/scripts/index.php:18
 msgid "Featured Collection"
-msgstr "Colecții evidențiate"
+msgstr "Colecție prezentată"
 
 #: application/views/scripts/index.php:42
 msgid "View All Items"
@@ -3521,11 +3514,6 @@ msgstr "Mergi la setările pentru căutări pentru a selecta tipurile de resurse
 #: application/views/scripts/search/search-form.php:19
 msgid "Advanced Search (Items only)"
 msgstr "Căutare avansată (doar resurse)"
-
-#: application/views/scripts/users/activate.php:8
-#, php-format
-msgid "Hello %s. Your username is %s"
-msgstr "Bună %s. Numele de utilizator este %s"
 
 #: application/views/scripts/users/login.php:9
 msgid "Go to Home Page"

@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2014-06-09 19:07+0000\n"
+"PO-Revision-Date: 2015-02-24 17:00+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/omeka/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -342,15 +342,15 @@ msgid "Add a Link to the Navigation"
 msgstr "给导航页添加链接"
 
 #: admin/themes/default/appearance/edit-navigation.php:21
-#: admin/themes/default/appearance/edit-navigation.php:37
+#: admin/themes/default/appearance/edit-navigation.php:41
 #: admin/themes/default/users/api-keys.php:40
-#: application/forms/Navigation.php:132
+#: application/forms/Navigation.php:138
 msgid "Label"
 msgstr "标签"
 
 #: admin/themes/default/appearance/edit-navigation.php:23
-#: admin/themes/default/appearance/edit-navigation.php:38
-#: application/forms/Navigation.php:133
+#: admin/themes/default/appearance/edit-navigation.php:42
+#: application/forms/Navigation.php:139
 msgid "URL"
 msgstr "URL"
 
@@ -363,21 +363,27 @@ msgstr "添加链接"
 #: admin/themes/default/collections/edit.php:22
 #: admin/themes/default/element-sets/edit.php:41
 #: admin/themes/default/files/edit.php:35
+#: admin/themes/default/item-types/edit.php:18
 #: admin/themes/default/items/batch-edit.php:130
 #: admin/themes/default/items/edit.php:19
 #: admin/themes/default/plugins/config.php:14
-#: admin/themes/default/settings/edit-api.php:81
-#: admin/themes/default/settings/edit-item-type-elements.php:38
-#: admin/themes/default/settings/edit-search.php:40
+#: admin/themes/default/settings/edit-api.php:82
+#: admin/themes/default/settings/edit-item-type-elements.php:39
+#: admin/themes/default/settings/edit-search.php:41
 #: admin/themes/default/settings/edit-security.php:15
 #: admin/themes/default/settings/edit-settings.php:15
 #: admin/themes/default/themes/config.php:16
-#: admin/themes/default/users/edit.php:21 application/forms/ItemTypes.php:169
+#: admin/themes/default/users/edit.php:21
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:73
 msgid "Save Changes"
 msgstr "保存更改"
 
-#: admin/themes/default/appearance/edit-navigation.php:39
+#: admin/themes/default/appearance/edit-navigation.php:35
+#: admin/themes/default/appearance/reset-navigation-confirm.php:2
+msgid "Reset Navigation"
+msgstr ""
+
+#: admin/themes/default/appearance/edit-navigation.php:43
 #: admin/themes/default/collections/edit.php:23
 #: admin/themes/default/collections/show.php:34
 #: admin/themes/default/files/show.php:28
@@ -387,7 +393,7 @@ msgstr "保存更改"
 msgid "View Public Page"
 msgstr "浏览公开页"
 
-#: admin/themes/default/appearance/edit-navigation.php:40
+#: admin/themes/default/appearance/edit-navigation.php:44
 #: admin/themes/default/collections/edit.php:24
 #: admin/themes/default/collections/show.php:36
 #: admin/themes/default/element-sets/browse.php:29
@@ -407,6 +413,18 @@ msgstr "浏览公开页"
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:83
 msgid "Delete"
 msgstr "删除"
+
+#: admin/themes/default/appearance/reset-navigation-confirm.php:9
+#: admin/themes/default/common/delete-confirm.php:10
+#: application/views/scripts/common/delete-confirm.php:12
+msgid "Are you sure?"
+msgstr "您是否确定执行操作？"
+
+#: admin/themes/default/appearance/reset-navigation-confirm.php:10
+msgid ""
+"All customizations will be lost. Order and labels will revert to Omeka "
+"defaults. Custom links will be lost."
+msgstr ""
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:11
@@ -527,24 +545,11 @@ msgstr "您没有馆藏"
 msgid "Get started by adding your first collection."
 msgstr "从添加您的第一个馆藏开始。"
 
-#: admin/themes/default/collections/edit.php:3
-#: admin/themes/default/collections/show.php:3
-#: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/libraries/globals.php:2574
-#: application/views/scripts/collections/show.php:4
-#: application/views/scripts/functions.php:14
-msgid "[Untitled]"
-msgstr "[无题名]"
-
 #: admin/themes/default/collections/edit.php:8
+#: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Edit Collection #%s"
 msgstr "编辑馆藏#%s"
-
-#: admin/themes/default/collections/show.php:8
-#, php-format
-msgid "Collection #%s"
-msgstr "馆藏#%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
@@ -591,6 +596,10 @@ msgstr "导航"
 msgid "Settings"
 msgstr "设置"
 
+#: admin/themes/default/common/content-nav.php:1
+msgid "Main Menu"
+msgstr ""
+
 #: admin/themes/default/common/content-nav.php:5
 #: admin/themes/default/index.php:2
 msgid "Dashboard"
@@ -624,11 +633,6 @@ msgstr "标签"
 msgid "Delete %s"
 msgstr "删除%s"
 
-#: admin/themes/default/common/delete-confirm.php:10
-#: application/views/scripts/common/delete-confirm.php:12
-msgid "Are you sure?"
-msgstr "您是否确定执行操作？"
-
 #: admin/themes/default/common/footer.php:6
 #: admin/themes/default/common/login-footer.php:7
 msgid "Powered by Omeka"
@@ -654,6 +658,10 @@ msgstr "版本%s"
 msgid "System Information"
 msgstr "系统信息"
 
+#: admin/themes/default/common/global-nav.php:1
+msgid "Manage Site"
+msgstr ""
+
 #: admin/themes/default/common/global-nav.php:5
 #: admin/themes/default/plugins/browse.php:2
 msgid "Plugins"
@@ -669,6 +677,11 @@ msgstr "用户"
 #: application/views/scripts/common/admin-bar.php:11
 msgid "Omeka Admin"
 msgstr "Omeka管理"
+
+#: admin/themes/default/common/header.php:40
+#: application/views/scripts/common/header.php:32
+msgid "Skip to main content"
+msgstr ""
 
 #: admin/themes/default/common/header.php:60
 #: application/views/scripts/common/admin-bar.php:7
@@ -691,7 +704,9 @@ msgid "Security"
 msgstr "安全"
 
 #: admin/themes/default/common/settings-nav.php:16
+#: admin/themes/default/search/index.php:2
 #: application/views/helpers/SearchForm.php:34
+#: application/views/scripts/search/index.php:2
 #: application/views/scripts/search/search-form.php:2
 #: application/views/scripts/search/search-form.php:22
 msgid "Search"
@@ -710,7 +725,7 @@ msgid "API"
 msgstr ""
 
 #: admin/themes/default/common/users-nav.php:11
-#: application/forms/ChangePassword.php:78
+#: application/forms/ChangePassword.php:80
 msgid "Change Password"
 msgstr "修改密码"
 
@@ -812,7 +827,7 @@ msgid "File #%s"
 msgstr "文件#%s"
 
 #: admin/themes/default/files/show.php:35
-#: application/libraries/globals.php:416
+#: application/libraries/globals.php:409
 msgid "Item"
 msgstr "条目"
 
@@ -951,7 +966,7 @@ msgid "Element Description"
 msgstr "元素描述"
 
 #: admin/themes/default/item-types/add.php:2
-#: application/forms/ItemTypes.php:161
+#: admin/themes/default/item-types/add.php:11
 msgid "Add Item Type"
 msgstr "添加条目类型"
 
@@ -1042,7 +1057,7 @@ msgstr "添加条目"
 #: admin/themes/default/items/browse.php:90
 #: admin/themes/default/items/edit.php:41
 #: admin/themes/default/items/show.php:57
-#: application/libraries/globals.php:418
+#: application/libraries/globals.php:411
 #: application/views/scripts/items/show.php:18
 msgid "Collection"
 msgstr "馆藏"
@@ -1169,8 +1184,8 @@ msgstr "浏览条目"
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2350
-#: application/libraries/globals.php:2734
+#: application/libraries/globals.php:2367
+#: application/libraries/globals.php:2757
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "搜索条目"
@@ -1216,6 +1231,11 @@ msgstr "修改您的搜索"
 #, php-format
 msgid "Would you like to %s?"
 msgstr "您想要%s吗？"
+
+#: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
+#: application/views/scripts/functions.php:14
+msgid "[Untitled]"
+msgstr "[无题名]"
 
 #: admin/themes/default/items/edit.php:8
 #, php-format
@@ -1458,7 +1478,7 @@ msgstr "由%s"
 
 #: admin/themes/default/plugins/browse.php:65
 #: admin/themes/default/themes/browse.php:23
-#: admin/themes/default/themes/browse.php:49
+#: admin/themes/default/themes/browse.php:48
 msgid "Get support"
 msgstr ""
 
@@ -1471,31 +1491,31 @@ msgstr "您有了新版本的%s。请升级！"
 msgid "Upgrade"
 msgstr "升级"
 
-#: admin/themes/default/plugins/browse.php:100
+#: admin/themes/default/plugins/browse.php:101
 msgid "Configure"
 msgstr "配置"
 
-#: admin/themes/default/plugins/browse.php:106
+#: admin/themes/default/plugins/browse.php:107
 msgid "Deactivate"
 msgstr "禁用"
 
-#: admin/themes/default/plugins/browse.php:106
-#: admin/themes/default/users/activate.php:31
+#: admin/themes/default/plugins/browse.php:107
+#: admin/themes/default/users/activate.php:30
 #: application/views/scripts/users/activate.php:27
 msgid "Activate"
 msgstr "激活"
 
-#: admin/themes/default/plugins/browse.php:116
+#: admin/themes/default/plugins/browse.php:118
 #: admin/themes/default/plugins/confirm-uninstall.php:16
 msgid "Uninstall"
 msgstr "卸载"
 
-#: admin/themes/default/plugins/browse.php:129
+#: admin/themes/default/plugins/browse.php:131
 #: application/forms/Install.php:178
 msgid "Install"
 msgstr "安装"
 
-#: admin/themes/default/plugins/browse.php:140
+#: admin/themes/default/plugins/browse.php:143
 msgid ""
 "You do not have any plugins installed. Add them to the plugins directory to "
 "see them listed here."
@@ -1525,14 +1545,9 @@ msgid "or"
 msgstr "或"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:17
-#: admin/themes/default/settings/edit-item-type-elements.php:50
+#: admin/themes/default/settings/edit-item-type-elements.php:51
 msgid "Cancel"
 msgstr "取消"
-
-#: admin/themes/default/search/index.php:2
-#: application/views/scripts/search/index.php:2
-msgid "Search Omeka "
-msgstr "搜索Omeka"
 
 #: admin/themes/default/search/index.php:12
 #: admin/themes/default/tags/browse.php:18
@@ -1592,18 +1607,18 @@ msgid ""
 "Customize the element descriptions below. To re-order the elements, %s."
 msgstr "定制下面的元素描述。要重新排序元素，%s。"
 
-#: admin/themes/default/settings/edit-item-type-elements.php:42
+#: admin/themes/default/settings/edit-item-type-elements.php:43
 msgid "Confirm Delete"
 msgstr "确认删除"
 
-#: admin/themes/default/settings/edit-item-type-elements.php:43
+#: admin/themes/default/settings/edit-item-type-elements.php:44
 msgid ""
 "Are you sure you want to delete the selected item type elements from the "
 "database? You will lose all text related to the selected elements. This "
 "cannot be undone."
 msgstr "你确认要从数据库中删除所选定的条目类型元素吗？您将丢失所有与选定元素相关的文本。本操作不能被撤销。"
 
-#: admin/themes/default/settings/edit-item-type-elements.php:50
+#: admin/themes/default/settings/edit-item-type-elements.php:51
 msgid "Ok"
 msgstr "可以"
 
@@ -1616,7 +1631,7 @@ msgid "Customize which types of records will be searchable in Omeka."
 msgstr "定制在Omeka中哪些类型的记录可以被搜索。"
 
 #: admin/themes/default/settings/edit-search.php:23
-#: admin/themes/default/settings/edit-search.php:41
+#: admin/themes/default/settings/edit-search.php:42
 msgid "Index Records"
 msgstr "索引记录"
 
@@ -1703,7 +1718,7 @@ msgid "Record Types"
 msgstr ""
 
 #: admin/themes/default/themes/browse.php:15
-#: admin/themes/default/themes/browse.php:43
+#: admin/themes/default/themes/browse.php:42
 #, php-format
 msgid "Screenshot for %s Theme"
 msgstr "%s主题截图"
@@ -1717,7 +1732,7 @@ msgid "Current Theme"
 msgstr "当前主题"
 
 #: admin/themes/default/themes/browse.php:21
-#: admin/themes/default/themes/browse.php:48
+#: admin/themes/default/themes/browse.php:47
 #, php-format
 msgid "By %s"
 msgstr "按照%s"
@@ -1730,7 +1745,7 @@ msgid ""
 "target=\"_blank\">design your own</a>!"
 msgstr "要添加新主题，请从<a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Omeka主题目录</a>下载，或者<a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">设计您自己的主题</a>！"
 
-#: admin/themes/default/themes/browse.php:45
+#: admin/themes/default/themes/browse.php:44
 msgid "Use this theme"
 msgstr "使用这个主题"
 
@@ -1789,13 +1804,19 @@ msgstr "返回控制面板"
 msgid "User Activation"
 msgstr "用户激活"
 
-#: admin/themes/default/users/activate.php:18
+#: admin/themes/default/users/activate.php:12
+#: application/views/scripts/users/activate.php:8
+#, php-format
+msgid "Hello %s. Your username is %s"
+msgstr ""
+
+#: admin/themes/default/users/activate.php:17
 #: application/forms/ResetPassword.php:23
 #: application/views/scripts/users/activate.php:14
 msgid "Create a Password"
 msgstr "创建密码"
 
-#: admin/themes/default/users/activate.php:24 application/forms/Install.php:71
+#: admin/themes/default/users/activate.php:23 application/forms/Install.php:71
 #: application/forms/ResetPassword.php:44
 #: application/views/scripts/users/activate.php:20
 msgid "Re-type the Password"
@@ -1850,6 +1871,10 @@ msgstr ""
 
 #: admin/themes/default/users/api-keys.php:44
 msgid "Rescind"
+msgstr ""
+
+#: admin/themes/default/users/api-keys.php:60
+msgid "Update API Keys"
 msgstr ""
 
 #: admin/themes/default/users/browse.php:2
@@ -1948,8 +1973,8 @@ msgstr "外观设定已更新。"
 #: application/controllers/AppearanceController.php:51
 #: application/controllers/ItemTypesController.php:35
 #: application/controllers/ItemTypesController.php:61
-#: application/controllers/SettingsController.php:47
-#: application/controllers/SettingsController.php:79
+#: application/controllers/SettingsController.php:55
+#: application/controllers/SettingsController.php:88
 #: install/views/scripts/index/index.phtml:17
 msgid "There were errors found in your form. Please edit and resubmit."
 msgstr "您的表单有错误。请编辑后再提交。"
@@ -1964,37 +1989,41 @@ msgid ""
 "  All changed values have been restored."
 msgstr "由于缺失或无效值，导航设定没有保存。所有改动值都被恢复了。"
 
-#: application/controllers/CollectionsController.php:74
+#: application/controllers/AppearanceController.php:97
+msgid "The navigation settings have been reset."
+msgstr ""
+
+#: application/controllers/CollectionsController.php:76
 #, php-format
 msgid "The collection \"%s\" was successfully added!"
 msgstr "馆藏\"%s\"添加成功！"
 
-#: application/controllers/CollectionsController.php:76
+#: application/controllers/CollectionsController.php:78
 #, php-format
 msgid "The collection #%s was successfully added!"
 msgstr "馆藏 #%s添加成功！"
 
-#: application/controllers/CollectionsController.php:84
+#: application/controllers/CollectionsController.php:86
 #, php-format
 msgid "The collection \"%s\" was successfully changed!"
 msgstr "馆藏\"%s\"修改成功！"
 
-#: application/controllers/CollectionsController.php:86
+#: application/controllers/CollectionsController.php:88
 #, php-format
 msgid "The collection #%s was successfully changed!"
 msgstr "馆藏 #%s修改成功！"
 
-#: application/controllers/CollectionsController.php:94
+#: application/controllers/CollectionsController.php:96
 #, php-format
 msgid "The collection \"%s\" was successfully deleted!"
 msgstr "馆藏\"%s\"删除成功！"
 
-#: application/controllers/CollectionsController.php:96
+#: application/controllers/CollectionsController.php:98
 #, php-format
 msgid "The collection #%s was successfully deleted!"
 msgstr "馆藏 #%s删除成功！"
 
-#: application/controllers/CollectionsController.php:104
+#: application/controllers/CollectionsController.php:106
 #, php-format
 msgid ""
 "This will delete the collection \"%s\" and its associated metadata. This "
@@ -2002,7 +2031,7 @@ msgid ""
 "to this collection in each item."
 msgstr "这将删除馆藏\"%s\"以及与其关联的元数据。这不会删除该馆藏中的任何条目，但是会删除每个条目中指向该馆藏的索引。"
 
-#: application/controllers/CollectionsController.php:108
+#: application/controllers/CollectionsController.php:110
 #, php-format
 msgid ""
 "This will delete the collection #%s and its associated metadata. This will "
@@ -2016,7 +2045,23 @@ msgid ""
 "set. Items will lose all metadata that is specific to this element set."
 msgstr "这将删除元素集以及赋予该元素集的所有元素。条目将失去该元素集独有的所有元数据。"
 
-#: application/controllers/ElementSetsController.php:65
+#: application/controllers/ElementSetsController.php:53
+#: application/controllers/PluginsController.php:51
+#: application/controllers/PluginsController.php:79
+#: application/controllers/PluginsController.php:139
+#: application/controllers/PluginsController.php:190
+#: application/controllers/PluginsController.php:223
+#: application/controllers/PluginsController.php:337
+#: application/controllers/SettingsController.php:104
+#: application/controllers/SettingsController.php:140
+#: application/controllers/SettingsController.php:177
+#: application/controllers/ThemesController.php:87
+#: application/libraries/Omeka/Controller/AbstractActionController.php:183
+#: application/libraries/Omeka/Controller/AbstractActionController.php:224
+msgid "There was an error on the form. Please try again."
+msgstr "表单有个错误。请再次尝试。"
+
+#: application/controllers/ElementSetsController.php:72
 msgid "The element set was successfully changed!"
 msgstr "元素集合修改成功！"
 
@@ -2028,9 +2073,13 @@ msgstr "没有找到页面。"
 msgid "Access denied."
 msgstr "访问被拒绝了。"
 
-#: application/controllers/FilesController.php:64
+#: application/controllers/FilesController.php:66
 msgid "This will delete the file and its associated metadata."
 msgstr "这将删除该文件和相关元数据。"
+
+#: application/controllers/FilesController.php:72
+msgid "The file was successfully deleted."
+msgstr ""
 
 #: application/controllers/ItemTypesController.php:28
 #, php-format
@@ -2057,87 +2106,87 @@ msgid ""
 "your new item type."
 msgstr "条目类型\"%s\"添加成功！您现在可以向新条目类型添加元素。"
 
-#: application/controllers/ItemsController.php:85
-#: application/controllers/ItemsController.php:145
+#: application/controllers/ItemsController.php:89
+#: application/controllers/ItemsController.php:149
 msgid ""
 "The ImageMagick directory path has not been set. No derivative images will "
 "be created. If you would like Omeka to create derivative images, please set "
 "the path in Settings."
 msgstr ""
 
-#: application/controllers/ItemsController.php:94
+#: application/controllers/ItemsController.php:98
 #, php-format
 msgid "The item \"%s\" was successfully added!"
 msgstr "条目\"%s\"添加成功！"
 
-#: application/controllers/ItemsController.php:96
+#: application/controllers/ItemsController.php:100
 #, php-format
 msgid "The item #%s was successfully added!"
 msgstr "条目#%s添加成功！"
 
-#: application/controllers/ItemsController.php:104
+#: application/controllers/ItemsController.php:108
 #, php-format
 msgid "The item \"%s\" was successfully changed!"
 msgstr "条目\"%s\"修改成功！"
 
-#: application/controllers/ItemsController.php:106
+#: application/controllers/ItemsController.php:110
 #, php-format
 msgid "The item #%s was successfully changed!"
 msgstr "条目#%s修改成功！"
 
-#: application/controllers/ItemsController.php:114
+#: application/controllers/ItemsController.php:118
 #, php-format
 msgid "The item \"%s\" was successfully deleted!"
 msgstr "条目\"%s\"删除成功！"
 
-#: application/controllers/ItemsController.php:116
+#: application/controllers/ItemsController.php:120
 #, php-format
 msgid "The item #%s was successfully deleted!"
 msgstr "条目#%s删除成功！"
 
-#: application/controllers/ItemsController.php:124
+#: application/controllers/ItemsController.php:128
 #, php-format
 msgid ""
 "This will delete the item \"%s\" and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
 msgstr "这将删除条目\"%s\"以及和其关联的元数据。同时这也将删除所有与此条目关联的文件和文件元数据。"
 
-#: application/controllers/ItemsController.php:128
+#: application/controllers/ItemsController.php:132
 #, php-format
 msgid ""
 "This will delete the item #%s and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
 msgstr "这将删除条目#%s以及与其相关的元数据。同时这也将删除所有和该条目关联的文件和文件元数据。"
 
-#: application/controllers/ItemsController.php:255
+#: application/controllers/ItemsController.php:227
 msgid "You must choose some items to batch edit."
 msgstr "您必须选择一些条目进行批处理编辑。"
 
-#: application/controllers/ItemsController.php:299
+#: application/controllers/ItemsController.php:271
 msgid "User is not allowed to modify visibility of items."
 msgstr "用户不被允许修改条目的可见性。"
 
-#: application/controllers/ItemsController.php:304
+#: application/controllers/ItemsController.php:276
 msgid "User is not allowed to modify featured status of items."
 msgstr "用户不被允许修改条目的专题状态。"
 
-#: application/controllers/ItemsController.php:311
+#: application/controllers/ItemsController.php:283
 msgid "User is not allowed to delete selected items."
 msgstr "用户不被允许删除所选条目。"
 
-#: application/controllers/ItemsController.php:317
+#: application/controllers/ItemsController.php:289
 msgid "User is not allowed to edit selected items."
 msgstr "用户不被允许编辑所选条目。"
 
-#: application/controllers/ItemsController.php:322
+#: application/controllers/ItemsController.php:294
 msgid "User is not allowed to tag selected items."
 msgstr "用户不被允许标注所选条目。"
 
-#: application/controllers/ItemsController.php:356
+#: application/controllers/ItemsController.php:328
 msgid "The items were successfully deleted!"
 msgstr "条目删除成功！"
 
-#: application/controllers/ItemsController.php:358
+#: application/controllers/ItemsController.php:330
 msgid "The items were successfully changed!"
 msgstr "条目修改成功！"
 
@@ -2148,165 +2197,152 @@ msgid ""
 "hook(s)."
 msgstr "\"%s\"插件配置错误。配置或config_form钩子(hook)缺失。"
 
-#: application/controllers/PluginsController.php:52
+#: application/controllers/PluginsController.php:59
 #, php-format
 msgid "The %s plugin was successfully configured!"
 msgstr "%s插件配置成功！"
 
-#: application/controllers/PluginsController.php:70
+#: application/controllers/PluginsController.php:89
 #, php-format
 msgid "The %s plugin has already been installed."
 msgstr "%s插件已安装。"
 
-#: application/controllers/PluginsController.php:79
+#: application/controllers/PluginsController.php:99
 #, php-format
 msgid "The %s plugin was successfully installed!"
 msgstr "%s插件安装成功！"
 
-#: application/controllers/PluginsController.php:91
-#: application/controllers/PluginsController.php:96
+#: application/controllers/PluginsController.php:111
+#: application/controllers/PluginsController.php:116
 #, php-format
 msgid "The following error occurred while installing the %s plugin: "
 msgstr "%s插件安装时发生以下错误："
 
-#: application/controllers/PluginsController.php:124
+#: application/controllers/PluginsController.php:154
 #, php-format
 msgid "The following error occurred while activating the %s plugin: "
 msgstr "%s插件激活时发生以下错误："
 
-#: application/controllers/PluginsController.php:134
+#: application/controllers/PluginsController.php:164
 #, php-format
 msgid "The %s plugin was successfully activated!"
 msgstr "%s插件激活成功！"
 
-#: application/controllers/PluginsController.php:139
+#: application/controllers/PluginsController.php:169
 #, php-format
 msgid "The %s plugin was activated, but could not be loaded: "
 msgstr "%s插件已被激活，但无法载入："
 
-#: application/controllers/PluginsController.php:163
+#: application/controllers/PluginsController.php:204
 #, php-format
 msgid "The %s plugin was successfully deactivated!"
 msgstr "%s插件禁用成功！"
 
-#: application/controllers/PluginsController.php:168
+#: application/controllers/PluginsController.php:209
 #, php-format
 msgid "The following error occurred while deactivating the %s plugin: "
 msgstr "%s插件禁用时发生以下错误："
 
-#: application/controllers/PluginsController.php:187
+#: application/controllers/PluginsController.php:239
 #, php-format
 msgid "The %s plugin was successfully upgraded!"
 msgstr "%s插件升级成功！"
 
-#: application/controllers/PluginsController.php:196
-#: application/controllers/PluginsController.php:202
+#: application/controllers/PluginsController.php:248
+#: application/controllers/PluginsController.php:254
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
 msgstr "%s插件升级时发生以下错误："
 
-#: application/controllers/PluginsController.php:253
+#: application/controllers/PluginsController.php:310
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
 msgstr "在'%s'目录下找不到该插件！"
 
-#: application/controllers/PluginsController.php:262
+#: application/controllers/PluginsController.php:322
 msgid "You must confirm the uninstall before proceeding."
 msgstr "下一步之前您必须确认是否要卸载。"
 
-#: application/controllers/PluginsController.php:280
+#: application/controllers/PluginsController.php:345
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
 msgstr "%s插件卸载成功！"
 
-#: application/controllers/PluginsController.php:285
-#: application/controllers/PluginsController.php:290
+#: application/controllers/PluginsController.php:350
+#: application/controllers/PluginsController.php:355
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
 msgstr "%s插件卸载时发生以下错误："
 
-#: application/controllers/PluginsController.php:317
+#: application/controllers/PluginsController.php:382
 msgid "No plugin name given."
 msgstr "没有给定插件名。"
 
-#: application/controllers/PluginsController.php:330
+#: application/controllers/PluginsController.php:395
 #, php-format
 msgid "The plugin %s must be installed."
 msgstr "必须安装%s插件。"
 
-#: application/controllers/SettingsController.php:44
+#: application/controllers/SettingsController.php:52
 msgid "The general settings have been updated."
 msgstr "通用设置已更新。"
 
-#: application/controllers/SettingsController.php:76
+#: application/controllers/SettingsController.php:85
 msgid "The security settings have been updated."
 msgstr "安全设置已更新。"
 
-#: application/controllers/SettingsController.php:95
+#: application/controllers/SettingsController.php:114
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
 msgstr "您已经修改了在Omeka中哪些记录是可搜索的。请用下面的表格重新索引记录。"
 
-#: application/controllers/SettingsController.php:102
+#: application/controllers/SettingsController.php:121
 msgid ""
 "Indexing records. This may take a while. You may continue administering your"
 " site."
 msgstr "正在索引记录。这将需要一些时间。您可以继续管理您的网站。"
 
-#: application/controllers/SettingsController.php:131
+#: application/controllers/SettingsController.php:156
 msgid "The item type elements were successfully changed!"
 msgstr "条目类型元素修改成功！"
 
-#: application/controllers/SettingsController.php:150
+#: application/controllers/SettingsController.php:183
 msgid "The API configuration was successfully changed!"
 msgstr ""
 
-#: application/controllers/SettingsController.php:176
+#: application/controllers/SettingsController.php:206
 msgid "The ImageMagick directory path works."
 msgstr "ImageMagick目录路径是有效的。"
 
-#: application/controllers/SettingsController.php:177
+#: application/controllers/SettingsController.php:207
 msgid "The ImageMagick directory path does not work."
 msgstr "ImageMagick目录路径是无效的。"
 
-#: application/controllers/TagsController.php:35
-msgid "You have to be logged in to edit tags!"
-msgstr "您必须登录后才能编辑标签！"
-
-#: application/controllers/TagsController.php:64
-#, php-format
-msgid "Tag named \"%1$s\" was successfully renamed to \"%2$s\"."
-msgstr "\"%1$s\"标签成功改名为\"%2$s\"。"
-
-#: application/controllers/TagsController.php:91
+#: application/controllers/TagsController.php:48
 msgid "Invalid tagType given."
 msgstr "给定的tagType无效。"
 
-#: application/controllers/ThemesController.php:25
+#: application/controllers/ThemesController.php:28
 msgid "Invalid form submission."
 msgstr "表单提交无效。"
 
-#: application/controllers/ThemesController.php:33
+#: application/controllers/ThemesController.php:36
 msgid "You have chosen an illegal theme name. Please select another theme."
 msgstr "您选择了一个无效主题名字。请选择另一个主题。"
 
-#: application/controllers/ThemesController.php:40
+#: application/controllers/ThemesController.php:43
 #, php-format
 msgid "This theme requires a newer version of Omeka (%s)."
 msgstr "该主题要求新版本的Omeka (%s)。"
 
-#: application/controllers/ThemesController.php:54
+#: application/controllers/ThemesController.php:57
 msgid "The theme has been successfully changed."
 msgstr "主题修改成功。"
 
-#: application/controllers/ThemesController.php:81
+#: application/controllers/ThemesController.php:84
 msgid "The theme settings were successfully saved!"
 msgstr "主题配置保存成功！"
-
-#: application/controllers/ThemesController.php:84
-msgid "There was an error on the form. Please try again."
-msgstr "表单有个错误。请再次尝试。"
 
 #: application/controllers/UpgradeController.php:50
 msgid "SQL error in migration: "
@@ -2324,7 +2360,7 @@ msgstr "请点击链接重置您的密码："
 
 #: application/controllers/UsersController.php:110
 #: application/controllers/UsersController.php:113
-#: application/controllers/UsersController.php:380
+#: application/controllers/UsersController.php:385
 #, php-format
 msgid "%s Administrator"
 msgstr "%s管理员"
@@ -2350,52 +2386,53 @@ msgstr "密码：输入的密码不匹配。"
 msgid "You may now log in to Omeka."
 msgstr "您现在可以登录Omeka。"
 
-#: application/controllers/UsersController.php:171
+#: application/controllers/UsersController.php:168
+#: application/controllers/UsersController.php:236
+#: application/controllers/UsersController.php:287
+msgid "There was an invalid entry on the form. Please try again."
+msgstr "表单有一个无效输入。请再次尝试。"
+
+#: application/controllers/UsersController.php:176
 #, php-format
 msgid "The user \"%s\" was successfully added!"
 msgstr "用户\"%s\"添加成功！"
 
-#: application/controllers/UsersController.php:175
+#: application/controllers/UsersController.php:180
 #, php-format
 msgid "The user \"%s\" was added, but the activation email could not be sent."
 msgstr "添加了用户\"%s\"，但是无法送出激活电子邮件。"
 
-#: application/controllers/UsersController.php:213
+#: application/controllers/UsersController.php:218
 msgid "User activation email has been sent."
 msgstr ""
 
-#: application/controllers/UsersController.php:215
+#: application/controllers/UsersController.php:220
 msgid "User activation email could not be sent."
 msgstr ""
 
-#: application/controllers/UsersController.php:231
-#: application/controllers/UsersController.php:282
-msgid "There was an invalid entry on the form. Please try again."
-msgstr "表单有一个无效输入。请再次尝试。"
-
-#: application/controllers/UsersController.php:253
+#: application/controllers/UsersController.php:258
 #, php-format
 msgid "The user %s was successfully changed!"
 msgstr "用户\"%s\"修改成功！"
 
-#: application/controllers/UsersController.php:289
+#: application/controllers/UsersController.php:294
 msgid "Password changed!"
 msgstr "密码已修改！"
 
-#: application/controllers/UsersController.php:311
+#: application/controllers/UsersController.php:316
 msgid "A new API key was successfully created."
 msgstr ""
 
-#: application/controllers/UsersController.php:318
+#: application/controllers/UsersController.php:323
 msgid "An existing API key was successfully rescinded."
 msgstr ""
 
-#: application/controllers/UsersController.php:345
+#: application/controllers/UsersController.php:350
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
 msgstr "用户\"%s\"删除成功！"
 
-#: application/controllers/UsersController.php:351
+#: application/controllers/UsersController.php:356
 #, php-format
 msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
@@ -2403,23 +2440,23 @@ msgid ""
 "this user."
 msgstr "%s将会从系统中删除。由该用户创建的条目、馆藏和标签会保留在系统中，但是不再与该用户相关联。"
 
-#: application/controllers/UsersController.php:376
+#: application/controllers/UsersController.php:381
 msgid "Welcome!"
 msgstr "欢迎光临！"
 
-#: application/controllers/UsersController.php:378
+#: application/controllers/UsersController.php:383
 #, php-format
 msgid ""
 "Your account for the %s repository has been created. Please click the "
 "following link to activate your account:"
 msgstr "您在%s库中的账户已经建立。请点击下面的链接激活您的账户。"
 
-#: application/controllers/UsersController.php:381
+#: application/controllers/UsersController.php:386
 #, php-format
 msgid "Activate your account with the %s repository"
 msgstr "使用%s库来激活您的账户。"
 
-#: application/controllers/UsersController.php:476
+#: application/controllers/UsersController.php:481
 msgid "Login information incorrect. Please try again."
 msgstr "登录信息不正确。请再次尝试。"
 
@@ -2478,11 +2515,11 @@ msgstr "显示空元素"
 msgid "Show Element Set Headings"
 msgstr ""
 
-#: application/forms/AppearanceSettings.php:71
+#: application/forms/AppearanceSettings.php:75
 msgid "Derivative Size Constraints"
 msgstr "衍生尺寸限制"
 
-#: application/forms/AppearanceSettings.php:79
+#: application/forms/AppearanceSettings.php:83
 msgid "Display Settings"
 msgstr "显示设定"
 
@@ -2631,7 +2668,7 @@ msgstr "条目类型的名称。"
 msgid "The description of the item type."
 msgstr "条目类型的描述。"
 
-#: application/forms/ItemTypes.php:188 application/forms/ItemTypes.php:197
+#: application/forms/ItemTypes.php:173 application/forms/ItemTypes.php:182
 #, php-format
 msgid "The item type cannot have more than one \"%s\" element."
 msgstr "条目类型不能包含多于一个\"%s\"元素。"
@@ -2648,32 +2685,32 @@ msgstr "密码不能为空。"
 msgid "Remember Me?"
 msgstr "是否记住我？"
 
-#: application/forms/Navigation.php:156
+#: application/forms/Navigation.php:162
 msgid "[Default]"
 msgstr "【默认】"
 
-#: application/forms/Navigation.php:162
+#: application/forms/Navigation.php:168
 msgid "Select a Homepage"
 msgstr "选择一个主页"
 
-#: application/forms/Navigation.php:244
+#: application/forms/Navigation.php:250
 msgid "Cannot find parent navigation page."
 msgstr "无法找到上一层导航页。"
 
-#: application/forms/Navigation.php:325
+#: application/forms/Navigation.php:331
 msgid "All navigation links must have URIs."
 msgstr "所有导航链接必须有URI。"
 
-#: application/forms/Navigation.php:338
+#: application/forms/Navigation.php:344
 msgid "All navigation links must have different URIs."
 msgstr "所有导航链接必须有不同的URI。"
 
-#: application/forms/Navigation.php:344
+#: application/forms/Navigation.php:350
 #, php-format
 msgid "Invalid URI for \"%s\" navigation link:  \"%s\""
 msgstr "\"%s\"导航链接的无效URI： \"%s\""
 
-#: application/forms/Navigation.php:377
+#: application/forms/Navigation.php:383
 msgid "Navigation links that have undeleteable sublinks cannot be deleted."
 msgstr "含有无法删除的子链接的导航链接是不能被删除的。"
 
@@ -2777,15 +2814,15 @@ msgstr "允许的HTML属性"
 msgid "List of allowed HTML attributes in form input"
 msgstr "表单输入框中允许的HTML属性列表"
 
-#: application/forms/SecuritySettings.php:94
+#: application/forms/SecuritySettings.php:98
 msgid "File Validation"
 msgstr "文件验证"
 
-#: application/forms/SecuritySettings.php:102
+#: application/forms/SecuritySettings.php:106
 msgid "Captcha"
 msgstr "Captcha"
 
-#: application/forms/SecuritySettings.php:111
+#: application/forms/SecuritySettings.php:115
 msgid "HTML Filtering"
 msgstr "HTML过滤"
 
@@ -2895,51 +2932,6 @@ msgstr "必须安装\"%s\"插件并且有新文件来升级它。"
 msgid "Plugin must have a valid directory name before it can be installed."
 msgstr "插件在安装前必须有一个有效的目录名。"
 
-#: application/libraries/Omeka/Plugin/Loader.php:112
-#, php-format
-msgid "Plugin named '%s' has already been loaded/registered."
-msgstr ""
-
-#: application/libraries/Omeka/Plugin/Loader.php:153
-#, php-format
-msgid "The %s plugin could not be loaded."
-msgstr ""
-
-#: application/libraries/Omeka/Plugin/Loader.php:174
-#, php-format
-msgid "The required plugin '%s' could not be found."
-msgstr ""
-
-#: application/libraries/Omeka/Plugin/Loader.php:247
-#, php-format
-msgid "'%s' has no valid bootstrap file."
-msgstr ""
-
-#: application/libraries/Omeka/Plugin/Loader.php:250
-#, php-format
-msgid "'%s' has not been installed."
-msgstr ""
-
-#: application/libraries/Omeka/Plugin/Loader.php:253
-#, php-format
-msgid "'%s' has not been activated."
-msgstr ""
-
-#: application/libraries/Omeka/Plugin/Loader.php:256
-#, php-format
-msgid "'%s' requires a newer version of Omeka."
-msgstr ""
-
-#: application/libraries/Omeka/Plugin/Loader.php:261
-#, php-format
-msgid "'%s' must be upgraded to the new version before it can be loaded."
-msgstr ""
-
-#: application/libraries/Omeka/Plugin/Loader.php:264
-#, php-format
-msgid "'%s' cannot be loaded twice."
-msgstr ""
-
 #: application/libraries/Omeka/Record/AbstractRecord.php:349
 #, php-format
 msgid "'%s' is an invalid special value."
@@ -2949,81 +2941,81 @@ msgstr "'%s'是无效的特殊值。"
 msgid "An invalid value was detected during record iteration."
 msgstr "在记录循环时检测到无效值。"
 
-#: application/libraries/globals.php:417
+#: application/libraries/globals.php:410
 msgid "File"
 msgstr "文件"
 
-#: application/libraries/globals.php:475
+#: application/libraries/globals.php:468
 msgid "Keyword"
 msgstr "关键词"
 
-#: application/libraries/globals.php:476
+#: application/libraries/globals.php:469
 msgid "Boolean"
 msgstr "布尔逻辑"
 
-#: application/libraries/globals.php:477
+#: application/libraries/globals.php:470
 msgid "Exact match"
 msgstr "完全匹配"
 
-#: application/libraries/globals.php:1238
-#: application/libraries/globals.php:1259
+#: application/libraries/globals.php:1234
+#: application/libraries/globals.php:1255
 #, php-format
 msgid "Could not find file %s!"
 msgstr "无法找到文件%s！"
 
-#: application/libraries/globals.php:1276
+#: application/libraries/globals.php:1272
 msgid "No featured collections are available."
 msgstr "无专题馆藏在下面可用。"
 
-#: application/libraries/globals.php:1569
+#: application/libraries/globals.php:1564
 msgid "Select Below "
 msgstr "在下面选择"
 
-#: application/libraries/globals.php:1611
+#: application/libraries/globals.php:1607
 msgid "Omeka RSS Feed"
 msgstr "Omeka RSS摘要"
 
-#: application/libraries/globals.php:1612
+#: application/libraries/globals.php:1608
 msgid "Omeka Atom Feed"
 msgstr "Omkea Atom摘要"
 
-#: application/libraries/globals.php:2251
+#: application/libraries/globals.php:2264
 msgid "No recent items available."
 msgstr "无新近条目"
 
-#: application/libraries/globals.php:2277
+#: application/libraries/globals.php:2290
 msgid "No featured items are available."
 msgstr "无专题条目可用。"
 
-#: application/libraries/globals.php:2332
+#: application/libraries/globals.php:2349
 msgid "View"
 msgstr "视图"
 
-#: application/libraries/globals.php:2394
+#: application/libraries/globals.php:2411
 msgid "No Collection"
 msgstr "无馆藏"
 
-#: application/libraries/globals.php:2509
+#: application/libraries/globals.php:2529
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2526
+#: application/libraries/globals.php:2546
 msgid "Next Item &rarr;"
 msgstr "下一个条目&rarr;"
 
-#: application/libraries/globals.php:2546
+#: application/libraries/globals.php:2566
 msgid "&larr; Previous Item"
 msgstr "&larr;上一个条目"
 
-#: application/libraries/globals.php:2724
+#: application/libraries/globals.php:2747
 msgid "Browse All"
 msgstr "浏览所有"
 
-#: application/libraries/globals.php:2729
+#: application/libraries/globals.php:2752
 msgid "Browse by Tag"
 msgstr "标签浏览"
 
-#: application/libraries/globals.php:3002
+#: application/libraries/globals.php:3021
 msgid "No tags are available."
 msgstr "无标签可用。"
 
@@ -3073,11 +3065,11 @@ msgstr "所有元素文本必须有一个记录类型。"
 msgid "Invalid element ID."
 msgstr "无效的元素标识符。"
 
-#: application/models/File.php:241
+#: application/models/File.php:235
 msgid "Cannot get the local path for a stored file."
 msgstr "无法得到已保存文件的本地路径。"
 
-#: application/models/File.php:458
+#: application/models/File.php:452
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
 msgstr "\"%s\"不是一个有效的导出文件。"
@@ -3172,26 +3164,26 @@ msgid ""
 " or an element id to determine if an item type has an element."
 msgstr "无效参数。hasElement函数需要一个元素对象或元素标识符，从而判定条目类型是否包含元素。"
 
-#: application/models/Mixin/ElementText.php:278
+#: application/models/Mixin/ElementText.php:292
 #, php-format
 msgid "There is no element \"%1$s\", \"%2$s\"!"
 msgstr "没有元素\"%1$s\"，\"%2$s\"！"
 
-#: application/models/Mixin/ElementText.php:297
+#: application/models/Mixin/ElementText.php:311
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
 msgstr "无法找到标识符为'%s'的元素！"
 
-#: application/models/Mixin/ElementText.php:416
+#: application/models/Mixin/ElementText.php:430
 msgid "Element texts are not formatted correctly!"
 msgstr "元素文本没有正确格式化！"
 
-#: application/models/Mixin/ElementText.php:562
+#: application/models/Mixin/ElementText.php:578
 #, php-format
 msgid "The \"%s\" field has at least one invalid value!"
 msgstr "\"%s\"字段至少有一个无效值！"
 
-#: application/models/Mixin/ElementText.php:632
+#: application/models/Mixin/ElementText.php:648
 msgid "Cannot save element text for records that are not yet persistent!"
 msgstr "无法保存非持久记录的元素文本！"
 
@@ -3203,12 +3195,12 @@ msgstr "每个选项必须有唯一名称。"
 msgid "Names of plugins must not be blank"
 msgstr "插件名不能为空"
 
-#: application/models/Table/Collection.php:77
+#: application/models/Table/Collection.php:80
 #, php-format
 msgid "[Untitled] #%s"
 msgstr "【无标题】#%s"
 
-#: application/models/Table/Item.php:164
+#: application/models/Table/Item.php:123
 msgid "Invalid search type given!"
 msgstr "无效的搜索类型！"
 
@@ -3397,12 +3389,12 @@ msgstr "以此分类："
 msgid "View the items in %s"
 msgstr "查看%s的条目"
 
-#: application/views/scripts/collections/show.php:15
+#: application/views/scripts/collections/show.php:12
 #, php-format
 msgid "Items in the %s Collection"
 msgstr "%s馆藏的条目"
 
-#: application/views/scripts/collections/show.php:40
+#: application/views/scripts/collections/show.php:37
 msgid "There are currently no items within this collection."
 msgstr "当前该馆藏没有条目"
 
@@ -3522,11 +3514,6 @@ msgstr "去搜索设定选择要使用的记录类型。"
 #: application/views/scripts/search/search-form.php:19
 msgid "Advanced Search (Items only)"
 msgstr "高级搜索（只搜索条目）"
-
-#: application/views/scripts/users/activate.php:8
-#, php-format
-msgid "Hello %s. Your username is %s"
-msgstr ""
 
 #: application/views/scripts/users/login.php:9
 msgid "Go to Home Page"

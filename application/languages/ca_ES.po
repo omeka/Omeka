@@ -5,7 +5,7 @@
 # Translators:
 # Miquel Àngel <ma.serra@gmail.com>, 2013
 # Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>, 2013
-# Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>, 2013-2014
+# Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>, 2013-2015
 # Sergi Montes <sergi.blanes@gmail.com>, 2013
 # Sergi Montes <sergi.blanes@gmail.com>, 2013
 msgid ""
@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2014-06-09 19:07+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2015-02-26 08:34+0000\n"
+"Last-Translator: Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>\n"
 "Language-Team: Catalan (Spain) (http://www.transifex.com/projects/p/omeka/language/ca_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,7 +27,7 @@ msgid ""
 "The Dublin Core metadata element set is common to all Omeka records, "
 "including items, files, and collections. For more information see, "
 "http://dublincore.org/documents/dces/."
-msgstr "El conjunt d'elements Dublin Core és comú per a tots els registres a Omeka, inclosos els ítems, arxius i col·leccions. Per a més informació vegeu: http://dublincore.org/documents/dces/."
+msgstr "El conjunt d'elements Dublin Core és comú per a tots els registres d'Omeka, inclosos els ítems, fitxers i col·leccions. Per a més informació vegeu: http://dublincore.org/documents/dces/."
 
 #. Dublin Core: Title element name
 #: admin/themes/default/collections/browse.php:22
@@ -51,7 +51,7 @@ msgstr "Autor"
 
 #. Dublin Core: Creator element description
 msgid "An entity primarily responsible for making the resource"
-msgstr "Persona o entitat responsable de la creació intel·lectual del recurs."
+msgstr "Persona o entitat responsable de la creació intel·lectual del recurs"
 
 #. Dublin Core: Subject element name
 msgid "Subject"
@@ -89,7 +89,7 @@ msgstr "Contribuïdor"
 
 #. Dublin Core: Contributor element description
 msgid "An entity responsible for making contributions to the resource"
-msgstr "una persona o organització que hagi tingut una contribució intel·lectual significativa, però que aquesta sigui secundària en comparació amb les de les persones o organitzacions especificades a l'element Autor. (per exemple: editor, il·lustrador i traductor)."
+msgstr "Una persona o organització que hagi tingut una contribució intel·lectual significativa, quan aquesta sigui secundària en comparació amb les de les persones o organitzacions especificades a l'element Autor. (per exemple: editor, il·lustrador o traductor)."
 
 #. Dublin Core: Date element name
 msgid "Date"
@@ -99,7 +99,7 @@ msgstr "Data"
 msgid ""
 "A point or period of time associated with an event in the lifecycle of the "
 "resource"
-msgstr "Moment en el temps que s'associa a un esdeveniment dins el cicle de vida del recurs."
+msgstr "Moment en el temps que s'associa a un esdeveniment dins el cicle de vida del recurs"
 
 #. Dublin Core: Type element name
 #: admin/themes/default/items/browse.php:42
@@ -108,7 +108,7 @@ msgstr "Tipus"
 
 #. Dublin Core: Type element description
 msgid "The nature or genre of the resource"
-msgstr "La naturalesa o gènere del recurs"
+msgstr "La natura o gènere del recurs"
 
 #. Dublin Core: Format element name
 msgid "Format"
@@ -116,7 +116,7 @@ msgstr "Format"
 
 #. Dublin Core: Format element description
 msgid "The file format, physical medium, or dimensions of the resource"
-msgstr "El format d'arxiu, medi físic o dimensions del recurs"
+msgstr "El format del fitxer, medi físic o dimensions del recurs"
 
 #. Dublin Core: Identifier element name
 msgid "Identifier"
@@ -136,7 +136,7 @@ msgstr "Un recurs relacionat del qual es deriva el recurs descrit"
 
 #. Dublin Core: Language element name
 msgid "Language"
-msgstr "Llengua"
+msgstr "Idioma"
 
 #. Dublin Core: Language element description
 msgid "A language of the resource"
@@ -158,7 +158,7 @@ msgstr "Cobertura"
 msgid ""
 "The spatial or temporal topic of the resource, the spatial applicability of "
 "the resource, or the jurisdiction under which the resource is relevant"
-msgstr "Característica de cobertura espacial i/o temporal del contingut intel·lectual del recurs o la jurisdicció sota la qual el recurs és pertinent"
+msgstr "La cobertura espacial i/o temporal del contingut intel·lectual del recurs o la jurisdicció sota la qual el recurs és pertinent"
 
 #. Dublin Core: Rights element name
 msgid "Rights"
@@ -176,11 +176,11 @@ msgstr "Metadades de tipus d'ítem"
 msgid ""
 "The item type metadata element set, consisting of all item type elements "
 "bundled with Omeka and all item type elements created by an administrator."
-msgstr "El set de metadades del tipus d'element, format per tots els tipus d'elements que venen per defecte amb la instal·lació d'Omeka i aquells tipus d'elements creats per un administrador."
+msgstr "El conjunt de metadades del tipus d'ítem, format per tots els elements del tipus d'ítem que venen per defecte amb la instal·lació d'Omeka i per aquells elements de tipus d'ítem creats per un administrador."
 
 #. Omeka Legacy File
 msgid "Omeka Legacy File"
-msgstr "Arxius llegats d'Omeka"
+msgstr "Arxius heretats d'Omeka"
 
 #. Omeka Legacy File description
 msgid ""
@@ -188,11 +188,11 @@ msgid ""
 "was included in the `files` table in previous versions of Omeka. These "
 "elements are common to all Omeka files. This set may be deprecated in future"
 " versions."
-msgstr "Els conjunts d'elements de metadades i el conjunt d'elements de l'esquema Dublin Core, es troben inclosos en la taula ‘files’ a les versions anteriors d’Omeka. Aquests elements són comuns a tots els arxius d'Omeka. Aquest conjunt quedarà obsolet en futures versions del sistema."
+msgstr "Els conjunts d'elements de metadades i el conjunt d'elements de l'esquema Dublin Core, es troben inclosos en la taula ‘files’ a les versions anteriors d’Omeka. Aquests elements són comuns a tots els fitxers d'Omeka. Aquest conjunt quedarà obsolet en futures versions del sistema."
 
 #. Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
-msgstr "Altres contribuïdors"
+msgstr "Autor addicional"
 
 #. Omeka Legacy File: Transcriber element
 msgid "Transcriber"
@@ -224,7 +224,7 @@ msgstr "Detalls de la captura"
 
 #. Omeka Legacy File: Change History element
 msgid "Change History"
-msgstr "Històric de canvis"
+msgstr "Historial de canvis"
 
 #. Omeka Legacy File: Watermark element
 msgid "Watermark"
@@ -244,13 +244,13 @@ msgstr "Processament posterior"
 
 #. Omeka Image File
 msgid "Omeka Image File"
-msgstr "Arxiu d'imatge Omeka"
+msgstr "Fitxer d'imatge d'Omeka"
 
 #. Omeka Image File description
 msgid ""
 "The metadata element set that was included in the `files_images` table in "
 "previous versions of Omeka. These elements are common to all image files."
-msgstr "Els conjunts d'elements de metadades es troben inclosos a la taula 'files_images' a les versions anteriors d'Omeka. Aquests elements són comuns a tots els arxius d'imatges."
+msgstr "Els conjunts d'elements de metadades es troben inclosos a la taula 'files_images' a les versions anteriors d'Omeka. Aquests elements són comuns a tots els fitxers d'imatge."
 
 #. Omeka Image File: Width element
 msgid "Width"
@@ -274,7 +274,7 @@ msgstr "Cadena Exif"
 
 #. Omeka Image File: Exif Array element
 msgid "Exif Array"
-msgstr "Dades Exif"
+msgstr "Matriu Exif"
 
 #. Omeka Image File: IPTC String element
 msgid "IPTC String"
@@ -282,17 +282,17 @@ msgstr "Cadena IPTC"
 
 #. Omeka Image File: IPTC Array element
 msgid "IPTC Array"
-msgstr "Dades IPTC"
+msgstr "Matriu IPTC"
 
 #. Omeka Video File
 msgid "Omeka Video File"
-msgstr "Arxiu de vídeo d'Omeka"
+msgstr "Fitxer de vídeo d'Omeka"
 
 #. Omeka Video File description
 msgid ""
 "The metadata element set that was included in the `files_videos` table in "
 "previous versions of Omeka. These elements are common to all video files."
-msgstr "Els conjunts d'elements de metadades es troben inclosos a la taula 'files_videos' a les versions anteriors d'Omeka. Aquests elements són comuns a tots els arxius de vídeo."
+msgstr "Els conjunts d'elements de metadades es troben inclosos a la taula 'files_videos' a les versions anteriors d'Omeka. Aquests elements són comuns a tots els fitxers de vídeo."
 
 #. Omeka Video File: Bitrate element
 msgid "Bitrate"
@@ -312,7 +312,7 @@ msgstr "Còdec"
 
 #. Format (Legacy) Metadata element set
 msgid "Format (Legacy) Metadata"
-msgstr "Format de metadades (Legacy)"
+msgstr "Format de metadades (heretat)"
 
 #. User role: Super
 msgid "Super"
@@ -342,45 +342,51 @@ msgstr "Comproveu els enllaços per a mostrar-los a la barra de navegació princ
 
 #: admin/themes/default/appearance/edit-navigation.php:19
 msgid "Add a Link to the Navigation"
-msgstr "Afegir un enllaç a la navegació"
+msgstr "Afegeix un enllaç a la navegació"
 
 #: admin/themes/default/appearance/edit-navigation.php:21
-#: admin/themes/default/appearance/edit-navigation.php:37
+#: admin/themes/default/appearance/edit-navigation.php:41
 #: admin/themes/default/users/api-keys.php:40
-#: application/forms/Navigation.php:132
+#: application/forms/Navigation.php:138
 msgid "Label"
 msgstr "Etiqueta"
 
 #: admin/themes/default/appearance/edit-navigation.php:23
-#: admin/themes/default/appearance/edit-navigation.php:38
-#: application/forms/Navigation.php:133
+#: admin/themes/default/appearance/edit-navigation.php:42
+#: application/forms/Navigation.php:139
 msgid "URL"
 msgstr "URL"
 
 #: admin/themes/default/appearance/edit-navigation.php:25
 msgid "Add Link"
-msgstr "Afegir enllaç"
+msgstr "Afegeix un enllaç"
 
 #: admin/themes/default/appearance/edit-navigation.php:31
 #: admin/themes/default/appearance/edit-settings.php:21
 #: admin/themes/default/collections/edit.php:22
 #: admin/themes/default/element-sets/edit.php:41
 #: admin/themes/default/files/edit.php:35
+#: admin/themes/default/item-types/edit.php:18
 #: admin/themes/default/items/batch-edit.php:130
 #: admin/themes/default/items/edit.php:19
 #: admin/themes/default/plugins/config.php:14
-#: admin/themes/default/settings/edit-api.php:81
-#: admin/themes/default/settings/edit-item-type-elements.php:38
-#: admin/themes/default/settings/edit-search.php:40
+#: admin/themes/default/settings/edit-api.php:82
+#: admin/themes/default/settings/edit-item-type-elements.php:39
+#: admin/themes/default/settings/edit-search.php:41
 #: admin/themes/default/settings/edit-security.php:15
 #: admin/themes/default/settings/edit-settings.php:15
 #: admin/themes/default/themes/config.php:16
-#: admin/themes/default/users/edit.php:21 application/forms/ItemTypes.php:169
+#: admin/themes/default/users/edit.php:21
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:73
 msgid "Save Changes"
 msgstr "Desa els canvis"
 
-#: admin/themes/default/appearance/edit-navigation.php:39
+#: admin/themes/default/appearance/edit-navigation.php:35
+#: admin/themes/default/appearance/reset-navigation-confirm.php:2
+msgid "Reset Navigation"
+msgstr "Reinicieu la navegació"
+
+#: admin/themes/default/appearance/edit-navigation.php:43
 #: admin/themes/default/collections/edit.php:23
 #: admin/themes/default/collections/show.php:34
 #: admin/themes/default/files/show.php:28
@@ -390,7 +396,7 @@ msgstr "Desa els canvis"
 msgid "View Public Page"
 msgstr "Visualitza la pàgina pública"
 
-#: admin/themes/default/appearance/edit-navigation.php:40
+#: admin/themes/default/appearance/edit-navigation.php:44
 #: admin/themes/default/collections/edit.php:24
 #: admin/themes/default/collections/show.php:36
 #: admin/themes/default/element-sets/browse.php:29
@@ -411,6 +417,18 @@ msgstr "Visualitza la pàgina pública"
 msgid "Delete"
 msgstr "Esborra"
 
+#: admin/themes/default/appearance/reset-navigation-confirm.php:9
+#: admin/themes/default/common/delete-confirm.php:10
+#: application/views/scripts/common/delete-confirm.php:12
+msgid "Are you sure?"
+msgstr "Esteu segur?"
+
+#: admin/themes/default/appearance/reset-navigation-confirm.php:10
+msgid ""
+"All customizations will be lost. Order and labels will revert to Omeka "
+"defaults. Custom links will be lost."
+msgstr "Es perdran totes les personalitzacions. L’ordre i les etiquetes tornaran als valors per defecte de l’Omeka. Es perdran els enllaços personalitzats."
+
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:11
 #: admin/themes/default/collections/browse.php:67
@@ -420,7 +438,7 @@ msgstr "Afegeix una col·lecció"
 
 #: admin/themes/default/collections/add.php:11
 msgid "Add Collection"
-msgstr "Afegir col·lecció"
+msgstr "Afegeix una col·lecció"
 
 #: admin/themes/default/collections/add.php:16
 #: admin/themes/default/collections/edit.php:30
@@ -480,7 +498,7 @@ msgstr "Contribuïdors"
 #: application/views/scripts/collections/browse.php:11
 #: application/views/scripts/items/browse.php:21
 msgid "Date Added"
-msgstr "Data "
+msgstr "Data d'alta"
 
 #: admin/themes/default/collections/browse.php:25
 #: admin/themes/default/collections/show.php:46
@@ -512,7 +530,7 @@ msgstr "Edita"
 
 #: admin/themes/default/collections/browse.php:52
 msgid "No contributors"
-msgstr "No hi han contribuïdors."
+msgstr "No hi ha contribuïdors"
 
 #: admin/themes/default/collections/browse.php:70
 msgid "There are no collections on this page."
@@ -530,24 +548,11 @@ msgstr "No teniu cap col·lecció."
 msgid "Get started by adding your first collection."
 msgstr "Comenceu afegint la vostra primera col·lecció."
 
-#: admin/themes/default/collections/edit.php:3
-#: admin/themes/default/collections/show.php:3
-#: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/libraries/globals.php:2574
-#: application/views/scripts/collections/show.php:4
-#: application/views/scripts/functions.php:14
-msgid "[Untitled]"
-msgstr "[Sense títol]"
-
 #: admin/themes/default/collections/edit.php:8
-#, php-format
-msgid "Edit Collection #%s"
-msgstr "Editar col·lecció #%s"
-
 #: admin/themes/default/collections/show.php:8
 #, php-format
-msgid "Collection #%s"
-msgstr "Col·lecció #%s"
+msgid "Edit Collection #%s"
+msgstr "Edita la col·lecció #%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
@@ -573,7 +578,7 @@ msgstr "No"
 
 #: admin/themes/default/collections/show.php:56
 msgid "No contributors."
-msgstr "No hi han contribuïdors."
+msgstr "No hi ha contribuïdors."
 
 #: admin/themes/default/common/appearance-nav.php:5
 msgid "Themes"
@@ -592,7 +597,11 @@ msgstr "Navegació"
 #: admin/themes/default/settings/edit-security.php:3
 #: admin/themes/default/settings/edit-settings.php:3
 msgid "Settings"
-msgstr "Configuració"
+msgstr "Paràmetres"
+
+#: admin/themes/default/common/content-nav.php:1
+msgid "Main Menu"
+msgstr "Menú principal"
 
 #: admin/themes/default/common/content-nav.php:5
 #: admin/themes/default/index.php:2
@@ -627,11 +636,6 @@ msgstr "Etiquetes"
 msgid "Delete %s"
 msgstr "Esborra %s"
 
-#: admin/themes/default/common/delete-confirm.php:10
-#: application/views/scripts/common/delete-confirm.php:12
-msgid "Are you sure?"
-msgstr "Estàs segur?"
-
 #: admin/themes/default/common/footer.php:6
 #: admin/themes/default/common/login-footer.php:7
 msgid "Powered by Omeka"
@@ -657,10 +661,14 @@ msgstr "Versió %s"
 msgid "System Information"
 msgstr "Informació del sistema"
 
+#: admin/themes/default/common/global-nav.php:1
+msgid "Manage Site"
+msgstr "Gestiona el lloc web"
+
 #: admin/themes/default/common/global-nav.php:5
 #: admin/themes/default/plugins/browse.php:2
 msgid "Plugins"
-msgstr "Plugins"
+msgstr "Connectors"
 
 #: admin/themes/default/common/global-nav.php:17
 msgid "Users"
@@ -671,7 +679,12 @@ msgstr "Usuaris"
 #: admin/themes/default/upgrade/migrate.php:6
 #: application/views/scripts/common/admin-bar.php:11
 msgid "Omeka Admin"
-msgstr "Administrador d'Omeka"
+msgstr "Administració d'Omeka"
+
+#: admin/themes/default/common/header.php:40
+#: application/views/scripts/common/header.php:32
+msgid "Skip to main content"
+msgstr "Salta al contingut principal"
 
 #: admin/themes/default/common/header.php:60
 #: application/views/scripts/common/admin-bar.php:7
@@ -682,7 +695,7 @@ msgstr "Benvingut, %s"
 #: admin/themes/default/common/header.php:61
 #: application/views/scripts/common/admin-bar.php:15
 msgid "Log Out"
-msgstr "Sortir"
+msgstr "Surt"
 
 #: admin/themes/default/common/settings-nav.php:6
 #: admin/themes/default/common/users-nav.php:5
@@ -694,7 +707,9 @@ msgid "Security"
 msgstr "Seguretat"
 
 #: admin/themes/default/common/settings-nav.php:16
+#: admin/themes/default/search/index.php:2
 #: application/views/helpers/SearchForm.php:34
+#: application/views/scripts/search/index.php:2
 #: application/views/scripts/search/search-form.php:2
 #: application/views/scripts/search/search-form.php:22
 msgid "Search"
@@ -713,14 +728,14 @@ msgid "API"
 msgstr "API"
 
 #: admin/themes/default/common/users-nav.php:11
-#: application/forms/ChangePassword.php:78
+#: application/forms/ChangePassword.php:80
 msgid "Change Password"
 msgstr "Canvia la contrasenya"
 
 #: admin/themes/default/common/users-nav.php:17
 #: admin/themes/default/users/api-keys.php:14
 msgid "API Keys"
-msgstr "Claus API"
+msgstr "Claus de l'API"
 
 #: admin/themes/default/element-sets/browse.php:16
 #: admin/themes/default/users/browse.php:17
@@ -730,7 +745,7 @@ msgstr "Nom"
 
 #: admin/themes/default/element-sets/edit.php:5
 msgid "Edit Element Set"
-msgstr "Editar el conjunt d'elements"
+msgstr "Edita el conjunt d'elements"
 
 #: admin/themes/default/element-sets/edit.php:17
 msgid ""
@@ -748,7 +763,7 @@ msgstr "403: Accés no permès"
 
 #: admin/themes/default/error/403.php:6
 msgid "Sorry, you do not have permission to access this page."
-msgstr "Ho sentim, no tens permisos per veure aquesta pàgina."
+msgstr "No tens permisos per veure aquesta pàgina."
 
 #: admin/themes/default/error/403.php:10 admin/themes/default/error/404.php:9
 #: admin/themes/default/error/405.php:8
@@ -758,7 +773,7 @@ msgstr "administrador del lloc web"
 #: admin/themes/default/error/403.php:11
 #, php-format
 msgid "If you think you should have permission, try contacting the %s."
-msgstr "Si creus que hauries de tenir permisos, contacta amb %s."
+msgstr "Si creieu que hauríeu de tenir permisos, contacteu amb %s."
 
 #: admin/themes/default/error/404.php:2
 msgid "404: Page Not Found"
@@ -774,7 +789,7 @@ msgstr "Heu intentat accedir a una pàgina que sembla no existir. De vegades aix
 #: admin/themes/default/error/404.php:10
 #, php-format
 msgid "If this does not help, try contacting the %s."
-msgstr "Si l'ajuda no és suficient prova contactar amb %s."
+msgstr "Si l'ajuda no és suficient proveu de contactar amb %s."
 
 #: admin/themes/default/error/404.php:16 admin/themes/default/index.php:46
 msgid "Recent Items"
@@ -801,21 +816,21 @@ msgstr "Error 405 de mètode no permès"
 msgid ""
 "You must use a different method to access this URL. If you reached this page"
 " by following a link or clicking a button in Omeka, please contact the %s."
-msgstr "Intenteu fer servir un altre mètode per accedir a la URL. Si heu arribat a aquesta pàgina mitjançant un enllaç; o polsant a sobre d';un botó en aquest portal, si us plau contacti amb %s."
+msgstr "Intenteu fer servir un altre mètode per accedir a l'URL. Si heu arribat a aquesta pàgina mitjançant un enllaç; o polsant a sobre d'un botó en aquest portal, contacteu amb %s."
 
 #: admin/themes/default/files/edit.php:8
 #, php-format
 msgid "Edit File #%s"
-msgstr "Editar arxiu #%s"
+msgstr "Edita el fitxer #%s"
 
 #: admin/themes/default/files/show.php:9
 #: application/views/scripts/files/show.php:9
 #, php-format
 msgid "File #%s"
-msgstr "Arxiu #%s"
+msgstr "Fitxer #%s"
 
 #: admin/themes/default/files/show.php:35
-#: application/libraries/globals.php:416
+#: application/libraries/globals.php:409
 msgid "Item"
 msgstr "Ítem"
 
@@ -862,11 +877,11 @@ msgstr "Mida del fitxer"
 #: application/views/scripts/files/show.php:30
 #, php-format
 msgid "%s bytes"
-msgstr "%s bits"
+msgstr "%s bytes"
 
 #: admin/themes/default/files/show.php:64
 msgid "File History"
-msgstr "Història de l'arxiu"
+msgstr "Historial del fitxer"
 
 #: admin/themes/default/files/show.php:68
 msgid "Date Modified"
@@ -885,7 +900,7 @@ msgstr "Tipus de metadades"
 #: admin/themes/default/files/show.php:78
 #: application/views/scripts/files/show.php:42
 msgid "Mime Type"
-msgstr "Mime Type"
+msgstr "Tipus MIME"
 
 #: admin/themes/default/files/show.php:80
 #: application/views/scripts/files/show.php:46
@@ -918,7 +933,7 @@ msgstr "etiquetes"
 
 #: admin/themes/default/index.php:11
 msgid "plugins"
-msgstr "plugins"
+msgstr "connectors"
 
 #: admin/themes/default/index.php:14
 msgid "users"
@@ -930,7 +945,7 @@ msgstr "plantilla"
 
 #: admin/themes/default/index.php:29
 msgid "A new version of Omeka is available for download."
-msgstr "Ja pots descarregar la nova versió d'Omeka."
+msgstr "Ja podeu descarregar la nova versió d'Omeka."
 
 #: admin/themes/default/index.php:30
 #, php-format
@@ -943,7 +958,7 @@ msgstr "Actualitza a %s"
 #: admin/themes/default/items/tag-form.php:23
 #: application/views/helpers/ElementInput.php:113
 msgid "Remove"
-msgstr "Esborra"
+msgstr "Elimina"
 
 #: admin/themes/default/item-types/add-new-element.php:6
 msgid "Element Name"
@@ -951,10 +966,10 @@ msgstr "Nom de l'element"
 
 #: admin/themes/default/item-types/add-new-element.php:22
 msgid "Element Description"
-msgstr "Descripció de l';element"
+msgstr "Descripció de l'element"
 
 #: admin/themes/default/item-types/add.php:2
-#: application/forms/ItemTypes.php:161
+#: admin/themes/default/item-types/add.php:11
 msgid "Add Item Type"
 msgstr "Afegeix un tipus d'ítem"
 
@@ -978,7 +993,7 @@ msgstr "Total d'ítems"
 #: admin/themes/default/item-types/edit.php:8
 #, php-format
 msgid "Edit Item Type #%s"
-msgstr "Editar tipus d'ítem #%s"
+msgstr "Edita el tipus d'ítem #%s"
 
 #: admin/themes/default/item-types/form.php:14
 msgid "Item Type Information"
@@ -990,7 +1005,7 @@ msgstr "Informació del tipus d'ítem"
 #: admin/themes/default/users/edit.php:15
 #: install/views/scripts/index/index.phtml:14
 msgid "required field"
-msgstr "camp requerit"
+msgstr "camp obligatori"
 
 #: admin/themes/default/item-types/form.php:25
 #: admin/themes/default/item-types/show.php:16
@@ -1001,7 +1016,7 @@ msgstr "Elements"
 #: admin/themes/default/items/tag-form.php:22
 #: admin/themes/default/settings/edit-item-type-elements.php:22
 msgid "Undo"
-msgstr "Desfer"
+msgstr "Desfés"
 
 #: admin/themes/default/item-types/form.php:80
 #: admin/themes/default/item-types/form.php:87
@@ -1045,19 +1060,19 @@ msgstr "Afegeix un ítem"
 #: admin/themes/default/items/browse.php:90
 #: admin/themes/default/items/edit.php:41
 #: admin/themes/default/items/show.php:57
-#: application/libraries/globals.php:418
+#: application/libraries/globals.php:411
 #: application/views/scripts/items/show.php:18
 msgid "Collection"
 msgstr "Col·lecció"
 
 #: admin/themes/default/items/batch-delete.php:2
 msgid "Batch Delete Items"
-msgstr "Eliminar ítems en lot"
+msgstr "Elimina els ítems en lot"
 
 #: admin/themes/default/items/batch-delete.php:38
 msgid ""
 "Some items were excluded because you do not have permission to delete them."
-msgstr "Alguns ítems han estats exclosos perquè no té permisos per esborrar-los"
+msgstr "Alguns ítems han estat exclosos perquè no teniu permisos per esborrar-los"
 
 #: admin/themes/default/items/batch-delete.php:41
 msgid "Checked items will be deleted."
@@ -1066,11 +1081,11 @@ msgstr "Els elements seleccionats seran eliminats."
 #: admin/themes/default/items/batch-delete.php:50
 #: admin/themes/default/items/batch-edit.php:116
 msgid "Delete Items"
-msgstr "Esborra ítems"
+msgstr "Elimina els ítems"
 
 #: admin/themes/default/items/batch-edit.php:2
 msgid "Batch Edit Items"
-msgstr "Editar ítems per lots"
+msgstr "Edita els ítems per lots"
 
 #: admin/themes/default/items/batch-edit.php:36
 msgid "Changes will be applied to checked items."
@@ -1089,11 +1104,11 @@ msgstr "Públic?"
 #: admin/themes/default/items/batch-edit.php:78
 #: admin/themes/default/items/batch-edit.php:93
 msgid "Select Below"
-msgstr "Tria a sota"
+msgstr "Trieu a sota"
 
 #: admin/themes/default/items/batch-edit.php:51
 msgid "Not Public"
-msgstr "No Públic"
+msgstr "Privat"
 
 #: admin/themes/default/items/batch-edit.php:61
 msgid "Featured?"
@@ -1111,7 +1126,7 @@ msgstr "Tipus d'ítem"
 #: admin/themes/default/items/batch-edit.php:83
 #: admin/themes/default/items/batch-edit.php:98
 msgid "Remove?"
-msgstr "Esborra?"
+msgstr "Elimina?"
 
 #: admin/themes/default/items/batch-edit.php:104
 #: admin/themes/default/items/tag-form.php:8
@@ -1126,7 +1141,7 @@ msgstr "Llista d'etiquetes per afegir a tots els ítems seleccionats, separats p
 
 #: admin/themes/default/items/batch-edit.php:117
 msgid "Check if you wish to delete selected items."
-msgstr "Marqueu si voleu eliminar els ítems seleccionats."
+msgstr "Marqueu-la si voleu eliminar els ítems seleccionats."
 
 #: admin/themes/default/items/browse.php:3
 #: application/libraries/Omeka/Navigation.php:142
@@ -1172,11 +1187,11 @@ msgstr "Navega pels ítems"
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2350
-#: application/libraries/globals.php:2734
+#: application/libraries/globals.php:2367
+#: application/libraries/globals.php:2757
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
-msgstr "Cercar ítems."
+msgstr "Cerca ítems."
 
 #: admin/themes/default/items/browse.php:37
 msgid "Select"
@@ -1209,7 +1224,7 @@ msgstr "Comenceu afegint el vostre primer ítem."
 #: admin/themes/default/items/browse.php:154
 #, php-format
 msgid "The query searched %s items and returned no results."
-msgstr "S'ha fet un consulta sobre %s ítems i no s'han obtingut resultats."
+msgstr "S'ha fet un consulta sobre %s ítems i no s'ha obtingut cap resultat."
 
 #: admin/themes/default/items/browse.php:154
 msgid "refine your search"
@@ -1218,20 +1233,25 @@ msgstr "Reformula la cerca"
 #: admin/themes/default/items/browse.php:154
 #, php-format
 msgid "Would you like to %s?"
-msgstr "Voldries %s?"
+msgstr "Voldrieu %s?"
+
+#: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
+#: application/views/scripts/functions.php:14
+msgid "[Untitled]"
+msgstr "[Sense títol]"
 
 #: admin/themes/default/items/edit.php:8
 #, php-format
 msgid "Edit Item #%s"
-msgstr "Editar ítem #%s"
+msgstr "Edita l'ítem #%s"
 
 #: admin/themes/default/items/files-form.php:2
 msgid "Click and drag the files into the preferred display order."
-msgstr "Polsar i arrossegar els arxius en l'ordre de visualització desitjat."
+msgstr "Feu clic i arrossegueu els fitxers en l'ordre de visualització desitjat."
 
 #: admin/themes/default/items/files-form.php:13
 msgid "Delete "
-msgstr "Esborrar"
+msgstr "Elimina"
 
 #: admin/themes/default/items/files-form.php:22
 msgid "Add New Files"
@@ -1240,19 +1260,19 @@ msgstr "Afegeix nous fitxers"
 #: admin/themes/default/items/files-form.php:24
 #, php-format
 msgid "The maximum file size is %s."
-msgstr "La mida màxima de l'arxiu és %s."
+msgstr "La mida màxima del fitxer és %s."
 
 #: admin/themes/default/items/files-form.php:27
 msgid "Find a File"
-msgstr "Cercar arxius"
+msgstr "Cerca un fitxer"
 
 #: admin/themes/default/items/form.php:25
 msgid "Add Another File"
-msgstr "Afegeix un altre arxiu"
+msgstr "Afegeix un altre fitxer"
 
 #: admin/themes/default/items/item-type-form.php:15
 msgid "Pick this type"
-msgstr "Trieu aquest tipus"
+msgstr "Tria aquest tipus"
 
 #: admin/themes/default/items/quick-filters.php:2
 #: admin/themes/default/items/quick-filters.php:4
@@ -1305,7 +1325,7 @@ msgstr "no conté"
 #: admin/themes/default/items/search-form.php:74
 #: application/views/scripts/items/search-form.php:70
 msgid "is exactly"
-msgstr "Cerca exacta"
+msgstr "es exactament"
 
 #: admin/themes/default/items/search-form.php:75
 #: application/views/scripts/items/search-form.php:71
@@ -1325,12 +1345,12 @@ msgstr "Termes de cerca"
 #: admin/themes/default/items/search-form.php:90
 #: application/views/scripts/items/search-form.php:86
 msgid "Remove field"
-msgstr "Esborreu el camp"
+msgstr "Elimina el camp"
 
 #: admin/themes/default/items/search-form.php:98
 #: application/views/scripts/items/search-form.php:94
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
-msgstr "Cerca per rang de ID#s (per exemple: 1-4, 156, 79)"
+msgstr "Cerca per rang de ID#s (p. e.: 1-4, 156, 79)"
 
 #: admin/themes/default/items/search-form.php:112
 #: application/views/scripts/items/search-form.php:105
@@ -1398,11 +1418,11 @@ msgstr "Ítem anterior"
 
 #: admin/themes/default/items/show.php:33
 msgid "Next Item"
-msgstr "Següent ítem"
+msgstr "Ítem següent"
 
 #: admin/themes/default/items/show.php:73
 msgid "File Metadata"
-msgstr "Metadades de l'arxiu"
+msgstr "Metadades del fitxer"
 
 #: admin/themes/default/items/show.php:76
 msgid "There are no files for this item yet."
@@ -1414,7 +1434,7 @@ msgstr "Afegeix un fitxer"
 
 #: admin/themes/default/items/show.php:80
 msgid "View File Metadata"
-msgstr "Visualitza les metadades de l'arxiu"
+msgstr "Visualitza les metadades del fitxer"
 
 #: admin/themes/default/items/show.php:93
 msgid "Bibliographic Citation"
@@ -1436,23 +1456,23 @@ msgstr "Navega els ítems per etiqueta"
 #: admin/themes/default/items/tags.php:9
 #: admin/themes/default/tags/browse.php:85
 msgid "There are no tags to display. You must first tag some items."
-msgstr "No hi han etiquetes que mostrar. Primer heu d'etiquetar ítems."
+msgstr "No hi ha etiquetes per mostrar. Primer heu d'etiquetar els ítems."
 
 #: admin/themes/default/plugins/browse.php:26
 #, php-format
 msgid "This version of %1$s requires at least Omeka %2$s."
-msgstr "Aquesta versió de of %1$s requereix com a mínim Omeka %2$s."
+msgstr "Aquesta versió de %1$s requereix com a mínim Omeka %2$s."
 
 #: admin/themes/default/plugins/browse.php:29
 #, php-format
 msgid ""
 "%1$s requires the following plugins to be installed, activated, and loaded: "
 "%2$s"
-msgstr "%1$s requereix els següents plugins per ser instal·lat, activat i carregat: %2$s"
+msgstr "%1$s requereix els connectors següents per ser instal·lat, activat i carregat: %2$s"
 
 #: admin/themes/default/plugins/browse.php:32
 msgid "This is not a valid plugin."
-msgstr "Aquest plugin no és vàlid."
+msgstr "Aquest connector no és vàlid."
 
 #: admin/themes/default/plugins/browse.php:57
 #, php-format
@@ -1461,81 +1481,76 @@ msgstr "per %s"
 
 #: admin/themes/default/plugins/browse.php:65
 #: admin/themes/default/themes/browse.php:23
-#: admin/themes/default/themes/browse.php:49
+#: admin/themes/default/themes/browse.php:48
 msgid "Get support"
 msgstr "Suport"
 
 #: admin/themes/default/plugins/browse.php:69
 #, php-format
 msgid "You have a new version of %s. Please upgrade!"
-msgstr "Hi ha una nova versió de %s. Si us plau actualitza!"
+msgstr "Hi ha una nova versió de %s. Actualitzeu!"
 
 #: admin/themes/default/plugins/browse.php:90
 msgid "Upgrade"
 msgstr "Actualitza"
 
-#: admin/themes/default/plugins/browse.php:100
+#: admin/themes/default/plugins/browse.php:101
 msgid "Configure"
 msgstr "Configura"
 
-#: admin/themes/default/plugins/browse.php:106
+#: admin/themes/default/plugins/browse.php:107
 msgid "Deactivate"
 msgstr "Desactiva"
 
-#: admin/themes/default/plugins/browse.php:106
-#: admin/themes/default/users/activate.php:31
+#: admin/themes/default/plugins/browse.php:107
+#: admin/themes/default/users/activate.php:30
 #: application/views/scripts/users/activate.php:27
 msgid "Activate"
 msgstr "Activa"
 
-#: admin/themes/default/plugins/browse.php:116
+#: admin/themes/default/plugins/browse.php:118
 #: admin/themes/default/plugins/confirm-uninstall.php:16
 msgid "Uninstall"
 msgstr "Desinstal·la"
 
-#: admin/themes/default/plugins/browse.php:129
+#: admin/themes/default/plugins/browse.php:131
 #: application/forms/Install.php:178
 msgid "Install"
 msgstr "Instal·la"
 
-#: admin/themes/default/plugins/browse.php:140
+#: admin/themes/default/plugins/browse.php:143
 msgid ""
 "You do not have any plugins installed. Add them to the plugins directory to "
 "see them listed here."
-msgstr "No teniu cap plugin instal·lat. Afegeix-los al directori ‘plugins’ per veure'ls en aquesta llista"
+msgstr "No teniu cap connector instal·lat. Afegiu-los al directori ‘plugins’ per veure'ls en aquesta llista"
 
 #: admin/themes/default/plugins/config.php:2
 #, php-format
 msgid "Configure Plugin: %s"
-msgstr "Configurar el plugin: %s"
+msgstr "Configura el connector: %s"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:2
 #, php-format
 msgid "Uninstall Plugin: %s"
-msgstr "Desintal·lar el plugin: %s"
+msgstr "Desintal·la el connector: %s"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:7
 #, php-format
 msgid "Are you sure you want to uninstall %s?"
-msgstr "Esteu segurs que voleu desintal·lar %s?"
+msgstr "Esteu segur que voleu desintal·lar %s?"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:12
 msgid "Yes, I want to uninstall this plugin."
-msgstr "Si, vull desinstal·lar aquest plugin"
+msgstr "Sí, vull desinstal·lar aquest plugin"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:17
 msgid "or"
 msgstr "o"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:17
-#: admin/themes/default/settings/edit-item-type-elements.php:50
+#: admin/themes/default/settings/edit-item-type-elements.php:51
 msgid "Cancel"
 msgstr "Cancel·la"
-
-#: admin/themes/default/search/index.php:2
-#: application/views/scripts/search/index.php:2
-msgid "Search Omeka "
-msgstr "Cerca a Omeka"
 
 #: admin/themes/default/search/index.php:12
 #: admin/themes/default/tags/browse.php:18
@@ -1550,7 +1565,7 @@ msgstr "La consulta no ha retornat cap resultat."
 
 #: admin/themes/default/settings/edit-api.php:11
 msgid "Enable API"
-msgstr "Habilitar API"
+msgstr "Habilitar l'API"
 
 #: admin/themes/default/settings/edit-api.php:15
 msgid "Enable or disable the API by checking or uncheking the box below."
@@ -1558,14 +1573,14 @@ msgstr "Habilita o deshabilita l'API marcant o desmarcant aquesta casella."
 
 #: admin/themes/default/settings/edit-api.php:22
 msgid "Filter Element Texts"
-msgstr "Filtreu els elements de text"
+msgstr "Filtra els elements de text"
 
 #: admin/themes/default/settings/edit-api.php:26
 msgid ""
 "Filter element texts by checking the box below. When checked, the API will "
 "respect the display element and element text filters when outputting element"
 " text representations."
-msgstr "Filtreu els elements de text activant la següent casella. Un cop activat, l'API respectarà la visualització de l'element i els seus filtres quan un servei en demani representacions textuals."
+msgstr "Filtreu els elements de text activant la casella següent. Un cop activada, l'API respectarà la visualització de l'element i els seus filtres quan un servei en demani representacions textuals."
 
 #: admin/themes/default/settings/edit-api.php:35
 msgid "Results per Page"
@@ -1583,30 +1598,30 @@ msgid ""
 "adding, editing, and deleting content, is protected and requires key "
 "authentication. Each key corresponds to, and has all permissions of, an "
 "existing Omeka user. You can create keys on each user's %sedit page%s."
-msgstr "Després d'habilitar l'API, les aplicacions poden mostrar, navegar, afegir, editar i eliminar els recursos del portal. Visualitzar contingut protegit, així com afegir, editar i eliminar contingut, està restringit i requereix l'autenticació amb la clau. Cada clau correspon un usuari existent d'Omeka i té tots els permisos. Podeu crear claus per cada usuari a la %spàgina d'edició%s."
+msgstr "Després d'habilitar l'API, les aplicacions poden mostrar, navegar, afegir, editar i eliminar els recursos del portal. Visualitzar contingut protegit, així com afegir, editar i eliminar contingut, està restringit i requereix l'autenticació amb la clau. Cada clau correspon a un usuari existent d'Omeka i té tots els permisos. Podeu crear claus per cada usuari a la %spàgina d'edició%s."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:12
 msgid "edit a specific item type"
-msgstr "Editar un tipus d'ítem específic"
+msgstr "Edita un tipus d'ítem específic"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:11
 #, php-format
 msgid ""
 "Customize the element descriptions below. To re-order the elements, %s."
-msgstr "Personalitza les descripcions dels elements a sota. Per a re-ordenar els elements, %s."
+msgstr "Personalitza les descripcions dels elements a continuació. Per a reordenar els elements, %s."
 
-#: admin/themes/default/settings/edit-item-type-elements.php:42
+#: admin/themes/default/settings/edit-item-type-elements.php:43
 msgid "Confirm Delete"
 msgstr "Confirmeu que voleu eliminar"
 
-#: admin/themes/default/settings/edit-item-type-elements.php:43
+#: admin/themes/default/settings/edit-item-type-elements.php:44
 msgid ""
 "Are you sure you want to delete the selected item type elements from the "
 "database? You will lose all text related to the selected elements. This "
 "cannot be undone."
-msgstr "Estàs segur que vols esborrar els següents tipus d'ítems de la base de dades? Es perdrà tot aquell text relacionat amb els elements triats. Aquesta acció no es podrà desfer."
+msgstr "Esteu segur que voleu eliminar els tipus d'ítems següents de la base de dades? Es perdrà tot aquell text relacionat amb els elements triats. Aquesta acció no es podrà desfer."
 
-#: admin/themes/default/settings/edit-item-type-elements.php:50
+#: admin/themes/default/settings/edit-item-type-elements.php:51
 msgid "Ok"
 msgstr "Ok"
 
@@ -1619,13 +1634,13 @@ msgid "Customize which types of records will be searchable in Omeka."
 msgstr "Personalitza quins tipus de registres podran ser cercats a Omeka."
 
 #: admin/themes/default/settings/edit-search.php:23
-#: admin/themes/default/settings/edit-search.php:41
+#: admin/themes/default/settings/edit-search.php:42
 msgid "Index Records"
 msgstr "Indexa els registres"
 
 #: admin/themes/default/settings/edit-search.php:26
 msgid "Click on the \"Index Records\" button to re-index your records."
-msgstr "Fes clic al botó \"Indexa els registres\" per a re-indexar els teus registres"
+msgstr "Feu clic al botó \"Indexa els registres\" per a reindexar els vostres registres"
 
 #: admin/themes/default/settings/edit-search.php:28
 msgid ""
@@ -1642,7 +1657,7 @@ msgstr "Restaura les extensions per defecte"
 
 #: admin/themes/default/settings/edit-security.php:28
 msgid "Restore Default Types"
-msgstr "Restaure els tipus per defecte"
+msgstr "Restaura els tipus per defecte"
 
 #: admin/themes/default/settings/edit-security.php:33
 msgid "Restore Default Elements"
@@ -1662,27 +1677,27 @@ msgstr "Edita etiquetes"
 
 #: admin/themes/default/tags/browse.php:9
 msgid "Browse Tags"
-msgstr "Cerqueu etiquetes"
+msgstr "Cerca etiquetes"
 
 #: admin/themes/default/tags/browse.php:24
 msgid "Editing Tags"
-msgstr "Editant etiquetes"
+msgstr "S'estan editant les etiquetes"
 
 #: admin/themes/default/tags/browse.php:27
 msgid "To view all items with a tag, click the number."
-msgstr "Per a visualitzar tots els elements amb una etiqueta fes clic al nombre."
+msgstr "Per veure tots els elements amb una etiqueta determinada, feu clic al número."
 
 #: admin/themes/default/tags/browse.php:28
 msgid ""
 "To edit the tag name, click the name and begin editing, and hit \"enter\" to"
 " save. To cancel an edit, click the ESC key or click away from the tag."
-msgstr "Per editar el nom de l'etiqueta fes clic al nom i comença a editar-lo i pressiona \"enter\" per guardar. Per cancel·lar l'edició fes clic a la tecla ESC o fes clic a fora de l'etiqueta."
+msgstr "Per editar el nom de l'etiqueta feu clic al nom i comenceu a editar-lo. Polseu \"intro\" per guardar. Per cancel·lar l'edició feu clic a la tecla ESC o feu clic fora de l'etiqueta."
 
 #: admin/themes/default/tags/browse.php:29
 msgid ""
 "To delete a tag, click the X. Deleting a tag will not delete the tagged "
 "items."
-msgstr "Per esborrar una etiqueta fes clic a la X. Si s'esborra una etiqueta no s'esborren els ítems etiquetats amb la mateixa."
+msgstr "Per esborrar una etiqueta feu clic a la X. Si s'esborra una etiqueta no s'esborren els ítems etiquetats amb aquesta."
 
 #: admin/themes/default/tags/browse.php:39
 msgid "Most"
@@ -1706,7 +1721,7 @@ msgid "Record Types"
 msgstr "Tipus de registres"
 
 #: admin/themes/default/themes/browse.php:15
-#: admin/themes/default/themes/browse.php:43
+#: admin/themes/default/themes/browse.php:42
 #, php-format
 msgid "Screenshot for %s Theme"
 msgstr "Captura de pantalla de la %s Plantilla"
@@ -1720,7 +1735,7 @@ msgid "Current Theme"
 msgstr "Plantilla actual"
 
 #: admin/themes/default/themes/browse.php:21
-#: admin/themes/default/themes/browse.php:48
+#: admin/themes/default/themes/browse.php:47
 #, php-format
 msgid "By %s"
 msgstr "Per %s"
@@ -1733,7 +1748,7 @@ msgid ""
 "target=\"_blank\">design your own</a>!"
 msgstr "Podeu afegir noves plantilles descarregant-les del <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Directori de plantilles d'Omeka</a>, o <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">dissenyar una de pròpia</a>!"
 
-#: admin/themes/default/themes/browse.php:45
+#: admin/themes/default/themes/browse.php:44
 msgid "Use this theme"
 msgstr "Utilitza aquesta plantilla"
 
@@ -1744,21 +1759,21 @@ msgstr "Configura la plantilla: %s"
 
 #: admin/themes/default/themes/config.php:11
 msgid "Configurations apply to this theme only."
-msgstr "Les configuracions s'apliquen únicament a aquesta plantilla"
+msgstr "Les configuracions s'apliquen únicament a aquesta plantilla."
 
 #: admin/themes/default/upgrade/index.php:32
 msgid "Upgrade Your Omeka Database"
-msgstr "Actualitza la teva base de dades Omeka"
+msgstr "Actualitzeu la base de dades d'Omeka"
 
 #: admin/themes/default/upgrade/index.php:34
 msgid ""
 "Your Omeka database is not compatible with your current version of Omeka."
-msgstr "La teva base de dades no es compatible amb la teva actual versió d'Omeka"
+msgstr "La base de dades no es compatible amb versió actual d'Omeka"
 
 #: admin/themes/default/upgrade/index.php:35
 msgid ""
 "Please back up your existing database and then click the button to upgrade."
-msgstr "Si us plau fes un còpia de seguretat de la teva base de dades i posteriorment fes clic al botó per actualitzar"
+msgstr "Feu un còpia de seguretat de la base de dades i posteriorment feu clic al botó per actualitzar"
 
 #: admin/themes/default/upgrade/index.php:37
 msgid "Upgrade Database"
@@ -1766,18 +1781,18 @@ msgstr "Actualitza la base de dades"
 
 #: admin/themes/default/upgrade/migrate.php:32
 msgid "Omeka encountered an error when upgrading your installation."
-msgstr "Omeka ha trobat un error al actualitzar el sistema."
+msgstr "Omeka ha trobat un error en actualitzar el sistema."
 
 #: admin/themes/default/upgrade/migrate.php:37
 msgid "Please restore from your database backup and try again."
-msgstr "Si us plau restaura a partir de la base de dades i prova de nou."
+msgstr "Restaureu a partir de la base de dades i proveu de nou."
 
 #: admin/themes/default/upgrade/migrate.php:39
 msgid ""
 "If you have any questions please refer to <a "
 "href=\"http://omeka.org/codex\">Omeka documentation</a> or post a message on"
 " the <a href=\"http://omeka.org/forums\">Omeka forums</a>."
-msgstr "Si teniu cap pregunta, si us plau adreceu-vos a <a href=\"http://omeka.org/codex\">Omeka documentation</a> o feu un post als <a href=\"http://omeka.org/forums\">forums d'Omeka</a>."
+msgstr "Si teniu cap pregunta, adreceu-vos a la <a href=\"http://omeka.org/codex\">documentació d'Omeka</a> o feu un post als <a href=\"http://omeka.org/forums\">fòrums d'Omeka</a>."
 
 #: admin/themes/default/upgrade/migrate.php:42
 msgid "Omeka has upgraded successfully."
@@ -1792,17 +1807,23 @@ msgstr "Torna al tauler de control"
 msgid "User Activation"
 msgstr "Activació de l'usuari"
 
-#: admin/themes/default/users/activate.php:18
+#: admin/themes/default/users/activate.php:12
+#: application/views/scripts/users/activate.php:8
+#, php-format
+msgid "Hello %s. Your username is %s"
+msgstr "Hola %s. El teu nom d'usuari és %s"
+
+#: admin/themes/default/users/activate.php:17
 #: application/forms/ResetPassword.php:23
 #: application/views/scripts/users/activate.php:14
 msgid "Create a Password"
 msgstr "Trieu una contrasenya"
 
-#: admin/themes/default/users/activate.php:24 application/forms/Install.php:71
+#: admin/themes/default/users/activate.php:23 application/forms/Install.php:71
 #: application/forms/ResetPassword.php:44
 #: application/views/scripts/users/activate.php:20
 msgid "Re-type the Password"
-msgstr "Torna a escriure la contrasenya"
+msgstr "Torneu a escriure la contrasenya"
 
 #: admin/themes/default/users/add.php:2
 msgid "Add New User"
@@ -1832,12 +1853,12 @@ msgstr "Per crear una clau d'API, introduïu una etiqueta per aquesta clau a con
 
 #: admin/themes/default/users/api-keys.php:31
 msgid "You have no API keys. Use the form above to create one."
-msgstr "No tens cap clau API. Creeu una amb el següent formulari."
+msgstr "No teniu cap clau API. Creeu una amb el formulari següent."
 
 #: admin/themes/default/users/api-keys.php:33
 #, php-format
 msgid "%s has no API keys. Use the form above to create one."
-msgstr "%s no té claus API. Utilitzeu el formulari per crear una."
+msgstr "%s no té claus API. Utilitzeu el formulari per crear-ne una."
 
 #: admin/themes/default/users/api-keys.php:41
 msgid "Key"
@@ -1855,9 +1876,13 @@ msgstr "Darrer accés"
 msgid "Rescind"
 msgstr "Rescindir"
 
+#: admin/themes/default/users/api-keys.php:60
+msgid "Update API Keys"
+msgstr "Actualitza les claus de l'API"
+
 #: admin/themes/default/users/browse.php:2
 msgid "Browse Users"
-msgstr "Navega pels usuaris"
+msgstr "Usuaris"
 
 #: admin/themes/default/users/browse.php:8
 msgid "Add a User"
@@ -1878,11 +1903,11 @@ msgstr "Nom d'usuari"
 #: application/forms/RecoverPassword.php:27 application/forms/User.php:96
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
-msgstr "Email"
+msgstr "Correu electrònic"
 
 #: admin/themes/default/users/browse.php:35
 msgid "Search users"
-msgstr "Cercar usuaris"
+msgstr "Cerca usuaris"
 
 #: admin/themes/default/users/browse.php:37
 #: admin/themes/default/users/browse.php:48
@@ -1904,7 +1929,7 @@ msgstr "Desa la contrasenya"
 
 #: admin/themes/default/users/edit.php:23
 msgid "Resend Activation Email"
-msgstr "Reenvieu el correu electrònic d'activació"
+msgstr "Reenvia el correu electrònic d'activació"
 
 #: admin/themes/default/users/forgot-password.php:2
 #: application/views/scripts/users/forgot-password.php:2
@@ -1914,7 +1939,7 @@ msgstr "Contrasenya oblidada"
 #: admin/themes/default/users/forgot-password.php:11
 #: application/views/scripts/users/forgot-password.php:10
 msgid "Enter your email address to retrieve your password."
-msgstr "Introdueix el teu email si vols recuperar la contrasenya."
+msgstr "Introduïu el vostre correu electrònic si voleu recuperar la contrasenya."
 
 #: admin/themes/default/users/forgot-password.php:21
 #: application/views/scripts/users/forgot-password.php:18
@@ -1929,11 +1954,11 @@ msgstr "Torna a la validació d'usuari"
 #: admin/themes/default/users/login.php:3 application/forms/Login.php:55
 #: application/views/scripts/users/login.php:3
 msgid "Log In"
-msgstr "Entrar"
+msgstr "Entra"
 
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
-msgstr "(Has perdut la teva contrasenya?)"
+msgstr "(Heu perdut la vostra contrasenya?)"
 
 #: admin/themes/default/users/show.php:8
 #, php-format
@@ -1951,67 +1976,71 @@ msgstr "Les configuracions de la visualització han estat actualitzades."
 #: application/controllers/AppearanceController.php:51
 #: application/controllers/ItemTypesController.php:35
 #: application/controllers/ItemTypesController.php:61
-#: application/controllers/SettingsController.php:47
-#: application/controllers/SettingsController.php:79
+#: application/controllers/SettingsController.php:55
+#: application/controllers/SettingsController.php:88
 #: install/views/scripts/index/index.phtml:17
 msgid "There were errors found in your form. Please edit and resubmit."
-msgstr "Hem trobat errors en el formulari. Si us plau torni'l a editar i enviï'l de nou."
+msgstr "Hem trobat errors en el formulari. Torneu-lo a editar i envieu-lo de nou."
 
 #: application/controllers/AppearanceController.php:66
 msgid "The navigation settings have been updated."
-msgstr "La configuració de la navegació ha estat actualitzada"
+msgstr "La configuració de la navegació s'ha actualitzat."
 
 #: application/controllers/AppearanceController.php:69
 msgid ""
 "The navigation settings were not saved because of missing or invalid values."
 "  All changed values have been restored."
-msgstr "La configuració de la navegació no s'ha guardat donat que hi ha valors que falten o bé són incorrectes. Tots els valors canviats han estat restaurats."
+msgstr "La configuració de la navegació no s'ha desat perquè hi ha valors que falten o bé són incorrectes. Tots els valors canviats s'han restaurat."
 
-#: application/controllers/CollectionsController.php:74
-#, php-format
-msgid "The collection \"%s\" was successfully added!"
-msgstr "La col·lecció \"%s\" ha estat afegida amb èxit!"
+#: application/controllers/AppearanceController.php:97
+msgid "The navigation settings have been reset."
+msgstr "Els paràmetres de la navegació s'han reiniciat correctament."
 
 #: application/controllers/CollectionsController.php:76
+#, php-format
+msgid "The collection \"%s\" was successfully added!"
+msgstr "La col·lecció #%s s'ha afegit correctament!"
+
+#: application/controllers/CollectionsController.php:78
 #, php-format
 msgid "The collection #%s was successfully added!"
 msgstr "La col·lecció #%s s'ha afegit correctament!"
 
-#: application/controllers/CollectionsController.php:84
-#, php-format
-msgid "The collection \"%s\" was successfully changed!"
-msgstr "La col·lecció \"%s\" ha estat modificada amb èxit!"
-
 #: application/controllers/CollectionsController.php:86
 #, php-format
-msgid "The collection #%s was successfully changed!"
-msgstr "La col·lecció #%s ha estat modificada correctament!"
+msgid "The collection \"%s\" was successfully changed!"
+msgstr "La col·lecció \"%s\" s'ha modificat correctament!"
 
-#: application/controllers/CollectionsController.php:94
+#: application/controllers/CollectionsController.php:88
 #, php-format
-msgid "The collection \"%s\" was successfully deleted!"
-msgstr "La col·lecció \"%s\" ha estat esborrada amb èxit!"
+msgid "The collection #%s was successfully changed!"
+msgstr "La col·lecció \"%s\" s'ha modificat correctament!"
 
 #: application/controllers/CollectionsController.php:96
 #, php-format
-msgid "The collection #%s was successfully deleted!"
-msgstr "La col·lecció #%s ha estat esborrada correctament!"
+msgid "The collection \"%s\" was successfully deleted!"
+msgstr "La col·lecció \"%s\" s'ha eliminat correctament!"
 
-#: application/controllers/CollectionsController.php:104
+#: application/controllers/CollectionsController.php:98
+#, php-format
+msgid "The collection #%s was successfully deleted!"
+msgstr "La col·lecció \"%s\" s'ha eliminat correctament!"
+
+#: application/controllers/CollectionsController.php:106
 #, php-format
 msgid ""
 "This will delete the collection \"%s\" and its associated metadata. This "
 "will not delete any items in this collection, but will delete the reference "
 "to this collection in each item."
-msgstr "Això esborrarà la col·lecció \"%s\" i les metadades associades. Això no eliminarà els ítems que formen part de la col·lecció, però eliminarà qualsevol referència a aquesta col·lecció a cadascun dels ítems."
+msgstr "Això esborrarà la col·lecció \"%s\" i les metadades associades. Això no eliminarà els ítems que formen part de la col·lecció, però eliminarà qualsevol referència a aquesta col·lecció en cadascun dels ítems."
 
-#: application/controllers/CollectionsController.php:108
+#: application/controllers/CollectionsController.php:110
 #, php-format
 msgid ""
 "This will delete the collection #%s and its associated metadata. This will "
 "not delete any items in this collection, but will delete the reference to "
 "this collection in each item."
-msgstr "Això esborrarà la col·lecció #%s i les metadades associades. Això no eliminarà els ítems que formen part de la col·lecció, però eliminarà qualsevol referència a aquesta col·lecció a cadascun dels ítems."
+msgstr "Això esborrarà la col·lecció #%s i les metadades associades. Això no eliminarà els ítems que formen part de la col·lecció, però eliminarà qualsevol referència a aquesta col·lecció en cadascun dels ítems."
 
 #: application/controllers/ElementSetsController.php:21
 msgid ""
@@ -2019,9 +2048,25 @@ msgid ""
 "set. Items will lose all metadata that is specific to this element set."
 msgstr "Això eliminarà el conjunt d'elements i tots els elements assignats al conjunt d'elements. Els ítems perdran totes les metadades que són específiques d'aquest conjunt d'elements."
 
-#: application/controllers/ElementSetsController.php:65
+#: application/controllers/ElementSetsController.php:53
+#: application/controllers/PluginsController.php:51
+#: application/controllers/PluginsController.php:79
+#: application/controllers/PluginsController.php:139
+#: application/controllers/PluginsController.php:190
+#: application/controllers/PluginsController.php:223
+#: application/controllers/PluginsController.php:337
+#: application/controllers/SettingsController.php:104
+#: application/controllers/SettingsController.php:140
+#: application/controllers/SettingsController.php:177
+#: application/controllers/ThemesController.php:87
+#: application/libraries/Omeka/Controller/AbstractActionController.php:183
+#: application/libraries/Omeka/Controller/AbstractActionController.php:224
+msgid "There was an error on the form. Please try again."
+msgstr "S'han detectat errors al formulari. Torneu a editar el formulari i envieu-lo de nou."
+
+#: application/controllers/ElementSetsController.php:72
 msgid "The element set was successfully changed!"
-msgstr "El set d'elements ha estat modificat correctament!"
+msgstr "El conjunt d'elements ha estat modificat correctament!"
 
 #: application/controllers/ErrorController.php:64
 msgid "Page not found."
@@ -2029,21 +2074,25 @@ msgstr "Pàgina no trobada"
 
 #: application/controllers/ErrorController.php:79
 msgid "Access denied."
-msgstr "Accés denegat"
+msgstr "Accés denegat."
 
-#: application/controllers/FilesController.php:64
+#: application/controllers/FilesController.php:66
 msgid "This will delete the file and its associated metadata."
 msgstr "Això esborrarà el fitxer i les seves metadades associades."
+
+#: application/controllers/FilesController.php:72
+msgid "The file was successfully deleted."
+msgstr "El fitxer s'ha esborrat correctament."
 
 #: application/controllers/ItemTypesController.php:28
 #, php-format
 msgid "The item type \"%s\" was successfully added."
-msgstr "El tipus d'ítem \"%s\" ha estat afegit correctament."
+msgstr "El tipus d'ítem \"%s\" s'ha afegit correctament."
 
 #: application/controllers/ItemTypesController.php:55
 #, php-format
 msgid "The item type \"%s\" was successfully updated."
-msgstr "El tipus d'ítem \"%s\" ha estat actualitzat correctament."
+msgstr "El tipus d'ítem \"%s\" s'ha actualitzat correctament."
 
 #: application/controllers/ItemTypesController.php:150
 #, php-format
@@ -2058,276 +2107,263 @@ msgstr "Això esborrarà el tipus d'ítem \"%s\" però no esborrarà els element
 msgid ""
 "The item type \"%s\" was successfully added!  You may now add elements to "
 "your new item type."
-msgstr "El tipus d'ítem \"%s\" ha estat afegit! Ara podeu afegir nous elements d'aquest tipus d'ítem."
+msgstr "El tipus d'ítem \"%s\" s'ha afegit correctament! Ara podeu afegir nous elements per aquest tipus d'ítem."
 
-#: application/controllers/ItemsController.php:85
-#: application/controllers/ItemsController.php:145
+#: application/controllers/ItemsController.php:89
+#: application/controllers/ItemsController.php:149
 msgid ""
 "The ImageMagick directory path has not been set. No derivative images will "
 "be created. If you would like Omeka to create derivative images, please set "
 "the path in Settings."
-msgstr "La ruta del directori de l'ImageMagick no s'ha establert. No es crearan imatges derivades. Per a que Omeka pugui crear imatges derivades heu de definir la ruta a l'apartat Configuració."
+msgstr "La ruta del directori de l'ImageMagick no s'ha establert. No es crearan imatges derivades. Per a que Omeka pugui crear imatges derivades heu de definir la ruta a l'apartat de Paràmetres."
 
-#: application/controllers/ItemsController.php:94
+#: application/controllers/ItemsController.php:98
 #, php-format
 msgid "The item \"%s\" was successfully added!"
-msgstr "L'ítem \"%s\" ha estat afegit correctament!"
+msgstr "L'ítem \"%s\" s'ha afegit correctament!"
 
-#: application/controllers/ItemsController.php:96
+#: application/controllers/ItemsController.php:100
 #, php-format
 msgid "The item #%s was successfully added!"
-msgstr "L'ítem #%s ha estat afegit correctament!"
+msgstr "L'ítem #%s s'ha afegit correctament!"
 
-#: application/controllers/ItemsController.php:104
+#: application/controllers/ItemsController.php:108
 #, php-format
 msgid "The item \"%s\" was successfully changed!"
-msgstr "L'ítem \"%s\" ha estat modificat correctament!"
+msgstr "L'ítem \"%s\" s'ha modificat correctament!"
 
-#: application/controllers/ItemsController.php:106
+#: application/controllers/ItemsController.php:110
 #, php-format
 msgid "The item #%s was successfully changed!"
-msgstr "L'ítem #%s ha estat modificat correctament!"
+msgstr "L'ítem #%s s'ha modificat correctament!"
 
-#: application/controllers/ItemsController.php:114
+#: application/controllers/ItemsController.php:118
 #, php-format
 msgid "The item \"%s\" was successfully deleted!"
-msgstr "L'ítem \"%s\" ha estat esborrat correctament!"
+msgstr "L'ítem \"%s\" s'ha eliminat correctament!"
 
-#: application/controllers/ItemsController.php:116
+#: application/controllers/ItemsController.php:120
 #, php-format
 msgid "The item #%s was successfully deleted!"
-msgstr "L'ítem #%s ha estat esborrat correctament!"
+msgstr "L'ítem #%s s'ha eliminat correctament!"
 
-#: application/controllers/ItemsController.php:124
+#: application/controllers/ItemsController.php:128
 #, php-format
 msgid ""
 "This will delete the item \"%s\" and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr "Això esborrarà l'ítem \"%s\" i les metadades associades al mateix. També s'esborraran tots els fitxers i les metadades dels fitxers associats a l'ítem."
+msgstr "Això eliminarà l'ítem \"%s\" i les metadades associades al mateix. També s'eliminaran tots els fitxers i les metadades dels fitxers associats a l'ítem."
 
-#: application/controllers/ItemsController.php:128
+#: application/controllers/ItemsController.php:132
 #, php-format
 msgid ""
 "This will delete the item #%s and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
 msgstr "Això esborrarà l'ítem #%s i les metadades associades al mateix. També s'esborraran tots els fitxers i les metadades dels fitxers associats a l'ítem."
 
-#: application/controllers/ItemsController.php:255
+#: application/controllers/ItemsController.php:227
 msgid "You must choose some items to batch edit."
 msgstr "Podeu triar diversos ítems per editar en lot."
 
-#: application/controllers/ItemsController.php:299
+#: application/controllers/ItemsController.php:271
 msgid "User is not allowed to modify visibility of items."
 msgstr "L'usuari no està autoritzat per modificar la visibilitat dels ítems"
 
-#: application/controllers/ItemsController.php:304
+#: application/controllers/ItemsController.php:276
 msgid "User is not allowed to modify featured status of items."
 msgstr "L'usuari no està autoritzat a modificar l'estat de destacat dels elements."
 
-#: application/controllers/ItemsController.php:311
+#: application/controllers/ItemsController.php:283
 msgid "User is not allowed to delete selected items."
 msgstr "L'usuari no està autoritzat per esborrar els ítems seleccionats"
 
-#: application/controllers/ItemsController.php:317
+#: application/controllers/ItemsController.php:289
 msgid "User is not allowed to edit selected items."
 msgstr "L'usuari no està autoritzat per editar els ítems seleccionats"
 
-#: application/controllers/ItemsController.php:322
+#: application/controllers/ItemsController.php:294
 msgid "User is not allowed to tag selected items."
 msgstr "L'usuari no està autoritzat per assignar etiquetes als ítems seleccionats"
 
-#: application/controllers/ItemsController.php:356
+#: application/controllers/ItemsController.php:328
 msgid "The items were successfully deleted!"
-msgstr "Els ítems han estat esborrats correctament!"
+msgstr "Els ítems s'han eliminat correctament!"
 
-#: application/controllers/ItemsController.php:358
+#: application/controllers/ItemsController.php:330
 msgid "The items were successfully changed!"
-msgstr "Els ítems han estat modificats amb èxit!"
+msgstr "Els ítems s'han modificat correctament!"
 
 #: application/controllers/PluginsController.php:45
 #, php-format
 msgid ""
 "Error in configuring plugin named \"%s\". Missing config and/or config_form "
 "hook(s)."
-msgstr "S'ha produït un error durant la configuració del plugin \"%s\". Manca 'config' i/o 'config_form hook(s)'."
+msgstr "S'ha produït un error durant la configuració del connector \"%s\". Manca 'config' i/o 'config_form hook(s)'."
 
-#: application/controllers/PluginsController.php:52
+#: application/controllers/PluginsController.php:59
 #, php-format
 msgid "The %s plugin was successfully configured!"
-msgstr "El %s plugin ha estat configurat amb èxit!"
+msgstr "El connector %s s'ha configurat correctament!"
 
-#: application/controllers/PluginsController.php:70
+#: application/controllers/PluginsController.php:89
 #, php-format
 msgid "The %s plugin has already been installed."
-msgstr "El %s plugin ja ha estat prèviament instal·lat"
+msgstr "El connector %s ja estava instal·lat"
 
-#: application/controllers/PluginsController.php:79
+#: application/controllers/PluginsController.php:99
 #, php-format
 msgid "The %s plugin was successfully installed!"
-msgstr "El plugin %s s'ha instal·lat correctament!"
+msgstr "El connector %s s'ha instal·lat correctament!"
 
-#: application/controllers/PluginsController.php:91
-#: application/controllers/PluginsController.php:96
+#: application/controllers/PluginsController.php:111
+#: application/controllers/PluginsController.php:116
 #, php-format
 msgid "The following error occurred while installing the %s plugin: "
 msgstr "El següent error s'ha produït en el moment d'instal·lar el plugin %s:"
 
-#: application/controllers/PluginsController.php:124
+#: application/controllers/PluginsController.php:154
 #, php-format
 msgid "The following error occurred while activating the %s plugin: "
-msgstr "El següent error ha ocurregut al activar el plugin %s :"
+msgstr "L'error següent ha ocorregut al activar el connector %s :"
 
-#: application/controllers/PluginsController.php:134
+#: application/controllers/PluginsController.php:164
 #, php-format
 msgid "The %s plugin was successfully activated!"
-msgstr "El plugin %s ha estat activat correctament!"
+msgstr "El connector %s s'ha activat correctament!"
 
-#: application/controllers/PluginsController.php:139
+#: application/controllers/PluginsController.php:169
 #, php-format
 msgid "The %s plugin was activated, but could not be loaded: "
-msgstr "El plugin %s ha estat activat, però no es pot carregar: "
+msgstr "El connector %s s'ha activat, però no es pot carregar: "
 
-#: application/controllers/PluginsController.php:163
+#: application/controllers/PluginsController.php:204
 #, php-format
 msgid "The %s plugin was successfully deactivated!"
-msgstr "El plugin %s s'ha desativat correctament!"
+msgstr "El connector %s s'ha desactivat correctament!"
 
-#: application/controllers/PluginsController.php:168
+#: application/controllers/PluginsController.php:209
 #, php-format
 msgid "The following error occurred while deactivating the %s plugin: "
-msgstr "El següent error ha ocurregut al desactivar el plugin %s :"
+msgstr "L'error següent ha ocorregut al desactivar el connector %s :"
 
-#: application/controllers/PluginsController.php:187
+#: application/controllers/PluginsController.php:239
 #, php-format
 msgid "The %s plugin was successfully upgraded!"
-msgstr "El plugin %s ha estat actualitzat correctament!"
+msgstr "El connector %s s'ha actualitzat correctament!"
 
-#: application/controllers/PluginsController.php:196
-#: application/controllers/PluginsController.php:202
+#: application/controllers/PluginsController.php:248
+#: application/controllers/PluginsController.php:254
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
-msgstr "El següent error ha ocurregut a l'actualitzar el plugin %s :"
+msgstr "L'error següent ha ocorregut a l'actualitzar el connector %s :"
 
-#: application/controllers/PluginsController.php:253
+#: application/controllers/PluginsController.php:310
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
-msgstr "No s'ha trobat el plugin al directori '%s' "
+msgstr "No s'ha trobat el connector al directori '%s' "
 
-#: application/controllers/PluginsController.php:262
+#: application/controllers/PluginsController.php:322
 msgid "You must confirm the uninstall before proceeding."
-msgstr "Ha de confirmar la desinstal·lació abans de continuar"
+msgstr "Heu de confirmar la desinstal·lació abans de continuar"
 
-#: application/controllers/PluginsController.php:280
+#: application/controllers/PluginsController.php:345
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
-msgstr "El plugin %s ha estat desinstal·lat correctament!"
+msgstr "El connector %s s'ha desinstal·lat correctament!"
 
-#: application/controllers/PluginsController.php:285
-#: application/controllers/PluginsController.php:290
+#: application/controllers/PluginsController.php:350
+#: application/controllers/PluginsController.php:355
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
-msgstr "El següent error ha ocurregut al desinstal·lar el plugin %s :"
+msgstr "L'error següent ha ocurregut al desinstal·lar el connector %s :"
 
-#: application/controllers/PluginsController.php:317
+#: application/controllers/PluginsController.php:382
 msgid "No plugin name given."
-msgstr "No s'ha donat cap nom al plugin"
+msgstr "No s'ha donat cap nom al connector."
 
-#: application/controllers/PluginsController.php:330
+#: application/controllers/PluginsController.php:395
 #, php-format
 msgid "The plugin %s must be installed."
-msgstr "El plugin %s ha d'estar instal·lat."
+msgstr "El connector %s s'ha instal·lat."
 
-#: application/controllers/SettingsController.php:44
+#: application/controllers/SettingsController.php:52
 msgid "The general settings have been updated."
-msgstr "La configuració general ha estat actualitzada"
+msgstr "Els paràmetres generals s'han actualitzat."
 
-#: application/controllers/SettingsController.php:76
+#: application/controllers/SettingsController.php:85
 msgid "The security settings have been updated."
-msgstr "La configuració de seguretat ha estat actualitzada"
+msgstr "El paràmetres de seguretat s'han actualitzat."
 
-#: application/controllers/SettingsController.php:95
+#: application/controllers/SettingsController.php:114
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
-msgstr "Has modificat quins son els registres que poden ser cercats a Omeka. Si us plau re-indexa els registres utilitzant el formulari de sota."
+msgstr "Heu modificat quins son els registres que poden ser cercats a Omeka. Reindexeu els registres utilitzant el formulari següent."
 
-#: application/controllers/SettingsController.php:102
+#: application/controllers/SettingsController.php:121
 msgid ""
 "Indexing records. This may take a while. You may continue administering your"
 " site."
-msgstr "Indexant registres. Aquest procés pot trigar una estona. Mentrestant pots continuar amb l'administració del lloc."
+msgstr "S'estan indexant els registres. Aquest procés pot trigar una estona. Mentrestant podeu continuar amb l'administració del lloc."
 
-#: application/controllers/SettingsController.php:131
+#: application/controllers/SettingsController.php:156
 msgid "The item type elements were successfully changed!"
-msgstr "Els tipus d'item pels diferents elements han estat modificats correctament!"
+msgstr "Els elements de tipus d'item s'han modificat correctament!"
 
-#: application/controllers/SettingsController.php:150
+#: application/controllers/SettingsController.php:183
 msgid "The API configuration was successfully changed!"
 msgstr "La configuració de l'API s'ha modificat correctament!"
 
-#: application/controllers/SettingsController.php:176
+#: application/controllers/SettingsController.php:206
 msgid "The ImageMagick directory path works."
-msgstr "La ruta per al directori d'ImageMagick és correcta."
+msgstr "La ruta del directori d'ImageMagick és correcta."
 
-#: application/controllers/SettingsController.php:177
+#: application/controllers/SettingsController.php:207
 msgid "The ImageMagick directory path does not work."
-msgstr "La ruta per al directori d'ImageMagick és incorrecta."
+msgstr "La ruta del directori d'ImageMagick és incorrecta."
 
-#: application/controllers/TagsController.php:35
-msgid "You have to be logged in to edit tags!"
-msgstr "Has d'estar validat per editar etiquetes!"
-
-#: application/controllers/TagsController.php:64
-#, php-format
-msgid "Tag named \"%1$s\" was successfully renamed to \"%2$s\"."
-msgstr "L'etiqueta \"%1$s\" s'ha modificat per \"%2$s\"."
-
-#: application/controllers/TagsController.php:91
+#: application/controllers/TagsController.php:48
 msgid "Invalid tagType given."
 msgstr "Invàlid tagType "
 
-#: application/controllers/ThemesController.php:25
+#: application/controllers/ThemesController.php:28
 msgid "Invalid form submission."
 msgstr "L'enviament del formulari no és vàlid"
 
-#: application/controllers/ThemesController.php:33
+#: application/controllers/ThemesController.php:36
 msgid "You have chosen an illegal theme name. Please select another theme."
-msgstr "Heu triat una plantilla inadequada. Si us plau seleccioni una altra plantilla."
+msgstr "Heu triat una plantilla inadequada. Si us plau seleccioneu una altra plantilla."
 
-#: application/controllers/ThemesController.php:40
+#: application/controllers/ThemesController.php:43
 #, php-format
 msgid "This theme requires a newer version of Omeka (%s)."
 msgstr "Aquesta plantilla requereix una versió més recent d'Omeka (%s)."
 
-#: application/controllers/ThemesController.php:54
+#: application/controllers/ThemesController.php:57
 msgid "The theme has been successfully changed."
-msgstr "La plantilla ha estat canviada correctament."
-
-#: application/controllers/ThemesController.php:81
-msgid "The theme settings were successfully saved!"
-msgstr "La configuració de la plantilla s'ha desat correctament!"
+msgstr "La plantilla s'ha canviat correctament."
 
 #: application/controllers/ThemesController.php:84
-msgid "There was an error on the form. Please try again."
-msgstr "S'han detectat errors al formulari. Si us plau torni a editar el formulari i enviï de nou."
+msgid "The theme settings were successfully saved!"
+msgstr "Els paràmetres de la plantilla s'han desat correctament!"
 
 #: application/controllers/UpgradeController.php:50
 msgid "SQL error in migration: "
-msgstr "Error SQL en la migració"
+msgstr "Error SQL en la migració:"
 
 #: application/controllers/UsersController.php:70
 msgid ""
 "Unable to reset password. Please verify that the information is correct and "
 "contact an administrator if necessary."
-msgstr "No és pot restaurar la contrasenya. Si us plau verifiqui que la informació és correcta i contacti amb l'administrador si és necessari."
+msgstr "No és pot restaurar la contrasenya. Verifiqueu que la informació és correcta. Contacteu amb l'administrador si és necessari."
 
 #: application/controllers/UsersController.php:108
 msgid "Please follow this link to reset your password:"
-msgstr "Si us plau utilitza aquest link per restaurar la teva contrasenya:"
+msgstr "Utilitzeu aquest enllaç per restaurar la vostra contrasenya:"
 
 #: application/controllers/UsersController.php:110
 #: application/controllers/UsersController.php:113
-#: application/controllers/UsersController.php:380
+#: application/controllers/UsersController.php:385
 #, php-format
 msgid "%s Administrator"
 msgstr "%s Administrador"
@@ -2335,11 +2371,11 @@ msgstr "%s Administrador"
 #: application/controllers/UsersController.php:114
 #, php-format
 msgid "[%s] Reset Your Password"
-msgstr "[%s] Restaura la teva contrasenya"
+msgstr "[%s] Restaureu la vostra ontrasenya"
 
 #: application/controllers/UsersController.php:117
 msgid "Please check your email for a link to reset your password."
-msgstr "S'ha enviat un enllaç al teu correu electrònic que has d'utilitzar per restaurar la teva contrasenya"
+msgstr "S'ha enviat un enllaç al vostre correu electrònic que heu d'utilitzar per restaurar la contrasenya"
 
 #: application/controllers/UsersController.php:126
 msgid "Invalid activation code given."
@@ -2347,58 +2383,59 @@ msgstr "Codi d'activació invàlid"
 
 #: application/controllers/UsersController.php:135
 msgid "Password: The passwords do not match."
-msgstr "Contrasenya: Les contrassenyes no coincideixen"
+msgstr "Contrasenya: Les contrasenyes no coincideixen."
 
 #: application/controllers/UsersController.php:143
 msgid "You may now log in to Omeka."
 msgstr "Ara podeu entrar a l'Omeka."
 
-#: application/controllers/UsersController.php:171
+#: application/controllers/UsersController.php:168
+#: application/controllers/UsersController.php:236
+#: application/controllers/UsersController.php:287
+msgid "There was an invalid entry on the form. Please try again."
+msgstr "S'ha produït una entrada de dades invàlida al formulari. Torneu a provar."
+
+#: application/controllers/UsersController.php:176
 #, php-format
 msgid "The user \"%s\" was successfully added!"
 msgstr "L'usuari \"%s\" s'ha afegit correctament!"
 
-#: application/controllers/UsersController.php:175
+#: application/controllers/UsersController.php:180
 #, php-format
 msgid "The user \"%s\" was added, but the activation email could not be sent."
-msgstr "S'ha activat l'usuari \"%s\" , però no s'ha pogut enviar l'email d'activació."
+msgstr "S'ha activat l'usuari \"%s\" , però no s'ha pogut enviar e correu electrònic d'activació."
 
-#: application/controllers/UsersController.php:213
+#: application/controllers/UsersController.php:218
 msgid "User activation email has been sent."
-msgstr "El correu electrònic d'activació d'usuari ha estat enviat."
+msgstr "El correu electrònic d'activació d'usuari s'ha enviat."
 
-#: application/controllers/UsersController.php:215
+#: application/controllers/UsersController.php:220
 msgid "User activation email could not be sent."
 msgstr "El correu electrònic d'activació no s'ha pogut enviar."
 
-#: application/controllers/UsersController.php:231
-#: application/controllers/UsersController.php:282
-msgid "There was an invalid entry on the form. Please try again."
-msgstr "S'ha produït una entrada de dades no vàlida al formulari. Si us plau torna a provar."
-
-#: application/controllers/UsersController.php:253
+#: application/controllers/UsersController.php:258
 #, php-format
 msgid "The user %s was successfully changed!"
 msgstr "L'usuari \"%s\" s'ha actualitzat correctament!"
 
-#: application/controllers/UsersController.php:289
+#: application/controllers/UsersController.php:294
 msgid "Password changed!"
 msgstr "Contrasenya modificada!"
 
-#: application/controllers/UsersController.php:311
+#: application/controllers/UsersController.php:316
 msgid "A new API key was successfully created."
-msgstr "S'ha creat una nova clau API."
+msgstr "S'ha creat una nova clau d'API."
 
-#: application/controllers/UsersController.php:318
+#: application/controllers/UsersController.php:323
 msgid "An existing API key was successfully rescinded."
-msgstr "Una clau API existent ha estat rescindida."
+msgstr "Una clau d'API existent s'ha rescindit."
 
-#: application/controllers/UsersController.php:345
+#: application/controllers/UsersController.php:350
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
 msgstr "L'usuari \"%s\" s'ha eliminat correctament!"
 
-#: application/controllers/UsersController.php:351
+#: application/controllers/UsersController.php:356
 #, php-format
 msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
@@ -2406,23 +2443,23 @@ msgid ""
 "this user."
 msgstr "%s serà esborrat del sistema. Tots el ítems, col·leccions i etiquetes creades per aquest usuari romandran al sistema, però ja no estaran associades a aquest usuari."
 
-#: application/controllers/UsersController.php:376
+#: application/controllers/UsersController.php:381
 msgid "Welcome!"
 msgstr "Benvingut!"
 
-#: application/controllers/UsersController.php:378
+#: application/controllers/UsersController.php:383
 #, php-format
 msgid ""
 "Your account for the %s repository has been created. Please click the "
 "following link to activate your account:"
-msgstr "S'ha creat el teu compte pel repositori %s . Si us plau fes clic al següent enllaç per activar el teu compte."
+msgstr "S'ha creat el vostre compte al repositori %s . Si us plau feu clic al següent enllaç per activar el vostre compte."
 
-#: application/controllers/UsersController.php:381
+#: application/controllers/UsersController.php:386
 #, php-format
 msgid "Activate your account with the %s repository"
 msgstr "Activeu el vostre compte en el repositori %s"
 
-#: application/controllers/UsersController.php:476
+#: application/controllers/UsersController.php:481
 msgid "Login information incorrect. Please try again."
 msgstr "Login incorrecte. Si us plau torneu a provar."
 
@@ -2433,7 +2470,7 @@ msgstr "Mida de la imatge a mida natural"
 
 #: application/forms/AppearanceSettings.php:23
 msgid "Maximum fullsize image size constraint (in pixels)."
-msgstr "Restricció de la mida de la imatge completa (en píxels)."
+msgstr "Mida màxima de la imatge completa (en píxels)."
 
 #: application/forms/AppearanceSettings.php:29
 #: application/forms/Install.php:136
@@ -2442,16 +2479,16 @@ msgstr "Mida de la imatge en miniatura"
 
 #: application/forms/AppearanceSettings.php:30
 msgid "Maximum thumbnail size constraint (in pixels)."
-msgstr "Restricció de la mida de la miniatura (en píxels)."
+msgstr "Mida màxima de la miniatura (en píxels)."
 
 #: application/forms/AppearanceSettings.php:36
 #: application/forms/Install.php:144
 msgid "Square Thumbnail Size"
-msgstr "Mida del quadrat per a les miniatures"
+msgstr "Mida de les miniatures quadrades"
 
 #: application/forms/AppearanceSettings.php:37
 msgid "Maximum square thumbnail size constraint (in pixels)."
-msgstr "Restricció de la mida de les miniatures quadrades (en píxels)."
+msgstr "Mida màxima de les miniatures quadrades (en píxels)."
 
 #: application/forms/AppearanceSettings.php:43
 msgid "Results Per Page (admin)"
@@ -2481,13 +2518,13 @@ msgstr "Mostra els elements buits"
 msgid "Show Element Set Headings"
 msgstr "Mostra la capçalera del conjunt d'elements"
 
-#: application/forms/AppearanceSettings.php:71
+#: application/forms/AppearanceSettings.php:75
 msgid "Derivative Size Constraints"
-msgstr "Limitacions derivades del tamany"
+msgstr "Limitacions derivades de la mida"
 
-#: application/forms/AppearanceSettings.php:79
+#: application/forms/AppearanceSettings.php:83
 msgid "Display Settings"
-msgstr "Configuració de la visualització"
+msgstr "Paràmetres de visualització"
 
 #: application/forms/ChangePassword.php:25
 msgid "Current Password"
@@ -2508,7 +2545,7 @@ msgstr "Nova contrasenya"
 
 #: application/forms/ChangePassword.php:41
 msgid "New password must be entered."
-msgstr "S'ha d'introduir una nova contrasenya"
+msgstr "S'ha d'introduir una nova contrasenya."
 
 #: application/forms/ChangePassword.php:50
 #: application/forms/ChangePassword.php:70
@@ -2521,7 +2558,7 @@ msgstr "La nova contrasenya ha de tenir un mínim de %min% caràcters."
 
 #: application/forms/ChangePassword.php:68
 msgid "Repeat New Password"
-msgstr "Torna a introduïr la nova contrasenya"
+msgstr "Torneu a introduïr la nova contrasenya"
 
 #: application/forms/GeneralSettings.php:22 application/forms/Install.php:90
 msgid "Site Title"
@@ -2533,7 +2570,7 @@ msgstr "Descripció del lloc web"
 
 #: application/forms/GeneralSettings.php:31 application/forms/Install.php:99
 msgid "Administrator Email"
-msgstr "Email de l'administrador del lloc"
+msgstr "Correu electrònic de l'administrador del lloc"
 
 #: application/forms/GeneralSettings.php:37 application/forms/Install.php:105
 msgid "Site Copyright Information"
@@ -2555,11 +2592,11 @@ msgstr "Separeu les etiquetes utilitzant aquest caràcter o cadena. Compte al ca
 
 #: application/forms/GeneralSettings.php:59 application/forms/Install.php:174
 msgid "ImageMagick Directory Path"
-msgstr "Ruta del directori d'ImageMagick"
+msgstr "Ruta al directori de l'ImageMagick"
 
 #: application/forms/Install.php:31
 msgid "must be 30 characters or fewer with no whitespace"
-msgstr "ha de ser de 30 caràcters com a màxim sense espais en blanc"
+msgstr "ha de tenir 30 caràcters com a màxim sense espais en blanc"
 
 #: application/forms/Install.php:39 application/forms/User.php:46
 #: application/models/User.php:189
@@ -2578,7 +2615,7 @@ msgstr "ha de tenir un mínim de 6 caràcters"
 
 #: application/forms/Install.php:72
 msgid "Confirm your password."
-msgstr "Confirma la teva contrasenya"
+msgstr "Confirma la contrasenya"
 
 #: application/forms/Install.php:114
 msgid "Separate tags using this character or string."
@@ -2604,7 +2641,7 @@ msgstr "Ítems per pàgina (administrador)"
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
-msgstr "Limiti el nombre d'ítems que es visualitzen per pàgina dins la interfície d'administració."
+msgstr "Limiteu el nombre d'ítems que es visualitzen per pàgina dins la interfície d'administració."
 
 #: application/forms/Install.php:160
 msgid "Items Per Page (public)"
@@ -2612,7 +2649,7 @@ msgstr "Ítems per pàgina (públic)"
 
 #: application/forms/Install.php:161
 msgid "Limit the number of items displayed per page in the public interface."
-msgstr "Limita el nombre d'ítems per pàgina que es mostraran a l'interfície pública"
+msgstr "Limiteu el nombre d'ítems per pàgina que es mostraran a l'interfície pública"
 
 #: application/forms/Install.php:170
 msgid "Check box to show metadata elements with no text."
@@ -2624,7 +2661,7 @@ msgstr "Compte per defecte del Superuser"
 
 #: application/forms/Install.php:195
 msgid "Site Settings"
-msgstr "Configuració del lloc"
+msgstr "Paràmetres del lloc"
 
 #: application/forms/ItemTypes.php:142
 msgid "The name of the item type."
@@ -2634,10 +2671,10 @@ msgstr "El nom del tipus d'ítem"
 msgid "The description of the item type."
 msgstr "La descripció del tipus d'ítem"
 
-#: application/forms/ItemTypes.php:188 application/forms/ItemTypes.php:197
+#: application/forms/ItemTypes.php:173 application/forms/ItemTypes.php:182
 #, php-format
 msgid "The item type cannot have more than one \"%s\" element."
-msgstr "El tipus d'ítem no pot tenir més d'un element de  \"%s\" ."
+msgstr "El tipus d'ítem no pot tenir més d'un element de \"%s\" ."
 
 #: application/forms/Login.php:27
 msgid "Username cannot be empty."
@@ -2651,34 +2688,34 @@ msgstr "La constrasenya no pot estar en blanc."
 msgid "Remember Me?"
 msgstr "Voleu que el sistema us recordi?"
 
-#: application/forms/Navigation.php:156
+#: application/forms/Navigation.php:162
 msgid "[Default]"
 msgstr "[Per defecte]"
 
-#: application/forms/Navigation.php:162
+#: application/forms/Navigation.php:168
 msgid "Select a Homepage"
-msgstr "Seleccioneu una pàgina d';inici"
+msgstr "Seleccioneu una pàgina d'inici"
 
-#: application/forms/Navigation.php:244
+#: application/forms/Navigation.php:250
 msgid "Cannot find parent navigation page."
 msgstr "No s'ha pogut localitzar la pàgina de navegació superior."
 
-#: application/forms/Navigation.php:325
+#: application/forms/Navigation.php:331
 msgid "All navigation links must have URIs."
-msgstr "Tots els enllaços de navegació han de tenir una URI."
+msgstr "Tots els enllaços de navegació han de tenir un URI."
 
-#: application/forms/Navigation.php:338
+#: application/forms/Navigation.php:344
 msgid "All navigation links must have different URIs."
 msgstr "Tots els enllaços de navegació han de tenir URIs diferents."
 
-#: application/forms/Navigation.php:344
+#: application/forms/Navigation.php:350
 #, php-format
 msgid "Invalid URI for \"%s\" navigation link:  \"%s\""
-msgstr "URI no vàlida per l'enllaç \"%s\" de navegació: \"%s\""
+msgstr "URI invàlid per l'enllaç \"%s\" de navegació: \"%s\""
 
-#: application/forms/Navigation.php:377
+#: application/forms/Navigation.php:383
 msgid "Navigation links that have undeleteable sublinks cannot be deleted."
-msgstr "Els enllaços de navegació que tenen associats enllaços a nivell inferior no poden ser eliminats."
+msgstr "Els enllaços de navegació que tenen associats enllaços de nivell inferior no poden ser eliminats."
 
 #: application/forms/RecoverPassword.php:36
 msgid "Email address is required."
@@ -2694,7 +2731,7 @@ msgstr "El format de l'adreça de correu electrònic és incorrecte."
 
 #: application/forms/RecoverPassword.php:50
 msgid "Invalid hostname given for email address."
-msgstr "El hostname de l'adreça de correu electrònic és incorrecte."
+msgstr "El nom del host de l'adreça de correu electrònic és incorrecte."
 
 #: application/forms/RecoverPassword.php:66
 msgid "Invalid email address"
@@ -2716,7 +2753,7 @@ msgstr "Desactiva la validació en la càrrega de fitxers"
 msgid ""
 "Check this field if you would like to allow any file to be uploaded to "
 "Omeka."
-msgstr "Activa aquesta casella si voleu permetre que qualsevol tipus d'arxiu pugui ser carregat a Omeka."
+msgstr "Activeu aquesta casella si voleu permetre que qualsevol tipus d'arxiu pugui ser carregat a l'Omeka."
 
 #: application/forms/SecuritySettings.php:32
 msgid "Allowed File Extensions"
@@ -2724,25 +2761,25 @@ msgstr "Extensions de fitxer permeses"
 
 #: application/forms/SecuritySettings.php:33
 msgid "List of allowed extensions for file uploads"
-msgstr "Llista de extensions permeses per a ser carregades com arxius"
+msgstr "Llista d'extensions permeses per ser carregades com fitxers"
 
 #: application/forms/SecuritySettings.php:42
 msgid "Allowed File Types"
-msgstr "Tipus de fitxer permesos"
+msgstr "Tipus de fitxers permesos"
 
 #: application/forms/SecuritySettings.php:43
 msgid "List of allowed MIME types for file uploads"
-msgstr "Llista dels MIME types permesos per a ser carregats"
+msgstr "Llista dels tipus MIME permesos per ser carregats com a fitxers"
 
 #: application/forms/SecuritySettings.php:52
 msgid "ReCaptcha Public Key"
-msgstr "Clau publica del ReCaptcha"
+msgstr "Clau pública del ReCaptcha"
 
 #: application/forms/SecuritySettings.php:53
 msgid ""
 "Enter public key from recaptcha.net. Both this and the private key must be "
 "filled in to secure public forms."
-msgstr "Entra la clau pública obtinguda a partir de recaptcha.net. Cal entrar la clau pública i la clau privada per protegir els formularis públics."
+msgstr "Entreu la clau pública obtinguda a partir de recaptcha.net. Cal entrar la clau pública i la clau privada per protegir els formularis públics."
 
 #: application/forms/SecuritySettings.php:60
 msgid "ReCaptcha Private Key"
@@ -2752,7 +2789,7 @@ msgstr "Clau privada del ReCaptcha"
 msgid ""
 "Enter private key from recaptcha.net. Both this and the public key must be "
 "filled in to secure public forms."
-msgstr "Entra la clau privada obtinguda a partir de recaptcha.net. Cal entrar la clau pública i la clau privada per protegir els formularis públics."
+msgstr "Entreu la clau privada obtinguda a partir de recaptcha.net. Cal entrar la clau pública i la clau privada per protegir els formularis públics."
 
 #: application/forms/SecuritySettings.php:68
 msgid ""
@@ -2762,11 +2799,11 @@ msgstr "Activeu aquest camp si voleu filtrar els elements HTML o atributs dels f
 
 #: application/forms/SecuritySettings.php:69
 msgid "Enable HTML Filtering"
-msgstr "Activar filtre HTML"
+msgstr "Activa el filtre HTML"
 
 #: application/forms/SecuritySettings.php:74
 msgid "Allowed HTML Elements"
-msgstr "Desactivar  filtre HTML"
+msgstr "Desactiva el filtre HTML"
 
 #: application/forms/SecuritySettings.php:75
 msgid "List of allowed HTML elements in form input"
@@ -2780,15 +2817,15 @@ msgstr "Atributs HTML permesos"
 msgid "List of allowed HTML attributes in form input"
 msgstr "Llista d'atributs HTML permesos en els formularis d'entrada"
 
-#: application/forms/SecuritySettings.php:94
+#: application/forms/SecuritySettings.php:98
 msgid "File Validation"
 msgstr "Validació del fitxer"
 
-#: application/forms/SecuritySettings.php:102
+#: application/forms/SecuritySettings.php:106
 msgid "Captcha"
 msgstr "Captcha"
 
-#: application/forms/SecuritySettings.php:111
+#: application/forms/SecuritySettings.php:115
 msgid "HTML Filtering"
 msgstr "Filtratge HTML"
 
@@ -2802,11 +2839,11 @@ msgstr "El nom d'usuari és obligatori."
 
 #: application/forms/User.php:56
 msgid "Username must be at least %min% characters long."
-msgstr "El nom d'usuari ha de ser de %min% caràcters com a mínim."
+msgstr "El nom d'usuari ha de tenir %min% caràcters com a mínim."
 
 #: application/forms/User.php:58
 msgid "Username must be at most %max% characters long."
-msgstr "El nom d'usuari ha de ser de %max% caràcters com a màxim."
+msgstr "El nom d'usuari ha de tenir %max% caràcters com a màxim."
 
 #: application/forms/User.php:72
 msgid "This username is already in use."
@@ -2818,11 +2855,11 @@ msgstr "El nom tal i com es mostrarà al lloc web."
 
 #: application/forms/User.php:88 application/models/User.php:169
 msgid "Real Name is required."
-msgstr "El nom real és obligatori"
+msgstr "El nom real és obligatori."
 
 #: application/forms/User.php:94
 msgid "This email address is invalid."
-msgstr "Aquest compte de correu electrònic no és correcte."
+msgstr "Aquest compte de correu electrònic és incorrecte."
 
 #: application/forms/User.php:102
 msgid "Email is required."
@@ -2837,7 +2874,7 @@ msgid ""
 "Roles describe the permissions a user has. See <a "
 "href='http://omeka.org/codex/User_Roles' target='_blank'>documentation</a> "
 "for details."
-msgstr "Els rols defineixen els permisos que un usuari té. Vegeu <a href='http://omeka.org/codex/User_Roles' target='_blank'>documentation</a> per a més detalls."
+msgstr "Els rols defineixen els permisos que té cada usuari. Vegeu la <a href='http://omeka.org/codex/User_Roles' target='_blank'>documentació</a> per saber més."
 
 #: application/forms/User.php:137
 msgid "Inactive users cannot log in to the site."
@@ -2855,7 +2892,7 @@ msgstr "Actiu?"
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:115
 #, php-format
 msgid "The configured PHP path (%s) is invalid."
-msgstr "El path PHP configurat (%s) és invàlid."
+msgstr "La ruta PHP configurada: (%s) és invàlida."
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:125
 #, php-format
@@ -2882,66 +2919,21 @@ msgstr "El contenidor general ha de ser o bé l'objecte de navegació o bé una 
 #: application/libraries/Omeka/Navigation/Page/Uri.php:128
 #, php-format
 msgid "Invalid URI for Omeka_Navigation_Page_Uri object: %s"
-msgstr "URI invàlida per Omeka_Navigation_Page_Uri object: %s"
+msgstr "URI invàlid per Omeka_Navigation_Page_Uri object: %s"
 
 #: application/libraries/Omeka/Plugin/Ini.php:63
 #, php-format
 msgid "Path to plugin.ini for \"%s\" is not correct."
-msgstr "El path a plugin.ini per a \"%s\" no és correcte"
+msgstr "La ruta a plugin.ini per a \"%s\" és incorrecte"
 
 #: application/libraries/Omeka/Plugin/Installer.php:79
 #, php-format
 msgid "The \"%s\" plugin must be installed and have newer files to upgrade it."
-msgstr "El plugin \"%s\" ha de ser instal·lat i requereix nous fitxers per actualitzar-lo."
+msgstr "El connector \"%s\" ha de ser instal·lat i requereix nous fitxers per actualitzar-lo."
 
 #: application/libraries/Omeka/Plugin/Installer.php:116
 msgid "Plugin must have a valid directory name before it can be installed."
-msgstr "Abans de fer la instal·lació és necessari que el plugin disposi d'un directori amb un nom vàlid."
-
-#: application/libraries/Omeka/Plugin/Loader.php:112
-#, php-format
-msgid "Plugin named '%s' has already been loaded/registered."
-msgstr "El plugin amb nom '%s' ha estat carregat/registrat"
-
-#: application/libraries/Omeka/Plugin/Loader.php:153
-#, php-format
-msgid "The %s plugin could not be loaded."
-msgstr "El plugin %s no pot ser carregat."
-
-#: application/libraries/Omeka/Plugin/Loader.php:174
-#, php-format
-msgid "The required plugin '%s' could not be found."
-msgstr "El plugin '%s' és necessari i no es pot trobar."
-
-#: application/libraries/Omeka/Plugin/Loader.php:247
-#, php-format
-msgid "'%s' has no valid bootstrap file."
-msgstr "'%s' no té un fitxer d'arrencada vàlid."
-
-#: application/libraries/Omeka/Plugin/Loader.php:250
-#, php-format
-msgid "'%s' has not been installed."
-msgstr "%s' no es pot instal·lar."
-
-#: application/libraries/Omeka/Plugin/Loader.php:253
-#, php-format
-msgid "'%s' has not been activated."
-msgstr "'%s' no es pot activar."
-
-#: application/libraries/Omeka/Plugin/Loader.php:256
-#, php-format
-msgid "'%s' requires a newer version of Omeka."
-msgstr "'%s' requereix una versió més actual d'Omeka."
-
-#: application/libraries/Omeka/Plugin/Loader.php:261
-#, php-format
-msgid "'%s' must be upgraded to the new version before it can be loaded."
-msgstr "'%s' ha de ser actualitzat a la nova versió abans de ser carregat."
-
-#: application/libraries/Omeka/Plugin/Loader.php:264
-#, php-format
-msgid "'%s' cannot be loaded twice."
-msgstr "'%s' no es pot carregar dues vegades."
+msgstr "Abans de fer la instal·lació és necessari que el connector disposi d'un directori amb un nom vàlid."
 
 #: application/libraries/Omeka/Record/AbstractRecord.php:349
 #, php-format
@@ -2950,93 +2942,93 @@ msgstr "'%s' és un valor especial invalid."
 
 #: application/libraries/Omeka/Record/Iterator.php:49
 msgid "An invalid value was detected during record iteration."
-msgstr "S'ha detectat un valor no vàlid durant el procés de gravació de dades."
+msgstr "S'ha detectat un valor invàlid durant el procés de gravació de dades."
 
-#: application/libraries/globals.php:417
+#: application/libraries/globals.php:410
 msgid "File"
-msgstr "Arxiu"
+msgstr "Fitxer"
 
-#: application/libraries/globals.php:475
+#: application/libraries/globals.php:468
 msgid "Keyword"
 msgstr "Paraula clau"
 
-#: application/libraries/globals.php:476
+#: application/libraries/globals.php:469
 msgid "Boolean"
 msgstr "Booleà"
 
-#: application/libraries/globals.php:477
+#: application/libraries/globals.php:470
 msgid "Exact match"
 msgstr "Coincidència exacta"
 
-#: application/libraries/globals.php:1238
-#: application/libraries/globals.php:1259
+#: application/libraries/globals.php:1234
+#: application/libraries/globals.php:1255
 #, php-format
 msgid "Could not find file %s!"
-msgstr "No es pot trobar l'arxiu %s!"
+msgstr "No s'ha pogut trobar el fitxer %s!"
 
-#: application/libraries/globals.php:1276
+#: application/libraries/globals.php:1272
 msgid "No featured collections are available."
 msgstr "No hi ha cap col·lecció destacada disponible."
 
-#: application/libraries/globals.php:1569
+#: application/libraries/globals.php:1564
 msgid "Select Below "
 msgstr "Tria a sota"
 
-#: application/libraries/globals.php:1611
+#: application/libraries/globals.php:1607
 msgid "Omeka RSS Feed"
-msgstr "Feed RSS d'Omeka"
+msgstr "Feed RSS de l'Omeka"
 
-#: application/libraries/globals.php:1612
+#: application/libraries/globals.php:1608
 msgid "Omeka Atom Feed"
-msgstr "Feed Atom d'Omeka"
+msgstr "Feed Atom de l'Omeka"
 
-#: application/libraries/globals.php:2251
+#: application/libraries/globals.php:2264
 msgid "No recent items available."
-msgstr "No hi han ítems recents disponibles."
+msgstr "No hi ha ítems recents disponibles."
 
-#: application/libraries/globals.php:2277
+#: application/libraries/globals.php:2290
 msgid "No featured items are available."
 msgstr "No hi ha cap ítem destacat disponible."
 
-#: application/libraries/globals.php:2332
+#: application/libraries/globals.php:2349
 msgid "View"
 msgstr "Visualitza"
 
-#: application/libraries/globals.php:2394
+#: application/libraries/globals.php:2411
 msgid "No Collection"
 msgstr "Sense col·lecció"
 
-#: application/libraries/globals.php:2509
+#: application/libraries/globals.php:2529
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2526
-msgid "Next Item &rarr;"
-msgstr "Següent ítem &rarr;"
-
 #: application/libraries/globals.php:2546
-msgid "&larr; Previous Item"
-msgstr "&larr; Anterior ítem"
+msgid "Next Item &rarr;"
+msgstr "Ítem següent &rarr;"
 
-#: application/libraries/globals.php:2724
+#: application/libraries/globals.php:2566
+msgid "&larr; Previous Item"
+msgstr "&larr; ítem anterior"
+
+#: application/libraries/globals.php:2747
 msgid "Browse All"
 msgstr "Navegar per tot el contingut"
 
-#: application/libraries/globals.php:2729
+#: application/libraries/globals.php:2752
 msgid "Browse by Tag"
-msgstr "Navegar per etiqueta"
+msgstr "Navegar per les etiquetes"
 
-#: application/libraries/globals.php:3002
+#: application/libraries/globals.php:3021
 msgid "No tags are available."
 msgstr "No hi ha cap etiqueta disponible."
 
 #: application/models/Builder/Item.php:263
 msgid "Must specify a file transfer type when attaching files to an item!"
-msgstr "Cal especificar un tipus de transferència d'arxiu quan s'afegeixen arxius a un element!"
+msgstr "Cal especificar un tipus de transferència de fitxers quan s'afegeixen fitxers a un ítem!"
 
 #: application/models/Collection.php:117
 msgid "Cannot associate the collection with an unsaved user."
-msgstr "No es pot associar la col·lecció a un usuari que no ha estat guardat."
+msgstr "No podeu associar la col·lecció a un usuari que no ha estat desat."
 
 #: application/models/Element.php:175
 msgid "The element name must not be empty."
@@ -3044,7 +3036,7 @@ msgstr "El nom de l'element no pot estar buit."
 
 #: application/models/Element.php:179
 msgid "Invalid element set."
-msgstr "Set d'element invàlid."
+msgstr "Set d'elements invàlid."
 
 #: application/models/Element.php:185
 #, php-format
@@ -3054,7 +3046,7 @@ msgstr "Un element amb el nom \"%s\" ja existeix dins el set d'elements \"%s\""
 #: application/models/Element.php:216
 #, php-format
 msgid "Cannot set element set ID: set named \"%s\" does not exist."
-msgstr "No s'ha pogut establir l'ID pel set d'elements: el nom del set d'elements \"%s\" no existeix. "
+msgstr "No s'ha pogut establir l'ID per al set d'elements: el nom del set d'elements \"%s\" no existeix. "
 
 #: application/models/ElementSet.php:146
 msgid "Name of element set must be unique."
@@ -3070,17 +3062,17 @@ msgstr "ID de registre invàlid"
 
 #: application/models/ElementText.php:62
 msgid "All element texts must have a record type."
-msgstr "Tots els elements de tipus text han de tenir associat una tipologia de registre."
+msgstr "Tots els elements de tipus text han de tenir associat un tipus de registre."
 
 #: application/models/ElementText.php:65
 msgid "Invalid element ID."
 msgstr "ID d'element invàlid"
 
-#: application/models/File.php:241
+#: application/models/File.php:235
 msgid "Cannot get the local path for a stored file."
-msgstr "No s'ha pogut obtenir la ruta d'accés per a un arxiu dipositat."
+msgstr "No s'ha pogut obtenir la ruta d'accés per a un fitxer emmagatzemat."
 
-#: application/models/File.php:458
+#: application/models/File.php:452
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
 msgstr "\"%s\" no és un fitxer derivat vàlid."
@@ -3088,7 +3080,7 @@ msgstr "\"%s\" no és un fitxer derivat vàlid."
 #: application/models/Item.php:330
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
-msgstr "No es poden afegir arxius a ítems que no són persistents a la base de dades!"
+msgstr "No es poden afegir fitxers a ítems que no són persistents a la base de dades!"
 
 #. / Chicago-style item citation: two authors
 #: application/models/Item.php:457
@@ -3116,11 +3108,11 @@ msgstr "consulta %1$s, %2$s."
 
 #: application/models/Item.php:500
 msgid "Cannot add an existing file to an item!"
-msgstr "No es pot afegir un arxiu existent a un ítem!"
+msgstr "No es pot afegir un fitxer existent a un ítem!"
 
 #: application/models/Item.php:504
 msgid "File must be valid before it can be associated with an item!"
-msgstr "L'arxiu ha de ser vàlid abans que pugui estar associat amb un ítem!"
+msgstr "El fitxer ha de ser vàlid abans que pugui estar associat amb un ítem!"
 
 #: application/models/Item.php:528
 msgid "Invalid item type."
@@ -3133,7 +3125,7 @@ msgstr "Col·lecció invàlida."
 #: application/models/ItemType.php:102
 #, php-format
 msgid "The item type name must have between %1$s and %2$s characters."
-msgstr "El nom del tipus d'element ha de tenir entre %1$s i %2$s caràcters."
+msgstr "El nom del tipus d'ítem ha de tenir entre %1$s i %2$s caràcters."
 
 #: application/models/ItemType.php:106
 msgid "The item type name must be unique."
@@ -3141,7 +3133,7 @@ msgstr "El nom del tipus d'ítem ha de ser únic."
 
 #: application/models/ItemType.php:179
 msgid "There are too many values in the element ordering array."
-msgstr "Hi han massa valors en la matriu d'ordenació dels elements."
+msgstr "Hi ha massa valors en la matriu d'ordenació dels elements."
 
 #: application/models/ItemType.php:181
 msgid "There are too few values in the element ordering array."
@@ -3151,18 +3143,18 @@ msgstr "No hi ha valors suficients a la matriu de classificació de l'element."
 msgid ""
 "Invalid element data. To add elements, you must either pass an element "
 "objects or an array of element metadata."
-msgstr "Valor no vàlid a l'element. Per afegir elements has de o bé introduir un element d'objecte o bé una matriu de metadades d'un element."
+msgstr "Valor invàlid a l'element. Per afegir elements heu de passar un element d'objecte o bé una matriu de metadades d'un element."
 
 #: application/models/ItemType.php:282
 msgid ""
 "Cannot remove elements from an item type that is not persistent in the "
 "database!"
-msgstr "No es poden esborrar elements d'un ítem que no és persistent a la base de dades!"
+msgstr "No es poden eliminar elements d'un ítem que no és persistent a la base de dades!"
 
 #: application/models/ItemType.php:291
 #, php-format
 msgid "Cannot find element with ID %s!"
-msgstr "No es pot trobar cap element amb ID %s!"
+msgstr "No s'ha pogut trobar cap element amb ID %s!"
 
 #: application/models/ItemType.php:332
 #, php-format
@@ -3175,43 +3167,43 @@ msgid ""
 " or an element id to determine if an item type has an element."
 msgstr "Paràmetre invàlid. La funció hasElement requereix o bé un objecte de tipus element o bé un identificador de l'element per determinar si un tipus d'ítem té un element."
 
-#: application/models/Mixin/ElementText.php:278
+#: application/models/Mixin/ElementText.php:292
 #, php-format
 msgid "There is no element \"%1$s\", \"%2$s\"!"
 msgstr "No hi ha cap element \"%1$s\", \"%2$s\"!"
 
-#: application/models/Mixin/ElementText.php:297
+#: application/models/Mixin/ElementText.php:311
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
 msgstr "No es pot trobar cap element amb ID '%s'!"
 
-#: application/models/Mixin/ElementText.php:416
+#: application/models/Mixin/ElementText.php:430
 msgid "Element texts are not formatted correctly!"
 msgstr "El text de l'element no té el format correcte!"
 
-#: application/models/Mixin/ElementText.php:562
+#: application/models/Mixin/ElementText.php:578
 #, php-format
 msgid "The \"%s\" field has at least one invalid value!"
 msgstr "El camp \"%s\" té com a mínim un valor invàlid!"
 
-#: application/models/Mixin/ElementText.php:632
+#: application/models/Mixin/ElementText.php:648
 msgid "Cannot save element text for records that are not yet persistent!"
 msgstr "No es poden guardar elements de text per a registres que encara no són persistents!"
 
 #: application/models/Option.php:50 application/models/Option.php:54
 msgid "Each option must have a unique name."
-msgstr "Cada opció ha de tenir un nom unívoc"
+msgstr "Cada opció ha de tenir un nom únic."
 
 #: application/models/Plugin.php:133
 msgid "Names of plugins must not be blank"
-msgstr "Els noms dels plugins no poden estar en blanc"
+msgstr "Els noms dels connectors no poden estar en blanc"
 
-#: application/models/Table/Collection.php:77
+#: application/models/Table/Collection.php:80
 #, php-format
 msgid "[Untitled] #%s"
 msgstr "[Sense títol] #%s"
 
-#: application/models/Table/Item.php:164
+#: application/models/Table/Item.php:123
 msgid "Invalid search type given!"
 msgstr "Aquest tipus de cerca no és vàlid!"
 
@@ -3229,21 +3221,21 @@ msgstr "L'User no pot canviar els permisos del Super-User"
 
 #: application/models/User.php:113
 msgid "User may not change roles."
-msgstr "L'User no pot canviar els rols."
+msgstr "L'usuari no pot canviar els rols."
 
 #: application/models/User.php:182 application/models/User.php:230
 msgid "The user must be assigned a role."
-msgstr "L'usuari ha de tenir assignat un rol."
+msgstr "L'usuari ha de tenir un rol assignat."
 
 #: application/models/User.php:187
 #, php-format
 msgid "The username \"%1$s\" must be between %2$s and %3$s characters."
-msgstr "El nom d'usuari \"%1$s\" ha d'estar entre %2$s i %3$s caràcters."
+msgstr "El nom d'usuari \"%1$s\" ha de tenir entre %2$s i %3$s caràcters."
 
 #: application/models/User.php:191
 #, php-format
 msgid "'%s' is already in use. Please choose another username."
-msgstr "'%s' ja s'utilitza. Si us plau tria un altre nom d'usuari."
+msgstr "'%s' ja s'utilitza. Si us plau trieu un altre nom d'usuari."
 
 #: application/models/UsersActivations.php:54
 msgid "Cannot create a user activation for non-existent user."
@@ -3262,14 +3254,14 @@ msgstr "Aquesta migració no s'ha d'executar."
 #: application/tests/suite/Omeka/NavigationTest.php:839
 #: application/tests/suite/Omeka/NavigationTest.php:952
 msgid "Edit Items"
-msgstr "Edita ítems"
+msgstr "Edita els ítems"
 
 #: application/tests/suite/Omeka/NavigationTest.php:758
 #: application/tests/suite/Omeka/NavigationTest.php:818
 #: application/tests/suite/Omeka/NavigationTest.php:856
 #: application/tests/suite/Omeka/NavigationTest.php:953
 msgid "Edit Collections"
-msgstr "Edita col·leccions"
+msgstr "Edita les col·leccions"
 
 #: application/tests/suite/Omeka/NavigationTest.php:764
 #: application/tests/suite/Omeka/NavigationTest.php:819
@@ -3358,7 +3350,7 @@ msgstr "[sense contingut]"
 
 #: application/views/helpers/ElementForm.php:65
 msgid "Add Input"
-msgstr "Afegir entrada"
+msgstr "Afegeix una entrada"
 
 #: application/views/helpers/ElementInput.php:131
 msgid "Use HTML"
@@ -3376,19 +3368,19 @@ msgstr "La variable en bucle %s no s'ha assignat per aquesta visualització."
 
 #: application/views/helpers/Loop.php:27
 msgid "An array of records is not available for the loop."
-msgstr "La matriu de registres no està disponible per aquesta iteracció"
+msgstr "La matriu de registres no està disponible per aquesta iteració"
 
 #: application/views/helpers/RecordUrl.php:34
 msgid "Invalid record passed while getting record URL."
-msgstr "Registre no vàlid al recuperar la URL del recurs."
+msgstr "Registre invàlid al recuperar l'URL del recurs."
 
 #: application/views/helpers/RecordUrl.php:44
 msgid "Invalid action passed while getting record URL."
-msgstr "Acció no vàlida al recuperar la URL del recurs."
+msgstr "Acció invàlida al recuperar l'URL del recurs."
 
 #: application/views/helpers/RecordUrl.php:75
 msgid "Invalid return value while getting record URL."
-msgstr "Valor invàlid en obtenir la URL d'un recurs."
+msgstr "Valor invàlid en obtenir l'URL del recurs."
 
 #: application/views/scripts/collections/browse.php:14
 #: application/views/scripts/items/browse.php:24
@@ -3400,14 +3392,14 @@ msgstr "Ordena per:"
 msgid "View the items in %s"
 msgstr "Veure els ítems en %s"
 
-#: application/views/scripts/collections/show.php:15
+#: application/views/scripts/collections/show.php:12
 #, php-format
 msgid "Items in the %s Collection"
 msgstr "Ítems en la col·lecció %s"
 
-#: application/views/scripts/collections/show.php:40
+#: application/views/scripts/collections/show.php:37
 msgid "There are currently no items within this collection."
-msgstr "Actualment no hi ha ítems en aquesta col·lecció."
+msgstr "No hi ha ítems en aquesta col·lecció."
 
 #: application/views/scripts/common/footer.php:14
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
@@ -3440,7 +3432,7 @@ msgstr "Error 403 d'accés denegat"
 
 #: application/views/scripts/error/403.php:8
 msgid "You do not have permission to access this page."
-msgstr "No tens permisos per accedir a aquesta pàgina."
+msgstr "No teniu permisos per accedir a aquesta pàgina."
 
 #: application/views/scripts/error/404.dc.php:1
 #: application/views/scripts/error/404.php:2
@@ -3451,7 +3443,7 @@ msgstr "404 Pàgina no trobada"
 #: application/views/scripts/error/404.php:6
 #, php-format
 msgid "%s is not a valid URL."
-msgstr "%s no és una URL vàlida."
+msgstr "%s no és un URL vàlid."
 
 #: application/views/scripts/error/404.rss2.php:1
 msgid "Rss2.0 Feed Not Found!"
@@ -3464,11 +3456,11 @@ msgstr "Error 405 de mètode no permès"
 #: application/views/scripts/error/405.php:6
 #, php-format
 msgid "The method used to access this URL (%s) is not valid."
-msgstr "El mètode emprat per accedir a aquesta URL (%s) no és vàlid."
+msgstr "El mètode emprat per accedir a aquest URL (%s) no és vàlid."
 
 #: application/views/scripts/error/index.php:4
 msgid "Omeka has encountered an error"
-msgstr "Omeka ha trobat un error"
+msgstr "L'Omeka ha trobat un error"
 
 #: application/views/scripts/error/index.php:33
 msgid ""
@@ -3476,7 +3468,7 @@ msgid ""
 "Omeka Codex page on <a "
 "href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error "
 "messages</a>."
-msgstr "Per a saber més sobre aquest error, podeu veure el Codex d'Omeka a <a href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error messages</a>."
+msgstr "Per saber més sobre aquest error, podeu consultar la documentació d'Omeka a <a href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error messages</a>."
 
 #: application/views/scripts/index.php:10
 msgid "Featured Item"
@@ -3492,11 +3484,11 @@ msgstr "Mostra tots els ítems"
 
 #: application/views/scripts/items/show.php:10
 msgid "Files"
-msgstr "Arxius"
+msgstr "Fitxers"
 
 #: application/views/scripts/items/show.php:33
 msgid "Citation"
-msgstr "Cita"
+msgstr "Citació"
 
 #: application/views/scripts/search/search-filters.php:3
 msgid "Query:"
@@ -3520,16 +3512,11 @@ msgstr "Cerca només aquests tipus de registres:"
 
 #: application/views/scripts/search/search-form.php:17
 msgid "Go to search settings to select record types to use."
-msgstr "Ves a la configuració de la cerca i selecciona quins tipus de registres s'utilitzaran."
+msgstr "Aneu als paràmetres de la cerca i seleccioneu quins tipus de registres s'utilitzaran."
 
 #: application/views/scripts/search/search-form.php:19
 msgid "Advanced Search (Items only)"
 msgstr "Cerca avançada (només ítems)"
-
-#: application/views/scripts/users/activate.php:8
-#, php-format
-msgid "Hello %s. Your username is %s"
-msgstr "Hola %s. El teu nom d'usuari és %s"
 
 #: application/views/scripts/users/login.php:9
 msgid "Go to Home Page"
@@ -3537,7 +3524,7 @@ msgstr "Torna a la pàgina principal"
 
 #: application/views/scripts/users/login.php:9
 msgid "Lost your password?"
-msgstr "Has oblidat la teva contrasenya?"
+msgstr "Heu oblidat la vostra contrasenya?"
 
 #: install/controllers/IndexController.php:25
 msgid "Could not load database resource!"
@@ -3564,11 +3551,11 @@ msgstr "Advertències a la instal·lació"
 msgid ""
 "The following issues will not affect installation, but they may negatively "
 "affect the behavior of Omeka:"
-msgstr "Les següents qüestions no afecten a la instal·lació, però poden tenir efectes negatius en el comportament d'Omeka:"
+msgstr "Les següents qüestions no afecten a la instal·lació, però poden tenir efectes negatius en el comportament de l'Omeka:"
 
 #: install/views/scripts/index/index.phtml:14
 msgid "Configure Your Site"
-msgstr "Configura el teu lloc web"
+msgstr "Configureu el lloc web"
 
 #: install/views/scripts/index/index.phtml:16
 msgid "Form Validation Errors"
@@ -3580,7 +3567,7 @@ msgstr "Tot correcte!"
 
 #: install/views/scripts/index/installed.phtml:2
 msgid "Omeka is installed."
-msgstr "Omeka ha estat instal·lat."
+msgstr "Omeka s'ha instal·lat."
 
 #: install/views/scripts/index/installed.phtml:3
 msgid "Public Site"

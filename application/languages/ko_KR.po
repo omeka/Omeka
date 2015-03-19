@@ -3,31 +3,30 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Benjamin <benjamin@deichman.no>, 2012
-# boutrosboutrosboutros <boutrosboutrosboutros@gmail.com>, 2013
-# boutrosboutrosboutros <boutrosboutrosboutros@gmail.com>, 2012
-# heidig <heidi.grytten@kul.oslo.kommune.no>, 2012
-# Vidar Krumins <vidar@biblioteksvar.no>, 2012
+# ahndj <ahndj@rikar.org>, 2014
+# Martin Sauter <martin.sauter@gmx.ch>, 2013
+# Roland Keck <roland.keck@web.de>, 2014
+# Seung-il, Lee <leesi@rikar.org>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2014-06-09 19:07+0000\n"
+"PO-Revision-Date: 2015-02-24 17:00+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
-"Language-Team: Norwegian (http://www.transifex.com/projects/p/omeka/language/no/)\n"
+"Language-Team: Korean (Korea) (http://www.transifex.com/projects/p/omeka/language/ko_KR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: no\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: ko_KR\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Dublin Core description
 msgid ""
 "The Dublin Core metadata element set is common to all Omeka records, "
 "including items, files, and collections. For more information see, "
 "http://dublincore.org/documents/dces/."
-msgstr "Dublin Core er et metadatasett som er felles for alle Omeka-ressurser, inkludert alle bilder, filer og samlinger. Se http://dublincore.org/documents/dces/ for mer informasjon."
+msgstr "더블린코어 메타데이터요소 세트는 컬렉션, 파일, 아이템을 포함하는 모든 Omeka 레코드에 공통적으로 적용됩니다. 자세한 정보는 http://dublincore.org/documents/dces/를 참고해 주십시오."
 
 #. Dublin Core: Title element name
 #: admin/themes/default/collections/browse.php:22
@@ -37,29 +36,29 @@ msgstr "Dublin Core er et metadatasett som er felles for alle Omeka-ressurser, i
 #: application/views/scripts/items/browse.php:19
 #: application/views/scripts/search/index.php:14
 msgid "Title"
-msgstr "Tittel"
+msgstr "표제"
 
 #. Dublin Core: Title element description
 msgid "A name given to the resource"
-msgstr "Navn på ressursen"
+msgstr "자원에 부여된 명칭"
 
 #. Dublin Core: Creator element name
 #: admin/themes/default/items/browse.php:41
 #: application/views/scripts/items/browse.php:20
 msgid "Creator"
-msgstr "Fotograf"
+msgstr "생산자"
 
 #. Dublin Core: Creator element description
 msgid "An entity primarily responsible for making the resource"
-msgstr "Ressursens opphavsperson"
+msgstr "자원을 만드는데 주된 책임이 있는 개체"
 
 #. Dublin Core: Subject element name
 msgid "Subject"
-msgstr "Tema"
+msgstr "주제"
 
 #. Dublin Core: Subject element description
 msgid "The topic of the resource"
-msgstr "Ressursens tema"
+msgstr "자원의 주제"
 
 #. Dublin Core: Description element name
 #: admin/themes/default/element-sets/browse.php:17
@@ -68,119 +67,119 @@ msgstr "Ressursens tema"
 #: admin/themes/default/settings/edit-item-type-elements.php:27
 #: application/forms/ItemTypes.php:150
 msgid "Description"
-msgstr "Beskrivelse"
+msgstr "기술"
 
 #. Dublin Core: Description element description
 msgid "An account of the resource"
-msgstr "Ressursens beskrivelse"
+msgstr "자원의 내용에 대한 설명"
 
 #. Dublin Core: Publisher element name
 msgid "Publisher"
-msgstr "Utgiver"
+msgstr "발행처/출판사"
 
 #. Dublin Core: Publisher element description
 msgid "An entity responsible for making the resource available"
-msgstr "Ressursens kilde"
+msgstr "자원을 이용 가능하도록 하는데 책임이 있는 개체"
 
 #. Dublin Core: Contributor element name
 #. User role: contributor
 msgid "Contributor"
-msgstr "Bidragsyter"
+msgstr "기여자"
 
 #. Dublin Core: Contributor element description
 msgid "An entity responsible for making contributions to the resource"
-msgstr "Ressursens bidragsyter"
+msgstr "자원을 만드는데 기여한 개체"
 
 #. Dublin Core: Date element name
 msgid "Date"
-msgstr "Dato"
+msgstr "날짜"
 
 #. Dublin Core: Date element description
 msgid ""
 "A point or period of time associated with an event in the lifecycle of the "
 "resource"
-msgstr "Tidspunkt assosiert med ressursen"
+msgstr "자원의 라이프사이클 중 발생하는 이벤트와 연관된 시점 또는 기간"
 
 #. Dublin Core: Type element name
 #: admin/themes/default/items/browse.php:42
 msgid "Type"
-msgstr "Type"
+msgstr "유형"
 
 #. Dublin Core: Type element description
 msgid "The nature or genre of the resource"
-msgstr "Ressurstypen"
+msgstr "자원의 특징 또는 장르"
 
 #. Dublin Core: Format element name
 msgid "Format"
-msgstr "Format"
+msgstr "파일형식"
 
 #. Dublin Core: Format element description
 msgid "The file format, physical medium, or dimensions of the resource"
-msgstr "Ressursens filformat, fysiske format eller dimensjoner"
+msgstr "파일 형식, 물리적 매체 또는 자원의 규격/크기"
 
 #. Dublin Core: Identifier element name
 msgid "Identifier"
-msgstr "Identifikator"
+msgstr "식별기호"
 
 #. Dublin Core: Identifier element description
 msgid "An unambiguous reference to the resource within a given context"
-msgstr "Entydig referanse som identifiserer ressursen"
+msgstr "특정 상황 또는 맥락 하에서 해당 자원을 분명히 식별할 수 있도록 하는 참조 기호(ex: URL, URI, DOI, ISBN 등)"
 
 #. Dublin Core: Source element name
 msgid "Source"
-msgstr "Kilde"
+msgstr "정보원/출처"
 
 #. Dublin Core: Source element description
 msgid "A related resource from which the described resource is derived"
-msgstr "En relatert ressurs"
+msgstr "해당 자원을 파생한 자원"
 
 #. Dublin Core: Language element name
 msgid "Language"
-msgstr "Språk"
+msgstr "언어"
 
 #. Dublin Core: Language element description
 msgid "A language of the resource"
-msgstr "Ressursens språk"
+msgstr "자원의 언어"
 
 #. Dublin Core: Relation element name
 msgid "Relation"
-msgstr "Relasjon"
+msgstr "관련 자원"
 
 #. Dublin Core: Relation element description
 msgid "A related resource"
-msgstr "En relatert ressurs"
+msgstr "연관된 자원에 대한 참조"
 
 #. Dublin Core: Coverage element name
 msgid "Coverage"
-msgstr "Dekningsområde"
+msgstr "내용범위"
 
 #. Dublin Core: Coverage element description
 msgid ""
 "The spatial or temporal topic of the resource, the spatial applicability of "
 "the resource, or the jurisdiction under which the resource is relevant"
-msgstr "Ressursens dekningsområde"
+msgstr "자원이 포함하고 있는 공간(지명/좌표), 시대(시기/날짜), 관할구명 (현)자원의 공간(지명/좌표)이나 시대(시기/날짜) 주제어, 자원에 적용되는 공간이나 자원과 관련된 관할구역"
 
 #. Dublin Core: Rights element name
 msgid "Rights"
-msgstr "Rettigheter"
+msgstr "권한(이용/재사용 등)"
 
 #. Dublin Core: Rights element description
 msgid "Information about rights held in and over the resource"
-msgstr "Rettighetsinformasjon om ressursen"
+msgstr "자원의 권한에 대해 명시한 정보"
 
 #. Item Type Metadata
 msgid "Item Type Metadata"
-msgstr "Metadata på ressurstype"
+msgstr "아이템 유형 메타데이터"
 
 #. Item Type Metadata description
 msgid ""
 "The item type metadata element set, consisting of all item type elements "
 "bundled with Omeka and all item type elements created by an administrator."
-msgstr "Elementsett for ressurstype, gjelder alle ressurstyper som ligger i Omeka som standard og alle elementsett som opprettes av administrator."
+msgstr "아이템 유형별 메타데이터 요소 세트는 Omeka 설치시 포함된 모든 아이템 유형별 요소와 관리자가 생성한 모든 아이템 유형별 요소로 구성됩니다."
 
 #. Omeka Legacy File
 msgid "Omeka Legacy File"
-msgstr "Omeka historisk fil"
+msgstr "Omeka 레거시 파일"
 
 #. Omeka Legacy File description
 msgid ""
@@ -188,143 +187,143 @@ msgid ""
 "was included in the `files` table in previous versions of Omeka. These "
 "elements are common to all Omeka files. This set may be deprecated in future"
 " versions."
-msgstr "Metadata-settet som var inkludert i 'files'-tabellen i tidligere versjoner av Omeka, i tillegg til Dublin Core settet. Disse elementene er felles for alle Omeka-filer. Settet kan komme til å bli forkastet i fremtidige versjoner."
+msgstr "메타데이터 요소 세트는 더블린 코어 요소 세트에 더해져서 이전 버전 Omeka의 'files' 테이블에 포함되어 있습니다. 이 요소들은 모든 Omeka 파일에 대해 공통 적용됩니다. 이 세트는 차기 버젼에선 사라질 수도 있습니다."
 
 #. Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
-msgstr "Ekstra opphavsperson"
+msgstr "추가 생산자"
 
 #. Omeka Legacy File: Transcriber element
 msgid "Transcriber"
-msgstr "Transkribent"
+msgstr "전사자(transcriber)"
 
 #. Omeka Legacy File: Producer element
 msgid "Producer"
-msgstr "Produsent"
+msgstr "제작자/생산자"
 
 #. Omeka Legacy File: Render Device element
 msgid "Render Device"
-msgstr "Rendringsenhet"
+msgstr "렌더링 장치"
 
 #. Omeka Legacy File: Render Details element
 msgid "Render Details"
-msgstr "Rendringsdetaljer"
+msgstr "렌더링 상세정보"
 
 #. Omeka Legacy File: Capture Date element
 msgid "Capture Date"
-msgstr "Bildedato"
+msgstr "캡쳐 날짜"
 
 #. Omeka Legacy File: Capture Device element
 msgid "Capture Device"
-msgstr "Enhet bildet er tatt med"
+msgstr "캡쳐 장치"
 
 #. Omeka Legacy File: Capture Details element
 msgid "Capture Details"
-msgstr "Detaljer for bildetakning"
+msgstr "캡쳐 상세정보"
 
 #. Omeka Legacy File: Change History element
 msgid "Change History"
-msgstr "Endringshistorikk"
+msgstr "변경 이력"
 
 #. Omeka Legacy File: Watermark element
 msgid "Watermark"
-msgstr "Vannmerke"
+msgstr "워터마크"
 
 #. Omeka Legacy File: Encryption element
 msgid "Encryption"
-msgstr "Kryptering"
+msgstr "암호화"
 
 #. Omeka Legacy File: Compression element
 msgid "Compression"
-msgstr "Komprimering"
+msgstr "압축"
 
 #. Omeka Legacy File: Post Processing element
 msgid "Post Processing"
-msgstr "Etterbehandling"
+msgstr "후(後)처리과정"
 
 #. Omeka Image File
 msgid "Omeka Image File"
-msgstr "Omeka bildefil"
+msgstr "Omeka 이미지 파일"
 
 #. Omeka Image File description
 msgid ""
 "The metadata element set that was included in the `files_images` table in "
 "previous versions of Omeka. These elements are common to all image files."
-msgstr "Metadata-settet som var inkludert i 'files_images'-tabellen i tidligere versjoner av Omeka. Disse elementene er felles for alle bildefiler."
+msgstr "메타데이터 요소 세트는 이전 버젼 Omeka의 'files_images' 테이블에 포함되어 있습니다. 이 요소들은 모든 이미지 파일에 공통 적용됩니다."
 
 #. Omeka Image File: Width element
 msgid "Width"
-msgstr "Bredde"
+msgstr "너비,폭"
 
 #. Omeka Image File: Height element
 msgid "Height"
-msgstr "Høyde"
+msgstr "높이"
 
 #. Omeka Image File: Bit Depth element
 msgid "Bit Depth"
-msgstr "Bit-dybde"
+msgstr "비트 심도"
 
 #. Omeka Image File: Channels element
 msgid "Channels"
-msgstr "Kanaler"
+msgstr "채널"
 
 #. Omeka Image File: Exif String element
 msgid "Exif String"
-msgstr "Exif-streng"
+msgstr "Exif(교환 이미지 파일형식) 문자열"
 
 #. Omeka Image File: Exif Array element
 msgid "Exif Array"
-msgstr "Exif-serie"
+msgstr "Exif 배열"
 
 #. Omeka Image File: IPTC String element
 msgid "IPTC String"
-msgstr "IPTC streng"
+msgstr "IPTC 문자열"
 
 #. Omeka Image File: IPTC Array element
 msgid "IPTC Array"
-msgstr "IPTC-serie"
+msgstr "IPTC 배열"
 
 #. Omeka Video File
 msgid "Omeka Video File"
-msgstr "Omeka videofil"
+msgstr "Omeka 비디오 파일"
 
 #. Omeka Video File description
 msgid ""
 "The metadata element set that was included in the `files_videos` table in "
 "previous versions of Omeka. These elements are common to all video files."
-msgstr "Metadata-settet som var inkludert i 'files_videos'-tabellen i tidligere versjoner av Omeka. Disse elementene er felles for alle videofiler."
+msgstr "메타데이터 요소 세트는 이전 버젼 Omeka의 'files_videos' 테이블에 포함되어 있습니다. 이 요소들은 모든 비디오 파일에 공통 적용됩니다."
 
 #. Omeka Video File: Bitrate element
 msgid "Bitrate"
-msgstr "Bitrate"
+msgstr "비트전송속도"
 
 # Omeka Video File: Duration element
 msgid "Duration"
-msgstr "Varighet"
+msgstr "재생시간"
 
 #. Omeka Video File: Sample Rate element
 msgid "Sample Rate"
-msgstr "Samplingsrate"
+msgstr "단위시간 당 샘플수"
 
 #. Omeka Video File: Codec element
 msgid "Codec"
-msgstr "Kodek"
+msgstr "코덱"
 
 #. Format (Legacy) Metadata element set
 msgid "Format (Legacy) Metadata"
-msgstr "Metadata-format (opprinnelig)"
+msgstr "포맷 메타데이터"
 
 #. User role: Super
 msgid "Super"
-msgstr "Superbruker"
+msgstr "최고관리자"
 
 #. User role: Admin
 msgid "Admin"
-msgstr "Admin"
+msgstr "관리자"
 
 #. User role: Researcher
 msgid "Researcher"
-msgstr "Forsker"
+msgstr "연구자"
 
 #: admin/themes/default/appearance/edit-navigation.php:3
 #: admin/themes/default/appearance/edit-settings.php:2
@@ -332,55 +331,61 @@ msgstr "Forsker"
 #: admin/themes/default/themes/browse.php:2
 #: admin/themes/default/themes/config.php:3
 msgid "Appearance"
-msgstr "Utseende"
+msgstr "화면관리"
 
 #: admin/themes/default/appearance/edit-navigation.php:14
 msgid ""
 "Check the links to display them in the main navigation. Click and drag the "
 "links into the preferred display order."
-msgstr "Huk av lenkene for å vise dem i hovednavigasjonen. Klikk og dra lenkene til den rekkefølgen du vil ha dem i."
+msgstr "메인 메뉴에서 보려면 해당 링크를 체크하십시오. 화면에 표시되기를 원하는 순서대로 해당 링크를 누르고(클릭) 옮기십시오(드래그)."
 
 #: admin/themes/default/appearance/edit-navigation.php:19
 msgid "Add a Link to the Navigation"
-msgstr "Legg til navigasjonslink"
+msgstr "메뉴에 링크 추가"
 
 #: admin/themes/default/appearance/edit-navigation.php:21
-#: admin/themes/default/appearance/edit-navigation.php:37
+#: admin/themes/default/appearance/edit-navigation.php:41
 #: admin/themes/default/users/api-keys.php:40
-#: application/forms/Navigation.php:132
+#: application/forms/Navigation.php:138
 msgid "Label"
-msgstr "Etikett"
+msgstr "라벨"
 
 #: admin/themes/default/appearance/edit-navigation.php:23
-#: admin/themes/default/appearance/edit-navigation.php:38
-#: application/forms/Navigation.php:133
+#: admin/themes/default/appearance/edit-navigation.php:42
+#: application/forms/Navigation.php:139
 msgid "URL"
 msgstr "URL"
 
 #: admin/themes/default/appearance/edit-navigation.php:25
 msgid "Add Link"
-msgstr "Legg til link"
+msgstr "링크 추가 등록"
 
 #: admin/themes/default/appearance/edit-navigation.php:31
 #: admin/themes/default/appearance/edit-settings.php:21
 #: admin/themes/default/collections/edit.php:22
 #: admin/themes/default/element-sets/edit.php:41
 #: admin/themes/default/files/edit.php:35
+#: admin/themes/default/item-types/edit.php:18
 #: admin/themes/default/items/batch-edit.php:130
 #: admin/themes/default/items/edit.php:19
 #: admin/themes/default/plugins/config.php:14
-#: admin/themes/default/settings/edit-api.php:81
-#: admin/themes/default/settings/edit-item-type-elements.php:38
-#: admin/themes/default/settings/edit-search.php:40
+#: admin/themes/default/settings/edit-api.php:82
+#: admin/themes/default/settings/edit-item-type-elements.php:39
+#: admin/themes/default/settings/edit-search.php:41
 #: admin/themes/default/settings/edit-security.php:15
 #: admin/themes/default/settings/edit-settings.php:15
 #: admin/themes/default/themes/config.php:16
-#: admin/themes/default/users/edit.php:21 application/forms/ItemTypes.php:169
+#: admin/themes/default/users/edit.php:21
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:73
 msgid "Save Changes"
-msgstr "Lagre endringer"
+msgstr "변경사항 저장"
 
-#: admin/themes/default/appearance/edit-navigation.php:39
+#: admin/themes/default/appearance/edit-navigation.php:35
+#: admin/themes/default/appearance/reset-navigation-confirm.php:2
+msgid "Reset Navigation"
+msgstr ""
+
+#: admin/themes/default/appearance/edit-navigation.php:43
 #: admin/themes/default/collections/edit.php:23
 #: admin/themes/default/collections/show.php:34
 #: admin/themes/default/files/show.php:28
@@ -388,9 +393,9 @@ msgstr "Lagre endringer"
 #: admin/themes/default/items/show.php:45
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:79
 msgid "View Public Page"
-msgstr "Se offentlig side"
+msgstr "공개 서비스용 페이지 보기"
 
-#: admin/themes/default/appearance/edit-navigation.php:40
+#: admin/themes/default/appearance/edit-navigation.php:44
 #: admin/themes/default/collections/edit.php:24
 #: admin/themes/default/collections/show.php:36
 #: admin/themes/default/element-sets/browse.php:29
@@ -409,18 +414,30 @@ msgstr "Se offentlig side"
 #: admin/themes/default/users/edit.php:26
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:83
 msgid "Delete"
-msgstr "Slett"
+msgstr "삭제"
+
+#: admin/themes/default/appearance/reset-navigation-confirm.php:9
+#: admin/themes/default/common/delete-confirm.php:10
+#: application/views/scripts/common/delete-confirm.php:12
+msgid "Are you sure?"
+msgstr "확실합니까?"
+
+#: admin/themes/default/appearance/reset-navigation-confirm.php:10
+msgid ""
+"All customizations will be lost. Order and labels will revert to Omeka "
+"defaults. Custom links will be lost."
+msgstr ""
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:11
 #: admin/themes/default/collections/browse.php:67
 #: admin/themes/default/collections/browse.php:76
 msgid "Add a Collection"
-msgstr "Legg til en samling"
+msgstr "컬렉션 추가"
 
 #: admin/themes/default/collections/add.php:11
 msgid "Add Collection"
-msgstr "Legg til samling"
+msgstr "컬렉션 추가"
 
 #: admin/themes/default/collections/add.php:16
 #: admin/themes/default/collections/edit.php:30
@@ -431,7 +448,7 @@ msgstr "Legg til samling"
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:52
 msgid "Public"
-msgstr "Vises"
+msgstr "공개"
 
 #: admin/themes/default/collections/add.php:19
 #: admin/themes/default/collections/edit.php:35
@@ -442,7 +459,7 @@ msgstr "Vises"
 #: admin/themes/default/items/quick-filters.php:8
 #: admin/themes/default/items/show.php:53
 msgid "Featured"
-msgstr "Fremhevet"
+msgstr "특집 항목"
 
 #: admin/themes/default/collections/browse.php:2
 #: application/libraries/Omeka/Navigation.php:149
@@ -452,7 +469,7 @@ msgstr "Fremhevet"
 #: application/tests/suite/Omeka/NavigationTest.php:950
 #: application/views/scripts/collections/browse.php:2
 msgid "Browse Collections"
-msgstr "Søk i samlinger"
+msgstr "컬렉션 보기"
 
 #: admin/themes/default/collections/browse.php:2
 #: admin/themes/default/item-types/browse.php:2
@@ -466,13 +483,13 @@ msgstr "Søk i samlinger"
 #: application/views/scripts/search/index.php:2
 #, php-format
 msgid "(%s total)"
-msgstr "(%s totalt)"
+msgstr "(전체 %s 건)"
 
 #: admin/themes/default/collections/browse.php:23
 #: admin/themes/default/collections/show.php:51
 #: application/views/scripts/collections/browse.php:36
 msgid "Contributors"
-msgstr "Bidragsytere"
+msgstr "기증자"
 
 #: admin/themes/default/collections/browse.php:24
 #: admin/themes/default/files/show.php:66
@@ -480,18 +497,18 @@ msgstr "Bidragsytere"
 #: application/views/scripts/collections/browse.php:11
 #: application/views/scripts/items/browse.php:21
 msgid "Date Added"
-msgstr "Lagt til dato"
+msgstr "등록된 날짜"
 
 #: admin/themes/default/collections/browse.php:25
 #: admin/themes/default/collections/show.php:46
 #: admin/themes/default/item-types/show.php:42
 msgid "Total Number of Items"
-msgstr "Totalt antall ressurser"
+msgstr "아이템 총수량"
 
 #: admin/themes/default/collections/browse.php:40
 #: admin/themes/default/items/browse.php:72
 msgid "(Private)"
-msgstr "(Privat)"
+msgstr "(비공개)"
 
 #: admin/themes/default/collections/browse.php:43
 #: admin/themes/default/collections/show.php:32
@@ -508,52 +525,39 @@ msgstr "(Privat)"
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:63
 msgid "Edit"
-msgstr "Endre"
+msgstr "편집"
 
 #: admin/themes/default/collections/browse.php:52
 msgid "No contributors"
-msgstr "Ingen bidragsytere"
+msgstr "기증자 없음"
 
 #: admin/themes/default/collections/browse.php:70
 msgid "There are no collections on this page."
-msgstr "Det er ingen samlinger på denne siden."
+msgstr "이 페이지에는 컬렉션이 없습니다."
 
 #: admin/themes/default/collections/browse.php:70
 msgid "View All Collections"
-msgstr "Se alle samlingene"
+msgstr "모든 컬렉션 보기"
 
 #: admin/themes/default/collections/browse.php:73
 msgid "You have no collections."
-msgstr "Du har ingen samlinger."
+msgstr "컬렉션이 없습니다."
 
 #: admin/themes/default/collections/browse.php:75
 msgid "Get started by adding your first collection."
-msgstr "Kom i gang med å lage din første samling."
-
-#: admin/themes/default/collections/edit.php:3
-#: admin/themes/default/collections/show.php:3
-#: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/libraries/globals.php:2574
-#: application/views/scripts/collections/show.php:4
-#: application/views/scripts/functions.php:14
-msgid "[Untitled]"
-msgstr "[Uten tittel]"
+msgstr "첫 번째 컬렉션 추가를 시작합니다."
 
 #: admin/themes/default/collections/edit.php:8
-#, php-format
-msgid "Edit Collection #%s"
-msgstr "Endre samling #%s"
-
 #: admin/themes/default/collections/show.php:8
 #, php-format
-msgid "Collection #%s"
-msgstr "Samling #%s"
+msgid "Edit Collection #%s"
+msgstr "#%s 컬렉션 편집"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
 #: application/views/scripts/index.php:40
 msgid "Recently Added Items"
-msgstr "Nylige ressurser lagt til"
+msgstr "최근 추가된 아이템"
 
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/collections/show.php:42
@@ -561,7 +565,7 @@ msgstr "Nylige ressurser lagt til"
 #: admin/themes/default/items/show.php:53
 #: application/views/helpers/ItemSearchFilters.php:69
 msgid "Yes"
-msgstr "Ja"
+msgstr "예"
 
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/collections/show.php:42
@@ -569,19 +573,19 @@ msgstr "Ja"
 #: admin/themes/default/items/show.php:53
 #: application/views/helpers/ItemSearchFilters.php:69
 msgid "No"
-msgstr "Nei"
+msgstr "아니오"
 
 #: admin/themes/default/collections/show.php:56
 msgid "No contributors."
-msgstr "Ingen bidragsytere."
+msgstr "기증자가 없습니다."
 
 #: admin/themes/default/common/appearance-nav.php:5
 msgid "Themes"
-msgstr "Tema"
+msgstr "화면 테마"
 
 #: admin/themes/default/common/appearance-nav.php:11
 msgid "Navigation"
-msgstr "Navigasjon"
+msgstr "메뉴구조"
 
 #: admin/themes/default/common/appearance-nav.php:15
 #: admin/themes/default/common/global-nav.php:23
@@ -592,26 +596,30 @@ msgstr "Navigasjon"
 #: admin/themes/default/settings/edit-security.php:3
 #: admin/themes/default/settings/edit-settings.php:3
 msgid "Settings"
-msgstr "Innstillinger"
+msgstr "설정"
+
+#: admin/themes/default/common/content-nav.php:1
+msgid "Main Menu"
+msgstr ""
 
 #: admin/themes/default/common/content-nav.php:5
 #: admin/themes/default/index.php:2
 msgid "Dashboard"
-msgstr "Frontpanel"
+msgstr "현황판"
 
 #: admin/themes/default/common/content-nav.php:9
 #: admin/themes/default/items/batch-delete.php:17
 #: admin/themes/default/items/batch-edit.php:17
 msgid "Items"
-msgstr "Ressurser"
+msgstr "아이템"
 
 #: admin/themes/default/common/content-nav.php:13
 msgid "Collections"
-msgstr "Samlinger"
+msgstr "컬렉션"
 
 #: admin/themes/default/common/content-nav.php:17
 msgid "Item Types"
-msgstr "Ressurstyper"
+msgstr "아이템 유형"
 
 #: admin/themes/default/common/content-nav.php:21
 #: admin/themes/default/items/browse.php:94
@@ -619,282 +627,288 @@ msgstr "Ressurstyper"
 #: application/views/scripts/items/browse.php:46
 #: application/views/scripts/items/show.php:26
 msgid "Tags"
-msgstr "Stikkord"
+msgstr "태그"
 
 #: admin/themes/default/common/delete-confirm.php:3
 #: application/views/scripts/common/delete-confirm.php:3
 #, php-format
 msgid "Delete %s"
-msgstr "Slett %s"
-
-#: admin/themes/default/common/delete-confirm.php:10
-#: application/views/scripts/common/delete-confirm.php:12
-msgid "Are you sure?"
-msgstr "Er du sikker?"
+msgstr "%s 삭제"
 
 #: admin/themes/default/common/footer.php:6
 #: admin/themes/default/common/login-footer.php:7
 msgid "Powered by Omeka"
-msgstr "Drevet av Omeka"
+msgstr "이 사이트는 오픈소스인 OMEKA 소프트웨어로 개발되었습니다."
 
 #: admin/themes/default/common/footer.php:6
 msgid "Documentation"
-msgstr "Dokumentasjon"
+msgstr "참고문서"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Support Forums"
-msgstr "Supportforum"
+msgstr "지원 포럼"
 
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
 #: admin/themes/default/plugins/browse.php:52
 #, php-format
 msgid "Version %s"
-msgstr "Versjon %s"
+msgstr "%s 버젼"
 
 #: admin/themes/default/common/footer.php:10
 #: admin/themes/default/system-info/index.php:2
 msgid "System Information"
-msgstr "Systeminformasjon"
+msgstr "시스템 정보"
+
+#: admin/themes/default/common/global-nav.php:1
+msgid "Manage Site"
+msgstr ""
 
 #: admin/themes/default/common/global-nav.php:5
 #: admin/themes/default/plugins/browse.php:2
 msgid "Plugins"
-msgstr "Programtillegg"
+msgstr "플러그인 관리"
 
 #: admin/themes/default/common/global-nav.php:17
 msgid "Users"
-msgstr "Brukere"
+msgstr "회원 관리"
 
 #: admin/themes/default/common/header.php:11
 #: admin/themes/default/upgrade/index.php:6
 #: admin/themes/default/upgrade/migrate.php:6
 #: application/views/scripts/common/admin-bar.php:11
 msgid "Omeka Admin"
-msgstr "Omeka admin"
+msgstr "Omeka 관리자"
+
+#: admin/themes/default/common/header.php:40
+#: application/views/scripts/common/header.php:32
+msgid "Skip to main content"
+msgstr ""
 
 #: admin/themes/default/common/header.php:60
 #: application/views/scripts/common/admin-bar.php:7
 #, php-format
 msgid "Welcome, %s"
-msgstr "Velkommen, %s"
+msgstr "%s 님, 반갑습니다."
 
 #: admin/themes/default/common/header.php:61
 #: application/views/scripts/common/admin-bar.php:15
 msgid "Log Out"
-msgstr "Logg ut"
+msgstr "로그아웃"
 
 #: admin/themes/default/common/settings-nav.php:6
 #: admin/themes/default/common/users-nav.php:5
 msgid "General"
-msgstr "Generelt"
+msgstr "일반"
 
 #: admin/themes/default/common/settings-nav.php:10
 msgid "Security"
-msgstr "Sikkerthet"
+msgstr "보안"
 
 #: admin/themes/default/common/settings-nav.php:16
+#: admin/themes/default/search/index.php:2
 #: application/views/helpers/SearchForm.php:34
+#: application/views/scripts/search/index.php:2
 #: application/views/scripts/search/search-form.php:2
 #: application/views/scripts/search/search-form.php:22
 msgid "Search"
-msgstr "Søk"
+msgstr "검색"
 
 #: admin/themes/default/common/settings-nav.php:20
 msgid "Element Sets"
-msgstr "Elementsett"
+msgstr "요소 세트"
 
 #: admin/themes/default/common/settings-nav.php:26
 msgid "Item Type Elements"
-msgstr "Ressurstype elementer"
+msgstr "아이템 유형별 요소"
 
 #: admin/themes/default/common/settings-nav.php:32
 msgid "API"
-msgstr ""
+msgstr "API"
 
 #: admin/themes/default/common/users-nav.php:11
-#: application/forms/ChangePassword.php:78
+#: application/forms/ChangePassword.php:80
 msgid "Change Password"
-msgstr "Endre passord"
+msgstr "비밀번호 변경"
 
 #: admin/themes/default/common/users-nav.php:17
 #: admin/themes/default/users/api-keys.php:14
 msgid "API Keys"
-msgstr ""
+msgstr "API 키"
 
 #: admin/themes/default/element-sets/browse.php:16
 #: admin/themes/default/users/browse.php:17
 #: application/forms/ItemTypes.php:141
 msgid "Name"
-msgstr "Navn"
+msgstr "이름"
 
 #: admin/themes/default/element-sets/edit.php:5
 msgid "Edit Element Set"
-msgstr "Rediger elementsett"
+msgstr "요소 세트 편집"
 
 #: admin/themes/default/element-sets/edit.php:17
 msgid ""
 "Click and drag the elements into the preferred display order. Click the "
 "right arrows to add customized comments to element descriptions."
-msgstr "Klikk og dra elementer for å arrangere rekkefølgen. Klikk på venstrepilene for å legge til kommentarer til elementbeskrivelsene."
+msgstr "화면에 표시될 순서대로 해당 요소를 누르고(클릭) 옮기십시오(드래그). 요소 설명을 추가하려면 오른쪽 화살표를 누르십시오(클릭)."
 
 #: admin/themes/default/element-sets/edit.php:29
 msgid "Comment"
-msgstr "Kommentar"
+msgstr "덧글 입력"
 
 #: admin/themes/default/error/403.php:2
 msgid "403: Forbidden"
-msgstr "403: forbudt"
+msgstr "403에러 : 해당 페이지의 접근 권한 설정에 문제가 있습니다."
 
 #: admin/themes/default/error/403.php:6
 msgid "Sorry, you do not have permission to access this page."
-msgstr "Beklager, du har ikke adgang til denne siden."
+msgstr "죄송합니다. 해당 페이지에 접근할 수 있는 권한이 없습니다."
 
 #: admin/themes/default/error/403.php:10 admin/themes/default/error/404.php:9
 #: admin/themes/default/error/405.php:8
 msgid "site administrator"
-msgstr "Side administrator"
+msgstr "사이트 관리자"
 
 #: admin/themes/default/error/403.php:11
 #, php-format
 msgid "If you think you should have permission, try contacting the %s."
-msgstr "Hvis du mener du har tillatelse, prøv å kontakte %s."
+msgstr "만약 접근권한이 필요하다고 판단되는 경우 %s 에게 문의하시기 바랍니다."
 
 #: admin/themes/default/error/404.php:2
 msgid "404: Page Not Found"
-msgstr "403: finner ikke denne siden"
+msgstr "404에러 : 해당 페이지를 찾을 수 없습니다."
 
 #: admin/themes/default/error/404.php:6
 msgid ""
 "You&#8217;ve tried to access a page that does not seem to exist. Sometimes "
 "this happens. Below is a quick break-down of the items, collections, and "
 "exhibits on this site."
-msgstr "Du har forsøkt å hente en side som ikke ekisterer. Ikke fortvil. Nedenfor finner du en kjapp oversikt over ressurser, samlinger og utstillinger på siden."
+msgstr "&#8217; 당신은 없는 페이지에 접근하려 하고 있습니다. 이 사이트에 있는 전시, 컬렉션, 아이템을 아래에서 살펴볼 수 있습니다."
 
 #: admin/themes/default/error/404.php:10
 #, php-format
 msgid "If this does not help, try contacting the %s."
-msgstr "Hvis det ikke hjelper, prøv å kontakte %s."
+msgstr "만약 도움이 되지 않았다면 %s 에게 문의하시기 바랍니다."
 
 #: admin/themes/default/error/404.php:16 admin/themes/default/index.php:46
 msgid "Recent Items"
-msgstr "Siste elementer"
+msgstr "최근 등록된 아이템"
 
 #: admin/themes/default/error/404.php:29 admin/themes/default/index.php:59
 msgid "Add a new item"
-msgstr "Legg til nytt element"
+msgstr "새 아이템 추가"
 
 #: admin/themes/default/error/404.php:36 admin/themes/default/index.php:64
 msgid "Recent Collections"
-msgstr "Siste samling"
+msgstr "최근 등록된 컬렉션"
 
 #: admin/themes/default/error/404.php:50 admin/themes/default/index.php:78
 msgid "Add a new collection"
-msgstr "legg til en ny samling"
+msgstr "새 컬렉션 추가"
 
 #: admin/themes/default/error/405.php:2
 msgid "405: Method Not Allowed"
-msgstr "405: Metoden er ikke tillatt"
+msgstr "405에러 : 해당 방법은 허용되지 않습니다."
 
 #: admin/themes/default/error/405.php:9
 #, php-format
 msgid ""
 "You must use a different method to access this URL. If you reached this page"
 " by following a link or clicking a button in Omeka, please contact the %s."
-msgstr "Du må bruke en annen metode for å nå denne nettadressen. Hvis du kom hit ved å følge en lenke eller ved å klikke på en knapp i Omeka, vennligst kontakt %s."
+msgstr "이 주소로 접근하기 위해서는 다른 방법이 필요합니다. 만약 오메카 내의 링크나 버튼을 통해서 이 페이지에 접근했다면 %s 에게 문의해 주시기 바랍니다."
 
 #: admin/themes/default/files/edit.php:8
 #, php-format
 msgid "Edit File #%s"
-msgstr "Endre fil #%s"
+msgstr "#%s 파일 편집"
 
 #: admin/themes/default/files/show.php:9
 #: application/views/scripts/files/show.php:9
 #, php-format
 msgid "File #%s"
-msgstr "Fil #%s"
+msgstr "#%s 파일"
 
 #: admin/themes/default/files/show.php:35
-#: application/libraries/globals.php:416
+#: application/libraries/globals.php:409
 msgid "Item"
-msgstr "Element"
+msgstr "아이템"
 
 #: admin/themes/default/files/show.php:40
 msgid "Direct Links"
-msgstr ""
+msgstr "바로 접속"
 
 #: admin/themes/default/files/show.php:42
 msgid "Original"
-msgstr ""
+msgstr "원본"
 
 #: admin/themes/default/files/show.php:44
 msgid "Fullsize"
-msgstr ""
+msgstr "실물 크기"
 
 #: admin/themes/default/files/show.php:45
 msgid "Thumbnail"
-msgstr ""
+msgstr "썸네일"
 
 #: admin/themes/default/files/show.php:46
 msgid "Square Thumbnail"
-msgstr ""
+msgstr "사각형 썸네일"
 
 #: admin/themes/default/files/show.php:52
 #: application/views/scripts/files/show.php:22
 msgid "Format Metadata"
-msgstr "Metadata på format"
+msgstr "파일 형식 메타데이터"
 
 #: admin/themes/default/files/show.php:54
 msgid "Filename"
-msgstr "Filnavn"
+msgstr "파일명"
 
 #: admin/themes/default/files/show.php:56
 #: application/views/scripts/files/show.php:24
 msgid "Original Filename"
-msgstr "Orginal filnavn"
+msgstr "원본 파일명"
 
 #: admin/themes/default/files/show.php:58
 #: application/views/scripts/files/show.php:29
 msgid "File Size"
-msgstr "Filstørrelse"
+msgstr "파일 크기"
 
 #: admin/themes/default/files/show.php:59
 #: application/views/scripts/files/show.php:30
 #, php-format
 msgid "%s bytes"
-msgstr "%s byte"
+msgstr "%s 바이트"
 
 #: admin/themes/default/files/show.php:64
 msgid "File History"
-msgstr "Filhistorikk"
+msgstr "파일 이력"
 
 #: admin/themes/default/files/show.php:68
 msgid "Date Modified"
-msgstr "Endret dato"
+msgstr "변경일"
 
 #: admin/themes/default/files/show.php:70
 #: application/views/scripts/files/show.php:34
 msgid "Authentication"
-msgstr "Autentisering"
+msgstr "인증"
 
 #: admin/themes/default/files/show.php:76
 #: application/views/scripts/files/show.php:40
 msgid "Type Metadata"
-msgstr "Metadata-type"
+msgstr "유형 메타데이터"
 
 #: admin/themes/default/files/show.php:78
 #: application/views/scripts/files/show.php:42
 msgid "Mime Type"
-msgstr "Mime Type"
+msgstr "MIME 형식"
 
 #: admin/themes/default/files/show.php:80
 #: application/views/scripts/files/show.php:46
 msgid "File Type / OS"
-msgstr "Filtype / OS"
+msgstr "파일 유형 / 운영체제"
 
 #: admin/themes/default/files/show.php:87
 msgid "Embedded Metadata"
-msgstr "Inkludert metadata"
+msgstr "포함된 메타데이터"
 
 #: admin/themes/default/files/show.php:93
 #: admin/themes/default/items/browse.php:133
@@ -902,40 +916,40 @@ msgstr "Inkludert metadata"
 #: application/views/scripts/items/browse.php:60
 #: application/views/scripts/items/show.php:38
 msgid "Output Formats"
-msgstr "Utformater"
+msgstr "출력 포맷"
 
 #: admin/themes/default/index.php:6
 msgid "items"
-msgstr "elementer"
+msgstr "아이템"
 
 #: admin/themes/default/index.php:7
 msgid "collections"
-msgstr "samlinger"
+msgstr "컬렉션"
 
 #: admin/themes/default/index.php:8
 msgid "tags"
-msgstr "tagger"
+msgstr "태그"
 
 #: admin/themes/default/index.php:11
 msgid "plugins"
-msgstr "programtillegg"
+msgstr "플러그인 관리"
 
 #: admin/themes/default/index.php:14
 msgid "users"
-msgstr "brukere"
+msgstr "회원현황"
 
 #: admin/themes/default/index.php:18
 msgid "theme"
-msgstr "tema"
+msgstr "화면 테마"
 
 #: admin/themes/default/index.php:29
 msgid "A new version of Omeka is available for download."
-msgstr "En ny versjon av Omeka er tilgjengelig for nedlasting."
+msgstr "새로운 Omeka 버전을 다운로드 할 수 있습니다."
 
 #: admin/themes/default/index.php:30
 #, php-format
 msgid "Upgrade to %s"
-msgstr "Oppgrader til %s"
+msgstr "%s 로 업그레이드"
 
 #: admin/themes/default/item-types/add-existing-element.php:22
 #: admin/themes/default/item-types/add-new-element.php:15
@@ -943,46 +957,46 @@ msgstr "Oppgrader til %s"
 #: admin/themes/default/items/tag-form.php:23
 #: application/views/helpers/ElementInput.php:113
 msgid "Remove"
-msgstr "Slett"
+msgstr "지우기"
 
 #: admin/themes/default/item-types/add-new-element.php:6
 msgid "Element Name"
-msgstr "Navn på element"
+msgstr "요소명"
 
 #: admin/themes/default/item-types/add-new-element.php:22
 msgid "Element Description"
-msgstr "Elementbeskrivelse"
+msgstr "요소 설명"
 
 #: admin/themes/default/item-types/add.php:2
-#: application/forms/ItemTypes.php:161
+#: admin/themes/default/item-types/add.php:11
 msgid "Add Item Type"
-msgstr "Legg til ressurstype"
+msgstr "아이템 유형 추가"
 
 #: admin/themes/default/item-types/browse.php:2
 msgid "Browse Item Types"
-msgstr "Se ressurstyper"
+msgstr "아이템 유형 보기"
 
 #: admin/themes/default/item-types/browse.php:7
 #: admin/themes/default/item-types/browse.php:40
 msgid "Add an Item Type"
-msgstr "Legg til en ressurstype"
+msgstr "아이템 유형 추가"
 
 #: admin/themes/default/item-types/browse.php:14
 msgid "Type Name"
-msgstr "Navn på type"
+msgstr "유형명"
 
 #: admin/themes/default/item-types/browse.php:16
 msgid "Total Items"
-msgstr "Alle elementer"
+msgstr "전체 아이템"
 
 #: admin/themes/default/item-types/edit.php:8
 #, php-format
 msgid "Edit Item Type #%s"
-msgstr "Endre ressurstype  #%s"
+msgstr "#%s 아이템 유형 편집"
 
 #: admin/themes/default/item-types/form.php:14
 msgid "Item Type Information"
-msgstr "Informasjon om ressurstype"
+msgstr "아이템 유형 정보"
 
 #: admin/themes/default/item-types/form.php:15
 #: admin/themes/default/users/add.php:7
@@ -990,143 +1004,143 @@ msgstr "Informasjon om ressurstype"
 #: admin/themes/default/users/edit.php:15
 #: install/views/scripts/index/index.phtml:14
 msgid "required field"
-msgstr "påkrevd felt"
+msgstr "필수 입력항목"
 
 #: admin/themes/default/item-types/form.php:25
 #: admin/themes/default/item-types/show.php:16
 msgid "Elements"
-msgstr "Elementer"
+msgstr "요소"
 
 #: admin/themes/default/item-types/form.php:42
 #: admin/themes/default/items/tag-form.php:22
 #: admin/themes/default/settings/edit-item-type-elements.php:22
 msgid "Undo"
-msgstr "Angre"
+msgstr "실행 취소"
 
 #: admin/themes/default/item-types/form.php:80
 #: admin/themes/default/item-types/form.php:87
 msgid "Add Element"
-msgstr "Legg til element"
+msgstr "요소 추가"
 
 #: admin/themes/default/item-types/form.php:84
 msgid "Existing"
-msgstr "Eksisterende"
+msgstr "기존"
 
 #: admin/themes/default/item-types/form.php:85
 msgid "New"
-msgstr "Ny"
+msgstr "신규"
 
 #: admin/themes/default/item-types/show.php:8
 #, php-format
 msgid "Item Type #%s"
-msgstr "Ressurstype #%s"
+msgstr "#%s 아이템 유형"
 
 #: admin/themes/default/item-types/show.php:25
 msgid "There are no elements."
-msgstr "Det finnes ingen elementer."
+msgstr "요소가 존재하지 않습니다."
 
 #: admin/themes/default/item-types/show.php:39
 msgid "There are no recently added items."
-msgstr "Ingen nylige ressurser lagt til"
+msgstr "최근 추가된 아이템이 없습니다."
 
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:20
 #: admin/themes/default/items/browse.php:116
 #: admin/themes/default/items/browse.php:151
 msgid "Add an Item"
-msgstr "Legg til et element"
+msgstr "아이템 추가"
 
 #: admin/themes/default/items/add.php:12
 msgid "Add Item"
-msgstr "Legg til ressurs"
+msgstr "아이템 추가"
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit.php:89
 #: admin/themes/default/items/browse.php:90
 #: admin/themes/default/items/edit.php:41
 #: admin/themes/default/items/show.php:57
-#: application/libraries/globals.php:418
+#: application/libraries/globals.php:411
 #: application/views/scripts/items/show.php:18
 msgid "Collection"
-msgstr "Samling"
+msgstr "컬렉션"
 
 #: admin/themes/default/items/batch-delete.php:2
 msgid "Batch Delete Items"
-msgstr "Slett mange elementer"
+msgstr "아이템 삭제 일괄처리"
 
 #: admin/themes/default/items/batch-delete.php:38
 msgid ""
 "Some items were excluded because you do not have permission to delete them."
-msgstr "Enkelte elementer ble utelatt fordi du ikke har rettigheter til å slette dem."
+msgstr "일부 아이템이 삭제되지 않는 이유는 해당 아이템에 대한 삭제 권한이 부여되어 있지 않기 때문입니다."
 
 #: admin/themes/default/items/batch-delete.php:41
 msgid "Checked items will be deleted."
-msgstr "De merkede elementene vi bli slettet."
+msgstr "선택한 아이템을 삭제합니다."
 
 #: admin/themes/default/items/batch-delete.php:50
 #: admin/themes/default/items/batch-edit.php:116
 msgid "Delete Items"
-msgstr "Slette elementer"
+msgstr "아이템 삭제"
 
 #: admin/themes/default/items/batch-edit.php:2
 msgid "Batch Edit Items"
-msgstr "Endre mange ressurser"
+msgstr "아이템 편집 일괄처리"
 
 #: admin/themes/default/items/batch-edit.php:36
 msgid "Changes will be applied to checked items."
-msgstr "Endringer vil bli gjort på avhukede ressurser"
+msgstr "체크한 아이템만 변경합니다."
 
 #: admin/themes/default/items/batch-edit.php:41
 msgid "Item Metadata"
-msgstr "Metadata på ressurs"
+msgstr "아이템 메타데이터"
 
 #: admin/themes/default/items/batch-edit.php:46
 msgid "Public?"
-msgstr "Vises?"
+msgstr "공개하시겠습니까?"
 
 #: admin/themes/default/items/batch-edit.php:49
 #: admin/themes/default/items/batch-edit.php:64
 #: admin/themes/default/items/batch-edit.php:78
 #: admin/themes/default/items/batch-edit.php:93
 msgid "Select Below"
-msgstr "Velg under"
+msgstr "아래에서 선택"
 
 #: admin/themes/default/items/batch-edit.php:51
 msgid "Not Public"
-msgstr "Vises ikke"
+msgstr "비공개"
 
 #: admin/themes/default/items/batch-edit.php:61
 msgid "Featured?"
-msgstr "Fremheve?"
+msgstr "특별 전시용으로 메인화면에 나타나도록 설정하시겠습니까?"
 
 #: admin/themes/default/items/batch-edit.php:66
 msgid "Not Featured"
-msgstr "Ikke fremhevet"
+msgstr "특별 전시용이 아님"
 
 #: admin/themes/default/items/batch-edit.php:74
 #: admin/themes/default/items/item-type-form.php:3
 msgid "Item Type"
-msgstr "Ressurstype"
+msgstr "아이템 유형"
 
 #: admin/themes/default/items/batch-edit.php:83
 #: admin/themes/default/items/batch-edit.php:98
 msgid "Remove?"
-msgstr "Slette?"
+msgstr "삭제하시겠습니까?"
 
 #: admin/themes/default/items/batch-edit.php:104
 #: admin/themes/default/items/tag-form.php:8
 #: admin/themes/default/items/tag-form.php:11
 msgid "Add Tags"
-msgstr "Legg til stikkord"
+msgstr "태그 추가"
 
 #: admin/themes/default/items/batch-edit.php:107
 #, php-format
 msgid "List of tags to add to all checked items, separated by %s."
-msgstr "Liste over stikkord som skal legges til alle merkede ressurser, skilt med  %s."
+msgstr "체크한 모든 아이템에 태그 목록을 추가하려면 %s 으로 구분하십시오."
 
 #: admin/themes/default/items/batch-edit.php:117
 msgid "Check if you wish to delete selected items."
-msgstr "Ønsker du å slette dette elementet?"
+msgstr "선택한 아이템을 삭제하시려면 체크하십시오."
 
 #: admin/themes/default/items/browse.php:3
 #: application/libraries/Omeka/Navigation.php:142
@@ -1167,413 +1181,413 @@ msgstr "Ønsker du å slette dette elementet?"
 #: application/views/scripts/items/browse.php:2
 #: application/views/scripts/items/tags.php:2
 msgid "Browse Items"
-msgstr "Bla i ressurser"
+msgstr "아이템 보기"
 
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2350
-#: application/libraries/globals.php:2734
+#: application/libraries/globals.php:2367
+#: application/libraries/globals.php:2757
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
-msgstr "Søk etter elementer"
+msgstr "아이템 검색"
 
 #: admin/themes/default/items/browse.php:37
 msgid "Select"
-msgstr "Velg"
+msgstr "선택"
 
 #: admin/themes/default/items/browse.php:95
 msgid "No Tags"
-msgstr "Ingen stikkord"
+msgstr "태그 없음"
 
 #: admin/themes/default/items/browse.php:139
 msgid "Details"
-msgstr "Detaljer"
+msgstr "상세정보"
 
 #: admin/themes/default/items/browse.php:140
 msgid "Show Details"
-msgstr "Vis detaljer"
+msgstr "상세정보 보기"
 
 #: admin/themes/default/items/browse.php:141
 msgid "Hide Details"
-msgstr "Skjul detaljer"
+msgstr "상세정보 숨기기"
 
 #: admin/themes/default/items/browse.php:148
 msgid "You have no items."
-msgstr "Du har ingen elementer."
+msgstr "아이템이 없습니다."
 
 #: admin/themes/default/items/browse.php:150
 msgid "Get started by adding your first item."
-msgstr "Kom i gang med å legge til ditt første element."
+msgstr "첫 번째 아이템 추가를 시작합니다."
 
 #: admin/themes/default/items/browse.php:154
 #, php-format
 msgid "The query searched %s items and returned no results."
-msgstr "Spørringen søkte gjennom %s ressurser og ga ingen resultater."
+msgstr "%s 아이템 검색 결과가 없습니다."
 
 #: admin/themes/default/items/browse.php:154
 msgid "refine your search"
-msgstr "Avgrense søket ditt"
+msgstr "검색어 재설정"
 
 #: admin/themes/default/items/browse.php:154
 #, php-format
 msgid "Would you like to %s?"
-msgstr "Vil du %s?"
+msgstr "%s 하기를 원하십니까?"
+
+#: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
+#: application/views/scripts/functions.php:14
+msgid "[Untitled]"
+msgstr "[제목없음]"
 
 #: admin/themes/default/items/edit.php:8
 #, php-format
 msgid "Edit Item #%s"
-msgstr "Endre ressurs #%s"
+msgstr "#%s 아이템 편집"
 
 #: admin/themes/default/items/files-form.php:2
 msgid "Click and drag the files into the preferred display order."
-msgstr "Klikk og dra filene i den rekkefølgen du vil ha dem i."
+msgstr "화면에 보여주고자 하는 순서대로 해당 파일을 누르고(클릭) 옮기십시오(드래그)."
 
 #: admin/themes/default/items/files-form.php:13
 msgid "Delete "
-msgstr "Slett"
+msgstr "삭제"
 
 #: admin/themes/default/items/files-form.php:22
 msgid "Add New Files"
-msgstr "Legg til en ny fil"
+msgstr "새 파일 추가"
 
 #: admin/themes/default/items/files-form.php:24
 #, php-format
 msgid "The maximum file size is %s."
-msgstr "Maks filstørrelse er %s."
+msgstr "최대 파일 크기는 %s 입니다."
 
 #: admin/themes/default/items/files-form.php:27
 msgid "Find a File"
-msgstr "Finn en fil"
+msgstr "파일 검색"
 
 #: admin/themes/default/items/form.php:25
 msgid "Add Another File"
-msgstr "Legg til en annen fil"
+msgstr "다른 파일 추가"
 
 #: admin/themes/default/items/item-type-form.php:15
 msgid "Pick this type"
-msgstr "Velg denne ressursen"
+msgstr "이 유형 선택"
 
 #: admin/themes/default/items/quick-filters.php:2
 #: admin/themes/default/items/quick-filters.php:4
 msgid "Quick Filter"
-msgstr "Raskt filter"
+msgstr "빠른 필터"
 
 #: admin/themes/default/items/quick-filters.php:5
 msgid "View All"
-msgstr "Vis alle"
+msgstr "전체 보기"
 
 #: admin/themes/default/items/quick-filters.php:7
 msgid "Private"
-msgstr "Privat"
+msgstr "비공개"
 
 #: admin/themes/default/items/search-form.php:14
 #: application/views/scripts/items/search-form.php:13
 msgid "Search for Keywords"
-msgstr "Søk etter nøkkelord"
+msgstr "키워드로 검색"
 
 #: admin/themes/default/items/search-form.php:27
 #: application/views/scripts/items/search-form.php:25
 msgid "Narrow by Specific Fields"
-msgstr "Begrens ved spesifikke feilter"
+msgstr "특정 항목으로 검색결과 좁히기"
 
 #: admin/themes/default/items/search-form.php:28
 #: application/views/scripts/items/search-form.php:90
 msgid "Add a Field"
-msgstr "Legg til et felt"
+msgstr "항목 추가"
 
 #: admin/themes/default/items/search-form.php:54
 #: application/views/scripts/items/search-form.php:50
 msgid "Search Field"
-msgstr ""
+msgstr "항목 검색"
 
 #: admin/themes/default/items/search-form.php:67
 #: application/views/scripts/items/search-form.php:63
 msgid "Search Type"
-msgstr ""
+msgstr "유형 검색"
 
 #: admin/themes/default/items/search-form.php:72
 #: application/views/scripts/items/search-form.php:68
 msgid "contains"
-msgstr "inneholder"
+msgstr "포함"
 
 #: admin/themes/default/items/search-form.php:73
 #: application/views/scripts/items/search-form.php:69
 msgid "does not contain"
-msgstr "inneholder ikke"
+msgstr "포함하지 않음"
 
 #: admin/themes/default/items/search-form.php:74
 #: application/views/scripts/items/search-form.php:70
 msgid "is exactly"
-msgstr "er nøyaktig"
+msgstr "완전히 일치함"
 
 #: admin/themes/default/items/search-form.php:75
 #: application/views/scripts/items/search-form.php:71
 msgid "is empty"
-msgstr "er tom"
+msgstr "비어있습니다"
 
 #: admin/themes/default/items/search-form.php:76
 #: application/views/scripts/items/search-form.php:72
 msgid "is not empty"
-msgstr "er  ikke tom"
+msgstr "비어있지 않습니다"
 
 #: admin/themes/default/items/search-form.php:84
 #: application/views/scripts/items/search-form.php:80
 msgid "Search Terms"
-msgstr ""
+msgstr "조건 검색"
 
 #: admin/themes/default/items/search-form.php:90
 #: application/views/scripts/items/search-form.php:86
 msgid "Remove field"
-msgstr ""
+msgstr "항목 삭제"
 
 #: admin/themes/default/items/search-form.php:98
 #: application/views/scripts/items/search-form.php:94
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
-msgstr "Søk i ID#-intervall (for eksempel: 1-4, 156, 79)"
+msgstr "ID#s 의 범위로 검색(example: 1-4, 156, 79)"
 
 #: admin/themes/default/items/search-form.php:112
 #: application/views/scripts/items/search-form.php:105
 msgid "Search By Collection"
-msgstr "Søk etter samling"
+msgstr "컬렉션별 검색"
 
 #: admin/themes/default/items/search-form.php:128
 #: application/views/scripts/items/search-form.php:119
 msgid "Search By Type"
-msgstr "Søk etter type"
+msgstr "형태별 검색"
 
 #: admin/themes/default/items/search-form.php:145
 #: application/views/scripts/items/search-form.php:135
 msgid "Search By User"
-msgstr "Søk etter bruker"
+msgstr "사용자별 검색"
 
 #: admin/themes/default/items/search-form.php:162
 #: application/views/scripts/items/search-form.php:150
 msgid "Search By Tags"
-msgstr "Søk etter stikkord"
+msgstr "태그별 검색"
 
 #: admin/themes/default/items/search-form.php:177
 #: application/views/scripts/items/search-form.php:163
 msgid "Public/Non-Public"
-msgstr "Vises/Vises ikke"
+msgstr "공개 / 비공개"
 
 #: admin/themes/default/items/search-form.php:186
 #: application/views/scripts/items/search-form.php:171
 msgid "Only Public Items"
-msgstr "Kun bilder som vises"
+msgstr "공개된 아이템만"
 
 #: admin/themes/default/items/search-form.php:187
 #: application/views/scripts/items/search-form.php:172
 msgid "Only Non-Public Items"
-msgstr "Kun bilder som ikke vises"
+msgstr "비공개 아이템만"
 
 #: admin/themes/default/items/search-form.php:197
 #: application/views/scripts/items/search-form.php:181
 msgid "Featured/Non-Featured"
-msgstr "Utvalgt/Ikke-utvalgt"
+msgstr "특별전시용/일반"
 
 #: admin/themes/default/items/search-form.php:206
 #: application/views/scripts/items/search-form.php:189
 msgid "Only Featured Items"
-msgstr "Bare utvalgte elementer"
+msgstr "특별 전시용으로 선택된 아이템만"
 
 #: admin/themes/default/items/search-form.php:207
 #: application/views/scripts/items/search-form.php:190
 msgid "Only Non-Featured Items"
-msgstr "Bare ikke-utvalgte elementer"
+msgstr "일반(특별 전시용이 아닌) 아이템만"
 
 #: admin/themes/default/items/search-form.php:215
 #: application/views/scripts/items/search-form.php:199
 msgid "Search for items"
-msgstr "Søk etter elementer"
+msgstr "아이템 검색"
 
 #: admin/themes/default/items/show.php:8
 #, php-format
 msgid "Item #%s"
-msgstr "Ressurs #%s"
+msgstr "#%s 아이템"
 
 #: admin/themes/default/items/show.php:28
 msgid "Prev Item"
-msgstr "Forrige element"
+msgstr "이전 아이템"
 
 #: admin/themes/default/items/show.php:33
 msgid "Next Item"
-msgstr "Neste element"
+msgstr "다음 아이템"
 
 #: admin/themes/default/items/show.php:73
 msgid "File Metadata"
-msgstr "Filmetadata"
+msgstr "파일 메타데이터"
 
 #: admin/themes/default/items/show.php:76
 msgid "There are no files for this item yet."
-msgstr "Det er enda ingen filer til dette elementet."
+msgstr "이 아이템에는 아직 파일이 등록되지 않았습니다."
 
 #: admin/themes/default/items/show.php:76
 msgid "Add a File"
-msgstr "Legg til en fil"
+msgstr "파일 추가"
 
 #: admin/themes/default/items/show.php:80
 msgid "View File Metadata"
-msgstr "Se filens metadata"
+msgstr "파일 메타데이터 보기"
 
 #: admin/themes/default/items/show.php:93
 msgid "Bibliographic Citation"
-msgstr "Bibliografisk sitat"
+msgstr "서지정보 인용"
 
 #: admin/themes/default/items/tag-form.php:10
 #, php-format
 msgid "Separate tags with %s"
-msgstr "Skill stikkord med %s"
+msgstr "%s 로 태그 구분"
 
 #: admin/themes/default/items/tag-form.php:15
 msgid "All Tags"
-msgstr "Alle stikkord"
+msgstr "전체 태그"
 
 #: admin/themes/default/items/tags.php:2
 msgid "Browse Items by Tag"
-msgstr "Bla i ressurser med stikkord"
+msgstr "태그별 아이템 보기"
 
 #: admin/themes/default/items/tags.php:9
 #: admin/themes/default/tags/browse.php:85
 msgid "There are no tags to display. You must first tag some items."
-msgstr "Ingen stikkord å vise. Du må først merke noen ressurser med stikkord."
+msgstr "태그가 설정되어 있지 않습니다. 아이템에 첫 번째 태그를 넣어주셔야 합니다."
 
 #: admin/themes/default/plugins/browse.php:26
 #, php-format
 msgid "This version of %1$s requires at least Omeka %2$s."
-msgstr "Denne versjonen av %1$s krever minst Omeka %2$s."
+msgstr "%1$s 은 최소 Omeka %2$s 버젼을 사용해야 합니다."
 
 #: admin/themes/default/plugins/browse.php:29
 #, php-format
 msgid ""
 "%1$s requires the following plugins to be installed, activated, and loaded: "
 "%2$s"
-msgstr "%1$s krever at følgende programtillegg er installert, aktivert og lastet inn: %2$s"
+msgstr "%1$s 를 설치하고 활성화하여 이용하기 위해서는 다음 플러그인을 설치해야 합니다 : %2$s"
 
 #: admin/themes/default/plugins/browse.php:32
 msgid "This is not a valid plugin."
-msgstr "Dette programtillegget er ugyldig."
+msgstr "잘못된 플러그인입니다."
 
 #: admin/themes/default/plugins/browse.php:57
 #, php-format
 msgid "by %s"
-msgstr "av %s"
+msgstr "%s "
 
 #: admin/themes/default/plugins/browse.php:65
 #: admin/themes/default/themes/browse.php:23
-#: admin/themes/default/themes/browse.php:49
+#: admin/themes/default/themes/browse.php:48
 msgid "Get support"
-msgstr ""
+msgstr "지원 받기"
 
 #: admin/themes/default/plugins/browse.php:69
 #, php-format
 msgid "You have a new version of %s. Please upgrade!"
-msgstr "Det har kommet en ny versjon av %s. Vennligst oppgrader!"
+msgstr "새로운 버젼의 %s 가 나왔습니다. 업그레이드 하시기 바랍니다!"
 
 #: admin/themes/default/plugins/browse.php:90
 msgid "Upgrade"
-msgstr "Oppgrader"
+msgstr "업그레이드"
 
-#: admin/themes/default/plugins/browse.php:100
+#: admin/themes/default/plugins/browse.php:101
 msgid "Configure"
-msgstr "Konfigurer"
+msgstr "구성정보"
 
-#: admin/themes/default/plugins/browse.php:106
+#: admin/themes/default/plugins/browse.php:107
 msgid "Deactivate"
-msgstr "Deaktiver"
+msgstr "비활성화"
 
-#: admin/themes/default/plugins/browse.php:106
-#: admin/themes/default/users/activate.php:31
+#: admin/themes/default/plugins/browse.php:107
+#: admin/themes/default/users/activate.php:30
 #: application/views/scripts/users/activate.php:27
 msgid "Activate"
-msgstr "Aktiver"
+msgstr "활성화"
 
-#: admin/themes/default/plugins/browse.php:116
+#: admin/themes/default/plugins/browse.php:118
 #: admin/themes/default/plugins/confirm-uninstall.php:16
 msgid "Uninstall"
-msgstr "Avinstaller"
+msgstr "삭제하기"
 
-#: admin/themes/default/plugins/browse.php:129
+#: admin/themes/default/plugins/browse.php:131
 #: application/forms/Install.php:178
 msgid "Install"
-msgstr "Installer"
+msgstr "설치하기"
 
-#: admin/themes/default/plugins/browse.php:140
+#: admin/themes/default/plugins/browse.php:143
 msgid ""
 "You do not have any plugins installed. Add them to the plugins directory to "
 "see them listed here."
-msgstr "Du har ingen installerte programtillegg. Legg dem til mappen 'plugins' for å se dem her."
+msgstr "설치할 플러그인이 없습니다. 이 페이지에서 플러그인 목록을 확인하려면 먼저 플러그인 디렉토리에 플러그인들을 추가해 주십시오."
 
 #: admin/themes/default/plugins/config.php:2
 #, php-format
 msgid "Configure Plugin: %s"
-msgstr "Konfigurér programtillegg: %s"
+msgstr "플러그인 구성 : %s"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:2
 #, php-format
 msgid "Uninstall Plugin: %s"
-msgstr "Avinstaller programtillegg: %s"
+msgstr "플러그인 삭제 : %s"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:7
 #, php-format
 msgid "Are you sure you want to uninstall %s?"
-msgstr "Er du sikkert på at du vil avinstallere %s?"
+msgstr "%s 플러그인을 정말 삭제하시겠습니까?"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:12
 msgid "Yes, I want to uninstall this plugin."
-msgstr "Ja, jeg vil avinstallere dette programtillegget."
+msgstr "예, 이 플러그인을 삭제합니다."
 
 #: admin/themes/default/plugins/confirm-uninstall.php:17
 msgid "or"
-msgstr "eller"
+msgstr "또는"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:17
-#: admin/themes/default/settings/edit-item-type-elements.php:50
+#: admin/themes/default/settings/edit-item-type-elements.php:51
 msgid "Cancel"
-msgstr "Avbryt"
-
-#: admin/themes/default/search/index.php:2
-#: application/views/scripts/search/index.php:2
-msgid "Search Omeka "
-msgstr "Søk i Omeka"
+msgstr "취소"
 
 #: admin/themes/default/search/index.php:12
 #: admin/themes/default/tags/browse.php:18
 #: application/views/scripts/search/index.php:13
 msgid "Record Type"
-msgstr "Objekttype"
+msgstr "레코드 유형"
 
 #: admin/themes/default/search/index.php:39
 #: application/views/scripts/search/index.php:40
 msgid "Your query returned no results."
-msgstr "Spørringen ga ingen resultater."
+msgstr "검색 결과가 없습니다."
 
 #: admin/themes/default/settings/edit-api.php:11
 msgid "Enable API"
-msgstr ""
+msgstr "API 실행"
 
 #: admin/themes/default/settings/edit-api.php:15
 msgid "Enable or disable the API by checking or uncheking the box below."
-msgstr ""
+msgstr "아래의 박스가 체크되었으면 API가 실행되고, 체크되어있지 않으면 API가 실행되지 않습니다."
 
 #: admin/themes/default/settings/edit-api.php:22
 msgid "Filter Element Texts"
-msgstr ""
+msgstr "텍스트형 요소 필터"
 
 #: admin/themes/default/settings/edit-api.php:26
 msgid ""
 "Filter element texts by checking the box below. When checked, the API will "
 "respect the display element and element text filters when outputting element"
 " text representations."
-msgstr ""
+msgstr "아래의 박스를 체크하면 요소 텍스트를 필터링할 수 있습니다. 체크되면 해당 API는 요소 텍스트를 보여줄 때 요소와 요소 텍스트 필터 표시를 따를 것입니다."
 
 #: admin/themes/default/settings/edit-api.php:35
 msgid "Results per Page"
-msgstr ""
+msgstr "페이지 당 결과"
 
 #: admin/themes/default/settings/edit-api.php:39
 msgid "Maximum number of API results displayed per page."
-msgstr ""
+msgstr "페이지 당 표시되는 API 결과의 최대 수"
 
 #: admin/themes/default/settings/edit-api.php:45
 #, php-format
@@ -1583,49 +1597,49 @@ msgid ""
 "adding, editing, and deleting content, is protected and requires key "
 "authentication. Each key corresponds to, and has all permissions of, an "
 "existing Omeka user. You can create keys on each user's %sedit page%s."
-msgstr ""
+msgstr "API를 실행하면 어플리케이션은 사이트의 자원들을 열람, 검색, 추가, 편집, 삭제할 수 있습니다. 보호된 컨텐츠 보기는 컨텐츠를 삭제, 편집, 추가하는 것과 마찬가지로 보호되며 키 인증을 필요로 합니다. 각 키는 기존 개별 Omeka 사용자와 일치하며, 그가 갖는 모든 권한을 갖게 됩니다. 각 사용자의 %s페이지 편집%s 에서 키를 생성할 수 있습니다."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:12
 msgid "edit a specific item type"
-msgstr "rediger en bestemt element-type"
+msgstr "특정 아이템 유형 편집"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:11
 #, php-format
 msgid ""
 "Customize the element descriptions below. To re-order the elements, %s."
-msgstr "Spesifisér elementbeskrivelser under. For å endre på rekkefølgen, %s."
-
-#: admin/themes/default/settings/edit-item-type-elements.php:42
-msgid "Confirm Delete"
-msgstr "Bekreft sletting"
+msgstr "아래의요소에 대한 설명 정보를 사용자가 편집합니다. %s 에서 요소를 다시 재정렬합니다."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:43
+msgid "Confirm Delete"
+msgstr "삭제 확인"
+
+#: admin/themes/default/settings/edit-item-type-elements.php:44
 msgid ""
 "Are you sure you want to delete the selected item type elements from the "
 "database? You will lose all text related to the selected elements. This "
 "cannot be undone."
-msgstr "Er du sikker på at du vil slette valgte element-typer fra databasen? Du vil miste all tekst relatert til de valgte elementene. Kan ikke gjøres om."
+msgstr "데이터베이스에서 선택한 아이템 유형을 삭제하시겠습니까? 선택한요소와 연관된 모든 텍스트가 삭제될 것입니다. 한 번 실행되면 되돌릴 수 없습니다."
 
-#: admin/themes/default/settings/edit-item-type-elements.php:50
+#: admin/themes/default/settings/edit-item-type-elements.php:51
 msgid "Ok"
-msgstr "Ok"
+msgstr "예"
 
 #: admin/themes/default/settings/edit-search.php:10
 msgid "Search Record Types"
-msgstr "Søk i objekttyper"
+msgstr "레코드 유형 검색"
 
 #: admin/themes/default/settings/edit-search.php:13
 msgid "Customize which types of records will be searchable in Omeka."
-msgstr "Velg hvilke objekttyper som vil være søkbare i Omeka."
+msgstr "Omeka에서 검색될 수 있는 레코드 유형을 설정하십시오."
 
 #: admin/themes/default/settings/edit-search.php:23
-#: admin/themes/default/settings/edit-search.php:41
+#: admin/themes/default/settings/edit-search.php:42
 msgid "Index Records"
-msgstr "Indeksér objekter"
+msgstr "레코드 색인"
 
 #: admin/themes/default/settings/edit-search.php:26
 msgid "Click on the \"Index Records\" button to re-index your records."
-msgstr "Klikk på \"Indeksér objekter\" får å re-indeksere alle dine objekter."
+msgstr "레코드를 다시 색인하려면 \"레코드 색인\" 버튼을 클릭하십시오."
 
 #: admin/themes/default/settings/edit-search.php:28
 msgid ""
@@ -1634,96 +1648,96 @@ msgid ""
 " are saved, but there are circumstances when your records are not indexed; "
 "for instance, when updating from an earlier version of Omeka or after you "
 "customize which records will be searchable."
-msgstr "Å indeksere betyr å samle, analysere og lagre data for å legge til rette for rakse og relevante søk. Omeka vil automatisk indeksere individuelle objekter når de lagres, men det kan være tilfeller hvor ikke objektene er indeksert; for eksempel når du oppgraderer fra en eldre versjon av Omeka, eller etter at du har endret hvilke objekttyper som skal være søkbare."
+msgstr "색인(indexing)은 빠르고 정확한 검색을 위해 데이터를 수집하고 분석하고 저장하는 것을 의미합니다. Omeka는 레코드를 저장할 때 자동으로 색인하지만 레코드가 색인되지 않는 상황이 일어날 수 있습니다. 예를 들어, Omeka 초기 버젼에서 업데이트한다거나 검색 가능한 레코드를 사용자 정의로 편집한 경우 색인이 실행되지 않을 수 있습니다."
 
 #: admin/themes/default/settings/edit-security.php:23
 msgid "Restore Default Extensions"
-msgstr "Gjenopprett standard fil-etternavn"
+msgstr "디폴트 확장자 복원"
 
 #: admin/themes/default/settings/edit-security.php:28
 msgid "Restore Default Types"
-msgstr "Gjenopprett standardtyper"
+msgstr "디폴트 유형 복원"
 
 #: admin/themes/default/settings/edit-security.php:33
 msgid "Restore Default Elements"
-msgstr "Gjenopprett standardelementer"
+msgstr "디폴트 요소 복원"
 
 #: admin/themes/default/settings/edit-security.php:38
 msgid "Restore Default Attributes"
-msgstr "Gjenoprett standardegenskaper"
+msgstr "디폴트 속성 복원"
 
 #: admin/themes/default/settings/edit-settings.php:23
 msgid "Test"
-msgstr "Test"
+msgstr "테스트"
 
 #: admin/themes/default/tags/browse.php:7
 msgid "Edit Tags"
-msgstr "Redigere stikkord"
+msgstr "태그 편집"
 
 #: admin/themes/default/tags/browse.php:9
 msgid "Browse Tags"
-msgstr ""
+msgstr "태그 보기"
 
 #: admin/themes/default/tags/browse.php:24
 msgid "Editing Tags"
-msgstr "Redigerer stikkord"
+msgstr "태그 편집"
 
 #: admin/themes/default/tags/browse.php:27
 msgid "To view all items with a tag, click the number."
-msgstr "Klikk nummeret for å se alle elementer med et stikkord."
+msgstr "태그로 전체 아이템을 보려면 숫자를 클릭하십시오."
 
 #: admin/themes/default/tags/browse.php:28
 msgid ""
 "To edit the tag name, click the name and begin editing, and hit \"enter\" to"
 " save. To cancel an edit, click the ESC key or click away from the tag."
-msgstr "For å redigere ett stikkord, klikk på teksten og start skrivingen, og trykk \"enter\" for å lagre. For å avbryte en redigering, trykk \"esc\" eller klikk et sted utenfor stikkordet."
+msgstr "태그명을 편집하려면 명칭을 클릭하고 편집을 시작한 다음 \"Enter키\" 를 눌러 저장하십시오. 편집을 취소하려면 ESC키를 누르거나 태그와 상관 없는 곳을 클릭하시면 됩니다."
 
 #: admin/themes/default/tags/browse.php:29
 msgid ""
 "To delete a tag, click the X. Deleting a tag will not delete the tagged "
 "items."
-msgstr "Klikk på X for å slette et stikkord. Sletting av et stikkord vil ikke slette noen elementer."
+msgstr "태그를 삭제하려면 X 표시를 클릭하십시오. 태그가 삭제되더라도 태그된 아이템은 삭제되지 않습니다."
 
 #: admin/themes/default/tags/browse.php:39
 msgid "Most"
-msgstr "Mest"
+msgstr "최대"
 
 #: admin/themes/default/tags/browse.php:40
 msgid "Least"
-msgstr "Minst"
+msgstr "최소"
 
 #: admin/themes/default/tags/browse.php:41
 msgid "Alphabetical"
-msgstr "Alfabetisk"
+msgstr "알파벳순"
 
 #: admin/themes/default/tags/browse.php:42
 msgid "Recent"
-msgstr "Siste"
+msgstr "최근"
 
 #: admin/themes/default/tags/browse.php:53
 #: admin/themes/default/tags/browse.php:55
 msgid "Record Types"
-msgstr ""
+msgstr "레코드유형"
 
 #: admin/themes/default/themes/browse.php:15
-#: admin/themes/default/themes/browse.php:43
+#: admin/themes/default/themes/browse.php:42
 #, php-format
 msgid "Screenshot for %s Theme"
-msgstr "Skjermbilde for temaet %s"
+msgstr "%s 테마의 스크린샷"
 
 #: admin/themes/default/themes/browse.php:16
 msgid "Configure Theme"
-msgstr "Konfigurér tema"
+msgstr "테마 구성"
 
 #: admin/themes/default/themes/browse.php:19
 msgid "Current Theme"
-msgstr "Gjeldende tema"
+msgstr "현재 테마"
 
 #: admin/themes/default/themes/browse.php:21
-#: admin/themes/default/themes/browse.php:48
+#: admin/themes/default/themes/browse.php:47
 #, php-format
 msgid "By %s"
-msgstr "Av %s"
+msgstr "%s 별"
 
 #: admin/themes/default/themes/browse.php:27
 msgid ""
@@ -1731,137 +1745,147 @@ msgid ""
 "ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a "
 "href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" "
 "target=\"_blank\">design your own</a>!"
-msgstr "Legg til nye temaer ved å gå til <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, eller <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">lag dit eget tema</a>!"
+msgstr "<a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Omeka 테마 다운로드 사이트 주소</a>에서 테마를 내려받은 다음 새로운 테마를 추가하거나 <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">Omeka 테마 개발 관련 참고문서</a>를 토대로 Omeka 테마를 직접 제작하여 새로운 테마를 추가할 수 있습니다!"
 
-#: admin/themes/default/themes/browse.php:45
+#: admin/themes/default/themes/browse.php:44
 msgid "Use this theme"
-msgstr "Bruk dette temaet"
+msgstr "이 테마 사용"
 
 #: admin/themes/default/themes/config.php:10
 #, php-format
 msgid "Configure Theme: %s"
-msgstr "Konfigurér tema: %s"
+msgstr "테마 구성 : %s"
 
 #: admin/themes/default/themes/config.php:11
 msgid "Configurations apply to this theme only."
-msgstr "Innstillingene gjelder kun for dette temaet."
+msgstr "구성사항은 오직 이 테마에만 적용됨"
 
 #: admin/themes/default/upgrade/index.php:32
 msgid "Upgrade Your Omeka Database"
-msgstr "Oppgrader din Omeka database"
+msgstr "Omeka 데이터베이스를 업그레이드 하십시오."
 
 #: admin/themes/default/upgrade/index.php:34
 msgid ""
 "Your Omeka database is not compatible with your current version of Omeka."
-msgstr "Din Omeka database er ikke kompatibel med din seneste versjon av Omeka"
+msgstr "이 Omeka 데이터베이스는 현재 사용중인 Omeka 버젼과 호환되지 않습니다."
 
 #: admin/themes/default/upgrade/index.php:35
 msgid ""
 "Please back up your existing database and then click the button to upgrade."
-msgstr "Vennligst ta en sikkerhetskopi av databasen din før du klikker knappen for å oppgradere."
+msgstr "기존의 데이터베이스를 백업한 다음 업그레이드 버튼을 클릭하십시오."
 
 #: admin/themes/default/upgrade/index.php:37
 msgid "Upgrade Database"
-msgstr "Oppgrader databasen"
+msgstr "데이터베이스 업그레이드"
 
 #: admin/themes/default/upgrade/migrate.php:32
 msgid "Omeka encountered an error when upgrading your installation."
-msgstr "Omeka støtte på en feil under oppgradering av installasjonen."
+msgstr "설치하는 동안 에러가 발생하였습니다."
 
 #: admin/themes/default/upgrade/migrate.php:37
 msgid "Please restore from your database backup and try again."
-msgstr "Vennligst gjenopprett sikkerhetskopi fra databasen og prøv igjen"
+msgstr "데이터베이스 백업본으로 복원한 다음 다시 시작해 주십시오."
 
 #: admin/themes/default/upgrade/migrate.php:39
 msgid ""
 "If you have any questions please refer to <a "
 "href=\"http://omeka.org/codex\">Omeka documentation</a> or post a message on"
 " the <a href=\"http://omeka.org/forums\">Omeka forums</a>."
-msgstr "Hvis du har spørsmål, vennligst se <a href=\"http://omeka.org/codex\">Omeka-dokumentasjonen</a> eller skriv et innlegg i<a href=\"http://omeka.org/forums\">Omeka-forumet</a>."
+msgstr "궁금한 점 있으시면 <a href=\"http://omeka.org/codex\">Omeka 참고문서</a> 또는 <a href=\"http://omeka.org/forums\">Omeka 포럼</a>을 참고해 주십시오."
 
 #: admin/themes/default/upgrade/migrate.php:42
 msgid "Omeka has upgraded successfully."
-msgstr "Oppgraderingen av Omeka var vellykket"
+msgstr "Omeka가 성공적으로 업그레이드되었습니다."
 
 #: admin/themes/default/upgrade/migrate.php:43
 msgid "Return to Dashboard"
-msgstr "Tilbake til frontpanelet"
+msgstr "현황판으로 돌아가기"
 
 #: admin/themes/default/users/activate.php:2
 #: application/views/scripts/users/activate.php:2
 msgid "User Activation"
-msgstr "Brukeraktivering"
+msgstr "사용자 계정 활성화"
 
-#: admin/themes/default/users/activate.php:18
+#: admin/themes/default/users/activate.php:12
+#: application/views/scripts/users/activate.php:8
+#, php-format
+msgid "Hello %s. Your username is %s"
+msgstr "%s 님, 안녕하세요. 사용자명은 %s 입니다."
+
+#: admin/themes/default/users/activate.php:17
 #: application/forms/ResetPassword.php:23
 #: application/views/scripts/users/activate.php:14
 msgid "Create a Password"
-msgstr "Lag et passord"
+msgstr "비밀번호 생성"
 
-#: admin/themes/default/users/activate.php:24 application/forms/Install.php:71
+#: admin/themes/default/users/activate.php:23 application/forms/Install.php:71
 #: application/forms/ResetPassword.php:44
 #: application/views/scripts/users/activate.php:20
 msgid "Re-type the Password"
-msgstr "Skriv inn passordet på nytt"
+msgstr "비밀번호 재입력"
 
 #: admin/themes/default/users/add.php:2
 msgid "Add New User"
-msgstr "Legg til ny bruker"
+msgstr "새 사용자 추가"
 
 #: admin/themes/default/users/add.php:13
 msgid "Add User"
-msgstr "Legg til bruker"
+msgstr "사용자 추가"
 
 #: admin/themes/default/users/api-keys.php:8
 #: admin/themes/default/users/change-password.php:8
 #: admin/themes/default/users/edit.php:8
 #, php-format
 msgid "Edit User #%s"
-msgstr "Rediger bruker #%s"
+msgstr "#%s 사용자 편집"
 
 #: admin/themes/default/users/api-keys.php:17
 msgid "New key label"
-msgstr ""
+msgstr "신규 키 라벨"
 
 #: admin/themes/default/users/api-keys.php:21
 msgid ""
 "To create a new API key, enter a label for the key below. For example, "
 "describe for what purpose it will be used. This key will have all your "
 "permissions; treat it as you would your password."
-msgstr ""
+msgstr "새로운 API키를 생성하려면 아래의 키 라벨을 클릭하십시오. 이 키는 모든 권한을 갖게될 것이며, 이 키를 비밀번호로 사용할 수 있습니다."
 
 #: admin/themes/default/users/api-keys.php:31
 msgid "You have no API keys. Use the form above to create one."
-msgstr ""
+msgstr "API키가 존재하지 않습니다. 생성하려면 위의 폼을 사용하십시오."
 
 #: admin/themes/default/users/api-keys.php:33
 #, php-format
 msgid "%s has no API keys. Use the form above to create one."
-msgstr ""
+msgstr "%s 는 API키가 존재하지 않습니다. 생성하려면 위의 폼을 사용하십시오."
 
 #: admin/themes/default/users/api-keys.php:41
 msgid "Key"
-msgstr ""
+msgstr "키"
 
 #: admin/themes/default/users/api-keys.php:42
 msgid "Last IP"
-msgstr ""
+msgstr "마지막 접속 IP"
 
 #: admin/themes/default/users/api-keys.php:43
 msgid "Last accessed"
-msgstr ""
+msgstr "최근 접근"
 
 #: admin/themes/default/users/api-keys.php:44
 msgid "Rescind"
+msgstr "무효"
+
+#: admin/themes/default/users/api-keys.php:60
+msgid "Update API Keys"
 msgstr ""
 
 #: admin/themes/default/users/browse.php:2
 msgid "Browse Users"
-msgstr "Søk i brukere"
+msgstr "사용자 보기"
 
 #: admin/themes/default/users/browse.php:8
 msgid "Add a User"
-msgstr "Legg til en bruker"
+msgstr "사용자 추가"
 
 #: admin/themes/default/users/browse.php:20
 #: admin/themes/default/users/browse.php:36
@@ -1869,7 +1893,7 @@ msgstr "Legg til en bruker"
 #: admin/themes/default/users/show.php:18 application/forms/Install.php:30
 #: application/forms/Login.php:21 application/forms/User.php:29
 msgid "Username"
-msgstr "Brukernavn"
+msgstr "사용자명"
 
 #: admin/themes/default/users/browse.php:23
 #: admin/themes/default/users/browse.php:38
@@ -1878,172 +1902,196 @@ msgstr "Brukernavn"
 #: application/forms/RecoverPassword.php:27 application/forms/User.php:96
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
-msgstr "E-postadresse"
+msgstr "이메일주소"
 
 #: admin/themes/default/users/browse.php:35
 msgid "Search users"
-msgstr ""
+msgstr "사용자 검색"
 
 #: admin/themes/default/users/browse.php:37
 #: admin/themes/default/users/browse.php:48
 #: admin/themes/default/users/show.php:20 application/forms/User.php:81
 msgid "Display Name"
-msgstr "Visningsnavn"
+msgstr "화면에 표시될 명칭"
 
 #: admin/themes/default/users/browse.php:50 application/forms/User.php:129
 msgid "Role"
-msgstr "Rolle"
+msgstr "역할"
 
 #: admin/themes/default/users/browse.php:60
 msgid "inactive"
-msgstr "inaktiv"
+msgstr "비활성"
 
 #: admin/themes/default/users/change-password.php:20
 msgid "Save Password"
-msgstr "Lagre passord"
+msgstr "비밀번호 저장"
 
 #: admin/themes/default/users/edit.php:23
 msgid "Resend Activation Email"
-msgstr ""
+msgstr "사용자 계정 활성화 메일 재발송"
 
 #: admin/themes/default/users/forgot-password.php:2
 #: application/views/scripts/users/forgot-password.php:2
 msgid "Forgot Password"
-msgstr "Glemt passord"
+msgstr "비밀번호 분실"
 
 #: admin/themes/default/users/forgot-password.php:11
 #: application/views/scripts/users/forgot-password.php:10
 msgid "Enter your email address to retrieve your password."
-msgstr "Skriv inn e-postadressen din å få tilsendt ditt passord"
+msgstr "비밀번호를 찾으려면 이메일 주소를 입력하십시오."
 
 #: admin/themes/default/users/forgot-password.php:21
 #: application/views/scripts/users/forgot-password.php:18
 msgid "Submit"
-msgstr "Send"
+msgstr "제출"
 
 #: admin/themes/default/users/forgot-password.php:25
 #: application/views/scripts/users/forgot-password.php:7
 msgid "Back to Log In"
-msgstr "Tilbake til innlogging"
+msgstr "로그인 페이지로 이동"
 
 #: admin/themes/default/users/login.php:3 application/forms/Login.php:55
 #: application/views/scripts/users/login.php:3
 msgid "Log In"
-msgstr "Logg inn"
+msgstr "로그인"
 
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
-msgstr "(Glemt passordet?)"
+msgstr "(비밀번호를 분실하셨습니까?)"
 
 #: admin/themes/default/users/show.php:8
 #, php-format
 msgid "User #%s"
-msgstr "Bruker #%s"
+msgstr "#%s 사용자"
 
 #: admin/themes/default/users/show.php:15
 msgid "Edit this User"
-msgstr "Rediger denne brukeren"
+msgstr "이 사용자 편집"
 
 #: application/controllers/AppearanceController.php:48
 msgid "The appearance settings have been updated."
-msgstr "Utseendeinstillingene er nå oppdatert."
+msgstr "화면 설정이 업데이트되었습니다."
 
 #: application/controllers/AppearanceController.php:51
 #: application/controllers/ItemTypesController.php:35
 #: application/controllers/ItemTypesController.php:61
-#: application/controllers/SettingsController.php:47
-#: application/controllers/SettingsController.php:79
+#: application/controllers/SettingsController.php:55
+#: application/controllers/SettingsController.php:88
 #: install/views/scripts/index/index.phtml:17
 msgid "There were errors found in your form. Please edit and resubmit."
-msgstr "Det ble funnet feil i skjemaet. Vennligst rediger og send inn på nytt."
+msgstr "작성한 폼에 에러가 있습니다. 다시 편집한 후 제출해 주십시오."
 
 #: application/controllers/AppearanceController.php:66
 msgid "The navigation settings have been updated."
-msgstr "Navigasjoninstillingene er nå oppdatert."
+msgstr "메뉴 설정이 업데이트되었습니다."
 
 #: application/controllers/AppearanceController.php:69
 msgid ""
 "The navigation settings were not saved because of missing or invalid values."
 "  All changed values have been restored."
-msgstr "Navigasjonsinnstillingene ble ikke lagret på grunn av manglende eller ugyldige verdier. Alle endrede verdier har blitt gjenopprettet."
+msgstr "유효하지 않거나 생략된 값으로 인해 메뉴 설정이 저장되지 않았습니다. 변경된 모든 값은 이전 상태로 복원되었습니다."
 
-#: application/controllers/CollectionsController.php:74
-#, php-format
-msgid "The collection \"%s\" was successfully added!"
-msgstr "Samlingen \"%s\" er nå lagt til!"
+#: application/controllers/AppearanceController.php:97
+msgid "The navigation settings have been reset."
+msgstr ""
 
 #: application/controllers/CollectionsController.php:76
 #, php-format
-msgid "The collection #%s was successfully added!"
-msgstr "Samlingen #%s er nå lagt til!"
+msgid "The collection \"%s\" was successfully added!"
+msgstr "\"%s\" 컬렉션이 성공적으로 추가되었습니다!"
 
-#: application/controllers/CollectionsController.php:84
+#: application/controllers/CollectionsController.php:78
 #, php-format
-msgid "The collection \"%s\" was successfully changed!"
-msgstr "Samlingen \"%s\" er nå endret!"
+msgid "The collection #%s was successfully added!"
+msgstr "#%s 컬렉션이 성공적으로 추가되었습니다!"
 
 #: application/controllers/CollectionsController.php:86
 #, php-format
-msgid "The collection #%s was successfully changed!"
-msgstr "Samlingen #%s er nå endret!"
+msgid "The collection \"%s\" was successfully changed!"
+msgstr "\"%s\" 컬렉션이 성공적으로 변경되었습니다!"
 
-#: application/controllers/CollectionsController.php:94
+#: application/controllers/CollectionsController.php:88
 #, php-format
-msgid "The collection \"%s\" was successfully deleted!"
-msgstr "Samlingen \"%s\" er nå slettet!"
+msgid "The collection #%s was successfully changed!"
+msgstr "#%s 컬렉션이 성공적으로 변경되었습니다!"
 
 #: application/controllers/CollectionsController.php:96
 #, php-format
-msgid "The collection #%s was successfully deleted!"
-msgstr "Samlingen \"%s\" er nå slettet!"
+msgid "The collection \"%s\" was successfully deleted!"
+msgstr "\"%s\" 컬렉션이 성공적으로 변경되었습니다!"
 
-#: application/controllers/CollectionsController.php:104
+#: application/controllers/CollectionsController.php:98
+#, php-format
+msgid "The collection #%s was successfully deleted!"
+msgstr "#%s 컬렉션이 성공적으로 삭제되었습니다!"
+
+#: application/controllers/CollectionsController.php:106
 #, php-format
 msgid ""
 "This will delete the collection \"%s\" and its associated metadata. This "
 "will not delete any items in this collection, but will delete the reference "
 "to this collection in each item."
-msgstr "Dette vil slette samlingen \"%s\" og all assosiert metadata. Ingen objekter i samlingen vil slettes, men koblingen til samlingen vil fjernes fra hvert objekt."
+msgstr "\"%s\" 컬렉션 및 연관된 메타데이터가 삭제될 것입니다. 이 컬렉션의 어떤 아이템도 삭제되진 않지만 개별 아이템에 입력된 이 컬렉션 참조값은 삭제될 것입니다."
 
-#: application/controllers/CollectionsController.php:108
+#: application/controllers/CollectionsController.php:110
 #, php-format
 msgid ""
 "This will delete the collection #%s and its associated metadata. This will "
 "not delete any items in this collection, but will delete the reference to "
 "this collection in each item."
-msgstr "Dette vil slette samlingen #%s og all assosiert metadata. Ingen objekter i samlingen vil slettes, men koblingen til samlingen vil fjernes fra hvert objekt."
+msgstr "#%s 컬렉션 및 연관된 메타데이터가 삭제될 것입니다. 이 컬렉션의 어떤 아이템도 삭제되진 않지만 개별 아이템에 입력된 이 컬렉션 참조값은 삭제될 것입니다."
 
 #: application/controllers/ElementSetsController.php:21
 msgid ""
 "This will delete the element set and all elements assigned to the element "
 "set. Items will lose all metadata that is specific to this element set."
-msgstr "Dette vil slette både element-settet og alle elementene i settet. Elementene vil miste all metadata som kun hører til dette element-settet."
+msgstr "요소 세트와 요소 세트에 할당된 모든 요소들이 삭제될 것입니다. 이 요소 세트에 해당하는 아이템의 메타데이터는 모두 삭제될 것입니다."
 
-#: application/controllers/ElementSetsController.php:65
+#: application/controllers/ElementSetsController.php:53
+#: application/controllers/PluginsController.php:51
+#: application/controllers/PluginsController.php:79
+#: application/controllers/PluginsController.php:139
+#: application/controllers/PluginsController.php:190
+#: application/controllers/PluginsController.php:223
+#: application/controllers/PluginsController.php:337
+#: application/controllers/SettingsController.php:104
+#: application/controllers/SettingsController.php:140
+#: application/controllers/SettingsController.php:177
+#: application/controllers/ThemesController.php:87
+#: application/libraries/Omeka/Controller/AbstractActionController.php:183
+#: application/libraries/Omeka/Controller/AbstractActionController.php:224
+msgid "There was an error on the form. Please try again."
+msgstr "입력 양식에 에러가 발생했습니다. 다시 시도해 주십시오."
+
+#: application/controllers/ElementSetsController.php:72
 msgid "The element set was successfully changed!"
-msgstr "Elementsettet er nå endret."
+msgstr "요소 세트가 성공적으로 변경되었습니다!"
 
 #: application/controllers/ErrorController.php:64
 msgid "Page not found."
-msgstr "Side ikke funnet"
+msgstr "페이지를 찾을 수 없습니다."
 
 #: application/controllers/ErrorController.php:79
 msgid "Access denied."
-msgstr "Ingen tilgang."
+msgstr "접근이 허용되지 않습니다."
 
-#: application/controllers/FilesController.php:64
+#: application/controllers/FilesController.php:66
 msgid "This will delete the file and its associated metadata."
-msgstr "Dette vil slette filen og all dens metadata."
+msgstr "해당 파일과 관련된 메타데이터를 삭제할 것입니다."
+
+#: application/controllers/FilesController.php:72
+msgid "The file was successfully deleted."
+msgstr ""
 
 #: application/controllers/ItemTypesController.php:28
 #, php-format
 msgid "The item type \"%s\" was successfully added."
-msgstr "Ressurstypen \"%s\" er nå lagt til."
+msgstr "\"%s\" 아이템 타입이 성공적으로 추가되었습니다."
 
 #: application/controllers/ItemTypesController.php:55
 #, php-format
 msgid "The item type \"%s\" was successfully updated."
-msgstr "Ressurstypen \"%s\" er nå oppdatert."
+msgstr "\"%s\" 아이템 유형이 성공적으로 업데이트되었습니다."
 
 #: application/controllers/ItemTypesController.php:150
 #, php-format
@@ -2051,1225 +2099,1168 @@ msgid ""
 "This will delete the \"%s\" item type but will not delete the elements "
 "assigned to the item type. Items that are assigned to this item type will "
 "lose all metadata that is specific to the item type."
-msgstr "Dette vil slette ressurstypen \"%s\", men vil ikke slette tilhørende ressurser. De vil kun miste metadata som er spesifikk for denne ressurstypen."
+msgstr "\"%s\" 아이템 유형을 삭제하지만 아이템 유형에 할당된 요소들은 삭제되지 않을 것입니다. 삭제되는 아이템 유형에 해당하는 아이템에서 이 유형별 메타데이터는 모두 삭제될 것입니다."
 
 #: application/controllers/ItemTypesController.php:158
 #, php-format
 msgid ""
 "The item type \"%s\" was successfully added!  You may now add elements to "
 "your new item type."
-msgstr "Ressurstypen \"%s\" ble lagt til!  Du kan nå legge til nye elementer til din nye ressurstype."
+msgstr "\"%s\" 아이템 유형이 성공적으로 추가되었습니다! 이제 새로운 아이템 유형에 요소를 추가할 수 있습니다."
 
-#: application/controllers/ItemsController.php:85
-#: application/controllers/ItemsController.php:145
+#: application/controllers/ItemsController.php:89
+#: application/controllers/ItemsController.php:149
 msgid ""
 "The ImageMagick directory path has not been set. No derivative images will "
 "be created. If you would like Omeka to create derivative images, please set "
 "the path in Settings."
-msgstr ""
+msgstr "ImageMagick의 디렉토리 경로가 설정되지  않아 파생 이미지는 생성되지 않을 것입니다. 파생 이미지를 생성하려면 설정 화면에서 경로를 설정하십시오."
 
-#: application/controllers/ItemsController.php:94
+#: application/controllers/ItemsController.php:98
 #, php-format
 msgid "The item \"%s\" was successfully added!"
-msgstr "Ressursen \"%s\" er nå lagt til."
+msgstr "\"%s\" 아이템이 성공적으로 추가되었습니다!"
 
-#: application/controllers/ItemsController.php:96
+#: application/controllers/ItemsController.php:100
 #, php-format
 msgid "The item #%s was successfully added!"
-msgstr "Ressursen #%s er nå lagt til."
+msgstr "#%s 아이템이 성공적으로 추가되었습니다!"
 
-#: application/controllers/ItemsController.php:104
+#: application/controllers/ItemsController.php:108
 #, php-format
 msgid "The item \"%s\" was successfully changed!"
-msgstr "Ressursen \"%s\" er nå endret."
+msgstr "\"%s\" 이 성공적으로 변경되었습니다!"
 
-#: application/controllers/ItemsController.php:106
+#: application/controllers/ItemsController.php:110
 #, php-format
 msgid "The item #%s was successfully changed!"
-msgstr "Ressursen #%s er nå endret."
+msgstr "#%s 아이템이 성공적으로 변경되었습니다!"
 
-#: application/controllers/ItemsController.php:114
+#: application/controllers/ItemsController.php:118
 #, php-format
 msgid "The item \"%s\" was successfully deleted!"
-msgstr "Ressursen \"%s\" er nå slettet."
+msgstr "\"%s\" 아이템이 성공적으로 삭제되었습니다!"
 
-#: application/controllers/ItemsController.php:116
+#: application/controllers/ItemsController.php:120
 #, php-format
 msgid "The item #%s was successfully deleted!"
-msgstr "Ressursen #%s er nå slettet."
-
-#: application/controllers/ItemsController.php:124
-#, php-format
-msgid ""
-"This will delete the item \"%s\" and its associated metadata. It will also "
-"delete all files and file metadata associated with this item."
-msgstr "Dette vil slette ressursen \"%s\" og all dens metadata. Det vil også slette alle filer og metadata assosiert med ressursen."
+msgstr "#%s 아이템이 성공적으로 삭제되었습니다!"
 
 #: application/controllers/ItemsController.php:128
 #, php-format
 msgid ""
+"This will delete the item \"%s\" and its associated metadata. It will also "
+"delete all files and file metadata associated with this item."
+msgstr "\"%s\" 아이템 및 이 아이템과 연관된 메타데이터를 삭제할 것입니다. 또한, 이 아이템과 연관된 모든 파일과 파일 메타데이터도 삭제할 것입니다."
+
+#: application/controllers/ItemsController.php:132
+#, php-format
+msgid ""
 "This will delete the item #%s and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr "Dette vil slette ressursen #%s og all dens metadata. Det vil også slette alle filer og metadata assosiert med ressursen."
+msgstr "#%s 아이템 및 이 아이템과 연관된 메타데이터를 삭제할 것입니다. 또한, 이 아이템과 연관된 모든 파일과 파일 메타데이터도 삭제할 것입니다."
 
-#: application/controllers/ItemsController.php:255
+#: application/controllers/ItemsController.php:227
 msgid "You must choose some items to batch edit."
-msgstr "Du må velge noen ressurser for masse-endring."
+msgstr "편집을 일괄 처리하려면 해당 아이템을 선택해야 합니다."
 
-#: application/controllers/ItemsController.php:299
+#: application/controllers/ItemsController.php:271
 msgid "User is not allowed to modify visibility of items."
-msgstr "Brukeren har ikke rettigheter til å endre synligheten på ressurser."
+msgstr "사용자는 아이템의 visibility 속성을 변경할 수 없습니다."
 
-#: application/controllers/ItemsController.php:304
+#: application/controllers/ItemsController.php:276
 msgid "User is not allowed to modify featured status of items."
-msgstr "Brukeren har ikke rettigheter til å endre ressursenes status."
+msgstr "사용자는 아이템의 특별 전시 상태를 변경할 수 없습니다."
 
-#: application/controllers/ItemsController.php:311
+#: application/controllers/ItemsController.php:283
 msgid "User is not allowed to delete selected items."
-msgstr "Brukeren har ikke rettigheter til å slette valgte ressurser."
+msgstr "사용자는 선택된 아이템을 삭제할 수 없습니다."
 
-#: application/controllers/ItemsController.php:317
+#: application/controllers/ItemsController.php:289
 msgid "User is not allowed to edit selected items."
-msgstr "Brukeren har ikke rettigheter til å endre på valgte ressurser."
+msgstr "사용자는 선택된 아이템을 편집할 수 없습니다."
 
-#: application/controllers/ItemsController.php:322
+#: application/controllers/ItemsController.php:294
 msgid "User is not allowed to tag selected items."
-msgstr "Brukeren har ikke rettigheter til å lage stikkord til valgte ressurser."
+msgstr "사용자는 선택된 태그를 편집할 수 없습니다."
 
-#: application/controllers/ItemsController.php:356
+#: application/controllers/ItemsController.php:328
 msgid "The items were successfully deleted!"
-msgstr "Ressursene er nå slettet."
+msgstr "이 아이템이 성공적으로 삭제되었습니다!"
 
-#: application/controllers/ItemsController.php:358
+#: application/controllers/ItemsController.php:330
 msgid "The items were successfully changed!"
-msgstr "Ressursene ble endret uten feil!"
+msgstr "이 아이템이 성공적으로 변경되었습니다!"
 
 #: application/controllers/PluginsController.php:45
 #, php-format
 msgid ""
 "Error in configuring plugin named \"%s\". Missing config and/or config_form "
 "hook(s)."
-msgstr "Feil ved oppsett av programtillegget \"%s\". Manglende innstillinger og/eller innstillinger fra hake(r)."
+msgstr "\"%s\" 플러그인 구성에 에러가 있습니다. and/or config_form 후크 설정이 빠져 있습니다."
 
-#: application/controllers/PluginsController.php:52
+#: application/controllers/PluginsController.php:59
 #, php-format
 msgid "The %s plugin was successfully configured!"
-msgstr "Programtillegget %s er nå satt opp korrekt!"
+msgstr "%s 플러그인이 성공적으로 구성되었습니다!"
 
-#: application/controllers/PluginsController.php:70
+#: application/controllers/PluginsController.php:89
 #, php-format
 msgid "The %s plugin has already been installed."
-msgstr "Programtillegget %s er allerede installert."
+msgstr "%s 플러그인이 이미 설치되어 있습니다."
 
-#: application/controllers/PluginsController.php:79
+#: application/controllers/PluginsController.php:99
 #, php-format
 msgid "The %s plugin was successfully installed!"
-msgstr "Programtillegget %s ble installert uten problemer!"
+msgstr "%s 플러그인이 성공적으로 설치되었습니다!"
 
-#: application/controllers/PluginsController.php:91
-#: application/controllers/PluginsController.php:96
+#: application/controllers/PluginsController.php:111
+#: application/controllers/PluginsController.php:116
 #, php-format
 msgid "The following error occurred while installing the %s plugin: "
-msgstr "Følgende feil inntraff ved installering av programtillegget %s:"
+msgstr "%s 플러그인이 설치되는 동안 다음과 같은 에러가 발생했습니다 : "
 
-#: application/controllers/PluginsController.php:124
+#: application/controllers/PluginsController.php:154
 #, php-format
 msgid "The following error occurred while activating the %s plugin: "
-msgstr "Følgende feil inntraff ved aktivering av programtillegget %s:"
+msgstr "%s 플러그인이 활성화되는 동안 다음과 같은 에러가 발생했습니다 : "
 
-#: application/controllers/PluginsController.php:134
+#: application/controllers/PluginsController.php:164
 #, php-format
 msgid "The %s plugin was successfully activated!"
-msgstr "Programtillegget %s er nå slått på!"
+msgstr "%s 플러그인이 성공적으로 활성화되었습니다!"
 
-#: application/controllers/PluginsController.php:139
+#: application/controllers/PluginsController.php:169
 #, php-format
 msgid "The %s plugin was activated, but could not be loaded: "
-msgstr "Programtillegget %s ble slått på, men kunne ikke lastes inn:"
+msgstr "%s 플러그인이 활성화되었지만 불러올 수 없습니다 : "
 
-#: application/controllers/PluginsController.php:163
+#: application/controllers/PluginsController.php:204
 #, php-format
 msgid "The %s plugin was successfully deactivated!"
-msgstr "Programtillegget %s er nå skrudd av!"
+msgstr "%s 플러그인이 성공적으로 비활성화 되었습니다!"
 
-#: application/controllers/PluginsController.php:168
+#: application/controllers/PluginsController.php:209
 #, php-format
 msgid "The following error occurred while deactivating the %s plugin: "
-msgstr "Følgende feil inntraff ved forsøk på å skru av programtillegget %s:"
+msgstr "%s 플러그인을 비활성화하는 동안 다음과 같은 에러가 발생했습니다 : "
 
-#: application/controllers/PluginsController.php:187
+#: application/controllers/PluginsController.php:239
 #, php-format
 msgid "The %s plugin was successfully upgraded!"
-msgstr "Programtillegget %s ble oppgradert uten problemer!"
+msgstr "%s 플러그인이 성공적으로 업그레이드 되었습니다!"
 
-#: application/controllers/PluginsController.php:196
-#: application/controllers/PluginsController.php:202
+#: application/controllers/PluginsController.php:248
+#: application/controllers/PluginsController.php:254
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
-msgstr "Følgende feil inntraff under forsøk på å oppgradere programtillegget %s:"
+msgstr "%s 플러그인을 업그레이드하는 동안 다음과 같은 에러가 발생했습니다 : "
 
-#: application/controllers/PluginsController.php:253
+#: application/controllers/PluginsController.php:310
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
-msgstr "Programtillegget ble ikke funnet i '%s' mappe!"
+msgstr "'%s' 디렉토리에서 플러그인을 찾을 수 없습니다!"
 
-#: application/controllers/PluginsController.php:262
+#: application/controllers/PluginsController.php:322
 msgid "You must confirm the uninstall before proceeding."
-msgstr "Du må bekrefte at du ønsker å avinstallere."
+msgstr "진행하기 전에 삭제를 확인해 주십시오."
 
-#: application/controllers/PluginsController.php:280
+#: application/controllers/PluginsController.php:345
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
-msgstr "Programtillegget %s ble avinstallert uten problemer!"
+msgstr "%s 플러그인이 성공적으로 삭제되었습니다!"
 
-#: application/controllers/PluginsController.php:285
-#: application/controllers/PluginsController.php:290
+#: application/controllers/PluginsController.php:350
+#: application/controllers/PluginsController.php:355
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
-msgstr "Følgende feil inntraff ved forsøk på å avinstallere programtillegget %s:"
+msgstr "%s 플러그인을 삭제하는 동안 다음과 같은 에러가 발생했습니다 : "
 
-#: application/controllers/PluginsController.php:317
+#: application/controllers/PluginsController.php:382
 msgid "No plugin name given."
-msgstr "Du må angi navn på programtillegg."
+msgstr "플러그인 이름이 없습니다."
 
-#: application/controllers/PluginsController.php:330
+#: application/controllers/PluginsController.php:395
 #, php-format
 msgid "The plugin %s must be installed."
-msgstr "Programtillegget %s må være installert."
+msgstr "%s 플러그인이 설치되어야 합니다."
 
-#: application/controllers/SettingsController.php:44
+#: application/controllers/SettingsController.php:52
 msgid "The general settings have been updated."
-msgstr "Generelle innstillinger er oppdatert."
+msgstr "일반 설정이 업데이트되었습니다."
 
-#: application/controllers/SettingsController.php:76
+#: application/controllers/SettingsController.php:85
 msgid "The security settings have been updated."
-msgstr "Sikkerthetsinnstillingene er nå oppdatert."
+msgstr "보안 설정이 업데이트되었습니다."
 
-#: application/controllers/SettingsController.php:95
+#: application/controllers/SettingsController.php:114
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
-msgstr "Du har endret ressurser som er søkbare i Omeka. Venligst indeksér på nytt ved bruk av skjemaet under."
+msgstr "Omeka에서 검색 가능한 레코드를 변경했습니다. 아래의 폼을 사용하여 레코드를 다시 색인해 주십시오. "
 
-#: application/controllers/SettingsController.php:102
+#: application/controllers/SettingsController.php:121
 msgid ""
 "Indexing records. This may take a while. You may continue administering your"
 " site."
-msgstr "Indekserer ressurser. Dette kan ta litt tid. Du kan forsette med å jobbe med andre ting."
+msgstr "레코드를 색인하고 있습니다. 이 작업은 시간이 조금 소요될 수 있습니다. 다른 사이트 관리 작업을 계속 진행할 수 있습니다."
 
-#: application/controllers/SettingsController.php:131
+#: application/controllers/SettingsController.php:156
 msgid "The item type elements were successfully changed!"
-msgstr "Ressurstypen elementer er nå endret."
+msgstr "아이템 유형별 요소가 성공적으로 변경되었습니다!"
 
-#: application/controllers/SettingsController.php:150
+#: application/controllers/SettingsController.php:183
 msgid "The API configuration was successfully changed!"
-msgstr ""
+msgstr "API 구성이 성공적으로 변경되었습니다!"
 
-#: application/controllers/SettingsController.php:176
+#: application/controllers/SettingsController.php:206
 msgid "The ImageMagick directory path works."
-msgstr "ImageMagick's mappesti er korrekt."
+msgstr "ImageMagick 디렉토리 경로가 정상 작동합니다."
 
-#: application/controllers/SettingsController.php:177
+#: application/controllers/SettingsController.php:207
 msgid "The ImageMagick directory path does not work."
-msgstr "ImageMagick's mappesti er ikke riktig."
+msgstr "ImageMagick 디렉토리 경로가 제대로 작동하지 않습니다."
 
-#: application/controllers/TagsController.php:35
-msgid "You have to be logged in to edit tags!"
-msgstr "Du må være logget inn for å endre stikkord."
-
-#: application/controllers/TagsController.php:64
-#, php-format
-msgid "Tag named \"%1$s\" was successfully renamed to \"%2$s\"."
-msgstr "Stikkord \"%1$s\" ble endret til \"%2$s\"."
-
-#: application/controllers/TagsController.php:91
+#: application/controllers/TagsController.php:48
 msgid "Invalid tagType given."
-msgstr "Feil type stikkord (tagType)."
+msgstr "잘못된 태그유형입니다."
 
-#: application/controllers/ThemesController.php:25
+#: application/controllers/ThemesController.php:28
 msgid "Invalid form submission."
-msgstr "Feil i innsendt skjema"
+msgstr "잘못된 양식이 제출되었습니다."
 
-#: application/controllers/ThemesController.php:33
+#: application/controllers/ThemesController.php:36
 msgid "You have chosen an illegal theme name. Please select another theme."
-msgstr "Du har valgt et ugyldig temanavn. Vennligst velg et annet."
+msgstr "잘못된 테마명을 선택하셨습니다. 다른 테마를 선택해 주십시오."
 
-#: application/controllers/ThemesController.php:40
+#: application/controllers/ThemesController.php:43
 #, php-format
 msgid "This theme requires a newer version of Omeka (%s)."
-msgstr "Dette temaet krever en nyere versjon av Omeka (%s)."
+msgstr "이 테마는 Omeka (%s) 버젼을 필요로 합니다."
 
-#: application/controllers/ThemesController.php:54
+#: application/controllers/ThemesController.php:57
 msgid "The theme has been successfully changed."
-msgstr "Temaet ble endret uten problemer."
-
-#: application/controllers/ThemesController.php:81
-msgid "The theme settings were successfully saved!"
-msgstr "Temaoppsett ble lagret uten problemer!"
+msgstr "테마 설정이 성공적으로 변경되었습니다."
 
 #: application/controllers/ThemesController.php:84
-msgid "There was an error on the form. Please try again."
-msgstr "Det ble funnet feil i skjemaet. Vennligst prøv på nytt."
+msgid "The theme settings were successfully saved!"
+msgstr "테마 설정이 성공적으로 저장되었습니다!"
 
 #: application/controllers/UpgradeController.php:50
 msgid "SQL error in migration: "
-msgstr "SQL-feil under migrasjon:"
+msgstr "마이그레이션 중 SQL 에러 발생 : "
 
 #: application/controllers/UsersController.php:70
 msgid ""
 "Unable to reset password. Please verify that the information is correct and "
 "contact an administrator if necessary."
-msgstr "Kunne ikke nullstille passord. Vennligst sjekk at informasjonen stemmer og kontakt administrator hvis nødvendig."
+msgstr "비밀번호를 재설정 할 수 없습니다. 해당 정보가 정확한지 확인하고 필요한 경우엔 관리자에게 문의해 주십시오."
 
 #: application/controllers/UsersController.php:108
 msgid "Please follow this link to reset your password:"
-msgstr "Vennligst bruk følgende lenke for å nullstille passordet ditt:"
+msgstr "다음의 비밀번호 재설정 링크를 클릭해 주십시오 : "
 
 #: application/controllers/UsersController.php:110
 #: application/controllers/UsersController.php:113
-#: application/controllers/UsersController.php:380
+#: application/controllers/UsersController.php:385
 #, php-format
 msgid "%s Administrator"
-msgstr "%s Administrator"
+msgstr "%s 관리자"
 
 #: application/controllers/UsersController.php:114
 #, php-format
 msgid "[%s] Reset Your Password"
-msgstr "[%s] nullstill password"
+msgstr "[%s] 비밀번호 재설정"
 
 #: application/controllers/UsersController.php:117
 msgid "Please check your email for a link to reset your password."
-msgstr "Vennligst sjekk din epost for en link til å tilbakestille passord."
+msgstr "이메일에서 비밀번호 재설정 링크를 체크하십시오."
 
 #: application/controllers/UsersController.php:126
 msgid "Invalid activation code given."
-msgstr ""
+msgstr "잘못된 사용자 계정 활성화 코드입니다."
 
 #: application/controllers/UsersController.php:135
 msgid "Password: The passwords do not match."
-msgstr "Passord: De to passordene er ikke like."
+msgstr "비밀번호 : 비밀번호가 맞지 않습니다."
 
 #: application/controllers/UsersController.php:143
 msgid "You may now log in to Omeka."
-msgstr "Du kan nå logge deg på Omeka."
+msgstr "이제 Omeka에 로그인 할 수 있습니다."
 
-#: application/controllers/UsersController.php:171
+#: application/controllers/UsersController.php:168
+#: application/controllers/UsersController.php:236
+#: application/controllers/UsersController.php:287
+msgid "There was an invalid entry on the form. Please try again."
+msgstr "입력폼에 잘못된 기입된 항목이 있습니다. 다시 시도해 주십시오."
+
+#: application/controllers/UsersController.php:176
 #, php-format
 msgid "The user \"%s\" was successfully added!"
-msgstr "Brukeren \"%s\" er nå lagt til!"
+msgstr "\"%s\" 사용자 계정이 성공적으로 추가되었습니다!"
 
-#: application/controllers/UsersController.php:175
+#: application/controllers/UsersController.php:180
 #, php-format
 msgid "The user \"%s\" was added, but the activation email could not be sent."
-msgstr "Brukeren \"%s\" er lagt til, men bekreftelses-eposten ble ikke sendt."
+msgstr "\"%s\" 사용자 계정이 추가되었지만 사용자 계정 활성화 이메일은 발송되지 않았습니다."
 
-#: application/controllers/UsersController.php:213
+#: application/controllers/UsersController.php:218
 msgid "User activation email has been sent."
-msgstr ""
+msgstr "사용자 계정 활성화 이메일이 발송되었습니다."
 
-#: application/controllers/UsersController.php:215
+#: application/controllers/UsersController.php:220
 msgid "User activation email could not be sent."
-msgstr ""
+msgstr "사용자 계정 활성화 이메일이 발송되지 않았습니다."
 
-#: application/controllers/UsersController.php:231
-#: application/controllers/UsersController.php:282
-msgid "There was an invalid entry on the form. Please try again."
-msgstr "Det var en feil i skjemaet. Vennligst prøv på nytt."
-
-#: application/controllers/UsersController.php:253
+#: application/controllers/UsersController.php:258
 #, php-format
 msgid "The user %s was successfully changed!"
-msgstr "Brukeren %s ble endret!"
+msgstr "%s 사용자 계정 정보가 성공적으로 변경되었습니다!"
 
-#: application/controllers/UsersController.php:289
+#: application/controllers/UsersController.php:294
 msgid "Password changed!"
-msgstr "Passord endret!"
+msgstr "비밀번호가 변경되었습니다!"
 
-#: application/controllers/UsersController.php:311
+#: application/controllers/UsersController.php:316
 msgid "A new API key was successfully created."
-msgstr ""
+msgstr "새로운 API키가 성공적으로 생성되었습니다."
 
-#: application/controllers/UsersController.php:318
+#: application/controllers/UsersController.php:323
 msgid "An existing API key was successfully rescinded."
-msgstr ""
+msgstr "기존의 API키가 성공적으로 삭제되었습니다."
 
-#: application/controllers/UsersController.php:345
+#: application/controllers/UsersController.php:350
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
-msgstr "Brukeren \"%s\" er nå slettet!"
+msgstr "\"%s\" 사용자 계정이 성공적으로 삭제되었습니다!"
 
-#: application/controllers/UsersController.php:351
+#: application/controllers/UsersController.php:356
 #, php-format
 msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
 "this user will remain in the system, but will no longer be associated with "
 "this user."
-msgstr "%s vil slettes fra systemet. Alle ressurser, samlinger og stikkord laget av brukeren vil forbli i systemet, men vil ikke lenger være assosiert med denne brukeren."
+msgstr "%s 은 이 시스템에서 삭제될 것입니다. 이 사용자가 생성한 아이템, 컬렉션, 태그는 시스템에 계속 남아 있지만 이 사용자와와의 연관정보는 삭제될 것입니다."
 
-#: application/controllers/UsersController.php:376
+#: application/controllers/UsersController.php:381
 msgid "Welcome!"
-msgstr "Velkommen!"
+msgstr "환영합니다!"
 
-#: application/controllers/UsersController.php:378
+#: application/controllers/UsersController.php:383
 #, php-format
 msgid ""
 "Your account for the %s repository has been created. Please click the "
 "following link to activate your account:"
-msgstr "Din brukerkonto for %s deponiet er opprettet. Vennligst klikk på følgene lenke for å aktivere kontoen: "
+msgstr "%s 리포지터리 계정이 생성되었습니다. 계정을 활성화하려면 다음의 링크를 클릭하십시오 : "
 
-#: application/controllers/UsersController.php:381
+#: application/controllers/UsersController.php:386
 #, php-format
 msgid "Activate your account with the %s repository"
-msgstr "Aktiver brukerkontoen din til %s deponiet"
+msgstr "%s 리포지터리의 계정을 활성화합니다."
 
-#: application/controllers/UsersController.php:476
+#: application/controllers/UsersController.php:481
 msgid "Login information incorrect. Please try again."
-msgstr "Ugyldig inloggingsinformasjon. Venglist prøv igjen."
+msgstr "로그인 정보가 정확하지 않습니다. 다시 시도해 주십시오."
 
 #: application/forms/AppearanceSettings.php:22
 #: application/forms/Install.php:128
 msgid "Fullsize Image Size"
-msgstr "Størrelse på bilde i fullstørrelse"
+msgstr "실물 이미지 크기"
 
 #: application/forms/AppearanceSettings.php:23
 msgid "Maximum fullsize image size constraint (in pixels)."
-msgstr "Maks fullstørrelse bildestørrelse (i piksler)"
+msgstr "최대 실물 이미지 크기는 (픽셀)로 제한됩니다."
 
 #: application/forms/AppearanceSettings.php:29
 #: application/forms/Install.php:136
 msgid "Thumbnail Size"
-msgstr "Størrelse på miniatyrbilder"
+msgstr "썸네일 크기"
 
 #: application/forms/AppearanceSettings.php:30
 msgid "Maximum thumbnail size constraint (in pixels)."
-msgstr "Maks størrelse på miniatyrbilder (målt i piksler)."
+msgstr "최대 썸네일 크기는 (픽셀)로 제한됩니다."
 
 #: application/forms/AppearanceSettings.php:36
 #: application/forms/Install.php:144
 msgid "Square Thumbnail Size"
-msgstr "Størrelse på kvadratisk miniatyrbilde"
+msgstr "사각형 썸네일 크기"
 
 #: application/forms/AppearanceSettings.php:37
 msgid "Maximum square thumbnail size constraint (in pixels)."
-msgstr "Maks størrelse på kvadratiske miniatyrbilder (målt i piksler)."
+msgstr "최대 사각형 썸네일 크기는 (픽셀)로 제한됩니다."
 
 #: application/forms/AppearanceSettings.php:43
 msgid "Results Per Page (admin)"
-msgstr "Resultater per side (admin)"
+msgstr "페이지당 결과 (관리자)"
 
 #: application/forms/AppearanceSettings.php:44
 msgid ""
 "Limit the number of results displayed per page in the administrative "
 "interface."
-msgstr "Angi antall resultater per side i administrasjonsgrensesnittet."
+msgstr "관리용 인터페이스 화면에서 페이지 당 표시되는 결과의 숫자를 제한합니다."
 
 #: application/forms/AppearanceSettings.php:50
 msgid "Results Per Page (public)"
-msgstr "Resultater per side (offentlig)"
+msgstr "페이지당 결과 (일반)"
 
 #: application/forms/AppearanceSettings.php:51
 msgid ""
 "Limit the number of results displayed per page in the public interface."
-msgstr "Angi antall resultater per side i det offentlige brukergrensesnittet."
+msgstr "공개용 인터페이스 화면에서 페이지 당 표시되는 결과의 숫자를 제한합니다."
 
 #: application/forms/AppearanceSettings.php:57
 #: application/forms/Install.php:168
 msgid "Show Empty Elements"
-msgstr "Vis tomme elementer"
+msgstr "비어있는 요소 보기"
 
 #: application/forms/AppearanceSettings.php:62
 msgid "Show Element Set Headings"
-msgstr ""
+msgstr "요소 세트 제목 보기"
 
-#: application/forms/AppearanceSettings.php:71
+#: application/forms/AppearanceSettings.php:75
 msgid "Derivative Size Constraints"
-msgstr "Avledete størrelsesbegrensninger"
+msgstr "파생되는 크기 제한"
 
-#: application/forms/AppearanceSettings.php:79
+#: application/forms/AppearanceSettings.php:83
 msgid "Display Settings"
-msgstr "Visningsinnstillinger"
+msgstr "화면 설정"
 
 #: application/forms/ChangePassword.php:25
 msgid "Current Password"
-msgstr "Nåværende passord"
+msgstr "현재 비밀번호"
 
 #: application/forms/ChangePassword.php:26
 #: application/forms/ChangePassword.php:36
 msgid "Password must be at least 6 characters long."
-msgstr "Passordet må bestå av minst 6 tegn."
+msgstr "비밀번호는 6자 이상이어야 합니다."
 
 #: application/forms/ChangePassword.php:28
 msgid "Invalid current password"
-msgstr "Ugyldig nåværende passord"
+msgstr "잘못된 현재 비밀번호"
 
 #: application/forms/ChangePassword.php:34
 msgid "New Password"
-msgstr "Nytt passord"
+msgstr "새 비밀번호"
 
 #: application/forms/ChangePassword.php:41
 msgid "New password must be entered."
-msgstr "Du må skrive inn et nytt passord."
+msgstr "새 비밀번호를 입력하십시오."
 
 #: application/forms/ChangePassword.php:50
 #: application/forms/ChangePassword.php:70
 msgid "New password must be typed correctly twice."
-msgstr "Du må skrive passordet korrekt to ganger."
+msgstr "새 비밀번호는 두 번 정확히 입력하셔야 합니다."
 
 #: application/forms/ChangePassword.php:59
 msgid "New password must be at least %min% characters long."
-msgstr "Nytt passord må bestå av minst %min% ctegn."
+msgstr "새 비밀번호는 최소 %min% 자 이상이어야 합니다."
 
 #: application/forms/ChangePassword.php:68
 msgid "Repeat New Password"
-msgstr "Gjenta nytt passord"
+msgstr "새 비밀번호 재입력"
 
 #: application/forms/GeneralSettings.php:22 application/forms/Install.php:90
 msgid "Site Title"
-msgstr "Tittel på siden"
+msgstr "사이트 제목"
 
 #: application/forms/GeneralSettings.php:26 application/forms/Install.php:95
 msgid "Site Description"
-msgstr "Beskrivelse av siden"
+msgstr "사이트 설명"
 
 #: application/forms/GeneralSettings.php:31 application/forms/Install.php:99
 msgid "Administrator Email"
-msgstr "Administrator e-postadresse"
+msgstr "관리자 이메일"
 
 #: application/forms/GeneralSettings.php:37 application/forms/Install.php:105
 msgid "Site Copyright Information"
-msgstr "Opphavsrett for siden"
+msgstr "사이트 저작권 정보"
 
 #: application/forms/GeneralSettings.php:41 application/forms/Install.php:109
 msgid "Site Author Information"
-msgstr "Informasjon om forfatter av siden"
+msgstr "사이트 저자 정보"
 
 #: application/forms/GeneralSettings.php:45 application/forms/Install.php:113
 msgid "Tag Delimiter"
-msgstr "Skilletegn for stikkord"
+msgstr "태그 구분기호"
 
 #: application/forms/GeneralSettings.php:46
 msgid ""
 "Separate tags using this character or string. Be careful when changing this "
 "setting. You run the risk of splitting tags that contain the old delimiter."
-msgstr "Skill stikkordene med dette tegnet eller tekststrengen. Vær varsom hvis du endrer denne innstillingen; du kan risikere å splitte stikkord som inneholder det opprinnelige skilletegnet."
+msgstr "이 문자 또는 문자열을 사용해서 태그를 구분하십시오. 이 설정을 변경할 때는 유의하십시오. 이전 구분기호를 포함하고 있는 태그를 쪼개버릴 위험이 있습니다."
 
 #: application/forms/GeneralSettings.php:59 application/forms/Install.php:174
 msgid "ImageMagick Directory Path"
-msgstr "Filsti til Imagemagick"
+msgstr "ImageMagick 디렉토리 경로"
 
 #: application/forms/Install.php:31
 msgid "must be 30 characters or fewer with no whitespace"
-msgstr ""
+msgstr "공백 없이 30자 이하여야 합니다."
 
 #: application/forms/Install.php:39 application/forms/User.php:46
 #: application/models/User.php:189
 #, php-format
 msgid ""
 "Whitespace is not allowed. Only these special characters may be used: %s"
-msgstr ""
+msgstr "공백은 허용되지 않습니다. %s 같은 특수 문자만 사용할 수 있습니다."
 
 #: application/forms/Install.php:48 application/forms/Login.php:34
 msgid "Password"
-msgstr "Passord"
+msgstr "비밀번호"
 
 #: application/forms/Install.php:49
 msgid "must be at least 6 characters"
-msgstr "må være minst 6 tegn"
+msgstr "최소 6자이어야 합니다."
 
 #: application/forms/Install.php:72
 msgid "Confirm your password."
-msgstr "Bekreft passord"
+msgstr "비밀번호를 확인하십시오."
 
 #: application/forms/Install.php:114
 msgid "Separate tags using this character or string."
-msgstr "Skill stikkord med dette tegnet eller tekststreng."
+msgstr "이 문자 또는 문자열을 사용해서 태그를 구분하십시오."
 
 #: application/forms/Install.php:129
 msgid "Maximum fullsize image size constraint (in pixels)"
-msgstr "Maks bildestørrelse (i piksler)"
+msgstr "최대 실물 이미지 크기는 (픽셀)로 제한됩니다."
 
 #: application/forms/Install.php:137
 msgid "Maximum thumbnail size constraint (in pixels)"
-msgstr "Maks størrelse på miniatyrbilde (i piksler)"
+msgstr "최대 썸네일 크기는 (픽셀)로 제한됩니다."
 
 #: application/forms/Install.php:145
 msgid "Maximum square thumbnail size constraint (in pixels)"
-msgstr "Maks størrelse på kvadratiske miniatyrbilde (i piksler)"
+msgstr "최대 사각형 썸네일 크기는 (픽셀)로 제한됩니다."
 
 #: application/forms/Install.php:152
 msgid "Items Per Page (admin)"
-msgstr "Elementer per side (admin)"
+msgstr "페이지 당 아이템 (관리자)"
 
 #: application/forms/Install.php:153
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
-msgstr "Avgrens hvor mange elementer som vises per side i administrasjonsgrensesnittet."
+msgstr "관리자용 인터페이스 화면에서 페이지 당 표시되는 결과의 숫자를 제한합니다."
 
 #: application/forms/Install.php:160
 msgid "Items Per Page (public)"
-msgstr "Bilder per side (vises)"
+msgstr "페이지 당 아이템 (일반이용자)"
 
 #: application/forms/Install.php:161
 msgid "Limit the number of items displayed per page in the public interface."
-msgstr "Avgrens hvor mange elementer som vises per side i det alment tilgjengelige grensesnittet."
+msgstr "공개용 인터페이스 화면에서 페이지 당 표시되는 결과의 숫자를 제한합니다."
 
 #: application/forms/Install.php:170
 msgid "Check box to show metadata elements with no text."
-msgstr "Avkryssningsboks for å vise metadataelementer uten tekst."
+msgstr "입력값이 없는 메타데이터 요소를 보려면 박스를 체크하십시오."
 
 #: application/forms/Install.php:185
 msgid "Default Superuser Account"
-msgstr "Standard superbruker-konto"
+msgstr "디폴트 최고관리자 계정"
 
 #: application/forms/Install.php:195
 msgid "Site Settings"
-msgstr "Nettstedets innstillinger"
+msgstr "사이트 설정"
 
 #: application/forms/ItemTypes.php:142
 msgid "The name of the item type."
-msgstr "Navn på elementtypen."
+msgstr "아이템 유형의 명칭"
 
 #: application/forms/ItemTypes.php:151
 msgid "The description of the item type."
-msgstr "Elementtypens beskrivelse."
+msgstr "아이템 유형 설명"
 
-#: application/forms/ItemTypes.php:188 application/forms/ItemTypes.php:197
+#: application/forms/ItemTypes.php:173 application/forms/ItemTypes.php:182
 #, php-format
 msgid "The item type cannot have more than one \"%s\" element."
-msgstr "Denne ressurstypen kan ikke har mer enn \"%s\" elementer."
+msgstr "아이템 유형은  \"%s\" 요소를 하나만 가질 수 있습니다."
 
 #: application/forms/Login.php:27
 msgid "Username cannot be empty."
-msgstr "Brukernavn kan ikke være tomt."
+msgstr "사용자명은 공백이 허용되지 않습니다."
 
 #: application/forms/Login.php:40
 msgid "Password cannot be empty."
-msgstr "Passordet kan ikke være tomt."
+msgstr "비밀번호는 공백이 허용되지 않습니다."
 
 #: application/forms/Login.php:48
 msgid "Remember Me?"
-msgstr "Husk meg?"
-
-#: application/forms/Navigation.php:156
-msgid "[Default]"
-msgstr "[Standard]"
+msgstr "나를 기억합니까?"
 
 #: application/forms/Navigation.php:162
+msgid "[Default]"
+msgstr "[디폴트]"
+
+#: application/forms/Navigation.php:168
 msgid "Select a Homepage"
-msgstr "Velg en hjemmeside"
+msgstr "홈페이지 선택"
 
-#: application/forms/Navigation.php:244
+#: application/forms/Navigation.php:250
 msgid "Cannot find parent navigation page."
-msgstr "Finner ikke overordnet navigasjonsside."
+msgstr "상위 메뉴 페이지를 찾을 수 없습니다."
 
-#: application/forms/Navigation.php:325
+#: application/forms/Navigation.php:331
 msgid "All navigation links must have URIs."
-msgstr "Alle navigasjonslinkene må ha URIer."
-
-#: application/forms/Navigation.php:338
-msgid "All navigation links must have different URIs."
-msgstr "Alle navigasjonslinkene må ha ulike URIer."
+msgstr "메뉴의 링크는 모두 URI를 가져야 합니다."
 
 #: application/forms/Navigation.php:344
+msgid "All navigation links must have different URIs."
+msgstr "메뉴의 링크는 모두 다른 URI를 가져야 합니다."
+
+#: application/forms/Navigation.php:350
 #, php-format
 msgid "Invalid URI for \"%s\" navigation link:  \"%s\""
-msgstr "Ugyldig URI for \"%s\" navigasjonslink: \"%s\""
+msgstr "\"%s\" 메뉴 링크의  \"%s\" URI는 잘못된 URI입니다."
 
-#: application/forms/Navigation.php:377
+#: application/forms/Navigation.php:383
 msgid "Navigation links that have undeleteable sublinks cannot be deleted."
-msgstr "Navigasjonslinker med beskyttede underlinker kan ikke slettes."
+msgstr "삭제가 불가능한 하위 링크를 포함하는 매뉴 링크는 삭제될 수 없습니다."
 
 #: application/forms/RecoverPassword.php:36
 msgid "Email address is required."
-msgstr "E-postadresse er påkrevd"
+msgstr "이메일 주소가 필요합니다."
 
 #: application/forms/RecoverPassword.php:46
 msgid "Invalid email address given."
-msgstr "Ugyldig epost-adresse."
+msgstr "잘못된 이메일 주소입니다."
 
 #: application/forms/RecoverPassword.php:48
 msgid "Invalid format given for email address."
-msgstr "Ugyldig format for epost-adresse."
+msgstr "잘못된 이메일 주소 형식입니다."
 
 #: application/forms/RecoverPassword.php:50
 msgid "Invalid hostname given for email address."
-msgstr "Ugyldig vertsnavn for epost-adresse."
+msgstr "이메일 주소의 호스트명이 잘못되었습니다."
 
 #: application/forms/RecoverPassword.php:66
 msgid "Invalid email address"
-msgstr "Feil e-postadresse"
+msgstr "잘못된 이메일 주소"
 
 #: application/forms/ResetPassword.php:27
 msgid "Password is required."
-msgstr "Passord er påkrevd"
+msgstr "비밀번호가 필요합니다."
 
 #: application/forms/ResetPassword.php:33
 msgid "Typed passwords do not match."
-msgstr "Passord stemmer ikke overens"
+msgstr "입력한 비밀번호가 맞지 않습니다."
 
 #: application/forms/SecuritySettings.php:24
 msgid "Disable File Upload Validation"
-msgstr "Skru av gyldighetssjekk for filopplasting"
+msgstr "파일 업로드 확인 사용안함"
 
 #: application/forms/SecuritySettings.php:26
 msgid ""
 "Check this field if you would like to allow any file to be uploaded to "
 "Omeka."
-msgstr "Kryss av i dette feltet hvis du vil tillate at alle filtyper skal kunne lastes opp til Omeka."
+msgstr "Omeka에 업로드할 수 있는 파일을 제한하지 않으려면 이 필드를 체크하십시오."
 
 #: application/forms/SecuritySettings.php:32
 msgid "Allowed File Extensions"
-msgstr "Tillatte fil-etternavn"
+msgstr "허용된 파일 확장자"
 
 #: application/forms/SecuritySettings.php:33
 msgid "List of allowed extensions for file uploads"
-msgstr "Liste over filtyper som er tillatt å laste opp."
+msgstr "파일 업로드용으로 허용된 확장자 목록"
 
 #: application/forms/SecuritySettings.php:42
 msgid "Allowed File Types"
-msgstr "Tillatte filtyper"
+msgstr "허용된 파일 타입"
 
 #: application/forms/SecuritySettings.php:43
 msgid "List of allowed MIME types for file uploads"
-msgstr "Liste over tillate MIME-typer for opplasting"
+msgstr "파일 업로드용으로 허용된 MIME 타입 목록"
 
 #: application/forms/SecuritySettings.php:52
 msgid "ReCaptcha Public Key"
-msgstr "ReCaptcha offentlig nøkkel"
+msgstr "ReCaptcha 공개키(암호화키)"
 
 #: application/forms/SecuritySettings.php:53
 msgid ""
 "Enter public key from recaptcha.net. Both this and the private key must be "
 "filled in to secure public forms."
-msgstr "Skriv inn offentlig nøkkel fra recaptcha.net. Både denne og den private nøkkelen må fylles inn for å sikre offentlige skjemaer."
+msgstr "recaptcha.net에서 생성한 공개키를 입력하십시오. 개인키와 공개키는 공용 입력폼들의 안전을 위한 것이므로 반드시 입력해 주십시오."
 
 #: application/forms/SecuritySettings.php:60
 msgid "ReCaptcha Private Key"
-msgstr "ReCaptcha privat nøkkel"
+msgstr "ReCaptcha 개인키(복호화키)"
 
 #: application/forms/SecuritySettings.php:61
 msgid ""
 "Enter private key from recaptcha.net. Both this and the public key must be "
 "filled in to secure public forms."
-msgstr "Skriv inn privat nøkkel fra recaptcha.net. Både denne og den offentlige nøkkelen må fylles inn for å sikre offentlige skjemaer."
+msgstr "recaptcha.net에서 생성한 개인키를 입력하십시오. 개인키와 공개키는 공용 입력폼들의 안전을 위한 것이므로 반드시 입력해 주십시오."
 
 #: application/forms/SecuritySettings.php:68
 msgid ""
 "Check this field if you would like to filter HTML elements or attributes "
 "from form input."
-msgstr ""
+msgstr "입력 양식에서 HTML 요소나 속성을 필터링하려면 이 필드를 체크하십시오."
 
 #: application/forms/SecuritySettings.php:69
 msgid "Enable HTML Filtering"
-msgstr "Bruk HTML-filtrering"
+msgstr "HTML 필터링 실행"
 
 #: application/forms/SecuritySettings.php:74
 msgid "Allowed HTML Elements"
-msgstr "Tillatte HTML-elementer"
+msgstr "허용된 HTML 요소"
 
 #: application/forms/SecuritySettings.php:75
 msgid "List of allowed HTML elements in form input"
-msgstr "Liste over tillatte HTML-elementer i inndata"
+msgstr "입력 양식에 허용된 HTML 요소 목록"
 
 #: application/forms/SecuritySettings.php:82
 msgid "Allowed HTML Attributes"
-msgstr "Tillatte HTML-attributter"
+msgstr "허용된 HTML 속성"
 
 #: application/forms/SecuritySettings.php:83
 msgid "List of allowed HTML attributes in form input"
-msgstr "Liste over tillatte HTML-attributter i skjemaer"
+msgstr "입력 양식에 허용된 HTML 속성 목록"
 
-#: application/forms/SecuritySettings.php:94
+#: application/forms/SecuritySettings.php:98
 msgid "File Validation"
-msgstr "Filvalidering"
+msgstr "파일 유효성 검사"
 
-#: application/forms/SecuritySettings.php:102
+#: application/forms/SecuritySettings.php:106
 msgid "Captcha"
-msgstr "Captcha"
+msgstr "CAPTCHA"
 
-#: application/forms/SecuritySettings.php:111
+#: application/forms/SecuritySettings.php:115
 msgid "HTML Filtering"
-msgstr "HTML-filtrering"
+msgstr "HTML 필터링"
 
 #: application/forms/User.php:30
 msgid "Username must be 30 characters or fewer. Whitespace is not allowed."
-msgstr ""
+msgstr "사용자명은 30자 이하여야 합니다. 공백은 허용되지 않습니다."
 
 #: application/forms/User.php:37
 msgid "Username is required."
-msgstr "Brukernavn er påkrevd."
+msgstr "사용자명은 필수 입력 항목입니다."
 
 #: application/forms/User.php:56
 msgid "Username must be at least %min% characters long."
-msgstr "Brukernavn må være minst %min% tegn."
+msgstr "사용자명은 최소 %min% 자 이상이어야 합니다."
 
 #: application/forms/User.php:58
 msgid "Username must be at most %max% characters long."
-msgstr "Brukernavn kan være maks %max% tegn."
+msgstr "사용자명은 최대 %max% 자 입니다."
 
 #: application/forms/User.php:72
 msgid "This username is already in use."
-msgstr "Dette brukernavnet er allerede i bruk"
+msgstr "이 사용자명은 이미 사용 중입니다."
 
 #: application/forms/User.php:82
 msgid "Name as it should be displayed on the site"
-msgstr "Navn slik det vil vises på siden"
+msgstr "이 사이트에 표시해야 되는 명칭"
 
 #: application/forms/User.php:88 application/models/User.php:169
 msgid "Real Name is required."
-msgstr "Ekte navn er påkrevd."
+msgstr "본명은 필수 입력 항목입니다."
 
 #: application/forms/User.php:94
 msgid "This email address is invalid."
-msgstr "E-postadressen er ugyldig"
+msgstr "이 이메일 주소는 잘못되었습니다."
 
 #: application/forms/User.php:102
 msgid "Email is required."
-msgstr "E-postadresse er påkrevd"
+msgstr "이메일 주소는 필수 입력 항목입니다."
 
 #: application/forms/User.php:121
 msgid "This email address is already in use."
-msgstr "Denne e-postadressen er i bruk"
+msgstr "이 이메일 주소는 이미 사용 중입니다."
 
 #: application/forms/User.php:130
 msgid ""
 "Roles describe the permissions a user has. See <a "
 "href='http://omeka.org/codex/User_Roles' target='_blank'>documentation</a> "
 "for details."
-msgstr "Roller beskriver hvilke rettigheter brukeren har. Se <a href='http://omeka.org/codex/User_Roles' target='_blank'>dokumentasjonen</a> for detaljer."
+msgstr "역할(Roles)은 사용자에게 부여된 권한을 기술합니다. 자세한 사항은 <a href='http://omeka.org/codex/User_Roles' target='_blank'>레퍼런스 문서</a>를 참고하십시오."
 
 #: application/forms/User.php:137
 msgid "Inactive users cannot log in to the site."
-msgstr "Inaktive brukere kan ikke logge inn på siden."
+msgstr "비활성화된 사용자는 이 사이트에 로그인할 수 없습니다."
 
 #: application/forms/User.php:139
 #, php-format
 msgid "Activation has been pending since %s."
-msgstr ""
+msgstr "활성화는 %s 이후로 보류되었습니다."
 
 #: application/forms/User.php:142
 msgid "Active?"
-msgstr "Aktiv?"
+msgstr "활성화하겠습니까?"
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:115
 #, php-format
 msgid "The configured PHP path (%s) is invalid."
-msgstr "PHP's filsti (%s) er ikke korrekt."
+msgstr "구성된 PHP 경로(%s)가 잘못되었습니다."
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:125
 #, php-format
 msgid "The configured PHP path (%s) does not point to a PHP-CLI binary."
-msgstr "PHP's filsti (%s) peker ikke til en PHP-CLI binærfil."
+msgstr "구성된 PHP 경로(%s)가 PHP-CLI 바이너리를 가리키고 있지 않습니다."
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:127
 #, php-format
 msgid ""
 "The configured PHP path (%s) points to a PHP-CLI binary with an invalid "
 "version (%s)"
-msgstr "PHP's filsti (%s) peker til en PHP-CLI binærfil med ugyldig versjon (%s)."
+msgstr "구성된 PHP 경로(%s)가 잘못된 버젼 (%s)의 PHP-CLI 바이너리를 가리키고 있습니다."
 
 #: application/libraries/Omeka/Navigation.php:214
 msgid "The page must be normalized and have a valid uid."
-msgstr "Siden må være normalisert og ha en gyldig uid."
+msgstr "이 페이지는 정규화되어야 하며, 올바른 UID를 가져야 합니다."
 
 #: application/libraries/Omeka/Navigation.php:226
 msgid ""
 "The parent container must either be the navigation object or a descendant "
 "subpage of the navigation object."
-msgstr "Overordnet plassholder må enten være  navigasjonsobjektet eller en side underordnet navigasjonsobjektet."
+msgstr "상위 컨테이너는 메뉴 오브젝트 또는 메뉴 오브젝트의 서브 페이지 중 하나이어야 합니다."
 
 #: application/libraries/Omeka/Navigation/Page/Uri.php:128
 #, php-format
 msgid "Invalid URI for Omeka_Navigation_Page_Uri object: %s"
-msgstr "Ugyldig URI for Omeka_Navigation_Page_Uri objekt: %s"
+msgstr "Omeka_Navigation_Page_Uri 를 위한 URI가 다름 : %s"
 
 #: application/libraries/Omeka/Plugin/Ini.php:63
 #, php-format
 msgid "Path to plugin.ini for \"%s\" is not correct."
-msgstr "Filsti til plugin.ini for \"%s\" er ikke riktig."
+msgstr "\"%s\" 를 위한 plugin.ini 파일의 경로가 정확하지 않습니다."
 
 #: application/libraries/Omeka/Plugin/Installer.php:79
 #, php-format
 msgid "The \"%s\" plugin must be installed and have newer files to upgrade it."
-msgstr "Programtillegget \"%s\" må være installert og ha nyere filer for å oppgradere."
+msgstr "\"%s\" 플러그인이 설치되어야 하고, 업그레이드하려면 새로운 파일이 있어야 합니다."
 
 #: application/libraries/Omeka/Plugin/Installer.php:116
 msgid "Plugin must have a valid directory name before it can be installed."
-msgstr "Programtillegget må ha et gyldig mappenavn før det kan installeres."
-
-#: application/libraries/Omeka/Plugin/Loader.php:112
-#, php-format
-msgid "Plugin named '%s' has already been loaded/registered."
-msgstr ""
-
-#: application/libraries/Omeka/Plugin/Loader.php:153
-#, php-format
-msgid "The %s plugin could not be loaded."
-msgstr ""
-
-#: application/libraries/Omeka/Plugin/Loader.php:174
-#, php-format
-msgid "The required plugin '%s' could not be found."
-msgstr ""
-
-#: application/libraries/Omeka/Plugin/Loader.php:247
-#, php-format
-msgid "'%s' has no valid bootstrap file."
-msgstr ""
-
-#: application/libraries/Omeka/Plugin/Loader.php:250
-#, php-format
-msgid "'%s' has not been installed."
-msgstr ""
-
-#: application/libraries/Omeka/Plugin/Loader.php:253
-#, php-format
-msgid "'%s' has not been activated."
-msgstr ""
-
-#: application/libraries/Omeka/Plugin/Loader.php:256
-#, php-format
-msgid "'%s' requires a newer version of Omeka."
-msgstr ""
-
-#: application/libraries/Omeka/Plugin/Loader.php:261
-#, php-format
-msgid "'%s' must be upgraded to the new version before it can be loaded."
-msgstr ""
-
-#: application/libraries/Omeka/Plugin/Loader.php:264
-#, php-format
-msgid "'%s' cannot be loaded twice."
-msgstr ""
+msgstr "플러그인을 설치하려면 먼저 유효한 디렉토리명이 있어야 합니다."
 
 #: application/libraries/Omeka/Record/AbstractRecord.php:349
 #, php-format
 msgid "'%s' is an invalid special value."
-msgstr "'%s' er en ugyldig spesialverdi."
+msgstr "'%s' 은 잘못된 값입니다."
 
 #: application/libraries/Omeka/Record/Iterator.php:49
 msgid "An invalid value was detected during record iteration."
-msgstr "Det ble funnet en ugyldig verdi under gjennomgangen."
+msgstr "레코드가 반복되는 동안 잘못된 값이 발견되었습니다."
 
-#: application/libraries/globals.php:417
+#: application/libraries/globals.php:410
 msgid "File"
-msgstr "Fil"
+msgstr "파일"
 
-#: application/libraries/globals.php:475
+#: application/libraries/globals.php:468
 msgid "Keyword"
-msgstr "Nøkkelord"
+msgstr "키워드"
 
-#: application/libraries/globals.php:476
+#: application/libraries/globals.php:469
 msgid "Boolean"
-msgstr "Boolsk"
+msgstr "불 방식(boolean)"
 
-#: application/libraries/globals.php:477
+#: application/libraries/globals.php:470
 msgid "Exact match"
-msgstr "Eksakt treff"
+msgstr "완전일치"
 
-#: application/libraries/globals.php:1238
-#: application/libraries/globals.php:1259
+#: application/libraries/globals.php:1234
+#: application/libraries/globals.php:1255
 #, php-format
 msgid "Could not find file %s!"
-msgstr "Kunne ikke finne filen %s!"
+msgstr "%s 파일을 찾을 수 없습니다."
 
-#: application/libraries/globals.php:1276
+#: application/libraries/globals.php:1272
 msgid "No featured collections are available."
-msgstr "Ingen fremhevede samlinger er tilgjengelige,"
+msgstr "특별 전시용 컬렉션이 없습니다."
 
-#: application/libraries/globals.php:1569
+#: application/libraries/globals.php:1564
 msgid "Select Below "
-msgstr "Velg under"
+msgstr "아래를 선택"
 
-#: application/libraries/globals.php:1611
+#: application/libraries/globals.php:1607
 msgid "Omeka RSS Feed"
-msgstr "Omeka RSS-feed"
+msgstr "Omeka RSS 피드"
 
-#: application/libraries/globals.php:1612
+#: application/libraries/globals.php:1608
 msgid "Omeka Atom Feed"
-msgstr "Omeka Atom-feed"
+msgstr "Omeka Atom 피드"
 
-#: application/libraries/globals.php:2251
+#: application/libraries/globals.php:2264
 msgid "No recent items available."
-msgstr "Ingen nylige ressurser tilgjengelig."
+msgstr "최근에 등록된 아이템이 없습니다."
 
-#: application/libraries/globals.php:2277
+#: application/libraries/globals.php:2290
 msgid "No featured items are available."
-msgstr "Ingen fremhevede ressurser"
+msgstr "특별 전시용 아이템이 없습니다."
 
-#: application/libraries/globals.php:2332
+#: application/libraries/globals.php:2349
 msgid "View"
-msgstr "Vis"
+msgstr "보기"
 
-#: application/libraries/globals.php:2394
+#: application/libraries/globals.php:2411
 msgid "No Collection"
-msgstr "Ingen samling"
+msgstr "컬렉션 없음"
 
-#: application/libraries/globals.php:2509
+#: application/libraries/globals.php:2529
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2526
-msgid "Next Item &rarr;"
-msgstr "Neste ressurs &rarr;"
-
 #: application/libraries/globals.php:2546
+msgid "Next Item &rarr;"
+msgstr "다음 아이템 &rarr;"
+
+#: application/libraries/globals.php:2566
 msgid "&larr; Previous Item"
-msgstr "&larr; Forrige ressurs"
+msgstr "&larr; 이전 아이템"
 
-#: application/libraries/globals.php:2724
+#: application/libraries/globals.php:2747
 msgid "Browse All"
-msgstr "Bla i alle"
+msgstr "전체 보기"
 
-#: application/libraries/globals.php:2729
+#: application/libraries/globals.php:2752
 msgid "Browse by Tag"
-msgstr "Bla i stikkord"
+msgstr "태그별 보기"
 
-#: application/libraries/globals.php:3002
+#: application/libraries/globals.php:3021
 msgid "No tags are available."
-msgstr "Ingen stikkord tilgjengelig"
+msgstr "사용 가능한 태그가 없습니다."
 
 #: application/models/Builder/Item.php:263
 msgid "Must specify a file transfer type when attaching files to an item!"
-msgstr "Må angi filoverføringstype når du legger ved filer til en enhet!"
+msgstr "아이템에 파일을 첨부할때 파일 전송 유형(file transfer type)을 지정해야 합니다!"
 
 #: application/models/Collection.php:117
 msgid "Cannot associate the collection with an unsaved user."
-msgstr "Kan ikke assosiere samlingen med en bruker som ikke er lagret."
+msgstr "해당 컬렉션을 저장되지 않은 사용자와 연결할 수 없습니다."
 
 #: application/models/Element.php:175
 msgid "The element name must not be empty."
-msgstr "Elementnavnet kan ikke være tomt."
+msgstr "요소명은 공란이어서는 안됩니다."
 
 #: application/models/Element.php:179
 msgid "Invalid element set."
-msgstr ""
+msgstr "잘못된 요소 세트입니다."
 
 #: application/models/Element.php:185
 #, php-format
 msgid "An element named \"%s\" already exists for the \"%s\" element set."
-msgstr "Det finnes allerede et element kalt \"%s\" i \"%s\" elementsett."
+msgstr "\"%s\" 로 명명된 요소는 \"%s\" 요소 세트에 이미 존재합니다."
 
 #: application/models/Element.php:216
 #, php-format
 msgid "Cannot set element set ID: set named \"%s\" does not exist."
-msgstr "Kan ikke sette element-sett ID: settet \"%s\" finnes ikke."
+msgstr "요소 세트 ID를 설정할 수 없습니다 : \"%s\" 로 명명된 세트는 존재하지 않습니다."
 
 #: application/models/ElementSet.php:146
 msgid "Name of element set must be unique."
-msgstr "Navn på element-sett må være unike."
+msgstr "요소 세트의 명칭은 고유해야 합니다."
 
 #: application/models/ElementSet.php:150
 msgid "Name of element set must not be empty."
-msgstr "Navn på elementsett kan ikke være tomt."
+msgstr "요소 세트의 명칭은 공란이어서는 안됩니다."
 
 #: application/models/ElementText.php:59
 msgid "Invalid record ID."
-msgstr "Ugyldig objekt-ID."
+msgstr "레코드 ID가 잘못되었습니다."
 
 #: application/models/ElementText.php:62
 msgid "All element texts must have a record type."
-msgstr "Alle elementer må ha en ressurstype."
+msgstr "모든 요소 텍스트는 레코드 타입을 가져야 합니다."
 
 #: application/models/ElementText.php:65
 msgid "Invalid element ID."
-msgstr "Ugyldig element-ID."
+msgstr "요소 ID가 잘못되었습니다."
 
-#: application/models/File.php:241
+#: application/models/File.php:235
 msgid "Cannot get the local path for a stored file."
-msgstr "Finner ikke den lokale stien til en lagret fil."
+msgstr "저장된 파일을 위한 로컬 경로를 얻을 수 없습니다."
 
-#: application/models/File.php:458
+#: application/models/File.php:452
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
-msgstr "\"%s\" er ikke et gyldig filderivat."
+msgstr "\"%s\"는 잘못된 파생 파일입니다."
 
 #: application/models/Item.php:330
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
-msgstr "Kan ikke legge til filer til elementer som ikke er lagret i databasen!"
+msgstr "데이터베이스에서 지속 가능하지 않은 아이템에는 파일을 첨부할 수 없습니다. 파일을 아이템에 첨부할 수 없습니다."
 
 #. / Chicago-style item citation: two authors
 #: application/models/Item.php:457
 #, php-format
 msgid "%1$s and %2$s"
-msgstr "%1$s og %2$s"
+msgstr "%1$s 와/과 %2$s"
 
 #. / Chicago-style item citation: three authors
 #: application/models/Item.php:461
 #, php-format
 msgid "%1$s, %2$s, and %3$s"
-msgstr "%1$s, %2$s og %3$s"
+msgstr "%1$s 와/과 %2$s, %3$s"
 
 #. / Chicago-style item citation: more than three authors
 #: application/models/Item.php:465
 #, php-format
 msgid "%s et al."
-msgstr "%s m fl."
+msgstr "%s 등."
 
 #. / Chicago-style item citation: access date and URL
 #: application/models/Item.php:483
 #, php-format
 msgid "accessed %1$s, %2$s."
-msgstr "besøkt %1$s, %2$s."
+msgstr "접근된 %1$s, %2$s."
 
 #: application/models/Item.php:500
 msgid "Cannot add an existing file to an item!"
-msgstr "Kan ikke legg til en eksisterende fil til et element!"
+msgstr "아이템에 기존 파일을 추가할 수 없습니다!"
 
 #: application/models/Item.php:504
 msgid "File must be valid before it can be associated with an item!"
-msgstr "Filen må være gyldig før den kan assosieres med et element!"
+msgstr "파일이 유효해야 아이템과 연결시킬 수 있습니다!"
 
 #: application/models/Item.php:528
 msgid "Invalid item type."
-msgstr ""
+msgstr "잘못된 아이템 유형입니다."
 
 #: application/models/Item.php:531
 msgid "Invalid collection."
-msgstr ""
+msgstr "잘못된 컬렉션입니다."
 
 #: application/models/ItemType.php:102
 #, php-format
 msgid "The item type name must have between %1$s and %2$s characters."
-msgstr "Navn på enhetstype må være mellom %1$s og %2$s tegn."
+msgstr "아이템 유형의 명칭은 %1$s 자와 %2$s 자 사이여야 합니다."
 
 #: application/models/ItemType.php:106
 msgid "The item type name must be unique."
-msgstr "Navn på elementtype må være unikt."
+msgstr "아이템 유형의 명칭은 고유해야 합니다."
 
 #: application/models/ItemType.php:179
 msgid "There are too many values in the element ordering array."
-msgstr "Det er for mange verdier i elementets sorteringsrekke."
+msgstr "요소 순서 배열 값이 너무 많습니다."
 
 #: application/models/ItemType.php:181
 msgid "There are too few values in the element ordering array."
-msgstr "Det er for få verdier i elementets sorteringsrekke."
+msgstr "요소 순서 배열 값이 너무 적습니다."
 
 #: application/models/ItemType.php:218
 msgid ""
 "Invalid element data. To add elements, you must either pass an element "
 "objects or an array of element metadata."
-msgstr "Ugyldig metadata. For å legge til elementer, må du enten oppgi et elementobjekt eller en serie med elementmetadata."
+msgstr "잘못된 요소 데이터입니다. 요소를 추가하려면 요소 오브젝트나 요소 메타데이터 배열 중 하나를 통과해야 합니다."
 
 #: application/models/ItemType.php:282
 msgid ""
 "Cannot remove elements from an item type that is not persistent in the "
 "database!"
-msgstr "Kan ikke fjerne elementer av en elementtype som ennå ikke er lagret i databasen!"
+msgstr "데이터베이스의 지속 가능하지 않은 아이템 유형으로부터 요소를 삭제할 수는 없습니다!"
 
 #: application/models/ItemType.php:291
 #, php-format
 msgid "Cannot find element with ID %s!"
-msgstr "Kan ikke finne elementet med ID %s!"
+msgstr "ID %s 의 엘리먼트를 찾을 수 없습니다!"
 
 #: application/models/ItemType.php:332
 #, php-format
 msgid "Item type does not contain an element with the ID %s!"
-msgstr "Elementtypen har ingen element med ID %s!"
+msgstr "아이템 유형은 ID %s 의 요소를 포함하고 있지 않습니다!"
 
 #: application/models/ItemType.php:353
 msgid ""
 "Invalid parameter. The hasElement function requires either an element object"
 " or an element id to determine if an item type has an element."
-msgstr "Ugyldig parameter. Funksjonen hasElement krever enten et element-objekt eller en element-ID for å avgjøre om en elementtype har et element."
+msgstr "잘못된 매개변수입니다. 한 아이템 유형이 요소를 갖고 있는 경우  'hasElement' 기능은 요소 오브젝트나 요소 id 중 하나를 필요로 합니다."
 
-#: application/models/Mixin/ElementText.php:278
+#: application/models/Mixin/ElementText.php:292
 #, php-format
 msgid "There is no element \"%1$s\", \"%2$s\"!"
-msgstr "Det finnes ingen element \"%1$s\", \"%2$s\"!"
+msgstr "\"%1$s\", \"%2$s\" 요소가 존재하지 않습니다!"
 
-#: application/models/Mixin/ElementText.php:297
+#: application/models/Mixin/ElementText.php:311
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
-msgstr "Finner ingen elementer med ID \"%s\"!"
+msgstr "ID '%s' 의 요소를 찾을 수 없습니다!"
 
-#: application/models/Mixin/ElementText.php:416
+#: application/models/Mixin/ElementText.php:430
 msgid "Element texts are not formatted correctly!"
-msgstr "Element-tekstene er ikke korrekt formatert!"
+msgstr "요소의 텍스트가 정상적으로 구성되지 않았습니다!"
 
-#: application/models/Mixin/ElementText.php:562
+#: application/models/Mixin/ElementText.php:578
 #, php-format
 msgid "The \"%s\" field has at least one invalid value!"
-msgstr "Feltet \"%s\" må ha minst en verdi!"
+msgstr "\"%s\" 필드에 하나 이상의 유효하지 않은 값이 있습니다!"
 
-#: application/models/Mixin/ElementText.php:632
+#: application/models/Mixin/ElementText.php:648
 msgid "Cannot save element text for records that are not yet persistent!"
-msgstr "Kan ikke lagre tekstelement for poster som ennå ikke er lagret!"
+msgstr "아직 지속 가능하지 않은 레코드에 대해서는 요소 텍스트를 저장할 수 없습니다."
 
 #: application/models/Option.php:50 application/models/Option.php:54
 msgid "Each option must have a unique name."
-msgstr "Hvert alternativ må ha et unikt navn."
+msgstr "각 옵션은 고유의 명칭을 지녀야 합니다."
 
 #: application/models/Plugin.php:133
 msgid "Names of plugins must not be blank"
-msgstr "Programtillegg må ha navn"
+msgstr "플러그인 명칭은 비어 있을 수 없습니다."
 
-#: application/models/Table/Collection.php:77
+#: application/models/Table/Collection.php:80
 #, php-format
 msgid "[Untitled] #%s"
-msgstr "[Uten tittel] #%s"
+msgstr "[제목없음] #%s"
 
-#: application/models/Table/Item.php:164
+#: application/models/Table/Item.php:123
 msgid "Invalid search type given!"
-msgstr "Ugyldig søketype!"
+msgstr "검색 유형이 유효하지 않습니다!"
 
 #: application/models/Tag.php:56
 msgid "Tags must be given a name."
-msgstr "Stikkord må få navn."
+msgstr "태그에는 명칭이 부여되어야 합니다."
 
 #: application/models/Tag.php:60
 msgid "That name is already taken for this tag."
-msgstr "Dette navnet er allerede tatt."
+msgstr "해당 명칭은 이 태그에 이미 등록되어 있습니다."
 
 #: application/models/User.php:110
 msgid "User may not change permissions to super-user"
-msgstr "Bruker kan ikke endre rettigheter til superbruker"
+msgstr "사용자는 최고관리자의 권한을 변경할 수 없습니다."
 
 #: application/models/User.php:113
 msgid "User may not change roles."
-msgstr "Bruker kan ikke endre roller."
+msgstr "사용자는 역할을 변경할 수 없습니다."
 
 #: application/models/User.php:182 application/models/User.php:230
 msgid "The user must be assigned a role."
-msgstr "Brukeren må få tildelt en rolle."
+msgstr "사용자 역할을 지정해야 합니다."
 
 #: application/models/User.php:187
 #, php-format
 msgid "The username \"%1$s\" must be between %2$s and %3$s characters."
-msgstr "Brukernavnet \"%1$s\" må være melleom %2$s og %3$s tegn."
+msgstr "사용자명 \"%1$s\" 은 %2$s 와 %3$s 자 이내로 입력해야 합니다."
 
 #: application/models/User.php:191
 #, php-format
 msgid "'%s' is already in use. Please choose another username."
-msgstr "'%s' er allerede i bruk. Vennligst velg et annet brukernavn."
+msgstr "'%s' 는 이미 사용 중입니다. 다른 사용자명을 입력하십시오."
 
 #: application/models/UsersActivations.php:54
 msgid "Cannot create a user activation for non-existent user."
-msgstr "Kan ikke aktivere bruker for en bruker som ikke finnes."
+msgstr "존재하지 않는 사용자 계정은 활성화 할 수 없습니다."
 
 #: application/tests/suite/Omeka/Db/Migration/_files/migrations/20080717013526_foobar.php:18
 msgid "This migration should have been run previously (should not run again)."
-msgstr "Denne databaseoppgraderingen skulle være kjørt før (og bør ikke kjøres igjen)."
+msgstr "마이그레이션 작업은 이전에 실행되었습니다 (재실행할 수 없습니다)."
 
 #: application/tests/suite/Omeka/Db/Migration/_files/migrations/50000101120000_notRunYet.php:19
 msgid "This migration should not be run."
-msgstr "Denne databaseoppgraderingen bør ikke kjøres."
+msgstr "마이그레이션 작업은 실행되지 않습니다."
 
 #: application/tests/suite/Omeka/NavigationTest.php:752
 #: application/tests/suite/Omeka/NavigationTest.php:817
 #: application/tests/suite/Omeka/NavigationTest.php:839
 #: application/tests/suite/Omeka/NavigationTest.php:952
 msgid "Edit Items"
-msgstr "Rediger ressurser"
+msgstr "아이템 편집"
 
 #: application/tests/suite/Omeka/NavigationTest.php:758
 #: application/tests/suite/Omeka/NavigationTest.php:818
 #: application/tests/suite/Omeka/NavigationTest.php:856
 #: application/tests/suite/Omeka/NavigationTest.php:953
 msgid "Edit Collections"
-msgstr "Rediger samlinger"
+msgstr "컬렉션 편집"
 
 #: application/tests/suite/Omeka/NavigationTest.php:764
 #: application/tests/suite/Omeka/NavigationTest.php:819
@@ -3289,7 +3280,7 @@ msgstr "CHNM"
 #: application/tests/suite/Omeka/NavigationTest.php:1128
 #: application/tests/suite/Omeka/NavigationTest.php:1136
 msgid "Page "
-msgstr "Side"
+msgstr "페이지"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1009
 #: application/tests/suite/Omeka/NavigationTest.php:1013
@@ -3298,7 +3289,7 @@ msgstr "Side"
 #: application/tests/suite/Omeka/NavigationTest.php:1156
 #: application/tests/suite/Omeka/NavigationTest.php:1256
 msgid "Page 1"
-msgstr "Side 1"
+msgstr "1페이지"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1016
 #: application/tests/suite/Omeka/NavigationTest.php:1022
@@ -3309,7 +3300,7 @@ msgstr "Side 1"
 #: application/tests/suite/Omeka/NavigationTest.php:1200
 #: application/tests/suite/Omeka/NavigationTest.php:1232
 msgid "Page 2"
-msgstr "Side 2"
+msgstr "2페이지"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1025
 #: application/tests/suite/Omeka/NavigationTest.php:1029
@@ -3320,7 +3311,7 @@ msgstr "Side 2"
 #: application/tests/suite/Omeka/NavigationTest.php:1193
 #: application/tests/suite/Omeka/NavigationTest.php:1255
 msgid "Page 3"
-msgstr "Side 3"
+msgstr "3페이지"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1032
 #: application/tests/suite/Omeka/NavigationTest.php:1041
@@ -3333,7 +3324,7 @@ msgstr "Side 3"
 #: application/tests/suite/Omeka/NavigationTest.php:1240
 #: application/tests/suite/Omeka/NavigationTest.php:1250
 msgid "Page 4"
-msgstr "Side 4"
+msgstr "4페이지"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1044
 #: application/tests/suite/Omeka/NavigationTest.php:1048
@@ -3344,131 +3335,131 @@ msgstr "Side 4"
 #: application/tests/suite/Omeka/NavigationTest.php:1223
 #: application/tests/suite/Omeka/NavigationTest.php:1241
 msgid "Page 5"
-msgstr "Side 5"
+msgstr "5페이지"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1051
 #: application/tests/suite/Omeka/NavigationTest.php:1055
 #: application/tests/suite/Omeka/NavigationTest.php:1215
 msgid "Page 6"
-msgstr "Side 6"
+msgstr "6페이지"
 
 #: application/views/helpers/AllElementTexts.php:108
 msgid "[no text]"
-msgstr "[ingen tekst]"
+msgstr "[텍스트 없음]"
 
 #: application/views/helpers/ElementForm.php:65
 msgid "Add Input"
-msgstr "Legg til inndata"
+msgstr "입력 추가"
 
 #: application/views/helpers/ElementInput.php:131
 msgid "Use HTML"
-msgstr "Bruk HTML"
+msgstr "HTML 사용"
 
 #: application/views/helpers/GetCurrentRecord.php:27
 #, php-format
 msgid "A current %s variable has not been set to this view."
-msgstr "En variabel %s har ikke blitt satt til denne visningen"
+msgstr "현재의  %s 변수는 현재 보기에 적합하지 않습니다."
 
 #: application/views/helpers/GetLoopRecords.php:30
 #, php-format
 msgid "A loop %s variable has not been set to this view."
-msgstr "En loop-variabel %s har ikke blitt satt til denne visningen"
+msgstr "반복되는 %s 변수는 현재 보기에 적합하지 않습니다."
 
 #: application/views/helpers/Loop.php:27
 msgid "An array of records is not available for the loop."
-msgstr "En array av elementer er ikke tilgjengelige for loopen."
+msgstr "레코드의 배열은 반복할 수 없습니다."
 
 #: application/views/helpers/RecordUrl.php:34
 msgid "Invalid record passed while getting record URL."
-msgstr "Fikk et ugyldig objekt ved forsøk på å få tak i objektets URL"
+msgstr "레코드 주소를 얻는 동안 잘못된 레코드가 있었습니다."
 
 #: application/views/helpers/RecordUrl.php:44
 msgid "Invalid action passed while getting record URL."
-msgstr "Ugyldig handling ved forsøk på å få tak i objektets URL"
+msgstr "레코드 주소를 얻는 동안 잘못된 실행이 있었습니다."
 
 #: application/views/helpers/RecordUrl.php:75
 msgid "Invalid return value while getting record URL."
-msgstr "Ugyldig returverdi ved forsøk på å få tak i objektets URL."
+msgstr "레코드 주소를 얻는 동안 잘못된 값이 반환되었습니다."
 
 #: application/views/scripts/collections/browse.php:14
 #: application/views/scripts/items/browse.php:24
 msgid "Sort by: "
-msgstr "Sorter etter:"
+msgstr "정렬 방식:"
 
 #: application/views/scripts/collections/browse.php:42
 #, php-format
 msgid "View the items in %s"
-msgstr "Se ressursene i %s"
+msgstr "%s 에 포함된 아이템 보기"
 
-#: application/views/scripts/collections/show.php:15
+#: application/views/scripts/collections/show.php:12
 #, php-format
 msgid "Items in the %s Collection"
-msgstr "Elementer i samlingen %s"
+msgstr "%s 컬렉션에 포함된 아이템"
 
-#: application/views/scripts/collections/show.php:40
+#: application/views/scripts/collections/show.php:37
 msgid "There are currently no items within this collection."
-msgstr "Det finnes ingen ressurser i den samlingen."
+msgstr "이 컬렉션에는 아이템이 등록되어 있지 않습니다."
 
 #: application/views/scripts/common/footer.php:14
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
-msgstr "Kjører på <a href=\"http://omeka.org\">Omeka</a>."
+msgstr "이 사이트는 오픈소스인 Omeka 소프트웨어<a href=\"http://omeka.org\">Omeka</a>로 개발되었습니다."
 
 #: application/views/scripts/common/pagination_control.php:5
 msgid "Pagination"
-msgstr ""
+msgstr "페이지 매기기"
 
 #: application/views/scripts/common/pagination_control.php:11
 msgid "Previous Page"
-msgstr ""
+msgstr "이전 페이지"
 
 #: application/views/scripts/common/pagination_control.php:36
 msgid "Current Page"
-msgstr ""
+msgstr "현재 페이지"
 
 #: application/views/scripts/common/pagination_control.php:39
 #, php-format
 msgid "%s of %s"
-msgstr "%s av %s"
+msgstr "%s / %s"
 
 #: application/views/scripts/common/pagination_control.php:48
 msgid "Next Page"
-msgstr ""
+msgstr "다음 페이지"
 
 #: application/views/scripts/error/403.php:2
 msgid "403 Page Forbidden"
-msgstr "403 ingen tilgang"
+msgstr "403에러 : 페이지 접근권한이 없습니다"
 
 #: application/views/scripts/error/403.php:8
 msgid "You do not have permission to access this page."
-msgstr "Du har ikke tillatelse til å se denne siden"
+msgstr "이 페이지 접근 권한이 없습니다."
 
 #: application/views/scripts/error/404.dc.php:1
 #: application/views/scripts/error/404.php:2
 #: application/views/scripts/error/404.xml.php:1
 msgid "404 Page Not Found"
-msgstr "404 Siden finnes ikke"
+msgstr "404에러 : 페이지를 찾을 수 없습니다"
 
 #: application/views/scripts/error/404.php:6
 #, php-format
 msgid "%s is not a valid URL."
-msgstr "%s er ikke en gyldig nettadresse."
+msgstr "%s 는 올바른 URL이 아닙니다."
 
 #: application/views/scripts/error/404.rss2.php:1
 msgid "Rss2.0 Feed Not Found!"
-msgstr "Rss2.0 strøm ikke funnet!"
+msgstr "Rss 2.0 피드를 찾을 수 없습니다!"
 
 #: application/views/scripts/error/405.php:2
 msgid "405 Method Not Allowed"
-msgstr "405 metode ikke tillatt!"
+msgstr "405에러 : 페이지는 존재하나 리소스에 접근하는 것을 허용하지 않습니다"
 
 #: application/views/scripts/error/405.php:6
 #, php-format
 msgid "The method used to access this URL (%s) is not valid."
-msgstr "Metoden brukt til å nå denne nettadressen (%s) er ikke gyldig."
+msgstr "(%s) URL에 접근하기 위한 방법이 잘못되었습니다."
 
 #: application/views/scripts/error/index.php:4
 msgid "Omeka has encountered an error"
-msgstr "Det har oppstått en feil i Omeka"
+msgstr "Omeka 시스템에 장애가 발생했습니다."
 
 #: application/views/scripts/error/index.php:33
 msgid ""
@@ -3476,116 +3467,111 @@ msgid ""
 "Omeka Codex page on <a "
 "href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error "
 "messages</a>."
-msgstr "For å få mer utfyllende informasjon om denne feilen, se Omeka Codex siden om å <a href=\"http://omeka.org/codex/Retrieving_error_messages\">spore feilmeldinger</a>."
+msgstr "이 에러에 대한 더 많은 상세 정보를 보시려면 <a href=\"http://omeka.org/codex/Retrieving_error_messages\">에러 메시지 검색</a> 페이지를 확인하시기 바랍니다."
 
 #: application/views/scripts/index.php:10
 msgid "Featured Item"
-msgstr "Fremhevet ressurs"
+msgstr "특별 전시 아이템"
 
 #: application/views/scripts/index.php:18
 msgid "Featured Collection"
-msgstr "Fremhevet samling"
+msgstr "특별 전시 컬렉션"
 
 #: application/views/scripts/index.php:42
 msgid "View All Items"
-msgstr "Vis alle bilder"
+msgstr "전체 아이템 보기"
 
 #: application/views/scripts/items/show.php:10
 msgid "Files"
-msgstr "Filer"
+msgstr "파일"
 
 #: application/views/scripts/items/show.php:33
 msgid "Citation"
-msgstr "Sitering"
+msgstr "인용"
 
 #: application/views/scripts/search/search-filters.php:3
 msgid "Query:"
-msgstr "Spørring:"
+msgstr "쿼리 : "
 
 #: application/views/scripts/search/search-filters.php:4
 msgid "Query type:"
-msgstr "Spørretype:"
+msgstr "쿼리 유형 : "
 
 #: application/views/scripts/search/search-filters.php:5
 msgid "Record types:"
-msgstr "Objekttyper"
+msgstr "레코드 유형 : "
 
 #: application/views/scripts/search/search-form.php:6
 msgid "Search using this query type:"
-msgstr "Søk med denne type spørring:"
+msgstr "다음의 쿼리 유형만 사용해서 검색 :  "
 
 #: application/views/scripts/search/search-form.php:11
 msgid "Search only these record types:"
-msgstr "Søk kun i disse objekttypene:"
+msgstr "다음의 레코드 유형만 검색 :  "
 
 #: application/views/scripts/search/search-form.php:17
 msgid "Go to search settings to select record types to use."
-msgstr "Gå til søkeinstillingene for å velge hvilke objekttyper som skal brukes."
+msgstr "사용할 레코드 유형을 선택하기 위해 검색 설정으로 이동합니다."
 
 #: application/views/scripts/search/search-form.php:19
 msgid "Advanced Search (Items only)"
-msgstr "Avansert søk (kun ressurser)"
-
-#: application/views/scripts/users/activate.php:8
-#, php-format
-msgid "Hello %s. Your username is %s"
-msgstr ""
+msgstr "고급검색 (아이템만)"
 
 #: application/views/scripts/users/login.php:9
 msgid "Go to Home Page"
-msgstr "Gå til hjemmesiden"
+msgstr "홈페이지로 이동"
 
 #: application/views/scripts/users/login.php:9
 msgid "Lost your password?"
-msgstr "Glemt passordet?"
+msgstr "비밀번호를 분실하셨습니까?"
 
 #: install/controllers/IndexController.php:25
 msgid "Could not load database resource!"
-msgstr "Kunne ikke laste ressursen fra databasen!"
+msgstr "데이터베이스 리소스를 불러올 수 없습니다!"
 
 #: install/views/scripts/index/errors.phtml:1
 msgid "Installation Error"
-msgstr "Installasjonsfeil"
+msgstr "설치 에러"
 
 #: install/views/scripts/index/errors.phtml:2
 msgid ""
 "Before installation can continue, the following errors must be resolved:"
-msgstr "Følgende feil må rettes opp før installasjonen kan fortsette:"
+msgstr "설치를 계속하기전에 다음의 에러가 먼저 해결되어야 합니다 : "
 
 #: install/views/scripts/index/fatal-error.phtml:1
 msgid "Fatal Error"
-msgstr "Fatal feil"
+msgstr "치명적 에러"
 
 #: install/views/scripts/index/index.phtml:2
 msgid "Installation Warning"
-msgstr "Installasjonsadvarsel"
+msgstr "설치 경고"
 
 #: install/views/scripts/index/index.phtml:4
 msgid ""
 "The following issues will not affect installation, but they may negatively "
 "affect the behavior of Omeka:"
-msgstr "Følgende problemer vil ikke ha innvirkning på installasjonen, men de kan ha negativ innvirkning på hvordan Omeka oppfører seg:"
+msgstr "다음은 설치에 영향을 미치지 않는 문제들이지만, Omeka의 프로세스에 부정적 영향을 끼칠 수도 있습니다 : "
 
 #: install/views/scripts/index/index.phtml:14
 msgid "Configure Your Site"
-msgstr "Konfigurer nettstedet"
+msgstr "사이트 구성하기"
 
 #: install/views/scripts/index/index.phtml:16
 msgid "Form Validation Errors"
-msgstr "Feil under validering av skjema"
+msgstr "폼 유효성 에러"
 
 #: install/views/scripts/index/installed.phtml:1
 msgid "Success!"
-msgstr "Suksess!"
+msgstr "성공했습니다!"
 
 #: install/views/scripts/index/installed.phtml:2
 msgid "Omeka is installed."
-msgstr "Omeka er installert."
+msgstr "Omeka가 설치되었습니다."
 
 #: install/views/scripts/index/installed.phtml:3
 msgid "Public Site"
-msgstr "Offentlig side"
+msgstr "공개용 사이트"
 
 #: install/views/scripts/index/installed.phtml:3
 msgid "Admin Dashboard"
-msgstr "Admin frontpanel"
+msgstr "관리자 현황판"
