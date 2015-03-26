@@ -42,7 +42,7 @@ class Omeka_File_Derivative_Strategy_Imagick
         }
 
         $imagick->setBackgroundColor('white');
-        $imagick->mergeImageLayers(Imagick::LAYERMETHOD_FLATTEN);
+        $imagick = $imagick->mergeImageLayers(Imagick::LAYERMETHOD_FLATTEN);
 
         if ($type != 'square_thumbnail') {
             $imagick->thumbnailImage($sizeConstraint, $sizeConstraint, true);
