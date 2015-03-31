@@ -41,6 +41,10 @@ class Omeka_File_Derivative_Strategy_Imagick
             return false;
         }
 
+        $origX = $imagick->getImageWidth();
+        $origY = $imagick->getImageHeight();
+
+        $imagick->setImagePage($origX, $origY, 0, 0);
         $imagick->setBackgroundColor('white');
         $imagick = $imagick->mergeImageLayers(Imagick::LAYERMETHOD_FLATTEN);
 
@@ -49,9 +53,6 @@ class Omeka_File_Derivative_Strategy_Imagick
         } else {
             // We could use cropThumbnailImage here but it lacks support for
             // the gravity setting
-            $origX = $imagick->getImageWidth();
-            $origY = $imagick->getImageHeight();
-
             if ($origX < $origY) {
                 $newX = $sizeConstraint;
                 $newY = $origY * ($sizeConstraint / $origX);
