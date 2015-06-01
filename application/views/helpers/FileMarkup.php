@@ -386,9 +386,12 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
             $html = $fileTitle ? $fileTitle : metadata($file, 'Original Filename');
         }
 
+        $linkAttributes = isset($options['linkAttributes'])
+                        ? $options['linkAttributes']
+                        : array();
+
         if ($options['linkToMetadata']) {
-            $html = link_to_file_show((array)$options['linkAttributes'],
-                  $html, $file);
+            $html = link_to_file_show($linkAttributes, $html, $file);
         } else if (($linkToFile = $options['linkToFile'])) {
             // If you've manually specified a derivative type to link
             // to, and this file actually has derivatives, we'll use
@@ -404,8 +407,6 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
                 'class'=>'download-file', 
                 'href'=>$file->getWebPath($derivative)
                 );
-            $linkAttributes = array_key_exists('linkAttributes', $options)
-                            ? $options['linkAttributes'] : array();
             $linkAttributes = array_merge($defaultLinkAttributes, $linkAttributes);
             $html = '<a ' . tag_attributes($linkAttributes) . '>' . $html . '</a>';
         }
