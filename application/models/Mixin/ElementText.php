@@ -240,7 +240,7 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
             $this->loadElementsAndTexts();
         }
 
-        return $this->_textsByElementId();
+        return $this->_textsByElementId;
     }
     
     /**
