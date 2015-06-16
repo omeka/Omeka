@@ -683,6 +683,7 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
         // Cause texts to be re-loaded if accessed after save.
         $this->_recordsAreLoaded = false;
         $this->_replaceElementTexts = false;
+        $this->_textsToSave = array();
     }
     
     /**
