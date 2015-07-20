@@ -1566,7 +1566,7 @@ msgid "Enable API"
 msgstr "Habilitar a API"
 
 #: admin/themes/default/settings/edit-api.php:15
-msgid "Enable or disable the API by checking or uncheking the box below."
+msgid "Enable or disable the API by checking or unchecking the box below."
 msgstr "Habilitar ou desabilitar a API marcando ou não a caixa abaixo."
 
 #: admin/themes/default/settings/edit-api.php:22

@@ -1566,7 +1566,7 @@ msgid "Enable API"
 msgstr "Luba API"
 
 #: admin/themes/default/settings/edit-api.php:15
-msgid "Enable or disable the API by checking or uncheking the box below."
+msgid "Enable or disable the API by checking or unchecking the box below."
 msgstr "API lubamiseks/keelamiseks tee linnuke allolevasse ruudukesse või vastavalt eemalda see."
 
 #: admin/themes/default/settings/edit-api.php:22
