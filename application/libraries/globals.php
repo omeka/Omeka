@@ -875,12 +875,13 @@ function plugin_is_active($name, $version = null, $compOperator = '>=')
  *
  * @package Omeka\Function\Locale
  * @uses Zend_Translate::translate()
- * @param string $string The string to be translated.
+ * @param string|array $msgid The string to be translated, or Array for plural
+ *  translations.
  * @param mixed $args string formatting args. If any extra args are passed, the
  *  args and the translated string will be formatted with sprintf().
  * @return string The translated string.
  */
-function __($string)
+function __($msgid)
 {
     // Avoid getting the translate object more than once.
     static $translate;
@@ -894,7 +895,11 @@ function __($string)
     }
 
     if ($translate) {
-        $string = $translate->translate($string);
+        $string = $translate->translate($msgid);
+    } elseif (is_array($msgid)) {
+      $string = $msgid[0];
+    } else {
+      $string = $msgid;
     }
 
     $args = func_get_args();
@@ -905,6 +910,25 @@ function __($string)
     }
 
     return $string;
+}
+
+/**
+ * Transform arguments in an array suitable for __.
+ *
+ * <code>
+ *     $n = count($items);
+ *     echo __(plural('one item', '%s items', $n), $n);
+ * </code>
+ *
+ * @package Omeka\Function\Locale
+ * @param string $msgid The string to be translated, singular form
+ * @param string $msgid_plural The string to be translated, plural form
+ * @param int $n Used to determine the plural form
+ * @return array Array to pass to __
+ */
+function plural($msgid, $msgid_plural, $n)
+{
+    return array($msgid, $msgid_plural, $n);
 }
 
 /**
