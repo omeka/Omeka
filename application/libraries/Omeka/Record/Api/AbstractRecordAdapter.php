@@ -186,6 +186,9 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter implements Omeka_Record_Ap
             // unnecessary database queries.
             if (!isset($this->_elementsCache[$elementText->element_id])) {
                 $element = get_db()->getTable('Element')->find($elementText->element_id);
+                if (!$element) {
+                    continue;
+                }
                 $this->_elementsCache[$element->id] = array(
                     'id' => $element->id, 
                     'element_set_id' => $element->element_set_id, 
@@ -195,6 +198,9 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter implements Omeka_Record_Ap
             $element = $this->_elementsCache[$elementText->element_id];
             if (!isset($this->_elementSetsCache[$element['element_set_id']])) {
                 $elementSet = get_db()->getTable('ElementSet')->find($element['element_set_id']);
+                if (!$elementSet) {
+                    continue;
+                }
                 $this->_elementSetsCache[$elementSet->id] = array(
                     'id' => $elementSet->id, 
                     'name' => $elementSet->name, 
