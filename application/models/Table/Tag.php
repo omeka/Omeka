@@ -17,7 +17,7 @@ class Table_Tag extends Omeka_Db_Table
         $sql = "
         SELECT tags.* 
         FROM {$db->Tag} tags
-        WHERE tags.name LIKE ?
+        WHERE tags.name = ?
         LIMIT 1";
         $tag = $this->fetchObject($sql, array($name));
         
