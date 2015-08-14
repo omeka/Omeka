@@ -1,8 +1,16 @@
 <?php
 
-function utf8_htmlspecialchars($value)
-{
-    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+// Use ENT_SUBSTITUTE when we're using a new-enough PHP version
+if (defined('ENT_SUBSTITUTE')) {
+    function utf8_htmlspecialchars($value)
+    {
+        return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+    }
+} else {
+    function utf8_htmlspecialchars($value)
+    {
+        return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+    }
 }
 
 function show_untitled_items($title)
