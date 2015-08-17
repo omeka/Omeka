@@ -33,7 +33,6 @@ class TagsController extends Omeka_Controller_AbstractActionController
     public function browseAction()
     {
         $params = $this->_getAllParams();
-        $perms = array();
         
         //Check to see whether it will be tags for exhibits or for items
         //Default is Item
@@ -51,23 +50,14 @@ class TagsController extends Omeka_Controller_AbstractActionController
         if($record = $this->_getParam('record')) {
             $filter['record'] = $record;
         }
-        
-        //For the count, we only need to check based on permission levels
-        $count_params = array_merge($perms, array('type' => $for));
-        
-        $total_tags = $this->_helper->db->count($count_params);
-           
-        $findByParams = array_merge(array('sort_field' => 'name'), 
-                                    $params, 
-                                    $perms, 
+
+        $findByParams = array_merge(array('sort_field' => 'name', 'include_zero' => true),
+                                    $params,
                                     array('type' => $for));
 
+        $total_tags = $this->_helper->db->count($findByParams);
         $limit = isset($params['limit']) ? $params['limit'] : null;
         $tags = $this->_helper->db->findBy($findByParams, $limit);
-        $total_results = count($tags);
-        
-        Zend_Registry::set('total_tags', $total_tags);
-        Zend_Registry::set('total_results', $total_results);    
         
         $browse_for = $for;
         $sort = array_intersect_key($findByParams, array('sort_field' => '', 'sort_dir' => ''));

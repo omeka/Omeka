@@ -41,11 +41,8 @@ class Table_Tag extends Omeka_Db_Table
     {
         if ($record->exists()) {
             $record_id = $record->id;
-            $select->where('records_tags.record_id = ?', $record_id);
-            
-            if (empty($for)) {
-                $select->where('records_tags.record_type = ?', get_class($record));
-            }
+            $select->where('records_tags.record_id = ?', $record_id)
+                   ->where('records_tags.record_type = ?', get_class($record));
         //A non-persistent record has no tags, so return emptiness
         } else {
             $select->where('tags.id = 0');
@@ -88,15 +85,21 @@ class Table_Tag extends Omeka_Db_Table
     public function filterByTagType($select, $type)
     {
         $db = $this->getDb();
-        
+
+        $recordType = $db->quote($type);
+        //Redo the "from" so we can change the join condition
+        $select->reset(Zend_Db_Select::FROM)
+               ->from(array('tags'=>$db->Tag), array())
+               ->joinLeft( array('records_tags' => $db->RecordsTags),
+                    "records_tags.tag_id = tags.id AND records_tags.record_type = $recordType",
+                    array());
+
         //Showing tags related to items
         if ($type == 'Item') {
             //Join on the items table, add permissions checks for public
-            $select->joinInner( array('items'=>$db->Item), "items.id = records_tags.record_id AND records_tags.record_type = 'Item'", array());
+            $select->joinLeft( array('items'=>$db->Item), "items.id = records_tags.record_id", array());
             $permissions = new Omeka_Db_Select_PublicPermissions('Items');
             $permissions->apply($select, 'items');
-        } else {
-            $select->where("records_tags.record_type = ?", (string) $type);
         }
     }
     
@@ -143,7 +146,10 @@ class Table_Tag extends Omeka_Db_Table
         if (array_key_exists('like', $params)) {
             $this->filterByTagNameLike($select, $params['like']);
         }
-                        
+
+        if (!(array_key_exists('include_zero', $params) && $params['include_zero'])) {
+            $select->having('COUNT(records_tags.id) > 0');
+        }
         $select->group("tags.id");
     }
     
@@ -160,8 +166,8 @@ class Table_Tag extends Omeka_Db_Table
         
         $db = $this->getDb();
         
-        $select->from(array('tags'=>$db->Tag), array('tags.*', 'tagCount'=>'COUNT(tags.id)'))
-                ->joinInner( array('records_tags'=>$db->RecordsTags), 'records_tags.tag_id = tags.id', array())
+        $select->from(array('tags'=>$db->Tag), array('tags.*', 'tagCount'=>'COUNT(records_tags.id)'))
+                ->joinLeft( array('records_tags'=>$db->RecordsTags), 'records_tags.tag_id = tags.id', array())
                 ->group('tags.id');
                 
         return $select;
