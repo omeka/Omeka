@@ -362,7 +362,7 @@ msgstr ""
 #: admin/themes/default/element-sets/edit.php:41
 #: admin/themes/default/files/edit.php:35
 #: admin/themes/default/item-types/edit.php:18
-#: admin/themes/default/items/batch-edit.php:130
+#: admin/themes/default/items/batch-edit.php:131
 #: admin/themes/default/items/edit.php:19
 #: admin/themes/default/plugins/config.php:14
 #: admin/themes/default/settings/edit-api.php:82
@@ -399,7 +399,7 @@ msgstr ""
 #: admin/themes/default/files/show.php:30
 #: admin/themes/default/item-types/edit.php:20
 #: admin/themes/default/item-types/show.php:54
-#: admin/themes/default/items/batch-edit.php:119
+#: admin/themes/default/items/batch-edit.php:120
 #: admin/themes/default/items/browse.php:27
 #: admin/themes/default/items/browse.php:81
 #: admin/themes/default/items/browse.php:123
@@ -439,7 +439,7 @@ msgstr ""
 #: admin/themes/default/collections/edit.php:30
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/items/add.php:19
-#: admin/themes/default/items/batch-edit.php:50
+#: admin/themes/default/items/batch-edit.php:51
 #: admin/themes/default/items/edit.php:28
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:52
@@ -450,7 +450,7 @@ msgstr ""
 #: admin/themes/default/collections/edit.php:35
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/add.php:25
-#: admin/themes/default/items/batch-edit.php:65
+#: admin/themes/default/items/batch-edit.php:66
 #: admin/themes/default/items/edit.php:34
 #: admin/themes/default/items/quick-filters.php:8
 #: admin/themes/default/items/show.php:53
@@ -671,7 +671,6 @@ msgstr ""
 
 #: admin/themes/default/common/header.php:11
 #: admin/themes/default/upgrade/index.php:6
-#: admin/themes/default/upgrade/migrate.php:6
 #: application/views/scripts/common/admin-bar.php:11
 msgid "Omeka Admin"
 msgstr ""
@@ -703,10 +702,9 @@ msgstr ""
 
 #: admin/themes/default/common/settings-nav.php:16
 #: admin/themes/default/search/index.php:2
-#: application/views/helpers/SearchForm.php:34
+#: application/views/helpers/SearchForm.php:56
 #: application/views/scripts/search/index.php:2
 #: application/views/scripts/search/search-form.php:2
-#: application/views/scripts/search/search-form.php:22
 msgid "Search"
 msgstr ""
 
@@ -1051,7 +1049,7 @@ msgid "Add Item"
 msgstr ""
 
 #: admin/themes/default/items/add.php:32
-#: admin/themes/default/items/batch-edit.php:89
+#: admin/themes/default/items/batch-edit.php:90
 #: admin/themes/default/items/browse.php:90
 #: admin/themes/default/items/edit.php:41
 #: admin/themes/default/items/show.php:57
@@ -1074,7 +1072,7 @@ msgid "Checked items will be deleted."
 msgstr ""
 
 #: admin/themes/default/items/batch-delete.php:50
-#: admin/themes/default/items/batch-edit.php:116
+#: admin/themes/default/items/batch-edit.php:117
 msgid "Delete Items"
 msgstr ""
 
@@ -1082,59 +1080,59 @@ msgstr ""
 msgid "Batch Edit Items"
 msgstr ""
 
-#: admin/themes/default/items/batch-edit.php:36
+#: admin/themes/default/items/batch-edit.php:37
 msgid "Changes will be applied to checked items."
 msgstr ""
 
-#: admin/themes/default/items/batch-edit.php:41
+#: admin/themes/default/items/batch-edit.php:42
 msgid "Item Metadata"
 msgstr ""
 
-#: admin/themes/default/items/batch-edit.php:46
+#: admin/themes/default/items/batch-edit.php:47
 msgid "Public?"
 msgstr ""
 
-#: admin/themes/default/items/batch-edit.php:49
-#: admin/themes/default/items/batch-edit.php:64
-#: admin/themes/default/items/batch-edit.php:78
-#: admin/themes/default/items/batch-edit.php:93
+#: admin/themes/default/items/batch-edit.php:50
+#: admin/themes/default/items/batch-edit.php:65
+#: admin/themes/default/items/batch-edit.php:79
+#: admin/themes/default/items/batch-edit.php:94
 msgid "Select Below"
 msgstr ""
 
-#: admin/themes/default/items/batch-edit.php:51
+#: admin/themes/default/items/batch-edit.php:52
 msgid "Not Public"
 msgstr ""
 
-#: admin/themes/default/items/batch-edit.php:61
+#: admin/themes/default/items/batch-edit.php:62
 msgid "Featured?"
 msgstr ""
 
-#: admin/themes/default/items/batch-edit.php:66
+#: admin/themes/default/items/batch-edit.php:67
 msgid "Not Featured"
 msgstr ""
 
-#: admin/themes/default/items/batch-edit.php:74
+#: admin/themes/default/items/batch-edit.php:75
 #: admin/themes/default/items/item-type-form.php:3
 msgid "Item Type"
 msgstr ""
 
-#: admin/themes/default/items/batch-edit.php:83
-#: admin/themes/default/items/batch-edit.php:98
+#: admin/themes/default/items/batch-edit.php:84
+#: admin/themes/default/items/batch-edit.php:99
 msgid "Remove?"
 msgstr ""
 
-#: admin/themes/default/items/batch-edit.php:104
+#: admin/themes/default/items/batch-edit.php:105
 #: admin/themes/default/items/tag-form.php:8
 #: admin/themes/default/items/tag-form.php:11
 msgid "Add Tags"
 msgstr ""
 
-#: admin/themes/default/items/batch-edit.php:107
+#: admin/themes/default/items/batch-edit.php:108
 #, php-format
 msgid "List of tags to add to all checked items, separated by %s."
 msgstr ""
 
-#: admin/themes/default/items/batch-edit.php:117
+#: admin/themes/default/items/batch-edit.php:118
 msgid "Check if you wish to delete selected items."
 msgstr ""
 
@@ -1563,7 +1561,7 @@ msgid "Enable API"
 msgstr ""
 
 #: admin/themes/default/settings/edit-api.php:15
-msgid "Enable or disable the API by checking or uncheking the box below."
+msgid "Enable or disable the API by checking or unchecking the box below."
 msgstr ""
 
 #: admin/themes/default/settings/edit-api.php:22
@@ -1773,27 +1771,27 @@ msgstr ""
 msgid "Upgrade Database"
 msgstr ""
 
-#: admin/themes/default/upgrade/migrate.php:32
+#: admin/themes/default/upgrade/migrate.php:3
+msgid "Omeka has upgraded successfully."
+msgstr ""
+
+#: admin/themes/default/upgrade/migrate.php:5
 msgid "Omeka encountered an error when upgrading your installation."
 msgstr ""
 
-#: admin/themes/default/upgrade/migrate.php:37
+#: admin/themes/default/upgrade/migrate.php:24
+msgid "Return to Dashboard"
+msgstr ""
+
+#: admin/themes/default/upgrade/migrate.php:29
 msgid "Please restore from your database backup and try again."
 msgstr ""
 
-#: admin/themes/default/upgrade/migrate.php:39
+#: admin/themes/default/upgrade/migrate.php:30
 msgid ""
 "If you have any questions please refer to <a href=\"http://omeka.org/codex"
 "\">Omeka documentation</a> or post a message on the <a href=\"http://omeka."
 "org/forums\">Omeka forums</a>."
-msgstr ""
-
-#: admin/themes/default/upgrade/migrate.php:42
-msgid "Omeka has upgraded successfully."
-msgstr ""
-
-#: admin/themes/default/upgrade/migrate.php:43
-msgid "Return to Dashboard"
 msgstr ""
 
 #: admin/themes/default/users/activate.php:2
@@ -2341,7 +2339,7 @@ msgstr ""
 msgid "The theme settings were successfully saved!"
 msgstr ""
 
-#: application/controllers/UpgradeController.php:50
+#: application/controllers/UpgradeController.php:48
 msgid "SQL error in migration: "
 msgstr ""
 
@@ -3121,62 +3119,62 @@ msgstr ""
 msgid "The item type name must be unique."
 msgstr ""
 
-#: application/models/ItemType.php:179
+#: application/models/ItemType.php:183
 msgid "There are too many values in the element ordering array."
 msgstr ""
 
-#: application/models/ItemType.php:181
+#: application/models/ItemType.php:185
 msgid "There are too few values in the element ordering array."
 msgstr ""
 
-#: application/models/ItemType.php:218
+#: application/models/ItemType.php:222
 msgid ""
 "Invalid element data. To add elements, you must either pass an element "
 "objects or an array of element metadata."
 msgstr ""
 
-#: application/models/ItemType.php:282
+#: application/models/ItemType.php:286
 msgid ""
 "Cannot remove elements from an item type that is not persistent in the "
 "database!"
 msgstr ""
 
-#: application/models/ItemType.php:291
+#: application/models/ItemType.php:295
 #, php-format
 msgid "Cannot find element with ID %s!"
 msgstr ""
 
-#: application/models/ItemType.php:332
+#: application/models/ItemType.php:336
 #, php-format
 msgid "Item type does not contain an element with the ID %s!"
 msgstr ""
 
-#: application/models/ItemType.php:353
+#: application/models/ItemType.php:357
 msgid ""
 "Invalid parameter. The hasElement function requires either an element object "
 "or an element id to determine if an item type has an element."
 msgstr ""
 
-#: application/models/Mixin/ElementText.php:292
+#: application/models/Mixin/ElementText.php:293
 #, php-format
 msgid "There is no element \"%1$s\", \"%2$s\"!"
 msgstr ""
 
-#: application/models/Mixin/ElementText.php:311
+#: application/models/Mixin/ElementText.php:312
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
 msgstr ""
 
-#: application/models/Mixin/ElementText.php:430
+#: application/models/Mixin/ElementText.php:431
 msgid "Element texts are not formatted correctly!"
 msgstr ""
 
-#: application/models/Mixin/ElementText.php:578
+#: application/models/Mixin/ElementText.php:579
 #, php-format
 msgid "The \"%s\" field has at least one invalid value!"
 msgstr ""
 
-#: application/models/Mixin/ElementText.php:648
+#: application/models/Mixin/ElementText.php:649
 msgid "Cannot save element text for records that are not yet persistent!"
 msgstr ""
 

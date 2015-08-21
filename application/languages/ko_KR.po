@@ -1567,7 +1567,7 @@ msgid "Enable API"
 msgstr "API 실행"
 
 #: admin/themes/default/settings/edit-api.php:15
-msgid "Enable or disable the API by checking or uncheking the box below."
+msgid "Enable or disable the API by checking or unchecking the box below."
 msgstr "아래의 박스가 체크되었으면 API가 실행되고, 체크되어있지 않으면 API가 실행되지 않습니다."
 
 #: admin/themes/default/settings/edit-api.php:22

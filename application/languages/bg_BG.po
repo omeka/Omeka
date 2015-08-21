@@ -1564,7 +1564,7 @@ msgid "Enable API"
 msgstr "Включване на API"
 
 #: admin/themes/default/settings/edit-api.php:15
-msgid "Enable or disable the API by checking or uncheking the box below."
+msgid "Enable or disable the API by checking or unchecking the box below."
 msgstr "Включване или изключване на API чрез маркиране или размаркиране на квадратчето"
 
 #: admin/themes/default/settings/edit-api.php:22

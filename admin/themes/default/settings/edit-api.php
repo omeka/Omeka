@@ -12,7 +12,7 @@ echo flash();
             </div>
             <div class="inputs five columns omega">
                 <p class="explanation"><?php echo __(
-                    'Enable or disable the API by checking or uncheking the box below.'
+                    'Enable or disable the API by checking or unchecking the box below.'
                 ); ?></p>
                 <?php echo $this->formCheckbox('api_enable', null, array('checked' => (bool) get_option('api_enable'))); ?>
             </div>
