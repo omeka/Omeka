@@ -5,7 +5,7 @@
 # Translators:
 # Dana Léw <lew.dana@gmail.com>, 2011,2013
 # Jan Černý <cernyhonza@gmail.com>, 2011-2014
-# Jiří Vírava <appukonrad@gmail.com>, 2014
+# Jiří Vírava <appukonrad@gmail.com>, 2014-2015
 # MICHAL D. <black23@gmail.com>, 2013-2014
 # Adam Véle <vele@centrum.cz>, 2012
 msgid ""
@@ -13,9 +13,9 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2015-02-24 17:00+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
-"Language-Team: Czech (http://www.transifex.com/projects/p/omeka/language/cs/)\n"
+"PO-Revision-Date: 2015-08-12 07:47+0000\n"
+"Last-Translator: Jiří Vírava <appukonrad@gmail.com>\n"
+"Language-Team: Czech (http://www.transifex.com/omeka/omeka/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -384,7 +384,7 @@ msgstr "Uložit změny"
 #: admin/themes/default/appearance/edit-navigation.php:35
 #: admin/themes/default/appearance/reset-navigation-confirm.php:2
 msgid "Reset Navigation"
-msgstr ""
+msgstr "Obnovit navigaci"
 
 #: admin/themes/default/appearance/edit-navigation.php:43
 #: admin/themes/default/collections/edit.php:23
@@ -427,7 +427,7 @@ msgstr "Jste si jist?"
 msgid ""
 "All customizations will be lost. Order and labels will revert to Omeka "
 "defaults. Custom links will be lost."
-msgstr ""
+msgstr "Veškeré úpravy budou ztraceny. Řazení a štítky se vrátí na výchozí nastavení Omeka. Vlastní odkazy budou ztraceny."
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:11
@@ -601,7 +601,7 @@ msgstr "Nastavení"
 
 #: admin/themes/default/common/content-nav.php:1
 msgid "Main Menu"
-msgstr ""
+msgstr "Hlavní Menu"
 
 #: admin/themes/default/common/content-nav.php:5
 #: admin/themes/default/index.php:2
@@ -663,7 +663,7 @@ msgstr "Systémové informace"
 
 #: admin/themes/default/common/global-nav.php:1
 msgid "Manage Site"
-msgstr ""
+msgstr "Správa stránek"
 
 #: admin/themes/default/common/global-nav.php:5
 #: admin/themes/default/plugins/browse.php:2
@@ -684,7 +684,7 @@ msgstr "Omeka admin"
 #: admin/themes/default/common/header.php:40
 #: application/views/scripts/common/header.php:32
 msgid "Skip to main content"
-msgstr ""
+msgstr "Přejít k hlavnímu obsahu"
 
 #: admin/themes/default/common/header.php:60
 #: application/views/scripts/common/admin-bar.php:7
@@ -1811,7 +1811,7 @@ msgstr "Aktivace uživatele"
 #: application/views/scripts/users/activate.php:8
 #, php-format
 msgid "Hello %s. Your username is %s"
-msgstr ""
+msgstr "Zdravím %s. Vaše uživatelské jméno je %s"
 
 #: admin/themes/default/users/activate.php:17
 #: application/forms/ResetPassword.php:23
@@ -1878,7 +1878,7 @@ msgstr "Zrušit"
 
 #: admin/themes/default/users/api-keys.php:60
 msgid "Update API Keys"
-msgstr ""
+msgstr "Aktualizovat API klíče"
 
 #: admin/themes/default/users/browse.php:2
 msgid "Browse Users"
@@ -1994,7 +1994,7 @@ msgstr "Nastavení navigace nebude uloženo, protože obsahuje neplatné nebo ne
 
 #: application/controllers/AppearanceController.php:97
 msgid "The navigation settings have been reset."
-msgstr ""
+msgstr "Nastavení navigace byla obnovena."
 
 #: application/controllers/CollectionsController.php:76
 #, php-format
@@ -2082,7 +2082,7 @@ msgstr "Tímto smažete soubor a s ním asociovaná metadata."
 
 #: application/controllers/FilesController.php:72
 msgid "The file was successfully deleted."
-msgstr ""
+msgstr "Soubor byl úspěšně smazán."
 
 #: application/controllers/ItemTypesController.php:28
 #, php-format
@@ -2115,7 +2115,7 @@ msgid ""
 "The ImageMagick directory path has not been set. No derivative images will "
 "be created. If you would like Omeka to create derivative images, please set "
 "the path in Settings."
-msgstr ""
+msgstr "Cesta k adresáři ImageMagick nebyla nastavena. Nebudou vytvořeny žádné odvozené obrázky. Pokud byste chtěli v Omeka vytvořit odvozené obrázky, prosím, nastavte  cestu k ImageMagick v Nastavení."
 
 #: application/controllers/ItemsController.php:98
 #, php-format
@@ -2596,14 +2596,14 @@ msgstr "Cesta k ImageMagick"
 
 #: application/forms/Install.php:31
 msgid "must be 30 characters or fewer with no whitespace"
-msgstr ""
+msgstr "musí být 30 nebo méně znaků bez mezery"
 
 #: application/forms/Install.php:39 application/forms/User.php:46
 #: application/models/User.php:189
 #, php-format
 msgid ""
 "Whitespace is not allowed. Only these special characters may be used: %s"
-msgstr ""
+msgstr "Mezery nejsou povoleny. Mohou být použity pouze tyto speciální znaky: %s"
 
 #: application/forms/Install.php:48 application/forms/Login.php:34
 msgid "Password"

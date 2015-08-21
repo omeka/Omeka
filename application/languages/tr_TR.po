@@ -9,9 +9,9 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2015-02-25 21:35+0000\n"
+"PO-Revision-Date: 2015-07-20 04:09+0000\n"
 "Last-Translator: mustafaulu@msn.com <Mustafaulu@msn.com>\n"
-"Language-Team: Turkish (Turkey) (http://www.transifex.com/projects/p/omeka/language/tr_TR/)\n"
+"Language-Team: Turkish (Turkey) (http://www.transifex.com/omeka/omeka/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -128,7 +128,7 @@ msgstr "Kaynak"
 
 #. Dublin Core: Source element description
 msgid "A related resource from which the described resource is derived"
-msgstr ""
+msgstr "Tanımlanmış kaynakla bağlantılı bir kaynak türetildi."
 
 #. Dublin Core: Language element name
 msgid "Language"
@@ -334,7 +334,7 @@ msgstr "Görünüm"
 msgid ""
 "Check the links to display them in the main navigation. Click and drag the "
 "links into the preferred display order."
-msgstr ""
+msgstr "Ana navigasyonda gösterilecek linkleri kontrol et. Tercih edilen görünüm düzenindeki dosyalara tıkla ve sürükle."
 
 #: admin/themes/default/appearance/edit-navigation.php:19
 msgid "Add a Link to the Navigation"
@@ -747,7 +747,7 @@ msgstr "Öğe Setini Düzenle"
 msgid ""
 "Click and drag the elements into the preferred display order. Click the "
 "right arrows to add customized comments to element descriptions."
-msgstr ""
+msgstr "Tercih edilen görünüm düzenindeki dosyalara tıkla ve sürükle. Düzenlenmiş yorumları öğe açıklamalarına eklemek için sağ oka tıkla."
 
 #: admin/themes/default/element-sets/edit.php:29
 msgid "Comment"
@@ -780,7 +780,7 @@ msgid ""
 "You&#8217;ve tried to access a page that does not seem to exist. Sometimes "
 "this happens. Below is a quick break-down of the items, collections, and "
 "exhibits on this site."
-msgstr ""
+msgstr "Mevcut olmayan bir sayfa&#8217;ya ulaşmaya çalıştınız. Bu bazen olabilmektedir. Sitedeki maddeler, koleksiyonlar ve teşhir ürünlerinin hızlı bir analizi aşağıdadır."
 
 #: admin/themes/default/error/404.php:10
 #, php-format
@@ -812,7 +812,7 @@ msgstr "405: Yönteme İzin Verilmedi."
 msgid ""
 "You must use a different method to access this URL. If you reached this page"
 " by following a link or clicking a button in Omeka, please contact the %s."
-msgstr ""
+msgstr "Bu URL'ye ulaşmak için başka bir yol kullanmalısınız. Eğer bu sayfaya bir linki takip ederek ya da Omeka'daki bir butona tıklayarak ulaşmışsanız, lütfen %s ile iletişime geçiniz."
 
 #: admin/themes/default/files/edit.php:8
 #, php-format
@@ -1986,7 +1986,7 @@ msgstr "Navigasyon ayarları güncelleştirildi."
 msgid ""
 "The navigation settings were not saved because of missing or invalid values."
 "  All changed values have been restored."
-msgstr ""
+msgstr "Kayıp ya da geçersiz değerler sebebiyle navigasyon ayarları kaydedilmedi. Değiştirilen bütün ayarlar eski haline döndürülecektir."
 
 #: application/controllers/AppearanceController.php:97
 msgid "The navigation settings have been reset."
@@ -2028,7 +2028,7 @@ msgid ""
 "This will delete the collection \"%s\" and its associated metadata. This "
 "will not delete any items in this collection, but will delete the reference "
 "to this collection in each item."
-msgstr ""
+msgstr "Bu işlem, #%s koleksiyonunu ve onunla ilişkili olan bütün metadataları silecektir. Bu işlem ile koleksiyondaki hiçbir madde silinmeyecektir ancak her bir maddedeki bu koleksiyona olan referansları silecektir."
 
 #: application/controllers/CollectionsController.php:110
 #, php-format
@@ -2036,13 +2036,13 @@ msgid ""
 "This will delete the collection #%s and its associated metadata. This will "
 "not delete any items in this collection, but will delete the reference to "
 "this collection in each item."
-msgstr ""
+msgstr "Bu işlem, #%s koleksiyonunu ve onunla ilişkili olan bütün metadataları silecektir. Bu işlem ile koleksiyondaki hiçbir madde silinmeyecektir ancak her bir maddedeki bu koleksiyona olan referansları silecektir."
 
 #: application/controllers/ElementSetsController.php:21
 msgid ""
 "This will delete the element set and all elements assigned to the element "
 "set. Items will lose all metadata that is specific to this element set."
-msgstr ""
+msgstr "Bu işlem, öğe setini ve onunla ilişkili olan bütün öğeleri silecektir. Maddeler, öğe seti ile ilişkilendirilen bütün metadataları kaybedecektir. "
 
 #: application/controllers/ElementSetsController.php:53
 #: application/controllers/PluginsController.php:51
@@ -2096,7 +2096,7 @@ msgid ""
 "This will delete the \"%s\" item type but will not delete the elements "
 "assigned to the item type. Items that are assigned to this item type will "
 "lose all metadata that is specific to the item type."
-msgstr ""
+msgstr "Bu işlem, \"%s\" isimli madde türünü silecektir ancak  ve bu türle ilişkili olan öğeler silinmeyecektir. Bu madde türü ile ilişkili olan maddeler, madde türü ile ilişkilendirilen bütün metadataları kaybedecektir."
 
 #: application/controllers/ItemTypesController.php:158
 #, php-format

@@ -5,14 +5,15 @@
 # Translators:
 # Kaisa Kulasalu <a71465@ut.ee>, 2013
 # Mari Sarv <mari@haldjas.folklore.ee>, 2013-2014
+# Rivo Zängov <eraser@eraser.ee>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2015-02-24 17:00+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
-"Language-Team: Estonian (http://www.transifex.com/projects/p/omeka/language/et/)\n"
+"PO-Revision-Date: 2015-08-14 09:05+0000\n"
+"Last-Translator: Rivo Zängov <eraser@eraser.ee>\n"
+"Language-Team: Estonian (http://www.transifex.com/omeka/omeka/language/et/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -381,7 +382,7 @@ msgstr "Salvesta muutused"
 #: admin/themes/default/appearance/edit-navigation.php:35
 #: admin/themes/default/appearance/reset-navigation-confirm.php:2
 msgid "Reset Navigation"
-msgstr ""
+msgstr "Nulli peamenüü"
 
 #: admin/themes/default/appearance/edit-navigation.php:43
 #: admin/themes/default/collections/edit.php:23
@@ -424,7 +425,7 @@ msgstr "Kas oled kindel?"
 msgid ""
 "All customizations will be lost. Order and labels will revert to Omeka "
 "defaults. Custom links will be lost."
-msgstr ""
+msgstr "Kõik kohandamised lähevad kaduma. Järjekord ja sildid muudetakse Omeka vaikeväärtusteks. Kohandatud lingid lähevad kaduma."
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:11
@@ -598,7 +599,7 @@ msgstr "Sätted"
 
 #: admin/themes/default/common/content-nav.php:1
 msgid "Main Menu"
-msgstr ""
+msgstr "Peamenüü"
 
 #: admin/themes/default/common/content-nav.php:5
 #: admin/themes/default/index.php:2
@@ -660,7 +661,7 @@ msgstr "Süsteemi info"
 
 #: admin/themes/default/common/global-nav.php:1
 msgid "Manage Site"
-msgstr ""
+msgstr "Halda saiti"
 
 #: admin/themes/default/common/global-nav.php:5
 #: admin/themes/default/plugins/browse.php:2
@@ -681,7 +682,7 @@ msgstr "Omeka haldaja"
 #: admin/themes/default/common/header.php:40
 #: application/views/scripts/common/header.php:32
 msgid "Skip to main content"
-msgstr ""
+msgstr "Mine peamise sisu juurde"
 
 #: admin/themes/default/common/header.php:60
 #: application/views/scripts/common/admin-bar.php:7
@@ -1875,7 +1876,7 @@ msgstr "Tühista"
 
 #: admin/themes/default/users/api-keys.php:60
 msgid "Update API Keys"
-msgstr ""
+msgstr "Uuenda API võtmeid"
 
 #: admin/themes/default/users/browse.php:2
 msgid "Browse Users"
@@ -1991,7 +1992,7 @@ msgstr "Lingiriba sätteid ei salvestatud puuduvate või ebakorrektsete väärtu
 
 #: application/controllers/AppearanceController.php:97
 msgid "The navigation settings have been reset."
-msgstr ""
+msgstr "Peamenüü seaded on nullitud."
 
 #: application/controllers/CollectionsController.php:76
 #, php-format
@@ -2079,7 +2080,7 @@ msgstr "See kustutab faili ning sellega seotud metaandmestiku."
 
 #: application/controllers/FilesController.php:72
 msgid "The file was successfully deleted."
-msgstr ""
+msgstr "Fail on kustutatud."
 
 #: application/controllers/ItemTypesController.php:28
 #, php-format
