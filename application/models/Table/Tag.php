@@ -172,6 +172,22 @@ class Table_Tag extends Omeka_Db_Table
                 
         return $select;
     }
+
+    /**
+     * @internal Avoid the unnecessary expense of joining if we're just counting
+     * all the tags.
+     */
+    public function getSelectForCount($params = array())
+    {
+        if (!$params) {
+            $select = new Omeka_Db_Select;
+            $db = $this->getDb();
+            $select->from(array('tags' => $db->Tag), array('COUNT(*)'));
+        } else {
+            $select = parent::getSelectForCount($params);
+        }
+        return $select;
+    }
     
     public function findTagNamesLike($partialName, $limit = 10)
     {

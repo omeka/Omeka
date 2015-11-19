@@ -5,5 +5,6 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%records_tags` (
   `tag_id` int unsigned NOT NULL,
   `time` timestamp NOT NULL default CURRENT_TIMESTAMP,
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `tag` (`record_type`, `record_id`,`tag_id`)
+  UNIQUE KEY `tag` (`record_type`, `record_id`,`tag_id`),
+  KEY `tag_id` (`tag_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
