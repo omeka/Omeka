@@ -5,12 +5,16 @@ php:
   - 5.4
   - 5.5
   - 5.6
+  - 7.0
 
-env:
-  - DB=mysql
+matrix:
+  allow_failures:
+    - php: 7.0
+
+sudo: false
 
 before_script:
-  - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS omeka_test;" -uroot; fi
+  - mysql -e "create database IF NOT EXISTS omeka_test;" -uroot
   - mv application/config/config.ini.changeme application/config/config.ini
   - mv application/tests/config.ini.changeme application/tests/config.ini
   - sed -i 's/db.host = ""/db.host = "localhost"/' application/tests/config.ini
