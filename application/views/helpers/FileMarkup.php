@@ -92,6 +92,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         'oga' => 'audio',
         'ogg' => 'audio',
         'spx' => 'audio',
+        'opus' => 'audio',
         // audio/x-wav
         'wav' => 'audio',
         // video/mp4
