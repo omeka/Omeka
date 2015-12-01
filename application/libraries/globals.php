@@ -1449,9 +1449,14 @@ function tag_attributes($attributes)
 
     $attr = array();
     foreach ($toProcess as $key => $attribute) {
-        // Only include the attribute if its value is a string.
+        // Reject weird attribute names (a little more restrictively than necessary)
+        if (preg_match('/[^A-Za-z0-9_:.-]/', $key)) {
+            continue;
+        }
         if (is_string($attribute)) {
             $attr[$key] = $key . '="' . html_escape( $attribute ) . '"';
+        }  else if ($attribute === true) {
+            $attr[$key] = $key;
         }
     }
     return join(' ',$attr);

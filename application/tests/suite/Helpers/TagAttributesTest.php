@@ -54,8 +54,8 @@ class TagAttributesTest extends PHPUnit_Framework_TestCase
      */
     public function testAttributesWithMixedValues()
     {
-        $attributesWithMixedValues = array('id' => null, 'class' => 'element class', 'title' => '');
-        $html = 'class="element class" title=""';
+        $attributesWithMixedValues = array('id' => null, 'class' => 'element class', 'title' => '', 'boolean' => true, 'boolean-no' => false);
+        $html = 'class="element class" title="" boolean';
         $this->assertEquals($html, tag_attributes($attributesWithMixedValues));
     }
     
