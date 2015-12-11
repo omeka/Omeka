@@ -2,7 +2,8 @@
 /////////////////////////////////////////////////////////////////////////////////
 /// getID3() by James Heinrich <info@getid3.org>                               //
 //  available at http://getid3.sourceforge.net                                 //
-//            or http://www.getid3.org                                        ///
+//            or http://www.getid3.org                                         //
+//          also https://github.com/JamesHeinrich/getID3                       //
 /////////////////////////////////////////////////////////////////////////////////
 ///                                                                            //
 // extension.cache.sqlite3.php - part of getID3()                              //
@@ -48,20 +49,20 @@
 *
 *   sqlite3             table='getid3_cache', hide=false        (PHP5)
 *
-
-***  database file will be stored in the same directory as this script,
-***  webserver must have write access to that directory!
-***  set $hide to TRUE to prefix db file with .ht to pervent access from web client
-***  this is a default setting in the Apache configuration:
-
-# The following lines prevent .htaccess and .htpasswd files from being viewed by Web clients.
-
-<Files ~ "^\.ht">
-    Order allow,deny
-    Deny from all
-    Satisfy all
-</Files>
-
+*
+* ***  database file will be stored in the same directory as this script,
+* ***  webserver must have write access to that directory!
+* ***  set $hide to TRUE to prefix db file with .ht to pervent access from web client
+* ***  this is a default setting in the Apache configuration:
+*
+* The following lines prevent .htaccess and .htpasswd files from being viewed by Web clients.
+*
+* <Files ~ "^\.ht">
+*     Order allow,deny
+*     Deny from all
+*     Satisfy all
+* </Files>
+*
 ********************************************************************************
 *
 *   -------------------------------------------------------------------
@@ -158,7 +159,7 @@ class getID3_cached_sqlite3 extends getID3 {
 	* @param type $filename
 	* @return boolean
 	*/
-	public function analyze($filename) {
+	public function analyze($filename, $filesize=null, $original_filename='') {
 		if (!file_exists($filename)) {
 			return false;
 		}
@@ -181,7 +182,7 @@ class getID3_cached_sqlite3 extends getID3 {
 			return unserialize(base64_decode($result));
 		}
 		// if it hasn't been analyzed before, then do it now
-		$analysis = parent::analyze($filename);
+		$analysis = parent::analyze($filename, $filesize=null, $original_filename='');
 		// Save result
 		$sql = $this->cache_file;
 		$stmt = $db->prepare($sql);
@@ -252,7 +253,8 @@ class getID3_cached_sqlite3 extends getID3 {
 				return "INSERT INTO $this->table (filename, dirname, filesize, filetime, analyzetime, val) VALUES (:filename, :dirname, :filesize, :filetime, :atime, :val)";
 				break;
 			case 'make_table':
-				return "CREATE TABLE IF NOT EXISTS $this->table (filename VARCHAR(255) NOT NULL DEFAULT '', dirname VARCHAR(255) NOT NULL DEFAULT '', filesize INT(11) NOT NULL DEFAULT '0', filetime INT(11) NOT NULL DEFAULT '0', analyzetime INT(11) NOT NULL DEFAULT '0', val text not null, PRIMARY KEY (filename, filesize, filetime))";
+				//return "CREATE TABLE IF NOT EXISTS $this->table (filename VARCHAR(255) NOT NULL DEFAULT '', dirname VARCHAR(255) NOT NULL DEFAULT '', filesize INT(11) NOT NULL DEFAULT '0', filetime INT(11) NOT NULL DEFAULT '0', analyzetime INT(11) NOT NULL DEFAULT '0', val text not null, PRIMARY KEY (filename, filesize, filetime))";
+				return "CREATE TABLE IF NOT EXISTS $this->table (filename VARCHAR(255) DEFAULT '', dirname VARCHAR(255) DEFAULT '', filesize INT(11) DEFAULT '0', filetime INT(11) DEFAULT '0', analyzetime INT(11) DEFAULT '0', val text, PRIMARY KEY (filename, filesize, filetime))";
 				break;
 			case 'get_cached_dir':
 				return "SELECT val FROM $this->table WHERE dirname = :dirname";
