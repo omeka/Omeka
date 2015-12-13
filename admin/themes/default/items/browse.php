@@ -30,7 +30,7 @@ echo item_search_filters();
 
         <?php echo common('quick-filters', array(), 'items'); ?>
 
-        <table id="items" cellspacing="0" cellpadding="0">
+        <table id="items">
         <thead>
             <tr>
                 <?php if (is_allowed('Items', 'edit')): ?>

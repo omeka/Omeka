@@ -14,7 +14,7 @@ echo flash();
     </div>
     <?php echo pagination_links(); ?>
     <?php if (has_loop_records('collections')): ?>
-        <table id="collections" cellspacing="0" cellpadding="0">
+        <table id="collections">
             <thead>
                 <tr>
                 <?php
