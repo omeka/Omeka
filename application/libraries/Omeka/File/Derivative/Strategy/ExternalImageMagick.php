@@ -45,7 +45,10 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick
             $convertArgs,
             escapeshellarg($destPath)
         ));
-        
+
+        $status = null;
+        $output = null;
+        $errors = null;
         self::executeCommand($cmd, $status, $output, $errors);
 
         if (!empty($errors)) {
@@ -161,7 +164,10 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick
         // Attempt to run the ImageMagick binary with the version argument
         // If you try to run it without any arguments, it returns an error code
         $cmd = $convertPath . ' -version';
-        
+
+        $status = null;
+        $output = null;
+        $errors = null;
         self::executeCommand($cmd, $status, $output, $errors);
         
         // A return value of 0 indicates the convert binary is working correctly.
@@ -182,6 +188,9 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick
     {
         // Use the "which" command to auto-detect the path to ImageMagick
         $cmd = 'which ' . self::IMAGEMAGICK_CONVERT_COMMAND;
+        $status = null;
+        $output = null;
+        $errors = null;
         try {
             self::executeCommand($cmd, $status, $output, $errors);
             return $status == 0 ? dirname($output) : '';
