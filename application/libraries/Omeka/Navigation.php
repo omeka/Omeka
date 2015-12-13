@@ -222,8 +222,8 @@ class Omeka_Navigation extends Zend_Navigation
         if (!($oldPage = $this->getPageByUid($page->uid))) {    
             if ($parentContainer !== $this && !$this->hasPage($parentContainer, true)) {
                 // we assume parentContainer is either the navigation object
-                // or a descendant page of the navigation object 
-                throw RuntimeException(__('The parent container must either be the navigation object' .
+                // or a descendant page of the navigation object
+                throw new RuntimeException(__('The parent container must either be the navigation object' .
                                        ' or a descendant subpage of the navigation object.'));
             }
             // add the page to the end of the parent container
