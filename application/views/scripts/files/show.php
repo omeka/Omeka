@@ -47,7 +47,5 @@
             <div class="element-text"><?php echo metadata('file', 'Type OS'); ?></div>
         </div>
     </div><!-- end type-metadata -->
-</div>
-
 </aside>
 <?php echo foot();?>
