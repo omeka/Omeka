@@ -897,9 +897,9 @@ function __($msgid)
     if ($translate) {
         $string = $translate->translate($msgid);
     } elseif (is_array($msgid)) {
-      $string = $msgid[0];
+        $string = ($msgid[2] === 1) ? $msgid[0] : $msgid[1];
     } else {
-      $string = $msgid;
+        $string = $msgid;
     }
 
     $args = func_get_args();
