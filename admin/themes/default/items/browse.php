@@ -144,14 +144,18 @@ echo item_search_filters();
     </script>
 
 <?php else: ?>
-    <?php if (total_records('Item') === 0): ?>
+    <?php $total_items = total_records('Item'); ?>
+    <?php if ($total_items === 0): ?>
         <h2><?php echo __('You have no items.'); ?></h2>
         <?php if(is_allowed('Items', 'add')): ?>
             <p><?php echo __('Get started by adding your first item.'); ?></p>
             <a href="<?php echo html_escape(url('items/add')); ?>" class="add big green button"><?php echo __('Add an Item'); ?></a>
         <?php endif; ?>
     <?php else: ?>
-        <p><?php echo __('The query searched %s items and returned no results.', total_records('Item')); ?> <?php echo __('Would you like to %s?', link_to_item_search(__('refine your search'))); ?></p>
+        <p>
+            <?php echo __(plural('The query searched 1 item and returned no results.', 'The query searched %s items and returned no results.', $total_items), $total_items); ?>
+            <?php echo __('Would you like to %s?', link_to_item_search(__('refine your search'))); ?>
+        </p>
     <?php endif; ?>
 <?php endif; ?>
 

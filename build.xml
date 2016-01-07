@@ -75,6 +75,7 @@
             <arg value="--language=php"/>
             <arg value="--from-code=utf-8"/>
             <arg value="--keyword=__"/>
+            <arg value="--keyword=plural:1,2"/>
             <arg value="--flag=__:1:pass-php-format"/>
             <arg value="--add-comments=/"/>
             <arg value="--omit-header"/>
