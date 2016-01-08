@@ -131,11 +131,22 @@ if (!Omeka) {
         }
     };
 
+    Omeka.mediaFallback = function () {
+        $('.omeka-media').on('error', function () {
+            if (this.networkState === HTMLMediaElement.NETWORK_NO_SOURCE ||
+                this.networkState === HTMLMediaElement.NETWORK_EMPTY
+            ) {
+                $(this).replaceWith(this.innerHTML);
+            }
+        });
+    };
+
     Omeka.readyCallbacks = [
         [Omeka.deleteConfirm, null],
         [Omeka.saveScroll, null],
         [Omeka.stickyNav, null],
         [Omeka.showAdvancedForm, null],
-        [Omeka.skipNav, null]
+        [Omeka.skipNav, null],
+        [Omeka.mediaFallback, null]
     ];
 })(jQuery);

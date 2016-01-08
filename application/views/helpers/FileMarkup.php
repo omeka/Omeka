@@ -51,10 +51,10 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         'audio/x-mp4'       => 'audio',
         'audio/wav'         => 'audio',
         'audio/x-wav'       => 'audio',
-        'video/mp4'         => 'mov',
-        'video/mpeg'        => 'mov',
-        'video/ogg'         => 'mov',
-        'video/quicktime'   => 'mov',
+        'video/mp4'         => 'video',
+        'video/ogg'         => 'video',
+        'video/webm'        => 'video',
+        'video/quicktime'   => 'video',
         'audio/wma'         => 'wma',
         'audio/x-ms-wma'    => 'wma',
         'video/avi'         => 'wmv',
@@ -96,20 +96,15 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         // audio/x-wav
         'wav' => 'audio',
         // video/mp4
-        'mp4' => 'mov', 
-        'mp4v' => 'mov',  
-        'mpg4'  => 'mov', 
-        // video/mpeg
-        'mpeg' => 'mov', 
-        'mpg' => 'mov', 
-        'mpe' => 'mov', 
-        'm1v' => 'mov', 
-        'm2v'  => 'mov', 
+        'mp4' => 'video',
+        'mp4v' => 'video',
+        'mpg4'  => 'video',
         // video/ogg
-        'ogv' => 'mov', 
+        'ogv' => 'video',
+        // video/webm
+        'webm' => 'video',
         // video/quicktime
-        'qt' => 'mov', 
-        'mov' => 'mov', 
+        'mov' => 'video',
         // audio/x-ms-wma
         'wma' => 'wma', 
         // video/x-msvideo
@@ -151,7 +146,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
             'ShowDisplay'=> 0,
             'ShowStatusBar' => 0
             ),
-        'mov'=>array(
+        'video'=>array(
             'width' => '320',
             'height' => '240',
             'autoplay' => false,
@@ -423,18 +418,9 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
      *  width, height, autoplay, controller, loop
      * @return string
      */ 
-    public function mov($file, array $options=array())
+    public function video($file, array $options=array())
     {
-        $path = html_escape($file->getWebPath('original'));
-        $html = '<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab" width="'.$options['width'].'" height="'.$options['height'].'">'
-              . '<param name="src" value="'.$path.'" />'
-              . '<param name="controller" value="'.($options['controller'] ? 'true' : 'false').'" />'
-              . '<param name="autoplay" value="'.($options['autoplay'] ? 'true' : 'false').'" />'
-              . '<param name="loop" value="'.($options['loop'] ? 'true' : 'false').'" />'
-              . '<param name="scale" value="' . $options['scale'] . '" />'
-              . '<embed src="'.$path.'" scale="' . $options['scale'] . '" width="'.$options['width'].'" height="'.$options['height'].'" controller="'.($options['controller'] ? 'true' : 'false').'" autoplay="'.($options['autoplay'] ? 'true' : 'false').'" pluginspage="http://www.apple.com/quicktime/download/" type="video/quicktime"></embed>'
-              . '</object>';
-        return $html;
+        return $this->_media('video', $file, $options);
     }
     
     /**
@@ -447,18 +433,27 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
      */
     public function audio($file, array $options)
     {
+        return $this->_media('audio', $file, $options);
+    }
+
+    protected function _media($type, $file, array $options)
+    {
+        if ($type !== 'audio' && $type !== 'video') {
+            $type = 'video';
+        }
         $url = $file->getWebPath('original');
         $escapedUrl = html_escape($url);
         $attrs = array(
             'src' => $url,
+            'class' => 'omeka-media',
             'width' => $options['width'],
             'height' => $options['height'],
             'controls' => (bool) $options['controller'],
             'autoplay' => (bool) $options['autoplay'],
             'loop'     => (bool) $options['loop'],
         );
-        $html = '<audio ' . tag_attributes($attrs) . '>'
-            . '<a href="' . $escapedUrl . '">' . $escapedUrl . '</a>'
+        $html = '<' . $type . ' ' . tag_attributes($attrs) . '>'
+            . '<a href="' . $escapedUrl . '">' . metadata($file, 'display_title') . '</a>'
             . '</audio>';
         return $html;
     }
