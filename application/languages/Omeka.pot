@@ -731,8 +731,7 @@ msgid "API Keys"
 msgstr ""
 
 #: admin/themes/default/element-sets/browse.php:16
-#: admin/themes/default/users/browse.php:17
-#: application/forms/ItemTypes.php:141
+#: admin/themes/default/users/browse.php:17 application/forms/ItemTypes.php:141
 msgid "Name"
 msgstr ""
 
@@ -822,8 +821,7 @@ msgstr ""
 msgid "File #%s"
 msgstr ""
 
-#: admin/themes/default/files/show.php:35
-#: application/libraries/globals.php:409
+#: admin/themes/default/files/show.php:35 application/libraries/globals.php:409
 msgid "Item"
 msgstr ""
 
@@ -1062,8 +1060,7 @@ msgstr ""
 #: admin/themes/default/items/batch-edit.php:90
 #: admin/themes/default/items/browse.php:90
 #: admin/themes/default/items/edit.php:41
-#: admin/themes/default/items/show.php:57
-#: application/libraries/globals.php:411
+#: admin/themes/default/items/show.php:57 application/libraries/globals.php:411
 #: application/views/scripts/items/show.php:18
 msgid "Collection"
 msgstr ""
@@ -1190,8 +1187,8 @@ msgstr ""
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2391
-#: application/libraries/globals.php:2781
+#: application/libraries/globals.php:2396
+#: application/libraries/globals.php:2786
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr ""
@@ -1241,7 +1238,7 @@ msgid "Would you like to %s?"
 msgstr ""
 
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/views/scripts/functions.php:14
+#: application/views/scripts/functions.php:22
 msgid "[Untitled]"
 msgstr ""
 
@@ -1795,11 +1792,11 @@ msgstr ""
 msgid "Return to Dashboard"
 msgstr ""
 
-#: admin/themes/default/upgrade/migrate.php:29
+#: admin/themes/default/upgrade/migrate.php:30
 msgid "Please restore from your database backup and try again."
 msgstr ""
 
-#: admin/themes/default/upgrade/migrate.php:30
+#: admin/themes/default/upgrade/migrate.php:31
 msgid ""
 "If you have any questions please refer to <a href=\"http://omeka.org/codex"
 "\">Omeka documentation</a> or post a message on the <a href=\"http://omeka."
@@ -2326,7 +2323,7 @@ msgstr ""
 msgid "The ImageMagick directory path does not work."
 msgstr ""
 
-#: application/controllers/TagsController.php:48
+#: application/controllers/TagsController.php:47
 msgid "Invalid tagType given."
 msgstr ""
 
@@ -2351,8 +2348,15 @@ msgstr ""
 msgid "The theme settings were successfully saved!"
 msgstr ""
 
-#: application/controllers/UpgradeController.php:48
+#: application/controllers/UpgradeController.php:56
 msgid "SQL error in migration: "
+msgstr ""
+
+#: application/controllers/UpgradeController.php:69
+#, php-format
+msgid ""
+"Omeka requires PHP version %1$s or higher, but this server is running PHP "
+"version %2$s. Please update the installed version of PHP and try again."
 msgstr ""
 
 #: application/controllers/UsersController.php:70
@@ -2889,17 +2893,17 @@ msgstr ""
 msgid "Active?"
 msgstr ""
 
-#: application/libraries/Omeka/Job/Process/Dispatcher.php:115
+#: application/libraries/Omeka/Job/Process/Dispatcher.php:114
 #, php-format
 msgid "The configured PHP path (%s) is invalid."
 msgstr ""
 
-#: application/libraries/Omeka/Job/Process/Dispatcher.php:125
+#: application/libraries/Omeka/Job/Process/Dispatcher.php:124
 #, php-format
 msgid "The configured PHP path (%s) does not point to a PHP-CLI binary."
 msgstr ""
 
-#: application/libraries/Omeka/Job/Process/Dispatcher.php:127
+#: application/libraries/Omeka/Job/Process/Dispatcher.php:126
 #, php-format
 msgid ""
 "The configured PHP path (%s) points to a PHP-CLI binary with an invalid "
@@ -2970,55 +2974,55 @@ msgstr ""
 msgid "No featured collections are available."
 msgstr ""
 
-#: application/libraries/globals.php:1588
+#: application/libraries/globals.php:1593
 msgid "Select Below "
 msgstr ""
 
-#: application/libraries/globals.php:1631
+#: application/libraries/globals.php:1636
 msgid "Omeka RSS Feed"
 msgstr ""
 
-#: application/libraries/globals.php:1632
+#: application/libraries/globals.php:1637
 msgid "Omeka Atom Feed"
 msgstr ""
 
-#: application/libraries/globals.php:2288
+#: application/libraries/globals.php:2293
 msgid "No recent items available."
 msgstr ""
 
-#: application/libraries/globals.php:2314
+#: application/libraries/globals.php:2319
 msgid "No featured items are available."
 msgstr ""
 
-#: application/libraries/globals.php:2373
+#: application/libraries/globals.php:2378
 msgid "View"
 msgstr ""
 
-#: application/libraries/globals.php:2435
+#: application/libraries/globals.php:2440
 msgid "No Collection"
 msgstr ""
 
-#: application/libraries/globals.php:2553
+#: application/libraries/globals.php:2558
 msgid "RSS"
 msgstr ""
 
-#: application/libraries/globals.php:2570
+#: application/libraries/globals.php:2575
 msgid "Next Item &rarr;"
 msgstr ""
 
-#: application/libraries/globals.php:2590
+#: application/libraries/globals.php:2595
 msgid "&larr; Previous Item"
 msgstr ""
 
-#: application/libraries/globals.php:2771
+#: application/libraries/globals.php:2776
 msgid "Browse All"
 msgstr ""
 
-#: application/libraries/globals.php:2776
+#: application/libraries/globals.php:2781
 msgid "Browse by Tag"
 msgstr ""
 
-#: application/libraries/globals.php:3045
+#: application/libraries/globals.php:3050
 msgid "No tags are available."
 msgstr ""
 
