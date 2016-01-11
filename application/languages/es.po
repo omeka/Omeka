@@ -4,23 +4,25 @@
 # 
 # Translators:
 # Dani Garcia <danimontesgarcia@gmail.com>, 2012
+# Dani Garcia <danimontesgarcia@gmail.com>, 2012
 # dario hereñu <magallania@gmail.com>, 2015
 # Francisco Gálvez Prada <iguannaweb@gmail.com>, 2013
 # Fran Pérez <fperezrodri@gmail.com>, 2012-2013
 # Francisco Gálvez Prada <iguannaweb@gmail.com>, 2013
-# John Flatness <john@zerocrates.org>, 2012
+# John Flatness <john@zerocrates.org>, 2011-2012
 # John Flatness <john@zerocrates.org>, 2011
 # Pablo Laguna <pablolaguna@vera.com.uy>, 2014
 # Pablo Laguna <pablolaguna@vera.com.uy>, 2014
-# Roberto Sanchez <rsanc77@yahoo.com>, 2011, 2012
+# Roberto Sanchez <rsanc77@yahoo.com>, 2011-2012
 # Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>, 2013
+# Sergi Montes <sergi.blanes@gmail.com>, 2013
 # Sergi Montes <sergi.blanes@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2015-02-26 17:57+0000\n"
+"PO-Revision-Date: 2015-08-21 17:18+0000\n"
 "Last-Translator: dario hereñu <magallania@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/omeka/omeka/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -34,7 +36,7 @@ msgid ""
 "The Dublin Core metadata element set is common to all Omeka records, "
 "including items, files, and collections. For more information see, "
 "http://dublincore.org/documents/dces/."
-msgstr "El conjunto de metadatos Dublin Core es común a todos los registros Omeka, incluyendo items, archivos y colecciones. Para más información ver, http://dublincore.org/documents/dces/."
+msgstr "El conjunto de metadatos Dublin Core es común a todos los registros Omeka, incluyendo items, archivos y colecciones. Para obtener más información, consulte http://dublincore.org/documents/dces/."
 
 #. Dublin Core: Title element name
 #: admin/themes/default/collections/browse.php:22

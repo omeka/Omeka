@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Alexios Dimitropoulos <alexios.dimitropoulos@gmail.com>, 2012
+# ctsolkas <tsolkiss@gmail.com>, 2014
 # stauros gkinis <gkista@yahoo.gr>, 2012
 # Stoitsis Giannis <>, 2012
 # Theodosis Filippou <tf1974@gmail.com>, 2013
@@ -15,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2015-02-24 17:00+0000\n"
+"PO-Revision-Date: 2015-08-21 16:55+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Greek (Greece) (http://www.transifex.com/omeka/omeka/language/el_GR/)\n"
 "MIME-Version: 1.0\n"

@@ -6,12 +6,13 @@
 # Mikhail Shvartsman <Shvar@rsl.ru>, 2013-2014
 # Roman Kon <rosveso@gmail.com>, 2013
 # Svetlana_LSI <Ysvet96@rambler.ru>, 2013
+# Svetlana_LSI <Ysvet96@rambler.ru>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2015-02-24 17:00+0000\n"
+"PO-Revision-Date: 2015-08-21 16:56+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Russian (http://www.transifex.com/omeka/omeka/language/ru/)\n"
 "MIME-Version: 1.0\n"

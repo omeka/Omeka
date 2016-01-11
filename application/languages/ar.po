@@ -4,10 +4,14 @@
 # 
 # Translators:
 # Daniel Bourrion <>, 2011
-# Julien Sicot <julien.sicot@gmail.com>, 2011, 2012
+# Julien Sicot <julien.sicot@gmail.com>, 2011-2012
 # laurence leroux <laurencelx@gmail.com>, 2012
 # Nicolas <booloki@lokizone.net>, 2011
+# Nicolas <booloki@lokizone.net>, 2011
+# Stéphane Loret Sdj <stephane.loret@univ-nantes.fr>, 2011-2012
 # Stéphane Loret Sdj <stephane.loret@univ-nantes.fr>, 2011, 2012
+# symac <wikitipiac@laposte.net>, 2011-2012
+# Thierry Pasquier <thierry.pasquier@emf.ccsti.eu>, 2012
 # Thierry Pasquier <thierry.pasquier@emf.ccsti.eu>, 2012
 # symac <wikitipiac@laposte.net>, 2011, 2012
 msgid ""
@@ -15,7 +19,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2015-02-24 17:00+0000\n"
+"PO-Revision-Date: 2015-08-21 16:53+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Arabic (http://www.transifex.com/omeka/omeka/language/ar/)\n"
 "MIME-Version: 1.0\n"

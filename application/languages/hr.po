@@ -5,13 +5,14 @@
 # Translators:
 # rijekateam <digitalizacija@gkri.hr>, 2013-2015
 # rijekateam <digitalizacija@gkri.hr>, 2012
+# rijekateam <digitalizacija@gkri.hr>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2015-02-24 17:00+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2015-12-09 07:56+0000\n"
+"Last-Translator: rijekateam <digitalizacija@gkri.hr>\n"
 "Language-Team: Croatian (http://www.transifex.com/omeka/omeka/language/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -598,7 +599,7 @@ msgstr "Postavke"
 
 #: admin/themes/default/common/content-nav.php:1
 msgid "Main Menu"
-msgstr ""
+msgstr "Glavni izbornik"
 
 #: admin/themes/default/common/content-nav.php:5
 #: admin/themes/default/index.php:2
@@ -2079,7 +2080,7 @@ msgstr "Ovo će izbrisati datoteku i njoj pridružene metapodatke. "
 
 #: application/controllers/FilesController.php:72
 msgid "The file was successfully deleted."
-msgstr ""
+msgstr "Datoteka je uspješno izbrisana."
 
 #: application/controllers/ItemTypesController.php:28
 #, php-format

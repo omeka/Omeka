@@ -9,13 +9,14 @@
 # Henrique B <henriquebeira@gmail.com>, 2013
 # Tel, 2013
 # Tel, 2013
+# Tel, 2013
 # Tel, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2015-03-18 00:51+0000\n"
+"PO-Revision-Date: 2015-08-25 14:16+0000\n"
 "Last-Translator: Carlos Eduardo Maciel <carlosmaciel1@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/omeka/omeka/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -49,11 +50,11 @@ msgstr "Um nome dado ao recurso"
 #: admin/themes/default/items/browse.php:41
 #: application/views/scripts/items/browse.php:20
 msgid "Creator"
-msgstr "Autoria"
+msgstr "Autor"
 
 #. Dublin Core: Creator element description
 msgid "An entity primarily responsible for making the resource"
-msgstr "Uma entidade responsável (principal) pela produção do recurso"
+msgstr "Uma entidade responsável em especial pela produção do recurso"
 
 #. Dublin Core: Subject element name
 msgid "Subject"
@@ -160,7 +161,7 @@ msgstr "Abrangência"
 msgid ""
 "The spatial or temporal topic of the resource, the spatial applicability of "
 "the resource, or the jurisdiction under which the resource is relevant"
-msgstr "O tema espacial ou temporal do recurso, a aplicabilidade espacial do recurso, ou da jurisdição sob a qual o recurso é relevante\n\nDistribuição espacial ou temporal deste recurso, sua aplicabilidade espacial, ou a jurisdição na qual ele é relevante"
+msgstr "O tópico espacial ou temporal do recurso, a aplicabilidade espacial do recurso, ou da jurisdição na qual ele é relevante"
 
 #. Dublin Core: Rights element name
 msgid "Rights"
@@ -757,7 +758,7 @@ msgstr "Clique e arraste os elementos para a ordem de exibição preferida. Cliq
 
 #: admin/themes/default/element-sets/edit.php:29
 msgid "Comment"
-msgstr "Comentar"
+msgstr "Comentários"
 
 #: admin/themes/default/error/403.php:2
 msgid "403: Forbidden"
@@ -1571,7 +1572,7 @@ msgstr "Habilitar API"
 
 #: admin/themes/default/settings/edit-api.php:15
 msgid "Enable or disable the API by checking or unchecking the box below."
-msgstr "Habilita ou desabilita a API marcando a caixa abaixo."
+msgstr "Habilite ou desabilite a API marcando a caixa abaixo."
 
 #: admin/themes/default/settings/edit-api.php:22
 msgid "Filter Element Texts"
@@ -1748,7 +1749,7 @@ msgid ""
 "ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a "
 "href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" "
 "target=\"_blank\">design your own</a>!"
-msgstr "Adicionar novos temas, baixando-os da <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Diretório de Temas do Omeka</a>, ou <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">faça o seu próprio</a>!"
+msgstr "Adicione novos temas, baixando-os de <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Diretório de Temas do Omeka</a>, ou <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">faça o seu próprio</a>!"
 
 #: admin/themes/default/themes/browse.php:44
 msgid "Use this theme"
@@ -1851,7 +1852,7 @@ msgid ""
 "To create a new API key, enter a label for the key below. For example, "
 "describe for what purpose it will be used. This key will have all your "
 "permissions; treat it as you would your password."
-msgstr "Cara criar uma nova chave API, insira uma palavra descritiva para a chave abaixo. Descreve, por exemplo, o propósito para a chave. Essa chave terá todas as suas permissões; trate-a como trataria sua senha."
+msgstr "Para criar uma nova chave API, insira uma palavra descritiva para a chave abaixo. Descreva, por exemplo, o propósito para a chave. Essa chave terá todas as suas permissões; trate-a como trataria sua senha."
 
 #: admin/themes/default/users/api-keys.php:31
 msgid "You have no API keys. Use the form above to create one."
@@ -1992,7 +1993,7 @@ msgstr "As configurações de navegação foram atualizadas."
 msgid ""
 "The navigation settings were not saved because of missing or invalid values."
 "  All changed values have been restored."
-msgstr "As configurações de navegação não foram salvos pois há valores em falta ou inválidos. Todos os valores alterados foram restaurados."
+msgstr "As configurações de navegação não foram salvas pois há valores em falta ou inválidos. Todos os valores alterados foram restaurados."
 
 #: application/controllers/AppearanceController.php:97
 msgid "The navigation settings have been reset."
@@ -2034,7 +2035,7 @@ msgid ""
 "This will delete the collection \"%s\" and its associated metadata. This "
 "will not delete any items in this collection, but will delete the reference "
 "to this collection in each item."
-msgstr "Isto irá apagar a coleção \"%s\" e seus metadados associados.  Isso não vai apagar qualquer item desta coleção, mas vai eliminar a referência para esta coleção em cada item."
+msgstr "Isto apagará coleção \"%s\" e seus metadados associados.  Não apagará nenhum item desta coleção, mas eliminará a referência para esta coleção em cada item."
 
 #: application/controllers/CollectionsController.php:110
 #, php-format
@@ -2042,7 +2043,7 @@ msgid ""
 "This will delete the collection #%s and its associated metadata. This will "
 "not delete any items in this collection, but will delete the reference to "
 "this collection in each item."
-msgstr "Isto irá apagar a coleção #%s e seus metadados associados.  Isso não vai apagar qualquer item desta coleção, mas vai eliminar a referência para esta coleção em cada item."
+msgstr "Isto apagará a coleção #%s e seus metadados associados.  Não apagará nenhum item desta coleção, mas eliminará a referência para esta coleção em cada item."
 
 #: application/controllers/ElementSetsController.php:21
 msgid ""
@@ -2068,7 +2069,7 @@ msgstr "Houve um erro no formulário.  Por favor, tente novamente."
 
 #: application/controllers/ElementSetsController.php:72
 msgid "The element set was successfully changed!"
-msgstr "O conjunto de elementos foi alterado com sucesso!"
+msgstr "O elemento foi alterado com sucesso!"
 
 #: application/controllers/ErrorController.php:64
 msgid "Page not found."
@@ -2102,7 +2103,7 @@ msgid ""
 "This will delete the \"%s\" item type but will not delete the elements "
 "assigned to the item type. Items that are assigned to this item type will "
 "lose all metadata that is specific to the item type."
-msgstr "Isto irá apagar o tipo de item \"%s\" , mas não irá excluir os elementos atribuídos para este tipo de item.  Os itens que são atribuídos com este tipo de item perderão todos os metadados que são específicos para este tipo de item."
+msgstr "Isto apagará o item tipo \"%s\" , mas não excluirá os elementos atribuídos para este tipo de item.  Os itens que são atribuídos a este tipo de item perderão todos os metadados que são específicos para este tipo de item."
 
 #: application/controllers/ItemTypesController.php:158
 #, php-format
@@ -2154,14 +2155,14 @@ msgstr "O item #%s foi apagado com sucesso!"
 msgid ""
 "This will delete the item \"%s\" and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr "Isso vai excluir o item \"%s\" e seus metadados associados.  Isto também irá apagar todos os arquivos e metadados de arquivos associados a esse item."
+msgstr "Isso excluirá o item \"%s\" e seus metadados associados.  Isto também apagará todos os arquivos e metadados de arquivos associados a esse item."
 
 #: application/controllers/ItemsController.php:132
 #, php-format
 msgid ""
 "This will delete the item #%s and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr "Isso vai excluir o item #%s e seus metadados associados.  Isto também irá apagar todos os arquivos e metadados de arquivos associados a esse item."
+msgstr "Isso excluirá o item #%s e seus metadados associados.  Isto também apagará todos os arquivos e metadados de arquivos associados a esse item."
 
 #: application/controllers/ItemsController.php:227
 msgid "You must choose some items to batch edit."
@@ -2300,13 +2301,13 @@ msgstr "As configurações de segurança foram atualizadas."
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
-msgstr "Você mudou os registros que são pesquisáveis ​​no Omeka.  Por favor, re-indexar os registros usando o formulário abaixo."
+msgstr "Você mudou os registros que são pesquisáveis ​​no Omeka.  Por favor, re-indexe os registros usando o formulário abaixo."
 
 #: application/controllers/SettingsController.php:121
 msgid ""
 "Indexing records. This may take a while. You may continue administering your"
 " site."
-msgstr "Re-indexando os registros .  Isso pode demorar um pouco.  Você pode continuar administrando seu site."
+msgstr "Indexando os registros .  Isso pode demorar um pouco.  Você pode continuar administrando seu site."
 
 #: application/controllers/SettingsController.php:156
 msgid "The item type elements were successfully changed!"

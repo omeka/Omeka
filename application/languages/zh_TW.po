@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
+# Hong Zhang <zhangh@unlv.nevada.edu>, 2013
 # wfan <fanw.scu@gmail.com>, 2012
 # yennylin <yennylin1234@gmail.com>, 2014
 # yennylin <yennylin1234@gmail.com>, 2014
@@ -12,7 +13,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2015-02-24 17:00+0000\n"
+"PO-Revision-Date: 2015-08-21 16:57+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/omeka/omeka/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"

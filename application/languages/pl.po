@@ -7,17 +7,21 @@
 # Dominik Broniszewski <dominik@broniszewski.pl>, 2013
 # platanus <marcin.mielnicki@gmail.com>, 2013
 # miniol <michal.seweryniak@gmail.com>, 2012
+# miniol <michal.seweryniak@gmail.com>, 2012
 # mw <m@wilkowski.org>, 2015
 # p <inactive+poczciwiec@transifex.com>, 2012
+# platanus <marcin.mielnicki@gmail.com>, 2013
+# p <inactive+poczciwiec@transifex.com>, 2012
 # Tomasz Sopylo <tomasz@sopylo.pl>, 2015
+# vortage <vortage@o2.pl>, 2014
 # vortage <vortage@o2.pl>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2015-06-22 20:51+0000\n"
-"Last-Translator: Tomasz Sopylo <tomasz@sopylo.pl>\n"
+"PO-Revision-Date: 2015-08-21 16:56+0000\n"
+"Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Polish (http://www.transifex.com/omeka/omeka/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
