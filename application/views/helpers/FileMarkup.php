@@ -55,12 +55,6 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         'video/ogg'         => 'video',
         'video/webm'        => 'video',
         'video/quicktime'   => 'video',
-        'audio/wma'         => 'wma',
-        'audio/x-ms-wma'    => 'wma',
-        'video/avi'         => 'wmv',
-        'video/msvideo'     => 'wmv',
-        'video/x-msvideo'   => 'wmv',
-        'video/x-ms-wmv'    => 'wmv', 
     );
     
     /**
@@ -105,10 +99,6 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         'webm' => 'video',
         // video/quicktime
         'mov' => 'video',
-        // audio/x-ms-wma
-        'wma' => 'wma', 
-        // video/x-msvideo
-        'avi' => 'wmv', 
     );
     
     /**
@@ -129,30 +119,12 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
             'linkToMetadata'=>false,
             'imgAttributes' => array()
             ),
-        'wmv'=>array(
-            'width' => '320',
-            'height' => '240', 
-            'autostart' => 0,
-            'ShowControls'=> 1,
-            'ShowDisplay'=> 0,
-            'ShowStatusBar' => 0,
-            'scale' => 'aspect'
-            ),
-        'wma'=>array(
-            'width' => '320',
-            'height' => '46',
-            'autostart' => 0,
-            'ShowControls'=> 1,
-            'ShowDisplay'=> 0,
-            'ShowStatusBar' => 0
-            ),
         'video'=>array(
             'width' => '320',
             'height' => '240',
             'autoplay' => false,
             'controller'=> true,
             'loop'=> false,
-            'scale' => 'aspect'
             ),
         'audio' => array(
             'width' => '200',
@@ -360,56 +332,6 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         return $html;
     }
         
-    /**
-     * Retrieve valid XHTML for displaying a wmv video file or equivalent.  
-     * Currently this loads the video inside of an <object> tag, but that 
-     * provides less flexibility than a flash wrapper, which seems to be a 
-     * standard Web2.0 practice for video sharing.  This limitation can be
-     * overcome by a plugin that used a flash wrapper for displaying video.
-     * 
-     * @param File $file
-     * @param array $options
-     * @return string
-     */ 
-    public function wmv($file, array $options=array())
-    {
-        $path = html_escape($file->getWebPath('original'));
-        $html = '<object type="application/x-mplayer2" width="'.$options['width'].'" height="'.$options['height'].'" data="'.$path.'" autoStart="'.$options['autostart'].'">'
-              . '<param name="FileName" value="'.$path.'" />'
-              . '<param name="autoStart" value="'.($options['autostart'] ? 'true' : 'false').'" />'
-              . '<param name="ShowAudioControls" value="'.($options['ShowControls'] ? 'true' : 'false').'" />'
-              . '<param name="ShowStatusBar" value="'.($options['ShowStatusBar'] ? 'true' : 'false').'" />'
-              . '<param name="ShowDisplay" value="'.($options['ShowDisplay'] ? 'true' : 'false').'" />'
-              // This param is for QuickTime clients
-              . '<param name="scale" value="' . $options['scale'] . '" />'
-              . '</object>';
-        return $html;
-    }
-    
-    /**
-     * Retrieve valid XHTML for displaying a wma audio file or equivalent.  
-     * Currently this loads the video inside of an <object> tag, but that
-     * provides less flexibility than a flash wrapper, which seems to be a 
-     * standard Web2.0 practice for video sharing.  This limitation can be
-     * overcome by a plugin that used a flash wrapper for displaying video.
-     * 
-     * @param File $file
-     * @param array $options
-     * @return string
-     */ 
-    public function wma($file, array $options=array())
-    {
-        $path = html_escape($file->getWebPath('original'));
-        $html = '<object type="audio/x-ms-wma" width="'.$options['width'].'" height="'.$options['height'].'" data="'.$path.'" autoStart="'.$options['autostart'].'">'
-              . '<param name="FileName" value="'.$path.'" />'
-              . '<param name="autoStart" value="'.($options['autostart'] ? 'true' : 'false').'" />'
-              . '<param name="ShowControls" value="'.($options['ShowControls'] ? 'true' : 'false').'" />'
-              . '<param name="ShowStatusBar" value="'.($options['ShowStatusBar'] ? 'true' : 'false').'" />'
-              . '<param name="ShowDisplay" value="'.($options['ShowDisplay'] ? 'true' : 'false').'" />'
-              . '</object>';
-        return $html;
-    }
-    
     /**
      * Retrieve valid XHTML for displaying Quicktime video files
      * 
