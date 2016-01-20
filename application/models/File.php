@@ -306,7 +306,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     {
         $this->size = filesize($filepath);
         $this->authentication = md5_file($filepath);
-        $this->type_os = trim(exec('file -b ' . trim(escapeshellarg($filepath))));
+        $this->type_os = substr(trim(exec('file -b ' . trim(escapeshellarg($filepath)))), 0, 255);
         $this->filename = basename($filepath);
         $this->metadata = '';
     }
