@@ -49,6 +49,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         'audio/x-mpg'       => 'audio',
         'audio/mp4'         => 'audio',
         'audio/x-mp4'       => 'audio',
+        'audio/x-m4a'       => 'audio',
         'audio/wav'         => 'audio',
         'audio/x-wav'       => 'audio',
         'video/mp4'         => 'video',
@@ -82,6 +83,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         'm3a' => 'audio',
         // audio/mp4
         'mp4a' => 'audio',
+        'm4a' => 'audio',
         // audio/ogg
         'oga' => 'audio',
         'ogg' => 'audio',
