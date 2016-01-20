@@ -89,4 +89,19 @@ class Omeka_Session_SaveHandler_DbTable extends Zend_Session_SaveHandler_DbTable
             )
         );
     }
+
+    /**
+     * Write session data
+     *
+     * @param string $id
+     * @param string $data
+     * @return boolean
+     */
+    public function write($id, $data)
+    {
+        parent::write($id, $data);
+
+        // Discard parent's return value and return true (PHP 7 actually cares about this)
+        return true;
+    }
 }
