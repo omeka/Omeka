@@ -5,14 +5,14 @@
 # Translators:
 # Martin Sauter <martin.sauter@gmx.ch>, 2011-2012
 # Martin Sauter <martin.sauter@gmx.ch>, 2013
-# Roland Keck <roland.keck@web.de>, 2014-2015
+# Roland Keck <roland.keck@web.de>, 2014-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2015-08-21 16:57+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2016-01-18 16:09+0000\n"
+"Last-Translator: Roland Keck <roland.keck@web.de>\n"
 "Language-Team: German (Germany) (http://www.transifex.com/omeka/omeka/language/de_DE/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -365,7 +365,7 @@ msgstr "Link hinzufügen"
 #: admin/themes/default/element-sets/edit.php:41
 #: admin/themes/default/files/edit.php:35
 #: admin/themes/default/item-types/edit.php:18
-#: admin/themes/default/items/batch-edit.php:130
+#: admin/themes/default/items/batch-edit.php:131
 #: admin/themes/default/items/edit.php:19
 #: admin/themes/default/plugins/config.php:14
 #: admin/themes/default/settings/edit-api.php:82
@@ -402,7 +402,7 @@ msgstr "Öffentliche Seite anzeigen"
 #: admin/themes/default/files/show.php:30
 #: admin/themes/default/item-types/edit.php:20
 #: admin/themes/default/item-types/show.php:54
-#: admin/themes/default/items/batch-edit.php:119
+#: admin/themes/default/items/batch-edit.php:120
 #: admin/themes/default/items/browse.php:27
 #: admin/themes/default/items/browse.php:81
 #: admin/themes/default/items/browse.php:123
@@ -442,7 +442,7 @@ msgstr "Sammlung hinzufügen"
 #: admin/themes/default/collections/edit.php:30
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/items/add.php:19
-#: admin/themes/default/items/batch-edit.php:50
+#: admin/themes/default/items/batch-edit.php:51
 #: admin/themes/default/items/edit.php:28
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:52
@@ -453,7 +453,7 @@ msgstr "Öffentlich"
 #: admin/themes/default/collections/edit.php:35
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/add.php:25
-#: admin/themes/default/items/batch-edit.php:65
+#: admin/themes/default/items/batch-edit.php:66
 #: admin/themes/default/items/edit.php:34
 #: admin/themes/default/items/quick-filters.php:8
 #: admin/themes/default/items/show.php:53
@@ -513,8 +513,8 @@ msgstr "(Privat)"
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:27
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
-#: admin/themes/default/files/show.php:26 admin/themes/default/index.php:54
-#: admin/themes/default/index.php:73
+#: admin/themes/default/files/show.php:26 admin/themes/default/index.php:60
+#: admin/themes/default/index.php:79
 #: admin/themes/default/item-types/browse.php:26
 #: admin/themes/default/item-types/show.php:51
 #: admin/themes/default/items/browse.php:24
@@ -674,7 +674,6 @@ msgstr "Benutzer"
 
 #: admin/themes/default/common/header.php:11
 #: admin/themes/default/upgrade/index.php:6
-#: admin/themes/default/upgrade/migrate.php:6
 #: application/views/scripts/common/admin-bar.php:11
 msgid "Omeka Admin"
 msgstr "Omeka Admin"
@@ -706,10 +705,9 @@ msgstr "Sicherheit"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: admin/themes/default/search/index.php:2
-#: application/views/helpers/SearchForm.php:34
+#: application/views/helpers/SearchForm.php:56
 #: application/views/scripts/search/index.php:2
 #: application/views/scripts/search/search-form.php:2
-#: application/views/scripts/search/search-form.php:22
 msgid "Search"
 msgstr "Suchen"
 
@@ -789,19 +787,19 @@ msgstr "Sie haben versucht, eine Seite aufzurufen, die offenbar nicht existiert.
 msgid "If this does not help, try contacting the %s."
 msgstr "Falls dies nicht hilft kontaktieren Sie bitte den %s."
 
-#: admin/themes/default/error/404.php:16 admin/themes/default/index.php:46
+#: admin/themes/default/error/404.php:16 admin/themes/default/index.php:52
 msgid "Recent Items"
 msgstr "Neuste Objekte"
 
-#: admin/themes/default/error/404.php:29 admin/themes/default/index.php:59
+#: admin/themes/default/error/404.php:29 admin/themes/default/index.php:65
 msgid "Add a new item"
 msgstr "Neues Objekt hinzufügen"
 
-#: admin/themes/default/error/404.php:36 admin/themes/default/index.php:64
+#: admin/themes/default/error/404.php:36 admin/themes/default/index.php:70
 msgid "Recent Collections"
 msgstr "Neuste Sammlungen"
 
-#: admin/themes/default/error/404.php:50 admin/themes/default/index.php:78
+#: admin/themes/default/error/404.php:50 admin/themes/default/index.php:84
 msgid "Add a new collection"
 msgstr "Neue Sammlung hinzufügen"
 
@@ -917,35 +915,45 @@ msgstr "Eingebettete Metadaten"
 msgid "Output Formats"
 msgstr "Ausgabeformate"
 
-#: admin/themes/default/index.php:6
-msgid "items"
-msgstr "Objekte"
-
-#: admin/themes/default/index.php:7
-msgid "collections"
-msgstr "Sammlungen"
-
-#: admin/themes/default/index.php:8
-msgid "tags"
-msgstr "Schlagwörter"
+#: admin/themes/default/index.php:10
+msgid "item"
+msgid_plural "items"
+msgstr[0] "Objekt"
+msgstr[1] "Objekte"
 
 #: admin/themes/default/index.php:11
-msgid "plugins"
-msgstr "Plugins"
+msgid "collection"
+msgid_plural "collections"
+msgstr[0] "Kollektion"
+msgstr[1] "Kollektionen"
 
-#: admin/themes/default/index.php:14
-msgid "users"
-msgstr "Benutzer"
+#: admin/themes/default/index.php:12
+msgid "tag"
+msgid_plural "tags"
+msgstr[0] "Tag"
+msgstr[1] "Tags"
 
-#: admin/themes/default/index.php:18
+#: admin/themes/default/index.php:16
+msgid "plugin"
+msgid_plural "plugins"
+msgstr[0] "Plugin"
+msgstr[1] "Plugins"
+
+#: admin/themes/default/index.php:20
+msgid "user"
+msgid_plural "users"
+msgstr[0] "Benutzer"
+msgstr[1] "Benutzer"
+
+#: admin/themes/default/index.php:24
 msgid "theme"
 msgstr "Theme"
 
-#: admin/themes/default/index.php:29
+#: admin/themes/default/index.php:35
 msgid "A new version of Omeka is available for download."
 msgstr "Eine neue Omeka-Version steht zum Download bereit."
 
-#: admin/themes/default/index.php:30
+#: admin/themes/default/index.php:36
 #, php-format
 msgid "Upgrade to %s"
 msgstr "Upgrade auf %s"
@@ -1045,7 +1053,7 @@ msgstr "Es gibt keine kürzlich hinzugefügten Objekte."
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:20
 #: admin/themes/default/items/browse.php:116
-#: admin/themes/default/items/browse.php:151
+#: admin/themes/default/items/browse.php:152
 msgid "Add an Item"
 msgstr "Ein Objekt hinzufügen"
 
@@ -1054,7 +1062,7 @@ msgid "Add Item"
 msgstr "Objekt hinzufügen"
 
 #: admin/themes/default/items/add.php:32
-#: admin/themes/default/items/batch-edit.php:89
+#: admin/themes/default/items/batch-edit.php:90
 #: admin/themes/default/items/browse.php:90
 #: admin/themes/default/items/edit.php:41
 #: admin/themes/default/items/show.php:57
@@ -1077,7 +1085,7 @@ msgid "Checked items will be deleted."
 msgstr "Markierte Objekte werden gelöscht."
 
 #: admin/themes/default/items/batch-delete.php:50
-#: admin/themes/default/items/batch-edit.php:116
+#: admin/themes/default/items/batch-edit.php:117
 msgid "Delete Items"
 msgstr "Objekte löschen"
 
@@ -1085,59 +1093,59 @@ msgstr "Objekte löschen"
 msgid "Batch Edit Items"
 msgstr "Objekte im Bacht-Verfahren bearbeiten"
 
-#: admin/themes/default/items/batch-edit.php:36
+#: admin/themes/default/items/batch-edit.php:37
 msgid "Changes will be applied to checked items."
 msgstr "Änderungen werden auf die markierten Objekte angewendet."
 
-#: admin/themes/default/items/batch-edit.php:41
+#: admin/themes/default/items/batch-edit.php:42
 msgid "Item Metadata"
 msgstr "Objekt-Metadaten"
 
-#: admin/themes/default/items/batch-edit.php:46
+#: admin/themes/default/items/batch-edit.php:47
 msgid "Public?"
 msgstr "Öffentlich?"
 
-#: admin/themes/default/items/batch-edit.php:49
-#: admin/themes/default/items/batch-edit.php:64
-#: admin/themes/default/items/batch-edit.php:78
-#: admin/themes/default/items/batch-edit.php:93
+#: admin/themes/default/items/batch-edit.php:50
+#: admin/themes/default/items/batch-edit.php:65
+#: admin/themes/default/items/batch-edit.php:79
+#: admin/themes/default/items/batch-edit.php:94
 msgid "Select Below"
 msgstr "Unten auswählen"
 
-#: admin/themes/default/items/batch-edit.php:51
+#: admin/themes/default/items/batch-edit.php:52
 msgid "Not Public"
 msgstr "Nicht öffentlich"
 
-#: admin/themes/default/items/batch-edit.php:61
+#: admin/themes/default/items/batch-edit.php:62
 msgid "Featured?"
 msgstr "Hervorgehoben?"
 
-#: admin/themes/default/items/batch-edit.php:66
+#: admin/themes/default/items/batch-edit.php:67
 msgid "Not Featured"
 msgstr "Nicht hervorgehoben"
 
-#: admin/themes/default/items/batch-edit.php:74
+#: admin/themes/default/items/batch-edit.php:75
 #: admin/themes/default/items/item-type-form.php:3
 msgid "Item Type"
 msgstr "Objekttyp"
 
-#: admin/themes/default/items/batch-edit.php:83
-#: admin/themes/default/items/batch-edit.php:98
+#: admin/themes/default/items/batch-edit.php:84
+#: admin/themes/default/items/batch-edit.php:99
 msgid "Remove?"
 msgstr "Entfernen?"
 
-#: admin/themes/default/items/batch-edit.php:104
+#: admin/themes/default/items/batch-edit.php:105
 #: admin/themes/default/items/tag-form.php:8
 #: admin/themes/default/items/tag-form.php:11
 msgid "Add Tags"
 msgstr "Schlagwort hinzufügen"
 
-#: admin/themes/default/items/batch-edit.php:107
+#: admin/themes/default/items/batch-edit.php:108
 #, php-format
 msgid "List of tags to add to all checked items, separated by %s."
 msgstr "Liste der Schlagwörter, welche allen markierten Objekten hinzugefügt werden, getrennt durch %s."
 
-#: admin/themes/default/items/batch-edit.php:117
+#: admin/themes/default/items/batch-edit.php:118
 msgid "Check if you wish to delete selected items."
 msgstr "Auswählen um markierte Objekte zu löschen."
 
@@ -1185,8 +1193,8 @@ msgstr "Objekte durchsuchen"
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2367
-#: application/libraries/globals.php:2757
+#: application/libraries/globals.php:2396
+#: application/libraries/globals.php:2786
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Objekte suchen"
@@ -1211,30 +1219,32 @@ msgstr "Details anzeigen"
 msgid "Hide Details"
 msgstr "Verberge Details"
 
-#: admin/themes/default/items/browse.php:148
+#: admin/themes/default/items/browse.php:149
 msgid "You have no items."
 msgstr "Sie haben keine Objekte."
 
-#: admin/themes/default/items/browse.php:150
+#: admin/themes/default/items/browse.php:151
 msgid "Get started by adding your first item."
 msgstr "Beginnen Sie, indem Sie Ihr erstes Objekt hinzufügen."
 
-#: admin/themes/default/items/browse.php:154
+#: admin/themes/default/items/browse.php:156
 #, php-format
-msgid "The query searched %s items and returned no results."
-msgstr "Die Anfrage hat %s Objekte durchsucht, aber keine Treffer gefunden."
+msgid "The query searched 1 item and returned no results."
+msgid_plural "The query searched %s items and returned no results."
+msgstr[0] "Die Abfrage durchsuchte 1 Objekt und fand kein gültiges Ergebnis."
+msgstr[1] "Die Abfrage durchsuchte %s Objekte und fand kein gültiges Ergebnis."
 
-#: admin/themes/default/items/browse.php:154
+#: admin/themes/default/items/browse.php:157
 msgid "refine your search"
 msgstr "Suche verfeinern"
 
-#: admin/themes/default/items/browse.php:154
+#: admin/themes/default/items/browse.php:157
 #, php-format
 msgid "Would you like to %s?"
 msgstr "Möchten Sie %s?"
 
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/views/scripts/functions.php:14
+#: application/views/scripts/functions.php:22
 msgid "[Untitled]"
 msgstr "[Unbenannt]"
 
@@ -1777,28 +1787,28 @@ msgstr "Bitte erstellen Sie eine Sicherheitskopie Ihrer bestehenden Datenbank un
 msgid "Upgrade Database"
 msgstr "Datenbank aktualisieren"
 
-#: admin/themes/default/upgrade/migrate.php:32
+#: admin/themes/default/upgrade/migrate.php:3
+msgid "Omeka has upgraded successfully."
+msgstr "Omeka wurde erfolgreich aktualisiert."
+
+#: admin/themes/default/upgrade/migrate.php:5
 msgid "Omeka encountered an error when upgrading your installation."
 msgstr "Bei der Aktualisierung Ihrer Omeka-Installation ist ein Fehler aufgetreten."
 
-#: admin/themes/default/upgrade/migrate.php:37
+#: admin/themes/default/upgrade/migrate.php:24
+msgid "Return to Dashboard"
+msgstr "Zurück zum Dashboard"
+
+#: admin/themes/default/upgrade/migrate.php:30
 msgid "Please restore from your database backup and try again."
 msgstr "Bitte spielen Sie die Sicherheitskopie Ihrer Datenbank ein und versuchen Sie es erneut."
 
-#: admin/themes/default/upgrade/migrate.php:39
+#: admin/themes/default/upgrade/migrate.php:31
 msgid ""
 "If you have any questions please refer to <a "
 "href=\"http://omeka.org/codex\">Omeka documentation</a> or post a message on"
 " the <a href=\"http://omeka.org/forums\">Omeka forums</a>."
 msgstr "Wenn Sie Fragen haben, dann benutzen Sie bitte die <a href=\"http://omeka.org/codex\">Omeka-Dokumentation</a> oder veröffentlichen eine Nachricht im <a href=\"http://omeka.org/forums\">Omeka-Forum</a>."
-
-#: admin/themes/default/upgrade/migrate.php:42
-msgid "Omeka has upgraded successfully."
-msgstr "Omeka wurde erfolgreich aktualisiert."
-
-#: admin/themes/default/upgrade/migrate.php:43
-msgid "Return to Dashboard"
-msgstr "Zurück zum Dashboard"
 
 #: admin/themes/default/users/activate.php:2
 #: application/views/scripts/users/activate.php:2
@@ -2320,7 +2330,7 @@ msgstr "Der Pfad zum ImageMagick-Verzeichnis funktioniert."
 msgid "The ImageMagick directory path does not work."
 msgstr "Der Pfad zum ImageMagick-Verzeichnis funktioniert nicht."
 
-#: application/controllers/TagsController.php:48
+#: application/controllers/TagsController.php:47
 msgid "Invalid tagType given."
 msgstr "Ungültiger tagType."
 
@@ -2345,9 +2355,16 @@ msgstr "Das Theme wurde erfolgreich geändert."
 msgid "The theme settings were successfully saved!"
 msgstr "Die Theme-Einstellungen wurden erfolgreich gespeichert!"
 
-#: application/controllers/UpgradeController.php:50
+#: application/controllers/UpgradeController.php:56
 msgid "SQL error in migration: "
 msgstr "SQL-Fehler bei der Migration:"
+
+#: application/controllers/UpgradeController.php:69
+#, php-format
+msgid ""
+"Omeka requires PHP version %1$s or higher, but this server is running PHP "
+"version %2$s. Please update the installed version of PHP and try again."
+msgstr "Omeka beötigt PHP Version %1$s oder höher. Dieser Server verwendet PHP Version %2$s. Bitte aktualisieren Sie die PHP Version und versuchen Sie es erneut."
 
 #: application/controllers/UsersController.php:70
 msgid ""
@@ -2887,17 +2904,17 @@ msgstr "Aktivierung ist offen seit %s."
 msgid "Active?"
 msgstr "Aktiv?"
 
-#: application/libraries/Omeka/Job/Process/Dispatcher.php:115
+#: application/libraries/Omeka/Job/Process/Dispatcher.php:114
 #, php-format
 msgid "The configured PHP path (%s) is invalid."
 msgstr "Der konfigurierte PHP-Pfad (%s) ist ungültig."
 
-#: application/libraries/Omeka/Job/Process/Dispatcher.php:125
+#: application/libraries/Omeka/Job/Process/Dispatcher.php:124
 #, php-format
 msgid "The configured PHP path (%s) does not point to a PHP-CLI binary."
 msgstr "Der konfigurierte PHP-Pfad (%s) zeigt nicht auf ein PHP-CLI Binary."
 
-#: application/libraries/Omeka/Job/Process/Dispatcher.php:127
+#: application/libraries/Omeka/Job/Process/Dispatcher.php:126
 #, php-format
 msgid ""
 "The configured PHP path (%s) points to a PHP-CLI binary with an invalid "
@@ -2958,65 +2975,65 @@ msgstr "Boolean"
 msgid "Exact match"
 msgstr "Exakte Übereinstimmung"
 
-#: application/libraries/globals.php:1234
-#: application/libraries/globals.php:1255
+#: application/libraries/globals.php:1258
+#: application/libraries/globals.php:1279
 #, php-format
 msgid "Could not find file %s!"
 msgstr "Die Datei %s wurde nicht gefunden!"
 
-#: application/libraries/globals.php:1272
+#: application/libraries/globals.php:1296
 msgid "No featured collections are available."
 msgstr "Es sind keine hervorgehobenen Sammlungen vorhanden."
 
-#: application/libraries/globals.php:1564
+#: application/libraries/globals.php:1593
 msgid "Select Below "
 msgstr "Unten auswählen"
 
-#: application/libraries/globals.php:1607
+#: application/libraries/globals.php:1636
 msgid "Omeka RSS Feed"
 msgstr "Omeka RSS Feed"
 
-#: application/libraries/globals.php:1608
+#: application/libraries/globals.php:1637
 msgid "Omeka Atom Feed"
 msgstr "Omeka Atom Feed"
 
-#: application/libraries/globals.php:2264
+#: application/libraries/globals.php:2293
 msgid "No recent items available."
 msgstr " Es sind keine neuen Objekte vorhanden."
 
-#: application/libraries/globals.php:2290
+#: application/libraries/globals.php:2319
 msgid "No featured items are available."
 msgstr "Es sind keine hervorgehobenen Sammlungen vorhanden."
 
-#: application/libraries/globals.php:2349
+#: application/libraries/globals.php:2378
 msgid "View"
 msgstr "Ansehen"
 
-#: application/libraries/globals.php:2411
+#: application/libraries/globals.php:2440
 msgid "No Collection"
 msgstr "Keine Sammlung"
 
-#: application/libraries/globals.php:2529
+#: application/libraries/globals.php:2558
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2546
+#: application/libraries/globals.php:2575
 msgid "Next Item &rarr;"
 msgstr "Nächstes Objekt &rarr;"
 
-#: application/libraries/globals.php:2566
+#: application/libraries/globals.php:2595
 msgid "&larr; Previous Item"
 msgstr "&larr; Vorangehendes Objekt"
 
-#: application/libraries/globals.php:2747
+#: application/libraries/globals.php:2776
 msgid "Browse All"
 msgstr "Alle durchsuchen"
 
-#: application/libraries/globals.php:2752
+#: application/libraries/globals.php:2781
 msgid "Browse by Tag"
 msgstr "Nach Schlagwörtern durchsuchen"
 
-#: application/libraries/globals.php:3021
+#: application/libraries/globals.php:3050
 msgid "No tags are available."
 msgstr "Es sind keine Schlagwörter vorhanden."
 
@@ -3129,62 +3146,62 @@ msgstr "Der Name des Objekttyps muss zwischen %1$s und %2$s Zeichen lang sein."
 msgid "The item type name must be unique."
 msgstr "Der Name des Objekttyps muss eindeutig sein."
 
-#: application/models/ItemType.php:179
+#: application/models/ItemType.php:183
 msgid "There are too many values in the element ordering array."
 msgstr "Es gibt zu viele Werte im Elementsortierungs-Array."
 
-#: application/models/ItemType.php:181
+#: application/models/ItemType.php:185
 msgid "There are too few values in the element ordering array."
 msgstr "Es gibt zu wenig Werte im Elementsortierungs-Array."
 
-#: application/models/ItemType.php:218
+#: application/models/ItemType.php:222
 msgid ""
 "Invalid element data. To add elements, you must either pass an element "
 "objects or an array of element metadata."
 msgstr "Ungültige Elementdaten. Um Elemente hinzuzufügen müssen entweder Elementobjekte oder ein Array mit Element-Metadaten übergeben werden."
 
-#: application/models/ItemType.php:282
+#: application/models/ItemType.php:286
 msgid ""
 "Cannot remove elements from an item type that is not persistent in the "
 "database!"
 msgstr "Von einem Objekttyp, der nicht persistent in der Datenbank ist, können keine Elemente entfernt werden!"
 
-#: application/models/ItemType.php:291
+#: application/models/ItemType.php:295
 #, php-format
 msgid "Cannot find element with ID %s!"
 msgstr "Das Element mit der ID %s wurde nicht gefunden!"
 
-#: application/models/ItemType.php:332
+#: application/models/ItemType.php:336
 #, php-format
 msgid "Item type does not contain an element with the ID %s!"
 msgstr "Der Objekttyp enthält kein Element mit der ID %s!"
 
-#: application/models/ItemType.php:353
+#: application/models/ItemType.php:357
 msgid ""
 "Invalid parameter. The hasElement function requires either an element object"
 " or an element id to determine if an item type has an element."
 msgstr "Ungültiger Parameter. Die Funktion hasElement verlangt entweder ein Elementobjekt oder eine Element-ID um entscheiden zu können, ob ein Objekttyp ein Element besetzt."
 
-#: application/models/Mixin/ElementText.php:292
+#: application/models/Mixin/ElementText.php:293
 #, php-format
 msgid "There is no element \"%1$s\", \"%2$s\"!"
 msgstr "Es existiert kein Element \"%1$s\", \"%2$s\"!"
 
-#: application/models/Mixin/ElementText.php:311
+#: application/models/Mixin/ElementText.php:312
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
 msgstr "Kein Element mit der ID '%s' gefunden!"
 
-#: application/models/Mixin/ElementText.php:430
+#: application/models/Mixin/ElementText.php:431
 msgid "Element texts are not formatted correctly!"
 msgstr "Die Elementtexte sind nicht korrekt formatiert!"
 
-#: application/models/Mixin/ElementText.php:578
+#: application/models/Mixin/ElementText.php:579
 #, php-format
 msgid "The \"%s\" field has at least one invalid value!"
 msgstr "Das Feld \"%s\" enthält mindestens einen ungültigen Wert!"
 
-#: application/models/Mixin/ElementText.php:648
+#: application/models/Mixin/ElementText.php:649
 msgid "Cannot save element text for records that are not yet persistent!"
 msgstr "Elementtexte für Datensätze, die noch nicht persistent sind, können nicht gespeichert werden."
 

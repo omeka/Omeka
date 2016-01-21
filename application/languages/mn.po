@@ -4,13 +4,13 @@
 # 
 # Translators:
 # baatarsuren <mgllibrary@gmail.com>, 2015
-# Khaidav T. <khaidaw@yahoo.com>, 2015
+# Khaidav T. <khaidaw@yahoo.com>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2015-12-11 00:47+0000\n"
+"PO-Revision-Date: 2016-01-15 07:58+0000\n"
 "Last-Translator: Khaidav T. <khaidaw@yahoo.com>\n"
 "Language-Team: Mongolian (http://www.transifex.com/omeka/omeka/language/mn/)\n"
 "MIME-Version: 1.0\n"
@@ -38,7 +38,7 @@ msgstr "Мэдээллийн нэр"
 
 #. Dublin Core: Title element description
 msgid "A name given to the resource"
-msgstr ""
+msgstr "Нөөцөд /эх сурвалж/ өгсөн нэр"
 
 #. Dublin Core: Creator element name
 #: admin/themes/default/items/browse.php:41
@@ -56,7 +56,7 @@ msgstr "Агуулга"
 
 #. Dublin Core: Subject element description
 msgid "The topic of the resource"
-msgstr ""
+msgstr "Нөөцийн /Эх сурвалжийн/ сэдэв"
 
 #. Dublin Core: Description element name
 #: admin/themes/default/element-sets/browse.php:17
@@ -82,7 +82,7 @@ msgstr ""
 #. Dublin Core: Contributor element name
 #. User role: contributor
 msgid "Contributor"
-msgstr ""
+msgstr "Дэмжигч оролцогч"
 
 #. Dublin Core: Contributor element description
 msgid "An entity responsible for making contributions to the resource"
@@ -137,19 +137,19 @@ msgstr "Хэл"
 
 #. Dublin Core: Language element description
 msgid "A language of the resource"
-msgstr ""
+msgstr "Эх сурвалжийн хэл"
 
 #. Dublin Core: Relation element name
 msgid "Relation"
-msgstr ""
+msgstr "Хамаарал"
 
 #. Dublin Core: Relation element description
 msgid "A related resource"
-msgstr ""
+msgstr "Хамааралтай нөөц"
 
 #. Dublin Core: Coverage element name
 msgid "Coverage"
-msgstr ""
+msgstr "Хамрах хүрээ"
 
 #. Dublin Core: Coverage element description
 msgid ""
@@ -167,7 +167,7 @@ msgstr ""
 
 #. Item Type Metadata
 msgid "Item Type Metadata"
-msgstr ""
+msgstr "Метадата мэдээллийн төрөл"
 
 #. Item Type Metadata description
 msgid ""
@@ -189,7 +189,7 @@ msgstr ""
 
 #. Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
-msgstr ""
+msgstr "Бусад бүтээгч"
 
 #. Omeka Legacy File: Transcriber element
 msgid "Transcriber"
@@ -197,7 +197,7 @@ msgstr ""
 
 #. Omeka Legacy File: Producer element
 msgid "Producer"
-msgstr ""
+msgstr "Продюсер /найруулагч/"
 
 #. Omeka Legacy File: Render Device element
 msgid "Render Device"
@@ -241,7 +241,7 @@ msgstr ""
 
 #. Omeka Image File
 msgid "Omeka Image File"
-msgstr ""
+msgstr "Омека зурган файл"
 
 #. Omeka Image File description
 msgid ""
@@ -297,7 +297,7 @@ msgstr ""
 
 # Omeka Video File: Duration element
 msgid "Duration"
-msgstr ""
+msgstr "Үргэлжлэх хугацаа"
 
 #. Omeka Video File: Sample Rate element
 msgid "Sample Rate"
@@ -364,7 +364,7 @@ msgstr "Холбоос нэмэх"
 #: admin/themes/default/element-sets/edit.php:41
 #: admin/themes/default/files/edit.php:35
 #: admin/themes/default/item-types/edit.php:18
-#: admin/themes/default/items/batch-edit.php:130
+#: admin/themes/default/items/batch-edit.php:131
 #: admin/themes/default/items/edit.php:19
 #: admin/themes/default/plugins/config.php:14
 #: admin/themes/default/settings/edit-api.php:82
@@ -381,7 +381,7 @@ msgstr "Өөрчлөлтийг хадгалах"
 #: admin/themes/default/appearance/edit-navigation.php:35
 #: admin/themes/default/appearance/reset-navigation-confirm.php:2
 msgid "Reset Navigation"
-msgstr ""
+msgstr "Удирдлагыг хуучнаар тохируулах"
 
 #: admin/themes/default/appearance/edit-navigation.php:43
 #: admin/themes/default/collections/edit.php:23
@@ -391,7 +391,7 @@ msgstr ""
 #: admin/themes/default/items/show.php:45
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:79
 msgid "View Public Page"
-msgstr ""
+msgstr "Нийтэд зориулсан хуудсыг харах"
 
 #: admin/themes/default/appearance/edit-navigation.php:44
 #: admin/themes/default/collections/edit.php:24
@@ -401,7 +401,7 @@ msgstr ""
 #: admin/themes/default/files/show.php:30
 #: admin/themes/default/item-types/edit.php:20
 #: admin/themes/default/item-types/show.php:54
-#: admin/themes/default/items/batch-edit.php:119
+#: admin/themes/default/items/batch-edit.php:120
 #: admin/themes/default/items/browse.php:27
 #: admin/themes/default/items/browse.php:81
 #: admin/themes/default/items/browse.php:123
@@ -418,7 +418,7 @@ msgstr "Устгах"
 #: admin/themes/default/common/delete-confirm.php:10
 #: application/views/scripts/common/delete-confirm.php:12
 msgid "Are you sure?"
-msgstr ""
+msgstr "Та итгэлтэй байна уу?"
 
 #: admin/themes/default/appearance/reset-navigation-confirm.php:10
 msgid ""
@@ -441,7 +441,7 @@ msgstr "Сан хөмрөг нэмэх"
 #: admin/themes/default/collections/edit.php:30
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/items/add.php:19
-#: admin/themes/default/items/batch-edit.php:50
+#: admin/themes/default/items/batch-edit.php:51
 #: admin/themes/default/items/edit.php:28
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:52
@@ -452,7 +452,7 @@ msgstr "Нийтийн"
 #: admin/themes/default/collections/edit.php:35
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/add.php:25
-#: admin/themes/default/items/batch-edit.php:65
+#: admin/themes/default/items/batch-edit.php:66
 #: admin/themes/default/items/edit.php:34
 #: admin/themes/default/items/quick-filters.php:8
 #: admin/themes/default/items/show.php:53
@@ -495,7 +495,7 @@ msgstr ""
 #: application/views/scripts/collections/browse.php:11
 #: application/views/scripts/items/browse.php:21
 msgid "Date Added"
-msgstr ""
+msgstr "Нэмэгдсэн огноо"
 
 #: admin/themes/default/collections/browse.php:25
 #: admin/themes/default/collections/show.php:46
@@ -512,8 +512,8 @@ msgstr ""
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:27
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
-#: admin/themes/default/files/show.php:26 admin/themes/default/index.php:54
-#: admin/themes/default/index.php:73
+#: admin/themes/default/files/show.php:26 admin/themes/default/index.php:60
+#: admin/themes/default/index.php:79
 #: admin/themes/default/item-types/browse.php:26
 #: admin/themes/default/item-types/show.php:51
 #: admin/themes/default/items/browse.php:24
@@ -543,7 +543,7 @@ msgstr "Ямар нэг сан хөмрөг алга"
 
 #: admin/themes/default/collections/browse.php:75
 msgid "Get started by adding your first collection."
-msgstr ""
+msgstr "Анхны сан хөмрөгийг үүсгэлээ."
 
 #: admin/themes/default/collections/edit.php:8
 #: admin/themes/default/collections/show.php:8
@@ -603,7 +603,7 @@ msgstr "Үндсэн цэс"
 #: admin/themes/default/common/content-nav.php:5
 #: admin/themes/default/index.php:2
 msgid "Dashboard"
-msgstr ""
+msgstr "Хянах самбар"
 
 #: admin/themes/default/common/content-nav.php:9
 #: admin/themes/default/items/batch-delete.php:17
@@ -640,11 +640,11 @@ msgstr "Омекад суурилав"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Documentation"
-msgstr ""
+msgstr "Баримтжуулалт"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Support Forums"
-msgstr ""
+msgstr "Хэлэлцүүлгийг дэмжих"
 
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
@@ -656,7 +656,7 @@ msgstr "Хувилбар %s"
 #: admin/themes/default/common/footer.php:10
 #: admin/themes/default/system-info/index.php:2
 msgid "System Information"
-msgstr ""
+msgstr "Системийн мэдээлэл"
 
 #: admin/themes/default/common/global-nav.php:1
 msgid "Manage Site"
@@ -673,7 +673,6 @@ msgstr "Хэрэглэгчид"
 
 #: admin/themes/default/common/header.php:11
 #: admin/themes/default/upgrade/index.php:6
-#: admin/themes/default/upgrade/migrate.php:6
 #: application/views/scripts/common/admin-bar.php:11
 msgid "Omeka Admin"
 msgstr "Омека удирдлага"
@@ -681,7 +680,7 @@ msgstr "Омека удирдлага"
 #: admin/themes/default/common/header.php:40
 #: application/views/scripts/common/header.php:32
 msgid "Skip to main content"
-msgstr ""
+msgstr "Алгасаад үндсэн агуулгад очих"
 
 #: admin/themes/default/common/header.php:60
 #: application/views/scripts/common/admin-bar.php:7
@@ -701,14 +700,13 @@ msgstr "Ерөнхий"
 
 #: admin/themes/default/common/settings-nav.php:10
 msgid "Security"
-msgstr ""
+msgstr "Хамгаалалт"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: admin/themes/default/search/index.php:2
-#: application/views/helpers/SearchForm.php:34
+#: application/views/helpers/SearchForm.php:56
 #: application/views/scripts/search/index.php:2
 #: application/views/scripts/search/search-form.php:2
-#: application/views/scripts/search/search-form.php:22
 msgid "Search"
 msgstr "Хайлт"
 
@@ -756,11 +754,11 @@ msgstr "Сэтгэгдэл"
 
 #: admin/themes/default/error/403.php:2
 msgid "403: Forbidden"
-msgstr ""
+msgstr "403: Хандах боломжгүй"
 
 #: admin/themes/default/error/403.php:6
 msgid "Sorry, you do not have permission to access this page."
-msgstr ""
+msgstr "Уучлаарай, та энэ хуудсанд хандах эрхгүй байна."
 
 #: admin/themes/default/error/403.php:10 admin/themes/default/error/404.php:9
 #: admin/themes/default/error/405.php:8
@@ -774,7 +772,7 @@ msgstr ""
 
 #: admin/themes/default/error/404.php:2
 msgid "404: Page Not Found"
-msgstr ""
+msgstr "404: Хуудас олдсонгүй"
 
 #: admin/themes/default/error/404.php:6
 msgid ""
@@ -788,25 +786,25 @@ msgstr ""
 msgid "If this does not help, try contacting the %s."
 msgstr ""
 
-#: admin/themes/default/error/404.php:16 admin/themes/default/index.php:46
+#: admin/themes/default/error/404.php:16 admin/themes/default/index.php:52
 msgid "Recent Items"
-msgstr ""
+msgstr "Шинээр нэмэгдсэн мэдээлэл"
 
-#: admin/themes/default/error/404.php:29 admin/themes/default/index.php:59
+#: admin/themes/default/error/404.php:29 admin/themes/default/index.php:65
 msgid "Add a new item"
 msgstr "Шинэ мэдээлэл нэмэх"
 
-#: admin/themes/default/error/404.php:36 admin/themes/default/index.php:64
+#: admin/themes/default/error/404.php:36 admin/themes/default/index.php:70
 msgid "Recent Collections"
-msgstr ""
+msgstr "Сүүлд нэмэгдсэн сан хөмрөг"
 
-#: admin/themes/default/error/404.php:50 admin/themes/default/index.php:78
+#: admin/themes/default/error/404.php:50 admin/themes/default/index.php:84
 msgid "Add a new collection"
 msgstr "Шинээр сан хөмрөг нэмэх"
 
 #: admin/themes/default/error/405.php:2
 msgid "405: Method Not Allowed"
-msgstr ""
+msgstr "405: Зөвшөөрөгдөөгүй арга"
 
 #: admin/themes/default/error/405.php:9
 #, php-format
@@ -824,7 +822,7 @@ msgstr " #%s  файлыг засварлах"
 #: application/views/scripts/files/show.php:9
 #, php-format
 msgid "File #%s"
-msgstr ""
+msgstr "Файл #%s"
 
 #: admin/themes/default/files/show.php:35
 #: application/libraries/globals.php:409
@@ -841,7 +839,7 @@ msgstr ""
 
 #: admin/themes/default/files/show.php:44
 msgid "Fullsize"
-msgstr ""
+msgstr "Бүтэн хэмжээ"
 
 #: admin/themes/default/files/show.php:45
 msgid "Thumbnail"
@@ -863,7 +861,7 @@ msgstr "Файлын нэр"
 #: admin/themes/default/files/show.php:56
 #: application/views/scripts/files/show.php:24
 msgid "Original Filename"
-msgstr ""
+msgstr "Үндсэн файлын нэр"
 
 #: admin/themes/default/files/show.php:58
 #: application/views/scripts/files/show.php:29
@@ -874,15 +872,15 @@ msgstr "Файлын хэмжээ"
 #: application/views/scripts/files/show.php:30
 #, php-format
 msgid "%s bytes"
-msgstr ""
+msgstr "%s байт"
 
 #: admin/themes/default/files/show.php:64
 msgid "File History"
-msgstr ""
+msgstr "Файлын түүх"
 
 #: admin/themes/default/files/show.php:68
 msgid "Date Modified"
-msgstr ""
+msgstr "Зассан огноо"
 
 #: admin/themes/default/files/show.php:70
 #: application/views/scripts/files/show.php:34
@@ -916,35 +914,45 @@ msgstr ""
 msgid "Output Formats"
 msgstr ""
 
-#: admin/themes/default/index.php:6
-msgid "items"
-msgstr ""
-
-#: admin/themes/default/index.php:7
-msgid "collections"
-msgstr ""
-
-#: admin/themes/default/index.php:8
-msgid "tags"
-msgstr "таагууд"
+#: admin/themes/default/index.php:10
+msgid "item"
+msgid_plural "items"
+msgstr[0] ""
+msgstr[1] ""
 
 #: admin/themes/default/index.php:11
-msgid "plugins"
-msgstr ""
+msgid "collection"
+msgid_plural "collections"
+msgstr[0] ""
+msgstr[1] ""
 
-#: admin/themes/default/index.php:14
-msgid "users"
-msgstr ""
+#: admin/themes/default/index.php:12
+msgid "tag"
+msgid_plural "tags"
+msgstr[0] ""
+msgstr[1] ""
 
-#: admin/themes/default/index.php:18
+#: admin/themes/default/index.php:16
+msgid "plugin"
+msgid_plural "plugins"
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/themes/default/index.php:20
+msgid "user"
+msgid_plural "users"
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/themes/default/index.php:24
 msgid "theme"
-msgstr ""
+msgstr "загвар"
 
-#: admin/themes/default/index.php:29
+#: admin/themes/default/index.php:35
 msgid "A new version of Omeka is available for download."
 msgstr ""
 
-#: admin/themes/default/index.php:30
+#: admin/themes/default/index.php:36
 #, php-format
 msgid "Upgrade to %s"
 msgstr ""
@@ -1044,16 +1052,16 @@ msgstr ""
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:20
 #: admin/themes/default/items/browse.php:116
-#: admin/themes/default/items/browse.php:151
+#: admin/themes/default/items/browse.php:152
 msgid "Add an Item"
-msgstr ""
+msgstr "Мэдээллийг нэмэх"
 
 #: admin/themes/default/items/add.php:12
 msgid "Add Item"
-msgstr ""
+msgstr "Мэдээлэл нэмэх"
 
 #: admin/themes/default/items/add.php:32
-#: admin/themes/default/items/batch-edit.php:89
+#: admin/themes/default/items/batch-edit.php:90
 #: admin/themes/default/items/browse.php:90
 #: admin/themes/default/items/edit.php:41
 #: admin/themes/default/items/show.php:57
@@ -1076,67 +1084,67 @@ msgid "Checked items will be deleted."
 msgstr ""
 
 #: admin/themes/default/items/batch-delete.php:50
-#: admin/themes/default/items/batch-edit.php:116
+#: admin/themes/default/items/batch-edit.php:117
 msgid "Delete Items"
-msgstr ""
+msgstr "Мэдээлэл устгах"
 
 #: admin/themes/default/items/batch-edit.php:2
 msgid "Batch Edit Items"
 msgstr ""
 
-#: admin/themes/default/items/batch-edit.php:36
+#: admin/themes/default/items/batch-edit.php:37
 msgid "Changes will be applied to checked items."
 msgstr ""
 
-#: admin/themes/default/items/batch-edit.php:41
+#: admin/themes/default/items/batch-edit.php:42
 msgid "Item Metadata"
 msgstr ""
 
-#: admin/themes/default/items/batch-edit.php:46
+#: admin/themes/default/items/batch-edit.php:47
 msgid "Public?"
-msgstr ""
+msgstr "Нийтийнх үү?"
 
-#: admin/themes/default/items/batch-edit.php:49
-#: admin/themes/default/items/batch-edit.php:64
-#: admin/themes/default/items/batch-edit.php:78
-#: admin/themes/default/items/batch-edit.php:93
+#: admin/themes/default/items/batch-edit.php:50
+#: admin/themes/default/items/batch-edit.php:65
+#: admin/themes/default/items/batch-edit.php:79
+#: admin/themes/default/items/batch-edit.php:94
 msgid "Select Below"
 msgstr ""
 
-#: admin/themes/default/items/batch-edit.php:51
+#: admin/themes/default/items/batch-edit.php:52
 msgid "Not Public"
-msgstr ""
+msgstr "Нийтийнх биш"
 
-#: admin/themes/default/items/batch-edit.php:61
+#: admin/themes/default/items/batch-edit.php:62
 msgid "Featured?"
 msgstr "Онцлох мөн үү?"
 
-#: admin/themes/default/items/batch-edit.php:66
+#: admin/themes/default/items/batch-edit.php:67
 msgid "Not Featured"
 msgstr ""
 
-#: admin/themes/default/items/batch-edit.php:74
+#: admin/themes/default/items/batch-edit.php:75
 #: admin/themes/default/items/item-type-form.php:3
 msgid "Item Type"
-msgstr ""
+msgstr "Мэдээллийн төрөл"
 
-#: admin/themes/default/items/batch-edit.php:83
-#: admin/themes/default/items/batch-edit.php:98
+#: admin/themes/default/items/batch-edit.php:84
+#: admin/themes/default/items/batch-edit.php:99
 msgid "Remove?"
-msgstr ""
+msgstr "Хасах уу?"
 
-#: admin/themes/default/items/batch-edit.php:104
+#: admin/themes/default/items/batch-edit.php:105
 #: admin/themes/default/items/tag-form.php:8
 #: admin/themes/default/items/tag-form.php:11
 msgid "Add Tags"
-msgstr ""
+msgstr "Тааг нэмэх"
 
-#: admin/themes/default/items/batch-edit.php:107
+#: admin/themes/default/items/batch-edit.php:108
 #, php-format
 msgid "List of tags to add to all checked items, separated by %s."
 msgstr ""
 
-#: admin/themes/default/items/batch-edit.php:117
+#: admin/themes/default/items/batch-edit.php:118
 msgid "Check if you wish to delete selected items."
 msgstr ""
 
@@ -1179,16 +1187,16 @@ msgstr ""
 #: application/views/scripts/items/browse.php:2
 #: application/views/scripts/items/tags.php:2
 msgid "Browse Items"
-msgstr ""
+msgstr "Мэдээллийг тоймлож харах"
 
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2367
-#: application/libraries/globals.php:2757
+#: application/libraries/globals.php:2396
+#: application/libraries/globals.php:2786
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
-msgstr ""
+msgstr "Мэдээлэл хайх"
 
 #: admin/themes/default/items/browse.php:37
 msgid "Select"
@@ -1196,7 +1204,7 @@ msgstr "Сонгох"
 
 #: admin/themes/default/items/browse.php:95
 msgid "No Tags"
-msgstr ""
+msgstr "Тааггүй"
 
 #: admin/themes/default/items/browse.php:139
 msgid "Details"
@@ -1210,37 +1218,39 @@ msgstr ""
 msgid "Hide Details"
 msgstr ""
 
-#: admin/themes/default/items/browse.php:148
+#: admin/themes/default/items/browse.php:149
 msgid "You have no items."
-msgstr ""
+msgstr "Ямар нэг баримт алга"
 
-#: admin/themes/default/items/browse.php:150
+#: admin/themes/default/items/browse.php:151
 msgid "Get started by adding your first item."
 msgstr ""
 
-#: admin/themes/default/items/browse.php:154
+#: admin/themes/default/items/browse.php:156
 #, php-format
-msgid "The query searched %s items and returned no results."
-msgstr ""
+msgid "The query searched 1 item and returned no results."
+msgid_plural "The query searched %s items and returned no results."
+msgstr[0] ""
+msgstr[1] ""
 
-#: admin/themes/default/items/browse.php:154
+#: admin/themes/default/items/browse.php:157
 msgid "refine your search"
 msgstr ""
 
-#: admin/themes/default/items/browse.php:154
+#: admin/themes/default/items/browse.php:157
 #, php-format
 msgid "Would you like to %s?"
 msgstr ""
 
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/views/scripts/functions.php:14
+#: application/views/scripts/functions.php:22
 msgid "[Untitled]"
-msgstr ""
+msgstr "[Гарчиггүй]"
 
 #: admin/themes/default/items/edit.php:8
 #, php-format
 msgid "Edit Item #%s"
-msgstr ""
+msgstr " #%s  - мэдээллийг засварлах"
 
 #: admin/themes/default/items/files-form.php:2
 msgid "Click and drag the files into the preferred display order."
@@ -1252,7 +1262,7 @@ msgstr "Устгах"
 
 #: admin/themes/default/items/files-form.php:22
 msgid "Add New Files"
-msgstr ""
+msgstr "Шинэ файл нэмэх"
 
 #: admin/themes/default/items/files-form.php:24
 #, php-format
@@ -1261,11 +1271,11 @@ msgstr ""
 
 #: admin/themes/default/items/files-form.php:27
 msgid "Find a File"
-msgstr ""
+msgstr "Файл хайх"
 
 #: admin/themes/default/items/form.php:25
 msgid "Add Another File"
-msgstr ""
+msgstr "Өөр файл нэмэх"
 
 #: admin/themes/default/items/item-type-form.php:15
 msgid "Pick this type"
@@ -1278,7 +1288,7 @@ msgstr ""
 
 #: admin/themes/default/items/quick-filters.php:5
 msgid "View All"
-msgstr ""
+msgstr "Бүгдийг харах"
 
 #: admin/themes/default/items/quick-filters.php:7
 msgid "Private"
@@ -1287,7 +1297,7 @@ msgstr ""
 #: admin/themes/default/items/search-form.php:14
 #: application/views/scripts/items/search-form.php:13
 msgid "Search for Keywords"
-msgstr ""
+msgstr "Түлхүүр үгээр хайх"
 
 #: admin/themes/default/items/search-form.php:27
 #: application/views/scripts/items/search-form.php:25
@@ -1297,27 +1307,27 @@ msgstr ""
 #: admin/themes/default/items/search-form.php:28
 #: application/views/scripts/items/search-form.php:90
 msgid "Add a Field"
-msgstr ""
+msgstr "Талбар нэмэх"
 
 #: admin/themes/default/items/search-form.php:54
 #: application/views/scripts/items/search-form.php:50
 msgid "Search Field"
-msgstr ""
+msgstr "Талбараар хайх"
 
 #: admin/themes/default/items/search-form.php:67
 #: application/views/scripts/items/search-form.php:63
 msgid "Search Type"
-msgstr ""
+msgstr "Төрлөөр хайх"
 
 #: admin/themes/default/items/search-form.php:72
 #: application/views/scripts/items/search-form.php:68
 msgid "contains"
-msgstr ""
+msgstr "агуулсан"
 
 #: admin/themes/default/items/search-form.php:73
 #: application/views/scripts/items/search-form.php:69
 msgid "does not contain"
-msgstr ""
+msgstr "агуулаагүй"
 
 #: admin/themes/default/items/search-form.php:74
 #: application/views/scripts/items/search-form.php:70
@@ -1352,22 +1362,22 @@ msgstr ""
 #: admin/themes/default/items/search-form.php:112
 #: application/views/scripts/items/search-form.php:105
 msgid "Search By Collection"
-msgstr ""
+msgstr "Сан хөмрөгөөс хайх"
 
 #: admin/themes/default/items/search-form.php:128
 #: application/views/scripts/items/search-form.php:119
 msgid "Search By Type"
-msgstr ""
+msgstr "Төрлөөр хайх"
 
 #: admin/themes/default/items/search-form.php:145
 #: application/views/scripts/items/search-form.php:135
 msgid "Search By User"
-msgstr ""
+msgstr "Хэрэглэгчээр хайх"
 
 #: admin/themes/default/items/search-form.php:162
 #: application/views/scripts/items/search-form.php:150
 msgid "Search By Tags"
-msgstr ""
+msgstr "Таагаар хайх"
 
 #: admin/themes/default/items/search-form.php:177
 #: application/views/scripts/items/search-form.php:163
@@ -1377,7 +1387,7 @@ msgstr ""
 #: admin/themes/default/items/search-form.php:186
 #: application/views/scripts/items/search-form.php:171
 msgid "Only Public Items"
-msgstr ""
+msgstr "Зөвхөн нийтэд зориулсан мэдээлэл"
 
 #: admin/themes/default/items/search-form.php:187
 #: application/views/scripts/items/search-form.php:172
@@ -1392,7 +1402,7 @@ msgstr ""
 #: admin/themes/default/items/search-form.php:206
 #: application/views/scripts/items/search-form.php:189
 msgid "Only Featured Items"
-msgstr ""
+msgstr "Зөвхөн онцлох мэдээлэл"
 
 #: admin/themes/default/items/search-form.php:207
 #: application/views/scripts/items/search-form.php:190
@@ -1402,7 +1412,7 @@ msgstr ""
 #: admin/themes/default/items/search-form.php:215
 #: application/views/scripts/items/search-form.php:199
 msgid "Search for items"
-msgstr ""
+msgstr "Мэдээллээр хайх"
 
 #: admin/themes/default/items/show.php:8
 #, php-format
@@ -1411,11 +1421,11 @@ msgstr ""
 
 #: admin/themes/default/items/show.php:28
 msgid "Prev Item"
-msgstr ""
+msgstr "Өмнөх мэдээлэл"
 
 #: admin/themes/default/items/show.php:33
 msgid "Next Item"
-msgstr ""
+msgstr "Дараагийн мэдээлэл"
 
 #: admin/themes/default/items/show.php:73
 msgid "File Metadata"
@@ -1444,11 +1454,11 @@ msgstr ""
 
 #: admin/themes/default/items/tag-form.php:15
 msgid "All Tags"
-msgstr ""
+msgstr "Бүх Таагууд"
 
 #: admin/themes/default/items/tags.php:2
 msgid "Browse Items by Tag"
-msgstr ""
+msgstr "Мэдээллийг Таагаар тоймлож харах"
 
 #: admin/themes/default/items/tags.php:9
 #: admin/themes/default/tags/browse.php:85
@@ -1469,7 +1479,7 @@ msgstr ""
 
 #: admin/themes/default/plugins/browse.php:32
 msgid "This is not a valid plugin."
-msgstr ""
+msgstr "Энэ плагин зөвшөөрөгдөөгүй."
 
 #: admin/themes/default/plugins/browse.php:57
 #, php-format
@@ -1513,7 +1523,7 @@ msgstr ""
 #: admin/themes/default/plugins/browse.php:131
 #: application/forms/Install.php:178
 msgid "Install"
-msgstr ""
+msgstr "Суулгах"
 
 #: admin/themes/default/plugins/browse.php:143
 msgid ""
@@ -1524,7 +1534,7 @@ msgstr ""
 #: admin/themes/default/plugins/config.php:2
 #, php-format
 msgid "Configure Plugin: %s"
-msgstr ""
+msgstr "Плагин тохируулах: %s"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:2
 #, php-format
@@ -1553,7 +1563,7 @@ msgstr "Болих"
 #: admin/themes/default/tags/browse.php:18
 #: application/views/scripts/search/index.php:13
 msgid "Record Type"
-msgstr ""
+msgstr "Бичлэгийн төрөл"
 
 #: admin/themes/default/search/index.php:39
 #: application/views/scripts/search/index.php:40
@@ -1666,19 +1676,19 @@ msgstr ""
 
 #: admin/themes/default/settings/edit-settings.php:23
 msgid "Test"
-msgstr ""
+msgstr "тест"
 
 #: admin/themes/default/tags/browse.php:7
 msgid "Edit Tags"
-msgstr ""
+msgstr "Таагийг засварлах"
 
 #: admin/themes/default/tags/browse.php:9
 msgid "Browse Tags"
-msgstr ""
+msgstr "Таагуудыг тоймлож харах"
 
 #: admin/themes/default/tags/browse.php:24
 msgid "Editing Tags"
-msgstr ""
+msgstr "Тааг засварлаж байна"
 
 #: admin/themes/default/tags/browse.php:27
 msgid "To view all items with a tag, click the number."
@@ -1710,7 +1720,7 @@ msgstr ""
 
 #: admin/themes/default/tags/browse.php:42
 msgid "Recent"
-msgstr ""
+msgstr "Сүүлийн"
 
 #: admin/themes/default/tags/browse.php:53
 #: admin/themes/default/tags/browse.php:55
@@ -1729,7 +1739,7 @@ msgstr ""
 
 #: admin/themes/default/themes/browse.php:19
 msgid "Current Theme"
-msgstr ""
+msgstr "Сонгосон загвар"
 
 #: admin/themes/default/themes/browse.php:21
 #: admin/themes/default/themes/browse.php:47
@@ -1776,27 +1786,27 @@ msgstr ""
 msgid "Upgrade Database"
 msgstr ""
 
-#: admin/themes/default/upgrade/migrate.php:32
+#: admin/themes/default/upgrade/migrate.php:3
+msgid "Omeka has upgraded successfully."
+msgstr ""
+
+#: admin/themes/default/upgrade/migrate.php:5
 msgid "Omeka encountered an error when upgrading your installation."
 msgstr ""
 
-#: admin/themes/default/upgrade/migrate.php:37
+#: admin/themes/default/upgrade/migrate.php:24
+msgid "Return to Dashboard"
+msgstr "Хяналтын самбарт буцах"
+
+#: admin/themes/default/upgrade/migrate.php:30
 msgid "Please restore from your database backup and try again."
 msgstr ""
 
-#: admin/themes/default/upgrade/migrate.php:39
+#: admin/themes/default/upgrade/migrate.php:31
 msgid ""
 "If you have any questions please refer to <a "
 "href=\"http://omeka.org/codex\">Omeka documentation</a> or post a message on"
 " the <a href=\"http://omeka.org/forums\">Omeka forums</a>."
-msgstr ""
-
-#: admin/themes/default/upgrade/migrate.php:42
-msgid "Omeka has upgraded successfully."
-msgstr ""
-
-#: admin/themes/default/upgrade/migrate.php:43
-msgid "Return to Dashboard"
 msgstr ""
 
 #: admin/themes/default/users/activate.php:2
@@ -1814,28 +1824,28 @@ msgstr ""
 #: application/forms/ResetPassword.php:23
 #: application/views/scripts/users/activate.php:14
 msgid "Create a Password"
-msgstr ""
+msgstr "Нууц үг үүсгэх"
 
 #: admin/themes/default/users/activate.php:23 application/forms/Install.php:71
 #: application/forms/ResetPassword.php:44
 #: application/views/scripts/users/activate.php:20
 msgid "Re-type the Password"
-msgstr ""
+msgstr "Нууц үгийг дахин оруул"
 
 #: admin/themes/default/users/add.php:2
 msgid "Add New User"
-msgstr ""
+msgstr "Шинэ хэрэглэгч нэмэх"
 
 #: admin/themes/default/users/add.php:13
 msgid "Add User"
-msgstr ""
+msgstr "Шинэ хэрэглэгч нэмэх"
 
 #: admin/themes/default/users/api-keys.php:8
 #: admin/themes/default/users/change-password.php:8
 #: admin/themes/default/users/edit.php:8
 #, php-format
 msgid "Edit User #%s"
-msgstr ""
+msgstr " #%s - хэрэглэгчийг засварлах"
 
 #: admin/themes/default/users/api-keys.php:17
 msgid "New key label"
@@ -1859,7 +1869,7 @@ msgstr ""
 
 #: admin/themes/default/users/api-keys.php:41
 msgid "Key"
-msgstr ""
+msgstr "Түлхүүр"
 
 #: admin/themes/default/users/api-keys.php:42
 msgid "Last IP"
@@ -2281,11 +2291,11 @@ msgstr ""
 #: application/controllers/PluginsController.php:395
 #, php-format
 msgid "The plugin %s must be installed."
-msgstr ""
+msgstr " %s  плагин суугдсан байна."
 
 #: application/controllers/SettingsController.php:52
 msgid "The general settings have been updated."
-msgstr ""
+msgstr "Ерөнхий тохиргоо шинэчлэгдсэн байна."
 
 #: application/controllers/SettingsController.php:85
 msgid "The security settings have been updated."
@@ -2319,7 +2329,7 @@ msgstr ""
 msgid "The ImageMagick directory path does not work."
 msgstr ""
 
-#: application/controllers/TagsController.php:48
+#: application/controllers/TagsController.php:47
 msgid "Invalid tagType given."
 msgstr ""
 
@@ -2344,8 +2354,15 @@ msgstr ""
 msgid "The theme settings were successfully saved!"
 msgstr ""
 
-#: application/controllers/UpgradeController.php:50
+#: application/controllers/UpgradeController.php:56
 msgid "SQL error in migration: "
+msgstr ""
+
+#: application/controllers/UpgradeController.php:69
+#, php-format
+msgid ""
+"Omeka requires PHP version %1$s or higher, but this server is running PHP "
+"version %2$s. Please update the installed version of PHP and try again."
 msgstr ""
 
 #: application/controllers/UsersController.php:70
@@ -2886,17 +2903,17 @@ msgstr ""
 msgid "Active?"
 msgstr ""
 
-#: application/libraries/Omeka/Job/Process/Dispatcher.php:115
+#: application/libraries/Omeka/Job/Process/Dispatcher.php:114
 #, php-format
 msgid "The configured PHP path (%s) is invalid."
 msgstr ""
 
-#: application/libraries/Omeka/Job/Process/Dispatcher.php:125
+#: application/libraries/Omeka/Job/Process/Dispatcher.php:124
 #, php-format
 msgid "The configured PHP path (%s) does not point to a PHP-CLI binary."
 msgstr ""
 
-#: application/libraries/Omeka/Job/Process/Dispatcher.php:127
+#: application/libraries/Omeka/Job/Process/Dispatcher.php:126
 #, php-format
 msgid ""
 "The configured PHP path (%s) points to a PHP-CLI binary with an invalid "
@@ -2943,11 +2960,11 @@ msgstr ""
 
 #: application/libraries/globals.php:410
 msgid "File"
-msgstr ""
+msgstr "Файл"
 
 #: application/libraries/globals.php:468
 msgid "Keyword"
-msgstr ""
+msgstr "Түлхүүр үг"
 
 #: application/libraries/globals.php:469
 msgid "Boolean"
@@ -2957,65 +2974,65 @@ msgstr ""
 msgid "Exact match"
 msgstr ""
 
-#: application/libraries/globals.php:1234
-#: application/libraries/globals.php:1255
+#: application/libraries/globals.php:1258
+#: application/libraries/globals.php:1279
 #, php-format
 msgid "Could not find file %s!"
 msgstr ""
 
-#: application/libraries/globals.php:1272
+#: application/libraries/globals.php:1296
 msgid "No featured collections are available."
 msgstr ""
 
-#: application/libraries/globals.php:1564
+#: application/libraries/globals.php:1593
 msgid "Select Below "
 msgstr ""
 
-#: application/libraries/globals.php:1607
+#: application/libraries/globals.php:1636
 msgid "Omeka RSS Feed"
 msgstr ""
 
-#: application/libraries/globals.php:1608
+#: application/libraries/globals.php:1637
 msgid "Omeka Atom Feed"
 msgstr ""
 
-#: application/libraries/globals.php:2264
+#: application/libraries/globals.php:2293
 msgid "No recent items available."
 msgstr ""
 
-#: application/libraries/globals.php:2290
+#: application/libraries/globals.php:2319
 msgid "No featured items are available."
 msgstr ""
 
-#: application/libraries/globals.php:2349
+#: application/libraries/globals.php:2378
 msgid "View"
-msgstr ""
+msgstr "Харах"
 
-#: application/libraries/globals.php:2411
+#: application/libraries/globals.php:2440
 msgid "No Collection"
 msgstr ""
 
-#: application/libraries/globals.php:2529
+#: application/libraries/globals.php:2558
 msgid "RSS"
-msgstr ""
+msgstr "АрЭсЭс"
 
-#: application/libraries/globals.php:2546
+#: application/libraries/globals.php:2575
 msgid "Next Item &rarr;"
-msgstr ""
+msgstr "Дараагийн мэдээлэл &rarr;"
 
-#: application/libraries/globals.php:2566
+#: application/libraries/globals.php:2595
 msgid "&larr; Previous Item"
-msgstr ""
+msgstr "&larr; Өмнөх мэдээлэл"
 
-#: application/libraries/globals.php:2747
+#: application/libraries/globals.php:2776
 msgid "Browse All"
-msgstr ""
+msgstr "Бүгдийг харах"
 
-#: application/libraries/globals.php:2752
+#: application/libraries/globals.php:2781
 msgid "Browse by Tag"
 msgstr ""
 
-#: application/libraries/globals.php:3021
+#: application/libraries/globals.php:3050
 msgid "No tags are available."
 msgstr ""
 
@@ -3113,7 +3130,7 @@ msgstr ""
 
 #: application/models/Item.php:528
 msgid "Invalid item type."
-msgstr ""
+msgstr "Хүчингүй файлын төрөл"
 
 #: application/models/Item.php:531
 msgid "Invalid collection."
@@ -3128,62 +3145,62 @@ msgstr ""
 msgid "The item type name must be unique."
 msgstr ""
 
-#: application/models/ItemType.php:179
+#: application/models/ItemType.php:183
 msgid "There are too many values in the element ordering array."
 msgstr ""
 
-#: application/models/ItemType.php:181
+#: application/models/ItemType.php:185
 msgid "There are too few values in the element ordering array."
 msgstr ""
 
-#: application/models/ItemType.php:218
+#: application/models/ItemType.php:222
 msgid ""
 "Invalid element data. To add elements, you must either pass an element "
 "objects or an array of element metadata."
 msgstr ""
 
-#: application/models/ItemType.php:282
+#: application/models/ItemType.php:286
 msgid ""
 "Cannot remove elements from an item type that is not persistent in the "
 "database!"
 msgstr ""
 
-#: application/models/ItemType.php:291
+#: application/models/ItemType.php:295
 #, php-format
 msgid "Cannot find element with ID %s!"
 msgstr ""
 
-#: application/models/ItemType.php:332
+#: application/models/ItemType.php:336
 #, php-format
 msgid "Item type does not contain an element with the ID %s!"
 msgstr ""
 
-#: application/models/ItemType.php:353
+#: application/models/ItemType.php:357
 msgid ""
 "Invalid parameter. The hasElement function requires either an element object"
 " or an element id to determine if an item type has an element."
 msgstr ""
 
-#: application/models/Mixin/ElementText.php:292
+#: application/models/Mixin/ElementText.php:293
 #, php-format
 msgid "There is no element \"%1$s\", \"%2$s\"!"
 msgstr ""
 
-#: application/models/Mixin/ElementText.php:311
+#: application/models/Mixin/ElementText.php:312
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
 msgstr ""
 
-#: application/models/Mixin/ElementText.php:430
+#: application/models/Mixin/ElementText.php:431
 msgid "Element texts are not formatted correctly!"
 msgstr ""
 
-#: application/models/Mixin/ElementText.php:578
+#: application/models/Mixin/ElementText.php:579
 #, php-format
 msgid "The \"%s\" field has at least one invalid value!"
 msgstr ""
 
-#: application/models/Mixin/ElementText.php:648
+#: application/models/Mixin/ElementText.php:649
 msgid "Cannot save element text for records that are not yet persistent!"
 msgstr ""
 
@@ -3251,7 +3268,7 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:839
 #: application/tests/suite/Omeka/NavigationTest.php:952
 msgid "Edit Items"
-msgstr ""
+msgstr "Мэдээлэл засварлах"
 
 #: application/tests/suite/Omeka/NavigationTest.php:758
 #: application/tests/suite/Omeka/NavigationTest.php:818
@@ -3271,7 +3288,7 @@ msgstr "Омека"
 #: application/tests/suite/Omeka/NavigationTest.php:825
 #: application/tests/suite/Omeka/NavigationTest.php:951
 msgid "CHNM"
-msgstr ""
+msgstr "- CHNM -"
 
 #: application/tests/suite/Omeka/NavigationTest.php:982
 #: application/tests/suite/Omeka/NavigationTest.php:990
@@ -3343,7 +3360,7 @@ msgstr "Хуудас 6"
 
 #: application/views/helpers/AllElementTexts.php:108
 msgid "[no text]"
-msgstr ""
+msgstr "[бичиггүй]"
 
 #: application/views/helpers/ElementForm.php:65
 msgid "Add Input"
@@ -3400,7 +3417,7 @@ msgstr ""
 
 #: application/views/scripts/common/footer.php:14
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
-msgstr ""
+msgstr "Суурилсан програм <a href=\"http://omeka.org\">Омека</a>."
 
 #: application/views/scripts/common/pagination_control.php:5
 msgid "Pagination"
@@ -3469,7 +3486,7 @@ msgstr ""
 
 #: application/views/scripts/index.php:10
 msgid "Featured Item"
-msgstr ""
+msgstr "Онцлох мэдээлэл"
 
 #: application/views/scripts/index.php:18
 msgid "Featured Collection"
@@ -3542,7 +3559,7 @@ msgstr ""
 
 #: install/views/scripts/index/index.phtml:2
 msgid "Installation Warning"
-msgstr ""
+msgstr "Суулгалтын анхааруулга"
 
 #: install/views/scripts/index/index.phtml:4
 msgid ""

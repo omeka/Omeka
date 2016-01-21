@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2015-08-21 16:55+0000\n"
+"PO-Revision-Date: 2016-01-11 21:13+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Welsh (United Kingdom) (http://www.transifex.com/omeka/omeka/language/cy_GB/)\n"
 "MIME-Version: 1.0\n"
@@ -363,7 +363,7 @@ msgstr "Ychwanegu Dolen"
 #: admin/themes/default/element-sets/edit.php:41
 #: admin/themes/default/files/edit.php:35
 #: admin/themes/default/item-types/edit.php:18
-#: admin/themes/default/items/batch-edit.php:130
+#: admin/themes/default/items/batch-edit.php:131
 #: admin/themes/default/items/edit.php:19
 #: admin/themes/default/plugins/config.php:14
 #: admin/themes/default/settings/edit-api.php:82
@@ -400,7 +400,7 @@ msgstr "Gweld y Tudalen Gyhoeddus"
 #: admin/themes/default/files/show.php:30
 #: admin/themes/default/item-types/edit.php:20
 #: admin/themes/default/item-types/show.php:54
-#: admin/themes/default/items/batch-edit.php:119
+#: admin/themes/default/items/batch-edit.php:120
 #: admin/themes/default/items/browse.php:27
 #: admin/themes/default/items/browse.php:81
 #: admin/themes/default/items/browse.php:123
@@ -440,7 +440,7 @@ msgstr "Ychwanegu Casgliad"
 #: admin/themes/default/collections/edit.php:30
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/items/add.php:19
-#: admin/themes/default/items/batch-edit.php:50
+#: admin/themes/default/items/batch-edit.php:51
 #: admin/themes/default/items/edit.php:28
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:52
@@ -451,7 +451,7 @@ msgstr "Cyhoeddus"
 #: admin/themes/default/collections/edit.php:35
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/add.php:25
-#: admin/themes/default/items/batch-edit.php:65
+#: admin/themes/default/items/batch-edit.php:66
 #: admin/themes/default/items/edit.php:34
 #: admin/themes/default/items/quick-filters.php:8
 #: admin/themes/default/items/show.php:53
@@ -511,8 +511,8 @@ msgstr "(Preifat)"
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:27
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
-#: admin/themes/default/files/show.php:26 admin/themes/default/index.php:54
-#: admin/themes/default/index.php:73
+#: admin/themes/default/files/show.php:26 admin/themes/default/index.php:60
+#: admin/themes/default/index.php:79
 #: admin/themes/default/item-types/browse.php:26
 #: admin/themes/default/item-types/show.php:51
 #: admin/themes/default/items/browse.php:24
@@ -672,7 +672,6 @@ msgstr "Defnyddwyr"
 
 #: admin/themes/default/common/header.php:11
 #: admin/themes/default/upgrade/index.php:6
-#: admin/themes/default/upgrade/migrate.php:6
 #: application/views/scripts/common/admin-bar.php:11
 msgid "Omeka Admin"
 msgstr "Gweinyddiaeth Omeka"
@@ -704,10 +703,9 @@ msgstr "Diogelwch"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: admin/themes/default/search/index.php:2
-#: application/views/helpers/SearchForm.php:34
+#: application/views/helpers/SearchForm.php:56
 #: application/views/scripts/search/index.php:2
 #: application/views/scripts/search/search-form.php:2
-#: application/views/scripts/search/search-form.php:22
 msgid "Search"
 msgstr "Chwilio"
 
@@ -787,19 +785,19 @@ msgstr "Rydych wedi ceisio mynd at dudalen sydd ddim yn bodoli. Mae hyn yn digwy
 msgid "If this does not help, try contacting the %s."
 msgstr "Os nad yw hyn yn gweithio, cysylltwch â %s."
 
-#: admin/themes/default/error/404.php:16 admin/themes/default/index.php:46
+#: admin/themes/default/error/404.php:16 admin/themes/default/index.php:52
 msgid "Recent Items"
 msgstr "Eitemau Diweddar"
 
-#: admin/themes/default/error/404.php:29 admin/themes/default/index.php:59
+#: admin/themes/default/error/404.php:29 admin/themes/default/index.php:65
 msgid "Add a new item"
 msgstr "Ychwanegu eitem newydd"
 
-#: admin/themes/default/error/404.php:36 admin/themes/default/index.php:64
+#: admin/themes/default/error/404.php:36 admin/themes/default/index.php:70
 msgid "Recent Collections"
 msgstr "Casgliadau Diweddar"
 
-#: admin/themes/default/error/404.php:50 admin/themes/default/index.php:78
+#: admin/themes/default/error/404.php:50 admin/themes/default/index.php:84
 msgid "Add a new collection"
 msgstr "Ychwanegu casgliad newydd"
 
@@ -915,35 +913,55 @@ msgstr "Metadata wedi'i mewnblannu"
 msgid "Output Formats"
 msgstr "Fformat yr Allbwn"
 
-#: admin/themes/default/index.php:6
-msgid "items"
-msgstr "eitemau"
-
-#: admin/themes/default/index.php:7
-msgid "collections"
-msgstr "casgliadau"
-
-#: admin/themes/default/index.php:8
-msgid "tags"
-msgstr "tagiau"
+#: admin/themes/default/index.php:10
+msgid "item"
+msgid_plural "items"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 #: admin/themes/default/index.php:11
-msgid "plugins"
-msgstr "ategion"
+msgid "collection"
+msgid_plural "collections"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
-#: admin/themes/default/index.php:14
-msgid "users"
-msgstr "defnyddwyr"
+#: admin/themes/default/index.php:12
+msgid "tag"
+msgid_plural "tags"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
-#: admin/themes/default/index.php:18
+#: admin/themes/default/index.php:16
+msgid "plugin"
+msgid_plural "plugins"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: admin/themes/default/index.php:20
+msgid "user"
+msgid_plural "users"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: admin/themes/default/index.php:24
 msgid "theme"
 msgstr "themâu"
 
-#: admin/themes/default/index.php:29
+#: admin/themes/default/index.php:35
 msgid "A new version of Omeka is available for download."
 msgstr "Mae yna fersiwn newydd o Omeka ar gael i'w lawrlwytho."
 
-#: admin/themes/default/index.php:30
+#: admin/themes/default/index.php:36
 #, php-format
 msgid "Upgrade to %s"
 msgstr "Uwchraddio i %s"
@@ -1043,7 +1061,7 @@ msgstr "Ni ychwanegwyd unrhyw eitem yn ddiweddar."
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:20
 #: admin/themes/default/items/browse.php:116
-#: admin/themes/default/items/browse.php:151
+#: admin/themes/default/items/browse.php:152
 msgid "Add an Item"
 msgstr "Ychwanegu Eitem"
 
@@ -1052,7 +1070,7 @@ msgid "Add Item"
 msgstr "Ychwanegu Eitem"
 
 #: admin/themes/default/items/add.php:32
-#: admin/themes/default/items/batch-edit.php:89
+#: admin/themes/default/items/batch-edit.php:90
 #: admin/themes/default/items/browse.php:90
 #: admin/themes/default/items/edit.php:41
 #: admin/themes/default/items/show.php:57
@@ -1075,7 +1093,7 @@ msgid "Checked items will be deleted."
 msgstr "Bydd yr eitemau sydd wedi'u ticio yn cael eu dileu."
 
 #: admin/themes/default/items/batch-delete.php:50
-#: admin/themes/default/items/batch-edit.php:116
+#: admin/themes/default/items/batch-edit.php:117
 msgid "Delete Items"
 msgstr "Dileu Eitemau"
 
@@ -1083,59 +1101,59 @@ msgstr "Dileu Eitemau"
 msgid "Batch Edit Items"
 msgstr "Golygu Mwy Nag Un Eitem"
 
-#: admin/themes/default/items/batch-edit.php:36
+#: admin/themes/default/items/batch-edit.php:37
 msgid "Changes will be applied to checked items."
 msgstr "Bydd newidiadau yn cael eu gweithredu i'r eitemau a farciwyd."
 
-#: admin/themes/default/items/batch-edit.php:41
+#: admin/themes/default/items/batch-edit.php:42
 msgid "Item Metadata"
 msgstr "Metadata'r Eitem"
 
-#: admin/themes/default/items/batch-edit.php:46
+#: admin/themes/default/items/batch-edit.php:47
 msgid "Public?"
 msgstr "Cyhoeddus?"
 
-#: admin/themes/default/items/batch-edit.php:49
-#: admin/themes/default/items/batch-edit.php:64
-#: admin/themes/default/items/batch-edit.php:78
-#: admin/themes/default/items/batch-edit.php:93
+#: admin/themes/default/items/batch-edit.php:50
+#: admin/themes/default/items/batch-edit.php:65
+#: admin/themes/default/items/batch-edit.php:79
+#: admin/themes/default/items/batch-edit.php:94
 msgid "Select Below"
 msgstr "Dewiswch Isod"
 
-#: admin/themes/default/items/batch-edit.php:51
+#: admin/themes/default/items/batch-edit.php:52
 msgid "Not Public"
 msgstr "Ddim yn Gyhoeddus"
 
-#: admin/themes/default/items/batch-edit.php:61
+#: admin/themes/default/items/batch-edit.php:62
 msgid "Featured?"
 msgstr "Amlygwyd?"
 
-#: admin/themes/default/items/batch-edit.php:66
+#: admin/themes/default/items/batch-edit.php:67
 msgid "Not Featured"
 msgstr "Heb ei Amlygu"
 
-#: admin/themes/default/items/batch-edit.php:74
+#: admin/themes/default/items/batch-edit.php:75
 #: admin/themes/default/items/item-type-form.php:3
 msgid "Item Type"
 msgstr "Math o Eitem"
 
-#: admin/themes/default/items/batch-edit.php:83
-#: admin/themes/default/items/batch-edit.php:98
+#: admin/themes/default/items/batch-edit.php:84
+#: admin/themes/default/items/batch-edit.php:99
 msgid "Remove?"
 msgstr "Dileu?"
 
-#: admin/themes/default/items/batch-edit.php:104
+#: admin/themes/default/items/batch-edit.php:105
 #: admin/themes/default/items/tag-form.php:8
 #: admin/themes/default/items/tag-form.php:11
 msgid "Add Tags"
 msgstr "Ychwanegu Tagiau"
 
-#: admin/themes/default/items/batch-edit.php:107
+#: admin/themes/default/items/batch-edit.php:108
 #, php-format
 msgid "List of tags to add to all checked items, separated by %s."
 msgstr "Rhestr y tagiau i'w hychwanegu at yr eitemau a farciwyd, wedi'u gwahanu â %s."
 
-#: admin/themes/default/items/batch-edit.php:117
+#: admin/themes/default/items/batch-edit.php:118
 msgid "Check if you wish to delete selected items."
 msgstr "Ticiwch os ydych am ddileu'r eitemau."
 
@@ -1183,8 +1201,8 @@ msgstr "Pori'r Eitemau"
 #: admin/themes/default/items/browse.php:22
 #: admin/themes/default/items/browse.php:118
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2367
-#: application/libraries/globals.php:2757
+#: application/libraries/globals.php:2396
+#: application/libraries/globals.php:2786
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Chwilio eitemau"
@@ -1209,30 +1227,34 @@ msgstr "Dangos Manylion"
 msgid "Hide Details"
 msgstr "Cuddio Manylion"
 
-#: admin/themes/default/items/browse.php:148
+#: admin/themes/default/items/browse.php:149
 msgid "You have no items."
 msgstr "Does dim eitem gennych."
 
-#: admin/themes/default/items/browse.php:150
+#: admin/themes/default/items/browse.php:151
 msgid "Get started by adding your first item."
 msgstr "Dechreuwch arni drwy ychwanegu'ch eitem cyntaf."
 
-#: admin/themes/default/items/browse.php:154
+#: admin/themes/default/items/browse.php:156
 #, php-format
-msgid "The query searched %s items and returned no results."
-msgstr "Chwiliwyd %s eitem a ni chafwyd unrhyw ganlyniadau."
+msgid "The query searched 1 item and returned no results."
+msgid_plural "The query searched %s items and returned no results."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
-#: admin/themes/default/items/browse.php:154
+#: admin/themes/default/items/browse.php:157
 msgid "refine your search"
 msgstr "mireinio'r chwiliad"
 
-#: admin/themes/default/items/browse.php:154
+#: admin/themes/default/items/browse.php:157
 #, php-format
 msgid "Would you like to %s?"
 msgstr "Hoffech chi %s?"
 
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/views/scripts/functions.php:14
+#: application/views/scripts/functions.php:22
 msgid "[Untitled]"
 msgstr "[Di-deitl]"
 
@@ -1775,28 +1797,28 @@ msgstr "Gwnewch copi wrth-gefn o'ch cronfa ddata cyfredol, yna cliciwch ar y bot
 msgid "Upgrade Database"
 msgstr "Uwchraddio'r Gronfa ddata"
 
-#: admin/themes/default/upgrade/migrate.php:32
+#: admin/themes/default/upgrade/migrate.php:3
+msgid "Omeka has upgraded successfully."
+msgstr "Uwchraddiwyd Omeka yn llwyddiannus."
+
+#: admin/themes/default/upgrade/migrate.php:5
 msgid "Omeka encountered an error when upgrading your installation."
 msgstr "Gwynebwyd gwall wrth i Omeka geisio uwchraddio'ch gosodiadau."
 
-#: admin/themes/default/upgrade/migrate.php:37
+#: admin/themes/default/upgrade/migrate.php:24
+msgid "Return to Dashboard"
+msgstr "Dychwelyd at y Dangosfwrdd"
+
+#: admin/themes/default/upgrade/migrate.php:30
 msgid "Please restore from your database backup and try again."
 msgstr "Ail-osodwch o'ch cronfa ddata a cheisiwch eto."
 
-#: admin/themes/default/upgrade/migrate.php:39
+#: admin/themes/default/upgrade/migrate.php:31
 msgid ""
 "If you have any questions please refer to <a "
 "href=\"http://omeka.org/codex\">Omeka documentation</a> or post a message on"
 " the <a href=\"http://omeka.org/forums\">Omeka forums</a>."
 msgstr "Os oes unrhyw gwestiynau gennych, sbiwch ar <a href=\"http://omeka.org/codex\">ddogfennaeth Omeka</a>  neu postiwch ar <a href=\"http://omeka.org/forums\">Negesfyrddau Omeka</a>."
-
-#: admin/themes/default/upgrade/migrate.php:42
-msgid "Omeka has upgraded successfully."
-msgstr "Uwchraddiwyd Omeka yn llwyddiannus."
-
-#: admin/themes/default/upgrade/migrate.php:43
-msgid "Return to Dashboard"
-msgstr "Dychwelyd at y Dangosfwrdd"
 
 #: admin/themes/default/users/activate.php:2
 #: application/views/scripts/users/activate.php:2
@@ -2318,7 +2340,7 @@ msgstr "Mae'r llwybr ImageMagick yn gweithio."
 msgid "The ImageMagick directory path does not work."
 msgstr "Nid yw llwybr ImageMagick yn gweithio."
 
-#: application/controllers/TagsController.php:48
+#: application/controllers/TagsController.php:47
 msgid "Invalid tagType given."
 msgstr "tagType annilys."
 
@@ -2343,9 +2365,16 @@ msgstr "Newidwyd y thema yn llwyddiannus."
 msgid "The theme settings were successfully saved!"
 msgstr "Mae gosodiadau'r thema wedi'u newid yn llwyddiannus!"
 
-#: application/controllers/UpgradeController.php:50
+#: application/controllers/UpgradeController.php:56
 msgid "SQL error in migration: "
 msgstr "Gwall SQL tra'n mudo."
+
+#: application/controllers/UpgradeController.php:69
+#, php-format
+msgid ""
+"Omeka requires PHP version %1$s or higher, but this server is running PHP "
+"version %2$s. Please update the installed version of PHP and try again."
+msgstr ""
 
 #: application/controllers/UsersController.php:70
 msgid ""
@@ -2885,17 +2914,17 @@ msgstr ""
 msgid "Active?"
 msgstr "Gweithredol?"
 
-#: application/libraries/Omeka/Job/Process/Dispatcher.php:115
+#: application/libraries/Omeka/Job/Process/Dispatcher.php:114
 #, php-format
 msgid "The configured PHP path (%s) is invalid."
 msgstr "Mae'r llwybyr PHP (%s) yn annilys."
 
-#: application/libraries/Omeka/Job/Process/Dispatcher.php:125
+#: application/libraries/Omeka/Job/Process/Dispatcher.php:124
 #, php-format
 msgid "The configured PHP path (%s) does not point to a PHP-CLI binary."
 msgstr "Nid yw'r llwybr PHP (%s) yn pwyntio at PHP-CLI deuaidd."
 
-#: application/libraries/Omeka/Job/Process/Dispatcher.php:127
+#: application/libraries/Omeka/Job/Process/Dispatcher.php:126
 #, php-format
 msgid ""
 "The configured PHP path (%s) points to a PHP-CLI binary with an invalid "
@@ -2956,65 +2985,65 @@ msgstr "Boolean"
 msgid "Exact match"
 msgstr "Cydweddiad union"
 
-#: application/libraries/globals.php:1234
-#: application/libraries/globals.php:1255
+#: application/libraries/globals.php:1258
+#: application/libraries/globals.php:1279
 #, php-format
 msgid "Could not find file %s!"
 msgstr "Methu dod o hyd i'r ffeil %s!"
 
-#: application/libraries/globals.php:1272
+#: application/libraries/globals.php:1296
 msgid "No featured collections are available."
 msgstr "Does dim casgliadau nodweddiadol i gael."
 
-#: application/libraries/globals.php:1564
+#: application/libraries/globals.php:1593
 msgid "Select Below "
 msgstr "Dewiswch Isod"
 
-#: application/libraries/globals.php:1607
+#: application/libraries/globals.php:1636
 msgid "Omeka RSS Feed"
 msgstr "Ffrwd RSS Omeka"
 
-#: application/libraries/globals.php:1608
+#: application/libraries/globals.php:1637
 msgid "Omeka Atom Feed"
 msgstr "Ffrwd Atom Omeka"
 
-#: application/libraries/globals.php:2264
+#: application/libraries/globals.php:2293
 msgid "No recent items available."
 msgstr "Does dim eitemau diweddar ar gael."
 
-#: application/libraries/globals.php:2290
+#: application/libraries/globals.php:2319
 msgid "No featured items are available."
 msgstr "Does dim eitemau nodweddiadol i gael."
 
-#: application/libraries/globals.php:2349
+#: application/libraries/globals.php:2378
 msgid "View"
 msgstr "Gweld"
 
-#: application/libraries/globals.php:2411
+#: application/libraries/globals.php:2440
 msgid "No Collection"
 msgstr "Dim Casgliad"
 
-#: application/libraries/globals.php:2529
+#: application/libraries/globals.php:2558
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2546
+#: application/libraries/globals.php:2575
 msgid "Next Item &rarr;"
 msgstr "Eitem nesaf →"
 
-#: application/libraries/globals.php:2566
+#: application/libraries/globals.php:2595
 msgid "&larr; Previous Item"
 msgstr "← Eitem Flaenorol"
 
-#: application/libraries/globals.php:2747
+#: application/libraries/globals.php:2776
 msgid "Browse All"
 msgstr "Pori Popeth"
 
-#: application/libraries/globals.php:2752
+#: application/libraries/globals.php:2781
 msgid "Browse by Tag"
 msgstr "Pori yn ôl Tagiau"
 
-#: application/libraries/globals.php:3021
+#: application/libraries/globals.php:3050
 msgid "No tags are available."
 msgstr "Does dim tagiau i gael."
 
@@ -3127,62 +3156,62 @@ msgstr "Rhaid i'r math o eitem cael enw sydd rhwng %1$s a %2$s llythyren."
 msgid "The item type name must be unique."
 msgstr "Mae'n rhaid i enw'r math o eitem fod yn unigryw."
 
-#: application/models/ItemType.php:179
+#: application/models/ItemType.php:183
 msgid "There are too many values in the element ordering array."
 msgstr "Mae yna ormod o werthoedd yn arae trefn yr elfen."
 
-#: application/models/ItemType.php:181
+#: application/models/ItemType.php:185
 msgid "There are too few values in the element ordering array."
 msgstr "Does dim digon o werthoedd yn arae trefn yr elfen."
 
-#: application/models/ItemType.php:218
+#: application/models/ItemType.php:222
 msgid ""
 "Invalid element data. To add elements, you must either pass an element "
 "objects or an array of element metadata."
 msgstr "Data elfen annilys. Er mwyn ychwanegu elfenmae'n rhaid naill ai pasio elfen gwrthrych neu arae o fetadata elfen."
 
-#: application/models/ItemType.php:282
+#: application/models/ItemType.php:286
 msgid ""
 "Cannot remove elements from an item type that is not persistent in the "
 "database!"
 msgstr "Ni ellir tynnu elfen i ffwrdd o math o eitem sydd ddim yn barhaol yn y gronfa ddata!"
 
-#: application/models/ItemType.php:291
+#: application/models/ItemType.php:295
 #, php-format
 msgid "Cannot find element with ID %s!"
 msgstr "Ni ellir dod o hyd i elfen gyda'r rhif '%s'!"
 
-#: application/models/ItemType.php:332
+#: application/models/ItemType.php:336
 #, php-format
 msgid "Item type does not contain an element with the ID %s!"
 msgstr "Nid yw'r math o eitem yn cynnwys elfen gyda'r rhif %s!"
 
-#: application/models/ItemType.php:353
+#: application/models/ItemType.php:357
 msgid ""
 "Invalid parameter. The hasElement function requires either an element object"
 " or an element id to determine if an item type has an element."
 msgstr "Paramedr annilys. Mae'r ffwythiant hasElement yn gorfod cael naill ai gwrthrych elfen neu rhif elfen er mwyn penderfynu os oes elfen gan y math o eitem."
 
-#: application/models/Mixin/ElementText.php:292
+#: application/models/Mixin/ElementText.php:293
 #, php-format
 msgid "There is no element \"%1$s\", \"%2$s\"!"
 msgstr "Nid oes elfen \"%1$s\", \"%2$s\" i gael!"
 
-#: application/models/Mixin/ElementText.php:311
+#: application/models/Mixin/ElementText.php:312
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
 msgstr "Ni ellir dod o hyd i elfen gyda'r rhif '%s'!"
 
-#: application/models/Mixin/ElementText.php:430
+#: application/models/Mixin/ElementText.php:431
 msgid "Element texts are not formatted correctly!"
 msgstr "Nid yw testun yr elfen wedi'i fformatio'n gywir!"
 
-#: application/models/Mixin/ElementText.php:578
+#: application/models/Mixin/ElementText.php:579
 #, php-format
 msgid "The \"%s\" field has at least one invalid value!"
 msgstr "Mae gan y maes \"%s\" o leiaf un gwerth annilys!"
 
-#: application/models/Mixin/ElementText.php:648
+#: application/models/Mixin/ElementText.php:649
 msgid "Cannot save element text for records that are not yet persistent!"
 msgstr "Ni ellir arbed testun elfen ar gyfer cofnodion sydd ddim eto'n barhaol!"
 
