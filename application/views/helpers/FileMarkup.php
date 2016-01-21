@@ -53,6 +53,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         'audio/wav'         => 'audio',
         'audio/x-wav'       => 'audio',
         'video/mp4'         => 'video',
+        'video/x-m4v'       => 'video',
         'video/ogg'         => 'video',
         'video/webm'        => 'video',
         'video/quicktime'   => 'video',
@@ -95,6 +96,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         'mp4' => 'video',
         'mp4v' => 'video',
         'mpg4'  => 'video',
+        'm4v' => 'video',
         // video/ogg
         'ogv' => 'video',
         // video/webm
