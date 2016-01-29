@@ -45,8 +45,14 @@ define('SCRIPTS_DIR', APP_DIR . '/scripts');
 
 // Define the web address constants.
 
-// Set the scheme.
-$base_root = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 'https' : 'http';
+// Set default path for HTTP / HTTPS
+if(isset($_SERVER['HTTPS'])) { 
+    $base_root = ($_SERVER['HTTPS'] == 'on') ? 'https' : 'http';
+} elseif (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) {
+    $base_root = ($_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') ? 'https' : 'http';
+} else {
+    $base_root = 'http';
+}
 
 // Set the domain.
 if (!isset($_SERVER['HTTP_HOST'])) {
