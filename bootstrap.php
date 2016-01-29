@@ -48,7 +48,7 @@ define('SCRIPTS_DIR', APP_DIR . '/scripts');
 // Set default path for HTTP / HTTPS
 if(isset($_SERVER['HTTPS'])) { 
     $base_root = ($_SERVER['HTTPS'] == 'on') ? 'https' : 'http';
-} elseif (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) {
+} elseif (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
     $base_root = ($_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') ? 'https' : 'http';
 } else {
     $base_root = 'http';
