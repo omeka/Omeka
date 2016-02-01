@@ -33,7 +33,7 @@ class Builder_ItemType extends Omeka_Record_Builder_AbstractBuilder
     /**
      * Add elements to be associated with the Item Type.
      */
-    protected function _beforeBuild()
+    protected function _beforeBuild(Omeka_Record_AbstractRecord $record)
     {        
         $this->_record->addElements($this->_elements);
     }

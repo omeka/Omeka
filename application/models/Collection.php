@@ -205,7 +205,7 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
      *
      * Handle public/private status for search.
      */
-    protected function afterSave()
+    protected function afterSave($args)
     {
         if (!$this->public) {
             $this->setSearchTextPrivate();

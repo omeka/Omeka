@@ -729,6 +729,11 @@ function insert_collection($metadata = array(), $elementTexts = array())
  */
 function insert_element_set($elementSetMetadata = array(), array $elements = array())
 {
+    // Set the element set name if a string is provided.
+    if (is_string($elementSetMetadata)) {
+        $elementSetMetadata = array('name' => $elementSetMetadata);
+    }
+
     $builder = new Builder_ElementSet(get_db());
     $builder->setRecordMetadata($elementSetMetadata);
     $builder->setElements($elements);
