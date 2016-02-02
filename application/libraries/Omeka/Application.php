@@ -46,8 +46,6 @@ class Omeka_Application extends Zend_Application
     public function initialize()
     {
         try {
-            // Force the autoloader to be set up first.
-            $this->getBootstrap()->bootstrap('Autoloader');
             return $this->bootstrap();
             
         } catch (Zend_Config_Exception $e) {

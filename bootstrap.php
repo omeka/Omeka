@@ -141,8 +141,14 @@ set_include_path(LIB_DIR. PATH_SEPARATOR . MODEL_DIR . PATH_SEPARATOR . get_incl
 
 // Set up the Zend autoloader to work for all classes.
 require_once 'Zend/Loader/StandardAutoloader.php';
-$autoloader = new Zend_Loader_StandardAutoloader;
-$autoloader->setFallbackAutoloader(true);
+$autoloader = new Zend_Loader_StandardAutoloader(array(
+    'prefixes' => array(
+        'Omeka_Form_' => APP_DIR . '/forms',
+        'Omeka_View_Helper_' => APP_DIR . '/views/helpers',
+        'Omeka_Controller_Action_Helper' => APP_DIR . '/controllers/helpers',
+    ),
+    'fallback_autoloader' => true,
+));
 $autoloader->register();
 
 // Define the theme directory path.
