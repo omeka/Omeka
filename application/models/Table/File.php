@@ -62,31 +62,7 @@ class Table_File extends Omeka_Db_Table
             }
         }
     }
-    
-    /**
-     * Filter select object by date since.
-     *
-     * @param Zend_Db_Select $select
-     * @param string $dateSince ISO 8601 formatted date
-     * @param string $dateField "added" or "modified"
-     */
-    public function filterBySince($select, $dateSince, $dateField)
-    {
-        // Reject invalid date fields.
-        if (!in_array($dateField, array('added', 'modified'))) {
-            return;
-        }
-    
-        // Accept an ISO 8601 date, set the tiemzone to the server's default
-        // timezone, and format the date to be MySQL timestamp compatible.
-        $date = new Zend_Date($dateSince, Zend_Date::ISO_8601);
-        $date->setTimezone(date_default_timezone_get());
-        $date = $date->get('yyyy-MM-dd HH:mm:ss');
-    
-        // Select all dates that are greater than the passed date.
-        $select->where("files.$dateField > ?", $date);
-    }    
-    
+
     public function filterByHasDerivativeImage($select, $hasDerivative)
     {
         if ($hasDerivative) {

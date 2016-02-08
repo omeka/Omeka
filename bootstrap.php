@@ -139,14 +139,17 @@ if (get_magic_quotes_gpc()) {
 // Add the libraries and models directories to the include path.
 set_include_path(LIB_DIR. PATH_SEPARATOR . MODEL_DIR . PATH_SEPARATOR . get_include_path());
 
-// Set up the Zend_Loader autoloader to work for all classes. The Omeka 
-// namespace must be manually specified to avoid incompatibility with the
-// resource autoloader.
-require_once 'Zend/Loader/Autoloader.php';
-$autoloader = Zend_Loader_Autoloader::getInstance();
-$autoloader->registerNamespace('Omeka_');
-$autoloader->setFallbackAutoloader(true);
-$autoloader->suppressNotFoundWarnings(true);
+// Set up the Zend autoloader to work for all classes.
+require_once 'Zend/Loader/StandardAutoloader.php';
+$autoloader = new Zend_Loader_StandardAutoloader(array(
+    'prefixes' => array(
+        'Omeka_Form_' => APP_DIR . '/forms',
+        'Omeka_View_Helper_' => APP_DIR . '/views/helpers',
+        'Omeka_Controller_Action_Helper' => APP_DIR . '/controllers/helpers',
+    ),
+    'fallback_autoloader' => true,
+));
+$autoloader->register();
 
 // Define the theme directory path.
 define('THEME_DIR', defined('ADMIN') ? ADMIN_THEME_DIR : PUBLIC_THEME_DIR);

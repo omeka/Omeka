@@ -27,7 +27,3 @@ define('TEST_DIR', dirname(__FILE__));
 // Append the testing class library.
 define('TEST_LIB_DIR', TEST_DIR . '/libraries');
 set_include_path(get_include_path() . PATH_SEPARATOR . TEST_LIB_DIR);
-
-// Make sure the autoloader is initialized.
-$autoloader = new Omeka_Application_Resource_Autoloader;
-$autoloader->init();

@@ -27,27 +27,11 @@ class Builder_ElementSet extends Omeka_Record_Builder_AbstractBuilder
     {
         $this->_elementInfo = $elements;
     }
-    
-    /**
-     * Overrides setRecordMetadata() to allow giving the name of the element as
-     * a string.
-     * 
-     * @param string|array $metadata
-     */
-    public function setRecordMetadata($metadata)
-    {
-        // Set the element set name if a string is provided.
-        if (is_string($metadata)) {
-            $metadata = array('name' => $metadata);
-        }
-        
-        return parent::setRecordMetadata($metadata);
-    }
-    
+
     /**
      * Add elements to be associated with the element set.
      */
-    protected function _beforeBuild()
+    protected function _beforeBuild(Omeka_Record_AbstractRecord $record)
     {        
         // Add elements to the element set.
         $this->_record->addElements($this->_elementInfo);
