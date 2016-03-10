@@ -73,7 +73,9 @@ $formAttributes['method'] = 'GET';
                         'does not contain' => __('does not contain'),
                         'is exactly' => __('is exactly'),
                         'is empty' => __('is empty'),
-                        'is not empty' => __('is not empty'))
+                        'is not empty' => __('is not empty'),
+                        'starts with' => __('starts with'),
+                        'ends with' => __('ends with'))
                     )
                 );
                 echo $this->formText(
