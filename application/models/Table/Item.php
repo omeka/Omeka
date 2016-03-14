@@ -119,6 +119,12 @@ class Table_Item extends Omeka_Db_Table
                 case 'is not empty':
                     $predicate = "IS NOT NULL";
                     break;
+                case 'starts with':
+                    $predicate = "LIKE " . $db->quote($value.'%');
+                    break;
+                case 'ends with':
+                    $predicate = "LIKE " . $db->quote('%'.$value);
+                    break;
                 default:
                     throw new Omeka_Record_Exception(__('Invalid search type given!'));
             }
