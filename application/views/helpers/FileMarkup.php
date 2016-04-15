@@ -277,10 +277,11 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
      */
     public function defaultDisplay($file, array $options=array())
     {
+        $html = null;
         if ($options['linkText']) {
             $html = $options['linkText'];
         }
-        return $this->_linkToFile($file, $options);
+        return $this->_linkToFile($file, $options, $html);
     }
         
     /**
