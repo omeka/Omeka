@@ -14,6 +14,11 @@
 class Omeka_Application_Resource_Db extends Zend_Application_Resource_Db
 {
     /**
+     * Command to run at connect time; currently sets the SQL mode
+     */
+    const INIT_COMMAND = "SET SESSION sql_mode='STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'";
+
+    /**
      * Path to the database configuration file.
      * Set in application.ini
      *
@@ -58,6 +63,9 @@ class Omeka_Application_Resource_Db extends Zend_Application_Resource_Db
         if ($profilingEnabled) {
             $connectionParams['profiler'] = true;
         }
+
+        $connectionParams['driver_options']['MYSQLI_INIT_COMMAND'] = self::INIT_COMMAND;
+
         $dbh = Zend_Db::factory('Mysqli', $connectionParams);
         
         $db_obj = new Omeka_Db($dbh, $dbIni->prefix);
