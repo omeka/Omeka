@@ -296,8 +296,6 @@ class ItemsController extends Omeka_Controller_AbstractActionController
             $select = $this->_helper->db
                 ->getSelectForFindBy($params)
                 ->reset(Zend_Db_Select::COLUMNS)
-                ->reset(Zend_Db_Select::LIMIT_COUNT)
-                ->reset(Zend_Db_Select::LIMIT_OFFSET)
                 ->columns(array("$alias.id"));
             $itemIds = get_db()->fetchCol($select);
         } else {
