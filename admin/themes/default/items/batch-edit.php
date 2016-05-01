@@ -13,6 +13,7 @@ endif;
 
 <form id="batch-edit-form" action="<?php echo html_escape(url('items/batch-edit-save')); ?>" method="post" accept-charset="utf-8">
     <section class="seven columns alpha">
+        <?php if (isset($itemIds)): ?>
         <fieldset id="item-list" class="panel">
             <h2 class="two columns alpha"><?php echo __('Items'); ?></h2>
             <div class="five columns omega">
@@ -37,12 +38,29 @@ endif;
                 <p class="explanation"><?php echo __('Changes will be applied to checked items.'); ?></p>
             </div>
         </fieldset>
-    
+        <?php else: ?>
+        <fieldset class="panel">
+            <h2><?php echo __('Search Filters'); ?></h2>
+            <?php if ($params):
+                echo item_search_filters($params); ?>
+            <p class="explanation"><?php echo __('Changes will be applied to all items matching search filters above [%d].', $totalRecords); ?></p>
+            <?php else: ?>
+            <p><?php echo __('No search filter.'); ?></p>
+            <p class="explanation"><?php echo __('Changes will be applied to all items of the base [%d].', $totalRecords); ?></p>
+            <?php endif; ?>
+            <p class="explanation"><?php echo __('Changes will be processed in the background item by item, so you should check logs for success and errors.'); ?></p>
+            <?php
+            echo $this->formHidden('editAll', true);
+	        echo $this->formHidden('params', json_encode($params));
+	        $showItemFields = false;
+	        ?>
+        </fieldset>
+        <?php endif; ?>
+
         <fieldset id="item-fields">
             <h2><?php echo __('Item Metadata'); ?></h2>
     
             <?php if ( is_allowed('Items', 'makePublic') ): ?>
-        
             <div class="field">
                 <label class="two columns alpha" for="metadata[public]"><?php echo __('Public?'); ?></label>
                 <div class="inputs five columns omega">
@@ -54,7 +72,6 @@ endif;
                     echo $this->formSelect('metadata[public]', null, array(), $publicOptions); ?>
                 </div>
             </div>
-        
             <?php endif; ?>
     
             <?php if ( is_allowed('Items', 'makeFeatured') ): ?>

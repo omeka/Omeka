@@ -22,6 +22,7 @@ echo item_search_filters();
             <?php echo link_to_item_search(__('Search Items'), array('class' => 'small blue advanced-search-link button')); ?>
             <?php if (is_allowed('Items', 'edit')): ?>
             <input type="submit" class="edit-items small blue batch-action button" name="submit-batch-edit" value="<?php echo __('Edit'); ?>" />
+            <a href="<?php echo html_escape(url('items/batch-edit-all', $_GET)); ?>" class="edit-items small blue batch-action button"><?php echo __('Edit All'); ?></a>
             <?php endif; ?>
             <?php if (is_allowed('Items', 'delete')): ?>
             <input type="submit" class="small red batch-action button" name="submit-batch-delete" value="<?php echo __('Delete'); ?>">

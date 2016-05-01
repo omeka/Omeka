@@ -39,6 +39,7 @@ if (!$isPartial):
             <?php endif; ?>
             
             <p class="explanation"><?php echo __('Checked items will be deleted.'); ?></p>
+        </div>
     </fieldset>
 
     <input type="hidden" name="delete" value="1">
