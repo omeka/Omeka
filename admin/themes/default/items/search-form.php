@@ -72,11 +72,14 @@ $formAttributes['method'] = 'GET';
                         'contains' => __('contains'),
                         'does not contain' => __('does not contain'),
                         'is exactly' => __('is exactly'),
+                        'is not exactly' => __('is not'),
                         'is empty' => __('is empty'),
                         'is not empty' => __('is not empty'),
                         'starts with' => __('starts with'),
-                        'ends with' => __('ends with'))
-                    )
+                        'ends with' => __('ends with'),
+                        'regexp' => __('regexp'),
+                        'not regexp' => __('not regexp'),
+                    ))
                 );
                 echo $this->formText(
                     "advanced[$i][terms]",
