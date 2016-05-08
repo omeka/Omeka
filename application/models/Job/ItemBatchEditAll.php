@@ -31,7 +31,12 @@ class Job_ItemBatchEditAll extends Omeka_Job_AbstractJob
             return;
         }
 
-        $this->_aclHelper = get_acl();
+        // Prepare the background acl to check rights of the user for each item.
+        // $this->_aclHelper = get_acl();
+        $acl = Zend_Registry::get('bootstrap')->bootstrap('Acl')->acl;
+        $aclChecker = new Omeka_Controller_Action_Helper_Acl($acl, $this->_user);
+        Zend_Controller_Action_HelperBroker::addHelper($aclChecker);
+        $this->_aclHelper = Zend_Controller_Action_HelperBroker::getStaticHelper('Acl');
 
         foreach ($itemIds as $id) {
             $this->_performItem($id);
@@ -59,8 +64,6 @@ class Job_ItemBatchEditAll extends Omeka_Job_AbstractJob
 
         $message = null;
 
-        /*
-        // TODO Check rights of the user to process each item in background.
         // Check rights via acl.
         $aclHelper = $this->_aclHelper;
 
@@ -82,7 +85,6 @@ class Job_ItemBatchEditAll extends Omeka_Job_AbstractJob
             _log(__('Batch Edit Item #%d: %s', $itemId, $message), Zend_Log::ERR);
             return false;
         }
-        */
 
         // Check errors set by plugins filters.
         $message = apply_filters(
