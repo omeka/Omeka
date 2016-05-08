@@ -40,12 +40,23 @@ Omeka.ItemsBrowse = {};
     Omeka.ItemsBrowse.setupBatchEdit = function () {
         var itemCheckboxes = $("table#items tbody input[type=checkbox]");
         var globalCheckbox = $('th.batch-edit-heading').html('<input type="checkbox">').find('input');
-        var batchEditSubmit = $('.batch-edit-option input');
+        var batchEditSubmit = $('.batch-edit-option input[type=submit]');
+        var batchAllCheckbox = $('#batch-all');
+
         /**
          * Disable the batch submit button first, will be enabled once item
          * checkboxes are checked.
          */
         batchEditSubmit.prop('disabled', true);
+
+        /**
+         * Disable all the itemCheckboxes if the batchAllCheckbox is checked.
+         */
+        batchAllCheckbox.change(function() {
+            globalCheckbox.prop('disabled', this.checked);
+            itemCheckboxes.prop('disabled', this.checked);
+            checkBatchEditSubmitButton();
+        });
 
         /**
          * Check all the itemCheckboxes if the globalCheckbox is checked.
@@ -68,17 +79,19 @@ Omeka.ItemsBrowse = {};
 
         /**
          * Check whether the batchEditSubmit button should be enabled.
-         * If any of the itemCheckboxes is checked, the batchEditSubmit button
-         * is enabled.
+         * If any of the itemCheckboxes or the batchAllCheckbox is checked, the
+         * batchEditSubmit button is enabled.
          */
         function checkBatchEditSubmitButton() {
-            var checked = false;
-            itemCheckboxes.each(function() {
-                if (this.checked) {
-                    checked = true;
-                    return false;
-                }
-            });
+            var checked = batchAllCheckbox.prop('checked');
+            if (!checked) {
+                itemCheckboxes.each(function() {
+                    if (this.checked) {
+                        checked = true;
+                        return false;
+                    }
+                });
+            }
 
             batchEditSubmit.prop('disabled', !checked);
         }

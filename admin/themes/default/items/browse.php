@@ -22,10 +22,16 @@ echo item_search_filters();
             <?php echo link_to_item_search(__('Search Items'), array('class' => 'small blue advanced-search-link button')); ?>
             <?php if (is_allowed('Items', 'edit')): ?>
             <input type="submit" class="edit-items small blue batch-action button" name="submit-batch-edit" value="<?php echo __('Edit'); ?>" />
-            <a href="<?php echo html_escape(url('items/batch-edit-all', $_GET)); ?>" class="edit-items small blue batch-action button"><?php echo __('Edit All'); ?></a>
             <?php endif; ?>
             <?php if (is_allowed('Items', 'delete')): ?>
             <input type="submit" class="small red batch-action button" name="submit-batch-delete" value="<?php echo __('Delete'); ?>">
+            <?php endif; ?>
+            <?php if (is_allowed('Items', 'edit') || is_allowed('Items', 'delete')): ?>
+            <span title="<?php echo __('Check to batch edit or delete all the %d browsed items.', $total_results); ?>" style="margin: 0 0 20px; padding: 3px 0;">
+                <label for="batch-all"><?php echo __('All'); ?></label>
+                <input id="batch-all" type="checkbox" value="1" name="batch-all" >
+            </span>
+            <?php echo $this->formHidden('params', json_encode($_GET)); ?>
             <?php endif; ?>
         </div>
 
@@ -42,7 +48,7 @@ echo item_search_filters();
                 $browseHeadings[__('Creator')] = 'Dublin Core,Creator';
                 $browseHeadings[__('Type')] = null;
                 $browseHeadings[__('Date Added')] = 'added';
-                echo browse_sort_links($browseHeadings, array('link_tag' => 'th scope="col"', 'list_tag' => '')); 
+                echo browse_sort_links($browseHeadings, array('link_tag' => 'th scope="col"', 'list_tag' => ''));
                 ?>
             </tr>
         </thead>
@@ -124,7 +130,7 @@ echo item_search_filters();
             <input type="submit" class="small red batch-action button" name="submit-batch-delete" value="<?php echo __('Delete'); ?>">
             <?php endif; ?>
         </div>
-        
+
         <?php echo common('quick-filters',array(),'items'); ?>
     </form>
 
