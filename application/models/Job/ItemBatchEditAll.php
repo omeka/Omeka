@@ -102,6 +102,7 @@ class Job_ItemBatchEditAll extends Omeka_Job_AbstractJob
         // No error, so process the edition.
         if ($delete == '1') {
             $item->delete();
+            $message = __('The item was successfully deleted.');
         } else {
             foreach ($metadata as $key => $value) {
                 if ($value === '') {
@@ -117,11 +118,12 @@ class Job_ItemBatchEditAll extends Omeka_Job_AbstractJob
                 _log(__('Batch Edit Item #%d: %s', $itemId, $message), Zend_Log::ERR);
                 return false;
             }
+
+            $message = __('The item was successfully batch-edited.');
         }
 
         release_object($item);
 
-        $message = __('The item was successfully batch-edited.');
         _log(__('Batch Edit Item #%d: %s', $itemId, $message), Zend_Log::INFO);
         return true;
     }

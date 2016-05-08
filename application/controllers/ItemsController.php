@@ -222,6 +222,8 @@ class ItemsController extends Omeka_Controller_AbstractActionController
          */
         $this->view->isPartial = $this->getRequest()->isXmlHttpRequest();
 
+        $delete = (boolean) $this->_getParam('submit-batch-delete');
+
         $batchAll = (boolean) $this->_getParam('batch-all');
         // Process all searched items.
         if ($batchAll) {
@@ -241,8 +243,15 @@ class ItemsController extends Omeka_Controller_AbstractActionController
                 return;
             }
 
+            // Special check to avoid the deletion of all the base.
+            if ($delete && total_records('Item') == $totalRecords) {
+                $this->_helper->flashMessenger(__('The deletion of all items is forbidden.'), 'error');
+                $this->_helper->redirector('browse', 'items', null, $params);
+                return;
+            }
+
             $this->view->assign(array('params' => $params, 'totalRecords' => $totalRecords));
-            if ($this->_getParam('submit-batch-delete')) {
+            if ($delete) {
                 $this->render('batch-delete-all');
             } else {
                 $this->render('batch-edit-all');
@@ -259,7 +268,7 @@ class ItemsController extends Omeka_Controller_AbstractActionController
         }
 
         $this->view->assign(compact('itemIds'));
-        if ($this->_getParam('submit-batch-delete')) {
+        if ($delete) {
             $this->render('batch-delete');
         }
     }
@@ -423,7 +432,6 @@ class ItemsController extends Omeka_Controller_AbstractActionController
                     'metadata' => $metadata,
                     'custom' => $custom,
                 );
-
                 $dispatcher->sendLongRunning('Job_ItemBatchEditAll', $options);
 
                 if ($delete) {
