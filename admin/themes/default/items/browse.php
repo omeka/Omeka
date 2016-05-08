@@ -31,7 +31,7 @@ echo item_search_filters();
                 <label for="batch-all"><?php echo __('All'); ?></label>
                 <input id="batch-all" type="checkbox" value="1" name="batch-all" >
             </span>
-            <?php echo $this->formHidden('params', json_encode($_GET)); ?>
+            <?php echo $this->formHidden('params', json_encode(Zend_Controller_Front::getInstance()->getRequest()->getParams())); ?>
             <?php endif; ?>
         </div>
 
