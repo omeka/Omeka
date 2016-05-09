@@ -125,13 +125,13 @@ class Table_Item extends Omeka_Db_Table
                 case 'ends with':
                     $predicate = "LIKE " . $db->quote('%'.$value);
                     break;
-                case 'is not exactly':
+                case 'is not':
                     $predicate = ' != ' . $db->quote($value);
                     break;
-                case 'regexp':
+                case 'matches':
                     $predicate = 'REGEXP ' . $db->quote($value);
                     break;
-                case 'not regexp':
+                case 'does not match':
                     $predicate = 'NOT REGEXP ' . $db->quote($value);
                     break;
                 default:
