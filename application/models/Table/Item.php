@@ -129,10 +129,17 @@ class Table_Item extends Omeka_Db_Table
                     $predicate = ' != ' . $db->quote($value);
                     break;
                 case 'matches':
-                    $predicate = 'REGEXP ' . $db->quote($value);
+                    if (strlen($value)) {
+                        $predicate = 'REGEXP ' . $db->quote($value);
+                    } else {
+                        $inner = false;
+                        $predicate = 'IS NULL';
+                    }
                     break;
                 case 'does not match':
-                    $predicate = 'NOT REGEXP ' . $db->quote($value);
+                    $predicate = strlen($value)
+                        ? 'NOT REGEXP ' . $db->quote($value)
+                        : 'IS NOT NULL';
                     break;
                 default:
                     throw new Omeka_Record_Exception(__('Invalid search type given!'));
