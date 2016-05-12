@@ -125,6 +125,21 @@ class Table_Item extends Omeka_Db_Table
                 case 'ends with':
                     $predicate = "LIKE " . $db->quote('%'.$value);
                     break;
+                case 'is not exactly':
+                    $predicate = ' != ' . $db->quote($value);
+                    break;
+                case 'matches':
+                    if (!strlen($value)) {
+                        continue 2;
+                    }
+                    $predicate = 'REGEXP ' . $db->quote($value);
+                    break;
+                case 'does not match':
+                    if (!strlen($value)) {
+                        continue 2;
+                    }
+                    $predicate = 'NOT REGEXP ' . $db->quote($value);
+                    break;
                 default:
                     throw new Omeka_Record_Exception(__('Invalid search type given!'));
             }
