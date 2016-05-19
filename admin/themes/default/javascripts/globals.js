@@ -26,7 +26,8 @@ if (!Omeka) {
             plugins: "paste,inlinepopups,media,autoresize",
             media_strict: false,
             width: "100%",
-            autoresize_max_height: 500
+            autoresize_max_height: 500,
+            entity_encoding: "raw"
         };
 
         tinyMCE.init($.extend(initParams, params));
