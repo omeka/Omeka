@@ -104,22 +104,9 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
             }
         }
 
-        $html = '';
-        if (!empty($displayArray) || !empty($advancedArray)) {
-            $html .= '<div id="item-filters">';
-            $html .= '<ul>';
-            foreach($displayArray as $name => $query) {
-                $class = html_escape(strtolower(str_replace(' ', '-', $name)));
-                $html .= '<li class="' . $class . '">' . html_escape(__($name)) . ': ' . html_escape($query) . '</li>';
-            }
-            if(!empty($advancedArray)) {
-                foreach($advancedArray as $j => $advanced) {
-                    $html .= '<li class="advanced">' . html_escape($advanced) . '</li>';
-                }
-            }
-            $html .= '</ul>';
-            $html .= '</div>';
-        }
-        return $html;
+        return $this->view->partial(
+            'items/search-filters.php',
+            compact('displayArray', 'advancedArray', 'requestArray')
+        );
     }
 }
