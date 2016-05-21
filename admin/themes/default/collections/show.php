@@ -5,7 +5,7 @@
     } else {
         $collectionTitle = '';
     }
-    $collectionTitle = __('Edit Collection #%s', metadata('collection', 'id')) . $collectionTitle;
+    $collectionTitle = __('Collection #%s', metadata('collection', 'id')) . $collectionTitle;
 ?>
 <?php echo head(array('title'=> $collectionTitle, 'bodyclass'=>'collections show')); ?>
 
