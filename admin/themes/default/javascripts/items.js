@@ -15,7 +15,7 @@ Omeka.Items = {};
             forceHelperSize: true,
             revert: 200,
             placeholder: "ui-sortable-highlight",
-            containment: 'body',
+            containment: 'document',
             update: function (event, ui) {
                 $(this).find('.file-order').each(function (index) {
                     $(this).val(index + 1);
