@@ -27,7 +27,7 @@ if (!Omeka) {
             media_strict: false,
             width: "100%",
             autoresize_max_height: 500,
-            entity_encoding: "raw"
+            entities: "160,nbsp,173,shy,8194,ensp,8195,emsp,8201,thinsp,8204,zwnj,8205,zwj,8206,lrm,8207,rlm"
         };
 
         tinyMCE.init($.extend(initParams, params));
