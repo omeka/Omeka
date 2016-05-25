@@ -12,7 +12,7 @@
 # p <inactive+poczciwiec@transifex.com>, 2012
 # platanus <marcin.mielnicki@gmail.com>, 2013
 # p <inactive+poczciwiec@transifex.com>, 2012
-# Tomasz Sopylo <tomasz@sopylo.pl>, 2015
+# Tomasz Sopylo <tomasz@sopylo.pl>, 2015-2016
 # vortage <vortage@o2.pl>, 2014
 # vortage <vortage@o2.pl>, 2014
 msgid ""
@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2016-01-11 21:13+0000\n"
+"PO-Revision-Date: 2016-05-23 21:15+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Polish (http://www.transifex.com/omeka/omeka/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -556,10 +556,14 @@ msgid "Get started by adding your first collection."
 msgstr "Rozpocznij dodając pierwszą publikację."
 
 #: admin/themes/default/collections/edit.php:8
-#: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Edit Collection #%s"
 msgstr "Modyfikuj kolekcję nr %s"
+
+#: admin/themes/default/collections/show.php:8
+#, php-format
+msgid "Collection #%s"
+msgstr ""
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
@@ -927,37 +931,37 @@ msgstr "Formaty wyjściowe"
 #: admin/themes/default/index.php:10
 msgid "item"
 msgid_plural "items"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "publikacja"
+msgstr[1] "publikacje"
+msgstr[2] "publikacje"
 
 #: admin/themes/default/index.php:11
 msgid "collection"
 msgid_plural "collections"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "kolekcja"
+msgstr[1] "kolekcje"
+msgstr[2] "kolekcje"
 
 #: admin/themes/default/index.php:12
 msgid "tag"
 msgid_plural "tags"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "etykieta"
+msgstr[1] "etykiety"
+msgstr[2] "etykiety"
 
 #: admin/themes/default/index.php:16
 msgid "plugin"
 msgid_plural "plugins"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "wtyczka"
+msgstr[1] "wtyczki"
+msgstr[2] "wtyczki"
 
 #: admin/themes/default/index.php:20
 msgid "user"
 msgid_plural "users"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "użytkownik"
+msgstr[1] "użytkownicy"
+msgstr[2] "użytkownicy"
 
 #: admin/themes/default/index.php:24
 msgid "theme"
@@ -1700,7 +1704,7 @@ msgstr "Modyfikuj etykiety"
 
 #: admin/themes/default/tags/browse.php:9
 msgid "Browse Tags"
-msgstr ""
+msgstr "Przeglądaj etykiety"
 
 #: admin/themes/default/tags/browse.php:24
 msgid "Editing Tags"
@@ -2695,11 +2699,11 @@ msgstr "Ustawienia strony"
 
 #: application/forms/ItemTypes.php:142
 msgid "The name of the item type."
-msgstr ""
+msgstr "Nazwa typu publikacji."
 
 #: application/forms/ItemTypes.php:151
 msgid "The description of the item type."
-msgstr ""
+msgstr "Opis typu publikacji."
 
 #: application/forms/ItemTypes.php:173 application/forms/ItemTypes.php:182
 #, php-format
@@ -2791,7 +2795,7 @@ msgstr "Dozwolone rozszerzenia plików"
 
 #: application/forms/SecuritySettings.php:33
 msgid "List of allowed extensions for file uploads"
-msgstr ""
+msgstr "Lista rozszerzeń plików, które można wysyłać na serwer."
 
 #: application/forms/SecuritySettings.php:42
 msgid "Allowed File Types"
@@ -2829,19 +2833,19 @@ msgstr ""
 
 #: application/forms/SecuritySettings.php:69
 msgid "Enable HTML Filtering"
-msgstr ""
+msgstr "Włącz filtrowanie HTML"
 
 #: application/forms/SecuritySettings.php:74
 msgid "Allowed HTML Elements"
-msgstr ""
+msgstr "Dozwolone atrybuty HTML"
 
 #: application/forms/SecuritySettings.php:75
 msgid "List of allowed HTML elements in form input"
-msgstr ""
+msgstr "Lista dozwolonych atrybutów HTML w polach formularza"
 
 #: application/forms/SecuritySettings.php:82
 msgid "Allowed HTML Attributes"
-msgstr ""
+msgstr "Dozwolone atrybuty HTML"
 
 #: application/forms/SecuritySettings.php:83
 msgid "List of allowed HTML attributes in form input"
@@ -2849,7 +2853,7 @@ msgstr ""
 
 #: application/forms/SecuritySettings.php:98
 msgid "File Validation"
-msgstr ""
+msgstr "Sprawdzanie pliku"
 
 #: application/forms/SecuritySettings.php:106
 msgid "Captcha"
@@ -2857,7 +2861,7 @@ msgstr "Captcha"
 
 #: application/forms/SecuritySettings.php:115
 msgid "HTML Filtering"
-msgstr ""
+msgstr "Filtrowanie HTML"
 
 #: application/forms/User.php:30
 msgid "Username must be 30 characters or fewer. Whitespace is not allowed."
@@ -2885,7 +2889,7 @@ msgstr ""
 
 #: application/forms/User.php:88 application/models/User.php:169
 msgid "Real Name is required."
-msgstr ""
+msgstr "Prawdziwe imię jest wymagane."
 
 #: application/forms/User.php:94
 msgid "This email address is invalid."
@@ -2908,7 +2912,7 @@ msgstr ""
 
 #: application/forms/User.php:137
 msgid "Inactive users cannot log in to the site."
-msgstr ""
+msgstr "Nieaktywni użytkownicy nie mogą się logować na stronie."
 
 #: application/forms/User.php:139
 #, php-format
@@ -2954,7 +2958,7 @@ msgstr ""
 #: application/libraries/Omeka/Plugin/Ini.php:63
 #, php-format
 msgid "Path to plugin.ini for \"%s\" is not correct."
-msgstr ""
+msgstr "Ścieżka do plugin.ini dla \"%s\" jest nieprawidłowa."
 
 #: application/libraries/Omeka/Plugin/Installer.php:79
 #, php-format
@@ -3066,7 +3070,7 @@ msgstr "Nazwa atrybutu nie może być pusta."
 
 #: application/models/Element.php:179
 msgid "Invalid element set."
-msgstr ""
+msgstr "Nieprawidłowy zestaw atrybutów."
 
 #: application/models/Element.php:185
 #, php-format
@@ -3410,7 +3414,7 @@ msgstr ""
 
 #: application/views/helpers/RecordUrl.php:75
 msgid "Invalid return value while getting record URL."
-msgstr ""
+msgstr "Nieprawidłowa wartość podczas pobierania URL rekordu."
 
 #: application/views/scripts/collections/browse.php:14
 #: application/views/scripts/items/browse.php:24
@@ -3534,15 +3538,15 @@ msgstr "Rodzaje rekordu:"
 
 #: application/views/scripts/search/search-form.php:6
 msgid "Search using this query type:"
-msgstr ""
+msgstr "Szukaj używając tego typu zapytania:"
 
 #: application/views/scripts/search/search-form.php:11
 msgid "Search only these record types:"
-msgstr ""
+msgstr "Przeszukuj tylko te typy rekordów:"
 
 #: application/views/scripts/search/search-form.php:17
 msgid "Go to search settings to select record types to use."
-msgstr ""
+msgstr "Przejdź do ustawień wyszukiwania w celu wybrania używanych typów rekordów."
 
 #: application/views/scripts/search/search-form.php:19
 msgid "Advanced Search (Items only)"

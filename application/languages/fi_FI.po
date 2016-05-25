@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Matti Lassila <matti.lassila@gmail.com>, 2012-2015
+# Matti Lassila <matti.lassila@gmail.com>, 2012-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2016-01-11 21:13+0000\n"
+"PO-Revision-Date: 2016-05-23 21:16+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Finnish (Finland) (http://www.transifex.com/omeka/omeka/language/fi_FI/)\n"
 "MIME-Version: 1.0\n"
@@ -545,10 +545,14 @@ msgid "Get started by adding your first collection."
 msgstr "Aloita luomalla ensimmäinen kokoelma."
 
 #: admin/themes/default/collections/edit.php:8
-#: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Edit Collection #%s"
 msgstr "Muokkaa kokoelmaa #%s"
+
+#: admin/themes/default/collections/show.php:8
+#, php-format
+msgid "Collection #%s"
+msgstr ""
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
@@ -940,8 +944,8 @@ msgstr[1] ""
 #: admin/themes/default/index.php:20
 msgid "user"
 msgid_plural "users"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "käyttäjä"
+msgstr[1] "käyttäjiä"
 
 #: admin/themes/default/index.php:24
 msgid "theme"
@@ -1229,8 +1233,8 @@ msgstr "Aloita lisäämällä ensimmäinen aineisto."
 #, php-format
 msgid "The query searched 1 item and returned no results."
 msgid_plural "The query searched %s items and returned no results."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Haku ei tuottanut tuloksia."
+msgstr[1] "Haettiin yhteensä %s aineistosta, mutta haku ei tuottanut tuloksia."
 
 #: admin/themes/default/items/browse.php:157
 msgid "refine your search"
@@ -2362,7 +2366,7 @@ msgstr "SQL-virhe tietojen siirrossa:"
 msgid ""
 "Omeka requires PHP version %1$s or higher, but this server is running PHP "
 "version %2$s. Please update the installed version of PHP and try again."
-msgstr ""
+msgstr "Omeka vaatii PHP-version %1$s tai uudemman, mutta palvelimella on tällä hetkellä käytössä PHP versio %2$s. Ole hyvä ja päivitä PHP uudempaan ja yritä uudelleen."
 
 #: application/controllers/UsersController.php:70
 msgid ""

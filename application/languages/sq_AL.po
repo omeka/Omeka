@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Ardit Dani <ardit.dani@gmail.com>, 2014
+# Ardit Dani <ardit.dani@gmail.com>, 2014,2016
 # Gjergj Sheldija <gjergj.sheldija@gmail.com>, 2012,2014
 # Gjergj Sheldija <inactive+gjergjsheldij8748763d3d714768@transifex.com>, 2011
 # Gjergj Sheldija <inactive+gjergjsheldij8748763d3d714768@transifex.com>, 2011
@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2016-01-11 21:13+0000\n"
+"PO-Revision-Date: 2016-05-23 21:15+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Albanian (Albania) (http://www.transifex.com/omeka/omeka/language/sq_AL/)\n"
 "MIME-Version: 1.0\n"
@@ -548,10 +548,14 @@ msgid "Get started by adding your first collection."
 msgstr "Filloni duke shtuar koleksionin tuaj të parë."
 
 #: admin/themes/default/collections/edit.php:8
-#: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Edit Collection #%s"
 msgstr "Ndrysho koleksionin #%s"
+
+#: admin/themes/default/collections/show.php:8
+#, php-format
+msgid "Collection #%s"
+msgstr ""
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
@@ -943,8 +947,8 @@ msgstr[1] ""
 #: admin/themes/default/index.php:20
 msgid "user"
 msgid_plural "users"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Përdorues"
+msgstr[1] "Përdoruesit"
 
 #: admin/themes/default/index.php:24
 msgid "theme"
@@ -1023,7 +1027,7 @@ msgstr "Elementet"
 #: admin/themes/default/items/tag-form.php:22
 #: admin/themes/default/settings/edit-item-type-elements.php:22
 msgid "Undo"
-msgstr ""
+msgstr "Kthe"
 
 #: admin/themes/default/item-types/form.php:80
 #: admin/themes/default/item-types/form.php:87

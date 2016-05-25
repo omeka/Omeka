@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
+# Andreas Sandlund <andreas.sandlund@gmail.com>, 2016
 # Jonas Lindqvist <info@melvik.se>, 2013
 # Peter Krantz <peter.krantz@gmail.com>, 2014-2015
 # Sami Varjo <sami.varjo@vaasa.fi>, 2015
@@ -11,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2016-01-11 21:13+0000\n"
+"PO-Revision-Date: 2016-05-23 21:16+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Swedish (Sweden) (http://www.transifex.com/omeka/omeka/language/sv_SE/)\n"
 "MIME-Version: 1.0\n"
@@ -547,10 +548,14 @@ msgid "Get started by adding your first collection."
 msgstr "Börja genom att skapa din första samling"
 
 #: admin/themes/default/collections/edit.php:8
-#: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Edit Collection #%s"
 msgstr "Redigera samling #%s"
+
+#: admin/themes/default/collections/show.php:8
+#, php-format
+msgid "Collection #%s"
+msgstr ""
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
@@ -604,7 +609,7 @@ msgstr "Huvudmeny"
 #: admin/themes/default/common/content-nav.php:5
 #: admin/themes/default/index.php:2
 msgid "Dashboard"
-msgstr "Instrumentbräda"
+msgstr "Översikt"
 
 #: admin/themes/default/common/content-nav.php:9
 #: admin/themes/default/items/batch-delete.php:17
@@ -666,7 +671,7 @@ msgstr "Administrera sajt"
 #: admin/themes/default/common/global-nav.php:5
 #: admin/themes/default/plugins/browse.php:2
 msgid "Plugins"
-msgstr "Plugins"
+msgstr "Tillägg"
 
 #: admin/themes/default/common/global-nav.php:17
 msgid "Users"
@@ -918,32 +923,32 @@ msgstr "Utdataformat"
 #: admin/themes/default/index.php:10
 msgid "item"
 msgid_plural "items"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "objekt"
+msgstr[1] "objekt"
 
 #: admin/themes/default/index.php:11
 msgid "collection"
 msgid_plural "collections"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "samling"
+msgstr[1] "samlingar"
 
 #: admin/themes/default/index.php:12
 msgid "tag"
 msgid_plural "tags"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "tagg"
+msgstr[1] "taggar"
 
 #: admin/themes/default/index.php:16
 msgid "plugin"
 msgid_plural "plugins"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "tillägg"
+msgstr[1] "tillägg"
 
 #: admin/themes/default/index.php:20
 msgid "user"
 msgid_plural "users"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "användare"
+msgstr[1] "användare"
 
 #: admin/themes/default/index.php:24
 msgid "theme"
@@ -1231,8 +1236,8 @@ msgstr "Börja genom att skapa ditt första objekt."
 #, php-format
 msgid "The query searched 1 item and returned no results."
 msgid_plural "The query searched %s items and returned no results."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Din sökning gav inget resultat."
+msgstr[1] "Din sökfråga kördes på %s objekt men gav inga resultat."
 
 #: admin/themes/default/items/browse.php:157
 msgid "refine your search"
@@ -1504,7 +1509,7 @@ msgstr "Uppgradera"
 
 #: admin/themes/default/plugins/browse.php:101
 msgid "Configure"
-msgstr "Gör inställningar"
+msgstr "Inställningar"
 
 #: admin/themes/default/plugins/browse.php:107
 msgid "Deactivate"
@@ -1797,7 +1802,7 @@ msgstr "Omeka stötte på ett problem när din installation skulle uppgraderas."
 
 #: admin/themes/default/upgrade/migrate.php:24
 msgid "Return to Dashboard"
-msgstr "Återgå till instrumentbräda"
+msgstr "Återgå till översikt"
 
 #: admin/themes/default/upgrade/migrate.php:30
 msgid "Please restore from your database backup and try again."
@@ -1998,7 +2003,7 @@ msgstr "Navigationsinställningarna har uppdaterats."
 msgid ""
 "The navigation settings were not saved because of missing or invalid values."
 "  All changed values have been restored."
-msgstr ""
+msgstr "Navigeringsinställningarna sparades inte på grund av felaktiga eller saknade värden. Alla ändrade värden har återställts."
 
 #: application/controllers/AppearanceController.php:97
 msgid "The navigation settings have been reset."
@@ -2048,13 +2053,13 @@ msgid ""
 "This will delete the collection #%s and its associated metadata. This will "
 "not delete any items in this collection, but will delete the reference to "
 "this collection in each item."
-msgstr ""
+msgstr "Detta kommer att radera samlingen \"%s\" och relaterade metadata. Detta kommer inte att radera några objekt i samlingen men kommer att radera kopplingen mellan samlingen och respektive objekt."
 
 #: application/controllers/ElementSetsController.php:21
 msgid ""
 "This will delete the element set and all elements assigned to the element "
 "set. Items will lose all metadata that is specific to this element set."
-msgstr ""
+msgstr "Detta kommer att radera elementsamlingen och dess relaterade element. Objekt kommer att förlora alla metadata specifika för denna elementsamling."
 
 #: application/controllers/ElementSetsController.php:53
 #: application/controllers/PluginsController.php:51
@@ -2074,7 +2079,7 @@ msgstr "Något blev fel i formuläret. Försök igen."
 
 #: application/controllers/ElementSetsController.php:72
 msgid "The element set was successfully changed!"
-msgstr ""
+msgstr "Elementsamlingen ändrades!"
 
 #: application/controllers/ErrorController.php:64
 msgid "Page not found."
@@ -2086,7 +2091,7 @@ msgstr "Åtkomst nekad."
 
 #: application/controllers/FilesController.php:66
 msgid "This will delete the file and its associated metadata."
-msgstr ""
+msgstr "Detta kommer att radera filen och dess tillhörande metadata."
 
 #: application/controllers/FilesController.php:72
 msgid "The file was successfully deleted."
@@ -2095,12 +2100,12 @@ msgstr "Filen har raderats."
 #: application/controllers/ItemTypesController.php:28
 #, php-format
 msgid "The item type \"%s\" was successfully added."
-msgstr ""
+msgstr "Objekttypen \"%s\" lades till!"
 
 #: application/controllers/ItemTypesController.php:55
 #, php-format
 msgid "The item type \"%s\" was successfully updated."
-msgstr ""
+msgstr "Objekttypen \"%s\" ändrades."
 
 #: application/controllers/ItemTypesController.php:150
 #, php-format
@@ -2108,14 +2113,14 @@ msgid ""
 "This will delete the \"%s\" item type but will not delete the elements "
 "assigned to the item type. Items that are assigned to this item type will "
 "lose all metadata that is specific to the item type."
-msgstr ""
+msgstr "Detta kommer att radera objekttypen \"%s\". Element tilldelade objekttypen kommer inte att raderas. Objekt tilldelade denna objekttyp kommer att förlora alla metadata specifika för objekttypen."
 
 #: application/controllers/ItemTypesController.php:158
 #, php-format
 msgid ""
 "The item type \"%s\" was successfully added!  You may now add elements to "
 "your new item type."
-msgstr ""
+msgstr "Objekttypen \"%s\" lades till! Du kan nu lägga till element till din nya objekttyp."
 
 #: application/controllers/ItemsController.php:89
 #: application/controllers/ItemsController.php:149
@@ -2123,51 +2128,51 @@ msgid ""
 "The ImageMagick directory path has not been set. No derivative images will "
 "be created. If you would like Omeka to create derivative images, please set "
 "the path in Settings."
-msgstr ""
+msgstr "Sökvägen till installationsmappen för ImageMagick saknas. Inga bildderivat kommer att skapas. Om du vill att Omeka skall skapa bildderivat måste en sökväg anges i Inställningar."
 
 #: application/controllers/ItemsController.php:98
 #, php-format
 msgid "The item \"%s\" was successfully added!"
-msgstr ""
+msgstr "Objektet \"%s\" lades till!"
 
 #: application/controllers/ItemsController.php:100
 #, php-format
 msgid "The item #%s was successfully added!"
-msgstr ""
+msgstr "Objektet #%s lades till!"
 
 #: application/controllers/ItemsController.php:108
 #, php-format
 msgid "The item \"%s\" was successfully changed!"
-msgstr ""
+msgstr "Objektet \"%s\" ändrades!"
 
 #: application/controllers/ItemsController.php:110
 #, php-format
 msgid "The item #%s was successfully changed!"
-msgstr ""
+msgstr "Objektet #%s ändrades!"
 
 #: application/controllers/ItemsController.php:118
 #, php-format
 msgid "The item \"%s\" was successfully deleted!"
-msgstr ""
+msgstr "Objektet \"%s\" raderades!"
 
 #: application/controllers/ItemsController.php:120
 #, php-format
 msgid "The item #%s was successfully deleted!"
-msgstr ""
+msgstr "Objektet #%s raderades!"
 
 #: application/controllers/ItemsController.php:128
 #, php-format
 msgid ""
 "This will delete the item \"%s\" and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr ""
+msgstr "Detta kommer att radera objektet \"%s\" och dess relaterade metadata. Alla filer och deras metadata med kopplingar till detta objekt kommer också att raderas."
 
 #: application/controllers/ItemsController.php:132
 #, php-format
 msgid ""
 "This will delete the item #%s and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr ""
+msgstr "Detta kommer att radera objektet #%s och dess relaterade metadata. Alla filer och deras metadata med kopplingar till detta objekt kommer också att raderas."
 
 #: application/controllers/ItemsController.php:227
 msgid "You must choose some items to batch edit."
@@ -2179,44 +2184,44 @@ msgstr "Användare får inte förändra objekts synlighet."
 
 #: application/controllers/ItemsController.php:276
 msgid "User is not allowed to modify featured status of items."
-msgstr ""
+msgstr "Användaren har inte behörighet att ändra objekts status som utvalda."
 
 #: application/controllers/ItemsController.php:283
 msgid "User is not allowed to delete selected items."
-msgstr ""
+msgstr "Användaren har inte behörighet att radera valda objekt."
 
 #: application/controllers/ItemsController.php:289
 msgid "User is not allowed to edit selected items."
-msgstr ""
+msgstr "Användaren har inte behörighet att ändra valda objekt."
 
 #: application/controllers/ItemsController.php:294
 msgid "User is not allowed to tag selected items."
-msgstr ""
+msgstr "Användaren har inte behörighet att tagga valda objekt."
 
 #: application/controllers/ItemsController.php:328
 msgid "The items were successfully deleted!"
-msgstr ""
+msgstr "Objekten raderades!"
 
 #: application/controllers/ItemsController.php:330
 msgid "The items were successfully changed!"
-msgstr ""
+msgstr "Objekten ändrades!"
 
 #: application/controllers/PluginsController.php:45
 #, php-format
 msgid ""
 "Error in configuring plugin named \"%s\". Missing config and/or config_form "
 "hook(s)."
-msgstr ""
+msgstr "Fel uppstod när tillägget \"%s\" skulle konfigureras. Inställningar och/eller kopplingar till inställningsformulär(et) saknas."
 
 #: application/controllers/PluginsController.php:59
 #, php-format
 msgid "The %s plugin was successfully configured!"
-msgstr ""
+msgstr "Tillägget %s konfigurerades!"
 
 #: application/controllers/PluginsController.php:89
 #, php-format
 msgid "The %s plugin has already been installed."
-msgstr ""
+msgstr "Tillägget %s är redan installerat."
 
 #: application/controllers/PluginsController.php:99
 #, php-format
@@ -2227,48 +2232,48 @@ msgstr "%s pluginen installerades!"
 #: application/controllers/PluginsController.php:116
 #, php-format
 msgid "The following error occurred while installing the %s plugin: "
-msgstr ""
+msgstr "Följande fel uppstod när tillägget %s installerades:"
 
 #: application/controllers/PluginsController.php:154
 #, php-format
 msgid "The following error occurred while activating the %s plugin: "
-msgstr ""
+msgstr "Följande fel uppstod när tillägget %s aktiverades:"
 
 #: application/controllers/PluginsController.php:164
 #, php-format
 msgid "The %s plugin was successfully activated!"
-msgstr ""
+msgstr "Tillägget %s aktiverades!"
 
 #: application/controllers/PluginsController.php:169
 #, php-format
 msgid "The %s plugin was activated, but could not be loaded: "
-msgstr ""
+msgstr "Tillägget %s aktiverades men kunde inte laddas:"
 
 #: application/controllers/PluginsController.php:204
 #, php-format
 msgid "The %s plugin was successfully deactivated!"
-msgstr ""
+msgstr "Tillägget %s avaktiverades!"
 
 #: application/controllers/PluginsController.php:209
 #, php-format
 msgid "The following error occurred while deactivating the %s plugin: "
-msgstr ""
+msgstr "Följande fel uppstod när tillägget %s avaktiverades:"
 
 #: application/controllers/PluginsController.php:239
 #, php-format
 msgid "The %s plugin was successfully upgraded!"
-msgstr ""
+msgstr "Tillägget %s uppgraderades!"
 
 #: application/controllers/PluginsController.php:248
 #: application/controllers/PluginsController.php:254
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
-msgstr ""
+msgstr "Följande fel uppstod när tillägget %s uppgraderades:"
 
 #: application/controllers/PluginsController.php:310
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
-msgstr ""
+msgstr "Tillägget kunde inte hittas i katalogen '%s'!"
 
 #: application/controllers/PluginsController.php:322
 msgid "You must confirm the uninstall before proceeding."
@@ -2306,29 +2311,29 @@ msgstr "Säkerhetsinställningarna har uppdaterats."
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
-msgstr ""
+msgstr "Du har ändrat vilka uppgifter som är sökbara i Omeka. Vänligen använd nedanstående formulär för att göra en omindexering."
 
 #: application/controllers/SettingsController.php:121
 msgid ""
 "Indexing records. This may take a while. You may continue administering your"
 " site."
-msgstr ""
+msgstr "Indexerar uppgifter. Detta kan ta ett tag. Du kan fortsätta administrera din sida under tiden."
 
 #: application/controllers/SettingsController.php:156
 msgid "The item type elements were successfully changed!"
-msgstr ""
+msgstr "Elementen för objekttyper ändrades!"
 
 #: application/controllers/SettingsController.php:183
 msgid "The API configuration was successfully changed!"
-msgstr ""
+msgstr "API:ets inställningar ändrades!"
 
 #: application/controllers/SettingsController.php:206
 msgid "The ImageMagick directory path works."
-msgstr ""
+msgstr "Katalogsökvägen för ImageMagick stämmer."
 
 #: application/controllers/SettingsController.php:207
 msgid "The ImageMagick directory path does not work."
-msgstr ""
+msgstr "Katalogsökvägen för ImageMagick stämmer inte."
 
 #: application/controllers/TagsController.php:47
 msgid "Invalid tagType given."
@@ -2336,24 +2341,24 @@ msgstr "Ogiltig tagType angiven."
 
 #: application/controllers/ThemesController.php:28
 msgid "Invalid form submission."
-msgstr ""
+msgstr "Ogiltig formulärdata."
 
 #: application/controllers/ThemesController.php:36
 msgid "You have chosen an illegal theme name. Please select another theme."
-msgstr ""
+msgstr "Du har valt ett otillåtet tema. Vänligen välj ett annat tema."
 
 #: application/controllers/ThemesController.php:43
 #, php-format
 msgid "This theme requires a newer version of Omeka (%s)."
-msgstr ""
+msgstr "Detta tema kräver en nyare version av Omeka (%s)."
 
 #: application/controllers/ThemesController.php:57
 msgid "The theme has been successfully changed."
-msgstr ""
+msgstr "Temat ändrades!"
 
 #: application/controllers/ThemesController.php:84
 msgid "The theme settings were successfully saved!"
-msgstr ""
+msgstr "Inställningarna för temat sparades!"
 
 #: application/controllers/UpgradeController.php:56
 msgid "SQL error in migration: "
@@ -2364,7 +2369,7 @@ msgstr "SQL-fel vid migrering:"
 msgid ""
 "Omeka requires PHP version %1$s or higher, but this server is running PHP "
 "version %2$s. Please update the installed version of PHP and try again."
-msgstr ""
+msgstr "Omeka kräver PHP version %1$s eller senare men denna server kör PHP version %2$s. Vänligen uppdatera den installerade versionen av PHP och försök igen."
 
 #: application/controllers/UsersController.php:70
 msgid ""
@@ -2408,7 +2413,7 @@ msgstr "Du kan nu logga in i Omeka."
 #: application/controllers/UsersController.php:236
 #: application/controllers/UsersController.php:287
 msgid "There was an invalid entry on the form. Please try again."
-msgstr ""
+msgstr "Formuläret innehåller ogiltiga uppgifter. Vänligen försök igen."
 
 #: application/controllers/UsersController.php:176
 #, php-format
@@ -2426,29 +2431,29 @@ msgstr "Aktiveringsmail har skickats."
 
 #: application/controllers/UsersController.php:220
 msgid "User activation email could not be sent."
-msgstr ""
+msgstr "Aktiveringsmail kunde inte skickas."
 
 #: application/controllers/UsersController.php:258
 #, php-format
 msgid "The user %s was successfully changed!"
-msgstr ""
+msgstr "Användaren %s ändrades!"
 
 #: application/controllers/UsersController.php:294
 msgid "Password changed!"
-msgstr ""
+msgstr "Lösenordet ändrades!"
 
 #: application/controllers/UsersController.php:316
 msgid "A new API key was successfully created."
-msgstr ""
+msgstr "En ny API-nyckel skapades."
 
 #: application/controllers/UsersController.php:323
 msgid "An existing API key was successfully rescinded."
-msgstr ""
+msgstr "En befintlig API-nyckel upphävdes."
 
 #: application/controllers/UsersController.php:350
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
-msgstr ""
+msgstr "Användaren \"%s\" raderades!"
 
 #: application/controllers/UsersController.php:356
 #, php-format
@@ -2456,7 +2461,7 @@ msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
 "this user will remain in the system, but will no longer be associated with "
 "this user."
-msgstr ""
+msgstr "%s kommer att raderas från systemet. Objekt, samlingar och taggar skapade av denna användare finns kvar i systemet men kommer inte längre att vara kopplade till denna användare."
 
 #: application/controllers/UsersController.php:381
 msgid "Welcome!"
@@ -2467,25 +2472,25 @@ msgstr "Välkommen!"
 msgid ""
 "Your account for the %s repository has been created. Please click the "
 "following link to activate your account:"
-msgstr ""
+msgstr "Ditt konto för databasen %s har skapats. Klicka på följande länk för att aktivera ditt konto:"
 
 #: application/controllers/UsersController.php:386
 #, php-format
 msgid "Activate your account with the %s repository"
-msgstr ""
+msgstr "Ativera ditt konto för databasen %s"
 
 #: application/controllers/UsersController.php:481
 msgid "Login information incorrect. Please try again."
-msgstr ""
+msgstr "Inloggningsuppgifterna stämmer inte. Vänligen försök igen."
 
 #: application/forms/AppearanceSettings.php:22
 #: application/forms/Install.php:128
 msgid "Fullsize Image Size"
-msgstr ""
+msgstr "Fullstorlek"
 
 #: application/forms/AppearanceSettings.php:23
 msgid "Maximum fullsize image size constraint (in pixels)."
-msgstr ""
+msgstr "Max storlek på fullstorlek (i pixlar)."
 
 #: application/forms/AppearanceSettings.php:29
 #: application/forms/Install.php:136
@@ -2499,47 +2504,47 @@ msgstr "Max storlek på tumnagel (i pixlar)"
 #: application/forms/AppearanceSettings.php:36
 #: application/forms/Install.php:144
 msgid "Square Thumbnail Size"
-msgstr ""
+msgstr "Kvadratisk tumnagelstorlek"
 
 #: application/forms/AppearanceSettings.php:37
 msgid "Maximum square thumbnail size constraint (in pixels)."
-msgstr ""
+msgstr "Max storlek på kvadratisk tumnagel (i pixlar)."
 
 #: application/forms/AppearanceSettings.php:43
 msgid "Results Per Page (admin)"
-msgstr ""
+msgstr "Resultat per sida (admin)"
 
 #: application/forms/AppearanceSettings.php:44
 msgid ""
 "Limit the number of results displayed per page in the administrative "
 "interface."
-msgstr ""
+msgstr "Begränsa antalet resultat som visas per sida i det administrativa gränssnittet."
 
 #: application/forms/AppearanceSettings.php:50
 msgid "Results Per Page (public)"
-msgstr ""
+msgstr "Resultat per sida (publikt)"
 
 #: application/forms/AppearanceSettings.php:51
 msgid ""
 "Limit the number of results displayed per page in the public interface."
-msgstr ""
+msgstr "Begränsa antalet resultat som visas per sida i det publika gränssnittet."
 
 #: application/forms/AppearanceSettings.php:57
 #: application/forms/Install.php:168
 msgid "Show Empty Elements"
-msgstr ""
+msgstr "Visa tomma element"
 
 #: application/forms/AppearanceSettings.php:62
 msgid "Show Element Set Headings"
-msgstr ""
+msgstr "Visa rubriker för elementsamlingar"
 
 #: application/forms/AppearanceSettings.php:75
 msgid "Derivative Size Constraints"
-msgstr ""
+msgstr "Begränsningar för derivatstorlekar"
 
 #: application/forms/AppearanceSettings.php:83
 msgid "Display Settings"
-msgstr ""
+msgstr "Visningsinställningar"
 
 #: application/forms/ChangePassword.php:25
 msgid "Current Password"
@@ -2548,11 +2553,11 @@ msgstr "Nuvarande lösenord"
 #: application/forms/ChangePassword.php:26
 #: application/forms/ChangePassword.php:36
 msgid "Password must be at least 6 characters long."
-msgstr ""
+msgstr "Lösenordet måste bestå av minst 6 tecken."
 
 #: application/forms/ChangePassword.php:28
 msgid "Invalid current password"
-msgstr ""
+msgstr "Felaktigt nuvarande lösenord"
 
 #: application/forms/ChangePassword.php:34
 msgid "New Password"
@@ -2560,16 +2565,16 @@ msgstr "Nytt lösenord"
 
 #: application/forms/ChangePassword.php:41
 msgid "New password must be entered."
-msgstr ""
+msgstr "Ett nytt lösenord måste anges."
 
 #: application/forms/ChangePassword.php:50
 #: application/forms/ChangePassword.php:70
 msgid "New password must be typed correctly twice."
-msgstr ""
+msgstr "Det nya lösenordet måste anges korrekt två gånger."
 
 #: application/forms/ChangePassword.php:59
 msgid "New password must be at least %min% characters long."
-msgstr ""
+msgstr "Det nya lösenordet måste bestå av minst %min% tecken."
 
 #: application/forms/ChangePassword.php:68
 msgid "Repeat New Password"
@@ -2593,32 +2598,32 @@ msgstr "Webbplatsens copyrightinformation"
 
 #: application/forms/GeneralSettings.php:41 application/forms/Install.php:109
 msgid "Site Author Information"
-msgstr ""
+msgstr "Webbplatsens upphovsman"
 
 #: application/forms/GeneralSettings.php:45 application/forms/Install.php:113
 msgid "Tag Delimiter"
-msgstr ""
+msgstr "Avgränsare för taggar"
 
 #: application/forms/GeneralSettings.php:46
 msgid ""
 "Separate tags using this character or string. Be careful when changing this "
 "setting. You run the risk of splitting tags that contain the old delimiter."
-msgstr ""
+msgstr "Separera taggar med detta tecken eller ord. Var försiktig när du ändrar denna inställning. Du riskerar att dela taggar som innehåller den tidigare avgränsaren."
 
 #: application/forms/GeneralSettings.php:59 application/forms/Install.php:174
 msgid "ImageMagick Directory Path"
-msgstr ""
+msgstr "Katalogsökväg för ImageMagick"
 
 #: application/forms/Install.php:31
 msgid "must be 30 characters or fewer with no whitespace"
-msgstr ""
+msgstr "får vara max 30 tecken utan mellanrum"
 
 #: application/forms/Install.php:39 application/forms/User.php:46
 #: application/models/User.php:189
 #, php-format
 msgid ""
 "Whitespace is not allowed. Only these special characters may be used: %s"
-msgstr ""
+msgstr "Mellanrum är inte tillåtna. Endast följande specialtecken får användas: %s"
 
 #: application/forms/Install.php:48 application/forms/Login.php:34
 msgid "Password"
@@ -2634,45 +2639,45 @@ msgstr "Bekräfta lösenord"
 
 #: application/forms/Install.php:114
 msgid "Separate tags using this character or string."
-msgstr ""
+msgstr "Separera taggar med detta tecken eller ord."
 
 #: application/forms/Install.php:129
 msgid "Maximum fullsize image size constraint (in pixels)"
-msgstr ""
+msgstr "Max storlek på fullstorlek (i pixlar)."
 
 #: application/forms/Install.php:137
 msgid "Maximum thumbnail size constraint (in pixels)"
-msgstr ""
+msgstr "Max storlek på tumnagel (i pixlar)"
 
 #: application/forms/Install.php:145
 msgid "Maximum square thumbnail size constraint (in pixels)"
-msgstr ""
+msgstr "Max storlek på kvadratisk tumnagel (i pixlar)."
 
 #: application/forms/Install.php:152
 msgid "Items Per Page (admin)"
-msgstr ""
+msgstr "Objekt per sida (admin)"
 
 #: application/forms/Install.php:153
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
-msgstr ""
+msgstr "Begränsa antalet objekt som visas per sida i det administrativa gränssnittet."
 
 #: application/forms/Install.php:160
 msgid "Items Per Page (public)"
-msgstr ""
+msgstr "Objekt per sida (publikt)"
 
 #: application/forms/Install.php:161
 msgid "Limit the number of items displayed per page in the public interface."
-msgstr ""
+msgstr "Begränsa antalet objekt som visas per sida i det publika gränssnittet."
 
 #: application/forms/Install.php:170
 msgid "Check box to show metadata elements with no text."
-msgstr ""
+msgstr "Markera för att visa metadataelement utan text."
 
 #: application/forms/Install.php:185
 msgid "Default Superuser Account"
-msgstr ""
+msgstr "Standardkonto huvudadministratör"
 
 #: application/forms/Install.php:195
 msgid "Site Settings"
@@ -2684,12 +2689,12 @@ msgstr "Objekttypens namn."
 
 #: application/forms/ItemTypes.php:151
 msgid "The description of the item type."
-msgstr ""
+msgstr "Objekttypens beskrivning."
 
 #: application/forms/ItemTypes.php:173 application/forms/ItemTypes.php:182
 #, php-format
 msgid "The item type cannot have more than one \"%s\" element."
-msgstr ""
+msgstr "Objekttypen kan inte ha mer än ett \"%s\" element."
 
 #: application/forms/Login.php:27
 msgid "Username cannot be empty."
@@ -2713,70 +2718,70 @@ msgstr "Välj en startsida"
 
 #: application/forms/Navigation.php:250
 msgid "Cannot find parent navigation page."
-msgstr ""
+msgstr "Överordnad navigationssida saknas."
 
 #: application/forms/Navigation.php:331
 msgid "All navigation links must have URIs."
-msgstr ""
+msgstr "Alla navigeringslänkar måste ha URI:er."
 
 #: application/forms/Navigation.php:344
 msgid "All navigation links must have different URIs."
-msgstr ""
+msgstr "Alla navigeringslänkar måste ha unika URI:er."
 
 #: application/forms/Navigation.php:350
 #, php-format
 msgid "Invalid URI for \"%s\" navigation link:  \"%s\""
-msgstr ""
+msgstr "Ogiltig URI för \"%s\" navigationslänk: \"%s\""
 
 #: application/forms/Navigation.php:383
 msgid "Navigation links that have undeleteable sublinks cannot be deleted."
-msgstr ""
+msgstr "Navigeringslänkar med permanenta underlänkar kan inte raderas."
 
 #: application/forms/RecoverPassword.php:36
 msgid "Email address is required."
-msgstr ""
+msgstr "E-post måste anges"
 
 #: application/forms/RecoverPassword.php:46
 msgid "Invalid email address given."
-msgstr ""
+msgstr "Ogiltig e-post angiven."
 
 #: application/forms/RecoverPassword.php:48
 msgid "Invalid format given for email address."
-msgstr ""
+msgstr "Ogiltigt e-postformat angivet."
 
 #: application/forms/RecoverPassword.php:50
 msgid "Invalid hostname given for email address."
-msgstr ""
+msgstr "Ogiltigt värdnamn för e-post angivet."
 
 #: application/forms/RecoverPassword.php:66
 msgid "Invalid email address"
-msgstr ""
+msgstr "Ogiltig e-postadress"
 
 #: application/forms/ResetPassword.php:27
 msgid "Password is required."
-msgstr ""
+msgstr "Lösenord måste anges."
 
 #: application/forms/ResetPassword.php:33
 msgid "Typed passwords do not match."
-msgstr ""
+msgstr "Lösenorden matchar inte."
 
 #: application/forms/SecuritySettings.php:24
 msgid "Disable File Upload Validation"
-msgstr ""
+msgstr "Inaktivera validering för filuppladdning"
 
 #: application/forms/SecuritySettings.php:26
 msgid ""
 "Check this field if you would like to allow any file to be uploaded to "
 "Omeka."
-msgstr ""
+msgstr "Markera om du vill tillåta uppladdning av alla filtyper till Omeka."
 
 #: application/forms/SecuritySettings.php:32
 msgid "Allowed File Extensions"
-msgstr ""
+msgstr "Tillåtna filtyper"
 
 #: application/forms/SecuritySettings.php:33
 msgid "List of allowed extensions for file uploads"
-msgstr ""
+msgstr "Lista över tillåtna filtyper för uppladdning"
 
 #: application/forms/SecuritySettings.php:42
 msgid "Allowed File Types"
@@ -2784,33 +2789,33 @@ msgstr "Tillåtna filtyper"
 
 #: application/forms/SecuritySettings.php:43
 msgid "List of allowed MIME types for file uploads"
-msgstr ""
+msgstr "Lista över tillåtna MIME-typer för uppladdning"
 
 #: application/forms/SecuritySettings.php:52
 msgid "ReCaptcha Public Key"
-msgstr ""
+msgstr "Publik nyckel för ReCaptcha"
 
 #: application/forms/SecuritySettings.php:53
 msgid ""
 "Enter public key from recaptcha.net. Both this and the private key must be "
 "filled in to secure public forms."
-msgstr ""
+msgstr "Ange publik nyckel från recaptcha.net. Både denna och den privata nyckeln måste anges för att publika formulär skall vara skyddade."
 
 #: application/forms/SecuritySettings.php:60
 msgid "ReCaptcha Private Key"
-msgstr ""
+msgstr "Privat nyckel för ReCaptcha"
 
 #: application/forms/SecuritySettings.php:61
 msgid ""
 "Enter private key from recaptcha.net. Both this and the public key must be "
 "filled in to secure public forms."
-msgstr ""
+msgstr "Ange privat nyckel från recaptcha.net. Både denna och den publika nyckeln måste anges för att publika formulär skall vara skyddade."
 
 #: application/forms/SecuritySettings.php:68
 msgid ""
 "Check this field if you would like to filter HTML elements or attributes "
 "from form input."
-msgstr ""
+msgstr "Markera om du vill filtrera bort HTML-element eller attribut från inskickad formulärdata."
 
 #: application/forms/SecuritySettings.php:69
 msgid "Enable HTML Filtering"
@@ -2822,19 +2827,19 @@ msgstr "Tillåtna HTML-element"
 
 #: application/forms/SecuritySettings.php:75
 msgid "List of allowed HTML elements in form input"
-msgstr ""
+msgstr "Lista över tillåtna HTML-element i formulärdata"
 
 #: application/forms/SecuritySettings.php:82
 msgid "Allowed HTML Attributes"
-msgstr ""
+msgstr "Tillåtna HTML-attribut"
 
 #: application/forms/SecuritySettings.php:83
 msgid "List of allowed HTML attributes in form input"
-msgstr ""
+msgstr "Lista över tillåtna HTML-attribut i formulärdata"
 
 #: application/forms/SecuritySettings.php:98
 msgid "File Validation"
-msgstr ""
+msgstr "Filvalidering"
 
 #: application/forms/SecuritySettings.php:106
 msgid "Captcha"
@@ -2846,35 +2851,35 @@ msgstr "HTML-filtrering"
 
 #: application/forms/User.php:30
 msgid "Username must be 30 characters or fewer. Whitespace is not allowed."
-msgstr ""
+msgstr "Användarnamnet får innehålla max 30 tecken. Mellanrum är inte tillåtet."
 
 #: application/forms/User.php:37
 msgid "Username is required."
-msgstr ""
+msgstr "Användarnamn måste anges."
 
 #: application/forms/User.php:56
 msgid "Username must be at least %min% characters long."
-msgstr ""
+msgstr "Användarnamnet måste bestå av minst %min% tecken."
 
 #: application/forms/User.php:58
 msgid "Username must be at most %max% characters long."
-msgstr ""
+msgstr "Användarnamnet får bestå av max %max% tecken."
 
 #: application/forms/User.php:72
 msgid "This username is already in use."
-msgstr ""
+msgstr "Detta användarnamn används redan."
 
 #: application/forms/User.php:82
 msgid "Name as it should be displayed on the site"
-msgstr ""
+msgstr "Namnet som det visas publikt på sidan"
 
 #: application/forms/User.php:88 application/models/User.php:169
 msgid "Real Name is required."
-msgstr ""
+msgstr "Namn måste anges."
 
 #: application/forms/User.php:94
 msgid "This email address is invalid."
-msgstr ""
+msgstr "Den angivna e-postadressen är ogiltig."
 
 #: application/forms/User.php:102
 msgid "Email is required."
@@ -2889,75 +2894,75 @@ msgid ""
 "Roles describe the permissions a user has. See <a "
 "href='http://omeka.org/codex/User_Roles' target='_blank'>documentation</a> "
 "for details."
-msgstr ""
+msgstr "Roller beskriver de befogenheter en användare har. Se <a href='http://omeka.org/codex/User_Roles' target='_blank'>dokumentationen</a> för mer detaljer."
 
 #: application/forms/User.php:137
 msgid "Inactive users cannot log in to the site."
-msgstr ""
+msgstr "Inaktiva användare kan inte logga in på webbplatsen."
 
 #: application/forms/User.php:139
 #, php-format
 msgid "Activation has been pending since %s."
-msgstr ""
+msgstr "Väntar på aktivering sedan %s."
 
 #: application/forms/User.php:142
 msgid "Active?"
-msgstr ""
+msgstr "Aktiv?"
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:114
 #, php-format
 msgid "The configured PHP path (%s) is invalid."
-msgstr ""
+msgstr "Den angivna sökvägen för PHP (%s) är ogiltig."
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:124
 #, php-format
 msgid "The configured PHP path (%s) does not point to a PHP-CLI binary."
-msgstr ""
+msgstr "Den angivna sökvägen för PHP (%s) pekar inte mot en PHP-CLI-binär."
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:126
 #, php-format
 msgid ""
 "The configured PHP path (%s) points to a PHP-CLI binary with an invalid "
 "version (%s)"
-msgstr ""
+msgstr "Den angivna sökvägen för PHP (%s) pekar mot en PHP-CLI-binär med en ogiltig version (%s)"
 
 #: application/libraries/Omeka/Navigation.php:214
 msgid "The page must be normalized and have a valid uid."
-msgstr ""
+msgstr "Sidan måste normaliseras samt ha ett giltigt uid."
 
 #: application/libraries/Omeka/Navigation.php:226
 msgid ""
 "The parent container must either be the navigation object or a descendant "
 "subpage of the navigation object."
-msgstr ""
+msgstr "Det överordnade elementet måste antingen vara navigeringsobjektet eller en undersida till navigeringsobjektet."
 
 #: application/libraries/Omeka/Navigation/Page/Uri.php:128
 #, php-format
 msgid "Invalid URI for Omeka_Navigation_Page_Uri object: %s"
-msgstr ""
+msgstr "Ogiltig URI för Omeka_Navigation_Page_Uri-objektet: %s "
 
 #: application/libraries/Omeka/Plugin/Ini.php:63
 #, php-format
 msgid "Path to plugin.ini for \"%s\" is not correct."
-msgstr ""
+msgstr "Sökvägen till plugin.ini för \"%s\" är inte korrekt."
 
 #: application/libraries/Omeka/Plugin/Installer.php:79
 #, php-format
 msgid "The \"%s\" plugin must be installed and have newer files to upgrade it."
-msgstr ""
+msgstr "Tillägget \"%s\" måste vara installerat och innehålla nyare filer för att kunna uppgraderas."
 
 #: application/libraries/Omeka/Plugin/Installer.php:116
 msgid "Plugin must have a valid directory name before it can be installed."
-msgstr ""
+msgstr "Tillägget måste ha ett giltigt katalognamn innan det kan installeras."
 
 #: application/libraries/Omeka/Record/AbstractRecord.php:349
 #, php-format
 msgid "'%s' is an invalid special value."
-msgstr ""
+msgstr "'%s' är ett ogiltigt specialvärde."
 
 #: application/libraries/Omeka/Record/Iterator.php:49
 msgid "An invalid value was detected during record iteration."
-msgstr ""
+msgstr "Ett ogiltigt värde upptäcktes under genomgången av poster."
 
 #: application/libraries/globals.php:410
 msgid "File"
@@ -2979,11 +2984,11 @@ msgstr "Exakt matchning"
 #: application/libraries/globals.php:1279
 #, php-format
 msgid "Could not find file %s!"
-msgstr ""
+msgstr "Kunde inte hitta filen %s!"
 
 #: application/libraries/globals.php:1296
 msgid "No featured collections are available."
-msgstr ""
+msgstr "Inga utvalda samlingar finns tillgängliga."
 
 #: application/libraries/globals.php:1593
 msgid "Select Below "
@@ -2999,15 +3004,15 @@ msgstr "Omeka Atom-feed"
 
 #: application/libraries/globals.php:2293
 msgid "No recent items available."
-msgstr ""
+msgstr "Inga senaste objekt finns tillgängliga"
 
 #: application/libraries/globals.php:2319
 msgid "No featured items are available."
-msgstr ""
+msgstr "Inga utvalda objekt finns tillgängliga."
 
 #: application/libraries/globals.php:2378
 msgid "View"
-msgstr ""
+msgstr "Listvy"
 
 #: application/libraries/globals.php:2440
 msgid "No Collection"
@@ -3027,256 +3032,256 @@ msgstr "&larr; Föregående post"
 
 #: application/libraries/globals.php:2776
 msgid "Browse All"
-msgstr ""
+msgstr "Visa alla"
 
 #: application/libraries/globals.php:2781
 msgid "Browse by Tag"
-msgstr ""
+msgstr "Bläddra via taggar"
 
 #: application/libraries/globals.php:3050
 msgid "No tags are available."
-msgstr ""
+msgstr "Inga taggar tillgängliga."
 
 #: application/models/Builder/Item.php:263
 msgid "Must specify a file transfer type when attaching files to an item!"
-msgstr ""
+msgstr "En filöverföringstyp måste anges när filer läggs till ett objekt!"
 
 #: application/models/Collection.php:117
 msgid "Cannot associate the collection with an unsaved user."
-msgstr ""
+msgstr "Samlingen kan inte kopplas till en ej sparad användare."
 
 #: application/models/Element.php:175
 msgid "The element name must not be empty."
-msgstr ""
+msgstr "Elementnamnet måste anges."
 
 #: application/models/Element.php:179
 msgid "Invalid element set."
-msgstr ""
+msgstr "Ogiltig elementsamling."
 
 #: application/models/Element.php:185
 #, php-format
 msgid "An element named \"%s\" already exists for the \"%s\" element set."
-msgstr ""
+msgstr "Ett element med namnet \"%s\" existerar redan för elementsamlingen \"%s\"."
 
 #: application/models/Element.php:216
 #, php-format
 msgid "Cannot set element set ID: set named \"%s\" does not exist."
-msgstr ""
+msgstr "ID för elementsamling kan ej sättas: samlingen \"%s\" existerar inte."
 
 #: application/models/ElementSet.php:146
 msgid "Name of element set must be unique."
-msgstr ""
+msgstr "Namnet på elementsamlingen måste vara unikt."
 
 #: application/models/ElementSet.php:150
 msgid "Name of element set must not be empty."
-msgstr ""
+msgstr "Elementsamlingens namn måste anges."
 
 #: application/models/ElementText.php:59
 msgid "Invalid record ID."
-msgstr ""
+msgstr "Ogiltigt post-ID."
 
 #: application/models/ElementText.php:62
 msgid "All element texts must have a record type."
-msgstr ""
+msgstr "Samtliga elementtexter måste ha en posttyp."
 
 #: application/models/ElementText.php:65
 msgid "Invalid element ID."
-msgstr ""
+msgstr "Ogiltigt element-id"
 
 #: application/models/File.php:235
 msgid "Cannot get the local path for a stored file."
-msgstr ""
+msgstr "Den lokala sökvägen för en sparad fil kunde inte hämtas."
 
 #: application/models/File.php:452
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
-msgstr ""
+msgstr "\"%s\" är inte ett giltigt filderivat"
 
 #: application/models/Item.php:330
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
-msgstr ""
+msgstr "Filer kan inte läggas till ett objekt som inte sparats i databasen!"
 
 #. / Chicago-style item citation: two authors
 #: application/models/Item.php:457
 #, php-format
 msgid "%1$s and %2$s"
-msgstr ""
+msgstr "%1$s och %2$s"
 
 #. / Chicago-style item citation: three authors
 #: application/models/Item.php:461
 #, php-format
 msgid "%1$s, %2$s, and %3$s"
-msgstr ""
+msgstr "%1$s, %2$s, och %3$s"
 
 #. / Chicago-style item citation: more than three authors
 #: application/models/Item.php:465
 #, php-format
 msgid "%s et al."
-msgstr ""
+msgstr "%s et al."
 
 #. / Chicago-style item citation: access date and URL
 #: application/models/Item.php:483
 #, php-format
 msgid "accessed %1$s, %2$s."
-msgstr ""
+msgstr "visades %1$s, %2$s."
 
 #: application/models/Item.php:500
 msgid "Cannot add an existing file to an item!"
-msgstr ""
+msgstr "En redan befintlig fil kan inte läggas till ett objekt!"
 
 #: application/models/Item.php:504
 msgid "File must be valid before it can be associated with an item!"
-msgstr ""
+msgstr "Filen måste vara giltig innan den kan läggas till ett objekt!"
 
 #: application/models/Item.php:528
 msgid "Invalid item type."
-msgstr ""
+msgstr "Ogiltig objekttyp."
 
 #: application/models/Item.php:531
 msgid "Invalid collection."
-msgstr ""
+msgstr "Ogiltig samling."
 
 #: application/models/ItemType.php:102
 #, php-format
 msgid "The item type name must have between %1$s and %2$s characters."
-msgstr ""
+msgstr "Objekttypens namn måste innehålla mellan %1$s och %2$s tecken."
 
 #: application/models/ItemType.php:106
 msgid "The item type name must be unique."
-msgstr ""
+msgstr "Objekttypens namn måste vara unikt."
 
 #: application/models/ItemType.php:183
 msgid "There are too many values in the element ordering array."
-msgstr ""
+msgstr "Elementsorteringslistan innehåller för många värden."
 
 #: application/models/ItemType.php:185
 msgid "There are too few values in the element ordering array."
-msgstr ""
+msgstr "Elementsorteringslistan innehåller får få värden."
 
 #: application/models/ItemType.php:222
 msgid ""
 "Invalid element data. To add elements, you must either pass an element "
 "objects or an array of element metadata."
-msgstr ""
+msgstr "Ogiltig elementdata. För att lägga till element måste du ange ett elementobjekt eller en lista med elementmetadata."
 
 #: application/models/ItemType.php:286
 msgid ""
 "Cannot remove elements from an item type that is not persistent in the "
 "database!"
-msgstr ""
+msgstr "Element kan inte raderas från en objekttyp som inte sparats i databasen!"
 
 #: application/models/ItemType.php:295
 #, php-format
 msgid "Cannot find element with ID %s!"
-msgstr ""
+msgstr "Element med id %s kunde inte hittas!"
 
 #: application/models/ItemType.php:336
 #, php-format
 msgid "Item type does not contain an element with the ID %s!"
-msgstr ""
+msgstr "Objekttypen innehåller inte ett element med id %s!"
 
 #: application/models/ItemType.php:357
 msgid ""
 "Invalid parameter. The hasElement function requires either an element object"
 " or an element id to determine if an item type has an element."
-msgstr ""
+msgstr "Ogiltig parameter. hasElement-funktionen kräver antingen ett elementobjekt eller ett elementid för att kunna avgöra om en objekttyp innehåller ett specifikt element."
 
 #: application/models/Mixin/ElementText.php:293
 #, php-format
 msgid "There is no element \"%1$s\", \"%2$s\"!"
-msgstr ""
+msgstr "Det finns inget element \"%1$s\", \"%2$s\"!"
 
 #: application/models/Mixin/ElementText.php:312
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
-msgstr ""
+msgstr "Element med id '%s' kunde inte hittas!"
 
 #: application/models/Mixin/ElementText.php:431
 msgid "Element texts are not formatted correctly!"
-msgstr ""
+msgstr "Elementets texter är inte korrekt formaterade!"
 
 #: application/models/Mixin/ElementText.php:579
 #, php-format
 msgid "The \"%s\" field has at least one invalid value!"
-msgstr ""
+msgstr "Fältet \"%s\" har minst ett ogiltigt värde!"
 
 #: application/models/Mixin/ElementText.php:649
 msgid "Cannot save element text for records that are not yet persistent!"
-msgstr ""
+msgstr "Elementtexter kan inte sparas för poster som inte sparats i databasen!"
 
 #: application/models/Option.php:50 application/models/Option.php:54
 msgid "Each option must have a unique name."
-msgstr ""
+msgstr "Varje alternativ måste ha ett unikt namn."
 
 #: application/models/Plugin.php:133
 msgid "Names of plugins must not be blank"
-msgstr ""
+msgstr "Namn på tillägg får inte vara tomma"
 
 #: application/models/Table/Collection.php:80
 #, php-format
 msgid "[Untitled] #%s"
-msgstr ""
+msgstr "[Utan namn] #%s"
 
 #: application/models/Table/Item.php:123
 msgid "Invalid search type given!"
-msgstr ""
+msgstr "Ogiltig söktyp angiven!"
 
 #: application/models/Tag.php:56
 msgid "Tags must be given a name."
-msgstr ""
+msgstr "Taggar måste ha ett namn."
 
 #: application/models/Tag.php:60
 msgid "That name is already taken for this tag."
-msgstr ""
+msgstr "Det angivna namnet används redan för denna tagg."
 
 #: application/models/User.php:110
 msgid "User may not change permissions to super-user"
-msgstr ""
+msgstr "Användaren kan inte ändra privilegier för rollen överordnad"
 
 #: application/models/User.php:113
 msgid "User may not change roles."
-msgstr ""
+msgstr "Användaren kan inte ändra roller."
 
 #: application/models/User.php:182 application/models/User.php:230
 msgid "The user must be assigned a role."
-msgstr ""
+msgstr "Användaren måste tilldelas en roll."
 
 #: application/models/User.php:187
 #, php-format
 msgid "The username \"%1$s\" must be between %2$s and %3$s characters."
-msgstr ""
+msgstr "Användarnamnet \"%1$s\" måste innehålla mellan %2$s och %3$s tecken."
 
 #: application/models/User.php:191
 #, php-format
 msgid "'%s' is already in use. Please choose another username."
-msgstr ""
+msgstr "'%s' är upptaget. Vänligen välj ett annat användarnamn."
 
 #: application/models/UsersActivations.php:54
 msgid "Cannot create a user activation for non-existent user."
-msgstr ""
+msgstr "Kan inte aktivera en användare som inte existerar."
 
 #: application/tests/suite/Omeka/Db/Migration/_files/migrations/20080717013526_foobar.php:18
 msgid "This migration should have been run previously (should not run again)."
-msgstr ""
+msgstr "Denna migrering bör ha körts tidigare (bör inte köras igen)."
 
 #: application/tests/suite/Omeka/Db/Migration/_files/migrations/50000101120000_notRunYet.php:19
 msgid "This migration should not be run."
-msgstr ""
+msgstr "Denna migrering bör inte köras."
 
 #: application/tests/suite/Omeka/NavigationTest.php:752
 #: application/tests/suite/Omeka/NavigationTest.php:817
 #: application/tests/suite/Omeka/NavigationTest.php:839
 #: application/tests/suite/Omeka/NavigationTest.php:952
 msgid "Edit Items"
-msgstr ""
+msgstr "Redigera objekt"
 
 #: application/tests/suite/Omeka/NavigationTest.php:758
 #: application/tests/suite/Omeka/NavigationTest.php:818
 #: application/tests/suite/Omeka/NavigationTest.php:856
 #: application/tests/suite/Omeka/NavigationTest.php:953
 msgid "Edit Collections"
-msgstr ""
+msgstr "Redigera samlingar"
 
 #: application/tests/suite/Omeka/NavigationTest.php:764
 #: application/tests/suite/Omeka/NavigationTest.php:819
@@ -3284,12 +3289,12 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:954
 #: install/views/scripts/layout.phtml:6 install/views/scripts/layout.phtml:23
 msgid "Omeka"
-msgstr ""
+msgstr "Omeka"
 
 #: application/tests/suite/Omeka/NavigationTest.php:825
 #: application/tests/suite/Omeka/NavigationTest.php:951
 msgid "CHNM"
-msgstr ""
+msgstr "CHNM"
 
 #: application/tests/suite/Omeka/NavigationTest.php:982
 #: application/tests/suite/Omeka/NavigationTest.php:990
@@ -3361,11 +3366,11 @@ msgstr "Sida 6"
 
 #: application/views/helpers/AllElementTexts.php:108
 msgid "[no text]"
-msgstr ""
+msgstr "[ingen text]"
 
 #: application/views/helpers/ElementForm.php:65
 msgid "Add Input"
-msgstr ""
+msgstr "Lägg till data"
 
 #: application/views/helpers/ElementInput.php:131
 msgid "Use HTML"
@@ -3374,51 +3379,51 @@ msgstr "Använd HTML"
 #: application/views/helpers/GetCurrentRecord.php:27
 #, php-format
 msgid "A current %s variable has not been set to this view."
-msgstr ""
+msgstr "En aktuell %s variabel har inte tilldelats denna vy."
 
 #: application/views/helpers/GetLoopRecords.php:30
 #, php-format
 msgid "A loop %s variable has not been set to this view."
-msgstr ""
+msgstr "En loop %s variabel har inte tilldelats denna vy."
 
 #: application/views/helpers/Loop.php:27
 msgid "An array of records is not available for the loop."
-msgstr ""
+msgstr "En lista med poster är inte tillgänglig för loopen."
 
 #: application/views/helpers/RecordUrl.php:34
 msgid "Invalid record passed while getting record URL."
-msgstr ""
+msgstr "Ogiltig post när post-url hämtades."
 
 #: application/views/helpers/RecordUrl.php:44
 msgid "Invalid action passed while getting record URL."
-msgstr ""
+msgstr "Ogiltig handling när post-url hämtades."
 
 #: application/views/helpers/RecordUrl.php:75
 msgid "Invalid return value while getting record URL."
-msgstr ""
+msgstr "Ogiltigt returvärde när post-url hämtades."
 
 #: application/views/scripts/collections/browse.php:14
 #: application/views/scripts/items/browse.php:24
 msgid "Sort by: "
-msgstr ""
+msgstr "Sortera på:"
 
 #: application/views/scripts/collections/browse.php:42
 #, php-format
 msgid "View the items in %s"
-msgstr ""
+msgstr "Visa objekten i %s"
 
 #: application/views/scripts/collections/show.php:12
 #, php-format
 msgid "Items in the %s Collection"
-msgstr ""
+msgstr "Objekt i samlingen %s"
 
 #: application/views/scripts/collections/show.php:37
 msgid "There are currently no items within this collection."
-msgstr ""
+msgstr "Denna samling innehåller inga objekt."
 
 #: application/views/scripts/common/footer.php:14
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
-msgstr ""
+msgstr "Skapad med <a href=\"http://omeka.org\">Omeka</a>."
 
 #: application/views/scripts/common/pagination_control.php:5
 msgid "Pagination"
@@ -3462,20 +3467,20 @@ msgstr "%s är inte en giltig URL."
 
 #: application/views/scripts/error/404.rss2.php:1
 msgid "Rss2.0 Feed Not Found!"
-msgstr ""
+msgstr "Rss2.0-flöde hittades inte!"
 
 #: application/views/scripts/error/405.php:2
 msgid "405 Method Not Allowed"
-msgstr ""
+msgstr "405 Metoden inte tillåten"
 
 #: application/views/scripts/error/405.php:6
 #, php-format
 msgid "The method used to access this URL (%s) is not valid."
-msgstr ""
+msgstr "Åtkomstmetoden för denna url (%s) är inte giltig."
 
 #: application/views/scripts/error/index.php:4
 msgid "Omeka has encountered an error"
-msgstr ""
+msgstr "Ett fel har uppstått i Omeka"
 
 #: application/views/scripts/error/index.php:33
 msgid ""
@@ -3483,15 +3488,15 @@ msgid ""
 "Omeka Codex page on <a "
 "href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error "
 "messages</a>."
-msgstr ""
+msgstr "För information om hur du får mer detaljerade felmeddelanden, se följande sida på Omeka Codex: <a href=\"http://omeka.org/codex/Retrieving_error_messages\">hantera felmeddelanden</a>."
 
 #: application/views/scripts/index.php:10
 msgid "Featured Item"
-msgstr ""
+msgstr "Utvalt objekt"
 
 #: application/views/scripts/index.php:18
 msgid "Featured Collection"
-msgstr ""
+msgstr "Utvald samling"
 
 #: application/views/scripts/index.php:42
 msgid "View All Items"
@@ -3503,19 +3508,19 @@ msgstr "Filer"
 
 #: application/views/scripts/items/show.php:33
 msgid "Citation"
-msgstr ""
+msgstr "Citat"
 
 #: application/views/scripts/search/search-filters.php:3
 msgid "Query:"
-msgstr ""
+msgstr "Förfrågan:"
 
 #: application/views/scripts/search/search-filters.php:4
 msgid "Query type:"
-msgstr ""
+msgstr "Typ av förfrågan:"
 
 #: application/views/scripts/search/search-filters.php:5
 msgid "Record types:"
-msgstr ""
+msgstr "Posttyper:"
 
 #: application/views/scripts/search/search-form.php:6
 msgid "Search using this query type:"
@@ -3527,58 +3532,58 @@ msgstr "Sök mål:"
 
 #: application/views/scripts/search/search-form.php:17
 msgid "Go to search settings to select record types to use."
-msgstr ""
+msgstr "Gå till sökinställningar för att välja vilka posttyper som skall användas."
 
 #: application/views/scripts/search/search-form.php:19
 msgid "Advanced Search (Items only)"
-msgstr ""
+msgstr "Avancerad sökning (endast objekt)"
 
 #: application/views/scripts/users/login.php:9
 msgid "Go to Home Page"
-msgstr ""
+msgstr "Till startsidan"
 
 #: application/views/scripts/users/login.php:9
 msgid "Lost your password?"
-msgstr ""
+msgstr "Glömt ditt lösenord?"
 
 #: install/controllers/IndexController.php:25
 msgid "Could not load database resource!"
-msgstr ""
+msgstr "Databasresursen kunde inte laddas!"
 
 #: install/views/scripts/index/errors.phtml:1
 msgid "Installation Error"
-msgstr ""
+msgstr "Installationsfel"
 
 #: install/views/scripts/index/errors.phtml:2
 msgid ""
 "Before installation can continue, the following errors must be resolved:"
-msgstr ""
+msgstr "Innan installationen kan fortsätta måste följande fel avhjälpas:"
 
 #: install/views/scripts/index/fatal-error.phtml:1
 msgid "Fatal Error"
-msgstr ""
+msgstr "Allvarligt fel"
 
 #: install/views/scripts/index/index.phtml:2
 msgid "Installation Warning"
-msgstr ""
+msgstr "Installationsvarning"
 
 #: install/views/scripts/index/index.phtml:4
 msgid ""
 "The following issues will not affect installation, but they may negatively "
 "affect the behavior of Omeka:"
-msgstr ""
+msgstr "Följande problem påverkar inte själva installationen, men de kan ha negativa effekter på Omekas beteende:"
 
 #: install/views/scripts/index/index.phtml:14
 msgid "Configure Your Site"
-msgstr ""
+msgstr "Konfigurera din webbplats"
 
 #: install/views/scripts/index/index.phtml:16
 msgid "Form Validation Errors"
-msgstr ""
+msgstr "Fel vid validering av formulär"
 
 #: install/views/scripts/index/installed.phtml:1
 msgid "Success!"
-msgstr ""
+msgstr "Åtgärden lyckades!"
 
 #: install/views/scripts/index/installed.phtml:2
 msgid "Omeka is installed."

@@ -6,6 +6,8 @@
 # danieltakacs <daniel.takacs@gmail.com>, 2012
 # danieltakacs <daniel.takacs@gmail.com>, 2012
 # Imre Juhász <juhasz.imr@gmail.com>, 2012
+# RustySheriff <jozsef.bone@gmail.com>, 2016
+# madaraszcsaba <madarasz.csaba@gmail.com>, 2016
 # madaraszcsaba <madarasz.csaba@gmail.com>, 2012
 # madaraszcsaba <madarasz.csaba@gmail.com>, 2012
 # Sándor Koroknai <koroknaisandor@gmail.com>, 2012
@@ -14,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2016-01-11 21:13+0000\n"
+"PO-Revision-Date: 2016-05-23 21:15+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Hungarian (Hungary) (http://www.transifex.com/omeka/omeka/language/hu_HU/)\n"
 "MIME-Version: 1.0\n"
@@ -77,7 +79,7 @@ msgstr ""
 
 #. Dublin Core: Publisher element name
 msgid "Publisher"
-msgstr "Publikáló"
+msgstr "Közzétette"
 
 #. Dublin Core: Publisher element description
 msgid "An entity responsible for making the resource available"
@@ -550,10 +552,14 @@ msgid "Get started by adding your first collection."
 msgstr ""
 
 #: admin/themes/default/collections/edit.php:8
-#: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Edit Collection #%s"
 msgstr "#%s gyűjtemény szerkesztése"
+
+#: admin/themes/default/collections/show.php:8
+#, php-format
+msgid "Collection #%s"
+msgstr ""
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
@@ -3585,7 +3591,7 @@ msgstr ""
 
 #: install/views/scripts/index/installed.phtml:2
 msgid "Omeka is installed."
-msgstr ""
+msgstr "Az Omeka telepítve."
 
 #: install/views/scripts/index/installed.phtml:3
 msgid "Public Site"
