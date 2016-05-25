@@ -100,6 +100,8 @@ class Table_Item extends Omeka_Db_Table
             $elementId = (int) $v['element_id'];
             $alias = "_advanced_{$advancedIndex}";
 
+            $joiner = isset($v['joiner']) && $advancedIndex > 0 ? $v['joiner'] : null;
+
             $negate = false;
             // Determine what the WHERE clause should look like.
             switch ($type) {
@@ -150,11 +152,16 @@ class Table_Item extends Omeka_Db_Table
 
             if ($negate) {
                 $joinCondition .= " AND {$predicateClause}";
-                $select->joinLeft(array($alias => $db->ElementText), $joinCondition, array());
-                $select->where("{$alias}.text IS NULL");
+                $whereClause = "{$alias}.text IS NULL";
             } else {
-                $select->joinInner(array($alias => $db->ElementText), $joinCondition, array());
-                $select->where($predicateClause);
+                $whereClause = $predicateClause;
+            }
+
+            $select->joinLeft(array($alias => $db->ElementText), $joinCondition, array());
+            if ($joiner == 'or') {
+                $select->orWhere($whereClause);
+            } else {
+                $select->where($whereClause);
             }
 
             $advancedIndex++;

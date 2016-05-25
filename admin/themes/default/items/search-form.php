@@ -48,6 +48,19 @@ $formAttributes['method'] = 'GET';
                 //[terms] = 'foobar'
                 //etc
                 echo $this->formSelect(
+                    "advanced[$i][joiner]",
+                    @$rows['joiner'],
+                    array(
+                        'title' => __("Search Joiner"),
+                        'id' => null,
+                        'class' => 'advanced-search-joiner'
+                    ),
+                    array(
+                        'and' => __('AND'),
+                        'or' => __('OR'),
+                    )
+                );
+                echo $this->formSelect(
                     "advanced[$i][element_id]",
                     @$rows['element_id'],
                     array(
