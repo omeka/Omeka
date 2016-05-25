@@ -100,62 +100,62 @@ class Table_Item extends Omeka_Db_Table
             $elementId = (int) $v['element_id'];
             $alias = "_advanced_{$advancedIndex}";
 
-            $inner = true;
-            $extraJoinCondition = '';
+            $negate = false;
             // Determine what the WHERE clause should look like.
             switch ($type) {
+                case 'does not contain':
+                    $negate = true;
                 case 'contains':
                     $predicate = "LIKE " . $db->quote('%'.$value .'%');
                     break;
+
+                case 'is not exactly':
+                    $negate = true;
                 case 'is exactly':
                     $predicate = ' = ' . $db->quote($value);
                     break;
-                case 'does not contain':
-                    $extraJoinCondition = "AND {$alias}.text LIKE " . $db->quote('%'.$value .'%');
+
                 case 'is empty':
-                    $inner = false;
-                    $predicate = "IS NULL";
-                    break;
+                    $negate = true;
                 case 'is not empty':
-                    $predicate = "IS NOT NULL";
+                    $predicate = 'IS NOT NULL';
                     break;
+
                 case 'starts with':
                     $predicate = "LIKE " . $db->quote($value.'%');
                     break;
+
                 case 'ends with':
                     $predicate = "LIKE " . $db->quote('%'.$value);
                     break;
-                case 'is not exactly':
-                    $predicate = ' != ' . $db->quote($value);
-                    break;
+
+                case 'does not match':
+                    $negate = true;
                 case 'matches':
                     if (!strlen($value)) {
                         continue 2;
                     }
                     $predicate = 'REGEXP ' . $db->quote($value);
                     break;
-                case 'does not match':
-                    if (!strlen($value)) {
-                        continue 2;
-                    }
-                    $predicate = 'NOT REGEXP ' . $db->quote($value);
-                    break;
+
                 default:
                     throw new Omeka_Record_Exception(__('Invalid search type given!'));
             }
 
+            $predicateClause = "{$alias}.text {$predicate}";
+
             // Note that $elementId was earlier forced to int, so manual quoting
             // is unnecessary here
             $joinCondition = "{$alias}.record_id = items.id AND {$alias}.record_type = 'Item' AND {$alias}.element_id = $elementId";
-            if ($extraJoinCondition) {
-                $joinCondition .= ' ' . $extraJoinCondition;
-            }
-            if ($inner) {
-                $select->joinInner(array($alias => $db->ElementText), $joinCondition, array());
-            } else {
+
+            if ($negate) {
+                $joinCondition .= " AND {$predicateClause}";
                 $select->joinLeft(array($alias => $db->ElementText), $joinCondition, array());
+                $select->where("{$alias}.text IS NULL");
+            } else {
+                $select->joinInner(array($alias => $db->ElementText), $joinCondition, array());
+                $select->where($predicateClause);
             }
-            $select->where("{$alias}.text {$predicate}");
 
             $advancedIndex++;
         }
