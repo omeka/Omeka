@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Dimitar Poposki <poposkidimitar@gmail.com>, 2011-2012,2015
+# Dimitar Poposki <poposkidimitar@gmail.com>, 2011-2012,2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2016-01-11 21:13+0000\n"
+"PO-Revision-Date: 2016-05-23 21:15+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Macedonian (Macedonia) (http://www.transifex.com/omeka/omeka/language/mk_MK/)\n"
 "MIME-Version: 1.0\n"
@@ -430,11 +430,11 @@ msgstr ""
 #: admin/themes/default/collections/browse.php:67
 #: admin/themes/default/collections/browse.php:76
 msgid "Add a Collection"
-msgstr "Додади "
+msgstr "Додади ја колекцијата"
 
 #: admin/themes/default/collections/add.php:11
 msgid "Add Collection"
-msgstr ""
+msgstr "Додади колекција"
 
 #: admin/themes/default/collections/add.php:16
 #: admin/themes/default/collections/edit.php:30
@@ -538,17 +538,21 @@ msgstr "Види ги сите колекции"
 
 #: admin/themes/default/collections/browse.php:73
 msgid "You have no collections."
-msgstr ""
+msgstr "Немате колекции"
 
 #: admin/themes/default/collections/browse.php:75
 msgid "Get started by adding your first collection."
 msgstr ""
 
 #: admin/themes/default/collections/edit.php:8
-#: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Edit Collection #%s"
 msgstr "Измени колекција #%s"
+
+#: admin/themes/default/collections/show.php:8
+#, php-format
+msgid "Collection #%s"
+msgstr ""
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
@@ -630,7 +634,7 @@ msgstr "Тагови"
 #: application/views/scripts/common/delete-confirm.php:3
 #, php-format
 msgid "Delete %s"
-msgstr ""
+msgstr "Избриши%s"
 
 #: admin/themes/default/common/footer.php:6
 #: admin/themes/default/common/login-footer.php:7
@@ -659,7 +663,7 @@ msgstr ""
 
 #: admin/themes/default/common/global-nav.php:1
 msgid "Manage Site"
-msgstr ""
+msgstr "Менаџирај страница"
 
 #: admin/themes/default/common/global-nav.php:5
 #: admin/themes/default/plugins/browse.php:2
@@ -855,7 +859,7 @@ msgstr ""
 
 #: admin/themes/default/files/show.php:54
 msgid "Filename"
-msgstr ""
+msgstr "име на фајлот"
 
 #: admin/themes/default/files/show.php:56
 #: application/views/scripts/files/show.php:24
@@ -949,7 +953,7 @@ msgstr ""
 
 #: admin/themes/default/index.php:35
 msgid "A new version of Omeka is available for download."
-msgstr ""
+msgstr "Нова везија на Омека е достапна за симнување"
 
 #: admin/themes/default/index.php:36
 #, php-format
@@ -1009,7 +1013,7 @@ msgstr ""
 #: admin/themes/default/users/edit.php:15
 #: install/views/scripts/index/index.phtml:14
 msgid "required field"
-msgstr ""
+msgstr "Задолжително поле"
 
 #: admin/themes/default/item-types/form.php:25
 #: admin/themes/default/item-types/show.php:16
@@ -1067,7 +1071,7 @@ msgstr ""
 #: application/libraries/globals.php:411
 #: application/views/scripts/items/show.php:18
 msgid "Collection"
-msgstr ""
+msgstr "колекција"
 
 #: admin/themes/default/items/batch-delete.php:2
 msgid "Batch Delete Items"
@@ -1085,7 +1089,7 @@ msgstr ""
 #: admin/themes/default/items/batch-delete.php:50
 #: admin/themes/default/items/batch-edit.php:117
 msgid "Delete Items"
-msgstr ""
+msgstr "Избриши ставки"
 
 #: admin/themes/default/items/batch-edit.php:2
 msgid "Batch Edit Items"
@@ -1097,18 +1101,18 @@ msgstr ""
 
 #: admin/themes/default/items/batch-edit.php:42
 msgid "Item Metadata"
-msgstr ""
+msgstr "метаподаток"
 
 #: admin/themes/default/items/batch-edit.php:47
 msgid "Public?"
-msgstr ""
+msgstr "Јавно?"
 
 #: admin/themes/default/items/batch-edit.php:50
 #: admin/themes/default/items/batch-edit.php:65
 #: admin/themes/default/items/batch-edit.php:79
 #: admin/themes/default/items/batch-edit.php:94
 msgid "Select Below"
-msgstr ""
+msgstr "Одбери долу"
 
 #: admin/themes/default/items/batch-edit.php:52
 msgid "Not Public"
@@ -1257,11 +1261,11 @@ msgstr ""
 
 #: admin/themes/default/items/files-form.php:13
 msgid "Delete "
-msgstr ""
+msgstr "Избриши"
 
 #: admin/themes/default/items/files-form.php:22
 msgid "Add New Files"
-msgstr ""
+msgstr "Додај нови полиња"
 
 #: admin/themes/default/items/files-form.php:24
 #, php-format
@@ -1270,7 +1274,7 @@ msgstr ""
 
 #: admin/themes/default/items/files-form.php:27
 msgid "Find a File"
-msgstr ""
+msgstr "Додади фајл"
 
 #: admin/themes/default/items/form.php:25
 msgid "Add Another File"
@@ -1316,7 +1320,7 @@ msgstr ""
 #: admin/themes/default/items/search-form.php:67
 #: application/views/scripts/items/search-form.php:63
 msgid "Search Type"
-msgstr ""
+msgstr "Пребарај тип"
 
 #: admin/themes/default/items/search-form.php:72
 #: application/views/scripts/items/search-form.php:68

@@ -544,9 +544,13 @@ msgid "Get started by adding your first collection."
 msgstr ""
 
 #: admin/themes/default/collections/edit.php:8
-#: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Edit Collection #%s"
+msgstr ""
+
+#: admin/themes/default/collections/show.php:8
+#, php-format
+msgid "Collection #%s"
 msgstr ""
 
 #: admin/themes/default/collections/show.php:18

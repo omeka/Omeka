@@ -7,13 +7,13 @@
 # ahndj <ahndj@rikar.org>, 2014
 # Martin Sauter <martin.sauter@gmx.ch>, 2013
 # Roland Keck <roland.keck@web.de>, 2014
-# Seung-il, Lee <leesi@rikar.org>, 2014
+# Seung-il, Lee <silee0523@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2016-01-11 21:13+0000\n"
+"PO-Revision-Date: 2016-05-23 21:16+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Korean (Korea) (http://www.transifex.com/omeka/omeka/language/ko_KR/)\n"
 "MIME-Version: 1.0\n"
@@ -549,10 +549,14 @@ msgid "Get started by adding your first collection."
 msgstr "첫 번째 컬렉션 추가를 시작합니다."
 
 #: admin/themes/default/collections/edit.php:8
-#: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Edit Collection #%s"
 msgstr "#%s 컬렉션 편집"
+
+#: admin/themes/default/collections/show.php:8
+#, php-format
+msgid "Collection #%s"
+msgstr ""
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
