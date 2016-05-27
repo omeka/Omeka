@@ -18,16 +18,41 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
      *
      * @param array $params Optional array of key-value pairs to use instead of
      *  reading the current params from the request.
+     * @param array $options Optional options for the search filters. Possible keys:
+     * - 'remove_filter' (bool) Enable removing single filter? By default false.
+     *    When set to true, you need to pass the key in request params 
+     *    that this filter refers to. Example: 
+     *    <code>
+     *        // GET items/browse?search=&public=1&custom_field=xyz
+     *        public function filterItemSearchFilters($displayArray, $args) {
+     *            if (!empty($args['request_array']['custom_field'])) {
+     *                if (empty($args['options']['remove_filter'])) {
+     *                    $displayArray['Custom Label'] = $args['request_array']['custom_field'];
+     *                } else {
+     *                    $displayArray['Custom Label'] = array(
+     *                        'key'   => 'custom_field',
+     *                        'value' => $args['request_array']['custom_field']
+     *                    );
+     *                }
+     *            }
+     *            return $displayArray;
+     *        }
+     *    </code>
      * @return string HTML output
      */
-    public function itemSearchFilters(array $params = null)
+    public function itemSearchFilters(array $params = null, $options = array())
     {
         if ($params === null) {
             $request = Zend_Controller_Front::getInstance()->getRequest(); 
             $requestArray = $request->getParams();
+            // TODO - here I would rather use $requestArray = $request->getQuery();
+            // because $request->getParams(); contains also module, controller, action keys
         } else {
             $requestArray = $params;
         }
+        $options = array_merge(array(
+            'remove_filter' => false
+        ), $options);
         
         $db = get_db();
         $displayArray = array();
@@ -76,12 +101,20 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
                         break;
                 }
                 if ($displayValue) {
-                    $displayArray[$filter] = $displayValue;
+                    if ($options['remove_filter']) {
+                        // pass the query param key, so we know which part should be removed
+                        $displayArray[$filter] = array(
+                            'key'   => $key,
+                            'value' => $displayValue,
+                        );
+                    } else {
+                        $displayArray[$filter] = $displayValue;
+                    }
                 }
             }
         }
 
-        $displayArray = apply_filters('item_search_filters', $displayArray, array('request_array' => $requestArray));
+        $displayArray = apply_filters('item_search_filters', $displayArray, array('request_array' => $requestArray, 'options' => $options));
         
         // Advanced needs a separate array from $displayValue because it's
         // possible for "Specific Fields" to have multiple values due to 
@@ -100,13 +133,21 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
                 if (isset($row['terms'])) {
                     $advancedValue .= ' "' . $row['terms'] . '"';
                 }
-                $advancedArray[$i] = $advancedValue;
+                if ($options['remove_filter']) {
+                    // pass the query param index, so we know which part should be removed
+                    $advancedArray[$i] = array(
+                        'key'   => $i,
+                        'value' => $advancedValue,
+                    );
+                } else {
+                    $advancedArray[$i] = $advancedValue;
+                }
             }
         }
 
         return $this->view->partial(
             'items/search-filters.php',
-            compact('displayArray', 'advancedArray', 'requestArray')
+            compact('displayArray', 'advancedArray', 'requestArray', 'options')
         );
     }
 }

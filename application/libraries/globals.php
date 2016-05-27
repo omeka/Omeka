@@ -2010,13 +2010,14 @@ function body_tag($attributes = array())
  * Get a list of the current search item filters in use.
  *
  * @package Omeka\Function\Search
- * @uses Omeka_View_Helper_SearchFilters::searchFilters()
+ * @uses Omeka_View_Helper_ItemSearchFilters::itemSearchFilters()
  * @params array $params Params to override the ones read from the request.
+ * @param array $options Options for the filters.
  * @return string
  */
-function item_search_filters(array $params = null)
+function item_search_filters(array $params = null, $options = array())
 {
-    return get_view()->itemSearchFilters($params);
+    return get_view()->itemSearchFilters($params, $options);
 }
 
 /**
