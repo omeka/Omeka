@@ -446,6 +446,6 @@ class ItemsController extends Omeka_Controller_AbstractActionController
             $this->_helper->flashMessenger(__('No item to batch edit.'), 'error');
         }
 
-        $this->_helper->redirector('browse', 'items', null, $params);
+        $this->_helper->redirector('browse', 'items');
     }
 }
