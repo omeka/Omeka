@@ -17,9 +17,15 @@ class Job_ItemBatchEditAll extends Omeka_Job_AbstractJob
 
     public function perform()
     {
+        // Prepare the background acl to check rights of the user for each item.
+        // $this->_aclHelper = get_acl();
+        $acl = Zend_Registry::get('bootstrap')->bootstrap('Acl')->acl;
+        $aclChecker = new Omeka_Controller_Action_Helper_Acl($acl, $this->_user);
+        Zend_Controller_Action_HelperBroker::addHelper($aclChecker);
+        $this->_aclHelper = Zend_Controller_Action_HelperBroker::getStaticHelper('Acl');
+
         // Get the record ids filtered to Omeka_Db_Table::applySearchFilters().
         $params = $this->_options['params'];
-
         $this->_table = $this->_db->getTable('Item');
         $alias = $this->_table->getTableAlias();
         $select = $this->_table
@@ -30,13 +36,6 @@ class Job_ItemBatchEditAll extends Omeka_Job_AbstractJob
         if (!$itemIds) {
             return;
         }
-
-        // Prepare the background acl to check rights of the user for each item.
-        // $this->_aclHelper = get_acl();
-        $acl = Zend_Registry::get('bootstrap')->bootstrap('Acl')->acl;
-        $aclChecker = new Omeka_Controller_Action_Helper_Acl($acl, $this->_user);
-        Zend_Controller_Action_HelperBroker::addHelper($aclChecker);
-        $this->_aclHelper = Zend_Controller_Action_HelperBroker::getStaticHelper('Acl');
 
         foreach ($itemIds as $id) {
             $this->_performItem($id);

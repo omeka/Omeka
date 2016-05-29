@@ -11,7 +11,7 @@ endif;
 ?>
 <div title="<?php echo $title; ?>">
 
-<form id="batch-edit-form" action="<?php echo html_escape(url('items/batch-edit-all-save')); ?>" method="post" accept-charset="utf-8">
+<form id="batch-edit-form" action="<?php echo html_escape(url('items/batch-edit-save')); ?>" method="post" accept-charset="utf-8">
     <section class="seven columns alpha">
         <fieldset class="panel">
             <h2><?php echo __('Search Filters'); ?></h2>
@@ -24,6 +24,7 @@ endif;
             <?php endif; ?>
             <p class="explanation"><?php echo __('Changes will be processed in the background item by item, so you should check logs for success and errors.'); ?></p>
             <?php
+            echo $this->formHidden('all', true);
             echo $this->formHidden('params', json_encode($params));
             ?>
         </fieldset>

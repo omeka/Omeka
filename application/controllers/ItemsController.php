@@ -286,6 +286,10 @@ class ItemsController extends Omeka_Controller_AbstractActionController
             throw new Omeka_Controller_Exception_403;
         }
 
+        if ($this->_getParam('all')) {
+            return $this->_batchEditAllSave();
+        }
+
         $itemIds = $this->_getParam('items');
         if ($itemIds) {
             $metadata = $this->_getParam('metadata');
@@ -380,14 +384,8 @@ class ItemsController extends Omeka_Controller_AbstractActionController
      *
      * @return void
      */
-    public function batchEditAllSaveAction()
+    protected function _batchEditAllSave()
     {
-        $hashParam = $this->_getParam('batch_edit_hash');
-        $hash = new Zend_Form_Element_Hash('batch_edit_hash');
-        if (!$hash->isValid($hashParam)) {
-            throw new Omeka_Controller_Exception_403;
-        }
-
         // Get the record ids filtered to Omeka_Db_Table::applySearchFilters().
         $params = json_decode($this->_getParam('params'), true) ?: array();
         $totalRecords = $this->_helper->db->count($params);
