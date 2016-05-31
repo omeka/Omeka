@@ -381,7 +381,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         );
         $html = '<' . $type . ' ' . tag_attributes($attrs) . '>'
             . '<a href="' . $escapedUrl . '">' . metadata($file, 'display_title') . '</a>'
-            . '</audio>';
+            . '</'. $type .'>';
         return $html;
     }
     
