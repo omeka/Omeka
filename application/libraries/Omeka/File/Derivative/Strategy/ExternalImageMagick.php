@@ -40,7 +40,7 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick
         $convertArgs = $this->_getConvertArgs($type, $sizeConstraint);
         $page = (int) $this->getOption('page', 0);
         $cmd = join(' ', array(
-            escapeshellcmd($convertPath),
+            escapeshellarg($convertPath),
             escapeshellarg($sourcePath . '[' . $page . ']'),
             $convertArgs,
             escapeshellarg($destPath)
