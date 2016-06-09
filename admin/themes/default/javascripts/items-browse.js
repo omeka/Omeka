@@ -27,11 +27,11 @@ Omeka.ItemsBrowse = {};
         $('.toggle-all-details').click(function (e) {
             e.preventDefault();
             if (detailsShown) {
-                $('.toggle-all-details').text(hideDetailsText);
-                $('.details').slideDown('fast');
+            	$('.toggle-all-details').text(showDetailsText);
+            	$('.details').slideUp('fast');
             } else {
-                $('.toggle-all-details').text(showDetailsText);
-                $('.details').slideUp('fast');
+            	$('.toggle-all-details').text(hideDetailsText);
+            	$('.details').slideDown('fast');
             }
             detailsShown = !detailsShown;
         });
