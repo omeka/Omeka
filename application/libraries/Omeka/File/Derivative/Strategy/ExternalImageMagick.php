@@ -160,7 +160,7 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick
                         
         // Attempt to run the ImageMagick binary with the version argument
         // If you try to run it without any arguments, it returns an error code
-        $cmd = $convertPath . ' -version';
+        $cmd = escapeshellarg($convertPath) . ' -version';
         
         self::executeCommand($cmd, $status, $output, $errors);
         
