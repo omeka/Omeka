@@ -26,6 +26,13 @@ echo item_search_filters();
             <?php if (is_allowed('Items', 'delete')): ?>
             <input type="submit" class="small red batch-action button" name="submit-batch-delete" value="<?php echo __('Delete'); ?>">
             <?php endif; ?>
+            <?php if (is_allowed('Items', 'edit') || is_allowed('Items', 'delete')): ?>
+            <span title="<?php echo __('Check to batch edit or delete all the %d browsed items.', $total_results); ?>" style="margin: 0 0 20px; padding: 3px 0;">
+                <label for="batch-all"><?php echo __('All'); ?></label>
+                <input id="batch-all" type="checkbox" value="1" name="batch-all" >
+            </span>
+            <?php echo $this->formHidden('params', json_encode(Zend_Controller_Front::getInstance()->getRequest()->getParams())); ?>
+            <?php endif; ?>
         </div>
 
         <?php echo common('quick-filters', array(), 'items'); ?>
@@ -41,7 +48,7 @@ echo item_search_filters();
                 $browseHeadings[__('Creator')] = 'Dublin Core,Creator';
                 $browseHeadings[__('Type')] = null;
                 $browseHeadings[__('Date Added')] = 'added';
-                echo browse_sort_links($browseHeadings, array('link_tag' => 'th scope="col"', 'list_tag' => '')); 
+                echo browse_sort_links($browseHeadings, array('link_tag' => 'th scope="col"', 'list_tag' => ''));
                 ?>
             </tr>
         </thead>
@@ -123,7 +130,7 @@ echo item_search_filters();
             <input type="submit" class="small red batch-action button" name="submit-batch-delete" value="<?php echo __('Delete'); ?>">
             <?php endif; ?>
         </div>
-        
+
         <?php echo common('quick-filters',array(),'items'); ?>
     </form>
 
