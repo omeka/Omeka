@@ -88,6 +88,7 @@ class Table_Item extends Omeka_Db_Table
     {
         $db = $this->getDb();
 
+        $where = '';
         $advancedIndex = 0;
         foreach ($terms as $v) {
             // Do not search on blank rows.
@@ -158,13 +159,19 @@ class Table_Item extends Omeka_Db_Table
             }
 
             $select->joinLeft(array($alias => $db->ElementText), $joinCondition, array());
-            if ($joiner == 'or') {
-                $select->orWhere($whereClause);
+            if ($where == '') {
+                $where = $whereClause;
+            } else if ($joiner == 'or') {
+                $where .= " OR $whereClause";
             } else {
-                $select->where($whereClause);
+                $where .= " AND $whereClause";
             }
 
             $advancedIndex++;
+        }
+
+        if ($where) {
+            $select->where($where);
         }
     }
     
