@@ -2183,6 +2183,10 @@ header nav {
     margin-bottom: 10px;
 }
 
+#search-narrow-by-fields .search-entry:first-of-type .advanced-search-joiner {
+    display: none;
+}
+
 button.remove_search {
     margin-bottom: 40px;
 }
