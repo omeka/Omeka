@@ -57,6 +57,11 @@
             <?php endif; ?> 
         </ul>
     </div>
+
+    <div class="panel">
+        <h4><?php echo __('Output Formats'); ?></h4>
+        <div><?php echo output_format_list(); ?></div>
+    </div>
     <?php fire_plugin_hook('admin_collections_show_sidebar', array('view'=>$this, 'collection'=>$collection)); ?>
 </section>
 
