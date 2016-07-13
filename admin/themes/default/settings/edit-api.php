@@ -32,15 +32,13 @@ echo flash();
         </div>
         <div class="field">
             <div class="two columns alpha">
-                <label for="search_record_types"><?php echo __('Results per Page'); ?></label>
+                <label for="api_per_page"><?php echo __('Results per Page'); ?></label>
             </div>
             <div class="inputs five columns omega">
                 <p class="explanation"><?php echo __(
                     'Maximum number of API results displayed per page.'
                 ); ?></p>
-                <?php echo $this->formText('api_per_page', get_option('api_per_page'), array('aria-label' => __(
-                    'Maximum number of API results displayed per page.'
-                ))); ?>
+                <?php echo $this->formText('api_per_page', get_option('api_per_page')); ?>
             </div>
         </div>
         <p><?php echo __(
