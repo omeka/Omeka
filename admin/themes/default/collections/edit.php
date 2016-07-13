@@ -1,11 +1,11 @@
 <?php
-    $collectionTitle = strip_formatting(metadata('collection', array('Dublin Core', 'Title'), array('no_filter' => true)));
-    if ($collectionTitle != '') {
-        $collectionTitle = ': &quot;' . $collectionTitle . '&quot; ';
-    } else {
-        $collectionTitle = '';
-    }
-    $collectionTitle = __('Edit Collection #%s', metadata('collection', 'id')) . $collectionTitle;
+$collectionTitle = metadata('collection', 'display_title');
+if ($collectionTitle != '' && $collectionTitle != __('[Untitled]')) {
+    $collectionTitle = ': &quot;' . $collectionTitle . '&quot; ';
+} else {
+    $collectionTitle = '';
+}
+$collectionTitle = __('Edit Collection #%s', metadata('collection', 'id')) . $collectionTitle;
 ?>
 
 <?php

@@ -52,7 +52,15 @@ echo item_search_filters();
                 <?php $id = metadata('item', 'id'); ?>
 
                 <?php if (is_allowed($item, 'edit') || is_allowed($item, 'tag')): ?>
-                <td class="batch-edit-check" scope="row"><input type="checkbox" name="items[]" value="<?php echo $id; ?>" aria-label="<?php echo __('Select \'%s\' row', metadata('item', array('Dublin Core', 'Title'))); ?>"/></td>
+                <td class="batch-edit-check">
+                    <input type="checkbox" name="items[]" value="<?php echo $id; ?>"
+                        aria-label="<?php echo html_escape(
+                            __('Select item "%s"',
+                                metadata('item', 'display_title', array('no_escape' => true))
+                            )
+                        ); ?>"
+                    >
+                </td>
                 <?php endif; ?>
 
                 <?php if ($item->featured): ?>

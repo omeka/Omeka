@@ -1,5 +1,5 @@
 <?php
-$collectionTitle = strip_formatting(metadata('collection', array('Dublin Core', 'Title')));
+$collectionTitle = metadata('collection', 'display_title');
 ?>
 
 <?php echo head(array('title'=> $collectionTitle, 'bodyclass' => 'collections show')); ?>
@@ -12,7 +12,7 @@ $collectionTitle = strip_formatting(metadata('collection', array('Dublin Core', 
     <h2><?php echo link_to_items_browse(__('Items in the %s Collection', $collectionTitle), array('collection' => metadata('collection', 'id'))); ?></h2>
     <?php if (metadata('collection', 'total_items') > 0): ?>
         <?php foreach (loop('items') as $item): ?>
-        <?php $itemTitle = strip_formatting(metadata('item', array('Dublin Core', 'Title'))); ?>
+        <?php $itemTitle = metadata('item', 'display_title'); ?>
         <div class="item hentry">
             <h3><?php echo link_to_item($itemTitle, array('class'=>'permalink')); ?></h3>
 

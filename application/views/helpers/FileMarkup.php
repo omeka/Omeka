@@ -306,8 +306,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
     protected function _linkToFile($file, $options, $html = null)
     {
         if ($html === null) {
-            $fileTitle = strip_formatting(metadata($file, array('Dublin Core', 'Title')));
-            $html = $fileTitle ? $fileTitle : metadata($file, 'Original Filename');
+            $html = metadata($file, 'display_title');
         }
 
         $linkAttributes = isset($options['linkAttributes'])

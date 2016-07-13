@@ -2515,8 +2515,7 @@ function link_to_file_show($attributes = array(), $text = null, $file = null)
         $file = get_current_record('file');
     }
     if (!$text) {
-        $fileTitle = strip_formatting(metadata($file, array('Dublin Core', 'Title')));
-        $text = $fileTitle ? $fileTitle : metadata($file, 'Original Filename');
+        $text = metadata($file, 'display_title');
     }
     return link_to($file, 'show', $text, $attributes);
 }
@@ -2542,7 +2541,9 @@ function link_to_item($text = null, $props = array(), $action = 'show', $item = 
     if (!$item) {
         $item = get_current_record('item');
     }
-    $text = (!empty($text) ? $text : strip_formatting(metadata($item, array('Dublin Core', 'Title'))));
+    if (empty($text)) {
+        $text = metadata($item, 'display_title');
+    }
     return link_to($item, $action, $text, $props);
 }
 
