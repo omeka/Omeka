@@ -39,7 +39,8 @@ Omeka.ItemsBrowse = {};
 
     Omeka.ItemsBrowse.setupBatchEdit = function () {
         var itemCheckboxes = $("table#items tbody input[type=checkbox]");
-        var globalCheckbox = $('th.batch-edit-heading').html('<input type="checkbox">').find('input');
+        var globalCheckboxLabel = $('th.batch-edit-heading').text();
+        var globalCheckbox = $('th.batch-edit-heading').html('<input type="checkbox" aria-label="' + globalCheckboxLabel + '">').find('input');
         var batchEditSubmit = $('.batch-edit-option input');
         /**
          * Disable the batch submit button first, will be enabled once item

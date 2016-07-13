@@ -34,14 +34,14 @@ echo item_search_filters();
         <thead>
             <tr>
                 <?php if (is_allowed('Items', 'edit')): ?>
-                <th class="batch-edit-heading"><?php echo __('Select'); ?></th>
+                <th class="batch-edit-heading"><?php echo __('Select all rows'); ?></th>
                 <?php endif; ?>
                 <?php
                 $browseHeadings[__('Title')] = 'Dublin Core,Title';
                 $browseHeadings[__('Creator')] = 'Dublin Core,Creator';
                 $browseHeadings[__('Type')] = null;
                 $browseHeadings[__('Date Added')] = 'added';
-                echo browse_sort_links($browseHeadings, array('link_tag' => 'th scope="col"', 'list_tag' => '')); 
+                echo browse_sort_links($browseHeadings, array('link_tag' => 'th scope="col"', 'list_tag' => ''));
                 ?>
             </tr>
         </thead>
@@ -52,7 +52,7 @@ echo item_search_filters();
                 <?php $id = metadata('item', 'id'); ?>
 
                 <?php if (is_allowed($item, 'edit') || is_allowed($item, 'tag')): ?>
-                <td class="batch-edit-check" scope="row"><input type="checkbox" name="items[]" value="<?php echo $id; ?>" /></td>
+                <td class="batch-edit-check" scope="row"><input type="checkbox" name="items[]" value="<?php echo $id; ?>" aria-label="<?php echo __('Select \'%s\' row', metadata('item', array('Dublin Core', 'Title'))); ?>"/></td>
                 <?php endif; ?>
 
                 <?php if ($item->featured): ?>
@@ -123,7 +123,7 @@ echo item_search_filters();
             <input type="submit" class="small red batch-action button" name="submit-batch-delete" value="<?php echo __('Delete'); ?>">
             <?php endif; ?>
         </div>
-        
+
         <?php echo common('quick-filters',array(),'items'); ?>
     </form>
 

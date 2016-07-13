@@ -32,10 +32,10 @@ echo flash();
 <?php endif; ?>
 
 <form id='search-users' method='GET'>
-<button><?php echo __('Search users'); ?></button><input type='text' name='search'/>
-<input type='radio' name='search-type' value='username' checked='checked' /><span><?php echo __('Username'); ?></span>
-<input type='radio' name='search-type' value='name' /><span><?php echo __('Display Name'); ?></span>
-<input type='radio' name='search-type' value='email' /><span><?php echo __('Email'); ?></span>
+<button><?php echo __('Search users'); ?></button><input type='text' name='search' aria-label="<?php echo __('Search users'); ?>"/>
+<label><input type='radio' name='search-type' value='username' checked='checked' /><?php echo __('Username'); ?></label>
+<label><input type='radio' name='search-type' value='name' /><?php echo __('Display Name'); ?></label>
+<label><input type='radio' name='search-type' value='email' /><?php echo __('Email'); ?></label>
 
 </form>
 

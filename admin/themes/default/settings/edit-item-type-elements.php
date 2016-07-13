@@ -41,8 +41,8 @@ echo flash();
     </section>
 </form>
 <div id="confirm-delete-dialog" title="<?php echo __('Confirm Delete'); ?>">
-<?php echo __('Are you sure you want to delete the selected item type elements from ' 
-. 'the database? You will lose all text related to the selected elements. This cannot ' 
+<?php echo __('Are you sure you want to delete the selected item type elements from '
+. 'the database? You will lose all text related to the selected elements. This cannot '
 . 'be undone.'); ?>
 </div>
 <script type="text/javascript">
