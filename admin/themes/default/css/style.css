@@ -617,9 +617,9 @@ footer {
         #advanced-form input[type=radio] { margin: 0 9px 0 0; }
 
         #advanced-form input[type=checkbox] { margin-right: 5px; }
-        
+
         #advanced-form fieldset { margin: 20px 0; }
-        
+
         #advanced-form legend {
             font-size: 16px;
             margin: 20px 0 10px;
@@ -1601,6 +1601,7 @@ header nav {
 .table-actions {
     clear: left;
     float: left;
+    width: 100%;
 }
 
     .browse-items .table-actions input[type=submit], .browse-items .table-actions a.button,
@@ -1644,9 +1645,9 @@ header nav {
     box-sizing: border-box;
     color: #666;
     display: inline-block;
-    float: left;
     line-height: 1.5em;
-    margin: 0px 0px 20px 0px;
+    margin: 0 0 0 -3px;
+    vertical-align: top;
     padding: 0;
     z-index: 15;
 }
@@ -1700,6 +1701,79 @@ header nav {
     display: none;
 }
 
+.quick-filters li {
+    display: inline-block;
+    padding: 3px 10px;
+    border-left: 1px solid #d8d8d8;
+}
+
+.quick-filters li a {
+    color: #666;
+}
+
+.quick-filters {
+    float: right;
+    margin: 0;
+    display: inline-block;
+}
+
+.table-actions {
+    background: #f8f8f8;
+    background: -webkit-linear-gradient(top, #f8f8f8, #e2e2e2);
+    background: -moz-linear-gradient(top, #f8f8f8, #e2e2e2);
+    background: -o-linear-gradient(top, #f8f8f8, #e2e2e2);
+    background: linear-gradient(to bottom, #f8f8f8, #e2e2e2);
+    border: 1px solid #D8D8D8;
+    border-bottom: 0;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: right;
+}
+
+.table-actions > *,
+.table-actions > input[type="submit"].small {
+    margin-bottom: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+    color: #666;
+    text-shadow: none;
+}
+
+.table-actions button {
+    float: left;
+    border-right: 1px solid #D8D8D8;
+}
+
+.table-actions button:hover {
+    box-shadow: none;
+    color: #666;
+}
+
+.table-actions button:active,
+.table-actions button.active {
+    background-color: #cecece;
+    color: #545454 !important;
+}
+
+.table-actions .selected {
+    display: inline-block;
+    margin-right: 4px;
+}
+
+.table-actions > input[type="submit"].small {
+    border-left: 1px solid #D8D8D8;
+    display: inline-block;
+    margin-right: 0;
+}
+
+table + .table-actions {
+    margin: -16px 0 20px;
+    border-top: 0;
+    border-bottom: 1px solid #d8d8d8;
+}
 
 /* Show Item
 ================================================== */

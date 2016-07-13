@@ -41,7 +41,9 @@ Omeka.ItemsBrowse = {};
         var itemCheckboxes = $("table#items tbody input[type=checkbox]");
         var globalCheckbox = $('th.batch-edit-heading').html('<input type="checkbox">').find('input');
         var batchEditSubmit = $('.batch-edit-option input[type=submit]');
-        var batchAllCheckbox = $('#batch-all');
+        var batchAllButton = $('.batch-all-toggle');
+        var batchAllInput = $('#batch-all');
+        var selectedCounter = $('.selected .count');
 
         /**
          * Disable the batch submit button first, will be enabled once item
@@ -50,11 +52,21 @@ Omeka.ItemsBrowse = {};
         batchEditSubmit.prop('disabled', true);
 
         /**
-         * Disable all the itemCheckboxes if the batchAllCheckbox is checked.
+         * Disable all the itemCheckboxes if the batchAllButton is checked.
          */
-        batchAllCheckbox.change(function() {
-            globalCheckbox.prop('disabled', this.checked);
-            itemCheckboxes.prop('disabled', this.checked);
+        batchAllButton.click(function() {
+            batchAllButton.toggleClass('active');
+            if (batchAllButton.hasClass('active')) {
+                batchAllInput.removeAttr('disabled');
+                selectedCounter.text($(this).data('records-count'));
+                globalCheckbox.prop('disabled', 'disabled');
+                itemCheckboxes.prop('disabled', 'disabled');
+            } else  {
+                batchAllInput.prop('disabled', 'disabled');
+                selectedCounter.text($("table#items tbody input[type=checkbox]:checked").length);
+                globalCheckbox.removeAttr('disabled');
+                itemCheckboxes.removeAttr('disabled');
+            }
             checkBatchEditSubmitButton();
         });
 
@@ -63,6 +75,7 @@ Omeka.ItemsBrowse = {};
          */
         globalCheckbox.change(function() {
             itemCheckboxes.prop('checked', !!this.checked);
+            selectedCounter.text($("table#items tbody input[type=checkbox]:checked").length);
             checkBatchEditSubmitButton();
         });
 
@@ -74,16 +87,17 @@ Omeka.ItemsBrowse = {};
             if (!this.checked) {
                 globalCheckbox.prop('checked', false);
             }
+            selectedCounter.text($("table#items tbody input[type=checkbox]:checked").length);
             checkBatchEditSubmitButton();
         });
 
         /**
          * Check whether the batchEditSubmit button should be enabled.
-         * If any of the itemCheckboxes or the batchAllCheckbox is checked, the
+         * If any of the itemCheckboxes or the batchAllButton is checked, the
          * batchEditSubmit button is enabled.
          */
         function checkBatchEditSubmitButton() {
-            var checked = batchAllCheckbox.prop('checked');
+            var checked = batchAllButton.hasClass('active');
             if (!checked) {
                 itemCheckboxes.each(function() {
                     if (this.checked) {
