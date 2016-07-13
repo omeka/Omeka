@@ -1,5 +1,5 @@
 <?php
-$type_name = strip_formatting($item_type->name);
+$type_name = $item_type->name;
 if ($type_name != '') {
     $type_name = ': &quot;' . html_escape($type_name) . '&quot; ';
 } else {

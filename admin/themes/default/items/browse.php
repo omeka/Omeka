@@ -93,7 +93,7 @@ echo item_search_filters();
                     <?php fire_plugin_hook('admin_items_browse_simple_each', array('item' => $item, 'view' => $this)); ?>
 
                     <div class="details">
-                        <?php echo snippet_by_word_count(strip_formatting(metadata('item', array('Dublin Core', 'Description'))), 40); ?>
+                        <?php echo snippet_by_word_count(metadata('item', array('Dublin Core', 'Description')), 40); ?>
                         <p>
                             <strong><?php echo __('Collection'); ?>:</strong>
                             <?php echo link_to_collection_for_item(); ?>
