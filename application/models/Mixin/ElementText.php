@@ -684,6 +684,7 @@ class Mixin_ElementText extends Omeka_Record_Mixin_AbstractMixin
         $this->_recordsAreLoaded = false;
         $this->_replaceElementTexts = false;
         $this->_textsToSave = array();
+        $this->_elementsOnForm = array();
     }
     
     /**
