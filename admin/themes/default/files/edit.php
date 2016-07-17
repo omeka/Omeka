@@ -7,12 +7,12 @@ if ($fileTitle != '') {
 }
 $fileTitle = __('Edit File #%s', metadata('file', 'id')) . $fileTitle;
 
-queue_js_file(array('vendor/tiny_mce/tiny_mce', 'elements', 'tabs'));
+queue_js_file(array('vendor/tiny_mce/tiny_mce', 'elements', 'tabs', 'vendor/jquery.are-you-sure'));
 echo head(array('title' => $fileTitle, 'bodyclass' => 'files edit'));
 include 'form-tabs.php';
 echo flash();
 ?>
-<form method="post" action="">
+<form method="post" enctype="multipart/form-data" id="file-form" action="">
     <section class="seven columns alpha" id="edit-form">
         <?php echo file_markup($file); ?>
         <div id="file-metadata">
@@ -44,8 +44,12 @@ jQuery(window).load(function () {
     Omeka.Tabs.initialize();
     Omeka.wysiwyg({
         mode: "none",
-        forced_root_block: ""
+        forced_root_block: "",
+        form_areYouSure: 'form#file-form'
     });
+
+    // A rescan may be required to init AreYouSure fully during fist load.
+    Omeka.rescanAreYouSure('form#file-form');
 
     // Must run the element form scripts AFTER reseting textarea ids.
     jQuery(document).trigger('omeka:elementformload');
@@ -54,6 +58,7 @@ jQuery(window).load(function () {
 jQuery(document).bind('omeka:elementformload', function (event) {
     Omeka.Elements.makeElementControls(event.target, <?php echo js_escape(url('elements/element-form')); ?>,'File'<?php if ($id = metadata('file', 'id')) echo ', '.$id; ?>);
     Omeka.Elements.enableWysiwyg(event.target);
+    Omeka.checkAreYouSure('form#file-form');
 });
 </script>
 <?php echo foot(); ?>

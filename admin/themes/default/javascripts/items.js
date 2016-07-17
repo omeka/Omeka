@@ -52,6 +52,7 @@ Omeka.Items = {};
         } else {
             deleteLink.text("Delete").next().prop('checked', false).parents('.sortable-item').removeClass("deleted");
         }
+        Omeka.checkAreYouSure('form#item-form');
     };
 
     /**
@@ -81,6 +82,7 @@ Omeka.Items = {};
                         tinyMCE.execCommand('mceRemoveControl', true, this.id);
                     });
                     form.html(response);
+                    Omeka.rescanAreYouSure('form#item-form');
                     form.trigger('omeka:elementformload');
                     form.slideDown(1000, function () {
                         // Explicit show() call fixes IE7
@@ -168,6 +170,7 @@ Omeka.Items = {};
         
         $('#tags-to-add').val(tagsToAdd.join(Omeka.Items.tagDelimiter));
         $('#tags-to-delete').val(tagsToDelete.join(Omeka.Items.tagDelimiter));
+        Omeka.checkAreYouSure('form#item-form');
     };
 
     /**
@@ -268,6 +271,7 @@ Omeka.Items = {};
                 // Extra show fixes IE bug.
                 $(this).show();
             });
+            Omeka.rescanAreYouSure('form#item-form');
         });
 
         $('#file-inputs').append(link);

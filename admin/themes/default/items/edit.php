@@ -7,6 +7,7 @@ if ($itemTitle != '' && $itemTitle != __('[Untitled]')) {
 }
 $itemTitle = __('Edit Item #%s', metadata('item', 'id')) . $itemTitle;
 
+queue_js_file('vendor/jquery.are-you-sure');
 echo head(array('title'=> $itemTitle, 'bodyclass'=>'items edit'));
 include 'form-tabs.php';
 echo flash();
@@ -55,4 +56,11 @@ echo flash();
         </div>
     </section>
 </form>
+<script type="text/javascript">
+Omeka.addReadyCallback(Omeka.areYouSure, [{
+    form: 'form#item-form',
+    options: {
+        'addRemoveFieldsMarksDirty': true
+}}]);
+</script>
 <?php echo foot();?>

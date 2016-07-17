@@ -1,4 +1,5 @@
-<?php 
+<?php
+queue_js_file('vendor/jquery.are-you-sure');
 echo head(array('title' => __('Add a Collection'), 'bodyclass'=>'collections'));
 include 'form-tabs.php';
 echo flash();
@@ -23,4 +24,11 @@ echo flash();
         </div>
     </section>
 </form>
+<script type="text/javascript">
+Omeka.addReadyCallback(Omeka.areYouSure, [{
+    form: 'form#collection-form',
+    options: {
+        'addRemoveFieldsMarksDirty': true
+}}]);
+</script>
 <?php echo foot(); ?>

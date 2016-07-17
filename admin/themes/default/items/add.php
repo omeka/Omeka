@@ -1,5 +1,6 @@
-<?php 
+<?php
 $pageTitle = __('Add an Item');
+queue_js_file('vendor/jquery.are-you-sure');
 echo head(array('title' => $pageTitle,'bodyclass' => 'items'));
 include 'form-tabs.php';
 echo flash();
@@ -43,5 +44,11 @@ echo flash();
         </div>
     </section>
 </form>
-
+<script type="text/javascript">
+Omeka.addReadyCallback(Omeka.areYouSure, [{
+    form: 'form#item-form',
+    options: {
+        'addRemoveFieldsMarksDirty': true
+}}]);
+</script>
 <?php echo foot();?>

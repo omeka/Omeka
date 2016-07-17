@@ -17,6 +17,7 @@ Omeka.Elements = {};
      */
     Omeka.Elements.elementFormRequest = function (fieldDiv, params, elementFormPartialUri, recordType, recordId) {
         var elementId = fieldDiv.attr('id').replace(/element-/, '');
+        var form = 'form#' + recordType.toLowerCase() + '-form';
         
         fieldDiv.find('input, textarea, select').each(function () {
             var element = $(this);
@@ -52,6 +53,7 @@ Omeka.Elements = {};
                     tinyMCE.execCommand('mceRemoveControl', false, this.id);
                 });
                 fieldDiv.html(response);
+                Omeka.rescanAreYouSure(form);
                 fieldDiv.trigger('omeka:elementformload');
             }
         });
@@ -70,6 +72,7 @@ Omeka.Elements = {};
         var removeSelector = '.remove-element';
         var fieldSelector = 'div.field';
         var inputBlockSelector = 'div.input-block';
+        var form = 'form#' + recordType.toLowerCase() + '-form';
         var context = $(element);
         var fields;
 
@@ -95,6 +98,7 @@ Omeka.Elements = {};
             var fieldDiv = $(this).parents(fieldSelector);
 
             Omeka.Elements.elementFormRequest(fieldDiv, {add: '1'}, elementFormPartialUrl, recordType, recordId);
+            Omeka.rescanAreYouSure(form);
         });
 
         // When a remove button is clicked, remove that input from the form.
@@ -124,6 +128,7 @@ Omeka.Elements = {};
                     removeButtons.hide();
                 }
             });
+            Omeka.rescanAreYouSure(form);
         });
     };
 

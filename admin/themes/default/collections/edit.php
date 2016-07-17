@@ -6,17 +6,15 @@ if ($collectionTitle != '' && $collectionTitle != __('[Untitled]')) {
     $collectionTitle = '';
 }
 $collectionTitle = __('Edit Collection #%s', metadata('collection', 'id')) . $collectionTitle;
-?>
 
-<?php
+queue_js_file('vendor/jquery.are-you-sure');
 echo head(array('title' => $collectionTitle, 'bodyclass' => 'collections'));
 include 'form-tabs.php';
 echo flash();
 ?>
 
-<form method="post">
+<form method="post" enctype="multipart/form-data" id="collection-form" action="">
     <?php include 'form.php'; ?>
-
     <section class="three columns omega">
         <div id="save" class="panel">
             <input type="submit" name="submit" class="big green button" id="save-changes" value="<?php echo __('Save Changes'); ?>" />
@@ -40,5 +38,11 @@ echo flash();
         </div>
     </section>
 </form>
-
+<script type="text/javascript">
+Omeka.addReadyCallback(Omeka.areYouSure, [{
+    form: 'form#collection-form',
+    options: {
+        'addRemoveFieldsMarksDirty': true
+}}]);
+</script>
 <?php echo foot(); ?>

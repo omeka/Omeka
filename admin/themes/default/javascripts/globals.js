@@ -30,6 +30,16 @@ if (!Omeka) {
             entities: "160,nbsp,173,shy,8194,ensp,8195,emsp,8201,thinsp,8204,zwnj,8205,zwj,8206,lrm,8207,rlm"
         };
 
+        if (params.form_areYouSure) {
+            params.setup = function(editor) {
+                // TinyMCE 3.x.
+                editor.onChange.add(function(editor, l) {
+                    editor.save();
+                    Omeka.checkAreYouSure(params.form_areYouSure);
+                });
+            }
+        }
+
         tinyMCE.init($.extend(initParams, params));
     };
 
@@ -120,6 +130,18 @@ if (!Omeka) {
             $(this).removeAttr("tabindex");
         });
     };
+
+    Omeka.areYouSure = function (params) {
+        $(params.form).areYouSure(params.options);
+    }
+
+    Omeka.checkAreYouSure = function (form) {
+        $(form).trigger('checkform.areYouSure');
+    }
+
+    Omeka.rescanAreYouSure = function (form) {
+        $(form).trigger('rescan.areYouSure');
+    }
 
     Omeka.addReadyCallback = function (callback, params) {
         this.readyCallbacks.push([callback, params]);
