@@ -15,6 +15,10 @@ class Job_ItemBatchEditAll extends Omeka_Job_AbstractJob
     protected $_table;
     protected $_aclHelper;
 
+    private $_totalItems = 0;
+    private $_totalProcessedItems = 0;
+    private $_itemId = 0;
+
     public function perform()
     {
         // Prepare the background acl to check rights of the user for each item.
@@ -34,11 +38,43 @@ class Job_ItemBatchEditAll extends Omeka_Job_AbstractJob
             ->columns(array("$alias.id"));
         $itemIds = get_db()->fetchCol($select);
         if (!$itemIds) {
+            _log(__('Batch Edit All Items: No item matches the specified filters.'), Zend_Log::WARN);
             return;
         }
 
+        $totalItems = count($itemIds);
+        $this->_totalItems = $totalItems;
+        _log(__(plural(
+            'Batch Edit: Starting processing 1 item.',
+            'Batch Edit: Starting processing %d items.',
+            $this->_totalItems), $this->_totalItems),
+            Zend_Log::INFO);
+
+        $totalSuccess = 0;
         foreach ($itemIds as $id) {
-            $this->_performItem($id);
+            $this->_itemId = $id;
+            $this->_totalProcessedItems++;
+
+            $result = $this->_performItem($id);
+
+            if ($result) {
+                $totalSuccess++;
+            }
+        }
+
+        $totalErrors = $totalItems - $totalSuccess;
+        if ($totalErrors) {
+            _log(__('Batch Edit: A total of %d errors occurred during the batch process of %d items.',
+                    $totalErrors, $this->_totalItems),
+                Zend_Log::ERR);
+        }
+        // No error occured.
+        else {
+            _log(__(plural(
+                'Batch Edit: The item has been processed successfully.',
+                'Batch Edit: All %d items have been processed successfully.',
+                $totalItems), $totalItems),
+                Zend_Log::INFO);
         }
     }
 
@@ -53,7 +89,7 @@ class Job_ItemBatchEditAll extends Omeka_Job_AbstractJob
         $item = $this->_table->find($itemId);
         if (!$item) {
             $message = __('Item does not exist: it may have been deleted before processing.');
-            _log(__('Batch Edit Item #%d: %s', $itemId, $message), Zend_Log::ERR);
+            $this->_logProcessedItem($message, Zend_Log::ERR);
             return false;
         }
 
@@ -68,20 +104,20 @@ class Job_ItemBatchEditAll extends Omeka_Job_AbstractJob
 
         if ($delete && !$aclHelper->isAllowed('delete', $item)) {
             $message = __('User is not allowed to delete this item.');
-            _log(__('Batch Edit Item #%d: %s', $itemId, $message), Zend_Log::ERR);
+            $this->_logProcessedItem($message, Zend_Log::ERR);
             return false;
         }
 
         // Check to see if anything but 'tag'.
         if ($metadata && array_diff_key($metadata, array('tags' => '')) && !$aclHelper->isAllowed('edit', $item)) {
             $message = __('User is not allowed to edit this item.');
-            _log(__('Batch Edit Item #%d: %s', $itemId, $message), Zend_Log::ERR);
+            $this->_logProcessedItem($message, Zend_Log::ERR);
             return false;
         }
 
         if ($metadata && array_key_exists('tags', $metadata) && !$aclHelper->isAllowed('tag', $item)) {
             $message = __('User is not allowed to tag this item.');
-            _log(__('Batch Edit Item #%d: %s', $itemId, $message), Zend_Log::ERR);
+            $this->_logProcessedItem($message, Zend_Log::ERR);
             return false;
         }
 
@@ -96,7 +132,7 @@ class Job_ItemBatchEditAll extends Omeka_Job_AbstractJob
             )
         );
         if ($message) {
-            _log(__('Batch Edit Item #%d: %s', $itemId, $message), Zend_Log::ERR);
+            $this->_logProcessedItem($message, Zend_Log::ERR);
             return false;
         }
 
@@ -116,7 +152,7 @@ class Job_ItemBatchEditAll extends Omeka_Job_AbstractJob
                     array('item' => $item, 'custom' => $custom));
             } catch (Exception $e) {
                 $message = __('An error occured when the item was updated: %s', $e->getMessage());
-                _log(__('Batch Edit Item #%d: %s', $itemId, $message), Zend_Log::ERR);
+                $this->_logProcessedItem($message, Zend_Log::ERR);
                 return false;
             }
 
@@ -125,7 +161,22 @@ class Job_ItemBatchEditAll extends Omeka_Job_AbstractJob
 
         release_object($item);
 
-        _log(__('Batch Edit Item #%d: %s', $itemId, $message), Zend_Log::INFO);
+        $this->_logProcessedItem($message, Zend_Log::INFO);
         return true;
+    }
+
+    /**
+     * Log a message about the current processed item.
+     *
+     * @param string $message
+     * @param string $priority
+     * @return void
+     */
+    private function _logProcessedItem($message, $priority)
+    {
+        _log(
+            __('Batch Edit Item #%d [%d/%d]: %s',
+                $this->_itemId, $this->_totalProcessedItems, $this->_totalItems, $message),
+            $priority);
     }
 }
