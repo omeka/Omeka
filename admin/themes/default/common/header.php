@@ -2,7 +2,7 @@
 <html lang="<?php echo get_html_lang(); ?>">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php
     if (isset($title)) {
         $titleParts[] = strip_formatting($title);
