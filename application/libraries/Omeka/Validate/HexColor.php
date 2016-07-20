@@ -22,7 +22,7 @@ class Omeka_Validate_HexColor extends Zend_Validate_Abstract
     public function isValid($value)
     {
         $this->_setValue($value);
-        $valid = preg_match('/^#[0-9a-f]{6}$/i', $value);
+        $valid = preg_match('/^#[0-9a-f]{6}$|transparent/i', $value);
 
         if (!$valid) {
             $this->_error(self::MSG_BAD_COLOR);
