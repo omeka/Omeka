@@ -16,13 +16,13 @@ class Omeka_Validate_HexColor extends Zend_Validate_Abstract
     const MSG_BAD_COLOR = 'msgUri';
 
     protected $_messageTemplates = array(
-        self::MSG_BAD_COLOR => '"%value%" is not a valid color. A color must be a hash (#) followed by 6 hex digits.',
+        self::MSG_BAD_COLOR => '"%value%" is not a valid color. A color must be a hash (#) followed by 6 hex digits or the keyword transparent.',
     );
 
     public function isValid($value)
     {
         $this->_setValue($value);
-        $valid = preg_match('/^#[0-9a-f]{6}$|transparent/i', $value);
+        $valid = preg_match('/^#[0-9a-f]{6}$|^transparent$/i', $value);
 
         if (!$valid) {
             $this->_error(self::MSG_BAD_COLOR);
