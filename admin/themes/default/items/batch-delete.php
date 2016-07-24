@@ -9,7 +9,7 @@ endif;
 ?>
 <div title="<?php echo $title; ?>">
 
-<form id="batch-edit-form" action="<?php echo html_escape(url('items/batch-edit-save')); ?>" method="post" accept-charset="utf-8">
+<form id="batch-edit-form" action="<?php echo html_escape(url('items/batch-edit-save')); ?>" method="post" accept-charset="utf-8" class="warn-no-save">
     <section class="seven columns alpha">
         <fieldset id="item-list" class="panel">
             <h2 class="two columns alpha"><?php echo __('Items'); ?></h2>
@@ -35,7 +35,6 @@ endif;
                 <?php if ($excludedItems): ?>
                 <p class="explanation"><?php echo __('Some items were excluded because you do not have permission to delete them.'); ?></p>
                 <?php endif; ?>
-
                 <p class="explanation"><?php echo __('Checked items will be deleted.'); ?></p>
             </div>
         </fieldset>
