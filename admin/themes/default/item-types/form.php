@@ -81,8 +81,8 @@ jQuery(document).ready(function () {
                     </div>
                     <div class="drawer-contents">
                         <p>
-                            <input type="radio" name="add-element-type" value="existing" checked="checked" /><?php echo __('Existing'); ?>
-                            <input type="radio" name="add-element-type" value="new" /><?php echo __('New'); ?>
+                            <input type="radio" name="add-element-type" value="existing" checked="checked" class="ays-ignore" /><?php echo __('Existing'); ?>
+                            <input type="radio" name="add-element-type" value="new" class="ays-ignore" /><?php echo __('New'); ?>
                         </p>
                         <button id="add-element" name="add-element"><?php echo __('Add Element'); ?></button>
                     </div>
