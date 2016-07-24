@@ -6,7 +6,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'settings')); ?>
       enctype="<?php echo $this->form->getEnctype() ?>"
       method="<?php echo $this->form->getMethod() ?>"
       id="<?php echo $this->form->getId() ?>"
-      class="<?php echo $this->form->getAttrib('class') ?>" >
+      class="<?php echo $this->form->getAttrib('class') ?> warn-no-save">
 
 <?php echo common('appearance-nav'); ?>
 <?php echo flash(); ?>

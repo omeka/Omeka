@@ -15,6 +15,10 @@ Omeka.Navigation = {};
             placeholder: 'ui-sortable-highlight',
             forcePlaceholderSize: true,
             containment: 'document',
+            update: function (event, ui) {
+                $('#navigation_form.warn-no-save').submit();
+                Omeka.areYouSureCheck();
+            }
         });
         
         $('div.sortable-item input[type="checkbox"]').click(function(e) {
@@ -40,6 +44,7 @@ Omeka.Navigation = {};
         });
         
         select.val(selectedValue);
+        Omeka.areYouSureCheck();
     };
 
     Omeka.Navigation.updateHideButtons = function () {
@@ -185,6 +190,10 @@ Omeka.Navigation = {};
             // store link data in hidden element
             $('#navigation_hidden').val(JSON.stringify(linkData)); 
         });
+
+        // Set the true initial input values for are-you-sure.
+        $('#navigation_form.warn-no-save').submit();
+        $('#navigation_form.warn-no-save').trigger('reinitialize.areYouSure');
     };
 
     Omeka.Navigation.updateForNewLinks = function () {
