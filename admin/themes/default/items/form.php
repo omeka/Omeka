@@ -16,8 +16,7 @@ jQuery(window).load(function () {
 
     Omeka.wysiwyg({
         mode: "none",
-        forced_root_block: "",
-        form_areYouSure: 'form#item-form'
+        forced_root_block: ""
     });
 
     Omeka.Items.enableAddFiles(<?php echo js_escape(__('Add Another File')); ?>);
@@ -25,7 +24,7 @@ jQuery(window).load(function () {
 
     // A rescan is required to init AreYouSure fully during fist load.
     Omeka.Items.updateTagsField();
-    Omeka.rescanAreYouSure('form#item-form');
+    Omeka.areYouSureRescan();
 
     // Must run the element form scripts AFTER reseting textarea ids.
     jQuery(document).trigger('omeka:elementformload');
@@ -34,7 +33,7 @@ jQuery(window).load(function () {
 jQuery(document).bind('omeka:elementformload', function (event) {
     Omeka.Elements.makeElementControls(event.target, <?php echo js_escape(url('elements/element-form')); ?>,'Item'<?php if ($id = metadata('item', 'id')) echo ', '.$id; ?>);
     Omeka.Elements.enableWysiwyg(event.target);
-    Omeka.checkAreYouSure('form#item-form');
+    Omeka.areYouSureCheck();
 });
 //]]>
 </script>

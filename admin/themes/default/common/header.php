@@ -20,7 +20,7 @@
     queue_css_file('media/479max', 'only screen and (max-width: 479px)');
     queue_css_url('//fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic|Cabin:400,700,400italic,700italic');
 
-    queue_js_file(array('vendor/respond', 'vendor/modernizr'));
+    queue_js_file(array('vendor/respond', 'vendor/modernizr', 'vendor/jquery.are-you-sure'));
     queue_js_file('vendor/selectivizr', 'javascripts', array('conditional' => '(gte IE 6)&(lte IE 8)'));
     queue_js_file('globals');
 ?>
@@ -69,7 +69,7 @@
     <?php echo common('content-nav', array('title' => $title)); ?>
 
     <div class="subhead">
-        <?php echo search_form(array('show_advanced' => true, 'form_attributes'=> array('role'=>'search'))); ?>
+        <?php echo search_form(array('show_advanced' => true, 'form_attributes'=> array('role'=>'search', 'class' => 'no-warn'))); ?>
         <?php if (isset($title)) : ?>
             <h1 id="content-heading" class="section-title" title="<?php echo $title; ?>"><?php echo $title ?></h1>
         <?php endif; ?>

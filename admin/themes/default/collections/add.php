@@ -1,11 +1,9 @@
 <?php
-queue_js_file('vendor/jquery.are-you-sure');
 echo head(array('title' => __('Add a Collection'), 'bodyclass'=>'collections'));
 include 'form-tabs.php';
 echo flash();
 ?>
-
-<form method="post" enctype="multipart/form-data" id="collection-form" action="">
+<form method="post" enctype="multipart/form-data" id="collection-form" action="" class="warn-no-save">
     <?php include 'form.php'; ?>
     <section class="three columns omega">
         <div id="save" class="panel">
@@ -24,11 +22,4 @@ echo flash();
         </div>
     </section>
 </form>
-<script type="text/javascript">
-Omeka.addReadyCallback(Omeka.areYouSure, [{
-    form: 'form#collection-form',
-    options: {
-        'addRemoveFieldsMarksDirty': true
-}}]);
-</script>
 <?php echo foot(); ?>

@@ -7,13 +7,12 @@ if ($itemTitle != '' && $itemTitle != __('[Untitled]')) {
 }
 $itemTitle = __('Edit Item #%s', metadata('item', 'id')) . $itemTitle;
 
-queue_js_file('vendor/jquery.are-you-sure');
 echo head(array('title'=> $itemTitle, 'bodyclass'=>'items edit'));
 include 'form-tabs.php';
 echo flash();
 ?>
 
-<form method="post" enctype="multipart/form-data" id="item-form" action="">
+<form method="post" enctype="multipart/form-data" id="item-form" action="" class="warn-no-save">
     <?php include 'form.php'; ?>
     <section class="three columns omega">
         <div id="save" class="panel">
@@ -56,11 +55,4 @@ echo flash();
         </div>
     </section>
 </form>
-<script type="text/javascript">
-Omeka.addReadyCallback(Omeka.areYouSure, [{
-    form: 'form#item-form',
-    options: {
-        'addRemoveFieldsMarksDirty': true
-}}]);
-</script>
 <?php echo foot();?>

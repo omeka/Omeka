@@ -27,18 +27,15 @@ if (!Omeka) {
             media_strict: false,
             width: "100%",
             autoresize_max_height: 500,
-            entities: "160,nbsp,173,shy,8194,ensp,8195,emsp,8201,thinsp,8204,zwnj,8205,zwj,8206,lrm,8207,rlm"
-        };
-
-        if (params.form_areYouSure) {
-            params.setup = function(editor) {
+            entities: "160,nbsp,173,shy,8194,ensp,8195,emsp,8201,thinsp,8204,zwnj,8205,zwj,8206,lrm,8207,rlm",
+            setup: function(editor) {
                 // TinyMCE 3.x.
                 editor.onChange.add(function(editor, l) {
                     editor.save();
-                    Omeka.checkAreYouSure(params.form_areYouSure);
-                });
+                    Omeka.areYouSureCheck();
+                })
             }
-        }
+        };
 
         tinyMCE.init($.extend(initParams, params));
     };
@@ -97,7 +94,6 @@ if (!Omeka) {
             }
         });
     };
-    
 
     Omeka.showAdvancedForm = function () {
         var advancedForm = $('#advanced-form');
@@ -132,14 +128,22 @@ if (!Omeka) {
     };
 
     Omeka.areYouSure = function (params) {
-        $(params.form).areYouSure(params.options);
+        if (Omeka.areYouSureForm === undefined) Omeka.areYouSureForm = 'form.warn-no-save';
+        var options = {'addRemoveFieldsMarksDirty': true};
+        if (params) {
+            if (params.form !== null) Omeka.areYouSureForm = params.form;
+            if (params.options !== null) options = params.options;
+        }
+        $(Omeka.areYouSureForm).areYouSure(options);
     }
 
-    Omeka.checkAreYouSure = function (form) {
+    Omeka.areYouSureCheck = function (form) {
+        if (form === undefined) form = Omeka.areYouSureForm;
         $(form).trigger('checkform.areYouSure');
     }
 
-    Omeka.rescanAreYouSure = function (form) {
+    Omeka.areYouSureRescan = function (form) {
+        if (form === undefined) form = Omeka.areYouSureForm;
         $(form).trigger('rescan.areYouSure');
     }
 
@@ -166,6 +170,7 @@ if (!Omeka) {
 
     Omeka.readyCallbacks = [
         [Omeka.deleteConfirm, null],
+        [Omeka.areYouSure, null],
         [Omeka.saveScroll, null],
         [Omeka.stickyNav, null],
         [Omeka.showAdvancedForm, null],
