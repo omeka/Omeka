@@ -4,7 +4,7 @@ echo head(array('title' => __('Settings'), 'bodyclass'=>'settings edit-item-type
 echo common('settings-nav');
 echo flash();
 ?>
-<form method="post" id="edit-item-type-elements">
+<form method="post" id="edit-item-type-elements" class="warn-no-save">
     <section class="seven columns alpha">
         <p class="explanation">
         <?php
