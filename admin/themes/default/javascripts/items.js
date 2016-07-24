@@ -20,12 +20,18 @@ Omeka.Items = {};
                 $(this).find('.file-order').each(function (index) {
                     $(this).val(index + 1);
                 });
+                Omeka.areYouSureCheck();
             }
         });
         $( ".sortable" ).disableSelection();
         
         $( ".sortable input[type=checkbox]" ).each(function () {
             $(this).css("display", "none");
+        });
+
+        // Initialize the order of files for are-you-sure.
+        $('.sortable .file-order').each(function (index) {
+            $(this).val(index + 1);
         });
     };
 
