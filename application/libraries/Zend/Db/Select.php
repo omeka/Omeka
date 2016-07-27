@@ -81,7 +81,9 @@ class Zend_Db_Select
     const SQL_ASC        = 'ASC';
     const SQL_DESC       = 'DESC';
 
-    const REGEX_COLUMN_EXPR = '/^([\w]*\s*\(([^\(\)]|(?1))*\))$/';
+    const REGEX_COLUMN_EXPR       = '/^([\w]*\s*\(([^\(\)]|(?1))*\))$/';
+    const REGEX_COLUMN_EXPR_ORDER = '/^([\w]+\s*\(([^\(\)]|(?1))*\))$/';
+    const REGEX_COLUMN_EXPR_GROUP = '/^([\w]+\s*\(([^\(\)]|(?1))*\))$/';
 
     /**
      * Bind variables for query
@@ -511,7 +513,7 @@ class Zend_Db_Select
         }
 
         foreach ($spec as $val) {
-            if (preg_match(self::REGEX_COLUMN_EXPR, (string) $val)) {
+            if (preg_match(self::REGEX_COLUMN_EXPR_GROUP, (string) $val)) {
                 $val = new Zend_Db_Expr($val);
             }
             $this->_parts[self::GROUP][] = $val;
@@ -603,7 +605,7 @@ class Zend_Db_Select
                     $val = trim($matches[1]);
                     $direction = $matches[2];
                 }
-                if (preg_match(self::REGEX_COLUMN_EXPR, (string) $val)) {
+                if (preg_match(self::REGEX_COLUMN_EXPR_ORDER, (string) $val)) {
                     $val = new Zend_Db_Expr($val);
                 }
                 $this->_parts[self::ORDER][] = array($val, $direction);
