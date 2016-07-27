@@ -72,8 +72,8 @@ if (!$pheanJob) {
     exit(0);
 }
 $application->bootstrap(array(
-    'Config', 'Db', 'Filederivatives', 'Locale', 'Options',
-    'Pluginbroker', 'Plugins', 'Jobs', 'Storage', 'Mail', 'View'
+    'Config', 'Logger', 'Db', 'Options', 'Pluginbroker', 'View', 'Locale', 'Mail',
+    'Plugins', 'Jobs', 'Storage', 'Filederivatives'
 ));
 
 // resend() must send jobs to the original queue by default.
