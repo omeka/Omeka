@@ -3149,6 +3149,8 @@ function tag_string($recordOrTags = null, $link = 'items/browse', $delimiter = n
  *  Omeka-relative link. So, passing 'items' would create a link to the items
  *  page. If an array is passed (or no argument given), it is treated as options
  *  to be passed to Omeka's routing system.
+ *  Note that in the Url Helper, if the first argument is a string, the second
+ *  argument, not the third, is the queryParams
  * @param string $route The route to use if an array is passed in the first argument.
  * @param mixed $queryParams A set of query string parameters to append to the URL
  * @param bool $reset Whether Omeka should discard the current route when generating the URL.
