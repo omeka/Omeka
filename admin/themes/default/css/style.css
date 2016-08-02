@@ -1747,7 +1747,7 @@ header nav {
     border-right: 1px solid #D8D8D8;
 }
 
-.itesm .table-actions button:hover {
+.items .table-actions button:hover {
     box-shadow: none;
     color: #666;
 }
@@ -1769,7 +1769,7 @@ header nav {
     margin-right: 0;
 }
 
-.itesm table + .table-actions {
+.items table + .table-actions {
     margin: -16px 0 20px;
     border-top: 0;
     border-bottom: 1px solid #d8d8d8;
