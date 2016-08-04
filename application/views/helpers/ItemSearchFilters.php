@@ -88,6 +88,7 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
         // the ability to add fields.
         if(array_key_exists('advanced', $requestArray)) {
             $advancedArray = array();
+            $index = 0;
             foreach ($requestArray['advanced'] as $i => $row) {
                 if (!$row['element_id'] || !$row['type']) {
                     continue;
@@ -100,7 +101,15 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
                 if (isset($row['terms'])) {
                     $advancedValue .= ' "' . $row['terms'] . '"';
                 }
-                $advancedArray[$i] = $advancedValue;
+
+                if ($index) {
+                    if(isset($row['joiner']) && $row['joiner'] === 'or') {
+                        $advancedValue = __('OR') . ' ' . $advancedValue;
+                    } else {
+                        $advancedValue = __('AND') . ' ' . $advancedValue;
+                    }
+                }
+                $advancedArray[$index++] = $advancedValue;
             }
         }
 
