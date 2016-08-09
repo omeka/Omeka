@@ -46,7 +46,9 @@ Omeka.Search = {};
                 return this.name.replace(/\d+/, newIndex);
             });
 
-            selects.val('');
+            selects.each(function () {
+                this.selectedIndex = 0;
+            });
             selects.attr('name', function () {
                 return this.name.replace(/\d+/, newIndex);
             });

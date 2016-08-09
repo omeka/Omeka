@@ -2176,11 +2176,23 @@ header nav {
 
 .search-entry select {
     min-width: 0;
+    width: 42.5%;
+}
+
+.search-entry:first-of-type select {
     width: 49.5%;
 }
 
 .search-entry input[type=text] {
     margin-bottom: 10px;
+}
+
+#search-narrow-by-fields .search-entry:first-of-type .advanced-search-joiner {
+    display: none;
+}
+
+#search-narrow-by-fields .advanced-search-joiner {
+    width: 15%;
 }
 
 button.remove_search {
