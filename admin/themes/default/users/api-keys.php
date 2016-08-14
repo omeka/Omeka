@@ -10,7 +10,7 @@ echo head(array('title' => $userTitle, 'bodyclass' => 'users'));
 echo common('users-nav', array('user' => $user));
 echo flash();
 ?>
-<form method="post" id="api-keys-form" class="warn-no-save">
+<form method="post" id="api-keys-form">
 <h3><?php echo __('API Keys'); ?></h3>
 <div class="field">
     <div class="two columns alpha">

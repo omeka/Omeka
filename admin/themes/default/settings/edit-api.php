@@ -3,7 +3,7 @@ echo head(array('title' => __('Settings'), 'bodyclass'=>'settings edit-api'));
 echo common('settings-nav');
 echo flash();
 ?>
-<form method="post" id="edit-api-form" class="warn-no-save">
+<form method="post" id="edit-api-form">
     <h2><?php echo __('Configure API'); ?></h2>
     <section class="seven columns alpha">
         <div class="field">

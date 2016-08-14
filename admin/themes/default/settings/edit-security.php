@@ -5,7 +5,7 @@ echo common('settings-nav');
 echo flash();
 ?>
 
-<form method="post" id="edit-security-form" class="warn-no-save">
+<form method="post" id="edit-security-form">
     <section class="seven columns alpha">
         <?php echo $this->form; ?>
         <?php fire_plugin_hook('admin_settings_security_form', array('form' => $form, 'view' => $this)); ?>

@@ -11,7 +11,7 @@ echo head(array('title'=> $title,'bodyclass'=>'item-types'));
 echo flash();
 ?>
 
-<form method="post" id="item-type-form" action="" class="warn-no-save">
+<form method="post" id="item-type-form" action="">
     <?php include 'form.php';?>
     <section class="three columns omega">
         <div id="save" class="panel">

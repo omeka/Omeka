@@ -6,7 +6,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'settings')); ?>
 
 <?php echo flash(); ?>
 
-<form id="appearance-form" method="post" class="warn-no-save">
+<form id="appearance-form" method="post">
 
 <section class="seven columns alpha">
         

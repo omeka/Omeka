@@ -2,7 +2,7 @@
 echo head(array('title' => __('Add New User'), 'bodyclass' => 'users'));
 echo flash();
 ?>
-<form method="post" id="user-form" class="warn-no-save">
+<form method="post" id="user-form">
 <section class="seven columns alpha">
     <p class='explanation'>* <?php echo __('required field'); ?></p>
     <?php echo $this->form; ?>

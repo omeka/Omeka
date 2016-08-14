@@ -12,7 +12,7 @@ echo head(array('title' => $fileTitle, 'bodyclass' => 'files edit'));
 include 'form-tabs.php';
 echo flash();
 ?>
-<form method="post" id="file-form" action="" class="warn-no-save">
+<form method="post" id="file-form" action="">
     <section class="seven columns alpha" id="edit-form">
         <?php echo file_markup($file); ?>
         <div id="file-metadata">
