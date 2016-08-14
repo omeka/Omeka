@@ -27,6 +27,7 @@ class Installer_Test extends Installer_Default
         'per_page_admin'                => Omeka_Form_Install::DEFAULT_PER_PAGE_ADMIN, 
         'per_page_public'               => Omeka_Form_Install::DEFAULT_PER_PAGE_PUBLIC, 
         'show_empty_elements'           => Omeka_Form_Install::DEFAULT_SHOW_EMPTY_ELEMENTS,
+        'warn_unsaved_form'             => Omeka_Form_Install::DEFAULT_WARN_UNSAVED_FORM,
         'path_to_convert'               => '',
         'username'                      => Omeka_Test_Resource_Db::SUPER_USERNAME,
         'password'                      => Omeka_Test_Resource_Db::SUPER_PASSWORD,

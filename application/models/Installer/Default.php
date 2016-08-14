@@ -109,6 +109,7 @@ class Installer_Default implements Installer_InstallerInterface
             'per_page_admin'                => $this->_getValue('per_page_admin'), 
             'per_page_public'               => $this->_getValue('per_page_public'), 
             'show_empty_elements'           => $this->_getValue('show_empty_elements'),
+            'warn_unsaved_form'             => $this->_getValue('warn_unsaved_form'),
             'path_to_convert'               => $this->_getValue('path_to_convert'),
             Theme::ADMIN_THEME_OPTION       => Installer_Default::DEFAULT_ADMIN_THEME,
             Theme::PUBLIC_THEME_OPTION      => Installer_Default::DEFAULT_PUBLIC_THEME,

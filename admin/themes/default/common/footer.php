@@ -13,6 +13,9 @@
     </footer>
 </div>
 <script type="text/javascript">
+<?php if (get_option('warn_unsaved_form')): ?>
+Omeka.addReadyCallback(Omeka.areYouSure, [{form: 'form.warn-no-save'}]);
+<?php endif; ?>
 jQuery(document).ready(function () {
     Omeka.runReadyCallbacks();
 });

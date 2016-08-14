@@ -128,23 +128,23 @@ if (!Omeka) {
     };
 
     Omeka.areYouSure = function (params) {
-        if (Omeka.areYouSureForm === undefined) Omeka.areYouSureForm = 'form.warn-no-save';
-        var options = {'addRemoveFieldsMarksDirty': true};
-        if (params) {
-            if (params.form !== null) Omeka.areYouSureForm = params.form;
-            if (params.options !== null) options = params.options;
+        if (params && params.form) {
+            Omeka.areYouSureForm = params.form;
+            var options = params.options || {'addRemoveFieldsMarksDirty': true};
+            $(Omeka.areYouSureForm).areYouSure(options);
         }
-        $(Omeka.areYouSureForm).areYouSure(options);
     }
 
-    Omeka.areYouSureCheck = function (form) {
-        if (form === undefined) form = Omeka.areYouSureForm;
-        $(form).trigger('checkform.areYouSure');
+    Omeka.areYouSureCheck = function () {
+        if (Omeka.areYouSureForm) {
+            $(Omeka.areYouSureForm).trigger('checkform.areYouSure');
+        }
     }
 
-    Omeka.areYouSureRescan = function (form) {
-        if (form === undefined) form = Omeka.areYouSureForm;
-        $(form).trigger('rescan.areYouSure');
+    Omeka.areYouSureRescan = function () {
+        if (Omeka.areYouSureForm) {
+            $(Omeka.areYouSureForm).trigger('rescan.areYouSure');
+        }
     }
 
     Omeka.addReadyCallback = function (callback, params) {
@@ -170,7 +170,6 @@ if (!Omeka) {
 
     Omeka.readyCallbacks = [
         [Omeka.deleteConfirm, null],
-        [Omeka.areYouSure, null],
         [Omeka.saveScroll, null],
         [Omeka.stickyNav, null],
         [Omeka.showAdvancedForm, null],
