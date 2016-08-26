@@ -63,6 +63,17 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
             'class' => 'checkbox',
         ));
 
+        $adminThemes = Theme::getAllAdminThemes();
+        if (count($adminThemes) > 1 && is_allowed('Themes', 'edit')) {
+            foreach ($adminThemes as &$theme) {
+                $theme = $theme->title;
+            }
+            $this->addElement('select', Theme::ADMIN_THEME_OPTION, array(
+                'label' => __('Admin Theme'),
+                'multiOptions' => $adminThemes,
+            ));
+        }
+
         $this->addElement('hash', 'appearance_csrf', array(
             'timeout' => 3600
         ));
@@ -83,6 +94,14 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
             'display-settings', array('legend' => __('Display Settings'))
         );
 
+        if (count($adminThemes) > 1 && is_allowed('Themes', 'edit')) {
+            $this->addDisplayGroup(
+                array(
+                    Theme::ADMIN_THEME_OPTION,
+                ),
+                'admin-themes', array('legend' => __('Admin Themes'))
+            );
+        }
     }
 
 }

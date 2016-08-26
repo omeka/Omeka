@@ -256,6 +256,32 @@ class Theme
         return $themes;
     }
 
+    /**
+     * Retrieve all admin themes
+     *
+     * @todo Merge with getAllThemes() or make Theme more generic.
+     * @return array An array of theme objects
+     */
+    static public function getAllAdminThemes()
+    {
+        /**
+         * Create an array of themes, with the directory paths
+         * theme.ini files and images paths if they are present
+         */
+        $themes = array();
+        $iterator = new VersionedDirectoryIterator(ADMIN_THEME_DIR);
+        $themeDirs = $iterator->getValid();
+        foreach ($themeDirs as $themeName) {
+            $theme = self::getTheme($themeName);
+            $theme->path = ADMIN_THEME_DIR . '/' . $themeName;
+            $theme->setImage(self::THEME_IMAGE_FILE_NAME);
+            $theme->setIni(self::THEME_INI_FILE_NAME);
+            $theme->setConfig(self::THEME_CONFIG_FILE_NAME);
+            $themes[$themeName] = $theme;
+        }
+        ksort($themes);
+        return $themes;
+    }
 
     /**
      * Retrieve a theme.
