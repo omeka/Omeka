@@ -22,11 +22,7 @@ $collectionTitle = metadata('collection', 'display_title');
             </div>
             <?php endif; ?>
 
-            <?php if ($text = metadata('item', array('Item Type Metadata', 'Text'), array('snippet'=>250))): ?>
-            <div class="item-description">
-                <p><?php echo $text; ?></p>
-            </div>
-            <?php elseif ($description = metadata('item', array('Dublin Core', 'Description'), array('snippet'=>250))): ?>
+            <?php if ($description = metadata('item', array('Dublin Core', 'Description'), array('snippet'=>250))): ?>
             <div class="item-description">
                 <?php echo $description; ?>
             </div>
