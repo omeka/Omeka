@@ -821,6 +821,8 @@ header nav {
     margin-top: 10%;
     margin-bottom: 10%;
     padding: 20px 10px;
+    border: solid #9d5b41;
+    border-width: 5px 0 0 0;
 }
 
         #content h1:first-child, #content h2:first-child {
