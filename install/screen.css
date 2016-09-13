@@ -1,6 +1,6 @@
 /* Table of Contents
 ==================================================
-    #Basic Styles    
+    #Basic Styles
         #Form Elements
     #Content */
 
@@ -41,7 +41,7 @@ h1 {
             display: inline-block;
             float: left;
         }
-            
+
         h1:after {
             height: 53px;
             width: 27px;
@@ -51,27 +51,27 @@ h1 {
             float: right;
         }
 
-h2 { 
+h2 {
     font-size: 21px;
     text-align: center;
     }
-    
+
 h3 {
     font-size: 21px;
     font-weight: normal;
 }
-    
+
 h4 { font-size: 16px; }
-    
+
 h5 { font-family: "Arvo", serif; }
 
 a:link {
     color: #B86644;
     text-decoration: none;
 }
-    
+
     a:hover, a:active { color: #E57F52; }
-        
+
     a:visited { color: #A28E8A; }
 
 p, li {
@@ -107,11 +107,11 @@ ol { padding: 0 0 0 20px; }
         font-size: 16px;
         line-height: 32px;
         margin: 10px auto;
-        padding: 0 10px;            
+        padding: 0 10px;
         text-align: center;
         text-shadow: -1px -1px 1px rgba(0,0,0,.5);
     }
-    
+
             a.button.blue, input[type=submit].blue, button.blue {
                 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#22546b), color-stop(100%,#102d3b));
                 background: -moz-linear-gradient(center top, #22546b 0%, #102d3b 100%);
@@ -122,7 +122,7 @@ ol { padding: 0 0 0 20px; }
             }
 
     form, fieldset { border: 0; }
-    
+
     fieldset:first-child { margin: 0 0 20px 0; }
 
     input[type="checkbox"] {
@@ -148,28 +148,28 @@ ol { padding: 0 0 0 20px; }
         margin: 0;
         padding: 5px 10px;
     }
-        
+
         input[type=text].big {
             font-size: 14px;
             padding: .375em;
         }
-            
+
         input[type=text].small {
             font-size: 14px;
             padding: 0;
         }
 
-    legend { 
+    legend {
         width: 100%;
         font-size: 1.125em;
         font-weight: bold;
-        padding: 0 0 20px 0; 
-        margin: 0 0 10px 0; 
+        padding: 0 0 20px 0;
+        margin: 0 0 10px 0;
         text-align: center;
         border-bottom: 1px dotted #c7c7c7;
     }
 
-    
+
     textarea {
         height: 100px;
         border: 1px solid #d8d8d8;
@@ -187,13 +187,13 @@ ol { padding: 0 0 0 20px; }
         font-size: 14px;
         padding: 5px 10px;
     }
-    
+
     .explanation {
         clear: both;
         font-style: italic;
         margin-top: 0;
     }
-    
+
     .field {
         clear: both;
         margin: 0 0 10px 0;
@@ -206,7 +206,7 @@ ol { padding: 0 0 0 20px; }
         overflow: hidden;
         clear: both;
     }
-            
+
         .field label {
             clear: left;
             font-size: 14px;
@@ -214,21 +214,21 @@ ol { padding: 0 0 0 20px; }
             float: left;
             margin: 0;
         }
-            
+
         .field select {
             min-width: 100%;
             margin-bottom: 10px;
         }
-    
+
     .inputs {
         margin: 0 0 20px 0;
     }
-            
+
         .inputs select {
             margin-top: 0;
         }
-        
-        
+
+
         .inputs input[type=text], .inputs input[type=password], .inputs textarea {
             width: 100%;
             box-sizing: border-box;
@@ -236,18 +236,18 @@ ol { padding: 0 0 0 20px; }
                 -moz-box-sizing: border-box;
                 -o-box-sizing: border-box;
         }
-            
+
         .inputs inputs a.button, .inputs input[type="submit"], .inputs button {
             margin-bottom: 10px;
         }
 
     #required-note {
-        font-size: 0.6em; 
-        color: #777; 
+        font-size: 0.6em;
+        color: #777;
         display: block;
         line-height: 2em;
     }
-    
+
     .required:after {
         content: "*";
     }
@@ -258,42 +258,38 @@ ol { padding: 0 0 0 20px; }
 
 header { text-align: center; }
 
-#content { 
+#content {
     background-image: url('images/content_bg.jpg');
-    border-image: url('images/red-bg.jpg') 5 repeat; 
-        -webkit-border-image: url('images/red-bg.jpg') 5 repeat;
-        -moz-border-image: url('images/red-bg.jpg') 5 repeat; 
-        -o-border-image: url('images/red-bg.jpg') 50 repeat; 
-    border-width: .375em 0 0 0; 
-    box-shadow: 0 0 1px #999999; 
-        -webkit-box-shadow: 0 0 1px #999999; 
-        -moz-box-shadow: 0 0 1px #999999; 
-        -o-box-shadow: 0 0 1px #999999; 
+    border-top: .375em solid #9d5b41;
+    box-shadow: 0 0 1px #999999;
+        -webkit-box-shadow: 0 0 1px #999999;
+        -moz-box-shadow: 0 0 1px #999999;
+        -o-box-shadow: 0 0 1px #999999;
     margin-top: 10%;
-    margin-bottom: 10%; 
+    margin-bottom: 10%;
     padding: 20px 10px;
 }
 
         /* Alerts
         ================================================== */
-        
+
         #content #flash ul, ul.error {
             list-style-type: none;
             margin-top: 20px;
             padding: 0;
         }
-            
+
             #content #flash li, ul.error li {
                 background-color: rgba(255, 255, 255, .5);
                 border: 1px solid #E7E7E7;
                 border-radius: 3px;
                 font-size: 14px;
                 margin-bottom: 20px;
-                padding: .5em;            
+                padding: .5em;
             }
 
         .error, .alert { color: #914E33;  }
 
         .fatal, .installed { text-align: center; }
-        
+
         .success { color: #729108; }
