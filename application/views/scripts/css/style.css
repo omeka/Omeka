@@ -1289,41 +1289,6 @@ header nav {
     font-size: 14px;
 }
 
-ul#section-nav, #section-nav ul {
-    font-family: "Arvo", sans-serif;
-    list-style-type: none;
-    margin: -20px 0 16px 0;
-    padding: 0;
-}
-
-    #section-nav li { display: inline-block; }
-
-        #section-nav li:first-child a { padding: 10px 10px 10px 0; }
-
-        #section-nav li.active:first-child a,
-        #section-nav li.current:first-child a,
-        #section-nav li:first-child a.active {
-            padding: 10px 10px 10px 10px;
-        }
-
-    #section-nav a {
-        display: inline-block;
-        padding: 10px;
-        }
-
-    #section-nav .active a,
-    #section-nav .current a,
-    #section-nav a.active {
-        background-image: url('../images/red-bg.jpg');
-        -webkit-box-shadow: 0px 2px 3px #cccccc;
-        -moz-box-shadow: 0px 2px 3px #cccccc;
-        -o-box-shadow: 0px 2px 3px #cccccc;
-        box-shadow: 0px 2px 3px #cccccc;
-        color: #ffffff !important;
-        text-shadow: -1px -1px 1px rgba(0,0,0,.05);
-        padding: 10px;
-    }
-
 #tags {
     width: 96%;
     margin: 10px 0;

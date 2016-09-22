@@ -1982,10 +1982,10 @@ header nav {
     #section-nav .active a,
     #section-nav .current a,
     #section-nav a.active {
-        background-image: url('../images/red-bg.jpg');
-        -webkit-box-shadow: 0px 2px 3px #cccccc;
-        -moz-box-shadow: 0px 2px 3px #cccccc;
-        box-shadow: 0px 2px 3px #cccccc;
+        background-color: #9d5b41;
+        -webkit-box-shadow: 0px 3px 3px #cccccc;
+        -moz-box-shadow: 0px 3px 3px #cccccc;
+        box-shadow: 0px 3px 3px #cccccc;
         color: #ffffff !important;
         text-shadow: -1px -1px 1px rgba(0,0,0,.05);
     }
