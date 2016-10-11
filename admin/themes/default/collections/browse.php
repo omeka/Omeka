@@ -69,6 +69,14 @@ echo flash();
     <?php else: ?>
         <p><?php echo __('There are no collections on this page.'); ?> <?php echo link_to('collections', null, __('View All Collections')); ?></p>
     <?php endif; ?> 
+    <p><?php $total_items_without_collection = get_db()->getTable('Item')->count(array('collection' => 0));
+    if ($total_items_without_collection):
+        echo __(plural('%sOne item%s has no collection.', "%s%d items%s aren't in a collection.", $total_items_without_collection),
+            '<a href="' . html_escape(url('items/browse?collection=0')) . '">', $total_items_without_collection, '</a>');
+    else:
+        echo __('All items are in a collection.');
+    endif;
+    ?></p>
 <?php else: ?>
     <h2><?php echo __('You have no collections.'); ?></h2>
     <?php if(is_allowed('Collections', 'add')): ?>
