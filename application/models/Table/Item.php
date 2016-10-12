@@ -192,7 +192,7 @@ class Table_Item extends Omeka_Db_Table
             return;
         }
 
-        if (empty($collectionId)) {
+        if ($collectionId === 0) {
             $select->where('items.collection_id IS NULL');
         } else {
             $select->joinInner(

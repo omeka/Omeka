@@ -45,6 +45,11 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
                         break;
                     
                     case 'collection':
+                        if ($value === '0') {
+                            $displayValue = __('No Collection');
+                            break;
+                        }
+
                         $collection = $db->getTable('Collection')->find($value);
                         if ($collection) {
                             $displayValue = metadata($collection, 'display_title', array('no_escape' => true));
