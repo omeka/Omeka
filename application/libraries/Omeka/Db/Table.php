@@ -367,12 +367,16 @@ class Omeka_Db_Table
             if(array_key_exists($column, $params)) {
                 if (is_array($params[$column])) {
                     $nullIndex = array_search(null, $params[$column], true);
-                    $orWhere = '';
+                    $where = "`$alias`.`$column` IN (?)";
                     if ($nullIndex !== false) {
                         unset($params[$column][$nullIndex]);
-                        $orWhere = " OR `$alias`.`$column` IS NULL";
+                        if (empty($params[$column])) {
+                            $where = "`$alias`.`$column` IS NULL";
+                        } else {
+                            $where .= " OR `$alias`.`$column` IS NULL";
+                        }
                     }
-                    $select->where("`$alias`.`$column` IN (?)$orWhere", $params[$column]);
+                    $select->where($where, $params[$column]);
                 } else {
                     if ($params[$column] === null) {
                         $select->where("`$alias`.`$column` IS NULL");
