@@ -368,7 +368,11 @@ class Omeka_Db_Table
                 if (is_array($params[$column])) {
                     $select->where("`$alias`.`$column` IN (?)", $params[$column]);
                 } else {
-                    $select->where("`$alias`.`$column` = ?", $params[$column]);
+                    if ($params[$column] === null) {
+                        $select->where("`$alias`.`$column` IS NULL");
+                    } else {
+                        $select->where("`$alias`.`$column` = ?", $params[$column]);
+                    }
                 }
             }
         }
