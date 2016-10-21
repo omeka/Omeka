@@ -350,12 +350,12 @@
     }
      
     
-/* #Additional - Large Screens beyond 1280px
+/* #Additional - Large Screens beyond 1200px
 ================================================== */
  
     /* Note: Design for a width of 1200px */
  
-    @media only screen and (min-width: 1280px) {
+    @media only screen and (min-width: 1200px) {
         .container                                  {width: 1200px;}
 
         /*****************************
@@ -445,15 +445,6 @@
         .container .one-third.column                {width: 380px;}
         .container .two-thirds.column               {width: 780px;}
         
-        /*****************************
-            Omeka specifics
-        *****************************/
-        #content-nav {
-            width: 170px;
-        }
-        .container.container-twelve .section-title {
-            margin: 60px 0 10px 200px;
-        }
     }
     
     
