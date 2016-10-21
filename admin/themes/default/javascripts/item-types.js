@@ -20,7 +20,13 @@ Omeka.ItemTypes = {};
                 $(this).find('.element-order').each(function (index) {
                     $(this).val(index + 1);
                 });
+                Omeka.areYouSureCheck();
             }
+        });
+
+        // Initialize the order of elements for are-you-sure.
+        $('.sortable .element-order').each(function (index) {
+            $(this).val(index + 1);
         });
     };
 
@@ -130,6 +136,7 @@ Omeka.ItemTypes = {};
                 $(button).next().toggle();
                 $(button).toggle();
             }
+            Omeka.areYouSureRescan();
         }
 
         $('#add-element').click( function (event) {
@@ -149,6 +156,7 @@ Omeka.ItemTypes = {};
                 success: function (responseText) {
                     var response = responseText || 'no response text';
                     $('.add-new').parent().before(response);
+                    Omeka.areYouSureRescan();
                 },
                 error: function () {
                     alert('Unable to get a new element.');

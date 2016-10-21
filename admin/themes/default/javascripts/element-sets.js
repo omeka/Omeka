@@ -20,7 +20,13 @@ Omeka.ElementSets = {};
                 $(this).find('.element-order').each(function (index) {
                     $(this).val(index + 1);
                 });
+                Omeka.areYouSureCheck();
             }
+        });
+
+        // Initialize the order of elements for are-you-sure.
+        $('.sortable .element-order').each(function (index) {
+            $(this).val(index + 1);
         });
     };
 

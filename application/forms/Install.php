@@ -18,6 +18,7 @@ class Omeka_Form_Install extends Omeka_Form
     const DEFAULT_PER_PAGE_ADMIN = 10;
     const DEFAULT_PER_PAGE_PUBLIC = 10;
     const DEFAULT_SHOW_EMPTY_ELEMENTS = true;
+    const DEFAULT_WARN_UNSAVED_FORM = false;
     const DEFAULT_USER_NAME = 'Super User';
         
     public function init()
@@ -169,7 +170,14 @@ class Omeka_Form_Install extends Omeka_Form
             'class' => 'checkbox',
             'description' => __('Check box to show metadata elements with no text.')
         ));
-        
+
+        $this->addElement('checkbox', 'warn_unsaved_form', array(
+            'label' => __('Warn Unsaved Form'),
+            'description' => __('Alert curators to unsaved changes in a form if they attempt to close the browser or navigate away from the page.'),
+            'value' => self::DEFAULT_WARN_UNSAVED_FORM,
+            'class' => 'checkbox',
+        ));
+
         $this->addElement('text', 'path_to_convert', array(
             'label' => __('ImageMagick Directory Path')
         ));
@@ -186,12 +194,12 @@ class Omeka_Form_Install extends Omeka_Form
         );
         
         $this->addDisplayGroup(
-            array('administrator_email', 'site_title', 'description', 
-                  'copyright', 'author', 'tag_delimiter', 'fullsize_constraint', 
-                  'thumbnail_constraint', 'square_thumbnail_constraint', 
-                  'per_page_admin', 'per_page_public', 'show_empty_elements', 
-                  'path_to_convert'), 
-            'site_settings', 
+            array('administrator_email', 'site_title', 'description',
+                  'copyright', 'author', 'tag_delimiter', 'fullsize_constraint',
+                  'thumbnail_constraint', 'square_thumbnail_constraint',
+                  'per_page_admin', 'per_page_public', 'show_empty_elements',
+                  'warn_unsaved_form', 'path_to_convert'),
+            'site_settings',
             array('legend' =>__('Site Settings'))
         );
         

@@ -9,7 +9,7 @@ echo head(
 echo common('settings-nav');
 echo flash();
 ?>
-<form method='post'>
+<form method="post" id="element-set-form">
     <section class="seven columns alpha">
         <h2><?php echo __($element_set->name); ?></h2>
 
