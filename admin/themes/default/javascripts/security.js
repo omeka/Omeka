@@ -43,7 +43,6 @@ Omeka.Security = {};
                 data: params,
                 success: function (data) {
                     input.val(data);
-                    Omeka.areYouSureCheck();
                 }
             });
         }

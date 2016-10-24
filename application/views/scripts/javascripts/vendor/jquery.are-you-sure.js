@@ -1,4 +1,5 @@
 /*!
+ * Adapted and simplified from: 
  * jQuery Plugin: Are-You-Sure (Dirty Form Detection)
  * https://github.com/codedance/jquery.AreYouSure/
  *
@@ -9,6 +10,8 @@
  * Author:  chris.dance@papercut.com
  * Version: 1.9.0
  * Date:    13th August 2014
+ * Author:  Luk Puk
+ * Date:    24th October 2016
  */
 (function($) {
 
@@ -17,158 +20,70 @@ $.fn.areYouSure = function(options) {
     var settings = $.extend(
     {
         'message' : 'You have unsaved changes!',
-        'dirtyClass' : 'dirty',
-        'change' : null,
-        'silent' : false,
-        'addRemoveFieldsMarksDirty' : false,
-        'fieldEvents' : 'change keyup propertychange input',
-        'fieldSelector': ":input:not(input[type=submit]):not(input[type=button])"
+        'watchClass' : 'ays-watching', // used for quick lookup of forms with initiated plugin
+        'ignoreEvents': {
+            // eventType: selector = maps events and selectors that will ignore the warning
+            'click keydown': 'input#Delete'
+        }
     }, options);
 
-    var getValue = function($field) {
-        if ($field.hasClass('ays-ignore')
-            || $field.hasClass('aysIgnore')
-            || $field.attr('data-ays-ignore')
-            || $field.attr('name') === undefined) {
-            return null;
-        }
-
-        if ($field.is(':disabled')) {
-            return 'ays-disabled';
-        }
-
-        var val;
-        var type = $field.attr('type');
-        if ($field.is('select')) {
-            type = 'select';
-        }
-
-        switch (type) {
-            case 'checkbox':
-            case 'radio':
-                val = $field.is(':checked');
-                break;
-            case 'select':
-                val = '';
-                $field.find('option').each(function(o) {
-                    var $option = $(this);
-                    if ($option.is(':selected')) {
-                        val += $option.val();
-                    }
-                });
-                break;
-            default:
-                val = $field.val();
-        }
-
-        return val;
-    };
-
-    var storeOrigValue = function($field) {
-        $field.data('ays-orig', getValue($field));
-    };
-
-    var checkForm = function(evt) {
-
-        var isFieldDirty = function($field) {
-            var origValue = $field.data('ays-orig');
-            if (undefined === origValue) {
-                return false;
-            }
-            return (getValue($field) != origValue);
-        };
-
-        var $form = ($(this).is('form'))
-            ? $(this)
-            : $(this).parents('form');
-
-        // Test on the target first as it's the most likely to be dirty
-        if (isFieldDirty($(evt.target))) {
-            setDirtyStatus($form, true);
-            return;
-        }
-
-        $fields = $form.find(settings.fieldSelector);
-
-        if (settings.addRemoveFieldsMarksDirty) {
-            // Check if field count has changed
-            var origCount = $form.data("ays-orig-field-count");
-            if (origCount != $fields.length) {
-                setDirtyStatus($form, true);
-                return;
-            }
-        }
-
-        // Brute force - check each field
-        var isDirty = false;
-        $fields.each(function() {
-            $field = $(this);
-            if (isFieldDirty($field)) {
-                isDirty = true;
-                return false; // break
-            }
+    var serializeForm = function($form) {
+        var values = [$form.serialize()];
+        // $.serialize() doesn't include <input type=file tags at all
+        $form.find('input[type=file]').each(function() {
+            var el = $(this);
+            values.push(el.attr('name') +'='+ el.prop('value'));
         });
+        return values.join('&');
+    };
 
-        setDirtyStatus($form, isDirty);
+    var storeOrigState = function($form) {
+        $form.data('ays-orig', serializeForm($form));
+    };
+
+    var getOrigState = function($form) {
+        return $form.data('ays-orig');
     };
 
     var initForm = function($form) {
-        var fields = $form.find(settings.fieldSelector);
-        $(fields).each(function() { storeOrigValue($(this)); });
-        $(fields).unbind(settings.fieldEvents, checkForm);
-        $(fields).bind(settings.fieldEvents, checkForm);
-        $form.data("ays-orig-field-count", $(fields).length);
-        setDirtyStatus($form, false);
-    };
-
-    var setDirtyStatus = function($form, isDirty) {
-        var changed = isDirty != $form.hasClass(settings.dirtyClass);
-        $form.toggleClass(settings.dirtyClass, isDirty);
-
-        // Fire change event if required
-        if (changed) {
-            if (settings.change) settings.change.call($form, $form);
-
-            if (isDirty) $form.trigger('dirty.areYouSure', [$form]);
-            if (!isDirty) $form.trigger('clean.areYouSure', [$form]);
-            $form.trigger('change.areYouSure', [$form]);
-        }
+        storeOrigState($form);
+        $form.addClass(settings.watchClass);
     };
 
     var rescan = function() {
-        var $form = $(this);
-        var fields = $form.find(settings.fieldSelector);
-        $(fields).each(function() {
-            var $field = $(this);
-            if (!$field.data('ays-orig')) {
-                storeOrigValue($field);
-                $field.bind(settings.fieldEvents, checkForm);
-            }
-        });
-        // Check for changes while we're here
-        $form.trigger('checkform.areYouSure');
+        storeOrigState($(this));
+    };
+
+    var destroy = function() {
+        $(this).removeData(['ays-orig', 'ays-ignore'])
+            .removeClass(settings.watchClass);
     };
 
     var reinitialize = function() {
         initForm($(this));
-    }
+    };
 
-    if (!settings.silent && !window.aysUnloadSet) {
+    if (!window.aysUnloadSet) {
         window.aysUnloadSet = true;
-        $(window).bind('beforeunload', function() {
-            $dirtyForms = $("form").filter('.' + settings.dirtyClass);
-            if ($dirtyForms.length == 0) {
-                return;
-            }
-            // Prevent multiple prompts - seen on Chrome and IE
-            if (navigator.userAgent.toLowerCase().match(/msie|chrome/)) {
-                if (window.aysHasPrompted) {
-                    return;
+        $(window).on('beforeunload', function() {
+            var ignoreWarning = false;
+            $dirtyForms = $('form.' + settings.watchClass).filter(function() {
+                var $form = $(this);
+                return !$form.data('ays-ignore') && (getOrigState($form) != serializeForm($form));
+            });
+            if ($dirtyForms.length) {
+                // Prevent multiple prompts - seen on Chrome and IE
+                if (navigator.userAgent.toLowerCase().match(/msie|chrome/)) {
+                    if (window.aysHasPrompted) {
+                        return;
+                    }
+                    window.aysHasPrompted = true;
+                    window.setTimeout(function() {window.aysHasPrompted = false;}, 900);
                 }
-                window.aysHasPrompted = true;
-                window.setTimeout(function() {window.aysHasPrompted = false;}, 900);
+                return settings.message;
             }
-            return settings.message;
+            // reset the ignore flag, if user stays on page
+            $dirtyForms.data('ays-ignore', 0);
         });
     }
 
@@ -178,14 +93,25 @@ $.fn.areYouSure = function(options) {
         }
         var $form = $(this);
 
-        $form.submit(function() {
-            $form.removeClass(settings.dirtyClass);
+        $form.on('submit', function() {
+            $form.removeClass(settings.watchClass);
         });
-        $form.bind('reset', function() { setDirtyStatus($form, false); });
+        $form.on('reset', function() {
+            $form.trigger('rescan.areYouSure');
+        });
+        // Disable/Ignore warning in specific cases
+        if (settings.ignoreEvents) {
+            var $document = $(document);
+            $.each(settings.ignoreEvents, function(type, selector) {
+                $document.on(type, selector, function(e) {
+                    $form.data('ays-ignore', 1);
+                });
+            });
+        }
         // Add a custom events
-        $form.bind('rescan.areYouSure', rescan);
-        $form.bind('reinitialize.areYouSure', reinitialize);
-        $form.bind('checkform.areYouSure', checkForm);
+        $form.on('rescan.areYouSure', rescan);
+        $form.on('reinitialize.areYouSure', reinitialize);
+        $form.on('destroy.areYouSure', destroy);
         initForm($form);
     });
 };

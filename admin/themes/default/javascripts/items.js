@@ -20,7 +20,6 @@ Omeka.Items = {};
                 $(this).find('.file-order').each(function (index) {
                     $(this).val(index + 1);
                 });
-                Omeka.areYouSureCheck();
             }
         });
         $( ".sortable" ).disableSelection();
@@ -58,7 +57,6 @@ Omeka.Items = {};
         } else {
             deleteLink.text("Delete").next().prop('checked', false).parents('.sortable-item').removeClass("deleted");
         }
-        Omeka.areYouSureCheck();
     };
 
     /**
@@ -88,7 +86,6 @@ Omeka.Items = {};
                         tinyMCE.execCommand('mceRemoveControl', true, this.id);
                     });
                     form.html(response);
-                    Omeka.areYouSureRescan();
                     form.trigger('omeka:elementformload');
                     form.slideDown(1000, function () {
                         // Explicit show() call fixes IE7
@@ -176,7 +173,6 @@ Omeka.Items = {};
         
         $('#tags-to-add').val(tagsToAdd.join(Omeka.Items.tagDelimiter));
         $('#tags-to-delete').val(tagsToDelete.join(Omeka.Items.tagDelimiter));
-        Omeka.areYouSureCheck();
     };
 
     /**
@@ -277,7 +273,6 @@ Omeka.Items = {};
                 // Extra show fixes IE bug.
                 $(this).show();
             });
-            Omeka.areYouSureRescan();
         });
 
         $('#file-inputs').append(link);

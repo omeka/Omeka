@@ -57,7 +57,6 @@ jQuery(window).load(function () {
 jQuery(document).bind('omeka:elementformload', function (event) {
     Omeka.Elements.makeElementControls(event.target, <?php echo js_escape(url('elements/element-form')); ?>,'File'<?php if ($id = metadata('file', 'id')) echo ', '.$id; ?>);
     Omeka.Elements.enableWysiwyg(event.target);
-    Omeka.areYouSureCheck();
 });
 </script>
 <?php echo foot(); ?>

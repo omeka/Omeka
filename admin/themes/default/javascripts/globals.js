@@ -32,8 +32,7 @@ if (!Omeka) {
                 // TinyMCE 3.x.
                 editor.onChange.add(function(editor, l) {
                     editor.save();
-                    Omeka.areYouSureCheck();
-                })
+                });
             }
         };
 
@@ -130,22 +129,16 @@ if (!Omeka) {
     Omeka.areYouSure = function (params) {
         if (params && params.form) {
             Omeka.areYouSureForm = params.form;
-            var options = params.options || {'addRemoveFieldsMarksDirty': true};
+            var options = params.options || {};
             $(Omeka.areYouSureForm).areYouSure(options);
         }
-    }
-
-    Omeka.areYouSureCheck = function () {
-        if (Omeka.areYouSureForm) {
-            $(Omeka.areYouSureForm).trigger('checkform.areYouSure');
-        }
-    }
+    };
 
     Omeka.areYouSureRescan = function () {
         if (Omeka.areYouSureForm) {
             $(Omeka.areYouSureForm).trigger('rescan.areYouSure');
         }
-    }
+    };
 
     Omeka.addReadyCallback = function (callback, params) {
         this.readyCallbacks.push([callback, params]);

@@ -14,7 +14,10 @@
 </div>
 <script type="text/javascript">
 <?php if (get_option('warn_unsaved_form')): ?>
-Omeka.addReadyCallback(Omeka.areYouSure, [{form: 'form.warn-no-save, #collection-form, #item-form, #file-form, #api-keys-form, #appearance-form, #batch-edit-form, #edit-api-form, #edit-item-type-elements, #edit-search-form, #edit-security-form, #edit-settings-form, #element-set-form, #item-type-form, #navigation_form, #plugin-form, #theme-form, #user-form'}]);
+Omeka.addReadyCallback(Omeka.areYouSure, [{
+    form: 'form.warn-no-save, #collection-form, #item-form, #file-form, #api-keys-form, #appearance-form, #batch-edit-form, #edit-api-form, #edit-item-type-elements, #edit-search-form, #edit-security-form, #edit-settings-form, #element-set-form, #item-type-form, #navigation_form, #plugin-form, #theme-form, #user-form',
+    options: { message: <?php echo js_escape(__('It seems there are unsaved changes, that are going to be lost if you leave this page. Click "Leave page" to continue.')); ?> },
+}]);
 <?php endif; ?>
 jQuery(document).ready(function () {
     Omeka.runReadyCallbacks();

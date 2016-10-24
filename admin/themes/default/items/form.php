@@ -33,7 +33,6 @@ jQuery(window).load(function () {
 jQuery(document).bind('omeka:elementformload', function (event) {
     Omeka.Elements.makeElementControls(event.target, <?php echo js_escape(url('elements/element-form')); ?>,'Item'<?php if ($id = metadata('item', 'id')) echo ', '.$id; ?>);
     Omeka.Elements.enableWysiwyg(event.target);
-    Omeka.areYouSureCheck();
 });
 //]]>
 </script>

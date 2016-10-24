@@ -17,7 +17,6 @@ Omeka.Navigation = {};
             containment: 'document',
             update: function (event, ui) {
                 $('#navigation_form.warn-no-save').submit();
-                Omeka.areYouSureCheck();
             }
         });
         
@@ -44,7 +43,6 @@ Omeka.Navigation = {};
         });
         
         select.val(selectedValue);
-        Omeka.areYouSureCheck();
     };
 
     Omeka.Navigation.updateHideButtons = function () {

@@ -20,7 +20,6 @@ Omeka.ElementSets = {};
                 $(this).find('.element-order').each(function (index) {
                     $(this).val(index + 1);
                 });
-                Omeka.areYouSureCheck();
             }
         });
 
