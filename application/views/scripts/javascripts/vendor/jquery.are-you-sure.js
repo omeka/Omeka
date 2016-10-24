@@ -66,7 +66,6 @@ $.fn.areYouSure = function(options) {
     if (!window.aysUnloadSet) {
         window.aysUnloadSet = true;
         $(window).on('beforeunload', function() {
-            var ignoreWarning = false;
             $dirtyForms = $('form.' + settings.watchClass).filter(function() {
                 var $form = $(this);
                 return !$form.data('ays-ignore') && (getOrigState($form) != serializeForm($form));
@@ -82,8 +81,6 @@ $.fn.areYouSure = function(options) {
                 }
                 return settings.message;
             }
-            // reset the ignore flag, if user stays on page
-            $dirtyForms.data('ays-ignore', 0);
         });
     }
 
