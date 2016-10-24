@@ -191,7 +191,6 @@ Omeka.Navigation = {};
 
         // Set the true initial input values for are-you-sure.
         $('#navigation_form.warn-no-save').submit();
-        $('#navigation_form.warn-no-save').trigger('reinitialize.areYouSure');
     };
 
     Omeka.Navigation.updateForNewLinks = function () {

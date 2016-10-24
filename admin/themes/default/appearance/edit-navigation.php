@@ -46,5 +46,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'settings')); ?>
     Omeka.addReadyCallback(Omeka.Navigation.addNewNavLinkForm);
     Omeka.addReadyCallback(Omeka.Navigation.updateForNewLinks);
     Omeka.addReadyCallback(Omeka.Navigation.setUpFormSubmission);
+    // A rescan may be required to init AreYouSure fully during first load.
+    Omeka.areYouSureRescan();
 </script>
 <?php echo foot(); ?>
