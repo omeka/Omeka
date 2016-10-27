@@ -40,7 +40,9 @@ class Omeka_View_Helper_SearchFilters extends Zend_View_Helper_Abstract
         if (isset($_GET['record_types'])) {
             $recordTypes = array();
             foreach ($_GET['record_types'] as $recordType) {
-                $recordTypes[] = $validRecordTypes[$recordType];
+                if (isset($validRecordTypes[$recordType])) {
+                    $recordTypes[] = $validRecordTypes[$recordType];
+                }
             }
         }
 
