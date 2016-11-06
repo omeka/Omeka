@@ -14,11 +14,28 @@ class Omeka_File_MimeType_Detect_Strategy_MimeContentType
 {
     public function detect($file)
     {
-        if (!function_exists('mime_content_type')) {
-            // The mime_content_type has been deprecated and will be removed in 
-            // future versions of PHP.
-            return false;
+        $mimetype = mime_content_type($file);
+        // Detect some common "plain text" via the extension. Most important ones
+        // are json and xml.
+        if ($mimetype == 'text/plain') {
+            $extensions = array(
+                'css' => 'text/css',
+                'csv' => 'text/csv',
+                'htm' => 'text/html',
+                'html' => 'text/html',
+                'json' => 'application/json',
+                'marc' => 'application/marc',
+                'md' => 'text/markdown',
+                'rtf' => 'text/rtf',
+                'tsv' => 'text/tab-separated-values',
+                'xhtml' => 'application/xhtml+xml',
+                'xml' => 'text/xml',
+            );
+            $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+            if (isset($extensions[$extension])) {
+                $mimetype = $extensions[$extension];
+            }
         }
-        return mime_content_type($file);
+        return $mimetype;
     }
 }
