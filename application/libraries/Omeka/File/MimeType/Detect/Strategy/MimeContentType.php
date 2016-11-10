@@ -14,28 +14,9 @@ class Omeka_File_MimeType_Detect_Strategy_MimeContentType
 {
     public function detect($file)
     {
-        $mimetype = mime_content_type($file);
-        // Detect some common "plain text" via the extension. Most important ones
-        // are json and xml.
-        if ($mimetype == 'text/plain') {
-            $extensions = array(
-                'css' => 'text/css',
-                'csv' => 'text/csv',
-                'htm' => 'text/html',
-                'html' => 'text/html',
-                'json' => 'application/json',
-                'marc' => 'application/marc',
-                'md' => 'text/markdown',
-                'rtf' => 'text/rtf',
-                'tsv' => 'text/tab-separated-values',
-                'xhtml' => 'application/xhtml+xml',
-                'xml' => 'text/xml',
-            );
-            $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-            if (isset($extensions[$extension])) {
-                $mimetype = $extensions[$extension];
-            }
+        if (!function_exists('mime_content_type')) {
+            return false;
         }
-        return $mimetype;
+        return mime_content_type($file);
     }
 }
