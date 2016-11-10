@@ -82,7 +82,7 @@ class ThemesController extends Omeka_Controller_AbstractActionController
             if (($newOptions = $configHelper->processForm($form, $_POST, $themeOptions))) {
                 Theme::setOptions($themeName, $newOptions);
                 $this->_helper->flashMessenger(__('The theme settings were successfully saved!'), 'success');
-                $this->_helper->redirector('browse');
+                $this->_helper->redirector->gotoUrl('themes/config?name='. $themeName);
             } else {
                 $this->_helper->_flashMessenger(__('There was an error on the form. Please try again.'), 'error');
             }
