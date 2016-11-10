@@ -350,6 +350,104 @@
     }
      
     
+/* #Additional - Large Screens beyond 1200px
+================================================== */
+ 
+    /* Note: Design for a width of 1200px */
+ 
+    @media only screen and (min-width: 1200px) {
+        .container                                  {width: 1200px;}
+
+        /*****************************
+            12 Column
+        *****************************/
+        
+        /* Base Grid */
+        .container-twelve .one.column                        {width: 80px;}
+        .container-twelve .two.columns                       {width: 180px;}
+        .container-twelve .three.columns                     {width: 280px;}
+        .container-twelve .four.columns                      {width: 380px;}
+        .container-twelve .five.columns                      {width: 480px;}
+        .container-twelve .six.columns                       {width: 580px;}
+        .container-twelve .seven.columns                     {width: 680px;}
+        .container-twelve .eight.columns                     {width: 780px;}
+        .container-twelve .nine.columns                      {width: 880px;}
+        .container-twelve .ten.columns                       {width: 980px;}
+        .container-twelve .eleven.columns                    {width: 1080px;}
+        .container-twelve .twelve.columns                    {width: 1180px;}
+        
+        .container-twelve .one.column.panel                  {width: 60px;}
+        .container-twelve .two.columns.panel                 {width: 160px;}
+        .container-twelve .three.columns.panel               {width: 260px;}
+        .container-twelve .four.columns.panel                {width: 360px;}
+        .container-twelve .five.columns.panel                {width: 460px;}
+        .container-twelve .six.columns.panel                 {width: 560px;}
+        .container-twelve .seven.columns.panel               {width: 660px;}
+        .container-twelve .eight.columns.panel               {width: 760px;}
+        .container-twelve .nine.columns.panel                {width: 860px;}
+        .container-twelve .ten.columns.panel                 {width: 960px;}
+        .container-twelve .eleven.columns.panel              {width: 1060px;}
+        .container-twelve .twelve.columns.panel              {width: 1160px;}
+        
+        /* Offsets */    
+        .container-twelve .offset-by-one                     {margin-left: 100px;}
+        .container-twelve .offset-by-two                     {margin-left: 200px;}
+        .container-twelve .offset-by-three                   {margin-left: 300px;}
+        .container-twelve .offset-by-four                    {margin-left: 400px;}
+        .container-twelve .offset-by-five                    {margin-left: 500px;}
+        .container-twelve .offset-by-six                     {margin-left: 600px;}
+        .container-twelve .offset-by-seven                   {margin-left: 700px;}
+        .container-twelve .offset-by-eight                   {margin-left: 800px;}
+        .container-twelve .offset-by-nine                    {margin-left: 900px;}
+        .container-twelve .offset-by-ten                     {margin-left: 1000px;}
+        .container-twelve .offset-by-eleven                  {margin-left: 1100px;}
+        
+        
+        /*****************************
+            16 Column
+        *****************************/
+        
+        /* Base Grid */
+        .container-sixteen .one.column                      {width: 55px;}
+        .container-sixteen .two.columns                     {width: 130px;}
+        .container-sixteen .three.columns                   {width: 205px;}
+        .container-sixteen .four.columns                    {width: 280px;}
+        .container-sixteen .five.columns                    {width: 355px;}
+        .container-sixteen .six.columns                     {width: 430px;}
+        .container-sixteen .seven.columns                   {width: 505px;}
+        .container-sixteen .eight.columns                   {width: 580px;}
+        .container-sixteen .nine.columns                    {width: 655px;}
+        .container-sixteen .ten.columns                     {width: 730px;}
+        .container-sixteen .eleven.columns                  {width: 805px;}
+        .container-sixteen .twelve.columns                  {width: 880px;}
+        .container-sixteen .thirteen.columns                {width: 955px;}
+        .container-sixteen .fourteen.columns                {width: 1030px;}
+        .container-sixteen .fifteen.columns                 {width: 1105px;}
+        .container-sixteen .sixteen.columns                 {width: 1180px;}
+        
+        /* Offsets */    
+        .container-sixteen .offset-by-one                   {margin-left: 75px;}
+        .container-sixteen .offset-by-two                   {margin-left: 150px;}
+        .container-sixteen .offset-by-three                 {margin-left: 225px;}
+        .container-sixteen .offset-by-four                  {margin-left: 300px;}
+        .container-sixteen .offset-by-five                  {margin-left: 375px;}
+        .container-sixteen .offset-by-six                   {margin-left: 450px;}
+        .container-sixteen .offset-by-seven                 {margin-left: 525px;}
+        .container-sixteen .offset-by-eight                 {margin-left: 600px;}
+        .container-sixteen .offset-by-nine                  {margin-left: 675px;}
+        .container-sixteen .offset-by-ten                   {margin-left: 750px;}
+        .container-sixteen .offset-by-eleven                {margin-left: 825px;}
+        .container-sixteen .offset-by-twelve                {margin-left: 900px;}
+        .container-sixteen .offset-by-thirteen              {margin-left: 975px;}
+        .container-sixteen .offset-by-fourteen              {margin-left: 1050px;}
+        .container-sixteen .offset-by-fifteen               {margin-left: 1125px;}
+
+        .container .one-third.column                {width: 380px;}
+        .container .two-thirds.column               {width: 780px;}
+        
+    }
+    
+    
 /* #Clearing
 ================================================== */
 
