@@ -21,6 +21,7 @@ $.fn.areYouSure = function(options) {
     {
         'message' : 'You have unsaved changes!',
         'watchClass' : 'ays-watching', // used for quick lookup of forms with initiated plugin
+        'fieldSelector': ':input:not(:disabled, :submit, :button)',
         'ignoreEvents': {
             // eventType: selector = maps events and selectors that will ignore the warning
             'click keydown': 'input#Delete'
@@ -28,13 +29,45 @@ $.fn.areYouSure = function(options) {
     }, options);
 
     var serializeForm = function($form) {
-        var values = [$form.serialize()];
-        // $.serialize() doesn't include <input type=file tags at all
-        $form.find('input[type=file]').each(function() {
-            var el = $(this);
-            values.push(el.attr('name') +'='+ el.prop('value'));
+        var values = [];
+        $form.find(settings.fieldSelector).each(function() {
+            var $field = $(this);
+            var value = getValue($field);
+            if (value !== null) {
+                values.push($field.attr('name') +'='+ value);
+            }
         });
         return values.join('&');
+    };
+
+    var getValue = function($field) {
+        if ($field.hasClass('ays-ignore')
+            || $field.hasClass('aysIgnore')
+            || $field.attr('data-ays-ignore')
+            || $field.attr('name') === undefined) {
+            return null;
+        }
+
+        var val;
+        var type = $field.attr('type');
+        if ($field.is('select')) {
+            type = 'select';
+        }
+
+        switch (type) {
+            case 'checkbox':
+            case 'radio':
+                val = $field.is(':checked');
+                break;
+            case 'select':
+                val = $field.val();
+                val = $.isArray(val) ? val.join(',') : val;
+                break;
+            default:
+                val = $field.val();
+        }
+
+        return val;
     };
 
     var storeOrigState = function($form) {
