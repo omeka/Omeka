@@ -2272,6 +2272,14 @@ button.remove_search {
 /* Show Collections
 ================================================== */
 
+.not-in-collections {
+    float: right;
+    padding: 1px 6px;
+    background-color: #fff;
+    border: 1px solid #e4e5de;
+    margin: 0 20px 20px 0;
+}
+
 .collections.show .recent-items {
     list-style-type: none;
     margin: 0;
