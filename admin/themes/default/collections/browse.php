@@ -13,11 +13,12 @@ echo flash();
         </a>
     <?php endif; ?>
     <p class="not-in-collections">
-    <?php if ($totalItemsWithoutCollection): ?>
-        <?php $withoutCollectionMessage = __(plural('%sOne item%s has no collection.', "%s%d items%s aren't in a collection.", $totalItemsWithoutCollection), '<a href="' . html_escape(url('items/browse?collection=0')) . '">', $totalItemsWithoutCollection, '</a>') ?>
-    <?php else: ?>
-        <?php $withoutCollectionMessage = __('All items are in a collection.'); ?>
-    <?php endif;?>
+    <?php if ($totalItemsWithoutCollection):
+        $withoutCollectionMessage = __(plural('%s%d item%s has no collection.', "%s%d items%s aren't in a collection.",
+            $totalItemsWithoutCollection), '<a href="' . html_escape(url('items/browse?collection=0')) . '">', $totalItemsWithoutCollection, '</a>');
+    else:
+        $withoutCollectionMessage = __('All items are in a collection.');
+    endif; ?>
     <?php echo $withoutCollectionMessage; ?>
     </p>
     <?php if (has_loop_records('collections')): ?>
