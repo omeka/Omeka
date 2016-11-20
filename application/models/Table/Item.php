@@ -174,33 +174,41 @@ class Table_Item extends Omeka_Db_Table
             $select->where($where);
         }
     }
-    
+
     /**
      * Filter the SELECT statement based on an item's collection
      *
-     * @param Zend_Db_Select
-     * @param Collection|integer Either a Collection object, or the collection ID
+     * @param Zend_Db_Select $select
+     * @param Collection|integer|array $collection Either a Collection object,
+     * or the collection id or an array of collection object or id.
      * @return void
      */
     public function filterByCollection($select, $collection)
     {
+        if ($collection === 0 || $collection === '0') {
+            $select->where('items.collection_id IS NULL');
+            return;
+        }
         if ($collection instanceof Collection) {
-            $collectionId = $collection->id;
+            $select->where('collections.id = ?', $collection->id);
         } elseif (is_numeric($collection)) {
-            $collectionId = (int) $collection;
+            $select->where('collections.id = ?', (int) $collection);
+        } elseif (is_array($collection)) {
+            $collections = array_filter(array_map(function($v) {
+                return $v instanceof Collection ? $v->id : (is_numeric($v) ? (int) $v : null);
+            }, $collection));
+            if (empty($collections)) {
+                return;
+            }
+            $select->where('collections.id IN (?)', $collections);
         } else {
             return;
         }
 
-        if ($collectionId === 0) {
-            $select->where('items.collection_id IS NULL');
-        } else {
-            $select->joinInner(
-                array('collections' => $this->getDb()->Collection),
-                'items.collection_id = collections.id',
-                array());
-            $select->where('collections.id = ?', $collectionId);
-        }
+        $select->joinInner(
+            array('collections' => $this->getDb()->Collection),
+            'items.collection_id = collections.id',
+            array());
     }
 
     /**
