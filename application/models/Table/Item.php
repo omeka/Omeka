@@ -206,8 +206,9 @@ class Table_Item extends Omeka_Db_Table
     /**
      * Filter the SELECT statement based on the item Type
      *
-     * @param Zend_Db_Select
-     * @param Type|integer|string Type object, Type ID or Type name
+     * @param Zend_Db_Select $select
+     * @param Type|integer|string|array $type One or multiple Item Type object,
+     * Item Type ID or Item Type name.
      * @return void
      */
     public function filterByItemType($select, $type)
@@ -217,8 +218,26 @@ class Table_Item extends Omeka_Db_Table
                            array());
         if ($type instanceof ItemType) {
             $select->where('item_types.id = ?', $type->id);
-        } else if (is_numeric($type)) {
-            $select->where('item_types.id = ?', $type);
+        } elseif (is_numeric($type)) {
+            $select->where('item_types.id = ?', (int) $type);
+        } elseif (is_array($type)) {
+            $first = reset($type);
+            switch (gettype($first)) {
+                case 'object':
+                    if ($first instanceof ItemType) {
+                        $types = array_map(function($v) {
+                            return $v->id;
+                        }, $type);
+                        $select->where('item_types.id IN (?)', $types);
+                    }
+                    break;
+                case 'numeric':
+                    $types = array_map('intval', $type);
+                    $select->where('item_types.id IN (?)', $types);
+                    break;
+                default:
+                    $select->where('item_types.name IN (?)', $type);
+            }
         } else {
             $select->where('item_types.name = ?', $type);
         }
