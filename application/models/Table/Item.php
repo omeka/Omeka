@@ -213,6 +213,10 @@ class Table_Item extends Omeka_Db_Table
      */
     public function filterByItemType($select, $type)
     {
+        if ($type === 0 || $type === '0' || $type === '') {
+            $select->where('items.item_type_id IS NULL');
+            return;
+        }
         $select->joinInner(array('item_types' => $this->getDb()->ItemType),
                            'items.item_type_id = item_types.id',
                            array());
