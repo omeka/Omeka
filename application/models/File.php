@@ -146,7 +146,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             case 'permalink':
                 return absolute_url(array('controller' => 'files', 'action' => 'show', 'id' => $this->id));
             case 'display_title':
-                return $this->getDisplayTitle();
+                return $this->getDisplayTitle($this->original_filename);
             default:
                 return parent::getProperty($property);
         }
@@ -515,24 +515,5 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     public function getFile()
     {
         return $this;
-    }
-
-    /**
-     * Get a title suitable for display through metadata()
-     *
-     * @return string
-     */
-    public function getDisplayTitle()
-    {
-        $titles = $this->getElementTexts('Dublin Core', 'Title');
-        if ($titles) {
-            $title = $titles[0]->text;
-            if ($titles[0]->html) {
-                $title = html_entity_decode(strip_formatting($title), ENT_QUOTES, 'UTF-8');
-            }
-        } else {
-            $title = $this->original_filename;
-        }
-        return $title;
     }
 }

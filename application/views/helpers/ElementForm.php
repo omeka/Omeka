@@ -61,9 +61,8 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
         $inputsComponent = $this->_getInputsComponent($extraFieldCount);
         $descriptionComponent = $this->_getDescriptionComponent();
         $commentComponent = $this->_getCommentComponent();
-        $addInputComponent = $this->view->formSubmit('add_element_' . $this->_element['id'], 
-                                         __('Add Input'),
-                                         array('class'=>'add-element'));
+        $addInputComponent = $this->view->formButton('add_element_' . $this->_element['id'],
+            __('Add Input'), array('class'=>'add-element'));
         $components = array(
             'label' => $labelComponent,
             'inputs' => $inputsComponent,

@@ -19,6 +19,7 @@ class Omeka_View_Helper_Metadata extends Zend_View_Helper_Abstract
     const NO_ESCAPE = 'no_escape';
     const NO_FILTER = 'no_filter';
     const DELIMITER = 'delimiter';
+    const IGNORE_UNKNOWN = 'ignore_unknown';
 
     /**
      * Retrieve a specific piece of a record's metadata for display.
@@ -66,8 +67,17 @@ class Omeka_View_Helper_Metadata extends Zend_View_Helper_Abstract
         $all = isset($options[self::ALL]) && $options[self::ALL];
         $delimiter = isset($options[self::DELIMITER]) ? (string) $options[self::DELIMITER] : false;
         $index = isset($options[self::INDEX]) ? (int) $options[self::INDEX] : 0;
+        $ignoreUnknown = isset($options[self::IGNORE_UNKNOWN]) && $options[self::IGNORE_UNKNOWN];
 
-        $text = $this->_getText($record, $metadata);
+        try {
+            $text = $this->_getText($record, $metadata);
+        } catch (Omeka_Record_Exception $e) {
+            if ($ignoreUnknown) {
+                $text = null;
+            } else {
+                throw $e;
+            }
+        }
 
         if (is_array($text)) {
             // If $all or $delimiter isn't specified, pare the array down to

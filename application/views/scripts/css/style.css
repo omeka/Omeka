@@ -460,11 +460,7 @@ p, li {
 header {
     width: 100%;
     background-color: #2A2520;
-    -webkit-border-image: url('../images/red-bg.jpg') 5 repeat;
-    -moz-border-image: url('../images/red-bg.jpg') 5 repeat;
-    -o-border-image: url('../images/red-bg.jpg') 5 repeat;
-    border-image: url('../images/red-bg.jpg') 5 repeat;
-    border-width: 0 0 .375em 0;
+    border-bottom: .375em solid #9d5b41;
     -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
     -moz-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
     -o-box-shadow: 1px 1px 2px rgba(0,0,0,.35);
@@ -810,10 +806,6 @@ header nav {
 
 #content {
     background-image: url('../images/content_bg.jpg');
-    -webkit-border-image: url('../images/red-bg.jpg') 5 repeat;
-    -moz-border-image: url('../images/red-bg.jpg') 5 repeat;
-    -o-border-image: url('../images/red-bg.jpg') 50 repeat;
-    border-image: url("../images/red-bg.jpg") 5 / 0.375em 0 0 repeat;
     -webkit-box-shadow: 0 0 1px #999999;
     -moz-box-shadow: 0 0 1px #999999;
     -o-box-shadow: 0 0 1px #999999;
@@ -821,6 +813,7 @@ header nav {
     margin-top: 10%;
     margin-bottom: 10%;
     padding: 20px 10px;
+    border-top: 5px solid #9d5b41;
 }
 
         #content h1:first-child, #content h2:first-child {
@@ -1295,41 +1288,6 @@ header nav {
     clear: none !important;
     font-size: 14px;
 }
-
-ul#section-nav, #section-nav ul {
-    font-family: "Arvo", sans-serif;
-    list-style-type: none;
-    margin: -20px 0 16px 0;
-    padding: 0;
-}
-
-    #section-nav li { display: inline-block; }
-
-        #section-nav li:first-child a { padding: 10px 10px 10px 0; }
-
-        #section-nav li.active:first-child a,
-        #section-nav li.current:first-child a,
-        #section-nav li:first-child a.active {
-            padding: 10px 10px 10px 10px;
-        }
-
-    #section-nav a {
-        display: inline-block;
-        padding: 10px;
-        }
-
-    #section-nav .active a,
-    #section-nav .current a,
-    #section-nav a.active {
-        background-image: url('../images/red-bg.jpg');
-        -webkit-box-shadow: 0px 2px 3px #cccccc;
-        -moz-box-shadow: 0px 2px 3px #cccccc;
-        -o-box-shadow: 0px 2px 3px #cccccc;
-        box-shadow: 0px 2px 3px #cccccc;
-        color: #ffffff !important;
-        text-shadow: -1px -1px 1px rgba(0,0,0,.05);
-        padding: 10px;
-    }
 
 #tags {
     width: 96%;

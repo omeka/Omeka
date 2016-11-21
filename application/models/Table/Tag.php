@@ -148,7 +148,7 @@ class Table_Tag extends Omeka_Db_Table
         }
 
         if (!(array_key_exists('include_zero', $params) && $params['include_zero'])) {
-            $select->having('COUNT(records_tags.id) > 0');
+            $select->where('records_tags.id IS NOT NULL');
         }
         $select->group("tags.id");
     }

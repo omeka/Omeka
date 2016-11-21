@@ -88,6 +88,7 @@ class Table_Item extends Omeka_Db_Table
     {
         $db = $this->getDb();
 
+        $where = '';
         $advancedIndex = 0;
         foreach ($terms as $v) {
             // Do not search on blank rows.
@@ -99,6 +100,8 @@ class Table_Item extends Omeka_Db_Table
             $type = $v['type'];
             $elementId = (int) $v['element_id'];
             $alias = "_advanced_{$advancedIndex}";
+
+            $joiner = isset($v['joiner']) && $advancedIndex > 0 ? $v['joiner'] : null;
 
             $negate = false;
             // Determine what the WHERE clause should look like.
@@ -150,14 +153,25 @@ class Table_Item extends Omeka_Db_Table
 
             if ($negate) {
                 $joinCondition .= " AND {$predicateClause}";
-                $select->joinLeft(array($alias => $db->ElementText), $joinCondition, array());
-                $select->where("{$alias}.text IS NULL");
+                $whereClause = "{$alias}.text IS NULL";
             } else {
-                $select->joinInner(array($alias => $db->ElementText), $joinCondition, array());
-                $select->where($predicateClause);
+                $whereClause = $predicateClause;
+            }
+
+            $select->joinLeft(array($alias => $db->ElementText), $joinCondition, array());
+            if ($where == '') {
+                $where = $whereClause;
+            } else if ($joiner == 'or') {
+                $where .= " OR $whereClause";
+            } else {
+                $where .= " AND $whereClause";
             }
 
             $advancedIndex++;
+        }
+
+        if ($where) {
+            $select->where($where);
         }
     }
     
@@ -165,19 +179,27 @@ class Table_Item extends Omeka_Db_Table
      * Filter the SELECT statement based on an item's collection
      *
      * @param Zend_Db_Select
-     * @param Collection|integer|string Either a Collection object, the collection ID, or the name of the collection
+     * @param Collection|integer Either a Collection object, or the collection ID
      * @return void
      */
     public function filterByCollection($select, $collection)
     {
-        $select->joinInner(array('collections' => $this->getDb()->Collection),
-                           'items.collection_id = collections.id',
-                           array());
-
         if ($collection instanceof Collection) {
-            $select->where('collections.id = ?', $collection->id);
-        } else if (is_numeric($collection)) {
-            $select->where('collections.id = ?', (int) $collection);
+            $collectionId = $collection->id;
+        } elseif (is_numeric($collection)) {
+            $collectionId = (int) $collection;
+        } else {
+            return;
+        }
+
+        if ($collectionId === 0) {
+            $select->where('items.collection_id IS NULL');
+        } else {
+            $select->joinInner(
+                array('collections' => $this->getDb()->Collection),
+                'items.collection_id = collections.id',
+                array());
+            $select->where('collections.id = ?', $collectionId);
         }
     }
 

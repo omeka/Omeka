@@ -26,14 +26,10 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
      *        // GET items/browse?search=&public=1&custom_field=xyz
      *        public function filterItemSearchFilters($displayArray, $args) {
      *            if (!empty($args['request_array']['custom_field'])) {
-     *                if (empty($args['options']['remove_filter'])) {
-     *                    $displayArray['Custom Label'] = $args['request_array']['custom_field'];
-     *                } else {
-     *                    $displayArray['Custom Label'] = array(
-     *                        'key'   => 'custom_field',
-     *                        'value' => $args['request_array']['custom_field']
-     *                    );
-     *                }
+     *                $displayArray['Custom Label'] = array(
+     *                    'key'   => 'custom_field',
+     *                    'value' => $args['request_array']['custom_field']
+     *                );
      *            }
      *            return $displayArray;
      *        }
@@ -70,15 +66,14 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
                         break;
                     
                     case 'collection':
+                        if ($value === '0') {
+                            $displayValue = __('No Collection');
+                            break;
+                        }
+
                         $collection = $db->getTable('Collection')->find($value);
                         if ($collection) {
-                            $displayValue = strip_formatting(
-                                metadata(
-                                    $collection,
-                                    array('Dublin Core', 'Title'),
-                                    array('no_escape' => true)
-                                )
-                            );
+                            $displayValue = metadata($collection, 'display_title', array('no_escape' => true));
                         }
                         break;
 
@@ -101,26 +96,23 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
                         break;
                 }
                 if ($displayValue) {
-                    if ($options['remove_filter']) {
-                        // pass the query param key, so we know which part should be removed
-                        $displayArray[$filter] = array(
-                            'key'   => $key,
-                            'value' => $displayValue,
-                        );
-                    } else {
-                        $displayArray[$filter] = $displayValue;
-                    }
+                    // pass the query param key, so we know which part should be removed
+                    $displayArray[$filter] = array(
+                        'key'   => $key,
+                        'value' => $displayValue,
+                    );
                 }
             }
         }
 
-        $displayArray = apply_filters('item_search_filters', $displayArray, array('request_array' => $requestArray, 'options' => $options));
+        $displayArray = apply_filters('item_search_filters', $displayArray, array('request_array' => $requestArray));
         
         // Advanced needs a separate array from $displayValue because it's
         // possible for "Specific Fields" to have multiple values due to 
         // the ability to add fields.
         if(array_key_exists('advanced', $requestArray)) {
             $advancedArray = array();
+            $index = 0;
             foreach ($requestArray['advanced'] as $i => $row) {
                 if (!$row['element_id'] || !$row['type']) {
                     continue;
@@ -133,15 +125,19 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
                 if (isset($row['terms'])) {
                     $advancedValue .= ' "' . $row['terms'] . '"';
                 }
-                if ($options['remove_filter']) {
-                    // pass the query param index, so we know which part should be removed
-                    $advancedArray[$i] = array(
-                        'key'   => $i,
-                        'value' => $advancedValue,
-                    );
-                } else {
-                    $advancedArray[$i] = $advancedValue;
+
+                if ($index) {
+                    if(isset($row['joiner']) && $row['joiner'] === 'or') {
+                        $advancedValue = __('OR') . ' ' . $advancedValue;
+                    } else {
+                        $advancedValue = __('AND') . ' ' . $advancedValue;
+                    }
                 }
+                // pass the query param index, so we know which part should be removed
+                $advancedArray[$index++] = array(
+                    'key'   => $i,
+                    'value' => $advancedValue,
+                );
             }
         }
 

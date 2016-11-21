@@ -10,10 +10,10 @@ echo flash();
                 <label for="search_record_types"><?php echo __('Search Record Types'); ?></label>
             </div>
             <div class="inputs five columns omega">
-                <p class="explanation"><?php echo __('Customize which types of records ' 
+                <p class="explanation"><?php echo __('Customize which types of records '
                 . 'will be searchable in Omeka.'); ?></p>
                 <ul><?php foreach ($this->searchRecordTypes as $key => $value): ?>
-                <li><?php echo $this->formCheckbox('search_record_types[]', $key, 
+                <li><?php echo $this->formCheckbox("search_record_types[$key]", $key,
                 array('checked' => array_key_exists($key, $this->customSearchRecordTypes))); ?> <?php echo $value; ?></li>
                 <?php endforeach; ?></ul>
             </div>
@@ -23,13 +23,13 @@ echo flash();
                 <label><?php echo __('Index Records'); ?></label>
             </div>
             <div class="inputs five columns omega">
-                <p class="explanation"><?php echo __('Click on the "Index Records" ' 
+                <p class="explanation"><?php echo __('Click on the "Index Records" '
                 . 'button to re-index your records.'); ?></p>
-                <p class="explanation"><?php echo __('Indexing means to collect, parse, ' 
-                . 'and store data to facilitate fast and accurate searches. Omeka will ' 
-                . 'automatically index individual records as they are saved, but there ' 
-                . 'are circumstances when your records are not indexed; for instance, ' 
-                . 'when updating from an earlier version of Omeka or after you customize ' 
+                <p class="explanation"><?php echo __('Indexing means to collect, parse, '
+                . 'and store data to facilitate fast and accurate searches. Omeka will '
+                . 'automatically index individual records as they are saved, but there '
+                . 'are circumstances when your records are not indexed; for instance, '
+                . 'when updating from an earlier version of Omeka or after you customize '
                 . 'which records will be searchable.'); ?></p>
             </div>
         </div>

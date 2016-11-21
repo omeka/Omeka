@@ -32,7 +32,7 @@ echo flash();
         </div>
         <div class="field">
             <div class="two columns alpha">
-                <label for="search_record_types"><?php echo __('Results per Page'); ?></label>
+                <label for="api_per_page"><?php echo __('Results per Page'); ?></label>
             </div>
             <div class="inputs five columns omega">
                 <p class="explanation"><?php echo __(
@@ -42,11 +42,11 @@ echo flash();
             </div>
         </div>
         <p><?php echo __(
-        'After enabling the API, applications may be able to show, browse, add, edit, ' . 
-        'and delete your site resources. Viewing protected content, as well as adding, ' . 
+        'After enabling the API, applications may be able to show, browse, add, edit, ' .
+        'and delete your site resources. Viewing protected content, as well as adding, ' .
         'editing, and deleting content, is protected and requires key authentication. ' .
         'Each key corresponds to, and has all permissions of, an existing Omeka user. ' .
-        'You can create keys on each user\'s %sedit page%s.', 
+        'You can create keys on each user\'s %sedit page%s.',
         '<a href="' . url('users') . '">', '</a>'
         ); ?></p>
         <table>

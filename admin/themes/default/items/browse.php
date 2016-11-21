@@ -15,33 +15,39 @@ echo item_search_filters();
     <?php echo pagination_links(); ?>
 
     <form action="<?php echo html_escape(url('items/batch-edit')); ?>" method="post" accept-charset="utf-8">
+        <?php if (is_allowed('Items', 'add')): ?>
+        <a href="<?php echo html_escape(url('items/add')); ?>" class="add button small green"><?php echo __('Add an Item'); ?></a>
+        <?php endif; ?>
+        <?php echo link_to_item_search(__('Search Items'), array('class' => 'small blue advanced-search-link button')); ?>
+        <?php echo common('quick-filters', array(), 'items'); ?>
+
         <div class="table-actions batch-edit-option">
-            <?php if (is_allowed('Items', 'add')): ?>
-            <a href="<?php echo html_escape(url('items/add')); ?>" class="add button small green"><?php echo __('Add an Item'); ?></a>
-            <?php endif; ?>
-            <?php echo link_to_item_search(__('Search Items'), array('class' => 'small blue advanced-search-link button')); ?>
-            <?php if (is_allowed('Items', 'edit')): ?>
-            <input type="submit" class="edit-items small blue batch-action button" name="submit-batch-edit" value="<?php echo __('Edit'); ?>" />
-            <?php endif; ?>
-            <?php if (is_allowed('Items', 'delete')): ?>
-            <input type="submit" class="small red batch-action button" name="submit-batch-delete" value="<?php echo __('Delete'); ?>">
+            <?php if (is_allowed('Items', 'edit') || is_allowed('Items', 'delete')): ?>
+                <button class="batch-all-toggle" type="button" data-records-count="<?php echo $total_results; ?>"><?php echo __('Select all %s results', $total_results); ?></button>
+                <div class="selected"><span class="count">0</span> <?php echo __('items selected'); ?></div>
+                <input type="hidden" name="batch-all" value="1" id="batch-all" disabled>
+                <?php echo $this->formHidden('params', json_encode(Zend_Controller_Front::getInstance()->getRequest()->getParams())); ?>
+                <?php if (is_allowed('Items', 'edit')): ?>
+                <input type="submit" class="edit-items small batch-action button" name="submit-batch-edit" value="<?php echo __('Edit'); ?>" />
+                <?php endif; ?>
+                <?php if (is_allowed('Items', 'delete')): ?>
+                <input type="submit" class="small batch-action button" name="submit-batch-delete" value="<?php echo __('Delete'); ?>">
+                <?php endif; ?>
             <?php endif; ?>
         </div>
-
-        <?php echo common('quick-filters', array(), 'items'); ?>
 
         <table id="items">
         <thead>
             <tr>
                 <?php if (is_allowed('Items', 'edit')): ?>
-                <th class="batch-edit-heading"><?php echo __('Select'); ?></th>
+                <th class="batch-edit-heading"><?php echo __('Select all rows'); ?></th>
                 <?php endif; ?>
                 <?php
                 $browseHeadings[__('Title')] = 'Dublin Core,Title';
                 $browseHeadings[__('Creator')] = 'Dublin Core,Creator';
                 $browseHeadings[__('Type')] = null;
                 $browseHeadings[__('Date Added')] = 'added';
-                echo browse_sort_links($browseHeadings, array('link_tag' => 'th scope="col"', 'list_tag' => '')); 
+                echo browse_sort_links($browseHeadings, array('link_tag' => 'th scope="col"', 'list_tag' => ''));
                 ?>
             </tr>
         </thead>
@@ -52,7 +58,15 @@ echo item_search_filters();
                 <?php $id = metadata('item', 'id'); ?>
 
                 <?php if (is_allowed($item, 'edit') || is_allowed($item, 'tag')): ?>
-                <td class="batch-edit-check" scope="row"><input type="checkbox" name="items[]" value="<?php echo $id; ?>" /></td>
+                <td class="batch-edit-check">
+                    <input type="checkbox" name="items[]" value="<?php echo $id; ?>"
+                        aria-label="<?php echo html_escape(
+                            __('Select item "%s"',
+                                metadata('item', 'display_title', array('no_escape' => true))
+                            )
+                        ); ?>"
+                    >
+                </td>
                 <?php endif; ?>
 
                 <?php if ($item->featured): ?>
@@ -85,7 +99,7 @@ echo item_search_filters();
                     <?php fire_plugin_hook('admin_items_browse_simple_each', array('item' => $item, 'view' => $this)); ?>
 
                     <div class="details">
-                        <?php echo snippet_by_word_count(strip_formatting(metadata('item', array('Dublin Core', 'Description'))), 40); ?>
+                        <?php echo snippet_by_word_count(metadata('item', array('Dublin Core', 'Description')), 40); ?>
                         <p>
                             <strong><?php echo __('Collection'); ?>:</strong>
                             <?php echo link_to_collection_for_item(); ?>
@@ -110,24 +124,26 @@ echo item_search_filters();
             <?php endforeach; ?>
         </tbody>
         </table>
-
         <div class="table-actions batch-edit-option">
-            <?php if (is_allowed('Items', 'add')): ?>
-            <a href="<?php echo html_escape(url('items/add')); ?>" class="add button small green"><?php echo __('Add an Item'); ?></a>
-            <?php endif; ?>
-            <?php echo link_to_item_search(__('Search Items'), array('class' => 'small blue advanced-search-link button')); ?>
-            <?php if (is_allowed('Items', 'edit')): ?>
-            <input type="submit" class="small blue batch-action button" name="submit-batch-edit" value="<?php echo __('Edit'); ?>" />
-            <?php endif; ?>
-            <?php if (is_allowed('Items', 'delete')): ?>
-            <input type="submit" class="small red batch-action button" name="submit-batch-delete" value="<?php echo __('Delete'); ?>">
+            <?php if (is_allowed('Items', 'edit') || is_allowed('Items', 'delete')): ?>
+                <button class="batch-all-toggle" type="button" data-records-count="<?php echo $total_results; ?>"><?php echo __('Select all %s results', $total_results); ?></button>
+                <div class="selected"><span class="count">0</span> <?php echo __('items selected'); ?></div>
+                <?php if (is_allowed('Items', 'edit')): ?>
+                <input type="submit" class="edit-items small batch-action button" name="submit-batch-edit" value="<?php echo __('Edit'); ?>" />
+                <?php endif; ?>
+                <?php if (is_allowed('Items', 'delete')): ?>
+                <input type="submit" class="small batch-action button" name="submit-batch-delete" value="<?php echo __('Delete'); ?>">
+                <?php endif; ?>
             <?php endif; ?>
         </div>
-        
-        <?php echo common('quick-filters',array(),'items'); ?>
+        <?php echo pagination_links(); ?>
+        <?php if (is_allowed('Items', 'add')): ?>
+        <a href="<?php echo html_escape(url('items/add')); ?>" class="add button small green"><?php echo __('Add an Item'); ?></a>
+        <?php endif; ?>
+        <?php echo link_to_item_search(__('Search Items'), array('class' => 'small blue advanced-search-link button')); ?>
+        <?php echo common('quick-filters', array(), 'items'); ?>
     </form>
 
-    <?php echo pagination_links(); ?>
 
     <div id="outputs">
     <span class="outputs-label"><?php echo __('Output Formats'); ?></span>

@@ -1,11 +1,11 @@
 <?php
-    $collectionTitle = strip_formatting(metadata('collection', array('Dublin Core', 'Title'), array('no_filter' => true)));
-    if ($collectionTitle != '') {
-        $collectionTitle = ': &quot;' . $collectionTitle . '&quot; ';
-    } else {
-        $collectionTitle = '';
-    }
-    $collectionTitle = __('Collection #%s', metadata('collection', 'id')) . $collectionTitle;
+$collectionTitle = metadata('collection', 'display_title');
+if ($collectionTitle != '' && $collectionTitle != __('[Untitled]')) {
+    $collectionTitle = ': &quot;' . $collectionTitle . '&quot; ';
+} else {
+    $collectionTitle = '';
+}
+$collectionTitle = __('Collection #%s', metadata('collection', 'id')) . $collectionTitle;
 ?>
 <?php echo head(array('title'=> $collectionTitle, 'bodyclass'=>'collections show')); ?>
 
@@ -56,6 +56,11 @@
             <li><?php echo __('No contributors.'); ?></li>
             <?php endif; ?> 
         </ul>
+    </div>
+
+    <div class="panel">
+        <h4><?php echo __('Output Formats'); ?></h4>
+        <div><?php echo output_format_list(); ?></div>
     </div>
     <?php fire_plugin_hook('admin_collections_show_sidebar', array('view'=>$this, 'collection'=>$collection)); ?>
 </section>

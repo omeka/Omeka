@@ -19,6 +19,7 @@ class Omeka_Filter_HtmlPurifier implements Zend_Filter_Interface
         'Core.Encoding' => 'UTF-8',
         'Cache.DefinitionImpl' => null, // Caching disabled
         'Attr.AllowedFrameTargets' => array('_blank'),
+        'Attr.EnableID' => true,
         'HTML.TidyLevel' => 'none',
         'HTML.AllowedElements' => array(
             'p', 'br', 'strong', 'em', 'span', 'div', 'ul', 'ol', 'li', 'a', 

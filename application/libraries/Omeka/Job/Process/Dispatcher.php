@@ -45,7 +45,7 @@ class Omeka_Job_Process_Dispatcher
         $process->started = date('Y-m-d G:i:s');
         $process->save();
 
-        $command = escapeshellcmd($cliPath) . ' '
+        $command = escapeshellarg($cliPath) . ' '
                  . escapeshellarg(self::_getBootstrapFilePath())
                  . " -p " . escapeshellarg($process->id);
         self::_fork($command);
@@ -106,7 +106,7 @@ class Omeka_Job_Process_Dispatcher
          * php_cli_path option
          */
         // Try to execute PHP and check for appropriate version
-        $command = escapeshellcmd($cliPath).' -v';
+        $command = escapeshellarg($cliPath) . ' -v';
         $output = array();
         exec($command, $output, $returnCode);
         

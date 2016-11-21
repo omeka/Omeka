@@ -89,6 +89,8 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
         switch ($property) {
             case 'total_items':
                 return $this->totalItems();
+            case 'display_title':
+                return $this->getDisplayTitle();
             default:
                 return parent::getProperty($property);
         }

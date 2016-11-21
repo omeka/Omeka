@@ -298,18 +298,14 @@ class PluginsController extends Omeka_Controller_AbstractActionController
             return $this->_forward('method-not-allowed', 'error');
         }
 
-        $this->_helper->redirector('index');
-        $plugin = $this->_getPluginByName();
-        if (!$plugin) {
-            return;
-        }
-        
         // Check to see if the plugin exists and is installed.
-        if (!$plugin->isInstalled()) {
+        $plugin = $this->_getPluginByName();
+        if (!($plugin && $plugin->isInstalled())) {
             $this->_helper->flashMessenger(
                 __("The plugin could not be found in the '%s' directory!", $plugin->getDirectoryName()),
                 'error'
             );
+            $this->_helper->redirector('index');
             return;
         }
 
@@ -329,15 +325,11 @@ class PluginsController extends Omeka_Controller_AbstractActionController
             $message = get_specific_plugin_hook_output($plugin, 'uninstall_message');
             
             $this->view->assign(compact('plugin', 'message', 'csrf'));
-            // Cancel the redirect here.
-            $this->getResponse()->clearHeader('Location')->setHttpResponseCode(200);
             $this->render('confirm-uninstall');
+            return;
+        } else if (!$csrf->isValid($_POST)) {
+            $this->_helper->_flashMessenger(__('There was an error on the form. Please try again.'), 'error');
         } else {
-            if (!$csrf->isValid($_POST)) {
-                $this->_helper->_flashMessenger(__('There was an error on the form. Please try again.'), 'error');
-                return;
-            }
-
             // Attempt to uninstall the plugin.
             try {
                 $this->_pluginInstaller->uninstall($plugin);
@@ -357,6 +349,8 @@ class PluginsController extends Omeka_Controller_AbstractActionController
                 );
             }
         }
+
+        $this->_helper->redirector('index');
     }
     
     public function deleteAction()

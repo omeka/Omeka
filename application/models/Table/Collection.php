@@ -82,6 +82,10 @@ class Table_Collection extends Omeka_Db_Table
                 $name = strip_formatting($name);
             }
         }
+
+        if (isset($options['include_no_collection']) && $options['include_no_collection']) {
+            $pairs = array(__('No Collection')) + $pairs;
+        }
         return $pairs;
     }
     
