@@ -20,8 +20,8 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
      *  reading the current params from the request.
      * @param array $options Optional options for the search filters. Possible keys:
      * - 'remove_filter' (bool) Enable removing single filter? By default false.
-     *    When set to true, you need to pass the key in request params 
-     *    that this filter refers to. Example: 
+     *    You need to pass the key in request params that this filter refers to.
+     *    Example: 
      *    <code>
      *        // GET items/browse?search=&public=1&custom_field=xyz
      *        public function filterItemSearchFilters($displayArray, $args) {
@@ -39,10 +39,8 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
     public function itemSearchFilters(array $params = null, $options = array())
     {
         if ($params === null) {
-            $request = Zend_Controller_Front::getInstance()->getRequest(); 
-            $requestArray = $request->getParams();
-            // TODO - here I would rather use $requestArray = $request->getQuery();
-            // because $request->getParams(); contains also module, controller, action keys
+            $request = Zend_Controller_Front::getInstance()->getRequest();
+            $requestArray = $request->getQuery();
         } else {
             $requestArray = $params;
         }
