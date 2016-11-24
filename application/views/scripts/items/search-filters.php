@@ -2,7 +2,7 @@
 <?php if (!empty($displayArray) || !empty($advancedArray)): ?>
 <?php
     $url = $this->url();
-    $removeFilter = !empty($options['remove_filter']);
+    $removableFilter = !empty($removableFilter);
 ?>
 <div id="item-filters">
     <ul>
@@ -11,7 +11,7 @@
             $class = html_escape(strtolower(str_replace(' ', '-', $name)));
             $text = isset($query['value']) ? $query['value'] : $query;
             $li = html_escape(__($name)) . ': ' . html_escape($text);
-            if ($removeFilter && isset($query['key'])) {
+            if ($removableFilter && isset($query['key'])) {
                 $requestArrayCopy = $requestArray;
                 unset($requestArrayCopy[$query['key']]);
                 $params = http_build_query($requestArrayCopy);
@@ -29,7 +29,7 @@
         <?php
             $text = isset($advanced['value']) ? $advanced['value'] : $advanced;
             $li = html_escape($text);
-            if ($removeFilter && isset($advanced['key'])) {
+            if ($removableFilter && isset($advanced['key'])) {
                 $requestArrayCopy = $requestArray;
                 unset($requestArrayCopy['advanced'][$advanced['key']]);
                 $params = http_build_query($requestArrayCopy);

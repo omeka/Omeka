@@ -18,10 +18,11 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
      *
      * @param array $params Optional array of key-value pairs to use instead of
      *  reading the current params from the request.
-     * @param array $options Optional options for the search filters. Possible keys:
-     * - 'remove_filter' (bool) Enable removing single filter? By default false.
-     *    You need to pass the key in request params that this filter refers to.
-     *    Example: 
+     * @param bool $removableFilter Set to true if filters should be removable (via link). 
+     *  By default false.
+     * To support removable filters, you need to pass the key in request params 
+     * that this filter refers to.
+     * Example: 
      *    <code>
      *        // GET items/browse?search=&public=1&custom_field=xyz
      *        public function filterItemSearchFilters($displayArray, $args) {
@@ -36,7 +37,7 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
      *    </code>
      * @return string HTML output
      */
-    public function itemSearchFilters(array $params = null, $options = array())
+    public function itemSearchFilters(array $params = null, $removableFilter = false)
     {
         if ($params === null) {
             $request = Zend_Controller_Front::getInstance()->getRequest();
@@ -44,9 +45,6 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
         } else {
             $requestArray = $params;
         }
-        $options = array_merge(array(
-            'remove_filter' => false
-        ), $options);
         
         $db = get_db();
         $displayArray = array();
@@ -141,7 +139,7 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
 
         return $this->view->partial(
             'items/search-filters.php',
-            compact('displayArray', 'advancedArray', 'requestArray', 'options')
+            compact('displayArray', 'advancedArray', 'requestArray', 'removableFilter')
         );
     }
 }

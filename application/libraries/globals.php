@@ -2012,12 +2012,13 @@ function body_tag($attributes = array())
  * @package Omeka\Function\Search
  * @uses Omeka_View_Helper_ItemSearchFilters::itemSearchFilters()
  * @params array $params Params to override the ones read from the request.
- * @param array $options Options for the filters.
+ * @param bool $removableFilter Set to true if filters should be removable (via link). 
+ *  By default false.
  * @return string
  */
-function item_search_filters(array $params = null, $options = array())
+function item_search_filters(array $params = null, $removableFilter = false)
 {
-    return get_view()->itemSearchFilters($params, $options);
+    return get_view()->itemSearchFilters($params, $removableFilter);
 }
 
 /**
