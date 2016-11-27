@@ -62,8 +62,8 @@ class Models_Table_ItemTest extends PHPUnit_Framework_TestCase
 		$typeSelect = $this->table->getSelect();
 		$this->table->applySearchFilters($typeSelect, array('type' => '4'));
 		$this->assertContains("INNER JOIN omeka_item_types AS item_types ON items.item_type_id = item_types.id", (string)$typeSelect);
-		$this->assertContains("(item_types.id = '4')", $typeSelect->getPart('where'));
-		
+		$this->assertContains("(item_types.id = 4)", $typeSelect->getPart('where'));
+
 		// Test collection filter
 		$collectionSelect = $this->table->getSelect();
 		$this->table->applySearchFilters($collectionSelect, array('collection' => '2'));
