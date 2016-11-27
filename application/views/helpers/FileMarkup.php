@@ -548,7 +548,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         
         // Append a class name that corresponds to the MIME type.
         if ($wrapperAttributes) {
-            $mimeTypeClassName = str_ireplace('/', '-', $file->mime_type);
+            $mimeTypeClassName = str_replace('+', '-', str_replace('/', '-', $file->mime_type));
             if (array_key_exists('class', $wrapperAttributes)) {
                 $wrapperAttributes['class'] .= ' ' . $mimeTypeClassName;
             } else {
