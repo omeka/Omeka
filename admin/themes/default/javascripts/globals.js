@@ -27,7 +27,14 @@ if (!Omeka) {
             media_strict: false,
             width: "100%",
             autoresize_max_height: 500,
-            entities: "160,nbsp,173,shy,8194,ensp,8195,emsp,8201,thinsp,8204,zwnj,8205,zwj,8206,lrm,8207,rlm"
+            entities: "160,nbsp,173,shy,8194,ensp,8195,emsp,8201,thinsp,8204,zwnj,8205,zwj,8206,lrm,8207,rlm",
+            setup: function(editor) {
+                // TinyMCE 3.x.
+                editor.onChange.add(function(editor, l) {
+                    editor.save();
+                    Omeka.areYouSureCheck();
+                })
+            }
         };
 
         tinyMCE.init($.extend(initParams, params));
@@ -87,7 +94,6 @@ if (!Omeka) {
             }
         });
     };
-    
 
     Omeka.showAdvancedForm = function () {
         var advancedForm = $('#advanced-form');
@@ -120,6 +126,26 @@ if (!Omeka) {
             $(this).removeAttr("tabindex");
         });
     };
+
+    Omeka.areYouSure = function (params) {
+        if (params && params.form) {
+            Omeka.areYouSureForm = params.form;
+            var options = params.options || {'addRemoveFieldsMarksDirty': true};
+            $(Omeka.areYouSureForm).areYouSure(options);
+        }
+    }
+
+    Omeka.areYouSureCheck = function () {
+        if (Omeka.areYouSureForm) {
+            $(Omeka.areYouSureForm).trigger('checkform.areYouSure');
+        }
+    }
+
+    Omeka.areYouSureRescan = function () {
+        if (Omeka.areYouSureForm) {
+            $(Omeka.areYouSureForm).trigger('rescan.areYouSure');
+        }
+    }
 
     Omeka.addReadyCallback = function (callback, params) {
         this.readyCallbacks.push([callback, params]);

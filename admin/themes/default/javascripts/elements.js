@@ -52,6 +52,7 @@ Omeka.Elements = {};
                     tinyMCE.execCommand('mceRemoveControl', false, this.id);
                 });
                 fieldDiv.html(response);
+                Omeka.areYouSureRescan();
                 fieldDiv.trigger('omeka:elementformload');
             }
         });
@@ -95,6 +96,7 @@ Omeka.Elements = {};
             var fieldDiv = $(this).parents(fieldSelector);
 
             Omeka.Elements.elementFormRequest(fieldDiv, {add: '1'}, elementFormPartialUrl, recordType, recordId);
+            Omeka.areYouSureRescan();
         });
 
         // When a remove button is clicked, remove that input from the form.
@@ -124,6 +126,7 @@ Omeka.Elements = {};
                     removeButtons.hide();
                 }
             });
+            Omeka.areYouSureRescan();
         });
     };
 

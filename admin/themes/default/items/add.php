@@ -1,4 +1,4 @@
-<?php 
+<?php
 $pageTitle = __('Add an Item');
 echo head(array('title' => $pageTitle,'bodyclass' => 'items'));
 include 'form-tabs.php';
@@ -43,5 +43,4 @@ echo flash();
         </div>
     </section>
 </form>
-
 <?php echo foot();?>

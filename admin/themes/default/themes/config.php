@@ -5,7 +5,7 @@ echo common('appearance-nav');
 echo flash();
 ?>
 
-<form method="post" action="" enctype="multipart/form-data">
+<form method="post" id="theme-form" action="" enctype="multipart/form-data">
     <section class="seven columns alpha">
         <h2><?php echo __('Configure Theme: %s', html_escape($theme->title)); ?></h2>
         <p><?php echo __('Configurations apply to this theme only.'); ?></p>
