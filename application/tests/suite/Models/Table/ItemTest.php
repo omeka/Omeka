@@ -62,13 +62,13 @@ class Models_Table_ItemTest extends PHPUnit_Framework_TestCase
 		$typeSelect = $this->table->getSelect();
 		$this->table->applySearchFilters($typeSelect, array('type' => '4'));
 		$this->assertContains("INNER JOIN omeka_item_types AS item_types ON items.item_type_id = item_types.id", (string)$typeSelect);
-		$this->assertContains("(item_types.id = 4)", $typeSelect->getPart('where'));
+		$this->assertContains("(item_types.id IN (4))", $typeSelect->getPart('where'));
 
 		// Test type filter with a string
 		$typeSelect = $this->table->getSelect();
 		$this->table->applySearchFilters($typeSelect, array('type' => 'Still Image'));
 		$this->assertContains("INNER JOIN omeka_item_types AS item_types ON items.item_type_id = item_types.id", (string)$typeSelect);
-		$this->assertContains("(item_types.name = 'Still Image')", $typeSelect->getPart('where'));
+		$this->assertContains("(item_types.name IN ('Still Image'))", $typeSelect->getPart('where'));
 
 		// Test type filter with multiple strings
 		$typeSelect = $this->table->getSelect();
@@ -81,6 +81,21 @@ class Models_Table_ItemTest extends PHPUnit_Framework_TestCase
 		$this->table->applySearchFilters($typeSelect, array('type' => 0));
 		$this->assertNotContains("INNER JOIN omeka_item_types AS item_types ON items.item_type_id = item_types.id", (string)$typeSelect);
 		$this->assertContains("(items.item_type_id IS NULL)", $typeSelect->getPart('where'));
+
+		// Test type filter with a item type object
+		$type = new ItemType;
+		$type->id = 6;
+		$type->name = 'Foo';
+		$typeSelect = $this->table->getSelect();
+		$this->table->applySearchFilters($typeSelect, array('type' => $type));
+		$this->assertContains("INNER JOIN omeka_item_types AS item_types ON items.item_type_id = item_types.id", (string)$typeSelect);
+		$this->assertContains("(item_types.id IN (6))", $typeSelect->getPart('where'));
+
+		// Test type filter with multiple strings, some empty
+		$typeSelect = $this->table->getSelect();
+		$this->table->applySearchFilters($typeSelect, array('type' => array('Still Image', 'Sound', 0, $type)));
+		$this->assertContains("INNER JOIN omeka_item_types AS item_types ON items.item_type_id = item_types.id", (string)$typeSelect);
+		$this->assertContains("(item_types.id IN (6) OR item_types.name IN ('Still Image', 'Sound') OR items.item_type_id IS NULL)", $typeSelect->getPart('where'));
 
 		// Test collection filter
 		$collectionSelect = $this->table->getSelect();

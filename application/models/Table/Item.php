@@ -226,43 +226,63 @@ class Table_Item extends Omeka_Db_Table
      * Filter the SELECT statement based on the item Type
      *
      * @param Zend_Db_Select $select
-     * @param Type|integer|string|array $type One or multiple Item Type object,
-     * Item Type ID or Item Type name. Ids and names must not be mixed.
+     * @param Type|integer|string|array $types One or multiple Item Type object,
+     * Item Type ID or Item Type name.
      * @return void
      */
-    public function filterByItemType($select, $type)
+    public function filterByItemType($select, $types)
     {
-        if ($type === 0 || $type === '0') {
-            $select->where('items.item_type_id IS NULL');
-            return;
+        if (!is_array($types)) {
+            $types = array($types);
         }
-        if ($type instanceof ItemType) {
-            $select->where('item_types.id = ?', $type->id);
-        } elseif (is_numeric($type)) {
-            $select->where('item_types.id = ?', (int) $type);
-        } elseif (is_string($type)) {
-            $select->where('item_types.name = ?', $type);
-        } elseif (is_array($type)) {
-            $types = array_filter(array_map(function($v) {
-                return $v instanceof ItemType ? $v->id : (is_numeric($v) ? (int) $v : (string) $v);
-            }, $type));
-            if (empty($types)) {
+
+        $typeIdsOrNames = array_map(function($type) {
+            if ($type === 0 || $type === '0') {
                 return;
             }
-            $typeIds = array_filter($types, 'is_integer');
-            $typeNames = array_diff($types, $typeIds);
-            if ($typeIds) {
-                $select->where('item_types.id IN (?)', $typeIds);
+            if ($type instanceof ItemType) {
+                return (int) $type->id;
             }
-            elseif ($typeNames) {
-                $select->where('item_types.name IN (?)', $typeNames);
+            if (is_numeric($type)) {
+                return (int) $type;
             }
-        } else {
+            if (is_string($type)) {
+                return $type;
+            }
             return;
+        }, $types);
+
+
+        $hasEmpty = in_array(null, $typeIdsOrNames);
+        $typeIdsOrNames = array_filter($typeIdsOrNames);
+        if ($typeIdsOrNames) {
+            $select->joinInner(array(
+                'item_types' => $this->getDb()->ItemType),
+                'items.item_type_id = item_types.id',
+                array());
+            $typeIds = array_filter($typeIdsOrNames, 'is_integer');
+            $typeNames = array_diff($typeIdsOrNames, $typeIds);
+            if (!empty($typeIds)) {
+                if (!empty($typeNames)) {
+                    $conditions = 'item_types.id IN (' . implode(',', $typeIds) . ') OR item_types.name IN (?)';
+                    $bind = array($typeNames);
+                } else {
+                    $conditions = 'item_types.id IN (?)';
+                    $bind = array($typeIds);
+                }
+            } else {
+                $conditions = 'item_types.name IN (?)';
+                $bind = array($typeNames);
+            }
+            if ($hasEmpty) {
+                $conditions .= ' OR items.item_type_id IS NULL';
+            }
+            $select->where($conditions, $bind);
         }
-        $select->joinInner(array('item_types' => $this->getDb()->ItemType),
-            'items.item_type_id = item_types.id',
-            array());
+        // Check no collection only.
+        elseif ($hasEmpty) {
+            $select->where('items.item_type_id IS NULL');
+        }
     }
 
     /**
