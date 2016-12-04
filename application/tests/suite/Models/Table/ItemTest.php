@@ -86,7 +86,7 @@ class Models_Table_ItemTest extends PHPUnit_Framework_TestCase
 		$collectionSelect = $this->table->getSelect();
 		$this->table->applySearchFilters($collectionSelect, array('collection' => '2'));
 		$this->assertContains("INNER JOIN omeka_collections AS collections ON items.collection_id = collections.id", (string)$collectionSelect);
-		$this->assertContains("(collections.id = 2)", $collectionSelect->getPart('where'));
+		$this->assertContains("(collections.id IN (2))", $collectionSelect->getPart('where'));
 
 		// Test collection filter with multiple collections
 		$collectionSelect = $this->table->getSelect();
@@ -99,6 +99,12 @@ class Models_Table_ItemTest extends PHPUnit_Framework_TestCase
 		$this->table->applySearchFilters($collectionSelect, array('collection' => 0));
 		$this->assertNotContains("INNER JOIN omeka_collections AS collections ON items.collection_id = collections.id", (string)$collectionSelect);
 		$this->assertContains("(items.collection_id IS NULL)", $collectionSelect->getPart('where'));
+
+		// Test collection filter with multiple collections, some empty.
+		$collectionSelect = $this->table->getSelect();
+		$this->table->applySearchFilters($collectionSelect, array('collection' => array(null, '2', 3, 0)));
+		$this->assertContains("INNER JOIN omeka_collections AS collections ON items.collection_id = collections.id", (string)$collectionSelect);
+		$this->assertContains('(collections.id IN (2, 3) OR (items.collection_id IS NULL))', $collectionSelect->getPart('where'));
 
 		// Test hasImage filter
         $hasDerivativeImageSelect = $this->table->getSelect();

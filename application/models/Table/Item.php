@@ -179,36 +179,47 @@ class Table_Item extends Omeka_Db_Table
      * Filter the SELECT statement based on an item's collection
      *
      * @param Zend_Db_Select $select
-     * @param Collection|integer|array $collection Either a Collection object,
+     * @param Collection|integer|array $collections Either a Collection object,
      * or the collection id or an array of collection object or id.
      * @return void
      */
-    public function filterByCollection($select, $collection)
+    public function filterByCollection($select, $collections)
     {
-        if ($collection === 0 || $collection === '0') {
-            $select->where('items.collection_id IS NULL');
-            return;
-        }
-        if ($collection instanceof Collection) {
-            $select->where('collections.id = ?', $collection->id);
-        } elseif (is_numeric($collection)) {
-            $select->where('collections.id = ?', (int) $collection);
-        } elseif (is_array($collection)) {
-            $collections = array_filter(array_map(function($v) {
-                return $v instanceof Collection ? $v->id : (is_numeric($v) ? (int) $v : null);
-            }, $collection));
-            if (empty($collections)) {
-                return;
-            }
-            $select->where('collections.id IN (?)', $collections);
-        } else {
-            return;
+        if (!is_array($collections)) {
+            $collections = array($collections);
         }
 
-        $select->joinInner(
-            array('collections' => $this->getDb()->Collection),
-            'items.collection_id = collections.id',
-            array());
+        $collectionIds = array_map(function($collection) {
+            if ($collection === 0 || $collection === '0') {
+                return;
+            }
+            if ($collection instanceof Collection) {
+                return (int) $collection->id;
+            }
+            if (is_numeric($collection)) {
+                return (int) $collection;
+            }
+            return;
+        }, $collections);
+
+
+        $hasEmpty = in_array(null, $collectionIds);
+        $collectionIds = array_filter($collectionIds);
+        if (!empty($collectionIds)) {
+            $select->joinInner(
+                array('collections' => $this->getDb()->Collection),
+                'items.collection_id = collections.id',
+                array());
+            $condition = 'collections.id IN (?)';
+            if ($hasEmpty) {
+                $condition .= ' OR items.collection_id IS NULL';
+            }
+            $select->where($condition, $collectionIds);
+        }
+        // Check no collection only.
+        elseif ($hasEmpty) {
+            $select->where('items.collection_id IS NULL');
+        }
     }
 
     /**
