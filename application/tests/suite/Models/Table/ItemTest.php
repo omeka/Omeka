@@ -88,11 +88,19 @@ class Models_Table_ItemTest extends PHPUnit_Framework_TestCase
 		$this->assertContains("INNER JOIN omeka_collections AS collections ON items.collection_id = collections.id", (string)$collectionSelect);
 		$this->assertContains("(collections.id IN (2))", $collectionSelect->getPart('where'));
 
+		// Test collection filter with a collection object
+		$collection = new Collection;
+		$collection->id = 5;
+		$collectionSelect = $this->table->getSelect();
+		$this->table->applySearchFilters($collectionSelect, array('collection' => $collection));
+		$this->assertContains("INNER JOIN omeka_collections AS collections ON items.collection_id = collections.id", (string)$collectionSelect);
+		$this->assertContains("(collections.id IN (5))", $collectionSelect->getPart('where'));
+
 		// Test collection filter with multiple collections
 		$collectionSelect = $this->table->getSelect();
-		$this->table->applySearchFilters($collectionSelect, array('collection' => array('2', 3)));
+		$this->table->applySearchFilters($collectionSelect, array('collection' => array('2', 3, $collection)));
 		$this->assertContains("INNER JOIN omeka_collections AS collections ON items.collection_id = collections.id", (string)$collectionSelect);
-		$this->assertContains("(collections.id IN (2, 3))", $collectionSelect->getPart('where'));
+		$this->assertContains("(collections.id IN (2, 3, 5))", $collectionSelect->getPart('where'));
 
 		// Test collection filter with no collection
 		$collectionSelect = $this->table->getSelect();
@@ -100,11 +108,17 @@ class Models_Table_ItemTest extends PHPUnit_Framework_TestCase
 		$this->assertNotContains("INNER JOIN omeka_collections AS collections ON items.collection_id = collections.id", (string)$collectionSelect);
 		$this->assertContains("(items.collection_id IS NULL)", $collectionSelect->getPart('where'));
 
+		// Test collection filter with a collection null
+		$collectionSelect = $this->table->getSelect();
+		$this->table->applySearchFilters($collectionSelect, array('collection' => null));
+		$this->assertNotContains("INNER JOIN omeka_collections AS collections ON items.collection_id = collections.id", (string)$collectionSelect);
+		$this->assertNotContains("(items.collection_id IS NULL)", $collectionSelect->getPart('where'));
+
 		// Test collection filter with multiple collections, some empty.
 		$collectionSelect = $this->table->getSelect();
-		$this->table->applySearchFilters($collectionSelect, array('collection' => array(null, '2', 3, 0)));
+		$this->table->applySearchFilters($collectionSelect, array('collection' => array(null, '2', 3, 0, $collection)));
 		$this->assertContains("INNER JOIN omeka_collections AS collections ON items.collection_id = collections.id", (string)$collectionSelect);
-		$this->assertContains('(collections.id IN (2, 3) OR (items.collection_id IS NULL))', $collectionSelect->getPart('where'));
+		$this->assertContains('(collections.id IN (2, 3, 5) OR items.collection_id IS NULL)', $collectionSelect->getPart('where'));
 
 		// Test hasImage filter
         $hasDerivativeImageSelect = $this->table->getSelect();
