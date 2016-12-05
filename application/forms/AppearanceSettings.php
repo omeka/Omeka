@@ -20,6 +20,7 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
 
         $this->addElement('checkbox', 'use_square_thumbnail', array(
             'label' => __('Use Square Thumbnails'),
+            'description' => __('Use square-cropped images wherever thumbnails appear in the public interface.'),
             'class' => 'checkbox',
             'value' => 1
         ));
