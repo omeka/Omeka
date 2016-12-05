@@ -18,8 +18,7 @@ $collectionTitle = metadata('collection', 'display_title');
 
             <?php if (metadata('item', 'has thumbnail')): ?>
             <div class="item-img">
-                <?php $useSquareThumbnail = (option('use_square_thumbnail')) ? 'square_thumbnail' : 'thumbnail'; ?>
-                <?php echo link_to_item(item_image($useSquareThumbnail, array('alt' => $itemTitle))); ?>
+                <?php echo link_to_item(item_image(null, array('alt' => $itemTitle))); ?>
             </div>
             <?php endif; ?>
 
