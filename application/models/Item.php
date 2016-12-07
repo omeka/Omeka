@@ -398,7 +398,7 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      */
     public function previous()
     {
-        $previousItem = apply_filters('item_previous', null, ['item' => $this]);
+        $previousItem = apply_filters('item_previous', null, array('item' => $this));
         if ($previousItem) {
             return $previousItem;
         }
@@ -413,7 +413,7 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      */
     public function next()
     {
-        $nextItem = apply_filters('item_next', null, ['item' => $this]);
+        $nextItem = apply_filters('item_next', null, array('item' => $this));
         if ($nextItem) {
             return $nextItem;
         }
