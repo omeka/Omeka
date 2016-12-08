@@ -2689,7 +2689,7 @@ function nav(array $navLinks, $name = null, array $args = array())
     }
 
     $menu = get_view()->navigation()->menu(new Omeka_Navigation($navLinks))
-        ->addaddPageClassToLi(!empty($args['li_class']));
+        ->addPageClassToLi(!empty($args['li_class']));
 
     if ($acl = get_acl()) {
         $menu->setRole(current_user())->setAcl($acl);
