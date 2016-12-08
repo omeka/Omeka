@@ -2676,7 +2676,8 @@ function link_to_admin_home_page($text = null, $props = array())
  * @param array $navLinks The array of links for the navigation.
  * @param string $name Optionally, the name of a filter to pass the links
  *  through before using them.
- * @param array $args Optionally, arguments to pass to the filter
+ * @param array $args Optionally, arguments to pass to the filter. Predefined:
+ *  - 'li_class' bool - should be used provided class for <li> instead of <a> tag? By default false.
  *
  * @return Zend_View_Helper_Navigation_Menu The navigation menu object. Can
  *  generally be treated simply as a string.
@@ -2687,7 +2688,8 @@ function nav(array $navLinks, $name = null, array $args = array())
         $navLinks = apply_filters($name, $navLinks, $args);
     }
 
-    $menu = get_view()->navigation()->menu(new Omeka_Navigation($navLinks));
+    $menu = get_view()->navigation()->menu(new Omeka_Navigation($navLinks))
+        ->addaddPageClassToLi(!empty($args['li_class']));
 
     if ($acl = get_acl()) {
         $menu->setRole(current_user())->setAcl($acl);
