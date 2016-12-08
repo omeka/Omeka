@@ -11,8 +11,10 @@
  */
 class Omeka_View_Helper_MaxFileSize extends Zend_View_Helper_Abstract
 {
+    const MEGABYTE_BYTES = 1048576;
+
     /**
-     * @var Zend_Measure_Binary
+     * @var string
      */
     protected $_maxFileSize;
     
@@ -25,60 +27,56 @@ class Omeka_View_Helper_MaxFileSize extends Zend_View_Helper_Abstract
     public function __construct()
     {
         // Compare core php.ini directives that affect maximum file size.
-        $postMaxSize = $this->_getSizeMeasure(ini_get('post_max_size'));
-        $uploadMaxFilesize = $this->_getSizeMeasure(ini_get('upload_max_filesize'));
-        $maxFileSize = (0 > $postMaxSize->compare($uploadMaxFilesize)) 
-                     ? $postMaxSize : $uploadMaxFilesize;
+        $postMaxSize = $this->_parseSize(ini_get('post_max_size'));
+        $uploadMaxFilesize = $this->_parseSize(ini_get('upload_max_filesize'));
+        $maxFileSize = min($postMaxSize, $uploadMaxFilesize);
         
         // Compare to file.maxSize in config.ini.
         $config = Zend_Registry::get('bootstrap')->getResource('Config');
         if (isset($config->upload->maxFileSize)) {
-            $configMaxSize = $this->_getSizeMeasure($config->upload->maxFileSize);
+            $configMaxSize = $this->_parseSize($config->upload->maxFileSize);
             if ($configMaxSize) {
-                $maxFileSize = (0 > $maxFileSize->compare($configMaxSize)) 
-                             ? $maxFileSize : $configMaxSize;
+                $maxFileSize = min($maxFileSize, $configMaxSize);
             }
         }
         
-        $this->_maxFileSize = $maxFileSize;
+        $megabytes = round($maxFileSize / self::MEGABYTE_BYTES);
+        $this->_maxFileSize = __('%s MB', $megabytes);
     }
     
     /**
      * Return the maximum file size.
      * 
-     * @return Zend_Measure_Binary
+     * @return string
      */
     public function maxFileSize()
     {
         return $this->_maxFileSize;
     }
-    
+
     /**
-     * Get the binary measurements for file size.
-     * 
-     * @param string|int $size
-     * @return Zend_Measure_Binary
+     * Get the size in bytes represented by the given php ini config string
+     *
+     * @param string $sizeString
+     * @return int Size in bytes
      */
-    protected function _getSizeMeasure($size)
+    protected function _parseSize($sizeString)
     {
-        // Check for a valid size.
-        if (!preg_match('/(\d+)([KMG]?)/i', $size, $matches)) {
-            return false;
+        $value = intval($sizeString);
+        $lastChar = substr($sizeString, -1);
+        // Note: these cases fall through purposely
+        switch ($lastChar) {
+            case 'g':
+            case 'G':
+                $value *= 1024;
+            case 'm':
+            case 'M':
+                $value *= 1024;
+            case 'k':
+            case 'K':
+                $value *= 1024;
         }
-        
-        // The default size type is bytes.
-        $sizeType = Zend_Measure_Binary::BYTE;
-        
-        // Check for larger size types.
-        $sizeTypes = array(
-            'K' => Zend_Measure_Binary::KILOBYTE,
-            'M' => Zend_Measure_Binary::MEGABYTE,
-            'G' => Zend_Measure_Binary::GIGABYTE,
-        );
-        if (array_key_exists($matches[2], $sizeTypes)) {
-            $sizeType = $sizeTypes[$matches[2]];
-        }
-        
-        return new Zend_Measure_Binary($matches[1], $sizeType);
+
+        return $value;
     }
 }

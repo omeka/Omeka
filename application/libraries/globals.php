@@ -1393,7 +1393,7 @@ function latest_omeka_version()
  * Get the maximum file upload size.
  *
  * @package Omeka\Function\Utility
- * @return Zend_Measure_Binary
+ * @return string
  */
 function max_file_size()
 {
