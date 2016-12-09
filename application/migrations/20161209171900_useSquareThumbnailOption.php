@@ -9,7 +9,7 @@
 /**
  * @package Omeka\Db\Migration
  */
-class useSquareThumbnailsOption extends Omeka_Db_Migration_AbstractMigration
+class useSquareThumbnailOption extends Omeka_Db_Migration_AbstractMigration
 {
     public function up()
     {
