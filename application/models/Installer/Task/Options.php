@@ -42,7 +42,7 @@ class Installer_Task_Options implements Installer_TaskInterface
         'api_enable',
         'api_per_page',
         'show_element_set_headings',
-        'use_square_thumbnails'
+        'use_square_thumbnail'
     );
     
     private $_options = array();
