@@ -2114,7 +2114,7 @@ function get_previous_item($item = null)
  * @param array $props HTML attributes for the img tag
  * @return string
  */
-function record_image($record, $imageType, $props = array())
+function record_image($record, $imageType = null, $props = array())
 {
     if (is_string($record)) {
         $record = get_current_record($record);
@@ -2123,7 +2123,6 @@ function record_image($record, $imageType, $props = array())
     if (!($record instanceof Omeka_Record_AbstractRecord)) {
         throw new InvalidArgumentException('An Omeka record must be passed to record_image.');
     }
-
     $fileMarkup = new Omeka_View_Helper_FileMarkup;
     return $fileMarkup->image_tag($record, $props, $imageType);
 }
@@ -2139,7 +2138,7 @@ function record_image($record, $imageType, $props = array())
  *  is the first file.
  * @param Item|null Check for this specific item record (current item if null).
  */
-function item_image($imageType, $props = array(), $index = 0, $item = null)
+function item_image($imageType = null, $props = array(), $index = 0, $item = null)
 {
     if (!$item) {
         $item = get_current_record('item');

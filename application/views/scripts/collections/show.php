@@ -18,7 +18,7 @@ $collectionTitle = metadata('collection', 'display_title');
 
             <?php if (metadata('item', 'has thumbnail')): ?>
             <div class="item-img">
-                <?php echo link_to_item(item_image('square_thumbnail', array('alt' => $itemTitle))); ?>
+                <?php echo link_to_item(item_image(null, array('alt' => $itemTitle))); ?>
             </div>
             <?php endif; ?>
 
