@@ -2123,7 +2123,9 @@ function record_image($record, $imageType = null, $props = array())
     if (!($record instanceof Omeka_Record_AbstractRecord)) {
         throw new InvalidArgumentException('An Omeka record must be passed to record_image.');
     }
-
+    if (!$imageType) {
+        $imageType = (option('use_square_thumbnail') == 1) ? 'square_thumbnail' : 'thumbnail';
+    }
     $fileMarkup = new Omeka_View_Helper_FileMarkup;
     return $fileMarkup->image_tag($record, $props, $imageType);
 }
@@ -2141,6 +2143,10 @@ function record_image($record, $imageType = null, $props = array())
  */
 function item_image($imageType = null, $props = array(), $index = 0, $item = null)
 {
+    if (!$imageType) {
+        $imageType = (option('use_square_thumbnail') == 1) ? 'square_thumbnail' : 'thumbnail';
+    }
+
     if (!$item) {
         $item = get_current_record('item');
     }
