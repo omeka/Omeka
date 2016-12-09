@@ -540,6 +540,11 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         // There is a chance that $props passed in could modify the callback
         // that is used.  Currently used to determine whether or not to display
         // an icon.
+
+        if (!isset($props['imageSize'])) {
+            $props['imageSize'] = (option('use_square_thumbnail') == 1) ? 'square_thumbnail' : 'thumbnail';
+        }
+
         $callback = $this->getCallback($file, $props);   
         
         $options = array_merge($this->getDefaultOptions($callback), $props);
@@ -590,6 +595,10 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         $file = $record->getFile();
         if (!$file) {
             return false;
+        }
+
+        if (!$format) {
+            $format = (option('use_square_thumbnail') == 1) ? 'square_thumbnail' : 'thumbnail';
         }
 
         if ($file->hasThumbnail()) {
