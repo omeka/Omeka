@@ -118,7 +118,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
             'linkText' => null, 
             ),
         'derivativeImage'=>array(
-            'imageSize'=>'square_thumbnail',
+            'imageSize'=>null,
             'linkToFile'=>true,
             'linkToMetadata'=>false,
             'imgAttributes' => array()
@@ -443,13 +443,14 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         // Should we ever include more image sizes by default, this will be 
         // easier to modify.        
         $imgClasses = array(
+            null => 'thumb',
             'thumbnail'=>'thumb', 
             'square_thumbnail'=>'thumb', 
             'fullsize'=>'full');
         $imageSize = $options['imageSize'];
         
         // If we can make an image from the given image size.
-        if (in_array($imageSize, array_keys($imgClasses))) {
+        if (array_key_exists($imageSize, $imgClasses)) {
             
             // A class is given to all of the images by default to make it 
             // easier to style. This can be modified by passing it in as an 
@@ -540,10 +541,6 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         // There is a chance that $props passed in could modify the callback
         // that is used.  Currently used to determine whether or not to display
         // an icon.
-
-        if (!isset($props['imageSize'])) {
-            $props['imageSize'] = (option('use_square_thumbnail') == 1) ? 'square_thumbnail' : 'thumbnail';
-        }
 
         $callback = $this->getCallback($file, $props);   
         
