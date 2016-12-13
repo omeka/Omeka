@@ -595,7 +595,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         }
 
         if (!$format) {
-            $format = (option('use_square_thumbnail') == 1) ? 'square_thumbnail' : 'thumbnail';
+            $format = (get_option('use_square_thumbnail') == 1) ? 'square_thumbnail' : 'thumbnail';
         }
 
         if ($file->hasThumbnail()) {
