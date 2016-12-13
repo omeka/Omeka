@@ -23,6 +23,7 @@ class Installer_Requirements
     public function check()
     {
         $this->_checkPhpVersionIsValid();
+        $this->_checkPhpExtensionsAreAvailable();
         $this->_checkMysqliIsAvailable();
         $this->_checkMysqlVersionIsValid();
         $this->_checkHtaccessFilesExist();
@@ -71,6 +72,22 @@ class Installer_Requirements
             installed. <a href=\"http://www.php.net/manual/en/migration5.php\">Instructions 
             for upgrading</a> are on the PHP website.";
             $this->_errorMessages[] = compact('header', 'message');
+        }
+    }
+
+    private function _checkPhpExtensionsAreAvailable()
+    {
+        $requiredExtensions = array('dom', 'filter');
+        foreach ($requiredExtensions as $extension) {
+            if (!extension_loaded($extension)) {
+                $header = "$extension extension is not available";
+                $message = <<<ERR
+The $extension PHP extension is required for Omeka to run.
+Please check with your server administrator to enable this extension and then
+try again.
+ERR;
+                $this->_errorMessages[] = compact('header', 'message');
+            }
         }
     }
     
