@@ -126,7 +126,8 @@ class Installer_Default implements Installer_InstallerInterface
             'search_record_types' => serialize(get_search_record_types()), 
             'api_enable' => false, 
             'api_per_page' => 50,
-            'show_element_set_headings' => 1
+            'show_element_set_headings' => 1,
+            'use_square_thumbnail' => 1
         ));
         $task->install($this->_db);
     }

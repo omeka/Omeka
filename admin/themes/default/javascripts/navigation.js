@@ -15,9 +15,6 @@ Omeka.Navigation = {};
             placeholder: 'ui-sortable-highlight',
             forcePlaceholderSize: true,
             containment: 'document',
-            update: function (event, ui) {
-                $('#navigation_form.warn-no-save').submit();
-            }
         });
         
         $('div.sortable-item input[type="checkbox"]').click(function(e) {
@@ -188,9 +185,6 @@ Omeka.Navigation = {};
             // store link data in hidden element
             $('#navigation_hidden').val(JSON.stringify(linkData)); 
         });
-
-        // Set the true initial input values for are-you-sure.
-        $('#navigation_form.warn-no-save').submit();
     };
 
     Omeka.Navigation.updateForNewLinks = function () {

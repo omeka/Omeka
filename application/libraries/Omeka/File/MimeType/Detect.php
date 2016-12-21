@@ -128,6 +128,28 @@ class Omeka_File_MimeType_Detect
             $this->_mimeType = (false === $fallbackMimeType) ? 'application/octet-stream' : $fallbackMimeType;
         }
         
+        // Detect some common "plain text" via the extension. Most important
+        // ones are json and xml.
+        if ($this->_mimeType == 'text/plain') {
+            $extensions = array(
+                'css' => 'text/css',
+                'csv' => 'text/csv',
+                'htm' => 'text/html',
+                'html' => 'text/html',
+                'json' => 'application/json',
+                'marc' => 'application/marc',
+                'md' => 'text/markdown',
+                'rtf' => 'text/rtf',
+                'tsv' => 'text/tab-separated-values',
+                'xhtml' => 'application/xhtml+xml',
+                'xml' => 'text/xml',
+            );
+            $extension = strtolower(pathinfo($this->_file, PATHINFO_EXTENSION));
+            if (isset($extensions[$extension])) {
+                $this->_mimeType = $extensions[$extension];
+            }
+        }
+
         // Return the definitive MIME type.
         return $this->_mimeType;
     }

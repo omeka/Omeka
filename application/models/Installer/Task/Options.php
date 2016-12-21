@@ -42,7 +42,8 @@ class Installer_Task_Options implements Installer_TaskInterface
         'search_record_types',
         'api_enable',
         'api_per_page',
-        'show_element_set_headings'
+        'show_element_set_headings',
+        'use_square_thumbnail'
     );
     
     private $_options = array();

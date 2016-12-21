@@ -74,6 +74,7 @@ class Installer_Task_OptionsTest extends PHPUnit_Framework_TestCase
             'api_enable' => true,
             'api_per_page' => 50,
             'show_element_set_headings' => '1',
+            'use_square_thumbnail' => '1'
         ));
         try {
             $task->install($this->db);
@@ -118,6 +119,7 @@ class Installer_Task_OptionsTest extends PHPUnit_Framework_TestCase
             'api_enable' => true,
             'api_per_page' => 50,
             'show_element_set_headings' => '1',
+            'use_square_thumbnail' => '1'
         ));
         $task->install($this->db);
         $this->profilerHelper->assertDbQuery(array(
