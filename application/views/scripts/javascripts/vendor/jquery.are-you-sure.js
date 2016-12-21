@@ -57,7 +57,7 @@ $.fn.areYouSure = function(options) {
         switch (type) {
             case 'checkbox':
             case 'radio':
-                val = $field.is(':checked');
+                val = +$field.is(':checked');
                 break;
             case 'select':
                 val = $field.val();
@@ -99,6 +99,10 @@ $.fn.areYouSure = function(options) {
     if (!window.aysUnloadSet) {
         window.aysUnloadSet = true;
         $(window).on('beforeunload', function() {
+            // force tinyMCE to save current value, so we get it fresh in serializeForm()
+            if (window.tinyMCE) { 
+                tinyMCE.triggerSave(); 
+            }
             $dirtyForms = $('form.' + settings.watchClass).filter(function() {
                 var $form = $(this);
                 return !$form.data('ays-ignore') && (getOrigState($form) != serializeForm($form));
