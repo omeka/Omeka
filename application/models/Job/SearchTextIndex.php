@@ -93,7 +93,7 @@ class Job_SearchTextIndex extends Omeka_Job_AbstractJob
             $recordTableAlias = $recordTable->getTableAlias();
             $pageNumber = 0;
             $perPpage = 100;
-            // Find all record by given list of ids (paginated by 100).
+            // Find all records by given list of ids (paginated by 100).
             while ($ids = array_slice($recordMap[$recordType], $pageNumber * $perPpage, $perPpage)) {
                 $recordObjects = $recordTable->fetchObjects($recordTable->getSelect()->where("$recordTableAlias.id IN (?)", $ids));
                 foreach ($recordObjects as $recordObject) {
