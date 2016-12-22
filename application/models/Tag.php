@@ -28,7 +28,25 @@ class Tag extends Omeka_Record_AbstractRecord {
     public function __toString() {
         return $this->name;
     }
-    
+    /**
+     * Executes after the record is inserted.
+     */
+    protected function afterSave($args) {
+        // on tag name change/update, run SearchIndex for all record types using this tag
+        if (!empty($args['post']['nameChanged'])) {
+            $db = $this->getDb();
+            $sql = "
+                SELECT `record_type`, `record_id`
+                FROM `{$db->RecordsTags}`
+                WHERE `tag_id` = " . (int) $this->id;
+            // safer to pass SQL here, it's unclear how many records needs to be updated, 
+            // and `args` column in `processes` table is only TEXT data type
+            Zend_Registry::get('bootstrap')->getResource('jobs')
+                ->sendLongRunning('Job_SearchTextIndex', array(
+                    'sql' => $sql
+                ));
+        }
+    }
     /**
      * Delete handling for a tag.
      * 
