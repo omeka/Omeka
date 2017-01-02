@@ -16,7 +16,7 @@
                 unset($requestArrayCopy[$query['key']]);
                 $params = http_build_query($requestArrayCopy);
                 $href = $url . (strlen($params) ? '?'. $params : '');
-                $li = '<a href="'. $href .'" class="search-filter">'. $li .'</a>';
+                $li = '<a href="'. $href .'" class="search-filter">'. $li .' <span>&times;</span></a>';
                 unset($requestArrayCopy, $params, $href);
             }
         ?>
@@ -34,7 +34,7 @@
                 unset($requestArrayCopy['advanced'][$advanced['key']]);
                 $params = http_build_query($requestArrayCopy);
                 $href = $url . (strlen($params) ? '?'. $params : '');
-                $li = '<a href="'. $href .'" class="search-filter">'. $li .'</a>';
+                $li = '<a href="'. $href .'" class="search-filter">'. $li .' <span>&times;</span></a>';
                 unset($requestArrayCopy, $params, $href);
             }
         ?>

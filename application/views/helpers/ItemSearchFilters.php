@@ -18,11 +18,11 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
      *
      * @param array $params Optional array of key-value pairs to use instead of
      *  reading the current params from the request.
-     * @param bool $removableFilter Set to true if filters should be removable (via link). 
-     *  By default false.
-     * To support removable filters, you need to pass the key in request params 
-     * that this filter refers to.
-     * Example: 
+     * @param bool $removableFilter Set to true if filters should be removable (via link).  
+     *  By default false. 
+     *  To support removable filters, you need to pass the key in request params 
+     *  that this filter refers to.
+     *  Example: 
      *    <code>
      *        // GET items/browse?search=&public=1&custom_field=xyz
      *        public function filterItemSearchFilters($displayArray, $args) {
@@ -35,9 +35,10 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
      *            return $displayArray;
      *        }
      *    </code>
+     * @param array $options Additional options for the filters.
      * @return string HTML output
      */
-    public function itemSearchFilters(array $params = null, $removableFilter = false)
+    public function itemSearchFilters(array $params = null, $removableFilter = false, $options = array())
     {
         if ($params === null) {
             $request = Zend_Controller_Front::getInstance()->getRequest();
@@ -45,7 +46,7 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
         } else {
             $requestArray = $params;
         }
-        
+
         $db = get_db();
         $displayArray = array();
         foreach ($requestArray as $key => $value) {
@@ -139,7 +140,7 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
 
         return $this->view->partial(
             'items/search-filters.php',
-            compact('displayArray', 'advancedArray', 'requestArray', 'removableFilter')
+            compact('displayArray', 'advancedArray', 'requestArray', 'removableFilter', 'options')
         );
     }
 }
