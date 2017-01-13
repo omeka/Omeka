@@ -15,6 +15,9 @@ Omeka.Navigation = {};
             placeholder: 'ui-sortable-highlight',
             forcePlaceholderSize: true,
             containment: 'document',
+            change: function () {
+                $('#navigation_form').data('omekaFormDirty', true);
+            }
         });
         
         $('div.sortable-item input[type="checkbox"]').click(function(e) {
