@@ -490,6 +490,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
         $form->addElement('hash', 'confirm_delete_hash');
         $form->addElement('submit', 'Delete', array('class' => 'delete red button'));
         $form->setAction($this->view->url(array('action' => 'delete')));
+        $form->setAttrib('class', 'delete-confirm');
         return $form;
     }
 }

@@ -145,6 +145,7 @@ if (!Omeka) {
     };
 
     Omeka.warnIfUnsaved = function() {
+        var deleteConfirmed = false;
         var setSubmittedFlag = function () {
             $(this).data('omekaFormSubmitted', true);
         };
@@ -161,13 +162,17 @@ if (!Omeka) {
             form.submit(setSubmittedFlag);
         });
 
+        $('body').on('submit', 'form.delete-confirm', function () {
+            deleteConfirmed = true;
+        });
+
         $(window).on('beforeunload', function() {
             var preventNav = false;
             formsToCheck.each(function () {
                 var form = $(this);
                 var originalData = form.data('omekaFormOriginalData');
                 var hasFile = false;
-                if (form.data('omekaFormSubmitted')) {
+                if (form.data('omekaFormSubmitted') || deleteConfirmed) {
                     return;
                 }
 
