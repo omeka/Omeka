@@ -191,7 +191,7 @@ class Table_Item extends Omeka_Db_Table
 
         $collectionIds = array_map(function($collection) {
             if ($collection === 0 || $collection === '0') {
-                return;
+                return null;
             }
             if ($collection instanceof Collection) {
                 return (int) $collection->id;
@@ -206,7 +206,7 @@ class Table_Item extends Omeka_Db_Table
         $hasEmpty = in_array(null, $collectionIds);
         $collectionIds = array_filter($collectionIds);
         if (!empty($collectionIds)) {
-            $select->joinInner(
+            $select->joinLeft(
                 array('collections' => $this->getDb()->Collection),
                 'items.collection_id = collections.id',
                 array());
@@ -238,7 +238,7 @@ class Table_Item extends Omeka_Db_Table
 
         $typeIdsOrNames = array_map(function($type) {
             if ($type === 0 || $type === '0') {
-                return;
+                return null;
             }
             if ($type instanceof ItemType) {
                 return (int) $type->id;
@@ -256,7 +256,7 @@ class Table_Item extends Omeka_Db_Table
         $hasEmpty = in_array(null, $typeIdsOrNames);
         $typeIdsOrNames = array_filter($typeIdsOrNames);
         if ($typeIdsOrNames) {
-            $select->joinInner(array(
+            $select->joinLeft(array(
                 'item_types' => $this->getDb()->ItemType),
                 'items.item_type_id = item_types.id',
                 array());
