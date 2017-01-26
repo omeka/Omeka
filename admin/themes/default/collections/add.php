@@ -1,9 +1,8 @@
-<?php 
+<?php
 echo head(array('title' => __('Add a Collection'), 'bodyclass'=>'collections'));
 include 'form-tabs.php';
 echo flash();
 ?>
-
 <form method="post" enctype="multipart/form-data" id="collection-form" action="">
     <?php include 'form.php'; ?>
     <section class="three columns omega">

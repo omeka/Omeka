@@ -25,6 +25,7 @@ class Installer_Task_Options implements Installer_TaskInterface
         'per_page_admin',
         'per_page_public',
         'show_empty_elements',
+        'warn_unsaved_form',
         'path_to_convert',
         Theme::ADMIN_THEME_OPTION,
         Theme::PUBLIC_THEME_OPTION,

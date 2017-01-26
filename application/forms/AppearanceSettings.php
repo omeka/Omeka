@@ -69,6 +69,12 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
             'class' => 'checkbox',
         ));
 
+        $this->addElement('checkbox', 'warn_unsaved_form', array(
+            'label' => __('Warn Unsaved Form'),
+            'description' => __('Alert curators to unsaved changes in a form if they attempt to close the browser or navigate away from the page.'),
+            'class' => 'checkbox',
+        ));
+
         $adminThemes = Theme::getAllAdminThemes();
         if (count($adminThemes) > 1 && is_allowed('Themes', 'edit')) {
             foreach ($adminThemes as &$theme) {
@@ -94,8 +100,8 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
 
         $this->addDisplayGroup(
             array(
-                'use_square_thumbnail', 'per_page_admin', 'per_page_public',
-                'show_empty_elements', 'show_element_set_headings',
+                'use_square_thumbnail', 'per_page_admin', 'per_page_public', 
+                'show_empty_elements', 'show_element_set_headings', 'warn_unsaved_form',
             ),
             'display-settings', array('legend' => __('Display Settings'))
         );

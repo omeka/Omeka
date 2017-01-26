@@ -5,11 +5,14 @@
 // TinyMCE hates document.ready.
 jQuery(window).load(function () {
     Omeka.Tabs.initialize();
-    
+
     Omeka.wysiwyg({
         mode: "none",
         forced_root_block: ""
     });
+
+    // A rescan may be required to init AreYouSure fully during fist load.
+    Omeka.areYouSureRescan();
 
     // Must run the element form scripts AFTER reseting textarea ids.
     jQuery(document).trigger('omeka:elementformload');

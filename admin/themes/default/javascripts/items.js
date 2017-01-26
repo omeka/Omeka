@@ -27,6 +27,11 @@ Omeka.Items = {};
         $( ".sortable input[type=checkbox]" ).each(function () {
             $(this).css("display", "none");
         });
+
+        // Initialize the order of files for are-you-sure.
+        $('.sortable .file-order').each(function (index) {
+            $(this).val(index + 1);
+        });
     };
 
     /**

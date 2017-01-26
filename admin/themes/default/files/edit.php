@@ -12,7 +12,7 @@ echo head(array('title' => $fileTitle, 'bodyclass' => 'files edit'));
 include 'form-tabs.php';
 echo flash();
 ?>
-<form method="post" action="">
+<form method="post" id="file-form" action="">
     <section class="seven columns alpha" id="edit-form">
         <?php echo file_markup($file); ?>
         <div id="file-metadata">
@@ -46,6 +46,9 @@ jQuery(window).load(function () {
         mode: "none",
         forced_root_block: ""
     });
+
+    // A rescan may be required to init AreYouSure fully during fist load.
+    Omeka.areYouSureRescan();
 
     // Must run the element form scripts AFTER reseting textarea ids.
     jQuery(document).trigger('omeka:elementformload');

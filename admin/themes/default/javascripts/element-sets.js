@@ -22,6 +22,11 @@ Omeka.ElementSets = {};
                 });
             }
         });
+
+        // Initialize the order of elements for are-you-sure.
+        $('.sortable .element-order').each(function (index) {
+            $(this).val(index + 1);
+        });
     };
 
     /**

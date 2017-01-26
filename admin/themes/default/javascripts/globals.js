@@ -90,7 +90,6 @@ if (!Omeka) {
         });
     };
 
-
     Omeka.showAdvancedForm = function () {
         var advancedForm = $('#advanced-form');
         $('#search-form').addClass("with-advanced");
@@ -121,6 +120,20 @@ if (!Omeka) {
         $("#content").on("blur focusout", function () {
             $(this).removeAttr("tabindex");
         });
+    };
+
+    Omeka.areYouSure = function (params) {
+        if (params && params.form) {
+            Omeka.areYouSureForm = params.form;
+            var options = params.options || {};
+            $(Omeka.areYouSureForm).areYouSure(options);
+        }
+    };
+
+    Omeka.areYouSureRescan = function () {
+        if (Omeka.areYouSureForm) {
+            $(Omeka.areYouSureForm).trigger('rescan.areYouSure');
+        }
     };
 
     Omeka.addReadyCallback = function (callback, params) {

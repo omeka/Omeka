@@ -35,7 +35,6 @@ endif;
                 <?php if ($excludedItems): ?>
                 <p class="explanation"><?php echo __('Some items were excluded because you do not have permission to delete them.'); ?></p>
                 <?php endif; ?>
-
                 <p class="explanation"><?php echo __('Checked items will be deleted.'); ?></p>
             </div>
         </fieldset>
