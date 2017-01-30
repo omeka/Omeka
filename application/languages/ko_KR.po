@@ -5,6 +5,7 @@
 # Translators:
 # ahndj <ahndj@rikar.org>, 2014
 # ahndj <ahndj@rikar.org>, 2014
+# An Daejin <djahhn@gmail.com>, 2016
 # Martin Sauter <martin.sauter@gmx.ch>, 2013
 # Roland Keck <roland.keck@web.de>, 2014
 # Seung-il, Lee <silee0523@gmail.com>, 2014
@@ -13,8 +14,8 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2016-05-23 21:16+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2016-12-19 13:19+0000\n"
+"Last-Translator: An Daejin <djahhn@gmail.com>\n"
 "Language-Team: Korean (Korea) (http://www.transifex.com/omeka/omeka/language/ko_KR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,8 +31,8 @@ msgid ""
 msgstr "더블린코어 메타데이터요소 세트는 컬렉션, 파일, 아이템을 포함하는 모든 Omeka 레코드에 공통적으로 적용됩니다. 자세한 정보는 http://dublincore.org/documents/dces/를 참고해 주십시오."
 
 #. Dublin Core: Title element name
-#: admin/themes/default/collections/browse.php:22
-#: admin/themes/default/items/browse.php:40
+#: admin/themes/default/collections/browse.php:29
+#: admin/themes/default/items/browse.php:46
 #: admin/themes/default/search/index.php:13
 #: application/views/scripts/collections/browse.php:10
 #: application/views/scripts/items/browse.php:19
@@ -44,7 +45,7 @@ msgid "A name given to the resource"
 msgstr "자원에 부여된 명칭"
 
 #. Dublin Core: Creator element name
-#: admin/themes/default/items/browse.php:41
+#: admin/themes/default/items/browse.php:47
 #: application/views/scripts/items/browse.php:20
 msgid "Creator"
 msgstr "생산자"
@@ -68,7 +69,7 @@ msgstr "자원의 주제"
 #: admin/themes/default/settings/edit-item-type-elements.php:27
 #: application/forms/ItemTypes.php:150
 msgid "Description"
-msgstr "기술"
+msgstr "내용"
 
 #. Dublin Core: Description element description
 msgid "An account of the resource"
@@ -102,9 +103,9 @@ msgid ""
 msgstr "자원의 라이프사이클 중 발생하는 이벤트와 연관된 시점 또는 기간"
 
 #. Dublin Core: Type element name
-#: admin/themes/default/items/browse.php:42
+#: admin/themes/default/items/browse.php:48
 msgid "Type"
-msgstr "유형"
+msgstr "기록물유형"
 
 #. Dublin Core: Type element description
 msgid "The nature or genre of the resource"
@@ -120,7 +121,7 @@ msgstr "파일 형식, 물리적 매체 또는 자원의 규격/크기"
 
 #. Dublin Core: Identifier element name
 msgid "Identifier"
-msgstr "식별기호"
+msgstr "식별번호"
 
 #. Dublin Core: Identifier element description
 msgid "An unambiguous reference to the resource within a given context"
@@ -367,7 +368,8 @@ msgstr "링크 추가 등록"
 #: admin/themes/default/element-sets/edit.php:41
 #: admin/themes/default/files/edit.php:35
 #: admin/themes/default/item-types/edit.php:18
-#: admin/themes/default/items/batch-edit.php:131
+#: admin/themes/default/items/batch-edit-all.php:41
+#: admin/themes/default/items/batch-edit.php:61
 #: admin/themes/default/items/edit.php:19
 #: admin/themes/default/plugins/config.php:14
 #: admin/themes/default/settings/edit-api.php:82
@@ -397,18 +399,18 @@ msgid "View Public Page"
 msgstr "공개 서비스용 페이지 보기"
 
 #: admin/themes/default/appearance/edit-navigation.php:44
-#: admin/themes/default/collections/edit.php:24
+#: admin/themes/default/collections/edit.php:25
 #: admin/themes/default/collections/show.php:36
 #: admin/themes/default/element-sets/browse.php:29
 #: admin/themes/default/files/edit.php:37
 #: admin/themes/default/files/show.php:30
 #: admin/themes/default/item-types/edit.php:20
 #: admin/themes/default/item-types/show.php:54
-#: admin/themes/default/items/batch-edit.php:120
-#: admin/themes/default/items/browse.php:27
-#: admin/themes/default/items/browse.php:81
-#: admin/themes/default/items/browse.php:123
-#: admin/themes/default/items/edit.php:21
+#: admin/themes/default/items/batch-edit.php:50
+#: admin/themes/default/items/browse.php:34
+#: admin/themes/default/items/browse.php:95
+#: admin/themes/default/items/browse.php:135
+#: admin/themes/default/items/edit.php:22
 #: admin/themes/default/items/show.php:47
 #: admin/themes/default/settings/edit-item-type-elements.php:23
 #: admin/themes/default/users/browse.php:66
@@ -430,9 +432,9 @@ msgid ""
 msgstr ""
 
 #: admin/themes/default/collections/add.php:2
-#: admin/themes/default/collections/browse.php:11
-#: admin/themes/default/collections/browse.php:67
-#: admin/themes/default/collections/browse.php:76
+#: admin/themes/default/collections/browse.php:12
+#: admin/themes/default/collections/browse.php:75
+#: admin/themes/default/collections/browse.php:85
 msgid "Add a Collection"
 msgstr "컬렉션 추가"
 
@@ -441,22 +443,22 @@ msgid "Add Collection"
 msgstr "컬렉션 추가"
 
 #: admin/themes/default/collections/add.php:16
-#: admin/themes/default/collections/edit.php:30
+#: admin/themes/default/collections/edit.php:32
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/items/add.php:19
-#: admin/themes/default/items/batch-edit.php:51
-#: admin/themes/default/items/edit.php:28
+#: admin/themes/default/items/batch-edit-common.php:10
+#: admin/themes/default/items/edit.php:30
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:52
 msgid "Public"
 msgstr "공개"
 
 #: admin/themes/default/collections/add.php:19
-#: admin/themes/default/collections/edit.php:35
+#: admin/themes/default/collections/edit.php:37
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/add.php:25
-#: admin/themes/default/items/batch-edit.php:66
-#: admin/themes/default/items/edit.php:34
+#: admin/themes/default/items/batch-edit-common.php:24
+#: admin/themes/default/items/edit.php:36
 #: admin/themes/default/items/quick-filters.php:8
 #: admin/themes/default/items/show.php:53
 msgid "Featured"
@@ -486,32 +488,42 @@ msgstr "컬렉션 보기"
 msgid "(%s total)"
 msgstr "(전체 %s 건)"
 
-#: admin/themes/default/collections/browse.php:23
+#: admin/themes/default/collections/browse.php:17
+#, php-format
+msgid "%sOne item%s has no collection."
+msgid_plural "%s%d items%s aren't in a collection."
+msgstr[0] ""
+
+#: admin/themes/default/collections/browse.php:19
+msgid "All items are in a collection."
+msgstr ""
+
+#: admin/themes/default/collections/browse.php:30
 #: admin/themes/default/collections/show.php:51
-#: application/views/scripts/collections/browse.php:36
+#: application/views/scripts/collections/browse.php:35
 msgid "Contributors"
 msgstr "기증자"
 
-#: admin/themes/default/collections/browse.php:24
+#: admin/themes/default/collections/browse.php:31
 #: admin/themes/default/files/show.php:66
-#: admin/themes/default/items/browse.php:43
+#: admin/themes/default/items/browse.php:49
 #: application/views/scripts/collections/browse.php:11
 #: application/views/scripts/items/browse.php:21
 msgid "Date Added"
 msgstr "등록된 날짜"
 
-#: admin/themes/default/collections/browse.php:25
+#: admin/themes/default/collections/browse.php:32
 #: admin/themes/default/collections/show.php:46
 #: admin/themes/default/item-types/show.php:42
 msgid "Total Number of Items"
 msgstr "아이템 총수량"
 
-#: admin/themes/default/collections/browse.php:40
-#: admin/themes/default/items/browse.php:72
+#: admin/themes/default/collections/browse.php:47
+#: admin/themes/default/items/browse.php:86
 msgid "(Private)"
 msgstr "(비공개)"
 
-#: admin/themes/default/collections/browse.php:43
+#: admin/themes/default/collections/browse.php:50
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:27
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
@@ -519,34 +531,42 @@ msgstr "(비공개)"
 #: admin/themes/default/index.php:79
 #: admin/themes/default/item-types/browse.php:26
 #: admin/themes/default/item-types/show.php:51
-#: admin/themes/default/items/browse.php:24
-#: admin/themes/default/items/browse.php:77
-#: admin/themes/default/items/browse.php:120
+#: admin/themes/default/items/browse.php:31
+#: admin/themes/default/items/browse.php:91
+#: admin/themes/default/items/browse.php:132
 #: admin/themes/default/items/files-form.php:12
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:63
 msgid "Edit"
 msgstr "편집"
 
-#: admin/themes/default/collections/browse.php:52
+#: admin/themes/default/collections/browse.php:59
 msgid "No contributors"
 msgstr "기증자 없음"
 
-#: admin/themes/default/collections/browse.php:70
+#: admin/themes/default/collections/browse.php:79
 msgid "There are no collections on this page."
 msgstr "이 페이지에는 컬렉션이 없습니다."
 
-#: admin/themes/default/collections/browse.php:70
+#: admin/themes/default/collections/browse.php:79
 msgid "View All Collections"
 msgstr "모든 컬렉션 보기"
 
-#: admin/themes/default/collections/browse.php:73
+#: admin/themes/default/collections/browse.php:82
 msgid "You have no collections."
 msgstr "컬렉션이 없습니다."
 
-#: admin/themes/default/collections/browse.php:75
+#: admin/themes/default/collections/browse.php:84
 msgid "Get started by adding your first collection."
 msgstr "첫 번째 컬렉션 추가를 시작합니다."
+
+#: admin/themes/default/collections/edit.php:3
+#: admin/themes/default/collections/show.php:3
+#: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
+#: application/models/Mixin/ElementText.php:780
+#: application/views/scripts/functions.php:22
+msgid "[Untitled]"
+msgstr "[제목없음]"
 
 #: admin/themes/default/collections/edit.php:8
 #, php-format
@@ -568,7 +588,7 @@ msgstr "최근 추가된 아이템"
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/show.php:52
 #: admin/themes/default/items/show.php:53
-#: application/views/helpers/ItemSearchFilters.php:69
+#: application/views/helpers/ItemSearchFilters.php:68
 msgid "Yes"
 msgstr "예"
 
@@ -576,13 +596,22 @@ msgstr "예"
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/show.php:52
 #: admin/themes/default/items/show.php:53
-#: application/views/helpers/ItemSearchFilters.php:69
+#: application/views/helpers/ItemSearchFilters.php:68
 msgid "No"
 msgstr "아니오"
 
 #: admin/themes/default/collections/show.php:56
 msgid "No contributors."
 msgstr "기증자가 없습니다."
+
+#: admin/themes/default/collections/show.php:62
+#: admin/themes/default/files/show.php:93
+#: admin/themes/default/items/browse.php:149
+#: admin/themes/default/items/show.php:88
+#: application/views/scripts/items/browse.php:60
+#: application/views/scripts/items/show.php:41
+msgid "Output Formats"
+msgstr "출력 포맷"
 
 #: admin/themes/default/common/appearance-nav.php:5
 msgid "Themes"
@@ -613,7 +642,7 @@ msgid "Dashboard"
 msgstr "현황판"
 
 #: admin/themes/default/common/content-nav.php:9
-#: admin/themes/default/items/batch-delete.php:17
+#: admin/themes/default/items/batch-delete.php:15
 #: admin/themes/default/items/batch-edit.php:17
 msgid "Items"
 msgstr "아이템"
@@ -627,10 +656,10 @@ msgid "Item Types"
 msgstr "아이템 유형"
 
 #: admin/themes/default/common/content-nav.php:21
-#: admin/themes/default/items/browse.php:94
+#: admin/themes/default/items/browse.php:108
 #: admin/themes/default/items/show.php:65
 #: application/views/scripts/items/browse.php:46
-#: application/views/scripts/items/show.php:26
+#: application/views/scripts/items/show.php:29
 msgid "Tags"
 msgstr "태그"
 
@@ -684,18 +713,18 @@ msgstr "회원 관리"
 msgid "Omeka Admin"
 msgstr "Omeka 관리자"
 
-#: admin/themes/default/common/header.php:40
+#: admin/themes/default/common/header.php:41
 #: application/views/scripts/common/header.php:32
 msgid "Skip to main content"
 msgstr ""
 
-#: admin/themes/default/common/header.php:60
+#: admin/themes/default/common/header.php:61
 #: application/views/scripts/common/admin-bar.php:7
 #, php-format
 msgid "Welcome, %s"
 msgstr "%s 님, 반갑습니다."
 
-#: admin/themes/default/common/header.php:61
+#: admin/themes/default/common/header.php:62
 #: application/views/scripts/common/admin-bar.php:15
 msgid "Log Out"
 msgstr "로그아웃"
@@ -913,14 +942,6 @@ msgstr "파일 유형 / 운영체제"
 msgid "Embedded Metadata"
 msgstr "포함된 메타데이터"
 
-#: admin/themes/default/files/show.php:93
-#: admin/themes/default/items/browse.php:133
-#: admin/themes/default/items/show.php:88
-#: application/views/scripts/items/browse.php:60
-#: application/views/scripts/items/show.php:38
-msgid "Output Formats"
-msgstr "출력 포맷"
-
 #: admin/themes/default/index.php:10
 msgid "item"
 msgid_plural "items"
@@ -1052,9 +1073,9 @@ msgid "There are no recently added items."
 msgstr "최근 추가된 아이템이 없습니다."
 
 #: admin/themes/default/items/add.php:2
-#: admin/themes/default/items/browse.php:20
-#: admin/themes/default/items/browse.php:116
-#: admin/themes/default/items/browse.php:152
+#: admin/themes/default/items/browse.php:19
+#: admin/themes/default/items/browse.php:141
+#: admin/themes/default/items/browse.php:168
 msgid "Add an Item"
 msgstr "아이템 추가"
 
@@ -1063,32 +1084,118 @@ msgid "Add Item"
 msgstr "아이템 추가"
 
 #: admin/themes/default/items/add.php:32
-#: admin/themes/default/items/batch-edit.php:90
-#: admin/themes/default/items/browse.php:90
-#: admin/themes/default/items/edit.php:41
+#: admin/themes/default/items/batch-edit-common.php:48
+#: admin/themes/default/items/browse.php:104
+#: admin/themes/default/items/edit.php:43
 #: admin/themes/default/items/show.php:57
 #: application/libraries/globals.php:411
-#: application/views/scripts/items/show.php:18
+#: application/views/scripts/items/show.php:21
 msgid "Collection"
 msgstr "컬렉션"
+
+#: admin/themes/default/items/batch-delete-all.php:2
+msgid "Batch Delete All Searched Items"
+msgstr ""
+
+#: admin/themes/default/items/batch-delete-all.php:18
+#, php-format
+msgid "All %d items matching the search filters above will be deleted."
+msgstr ""
+
+#: admin/themes/default/items/batch-delete-all.php:20
+#, php-format
+msgid "All %d items will be deleted."
+msgstr ""
+
+#: admin/themes/default/items/batch-delete-all.php:25
+msgid "Deletions will be processed in the background item by item."
+msgstr ""
+
+#: admin/themes/default/items/batch-delete-all.php:36
+#: admin/themes/default/items/batch-delete.php:47
+#: admin/themes/default/items/batch-edit.php:47
+msgid "Delete Items"
+msgstr "아이템 삭제"
 
 #: admin/themes/default/items/batch-delete.php:2
 msgid "Batch Delete Items"
 msgstr "아이템 삭제 일괄처리"
 
-#: admin/themes/default/items/batch-delete.php:38
+#: admin/themes/default/items/batch-delete.php:36
 msgid ""
 "Some items were excluded because you do not have permission to delete them."
 msgstr "일부 아이템이 삭제되지 않는 이유는 해당 아이템에 대한 삭제 권한이 부여되어 있지 않기 때문입니다."
 
-#: admin/themes/default/items/batch-delete.php:41
+#: admin/themes/default/items/batch-delete.php:39
 msgid "Checked items will be deleted."
 msgstr "선택한 아이템을 삭제합니다."
 
-#: admin/themes/default/items/batch-delete.php:50
-#: admin/themes/default/items/batch-edit.php:117
-msgid "Delete Items"
-msgstr "아이템 삭제"
+#: admin/themes/default/items/batch-edit-all.php:2
+msgid "Batch Edit All Searched Items"
+msgstr ""
+
+#: admin/themes/default/items/batch-edit-all.php:20
+#, php-format
+msgid ""
+"Changes will be applied to all %d items matching the search filters above."
+msgstr ""
+
+#: admin/themes/default/items/batch-edit-all.php:22
+#, php-format
+msgid "Changes will be applied to all %d items."
+msgstr ""
+
+#: admin/themes/default/items/batch-edit-all.php:27
+msgid "Changes will be processed in the background item by item."
+msgstr ""
+
+#: admin/themes/default/items/batch-edit-common.php:2
+msgid "Item Metadata"
+msgstr "아이템 메타데이터"
+
+#: admin/themes/default/items/batch-edit-common.php:6
+msgid "Public?"
+msgstr "공개하시겠습니까?"
+
+#: admin/themes/default/items/batch-edit-common.php:9
+#: admin/themes/default/items/batch-edit-common.php:23
+#: admin/themes/default/items/batch-edit-common.php:37
+#: admin/themes/default/items/batch-edit-common.php:52
+msgid "Select Below"
+msgstr "아래에서 선택"
+
+#: admin/themes/default/items/batch-edit-common.php:11
+msgid "Not Public"
+msgstr "비공개"
+
+#: admin/themes/default/items/batch-edit-common.php:20
+msgid "Featured?"
+msgstr "특별 전시용으로 메인화면에 나타나도록 설정하시겠습니까?"
+
+#: admin/themes/default/items/batch-edit-common.php:25
+msgid "Not Featured"
+msgstr "특별 전시용이 아님"
+
+#: admin/themes/default/items/batch-edit-common.php:33
+#: admin/themes/default/items/item-type-form.php:3
+msgid "Item Type"
+msgstr "아이템 유형"
+
+#: admin/themes/default/items/batch-edit-common.php:42
+#: admin/themes/default/items/batch-edit-common.php:57
+msgid "Remove?"
+msgstr "삭제하시겠습니까?"
+
+#: admin/themes/default/items/batch-edit-common.php:63
+#: admin/themes/default/items/tag-form.php:8
+#: admin/themes/default/items/tag-form.php:11
+msgid "Add Tags"
+msgstr "태그 추가"
+
+#: admin/themes/default/items/batch-edit-common.php:66
+#, php-format
+msgid "List of tags to add to all checked items, separated by %s."
+msgstr "체크한 모든 아이템에 태그 목록을 추가하려면 %s 으로 구분하십시오."
 
 #: admin/themes/default/items/batch-edit.php:2
 msgid "Batch Edit Items"
@@ -1098,55 +1205,7 @@ msgstr "아이템 편집 일괄처리"
 msgid "Changes will be applied to checked items."
 msgstr "체크한 아이템만 변경합니다."
 
-#: admin/themes/default/items/batch-edit.php:42
-msgid "Item Metadata"
-msgstr "아이템 메타데이터"
-
-#: admin/themes/default/items/batch-edit.php:47
-msgid "Public?"
-msgstr "공개하시겠습니까?"
-
-#: admin/themes/default/items/batch-edit.php:50
-#: admin/themes/default/items/batch-edit.php:65
-#: admin/themes/default/items/batch-edit.php:79
-#: admin/themes/default/items/batch-edit.php:94
-msgid "Select Below"
-msgstr "아래에서 선택"
-
-#: admin/themes/default/items/batch-edit.php:52
-msgid "Not Public"
-msgstr "비공개"
-
-#: admin/themes/default/items/batch-edit.php:62
-msgid "Featured?"
-msgstr "특별 전시용으로 메인화면에 나타나도록 설정하시겠습니까?"
-
-#: admin/themes/default/items/batch-edit.php:67
-msgid "Not Featured"
-msgstr "특별 전시용이 아님"
-
-#: admin/themes/default/items/batch-edit.php:75
-#: admin/themes/default/items/item-type-form.php:3
-msgid "Item Type"
-msgstr "아이템 유형"
-
-#: admin/themes/default/items/batch-edit.php:84
-#: admin/themes/default/items/batch-edit.php:99
-msgid "Remove?"
-msgstr "삭제하시겠습니까?"
-
-#: admin/themes/default/items/batch-edit.php:105
-#: admin/themes/default/items/tag-form.php:8
-#: admin/themes/default/items/tag-form.php:11
-msgid "Add Tags"
-msgstr "태그 추가"
-
-#: admin/themes/default/items/batch-edit.php:108
-#, php-format
-msgid "List of tags to add to all checked items, separated by %s."
-msgstr "체크한 모든 아이템에 태그 목록을 추가하려면 %s 으로 구분하십시오."
-
-#: admin/themes/default/items/batch-edit.php:118
+#: admin/themes/default/items/batch-edit.php:48
 msgid "Check if you wish to delete selected items."
 msgstr "선택한 아이템을 삭제하시려면 체크하십시오."
 
@@ -1191,62 +1250,73 @@ msgstr "선택한 아이템을 삭제하시려면 체크하십시오."
 msgid "Browse Items"
 msgstr "아이템 보기"
 
-#: admin/themes/default/items/browse.php:22
-#: admin/themes/default/items/browse.php:118
+#: admin/themes/default/items/browse.php:21
+#: admin/themes/default/items/browse.php:143
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2396
-#: application/libraries/globals.php:2786
+#: application/libraries/globals.php:2400
+#: application/libraries/globals.php:2791
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "아이템 검색"
 
-#: admin/themes/default/items/browse.php:37
-msgid "Select"
-msgstr "선택"
+#: admin/themes/default/items/browse.php:26
+#: admin/themes/default/items/browse.php:129
+#, php-format
+msgid "Select all %s results"
+msgstr ""
 
-#: admin/themes/default/items/browse.php:95
+#: admin/themes/default/items/browse.php:27
+#: admin/themes/default/items/browse.php:130
+msgid "items selected"
+msgstr ""
+
+#: admin/themes/default/items/browse.php:43
+msgid "Select all rows"
+msgstr ""
+
+#: admin/themes/default/items/browse.php:64
+#, php-format
+msgid "Select item \"%s\""
+msgstr ""
+
+#: admin/themes/default/items/browse.php:109
 msgid "No Tags"
 msgstr "태그 없음"
 
-#: admin/themes/default/items/browse.php:139
+#: admin/themes/default/items/browse.php:155
 msgid "Details"
 msgstr "상세정보"
 
-#: admin/themes/default/items/browse.php:140
+#: admin/themes/default/items/browse.php:156
 msgid "Show Details"
 msgstr "상세정보 보기"
 
-#: admin/themes/default/items/browse.php:141
+#: admin/themes/default/items/browse.php:157
 msgid "Hide Details"
 msgstr "상세정보 숨기기"
 
-#: admin/themes/default/items/browse.php:149
+#: admin/themes/default/items/browse.php:165
 msgid "You have no items."
 msgstr "아이템이 없습니다."
 
-#: admin/themes/default/items/browse.php:151
+#: admin/themes/default/items/browse.php:167
 msgid "Get started by adding your first item."
 msgstr "첫 번째 아이템 추가를 시작합니다."
 
-#: admin/themes/default/items/browse.php:156
+#: admin/themes/default/items/browse.php:172
 #, php-format
 msgid "The query searched 1 item and returned no results."
 msgid_plural "The query searched %s items and returned no results."
 msgstr[0] ""
 
-#: admin/themes/default/items/browse.php:157
+#: admin/themes/default/items/browse.php:173
 msgid "refine your search"
 msgstr "검색어 재설정"
 
-#: admin/themes/default/items/browse.php:157
+#: admin/themes/default/items/browse.php:173
 #, php-format
 msgid "Would you like to %s?"
 msgstr "%s 하기를 원하십니까?"
-
-#: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/views/scripts/functions.php:22
-msgid "[Untitled]"
-msgstr "[제목없음]"
 
 #: admin/themes/default/items/edit.php:8
 #, php-format
@@ -1306,112 +1376,151 @@ msgid "Narrow by Specific Fields"
 msgstr "특정 항목으로 검색결과 좁히기"
 
 #: admin/themes/default/items/search-form.php:28
-#: application/views/scripts/items/search-form.php:90
+#: application/views/scripts/items/search-form.php:105
 msgid "Add a Field"
 msgstr "항목 추가"
 
 #: admin/themes/default/items/search-form.php:54
 #: application/views/scripts/items/search-form.php:50
-msgid "Search Field"
-msgstr "항목 검색"
+msgid "Search Joiner"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:59
+#: application/views/helpers/ItemSearchFilters.php:108
+#: application/views/scripts/items/search-form.php:55
+msgid "AND"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:60
+#: application/views/helpers/ItemSearchFilters.php:106
+#: application/views/scripts/items/search-form.php:56
+msgid "OR"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:67
 #: application/views/scripts/items/search-form.php:63
+msgid "Search Field"
+msgstr "항목 검색"
+
+#: admin/themes/default/items/search-form.php:80
+#: application/views/scripts/items/search-form.php:76
 msgid "Search Type"
 msgstr "유형 검색"
 
-#: admin/themes/default/items/search-form.php:72
-#: application/views/scripts/items/search-form.php:68
+#: admin/themes/default/items/search-form.php:85
+#: application/views/scripts/items/search-form.php:81
 msgid "contains"
 msgstr "포함"
 
-#: admin/themes/default/items/search-form.php:73
-#: application/views/scripts/items/search-form.php:69
+#: admin/themes/default/items/search-form.php:86
+#: application/views/scripts/items/search-form.php:82
 msgid "does not contain"
 msgstr "포함하지 않음"
 
-#: admin/themes/default/items/search-form.php:74
-#: application/views/scripts/items/search-form.php:70
+#: admin/themes/default/items/search-form.php:87
+#: application/views/scripts/items/search-form.php:83
 msgid "is exactly"
 msgstr "완전히 일치함"
 
-#: admin/themes/default/items/search-form.php:75
-#: application/views/scripts/items/search-form.php:71
+#: admin/themes/default/items/search-form.php:88
+msgid "is not exactly"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:89
+#: application/views/scripts/items/search-form.php:84
 msgid "is empty"
 msgstr "비어있습니다"
 
-#: admin/themes/default/items/search-form.php:76
-#: application/views/scripts/items/search-form.php:72
+#: admin/themes/default/items/search-form.php:90
+#: application/views/scripts/items/search-form.php:85
 msgid "is not empty"
 msgstr "비어있지 않습니다"
 
-#: admin/themes/default/items/search-form.php:84
-#: application/views/scripts/items/search-form.php:80
+#: admin/themes/default/items/search-form.php:91
+#: application/views/scripts/items/search-form.php:86
+msgid "starts with"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:92
+#: application/views/scripts/items/search-form.php:87
+msgid "ends with"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:93
+msgid "matches"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:94
+msgid "does not match"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:102
+#: application/views/scripts/items/search-form.php:95
 msgid "Search Terms"
 msgstr "조건 검색"
 
-#: admin/themes/default/items/search-form.php:90
-#: application/views/scripts/items/search-form.php:86
+#: admin/themes/default/items/search-form.php:108
+#: application/views/scripts/items/search-form.php:101
 msgid "Remove field"
 msgstr "항목 삭제"
 
-#: admin/themes/default/items/search-form.php:98
-#: application/views/scripts/items/search-form.php:94
+#: admin/themes/default/items/search-form.php:116
+#: application/views/scripts/items/search-form.php:109
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
 msgstr "ID#s 의 범위로 검색(example: 1-4, 156, 79)"
 
-#: admin/themes/default/items/search-form.php:112
-#: application/views/scripts/items/search-form.php:105
+#: admin/themes/default/items/search-form.php:130
+#: application/views/scripts/items/search-form.php:120
 msgid "Search By Collection"
 msgstr "컬렉션별 검색"
 
-#: admin/themes/default/items/search-form.php:128
-#: application/views/scripts/items/search-form.php:119
+#: admin/themes/default/items/search-form.php:146
+#: application/views/scripts/items/search-form.php:134
 msgid "Search By Type"
 msgstr "형태별 검색"
 
-#: admin/themes/default/items/search-form.php:145
-#: application/views/scripts/items/search-form.php:135
+#: admin/themes/default/items/search-form.php:163
+#: application/views/scripts/items/search-form.php:150
 msgid "Search By User"
 msgstr "사용자별 검색"
 
-#: admin/themes/default/items/search-form.php:162
-#: application/views/scripts/items/search-form.php:150
+#: admin/themes/default/items/search-form.php:180
+#: application/views/scripts/items/search-form.php:165
 msgid "Search By Tags"
 msgstr "태그별 검색"
 
-#: admin/themes/default/items/search-form.php:177
-#: application/views/scripts/items/search-form.php:163
+#: admin/themes/default/items/search-form.php:195
+#: application/views/scripts/items/search-form.php:178
 msgid "Public/Non-Public"
 msgstr "공개 / 비공개"
 
-#: admin/themes/default/items/search-form.php:186
-#: application/views/scripts/items/search-form.php:171
+#: admin/themes/default/items/search-form.php:204
+#: application/views/scripts/items/search-form.php:186
 msgid "Only Public Items"
 msgstr "공개된 아이템만"
 
-#: admin/themes/default/items/search-form.php:187
-#: application/views/scripts/items/search-form.php:172
+#: admin/themes/default/items/search-form.php:205
+#: application/views/scripts/items/search-form.php:187
 msgid "Only Non-Public Items"
 msgstr "비공개 아이템만"
 
-#: admin/themes/default/items/search-form.php:197
-#: application/views/scripts/items/search-form.php:181
+#: admin/themes/default/items/search-form.php:215
+#: application/views/scripts/items/search-form.php:196
 msgid "Featured/Non-Featured"
 msgstr "특별전시용/일반"
 
-#: admin/themes/default/items/search-form.php:206
-#: application/views/scripts/items/search-form.php:189
+#: admin/themes/default/items/search-form.php:224
+#: application/views/scripts/items/search-form.php:204
 msgid "Only Featured Items"
 msgstr "특별 전시용으로 선택된 아이템만"
 
-#: admin/themes/default/items/search-form.php:207
-#: application/views/scripts/items/search-form.php:190
+#: admin/themes/default/items/search-form.php:225
+#: application/views/scripts/items/search-form.php:205
 msgid "Only Non-Featured Items"
 msgstr "일반(특별 전시용이 아닌) 아이템만"
 
-#: admin/themes/default/items/search-form.php:215
-#: application/views/scripts/items/search-form.php:199
+#: admin/themes/default/items/search-form.php:233
+#: application/views/scripts/items/search-form.php:214
 msgid "Search for items"
 msgstr "아이템 검색"
 
@@ -1489,7 +1598,7 @@ msgstr "%s "
 
 #: admin/themes/default/plugins/browse.php:65
 #: admin/themes/default/themes/browse.php:23
-#: admin/themes/default/themes/browse.php:48
+#: admin/themes/default/themes/browse.php:50
 msgid "Get support"
 msgstr "지원 받기"
 
@@ -1729,7 +1838,7 @@ msgid "Record Types"
 msgstr "레코드유형"
 
 #: admin/themes/default/themes/browse.php:15
-#: admin/themes/default/themes/browse.php:42
+#: admin/themes/default/themes/browse.php:44
 #, php-format
 msgid "Screenshot for %s Theme"
 msgstr "%s 테마의 스크린샷"
@@ -1743,7 +1852,7 @@ msgid "Current Theme"
 msgstr "현재 테마"
 
 #: admin/themes/default/themes/browse.php:21
-#: admin/themes/default/themes/browse.php:47
+#: admin/themes/default/themes/browse.php:49
 #, php-format
 msgid "By %s"
 msgstr "%s 별"
@@ -1756,7 +1865,7 @@ msgid ""
 "target=\"_blank\">design your own</a>!"
 msgstr "<a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Omeka 테마 다운로드 사이트 주소</a>에서 테마를 내려받은 다음 새로운 테마를 추가하거나 <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">Omeka 테마 개발 관련 참고문서</a>를 토대로 Omeka 테마를 직접 제작하여 새로운 테마를 추가할 수 있습니다!"
 
-#: admin/themes/default/themes/browse.php:44
+#: admin/themes/default/themes/browse.php:46
 msgid "Use this theme"
 msgstr "이 테마 사용"
 
@@ -1964,6 +2073,10 @@ msgstr "로그인 페이지로 이동"
 msgid "Log In"
 msgstr "로그인"
 
+#: admin/themes/default/users/login.php:8
+msgid "Go to the public site"
+msgstr ""
+
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
 msgstr "(비밀번호를 분실하셨습니까?)"
@@ -2062,7 +2175,7 @@ msgstr "요소 세트와 요소 세트에 할당된 모든 요소들이 삭제�
 #: application/controllers/PluginsController.php:139
 #: application/controllers/PluginsController.php:190
 #: application/controllers/PluginsController.php:223
-#: application/controllers/PluginsController.php:337
+#: application/controllers/PluginsController.php:331
 #: application/controllers/SettingsController.php:104
 #: application/controllers/SettingsController.php:140
 #: application/controllers/SettingsController.php:177
@@ -2169,37 +2282,61 @@ msgid ""
 "delete all files and file metadata associated with this item."
 msgstr "#%s 아이템 및 이 아이템과 연관된 메타데이터를 삭제할 것입니다. 또한, 이 아이템과 연관된 모든 파일과 파일 메타데이터도 삭제할 것입니다."
 
-#: application/controllers/ItemsController.php:227
+#: application/controllers/ItemsController.php:241
+#: application/controllers/ItemsController.php:376
+#: application/controllers/ItemsController.php:444
+msgid "No item to batch edit."
+msgstr ""
+
+#: application/controllers/ItemsController.php:248
+msgid "The deletion of all items is forbidden."
+msgstr ""
+
+#: application/controllers/ItemsController.php:265
 msgid "You must choose some items to batch edit."
 msgstr "편집을 일괄 처리하려면 해당 아이템을 선택해야 합니다."
 
-#: application/controllers/ItemsController.php:271
+#: application/controllers/ItemsController.php:314
+#: application/controllers/ItemsController.php:412
 msgid "User is not allowed to modify visibility of items."
 msgstr "사용자는 아이템의 visibility 속성을 변경할 수 없습니다."
 
-#: application/controllers/ItemsController.php:276
+#: application/controllers/ItemsController.php:319
+#: application/controllers/ItemsController.php:417
 msgid "User is not allowed to modify featured status of items."
 msgstr "사용자는 아이템의 특별 전시 상태를 변경할 수 없습니다."
 
-#: application/controllers/ItemsController.php:283
+#: application/controllers/ItemsController.php:326
 msgid "User is not allowed to delete selected items."
 msgstr "사용자는 선택된 아이템을 삭제할 수 없습니다."
 
-#: application/controllers/ItemsController.php:289
+#: application/controllers/ItemsController.php:332
 msgid "User is not allowed to edit selected items."
 msgstr "사용자는 선택된 아이템을 편집할 수 없습니다."
 
-#: application/controllers/ItemsController.php:294
+#: application/controllers/ItemsController.php:337
 msgid "User is not allowed to tag selected items."
 msgstr "사용자는 선택된 태그를 편집할 수 없습니다."
 
-#: application/controllers/ItemsController.php:328
+#: application/controllers/ItemsController.php:369
 msgid "The items were successfully deleted!"
 msgstr "이 아이템이 성공적으로 삭제되었습니다!"
 
-#: application/controllers/ItemsController.php:330
+#: application/controllers/ItemsController.php:371
 msgid "The items were successfully changed!"
 msgstr "이 아이템이 성공적으로 변경되었습니다!"
+
+#: application/controllers/ItemsController.php:436
+msgid "The items are checked and deleted one by one in the background."
+msgstr ""
+
+#: application/controllers/ItemsController.php:438
+msgid "The items are checked and changed one by one in the background."
+msgstr ""
+
+#: application/controllers/ItemsController.php:440
+msgid "Check logs for success and errors."
+msgstr ""
 
 #: application/controllers/PluginsController.php:45
 #, php-format
@@ -2265,31 +2402,31 @@ msgstr "%s 플러그인이 성공적으로 업그레이드 되었습니다!"
 msgid "The following error occurred while upgrading the %s plugin: "
 msgstr "%s 플러그인을 업그레이드하는 동안 다음과 같은 에러가 발생했습니다 : "
 
-#: application/controllers/PluginsController.php:310
+#: application/controllers/PluginsController.php:305
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
 msgstr "'%s' 디렉토리에서 플러그인을 찾을 수 없습니다!"
 
-#: application/controllers/PluginsController.php:322
+#: application/controllers/PluginsController.php:318
 msgid "You must confirm the uninstall before proceeding."
 msgstr "진행하기 전에 삭제를 확인해 주십시오."
 
-#: application/controllers/PluginsController.php:345
+#: application/controllers/PluginsController.php:337
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
 msgstr "%s 플러그인이 성공적으로 삭제되었습니다!"
 
-#: application/controllers/PluginsController.php:350
-#: application/controllers/PluginsController.php:355
+#: application/controllers/PluginsController.php:342
+#: application/controllers/PluginsController.php:347
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
 msgstr "%s 플러그인을 삭제하는 동안 다음과 같은 에러가 발생했습니다 : "
 
-#: application/controllers/PluginsController.php:382
+#: application/controllers/PluginsController.php:376
 msgid "No plugin name given."
 msgstr "플러그인 이름이 없습니다."
 
-#: application/controllers/PluginsController.php:395
+#: application/controllers/PluginsController.php:389
 #, php-format
 msgid "The plugin %s must be installed."
 msgstr "%s 플러그인이 설치되어야 합니다."
@@ -2479,67 +2616,85 @@ msgid "Login information incorrect. Please try again."
 msgstr "로그인 정보가 정확하지 않습니다. 다시 시도해 주십시오."
 
 #: application/forms/AppearanceSettings.php:22
+msgid "Use Square Thumbnails"
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:23
+msgid ""
+"Use square-cropped images by default wherever thumbnails appear in the "
+"public interface."
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:28
 #: application/forms/Install.php:128
 msgid "Fullsize Image Size"
 msgstr "실물 이미지 크기"
 
-#: application/forms/AppearanceSettings.php:23
+#: application/forms/AppearanceSettings.php:29
 msgid "Maximum fullsize image size constraint (in pixels)."
 msgstr "최대 실물 이미지 크기는 (픽셀)로 제한됩니다."
 
-#: application/forms/AppearanceSettings.php:29
+#: application/forms/AppearanceSettings.php:35
 #: application/forms/Install.php:136
 msgid "Thumbnail Size"
 msgstr "썸네일 크기"
 
-#: application/forms/AppearanceSettings.php:30
+#: application/forms/AppearanceSettings.php:36
 msgid "Maximum thumbnail size constraint (in pixels)."
 msgstr "최대 썸네일 크기는 (픽셀)로 제한됩니다."
 
-#: application/forms/AppearanceSettings.php:36
+#: application/forms/AppearanceSettings.php:42
 #: application/forms/Install.php:144
 msgid "Square Thumbnail Size"
 msgstr "사각형 썸네일 크기"
 
-#: application/forms/AppearanceSettings.php:37
+#: application/forms/AppearanceSettings.php:43
 msgid "Maximum square thumbnail size constraint (in pixels)."
 msgstr "최대 사각형 썸네일 크기는 (픽셀)로 제한됩니다."
 
-#: application/forms/AppearanceSettings.php:43
+#: application/forms/AppearanceSettings.php:49
 msgid "Results Per Page (admin)"
 msgstr "페이지당 결과 (관리자)"
 
-#: application/forms/AppearanceSettings.php:44
+#: application/forms/AppearanceSettings.php:50
 msgid ""
 "Limit the number of results displayed per page in the administrative "
 "interface."
 msgstr "관리용 인터페이스 화면에서 페이지 당 표시되는 결과의 숫자를 제한합니다."
 
-#: application/forms/AppearanceSettings.php:50
+#: application/forms/AppearanceSettings.php:56
 msgid "Results Per Page (public)"
 msgstr "페이지당 결과 (일반)"
 
-#: application/forms/AppearanceSettings.php:51
+#: application/forms/AppearanceSettings.php:57
 msgid ""
 "Limit the number of results displayed per page in the public interface."
 msgstr "공개용 인터페이스 화면에서 페이지 당 표시되는 결과의 숫자를 제한합니다."
 
-#: application/forms/AppearanceSettings.php:57
+#: application/forms/AppearanceSettings.php:63
 #: application/forms/Install.php:168
 msgid "Show Empty Elements"
 msgstr "비어있는 요소 보기"
 
-#: application/forms/AppearanceSettings.php:62
+#: application/forms/AppearanceSettings.php:68
 msgid "Show Element Set Headings"
 msgstr "요소 세트 제목 보기"
 
-#: application/forms/AppearanceSettings.php:75
+#: application/forms/AppearanceSettings.php:78
+msgid "Admin Theme"
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:92
 msgid "Derivative Size Constraints"
 msgstr "파생되는 크기 제한"
 
-#: application/forms/AppearanceSettings.php:83
+#: application/forms/AppearanceSettings.php:100
 msgid "Display Settings"
 msgstr "화면 설정"
+
+#: application/forms/AppearanceSettings.php:108
+msgid "Admin Themes"
+msgstr ""
 
 #: application/forms/ChangePassword.php:25
 msgid "Current Password"
@@ -2975,65 +3130,67 @@ msgstr "불 방식(boolean)"
 msgid "Exact match"
 msgstr "완전일치"
 
-#: application/libraries/globals.php:1258
-#: application/libraries/globals.php:1279
+#: application/libraries/globals.php:1263
+#: application/libraries/globals.php:1284
 #, php-format
 msgid "Could not find file %s!"
 msgstr "%s 파일을 찾을 수 없습니다."
 
-#: application/libraries/globals.php:1296
+#: application/libraries/globals.php:1301
 msgid "No featured collections are available."
 msgstr "특별 전시용 컬렉션이 없습니다."
 
-#: application/libraries/globals.php:1593
+#: application/libraries/globals.php:1598
 msgid "Select Below "
 msgstr "아래를 선택"
 
-#: application/libraries/globals.php:1636
+#: application/libraries/globals.php:1641
 msgid "Omeka RSS Feed"
 msgstr "Omeka RSS 피드"
 
-#: application/libraries/globals.php:1637
+#: application/libraries/globals.php:1642
 msgid "Omeka Atom Feed"
 msgstr "Omeka Atom 피드"
 
-#: application/libraries/globals.php:2293
+#: application/libraries/globals.php:2297
 msgid "No recent items available."
 msgstr "최근에 등록된 아이템이 없습니다."
 
-#: application/libraries/globals.php:2319
+#: application/libraries/globals.php:2323
 msgid "No featured items are available."
 msgstr "특별 전시용 아이템이 없습니다."
 
-#: application/libraries/globals.php:2378
+#: application/libraries/globals.php:2382
 msgid "View"
 msgstr "보기"
 
-#: application/libraries/globals.php:2440
+#: application/libraries/globals.php:2444
+#: application/models/Table/Collection.php:87
+#: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
 msgstr "컬렉션 없음"
 
-#: application/libraries/globals.php:2558
+#: application/libraries/globals.php:2563
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2575
+#: application/libraries/globals.php:2580
 msgid "Next Item &rarr;"
 msgstr "다음 아이템 &rarr;"
 
-#: application/libraries/globals.php:2595
+#: application/libraries/globals.php:2600
 msgid "&larr; Previous Item"
 msgstr "&larr; 이전 아이템"
 
-#: application/libraries/globals.php:2776
+#: application/libraries/globals.php:2781
 msgid "Browse All"
 msgstr "전체 보기"
 
-#: application/libraries/globals.php:2781
+#: application/libraries/globals.php:2786
 msgid "Browse by Tag"
 msgstr "태그별 보기"
 
-#: application/libraries/globals.php:3050
+#: application/libraries/globals.php:3055
 msgid "No tags are available."
 msgstr "사용 가능한 태그가 없습니다."
 
@@ -3041,7 +3198,7 @@ msgstr "사용 가능한 태그가 없습니다."
 msgid "Must specify a file transfer type when attaching files to an item!"
 msgstr "아이템에 파일을 첨부할때 파일 전송 유형(file transfer type)을 지정해야 합니다!"
 
-#: application/models/Collection.php:117
+#: application/models/Collection.php:119
 msgid "Cannot associate the collection with an unsaved user."
 msgstr "해당 컬렉션을 저장되지 않은 사용자와 연결할 수 없습니다."
 
@@ -3092,48 +3249,48 @@ msgstr "저장된 파일을 위한 로컬 경로를 얻을 수 없습니다."
 msgid "\"%s\" is not a valid file derivative."
 msgstr "\"%s\"는 잘못된 파생 파일입니다."
 
-#: application/models/Item.php:330
+#: application/models/Item.php:332
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
 msgstr "데이터베이스에서 지속 가능하지 않은 아이템에는 파일을 첨부할 수 없습니다. 파일을 아이템에 첨부할 수 없습니다."
 
 #. / Chicago-style item citation: two authors
-#: application/models/Item.php:457
+#: application/models/Item.php:467
 #, php-format
 msgid "%1$s and %2$s"
 msgstr "%1$s 와/과 %2$s"
 
 #. / Chicago-style item citation: three authors
-#: application/models/Item.php:461
+#: application/models/Item.php:471
 #, php-format
 msgid "%1$s, %2$s, and %3$s"
 msgstr "%1$s 와/과 %2$s, %3$s"
 
 #. / Chicago-style item citation: more than three authors
-#: application/models/Item.php:465
+#: application/models/Item.php:475
 #, php-format
 msgid "%s et al."
 msgstr "%s 등."
 
 #. / Chicago-style item citation: access date and URL
-#: application/models/Item.php:483
+#: application/models/Item.php:493
 #, php-format
 msgid "accessed %1$s, %2$s."
 msgstr "접근된 %1$s, %2$s."
 
-#: application/models/Item.php:500
+#: application/models/Item.php:510
 msgid "Cannot add an existing file to an item!"
 msgstr "아이템에 기존 파일을 추가할 수 없습니다!"
 
-#: application/models/Item.php:504
+#: application/models/Item.php:514
 msgid "File must be valid before it can be associated with an item!"
 msgstr "파일이 유효해야 아이템과 연결시킬 수 있습니다!"
 
-#: application/models/Item.php:528
+#: application/models/Item.php:538
 msgid "Invalid item type."
 msgstr "잘못된 아이템 유형입니다."
 
-#: application/models/Item.php:531
+#: application/models/Item.php:541
 msgid "Invalid collection."
 msgstr "잘못된 컬렉션입니다."
 
@@ -3182,6 +3339,63 @@ msgid ""
 " or an element id to determine if an item type has an element."
 msgstr "잘못된 매개변수입니다. 한 아이템 유형이 요소를 갖고 있는 경우  'hasElement' 기능은 요소 오브젝트나 요소 id 중 하나를 필요로 합니다."
 
+#: application/models/Job/ItemBatchEditAll.php:41
+msgid "Batch Edit All Items: No item matches the specified filters."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:48
+#, php-format
+msgid "Batch Edit: Starting processing 1 item."
+msgid_plural "Batch Edit: Starting processing %d items."
+msgstr[0] ""
+
+#: application/models/Job/ItemBatchEditAll.php:67
+#, php-format
+msgid ""
+"Batch Edit: A total of %d errors occurred during the batch process of %d "
+"items."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:74
+#, php-format
+msgid "Batch Edit: The item has been processed successfully."
+msgid_plural "Batch Edit: All %d items have been processed successfully."
+msgstr[0] ""
+
+#: application/models/Job/ItemBatchEditAll.php:91
+msgid "Item does not exist: it may have been deleted before processing."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:106
+msgid "User is not allowed to delete this item."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:113
+msgid "User is not allowed to edit this item."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:119
+msgid "User is not allowed to tag this item."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:142
+msgid "The item was successfully deleted."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:154
+#, php-format
+msgid "An error occured when the item was updated: %s"
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:159
+msgid "The item was successfully batch-edited."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:178
+#, php-format
+msgid "Batch Edit Item #%d [%d/%d]: %s"
+msgstr ""
+
 #: application/models/Mixin/ElementText.php:293
 #, php-format
 msgid "There is no element \"%1$s\", \"%2$s\"!"
@@ -3218,7 +3432,7 @@ msgstr "플러그인 명칭은 비어 있을 수 없습니다."
 msgid "[Untitled] #%s"
 msgstr "[제목없음] #%s"
 
-#: application/models/Table/Item.php:123
+#: application/models/Table/Item.php:145
 msgid "Invalid search type given!"
 msgstr "검색 유형이 유효하지 않습니다!"
 
@@ -3385,6 +3599,11 @@ msgstr "반복되는 %s 변수는 현재 보기에 적합하지 않습니다."
 msgid "An array of records is not available for the loop."
 msgstr "레코드의 배열은 반복할 수 없습니다."
 
+#: application/views/helpers/MaxFileSize.php:44
+#, php-format
+msgid "%s MB"
+msgstr ""
+
 #: application/views/helpers/RecordUrl.php:34
 msgid "Invalid record passed while getting record URL."
 msgstr "레코드 주소를 얻는 동안 잘못된 레코드가 있었습니다."
@@ -3402,7 +3621,7 @@ msgstr "레코드 주소를 얻는 동안 잘못된 값이 반환되었습니다
 msgid "Sort by: "
 msgstr "정렬 방식:"
 
-#: application/views/scripts/collections/browse.php:42
+#: application/views/scripts/collections/browse.php:41
 #, php-format
 msgid "View the items in %s"
 msgstr "%s 에 포함된 아이템 보기"
@@ -3412,7 +3631,7 @@ msgstr "%s 에 포함된 아이템 보기"
 msgid "Items in the %s Collection"
 msgstr "%s 컬렉션에 포함된 아이템"
 
-#: application/views/scripts/collections/show.php:37
+#: application/views/scripts/collections/show.php:33
 msgid "There are currently no items within this collection."
 msgstr "이 컬렉션에는 아이템이 등록되어 있지 않습니다."
 
@@ -3497,11 +3716,11 @@ msgstr "특별 전시 컬렉션"
 msgid "View All Items"
 msgstr "전체 아이템 보기"
 
-#: application/views/scripts/items/show.php:10
+#: application/views/scripts/items/show.php:13
 msgid "Files"
 msgstr "파일"
 
-#: application/views/scripts/items/show.php:33
+#: application/views/scripts/items/show.php:36
 msgid "Citation"
 msgstr "인용"
 

@@ -3,12 +3,7 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Masaki Hidano <MasaGon@info-lounge.jp>, 2013
-# Masaki Hidano <MasaGon@info-lounge.jp>, 2013
-# Takayuki Ako <ako.t.aa@m.titech.ac.jp>, 2016
-# あこたかゆき <inactive+akotaka@transifex.com>, 2014
-# YASUSHI INOUE <yasushi.inoue@gmail.com>, 2012
-# Yuki Shira <shirayuking@gmail.com>, 2013
+# Imanol Ortiz <imanol.ortiz@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
@@ -16,19 +11,19 @@ msgstr ""
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
 "PO-Revision-Date: 2016-12-15 22:50+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
-"Language-Team: Japanese (http://www.transifex.com/omeka/omeka/language/ja/)\n"
+"Language-Team: Basque (http://www.transifex.com/omeka/omeka/language/eu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ja\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: eu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Dublin Core description
 msgid ""
 "The Dublin Core metadata element set is common to all Omeka records, "
 "including items, files, and collections. For more information see, "
 "http://dublincore.org/documents/dces/."
-msgstr "Dublin Coreのメタ要素セットは全てのOmekaレコード（アイテム、ファイル、コレクション）に対して共通です。詳細は http://dublincore.org/documents/dces/ を参考にして下さい。"
+msgstr ""
 
 #. Dublin Core: Title element name
 #: admin/themes/default/collections/browse.php:29
@@ -38,29 +33,29 @@ msgstr "Dublin Coreのメタ要素セットは全てのOmekaレコード（ア�
 #: application/views/scripts/items/browse.php:19
 #: application/views/scripts/search/index.php:14
 msgid "Title"
-msgstr "タイトル (Title)"
+msgstr "Izenburu"
 
 #. Dublin Core: Title element description
 msgid "A name given to the resource"
-msgstr "リソースに与えられた名前"
+msgstr "Izen bat baliabideei emateko"
 
 #. Dublin Core: Creator element name
 #: admin/themes/default/items/browse.php:47
 #: application/views/scripts/items/browse.php:20
 msgid "Creator"
-msgstr "制作者 (Creator)"
+msgstr "Egile"
 
 #. Dublin Core: Creator element description
 msgid "An entity primarily responsible for making the resource"
-msgstr "リソースの制作に主たる責任を持つ（人や組織などの）エンティティ"
+msgstr "Erakunde bat, lehen arduraduna, baliabidea egiteko"
 
 #. Dublin Core: Subject element name
 msgid "Subject"
-msgstr "テーマ (Subject)"
+msgstr "Gaia"
 
 #. Dublin Core: Subject element description
 msgid "The topic of the resource"
-msgstr "リソースのトピック"
+msgstr "Baliabideko gaia"
 
 #. Dublin Core: Description element name
 #: admin/themes/default/element-sets/browse.php:17
@@ -69,119 +64,119 @@ msgstr "リソースのトピック"
 #: admin/themes/default/settings/edit-item-type-elements.php:27
 #: application/forms/ItemTypes.php:150
 msgid "Description"
-msgstr "詳細 (Description)"
+msgstr "Deskribapena"
 
 #. Dublin Core: Description element description
 msgid "An account of the resource"
-msgstr "リソースの内容の説明"
+msgstr "Baliabidearen aurkezpena"
 
 #. Dublin Core: Publisher element name
 msgid "Publisher"
-msgstr "発行者 (Publisher)"
+msgstr "Editorea"
 
 #. Dublin Core: Publisher element description
 msgid "An entity responsible for making the resource available"
-msgstr "リソースの発行に責任を持つ（人や組織などの）エンティティ"
+msgstr "Erakunde bat, baliabide erabilgarria egiteko"
 
 #. Dublin Core: Contributor element name
 #. User role: contributor
 msgid "Contributor"
-msgstr "協力者 (Contributor)"
+msgstr "Laguntzaile"
 
 #. Dublin Core: Contributor element description
 msgid "An entity responsible for making contributions to the resource"
-msgstr "リソースへの寄与に責任を持つ（人や組織などの）エンティティ"
+msgstr "Erakunde bat, baliabideei laguntasunak emateko"
 
 #. Dublin Core: Date element name
 msgid "Date"
-msgstr "日付 (Date)"
+msgstr "Data"
 
 #. Dublin Core: Date element description
 msgid ""
 "A point or period of time associated with an event in the lifecycle of the "
 "resource"
-msgstr "リソースのライフサイクルにおける出来事に関連する時もしくは期間"
+msgstr ""
 
 #. Dublin Core: Type element name
 #: admin/themes/default/items/browse.php:48
 msgid "Type"
-msgstr "タイプ (Type)"
+msgstr "Mota"
 
 #. Dublin Core: Type element description
 msgid "The nature or genre of the resource"
-msgstr "リソースの性質もしくはジャンル"
+msgstr "Baliabideko mota edo klase"
 
 #. Dublin Core: Format element name
 msgid "Format"
-msgstr "フォーマット (Format)"
+msgstr "Formatu"
 
 #. Dublin Core: Format element description
 msgid "The file format, physical medium, or dimensions of the resource"
-msgstr "リソースのファイル形式、物理媒体、あるいはサイズ"
+msgstr "Artxiboko formatu, euskarri fisiko edo baliabideko tamaina"
 
 #. Dublin Core: Identifier element name
 msgid "Identifier"
-msgstr "識別子 (Identifier)"
+msgstr "Identifikadore"
 
 #. Dublin Core: Identifier element description
 msgid "An unambiguous reference to the resource within a given context"
-msgstr "リソースのこの文脈における一意なレファレンス"
+msgstr "Baliabideei erreferentzi on bat testuinguruen barruan"
 
 #. Dublin Core: Source element name
 msgid "Source"
-msgstr "ソース (Source)"
+msgstr "Iturri"
 
 #. Dublin Core: Source element description
 msgid "A related resource from which the described resource is derived"
-msgstr "リソースの派生元リソースへの参照"
+msgstr ""
 
 #. Dublin Core: Language element name
 msgid "Language"
-msgstr "言語 (Language)"
+msgstr "Hizkuntza"
 
 #. Dublin Core: Language element description
 msgid "A language of the resource"
-msgstr "リソースの言語"
+msgstr "Balizabideko hizkuntza"
 
 #. Dublin Core: Relation element name
 msgid "Relation"
-msgstr "関連 (Relation)"
+msgstr "Erlazio"
 
 #. Dublin Core: Relation element description
 msgid "A related resource"
-msgstr "関連するリソースへの参照"
+msgstr "Erlazioko baliabidea"
 
 #. Dublin Core: Coverage element name
 msgid "Coverage"
-msgstr "範囲 (Coverage)"
+msgstr "Estaldura"
 
 #. Dublin Core: Coverage element description
 msgid ""
 "The spatial or temporal topic of the resource, the spatial applicability of "
 "the resource, or the jurisdiction under which the resource is relevant"
-msgstr "リソースの地理的・時間的範囲、リソースが関連する領域"
+msgstr ""
 
 #. Dublin Core: Rights element name
 msgid "Rights"
-msgstr "権利 (Rights)"
+msgstr "Egile-eskubideak"
 
 #. Dublin Core: Rights element description
 msgid "Information about rights held in and over the resource"
-msgstr "リソースに関する権利情報"
+msgstr ""
 
 #. Item Type Metadata
 msgid "Item Type Metadata"
-msgstr "アイテムタイプのメタデータ"
+msgstr "Item Type Metadata"
 
 #. Item Type Metadata description
 msgid ""
 "The item type metadata element set, consisting of all item type elements "
 "bundled with Omeka and all item type elements created by an administrator."
-msgstr "Omekaによってバンドルされている全てのアイテムタイプの要素と、管理者が作成したアイテムタイプの要素から構成される、アイテムタイプのメタデータ要素のセット。"
+msgstr ""
 
 #. Omeka Legacy File
 msgid "Omeka Legacy File"
-msgstr "Omekaファイル資産"
+msgstr "Omekako Legacy-ko artxiboa "
 
 #. Omeka Legacy File description
 msgid ""
@@ -193,101 +188,101 @@ msgstr ""
 
 #. Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
-msgstr "別の制作者"
+msgstr "Beste egile"
 
 #. Omeka Legacy File: Transcriber element
 msgid "Transcriber"
-msgstr "記述者"
+msgstr "Transkribatzailea"
 
 #. Omeka Legacy File: Producer element
 msgid "Producer"
-msgstr "制作者"
+msgstr "Produktorea"
 
 #. Omeka Legacy File: Render Device element
 msgid "Render Device"
-msgstr "レンダリングデバイス"
+msgstr "Render-eko tresna"
 
 #. Omeka Legacy File: Render Details element
 msgid "Render Details"
-msgstr "レンダリング詳細"
+msgstr "Render xehetazunak"
 
 #. Omeka Legacy File: Capture Date element
 msgid "Capture Date"
-msgstr "取り込み日"
+msgstr "Grabaketako data"
 
 #. Omeka Legacy File: Capture Device element
 msgid "Capture Device"
-msgstr "取り込み機器"
+msgstr "Grabaketako tresna"
 
 #. Omeka Legacy File: Capture Details element
 msgid "Capture Details"
-msgstr "取り込み詳細"
+msgstr "Grabaketako xehetazunak"
 
 #. Omeka Legacy File: Change History element
 msgid "Change History"
-msgstr "変更履歴"
+msgstr "Historia aldatu"
 
 #. Omeka Legacy File: Watermark element
 msgid "Watermark"
-msgstr "透かし"
+msgstr "Watemark"
 
 #. Omeka Legacy File: Encryption element
 msgid "Encryption"
-msgstr "暗号化"
+msgstr "Zifratu"
 
 #. Omeka Legacy File: Compression element
 msgid "Compression"
-msgstr "圧縮"
+msgstr "Kompresio"
 
 #. Omeka Legacy File: Post Processing element
 msgid "Post Processing"
-msgstr "後処理"
+msgstr "Prozesatu gero"
 
 #. Omeka Image File
 msgid "Omeka Image File"
-msgstr "Omeka画像ファイル"
+msgstr "Omekako irudiko artxiboa"
 
 #. Omeka Image File description
 msgid ""
 "The metadata element set that was included in the `files_images` table in "
 "previous versions of Omeka. These elements are common to all image files."
-msgstr "メタデータ要素はOmekaの前ヴァージョンの'files_images'テーブルに含まれていました。これらの要素はすべての画像ファイルに共通です。"
+msgstr ""
 
 #. Omeka Image File: Width element
 msgid "Width"
-msgstr "幅"
+msgstr "Zabalera"
 
 #. Omeka Image File: Height element
 msgid "Height"
-msgstr "高さ"
+msgstr "Luzera"
 
 #. Omeka Image File: Bit Depth element
 msgid "Bit Depth"
-msgstr "ビット深度"
+msgstr "Bit-eko sakontasuna"
 
 #. Omeka Image File: Channels element
 msgid "Channels"
-msgstr "チェンネル"
+msgstr "Kanalak"
 
 #. Omeka Image File: Exif String element
 msgid "Exif String"
-msgstr "Exif情報"
+msgstr "Exif-eko esaldi"
 
 #. Omeka Image File: Exif Array element
 msgid "Exif Array"
-msgstr "Exif 文字列"
+msgstr "Exif-eko array"
 
 #. Omeka Image File: IPTC String element
 msgid "IPTC String"
-msgstr "IPTC 文字列"
+msgstr "IPTC-eko esaldi"
 
 #. Omeka Image File: IPTC Array element
 msgid "IPTC Array"
-msgstr "IPTC 配列"
+msgstr "IPTC-eko array"
 
 #. Omeka Video File
 msgid "Omeka Video File"
-msgstr "Omekaビデオファイル"
+msgstr "Omekako bideoko artxiboa"
 
 #. Omeka Video File description
 msgid ""
@@ -297,35 +292,35 @@ msgstr ""
 
 #. Omeka Video File: Bitrate element
 msgid "Bitrate"
-msgstr "ビットレート"
+msgstr "Bitrate"
 
 # Omeka Video File: Duration element
 msgid "Duration"
-msgstr "期間"
+msgstr "Iraupena"
 
 #. Omeka Video File: Sample Rate element
 msgid "Sample Rate"
-msgstr "サンプリング周波数"
+msgstr "Sample Rate"
 
 #. Omeka Video File: Codec element
 msgid "Codec"
-msgstr "コーデック"
+msgstr "Kodek"
 
 #. Format (Legacy) Metadata element set
 msgid "Format (Legacy) Metadata"
-msgstr ""
+msgstr "Formatu (Legacy) Metadata"
 
 #. User role: Super
 msgid "Super"
-msgstr "特権管理者"
+msgstr "Nagusi"
 
 #. User role: Admin
 msgid "Admin"
-msgstr "管理者"
+msgstr "Administrazailea"
 
 #. User role: Researcher
 msgid "Researcher"
-msgstr "調査者"
+msgstr "Ikertzailea"
 
 #: admin/themes/default/appearance/edit-navigation.php:3
 #: admin/themes/default/appearance/edit-settings.php:2
@@ -333,24 +328,24 @@ msgstr "調査者"
 #: admin/themes/default/themes/browse.php:2
 #: admin/themes/default/themes/config.php:3
 msgid "Appearance"
-msgstr "表示"
+msgstr "Itxura"
 
 #: admin/themes/default/appearance/edit-navigation.php:14
 msgid ""
 "Check the links to display them in the main navigation. Click and drag the "
 "links into the preferred display order."
-msgstr "メインナビゲーションの中で表示されるリンクを確認してください。表示順を変更するにはリンクをクリックしてドラッグしてください。"
+msgstr ""
 
 #: admin/themes/default/appearance/edit-navigation.php:19
 msgid "Add a Link to the Navigation"
-msgstr "ナビゲーションにリンクを追加"
+msgstr "Linka gehitu"
 
 #: admin/themes/default/appearance/edit-navigation.php:21
 #: admin/themes/default/appearance/edit-navigation.php:41
 #: admin/themes/default/users/api-keys.php:40
 #: application/forms/Navigation.php:138
 msgid "Label"
-msgstr "ラベル"
+msgstr "Etiketa"
 
 #: admin/themes/default/appearance/edit-navigation.php:23
 #: admin/themes/default/appearance/edit-navigation.php:42
@@ -360,7 +355,7 @@ msgstr "URL"
 
 #: admin/themes/default/appearance/edit-navigation.php:25
 msgid "Add Link"
-msgstr "リンクを追加"
+msgstr "Linka gehitu"
 
 #: admin/themes/default/appearance/edit-navigation.php:31
 #: admin/themes/default/appearance/edit-settings.php:21
@@ -381,12 +376,12 @@ msgstr "リンクを追加"
 #: admin/themes/default/users/edit.php:21
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:73
 msgid "Save Changes"
-msgstr "変更を保存する"
+msgstr "Gorde aldaketak"
 
 #: admin/themes/default/appearance/edit-navigation.php:35
 #: admin/themes/default/appearance/reset-navigation-confirm.php:2
 msgid "Reset Navigation"
-msgstr "ナビゲーションをリセット"
+msgstr ""
 
 #: admin/themes/default/appearance/edit-navigation.php:43
 #: admin/themes/default/collections/edit.php:23
@@ -396,7 +391,7 @@ msgstr "ナビゲーションをリセット"
 #: admin/themes/default/items/show.php:45
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:79
 msgid "View Public Page"
-msgstr "公開ページを見る"
+msgstr "Orrialde publiko ikusi"
 
 #: admin/themes/default/appearance/edit-navigation.php:44
 #: admin/themes/default/collections/edit.php:25
@@ -417,13 +412,13 @@ msgstr "公開ページを見る"
 #: admin/themes/default/users/edit.php:26
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:83
 msgid "Delete"
-msgstr "削除"
+msgstr "Ezabatu"
 
 #: admin/themes/default/appearance/reset-navigation-confirm.php:9
 #: admin/themes/default/common/delete-confirm.php:10
 #: application/views/scripts/common/delete-confirm.php:12
 msgid "Are you sure?"
-msgstr "本当によろしいですか？"
+msgstr "Zihur zaude?"
 
 #: admin/themes/default/appearance/reset-navigation-confirm.php:10
 msgid ""
@@ -436,11 +431,11 @@ msgstr ""
 #: admin/themes/default/collections/browse.php:75
 #: admin/themes/default/collections/browse.php:85
 msgid "Add a Collection"
-msgstr "コレクションを追加"
+msgstr "Sortari gehitu"
 
 #: admin/themes/default/collections/add.php:11
 msgid "Add Collection"
-msgstr "コレクションを追加"
+msgstr "Sorta bat gehitu"
 
 #: admin/themes/default/collections/add.php:16
 #: admin/themes/default/collections/edit.php:32
@@ -451,7 +446,7 @@ msgstr "コレクションを追加"
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:52
 msgid "Public"
-msgstr "公開"
+msgstr "Publiko"
 
 #: admin/themes/default/collections/add.php:19
 #: admin/themes/default/collections/edit.php:37
@@ -462,7 +457,7 @@ msgstr "公開"
 #: admin/themes/default/items/quick-filters.php:8
 #: admin/themes/default/items/show.php:53
 msgid "Featured"
-msgstr "注目"
+msgstr "Nabarmena"
 
 #: admin/themes/default/collections/browse.php:2
 #: application/libraries/Omeka/Navigation.php:149
@@ -472,7 +467,7 @@ msgstr "注目"
 #: application/tests/suite/Omeka/NavigationTest.php:950
 #: application/views/scripts/collections/browse.php:2
 msgid "Browse Collections"
-msgstr "コレクションをブラウジング"
+msgstr "Sortari begirada"
 
 #: admin/themes/default/collections/browse.php:2
 #: admin/themes/default/item-types/browse.php:2
@@ -486,13 +481,14 @@ msgstr "コレクションをブラウジング"
 #: application/views/scripts/search/index.php:2
 #, php-format
 msgid "(%s total)"
-msgstr "(合計 %s個)"
+msgstr "(%s Guztia)"
 
 #: admin/themes/default/collections/browse.php:17
 #, php-format
 msgid "%sOne item%s has no collection."
 msgid_plural "%s%d items%s aren't in a collection."
 msgstr[0] ""
+msgstr[1] ""
 
 #: admin/themes/default/collections/browse.php:19
 msgid "All items are in a collection."
@@ -502,7 +498,7 @@ msgstr ""
 #: admin/themes/default/collections/show.php:51
 #: application/views/scripts/collections/browse.php:35
 msgid "Contributors"
-msgstr ""
+msgstr "Laguntzaileak"
 
 #: admin/themes/default/collections/browse.php:31
 #: admin/themes/default/files/show.php:66
@@ -510,18 +506,18 @@ msgstr ""
 #: application/views/scripts/collections/browse.php:11
 #: application/views/scripts/items/browse.php:21
 msgid "Date Added"
-msgstr "追加した日付"
+msgstr "Data eranskin"
 
 #: admin/themes/default/collections/browse.php:32
 #: admin/themes/default/collections/show.php:46
 #: admin/themes/default/item-types/show.php:42
 msgid "Total Number of Items"
-msgstr "アイテムの総数"
+msgstr "Item-eko guztira"
 
 #: admin/themes/default/collections/browse.php:47
 #: admin/themes/default/items/browse.php:86
 msgid "(Private)"
-msgstr ""
+msgstr "(Pribatu)"
 
 #: admin/themes/default/collections/browse.php:50
 #: admin/themes/default/collections/show.php:32
@@ -538,27 +534,27 @@ msgstr ""
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:63
 msgid "Edit"
-msgstr "編集"
+msgstr "Editatu"
 
 #: admin/themes/default/collections/browse.php:59
 msgid "No contributors"
-msgstr ""
+msgstr "Laguntzaleak gabe"
 
 #: admin/themes/default/collections/browse.php:79
 msgid "There are no collections on this page."
-msgstr "このページにコレクションはありません。"
+msgstr "Ez dago sortarik orrialde honetan"
 
 #: admin/themes/default/collections/browse.php:79
 msgid "View All Collections"
-msgstr "すべてのコレクションを見る"
+msgstr "Sorta guztiak ikusi"
 
 #: admin/themes/default/collections/browse.php:82
 msgid "You have no collections."
-msgstr ""
+msgstr "Zuk ez daukazu sortarik"
 
 #: admin/themes/default/collections/browse.php:84
 msgid "Get started by adding your first collection."
-msgstr ""
+msgstr "Hasi zure lehenengo sorta gehitzen"
 
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
@@ -566,23 +562,23 @@ msgstr ""
 #: application/models/Mixin/ElementText.php:780
 #: application/views/scripts/functions.php:22
 msgid "[Untitled]"
-msgstr "[Untitled]"
+msgstr ""
 
 #: admin/themes/default/collections/edit.php:8
 #, php-format
 msgid "Edit Collection #%s"
-msgstr "コレクション #%sを編集"
+msgstr "Sortako editatu #%s"
 
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Collection #%s"
-msgstr "コレクション #%s"
+msgstr "Sortako #%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
 #: application/views/scripts/index.php:40
 msgid "Recently Added Items"
-msgstr "最近追加されたアイテム"
+msgstr "Duela gutxi Items-k gehitutakoak"
 
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/collections/show.php:42
@@ -590,7 +586,7 @@ msgstr "最近追加されたアイテム"
 #: admin/themes/default/items/show.php:53
 #: application/views/helpers/ItemSearchFilters.php:68
 msgid "Yes"
-msgstr "はい"
+msgstr "Bai"
 
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/collections/show.php:42
@@ -598,11 +594,11 @@ msgstr "はい"
 #: admin/themes/default/items/show.php:53
 #: application/views/helpers/ItemSearchFilters.php:68
 msgid "No"
-msgstr "いいえ"
+msgstr "Ez"
 
 #: admin/themes/default/collections/show.php:56
 msgid "No contributors."
-msgstr ""
+msgstr "Laguntzailearik gabe"
 
 #: admin/themes/default/collections/show.php:62
 #: admin/themes/default/files/show.php:93
@@ -611,15 +607,15 @@ msgstr ""
 #: application/views/scripts/items/browse.php:60
 #: application/views/scripts/items/show.php:41
 msgid "Output Formats"
-msgstr "出力フォーマット"
+msgstr "Formatuak irteera"
 
 #: admin/themes/default/common/appearance-nav.php:5
 msgid "Themes"
-msgstr "テーマ"
+msgstr "Gaiak"
 
 #: admin/themes/default/common/appearance-nav.php:11
 msgid "Navigation"
-msgstr "ナビゲーション"
+msgstr "Nabigazio"
 
 #: admin/themes/default/common/appearance-nav.php:15
 #: admin/themes/default/common/global-nav.php:23
@@ -630,30 +626,30 @@ msgstr "ナビゲーション"
 #: admin/themes/default/settings/edit-security.php:3
 #: admin/themes/default/settings/edit-settings.php:3
 msgid "Settings"
-msgstr "設定"
+msgstr "Doikuntzak"
 
 #: admin/themes/default/common/content-nav.php:1
 msgid "Main Menu"
-msgstr "メインメニュー"
+msgstr "Menu nagusi"
 
 #: admin/themes/default/common/content-nav.php:5
 #: admin/themes/default/index.php:2
 msgid "Dashboard"
-msgstr "ダッシュボード"
+msgstr "Taula"
 
 #: admin/themes/default/common/content-nav.php:9
 #: admin/themes/default/items/batch-delete.php:15
 #: admin/themes/default/items/batch-edit.php:17
 msgid "Items"
-msgstr "アイテム"
+msgstr "Items-k"
 
 #: admin/themes/default/common/content-nav.php:13
 msgid "Collections"
-msgstr "コレクション"
+msgstr "Sortak"
 
 #: admin/themes/default/common/content-nav.php:17
 msgid "Item Types"
-msgstr "アイテムタイプ"
+msgstr "Items-eko mota"
 
 #: admin/themes/default/common/content-nav.php:21
 #: admin/themes/default/items/browse.php:108
@@ -661,82 +657,82 @@ msgstr "アイテムタイプ"
 #: application/views/scripts/items/browse.php:46
 #: application/views/scripts/items/show.php:29
 msgid "Tags"
-msgstr "タグ"
+msgstr "Tags"
 
 #: admin/themes/default/common/delete-confirm.php:3
 #: application/views/scripts/common/delete-confirm.php:3
 #, php-format
 msgid "Delete %s"
-msgstr "%sを削除"
+msgstr "Ezabatu %s"
 
 #: admin/themes/default/common/footer.php:6
 #: admin/themes/default/common/login-footer.php:7
 msgid "Powered by Omeka"
-msgstr "owered by Omeka"
+msgstr "Omekako ekintza"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Documentation"
-msgstr "ドキュメンテーション"
+msgstr "Dokumentazioa"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Support Forums"
-msgstr "サポートフォーラム"
+msgstr "Euskarriko foroak"
 
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
 #: admin/themes/default/plugins/browse.php:52
 #, php-format
 msgid "Version %s"
-msgstr "バージョン %s"
+msgstr "Bertsio %s"
 
 #: admin/themes/default/common/footer.php:10
 #: admin/themes/default/system-info/index.php:2
 msgid "System Information"
-msgstr "システム情報"
+msgstr "Sistemako informazioa"
 
 #: admin/themes/default/common/global-nav.php:1
 msgid "Manage Site"
-msgstr ""
+msgstr "Lekua administratu"
 
 #: admin/themes/default/common/global-nav.php:5
 #: admin/themes/default/plugins/browse.php:2
 msgid "Plugins"
-msgstr "プラグイン"
+msgstr "Plugins"
 
 #: admin/themes/default/common/global-nav.php:17
 msgid "Users"
-msgstr "ユーザー"
+msgstr "Erabiltzaleak"
 
 #: admin/themes/default/common/header.php:11
 #: admin/themes/default/upgrade/index.php:6
 #: application/views/scripts/common/admin-bar.php:11
 msgid "Omeka Admin"
-msgstr "Omeka Admin"
+msgstr "Omekako administratzailea"
 
 #: admin/themes/default/common/header.php:41
 #: application/views/scripts/common/header.php:32
 msgid "Skip to main content"
-msgstr ""
+msgstr "Leku nagusira joan"
 
 #: admin/themes/default/common/header.php:61
 #: application/views/scripts/common/admin-bar.php:7
 #, php-format
 msgid "Welcome, %s"
-msgstr "ようこそ, %s"
+msgstr "Ongi etorri, %s"
 
 #: admin/themes/default/common/header.php:62
 #: application/views/scripts/common/admin-bar.php:15
 msgid "Log Out"
-msgstr "ログアウト"
+msgstr "Irten"
 
 #: admin/themes/default/common/settings-nav.php:6
 #: admin/themes/default/common/users-nav.php:5
 msgid "General"
-msgstr "全般"
+msgstr "Nagusi"
 
 #: admin/themes/default/common/settings-nav.php:10
 msgid "Security"
-msgstr "セキュリティ"
+msgstr "Segurtasuna"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: admin/themes/default/search/index.php:2
@@ -744,15 +740,15 @@ msgstr "セキュリティ"
 #: application/views/scripts/search/index.php:2
 #: application/views/scripts/search/search-form.php:2
 msgid "Search"
-msgstr "検索"
+msgstr "Bilatu"
 
 #: admin/themes/default/common/settings-nav.php:20
 msgid "Element Sets"
-msgstr "要素セット"
+msgstr "Osagaiko doikuntzak"
 
 #: admin/themes/default/common/settings-nav.php:26
 msgid "Item Type Elements"
-msgstr "アイテムタイプの要素"
+msgstr "Item Type Elements"
 
 #: admin/themes/default/common/settings-nav.php:32
 msgid "API"
@@ -761,54 +757,54 @@ msgstr "API"
 #: admin/themes/default/common/users-nav.php:11
 #: application/forms/ChangePassword.php:80
 msgid "Change Password"
-msgstr "パスワードを変更"
+msgstr "Pasahitza aldatu"
 
 #: admin/themes/default/common/users-nav.php:17
 #: admin/themes/default/users/api-keys.php:14
 msgid "API Keys"
-msgstr "APIキー"
+msgstr "API giltzak"
 
 #: admin/themes/default/element-sets/browse.php:16
 #: admin/themes/default/users/browse.php:17
 #: application/forms/ItemTypes.php:141
 msgid "Name"
-msgstr "名前"
+msgstr "Izena"
 
 #: admin/themes/default/element-sets/edit.php:5
 msgid "Edit Element Set"
-msgstr "要素セットを編集する"
+msgstr "Elementu set editatu"
 
 #: admin/themes/default/element-sets/edit.php:17
 msgid ""
 "Click and drag the elements into the preferred display order. Click the "
 "right arrows to add customized comments to element descriptions."
-msgstr "お好みの表示順に変更するには要素をクリックしてドラッグしてください。要素の説明のコメントをカスタマイズするには、右の矢印をクリックしてください。"
+msgstr ""
 
 #: admin/themes/default/element-sets/edit.php:29
 msgid "Comment"
-msgstr "コメント"
+msgstr "Komentario"
 
 #: admin/themes/default/error/403.php:2
 msgid "403: Forbidden"
-msgstr "403: ページへのアクセスが拒否されました"
+msgstr "403: Debekatuta"
 
 #: admin/themes/default/error/403.php:6
 msgid "Sorry, you do not have permission to access this page."
-msgstr "申し訳ございません。このページにアクセスする権限がございません。"
+msgstr "Barkatu, zuk ez daukazu baimenik horri honetara joateko"
 
 #: admin/themes/default/error/403.php:10 admin/themes/default/error/404.php:9
 #: admin/themes/default/error/405.php:8
 msgid "site administrator"
-msgstr "サイト管理者"
+msgstr "Administratzailea lekua"
 
 #: admin/themes/default/error/403.php:11
 #, php-format
 msgid "If you think you should have permission, try contacting the %s."
-msgstr "もしあなたが権限があるとお考えなら、%sに連絡してください。"
+msgstr ""
 
 #: admin/themes/default/error/404.php:2
 msgid "404: Page Not Found"
-msgstr "404: ページが見つかりません"
+msgstr "404: Horri bilatu gabe"
 
 #: admin/themes/default/error/404.php:6
 msgid ""
@@ -820,66 +816,66 @@ msgstr ""
 #: admin/themes/default/error/404.php:10
 #, php-format
 msgid "If this does not help, try contacting the %s."
-msgstr "もしこれが役立たないようなら、%sに連絡してください。"
+msgstr ""
 
 #: admin/themes/default/error/404.php:16 admin/themes/default/index.php:52
 msgid "Recent Items"
-msgstr "最近のアイテム"
+msgstr "Item berriak"
 
 #: admin/themes/default/error/404.php:29 admin/themes/default/index.php:65
 msgid "Add a new item"
-msgstr "新しいアイテムを追加"
+msgstr "Item berri bat gehitu"
 
 #: admin/themes/default/error/404.php:36 admin/themes/default/index.php:70
 msgid "Recent Collections"
-msgstr "最近のコレクション"
+msgstr "Sorta Berriak"
 
 #: admin/themes/default/error/404.php:50 admin/themes/default/index.php:84
 msgid "Add a new collection"
-msgstr "新しいコレクションを追加"
+msgstr "Sorta berri bat gehitu"
 
 #: admin/themes/default/error/405.php:2
 msgid "405: Method Not Allowed"
-msgstr " 405 Method Not Allowed: 許可されていないメソッドです"
+msgstr ""
 
 #: admin/themes/default/error/405.php:9
 #, php-format
 msgid ""
 "You must use a different method to access this URL. If you reached this page"
 " by following a link or clicking a button in Omeka, please contact the %s."
-msgstr "このURLへのアクセスには違う方法をとって下さい。もし、次のリンクかOmekaのボタンをクリックしてこのページに辿り着いたなら、%sに連絡して下さい。"
+msgstr ""
 
 #: admin/themes/default/files/edit.php:8
 #, php-format
 msgid "Edit File #%s"
-msgstr "#%sファイルを編集"
+msgstr "Fitxategia editatu #%s"
 
 #: admin/themes/default/files/show.php:9
 #: application/views/scripts/files/show.php:9
 #, php-format
 msgid "File #%s"
-msgstr "ファイル#%s"
+msgstr "Fitxategi #%s"
 
 #: admin/themes/default/files/show.php:35
 #: application/libraries/globals.php:409
 msgid "Item"
-msgstr "アイテム"
+msgstr "Item"
 
 #: admin/themes/default/files/show.php:40
 msgid "Direct Links"
-msgstr "ダイレクトリンク"
+msgstr ""
 
 #: admin/themes/default/files/show.php:42
 msgid "Original"
-msgstr ""
+msgstr "Originala"
 
 #: admin/themes/default/files/show.php:44
 msgid "Fullsize"
-msgstr "フルサイズ"
+msgstr "Neurri osoa"
 
 #: admin/themes/default/files/show.php:45
 msgid "Thumbnail"
-msgstr "サムネイル"
+msgstr ""
 
 #: admin/themes/default/files/show.php:46
 msgid "Square Thumbnail"
@@ -888,40 +884,40 @@ msgstr ""
 #: admin/themes/default/files/show.php:52
 #: application/views/scripts/files/show.php:22
 msgid "Format Metadata"
-msgstr "媒体のメタデータ"
+msgstr ""
 
 #: admin/themes/default/files/show.php:54
 msgid "Filename"
-msgstr "ファイル名"
+msgstr "Fitxategi izena"
 
 #: admin/themes/default/files/show.php:56
 #: application/views/scripts/files/show.php:24
 msgid "Original Filename"
-msgstr "オリジナルのファイル名"
+msgstr "Fitxategiaren izen originala"
 
 #: admin/themes/default/files/show.php:58
 #: application/views/scripts/files/show.php:29
 msgid "File Size"
-msgstr "ファイルサイズ"
+msgstr "Fitxategiaren neurria"
 
 #: admin/themes/default/files/show.php:59
 #: application/views/scripts/files/show.php:30
 #, php-format
 msgid "%s bytes"
-msgstr ""
+msgstr "%s bytes"
 
 #: admin/themes/default/files/show.php:64
 msgid "File History"
-msgstr "ファイル履歴"
+msgstr "Fitxategiko historia"
 
 #: admin/themes/default/files/show.php:68
 msgid "Date Modified"
-msgstr "更新日"
+msgstr "Aldatuta data"
 
 #: admin/themes/default/files/show.php:70
 #: application/views/scripts/files/show.php:34
 msgid "Authentication"
-msgstr "認証"
+msgstr ""
 
 #: admin/themes/default/files/show.php:76
 #: application/views/scripts/files/show.php:40
@@ -931,12 +927,12 @@ msgstr ""
 #: admin/themes/default/files/show.php:78
 #: application/views/scripts/files/show.php:42
 msgid "Mime Type"
-msgstr ""
+msgstr "Mime mota"
 
 #: admin/themes/default/files/show.php:80
 #: application/views/scripts/files/show.php:46
 msgid "File Type / OS"
-msgstr "File Type / OS"
+msgstr ""
 
 #: admin/themes/default/files/show.php:87
 msgid "Embedded Metadata"
@@ -945,35 +941,40 @@ msgstr ""
 #: admin/themes/default/index.php:10
 msgid "item"
 msgid_plural "items"
-msgstr[0] "アイテム"
+msgstr[0] ""
+msgstr[1] ""
 
 #: admin/themes/default/index.php:11
 msgid "collection"
 msgid_plural "collections"
-msgstr[0] "コレクション"
+msgstr[0] "Sorta"
+msgstr[1] "Sortak"
 
 #: admin/themes/default/index.php:12
 msgid "tag"
 msgid_plural "tags"
-msgstr[0] "タグ"
+msgstr[0] ""
+msgstr[1] ""
 
 #: admin/themes/default/index.php:16
 msgid "plugin"
 msgid_plural "plugins"
-msgstr[0] "プラグイン"
+msgstr[0] ""
+msgstr[1] ""
 
 #: admin/themes/default/index.php:20
 msgid "user"
 msgid_plural "users"
-msgstr[0] "ユーザー"
+msgstr[0] ""
+msgstr[1] ""
 
 #: admin/themes/default/index.php:24
 msgid "theme"
-msgstr "テーマ"
+msgstr ""
 
 #: admin/themes/default/index.php:35
 msgid "A new version of Omeka is available for download."
-msgstr ""
+msgstr "Omekako bertsio bat dago deskargatuko"
 
 #: admin/themes/default/index.php:36
 #, php-format
@@ -986,46 +987,46 @@ msgstr ""
 #: admin/themes/default/items/tag-form.php:23
 #: application/views/helpers/ElementInput.php:113
 msgid "Remove"
-msgstr "削除"
+msgstr "Ezabatu"
 
 #: admin/themes/default/item-types/add-new-element.php:6
 msgid "Element Name"
-msgstr "要素の名前"
+msgstr "Elementuaren izena"
 
 #: admin/themes/default/item-types/add-new-element.php:22
 msgid "Element Description"
-msgstr ""
+msgstr "Elementuaren describapena"
 
 #: admin/themes/default/item-types/add.php:2
 #: admin/themes/default/item-types/add.php:11
 msgid "Add Item Type"
-msgstr "アイテムタイプを追加"
+msgstr "Item-eko mota gehitu"
 
 #: admin/themes/default/item-types/browse.php:2
 msgid "Browse Item Types"
-msgstr "タイプ"
+msgstr ""
 
 #: admin/themes/default/item-types/browse.php:7
 #: admin/themes/default/item-types/browse.php:40
 msgid "Add an Item Type"
-msgstr "アイテムタイプを追加"
+msgstr ""
 
 #: admin/themes/default/item-types/browse.php:14
 msgid "Type Name"
-msgstr "タイプ"
+msgstr "Motako izena"
 
 #: admin/themes/default/item-types/browse.php:16
 msgid "Total Items"
-msgstr "すべてのアイテム"
+msgstr "Item osoak"
 
 #: admin/themes/default/item-types/edit.php:8
 #, php-format
 msgid "Edit Item Type #%s"
-msgstr "項目タイプ  #%sを編集"
+msgstr ""
 
 #: admin/themes/default/item-types/form.php:14
 msgid "Item Type Information"
-msgstr "アイテムタイプについて"
+msgstr ""
 
 #: admin/themes/default/item-types/form.php:15
 #: admin/themes/default/users/add.php:7
@@ -1033,55 +1034,55 @@ msgstr "アイテムタイプについて"
 #: admin/themes/default/users/edit.php:15
 #: install/views/scripts/index/index.phtml:14
 msgid "required field"
-msgstr "必須項目"
+msgstr ""
 
 #: admin/themes/default/item-types/form.php:25
 #: admin/themes/default/item-types/show.php:16
 msgid "Elements"
-msgstr "要素"
+msgstr "Elementuak"
 
 #: admin/themes/default/item-types/form.php:42
 #: admin/themes/default/items/tag-form.php:22
 #: admin/themes/default/settings/edit-item-type-elements.php:22
 msgid "Undo"
-msgstr ""
+msgstr "atzera"
 
 #: admin/themes/default/item-types/form.php:80
 #: admin/themes/default/item-types/form.php:87
 msgid "Add Element"
-msgstr "要素を追加"
+msgstr "elementu gehitu"
 
 #: admin/themes/default/item-types/form.php:84
 msgid "Existing"
-msgstr "存在する"
+msgstr ""
 
 #: admin/themes/default/item-types/form.php:85
 msgid "New"
-msgstr "New"
+msgstr "berria"
 
 #: admin/themes/default/item-types/show.php:8
 #, php-format
 msgid "Item Type #%s"
-msgstr "項目タイプ #%s"
+msgstr ""
 
 #: admin/themes/default/item-types/show.php:25
 msgid "There are no elements."
-msgstr ""
+msgstr "Ez dago elementurik"
 
 #: admin/themes/default/item-types/show.php:39
 msgid "There are no recently added items."
-msgstr "最近追加されたアイテムはありません。"
+msgstr ""
 
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:19
 #: admin/themes/default/items/browse.php:141
 #: admin/themes/default/items/browse.php:168
 msgid "Add an Item"
-msgstr "アイテムを追加"
+msgstr "Item bat gehitu"
 
 #: admin/themes/default/items/add.php:12
 msgid "Add Item"
-msgstr "アイテムを追加"
+msgstr "Item gehitu"
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit-common.php:48
@@ -1091,7 +1092,7 @@ msgstr "アイテムを追加"
 #: application/libraries/globals.php:411
 #: application/views/scripts/items/show.php:21
 msgid "Collection"
-msgstr "コレクション"
+msgstr "Sorta"
 
 #: admin/themes/default/items/batch-delete-all.php:2
 msgid "Batch Delete All Searched Items"
@@ -1115,7 +1116,7 @@ msgstr ""
 #: admin/themes/default/items/batch-delete.php:47
 #: admin/themes/default/items/batch-edit.php:47
 msgid "Delete Items"
-msgstr "アイテムを削除"
+msgstr "Item ezabatu"
 
 #: admin/themes/default/items/batch-delete.php:2
 msgid "Batch Delete Items"
@@ -1151,46 +1152,46 @@ msgstr ""
 
 #: admin/themes/default/items/batch-edit-common.php:2
 msgid "Item Metadata"
-msgstr "アイテムのメタデータ"
+msgstr ""
 
 #: admin/themes/default/items/batch-edit-common.php:6
 msgid "Public?"
-msgstr "公開しますか？"
+msgstr "Publiko"
 
 #: admin/themes/default/items/batch-edit-common.php:9
 #: admin/themes/default/items/batch-edit-common.php:23
 #: admin/themes/default/items/batch-edit-common.php:37
 #: admin/themes/default/items/batch-edit-common.php:52
 msgid "Select Below"
-msgstr "下から選択"
+msgstr "Behera aukeratu"
 
 #: admin/themes/default/items/batch-edit-common.php:11
 msgid "Not Public"
-msgstr "非公開"
+msgstr "Ez da publiko"
 
 #: admin/themes/default/items/batch-edit-common.php:20
 msgid "Featured?"
-msgstr "特集しますか？"
+msgstr "¿Nabarmena?"
 
 #: admin/themes/default/items/batch-edit-common.php:25
 msgid "Not Featured"
-msgstr "注目ではない"
+msgstr "Ez da nabarmen"
 
 #: admin/themes/default/items/batch-edit-common.php:33
 #: admin/themes/default/items/item-type-form.php:3
 msgid "Item Type"
-msgstr "アイテムタイプ"
+msgstr "Item mota"
 
 #: admin/themes/default/items/batch-edit-common.php:42
 #: admin/themes/default/items/batch-edit-common.php:57
 msgid "Remove?"
-msgstr "削除しますか？"
+msgstr "¿Ezabatu?"
 
 #: admin/themes/default/items/batch-edit-common.php:63
 #: admin/themes/default/items/tag-form.php:8
 #: admin/themes/default/items/tag-form.php:11
 msgid "Add Tags"
-msgstr "タグを追加"
+msgstr ""
 
 #: admin/themes/default/items/batch-edit-common.php:66
 #, php-format
@@ -1203,11 +1204,11 @@ msgstr ""
 
 #: admin/themes/default/items/batch-edit.php:37
 msgid "Changes will be applied to checked items."
-msgstr "チェックしたアイテムに変更が適応されました。"
+msgstr ""
 
 #: admin/themes/default/items/batch-edit.php:48
 msgid "Check if you wish to delete selected items."
-msgstr "選択したアイテムを削除するか確認してください。"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:3
 #: application/libraries/Omeka/Navigation.php:142
@@ -1248,7 +1249,7 @@ msgstr "選択したアイテムを削除するか確認してください。"
 #: application/views/scripts/items/browse.php:2
 #: application/views/scripts/items/tags.php:2
 msgid "Browse Items"
-msgstr "アイテム"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:21
 #: admin/themes/default/items/browse.php:143
@@ -1257,7 +1258,7 @@ msgstr "アイテム"
 #: application/libraries/globals.php:2791
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
-msgstr "アイテムを検索"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:26
 #: admin/themes/default/items/browse.php:129
@@ -1281,47 +1282,48 @@ msgstr ""
 
 #: admin/themes/default/items/browse.php:109
 msgid "No Tags"
-msgstr "タグがありません"
+msgstr "Ez dago Tags"
 
 #: admin/themes/default/items/browse.php:155
 msgid "Details"
-msgstr "詳細"
+msgstr "Xehetasunak"
 
 #: admin/themes/default/items/browse.php:156
 msgid "Show Details"
-msgstr "詳細を表示"
+msgstr "Xehetasunak erakutsi"
 
 #: admin/themes/default/items/browse.php:157
 msgid "Hide Details"
-msgstr "詳細を隠す"
+msgstr "Xehetasunak ezkutatu"
 
 #: admin/themes/default/items/browse.php:165
 msgid "You have no items."
-msgstr ""
+msgstr "Zuk ez daukazu Item"
 
 #: admin/themes/default/items/browse.php:167
 msgid "Get started by adding your first item."
-msgstr ""
+msgstr "Hasi lehen item gehitu"
 
 #: admin/themes/default/items/browse.php:172
 #, php-format
 msgid "The query searched 1 item and returned no results."
 msgid_plural "The query searched %s items and returned no results."
 msgstr[0] ""
+msgstr[1] ""
 
 #: admin/themes/default/items/browse.php:173
 msgid "refine your search"
-msgstr "絞り込み検索"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:173
 #, php-format
 msgid "Would you like to %s?"
-msgstr "%sしたいですか？"
+msgstr ""
 
 #: admin/themes/default/items/edit.php:8
 #, php-format
 msgid "Edit Item #%s"
-msgstr "アイテム#%sを編集"
+msgstr "Item editatu #%s"
 
 #: admin/themes/default/items/files-form.php:2
 msgid "Click and drag the files into the preferred display order."
@@ -1329,56 +1331,56 @@ msgstr ""
 
 #: admin/themes/default/items/files-form.php:13
 msgid "Delete "
-msgstr "削除"
+msgstr ""
 
 #: admin/themes/default/items/files-form.php:22
 msgid "Add New Files"
-msgstr "新しいファイルを追加"
+msgstr ""
 
 #: admin/themes/default/items/files-form.php:24
 #, php-format
 msgid "The maximum file size is %s."
-msgstr "最大ファイルサイズは %s です。"
+msgstr ""
 
 #: admin/themes/default/items/files-form.php:27
 msgid "Find a File"
-msgstr "ファイルを探す"
+msgstr ""
 
 #: admin/themes/default/items/form.php:25
 msgid "Add Another File"
-msgstr "ファイルを追加"
+msgstr ""
 
 #: admin/themes/default/items/item-type-form.php:15
 msgid "Pick this type"
-msgstr "このタイプを選ぶ"
+msgstr ""
 
 #: admin/themes/default/items/quick-filters.php:2
 #: admin/themes/default/items/quick-filters.php:4
 msgid "Quick Filter"
-msgstr "クイックフィルター"
+msgstr ""
 
 #: admin/themes/default/items/quick-filters.php:5
 msgid "View All"
-msgstr "すべてを見る"
+msgstr ""
 
 #: admin/themes/default/items/quick-filters.php:7
 msgid "Private"
-msgstr "非公開"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:14
 #: application/views/scripts/items/search-form.php:13
 msgid "Search for Keywords"
-msgstr "キーワードで検索"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:27
 #: application/views/scripts/items/search-form.php:25
 msgid "Narrow by Specific Fields"
-msgstr "特定フィールドで絞り込み"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:28
 #: application/views/scripts/items/search-form.php:105
 msgid "Add a Field"
-msgstr "フィードを追加"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:54
 #: application/views/scripts/items/search-form.php:50
@@ -1400,27 +1402,27 @@ msgstr ""
 #: admin/themes/default/items/search-form.php:67
 #: application/views/scripts/items/search-form.php:63
 msgid "Search Field"
-msgstr "フィールドを検索"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:80
 #: application/views/scripts/items/search-form.php:76
 msgid "Search Type"
-msgstr "タイプを検索"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:85
 #: application/views/scripts/items/search-form.php:81
 msgid "contains"
-msgstr "含む"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:86
 #: application/views/scripts/items/search-form.php:82
 msgid "does not contain"
-msgstr "含まない"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:87
 #: application/views/scripts/items/search-form.php:83
 msgid "is exactly"
-msgstr "完全一致"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:88
 msgid "is not exactly"
@@ -1429,12 +1431,12 @@ msgstr ""
 #: admin/themes/default/items/search-form.php:89
 #: application/views/scripts/items/search-form.php:84
 msgid "is empty"
-msgstr "空欄"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:90
 #: application/views/scripts/items/search-form.php:85
 msgid "is not empty"
-msgstr "空欄以外"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:91
 #: application/views/scripts/items/search-form.php:86
@@ -1462,62 +1464,62 @@ msgstr ""
 #: admin/themes/default/items/search-form.php:108
 #: application/views/scripts/items/search-form.php:101
 msgid "Remove field"
-msgstr "項目を削除"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:116
 #: application/views/scripts/items/search-form.php:109
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
-msgstr "IDの範囲で検索 (例: 1-4, 156, 79)"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:130
 #: application/views/scripts/items/search-form.php:120
 msgid "Search By Collection"
-msgstr "コレクションで検索"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:146
 #: application/views/scripts/items/search-form.php:134
 msgid "Search By Type"
-msgstr "タイプで検索"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:163
 #: application/views/scripts/items/search-form.php:150
 msgid "Search By User"
-msgstr "ユーザーで検索"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:180
 #: application/views/scripts/items/search-form.php:165
 msgid "Search By Tags"
-msgstr "タグで検索"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:195
 #: application/views/scripts/items/search-form.php:178
 msgid "Public/Non-Public"
-msgstr "公開/非公開"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:204
 #: application/views/scripts/items/search-form.php:186
 msgid "Only Public Items"
-msgstr "公開アイテムのみ"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:205
 #: application/views/scripts/items/search-form.php:187
 msgid "Only Non-Public Items"
-msgstr "非公開アイテムのみ"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:215
 #: application/views/scripts/items/search-form.php:196
 msgid "Featured/Non-Featured"
-msgstr "注目/非注目"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:224
 #: application/views/scripts/items/search-form.php:204
 msgid "Only Featured Items"
-msgstr "注目アイテムのみ"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:225
 #: application/views/scripts/items/search-form.php:205
 msgid "Only Non-Featured Items"
-msgstr "非注目アイテムのみ"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:233
 #: application/views/scripts/items/search-form.php:214
@@ -1527,15 +1529,15 @@ msgstr ""
 #: admin/themes/default/items/show.php:8
 #, php-format
 msgid "Item #%s"
-msgstr "アイテム#%s"
+msgstr ""
 
 #: admin/themes/default/items/show.php:28
 msgid "Prev Item"
-msgstr "前のアイテム"
+msgstr ""
 
 #: admin/themes/default/items/show.php:33
 msgid "Next Item"
-msgstr "次のアイテム"
+msgstr ""
 
 #: admin/themes/default/items/show.php:73
 msgid "File Metadata"
@@ -1543,49 +1545,49 @@ msgstr ""
 
 #: admin/themes/default/items/show.php:76
 msgid "There are no files for this item yet."
-msgstr "このアイテムにはまだファイルがありません。"
+msgstr ""
 
 #: admin/themes/default/items/show.php:76
 msgid "Add a File"
-msgstr "ファイルを追加"
+msgstr ""
 
 #: admin/themes/default/items/show.php:80
 msgid "View File Metadata"
-msgstr "ファイルのメタデータをみる"
+msgstr ""
 
 #: admin/themes/default/items/show.php:93
 msgid "Bibliographic Citation"
-msgstr "書誌情報"
+msgstr ""
 
 #: admin/themes/default/items/tag-form.php:10
 #, php-format
 msgid "Separate tags with %s"
-msgstr "タグを%sで分割する。"
+msgstr ""
 
 #: admin/themes/default/items/tag-form.php:15
 msgid "All Tags"
-msgstr "すべてのタグ"
+msgstr ""
 
 #: admin/themes/default/items/tags.php:2
 msgid "Browse Items by Tag"
-msgstr "タグでアイテムを見る"
+msgstr ""
 
 #: admin/themes/default/items/tags.php:9
 #: admin/themes/default/tags/browse.php:85
 msgid "There are no tags to display. You must first tag some items."
-msgstr "表示するタグがありません。はじめにアイテムにタグ付をしてください。"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:26
 #, php-format
 msgid "This version of %1$s requires at least Omeka %2$s."
-msgstr "このバージョンの %1$s には、 Omeka %2$s以上が必要です。"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:29
 #, php-format
 msgid ""
 "%1$s requires the following plugins to be installed, activated, and loaded: "
 "%2$s"
-msgstr "%1$sは次のプラグインをインストール、有効化、ロードする必要があります。: %2$s"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:32
 msgid "This is not a valid plugin."
@@ -1605,41 +1607,41 @@ msgstr ""
 #: admin/themes/default/plugins/browse.php:69
 #, php-format
 msgid "You have a new version of %s. Please upgrade!"
-msgstr "新しいバージョンの%sがあります。アップグレードしてください。"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:90
 msgid "Upgrade"
-msgstr "アップグレード"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:101
 msgid "Configure"
-msgstr "設定"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:107
 msgid "Deactivate"
-msgstr "停止"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:107
 #: admin/themes/default/users/activate.php:30
 #: application/views/scripts/users/activate.php:27
 msgid "Activate"
-msgstr "有効化"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:118
 #: admin/themes/default/plugins/confirm-uninstall.php:16
 msgid "Uninstall"
-msgstr "アンインストール"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:131
 #: application/forms/Install.php:178
 msgid "Install"
-msgstr "インストール"
+msgstr ""
 
 #: admin/themes/default/plugins/browse.php:143
 msgid ""
 "You do not have any plugins installed. Add them to the plugins directory to "
 "see them listed here."
-msgstr "インストール済みのプラグインがありません。プラグインディレクトリに追加すれば、リストで見ることができます。"
+msgstr ""
 
 #: admin/themes/default/plugins/config.php:2
 #, php-format
@@ -1658,22 +1660,22 @@ msgstr ""
 
 #: admin/themes/default/plugins/confirm-uninstall.php:12
 msgid "Yes, I want to uninstall this plugin."
-msgstr "はい、このプラグインをアンインストールします。"
+msgstr ""
 
 #: admin/themes/default/plugins/confirm-uninstall.php:17
 msgid "or"
-msgstr "または"
+msgstr ""
 
 #: admin/themes/default/plugins/confirm-uninstall.php:17
 #: admin/themes/default/settings/edit-item-type-elements.php:51
 msgid "Cancel"
-msgstr "キャンセル"
+msgstr ""
 
 #: admin/themes/default/search/index.php:12
 #: admin/themes/default/tags/browse.php:18
 #: application/views/scripts/search/index.php:13
 msgid "Record Type"
-msgstr "レコードタイプ"
+msgstr ""
 
 #: admin/themes/default/search/index.php:39
 #: application/views/scripts/search/index.php:40
@@ -1725,39 +1727,39 @@ msgstr ""
 #, php-format
 msgid ""
 "Customize the element descriptions below. To re-order the elements, %s."
-msgstr "下記の要素をカスタマイズしてください。要素を並べ替えるには、%s。"
+msgstr ""
 
 #: admin/themes/default/settings/edit-item-type-elements.php:43
 msgid "Confirm Delete"
-msgstr "削除を確認"
+msgstr ""
 
 #: admin/themes/default/settings/edit-item-type-elements.php:44
 msgid ""
 "Are you sure you want to delete the selected item type elements from the "
 "database? You will lose all text related to the selected elements. This "
 "cannot be undone."
-msgstr "データベースから選択されたアイテムタイプをを削除しても良いですか？選択された要素に関連づけられた全てのテキストが失われます。この操作はやり直しできません。"
+msgstr ""
 
 #: admin/themes/default/settings/edit-item-type-elements.php:51
 msgid "Ok"
-msgstr "OK"
+msgstr ""
 
 #: admin/themes/default/settings/edit-search.php:10
 msgid "Search Record Types"
-msgstr "検索するレコードタイプ"
+msgstr ""
 
 #: admin/themes/default/settings/edit-search.php:13
 msgid "Customize which types of records will be searchable in Omeka."
-msgstr "Omeka内でどのタイプのレコードを検索可能にするかカスタマイズしてください。"
+msgstr ""
 
 #: admin/themes/default/settings/edit-search.php:23
 #: admin/themes/default/settings/edit-search.php:42
 msgid "Index Records"
-msgstr "レコードをインデックスする"
+msgstr ""
 
 #: admin/themes/default/settings/edit-search.php:26
 msgid "Click on the \"Index Records\" button to re-index your records."
-msgstr "レコードを再インデックス化するには、\"レコードをインデックする\"ボタンをクリックしてください。"
+msgstr ""
 
 #: admin/themes/default/settings/edit-search.php:28
 msgid ""
@@ -1766,82 +1768,82 @@ msgid ""
 " are saved, but there are circumstances when your records are not indexed; "
 "for instance, when updating from an earlier version of Omeka or after you "
 "customize which records will be searchable."
-msgstr "インデクシングとは高速で正確な検索を手助けするために、データを収集、パース、保存することを意味します。Omekaは各レコードが保存されたときに自動的にインデックス化しますが、いくつかの場合にレコードがインデックス化されない事があります。例えば、Omekaの古いバージョンからアップデートした場合や、どのレコードを検索可能にするかをカスタマイズした後などです。"
+msgstr ""
 
 #: admin/themes/default/settings/edit-security.php:23
 msgid "Restore Default Extensions"
-msgstr "デフォルトの拡張子をリストアする"
+msgstr ""
 
 #: admin/themes/default/settings/edit-security.php:28
 msgid "Restore Default Types"
-msgstr "デフォルトのタイプをリストアする"
+msgstr ""
 
 #: admin/themes/default/settings/edit-security.php:33
 msgid "Restore Default Elements"
-msgstr "デフォルトの要素をリストアする"
+msgstr ""
 
 #: admin/themes/default/settings/edit-security.php:38
 msgid "Restore Default Attributes"
-msgstr "デフォルトの属性をリストアする"
+msgstr ""
 
 #: admin/themes/default/settings/edit-settings.php:23
 msgid "Test"
-msgstr "テスト"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:7
 msgid "Edit Tags"
-msgstr "タグを編集"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:9
 msgid "Browse Tags"
-msgstr "タグ"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:24
 msgid "Editing Tags"
-msgstr "タグを編集中"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:27
 msgid "To view all items with a tag, click the number."
-msgstr "タグがついた全てのアイテムを見るには、番号をクリックして下さい。"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:28
 msgid ""
 "To edit the tag name, click the name and begin editing, and hit \"enter\" to"
 " save. To cancel an edit, click the ESC key or click away from the tag."
-msgstr "タグの名前を編集するには、名前をクリックして編集を始め、保存するには\"enter\"キーを押してください。編集をキャンセルするには、ESCキーあるいはタグの外をクリックしてください。"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:29
 msgid ""
 "To delete a tag, click the X. Deleting a tag will not delete the tagged "
 "items."
-msgstr "タグを削除するには、×をクリックして下さい。タグをクリックしてもタグづけられたアイテムは削除されません。"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:39
 msgid "Most"
-msgstr "多い順"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:40
 msgid "Least"
-msgstr "少ない順"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:41
 msgid "Alphabetical"
-msgstr "アルファベット順"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:42
 msgid "Recent"
-msgstr "最新順"
+msgstr ""
 
 #: admin/themes/default/tags/browse.php:53
 #: admin/themes/default/tags/browse.php:55
 msgid "Record Types"
-msgstr "レコードのタイプ"
+msgstr ""
 
 #: admin/themes/default/themes/browse.php:15
 #: admin/themes/default/themes/browse.php:44
 #, php-format
 msgid "Screenshot for %s Theme"
-msgstr "テーマ「%s」のスクリーンショット"
+msgstr ""
 
 #: admin/themes/default/themes/browse.php:16
 msgid "Configure Theme"
@@ -1849,13 +1851,13 @@ msgstr ""
 
 #: admin/themes/default/themes/browse.php:19
 msgid "Current Theme"
-msgstr "現在のテーマ"
+msgstr ""
 
 #: admin/themes/default/themes/browse.php:21
 #: admin/themes/default/themes/browse.php:49
 #, php-format
 msgid "By %s"
-msgstr "By %s"
+msgstr ""
 
 #: admin/themes/default/themes/browse.php:27
 msgid ""
@@ -1867,7 +1869,7 @@ msgstr ""
 
 #: admin/themes/default/themes/browse.php:46
 msgid "Use this theme"
-msgstr "このテーマを使う"
+msgstr ""
 
 #: admin/themes/default/themes/config.php:10
 #, php-format
@@ -1880,7 +1882,7 @@ msgstr ""
 
 #: admin/themes/default/upgrade/index.php:32
 msgid "Upgrade Your Omeka Database"
-msgstr "Omekaのデータベースをアップグレードしてください。"
+msgstr ""
 
 #: admin/themes/default/upgrade/index.php:34
 msgid ""
@@ -1890,23 +1892,23 @@ msgstr ""
 #: admin/themes/default/upgrade/index.php:35
 msgid ""
 "Please back up your existing database and then click the button to upgrade."
-msgstr "現在のデータベースをバックアップしてから、アップグレードのボタンをクリックして下さい。"
+msgstr ""
 
 #: admin/themes/default/upgrade/index.php:37
 msgid "Upgrade Database"
-msgstr "データベースをアップグレードする"
+msgstr ""
 
 #: admin/themes/default/upgrade/migrate.php:3
 msgid "Omeka has upgraded successfully."
-msgstr "Omekaのアップグレードに成功しました。"
+msgstr ""
 
 #: admin/themes/default/upgrade/migrate.php:5
 msgid "Omeka encountered an error when upgrading your installation."
-msgstr "アップグレード中にエラーが発生しました。"
+msgstr ""
 
 #: admin/themes/default/upgrade/migrate.php:24
 msgid "Return to Dashboard"
-msgstr "ダッシュボードに戻る"
+msgstr ""
 
 #: admin/themes/default/upgrade/migrate.php:30
 msgid "Please restore from your database backup and try again."
@@ -1934,28 +1936,28 @@ msgstr ""
 #: application/forms/ResetPassword.php:23
 #: application/views/scripts/users/activate.php:14
 msgid "Create a Password"
-msgstr "パスワードを作成する"
+msgstr ""
 
 #: admin/themes/default/users/activate.php:23 application/forms/Install.php:71
 #: application/forms/ResetPassword.php:44
 #: application/views/scripts/users/activate.php:20
 msgid "Re-type the Password"
-msgstr "パスワードを再入力してください。"
+msgstr ""
 
 #: admin/themes/default/users/add.php:2
 msgid "Add New User"
-msgstr "新しいユーザーを追加"
+msgstr ""
 
 #: admin/themes/default/users/add.php:13
 msgid "Add User"
-msgstr "ツーザーの追加"
+msgstr ""
 
 #: admin/themes/default/users/api-keys.php:8
 #: admin/themes/default/users/change-password.php:8
 #: admin/themes/default/users/edit.php:8
 #, php-format
 msgid "Edit User #%s"
-msgstr "ユーザー#%sを編集"
+msgstr ""
 
 #: admin/themes/default/users/api-keys.php:17
 msgid "New key label"
@@ -1979,19 +1981,19 @@ msgstr ""
 
 #: admin/themes/default/users/api-keys.php:41
 msgid "Key"
-msgstr "キー"
+msgstr ""
 
 #: admin/themes/default/users/api-keys.php:42
 msgid "Last IP"
-msgstr "最終IP"
+msgstr ""
 
 #: admin/themes/default/users/api-keys.php:43
 msgid "Last accessed"
-msgstr "最終アクセス"
+msgstr ""
 
 #: admin/themes/default/users/api-keys.php:44
 msgid "Rescind"
-msgstr "無効にする"
+msgstr ""
 
 #: admin/themes/default/users/api-keys.php:60
 msgid "Update API Keys"
@@ -1999,11 +2001,11 @@ msgstr ""
 
 #: admin/themes/default/users/browse.php:2
 msgid "Browse Users"
-msgstr "ユーザー"
+msgstr ""
 
 #: admin/themes/default/users/browse.php:8
 msgid "Add a User"
-msgstr "ユーザーを追加"
+msgstr ""
 
 #: admin/themes/default/users/browse.php:20
 #: admin/themes/default/users/browse.php:36
@@ -2011,7 +2013,7 @@ msgstr "ユーザーを追加"
 #: admin/themes/default/users/show.php:18 application/forms/Install.php:30
 #: application/forms/Login.php:21 application/forms/User.php:29
 msgid "Username"
-msgstr "ユーザー名"
+msgstr ""
 
 #: admin/themes/default/users/browse.php:23
 #: admin/themes/default/users/browse.php:38
@@ -2020,21 +2022,21 @@ msgstr "ユーザー名"
 #: application/forms/RecoverPassword.php:27 application/forms/User.php:96
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
-msgstr "Email"
+msgstr ""
 
 #: admin/themes/default/users/browse.php:35
 msgid "Search users"
-msgstr "ユーザーを検索"
+msgstr ""
 
 #: admin/themes/default/users/browse.php:37
 #: admin/themes/default/users/browse.php:48
 #: admin/themes/default/users/show.php:20 application/forms/User.php:81
 msgid "Display Name"
-msgstr "表示名"
+msgstr ""
 
 #: admin/themes/default/users/browse.php:50 application/forms/User.php:129
 msgid "Role"
-msgstr "役割"
+msgstr ""
 
 #: admin/themes/default/users/browse.php:60
 msgid "inactive"
@@ -2042,7 +2044,7 @@ msgstr ""
 
 #: admin/themes/default/users/change-password.php:20
 msgid "Save Password"
-msgstr "パスワードを保存"
+msgstr ""
 
 #: admin/themes/default/users/edit.php:23
 msgid "Resend Activation Email"
@@ -2051,27 +2053,27 @@ msgstr ""
 #: admin/themes/default/users/forgot-password.php:2
 #: application/views/scripts/users/forgot-password.php:2
 msgid "Forgot Password"
-msgstr "パスワードを忘れた"
+msgstr ""
 
 #: admin/themes/default/users/forgot-password.php:11
 #: application/views/scripts/users/forgot-password.php:10
 msgid "Enter your email address to retrieve your password."
-msgstr "パスワードを取得するためにEmailアドレスを入力してください。"
+msgstr ""
 
 #: admin/themes/default/users/forgot-password.php:21
 #: application/views/scripts/users/forgot-password.php:18
 msgid "Submit"
-msgstr "送信"
+msgstr ""
 
 #: admin/themes/default/users/forgot-password.php:25
 #: application/views/scripts/users/forgot-password.php:7
 msgid "Back to Log In"
-msgstr "ログインに戻る"
+msgstr ""
 
 #: admin/themes/default/users/login.php:3 application/forms/Login.php:55
 #: application/views/scripts/users/login.php:3
 msgid "Log In"
-msgstr "ログイン"
+msgstr ""
 
 #: admin/themes/default/users/login.php:8
 msgid "Go to the public site"
@@ -2084,11 +2086,11 @@ msgstr ""
 #: admin/themes/default/users/show.php:8
 #, php-format
 msgid "User #%s"
-msgstr "ユーザー#%s"
+msgstr ""
 
 #: admin/themes/default/users/show.php:15
 msgid "Edit this User"
-msgstr "このユーザーを編集"
+msgstr ""
 
 #: application/controllers/AppearanceController.php:48
 msgid "The appearance settings have been updated."
@@ -2101,7 +2103,7 @@ msgstr ""
 #: application/controllers/SettingsController.php:88
 #: install/views/scripts/index/index.phtml:17
 msgid "There were errors found in your form. Please edit and resubmit."
-msgstr "フォームにエラーを発見しました。編集して再度送信して下さい。"
+msgstr ""
 
 #: application/controllers/AppearanceController.php:66
 msgid "The navigation settings have been updated."
@@ -2120,7 +2122,7 @@ msgstr ""
 #: application/controllers/CollectionsController.php:76
 #, php-format
 msgid "The collection \"%s\" was successfully added!"
-msgstr "「%s」コレクションの追加に成功しました。"
+msgstr ""
 
 #: application/controllers/CollectionsController.php:78
 #, php-format
@@ -2130,7 +2132,7 @@ msgstr ""
 #: application/controllers/CollectionsController.php:86
 #, php-format
 msgid "The collection \"%s\" was successfully changed!"
-msgstr "「%s」コレクションの変更に成功しました。"
+msgstr ""
 
 #: application/controllers/CollectionsController.php:88
 #, php-format
@@ -2140,7 +2142,7 @@ msgstr ""
 #: application/controllers/CollectionsController.php:96
 #, php-format
 msgid "The collection \"%s\" was successfully deleted!"
-msgstr "「%s」コレクションの削除に成功しました。"
+msgstr ""
 
 #: application/controllers/CollectionsController.php:98
 #, php-format
@@ -2153,7 +2155,7 @@ msgid ""
 "This will delete the collection \"%s\" and its associated metadata. This "
 "will not delete any items in this collection, but will delete the reference "
 "to this collection in each item."
-msgstr "この操作を行うと、コレクション \"%s\" と関連したメタデータが削除されます。コレクション中のアイテムは削除されませんが、それぞれのアイテムの、このコレクションに対する参照は削除されます。"
+msgstr ""
 
 #: application/controllers/CollectionsController.php:110
 #, php-format
@@ -2161,13 +2163,13 @@ msgid ""
 "This will delete the collection #%s and its associated metadata. This will "
 "not delete any items in this collection, but will delete the reference to "
 "this collection in each item."
-msgstr "この操作を行うと、コレクション #%s と関連したメタデータが削除されます。コレクション中のアイテムは削除されませんが、それぞれのアイテムの、このコレクションに対する参照は削除されます。"
+msgstr ""
 
 #: application/controllers/ElementSetsController.php:21
 msgid ""
 "This will delete the element set and all elements assigned to the element "
 "set. Items will lose all metadata that is specific to this element set."
-msgstr "この操作を行うと、この要素セットとそれに割り当てられた全ての要素が削除されます。アイテムはこの要素セット固有の全てのメタデータを失います。"
+msgstr ""
 
 #: application/controllers/ElementSetsController.php:53
 #: application/controllers/PluginsController.php:51
@@ -2187,19 +2189,19 @@ msgstr ""
 
 #: application/controllers/ElementSetsController.php:72
 msgid "The element set was successfully changed!"
-msgstr "要素セットが無事変更されました！"
+msgstr ""
 
 #: application/controllers/ErrorController.php:64
 msgid "Page not found."
-msgstr "ページが見つかりません。"
+msgstr ""
 
 #: application/controllers/ErrorController.php:79
 msgid "Access denied."
-msgstr "アクセスが拒否されました。"
+msgstr ""
 
 #: application/controllers/FilesController.php:66
 msgid "This will delete the file and its associated metadata."
-msgstr "この操作を行うと、ファイルと関連づけられたメタデータが削除されます。"
+msgstr ""
 
 #: application/controllers/FilesController.php:72
 msgid "The file was successfully deleted."
@@ -2208,12 +2210,12 @@ msgstr ""
 #: application/controllers/ItemTypesController.php:28
 #, php-format
 msgid "The item type \"%s\" was successfully added."
-msgstr "アイテムタイプ \"%s\" が無事追加されました。"
+msgstr ""
 
 #: application/controllers/ItemTypesController.php:55
 #, php-format
 msgid "The item type \"%s\" was successfully updated."
-msgstr "アイテムタイプ \"%s\" が無事更新されました。"
+msgstr ""
 
 #: application/controllers/ItemTypesController.php:150
 #, php-format
@@ -2221,14 +2223,14 @@ msgid ""
 "This will delete the \"%s\" item type but will not delete the elements "
 "assigned to the item type. Items that are assigned to this item type will "
 "lose all metadata that is specific to the item type."
-msgstr "この操作を行うと、アイテムタイプ \"%s\" が削除されますが、このアイテムタイプに割り当てられた要素は削除されません。このアイテムタイプに関連づけられたアイテムはこのアイテム固有の全てのメタデータを失います。"
+msgstr ""
 
 #: application/controllers/ItemTypesController.php:158
 #, php-format
 msgid ""
 "The item type \"%s\" was successfully added!  You may now add elements to "
 "your new item type."
-msgstr "アイテムタイプ \"%s\" が無事追加されました！新しいアイテムタイプに要素の追加ができます。"
+msgstr ""
 
 #: application/controllers/ItemsController.php:89
 #: application/controllers/ItemsController.php:149
@@ -2241,46 +2243,46 @@ msgstr ""
 #: application/controllers/ItemsController.php:98
 #, php-format
 msgid "The item \"%s\" was successfully added!"
-msgstr "アイテムタイプ \"%s\" が無事追加されました！"
+msgstr ""
 
 #: application/controllers/ItemsController.php:100
 #, php-format
 msgid "The item #%s was successfully added!"
-msgstr "アイテム #%s が無事追加されました！"
+msgstr ""
 
 #: application/controllers/ItemsController.php:108
 #, php-format
 msgid "The item \"%s\" was successfully changed!"
-msgstr "アイテム \"%s\" が無事更新されました！"
+msgstr ""
 
 #: application/controllers/ItemsController.php:110
 #, php-format
 msgid "The item #%s was successfully changed!"
-msgstr "アイテム #%s が無事更新されました！"
+msgstr ""
 
 #: application/controllers/ItemsController.php:118
 #, php-format
 msgid "The item \"%s\" was successfully deleted!"
-msgstr "アイテム \"%s\" が無事削除されました！"
+msgstr ""
 
 #: application/controllers/ItemsController.php:120
 #, php-format
 msgid "The item #%s was successfully deleted!"
-msgstr "アイテム #%s が無事削除されました！"
+msgstr ""
 
 #: application/controllers/ItemsController.php:128
 #, php-format
 msgid ""
 "This will delete the item \"%s\" and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr "この操作を行うと、アイテム \"%s\" と関連づけられたメタデータが削除されます。また、このアイテムに関連づけられた全てのファイルとファイルのメタデータも削除されます。"
+msgstr ""
 
 #: application/controllers/ItemsController.php:132
 #, php-format
 msgid ""
 "This will delete the item #%s and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr "この操作を行うと、アイテム #%s と関連づけられたメタデータが削除されます。また、このアイテムに関連づけられた全てのファイルとファイルのメタデータも削除されます。"
+msgstr ""
 
 #: application/controllers/ItemsController.php:241
 #: application/controllers/ItemsController.php:376
@@ -2294,37 +2296,37 @@ msgstr ""
 
 #: application/controllers/ItemsController.php:265
 msgid "You must choose some items to batch edit."
-msgstr "バッチ編集にはアイテムを選択しなければいけません。"
+msgstr ""
 
 #: application/controllers/ItemsController.php:314
 #: application/controllers/ItemsController.php:412
 msgid "User is not allowed to modify visibility of items."
-msgstr "一般ユーザーはアイテムの表示を変更できません。"
+msgstr ""
 
 #: application/controllers/ItemsController.php:319
 #: application/controllers/ItemsController.php:417
 msgid "User is not allowed to modify featured status of items."
-msgstr "一般ユーザーは注目アイテムの状況を変更できません。"
+msgstr ""
 
 #: application/controllers/ItemsController.php:326
 msgid "User is not allowed to delete selected items."
-msgstr "選択したアイテムを削除する権限がありません。"
+msgstr ""
 
 #: application/controllers/ItemsController.php:332
 msgid "User is not allowed to edit selected items."
-msgstr "選択したアイテムを編集する権限がありません。"
+msgstr ""
 
 #: application/controllers/ItemsController.php:337
 msgid "User is not allowed to tag selected items."
-msgstr "選択したアイテムにタグを付ける権限がありません。"
+msgstr ""
 
 #: application/controllers/ItemsController.php:369
 msgid "The items were successfully deleted!"
-msgstr "このアイテムは無事削除されました！"
+msgstr ""
 
 #: application/controllers/ItemsController.php:371
 msgid "The items were successfully changed!"
-msgstr "このアイテムは無事変更されました！"
+msgstr ""
 
 #: application/controllers/ItemsController.php:436
 msgid "The items are checked and deleted one by one in the background."
@@ -2343,101 +2345,101 @@ msgstr ""
 msgid ""
 "Error in configuring plugin named \"%s\". Missing config and/or config_form "
 "hook(s)."
-msgstr "プラグイン \"%s\" の設定にエラーがあります。config および（あるいは） config_fomr hook(s) が見つかりません。"
+msgstr ""
 
 #: application/controllers/PluginsController.php:59
 #, php-format
 msgid "The %s plugin was successfully configured!"
-msgstr "プラグイン %s は無事設定されました！"
+msgstr ""
 
 #: application/controllers/PluginsController.php:89
 #, php-format
 msgid "The %s plugin has already been installed."
-msgstr "プラグイン %s はすでにインストールされています。"
+msgstr ""
 
 #: application/controllers/PluginsController.php:99
 #, php-format
 msgid "The %s plugin was successfully installed!"
-msgstr "プラグイン %s は無事インストールされました。"
+msgstr ""
 
 #: application/controllers/PluginsController.php:111
 #: application/controllers/PluginsController.php:116
 #, php-format
 msgid "The following error occurred while installing the %s plugin: "
-msgstr "プラグイン %s をインストール中に次のエラーが発生しました。"
+msgstr ""
 
 #: application/controllers/PluginsController.php:154
 #, php-format
 msgid "The following error occurred while activating the %s plugin: "
-msgstr "プラグイン %s を有効化する際に次のエラーが発生しました。"
+msgstr ""
 
 #: application/controllers/PluginsController.php:164
 #, php-format
 msgid "The %s plugin was successfully activated!"
-msgstr "プラグイン %s の有効化に成功しました。"
+msgstr ""
 
 #: application/controllers/PluginsController.php:169
 #, php-format
 msgid "The %s plugin was activated, but could not be loaded: "
-msgstr "プラグイン %s は有効化されましたが、読み込むことができませんでした。"
+msgstr ""
 
 #: application/controllers/PluginsController.php:204
 #, php-format
 msgid "The %s plugin was successfully deactivated!"
-msgstr "プラグイン %s が無事無効化されました。"
+msgstr ""
 
 #: application/controllers/PluginsController.php:209
 #, php-format
 msgid "The following error occurred while deactivating the %s plugin: "
-msgstr "プラグイン %s を無効化する途中で、次のエラーが発生しました。"
+msgstr ""
 
 #: application/controllers/PluginsController.php:239
 #, php-format
 msgid "The %s plugin was successfully upgraded!"
-msgstr "プラグイン %s が無事アップグレードされました。"
+msgstr ""
 
 #: application/controllers/PluginsController.php:248
 #: application/controllers/PluginsController.php:254
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
-msgstr "プラグイン %s をアップグレードする際に次のエラーが発生しました。"
+msgstr ""
 
 #: application/controllers/PluginsController.php:305
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
-msgstr "%s ディレクトリーにプラグイン見つかりません。"
+msgstr ""
 
 #: application/controllers/PluginsController.php:318
 msgid "You must confirm the uninstall before proceeding."
-msgstr "次に進む前にアンインストールを確認して下さい。"
+msgstr ""
 
 #: application/controllers/PluginsController.php:337
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
-msgstr "プラグイン %s が無事アンインストールされました。"
+msgstr ""
 
 #: application/controllers/PluginsController.php:342
 #: application/controllers/PluginsController.php:347
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
-msgstr "プラグイン %s をインストール中に次のエラーが発生しました。"
+msgstr ""
 
 #: application/controllers/PluginsController.php:376
 msgid "No plugin name given."
-msgstr "プラグインの名前がありません。"
+msgstr ""
 
 #: application/controllers/PluginsController.php:389
 #, php-format
 msgid "The plugin %s must be installed."
-msgstr "プラグイン %s がインストールされている必要があります。"
+msgstr ""
 
 #: application/controllers/SettingsController.php:52
 msgid "The general settings have been updated."
-msgstr "一般設定がアップデートされました。"
+msgstr ""
 
 #: application/controllers/SettingsController.php:85
 msgid "The security settings have been updated."
-msgstr "セキュリティ設定がアップデートされました。"
+msgstr ""
 
 #: application/controllers/SettingsController.php:114
 msgid ""
@@ -2477,7 +2479,7 @@ msgstr ""
 
 #: application/controllers/ThemesController.php:36
 msgid "You have chosen an illegal theme name. Please select another theme."
-msgstr "間違ったテーマを選択しました。他のテーマを選択してください。"
+msgstr ""
 
 #: application/controllers/ThemesController.php:43
 #, php-format
@@ -2486,15 +2488,15 @@ msgstr ""
 
 #: application/controllers/ThemesController.php:57
 msgid "The theme has been successfully changed."
-msgstr "テーマの変更に成功しました！"
+msgstr ""
 
 #: application/controllers/ThemesController.php:84
 msgid "The theme settings were successfully saved!"
-msgstr "テーマ設定の保存に成功しました。"
+msgstr ""
 
 #: application/controllers/UpgradeController.php:56
 msgid "SQL error in migration: "
-msgstr "マイグレーション中のSQLエラー"
+msgstr ""
 
 #: application/controllers/UpgradeController.php:69
 #, php-format
@@ -2511,23 +2513,23 @@ msgstr ""
 
 #: application/controllers/UsersController.php:108
 msgid "Please follow this link to reset your password:"
-msgstr "パスワードをリセットするためには、このリンクをたどってください："
+msgstr ""
 
 #: application/controllers/UsersController.php:110
 #: application/controllers/UsersController.php:113
 #: application/controllers/UsersController.php:385
 #, php-format
 msgid "%s Administrator"
-msgstr "%s 管理者"
+msgstr ""
 
 #: application/controllers/UsersController.php:114
 #, php-format
 msgid "[%s] Reset Your Password"
-msgstr "[%s] パスワードをリセットしてください。"
+msgstr ""
 
 #: application/controllers/UsersController.php:117
 msgid "Please check your email for a link to reset your password."
-msgstr "パスワードをリセットするリンクのため、Emailを確認してください。"
+msgstr ""
 
 #: application/controllers/UsersController.php:126
 msgid "Invalid activation code given."
@@ -2535,11 +2537,11 @@ msgstr ""
 
 #: application/controllers/UsersController.php:135
 msgid "Password: The passwords do not match."
-msgstr "パスワード：パスワードが一致しません。"
+msgstr ""
 
 #: application/controllers/UsersController.php:143
 msgid "You may now log in to Omeka."
-msgstr "Omekaにログイン中"
+msgstr ""
 
 #: application/controllers/UsersController.php:168
 #: application/controllers/UsersController.php:236
@@ -2550,7 +2552,7 @@ msgstr ""
 #: application/controllers/UsersController.php:176
 #, php-format
 msgid "The user \"%s\" was successfully added!"
-msgstr "ユーザー\"%s\"の追加に成功しました。"
+msgstr ""
 
 #: application/controllers/UsersController.php:180
 #, php-format
@@ -2568,15 +2570,15 @@ msgstr ""
 #: application/controllers/UsersController.php:258
 #, php-format
 msgid "The user %s was successfully changed!"
-msgstr "ユーザー\"%s\"の変更に成功しました。"
+msgstr ""
 
 #: application/controllers/UsersController.php:294
 msgid "Password changed!"
-msgstr "パスワードが変更されました！"
+msgstr ""
 
 #: application/controllers/UsersController.php:316
 msgid "A new API key was successfully created."
-msgstr "新しいAPIキーが作成に成功しました。"
+msgstr ""
 
 #: application/controllers/UsersController.php:323
 msgid "An existing API key was successfully rescinded."
@@ -2585,7 +2587,7 @@ msgstr ""
 #: application/controllers/UsersController.php:350
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
-msgstr "ユーザー\"%s\"の削除に成功しました。"
+msgstr ""
 
 #: application/controllers/UsersController.php:356
 #, php-format
@@ -2597,7 +2599,7 @@ msgstr ""
 
 #: application/controllers/UsersController.php:381
 msgid "Welcome!"
-msgstr "ようこそ！"
+msgstr ""
 
 #: application/controllers/UsersController.php:383
 #, php-format
@@ -2628,7 +2630,7 @@ msgstr ""
 #: application/forms/AppearanceSettings.php:28
 #: application/forms/Install.php:128
 msgid "Fullsize Image Size"
-msgstr "フルサイズの画像サイズ"
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:29
 msgid "Maximum fullsize image size constraint (in pixels)."
@@ -2637,7 +2639,7 @@ msgstr ""
 #: application/forms/AppearanceSettings.php:35
 #: application/forms/Install.php:136
 msgid "Thumbnail Size"
-msgstr "サムネイルのサイズ"
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:36
 msgid "Maximum thumbnail size constraint (in pixels)."
@@ -2646,7 +2648,7 @@ msgstr ""
 #: application/forms/AppearanceSettings.php:42
 #: application/forms/Install.php:144
 msgid "Square Thumbnail Size"
-msgstr "正方形のサムネイルサイズ"
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:43
 msgid "Maximum square thumbnail size constraint (in pixels)."
@@ -2674,7 +2676,7 @@ msgstr ""
 #: application/forms/AppearanceSettings.php:63
 #: application/forms/Install.php:168
 msgid "Show Empty Elements"
-msgstr "空の要素を見る"
+msgstr ""
 
 #: application/forms/AppearanceSettings.php:68
 msgid "Show Element Set Headings"
@@ -2698,12 +2700,12 @@ msgstr ""
 
 #: application/forms/ChangePassword.php:25
 msgid "Current Password"
-msgstr "現在のパスワード"
+msgstr ""
 
 #: application/forms/ChangePassword.php:26
 #: application/forms/ChangePassword.php:36
 msgid "Password must be at least 6 characters long."
-msgstr "パスワードは最低6文字以上が必要です。"
+msgstr ""
 
 #: application/forms/ChangePassword.php:28
 msgid "Invalid current password"
@@ -2711,7 +2713,7 @@ msgstr ""
 
 #: application/forms/ChangePassword.php:34
 msgid "New Password"
-msgstr "新しいパスワード"
+msgstr ""
 
 #: application/forms/ChangePassword.php:41
 msgid "New password must be entered."
@@ -2728,37 +2730,37 @@ msgstr ""
 
 #: application/forms/ChangePassword.php:68
 msgid "Repeat New Password"
-msgstr "新しいパスワードを再入力"
+msgstr ""
 
 #: application/forms/GeneralSettings.php:22 application/forms/Install.php:90
 msgid "Site Title"
-msgstr "サイト名"
+msgstr ""
 
 #: application/forms/GeneralSettings.php:26 application/forms/Install.php:95
 msgid "Site Description"
-msgstr "サイトの説明"
+msgstr ""
 
 #: application/forms/GeneralSettings.php:31 application/forms/Install.php:99
 msgid "Administrator Email"
-msgstr "管理者のEmail"
+msgstr ""
 
 #: application/forms/GeneralSettings.php:37 application/forms/Install.php:105
 msgid "Site Copyright Information"
-msgstr "サイトの権利情報"
+msgstr ""
 
 #: application/forms/GeneralSettings.php:41 application/forms/Install.php:109
 msgid "Site Author Information"
-msgstr "サイトの著者情報"
+msgstr ""
 
 #: application/forms/GeneralSettings.php:45 application/forms/Install.php:113
 msgid "Tag Delimiter"
-msgstr "タグ区切り文字"
+msgstr ""
 
 #: application/forms/GeneralSettings.php:46
 msgid ""
 "Separate tags using this character or string. Be careful when changing this "
 "setting. You run the risk of splitting tags that contain the old delimiter."
-msgstr "分離タグは、この文字または文字列を使用する。この設定を変更する場合には十分に注意して下さい。古いデリミターを含む分離タグのリスクを追うことになります。"
+msgstr ""
 
 #: application/forms/GeneralSettings.php:59 application/forms/Install.php:174
 msgid "ImageMagick Directory Path"
@@ -2777,7 +2779,7 @@ msgstr ""
 
 #: application/forms/Install.php:48 application/forms/Login.php:34
 msgid "Password"
-msgstr "パスワード"
+msgstr ""
 
 #: application/forms/Install.php:49
 msgid "must be at least 6 characters"
@@ -2785,7 +2787,7 @@ msgstr ""
 
 #: application/forms/Install.php:72
 msgid "Confirm your password."
-msgstr "パスワードを確定する。"
+msgstr ""
 
 #: application/forms/Install.php:114
 msgid "Separate tags using this character or string."
@@ -2805,21 +2807,21 @@ msgstr ""
 
 #: application/forms/Install.php:152
 msgid "Items Per Page (admin)"
-msgstr "ページごとのアイテム（管理人）"
+msgstr ""
 
 #: application/forms/Install.php:153
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
-msgstr "管理ページの1ページに表示するアイテムの数を制限する。"
+msgstr ""
 
 #: application/forms/Install.php:160
 msgid "Items Per Page (public)"
-msgstr "ページごとのアイテム（公開）"
+msgstr ""
 
 #: application/forms/Install.php:161
 msgid "Limit the number of items displayed per page in the public interface."
-msgstr "公開ページの1ページに表示するアイテムの数を制限する。"
+msgstr ""
 
 #: application/forms/Install.php:170
 msgid "Check box to show metadata elements with no text."
@@ -2827,19 +2829,19 @@ msgstr ""
 
 #: application/forms/Install.php:185
 msgid "Default Superuser Account"
-msgstr "デフォルトのスーパーユーザー・アカウント"
+msgstr ""
 
 #: application/forms/Install.php:195
 msgid "Site Settings"
-msgstr "サイトの設定"
+msgstr ""
 
 #: application/forms/ItemTypes.php:142
 msgid "The name of the item type."
-msgstr "アイテムタイプの名前"
+msgstr ""
 
 #: application/forms/ItemTypes.php:151
 msgid "The description of the item type."
-msgstr "アイテムタイプの説明"
+msgstr ""
 
 #: application/forms/ItemTypes.php:173 application/forms/ItemTypes.php:182
 #, php-format
@@ -2848,118 +2850,118 @@ msgstr ""
 
 #: application/forms/Login.php:27
 msgid "Username cannot be empty."
-msgstr "ユーザー名が入力されていません"
+msgstr ""
 
 #: application/forms/Login.php:40
 msgid "Password cannot be empty."
-msgstr "パスワードが入力されていません。"
+msgstr ""
 
 #: application/forms/Login.php:48
 msgid "Remember Me?"
-msgstr "保存する"
+msgstr ""
 
 #: application/forms/Navigation.php:162
 msgid "[Default]"
-msgstr "[デフォルト]"
+msgstr ""
 
 #: application/forms/Navigation.php:168
 msgid "Select a Homepage"
-msgstr "トップページを選択"
+msgstr ""
 
 #: application/forms/Navigation.php:250
 msgid "Cannot find parent navigation page."
-msgstr "親ナビゲーションページが見つかりません。"
+msgstr ""
 
 #: application/forms/Navigation.php:331
 msgid "All navigation links must have URIs."
-msgstr "全てのナビゲーションリンクはURIを持つ必要があります。"
+msgstr ""
 
 #: application/forms/Navigation.php:344
 msgid "All navigation links must have different URIs."
-msgstr "全てのナビゲーションリンクは異なるURIである必要があります。"
+msgstr ""
 
 #: application/forms/Navigation.php:350
 #, php-format
 msgid "Invalid URI for \"%s\" navigation link:  \"%s\""
-msgstr "ナビゲーションリンク \"%s\" に対して無効なURIです。: \"%s\""
+msgstr ""
 
 #: application/forms/Navigation.php:383
 msgid "Navigation links that have undeleteable sublinks cannot be deleted."
-msgstr "削除不可のサブリンクを持つナビゲーションリンクは削除できません。"
+msgstr ""
 
 #: application/forms/RecoverPassword.php:36
 msgid "Email address is required."
-msgstr "Emailアドレスは必須です。"
+msgstr ""
 
 #: application/forms/RecoverPassword.php:46
 msgid "Invalid email address given."
-msgstr "Emailアドレスが正しくありません。"
+msgstr ""
 
 #: application/forms/RecoverPassword.php:48
 msgid "Invalid format given for email address."
-msgstr "emailアドレスが不正な形式です。"
+msgstr ""
 
 #: application/forms/RecoverPassword.php:50
 msgid "Invalid hostname given for email address."
-msgstr "Emailアドレスのホストネームが無効です。"
+msgstr ""
 
 #: application/forms/RecoverPassword.php:66
 msgid "Invalid email address"
-msgstr "Emailアドレスが正しくありません。"
+msgstr ""
 
 #: application/forms/ResetPassword.php:27
 msgid "Password is required."
-msgstr "パスワードが必要です。"
+msgstr ""
 
 #: application/forms/ResetPassword.php:33
 msgid "Typed passwords do not match."
-msgstr "入力されたパスワードが一致しません。"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:24
 msgid "Disable File Upload Validation"
-msgstr "ファイルアップロードのバリデーションを無効化"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:26
 msgid ""
 "Check this field if you would like to allow any file to be uploaded to "
 "Omeka."
-msgstr "Omekaにどんなファイルのアップローも許可する場合は、このフィールドをチェックしてください。"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:32
 msgid "Allowed File Extensions"
-msgstr "許可されたファイル拡張子"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:33
 msgid "List of allowed extensions for file uploads"
-msgstr "ファイルアップロード時に許可された拡張子のリスト"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:42
 msgid "Allowed File Types"
-msgstr "許可されたファイルタイプ"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:43
 msgid "List of allowed MIME types for file uploads"
-msgstr "ファイルアップロード時に許可されたMIMEタイプのリスト"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:52
 msgid "ReCaptcha Public Key"
-msgstr "ReCaptcha 公開鍵"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:53
 msgid ""
 "Enter public key from recaptcha.net. Both this and the private key must be "
 "filled in to secure public forms."
-msgstr "recaptcha.netの公開鍵を入力して下さい。この鍵と秘密鍵は安全な公開フォームの中で入力する必要があります。"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:60
 msgid "ReCaptcha Private Key"
-msgstr "ReCaptcha 秘密鍵"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:61
 msgid ""
 "Enter private key from recaptcha.net. Both this and the public key must be "
 "filled in to secure public forms."
-msgstr "recapthca.netの秘密鍵を入力して下さい。この鍵と公開鍵は安全な公開フォームの中で入力する必要があります。"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:68
 msgid ""
@@ -2969,35 +2971,35 @@ msgstr ""
 
 #: application/forms/SecuritySettings.php:69
 msgid "Enable HTML Filtering"
-msgstr "HTMLフィルターを有効にする"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:74
 msgid "Allowed HTML Elements"
-msgstr "HTML要素を許可する"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:75
 msgid "List of allowed HTML elements in form input"
-msgstr "フォーム入力の中で許可されるHTML要素のリスト"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:82
 msgid "Allowed HTML Attributes"
-msgstr "許可されるHTML属性"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:83
 msgid "List of allowed HTML attributes in form input"
-msgstr "フォーム入力の中で許可されるHTML属性のリスト"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:98
 msgid "File Validation"
-msgstr "ファイルのバリデーション"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:106
 msgid "Captcha"
-msgstr "Captcha"
+msgstr ""
 
 #: application/forms/SecuritySettings.php:115
 msgid "HTML Filtering"
-msgstr "HTMLフィルター"
+msgstr ""
 
 #: application/forms/User.php:30
 msgid "Username must be 30 characters or fewer. Whitespace is not allowed."
@@ -3005,50 +3007,50 @@ msgstr ""
 
 #: application/forms/User.php:37
 msgid "Username is required."
-msgstr "ユーザー名は必須です。"
+msgstr ""
 
 #: application/forms/User.php:56
 msgid "Username must be at least %min% characters long."
-msgstr "ユーザー名は %min% 文字以上で入力してください。"
+msgstr ""
 
 #: application/forms/User.php:58
 msgid "Username must be at most %max% characters long."
-msgstr "ユーザー名は %max% 文字以下で入力してください。"
+msgstr ""
 
 #: application/forms/User.php:72
 msgid "This username is already in use."
-msgstr "このユーザー名はすでに使われています。"
+msgstr ""
 
 #: application/forms/User.php:82
 msgid "Name as it should be displayed on the site"
-msgstr "このサイトで表示される名前"
+msgstr ""
 
 #: application/forms/User.php:88 application/models/User.php:169
 msgid "Real Name is required."
-msgstr "実名は必須です。"
+msgstr ""
 
 #: application/forms/User.php:94
 msgid "This email address is invalid."
-msgstr "このemailアドレスは無効です。"
+msgstr ""
 
 #: application/forms/User.php:102
 msgid "Email is required."
-msgstr "Emailの入力が必要です。"
+msgstr ""
 
 #: application/forms/User.php:121
 msgid "This email address is already in use."
-msgstr "このemailアドレスはすでに使われています。"
+msgstr ""
 
 #: application/forms/User.php:130
 msgid ""
 "Roles describe the permissions a user has. See <a "
 "href='http://omeka.org/codex/User_Roles' target='_blank'>documentation</a> "
 "for details."
-msgstr "Roleはユーザーがもつパーミッションを表します。詳細は<a href='http://omeka.org/codex/User_Roles' target='_blan'>ドキュメント</a>を参照して下さい。"
+msgstr ""
 
 #: application/forms/User.php:137
 msgid "Inactive users cannot log in to the site."
-msgstr "無効なユーザーはこのサイトにログイン出来ません。"
+msgstr ""
 
 #: application/forms/User.php:139
 #, php-format
@@ -3057,142 +3059,142 @@ msgstr ""
 
 #: application/forms/User.php:142
 msgid "Active?"
-msgstr "有効化？"
+msgstr ""
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:114
 #, php-format
 msgid "The configured PHP path (%s) is invalid."
-msgstr "設定されているPHP path (%s) が無効です。"
+msgstr ""
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:124
 #, php-format
 msgid "The configured PHP path (%s) does not point to a PHP-CLI binary."
-msgstr "設定されているPHP path (%s) が PHP-CLI binaryを示していません。"
+msgstr ""
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:126
 #, php-format
 msgid ""
 "The configured PHP path (%s) points to a PHP-CLI binary with an invalid "
 "version (%s)"
-msgstr "設定されているPHP path (%s) が示しているPHP-CLI binaryが無効なバージョンです。(%s)"
+msgstr ""
 
 #: application/libraries/Omeka/Navigation.php:214
 msgid "The page must be normalized and have a valid uid."
-msgstr "ページが正規化されて有効なuidを持つ必要があります。"
+msgstr ""
 
 #: application/libraries/Omeka/Navigation.php:226
 msgid ""
 "The parent container must either be the navigation object or a descendant "
 "subpage of the navigation object."
-msgstr "親コンテナはnavigationオブジェクトあるいは、navigationオブジェクトの子孫サブページである必要があります。"
+msgstr ""
 
 #: application/libraries/Omeka/Navigation/Page/Uri.php:128
 #, php-format
 msgid "Invalid URI for Omeka_Navigation_Page_Uri object: %s"
-msgstr "Omeka_Navigation_Page_Uri オブジェクトに対して無効なURIです: %s"
+msgstr ""
 
 #: application/libraries/Omeka/Plugin/Ini.php:63
 #, php-format
 msgid "Path to plugin.ini for \"%s\" is not correct."
-msgstr "\"%s\"に対する plugin.ini のパスが正しくありません。"
+msgstr ""
 
 #: application/libraries/Omeka/Plugin/Installer.php:79
 #, php-format
 msgid "The \"%s\" plugin must be installed and have newer files to upgrade it."
-msgstr "プラグイン \"%s\" をアップグレードするには、このプラグインがインストールされており、新しいファイルが存在する必要があります。"
+msgstr ""
 
 #: application/libraries/Omeka/Plugin/Installer.php:116
 msgid "Plugin must have a valid directory name before it can be installed."
-msgstr "プラグインをインストールする前に有効なディレクトリーを持つ必要があります。"
+msgstr ""
 
 #: application/libraries/Omeka/Record/AbstractRecord.php:349
 #, php-format
 msgid "'%s' is an invalid special value."
-msgstr "'%s' は無効な特別値です。"
+msgstr ""
 
 #: application/libraries/Omeka/Record/Iterator.php:49
 msgid "An invalid value was detected during record iteration."
-msgstr "レコードの反復中に無効な値が検出されました。"
+msgstr ""
 
 #: application/libraries/globals.php:410
 msgid "File"
-msgstr "ファイル"
+msgstr ""
 
 #: application/libraries/globals.php:468
 msgid "Keyword"
-msgstr "キーワード"
+msgstr ""
 
 #: application/libraries/globals.php:469
 msgid "Boolean"
-msgstr "論理値"
+msgstr ""
 
 #: application/libraries/globals.php:470
 msgid "Exact match"
-msgstr "完全一致"
+msgstr ""
 
 #: application/libraries/globals.php:1263
 #: application/libraries/globals.php:1284
 #, php-format
 msgid "Could not find file %s!"
-msgstr "ファイル %s が見つかりませんでした！"
+msgstr ""
 
 #: application/libraries/globals.php:1301
 msgid "No featured collections are available."
-msgstr "特集コレクションはありません。"
+msgstr ""
 
 #: application/libraries/globals.php:1598
 msgid "Select Below "
-msgstr "下記より選択"
+msgstr ""
 
 #: application/libraries/globals.php:1641
 msgid "Omeka RSS Feed"
-msgstr "Omeka RSS フィード"
+msgstr ""
 
 #: application/libraries/globals.php:1642
 msgid "Omeka Atom Feed"
-msgstr "Omeka Atom フィード"
+msgstr ""
 
 #: application/libraries/globals.php:2297
 msgid "No recent items available."
-msgstr "最近のアイテムはありません。"
+msgstr ""
 
 #: application/libraries/globals.php:2323
 msgid "No featured items are available."
-msgstr "注目アイテムはありません。"
+msgstr ""
 
 #: application/libraries/globals.php:2382
 msgid "View"
-msgstr "見る"
+msgstr ""
 
 #: application/libraries/globals.php:2444
 #: application/models/Table/Collection.php:87
 #: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
-msgstr "コレクションがありません"
+msgstr ""
 
 #: application/libraries/globals.php:2563
 msgid "RSS"
-msgstr "RSS"
+msgstr ""
 
 #: application/libraries/globals.php:2580
 msgid "Next Item &rarr;"
-msgstr "次のアイテム &rarr;"
+msgstr ""
 
 #: application/libraries/globals.php:2600
 msgid "&larr; Previous Item"
-msgstr "&larr; 前のアイテム"
+msgstr ""
 
 #: application/libraries/globals.php:2781
 msgid "Browse All"
-msgstr "すべて"
+msgstr ""
 
 #: application/libraries/globals.php:2786
 msgid "Browse by Tag"
-msgstr "タグ"
+msgstr ""
 
 #: application/libraries/globals.php:3055
 msgid "No tags are available."
-msgstr "タグがありません。"
+msgstr ""
 
 #: application/models/Builder/Item.php:263
 msgid "Must specify a file transfer type when attaching files to an item!"
@@ -3208,7 +3210,7 @@ msgstr ""
 
 #: application/models/Element.php:179
 msgid "Invalid element set."
-msgstr "無効な要素セットです"
+msgstr ""
 
 #: application/models/Element.php:185
 #, php-format
@@ -3222,7 +3224,7 @@ msgstr ""
 
 #: application/models/ElementSet.php:146
 msgid "Name of element set must be unique."
-msgstr "エレメントの名前は唯一でなければいけません。"
+msgstr ""
 
 #: application/models/ElementSet.php:150
 msgid "Name of element set must not be empty."
@@ -3288,11 +3290,11 @@ msgstr ""
 
 #: application/models/Item.php:538
 msgid "Invalid item type."
-msgstr "無効なアイテムタイプです"
+msgstr ""
 
 #: application/models/Item.php:541
 msgid "Invalid collection."
-msgstr "無効なコレクションです"
+msgstr ""
 
 #: application/models/ItemType.php:102
 #, php-format
@@ -3301,7 +3303,7 @@ msgstr ""
 
 #: application/models/ItemType.php:106
 msgid "The item type name must be unique."
-msgstr "項目タイプは唯一でなければいけません。"
+msgstr ""
 
 #: application/models/ItemType.php:183
 msgid "There are too many values in the element ordering array."
@@ -3348,6 +3350,7 @@ msgstr ""
 msgid "Batch Edit: Starting processing 1 item."
 msgid_plural "Batch Edit: Starting processing %d items."
 msgstr[0] ""
+msgstr[1] ""
 
 #: application/models/Job/ItemBatchEditAll.php:67
 #, php-format
@@ -3361,6 +3364,7 @@ msgstr ""
 msgid "Batch Edit: The item has been processed successfully."
 msgid_plural "Batch Edit: All %d items have been processed successfully."
 msgstr[0] ""
+msgstr[1] ""
 
 #: application/models/Job/ItemBatchEditAll.php:91
 msgid "Item does not exist: it may have been deleted before processing."
@@ -3408,7 +3412,7 @@ msgstr ""
 
 #: application/models/Mixin/ElementText.php:431
 msgid "Element texts are not formatted correctly!"
-msgstr "エレメントのテキストが正しい形式ではありません。"
+msgstr ""
 
 #: application/models/Mixin/ElementText.php:579
 #, php-format
@@ -3421,11 +3425,11 @@ msgstr ""
 
 #: application/models/Option.php:50 application/models/Option.php:54
 msgid "Each option must have a unique name."
-msgstr "それぞれのオプションは唯一の名前でなければいけません。"
+msgstr ""
 
 #: application/models/Plugin.php:133
 msgid "Names of plugins must not be blank"
-msgstr "プラグイン名が空欄かもしれません。"
+msgstr ""
 
 #: application/models/Table/Collection.php:80
 #, php-format
@@ -3450,7 +3454,7 @@ msgstr ""
 
 #: application/models/User.php:113
 msgid "User may not change roles."
-msgstr "ユーザーは役割を変更できません。"
+msgstr ""
 
 #: application/models/User.php:182 application/models/User.php:230
 msgid "The user must be assigned a role."
@@ -3459,12 +3463,12 @@ msgstr ""
 #: application/models/User.php:187
 #, php-format
 msgid "The username \"%1$s\" must be between %2$s and %3$s characters."
-msgstr "ユーザー名\"%1$s\"は、 %2$sから %3$s文字でなければなりません。"
+msgstr ""
 
 #: application/models/User.php:191
 #, php-format
 msgid "'%s' is already in use. Please choose another username."
-msgstr "'%s'はすでに使われています。 違う名前を付けてください。"
+msgstr ""
 
 #: application/models/UsersActivations.php:54
 msgid "Cannot create a user activation for non-existent user."
@@ -3483,14 +3487,14 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:839
 #: application/tests/suite/Omeka/NavigationTest.php:952
 msgid "Edit Items"
-msgstr "アイテムを編集"
+msgstr ""
 
 #: application/tests/suite/Omeka/NavigationTest.php:758
 #: application/tests/suite/Omeka/NavigationTest.php:818
 #: application/tests/suite/Omeka/NavigationTest.php:856
 #: application/tests/suite/Omeka/NavigationTest.php:953
 msgid "Edit Collections"
-msgstr "コレクションを編集"
+msgstr ""
 
 #: application/tests/suite/Omeka/NavigationTest.php:764
 #: application/tests/suite/Omeka/NavigationTest.php:819
@@ -3510,7 +3514,7 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1128
 #: application/tests/suite/Omeka/NavigationTest.php:1136
 msgid "Page "
-msgstr "ページ"
+msgstr ""
 
 #: application/tests/suite/Omeka/NavigationTest.php:1009
 #: application/tests/suite/Omeka/NavigationTest.php:1013
@@ -3519,7 +3523,7 @@ msgstr "ページ"
 #: application/tests/suite/Omeka/NavigationTest.php:1156
 #: application/tests/suite/Omeka/NavigationTest.php:1256
 msgid "Page 1"
-msgstr "ページ１"
+msgstr ""
 
 #: application/tests/suite/Omeka/NavigationTest.php:1016
 #: application/tests/suite/Omeka/NavigationTest.php:1022
@@ -3530,7 +3534,7 @@ msgstr "ページ１"
 #: application/tests/suite/Omeka/NavigationTest.php:1200
 #: application/tests/suite/Omeka/NavigationTest.php:1232
 msgid "Page 2"
-msgstr "ページ2"
+msgstr ""
 
 #: application/tests/suite/Omeka/NavigationTest.php:1025
 #: application/tests/suite/Omeka/NavigationTest.php:1029
@@ -3541,7 +3545,7 @@ msgstr "ページ2"
 #: application/tests/suite/Omeka/NavigationTest.php:1193
 #: application/tests/suite/Omeka/NavigationTest.php:1255
 msgid "Page 3"
-msgstr "ページ3"
+msgstr ""
 
 #: application/tests/suite/Omeka/NavigationTest.php:1032
 #: application/tests/suite/Omeka/NavigationTest.php:1041
@@ -3554,7 +3558,7 @@ msgstr "ページ3"
 #: application/tests/suite/Omeka/NavigationTest.php:1240
 #: application/tests/suite/Omeka/NavigationTest.php:1250
 msgid "Page 4"
-msgstr "ページ4"
+msgstr ""
 
 #: application/tests/suite/Omeka/NavigationTest.php:1044
 #: application/tests/suite/Omeka/NavigationTest.php:1048
@@ -3565,25 +3569,25 @@ msgstr "ページ4"
 #: application/tests/suite/Omeka/NavigationTest.php:1223
 #: application/tests/suite/Omeka/NavigationTest.php:1241
 msgid "Page 5"
-msgstr "ページ5"
+msgstr ""
 
 #: application/tests/suite/Omeka/NavigationTest.php:1051
 #: application/tests/suite/Omeka/NavigationTest.php:1055
 #: application/tests/suite/Omeka/NavigationTest.php:1215
 msgid "Page 6"
-msgstr "ページ6"
+msgstr ""
 
 #: application/views/helpers/AllElementTexts.php:108
 msgid "[no text]"
-msgstr "[テキストがありません]"
+msgstr ""
 
 #: application/views/helpers/ElementForm.php:65
 msgid "Add Input"
-msgstr "入力を追加"
+msgstr ""
 
 #: application/views/helpers/ElementInput.php:131
 msgid "Use HTML"
-msgstr "HTMLを使用"
+msgstr ""
 
 #: application/views/helpers/GetCurrentRecord.php:27
 #, php-format
@@ -3624,12 +3628,12 @@ msgstr ""
 #: application/views/scripts/collections/browse.php:41
 #, php-format
 msgid "View the items in %s"
-msgstr "%sのアイテムを見る"
+msgstr ""
 
 #: application/views/scripts/collections/show.php:12
 #, php-format
 msgid "Items in the %s Collection"
-msgstr " %sコレクションのアイテム"
+msgstr ""
 
 #: application/views/scripts/collections/show.php:33
 msgid "There are currently no items within this collection."
@@ -3637,7 +3641,7 @@ msgstr ""
 
 #: application/views/scripts/common/footer.php:14
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
-msgstr "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
+msgstr ""
 
 #: application/views/scripts/common/pagination_control.php:5
 msgid "Pagination"
@@ -3662,30 +3666,30 @@ msgstr ""
 
 #: application/views/scripts/error/403.php:2
 msgid "403 Page Forbidden"
-msgstr "403 Page Forbidden：アクセスする権限がありません。"
+msgstr ""
 
 #: application/views/scripts/error/403.php:8
 msgid "You do not have permission to access this page."
-msgstr "このページにアクセスする権限がありません。"
+msgstr ""
 
 #: application/views/scripts/error/404.dc.php:1
 #: application/views/scripts/error/404.php:2
 #: application/views/scripts/error/404.xml.php:1
 msgid "404 Page Not Found"
-msgstr "404 Page Forbidden：ページがみつかりません。"
+msgstr ""
 
 #: application/views/scripts/error/404.php:6
 #, php-format
 msgid "%s is not a valid URL."
-msgstr "%sは有効なURLではありません。"
+msgstr ""
 
 #: application/views/scripts/error/404.rss2.php:1
 msgid "Rss2.0 Feed Not Found!"
-msgstr "Rss2.0フィードが見つかりません！"
+msgstr ""
 
 #: application/views/scripts/error/405.php:2
 msgid "405 Method Not Allowed"
-msgstr " 405 Method Not Allowed: 許可されていないメソッドです"
+msgstr ""
 
 #: application/views/scripts/error/405.php:6
 #, php-format
@@ -3694,7 +3698,7 @@ msgstr ""
 
 #: application/views/scripts/error/index.php:4
 msgid "Omeka has encountered an error"
-msgstr "Omekaにエラーが発生しました。"
+msgstr ""
 
 #: application/views/scripts/error/index.php:33
 msgid ""
@@ -3706,23 +3710,23 @@ msgstr ""
 
 #: application/views/scripts/index.php:10
 msgid "Featured Item"
-msgstr "注目アイテム"
+msgstr ""
 
 #: application/views/scripts/index.php:18
 msgid "Featured Collection"
-msgstr "注目コレクション"
+msgstr ""
 
 #: application/views/scripts/index.php:42
 msgid "View All Items"
-msgstr "すべてのアイテムを見る"
+msgstr ""
 
 #: application/views/scripts/items/show.php:13
 msgid "Files"
-msgstr "ファイル"
+msgstr ""
 
 #: application/views/scripts/items/show.php:36
 msgid "Citation"
-msgstr "引用"
+msgstr ""
 
 #: application/views/scripts/search/search-filters.php:3
 msgid "Query:"
@@ -3738,27 +3742,27 @@ msgstr ""
 
 #: application/views/scripts/search/search-form.php:6
 msgid "Search using this query type:"
-msgstr "このクエリータイプを使用して検索:"
+msgstr ""
 
 #: application/views/scripts/search/search-form.php:11
 msgid "Search only these record types:"
-msgstr "このレコードタイプだけを使って検索:"
+msgstr ""
 
 #: application/views/scripts/search/search-form.php:17
 msgid "Go to search settings to select record types to use."
-msgstr "検索設定に行って使用するレコードタイプを選択する。"
+msgstr ""
 
 #: application/views/scripts/search/search-form.php:19
 msgid "Advanced Search (Items only)"
-msgstr "アドバンスト検索 (アイテムのみ)"
+msgstr ""
 
 #: application/views/scripts/users/login.php:9
 msgid "Go to Home Page"
-msgstr "ホームページに戻る"
+msgstr ""
 
 #: application/views/scripts/users/login.php:9
 msgid "Lost your password?"
-msgstr "パスワードを忘れましたか？"
+msgstr ""
 
 #: install/controllers/IndexController.php:25
 msgid "Could not load database resource!"
@@ -3766,20 +3770,20 @@ msgstr ""
 
 #: install/views/scripts/index/errors.phtml:1
 msgid "Installation Error"
-msgstr "インストールエラー"
+msgstr ""
 
 #: install/views/scripts/index/errors.phtml:2
 msgid ""
 "Before installation can continue, the following errors must be resolved:"
-msgstr "インストールを続ける前に、次のエラーを解決して下さい。"
+msgstr ""
 
 #: install/views/scripts/index/fatal-error.phtml:1
 msgid "Fatal Error"
-msgstr "Fatal Error"
+msgstr ""
 
 #: install/views/scripts/index/index.phtml:2
 msgid "Installation Warning"
-msgstr "インストールエラー"
+msgstr ""
 
 #: install/views/scripts/index/index.phtml:4
 msgid ""
@@ -3789,23 +3793,23 @@ msgstr ""
 
 #: install/views/scripts/index/index.phtml:14
 msgid "Configure Your Site"
-msgstr "サイト設定"
+msgstr ""
 
 #: install/views/scripts/index/index.phtml:16
 msgid "Form Validation Errors"
-msgstr "Form Validation Errors"
+msgstr ""
 
 #: install/views/scripts/index/installed.phtml:1
 msgid "Success!"
-msgstr "成功！"
+msgstr ""
 
 #: install/views/scripts/index/installed.phtml:2
 msgid "Omeka is installed."
-msgstr "Omekaがインストールされました"
+msgstr ""
 
 #: install/views/scripts/index/installed.phtml:3
 msgid "Public Site"
-msgstr "公開サイト"
+msgstr ""
 
 #: install/views/scripts/index/installed.phtml:3
 msgid "Admin Dashboard"
