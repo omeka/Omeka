@@ -11,7 +11,7 @@
  */
 class RedirectorController extends Omeka_Controller_AbstractActionController
 {
-    public function indexAction() 
+    public function indexAction()
     {
         $uri = trim($this->getParam('redirect_uri'));
         $redirector = Zend_Controller_Action_HelperBroker::getStaticHelper('Redirector');

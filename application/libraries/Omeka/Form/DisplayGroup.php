@@ -16,8 +16,6 @@ class Omeka_Form_DisplayGroup extends Zend_Form_DisplayGroup
 {
     /**
      * Cause display groups to render as HTML fieldset elements.
-     *
-     * @return void
      */
     public function loadDefaultDecorators()
     {

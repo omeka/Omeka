@@ -6,8 +6,6 @@
  */
 
 /**
- * 
- *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
@@ -25,11 +23,11 @@ class Globals_InsertItemTypeTest extends Omeka_Test_AppTestCase
         );
         $this->assertThat($itemType, $this->isInstanceOf('ItemType'));
         $this->assertTrue($itemType->exists());
-        
+
         $newFirstElement = $itemType->Elements[0];
         $this->assertEquals($newFirstElement->name, 'new element');
-        
+
         $newSecondElement = $itemType->Elements[1];
-        $this->assertEquals($newSecondElement->name, 'URL'); 
+        $this->assertEquals($newSecondElement->name, 'URL');
     }
 }

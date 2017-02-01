@@ -15,7 +15,7 @@ ini_set('memory_limit', '256M');
 $_SERVER['HTTP_HOST'] = 'www.example.com';
 $_SERVER['SERVER_PORT'] = '80';
 $_SERVER['SCRIPT_NAME'] = '';
-require_once (dirname(dirname(dirname(__FILE__))) . '/bootstrap.php');
+require_once dirname(dirname(dirname(__FILE__))) . '/bootstrap.php';
 require_once 'globals.php';
 
 error_reporting(E_ALL);

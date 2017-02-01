@@ -119,13 +119,13 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      *
      * @var array
      */
-    static private $_pathsByType = array(
+    private static $_pathsByType = array(
         'original' => 'original',
         'fullsize' => 'fullsize',
         'thumbnail' => 'thumbnails',
         'square_thumbnail' => 'square_thumbnails'
     );
-    
+
     /**
      * Get a property or special value of this record.
      *
@@ -151,7 +151,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
                 return parent::getProperty($property);
         }
     }
-    
+
     /**
      * Initialize the mixins.
      */
@@ -161,7 +161,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         $this->_mixins[] = new Mixin_Timestamp($this);
         $this->_mixins[] = new Mixin_Search($this);
     }
-    
+
     /**
      * Unset immutable properties from $_POST.
      * 
@@ -170,14 +170,14 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      */
     protected function filterPostData($post)
     {
-        $immutable = array('id', 'modified', 'added', 'authentication', 'filename', 
+        $immutable = array('id', 'modified', 'added', 'authentication', 'filename',
                            'original_filename', 'mime_type', 'type_os', 'item_id');
         foreach ($immutable as $value) {
             unset($post[$value]);
         }
         return $post;
     }
-    
+
     /**
      * Before-save hook.
      * 
@@ -189,7 +189,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             $this->beforeSaveElements($args['post']);
         }
     }
-    
+
     /**
      * After-save hook.
      * 
@@ -202,14 +202,14 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             $dispatcher->setQueueName('uploads');
             $dispatcher->send('Job_FileProcessUpload', array('fileData' => $this->toArray()));
         }
-        
+
         $item = $this->getItem();
         if (!$item->public) {
             $this->setSearchTextPrivate();
         }
         $this->setSearchTextTitle($this->original_filename);
     }
-    
+
     /**
      * Get the Item this file belongs to.
      * 
@@ -219,7 +219,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     {
         return $this->getTable('Item')->find($this->item_id);
     }
-    
+
     /**
      * Get a system path for this file.
      *
@@ -241,7 +241,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             return $dir . "/{$type}_{$fn}";
         }
     }
-    
+
     /**
      * Get a web path for this file.
      *
@@ -252,7 +252,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     {
         return $this->getStorage()->getUri($this->getStoragePath($type));
     }
-    
+
     /**
      * Get the filename for this file's derivative images.
      * 
@@ -263,7 +263,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         $base = pathinfo($this->filename, PATHINFO_EXTENSION) ? substr($this->filename, 0, strrpos($this->filename, '.')) : $this->filename;
         return $base . '.' . self::DERIVATIVE_EXT;
     }
-    
+
     /**
      * Determine whether this file has a thumbnail image.
      * 
@@ -273,7 +273,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     {
         return $this->has_derivative_image;
     }
-    
+
     /**
      * Determine whether this record has a fullsize image.
      *
@@ -285,7 +285,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     {
         return $this->has_derivative_image;
     }
-    
+
     /**
      * Get the original file's extension.
      * 
@@ -295,7 +295,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     {
         return pathinfo($this->original_filename, PATHINFO_EXTENSION);
     }
-    
+
     /**
      * Set the default values that will be stored for this record in the 'files' 
      * table.
@@ -310,40 +310,40 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         $this->filename = basename($filepath);
         $this->metadata = '';
     }
-    
+
     /**
      * Unlink the file and file derivatives belonging to this record.
      */
-    public function unlinkFile() 
+    public function unlinkFile()
     {
         $storage = $this->getStorage();
         $files = array($this->getStoragePath('original'));
         if ($this->has_derivative_image) {
             $types = self::$_pathsByType;
             unset($types['original']);
-            foreach($types as $type => $path) {
+            foreach ($types as $type => $path) {
                 $files[] = $this->getStoragePath($type);
             }
         }
-        foreach($files as $file) {
+        foreach ($files as $file) {
             $storage->delete($file);
         }
     }
-    
+
     /**
      * Perform any further deletion when deleting this record.
      */
-    protected function _delete() 
+    protected function _delete()
     {
         $this->unlinkFile();
         $this->deleteElementTexts();
     }
-    
+
     /**
      * Create derivatives of the original file.
      */
     public function createDerivatives()
-    {        
+    {
         if (!Zend_Registry::isRegistered('file_derivative_creator')) {
             return;
         }
@@ -351,14 +351,14 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         $creator->addDerivative('fullsize', get_option('fullsize_constraint'));
         $creator->addDerivative('thumbnail', get_option('thumbnail_constraint'));
         $creator->addDerivative('square_thumbnail', get_option('square_thumbnail_constraint'));
-        if ($creator->create($this->getPath('original'), 
+        if ($creator->create($this->getPath('original'),
                              $this->getDerivativeFilename(),
                              $this->mime_type)) {
             $this->has_derivative_image = 1;
             $this->save();
         }
     }
-    
+
     /**
      * Extract ID3 metadata associated with the file.
      * 
@@ -379,16 +379,16 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             'mime_type', 'audio', 'video', 'comments', 'comments_html',
             'iptc', 'jpg'
         );
-        foreach($keys as $key) {
+        foreach ($keys as $key) {
             if (array_key_exists($key, $id3->info)) {
                 $metadata[$key] = $id3->info[$key];
             }
         }
-        
-        $this->metadata = json_encode($metadata);      
+
+        $this->metadata = json_encode($metadata);
         return true;
     }
-    
+
     /**
      * Read the file's embedded metadata with the getID3 library.
      *
@@ -408,11 +408,11 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
                 $message = $e->getMessage();
                 _log("getID3: $message");
                 return false;
-            }        
+            }
         }
         return $this->_id3;
     }
-    
+
     /**
      * Store the files belonging to this record.
      */
@@ -433,7 +433,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         $this->stored = '1';
         $this->save();
     }
-    
+
     /**
      * Get a storage path for the file.
      * 
@@ -453,7 +453,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         }
         return $storage->getPathByType($fn, self::$_pathsByType[$type]);
     }
-    
+
     /**
      * Set the storage object.
      * 
@@ -463,7 +463,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     {
         $this->_storage = $storage;
     }
-    
+
     /**
      * Get the storage object.
      * 
@@ -476,7 +476,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         }
         return $this->_storage;
     }
-    
+
     /**
      * Get the ACL resource ID for the record.
      *

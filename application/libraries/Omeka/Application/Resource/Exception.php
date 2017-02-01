@@ -15,4 +15,5 @@
  * @package Omeka\Application\Resource
  */
 interface Omeka_Application_Resource_Exception
-{}
+{
+}

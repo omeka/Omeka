@@ -12,7 +12,7 @@ class Omeka_Storage_Adapter_ZendS3Test extends PHPUnit_Framework_TestCase
     {
         new Omeka_Storage_Adapter_ZendS3($this->_options);
     }
-    
+
     /**
      * @expectedException Omeka_Storage_Exception
      */

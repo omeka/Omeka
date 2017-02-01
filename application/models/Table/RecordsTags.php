@@ -14,9 +14,9 @@ class Table_RecordsTags extends Omeka_Db_Table
     public function applySearchFilters($select, $params = array())
     {
         $db = $this->getDb();
-        if(isset($params['tag'])) {
+        if (isset($params['tag'])) {
             $tag = $params['tag'];
-            $select->joinInner(array('tags'=>$db->Tag), 'tags.id = records_tags.tag_id', array());
+            $select->joinInner(array('tags' => $db->Tag), 'tags.id = records_tags.tag_id', array());
 
             if (is_array($tag)) {
                 $wheres = array();
@@ -25,7 +25,7 @@ class Table_RecordsTags extends Omeka_Db_Table
                     $name = ($t instanceof Tag) ? $t->name : $t;
                     $wheres[] = 'tags.name = '.$db->quote($t);
                 }
-                $select->where( '(' . implode(' OR ', $wheres) . ')' );
+                $select->where('(' . implode(' OR ', $wheres) . ')');
             } else {
                 $name = ($tag instanceof Tag) ? $tag->name : $tag;
                 $select->where('tags.name = ?', $name);
@@ -35,15 +35,16 @@ class Table_RecordsTags extends Omeka_Db_Table
         if (isset($params['record'])) {
             $record = $params['record'];
             $select->where('records_tags.record_id = ?', $record->id);
-            $select->where('records_tags.record_type = ?', get_class($record) );
-        } else if (isset($params['type'])) {
+            $select->where('records_tags.record_type = ?', get_class($record));
+        } elseif (isset($params['type'])) {
             $type = $params['type'];
             $select->where('records_tags.record_type = ?', $type);
         }
     }
-    
-    public function findForRecordAndTag($record, $tag) {
-        $select = $this->getSelectForFindBy(array('record'=>$record, 'tag'=>$tag));
+
+    public function findForRecordAndTag($record, $tag)
+    {
+        $select = $this->getSelectForFindBy(array('record' => $record, 'tag' => $tag));
         return $this->fetchObject($select);
     }
 }

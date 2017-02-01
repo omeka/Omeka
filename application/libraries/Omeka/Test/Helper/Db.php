@@ -21,7 +21,7 @@ class Omeka_Test_Helper_Db
     private $_dbAdapter;
 
     private $_prefix;
-    
+
     /**
      * @param Zend_Db_Adapter_Abstract $dbAdapter
      */
@@ -30,7 +30,7 @@ class Omeka_Test_Helper_Db
         $this->_dbAdapter = $dbAdapter;
         $this->_prefix = $prefix;
     }
-    
+
     /**
      * Proxy to the db adapter object for all other requests.
      *
@@ -42,7 +42,7 @@ class Omeka_Test_Helper_Db
     {
         return call_user_func_array(array($this->_dbAdapter, $method), $args);
     }
-    
+
     /**
      * Create an instance of the helper that is configured for the correct 
      * database.
@@ -56,32 +56,32 @@ class Omeka_Test_Helper_Db
         if ($dbConfig instanceof Zend_Application) {
             $dbResource = $dbConfig->getBootstrap()->getResource('Db');
             return new self($dbResource->getAdapter(), $dbResource->prefix);
-        } else if ($dbConfig instanceof Omeka_Test_Resource_Db) {
+        } elseif ($dbConfig instanceof Omeka_Test_Resource_Db) {
             return new self($dbConfig->getDb()->getAdapter(), $dbConfig->getDb()->prefix);
-        } else if (is_array($dbConfig) || ($dbConfig instanceof Zend_Config)){
+        } elseif (is_array($dbConfig) || ($dbConfig instanceof Zend_Config)) {
             return new self(Zend_Db::factory('Mysqli', $dbConfig), $dbConfig->prefix);
         } else {
             throw new InvalidArgumentException("\$dbConfig must be an array, Zend_Config or Zend_Application!");
         }
     }
-    
+
     /**
      * Check whether a table exists in the database.
      *
      * @param string $tableName
-     * @return boolean
+     * @return bool
      */
     public function tableExists($tableName)
     {
         $result = $this->_dbAdapter->fetchOne("SHOW TABLES LIKE '$tableName'");
-        return (boolean)$result;
+        return (boolean) $result;
     }
-    
+
     /**
      * Get the number of tables in the database.
      * 
      * @param string $prefix
-     * @return integer
+     * @return int
      */
     public function getTableCount($prefix = null)
     {
@@ -93,7 +93,6 @@ class Omeka_Test_Helper_Db
      * Drop the tables from the database.
      *
      * @param string $prefix Optionally, delete only tables with this prefix.
-     * @return void
      */
     public function dropTables($tables = null)
     {
@@ -112,7 +111,6 @@ class Omeka_Test_Helper_Db
      * Truncate the tables from the database.
      *
      * @param string $prefix Optionally, delete only tables with this prefix.
-     * @return void
      */
     public function truncateTables($tables = null)
     {
@@ -134,7 +132,7 @@ class Omeka_Test_Helper_Db
         $installer = new Installer_Test(new Omeka_Db($this->getAdapter(), $this->getPrefix()));
         $installer->install();
     }
-    
+
     /**
      * Get the tables in the database.
      *
@@ -146,13 +144,13 @@ class Omeka_Test_Helper_Db
         $prefix = $this->getPrefix();
         $sql = "SHOW TABLES " . ($prefix ? "LIKE '$prefix%'" : '');
         return $this->_dbAdapter->fetchCol($sql);
-    }    
-    
+    }
+
     /**
      * Get the number of rows in a table.
      *
      * @param string $tableName
-     * @return integer
+     * @return int
      */
     public function getRowCount($tableName)
     {

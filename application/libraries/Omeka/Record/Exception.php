@@ -10,4 +10,5 @@
  * @package Omeka\Record
  */
 class Omeka_Record_Exception extends Exception
-{}
+{
+}

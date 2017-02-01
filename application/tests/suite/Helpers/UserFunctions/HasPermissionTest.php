@@ -16,7 +16,7 @@ class Helpers_UserFunctions_HasPermissionTest extends Omeka_Test_AppTestCase
     public function setUp()
     {
         parent::setUp();
-        
+
         $acl = get_acl();
         $acl->addResource('TestResource');
         $acl->allow(null, 'TestResource', 'allowedPrivilege');
@@ -28,7 +28,8 @@ class Helpers_UserFunctions_HasPermissionTest extends Omeka_Test_AppTestCase
      *
      * No user is authenticated to start with, so no setup is required.
      */
-    public function testPermissionsForAnonymous() {
+    public function testPermissionsForAnonymous()
+    {
         $this->assertTrue(is_allowed('TestResource', 'allowedPrivilege'));
         $this->assertFalse(is_allowed('TestResource', 'deniedPrivilege'));
         $this->assertFalse(is_allowed('TestResource', 'otherPrivilege'));
@@ -41,9 +42,10 @@ class Helpers_UserFunctions_HasPermissionTest extends Omeka_Test_AppTestCase
      * everything not explicitly denied, so the "other" permission
      * check should also succeed.
      */
-    public function testPermissionsForSuper() {
+    public function testPermissionsForSuper()
+    {
         $this->_authenticateUser($this->_getDefaultUser());
-        
+
         $this->assertTrue(is_allowed('TestResource', 'allowedPrivilege'));
         $this->assertFalse(is_allowed('TestResource', 'deniedPrivilege'));
         $this->assertTrue(is_allowed('TestResource', 'otherPrivilege'));
@@ -52,7 +54,8 @@ class Helpers_UserFunctions_HasPermissionTest extends Omeka_Test_AppTestCase
     /**
      * Tests that the "resource" argument is automatically uppercased.
      */
-    public function testResourceFirstLetterIsUppercased() {
+    public function testResourceFirstLetterIsUppercased()
+    {
         $this->assertTrue(is_allowed('testResource', 'allowedPrivilege'));
     }
 }

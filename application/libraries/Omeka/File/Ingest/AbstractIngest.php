@@ -34,14 +34,14 @@ abstract class Omeka_File_Ingest_AbstractIngest
      * @var Item
      */
     protected $_item;
-    
+
     /**
      * Set of arbitrary options to use when ingesting files.
      *
      * @var array
      */
     protected $_options = array();
-    
+
     /**
      * Set of validators implementing Zend_Validate_Interface.
      * 
@@ -49,7 +49,7 @@ abstract class Omeka_File_Ingest_AbstractIngest
      * @see Omeka_File_Ingest_AbstractIngest::addValidator()
      */
     private $_validators = array();
-    
+
     /**
      * The current validated file MIME type.
      * 
@@ -57,18 +57,17 @@ abstract class Omeka_File_Ingest_AbstractIngest
      * @var string
      */
     public static $mimeType;
-    
+
     /**
      * Set the item to use as a target when ingesting files.
      * 
      * @param Item $item
-     * @return void
-     */        
+     */
     public function setItem(Item $item)
     {
         $this->_item = $item;
     }
-    
+
     /**
      * Factory to retrieve Omeka_File_Ingest_* instances.
      * 
@@ -77,7 +76,7 @@ abstract class Omeka_File_Ingest_AbstractIngest
      * @param array $options
      * @return Omeka_File_Ingest_AbstractIngest
      */
-    final static public function factory($adapterName, $item, $options = array())
+    final public static function factory($adapterName, $item, $options = array())
     {
         $className = 'Omeka_File_Ingest_' . $adapterName;
         if (class_exists($className, true)) {
@@ -89,7 +88,7 @@ abstract class Omeka_File_Ingest_AbstractIngest
             throw new Omeka_File_Ingest_Exception('Could not load ' . $className);
         }
     }
-    
+
     /**
      * Retrieve the original filename of the file.
      * 
@@ -97,7 +96,7 @@ abstract class Omeka_File_Ingest_AbstractIngest
      * @return string
      */
     abstract protected function _getOriginalFilename($fileInfo);
-    
+
     /**
      * Transfer the file to Omeka.
      * 
@@ -112,7 +111,7 @@ abstract class Omeka_File_Ingest_AbstractIngest
      * @return string Real path to the transferred file.
      */
     abstract protected function _transferFile($fileInfo, $originalFilename);
-        
+
     /**
      * Ingest classes receive arbitrary information.  This method needs to
      * parse that information into an iterable array so that multiple files
@@ -125,7 +124,7 @@ abstract class Omeka_File_Ingest_AbstractIngest
      * @return array
      */
     abstract protected function _parseFileInfo($files);
-    
+
     /**
      * Set options for ingesting files.
      * 
@@ -139,18 +138,17 @@ abstract class Omeka_File_Ingest_AbstractIngest
      *   files/ directory is not writeable).  
      *   This option is primarily useful for skipping known invalid files when 
      *   ingesting large data sets.
-     * @return void
-     */        
+     */
     public function setOptions($options)
     {
         $this->_options = $options;
-        
+
          // Set the default options.
         if (!array_key_exists('ignore_invalid_files', $options)) {
             $this->_options['ignore_invalid_files'] = false;
         }
     }
-    
+
     /**
      * Ingest based on arbitrary file identifier info.
      * 
@@ -166,13 +164,12 @@ abstract class Omeka_File_Ingest_AbstractIngest
     {
         // Don't catch or suppress parsing errors.
         $fileInfoArray = $this->_parseFileInfo($fileInfo);
-        
+
         // Iterate the files.
         $fileObjs = array();
-        foreach ($fileInfoArray as $file) {            
-            
-            try {                
-                // This becomes the file's identifier (stored in the 
+        foreach ($fileInfoArray as $file) {
+            try {
+                // This becomes the file's identifier (stored in the
                 // 'original_filename' column and used to derive the archival filename).
                 $originalFileName = $this->_getOriginalFilename($file);
 
@@ -180,35 +177,34 @@ abstract class Omeka_File_Ingest_AbstractIngest
 
                 // Create the file object.
                 if ($fileDestinationPath) {
-                    $fileMetadata = isset($file['metadata']) 
+                    $fileMetadata = isset($file['metadata'])
                         ? $file['metadata'] : array();
                     $fileObjs[] = $this->_createFile($fileDestinationPath, $originalFileName, $fileMetadata);
                 }
-            
             } catch (Omeka_File_Ingest_InvalidException $e) {
                 if ($this->_ignoreIngestErrors()) {
                     $this->_logException($e);
                     continue;
-                } 
-                
+                }
+
                 // If not suppressed, rethrow it.
                 throw $e;
             }
         }
         return $fileObjs;
     }
-    
+
     /**
      * Determine whether or not to ignore file ingest errors.  Based on 
      * 'ignore_invalid_files', which is false by default.
      * 
-     * @return boolean
+     * @return bool
      */
     private function _ignoreIngestErrors()
     {
-        return (boolean)$this->_options['ignore_invalid_files'];
+        return (boolean) $this->_options['ignore_invalid_files'];
     }
-    
+
     /**
      * Log any exceptions that are thrown as a result of attempting to ingest
      * invalid files.
@@ -217,7 +213,6 @@ abstract class Omeka_File_Ingest_AbstractIngest
      * so they don't actually kill the file ingest process.
      * 
      * @param Exception $e
-     * @return void
      */
     private function _logException(Exception $e)
     {
@@ -226,7 +221,7 @@ abstract class Omeka_File_Ingest_AbstractIngest
             $logger->log($e->getMessage(), Zend_Log::WARN);
         }
     }
-        
+
     /**
      * Insert a File record corresponding to an ingested file and its metadata.
      * 
@@ -237,12 +232,12 @@ abstract class Omeka_File_Ingest_AbstractIngest
      * for more information about the format of this array.
      * @uses ActsAsElementText::addElementTextsByArray()
      * @return File
-     */        
+     */
     private function _createFile($newFilePath, $oldFilename, $elementMetadata = array())
     {
-        // Normally, the MIME type validator sets the type to this class's 
-        // static $mimeType property during validation. If that validator has 
-        // been disabled (from the admin settings menu, for example), set the 
+        // Normally, the MIME type validator sets the type to this class's
+        // static $mimeType property during validation. If that validator has
+        // been disabled (from the admin settings menu, for example), set the
         // MIME type here.
         if (self::$mimeType) {
             $mimeType = self::$mimeType;
@@ -256,18 +251,17 @@ abstract class Omeka_File_Ingest_AbstractIngest
         try {
             $file->original_filename = $oldFilename;
             $file->mime_type = $mimeType;
-            
+
             $file->setDefaults($newFilePath);
-            
+
             if ($elementMetadata) {
                 $file->addElementTextsByArray($elementMetadata);
             }
-            
+
             fire_plugin_hook('after_ingest_file', array('file' => $file, 'item' => $this->_item));
-            
+
             $this->_item->addFile($file);
-            
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             if (!$file->exists()) {
                 $file->unlinkFile();
             }
@@ -275,7 +269,7 @@ abstract class Omeka_File_Ingest_AbstractIngest
         }
         return $file;
     }
-    
+
     /**
      * Retrieve the destination path for the file to be transferred.
      * 
@@ -288,7 +282,7 @@ abstract class Omeka_File_Ingest_AbstractIngest
      * @param string $fromFilename The filename from which to derive the 
      * archival filename. 
      * @return string
-     */    
+     */
     protected function _getDestination($fromFilename)
     {
         $filter = new Omeka_Filter_Filename;
@@ -296,14 +290,14 @@ abstract class Omeka_File_Ingest_AbstractIngest
 
         $storage = Zend_Registry::get('storage');
         $dir = $storage->getTempDir();
-        
+
         if (!is_writable($dir)) {
             throw new Omeka_File_Ingest_Exception('Cannot write to the following directory: "'
                               . $dir . '"!');
         }
         return $dir . '/' . $filename;
     }
-    
+
     /**
      * Add Zend Framework file validators.
      * 
@@ -313,12 +307,12 @@ abstract class Omeka_File_Ingest_AbstractIngest
      * @return Omeka_File_Ingest_AbstractIngest
      */
     public function addValidator(Zend_Validate_Interface $validator)
-    {        
+    {
         $this->_validators[] = $validator;
-        
+
         return $this;
     }
-    
+
     /**
      * Validate a file that has been transferred to Omeka.
      * 
@@ -350,7 +344,7 @@ abstract class Omeka_File_Ingest_AbstractIngest
      * Zend_Validate_File_* classes.
      * @param array $fileInfo Set of file info that describes a given file being 
      * ingested. 
-     * @return boolean True if valid, otherwise throws an exception.
+     * @return bool True if valid, otherwise throws an exception.
      */
     protected function _validateFile($filePath, $fileInfo)
     {

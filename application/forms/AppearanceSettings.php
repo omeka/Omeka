@@ -11,7 +11,6 @@
  */
 class Omeka_Form_AppearanceSettings extends Omeka_Form
 {
-
     private $_app;
 
     public function init()
@@ -109,7 +108,4 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
             );
         }
     }
-
 }
-
-?>

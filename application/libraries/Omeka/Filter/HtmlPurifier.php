@@ -14,7 +14,7 @@
 class Omeka_Filter_HtmlPurifier implements Zend_Filter_Interface
 {
     private static $_purifier = null;
-    
+
     private static $_purifierConfig = array(
         'Core.Encoding' => 'UTF-8',
         'Cache.DefinitionImpl' => null, // Caching disabled
@@ -23,10 +23,10 @@ class Omeka_Filter_HtmlPurifier implements Zend_Filter_Interface
         'Attr.ID.HTML5' => true,
         'HTML.TidyLevel' => 'none',
         'HTML.AllowedElements' => array(
-            'p', 'br', 'strong', 'em', 'span', 'div', 'ul', 'ol', 'li', 'a', 
+            'p', 'br', 'strong', 'em', 'span', 'div', 'ul', 'ol', 'li', 'a',
             'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'address', 'pre', 'table',
-            'tr', 'td', 'blockquote', 'thead', 'tfoot', 'tbody', 'th', 'dl', 
-            'dt', 'dd', 'q', 'small', 'strike', 'sup', 'sub', 'b', 'i', 'big', 
+            'tr', 'td', 'blockquote', 'thead', 'tfoot', 'tbody', 'th', 'dl',
+            'dt', 'dd', 'q', 'small', 'strike', 'sup', 'sub', 'b', 'i', 'big',
             'small', 'tt'
         ),
         'HTML.AllowedAttributes' => array(
@@ -49,7 +49,7 @@ class Omeka_Filter_HtmlPurifier implements Zend_Filter_Interface
         $cleanValue = $purifier->purify($value);
         return $cleanValue;
     }
-        
+
     /**
      * Get the default allowed html elements.
      *
@@ -57,9 +57,9 @@ class Omeka_Filter_HtmlPurifier implements Zend_Filter_Interface
      */
     public static function getDefaultAllowedHtmlElements()
     {
-       return self::$_purifierConfig['HTML.AllowedElements'];
+        return self::$_purifierConfig['HTML.AllowedElements'];
     }
-    
+
     /**
      * Get the default allowed html attributes.
      *
@@ -70,12 +70,12 @@ class Omeka_Filter_HtmlPurifier implements Zend_Filter_Interface
     {
         return self::$_purifierConfig['HTML.AllowedAttributes'];
     }
-    
+
     /**
      * Gets the html purifier singleton
      *
      * @return HTMLPurifier $purifier
-     */         
+     */
     public static function getHtmlPurifier()
     {
         if (!self::$_purifier) {
@@ -83,21 +83,20 @@ class Omeka_Filter_HtmlPurifier implements Zend_Filter_Interface
         }
         return self::$_purifier;
     }
-    
+
     /**
      * Sets the html purifier singleton
      *
      * @param HTMLPurifier $purifier
-     * @return void
      */
     public static function setHtmlPurifier($purifier)
     {
         self::$_purifier = $purifier;
-        
+
         // Set this in the registry so that other plugins can get to it.
         Zend_Registry::set('html_purifier', $purifier);
     }
-    
+
     /**
      * @param array $allowedHtmlElements An array of strings representing 
      * allowed HTML elements
@@ -106,34 +105,33 @@ class Omeka_Filter_HtmlPurifier implements Zend_Filter_Interface
      * @return HTMLPurifier 
      **/
     public static function createHtmlPurifier(
-        $allowedHtmlElements = null, 
+        $allowedHtmlElements = null,
         $allowedHtmlAttributes = null
     ) {
         // Require the HTML Purfier autoloader.
-        require_once 'htmlpurifier/HTMLPurifier.auto.php';        
+        require_once 'htmlpurifier/HTMLPurifier.auto.php';
 
         // Get the allowed HTML elements from the configuration file
-        // Setting this as NULL allows a subest of TinyMCE's 
-        // valid_elements whitelist. Setting this as an empty string disallows 
+        // Setting this as NULL allows a subest of TinyMCE's
+        // valid_elements whitelist. Setting this as an empty string disallows
         // all HTML elements.
         if ($allowedHtmlElements === null) {
-            $allowedHtmlElements = explode(',', 
+            $allowedHtmlElements = explode(',',
                 get_option('html_purifier_allowed_html_elements'));
         }
 
         // Get the allowed HTML attributes from the configuration file
         if ($allowedHtmlAttributes === null) {
-            $allowedHtmlAttributes = explode(',', 
+            $allowedHtmlAttributes = explode(',',
                 get_option('html_purifier_allowed_html_attributes'));
         }
 
-
-        // Filter the allowed html attributes of any attributes that are 
+        // Filter the allowed html attributes of any attributes that are
         // missing elements.
-        // For example, if there is no 'a' element then filter out the 
-        // attribute 'a.href' and any other attribute associated with the 'a' 
+        // For example, if there is no 'a' element then filter out the
+        // attribute 'a.href' and any other attribute associated with the 'a'
         // element
-        $allowedHtmlAttributes = 
+        $allowedHtmlAttributes =
             self::filterAttributesWithMissingElements(
                 $allowedHtmlAttributes, $allowedHtmlElements);
 
@@ -147,23 +145,23 @@ class Omeka_Filter_HtmlPurifier implements Zend_Filter_Interface
         $purifier = HTMLPurifier::instance($purifierConfig);
         return $purifier;
     }
-    
+
     public static function filterAttributesWithMissingElements(
-        $htmlAttributes = array(), 
+        $htmlAttributes = array(),
         $htmlElements = array()
     ) {
         if (!count($htmlElements)) {
             return array();
         }
         $cleanHtmlAttributes = array();
-        foreach($htmlAttributes as $attr) {
+        foreach ($htmlAttributes as $attr) {
             $attr = trim($attr);
             $attrParts = explode('.', $attr);
-            if (count($attrParts) == 2 
-                && ($attrParts[0] == '*' 
+            if (count($attrParts) == 2
+                && ($attrParts[0] == '*'
                     || in_array($attrParts[0], $htmlElements))
             ) {
-                $cleanHtmlAttributes[] = $attr; 
+                $cleanHtmlAttributes[] = $attr;
             }
         }
         return $cleanHtmlAttributes;

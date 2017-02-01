@@ -17,7 +17,7 @@ class Omeka_View_Helper_MaxFileSize extends Zend_View_Helper_Abstract
      * @var string
      */
     protected $_maxFileSize;
-    
+
     /**
      * Set the maximum file size.
      * 
@@ -30,7 +30,7 @@ class Omeka_View_Helper_MaxFileSize extends Zend_View_Helper_Abstract
         $postMaxSize = $this->_parseSize(ini_get('post_max_size'));
         $uploadMaxFilesize = $this->_parseSize(ini_get('upload_max_filesize'));
         $maxFileSize = min($postMaxSize, $uploadMaxFilesize);
-        
+
         // Compare to file.maxSize in config.ini.
         $config = Zend_Registry::get('bootstrap')->getResource('Config');
         if (isset($config->upload->maxFileSize)) {
@@ -39,11 +39,11 @@ class Omeka_View_Helper_MaxFileSize extends Zend_View_Helper_Abstract
                 $maxFileSize = min($maxFileSize, $configMaxSize);
             }
         }
-        
+
         $megabytes = round($maxFileSize / self::MEGABYTE_BYTES);
         $this->_maxFileSize = __('%s MB', $megabytes);
     }
-    
+
     /**
      * Return the maximum file size.
      * 

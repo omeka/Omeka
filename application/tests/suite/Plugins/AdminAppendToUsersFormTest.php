@@ -13,15 +13,15 @@
 class Omeka_Plugins_AdminAppendToUsersFormTest extends Omeka_Test_AppTestCase
 {
     protected $_isAdminTest = true;
-    
+
     public function setUp()
     {
         parent::setUp();
-        
+
         // Set the ACL to allow access to users.
         $this->acl = $this->application->getBootstrap()->acl;
         $this->acl->allow(null, 'Users');
-        
+
         $this->db = $this->application->getBootstrap()->db;
         $this->user = $this->db->getTable('User')->find(1);
         $this->_authenticateUser($this->user);
@@ -29,12 +29,12 @@ class Omeka_Plugins_AdminAppendToUsersFormTest extends Omeka_Test_AppTestCase
         // Hack: add_plugin_hook() still doesn't allow arbitrary namespaces.
         $this->pluginbroker->setCurrentPluginDirName('__global__');
     }
-    
+
     public function assertPreConditions()
     {
         $this->assertTrue($this->acl->isAllowed($this->user, 'Users', 'edit'));
     }
-    
+
     public function testCanAppendHtmlToAdminUsersEditForm()
     {
         add_plugin_hook('users_form', array($this, 'appendExtraFormInput'));
@@ -42,9 +42,9 @@ class Omeka_Plugins_AdminAppendToUsersFormTest extends Omeka_Test_AppTestCase
         $this->dispatch('/users/edit/1');
         $this->assertNotRedirect();
         $this->assertContains("TEST HOOK CONTENT", $this->getResponse()->sendResponse());
-        // var_dump($this->getResponse());exit;        
+        // var_dump($this->getResponse());exit;
     }
-    
+
     public function testCanAppendHtmlToAdminUsersAddForm()
     {
         add_plugin_hook('users_form', array($this, 'appendExtraFormInput'));
@@ -52,7 +52,7 @@ class Omeka_Plugins_AdminAppendToUsersFormTest extends Omeka_Test_AppTestCase
         $this->assertNotRedirect();
         $this->assertQueryContentContains("label", "TEST HOOK CONTENT");
     }
-    
+
     public function appendExtraFormInput($args)
     {
         $args['form']->addElement('text', 'foobar', array('label' => 'TEST HOOK CONTENT'));

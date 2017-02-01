@@ -12,7 +12,6 @@
  */
 class Omeka_Helper_RandomFeaturedCollectionTest extends Omeka_Test_AppTestCase
 {
-
     /**
      * Checks that the correct message is displayed if there are no featured 
      * collections to display.
@@ -23,5 +22,4 @@ class Omeka_Helper_RandomFeaturedCollectionTest extends Omeka_Test_AppTestCase
         $html = random_featured_collection();
         $this->assertContains('No featured collections are available.', $html);
     }
-
 }

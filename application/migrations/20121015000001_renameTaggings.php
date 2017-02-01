@@ -18,7 +18,7 @@ class renameTaggings extends Omeka_Db_Migration_AbstractMigration
         CHANGE `relation_id` `record_id` INT(10) UNSIGNED NOT NULL, 
         CHANGE `type` `record_type` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT ''";
         $this->db->query($sql);
-        
+
         $sql = "RENAME TABLE  `{$this->db->prefix}taggings` TO  `{$this->db->prefix}records_tags`";
         $this->db->query($sql);
     }

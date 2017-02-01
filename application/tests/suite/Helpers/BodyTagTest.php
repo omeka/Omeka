@@ -5,7 +5,6 @@
  * @package Omeka
  */
 
-
 /**
  * Tests for body_tag() helper.
  *
@@ -31,7 +30,7 @@ class Omeka_Helper_BodyTagTest extends Omeka_Test_AppTestCase
      */
     public function testBodyTagWithNullAttributes()
     {
-        $attributes = array('id' => null , 'class' => null);
+        $attributes = array('id' => null, 'class' => null);
         $html = "<body>\n";
         $this->assertEquals($html, body_tag($attributes));
     }

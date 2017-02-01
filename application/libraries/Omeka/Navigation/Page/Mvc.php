@@ -19,7 +19,7 @@ class Omeka_Navigation_Page_Mvc extends Zend_Navigation_Page_Mvc
      * @var string
      */
     protected $_theme;
-        
+
     /**
      * Returns href for this page
      *
@@ -34,20 +34,20 @@ class Omeka_Navigation_Page_Mvc extends Zend_Navigation_Page_Mvc
         if ($themeOption === null) {
             return parent::getHref();
         }
-        
+
         // clear cache if themeOption is the empty string,
         // which corresponds to current base url
         if ($themeOption == '') {
             $this->_hrefCache = null;
         }
-        
+
         // create an href for the correct theme
         set_theme_base_url($themeOption);
         $href = parent::getHref();
         revert_theme_base_url();
         return $href;
     }
-    
+
     /**
      * Returns theme option to use when assembling URL
      *
@@ -59,7 +59,7 @@ class Omeka_Navigation_Page_Mvc extends Zend_Navigation_Page_Mvc
     {
         return $this->_theme;
     }
-    
+
     /**
      * Sets theme option to use when assembling URL
      *

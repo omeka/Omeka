@@ -29,7 +29,7 @@ class Omeka_Job_Dispatcher_Adapter_SynchronousTest extends PHPUnit_Framework_Tes
     }
 }
 
-class Omeka_Job_FactoryMock 
+class Omeka_Job_FactoryMock
 {
     public function from($str)
     {
@@ -37,5 +37,3 @@ class Omeka_Job_FactoryMock
         return new Omeka_Job_Mock(array());
     }
 }
-
-

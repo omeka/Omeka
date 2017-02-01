@@ -28,7 +28,7 @@ class Omeka_Acl_Assert_Ownership implements Zend_Acl_Assert_Interface
         $selfPriv = $privilege . 'Self';
         if (!($role instanceof User)) {
             $allowed = false;
-        } else if ($resource instanceof Omeka_Record_AbstractRecord) {
+        } elseif ($resource instanceof Omeka_Record_AbstractRecord) {
             $allowed = $acl->isAllowed($role, $resource, $allPriv)
                    || ($acl->isAllowed($role, $resource, $selfPriv)
                        && $this->_userOwnsRecord($role, $resource));

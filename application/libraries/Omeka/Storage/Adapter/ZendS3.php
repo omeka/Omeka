@@ -58,7 +58,7 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
         $client = new Omeka_Http_Client;
         $client->setMaxRetries(3);
         Zend_Service_Amazon_S3::setHttpClient($client);
-        
+
         $this->_s3 = new Zend_Service_Amazon_S3($awsKey, $awsSecretKey);
         if (!empty($options[self::ENDPOINT_OPTION])) {
             $this->_s3->setEndpoint($options[self::ENDPOINT_OPTION]);
@@ -93,13 +93,13 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
         } else {
             $meta[Zend_Service_Amazon_S3::S3_ACL_HEADER] = Zend_Service_Amazon_S3::S3_ACL_PUBLIC_READ;
         }
-            
+
         $status = $this->_s3->putFileStream($source, $objectName, $meta);
 
-        if(!$status) {
+        if (!$status) {
             throw new Omeka_Storage_Exception('Unable to store file.');
         }
-        
+
         _log("Omeka_Storage_Adapter_ZendS3: Stored '$source' as '$objectName'.");
         unlink($source);
     }
@@ -114,10 +114,10 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
     {
         $sourceObject = $this->_getObjectName($source);
         $destObject = $this->_getObjectName($dest);
-        
+
         $status = $this->_s3->moveObject($sourceObject, $destObject);
 
-        if(!$status) {
+        if (!$status) {
             throw new Omeka_Storage_Exception('Unable to move file.');
         }
 
@@ -132,10 +132,10 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
     public function delete($path)
     {
         $objectName = $this->_getObjectName($path);
-            
+
         $status = $this->_s3->removeObject($objectName);
 
-        if(!$status) {
+        if (!$status) {
             if ($this->_s3->isObjectAvailable($objectName)) {
                 throw new Omeka_Storage_Exception('Unable to delete file.');
             } else {

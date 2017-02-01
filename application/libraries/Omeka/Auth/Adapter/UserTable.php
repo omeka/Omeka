@@ -18,13 +18,13 @@ class Omeka_Auth_Adapter_UserTable extends Zend_Auth_Adapter_DbTable
      */
     public function __construct(Omeka_Db $db)
     {
-        parent::__construct($db->getAdapter(), 
-                            $db->User, 
-                            'username', 
-                            'password', 
+        parent::__construct($db->getAdapter(),
+                            $db->User,
+                            'username',
+                            'password',
                             'SHA1(CONCAT(salt, ?)) AND active = 1');
     }
-    
+
     /**
      * Validate the identity returned from the database.
      *

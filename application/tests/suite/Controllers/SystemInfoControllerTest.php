@@ -38,7 +38,7 @@ class Omeka_Controllers_SystemInfoControllerTest extends Omeka_Test_AppTestCase
      */
     public function testAcl($role, $isAllowed)
     {
-        $this->assertEquals($isAllowed, 
+        $this->assertEquals($isAllowed,
             $this->acl->isAllowed($role, 'SystemInfo', 'index'));
     }
 
@@ -51,8 +51,8 @@ class Omeka_Controllers_SystemInfoControllerTest extends Omeka_Test_AppTestCase
 
     public function testDisplaySystemInfo()
     {
-        // User agent never populated in CLI, workaround to prevent array 
-        // index notice. 
+        // User agent never populated in CLI, workaround to prevent array
+        // index notice.
         $_SERVER['HTTP_USER_AGENT'] = 'Omeka Test';
         set_option('display_system_info', true);
         $this->dispatch('system-info');

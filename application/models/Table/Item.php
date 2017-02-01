@@ -16,7 +16,6 @@ class Table_Item extends Omeka_Db_Table
      *
      * @param Zend_Db_Select
      * @param array
-     * @return void
      */
     public function filterBySearch($select, $params)
     {
@@ -30,7 +29,7 @@ class Table_Item extends Omeka_Db_Table
             }
         }
     }
-    
+
     /**
      * Build the simple search.
      * 
@@ -47,10 +46,10 @@ class Table_Item extends Omeka_Db_Table
     protected function _simpleSearch($select, $terms)
     {
         $db = $this->getDb();
-        
+
         // Build tags query.
         $tagList = preg_split('/\s+/', $terms);
-        // Make sure the tag list contains the whole search string, just in case 
+        // Make sure the tag list contains the whole search string, just in case
         // that is found
         if (count($tagList) > 1) {
             $tagList[] = $terms;
@@ -77,7 +76,7 @@ class Table_Item extends Omeka_Db_Table
                         . $db->quoteInto('_simple_tags.name IN (?)', $tagList);
         $select->where($whereCondition);
     }
-    
+
     /**
      * Build the advanced search.
      * 
@@ -95,7 +94,7 @@ class Table_Item extends Omeka_Db_Table
             if (empty($v['element_id']) || empty($v['type'])) {
                 continue;
             }
-            
+
             $value = isset($v['terms']) ? $v['terms'] : null;
             $type = $v['type'];
             $elementId = (int) $v['element_id'];
@@ -161,7 +160,7 @@ class Table_Item extends Omeka_Db_Table
             $select->joinLeft(array($alias => $db->ElementText), $joinCondition, array());
             if ($where == '') {
                 $where = $whereClause;
-            } else if ($joiner == 'or') {
+            } elseif ($joiner == 'or') {
                 $where .= " OR $whereClause";
             } else {
                 $where .= " AND $whereClause";
@@ -179,9 +178,8 @@ class Table_Item extends Omeka_Db_Table
      * Filter the SELECT statement based on an item's collection
      *
      * @param Zend_Db_Select $select
-     * @param Collection|integer|array $collections Either a Collection object,
+     * @param Collection|int|array $collections Either a Collection object,
      * or the collection id or an array of collection object or id.
-     * @return void
      */
     public function filterByCollection($select, $collections)
     {
@@ -189,7 +187,7 @@ class Table_Item extends Omeka_Db_Table
             $collections = array($collections);
         }
 
-        $collectionIds = array_map(function($collection) {
+        $collectionIds = array_map(function ($collection) {
             if ($collection === 0 || $collection === '0') {
                 return null;
             }
@@ -201,7 +199,6 @@ class Table_Item extends Omeka_Db_Table
             }
             return;
         }, $collections);
-
 
         $hasEmpty = in_array(null, $collectionIds);
         $collectionIds = array_filter($collectionIds);
@@ -226,9 +223,8 @@ class Table_Item extends Omeka_Db_Table
      * Filter the SELECT statement based on the item Type
      *
      * @param Zend_Db_Select $select
-     * @param Type|integer|string|array $types One or multiple Item Type object,
+     * @param Type|int|string|array $types One or multiple Item Type object,
      * Item Type ID or Item Type name.
-     * @return void
      */
     public function filterByItemType($select, $types)
     {
@@ -236,7 +232,7 @@ class Table_Item extends Omeka_Db_Table
             $types = array($types);
         }
 
-        $typeIdsOrNames = array_map(function($type) {
+        $typeIdsOrNames = array_map(function ($type) {
             if ($type === 0 || $type === '0') {
                 return null;
             }
@@ -251,7 +247,6 @@ class Table_Item extends Omeka_Db_Table
             }
             return;
         }, $types);
-
 
         $hasEmpty = in_array(null, $typeIdsOrNames);
         $typeIdsOrNames = array_filter($typeIdsOrNames);
@@ -310,7 +305,6 @@ class Table_Item extends Omeka_Db_Table
      *
      * @param Omeka_Db_Select
      * @param string|array A comma-delimited string or an array of tag names.
-     * @return void
      */
     public function filterByTags($select, $tags)
     {
@@ -325,10 +319,9 @@ class Table_Item extends Omeka_Db_Table
         // This subquery should only return item IDs, so that the subquery can be
         // appended to the main query by WHERE i.id IN (SUBQUERY).
         foreach ($tags as $tagName) {
-
             $subSelect = new Omeka_Db_Select;
-            $subSelect->from(array('records_tags'=>$db->RecordsTags), array('items.id'=>'records_tags.record_id'))
-                ->joinInner(array('tags'=>$db->Tag), 'tags.id = records_tags.tag_id', array())
+            $subSelect->from(array('records_tags' => $db->RecordsTags), array('items.id' => 'records_tags.record_id'))
+                ->joinInner(array('tags' => $db->Tag), 'tags.id = records_tags.tag_id', array())
                 ->where('tags.name = ? AND records_tags.`record_type` = "Item"', trim($tagName));
 
             $select->where('items.id IN (' . (string) $subSelect . ')');
@@ -341,17 +334,16 @@ class Table_Item extends Omeka_Db_Table
      *
      * @param Zend_Db_Select
      * @param array|string Set of tag names (either array or comma-delimited string)
-     * @return void
      */
     public function filterByExcludedTags($select, $tags)
     {
         $db = $this->getDb();
 
-        if (!is_array($tags)){
+        if (!is_array($tags)) {
             $tags = explode(get_option('tag_delimiter'), $tags);
         }
         $subSelect = new Omeka_Db_Select;
-        $subSelect->from(array('items'=>$db->Item), 'items.id')
+        $subSelect->from(array('items' => $db->Item), 'items.id')
                          ->joinInner(array('records_tags' => $db->RecordsTags),
                                      'records_tags.record_id = items.id AND records_tags.record_type = "Item"',
                                      array())
@@ -371,9 +363,8 @@ class Table_Item extends Omeka_Db_Table
      * file.
      *
      * @param Zend_Db_Select
-     * @param boolean $hasDerivativeImage Whether items should have a derivative
+     * @param bool $hasDerivativeImage Whether items should have a derivative
      * image file.
-     * @return void
      */
     public function filterByHasDerivativeImage($select, $hasDerivativeImage = true)
     {
@@ -381,14 +372,13 @@ class Table_Item extends Omeka_Db_Table
 
         $db = $this->getDb();
 
-        $select->joinLeft(array('files'=>"$db->File"), 'files.item_id = items.id', array());
+        $select->joinLeft(array('files' => "$db->File"), 'files.item_id = items.id', array());
         $select->where('files.has_derivative_image = ?', $hasDerivativeImage);
     }
-    
+
     /**
      * @param Omeka_Db_Select
      * @param array
-     * @return void
      */
     public function applySearchFilters($select, $params)
     {
@@ -441,7 +431,7 @@ class Table_Item extends Omeka_Db_Table
             }
         }
         $this->filterBySearch($select, $params);
-        
+
         // If we returning the data itself, we need to group by the item ID
         $select->group('items.id');
     }
@@ -542,7 +532,7 @@ class Table_Item extends Omeka_Db_Table
                 break;
 
             default:
-                throw new Omeka_Record_Exception( 'Invalid position provided to ItemTable::findNearby()!' );
+                throw new Omeka_Record_Exception('Invalid position provided to ItemTable::findNearby()!');
                 break;
         }
 

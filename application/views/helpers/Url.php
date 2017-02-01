@@ -66,40 +66,40 @@ class Omeka_View_Helper_Url extends Zend_View_Helper_Abstract
      * should be the route name (string) or null. If $options is a string, $name 
      * should be the set of query string parameters (array) or null.
      * @param array $queryParams Optional Set of query string parameters.
-     * @param boolean $reset Optional Whether or not to reset the route 
+     * @param bool $reset Optional Whether or not to reset the route 
      * parameters implied by the current request, e.g. if the current controller
      * is 'items', then 'controller'=>'items' will be inferred when assembling
      * the route.
-     * @param boolean $encode
+     * @param bool $encode
      * @return string
      */
-    public function url($options = array(), $name = null, array $queryParams = array(), 
+    public function url($options = array(), $name = null, array $queryParams = array(),
         $reset = false, $encode = true
     ) {
         $url = '';
         $front = Zend_Controller_Front::getInstance();
-        
+
         // If it's a string, just append it.
         if (is_string($options)) {
             $url = rtrim($front->getBaseUrl(), '/') . '/' . ltrim($options, '/');
-            
+
         // If it's an array, assemble the URL with Zend_View_Helper_Url.
-        } else if (is_array($options)) {
+        } elseif (is_array($options)) {
             $urlHelper = new Zend_View_Helper_Url;
             $url = $urlHelper->url($options, $name, $reset, $encode);
         }
-        
-        // If the first argument is a string, then the second is a set of 
-        // parameters to append to the query string. If the first argument is an 
+
+        // If the first argument is a string, then the second is a set of
+        // parameters to append to the query string. If the first argument is an
         // array, then the query parameters are the 3rd argument.
         if (is_string($options)) {
             $queryParams = $name;
         }
-        
+
         if ($queryParams) {
             $url .= '?' . http_build_query($queryParams);
         }
-        
+
         return $url;
     }
 }

@@ -13,4 +13,5 @@
  * @package Omeka\Job\Worker
  */
 class Omeka_Job_Worker_InterruptException extends Exception
-{}
+{
+}

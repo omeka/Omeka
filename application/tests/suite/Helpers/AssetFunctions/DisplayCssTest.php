@@ -29,7 +29,8 @@ class Omeka_Helper_DisplayCssTest extends PHPUnit_Framework_TestCase
         Zend_Registry::_unsetInstance();
     }
 
-    private function _getCssOutput() {
+    private function _getCssOutput()
+    {
         ob_start();
         echo head_css();
         return ob_get_clean();
@@ -46,7 +47,8 @@ class Omeka_Helper_DisplayCssTest extends PHPUnit_Framework_TestCase
         $this->assertCount(1, $result, "Link tag for '$path' not found.");
     }
 
-    private function _assertStylesheets($output, $cssPaths) {
+    private function _assertStylesheets($output, $cssPaths)
+    {
         foreach ($cssPaths as $path) {
             $this->_assertStyleLink($output, $path);
         }
@@ -55,7 +57,6 @@ class Omeka_Helper_DisplayCssTest extends PHPUnit_Framework_TestCase
     public function testWithNoStyles()
     {
         $this->assertEquals('', $this->_getCssOutput());
-
     }
 
     public function testQueueCssSingle()

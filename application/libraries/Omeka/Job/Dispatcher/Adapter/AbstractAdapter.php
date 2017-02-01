@@ -24,7 +24,7 @@ abstract class Omeka_Job_Dispatcher_Adapter_AbstractAdapter implements Omeka_Job
             $this->_setOptions($options);
         }
     }
-    
+
     private function _setOptions(array $options)
     {
         $this->_options = $options;
@@ -64,4 +64,3 @@ abstract class Omeka_Job_Dispatcher_Adapter_AbstractAdapter implements Omeka_Job
         return false;
     }
 }
-

@@ -40,7 +40,7 @@ class ElementSet extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
      * @var array
      */
     protected $_elementsToSave = array();
-    
+
     /**
      * The name of the item type element set.
      * 
@@ -58,14 +58,14 @@ class ElementSet extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
     {
         return $this->getTable('Element')->findBySet($this->name);
     }
-    
+
     /**
      * Add elements to the element set.
      * 
      * @param array $elements
      */
     public function addElements(array $elements)
-    {        
+    {
         foreach ($elements as $order => $options) {
             $record = $this->_buildElementRecord($options);
             $this->_elementsToSave[] = $record;
@@ -95,16 +95,14 @@ class ElementSet extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
         $maxOrder = $this->_getNextElementOrder();
         foreach ($this->_elementsToSave as $order => $obj) {
             $obj->element_set_id = $this->id;
-            $obj->setOrder($maxOrder + (int)$order);
+            $obj->setOrder($maxOrder + (int) $order);
             $obj->save();
             unset($this->_elementsToSave[$order]);
         }
     }
-    
+
     /**
      * Delete all the elements associated with an element set.
-     * 
-     * @return void
      */
     protected function _delete()
     {
@@ -145,12 +143,12 @@ class ElementSet extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
         if (!$this->fieldIsUnique('name')) {
             $this->addError('Name', __('Name of element set must be unique.'));
         }
-        
+
         if (empty($this->name)) {
             $this->addError('Name', __('Name of element set must not be empty.'));
         }
     }
-    
+
     /**
      * Identify ElementSet records as relating to the ElementSets ACL resource.
      *

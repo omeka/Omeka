@@ -18,8 +18,8 @@ class Omeka_Application_Resource_Debug extends Zend_Application_Resource_Resourc
         $bootstrap = $this->getBootstrap();
         $bootstrap->bootstrap('FrontController');
         $front = $bootstrap->getResource('FrontController');
-        
-        // This plugin allows for debugging request objects without inserting 
+
+        // This plugin allows for debugging request objects without inserting
         // debugging code into the Zend Framework code files.
         $front->registerPlugin(new Omeka_Controller_Plugin_Debug);
     }

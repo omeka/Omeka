@@ -23,7 +23,7 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
         // Load a view object to allow get_view() to work.
         $this->view = new Omeka_View;
         Zend_Registry::set('view', $this->view);
-        
+
         // Trick it into loading existing shared javascripts.
         $this->view->addAssetPath(VIEW_SCRIPTS_DIR, self::ASSET_PATH_ROOT);
 
@@ -35,8 +35,9 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
     {
         Zend_Registry::_unsetInstance();
     }
-    
-    private function _getJsOutput($includeDefaults = true) {
+
+    private function _getJsOutput($includeDefaults = true)
+    {
         ob_start();
         echo head_js($includeDefaults);
         return ob_get_clean();
@@ -54,7 +55,6 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
     public function testWithNoScripts()
     {
         $this->assertEquals('', $this->_getJsOutput(false));
-        
     }
 
     public function testQueueJs()
@@ -96,7 +96,6 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
         $output = $this->_getJsOutput(false);
 
         $this->assertContains('<!--[if lt IE 9]>', $output);
-
     }
 
     public function testQueueJsStringConditional()
@@ -109,5 +108,4 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
         $this->assertContains('<!--[if lt IE 9]>', $output);
         $this->assertContains($script, $output);
     }
-
 }

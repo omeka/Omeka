@@ -22,7 +22,7 @@ abstract class Omeka_Plugin_AbstractPlugin
      * @var Omeka_Db
      */
     protected $_db;
-    
+
     /**
      * Plugin hooks.
      *
@@ -43,7 +43,7 @@ abstract class Omeka_Plugin_AbstractPlugin
      * @var array
      */
     protected $_hooks;
-    
+
     /**
      * Plugin filters.
      *
@@ -65,7 +65,7 @@ abstract class Omeka_Plugin_AbstractPlugin
      * @var array
      */
     protected $_filters;
-    
+
     /**
      * Plugin options.
      *
@@ -83,7 +83,7 @@ abstract class Omeka_Plugin_AbstractPlugin
      * @var array
      */
     protected $_options;
-    
+
     /**
      * Construct the plugin object.
      *
@@ -94,7 +94,7 @@ abstract class Omeka_Plugin_AbstractPlugin
     {
         $this->_db = Zend_Registry::get('bootstrap')->getResource('Db');
     }
-    
+
     /**
      * Set up the plugin to hook into Omeka.
      *
@@ -106,7 +106,7 @@ abstract class Omeka_Plugin_AbstractPlugin
         $this->_addHooks();
         $this->_addFilters();
     }
-    
+
     /**
      * Set options with default values.
      *
@@ -126,7 +126,7 @@ abstract class Omeka_Plugin_AbstractPlugin
             set_option($name, $value);
         }
     }
-    
+
     /**
      * Delete all options.
      *
@@ -145,7 +145,7 @@ abstract class Omeka_Plugin_AbstractPlugin
             delete_option($name);
         }
     }
-    
+
     /**
      * Validate and add hooks.
      */
@@ -164,7 +164,7 @@ abstract class Omeka_Plugin_AbstractPlugin
             add_plugin_hook($hook, array($this, $callback));
         }
     }
-    
+
     /**
      * Validate and add filters.
      */

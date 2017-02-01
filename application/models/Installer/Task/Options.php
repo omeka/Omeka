@@ -44,9 +44,9 @@ class Installer_Task_Options implements Installer_TaskInterface
         'show_element_set_headings',
         'use_square_thumbnail'
     );
-    
+
     private $_options = array();
-        
+
     /**
      * Set the key value pairs that will correspond to database options.
      */
@@ -54,7 +54,7 @@ class Installer_Task_Options implements Installer_TaskInterface
     {
         $this->_options = $options;
     }
-    
+
     public function install(Omeka_Db $db)
     {
         $givenOptions = array_keys($this->_options);
@@ -66,7 +66,7 @@ class Installer_Task_Options implements Installer_TaskInterface
             $optStr = join(', ', $unknownOptions);
             throw new Installer_Task_Exception("Unknown options given: $optStr.");
         }
-        
+
         foreach ($this->_options as $name => $value) {
             $db->insert('Option', array('name' => $name, 'value' => $value));
         }

@@ -32,30 +32,31 @@ class Omeka_Job_Dispatcher_Default implements Omeka_Job_Dispatcher_DispatcherInt
      * @var Omeka_Job_Dispatcher_Adapter_AdapterInterface
      */
     private $_defaultAdapter;
-    
+
     /**
      * @var Omeka_Job_Dispatcher_Adapter_AdapterInterface
      */
     private $_longRunningAdapter;
-    
+
     /**
      * @var User
      */
     private $_user;
-    
+
     /**
      * @param Omeka_Job_Dispatcher_Adapter_AdapterInterface $defaultAdapter
      * @param Omeka_Job_Dispatcher_Adapter_AdapterInterface $longRunningAdapter
      * @param User|null $user The user account associated with the request,
      * i.e. the user account associated with jobs sent by the dispatcher.
      */
-    public function __construct(Omeka_Job_Dispatcher_Adapter_AdapterInterface $defaultAdapter, 
-        Omeka_Job_Dispatcher_Adapter_AdapterInterface $longRunningAdapter, $user) {
+    public function __construct(Omeka_Job_Dispatcher_Adapter_AdapterInterface $defaultAdapter,
+        Omeka_Job_Dispatcher_Adapter_AdapterInterface $longRunningAdapter, $user)
+    {
         $this->setDefaultAdapter($defaultAdapter);
         $this->setLongRunningAdapter($longRunningAdapter);
         $this->setUser($user);
     }
-    
+
     /**
      * Set the user.
      * 
@@ -65,7 +66,7 @@ class Omeka_Job_Dispatcher_Default implements Omeka_Job_Dispatcher_DispatcherInt
     {
         $this->_user = $user;
     }
-    
+
     /**
      * Get the user.
      * 
@@ -85,7 +86,7 @@ class Omeka_Job_Dispatcher_Default implements Omeka_Job_Dispatcher_DispatcherInt
     {
         $this->_defaultAdapter = $defaultAdapter;
     }
-    
+
     /**
      * Set the long running adapter.
      * 
@@ -95,7 +96,7 @@ class Omeka_Job_Dispatcher_Default implements Omeka_Job_Dispatcher_DispatcherInt
     {
         $this->_longRunningAdapter = $longRunningAdapter;
     }
-    
+
     /**
      * Set the name of the queue to which default jobs will be sent.
      *
@@ -108,7 +109,7 @@ class Omeka_Job_Dispatcher_Default implements Omeka_Job_Dispatcher_DispatcherInt
     {
         $this->_defaultAdapter->setQueueName($name);
     }
-    
+
     /**
      * Set the name of the queue to which long-running jobs will be sent.
      *
@@ -121,7 +122,7 @@ class Omeka_Job_Dispatcher_Default implements Omeka_Job_Dispatcher_DispatcherInt
     {
         $this->_longRunningAdapter->setQueueName($name);
     }
-    
+
     /**
      * Dispatch a job using the default dispatcher.
      * 
@@ -135,7 +136,7 @@ class Omeka_Job_Dispatcher_Default implements Omeka_Job_Dispatcher_DispatcherInt
         $metadata = $this->_getJobMetadata($jobClass, $options);
         $this->_defaultAdapter->send($this->_toJson($metadata), $metadata);
     }
-    
+
     /**
      * Dispatch a job using the long-running dispatcher.
      * 
@@ -153,10 +154,10 @@ class Omeka_Job_Dispatcher_Default implements Omeka_Job_Dispatcher_DispatcherInt
     private function _getJobMetadata($class, $options)
     {
         return array(
-            'className'     => $class,
-            'options'       => $options,
-            'createdAt'     => Zend_Date::now(),
-            'createdBy'     => $this->_user,
+            'className' => $class,
+            'options' => $options,
+            'createdAt' => Zend_Date::now(),
+            'createdBy' => $this->_user,
         );
     }
 
@@ -164,7 +165,7 @@ class Omeka_Job_Dispatcher_Default implements Omeka_Job_Dispatcher_DispatcherInt
     {
         $encodable = array(
             'className' => $metadata['className'],
-            'options'   => $metadata['options'],
+            'options' => $metadata['options'],
             'createdAt' => $metadata['createdAt']->toString(Zend_Date::ISO_8601),
         );
         if ($metadata['createdBy'] instanceof User) {

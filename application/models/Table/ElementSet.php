@@ -11,19 +11,20 @@
  */
 class Table_ElementSet extends Omeka_Db_Table
 {
-    public function getSelect() {
+    public function getSelect()
+    {
         $select = parent::getSelect();
         $select->order('id ASC');
         return $select;
     }
-    
+
     /**
      * Find all the element sets that correspond to a particular record type.  
      * If the second param is set, this will include all element sets that belong 
      * to the 'All' record type.
      * 
      * @param string
-     * @param boolean
+     * @param bool
      * @return array
      */
     public function findByRecordType($recordTypeName, $includeAll = true)
@@ -33,10 +34,10 @@ class Table_ElementSet extends Omeka_Db_Table
         if ($includeAll) {
             $select->orWhere('record_type IS NULL');
         }
-        
+
         return $this->fetchObjects($select);
     }
-    
+
     public function findByName($name)
     {
         $select = $this->getSelect()->where('name = ?', $name);

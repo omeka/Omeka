@@ -4,7 +4,7 @@ class Omeka_JobTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->db = $this->getMock('Omeka_Db', array(), array(), '', false);
-        $this->dispatcher = $this->getMock('Omeka_Job_Dispatcher_DispatcherInterface', array(), array(), '', false);   
+        $this->dispatcher = $this->getMock('Omeka_Job_Dispatcher_DispatcherInterface', array(), array(), '', false);
     }
 
     public function testSetters()
@@ -19,7 +19,7 @@ class Omeka_JobTest extends PHPUnit_Framework_TestCase
     public function testConstructorCallsSetters()
     {
         $job = new Omeka_Job_Mock(array(
-            'db'            => $this->db,
+            'db' => $this->db,
             'jobDispatcher' => $this->dispatcher,
         ));
         $this->assertSame($this->db, $job->getDb());
@@ -30,7 +30,7 @@ class Omeka_JobTest extends PHPUnit_Framework_TestCase
     {
         $job = new Omeka_Job_Mock(array(
             'foobar' => true,
-            'db'     => $this->db,
+            'db' => $this->db,
         ));
         $this->assertEquals(array('foobar' => true), $job->getMiscOptions());
     }

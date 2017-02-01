@@ -11,8 +11,7 @@
  * 
  * @package Omeka\Record
  */
-class User extends Omeka_Record_AbstractRecord 
-    implements Zend_Acl_Resource_Interface, Zend_Acl_Role_Interface
+class User extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Interface, Zend_Acl_Role_Interface
 {
     /**
      * This User's username.
@@ -20,7 +19,7 @@ class User extends Omeka_Record_AbstractRecord
      * @var string
      */
     public $username;
-    
+
     /**
      * The hashed password.
      *
@@ -100,7 +99,7 @@ class User extends Omeka_Record_AbstractRecord
     {
         if ($args['post']) {
             $post = $args['post'];
-            
+
             // Permissions check to see if whoever is trying to change role to a super-user
             if (!empty($post['role'])) {
                 $bootstrap = Zend_Registry::get('bootstrap');
@@ -127,19 +126,19 @@ class User extends Omeka_Record_AbstractRecord
     protected function filterPostData($post)
     {
         $options = array('inputNamespace' => 'Omeka_Filter');
-        
+
         // Alphanumeric with no whitespace allowed, lowercase
         $username_filter = array(new Zend_Filter_Alnum(false), 'StringToLower');
-        
+
         // User form input does not allow HTML tags or superfluous whitespace
-        $filters = array('*'        => array('StripTags','StringTrim'),
+        $filters = array('*' => array('StripTags', 'StringTrim'),
                          'username' => 'StringTrim',
-                         'active'   => 'Boolean');
-            
+                         'active' => 'Boolean');
+
         $filter = new Zend_Filter_Input($filters, null, $post, $options);
-        
+
         $post = $filter->getUnescaped();
-                
+
         return $post;
     }
 
@@ -152,7 +151,7 @@ class User extends Omeka_Record_AbstractRecord
     {
         // potential security hole
         if (isset($post['password'])) {
-             unset($post['password']);
+            unset($post['password']);
         }
         if (array_key_exists('salt', $post)) {
             unset($post['salt']);
@@ -168,30 +167,30 @@ class User extends Omeka_Record_AbstractRecord
         if (!trim($this->name)) {
             $this->addError('name', __('Real Name is required.'));
         }
-            
+
         if (!Zend_Validate::is($this->email, 'EmailAddress')) {
             $this->addError('email', __(self::INVALID_EMAIL_ERROR_MSG));
         }
-            
+
         if (!$this->fieldIsUnique('email')) {
-            $this->addError('email', __(self::CLAIMED_EMAIL_ERROR_MSG));            
+            $this->addError('email', __(self::CLAIMED_EMAIL_ERROR_MSG));
         }
-        
+
         //Validate the role
         if (trim($this->role) == '') {
             $this->addError('role', __('The user must be assigned a role.'));
         }
-        
+
         // Validate the username
         if (strlen($this->username) < self::USERNAME_MIN_LENGTH || strlen($this->username) > self::USERNAME_MAX_LENGTH) {
-            $this->addError('username', __('The username "%1$s" must be between %2$s and %3$s characters.',$this->username, self::USERNAME_MIN_LENGTH, self::USERNAME_MAX_LENGTH));
-        } else if (! Zend_Validate::is($this->username, 'Regex', array('pattern' => '#^[a-zA-Z0-9.*@+!\-_%\#\^&$]*$#u'))) {
-            $this->addError('username', __('Whitespace is not allowed. Only these special characters may be used: %s', ' + ! @ # $ % ^ & * . - _' ));
-        } else if (!$this->fieldIsUnique('username')) {
+            $this->addError('username', __('The username "%1$s" must be between %2$s and %3$s characters.', $this->username, self::USERNAME_MIN_LENGTH, self::USERNAME_MAX_LENGTH));
+        } elseif (! Zend_Validate::is($this->username, 'Regex', array('pattern' => '#^[a-zA-Z0-9.*@+!\-_%\#\^&$]*$#u'))) {
+            $this->addError('username', __('Whitespace is not allowed. Only these special characters may be used: %s', ' + ! @ # $ % ^ & * . - _'));
+        } elseif (!$this->fieldIsUnique('username')) {
             $this->addError('username', __("'%s' is already in use. Please choose another username.", $this->username));
         }
     }
-            
+
     /**
      * Upgrade the hashed password.
      *
@@ -201,13 +200,13 @@ class User extends Omeka_Record_AbstractRecord
      * @since 1.3
      * @param string $username
      * @param string $password
-     * @return boolean False if incorrect username/password given, otherwise true
+     * @return bool False if incorrect username/password given, otherwise true
      * when password can be or has been upgraded.
      */
     public static function upgradeHashedPassword($username, $password)
-    {        
+    {
         $userTable = get_db()->getTable('User');
-        $user = $userTable->findBySql("username = ? AND salt IS NULL AND password = SHA1(?)", 
+        $user = $userTable->findBySql("username = ? AND salt IS NULL AND password = SHA1(?)",
                                              array($username, $password), true);
         if (!$user) {
             return false;
@@ -242,8 +241,8 @@ class User extends Omeka_Record_AbstractRecord
     public function getResourceId()
     {
         return 'Users';
-    }     
-    
+    }
+
     /**
      * Generate a simple 16 character salt for the user.
      */

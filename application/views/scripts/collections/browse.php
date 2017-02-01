@@ -1,6 +1,6 @@
 <?php
 $pageTitle = __('Browse Collections');
-echo head(array('title'=>$pageTitle,'bodyclass' => 'collections browse'));
+echo head(array('title' => $pageTitle, 'bodyclass' => 'collections browse'));
 ?>
 
 <h1><?php echo $pageTitle; ?> <?php echo __('(%s total)', $total_results); ?></h1>
@@ -25,7 +25,7 @@ $sortLinks[__('Date Added')] = 'added';
 
     <?php if (metadata('collection', array('Dublin Core', 'Description'))): ?>
     <div class="collection-description">
-        <?php echo text_to_paragraphs(metadata('collection', array('Dublin Core', 'Description'), array('snippet'=>150))); ?>
+        <?php echo text_to_paragraphs(metadata('collection', array('Dublin Core', 'Description'), array('snippet' => 150))); ?>
     </div>
     <?php endif; ?>
 
@@ -33,7 +33,7 @@ $sortLinks[__('Date Added')] = 'added';
     <div class="collection-contributors">
         <p>
         <strong><?php echo __('Contributors'); ?>:</strong>
-        <?php echo metadata('collection', array('Dublin Core', 'Contributor'), array('all'=>true, 'delimiter'=>', ')); ?>
+        <?php echo metadata('collection', array('Dublin Core', 'Contributor'), array('all' => true, 'delimiter' => ', ')); ?>
         </p>
     </div>
     <?php endif; ?>
@@ -48,6 +48,6 @@ $sortLinks[__('Date Added')] = 'added';
 
 <?php echo pagination_links(); ?>
 
-<?php fire_plugin_hook('public_collections_browse', array('collections'=>$collections, 'view' => $this)); ?>
+<?php fire_plugin_hook('public_collections_browse', array('collections' => $collections, 'view' => $this)); ?>
 
 <?php echo foot(); ?>

@@ -1,4 +1,4 @@
-<?php echo head(array('bodyid'=>'home')); ?>
+<?php echo head(array('bodyid' => 'home')); ?>
 
 <?php if (get_theme_option('Homepage Text')): ?>
 <p><?php echo get_theme_option('Homepage Text'); ?></p>

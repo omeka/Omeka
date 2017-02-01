@@ -17,7 +17,7 @@ class Omeka_Db_Select extends Zend_Db_Select
      * @param Zend_Db_Adapter $adapter (optional) Adapter to use instead of the
      * one set up by Omeka.
      */
-    public function __construct($adapter=null)
+    public function __construct($adapter = null)
     {
         if (!$adapter) {
             //Omeka's connection to the Zend_Db_Adapter
@@ -28,12 +28,12 @@ class Omeka_Db_Select extends Zend_Db_Select
         }
         return parent::__construct($adapter);
     }
-    
+
     /**
      * Detect if this SELECT joins with the given table.
      *
      * @param string $name Table name.
-     * @return boolean
+     * @return bool
      */
     public function hasJoin($name)
     {

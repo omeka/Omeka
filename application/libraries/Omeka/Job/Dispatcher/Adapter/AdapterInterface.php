@@ -22,7 +22,7 @@ interface Omeka_Job_Dispatcher_Adapter_AdapterInterface
      * @param string $name
      */
     public function setQueueName($name);
-    
+
     /**
      * Send the job to whatever underlying system is used by the adapter.
      *

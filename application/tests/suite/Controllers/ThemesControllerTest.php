@@ -12,21 +12,21 @@
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
-{   
+{
     const THEME = 'default';
-    
+
     public function setUp()
     {
         $themeDir = PUBLIC_THEME_DIR . '/' . self::THEME;
-        if (!is_dir($themeDir) 
+        if (!is_dir($themeDir)
             || !file_exists($themeDir . '/config.ini')
         ) {
             $this->markTestSkipped("Cannot test ThemesController without the '" . self::THEME . "' theme.");
         }
-        parent::setUp();   
+        parent::setUp();
         $this->_authenticateUser($this->_getDefaultUser());
     }
-    
+
     public function testDisplayConfigForm()
     {
         set_option(Theme::PUBLIC_THEME_OPTION, self::THEME);
@@ -41,15 +41,15 @@ class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
         $this->assertQueryContentContains('h2', $name);
         $this->assertQuery('input#logo');
     }
-        
+
     public function testConfigureThemeWithNoLogoFileAndNoPreviousLogoFile()
     {
         $themeName = self::THEME;
-        $this->assertEquals('', (string)get_theme_option('logo', $themeName));
-        
+        $this->assertEquals('', (string) get_theme_option('logo', $themeName));
+
         // specify the files array for the post
         $_FILES = array(
-            'logo' => 
+            'logo' =>
                 array(
                   'name' => '',
                   'type' => '',
@@ -66,7 +66,7 @@ class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
                   'size' => 0
               )
         );
-        
+
         // specify the theme options for the post
         $themeOptions = array(
           'display_featured_item' => '1',
@@ -80,32 +80,32 @@ class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
 
         $csrf = new Zend_Form_Element_Hash('theme_config_csrf');
         $csrf->initCsrfToken();
-        
+
         // specify other post data
         $otherPostData = array(
           'hidden_file_logo' => '',
-          'hidden_file_header_background' => '',  
+          'hidden_file_header_background' => '',
           'MAX_FILE_SIZE' => '33554432',
           'submit' => 'Save Changes',
           'theme_config_csrf' => $csrf->getHash()
         );
-        
+
         // set the the post data
         $post = array_merge($themeOptions, $otherPostData);
         $this->getRequest()->setParam('name', $themeName);
         $this->getRequest()->setPost($post);
         $this->getRequest()->setMethod('POST');
-        
+
         // dispatch the controller action
         $this->dispatch('themes/config');
 
         $actualOptions = Theme::getOptions(self::THEME);
         $this->assertArrayNotHasKey('theme_config_csrf', $actualOptions);
-        foreach($themeOptions as $name => $value) {
+        foreach ($themeOptions as $name => $value) {
             $this->assertArrayHasKey($name, $actualOptions);
             $this->assertEquals($actualOptions[$name], $value, "Option '$name' was not correctly set.");
         }
-        
+
         // verify that logo is empty
         $this->assertEmpty(get_theme_option('logo', $themeName));
     }

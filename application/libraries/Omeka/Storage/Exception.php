@@ -9,4 +9,6 @@
 /**
  * @package Omeka\Storage
  */
-class Omeka_Storage_Exception extends Exception {}
+class Omeka_Storage_Exception extends Exception
+{
+}

@@ -1,7 +1,6 @@
 <nav id="admin-bar">
 
-<?php if($user = current_user()) {
-
+<?php if ($user = current_user()) {
     $links = array(
         array(
             'label' => __('Welcome, %s', $user->name),
@@ -16,7 +15,6 @@
             'uri' => url('/users/logout')
         )
     );
-
 } else {
     $links = array();
 }

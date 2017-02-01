@@ -50,12 +50,12 @@ class Omeka_View_Helper_SearchForm extends Zend_View_Helper_Abstract
         if (!isset($options['show_advanced'])) {
             $options['show_advanced'] = false;
         }
-        
+
         // Set the default submit value.
         if (!isset($options['submit_value'])) {
             $options['submit_value'] = __('Search');
         }
-        
+
         // Set the default form attributes.
         if (!isset($options['form_attributes'])) {
             $options['form_attributes'] = array();
@@ -70,9 +70,9 @@ class Omeka_View_Helper_SearchForm extends Zend_View_Helper_Abstract
         $options['form_attributes']['method'] = 'get';
 
         $formParams = array(
-            'options'      => $options,
-            'filters'      => $filters,
-            'query_types'  => $validQueryTypes,
+            'options' => $options,
+            'filters' => $filters,
+            'query_types' => $validQueryTypes,
             'record_types' => $validRecordTypes
         );
 

@@ -20,7 +20,7 @@ class ThemesController extends Omeka_Controller_AbstractActionController
         $this->view->current = $themes[$public];
         $this->view->csrf = $csrfForm;
     }
-    
+
     public function switchAction()
     {
         $csrfForm = new Omeka_Form_SessionCsrf;
@@ -29,7 +29,7 @@ class ThemesController extends Omeka_Controller_AbstractActionController
             $this->_helper->redirector('browse');
             return;
         }
-        
+
         $themeName = $this->_getParam(Theme::PUBLIC_THEME_OPTION);
         // Theme names should be alphanumeric(-ish) (prevent security flaws).
         if (preg_match('/[^a-z0-9\-_]/i', $themeName)) {
@@ -44,37 +44,35 @@ class ThemesController extends Omeka_Controller_AbstractActionController
             $this->_helper->redirector('browse');
             return;
         }
-        
+
         // Set the public theme option according to the form post.
         set_option(Theme::PUBLIC_THEME_OPTION, $themeName);
-        
-        if (!Theme::getOptions($themeName) 
+
+        if (!Theme::getOptions($themeName)
             && ($configForm = new Omeka_Form_ThemeConfiguration(array('themeName' => $themeName)))
         ) {
             Theme::setOptions($themeName, $configForm->getValues());
         }
-        
+
         $this->_helper->flashMessenger(__('The theme has been successfully changed.'), 'success');
         $this->_helper->redirector('browse');
     }
-    
+
     /**
      * Load the configuration form for a specific theme.  
      * That configuration form will be POSTed back to this URL.
-     *
-     * @return void
      */
     public function configAction()
-    {                      
+    {
         // get the theme name and theme object
         $themeName = $this->_getParam('name');
         $theme = Theme::getTheme($themeName);
         $themeOptions = Theme::getOptions($themeName);
-        
-        // get the configuration form        
+
+        // get the configuration form
         $form = new Omeka_Form_ThemeConfiguration(array('themeName' => $themeName));
         $form->removeDecorator('Form');
-                
+
         // process the form if posted
         if ($this->getRequest()->isPost()) {
             $configHelper = new Omeka_Controller_Action_Helper_ThemeConfiguration;
@@ -87,7 +85,7 @@ class ThemesController extends Omeka_Controller_AbstractActionController
                 $this->_helper->_flashMessenger(__('There was an error on the form. Please try again.'), 'error');
             }
         }
-        
+
         $this->view->configForm = $form;
         $this->view->theme = $theme;
     }

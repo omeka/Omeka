@@ -22,15 +22,15 @@ class convertCollectorArrays extends Omeka_Db_Migration_AbstractMigration
             // If we can succesfully unserialize this as an array, convert it
             // back to a string.  Otherwise, leave it alone.
             $array = @unserialize($column);
-            if(is_array($array)) {
+            if (is_array($array)) {
                 $id = (int) $id;
                 $db->update($db->Collection, array('collectors' => implode("\n", $array)), "id = $id");
             }
         }
     }
-    
+
     public function down()
     {
         throw new RuntimeException("Cannot reverse this migration.");
     }
-} 
+}

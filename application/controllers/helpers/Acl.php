@@ -38,7 +38,7 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
     /**
      * Whether we should automatically try to set the resource object.
      *
-     * @var boolean
+     * @var bool
      */
     protected $_autoloadResourceObject = true;
 
@@ -59,8 +59,6 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
      *
      * If the user has been authenticated, display the Access Forbidden error page.
      * Otherwise, give the user an opportunity to login before trying again.
-     *
-     * @return void
      */
     public function preDispatch()
     {
@@ -85,7 +83,7 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
                                ->setModuleName('default')
                                ->setParams(array())
                                ->setDispatched(false);
-        } else if (!$this->_isLoginRequest()) {
+        } elseif (!$this->_isLoginRequest()) {
             $this->getRequest()->setControllerName('users')
                                ->setActionName('login')
                                ->setModuleName('default')
@@ -112,21 +110,21 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
      * @param string $privilege
      * @param Zend_Acl_Resource|string|null (Optional) Resource to check.
      * @see getResourceName()
-     * @return boolean
+     * @return bool
      */
     public function isAllowed($privilege, $resource = null)
     {
         $allowed = $this->_allowed;
-        if(isset($allowed[$privilege])) {
+        if (isset($allowed[$privilege])) {
             return $allowed[$privilege];
         }
 
         if ($resource instanceof Zend_Acl_Resource_Interface) {
             $resourceObj = $resource;
             $resourceName = $resourceObj->getResourceId();
-        } else if (is_string($resource)) {
+        } elseif (is_string($resource)) {
             $resourceName = $resource;
-        } else if (!$resource) {
+        } elseif (!$resource) {
             $resourceName = $this->getResourceName();
         }
 
@@ -153,7 +151,7 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
     public function getResourceName()
     {
         $controllerName = $this->getRequest()->getControllerName();
-        $moduleName     = $this->getRequest()->getModuleName();
+        $moduleName = $this->getRequest()->getModuleName();
 
         // This ZF inflector should work but it doesn't!
         // $inflector = new Zend_Filter_Word_DashToCamelCase();
@@ -174,7 +172,6 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
         return $resourceName;
     }
 
-
     /**
      * @param User|null $currentUser
      */
@@ -187,7 +184,7 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
      * Temporarily override the ACL's permissions for this controller
      *
      * @param string $rule
-     * @param boolean $isAllowed
+     * @param bool $isAllowed
      */
     public function setAllowed($rule, $isAllowed = true)
     {
@@ -198,7 +195,7 @@ class Omeka_Controller_Action_Helper_Acl extends Zend_Controller_Action_Helper_A
      * Set whether the ACL helper should try to automatically load
      * a resource object from the request.
      *
-     * @param boolean $autoload
+     * @param bool $autoload
      */
     public function setAutoloadResourceObject($autoload)
     {

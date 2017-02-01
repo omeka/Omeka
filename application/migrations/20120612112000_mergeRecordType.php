@@ -59,7 +59,7 @@ ADD INDEX `record_type_record_id` (`record_type`, `record_id`)
 SQL
 );
     }
-    
+
     private function _removeObsoleteData()
     {
         $this->db->query("ALTER TABLE `{$this->db->ElementSet}` DROP `record_type_id`");

@@ -17,14 +17,13 @@ class Output_ItemContainerOmekaXml extends Omeka_Output_OmekaXml_AbstractOmekaXm
      * Create a node to contain Item nodes.
      *
      * @see Output_ItemOmekaXml
-     * @return void
      */
     protected function _buildNode()
     {
         $itemContainerElement = $this->_createElement('itemContainer');
-        
+
         $this->_setContainerPagination($itemContainerElement);
-        
+
         foreach ($this->_record as $item) {
             $itemOmekaXml = new Output_ItemOmekaXml($item, $this->_context);
             $itemElement = $this->_doc->importNode($itemOmekaXml->_node, true);

@@ -21,7 +21,7 @@ class ApiController extends Omeka_Controller_AbstractActionController
         // Actions should use the jsonApi action helper to render JSON data.
         $this->_helper->viewRenderer->setNoRender();
     }
-    
+
     /**
      * Handle GET request without ID.
      */
@@ -31,35 +31,35 @@ class ApiController extends Omeka_Controller_AbstractActionController
         $recordType = $request->getParam('api_record_type');
         $resource = $request->getParam('api_resource');
         $page = $request->getQuery('page', 1);
-        
+
         $this->_validateRecordType($recordType);
-        
+
         // Determine the results per page.
         $perPageMax = (int) get_option('api_per_page');
         $perPageUser = (int) $request->getQuery('per_page');
         $perPage = ($perPageUser < $perPageMax && $perPageUser > 0) ? $perPageUser : $perPageMax;
-        
+
         // Get the records and the result count.
         $recordsTable = $this->_helper->db->getTable($recordType);
         $totalResults = $recordsTable->count($_GET);
         $records = $recordsTable->findBy($_GET, $perPage, $page);
-        
+
         // Set the non-standard Omeka-Total-Results header.
         $this->getResponse()->setHeader('Omeka-Total-Results', $totalResults);
-        
+
         // Set the Link header for pagination.
         $this->_setLinkHeader($perPage, $page, $totalResults, $resource);
-        
+
         // Build the data array.
         $data = array();
         $recordAdapter = $this->_getRecordAdapter($recordType);
         foreach ($records as $record) {
             $data[] = $this->_getRepresentation($recordAdapter, $record, $resource);
         }
-        
+
         $this->_helper->jsonApi($data);
     }
-    
+
     /**
      * Handle GET request with ID.
      */
@@ -69,21 +69,21 @@ class ApiController extends Omeka_Controller_AbstractActionController
         $recordType = $request->getParam('api_record_type');
         $resource = $request->getParam('api_resource');
         $apiParams = $request->getParam('api_params');
-        
+
         $this->_validateRecordType($recordType);
-        
+
         $record = $this->_helper->db->getTable($recordType)->find($apiParams[0]);
         if (!$record) {
             throw new Omeka_Controller_Exception_Api('Invalid record. Record not found.', 404);
         }
-        
+
         // The user must have permission to show this record.
         $this->_validateUser($record, 'show');
-        
+
         $data = $this->_getRepresentation($this->_getRecordAdapter($recordType), $record, $resource);
         $this->_helper->jsonApi($data);
     }
-    
+
     /**
      * Handle POST requests.
      */
@@ -92,40 +92,40 @@ class ApiController extends Omeka_Controller_AbstractActionController
         $request = $this->getRequest();
         $recordType = $request->getParam('api_record_type');
         $resource = $request->getParam('api_resource');
-        
+
         $this->_validateRecordType($recordType);
-        
+
         $record = new $recordType;
-        
+
         // The user must have permission to add this record.
         $this->_validateUser($record, 'add');
-        
+
         // The request body must be a JSON object.
         $data = json_decode($request->getRawBody());
         if (!($data instanceof stdClass)) {
             throw new Omeka_Controller_Exception_Api('Invalid request. Request body must be a JSON object.', 400);
         }
-        
+
         // Set the POST data to the record using the record adapter.
         $this->_getRecordAdapter($recordType)->setPostData($record, $data);
         if (!$record->save(false)) {
-            throw new Omeka_Controller_Exception_Api('Error when saving record.', 
+            throw new Omeka_Controller_Exception_Api('Error when saving record.',
                 400, $record->getErrors()->get());
         }
-        
-        // The client may have set invalid data to the record. This does not 
-        // always throw an error. Get the current record state directly from the 
+
+        // The client may have set invalid data to the record. This does not
+        // always throw an error. Get the current record state directly from the
         // database.
         $data = $this->_getRepresentation(
-            $this->_getRecordAdapter($recordType), 
-            $this->_helper->db->getTable($recordType)->find($record->id), 
+            $this->_getRecordAdapter($recordType),
+            $this->_helper->db->getTable($recordType)->find($record->id),
             $resource
         );
         $this->getResponse()->setHttpResponseCode(201);
         $this->getResponse()->setHeader('Location', $data['url']);
         $this->_helper->jsonApi($data);
     }
-    
+
     /**
      * Handle PUT requests.
      */
@@ -135,41 +135,41 @@ class ApiController extends Omeka_Controller_AbstractActionController
         $recordType = $request->getParam('api_record_type');
         $resource = $request->getParam('api_resource');
         $apiParams = $request->getParam('api_params');
-        
+
         $this->_validateRecordType($recordType);
-        
+
         $record = $this->_helper->db->getTable($recordType)->find($apiParams[0]);
         if (!$record) {
             throw new Omeka_Controller_Exception_Api('Invalid record. Record not found.', 404);
         }
-        
+
         // The user must have permission to edit this record.
         $this->_validateUser($record, 'edit');
-        
+
         // The request body must be a JSON object.
         $data = json_decode($request->getRawBody());
         if (!($data instanceof stdClass)) {
             throw new Omeka_Controller_Exception_Api('Invalid request. Request body must be a JSON object.', 400);
         }
-        
+
         // Set the PUT data to the record using the record adapter.
         $this->_getRecordAdapter($recordType)->setPutData($record, $data);
         if (!$record->save(false)) {
-            throw new Omeka_Controller_Exception_Api('Error when saving record.', 
+            throw new Omeka_Controller_Exception_Api('Error when saving record.',
                 400, $record->getErrors()->get());
         }
-        
-        // The client may have set invalid data to the record. This does not 
-        // always throw an error. Get the current record state directly from the 
+
+        // The client may have set invalid data to the record. This does not
+        // always throw an error. Get the current record state directly from the
         // database.
         $data = $this->_getRepresentation(
-            $this->_getRecordAdapter($recordType), 
-            $this->_helper->db->getTable($recordType)->find($record->id), 
+            $this->_getRecordAdapter($recordType),
+            $this->_helper->db->getTable($recordType)->find($record->id),
             $resource
         );
         $this->_helper->jsonApi($data);
     }
-    
+
     /**
      * Handle DELETE requests.
      */
@@ -178,23 +178,23 @@ class ApiController extends Omeka_Controller_AbstractActionController
         $request = $this->getRequest();
         $recordType = $request->getParam('api_record_type');
         $apiParams = $request->getParam('api_params');
-        
+
         $this->_validateRecordType($recordType);
-        
+
         $record = $this->_helper->db->getTable($recordType)->find($apiParams[0]);
         if (!$record) {
             throw new Omeka_Controller_Exception_Api('Invalid record. Record not found.', 404);
         }
-        
+
         // The user must have permission to delete this record.
         $this->_validateUser($record, 'delete');
-        
+
         $record->delete();
-        
+
         // 204 No Content.
         $this->getResponse()->setHttpResponseCode(204);
     }
-    
+
     /**
      * Validate a record type.
      * 
@@ -205,17 +205,17 @@ class ApiController extends Omeka_Controller_AbstractActionController
         if (!class_exists($recordType)) {
             throw new Omeka_Controller_Exception_Api("Invalid record. Record type \"$recordType\" not found.", 404);
         }
-        
+
         // Records must have corresponding record adapters.
         $recordAdapterClass = "Api_$recordType";
         if (!class_exists($recordAdapterClass)) {
-           throw new Omeka_Controller_Exception_Api("Invalid record adapter. Record adapter \"$recordAdapterClass\" not found.", 404);
+            throw new Omeka_Controller_Exception_Api("Invalid record adapter. Record adapter \"$recordAdapterClass\" not found.", 404);
         }
         if (!in_array('Omeka_Record_Api_RecordAdapterInterface', class_implements($recordAdapterClass))) {
-           throw new Omeka_Controller_Exception_Api("Invalid record adapter. Record adapter \"$recordAdapterClass\" is invalid", 500);
+            throw new Omeka_Controller_Exception_Api("Invalid record adapter. Record adapter \"$recordAdapterClass\" is invalid", 500);
         }
     }
-    
+
     /**
      * Validate a user against a privilege.
      * 
@@ -231,7 +231,7 @@ class ApiController extends Omeka_Controller_AbstractActionController
         $bootstrap = Zend_Registry::get('bootstrap');
         $currentUser = $bootstrap->getResource('CurrentUser');
         $acl = $bootstrap->getResource('Acl');
-        
+
         if ($record instanceof Zend_Acl_Resource_Interface) {
             if (!$acl->isAllowed($currentUser, $record, $privilege)) {
                 throw new Omeka_Controller_Exception_Api('Permission denied.', 403);
@@ -241,7 +241,7 @@ class ApiController extends Omeka_Controller_AbstractActionController
             throw new Omeka_Controller_Exception_Api("Invalid record. Record \"$recordType\" must define an ACL resource.", 500);
         }
     }
-    
+
     /**
      * Get the adapter for a record type.
      * 
@@ -253,7 +253,7 @@ class ApiController extends Omeka_Controller_AbstractActionController
         $recordAdapterClass = "Api_$recordType";
         return new $recordAdapterClass;
     }
-    
+
     /**
      * Set the Link header for pagination.
      * 
@@ -269,11 +269,11 @@ class ApiController extends Omeka_Controller_AbstractActionController
         if (isset($linkGet['key'])) {
             unset($linkGet['key']);
         }
-        
+
         // Calculate the first, last, prev, and next page numbers.
         $linkPages = array(
-            'first' => 1, 
-            'last' => ceil($totalResults / $perPage), 
+            'first' => 1,
+            'last' => ceil($totalResults / $perPage),
         );
         if (1 < $page) {
             $linkPages['prev'] = $page - 1;
@@ -281,17 +281,17 @@ class ApiController extends Omeka_Controller_AbstractActionController
         if ($page < $linkPages['last']) {
             $linkPages['next'] = $page + 1;
         }
-        
+
         // Build the Link value.
         $linkValues = array();
         foreach ($linkPages as $rel => $page) {
             $linkQuery = array_merge($linkGet, array('page' => $page, 'per_page' => $perPage));
             $linkValues[] = "<" . absolute_url("api/$resource", $linkQuery) . ">; rel=\"$rel\"";
         }
-        
+
         $this->getResponse()->setHeader('Link', implode(', ', $linkValues));
     }
-    
+
     /**
      * Get the representation of a record.
      * 
@@ -299,29 +299,29 @@ class ApiController extends Omeka_Controller_AbstractActionController
      * @param string $resource
      */
     protected function _getRepresentation(
-        Omeka_Record_Api_AbstractRecordAdapter $recordAdapter, 
-        Omeka_Record_AbstractRecord $record, 
+        Omeka_Record_Api_AbstractRecordAdapter $recordAdapter,
+        Omeka_Record_AbstractRecord $record,
         $resource
     ) {
         $extend = array();
         $extendTemp = apply_filters("api_extend_$resource", array(), array('record' => $record));
         $apiResources = $this->getFrontController()->getParam('api_resources');
-        
-        // Validate each extended resource. Each must be registered as an API 
-        // resource and the content must contain "id" and "url" for one resource 
-        // or "count" and "url" for multiple resources. A "resource" is 
-        // recommended but not mandatory. Everything else passes through as 
+
+        // Validate each extended resource. Each must be registered as an API
+        // resource and the content must contain "id" and "url" for one resource
+        // or "count" and "url" for multiple resources. A "resource" is
+        // recommended but not mandatory. Everything else passes through as
         // custom data that may be used for the client's convenience.
         foreach ($extendTemp as $extendResource => $extendContent) {
-            if (is_array($extendContent) 
-                && array_key_exists($extendResource, $apiResources) 
+            if (is_array($extendContent)
+                && array_key_exists($extendResource, $apiResources)
                 && (array_key_exists('count', $extendContent) || array_key_exists('id', $extendContent))
                 && array_key_exists('url', $extendContent)
             ) {
                 $extend[$extendResource] = $extendContent;
             }
         }
-        
+
         // Get the representation from the record adapter.
         $representation = $recordAdapter->getRepresentation($record);
         $representation['extended_resources'] = $extend;

@@ -19,7 +19,7 @@ class Process extends Omeka_Record_AbstractRecord
     const STATUS_PAUSED = 'paused';
     const STATUS_ERROR = 'error';
     const STATUS_STOPPED = 'stopped';
-    
+
     public $pid;
     public $class;
     public $user_id;
@@ -27,27 +27,27 @@ class Process extends Omeka_Record_AbstractRecord
     public $args;
     public $started;
     public $stopped;
-    
+
     protected function beforeSave($args)
     {
         if (!$this->_isSerialized($this->args)) {
-            $this->args = serialize($this->args);            
+            $this->args = serialize($this->args);
         }
     }
-    
+
     public function getArguments()
-    {     
+    {
         if ($this->_isSerialized($this->args)) {
             $this->args = unserialize($this->args);
-        }        
+        }
         return $this->args;
     }
-    
+
     public function setArguments($args)
     {
         $this->args = $args;
     }
-    
+
     private function _isSerialized($s)
     {
         if (!is_string($s)) {

@@ -33,17 +33,17 @@ class Omeka_View_Helper_RecordUrl extends Zend_View_Helper_Abstract
         if (!($record instanceof Omeka_Record_AbstractRecord)) {
             throw new Omeka_View_Exception(__('Invalid record passed while getting record URL.'));
         }
-        
-        // If no action is passed, use the default action set in the signature 
+
+        // If no action is passed, use the default action set in the signature
         // of Omeka_Record_AbstractRecord::getRecordUrl().
         if (is_null($action)) {
             $url = $record->getRecordUrl();
-        } else if (is_string($action)) {
+        } elseif (is_string($action)) {
             $url = $record->getRecordUrl($action);
         } else {
             throw new Omeka_View_Exception(__('Invalid action passed while getting record URL.'));
         }
-        
+
         // Assume a well-formed URL if getRecordUrl() returns a string.
         if (is_string($url)) {
             if ($getAbsoluteUrl) {
@@ -60,7 +60,7 @@ class Omeka_View_Helper_RecordUrl extends Zend_View_Helper_Abstract
             }
             return $url;
         // Assume routing parameters if getRecordUrl() returns an array.
-        } else if (is_array($url)) {
+        } elseif (is_array($url)) {
             if (isset($url['id']) && !isset($url['module'])) {
                 $route = 'id';
             } else {

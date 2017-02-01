@@ -5,7 +5,7 @@ echo head(array('title' => $pageTitle), $header);
 <h1><?php echo $pageTitle; ?></h1>
 
 <?php echo flash(); ?>
-<h2><?php echo html_escape(__('Hello %s. Your username is %s', $user->name , $user->username)); ?></h2>
+<h2><?php echo html_escape(__('Hello %s. Your username is %s', $user->name, $user->username)); ?></h2>
 
 
 <form method="post">

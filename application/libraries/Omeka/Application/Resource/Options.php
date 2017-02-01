@@ -18,7 +18,7 @@
 class Omeka_Application_Resource_Options extends Zend_Application_Resource_ResourceAbstract
 {
     private $_installerRedirect = true;
-    
+
     /**
      * @return array
      */
@@ -27,7 +27,7 @@ class Omeka_Application_Resource_Options extends Zend_Application_Resource_Resou
         $bootstrap = $this->getBootstrap();
         $bootstrap->bootstrap('Db');
         $db = $bootstrap->getResource('Db');
-        
+
         try {
             // This will throw an exception if the options table does not exist
             $options = $db->fetchPairs("SELECT name, value FROM $db->Option");
@@ -40,19 +40,19 @@ class Omeka_Application_Resource_Options extends Zend_Application_Resource_Resou
                 throw $e;
             }
         }
-        
+
         $this->_convertMigrationSchema($options);
-        
+
         // Merge in options from config.ini, options specified in config.ini
         // override options from the DB.
         $config = $this->getBootstrap()->bootstrap('Config')->getResource('Config');
         if (isset($config->options)) {
             $options = array_merge($options, $config->options->toArray());
         }
-        
+
         return $options;
     }
-    
+
     /*
      * Indicate whether or not this bootstrap resource should redirect to the 
      * installer if database exceptions are thrown, i.e. if the options table
@@ -60,30 +60,30 @@ class Omeka_Application_Resource_Options extends Zend_Application_Resource_Resou
      *
      * @param boolean $flag
      */
-    public function setInstallerRedirect($flag) {
-        $this->_installerRedirect = (boolean)$flag;
+    public function setInstallerRedirect($flag)
+    {
+        $this->_installerRedirect = (boolean) $flag;
     }
-    
+
     /**
      * If necessary, convert from the old sequentially-numbered migration scheme
      * to the new timestamped migrations.
      *
      * @param array Omeka options.
-     * @return void.
      */
     private function _convertMigrationSchema(array $options)
     {
         if (!isset($options[Omeka_Db_Migration_Manager::ORIG_MIGRATION_OPTION_NAME])) {
             return;
         }
-        
+
         // 47 is the migration of the completely-updated 1.2.x database.
         // Due to the changed migrations starting with 1.3, we must disallow
         // upgrades from pre-1.2.x versions to post-1.2 versions.
         if ($options[Omeka_Db_Migration_Manager::ORIG_MIGRATION_OPTION_NAME] != '47') {
             throw new Omeka_Db_Migration_Exception;
         }
-        
+
         $migrationManager = Omeka_Db_Migration_Manager::getDefault($this->getBootstrap()->db);
         $migrationManager->setupTimestampMigrations();
     }

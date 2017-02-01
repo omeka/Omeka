@@ -21,17 +21,17 @@ class Omeka_Validate_Errors extends ArrayObject
      * @var array
      */
     protected $_errors = array();
-    
+
     /**
      * @param array|null $errors Initial errors to set.
      */
-    public function __construct($errors=null)
+    public function __construct($errors = null)
     {
         if ($errors) {
             $this->_errors = $errors;
         }
     }
-    
+
     /**
      * Get an error from the list.
      * Required by ArrayObject.
@@ -44,7 +44,7 @@ class Omeka_Validate_Errors extends ArrayObject
             return $this->_errors[$key];
         }
     }
-    
+
     /**
      * Set an error into the list.
      * Required by ArrayObject.
@@ -56,7 +56,7 @@ class Omeka_Validate_Errors extends ArrayObject
     {
         $this->_errors[$key] = $val;
     }
-    
+
     /**
      * Get the array of errors.
      *
@@ -67,17 +67,17 @@ class Omeka_Validate_Errors extends ArrayObject
     {
         return $this->_errors;
     }
-    
+
     /**
      * Get the number of errors.
      *
-     * @return integer
+     * @return int
      */
     public function count()
     {
         return count($this->_errors);
     }
-    
+
     /**
      * Get a string representation of all the stored errors.
      *
@@ -87,9 +87,9 @@ class Omeka_Validate_Errors extends ArrayObject
     {
         $msgs = array();
         foreach ($this->_errors as $field => $error) {
-            $msgs[] = (!is_numeric($field) ? (Inflector::humanize($field, 'all'). ": ") : '') . $error; 
+            $msgs[] = (!is_numeric($field) ? (Inflector::humanize($field, 'all'). ": ") : '') . $error;
         }
-        
+
         return join("\n", $msgs);
     }
 }

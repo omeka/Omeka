@@ -17,7 +17,7 @@ interface Omeka_Record_Api_RecordAdapterInterface
      * @param Omeka_Record_AbstractRecord $record
      */
     public function getRepresentation(Omeka_Record_AbstractRecord $record);
-    
+
     /**
      * Set data to a record during a POST request.
      * 
@@ -25,7 +25,7 @@ interface Omeka_Record_Api_RecordAdapterInterface
      * @param mixed $data
      */
     public function setPostData(Omeka_Record_AbstractRecord $record, $data);
-    
+
     /**
      * Set data to a record during a PUT request.
      * 

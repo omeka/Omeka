@@ -13,13 +13,13 @@
  * 
  * @package Omeka\Controller
  */
-class Omeka_Controller_Exception_Api extends Exception {
-    
+class Omeka_Controller_Exception_Api extends Exception
+{
     /**
      * @var array
      */
     protected $_errors;
-    
+
     /**
      * @param string $message
      * @param int $code
@@ -30,7 +30,7 @@ class Omeka_Controller_Exception_Api extends Exception {
         $this->_errors = $errors;
         parent::__construct($message, (int) $code);
     }
-    
+
     /**
      * @return array
      */

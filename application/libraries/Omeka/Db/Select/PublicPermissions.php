@@ -57,7 +57,7 @@ class Omeka_Db_Select_PublicPermissions
         if ($this->_allPermission || $this->_allPermission === null) {
             return;
         }
-        
+
         if ($ownerColumn && $this->_selfPermission) {
             $select->where("$alias.$publicColumn = 1 OR $alias.$ownerColumn = ?", $this->_currentUser->id);
         } else {
