@@ -21,7 +21,7 @@ abstract class Omeka_Job_AbstractJob implements Omeka_Job_JobInterface
      * @var Omeka_Db
      */
     protected $_db;
-    
+
     /**
      * @var Omeka_Job_Dispatcher_DispatcherInterface
      */

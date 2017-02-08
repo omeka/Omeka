@@ -2272,6 +2272,7 @@ button.remove_search {
 /* Show Collections
 ================================================== */
 
+.without-item-type,
 .not-in-collections {
     float: right;
     padding: 1px 6px;

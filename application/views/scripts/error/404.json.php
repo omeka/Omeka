@@ -1,1 +1,1 @@
-<?php echo Zend_Json::encode(array('error'=>$e->getMessage(), 'flash'=>$e->getMessage())); ?>
+<?php echo Zend_Json::encode(array('error' => $e->getMessage(), 'flash' => $e->getMessage()));

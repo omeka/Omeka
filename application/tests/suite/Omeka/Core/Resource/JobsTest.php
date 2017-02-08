@@ -13,7 +13,7 @@ class Omeka_Application_Resource_JobsTest extends PHPUnit_Framework_TestCase
         $this->config = new Zend_Config(array(
             'jobs' => array(
                 'dispatcher' => array(
-                    'default'        => 'Omeka_Job_Dispatcher_Adapter_Array',
+                    'default' => 'Omeka_Job_Dispatcher_Adapter_Array',
                     'defaultOptions' => array(),
                 )
             )
@@ -46,7 +46,7 @@ class Omeka_Application_Resource_JobsTest extends PHPUnit_Framework_TestCase
         $resource = new Omeka_Application_Resource_Jobs();
         $resource->setBootstrap($this->bootstrap);
         unset($this->config->jobs);
-        // The fact that this doesn't die when there are no config settings 
+        // The fact that this doesn't die when there are no config settings
         // means that it set up a valid dispatcher adapter.
         $dispatcher = $resource->init();
         $this->assertEquals('Omeka_Job_Dispatcher_Default', get_class($dispatcher));
@@ -59,7 +59,7 @@ class Omeka_Application_Resource_JobsTest extends PHPUnit_Framework_TestCase
     {
         $resource = new Omeka_Application_Resource_Jobs();
         $resource->setBootstrap($this->bootstrap);
-        // A class name that exists but does not implement the correct 
+        // A class name that exists but does not implement the correct
         // interface.
         $this->config->jobs->dispatcher->default = 'stdClass';
         $dispatcher = $resource->init();
@@ -80,21 +80,24 @@ class Omeka_Application_Bootstrap_Mock extends Zend_Application_Bootstrap_Bootst
     private $_mockResources = array();
 
     public function run()
-    {}
+    {
+    }
 
     public function setResource($name, $resource)
     {
         $this->_mockResources[$name] = $resource;
     }
 
-    public function getResource($name) {
+    public function getResource($name)
+    {
         if (!$this->hasResource($name)) {
             throw new InvalidArgumentException("Resource named '$name' is not available.");
         }
         return $this->_mockResources[$name];
     }
 
-    public function hasResource($name) {
+    public function hasResource($name)
+    {
         return array_key_exists(strtolower($name), $this->_mockResources);
     }
 

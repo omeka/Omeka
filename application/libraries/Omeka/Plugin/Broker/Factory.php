@@ -20,10 +20,10 @@ class Omeka_Plugin_Broker_Factory
 
     public function getAll()
     {
-        $pluginBroker = new Omeka_Plugin_Broker;   
+        $pluginBroker = new Omeka_Plugin_Broker;
         $pluginIniReader = new Omeka_Plugin_Ini($this->_basePluginDir);
         $pluginMvc = new Omeka_Plugin_Mvc($this->_basePluginDir);
-        $pluginLoader = new Omeka_Plugin_Loader($pluginBroker, 
+        $pluginLoader = new Omeka_Plugin_Loader($pluginBroker,
                                                 $pluginIniReader,
                                                 $pluginMvc,
                                                 $this->_basePluginDir);

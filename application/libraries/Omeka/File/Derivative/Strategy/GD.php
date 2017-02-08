@@ -11,8 +11,7 @@
  *
  * @package Omeka\File\Derivative\Strategy
  */
-class Omeka_File_Derivative_Strategy_GD
-    extends Omeka_File_Derivative_AbstractStrategy
+class Omeka_File_Derivative_Strategy_GD extends Omeka_File_Derivative_AbstractStrategy
 {
     /**
      * Check for the imagick extension at creation.
@@ -29,7 +28,7 @@ class Omeka_File_Derivative_Strategy_GD
     /**
      * Generate a derivative image with GD.
      *
-     * @return boolean Returns true on success or false on failure.
+     * @return bool Returns true on success or false on failure.
      */
     public function createImage($sourcePath, $destPath, $type, $sizeConstraint, $mimeType)
     {
@@ -77,8 +76,8 @@ class Omeka_File_Derivative_Strategy_GD
      *
      * @param string $source Path of the source.
      * @param string $destination Path of the destination.
-     * @param integer $sizeConstraint Maximum size in pixels.
-     * @return boolean Returns true on success or false on failure.
+     * @param int $sizeConstraint Maximum size in pixels.
+     * @return bool Returns true on success or false on failure.
      */
     protected function _makeThumbnail($source, $destination, $sizeConstraint)
     {
@@ -129,8 +128,8 @@ class Omeka_File_Derivative_Strategy_GD
      *
      * @param string $source Path of the source.
      * @param string $destination Path of the destination.
-     * @param integer $sizeConstraint Maximum size in pixels.
-     * @return boolean Returns true on success or false on failure.
+     * @param int $sizeConstraint Maximum size in pixels.
+     * @return bool Returns true on success or false on failure.
      */
     protected function _makeSquareThumbnail($source, $destination, $sizeConstraint)
     {

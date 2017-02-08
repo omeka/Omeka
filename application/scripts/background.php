@@ -15,8 +15,8 @@ $baseDir = dirname(__FILE__);
 /**
  * bootstrap.php is required at minimum in order to define all path constants.
  */
-require_once("{$baseDir}/../../bootstrap.php");
-require_once("{$baseDir}/../libraries/Omeka/Application.php");
+require_once "{$baseDir}/../../bootstrap.php";
+require_once "{$baseDir}/../libraries/Omeka/Application.php";
 
 // Set the command line arguments.
 $options = new Zend_Console_Getopt(array('process|p=i' => 'process to run'));

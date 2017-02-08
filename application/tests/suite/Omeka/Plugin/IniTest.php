@@ -11,7 +11,6 @@
  */
 class Omeka_Plugin_IniTest extends PHPUnit_Framework_TestCase
 {
-    
     public function setUp()
     {
         $this->basePath = TEST_DIR . '/_files/unit/plugin-loader';
@@ -20,7 +19,7 @@ class Omeka_Plugin_IniTest extends PHPUnit_Framework_TestCase
         $this->plugin = new Plugin($this->db);
         $this->plugin->setDirectoryName('foobar');
     }
-    
+
     public function assertPreConditions()
     {
         $gettersShouldBeNull = array(
@@ -31,24 +30,24 @@ class Omeka_Plugin_IniTest extends PHPUnit_Framework_TestCase
             'getLinkUrl',
             'getIniVersion'
         );
-        
+
         foreach ($gettersShouldBeNull as $getterMethod) {
             $this->assertNull($this->plugin->$getterMethod(), "$getterMethod() should return null.");
         }
-        
+
         $gettersShouldBeEmptyArray = array(
             'getRequiredPlugins',
             'getOptionalPlugins',
             'getIniTags'
         );
-        
+
         foreach ($gettersShouldBeEmptyArray as $getterMethod) {
             $this->assertEquals(array(), $this->plugin->$getterMethod(), "$getterMethod() should return an empty array.");
         }
-        
+
         $this->assertTrue($this->iniReader->hasPluginIniFile($this->plugin));
     }
-    
+
     public function testLoadingIniDataIntoPluginRecord()
     {
         $this->iniReader->load($this->plugin);

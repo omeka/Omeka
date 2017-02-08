@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Victor Pshibytko <vpshibitko@mail.ru>, 2016
+# Victor Pshibytko <vpshibitko@mail.ru>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2016-05-23 21:15+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2017-01-23 21:27+0000\n"
+"Last-Translator: Victor Pshibytko <vpshibitko@mail.ru>\n"
 "Language-Team: Belarusian (Belarus) (http://www.transifex.com/omeka/omeka/language/be_BY/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,8 +26,8 @@ msgid ""
 msgstr "Набор элементаў метаданых Dublin Core з'яўляецца агульным для ўсіх запісаў Omeka, уключаючы дакументы, файлы і калекцыі. За больш падрабязнай інфармацыяй звяртайцеся па адрасу  http://dublincore.org/documents/dces/."
 
 #. Dublin Core: Title element name
-#: admin/themes/default/collections/browse.php:22
-#: admin/themes/default/items/browse.php:40
+#: admin/themes/default/collections/browse.php:29
+#: admin/themes/default/items/browse.php:46
 #: admin/themes/default/search/index.php:13
 #: application/views/scripts/collections/browse.php:10
 #: application/views/scripts/items/browse.php:19
@@ -40,7 +40,7 @@ msgid "A name given to the resource"
 msgstr "Назва, дадзеная рэсурсу "
 
 #. Dublin Core: Creator element name
-#: admin/themes/default/items/browse.php:41
+#: admin/themes/default/items/browse.php:47
 #: application/views/scripts/items/browse.php:20
 msgid "Creator"
 msgstr "Стваральнік, аўтар"
@@ -98,7 +98,7 @@ msgid ""
 msgstr "Кропка ці перыяд часу, звязаны з падзеяй у жыццёвым цыкле рэсурсу"
 
 #. Dublin Core: Type element name
-#: admin/themes/default/items/browse.php:42
+#: admin/themes/default/items/browse.php:48
 msgid "Type"
 msgstr "Тып"
 
@@ -363,7 +363,8 @@ msgstr "Дадаць спасылку"
 #: admin/themes/default/element-sets/edit.php:41
 #: admin/themes/default/files/edit.php:35
 #: admin/themes/default/item-types/edit.php:18
-#: admin/themes/default/items/batch-edit.php:131
+#: admin/themes/default/items/batch-edit-all.php:41
+#: admin/themes/default/items/batch-edit.php:61
 #: admin/themes/default/items/edit.php:19
 #: admin/themes/default/plugins/config.php:14
 #: admin/themes/default/settings/edit-api.php:82
@@ -393,18 +394,18 @@ msgid "View Public Page"
 msgstr "Праглад публікуемай старонкі"
 
 #: admin/themes/default/appearance/edit-navigation.php:44
-#: admin/themes/default/collections/edit.php:24
+#: admin/themes/default/collections/edit.php:25
 #: admin/themes/default/collections/show.php:36
 #: admin/themes/default/element-sets/browse.php:29
 #: admin/themes/default/files/edit.php:37
 #: admin/themes/default/files/show.php:30
 #: admin/themes/default/item-types/edit.php:20
 #: admin/themes/default/item-types/show.php:54
-#: admin/themes/default/items/batch-edit.php:120
-#: admin/themes/default/items/browse.php:27
-#: admin/themes/default/items/browse.php:81
-#: admin/themes/default/items/browse.php:123
-#: admin/themes/default/items/edit.php:21
+#: admin/themes/default/items/batch-edit.php:50
+#: admin/themes/default/items/browse.php:34
+#: admin/themes/default/items/browse.php:95
+#: admin/themes/default/items/browse.php:135
+#: admin/themes/default/items/edit.php:22
 #: admin/themes/default/items/show.php:47
 #: admin/themes/default/settings/edit-item-type-elements.php:23
 #: admin/themes/default/users/browse.php:66
@@ -426,9 +427,9 @@ msgid ""
 msgstr "Усе налады будуць страчаныя. Парадак і меткі вярнуцца да налад Omeka па змаўчанні. Прыстасаваныя спасылкі будуць страчаныя."
 
 #: admin/themes/default/collections/add.php:2
-#: admin/themes/default/collections/browse.php:11
-#: admin/themes/default/collections/browse.php:67
-#: admin/themes/default/collections/browse.php:76
+#: admin/themes/default/collections/browse.php:12
+#: admin/themes/default/collections/browse.php:75
+#: admin/themes/default/collections/browse.php:85
 msgid "Add a Collection"
 msgstr "Дадаць калекцыю"
 
@@ -437,22 +438,22 @@ msgid "Add Collection"
 msgstr "Дадаць калекцыю"
 
 #: admin/themes/default/collections/add.php:16
-#: admin/themes/default/collections/edit.php:30
+#: admin/themes/default/collections/edit.php:32
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/items/add.php:19
-#: admin/themes/default/items/batch-edit.php:51
-#: admin/themes/default/items/edit.php:28
+#: admin/themes/default/items/batch-edit-common.php:10
+#: admin/themes/default/items/edit.php:30
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:52
 msgid "Public"
 msgstr "Грамадскі"
 
 #: admin/themes/default/collections/add.php:19
-#: admin/themes/default/collections/edit.php:35
+#: admin/themes/default/collections/edit.php:37
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/add.php:25
-#: admin/themes/default/items/batch-edit.php:66
-#: admin/themes/default/items/edit.php:34
+#: admin/themes/default/items/batch-edit-common.php:24
+#: admin/themes/default/items/edit.php:36
 #: admin/themes/default/items/quick-filters.php:8
 #: admin/themes/default/items/show.php:53
 msgid "Featured"
@@ -482,32 +483,45 @@ msgstr "Прагляд калекцый"
 msgid "(%s total)"
 msgstr "(%s усяго)"
 
-#: admin/themes/default/collections/browse.php:23
+#: admin/themes/default/collections/browse.php:17
+#, php-format
+msgid "%sOne item%s has no collection."
+msgid_plural "%s%d items%s aren't in a collection."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: admin/themes/default/collections/browse.php:19
+msgid "All items are in a collection."
+msgstr "Усе дакументы знаходзяцца ў калекцыі."
+
+#: admin/themes/default/collections/browse.php:30
 #: admin/themes/default/collections/show.php:51
-#: application/views/scripts/collections/browse.php:36
+#: application/views/scripts/collections/browse.php:35
 msgid "Contributors"
 msgstr "Суаўтары"
 
-#: admin/themes/default/collections/browse.php:24
+#: admin/themes/default/collections/browse.php:31
 #: admin/themes/default/files/show.php:66
-#: admin/themes/default/items/browse.php:43
+#: admin/themes/default/items/browse.php:49
 #: application/views/scripts/collections/browse.php:11
 #: application/views/scripts/items/browse.php:21
 msgid "Date Added"
 msgstr "Дата дадання"
 
-#: admin/themes/default/collections/browse.php:25
+#: admin/themes/default/collections/browse.php:32
 #: admin/themes/default/collections/show.php:46
 #: admin/themes/default/item-types/show.php:42
 msgid "Total Number of Items"
 msgstr "Агульная колькасць дакументаў"
 
-#: admin/themes/default/collections/browse.php:40
-#: admin/themes/default/items/browse.php:72
+#: admin/themes/default/collections/browse.php:47
+#: admin/themes/default/items/browse.php:86
 msgid "(Private)"
 msgstr "(Прыватны)"
 
-#: admin/themes/default/collections/browse.php:43
+#: admin/themes/default/collections/browse.php:50
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:27
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
@@ -515,34 +529,42 @@ msgstr "(Прыватны)"
 #: admin/themes/default/index.php:79
 #: admin/themes/default/item-types/browse.php:26
 #: admin/themes/default/item-types/show.php:51
-#: admin/themes/default/items/browse.php:24
-#: admin/themes/default/items/browse.php:77
-#: admin/themes/default/items/browse.php:120
+#: admin/themes/default/items/browse.php:31
+#: admin/themes/default/items/browse.php:91
+#: admin/themes/default/items/browse.php:132
 #: admin/themes/default/items/files-form.php:12
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:63
 msgid "Edit"
 msgstr "Рэдагаваць"
 
-#: admin/themes/default/collections/browse.php:52
+#: admin/themes/default/collections/browse.php:59
 msgid "No contributors"
 msgstr "Няма сувыканаўцаў"
 
-#: admin/themes/default/collections/browse.php:70
+#: admin/themes/default/collections/browse.php:79
 msgid "There are no collections on this page."
 msgstr "Няма калекцый на гэтай старонцы"
 
-#: admin/themes/default/collections/browse.php:70
+#: admin/themes/default/collections/browse.php:79
 msgid "View All Collections"
 msgstr "Праглядзець усе калекцыі"
 
-#: admin/themes/default/collections/browse.php:73
+#: admin/themes/default/collections/browse.php:82
 msgid "You have no collections."
 msgstr "У вас няма калекцый"
 
-#: admin/themes/default/collections/browse.php:75
+#: admin/themes/default/collections/browse.php:84
 msgid "Get started by adding your first collection."
 msgstr "Пачніце ствараць сваю першую калекцыю"
+
+#: admin/themes/default/collections/edit.php:3
+#: admin/themes/default/collections/show.php:3
+#: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
+#: application/models/Mixin/ElementText.php:780
+#: application/views/scripts/functions.php:22
+msgid "[Untitled]"
+msgstr "[Без назвы]"
 
 #: admin/themes/default/collections/edit.php:8
 #, php-format
@@ -552,7 +574,7 @@ msgstr "Рэдагаваць калекцыю #%s"
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Collection #%s"
-msgstr ""
+msgstr "Калекцыя #%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
@@ -564,7 +586,7 @@ msgstr "Нядаўна дададзеныя дакументы"
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/show.php:52
 #: admin/themes/default/items/show.php:53
-#: application/views/helpers/ItemSearchFilters.php:69
+#: application/views/helpers/ItemSearchFilters.php:68
 msgid "Yes"
 msgstr "Так"
 
@@ -572,13 +594,22 @@ msgstr "Так"
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/show.php:52
 #: admin/themes/default/items/show.php:53
-#: application/views/helpers/ItemSearchFilters.php:69
+#: application/views/helpers/ItemSearchFilters.php:68
 msgid "No"
 msgstr "Не"
 
 #: admin/themes/default/collections/show.php:56
 msgid "No contributors."
 msgstr "Няма сувыканаўцаў"
+
+#: admin/themes/default/collections/show.php:62
+#: admin/themes/default/files/show.php:93
+#: admin/themes/default/items/browse.php:149
+#: admin/themes/default/items/show.php:88
+#: application/views/scripts/items/browse.php:60
+#: application/views/scripts/items/show.php:41
+msgid "Output Formats"
+msgstr "Выходныя фарматы"
 
 #: admin/themes/default/common/appearance-nav.php:5
 msgid "Themes"
@@ -609,7 +640,7 @@ msgid "Dashboard"
 msgstr "Прыборная панэль"
 
 #: admin/themes/default/common/content-nav.php:9
-#: admin/themes/default/items/batch-delete.php:17
+#: admin/themes/default/items/batch-delete.php:15
 #: admin/themes/default/items/batch-edit.php:17
 msgid "Items"
 msgstr "Дакументы"
@@ -623,10 +654,10 @@ msgid "Item Types"
 msgstr "Тыпы дакументаў"
 
 #: admin/themes/default/common/content-nav.php:21
-#: admin/themes/default/items/browse.php:94
+#: admin/themes/default/items/browse.php:108
 #: admin/themes/default/items/show.php:65
 #: application/views/scripts/items/browse.php:46
-#: application/views/scripts/items/show.php:26
+#: application/views/scripts/items/show.php:29
 msgid "Tags"
 msgstr "Тэгі"
 
@@ -680,18 +711,18 @@ msgstr "Карыстальнікі"
 msgid "Omeka Admin"
 msgstr "Адміністратар Omeka"
 
-#: admin/themes/default/common/header.php:40
+#: admin/themes/default/common/header.php:41
 #: application/views/scripts/common/header.php:32
 msgid "Skip to main content"
 msgstr "Перайсці да асноўнага зместу"
 
-#: admin/themes/default/common/header.php:60
+#: admin/themes/default/common/header.php:61
 #: application/views/scripts/common/admin-bar.php:7
 #, php-format
 msgid "Welcome, %s"
 msgstr "Запрашаем, %s"
 
-#: admin/themes/default/common/header.php:61
+#: admin/themes/default/common/header.php:62
 #: application/views/scripts/common/admin-bar.php:15
 msgid "Log Out"
 msgstr "Выхад"
@@ -909,14 +940,6 @@ msgstr "Тып файла / OS"
 msgid "Embedded Metadata"
 msgstr "Убудаваныя метаданыя"
 
-#: admin/themes/default/files/show.php:93
-#: admin/themes/default/items/browse.php:133
-#: admin/themes/default/items/show.php:88
-#: application/views/scripts/items/browse.php:60
-#: application/views/scripts/items/show.php:38
-msgid "Output Formats"
-msgstr "Выходныя фарматы"
-
 #: admin/themes/default/index.php:10
 msgid "item"
 msgid_plural "items"
@@ -1063,9 +1086,9 @@ msgid "There are no recently added items."
 msgstr "Няма нядаўна дададзеных дакументаў"
 
 #: admin/themes/default/items/add.php:2
-#: admin/themes/default/items/browse.php:20
-#: admin/themes/default/items/browse.php:116
-#: admin/themes/default/items/browse.php:152
+#: admin/themes/default/items/browse.php:19
+#: admin/themes/default/items/browse.php:141
+#: admin/themes/default/items/browse.php:168
 msgid "Add an Item"
 msgstr "Дадаць дакумент"
 
@@ -1074,32 +1097,118 @@ msgid "Add Item"
 msgstr "Дадаць дакумент"
 
 #: admin/themes/default/items/add.php:32
-#: admin/themes/default/items/batch-edit.php:90
-#: admin/themes/default/items/browse.php:90
-#: admin/themes/default/items/edit.php:41
+#: admin/themes/default/items/batch-edit-common.php:48
+#: admin/themes/default/items/browse.php:104
+#: admin/themes/default/items/edit.php:43
 #: admin/themes/default/items/show.php:57
 #: application/libraries/globals.php:411
-#: application/views/scripts/items/show.php:18
+#: application/views/scripts/items/show.php:21
 msgid "Collection"
 msgstr "Калекцыя"
+
+#: admin/themes/default/items/batch-delete-all.php:2
+msgid "Batch Delete All Searched Items"
+msgstr "Пакетнае выдаленне ўсіх знойденых дакументаў"
+
+#: admin/themes/default/items/batch-delete-all.php:18
+#, php-format
+msgid "All %d items matching the search filters above will be deleted."
+msgstr "Усе %d дакументаў, якія адпавядаюць фільтрам пошуку вышэй, будуць выдалены."
+
+#: admin/themes/default/items/batch-delete-all.php:20
+#, php-format
+msgid "All %d items will be deleted."
+msgstr "Усе %d дакументаў будуць выдалены."
+
+#: admin/themes/default/items/batch-delete-all.php:25
+msgid "Deletions will be processed in the background item by item."
+msgstr "Выдаленне будзе адбывацца ў фонавым рэжыме адзін дакумент за другім."
+
+#: admin/themes/default/items/batch-delete-all.php:36
+#: admin/themes/default/items/batch-delete.php:47
+#: admin/themes/default/items/batch-edit.php:47
+msgid "Delete Items"
+msgstr "Выдаліць дакументы"
 
 #: admin/themes/default/items/batch-delete.php:2
 msgid "Batch Delete Items"
 msgstr "Пакетнае выдаленне дакументаў"
 
-#: admin/themes/default/items/batch-delete.php:38
+#: admin/themes/default/items/batch-delete.php:36
 msgid ""
 "Some items were excluded because you do not have permission to delete them."
 msgstr "Некаторыя дакументы былі выключаныя, таму што ў вас няма дазволу на іх выдаленне ."
 
-#: admin/themes/default/items/batch-delete.php:41
+#: admin/themes/default/items/batch-delete.php:39
 msgid "Checked items will be deleted."
 msgstr "Адзначаныя дакументы будуць выдалены"
 
-#: admin/themes/default/items/batch-delete.php:50
-#: admin/themes/default/items/batch-edit.php:117
-msgid "Delete Items"
-msgstr "Выдаліць дакументы"
+#: admin/themes/default/items/batch-edit-all.php:2
+msgid "Batch Edit All Searched Items"
+msgstr "Пакетнае рэдагаванне ўсіх знойдзеных дакументаў"
+
+#: admin/themes/default/items/batch-edit-all.php:20
+#, php-format
+msgid ""
+"Changes will be applied to all %d items matching the search filters above."
+msgstr "Змяненні будуць прыменены да ўсіх дакументаў %d, якія адпавядаюць пошукавым фільтрам вышэй."
+
+#: admin/themes/default/items/batch-edit-all.php:22
+#, php-format
+msgid "Changes will be applied to all %d items."
+msgstr "Змяненні будуць прыменены да ўсіх %d дакументаў"
+
+#: admin/themes/default/items/batch-edit-all.php:27
+msgid "Changes will be processed in the background item by item."
+msgstr "Змяненні будуць адбывацца ў фонавым рэжыме адзін дакумент за другім."
+
+#: admin/themes/default/items/batch-edit-common.php:2
+msgid "Item Metadata"
+msgstr "Метаданыя дакумента"
+
+#: admin/themes/default/items/batch-edit-common.php:6
+msgid "Public?"
+msgstr "Грамадскі?"
+
+#: admin/themes/default/items/batch-edit-common.php:9
+#: admin/themes/default/items/batch-edit-common.php:23
+#: admin/themes/default/items/batch-edit-common.php:37
+#: admin/themes/default/items/batch-edit-common.php:52
+msgid "Select Below"
+msgstr "Выберыце ніжэй"
+
+#: admin/themes/default/items/batch-edit-common.php:11
+msgid "Not Public"
+msgstr "Не грамадскі"
+
+#: admin/themes/default/items/batch-edit-common.php:20
+msgid "Featured?"
+msgstr "Адзначаны?"
+
+#: admin/themes/default/items/batch-edit-common.php:25
+msgid "Not Featured"
+msgstr "Не адзначаны"
+
+#: admin/themes/default/items/batch-edit-common.php:33
+#: admin/themes/default/items/item-type-form.php:3
+msgid "Item Type"
+msgstr "Тып дакумента"
+
+#: admin/themes/default/items/batch-edit-common.php:42
+#: admin/themes/default/items/batch-edit-common.php:57
+msgid "Remove?"
+msgstr "Выдаліць?"
+
+#: admin/themes/default/items/batch-edit-common.php:63
+#: admin/themes/default/items/tag-form.php:8
+#: admin/themes/default/items/tag-form.php:11
+msgid "Add Tags"
+msgstr "Дадаць меткі"
+
+#: admin/themes/default/items/batch-edit-common.php:66
+#, php-format
+msgid "List of tags to add to all checked items, separated by %s."
+msgstr "Спіс метак, якія варта дадаць да ўсіх адзначаных дакументаў, падзеленых %s."
 
 #: admin/themes/default/items/batch-edit.php:2
 msgid "Batch Edit Items"
@@ -1109,55 +1218,7 @@ msgstr "Пакетнае рэдагаванне дакументаў"
 msgid "Changes will be applied to checked items."
 msgstr "Змены будуць ужытыя да адзначаных дакументаў"
 
-#: admin/themes/default/items/batch-edit.php:42
-msgid "Item Metadata"
-msgstr "Метаданыя дакумента"
-
-#: admin/themes/default/items/batch-edit.php:47
-msgid "Public?"
-msgstr "Грамадскі?"
-
-#: admin/themes/default/items/batch-edit.php:50
-#: admin/themes/default/items/batch-edit.php:65
-#: admin/themes/default/items/batch-edit.php:79
-#: admin/themes/default/items/batch-edit.php:94
-msgid "Select Below"
-msgstr "Выберыце ніжэй"
-
-#: admin/themes/default/items/batch-edit.php:52
-msgid "Not Public"
-msgstr "Не грамадскі"
-
-#: admin/themes/default/items/batch-edit.php:62
-msgid "Featured?"
-msgstr "Адзначаны?"
-
-#: admin/themes/default/items/batch-edit.php:67
-msgid "Not Featured"
-msgstr "Не адзначаны"
-
-#: admin/themes/default/items/batch-edit.php:75
-#: admin/themes/default/items/item-type-form.php:3
-msgid "Item Type"
-msgstr "Тып дакумента"
-
-#: admin/themes/default/items/batch-edit.php:84
-#: admin/themes/default/items/batch-edit.php:99
-msgid "Remove?"
-msgstr "Выдаліць?"
-
-#: admin/themes/default/items/batch-edit.php:105
-#: admin/themes/default/items/tag-form.php:8
-#: admin/themes/default/items/tag-form.php:11
-msgid "Add Tags"
-msgstr "Дадаць меткі"
-
-#: admin/themes/default/items/batch-edit.php:108
-#, php-format
-msgid "List of tags to add to all checked items, separated by %s."
-msgstr "Спіс метак, якія варта дадаць да ўсіх адзначаных дакументаў, падзеленых %s."
-
-#: admin/themes/default/items/batch-edit.php:118
+#: admin/themes/default/items/batch-edit.php:48
 msgid "Check if you wish to delete selected items."
 msgstr "Праверце, калі вы хочаце  выдаліць выбраныя дакументы"
 
@@ -1202,44 +1263,60 @@ msgstr "Праверце, калі вы хочаце  выдаліць выбр�
 msgid "Browse Items"
 msgstr "Прагляд дакументаў"
 
-#: admin/themes/default/items/browse.php:22
-#: admin/themes/default/items/browse.php:118
+#: admin/themes/default/items/browse.php:21
+#: admin/themes/default/items/browse.php:143
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2396
-#: application/libraries/globals.php:2786
+#: application/libraries/globals.php:2400
+#: application/libraries/globals.php:2791
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Пошук дакументаў"
 
-#: admin/themes/default/items/browse.php:37
-msgid "Select"
-msgstr "Выбраць"
+#: admin/themes/default/items/browse.php:26
+#: admin/themes/default/items/browse.php:129
+#, php-format
+msgid "Select all %s results"
+msgstr "Выберыце ўсе %s вынікі"
 
-#: admin/themes/default/items/browse.php:95
+#: admin/themes/default/items/browse.php:27
+#: admin/themes/default/items/browse.php:130
+msgid "items selected"
+msgstr "выбрана дакументаў "
+
+#: admin/themes/default/items/browse.php:43
+msgid "Select all rows"
+msgstr "Выберыце усе радкі"
+
+#: admin/themes/default/items/browse.php:64
+#, php-format
+msgid "Select item \"%s\""
+msgstr "Выберыце дакумент \"%s\""
+
+#: admin/themes/default/items/browse.php:109
 msgid "No Tags"
 msgstr "Няма метак"
 
-#: admin/themes/default/items/browse.php:139
+#: admin/themes/default/items/browse.php:155
 msgid "Details"
 msgstr "Дэталі"
 
-#: admin/themes/default/items/browse.php:140
+#: admin/themes/default/items/browse.php:156
 msgid "Show Details"
 msgstr "Паказаць дэталі"
 
-#: admin/themes/default/items/browse.php:141
+#: admin/themes/default/items/browse.php:157
 msgid "Hide Details"
 msgstr "Схаваць дэталі"
 
-#: admin/themes/default/items/browse.php:149
+#: admin/themes/default/items/browse.php:165
 msgid "You have no items."
 msgstr "У вас няма дакументаў"
 
-#: admin/themes/default/items/browse.php:151
+#: admin/themes/default/items/browse.php:167
 msgid "Get started by adding your first item."
 msgstr "Дадайце ваш першы дакумент"
 
-#: admin/themes/default/items/browse.php:156
+#: admin/themes/default/items/browse.php:172
 #, php-format
 msgid "The query searched 1 item and returned no results."
 msgid_plural "The query searched %s items and returned no results."
@@ -1248,19 +1325,14 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: admin/themes/default/items/browse.php:157
+#: admin/themes/default/items/browse.php:173
 msgid "refine your search"
 msgstr "Удакладніце пошук"
 
-#: admin/themes/default/items/browse.php:157
+#: admin/themes/default/items/browse.php:173
 #, php-format
 msgid "Would you like to %s?"
 msgstr "Хацелі б вы %s? "
-
-#: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/views/scripts/functions.php:22
-msgid "[Untitled]"
-msgstr "[Без назвы]"
 
 #: admin/themes/default/items/edit.php:8
 #, php-format
@@ -1320,112 +1392,151 @@ msgid "Narrow by Specific Fields"
 msgstr "Звузіць па вызначаных палях"
 
 #: admin/themes/default/items/search-form.php:28
-#: application/views/scripts/items/search-form.php:90
+#: application/views/scripts/items/search-form.php:105
 msgid "Add a Field"
 msgstr "Дадаць поле"
 
 #: admin/themes/default/items/search-form.php:54
 #: application/views/scripts/items/search-form.php:50
-msgid "Search Field"
-msgstr "Пошукавае поле"
+msgid "Search Joiner"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:59
+#: application/views/helpers/ItemSearchFilters.php:108
+#: application/views/scripts/items/search-form.php:55
+msgid "AND"
+msgstr "І"
+
+#: admin/themes/default/items/search-form.php:60
+#: application/views/helpers/ItemSearchFilters.php:106
+#: application/views/scripts/items/search-form.php:56
+msgid "OR"
+msgstr "ЦІ"
 
 #: admin/themes/default/items/search-form.php:67
 #: application/views/scripts/items/search-form.php:63
+msgid "Search Field"
+msgstr "Пошукавае поле"
+
+#: admin/themes/default/items/search-form.php:80
+#: application/views/scripts/items/search-form.php:76
 msgid "Search Type"
 msgstr "Тып пошуку "
 
-#: admin/themes/default/items/search-form.php:72
-#: application/views/scripts/items/search-form.php:68
+#: admin/themes/default/items/search-form.php:85
+#: application/views/scripts/items/search-form.php:81
 msgid "contains"
 msgstr "змяшчае"
 
-#: admin/themes/default/items/search-form.php:73
-#: application/views/scripts/items/search-form.php:69
+#: admin/themes/default/items/search-form.php:86
+#: application/views/scripts/items/search-form.php:82
 msgid "does not contain"
 msgstr "не змяшчае"
 
-#: admin/themes/default/items/search-form.php:74
-#: application/views/scripts/items/search-form.php:70
+#: admin/themes/default/items/search-form.php:87
+#: application/views/scripts/items/search-form.php:83
 msgid "is exactly"
 msgstr "дакладна"
 
-#: admin/themes/default/items/search-form.php:75
-#: application/views/scripts/items/search-form.php:71
+#: admin/themes/default/items/search-form.php:88
+msgid "is not exactly"
+msgstr "не зусім"
+
+#: admin/themes/default/items/search-form.php:89
+#: application/views/scripts/items/search-form.php:84
 msgid "is empty"
 msgstr "пуста"
 
-#: admin/themes/default/items/search-form.php:76
-#: application/views/scripts/items/search-form.php:72
+#: admin/themes/default/items/search-form.php:90
+#: application/views/scripts/items/search-form.php:85
 msgid "is not empty"
 msgstr "не пуста"
 
-#: admin/themes/default/items/search-form.php:84
-#: application/views/scripts/items/search-form.php:80
+#: admin/themes/default/items/search-form.php:91
+#: application/views/scripts/items/search-form.php:86
+msgid "starts with"
+msgstr "пачынаецца з"
+
+#: admin/themes/default/items/search-form.php:92
+#: application/views/scripts/items/search-form.php:87
+msgid "ends with"
+msgstr "заканчваецца на"
+
+#: admin/themes/default/items/search-form.php:93
+msgid "matches"
+msgstr "супадзенняў"
+
+#: admin/themes/default/items/search-form.php:94
+msgid "does not match"
+msgstr "не супадае"
+
+#: admin/themes/default/items/search-form.php:102
+#: application/views/scripts/items/search-form.php:95
 msgid "Search Terms"
 msgstr "Умовы пошуку"
 
-#: admin/themes/default/items/search-form.php:90
-#: application/views/scripts/items/search-form.php:86
+#: admin/themes/default/items/search-form.php:108
+#: application/views/scripts/items/search-form.php:101
 msgid "Remove field"
 msgstr "Выдаліць поле"
 
-#: admin/themes/default/items/search-form.php:98
-#: application/views/scripts/items/search-form.php:94
+#: admin/themes/default/items/search-form.php:116
+#: application/views/scripts/items/search-form.php:109
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
 msgstr "Пошук у дыяпазоне ID#s (прыклад: 1-4, 156, 79)"
 
-#: admin/themes/default/items/search-form.php:112
-#: application/views/scripts/items/search-form.php:105
+#: admin/themes/default/items/search-form.php:130
+#: application/views/scripts/items/search-form.php:120
 msgid "Search By Collection"
 msgstr "Пошук па калекцыі"
 
-#: admin/themes/default/items/search-form.php:128
-#: application/views/scripts/items/search-form.php:119
+#: admin/themes/default/items/search-form.php:146
+#: application/views/scripts/items/search-form.php:134
 msgid "Search By Type"
 msgstr "Пошук па тыпу"
 
-#: admin/themes/default/items/search-form.php:145
-#: application/views/scripts/items/search-form.php:135
+#: admin/themes/default/items/search-form.php:163
+#: application/views/scripts/items/search-form.php:150
 msgid "Search By User"
 msgstr "Пошук па карыстальніку"
 
-#: admin/themes/default/items/search-form.php:162
-#: application/views/scripts/items/search-form.php:150
+#: admin/themes/default/items/search-form.php:180
+#: application/views/scripts/items/search-form.php:165
 msgid "Search By Tags"
 msgstr "Пошук па метках"
 
-#: admin/themes/default/items/search-form.php:177
-#: application/views/scripts/items/search-form.php:163
+#: admin/themes/default/items/search-form.php:195
+#: application/views/scripts/items/search-form.php:178
 msgid "Public/Non-Public"
 msgstr "Адкрыты / закрыты"
 
-#: admin/themes/default/items/search-form.php:186
-#: application/views/scripts/items/search-form.php:171
+#: admin/themes/default/items/search-form.php:204
+#: application/views/scripts/items/search-form.php:186
 msgid "Only Public Items"
 msgstr "Толькі адкрытыя дакументы"
 
-#: admin/themes/default/items/search-form.php:187
-#: application/views/scripts/items/search-form.php:172
+#: admin/themes/default/items/search-form.php:205
+#: application/views/scripts/items/search-form.php:187
 msgid "Only Non-Public Items"
 msgstr "Толькі закрытыя дакументы"
 
-#: admin/themes/default/items/search-form.php:197
-#: application/views/scripts/items/search-form.php:181
+#: admin/themes/default/items/search-form.php:215
+#: application/views/scripts/items/search-form.php:196
 msgid "Featured/Non-Featured"
 msgstr "Адзначаны / не адзначаны"
 
-#: admin/themes/default/items/search-form.php:206
-#: application/views/scripts/items/search-form.php:189
+#: admin/themes/default/items/search-form.php:224
+#: application/views/scripts/items/search-form.php:204
 msgid "Only Featured Items"
 msgstr "Толькі адзначаныя дакументы"
 
-#: admin/themes/default/items/search-form.php:207
-#: application/views/scripts/items/search-form.php:190
+#: admin/themes/default/items/search-form.php:225
+#: application/views/scripts/items/search-form.php:205
 msgid "Only Non-Featured Items"
 msgstr "Толькі не адзначаныя дакументы"
 
-#: admin/themes/default/items/search-form.php:215
-#: application/views/scripts/items/search-form.php:199
+#: admin/themes/default/items/search-form.php:233
+#: application/views/scripts/items/search-form.php:214
 msgid "Search for items"
 msgstr "Пошук дакументаў"
 
@@ -1503,7 +1614,7 @@ msgstr "па %s"
 
 #: admin/themes/default/plugins/browse.php:65
 #: admin/themes/default/themes/browse.php:23
-#: admin/themes/default/themes/browse.php:48
+#: admin/themes/default/themes/browse.php:50
 msgid "Get support"
 msgstr "Атрымаць падтрымку"
 
@@ -1743,7 +1854,7 @@ msgid "Record Types"
 msgstr "Тыпы запісаў"
 
 #: admin/themes/default/themes/browse.php:15
-#: admin/themes/default/themes/browse.php:42
+#: admin/themes/default/themes/browse.php:44
 #, php-format
 msgid "Screenshot for %s Theme"
 msgstr "Здымак экрана для %s тэмы"
@@ -1757,7 +1868,7 @@ msgid "Current Theme"
 msgstr "Бягучая тэма"
 
 #: admin/themes/default/themes/browse.php:21
-#: admin/themes/default/themes/browse.php:47
+#: admin/themes/default/themes/browse.php:49
 #, php-format
 msgid "By %s"
 msgstr "Па %s"
@@ -1770,7 +1881,7 @@ msgid ""
 "target=\"_blank\">design your own</a>!"
 msgstr "Дадайце новыя тэмы, загрузіўшы іх з <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Каталог тэм Omeka</a>, альбо <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\"> стварыце сваю ўласную </a>!"
 
-#: admin/themes/default/themes/browse.php:44
+#: admin/themes/default/themes/browse.php:46
 msgid "Use this theme"
 msgstr "Выкарыстоўвайце гэтую тэму"
 
@@ -1978,6 +2089,10 @@ msgstr "Вярнуцца да ўваходу"
 msgid "Log In"
 msgstr "Увайсці"
 
+#: admin/themes/default/users/login.php:8
+msgid "Go to the public site"
+msgstr "Перайсці на сайт"
+
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
 msgstr "(Забылі свой пароль?)"
@@ -2076,7 +2191,7 @@ msgstr "Гэта прывядзе да выдалення набору элем�
 #: application/controllers/PluginsController.php:139
 #: application/controllers/PluginsController.php:190
 #: application/controllers/PluginsController.php:223
-#: application/controllers/PluginsController.php:337
+#: application/controllers/PluginsController.php:331
 #: application/controllers/SettingsController.php:104
 #: application/controllers/SettingsController.php:140
 #: application/controllers/SettingsController.php:177
@@ -2183,37 +2298,61 @@ msgid ""
 "delete all files and file metadata associated with this item."
 msgstr "Гэта выдаліць дакумент #%s і звязаныя з ім метаданыя. Акрамя таго, будуць выдалены ўсе файлы і файлы метаданых, звязаныя з гэтым дакументам."
 
-#: application/controllers/ItemsController.php:227
+#: application/controllers/ItemsController.php:241
+#: application/controllers/ItemsController.php:376
+#: application/controllers/ItemsController.php:444
+msgid "No item to batch edit."
+msgstr "Няма дакументаў для пакетнага рэдагавання"
+
+#: application/controllers/ItemsController.php:248
+msgid "The deletion of all items is forbidden."
+msgstr "Выдаленне ўсіх дакументаў забаронена."
+
+#: application/controllers/ItemsController.php:265
 msgid "You must choose some items to batch edit."
 msgstr "Вы павінны выбраць некалькі дакументаў для пакетнага рэдагавання."
 
-#: application/controllers/ItemsController.php:271
+#: application/controllers/ItemsController.php:314
+#: application/controllers/ItemsController.php:412
 msgid "User is not allowed to modify visibility of items."
 msgstr "Карыстальнік не можа змяніць бачнасць дакументаў."
 
-#: application/controllers/ItemsController.php:276
+#: application/controllers/ItemsController.php:319
+#: application/controllers/ItemsController.php:417
 msgid "User is not allowed to modify featured status of items."
 msgstr "Карыстальнік не можа змяняць статус адзначаных дакументаў."
 
-#: application/controllers/ItemsController.php:283
+#: application/controllers/ItemsController.php:326
 msgid "User is not allowed to delete selected items."
 msgstr "Карыстальнік не можа выдаляць абраныя дакументы."
 
-#: application/controllers/ItemsController.php:289
+#: application/controllers/ItemsController.php:332
 msgid "User is not allowed to edit selected items."
 msgstr "Карыстальнік не можа рэдагаваць абраныя дакументы."
 
-#: application/controllers/ItemsController.php:294
+#: application/controllers/ItemsController.php:337
 msgid "User is not allowed to tag selected items."
 msgstr "Карыстальнік не можа пазначаць абраныя дакументы."
 
-#: application/controllers/ItemsController.php:328
+#: application/controllers/ItemsController.php:369
 msgid "The items were successfully deleted!"
 msgstr "Дакументы былі паспяхова выдаленыя!"
 
-#: application/controllers/ItemsController.php:330
+#: application/controllers/ItemsController.php:371
 msgid "The items were successfully changed!"
 msgstr "Дакументы былі паспяхова зменены!"
+
+#: application/controllers/ItemsController.php:436
+msgid "The items are checked and deleted one by one in the background."
+msgstr "Гэтыя дакументы правяраюцца і змяняюцца адзін за другім у фонавым рэжыме"
+
+#: application/controllers/ItemsController.php:438
+msgid "The items are checked and changed one by one in the background."
+msgstr "Гэтыя дакументы правяраюцца і змяняюцца адзін за другім у фонавым рэжыме"
+
+#: application/controllers/ItemsController.php:440
+msgid "Check logs for success and errors."
+msgstr "Праверце лог-файл на наяўнасць памылак"
 
 #: application/controllers/PluginsController.php:45
 #, php-format
@@ -2279,31 +2418,31 @@ msgstr "%s плагін быў паспяхова абноўлены!"
 msgid "The following error occurred while upgrading the %s plugin: "
 msgstr "Адбылася наступная памылка пры абнаўленні %s плагіна:"
 
-#: application/controllers/PluginsController.php:310
+#: application/controllers/PluginsController.php:305
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
 msgstr "Не ўдаецца знайсці гэты плагін у '%s' каталозе!"
 
-#: application/controllers/PluginsController.php:322
+#: application/controllers/PluginsController.php:318
 msgid "You must confirm the uninstall before proceeding."
 msgstr "Перад працягам вы павінны пацвердзіць выдаленне ."
 
-#: application/controllers/PluginsController.php:345
+#: application/controllers/PluginsController.php:337
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
 msgstr "%s плагін быў паспяхова выдалены!"
 
-#: application/controllers/PluginsController.php:350
-#: application/controllers/PluginsController.php:355
+#: application/controllers/PluginsController.php:342
+#: application/controllers/PluginsController.php:347
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
 msgstr "Адбылася наступная памылка пры выдаленні %s плагіна :"
 
-#: application/controllers/PluginsController.php:382
+#: application/controllers/PluginsController.php:376
 msgid "No plugin name given."
 msgstr "Плагін без назвы"
 
-#: application/controllers/PluginsController.php:395
+#: application/controllers/PluginsController.php:389
 #, php-format
 msgid "The plugin %s must be installed."
 msgstr "Плагін %s павінен быць усталяваны."
@@ -2493,67 +2632,85 @@ msgid "Login information incorrect. Please try again."
 msgstr "Рэгістрацыйная інфармацыя некарэктная. Калі ласка, паспрабуйце яшчэ раз."
 
 #: application/forms/AppearanceSettings.php:22
+msgid "Use Square Thumbnails"
+msgstr "Выкарыстоўвайце квадратныя іконкі"
+
+#: application/forms/AppearanceSettings.php:23
+msgid ""
+"Use square-cropped images by default wherever thumbnails appear in the "
+"public interface."
+msgstr "Выкарыстоўвайце абрэзаныя по квадрату выявы ўсюды, дзе будуць іконкі ў карыстальніцкім інтэрфейсе."
+
+#: application/forms/AppearanceSettings.php:28
 #: application/forms/Install.php:128
 msgid "Fullsize Image Size"
 msgstr "Памер выявы ў поўную велічыню"
 
-#: application/forms/AppearanceSettings.php:23
+#: application/forms/AppearanceSettings.php:29
 msgid "Maximum fullsize image size constraint (in pixels)."
 msgstr "Максімальны памер малюнка (у пікселях)."
 
-#: application/forms/AppearanceSettings.php:29
+#: application/forms/AppearanceSettings.php:35
 #: application/forms/Install.php:136
 msgid "Thumbnail Size"
 msgstr "Памер паменшанага растравага малюнка"
 
-#: application/forms/AppearanceSettings.php:30
+#: application/forms/AppearanceSettings.php:36
 msgid "Maximum thumbnail size constraint (in pixels)."
 msgstr "Максімальны памер паменшанага растравага малюнка (у пікселях)."
 
-#: application/forms/AppearanceSettings.php:36
+#: application/forms/AppearanceSettings.php:42
 #: application/forms/Install.php:144
 msgid "Square Thumbnail Size"
 msgstr "Плошча паменшанага растравага малюнка"
 
-#: application/forms/AppearanceSettings.php:37
+#: application/forms/AppearanceSettings.php:43
 msgid "Maximum square thumbnail size constraint (in pixels)."
 msgstr "Максімальная плошча паменшанага растравага малюнка (у пікселях)"
 
-#: application/forms/AppearanceSettings.php:43
+#: application/forms/AppearanceSettings.php:49
 msgid "Results Per Page (admin)"
 msgstr "Вынікаў на старонку (для адміністратара)"
 
-#: application/forms/AppearanceSettings.php:44
+#: application/forms/AppearanceSettings.php:50
 msgid ""
 "Limit the number of results displayed per page in the administrative "
 "interface."
 msgstr "Абмяжуйце колькасць вынікаў, якія паказваюцца на старонцы, ў адміністрацыйным інтэрфейсе."
 
-#: application/forms/AppearanceSettings.php:50
+#: application/forms/AppearanceSettings.php:56
 msgid "Results Per Page (public)"
 msgstr "Вынікаў на старонку (агульнадаступныя)"
 
-#: application/forms/AppearanceSettings.php:51
+#: application/forms/AppearanceSettings.php:57
 msgid ""
 "Limit the number of results displayed per page in the public interface."
 msgstr "Абмяжуйце колькасць вынікаў, якія паказваюцца на старонцы, ў агульнадаступным інтэрфейсе."
 
-#: application/forms/AppearanceSettings.php:57
+#: application/forms/AppearanceSettings.php:63
 #: application/forms/Install.php:168
 msgid "Show Empty Elements"
 msgstr "Паказаць пустыя элементы"
 
-#: application/forms/AppearanceSettings.php:62
+#: application/forms/AppearanceSettings.php:68
 msgid "Show Element Set Headings"
 msgstr "Паказаць набор элементаў загалоўкаў"
 
-#: application/forms/AppearanceSettings.php:75
+#: application/forms/AppearanceSettings.php:78
+msgid "Admin Theme"
+msgstr "Тэма адміністратыўнай часткі сайта"
+
+#: application/forms/AppearanceSettings.php:92
 msgid "Derivative Size Constraints"
 msgstr "Другасныя абмежаванні памеру"
 
-#: application/forms/AppearanceSettings.php:83
+#: application/forms/AppearanceSettings.php:100
 msgid "Display Settings"
 msgstr "Паказаць настройкі"
+
+#: application/forms/AppearanceSettings.php:108
+msgid "Admin Themes"
+msgstr "Тэмы адміністратыўнай часткі сайта"
 
 #: application/forms/ChangePassword.php:25
 msgid "Current Password"
@@ -2989,65 +3146,67 @@ msgstr "Лагічны выраз"
 msgid "Exact match"
 msgstr "Дакладнае супадзенне"
 
-#: application/libraries/globals.php:1258
-#: application/libraries/globals.php:1279
+#: application/libraries/globals.php:1263
+#: application/libraries/globals.php:1284
 #, php-format
 msgid "Could not find file %s!"
 msgstr "Не атрымалася знайсці файл %s!"
 
-#: application/libraries/globals.php:1296
+#: application/libraries/globals.php:1301
 msgid "No featured collections are available."
 msgstr "Адзначаныя калекцыі адсутнічаюць."
 
-#: application/libraries/globals.php:1593
+#: application/libraries/globals.php:1598
 msgid "Select Below "
 msgstr "Выберыце ніжэй"
 
-#: application/libraries/globals.php:1636
+#: application/libraries/globals.php:1641
 msgid "Omeka RSS Feed"
 msgstr "Стужка RSS Omega"
 
-#: application/libraries/globals.php:1637
+#: application/libraries/globals.php:1642
 msgid "Omeka Atom Feed"
 msgstr "Стужка Atom Omeka"
 
-#: application/libraries/globals.php:2293
+#: application/libraries/globals.php:2297
 msgid "No recent items available."
 msgstr "Няма нядаўніх даступных дакументаў."
 
-#: application/libraries/globals.php:2319
+#: application/libraries/globals.php:2323
 msgid "No featured items are available."
 msgstr "Адзначаныя дакументы адсутнічаюць."
 
-#: application/libraries/globals.php:2378
+#: application/libraries/globals.php:2382
 msgid "View"
 msgstr "Рэжым прагляду"
 
-#: application/libraries/globals.php:2440
+#: application/libraries/globals.php:2444
+#: application/models/Table/Collection.php:87
+#: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
 msgstr "Няма калекцыі"
 
-#: application/libraries/globals.php:2558
+#: application/libraries/globals.php:2563
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2575
+#: application/libraries/globals.php:2580
 msgid "Next Item &rarr;"
 msgstr "Наступны дакумент &rarr;"
 
-#: application/libraries/globals.php:2595
+#: application/libraries/globals.php:2600
 msgid "&larr; Previous Item"
 msgstr "&larr; папярэдні дакумент"
 
-#: application/libraries/globals.php:2776
+#: application/libraries/globals.php:2781
 msgid "Browse All"
 msgstr "Прагледзець усе"
 
-#: application/libraries/globals.php:2781
+#: application/libraries/globals.php:2786
 msgid "Browse by Tag"
 msgstr "Прагляд па метках"
 
-#: application/libraries/globals.php:3050
+#: application/libraries/globals.php:3055
 msgid "No tags are available."
 msgstr "Няма даступных метак."
 
@@ -3055,7 +3214,7 @@ msgstr "Няма даступных метак."
 msgid "Must specify a file transfer type when attaching files to an item!"
 msgstr "Неабходна пазначыць тып перадачы файла пры далучэнні яго да дакумента!"
 
-#: application/models/Collection.php:117
+#: application/models/Collection.php:119
 msgid "Cannot associate the collection with an unsaved user."
 msgstr "Не ўдаецца звязаць калекцыю з незахаваным карыстальнікам."
 
@@ -3095,202 +3254,265 @@ msgstr "Усе тэкставыя элементы павінны мець ты�
 
 #: application/models/ElementText.php:65
 msgid "Invalid element ID."
-msgstr ""
+msgstr "Недапушчальны элемент ID."
 
 #: application/models/File.php:235
 msgid "Cannot get the local path for a stored file."
-msgstr ""
+msgstr "Немагчыма атрымаць лакальны шлях для захаванага файла."
 
 #: application/models/File.php:452
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
-msgstr ""
+msgstr "\"%s\" недапушчальная мадыфікацыя файла."
 
-#: application/models/Item.php:330
+#: application/models/Item.php:332
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
-msgstr ""
+msgstr "Файлы не могуць быць далучаныя да элемента, які не захоўваецца ў базе даных!"
 
 #. / Chicago-style item citation: two authors
-#: application/models/Item.php:457
+#: application/models/Item.php:467
 #, php-format
 msgid "%1$s and %2$s"
-msgstr ""
+msgstr "%1$s і %2$s"
 
 #. / Chicago-style item citation: three authors
-#: application/models/Item.php:461
+#: application/models/Item.php:471
 #, php-format
 msgid "%1$s, %2$s, and %3$s"
-msgstr ""
+msgstr "%1$s, %2$s, і %3$s"
 
 #. / Chicago-style item citation: more than three authors
-#: application/models/Item.php:465
+#: application/models/Item.php:475
 #, php-format
 msgid "%s et al."
-msgstr ""
+msgstr "%s і інш."
 
 #. / Chicago-style item citation: access date and URL
-#: application/models/Item.php:483
+#: application/models/Item.php:493
 #, php-format
 msgid "accessed %1$s, %2$s."
-msgstr ""
+msgstr "доступ да %1$s, %2$s."
 
-#: application/models/Item.php:500
+#: application/models/Item.php:510
 msgid "Cannot add an existing file to an item!"
-msgstr ""
+msgstr "Немагчыма дадаць існуючы файл да дакумента!"
 
-#: application/models/Item.php:504
+#: application/models/Item.php:514
 msgid "File must be valid before it can be associated with an item!"
-msgstr ""
+msgstr "Файл павінен быць карэктным, перш чым ён можа быць звязаны з дакументам!"
 
-#: application/models/Item.php:528
+#: application/models/Item.php:538
 msgid "Invalid item type."
-msgstr ""
+msgstr "Няправільны тып дакумента."
 
-#: application/models/Item.php:531
+#: application/models/Item.php:541
 msgid "Invalid collection."
-msgstr ""
+msgstr "Недапушчальная калекцыя."
 
 #: application/models/ItemType.php:102
 #, php-format
 msgid "The item type name must have between %1$s and %2$s characters."
-msgstr ""
+msgstr "Імя тыпу дакумента павінна размяшчацца паміж %1$s і %2$s знакамі."
 
 #: application/models/ItemType.php:106
 msgid "The item type name must be unique."
-msgstr ""
+msgstr "Назва тыпу дакумента павінна быць унікальнай."
 
 #: application/models/ItemType.php:183
 msgid "There are too many values in the element ordering array."
-msgstr ""
+msgstr "Зададзена занадта шмат значэнняў у спарадкаваным масіве элементаў."
 
 #: application/models/ItemType.php:185
 msgid "There are too few values in the element ordering array."
-msgstr ""
+msgstr "Зададзена занадта мала значэнняў у спарадкаваным масіве элементаў."
 
 #: application/models/ItemType.php:222
 msgid ""
 "Invalid element data. To add elements, you must either pass an element "
 "objects or an array of element metadata."
-msgstr ""
+msgstr "Няправільны элемент даных. Каб дадаць элементы, вы павінны перадаць альбо элемент аб'ектаў, альбо масіў метаданых элемента."
 
 #: application/models/ItemType.php:286
 msgid ""
 "Cannot remove elements from an item type that is not persistent in the "
 "database!"
-msgstr ""
+msgstr "Не ўдаецца выдаліць элементы з тыпу дакумента, які не захаваны ў базе даных!"
 
 #: application/models/ItemType.php:295
 #, php-format
 msgid "Cannot find element with ID %s!"
-msgstr ""
+msgstr "Не ўдаецца знайсці элемент з ID %s!"
 
 #: application/models/ItemType.php:336
 #, php-format
 msgid "Item type does not contain an element with the ID %s!"
-msgstr ""
+msgstr "Тып дакумента не ўтрымлівае элемент з ID %s!"
 
 #: application/models/ItemType.php:357
 msgid ""
 "Invalid parameter. The hasElement function requires either an element object"
 " or an element id to determine if an item type has an element."
-msgstr ""
+msgstr "Няправільны параметр. Функцыя hasElement патрабуе альбо элемент аб'екта, альбо ідэнтыфікатар элемента, калі тып дакумента мае элемент."
+
+#: application/models/Job/ItemBatchEditAll.php:41
+msgid "Batch Edit All Items: No item matches the specified filters."
+msgstr "Пакетнае рэдагаванне дакументаў: няма дакументаў, якія адпавядаюць указаным фільтрам"
+
+#: application/models/Job/ItemBatchEditAll.php:48
+#, php-format
+msgid "Batch Edit: Starting processing 1 item."
+msgid_plural "Batch Edit: Starting processing %d items."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: application/models/Job/ItemBatchEditAll.php:67
+#, php-format
+msgid ""
+"Batch Edit: A total of %d errors occurred during the batch process of %d "
+"items."
+msgstr "Групавое рэдагаванне: усяго адбылося %d памылак падчас групавой апрацоўкі %d дакументаў."
+
+#: application/models/Job/ItemBatchEditAll.php:74
+#, php-format
+msgid "Batch Edit: The item has been processed successfully."
+msgid_plural "Batch Edit: All %d items have been processed successfully."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: application/models/Job/ItemBatchEditAll.php:91
+msgid "Item does not exist: it may have been deleted before processing."
+msgstr "Дакумент не існуе: магчыма ён быў выдалены перад апрацоўкай."
+
+#: application/models/Job/ItemBatchEditAll.php:106
+msgid "User is not allowed to delete this item."
+msgstr "Карыстальніку не дазволена выдаляць гэты дакумент."
+
+#: application/models/Job/ItemBatchEditAll.php:113
+msgid "User is not allowed to edit this item."
+msgstr "Карыстальніку не дазволена рэдагаваць гэты дакумент."
+
+#: application/models/Job/ItemBatchEditAll.php:119
+msgid "User is not allowed to tag this item."
+msgstr "Карыстальніку не дазволена пазначаць гэты дакумент."
+
+#: application/models/Job/ItemBatchEditAll.php:142
+msgid "The item was successfully deleted."
+msgstr "Дакумент быў паспяхова выдалены."
+
+#: application/models/Job/ItemBatchEditAll.php:154
+#, php-format
+msgid "An error occured when the item was updated: %s"
+msgstr "Адбылася памылка, калі дакумент абнаўляўся: %s"
+
+#: application/models/Job/ItemBatchEditAll.php:159
+msgid "The item was successfully batch-edited."
+msgstr "Дакумент быў паспяхова адрэдагаваны ў пакетным рэжыме."
+
+#: application/models/Job/ItemBatchEditAll.php:178
+#, php-format
+msgid "Batch Edit Item #%d [%d/%d]: %s"
+msgstr "Пакетнае рэдагаванне дакументаў #%d [%d/%d]: %s"
 
 #: application/models/Mixin/ElementText.php:293
 #, php-format
 msgid "There is no element \"%1$s\", \"%2$s\"!"
-msgstr ""
+msgstr "Не існуе элемента \"%1$s\", \"%2$s\"!"
 
 #: application/models/Mixin/ElementText.php:312
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
-msgstr ""
+msgstr "Не знойдзены элемент з ID of '%s'!"
 
 #: application/models/Mixin/ElementText.php:431
 msgid "Element texts are not formatted correctly!"
-msgstr ""
+msgstr "Элемент тэкстаў не адфармаціраваны карэктна!"
 
 #: application/models/Mixin/ElementText.php:579
 #, php-format
 msgid "The \"%s\" field has at least one invalid value!"
-msgstr ""
+msgstr "Поле \"%s\" мае па крайняй меры адно недапушчальнае значэнне!"
 
 #: application/models/Mixin/ElementText.php:649
 msgid "Cannot save element text for records that are not yet persistent!"
-msgstr ""
+msgstr "Немагчыма захаваць элемент тэксту для запісаў, якія яшчэ не вызначаныя!"
 
 #: application/models/Option.php:50 application/models/Option.php:54
 msgid "Each option must have a unique name."
-msgstr ""
+msgstr "Кожная опцыя павінна мець унікальную назву."
 
 #: application/models/Plugin.php:133
 msgid "Names of plugins must not be blank"
-msgstr ""
+msgstr "Назвы плагінаў не павінны быць пустымі"
 
 #: application/models/Table/Collection.php:80
 #, php-format
 msgid "[Untitled] #%s"
-msgstr ""
+msgstr "[Без назвы] #%s"
 
-#: application/models/Table/Item.php:123
+#: application/models/Table/Item.php:145
 msgid "Invalid search type given!"
-msgstr ""
+msgstr "Зададзены няправільны тып пошуку! "
 
 #: application/models/Tag.php:56
 msgid "Tags must be given a name."
-msgstr ""
+msgstr "Меткі павінны мець назву."
 
 #: application/models/Tag.php:60
 msgid "That name is already taken for this tag."
-msgstr ""
+msgstr "Гэта імя ўжо выкарыстоўваецца для дадзенай меткі."
 
 #: application/models/User.php:110
 msgid "User may not change permissions to super-user"
-msgstr ""
+msgstr "Карыстальнік не можа змяніць правы доступу суперкарыстальніку."
 
 #: application/models/User.php:113
 msgid "User may not change roles."
-msgstr ""
+msgstr "Карыстальнік не можа змяняць ролі."
 
 #: application/models/User.php:182 application/models/User.php:230
 msgid "The user must be assigned a role."
-msgstr ""
+msgstr "Карыстальніку павінна быць прызначана роля."
 
 #: application/models/User.php:187
 #, php-format
 msgid "The username \"%1$s\" must be between %2$s and %3$s characters."
-msgstr ""
+msgstr "Імя карыстальніка \"%1$s\" павінна быць паміж %2$s і %3$s знакамі."
 
 #: application/models/User.php:191
 #, php-format
 msgid "'%s' is already in use. Please choose another username."
-msgstr ""
+msgstr "'%s'  ужо выкарыстоўваецца. Калі ласка, абярыце іншае імя карыстальніка."
 
 #: application/models/UsersActivations.php:54
 msgid "Cannot create a user activation for non-existent user."
-msgstr ""
+msgstr "Не ўдаецца актываваць карыстальніка, бо ён не існуе."
 
 #: application/tests/suite/Omeka/Db/Migration/_files/migrations/20080717013526_foobar.php:18
 msgid "This migration should have been run previously (should not run again)."
-msgstr ""
+msgstr "Гэтае перасоўванне павінна было быць запушчана раней (не варта запускаць зноў)."
 
 #: application/tests/suite/Omeka/Db/Migration/_files/migrations/50000101120000_notRunYet.php:19
 msgid "This migration should not be run."
-msgstr ""
+msgstr "Гэта перасоўванне не павінна быць запушчана."
 
 #: application/tests/suite/Omeka/NavigationTest.php:752
 #: application/tests/suite/Omeka/NavigationTest.php:817
 #: application/tests/suite/Omeka/NavigationTest.php:839
 #: application/tests/suite/Omeka/NavigationTest.php:952
 msgid "Edit Items"
-msgstr ""
+msgstr "Рэгадаваць дакументы"
 
 #: application/tests/suite/Omeka/NavigationTest.php:758
 #: application/tests/suite/Omeka/NavigationTest.php:818
 #: application/tests/suite/Omeka/NavigationTest.php:856
 #: application/tests/suite/Omeka/NavigationTest.php:953
 msgid "Edit Collections"
-msgstr ""
+msgstr "Рэдагаваць калекцыі"
 
 #: application/tests/suite/Omeka/NavigationTest.php:764
 #: application/tests/suite/Omeka/NavigationTest.php:819
@@ -3298,19 +3520,19 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:954
 #: install/views/scripts/layout.phtml:6 install/views/scripts/layout.phtml:23
 msgid "Omeka"
-msgstr ""
+msgstr "Omeka"
 
 #: application/tests/suite/Omeka/NavigationTest.php:825
 #: application/tests/suite/Omeka/NavigationTest.php:951
 msgid "CHNM"
-msgstr ""
+msgstr "CHNM"
 
 #: application/tests/suite/Omeka/NavigationTest.php:982
 #: application/tests/suite/Omeka/NavigationTest.php:990
 #: application/tests/suite/Omeka/NavigationTest.php:1128
 #: application/tests/suite/Omeka/NavigationTest.php:1136
 msgid "Page "
-msgstr ""
+msgstr "Старонка"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1009
 #: application/tests/suite/Omeka/NavigationTest.php:1013
@@ -3319,7 +3541,7 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1156
 #: application/tests/suite/Omeka/NavigationTest.php:1256
 msgid "Page 1"
-msgstr ""
+msgstr "Старонка 1"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1016
 #: application/tests/suite/Omeka/NavigationTest.php:1022
@@ -3330,7 +3552,7 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1200
 #: application/tests/suite/Omeka/NavigationTest.php:1232
 msgid "Page 2"
-msgstr ""
+msgstr "Старонка 2"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1025
 #: application/tests/suite/Omeka/NavigationTest.php:1029
@@ -3341,7 +3563,7 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1193
 #: application/tests/suite/Omeka/NavigationTest.php:1255
 msgid "Page 3"
-msgstr ""
+msgstr "Старонка 3"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1032
 #: application/tests/suite/Omeka/NavigationTest.php:1041
@@ -3354,7 +3576,7 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1240
 #: application/tests/suite/Omeka/NavigationTest.php:1250
 msgid "Page 4"
-msgstr ""
+msgstr "Старонка 4"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1044
 #: application/tests/suite/Omeka/NavigationTest.php:1048
@@ -3365,131 +3587,136 @@ msgstr ""
 #: application/tests/suite/Omeka/NavigationTest.php:1223
 #: application/tests/suite/Omeka/NavigationTest.php:1241
 msgid "Page 5"
-msgstr ""
+msgstr "Старонка 5"
 
 #: application/tests/suite/Omeka/NavigationTest.php:1051
 #: application/tests/suite/Omeka/NavigationTest.php:1055
 #: application/tests/suite/Omeka/NavigationTest.php:1215
 msgid "Page 6"
-msgstr ""
+msgstr "Старонка 6"
 
 #: application/views/helpers/AllElementTexts.php:108
 msgid "[no text]"
-msgstr ""
+msgstr "[няма тэксту]"
 
 #: application/views/helpers/ElementForm.php:65
 msgid "Add Input"
-msgstr ""
+msgstr "Дадаць Увод"
 
 #: application/views/helpers/ElementInput.php:131
 msgid "Use HTML"
-msgstr ""
+msgstr "Выкарыстоўваць HTML"
 
 #: application/views/helpers/GetCurrentRecord.php:27
 #, php-format
 msgid "A current %s variable has not been set to this view."
-msgstr ""
+msgstr "Бягучая пераменная %s не была ўсталяваная."
 
 #: application/views/helpers/GetLoopRecords.php:30
 #, php-format
 msgid "A loop %s variable has not been set to this view."
-msgstr ""
+msgstr "Пераменная цыклу %s не была ўсталяваная."
 
 #: application/views/helpers/Loop.php:27
 msgid "An array of records is not available for the loop."
-msgstr ""
+msgstr "Масіў запісаў недаступны для цыклу."
+
+#: application/views/helpers/MaxFileSize.php:44
+#, php-format
+msgid "%s MB"
+msgstr "%s Мб"
 
 #: application/views/helpers/RecordUrl.php:34
 msgid "Invalid record passed while getting record URL."
-msgstr ""
+msgstr "Пры атрыманні запісу URL прапушчаны няправільны запіс."
 
 #: application/views/helpers/RecordUrl.php:44
 msgid "Invalid action passed while getting record URL."
-msgstr ""
+msgstr "Пры атрыманні запісу URL прапушчана няправільнае дзеянне."
 
 #: application/views/helpers/RecordUrl.php:75
 msgid "Invalid return value while getting record URL."
-msgstr ""
+msgstr "Пры атрыманні запісу URL вяртаецца няправільнае  значэнне ."
 
 #: application/views/scripts/collections/browse.php:14
 #: application/views/scripts/items/browse.php:24
 msgid "Sort by: "
-msgstr ""
+msgstr "Сартаваць па:"
 
-#: application/views/scripts/collections/browse.php:42
+#: application/views/scripts/collections/browse.php:41
 #, php-format
 msgid "View the items in %s"
-msgstr ""
+msgstr "Праглядзець дакумент у %s"
 
 #: application/views/scripts/collections/show.php:12
 #, php-format
 msgid "Items in the %s Collection"
-msgstr ""
+msgstr "Дакументы ў %s калекцыі"
 
-#: application/views/scripts/collections/show.php:37
+#: application/views/scripts/collections/show.php:33
 msgid "There are currently no items within this collection."
-msgstr ""
+msgstr "На бягучы момант у дадзенай калекцыі няма дакументаў."
 
 #: application/views/scripts/common/footer.php:14
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
-msgstr ""
+msgstr "Сайт працуе на <a href=\"http://omeka.org\"> Omega </a>."
 
 #: application/views/scripts/common/pagination_control.php:5
 msgid "Pagination"
-msgstr ""
+msgstr "Пагінацыя"
 
 #: application/views/scripts/common/pagination_control.php:11
 msgid "Previous Page"
-msgstr ""
+msgstr "Папярэдняя старонка"
 
 #: application/views/scripts/common/pagination_control.php:36
 msgid "Current Page"
-msgstr ""
+msgstr "Бягучая старонка"
 
 #: application/views/scripts/common/pagination_control.php:39
 #, php-format
 msgid "%s of %s"
-msgstr ""
+msgstr "%s з %s"
 
 #: application/views/scripts/common/pagination_control.php:48
 msgid "Next Page"
-msgstr ""
+msgstr "Наступная старонка"
 
 #: application/views/scripts/error/403.php:2
 msgid "403 Page Forbidden"
-msgstr ""
+msgstr "403 Доступ да старонкі забаронены"
 
 #: application/views/scripts/error/403.php:8
 msgid "You do not have permission to access this page."
-msgstr ""
+msgstr "У вас няма доступу да гэтай старонкі."
 
 #: application/views/scripts/error/404.dc.php:1
 #: application/views/scripts/error/404.php:2
 #: application/views/scripts/error/404.xml.php:1
 msgid "404 Page Not Found"
-msgstr ""
+msgstr "404 Старонка не знойдзена"
 
 #: application/views/scripts/error/404.php:6
 #, php-format
 msgid "%s is not a valid URL."
-msgstr ""
+msgstr "%s некарэктны URL."
 
 #: application/views/scripts/error/404.rss2.php:1
 msgid "Rss2.0 Feed Not Found!"
-msgstr ""
+msgstr "Канал Rss2.0 не знойдзены!"
 
 #: application/views/scripts/error/405.php:2
 msgid "405 Method Not Allowed"
-msgstr ""
+msgstr "405 Забаронены метад"
 
 #: application/views/scripts/error/405.php:6
 #, php-format
 msgid "The method used to access this URL (%s) is not valid."
-msgstr ""
+msgstr "Недапушчальны метад для доступу да URL (%s)."
 
 #: application/views/scripts/error/index.php:4
 msgid "Omeka has encountered an error"
-msgstr ""
+msgstr "Здарылася памылка"
 
 #: application/views/scripts/error/index.php:33
 msgid ""
@@ -3497,111 +3724,111 @@ msgid ""
 "Omeka Codex page on <a "
 "href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error "
 "messages</a>."
-msgstr ""
+msgstr "Каб даведацца больш дэталёвую інфармацыю аб гэтай памылцы, глядзіце старонку Omeka Codex <a href=\"http://omeka.org/codex/Retrieving_error_messages\"> </a>"
 
 #: application/views/scripts/index.php:10
 msgid "Featured Item"
-msgstr ""
+msgstr "Адзначаны дакумент"
 
 #: application/views/scripts/index.php:18
 msgid "Featured Collection"
-msgstr ""
+msgstr "Адзначаная калекцыя"
 
 #: application/views/scripts/index.php:42
 msgid "View All Items"
-msgstr ""
+msgstr "Праглядзець усе дакументы"
 
-#: application/views/scripts/items/show.php:10
+#: application/views/scripts/items/show.php:13
 msgid "Files"
-msgstr ""
+msgstr "Файлы"
 
-#: application/views/scripts/items/show.php:33
+#: application/views/scripts/items/show.php:36
 msgid "Citation"
-msgstr ""
+msgstr "Цытата"
 
 #: application/views/scripts/search/search-filters.php:3
 msgid "Query:"
-msgstr ""
+msgstr "Запыт:"
 
 #: application/views/scripts/search/search-filters.php:4
 msgid "Query type:"
-msgstr ""
+msgstr "Тып запыту: "
 
 #: application/views/scripts/search/search-filters.php:5
 msgid "Record types:"
-msgstr ""
+msgstr "Тыпы запісу:"
 
 #: application/views/scripts/search/search-form.php:6
 msgid "Search using this query type:"
-msgstr ""
+msgstr "Пошук па наступным тыпу запыту:"
 
 #: application/views/scripts/search/search-form.php:11
 msgid "Search only these record types:"
-msgstr ""
+msgstr "Пошук толькі па гэтых відах запісу:"
 
 #: application/views/scripts/search/search-form.php:17
 msgid "Go to search settings to select record types to use."
-msgstr ""
+msgstr "Пачаць пошук налад, каб вылучыць тыпы запісу для выкарыстання."
 
 #: application/views/scripts/search/search-form.php:19
 msgid "Advanced Search (Items only)"
-msgstr ""
+msgstr "Пашыраны пошук (толькі дакументы)"
 
 #: application/views/scripts/users/login.php:9
 msgid "Go to Home Page"
-msgstr ""
+msgstr "Перайсці на хатнюю старонку"
 
 #: application/views/scripts/users/login.php:9
 msgid "Lost your password?"
-msgstr ""
+msgstr "Забыліся пароль?"
 
 #: install/controllers/IndexController.php:25
 msgid "Could not load database resource!"
-msgstr ""
+msgstr "Не атрымалася загрузіць рэсурс базы даных!"
 
 #: install/views/scripts/index/errors.phtml:1
 msgid "Installation Error"
-msgstr ""
+msgstr "Памылка ўстаноўкі"
 
 #: install/views/scripts/index/errors.phtml:2
 msgid ""
 "Before installation can continue, the following errors must be resolved:"
-msgstr ""
+msgstr "Перад працягам устаноўкі, наступныя памылкі павінны быць вырашаны:"
 
 #: install/views/scripts/index/fatal-error.phtml:1
 msgid "Fatal Error"
-msgstr ""
+msgstr "Непапраўная памылка"
 
 #: install/views/scripts/index/index.phtml:2
 msgid "Installation Warning"
-msgstr ""
+msgstr "Памылка ўстаноўкі"
 
 #: install/views/scripts/index/index.phtml:4
 msgid ""
 "The following issues will not affect installation, but they may negatively "
 "affect the behavior of Omeka:"
-msgstr ""
+msgstr "Наступныя праблемы не акажуць ўплыву на ўстаноўку, але яны могуць негатыўна адбіцца на працы Omeka:"
 
 #: install/views/scripts/index/index.phtml:14
 msgid "Configure Your Site"
-msgstr ""
+msgstr "Наладзьце свой сайт"
 
 #: install/views/scripts/index/index.phtml:16
 msgid "Form Validation Errors"
-msgstr ""
+msgstr "Памылкі пры праверцы правільнасці запаўнення формаў"
 
 #: install/views/scripts/index/installed.phtml:1
 msgid "Success!"
-msgstr ""
+msgstr "Паспяхова!"
 
 #: install/views/scripts/index/installed.phtml:2
 msgid "Omeka is installed."
-msgstr ""
+msgstr "Omeka ўсталяваная."
 
 #: install/views/scripts/index/installed.phtml:3
 msgid "Public Site"
-msgstr ""
+msgstr "Адкрыты сайт"
 
 #: install/views/scripts/index/installed.phtml:3
 msgid "Admin Dashboard"
-msgstr ""
+msgstr "Панэль адміністратара"

@@ -11,7 +11,6 @@
  */
 class Job_ItemBatchEditAll extends Omeka_Job_AbstractJob
 {
-
     protected $_table;
     protected $_aclHelper;
 
@@ -81,8 +80,8 @@ class Job_ItemBatchEditAll extends Omeka_Job_AbstractJob
     /**
      * Check if the item can be processed, then process it if possible.
      *
-     * @param integer $itemId
-     * @return boolean
+     * @param int $itemId
+     * @return bool
      */
     protected function _performItem($itemId)
     {
@@ -170,7 +169,6 @@ class Job_ItemBatchEditAll extends Omeka_Job_AbstractJob
      *
      * @param string $message
      * @param string $priority
-     * @return void
      */
     private function _logProcessedItem($message, $priority)
     {

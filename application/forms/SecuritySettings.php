@@ -13,12 +13,11 @@
  */
 class Omeka_Form_SecuritySettings extends Omeka_Form
 {
-    
     public function init()
     {
         parent::init();
         $this->setAttrib('id', 'settings-form');
-        
+
         $this->addElement('checkbox', File::DISABLE_DEFAULT_VALIDATION_OPTION,
             array(
                 'label' => __('Disable File Upload Validation'),
@@ -26,27 +25,27 @@ class Omeka_Form_SecuritySettings extends Omeka_Form
                 'description' => __('Check this field if you would like to allow any file to be uploaded to Omeka.')
             )
         );
-        
+
         $this->addElement('textarea', Omeka_Validate_File_Extension::WHITELIST_OPTION,
             array(
                 'label' => __('Allowed File Extensions'),
                 'description' => __('List of allowed extensions for file uploads'),
                 'value' => get_option(Omeka_Validate_File_Extension::WHITELIST_OPTION),
-                'cols'=>50, 
-                'rows'=>5
+                'cols' => 50,
+                'rows' => 5
             )
         );
-        
+
         $this->addElement('textarea', Omeka_Validate_File_MimeType::WHITELIST_OPTION,
             array(
                 'label' => __('Allowed File Types'),
                 'description' => __('List of allowed MIME types for file uploads'),
                 'value' => get_option(Omeka_Validate_File_MimeType::WHITELIST_OPTION),
-                'cols' => 50, 
+                'cols' => 50,
                 'rows' => 13
             )
         );
-        
+
         $this->addElement('text', Omeka_Captcha::PUBLIC_KEY_OPTION,
             array(
                 'label' => __('ReCaptcha Public Key'),
@@ -62,26 +61,26 @@ class Omeka_Form_SecuritySettings extends Omeka_Form
                 'value' => get_option(Omeka_Captcha::PRIVATE_KEY_OPTION)
             )
         );
-        
+
         $this->addElement('checkbox', 'html_purifier_is_enabled', array(
-            'checked' => (boolean)get_option('html_purifier_is_enabled'),
+            'checked' => (boolean) get_option('html_purifier_is_enabled'),
             'description' => __('Check this field if you would like to filter HTML elements or attributes from form input.'),
             'label' => __('Enable HTML Filtering')
         ));
-        
+
         $this->addElement('textarea', 'html_purifier_allowed_html_elements', array(
             'value' => get_option('html_purifier_allowed_html_elements'),
             'label' => __('Allowed HTML Elements'),
             'description' => __('List of allowed HTML elements in form input'),
-            'cols' => 50, 
-            'rows' =>  5
+            'cols' => 50,
+            'rows' => 5
         ));
-        
+
         $this->addElement('textarea', 'html_purifier_allowed_html_attributes', array(
             'value' => get_option('html_purifier_allowed_html_attributes'),
             'label' => __('Allowed HTML Attributes'),
             'description' => __('List of allowed HTML attributes in form input'),
-            'cols' => 50, 
+            'cols' => 50,
             'rows' => 5
         ));
 

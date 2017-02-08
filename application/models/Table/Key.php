@@ -10,4 +10,5 @@
  * @package Omeka\Db\Table
  */
 class Table_Key extends Omeka_Db_Table
-{}
+{
+}

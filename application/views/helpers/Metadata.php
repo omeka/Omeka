@@ -30,7 +30,7 @@ class Omeka_View_Helper_Metadata extends Zend_View_Helper_Abstract
      *  If a string, refers to a property of the record itself.
      *  If an array, refers to an Element: the first entry is the set name,
      *  the second is the element name.
-     * @param array|string|integer $options Options for formatting the metadata
+     * @param array|string|int $options Options for formatting the metadata
      * for display.
      * - Array options:
      *   - 'all': If true, return an array containing all values for the field.
@@ -113,7 +113,7 @@ class Omeka_View_Helper_Metadata extends Zend_View_Helper_Abstract
      * which functions as a handy shortcut for theme writers.  This converts
      * the short form of the options into its proper array form.
      *
-     * @param string|integer|array $options
+     * @param string|int|array $options
      * @return array
      */
     protected function _getOptions($options)
@@ -121,7 +121,7 @@ class Omeka_View_Helper_Metadata extends Zend_View_Helper_Abstract
         $converted = array();
         if (is_integer($options)) {
             $converted = array(self::INDEX => $options);
-        } else if (self::ALL == $options) {
+        } elseif (self::ALL == $options) {
             $converted = array(self::ALL => true);
         } else {
             $converted = (array) $options;

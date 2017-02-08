@@ -38,7 +38,7 @@ class Omeka_Session_SaveHandler_DbTable extends Zend_Session_SaveHandler_DbTable
                 'PRIMARY' => true,
                 'PRIMARY_POSITION' => 1,
                 'IDENTITY' => false,
-            ),    
+            ),
             'modified' => array(
                 'SCHEMA_NAME' => null,
                 'TABLE_NAME' => $tableName,
@@ -95,7 +95,7 @@ class Omeka_Session_SaveHandler_DbTable extends Zend_Session_SaveHandler_DbTable
      *
      * @param string $id
      * @param string $data
-     * @return boolean
+     * @return bool
      */
     public function write($id, $data)
     {

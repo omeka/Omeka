@@ -30,16 +30,16 @@ class Omeka_Application extends Zend_Application
     {
         // Add functions to the global scope.
         require_once 'globals.php';
-        
+
         // Set the configuration file if not passed.
         if (!$options) {
             $options = CONFIG_DIR . '/application.ini';
         }
-        
+
         parent::__construct($environment, $options);
         Zend_Registry::set('bootstrap', $this->getBootstrap());
     }
-    
+
     /**
      * Bootstrap the entire application.
      */
@@ -47,27 +47,23 @@ class Omeka_Application extends Zend_Application
     {
         try {
             return $this->bootstrap();
-            
         } catch (Zend_Config_Exception $e) {
             $this->_displayErrorPage($e->getMessage(), 'Omeka Configuration Error');
-        
         } catch (Zend_Db_Adapter_Mysqli_Exception $e) {
             $message = $e->getMessage() . ".\n\n";
             $message .= 'Confirm that the information in your db.ini file is correct.';
-            $this->_displayErrorPage($message, 'Omeka Database Error'); 
-        
+            $this->_displayErrorPage($message, 'Omeka Database Error');
         } catch (Omeka_Db_Migration_Exception $e) {
             $title = 'Cannot Upgrade: Need to Upgrade to Omeka 1.2.1';
             $message = 'You must upgrade to version 1.2.1 before continuing.'."\n\n";
             $message .= 'Please consult the <a href="http://omeka.org/codex/Upgrading">Upgrading</a> page on the Omeka codex, and <a href="http://omeka.org/files/omeka-1.2.1.zip">Downlodad Omeka 1.2.1</a>';
             $this->_displayErrorPage($message, $title);
-        
         } catch (Exception $e) {
             $this->_displayErrorPage($e);
         }
         exit;
     }
-    
+
     /**
      * Display the generic error page for all otherwise-uncaught exceptions.
      */
@@ -80,7 +76,7 @@ class Omeka_Application extends Zend_Application
             exit;
         }
     }
-    
+
     /**
      * Print an HTML page to display errors when starting the application.
      *

@@ -6,8 +6,6 @@
  */
 
 /**
- * 
- *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
@@ -22,9 +20,9 @@ class Omeka_Helper_AbsUriTest extends Omeka_Test_AppTestCase
                 "absolute_url() should not give an 'Undefined index:  HTTP_HOST' notice.");
         }
     }
-    
+
     public function testAbsUriUsesHttpHost()
-    {   
+    {
         $_SERVER['HTTP_HOST'] = 'www.example.com';
         $uri = absolute_url(array('controller' => 'items', 'action' => 'browse'), 'default');
         $this->assertEquals('http://www.example.com/items/browse', $uri);

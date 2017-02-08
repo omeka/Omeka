@@ -16,7 +16,6 @@ class Table_Item extends Omeka_Db_Table
      *
      * @param Zend_Db_Select
      * @param array
-     * @return void
      */
     public function filterBySearch($select, $params)
     {
@@ -30,7 +29,7 @@ class Table_Item extends Omeka_Db_Table
             }
         }
     }
-    
+
     /**
      * Build the simple search.
      * 
@@ -47,10 +46,10 @@ class Table_Item extends Omeka_Db_Table
     protected function _simpleSearch($select, $terms)
     {
         $db = $this->getDb();
-        
+
         // Build tags query.
         $tagList = preg_split('/\s+/', $terms);
-        // Make sure the tag list contains the whole search string, just in case 
+        // Make sure the tag list contains the whole search string, just in case
         // that is found
         if (count($tagList) > 1) {
             $tagList[] = $terms;
@@ -77,7 +76,7 @@ class Table_Item extends Omeka_Db_Table
                         . $db->quoteInto('_simple_tags.name IN (?)', $tagList);
         $select->where($whereCondition);
     }
-    
+
     /**
      * Build the advanced search.
      * 
@@ -95,7 +94,7 @@ class Table_Item extends Omeka_Db_Table
             if (empty($v['element_id']) || empty($v['type'])) {
                 continue;
             }
-            
+
             $value = isset($v['terms']) ? $v['terms'] : null;
             $type = $v['type'];
             $elementId = (int) $v['element_id'];
@@ -161,7 +160,7 @@ class Table_Item extends Omeka_Db_Table
             $select->joinLeft(array($alias => $db->ElementText), $joinCondition, array());
             if ($where == '') {
                 $where = $whereClause;
-            } else if ($joiner == 'or') {
+            } elseif ($joiner == 'or') {
                 $where .= " OR $whereClause";
             } else {
                 $where .= " AND $whereClause";
@@ -174,53 +173,110 @@ class Table_Item extends Omeka_Db_Table
             $select->where($where);
         }
     }
-    
+
     /**
      * Filter the SELECT statement based on an item's collection
      *
-     * @param Zend_Db_Select
-     * @param Collection|integer Either a Collection object, or the collection ID
-     * @return void
+     * @param Zend_Db_Select $select
+     * @param Collection|int|array $collections Either a Collection object,
+     * or the collection id or an array of collection object or id.
      */
-    public function filterByCollection($select, $collection)
+    public function filterByCollection($select, $collections)
     {
-        if ($collection instanceof Collection) {
-            $collectionId = $collection->id;
-        } elseif (is_numeric($collection)) {
-            $collectionId = (int) $collection;
-        } else {
-            return;
+        if (!is_array($collections)) {
+            $collections = array($collections);
         }
 
-        if ($collectionId === 0) {
-            $select->where('items.collection_id IS NULL');
-        } else {
-            $select->joinInner(
+        $collectionIds = array_map(function ($collection) {
+            if ($collection === 0 || $collection === '0') {
+                return null;
+            }
+            if ($collection instanceof Collection) {
+                return (int) $collection->id;
+            }
+            if (is_numeric($collection)) {
+                return (int) $collection;
+            }
+            return;
+        }, $collections);
+
+        $hasEmpty = in_array(null, $collectionIds);
+        $collectionIds = array_filter($collectionIds);
+        if (!empty($collectionIds)) {
+            $select->joinLeft(
                 array('collections' => $this->getDb()->Collection),
                 'items.collection_id = collections.id',
                 array());
-            $select->where('collections.id = ?', $collectionId);
+            $condition = 'collections.id IN (?)';
+            if ($hasEmpty) {
+                $condition .= ' OR items.collection_id IS NULL';
+            }
+            $select->where($condition, $collectionIds);
+        }
+        // Check no collection only.
+        elseif ($hasEmpty) {
+            $select->where('items.collection_id IS NULL');
         }
     }
 
     /**
      * Filter the SELECT statement based on the item Type
      *
-     * @param Zend_Db_Select
-     * @param Type|integer|string Type object, Type ID or Type name
-     * @return void
+     * @param Zend_Db_Select $select
+     * @param Type|int|string|array $types One or multiple Item Type object,
+     * Item Type ID or Item Type name.
      */
-    public function filterByItemType($select, $type)
+    public function filterByItemType($select, $types)
     {
-        $select->joinInner(array('item_types' => $this->getDb()->ItemType),
-                           'items.item_type_id = item_types.id',
-                           array());
-        if ($type instanceof ItemType) {
-            $select->where('item_types.id = ?', $type->id);
-        } else if (is_numeric($type)) {
-            $select->where('item_types.id = ?', $type);
-        } else {
-            $select->where('item_types.name = ?', $type);
+        if (!is_array($types)) {
+            $types = array($types);
+        }
+
+        $typeIdsOrNames = array_map(function ($type) {
+            if ($type === 0 || $type === '0') {
+                return null;
+            }
+            if ($type instanceof ItemType) {
+                return (int) $type->id;
+            }
+            if (is_numeric($type)) {
+                return (int) $type;
+            }
+            if (is_string($type)) {
+                return $type;
+            }
+            return;
+        }, $types);
+
+        $hasEmpty = in_array(null, $typeIdsOrNames);
+        $typeIdsOrNames = array_filter($typeIdsOrNames);
+        if ($typeIdsOrNames) {
+            $select->joinLeft(array(
+                'item_types' => $this->getDb()->ItemType),
+                'items.item_type_id = item_types.id',
+                array());
+            $typeIds = array_filter($typeIdsOrNames, 'is_integer');
+            $typeNames = array_diff($typeIdsOrNames, $typeIds);
+            if (!empty($typeIds)) {
+                if (!empty($typeNames)) {
+                    $conditions = 'item_types.id IN (' . implode(',', $typeIds) . ') OR item_types.name IN (?)';
+                    $bind = array($typeNames);
+                } else {
+                    $conditions = 'item_types.id IN (?)';
+                    $bind = array($typeIds);
+                }
+            } else {
+                $conditions = 'item_types.name IN (?)';
+                $bind = array($typeNames);
+            }
+            if ($hasEmpty) {
+                $conditions .= ' OR items.item_type_id IS NULL';
+            }
+            $select->where($conditions, $bind);
+        }
+        // Check no collection only.
+        elseif ($hasEmpty) {
+            $select->where('items.item_type_id IS NULL');
         }
     }
 
@@ -249,7 +305,6 @@ class Table_Item extends Omeka_Db_Table
      *
      * @param Omeka_Db_Select
      * @param string|array A comma-delimited string or an array of tag names.
-     * @return void
      */
     public function filterByTags($select, $tags)
     {
@@ -264,10 +319,9 @@ class Table_Item extends Omeka_Db_Table
         // This subquery should only return item IDs, so that the subquery can be
         // appended to the main query by WHERE i.id IN (SUBQUERY).
         foreach ($tags as $tagName) {
-
             $subSelect = new Omeka_Db_Select;
-            $subSelect->from(array('records_tags'=>$db->RecordsTags), array('items.id'=>'records_tags.record_id'))
-                ->joinInner(array('tags'=>$db->Tag), 'tags.id = records_tags.tag_id', array())
+            $subSelect->from(array('records_tags' => $db->RecordsTags), array('items.id' => 'records_tags.record_id'))
+                ->joinInner(array('tags' => $db->Tag), 'tags.id = records_tags.tag_id', array())
                 ->where('tags.name = ? AND records_tags.`record_type` = "Item"', trim($tagName));
 
             $select->where('items.id IN (' . (string) $subSelect . ')');
@@ -280,17 +334,16 @@ class Table_Item extends Omeka_Db_Table
      *
      * @param Zend_Db_Select
      * @param array|string Set of tag names (either array or comma-delimited string)
-     * @return void
      */
     public function filterByExcludedTags($select, $tags)
     {
         $db = $this->getDb();
 
-        if (!is_array($tags)){
+        if (!is_array($tags)) {
             $tags = explode(get_option('tag_delimiter'), $tags);
         }
         $subSelect = new Omeka_Db_Select;
-        $subSelect->from(array('items'=>$db->Item), 'items.id')
+        $subSelect->from(array('items' => $db->Item), 'items.id')
                          ->joinInner(array('records_tags' => $db->RecordsTags),
                                      'records_tags.record_id = items.id AND records_tags.record_type = "Item"',
                                      array())
@@ -310,9 +363,8 @@ class Table_Item extends Omeka_Db_Table
      * file.
      *
      * @param Zend_Db_Select
-     * @param boolean $hasDerivativeImage Whether items should have a derivative
+     * @param bool $hasDerivativeImage Whether items should have a derivative
      * image file.
-     * @return void
      */
     public function filterByHasDerivativeImage($select, $hasDerivativeImage = true)
     {
@@ -320,14 +372,13 @@ class Table_Item extends Omeka_Db_Table
 
         $db = $this->getDb();
 
-        $select->joinLeft(array('files'=>"$db->File"), 'files.item_id = items.id', array());
+        $select->joinLeft(array('files' => "$db->File"), 'files.item_id = items.id', array());
         $select->where('files.has_derivative_image = ?', $hasDerivativeImage);
     }
-    
+
     /**
      * @param Omeka_Db_Select
      * @param array
-     * @return void
      */
     public function applySearchFilters($select, $params)
     {
@@ -380,7 +431,7 @@ class Table_Item extends Omeka_Db_Table
             }
         }
         $this->filterBySearch($select, $params);
-        
+
         // If we returning the data itself, we need to group by the item ID
         $select->group('items.id');
     }
@@ -481,7 +532,7 @@ class Table_Item extends Omeka_Db_Table
                 break;
 
             default:
-                throw new Omeka_Record_Exception( 'Invalid position provided to ItemTable::findNearby()!' );
+                throw new Omeka_Record_Exception('Invalid position provided to ItemTable::findNearby()!');
                 break;
         }
 

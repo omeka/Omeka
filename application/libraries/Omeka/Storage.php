@@ -20,7 +20,7 @@ class Omeka_Storage
     const MSG_NOT_INITIALIZED = 'The storage adapter is not initialized.';
     const MSG_NO_SUCH_METHOD = 'The storage adapter has no method "%s"';
     const MSG_INVALID_ADAPTER = 'Storage adapters must implement the Omeka_Storage_Adapter_AdapterInterface interface.';
-        
+
     /**
      * @var Omeka_Storage_Adapter_AdapterInterface
      */
@@ -168,15 +168,15 @@ class Omeka_Storage
         if (!$this->_tempDir) {
             $this->_tempDir = sys_get_temp_dir();
         }
-        
+
         return $this->_tempDir;
     }
 
     public function getPathByType($filename, $type = 'files')
     {
         return apply_filters(
-            'storage_path', 
-            $type . "/$filename", 
+            'storage_path',
+            $type . "/$filename",
             array('filename' => $filename, 'type' => $type)
         );
     }

@@ -36,84 +36,84 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
      * @var string
      */
     public $version;
-    
+
     /**
      * Human-readable display name of the plugin.
      * 
      * @var string 
      */
     protected $_displayName;
-    
+
     /**
      * The plugin's author.
      * 
      * @var string
      */
     protected $_author;
-    
+
     /**
      * Description of the plugin.
      * 
      * @var string 
      */
     protected $_description;
-    
+
     /**
      * URL for documentation or further information about the plugin.
      * 
      * @var string
      */
     protected $_link;
-        
+
     /**
      * Whether the plugin has been loaded.
      * 
-     * @var boolean
+     * @var bool
      */
     protected $_loaded = false;
 
     /**
      * Whether the plugin has a custom configuration form.
      * 
-     * @var boolean 
+     * @var bool 
      */
     protected $_hasConfig = false;
-    
+
     /**
      * Directory names of required plugins.
      * 
      * @var array 
      */
-    protected $_requiredPlugins = array();  
-    
+    protected $_requiredPlugins = array();
+
     /**
      * Directory names of optional plugins.
      * 
      * @var array
      */
     protected $_optionalPlugins = array();
-        
+
     /**
      * Minimum Omeka version requirement for the plugin.
      * 
      * @var string 
      */
-    protected $_minimumOmekaVersion;    
-    
+    protected $_minimumOmekaVersion;
+
     /**
      * Maximum version of Omeka that the plugin has been tested on.
      * 
      * @var string 
      */
     protected $_testedUpToVersion;
-    
+
     /**
      * Version of the plugin that is stored in the INI.
      * 
      * @var string 
      */
     protected $_iniVersion;
-    
+
     /**
      * List of tags associated with this plugin, as retrieved from
      * the ini file.
@@ -133,7 +133,7 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
             $this->addError('name', __('Names of plugins must not be blank'));
         }
     }
-    
+
     /**
      * Get the name of the directory containing the plugin.
      *
@@ -155,7 +155,7 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
         $this->name = $name;
         return $this;
     }
-    
+
     /**
      * Get the human-readable name of the plugin.
      * 
@@ -183,7 +183,7 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
         $this->_displayName = trim($name);
         return $this;
     }
-    
+
     /**
      * Get the plugin's author.
      *
@@ -205,7 +205,7 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
         $this->_author = trim($author);
         return $this;
     }
-    
+
     /**
      * Get the description of the plugin.
      *
@@ -227,7 +227,7 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
         $this->_description = trim($description);
         return $this;
     }
-    
+
     /**
      * Get the minimum version of Omeka that this plugin requires to work.
      *
@@ -249,7 +249,7 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
         $this->_minimumOmekaVersion = $version;
         return $this;
     }
-    
+
     /**
      * Get the version of Omeka that this plugin is tested up to.
      *
@@ -271,7 +271,7 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
         $this->_testedUpToVersion = $version;
         return $this;
     }
-    
+
     /**
      * Get the list of plugins that are required for this plugin to work.
      *
@@ -293,10 +293,10 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
         if (is_string($plugins)) {
             $plugins = array_filter(array_map('trim', explode(',', $plugins)));
         }
-        $this->_requiredPlugins = (array)$plugins;
+        $this->_requiredPlugins = (array) $plugins;
         return $this;
     }
-    
+
     /**
      * Get the list of plugins that can be used, but are not required by, this
      * plugin.
@@ -319,10 +319,10 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
         if (is_string($plugins)) {
             $plugins = array_filter(array_map('trim', explode(',', $plugins)));
         }
-        $this->_optionalPlugins = (array)$plugins;
+        $this->_optionalPlugins = (array) $plugins;
         return $this;
     }
-    
+
     /**
      * Get the list of tags for this plugin (from the ini file).
      *
@@ -344,10 +344,10 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
         if (is_string($tags)) {
             $tags = array_filter(array_map('trim', explode(',', $tags)));
         }
-        $this->_iniTags = (array)$tags;
+        $this->_iniTags = (array) $tags;
         return $this;
     }
-    
+
     /**
      * Get the support link url from plugin.ini
      * 
@@ -357,7 +357,7 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
     {
         return $this->_support_link;
     }
-    
+
     /**
      * Set the support link url from plugin.ini
      * 
@@ -366,13 +366,13 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
      */
     public function setSupportLinkUrl($link)
     {
-        if ( $link && !parse_url($link, PHP_URL_SCHEME) ) {
+        if ($link && !parse_url($link, PHP_URL_SCHEME)) {
             $link = 'http://'.$link;
         }
         $this->_support_link = $link;
         return $this;
-    }        
-    
+    }
+
     /**
      * Get the URL link from the plugin.ini.
      *
@@ -391,13 +391,13 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
      */
     public function setLinkUrl($link)
     {
-        if ( $link && !parse_url($link, PHP_URL_SCHEME) ) {
+        if ($link && !parse_url($link, PHP_URL_SCHEME)) {
             $link = 'http://'.$link;
         }
         $this->_link = $link;
         return $this;
     }
-        
+
     /**
      * Determine whether the Plugin has been installed.
      * 
@@ -407,7 +407,7 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
     {
         return $this->exists();
     }
-    
+
     /**
      * Determine whether the Plugin has been loaded.
      * 
@@ -429,7 +429,7 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
         $this->_loaded = $flag;
         return $this;
     }
-    
+
     /**
      * Determine whether the plugin is active.
      *
@@ -451,7 +451,7 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
         $this->active = $flag ? '1' : '0';
         return $this;
     }
-    
+
     /**
      * Determine whether the plugin has a custom configuration form.
      *
@@ -473,7 +473,7 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
         $this->_hasConfig = $flag;
         return $this;
     }
-    
+
     /**
      * Get the version of the plugin stored in the INI file.
      *
@@ -495,7 +495,7 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
         $this->_iniVersion = trim($version);
         return $this;
     }
-    
+
     /**
      * Get the version of the plugin that is stored in the database.
      *
@@ -525,9 +525,9 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
      */
     public function hasNewVersion()
     {
-        return $this->isInstalled() && $this->getIniVersion() && version_compare($this->getIniVersion(), $this->getDbVersion(), '>');   
+        return $this->isInstalled() && $this->getIniVersion() && version_compare($this->getIniVersion(), $this->getDbVersion(), '>');
     }
-    
+
     /**
      * Determine whether this Omeka install meets the plugin's minimum version
      * requirements.

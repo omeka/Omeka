@@ -17,12 +17,12 @@ class Omeka_Test_Helper_DbProfiler
      * @var Zend_Db_Profiler
      */
     private $_profiler;
-    
+
     /**
      * @var PHPUnit_Framework_TestCase
      */
     private $_test;
-    
+
     /**
      * Constructor.
      * 
@@ -34,7 +34,7 @@ class Omeka_Test_Helper_DbProfiler
         $this->_profiler = $profiler;
         $this->_test = $test;
     }
-    
+
     public function assertDbQuery($sqlPart, $message = null)
     {
         $queryProfiles = $this->_profiler->getQueryProfiles();
@@ -47,30 +47,30 @@ class Omeka_Test_Helper_DbProfiler
             $query = $sqlPart;
         }
 
-        foreach ($queryProfiles as $profile) {            
+        foreach ($queryProfiles as $profile) {
             if (strpos($profile->getQuery(), $query) !== false) {
                 if (isset($params) && $profile->getQueryParams() == $params) {
                     $ranQuery = true;
                     break;
-                } else if (!isset($params)) {
+                } elseif (!isset($params)) {
                     $ranQuery = true;
                     break;
                 }
             }
         }
-        $this->_test->assertTrue($ranQuery, $message . PHP_EOL . "Should have run SQL query containing '$query'." 
+        $this->_test->assertTrue($ranQuery, $message . PHP_EOL . "Should have run SQL query containing '$query'."
             . (isset($params) ? PHP_EOL . "Should have been passed parameters: " . print_r($params, true) : ''));
     }
-    
+
     /**
      * Assert that the given number of SQL queries were made.
      * 
-     * @param integer $queryCount
+     * @param int $queryCount
      */
     public function assertTotalNumQueries($queryCount, $msg = null)
     {
         if (!$msg) {
-            $msg = "Failed asserting that " . (integer)$queryCount . " SQL queries were made.";
+            $msg = "Failed asserting that " . (integer) $queryCount . " SQL queries were made.";
         }
         $this->_test->assertEquals($queryCount, $this->_profiler->getTotalNumQueries(),
             $msg);

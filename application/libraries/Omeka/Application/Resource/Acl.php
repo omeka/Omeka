@@ -73,7 +73,7 @@ class Omeka_Application_Resource_Acl extends Zend_Application_Resource_ResourceA
 
         // Deny privileges from admin users
         $acl->deny('admin', array('Settings', 'Plugins', 'Themes', 'ElementSets',
-                                  'Security', 'SystemInfo','Appearance'));
+                                  'Security', 'SystemInfo', 'Appearance'));
 
         // Assert ownership for certain privileges.
 
@@ -100,7 +100,7 @@ class Omeka_Application_Resource_Acl extends Zend_Application_Resource_ResourceA
         $acl->allow('contributor', 'Tags', array('autocomplete'));
         // Contributors can add collections, edit or delete their own collections, and
         // see their collections that are not public.
-        $acl->allow('contributor','Collections', array('add', 'delete-confirm', 'editSelf',
+        $acl->allow('contributor', 'Collections', array('add', 'delete-confirm', 'editSelf',
                                                        'deleteSelf', 'showSelfNotPublic'));
         $acl->allow('contributor', 'Elements', 'element-form');
 

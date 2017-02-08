@@ -19,7 +19,7 @@ class Omeka_Validate_UserPassword extends Zend_Validate_Abstract
      * @var string
      */
     const INVALID = 'invalid';
-    
+
     /**
      * Error message templates.
      *
@@ -28,14 +28,14 @@ class Omeka_Validate_UserPassword extends Zend_Validate_Abstract
     protected $_messageTemplates = array(
         self::INVALID => "Password is invalid."
     );
-    
+
     /**
      * User to check the password against.
      *
      * @var User
      */
     private $_user;
-    
+
     /**
      * @param User $user
      */
@@ -43,7 +43,7 @@ class Omeka_Validate_UserPassword extends Zend_Validate_Abstract
     {
         $this->_user = $user;
     }
-    
+
     /**
      * Validate against a user's stored password.
      *

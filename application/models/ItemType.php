@@ -78,12 +78,12 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
      * Get an array of Items that have this item type.
      *
      * @param int $count The maximum number of items to return.
-     * @param boolean $recent  Whether the most recent items should be chosen.
+     * @param bool $recent  Whether the most recent items should be chosen.
      * @return array The Item objects associated with the item type.
      */
-    protected function getItems($count = 10, $recent=true)
+    protected function getItems($count = 10, $recent = true)
     {
-        $params = array('type'=>$this->id);
+        $params = array('type' => $this->id);
         if ($recent) {
             $params['sort_field'] = 'added';
             $params['sort_dir'] = 'd';
@@ -99,7 +99,7 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
     protected function _validate()
     {
         if (strlen($this->name) < self::ITEM_TYPE_NAME_MIN_CHARACTERS || strlen($this->name) > self::ITEM_TYPE_NAME_MAX_CHARACTERS) {
-            $this->addError('name', __('The item type name must have between %1$s and %2$s characters.', self::ITEM_TYPE_NAME_MIN_CHARACTERS, self::ITEM_TYPE_NAME_MAX_CHARACTERS) );
+            $this->addError('name', __('The item type name must have between %1$s and %2$s characters.', self::ITEM_TYPE_NAME_MIN_CHARACTERS, self::ITEM_TYPE_NAME_MAX_CHARACTERS));
         }
 
         if (!$this->fieldIsUnique('name')) {
@@ -112,7 +112,7 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
      */
     protected function filterPostData($post)
     {
-        $options = array('inputNamespace'=>'Omeka_Filter');
+        $options = array('inputNamespace' => 'Omeka_Filter');
 
         // User form input does not allow superfluous whitespace
         $filters = array('name' => array('StripTags', 'StringTrim'),
@@ -181,7 +181,7 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
 
         if (count($elementOrderingArray) > count($joinRecordArray)) {
             throw new Omeka_Record_Exception(__('There are too many values in the element ordering array.'));
-        } else if (count($elementOrderingArray) < count($joinRecordArray)) {
+        } elseif (count($elementOrderingArray) < count($joinRecordArray)) {
             throw new Omeka_Record_Exception(__('There are too few values in the element ordering array.'));
         }
 
@@ -213,7 +213,7 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
                 $elementToSave = new Element;
                 $elementToSave->setArray($element);
                 $elementToSave->setElementSet(ElementSet::ITEM_TYPE_NAME);
-            } else if ($element instanceof Element) {
+            } elseif ($element instanceof Element) {
                 $elementToSave = $element;
                 if ($element->id) {
                     $elementsToSaveIds[] = $element->id;
@@ -228,7 +228,7 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
 
         // check to see if the element already exists in the $this->_elementToSave,
         // and if it does, then replace the old element with the new element
-        foreach($this->_elementsToSave as $oldElementToSave) {
+        foreach ($this->_elementsToSave as $oldElementToSave) {
             if (!$oldElementToSave->id || !in_array($oldElementToSave->id, $elementsToSaveIds)) {
                 $elementsToSave[] = $oldElementToSave;
             }
@@ -268,7 +268,7 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
      */
     public function removeElements($elements)
     {
-        foreach($elements as $element) {
+        foreach ($elements as $element) {
             $this->removeElement($element);
         }
     }
@@ -288,7 +288,7 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
 
         if ($element instanceof Element) {
             $elementId = $element->id;
-        } else if (is_string($element)) {
+        } elseif (is_string($element)) {
             $elementId = $element;
             $element = $this->getTable('Element')->find($elementId);
             if (!$element) {
@@ -298,7 +298,7 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
 
         // Remove the element from the elements to save
         $elementsToSave = array();
-        foreach($this->_elementsToSave as $elementToSave) {
+        foreach ($this->_elementsToSave as $elementToSave) {
             if ($elementToSave->id != $elementId) {
                 $elementsToSave[] = $elementToSave;
             }
@@ -307,10 +307,10 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
 
         // Reset the elements to remove
         $hasElement = false;
-        foreach($this->_elementsToRemove as $elementToRemove) {
+        foreach ($this->_elementsToRemove as $elementToRemove) {
             if ($elementToRemove->id == $elementId) {
-               $hasElement = true;
-               break;
+                $hasElement = true;
+                break;
             }
         }
         if (!$hasElement) {
@@ -351,7 +351,7 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
     {
         if ($element instanceof Element) {
             $elementId = $element->id;
-        } else if (is_string($element) || is_integer($element)) {
+        } elseif (is_string($element) || is_integer($element)) {
             $elementId = (string) $element;
         } else {
             throw new Omeka_Record_Exception(__('Invalid parameter. The hasElement function requires either an element object or an element id to determine if an item type has an element.'));
@@ -375,13 +375,12 @@ class ItemType extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_
         return $this->getDb()->getTable('Item')->count(array('type' => $this->id));
     }
 
-
     /**
      * Get the 'Item Type' element set.
      *
      * @return ElementSet
      */
-    static public function getItemTypeElementSet()
+    public static function getItemTypeElementSet()
     {
         // Element should belong to the 'Item Type' element set.
         return get_db()->getTable('ElementSet')->findBySql('name = ?', array(ElementSet::ITEM_TYPE_NAME), true);

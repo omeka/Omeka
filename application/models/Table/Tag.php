@@ -10,8 +10,8 @@
  * @package Omeka\Db\Table
  */
 class Table_Tag extends Omeka_Db_Table
-{    
-    public function findOrNew($name) 
+{
+    public function findOrNew($name)
     {
         $db = $this->getDb();
         $sql = "
@@ -20,22 +20,21 @@ class Table_Tag extends Omeka_Db_Table
         WHERE tags.name = ?
         LIMIT 1";
         $tag = $this->fetchObject($sql, array($name));
-        
+
         if (!$tag) {
             $tag = new Tag;
             $tag->name = $name;
             $tag->save();
         }
-        
+
         return $tag;
     }
-    
+
     /**
      * Filter a SELECT statement based on an Omeka_Record_AbstractRecord instance
      * 
      * @param Omeka_Db_Select
      * @param Omeka_Record_AbstractRecord
-     * @return void
      */
     public function filterByRecord($select, $record)
     {
@@ -46,7 +45,7 @@ class Table_Tag extends Omeka_Db_Table
         //A non-persistent record has no tags, so return emptiness
         } else {
             $select->where('tags.id = 0');
-        }        
+        }
     }
 
     /**
@@ -74,13 +73,12 @@ class Table_Tag extends Omeka_Db_Table
                 break;
         }
     }
-    
+
     /**
      * Filter SELECT statement based on the type of tags to view (Item, Exhibit, etc.)
      * 
      * @param Omeka_Db_Select
      * @param string
-     * @return void
      */
     public function filterByTagType($select, $type)
     {
@@ -89,32 +87,31 @@ class Table_Tag extends Omeka_Db_Table
         $recordType = $db->quote($type);
         //Redo the "from" so we can change the join condition
         $select->reset(Zend_Db_Select::FROM)
-               ->from(array('tags'=>$db->Tag), array())
-               ->joinLeft( array('records_tags' => $db->RecordsTags),
+               ->from(array('tags' => $db->Tag), array())
+               ->joinLeft(array('records_tags' => $db->RecordsTags),
                     "records_tags.tag_id = tags.id AND records_tags.record_type = $recordType",
                     array());
 
         //Showing tags related to items
         if ($type == 'Item') {
             //Join on the items table, add permissions checks for public
-            $select->joinLeft( array('items'=>$db->Item), "items.id = records_tags.record_id", array());
+            $select->joinLeft(array('items' => $db->Item), "items.id = records_tags.record_id", array());
             $permissions = new Omeka_Db_Select_PublicPermissions('Items');
             $permissions->apply($select, 'items');
         }
     }
-    
+
     /**
      * Filter SELECT statement based on whether the tag contains the partial tag name
      * 
      * @param Omeka_Db_Select
      * @param string
-     * @return void
      */
-    public function filterByTagNameLike($select, $partialTagName) 
+    public function filterByTagNameLike($select, $partialTagName)
     {
         $select->where("`tags`.`name` LIKE CONCAT('%', ?, '%')", $partialTagName);
     }
-         
+
     /**
      * Retrieve a certain number of tags
      *
@@ -124,21 +121,20 @@ class Table_Tag extends Omeka_Db_Table
      *        'record' => instanceof Omeka_Record_AbstractRecord
      *        'like' => partial_tag_name
      *        'type' => tag_type
-     * @return void
      */
-    public function applySearchFilters($select, $params=array())
-    {        
+    public function applySearchFilters($select, $params = array())
+    {
         $db = $this->getDb();
-        
+
         if (array_key_exists('type', $params)) {
             $this->filterByTagType($select, $params['type']);
-            
+
             //If we only want tags for public items, use one of the ItemTable's filters
             if ($params['type'] == 'Item' && isset($params['public'])) {
                 $db->getTable('Item')->filterByPublic($select, (bool) $params['public']);
             }
         }
-        
+
         if (array_key_exists('record', $params) && $params['record'] instanceof Omeka_Record_AbstractRecord) {
             $this->filterByRecord($select, $params['record']);
         }
@@ -152,24 +148,23 @@ class Table_Tag extends Omeka_Db_Table
         }
         $select->group("tags.id");
     }
-    
-        
+
     /**
      * @internal SELECT statements should always pull a count of how many times 
      * the tag occurs as a tagCount field in the Tag object.
      * 
      * @return Omeka_Db_Select
-     */    
+     */
     public function getSelect()
     {
         $select = new Omeka_Db_Select;
-        
+
         $db = $this->getDb();
-        
-        $select->from(array('tags'=>$db->Tag), array('tags.*', 'tagCount'=>'COUNT(records_tags.id)'))
-                ->joinLeft( array('records_tags'=>$db->RecordsTags), 'records_tags.tag_id = tags.id', array())
+
+        $select->from(array('tags' => $db->Tag), array('tags.*', 'tagCount' => 'COUNT(records_tags.id)'))
+                ->joinLeft(array('records_tags' => $db->RecordsTags), 'records_tags.tag_id = tags.id', array())
                 ->group('tags.id');
-                
+
         return $select;
     }
 
@@ -188,7 +183,7 @@ class Table_Tag extends Omeka_Db_Table
         }
         return $select;
     }
-    
+
     public function findTagNamesLike($partialName, $limit = 10)
     {
         $db = $this->getDb();

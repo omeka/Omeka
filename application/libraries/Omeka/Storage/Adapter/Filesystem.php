@@ -24,9 +24,9 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter_AdapterI
     protected $_localDir;
 
     protected $_subDirs = array(
-        'thumbnails', 
-        'square_thumbnails', 
-        'fullsize', 
+        'thumbnails',
+        'square_thumbnails',
+        'fullsize',
         'original',
         'theme_uploads'
     );
@@ -93,7 +93,7 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter_AdapterI
      * Specifically, this checks to see if the local storage directory
      * is writable.
      *
-     * @return boolean
+     * @return bool
      */
     public function canStore()
     {
@@ -115,7 +115,7 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter_AdapterI
     {
         $status = $this->_rename($source, $this->_getAbsPath($dest));
 
-        if(!$status) {
+        if (!$status) {
             throw new Omeka_Storage_Exception('Unable to store file.');
         }
     }
@@ -128,10 +128,10 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter_AdapterI
      */
     public function move($source, $dest)
     {
-        $status = $this->_rename($this->_getAbsPath($source), 
+        $status = $this->_rename($this->_getAbsPath($source),
             $this->_getAbsPath($dest));
 
-        if(!$status) {
+        if (!$status) {
             throw new Omeka_Storage_Exception('Unable to move file.');
         }
     }
@@ -146,7 +146,7 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter_AdapterI
         $absPath = $this->_getAbsPath($path);
         $status = @unlink($absPath);
 
-        if(!$status) {
+        if (!$status) {
             if (file_exists($absPath)) {
                 throw new Omeka_Storage_Exception('Unable to delete file.');
             } else {
@@ -210,7 +210,7 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter_AdapterI
 
     /**
      * @throws Omeka_Storage_Exception
-     * @return boolean
+     * @return bool
      */
     protected function _rename($source, $dest)
     {

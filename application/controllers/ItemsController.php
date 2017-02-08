@@ -17,7 +17,7 @@ class ItemsController extends Omeka_Controller_AbstractActionController
 
     public $contexts = array(
             'browse' => array('json', 'dcmes-xml', 'rss2', 'omeka-xml', 'omeka-json', 'atom'),
-            'show'   => array('json', 'dcmes-xml', 'omeka-xml', 'omeka-json', 'atom')
+            'show' => array('json', 'dcmes-xml', 'omeka-xml', 'omeka-json', 'atom')
     );
 
     private $_ajaxRequiredActions = array(
@@ -28,10 +28,10 @@ class ItemsController extends Omeka_Controller_AbstractActionController
         'modify-tags' => array('POST'),
         'power-edit' => array('POST'),
         'change-type' => array('POST'),
-        'batch-edit-save'   => array('POST'),
+        'batch-edit-save' => array('POST'),
     );
 
-    public function init() 
+    public function init()
     {
         $this->_helper->db->setDefaultModelName('Item');
     }
@@ -51,22 +51,20 @@ class ItemsController extends Omeka_Controller_AbstractActionController
             }
         }
     }
-    
+
     /**
      * This shows the search form for items by going to the correct URI.
      * 
      * This form can be loaded as a partial by calling items_search_form().
-     * 
-     * @return void
      */
     public function searchAction()
     {
         // Only show this form as a partial if it's being pulled via XmlHttpRequest
-        if($this->getRequest()->isXmlHttpRequest()) {
+        if ($this->getRequest()->isXmlHttpRequest()) {
             $this->render('search-form');
         }
     }
-    
+
     /**
      * Gets the element sets for the 'Item' record type.
      * 
@@ -76,10 +74,9 @@ class ItemsController extends Omeka_Controller_AbstractActionController
     {
         return $this->_helper->db->getTable('ElementSet')->findByRecordType('Item');
     }
-    
+
     /**
      * Adds an additional permissions check to the built-in edit action.
-     * 
      */
     public function editAction()
     {
@@ -90,7 +87,7 @@ class ItemsController extends Omeka_Controller_AbstractActionController
         }
         parent::editAction();
     }
-    
+
     protected function _getAddSuccessMessage($item)
     {
         $itemTitle = $this->_getElementMetadata($item, 'Dublin Core', 'Title');
@@ -98,9 +95,9 @@ class ItemsController extends Omeka_Controller_AbstractActionController
             return __('The item "%s" was successfully added!', $itemTitle);
         } else {
             return __('The item #%s was successfully added!', strval($item->id));
-        }        
+        }
     }
-    
+
     protected function _getEditSuccessMessage($item)
     {
         $itemTitle = $this->_getElementMetadata($item, 'Dublin Core', 'Title');
@@ -111,7 +108,7 @@ class ItemsController extends Omeka_Controller_AbstractActionController
         }
     }
 
-    protected function  _getDeleteSuccessMessage($item)
+    protected function _getDeleteSuccessMessage($item)
     {
         $itemTitle = $this->_getElementMetadata($item, 'Dublin Core', 'Title');
         if ($itemTitle != '') {
@@ -120,11 +117,11 @@ class ItemsController extends Omeka_Controller_AbstractActionController
             return __('The item #%s was successfully deleted!', strval($item->id));
         }
     }
-    
+
     protected function _getDeleteConfirmMessage($item)
     {
         $itemTitle = $this->_getElementMetadata($item, 'Dublin Core', 'Title');
-        if ($itemTitle != '') {        
+        if ($itemTitle != '') {
             return __('This will delete the item "%s" and its associated metadata. It will '
                  . 'also delete all files and file metadata associated with this '
                  . 'item.', $itemTitle);
@@ -134,13 +131,13 @@ class ItemsController extends Omeka_Controller_AbstractActionController
                  . 'item.', strval($item->id));
         }
     }
-    
-    protected function _getElementMetadata($item, $elementSetName, $elementName) 
+
+    protected function _getElementMetadata($item, $elementSetName, $elementName)
     {
         $m = new Omeka_View_Helper_Metadata;
         return strip_formatting($m->metadata($item, array($elementSetName, $elementName)));
     }
-    
+
     public function addAction()
     {
         // Get all the element sets that apply to the item.
@@ -153,22 +150,18 @@ class ItemsController extends Omeka_Controller_AbstractActionController
 
     /**
      * Finds all tags associated with items (used for tag cloud)
-     * 
-     * @return void
      */
     public function tagsAction()
     {
-        $params = array_merge($this->_getAllParams(), array('type'=>'Item'));
+        $params = array_merge($this->_getAllParams(), array('type' => 'Item'));
         $tags = $this->_helper->db->getTable('Tag')->findBy($params);
         $this->view->assign(compact('tags'));
     }
-    
+
     /**
      * Browse the items.  Encompasses search, pagination, and filtering of
      * request parameters.  Should perhaps be split into a separate
      * mechanism.
-     * 
-     * @return void
      */
     public function browseAction()
     {
@@ -179,7 +172,7 @@ class ItemsController extends Omeka_Controller_AbstractActionController
             // also remove these.
             unset($_GET['user'], $_POST['user']);
         }
-        
+
         parent::browseAction();
     }
 
@@ -187,12 +180,11 @@ class ItemsController extends Omeka_Controller_AbstractActionController
     {
         return array('added', 'd');
     }
-    
+
     ///// AJAX ACTIONS /////
-    
+
     /**
      * Find or create an item for this mini-form
-     *
      */
     public function changeTypeAction()
     {
@@ -201,22 +193,20 @@ class ItemsController extends Omeka_Controller_AbstractActionController
         } else {
             $item = new Item;
         }
-        
+
         $item->item_type_id = (int) $_POST['type_id'];
         $this->view->assign(compact('item'));
     }
-    
+
     ///// END AJAX ACTIONS /////
-    
+
     /**
      * Batch editing of Items. If this is an AJAX request, it will
      * render the 'batch-edit' as a partial.
-     * 
-     * @return void
      */
     public function batchEditAction()
     {
-        /**
+        /*
          * Only show this view as a partial if it's being pulled via
          * XmlHttpRequest
          */
@@ -275,8 +265,6 @@ class ItemsController extends Omeka_Controller_AbstractActionController
 
     /**
      * Processes batch edit information. Only accessible via POST.
-     *
-     * @return void
      */
     public function batchEditSaveAction()
     {
@@ -381,8 +369,6 @@ class ItemsController extends Omeka_Controller_AbstractActionController
 
     /**
      * Processes batch edit all information. Only accessible via POST.
-     *
-     * @return void
      */
     protected function _batchEditAllSave()
     {
@@ -433,9 +419,9 @@ class ItemsController extends Omeka_Controller_AbstractActionController
                 $dispatcher->sendLongRunning('Job_ItemBatchEditAll', $options);
 
                 if ($delete) {
-                  $message = __('The items are checked and deleted one by one in the background.');
+                    $message = __('The items are checked and deleted one by one in the background.');
                 } else {
-                  $message = __('The items are checked and changed one by one in the background.');
+                    $message = __('The items are checked and changed one by one in the background.');
                 }
                 $message .= ' ' . __('Check logs for success and errors.');
                 $this->_helper->flashMessenger($message, 'success');

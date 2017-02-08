@@ -29,7 +29,7 @@ class Omeka_File_Ingest_Filesystem extends Omeka_File_Ingest_AbstractSourceInges
         }
         return $original;
     }
-    
+
     /**
      * Transfer a file.
      *
@@ -37,7 +37,6 @@ class Omeka_File_Ingest_Filesystem extends Omeka_File_Ingest_AbstractSourceInges
      * @param string $destination Destination path.
      * @param array $info File info array.  If 'rename' is specified as true,
      * move the file instead of copying.
-     * @return void
      */
     protected function _transfer($source, $destination, array $info)
     {
@@ -47,7 +46,7 @@ class Omeka_File_Ingest_Filesystem extends Omeka_File_Ingest_AbstractSourceInges
             throw new Omeka_File_Ingest_Exception("Could not transfer \"$source\" to \"$destination\".");
         }
     }
-    
+
     /**
      * Validate file transfer.
      *

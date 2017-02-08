@@ -12,4 +12,5 @@
  * @package Omeka\File\Ingest
  */
 class Omeka_File_Ingest_InvalidException extends Zend_Validate_Exception
-{}
+{
+}

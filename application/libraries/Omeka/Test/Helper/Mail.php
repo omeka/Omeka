@@ -12,14 +12,14 @@
  * @package Omeka\Test\Helper
  */
 class Omeka_Test_Helper_Mail
-{   
+{
     /**
      * Path to the mail storage directory.
      *
      * @var string
      */
     private $_path;
-    
+
     /**
      * @param string $path Real path to the mail storage directory.
      */
@@ -28,10 +28,10 @@ class Omeka_Test_Helper_Mail
         if (!is_writable($path)) {
             throw new RuntimeException('The mail path '.$path.' must be writable by this user.');
         }
-        
+
         $this->_path = $path;
     }
-    
+
     /**
      * Configure an instance of the Mail helper using the registered test_config.
      *
@@ -43,7 +43,7 @@ class Omeka_Test_Helper_Mail
         $helper = new self($path);
         return $helper;
     }
-    
+
     /**
      * Get an iterator over the fakemail directory.
      *
@@ -53,25 +53,25 @@ class Omeka_Test_Helper_Mail
     {
         return new DirectoryIterator($this->_path);
     }
-    
+
     /**
      * Check if a directory entry is a mail message file.
      *
      * @param SplFileInfo $file
-     * @return boolean
+     * @return bool
      */
     private function _isMailFile(SplFileInfo $file)
     {
         return $file->isFile() && $file->isWritable(); // && $file->getFilename() != '';
     }
-    
+
     /**
      * Return the text of the n'th email that was sent during the test.
      * 
      * Note that this will not return correct results if reset() was not 
      * invoked between test runs.
      *
-     * @param integer $index
+     * @param int $index
      * @return string
      */
     public function getMailText($index = 0)
@@ -84,7 +84,7 @@ class Omeka_Test_Helper_Mail
         }
 
         sort($mails);
-        
+
         if (!isset($mails[$index])) {
             throw new InvalidArgumentException("No mail exists at index: $index.");
         }

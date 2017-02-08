@@ -13,7 +13,7 @@
  * @package Omeka\Acl
  */
 class Omeka_Acl_Assert_User implements Zend_Acl_Assert_Interface
-{    
+{
     private $_allowSelf = array(
         'show',
         'edit',
@@ -51,7 +51,7 @@ class Omeka_Acl_Assert_User implements Zend_Acl_Assert_Interface
                            Zend_Acl_Role_Interface $role = null,
                            Zend_Acl_Resource_Interface $resource = null,
                            $privilege = null)
-    {   
+    {
         // Non-authenticated users can never be allowed to do anything.
         if (!($role instanceof User)) {
             return false;
@@ -63,9 +63,9 @@ class Omeka_Acl_Assert_User implements Zend_Acl_Assert_Interface
         // role represent the same user and branch accordingly.
         if ($resource instanceof User) {
             if ($this->_isSuperUser($role)) {
-                $allowed = !($this->_isSelf($role, $resource) 
+                $allowed = !($this->_isSelf($role, $resource)
                         && $this->_isDeniedSelf($privilege));
-            } else if ($this->_isSelf($role, $resource)) {
+            } elseif ($this->_isSelf($role, $resource)) {
                 $allowed = $this->_isAllowedSelf($privilege);
             }
         } else {

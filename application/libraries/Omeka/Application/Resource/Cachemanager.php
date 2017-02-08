@@ -18,12 +18,12 @@ class Omeka_Application_Resource_Cachemanager extends Zend_Application_Resource_
         $bootstrap = $this->getBootstrap();
         $bootstrap->bootstrap('Config');
         $config = $bootstrap->getResource('Config');
-        
+
         $cacheConfig = $config->cache;
         if ($cacheConfig) {
             $this->setOptions($cacheConfig->toArray());
         }
-        
+
         return parent::init();
     }
 }

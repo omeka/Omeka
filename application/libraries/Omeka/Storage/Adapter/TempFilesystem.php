@@ -58,7 +58,7 @@ class Omeka_Storage_Adapter_TempFilesystem extends Omeka_Storage_Adapter_Filesys
     private function _mkdir($filepath)
     {
         $absPath = $this->_localDir . '/' . $filepath;
-        // Meant to stub out filesystem behavior, prevent failure due to 
+        // Meant to stub out filesystem behavior, prevent failure due to
         // missing subdirectories.
         if (!is_dir(dirname($absPath))) {
             mkdir(dirname($absPath), 0770, true);

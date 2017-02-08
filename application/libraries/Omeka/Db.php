@@ -22,21 +22,21 @@ class Omeka_Db
      * @var string|null
      */
     public $prefix = null;
-    
+
     /**
      * The database adapter.
      *
      * @var Zend_Db_Adapter_Abstract
      */
     protected $_adapter;
-    
+
     /**
      * All the tables that are currently managed by this database object.
      *
      * @var array
      */
     protected $_tables = array();
-    
+
     /**
      * The logger to use for logging SQL queries. If not set, no logging will 
      * be done.
@@ -44,7 +44,7 @@ class Omeka_Db
      * @var Zend_Log|null
      */
     private $_logger;
-    
+
     /**
      * @param Zend_Db_Adapter_Abstract $adapter A Zend Framework connection object.
      * @param string $prefix The prefix for the database tables, if applicable.
@@ -54,7 +54,7 @@ class Omeka_Db
         $this->_adapter = $adapter;
         $this->prefix = (string) $prefix;
     }
-    
+
     /**
      * Delegate to the database adapter.
      * 
@@ -67,19 +67,19 @@ class Omeka_Db
         if (!method_exists($this->_adapter, $m)) {
             throw new BadMethodCallException("Method named '$m' does not exist or is not callable.");
         }
-        
+
         // Log SQL for certain adapter calls.
-        $logFor = array('fetchOne', 'fetchAll', 'prepare', 'query', 'fetchRow', 
+        $logFor = array('fetchOne', 'fetchAll', 'prepare', 'query', 'fetchRow',
                         'fetchAssoc', 'fetchCol', 'fetchPairs');
         if (in_array($m, $logFor)) {
             $this->log($a[0]);
         }
-        
+
         try {
             return call_user_func_array(array($this->_adapter, $m), $a);
-            
-        // Zend_Db_Statement_Mysqli does not consider a connection that returns 
-        // a "MySQL server has gone away" error to be disconnected. Catch these 
+
+        // Zend_Db_Statement_Mysqli does not consider a connection that returns
+        // a "MySQL server has gone away" error to be disconnected. Catch these
         // errors, close the connection, and reconnect, then retry the query.
         } catch (Zend_Db_Statement_Mysqli_Exception $e) {
             if (2006 == $e->getCode()) {
@@ -90,7 +90,7 @@ class Omeka_Db
             throw $e;
         }
     }
-    
+
     /**
      * Magic getter is a synonym for Omeka_Db::getTableName().
      *
@@ -104,7 +104,7 @@ class Omeka_Db
     {
         return $this->getTableName($name);
     }
-    
+
     /**
      * Set logger for SQL queries.
      *
@@ -114,35 +114,37 @@ class Omeka_Db
     {
         $this->_logger = $logger;
     }
-    
+
     /**
      * Retrieve the database adapter.
      *
      * @return Zend_Db_Adapter_Abstract
-     */ 
+     */
     public function getAdapter()
     {
         return $this->_adapter;
     }
-    
+
     /**
      * Retrieve the name of the table (including the prefix).
      *
      * @return string
      */
-    public function getTableName($class) {
+    public function getTableName($class)
+    {
         return $this->getTable($class)->getTableName();
     }
-        
+
     /**
      * Check whether the database tables have a prefix.
      *
-     * @return boolean
+     * @return bool
      */
-    public function hasPrefix() {
+    public function hasPrefix()
+    {
         return !empty($this->prefix);
     }
-    
+
     /**
      * Retrieve a table object corresponding to the model class.
      * 
@@ -159,31 +161,32 @@ class Omeka_Db
      * @param string $class Model class name.
      * @return Omeka_Db_Table
      */
-    public function getTable($class) {
-        
+    public function getTable($class)
+    {
+
         // Return the cached table object.
         if (array_key_exists($class, $this->_tables)) {
             return $this->_tables[$class];
         }
-        
+
         // Set the expected table class names.
         $tableClass = "Table_$class";
         $tableClassDeprecated = "{$class}Table";
-        
+
         if (class_exists($tableClass)) {
             $table = new $tableClass($class, $this);
-        } else if (class_exists($tableClassDeprecated)) {
+        } elseif (class_exists($tableClassDeprecated)) {
             $table = new $tableClassDeprecated($class, $this);
         } else {
             $table = new Omeka_Db_Table($class, $this);
         }
-        
+
         // Cache the table object
         $this->setTable($class, $table);
-        
+
         return $table;
     }
-    
+
     /**
      * Cache a table object.
      *
@@ -196,7 +199,7 @@ class Omeka_Db
     {
         $this->_tables[$alias] = $table;
     }
-    
+
     /**
      * Every query ends up looking like: 
      * INSERT INTO table (field, field2, field3, ...) VALUES (?, ?, ?, ...) 
@@ -209,32 +212,32 @@ class Omeka_Db
      * 
      * @param string $table Table model class name.
      * @param array $values Rows to insert (or update).
-     * @return integer The ID for the row that got inserted (or updated).
+     * @return int The ID for the row that got inserted (or updated).
      */
     public function insert($table, array $values = array())
     {
         if (empty($values)) {
             return false;
         }
-        
+
         $table = $this->getTableName($table);
-        
+
         // Column names are specified as array keys.
         $cols = array_keys($values);
-        
+
         // Build the statement.
         $query = "INSERT INTO `$table` (`" . implode('`, `', $cols) . "`) VALUES (";
         $query .= implode(', ', array_fill(0, count($values), '?')) . ')';
-        
+
         $insertParams = array_values($values);
         $updateQuery = array();
         $updateParams = $values;
-        
+
         foreach ($cols as $col) {
             switch ($col) {
                 case 'id':
                     $updateQuery[] = '`id` = LAST_INSERT_ID(`id`)';
-                    // Since we're not actually using the 'id' param in the 
+                    // Since we're not actually using the 'id' param in the
                     // UPDATE clause, remove it
                     unset($updateParams['id']);
                     break;
@@ -243,17 +246,17 @@ class Omeka_Db
                     break;
             }
         }
-        
+
         // Build the update of duplicate key clause.
         $query .= ' ON DUPLICATE KEY UPDATE ' . implode(', ', $updateQuery);
-        
+
         // Prepare and execute the statement.
         $params = array_merge($insertParams, array_values($updateParams));
         $this->query($query, $params);
-        
+
         return (int) $this->_adapter->lastInsertId();
     }
-    
+
     /**
      * Log SQL query if logging is configured.
      * 

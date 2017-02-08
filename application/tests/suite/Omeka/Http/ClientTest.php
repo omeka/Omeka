@@ -18,7 +18,7 @@ class Omeka_Http_ClientTest extends PHPUnit_Framework_TestCase
         $this->uri = 'http://local.test';
         $this->client = new Omeka_Http_Client($this->uri);
         $this->exception = new Zend_Http_Client_Adapter_Exception(
-            "Read timeout", 
+            "Read timeout",
             Zend_Http_Client_Adapter_Exception::READ_TIMEOUT
         );
         $this->exceptionAdapter = $this

@@ -14,7 +14,7 @@ class Omeka_Record_Iterator implements Iterator
     protected $_records;
     protected $_view;
     protected $_currentRecordVar;
-    
+
     /**
      * Construct the record iterator.
      * 
@@ -29,17 +29,17 @@ class Omeka_Record_Iterator implements Iterator
         if ($view instanceof Zend_View_Abstract) {
             $currentRecordVar = $view->singularize($currentRecordVar);
         }
-        
+
         $this->_records = $records;
         $this->_currentRecordVar = $currentRecordVar;
         $this->_view = $view;
     }
-    
+
     public function rewind()
     {
         reset($this->_records);
     }
-    
+
     /**
      * Return the current record, setting it to the view if applicable.
      */
@@ -48,18 +48,18 @@ class Omeka_Record_Iterator implements Iterator
         if (!(current($this->_records) instanceof Omeka_Record_AbstractRecord)) {
             throw new Omeka_Record_Exception(__('An invalid value was detected during record iteration.'));
         }
-        
+
         if ($this->_view instanceof Zend_View_Abstract) {
             $this->_view->{$this->_currentRecordVar} = current($this->_records);
         }
         return current($this->_records);
     }
-    
+
     public function key()
     {
         return key($this->_records);
     }
-    
+
     /**
      * Release the previous record and advance the pointer to the next one.
      * 
@@ -70,7 +70,7 @@ class Omeka_Record_Iterator implements Iterator
         release_object($this->_records[$this->key()]);
         next($this->_records);
     }
-    
+
     public function valid()
     {
         return false !== current($this->_records);

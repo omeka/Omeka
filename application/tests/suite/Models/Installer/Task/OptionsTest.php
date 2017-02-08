@@ -6,15 +6,13 @@
  */
 
 /**
- * 
- *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Installer_Task_OptionsTest extends PHPUnit_Framework_TestCase
 {
     const DB_PREFIX = 'test_';
-    
+
     public function setUp()
     {
         $this->dbAdapter = new Zend_Test_DbAdapter;
@@ -22,7 +20,7 @@ class Installer_Task_OptionsTest extends PHPUnit_Framework_TestCase
         $this->profilerHelper = new Omeka_Test_Helper_DbProfiler($this->dbAdapter->getProfiler(),
             $this);
     }
-    
+
     public function testThrowsExceptionForMissingOptions()
     {
         $task = new Installer_Task_Options;
@@ -39,40 +37,41 @@ class Installer_Task_OptionsTest extends PHPUnit_Framework_TestCase
             $this->assertNotContains("site_title", $e->getMessage());
         }
     }
-    
+
     public function testThrowsExceptionForUnexpectedOptions()
     {
         $task = new Installer_Task_Options;
         $task->setOptions(array(
-            'fake_option'                   => 'This option does not exist.',
-            'administrator_email'           => 'foobar', 
-            'copyright'                     => 'foobar', 
-            'site_title'                    => 'foobar', 
-            'author'                        => 'foobar', 
-            'description'                   => 'foobar', 
-            'thumbnail_constraint'          => 'foobar', 
-            'square_thumbnail_constraint'   => 'foobar', 
-            'fullsize_constraint'           => 'foobar', 
-            'per_page_admin'                => 'foobar', 
-            'per_page_public'               => 'foobar', 
-            'show_empty_elements'           => 'foobar',
-            'path_to_convert'               => 'foobar',
-            Theme::ADMIN_THEME_OPTION       => Installer_Default::DEFAULT_ADMIN_THEME,
-            Theme::PUBLIC_THEME_OPTION      => Installer_Default::DEFAULT_PUBLIC_THEME,
+            'fake_option' => 'This option does not exist.',
+            'administrator_email' => 'foobar',
+            'copyright' => 'foobar',
+            'site_title' => 'foobar',
+            'author' => 'foobar',
+            'description' => 'foobar',
+            'thumbnail_constraint' => 'foobar',
+            'square_thumbnail_constraint' => 'foobar',
+            'fullsize_constraint' => 'foobar',
+            'per_page_admin' => 'foobar',
+            'per_page_public' => 'foobar',
+            'show_empty_elements' => 'foobar',
+            'path_to_convert' => 'foobar',
+            Theme::ADMIN_THEME_OPTION => Installer_Default::DEFAULT_ADMIN_THEME,
+            Theme::PUBLIC_THEME_OPTION => Installer_Default::DEFAULT_PUBLIC_THEME,
             Omeka_Validate_File_Extension::WHITELIST_OPTION => Omeka_Validate_File_Extension::DEFAULT_WHITELIST,
-            Omeka_Validate_File_MimeType::WHITELIST_OPTION  => Omeka_Validate_File_MimeType::DEFAULT_WHITELIST,
-            File::DISABLE_DEFAULT_VALIDATION_OPTION         => (string)!extension_loaded('fileinfo'),
+            Omeka_Validate_File_MimeType::WHITELIST_OPTION => Omeka_Validate_File_MimeType::DEFAULT_WHITELIST,
+            File::DISABLE_DEFAULT_VALIDATION_OPTION => (string) !extension_loaded('fileinfo'),
             Omeka_Db_Migration_Manager::VERSION_OPTION_NAME => OMEKA_VERSION,
-            'display_system_info'           => true,
-            'html_purifier_is_enabled'      => '1',
-            'html_purifier_allowed_html_elements'   => 'foo',
+            'display_system_info' => true,
+            'html_purifier_is_enabled' => '1',
+            'html_purifier_allowed_html_elements' => 'foo',
             'html_purifier_allowed_html_attributes' => 'bar',
-            'tag_delimiter'                 => ',',
-            Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME => 'foobar', 
+            'tag_delimiter' => ',',
+            Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME => 'foobar',
             'search_record_types' => 'foobar',
             'api_enable' => true,
             'api_per_page' => 50,
             'show_element_set_headings' => '1',
+            'use_square_thumbnail' => '1'
         ));
         try {
             $task->install($this->db);
@@ -83,48 +82,49 @@ class Installer_Task_OptionsTest extends PHPUnit_Framework_TestCase
             $this->assertNotContains("path_to_convert", $e->getMessage());
         }
     }
-    
+
     public function testInsertsOptions()
     {
         $task = new Installer_Task_Options();
         $task->setOptions(array(
-            'administrator_email'           => 'foobar', 
-            'copyright'                     => 'foobar', 
-            'site_title'                    => 'foobar', 
-            'author'                        => 'foobar', 
-            'description'                   => 'foobar', 
-            'thumbnail_constraint'          => 'foobar', 
-            'square_thumbnail_constraint'   => 'foobar', 
-            'fullsize_constraint'           => 'foobar', 
-            'per_page_admin'                => 'foobar', 
-            'per_page_public'               => 'foobar', 
-            'show_empty_elements'           => 'foobar',
-            'path_to_convert'               => 'foobar',
-            Theme::ADMIN_THEME_OPTION       => Installer_Default::DEFAULT_ADMIN_THEME,
-            Theme::PUBLIC_THEME_OPTION      => Installer_Default::DEFAULT_PUBLIC_THEME,
+            'administrator_email' => 'foobar',
+            'copyright' => 'foobar',
+            'site_title' => 'foobar',
+            'author' => 'foobar',
+            'description' => 'foobar',
+            'thumbnail_constraint' => 'foobar',
+            'square_thumbnail_constraint' => 'foobar',
+            'fullsize_constraint' => 'foobar',
+            'per_page_admin' => 'foobar',
+            'per_page_public' => 'foobar',
+            'show_empty_elements' => 'foobar',
+            'path_to_convert' => 'foobar',
+            Theme::ADMIN_THEME_OPTION => Installer_Default::DEFAULT_ADMIN_THEME,
+            Theme::PUBLIC_THEME_OPTION => Installer_Default::DEFAULT_PUBLIC_THEME,
             Omeka_Validate_File_Extension::WHITELIST_OPTION => Omeka_Validate_File_Extension::DEFAULT_WHITELIST,
-            Omeka_Validate_File_MimeType::WHITELIST_OPTION  => Omeka_Validate_File_MimeType::DEFAULT_WHITELIST,
-            File::DISABLE_DEFAULT_VALIDATION_OPTION         => (string)!extension_loaded('fileinfo'),
+            Omeka_Validate_File_MimeType::WHITELIST_OPTION => Omeka_Validate_File_MimeType::DEFAULT_WHITELIST,
+            File::DISABLE_DEFAULT_VALIDATION_OPTION => (string) !extension_loaded('fileinfo'),
             Omeka_Db_Migration_Manager::VERSION_OPTION_NAME => OMEKA_VERSION,
-            'display_system_info'           => true,
-            'html_purifier_is_enabled'      => '1',
-            'html_purifier_allowed_html_elements'   => 'foo',
+            'display_system_info' => true,
+            'html_purifier_is_enabled' => '1',
+            'html_purifier_allowed_html_elements' => 'foo',
             'html_purifier_allowed_html_attributes' => 'bar',
-            'tag_delimiter'                 => ',',
-            Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME => 'foobar', 
+            'tag_delimiter' => ',',
+            Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME => 'foobar',
             'search_record_types' => 'foobar',
             'api_enable' => true,
             'api_per_page' => 50,
             'show_element_set_headings' => '1',
+            'use_square_thumbnail' => '1'
         ));
         $task->install($this->db);
         $this->profilerHelper->assertDbQuery(array(
             "INSERT INTO `test_options`",
             array(
                 1 => File::DISABLE_DEFAULT_VALIDATION_OPTION,
-                2 => (string)!extension_loaded('fileinfo'),
+                2 => (string) !extension_loaded('fileinfo'),
                 3 => File::DISABLE_DEFAULT_VALIDATION_OPTION,
-                4 => (string)!extension_loaded('fileinfo')
+                4 => (string) !extension_loaded('fileinfo')
             )
         ), "Should have inserted options into the database.");
     }

@@ -17,14 +17,14 @@ class Omeka_Validate_Confirmation extends Zend_Validate_Abstract
      * Error message for non-matching confirmation.
      */
     const NOT_MATCH = 'notMatch';
-    
+
     /**
      * Field needing confirmation.
      *
      * @var string
      */
     protected $_field;
-    
+
     /**
      * Error messages.
      *
@@ -33,7 +33,7 @@ class Omeka_Validate_Confirmation extends Zend_Validate_Abstract
     protected $_messageTemplates = array(
         self::NOT_MATCH => 'Confirmation does not match'
     );
-    
+
     /**
      * Error message replace variables.
      *
@@ -42,7 +42,7 @@ class Omeka_Validate_Confirmation extends Zend_Validate_Abstract
     protected $_messageVariables = array(
         'field' => '_field'
     );
-    
+
     /**
      * Sets validator options
      *
@@ -65,13 +65,12 @@ class Omeka_Validate_Confirmation extends Zend_Validate_Abstract
         $this->setField($field);
     }
 
-    
     /**
      * Check that the value is valid.
      *
      * @param string $value
      * @param string|array $context
-     * @return boolean
+     * @return bool
      */
     public function isValid($value, $context = null)
     {
@@ -81,8 +80,7 @@ class Omeka_Validate_Confirmation extends Zend_Validate_Abstract
         if (is_array($context)) {
             $confirmFieldName = $this->getField();
             if (isset($context[$confirmFieldName])
-                && ($value == $context[$confirmFieldName]))
-            {
+                && ($value == $context[$confirmFieldName])) {
                 return true;
             }
         } elseif (is_string($context) && ($value == $context)) {
@@ -92,7 +90,7 @@ class Omeka_Validate_Confirmation extends Zend_Validate_Abstract
         $this->_error(self::NOT_MATCH);
         return false;
     }
-    
+
     /**
      * Get the name of the field that needs confirmation.
      *
@@ -107,7 +105,6 @@ class Omeka_Validate_Confirmation extends Zend_Validate_Abstract
      * Set the name of the field that needs confirmation.
      * 
      * @param string $field
-     * @return void
      */
     public function setField($field)
     {

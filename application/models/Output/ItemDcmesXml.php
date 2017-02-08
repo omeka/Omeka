@@ -11,10 +11,10 @@
  */
 class Output_ItemDcmesXml
 {
-    private $_dcElements = array('Title', 'Subject', 'Description', 
-                                 'Creator', 'Source', 'Publisher', 
-                                 'Date', 'Contributor', 'Rights', 
-                                 'Relation', 'Format', 'Language', 
+    private $_dcElements = array('Title', 'Subject', 'Description',
+                                 'Creator', 'Source', 'Publisher',
+                                 'Date', 'Contributor', 'Rights',
+                                 'Relation', 'Format', 'Language',
                                  'Type', 'Identifier', 'Coverage');
 
     public function recordToDcmesXml($item)
@@ -22,16 +22,16 @@ class Output_ItemDcmesXml
         $xml = "\n" . '<rdf:Description rdf:about="' . xml_escape(record_url($item, null, true)) . '">';
         // Iterate throught the DCMES.
         foreach ($this->_dcElements as $elementName) {
-            if ($text = metadata($item, array('Dublin Core', $elementName), array('all'=>true, 'no_escape'=>true))) {
+            if ($text = metadata($item, array('Dublin Core', $elementName), array('all' => true, 'no_escape' => true))) {
                 foreach ($text as $k => $v) {
                     if (!empty($v)) {
-                        $xml .= "\n" . '<dc:' . strtolower($elementName) . '>' 
+                        $xml .= "\n" . '<dc:' . strtolower($elementName) . '>'
                             . xml_escape($v) . '</dc:' . strtolower($elementName) . '>';
                     }
                 }
             }
         }
         $xml .= "\n" . '</rdf:Description>';
-        return $xml;        
+        return $xml;
     }
 }

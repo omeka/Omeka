@@ -24,38 +24,37 @@ class Omeka_Controller_Plugin_Upgrade extends Zend_Controller_Plugin_Abstract
      * which otherwise causes an endless redirect.
      *
      * @param Zend_Controller_Request_Abstract $request Request object.
-     * @return void
      */
     public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
     {
         // Block access to the upgrade controller.
         if ($request->getControllerName() == 'upgrade'
          && $request->getModuleName() == 'default'
-         && !$this->_dbCanUpgrade() 
+         && !$this->_dbCanUpgrade()
         ) {
             $request->setControllerName('index')
                     ->setActionName('index')
                     ->setDispatched(false);
-        }        
+        }
         if ($this->_dbNeedsUpgrade()) {
             if (!is_admin_theme()) {
                 die("Public site is unavailable until the upgrade completes.");
             }
             // This is a workaround to avoid the authentication requirement.
             Zend_Controller_Front::getInstance()->unregisterPlugin('Omeka_Controller_Plugin_Admin');
-            
+
             if ($request->getControllerName() != 'upgrade') {
                 $this->_upgrade($request);
             }
         }
     }
-    
+
     private function _dbNeedsUpgrade()
     {
         $migrationManager = Omeka_Db_Migration_Manager::getDefault();
         return $migrationManager->dbNeedsUpgrade();
     }
-    
+
     private function _dbCanUpgrade()
     {
         $migrationManager = Omeka_Db_Migration_Manager::getDefault();
@@ -67,7 +66,6 @@ class Omeka_Controller_Plugin_Upgrade extends Zend_Controller_Plugin_Abstract
      *
      * @param Zend_Controller_Request_Abstract $request Request object
      * (not used).
-     * @return void
      */
     private function _upgrade($request)
     {
@@ -75,4 +73,3 @@ class Omeka_Controller_Plugin_Upgrade extends Zend_Controller_Plugin_Abstract
             ->goto('index', 'upgrade', 'default');
     }
 }
-

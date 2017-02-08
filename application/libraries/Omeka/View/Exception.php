@@ -11,4 +11,6 @@
  * 
  * @package Omeka\View
  */
-class Omeka_View_Exception extends Exception {}
+class Omeka_View_Exception extends Exception
+{
+}

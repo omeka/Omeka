@@ -50,7 +50,7 @@ class Omeka_Storage_Adapter_FilesystemTest extends PHPUnit_Framework_TestCase
     {
         $storage = new Omeka_Storage_Adapter_Filesystem(array('foobar' => true));
     }
-    
+
     public function testCanStore()
     {
         $cantStore = new Omeka_Storage_Adapter_Filesystem($this->_options);
@@ -79,7 +79,7 @@ class Omeka_Storage_Adapter_FilesystemTest extends PHPUnit_Framework_TestCase
         if (!$localDir) {
             $localDir = self::$tempDir;
         }
-        
+
         $storage = new Omeka_Storage_Adapter_Filesystem(array(
             'localDir' => $localDir,
         ));
@@ -91,9 +91,9 @@ class Omeka_Storage_Adapter_FilesystemTest extends PHPUnit_Framework_TestCase
                 $this->fail();
             }
         } catch (Omeka_Storage_Exception $e) {
-             if (!$throwsException) {
+            if (!$throwsException) {
                 $this->fail($e->getMessage());
-             }
+            }
         }
     }
 
@@ -105,7 +105,7 @@ class Omeka_Storage_Adapter_FilesystemTest extends PHPUnit_Framework_TestCase
         if (!$localDir) {
             $localDir = self::$tempDir;
         }
-        
+
         $storage = new Omeka_Storage_Adapter_Filesystem(array(
             'localDir' => $localDir,
         ));
@@ -117,9 +117,9 @@ class Omeka_Storage_Adapter_FilesystemTest extends PHPUnit_Framework_TestCase
                 $this->fail();
             }
         } catch (Omeka_Storage_Exception $e) {
-             if (!$throwsException) {
+            if (!$throwsException) {
                 $this->fail($e->getMessage());
-             }
+            }
         }
     }
 
@@ -144,7 +144,7 @@ class Omeka_Storage_Adapter_FilesystemTest extends PHPUnit_Framework_TestCase
     public static function notWritable()
     {
         return array(
-            array('store', array(self::_getRandomFilename(), 
+            array('store', array(self::_getRandomFilename(),
                                  self::_getRandomFilename())),
             array('move', array(self::_getRandomFilename(),
                                 self::_getRandomFilename())),

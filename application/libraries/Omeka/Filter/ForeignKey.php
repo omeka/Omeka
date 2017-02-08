@@ -21,14 +21,14 @@ class Omeka_Filter_ForeignKey implements Zend_Filter_Interface
      * of an unsigned integer (string, negative numbers, etc.)
      * 
      * @param mixed $value Input value.
-     * @return integer
+     * @return int
      */
     public function filter($value)
     {
         if (empty($value) || ((int) $value <= 0)) {
             return null;
         }
-        
+
         return (int) $value;
     }
 }

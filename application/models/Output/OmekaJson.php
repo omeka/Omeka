@@ -18,7 +18,7 @@ class Output_OmekaJson
      * JsonML XML stylesheet filename
      */
     const JSONML_XSLT_FILENAME = 'JsonML.xslt';
-    
+
     /**
      * Convert omeka-xml output to JSON.
      *
@@ -31,18 +31,18 @@ class Output_OmekaJson
 
         $xsldoc = new DOMDocument();
         $xsldoc->load($xsltPath);
-        
+
         $xsl = new XSLTProcessor();
         $xsl->importStyleSheet($xsldoc);
-        
+
         $omekaJson = $xsl->transformToXML($omekaXml->getDoc());
 
         // Enable JSONP if a callback was given.
         if (isset($_GET[Omeka_Controller_Plugin_Jsonp::CALLBACK_KEY])) {
             $callback = $_GET[Omeka_Controller_Plugin_Jsonp::CALLBACK_KEY];
-            $omekaJson =  "$callback($omekaJson)";
+            $omekaJson = "$callback($omekaJson)";
         }
-        
+
         return $omekaJson;
     }
 }

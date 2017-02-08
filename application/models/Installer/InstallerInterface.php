@@ -12,7 +12,7 @@
  * @package Omeka\Install
  */
 interface Installer_InstallerInterface
-{    
+{
     public function __construct(Omeka_Db $db);
     public function install();
     public function isInstalled();

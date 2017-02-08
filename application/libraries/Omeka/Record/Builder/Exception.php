@@ -13,4 +13,5 @@
  * @package Omeka\Record\Builder
  */
 class Omeka_Record_Builder_Exception extends Exception
-{}
+{
+}

@@ -15,8 +15,8 @@ class Table_ItemType extends Omeka_Db_Table
     {
         return array($this->_name . '.id', $this->_name . '.name');
     }
-    
-    public function findByName($itemTypeName) 
+
+    public function findByName($itemTypeName)
     {
         $select = $this->getSelect();
         $select->where($this->_name . '.name = ?', $itemTypeName);

@@ -12,6 +12,6 @@ echo head(array('title' => $pageTitle,
 
 <?php echo $this->partial('items/search-form.php',
     array('formAttributes' =>
-        array('id'=>'advanced-search-form'))); ?>
+        array('id' => 'advanced-search-form'))); ?>
 
 <?php echo foot(); ?>

@@ -24,7 +24,7 @@ class Omeka_Validate_Uri extends Zend_Validate_Abstract
     {
         $this->_setValue($value);
         $valid = Zend_Uri::check($value);
-        
+
         if (!$valid) {
             $this->_error(self::MSG_URI);
         }

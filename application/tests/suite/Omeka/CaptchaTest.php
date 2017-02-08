@@ -10,7 +10,7 @@
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Omeka_CaptchaTest extends PHPUnit_Framework_TestCase
-{   
+{
     public function setUp()
     {
         $this->bootstrap = new Omeka_Test_Bootstrap;

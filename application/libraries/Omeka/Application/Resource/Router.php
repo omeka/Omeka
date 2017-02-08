@@ -14,14 +14,14 @@
 class Omeka_Application_Resource_Router extends Zend_Application_Resource_Router
 {
     const HOMEPAGE_ROUTE_NAME = 'navigation_homepage';
-    
+
     /**
      * @return Zend_Controller_Router_Rewrite
      */
     public function init()
     {
         $router = parent::init();
-        
+
         $front = $this->getBootstrap()->getResource('Frontcontroller');
         if ($front->getParam('api')) {
             // The API route is the only valid route for an API request.
@@ -33,7 +33,7 @@ class Omeka_Application_Resource_Router extends Zend_Application_Resource_Router
         }
         return $router;
     }
-    
+
     /**
      * Adds the homepage route to the router (as specified by the navigation settings page)
      * The route will not be added if the user is currently on the admin theme.
@@ -41,7 +41,7 @@ class Omeka_Application_Resource_Router extends Zend_Application_Resource_Router
      * @param Zend_Controller_Router_Rewrite $router The router
      */
     private function _addHomepageRoute($router)
-    {        
+    {
         // Don't add the route if the user is on the admin theme
         if (is_admin_theme()) {
             return;
@@ -52,7 +52,7 @@ class Omeka_Application_Resource_Router extends Zend_Application_Resource_Router
         if (strpos($homepageUri, ADMIN_BASE_URL) === 0) {
             // homepage uri is an admin link
             $this->_addHomepageRedirect($homepageUri, $router);
-        } else if (strpos($homepageUri, '?') === false) {
+        } elseif (strpos($homepageUri, '?') === false) {
             // left trim root directory off of the homepage uri
             $relativeUri = $this->_leftTrim($homepageUri, PUBLIC_BASE_URL);
 
@@ -78,7 +78,7 @@ class Omeka_Application_Resource_Router extends Zend_Application_Resource_Router
         // query string
         $this->_addHomepageRedirect($homepageUri, $router);
     }
-    
+
     /**
      * Adds a redirect route for the homepage.
      *
@@ -87,7 +87,7 @@ class Omeka_Application_Resource_Router extends Zend_Application_Resource_Router
      *
      * @param string $uri The absolute uri to redirect to the default route to
      * @param Zend_Controller_Router_Rewrite $router The router
-     * @return boolean True if the route was successfully added, else false.
+     * @return bool True if the route was successfully added, else false.
      */
     protected function _addHomepageRedirect($uri, $router)
     {
@@ -98,7 +98,7 @@ class Omeka_Application_Resource_Router extends Zend_Application_Resource_Router
             || strpos($uri, '?') === 0 || strpos($uri, '/?') === 0) {
             return false;
         }
-        
+
         $router->addRoute(
              self::HOMEPAGE_ROUTE_NAME,
              new Zend_Controller_Router_Route('/', array(
@@ -107,10 +107,10 @@ class Omeka_Application_Resource_Router extends Zend_Application_Resource_Router
                 'redirect_uri' => $uri
              ))
         );
-        
+
         return true;
     }
-    
+
     /**
      * Left trims the first occurrence of a string within a string. 
      * Note: it will only trim the first occurrence of the string.
@@ -119,7 +119,7 @@ class Omeka_Application_Resource_Router extends Zend_Application_Resource_Router
      * @param string $n The string to remove from the left side of the base string
      * @return string
      */
-    protected function _leftTrim($s, $n) 
+    protected function _leftTrim($s, $n)
     {
         if ($n == '') {
             return $s;

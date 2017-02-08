@@ -19,7 +19,7 @@ class Models_UserTest extends PHPUnit_Framework_TestCase
         $this->db = new Omeka_Db($this->dbAdapter);
         $this->user = new User($this->db);
     }
-    
+
     public function testGetSetFormerEntityProperties()
     {
         $this->user->email = 'foobar@example.com';

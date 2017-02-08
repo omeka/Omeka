@@ -2,8 +2,8 @@
 if (!empty($formActionUri)):
     $formAttributes['action'] = $formActionUri;
 else:
-    $formAttributes['action'] = url(array('controller'=>'items',
-                                          'action'=>'browse'));
+    $formAttributes['action'] = url(array('controller' => 'items',
+                                          'action' => 'browse'));
 endif;
 $formAttributes['method'] = 'GET';
 ?>
@@ -30,7 +30,7 @@ $formAttributes['method'] = 'GET';
         if (!empty($_GET['advanced'])) {
             $search = $_GET['advanced'];
         } else {
-            $search = array(array('field'=>'','type'=>'','value'=>''));
+            $search = array(array('field' => '', 'type' => '', 'value' => ''));
         }
 
         //Here is where we actually build the search form
@@ -144,7 +144,7 @@ $formAttributes['method'] = 'GET';
         </div>
     </div>
 
-    <?php if(is_allowed('Users', 'browse')): ?>
+    <?php if (is_allowed('Users', 'browse')): ?>
     <div class="field">
     <?php
         echo $this->formLabel('user-search', __('Search By User'));?>
@@ -173,7 +173,7 @@ $formAttributes['method'] = 'GET';
     </div>
 
 
-    <?php if (is_allowed('Items','showNotPublic')): ?>
+    <?php if (is_allowed('Items', 'showNotPublic')): ?>
     <div class="field">
         <?php echo $this->formLabel('public', __('Public/Non-Public')); ?>
         <div class="inputs">
@@ -211,7 +211,9 @@ $formAttributes['method'] = 'GET';
 
     <?php fire_plugin_hook('public_items_search', array('view' => $this)); ?>
     <div>
-        <?php if (!isset($buttonText)) $buttonText = __('Search for items'); ?>
+        <?php if (!isset($buttonText)) {
+            $buttonText = __('Search for items');
+        } ?>
         <input type="submit" class="submit" name="submit_search" id="submit_search_advanced" value="<?php echo $buttonText ?>">
     </div>
 </form>

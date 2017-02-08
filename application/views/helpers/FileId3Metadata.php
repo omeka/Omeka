@@ -12,8 +12,8 @@
  * @package Omeka\View\Helper
  */
 class Omeka_View_Helper_FileId3Metadata extends Zend_View_Helper_Abstract
-{   
-    public function fileId3Metadata($file, $options) 
+{
+    public function fileId3Metadata($file, $options)
     {
         $output = '';
         if ($file->metadata) {
@@ -25,12 +25,11 @@ class Omeka_View_Helper_FileId3Metadata extends Zend_View_Helper_Abstract
         }
         return $output;
     }
-    
-    private function _arrayToList($array) 
+
+    private function _arrayToList($array)
     {
         $output = '<ul>';
-        foreach ($array as $key => $value)
-        {
+        foreach ($array as $key => $value) {
             if (is_array($value)) {
                 $output .= '<li><span class="id3-property-name">' . $key . '</span>' . $this->_arrayToList($value) . '</li>';
             } else {

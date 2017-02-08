@@ -13,9 +13,9 @@
  * 
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
- */ 
+ */
 class Helpers_GetRecordsTest extends PHPUnit_Framework_TestCase
-{   
+{
     public function setUp()
     {
         // Link a mock collections table to a mock database.
@@ -35,7 +35,7 @@ class Helpers_GetRecordsTest extends PHPUnit_Framework_TestCase
     {
         Zend_Registry::_unsetInstance();
     }
-    
+
     public function testDelegatesToCollectionTable()
     {
         $params = array('foobar' => true);
@@ -45,6 +45,6 @@ class Helpers_GetRecordsTest extends PHPUnit_Framework_TestCase
                  ->method('findBy')
                  ->with($params, $limit)
                  ->will($this->returnValue(array($collection)));
-        $this->assertEquals(array($collection), get_records('Collection', $params, $limit));             
+        $this->assertEquals(array($collection), get_records('Collection', $params, $limit));
     }
 }

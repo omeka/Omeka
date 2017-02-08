@@ -14,26 +14,25 @@
 abstract class Omeka_Db_Migration_AbstractMigration implements Omeka_Db_Migration_MigrationInterface
 {
     protected $db;
-        
+
     /**
      * Set the database to migrate.
      * 
      * @param Omeka_Db $db
-     * @return void
      */
     public function setDb(Omeka_Db $db)
     {
         $this->db = $db;
     }
-    
+
     /**
      * @return Omeka_Db
      */
     public function getDb()
     {
         return $this->db;
-    } 
-    
+    }
+
     /**
      * Template method for reversing the migration.
      * 
@@ -42,8 +41,10 @@ abstract class Omeka_Db_Migration_AbstractMigration implements Omeka_Db_Migratio
      * implement the down() method.  This ensures backwards compatibility for 
      * those migrations. 
      */
-    public function down() {}
-    
+    public function down()
+    {
+    }
+
     /**
      * Proxy calls to Omeka_Db.
      *
@@ -56,11 +57,11 @@ abstract class Omeka_Db_Migration_AbstractMigration implements Omeka_Db_Migratio
     {
         return call_user_func_array(array($this->getDb(), $m), $a);
     }
-        
+
     /**
      * If the migration requires a form submission, here's where to handle display of it
-     * 
-     * @return void
      */
-    public function form() {}
+    public function form()
+    {
+    }
 }

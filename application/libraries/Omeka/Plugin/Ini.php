@@ -69,7 +69,7 @@ class Omeka_Plugin_Ini
      * Return whether a plugin has a plugin.ini file
      *
      * @param string $pluginDirName Plugin name.
-     * @return boolean
+     * @return bool
      */
     public function hasPluginIniFile($pluginDirName)
     {
@@ -94,7 +94,6 @@ class Omeka_Plugin_Ini
      * Initialize a Plugin model object with the values from the INI file.
      *
      * @param Plugin $plugin The plugin model to initialize.
-     * @return void
      */
     public function load(Plugin $plugin)
     {
@@ -104,17 +103,17 @@ class Omeka_Plugin_Ini
         }
 
         $setters = array(
-            'setDisplayName'            => 'name',
-            'setAuthor'                 => 'author',
-            'setDescription'            => 'description',
-            'setLinkUrl'                => 'link',
-            'setMinimumOmekaVersion'    => 'omeka_minimum_version',
+            'setDisplayName' => 'name',
+            'setAuthor' => 'author',
+            'setDescription' => 'description',
+            'setLinkUrl' => 'link',
+            'setMinimumOmekaVersion' => 'omeka_minimum_version',
             'setTestedUpToOmekaVersion' => 'omeka_tested_up_to',
-            'setIniVersion'             => 'version',
-            'setRequiredPlugins'        => 'required_plugins',
-            'setOptionalPlugins'        => 'optional_plugins',
-            'setIniTags'                => 'tags',
-            'setSupportLinkUrl'         => 'support_link'
+            'setIniVersion' => 'version',
+            'setRequiredPlugins' => 'required_plugins',
+            'setOptionalPlugins' => 'optional_plugins',
+            'setIniTags' => 'tags',
+            'setSupportLinkUrl' => 'support_link'
         );
 
         foreach ($setters as $method => $iniField) {
