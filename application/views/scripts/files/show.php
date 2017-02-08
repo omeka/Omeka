@@ -8,12 +8,12 @@ if ($fileTitle != '') {
 }
 $fileTitle = __('File #%s', metadata('file', 'id')) . $fileTitle;
 ?>
-<?php echo head(array('title' => $fileTitle, 'bodyclass'=>'files show primary-secondary')); ?>
+<?php echo head(array('title' => $fileTitle, 'bodyclass' => 'files show primary-secondary')); ?>
 
 <h1><?php echo $fileTitle; ?></h1>
 
 <div id="primary">
-    <?php echo file_markup($file, array('imageSize'=>'fullsize')); ?>
+    <?php echo file_markup($file, array('imageSize' => 'fullsize')); ?>
     <?php echo all_element_texts('file'); ?>
 </div>
 

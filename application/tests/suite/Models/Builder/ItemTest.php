@@ -6,8 +6,6 @@
  */
 
 /**
- * 
- *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
@@ -18,7 +16,7 @@ class Models_Builder_ItemTest extends Omeka_Test_AppTestCase
         parent::setUp();
         $this->builder = new Builder_Item($this->db);
     }
-    
+
     public function testCanSetItemTypeByName()
     {
         $this->builder->setRecordMetadata(array(
@@ -30,7 +28,7 @@ class Models_Builder_ItemTest extends Omeka_Test_AppTestCase
         $this->assertThat($itemType, $this->isInstanceOf('ItemType'));
         $this->assertEquals('Still Image', $itemType->name);
     }
-    
+
     public function testCanAddTagsToItem()
     {
         $this->builder->setRecordMetadata(array(

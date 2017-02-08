@@ -11,7 +11,6 @@
  */
 class Job_ItemBatchEdit extends Omeka_Job_AbstractJob
 {
-    
     public function perform()
     {
         if (!($itemIds = $this->_options['itemIds'])) {
@@ -32,7 +31,7 @@ class Job_ItemBatchEdit extends Omeka_Job_AbstractJob
                     }
                 }
                 update_item($item, $metadata);
-                fire_plugin_hook('items_batch_edit_custom', 
+                fire_plugin_hook('items_batch_edit_custom',
                                  array('item' => $item, 'custom' => $custom));
             }
             release_object($item);

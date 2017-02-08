@@ -13,7 +13,6 @@
  */
 class notRunYet extends Omeka_Db_Migration_AbstractMigration
 {
-    
     public function up()
     {
         throw new Omeka_Db_Migration_Exception(__('This migration should not be run.'));

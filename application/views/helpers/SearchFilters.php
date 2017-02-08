@@ -52,10 +52,10 @@ class Omeka_View_Helper_SearchFilters extends Zend_View_Helper_Abstract
         }
 
         return $this->view->partial(
-            'search/search-filters.php', 
-            array('options'      => $options, 
-                  'query'        => $query,
-                  'query_type'   => $validQueryTypes[$queryType],
+            'search/search-filters.php',
+            array('options' => $options,
+                  'query' => $query,
+                  'query_type' => $validQueryTypes[$queryType],
                   'record_types' => $recordTypes)
         );
     }

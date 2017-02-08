@@ -30,12 +30,12 @@ class Mixin_Search extends Omeka_Record_Mixin_AbstractMixin
     protected $_text;
     protected $_title;
     protected $_public = 1;
-    
+
     public function __construct($record)
     {
         $this->_record = $record;
     }
-    
+
     /**
      * Add search text to this record.
      * 
@@ -47,7 +47,7 @@ class Mixin_Search extends Omeka_Record_Mixin_AbstractMixin
     {
         $this->_text .= "$text ";
     }
-    
+
     /**
      * Add a title to this record.
      * 
@@ -59,7 +59,7 @@ class Mixin_Search extends Omeka_Record_Mixin_AbstractMixin
     {
         $this->_title = $title;
     }
-    
+
     /**
      * Mark this record's search text as not public.
      * 
@@ -69,16 +69,16 @@ class Mixin_Search extends Omeka_Record_Mixin_AbstractMixin
     {
         $this->_public = false;
     }
-    
+
     /**
      * Save the accumulated search text to the database.
      */
     public function afterSave($args)
     {
-        self::saveSearchText(get_class($this->_record), $this->_record->id, 
+        self::saveSearchText(get_class($this->_record), $this->_record->id,
             $this->_text, $this->_title, $this->_public);
     }
-    
+
     /**
      * Delete this record's search text after it has been deleted.
      */
@@ -90,7 +90,7 @@ class Mixin_Search extends Omeka_Record_Mixin_AbstractMixin
             $searchText->delete();
         }
     }
-    
+
     /**
      * Save a search text row.
      * 
@@ -105,18 +105,19 @@ class Mixin_Search extends Omeka_Record_Mixin_AbstractMixin
      * @param string $title
      * @param int $public
      */
-    public static function saveSearchText($recordType, $recordId, $text, $title, $public = 1) {
-        
-        // Index this record only if it's of a type that is registered in the 
+    public static function saveSearchText($recordType, $recordId, $text, $title, $public = 1)
+    {
+
+        // Index this record only if it's of a type that is registered in the
         // search_record_types filter.
         if (!array_key_exists($recordType, get_search_record_types())) {
             return;
         }
-        
+
         $searchText = Zend_Registry::get('bootstrap')->getResource('Db')
             ->getTable('SearchText')->findByRecord($recordType, $recordId);
-        
-        // Either don't save the search text or delete an existing search text 
+
+        // Either don't save the search text or delete an existing search text
         // row if the record has no assigned text.
         if (!trim($text)) {
             if ($searchText) {
@@ -124,7 +125,7 @@ class Mixin_Search extends Omeka_Record_Mixin_AbstractMixin
             }
             return;
         }
-        
+
         if (!$searchText) {
             $searchText = new SearchText;
             $searchText->record_type = $recordType;

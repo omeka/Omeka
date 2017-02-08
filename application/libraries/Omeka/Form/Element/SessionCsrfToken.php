@@ -49,8 +49,6 @@ class Omeka_Form_Element_SessionCsrfToken extends Zend_Form_Element_Xhtml
      *
      * Creates session namespace for CSRF token, and adds validator for CSRF
      * token.
-     *
-     * @return void
      */
     public function init()
     {
@@ -112,8 +110,6 @@ class Omeka_Form_Element_SessionCsrfToken extends Zend_Form_Element_Xhtml
 
     /**
      * Override getLabel() to always be empty
-     *
-     * @return null
      */
     public function getLabel()
     {
@@ -153,15 +149,13 @@ class Omeka_Form_Element_SessionCsrfToken extends Zend_Form_Element_Xhtml
 
     /**
      * Generate CSRF token
-     *
-     * @return void
      */
     protected function _generateToken()
     {
         return md5(
-            mt_rand(1,1000000)
+            mt_rand(1, 1000000)
             .  self::SESSION_NAME
-            .  mt_rand(1,1000000)
+            .  mt_rand(1, 1000000)
         );
     }
 }

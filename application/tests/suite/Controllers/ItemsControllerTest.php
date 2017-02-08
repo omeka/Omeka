@@ -12,7 +12,7 @@
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
-{   
+{
     const XSS_QUERY_STRING = '"><script>alert(11639)</script>';
 
     public function setUp()
@@ -24,7 +24,7 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
     public function dispatch($url = null, $callback = null)
     {
         if ($callback) {
-            $callback = (array)$callback;
+            $callback = (array) $callback;
             foreach ($callback as $c) {
                 $this->$c();
             }
@@ -70,7 +70,7 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
     public function testFormPresence($url, $query, $callback = null)
     {
         $this->dispatch($url, $callback);
-        $this->assertQuery($query, (string)$this->response->getBody());
+        $this->assertQuery($query, (string) $this->response->getBody());
     }
 
     public static function ajaxRequired()
@@ -219,5 +219,4 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
             $this->request->setPost($post);
         }
     }
-
 }

@@ -13,4 +13,5 @@
  * @package Omeka\File\Derivative
  */
 class Omeka_File_Derivative_Exception extends Exception
-{}
+{
+}

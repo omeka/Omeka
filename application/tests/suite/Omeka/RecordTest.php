@@ -6,17 +6,15 @@
  */
 
 /**
- * 
- *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Omeka_RecordTest extends PHPUnit_Framework_TestCase
-{   
+{
     const VALIDATION_ERROR = "Do Not Set: Do Not Set property will automatically invalidate the record.";
-     
-    const DUMMY_RECORD_ID = 1; 
-     
+
+    const DUMMY_RECORD_ID = 1;
+
     private static $_eventStack = array();
 
     public function setUp()
@@ -25,7 +23,7 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
         $this->db = new Omeka_Db($this->dbAdapter);
         $this->pluginBroker = new Omeka_Plugin_Broker;
     }
-    
+
     /**
      * @expectedException Omeka_Record_Exception
      */
@@ -38,7 +36,7 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
             throw $e;
         }
     }
-    
+
     public function testGetRelatedMetadata()
     {
         $record = new DummyRecord($this->db);
@@ -46,7 +44,7 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
         $record->setFoobar(true);
         $this->assertTrue($record->Foobar);
     }
-    
+
     public function testGetSetPluginBroker()
     {
         $record = new DummyRecord($this->db);
@@ -55,30 +53,30 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
         $bootstrap = new Omeka_Test_Bootstrap;
         $bootstrap->getContainer()->pluginbroker = $this->pluginBroker;
         Zend_Registry::set('bootstrap', $bootstrap);
-        
+
         $this->assertSame($this->pluginBroker, $record->getPluginBroker());
         $mockPluginBroker = $this->getMock('Omeka_Plugin_Broker', array(), array(), '', false);
         $record->setPluginBroker($mockPluginBroker);
         $this->assertSame($mockPluginBroker, $record->getPluginBroker());
     }
-    
+
     public function testDelegateToMixinMethod()
     {
         $record = new DummyRecord($this->db);
         $this->assertTrue($record->dummyMixinMethod());
     }
-    
+
     public function testAddHasGetErrors()
     {
         $record = new DummyRecord($this->db);
         $this->assertFalse($record->hasErrors());
-        $this->assertEquals("", (string)$record->getErrors());
+        $this->assertEquals("", (string) $record->getErrors());
         $record->addError('Whatever', "This error message can be whatever we want.");
         $this->assertTrue($record->hasErrors());
         $this->assertEquals("Whatever: This error message can be whatever we want.",
-            (string)$record->getErrors());
+            (string) $record->getErrors());
     }
-    
+
     public function testAddErrorsFromOtherRecord()
     {
         $record = new DummyRecord($this->db);
@@ -87,34 +85,34 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
         $record->addErrorsFrom($otherRecord);
         $this->assertTrue($record->hasErrors());
         $this->assertEquals("Random: This error was from a different record.",
-            (string)$record->getErrors());
+            (string) $record->getErrors());
     }
-        
+
     public function testValidation()
     {
         // Dummy record should be valid by default
         $record = new DummyRecord($this->db);
         $this->assertTrue($record->isValid());
-        
+
         $record->do_not_set = true;
         $this->assertFalse($record->isValid());
-        
+
         $this->assertContains(self::VALIDATION_ERROR,
-                              (string)$record->getErrors());
+                              (string) $record->getErrors());
     }
-    
+
     public function testExists()
     {
         $record = new DummyRecord($this->db);
         $this->assertFalse($record->exists());
         $record->id = 1;
         $this->assertTrue($record->exists());
-        
+
         // Should fail with non-numeric ids as well.
         $record->id = '; DELETE FROM items; --';
         $this->assertFalse($record->exists());
     }
-    
+
     /**
      * @expectedException Omeka_Record_Exception
      */
@@ -144,25 +142,25 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
             throw $e;
         }
     }
-        
+
     public function testGetTable()
     {
         $record = new DummyRecord($this->db);
         $dummyTable = new Omeka_Db_Table('DummyRecord', $this->db);
         $this->db->setTable('DummyRecord', $dummyTable);
         $this->assertSame($dummyTable, $record->getTable());
-        
+
         $otherTable = new Omeka_Db_Table('Other', $this->db);
         $this->db->setTable('Other', $otherTable);
         $this->assertSame($otherTable, $record->getTable('Other'));
-    }    
-    
+    }
+
     public function testGetDb()
     {
         $record = new DummyRecord($this->db);
         $this->assertSame($this->db, $record->getDb());
     }
-    
+
     public function testToArray()
     {
         $record = new DummyRecord($this->db);
@@ -171,10 +169,10 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
         $dummyTable = new Omeka_Db_Table('DummyRecord', $this->db);
         $this->db->setTable('DummyRecord', $dummyTable);
         $this->assertEquals(array('id' => 1, 'do_not_set' => 'foobar', 'other_field' => null), $record->toArray());
-    }    
-        
+    }
+
     public function testSaveInsertsNewRecord()
-    {   
+    {
         $this->dbAdapter->appendLastInsertIdToStack(5);
         $record = new DummyRecord($this->db);
         $record->save();
@@ -184,7 +182,7 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($record->exists());
         $this->assertEquals(5, $record->id);
     }
-    
+
     public function testSaveUpdatesExistingRecord()
     {
         $record = new DummyRecord($this->db);
@@ -192,7 +190,7 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
         $record->save();
         $this->assertContains('DummyRecord::beforeSave(), insert = false', self::$_eventStack);
     }
-    
+
     public function testSaveFiresCallbacksInCorrectOrder()
     {
         $this->dbAdapter->appendLastInsertIdToStack(self::DUMMY_RECORD_ID);
@@ -203,7 +201,7 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
             'DummyRecord::afterSave(), insert = true',
         ), $this->_simpleStack());
     }
-    
+
     /**
      * @expectedException Omeka_Validate_Exception
      */
@@ -216,9 +214,9 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
         } catch (Exception $e) {
             $this->assertContains(self::VALIDATION_ERROR, $e->getMessage());
             throw $e;
-        }        
+        }
     }
-    
+
     public function testClone()
     {
         $record = new DummyRecord($this->db);
@@ -227,7 +225,7 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
         $clonedRecord = clone $record;
         $this->assertFalse($clonedRecord->exists());
     }
-    
+
     public function testDelete()
     {
         $record = new DummyRecord($this->db);
@@ -239,14 +237,14 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($record->exists());
         $this->assertNull($record->id);
     }
-    
+
     public function testDeleteWithInvalidId()
     {
         $record = new DummyRecord($this->db);
         $record->id = '; DELETE FROM items; --';
         $this->assertFalse($record->delete());
     }
-    
+
     public function testSetArray()
     {
         $record = new DummyRecord($this->db);
@@ -254,7 +252,7 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, $record->id);
         $this->assertEquals('whatever', $record->do_not_set);
     }
-        
+
     /**
      * @expectedException Omeka_Validate_Exception
      */
@@ -272,33 +270,33 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
             throw $e;
         }
     }
-    
+
     public function testSetFromPostBlocksIdField()
     {
         $this->dbAdapter->appendLastInsertIdToStack(self::DUMMY_RECORD_ID);
         $record = new DummyRecord($this->db);
         $post = array(
             'id' => 2,
-        );    
+        );
         $record->setPostData($post);
         $this->assertNotEquals(2, $record->id);
     }
-        
+
     public function tearDown()
     {
         self::$_eventStack = array();
         Zend_Registry::_unsetInstance();
     }
-    
+
     public static function addToEventStack($event)
     {
         self::$_eventStack[] = $event;
     }
-    
+
     private function _simpleStack()
     {
         $stack = self::$_eventStack;
-        // Clear out the mixin/plugin hook events so we can see the basic 
+        // Clear out the mixin/plugin hook events so we can see the basic
         // callback structure.
         foreach ($stack as $key => $event) {
             if (strpos($event, "DummyMixin") !== false) {
@@ -311,31 +309,31 @@ class Omeka_RecordTest extends PHPUnit_Framework_TestCase
 }
 
 class DummyRecord extends Omeka_Record_AbstractRecord
-{   
+{
     /**
      * Setting this property will automatically invalidate the record.
      */
     public $do_not_set = null;
-    
+
     public $other_field = null;
-    
+
     protected $_related = array('Foobar' => 'getFoobar');
-    
+
     protected function _initializeMixins()
     {
         $this->_mixins[] = new DummyMixin($this);
     }
-    
+
     public function getFoobar()
     {
         return $this->_foobar;
     }
-    
+
     public function setFoobar($flag)
     {
         $this->_foobar = $flag;
     }
-    
+
     protected function beforeSave($args)
     {
         if ($args['insert']) {
@@ -344,7 +342,7 @@ class DummyRecord extends Omeka_Record_AbstractRecord
             Omeka_RecordTest::addToEventStack('DummyRecord::beforeSave(), insert = false');
         }
     }
-    
+
     protected function afterSave($args)
     {
         if ($args['insert']) {
@@ -353,21 +351,23 @@ class DummyRecord extends Omeka_Record_AbstractRecord
             Omeka_RecordTest::addToEventStack('DummyRecord::aftrerSave(), insert = false');
         }
     }
-    
+
     /**
      * Executes before the record is deleted.
      */
-    protected function beforeDelete() {
+    protected function beforeDelete()
+    {
         Omeka_RecordTest::addToEventStack('DummyRecord::beforeDelete()');
     }
-    
+
     /**
      * Executes after the record is deleted.
      */
-    protected function afterDelete() {
+    protected function afterDelete()
+    {
         Omeka_RecordTest::addToEventStack('DummyRecord::afterDelete()');
     }
-    
+
     protected function _validate()
     {
         if ($this->do_not_set) {
@@ -382,7 +382,7 @@ class DummyMixin extends Omeka_Record_Mixin_AbstractMixin
     {
         return true;
     }
-    
+
     public function beforeSave($args)
     {
         Omeka_RecordTest::addToEventStack('DummyMixin::beforeSave()');

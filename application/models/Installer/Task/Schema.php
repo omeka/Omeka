@@ -14,7 +14,7 @@
  * @package Omeka\Install
  */
 class Installer_Task_Schema implements Installer_TaskInterface
-{   
+{
     private $_defaultTables = array(
         'collections',
         'element_texts',
@@ -35,9 +35,9 @@ class Installer_Task_Schema implements Installer_TaskInterface
         'search_texts',
         'keys',
     );
-    
+
     private $_tables = array();
-    
+
     /**
      * Add an SQL table to the list of tables to create.
      * 
@@ -51,7 +51,7 @@ class Installer_Task_Schema implements Installer_TaskInterface
         }
         $this->_tables[$tableName] = $sqlFilePath;
     }
-    
+
     /**
      * Add a set of SQL tables to the list.
      * 
@@ -63,7 +63,7 @@ class Installer_Task_Schema implements Installer_TaskInterface
             $this->addTable($tableName, $sqlFilePath);
         }
     }
-    
+
     /**
      * Set the list of SQL tables.
      * 
@@ -74,7 +74,7 @@ class Installer_Task_Schema implements Installer_TaskInterface
         $this->_tables = array();
         $this->addTables($tables);
     }
-    
+
     /**
      * Remove an SQL table from the list.
      * 
@@ -87,7 +87,7 @@ class Installer_Task_Schema implements Installer_TaskInterface
         }
         unset($this->_tables[$tableName]);
     }
-    
+
     /**
      * Retrieve list of tables being installed.
      */
@@ -95,29 +95,29 @@ class Installer_Task_Schema implements Installer_TaskInterface
     {
         return $this->_tables;
     }
-    
+
     /**
      * Add all tables corresponding to the default Omeka installation.
-     */        
+     */
     public function useDefaultTables()
     {
         foreach ($this->_defaultTables as $tableName) {
             $this->_tables[$tableName] = SCHEMA_DIR . "/$tableName.sql";
         }
     }
-            
+
     public function install(Omeka_Db $db)
     {
         if (empty($this->_tables)) {
             throw new Installer_Task_Exception("No SQL files were given to create the schema.");
         }
-        
+
         foreach ($this->_tables as $tableName => $sqlFilePath) {
             try {
                 $db->loadSqlFile($sqlFilePath);
             } catch (Zend_Db_Exception $e) {
                 throw new Installer_Task_Exception("Schema task failed"
-                    . " on table '" . $db->prefix . $tableName . "' with " 
+                    . " on table '" . $db->prefix . $tableName . "' with "
                     . get_class($e) . ": " . $e->getMessage());
             }
         }

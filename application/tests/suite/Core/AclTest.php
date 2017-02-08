@@ -14,11 +14,9 @@
 class Core_AclTest extends PHPUnit_Framework_TestCase
 {
     private $_acl;
-    
+
     /**
      * Include the defined ACL, exactly the way Omeka loads it by default.
-     * 
-     * @return void
      */
     public function setUp()
     {
@@ -38,7 +36,7 @@ class Core_AclTest extends PHPUnit_Framework_TestCase
             array(false, null, 'Items', 'add'),
             array(false, null, 'Collections', 'add'),
             array(false, null, 'ItemTypes', 'add'),
-            array(false, null, 'Themes', 'config'), 
+            array(false, null, 'Themes', 'config'),
             array(false, null, 'Themes', 'browse'),
             array(false, null, 'Themes', 'switch'),
             array(false, null, 'Settings', 'edit'),
@@ -71,7 +69,7 @@ class Core_AclTest extends PHPUnit_Framework_TestCase
      */
     public function testAcl($isAllowed, $role, $resource, $privilege = null)
     {
-        $this->assertEquals($isAllowed, 
+        $this->assertEquals($isAllowed,
             $this->_acl->isAllowed($role, $resource, $privilege));
     }
 }

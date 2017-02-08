@@ -45,7 +45,7 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
     protected $_record;
 
     public function elementForm(Element $element, Omeka_Record_AbstractRecord $record, $options = array())
-    {    
+    {
         $divWrap = isset($options['divWrap']) ? $options['divWrap'] : true;
         $extraFieldCount = isset($options['extraFieldCount']) ? $options['extraFieldCount'] : null;
 
@@ -62,24 +62,24 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
         $descriptionComponent = $this->_getDescriptionComponent();
         $commentComponent = $this->_getCommentComponent();
         $addInputComponent = $this->view->formButton('add_element_' . $this->_element['id'],
-            __('Add Input'), array('class'=>'add-element'));
+            __('Add Input'), array('class' => 'add-element'));
         $components = array(
             'label' => $labelComponent,
             'inputs' => $inputsComponent,
             'description' => $descriptionComponent,
             'comment' => $commentComponent,
             'add_input' => $addInputComponent,
-            'html' => null 
+            'html' => null
         );
 
         $elementSetName = $element->set_name;
         $recordType = get_class($record);
         $filterName = array('ElementForm', $recordType, $elementSetName, $element->name);
         $components = apply_filters(
-            $filterName, 
+            $filterName,
             $components,
-            array('record' => $record, 
-                  'element' => $element, 
+            array('record' => $record,
+                  'element' => $element,
                   'options' => $options)
         );
 
@@ -89,7 +89,7 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
 
         // Compose html for element form
         $html = $divWrap ? '<div class="field" id="element-' . html_escape($element->id) . '">' : '';
-        
+
         $html .= '<div class="two columns alpha">';
         $html .= $components['label'];
         $html .= $components['add_input'];
@@ -115,12 +115,12 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
     {
         return html_escape($this->_element['description']);
     }
-    
+
     protected function _getFieldComment()
     {
         return html_escape($this->_element['comment']);
     }
-    
+
     protected function _isPosted()
     {
         $postArray = $this->_getPostArray();
@@ -140,7 +140,7 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
     /**
      * How many form inputs to display for a given element.
      *
-     * @return integer
+     * @return int
      */
     protected function _getFormFieldCount()
     {
@@ -156,7 +156,7 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
 
     /**
      * @uses ActsAsElementText::getTextStringFromFormPost()
-     * @param integer
+     * @param int
      * @return mixed
      */
     protected function _getPostValueForField($index)
@@ -194,7 +194,7 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
     /**
      * Retrieve the form value for the field.
      *
-     * @param integer
+     * @param int
      * @return string
      */
     protected function _getValueForField($index)
@@ -215,9 +215,8 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
      * If index is not given, return all texts.
      *
      * @param string
-     * @return void
      */
-    public function getElementTexts($index=null)
+    public function getElementTexts($index = null)
     {
         $texts = $this->_record->getElementTextsByRecord($this->_element);
         if ($index !== null) {
@@ -234,7 +233,7 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
     {
         $fieldCount = $this->_getFormFieldCount() + (int) $extraFieldCount;
         $html = '';
-        for ($i=0; $i < $fieldCount; $i++) {
+        for ($i = 0; $i < $fieldCount; $i++) {
             $html .= $this->view->elementInput(
                 $this->_element, $this->_record, $i,
                 $this->_getValueForField($i), $this->_getHtmlFlagForField($i));
@@ -245,10 +244,10 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
     protected function _getDescriptionComponent()
     {
         return '<p class="explanation">' . __($this->_getFieldDescription()) .'</p>';
-    }  
-        
-    protected function _getCommentComponent() 
-    { 
+    }
+
+    protected function _getCommentComponent()
+    {
         if ($this->_getFieldComment()) {
             return '<p class="explanation">' . $this->_getFieldComment() .'</p>';
         }

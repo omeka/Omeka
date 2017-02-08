@@ -11,6 +11,6 @@
  * 
  * @package Omeka\Application\Resource
  */
-class Omeka_Application_Resource_Jobs_InvalidAdapterException extends InvalidArgumentException 
-    implements Omeka_Application_Resource_Exception 
-{}
+class Omeka_Application_Resource_Jobs_InvalidAdapterException extends InvalidArgumentException implements Omeka_Application_Resource_Exception
+{
+}

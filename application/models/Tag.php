@@ -11,8 +11,8 @@
  * 
  * @package Omeka\Record
  */
-class Tag extends Omeka_Record_AbstractRecord {
-
+class Tag extends Omeka_Record_AbstractRecord
+{
     /**
      * The tag text.
      *
@@ -25,9 +25,11 @@ class Tag extends Omeka_Record_AbstractRecord {
      *
      * @return string
      */
-    public function __toString() {
+    public function __toString()
+    {
         return $this->name;
     }
+
     /**
      * Executes after the record is inserted.
      */
@@ -39,7 +41,7 @@ class Tag extends Omeka_Record_AbstractRecord {
                 SELECT `record_type`, `record_id`
                 FROM `{$db->RecordsTags}`
                 WHERE `tag_id` = " . (int) $this->id;
-            // safer to pass SQL here, it's unclear how many records needs to be updated, 
+            // safer to pass SQL here, it's unclear how many records needs to be updated,
             // and `args` column in `processes` table is only TEXT data type
             Zend_Registry::get('bootstrap')->getResource('jobs')
                 ->sendLongRunning('Job_SearchTextIndex', array(
@@ -47,6 +49,7 @@ class Tag extends Omeka_Record_AbstractRecord {
                 ));
         }
     }
+
     /**
      * Delete handling for a tag.
      * 
@@ -57,7 +60,7 @@ class Tag extends Omeka_Record_AbstractRecord {
         $taggings = $this->getDb()
                          ->getTable('RecordsTags')
                          ->findBySql('tag_id = ?', array((int) $this->id));
-        
+
         foreach ($taggings as $tagging) {
             $tagging->delete();
         }
@@ -73,7 +76,7 @@ class Tag extends Omeka_Record_AbstractRecord {
         if (trim($this->name) == '') {
             $this->addError('name', __('Tags must be given a name.'));
         }
-        
+
         if (!$this->fieldIsUnique('name')) {
             $this->addError('name', __('That name is already taken for this tag.'));
         }
@@ -89,7 +92,7 @@ class Tag extends Omeka_Record_AbstractRecord {
      * @param array $new_names Names of the tags this one should be
      *  renamed to.
      */
-    public function rename($new_names) 
+    public function rename($new_names)
     {
         $taggings = $this->getTable('RecordsTags')->findBy(array('tag' => $this->name));
         $keepOldTaggings = false;
@@ -98,7 +101,7 @@ class Tag extends Omeka_Record_AbstractRecord {
         // to do anything to it or its taggings.
         if (in_array($this->name, $new_names)) {
             $new_names = array_diff($new_names, array($this->name));
-            
+
             // If the current name was the only new name, stop.
             if (!count($new_names)) {
                 return true;
@@ -109,22 +112,22 @@ class Tag extends Omeka_Record_AbstractRecord {
         } else {
             $this->delete();
         }
-        
+
         // Switch the existing taggings to the first of the new names,
         // and create new taggings for the remainder.
         foreach ($new_names as $key => $new_name) {
             $new_tag = $this->getTable()->findOrNew($new_name);
             $new_tag_id = $new_tag->id;
-                        
+
             foreach ($taggings as $tagging) {
                 // After the first pass, or if we didn't delete the
                 // original tag, operate on new copies of the taggings
                 if ($key > 0 || $keepOldTaggings) {
                     $tagging = clone $tagging;
                 }
-                
+
                 $tagging->tag_id = $new_tag_id;
-                
+
                 try {
                     $tagging->save();
                 } catch (Zend_Db_Exception $e) {

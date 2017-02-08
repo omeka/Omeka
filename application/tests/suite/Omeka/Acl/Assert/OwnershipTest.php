@@ -52,9 +52,9 @@ class Omeka_Acl_Assert_OwnershipTest extends Omeka_Test_AppTestCase
      *
      * @dataProvider userResourceProvider
      * @param string $userKey
-     * @param boolean $whenOwner
-     * @param boolean $whenNotOwner
-     * @param boolean $generally
+     * @param bool $whenOwner
+     * @param bool $whenNotOwner
+     * @param bool $generally
      */
     public function testOwnershipAcl($userKey, $whenOwner, $whenNotOwner, $generally)
     {
@@ -97,7 +97,7 @@ class Omeka_Acl_Assert_OwnershipTest extends Omeka_Test_AppTestCase
      * Avoids having to save new items or attempt to create the
      * correct entity relation structure.
      *
-     * @param boolean $addedBySelf
+     * @param bool $addedBySelf
      * @return Item mock Item object
      */
     private function _getMockItem($addedBySelf)

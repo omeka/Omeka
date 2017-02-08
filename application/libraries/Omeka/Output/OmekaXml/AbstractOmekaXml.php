@@ -16,18 +16,18 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
     /**
      * XML Schema instance namespace URI.
      */
-    const XMLNS_XSI            = 'http://www.w3.org/2001/XMLSchema-instance';
-    
+    const XMLNS_XSI = 'http://www.w3.org/2001/XMLSchema-instance';
+
     /**
      * Omeka-XML namespace URI.
      */
-    const XMLNS                = 'http://omeka.org/schemas/omeka-xml/v5';
-    
+    const XMLNS = 'http://omeka.org/schemas/omeka-xml/v5';
+
     /**
      * Omeka-XML XML Schema URI.
      */
     const XMLNS_SCHEMALOCATION = 'http://omeka.org/schemas/omeka-xml/v5/omeka-xml-5-0.xsd';
-    
+
     /**
      * This class' contextual record(s).
      * @var array|Omeka_Record_AbstractRecord
@@ -41,24 +41,24 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
      * @var string
      */
     protected $_context;
-    
+
     /**
      * The final document object.
      * @var DOMDocument
      */
     protected $_doc;
-    
+
     /**
      * The node built and set in child::_buildNode()
      * @var DOMNode
      */
     protected $_node;
-    
+
     /**
      * Abstract method. child::_buildNode() should set self::$_node.
      */
     abstract protected function _buildNode();
-    
+
     /**
      * @param Omeka_Record_AbstractRecord|array $record
      * @param string $context The context of this DOM document.
@@ -71,7 +71,7 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
         $this->_doc->formatOutput = true;
         $this->_buildNode();
     }
-    
+
     /**
      * Get the document object.
      * 
@@ -82,7 +82,7 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
         $this->_doc->appendChild($this->_setRootElement($this->_node));
         return $this->_doc;
     }
-    
+
     /**
      * Set an element as root.
      * 
@@ -98,7 +98,7 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
         $rootElement->setAttribute('accessDate', date('c'));
         return $rootElement;
     }
-    
+
     /**
      * Create a DOM element.
      * 
@@ -111,31 +111,30 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
     protected function _createElement($name, $value = null, $id = null, $parentElement = null)
     {
         $element = $this->_doc->createElement($name);
-        
+
         // Append the value, if given.
         if ($value) {
             $textNode = $this->_doc->createTextNode($value);
             $element->appendChild($textNode);
         }
-        
+
         // Set the @id attribute, if given.
         if ($id) {
             $element->setAttribute("{$name}Id", $id);
         }
-        
+
         // Append to the parent element, if given.
         if ($parentElement) {
             $parentElement->appendChild($element);
         }
-        
+
         return $element;
     }
-    
+
     /**
      * Set the pagination node for container elements
      *
      * @param DOMElement The parent container element.
-     * @return void
      */
     protected function _setContainerPagination(DOMElement $parentElement)
     {
@@ -146,11 +145,11 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
         $pagination = Zend_Registry::get('pagination');
         $miscellaneousContainerElement = $this->_createElement('miscellaneousContainer', null, null, $parentElement);
         $paginationElement = $this->_createElement('pagination', null, null, $miscellaneousContainerElement);
-        $this->_createElement('pageNumber',   $pagination['page'],          null, $paginationElement);
-        $this->_createElement('perPage',      $pagination['per_page'],      null, $paginationElement);
+        $this->_createElement('pageNumber', $pagination['page'], null, $paginationElement);
+        $this->_createElement('perPage', $pagination['per_page'], null, $paginationElement);
         $this->_createElement('totalResults', $pagination['total_results'], null, $paginationElement);
     }
-    
+
     /**
      * Get all element sets, elements, and element texts associated with the 
      * provided record.
@@ -164,12 +163,12 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
     {
         $elementSets = array();
         $itemType = array();
-        
+
         // Get all element texts associated with the provided record.
         $elementTexts = $record->getAllElementTexts();
 
         foreach ($elementTexts as $elementText) {
-            
+
             // Get associated element and element set records.
             $element = get_db()->getTable('Element')->find($elementText->element_id);
 
@@ -184,8 +183,8 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
             if (!$elementSet) {
                 continue;
             }
-            
-            // Differentiate between the element sets and the "Item Type 
+
+            // Differentiate between the element sets and the "Item Type
             // Metadata" pseudo element set.
             if (ElementSet::ITEM_TYPE_NAME == $elementSet->name) {
                 $itemType['elements'][$element->id]['name'] = $element->name;
@@ -199,7 +198,7 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
                 $elementSets[$elementSet->id]['elements'][$element->id]['elementTexts'][$elementText->id]['text'] = $elementText->text;
             }
         }
-        
+
         // Return the item type metadata.
         if ($getItemType) {
             $itemType['id'] = $record->Type->id;
@@ -207,11 +206,11 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
             $itemType['description'] = $record->Type->description;
             return $itemType;
         }
-        
+
         // Return the element sets metadata.
         return $elementSets;
     }
-    
+
     /**
      * Build an elementSetContainer element in a record (item or file) context.
      * 
@@ -224,23 +223,23 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
     protected function _buildElementSetContainerForRecord(Omeka_Record_AbstractRecord $record, DOMElement $parentElement)
     {
         $elementSets = $this->_getElemetSetsByElementTexts($record);
-        
+
         // Return if there are no element sets.
         if (!$elementSets) {
             return null;
         }
-        
+
         // elementSetContainer
         $elementSetContainerElement = $this->_createElement('elementSetContainer');
         foreach ($elementSets as $elementSetId => $elementSet) {
-             // elementSet
+            // elementSet
             $elementSetElement = $this->_createElement('elementSet', null, $elementSetId);
             $nameElement = $this->_createElement('name', $elementSet['name'], null, $elementSetElement);
             $descriptionElement = $this->_createElement('description', $elementSet['description'], null, $elementSetElement);
             // elementContainer
             $elementContainerElement = $this->_createElement('elementContainer');
             foreach ($elementSet['elements'] as $elementId => $element) {
-                // Exif data may contain invalid XML characters. Avoid encoding 
+                // Exif data may contain invalid XML characters. Avoid encoding
                 // errors by skipping relevent elements.
                 if ('Omeka Image File' == $elementSet['name'] && ('Exif Array' == $element['name'] || 'Exif String' == $element['name'])) {
                     continue;
@@ -267,7 +266,7 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
         }
         $parentElement->appendChild($elementSetContainerElement);
     }
-    
+
     /**
      * Build an itemType element in an item context.
      * 
@@ -281,14 +280,14 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
         if (!$item->Type) {
             return null;
         }
-        
+
         $itemType = $this->_getElemetSetsByElementTexts($item, true);
-        
+
         // itemType
         $itemTypeElement = $this->_createElement('itemType', null, $itemType['id']);
         $nameElement = $this->_createElement('name', $itemType['name'], null, $itemTypeElement);
         $descriptionElement = $this->_createElement('description', $itemType['description'], null, $itemTypeElement);
-        
+
         // Do not append elements if no element texts exist for this item type.
         if (isset($itemType['elements'])) {
             // elementContainer
@@ -313,7 +312,7 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
         }
         $parentElement->appendChild($itemTypeElement);
     }
-    
+
     /**
      * Build a fileContainer element in an item context.
      * 
@@ -328,7 +327,7 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
         if (!count($item->Files)) {
             return null;
         }
-        
+
         // fileContainer
         $fileContainerElement = $this->_createElement('fileContainer');
         foreach ($item->Files as $file) {
@@ -338,7 +337,7 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
         }
         $parentElement->appendChild($fileContainerElement);
     }
-    
+
     /**
      * Build a collection element in an item context.
      * 
@@ -353,12 +352,12 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
         if (!$item->Collection) {
             return null;
         }
-        
+
         $collectionElement = $this->_createElement('collection', null, $item->Collection->id);
         $this->_buildElementSetContainerForRecord($item->Collection, $collectionElement);
         $parentElement->appendChild($collectionElement);
     }
-    
+
     /**
      * Build a tagContainer element in an item context.
      * 
@@ -373,7 +372,7 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
         if (!count($item->Tags)) {
             return null;
         }
-        
+
         // tagContainer
         $tagContainerElement = $this->_createElement('tagContainer');
         foreach ($item->Tags as $tag) {
@@ -383,33 +382,33 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
             $tagContainerElement->appendChild($tagElement);
         }
         $parentElement->appendChild($tagContainerElement);
-   }
-   
+    }
+
     /**
-    * Build an itemContainer element in a collection context.
-    * 
-    * @param Collection $collection The collection from which to build the item 
-    * container.
-    * @param DOMElement $parentElement The item container will append to this 
-    * element.
-    * @return void|null
-    */
+     * Build an itemContainer element in a collection context.
+     * 
+     * @param Collection $collection The collection from which to build the item 
+     * container.
+     * @param DOMElement $parentElement The item container will append to this 
+     * element.
+     * @return void|null
+     */
     protected function _buildItemContainerForCollection(Collection $collection, DOMElement $parentElement)
     {
         // Get items belonging to this collection.
         $items = get_db()->getTable('Item')->findBy(array('collection' => $collection->id));
-        
+
         // Return if the collection has no items.
         if (!$items) {
             return null;
         }
-        
+
         // itemContainer
         $collectionOmekaXml = new Output_ItemContainerOmekaXml($items, 'collection');
         $itemContainerElement = $this->_doc->importNode($collectionOmekaXml->_node, true);
         $parentElement->appendChild($itemContainerElement);
     }
-   
+
    /**
     * Create a Tag URI to uniquely identify this Omeka XML instance.
     *
@@ -421,7 +420,7 @@ abstract class Omeka_Output_OmekaXml_AbstractOmekaXml
        $tagUri = 'tag:' . $uri->getHost() . ',' . date('Y-m-d') . ':' . $uri->getPath();
        return $tagUri;
    }
-   
+
    /**
     * Create a absolute URI containing the current query string.
     *

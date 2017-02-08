@@ -15,12 +15,12 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter implements Omeka_Record_Ap
      * @var array Cache of elements
      */
     protected $_elementsCache = array();
-    
+
     /**
      * @var array Cache of element sets
      */
     protected $_elementSetsCache = array();
-    
+
     /**
      * Set data to a record during a POST request.
      * 
@@ -32,7 +32,7 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter implements Omeka_Record_Ap
         $recordType = get_class($record);
         throw new Omeka_Controller_Exception_Api("The \"$recordType\" API record adapter does not implement setPostData");
     }
-    
+
     /**
      * Set data to a record during a PUT request.
      * 
@@ -44,7 +44,7 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter implements Omeka_Record_Ap
         $recordType = get_class($record);
         throw new Omeka_Controller_Exception_Api("The \"$recordType\" API record adapter does not implement setPutData");
     }
-    
+
     /**
      * Get representations of element texts belonging to a record.
      * 
@@ -57,7 +57,7 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter implements Omeka_Record_Ap
             ? $this->_getFilteredElementTextRepresentations($record)
             : $this->_getUnfilteredElementTextRepresentations($record);
     }
-    
+
     /**
      * Set element text data to a record.
      * 
@@ -91,7 +91,7 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter implements Omeka_Record_Ap
         $record->addElementTextsByArray($elementTexts);
         $record->setReplaceElementTexts();
     }
-    
+
     /**
      * Get representations of tags belonging to a record.
      * 
@@ -105,15 +105,15 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter implements Omeka_Record_Ap
         $tags = array();
         foreach ($record->getTags() as $tag) {
             $tags[] = array(
-                'id' => $tag->id, 
-                'url' => $this->getResourceUrl("/tags/{$tag->id}"), 
-                'name' => $tag->name, 
-                'resource' => 'tags', 
+                'id' => $tag->id,
+                'url' => $this->getResourceUrl("/tags/{$tag->id}"),
+                'name' => $tag->name,
+                'resource' => 'tags',
             );
         }
         return $tags;
     }
-    
+
     /**
      * Set tag data to a record.
      * 
@@ -136,7 +136,7 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter implements Omeka_Record_Ap
         }
         $record->applyTags($tags);
     }
-    
+
     /**
      * Get the absolute URL to the passed resource.
      * 
@@ -151,7 +151,7 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter implements Omeka_Record_Ap
         }
         return WEB_ROOT . "/api$uri";
     }
-    
+
     /**
      * Format a date string as an ISO 8601 date, UTC timezone.
      * 
@@ -181,8 +181,8 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter implements Omeka_Record_Ap
         // Get the record's element texts from the ElementText mixin, as opposed
         // to the AllElementTexts view helper.
         foreach ($record->getAllElementTexts() as $elementText) {
-            
-            // Cache information about elements and element sets to avoid 
+
+            // Cache information about elements and element sets to avoid
             // unnecessary database queries.
             if (!isset($this->_elementsCache[$elementText->element_id])) {
                 $element = get_db()->getTable('Element')->find($elementText->element_id);
@@ -190,9 +190,9 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter implements Omeka_Record_Ap
                     continue;
                 }
                 $this->_elementsCache[$element->id] = array(
-                    'id' => $element->id, 
-                    'element_set_id' => $element->element_set_id, 
-                    'name' => $element->name, 
+                    'id' => $element->id,
+                    'element_set_id' => $element->element_set_id,
+                    'name' => $element->name,
                 );
             }
             $element = $this->_elementsCache[$elementText->element_id];
@@ -202,32 +202,32 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter implements Omeka_Record_Ap
                     continue;
                 }
                 $this->_elementSetsCache[$elementSet->id] = array(
-                    'id' => $elementSet->id, 
-                    'name' => $elementSet->name, 
+                    'id' => $elementSet->id,
+                    'name' => $elementSet->name,
                 );
             }
             $elementSet = $this->_elementSetsCache[$element['element_set_id']];
-            
+
             // Build the representation.
             $representation = array(
-                'html' => (bool) $elementText->html, 
-                'text' => $elementText->text, 
+                'html' => (bool) $elementText->html,
+                'text' => $elementText->text,
                 'element_set' => array(
-                    'id' => $elementSet['id'], 
-                    'url' => $this->getResourceUrl("/element_sets/{$elementSet['id']}"), 
-                    'name' => $elementSet['name'], 
-                    'resource' => 'element_sets', 
-                ), 
+                    'id' => $elementSet['id'],
+                    'url' => $this->getResourceUrl("/element_sets/{$elementSet['id']}"),
+                    'name' => $elementSet['name'],
+                    'resource' => 'element_sets',
+                ),
                 'element' => array(
-                    'id' => $element['id'], 
-                    'url' => $this->getResourceUrl("/elements/{$element['id']}"), 
-                    'name' => $element['name'], 
-                    'resource' => 'elements', 
+                    'id' => $element['id'],
+                    'url' => $this->getResourceUrl("/elements/{$element['id']}"),
+                    'name' => $element['name'],
+                    'resource' => 'elements',
                 )
             );
             $representations[] = $representation;
         }
-        
+
         return $representations;
     }
 
@@ -244,16 +244,16 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter implements Omeka_Record_Ap
     protected function _getFilteredElementTextRepresentations(Omeka_Record_AbstractRecord $record)
     {
         $representations = array();
-        
+
         // Get the record's element texts from the AllElementTexts view helper,
         // as opposed to the ElementText mixin.
         $elementTexts = get_view()->allElementTexts($record, array(
             'return_type' => 'array',
             'show_empty_elements' => false,
         ));
-        
+
         foreach ($elementTexts as $elementSetName => $elements) {
-            
+
             // Account for item types.
             if (0 === substr_compare($elementSetName, ElementSet::ITEM_TYPE_NAME,
                 -strlen(ElementSet::ITEM_TYPE_NAME), strlen(ElementSet::ITEM_TYPE_NAME))
@@ -261,12 +261,12 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter implements Omeka_Record_Ap
                 $elements = $elementTexts[$elementSetName];
                 $elementSetName = ElementSet::ITEM_TYPE_NAME;
             }
-            
+
             foreach ($elements as $elementName => $texts) {
                 $element = $record->getElement($elementSetName, $elementName);
-                
+
                 foreach ($texts as $text) {
-                    
+
                     // Build the representation.
                     $representation = array(
                         'text' => $text,
@@ -283,12 +283,12 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter implements Omeka_Record_Ap
                             'resource' => 'elements',
                         )
                     );
-                    
+
                     $representations[] = $representation;
                 }
             }
         }
-        
+
         return $representations;
     }
 }

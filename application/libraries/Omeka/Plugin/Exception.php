@@ -12,4 +12,5 @@
  * @package Omeka\Plugin
  */
 class Omeka_Plugin_Exception extends Exception
-{}
+{
+}

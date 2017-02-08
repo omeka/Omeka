@@ -9,8 +9,7 @@
 /**
  * @package Omeka\File\MimeType\Detect\Strategy
  */
-class Omeka_File_MimeType_Detect_Strategy_GetId3 
-    implements Omeka_File_MimeType_Detect_StrategyInterface
+class Omeka_File_MimeType_Detect_Strategy_GetId3 implements Omeka_File_MimeType_Detect_StrategyInterface
 {
     public function detect($file)
     {

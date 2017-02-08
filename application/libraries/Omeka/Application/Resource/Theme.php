@@ -20,7 +20,7 @@ class Omeka_Application_Resource_Theme extends Zend_Application_Resource_Resourc
      * @var string
      */
     protected $_basePath;
-    
+
     /**
      * Theme base URI.
      * 
@@ -29,7 +29,7 @@ class Omeka_Application_Resource_Theme extends Zend_Application_Resource_Resourc
      * @var string
      */
     protected $_webBasePath;
-    
+
     public function init()
     {
         // We need the front controller to be set up if we're initializing the
@@ -37,18 +37,18 @@ class Omeka_Application_Resource_Theme extends Zend_Application_Resource_Resourc
         $bootstrap = $this->getBootstrap();
         $bootstrap->bootstrap('FrontController');
         $front = $bootstrap->getResource('FrontController');
-        
+
         // This requires that the options have been properly instantiated.
         $bootstrap = $this->getBootstrap();
         $bootstrap->bootstrap('Options');
-        
+
         // This needs the plugin broker to be built out already.
         $bootstrap->bootstrap('Pluginbroker');
         $dbOptions = $bootstrap->getResource('Options');
-        $pluginOptions = array('dbOptions' => $dbOptions, 'baseThemePath'=> $this->_basePath, 'webBaseThemePath' => $this->_webBasePath);
+        $pluginOptions = array('dbOptions' => $dbOptions, 'baseThemePath' => $this->_basePath, 'webBaseThemePath' => $this->_webBasePath);
         $front->registerPlugin(new Omeka_Controller_Plugin_ViewScripts($pluginOptions, Zend_Registry::get('plugin_mvc')));
     }
-    
+
     /**
      * Set the base path for themes.
      * Used to allow {@link $_basePath} to be set by application config.
@@ -59,7 +59,7 @@ class Omeka_Application_Resource_Theme extends Zend_Application_Resource_Resourc
     {
         $this->_basePath = $basePath;
     }
-    
+
     /**
      * Set the base URI for themes.
      * Used to allow {@link $_webBasePath} to be set by application config.

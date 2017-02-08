@@ -35,7 +35,7 @@ class unEntityExhibitBuilder extends Omeka_Db_Migration_AbstractMigration
             return false;
         }
     }
-    
+
     private function _updateSchema()
     {
         $this->db->queryBlock(<<<SQL

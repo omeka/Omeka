@@ -23,16 +23,16 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
     public function itemSearchFilters(array $params = null)
     {
         if ($params === null) {
-            $request = Zend_Controller_Front::getInstance()->getRequest(); 
+            $request = Zend_Controller_Front::getInstance()->getRequest();
             $requestArray = $request->getParams();
         } else {
             $requestArray = $params;
         }
-        
+
         $db = get_db();
         $displayArray = array();
         foreach ($requestArray as $key => $value) {
-            if($value != null) {
+            if ($value != null) {
                 $filter = ucfirst($key);
                 $displayValue = null;
                 switch ($key) {
@@ -43,7 +43,7 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
                             $displayValue = $itemType->name;
                         }
                         break;
-                    
+
                     case 'collection':
                         if ($value === '0') {
                             $displayValue = __('No Collection');
@@ -67,7 +67,7 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
                     case 'featured':
                         $displayValue = ($value == 1 ? __('Yes') : $displayValue = __('No'));
                         break;
-                        
+
                     case 'search':
                     case 'tags':
                     case 'range':
@@ -81,11 +81,11 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
         }
 
         $displayArray = apply_filters('item_search_filters', $displayArray, array('request_array' => $requestArray));
-        
+
         // Advanced needs a separate array from $displayValue because it's
-        // possible for "Specific Fields" to have multiple values due to 
+        // possible for "Specific Fields" to have multiple values due to
         // the ability to add fields.
-        if(array_key_exists('advanced', $requestArray)) {
+        if (array_key_exists('advanced', $requestArray)) {
             $advancedArray = array();
             $index = 0;
             foreach ($requestArray['advanced'] as $i => $row) {
@@ -102,7 +102,7 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
                 }
 
                 if ($index) {
-                    if(isset($row['joiner']) && $row['joiner'] === 'or') {
+                    if (isset($row['joiner']) && $row['joiner'] === 'or') {
                         $advancedValue = __('OR') . ' ' . $advancedValue;
                     } else {
                         $advancedValue = __('AND') . ' ' . $advancedValue;
@@ -116,12 +116,12 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
         if (!empty($displayArray) || !empty($advancedArray)) {
             $html .= '<div id="item-filters">';
             $html .= '<ul>';
-            foreach($displayArray as $name => $query) {
+            foreach ($displayArray as $name => $query) {
                 $class = html_escape(strtolower(str_replace(' ', '-', $name)));
                 $html .= '<li class="' . $class . '">' . html_escape(__($name)) . ': ' . html_escape($query) . '</li>';
             }
-            if(!empty($advancedArray)) {
-                foreach($advancedArray as $j => $advanced) {
+            if (!empty($advancedArray)) {
+                foreach ($advancedArray as $j => $advanced) {
                     $html .= '<li class="advanced">' . html_escape($advanced) . '</li>';
                 }
             }

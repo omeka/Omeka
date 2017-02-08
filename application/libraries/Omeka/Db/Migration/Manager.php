@@ -60,8 +60,6 @@ class Omeka_Db_Migration_Manager
      *
      * This creates the 'schema_migrations' table, drops the 'migration' option
      * and adds the 'omeka_version' option to the database.
-     *
-     * @return void
      */
     public function setupTimestampMigrations()
     {
@@ -80,8 +78,6 @@ class Omeka_Db_Migration_Manager
     /**
      * Mark all of the migrations as having been run.  Used by the installer as
      * a way of indicating that the database is entirely up to date.
-     *
-     * @return void
      */
     public function markAllAsMigrated()
     {
@@ -98,7 +94,6 @@ class Omeka_Db_Migration_Manager
      * point for the migration.  If older than the current time, database will
      * migrate down to that point.  If newer, the opposite.  Defaults to the
      * current timestamp.
-     * @return void
      */
     public function migrate($endTimestamp = null)
     {
@@ -119,13 +114,11 @@ class Omeka_Db_Migration_Manager
      *
      * This is based entirely on whether there exist any migrations that have
      * not yet been applied.
-     *
-     * @return void
      */
     public function canUpgrade()
     {
-       $pendingMigrations = $this->_getPendingMigrations(new DateTime());
-       return !empty($pendingMigrations);
+        $pendingMigrations = $this->_getPendingMigrations(new DateTime());
+        return !empty($pendingMigrations);
     }
 
     /**
@@ -221,7 +214,6 @@ class Omeka_Db_Migration_Manager
      * Migrate upwards to a specific timestamp.
      *
      * @param DateTime $stopAt
-     * @return void
      */
     private function _migrateUp($stopAt)
     {
@@ -272,7 +264,7 @@ class Omeka_Db_Migration_Manager
         // Now remove from this list any migrations that are too new.
         foreach ($pending as $time => $filename) {
             // Too big to use int.
-            if ((double)$time > (double)$stopAt) {
+            if ((double) $time > (double) $stopAt) {
                 unset($pending[$time]);
             }
             // Not exactly sure why, but sometimes empty migrations get into this list.
@@ -288,7 +280,6 @@ class Omeka_Db_Migration_Manager
      * Record the migration timestamp in the schema_migrations table.
      *
      * @param string $time
-     * @return void
      */
     private function _recordMigration($time)
     {

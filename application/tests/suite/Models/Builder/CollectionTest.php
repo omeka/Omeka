@@ -6,15 +6,13 @@
  */
 
 /**
- * 
- *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Models_Builder_CollectionTest extends Omeka_Test_AppTestCase
 {
     const USER_ID = 2;
-    
+
     public function setUp()
     {
         parent::setUp();
@@ -25,7 +23,7 @@ class Models_Builder_CollectionTest extends Omeka_Test_AppTestCase
     {
         Zend_Registry::_unsetInstance();
     }
-    
+
     public function testBuildReturnsSavedCollection()
     {
         // build collection
@@ -36,11 +34,11 @@ class Models_Builder_CollectionTest extends Omeka_Test_AppTestCase
         );
         $this->builder->setElementTexts($elementTexts);
         $collection = $this->builder->build();
-        
+
         $this->assertThat($collection, $this->isInstanceOf('Collection'));
         $this->assertTrue($collection->exists());
     }
-    
+
     public function testCanSetValidPropertiesForCollection()
     {
         // build the collection
@@ -57,7 +55,7 @@ class Models_Builder_CollectionTest extends Omeka_Test_AppTestCase
         );
         $this->builder->setElementTexts($elementTexts);
         $collection = $this->builder->build();
-              
+
         $this->assertEquals('foobar', strip_formatting(metadata($collection, array('Dublin Core', 'Title'))));
         $this->assertEquals('foobar desc', strip_formatting(metadata($collection, array('Dublin Core', 'Description'))));
         $this->assertEquals("1", $collection->public);
@@ -65,14 +63,14 @@ class Models_Builder_CollectionTest extends Omeka_Test_AppTestCase
         $this->assertEquals(self::USER_ID, $collection->owner_id,
             "Collection's 'owner_id' column should have been set.");
     }
-    
+
     public function testCannotSetInvalidPropertiesForCollection()
     {
         $this->builder->setRecordMetadata(array(
             'public' => true,
             'featured' => false,
             'owner_id' => self::USER_ID,
-            'jabberwocky' => 'huzzah'    
+            'jabberwocky' => 'huzzah'
         ));
         $elementTexts = array(
             'Dublin Core' => array(

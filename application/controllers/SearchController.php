@@ -17,7 +17,7 @@ class SearchController extends Omeka_Controller_AbstractActionController
     {
         $this->_helper->db->setDefaultModelName('SearchText');
     }
-    
+
     public function indexAction()
     {
         parent::browseAction();

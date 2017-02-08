@@ -19,7 +19,7 @@
  * @package Omeka\View
  */
 class Omeka_View extends Zend_View_Abstract
-{    
+{
     const THEME_HOOK_NAMESPACE = '__global__';
 
     /**
@@ -29,36 +29,36 @@ class Omeka_View extends Zend_View_Abstract
      * @var array
      */
     protected $_asset_paths = array();
-    
+
     /**
      * Flag indicated whether theme custom scripts have been loaded.
      *
-     * @var boolean
+     * @var bool
      */
     private $_customScriptsLoaded = false;
-    
+
     /**
      * @param array $config View configuration.
      */
     public function __construct($config = array())
     {
-        parent::__construct($config);         
-        
+        parent::__construct($config);
+
         // Setting the XHTML1_STRICT doctype fixes validation errors for ZF's form elements
         $this->doctype()->setDoctype('HTML5');
-        
+
         $this->addHelperPath(VIEW_HELPERS_DIR, 'Omeka_View_Helper');
 
         try {
             $mvc = Zend_Registry::get('plugin_mvc');
             foreach ($mvc->getHelpersDirs() as $pluginDirName => $dir) {
-                $this->addHelperPath($dir, "{$pluginDirName}_View_Helper"); 
+                $this->addHelperPath($dir, "{$pluginDirName}_View_Helper");
             }
         } catch (Zend_Exception $e) {
             // no plugins or MVC component, so we can't add helper paths
         }
     }
-    
+
     /**
      * Get the currently-configured asset paths.
      *
@@ -68,32 +68,30 @@ class Omeka_View extends Zend_View_Abstract
     {
         return $this->_asset_paths;
     }
-    
+
     /**
      * Add an asset path to the view.
      *
      * @param string $physical Local filesystem path.
      * @param string $web URL path.
-     * @return void
      */
     public function addAssetPath($physical, $web)
     {
         array_unshift($this->_asset_paths, array($physical, $web));
     }
-    
+
     /**
      * Remove the existing asset paths and set a single new one.
      * 
      * @param string $physical Local filesystem path.
      * @param string $web URL path.
-     * @return void 
      */
     public function setAssetPath($physical, $web)
     {
         $this->_asset_paths = array();
         $this->_asset_paths[] = array($physical, $web);
     }
-        
+
     /**
      * Allow for variables set to the view object
      * to be referenced in the view script by their actual name.
@@ -107,16 +105,15 @@ class Omeka_View extends Zend_View_Abstract
      * 
      * Now you can reference it simply by using:
      * $themes;
-     *
-     * @return void
      */
-    public function _run() {
+    public function _run()
+    {
         $this->_loadCustomThemeScripts();
         $vars = $this->getVars();
         extract($vars);
         include func_get_arg(0);
     }
-    
+
     /**
      * Look for a 'custom.php' script in all script paths and include the file if it exists.
      * 
@@ -125,7 +122,6 @@ class Omeka_View extends Zend_View_Abstract
      * scripts need to be loaded only once per request, but multiple times in
      * the test environment.  Hence the flag for making sure that it runs only
      * once per View instance.
-     * @return void
      */
     private function _loadCustomThemeScripts()
     {
@@ -150,7 +146,7 @@ class Omeka_View extends Zend_View_Abstract
         }
         $this->_customScriptsLoaded = true;
     }
-    
+
     /**
      * Add a script path to the view.
      * 
@@ -164,7 +160,7 @@ class Omeka_View extends Zend_View_Abstract
         // For some unknown reason, Zend_View adds a trailing slash to paths.
         // Need to add that for the purposes of comparison.
         $path = rtrim($path, '/') . '/';
-        
+
         if (!in_array($path, $this->getScriptPaths())) {
             return parent::addScriptPath($path);
         }

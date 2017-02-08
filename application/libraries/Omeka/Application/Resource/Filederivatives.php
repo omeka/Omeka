@@ -20,10 +20,10 @@ class Omeka_Application_Resource_Filederivatives extends Zend_Application_Resour
         $bootstrap = $this->getBootstrap();
         $bootstrap->bootstrap('Config');
         $bootstrap->bootstrap('Options');
-        
+
         $config = $bootstrap->config->fileDerivatives;
         $options = $bootstrap->options;
-        
+
         if ($config) {
             $derivativeOptions = $config->toArray();
         } else {

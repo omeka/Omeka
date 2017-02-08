@@ -13,17 +13,16 @@
  */
 class detachCollectorsFromEntities extends Omeka_Db_Migration_AbstractMigration
 {
-    
     public function up()
     {
         $this->_migrateCollections($this->getDb());
     }
-    
+
     public function down()
     {
         throw new RuntimeException("Cannot reverse this migration.");
     }
-    
+
     private function _migrateCollections($db)
     {
         $db->queryBlock(<<<COL
@@ -39,7 +38,7 @@ COL
         $this->_setCollectionOwnerIds($db);
         $this->_setCollectionCollectors($db);
     }
-    
+
     private function _setCollectionAddedStamps($db)
     {
         // Get all the metadata for `added` timestamps.
@@ -53,7 +52,7 @@ ORDER BY added DESC
 ADDED
 );
         foreach ($addedTimestamps as $timestamp) {
-            $db->update("$db->Collection", array('added' => $timestamp['added']), 'id = ' . (int)$timestamp['collection_id']);
+            $db->update("$db->Collection", array('added' => $timestamp['added']), 'id = ' . (int) $timestamp['collection_id']);
         }
     }
 
@@ -68,9 +67,9 @@ WHERE er.type = "Collection"
 GROUP BY collection_id
 ORDER BY modified DESC     
 MOD
-);       
+);
         foreach ($modifiedTimestamps as $timestamp) {
-            $db->update("$db->Collection", array('modified' => $timestamp['modified']), 'id = ' . (int)$timestamp['collection_id']);
+            $db->update("$db->Collection", array('modified' => $timestamp['modified']), 'id = ' . (int) $timestamp['collection_id']);
         }
     }
 
@@ -88,8 +87,8 @@ GROUP BY collection_id
 OWNERS
 );
         foreach ($ownerIds as $owner) {
-            $db->update("$db->Collection", array('owner_id' => $owner['owner_id']), 'id = ' . (int)$owner['collection_id']);
-        }     
+            $db->update("$db->Collection", array('owner_id' => $owner['owner_id']), 'id = ' . (int) $owner['collection_id']);
+        }
     }
 
     /**
@@ -127,12 +126,12 @@ COLLECTORS
             }
 
             if ($newCollector) {
-                $indexedCollectors[(int)$collector['collection_id']][] = $newCollector;
+                $indexedCollectors[(int) $collector['collection_id']][] = $newCollector;
             }
         }
 
         foreach ($indexedCollectors as $collectionId => $collectorArray) {
-            $db->update($db->Collection, array('collectors' => implode("\n", $collectorArray)), 'id = ' . (int)$collectionId);
-        }    
+            $db->update($db->Collection, array('collectors' => implode("\n", $collectorArray)), 'id = ' . (int) $collectionId);
+        }
     }
 }

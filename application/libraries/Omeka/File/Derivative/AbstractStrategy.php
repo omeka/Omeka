@@ -11,8 +11,7 @@
  *
  * @package Omeka\File\Derivative\Strategy
  */
-abstract class Omeka_File_Derivative_AbstractStrategy
-    implements Omeka_File_Derivative_StrategyInterface
+abstract class Omeka_File_Derivative_AbstractStrategy implements Omeka_File_Derivative_StrategyInterface
 {
     protected $_options = array();
 

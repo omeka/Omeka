@@ -15,8 +15,6 @@ class Output_CollectionOmekaXml extends Omeka_Output_OmekaXml_AbstractOmekaXml
 {
     /**
      * Create a node representing a collection.
-     *
-     * @return void
      */
     protected function _buildNode()
     {

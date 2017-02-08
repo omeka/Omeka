@@ -56,13 +56,13 @@ SQL
             if (!empty($row['last_name'])) {
                 $nameParts[] = $row['last_name'];
             }
-            
+
             if ($nameParts) {
                 $name = implode(' ', $nameParts);
             } else {
                 $name = $row['institution'];
             }
-            
+
             $this->db->update($this->db->User,
                 array('name' => $name, 'email' => $row['email']),
                 array('id = ?' => $row['id'])

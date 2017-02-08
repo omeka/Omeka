@@ -9,8 +9,7 @@
 /**
  * @package Omeka\File\MimeType\Detect\Strategy
  */
-class Omeka_File_MimeType_Detect_Strategy_Browser 
-    implements Omeka_File_MimeType_Detect_StrategyInterface
+class Omeka_File_MimeType_Detect_Strategy_Browser implements Omeka_File_MimeType_Detect_StrategyInterface
 {
     public function detect($file)
     {
@@ -18,7 +17,7 @@ class Omeka_File_MimeType_Detect_Strategy_Browser
             // No files have been uploaded.
             return false;
         }
-        // If an uploaded file's tmp_name matches the passed file, return the 
+        // If an uploaded file's tmp_name matches the passed file, return the
         // MIME type set by the browser.
         foreach ($_FILES['file']['tmp_name'] as $key => $tmpName) {
             if ($file == $tmpName) {

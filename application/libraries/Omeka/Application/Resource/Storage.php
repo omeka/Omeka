@@ -14,23 +14,23 @@
 class Omeka_Application_Resource_Storage extends Zend_Application_Resource_ResourceAbstract
 {
     const DEFAULT_ADAPTER = "Omeka_Storage_Adapter_Filesystem";
-    
+
     public function init()
     {
         $this->getBootstrap()->bootstrap('Config');
-        
+
         $config = $this->getBootstrap()->config->storage;
-        
+
         if ($config) {
             $storageOptions = $config->toArray();
         } else {
             $storageOptions = array();
         }
-        
+
         if (empty($storageOptions[Omeka_Storage::OPTION_ADAPTER])) {
             $storageOptions[Omeka_Storage::OPTION_ADAPTER] = self::DEFAULT_ADAPTER;
         }
-        
+
         $storage = new Omeka_Storage($storageOptions);
         Zend_Registry::set('storage', $storage);
         return $storage;

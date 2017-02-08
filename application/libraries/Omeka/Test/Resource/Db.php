@@ -18,14 +18,14 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
 {
     const SUPER_USERNAME = 'foobar123';
     const SUPER_PASSWORD = 'foobar123';
-    const SUPER_EMAIL    = 'foobar@example.com';
-    
-    const DEFAULT_USER_ID  = 1;
-    
-    const DEFAULT_SITE_TITLE    = 'Automated Test Installation';
-    const DEFAULT_AUTHOR        = 'CHNM';
-    const DEFAULT_COPYRIGHT     = '2010';
-    const DEFAULT_DESCRIPTION   = 'This database will be reset after every test run.  DO NOT USE WITH PRODUCTION SITES';
+    const SUPER_EMAIL = 'foobar@example.com';
+
+    const DEFAULT_USER_ID = 1;
+
+    const DEFAULT_SITE_TITLE = 'Automated Test Installation';
+    const DEFAULT_AUTHOR = 'CHNM';
+    const DEFAULT_COPYRIGHT = '2010';
+    const DEFAULT_DESCRIPTION = 'This database will be reset after every test run.  DO NOT USE WITH PRODUCTION SITES';
 
     /**
      * Flag to determine whether the tables need to be dropped. This is a slow
@@ -51,7 +51,7 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
      * @return Omeka_Db
      */
     public function init()
-    {   
+    {
         $db = $this->getDb();
         $helper = Omeka_Test_Helper_Db::factory($this);
         if (self::$dropTables) {
@@ -68,7 +68,7 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
         $db->beginTransaction();
         return $db;
     }
-    
+
     /**
      * @return Omeka_Db
      */
@@ -78,23 +78,23 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
         $this->useTestConfig();
         return $this->_getOmekaDb();
     }
-        
+
     public function useTestConfig()
     {
         $this->setAdapter('Mysqli');
         $params = Zend_Registry::get('test_config')->db->toArray();
         $this->setParams($params);
     }
-        
+
     /**
      * Set the flag that indicates whether or not to run the installer during 
      * init().
      * 
-     * @param boolean $flag
+     * @param bool $flag
      */
     public function setInstall($flag)
     {
-        $this->_runInstaller = (boolean)$flag;
+        $this->_runInstaller = (boolean) $flag;
     }
 
     public function getDbAdapter()
@@ -111,7 +111,7 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
     {
         self::$_cachedAdapter = $dbAdapter;
     }
-    
+
     /**
      * Create a DB instance with the omeka_ prefix.
      *
@@ -125,7 +125,7 @@ class Omeka_Test_Resource_Db extends Zend_Application_Resource_Db
         $this->_enableSqlLogging($omekaDb);
         return $omekaDb;
     }
-    
+
     private function _enableSqlLogging(Omeka_Db $db)
     {
         $bs = $this->getBootstrap();

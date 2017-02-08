@@ -16,48 +16,48 @@
 class Omeka_Form_RecoverPassword extends Omeka_Form
 {
     private $_db;
-    
+
     public function init()
     {
         parent::init();
-        
+
         $this->setAttrib('id', 'recover-password');
-        
+
         $this->addElement('text', 'email', array(
             'label' => __('Email'),
             'required' => true,
             'validators' => array(
                 array(
-                    'validator' => 'NotEmpty', 
-                    'breakChainOnFailure' => true, 
+                    'validator' => 'NotEmpty',
+                    'breakChainOnFailure' => true,
                     'options' => array(
                         'messages' => array(
-                            Zend_Validate_NotEmpty::IS_EMPTY => 
+                            Zend_Validate_NotEmpty::IS_EMPTY =>
                                 __('Email address is required.')
                         )
                     )
                 ),
                 array(
-                    'validator' => 'EmailAddress', 
+                    'validator' => 'EmailAddress',
                     'breakChainOnFailure' => true,
                     'options' => array(
                         'messages' => array(
                             Zend_Validate_EmailAddress::INVALID =>
                                 __('Invalid email address given.'),
-                            Zend_Validate_EmailAddress::INVALID_FORMAT => 
+                            Zend_Validate_EmailAddress::INVALID_FORMAT =>
                                 __('Invalid format given for email address.'),
-                            Zend_Validate_EmailAddress::INVALID_HOSTNAME   => 
+                            Zend_Validate_EmailAddress::INVALID_HOSTNAME =>
                                 __('Invalid hostname given for email address.'),
                             //Zend_Validate_EmailAddress::INVALID_SEGMENT => '',
                             //Zend_Validate_EmailAddress::DOT_ATOM => '',
-                            //Zend_Validate_EmailAddress::QUOTED_STRING => '', 
-                            //Zend_Validate_EmailAddress::INVALID_LOCAL_PART => '', 
+                            //Zend_Validate_EmailAddress::QUOTED_STRING => '',
+                            //Zend_Validate_EmailAddress::INVALID_LOCAL_PART => '',
                             //Zend_Validate_EmailAddress::LENGTH_EXCEEDED => '',
                         )
                     )
                 ),
                 array(
-                    'validator' => 'Db_RecordExists', 
+                    'validator' => 'Db_RecordExists',
                     'options' => array(
                         'table' => $this->_db->User,
                         'field' => 'email',
@@ -66,13 +66,13 @@ class Omeka_Form_RecoverPassword extends Omeka_Form
                             'noRecordFound' => __("Invalid email address")
                         )
                     )
-                )    
+                )
             )
         ));
-        
+
         $this->addElement('submit', 'Submit');
     }
-    
+
     public function setDb(Omeka_Db $db)
     {
         $this->_db = $db;

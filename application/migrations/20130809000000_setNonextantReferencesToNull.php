@@ -21,7 +21,7 @@ SET i.collection_id = NULL
 WHERE c.id IS NULL;
 SQL;
         $this->db->query($sql);
-        
+
         $sql = <<<SQL
 UPDATE `{$this->db->Item}` i 
 LEFT JOIN `{$this->db->ItemType}` it

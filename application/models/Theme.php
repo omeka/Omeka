@@ -14,7 +14,7 @@
  * 
  * @package Omeka\Record
  */
-class Theme 
+class Theme
 {
     /**
      * Filename for the theme screenshot.
@@ -109,7 +109,7 @@ class Theme
      *
      * @param string $themeName Directory name.
      */
-    public function __construct($themeName) 
+    public function __construct($themeName)
     {
         $this->setDirectoryName($themeName);
         $this->setImage(self::THEME_IMAGE_FILE_NAME);
@@ -215,7 +215,7 @@ class Theme
     {
         // Get the theme's config file
         $themeConfig = $this->path . '/' . $fileName;
-        
+
         // If the theme has a config file, set hasConfig to true.
         $this->hasConfig = (file_exists($themeConfig) && is_readable($themeConfig));
     }
@@ -226,7 +226,7 @@ class Theme
      * @param string $type 'admin' or 'public', defaults to current type
      * @return string
      */
-    static public function getCurrentThemeName($type = null)
+    public static function getCurrentThemeName($type = null)
     {
         if ($type === null) {
             $type = is_admin_theme() ? 'admin' : 'public';
@@ -235,13 +235,12 @@ class Theme
         return apply_filters($type . '_theme_name', get_option("{$type}_theme"));
     }
 
-
     /**
      * Retrieve all themes
      *
      * @return array An array of theme objects
      */
-    static public function getAllThemes() 
+    public static function getAllThemes()
     {
         /**
          * Create an array of themes, with the directory paths
@@ -262,7 +261,7 @@ class Theme
      * @todo Merge with getAllThemes() or make Theme more generic.
      * @return array An array of theme objects
      */
-    static public function getAllAdminThemes()
+    public static function getAllAdminThemes()
     {
         /**
          * Create an array of themes, with the directory paths
@@ -289,12 +288,12 @@ class Theme
      * @param string $themeName  The name of the theme.
      * @return Theme A theme object
      */
-    static public function getTheme($themeName) 
+    public static function getTheme($themeName)
     {
-        $theme = new Theme($themeName);     
+        $theme = new self($themeName);
         return $theme;
     }
-    
+
     /** 
      * Set theme configuration options.
      * 
@@ -302,13 +301,13 @@ class Theme
      * @param array $themeConfigOptions An associative array of configuration options, 
      *  where each key is a configuration form input name and 
      *  each value is a string value of that configuration form input
-     */    
-    static public function setOptions($themeName, $themeConfigOptions)
+     */
+    public static function setOptions($themeName, $themeConfigOptions)
     {
         $themeOptionName = self::getOptionName($themeName);
         set_option($themeOptionName, serialize($themeConfigOptions));
     }
-    
+
     /** 
      * Get theme configuration options.
      * 
@@ -317,13 +316,13 @@ class Theme
      *  where each key is a configuration form input name and 
      *  each value is a string value of that configuration form input
      */
-    static public function getOptions($themeName)
+    public static function getOptions($themeName)
     {
         $themeOptionName = self::getOptionName($themeName);
         $themeConfigOptions = get_option($themeOptionName);
         $themeConfigOptions = apply_filters(
-            'theme_options', 
-            $themeConfigOptions, 
+            'theme_options',
+            $themeConfigOptions,
             array('theme_name' => $themeName)
         );
         if ($themeConfigOptions) {
@@ -333,7 +332,7 @@ class Theme
         }
         return $themeConfigOptions;
     }
-    
+
     /** 
      * Get the value of a theme configuration option.
      * 
@@ -341,18 +340,18 @@ class Theme
      * @param string $themeOptionName The name of the theme option
      * @return string The value of the theme option
      */
-    static public function getOption($themeName, $themeOptionName)
+    public static function getOption($themeName, $themeOptionName)
     {
         $themeOptionValue = null;
         $themeName = trim($themeName);
         $themeOptionName = Inflector::underscore($themeOptionName);
         $themeConfigOptions = self::getOptions($themeName);
-        if ($themeConfigOptions && array_key_exists($themeOptionName, $themeConfigOptions)) {        
+        if ($themeConfigOptions && array_key_exists($themeOptionName, $themeConfigOptions)) {
             $themeOptionValue = $themeConfigOptions[$themeOptionName];
         }
         return $themeOptionValue;
     }
-    
+
     /** 
      * Set the value of a theme configuration option.
      * 
@@ -360,15 +359,15 @@ class Theme
      * @param string $themeOptionName The name of the theme option
      * @param string The value of the theme option
      */
-    static public function setOption($themeName, $themeOptionName, $themeOptionValue)
+    public static function setOption($themeName, $themeOptionName, $themeOptionValue)
     {
         $themeName = trim($themeName);
         $themeOptionName = Inflector::underscore($themeOptionName);
         $themeConfigOptions = self::getOptions($themeName);
         $themeConfigOptions[$themeOptionName] = $themeOptionValue;
-        self::setOptions($themeName, $themeConfigOptions);        
+        self::setOptions($themeName, $themeConfigOptions);
     }
-    
+
     /** 
      * Get the name of a specific theme's option.  Each theme has a single
      * option in the option's table, which stores all of the configuration
@@ -377,12 +376,12 @@ class Theme
      * @param string $themeName  The name of the theme
      * @return string The name of a specific theme's option.
      */
-    static public function getOptionName($themeName)
+    public static function getOptionName($themeName)
     {
         $themeOptionName = 'theme_' . trim(strtolower($themeName)) . '_options';
         return $themeOptionName;
     }
-    
+
     /** 
      * Get the name of a file uploaded as a theme configuration option.  
      * This is the name of the file after it has been uploaded and renamed.
@@ -392,21 +391,21 @@ class Theme
      * @param string $fileName The name of the uploaded file
      * @return string The name of an uploaded file for the theme.
      */
-    static public function getUploadedFileName($themeName, $optionName, $fileName)
+    public static function getUploadedFileName($themeName, $optionName, $fileName)
     {
         $filter = new Omeka_Filter_Filename;
         return $filter->renameFile($fileName);
     }
-    
+
     /**
      * Parses the website string to confirm whether it has a scheme.
      *
      * @param string $website The website given in the theme's INI file.
      * @return string The website URL with a prepended scheme.
      */
-    static protected function _parseWebsite($website)
+    protected static function _parseWebsite($website)
     {
-        if ( !parse_url($website, PHP_URL_SCHEME) ) {
+        if (!parse_url($website, PHP_URL_SCHEME)) {
             return 'http://'.$website;
         }
         return $website;

@@ -19,35 +19,35 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
      * @var Zend_View
      */
     protected $_view;
-    
+
     /**
      * List of options from the database.
      *
      * @var array
      */
     protected $_dbOptions = array();
-    
+
     /**
      * Base path to themes directory.
      *
      * @var string
      */
     protected $_baseThemePath;
-    
+
     /**
      * Base web-accesible path to themes.
      *
      * @var string
      */
     protected $_webBaseThemePath;
-    
+
     /**
      * MVC plugin behaviors class.
      * 
      * @var Omeka_Plugin_Mvc
      */
     protected $_pluginMvc;
-    
+
     /**
      * @param array $options List of options.
      * @param Omeka_Plugin_Mvc $pluginMvc Plugin MVC class.
@@ -67,14 +67,13 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
      * script paths will be available to the view.  
      * 
      * @param Zend_Controller_Request_Abstract $request Request object.
-     * @return void
      */
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
         // Getting the module name from the request object is pretty much the main
         // reason why this needs to be in a controller plugin and can't be localized
         // to the view script.
-        
+
         $moduleName = $request->getModuleName();
         $isPluginModule = !in_array($moduleName, array('default', null));
         $themeType = is_admin_theme() ? 'admin' : 'public';
@@ -120,17 +119,16 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
      * Add a new script path for a plugin to the view.
      *
      * @param string $scriptPath Path from plugins dir to script dir.
-     * @return void
      */
     protected function _addPathToView($scriptPath)
     {
         $view = $this->_getView();
         $physicalPath = PLUGIN_DIR . '/' . $scriptPath;
-        $webPath      = WEB_PLUGIN . '/' . $scriptPath;
+        $webPath = WEB_PLUGIN . '/' . $scriptPath;
         $view->addAssetPath($physicalPath, $webPath);
         $view->addScriptPath($physicalPath);
     }
-    
+
     /**
      * Gets the view from the registry.
      *
@@ -143,41 +141,38 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
         if (!$this->_view) {
             $this->_view = Zend_Registry::get('view');
         }
-        
+
         return $this->_view;
     }
-    
+
     /**
      * Add the global views from the view scripts directory to the view.
-     *
-     * @return void
      */
     protected function _addSharedViewsDir()
     {
         $view = $this->_getView();
-        
+
         //Baseline view scripts get checked first
         $view->addScriptPath(VIEW_SCRIPTS_DIR);
-        
-        //View scripts and shared directory get checked for assets 
+
+        //View scripts and shared directory get checked for assets
         $view->addAssetPath(VIEW_SCRIPTS_DIR, WEB_VIEW_SCRIPTS);
     }
-    
+
     /**
      * Add script and asset paths for a theme to the view.
      * 
      * @param string $theme Theme type; either 'public' or 'admin'.
-     * @return void
      */
     protected function _addThemePaths($theme)
     {
         $this->_addSharedViewsDir();
-        
+
         $view = $this->_getView();
         if ($themeName = $this->getThemeOption($theme)) {
             $scriptPath = $this->_baseThemePath . '/' . $themeName;
             $view->addScriptPath($scriptPath);
-            $view->addAssetPath($scriptPath, $this->_webBaseThemePath . '/' . $themeName);            
+            $view->addAssetPath($scriptPath, $this->_webBaseThemePath . '/' . $themeName);
         }
     }
 
@@ -196,7 +191,7 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
             $view->addAssetPath($scriptPath, $this->_webBaseThemePath . '/' . $themeName . '/' . $pluginModuleName);
         }
     }
-    
+
     /**
      * Retrieve the option from the database that contains the directory of
      * the theme to render. 

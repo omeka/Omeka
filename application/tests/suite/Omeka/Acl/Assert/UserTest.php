@@ -5,7 +5,7 @@ class Omeka_Acl_Assert_UserTest extends Omeka_Test_AppTestCase
     public function setUp()
     {
         parent::setUp();
-        
+
         $this->super = new User();
         $this->super->role = 'super';
         $this->super->id = 1;
@@ -62,7 +62,7 @@ class Omeka_Acl_Assert_UserTest extends Omeka_Test_AppTestCase
      */
     public function testUserAccountAcl($isAllowed, $roleUser, $resourceUser, $privilege)
     {
-        $this->assertEquals($isAllowed, $this->acl->isAllowed($this->$roleUser, 
+        $this->assertEquals($isAllowed, $this->acl->isAllowed($this->$roleUser,
             $this->$resourceUser, $privilege));
     }
 }

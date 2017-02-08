@@ -16,9 +16,9 @@ class Omeka_Form_ResetPassword extends Omeka_Form
     public function init()
     {
         parent::init();
-        
+
         $this->setAttrib('id', 'reset-password');
-        
+
         $this->addElement('password', 'new_password', array(
             'label' => __('Create a Password'),
             'validators' => array(
@@ -39,11 +39,11 @@ class Omeka_Form_ResetPassword extends Omeka_Form
                 ))
             )
         ));
-        
+
         $this->addElement('password', 'new_password_confirm', array(
             'label' => __('Re-type the Password')
         ));
-        
+
         $this->addElement('submit', 'Submit');
     }
 }

@@ -44,34 +44,33 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
         $this->_record = $record;
 
         $inputNameStem = "Elements[" . $this->_element->id . "][$index]";
-        
+
         $components = array(
             'input' => $this->_getInputComponent($inputNameStem, $value),
             'form_controls' => $this->_getControlsComponent(),
             'html_checkbox' => $this->_getHtmlCheckboxComponent($inputNameStem, $isHtml),
             'html' => null
         );
-        
+
         $filterName = array('ElementInput',
                             get_class($this->_record),
                             $this->_element->set_name,
                             $this->_element->name);
-        
+
         // Plugins should apply a filter to this HTML in order to display it in a certain way.
         $components = apply_filters($filterName,
-                                    $components, 
-                                    array('input_name_stem' => $inputNameStem, 
-                                          'value' => $value, 
-                                          'record' => $this->_record, 
+                                    $components,
+                                    array('input_name_stem' => $inputNameStem,
+                                          'value' => $value,
+                                          'record' => $this->_record,
                                           'element' => $this->_element,
                                           'index' => $index,
                                           'is_html' => $isHtml));
-                                    
-        
+
         if ($components['html'] !== null) {
             return strval($components['html']);
         }
-        
+
         $html = '<div class="input-block">'
               . '<div class="input">'
               . $components['input']
@@ -91,10 +90,10 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
      * @return string
      */
     protected function _getInputComponent($inputNameStem, $value)
-    {        
+    {
         $html = $this->view->formTextarea($inputNameStem . '[text]',
                                           $value,
-                                          array('rows' => 3, 
+                                          array('rows' => 3,
                                                 'cols' => 50));
         return $html;
     }
@@ -109,7 +108,7 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
     protected function _getControlsComponent()
     {
         $html = '<div class="controls">'
-              . $this->view->formSubmit(null, 
+              . $this->view->formSubmit(null,
                                        __('Remove'),
                                        array('class' => 'remove-element red button'))
               . '</div>';

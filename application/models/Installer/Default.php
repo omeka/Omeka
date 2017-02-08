@@ -16,13 +16,13 @@ class Installer_Default implements Installer_InstallerInterface
 {
     const DEFAULT_USER_ACTIVE = true;
     const DEFAULT_USER_ROLE = 'super';
-    
+
     const DEFAULT_PUBLIC_THEME = 'default';
     const DEFAULT_ADMIN_THEME = 'default';
-    
+
     private $_db;
     private $_form;
-    
+
     /**
      * Constructor.
      * 
@@ -32,7 +32,7 @@ class Installer_Default implements Installer_InstallerInterface
     {
         $this->_db = $db;
     }
-    
+
     /**
      * Set the form from which to extract data for the installer.
      * 
@@ -42,7 +42,7 @@ class Installer_Default implements Installer_InstallerInterface
     {
         $this->_form = $form;
     }
-    
+
     public function getDb()
     {
         return $this->_db;
@@ -59,23 +59,23 @@ class Installer_Default implements Installer_InstallerInterface
 
         $this->getDb()->commit();
     }
-    
+
     protected function _getValue($fieldName)
     {
         if (!$this->_form) {
             throw new Installer_Exception("Form was not set via setForm().");
         }
-        
+
         return $this->_form->getValue($fieldName);
     }
-    
+
     private function _createSchema()
     {
         $schemaTask = new Installer_Task_Schema();
         $schemaTask->useDefaultTables();
         $schemaTask->install($this->_db);
     }
-    
+
     private function _createUser()
     {
         $userTask = new Installer_Task_User;
@@ -83,8 +83,8 @@ class Installer_Default implements Installer_InstallerInterface
         $userTask->setPassword($this->_getValue('password'));
         $userTask->setEmail($this->_getValue('super_email'));
         $userTask->setName(Omeka_Form_Install::DEFAULT_USER_NAME);
-        $userTask->setIsActive(Installer_Default::DEFAULT_USER_ACTIVE);
-        $userTask->setRole(Installer_Default::DEFAULT_USER_ROLE);
+        $userTask->setIsActive(self::DEFAULT_USER_ACTIVE);
+        $userTask->setRole(self::DEFAULT_USER_ROLE);
         $userTask->install($this->_db);
     }
 
@@ -93,44 +93,44 @@ class Installer_Default implements Installer_InstallerInterface
         $task = new Installer_Task_Migrations();
         $task->install($this->_db);
     }
-    
+
     private function _addOptions()
     {
         $task = new Installer_Task_Options();
         $task->setOptions(array(
-            'administrator_email'           => $this->_getValue('administrator_email'), 
-            'copyright'                     => $this->_getValue('copyright'), 
-            'site_title'                    => $this->_getValue('site_title'), 
-            'author'                        => $this->_getValue('author'), 
-            'description'                   => $this->_getValue('description'), 
-            'thumbnail_constraint'          => $this->_getValue('thumbnail_constraint'), 
-            'square_thumbnail_constraint'   => $this->_getValue('square_thumbnail_constraint'), 
-            'fullsize_constraint'           => $this->_getValue('fullsize_constraint'), 
-            'per_page_admin'                => $this->_getValue('per_page_admin'), 
-            'per_page_public'               => $this->_getValue('per_page_public'), 
-            'show_empty_elements'           => $this->_getValue('show_empty_elements'),
-            'path_to_convert'               => $this->_getValue('path_to_convert'),
-            Theme::ADMIN_THEME_OPTION       => Installer_Default::DEFAULT_ADMIN_THEME,
-            Theme::PUBLIC_THEME_OPTION      => Installer_Default::DEFAULT_PUBLIC_THEME,
+            'administrator_email' => $this->_getValue('administrator_email'),
+            'copyright' => $this->_getValue('copyright'),
+            'site_title' => $this->_getValue('site_title'),
+            'author' => $this->_getValue('author'),
+            'description' => $this->_getValue('description'),
+            'thumbnail_constraint' => $this->_getValue('thumbnail_constraint'),
+            'square_thumbnail_constraint' => $this->_getValue('square_thumbnail_constraint'),
+            'fullsize_constraint' => $this->_getValue('fullsize_constraint'),
+            'per_page_admin' => $this->_getValue('per_page_admin'),
+            'per_page_public' => $this->_getValue('per_page_public'),
+            'show_empty_elements' => $this->_getValue('show_empty_elements'),
+            'path_to_convert' => $this->_getValue('path_to_convert'),
+            Theme::ADMIN_THEME_OPTION => self::DEFAULT_ADMIN_THEME,
+            Theme::PUBLIC_THEME_OPTION => self::DEFAULT_PUBLIC_THEME,
             Omeka_Validate_File_Extension::WHITELIST_OPTION => Omeka_Validate_File_Extension::DEFAULT_WHITELIST,
-            Omeka_Validate_File_MimeType::WHITELIST_OPTION  => Omeka_Validate_File_MimeType::DEFAULT_WHITELIST,
-            File::DISABLE_DEFAULT_VALIDATION_OPTION         => (string)!extension_loaded('fileinfo'),
+            Omeka_Validate_File_MimeType::WHITELIST_OPTION => Omeka_Validate_File_MimeType::DEFAULT_WHITELIST,
+            File::DISABLE_DEFAULT_VALIDATION_OPTION => (string) !extension_loaded('fileinfo'),
             Omeka_Db_Migration_Manager::VERSION_OPTION_NAME => OMEKA_VERSION,
-            'display_system_info'           => true, 
+            'display_system_info' => true,
             'html_purifier_is_enabled' => 1,
             'html_purifier_allowed_html_elements' => implode(',', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlElements()),
             'html_purifier_allowed_html_attributes' => implode(',', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlAttributes()),
-            'tag_delimiter'                 => ',',
+            'tag_delimiter' => ',',
             Omeka_Navigation::PUBLIC_NAVIGATION_MAIN_OPTION_NAME => Omeka_Navigation::getNavigationOptionValueForInstall(),
-            'search_record_types' => serialize(get_search_record_types()), 
-            'api_enable' => false, 
+            'search_record_types' => serialize(get_search_record_types()),
+            'api_enable' => false,
             'api_per_page' => 50,
             'show_element_set_headings' => 1,
             'use_square_thumbnail' => 1
         ));
         $task->install($this->_db);
     }
-    
+
     public function isInstalled()
     {
         // Assume Omeka is not installed if the `options` table does not exist.

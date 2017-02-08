@@ -15,8 +15,6 @@ class Output_FileOmekaXml extends Omeka_Output_OmekaXml_AbstractOmekaXml
 {
     /**
      * Create a node repesenting a File record.
-     *
-     * @return void
      */
     protected function _buildNode()
     {
@@ -24,19 +22,19 @@ class Output_FileOmekaXml extends Omeka_Output_OmekaXml_AbstractOmekaXml
         if ($this->_record->order) {
             $fileElement->setAttribute('order', $this->_record->order);
         }
-        $srcElement = $this->_createElement('src', $this->_record->getWebPath(), 
+        $srcElement = $this->_createElement('src', $this->_record->getWebPath(),
             null, $fileElement);
-        $authenticationElement = $this->_createElement('authentication', 
+        $authenticationElement = $this->_createElement('authentication',
             $this->_record->authentication, null, $fileElement);
         $this->_buildElementSetContainerForRecord($this->_record, $fileElement);
-        
+
         if (in_array($this->_context, array('file'))) {
             $item = get_db()->getTable('Item')->find($this->_record->item_id);
             $itemOmekaXml = new Output_ItemOmekaXml($item, $this->_context);
             $itemElement = $this->_doc->importNode($itemOmekaXml->_node, true);
             $fileElement->appendChild($itemElement);
         }
-        
+
         $this->_node = $fileElement;
     }
 }

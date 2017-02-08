@@ -15,13 +15,13 @@ class Mixin_Owner extends Omeka_Record_Mixin_AbstractMixin
 {
     protected $_record;
     protected $_column;
-    
+
     public function __construct($record, $column = 'owner_id')
     {
         parent::__construct($record);
         $this->_column = $column;
     }
-    
+
     public function beforeSave($args)
     {
         // After inserting a record, mark that the logged-in user owns it.
@@ -67,7 +67,7 @@ class Mixin_Owner extends Omeka_Record_Mixin_AbstractMixin
      * Check if the given User owns this record.
      *
      * @param User $user
-     * @return boolean
+     * @return bool
      */
     public function isOwnedBy(User $user)
     {

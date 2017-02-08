@@ -15,36 +15,34 @@ class Output_ItemOmekaXml extends Omeka_Output_OmekaXml_AbstractOmekaXml
 {
     /**
      * Create a node representing an Item record.
-     *
-     * @return void
      */
     protected function _buildNode()
     {
         // item
         $itemElement = $this->_createElement('item', null, $this->_record->id);
-        
+
         $itemElement->setAttribute('public', $this->_record->public);
         $itemElement->setAttribute('featured', $this->_record->featured);
-        
+
         if (!in_array($this->_context, array('file'))) {
             // fileContainer
             $this->_buildFileContainerForItem($this->_record, $itemElement);
         }
-        
+
         if (!in_array($this->_context, array('collection'))) {
             // collection
             $this->_buildCollectionForItem($this->_record, $itemElement);
         }
-        
+
         // itemType
         $this->_buildItemTypeForItem($this->_record, $itemElement);
-        
+
         // elementSetContainer
         $this->_buildElementSetContainerForRecord($this->_record, $itemElement);
-        
+
         // tagContainer
         $this->_buildTagContainerForItem($this->_record, $itemElement);
-        
+
         $this->_node = $itemElement;
     }
 }

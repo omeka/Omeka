@@ -12,4 +12,6 @@
  * 
  * @package Omeka\Controller
  */
-class Omeka_Controller_Exception_404 extends Exception {}
+class Omeka_Controller_Exception_404 extends Exception
+{
+}

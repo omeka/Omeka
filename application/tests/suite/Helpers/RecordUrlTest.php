@@ -13,7 +13,7 @@ class Omeka_View_Helper_RecordUrlTest extends Omeka_Test_AppTestCase
     public function setUp()
     {
         parent::setUp();
-        
+
         $view = new Omeka_View;
         $this->helper = $view->getHelper('RecordUrl');
 
@@ -28,7 +28,7 @@ class Omeka_View_Helper_RecordUrlTest extends Omeka_Test_AppTestCase
         $this->mockRoute = $this->getMock('Item', array('getRecordUrl'), array(), '', false);
         $this->mockRoute->expects($this->any())->method('getRecordUrl')
             ->will($this->returnValue(array(
-                'controller' => 'items', 
+                'controller' => 'items',
                 'action' => 'browse')));
     }
 

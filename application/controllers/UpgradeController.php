@@ -16,9 +16,8 @@ class UpgradeController extends Zend_Controller_Action
                                 array $invokeArgs = array())
     {
         parent::__construct($request, $response, $invokeArgs);
-
     }
-    
+
     public function indexAction()
     {
         if (!$this->_satisfiesPhpRequirement()) {
@@ -29,8 +28,6 @@ class UpgradeController extends Zend_Controller_Action
 
     /**
      * Run the migration script, obtain any success/error output and display it in a pretty way
-     *
-     * @return void
      **/
     public function migrateAction()
     {

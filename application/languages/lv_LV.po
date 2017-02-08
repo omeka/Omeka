@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2016-05-23 21:15+0000\n"
+"PO-Revision-Date: 2016-12-15 22:50+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Latvian (Latvia) (http://www.transifex.com/omeka/omeka/language/lv_LV/)\n"
 "MIME-Version: 1.0\n"
@@ -26,8 +26,8 @@ msgid ""
 msgstr "Metadatu elementu uzstādījums ir kopīgs visiem Omeka ierakstiem, tajā skaitā priekšmetiem, failiem un kolekcijām. Vairāk informācijas vietnē  http://dublincore.org/documents/dces/."
 
 #. Dublin Core: Title element name
-#: admin/themes/default/collections/browse.php:22
-#: admin/themes/default/items/browse.php:40
+#: admin/themes/default/collections/browse.php:29
+#: admin/themes/default/items/browse.php:46
 #: admin/themes/default/search/index.php:13
 #: application/views/scripts/collections/browse.php:10
 #: application/views/scripts/items/browse.php:19
@@ -40,7 +40,7 @@ msgid "A name given to the resource"
 msgstr "Resursa nosaukums"
 
 #. Dublin Core: Creator element name
-#: admin/themes/default/items/browse.php:41
+#: admin/themes/default/items/browse.php:47
 #: application/views/scripts/items/browse.php:20
 msgid "Creator"
 msgstr "Izgatavotājs"
@@ -98,7 +98,7 @@ msgid ""
 msgstr "Laika periods, kas raksturo resursa pastāvēšanu"
 
 #. Dublin Core: Type element name
-#: admin/themes/default/items/browse.php:42
+#: admin/themes/default/items/browse.php:48
 msgid "Type"
 msgstr "Veids"
 
@@ -363,7 +363,8 @@ msgstr "Pievienot saiti"
 #: admin/themes/default/element-sets/edit.php:41
 #: admin/themes/default/files/edit.php:35
 #: admin/themes/default/item-types/edit.php:18
-#: admin/themes/default/items/batch-edit.php:131
+#: admin/themes/default/items/batch-edit-all.php:41
+#: admin/themes/default/items/batch-edit.php:61
 #: admin/themes/default/items/edit.php:19
 #: admin/themes/default/plugins/config.php:14
 #: admin/themes/default/settings/edit-api.php:82
@@ -393,18 +394,18 @@ msgid "View Public Page"
 msgstr "Apskatīt publicēto lapu"
 
 #: admin/themes/default/appearance/edit-navigation.php:44
-#: admin/themes/default/collections/edit.php:24
+#: admin/themes/default/collections/edit.php:25
 #: admin/themes/default/collections/show.php:36
 #: admin/themes/default/element-sets/browse.php:29
 #: admin/themes/default/files/edit.php:37
 #: admin/themes/default/files/show.php:30
 #: admin/themes/default/item-types/edit.php:20
 #: admin/themes/default/item-types/show.php:54
-#: admin/themes/default/items/batch-edit.php:120
-#: admin/themes/default/items/browse.php:27
-#: admin/themes/default/items/browse.php:81
-#: admin/themes/default/items/browse.php:123
-#: admin/themes/default/items/edit.php:21
+#: admin/themes/default/items/batch-edit.php:50
+#: admin/themes/default/items/browse.php:34
+#: admin/themes/default/items/browse.php:95
+#: admin/themes/default/items/browse.php:135
+#: admin/themes/default/items/edit.php:22
 #: admin/themes/default/items/show.php:47
 #: admin/themes/default/settings/edit-item-type-elements.php:23
 #: admin/themes/default/users/browse.php:66
@@ -426,9 +427,9 @@ msgid ""
 msgstr "Visas izmaiņas tiks pazaudētas. Kārtība un paraksti tiks atgriezti sākotnējā režīmā. "
 
 #: admin/themes/default/collections/add.php:2
-#: admin/themes/default/collections/browse.php:11
-#: admin/themes/default/collections/browse.php:67
-#: admin/themes/default/collections/browse.php:76
+#: admin/themes/default/collections/browse.php:12
+#: admin/themes/default/collections/browse.php:75
+#: admin/themes/default/collections/browse.php:85
 msgid "Add a Collection"
 msgstr "Pievienot kolekciju"
 
@@ -437,22 +438,22 @@ msgid "Add Collection"
 msgstr "Pievienot kolekciju"
 
 #: admin/themes/default/collections/add.php:16
-#: admin/themes/default/collections/edit.php:30
+#: admin/themes/default/collections/edit.php:32
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/items/add.php:19
-#: admin/themes/default/items/batch-edit.php:51
-#: admin/themes/default/items/edit.php:28
+#: admin/themes/default/items/batch-edit-common.php:10
+#: admin/themes/default/items/edit.php:30
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:52
 msgid "Public"
 msgstr "Publisks"
 
 #: admin/themes/default/collections/add.php:19
-#: admin/themes/default/collections/edit.php:35
+#: admin/themes/default/collections/edit.php:37
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/add.php:25
-#: admin/themes/default/items/batch-edit.php:66
-#: admin/themes/default/items/edit.php:34
+#: admin/themes/default/items/batch-edit-common.php:24
+#: admin/themes/default/items/edit.php:36
 #: admin/themes/default/items/quick-filters.php:8
 #: admin/themes/default/items/show.php:53
 msgid "Featured"
@@ -482,32 +483,44 @@ msgstr "Skatīt kolekcijas"
 msgid "(%s total)"
 msgstr "(%s pavisam)"
 
-#: admin/themes/default/collections/browse.php:23
+#: admin/themes/default/collections/browse.php:17
+#, php-format
+msgid "%sOne item%s has no collection."
+msgid_plural "%s%d items%s aren't in a collection."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: admin/themes/default/collections/browse.php:19
+msgid "All items are in a collection."
+msgstr ""
+
+#: admin/themes/default/collections/browse.php:30
 #: admin/themes/default/collections/show.php:51
-#: application/views/scripts/collections/browse.php:36
+#: application/views/scripts/collections/browse.php:35
 msgid "Contributors"
 msgstr "Ieguldītājs"
 
-#: admin/themes/default/collections/browse.php:24
+#: admin/themes/default/collections/browse.php:31
 #: admin/themes/default/files/show.php:66
-#: admin/themes/default/items/browse.php:43
+#: admin/themes/default/items/browse.php:49
 #: application/views/scripts/collections/browse.php:11
 #: application/views/scripts/items/browse.php:21
 msgid "Date Added"
 msgstr "Pievienošanas datums"
 
-#: admin/themes/default/collections/browse.php:25
+#: admin/themes/default/collections/browse.php:32
 #: admin/themes/default/collections/show.php:46
 #: admin/themes/default/item-types/show.php:42
 msgid "Total Number of Items"
 msgstr "Pavisam priekšmetu"
 
-#: admin/themes/default/collections/browse.php:40
-#: admin/themes/default/items/browse.php:72
+#: admin/themes/default/collections/browse.php:47
+#: admin/themes/default/items/browse.php:86
 msgid "(Private)"
 msgstr "(Privāts)"
 
-#: admin/themes/default/collections/browse.php:43
+#: admin/themes/default/collections/browse.php:50
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:27
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
@@ -515,34 +528,42 @@ msgstr "(Privāts)"
 #: admin/themes/default/index.php:79
 #: admin/themes/default/item-types/browse.php:26
 #: admin/themes/default/item-types/show.php:51
-#: admin/themes/default/items/browse.php:24
-#: admin/themes/default/items/browse.php:77
-#: admin/themes/default/items/browse.php:120
+#: admin/themes/default/items/browse.php:31
+#: admin/themes/default/items/browse.php:91
+#: admin/themes/default/items/browse.php:132
 #: admin/themes/default/items/files-form.php:12
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:63
 msgid "Edit"
 msgstr "Rediģēt"
 
-#: admin/themes/default/collections/browse.php:52
+#: admin/themes/default/collections/browse.php:59
 msgid "No contributors"
 msgstr "Nav ieguldītāju"
 
-#: admin/themes/default/collections/browse.php:70
+#: admin/themes/default/collections/browse.php:79
 msgid "There are no collections on this page."
 msgstr "Šajā lapā nav kolekciju"
 
-#: admin/themes/default/collections/browse.php:70
+#: admin/themes/default/collections/browse.php:79
 msgid "View All Collections"
 msgstr "Skatīt visas kolekcijas"
 
-#: admin/themes/default/collections/browse.php:73
+#: admin/themes/default/collections/browse.php:82
 msgid "You have no collections."
 msgstr "Jums nav kolekciju."
 
-#: admin/themes/default/collections/browse.php:75
+#: admin/themes/default/collections/browse.php:84
 msgid "Get started by adding your first collection."
 msgstr "Izveidojiet savu pirmo kolekciju."
+
+#: admin/themes/default/collections/edit.php:3
+#: admin/themes/default/collections/show.php:3
+#: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
+#: application/models/Mixin/ElementText.php:780
+#: application/views/scripts/functions.php:22
+msgid "[Untitled]"
+msgstr "[Nenosaukts]"
 
 #: admin/themes/default/collections/edit.php:8
 #, php-format
@@ -564,7 +585,7 @@ msgstr "Visjaunākie priekšmeti"
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/show.php:52
 #: admin/themes/default/items/show.php:53
-#: application/views/helpers/ItemSearchFilters.php:69
+#: application/views/helpers/ItemSearchFilters.php:68
 msgid "Yes"
 msgstr "Jā"
 
@@ -572,13 +593,22 @@ msgstr "Jā"
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/show.php:52
 #: admin/themes/default/items/show.php:53
-#: application/views/helpers/ItemSearchFilters.php:69
+#: application/views/helpers/ItemSearchFilters.php:68
 msgid "No"
 msgstr "Nē"
 
 #: admin/themes/default/collections/show.php:56
 msgid "No contributors."
 msgstr "Nav ieguldītāju"
+
+#: admin/themes/default/collections/show.php:62
+#: admin/themes/default/files/show.php:93
+#: admin/themes/default/items/browse.php:149
+#: admin/themes/default/items/show.php:88
+#: application/views/scripts/items/browse.php:60
+#: application/views/scripts/items/show.php:41
+msgid "Output Formats"
+msgstr ""
 
 #: admin/themes/default/common/appearance-nav.php:5
 msgid "Themes"
@@ -609,7 +639,7 @@ msgid "Dashboard"
 msgstr "Mērinstrumentu panelis"
 
 #: admin/themes/default/common/content-nav.php:9
-#: admin/themes/default/items/batch-delete.php:17
+#: admin/themes/default/items/batch-delete.php:15
 #: admin/themes/default/items/batch-edit.php:17
 msgid "Items"
 msgstr "Priekšmeti"
@@ -623,10 +653,10 @@ msgid "Item Types"
 msgstr "Priekšmetu veidi"
 
 #: admin/themes/default/common/content-nav.php:21
-#: admin/themes/default/items/browse.php:94
+#: admin/themes/default/items/browse.php:108
 #: admin/themes/default/items/show.php:65
 #: application/views/scripts/items/browse.php:46
-#: application/views/scripts/items/show.php:26
+#: application/views/scripts/items/show.php:29
 msgid "Tags"
 msgstr "Birkas"
 
@@ -680,18 +710,18 @@ msgstr "Lietotāji"
 msgid "Omeka Admin"
 msgstr "Omeka Admins"
 
-#: admin/themes/default/common/header.php:40
+#: admin/themes/default/common/header.php:41
 #: application/views/scripts/common/header.php:32
 msgid "Skip to main content"
 msgstr "Pāriet pie satura"
 
-#: admin/themes/default/common/header.php:60
+#: admin/themes/default/common/header.php:61
 #: application/views/scripts/common/admin-bar.php:7
 #, php-format
 msgid "Welcome, %s"
 msgstr "Laipni lūgti, %s"
 
-#: admin/themes/default/common/header.php:61
+#: admin/themes/default/common/header.php:62
 #: application/views/scripts/common/admin-bar.php:15
 msgid "Log Out"
 msgstr "Iziet"
@@ -909,14 +939,6 @@ msgstr "Faila veids / OS"
 msgid "Embedded Metadata"
 msgstr "Iekļautie metadati"
 
-#: admin/themes/default/files/show.php:93
-#: admin/themes/default/items/browse.php:133
-#: admin/themes/default/items/show.php:88
-#: application/views/scripts/items/browse.php:60
-#: application/views/scripts/items/show.php:38
-msgid "Output Formats"
-msgstr ""
-
 #: admin/themes/default/index.php:10
 msgid "item"
 msgid_plural "items"
@@ -1058,9 +1080,9 @@ msgid "There are no recently added items."
 msgstr "Nav jaunu priekšmetu"
 
 #: admin/themes/default/items/add.php:2
-#: admin/themes/default/items/browse.php:20
-#: admin/themes/default/items/browse.php:116
-#: admin/themes/default/items/browse.php:152
+#: admin/themes/default/items/browse.php:19
+#: admin/themes/default/items/browse.php:141
+#: admin/themes/default/items/browse.php:168
 msgid "Add an Item"
 msgstr "Pievienot priekšmetu"
 
@@ -1069,32 +1091,118 @@ msgid "Add Item"
 msgstr "Pievienot priekšmetu"
 
 #: admin/themes/default/items/add.php:32
-#: admin/themes/default/items/batch-edit.php:90
-#: admin/themes/default/items/browse.php:90
-#: admin/themes/default/items/edit.php:41
+#: admin/themes/default/items/batch-edit-common.php:48
+#: admin/themes/default/items/browse.php:104
+#: admin/themes/default/items/edit.php:43
 #: admin/themes/default/items/show.php:57
 #: application/libraries/globals.php:411
-#: application/views/scripts/items/show.php:18
+#: application/views/scripts/items/show.php:21
 msgid "Collection"
 msgstr "Kolekcija"
+
+#: admin/themes/default/items/batch-delete-all.php:2
+msgid "Batch Delete All Searched Items"
+msgstr ""
+
+#: admin/themes/default/items/batch-delete-all.php:18
+#, php-format
+msgid "All %d items matching the search filters above will be deleted."
+msgstr ""
+
+#: admin/themes/default/items/batch-delete-all.php:20
+#, php-format
+msgid "All %d items will be deleted."
+msgstr ""
+
+#: admin/themes/default/items/batch-delete-all.php:25
+msgid "Deletions will be processed in the background item by item."
+msgstr ""
+
+#: admin/themes/default/items/batch-delete-all.php:36
+#: admin/themes/default/items/batch-delete.php:47
+#: admin/themes/default/items/batch-edit.php:47
+msgid "Delete Items"
+msgstr "Dzēst priekšmetu"
 
 #: admin/themes/default/items/batch-delete.php:2
 msgid "Batch Delete Items"
 msgstr "Dzēst priekšmetu kopu"
 
-#: admin/themes/default/items/batch-delete.php:38
+#: admin/themes/default/items/batch-delete.php:36
 msgid ""
 "Some items were excluded because you do not have permission to delete them."
 msgstr "Daži priekšmeti netika pievienoti, jo jums nav tiesību tos dzēst."
 
-#: admin/themes/default/items/batch-delete.php:41
+#: admin/themes/default/items/batch-delete.php:39
 msgid "Checked items will be deleted."
 msgstr "Atzīmētie priekšmeti tiks izdzēsti"
 
-#: admin/themes/default/items/batch-delete.php:50
-#: admin/themes/default/items/batch-edit.php:117
-msgid "Delete Items"
-msgstr "Dzēst priekšmetu"
+#: admin/themes/default/items/batch-edit-all.php:2
+msgid "Batch Edit All Searched Items"
+msgstr ""
+
+#: admin/themes/default/items/batch-edit-all.php:20
+#, php-format
+msgid ""
+"Changes will be applied to all %d items matching the search filters above."
+msgstr ""
+
+#: admin/themes/default/items/batch-edit-all.php:22
+#, php-format
+msgid "Changes will be applied to all %d items."
+msgstr ""
+
+#: admin/themes/default/items/batch-edit-all.php:27
+msgid "Changes will be processed in the background item by item."
+msgstr ""
+
+#: admin/themes/default/items/batch-edit-common.php:2
+msgid "Item Metadata"
+msgstr "Priekšmeta metadati"
+
+#: admin/themes/default/items/batch-edit-common.php:6
+msgid "Public?"
+msgstr "Publisks?"
+
+#: admin/themes/default/items/batch-edit-common.php:9
+#: admin/themes/default/items/batch-edit-common.php:23
+#: admin/themes/default/items/batch-edit-common.php:37
+#: admin/themes/default/items/batch-edit-common.php:52
+msgid "Select Below"
+msgstr "Izvēlēties zemāk"
+
+#: admin/themes/default/items/batch-edit-common.php:11
+msgid "Not Public"
+msgstr "Nav publisks"
+
+#: admin/themes/default/items/batch-edit-common.php:20
+msgid "Featured?"
+msgstr "Izcelt?"
+
+#: admin/themes/default/items/batch-edit-common.php:25
+msgid "Not Featured"
+msgstr "Neizceltie"
+
+#: admin/themes/default/items/batch-edit-common.php:33
+#: admin/themes/default/items/item-type-form.php:3
+msgid "Item Type"
+msgstr "Priekšmeta tips"
+
+#: admin/themes/default/items/batch-edit-common.php:42
+#: admin/themes/default/items/batch-edit-common.php:57
+msgid "Remove?"
+msgstr "Izdzēst?"
+
+#: admin/themes/default/items/batch-edit-common.php:63
+#: admin/themes/default/items/tag-form.php:8
+#: admin/themes/default/items/tag-form.php:11
+msgid "Add Tags"
+msgstr "Pievienot birku"
+
+#: admin/themes/default/items/batch-edit-common.php:66
+#, php-format
+msgid "List of tags to add to all checked items, separated by %s."
+msgstr ""
 
 #: admin/themes/default/items/batch-edit.php:2
 msgid "Batch Edit Items"
@@ -1104,55 +1212,7 @@ msgstr "Rediģēt failu kopu"
 msgid "Changes will be applied to checked items."
 msgstr "Izmaiņas tiks veiktas atzīmētajiem priekšmetiem"
 
-#: admin/themes/default/items/batch-edit.php:42
-msgid "Item Metadata"
-msgstr "Priekšmeta metadati"
-
-#: admin/themes/default/items/batch-edit.php:47
-msgid "Public?"
-msgstr "Publisks?"
-
-#: admin/themes/default/items/batch-edit.php:50
-#: admin/themes/default/items/batch-edit.php:65
-#: admin/themes/default/items/batch-edit.php:79
-#: admin/themes/default/items/batch-edit.php:94
-msgid "Select Below"
-msgstr "Izvēlēties zemāk"
-
-#: admin/themes/default/items/batch-edit.php:52
-msgid "Not Public"
-msgstr "Nav publisks"
-
-#: admin/themes/default/items/batch-edit.php:62
-msgid "Featured?"
-msgstr "Izcelt?"
-
-#: admin/themes/default/items/batch-edit.php:67
-msgid "Not Featured"
-msgstr "Neizceltie"
-
-#: admin/themes/default/items/batch-edit.php:75
-#: admin/themes/default/items/item-type-form.php:3
-msgid "Item Type"
-msgstr "Priekšmeta tips"
-
-#: admin/themes/default/items/batch-edit.php:84
-#: admin/themes/default/items/batch-edit.php:99
-msgid "Remove?"
-msgstr "Izdzēst?"
-
-#: admin/themes/default/items/batch-edit.php:105
-#: admin/themes/default/items/tag-form.php:8
-#: admin/themes/default/items/tag-form.php:11
-msgid "Add Tags"
-msgstr "Pievienot birku"
-
-#: admin/themes/default/items/batch-edit.php:108
-#, php-format
-msgid "List of tags to add to all checked items, separated by %s."
-msgstr ""
-
-#: admin/themes/default/items/batch-edit.php:118
+#: admin/themes/default/items/batch-edit.php:48
 msgid "Check if you wish to delete selected items."
 msgstr "Atzīmējiet priekšmetus kurus vēlaties dzēst."
 
@@ -1197,44 +1257,60 @@ msgstr "Atzīmējiet priekšmetus kurus vēlaties dzēst."
 msgid "Browse Items"
 msgstr "Skatīt priekšmetus"
 
-#: admin/themes/default/items/browse.php:22
-#: admin/themes/default/items/browse.php:118
+#: admin/themes/default/items/browse.php:21
+#: admin/themes/default/items/browse.php:143
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2396
-#: application/libraries/globals.php:2786
+#: application/libraries/globals.php:2400
+#: application/libraries/globals.php:2791
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Meklēt priekšmetus"
 
-#: admin/themes/default/items/browse.php:37
-msgid "Select"
-msgstr "Izvēlēties"
+#: admin/themes/default/items/browse.php:26
+#: admin/themes/default/items/browse.php:129
+#, php-format
+msgid "Select all %s results"
+msgstr ""
 
-#: admin/themes/default/items/browse.php:95
+#: admin/themes/default/items/browse.php:27
+#: admin/themes/default/items/browse.php:130
+msgid "items selected"
+msgstr ""
+
+#: admin/themes/default/items/browse.php:43
+msgid "Select all rows"
+msgstr ""
+
+#: admin/themes/default/items/browse.php:64
+#, php-format
+msgid "Select item \"%s\""
+msgstr ""
+
+#: admin/themes/default/items/browse.php:109
 msgid "No Tags"
 msgstr "Nav birku"
 
-#: admin/themes/default/items/browse.php:139
+#: admin/themes/default/items/browse.php:155
 msgid "Details"
 msgstr "Detaļas"
 
-#: admin/themes/default/items/browse.php:140
+#: admin/themes/default/items/browse.php:156
 msgid "Show Details"
 msgstr "Rādīt detaļas"
 
-#: admin/themes/default/items/browse.php:141
+#: admin/themes/default/items/browse.php:157
 msgid "Hide Details"
 msgstr "Slēpt detaļas"
 
-#: admin/themes/default/items/browse.php:149
+#: admin/themes/default/items/browse.php:165
 msgid "You have no items."
 msgstr "Jums nav priekšmetu"
 
-#: admin/themes/default/items/browse.php:151
+#: admin/themes/default/items/browse.php:167
 msgid "Get started by adding your first item."
 msgstr "Sāciet pievienojot savu pirmo priekšmetu."
 
-#: admin/themes/default/items/browse.php:156
+#: admin/themes/default/items/browse.php:172
 #, php-format
 msgid "The query searched 1 item and returned no results."
 msgid_plural "The query searched %s items and returned no results."
@@ -1242,19 +1318,14 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: admin/themes/default/items/browse.php:157
+#: admin/themes/default/items/browse.php:173
 msgid "refine your search"
 msgstr "Šķirot"
 
-#: admin/themes/default/items/browse.php:157
+#: admin/themes/default/items/browse.php:173
 #, php-format
 msgid "Would you like to %s?"
 msgstr "Vai jūs velētos %s?"
-
-#: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/views/scripts/functions.php:22
-msgid "[Untitled]"
-msgstr "[Nenosaukts]"
 
 #: admin/themes/default/items/edit.php:8
 #, php-format
@@ -1314,112 +1385,151 @@ msgid "Narrow by Specific Fields"
 msgstr ""
 
 #: admin/themes/default/items/search-form.php:28
-#: application/views/scripts/items/search-form.php:90
+#: application/views/scripts/items/search-form.php:105
 msgid "Add a Field"
 msgstr "Pievienot lauku"
 
 #: admin/themes/default/items/search-form.php:54
 #: application/views/scripts/items/search-form.php:50
-msgid "Search Field"
-msgstr "Meklēt lauku"
+msgid "Search Joiner"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:59
+#: application/views/helpers/ItemSearchFilters.php:108
+#: application/views/scripts/items/search-form.php:55
+msgid "AND"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:60
+#: application/views/helpers/ItemSearchFilters.php:106
+#: application/views/scripts/items/search-form.php:56
+msgid "OR"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:67
 #: application/views/scripts/items/search-form.php:63
+msgid "Search Field"
+msgstr "Meklēt lauku"
+
+#: admin/themes/default/items/search-form.php:80
+#: application/views/scripts/items/search-form.php:76
 msgid "Search Type"
 msgstr "Meklēšanas veids"
 
-#: admin/themes/default/items/search-form.php:72
-#: application/views/scripts/items/search-form.php:68
+#: admin/themes/default/items/search-form.php:85
+#: application/views/scripts/items/search-form.php:81
 msgid "contains"
 msgstr "satur"
 
-#: admin/themes/default/items/search-form.php:73
-#: application/views/scripts/items/search-form.php:69
+#: admin/themes/default/items/search-form.php:86
+#: application/views/scripts/items/search-form.php:82
 msgid "does not contain"
 msgstr "nesatur"
 
-#: admin/themes/default/items/search-form.php:74
-#: application/views/scripts/items/search-form.php:70
+#: admin/themes/default/items/search-form.php:87
+#: application/views/scripts/items/search-form.php:83
 msgid "is exactly"
 msgstr "konkrēts"
 
-#: admin/themes/default/items/search-form.php:75
-#: application/views/scripts/items/search-form.php:71
+#: admin/themes/default/items/search-form.php:88
+msgid "is not exactly"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:89
+#: application/views/scripts/items/search-form.php:84
 msgid "is empty"
 msgstr "ir tukšs"
 
-#: admin/themes/default/items/search-form.php:76
-#: application/views/scripts/items/search-form.php:72
+#: admin/themes/default/items/search-form.php:90
+#: application/views/scripts/items/search-form.php:85
 msgid "is not empty"
 msgstr "nav tukšs"
 
-#: admin/themes/default/items/search-form.php:84
-#: application/views/scripts/items/search-form.php:80
+#: admin/themes/default/items/search-form.php:91
+#: application/views/scripts/items/search-form.php:86
+msgid "starts with"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:92
+#: application/views/scripts/items/search-form.php:87
+msgid "ends with"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:93
+msgid "matches"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:94
+msgid "does not match"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:102
+#: application/views/scripts/items/search-form.php:95
 msgid "Search Terms"
 msgstr "Meklēt priekšmetu "
 
-#: admin/themes/default/items/search-form.php:90
-#: application/views/scripts/items/search-form.php:86
+#: admin/themes/default/items/search-form.php:108
+#: application/views/scripts/items/search-form.php:101
 msgid "Remove field"
 msgstr "Dzēst lauku"
 
-#: admin/themes/default/items/search-form.php:98
-#: application/views/scripts/items/search-form.php:94
+#: admin/themes/default/items/search-form.php:116
+#: application/views/scripts/items/search-form.php:109
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:112
-#: application/views/scripts/items/search-form.php:105
+#: admin/themes/default/items/search-form.php:130
+#: application/views/scripts/items/search-form.php:120
 msgid "Search By Collection"
 msgstr "Meklēt kolekciju"
 
-#: admin/themes/default/items/search-form.php:128
-#: application/views/scripts/items/search-form.php:119
+#: admin/themes/default/items/search-form.php:146
+#: application/views/scripts/items/search-form.php:134
 msgid "Search By Type"
 msgstr "Meklēt pēc tipa"
 
-#: admin/themes/default/items/search-form.php:145
-#: application/views/scripts/items/search-form.php:135
+#: admin/themes/default/items/search-form.php:163
+#: application/views/scripts/items/search-form.php:150
 msgid "Search By User"
 msgstr "Meklēt pēc lietotāja"
 
-#: admin/themes/default/items/search-form.php:162
-#: application/views/scripts/items/search-form.php:150
+#: admin/themes/default/items/search-form.php:180
+#: application/views/scripts/items/search-form.php:165
 msgid "Search By Tags"
 msgstr "Meklēt pēc birkas"
 
-#: admin/themes/default/items/search-form.php:177
-#: application/views/scripts/items/search-form.php:163
+#: admin/themes/default/items/search-form.php:195
+#: application/views/scripts/items/search-form.php:178
 msgid "Public/Non-Public"
 msgstr "Publisks/Nav publisks"
 
-#: admin/themes/default/items/search-form.php:186
-#: application/views/scripts/items/search-form.php:171
+#: admin/themes/default/items/search-form.php:204
+#: application/views/scripts/items/search-form.php:186
 msgid "Only Public Items"
 msgstr "Tikai publicētie priekšmeti"
 
-#: admin/themes/default/items/search-form.php:187
-#: application/views/scripts/items/search-form.php:172
+#: admin/themes/default/items/search-form.php:205
+#: application/views/scripts/items/search-form.php:187
 msgid "Only Non-Public Items"
 msgstr "TIkai nepublicētie priekšmeti"
 
-#: admin/themes/default/items/search-form.php:197
-#: application/views/scripts/items/search-form.php:181
+#: admin/themes/default/items/search-form.php:215
+#: application/views/scripts/items/search-form.php:196
 msgid "Featured/Non-Featured"
 msgstr "Izceltie/Neizceltie"
 
-#: admin/themes/default/items/search-form.php:206
-#: application/views/scripts/items/search-form.php:189
+#: admin/themes/default/items/search-form.php:224
+#: application/views/scripts/items/search-form.php:204
 msgid "Only Featured Items"
 msgstr "Tikai izceltie priekšmeti"
 
-#: admin/themes/default/items/search-form.php:207
-#: application/views/scripts/items/search-form.php:190
+#: admin/themes/default/items/search-form.php:225
+#: application/views/scripts/items/search-form.php:205
 msgid "Only Non-Featured Items"
 msgstr "Tikai neizceltie priekšmeti"
 
-#: admin/themes/default/items/search-form.php:215
-#: application/views/scripts/items/search-form.php:199
+#: admin/themes/default/items/search-form.php:233
+#: application/views/scripts/items/search-form.php:214
 msgid "Search for items"
 msgstr "Meklēt priekšmetus"
 
@@ -1497,7 +1607,7 @@ msgstr ""
 
 #: admin/themes/default/plugins/browse.php:65
 #: admin/themes/default/themes/browse.php:23
-#: admin/themes/default/themes/browse.php:48
+#: admin/themes/default/themes/browse.php:50
 msgid "Get support"
 msgstr "Saņemt palīdzību"
 
@@ -1737,7 +1847,7 @@ msgid "Record Types"
 msgstr "Ierakstu tipi"
 
 #: admin/themes/default/themes/browse.php:15
-#: admin/themes/default/themes/browse.php:42
+#: admin/themes/default/themes/browse.php:44
 #, php-format
 msgid "Screenshot for %s Theme"
 msgstr " %s dizaina ekrānšāviņš "
@@ -1751,7 +1861,7 @@ msgid "Current Theme"
 msgstr "Izmantotais dizains"
 
 #: admin/themes/default/themes/browse.php:21
-#: admin/themes/default/themes/browse.php:47
+#: admin/themes/default/themes/browse.php:49
 #, php-format
 msgid "By %s"
 msgstr ""
@@ -1764,7 +1874,7 @@ msgid ""
 "target=\"_blank\">design your own</a>!"
 msgstr ""
 
-#: admin/themes/default/themes/browse.php:44
+#: admin/themes/default/themes/browse.php:46
 msgid "Use this theme"
 msgstr "Izmantot šo dizainu"
 
@@ -1972,6 +2082,10 @@ msgstr "Atpakaļ uz ielogošanos"
 msgid "Log In"
 msgstr "Ienākt"
 
+#: admin/themes/default/users/login.php:8
+msgid "Go to the public site"
+msgstr ""
+
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
 msgstr "(Pazaudēji paroli?)"
@@ -2070,7 +2184,7 @@ msgstr ""
 #: application/controllers/PluginsController.php:139
 #: application/controllers/PluginsController.php:190
 #: application/controllers/PluginsController.php:223
-#: application/controllers/PluginsController.php:337
+#: application/controllers/PluginsController.php:331
 #: application/controllers/SettingsController.php:104
 #: application/controllers/SettingsController.php:140
 #: application/controllers/SettingsController.php:177
@@ -2177,37 +2291,61 @@ msgid ""
 "delete all files and file metadata associated with this item."
 msgstr "Priekšmets #%s un visi tā metadati tiks dzēsti. Tiks dzēsti arī visi faili un to metadati, kas saistīti ar šo priekšmetu."
 
-#: application/controllers/ItemsController.php:227
+#: application/controllers/ItemsController.php:241
+#: application/controllers/ItemsController.php:376
+#: application/controllers/ItemsController.php:444
+msgid "No item to batch edit."
+msgstr ""
+
+#: application/controllers/ItemsController.php:248
+msgid "The deletion of all items is forbidden."
+msgstr ""
+
+#: application/controllers/ItemsController.php:265
 msgid "You must choose some items to batch edit."
 msgstr "Jums jāpievieno daži priekšmeti, lai varētu rediģēt priekšmetu kopu. "
 
-#: application/controllers/ItemsController.php:271
+#: application/controllers/ItemsController.php:314
+#: application/controllers/ItemsController.php:412
 msgid "User is not allowed to modify visibility of items."
 msgstr "Šim lietotājam nav tiesību rediģēt priekšmetu redzamības uzstādījumus."
 
-#: application/controllers/ItemsController.php:276
+#: application/controllers/ItemsController.php:319
+#: application/controllers/ItemsController.php:417
 msgid "User is not allowed to modify featured status of items."
 msgstr "Šim lietotājam nav tiesību rediģēt izcelto priekšmetu statusu."
 
-#: application/controllers/ItemsController.php:283
+#: application/controllers/ItemsController.php:326
 msgid "User is not allowed to delete selected items."
 msgstr "Šim lietotājam nav atļauts dzēst atzīmētos priekšmetus."
 
-#: application/controllers/ItemsController.php:289
+#: application/controllers/ItemsController.php:332
 msgid "User is not allowed to edit selected items."
 msgstr "Šim lietotājam nav atļauts rediģēt atzīmētos priekšmetus."
 
-#: application/controllers/ItemsController.php:294
+#: application/controllers/ItemsController.php:337
 msgid "User is not allowed to tag selected items."
 msgstr "Šim lietotājam nav atļauts atzīmēt priekšmetus."
 
-#: application/controllers/ItemsController.php:328
+#: application/controllers/ItemsController.php:369
 msgid "The items were successfully deleted!"
 msgstr "Priekšmeti dzēsti!"
 
-#: application/controllers/ItemsController.php:330
+#: application/controllers/ItemsController.php:371
 msgid "The items were successfully changed!"
 msgstr "Priekšmeti tika mainīti!"
+
+#: application/controllers/ItemsController.php:436
+msgid "The items are checked and deleted one by one in the background."
+msgstr ""
+
+#: application/controllers/ItemsController.php:438
+msgid "The items are checked and changed one by one in the background."
+msgstr ""
+
+#: application/controllers/ItemsController.php:440
+msgid "Check logs for success and errors."
+msgstr ""
 
 #: application/controllers/PluginsController.php:45
 #, php-format
@@ -2273,31 +2411,31 @@ msgstr "%s spraudnis veiksmīgi atjaunots!"
 msgid "The following error occurred while upgrading the %s plugin: "
 msgstr "Spraudņa %s atjaunošanas laikā notika šāda kļūda:"
 
-#: application/controllers/PluginsController.php:310
+#: application/controllers/PluginsController.php:305
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
 msgstr "Spraudnis netika atrasts '%s' direktorijā!"
 
-#: application/controllers/PluginsController.php:322
+#: application/controllers/PluginsController.php:318
 msgid "You must confirm the uninstall before proceeding."
 msgstr "Apstipriniet pirms turpināt."
 
-#: application/controllers/PluginsController.php:345
+#: application/controllers/PluginsController.php:337
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
 msgstr "%s spraudnis atinstalēts! "
 
-#: application/controllers/PluginsController.php:350
-#: application/controllers/PluginsController.php:355
+#: application/controllers/PluginsController.php:342
+#: application/controllers/PluginsController.php:347
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
 msgstr "Atinstalējot spraudni %s notika šāda kļūda:"
 
-#: application/controllers/PluginsController.php:382
+#: application/controllers/PluginsController.php:376
 msgid "No plugin name given."
 msgstr "Nav spraudņa nosaukuma."
 
-#: application/controllers/PluginsController.php:395
+#: application/controllers/PluginsController.php:389
 #, php-format
 msgid "The plugin %s must be installed."
 msgstr "Spraudnim %s jābūt uzstādītam."
@@ -2487,67 +2625,85 @@ msgid "Login information incorrect. Please try again."
 msgstr "Iesniegtā informācija nepareiza. Lūdzu mēģiniet vēlreiz."
 
 #: application/forms/AppearanceSettings.php:22
+msgid "Use Square Thumbnails"
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:23
+msgid ""
+"Use square-cropped images by default wherever thumbnails appear in the "
+"public interface."
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:28
 #: application/forms/Install.php:128
 msgid "Fullsize Image Size"
 msgstr "Attēla izmērs"
 
-#: application/forms/AppearanceSettings.php:23
+#: application/forms/AppearanceSettings.php:29
 msgid "Maximum fullsize image size constraint (in pixels)."
 msgstr "Maksimālais pilnā izmēra attēla lielums (pikseļos). "
 
-#: application/forms/AppearanceSettings.php:29
+#: application/forms/AppearanceSettings.php:35
 #: application/forms/Install.php:136
 msgid "Thumbnail Size"
 msgstr "Sīktēla izmērs"
 
-#: application/forms/AppearanceSettings.php:30
+#: application/forms/AppearanceSettings.php:36
 msgid "Maximum thumbnail size constraint (in pixels)."
 msgstr "Maksimālais sīktēla izmēra lielums (pikseļos)."
 
-#: application/forms/AppearanceSettings.php:36
+#: application/forms/AppearanceSettings.php:42
 #: application/forms/Install.php:144
 msgid "Square Thumbnail Size"
 msgstr "Kvadrāta sīktēla izmērs"
 
-#: application/forms/AppearanceSettings.php:37
+#: application/forms/AppearanceSettings.php:43
 msgid "Maximum square thumbnail size constraint (in pixels)."
 msgstr ""
 
-#: application/forms/AppearanceSettings.php:43
+#: application/forms/AppearanceSettings.php:49
 msgid "Results Per Page (admin)"
 msgstr "Rezultāti lapā (admins)"
 
-#: application/forms/AppearanceSettings.php:44
+#: application/forms/AppearanceSettings.php:50
 msgid ""
 "Limit the number of results displayed per page in the administrative "
 "interface."
 msgstr ""
 
-#: application/forms/AppearanceSettings.php:50
+#: application/forms/AppearanceSettings.php:56
 msgid "Results Per Page (public)"
 msgstr "Rezultāti lapā (publiskie)"
 
-#: application/forms/AppearanceSettings.php:51
+#: application/forms/AppearanceSettings.php:57
 msgid ""
 "Limit the number of results displayed per page in the public interface."
 msgstr ""
 
-#: application/forms/AppearanceSettings.php:57
+#: application/forms/AppearanceSettings.php:63
 #: application/forms/Install.php:168
 msgid "Show Empty Elements"
 msgstr "Rādīt tukšos elementus"
 
-#: application/forms/AppearanceSettings.php:62
+#: application/forms/AppearanceSettings.php:68
 msgid "Show Element Set Headings"
 msgstr ""
 
-#: application/forms/AppearanceSettings.php:75
+#: application/forms/AppearanceSettings.php:78
+msgid "Admin Theme"
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:92
 msgid "Derivative Size Constraints"
 msgstr ""
 
-#: application/forms/AppearanceSettings.php:83
+#: application/forms/AppearanceSettings.php:100
 msgid "Display Settings"
 msgstr "Parādīt uzstatījumus"
+
+#: application/forms/AppearanceSettings.php:108
+msgid "Admin Themes"
+msgstr ""
 
 #: application/forms/ChangePassword.php:25
 msgid "Current Password"
@@ -2983,65 +3139,67 @@ msgstr ""
 msgid "Exact match"
 msgstr ""
 
-#: application/libraries/globals.php:1258
-#: application/libraries/globals.php:1279
+#: application/libraries/globals.php:1263
+#: application/libraries/globals.php:1284
 #, php-format
 msgid "Could not find file %s!"
 msgstr "Fails %s nav atrodams!"
 
-#: application/libraries/globals.php:1296
+#: application/libraries/globals.php:1301
 msgid "No featured collections are available."
 msgstr ""
 
-#: application/libraries/globals.php:1593
+#: application/libraries/globals.php:1598
 msgid "Select Below "
 msgstr "Izvēlieties zemāk"
 
-#: application/libraries/globals.php:1636
+#: application/libraries/globals.php:1641
 msgid "Omeka RSS Feed"
 msgstr ""
 
-#: application/libraries/globals.php:1637
+#: application/libraries/globals.php:1642
 msgid "Omeka Atom Feed"
 msgstr ""
 
-#: application/libraries/globals.php:2293
+#: application/libraries/globals.php:2297
 msgid "No recent items available."
 msgstr "Nav jaunāko priekšmetu."
 
-#: application/libraries/globals.php:2319
+#: application/libraries/globals.php:2323
 msgid "No featured items are available."
 msgstr "Nav izcelto priekšmetu."
 
-#: application/libraries/globals.php:2378
+#: application/libraries/globals.php:2382
 msgid "View"
 msgstr "Skats"
 
-#: application/libraries/globals.php:2440
+#: application/libraries/globals.php:2444
+#: application/models/Table/Collection.php:87
+#: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
 msgstr "Nav kolekcijas"
 
-#: application/libraries/globals.php:2558
+#: application/libraries/globals.php:2563
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2575
+#: application/libraries/globals.php:2580
 msgid "Next Item &rarr;"
 msgstr "Nākošais &rarr;"
 
-#: application/libraries/globals.php:2595
+#: application/libraries/globals.php:2600
 msgid "&larr; Previous Item"
 msgstr "&larr; Iepriekšējais"
 
-#: application/libraries/globals.php:2776
+#: application/libraries/globals.php:2781
 msgid "Browse All"
 msgstr "Skatīt visus"
 
-#: application/libraries/globals.php:2781
+#: application/libraries/globals.php:2786
 msgid "Browse by Tag"
 msgstr "Skatīt pēc birkas"
 
-#: application/libraries/globals.php:3050
+#: application/libraries/globals.php:3055
 msgid "No tags are available."
 msgstr "Birkas nav pieejamas"
 
@@ -3049,7 +3207,7 @@ msgstr "Birkas nav pieejamas"
 msgid "Must specify a file transfer type when attaching files to an item!"
 msgstr ""
 
-#: application/models/Collection.php:117
+#: application/models/Collection.php:119
 msgid "Cannot associate the collection with an unsaved user."
 msgstr ""
 
@@ -3100,48 +3258,48 @@ msgstr ""
 msgid "\"%s\" is not a valid file derivative."
 msgstr ""
 
-#: application/models/Item.php:330
+#: application/models/Item.php:332
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
 msgstr ""
 
 #. / Chicago-style item citation: two authors
-#: application/models/Item.php:457
+#: application/models/Item.php:467
 #, php-format
 msgid "%1$s and %2$s"
 msgstr "%1$s un %2$s"
 
 #. / Chicago-style item citation: three authors
-#: application/models/Item.php:461
+#: application/models/Item.php:471
 #, php-format
 msgid "%1$s, %2$s, and %3$s"
 msgstr "%1$s, %2$s, un %3$s"
 
 #. / Chicago-style item citation: more than three authors
-#: application/models/Item.php:465
+#: application/models/Item.php:475
 #, php-format
 msgid "%s et al."
 msgstr ""
 
 #. / Chicago-style item citation: access date and URL
-#: application/models/Item.php:483
+#: application/models/Item.php:493
 #, php-format
 msgid "accessed %1$s, %2$s."
 msgstr "izmantoti %1$s, %2$s."
 
-#: application/models/Item.php:500
+#: application/models/Item.php:510
 msgid "Cannot add an existing file to an item!"
 msgstr ""
 
-#: application/models/Item.php:504
+#: application/models/Item.php:514
 msgid "File must be valid before it can be associated with an item!"
 msgstr ""
 
-#: application/models/Item.php:528
+#: application/models/Item.php:538
 msgid "Invalid item type."
 msgstr "Nepareizs priekšmeta veids."
 
-#: application/models/Item.php:531
+#: application/models/Item.php:541
 msgid "Invalid collection."
 msgstr "Nepareiza kolekcija."
 
@@ -3190,6 +3348,67 @@ msgid ""
 " or an element id to determine if an item type has an element."
 msgstr ""
 
+#: application/models/Job/ItemBatchEditAll.php:41
+msgid "Batch Edit All Items: No item matches the specified filters."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:48
+#, php-format
+msgid "Batch Edit: Starting processing 1 item."
+msgid_plural "Batch Edit: Starting processing %d items."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: application/models/Job/ItemBatchEditAll.php:67
+#, php-format
+msgid ""
+"Batch Edit: A total of %d errors occurred during the batch process of %d "
+"items."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:74
+#, php-format
+msgid "Batch Edit: The item has been processed successfully."
+msgid_plural "Batch Edit: All %d items have been processed successfully."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: application/models/Job/ItemBatchEditAll.php:91
+msgid "Item does not exist: it may have been deleted before processing."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:106
+msgid "User is not allowed to delete this item."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:113
+msgid "User is not allowed to edit this item."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:119
+msgid "User is not allowed to tag this item."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:142
+msgid "The item was successfully deleted."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:154
+#, php-format
+msgid "An error occured when the item was updated: %s"
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:159
+msgid "The item was successfully batch-edited."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:178
+#, php-format
+msgid "Batch Edit Item #%d [%d/%d]: %s"
+msgstr ""
+
 #: application/models/Mixin/ElementText.php:293
 #, php-format
 msgid "There is no element \"%1$s\", \"%2$s\"!"
@@ -3226,7 +3445,7 @@ msgstr "Spraudņu nosaukumiem jābūt aizpildītiem"
 msgid "[Untitled] #%s"
 msgstr "[nav nosaukuma] #%s"
 
-#: application/models/Table/Item.php:123
+#: application/models/Table/Item.php:145
 msgid "Invalid search type given!"
 msgstr ""
 
@@ -3393,6 +3612,11 @@ msgstr ""
 msgid "An array of records is not available for the loop."
 msgstr ""
 
+#: application/views/helpers/MaxFileSize.php:44
+#, php-format
+msgid "%s MB"
+msgstr ""
+
 #: application/views/helpers/RecordUrl.php:34
 msgid "Invalid record passed while getting record URL."
 msgstr ""
@@ -3410,7 +3634,7 @@ msgstr ""
 msgid "Sort by: "
 msgstr "Šķirot pēc:"
 
-#: application/views/scripts/collections/browse.php:42
+#: application/views/scripts/collections/browse.php:41
 #, php-format
 msgid "View the items in %s"
 msgstr ""
@@ -3420,7 +3644,7 @@ msgstr ""
 msgid "Items in the %s Collection"
 msgstr "Pavisam priekšmetu %s kolekcijā"
 
-#: application/views/scripts/collections/show.php:37
+#: application/views/scripts/collections/show.php:33
 msgid "There are currently no items within this collection."
 msgstr "Šobrīd nav priekšmetu šajā kolekcijā."
 
@@ -3505,11 +3729,11 @@ msgstr "Kolekcijas"
 msgid "View All Items"
 msgstr "Skatīt visus priekšmetus"
 
-#: application/views/scripts/items/show.php:10
+#: application/views/scripts/items/show.php:13
 msgid "Files"
 msgstr "Faili"
 
-#: application/views/scripts/items/show.php:33
+#: application/views/scripts/items/show.php:36
 msgid "Citation"
 msgstr ""
 

@@ -40,7 +40,7 @@ class Table_Collection extends Omeka_Db_Table
             }
         }
     }
-    
+
     public function findPairsForSelectForm(array $options = array())
     {
         $db = $this->getDb();
@@ -62,7 +62,7 @@ class Table_Collection extends Omeka_Db_Table
         $subquery->where("element_texts.record_type = 'Collection'");
         $subquery->where('element_texts.record_id = collections.id');
         $subquery->limit(1);
-        
+
         $select = $this->getSelectForFindBy($options);
         $select->joinLeft(
             array('element_texts' => $db->ElementText),
@@ -73,7 +73,7 @@ class Table_Collection extends Omeka_Db_Table
         $select->reset(Zend_Db_Select::COLUMNS);
         $select->from(array(), array('collections.id', 'element_texts.text'));
         $select->order('element_texts.text');
-        
+
         $pairs = $db->fetchPairs($select);
         foreach ($pairs as $collectionId => &$name) {
             if ($name === null || $name == '') {
@@ -88,28 +88,27 @@ class Table_Collection extends Omeka_Db_Table
         }
         return $pairs;
     }
-    
+
     /**
      * Apply permissions checks to all SQL statements retrieving collections from the table
      * 
      * @param string
-     * @return void
      */
     public function getSelect()
     {
         $select = parent::getSelect();
         $permissions = new Omeka_Db_Select_PublicPermissions('Collections');
         $permissions->apply($select, 'collections');
-        
+
         return $select;
     }
-    
+
     public function findRandomFeatured()
     {
-        $select = $this->getSelect()->where('collections.featured = 1')->order('RAND()')->limit(1);        
+        $select = $this->getSelect()->where('collections.featured = 1')->order('RAND()')->limit(1);
         return $this->fetchObject($select);
     }
-    
+
     /**
      * Enables sorting based on ElementSet,Element field strings.
      *

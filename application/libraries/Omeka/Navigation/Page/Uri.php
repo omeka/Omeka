@@ -26,7 +26,7 @@ class Omeka_Navigation_Page_Uri extends Zend_Navigation_Page_Uri
         $this->_active = is_current_url($this->getUri());
         return parent::isActive($recursive);
     }
-    
+
     /**
      * Sets page href.  It will parse the href and update the uri and fragment properties.
      *
@@ -40,7 +40,7 @@ class Omeka_Navigation_Page_Uri extends Zend_Navigation_Page_Uri
         $this->setUri($hrefData['uri']);
         $this->setFragment($hrefData['fragment']);
     }
-    
+
     /**
      * Normalizes a string href for a navigation page and returns an array with the following keys:
      * 'uri' => the uri of the href. 
@@ -53,18 +53,18 @@ class Omeka_Navigation_Page_Uri extends Zend_Navigation_Page_Uri
      * @return array
      * @throws Omeka_Navigation_Page_Uri_Exception  if $uri is invalid
      */
-    protected function _normalizeHref($href) 
-    {   
+    protected function _normalizeHref($href)
+    {
         if ($href === null || trim($href) == '') {
             return array(
                 'uri' => '',
                 'fragment' => null
             );
         }
-        $href = trim($href);            
+        $href = trim($href);
         $isPath = false;
         if (strlen($href) && $href[0] == '/') {
-            // attempt to convert root path into a full path, 
+            // attempt to convert root path into a full path,
             // so that we can later extract the fragment using Zend_Uri_Http
             $webRoot = trim(WEB_ROOT);
             $webPath = trim(PUBLIC_BASE_URL);
@@ -91,7 +91,7 @@ class Omeka_Navigation_Page_Uri extends Zend_Navigation_Page_Uri
                 if ($isPath) {
                     $uriString = $uri->getPath();
                     if ($query = $uri->getQuery()) {
-                        $uriString .= '?' . $query; 
+                        $uriString .= '?' . $query;
                     }
                     $uri = $uriString;
                 } else {
@@ -102,13 +102,13 @@ class Omeka_Navigation_Page_Uri extends Zend_Navigation_Page_Uri
                 }
                 return array(
                     'uri' => $uri,
-                    'fragment' => $fragment, 
+                    'fragment' => $fragment,
                 );
             }
         } catch (Zend_Uri_Exception $e) {
             if (filter_var($href, FILTER_VALIDATE_URL, FILTER_FLAG_SCHEME_REQUIRED)) {
                 $fragmentPos = strrpos($href, '#');
-                if ($fragmentPos !== FALSE) {
+                if ($fragmentPos !== false) {
                     if ($fragmentPos < strlen($href) - 1) {
                         $fragment = substr($href, $fragmentPos + 1); // exclude the hash from the fragment
                     } else {

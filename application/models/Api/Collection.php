@@ -9,7 +9,6 @@
 /**
  * @package Omeka\Record\Api
  */
-
 class Api_Collection extends Omeka_Record_Api_AbstractRecordAdapter
 {
     /**
@@ -18,30 +17,31 @@ class Api_Collection extends Omeka_Record_Api_AbstractRecordAdapter
      * @param Collection $record 
      * @return array 
      */
-    public function getRepresentation(Omeka_Record_AbstractRecord $record) {
+    public function getRepresentation(Omeka_Record_AbstractRecord $record)
+    {
         $representation = array(
-            'id' => $record->id, 
-            'url' => self::getResourceUrl("/collections/{$record->id}"), 
-            'public' => (bool) $record->public, 
-            'featured' => (bool) $record->featured, 
-            'added' => self::getDate($record->added), 
-            'modified' => self::getDate($record->modified), 
+            'id' => $record->id,
+            'url' => self::getResourceUrl("/collections/{$record->id}"),
+            'public' => (bool) $record->public,
+            'featured' => (bool) $record->featured,
+            'added' => self::getDate($record->added),
+            'modified' => self::getDate($record->modified),
             'owner' => array(
-                'id'  => $record->owner_id,
-                'url' => self::getResourceUrl("/users/{$record->owner_id}"), 
-                'resource' => 'users', 
-            ), 
+                'id' => $record->owner_id,
+                'url' => self::getResourceUrl("/users/{$record->owner_id}"),
+                'resource' => 'users',
+            ),
             'items' => array(
                 'count' => $record->getTable('Item')->count(array('collection_id' => $record->id)),
-                'url' => self::getResourceUrl("/items?collection={$record->id}"), 
-                'resource' => 'items', 
-            ), 
-            'element_texts' => $this->getElementTextRepresentations($record), 
+                'url' => self::getResourceUrl("/items?collection={$record->id}"),
+                'resource' => 'items',
+            ),
+            'element_texts' => $this->getElementTextRepresentations($record),
         );
-        
+
         return $representation;
     }
-    
+
     /**
      * Set POST data to a Collection.
      * 
@@ -58,7 +58,7 @@ class Api_Collection extends Omeka_Record_Api_AbstractRecordAdapter
         }
         $this->setElementTextData($record, $data);
     }
-    
+
     /**
      * Set PUT data to a Collection.
      * 

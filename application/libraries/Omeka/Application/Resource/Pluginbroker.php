@@ -23,7 +23,7 @@ class Omeka_Application_Resource_Pluginbroker extends Zend_Application_Resource_
         // Bootstrap the options as well, to make them immediately available
         // to plugins.
         $bootstrap->bootstrap('Options');
-        // Initialize the plugin broker with the database object and the 
+        // Initialize the plugin broker with the database object and the
         // plugins/ directory
         $db = $bootstrap->getResource('Db');
         $factory = new Omeka_Plugin_Broker_Factory(PLUGIN_DIR);

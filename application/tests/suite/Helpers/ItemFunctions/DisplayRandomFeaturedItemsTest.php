@@ -10,18 +10,18 @@
  * in helpers/ItemFunctions.php
  *
  * @package Omeka
- */ 
+ */
 class Omeka_Helper_DisplayRandomFeaturedItemsTest extends Omeka_Test_AppTestCase
 {
     public function testDisplayRandomFeaturedItems()
-    {   
+    {
         $ids = $this->_createFeaturedItems();
         $this->dispatch('/');
         $html = random_featured_items();
         $this->assertContains('<h3><a href="/items/show/'. $ids[0]. '">Title 1</a></h3>', $html);
         $this->assertContains('<p class="item-description">Description for item 1.</p>', $html);
     }
-    
+
     public function testDisplayNoRandomFeaturedItems()
     {
         $this->_createFeaturedItems(false);
@@ -38,8 +38,8 @@ class Omeka_Helper_DisplayRandomFeaturedItemsTest extends Omeka_Test_AppTestCase
         $db = $this->db;
 
         $ids = array();
-        
-        for ($i=1; $i < 6; $i++) {
+
+        for ($i = 1; $i < 6; $i++) {
             $title = "Title $i";
             $description = "Description for item $i.";
 

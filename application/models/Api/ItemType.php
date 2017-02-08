@@ -26,26 +26,26 @@ class Api_ItemType extends Omeka_Record_Api_AbstractRecordAdapter
         $elements = array();
         foreach ($itemTypeElements as $element) {
             $elements[] = array(
-                'id' => $element->element_id, 
-                'url' => self::getResourceUrl("/elements/{$element->element_id}"), 
+                'id' => $element->element_id,
+                'url' => self::getResourceUrl("/elements/{$element->element_id}"),
             );
         }
-        
+
         $representation = array(
-            'id' => $record->id, 
-            'url' => self::getResourceUrl("/item_types/{$record->id}"), 
-            'name' => $record->name, 
-            'description' => $record->description, 
-            'elements' => $elements, 
+            'id' => $record->id,
+            'url' => self::getResourceUrl("/item_types/{$record->id}"),
+            'name' => $record->name,
+            'description' => $record->description,
+            'elements' => $elements,
             'items' => array(
-                'count' => $record->getTable('Item')->count(array('item_type_id' => $record->id)), 
-                'url' => self::getResourceUrl("/items/?item_type={$record->id}"), 
-                'resource' => 'items', 
-            ), 
+                'count' => $record->getTable('Item')->count(array('item_type_id' => $record->id)),
+                'url' => self::getResourceUrl("/items/?item_type={$record->id}"),
+                'resource' => 'items',
+            ),
         );
         return $representation;
-    } 
-    
+    }
+
     /**
      * Set POST data to an item type.
      *
@@ -71,7 +71,7 @@ class Api_ItemType extends Omeka_Record_Api_AbstractRecordAdapter
             $record->addElements($elements);
         }
     }
-    
+
     /**
      * Set PUT data to an item type.
      *
@@ -88,11 +88,11 @@ class Api_ItemType extends Omeka_Record_Api_AbstractRecordAdapter
         }
         if (isset($data->elements) && is_array($data->elements)) {
             $db = get_db();
-            
+
             // Delete the existing item type elements.
             $sql = "DELETE FROM {$db->ItemTypesElements} WHERE item_type_id = ?";
             $db->query($sql, $record->id);
-            
+
             // Insert new item type elements.
             $elementTable = $db->getTable('Element');
             $i = 1;

@@ -12,4 +12,5 @@
  * @package Omeka\Db\Migration
  */
 class Omeka_Db_Migration_Exception extends Exception
-{}
+{
+}

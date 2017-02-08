@@ -4,10 +4,8 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.txt
  * @package Omeka
  */
- 
+
 /**
- * 
- *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
  */
@@ -17,11 +15,11 @@ class Omeka_Helper_JsTest extends PHPUnit_Framework_TestCase
     {
         $this->view = new Omeka_View;
         Zend_Registry::set('view', $this->view);
-        
+
         // Trick it into loading existing shared javascripts.
         $this->view->addAssetPath(VIEW_SCRIPTS_DIR, 'http://fake.local/path/to/omeka');
     }
-    
+
     public function testOutputsScriptTagWithHref()
     {
         // Test with Contains to avoid matching issues with newlines.
@@ -29,7 +27,6 @@ class Omeka_Helper_JsTest extends PHPUnit_Framework_TestCase
                             js_tag('vendor/jquery'));
     }
 
-    
     public function tearDown()
     {
         Zend_Registry::_unsetInstance();

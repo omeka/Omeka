@@ -20,10 +20,10 @@ class Table_SearchText extends Omeka_Db_Table
      */
     public function findByRecord($recordType, $recordId)
     {
-         $select = $this->getSelect();
-         $select->where('record_type = ?', $recordType);
-         $select->where('record_id = ?', $recordId);
-         return $this->fetchObject($select);
+        $select = $this->getSelect();
+        $select->where('record_type = ?', $recordType);
+        $select->where('record_id = ?', $recordId);
+        return $this->fetchObject($select);
     }
 
     public function applySearchFilters($select, $params)
@@ -46,7 +46,7 @@ class Table_SearchText extends Omeka_Db_Table
         if ('exact_match' == $params['query_type']) {
             $where = '`search_texts`.`text` LIKE ?';
             $params['query'] = "%{$params['query']}%";
-        } else if ('boolean' == $params['query_type']) {
+        } elseif ('boolean' == $params['query_type']) {
             $where = 'MATCH (`search_texts`.`text`) AGAINST (? IN BOOLEAN MODE)';
         } else {
             $where = 'MATCH (`search_texts`.`text`) AGAINST (?)';
