@@ -19,6 +19,7 @@ class Omeka_View_Helper_Metadata extends Zend_View_Helper_Abstract
     const NO_ESCAPE = 'no_escape';
     const NO_FILTER = 'no_filter';
     const DELIMITER = 'delimiter';
+    const IGNORE_UNKNOWN = 'ignore_unknown';
 
     /**
      * Retrieve a specific piece of a record's metadata for display.
@@ -29,7 +30,7 @@ class Omeka_View_Helper_Metadata extends Zend_View_Helper_Abstract
      *  If a string, refers to a property of the record itself.
      *  If an array, refers to an Element: the first entry is the set name,
      *  the second is the element name.
-     * @param array|string|integer $options Options for formatting the metadata
+     * @param array|string|int $options Options for formatting the metadata
      * for display.
      * - Array options:
      *   - 'all': If true, return an array containing all values for the field.
@@ -66,8 +67,17 @@ class Omeka_View_Helper_Metadata extends Zend_View_Helper_Abstract
         $all = isset($options[self::ALL]) && $options[self::ALL];
         $delimiter = isset($options[self::DELIMITER]) ? (string) $options[self::DELIMITER] : false;
         $index = isset($options[self::INDEX]) ? (int) $options[self::INDEX] : 0;
+        $ignoreUnknown = isset($options[self::IGNORE_UNKNOWN]) && $options[self::IGNORE_UNKNOWN];
 
-        $text = $this->_getText($record, $metadata);
+        try {
+            $text = $this->_getText($record, $metadata);
+        } catch (Omeka_Record_Exception $e) {
+            if ($ignoreUnknown) {
+                $text = null;
+            } else {
+                throw $e;
+            }
+        }
 
         if (is_array($text)) {
             // If $all or $delimiter isn't specified, pare the array down to
@@ -103,7 +113,7 @@ class Omeka_View_Helper_Metadata extends Zend_View_Helper_Abstract
      * which functions as a handy shortcut for theme writers.  This converts
      * the short form of the options into its proper array form.
      *
-     * @param string|integer|array $options
+     * @param string|int|array $options
      * @return array
      */
     protected function _getOptions($options)
@@ -111,7 +121,7 @@ class Omeka_View_Helper_Metadata extends Zend_View_Helper_Abstract
         $converted = array();
         if (is_integer($options)) {
             $converted = array(self::INDEX => $options);
-        } else if (self::ALL == $options) {
+        } elseif (self::ALL == $options) {
             $converted = array(self::ALL => true);
         } else {
             $converted = (array) $options;

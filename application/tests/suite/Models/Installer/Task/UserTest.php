@@ -17,14 +17,14 @@ class Installer_Task_UserTest extends PHPUnit_Framework_TestCase
     const USER_ID = 1;
     const ENTITY_ID = 2;
     const USERS_PLANS_ID = 3;
-    
+
     public function setUp()
     {
         $this->dbAdapter = new Zend_Test_DbAdapter;
         $this->db = new Omeka_Db($this->dbAdapter, self::DB_PREFIX);
         $this->profiler = $this->dbAdapter->getProfiler();
     }
-    
+
     public function testRequiresUserMetadata()
     {
         $task = new Installer_Task_User();
@@ -35,7 +35,7 @@ class Installer_Task_UserTest extends PHPUnit_Framework_TestCase
             $this->assertContains("Required field", $e->getMessage());
         }
     }
-    
+
     public function testTaskFailsIfUserNotValidates()
     {
         $task = new Installer_Task_User();
@@ -52,7 +52,7 @@ class Installer_Task_UserTest extends PHPUnit_Framework_TestCase
             $this->assertContains("New user does not validate: Email: ", $e->getMessage());
         }
     }
-    
+
     public function testTaskSavesNewUser()
     {
         $this->dbAdapter->appendLastInsertIdToStack(self::USERS_PLANS_ID);

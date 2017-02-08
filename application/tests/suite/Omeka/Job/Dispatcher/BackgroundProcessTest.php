@@ -5,12 +5,12 @@ class Omeka_Job_Dispatcher_Adapter_BackgroundProcessTest extends PHPUnit_Framewo
         'createdAt' => 'now',
         'createdBy' => 1,
         'className' => 'foobar',
-        'options'   => array('baz' => true),
+        'options' => array('baz' => true),
     );
 
     public function setUp()
     {
-        // Omeka_Job_Process_Dispatcher is quite untestable so this test just 
+        // Omeka_Job_Process_Dispatcher is quite untestable so this test just
         // calls a mock instead.
         $this->processDispatcher = new MockProcessDispatcher;
         MockProcessDispatcher::_reset();

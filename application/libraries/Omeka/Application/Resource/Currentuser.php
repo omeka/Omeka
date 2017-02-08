@@ -29,21 +29,21 @@ class Omeka_Application_Resource_Currentuser extends Zend_Application_Resource_R
         $db = $this->getBootstrap()->getResource('Db');
         $front = Zend_Controller_Front::getInstance();
         $request = new Zend_Controller_Request_Http;
-        
-        // REST API requests require a slightly different authentication 
-        // strategy. They use non-persistant, key-based authentication 
+
+        // REST API requests require a slightly different authentication
+        // strategy. They use non-persistant, key-based authentication
         if ($front->getParam('api')) {
             // Authenticate against the API key in a non-persistent way.
             $auth->setStorage(new Zend_Auth_Storage_NonPersistent);
             $authAdapter = new Omeka_Auth_Adapter_KeyTable($request->getParam('key'));
             $auth->authenticate($authAdapter);
         }
-        
+
         if (!$auth->hasIdentity()) {
             // There is no user if there is no identity.
             return null;
         }
-        
+
         try {
             // Get the user ID for REST API or standard requests.
             if ($front->getParam('api')) {
@@ -58,8 +58,8 @@ class Omeka_Application_Resource_Currentuser extends Zend_Application_Resource_R
             }
             $user = $db->getTable('User')->findActiveById($userId);
         } catch (Zend_Db_Statement_Exception $e) {
-            // Exceptions may be thrown because the database is out of sync with 
-            // the code.  Suppress errors and skip authentication, but only 
+            // Exceptions may be thrown because the database is out of sync with
+            // the code.  Suppress errors and skip authentication, but only
             // until the database is properly upgraded.
             if (Omeka_Db_Migration_Manager::getDefault()->dbNeedsUpgrade()) {
                 $user = null;
@@ -67,14 +67,14 @@ class Omeka_Application_Resource_Currentuser extends Zend_Application_Resource_R
                 throw $e;
             }
         }
-        
+
         if (!$user) {
-            // If we can't retrieve the User from the database, it likely means 
-            // that this user has been deleted.  In this case, do not allow the 
+            // If we can't retrieve the User from the database, it likely means
+            // that this user has been deleted.  In this case, do not allow the
             // user to stay logged in.
             $auth->clearIdentity();
         }
-        
+
         return $user;
     }
 }

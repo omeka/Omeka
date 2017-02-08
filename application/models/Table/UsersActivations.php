@@ -11,12 +11,11 @@
  */
 class Table_UsersActivations extends Omeka_Db_Table
 {
-    
     public function findByUrl($url)
     {
         return $this->fetchObject($this->getSelect()->where('url = ?', $url)->limit(1));
     }
-    
+
     public function findByUser($user)
     {
         $select = $this->getSelect();

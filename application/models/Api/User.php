@@ -17,7 +17,7 @@ class Api_User extends Omeka_Record_Api_AbstractRecordAdapter
      * @param User $record
      * @return array
      */
-    public function getRepresentation(Omeka_Record_AbstractRecord $record)    
+    public function getRepresentation(Omeka_Record_AbstractRecord $record)
     {
         $representation = array(
             'id' => $record->id,
@@ -26,7 +26,7 @@ class Api_User extends Omeka_Record_Api_AbstractRecordAdapter
             'name' => $record->name,
             'active' => (bool) $record->active,
             'email' => $record->email,
-            'role' => $record->role, 
+            'role' => $record->role,
         );
         return $representation;
     }

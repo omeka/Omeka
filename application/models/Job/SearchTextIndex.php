@@ -16,15 +16,14 @@ class Job_SearchTextIndex extends Omeka_Job_AbstractJob
      */
     public function perform()
     {
-        // Truncate the `search_texts` table before indexing to clean out 
+        // Truncate the `search_texts` table before indexing to clean out
         // obsolete records.
         $sql = "TRUNCATE TABLE {$this->_db->SearchText}";
         $this->_db->query($sql);
-        
+
         foreach (get_custom_search_record_types() as $key => $value) {
-            
             $recordType = is_string($key) ? $key : $value;
-            
+
             if (!class_exists($recordType)) {
                 // The class does not exist or cannot be found.
                 continue;
@@ -38,7 +37,7 @@ class Job_SearchTextIndex extends Omeka_Job_AbstractJob
                 // The record does not implement the search mixin.
                 continue;
             }
-            
+
             $pageNumber = 1;
             $recordTable = $record->getTable();
             // Query a limited number of rows at a time to prevent memory issues.

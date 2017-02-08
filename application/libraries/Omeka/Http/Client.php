@@ -16,12 +16,12 @@
 class Omeka_Http_Client extends Zend_Http_Client
 {
     /**
-     * @var integer
+     * @var int
      */
     private $_maxRetries = 0;
 
     /**
-     * @var integer
+     * @var int
      */
     private $_retryCount = 0;
 
@@ -54,7 +54,7 @@ class Omeka_Http_Client extends Zend_Http_Client
     /**
      * Set the maximum number of retries to make when a request times out.
      *
-     * @param integer $count
+     * @param int $count
      */
     public function setMaxRetries($count)
     {

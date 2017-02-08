@@ -13,4 +13,5 @@
  * @package Omeka\Job\Dispatcher\Adapter
  */
 class Omeka_Job_Dispatcher_Adapter_RequiredOptionException extends LogicException
-{}
+{
+}

@@ -14,7 +14,7 @@
 class Omeka_Test_Bootstrap
 {
     private $_container;
-    
+
     /**
      * Set resource container
      *
@@ -32,7 +32,7 @@ class Omeka_Test_Bootstrap
         $this->_container = $container;
         return $this;
     }
-    
+
     /**
      * Retrieve resource container
      *
@@ -58,7 +58,7 @@ class Omeka_Test_Bootstrap
      */
     public function hasResource($name)
     {
-        $resource  = strtolower($name);
+        $resource = strtolower($name);
         $container = $this->getContainer();
         return isset($container->{$resource});
     }
@@ -77,7 +77,7 @@ class Omeka_Test_Bootstrap
      */
     public function getResource($name)
     {
-        $resource  = strtolower($name);
+        $resource = strtolower($name);
         $container = $this->getContainer();
         if ($this->hasResource($resource)) {
             return $container->{$resource};

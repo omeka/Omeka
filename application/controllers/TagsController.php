@@ -25,15 +25,14 @@ class TagsController extends Omeka_Controller_AbstractActionController
     {
         $this->_helper->redirector('');
     }
-    
+
     /**
      *
-     * @return void
      */
     public function browseAction()
     {
         $params = $this->_getAllParams();
-        
+
         //Check to see whether it will be tags for exhibits or for items
         //Default is Item
         if (isset($params['tagType'])) {
@@ -46,8 +45,8 @@ class TagsController extends Omeka_Controller_AbstractActionController
         if (!class_exists($for)) {
             throw new InvalidArgumentException(__('Invalid tagType given.'));
         }
-        
-        if($record = $this->_getParam('record')) {
+
+        if ($record = $this->_getParam('record')) {
             $filter['record'] = $record;
         }
 
@@ -58,7 +57,7 @@ class TagsController extends Omeka_Controller_AbstractActionController
         $total_tags = $this->_helper->db->count($findByParams);
         $limit = isset($params['limit']) ? $params['limit'] : null;
         $tags = $this->_helper->db->findBy($findByParams, $limit);
-        
+
         $browse_for = $for;
         $sort = array_intersect_key($findByParams, array('sort_field' => '', 'sort_dir' => ''));
 
@@ -66,8 +65,8 @@ class TagsController extends Omeka_Controller_AbstractActionController
         $db = get_db();
         $sql = "SELECT DISTINCT record_type FROM `$db->RecordsTag`";
         $record_types = array_keys($db->fetchAssoc($sql));
-        foreach($record_types as $index => $record_type) {
-            if(!class_exists($record_type)) {
+        foreach ($record_types as $index => $record_type) {
+            if (!class_exists($record_type)) {
                 unset($record_types[$index]);
             }
         }
@@ -77,7 +76,7 @@ class TagsController extends Omeka_Controller_AbstractActionController
         $this->view->record_types = $record_types;
         $this->view->assign(compact('tags', 'total_tags', 'browse_for', 'sort'));
     }
-    
+
     public function autocompleteAction()
     {
         $tagText = $this->_getParam('term');
@@ -87,7 +86,7 @@ class TagsController extends Omeka_Controller_AbstractActionController
         $tagNames = $this->_helper->db->getTable()->findTagNamesLike($tagText);
         $this->_helper->json($tagNames);
     }
-    
+
     public function renameAjaxAction()
     {
         $csrf = new Omeka_Form_SessionCsrf;

@@ -12,7 +12,7 @@
 class Table_ElementText extends Omeka_Db_Table
 {
     /**
-     * @param integer
+     * @param int
      * @param string
      * @return Omeka_Db_Select
      */
@@ -23,15 +23,15 @@ class Table_ElementText extends Omeka_Db_Table
 
         $select->where('element_texts.record_type = ?', (string) $recordType);
         $select->where('element_texts.record_id = ?', (int) $recordId);
-        
+
         // Retrieve element texts ordered by ID, which is incremental.
         // This means that element texts will be retrieved / displayed in the
         // same order as they were saved to the database.
         $select->order('element_texts.id ASC');
-        
+
         return $select;
     }
-    
+
     /**
      * Find all ElementText records for a given database record (Item, File, etc).
      * 
@@ -43,10 +43,10 @@ class Table_ElementText extends Omeka_Db_Table
         $select = $this->getSelectForRecord($record->id, get_class($record));
         return $this->fetchObjects($select);
     }
-    
+
     public function findByElement($elementId)
     {
-        $select = $this->getSelect()->where('element_texts.element_id = ?', (int)$elementId);
+        $select = $this->getSelect()->where('element_texts.element_id = ?', (int) $elementId);
         return $this->fetchObjects($select);
     }
 }

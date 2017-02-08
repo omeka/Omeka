@@ -11,9 +11,9 @@
  * 
  * @package Omeka\Job\Dispatcher\Adapter
  */
-class Omeka_Job_Dispatcher_Adapter_BackgroundProcess extends 
-    Omeka_Job_Dispatcher_Adapter_AbstractAdapter {
-        
+class Omeka_Job_Dispatcher_Adapter_BackgroundProcess extends
+    Omeka_Job_Dispatcher_Adapter_AbstractAdapter
+{
     private $_processDispatcher;
 
     /**
@@ -27,7 +27,7 @@ class Omeka_Job_Dispatcher_Adapter_BackgroundProcess extends
      */
     public function send($encodedJob, array $metadata)
     {
-        $this->getProcessDispatcher()->startProcess('Omeka_Job_Process_Wrapper', 
+        $this->getProcessDispatcher()->startProcess('Omeka_Job_Process_Wrapper',
             $metadata['createdBy'], array('job' => $encodedJob));
     }
 

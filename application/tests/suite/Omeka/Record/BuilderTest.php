@@ -6,15 +6,13 @@
  */
 
 /**
- * 
- *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Omeka_Record_BuilderTest extends PHPUnit_Framework_TestCase
-{   
+{
     const DUMMY_RECORD_ID = 1;
-    
+
     public function setUp()
     {
         $this->dbAdapter = new Zend_Test_DbAdapter;
@@ -26,16 +24,16 @@ class Omeka_Record_BuilderTest extends PHPUnit_Framework_TestCase
         $builder = new DummyRecordBuilder($this->db);
         $this->assertThat($builder, $this->isInstanceOf('Omeka_Record_Builder_AbstractBuilder'));
     }
-        
+
     public function testSetRecordMetadata()
     {
         $builder = new DummyRecordBuilder($this->db);
         $builder->setRecordMetadata(array(
             'description' => 'foobar'
         ));
-        $this->assertEquals(array('description'=>'foobar'), $builder->getRecordMetadata());
+        $this->assertEquals(array('description' => 'foobar'), $builder->getRecordMetadata());
     }
-    
+
     public function testBuildIgnoresUnsettableRecordColumns()
     {
         $this->dbAdapter->appendLastInsertIdToStack(self::DUMMY_RECORD_ID);
@@ -49,7 +47,7 @@ class Omeka_Record_BuilderTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(isset($record->shazbot));
         $this->assertNotEquals(3, $record->id);
     }
-    
+
     public function testGetRecordReturnsUnsavedRecord()
     {
         $builder = new DummyRecordBuilder($this->db);
@@ -66,7 +64,7 @@ class Omeka_Record_BuilderTest extends PHPUnit_Framework_TestCase
         $builder = new DummyRecordBuilder($this->db);
         $builder->setRecord(new Item($this->db));
     }
-    
+
     public function testSetRecordUsingRecordInstance()
     {
         $builder = new DummyRecordBuilder($this->db);
@@ -74,7 +72,7 @@ class Omeka_Record_BuilderTest extends PHPUnit_Framework_TestCase
         $builder->setRecord($record);
         $this->assertSame($builder->getRecord(), $record);
     }
-    
+
     public function testSetRecordUsingIntegerId()
     {
         $builder = new DummyRecordBuilder($this->db);
@@ -86,9 +84,9 @@ class Omeka_Record_BuilderTest extends PHPUnit_Framework_TestCase
         $builder->setRecord(self::DUMMY_RECORD_ID);
         $record = $builder->getRecord();
         $this->assertThat($record, $this->isInstanceOf('DummyRecordBuilderRecord'));
-        $this->assertTrue($record->exists());        
-    } 
-                    
+        $this->assertTrue($record->exists());
+    }
+
     public function testBeforeBuildHook()
     {
         $this->dbAdapter->appendLastInsertIdToStack(self::DUMMY_RECORD_ID);
@@ -96,9 +94,9 @@ class Omeka_Record_BuilderTest extends PHPUnit_Framework_TestCase
         $builder = new DummyRecordBuilder($this->db);
         $builder->setTest($this);
         $builder->build();
-        $this->assertTrue(isset($this->ranBeforeBuild));        
+        $this->assertTrue(isset($this->ranBeforeBuild));
     }
-    
+
     public function testAfterBuildHook()
     {
         $this->dbAdapter->appendLastInsertIdToStack(self::DUMMY_RECORD_ID);
@@ -107,23 +105,21 @@ class Omeka_Record_BuilderTest extends PHPUnit_Framework_TestCase
         $builder->setTest($this);
         $builder->build();
         $this->assertTrue(isset($this->ranAfterBuild),
-            "build() should have called the _afterBuild() method on the builder class.");        
+            "build() should have called the _afterBuild() method on the builder class.");
     }
-    
+
     public function testBuildReturnsSavedRecord()
     {
         $this->dbAdapter->appendLastInsertIdToStack(self::DUMMY_RECORD_ID);
         $builder = new DummyRecordBuilder($this->db);
         $builder->setTest($this);
-        $record = $builder->build();       
+        $record = $builder->build();
         $this->assertTrue($record->exists(),
-            "Returned record should have been saved.");         
-    }    
+            "Returned record should have been saved.");
+    }
 }
 
 /**
- * 
- *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
@@ -131,20 +127,20 @@ class DummyRecordBuilder extends Omeka_Record_Builder_AbstractBuilder
 {
     protected $_recordClass = 'DummyRecordBuilderRecord';
     protected $_settableProperties = array('description');
-    
+
     private $_test;
-    
+
     public function setTest(PHPUnit_Framework_TestCase $test)
     {
         $this->_test = $test;
     }
-    
+
     protected function _beforeBuild(Omeka_Record_AbstractRecord $record)
     {
         $this->_test->ranBeforeBuild = true;
         $this->_test->assertThat($record, $this->_test->isInstanceOf('DummyRecordBuilderRecord'));
     }
-    
+
     protected function _afterBuild(Omeka_Record_AbstractRecord $record)
     {
         $this->_test->assertTrue($record->exists());
@@ -153,8 +149,6 @@ class DummyRecordBuilder extends Omeka_Record_Builder_AbstractBuilder
 }
 
 /**
- * 
- *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */

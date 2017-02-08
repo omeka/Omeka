@@ -16,5 +16,7 @@
  */
 class Omeka_Test_Resource_Currentuser extends Zend_Application_Resource_ResourceAbstract
 {
-    public function init() {}
+    public function init()
+    {
+    }
 }

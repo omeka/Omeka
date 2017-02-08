@@ -33,12 +33,12 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
 
     protected $_themeName;
     protected $_themeOptions;
-    
+
     public function init()
     {
         parent::init();
         $themeName = $this->getThemeName();
-        
+
         $theme = Theme::getTheme($themeName);
         $themeConfigIni = $theme->path . '/config.ini';
 
@@ -61,17 +61,17 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
                 $themeConfigValues = Theme::getOptions($themeName);
                 $this->setThemeOptions($themeConfigValues);
             }
-            
+
             // configure all of the form elements
             $elements = $this->getElements();
-            foreach($elements as $element) {
+            foreach ($elements as $element) {
                 if ($element instanceof Zend_Form_Element_File) {
                     $this->_processFileElement($element);
                 }
             }
 
-            // set all of the form element values            
-            foreach($themeConfigValues as $key => $value) {
+            // set all of the form element values
+            foreach ($themeConfigValues as $key => $value) {
                 if ($this->getElement($key)) {
                     $this->$key->setValue($value);
                 }
@@ -81,12 +81,12 @@ class Omeka_Form_ThemeConfiguration extends Omeka_Form
             'timeout' => 3600
         ));
     }
-    
+
     public function setThemeName($themeName)
     {
         $this->_themeName = $themeName;
     }
-    
+
     public function getThemeName()
     {
         return $this->_themeName;

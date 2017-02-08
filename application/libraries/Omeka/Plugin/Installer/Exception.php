@@ -13,4 +13,5 @@
  * @package Omeka\Plugin\Installer
  */
 class Omeka_Plugin_Installer_Exception extends Exception
-{}
+{
+}

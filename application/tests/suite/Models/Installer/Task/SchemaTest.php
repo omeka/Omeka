@@ -6,15 +6,13 @@
  */
 
 /**
- * 
- *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Installer_Task_SchemaTest extends PHPUnit_Framework_TestCase
 {
     const DB_PREFIX = 'test_';
-    
+
     public function setUp()
     {
         $this->dbAdapter = new Zend_Test_DbAdapter;
@@ -23,16 +21,16 @@ class Installer_Task_SchemaTest extends PHPUnit_Framework_TestCase
             $this);
         $this->schemaTask = new Installer_Task_Schema;
     }
-        
+
     public function testAddTable()
     {
         $collectionSql = SCHEMA_DIR . '/collections.sql';
         $this->schemaTask->addTable('collections', $collectionSql);
         $this->assertEquals(array(
             'collections' => $collectionSql
-        ),$this->schemaTask->getTables());
+        ), $this->schemaTask->getTables());
     }
-    
+
     /**
      * @expectedException Installer_Task_Exception
      */
@@ -45,7 +43,7 @@ class Installer_Task_SchemaTest extends PHPUnit_Framework_TestCase
             throw $e;
         }
     }
-            
+
     public function testUseDefaultTables()
     {
         $this->assertEquals(0, count($this->schemaTask->getTables()));
@@ -71,7 +69,7 @@ class Installer_Task_SchemaTest extends PHPUnit_Framework_TestCase
             'keys' => SCHEMA_DIR . '/keys.sql'
         ), $this->schemaTask->getTables());
     }
-        
+
     public function testAddTables()
     {
         $expectedTables = array(
@@ -81,7 +79,7 @@ class Installer_Task_SchemaTest extends PHPUnit_Framework_TestCase
         $this->schemaTask->addTables($expectedTables);
         $this->assertEquals($expectedTables, $this->schemaTask->getTables());
     }
-    
+
     public function testSetTables()
     {
         $expectedTables = array(
@@ -91,7 +89,7 @@ class Installer_Task_SchemaTest extends PHPUnit_Framework_TestCase
         $this->schemaTask->setTables($expectedTables);
         $this->assertEquals($expectedTables, $this->schemaTask->getTables());
     }
-    
+
     public function testRemoveTable()
     {
         $someTables = array(
@@ -104,18 +102,18 @@ class Installer_Task_SchemaTest extends PHPUnit_Framework_TestCase
             'items' => $someTables['items']
         ), $this->schemaTask->getTables());
     }
-    
+
     public function testInstallFailsWithNoTables()
     {
-        $task = new Installer_Task_Schema();        
+        $task = new Installer_Task_Schema();
         try {
             $task->install($this->db);
             $this->fail("Task should have thrown an exception when not given a valid schema file.");
         } catch (Exception $e) {
             $this->assertContains("No SQL files were given to create the schema.", $e->getMessage());
         }
-    } 
-    
+    }
+
     public function testInstall()
     {
         $task = new Installer_Task_Schema();
@@ -124,7 +122,7 @@ class Installer_Task_SchemaTest extends PHPUnit_Framework_TestCase
         $task->install($this->db);
         $this->profilerHelper->assertDbQuery("CREATE TABLE `test_table` (`id` int(11), `name` varchar(20))");
     }
-    
+
     public function testLoadsDefaultOmekaSchema()
     {
         $task = new Installer_Task_Schema();
@@ -149,6 +147,6 @@ class Installer_Task_SchemaTest extends PHPUnit_Framework_TestCase
         );
         foreach ($expectedTables as $tableName) {
             $this->profilerHelper->assertDbQuery("CREATE TABLE IF NOT EXISTS `$tableName`");
-        }        
+        }
     }
 }

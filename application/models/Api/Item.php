@@ -20,19 +20,19 @@ class Api_Item extends Omeka_Record_Api_AbstractRecordAdapter
     public function getRepresentation(Omeka_Record_AbstractRecord $record)
     {
         $representation = array(
-            'id' => $record->id, 
-            'url' => self::getResourceUrl("/items/{$record->id}"), 
-            'public' => (bool) $record->public, 
-            'featured' => (bool) $record->featured, 
-            'added' => self::getDate($record->added), 
-            'modified' => self::getDate($record->modified), 
+            'id' => $record->id,
+            'url' => self::getResourceUrl("/items/{$record->id}"),
+            'public' => (bool) $record->public,
+            'featured' => (bool) $record->featured,
+            'added' => self::getDate($record->added),
+            'modified' => self::getDate($record->modified),
         );
         if ($record->item_type_id) {
             $representation['item_type'] = array(
-                'id' => $record->item_type_id, 
-                'url' => self::getResourceUrl("/item_types/{$record->item_type_id}"), 
-                'name' => $record->Type->name, 
-                'resource' => 'item_types', 
+                'id' => $record->item_type_id,
+                'url' => self::getResourceUrl("/item_types/{$record->item_type_id}"),
+                'name' => $record->Type->name,
+                'resource' => 'item_types',
             );
         } else {
             $representation['item_type'] = null;
@@ -42,9 +42,9 @@ class Api_Item extends Omeka_Record_Api_AbstractRecordAdapter
             $collection = $record->getCollection();
             if (is_allowed($collection, 'show')) {
                 $representation['collection'] = array(
-                    'id' => $record->collection_id, 
-                    'url' => self::getResourceUrl("/collections/{$record->collection_id}"), 
-                    'resource' => 'collections', 
+                    'id' => $record->collection_id,
+                    'url' => self::getResourceUrl("/collections/{$record->collection_id}"),
+                    'resource' => 'collections',
                 );
             } else {
                 $representation['collection'] = null;
@@ -54,24 +54,24 @@ class Api_Item extends Omeka_Record_Api_AbstractRecordAdapter
         }
         if ($record->owner_id) {
             $representation['owner'] = array(
-                'id' => $record->owner_id, 
-                'url' => self::getResourceUrl("/users/{$record->owner_id}"), 
-                'resource' => 'users', 
+                'id' => $record->owner_id,
+                'url' => self::getResourceUrl("/users/{$record->owner_id}"),
+                'resource' => 'users',
             );
         } else {
             $representation['owner'] = null;
         }
         $representation['files'] = array(
             'count' => $record->getTable('File')
-                ->count(array('item_id' => $record->id)), 
-            'url' => self::getResourceUrl("/files?item={$record->id}"), 
-            'resource' => 'files', 
+                ->count(array('item_id' => $record->id)),
+            'url' => self::getResourceUrl("/files?item={$record->id}"),
+            'resource' => 'files',
         );
         $representation['tags'] = $this->getTagRepresentations($record);
         $representation['element_texts'] = $this->getElementTextRepresentations($record);
         return $representation;
     }
-    
+
     /**
      * Set POST data to an item.
      * 
@@ -95,7 +95,7 @@ class Api_Item extends Omeka_Record_Api_AbstractRecordAdapter
         $this->setTagData($record, $data);
         $this->setElementTextData($record, $data);
     }
-    
+
     /**
      * Set PUT data to an item.
      * 

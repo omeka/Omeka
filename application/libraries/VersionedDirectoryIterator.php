@@ -15,18 +15,18 @@
 class VersionedDirectoryIterator extends DirectoryIterator
 {
     private $dirsOnly;
-    public function __construct($path,$dirsOnly=true)
+    public function __construct($path, $dirsOnly = true)
     {
         $this->dirsOnly = $dirsOnly;
         parent::__construct($path);
     }
-    
+
     public function valid()
     {
         if (parent::valid()) {
-            if (($this->dirsOnly && !parent::isDir()) 
-                || parent::isDot() 
-                || (parent::getFileName() == '.svn') ) {
+            if (($this->dirsOnly && !parent::isDir())
+                || parent::isDot()
+                || (parent::getFileName() == '.svn')) {
                 parent::next();
                 return $this->valid();
             }
@@ -34,12 +34,12 @@ class VersionedDirectoryIterator extends DirectoryIterator
         }
         return false;
     }
-    
+
     public function current()
     {
         return parent::getFileName();
     }
-    
+
     public function getValid()
     {
         $dirs = array();

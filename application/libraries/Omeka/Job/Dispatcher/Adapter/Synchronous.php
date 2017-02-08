@@ -27,4 +27,3 @@ class Omeka_Job_Dispatcher_Adapter_Synchronous extends Omeka_Job_Dispatcher_Adap
         return $job;
     }
 }
-

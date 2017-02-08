@@ -12,4 +12,5 @@
  * @package Omeka\Install
  */
 class Installer_Task_Exception extends Installer_Exception
-{}
+{
+}

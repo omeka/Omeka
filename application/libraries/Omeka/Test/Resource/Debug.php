@@ -14,5 +14,6 @@
 class Omeka_Test_Resource_Debug extends Zend_Application_Resource_ResourceAbstract
 {
     public function init()
-    {}
+    {
+    }
 }

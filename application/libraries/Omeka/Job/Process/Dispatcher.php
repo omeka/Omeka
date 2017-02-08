@@ -23,7 +23,7 @@ class Omeka_Job_Process_Dispatcher
      * @param Array|null $args Arguments specific to the child class process
      * @return Process The model object for the background process
      */
-    static public function startProcess($className, $user = null, $args = null)
+    public static function startProcess($className, $user = null, $args = null)
     {
         $cliPath = self::getPHPCliPath();
 
@@ -31,7 +31,7 @@ class Omeka_Job_Process_Dispatcher
             $user = Zend_Registry::get('bootstrap')->getResource('CurrentUser');
         }
 
-        if($user) {
+        if ($user) {
             $user_id = $user->id;
         } else {
             $user_id = 0;
@@ -59,7 +59,7 @@ class Omeka_Job_Process_Dispatcher
      * @param Process $process The process to stop.
      * @return bool True if the process was stopped, false if not.
      */
-    static public function stopProcess(Process $process)
+    public static function stopProcess(Process $process)
     {
         if ($process->status == Process::STATUS_STARTING ||
             $process->status == Process::STATUS_IN_PROGRESS) {
@@ -80,7 +80,7 @@ class Omeka_Job_Process_Dispatcher
         }
     }
 
-    static public function getPHPCliPath()
+    public static function getPHPCliPath()
     {
         // Use the user-specified path, or attempt autodetection if no path
         // specified.
@@ -99,7 +99,7 @@ class Omeka_Job_Process_Dispatcher
      * Checks if the configured PHP-CLI path points to a valid PHP binary.
      * Flash an appropriate error if the path is invalid.
      */
-    static private function _checkCliPath($cliPath)
+    private static function _checkCliPath($cliPath)
     {
         /**
          * All of this could be moved, or also used, when actually setting the
@@ -109,28 +109,28 @@ class Omeka_Job_Process_Dispatcher
         $command = escapeshellarg($cliPath) . ' -v';
         $output = array();
         exec($command, $output, $returnCode);
-        
+
         if ($returnCode != 0) {
             throw new RuntimeException(__('The configured PHP path (%s) is invalid.', $cliPath));
         }
 
         // Attempt to parse the output from 'php -v' (the first line only)
         preg_match('/(^\\w+) ([\\d\\.]+)/', $output[0], $matches);
-        $cliName    = $matches[1];
+        $cliName = $matches[1];
         $cliVersion = $matches[2];
         $phpVersion = phpversion();
 
-        if ($cliName != 'PHP'  || !$cliVersion) {
+        if ($cliName != 'PHP' || !$cliVersion) {
             throw new RuntimeException(__('The configured PHP path (%s) does not point to a PHP-CLI binary.', $cliPath));
-        } else if (version_compare($cliVersion, '5.2', '<')) {
+        } elseif (version_compare($cliVersion, '5.2', '<')) {
             throw new RuntimeException(__('The configured PHP path (%s) points to a PHP-CLI binary with an invalid version (%s)', $cliPath, $cliVersion));
-        } else if ($cliVersion != $phpVersion) {
+        } elseif ($cliVersion != $phpVersion) {
             // potentially display a warning for this
         }
         return true;
     }
 
-    static private function _autodetectCliPath()
+    private static function _autodetectCliPath()
     {
         $command = 'which php 2>&0';
         $lastLineOutput = exec($command, $output, $returnVar);
@@ -142,7 +142,7 @@ class Omeka_Job_Process_Dispatcher
      *
      * @return string Path to bootstrap
      */
-    static private function _getBootstrapFilePath()
+    private static function _getBootstrapFilePath()
     {
         return SCRIPTS_DIR . '/background.php';
     }
@@ -152,7 +152,7 @@ class Omeka_Job_Process_Dispatcher
      *
      * @link http://www.php.net/manual/en/ref.exec.php#70135
      */
-    static private function _fork($command)
+    private static function _fork($command)
     {
         exec("$command > /dev/null 2>&1 &");
     }

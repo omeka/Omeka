@@ -13,4 +13,5 @@
  * @package Omeka\Job\Factory
  */
 class Omeka_Job_Factory_MissingClassException extends InvalidArgumentException
-{}
+{
+}

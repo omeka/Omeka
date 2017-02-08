@@ -60,7 +60,7 @@ class Omeka_View_Helper_Flash extends Zend_View_Helper_Abstract
      */
     private function _getListHtml($status, $message)
     {
-        return '<li class="' . $this->view->escape($status) . '">' 
+        return '<li class="' . $this->view->escape($status) . '">'
             . nl2br($this->view->escape($message))
             . '</li>';
     }

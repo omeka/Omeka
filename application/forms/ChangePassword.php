@@ -14,28 +14,28 @@
 class Omeka_Form_ChangePassword extends Omeka_Form
 {
     private $_user;
-        
+
     public function init()
     {
         parent::init();
-        
+
         $this->setAttrib('id', 'change-password');
         $this->addElement('password', 'current_password',
             array(
-                'label'         => __('Current Password'),
-                'description'   => __('Password must be at least 6 characters long.'),
-                'required'      => true,
+                'label' => __('Current Password'),
+                'description' => __('Password must be at least 6 characters long.'),
+                'required' => true,
                 'errorMessages' => array(__("Invalid current password")),
             )
         );
-        
+
         $this->addElement('password', 'new_password',
             array(
-                'label'         => __('New Password'),
-                'required'      => true,
-                'description'   => __('Password must be at least 6 characters long.'),
-                'validators'    => array(
-                    array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' => 
+                'label' => __('New Password'),
+                'required' => true,
+                'description' => __('Password must be at least 6 characters long.'),
+                'validators' => array(
+                    array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
                         array(
                             'messages' => array(
                                 'isEmpty' => __("New password must be entered.")
@@ -43,17 +43,17 @@ class Omeka_Form_ChangePassword extends Omeka_Form
                         )
                     ),
                     array(
-                        'validator' => 'Confirmation', 
-                        'options'   => array(
-                            'field'     => 'new_password_confirm',
-                            'messages'  => array(
+                        'validator' => 'Confirmation',
+                        'options' => array(
+                            'field' => 'new_password_confirm',
+                            'messages' => array(
                                 Omeka_Validate_Confirmation::NOT_MATCH => __('New password must be typed correctly twice.')
                             )
                          )
                     ),
                     array(
                         'validator' => 'StringLength',
-                        'options'   => array(
+                        'options' => array(
                             'min' => User::PASSWORD_MIN_LENGTH,
                             'messages' => array(
                                 Zend_Validate_StringLength::TOO_SHORT => __("New password must be at least %min% characters long.")
@@ -65,21 +65,21 @@ class Omeka_Form_ChangePassword extends Omeka_Form
         );
         $this->addElement('password', 'new_password_confirm',
             array(
-                'label'         => __('Repeat New Password'),
-                'required'      => true,
+                'label' => __('Repeat New Password'),
+                'required' => true,
                 'errorMessages' => array(__('New password must be typed correctly twice.'))
             )
         );
 
         $this->addElement('hash', 'password_csrf');
-        
-        $this->addDisplayGroup(array('current_password', 
-                                     'new_password', 
-                                     'new_password_confirm'), 
-                               'change_password', 
+
+        $this->addDisplayGroup(array('current_password',
+                                     'new_password',
+                                     'new_password_confirm'),
+                               'change_password',
                                array("legend" => __("Change Password")));
     }
-    
+
     public function setUser(User $user)
     {
         $this->_user = $user;

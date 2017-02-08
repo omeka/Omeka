@@ -38,7 +38,6 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
     public static function addShortcode($shortcodeName, $callback)
     {
         self::$shortcodeCallbacks[$shortcodeName] = $callback;
-
     }
 
     /**
@@ -115,19 +114,19 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
 
         if (preg_match_all($pattern, $text, $match, PREG_SET_ORDER)) {
             foreach ($match as $m) {
-                if (!empty($m[1]))
+                if (!empty($m[1])) {
                     $args[strtolower($m[1])] = $m[2];
-                elseif (!empty($m[3]))
+                } elseif (!empty($m[3])) {
                     $args[strtolower($m[3])] = $m[4];
-                elseif (!empty($m[5]))
+                } elseif (!empty($m[5])) {
                     $args[strtolower($m[5])] = $m[6];
-                elseif (isset($m[7]))
+                } elseif (isset($m[7])) {
                     $args[] = $m[7];
-                elseif (isset($m[8]))
+                } elseif (isset($m[8])) {
                     $args[] = $m[8];
+                }
             }
-        }
-        else{
+        } else {
             $args = ltrim($text);
         }
         return $args;
@@ -225,14 +224,14 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
         if (isset($args['num'])) {
             $limit = $args['num'];
         } else {
-            $limit = 10; 
+            $limit = 10;
         }
 
         $items = get_records('Item', $params, $limit);
 
         $content = '';
         foreach ($items as $item) {
-           $content .= $view->partial('items/single.php', array('item' => $item));
+            $content .= $view->partial('items/single.php', array('item' => $item));
         }
 
         return $content;
@@ -245,7 +244,7 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
      * @param Omeka_View $view
      * @return string
      */
-    public static function shortcodeCollections($args, $view) 
+    public static function shortcodeCollections($args, $view)
     {
         $params = array();
 
@@ -268,7 +267,7 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
         if (isset($args['num'])) {
             $limit = $args['num'];
         } else {
-            $limit = 10; 
+            $limit = 10;
         }
 
         $collections = get_records('Collection', $params, $limit);
@@ -289,12 +288,12 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
      * @param Omeka_View $view
      * @return string
      */
-    public static function shortcodeRecentCollections($args, $view) 
+    public static function shortcodeRecentCollections($args, $view)
     {
         if (!isset($args['num'])) {
             $args['num'] = '5';
         }
-        
+
         $args['sort'] = 'added';
 
         $args['order'] = 'd';
@@ -310,7 +309,7 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
      * @param Omeka_View $view
      * @return string
      */
-    public static function shortcodeFeaturedCollections($args, $view) 
+    public static function shortcodeFeaturedCollections($args, $view)
     {
         if (!isset($args['num'])) {
             $args['num'] = '1';
@@ -363,7 +362,7 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
 
         $file = get_record_by_id('File', $recordId);
 
-        if ($file){
+        if ($file) {
             return file_markup($file, $props);
         }
     }

@@ -11,8 +11,7 @@
  * 
  * @package Omeka\File\Derivative\Strategy
  */
-class Omeka_File_Derivative_Strategy_ExternalImageMagick
-    extends Omeka_File_Derivative_AbstractStrategy
+class Omeka_File_Derivative_Strategy_ExternalImageMagick extends Omeka_File_Derivative_AbstractStrategy
 {
     const IMAGEMAGICK_CONVERT_COMMAND = 'convert';
 
@@ -45,7 +44,7 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick
             $convertArgs,
             escapeshellarg($destPath)
         ));
-        
+
         self::executeCommand($cmd, $status, $output, $errors);
 
         if (!empty($errors)) {
@@ -59,7 +58,7 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick
 
         return true;
     }
-    
+
     /**
      * Get the full path to the ImageMagick 'convert' command.
      * 
@@ -68,12 +67,12 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick
      */
     protected function _getConvertPath()
     {
-        // Assert that this is both a valid path and a directory (cannot be a 
+        // Assert that this is both a valid path and a directory (cannot be a
         // script).
         if (!empty($this->_convertPath)) {
             return $this->_convertPath;
         }
-        
+
         $path = $this->getOption('path_to_convert');
         if ($path && ($pathClean = realpath($path)) && is_dir($pathClean)) {
             $pathClean = rtrim($pathClean, DIRECTORY_SEPARATOR);
@@ -117,8 +116,8 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick
                 );
             } else {
                 $args = array(
-                    '-thumbnail ' . escapeshellarg('x' . $constraint*2),
-                    '-resize ' . escapeshellarg($constraint*2 . 'x<'),
+                    '-thumbnail ' . escapeshellarg('x' . $constraint * 2),
+                    '-resize ' . escapeshellarg($constraint * 2 . 'x<'),
                     '-resize 50%',
                     '-background white',
                     '+repage',
@@ -133,7 +132,7 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick
         if ($this->getOption('autoOrient', false)) {
             array_unshift($args, '-auto-orient');
         }
-        return join (' ', $args);
+        return join(' ', $args);
     }
 
     /**
@@ -141,33 +140,32 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick
      * The convert binary must be within the directory and executable.
      * 
      * @param string
-     * @return boolean
+     * @return bool
      */
     public static function isValidImageMagickPath($dirToIm)
     {
         if (!realpath($dirToIm) || !is_dir($dirToIm)) {
             return false;
         }
-        
+
         // Append the convert binary to the given path.
         $imPath = rtrim($dirToIm, DIRECTORY_SEPARATOR);
         $convertPath = $imPath . DIRECTORY_SEPARATOR . self::IMAGEMAGICK_CONVERT_COMMAND;
-        
+
         // Make sure the convert file is executable
         if (!is_executable($convertPath)) {
             return false;
         }
-                        
+
         // Attempt to run the ImageMagick binary with the version argument
         // If you try to run it without any arguments, it returns an error code
         $cmd = escapeshellarg($convertPath) . ' -version';
-        
+
         self::executeCommand($cmd, $status, $output, $errors);
-        
+
         // A return value of 0 indicates the convert binary is working correctly.
         return $status == 0;
     }
-
 
     /**
      * Retrieve the path to the directory containing ImageMagick's convert utility.
@@ -189,12 +187,12 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick
             return '';
         }
     }
-    
+
     public static function executeCommand($cmd, &$status, &$output, &$errors)
     {
-        // Using proc_open() instead of exec() solves a problem where exec('convert') 
-        // fails with a "Permission Denied" error because the current working 
-        // directory cannot be set properly via exec().  Note that exec() works 
+        // Using proc_open() instead of exec() solves a problem where exec('convert')
+        // fails with a "Permission Denied" error because the current working
+        // directory cannot be set properly via exec().  Note that exec() works
         // fine when executing in the web environment but fails in CLI.
         $descriptorSpec = array(
             0 => array("pipe", "r"), //STDIN

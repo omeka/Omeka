@@ -26,13 +26,13 @@ class Omeka_Application_Resource_Logger extends Zend_Application_Resource_Resour
         if (!$config->log->errors && !$config->log->sql) {
             return;
         }
-        
+
         $logFile = LOGS_DIR . '/' . 'errors.log';
-        
+
         if (!is_writable($logFile)) {
             throw new RuntimeException('Error log file cannot be written to. Please give this file read/write permissions for the web server.');
         }
-        
+
         $writer = new Zend_Log_Writer_Stream($logFile);
         $logger = new Zend_Log($writer);
 
@@ -42,23 +42,23 @@ class Omeka_Application_Resource_Logger extends Zend_Application_Resource_Resour
                 $writer->addFilter(constant($priority));
             }
         }
-        
+
         if (!empty($config->debug->email)) {
-            $bootstrap->bootstrap('Mail');            
-            $this->_addMailWriter($logger, (string)$config->debug->email,
+            $bootstrap->bootstrap('Mail');
+            $this->_addMailWriter($logger, (string) $config->debug->email,
                 $config->debug->emailLogPriority);
         }
-        
+
         return $logger;
     }
-    
+
     /**
      * Set up debugging emails.
      *
      * @param Zend_Log $log
      * @param string $toEmail Email address of debug message recipient.
      */
-    private function _addMailWriter(Zend_Log $log, $toEmail, 
+    private function _addMailWriter(Zend_Log $log, $toEmail,
         $filter = null)
     {
         $mailer = new Zend_Mail;

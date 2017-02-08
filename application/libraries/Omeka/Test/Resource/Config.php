@@ -18,7 +18,7 @@ class Omeka_Test_Resource_Config extends Zend_Application_Resource_ResourceAbstr
      * @var Omeka_Application_Resource_Config
      */
     private $_coreResource;
-    
+
     /**
      * @param array $options Options for resource.
      */
@@ -26,7 +26,7 @@ class Omeka_Test_Resource_Config extends Zend_Application_Resource_ResourceAbstr
     {
         $this->_coreResource = new Omeka_Application_Resource_Config($options);
     }
-    
+
     /**
      * Load both config files.
      *

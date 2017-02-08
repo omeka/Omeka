@@ -56,13 +56,12 @@ class Omeka_Test_Helper_Plugin
      * re-runs the hooks and filters normally run during bootstrap.
      *
      * @param string $pluginName If omitted, initialize all installed plugins.
-     * @return void
      */
     public function initialize($pluginName = null)
     {
         $this->_defineResponseContexts();
         $bootstrap = Zend_Registry::get('bootstrap');
-        
+
         $this->pluginBroker->callHook('initialize', array(), $pluginName);
         $this->pluginBroker->callHook('define_acl', array('acl' => $bootstrap->getResource('Acl')), $pluginName);
         $this->pluginBroker->callHook('define_routes', array('router' => $bootstrap->getResource('Router')), $pluginName);
@@ -70,8 +69,6 @@ class Omeka_Test_Helper_Plugin
 
     /**
      * Run the response_contexts filter.
-     *
-     * @return void
      */
     protected function _defineResponseContexts()
     {

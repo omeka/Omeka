@@ -3,7 +3,8 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# baatarsuren <mgllibrary@gmail.com>, 2015
+# 99791039 <luvsanfed@yahoo.com>, 2016
+# baatarsuren <mgllibrary@gmail.com>, 2015-2016
 # Khaidav T. <khaidaw@yahoo.com>, 2015-2016
 # Tuvshintogtoh <tuvshintogtoh.v@gmail.com>, 2016
 msgid ""
@@ -11,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2016-05-23 21:15+0000\n"
+"PO-Revision-Date: 2016-12-15 22:50+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Mongolian (http://www.transifex.com/omeka/omeka/language/mn/)\n"
 "MIME-Version: 1.0\n"
@@ -25,11 +26,11 @@ msgid ""
 "The Dublin Core metadata element set is common to all Omeka records, "
 "including items, files, and collections. For more information see, "
 "http://dublincore.org/documents/dces/."
-msgstr ""
+msgstr "Dublin Core metadata  элемэнтүүдийг Омекагийн үндсэн бичлэг, мэдээлэл, файлууд, сан хөмрөгүүдийг оролцуулаад бүгдэд тохируулах, Дэлгэрэнгүй мэдээллийг дараах линкээр харна уу , http://dublincore.org/documents/dces/."
 
 #. Dublin Core: Title element name
-#: admin/themes/default/collections/browse.php:22
-#: admin/themes/default/items/browse.php:40
+#: admin/themes/default/collections/browse.php:29
+#: admin/themes/default/items/browse.php:46
 #: admin/themes/default/search/index.php:13
 #: application/views/scripts/collections/browse.php:10
 #: application/views/scripts/items/browse.php:19
@@ -42,14 +43,14 @@ msgid "A name given to the resource"
 msgstr "Нөөцөд /эх сурвалж/ өгсөн нэр"
 
 #. Dublin Core: Creator element name
-#: admin/themes/default/items/browse.php:41
+#: admin/themes/default/items/browse.php:47
 #: application/views/scripts/items/browse.php:20
 msgid "Creator"
 msgstr "Бүтээгч"
 
 #. Dublin Core: Creator element description
 msgid "An entity primarily responsible for making the resource"
-msgstr ""
+msgstr "Мэдээллийг бий болгох уян хатан үндсэн нэгж."
 
 #. Dublin Core: Subject element name
 msgid "Subject"
@@ -74,20 +75,20 @@ msgstr "Нөөцийн бүртгэл"
 
 #. Dublin Core: Publisher element name
 msgid "Publisher"
-msgstr "Хэвлэн нийтлэгч  /ХГ/"
+msgstr "Хэвлэн нийтлэгч  /ХГ /"
 
 #. Dublin Core: Publisher element description
 msgid "An entity responsible for making the resource available"
-msgstr ""
+msgstr "Нөөцийг бэлэн байлгах үүрэгтэй нэгж"
 
 #. Dublin Core: Contributor element name
 #. User role: contributor
 msgid "Contributor"
-msgstr "Дэмжигч оролцогч"
+msgstr "Дэмжин оролцогч"
 
 #. Dublin Core: Contributor element description
 msgid "An entity responsible for making contributions to the resource"
-msgstr ""
+msgstr "Эх үүсвэрт хувь нэмэр оруулах баталгаажсан этгээд"
 
 #. Dublin Core: Date element name
 msgid "Date"
@@ -97,16 +98,16 @@ msgstr "Огноо"
 msgid ""
 "A point or period of time associated with an event in the lifecycle of the "
 "resource"
-msgstr ""
+msgstr "Эх сурвалжийн амьдралын мөчлөгт холбоотой үйл явдлын цаг хугацаа эсвэл үе"
 
 #. Dublin Core: Type element name
-#: admin/themes/default/items/browse.php:42
+#: admin/themes/default/items/browse.php:48
 msgid "Type"
 msgstr "Төрөл"
 
 #. Dublin Core: Type element description
 msgid "The nature or genre of the resource"
-msgstr ""
+msgstr "Нөөцийн мөн чанар, эсвэл төрөл"
 
 #. Dublin Core: Format element name
 msgid "Format"
@@ -114,7 +115,7 @@ msgstr "Формат"
 
 #. Dublin Core: Format element description
 msgid "The file format, physical medium, or dimensions of the resource"
-msgstr ""
+msgstr "Нөөцийн хэмжээ, эсвэл файлын формат, физик шинж "
 
 #. Dublin Core: Identifier element name
 msgid "Identifier"
@@ -122,7 +123,7 @@ msgstr "ялгагч тэмдэг"
 
 #. Dublin Core: Identifier element description
 msgid "An unambiguous reference to the resource within a given context"
-msgstr ""
+msgstr "Өгөгдсөн нөхцөл дэх нөөцийн нэг утгатай лавлагаа /тайлбар/ "
 
 #. Dublin Core: Source element name
 msgid "Source"
@@ -130,7 +131,7 @@ msgstr "Эх сурвалж"
 
 #. Dublin Core: Source element description
 msgid "A related resource from which the described resource is derived"
-msgstr ""
+msgstr "Энэ хамааралтай нөөц нь тодорхой нөөцөөс гаралтай"
 
 #. Dublin Core: Language element name
 msgid "Language"
@@ -156,7 +157,7 @@ msgstr "Хамрах хүрээ"
 msgid ""
 "The spatial or temporal topic of the resource, the spatial applicability of "
 "the resource, or the jurisdiction under which the resource is relevant"
-msgstr ""
+msgstr "Нөөцийн орон зай болон цаг хугацааны агуулга, нөөцийг хэрэглэж болох орон зай, эсвэл нөөцөд хамааралтай харъяалал"
 
 #. Dublin Core: Rights element name
 msgid "Rights"
@@ -174,7 +175,7 @@ msgstr "Метадата мэдээллийн төрөл"
 msgid ""
 "The item type metadata element set, consisting of all item type elements "
 "bundled with Omeka and all item type elements created by an administrator."
-msgstr ""
+msgstr "Элемэнтийн /Талбар/ багц дахь мэдээллийн төрлийн мета өгөгдөл, Сайт удирдагчийн үүсгэсэн Oмекагийн бүх  элемэнтийн /талбар/ төрлийг багцалсан мэдээллийн бүрэлдэхүүн"
 
 #. Omeka Legacy File
 msgid "Omeka Legacy File"
@@ -186,7 +187,7 @@ msgid ""
 "was included in the `files` table in previous versions of Omeka. These "
 "elements are common to all Omeka files. This set may be deprecated in future"
 " versions."
-msgstr ""
+msgstr "Омекагийн өмнөх хувилбарт байгаа \"файлууд\"  хүснэгтийг багтаасан, Dublin Core элемэнтийн /талбар/ багцад нэмэгдсэн, мета өгөгдлийн элемэнтийн багц. Энэ элемэнтүүд Омекагийн файлуудад элбэг байдаг. Энэ багц нь шинэ хувилбарт хуучирсан байж болно."
 
 #. Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
@@ -214,11 +215,11 @@ msgstr "Бичлэг хийсэн /тэмдэглэсэн/ огноо"
 
 #. Omeka Legacy File: Capture Device element
 msgid "Capture Device"
-msgstr ""
+msgstr "Бичлэгийн /Capture/ төхөөрөмж"
 
 #. Omeka Legacy File: Capture Details element
 msgid "Capture Details"
-msgstr ""
+msgstr "Бичлэгийн/Capture/ дэлгэрэнгүй"
 
 #. Omeka Legacy File: Change History element
 msgid "Change History"
@@ -226,7 +227,7 @@ msgstr "Өөрчилсөн огноо"
 
 #. Omeka Legacy File: Watermark element
 msgid "Watermark"
-msgstr ""
+msgstr "Онцлох Тэмдэглэгээ /Watermark/"
 
 #. Omeka Legacy File: Encryption element
 msgid "Encryption"
@@ -248,7 +249,7 @@ msgstr "Омека зурган файл"
 msgid ""
 "The metadata element set that was included in the `files_images` table in "
 "previous versions of Omeka. These elements are common to all image files."
-msgstr ""
+msgstr "Омекагийн өмнөх хувилбарт байгаа `files_images` хүснэгтэд багтсан мета өгөгдлийн багц. Энэ элемэнтүүд /талбарууд/ бүх зургийн файлд түгээмэл байдаг."
 
 #. Omeka Image File: Width element
 msgid "Width"
@@ -260,7 +261,7 @@ msgstr "Өндөр"
 
 #. Omeka Image File: Bit Depth element
 msgid "Bit Depth"
-msgstr ""
+msgstr "Битийн гүн"
 
 #. Omeka Image File: Channels element
 msgid "Channels"
@@ -268,19 +269,19 @@ msgstr "Сувгууд"
 
 #. Omeka Image File: Exif String element
 msgid "Exif String"
-msgstr ""
+msgstr "Exif String /тэмдэгтийн дараалал/"
 
 #. Omeka Image File: Exif Array element
 msgid "Exif Array"
-msgstr ""
+msgstr "Exif цуваа /дараалал/"
 
 #. Omeka Image File: IPTC String element
 msgid "IPTC String"
-msgstr ""
+msgstr "IPTC String /тэмдэгтийн дараалал/"
 
 #. Omeka Image File: IPTC Array element
 msgid "IPTC Array"
-msgstr ""
+msgstr "IPTC цуваа /дараалал/"
 
 #. Omeka Video File
 msgid "Omeka Video File"
@@ -290,11 +291,11 @@ msgstr "Омека видео файл"
 msgid ""
 "The metadata element set that was included in the `files_videos` table in "
 "previous versions of Omeka. These elements are common to all video files."
-msgstr ""
+msgstr "Омекагийн өмнөх хувилбарт байгаа `files_videos` хүснэгтэд багтсан мета өгөгдлийн багц. Энэ элемэнтүүд /талбарууд/ бүх видео файлд түгээмэл байдаг."
 
 #. Omeka Video File: Bitrate element
 msgid "Bitrate"
-msgstr ""
+msgstr "Дамжуулах хурд"
 
 # Omeka Video File: Duration element
 msgid "Duration"
@@ -302,7 +303,7 @@ msgstr "Үргэлжлэх хугацаа"
 
 #. Omeka Video File: Sample Rate element
 msgid "Sample Rate"
-msgstr ""
+msgstr "Энгийн үзүүлэлт"
 
 #. Omeka Video File: Codec element
 msgid "Codec"
@@ -310,7 +311,7 @@ msgstr "Коод уншигч"
 
 #. Format (Legacy) Metadata element set
 msgid "Format (Legacy) Metadata"
-msgstr ""
+msgstr "Формат(Legacy) Метадата"
 
 #. User role: Super
 msgid "Super"
@@ -336,7 +337,7 @@ msgstr "Харагдах байдал"
 msgid ""
 "Check the links to display them in the main navigation. Click and drag the "
 "links into the preferred display order."
-msgstr ""
+msgstr "Холбоосуудыг дэлгэцэд харуулахын тулд үндсэн цэсд шалгана уу. \nХолбоосуудыг сонгож чирээд эрэмбийг олгоно. "
 
 #: admin/themes/default/appearance/edit-navigation.php:19
 msgid "Add a Link to the Navigation"
@@ -365,7 +366,8 @@ msgstr "Холбоос нэмэх"
 #: admin/themes/default/element-sets/edit.php:41
 #: admin/themes/default/files/edit.php:35
 #: admin/themes/default/item-types/edit.php:18
-#: admin/themes/default/items/batch-edit.php:131
+#: admin/themes/default/items/batch-edit-all.php:41
+#: admin/themes/default/items/batch-edit.php:61
 #: admin/themes/default/items/edit.php:19
 #: admin/themes/default/plugins/config.php:14
 #: admin/themes/default/settings/edit-api.php:82
@@ -395,18 +397,18 @@ msgid "View Public Page"
 msgstr "Нийтэд зориулсан хуудсыг харах"
 
 #: admin/themes/default/appearance/edit-navigation.php:44
-#: admin/themes/default/collections/edit.php:24
+#: admin/themes/default/collections/edit.php:25
 #: admin/themes/default/collections/show.php:36
 #: admin/themes/default/element-sets/browse.php:29
 #: admin/themes/default/files/edit.php:37
 #: admin/themes/default/files/show.php:30
 #: admin/themes/default/item-types/edit.php:20
 #: admin/themes/default/item-types/show.php:54
-#: admin/themes/default/items/batch-edit.php:120
-#: admin/themes/default/items/browse.php:27
-#: admin/themes/default/items/browse.php:81
-#: admin/themes/default/items/browse.php:123
-#: admin/themes/default/items/edit.php:21
+#: admin/themes/default/items/batch-edit.php:50
+#: admin/themes/default/items/browse.php:34
+#: admin/themes/default/items/browse.php:95
+#: admin/themes/default/items/browse.php:135
+#: admin/themes/default/items/edit.php:22
 #: admin/themes/default/items/show.php:47
 #: admin/themes/default/settings/edit-item-type-elements.php:23
 #: admin/themes/default/users/browse.php:66
@@ -425,12 +427,12 @@ msgstr "Та итгэлтэй байна уу?"
 msgid ""
 "All customizations will be lost. Order and labels will revert to Omeka "
 "defaults. Custom links will be lost."
-msgstr ""
+msgstr "Бүх өөрчлөлтүүд алга болно. Хаяг болон эрэмбэ бүгд Омекагийн үндэсэн тохиргоонд шилжинэ. Нэмсэн холбоосууд /link/ алга болно."
 
 #: admin/themes/default/collections/add.php:2
-#: admin/themes/default/collections/browse.php:11
-#: admin/themes/default/collections/browse.php:67
-#: admin/themes/default/collections/browse.php:76
+#: admin/themes/default/collections/browse.php:12
+#: admin/themes/default/collections/browse.php:75
+#: admin/themes/default/collections/browse.php:85
 msgid "Add a Collection"
 msgstr "Сан хөмрөгийг нэмэх"
 
@@ -439,22 +441,22 @@ msgid "Add Collection"
 msgstr "Сан хөмрөг нэмэх"
 
 #: admin/themes/default/collections/add.php:16
-#: admin/themes/default/collections/edit.php:30
+#: admin/themes/default/collections/edit.php:32
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/items/add.php:19
-#: admin/themes/default/items/batch-edit.php:51
-#: admin/themes/default/items/edit.php:28
+#: admin/themes/default/items/batch-edit-common.php:10
+#: admin/themes/default/items/edit.php:30
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:52
 msgid "Public"
 msgstr "Нийтийн"
 
 #: admin/themes/default/collections/add.php:19
-#: admin/themes/default/collections/edit.php:35
+#: admin/themes/default/collections/edit.php:37
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/add.php:25
-#: admin/themes/default/items/batch-edit.php:66
-#: admin/themes/default/items/edit.php:34
+#: admin/themes/default/items/batch-edit-common.php:24
+#: admin/themes/default/items/edit.php:36
 #: admin/themes/default/items/quick-filters.php:8
 #: admin/themes/default/items/show.php:53
 msgid "Featured"
@@ -484,32 +486,43 @@ msgstr "Сан хөмрөгүүдийг тоймлож харах"
 msgid "(%s total)"
 msgstr "(нийт %s)"
 
-#: admin/themes/default/collections/browse.php:23
+#: admin/themes/default/collections/browse.php:17
+#, php-format
+msgid "%sOne item%s has no collection."
+msgid_plural "%s%d items%s aren't in a collection."
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/themes/default/collections/browse.php:19
+msgid "All items are in a collection."
+msgstr ""
+
+#: admin/themes/default/collections/browse.php:30
 #: admin/themes/default/collections/show.php:51
-#: application/views/scripts/collections/browse.php:36
+#: application/views/scripts/collections/browse.php:35
 msgid "Contributors"
 msgstr "Оролцогч"
 
-#: admin/themes/default/collections/browse.php:24
+#: admin/themes/default/collections/browse.php:31
 #: admin/themes/default/files/show.php:66
-#: admin/themes/default/items/browse.php:43
+#: admin/themes/default/items/browse.php:49
 #: application/views/scripts/collections/browse.php:11
 #: application/views/scripts/items/browse.php:21
 msgid "Date Added"
 msgstr "Нэмэгдсэн огноо"
 
-#: admin/themes/default/collections/browse.php:25
+#: admin/themes/default/collections/browse.php:32
 #: admin/themes/default/collections/show.php:46
 #: admin/themes/default/item-types/show.php:42
 msgid "Total Number of Items"
 msgstr "Нийт мэдээллийн тоо"
 
-#: admin/themes/default/collections/browse.php:40
-#: admin/themes/default/items/browse.php:72
+#: admin/themes/default/collections/browse.php:47
+#: admin/themes/default/items/browse.php:86
 msgid "(Private)"
 msgstr "(Хаалттай)"
 
-#: admin/themes/default/collections/browse.php:43
+#: admin/themes/default/collections/browse.php:50
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:27
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
@@ -517,34 +530,42 @@ msgstr "(Хаалттай)"
 #: admin/themes/default/index.php:79
 #: admin/themes/default/item-types/browse.php:26
 #: admin/themes/default/item-types/show.php:51
-#: admin/themes/default/items/browse.php:24
-#: admin/themes/default/items/browse.php:77
-#: admin/themes/default/items/browse.php:120
+#: admin/themes/default/items/browse.php:31
+#: admin/themes/default/items/browse.php:91
+#: admin/themes/default/items/browse.php:132
 #: admin/themes/default/items/files-form.php:12
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:63
 msgid "Edit"
 msgstr "Засах"
 
-#: admin/themes/default/collections/browse.php:52
+#: admin/themes/default/collections/browse.php:59
 msgid "No contributors"
 msgstr "Оролцогчгүй"
 
-#: admin/themes/default/collections/browse.php:70
+#: admin/themes/default/collections/browse.php:79
 msgid "There are no collections on this page."
 msgstr "Энэ хуудсанд ямар нэг сан хөмрөг алга."
 
-#: admin/themes/default/collections/browse.php:70
+#: admin/themes/default/collections/browse.php:79
 msgid "View All Collections"
 msgstr "Бүх сан хөмрөгийг харах"
 
-#: admin/themes/default/collections/browse.php:73
+#: admin/themes/default/collections/browse.php:82
 msgid "You have no collections."
 msgstr "Ямар нэг сан хөмрөг алга"
 
-#: admin/themes/default/collections/browse.php:75
+#: admin/themes/default/collections/browse.php:84
 msgid "Get started by adding your first collection."
 msgstr "Анхны сан хөмрөгийг үүсгэлээ."
+
+#: admin/themes/default/collections/edit.php:3
+#: admin/themes/default/collections/show.php:3
+#: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
+#: application/models/Mixin/ElementText.php:780
+#: application/views/scripts/functions.php:22
+msgid "[Untitled]"
+msgstr "[Гарчиггүй]"
 
 #: admin/themes/default/collections/edit.php:8
 #, php-format
@@ -554,7 +575,7 @@ msgstr " #%s сан хөмрөгийг засах"
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Collection #%s"
-msgstr ""
+msgstr "Сан хөмрөг #%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
@@ -566,7 +587,7 @@ msgstr "Сүүлд нэмэгдсэн мэдээлэл"
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/show.php:52
 #: admin/themes/default/items/show.php:53
-#: application/views/helpers/ItemSearchFilters.php:69
+#: application/views/helpers/ItemSearchFilters.php:68
 msgid "Yes"
 msgstr "Тийм"
 
@@ -574,13 +595,22 @@ msgstr "Тийм"
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/show.php:52
 #: admin/themes/default/items/show.php:53
-#: application/views/helpers/ItemSearchFilters.php:69
+#: application/views/helpers/ItemSearchFilters.php:68
 msgid "No"
 msgstr "Үгүй"
 
 #: admin/themes/default/collections/show.php:56
 msgid "No contributors."
 msgstr "Оролцогчгүй"
+
+#: admin/themes/default/collections/show.php:62
+#: admin/themes/default/files/show.php:93
+#: admin/themes/default/items/browse.php:149
+#: admin/themes/default/items/show.php:88
+#: application/views/scripts/items/browse.php:60
+#: application/views/scripts/items/show.php:41
+msgid "Output Formats"
+msgstr "Гаргах формат"
 
 #: admin/themes/default/common/appearance-nav.php:5
 msgid "Themes"
@@ -611,7 +641,7 @@ msgid "Dashboard"
 msgstr "Хянах самбар"
 
 #: admin/themes/default/common/content-nav.php:9
-#: admin/themes/default/items/batch-delete.php:17
+#: admin/themes/default/items/batch-delete.php:15
 #: admin/themes/default/items/batch-edit.php:17
 msgid "Items"
 msgstr "Баримтууд"
@@ -622,13 +652,13 @@ msgstr "Сан хөмрөгүүд"
 
 #: admin/themes/default/common/content-nav.php:17
 msgid "Item Types"
-msgstr "Баримтын төрөл"
+msgstr "Мэдээллийн төрөл"
 
 #: admin/themes/default/common/content-nav.php:21
-#: admin/themes/default/items/browse.php:94
+#: admin/themes/default/items/browse.php:108
 #: admin/themes/default/items/show.php:65
 #: application/views/scripts/items/browse.php:46
-#: application/views/scripts/items/show.php:26
+#: application/views/scripts/items/show.php:29
 msgid "Tags"
 msgstr "Таагууд"
 
@@ -682,18 +712,18 @@ msgstr "Хэрэглэгчид"
 msgid "Omeka Admin"
 msgstr "Омека удирдлага"
 
-#: admin/themes/default/common/header.php:40
+#: admin/themes/default/common/header.php:41
 #: application/views/scripts/common/header.php:32
 msgid "Skip to main content"
 msgstr "Алгасаад үндсэн агуулгад очих"
 
-#: admin/themes/default/common/header.php:60
+#: admin/themes/default/common/header.php:61
 #: application/views/scripts/common/admin-bar.php:7
 #, php-format
 msgid "Welcome, %s"
 msgstr "Сайн уу, %s"
 
-#: admin/themes/default/common/header.php:61
+#: admin/themes/default/common/header.php:62
 #: application/views/scripts/common/admin-bar.php:15
 msgid "Log Out"
 msgstr "Гарах"
@@ -717,15 +747,15 @@ msgstr "Хайлт"
 
 #: admin/themes/default/common/settings-nav.php:20
 msgid "Element Sets"
-msgstr ""
+msgstr "Элемэнтийн /талбар/ багц"
 
 #: admin/themes/default/common/settings-nav.php:26
 msgid "Item Type Elements"
-msgstr ""
+msgstr "Мэдээллийн төрлийн элемэнтүүд"
 
 #: admin/themes/default/common/settings-nav.php:32
 msgid "API"
-msgstr ""
+msgstr "API"
 
 #: admin/themes/default/common/users-nav.php:11
 #: application/forms/ChangePassword.php:80
@@ -735,7 +765,7 @@ msgstr "Нууц үг солих"
 #: admin/themes/default/common/users-nav.php:17
 #: admin/themes/default/users/api-keys.php:14
 msgid "API Keys"
-msgstr ""
+msgstr "API Түлхүүрүүд"
 
 #: admin/themes/default/element-sets/browse.php:16
 #: admin/themes/default/users/browse.php:17
@@ -745,13 +775,13 @@ msgstr "Нэр"
 
 #: admin/themes/default/element-sets/edit.php:5
 msgid "Edit Element Set"
-msgstr ""
+msgstr "Элемэнтийн багцыг засварлах"
 
 #: admin/themes/default/element-sets/edit.php:17
 msgid ""
 "Click and drag the elements into the preferred display order. Click the "
 "right arrows to add customized comments to element descriptions."
-msgstr ""
+msgstr "Элемэнтүүдийг /талбаруудыг/ сонгоод чирэх замаар кэлгэцэнд харагдах дарааллыг тогтоож болно. Баруун хэсэгт харагдах сумны дүрстэй товчийг дарж элемэнтэд /талбарт/ тайлбарт сэтгэгдэл нэмж болно."
 
 #: admin/themes/default/element-sets/edit.php:29
 msgid "Comment"
@@ -773,7 +803,7 @@ msgstr "сайт удирдагч"
 #: admin/themes/default/error/403.php:11
 #, php-format
 msgid "If you think you should have permission, try contacting the %s."
-msgstr ""
+msgstr "Хэрэв та нууцлалын зөвшөөрөлтэй байхыг хүсвэл,  %s -тай холбогдоорой."
 
 #: admin/themes/default/error/404.php:2
 msgid "404: Page Not Found"
@@ -784,12 +814,12 @@ msgid ""
 "You&#8217;ve tried to access a page that does not seem to exist. Sometimes "
 "this happens. Below is a quick break-down of the items, collections, and "
 "exhibits on this site."
-msgstr ""
+msgstr "Та  &#8217; хуудсанд хандах оролдлого хийгээд үр дүнгүй  мэт байж болно. Заримдаа ийм зүйл тохиолдоно. Сан хөмрөг, үзэсгэлэн, мэдээллийн гэмтэл сайтад байна. "
 
 #: admin/themes/default/error/404.php:10
 #, php-format
 msgid "If this does not help, try contacting the %s."
-msgstr ""
+msgstr "Хэрэв энэ танд тусалж чадахгүй бол, %s -тай холбогдоорой."
 
 #: admin/themes/default/error/404.php:16 admin/themes/default/index.php:52
 msgid "Recent Items"
@@ -816,7 +846,7 @@ msgstr "405: Зөвшөөрөгдөөгүй арга"
 msgid ""
 "You must use a different method to access this URL. If you reached this page"
 " by following a link or clicking a button in Omeka, please contact the %s."
-msgstr ""
+msgstr "Та энэ URL хаягт хандахын тулд өөр арга хэрэглэнэ үү.  Хэрэв дараах линкээр, эсвэл Oмекагийн товчлуураар хуудсыг нээсэн бол %s -тэй холбогдоно уу."
 
 #: admin/themes/default/files/edit.php:8
 #, php-format
@@ -848,11 +878,11 @@ msgstr "Бүтэн хэмжээ"
 
 #: admin/themes/default/files/show.php:45
 msgid "Thumbnail"
-msgstr ""
+msgstr "Товч зураг /Thumbnail/"
 
 #: admin/themes/default/files/show.php:46
 msgid "Square Thumbnail"
-msgstr ""
+msgstr "Товч зургийн /Thumbnail/ хүрээ"
 
 #: admin/themes/default/files/show.php:52
 #: application/views/scripts/files/show.php:22
@@ -890,7 +920,7 @@ msgstr "Зассан огноо"
 #: admin/themes/default/files/show.php:70
 #: application/views/scripts/files/show.php:34
 msgid "Authentication"
-msgstr ""
+msgstr "Нотолгоо"
 
 #: admin/themes/default/files/show.php:76
 #: application/views/scripts/files/show.php:40
@@ -900,54 +930,46 @@ msgstr "Метадатагийн төрөл"
 #: admin/themes/default/files/show.php:78
 #: application/views/scripts/files/show.php:42
 msgid "Mime Type"
-msgstr ""
+msgstr "Дүрсний төрөл"
 
 #: admin/themes/default/files/show.php:80
 #: application/views/scripts/files/show.php:46
 msgid "File Type / OS"
-msgstr ""
+msgstr "Файлын төрөл / OS"
 
 #: admin/themes/default/files/show.php:87
 msgid "Embedded Metadata"
-msgstr ""
-
-#: admin/themes/default/files/show.php:93
-#: admin/themes/default/items/browse.php:133
-#: admin/themes/default/items/show.php:88
-#: application/views/scripts/items/browse.php:60
-#: application/views/scripts/items/show.php:38
-msgid "Output Formats"
-msgstr ""
+msgstr "Шигтгэсэн /Embedded/ метадата"
 
 #: admin/themes/default/index.php:10
 msgid "item"
 msgid_plural "items"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "мэдээлэл"
+msgstr[1] "мэдээллүүд"
 
 #: admin/themes/default/index.php:11
 msgid "collection"
 msgid_plural "collections"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "сан хөмрөг"
+msgstr[1] "сан хөмрөг"
 
 #: admin/themes/default/index.php:12
 msgid "tag"
 msgid_plural "tags"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "тааг"
+msgstr[1] "тааг"
 
 #: admin/themes/default/index.php:16
 msgid "plugin"
 msgid_plural "plugins"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "хэрэглэгч"
+msgstr[1] "плагин"
 
 #: admin/themes/default/index.php:20
 msgid "user"
 msgid_plural "users"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "хэрэглэгч"
+msgstr[1] "хэрэглэгч"
 
 #: admin/themes/default/index.php:24
 msgid "theme"
@@ -955,12 +977,12 @@ msgstr "загвар"
 
 #: admin/themes/default/index.php:35
 msgid "A new version of Omeka is available for download."
-msgstr ""
+msgstr "Омекагийн шинэ хувилбар татах."
 
 #: admin/themes/default/index.php:36
 #, php-format
 msgid "Upgrade to %s"
-msgstr ""
+msgstr "Сайжруулах => %s"
 
 #: admin/themes/default/item-types/add-existing-element.php:22
 #: admin/themes/default/item-types/add-new-element.php:15
@@ -972,25 +994,25 @@ msgstr "Хасах"
 
 #: admin/themes/default/item-types/add-new-element.php:6
 msgid "Element Name"
-msgstr ""
+msgstr "Элемэнтийн нэр"
 
 #: admin/themes/default/item-types/add-new-element.php:22
 msgid "Element Description"
-msgstr ""
+msgstr "Элемэнтийн тодорхойлолт"
 
 #: admin/themes/default/item-types/add.php:2
 #: admin/themes/default/item-types/add.php:11
 msgid "Add Item Type"
-msgstr ""
+msgstr "Мэдээллийн/Баримтын/ төрөл нэмэх"
 
 #: admin/themes/default/item-types/browse.php:2
 msgid "Browse Item Types"
-msgstr ""
+msgstr "Мэдээллийн/баримтын/ төрлийг тоймлож харах"
 
 #: admin/themes/default/item-types/browse.php:7
 #: admin/themes/default/item-types/browse.php:40
 msgid "Add an Item Type"
-msgstr ""
+msgstr "Мэдээллийн /баримтын/ төрөл нэмэх"
 
 #: admin/themes/default/item-types/browse.php:14
 msgid "Type Name"
@@ -1020,7 +1042,7 @@ msgstr "шаардлагатай талбар"
 #: admin/themes/default/item-types/form.php:25
 #: admin/themes/default/item-types/show.php:16
 msgid "Elements"
-msgstr ""
+msgstr "Элемэнтүүд"
 
 #: admin/themes/default/item-types/form.php:42
 #: admin/themes/default/items/tag-form.php:22
@@ -1031,11 +1053,11 @@ msgstr "Буцаах"
 #: admin/themes/default/item-types/form.php:80
 #: admin/themes/default/item-types/form.php:87
 msgid "Add Element"
-msgstr ""
+msgstr "Элемэнт нэмэх"
 
 #: admin/themes/default/item-types/form.php:84
 msgid "Existing"
-msgstr ""
+msgstr "Байгаа"
 
 #: admin/themes/default/item-types/form.php:85
 msgid "New"
@@ -1044,20 +1066,20 @@ msgstr "Шинэ"
 #: admin/themes/default/item-types/show.php:8
 #, php-format
 msgid "Item Type #%s"
-msgstr ""
+msgstr "Мэдээллийн /баримтын/ төрөл #%s"
 
 #: admin/themes/default/item-types/show.php:25
 msgid "There are no elements."
-msgstr ""
+msgstr "Энд ямар нэг элемэнт алга."
 
 #: admin/themes/default/item-types/show.php:39
 msgid "There are no recently added items."
 msgstr "Шинээр нэмэгдсэн баримт алга."
 
 #: admin/themes/default/items/add.php:2
-#: admin/themes/default/items/browse.php:20
-#: admin/themes/default/items/browse.php:116
-#: admin/themes/default/items/browse.php:152
+#: admin/themes/default/items/browse.php:19
+#: admin/themes/default/items/browse.php:141
+#: admin/themes/default/items/browse.php:168
 msgid "Add an Item"
 msgstr "Мэдээллийг нэмэх"
 
@@ -1066,92 +1088,130 @@ msgid "Add Item"
 msgstr "Мэдээлэл нэмэх"
 
 #: admin/themes/default/items/add.php:32
-#: admin/themes/default/items/batch-edit.php:90
-#: admin/themes/default/items/browse.php:90
-#: admin/themes/default/items/edit.php:41
+#: admin/themes/default/items/batch-edit-common.php:48
+#: admin/themes/default/items/browse.php:104
+#: admin/themes/default/items/edit.php:43
 #: admin/themes/default/items/show.php:57
 #: application/libraries/globals.php:411
-#: application/views/scripts/items/show.php:18
+#: application/views/scripts/items/show.php:21
 msgid "Collection"
 msgstr "Сан хөмрөг"
 
-#: admin/themes/default/items/batch-delete.php:2
-msgid "Batch Delete Items"
+#: admin/themes/default/items/batch-delete-all.php:2
+msgid "Batch Delete All Searched Items"
 msgstr ""
 
-#: admin/themes/default/items/batch-delete.php:38
-msgid ""
-"Some items were excluded because you do not have permission to delete them."
+#: admin/themes/default/items/batch-delete-all.php:18
+#, php-format
+msgid "All %d items matching the search filters above will be deleted."
 msgstr ""
 
-#: admin/themes/default/items/batch-delete.php:41
-msgid "Checked items will be deleted."
+#: admin/themes/default/items/batch-delete-all.php:20
+#, php-format
+msgid "All %d items will be deleted."
 msgstr ""
 
-#: admin/themes/default/items/batch-delete.php:50
-#: admin/themes/default/items/batch-edit.php:117
+#: admin/themes/default/items/batch-delete-all.php:25
+msgid "Deletions will be processed in the background item by item."
+msgstr ""
+
+#: admin/themes/default/items/batch-delete-all.php:36
+#: admin/themes/default/items/batch-delete.php:47
+#: admin/themes/default/items/batch-edit.php:47
 msgid "Delete Items"
 msgstr "Мэдээлэл устгах"
 
-#: admin/themes/default/items/batch-edit.php:2
-msgid "Batch Edit Items"
+#: admin/themes/default/items/batch-delete.php:2
+msgid "Batch Delete Items"
+msgstr "Багц мэдээллийг /бармтыг/ устгах"
+
+#: admin/themes/default/items/batch-delete.php:36
+msgid ""
+"Some items were excluded because you do not have permission to delete them."
+msgstr "Таны эрх хаалттай учир устгах боломжгүй байна. "
+
+#: admin/themes/default/items/batch-delete.php:39
+msgid "Checked items will be deleted."
+msgstr "Сонгосон мэдээллүүд /баримтууд/ устгагдсан."
+
+#: admin/themes/default/items/batch-edit-all.php:2
+msgid "Batch Edit All Searched Items"
 msgstr ""
 
-#: admin/themes/default/items/batch-edit.php:37
-msgid "Changes will be applied to checked items."
+#: admin/themes/default/items/batch-edit-all.php:20
+#, php-format
+msgid ""
+"Changes will be applied to all %d items matching the search filters above."
 msgstr ""
 
-#: admin/themes/default/items/batch-edit.php:42
+#: admin/themes/default/items/batch-edit-all.php:22
+#, php-format
+msgid "Changes will be applied to all %d items."
+msgstr ""
+
+#: admin/themes/default/items/batch-edit-all.php:27
+msgid "Changes will be processed in the background item by item."
+msgstr ""
+
+#: admin/themes/default/items/batch-edit-common.php:2
 msgid "Item Metadata"
-msgstr ""
+msgstr "Мэдээллийн /баримтын/ метадата"
 
-#: admin/themes/default/items/batch-edit.php:47
+#: admin/themes/default/items/batch-edit-common.php:6
 msgid "Public?"
 msgstr "Нийтийнх үү?"
 
-#: admin/themes/default/items/batch-edit.php:50
-#: admin/themes/default/items/batch-edit.php:65
-#: admin/themes/default/items/batch-edit.php:79
-#: admin/themes/default/items/batch-edit.php:94
+#: admin/themes/default/items/batch-edit-common.php:9
+#: admin/themes/default/items/batch-edit-common.php:23
+#: admin/themes/default/items/batch-edit-common.php:37
+#: admin/themes/default/items/batch-edit-common.php:52
 msgid "Select Below"
-msgstr ""
+msgstr "Доорхыг сонгох"
 
-#: admin/themes/default/items/batch-edit.php:52
+#: admin/themes/default/items/batch-edit-common.php:11
 msgid "Not Public"
 msgstr "Нийтийнх биш"
 
-#: admin/themes/default/items/batch-edit.php:62
+#: admin/themes/default/items/batch-edit-common.php:20
 msgid "Featured?"
 msgstr "Онцлох мөн үү?"
 
-#: admin/themes/default/items/batch-edit.php:67
+#: admin/themes/default/items/batch-edit-common.php:25
 msgid "Not Featured"
 msgstr "Онцлох биш"
 
-#: admin/themes/default/items/batch-edit.php:75
+#: admin/themes/default/items/batch-edit-common.php:33
 #: admin/themes/default/items/item-type-form.php:3
 msgid "Item Type"
 msgstr "Мэдээллийн төрөл"
 
-#: admin/themes/default/items/batch-edit.php:84
-#: admin/themes/default/items/batch-edit.php:99
+#: admin/themes/default/items/batch-edit-common.php:42
+#: admin/themes/default/items/batch-edit-common.php:57
 msgid "Remove?"
 msgstr "Хасах уу?"
 
-#: admin/themes/default/items/batch-edit.php:105
+#: admin/themes/default/items/batch-edit-common.php:63
 #: admin/themes/default/items/tag-form.php:8
 #: admin/themes/default/items/tag-form.php:11
 msgid "Add Tags"
 msgstr "Тааг нэмэх"
 
-#: admin/themes/default/items/batch-edit.php:108
+#: admin/themes/default/items/batch-edit-common.php:66
 #, php-format
 msgid "List of tags to add to all checked items, separated by %s."
-msgstr ""
+msgstr "%s тусгаарлагдсан бүх мэдээллийг шалгаж жагсаалтад нэмэх."
 
-#: admin/themes/default/items/batch-edit.php:118
+#: admin/themes/default/items/batch-edit.php:2
+msgid "Batch Edit Items"
+msgstr "Багц мэдээллийг /баримтыг/ засварлах"
+
+#: admin/themes/default/items/batch-edit.php:37
+msgid "Changes will be applied to checked items."
+msgstr "Сонгосон мэдээллүүдэд /баримтуудад/ өөрчлөлт хийгдсэн."
+
+#: admin/themes/default/items/batch-edit.php:48
 msgid "Check if you wish to delete selected items."
-msgstr ""
+msgstr "Хэрэв сонгосон зүйлийг устгахыг хүсэж байгаа бол шалгана уу."
 
 #: admin/themes/default/items/browse.php:3
 #: application/libraries/Omeka/Navigation.php:142
@@ -1194,63 +1254,74 @@ msgstr ""
 msgid "Browse Items"
 msgstr "Мэдээллийг тоймлож харах"
 
-#: admin/themes/default/items/browse.php:22
-#: admin/themes/default/items/browse.php:118
+#: admin/themes/default/items/browse.php:21
+#: admin/themes/default/items/browse.php:143
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2396
-#: application/libraries/globals.php:2786
+#: application/libraries/globals.php:2400
+#: application/libraries/globals.php:2791
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Мэдээлэл хайх"
 
-#: admin/themes/default/items/browse.php:37
-msgid "Select"
-msgstr "Сонгох"
+#: admin/themes/default/items/browse.php:26
+#: admin/themes/default/items/browse.php:129
+#, php-format
+msgid "Select all %s results"
+msgstr ""
 
-#: admin/themes/default/items/browse.php:95
+#: admin/themes/default/items/browse.php:27
+#: admin/themes/default/items/browse.php:130
+msgid "items selected"
+msgstr ""
+
+#: admin/themes/default/items/browse.php:43
+msgid "Select all rows"
+msgstr ""
+
+#: admin/themes/default/items/browse.php:64
+#, php-format
+msgid "Select item \"%s\""
+msgstr ""
+
+#: admin/themes/default/items/browse.php:109
 msgid "No Tags"
 msgstr "Тааггүй"
 
-#: admin/themes/default/items/browse.php:139
+#: admin/themes/default/items/browse.php:155
 msgid "Details"
 msgstr "Төлөв"
 
-#: admin/themes/default/items/browse.php:140
+#: admin/themes/default/items/browse.php:156
 msgid "Show Details"
 msgstr "Төлөвийг харуулах"
 
-#: admin/themes/default/items/browse.php:141
+#: admin/themes/default/items/browse.php:157
 msgid "Hide Details"
 msgstr "Төлөвийг нуух"
 
-#: admin/themes/default/items/browse.php:149
+#: admin/themes/default/items/browse.php:165
 msgid "You have no items."
 msgstr "Ямар нэг баримт алга"
 
-#: admin/themes/default/items/browse.php:151
+#: admin/themes/default/items/browse.php:167
 msgid "Get started by adding your first item."
-msgstr ""
+msgstr "Эхний мэдээллийг /баримтыг/ нэмж байна."
 
-#: admin/themes/default/items/browse.php:156
+#: admin/themes/default/items/browse.php:172
 #, php-format
 msgid "The query searched 1 item and returned no results."
 msgid_plural "The query searched %s items and returned no results."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Хайлтын үр дүнд 1 мэдээлэл олдсон ба үр дүн алга."
+msgstr[1] "Хайлтын үр дүнд %s мэдээлэл олдсон ба үр дүн алга."
 
-#: admin/themes/default/items/browse.php:157
+#: admin/themes/default/items/browse.php:173
 msgid "refine your search"
 msgstr "Хайлтыг сайжруулах"
 
-#: admin/themes/default/items/browse.php:157
+#: admin/themes/default/items/browse.php:173
 #, php-format
 msgid "Would you like to %s?"
 msgstr "Та %s? -г хүссэн үү?"
-
-#: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/views/scripts/functions.php:22
-msgid "[Untitled]"
-msgstr "[Гарчиггүй]"
 
 #: admin/themes/default/items/edit.php:8
 #, php-format
@@ -1259,7 +1330,7 @@ msgstr " #%s  - мэдээллийг засварлах"
 
 #: admin/themes/default/items/files-form.php:2
 msgid "Click and drag the files into the preferred display order."
-msgstr ""
+msgstr "Файлыг дэлгэцэнд эрэмблэхдээ сонгоод чирэх замаар гүйцэтгэнэ."
 
 #: admin/themes/default/items/files-form.php:13
 msgid "Delete "
@@ -1284,7 +1355,7 @@ msgstr "Өөр файл нэмэх"
 
 #: admin/themes/default/items/item-type-form.php:15
 msgid "Pick this type"
-msgstr ""
+msgstr "Энэ төрлийг сонгох"
 
 #: admin/themes/default/items/quick-filters.php:2
 #: admin/themes/default/items/quick-filters.php:4
@@ -1307,115 +1378,154 @@ msgstr "Түлхүүр үгээр хайх"
 #: admin/themes/default/items/search-form.php:27
 #: application/views/scripts/items/search-form.php:25
 msgid "Narrow by Specific Fields"
-msgstr ""
+msgstr "Тодорхой талбаруудыг нарийвчлах"
 
 #: admin/themes/default/items/search-form.php:28
-#: application/views/scripts/items/search-form.php:90
+#: application/views/scripts/items/search-form.php:105
 msgid "Add a Field"
 msgstr "Талбар нэмэх"
 
 #: admin/themes/default/items/search-form.php:54
 #: application/views/scripts/items/search-form.php:50
-msgid "Search Field"
-msgstr "Талбараар хайх"
+msgid "Search Joiner"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:59
+#: application/views/helpers/ItemSearchFilters.php:108
+#: application/views/scripts/items/search-form.php:55
+msgid "AND"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:60
+#: application/views/helpers/ItemSearchFilters.php:106
+#: application/views/scripts/items/search-form.php:56
+msgid "OR"
+msgstr ""
 
 #: admin/themes/default/items/search-form.php:67
 #: application/views/scripts/items/search-form.php:63
+msgid "Search Field"
+msgstr "Талбараар хайх"
+
+#: admin/themes/default/items/search-form.php:80
+#: application/views/scripts/items/search-form.php:76
 msgid "Search Type"
 msgstr "Төрлөөр хайх"
 
-#: admin/themes/default/items/search-form.php:72
-#: application/views/scripts/items/search-form.php:68
+#: admin/themes/default/items/search-form.php:85
+#: application/views/scripts/items/search-form.php:81
 msgid "contains"
 msgstr "агуулсан"
 
-#: admin/themes/default/items/search-form.php:73
-#: application/views/scripts/items/search-form.php:69
+#: admin/themes/default/items/search-form.php:86
+#: application/views/scripts/items/search-form.php:82
 msgid "does not contain"
 msgstr "агуулаагүй"
 
-#: admin/themes/default/items/search-form.php:74
-#: application/views/scripts/items/search-form.php:70
+#: admin/themes/default/items/search-form.php:87
+#: application/views/scripts/items/search-form.php:83
 msgid "is exactly"
 msgstr "яг таарах"
 
-#: admin/themes/default/items/search-form.php:75
-#: application/views/scripts/items/search-form.php:71
+#: admin/themes/default/items/search-form.php:88
+msgid "is not exactly"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:89
+#: application/views/scripts/items/search-form.php:84
 msgid "is empty"
 msgstr "хоосон"
 
-#: admin/themes/default/items/search-form.php:76
-#: application/views/scripts/items/search-form.php:72
+#: admin/themes/default/items/search-form.php:90
+#: application/views/scripts/items/search-form.php:85
 msgid "is not empty"
 msgstr "хоосон биш"
 
-#: admin/themes/default/items/search-form.php:84
-#: application/views/scripts/items/search-form.php:80
+#: admin/themes/default/items/search-form.php:91
+#: application/views/scripts/items/search-form.php:86
+msgid "starts with"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:92
+#: application/views/scripts/items/search-form.php:87
+msgid "ends with"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:93
+msgid "matches"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:94
+msgid "does not match"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:102
+#: application/views/scripts/items/search-form.php:95
 msgid "Search Terms"
 msgstr "Хайлтын нөхцөл"
 
-#: admin/themes/default/items/search-form.php:90
-#: application/views/scripts/items/search-form.php:86
+#: admin/themes/default/items/search-form.php:108
+#: application/views/scripts/items/search-form.php:101
 msgid "Remove field"
 msgstr "Талбар устгах"
 
-#: admin/themes/default/items/search-form.php:98
-#: application/views/scripts/items/search-form.php:94
+#: admin/themes/default/items/search-form.php:116
+#: application/views/scripts/items/search-form.php:109
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
-msgstr ""
+msgstr "ID#s -р хязгаарлаж хайх (Жишээ: 1-4, 156, 79)"
 
-#: admin/themes/default/items/search-form.php:112
-#: application/views/scripts/items/search-form.php:105
+#: admin/themes/default/items/search-form.php:130
+#: application/views/scripts/items/search-form.php:120
 msgid "Search By Collection"
 msgstr "Сан хөмрөгөөс хайх"
 
-#: admin/themes/default/items/search-form.php:128
-#: application/views/scripts/items/search-form.php:119
+#: admin/themes/default/items/search-form.php:146
+#: application/views/scripts/items/search-form.php:134
 msgid "Search By Type"
 msgstr "Төрлөөр хайх"
 
-#: admin/themes/default/items/search-form.php:145
-#: application/views/scripts/items/search-form.php:135
+#: admin/themes/default/items/search-form.php:163
+#: application/views/scripts/items/search-form.php:150
 msgid "Search By User"
 msgstr "Хэрэглэгчээр хайх"
 
-#: admin/themes/default/items/search-form.php:162
-#: application/views/scripts/items/search-form.php:150
+#: admin/themes/default/items/search-form.php:180
+#: application/views/scripts/items/search-form.php:165
 msgid "Search By Tags"
 msgstr "Таагаар хайх"
 
-#: admin/themes/default/items/search-form.php:177
-#: application/views/scripts/items/search-form.php:163
+#: admin/themes/default/items/search-form.php:195
+#: application/views/scripts/items/search-form.php:178
 msgid "Public/Non-Public"
 msgstr "Нийтийн / Нийтийн бус"
 
-#: admin/themes/default/items/search-form.php:186
-#: application/views/scripts/items/search-form.php:171
+#: admin/themes/default/items/search-form.php:204
+#: application/views/scripts/items/search-form.php:186
 msgid "Only Public Items"
 msgstr "Зөвхөн нийтэд зориулсан мэдээлэл"
 
-#: admin/themes/default/items/search-form.php:187
-#: application/views/scripts/items/search-form.php:172
+#: admin/themes/default/items/search-form.php:205
+#: application/views/scripts/items/search-form.php:187
 msgid "Only Non-Public Items"
 msgstr "Зөвхөн нийтийн бус баримтууд"
 
-#: admin/themes/default/items/search-form.php:197
-#: application/views/scripts/items/search-form.php:181
+#: admin/themes/default/items/search-form.php:215
+#: application/views/scripts/items/search-form.php:196
 msgid "Featured/Non-Featured"
 msgstr "Онцлох/Онцлох биш"
 
-#: admin/themes/default/items/search-form.php:206
-#: application/views/scripts/items/search-form.php:189
+#: admin/themes/default/items/search-form.php:224
+#: application/views/scripts/items/search-form.php:204
 msgid "Only Featured Items"
 msgstr "Зөвхөн онцлох мэдээлэл"
 
-#: admin/themes/default/items/search-form.php:207
-#: application/views/scripts/items/search-form.php:190
+#: admin/themes/default/items/search-form.php:225
+#: application/views/scripts/items/search-form.php:205
 msgid "Only Non-Featured Items"
 msgstr "Зөвхөн Онцлох биш баримтууд"
 
-#: admin/themes/default/items/search-form.php:215
-#: application/views/scripts/items/search-form.php:199
+#: admin/themes/default/items/search-form.php:233
+#: application/views/scripts/items/search-form.php:214
 msgid "Search for items"
 msgstr "Мэдээллээр хайх"
 
@@ -1438,7 +1548,7 @@ msgstr "Метадата файл"
 
 #: admin/themes/default/items/show.php:76
 msgid "There are no files for this item yet."
-msgstr "Энэ баримтад тохирох файл алга."
+msgstr "Энэ мэдээлэлд тохирох файл алга."
 
 #: admin/themes/default/items/show.php:76
 msgid "Add a File"
@@ -1468,7 +1578,7 @@ msgstr "Мэдээллийг Таагаар тоймлож харах"
 #: admin/themes/default/items/tags.php:9
 #: admin/themes/default/tags/browse.php:85
 msgid "There are no tags to display. You must first tag some items."
-msgstr ""
+msgstr "Дэлгэцэнд ямар нэг тааг алга. Та эхний таагийг оруулж болно."
 
 #: admin/themes/default/plugins/browse.php:26
 #, php-format
@@ -1480,7 +1590,7 @@ msgstr "Энэ хувилбар нь  %1$s  байна.  Омека %2$s хув�
 msgid ""
 "%1$s requires the following plugins to be installed, activated, and loaded: "
 "%2$s"
-msgstr ""
+msgstr "%1$s плагинууд  суугдсан, идэвхжсэн, мөн ачаалагдсан байх шаардлагатай: %2$s"
 
 #: admin/themes/default/plugins/browse.php:32
 msgid "This is not a valid plugin."
@@ -1489,22 +1599,22 @@ msgstr "Энэ плагин зөвшөөрөгдөөгүй."
 #: admin/themes/default/plugins/browse.php:57
 #, php-format
 msgid "by %s"
-msgstr ""
+msgstr "- %s"
 
 #: admin/themes/default/plugins/browse.php:65
 #: admin/themes/default/themes/browse.php:23
-#: admin/themes/default/themes/browse.php:48
+#: admin/themes/default/themes/browse.php:50
 msgid "Get support"
-msgstr ""
+msgstr "Дэмжлэг авах"
 
 #: admin/themes/default/plugins/browse.php:69
 #, php-format
 msgid "You have a new version of %s. Please upgrade!"
-msgstr ""
+msgstr "Шинэ хувилбар %s. Сайжруулалт хийнэ үү!"
 
 #: admin/themes/default/plugins/browse.php:90
 msgid "Upgrade"
-msgstr ""
+msgstr "Сайжруулалт"
 
 #: admin/themes/default/plugins/browse.php:101
 msgid "Configure"
@@ -1534,7 +1644,7 @@ msgstr "Суулгах"
 msgid ""
 "You do not have any plugins installed. Add them to the plugins directory to "
 "see them listed here."
-msgstr ""
+msgstr "Ямар нэгэн плагин суугдаагүй байна. Нэмж суулгахыг хүсвэл плагины мэдээллээс үзнэ үү"
 
 #: admin/themes/default/plugins/config.php:2
 #, php-format
@@ -1573,26 +1683,26 @@ msgstr "Бичлэгийн төрөл"
 #: admin/themes/default/search/index.php:39
 #: application/views/scripts/search/index.php:40
 msgid "Your query returned no results."
-msgstr ""
+msgstr "Таны хайлтад үр дүн илэрсэнгүй."
 
 #: admin/themes/default/settings/edit-api.php:11
 msgid "Enable API"
-msgstr ""
+msgstr "API идэвхжүүлэх"
 
 #: admin/themes/default/settings/edit-api.php:15
 msgid "Enable or disable the API by checking or unchecking the box below."
-msgstr ""
+msgstr "API -г идэвхтэй, эсвэл идэвхгүй болгохдоо доорх сонголтыг сонгох, эсвэл арилгах байдлаар шийднэ."
 
 #: admin/themes/default/settings/edit-api.php:22
 msgid "Filter Element Texts"
-msgstr ""
+msgstr "Элемэнтийг шүүх текст"
 
 #: admin/themes/default/settings/edit-api.php:26
 msgid ""
 "Filter element texts by checking the box below. When checked, the API will "
 "respect the display element and element text filters when outputting element"
 " text representations."
-msgstr ""
+msgstr "Текст болон өгөгдлийг шалгаж шүүлт хийнэ. Шалгах явцад дэлгэцэнд API элементийг шалгах ба тайлбар гарах явцад шүүлтүүр хийнэ"
 
 #: admin/themes/default/settings/edit-api.php:35
 msgid "Results per Page"
@@ -1600,7 +1710,7 @@ msgstr "Нэг хуудсанд харагдах хэмжээ"
 
 #: admin/themes/default/settings/edit-api.php:39
 msgid "Maximum number of API results displayed per page."
-msgstr ""
+msgstr "Нэг хуудсанд харагдах API түлхүүрийн хязгаар."
 
 #: admin/themes/default/settings/edit-api.php:45
 #, php-format
@@ -1610,17 +1720,17 @@ msgid ""
 "adding, editing, and deleting content, is protected and requires key "
 "authentication. Each key corresponds to, and has all permissions of, an "
 "existing Omeka user. You can create keys on each user's %sedit page%s."
-msgstr ""
+msgstr "API идэвхжүүлсэний дараа, сайтын мэдээллийг засах, устгах, харах боломжтой болно. Хамгаалагдсан агуулгыг харахдаа мэдээллийг нэмэх, засах, устгахад хамгаалалтын түлхүүр үг шаардагдана. \nОмекагийн хэрэглэгч бүрийн эрх нь түхлүүртэйгээ тохирох ёстой. \nТа хэрэглэгч турс бүрийн %sedit page%s -нд түлхүүр үүсгэж болно."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:12
 msgid "edit a specific item type"
-msgstr ""
+msgstr "тусгай мэдээллийн төрлийн засах"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:11
 #, php-format
 msgid ""
 "Customize the element descriptions below. To re-order the elements, %s."
-msgstr ""
+msgstr "Элемэнтийн тайлбарыг өөрчлөх.  %s, элемэнтийг дахин эрэмблэх."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:43
 msgid "Confirm Delete"
@@ -1631,7 +1741,7 @@ msgid ""
 "Are you sure you want to delete the selected item type elements from the "
 "database? You will lose all text related to the selected elements. This "
 "cannot be undone."
-msgstr ""
+msgstr "Та сонгосон мэдээллийн төрөл элемэнтийг баазаас устгахыг хүсэж байна уу? Сонгосон элемэнттэй холбоотой бүх текст устгах болно. Үүнийг буцааж сэргээх боломжгүй."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:51
 msgid "Ok"
@@ -1639,11 +1749,11 @@ msgstr "За - ОК"
 
 #: admin/themes/default/settings/edit-search.php:10
 msgid "Search Record Types"
-msgstr ""
+msgstr "Бичлэгийн төрлөөр хайх"
 
 #: admin/themes/default/settings/edit-search.php:13
 msgid "Customize which types of records will be searchable in Omeka."
-msgstr ""
+msgstr "Омекагийн хайлтад оруулах бичлэгийн төрлийг сонгох."
 
 #: admin/themes/default/settings/edit-search.php:23
 #: admin/themes/default/settings/edit-search.php:42
@@ -1661,11 +1771,11 @@ msgid ""
 " are saved, but there are circumstances when your records are not indexed; "
 "for instance, when updating from an earlier version of Omeka or after you "
 "customize which records will be searchable."
-msgstr ""
+msgstr "Индекслэнэ гэдэг нь Хурдан болон үнэн зөв хайхыг дэмжиж хадгалагдаж байгаа сангаас өгөгдлийг цуглуулах, задлан шинжлэх явдал юм. Омека бичлэг бүрийг хадгалсны дараа автоматаар индекслэдэг, гэвч заримдаа индекслэгдэггүй. Жишээлбэл: Омекаг шинэчилсэний дараа тохиргоо хийгээгүй бол."
 
 #: admin/themes/default/settings/edit-security.php:23
 msgid "Restore Default Extensions"
-msgstr ""
+msgstr "Үндсэн өргөтгөлийг/extension/ сэргээх"
 
 #: admin/themes/default/settings/edit-security.php:28
 msgid "Restore Default Types"
@@ -1673,11 +1783,11 @@ msgstr "Үндсэн төрлийг сэргээх"
 
 #: admin/themes/default/settings/edit-security.php:33
 msgid "Restore Default Elements"
-msgstr ""
+msgstr "Үндсэн элемэнтийг сэргээх"
 
 #: admin/themes/default/settings/edit-security.php:38
 msgid "Restore Default Attributes"
-msgstr ""
+msgstr "Үндсэн шинж чанарыг сэргээх"
 
 #: admin/themes/default/settings/edit-settings.php:23
 msgid "Test"
@@ -1697,31 +1807,31 @@ msgstr "Тааг засварлаж байна"
 
 #: admin/themes/default/tags/browse.php:27
 msgid "To view all items with a tag, click the number."
-msgstr ""
+msgstr "Тоон дээр дараад, тааг бүхий бүх мэдээллийг харах."
 
 #: admin/themes/default/tags/browse.php:28
 msgid ""
 "To edit the tag name, click the name and begin editing, and hit \"enter\" to"
 " save. To cancel an edit, click the ESC key or click away from the tag."
-msgstr ""
+msgstr "Таагийн нэрийг засварлахдаа, нэрийг сонгоод засварлаж эхэлнэ. Засварласны дараа \"enter\" товч дарж хадгална. Засварлахаа болихыг хүсвэл, ESC товчлуурыг дарах, эсвэл хулганы заагчийг таагаас хол дарна."
 
 #: admin/themes/default/tags/browse.php:29
 msgid ""
 "To delete a tag, click the X. Deleting a tag will not delete the tagged "
 "items."
-msgstr ""
+msgstr "Х үсгийг дараад таагийн устгана. Тааглагдсан мэдээллэл устахгүй."
 
 #: admin/themes/default/tags/browse.php:39
 msgid "Most"
-msgstr ""
+msgstr "Ихэвчлэн"
 
 #: admin/themes/default/tags/browse.php:40
 msgid "Least"
-msgstr ""
+msgstr "Наад зах нь"
 
 #: admin/themes/default/tags/browse.php:41
 msgid "Alphabetical"
-msgstr ""
+msgstr "Үсэг дарааллаар"
 
 #: admin/themes/default/tags/browse.php:42
 msgid "Recent"
@@ -1730,27 +1840,27 @@ msgstr "Сүүлийн"
 #: admin/themes/default/tags/browse.php:53
 #: admin/themes/default/tags/browse.php:55
 msgid "Record Types"
-msgstr ""
+msgstr "Бичлэгийн төрлүүд"
 
 #: admin/themes/default/themes/browse.php:15
-#: admin/themes/default/themes/browse.php:42
+#: admin/themes/default/themes/browse.php:44
 #, php-format
 msgid "Screenshot for %s Theme"
-msgstr ""
+msgstr "%s загварын дүрс"
 
 #: admin/themes/default/themes/browse.php:16
 msgid "Configure Theme"
-msgstr ""
+msgstr "Загварыг тохируулах"
 
 #: admin/themes/default/themes/browse.php:19
 msgid "Current Theme"
 msgstr "Сонгосон загвар"
 
 #: admin/themes/default/themes/browse.php:21
-#: admin/themes/default/themes/browse.php:47
+#: admin/themes/default/themes/browse.php:49
 #, php-format
 msgid "By %s"
-msgstr ""
+msgstr "- %s"
 
 #: admin/themes/default/themes/browse.php:27
 msgid ""
@@ -1758,34 +1868,34 @@ msgid ""
 "ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a "
 "href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" "
 "target=\"_blank\">design your own</a>!"
-msgstr ""
+msgstr "Шинэ загвар татах <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Омекагийн загварууд</a>, эсвэл <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">таны өөрийн дизайн</a>!"
 
-#: admin/themes/default/themes/browse.php:44
+#: admin/themes/default/themes/browse.php:46
 msgid "Use this theme"
-msgstr ""
+msgstr "Энэ загварыг хэрэглэх"
 
 #: admin/themes/default/themes/config.php:10
 #, php-format
 msgid "Configure Theme: %s"
-msgstr ""
+msgstr "Загвар тохируулах: %s"
 
 #: admin/themes/default/themes/config.php:11
 msgid "Configurations apply to this theme only."
-msgstr ""
+msgstr "Тохиргоог зөвхөн энэ загварт хэрэглэх."
 
 #: admin/themes/default/upgrade/index.php:32
 msgid "Upgrade Your Omeka Database"
-msgstr ""
+msgstr "Омека баазыг сайжруулах"
 
 #: admin/themes/default/upgrade/index.php:34
 msgid ""
 "Your Omeka database is not compatible with your current version of Omeka."
-msgstr ""
+msgstr "Таны хэрэглэж байгаа Омекагийн бааз нь одоогийн хувилбартай нийцтэй биш байна."
 
 #: admin/themes/default/upgrade/index.php:35
 msgid ""
 "Please back up your existing database and then click the button to upgrade."
-msgstr ""
+msgstr "Баазаа нөөцлөөд шинэчлэх /upgrade/ товчийг дарна уу."
 
 #: admin/themes/default/upgrade/index.php:37
 msgid "Upgrade Database"
@@ -1797,7 +1907,7 @@ msgstr "Омека шинэчлэгдсэн байна."
 
 #: admin/themes/default/upgrade/migrate.php:5
 msgid "Omeka encountered an error when upgrading your installation."
-msgstr ""
+msgstr "Суулгалт шинэчлэх үед Омекагийн алдаа гарлаа."
 
 #: admin/themes/default/upgrade/migrate.php:24
 msgid "Return to Dashboard"
@@ -1805,19 +1915,19 @@ msgstr "Хяналтын самбарт буцах"
 
 #: admin/themes/default/upgrade/migrate.php:30
 msgid "Please restore from your database backup and try again."
-msgstr ""
+msgstr "Баазын нөөцийг дахин сэргээгээд дахин үзнэ үү."
 
 #: admin/themes/default/upgrade/migrate.php:31
 msgid ""
 "If you have any questions please refer to <a "
 "href=\"http://omeka.org/codex\">Omeka documentation</a> or post a message on"
 " the <a href=\"http://omeka.org/forums\">Omeka forums</a>."
-msgstr ""
+msgstr "Хэрэв танд ямар нэг асуулт дараах холбоосыг дараарай<a href=\"http://omeka.org/codex\">Омекагийн бичиг баримт</a> эсвэл энд хандаарай <a href=\"http://omeka.org/forums\">Омека форум</a>."
 
 #: admin/themes/default/users/activate.php:2
 #: application/views/scripts/users/activate.php:2
 msgid "User Activation"
-msgstr ""
+msgstr "Хэрэглэгчийг идэвхижүүлэх"
 
 #: admin/themes/default/users/activate.php:12
 #: application/views/scripts/users/activate.php:8
@@ -1854,23 +1964,23 @@ msgstr " #%s - хэрэглэгчийг засварлах"
 
 #: admin/themes/default/users/api-keys.php:17
 msgid "New key label"
-msgstr ""
+msgstr "Шинэ түлхүүр хаяг"
 
 #: admin/themes/default/users/api-keys.php:21
 msgid ""
 "To create a new API key, enter a label for the key below. For example, "
 "describe for what purpose it will be used. This key will have all your "
 "permissions; treat it as you would your password."
-msgstr ""
+msgstr "Шинэ API түлхүүр үүсгэхдээ, түлхүүрийн хаягийг оруулна. Жишээлбэл, үүнийг ямар зорилгоор ашиглах тухай. Энэ түлхүүр нь таны бүхий л хамгаалалт; нууц үгтэй хандах /харилцах/ юм."
 
 #: admin/themes/default/users/api-keys.php:31
 msgid "You have no API keys. Use the form above to create one."
-msgstr ""
+msgstr "Танд API  дүлхүүр алга. Форм ашиглан үүсгэнэ үү."
 
 #: admin/themes/default/users/api-keys.php:33
 #, php-format
 msgid "%s has no API keys. Use the form above to create one."
-msgstr ""
+msgstr "%s  API түлхүүр алга. Форм ашиглан үүсгэнэ үү."
 
 #: admin/themes/default/users/api-keys.php:41
 msgid "Key"
@@ -1878,19 +1988,19 @@ msgstr "Түлхүүр"
 
 #: admin/themes/default/users/api-keys.php:42
 msgid "Last IP"
-msgstr ""
+msgstr "Сүүлийн IP"
 
 #: admin/themes/default/users/api-keys.php:43
 msgid "Last accessed"
-msgstr ""
+msgstr "Сүүлд хандсан"
 
 #: admin/themes/default/users/api-keys.php:44
 msgid "Rescind"
-msgstr ""
+msgstr "Цуцлах"
 
 #: admin/themes/default/users/api-keys.php:60
 msgid "Update API Keys"
-msgstr ""
+msgstr " API түлхүүрийг шинэчлэх"
 
 #: admin/themes/default/users/browse.php:2
 msgid "Browse Users"
@@ -1933,7 +2043,7 @@ msgstr "Эрх, Үүрэг"
 
 #: admin/themes/default/users/browse.php:60
 msgid "inactive"
-msgstr ""
+msgstr "идэвхгүй"
 
 #: admin/themes/default/users/change-password.php:20
 msgid "Save Password"
@@ -1941,7 +2051,7 @@ msgstr "Нууц үг хадгалах"
 
 #: admin/themes/default/users/edit.php:23
 msgid "Resend Activation Email"
-msgstr ""
+msgstr "Идэвхижүүлэх и-мэйл дахин илгээх"
 
 #: admin/themes/default/users/forgot-password.php:2
 #: application/views/scripts/users/forgot-password.php:2
@@ -1951,7 +2061,7 @@ msgstr "Нууц үгээ мартсан"
 #: admin/themes/default/users/forgot-password.php:11
 #: application/views/scripts/users/forgot-password.php:10
 msgid "Enter your email address to retrieve your password."
-msgstr ""
+msgstr "И-мэйл хаягаа оруулсанаар сэргээх нууц үгийг хүлээн авна."
 
 #: admin/themes/default/users/forgot-password.php:21
 #: application/views/scripts/users/forgot-password.php:18
@@ -1968,6 +2078,10 @@ msgstr "Дахин нэвтрэх"
 msgid "Log In"
 msgstr "Нэвтрэх"
 
+#: admin/themes/default/users/login.php:8
+msgid "Go to the public site"
+msgstr ""
+
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
 msgstr "(Нууц үгээ мартсан уу?)"
@@ -1983,7 +2097,7 @@ msgstr "Энэ хэрэглэгчийг засварлах"
 
 #: application/controllers/AppearanceController.php:48
 msgid "The appearance settings have been updated."
-msgstr ""
+msgstr "Төлөвийн тохиргоо шинэчлэгдсэн байна."
 
 #: application/controllers/AppearanceController.php:51
 #: application/controllers/ItemTypesController.php:35
@@ -1992,7 +2106,7 @@ msgstr ""
 #: application/controllers/SettingsController.php:88
 #: install/views/scripts/index/index.phtml:17
 msgid "There were errors found in your form. Please edit and resubmit."
-msgstr ""
+msgstr "Форм бөгөлөхөд алдаа гарсан байна. Засварлаад дахин илгээнэ үү."
 
 #: application/controllers/AppearanceController.php:66
 msgid "The navigation settings have been updated."
@@ -2002,7 +2116,7 @@ msgstr "Удирдлагын тохиргоо шинэчлэдсэн"
 msgid ""
 "The navigation settings were not saved because of missing or invalid values."
 "  All changed values have been restored."
-msgstr ""
+msgstr "Буруу утга өгсөнөөр удирдлагын тохиргоо хадгалагдсангүй. Бүх өөрчлөгдсөн утгыг сэргээсэн."
 
 #: application/controllers/AppearanceController.php:97
 msgid "The navigation settings have been reset."
@@ -2044,7 +2158,7 @@ msgid ""
 "This will delete the collection \"%s\" and its associated metadata. This "
 "will not delete any items in this collection, but will delete the reference "
 "to this collection in each item."
-msgstr ""
+msgstr "\"%s\" сан хөмрөгийг устгахад холбогдох метадата өгөгдлүүд хамт устана. Энэ нь сан хөмрөгийн доторх мэдээллийг устгахгүй ч сан хөмрөгтэй холбоотой зүйлсийг устгах болно."
 
 #: application/controllers/CollectionsController.php:110
 #, php-format
@@ -2052,13 +2166,13 @@ msgid ""
 "This will delete the collection #%s and its associated metadata. This will "
 "not delete any items in this collection, but will delete the reference to "
 "this collection in each item."
-msgstr ""
+msgstr "\"%s\" сан хөмрөгийг устгахад холбогдох метадата өгөгдлүүд хамт устана. Энэ нь сан хөмрөгийн доторх мэдээллийг устгахгүй ч сан хөмрөгтэй холбоотой зүйлсийг устгах болно."
 
 #: application/controllers/ElementSetsController.php:21
 msgid ""
 "This will delete the element set and all elements assigned to the element "
 "set. Items will lose all metadata that is specific to this element set."
-msgstr ""
+msgstr "Энэ элемэнтийн /талбар/ багцыг устгахад холбоотой бүх элемэнтүүд   бас устах болно. Мэдээллүүд нь элемэнтийн багцтай холбоотой бүх мета өгөгдлөө алдана."
 
 #: application/controllers/ElementSetsController.php:53
 #: application/controllers/PluginsController.php:51
@@ -2066,7 +2180,7 @@ msgstr ""
 #: application/controllers/PluginsController.php:139
 #: application/controllers/PluginsController.php:190
 #: application/controllers/PluginsController.php:223
-#: application/controllers/PluginsController.php:337
+#: application/controllers/PluginsController.php:331
 #: application/controllers/SettingsController.php:104
 #: application/controllers/SettingsController.php:140
 #: application/controllers/SettingsController.php:177
@@ -2074,11 +2188,11 @@ msgstr ""
 #: application/libraries/Omeka/Controller/AbstractActionController.php:183
 #: application/libraries/Omeka/Controller/AbstractActionController.php:224
 msgid "There was an error on the form. Please try again."
-msgstr ""
+msgstr "Форм бөглөхөд алдаа гарлаа. Дахин оролдоно уу."
 
 #: application/controllers/ElementSetsController.php:72
 msgid "The element set was successfully changed!"
-msgstr ""
+msgstr "Элемэтийн амжилттай өөрчиллөө."
 
 #: application/controllers/ErrorController.php:64
 msgid "Page not found."
@@ -2090,7 +2204,7 @@ msgstr "Хандах эрхгүй байна."
 
 #: application/controllers/FilesController.php:66
 msgid "This will delete the file and its associated metadata."
-msgstr ""
+msgstr "Энэ нь файл болон түүний холбогдох мета өгөгдлийг устгах болно."
 
 #: application/controllers/FilesController.php:72
 msgid "The file was successfully deleted."
@@ -2099,12 +2213,12 @@ msgstr "Файлыг устгалаа."
 #: application/controllers/ItemTypesController.php:28
 #, php-format
 msgid "The item type \"%s\" was successfully added."
-msgstr ""
+msgstr " \"%s\" мэдээлэл /баримт/-ын төрөл нэмэгдлээ."
 
 #: application/controllers/ItemTypesController.php:55
 #, php-format
 msgid "The item type \"%s\" was successfully updated."
-msgstr ""
+msgstr "\"%s\" мэдээлэл /баримт/-ын төрөл шинэчлэгдлээ."
 
 #: application/controllers/ItemTypesController.php:150
 #, php-format
@@ -2112,14 +2226,14 @@ msgid ""
 "This will delete the \"%s\" item type but will not delete the elements "
 "assigned to the item type. Items that are assigned to this item type will "
 "lose all metadata that is specific to the item type."
-msgstr ""
+msgstr " \"%s\"  мэдээллийн төрлийг устгавч мэдээллийн төрлийг тодорхойлсон элемэнтүүд /талбарууд/ -ийг устахгүй болно. \nМэдээллийн төрөлтэй холбоотой мэдээллүүд нь тухайн мэдээллийн төрөлд хамаатай бүх мета өгөгдлийг алдана."
 
 #: application/controllers/ItemTypesController.php:158
 #, php-format
 msgid ""
 "The item type \"%s\" was successfully added!  You may now add elements to "
 "your new item type."
-msgstr ""
+msgstr "\"%s\" мэдээллийн төрөл нэмэгдлээ! Та дахин шинэ мэдээллийн төрөл нэмж болно. "
 
 #: application/controllers/ItemsController.php:89
 #: application/controllers/ItemsController.php:149
@@ -2127,82 +2241,106 @@ msgid ""
 "The ImageMagick directory path has not been set. No derivative images will "
 "be created. If you would like Omeka to create derivative images, please set "
 "the path in Settings."
-msgstr ""
+msgstr " ImageMagick хавтсын зам тохируулагдаагүй байна. Ямар нэг зураг үүссэнгүй. Хэрэв та Омекад ямар нэг үүсмэл /дуураймал/ зураг үүсгэхийг хүсвэл Тохиргоо хэсэгт хавтасны замыг зөв үааж өгнө үү."
 
 #: application/controllers/ItemsController.php:98
 #, php-format
 msgid "The item \"%s\" was successfully added!"
-msgstr ""
+msgstr "\"%s\" мэдээлэл /баримт/ ажилттай нэмэгдлээ!"
 
 #: application/controllers/ItemsController.php:100
 #, php-format
 msgid "The item #%s was successfully added!"
-msgstr ""
+msgstr "#%s мэдээлэл /баримт/ ажилттай нэмэгдлээ!"
 
 #: application/controllers/ItemsController.php:108
 #, php-format
 msgid "The item \"%s\" was successfully changed!"
-msgstr ""
+msgstr "\"%s\" мэдээлэл /баримт/ ажилттай өөрчлөгдлөө!"
 
 #: application/controllers/ItemsController.php:110
 #, php-format
 msgid "The item #%s was successfully changed!"
-msgstr ""
+msgstr "#%s  мэдээлэл /баримт/ ажилттай өөрчлөгдлөө!"
 
 #: application/controllers/ItemsController.php:118
 #, php-format
 msgid "The item \"%s\" was successfully deleted!"
-msgstr ""
+msgstr "\"%s\" мэдээлэл /баримт/ ажилттай устгагдлаа!"
 
 #: application/controllers/ItemsController.php:120
 #, php-format
 msgid "The item #%s was successfully deleted!"
-msgstr ""
+msgstr "#%s мэдээлэл /баримт/ ажилттай устгагдлаа!"
 
 #: application/controllers/ItemsController.php:128
 #, php-format
 msgid ""
 "This will delete the item \"%s\" and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr ""
+msgstr "\"%s\" мэдээллийг устгахад түүнд холбогдох мета өгөгдлүүд устгах болно.  Мөн түүнтэй холбоотой файл болон мета өгөгдлүүд давхар устана."
 
 #: application/controllers/ItemsController.php:132
 #, php-format
 msgid ""
 "This will delete the item #%s and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
+msgstr "\"%s\" мэдээллийг устгахад түүнд холбогдох мета өгөгдлүүд устгах болно. Мөн түүнтэй холбоотой файл болон мета өгөгдлүүд давхар устана."
+
+#: application/controllers/ItemsController.php:241
+#: application/controllers/ItemsController.php:376
+#: application/controllers/ItemsController.php:444
+msgid "No item to batch edit."
 msgstr ""
 
-#: application/controllers/ItemsController.php:227
+#: application/controllers/ItemsController.php:248
+msgid "The deletion of all items is forbidden."
+msgstr ""
+
+#: application/controllers/ItemsController.php:265
 msgid "You must choose some items to batch edit."
-msgstr ""
+msgstr "Багцыг засах зарим мэдээлэл /баримт/ сонгох хэрэгтэй."
 
-#: application/controllers/ItemsController.php:271
+#: application/controllers/ItemsController.php:314
+#: application/controllers/ItemsController.php:412
 msgid "User is not allowed to modify visibility of items."
-msgstr ""
+msgstr "мэдээллийг /баримтыг/ хэрэглэгч засах эрхгүй байна."
 
-#: application/controllers/ItemsController.php:276
+#: application/controllers/ItemsController.php:319
+#: application/controllers/ItemsController.php:417
 msgid "User is not allowed to modify featured status of items."
-msgstr ""
+msgstr "Мэдээллийн онцлох гэсэн статусыг хэрэглэгч өөрчлөх эрхгүй байна."
 
-#: application/controllers/ItemsController.php:283
+#: application/controllers/ItemsController.php:326
 msgid "User is not allowed to delete selected items."
-msgstr ""
+msgstr "Сонгосон мэдээллийг хэрэглэгч устгахыг зөвшөөрөлгүй."
 
-#: application/controllers/ItemsController.php:289
+#: application/controllers/ItemsController.php:332
 msgid "User is not allowed to edit selected items."
-msgstr ""
+msgstr "Сонгосон мэдээллийг /баримтыг/ хэрэглэгч засах эрхгүй байна."
 
-#: application/controllers/ItemsController.php:294
+#: application/controllers/ItemsController.php:337
 msgid "User is not allowed to tag selected items."
-msgstr ""
+msgstr "Хэрэглэгч сонгосон мэдээллийг тааглах эрхгүй байна."
 
-#: application/controllers/ItemsController.php:328
+#: application/controllers/ItemsController.php:369
 msgid "The items were successfully deleted!"
+msgstr "Мэдээлэл /баримт/ ажилттай устгагдлаа!"
+
+#: application/controllers/ItemsController.php:371
+msgid "The items were successfully changed!"
+msgstr "Мэдээлэл /баримт/ ажилттай өөрчлөгдлөө!"
+
+#: application/controllers/ItemsController.php:436
+msgid "The items are checked and deleted one by one in the background."
 msgstr ""
 
-#: application/controllers/ItemsController.php:330
-msgid "The items were successfully changed!"
+#: application/controllers/ItemsController.php:438
+msgid "The items are checked and changed one by one in the background."
+msgstr ""
+
+#: application/controllers/ItemsController.php:440
+msgid "Check logs for success and errors."
 msgstr ""
 
 #: application/controllers/PluginsController.php:45
@@ -2210,53 +2348,53 @@ msgstr ""
 msgid ""
 "Error in configuring plugin named \"%s\". Missing config and/or config_form "
 "hook(s)."
-msgstr ""
+msgstr "\"%s\" нэртэй плагин тохируулахад алдаа гарлаа.  config эсвэл config_form шалгана уу."
 
 #: application/controllers/PluginsController.php:59
 #, php-format
 msgid "The %s plugin was successfully configured!"
-msgstr ""
+msgstr "%s плагинд тохиргоо хийгдлээ!"
 
 #: application/controllers/PluginsController.php:89
 #, php-format
 msgid "The %s plugin has already been installed."
-msgstr ""
+msgstr "%s плагин суугдсан байна."
 
 #: application/controllers/PluginsController.php:99
 #, php-format
 msgid "The %s plugin was successfully installed!"
-msgstr ""
+msgstr "%s плагин амжилттай суугдлаа!"
 
 #: application/controllers/PluginsController.php:111
 #: application/controllers/PluginsController.php:116
 #, php-format
 msgid "The following error occurred while installing the %s plugin: "
-msgstr ""
+msgstr "%s  плагийн суулгах явцад алдаа гарлаа:"
 
 #: application/controllers/PluginsController.php:154
 #, php-format
 msgid "The following error occurred while activating the %s plugin: "
-msgstr ""
+msgstr "%s  плагийнийг идэвхижүүлэх явцад алдаа гарлаа:"
 
 #: application/controllers/PluginsController.php:164
 #, php-format
 msgid "The %s plugin was successfully activated!"
-msgstr ""
+msgstr "%s плагин идэвхжлээ."
 
 #: application/controllers/PluginsController.php:169
 #, php-format
 msgid "The %s plugin was activated, but could not be loaded: "
-msgstr ""
+msgstr "%s  плагийн идэвхжсэн байгаа ч ачаалагдахгүй байна:"
 
 #: application/controllers/PluginsController.php:204
 #, php-format
 msgid "The %s plugin was successfully deactivated!"
-msgstr ""
+msgstr "%s плагиний идэвхжлийг арилгалаа."
 
 #: application/controllers/PluginsController.php:209
 #, php-format
 msgid "The following error occurred while deactivating the %s plugin: "
-msgstr ""
+msgstr "%s  плагинийг идэвхигүй болгох явцад алдаа гарлаа."
 
 #: application/controllers/PluginsController.php:239
 #, php-format
@@ -2267,33 +2405,33 @@ msgstr "%s плагийн шинэчлэгдсэн байна!"
 #: application/controllers/PluginsController.php:254
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
-msgstr ""
+msgstr "%s  плагинийг шинэчлэх явцад алдаа гарлаа:"
 
-#: application/controllers/PluginsController.php:310
+#: application/controllers/PluginsController.php:305
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
-msgstr ""
+msgstr "'%s'  хавтсанд плагин алга."
 
-#: application/controllers/PluginsController.php:322
+#: application/controllers/PluginsController.php:318
 msgid "You must confirm the uninstall before proceeding."
-msgstr ""
+msgstr "Устгах үйлдэл эхлэхээс өмнө баталгаажуулах ёстой."
 
-#: application/controllers/PluginsController.php:345
+#: application/controllers/PluginsController.php:337
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
-msgstr ""
+msgstr " %s  плагин устгагдлаа!"
 
-#: application/controllers/PluginsController.php:350
-#: application/controllers/PluginsController.php:355
+#: application/controllers/PluginsController.php:342
+#: application/controllers/PluginsController.php:347
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
-msgstr ""
+msgstr "%s  плагин устгах явцад дараах алдаа гарлаа:"
 
-#: application/controllers/PluginsController.php:382
+#: application/controllers/PluginsController.php:376
 msgid "No plugin name given."
-msgstr ""
+msgstr "Өгөгдсөн нэртэй плагин байхгүй."
 
-#: application/controllers/PluginsController.php:395
+#: application/controllers/PluginsController.php:389
 #, php-format
 msgid "The plugin %s must be installed."
 msgstr " %s  плагин суугдсан байна."
@@ -2304,47 +2442,47 @@ msgstr "Ерөнхий тохиргоо шинэчлэгдсэн байна."
 
 #: application/controllers/SettingsController.php:85
 msgid "The security settings have been updated."
-msgstr ""
+msgstr "Хамгаалалтын тохиргоо шинэчлэгдсэн."
 
 #: application/controllers/SettingsController.php:114
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
-msgstr ""
+msgstr "Омекад хайлт хийх бичлэгийг өөрчилсөн байна. Доорх формыг ашиглан дахин бичлэгийн жагсаалт /index/ үүсгэнэ үү."
 
 #: application/controllers/SettingsController.php:121
 msgid ""
 "Indexing records. This may take a while. You may continue administering your"
 " site."
-msgstr ""
+msgstr "Жагсаалт үүсгэж байна. Энэ нь тодорхой хугацаа шаардана. Та сайтыг удирдах ажлыг үргэлжлүүлж болно."
 
 #: application/controllers/SettingsController.php:156
 msgid "The item type elements were successfully changed!"
-msgstr ""
+msgstr "Мэдээллийн /баримтын/ төрлийн элемэнтийг амжилттай өөрчиллөө!"
 
 #: application/controllers/SettingsController.php:183
 msgid "The API configuration was successfully changed!"
-msgstr ""
+msgstr " API тохируулга өөрчлөгдсөн байна!"
 
 #: application/controllers/SettingsController.php:206
 msgid "The ImageMagick directory path works."
-msgstr ""
+msgstr "ImageMagick хавтасны зам ажиллаж /тохирч/ байна."
 
 #: application/controllers/SettingsController.php:207
 msgid "The ImageMagick directory path does not work."
-msgstr ""
+msgstr "ImageMagick хавтасны зам ажиллахгүй /тохирохгүй/ байна."
 
 #: application/controllers/TagsController.php:47
 msgid "Invalid tagType given."
-msgstr ""
+msgstr "Таагийн төрөл хүчингүй байна."
 
 #: application/controllers/ThemesController.php:28
 msgid "Invalid form submission."
-msgstr ""
+msgstr "Формын илгээлт хүчингүй."
 
 #: application/controllers/ThemesController.php:36
 msgid "You have chosen an illegal theme name. Please select another theme."
-msgstr ""
+msgstr "Та хууль бус /хориотой/ загварын нэр сонгосон байна. Өөр загвар сонгоно уу."
 
 #: application/controllers/ThemesController.php:43
 #, php-format
@@ -2368,13 +2506,13 @@ msgstr "Шилжүүлэлтэд SQL алдаа гарлаа:"
 msgid ""
 "Omeka requires PHP version %1$s or higher, but this server is running PHP "
 "version %2$s. Please update the installed version of PHP and try again."
-msgstr ""
+msgstr "Омека нь  PHP  %1$s  болон түүнээс дээшхи хувилбарыг шаарддаг,  гэвч энэ ажиллаж байгаа сервэр нь PHP  %2$s хувилбартай байна. Өөрийн PHP хувилбарыг шинэчлэлт хийгээд дахин оролдоно уу."
 
 #: application/controllers/UsersController.php:70
 msgid ""
 "Unable to reset password. Please verify that the information is correct and "
 "contact an administrator if necessary."
-msgstr ""
+msgstr "Нууц үгийг сэргээх боломжгүй байна. Баталгаажуулах мэдээллийг зөв оруулах эсвэл сайт удирдагчид хандана уу."
 
 #: application/controllers/UsersController.php:108
 msgid "Please follow this link to reset your password:"
@@ -2394,7 +2532,7 @@ msgstr "[%s] Нууц үгээ солих"
 
 #: application/controllers/UsersController.php:117
 msgid "Please check your email for a link to reset your password."
-msgstr ""
+msgstr "Нууц үг сэргээх линк таны и-мэйл хаягаар илгээгдсэн."
 
 #: application/controllers/UsersController.php:126
 msgid "Invalid activation code given."
@@ -2412,7 +2550,7 @@ msgstr "Та одоо Омека-д нэвтэрч болно."
 #: application/controllers/UsersController.php:236
 #: application/controllers/UsersController.php:287
 msgid "There was an invalid entry on the form. Please try again."
-msgstr ""
+msgstr "Формд оруулсан мэдээлэл хүчингүй байна. Дахин оролдоно уу."
 
 #: application/controllers/UsersController.php:176
 #, php-format
@@ -2422,20 +2560,20 @@ msgstr "\"%s\" хэрэглэгчийг нэмсэн байна!"
 #: application/controllers/UsersController.php:180
 #, php-format
 msgid "The user \"%s\" was added, but the activation email could not be sent."
-msgstr ""
+msgstr "\"%s\" хэрэглэгч нэмэгдлээ, гэвч идэвхжүүлэх и-мэйл илгээгдсэнгүй."
 
 #: application/controllers/UsersController.php:218
 msgid "User activation email has been sent."
-msgstr ""
+msgstr "Хэрэглэгчийг идэвхижүүлэх и-мэйл илгээгдлээ."
 
 #: application/controllers/UsersController.php:220
 msgid "User activation email could not be sent."
-msgstr ""
+msgstr "Хэрэглэгчийг идэхижүүлэх и-мэйл илгээгдсэнгүй."
 
 #: application/controllers/UsersController.php:258
 #, php-format
 msgid "The user %s was successfully changed!"
-msgstr ""
+msgstr " %s хэрэглэгчийн мэдээлэл өөрчлөгдсөн байна!"
 
 #: application/controllers/UsersController.php:294
 msgid "Password changed!"
@@ -2443,16 +2581,16 @@ msgstr "Нууц үг өөрчлөгдлөө!"
 
 #: application/controllers/UsersController.php:316
 msgid "A new API key was successfully created."
-msgstr ""
+msgstr "Шинэ API түлхүүр үүссэн байна."
 
 #: application/controllers/UsersController.php:323
 msgid "An existing API key was successfully rescinded."
-msgstr ""
+msgstr "Одоо байгаа API түлхүүр амжилттай цуцлагдлаа."
 
 #: application/controllers/UsersController.php:350
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
-msgstr ""
+msgstr "\"%s\" хэрэглэгч устгагдлаа!"
 
 #: application/controllers/UsersController.php:356
 #, php-format
@@ -2460,7 +2598,7 @@ msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
 "this user will remain in the system, but will no longer be associated with "
 "this user."
-msgstr ""
+msgstr "%s нь системээс устсан байна. Энэ хэрэглэгчийн үүсгэсэн мэдээлэл, сан хөмрөг, таагууд системд үлдэх ч цаашид хэрэглэгчтэй холбоогүй болно. "
 
 #: application/controllers/UsersController.php:381
 msgid "Welcome!"
@@ -2471,92 +2609,110 @@ msgstr "Тавтай морил!"
 msgid ""
 "Your account for the %s repository has been created. Please click the "
 "following link to activate your account:"
-msgstr ""
+msgstr "Таны %s бүртгэл үүссэн байна. Холбоосыг ашиглан өөрийн бүртгэлийг идэвхжүүлнэ үү."
 
 #: application/controllers/UsersController.php:386
 #, php-format
 msgid "Activate your account with the %s repository"
-msgstr ""
+msgstr "%s хадгаламж таны бүртгэлийг илэвхжүүлнэ"
 
 #: application/controllers/UsersController.php:481
 msgid "Login information incorrect. Please try again."
-msgstr ""
+msgstr "Нэвтрэх мэдээлэл буруу байна. Дахиж оролдоно уу."
 
 #: application/forms/AppearanceSettings.php:22
+msgid "Use Square Thumbnails"
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:23
+msgid ""
+"Use square-cropped images by default wherever thumbnails appear in the "
+"public interface."
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:28
 #: application/forms/Install.php:128
 msgid "Fullsize Image Size"
 msgstr "Зургийг бүтэн хэмжээгээр харах"
 
-#: application/forms/AppearanceSettings.php:23
-msgid "Maximum fullsize image size constraint (in pixels)."
-msgstr ""
-
 #: application/forms/AppearanceSettings.php:29
+msgid "Maximum fullsize image size constraint (in pixels)."
+msgstr "Зургийн хамгийн том хэмжээний хязгаар (pixel-ээр)."
+
+#: application/forms/AppearanceSettings.php:35
 #: application/forms/Install.php:136
 msgid "Thumbnail Size"
-msgstr ""
-
-#: application/forms/AppearanceSettings.php:30
-msgid "Maximum thumbnail size constraint (in pixels)."
-msgstr ""
+msgstr "Товч зургийн /Thumbnail/ хэмжээ"
 
 #: application/forms/AppearanceSettings.php:36
+msgid "Maximum thumbnail size constraint (in pixels)."
+msgstr "Тоймлож харах хамгийн дээд хэмжээ (цэгээр)"
+
+#: application/forms/AppearanceSettings.php:42
 #: application/forms/Install.php:144
 msgid "Square Thumbnail Size"
-msgstr ""
-
-#: application/forms/AppearanceSettings.php:37
-msgid "Maximum square thumbnail size constraint (in pixels)."
-msgstr ""
+msgstr "Талбайн тойм хэмжээ."
 
 #: application/forms/AppearanceSettings.php:43
-msgid "Results Per Page (admin)"
-msgstr ""
+msgid "Maximum square thumbnail size constraint (in pixels)."
+msgstr "Талбайн хамгийн дээд хэмжээний хязгаарлалт (цэгээр)"
 
-#: application/forms/AppearanceSettings.php:44
+#: application/forms/AppearanceSettings.php:49
+msgid "Results Per Page (admin)"
+msgstr "Нэг хуудсанд харагдах хэмжээ (админ)"
+
+#: application/forms/AppearanceSettings.php:50
 msgid ""
 "Limit the number of results displayed per page in the administrative "
 "interface."
-msgstr ""
+msgstr "Удирдлагын хэсгийн хуудасны нэг нүүрэнд харагдах хайлтын үр дүнгийн хязгаар."
 
-#: application/forms/AppearanceSettings.php:50
+#: application/forms/AppearanceSettings.php:56
 msgid "Results Per Page (public)"
-msgstr ""
-
-#: application/forms/AppearanceSettings.php:51
-msgid ""
-"Limit the number of results displayed per page in the public interface."
-msgstr ""
+msgstr "Нэг хуудсанд харандах мэдээлэл (нийтэд)"
 
 #: application/forms/AppearanceSettings.php:57
+msgid ""
+"Limit the number of results displayed per page in the public interface."
+msgstr "Нийтэд зориулсан хуудасны нэг нүүрэнд харагдах хайлтын үр дүнгийн хязгаар."
+
+#: application/forms/AppearanceSettings.php:63
 #: application/forms/Install.php:168
 msgid "Show Empty Elements"
-msgstr ""
+msgstr "Хоосон элемэнтүүдийг харуулах"
 
-#: application/forms/AppearanceSettings.php:62
+#: application/forms/AppearanceSettings.php:68
 msgid "Show Element Set Headings"
+msgstr "Элемэнтийн багцын гарчигийг харуулах."
+
+#: application/forms/AppearanceSettings.php:78
+msgid "Admin Theme"
 msgstr ""
 
-#: application/forms/AppearanceSettings.php:75
+#: application/forms/AppearanceSettings.php:92
 msgid "Derivative Size Constraints"
-msgstr ""
+msgstr "Үүсмэл /дуураймал/ хэмжээний хязгаарлалт"
 
-#: application/forms/AppearanceSettings.php:83
+#: application/forms/AppearanceSettings.php:100
 msgid "Display Settings"
 msgstr "Дэлгэцийн тохиргоо"
 
+#: application/forms/AppearanceSettings.php:108
+msgid "Admin Themes"
+msgstr ""
+
 #: application/forms/ChangePassword.php:25
 msgid "Current Password"
-msgstr ""
+msgstr "Одоогийн нууц үг"
 
 #: application/forms/ChangePassword.php:26
 #: application/forms/ChangePassword.php:36
 msgid "Password must be at least 6 characters long."
-msgstr ""
+msgstr "Нууц үг хамгийн багадаа 6 тэмдэгт байх ёстой."
 
 #: application/forms/ChangePassword.php:28
 msgid "Invalid current password"
-msgstr ""
+msgstr "Нууц үг буруу байна."
 
 #: application/forms/ChangePassword.php:34
 msgid "New Password"
@@ -2564,16 +2720,16 @@ msgstr "Шинэ нууц үг"
 
 #: application/forms/ChangePassword.php:41
 msgid "New password must be entered."
-msgstr ""
+msgstr "Шинэ нууц үгийг оруулна уу."
 
 #: application/forms/ChangePassword.php:50
 #: application/forms/ChangePassword.php:70
 msgid "New password must be typed correctly twice."
-msgstr ""
+msgstr "Шинэ нууц үгийг 2 дахин зөв бичнэ."
 
 #: application/forms/ChangePassword.php:59
 msgid "New password must be at least %min% characters long."
-msgstr ""
+msgstr "Шинэ нууц үг хамгийн багадаа %min% тэмдэгт ба түүнээс урт байна."
 
 #: application/forms/ChangePassword.php:68
 msgid "Repeat New Password"
@@ -2589,40 +2745,40 @@ msgstr "Сайтын тухай"
 
 #: application/forms/GeneralSettings.php:31 application/forms/Install.php:99
 msgid "Administrator Email"
-msgstr ""
+msgstr "Удирдагчийн и-мэйл"
 
 #: application/forms/GeneralSettings.php:37 application/forms/Install.php:105
 msgid "Site Copyright Information"
-msgstr ""
+msgstr "Сайтын зохиогчийн эрхийн мэдээлэл"
 
 #: application/forms/GeneralSettings.php:41 application/forms/Install.php:109
 msgid "Site Author Information"
-msgstr ""
+msgstr "Сайт зохиогчийн мэдээлэл"
 
 #: application/forms/GeneralSettings.php:45 application/forms/Install.php:113
 msgid "Tag Delimiter"
-msgstr ""
+msgstr "Таагийн хязгаарлагч"
 
 #: application/forms/GeneralSettings.php:46
 msgid ""
 "Separate tags using this character or string. Be careful when changing this "
 "setting. You run the risk of splitting tags that contain the old delimiter."
-msgstr ""
+msgstr "Тусгай таагууд эдгээр тэмдэгт болон мөрийн хэрэглэж байна. Тохиргоог өөрчлөхдөө болгоомжтой хандана уу.\nТа хуучин хязгаарлагч бүхий таагуудыг хуваах эрсдэлтэй алхам хийж байна"
 
 #: application/forms/GeneralSettings.php:59 application/forms/Install.php:174
 msgid "ImageMagick Directory Path"
-msgstr ""
+msgstr "ImageMagick хавтасны зам"
 
 #: application/forms/Install.php:31
 msgid "must be 30 characters or fewer with no whitespace"
-msgstr ""
+msgstr "30 тэмдэгт, эсвэл түүнээс цөөн хоорондоо зайгүй байна"
 
 #: application/forms/Install.php:39 application/forms/User.php:46
 #: application/models/User.php:189
 #, php-format
 msgid ""
 "Whitespace is not allowed. Only these special characters may be used: %s"
-msgstr ""
+msgstr "Хоосон зай зөвшөөрөхгүй. Дараах тусгай тэмдэгтүүдийг ашиглаж болно: %s"
 
 #: application/forms/Install.php:48 application/forms/Login.php:34
 msgid "Password"
@@ -2630,7 +2786,7 @@ msgstr "Нууц үг"
 
 #: application/forms/Install.php:49
 msgid "must be at least 6 characters"
-msgstr ""
+msgstr "ихэвчлэн 6 тэмдэгтээс их байх ёстой"
 
 #: application/forms/Install.php:72
 msgid "Confirm your password."
@@ -2638,45 +2794,45 @@ msgstr "Нууц үгээ дахин оруулна уу."
 
 #: application/forms/Install.php:114
 msgid "Separate tags using this character or string."
-msgstr ""
+msgstr "Тусгаарласан таагууд энэ  тэмдэгт эсвэл тэмдэгтийн цувааг хэрэглэж байна."
 
 #: application/forms/Install.php:129
 msgid "Maximum fullsize image size constraint (in pixels)"
-msgstr ""
+msgstr "Бүтэн дэлгэцээр харах зургийн хамгийн том  хэмжээний хязгаарлалт (цэгээр)"
 
 #: application/forms/Install.php:137
 msgid "Maximum thumbnail size constraint (in pixels)"
-msgstr ""
+msgstr "Тоймлож харах хамгийн дээд хэмжээ (цэгээр)"
 
 #: application/forms/Install.php:145
 msgid "Maximum square thumbnail size constraint (in pixels)"
-msgstr ""
+msgstr "Талбайн хамгийн дээд хэмжээний хязгаарлалт (цэгээр)"
 
 #: application/forms/Install.php:152
 msgid "Items Per Page (admin)"
-msgstr ""
+msgstr "Нэг хуудсанд харагдах мэдээлэл /баримт/ (админ)"
 
 #: application/forms/Install.php:153
 msgid ""
 "Limit the number of items displayed per page in the administrative "
 "interface."
-msgstr ""
+msgstr "Удирдлагын хэсгийн хуудасны нэг нүүрэнд харагдах мэдээллийн тооны хязгаар."
 
 #: application/forms/Install.php:160
 msgid "Items Per Page (public)"
-msgstr ""
+msgstr "Нэг хуудсанд харагдах мэдээлэл /баримт/ (нийтэд)"
 
 #: application/forms/Install.php:161
 msgid "Limit the number of items displayed per page in the public interface."
-msgstr ""
+msgstr "Нийтэд зориулсан хуудасны нэг нүүрэнд харагдах мэдээллийн тооны хязгаар."
 
 #: application/forms/Install.php:170
 msgid "Check box to show metadata elements with no text."
-msgstr ""
+msgstr "Монголтыг идэвхжүүлсэнээр мета өгөгдлийн элемэнтийг /талбарыг/ текстгүй харуулна."
 
 #: application/forms/Install.php:185
 msgid "Default Superuser Account"
-msgstr ""
+msgstr "Үндсэн супер хэрэглэгчийн мэдээлэл"
 
 #: application/forms/Install.php:195
 msgid "Site Settings"
@@ -2684,24 +2840,24 @@ msgstr "Сайтын тохиргоо"
 
 #: application/forms/ItemTypes.php:142
 msgid "The name of the item type."
-msgstr ""
+msgstr "Мэдээллийн төрлийн нэр."
 
 #: application/forms/ItemTypes.php:151
 msgid "The description of the item type."
-msgstr ""
+msgstr "Мэдээллийн төрлийн тодорхойлолт."
 
 #: application/forms/ItemTypes.php:173 application/forms/ItemTypes.php:182
 #, php-format
 msgid "The item type cannot have more than one \"%s\" element."
-msgstr ""
+msgstr "Мэдээллийн төрөл нэгээс олон \"%s\" элемэнттэй байж болохгүй."
 
 #: application/forms/Login.php:27
 msgid "Username cannot be empty."
-msgstr ""
+msgstr "Хэрэглэгчийн нэр хоосон байх ёсгүй."
 
 #: application/forms/Login.php:40
 msgid "Password cannot be empty."
-msgstr ""
+msgstr "Нууц үг хоосон байх ёсгүй."
 
 #: application/forms/Login.php:48
 msgid "Remember Me?"
@@ -2709,78 +2865,78 @@ msgstr "Сануулах уу?"
 
 #: application/forms/Navigation.php:162
 msgid "[Default]"
-msgstr ""
+msgstr "[Үндсэн]"
 
 #: application/forms/Navigation.php:168
 msgid "Select a Homepage"
-msgstr ""
+msgstr "Нүүр хуудсыг сонгох"
 
 #: application/forms/Navigation.php:250
 msgid "Cannot find parent navigation page."
-msgstr ""
+msgstr "Дээд түвшний удирдлагын хуудсыг олж чадахгүй байна."
 
 #: application/forms/Navigation.php:331
 msgid "All navigation links must have URIs."
-msgstr ""
+msgstr "Бүх удирдлагын холбоос нь URI /бүрэн вэб хаяг/ хаягтай байх ёстой."
 
 #: application/forms/Navigation.php:344
 msgid "All navigation links must have different URIs."
-msgstr ""
+msgstr "Удирдлагын линк бүр нь ялгаатай URI хаягтай байх шаардлагатай."
 
 #: application/forms/Navigation.php:350
 #, php-format
 msgid "Invalid URI for \"%s\" navigation link:  \"%s\""
-msgstr ""
+msgstr "Зөвшөөрөгдөөгүй URI хаяг \"%s\" удирдлагын хаяг: \"%s\""
 
 #: application/forms/Navigation.php:383
 msgid "Navigation links that have undeleteable sublinks cannot be deleted."
-msgstr ""
+msgstr "Удирдлагын холбоосууд устгах боломжгүй дэд холбоостой бол түүнийг устгах боломжгүй"
 
 #: application/forms/RecoverPassword.php:36
 msgid "Email address is required."
-msgstr ""
+msgstr "И-мэйл хаяг шаардлагатай."
 
 #: application/forms/RecoverPassword.php:46
 msgid "Invalid email address given."
-msgstr ""
+msgstr "Өгсөн И-мэйл хаяг буруу байна."
 
 #: application/forms/RecoverPassword.php:48
 msgid "Invalid format given for email address."
-msgstr ""
+msgstr "И-мэйл хаягийн формат буруу байна. "
 
 #: application/forms/RecoverPassword.php:50
 msgid "Invalid hostname given for email address."
-msgstr ""
+msgstr "И-мэйл хаягийн хостын нэр буруу байна."
 
 #: application/forms/RecoverPassword.php:66
 msgid "Invalid email address"
-msgstr ""
+msgstr "И-мэйл хаяг буруу байна"
 
 #: application/forms/ResetPassword.php:27
 msgid "Password is required."
-msgstr ""
+msgstr "Нууц үг шаардлагатай."
 
 #: application/forms/ResetPassword.php:33
 msgid "Typed passwords do not match."
-msgstr ""
+msgstr "Нууц үгүүд хоорондоо тохирохгүй байна."
 
 #: application/forms/SecuritySettings.php:24
 msgid "Disable File Upload Validation"
-msgstr ""
+msgstr "Файл илгээх баталгаажуулалтыг арилгах"
 
 #: application/forms/SecuritySettings.php:26
 msgid ""
 "Check this field if you would like to allow any file to be uploaded to "
 "Omeka."
-msgstr ""
+msgstr "Омекад ямар нэг файл илгээх бол энэ талбараа шалгана уу."
 
 #: application/forms/SecuritySettings.php:32
 msgid "Allowed File Extensions"
-msgstr ""
+msgstr "Зөвшөөрөгдсөн файлын өргөтгөлүүд"
 
 #: application/forms/SecuritySettings.php:33
 msgid "List of allowed extensions for file uploads"
-msgstr ""
+msgstr "Илгээх боломжтой файлын өргөтгөлүүд"
 
 #: application/forms/SecuritySettings.php:42
 msgid "Allowed File Types"
@@ -2788,57 +2944,57 @@ msgstr "Зөвшөөрөгдсөн файлын төрөл"
 
 #: application/forms/SecuritySettings.php:43
 msgid "List of allowed MIME types for file uploads"
-msgstr ""
+msgstr "Файл илгээхэд зөвшөөрөгдсөн төрлүүдийн /MIME types/ жагсаалт"
 
 #: application/forms/SecuritySettings.php:52
 msgid "ReCaptcha Public Key"
-msgstr ""
+msgstr "Нийтэд харагдах хамгаалалтын түлхүүр  - ReCaptcha"
 
 #: application/forms/SecuritySettings.php:53
 msgid ""
 "Enter public key from recaptcha.net. Both this and the private key must be "
 "filled in to secure public forms."
-msgstr ""
+msgstr "recaptcha.net -ээс хувийн /хамгаалалтын/ түлхүүр оруулна уу. Энэ болон хувийн түлхүүр аль аль нь нийтийн формыг бөглөхөд хамгаалах ёстой."
 
 #: application/forms/SecuritySettings.php:60
 msgid "ReCaptcha Private Key"
-msgstr ""
+msgstr "ReCaptcha - Хамгаалалтын хувийн түлхүүр"
 
 #: application/forms/SecuritySettings.php:61
 msgid ""
 "Enter private key from recaptcha.net. Both this and the public key must be "
 "filled in to secure public forms."
-msgstr ""
+msgstr "recaptcha.net -ээс хувийн /хамгаалалтын/ түлхүүр оруулна уу.  Энэ болон нийтийн түлхүүр аль аль нь нийтийн формыг бөглөхөд хамгаалах ёстой."
 
 #: application/forms/SecuritySettings.php:68
 msgid ""
 "Check this field if you would like to filter HTML elements or attributes "
 "from form input."
-msgstr ""
+msgstr "HTML элемэнт болон шинж чанарыг шүүлт хийх бол оруулах формд  талбараа шалгана уу."
 
 #: application/forms/SecuritySettings.php:69
 msgid "Enable HTML Filtering"
-msgstr ""
+msgstr "HTML шүүлтүүрийг идэвхижүүлэх"
 
 #: application/forms/SecuritySettings.php:74
 msgid "Allowed HTML Elements"
-msgstr ""
+msgstr "Зөвшөөрөгдсөн HTML элэмэнтүүд"
 
 #: application/forms/SecuritySettings.php:75
 msgid "List of allowed HTML elements in form input"
-msgstr ""
+msgstr "Форм бөглөхөд зөвшөөрөгдсөн HTML элемэнтийн жагсаалт"
 
 #: application/forms/SecuritySettings.php:82
 msgid "Allowed HTML Attributes"
-msgstr ""
+msgstr "Зөвшөөрөгдсөн HTML шинж чанарууд"
 
 #: application/forms/SecuritySettings.php:83
 msgid "List of allowed HTML attributes in form input"
-msgstr ""
+msgstr "Форм бөглөхөд зөвшөөрөгдсөн HTML шинж чанаруудын жагсаалт"
 
 #: application/forms/SecuritySettings.php:98
 msgid "File Validation"
-msgstr ""
+msgstr "Файлын батаглаажуулалт"
 
 #: application/forms/SecuritySettings.php:106
 msgid "Captcha"
@@ -2850,7 +3006,7 @@ msgstr "HTML шүүлтүүр"
 
 #: application/forms/User.php:30
 msgid "Username must be 30 characters or fewer. Whitespace is not allowed."
-msgstr ""
+msgstr "Хэрэглэгчийн нэр 30  эсвэл түүнээс доош тэмдэгт байна. Тэмдэгтийн хооронд хоосон зай байж болохгүй."
 
 #: application/forms/User.php:37
 msgid "Username is required."
@@ -2870,7 +3026,7 @@ msgstr "Энэ хэрэглэгчийн нэр давхцаж байна."
 
 #: application/forms/User.php:82
 msgid "Name as it should be displayed on the site"
-msgstr ""
+msgstr "Сайт дээр нэр харагдаж байх ёстой"
 
 #: application/forms/User.php:88 application/models/User.php:169
 msgid "Real Name is required."
@@ -2878,7 +3034,7 @@ msgstr "Жинхэнэ нэр шаардлагатай."
 
 #: application/forms/User.php:94
 msgid "This email address is invalid."
-msgstr ""
+msgstr "Энэ и-мэйл хаяг хүчингүй байна."
 
 #: application/forms/User.php:102
 msgid "Email is required."
@@ -2886,23 +3042,23 @@ msgstr "Имэйл хаяг шаардлагатай."
 
 #: application/forms/User.php:121
 msgid "This email address is already in use."
-msgstr ""
+msgstr "Энэ И-мэйл хаяг хэрэглэгдэж байна."
 
 #: application/forms/User.php:130
 msgid ""
 "Roles describe the permissions a user has. See <a "
 "href='http://omeka.org/codex/User_Roles' target='_blank'>documentation</a> "
 "for details."
-msgstr ""
+msgstr "Хэрэглэгчийн эрх үүргийн зөвшөөрлийн тайлбарыг  дараах холбоосын тусламжтай харна уу <a href='http://omeka.org/codex/User_Roles' target='_blank'>баримт бичиг</a> "
 
 #: application/forms/User.php:137
 msgid "Inactive users cannot log in to the site."
-msgstr ""
+msgstr "Идэвхижүүлээгүй хэрэглэгчид сайтад нэвтэрч чадахгүй."
 
 #: application/forms/User.php:139
 #, php-format
 msgid "Activation has been pending since %s."
-msgstr ""
+msgstr "Идэвхижүүлэлт %s -ээс хойш хүлээлгэнд байна."
 
 #: application/forms/User.php:142
 msgid "Active?"
@@ -2911,57 +3067,57 @@ msgstr "Идэвхтэй юу?"
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:114
 #, php-format
 msgid "The configured PHP path (%s) is invalid."
-msgstr ""
+msgstr "Тохируулсан PHP зам (%s)  буруу байна."
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:124
 #, php-format
 msgid "The configured PHP path (%s) does not point to a PHP-CLI binary."
-msgstr ""
+msgstr "Тохируулагдсан PHP зам (%s)   PHP-CLI binary-д таарахгүй байна."
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:126
 #, php-format
 msgid ""
 "The configured PHP path (%s) points to a PHP-CLI binary with an invalid "
 "version (%s)"
-msgstr ""
+msgstr "PHP тохируулсан зам (%s) нь PHP-CLI гэсэн  (%s)  хувилбарт тохирохгүй байна."
 
 #: application/libraries/Omeka/Navigation.php:214
 msgid "The page must be normalized and have a valid uid."
-msgstr ""
+msgstr "Хуудас хэвийн байж зөв uid авах ёстой."
 
 #: application/libraries/Omeka/Navigation.php:226
 msgid ""
 "The parent container must either be the navigation object or a descendant "
 "subpage of the navigation object."
-msgstr ""
+msgstr "Дээд түвшинд агуулгадна гэдэг нь ихэвчлэн удирдлагын объект  эсвэл удирдлагын объектын гаралтай дэд хуудас байна."
 
 #: application/libraries/Omeka/Navigation/Page/Uri.php:128
 #, php-format
 msgid "Invalid URI for Omeka_Navigation_Page_Uri object: %s"
-msgstr ""
+msgstr " Omeka_Navigation_Page_Uri зориулагдсан буруу URI объект: %s"
 
 #: application/libraries/Omeka/Plugin/Ini.php:63
 #, php-format
 msgid "Path to plugin.ini for \"%s\" is not correct."
-msgstr ""
+msgstr " \"%s\" -ий  plugin.ini дэх хаяг буруу байна."
 
 #: application/libraries/Omeka/Plugin/Installer.php:79
 #, php-format
 msgid "The \"%s\" plugin must be installed and have newer files to upgrade it."
-msgstr ""
+msgstr "\"%s\"  плагин суугдсан ч шинэчлэл хийгдээгүй байна."
 
 #: application/libraries/Omeka/Plugin/Installer.php:116
 msgid "Plugin must have a valid directory name before it can be installed."
-msgstr ""
+msgstr "Плагинийг суулгахдаа хавтасны нэр зөв өгөгдсөн байх ёстойг анхаарна уу."
 
 #: application/libraries/Omeka/Record/AbstractRecord.php:349
 #, php-format
 msgid "'%s' is an invalid special value."
-msgstr ""
+msgstr "'%s' -нь зөвшөөрөгдөөгүй тусгай тэмдэгт."
 
 #: application/libraries/Omeka/Record/Iterator.php:49
 msgid "An invalid value was detected during record iteration."
-msgstr ""
+msgstr "Давталтын явцад буруу утга илэрлээ."
 
 #: application/libraries/globals.php:410
 msgid "File"
@@ -2979,294 +3135,355 @@ msgstr "Бүүлийн"
 msgid "Exact match"
 msgstr "Яг таарах"
 
-#: application/libraries/globals.php:1258
-#: application/libraries/globals.php:1279
+#: application/libraries/globals.php:1263
+#: application/libraries/globals.php:1284
 #, php-format
 msgid "Could not find file %s!"
 msgstr " %s файлыг хайж болохгүй байна!"
 
-#: application/libraries/globals.php:1296
+#: application/libraries/globals.php:1301
 msgid "No featured collections are available."
-msgstr ""
+msgstr "Онцлох сан хөмрөг алга."
 
-#: application/libraries/globals.php:1593
+#: application/libraries/globals.php:1598
 msgid "Select Below "
-msgstr ""
+msgstr "Доорхыг сонгох"
 
-#: application/libraries/globals.php:1636
+#: application/libraries/globals.php:1641
 msgid "Omeka RSS Feed"
-msgstr ""
+msgstr "Омека RSS Тэжээл"
 
-#: application/libraries/globals.php:1637
+#: application/libraries/globals.php:1642
 msgid "Omeka Atom Feed"
-msgstr ""
+msgstr "Омека - Atom Feed"
 
-#: application/libraries/globals.php:2293
+#: application/libraries/globals.php:2297
 msgid "No recent items available."
-msgstr ""
+msgstr "Шинэ нэмэгдсэн мэдээлэл алга"
 
-#: application/libraries/globals.php:2319
+#: application/libraries/globals.php:2323
 msgid "No featured items are available."
-msgstr ""
+msgstr "Онцлох мэдээлэл алга."
 
-#: application/libraries/globals.php:2378
+#: application/libraries/globals.php:2382
 msgid "View"
 msgstr "Харах"
 
-#: application/libraries/globals.php:2440
+#: application/libraries/globals.php:2444
+#: application/models/Table/Collection.php:87
+#: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
 msgstr "Сан хөмрөг алга"
 
-#: application/libraries/globals.php:2558
+#: application/libraries/globals.php:2563
 msgid "RSS"
 msgstr "АрЭсЭс"
 
-#: application/libraries/globals.php:2575
+#: application/libraries/globals.php:2580
 msgid "Next Item &rarr;"
 msgstr "Дараагийн мэдээлэл &rarr;"
 
-#: application/libraries/globals.php:2595
+#: application/libraries/globals.php:2600
 msgid "&larr; Previous Item"
 msgstr "&larr; Өмнөх мэдээлэл"
 
-#: application/libraries/globals.php:2776
+#: application/libraries/globals.php:2781
 msgid "Browse All"
 msgstr "Бүгдийг харах"
 
-#: application/libraries/globals.php:2781
+#: application/libraries/globals.php:2786
 msgid "Browse by Tag"
 msgstr "Таагаар гүйлгэн харах"
 
-#: application/libraries/globals.php:3050
+#: application/libraries/globals.php:3055
 msgid "No tags are available."
-msgstr ""
+msgstr "Тааг алга"
 
 #: application/models/Builder/Item.php:263
 msgid "Must specify a file transfer type when attaching files to an item!"
-msgstr ""
+msgstr "Мэдээлэлд файл хавсаргахдаа файл дамжуулах төрлийг зааж өгөх ёстой."
 
-#: application/models/Collection.php:117
+#: application/models/Collection.php:119
 msgid "Cannot associate the collection with an unsaved user."
-msgstr ""
+msgstr "Хадгалагдаагүй хэрэглэгчтэй сан хөмрөг холбогдохгүй байна."
 
 #: application/models/Element.php:175
 msgid "The element name must not be empty."
-msgstr ""
+msgstr "Элемэнтийн нэр хоосон байж болохгүй."
 
 #: application/models/Element.php:179
 msgid "Invalid element set."
-msgstr ""
+msgstr "Элемэнт буруу байна."
 
 #: application/models/Element.php:185
 #, php-format
 msgid "An element named \"%s\" already exists for the \"%s\" element set."
-msgstr ""
+msgstr "\"%s\" элемэнтийн нэр элемэнтийн \"%s\" багцад өмнө нь бүртгэгдсэн байна."
 
 #: application/models/Element.php:216
 #, php-format
 msgid "Cannot set element set ID: set named \"%s\" does not exist."
-msgstr ""
+msgstr "Элемэнтийн ID тохируулагдахгүй байна:   \"%s\" нэр тохирохгүй байна."
 
 #: application/models/ElementSet.php:146
 msgid "Name of element set must be unique."
-msgstr ""
+msgstr "Элемэнтийн нэр онцгой байх ёстой."
 
 #: application/models/ElementSet.php:150
 msgid "Name of element set must not be empty."
-msgstr ""
+msgstr "Элемэнтийн багцын нэр хоосон байж болохгүй."
 
 #: application/models/ElementText.php:59
 msgid "Invalid record ID."
-msgstr ""
+msgstr "Зөвшөөрөгдөөгүй бичлэгийн ID"
 
 #: application/models/ElementText.php:62
 msgid "All element texts must have a record type."
-msgstr ""
+msgstr "Бүх элемэнтийн текстүүд нь бичлэгийн төрөлтэй байх ёстой."
 
 #: application/models/ElementText.php:65
 msgid "Invalid element ID."
-msgstr "Үнэмлэх буруу"
+msgstr "Элемэнтийн ID буруу."
 
 #: application/models/File.php:235
 msgid "Cannot get the local path for a stored file."
-msgstr ""
+msgstr "Хадгалсан файлын зам олдохгүй байна."
 
 #: application/models/File.php:452
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
-msgstr ""
+msgstr "%s буруу файл үүссэн байна."
 
-#: application/models/Item.php:330
+#: application/models/Item.php:332
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
-msgstr ""
+msgstr "Мэдээллийн санруу файлыг хуулах боломжгүй байна."
 
 #. / Chicago-style item citation: two authors
-#: application/models/Item.php:457
+#: application/models/Item.php:467
 #, php-format
 msgid "%1$s and %2$s"
 msgstr "%1$s болон %2$s"
 
 #. / Chicago-style item citation: three authors
-#: application/models/Item.php:461
+#: application/models/Item.php:471
 #, php-format
 msgid "%1$s, %2$s, and %3$s"
-msgstr ""
+msgstr "%1$s, %2$s, болон %3$s"
 
 #. / Chicago-style item citation: more than three authors
-#: application/models/Item.php:465
+#: application/models/Item.php:475
 #, php-format
 msgid "%s et al."
-msgstr ""
+msgstr "%s ба бус."
 
 #. / Chicago-style item citation: access date and URL
-#: application/models/Item.php:483
+#: application/models/Item.php:493
 #, php-format
 msgid "accessed %1$s, %2$s."
-msgstr ""
+msgstr " %1$s, %2$s  хандсан."
 
-#: application/models/Item.php:500
+#: application/models/Item.php:510
 msgid "Cannot add an existing file to an item!"
-msgstr ""
+msgstr "Энэ файлыг мэдээлэлд нэмж чадахгүй байна!"
 
-#: application/models/Item.php:504
+#: application/models/Item.php:514
 msgid "File must be valid before it can be associated with an item!"
-msgstr ""
+msgstr "Файл зөвшөөрөгдсөний мэдээлэлтэй холбогдоно!"
 
-#: application/models/Item.php:528
+#: application/models/Item.php:538
 msgid "Invalid item type."
 msgstr "Хүчингүй файлын төрөл"
 
-#: application/models/Item.php:531
+#: application/models/Item.php:541
 msgid "Invalid collection."
 msgstr "Хүчингүй сан хөмрөг"
 
 #: application/models/ItemType.php:102
 #, php-format
 msgid "The item type name must have between %1$s and %2$s characters."
-msgstr ""
+msgstr "Мэдээллийн нэр %1$s ба %2$s тэмдэгтийн хооронд байна."
 
 #: application/models/ItemType.php:106
 msgid "The item type name must be unique."
-msgstr ""
+msgstr "Мэдээллийн төрлийн нэр онцгой байх ёстой."
 
 #: application/models/ItemType.php:183
 msgid "There are too many values in the element ordering array."
-msgstr ""
+msgstr "Элемэнтийг эрэмблэхэд хэтэрхий олон утга байна."
 
 #: application/models/ItemType.php:185
 msgid "There are too few values in the element ordering array."
-msgstr ""
+msgstr "Элемэнтийг эрэмблэхэд хэтэрхий цөөн утга байна."
 
 #: application/models/ItemType.php:222
 msgid ""
 "Invalid element data. To add elements, you must either pass an element "
 "objects or an array of element metadata."
-msgstr ""
+msgstr "Хүчингүй элемэнтийн /талбарын/ өгөгдөл. Элемэнтийг нэмэхдээ, та элемэнтийн объект эсвэл элемэнтийн мета өгөгдөлийн цувааг орхих хэрэгтэй."
 
 #: application/models/ItemType.php:286
 msgid ""
 "Cannot remove elements from an item type that is not persistent in the "
 "database!"
-msgstr ""
+msgstr "Бааз дахь тасралтгүй мэдээллийн төрлөөс элемэнтийг устгаж чадахгүй байна!"
 
 #: application/models/ItemType.php:295
 #, php-format
 msgid "Cannot find element with ID %s!"
-msgstr ""
+msgstr " %s ID-тай элемэнтийг хайж чадахгүй байна!"
 
 #: application/models/ItemType.php:336
 #, php-format
 msgid "Item type does not contain an element with the ID %s!"
-msgstr ""
+msgstr "Мэдээлэл/баримт/-ын төрөл  %s ID-тай элемэнт агуулаагүй!  "
 
 #: application/models/ItemType.php:357
 msgid ""
 "Invalid parameter. The hasElement function requires either an element object"
 " or an element id to determine if an item type has an element."
+msgstr "Буруу параметр. Элемент объект буюу зүйлийн төрөл элемент байгаа эсэхийг тодорхойлохын тулд ID элемент шаарддаг."
+
+#: application/models/Job/ItemBatchEditAll.php:41
+msgid "Batch Edit All Items: No item matches the specified filters."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:48
+#, php-format
+msgid "Batch Edit: Starting processing 1 item."
+msgid_plural "Batch Edit: Starting processing %d items."
+msgstr[0] ""
+msgstr[1] ""
+
+#: application/models/Job/ItemBatchEditAll.php:67
+#, php-format
+msgid ""
+"Batch Edit: A total of %d errors occurred during the batch process of %d "
+"items."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:74
+#, php-format
+msgid "Batch Edit: The item has been processed successfully."
+msgid_plural "Batch Edit: All %d items have been processed successfully."
+msgstr[0] ""
+msgstr[1] ""
+
+#: application/models/Job/ItemBatchEditAll.php:91
+msgid "Item does not exist: it may have been deleted before processing."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:106
+msgid "User is not allowed to delete this item."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:113
+msgid "User is not allowed to edit this item."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:119
+msgid "User is not allowed to tag this item."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:142
+msgid "The item was successfully deleted."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:154
+#, php-format
+msgid "An error occured when the item was updated: %s"
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:159
+msgid "The item was successfully batch-edited."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:178
+#, php-format
+msgid "Batch Edit Item #%d [%d/%d]: %s"
 msgstr ""
 
 #: application/models/Mixin/ElementText.php:293
 #, php-format
 msgid "There is no element \"%1$s\", \"%2$s\"!"
-msgstr ""
+msgstr "\"%1$s\", \"%2$s\" энэ элемэнт алга!"
 
 #: application/models/Mixin/ElementText.php:312
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
-msgstr ""
+msgstr "'%s' ID-тай элемэнтийг хайж чадахгүй байна!"
 
 #: application/models/Mixin/ElementText.php:431
 msgid "Element texts are not formatted correctly!"
-msgstr ""
+msgstr "Элемэнтийн текст зөв форматлагдаагүй байна!"
 
 #: application/models/Mixin/ElementText.php:579
 #, php-format
 msgid "The \"%s\" field has at least one invalid value!"
-msgstr ""
+msgstr " \"%s\" талбарт ямар нэг зөвшөөрөгдөөгүй тэмдэгт /value/ байна!"
 
 #: application/models/Mixin/ElementText.php:649
 msgid "Cannot save element text for records that are not yet persistent!"
-msgstr ""
+msgstr "Элемэнтийн текстийг хадгалж чадахгүй байна!"
 
 #: application/models/Option.php:50 application/models/Option.php:54
 msgid "Each option must have a unique name."
-msgstr ""
+msgstr "Сонголт бүр өвөрмөц нэртэй байх ёстой."
 
 #: application/models/Plugin.php:133
 msgid "Names of plugins must not be blank"
-msgstr ""
+msgstr "Плагиний нэр хоосон байж болохгүй"
 
 #: application/models/Table/Collection.php:80
 #, php-format
 msgid "[Untitled] #%s"
-msgstr ""
+msgstr "[Нэргүй] #%s"
 
-#: application/models/Table/Item.php:123
+#: application/models/Table/Item.php:145
 msgid "Invalid search type given!"
-msgstr ""
+msgstr "Өгөгдсөн хайлтын төрөл зөвшөөрөгдөөгүй!"
 
 #: application/models/Tag.php:56
 msgid "Tags must be given a name."
-msgstr ""
+msgstr "Таагд нэр өгсөн байх ёстой."
 
 #: application/models/Tag.php:60
 msgid "That name is already taken for this tag."
-msgstr ""
+msgstr "Энэ нэр олгогдсон таагд байна."
 
 #: application/models/User.php:110
 msgid "User may not change permissions to super-user"
-msgstr ""
+msgstr "Хэрэглэгч супер хэрэглэгчийн статусыг өөрчилж чадахгүй"
 
 #: application/models/User.php:113
 msgid "User may not change roles."
-msgstr ""
+msgstr "Хэрэглэгч хандах эрхээ өөрчилж чадахгүй."
 
 #: application/models/User.php:182 application/models/User.php:230
 msgid "The user must be assigned a role."
-msgstr ""
+msgstr "Хэрэглэгч тодорхой үүрэгтэй байх ёстой."
 
 #: application/models/User.php:187
 #, php-format
 msgid "The username \"%1$s\" must be between %2$s and %3$s characters."
-msgstr ""
+msgstr "Хэрэглэгчийн нэр %3$s ба \"%1$s\" хооронд %2$s  тэмдэгттэй байна."
 
 #: application/models/User.php:191
 #, php-format
 msgid "'%s' is already in use. Please choose another username."
-msgstr ""
+msgstr "'%s' ашиглагдаж байна. Өөр хэрэглэгчийн нэр сонгоно уу."
 
 #: application/models/UsersActivations.php:54
 msgid "Cannot create a user activation for non-existent user."
-msgstr ""
+msgstr "Бодит бус хэрэглэгчийн идвэхжүүлэлтийг үүсгэж чадахгүй байна."
 
 #: application/tests/suite/Omeka/Db/Migration/_files/migrations/20080717013526_foobar.php:18
 msgid "This migration should have been run previously (should not run again)."
-msgstr ""
+msgstr "Энэ шилжүүлэлт нь өмнөхийг ажиллуулж байна (дахин ажиллах ёсгүй)"
 
 #: application/tests/suite/Omeka/Db/Migration/_files/migrations/50000101120000_notRunYet.php:19
 msgid "This migration should not be run."
-msgstr ""
+msgstr "Шилжүүлэлт ажиллахгүй байна."
 
 #: application/tests/suite/Omeka/NavigationTest.php:752
 #: application/tests/suite/Omeka/NavigationTest.php:817
@@ -3369,7 +3586,7 @@ msgstr "[бичиггүй]"
 
 #: application/views/helpers/ElementForm.php:65
 msgid "Add Input"
-msgstr ""
+msgstr "Оруулах форм нэмэх"
 
 #: application/views/helpers/ElementInput.php:131
 msgid "Use HTML"
@@ -3378,35 +3595,40 @@ msgstr "HTML хэрэглэх"
 #: application/views/helpers/GetCurrentRecord.php:27
 #, php-format
 msgid "A current %s variable has not been set to this view."
-msgstr ""
+msgstr "%s хувьсагч харагдах байдлаар тохируулагдаагүй байна."
 
 #: application/views/helpers/GetLoopRecords.php:30
 #, php-format
 msgid "A loop %s variable has not been set to this view."
-msgstr ""
+msgstr " %s хувьсагчийн давталт харагдах байдлаар тохируулагдаагүй байна."
 
 #: application/views/helpers/Loop.php:27
 msgid "An array of records is not available for the loop."
+msgstr "Бичлэгийн цувааны давталт хийх боломжгүй байна."
+
+#: application/views/helpers/MaxFileSize.php:44
+#, php-format
+msgid "%s MB"
 msgstr ""
 
 #: application/views/helpers/RecordUrl.php:34
 msgid "Invalid record passed while getting record URL."
-msgstr ""
+msgstr "Бичлэгийн URL хаяг нь буруу бичлэг харуулж байна."
 
 #: application/views/helpers/RecordUrl.php:44
 msgid "Invalid action passed while getting record URL."
-msgstr ""
+msgstr "Бичлэгийн URL хаяг нь буруу үйлдэл гаргаж байна."
 
 #: application/views/helpers/RecordUrl.php:75
 msgid "Invalid return value while getting record URL."
-msgstr ""
+msgstr "Бичлэгийн URL хаяг нь буруу утга харуулж байна.  "
 
 #: application/views/scripts/collections/browse.php:14
 #: application/views/scripts/items/browse.php:24
 msgid "Sort by: "
 msgstr "Эрэмблэх:"
 
-#: application/views/scripts/collections/browse.php:42
+#: application/views/scripts/collections/browse.php:41
 #, php-format
 msgid "View the items in %s"
 msgstr " %s -д мэдээллийн харах"
@@ -3416,9 +3638,9 @@ msgstr " %s -д мэдээллийн харах"
 msgid "Items in the %s Collection"
 msgstr "%s сан хөмрөгийн мэдээллүүд"
 
-#: application/views/scripts/collections/show.php:37
+#: application/views/scripts/collections/show.php:33
 msgid "There are currently no items within this collection."
-msgstr ""
+msgstr "Сонгосон сан хөмрөгт ямар нэг мэдээлэл алга."
 
 #: application/views/scripts/common/footer.php:14
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
@@ -3451,7 +3673,7 @@ msgstr "403 Хуудас хамгаалагдсан"
 
 #: application/views/scripts/error/403.php:8
 msgid "You do not have permission to access this page."
-msgstr ""
+msgstr "Та энэ хуудсанд хандах эрхгүй байна."
 
 #: application/views/scripts/error/404.dc.php:1
 #: application/views/scripts/error/404.php:2
@@ -3466,20 +3688,20 @@ msgstr "%s  - буруу URL хаяг байна."
 
 #: application/views/scripts/error/404.rss2.php:1
 msgid "Rss2.0 Feed Not Found!"
-msgstr ""
+msgstr "Rss2.0 тэжээл олдсонгүй!"
 
 #: application/views/scripts/error/405.php:2
 msgid "405 Method Not Allowed"
-msgstr ""
+msgstr "405: Зөвшөөрөгдөөгүй арга"
 
 #: application/views/scripts/error/405.php:6
 #, php-format
 msgid "The method used to access this URL (%s) is not valid."
-msgstr ""
+msgstr "Энэ URL (%s) хаягт хандах арга зөвшөөрөгдөөгүй байна."
 
 #: application/views/scripts/error/index.php:4
 msgid "Omeka has encountered an error"
-msgstr ""
+msgstr "Омекад ямар нэг алдаа гарлаа"
 
 #: application/views/scripts/error/index.php:33
 msgid ""
@@ -3487,7 +3709,7 @@ msgid ""
 "Omeka Codex page on <a "
 "href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error "
 "messages</a>."
-msgstr ""
+msgstr "Та энэхүү алдааны тухай илүү их мэдээлэл авахыг хүсвэл Омекагийн  дараах хуудсанд хандаарай<a href=\"http://omeka.org/codex/Retrieving_error_messages\">алдааны мэдээллийг харах</a>."
 
 #: application/views/scripts/index.php:10
 msgid "Featured Item"
@@ -3501,21 +3723,21 @@ msgstr "Онцлох сан хөмрөг"
 msgid "View All Items"
 msgstr "Бүх мэдээллийг харах"
 
-#: application/views/scripts/items/show.php:10
+#: application/views/scripts/items/show.php:13
 msgid "Files"
 msgstr "Файлууд"
 
-#: application/views/scripts/items/show.php:33
+#: application/views/scripts/items/show.php:36
 msgid "Citation"
 msgstr "Эшлэл"
 
 #: application/views/scripts/search/search-filters.php:3
 msgid "Query:"
-msgstr ""
+msgstr "Лавлах:"
 
 #: application/views/scripts/search/search-filters.php:4
 msgid "Query type:"
-msgstr "Хайлт хийх төрөл"
+msgstr "Лавлахын төрөл"
 
 #: application/views/scripts/search/search-filters.php:5
 msgid "Record types:"
@@ -3531,7 +3753,7 @@ msgstr "Нэг бичлэгийг голлож хайлт хийх төрөл"
 
 #: application/views/scripts/search/search-form.php:17
 msgid "Go to search settings to select record types to use."
-msgstr ""
+msgstr "Хайлтын тохиргоонд очиж бичлэгийн төрлийг сонгоод хэрэглэнэ."
 
 #: application/views/scripts/search/search-form.php:19
 msgid "Advanced Search (Items only)"
@@ -3547,7 +3769,7 @@ msgstr "Нууц үгээ мартсан уу?"
 
 #: install/controllers/IndexController.php:25
 msgid "Could not load database resource!"
-msgstr ""
+msgstr "Мэдээллийн сангийн нөөцийг ачаалж чадахгүй байна!"
 
 #: install/views/scripts/index/errors.phtml:1
 msgid "Installation Error"
@@ -3556,7 +3778,7 @@ msgstr "Суулгалтын алдаа"
 #: install/views/scripts/index/errors.phtml:2
 msgid ""
 "Before installation can continue, the following errors must be resolved:"
-msgstr ""
+msgstr "Дараах алдааг зассаны дараа суулгах ажил үргэлжилнэ:"
 
 #: install/views/scripts/index/fatal-error.phtml:1
 msgid "Fatal Error"
@@ -3570,7 +3792,7 @@ msgstr "Суулгалтын анхааруулга"
 msgid ""
 "The following issues will not affect installation, but they may negatively "
 "affect the behavior of Omeka:"
-msgstr ""
+msgstr "Дараах асуудлууд суулгалтад ямар нэг нөлөө үзүүлэхгүй, гэвч Омекагийн үндсэн шинжэд сөргөөр нөлөөлж магадгүй:"
 
 #: install/views/scripts/index/index.phtml:14
 msgid "Configure Your Site"

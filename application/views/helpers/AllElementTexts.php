@@ -26,13 +26,13 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
     /**
      * Flag to indicate whether to show elements that do not have text.
      * @see self::$_emptyElementString
-     * @var boolean
+     * @var bool
      */
     protected $_showEmptyElements = true;
 
     /**
      * Whether to include a heading for each Element Set.
-     * @var boolean
+     * @var bool
      */
     protected $_showElementSetHeadings = true;
 
@@ -88,7 +88,7 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
         if (!($record instanceof Omeka_Record_AbstractRecord)) {
             throw new InvalidArgumentException('Invalid record passed to recordMetadata.');
         }
-        
+
         $this->_record = $record;
         $this->_setOptions($options);
         return $this->_getOutput();
@@ -98,7 +98,6 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
      * Set the options.
      *
      * @param array $options
-     * @return void
      */
     protected function _setOptions(array $options)
     {
@@ -130,13 +129,12 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
         }
 
         if (array_key_exists('return_type', $options)) {
-            $this->_returnType = (string)$options['return_type'];
+            $this->_returnType = (string) $options['return_type'];
         }
 
         if (array_key_exists('partial', $options)) {
-            $this->_partial = (string)$options['partial'];
+            $this->_partial = (string) $options['partial'];
         }
-
     }
 
     /**
@@ -174,20 +172,19 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
                 // those that belong to this item's particular item type. This is
                 // necessary because, otherwise, all item type elements will be shown.
                 $itemTypeElementSetName = $this->_record->getProperty('item_type_name') . ' ' . ElementSet::ITEM_TYPE_NAME;
-                
+
                 // Check to see if either the generic or specific Item Type element
                 // set has been chosen, i.e. 'Item Type Metadata' or 'Document
                 // Item Type Metadata', etc.
 
                 $itemTypeElements = $this->_record->getItemTypeElements();
-                
+
                 if (!empty($this->_elementSetsToShow)) {
                     if (in_array($itemTypeElementSetName, $this->_elementSetsToShow) or
                     in_array(ElementSet::ITEM_TYPE_NAME, $this->_elementSetsToShow)) {
                         $elementsBySet[$itemTypeElementSetName] = $itemTypeElements;
                     }
-                }
-                else {
+                } else {
                     $elementsBySet[$itemTypeElementSetName] = $itemTypeElements;
                 }
             }
@@ -205,7 +202,7 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
      *
      * @param Element $element
      * @param array $texts
-     * @return boolean
+     * @return bool
      */
     protected function _elementIsShowable(Element $element, $texts)
     {
@@ -253,7 +250,7 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
                     $displayInfo['texts'] = $elementTexts;
                 }
 
-                $setInfo[$elementName] = $displayInfo; 
+                $setInfo[$elementName] = $displayInfo;
             }
             if (!empty($setInfo)) {
                 $elementsForDisplay[$setName] = $setInfo;
@@ -279,7 +276,7 @@ class Omeka_View_Helper_AllElementTexts extends Zend_View_Helper_Abstract
         foreach ($elementSets as $setName => $elementsInSet) {
             $outputArray[$setName] = array();
             foreach ($elementsInSet as $key => $element) {
-                $elementName = $element->name;                
+                $elementName = $element->name;
                 $textArray = $this->_getFormattedElementTexts($this->_record, array($element->set_name, $elementName));
                 if (!empty($textArray[0]) or $this->_showEmptyElements) {
                     $outputArray[$setName][$elementName] = $textArray;

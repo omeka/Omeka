@@ -16,26 +16,26 @@ class Table_File extends Omeka_Db_Table
     public function applySearchFilters($select, $params)
     {
         $boolean = new Omeka_Filter_Boolean;
-        
+
         foreach ($params as $paramName => $paramValue) {
             if ($paramValue === null || (is_string($paramValue) && trim($paramValue) == '')) {
                 continue;
             }
 
-            switch($paramName) {
+            switch ($paramName) {
                 case 'item':
                 case 'item_id':
                     $select->where('files.item_id = ?', $paramValue);
                     break;
-                    
+
                 case 'order':
-                    if($paramValue == 'null') {
+                    if ($paramValue == 'null') {
                         $select->where('files.order IS NULL');
                     } else {
                         $select->where('files.order = ?', $paramValue);
                     }
                     break;
-                    
+
                 case 'original_filename':
                     $select->where('files.original_filename = ?', $paramValue);
                     break;
@@ -43,19 +43,19 @@ class Table_File extends Omeka_Db_Table
                 case 'size_greater_then':
                     $select->where('files.size > ?', $paramValue);
                     break;
-                    
+
                 case 'has_derivative_image':
                     $this->filterByHasDerivativeImage($select, $boolean->filter($paramValue));
                     break;
-                    
+
                 case 'mime_type':
                     $select->where('files.mime_type = ?', $paramValue);
                     break;
-                    
+
                 case 'added_since':
                     $this->filterBySince($select, $paramValue, 'added');
                     break;
-                    
+
                 case 'modified_since':
                     $this->filterBySince($select, $paramValue, 'modified');
                     break;
@@ -69,9 +69,9 @@ class Table_File extends Omeka_Db_Table
             $select->where('files.has_derivative_image = 1');
         } else {
             $select->where('files.has_derivative_image = 0');
-        }        
+        }
     }
-    
+
     /**
      * All files should only be retrieved if they join properly on the items
      * table.
@@ -94,7 +94,7 @@ class Table_File extends Omeka_Db_Table
     /**
      * Retrieve a random file with an image associated with an item.
      *
-     * @param integer $itemId
+     * @param int $itemId
      * @return File
      */
     public function getRandomFileWithImage($itemId)
@@ -110,7 +110,7 @@ class Table_File extends Omeka_Db_Table
     /**
      * Retrieve files associated with an item.
      *
-     * @param integer $itemId
+     * @param int $itemId
      * @param array $fileIds Optional If given, this will only retrieve files
      * with these specific IDs.
      * @param string $sort The manner by which to order the files. For example:
@@ -134,8 +134,8 @@ class Table_File extends Omeka_Db_Table
     /**
      * Get a single file associated with an item, by index.
      *
-     * @param integer $itemId
-     * @param integer $index
+     * @param int $itemId
+     * @param int $index
      * @param string $sort The manner by which to order the files. For example:
      *  'id': file id, 'filename' = alphabetical by filename. The default is
      *  'order', following the user's specified order.
@@ -154,8 +154,8 @@ class Table_File extends Omeka_Db_Table
     /**
      * Retrieve files for an item that has derivative images.
      *
-     * @param integer $itemId The ID of the item to get images for.
-     * @param integer|null $index Optional If given, this specifies the file to
+     * @param int $itemId The ID of the item to get images for.
+     * @param int|null $index Optional If given, this specifies the file to
      * retrieve for an item, based upon the ordering of its files.
      * @param string $sort The manner by which to order the files. For example:
      *  'id': file id, 'filename': alphabetical by filename. The default is
@@ -176,7 +176,6 @@ class Table_File extends Omeka_Db_Table
             $select->limit(1, $index);
             return $this->fetchObject($select, array($itemId));
         }
-
     }
 
     /**
@@ -187,13 +186,11 @@ class Table_File extends Omeka_Db_Table
      * For example:
      * 'id' = file id
      * 'filename' = alphabetical by filename
-     *
-     * @return void
      */
     private function _orderFilesBy($select, $sort)
     {
         // order the files
-        switch($sort) {
+        switch ($sort) {
             case 'order':
                 $select->order('ISNULL(files.order)')->order('files.order');
             break;

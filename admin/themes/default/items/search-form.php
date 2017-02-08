@@ -147,7 +147,7 @@ $formAttributes['method'] = 'GET';
                     'collection',
                     @$_REQUEST['collection'],
                     array('id' => 'collection-search'),
-                    get_table_options('Collection')
+                    get_table_options('Collection', null, array('include_no_collection' => true))
                 );
             ?>
             </div>

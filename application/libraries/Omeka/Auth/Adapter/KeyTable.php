@@ -14,7 +14,7 @@
 class Omeka_Auth_Adapter_KeyTable implements Zend_Auth_Adapter_Interface
 {
     protected $_key;
-    
+
     /**
      * @param Omeka_Db $db Database object.
      */
@@ -22,7 +22,7 @@ class Omeka_Auth_Adapter_KeyTable implements Zend_Auth_Adapter_Interface
     {
         $this->_key = $key;
     }
-    
+
     /**
      * Authenticate against an API key.
      * 
@@ -33,7 +33,7 @@ class Omeka_Auth_Adapter_KeyTable implements Zend_Auth_Adapter_Interface
         if (null === $this->_key) {
             return new Zend_Auth_Result(Zend_Auth_Result::SUCCESS, null);
         }
-        
+
         $db = Zend_Registry::get('bootstrap')->getResource('db');
         $sql = "SELECT * FROM `{$db->Key}` WHERE `key` = ?";
         $key = $db->getTable('Key')->fetchObject($sql, array($this->_key));

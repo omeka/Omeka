@@ -19,28 +19,28 @@ class Globals_ClearFiltersTest extends Omeka_Test_AppTestCase
     {
         return get_plugin_broker();
     }
-    
+
     public function testNonexistingFilter()
     {
         clear_filters('not_a_filter');
         $this->assertEmpty($this->_getPluginBroker()->getFilters('not a filter'));
     }
-    
+
     public function testExistingFilter()
     {
         $broker = $this->_getPluginBroker();
-        
+
         add_filter('actual_filter', 'test_callback');
         add_filter('actual_filter', 'test_callback2');
         $this->assertNotEmpty($broker->getFilters('actual_filter'));
         clear_filters('actual_filter');
         $this->assertEmpty($broker->getFilters('actual_filter'));
     }
-    
+
     public function testAllFilters()
     {
         $broker = $this->_getPluginBroker();
-        
+
         add_filter('filter1', 'test_callback');
         add_filter('filter2', 'test_callback');
         clear_filters();

@@ -52,9 +52,9 @@ class Models_CollectionAclTest extends Omeka_Test_AppTestCase
      *
      * @dataProvider userResourceProvider
      * @param string $userKey
-     * @param boolean $whenOwner
-     * @param boolean $whenNotOwner
-     * @param boolean $generally
+     * @param bool $whenOwner
+     * @param bool $whenNotOwner
+     * @param bool $generally
      */
     public function testOwnershipAcl($userKey, $whenOwner, $whenNotOwner, $generally)
     {
@@ -94,7 +94,7 @@ class Models_CollectionAclTest extends Omeka_Test_AppTestCase
      * Get a mocked Collection object with stubs for the methods needed by the
      * ACL.
      *
-     * @param boolean $addedBySelf
+     * @param bool $addedBySelf
      * @return Collection mock Collection object
      */
     private function _getMockCollection($addedBySelf)
