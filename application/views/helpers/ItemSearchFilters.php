@@ -50,9 +50,11 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
                             break;
                         }
 
-                        $collection = $db->getTable('Collection')->find($value);
-                        if ($collection) {
-                            $displayValue = metadata($collection, 'display_title', array('no_escape' => true));
+                        $collections = $db->getTable('Collection')->findBy(array('id' => $value));
+                        if ($collections) {
+                            $displayValue = implode(', ', array_map(function($collection) {
+                                return metadata($collection, 'display_title', array('no_escape' => true));
+                            }, $collections));
                         }
                         break;
 
