@@ -38,9 +38,9 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
                 switch ($key) {
                     case 'type':
                         $filter = 'Item Type';
-                        $itemType = $db->getTable('ItemType')->find($value);
-                        if ($itemType) {
-                            $displayValue = $itemType->name;
+                        $itemTypes = $db->getTable('ItemType')->findBy(array('id' => $value));
+                        if ($itemTypes) {
+                            $displayValue = implode(', ', pluck('name', $itemTypes));
                         }
                         break;
 
