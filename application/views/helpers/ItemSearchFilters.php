@@ -38,24 +38,39 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
                 switch ($key) {
                     case 'type':
                         $filter = 'Item Type';
-                        $itemTypes = $db->getTable('ItemType')->findBy(array('id' => $value));
-                        if ($itemTypes) {
-                            $displayValue = implode(', ', pluck('name', $itemTypes));
+                        $value = (array) $value;
+                        $displayValues = array();
+                        $noIndex = array_search('0', $value, true);
+                        if ($noIndex !== false) {
+                            $displayValues[] = __('No Item Type');
+                            unset($value[$noIndex]);
                         }
+                        if (!empty($value)) {
+                            $itemTypes = $db->getTable('ItemType')->findBy(array('id' => $value));
+                            if ($itemTypes) {
+                                $displayValues[] = implode(', ', pluck('name', $itemTypes));
+                            }
+                        }
+                        $displayValue = implode(', ', $displayValues);
                         break;
 
                     case 'collection':
-                        if ($value === '0') {
-                            $displayValue = __('No Collection');
-                            break;
+                        $value = (array) $value;
+                        $displayValues = array();
+                        $noIndex = array_search('0', $value, true);
+                        if ($noIndex !== false) {
+                            $displayValues[] = __('No Collection');
+                            unset($value[$noIndex]);
                         }
-
-                        $collections = $db->getTable('Collection')->findBy(array('id' => $value));
-                        if ($collections) {
-                            $displayValue = implode(', ', array_map(function($collection) {
-                                return metadata($collection, 'display_title', array('no_escape' => true));
-                            }, $collections));
+                        if (!empty($value)) {
+                            $collections = $db->getTable('Collection')->findBy(array('id' => $value));
+                            if ($collections) {
+                                $displayValues[] = implode(', ', array_map(function($collection) {
+                                    return metadata($collection, 'display_title', array('no_escape' => true));
+                                }, $collections));
+                            }
                         }
+                        $displayValue = implode(', ', $displayValues);
                         break;
 
                     case 'user':
