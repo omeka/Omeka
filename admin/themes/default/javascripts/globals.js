@@ -162,7 +162,7 @@ if (!Omeka) {
             form.submit(setSubmittedFlag);
         });
 
-        $('body').on('submit', 'form.delete-confirm', function () {
+        $('body').on('submit', 'form.delete-confirm-form', function () {
             deleteConfirmed = true;
         });
 
