@@ -63,7 +63,7 @@ echo flash();
                 <li><?php echo link_to($user, 'edit', __('Edit'), array('class'=>'edit')); ?></li>
                 <?php endif; ?>
                 <?php if (is_allowed($user, 'delete')): ?>
-                <li><?php echo link_to($user, 'delete-confirm', __('Delete'), array('class'=>'delete')); ?></li>
+                <li><?php echo link_to($user, 'delete-confirm', __('Delete'), array('class'=>'delete-confirm')); ?></li>
                 <?php endif; ?>
             </ul>
             <?php fire_plugin_hook('admin_users_browse_each', array('user' => $user, 'view' => $this)); ?>
