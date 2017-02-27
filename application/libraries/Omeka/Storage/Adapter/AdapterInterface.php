@@ -21,7 +21,7 @@ interface Omeka_Storage_Adapter_AdapterInterface
      *
      * @param array $options
      */
-    public function __construct(array $options = null);
+    public function __construct(array $options = array());
 
     /**
      * Follow any necessary steps to set up storage prior to use.
