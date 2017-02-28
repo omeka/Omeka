@@ -11,6 +11,8 @@
  */
 class TagsController extends Omeka_Controller_AbstractActionController
 {
+    protected $_browseRecordsPerPage = 100;
+
     public function init()
     {
         $this->_helper->db->setDefaultModelName('Tag');
@@ -31,35 +33,34 @@ class TagsController extends Omeka_Controller_AbstractActionController
      */
     public function browseAction()
     {
-        $params = $this->_getAllParams();
-
         //Check to see whether it will be tags for exhibits or for items
-        //Default is Item
-        if (isset($params['tagType'])) {
-            $for = $params['tagType'];
-            unset($params['tagType']);
+        //Default is All
+        if ($type = $this->getParam('type')) {
+            $browse_for = $type;
+            //Since tag type must correspond to a valid classname, this will barf an error on Injection attempts
+            if (!class_exists($browse_for)) {
+                throw new InvalidArgumentException(__('Invalid tagType given.'));
+            }
+            // for specific record_type we want only tags with at least 1 relation
+            $this->setParam('include_zero', 0);
         } else {
-            $for = 'Item';
-        }
-        //Since tagType must correspond to a valid classname, this will barf an error on Injection attempts
-        if (!class_exists($for)) {
-            throw new InvalidArgumentException(__('Invalid tagType given.'));
-        }
-
-        if ($record = $this->_getParam('record')) {
-            $filter['record'] = $record;
+            $browse_for = 'All';
+            $this->setParam('type', null);
+            // by default include all tags, even without any records
+            $this->setParam('include_zero', 1);
         }
 
-        $findByParams = array_merge(array('sort_field' => 'name', 'include_zero' => true),
-                                    $params,
-                                    array('type' => $for));
+        /* OMEKA, WHAT IS THIS???? if ($record = $this->_getParam('record')) {
+            $filter['record'] = $record;
+        }*/
 
-        $total_tags = $this->_helper->db->count($findByParams);
-        $limit = isset($params['limit']) ? $params['limit'] : null;
-        $tags = $this->_helper->db->findBy($findByParams, $limit);
+        parent::browseAction();
 
-        $browse_for = $for;
-        $sort = array_intersect_key($findByParams, array('sort_field' => '', 'sort_dir' => ''));
+        // get all params after the parent::browseAction() added some defaults, like sorting
+        $params = $this->getAllParams();
+        unset($params['admin'], $params['module'], $params['controller'], $params['action']);
+
+        $sort = array_intersect_key($params, array('sort_field' => '', 'sort_dir' => ''));
 
         //dig up the record types for filtering
         $db = get_db();
@@ -74,7 +75,18 @@ class TagsController extends Omeka_Controller_AbstractActionController
         $csrf = new Omeka_Form_Element_SessionCsrfToken('csrf_token');
         $this->view->csrfToken = $csrf->getToken();
         $this->view->record_types = $record_types;
-        $this->view->assign(compact('tags', 'total_tags', 'browse_for', 'sort'));
+        $this->view->assign(compact('browse_for', 'sort', 'params'));
+    }
+
+    /**
+     * Return the default sorting parameters to use when none are specified.
+     *
+     * @return array|null Array of parameters, with the first element being the
+     *  sort_field parameter, and the second (optionally) the sort_dir.
+     */
+    protected function _getBrowseDefaultSort()
+    {
+        return array('name', 'a');
     }
 
     public function autocompleteAction()
