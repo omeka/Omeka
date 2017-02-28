@@ -6,8 +6,6 @@
  */
 
 /**
- * 
- *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
  */
@@ -20,7 +18,7 @@ class Omeka_Helpers_SetRevertThemeBaseUriTest extends Omeka_Test_AppTestCase
         $this->assertTrue(function_exists('revert_theme_base_url'));
         $this->assertTrue(function_exists('set_theme_base_url'));
     }
-    
+
     public function testSetAndRevertBaseUri()
     {
         $this->assertTrue(defined('PUBLIC_BASE_URL'));
@@ -31,10 +29,10 @@ class Omeka_Helpers_SetRevertThemeBaseUriTest extends Omeka_Test_AppTestCase
 
         $baseUrl = $this->frontController->getBaseUrl();
         $this->assertEquals($baseUrl, PUBLIC_BASE_URL);
-        
+
         set_theme_base_url('admin');
         $this->assertEquals($this->frontController->getBaseUrl(), ADMIN_BASE_URL);
-        
+
         revert_theme_base_url();
         $this->assertEquals($this->frontController->getBaseUrl(), PUBLIC_BASE_URL);
     }

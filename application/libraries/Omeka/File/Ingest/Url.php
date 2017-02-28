@@ -23,7 +23,7 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_AbstractSourceIngest
     {
         if (!($original = parent::_getOriginalFilename($fileInfo))) {
             $url = $fileInfo['source'];
-            
+
             //gets rid of the query string, if it exists
             if ($index = strpos($url, '?')) {
                 $url = substr($url, 0, $index);
@@ -55,7 +55,6 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_AbstractSourceIngest
      * @param string $source Source URL.
      * @param string $destination Destination file path.
      * @param array $fileInfo
-     * @return void
      */
     protected function _transfer($source, $destination, array $fileInfo)
     {
@@ -69,7 +68,7 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_AbstractSourceIngest
                 'Could not transfer the file from "' . $source
                 . '" to "' . $destination . '": ' . $e->getMessage());
         }
-    
+
         if ($response->isError()) {
             $code = $response->getStatus();
             $msg = "The server returned code '$code'";
@@ -84,7 +83,6 @@ class Omeka_File_Ingest_Url extends Omeka_File_Ingest_AbstractSourceIngest
      * @throws Omeka_File_Ingest_InvalidException
      * @param string $source Source URL.
      * @param array $info File info array (unused).
-     * @return void
      */
     protected function _validateSource($source, $info)
     {

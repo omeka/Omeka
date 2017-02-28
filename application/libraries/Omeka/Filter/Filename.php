@@ -25,24 +25,24 @@ class Omeka_Filter_Filename implements Zend_Filter_Interface
         $filename = basename($value);
         $directory = dirname($value);
         $newFilename = $this->renameFile($filename);
-        
+
         $targetPath = $directory . '/' . $newFilename;
         $result = rename($value, $targetPath);
-        
+
         return $targetPath;
     }
-    
+
     /**
      * Creates a new, random filename for storage in Omeka.
      * 
      * @param string $name
      * @return string
      */
-    public function renameFile($name) 
+    public function renameFile($name)
     {
         $extension = strrchr($name, '.');
-        $basename = md5(mt_rand() + microtime(true));        
-        // Assume that extensions that do not exclusively contain alphanumeric, 
+        $basename = md5(mt_rand() + microtime(true));
+        // Assume that extensions that do not exclusively contain alphanumeric,
         // hyphen, and underscore characters are invalid, and remove them.
         if (preg_match('/[^a-z0-9_\-]/i', substr($extension, 1))) {
             return $basename;

@@ -29,30 +29,26 @@ class Omeka_Helper_DisplayCssTest extends PHPUnit_Framework_TestCase
         Zend_Registry::_unsetInstance();
     }
 
-    private function _getCssOutput() {
+    private function _getCssOutput()
+    {
         ob_start();
         echo head_css();
         return ob_get_clean();
     }
 
-    private function _assertStyleLink($output, $path, $media = null) {
-        $matcher = array(
-            'tag' => 'link',
-            'attributes' => array(
-                'type' => 'text/css',
-                'href' => $path
-            )
-        );
-
+    private function _assertStyleLink($output, $path, $media = null)
+    {
+        $dom = new Zend_Dom_Query('<fake>' . $output . '</fake>');
+        $attribQuery = "@type='text/css' and @href='$path'";
         if ($media) {
-            $matcher['attributes']['media'] = $media;
+            $attribQuery .= " and @media='$media'";
         }
-
-        $this->assertTag($matcher, $output,
-            "Link tag for '$path' not found.");
+        $result = $dom->queryXpath("//link[$attribQuery]");
+        $this->assertCount(1, $result, "Link tag for '$path' not found.");
     }
 
-    private function _assertStylesheets($output, $cssPaths) {
+    private function _assertStylesheets($output, $cssPaths)
+    {
         foreach ($cssPaths as $path) {
             $this->_assertStyleLink($output, $path);
         }
@@ -61,7 +57,6 @@ class Omeka_Helper_DisplayCssTest extends PHPUnit_Framework_TestCase
     public function testWithNoStyles()
     {
         $this->assertEquals('', $this->_getCssOutput());
-
     }
 
     public function testQueueCssSingle()
@@ -111,8 +106,9 @@ class Omeka_Helper_DisplayCssTest extends PHPUnit_Framework_TestCase
 
         $output = $this->_getCssOutput();
 
-        $this->assertTag($matcher, $output,
-            "Style tag for inline stylesheet not found.");
+        $dom = new Zend_Dom_Query('<fake>' . $output . '</fake>');
+        $result = $dom->queryXpath("//style[@type='text/css' and @media='screen']");
+        $this->assertCount(1, $result, "Style tag for inline stylesheet not found.");
         $this->assertContains($style, $output);
     }
 }

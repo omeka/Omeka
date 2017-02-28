@@ -1,8 +1,8 @@
 <?php
-$collectionTitle = strip_formatting(metadata('collection', array('Dublin Core', 'Title')));
+$collectionTitle = metadata('collection', 'display_title');
 ?>
 
-<?php echo head(array('title'=> $collectionTitle, 'bodyclass' => 'collections show')); ?>
+<?php echo head(array('title' => $collectionTitle, 'bodyclass' => 'collections show')); ?>
 
 <h1><?php echo $collectionTitle; ?></h1>
 
@@ -12,21 +12,17 @@ $collectionTitle = strip_formatting(metadata('collection', array('Dublin Core', 
     <h2><?php echo link_to_items_browse(__('Items in the %s Collection', $collectionTitle), array('collection' => metadata('collection', 'id'))); ?></h2>
     <?php if (metadata('collection', 'total_items') > 0): ?>
         <?php foreach (loop('items') as $item): ?>
-        <?php $itemTitle = strip_formatting(metadata('item', array('Dublin Core', 'Title'))); ?>
+        <?php $itemTitle = metadata('item', 'display_title'); ?>
         <div class="item hentry">
-            <h3><?php echo link_to_item($itemTitle, array('class'=>'permalink')); ?></h3>
+            <h3><?php echo link_to_item($itemTitle, array('class' => 'permalink')); ?></h3>
 
             <?php if (metadata('item', 'has thumbnail')): ?>
             <div class="item-img">
-                <?php echo link_to_item(item_image('square_thumbnail', array('alt' => $itemTitle))); ?>
+                <?php echo link_to_item(item_image(null, array('alt' => $itemTitle))); ?>
             </div>
             <?php endif; ?>
 
-            <?php if ($text = metadata('item', array('Item Type Metadata', 'Text'), array('snippet'=>250))): ?>
-            <div class="item-description">
-                <p><?php echo $text; ?></p>
-            </div>
-            <?php elseif ($description = metadata('item', array('Dublin Core', 'Description'), array('snippet'=>250))): ?>
+            <?php if ($description = metadata('item', array('Dublin Core', 'Description'), array('snippet' => 250))): ?>
             <div class="item-description">
                 <?php echo $description; ?>
             </div>

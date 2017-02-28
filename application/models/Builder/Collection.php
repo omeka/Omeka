@@ -12,43 +12,43 @@
  * @package Omeka\Record\Builder
  */
 class Builder_Collection extends Omeka_Record_Builder_AbstractBuilder
-{    
+{
     const OWNER_ID = 'owner_id';
     const IS_PUBLIC = 'public';
     const IS_FEATURED = 'featured';
-    
+
     const OVERWRITE_ELEMENT_TEXTS = 'overwriteElementTexts';
-    
+
     protected $_recordClass = 'Collection';
     protected $_settableProperties = array(
-        self::OWNER_ID, 
-        self::IS_PUBLIC, 
+        self::OWNER_ID,
+        self::IS_PUBLIC,
         self::IS_FEATURED
-    );    
-    
+    );
+
     private $_elementTexts = array();
-    
+
     /**
      * Set the element texts for the collection.
      * 
      * @param array $elementTexts
-     */    
+     */
     public function setElementTexts(array $elementTexts)
     {
         $this->_elementTexts = $elementTexts;
     }
-    
+
     /**
      * Add element texts to a record.
-     */            
+     */
     private function _addElementTexts()
     {
         return $this->_record->addElementTextsByArray($this->_elementTexts);
     }
-    
+
     /**
      * Replace all the element texts for existing element texts.
-     */    
+     */
     private function _replaceElementTexts()
     {
         $collection = $this->_record;
@@ -67,7 +67,7 @@ class Builder_Collection extends Omeka_Record_Builder_AbstractBuilder
                         $etRecord->html = $textAttr['html'];
                         $etRecord->save();
                     } else {
-                        // Otherwise we should just append the new text to the 
+                        // Otherwise we should just append the new text to the
                         // pre-existing ones.
                         $elementRecord = $collection->getElement($elementSetName, $elementName);
                         $collection->addTextForElement($elementRecord, $textAttr['text'], $textAttr['html']);
@@ -76,7 +76,7 @@ class Builder_Collection extends Omeka_Record_Builder_AbstractBuilder
             }
         }
     }
-       
+
     /**
      * Add elements associated with the collection.
      *
@@ -85,7 +85,7 @@ class Builder_Collection extends Omeka_Record_Builder_AbstractBuilder
     protected function _beforeBuild(Omeka_Record_AbstractRecord $record)
     {
         $metadata = $this->getRecordMetadata();
-        
+
         if ($this->_record->exists() and array_key_exists(self::OVERWRITE_ELEMENT_TEXTS, $metadata)) {
             $this->_replaceElementTexts();
         } else {

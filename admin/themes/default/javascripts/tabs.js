@@ -36,7 +36,7 @@ Omeka.Tabs = {};
         var url = document.location.toString();
         if (url.match('#')) {
             var anchor = '#' + url.split('#')[1];
-            selectedTab = tabLinks.filter('[href=' + anchor + ']');
+            selectedTab = tabLinks.filter('[href="' + anchor + '"]');
         }
         if (!selectedTab || !selectedTab.length) {
             selectedTab = tabLinks.first();

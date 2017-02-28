@@ -13,55 +13,55 @@ class ItemTypesController extends Omeka_Controller_AbstractActionController
 {
     public function init()
     {
-        $this->_helper->db->setDefaultModelName('ItemType');     
+        $this->_helper->db->setDefaultModelName('ItemType');
     }
 
     public function addAction()
     {
         $itemType = new ItemType;
         $form = $this->_getForm($itemType);
-        
+
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($_POST)) {
-                try{
-                    $itemType = $form->saveFromPost();                    
+                try {
+                    $itemType = $form->saveFromPost();
                     $this->_helper->flashMessenger(__('The item type "%s" was successfully added.', $itemType->name), 'success');
-                    $this->_helper->redirector('show', null, null, array('id'=>$itemType->id));
+                    $this->_helper->redirector('show', null, null, array('id' => $itemType->id));
                 } catch (Omeka_Validate_Exception $e) {
                     $itemType->delete();
                     $this->_helper->flashMessenger($e);
-                }                
+                }
             } else {
                 $this->_helper->flashMessenger(__('There were errors found in your form. Please edit and resubmit.'), 'error');
             }
         }
-        
+
         // specify view variables
         $this->view->form = $form;
         $this->view->item_type = $itemType;
     }
-    
+
     public function editAction()
-    {        
+    {
         // get the item type
         $itemType = $this->_helper->db->findById();
-        
+
         // edit the item type
         $form = $this->_getForm($itemType);
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($_POST)) {
-                try{                    
-                    $form->saveFromPost();                    
+                try {
+                    $form->saveFromPost();
                     $this->_helper->flashMessenger(__('The item type "%s" was successfully updated.', $itemType->name), 'success');
-                    $this->_helper->redirector('show', null, null, array('id'=>$itemType->id));
+                    $this->_helper->redirector('show', null, null, array('id' => $itemType->id));
                 } catch (Omeka_Validate_Exception $e) {
                     $this->_helper->flashMessenger($e);
-                }                
+                }
             } else {
                 $this->_helper->flashMessenger(__('There were errors found in your form. Please edit and resubmit.'), 'error');
             }
         }
-        
+
         // specify view variables
         $this->view->form = $form;
         $this->view->item_type = $itemType;
@@ -99,7 +99,7 @@ class ItemTypesController extends Omeka_Controller_AbstractActionController
     {
         if ($this->_getParam('from_post') == 'true') {
             $elementTempId = $this->_getParam('elementTempId');
-            $elementId = $this->_getParam('elementId');            
+            $elementId = $this->_getParam('elementId');
             $element = $this->_helper->db->getTable('Element')->find($elementId);
             if ($element) {
                 $elementDescription = $element->description;
@@ -157,9 +157,9 @@ class ItemTypesController extends Omeka_Controller_AbstractActionController
     {
         return __('The item type "%s" was successfully added!  You may now add elements to your new item type.', $itemType->name);
     }
-    
+
     private function _getForm($itemType)
-    {        
+    {
         require_once APP_DIR . '/forms/ItemTypes.php';
         $form = new Omeka_Form_ItemTypes;
         $form->setItemType($itemType);

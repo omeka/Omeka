@@ -50,7 +50,7 @@ echo flash();
             }
             ?>
             <ul class="quick-filter-wrapper">
-                <li><a href="#" tabindex="0"><?php echo __('Record Types'); ?></a>
+                <li><a href="#"><?php echo __('Record Types'); ?></a>
                 <ul class="dropdown">
                     <li><span class="quick-filter-heading"><?php echo __('Record Types') ?></span></li>
                     <?php foreach($record_types as $record_type): ?>

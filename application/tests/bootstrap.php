@@ -15,7 +15,7 @@ ini_set('memory_limit', '256M');
 $_SERVER['HTTP_HOST'] = 'www.example.com';
 $_SERVER['SERVER_PORT'] = '80';
 $_SERVER['SCRIPT_NAME'] = '';
-require_once (dirname(dirname(dirname(__FILE__))) . '/bootstrap.php');
+require_once dirname(dirname(dirname(__FILE__))) . '/bootstrap.php';
 require_once 'globals.php';
 
 error_reporting(E_ALL);
@@ -27,7 +27,3 @@ define('TEST_DIR', dirname(__FILE__));
 // Append the testing class library.
 define('TEST_LIB_DIR', TEST_DIR . '/libraries');
 set_include_path(get_include_path() . PATH_SEPARATOR . TEST_LIB_DIR);
-
-// Make sure the autoloader is initialized.
-$autoloader = new Omeka_Application_Resource_Autoloader;
-$autoloader->init();

@@ -11,40 +11,40 @@
  * @package Omeka
  */
 class Omeka_Helpers_GetRecordsTagTest extends Omeka_Test_AppTestCase
-{   
+{
     private $_defaultTagLimit;
     private $_itemToTag;
-    
+
     public function setUp()
     {
         parent::setUp();
         $this->_defaultTagLimit = 10;
-        
+
         $this->_itemToTag = new Item;
-        $this->_itemToTag->setArray(array('title'=>'Thing'));
+        $this->_itemToTag->setArray(array('title' => 'Thing'));
         $this->_itemToTag->save();
     }
-    
+
     // adds tags to an item from the user
-    private function _addTags($tagStrings, $item=null)
+    private function _addTags($tagStrings, $item = null)
     {
-        if(!$item) {
+        if (!$item) {
             $item = $this->_itemToTag;
         }
-                
+
         $item->addTags($tagStrings);
         $item->save();
     }
-    
+
     public function testGetTagsByDefaultAndWithNoTags()
-    {        
+    {
         $this->assertEquals(0, count(get_records('Tag')));
     }
 
     public function testGetTagsByDefaultAndWithLessThanLimitOfTags()
     {
         $this->_addTags(array('Duck', 'Chicken', 'Goose'));
-        
+
         $tags = get_records('Tag');
         $this->assertEquals(3, count($tags));
         $this->assertEquals('Duck', $tags[0]->name);
@@ -54,32 +54,32 @@ class Omeka_Helpers_GetRecordsTagTest extends Omeka_Test_AppTestCase
 
     public function testGetTagsByDefaultAndWithMoreThanLimitOfTags()
     {
-        $tags = array();        
-        for($i = 0; $i < $this->_defaultTagLimit + 10; $i++) {
-            $tags[] = (string)$i;
+        $tags = array();
+        for ($i = 0; $i < $this->_defaultTagLimit + 10; $i++) {
+            $tags[] = (string) $i;
         }
-                    
+
         $this->_addTags($tags);
 
         $tags = get_records('Tag');
         $this->assertEquals($this->_defaultTagLimit, count($tags));
-        for($i = 0; $i < $this->_defaultTagLimit; $i++) {
-            $this->assertEquals((string)$i, $tags[$i]->name);            
+        for ($i = 0; $i < $this->_defaultTagLimit; $i++) {
+            $this->assertEquals((string) $i, $tags[$i]->name);
         }
     }
 
     public function testGetTagsWithNoLimitAndWithMoreThanDefaultLimitOfTags()
     {
-        $tags = array();        
-        for($i = 0; $i < $this->_defaultTagLimit + 10; $i++) {
-            $tags[] = (string)$i;
-        }        
-        $this->_addTags($tags);     
+        $tags = array();
+        for ($i = 0; $i < $this->_defaultTagLimit + 10; $i++) {
+            $tags[] = (string) $i;
+        }
+        $this->_addTags($tags);
 
         $tags = get_records('Tag', array(), 0);
         $this->assertEquals($this->_defaultTagLimit + 10, count($tags));
-        for($i = 0; $i < $this->_defaultTagLimit; $i++) {
-            $this->assertEquals((string)$i, $tags[$i]->name);            
+        for ($i = 0; $i < $this->_defaultTagLimit; $i++) {
+            $this->assertEquals((string) $i, $tags[$i]->name);
         }
     }
 
@@ -123,7 +123,7 @@ class Omeka_Helpers_GetRecordsTagTest extends Omeka_Test_AppTestCase
         $nonPublicTags = get_records('Tag', array('public' => false, 'type' => 'Item'));
         $this->assertEquals(0, count($publicTags));
 
-        /**
+        /*
          * Get tags for type=Item and public=false, with an authenticated user.
          * Should return 3 tags, since our item is not public and we are logged
          * in.

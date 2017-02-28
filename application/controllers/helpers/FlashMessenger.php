@@ -12,7 +12,7 @@
  * @package Omeka\Controller\ActionHelper
  */
 class Omeka_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Action_Helper_Abstract
-{    
+{
     const MESSAGE_KEY = 'message';
     const STATUS_KEY = 'status';
 
@@ -29,27 +29,26 @@ class Omeka_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Acti
      * @param  string|null $status The message status
      * @return Mu_Controller_Action_Helper_FlashMessenger Provides a fluent interface
      */
-    public function addMessage($message, $status = null) 
+    public function addMessage($message, $status = null)
     {
         if ($message instanceof Omeka_Validate_Exception) {
             $message = $message->getErrors();
             if ($status === null) {
                 $status = 'error';
             }
-        } else if ($message instanceof Omeka_Validate_Errors) {
+        } elseif ($message instanceof Omeka_Validate_Errors) {
             $message = (string) $message;
             if ($status === null) {
                 $status = 'error';
             }
-        } else if ($status === null) {
+        } elseif ($status === null) {
             $status = 'alert';
         }
-        
+
         return $this->_messenger->addMessage(array(self::MESSAGE_KEY => $message,
             self::STATUS_KEY => $status));
     }
-    
-    
+
     /**
      * getMessages() - Get messages
      *
@@ -72,7 +71,7 @@ class Omeka_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Acti
     /**
      * Clear all messages from the previous request & specified status
      *
-     * @return boolean True if messages were cleared, false if none existed
+     * @return bool True if messages were cleared, false if none existed
      */
     public function clearMessages()
     {
@@ -82,7 +81,7 @@ class Omeka_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Acti
     /**
      * Clear all current messages with specified status
      *
-     * @return boolean True if messages were cleared, false if none existed
+     * @return bool True if messages were cleared, false if none existed
      */
     public function clearCurrentMessages()
     {
@@ -96,7 +95,7 @@ class Omeka_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Acti
     {
         return $this->_messenger->hasMessages();
     }
-    
+
     public function hasCurrentMessages()
     {
         return $this->_messenger->hasCurrentMessages();
@@ -106,12 +105,11 @@ class Omeka_Controller_Action_Helper_FlashMessenger extends Zend_Controller_Acti
     {
         return $this->_filterMessages($this->_messenger->getCurrentMessages());
     }
-    
+
     /**
      * Strategy pattern: proxy to addMessage()
      *
      * @param  string $message
-     * @return void
      */
     public function direct($message, $status = null)
     {

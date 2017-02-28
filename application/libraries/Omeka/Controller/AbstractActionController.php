@@ -15,12 +15,17 @@
  */
 abstract class Omeka_Controller_AbstractActionController extends Zend_Controller_Action
 {
+    const RECORDS_PER_PAGE_SETTING = 'records_per_page_setting';
+
     /**
      * The number of records to browse per page.
      * 
      * If this is left null, then results will not paginate. This is partially 
      * because not every controller will want to paginate records and also to 
      * avoid BC breaks for plugins.
+     *
+     * Setting this to self::RECORDS_PER_PAGE_SETTING will cause the
+     * admin-configured page limits to be used (which is often what you want).
      *
      * @var string
      */
@@ -36,7 +41,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
      *
      * Note: default deletion always uses a token, regardless of this setting.
      *
-     * @var boolean
+     * @var bool
      */
     protected $_autoCsrfProtection = false;
 
@@ -66,7 +71,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
         parent::__construct($request, $response, $invokeArgs);
         $this->_setActionContexts();
     }
-    
+
     /**
      * Forward to the 'browse' action
      *
@@ -76,7 +81,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
     {
         $this->_forward('browse');
     }
-    
+
     /**
      * Retrieve and render a set of records for the controller's model.
      *
@@ -96,30 +101,45 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
     {
         // Respect only GET parameters when browsing.
         $this->getRequest()->setParamSources(array('_GET'));
-        
+
         // Inflect the record type from the model name.
         $pluralName = $this->view->pluralize($this->_helper->db->getDefaultModelName());
-        
+
+        // Apply controller-provided default sort parameters
+        if (!$this->_getParam('sort_field')) {
+            $defaultSort = apply_filters("{$pluralName}_browse_default_sort",
+                $this->_getBrowseDefaultSort(),
+                array('params' => $this->getAllParams())
+            );
+            if (is_array($defaultSort) && isset($defaultSort[0])) {
+                $this->setParam('sort_field', $defaultSort[0]);
+
+                if (isset($defaultSort[1])) {
+                    $this->setParam('sort_dir', $defaultSort[1]);
+                }
+            }
+        }
+
         $params = $this->getAllParams();
-        $recordsPerPage = $this->_getBrowseRecordsPerPage();
+        $recordsPerPage = $this->_getBrowseRecordsPerPage($pluralName);
         $currentPage = $this->getParam('page', 1);
-        
+
         // Get the records filtered to Omeka_Db_Table::applySearchFilters().
         $records = $this->_helper->db->findBy($params, $recordsPerPage, $currentPage);
         $totalRecords = $this->_helper->db->count($params);
-        
+
         // Add pagination data to the registry. Used by pagination_links().
         if ($recordsPerPage) {
             Zend_Registry::set('pagination', array(
-                'page' => $currentPage, 
-                'per_page' => $recordsPerPage, 
-                'total_results' => $totalRecords, 
+                'page' => $currentPage,
+                'per_page' => $recordsPerPage,
+                'total_results' => $totalRecords,
             ));
         }
-        
+
         $this->view->assign(array($pluralName => $records, 'total_results' => $totalRecords));
     }
-    
+
     /**
      * Retrieve a single record and render it.
      * 
@@ -134,7 +154,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
         $record = $this->_helper->db->findById();
         $this->view->assign(array($singularName => $record));
     }
-    
+
     /**
      * Add an instance of a record to the database.
      *
@@ -156,7 +176,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
             $csrf = new Omeka_Form_SessionCsrf;
             $this->view->csrf = $csrf;
         }
-        
+
         $record = new $class();
         if ($this->getRequest()->isPost()) {
             if ($this->_autoCsrfProtection && !$csrf->isValid($_POST)) {
@@ -177,7 +197,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
         }
         $this->view->$varName = $record;
     }
-    
+
     /**
      * Similar to 'add' action, except this requires a pre-existing record.
      *
@@ -191,14 +211,14 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
     public function editAction()
     {
         $varName = $this->view->singularize($this->_helper->db->getDefaultModelName());
-        
+
         $record = $this->_helper->db->findById();
 
         if ($this->_autoCsrfProtection) {
             $csrf = new Omeka_Form_SessionCsrf;
             $this->view->csrf = $csrf;
         }
-        
+
         if ($this->getRequest()->isPost()) {
             if ($this->_autoCsrfProtection && !$csrf->isValid($_POST)) {
                 $this->_helper->_flashMessenger(__('There was an error on the form. Please try again.'), 'error');
@@ -216,10 +236,10 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
                 $this->_helper->flashMessenger($record->getErrors());
             }
         }
-        
+
         $this->view->$varName = $record;
     }
-    
+
     /**
      * Ask for user confirmation before deleting a record.
      * 
@@ -233,10 +253,10 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
         $form = $this->_getDeleteForm();
         $confirmMessage = $this->_getDeleteConfirmMessage($record);
 
-        $this->view->assign(compact('confirmMessage','record', 'isPartial', 'form'));
+        $this->view->assign(compact('confirmMessage', 'record', 'isPartial', 'form'));
         $this->render('common/delete-confirm', null, true);
     }
-    
+
     /**
      * Delete a record from the database.
      *
@@ -252,25 +272,25 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
             $this->_forward('method-not-allowed', 'error', 'default');
             return;
         }
-        
+
         $record = $this->_helper->db->findById();
-        
+
         // get the success message before deleting it, so controllers can find related info, like its name
         $successMessage = $this->_getDeleteSuccessMessage($record);
-                
+
         $form = $this->_getDeleteForm();
         if ($form->isValid($_POST)) {
             $record->delete();
         } else {
             throw new Omeka_Controller_Exception_404;
         }
-                
+
         if ($successMessage != '') {
             $this->_helper->flashMessenger($successMessage, 'success');
         }
         $this->_redirectAfterDelete($record);
     }
-    
+
     /**
      * Return the record for the current user.
      *
@@ -280,18 +300,65 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
     {
         return $this->getInvokeArg('bootstrap')->getResource('Currentuser');
     }
-    
+
     /**
      * Return the number of records to display per page.
      *
-     * By default this will return null, disabling pagination. This can be 
-     * overridden in subclasses by redefining this method.
+     * By default this will read from the _browseRecordsPerPage property, which
+     * in turn defaults to null, disabling pagination. This can be 
+     * overridden in subclasses by redefining the property or this method.
      *
-     * @return integer|null
+     * Setting the property to self::RECORDS_PER_PAGE_SETTING will enable
+     * pagination using the admin-configued page limits.
+     *
+     * @param string|null $pluralName
+     * @return int|null
      */
-    protected function _getBrowseRecordsPerPage()
+    protected function _getBrowseRecordsPerPage($pluralName = null)
     {
-        return $this->_browseRecordsPerPage;
+        $perPage = $this->_browseRecordsPerPage;
+
+        // Use the user-configured page
+        if ($perPage === self::RECORDS_PER_PAGE_SETTING) {
+            $options = $this->getFrontController()->getParam('bootstrap')
+                ->getResource('Options');
+
+            if (is_admin_theme()) {
+                $perPage = (int) $options['per_page_admin'];
+            } else {
+                $perPage = (int) $options['per_page_public'];
+            }
+        }
+
+        // If users are allowed to modify the # of items displayed per page,
+        // then they can pass the 'per_page' query parameter to change that.
+        if ($this->_helper->acl->isAllowed('modifyPerPage')
+            && ($queryPerPage = $this->getRequest()->get('per_page'))
+        ) {
+            $perPage = (int) $queryPerPage;
+        }
+
+        // Any integer zero or below disables pagination.
+        if ($perPage < 1) {
+            $perPage = null;
+        }
+
+        if ($pluralName) {
+            $perPage = apply_filters("{$pluralName}_browse_per_page", $perPage,
+                array('controller' => $this));
+        }
+        return $perPage;
+    }
+
+    /**
+     * Return the default sorting parameters to use when none are specified.
+     *
+     * @return array|null Array of parameters, with the first element being the
+     *  sort_field parameter, and the second (optionally) the sort_dir.
+     */
+    protected function _getBrowseDefaultSort()
+    {
+        return null;
     }
 
     /**
@@ -306,7 +373,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
     {
         return '';
     }
-    
+
     /**
      * Return the success message for editing a record.
      * 
@@ -319,7 +386,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
     {
         return '';
     }
-    
+
     /**
      * Return the success message for deleting a record.
      * 
@@ -332,7 +399,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
     {
         return '';
     }
-    
+
     /**
      * Return the delete confirm message for deleting a record.
      *
@@ -343,7 +410,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
     {
         return '';
     }
-    
+
     /**
      * Redirect to another page after a record is successfully added.
      *
@@ -365,7 +432,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
      */
     protected function _redirectAfterEdit($record)
     {
-        $this->_helper->redirector('show', null, null, array('id'=>$record->id));
+        $this->_helper->redirector('show', null, null, array('id' => $record->id));
     }
 
     /**
@@ -390,19 +457,19 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
     {
         $contextSwitcher = $this->_helper->getHelper('contextSwitch');
         $contextArray = !empty($this->contexts) ? $this->contexts : array();
-        
+
         // Plugins can hook in to add contexts to actions
         if ($broker = $this->getInvokeArg('bootstrap')->getResource('Pluginbroker')) {
             // The 'action_contexts' filter receives the controller
             // object as the 2st argument and the context switcher object as the
             // 3nd (in case custom modification is required).
             $contextArray = $broker->applyFilters(
-                'action_contexts', 
+                'action_contexts',
                 $contextArray,
                 array('controller' => $this, 'context_switcher' => $contextSwitcher)
             );
         }
-        
+
         // Replace the existing contexts with the filtered plugin list.
         $contextSwitcher->setActionContexts($contextArray);
         $contextSwitcher->initContext();
@@ -423,6 +490,7 @@ abstract class Omeka_Controller_AbstractActionController extends Zend_Controller
         $form->addElement('hash', 'confirm_delete_hash');
         $form->addElement('submit', 'Delete', array('class' => 'delete red button'));
         $form->setAction($this->view->url(array('action' => 'delete')));
+        $form->setAttrib('class', 'delete-confirm-form');
         return $form;
     }
 }

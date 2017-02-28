@@ -31,11 +31,12 @@ class Omeka_Controller_Action_Helper_ThemeConfiguration extends Zend_Controller_
      * @return array|bool Array of options if the form was validly
      *  submitted, false otherwise.
      */
-    public function processForm(Zend_Form $form, $data, $originalOptions = array()) { 
+    public function processForm(Zend_Form $form, $data, $originalOptions = array())
+    {
         $this->_form = $form;
-        
+
         $elements = $this->_form->getElements();
-        foreach($elements as $element) {
+        foreach ($elements as $element) {
             if ($element instanceof Zend_Form_Element_File) {
                 $this->_configFileElement($element);
             }
@@ -49,13 +50,13 @@ class Omeka_Controller_Action_Helper_ThemeConfiguration extends Zend_Controller_
             unset($this->_formValues['theme_config_csrf']);
 
             $this->_themeOptions = $originalOptions;
-            
-            foreach($elements as $element) {
+
+            foreach ($elements as $element) {
                 if ($element instanceof Zend_Form_Element_File) {
                     $this->_processFileElement($element);
                 }
             }
-            
+
             return $this->_formValues;
         }
         return false;
@@ -70,8 +71,8 @@ class Omeka_Controller_Action_Helper_ThemeConfiguration extends Zend_Controller_
     private function _configFileElement(Zend_Form_Element_File $element)
     {
         $elementName = $element->getName();
-        
-        // If file input's related  hidden input has a non-empty value, 
+
+        // If file input's related  hidden input has a non-empty value,
         // then the user has NOT changed the file, so do NOT upload the file.
         if (($hiddenElement = $this->_form->getElement(Omeka_Form_ThemeConfiguration::THEME_FILE_HIDDEN_FIELD_NAME_PREFIX . $elementName))) {
             $hiddenName = $hiddenElement->getName();
@@ -91,7 +92,7 @@ class Omeka_Controller_Action_Helper_ThemeConfiguration extends Zend_Controller_
     private function _processFileElement(Zend_Form_Element_File $element)
     {
         $elementName = $element->getName();
-                
+
         // set the theme option for the uploaded file to the file name
         if ($element->getIgnore()) {
             // set the form value to the old theme option
@@ -102,7 +103,7 @@ class Omeka_Controller_Action_Helper_ThemeConfiguration extends Zend_Controller_
                 // Make sure null-like values are actually null when saved.
                 $newFile = null;
             } else {
-                $storage = Zend_Registry::get('storage');             
+                $storage = Zend_Registry::get('storage');
                 $newFile = basename($path);
                 $storagePath = $storage->getPathByType($newFile, self::THEME_UPLOAD_TYPE);
                 $storage->store($path, $storagePath);

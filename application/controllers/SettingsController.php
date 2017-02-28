@@ -10,28 +10,36 @@
  * @package Omeka\Controller
  */
 class SettingsController extends Omeka_Controller_AbstractActionController
-{    
+{
     const DEFAULT_TAG_DELIMITER = ',';
-        
-    public function indexAction() 
+
+    public function indexAction()
     {
         $this->_helper->redirector('edit-settings');
     }
-    
-    public function browseAction() 
+
+    public function browseAction()
     {
         $this->_helper->redirector('edit-settings');
     }
-    
-    public function editSettingsAction() 
+
+    public function editSettingsAction()
     {
-        require_once APP_DIR . '/forms/GeneralSettings.php';
         $form = new Omeka_Form_GeneralSettings;
-        $form->setDefaults($this->getInvokeArg('bootstrap')->getResource('Options'));
+        $bootstrap = $this->getInvokeArg('bootstrap');
+        $derivatives = $bootstrap->getResource('Filederivatives');
+
+        if (isset($derivatives)
+            && !($derivatives->getStrategy() instanceof Omeka_File_Derivative_Strategy_ExternalImageMagick)
+        ) {
+            $form->removeElement('path_to_convert');
+        }
+
+        $form->setDefaults($bootstrap->getResource('Options'));
         fire_plugin_hook('general_settings_form', array('form' => $form));
         $form->removeDecorator('Form');
         $this->view->form = $form;
-        
+
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($_POST)) {
                 $options = $form->getValues();
@@ -48,16 +56,16 @@ class SettingsController extends Omeka_Controller_AbstractActionController
             }
         }
     }
-    
+
     public function editSecurityAction()
     {
         $form = new Omeka_Form_SecuritySettings;
         $form->removeDecorator('Form');
         $this->view->form = $form;
-        
+
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($_POST)) {
-                // Any changes to this list should be reflected in the install 
+                // Any changes to this list should be reflected in the install
                 // script (and possibly the view functions).
                 $options = array(
                     Omeka_Validate_File_Extension::WHITELIST_OPTION,
@@ -81,7 +89,7 @@ class SettingsController extends Omeka_Controller_AbstractActionController
             }
         }
     }
-    
+
     public function editSearchAction()
     {
         // Customize search record types.
@@ -105,7 +113,7 @@ class SettingsController extends Omeka_Controller_AbstractActionController
                 set_option('search_record_types', $option);
                 $this->_helper->flashMessenger(__('You have changed which records are searchable in Omeka. Please re-index the records using the form below.'), 'success');
             }
-            
+
             // Index the records.
             if (isset($_POST['submit_index_records'])) {
                 Zend_Registry::get('bootstrap')->getResource('jobs')
@@ -115,7 +123,7 @@ class SettingsController extends Omeka_Controller_AbstractActionController
             $this->_helper->redirector('edit-search');
         }
     }
-    
+
     public function editItemTypeElementsAction()
     {
         $elementSet = $this->_helper->db->getTable('ElementSet')->findByName(ElementSet::ITEM_TYPE_NAME);
@@ -152,7 +160,7 @@ class SettingsController extends Omeka_Controller_AbstractActionController
             }
         }
     }
-    
+
     public function editApiAction()
     {
         $keyTable = $this->_helper->db->getTable('Key');
@@ -162,7 +170,7 @@ class SettingsController extends Omeka_Controller_AbstractActionController
         $this->view->api_resources = Omeka_Controller_Plugin_Api::getApiResources();
         $this->view->keys = $keyTable->findAll();
         $this->view->csrf = $csrf;
-        
+
         // Handle a form submission
         if ($this->getRequest()->isPost()) {
             if (!$csrf->isValid($_POST)) {
@@ -175,7 +183,7 @@ class SettingsController extends Omeka_Controller_AbstractActionController
             $this->_helper->flashMessenger(__('The API configuration was successfully changed!'), 'success');
         }
     }
-    
+
     /**
      * Determine whether or not ImageMagick has been correctly installed and
      * configured.  
@@ -186,7 +194,7 @@ class SettingsController extends Omeka_Controller_AbstractActionController
      * non-zero status code for some reason.  Keep in mind that a 0 status code 
      * always indicates success.
      *
-     * @return boolean True if the command line return status is 0 when
+     * @return bool True if the command line return status is 0 when
      * attempting to run ImageMagick's convert utility, false otherwise.
      */
     public function checkImagemagickAction()
@@ -195,10 +203,10 @@ class SettingsController extends Omeka_Controller_AbstractActionController
         $imPath = $this->_getParam('path-to-convert');
         $isValid = Omeka_File_Derivative_Strategy_ExternalImageMagick::isValidImageMagickPath($imPath);
         $this->getResponse()->setBody(
-            $isValid ? '<div class="success">' . __('The ImageMagick directory path works.') . '</div>' 
+            $isValid ? '<div class="success">' . __('The ImageMagick directory path works.') . '</div>'
                      : '<div class="error">' . __('The ImageMagick directory path does not work.') . '</div>');
     }
-    
+
     public function getFileExtensionWhitelistAction()
     {
         $this->_helper->viewRenderer->setNoRender(true);
@@ -209,7 +217,7 @@ class SettingsController extends Omeka_Controller_AbstractActionController
         }
         $this->getResponse()->setBody($body);
     }
-    
+
     public function getFileMimeTypeWhitelistAction()
     {
         $this->_helper->viewRenderer->setNoRender(true);
@@ -220,7 +228,7 @@ class SettingsController extends Omeka_Controller_AbstractActionController
         }
         $this->getResponse()->setBody($body);
     }
-    
+
     public function getHtmlPurifierAllowedHtmlElementsAction()
     {
         $this->_helper->viewRenderer->setNoRender(true);
@@ -231,7 +239,7 @@ class SettingsController extends Omeka_Controller_AbstractActionController
         }
         $this->getResponse()->setBody($body);
     }
-    
+
     public function getHtmlPurifierAllowedHtmlAttributesAction()
     {
         $this->_helper->viewRenderer->setNoRender(true);

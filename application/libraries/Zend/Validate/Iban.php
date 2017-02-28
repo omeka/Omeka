@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -29,7 +29,7 @@ require_once 'Zend/Validate/Abstract.php';
  *
  * @category   Zend
  * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_Iban extends Zend_Validate_Abstract
@@ -107,7 +107,7 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
         'MC' => '/^MC[0-9]{2}[0-9]{5}[0-9]{5}[A-Z0-9]{11}[0-9]{2}$/',
         'MD' => '/^MD[0-9]{2}[A-Z0-9]{20}$/',
         'ME' => '/^ME[0-9]{2}[0-9]{3}[0-9]{13}[0-9]{2}$/',
-        'MK' => '/^MK[0-9]{2}[A-Z]{3}[A-Z0-9]{10}[0-9]{2}$/',
+        'MK' => '/^MK[0-9]{2}[0-9]{3}[A-Z0-9]{10}[0-9]{2}$/',
         'MR' => '/^MR13[0-9]{5}[0-9]{5}[0-9]{11}[0-9]{2}$/',
         'MU' => '/^MU[0-9]{2}[A-Z]{4}[0-9]{2}[0-9]{2}[0-9]{12}[0-9]{3}[A-Z]{2}$/',
         'MT' => '/^MT[0-9]{2}[A-Z]{4}[0-9]{5}[A-Z0-9]{18}$/',
@@ -132,8 +132,7 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
     /**
      * Sets validator options
      *
-     * @param  string|Zend_Config|Zend_Locale $locale OPTIONAL
-     * @return void
+     * @param string|Zend_Config|Zend_Locale $locale OPTIONAL
      */
     public function __construct($locale = null)
     {
@@ -175,6 +174,8 @@ class Zend_Validate_Iban extends Zend_Validate_Abstract
      * Sets the locale option
      *
      * @param  string|Zend_Locale $locale
+     * @throws Zend_Locale_Exception
+     * @throws Zend_Validate_Exception
      * @return Zend_Validate_Date provides a fluent interface
      */
     public function setLocale($locale = null)

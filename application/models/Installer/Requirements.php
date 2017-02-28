@@ -11,18 +11,19 @@
  */
 class Installer_Requirements
 {
-    const OMEKA_PHP_VERSION = '5.2.11';
+    const OMEKA_PHP_VERSION = '5.3.2';
     const OMEKA_MYSQL_VERSION = '5.0';
-    
+
     private $_dbAdapter;
     private $_storage;
-    
+
     private $_errorMessages = array();
     private $_warningMessages = array();
-    
+
     public function check()
     {
         $this->_checkPhpVersionIsValid();
+        $this->_checkPhpExtensionsAreAvailable();
         $this->_checkMysqliIsAvailable();
         $this->_checkMysqlVersionIsValid();
         $this->_checkHtaccessFilesExist();
@@ -31,27 +32,27 @@ class Installer_Requirements
         $this->_checkFileStorageSetup();
         $this->_checkFileinfoIsLoaded();
     }
-    
+
     public function getErrorMessages()
     {
         return $this->_errorMessages;
     }
-    
+
     public function getWarningMessages()
     {
         return $this->_warningMessages;
     }
-    
+
     public function hasError()
     {
-        return (boolean)count($this->getErrorMessages());
+        return (boolean) count($this->getErrorMessages());
     }
 
     public function hasWarning()
     {
-        return (boolean)count($this->getWarningMessages());
+        return (boolean) count($this->getWarningMessages());
     }
-    
+
     public function setDbAdapter(Zend_Db_Adapter_Abstract $db)
     {
         $this->_dbAdapter = $db;
@@ -61,7 +62,7 @@ class Installer_Requirements
     {
         $this->_storage = $storage;
     }
-    
+
     private function _checkPhpVersionIsValid()
     {
         if (version_compare(PHP_VERSION, self::OMEKA_PHP_VERSION, '<')) {
@@ -73,7 +74,23 @@ class Installer_Requirements
             $this->_errorMessages[] = compact('header', 'message');
         }
     }
-    
+
+    private function _checkPhpExtensionsAreAvailable()
+    {
+        $requiredExtensions = array('dom', 'filter');
+        foreach ($requiredExtensions as $extension) {
+            if (!extension_loaded($extension)) {
+                $header = "$extension extension is not available";
+                $message = <<<ERR
+The $extension PHP extension is required for Omeka to run.
+Please check with your server administrator to enable this extension and then
+try again.
+ERR;
+                $this->_errorMessages[] = compact('header', 'message');
+            }
+        }
+    }
+
     private function _checkMysqliIsAvailable()
     {
         if (!function_exists('mysqli_get_server_info')) {
@@ -84,7 +101,7 @@ class Installer_Requirements
             $this->_errorMessages[] = compact('header', 'message');
         }
     }
-    
+
     private function _checkMysqlVersionIsValid()
     {
         $mysqlVersion = $this->_dbAdapter->getServerVersion();
@@ -97,7 +114,7 @@ class Installer_Requirements
             $this->_errorMessages[] = compact('header', 'message');
         }
     }
-    
+
     private function _checkHtaccessFilesExist()
     {
         if (!file_exists(BASE_DIR . '/.htaccess')) {
@@ -107,7 +124,7 @@ class Installer_Requirements
             $this->_errorMessages[] = compact('header', 'message');
         }
     }
-    
+
     private function _checkRegisterGlobalsIsOff()
     {
         if (ini_get('register_globals')) {
@@ -122,7 +139,7 @@ class Installer_Requirements
             $this->_warningMessages[] = compact('header', 'message');
         }
     }
-    
+
     private function _checkExifModuleIsLoaded()
     {
         if (!extension_loaded('exif')) {
@@ -133,7 +150,7 @@ class Installer_Requirements
             $this->_warningMessages[] = compact('header', 'message');
         }
     }
-    
+
     private function _checkFileStorageSetup()
     {
         if (!$this->_storage->canStore()) {
@@ -150,7 +167,7 @@ class Installer_Requirements
             }
         }
     }
-    
+
     private function _checkFileinfoIsLoaded()
     {
         if (!extension_loaded('fileinfo')) {

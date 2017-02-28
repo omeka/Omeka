@@ -40,4 +40,9 @@ class RecordsTags extends Omeka_Record_AbstractRecord
      * @var string
      */
     public $time;
+
+    protected function _initializeMixins()
+    {
+        $this->_mixins[] = new Mixin_Timestamp($this, 'time', null);
+    }
 }

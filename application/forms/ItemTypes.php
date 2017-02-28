@@ -22,14 +22,14 @@ class Omeka_Form_ItemTypes extends Omeka_Form
     const REMOVE_HIDDEN_ELEMENT_ID = 'itemtypes_remove';
     const SUBMIT_EDIT_ELEMENT_ID = 'itemtypes_edit_submit';
     const SUBMIT_ADD_ELEMENT_ID = 'itemtypes_add_submit';
-    
+
     // input names
     const ELEMENTS_INPUT_NAME = 'elements';
     const ELEMENTS_TO_ADD_INPUT_NAME = 'elements-to-add';
     const NEW_ELEMENTS_INPUT_NAME = 'new-elements';
-    
+
     private $_itemType;  // the item type for the form
-    
+
     /* 
        An info array for each item type element in the item type
        each elementInfo contains the following keys:
@@ -38,92 +38,92 @@ class Omeka_Form_ItemTypes extends Omeka_Form
        'temp_id' => the temporary form element id for 
                     item type elements that have not yet been added to the item type
     */
-    private $_elementInfos; 
-    
+    private $_elementInfos;
+
     public function init()
     {
         parent::init();
         $this->setAttrib('id', self::FORM_ID);
     }
-    
-    public function setItemType($itemType) 
+
+    public function setItemType($itemType)
     {
-        $this->_itemType = $itemType;                
+        $this->_itemType = $itemType;
         $this->_initElements();
-    } 
-    
+    }
+
     public function getElementInfos()
     {
         return $this->_elementInfos;
     }
-        
-    public function saveFromPost() 
+
+    public function saveFromPost()
     {
-        if ($_POST) {            
+        if ($_POST) {
             if (!$this->_itemType) {
                 $this->_itemType = new ItemType;
             }
-            
+
             // get the item type element infos from post
             $this->_elementInfos = $this->_getElementInfosFromPost();
-            
-            // make sure that there are no duplicates in item type elements            
+
+            // make sure that there are no duplicates in item type elements
             $this->_checkForDuplicateElements();
-            
+
             // remove old item type elements from post
             $this->_removeElementsFromItemType();
-                        
+
             // add elements to the item type
             $this->_addElementsToItemType();
-        
+
             // set the name and description of the item type
             $this->_itemType->name = $this->getValue(self::NAME_ELEMENT_ID);
             $this->_itemType->description = $this->getValue(self::DESCRIPTION_ELEMENT_ID);
-            
+
             // save the item type
-            if ($this->_itemType->save()) {            
+            if ($this->_itemType->save()) {
                 // reorder the item type's elements
                 $this->_reorderItemTypeElements();
             }
         }
-        
+
         return $this->_itemType;
     }
-    
+
     private function _addElementsToItemType()
     {
         $elements = array();
-        foreach($this->_elementInfos as $elementInfo) {
+        foreach ($this->_elementInfos as $elementInfo) {
             $elements[] = $elementInfo['element'];
         }
 
         $this->_itemType->addElements($elements);
     }
-    
+
     private function _reorderItemTypeElements()
     {
         $elementOrders = array();
-        foreach($this->_elementInfos as $elementInfo) {
+        foreach ($this->_elementInfos as $elementInfo) {
             $elementOrders[$elementInfo['element']['id']] = $elementInfo['order'];
         }
         $this->_itemType->reorderElements($elementOrders);
     }
-    
+
     private function _initElements()
-    {           
+    {
         // set the item type name and description
         $itemTypeName = '';
         $itemTypeDescription = '';
         if ($this->_itemType) {
-             $itemTypeName  = $this->_itemType->name;
-             $itemTypeDescription  = $this->_itemType->description;
+            $itemTypeName = $this->_itemType->name;
+            $itemTypeDescription = $this->_itemType->description;
         }
-        
+
         // set the default element infos
         $this->_elementInfos = array();
         if ($this->_itemType) {
             $elementOrder = 1;
-            foreach($this->_itemType->Elements as $element) {
+            foreach ($this->_itemType->Elements as $element) {
                 $elementInfo = array(
                     'element' => $element,
                     'temp_id' => null,
@@ -133,9 +133,9 @@ class Omeka_Form_ItemTypes extends Omeka_Form
                 $elementOrder++;
             }
         }
-         
+
         $this->clearElements();
-        
+
         $this->addElement('text', self::NAME_ELEMENT_ID,
             array(
                 'label' => __('Name'),
@@ -144,7 +144,7 @@ class Omeka_Form_ItemTypes extends Omeka_Form
                 'value' => $itemTypeName,
             )
         );
-        
+
         $this->addElement('textarea', self::DESCRIPTION_ELEMENT_ID,
             array(
                 'label' => __('Description'),
@@ -154,19 +154,19 @@ class Omeka_Form_ItemTypes extends Omeka_Form
                 'rows' => 5,
             )
         );
-        
+
         $this->addElement('hidden', self::REMOVE_HIDDEN_ELEMENT_ID, array('value' => ''));
         $this->addElement('sessionCsrfToken', 'csrf_token');
     }
-    
+
     private function _checkForDuplicateElements()
     {
         // Check for duplicate elements and throw an exception if a duplicate is found
         $elementIds = array();
         $elementNames = array();
-        foreach($this->_elementInfos as $elementInfo) {
+        foreach ($this->_elementInfos as $elementInfo) {
             $element = $elementInfo['element'];
-            
+
             // prevent duplicate item type element ids
             if ($element->id) {
                 if (in_array($element->id, $elementIds)) {
@@ -186,22 +186,22 @@ class Omeka_Form_ItemTypes extends Omeka_Form
             }
         }
     }
-    
+
     private function _removeElementsFromItemType()
-    {        
+    {
         $elementTable = get_db()->getTable('Element');
         // get the item type element ids to remove from the post and remove those elements from the item type
-        $elementIds = explode(',', $this->getValue(self::REMOVE_HIDDEN_ELEMENT_ID));            
-        foreach($elementIds as $elementId) {
+        $elementIds = explode(',', $this->getValue(self::REMOVE_HIDDEN_ELEMENT_ID));
+        foreach ($elementIds as $elementId) {
             $elementId = intval(trim($elementId));
             if ($elementId) {
                 if ($element = $elementTable->find($elementId)) {
-                    $this->_itemType->removeElement($element);        
+                    $this->_itemType->removeElement($element);
                 }
             }
-        }    
+        }
     }
-    
+
     // get the elements to save from the post
     private function _getElementInfosFromPost()
     {
@@ -246,7 +246,7 @@ class Omeka_Form_ItemTypes extends Omeka_Form
                 $element->setName($info['name']);
                 $element->setDescription($info['description']);
                 $element->order = null;
-                                
+
                 $elementInfos[] = array(
                     'element' => $element,
                     'temp_id' => $tempId,

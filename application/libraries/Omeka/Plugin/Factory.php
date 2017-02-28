@@ -20,7 +20,7 @@ class Omeka_Plugin_Factory
      * @var string
      */
     protected $_basePath;
-    
+
     /**
      * @param string $basePath Plugin base directory.
      */
@@ -28,7 +28,7 @@ class Omeka_Plugin_Factory
     {
         $this->_basePath = $basePath;
     }
-    
+
     /**
      * Retrieve all new plugins in the plugin directory.
      *
@@ -43,7 +43,7 @@ class Omeka_Plugin_Factory
             $existingPluginNames[] = $plugin->getDirectoryName();
         }
         $newPluginDirNames = array_diff($dirListing, $existingPluginNames);
-        
+
         $newPlugins = array();
         foreach ($newPluginDirNames as $pluginDirName) {
             $newPlugin = new Plugin;
@@ -52,7 +52,7 @@ class Omeka_Plugin_Factory
         }
         return $newPlugins;
     }
-    
+
     /**
      * Retrieve an array of all the plugins in the plugin directory.
      * A plugin is considered to be present when a directory includes a
@@ -64,9 +64,9 @@ class Omeka_Plugin_Factory
     {
         // Construct the current list of potential, installed & active plugins
         require_once 'VersionedDirectoryIterator.php';
-        
-        // Loop through all the plugins in the plugin directory, 
-        // and add each plugin directory name that has a plugin.php file 
+
+        // Loop through all the plugins in the plugin directory,
+        // and add each plugin directory name that has a plugin.php file
         // to the list of all plugin directory names
         $dir = new VersionedDirectoryIterator($this->_basePath);
         return $dir->getValid();

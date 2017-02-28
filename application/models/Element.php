@@ -65,10 +65,9 @@ class Element extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_I
      */
     public function getElementSet()
     {
-        if(($setId = $this->element_set_id)) {
+        if (($setId = $this->element_set_id)) {
             return $this->getDb()->getTable('ElementSet')->find($setId);
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -83,7 +82,7 @@ class Element extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_I
         if ($order !== null) {
             $order = (int) $order;
         }
-        
+
         $this->order = $order;
     }
 
@@ -104,7 +103,7 @@ class Element extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_I
      */
     public function setDescription($description)
     {
-        $this->description = (string)trim($description);
+        $this->description = (string) trim($description);
     }
 
     /**
@@ -174,15 +173,15 @@ class Element extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_I
         if (empty($this->name)) {
             $this->addError('name', __('The element name must not be empty.'));
         }
-        
+
         if (!$this->getDb()->getTable('ElementSet')->exists($this->element_set_id)) {
             $this->addError('element_set_id', __('Invalid element set.'));
         }
-        
+
         // Check if the element set / element name combination already exists.
         if ($this->_nameIsInSet($this->name, $this->element_set_id)) {
             $elementSetName = $this->getElementSet()->name;
-            $this->addError('name', __('An element named "%s" already exists for the "%s" element set.', $this->name, $elementSetName) );
+            $this->addError('name', __('An element named "%s" already exists for the "%s" element set.', $this->name, $elementSetName));
         }
     }
 
@@ -221,7 +220,7 @@ class Element extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_I
     /**
      * Calculate whether the element's name already belongs to the current set.
      * 
-     * @return boolean
+     * @return bool
      */
     private function _nameIsInSet($elementName, $elementSetId)
     {
@@ -234,7 +233,7 @@ class Element extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_I
         }
         return (bool) $db->fetchOne($sql, $params);
     }
-    
+
     /**
      * Identify Element records as relating to the Elements ACL resource.
      *

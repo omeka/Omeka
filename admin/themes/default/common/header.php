@@ -2,7 +2,7 @@
 <html lang="<?php echo get_html_lang(); ?>">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php
     if (isset($title)) {
         $titleParts[] = strip_formatting($title);
@@ -15,6 +15,7 @@
 <?php
     queue_css_file(array('iconfonts','style', 'skeleton', 'jquery-ui'));
     queue_css_file('media/960min', 'only screen and (min-width: 960px)');
+    queue_css_file('media/1200min', 'only screen and (min-width: 1200px)');
     queue_css_file('media/768min', 'only screen and (min-width: 768px) and (max-width: 959px)');
     queue_css_file('media/767max', 'only screen and (max-width: 767px)');
     queue_css_file('media/479max', 'only screen and (max-width: 479px)');
@@ -37,8 +38,8 @@
 </head>
 
 <?php echo body_tag(array('id' => @$bodyid, 'class' => @$bodyclass)); ?>
-
-<header>
+<a href="#content" id="skipnav"><?php echo __('Skip to main content'); ?></a>
+<header role="banner">
     <div class="container">
         <div id="site-title" class="two columns">
             <?php echo link_to_home_page(option('site_title'), array('target' => '_blank')); ?>
@@ -69,10 +70,10 @@
     <?php echo common('content-nav', array('title' => $title)); ?>
 
     <div class="subhead">
-        <?php echo search_form(array('show_advanced' => true)); ?>
+        <?php echo search_form(array('show_advanced' => true, 'form_attributes'=> array('role'=>'search'))); ?>
         <?php if (isset($title)) : ?>
-            <h1 class="section-title" title="<?php echo html_escape($title); ?>"><?php echo $title ?></h1>
+            <h1 id="content-heading" class="section-title" title="<?php echo $title; ?>"><?php echo $title ?></h1>
         <?php endif; ?>
     </div>
 
-    <div id="content" class="ten columns offset-by-two omega">
+    <div id="content" class="ten columns offset-by-two omega" role="main" aria-labelledby="content-heading">

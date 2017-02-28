@@ -6,7 +6,7 @@ class Omeka_StorageTest extends PHPUnit_Framework_TestCase
     {
         new Omeka_Storage();
     }
-    
+
     /**
      * Test passing an adapter class name that's not a defined class,
      * should throw Omeka_Storage_Exception.

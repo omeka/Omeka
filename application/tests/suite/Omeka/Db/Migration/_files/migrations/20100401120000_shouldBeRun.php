@@ -13,7 +13,6 @@
  */
 class shouldBeRun extends Omeka_Db_Migration_AbstractMigration
 {
-    
     public function up()
     {
         // This migration should run fine.

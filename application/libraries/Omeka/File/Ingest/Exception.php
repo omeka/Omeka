@@ -13,4 +13,5 @@
  * @package Omeka\File\Ingest
  */
 class Omeka_File_Ingest_Exception extends Exception
-{}
+{
+}

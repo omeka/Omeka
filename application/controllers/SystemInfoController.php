@@ -102,7 +102,7 @@ class SystemInfoController extends Omeka_Controller_AbstractActionController
                 $themeInfo .= ' (current)';
             }
 
-            $info['Themes'][$theme->title] = $themeInfo;
+            $info['Themes'][$name] = $themeInfo;
         }
 
         ksort($info['Themes']);

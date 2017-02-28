@@ -38,7 +38,7 @@ class Omeka_Job_Dispatcher_Adapter_ZendQueue extends Omeka_Job_Dispatcher_Adapte
      */
     public function setQueueName($name)
     {
-        $this->_queue()->setOption(Zend_Queue::NAME, $name);       
+        $this->_queue()->setOption(Zend_Queue::NAME, $name);
     }
 
     public function send($encodedJob, array $metadata)
@@ -49,7 +49,7 @@ class Omeka_Job_Dispatcher_Adapter_ZendQueue extends Omeka_Job_Dispatcher_Adapte
     private function _queue()
     {
         if (!$this->_queue) {
-            $this->_queue = new Zend_Queue($this->getOption('adapter'), 
+            $this->_queue = new Zend_Queue($this->getOption('adapter'),
                                            $this->getOption('options'));
         }
         return $this->_queue;

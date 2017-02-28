@@ -18,28 +18,26 @@ class Omeka_File_Ingest_Upload extends Omeka_File_Ingest_AbstractIngest
      * @var Zend_File_Transfer_Adapter_Http
      */
     protected $_adapter;
-    
+
     /**
      * @var array Set of options for the {@link $_adapter} instance.
      */
     protected $_adapterOptions = array();
-    
+
     /**
      * Create a ZF HTTP file transfer adapter.
-     *
-     * @return void
-     */        
+     */
     protected function _buildAdapter()
     {
         $storage = Zend_Registry::get('storage');
-        
+
         $this->_adapter = new Zend_File_Transfer_Adapter_Http($this->_adapterOptions);
         $this->_adapter->setDestination($storage->getTempDir());
-        
+
         // Add a filter to rename the file to something Omeka-friendly.
         $this->_adapter->addFilter(new Omeka_Filter_Filename);
     }
-    
+
     /**
      * In addition to the default options available for 
      * Omeka_File_Ingest_AbstractIngest, this understands the following options:
@@ -53,17 +51,16 @@ class Omeka_File_Ingest_Upload extends Omeka_File_Ingest_AbstractIngest
      * ignored.
      * 
      * @param array $options
-     * @return void
      */
     public function setOptions($options)
     {
         parent::setOptions($options);
-        
+
         if (array_key_exists('ignoreNoFile', $options)) {
             $this->_adapterOptions['ignoreNoFile'] = $options['ignoreNoFile'];
         }
     }
-    
+
     /**
      * The 'name' attribute of the $_FILES array will always contain the 
      * original name of the file.
@@ -75,7 +72,7 @@ class Omeka_File_Ingest_Upload extends Omeka_File_Ingest_AbstractIngest
     {
         return $fileInfo['name'];
     }
-    
+
     /**
      * Use the Zend_File_Transfer adapter to upload the file.  
      * 
@@ -96,7 +93,7 @@ class Omeka_File_Ingest_Upload extends Omeka_File_Ingest_AbstractIngest
         // Return the path to the file as it is listed in Omeka.
         return $this->_adapter->getFileName($fileInfo['form_index']);
     }
-        
+
     /**
      * Use the adapter to extract the array of file information.
      * 
@@ -108,27 +105,26 @@ class Omeka_File_Ingest_Upload extends Omeka_File_Ingest_AbstractIngest
         if (!$this->_adapter) {
             $this->_buildAdapter();
         }
-                        
+
         // Grab the info from $_FILES array (prior to receiving the files).
         $fileInfoArray = $this->_adapter->getFileInfo($fileInfo);
-       
+
         // Include the index of the form so that we can use that if necessary.
         foreach ($fileInfoArray as $index => $info) {
-            // We need the index of this as well b/c the file info is passed 
+            // We need the index of this as well b/c the file info is passed
             // around (not the form index).
             $info['form_index'] = $index;
             $fileInfoArray[$index] = $info;
         }
         return $fileInfoArray;
     }
-    
+
     /**
      * Use the Zend Framework adapter to handle validation instead of the 
      * built-in _validateFile() method.
      * 
      * @see Omeka_File_Ingest_AbstractIngest::_validateFile()
      * @param Zend_Validate_Interface $validator
-     * @return void
      */
     public function addValidator(Zend_Validate_Interface $validator)
     {

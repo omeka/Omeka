@@ -24,7 +24,6 @@ class Omeka_Validate_Exception extends Exception
      * @param $errors string|Omeka_Validate_Errors If a string, it is a
      * single error.  If it is an instance of Omeka_Validate_Errors, it is
      * a set of errors.
-     * @return void
      */
     public function __construct($errors)
     {
@@ -32,7 +31,7 @@ class Omeka_Validate_Exception extends Exception
 
         if ($errors instanceof Omeka_Validate_Errors) {
             $this->message = (string) $errors;
-        } else if (is_string($errors)) {
+        } elseif (is_string($errors)) {
             $this->message = $errors;
         }
     }

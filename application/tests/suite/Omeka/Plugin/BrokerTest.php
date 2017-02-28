@@ -6,8 +6,6 @@
  */
 
 /**
- * 
- *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
  */
@@ -20,13 +18,13 @@ class Omeka_Plugin_BrokerTest extends PHPUnit_Framework_TestCase
         $this->broker->addHook('initialize', array($this, 'hookImpl1'), 'foobar');
         $this->broker->addHook('initialize', array($this, 'hookImpl2'), 'bazfoo');
     }
-    
+
     public function testHookStorage()
     {
         $callback = $this->broker->getHook('foobar', 'initialize');
         $this->assertEquals(array($this, 'hookImpl1'), $callback[0]);
     }
-        
+
     public function testHookStorageViaAddPluginHookFunction()
     {
         $this->broker->register();
@@ -36,19 +34,19 @@ class Omeka_Plugin_BrokerTest extends PHPUnit_Framework_TestCase
         Zend_Registry::_unsetInstance();
         $callback = $this->broker->getHook('fake-plugin-name', 'initialize');
         $this->assertEquals('fake_plugin_initialize', $callback[0]);
-    }    
-    
+    }
+
     public function testCallSingleHook()
     {
         $this->broker->callHook('initialize', array('special info', '2nd argument'), 'foobar');
         // Only one of the two possible hooks should have be called.
         $this->assertEquals(1, count($this->testHooksFired));
-        
+
         // See if the hook implementation was correctly passed the arguments from
         // callHook().
         $this->assertEquals('special info', $this->testHooksFired['hook1']);
     }
-        
+
     public function testCallSetOfHooks()
     {
         $this->assertEquals(0, count($this->testHooksFired));
@@ -59,12 +57,12 @@ class Omeka_Plugin_BrokerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('special info', $this->testHooksFired['hook1']);
         $this->assertEquals('2nd argument', $this->testHooksFired['hook2']);
     }
-    
+
     public function hookImpl1($args)
     {
         $this->testHooksFired['hook1'] = $args[0];
     }
-    
+
     public function hookImpl2($args)
     {
         $this->testHooksFired['hook2'] = $args[1];

@@ -6,14 +6,11 @@
  */
 
 /**
- * 
- *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
  */
 class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
 {
-    
     public function setUp()
     {
         parent::setUp();
@@ -21,30 +18,30 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
         $this->mailHelper = Omeka_Test_Helper_Mail::factory();
         $this->email = 'user@example.com';
     }
-    
+
     public function testAddingNewUserSendsActivationEmail()
     {
         $this->_authenticateUser($this->_getDefaultUser());
-        $post = array('username'    => 'foobar',
-                      'name'        => 'foobar',
-                      'email'       => $this->email,
-                      'role'        => 'admin',
-                      'active'      => '1',
-                      'user_csrf'   => $this->_getCsrfToken());
+        $post = array('username' => 'foobar',
+                      'name' => 'foobar',
+                      'email' => $this->email,
+                      'role' => 'admin',
+                      'active' => '1',
+                      'user_csrf' => $this->_getCsrfToken());
         $this->getRequest()->setPost($post);
         $this->getRequest()->setMethod('post');
         $this->dispatch('users/add');
         $this->assertRedirectTo('/users/browse');
         $this->assertThat($this->mailHelper->getMailText(), $this->stringContains("Activate your account"));
     }
-    
+
     public function testShowForgotPasswordPage()
     {
         $this->dispatch('users/forgot-password');
         $this->assertNotRedirect();
         $this->assertQuery('form #email');
     }
-    
+
     public function testForgotPasswordForInvalidEmail()
     {
         $invalidEmail = 'bananabanana@example.com';
@@ -54,10 +51,10 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('post');
         $this->dispatch('users/forgot-password');
         $this->assertNotRedirect();
-        $this->assertQueryContentContains("li.error", "Unable to reset password.", 
+        $this->assertQueryContentContains("li.error", "Unable to reset password.",
             "The form should have responded with an error message indicating there was a problem.");
     }
-    
+
     public function testSendingEmailForForgottenPassword()
     {
         $this->request->setPost(array(
@@ -68,13 +65,13 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
         $mail = $this->mailHelper->getMailText();
         $this->assertThat($mail, $this->stringContains("Subject: [Automated Test Installation] Reset Your Password"));
         $this->assertQueryContentContains("li.success", "Please check your email");
-        
+
         $activationCode = $this->db->fetchOne("SELECT url FROM omeka_users_activations LIMIT 1");
-        $this->assertThat($mail, $this->stringContains($activationCode), 
+        $this->assertThat($mail, $this->stringContains($activationCode),
             "Email should contain the activation code send to the user.");
         $this->db->query("TRUNCATE {$this->db->UsersActivations}");
     }
-    
+
     public function testForgotPasswordForInactiveUser()
     {
         $user = $this->_getDefaultUser();
@@ -87,7 +84,7 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
         $this->request->setMethod('post');
         $this->dispatch('users/forgot-password');
         $this->assertNotRedirect();
-        $this->assertQueryContentContains("li.error", "Unable to reset password.", 
+        $this->assertQueryContentContains("li.error", "Unable to reset password.",
             "The form should have responded with an error message indicating there was a problem.");
     }
 
@@ -113,7 +110,7 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
             'name' => 'Different User',
             'email' => $this->email,
             'role' => 'super',
-            'user_csrf'   => $this->_getCsrfToken()
+            'user_csrf' => $this->_getCsrfToken()
         ));
         $request->setMethod('post');
         $this->dispatch("users/edit/$id");
@@ -132,7 +129,7 @@ class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
             'name' => 'Different User',
             'email' => $this->email,
             'role' => 'super',
-            'user_csrf'   => $this->_getCsrfToken()
+            'user_csrf' => $this->_getCsrfToken()
         ));
         $request->setMethod('post');
         $this->dispatch("users/edit/$id");

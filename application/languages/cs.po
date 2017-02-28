@@ -3,18 +3,20 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
+# Adam Véle <vele@centrum.cz>, 2012
 # Dana Léw <lew.dana@gmail.com>, 2011,2013
 # Jan Černý <cernyhonza@gmail.com>, 2011-2014
-# MICHAL D. <black23@gmail.com>, 2013
+# Jiří Vírava <appukonrad@gmail.com>, 2014-2015
+# MICHAL D. <black23@gmail.com>, 2013-2014
 # Adam Véle <vele@centrum.cz>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2014-06-09 19:07+0000\n"
+"PO-Revision-Date: 2016-12-15 22:50+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
-"Language-Team: Czech (http://www.transifex.com/projects/p/omeka/language/cs/)\n"
+"Language-Team: Czech (http://www.transifex.com/omeka/omeka/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -29,8 +31,8 @@ msgid ""
 msgstr "Soubor metadatových prvků Dublin Core je běžný pro všechny Omeka záznamy, včetně položek, souborů a sbírek. Pro více informací navštivte http://dublincore.org/documents/dces/."
 
 #. Dublin Core: Title element name
-#: admin/themes/default/collections/browse.php:22
-#: admin/themes/default/items/browse.php:40
+#: admin/themes/default/collections/browse.php:29
+#: admin/themes/default/items/browse.php:46
 #: admin/themes/default/search/index.php:13
 #: application/views/scripts/collections/browse.php:10
 #: application/views/scripts/items/browse.php:19
@@ -43,7 +45,7 @@ msgid "A name given to the resource"
 msgstr "Jméno dané zdroji"
 
 #. Dublin Core: Creator element name
-#: admin/themes/default/items/browse.php:41
+#: admin/themes/default/items/browse.php:47
 #: application/views/scripts/items/browse.php:20
 msgid "Creator"
 msgstr "Tvůrce"
@@ -101,7 +103,7 @@ msgid ""
 msgstr "Čas nebo období v životě zdroje asociované s událostí"
 
 #. Dublin Core: Type element name
-#: admin/themes/default/items/browse.php:42
+#: admin/themes/default/items/browse.php:48
 msgid "Type"
 msgstr "Typ"
 
@@ -344,15 +346,15 @@ msgid "Add a Link to the Navigation"
 msgstr "Přidat odkaz na Navigaci"
 
 #: admin/themes/default/appearance/edit-navigation.php:21
-#: admin/themes/default/appearance/edit-navigation.php:37
+#: admin/themes/default/appearance/edit-navigation.php:41
 #: admin/themes/default/users/api-keys.php:40
-#: application/forms/Navigation.php:132
+#: application/forms/Navigation.php:138
 msgid "Label"
 msgstr "Štítek"
 
 #: admin/themes/default/appearance/edit-navigation.php:23
-#: admin/themes/default/appearance/edit-navigation.php:38
-#: application/forms/Navigation.php:133
+#: admin/themes/default/appearance/edit-navigation.php:42
+#: application/forms/Navigation.php:139
 msgid "URL"
 msgstr "URL"
 
@@ -365,21 +367,28 @@ msgstr "Přidat odkaz"
 #: admin/themes/default/collections/edit.php:22
 #: admin/themes/default/element-sets/edit.php:41
 #: admin/themes/default/files/edit.php:35
-#: admin/themes/default/items/batch-edit.php:130
+#: admin/themes/default/item-types/edit.php:18
+#: admin/themes/default/items/batch-edit-all.php:41
+#: admin/themes/default/items/batch-edit.php:61
 #: admin/themes/default/items/edit.php:19
 #: admin/themes/default/plugins/config.php:14
-#: admin/themes/default/settings/edit-api.php:81
-#: admin/themes/default/settings/edit-item-type-elements.php:38
-#: admin/themes/default/settings/edit-search.php:40
+#: admin/themes/default/settings/edit-api.php:82
+#: admin/themes/default/settings/edit-item-type-elements.php:39
+#: admin/themes/default/settings/edit-search.php:41
 #: admin/themes/default/settings/edit-security.php:15
 #: admin/themes/default/settings/edit-settings.php:15
 #: admin/themes/default/themes/config.php:16
-#: admin/themes/default/users/edit.php:21 application/forms/ItemTypes.php:169
+#: admin/themes/default/users/edit.php:21
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:73
 msgid "Save Changes"
 msgstr "Uložit změny"
 
-#: admin/themes/default/appearance/edit-navigation.php:39
+#: admin/themes/default/appearance/edit-navigation.php:35
+#: admin/themes/default/appearance/reset-navigation-confirm.php:2
+msgid "Reset Navigation"
+msgstr "Obnovit navigaci"
+
+#: admin/themes/default/appearance/edit-navigation.php:43
 #: admin/themes/default/collections/edit.php:23
 #: admin/themes/default/collections/show.php:34
 #: admin/themes/default/files/show.php:28
@@ -389,19 +398,19 @@ msgstr "Uložit změny"
 msgid "View Public Page"
 msgstr "Zobrazit veřejnou stránku"
 
-#: admin/themes/default/appearance/edit-navigation.php:40
-#: admin/themes/default/collections/edit.php:24
+#: admin/themes/default/appearance/edit-navigation.php:44
+#: admin/themes/default/collections/edit.php:25
 #: admin/themes/default/collections/show.php:36
 #: admin/themes/default/element-sets/browse.php:29
 #: admin/themes/default/files/edit.php:37
 #: admin/themes/default/files/show.php:30
 #: admin/themes/default/item-types/edit.php:20
 #: admin/themes/default/item-types/show.php:54
-#: admin/themes/default/items/batch-edit.php:119
-#: admin/themes/default/items/browse.php:27
-#: admin/themes/default/items/browse.php:81
-#: admin/themes/default/items/browse.php:123
-#: admin/themes/default/items/edit.php:21
+#: admin/themes/default/items/batch-edit.php:50
+#: admin/themes/default/items/browse.php:34
+#: admin/themes/default/items/browse.php:95
+#: admin/themes/default/items/browse.php:135
+#: admin/themes/default/items/edit.php:22
 #: admin/themes/default/items/show.php:47
 #: admin/themes/default/settings/edit-item-type-elements.php:23
 #: admin/themes/default/users/browse.php:66
@@ -410,10 +419,22 @@ msgstr "Zobrazit veřejnou stránku"
 msgid "Delete"
 msgstr "Smazat"
 
+#: admin/themes/default/appearance/reset-navigation-confirm.php:9
+#: admin/themes/default/common/delete-confirm.php:10
+#: application/views/scripts/common/delete-confirm.php:12
+msgid "Are you sure?"
+msgstr "Jste si jist?"
+
+#: admin/themes/default/appearance/reset-navigation-confirm.php:10
+msgid ""
+"All customizations will be lost. Order and labels will revert to Omeka "
+"defaults. Custom links will be lost."
+msgstr "Veškeré úpravy budou ztraceny. Řazení a štítky se vrátí na výchozí nastavení Omeka. Vlastní odkazy budou ztraceny."
+
 #: admin/themes/default/collections/add.php:2
-#: admin/themes/default/collections/browse.php:11
-#: admin/themes/default/collections/browse.php:67
-#: admin/themes/default/collections/browse.php:76
+#: admin/themes/default/collections/browse.php:12
+#: admin/themes/default/collections/browse.php:75
+#: admin/themes/default/collections/browse.php:85
 msgid "Add a Collection"
 msgstr "Přidat sbírku"
 
@@ -422,22 +443,22 @@ msgid "Add Collection"
 msgstr "Přidat sbírku"
 
 #: admin/themes/default/collections/add.php:16
-#: admin/themes/default/collections/edit.php:30
+#: admin/themes/default/collections/edit.php:32
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/items/add.php:19
-#: admin/themes/default/items/batch-edit.php:50
-#: admin/themes/default/items/edit.php:28
+#: admin/themes/default/items/batch-edit-common.php:10
+#: admin/themes/default/items/edit.php:30
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:52
 msgid "Public"
 msgstr "Veřejné"
 
 #: admin/themes/default/collections/add.php:19
-#: admin/themes/default/collections/edit.php:35
+#: admin/themes/default/collections/edit.php:37
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/add.php:25
-#: admin/themes/default/items/batch-edit.php:65
-#: admin/themes/default/items/edit.php:34
+#: admin/themes/default/items/batch-edit-common.php:24
+#: admin/themes/default/items/edit.php:36
 #: admin/themes/default/items/quick-filters.php:8
 #: admin/themes/default/items/show.php:53
 msgid "Featured"
@@ -467,74 +488,85 @@ msgstr "Prohlížet sbírky"
 msgid "(%s total)"
 msgstr "(%s celkem)"
 
-#: admin/themes/default/collections/browse.php:23
+#: admin/themes/default/collections/browse.php:17
+#, php-format
+msgid "%sOne item%s has no collection."
+msgid_plural "%s%d items%s aren't in a collection."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: admin/themes/default/collections/browse.php:19
+msgid "All items are in a collection."
+msgstr ""
+
+#: admin/themes/default/collections/browse.php:30
 #: admin/themes/default/collections/show.php:51
-#: application/views/scripts/collections/browse.php:36
+#: application/views/scripts/collections/browse.php:35
 msgid "Contributors"
 msgstr "Přispěvatelé"
 
-#: admin/themes/default/collections/browse.php:24
+#: admin/themes/default/collections/browse.php:31
 #: admin/themes/default/files/show.php:66
-#: admin/themes/default/items/browse.php:43
+#: admin/themes/default/items/browse.php:49
 #: application/views/scripts/collections/browse.php:11
 #: application/views/scripts/items/browse.php:21
 msgid "Date Added"
 msgstr "Přidáno"
 
-#: admin/themes/default/collections/browse.php:25
+#: admin/themes/default/collections/browse.php:32
 #: admin/themes/default/collections/show.php:46
 #: admin/themes/default/item-types/show.php:42
 msgid "Total Number of Items"
 msgstr "Celkový počet položek"
 
-#: admin/themes/default/collections/browse.php:40
-#: admin/themes/default/items/browse.php:72
+#: admin/themes/default/collections/browse.php:47
+#: admin/themes/default/items/browse.php:86
 msgid "(Private)"
 msgstr "(Soukromé)"
 
-#: admin/themes/default/collections/browse.php:43
+#: admin/themes/default/collections/browse.php:50
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:27
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
-#: admin/themes/default/files/show.php:26 admin/themes/default/index.php:54
-#: admin/themes/default/index.php:73
+#: admin/themes/default/files/show.php:26 admin/themes/default/index.php:60
+#: admin/themes/default/index.php:79
 #: admin/themes/default/item-types/browse.php:26
 #: admin/themes/default/item-types/show.php:51
-#: admin/themes/default/items/browse.php:24
-#: admin/themes/default/items/browse.php:77
-#: admin/themes/default/items/browse.php:120
+#: admin/themes/default/items/browse.php:31
+#: admin/themes/default/items/browse.php:91
+#: admin/themes/default/items/browse.php:132
 #: admin/themes/default/items/files-form.php:12
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:63
 msgid "Edit"
 msgstr "Upravit"
 
-#: admin/themes/default/collections/browse.php:52
+#: admin/themes/default/collections/browse.php:59
 msgid "No contributors"
 msgstr "Žádní přespěvatelé"
 
-#: admin/themes/default/collections/browse.php:70
+#: admin/themes/default/collections/browse.php:79
 msgid "There are no collections on this page."
 msgstr "Žádná sbírka k zobrazení."
 
-#: admin/themes/default/collections/browse.php:70
+#: admin/themes/default/collections/browse.php:79
 msgid "View All Collections"
 msgstr "Prohlížet všechny sbírky"
 
-#: admin/themes/default/collections/browse.php:73
+#: admin/themes/default/collections/browse.php:82
 msgid "You have no collections."
 msgstr "Nemáte žádné kolekce."
 
-#: admin/themes/default/collections/browse.php:75
+#: admin/themes/default/collections/browse.php:84
 msgid "Get started by adding your first collection."
 msgstr "Začněte přidáním vaší první sbírky."
 
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/libraries/globals.php:2574
-#: application/views/scripts/collections/show.php:4
-#: application/views/scripts/functions.php:14
+#: application/models/Mixin/ElementText.php:780
+#: application/views/scripts/functions.php:22
 msgid "[Untitled]"
 msgstr "[Beze jména]"
 
@@ -546,7 +578,7 @@ msgstr "Upravit sbírku #%s"
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Collection #%s"
-msgstr "Sbírka #%s"
+msgstr ""
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
@@ -558,7 +590,7 @@ msgstr "Nedávno přidané položky"
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/show.php:52
 #: admin/themes/default/items/show.php:53
-#: application/views/helpers/ItemSearchFilters.php:69
+#: application/views/helpers/ItemSearchFilters.php:68
 msgid "Yes"
 msgstr "Ano"
 
@@ -566,13 +598,22 @@ msgstr "Ano"
 #: admin/themes/default/collections/show.php:42
 #: admin/themes/default/items/show.php:52
 #: admin/themes/default/items/show.php:53
-#: application/views/helpers/ItemSearchFilters.php:69
+#: application/views/helpers/ItemSearchFilters.php:68
 msgid "No"
 msgstr "Ne"
 
 #: admin/themes/default/collections/show.php:56
 msgid "No contributors."
 msgstr "Žádní přespěvatelé"
+
+#: admin/themes/default/collections/show.php:62
+#: admin/themes/default/files/show.php:93
+#: admin/themes/default/items/browse.php:149
+#: admin/themes/default/items/show.php:88
+#: application/views/scripts/items/browse.php:60
+#: application/views/scripts/items/show.php:41
+msgid "Output Formats"
+msgstr "Výstupní formáty"
 
 #: admin/themes/default/common/appearance-nav.php:5
 msgid "Themes"
@@ -593,13 +634,17 @@ msgstr "Navigace"
 msgid "Settings"
 msgstr "Nastavení"
 
+#: admin/themes/default/common/content-nav.php:1
+msgid "Main Menu"
+msgstr "Hlavní Menu"
+
 #: admin/themes/default/common/content-nav.php:5
 #: admin/themes/default/index.php:2
 msgid "Dashboard"
 msgstr "Nástěnka"
 
 #: admin/themes/default/common/content-nav.php:9
-#: admin/themes/default/items/batch-delete.php:17
+#: admin/themes/default/items/batch-delete.php:15
 #: admin/themes/default/items/batch-edit.php:17
 msgid "Items"
 msgstr "Položky"
@@ -613,10 +658,10 @@ msgid "Item Types"
 msgstr "Typy položek"
 
 #: admin/themes/default/common/content-nav.php:21
-#: admin/themes/default/items/browse.php:94
+#: admin/themes/default/items/browse.php:108
 #: admin/themes/default/items/show.php:65
 #: application/views/scripts/items/browse.php:46
-#: application/views/scripts/items/show.php:26
+#: application/views/scripts/items/show.php:29
 msgid "Tags"
 msgstr "Štítky"
 
@@ -625,11 +670,6 @@ msgstr "Štítky"
 #, php-format
 msgid "Delete %s"
 msgstr "Smazat %s"
-
-#: admin/themes/default/common/delete-confirm.php:10
-#: application/views/scripts/common/delete-confirm.php:12
-msgid "Are you sure?"
-msgstr "Jste si jist?"
 
 #: admin/themes/default/common/footer.php:6
 #: admin/themes/default/common/login-footer.php:7
@@ -656,6 +696,10 @@ msgstr "Verze %s"
 msgid "System Information"
 msgstr "Systémové informace"
 
+#: admin/themes/default/common/global-nav.php:1
+msgid "Manage Site"
+msgstr "Správa stránek"
+
 #: admin/themes/default/common/global-nav.php:5
 #: admin/themes/default/plugins/browse.php:2
 msgid "Plugins"
@@ -667,18 +711,22 @@ msgstr "Uživatelé"
 
 #: admin/themes/default/common/header.php:11
 #: admin/themes/default/upgrade/index.php:6
-#: admin/themes/default/upgrade/migrate.php:6
 #: application/views/scripts/common/admin-bar.php:11
 msgid "Omeka Admin"
 msgstr "Omeka admin"
 
-#: admin/themes/default/common/header.php:60
+#: admin/themes/default/common/header.php:41
+#: application/views/scripts/common/header.php:32
+msgid "Skip to main content"
+msgstr "Přejít k hlavnímu obsahu"
+
+#: admin/themes/default/common/header.php:61
 #: application/views/scripts/common/admin-bar.php:7
 #, php-format
 msgid "Welcome, %s"
 msgstr "Vítej, %s"
 
-#: admin/themes/default/common/header.php:61
+#: admin/themes/default/common/header.php:62
 #: application/views/scripts/common/admin-bar.php:15
 msgid "Log Out"
 msgstr "Odhlásit"
@@ -693,9 +741,10 @@ msgid "Security"
 msgstr "Zabezpečení"
 
 #: admin/themes/default/common/settings-nav.php:16
-#: application/views/helpers/SearchForm.php:34
+#: admin/themes/default/search/index.php:2
+#: application/views/helpers/SearchForm.php:56
+#: application/views/scripts/search/index.php:2
 #: application/views/scripts/search/search-form.php:2
-#: application/views/scripts/search/search-form.php:22
 msgid "Search"
 msgstr "Hledat"
 
@@ -712,7 +761,7 @@ msgid "API"
 msgstr "API"
 
 #: admin/themes/default/common/users-nav.php:11
-#: application/forms/ChangePassword.php:78
+#: application/forms/ChangePassword.php:80
 msgid "Change Password"
 msgstr "Změnit heslo"
 
@@ -775,19 +824,19 @@ msgstr "Vámi požadovaná stránka nejspíše neexistuje. Něco je špatně. Do
 msgid "If this does not help, try contacting the %s."
 msgstr "Pokud to nepomůže, kontaktujte %s."
 
-#: admin/themes/default/error/404.php:16 admin/themes/default/index.php:46
+#: admin/themes/default/error/404.php:16 admin/themes/default/index.php:52
 msgid "Recent Items"
 msgstr "Nedávné položky"
 
-#: admin/themes/default/error/404.php:29 admin/themes/default/index.php:59
+#: admin/themes/default/error/404.php:29 admin/themes/default/index.php:65
 msgid "Add a new item"
 msgstr "Přidat novou položku"
 
-#: admin/themes/default/error/404.php:36 admin/themes/default/index.php:64
+#: admin/themes/default/error/404.php:36 admin/themes/default/index.php:70
 msgid "Recent Collections"
 msgstr "Poslední sbírky"
 
-#: admin/themes/default/error/404.php:50 admin/themes/default/index.php:78
+#: admin/themes/default/error/404.php:50 admin/themes/default/index.php:84
 msgid "Add a new collection"
 msgstr "Přidat novou sbírku"
 
@@ -814,7 +863,7 @@ msgid "File #%s"
 msgstr "Soubor #%s"
 
 #: admin/themes/default/files/show.php:35
-#: application/libraries/globals.php:416
+#: application/libraries/globals.php:409
 msgid "Item"
 msgstr "Položka"
 
@@ -895,43 +944,50 @@ msgstr "Typ souboru / OS"
 msgid "Embedded Metadata"
 msgstr "Vložená metadata"
 
-#: admin/themes/default/files/show.php:93
-#: admin/themes/default/items/browse.php:133
-#: admin/themes/default/items/show.php:88
-#: application/views/scripts/items/browse.php:60
-#: application/views/scripts/items/show.php:38
-msgid "Output Formats"
-msgstr "Výstupní formáty"
-
-#: admin/themes/default/index.php:6
-msgid "items"
-msgstr "položky"
-
-#: admin/themes/default/index.php:7
-msgid "collections"
-msgstr "sbírky"
-
-#: admin/themes/default/index.php:8
-msgid "tags"
-msgstr "štítky"
+#: admin/themes/default/index.php:10
+msgid "item"
+msgid_plural "items"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: admin/themes/default/index.php:11
-msgid "plugins"
-msgstr "zásuvné moduly"
+msgid "collection"
+msgid_plural "collections"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
-#: admin/themes/default/index.php:14
-msgid "users"
-msgstr "uživatelé"
+#: admin/themes/default/index.php:12
+msgid "tag"
+msgid_plural "tags"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
-#: admin/themes/default/index.php:18
+#: admin/themes/default/index.php:16
+msgid "plugin"
+msgid_plural "plugins"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: admin/themes/default/index.php:20
+msgid "user"
+msgid_plural "users"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: admin/themes/default/index.php:24
 msgid "theme"
 msgstr "vzhled"
 
-#: admin/themes/default/index.php:29
+#: admin/themes/default/index.php:35
 msgid "A new version of Omeka is available for download."
 msgstr "Nová verze Omeky je připravená pro stažení."
 
-#: admin/themes/default/index.php:30
+#: admin/themes/default/index.php:36
 #, php-format
 msgid "Upgrade to %s"
 msgstr "Aktualizovat na %s"
@@ -953,7 +1009,7 @@ msgid "Element Description"
 msgstr "Popis prvku"
 
 #: admin/themes/default/item-types/add.php:2
-#: application/forms/ItemTypes.php:161
+#: admin/themes/default/item-types/add.php:11
 msgid "Add Item Type"
 msgstr "Přidat typ položky"
 
@@ -1029,9 +1085,9 @@ msgid "There are no recently added items."
 msgstr "Žádná poslední přidané položky."
 
 #: admin/themes/default/items/add.php:2
-#: admin/themes/default/items/browse.php:20
-#: admin/themes/default/items/browse.php:116
-#: admin/themes/default/items/browse.php:151
+#: admin/themes/default/items/browse.php:19
+#: admin/themes/default/items/browse.php:141
+#: admin/themes/default/items/browse.php:168
 msgid "Add an Item"
 msgstr "Přidat položku"
 
@@ -1040,90 +1096,128 @@ msgid "Add Item"
 msgstr "Přidat položku"
 
 #: admin/themes/default/items/add.php:32
-#: admin/themes/default/items/batch-edit.php:89
-#: admin/themes/default/items/browse.php:90
-#: admin/themes/default/items/edit.php:41
+#: admin/themes/default/items/batch-edit-common.php:48
+#: admin/themes/default/items/browse.php:104
+#: admin/themes/default/items/edit.php:43
 #: admin/themes/default/items/show.php:57
-#: application/libraries/globals.php:418
-#: application/views/scripts/items/show.php:18
+#: application/libraries/globals.php:411
+#: application/views/scripts/items/show.php:21
 msgid "Collection"
 msgstr "Sbírka"
+
+#: admin/themes/default/items/batch-delete-all.php:2
+msgid "Batch Delete All Searched Items"
+msgstr ""
+
+#: admin/themes/default/items/batch-delete-all.php:18
+#, php-format
+msgid "All %d items matching the search filters above will be deleted."
+msgstr ""
+
+#: admin/themes/default/items/batch-delete-all.php:20
+#, php-format
+msgid "All %d items will be deleted."
+msgstr ""
+
+#: admin/themes/default/items/batch-delete-all.php:25
+msgid "Deletions will be processed in the background item by item."
+msgstr ""
+
+#: admin/themes/default/items/batch-delete-all.php:36
+#: admin/themes/default/items/batch-delete.php:47
+#: admin/themes/default/items/batch-edit.php:47
+msgid "Delete Items"
+msgstr "Smazat položky"
 
 #: admin/themes/default/items/batch-delete.php:2
 msgid "Batch Delete Items"
 msgstr "Hromadné mazání položek"
 
-#: admin/themes/default/items/batch-delete.php:38
+#: admin/themes/default/items/batch-delete.php:36
 msgid ""
 "Some items were excluded because you do not have permission to delete them."
 msgstr "Některé položky byly vynechány protože nemáte oprávnění k jejich smazání."
 
-#: admin/themes/default/items/batch-delete.php:41
+#: admin/themes/default/items/batch-delete.php:39
 msgid "Checked items will be deleted."
 msgstr "Označené položky budou smazány."
 
-#: admin/themes/default/items/batch-delete.php:50
-#: admin/themes/default/items/batch-edit.php:116
-msgid "Delete Items"
-msgstr "Smazat položky"
+#: admin/themes/default/items/batch-edit-all.php:2
+msgid "Batch Edit All Searched Items"
+msgstr ""
 
-#: admin/themes/default/items/batch-edit.php:2
-msgid "Batch Edit Items"
-msgstr "Dávkově upravit položky"
+#: admin/themes/default/items/batch-edit-all.php:20
+#, php-format
+msgid ""
+"Changes will be applied to all %d items matching the search filters above."
+msgstr ""
 
-#: admin/themes/default/items/batch-edit.php:36
-msgid "Changes will be applied to checked items."
-msgstr "Změny budou aplikovány na označené položky."
+#: admin/themes/default/items/batch-edit-all.php:22
+#, php-format
+msgid "Changes will be applied to all %d items."
+msgstr ""
 
-#: admin/themes/default/items/batch-edit.php:41
+#: admin/themes/default/items/batch-edit-all.php:27
+msgid "Changes will be processed in the background item by item."
+msgstr ""
+
+#: admin/themes/default/items/batch-edit-common.php:2
 msgid "Item Metadata"
 msgstr "Metadata položky"
 
-#: admin/themes/default/items/batch-edit.php:46
+#: admin/themes/default/items/batch-edit-common.php:6
 msgid "Public?"
 msgstr "Veřejná?"
 
-#: admin/themes/default/items/batch-edit.php:49
-#: admin/themes/default/items/batch-edit.php:64
-#: admin/themes/default/items/batch-edit.php:78
-#: admin/themes/default/items/batch-edit.php:93
+#: admin/themes/default/items/batch-edit-common.php:9
+#: admin/themes/default/items/batch-edit-common.php:23
+#: admin/themes/default/items/batch-edit-common.php:37
+#: admin/themes/default/items/batch-edit-common.php:52
 msgid "Select Below"
 msgstr "Velikost souboru"
 
-#: admin/themes/default/items/batch-edit.php:51
+#: admin/themes/default/items/batch-edit-common.php:11
 msgid "Not Public"
 msgstr "Neveřejné"
 
-#: admin/themes/default/items/batch-edit.php:61
+#: admin/themes/default/items/batch-edit-common.php:20
 msgid "Featured?"
 msgstr "Doporučená?"
 
-#: admin/themes/default/items/batch-edit.php:66
+#: admin/themes/default/items/batch-edit-common.php:25
 msgid "Not Featured"
 msgstr "Nedoporučená"
 
-#: admin/themes/default/items/batch-edit.php:74
+#: admin/themes/default/items/batch-edit-common.php:33
 #: admin/themes/default/items/item-type-form.php:3
 msgid "Item Type"
 msgstr "Typ položky"
 
-#: admin/themes/default/items/batch-edit.php:83
-#: admin/themes/default/items/batch-edit.php:98
+#: admin/themes/default/items/batch-edit-common.php:42
+#: admin/themes/default/items/batch-edit-common.php:57
 msgid "Remove?"
 msgstr "Odstranit?"
 
-#: admin/themes/default/items/batch-edit.php:104
+#: admin/themes/default/items/batch-edit-common.php:63
 #: admin/themes/default/items/tag-form.php:8
 #: admin/themes/default/items/tag-form.php:11
 msgid "Add Tags"
 msgstr "Přidat štítky"
 
-#: admin/themes/default/items/batch-edit.php:107
+#: admin/themes/default/items/batch-edit-common.php:66
 #, php-format
 msgid "List of tags to add to all checked items, separated by %s."
 msgstr "Seznam štítků, které budou přidány ke všem označeným položkám, oddělené %s."
 
-#: admin/themes/default/items/batch-edit.php:117
+#: admin/themes/default/items/batch-edit.php:2
+msgid "Batch Edit Items"
+msgstr "Dávkově upravit položky"
+
+#: admin/themes/default/items/batch-edit.php:37
+msgid "Changes will be applied to checked items."
+msgstr "Změny budou aplikovány na označené položky."
+
+#: admin/themes/default/items/batch-edit.php:48
 msgid "Check if you wish to delete selected items."
 msgstr "Označte pokud si přejete smazat vybrané položky."
 
@@ -1168,53 +1262,72 @@ msgstr "Označte pokud si přejete smazat vybrané položky."
 msgid "Browse Items"
 msgstr "Procházet položky"
 
-#: admin/themes/default/items/browse.php:22
-#: admin/themes/default/items/browse.php:118
+#: admin/themes/default/items/browse.php:21
+#: admin/themes/default/items/browse.php:143
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2350
-#: application/libraries/globals.php:2734
+#: application/libraries/globals.php:2400
+#: application/libraries/globals.php:2791
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Hledat položky"
 
-#: admin/themes/default/items/browse.php:37
-msgid "Select"
-msgstr "Vybrat"
+#: admin/themes/default/items/browse.php:26
+#: admin/themes/default/items/browse.php:129
+#, php-format
+msgid "Select all %s results"
+msgstr ""
 
-#: admin/themes/default/items/browse.php:95
+#: admin/themes/default/items/browse.php:27
+#: admin/themes/default/items/browse.php:130
+msgid "items selected"
+msgstr ""
+
+#: admin/themes/default/items/browse.php:43
+msgid "Select all rows"
+msgstr ""
+
+#: admin/themes/default/items/browse.php:64
+#, php-format
+msgid "Select item \"%s\""
+msgstr ""
+
+#: admin/themes/default/items/browse.php:109
 msgid "No Tags"
 msgstr "Žádné štítky"
 
-#: admin/themes/default/items/browse.php:139
+#: admin/themes/default/items/browse.php:155
 msgid "Details"
 msgstr "Detaily"
 
-#: admin/themes/default/items/browse.php:140
+#: admin/themes/default/items/browse.php:156
 msgid "Show Details"
 msgstr "Zobrazit detaily"
 
-#: admin/themes/default/items/browse.php:141
+#: admin/themes/default/items/browse.php:157
 msgid "Hide Details"
 msgstr "Skrýt detaily"
 
-#: admin/themes/default/items/browse.php:148
+#: admin/themes/default/items/browse.php:165
 msgid "You have no items."
 msgstr "Nemáte žádné položky."
 
-#: admin/themes/default/items/browse.php:150
+#: admin/themes/default/items/browse.php:167
 msgid "Get started by adding your first item."
 msgstr "Začněte přidáním vaší první položky."
 
-#: admin/themes/default/items/browse.php:154
+#: admin/themes/default/items/browse.php:172
 #, php-format
-msgid "The query searched %s items and returned no results."
-msgstr "Hledaný řetězec %s položek nenalezen."
+msgid "The query searched 1 item and returned no results."
+msgid_plural "The query searched %s items and returned no results."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
-#: admin/themes/default/items/browse.php:154
+#: admin/themes/default/items/browse.php:173
 msgid "refine your search"
 msgstr "upravit hledání"
 
-#: admin/themes/default/items/browse.php:154
+#: admin/themes/default/items/browse.php:173
 #, php-format
 msgid "Would you like to %s?"
 msgstr "Rád by jste k %s?"
@@ -1277,112 +1390,151 @@ msgid "Narrow by Specific Fields"
 msgstr "SQL chyba při migraci:"
 
 #: admin/themes/default/items/search-form.php:28
-#: application/views/scripts/items/search-form.php:90
+#: application/views/scripts/items/search-form.php:105
 msgid "Add a Field"
 msgstr "Přidat pole"
 
 #: admin/themes/default/items/search-form.php:54
 #: application/views/scripts/items/search-form.php:50
-msgid "Search Field"
+msgid "Search Joiner"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:59
+#: application/views/helpers/ItemSearchFilters.php:108
+#: application/views/scripts/items/search-form.php:55
+msgid "AND"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:60
+#: application/views/helpers/ItemSearchFilters.php:106
+#: application/views/scripts/items/search-form.php:56
+msgid "OR"
 msgstr ""
 
 #: admin/themes/default/items/search-form.php:67
 #: application/views/scripts/items/search-form.php:63
-msgid "Search Type"
-msgstr ""
+msgid "Search Field"
+msgstr "Hledat pole"
 
-#: admin/themes/default/items/search-form.php:72
-#: application/views/scripts/items/search-form.php:68
+#: admin/themes/default/items/search-form.php:80
+#: application/views/scripts/items/search-form.php:76
+msgid "Search Type"
+msgstr "Hledat typ"
+
+#: admin/themes/default/items/search-form.php:85
+#: application/views/scripts/items/search-form.php:81
 msgid "contains"
 msgstr "obsahuje"
 
-#: admin/themes/default/items/search-form.php:73
-#: application/views/scripts/items/search-form.php:69
+#: admin/themes/default/items/search-form.php:86
+#: application/views/scripts/items/search-form.php:82
 msgid "does not contain"
 msgstr "neobsahuje"
 
-#: admin/themes/default/items/search-form.php:74
-#: application/views/scripts/items/search-form.php:70
+#: admin/themes/default/items/search-form.php:87
+#: application/views/scripts/items/search-form.php:83
 msgid "is exactly"
 msgstr "je právě"
 
-#: admin/themes/default/items/search-form.php:75
-#: application/views/scripts/items/search-form.php:71
+#: admin/themes/default/items/search-form.php:88
+msgid "is not exactly"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:89
+#: application/views/scripts/items/search-form.php:84
 msgid "is empty"
 msgstr "je prázdný"
 
-#: admin/themes/default/items/search-form.php:76
-#: application/views/scripts/items/search-form.php:72
+#: admin/themes/default/items/search-form.php:90
+#: application/views/scripts/items/search-form.php:85
 msgid "is not empty"
 msgstr "není prázdný"
 
-#: admin/themes/default/items/search-form.php:84
-#: application/views/scripts/items/search-form.php:80
-msgid "Search Terms"
+#: admin/themes/default/items/search-form.php:91
+#: application/views/scripts/items/search-form.php:86
+msgid "starts with"
 msgstr ""
 
-#: admin/themes/default/items/search-form.php:90
-#: application/views/scripts/items/search-form.php:86
+#: admin/themes/default/items/search-form.php:92
+#: application/views/scripts/items/search-form.php:87
+msgid "ends with"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:93
+msgid "matches"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:94
+msgid "does not match"
+msgstr ""
+
+#: admin/themes/default/items/search-form.php:102
+#: application/views/scripts/items/search-form.php:95
+msgid "Search Terms"
+msgstr "Hledat výraz"
+
+#: admin/themes/default/items/search-form.php:108
+#: application/views/scripts/items/search-form.php:101
 msgid "Remove field"
 msgstr "Odstranit pole"
 
-#: admin/themes/default/items/search-form.php:98
-#: application/views/scripts/items/search-form.php:94
+#: admin/themes/default/items/search-form.php:116
+#: application/views/scripts/items/search-form.php:109
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
 msgstr "Hledat podle rozsahu ID# (například 1-4, 156, 79)"
 
-#: admin/themes/default/items/search-form.php:112
-#: application/views/scripts/items/search-form.php:105
+#: admin/themes/default/items/search-form.php:130
+#: application/views/scripts/items/search-form.php:120
 msgid "Search By Collection"
 msgstr "Hledat podle sbírek"
 
-#: admin/themes/default/items/search-form.php:128
-#: application/views/scripts/items/search-form.php:119
+#: admin/themes/default/items/search-form.php:146
+#: application/views/scripts/items/search-form.php:134
 msgid "Search By Type"
 msgstr "Hledat polde typu"
 
-#: admin/themes/default/items/search-form.php:145
-#: application/views/scripts/items/search-form.php:135
+#: admin/themes/default/items/search-form.php:163
+#: application/views/scripts/items/search-form.php:150
 msgid "Search By User"
 msgstr "Hledat podle uživatele"
 
-#: admin/themes/default/items/search-form.php:162
-#: application/views/scripts/items/search-form.php:150
+#: admin/themes/default/items/search-form.php:180
+#: application/views/scripts/items/search-form.php:165
 msgid "Search By Tags"
 msgstr "Hledat podle štítků"
 
-#: admin/themes/default/items/search-form.php:177
-#: application/views/scripts/items/search-form.php:163
+#: admin/themes/default/items/search-form.php:195
+#: application/views/scripts/items/search-form.php:178
 msgid "Public/Non-Public"
 msgstr "Veřejný/Neveřejný"
 
-#: admin/themes/default/items/search-form.php:186
-#: application/views/scripts/items/search-form.php:171
+#: admin/themes/default/items/search-form.php:204
+#: application/views/scripts/items/search-form.php:186
 msgid "Only Public Items"
 msgstr "Pouze veřejné položky"
 
-#: admin/themes/default/items/search-form.php:187
-#: application/views/scripts/items/search-form.php:172
+#: admin/themes/default/items/search-form.php:205
+#: application/views/scripts/items/search-form.php:187
 msgid "Only Non-Public Items"
 msgstr "Pouze neveřejné položky"
 
-#: admin/themes/default/items/search-form.php:197
-#: application/views/scripts/items/search-form.php:181
+#: admin/themes/default/items/search-form.php:215
+#: application/views/scripts/items/search-form.php:196
 msgid "Featured/Non-Featured"
 msgstr "Doporučená/Nedoporučená"
 
-#: admin/themes/default/items/search-form.php:206
-#: application/views/scripts/items/search-form.php:189
+#: admin/themes/default/items/search-form.php:224
+#: application/views/scripts/items/search-form.php:204
 msgid "Only Featured Items"
 msgstr "Pouze doporučené položky"
 
-#: admin/themes/default/items/search-form.php:207
-#: application/views/scripts/items/search-form.php:190
+#: admin/themes/default/items/search-form.php:225
+#: application/views/scripts/items/search-form.php:205
 msgid "Only Non-Featured Items"
 msgstr "Zadaná emailová adresa je neplatná."
 
-#: admin/themes/default/items/search-form.php:215
-#: application/views/scripts/items/search-form.php:199
+#: admin/themes/default/items/search-form.php:233
+#: application/views/scripts/items/search-form.php:214
 msgid "Search for items"
 msgstr "Hledat položky"
 
@@ -1460,7 +1612,7 @@ msgstr "%s"
 
 #: admin/themes/default/plugins/browse.php:65
 #: admin/themes/default/themes/browse.php:23
-#: admin/themes/default/themes/browse.php:49
+#: admin/themes/default/themes/browse.php:50
 msgid "Get support"
 msgstr "Získejte podporu"
 
@@ -1473,31 +1625,31 @@ msgstr "Máte novou verzi %s. Prosím aktualizujte!"
 msgid "Upgrade"
 msgstr "Aktualizace"
 
-#: admin/themes/default/plugins/browse.php:100
+#: admin/themes/default/plugins/browse.php:101
 msgid "Configure"
 msgstr "Nastavit"
 
-#: admin/themes/default/plugins/browse.php:106
+#: admin/themes/default/plugins/browse.php:107
 msgid "Deactivate"
 msgstr "Deaktivovat"
 
-#: admin/themes/default/plugins/browse.php:106
-#: admin/themes/default/users/activate.php:31
+#: admin/themes/default/plugins/browse.php:107
+#: admin/themes/default/users/activate.php:30
 #: application/views/scripts/users/activate.php:27
 msgid "Activate"
 msgstr "Aktivovat"
 
-#: admin/themes/default/plugins/browse.php:116
+#: admin/themes/default/plugins/browse.php:118
 #: admin/themes/default/plugins/confirm-uninstall.php:16
 msgid "Uninstall"
 msgstr "Odinstalovat."
 
-#: admin/themes/default/plugins/browse.php:129
+#: admin/themes/default/plugins/browse.php:131
 #: application/forms/Install.php:178
 msgid "Install"
 msgstr "Instalace"
 
-#: admin/themes/default/plugins/browse.php:140
+#: admin/themes/default/plugins/browse.php:143
 msgid ""
 "You do not have any plugins installed. Add them to the plugins directory to "
 "see them listed here."
@@ -1527,14 +1679,9 @@ msgid "or"
 msgstr "nebo"
 
 #: admin/themes/default/plugins/confirm-uninstall.php:17
-#: admin/themes/default/settings/edit-item-type-elements.php:50
+#: admin/themes/default/settings/edit-item-type-elements.php:51
 msgid "Cancel"
 msgstr "Zrušit"
-
-#: admin/themes/default/search/index.php:2
-#: application/views/scripts/search/index.php:2
-msgid "Search Omeka "
-msgstr "Prohledat Omeku"
 
 #: admin/themes/default/search/index.php:12
 #: admin/themes/default/tags/browse.php:18
@@ -1552,7 +1699,7 @@ msgid "Enable API"
 msgstr "Povolit API"
 
 #: admin/themes/default/settings/edit-api.php:15
-msgid "Enable or disable the API by checking or uncheking the box below."
+msgid "Enable or disable the API by checking or unchecking the box below."
 msgstr "Zapnutí nebo vypnutí API provedete zaškrtnutím nebo odšktrnutím pole."
 
 #: admin/themes/default/settings/edit-api.php:22
@@ -1594,18 +1741,18 @@ msgid ""
 "Customize the element descriptions below. To re-order the elements, %s."
 msgstr "Přizpůsobit popisy prvků níže. K přeskládání prvků, %s."
 
-#: admin/themes/default/settings/edit-item-type-elements.php:42
+#: admin/themes/default/settings/edit-item-type-elements.php:43
 msgid "Confirm Delete"
 msgstr "Potvrdit smazání"
 
-#: admin/themes/default/settings/edit-item-type-elements.php:43
+#: admin/themes/default/settings/edit-item-type-elements.php:44
 msgid ""
 "Are you sure you want to delete the selected item type elements from the "
 "database? You will lose all text related to the selected elements. This "
 "cannot be undone."
 msgstr "Jste si jist že chcete smazat vybrané prvky typu položky? Přijdete o všechen tex který se k vybraným prvkům vztahuje. Tento krok je nevratný."
 
-#: admin/themes/default/settings/edit-item-type-elements.php:50
+#: admin/themes/default/settings/edit-item-type-elements.php:51
 msgid "Ok"
 msgstr "Budiž"
 
@@ -1618,7 +1765,7 @@ msgid "Customize which types of records will be searchable in Omeka."
 msgstr "Nastavení typů záznamů vyhledávatelných v Omece."
 
 #: admin/themes/default/settings/edit-search.php:23
-#: admin/themes/default/settings/edit-search.php:41
+#: admin/themes/default/settings/edit-search.php:42
 msgid "Index Records"
 msgstr "Indexovat záznamy"
 
@@ -1705,7 +1852,7 @@ msgid "Record Types"
 msgstr "Typy záznamů"
 
 #: admin/themes/default/themes/browse.php:15
-#: admin/themes/default/themes/browse.php:43
+#: admin/themes/default/themes/browse.php:44
 #, php-format
 msgid "Screenshot for %s Theme"
 msgstr "Screenshot vzhledu %s"
@@ -1719,7 +1866,7 @@ msgid "Current Theme"
 msgstr "Aktuální vzhled"
 
 #: admin/themes/default/themes/browse.php:21
-#: admin/themes/default/themes/browse.php:48
+#: admin/themes/default/themes/browse.php:49
 #, php-format
 msgid "By %s"
 msgstr "Od %s"
@@ -1732,7 +1879,7 @@ msgid ""
 "target=\"_blank\">design your own</a>!"
 msgstr "Přidejte si nová témata, která jsou ke stažení na <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Omeka Theme Directory</a> nebo <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">design your own</a>!s"
 
-#: admin/themes/default/themes/browse.php:45
+#: admin/themes/default/themes/browse.php:46
 msgid "Use this theme"
 msgstr "Použít tento vzhled"
 
@@ -1763,41 +1910,47 @@ msgstr "Prosím zálohujte vaší současnou databázi a potom klikněte na tla�
 msgid "Upgrade Database"
 msgstr "Aktualizovat databázi"
 
-#: admin/themes/default/upgrade/migrate.php:32
+#: admin/themes/default/upgrade/migrate.php:3
+msgid "Omeka has upgraded successfully."
+msgstr "Omeka byla úspěšně aktualizována."
+
+#: admin/themes/default/upgrade/migrate.php:5
 msgid "Omeka encountered an error when upgrading your installation."
 msgstr "V Omece nastala chyba při aktualizaci vaší instalace."
 
-#: admin/themes/default/upgrade/migrate.php:37
+#: admin/themes/default/upgrade/migrate.php:24
+msgid "Return to Dashboard"
+msgstr "Zpátky na nástěnku"
+
+#: admin/themes/default/upgrade/migrate.php:30
 msgid "Please restore from your database backup and try again."
 msgstr "Prosím obnovte databázi z vaši zálohy a opakujte proces."
 
-#: admin/themes/default/upgrade/migrate.php:39
+#: admin/themes/default/upgrade/migrate.php:31
 msgid ""
 "If you have any questions please refer to <a "
 "href=\"http://omeka.org/codex\">Omeka documentation</a> or post a message on"
 " the <a href=\"http://omeka.org/forums\">Omeka forums</a>."
 msgstr "Pokud máte nějaké otázky přečtěte si prosím <a href=\"http://omeka.org/codex\">Omeka dokumentaci</a> nebo se zeptejte na <a href=\"http://omeka.org/forums\">Omeka fóru</a>."
 
-#: admin/themes/default/upgrade/migrate.php:42
-msgid "Omeka has upgraded successfully."
-msgstr "Omeka byla úspěšně aktualizována."
-
-#: admin/themes/default/upgrade/migrate.php:43
-msgid "Return to Dashboard"
-msgstr "Zpátky na nástěnku"
-
 #: admin/themes/default/users/activate.php:2
 #: application/views/scripts/users/activate.php:2
 msgid "User Activation"
 msgstr "Aktivace uživatele"
 
-#: admin/themes/default/users/activate.php:18
+#: admin/themes/default/users/activate.php:12
+#: application/views/scripts/users/activate.php:8
+#, php-format
+msgid "Hello %s. Your username is %s"
+msgstr "Zdravím %s. Vaše uživatelské jméno je %s"
+
+#: admin/themes/default/users/activate.php:17
 #: application/forms/ResetPassword.php:23
 #: application/views/scripts/users/activate.php:14
 msgid "Create a Password"
 msgstr "Vytvořit heslo."
 
-#: admin/themes/default/users/activate.php:24 application/forms/Install.php:71
+#: admin/themes/default/users/activate.php:23 application/forms/Install.php:71
 #: application/forms/ResetPassword.php:44
 #: application/views/scripts/users/activate.php:20
 msgid "Re-type the Password"
@@ -1854,6 +2007,10 @@ msgstr "Poslední přístup"
 msgid "Rescind"
 msgstr "Zrušit"
 
+#: admin/themes/default/users/api-keys.php:60
+msgid "Update API Keys"
+msgstr "Aktualizovat API klíče"
+
 #: admin/themes/default/users/browse.php:2
 msgid "Browse Users"
 msgstr "Procházet uživatele"
@@ -1903,7 +2060,7 @@ msgstr "Uložit heslo"
 
 #: admin/themes/default/users/edit.php:23
 msgid "Resend Activation Email"
-msgstr ""
+msgstr "Znovu odeslat aktivační e-mail"
 
 #: admin/themes/default/users/forgot-password.php:2
 #: application/views/scripts/users/forgot-password.php:2
@@ -1930,6 +2087,10 @@ msgstr "Zpět na přihlášení"
 msgid "Log In"
 msgstr "Přihlásit se"
 
+#: admin/themes/default/users/login.php:8
+msgid "Go to the public site"
+msgstr ""
+
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
 msgstr "(Ztracené heslo?)"
@@ -1950,8 +2111,8 @@ msgstr "Nastavení vzhledu bylo aktualizováno."
 #: application/controllers/AppearanceController.php:51
 #: application/controllers/ItemTypesController.php:35
 #: application/controllers/ItemTypesController.php:61
-#: application/controllers/SettingsController.php:47
-#: application/controllers/SettingsController.php:79
+#: application/controllers/SettingsController.php:55
+#: application/controllers/SettingsController.php:88
 #: install/views/scripts/index/index.phtml:17
 msgid "There were errors found in your form. Please edit and resubmit."
 msgstr "Ve vašem formuláři jsou chyby. Prosím opravte je a formulář znovu odešlete."
@@ -1966,37 +2127,41 @@ msgid ""
 "  All changed values have been restored."
 msgstr "Nastavení navigace nebude uloženo, protože obsahuje neplatné nebo nevyplněné hodnoty. Všechny změněné hodnoty budou obnoveny."
 
-#: application/controllers/CollectionsController.php:74
+#: application/controllers/AppearanceController.php:97
+msgid "The navigation settings have been reset."
+msgstr "Nastavení navigace byla obnovena."
+
+#: application/controllers/CollectionsController.php:76
 #, php-format
 msgid "The collection \"%s\" was successfully added!"
 msgstr "Sbírka \"%s\" byla úspěšně přidána!"
 
-#: application/controllers/CollectionsController.php:76
+#: application/controllers/CollectionsController.php:78
 #, php-format
 msgid "The collection #%s was successfully added!"
 msgstr "Sbírka #%s byla úspěšně přidána!"
 
-#: application/controllers/CollectionsController.php:84
+#: application/controllers/CollectionsController.php:86
 #, php-format
 msgid "The collection \"%s\" was successfully changed!"
 msgstr "Sbírka \"%s\" byla úspěšně změněna!"
 
-#: application/controllers/CollectionsController.php:86
+#: application/controllers/CollectionsController.php:88
 #, php-format
 msgid "The collection #%s was successfully changed!"
 msgstr "Sbírka #%s byla úspěšně změněna!"
 
-#: application/controllers/CollectionsController.php:94
+#: application/controllers/CollectionsController.php:96
 #, php-format
 msgid "The collection \"%s\" was successfully deleted!"
 msgstr "Sbírka \"%s\" byla úspěšně smazána!"
 
-#: application/controllers/CollectionsController.php:96
+#: application/controllers/CollectionsController.php:98
 #, php-format
 msgid "The collection #%s was successfully deleted!"
 msgstr "Sbírka #%s byla úspěšně vymazána!"
 
-#: application/controllers/CollectionsController.php:104
+#: application/controllers/CollectionsController.php:106
 #, php-format
 msgid ""
 "This will delete the collection \"%s\" and its associated metadata. This "
@@ -2004,7 +2169,7 @@ msgid ""
 "to this collection in each item."
 msgstr "Tímto vymažete sbírku \"#%s\" a všechna s ní související metadata. Žádná z položek v kolekci nebude smazána, pouze všechny odkazy z položek vedoucí ke kolekci."
 
-#: application/controllers/CollectionsController.php:108
+#: application/controllers/CollectionsController.php:110
 #, php-format
 msgid ""
 "This will delete the collection #%s and its associated metadata. This will "
@@ -2018,7 +2183,23 @@ msgid ""
 "set. Items will lose all metadata that is specific to this element set."
 msgstr "Tímto smažete sadu prvků a všechny prvky přiřazené do této sady. Položky ztratí všechna metadata specifická pro tuto sadu prvků."
 
-#: application/controllers/ElementSetsController.php:65
+#: application/controllers/ElementSetsController.php:53
+#: application/controllers/PluginsController.php:51
+#: application/controllers/PluginsController.php:79
+#: application/controllers/PluginsController.php:139
+#: application/controllers/PluginsController.php:190
+#: application/controllers/PluginsController.php:223
+#: application/controllers/PluginsController.php:331
+#: application/controllers/SettingsController.php:104
+#: application/controllers/SettingsController.php:140
+#: application/controllers/SettingsController.php:177
+#: application/controllers/ThemesController.php:87
+#: application/libraries/Omeka/Controller/AbstractActionController.php:183
+#: application/libraries/Omeka/Controller/AbstractActionController.php:224
+msgid "There was an error on the form. Please try again."
+msgstr "Ve formuláři je chyba. Prosím zkuste to znovu."
+
+#: application/controllers/ElementSetsController.php:72
 msgid "The element set was successfully changed!"
 msgstr "Prvek byl úspěšně upraven!"
 
@@ -2030,9 +2211,13 @@ msgstr "Stránka nenalezena."
 msgid "Access denied."
 msgstr "Přistup odepřen."
 
-#: application/controllers/FilesController.php:64
+#: application/controllers/FilesController.php:66
 msgid "This will delete the file and its associated metadata."
 msgstr "Tímto smažete soubor a s ním asociovaná metadata."
+
+#: application/controllers/FilesController.php:72
+msgid "The file was successfully deleted."
+msgstr "Soubor byl úspěšně smazán."
 
 #: application/controllers/ItemTypesController.php:28
 #, php-format
@@ -2059,89 +2244,113 @@ msgid ""
 "your new item type."
 msgstr "Typ položky \"%s\" byl úspěšně přidán!   Nyní můžete přidat prvky do vašeho nového typu položky."
 
-#: application/controllers/ItemsController.php:85
-#: application/controllers/ItemsController.php:145
+#: application/controllers/ItemsController.php:89
+#: application/controllers/ItemsController.php:149
 msgid ""
 "The ImageMagick directory path has not been set. No derivative images will "
 "be created. If you would like Omeka to create derivative images, please set "
 "the path in Settings."
-msgstr ""
+msgstr "Cesta k adresáři ImageMagick nebyla nastavena. Nebudou vytvořeny žádné odvozené obrázky. Pokud byste chtěli v Omeka vytvořit odvozené obrázky, prosím, nastavte  cestu k ImageMagick v Nastavení."
 
-#: application/controllers/ItemsController.php:94
+#: application/controllers/ItemsController.php:98
 #, php-format
 msgid "The item \"%s\" was successfully added!"
 msgstr "Položka \"%s\" byla úspěšně přidána!"
 
-#: application/controllers/ItemsController.php:96
+#: application/controllers/ItemsController.php:100
 #, php-format
 msgid "The item #%s was successfully added!"
 msgstr "Položka #%s byla úspěšně přidána!"
 
-#: application/controllers/ItemsController.php:104
+#: application/controllers/ItemsController.php:108
 #, php-format
 msgid "The item \"%s\" was successfully changed!"
 msgstr "Položka \"%s\" byla úspěšně změněna!"
 
-#: application/controllers/ItemsController.php:106
+#: application/controllers/ItemsController.php:110
 #, php-format
 msgid "The item #%s was successfully changed!"
 msgstr "Položka #%s byla úspěšně změněna!"
 
-#: application/controllers/ItemsController.php:114
+#: application/controllers/ItemsController.php:118
 #, php-format
 msgid "The item \"%s\" was successfully deleted!"
 msgstr "Položka \"%s\" byla úspěšně smazána!"
 
-#: application/controllers/ItemsController.php:116
+#: application/controllers/ItemsController.php:120
 #, php-format
 msgid "The item #%s was successfully deleted!"
 msgstr "Položka #%s byla úspěšně smazána!"
 
-#: application/controllers/ItemsController.php:124
+#: application/controllers/ItemsController.php:128
 #, php-format
 msgid ""
 "This will delete the item \"%s\" and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
 msgstr "Tímto smažete položku \"%s\" a s ní asociovaná metadata. Smazána budou také soubory a metadata souborů asociovaných s touto položkou."
 
-#: application/controllers/ItemsController.php:128
+#: application/controllers/ItemsController.php:132
 #, php-format
 msgid ""
 "This will delete the item #%s and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
 msgstr "Tímto smažete položku #%s a s ní asociovaná metadata. Smazána budou také soubory a metadata souborů asociovaných s touto položkou."
 
-#: application/controllers/ItemsController.php:255
+#: application/controllers/ItemsController.php:241
+#: application/controllers/ItemsController.php:376
+#: application/controllers/ItemsController.php:444
+msgid "No item to batch edit."
+msgstr ""
+
+#: application/controllers/ItemsController.php:248
+msgid "The deletion of all items is forbidden."
+msgstr ""
+
+#: application/controllers/ItemsController.php:265
 msgid "You must choose some items to batch edit."
 msgstr "Procházet položky podle štítků"
 
-#: application/controllers/ItemsController.php:299
+#: application/controllers/ItemsController.php:314
+#: application/controllers/ItemsController.php:412
 msgid "User is not allowed to modify visibility of items."
 msgstr "Uživatel nesmí měnit viditelnost položek."
 
-#: application/controllers/ItemsController.php:304
+#: application/controllers/ItemsController.php:319
+#: application/controllers/ItemsController.php:417
 msgid "User is not allowed to modify featured status of items."
 msgstr "Uživatel nemá oprávnění upravovat doporučenost této položky."
 
-#: application/controllers/ItemsController.php:311
+#: application/controllers/ItemsController.php:326
 msgid "User is not allowed to delete selected items."
 msgstr "Uživatel nesmí mazat vybrané položky."
 
-#: application/controllers/ItemsController.php:317
+#: application/controllers/ItemsController.php:332
 msgid "User is not allowed to edit selected items."
 msgstr "Uživatel nesmí upravovat vybrané položky."
 
-#: application/controllers/ItemsController.php:322
+#: application/controllers/ItemsController.php:337
 msgid "User is not allowed to tag selected items."
 msgstr "Uživatel nemá oprávnění přidávat štítky k vybraným Položkám."
 
-#: application/controllers/ItemsController.php:356
+#: application/controllers/ItemsController.php:369
 msgid "The items were successfully deleted!"
 msgstr "Položky byly úspěšně smazány!"
 
-#: application/controllers/ItemsController.php:358
+#: application/controllers/ItemsController.php:371
 msgid "The items were successfully changed!"
 msgstr "Položky byly úspěšně změněny!"
+
+#: application/controllers/ItemsController.php:436
+msgid "The items are checked and deleted one by one in the background."
+msgstr ""
+
+#: application/controllers/ItemsController.php:438
+msgid "The items are checked and changed one by one in the background."
+msgstr ""
+
+#: application/controllers/ItemsController.php:440
+msgid "Check logs for success and errors."
+msgstr ""
 
 #: application/controllers/PluginsController.php:45
 #, php-format
@@ -2150,169 +2359,163 @@ msgid ""
 "hook(s)."
 msgstr "Chyba při konfiguraci zásuvného modulu \"%s\". Chybí config a/nebo config_form háček(ky)."
 
-#: application/controllers/PluginsController.php:52
+#: application/controllers/PluginsController.php:59
 #, php-format
 msgid "The %s plugin was successfully configured!"
 msgstr "Zásuvný modul %s byl úspěšně konfigurován!"
 
-#: application/controllers/PluginsController.php:70
+#: application/controllers/PluginsController.php:89
 #, php-format
 msgid "The %s plugin has already been installed."
 msgstr "Zásuvný modul %s je již nainstalován."
 
-#: application/controllers/PluginsController.php:79
+#: application/controllers/PluginsController.php:99
 #, php-format
 msgid "The %s plugin was successfully installed!"
 msgstr "Zásuvný modul %s byl úspěšně nainstalován!"
 
-#: application/controllers/PluginsController.php:91
-#: application/controllers/PluginsController.php:96
+#: application/controllers/PluginsController.php:111
+#: application/controllers/PluginsController.php:116
 #, php-format
 msgid "The following error occurred while installing the %s plugin: "
 msgstr "Následující chyba nastala při instalaci zásuvného modulu %s: "
 
-#: application/controllers/PluginsController.php:124
+#: application/controllers/PluginsController.php:154
 #, php-format
 msgid "The following error occurred while activating the %s plugin: "
 msgstr "Následující chyba nastala při aktivaci zásuvného modulu %s: "
 
-#: application/controllers/PluginsController.php:134
+#: application/controllers/PluginsController.php:164
 #, php-format
 msgid "The %s plugin was successfully activated!"
 msgstr "Zásuvný modul %s byl úspěšně aktivován!"
 
-#: application/controllers/PluginsController.php:139
+#: application/controllers/PluginsController.php:169
 #, php-format
 msgid "The %s plugin was activated, but could not be loaded: "
 msgstr "Zásuvný modul %s byl aktivován, ale nemohl být načten: "
 
-#: application/controllers/PluginsController.php:163
+#: application/controllers/PluginsController.php:204
 #, php-format
 msgid "The %s plugin was successfully deactivated!"
 msgstr "%s zásuvný modul byl úspěšně deaktivován!"
 
-#: application/controllers/PluginsController.php:168
+#: application/controllers/PluginsController.php:209
 #, php-format
 msgid "The following error occurred while deactivating the %s plugin: "
 msgstr "V průběhu deaktivace %s zásuvného modulu se stala následující chyba: "
 
-#: application/controllers/PluginsController.php:187
+#: application/controllers/PluginsController.php:239
 #, php-format
 msgid "The %s plugin was successfully upgraded!"
 msgstr "%s zásuvný modul byl úspěšně aktualizován!"
 
-#: application/controllers/PluginsController.php:196
-#: application/controllers/PluginsController.php:202
+#: application/controllers/PluginsController.php:248
+#: application/controllers/PluginsController.php:254
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
 msgstr "V průběhu aktualizace zásuvného modulu %s se stala následující chyba: "
 
-#: application/controllers/PluginsController.php:253
+#: application/controllers/PluginsController.php:305
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
 msgstr "Zásuvný modul nebyl nalezen v adresáři '%s' !"
 
-#: application/controllers/PluginsController.php:262
+#: application/controllers/PluginsController.php:318
 msgid "You must confirm the uninstall before proceeding."
 msgstr "Musíte potvrdit odinstalaci před tím než bude provedena."
 
-#: application/controllers/PluginsController.php:280
+#: application/controllers/PluginsController.php:337
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
 msgstr "Plugin %s byl úspěšně odinstalován!"
 
-#: application/controllers/PluginsController.php:285
-#: application/controllers/PluginsController.php:290
+#: application/controllers/PluginsController.php:342
+#: application/controllers/PluginsController.php:347
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
 msgstr "V průběhu odinstalace %s pluginu se stala následující chyba: "
 
-#: application/controllers/PluginsController.php:317
+#: application/controllers/PluginsController.php:376
 msgid "No plugin name given."
 msgstr "Není zadáno jméno zásuvného modulu."
 
-#: application/controllers/PluginsController.php:330
+#: application/controllers/PluginsController.php:389
 #, php-format
 msgid "The plugin %s must be installed."
 msgstr "Plugin %s musí být instalovaný."
 
-#: application/controllers/SettingsController.php:44
+#: application/controllers/SettingsController.php:52
 msgid "The general settings have been updated."
 msgstr "Nastavení bylo aktualizováno."
 
-#: application/controllers/SettingsController.php:76
+#: application/controllers/SettingsController.php:85
 msgid "The security settings have been updated."
 msgstr "Bezpečnostní nastavení bylo aktualizováno."
 
-#: application/controllers/SettingsController.php:95
+#: application/controllers/SettingsController.php:114
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
 msgstr "Soubory prohledávané Omekou byly změněny. Prosím reindexujte záznamy pomocí formuláře dole."
 
-#: application/controllers/SettingsController.php:102
+#: application/controllers/SettingsController.php:121
 msgid ""
 "Indexing records. This may take a while. You may continue administering your"
 " site."
 msgstr "Indexování záznamů. Může to chvilku trvat. Zatím můžete pokračovat v administraci vaší stránky."
 
-#: application/controllers/SettingsController.php:131
+#: application/controllers/SettingsController.php:156
 msgid "The item type elements were successfully changed!"
 msgstr "Prvky položky typu byly úspěšně změněny!"
 
-#: application/controllers/SettingsController.php:150
+#: application/controllers/SettingsController.php:183
 msgid "The API configuration was successfully changed!"
 msgstr "Nastavení API bylo úspěšně změněno!"
 
-#: application/controllers/SettingsController.php:176
+#: application/controllers/SettingsController.php:206
 msgid "The ImageMagick directory path works."
 msgstr "ImageMagick adresářová cesta pracuje."
 
-#: application/controllers/SettingsController.php:177
+#: application/controllers/SettingsController.php:207
 msgid "The ImageMagick directory path does not work."
 msgstr "ImageMagick adresářová cesta nepracuje správně."
 
-#: application/controllers/TagsController.php:35
-msgid "You have to be logged in to edit tags!"
-msgstr "Pro editaci štítků musíte být přihlášený!"
-
-#: application/controllers/TagsController.php:64
-#, php-format
-msgid "Tag named \"%1$s\" was successfully renamed to \"%2$s\"."
-msgstr "Štítek pojmenovaný \"%1$s\" byl úspěšně přejmenovaný na \"%2$s\"."
-
-#: application/controllers/TagsController.php:91
+#: application/controllers/TagsController.php:47
 msgid "Invalid tagType given."
 msgstr "Zadán neplatný typ štítku."
 
-#: application/controllers/ThemesController.php:25
+#: application/controllers/ThemesController.php:28
 msgid "Invalid form submission."
 msgstr "Neplatné odeslání formuláře."
 
-#: application/controllers/ThemesController.php:33
+#: application/controllers/ThemesController.php:36
 msgid "You have chosen an illegal theme name. Please select another theme."
 msgstr "Vybrali jste neplatné jméno vzhledu. Prosím, vyberte jiný vzhled."
 
-#: application/controllers/ThemesController.php:40
+#: application/controllers/ThemesController.php:43
 #, php-format
 msgid "This theme requires a newer version of Omeka (%s)."
 msgstr "Toto téma vyžaduje novější verzi Omeky(%s)."
 
-#: application/controllers/ThemesController.php:54
+#: application/controllers/ThemesController.php:57
 msgid "The theme has been successfully changed."
 msgstr "Vzhled byl úspěšně změněn."
 
-#: application/controllers/ThemesController.php:81
+#: application/controllers/ThemesController.php:84
 msgid "The theme settings were successfully saved!"
 msgstr "Nastavení vzhledu bylo úspěšně změněno!"
 
-#: application/controllers/ThemesController.php:84
-msgid "There was an error on the form. Please try again."
-msgstr "Ve formuláři je chyba. Prosím zkuste to znovu."
-
-#: application/controllers/UpgradeController.php:50
+#: application/controllers/UpgradeController.php:56
 msgid "SQL error in migration: "
 msgstr "SQL chyba při migraci:"
+
+#: application/controllers/UpgradeController.php:69
+#, php-format
+msgid ""
+"Omeka requires PHP version %1$s or higher, but this server is running PHP "
+"version %2$s. Please update the installed version of PHP and try again."
+msgstr ""
 
 #: application/controllers/UsersController.php:70
 msgid ""
@@ -2326,7 +2529,7 @@ msgstr "Prosím, pokračujte tímto odkazem, pokud chcete resetovat vaše heslo:
 
 #: application/controllers/UsersController.php:110
 #: application/controllers/UsersController.php:113
-#: application/controllers/UsersController.php:380
+#: application/controllers/UsersController.php:385
 #, php-format
 msgid "%s Administrator"
 msgstr "%s Administrator"
@@ -2352,52 +2555,53 @@ msgstr "Heslo: Heslo neodpovídá."
 msgid "You may now log in to Omeka."
 msgstr "Teď se smíte přihlásit do Omeky."
 
-#: application/controllers/UsersController.php:171
+#: application/controllers/UsersController.php:168
+#: application/controllers/UsersController.php:236
+#: application/controllers/UsersController.php:287
+msgid "There was an invalid entry on the form. Please try again."
+msgstr "Ve formuláři je chyba. Prosím zkuste to znovu."
+
+#: application/controllers/UsersController.php:176
 #, php-format
 msgid "The user \"%s\" was successfully added!"
 msgstr "Uživatel \"%s\" byl úspěšně přidán!"
 
-#: application/controllers/UsersController.php:175
+#: application/controllers/UsersController.php:180
 #, php-format
 msgid "The user \"%s\" was added, but the activation email could not be sent."
 msgstr "Uživatel \"%s\" byl přidán, ale aktivační e-mail mu nemohl být zaslán."
 
-#: application/controllers/UsersController.php:213
+#: application/controllers/UsersController.php:218
 msgid "User activation email has been sent."
-msgstr ""
+msgstr "Aktivační e-mail byl odeslán uživateli."
 
-#: application/controllers/UsersController.php:215
+#: application/controllers/UsersController.php:220
 msgid "User activation email could not be sent."
-msgstr ""
+msgstr "Nepodařilo se uživateli odeslat aktivační e-mail."
 
-#: application/controllers/UsersController.php:231
-#: application/controllers/UsersController.php:282
-msgid "There was an invalid entry on the form. Please try again."
-msgstr "Ve formuláři je chyba. Prosím zkuste to znovu."
-
-#: application/controllers/UsersController.php:253
+#: application/controllers/UsersController.php:258
 #, php-format
 msgid "The user %s was successfully changed!"
 msgstr "Uživatel \"%s\" byl úspěšně změněn!"
 
-#: application/controllers/UsersController.php:289
+#: application/controllers/UsersController.php:294
 msgid "Password changed!"
 msgstr "Heslo změněno!"
 
-#: application/controllers/UsersController.php:311
+#: application/controllers/UsersController.php:316
 msgid "A new API key was successfully created."
 msgstr "Byl úspěšně vytvořen nový API klíč."
 
-#: application/controllers/UsersController.php:318
+#: application/controllers/UsersController.php:323
 msgid "An existing API key was successfully rescinded."
 msgstr "Stávající klíč API byl úspěšně zrušen."
 
-#: application/controllers/UsersController.php:345
+#: application/controllers/UsersController.php:350
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
 msgstr "Uživatel \"%s\" byl úspěšně smazán!"
 
-#: application/controllers/UsersController.php:351
+#: application/controllers/UsersController.php:356
 #, php-format
 msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
@@ -2405,88 +2609,106 @@ msgid ""
 "this user."
 msgstr "%s bude smazán ze systému. Položky, sbírky a štítky vytvořené tímto uživatelem zůstanou nadále v systému, ale nebudou s ním již propojené."
 
-#: application/controllers/UsersController.php:376
+#: application/controllers/UsersController.php:381
 msgid "Welcome!"
 msgstr "Vítej!"
 
-#: application/controllers/UsersController.php:378
+#: application/controllers/UsersController.php:383
 #, php-format
 msgid ""
 "Your account for the %s repository has been created. Please click the "
 "following link to activate your account:"
 msgstr "Váš účet pro repositář %s byl vytvořen. Prosím klikněta na následující odkaz pro jeho aktivaci."
 
-#: application/controllers/UsersController.php:381
+#: application/controllers/UsersController.php:386
 #, php-format
 msgid "Activate your account with the %s repository"
 msgstr "Aktivuje váš účet s repositářem %s "
 
-#: application/controllers/UsersController.php:476
+#: application/controllers/UsersController.php:481
 msgid "Login information incorrect. Please try again."
 msgstr "Nesprávné přihlašovací údaje. Prosím zkuste to znovu."
 
 #: application/forms/AppearanceSettings.php:22
+msgid "Use Square Thumbnails"
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:23
+msgid ""
+"Use square-cropped images by default wherever thumbnails appear in the "
+"public interface."
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:28
 #: application/forms/Install.php:128
 msgid "Fullsize Image Size"
 msgstr "Velikost obrázku"
 
-#: application/forms/AppearanceSettings.php:23
+#: application/forms/AppearanceSettings.php:29
 msgid "Maximum fullsize image size constraint (in pixels)."
 msgstr "Omezení na maximální rozměr obrázku (v pixelech)."
 
-#: application/forms/AppearanceSettings.php:29
+#: application/forms/AppearanceSettings.php:35
 #: application/forms/Install.php:136
 msgid "Thumbnail Size"
 msgstr "Velikost náhledu"
 
-#: application/forms/AppearanceSettings.php:30
+#: application/forms/AppearanceSettings.php:36
 msgid "Maximum thumbnail size constraint (in pixels)."
 msgstr "Maximální velikost náhledu (v pixelech)."
 
-#: application/forms/AppearanceSettings.php:36
+#: application/forms/AppearanceSettings.php:42
 #: application/forms/Install.php:144
 msgid "Square Thumbnail Size"
 msgstr "Velikost čtvercové miniatury"
 
-#: application/forms/AppearanceSettings.php:37
+#: application/forms/AppearanceSettings.php:43
 msgid "Maximum square thumbnail size constraint (in pixels)."
 msgstr "Omezení na maximální rozměr čtvercového náhledu (v pixelech)."
 
-#: application/forms/AppearanceSettings.php:43
+#: application/forms/AppearanceSettings.php:49
 msgid "Results Per Page (admin)"
 msgstr "Výsledků na stranu (admin)"
 
-#: application/forms/AppearanceSettings.php:44
+#: application/forms/AppearanceSettings.php:50
 msgid ""
 "Limit the number of results displayed per page in the administrative "
 "interface."
 msgstr "Omezit počet výsledků zobrazených na stranu v administračním rozhraní."
 
-#: application/forms/AppearanceSettings.php:50
+#: application/forms/AppearanceSettings.php:56
 msgid "Results Per Page (public)"
 msgstr "Výsledků na stranu (veřejné)"
 
-#: application/forms/AppearanceSettings.php:51
+#: application/forms/AppearanceSettings.php:57
 msgid ""
 "Limit the number of results displayed per page in the public interface."
 msgstr "Omezení počtu výsledků zobrazených na jedné straně ve veřejném rozhraní."
 
-#: application/forms/AppearanceSettings.php:57
+#: application/forms/AppearanceSettings.php:63
 #: application/forms/Install.php:168
 msgid "Show Empty Elements"
 msgstr "Zobrazit prázdné prvky"
 
-#: application/forms/AppearanceSettings.php:62
+#: application/forms/AppearanceSettings.php:68
 msgid "Show Element Set Headings"
 msgstr ""
 
-#: application/forms/AppearanceSettings.php:71
+#: application/forms/AppearanceSettings.php:78
+msgid "Admin Theme"
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:92
 msgid "Derivative Size Constraints"
 msgstr "Omezení velikosti odvozenin"
 
-#: application/forms/AppearanceSettings.php:79
+#: application/forms/AppearanceSettings.php:100
 msgid "Display Settings"
 msgstr "Nastavení zobrazení"
+
+#: application/forms/AppearanceSettings.php:108
+msgid "Admin Themes"
+msgstr ""
 
 #: application/forms/ChangePassword.php:25
 msgid "Current Password"
@@ -2558,14 +2780,14 @@ msgstr "Cesta k ImageMagick"
 
 #: application/forms/Install.php:31
 msgid "must be 30 characters or fewer with no whitespace"
-msgstr ""
+msgstr "musí být 30 nebo méně znaků bez mezery"
 
 #: application/forms/Install.php:39 application/forms/User.php:46
 #: application/models/User.php:189
 #, php-format
 msgid ""
 "Whitespace is not allowed. Only these special characters may be used: %s"
-msgstr ""
+msgstr "Mezery nejsou povoleny. Mohou být použity pouze tyto speciální znaky: %s"
 
 #: application/forms/Install.php:48 application/forms/Login.php:34
 msgid "Password"
@@ -2633,7 +2855,7 @@ msgstr "Jméno typu položky."
 msgid "The description of the item type."
 msgstr "Popis typu položky."
 
-#: application/forms/ItemTypes.php:188 application/forms/ItemTypes.php:197
+#: application/forms/ItemTypes.php:173 application/forms/ItemTypes.php:182
 #, php-format
 msgid "The item type cannot have more than one \"%s\" element."
 msgstr "Typ položky nemůže obsahovat více než jeden \"%s\" prvek."
@@ -2650,32 +2872,32 @@ msgstr "Heslo nemůže být prázdné."
 msgid "Remember Me?"
 msgstr "Neodhlašovat?"
 
-#: application/forms/Navigation.php:156
+#: application/forms/Navigation.php:162
 msgid "[Default]"
 msgstr "[Standardní]"
 
-#: application/forms/Navigation.php:162
+#: application/forms/Navigation.php:168
 msgid "Select a Homepage"
 msgstr "Vybrat domácí stránku"
 
-#: application/forms/Navigation.php:244
+#: application/forms/Navigation.php:250
 msgid "Cannot find parent navigation page."
 msgstr "Nelze nalézt rodičovskou stránku v navigaci."
 
-#: application/forms/Navigation.php:325
+#: application/forms/Navigation.php:331
 msgid "All navigation links must have URIs."
 msgstr "Všechny odkazy v navigaci musí mít URI."
 
-#: application/forms/Navigation.php:338
+#: application/forms/Navigation.php:344
 msgid "All navigation links must have different URIs."
 msgstr "Všechny odkazy v navigaci musí mít různá URI."
 
-#: application/forms/Navigation.php:344
+#: application/forms/Navigation.php:350
 #, php-format
 msgid "Invalid URI for \"%s\" navigation link:  \"%s\""
 msgstr "Neplatný URI pro \"%s\" navigační odkaz:  \"%s\""
 
-#: application/forms/Navigation.php:377
+#: application/forms/Navigation.php:383
 msgid "Navigation links that have undeleteable sublinks cannot be deleted."
 msgstr "Navigační odkaz který má nesmazatelné pododkazy nemůže být smazán."
 
@@ -2757,7 +2979,7 @@ msgstr "Vložte soukromý klíč z recaptcha.net. Oba klíče musí být zadány
 msgid ""
 "Check this field if you would like to filter HTML elements or attributes "
 "from form input."
-msgstr ""
+msgstr "Zaškrtněte toto pole, pokud chcete ze vstupního formuláře filtrovat HTML elementy nebo atributy."
 
 #: application/forms/SecuritySettings.php:69
 msgid "Enable HTML Filtering"
@@ -2779,21 +3001,21 @@ msgstr "Povolené HTML atributy"
 msgid "List of allowed HTML attributes in form input"
 msgstr "Seznam HTML atributů povolených ve vstupním formuláři."
 
-#: application/forms/SecuritySettings.php:94
+#: application/forms/SecuritySettings.php:98
 msgid "File Validation"
 msgstr "Validace souboru"
 
-#: application/forms/SecuritySettings.php:102
+#: application/forms/SecuritySettings.php:106
 msgid "Captcha"
 msgstr "Captcha"
 
-#: application/forms/SecuritySettings.php:111
+#: application/forms/SecuritySettings.php:115
 msgid "HTML Filtering"
 msgstr "HTML filtrování"
 
 #: application/forms/User.php:30
 msgid "Username must be 30 characters or fewer. Whitespace is not allowed."
-msgstr ""
+msgstr "Uživatelské jméno musí být dlouhé 30 znaků nebo méně. Prázdné není povoleno."
 
 #: application/forms/User.php:37
 msgid "Username is required."
@@ -2851,17 +3073,17 @@ msgstr ""
 msgid "Active?"
 msgstr "Aktivní?"
 
-#: application/libraries/Omeka/Job/Process/Dispatcher.php:115
+#: application/libraries/Omeka/Job/Process/Dispatcher.php:114
 #, php-format
 msgid "The configured PHP path (%s) is invalid."
 msgstr "Nastavená cesta k PHP (%s) je neplatná."
 
-#: application/libraries/Omeka/Job/Process/Dispatcher.php:125
+#: application/libraries/Omeka/Job/Process/Dispatcher.php:124
 #, php-format
 msgid "The configured PHP path (%s) does not point to a PHP-CLI binary."
 msgstr "Nastavená PHP cesta (%s) neukazuje na PHP-CLI knihovnu."
 
-#: application/libraries/Omeka/Job/Process/Dispatcher.php:127
+#: application/libraries/Omeka/Job/Process/Dispatcher.php:126
 #, php-format
 msgid ""
 "The configured PHP path (%s) points to a PHP-CLI binary with an invalid "
@@ -2897,51 +3119,6 @@ msgstr "Zásuvný modul \"%s\" musí být nainstalován a musí mít nové soubo
 msgid "Plugin must have a valid directory name before it can be installed."
 msgstr "Zásuvný modul musí mít platné jméno adresáře, jinak nemůže být nainstalován."
 
-#: application/libraries/Omeka/Plugin/Loader.php:112
-#, php-format
-msgid "Plugin named '%s' has already been loaded/registered."
-msgstr "Zásuvný modul pojmenovaný '%s' je již načten/registrován."
-
-#: application/libraries/Omeka/Plugin/Loader.php:153
-#, php-format
-msgid "The %s plugin could not be loaded."
-msgstr "Zasuvný modul %s nemohl být načten.."
-
-#: application/libraries/Omeka/Plugin/Loader.php:174
-#, php-format
-msgid "The required plugin '%s' could not be found."
-msgstr "Vyžadovaný zásuvný modul '%s' nebyl nalezen."
-
-#: application/libraries/Omeka/Plugin/Loader.php:247
-#, php-format
-msgid "'%s' has no valid bootstrap file."
-msgstr "'%s' nemá správný soubor bootstrap."
-
-#: application/libraries/Omeka/Plugin/Loader.php:250
-#, php-format
-msgid "'%s' has not been installed."
-msgstr "'%s' nebyl nainstalován."
-
-#: application/libraries/Omeka/Plugin/Loader.php:253
-#, php-format
-msgid "'%s' has not been activated."
-msgstr "'%s' Nebyl aktivován."
-
-#: application/libraries/Omeka/Plugin/Loader.php:256
-#, php-format
-msgid "'%s' requires a newer version of Omeka."
-msgstr "'%s' vyžaduje novější verzi Omeky."
-
-#: application/libraries/Omeka/Plugin/Loader.php:261
-#, php-format
-msgid "'%s' must be upgraded to the new version before it can be loaded."
-msgstr "'%s' musí byt aktualizován na novou verzi předtím, než bude načten."
-
-#: application/libraries/Omeka/Plugin/Loader.php:264
-#, php-format
-msgid "'%s' cannot be loaded twice."
-msgstr "'%s' nemůže být nahraný dvakrát."
-
 #: application/libraries/Omeka/Record/AbstractRecord.php:349
 #, php-format
 msgid "'%s' is an invalid special value."
@@ -2951,81 +3128,83 @@ msgstr "'%s' je neplatná speciální hodnota."
 msgid "An invalid value was detected during record iteration."
 msgstr "Naplatná hodnota nalezena při procházení záznamů."
 
-#: application/libraries/globals.php:417
+#: application/libraries/globals.php:410
 msgid "File"
 msgstr "Soubor"
 
-#: application/libraries/globals.php:475
+#: application/libraries/globals.php:468
 msgid "Keyword"
 msgstr "Klíčové slovo"
 
-#: application/libraries/globals.php:476
+#: application/libraries/globals.php:469
 msgid "Boolean"
 msgstr "Boolean"
 
-#: application/libraries/globals.php:477
+#: application/libraries/globals.php:470
 msgid "Exact match"
 msgstr "Přesná shoda"
 
-#: application/libraries/globals.php:1238
-#: application/libraries/globals.php:1259
+#: application/libraries/globals.php:1263
+#: application/libraries/globals.php:1284
 #, php-format
 msgid "Could not find file %s!"
 msgstr "Soubor %s nenalezen!"
 
-#: application/libraries/globals.php:1276
+#: application/libraries/globals.php:1301
 msgid "No featured collections are available."
 msgstr "Žádná doporučená sbírka není dostupná."
 
-#: application/libraries/globals.php:1569
+#: application/libraries/globals.php:1598
 msgid "Select Below "
 msgstr "Vyberte z následujících"
 
-#: application/libraries/globals.php:1611
+#: application/libraries/globals.php:1641
 msgid "Omeka RSS Feed"
 msgstr "Omeka RSS kanál"
 
-#: application/libraries/globals.php:1612
+#: application/libraries/globals.php:1642
 msgid "Omeka Atom Feed"
 msgstr "Omeka Atom kanál"
 
-#: application/libraries/globals.php:2251
+#: application/libraries/globals.php:2297
 msgid "No recent items available."
 msgstr "Žádné nové položky nejsou k dispozici."
 
-#: application/libraries/globals.php:2277
+#: application/libraries/globals.php:2323
 msgid "No featured items are available."
 msgstr "Žádná doporučená položka není dostupná."
 
-#: application/libraries/globals.php:2332
+#: application/libraries/globals.php:2382
 msgid "View"
 msgstr "Zobrazit"
 
-#: application/libraries/globals.php:2394
+#: application/libraries/globals.php:2444
+#: application/models/Table/Collection.php:87
+#: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
 msgstr "Žádná sbírka"
 
-#: application/libraries/globals.php:2509
+#: application/libraries/globals.php:2563
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2526
+#: application/libraries/globals.php:2580
 msgid "Next Item &rarr;"
 msgstr "Další položka &rarr;"
 
-#: application/libraries/globals.php:2546
+#: application/libraries/globals.php:2600
 msgid "&larr; Previous Item"
 msgstr "&larr; Předchozí položka"
 
-#: application/libraries/globals.php:2724
+#: application/libraries/globals.php:2781
 msgid "Browse All"
 msgstr "Procházet vše"
 
-#: application/libraries/globals.php:2729
+#: application/libraries/globals.php:2786
 msgid "Browse by Tag"
 msgstr "Procházení podle štítků"
 
-#: application/libraries/globals.php:3002
+#: application/libraries/globals.php:3055
 msgid "No tags are available."
 msgstr "Žádné štítky."
 
@@ -3033,7 +3212,7 @@ msgstr "Žádné štítky."
 msgid "Must specify a file transfer type when attaching files to an item!"
 msgstr "Je třeba zadat typ přenosu souboru při připojování souborů k položce!"
 
-#: application/models/Collection.php:117
+#: application/models/Collection.php:119
 msgid "Cannot associate the collection with an unsaved user."
 msgstr "Nelze přiřadit sbírku s neuloženým uživatelem."
 
@@ -3075,57 +3254,57 @@ msgstr "Všechny prvky musí mít typ záznamu."
 msgid "Invalid element ID."
 msgstr "Neplatné ID prvku."
 
-#: application/models/File.php:241
+#: application/models/File.php:235
 msgid "Cannot get the local path for a stored file."
 msgstr "Nelze uložit lokální cestu pro ukládaný soubor."
 
-#: application/models/File.php:458
+#: application/models/File.php:452
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
 msgstr "\"%s\" není platná odvozenina."
 
-#: application/models/Item.php:330
+#: application/models/Item.php:332
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
 msgstr "Soubory nemohou být připojeny k položce která není trvale zaznamenána v databázi!"
 
 #. / Chicago-style item citation: two authors
-#: application/models/Item.php:457
+#: application/models/Item.php:467
 #, php-format
 msgid "%1$s and %2$s"
 msgstr "%1$s a %2$s"
 
 #. / Chicago-style item citation: three authors
-#: application/models/Item.php:461
+#: application/models/Item.php:471
 #, php-format
 msgid "%1$s, %2$s, and %3$s"
 msgstr "%1$s, %2$s, a %3$s"
 
 #. / Chicago-style item citation: more than three authors
-#: application/models/Item.php:465
+#: application/models/Item.php:475
 #, php-format
 msgid "%s et al."
 msgstr "%s a další"
 
 #. / Chicago-style item citation: access date and URL
-#: application/models/Item.php:483
+#: application/models/Item.php:493
 #, php-format
 msgid "accessed %1$s, %2$s."
 msgstr "navštíveno %1$s, %2$s."
 
-#: application/models/Item.php:500
+#: application/models/Item.php:510
 msgid "Cannot add an existing file to an item!"
 msgstr "Nelze přidat existující soubor k položce!"
 
-#: application/models/Item.php:504
+#: application/models/Item.php:514
 msgid "File must be valid before it can be associated with an item!"
 msgstr "Soubor musí být nejprve platný a pak ho lze přidat k položce!"
 
-#: application/models/Item.php:528
+#: application/models/Item.php:538
 msgid "Invalid item type."
 msgstr "Neplatný typ položky."
 
-#: application/models/Item.php:531
+#: application/models/Item.php:541
 msgid "Invalid collection."
 msgstr "Neplatná kolekce."
 
@@ -3138,62 +3317,123 @@ msgstr "Jméno typu položky musí obsahovat  %1$s až %2$s znaků."
 msgid "The item type name must be unique."
 msgstr "Jméno typu položky musí být jedinečné."
 
-#: application/models/ItemType.php:179
+#: application/models/ItemType.php:183
 msgid "There are too many values in the element ordering array."
 msgstr "Příliš mnoho hodnot pro řazení prvků pole."
 
-#: application/models/ItemType.php:181
+#: application/models/ItemType.php:185
 msgid "There are too few values in the element ordering array."
 msgstr "Příliš málo hodnot pro řazení prvků pole."
 
-#: application/models/ItemType.php:218
+#: application/models/ItemType.php:222
 msgid ""
 "Invalid element data. To add elements, you must either pass an element "
 "objects or an array of element metadata."
 msgstr "Neplatná data prvku. Pro přidání prvku musíte buď poslat objekt prvku, nebo pole metadat prvku."
 
-#: application/models/ItemType.php:282
+#: application/models/ItemType.php:286
 msgid ""
 "Cannot remove elements from an item type that is not persistent in the "
 "database!"
 msgstr "Nelze odstranit prvek z typu položky který není trvale zaznamenán v databázi!"
 
-#: application/models/ItemType.php:291
+#: application/models/ItemType.php:295
 #, php-format
 msgid "Cannot find element with ID %s!"
 msgstr "Nemohu nalézt položku s ID %s!"
 
-#: application/models/ItemType.php:332
+#: application/models/ItemType.php:336
 #, php-format
 msgid "Item type does not contain an element with the ID %s!"
 msgstr "Typ položky neobsahuje prvek s ID %s!"
 
-#: application/models/ItemType.php:353
+#: application/models/ItemType.php:357
 msgid ""
 "Invalid parameter. The hasElement function requires either an element object"
 " or an element id to determine if an item type has an element."
 msgstr "Neplatný parametr. Funkce hasElement vyžaduje buď objekt prvku nebo id prvku pro určení zda mát typ položky tento prvek."
 
-#: application/models/Mixin/ElementText.php:278
+#: application/models/Job/ItemBatchEditAll.php:41
+msgid "Batch Edit All Items: No item matches the specified filters."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:48
+#, php-format
+msgid "Batch Edit: Starting processing 1 item."
+msgid_plural "Batch Edit: Starting processing %d items."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: application/models/Job/ItemBatchEditAll.php:67
+#, php-format
+msgid ""
+"Batch Edit: A total of %d errors occurred during the batch process of %d "
+"items."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:74
+#, php-format
+msgid "Batch Edit: The item has been processed successfully."
+msgid_plural "Batch Edit: All %d items have been processed successfully."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: application/models/Job/ItemBatchEditAll.php:91
+msgid "Item does not exist: it may have been deleted before processing."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:106
+msgid "User is not allowed to delete this item."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:113
+msgid "User is not allowed to edit this item."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:119
+msgid "User is not allowed to tag this item."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:142
+msgid "The item was successfully deleted."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:154
+#, php-format
+msgid "An error occured when the item was updated: %s"
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:159
+msgid "The item was successfully batch-edited."
+msgstr ""
+
+#: application/models/Job/ItemBatchEditAll.php:178
+#, php-format
+msgid "Batch Edit Item #%d [%d/%d]: %s"
+msgstr ""
+
+#: application/models/Mixin/ElementText.php:293
 #, php-format
 msgid "There is no element \"%1$s\", \"%2$s\"!"
 msgstr "Neexistující prvek \"%1$s\", \"%2$s\"!"
 
-#: application/models/Mixin/ElementText.php:297
+#: application/models/Mixin/ElementText.php:312
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
 msgstr "Nelze najít prvek s ID  '%s'!"
 
-#: application/models/Mixin/ElementText.php:416
+#: application/models/Mixin/ElementText.php:431
 msgid "Element texts are not formatted correctly!"
 msgstr "Text není správně naformátován!"
 
-#: application/models/Mixin/ElementText.php:562
+#: application/models/Mixin/ElementText.php:579
 #, php-format
 msgid "The \"%s\" field has at least one invalid value!"
 msgstr "Pole \"%s\" má alespoň jednu neplatnou hodnotu!"
 
-#: application/models/Mixin/ElementText.php:632
+#: application/models/Mixin/ElementText.php:649
 msgid "Cannot save element text for records that are not yet persistent!"
 msgstr "Nemohu uložit text prvků záznamů které ještě nejsou trvalé."
 
@@ -3205,12 +3445,12 @@ msgstr "Každá volba musí mýt jedinečné jméno."
 msgid "Names of plugins must not be blank"
 msgstr "Jména zásuvných modulů nesmí být prázdná"
 
-#: application/models/Table/Collection.php:77
+#: application/models/Table/Collection.php:80
 #, php-format
 msgid "[Untitled] #%s"
 msgstr "[Bez názvu] #%s"
 
-#: application/models/Table/Item.php:164
+#: application/models/Table/Item.php:145
 msgid "Invalid search type given!"
 msgstr "Neplatný typ pro vyhledávání!"
 
@@ -3377,6 +3617,11 @@ msgstr "Cyklická proměnná %s  nebyla nastavena v tomto zobrazení."
 msgid "An array of records is not available for the loop."
 msgstr "Pole záznamů není použitelné pro cyklus."
 
+#: application/views/helpers/MaxFileSize.php:44
+#, php-format
+msgid "%s MB"
+msgstr ""
+
 #: application/views/helpers/RecordUrl.php:34
 msgid "Invalid record passed while getting record URL."
 msgstr "Při získávání URL záznamu byl zadán neplatný záznam."
@@ -3394,17 +3639,17 @@ msgstr "Neplatná návratová hodnota při získávání URL záznamu."
 msgid "Sort by: "
 msgstr "Řadit dle:"
 
-#: application/views/scripts/collections/browse.php:42
+#: application/views/scripts/collections/browse.php:41
 #, php-format
 msgid "View the items in %s"
 msgstr "Zobrazit položku v %s."
 
-#: application/views/scripts/collections/show.php:15
+#: application/views/scripts/collections/show.php:12
 #, php-format
 msgid "Items in the %s Collection"
 msgstr "Položky ve sbírce %s"
 
-#: application/views/scripts/collections/show.php:40
+#: application/views/scripts/collections/show.php:33
 msgid "There are currently no items within this collection."
 msgstr "Žádné položky ve sbírce"
 
@@ -3414,15 +3659,15 @@ msgstr "Hrdě postaveno na <a href=\"http://omeka.org\">Omeka</a>."
 
 #: application/views/scripts/common/pagination_control.php:5
 msgid "Pagination"
-msgstr ""
+msgstr "Stránkování"
 
 #: application/views/scripts/common/pagination_control.php:11
 msgid "Previous Page"
-msgstr ""
+msgstr "Předchozí strana"
 
 #: application/views/scripts/common/pagination_control.php:36
 msgid "Current Page"
-msgstr ""
+msgstr "Aktuální stránka"
 
 #: application/views/scripts/common/pagination_control.php:39
 #, php-format
@@ -3431,7 +3676,7 @@ msgstr "%s z %s"
 
 #: application/views/scripts/common/pagination_control.php:48
 msgid "Next Page"
-msgstr ""
+msgstr "Další stránka"
 
 #: application/views/scripts/error/403.php:2
 msgid "403 Page Forbidden"
@@ -3489,11 +3734,11 @@ msgstr "Doporučená sbírka"
 msgid "View All Items"
 msgstr "Zobrazit všechny položky"
 
-#: application/views/scripts/items/show.php:10
+#: application/views/scripts/items/show.php:13
 msgid "Files"
 msgstr "Soubory"
 
-#: application/views/scripts/items/show.php:33
+#: application/views/scripts/items/show.php:36
 msgid "Citation"
 msgstr "Citace"
 
@@ -3524,11 +3769,6 @@ msgstr "Použité typy zásnamů lze vybrat v nastavení vyhledávání."
 #: application/views/scripts/search/search-form.php:19
 msgid "Advanced Search (Items only)"
 msgstr "Pokročilé vyhledávání (pouze položky)"
-
-#: application/views/scripts/users/activate.php:8
-#, php-format
-msgid "Hello %s. Your username is %s"
-msgstr ""
 
 #: application/views/scripts/users/login.php:9
 msgid "Go to Home Page"

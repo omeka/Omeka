@@ -27,10 +27,10 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
             $user = new User;
 
             $userData = array(
-                'role'          => $role,
-                'username'      => $role,
-                'name'          => "User $role",
-                'email'         => $role .'@example.com'
+                'role' => $role,
+                'username' => $role,
+                'name' => "User $role",
+                'email' => $role .'@example.com'
             );
 
             $user->setPostData($userData);
@@ -38,7 +38,7 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
 
             $this->_users[$role] = $user;
         }
-                
+
         foreach ($userRoles as $role) {
             if ($role != 'researcher') {
                 $item = $this->_createItem($role);
@@ -63,7 +63,7 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
      */
     public function userRoleCanDeleteProvider()
     {
-        // Researcher is not included because that particular test will 
+        // Researcher is not included because that particular test will
         // always fail.
         return array(
             array('contributor', false),
@@ -85,7 +85,7 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
             array('super', true)
         );
     }
-    
+
     public function testBatchEditWithoutItems()
     {
         $this->dispatch('/items/batch-edit');
@@ -102,9 +102,9 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
     {
         $post = array(
             'items' => array('2', '3'),
-            'metadata'  => array(
+            'metadata' => array(
                 'item_type_id' => 1,
-                'tags'  => 'lorem,ipsum,dolor'
+                'tags' => 'lorem,ipsum,dolor'
             ),
         );
 
@@ -130,7 +130,7 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
         $this->request->setMethod('GET');
         $this->_authenticateUser($this->_users[$userRole]);
         $this->dispatch('/items/batch-edit');
-        
+
         if ($succeeds) {
             $this->assertController('items');
             $this->assertAction('batch-edit');
@@ -168,7 +168,7 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
         $this->assertController('error');
         $this->assertAction('method-not-allowed');
     }
-    
+
     public function testBatchEditSaveSuperUser()
     {
         $this->_authenticateUser($this->_getDefaultUser());
@@ -184,7 +184,7 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
         $this->dispatch('/items/batch-edit-save');
         $this->assertController('items');
         $this->assertAction('batch-edit-save');
-        
+
         foreach ($itemIds as $id) {
             $item = $this->db->getTable('Item')->find($id);
             $this->assertTrue($item->isPublic());
@@ -226,21 +226,21 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
         $messages = $flash->getCurrentMessages();
         $this->assertContains("The items were successfully changed!", $messages['success']);
     }
-    
+
     public function testBatchEditContributorUserSaveAllowedData()
     {
         $this->_authenticateUser($this->_users['contributor']);
 
         $hash = new Zend_Form_Element_Hash('batch_edit_hash');
         $hash->initCsrfToken();
-        
+
         $itemIds = array($this->_items['contributor']->id);
 
         $post = array(
             'items' => $itemIds,
-            'metadata'  => array(
+            'metadata' => array(
                 'item_type_id' => 1,
-                'tags'  => 'lorem,ipsum,dolor'
+                'tags' => 'lorem,ipsum,dolor'
             ),
             'batch_edit_hash' => $hash->getHash()
         );
@@ -270,7 +270,7 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
         foreach ($this->_items as $item) {
             $itemIds[] = $item->id;
         }
-        
+
         $this->_makePost();
 
         $this->dispatch('/items/batch-edit-save');
@@ -279,7 +279,7 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
         $messages = $flash->getCurrentMessages();
         $this->assertContains("User is not allowed", $messages['error'][0]);
     }
-    
+
     /**
      * @dataProvider userRoleCanDeleteProvider
      */
@@ -287,26 +287,26 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
     {
         $hash = new Zend_Form_Element_Hash('batch_edit_hash');
         $hash->initCsrfToken();
-        
+
         $itemIds = array();
 
         foreach ($this->_items as $item) {
             $itemIds[] = $item->id;
         }
-        
+
         $post = array(
             'items' => $itemIds,
-            'delete'  => 1,
+            'delete' => 1,
             'batch_edit_hash' => $hash->getHash()
         );
-        
+
         $this->_authenticateUser($this->_users[$userRole]);
         $this->_makePost($post);
         $this->dispatch('/items/batch-edit-save');
         $this->assertRedirectTo('/items/browse');
         $flash = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger');
         $messages = $flash->getCurrentMessages();
-        
+
         if ($succeeds) {
             $this->assertContains("The items were successfully deleted!", $messages['success']);
             foreach ($itemIds as $id) {
@@ -336,9 +336,9 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
 
         $post = array(
             'items' => $itemIds,
-            'metadata'  => array(
-                'public'        => 0,
-                'featured'      => 0
+            'metadata' => array(
+                'public' => 0,
+                'featured' => 0
             ),
             'batch_edit_hash' => $hash->getHash()
         );
@@ -374,12 +374,12 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
 
         $post = array(
             'items' => $itemIds,
-            'metadata'  => array(
-                'item_type_id'  => '100',
-                'collection_id'    => '100'
+            'metadata' => array(
+                'item_type_id' => '100',
+                'collection_id' => '100'
             ),
             'removeMetadata' => array(
-                'item_type_id'  => '1',
+                'item_type_id' => '1',
                 'collection_id' => '1'
             ),
             'batch_edit_hash' => $hash->getHash()
@@ -423,14 +423,14 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
             foreach ($this->_items as $item) {
                 $itemIds[] = $item->id;
             }
-            
+
             $post = array(
                 'items' => $itemIds,
-                'metadata'  => array(
+                'metadata' => array(
                     'public' => 1,
                     'featured' => 1,
                     'item_type_id' => 1,
-                    'tags'  => 'lorem,ipsum,dolor'
+                    'tags' => 'lorem,ipsum,dolor'
                 ),
                 'batch_edit_hash' => $hash->getHash()
             );

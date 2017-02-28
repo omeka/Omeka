@@ -21,7 +21,7 @@ class Omeka_Application_Resource_Session extends Zend_Application_Resource_Sessi
         $this->_setOptionsFromConfig();
         return parent::init();
     }
-    
+
     /**
      * Retrieve global session configuration options.
      * 
@@ -36,16 +36,16 @@ class Omeka_Application_Resource_Session extends Zend_Application_Resource_Sessi
         $bootstrap = $this->getBootstrap();
         $bootstrap->bootstrap(array('Config', 'Db', 'Options'));
         $config = $bootstrap->getResource('Config');
-        $sessionConfig = isset($config->session) 
+        $sessionConfig = isset($config->session)
                        ? $config->session->toArray()
                        : array();
-        
-        if (!array_key_exists('name', $sessionConfig) 
+
+        if (!array_key_exists('name', $sessionConfig)
             || empty($sessionConfig['name'])
         ) {
             $sessionConfig['name'] = $this->_buildSessionName();
         }
-        
+
         // Default is store sessions in the sessions table.
         if ($this->_canUseDbSessions($bootstrap->getResource('Options'))
             && !array_key_exists('saveHandler', $sessionConfig)
@@ -61,7 +61,7 @@ class Omeka_Application_Resource_Session extends Zend_Application_Resource_Sessi
                     'lifetimeColumn' => "lifetime",
                 ),
             );
-        } else if (empty($sessionConfig['saveHandler'])) {
+        } elseif (empty($sessionConfig['saveHandler'])) {
             // Set session.saveHandler = false to use the filesystem for storing
             // sessions.
             unset($sessionConfig['saveHandler']);
@@ -69,7 +69,7 @@ class Omeka_Application_Resource_Session extends Zend_Application_Resource_Sessi
 
         return $sessionConfig;
     }
-    
+
     /**
      * Create a unique session name.
      *
@@ -82,7 +82,7 @@ class Omeka_Application_Resource_Session extends Zend_Application_Resource_Sessi
     {
         return md5(BASE_DIR);
     }
-    
+
     private function _setOptionsFromConfig()
     {
         $this->setOptions($this->_getSessionConfig());
@@ -95,7 +95,7 @@ class Omeka_Application_Resource_Session extends Zend_Application_Resource_Sessi
      * use the DB sessions until the upgrade is complete to 2.0+.
      *
      * @param array $options
-     * @return boolean
+     * @return bool
      */
     private function _canUseDbSessions($options)
     {

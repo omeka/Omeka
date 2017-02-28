@@ -15,8 +15,8 @@ $baseDir = dirname(__FILE__);
 /**
  * bootstrap.php is required at minimum in order to define all path constants.
  */
-require_once("{$baseDir}/../../bootstrap.php");
-require_once("{$baseDir}/../libraries/Omeka/Application.php");
+require_once "{$baseDir}/../../bootstrap.php";
+require_once "{$baseDir}/../libraries/Omeka/Application.php";
 
 // Set the command line arguments.
 $options = new Zend_Console_Getopt(array('process|p=i' => 'process to run'));
@@ -31,8 +31,8 @@ try {
 // Load a core set of resources.
 $application = new Omeka_Application(APPLICATION_ENV);
 $application->bootstrap(array(
-    'Autoloader', 'Config', 'Db', 'Filederivatives', 'Locale', 'Logger',
-    'Options', 'Pluginbroker', 'Plugins', 'Jobs', 'Storage', 'Mail', 'View'
+    'Config', 'Logger', 'Db', 'Options', 'Pluginbroker', 'View', 'Locale', 'Mail',
+    'Plugins', 'Jobs', 'Storage', 'Filederivatives'
 ));
 
 // Get the database object.

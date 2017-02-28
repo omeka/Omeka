@@ -6,13 +6,11 @@
  */
 
 /**
- * 
- *
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
 class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
-{    
+{
     public function setUp()
     {
         parent::setUp();
@@ -22,7 +20,7 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
 
     public function testSuperCanAccessForm()
     {
-        $this->_authenticateUser($this->superUser);        
+        $this->_authenticateUser($this->superUser);
         $this->dispatch('/users/edit/' . $this->currentuser->id);
         $this->assertController('users');
         $this->assertAction('edit', "Super users should be able to reach the 'edit' action for their user account.");
@@ -31,7 +29,7 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
     public static function formXPaths()
     {
         return array(
-            array('//input[@id="username"][@value="adminuser"]', 
+            array('//input[@id="username"][@value="adminuser"]',
                 "There should be a 'username' element on this form with a default "
                 . "value."),
             array(
@@ -61,21 +59,21 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
      */
     public function testFormXPath($xPath, $failMsg)
     {
-        $this->_authenticateUser($this->superUser);        
+        $this->_authenticateUser($this->superUser);
         $this->dispatch('/users/edit/' . $this->adminUser->id);
         $this->assertXpath($xPath, $failMsg);
-    }   
+    }
 
     /**
      * @dataProvider formQueries
      */
     public function testFormQuery($query, $failMsg)
     {
-        $this->_authenticateUser($this->superUser);        
+        $this->_authenticateUser($this->superUser);
         $this->dispatch('/users/edit/' . $this->adminUser->id);
         $this->assertQuery($query, $failMsg);
     }
-    
+
     public function testChangeOtherUsersAccountInfoAsSuperUser()
     {
         $expectedUsername = 'newuser' . mt_rand();
@@ -86,7 +84,7 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
             'email' => 'admin' . mt_rand() . '@example.com',
             'role' => 'admin',
             'active' => '1',
-            'user_csrf'   => $this->_getCsrfToken()
+            'user_csrf' => $this->_getCsrfToken()
         ));
         $this->request->setMethod('post');
         $this->dispatch('/users/edit/' . $this->adminUser->id);
@@ -94,7 +92,7 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
         $this->assertEquals($expectedUsername, $newUsername);
         $this->assertRedirectTo('/users/edit/' . $this->adminUser->id);
     }
-    
+
     public function testChangeOwnUserAccountInfo()
     {
         $user = $this->superUser;
@@ -104,7 +102,7 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
             'name' => 'foobar foobar',
             'email' => 'foobar' . mt_rand() . '@example.com',
             'active' => '1',
-            'user_csrf'   => $this->_getCsrfToken()
+            'user_csrf' => $this->_getCsrfToken()
         ));
         $this->request->setMethod('post');
         $this->dispatch('/users/edit/' . $this->currentuser->id);
@@ -122,7 +120,7 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
             'email' => 'invalid.email',
             'role' => 'super',
             'active' => '1',
-            'user_csrf'   => $this->_getCsrfToken()
+            'user_csrf' => $this->_getCsrfToken()
         ));
         $this->request->setMethod('post');
         $this->dispatch('/users/edit/' . $this->adminUser->id);
@@ -133,14 +131,14 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
 
     public function testCannotSetActiveFlagOrRoleFieldWithoutAdequatePermissions()
     {
-        $this->_authenticateUser($this->adminUser);        
+        $this->_authenticateUser($this->adminUser);
         $this->request->setPost(array(
             'username' => 'newusername',
             'name' => 'foobar foobar',
             'email' => 'foobar@example.com',
             'role' => 'super',
             'active' => '0',
-            'user_csrf'   => $this->_getCsrfToken()
+            'user_csrf' => $this->_getCsrfToken()
         ));
         $this->request->setMethod('post');
         $this->dispatch('/users/edit/' . $this->adminUser->id);
@@ -148,7 +146,7 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
         $this->assertEquals($newAdminUser->role, 'admin', "User role should not have been changed from admin to super.");
         $this->assertEquals($newAdminUser->active, 1, "User status should not have been changed from active to inactive.");
     }
-        
+
     public function testCannotEverChangeSaltOrPasswordFields()
     {
         $user = $this->adminUser;
@@ -161,17 +159,17 @@ class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
             'active' => '1',
             'salt' => 'foobar',
             'password' => 'some-arbitrary-hash',
-            'user_csrf'   => $this->_getCsrfToken()
+            'user_csrf' => $this->_getCsrfToken()
         ));
         $this->request->setMethod('post');
         $this->dispatch('/users/edit/' . $this->currentuser->id);
         $changedUser = $this->db->getTable('User')->find($user->id);
-        $this->assertEquals($user->salt, $changedUser->salt, 
+        $this->assertEquals($user->salt, $changedUser->salt,
             "Salt should not have changed.");
-        $this->assertEquals($user->password, $changedUser->password, 
+        $this->assertEquals($user->password, $changedUser->password,
             "Hashed password should not have changed.");
     }
-        
+
     private function _addNewUserWithRole($role)
     {
         $username = $role . 'user';

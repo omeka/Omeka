@@ -36,8 +36,9 @@ class Models_Output_ItemAtomTest extends Omeka_Test_AppTestCase
         $atom = new Output_ItemAtom(array($item));
 
         $feed = $atom->getFeed();
+        $dom = new Zend_Dom_Query($feed);
 
-        $this->_assertAtomFeed($feed);
+        $this->_assertAtomFeed($dom);
     }
 
     public function testGetFeedOnItemWithFile()
@@ -65,41 +66,17 @@ class Models_Output_ItemAtomTest extends Omeka_Test_AppTestCase
 
         $feed = $atom->getFeed();
 
-        $this->_assertAtomFeed($feed);
-
-        $this->assertTag(array(
-            'tag' => 'feed',
-            'child' => array(
-                'tag' => 'entry',
-                'child' => array(
-                    'tag' => 'link',
-                    'attributes' => array(
-                        'rel' => 'enclosure',
-                        'type' => $mimeType,
-                        'length' => $size,
-                        'href' => $file->getWebPath('original')
-                    )
-                )
-            )
-        ), $feed, 'The feed did not contain a correct file enclosure.', false);
+        $dom = new Zend_Dom_Query($feed);
+        $this->_assertAtomFeed($dom);
+        $href = $file->getWebPath('original');
+        $queryResult = $dom->queryXpath("/atom:feed/atom:entry/atom:link[@rel='enclosure' and @type='$mimeType' and @length='$size' and @href='$href']");
+        $this->assertCount(1, $queryResult, 'The feed did not contain a correct file enclosure.');
     }
 
-    private function _assertAtomFeed($feed)
+    private function _assertAtomFeed($dom)
     {
-        return $this->assertTag(array(
-            'tag' => 'feed',
-            'attributes' => array(
-                'xmlns' => 'http://www.w3.org/2005/Atom'
-            ),
-            'child' => array(
-                'tag' => 'entry',
-                'child' => array(
-                    'tag' => 'content',
-                    'attributes' => array(
-                        'type' => 'html'
-                    )
-                )
-            )
-            ), $feed, 'The generated feed was not a valid Atom feed.', false);
+        $dom->registerXpathNamespaces(array('atom' => 'http://www.w3.org/2005/Atom'));
+        $queryResult = $dom->queryXpath("/atom:feed/atom:entry/atom:content[@type='html']");
+        $this->assertCount(1, $queryResult, 'The generated feed was not a valid Atom feed.');
     }
 }

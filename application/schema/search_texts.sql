@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%search_texts` (
   `record_type` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `record_id` int(10) unsigned NOT NULL,
   `public` tinyint(1) NOT NULL,
-  `title` tinytext COLLATE utf8_unicode_ci,
+  `title` mediumtext COLLATE utf8_unicode_ci,
   `text` longtext COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `record_name` (`record_type`,`record_id`),

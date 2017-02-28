@@ -12,14 +12,14 @@
  * @package Omeka\Record\Builder
  */
 abstract class Omeka_Record_Builder_AbstractBuilder
-{    
+{
     /**
      * Class of record that the builder will create.
      *
      * @var string
      */
     protected $_recordClass;
-    
+
     /**
      * String names denoting the properties of a specific record
      * that can be set directly through the builder.  This will not always
@@ -28,37 +28,37 @@ abstract class Omeka_Record_Builder_AbstractBuilder
      * @var array
      */
     protected $_settableProperties = array();
-        
+
     /**
      * Parsed metadata options for the builder.
      *
      * @var array
      */
     private $_metadataOptions = array();
-    
+
     /**
      * Record being built or updated.
      *
      * @var Omeka_Record_AbstractRecord
      */
-    protected $_record;    
-    
+    protected $_record;
+
     /**
      * @var Omeka_Db
      */
     protected $_db;
-    
+
     public function __construct(Omeka_Db $db)
     {
         $this->_db = $db;
     }
-    
+
     /**
      * Build the actual record.  If the record already exists, update it as 
      * necessary.
      *
      * @return Omeka_Record_AbstractRecord
-     */    
+     */
     public function build()
     {
         $record = $this->getRecord();
@@ -66,9 +66,9 @@ abstract class Omeka_Record_Builder_AbstractBuilder
         $this->_beforeBuild($record);
         $record->save();
         $this->_afterBuild($record);
-        return $record;        
+        return $record;
     }
-    
+
     /**
      * Set basic metadata for the record. 
      * 
@@ -76,13 +76,12 @@ abstract class Omeka_Record_Builder_AbstractBuilder
      * property of subclassed Builders.
      * 
      * @param array $metadata
-     * @return void
      */
     public function setRecordMetadata(array $metadata)
     {
         $this->_metadataOptions = $metadata;
     }
-    
+
     /**
      * Get the metadata that will be saved to the record.
      * 
@@ -105,30 +104,29 @@ abstract class Omeka_Record_Builder_AbstractBuilder
      * @return Omeka_Record_AbstractRecord
      */
     public function getRecord()
-    {        
+    {
         if (!($this->_record instanceof Omeka_Record_AbstractRecord)) {
             $this->setRecord($this->_record);
         }
         return $this->_record;
     }
-    
+
     /**
      * Set the record upon which this builder will act.
      * 
      * @see Omeka_Record_Builder::getRecord()
-     * @param Omeka_Record_AbstractRecord|integer|null $record
-     * @return void
+     * @param Omeka_Record_AbstractRecord|int|null $record
      */
     public function setRecord($record = null)
     {
         if ($record === null) {
-            $this->_record = new $this->_recordClass($this->_db);        
-        } else if ($record instanceof Omeka_Record_AbstractRecord) {
+            $this->_record = new $this->_recordClass($this->_db);
+        } elseif ($record instanceof Omeka_Record_AbstractRecord) {
             if (!($record instanceof $this->_recordClass)) {
                 throw new Omeka_Record_Builder_Exception("Incorrect record instance given.  Must be instance of '$this->_recordClass'.");
             }
             $this->_record = $record;
-        } else if (is_int($record)) {
+        } elseif (is_int($record)) {
             $this->_record = $this->_db->getTable($this->_recordClass)->find($record);
             if (!$this->_record) {
                 throw new Omeka_Record_Builder_Exception("Could not find record with ID = " . $record);
@@ -137,34 +135,31 @@ abstract class Omeka_Record_Builder_AbstractBuilder
             throw new InvalidArgumentException("Argument passed to setRecord() must be Omeka_Record_AbstractRecord, integer, or null.");
         }
     }
-    
+
     /**
      * All necessary tasks to take place before the record is inserted.
      * 
      * Exceptions may be thrown, validation errors may be added.
-     *
-     * @return void
      */
     protected function _beforeBuild(Omeka_Record_AbstractRecord $record)
-    {}
-    
+    {
+    }
+
     /**
      * All necessary tasks that take place after the record has been inserted
      * into the database.  
      * 
      * Should not throw exceptions in this method.
-     *
-     * @return void
      */
     protected function _afterBuild(Omeka_Record_AbstractRecord $record)
-    {}
-        
+    {
+    }
+
     /**
      * Set the properties for the record, taking care to filter based on the 
      * $_settableProperties array.
      * 
      * @param Omeka_Record_AbstractRecord $record
-     * @return void
      */
     private function _setRecordProperties($record)
     {

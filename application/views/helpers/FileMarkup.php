@@ -21,7 +21,7 @@
  * @package Omeka\View\Helper
  */
 class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
-{   
+{
     /**
      * Array of MIME types and the callbacks that can process it.
      *
@@ -30,41 +30,35 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
      *
      * @var array
      */
-    static protected $_callbacks = array(
-        'audio/ogg'         => 'ogg',
-        'audio/x-ogg'       => 'ogg',
-        'audio/aac'         => 'aac',
-        'audio/x-aac'       => 'aac',
-        'audio/aiff'        => 'aiff',
-        'audio/x-aiff'      => 'aiff',
-        'audio/midi'        => 'midi',
-        'audio/x-midi'      => 'midi',
-        'audio/mp3'         => 'mp3',
-        'audio/mpeg'        => 'mp3',
-        'audio/mpeg3'       => 'mp3',
-        'audio/mpegaudio'   => 'mp3',
-        'audio/mpg'         => 'mp3',
-        'audio/x-mp3'       => 'mp3',
-        'audio/x-mpeg'      => 'mp3',
-        'audio/x-mpeg3'     => 'mp3',
-        'audio/x-mpegaudio' => 'mp3',
-        'audio/x-mpg'       => 'mp3',
-        'audio/mp4'         => 'mp4',
-        'audio/x-mp4'       => 'mp4',
-        'audio/wav'         => 'wav',
-        'audio/x-wav'       => 'wav',
-        'video/mp4'         => 'mov',
-        'video/mpeg'        => 'mov',
-        'video/ogg'         => 'mov',
-        'video/quicktime'   => 'mov',
-        'audio/wma'         => 'wma',
-        'audio/x-ms-wma'    => 'wma',
-        'video/avi'         => 'wmv',
-        'video/msvideo'     => 'wmv',
-        'video/x-msvideo'   => 'wmv',
-        'video/x-ms-wmv'    => 'wmv', 
+    protected static $_callbacks = array(
+        'audio/ogg' => 'audio',
+        'audio/x-ogg' => 'audio',
+        'audio/aac' => 'audio',
+        'audio/x-aac' => 'audio',
+        'audio/aiff' => 'audio',
+        'audio/x-aiff' => 'audio',
+        'audio/mp3' => 'audio',
+        'audio/mpeg' => 'audio',
+        'audio/mpeg3' => 'audio',
+        'audio/mpegaudio' => 'audio',
+        'audio/mpg' => 'audio',
+        'audio/x-mp3' => 'audio',
+        'audio/x-mpeg' => 'audio',
+        'audio/x-mpeg3' => 'audio',
+        'audio/x-mpegaudio' => 'audio',
+        'audio/x-mpg' => 'audio',
+        'audio/mp4' => 'audio',
+        'audio/x-mp4' => 'audio',
+        'audio/x-m4a' => 'audio',
+        'audio/wav' => 'audio',
+        'audio/x-wav' => 'audio',
+        'video/mp4' => 'video',
+        'video/x-m4v' => 'video',
+        'video/ogg' => 'video',
+        'video/webm' => 'video',
+        'video/quicktime' => 'video',
     );
-    
+
     /**
      * Array of file extensions and the callbacks that can process them.
      * 
@@ -72,149 +66,78 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
      * 
      * @var array
      */
-    static private $_fileExtensionCallbacks = array(
+    private static $_fileExtensionCallbacks = array(
         // application/ogg
-        'ogx' => 'ogg', 
+        'ogx' => 'audio',
         // audio/x-aac
-        'aac' => 'aac', 
+        'aac' => 'audio',
         // audio/x-aiff
-        'aif' => 'aiff', 
-        'aiff' => 'aiff', 
-        'aifc' => 'aiff', 
-        // audio/midi
-        'mid' => 'midi', 
-        'midi' => 'midi', 
-        'kar' => 'midi', 
-        'rmi' => 'midi', 
+        'aif' => 'audio',
+        'aiff' => 'audio',
+        'aifc' => 'audio',
         // audio/mpeg
-        'mpga' => 'mp3', 
-        'mp2' => 'mp3', 
-        'mp2a' => 'mp3', 
-        'mp3' => 'mp3', 
-        'm2a' => 'mp3', 
-        'm3a' => 'mp3', 
+        'mpga' => 'audio',
+        'mp2' => 'audio',
+        'mp2a' => 'audio',
+        'mp3' => 'audio',
+        'm2a' => 'audio',
+        'm3a' => 'audio',
         // audio/mp4
-        'mp4a' => 'mp4', 
+        'mp4a' => 'audio',
+        'm4a' => 'audio',
         // audio/ogg
-        'oga' => 'ogg', 
-        'ogg' => 'ogg', 
-        'spx' => 'ogg', 
+        'oga' => 'audio',
+        'ogg' => 'audio',
+        'spx' => 'audio',
+        'opus' => 'audio',
         // audio/x-wav
-        'wav' => 'wav',
+        'wav' => 'audio',
         // video/mp4
-        'mp4' => 'mov', 
-        'mp4v' => 'mov',  
-        'mpg4'  => 'mov', 
-        // video/mpeg
-        'mpeg' => 'mov', 
-        'mpg' => 'mov', 
-        'mpe' => 'mov', 
-        'm1v' => 'mov', 
-        'm2v'  => 'mov', 
+        'mp4' => 'video',
+        'mp4v' => 'video',
+        'mpg4' => 'video',
+        'm4v' => 'video',
         // video/ogg
-        'ogv' => 'mov', 
+        'ogv' => 'video',
+        // video/webm
+        'webm' => 'video',
         // video/quicktime
-        'qt' => 'mov', 
-        'mov' => 'mov', 
-        // audio/x-ms-wma
-        'wma' => 'wma', 
-        // video/x-msvideo
-        'avi' => 'wmv', 
+        'mov' => 'video',
     );
-    
+
     /**
      * The array consists of the default options which are passed to the 
      * callback.
      *
      * @var array
      */
-    static protected $_callbackOptions = array(
-        'defaultDisplay'=>array(
-            'linkToFile'=>true,
-            'linkToMetadata'=>false,
-            'linkText' => null, 
+    protected static $_callbackOptions = array(
+        'defaultDisplay' => array(
+            'linkToFile' => true,
+            'linkToMetadata' => false,
+            'linkText' => null,
             ),
-        'derivativeImage'=>array(
-            'imageSize'=>'square_thumbnail',
-            'linkToFile'=>true,
-            'linkToMetadata'=>false,
+        'derivativeImage' => array(
+            'imageSize' => null,
+            'linkToFile' => true,
+            'linkToMetadata' => false,
             'imgAttributes' => array()
             ),
-        'wmv'=>array(
-            'width' => '320',
-            'height' => '240', 
-            'autostart' => 0,
-            'ShowControls'=> 1,
-            'ShowDisplay'=> 0,
-            'ShowStatusBar' => 0,
-            'scale' => 'aspect'
-            ),
-        'wma'=>array(
-            'width' => '320',
-            'height' => '46',
-            'autostart' => 0,
-            'ShowControls'=> 1,
-            'ShowDisplay'=> 0,
-            'ShowStatusBar' => 0
-            ),
-        'mov'=>array(
+        'video' => array(
             'width' => '320',
             'height' => '240',
             'autoplay' => false,
-            'controller'=> true,
-            'loop'=> false,
-            'scale' => 'aspect'
+            'controller' => true,
+            'loop' => false,
             ),
-        'ogg'=>array(
+        'audio' => array(
             'width' => '200',
             'height' => '20',
             'autoplay' => false,
             'controller' => true,
             'loop' => false
-            ),
-        'mp3'=>array(
-            'width' => '200',
-            'height' => '20',
-            'autoplay' => false,
-            'controller' => true,
-            'loop' => false
-            ),
-        'aac'=>array(
-            'width' => '200',
-            'height' => '20',
-            'autoplay' => false,
-            'controller' => true,
-            'loop' => false
-            ),
-        'aiff'=>array(
-            'width' => '200',
-            'height' => '20',
-            'autoplay' => false,
-            'controller' => true,
-            'loop' => false
-            ),
-        'midi'=>array(
-            'width' => '200',
-            'height' => '20',
-            'autoplay' => false,
-            'controller' => true,
-            'loop' => false
-            ),
-        'mp4'=>array(
-            'width' => '200',
-            'height' => '20',
-            'autoplay' => false,
-            'controller' => true,
-            'loop' => false
-            ),
-        'wav'=>array(
-            'width' => '200',
-            'height' => '20',
-            'autoplay' => false,
-            'controller' => true,
-            'loop' => false
-            ),
-        'icon'=>array(
+        ),
+        'icon' => array(
             'showFilename' => true,
             'icons' => array(),
             'linkToFile' => true,
@@ -230,7 +153,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
      *
      * @var array
      */
-    static protected $_fallbackImages = array(
+    protected static $_fallbackImages = array(
         'audio' => 'fallback-audio.png',
         'image' => 'fallback-image.png',
         'video' => 'fallback-video.png',
@@ -287,21 +210,20 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
      * containing valid XHTML, which will be used to display the file.
      * @param array $defaultOptions
      * @param array $fileExtensions
-     * @return void
      */
     public static function addMimeTypes($fileIdentifiers, $callback, array $defaultOptions = array())
     {
-        // Create the keyed list of mimeType => callback and fileExtension => 
+        // Create the keyed list of mimeType => callback and fileExtension =>
         // callback format, and merge them with the current lists.
         $callbackListMimeTypes = array();
         $callbackListFileExtensions = array();
-        
+
         // Interpret string as MIME type.
         if (is_string($fileIdentifiers)) {
             $fileIdentifiers = (array) $fileIdentifiers;
             $fillArray = array_fill(0, count($fileIdentifiers), $callback);
             $callbackListMimeTypes = array_combine($fileIdentifiers, $fillArray);
-        } else if (is_array($fileIdentifiers)) {
+        } elseif (is_array($fileIdentifiers)) {
             // Interpret unkeyed array as MIME types.
             if (array_key_exists(0, $fileIdentifiers)) {
                 $fillArray = array_fill(0, count($fileIdentifiers), $callback);
@@ -318,10 +240,10 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
                 }
             }
         }
-        
+
         self::$_callbacks = array_merge(self::$_callbacks, $callbackListMimeTypes);
         self::$_fileExtensionCallbacks = array_merge(self::$_fileExtensionCallbacks, $callbackListFileExtensions);
-        
+
         // Add this callback's default options to the list.
         $key = self::_getCallbackKey($callback);
         self::$_callbackOptions[$key] = $defaultOptions;
@@ -339,7 +261,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
     {
         self::$_fallbackImages[$mimeType] = $image;
     }
-    
+
     /**
      * Default display for MIME types that do not have a valid rendering 
      * callback.  
@@ -352,14 +274,15 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
      * @param array $options
      * @return string HTML
      */
-    public function defaultDisplay($file, array $options=array())
+    public function defaultDisplay($file, array $options = array())
     {
+        $html = null;
         if ($options['linkText']) {
             $html = $options['linkText'];
         }
-        return $this->_linkToFile($file, $options);
+        return $this->_linkToFile($file, $options, $html);
     }
-        
+
     /**
      * Add a link for the file based on the given set of options.
      * 
@@ -382,14 +305,16 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
     protected function _linkToFile($file, $options, $html = null)
     {
         if ($html === null) {
-            $fileTitle = strip_formatting(metadata($file, array('Dublin Core', 'Title')));
-            $html = $fileTitle ? $fileTitle : metadata($file, 'Original Filename');
+            $html = metadata($file, 'display_title');
         }
 
+        $linkAttributes = isset($options['linkAttributes'])
+                        ? $options['linkAttributes']
+                        : array();
+
         if ($options['linkToMetadata']) {
-            $html = link_to_file_show((array)$options['linkAttributes'],
-                  $html, $file);
-        } else if (($linkToFile = $options['linkToFile'])) {
+            $html = link_to_file_show($linkAttributes, $html, $file);
+        } elseif (($linkToFile = $options['linkToFile'])) {
             // If you've manually specified a derivative type to link
             // to, and this file actually has derivatives, we'll use
             // that, otherwise, the link is to the "original" file.
@@ -401,67 +326,15 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
 
             // Wrap in a link that will download the file directly.
             $defaultLinkAttributes = array(
-                'class'=>'download-file', 
-                'href'=>$file->getWebPath($derivative)
+                'class' => 'download-file',
+                'href' => $file->getWebPath($derivative)
                 );
-            $linkAttributes = array_key_exists('linkAttributes', $options)
-                            ? $options['linkAttributes'] : array();
             $linkAttributes = array_merge($defaultLinkAttributes, $linkAttributes);
             $html = '<a ' . tag_attributes($linkAttributes) . '>' . $html . '</a>';
         }
         return $html;
     }
-        
-    /**
-     * Retrieve valid XHTML for displaying a wmv video file or equivalent.  
-     * Currently this loads the video inside of an <object> tag, but that 
-     * provides less flexibility than a flash wrapper, which seems to be a 
-     * standard Web2.0 practice for video sharing.  This limitation can be
-     * overcome by a plugin that used a flash wrapper for displaying video.
-     * 
-     * @param File $file
-     * @param array $options
-     * @return string
-     */ 
-    public function wmv($file, array $options=array())
-    {
-        $path = html_escape($file->getWebPath('original'));
-        $html = '<object type="application/x-mplayer2" width="'.$options['width'].'" height="'.$options['height'].'" data="'.$path.'" autoStart="'.$options['autostart'].'">'
-              . '<param name="FileName" value="'.$path.'" />'
-              . '<param name="autoStart" value="'.($options['autostart'] ? 'true' : 'false').'" />'
-              . '<param name="ShowAudioControls" value="'.($options['ShowControls'] ? 'true' : 'false').'" />'
-              . '<param name="ShowStatusBar" value="'.($options['ShowStatusBar'] ? 'true' : 'false').'" />'
-              . '<param name="ShowDisplay" value="'.($options['ShowDisplay'] ? 'true' : 'false').'" />'
-              // This param is for QuickTime clients
-              . '<param name="scale" value="' . $options['scale'] . '" />'
-              . '</object>';
-        return $html;
-    }
-    
-    /**
-     * Retrieve valid XHTML for displaying a wma audio file or equivalent.  
-     * Currently this loads the video inside of an <object> tag, but that
-     * provides less flexibility than a flash wrapper, which seems to be a 
-     * standard Web2.0 practice for video sharing.  This limitation can be
-     * overcome by a plugin that used a flash wrapper for displaying video.
-     * 
-     * @param File $file
-     * @param array $options
-     * @return string
-     */ 
-    public function wma($file, array $options=array())
-    {
-        $path = html_escape($file->getWebPath('original'));
-        $html = '<object type="audio/x-ms-wma" width="'.$options['width'].'" height="'.$options['height'].'" data="'.$path.'" autoStart="'.$options['autostart'].'">'
-              . '<param name="FileName" value="'.$path.'" />'
-              . '<param name="autoStart" value="'.($options['autostart'] ? 'true' : 'false').'" />'
-              . '<param name="ShowControls" value="'.($options['ShowControls'] ? 'true' : 'false').'" />'
-              . '<param name="ShowStatusBar" value="'.($options['ShowStatusBar'] ? 'true' : 'false').'" />'
-              . '<param name="ShowDisplay" value="'.($options['ShowDisplay'] ? 'true' : 'false').'" />'
-              . '</object>';
-        return $html;
-    }
-    
+
     /**
      * Retrieve valid XHTML for displaying Quicktime video files
      * 
@@ -469,133 +342,47 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
      * @param array $options The set of default options for this includes:
      *  width, height, autoplay, controller, loop
      * @return string
-     */ 
-    public function mov($file, array $options=array())
+     */
+    public function video($file, array $options = array())
     {
-        $path = html_escape($file->getWebPath('original'));
-        $html = '<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab" width="'.$options['width'].'" height="'.$options['height'].'">'
-              . '<param name="src" value="'.$path.'" />'
-              . '<param name="controller" value="'.($options['controller'] ? 'true' : 'false').'" />'
-              . '<param name="autoplay" value="'.($options['autoplay'] ? 'true' : 'false').'" />'
-              . '<param name="loop" value="'.($options['loop'] ? 'true' : 'false').'" />'
-              . '<param name="scale" value="' . $options['scale'] . '" />'
-              . '<embed src="'.$path.'" scale="' . $options['scale'] . '" width="'.$options['width'].'" height="'.$options['height'].'" controller="'.($options['controller'] ? 'true' : 'false').'" autoplay="'.($options['autoplay'] ? 'true' : 'false').'" pluginspage="http://www.apple.com/quicktime/download/" type="video/quicktime"></embed>'
-              . '</object>';
-        return $html;
+        return $this->_media('video', $file, $options);
     }
-    
+
     /**
-     * Default display of audio files via <object> tags.
+     * Default display of audio files via <audio> tag.
      * 
      * @param File $file
      * @param array $options The set of default options for this includes:
      *  width, height, autoplay, controller, loop
-     * @param string $type The Internet media type of the file
      * @return string
      */
-    private function _audio($file, array $options, $type)
+    public function audio($file, array $options)
     {
-        $path = html_escape($file->getWebPath('original'));
-        $html = '<object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab" width="'.$options['width'].'" height="'.$options['height'].'">'
-              . '<param name="src" value="'.$path.'" />'
-              . '<param name="controller" value="'.($options['controller'] ? 'true' : 'false').'" />'
-              . '<param name="autoplay" value="'.($options['autoplay'] ? 'true' : 'false').'" />'
-              . '<param name="loop" value="'.($options['loop'] ? 'true' : 'false').'" />'
-              . '<object type="' . $type . '" data="' . $path . '" width="'.$options['width'].'" height="'.$options['height'].'" autoplay="'.($options['autoplay'] ? 'true' : 'false').'">'
-              . '<param name="src" value="'.$path.'" />'
-              . '<param name="controller" value="'.($options['controller'] ? 'true' : 'false').'" />'
-              . '<param name="autoplay" value="'.($options['autoplay'] ? 'true' : 'false').'" />'
-              . '<param name="autostart" value="'.($options['autoplay'] ? '1' : '0').'" />'
-              . '<param name="loop" value="'.($options['loop'] ? 'true' : 'false').'" />'
-              . '</object>'
-              . '</object>';
+        return $this->_media('audio', $file, $options);
+    }
+
+    protected function _media($type, $file, array $options)
+    {
+        if ($type !== 'audio' && $type !== 'video') {
+            $type = 'video';
+        }
+        $url = $file->getWebPath('original');
+        $escapedUrl = html_escape($url);
+        $attrs = array(
+            'src' => $url,
+            'class' => 'omeka-media',
+            'width' => $options['width'],
+            'height' => $options['height'],
+            'controls' => (bool) $options['controller'],
+            'autoplay' => (bool) $options['autoplay'],
+            'loop' => (bool) $options['loop'],
+        );
+        $html = '<' . $type . ' ' . tag_attributes($attrs) . '>'
+            . '<a href="' . $escapedUrl . '">' . metadata($file, 'display_title') . '</a>'
+            . '</'. $type .'>';
         return $html;
     }
-    
-    /**
-     * Display OGG audio files.
-     * 
-     * @param File $file
-     * @param array $options
-     * @return string
-     */
-    public function ogg($file, array $options = array())
-    {
-        return $this->_audio($file, $options, 'audio/ogg');
-    }
-    
-    /**
-     * Display MP3/MPEG audio files.
-     * 
-     * @param File $file
-     * @param array $options
-     * @return string
-     */
-    public function mp3($file, array $options = array())
-    {
-        return $this->_audio($file, $options, 'audio/mpeg');
-    }
-    
-    /**
-     * Display AAC audio files.
-     * 
-     * @param File $file
-     * @param array $options
-     * @return string
-     */
-    public function aac($file, array $options = array())
-    {
-        return $this->_audio($file, $options, 'audio/x-aac');
-    }
-    
-    /**
-     * Display AIFF audio files.
-     * 
-     * @param File $file
-     * @param array $options
-     * @return string
-     */
-    public function aiff($file, array $options = array())
-    {
-        return $this->_audio($file, $options, 'audio/x-aiff');
-    }
-    
-    /**
-     * Display MIDI audio files.
-     * 
-     * @param File $file
-     * @param array $options
-     * @return string
-     */
-    public function midi($file, array $options = array())
-    {
-        return $this->_audio($file, $options, 'audio/midi');
-    }
-    
-    /**
-     * Display MP4 audio files.
-     * 
-     * @param File $file
-     * @param array $options
-     * @return string
-     */
-    public function mp4($file, array $options = array())
-    {
-        return $this->_audio($file, $options, 'audio/mp4');
-    }
-    
-    /**
-     * Display WAV audio files.
-     * 
-     * @param File $file
-     * @param array $options
-     * @return string
-     */
-    public function wav($file, array $options = array())
-    {
-        return $this->_audio($file, $options, 'audio/x-wav');
-    }
-    
+
     /**
      * Default display of an icon to represent a file.
      * 
@@ -619,25 +406,24 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
      *      'icons' => array.
      * @return string
      */
-    public function icon($file, array $options=array())
+    public function icon($file, array $options = array())
     {
         $mimeType = $file->mime_type;
-        $imgAttributes = (array)$options['imgAttributes'];
+        $imgAttributes = (array) $options['imgAttributes'];
         // The path to the icon is keyed to the MIME type of the file.
-        $imgAttributes['src'] = (string)$options['icons'][$mimeType];
-        
+        $imgAttributes['src'] = (string) $options['icons'][$mimeType];
+
         $html = '<img ' . tag_attributes($imgAttributes) . ' />';
-        
+
         if ($options['showFilename']) {
             // Add a div with arbitrary attributes.
-            $html .= '<div ' . tag_attributes((array)$options['filenameAttributes']) 
+            $html .= '<div ' . tag_attributes((array) $options['filenameAttributes'])
                    . '>' . html_escape($file->original_filename) . '</div>';
         }
-        
+
         return $this->_linkToFile($file, $options, $html);
     }
-    
-    
+
     /**
      * Returns valid XHTML markup for displaying an image that has been stored 
      * in Omeka.
@@ -647,61 +433,62 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
      * options include: 'imageSize'
      * @return string HTML for display
      */
-    public function derivativeImage($file, array $options=array())
+    public function derivativeImage($file, array $options = array())
     {
         $html = '';
         $imgHtml = '';
-        
-        // Should we ever include more image sizes by default, this will be 
-        // easier to modify.        
+
+        // Should we ever include more image sizes by default, this will be
+        // easier to modify.
         $imgClasses = array(
-            'thumbnail'=>'thumb', 
-            'square_thumbnail'=>'thumb', 
-            'fullsize'=>'full');
+            null => 'thumb',
+            'thumbnail' => 'thumb',
+            'square_thumbnail' => 'thumb',
+            'fullsize' => 'full');
         $imageSize = $options['imageSize'];
-        
+
         // If we can make an image from the given image size.
-        if (in_array($imageSize, array_keys($imgClasses))) {
-            
-            // A class is given to all of the images by default to make it 
-            // easier to style. This can be modified by passing it in as an 
-            // option, but recommended against. Can also modify alt text via an 
+        if (array_key_exists($imageSize, $imgClasses)) {
+
+            // A class is given to all of the images by default to make it
+            // easier to style. This can be modified by passing it in as an
+            // option, but recommended against. Can also modify alt text via an
             // option.
             $imgClass = $imgClasses[$imageSize];
             $imgAttributes = array_merge(array('class' => $imgClass),
-                                (array)$options['imgAttributes']);
+                                (array) $options['imgAttributes']);
             $imgHtml = $this->image_tag($file, $imgAttributes, $imageSize);
         }
-        $html .= !empty($imgHtml) ? $imgHtml : html_escape($file->original_filename);   
+        $html .= !empty($imgHtml) ? $imgHtml : html_escape($file->original_filename);
         $html = $this->_linkToFile($file, $options, $html);
         return $html;
     }
     // END DEFINED DISPLAY CALLBACKS
-    
+
     protected function getCallback($file, $options)
     {
         $mimeType = $file->mime_type;
         $fileExtension = $file->getExtension();
-        
+
         // Displaying icons overrides the default lookup mechanism.
         if (array_key_exists('icons', $options) and
                 array_key_exists($mimeType, $options['icons'])) {
             return 'icon';
         }
-        
+
         if (array_key_exists($mimeType, self::$_callbacks)) {
             $name = self::$_callbacks[$mimeType];
-        } else if (array_key_exists($fileExtension, self::$_fileExtensionCallbacks)) {
+        } elseif (array_key_exists($fileExtension, self::$_fileExtensionCallbacks)) {
             $name = self::$_fileExtensionCallbacks[$fileExtension];
-        } else if ($file->hasThumbnail()) {
+        } elseif ($file->hasThumbnail()) {
             $name = 'derivativeImage';
         } else {
             $name = 'defaultDisplay';
         }
-        
+
         return $name;
     }
-    
+
     /**
      * @see Omeka_Plugin_Broker::addMediaAdapter()
      * @param mixed $callback
@@ -716,7 +503,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
             return array();
         }
     }
-    
+
     /**
      * Retrieve the HTML for a given file from the callback.   
      * 
@@ -728,15 +515,15 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
     protected function getHtml($file, $renderer, array $options)
     {
         //Format the callback based on whether we can actually run it
-        
+
         //If the callback is native to this object, get it valid and run it
-        if(is_string($renderer) and method_exists($this, $renderer)) {
+        if (is_string($renderer) and method_exists($this, $renderer)) {
             $renderer = array($this, $renderer);
         }
-        
+
         return call_user_func_array($renderer, array($file, $options));
     }
-    
+
     /**
      * Bootstrap for the helper class.  This will retrieve the HTML for
      * displaying the file and by default wrap it in a <div class="item-file">.
@@ -747,94 +534,90 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
      * @param array $wrapperAttributes
      * @return string HTML
      */
-    public function fileMarkup($file, array $props=array(), $wrapperAttributes = array())
-    {        
+    public function fileMarkup($file, array $props = array(), $wrapperAttributes = array())
+    {
         // There is a chance that $props passed in could modify the callback
         // that is used.  Currently used to determine whether or not to display
         // an icon.
-        $callback = $this->getCallback($file, $props);   
-        
+
+        $callback = $this->getCallback($file, $props);
+
         $options = array_merge($this->getDefaultOptions($callback), $props);
-        
-        $html  = $this->getHtml($file, $callback, $options);
-        
+
+        $html = $this->getHtml($file, $callback, $options);
+
         // Append a class name that corresponds to the MIME type.
         if ($wrapperAttributes) {
-            $mimeTypeClassName = str_ireplace('/', '-', $file->mime_type);
+            $mimeTypeClassName = str_replace(array('/', '+', '.'), '-', $file->mime_type);
             if (array_key_exists('class', $wrapperAttributes)) {
                 $wrapperAttributes['class'] .= ' ' . $mimeTypeClassName;
             } else {
-                $wrapperAttributes['class']  = $mimeTypeClassName;
+                $wrapperAttributes['class'] = $mimeTypeClassName;
             }
         }
-        
+
         //Wrap the HTML in a div with a class (if class is not set to null)
-        $wrapper = !empty($wrapperAttributes) ? '<div ' . tag_attributes($wrapperAttributes) . '>' : ''; 
+        $wrapper = !empty($wrapperAttributes) ? '<div ' . tag_attributes($wrapperAttributes) . '>' : '';
         $html = !empty($wrapper) ? $wrapper . $html . "</div>" : $html;
-        
+
         return apply_filters(
-            'file_markup', 
-            $html, 
+            'file_markup',
+            $html,
             array(
-                'file' => $file, 
-                'callback' => $callback, 
-                'options' => $options, 
-                'wrapper_attributes' => $wrapperAttributes, 
+                'file' => $file,
+                'callback' => $callback,
+                'options' => $options,
+                'wrapper_attributes' => $wrapperAttributes,
             )
         );
     }
-        
+
     /**
      * Return a valid img tag for an image.
      *
-     * @param File|Item $record
-     * @param array $props
-     * @param string $format
+     * @param Omeka_Record_AbstractRecord $record
+     * @param array $props Image tag attributes
+     * @param string $format Derivative image type (thumbnail, etc.)
      * @return string
      */
     public function image_tag($record, $props, $format)
     {
-        if (!$record) {
+        if (!($record && $record instanceof Omeka_Record_AbstractRecord)) {
             return false;
         }
-        
-        if ($record instanceof File) {
-            $filename = $record->getDerivativeFilename();
-            $file = $record;
-        } else if ($record instanceof Item) {
-            $item = $record;
-            $file = get_db()->getTable('File')->getRandomFileWithImage($item->id);
-            if (!$file) {
-                return false;
-            }
-            $filename = $file->getDerivativeFilename();
-        } else {
-            // throw some exception?
-            return '';
+
+        // Use the default representative file.
+        $file = $record->getFile();
+        if (!$file) {
+            return false;
         }
-        
+
+        if (!$format) {
+            $format = (get_option('use_square_thumbnail') == 1) ? 'square_thumbnail' : 'thumbnail';
+        }
+
         if ($file->hasThumbnail()) {
-            $uri = html_escape($file->getWebPath($format));
+            $uri = $file->getWebPath($format);
         } else {
             $uri = img($this->_getFallbackImage($file));
         }
-        
+        $props['src'] = $uri;
+
         /** 
          * Determine alt attribute for images
          * Should use the following in this order:
-         * 1. alt option 
-         * 2. file description
-         * 3. file title 
-         * 4. item title
+         * 1. passed 'alt' prop
+         * 2. first Dublin Core Title for $file
+         * 3. original filename for $file
          */
         $alt = '';
         if (isset($props['alt'])) {
             $alt = $props['alt'];
-        } else if ($fileTitle = metadata($file, 'display title')) {
+        } elseif ($fileTitle = metadata($file, 'display title', array('no_escape' => true))) {
             $alt = $fileTitle;
         }
         $props['alt'] = $alt;
-        
+
         $title = '';
         if (isset($props['title'])) {
             $title = $props['title'];
@@ -842,11 +625,9 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
             $title = $alt;
         }
         $props['title'] = $title;
-        
+
         // Build the img tag
-        $html = '<img src="' . $uri . '" '.tag_attributes($props) . '/>' . "\n";
-        
-        return $html;
+        return '<img ' . tag_attributes($props) . '>';
     }
 
     /**
@@ -886,7 +667,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
     {
         if (is_string($callback)) {
             return $callback;
-        } else if (is_callable($callback, false, $name)) {
+        } elseif (is_callable($callback, false, $name)) {
             return $name;
         } else {
             throw new InvalidArgumentException('Invalid file display callback.');

@@ -28,7 +28,7 @@ class Omeka_Test_Resource_Storage extends Zend_Application_Resource_ResourceAbst
             Omeka_Storage::OPTION_ADAPTER => 'Omeka_Storage_Adapter_TempFilesystem',
             Omeka_Storage::OPTION_TEMP_DIR => $tempDir,
             Omeka_Storage::OPTION_ADAPTER_OPTIONS => array(
-                'localDir' => "$tempDir/$storageDirName",
+                'localDir' => $storageDirName,
                 'webDir' => '/'
             )
         ));

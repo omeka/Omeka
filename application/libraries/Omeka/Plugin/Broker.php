@@ -51,7 +51,6 @@ class Omeka_Plugin_Broker
      * @param string $callback PHP callback for the hook implementation.
      * @param string|null $plugin Optional name of the plugin for
      * which to add the hook. If omitted, the current plugin is used.
-     * @return void
      */
     public function addHook($hook, $callback, $plugin = null)
     {
@@ -103,7 +102,6 @@ class Omeka_Plugin_Broker
      * necessary.
      *
      * @param string $pluginDirName Plugin to set as current.
-     * @return void
      */
     public function setCurrentPluginDirName($pluginDirName)
     {
@@ -129,7 +127,6 @@ class Omeka_Plugin_Broker
      * @param string $name The name of the hook.
      * @param array $args Arguments to be passed to the hook implementations.
      * @param Plugin|string $plugin Name of the plugin that will invoke the hook.
-     * @return void
      */
     public function callHook($name, array $args = array(), $plugin = null)
     {
@@ -137,7 +134,7 @@ class Omeka_Plugin_Broker
         if (empty($this->_callbacks[$name])) {
             return;
         }
-        
+
         // If we are calling the hook for a single function, do that and return.
         if ($plugin) {
             if ($callback = $this->getHook($plugin, $name)) {
@@ -147,17 +144,17 @@ class Omeka_Plugin_Broker
             }
             return;
         }
-        
+
         // Otherwise iterate through all the hooks and call each in turn.
         foreach ($this->_callbacks[$name] as $pluginDirName => $callback) {
-            // Make sure the callback executes within the scope of the current 
+            // Make sure the callback executes within the scope of the current
             // plugin
             $this->setCurrentPluginDirName($pluginDirName);
             foreach ($callback as $cb) {
                 call_user_func($cb, $args);
             }
         }
-        
+
         // Reset the value for current plugin after this loop finishes
         $this->setCurrentPluginDirName(null);
     }
@@ -168,9 +165,8 @@ class Omeka_Plugin_Broker
      * @see applyFilters()
      * @param string|array $name Name of filter being implemented.
      * @param callback $callback PHP callback for filter implementation.
-     * @param integer|null (optional) Priority. A lower priority will
+     * @param int|null (optional) Priority. A lower priority will
      * cause a filter to be run before those with higher priority.
-     * @return void
      */
     public function addFilter($name, $callback, $priority = 10)
     {
@@ -185,7 +181,7 @@ class Omeka_Plugin_Broker
      */
     protected function _getFilterNamespace()
     {
-        if($pluginName = $this->getCurrentPluginDirName()) {
+        if ($pluginName = $this->getCurrentPluginDirName()) {
             return $pluginName;
         }
 
@@ -233,7 +229,6 @@ class Omeka_Plugin_Broker
      *
      * @param string|null $name The name of the filter to clear.  If
      *  null or omitted, all filters will be cleared.
-     * @return void
      */
     public function clearFilters($name = null)
     {
@@ -264,7 +259,7 @@ class Omeka_Plugin_Broker
                 // particular loop. It only matters during lookup to determine
                 // whether or not a specific filter has been set already.
                 foreach ($filterSet as $filter) {
-                    
+
                     // The value must be prepended to the argument set b/c it is
                     // always the first argument to any filter callback.
                     if ($args) {
@@ -281,8 +276,6 @@ class Omeka_Plugin_Broker
     /**
      * Register the plugin broker so that plugin writers can use global functions
      * like add_plugin_hook() to interact with the plugin API.
-     *
-     * @return void
      */
     public function register()
     {

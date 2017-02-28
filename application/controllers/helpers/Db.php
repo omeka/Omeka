@@ -18,22 +18,22 @@ class Omeka_Controller_Action_Helper_Db extends Zend_Controller_Action_Helper_Ab
      * @var Omeka_Db
      */
     private $_db;
-    
+
     /**
      * @var Omeka_Db_Table
      */
     private $_defaultTable;
-    
+
     /**
      * @var string
      */
     private $_defaultModel;
-    
+
     /**
-     * @var integer
+     * @var int
      */
     private $_findByLimit;
-    
+
     public function __construct(Omeka_Db $db)
     {
         $this->_db = $db;
@@ -44,7 +44,7 @@ class Omeka_Controller_Action_Helper_Db extends Zend_Controller_Action_Helper_Ab
         $this->_defaultTable = null;
         $this->_defaultModel = null;
     }
-    
+
     /**
      * Delegate to the default table object for all other method calls.
      */
@@ -58,7 +58,7 @@ class Omeka_Controller_Action_Helper_Db extends Zend_Controller_Action_Helper_Ab
         }
         return call_user_func_array(array($this->_defaultTable, $method), $args);
     }
-    
+
     /**
      * Set the class name corresponding to the default model.
      */
@@ -67,29 +67,29 @@ class Omeka_Controller_Action_Helper_Db extends Zend_Controller_Action_Helper_Ab
         $this->_defaultModel = $modelName;
         $this->setDefaultTable($this->_db->getTable($modelName));
     }
-    
+
     public function getDefaultModelName()
     {
         return $this->_defaultModel;
     }
-    
+
     public function setDefaultTable(Omeka_Db_Table $table)
     {
         $this->_defaultTable = $table;
     }
-    
+
     public function getDb()
     {
         return $this->_db;
     }
-    
+
     /**
      * @param string|null $tableName
      * @return Omeka_Db_Table
      */
     public function getTable($tableName = null)
     {
-        if(!$tableName) {
+        if (!$tableName) {
             if (!$this->_defaultTable) {
                 throw new InvalidArgumentException("Default table must be assigned.");
             }
@@ -98,7 +98,7 @@ class Omeka_Controller_Action_Helper_Db extends Zend_Controller_Action_Helper_Ab
             return $this->_db->getTable($tableName);
         }
     }
-            
+
     /**
      * Find a particular record given its unique ID # and (optionally) its class name.  
      * 
@@ -113,26 +113,25 @@ class Omeka_Controller_Action_Helper_Db extends Zend_Controller_Action_Helper_Ab
     public function findById($id = null, $table = null)
     {
         $id = (!$id) ? $this->getRequest()->getParam('id') : $id;
-        
+
         if (!$id) {
-            throw new Omeka_Controller_Exception_404(get_class($this) . ': No ID passed to this request' );
+            throw new Omeka_Controller_Exception_404(get_class($this) . ': No ID passed to this request');
         }
-        
+
         $table = $this->getTable($table);
 
         $record = $table->find($id);
-        
+
         if (!$record) {
-            
+
             //Check to see whether to record exists at all
             if (!$table->checkExists($id)) {
-                throw new Omeka_Controller_Exception_404(get_class($this) . ": No record with ID # $id exists" );
+                throw new Omeka_Controller_Exception_404(get_class($this) . ": No record with ID # $id exists");
             } else {
                 throw new Omeka_Controller_Exception_403('You do not have permission to access this page.');
             }
-            
         }
-        
+
         return $record;
     }
 }

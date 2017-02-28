@@ -12,26 +12,24 @@
  * @package Omeka\Test
  */
 abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCase
-{   
+{
     /**
      * Flag that determines whether the test should run against admin or public.  
      * Defaults to true (for admin). 
      *
-     * @var boolean
+     * @var bool
      */
     protected $_isAdminTest = true;
-    
+
     /**
      * Bootstrap the application on each test run.
-     *
-     * @return void
      */
     public function setUp()
     {
         $this->bootstrap = array($this, 'appBootstrap');
         parent::setUp();
     }
-    
+
     /**
      * Proxy gets to properties to allow access to bootstrap container
      * properties.
@@ -52,14 +50,12 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
 
     /**
      * Bootstrap the application.
-     *
-     * @return void
      */
     public function appBootstrap()
-    {        
+    {
         $this->application = new Omeka_Application('testing', array(
             'config' => CONFIG_DIR . '/' . 'application.ini'));
-        
+
         // No idea why we actually need to add the default routes.
         $this->frontController->getRouter()->addDefaultRoutes();
         $this->frontController->setParam('bootstrap', $this->application->getBootstrap());
@@ -70,36 +66,34 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         } else {
             $this->_setUpThemeBootstrap('public');
         }
-        
+
         $this->setUpBootstrap($this->application->getBootstrap());
         $this->application->bootstrap();
     }
-    
+
     /**
      * Subclasses can override this to perform specialized setup on the Omeka
      * application.
      *
      * @param Zend_Application_Bootstrap $bootstrap
-     * @return void
      */
     public function setUpBootstrap($bootstrap)
-    {}
-    
+    {
+    }
+
     /**
      * Reset objects that carry global state between test runs.
-     *
-     * @return void
      */
     public function tearDown()
     {
         // This fixes a "too many open files" error caused by hanging references
-        // to the logger object somewhere in the code (could be anywhere).  
-        // Since log files are only closed in log writer shutdown (only in 
-        // destructor), this hanging reference keeps another file open with each 
+        // to the logger object somewhere in the code (could be anywhere).
+        // Since log files are only closed in log writer shutdown (only in
+        // destructor), this hanging reference keeps another file open with each
         // test run.
         if ($this->logger instanceof Zend_Log) {
             $this->logger->__destruct();
-        }    
+        }
         if ($this->db instanceof Omeka_Db) {
             Omeka_Test_Resource_Db::setDbAdapter($this->db->getAdapter());
             $this->db->rollBack();
@@ -110,13 +104,12 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         unset($this->application);
         parent::tearDown();
     }
-    
+
     /**
      * @internal Overrides the parent behavior to enable automatic throwing of
      * exceptions from dispatching.
      * @param string $url
-     * @param boolean $throwExceptions
-     * @return void
+     * @param bool $throwExceptions
      */
     public function dispatch($url = null, $throwExceptions = true)
     {
@@ -132,7 +125,6 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
      * Trick the environment into thinking that a user has been authenticated.
      *
      * @param User $user
-     * @return void
      */
     protected function _authenticateUser(User $user)
     {
@@ -146,7 +138,7 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
         $aclHelper = Zend_Controller_Action_HelperBroker::getStaticHelper('Acl');
         $aclHelper->setCurrentUser($user);
     }
-    
+
     /**
      * Get the user that is installed by default.
      *
@@ -156,7 +148,7 @@ abstract class Omeka_Test_AppTestCase extends Zend_Test_PHPUnit_ControllerTestCa
     {
         return $this->db->getTable('User')->find(Omeka_Test_Resource_Db::DEFAULT_USER_ID);
     }
-    
+
     /**
      * Set up the bootstrap differently depending on whether the test is meant
      * for the public or admin themes.

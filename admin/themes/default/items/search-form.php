@@ -48,6 +48,19 @@ $formAttributes['method'] = 'GET';
                 //[terms] = 'foobar'
                 //etc
                 echo $this->formSelect(
+                    "advanced[$i][joiner]",
+                    @$rows['joiner'],
+                    array(
+                        'title' => __("Search Joiner"),
+                        'id' => null,
+                        'class' => 'advanced-search-joiner'
+                    ),
+                    array(
+                        'and' => __('AND'),
+                        'or' => __('OR'),
+                    )
+                );
+                echo $this->formSelect(
                     "advanced[$i][element_id]",
                     @$rows['element_id'],
                     array(
@@ -57,7 +70,7 @@ $formAttributes['method'] = 'GET';
                     ),
                     get_table_options('Element', null, array(
                         'record_types' => array('Item', 'All'),
-                        'sort' => 'alphaBySet')
+                        'sort' => 'orderBySet')
                     )
                 );
                 echo $this->formSelect(
@@ -72,9 +85,14 @@ $formAttributes['method'] = 'GET';
                         'contains' => __('contains'),
                         'does not contain' => __('does not contain'),
                         'is exactly' => __('is exactly'),
+                        'is not exactly' => __('is not exactly'),
                         'is empty' => __('is empty'),
-                        'is not empty' => __('is not empty'))
-                    )
+                        'is not empty' => __('is not empty'),
+                        'starts with' => __('starts with'),
+                        'ends with' => __('ends with'),
+                        'matches' => __('matches'),
+                        'does not match' => __('does not match'),
+                    ))
                 );
                 echo $this->formText(
                     "advanced[$i][terms]",
@@ -117,7 +135,7 @@ $formAttributes['method'] = 'GET';
                     'collection',
                     @$_REQUEST['collection'],
                     array('id' => 'collection-search'),
-                    get_table_options('Collection')
+                    get_table_options('Collection', null, array('include_no_collection' => true))
                 );
             ?>
             </div>

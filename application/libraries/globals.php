@@ -77,7 +77,7 @@ function delete_option($name)
  * Return one column of a multidimensional array as an array.
  *
  * @package Omeka\Function\Utility
- * @param string|integer $col The column to pluck.
+ * @param string|int $col The column to pluck.
  * @param array $array The array from which to pluck.
  * @return array The column as an array.
  */
@@ -136,7 +136,7 @@ function debug($msg)
  *
  * @package Omeka\Function\Log
  * @param mixed $msg The log message.
- * @param integer $priority See Zend_Log for a list of available priorities.
+ * @param int $priority See Zend_Log for a list of available priorities.
  */
 function _log($msg, $priority = Zend_Log::INFO)
 {
@@ -220,14 +220,8 @@ function get_plugin_hook_output($name, array $args = array())
  * @param mixed $args Any arguments to be passed to the hook implementation.
  * @return string|null
  */
-function get_specific_plugin_hook_output()
+function get_specific_plugin_hook_output($pluginName, $hookName, $args = array())
 {
-    $args = func_get_args();
-
-    // Get the plugin name (1st arg) and hook name (2nd arg).
-    $pluginName = array_shift($args);
-    $hookName = array_shift($args);
-
     // Get the specific hook.
     $pluginBroker = get_plugin_broker();
     $hookNameSpecific = $pluginBroker->getHook($pluginName, $hookName);
@@ -240,7 +234,7 @@ function get_specific_plugin_hook_output()
     // Buffer and return any output originating from the hook.
     ob_start();
     foreach ($hookNameSpecific as $cb) {
-        call_user_func_array($cb, $args);
+        call_user_func($cb, $args);
     }
     $content = ob_get_contents();
     ob_end_clean();
@@ -274,10 +268,10 @@ function get_plugin_broker()
  */
 function get_plugin_ini($pluginDirName, $iniKeyName)
 {
-   $pluginIniReader = Zend_Registry::get('plugin_ini_reader');
-   if ($pluginIniReader->hasPluginIniFile($pluginDirName)) {
-       return $pluginIniReader->getPluginIniValue($pluginDirName, $iniKeyName);
-   }
+    $pluginIniReader = Zend_Registry::get('plugin_ini_reader');
+    if ($pluginIniReader->hasPluginIniFile($pluginDirName)) {
+        return $pluginIniReader->getPluginIniValue($pluginDirName, $iniKeyName);
+    }
 }
 
 /**
@@ -341,7 +335,7 @@ function apply_filters($name, $value, array $args = array())
  * @uses Omeka_Plugin_Broker::addFilter()
  * @param string|array $name The filter name.
  * @param callback $callback The function to call.
- * @param integer $priority Defaults to 10.
+ * @param int $priority Defaults to 10.
  */
 function add_filter($name, $callback, $priority = 10)
 {
@@ -388,7 +382,7 @@ function get_acl()
  * controlling access to scripts.
  *
  * @package Omeka\Function\View
- * @return boolean
+ * @return bool
  */
 function is_admin_theme()
 {
@@ -412,8 +406,8 @@ function is_admin_theme()
 function get_search_record_types()
 {
     $searchRecordTypes = array(
-        'Item'       => __('Item'),
-        'File'       => __('File'),
+        'Item' => __('Item'),
+        'File' => __('File'),
         'Collection' => __('Collection'),
     );
     $searchRecordTypes = apply_filters('search_record_types', $searchRecordTypes);
@@ -471,8 +465,8 @@ function get_search_query_types()
     }
 
     $searchQueryTypes = array(
-        'keyword'     => __('Keyword'),
-        'boolean'     => __('Boolean'),
+        'keyword' => __('Keyword'),
+        'boolean' => __('Boolean'),
         'exact_match' => __('Exact match'),
     );
     $searchQueryTypes = apply_filters('search_query_types', $searchQueryTypes);
@@ -550,7 +544,7 @@ function insert_item($metadata = array(), $elementTexts = array(), $fileMetadata
  *
  * @package Omeka\Function\Db\Item
  * @uses Builder_Item::addFiles()
- * @param Item|integer $item Item record or ID of item to add files to
+ * @param Item|int $item Item record or ID of item to add files to
  * @param string|Omeka_File_Ingest_AbstractIngest $transferStrategy Strategy
  *  to use when ingesting the file. The strings 'Url', 'Filesystem' and 'Upload'
  *  correspond to those built-in strategies. Alternatively a strategy object
@@ -735,6 +729,11 @@ function insert_collection($metadata = array(), $elementTexts = array())
  */
 function insert_element_set($elementSetMetadata = array(), array $elements = array())
 {
+    // Set the element set name if a string is provided.
+    if (is_string($elementSetMetadata)) {
+        $elementSetMetadata = array('name' => $elementSetMetadata);
+    }
+
     $builder = new Builder_ElementSet(get_db());
     $builder->setRecordMetadata($elementSetMetadata);
     $builder->setElements($elements);
@@ -755,7 +754,7 @@ function release_object(&$var)
 {
     if (is_array($var)) {
         array_walk($var, 'release_object');
-    } else if (is_object($var)) {
+    } elseif (is_object($var)) {
         $var->__destruct();
     }
     $var = null;
@@ -808,7 +807,7 @@ function set_theme_option($optionName, $optionValue, $themeName = null)
 function get_user_roles()
 {
     $roles = get_acl()->getRoles();
-    foreach($roles as $key => $val) {
+    foreach ($roles as $key => $val) {
         $roles[$val] = __(Inflector::humanize($val));
         unset($roles[$key]);
     }
@@ -824,11 +823,11 @@ function get_user_roles()
  * @param string $elementName The element name.
  * @return bool
  */
-function element_exists($elementSetName, $elementName) {
+function element_exists($elementSetName, $elementName)
+{
     $element = get_db()->getTable('Element')->findByElementSetNameAndElementName($elementSetName, $elementName);
     return (bool) $element;
 }
-
 
 /**
  * Determine whether a plugin is installed and active.
@@ -858,7 +857,7 @@ function element_exists($elementSetName, $elementName) {
  * @param string $version Version of the plugin to check.
  * @param string $compOperator Comparison operator to use when checking the
  *  installed version of ExhibitBuilder.
- * @return boolean
+ * @return bool
  */
 function plugin_is_active($name, $version = null, $compOperator = '>=')
 {
@@ -881,12 +880,13 @@ function plugin_is_active($name, $version = null, $compOperator = '>=')
  *
  * @package Omeka\Function\Locale
  * @uses Zend_Translate::translate()
- * @param string $string The string to be translated.
+ * @param string|array $msgid The string to be translated, or Array for plural
+ *  translations.
  * @param mixed $args string formatting args. If any extra args are passed, the
  *  args and the translated string will be formatted with sprintf().
  * @return string The translated string.
  */
-function __($string)
+function __($msgid)
 {
     // Avoid getting the translate object more than once.
     static $translate;
@@ -900,7 +900,11 @@ function __($string)
     }
 
     if ($translate) {
-        $string = $translate->translate($string);
+        $string = $translate->translate($msgid);
+    } elseif (is_array($msgid)) {
+        $string = ($msgid[2] === 1) ? $msgid[0] : $msgid[1];
+    } else {
+        $string = $msgid;
     }
 
     $args = func_get_args();
@@ -911,6 +915,25 @@ function __($string)
     }
 
     return $string;
+}
+
+/**
+ * Transform arguments in an array suitable for __.
+ *
+ * <code>
+ *     $n = count($items);
+ *     echo __(plural('one item', '%s items', $n), $n);
+ * </code>
+ *
+ * @package Omeka\Function\Locale
+ * @param string $msgid The string to be translated, singular form
+ * @param string $msgid_plural The string to be translated, plural form
+ * @param int $n Used to determine the plural form
+ * @return array Array to pass to __
+ */
+function plural($msgid, $msgid_plural, $n)
+{
+    return array($msgid, $msgid_plural, $n);
 }
 
 /**
@@ -960,7 +983,6 @@ function get_html_lang()
     }
     return str_replace('_', '-', $locale->toString());
 }
-
 
 /**
  * Format a date for output according to the current locale.
@@ -1132,9 +1154,9 @@ function head_js($includeDefaults = true)
         $dir = 'javascripts';
         $headScript->prependScript('jQuery.noConflict();')
                    ->prependScript('window.jQuery.ui || document.write(' . js_escape(js_tag('vendor/jquery-ui')) . ')')
-                   ->prependFile('//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js')
+                   ->prependFile('//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js')
                    ->prependScript('window.jQuery || document.write(' . js_escape(js_tag('vendor/jquery')) . ')')
-                   ->prependFile('//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js');
+                   ->prependFile('//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js');
     }
     return $headScript;
 }
@@ -1258,9 +1280,8 @@ function web_path_to($file)
             return $web . '/' . $file;
         }
     }
-    throw new InvalidArgumentException( __("Could not find file %s!",$file) );
+    throw new InvalidArgumentException(__("Could not find file %s!", $file));
 }
-
 
 /**
  * Get HTML for displaying a random featured collection.
@@ -1300,7 +1321,7 @@ function get_collection_for_item($item = null)
  *
  * @package Omeka\Function\Db\Collection
  * @uses get_records()
- * @param integer $num The maximum number of recent collections to return
+ * @param int $num The maximum number of recent collections to return
  * @return array
  */
 function get_recent_collections($num = 10)
@@ -1354,13 +1375,13 @@ function latest_omeka_version()
             $check['latest_version'] = $latestVersion;
             $check['last_updated'] = time();
             set_option('omeka_update', serialize($check));
-           return $result->getBody();
+            return $result->getBody();
         } else {
-           debug("Attempt to GET $omekaApiUri with version=$omekaApiVersion "
+            debug("Attempt to GET $omekaApiUri with version=$omekaApiVersion "
                  . "returned with status=" . $result->getStatus() . " and "
                  . "response body=" . $result->getBody());
         }
-    } catch (Zend_Http_Client_Adapter_Exception $e) {
+    } catch (Zend_Http_Client_Exception $e) {
         debug('Error in retrieving latest Omeka version: ' . $e->getMessage());
     }
     return false;
@@ -1370,7 +1391,7 @@ function latest_omeka_version()
  * Get the maximum file upload size.
  *
  * @package Omeka\Function\Utility
- * @return Zend_Measure_Binary
+ * @return string
  */
 function max_file_size()
 {
@@ -1426,7 +1447,7 @@ function file_id3_metadata(array $options = array(), $file = null)
  *
  * @package Omeka\Function\Db
  * @uses get_records()
- * @param integer $num The maximum number of recent files to return
+ * @param int $num The maximum number of recent files to return
  * @return array
  */
 function get_recent_files($num = 10)
@@ -1440,10 +1461,9 @@ function get_recent_files($num = 10)
  * @package Omeka\Function\View
  * @param array|string $attributes Attributes for the tag.  If this is a string,
  * it will assign both 'name' and 'id' attributes that value for the tag.
- * @param string $value
  * @return string
  */
-function tag_attributes($attributes, $value=null)
+function tag_attributes($attributes)
 {
     if (is_string($attributes)) {
         $toProcess['name'] = $attributes;
@@ -1456,12 +1476,17 @@ function tag_attributes($attributes, $value=null)
 
     $attr = array();
     foreach ($toProcess as $key => $attribute) {
-        // Only include the attribute if its value is a string.
+        // Reject weird attribute names (a little more restrictively than necessary)
+        if (preg_match('/[^A-Za-z0-9_:.-]/', $key)) {
+            continue;
+        }
         if (is_string($attribute)) {
-            $attr[$key] = $key . '="' . html_escape( $attribute ) . '"';
+            $attr[$key] = $key . '="' . html_escape($attribute) . '"';
+        } elseif ($attribute === true) {
+            $attr[$key] = $key;
         }
     }
-    return join(' ',$attr);
+    return join(' ', $attr);
 }
 
 /**
@@ -1700,7 +1725,7 @@ function option($name)
  * @uses Omeka_Db_Table::findBy
  * @param string $recordType Type of records to get.
  * @param array $params Array of search parameters for records.
- * @param integer $limit Maximum number of records to return.
+ * @param int $limit Maximum number of records to return.
  *
  * @return array An array of result records (of $recordType).
  */
@@ -1731,7 +1756,7 @@ function get_record($recordType, $params = array())
  * @package Omeka\Function\Db
  * @uses Omeka_Db_Table::count()
  * @param string $recordType Type of record to count.
- * @return integer Number of records of $recordType in the database.
+ * @return int Number of records of $recordType in the database.
  */
 function total_records($recordType)
 {
@@ -1775,7 +1800,7 @@ function set_loop_records($recordsVar, array $records)
  * @uses Omeka_View_Helper_GetLoopRecords::getLoopRecords()
  * @throws Omeka_View_Exception
  * @param string $recordsVar The name of the variable the records are stored in.
- * @param boolean $throwException Whether to throw an exception if the
+ * @param bool $throwException Whether to throw an exception if the
  *  $recordsVar is unset. Default is to throw.
  * @return array|bool
  */
@@ -1915,23 +1940,23 @@ function browse_sort_links($links, $wrapperTags = array())
 
     $linkAttrArray = array();
     foreach ($sortlistWrappers['link_attr'] as $key => $attribute) {
-        $linkAttrArray[$key] = $key . '="' . html_escape( $attribute ) . '"';
+        $linkAttrArray[$key] = $key . '="' . html_escape($attribute) . '"';
     }
     $linkAttr = join(' ', $linkAttrArray);
 
     $listAttrArray = array();
     foreach ($sortlistWrappers['list_attr'] as $key => $attribute) {
-        $listAttrArray[$key] = $key . '="' . html_escape( $attribute ) . '"';
+        $listAttrArray[$key] = $key . '="' . html_escape($attribute) . '"';
     }
     $listAttr = join(' ', $listAttrArray);
 
     $sortlist = '';
-    if(!empty($sortlistWrappers['list_tag'])) {
+    if (!empty($sortlistWrappers['list_tag'])) {
         $sortlist .= "<{$sortlistWrappers['list_tag']} $listAttr>";
     }
 
     foreach ($links as $label => $column) {
-        if($column) {
+        if ($column) {
             $urlParams = $_GET;
             $urlParams[$sortParam] = $column;
             $class = '';
@@ -1948,13 +1973,13 @@ function browse_sort_links($links, $wrapperTags = array())
             if ($sortlistWrappers['link_tag'] !== '') {
                 $sortlist .= "<{$sortlistWrappers['link_tag']} $class $linkAttr><a href=\"$url\">$label</a></{$sortlistWrappers['link_tag']}>";
             } else {
-                $sortlist .= "<a href=\"$url\" $class {$sortlistWrappers['link_attr']}\">$label</a>";
+                $sortlist .= "<a href=\"$url\" $class $linkAttr>$label</a>";
             }
         } else {
             $sortlist .= "<{$sortlistWrappers['link_tag']}>$label</{$sortlistWrappers['link_tag']}>";
         }
     }
-    if(!empty($sortlistWrappers['list_tag'])) {
+    if (!empty($sortlistWrappers['list_tag'])) {
         $sortlist .= "</{$sortlistWrappers['list_tag']}>";
     }
     return $sortlist;
@@ -2087,7 +2112,7 @@ function get_previous_item($item = null)
  * @param array $props HTML attributes for the img tag
  * @return string
  */
-function record_image($record, $imageType, $props = array())
+function record_image($record, $imageType = null, $props = array())
 {
     if (is_string($record)) {
         $record = get_current_record($record);
@@ -2096,10 +2121,8 @@ function record_image($record, $imageType, $props = array())
     if (!($record instanceof Omeka_Record_AbstractRecord)) {
         throw new InvalidArgumentException('An Omeka record must be passed to record_image.');
     }
-
-    $imageFile = $record->getFile();
     $fileMarkup = new Omeka_View_Helper_FileMarkup;
-    return $fileMarkup->image_tag($imageFile, $props, $imageType);
+    return $fileMarkup->image_tag($record, $props, $imageType);
 }
 
 /**
@@ -2109,11 +2132,11 @@ function record_image($record, $imageType, $props = array())
  * @uses Omeka_View_Helper_FileMarkup::image_tag()
  * @param string $imageType Image size: thumbnail, square thumbnail, fullsize
  * @param array $props HTML attributes for the img tag
- * @param integer $index Which file within the item to use, by order. Default
+ * @param int $index Which file within the item to use, by order. Default
  *  is the first file.
  * @param Item|null Check for this specific item record (current item if null).
  */
-function item_image($imageType, $props = array(), $index = 0, $item = null)
+function item_image($imageType = null, $props = array(), $index = 0, $item = null)
 {
     if (!$item) {
         $item = get_current_record('item');
@@ -2150,7 +2173,7 @@ function file_image($imageType, $props = array(), $file = null)
  *  sub-arrays for 'wrapper', 'linkWrapper', 'link', and 'image'. Set a wrapper
  *  to null to omit it.
  * @param string $imageType The type of derivative image to display.
- * @param boolean $filesShow Whether to link to the files/show. Defaults to
+ * @param bool $filesShow Whether to link to the files/show. Defaults to
  *  false, links to the original file.
  * @param Item $item The Item to use, the current item if omitted.
  * @return string
@@ -2226,7 +2249,7 @@ function items_search_form($props = array(), $formActionUri = null, $buttonText 
  *
  * @package Omeka\Function\View\Item
  * @uses Table_Item::findBy()
- * @param integer $num The maximum number of recent items to return
+ * @param int $num The maximum number of recent items to return
  * @return array
  */
 function get_recent_items($num = 10)
@@ -2239,8 +2262,8 @@ function get_recent_items($num = 10)
  *
  * @package Omeka\Function\View\Item
  * @uses get_records()
- * @param integer $num The maximum number of recent items to return
- * @param boolean|null $hasImage
+ * @param int $num The maximum number of recent items to return
+ * @param bool|null $hasImage
  * @return array|Item
  */
 function get_random_featured_items($num = 5, $hasImage = null)
@@ -2279,7 +2302,7 @@ function recent_items($count = 10)
  * @package Omeka\Function\View\Item
  * @uses get_random_featured_items()
  * @param int $count Maximum number of items to show.
- * @param boolean $withImage Whether or not the featured items must have
+ * @param bool $withImage Whether or not the featured items must have
  * images associated. If null, as default, all featured items can appear,
  * whether or not they have files. If true, only items with files will appear,
  * and if false, only items without files will appear.
@@ -2350,7 +2373,9 @@ function link_to($record, $action = null, $text = null, $props = array(), $query
         //Use Zend Framework's built-in 'default' route
         $route = 'default';
         $urlOptions['controller'] = (string) $record;
-        if($action) $urlOptions['action'] = (string) $action;
+        if ($action) {
+            $urlOptions['action'] = (string) $action;
+        }
         $url = url($urlOptions, $route, $queryParams, true);
     }
     if ($text === null) {
@@ -2489,8 +2514,7 @@ function link_to_file_show($attributes = array(), $text = null, $file = null)
         $file = get_current_record('file');
     }
     if (!$text) {
-        $fileTitle = strip_formatting(metadata($file, array('Dublin Core', 'Title')));
-        $text = $fileTitle ? $fileTitle : metadata($file, 'Original Filename');
+        $text = metadata($file, 'display_title');
     }
     return link_to($file, 'show', $text, $attributes);
 }
@@ -2516,7 +2540,9 @@ function link_to_item($text = null, $props = array(), $action = 'show', $item = 
     if (!$item) {
         $item = get_current_record('item');
     }
-    $text = (!empty($text) ? $text : strip_formatting(metadata($item, array('Dublin Core', 'Title'))));
+    if (empty($text)) {
+        $text = metadata($item, 'display_title');
+    }
     return link_to($item, $action, $text, $props);
 }
 
@@ -2531,7 +2557,7 @@ function link_to_item($text = null, $props = array(), $action = 'show', $item = 
  * page, and array('foo'=>'bar') was passed as this argument, the new URI would
  * be items/browse?collection=1&foo=bar.
  */
-function link_to_items_rss($text = null, $params=array())
+function link_to_items_rss($text = null, $params = array())
 {
     if (!$text) {
         $text = __('RSS');
@@ -2554,7 +2580,7 @@ function link_to_next_item_show($text = null, $props = array())
         $text = __("Next Item &rarr;");
     }
     $item = get_current_record('item');
-    if($next = $item->next()) {
+    if ($next = $item->next()) {
         return link_to($next, 'show', $text, $props);
     }
 }
@@ -2574,7 +2600,7 @@ function link_to_previous_item_show($text = null, $props = array())
         $text = __('&larr; Previous Item');
     }
     $item = get_current_record('item');
-    if($previous = $item->previous()) {
+    if ($previous = $item->previous()) {
         return link_to($previous, 'show', $text, $props);
     }
 }
@@ -2744,7 +2770,7 @@ function public_nav_main()
  * @package Omeka\Function\View\Navigation
  * @uses nav()
  * @param array $navArray
- * @param integer|null $maxDepth
+ * @param int|null $maxDepth
  * @return string
  */
 function public_nav_items(array $navArray = null, $maxDepth = 0)
@@ -2752,16 +2778,16 @@ function public_nav_items(array $navArray = null, $maxDepth = 0)
     if (!$navArray) {
         $navArray = array(
             array(
-                'label' =>__('Browse All'),
+                'label' => __('Browse All'),
                 'uri' => url('items/browse'),
             ));
-            if (total_records('Tag')) {
-                $navArray[] = array(
+        if (total_records('Tag')) {
+            $navArray[] = array(
                     'label' => __('Browse by Tag'),
                     'uri' => url('items/tags')
                 );
-            }
-            $navArray[] = array(
+        }
+        $navArray[] = array(
                 'label' => __('Search Items'),
                 'uri' => url('items/search')
             );
@@ -2828,7 +2854,7 @@ function xml_escape($value)
  */
 function text_to_paragraphs($str)
 {
-  return str_replace('<p></p>', '', '<p>'
+    return str_replace('<p></p>', '', '<p>'
        . preg_replace('#([\r\n]\s*?[\r\n]){2,}#', '</p>$0<p>', $str) . '</p>');
 }
 
@@ -2889,7 +2915,7 @@ function snippet($text, $startPos, $endPos, $append = '…')
  *
  * @package Omeka\Function\Text
  * @param string $text
- * @param integer $maxWords
+ * @param int $maxWords
  * @param string $ellipsis
  * @return string
  */
@@ -2992,7 +3018,7 @@ function url_to_link_callback($matches)
  *
  * @package Omeka\Function\View
  * @uses get_records()
- * @param integer $limit The maximum number of recent tags to return
+ * @param int $limit The maximum number of recent tags to return
  * @return array
  */
 function get_recent_tags($limit = 10)
@@ -3017,9 +3043,9 @@ function tag_cloud($recordOrTags = null, $link = null, $maxClasses = 9, $tagNumb
 {
     if (!$recordOrTags) {
         $tags = array();
-    } else if (is_string($recordOrTags)) {
+    } elseif (is_string($recordOrTags)) {
         $tags = get_current_record($recordOrTags)->Tags;
-    } else if ($recordOrTags instanceof Omeka_Record_AbstractRecord) {
+    } elseif ($recordOrTags instanceof Omeka_Record_AbstractRecord) {
         $tags = $recordOrTags->Tags;
     } else {
         $tags = $recordOrTags;
@@ -3032,7 +3058,7 @@ function tag_cloud($recordOrTags = null, $link = null, $maxClasses = 9, $tagNumb
     //Get the largest value in the tags array
     $largest = 0;
     foreach ($tags as $tag) {
-        if($tag["tagCount"] > $largest) {
+        if ($tag["tagCount"] > $largest) {
             $largest = $tag['tagCount'];
         }
     }
@@ -3043,18 +3069,18 @@ function tag_cloud($recordOrTags = null, $link = null, $maxClasses = 9, $tagNumb
         $maxClasses = $largest;
     }
 
-    foreach( $tags as $tag ) {
-        $size = (int)(($tag['tagCount'] * $maxClasses) / $largest - 1);
+    foreach ($tags as $tag) {
+        $size = (int) (($tag['tagCount'] * $maxClasses) / $largest - 1);
         $class = str_repeat('v', $size) . ($size ? '-' : '') . 'popular';
         $html .= '<li class="' . $class . '">';
         if ($link) {
             $html .= '<a href="' . html_escape(url($link, array('tags' => $tag['name']))) . '">';
         }
-        if($tagNumber && $tagNumberOrder == 'before') {
+        if ($tagNumber && $tagNumberOrder == 'before') {
             $html .= ' <span class="count">'.$tag['tagCount'].'</span> ';
         }
         $html .= html_escape($tag['name']);
-        if($tagNumber && $tagNumberOrder == 'after') {
+        if ($tagNumber && $tagNumberOrder == 'after') {
             $html .= ' <span class="count">'.$tag['tagCount'].'</span> ';
         }
         if ($link) {
@@ -3087,9 +3113,9 @@ function tag_string($recordOrTags = null, $link = 'items/browse', $delimiter = n
 
     if (!$recordOrTags) {
         $tags = array();
-    } else if (is_string($recordOrTags)) {
+    } elseif (is_string($recordOrTags)) {
         $tags = get_current_record($recordOrTags)->Tags;
-    } else if ($recordOrTags instanceof Omeka_Record_AbstractRecord) {
+    } elseif ($recordOrTags instanceof Omeka_Record_AbstractRecord) {
         $tags = $recordOrTags->Tags;
     } else {
         $tags = $recordOrTags;
@@ -3105,7 +3131,7 @@ function tag_string($recordOrTags = null, $link = 'items/browse', $delimiter = n
         if (!$link) {
             $tagStrings[] = html_escape($name);
         } else {
-            $tagStrings[] = '<a href="' . html_escape(url($link, array('tag' => $name))) . '" rel="tag">' . html_escape($name) . '</a>';
+            $tagStrings[] = '<a href="' . html_escape(url($link, array('tags' => $name))) . '" rel="tag">' . html_escape($name) . '</a>';
         }
     }
     return join(html_escape($delimiter), $tagStrings);
@@ -3122,6 +3148,8 @@ function tag_string($recordOrTags = null, $link = 'items/browse', $delimiter = n
  *  Omeka-relative link. So, passing 'items' would create a link to the items
  *  page. If an array is passed (or no argument given), it is treated as options
  *  to be passed to Omeka's routing system.
+ *  Note that in the Url Helper, if the first argument is a string, the second
+ *  argument, not the third, is the queryParams
  * @param string $route The route to use if an array is passed in the first argument.
  * @param mixed $queryParams A set of query string parameters to append to the URL
  * @param bool $reset Whether Omeka should discard the current route when generating the URL.
@@ -3195,7 +3223,7 @@ function current_url(array $params = array())
  *
  * @package Omeka\Function\View\Navigation
  * @param string $url
- * @return boolean
+ * @return bool
  */
 function is_current_url($url)
 {
@@ -3240,8 +3268,8 @@ function record_url($record, $action = null, $getAbsoluteUrl = false, $queryPara
  * @param array $otherParams
  * @return string
  */
-function items_output_url($output, $otherParams = array()) {
-
+function items_output_url($output, $otherParams = array())
+{
     $queryParams = array();
 
     // Provide additional query parameters if the current page is items/browse.
@@ -3254,7 +3282,7 @@ function items_output_url($output, $otherParams = array()) {
     $queryParams = array_merge($queryParams, $otherParams);
     $queryParams['output'] = $output;
 
-    return url(array('controller'=>'items', 'action'=>'browse'), 'default', $queryParams);
+    return url(array('controller' => 'items', 'action' => 'browse'), 'default', $queryParams);
 }
 
 /**
@@ -3415,7 +3443,7 @@ function theme_header_background()
  * @param string|Zend_Acl_Resource_Interface $resource The name of a resource,
  *  or a record implementing Zend_Acl_Resource_Interface
  * @param string|null $privilege The privilege to check for the resource.
- * @return boolean
+ * @return bool
  */
 function is_allowed($resource, $privilege)
 {
@@ -3423,7 +3451,7 @@ function is_allowed($resource, $privilege)
     $user = current_user();
 
     if (is_string($resource)) {
-       $resource = ucwords($resource);
+        $resource = ucwords($resource);
     }
 
     // User implements Zend_Acl_Role_Interface, so it can be checked directly by the ACL.

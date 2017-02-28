@@ -31,6 +31,9 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'settings')); ?>
         <?php echo $this->formSubmit('submit', __('Save Changes'), array('class'=>'submit big green button')); ?>
         <?php echo $this->form->getDisplayGroup(Omeka_Form_Navigation::HOMEPAGE_SELECT_DISPLAY_ELEMENT_ID); ?>
     </div>
+    <div id="reset" class="panel">
+        <a class='delete-confirm big red button' href='<?php echo url('appearance/reset-navigation-confirm'); ?>'><?php echo __('Reset Navigation'); ?></a>
+    </div>
 </section>
 <?php echo $this->form->getElement('navigation_csrf'); ?>
 </form>

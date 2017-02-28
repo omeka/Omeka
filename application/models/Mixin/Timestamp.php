@@ -35,7 +35,7 @@ class Mixin_Timestamp extends Omeka_Record_Mixin_AbstractMixin
         $this->_addedColumn = $addedColumn;
         $this->_modifiedColumn = $modifiedColumn;
     }
-    
+
     /**
      * Before saving a record, set the "updated" timestamp.
      */
@@ -48,7 +48,7 @@ class Mixin_Timestamp extends Omeka_Record_Mixin_AbstractMixin
             }
             $this->_setTimestamp($column);
         }
-        
+
         $column = $this->_modifiedColumn;
         if (!$column) {
             return;

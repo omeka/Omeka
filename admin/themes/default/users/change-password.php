@@ -1,5 +1,5 @@
 <?php
-$userTitle = strip_formatting($user->username);
+$userTitle = $user->username;
 if ($userTitle != '') {
     $userTitle = ': &quot;' . html_escape($userTitle) . '&quot; ';
 } else {

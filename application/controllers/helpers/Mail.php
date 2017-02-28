@@ -17,19 +17,19 @@ class Omeka_Controller_Action_Helper_Mail extends Zend_Controller_Action_Helper_
      * @var Zend_View
      */
     private $_view;
-    
+
     /**
      * Subject of the email.
      * @var string
      */
     private $_subject;
-    
+
     /**
      * Prefix (prepended to the subject).
      * @var string
      */
     private $_subjectPrefix;
-    
+
     /**
      * @param Zend_View $view View to render as the message body.
      */
@@ -39,7 +39,7 @@ class Omeka_Controller_Action_Helper_Mail extends Zend_Controller_Action_Helper_
         $this->_mail = new Zend_Mail;
         $this->_mail->addHeader('X-Mailer', 'PHP/' . phpversion());
     }
-    
+
     /**
      * Delegate to the Zend_Mail instance.
      *
@@ -53,7 +53,7 @@ class Omeka_Controller_Action_Helper_Mail extends Zend_Controller_Action_Helper_
         }
         throw new BadMethodCallException("Method named '$method' does not exist.");
     }
-    
+
     /**
      * Set the prefix for the subject header.  Typically takes the form "[Site Name] ".
      *
@@ -63,7 +63,7 @@ class Omeka_Controller_Action_Helper_Mail extends Zend_Controller_Action_Helper_
     {
         $this->_subjectPrefix = $prefix;
     }
-    
+
     /**
      * Set the subject of the email.
      *
@@ -73,21 +73,21 @@ class Omeka_Controller_Action_Helper_Mail extends Zend_Controller_Action_Helper_
     {
         $this->_subject = $subject;
     }
-    
+
     /**
      * Render the given view and use it as the body of the email.
      * 
      * @param string $viewScript View script path.
-     * @param boolean $html Whether or not the assigned view script will render
+     * @param bool $html Whether or not the assigned view script will render
      * as HTML.  Defaults to false.
      */
     public function setBodyFromView($viewScript, $html = false)
     {
         $rendered = $this->_view->render($viewScript);
-        $html ? $this->_mail->setBodyHtml($rendered) 
+        $html ? $this->_mail->setBodyHtml($rendered)
               : $this->_mail->setBodyText($rendered);
     }
-    
+
     /**
      * Send the email.
      * 
@@ -101,5 +101,5 @@ class Omeka_Controller_Action_Helper_Mail extends Zend_Controller_Action_Helper_
         // Prepare the subject line.
         $this->_mail->setSubject($this->_subjectPrefix . $this->_subject);
         return $this->_mail->send($transport);
-    }            
+    }
 }

@@ -1,6 +1,6 @@
         </article>
 
-        <footer>
+        <footer role="contentinfo">
 
             <nav id="bottom-nav">
                 <?php echo public_nav_main(); ?>
@@ -14,7 +14,7 @@
                 <p><?php echo __('Proudly powered by <a href="http://omeka.org">Omeka</a>.'); ?></p>
             </div>
 
-            <?php fire_plugin_hook('public_footer', array('view'=>$this)); ?>
+            <?php fire_plugin_hook('public_footer', array('view' => $this)); ?>
 
         </footer>
 

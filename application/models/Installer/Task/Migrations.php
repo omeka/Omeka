@@ -10,7 +10,7 @@
  * @package Omeka\Install
  */
 class Installer_Task_Migrations implements Installer_TaskInterface
-{    
+{
     public function install(Omeka_Db $db)
     {
         $manager = Omeka_Db_Migration_Manager::getDefault($db);

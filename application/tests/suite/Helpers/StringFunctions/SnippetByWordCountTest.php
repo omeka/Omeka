@@ -4,7 +4,7 @@
  * in helpers/StringFunctions.php
  */
 class Helpers_StringFunctions_SnippetByWordCountTest extends PHPUnit_Framework_TestCase
-{   
+{
     public function setUp()
     {
         $this->reporting = error_reporting();
@@ -51,7 +51,7 @@ class Helpers_StringFunctions_SnippetByWordCountTest extends PHPUnit_Framework_T
         $targetPhrase = 'All birds' . $ellipsis;
         $this->assertEquals($targetPhrase, snippet_by_word_count($phrase, $wordCount, $ellipsis));
     }
-    
+
     public function testSnippetByWordCountWithMaxWordsEqualsWordCount()
     {
         $phrase = 'All squirrels eat grass.';

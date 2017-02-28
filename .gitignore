@@ -1,8 +1,14 @@
 # Root .htaccess
 /.htaccess
 
+# php-cs-fixer cache
+/.php_cs.cache
+
 # dist directory
 /dist/
+
+# Composer vendor directory
+/vendor/
 
 # Config files
 /db.ini

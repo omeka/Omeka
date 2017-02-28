@@ -12,14 +12,14 @@
  * 
  * @package Omeka\Application\Resource
  */
-class Omeka_Application_Resource_Locale extends Zend_Application_Resource_Locale {
-    
+class Omeka_Application_Resource_Locale extends Zend_Application_Resource_Locale
+{
     public function init()
     {
         $bootstrap = $this->getBootstrap();
         $bootstrap->bootstrap('Config');
         $config = $bootstrap->getResource('Config');
-        
+
         $locale = $config->locale;
         if ($locale instanceof Zend_Config) {
             $localeName = $locale->name;
@@ -28,7 +28,7 @@ class Omeka_Application_Resource_Locale extends Zend_Application_Resource_Locale
             $localeName = $locale;
             $cache = null;
         }
-        
+
         if ($this->getBootstrap()->hasResource('Pluginbroker')) {
             $broker = $this->getBootstrap()->getResource('Pluginbroker');
             $localeName = $broker->applyFilters('locale', $localeName);
@@ -37,9 +37,9 @@ class Omeka_Application_Resource_Locale extends Zend_Application_Resource_Locale
         if ($cache === null) {
             $cache = 'locale';
         }
-        
+
         $this->setOptions(array('cache' => $cache));
-        
+
         if ($localeName) {
             $this->setOptions(array(
                 'default' => $localeName,
@@ -53,7 +53,7 @@ class Omeka_Application_Resource_Locale extends Zend_Application_Resource_Locale
         }
         return $locale;
     }
-    
+
     /**
      * Retrieve translation configuration options.
      * 
@@ -72,14 +72,14 @@ class Omeka_Application_Resource_Locale extends Zend_Application_Resource_Locale
         if ($cache) {
             $options['cache'] = $cache;
         }
-        
+
         $translatePath = LANGUAGES_DIR . "/$locale.mo";
         if (is_readable($translatePath)) {
             $options['content'] = $translatePath;
         } else {
             $options['content'] = '';
         }
-        
+
         $translateResource = new Zend_Application_Resource_Translate($options);
         $translateResource->getTranslate();
     }

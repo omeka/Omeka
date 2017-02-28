@@ -12,7 +12,7 @@
  * @package Omeka\Test\Resource
  */
 class Omeka_Test_Resource_Mail extends Zend_Application_Resource_ResourceAbstract
-{    
+{
     /**
      * @return Zend_Mail
      */
@@ -33,7 +33,7 @@ class Omeka_Test_Resource_Mail extends Zend_Application_Resource_ResourceAbstrac
             'callback' => array(get_class($this), 'mailCallback')));
         Zend_Mail::setDefaultTransport($transport);
         Zend_Registry::set('test_mail_dir', $path);
-        
+
         return new Zend_Mail;
     }
 
@@ -43,7 +43,7 @@ class Omeka_Test_Resource_Mail extends Zend_Application_Resource_ResourceAbstrac
      * collide, the counter differentiates between messages sent during
      * the same timestamp unit (common).
      */
-    static public function mailCallback($transport)
+    public static function mailCallback($transport)
     {
         static $count = 0;
         return 'message_' . time() . '_' . ($count++) . '.tmp';

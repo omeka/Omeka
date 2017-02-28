@@ -19,28 +19,28 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
      * @var bool
      */
     public $public = 0;
-    
+
     /**
      * Whether or not the collection is featured.
      *
      * @var bool
      */
     public $featured = 0;
-    
+
     /**
      * Date the collection was added.
      *
      * @var string
      */
     public $added;
-    
+
     /**
      * Date the collection was last modified.
      *
      * @var string
      */
     public $modified;
-    
+
     /**
      * ID for the User that created this collection.
      *
@@ -55,7 +55,7 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
      */
     protected $_related = array(
         'Elements' => 'getElements',
-        'ElementTexts'=>'getElementText'
+        'ElementTexts' => 'getElementText'
     );
 
     /**
@@ -89,11 +89,13 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
         switch ($property) {
             case 'total_items':
                 return $this->totalItems();
+            case 'display_title':
+                return $this->getDisplayTitle();
             default:
                 return parent::getProperty($property);
         }
     }
-    
+
     /**
      * Get the total number of items in this collection.
      * 
@@ -103,7 +105,7 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
     {
         return $this->getDb()->getTable('Item')->count(array('collection' => $this->id));
     }
-    
+
     /**
      * Set the user who added the collection.
      * 
@@ -152,27 +154,25 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
      */
     protected function filterPostData($post)
     {
-        $options = array('inputNamespace'=>'Omeka_Filter');
-        
+        $options = array('inputNamespace' => 'Omeka_Filter');
+
         // User form input does not allow HTML tags or superfluous whitespace
-        $filters = array('public'       => 'Boolean',
-                         'featured'     => 'Boolean');
-            
+        $filters = array('public' => 'Boolean',
+                         'featured' => 'Boolean');
+
         $filter = new Zend_Filter_Input($filters, null, $post, $options);
         $post = $filter->getUnescaped();
-        
+
         return $post;
     }
-    
+
     /**
      * All of the custom code for deleting an collection.
      *
      * Delete the element texts for this record.
-     *
-     * @return void
      */
     protected function _delete()
-    {    
+    {
         $this->deleteElementTexts();
         $this->_dissociateItems();
     }
@@ -205,7 +205,7 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
      *
      * Handle public/private status for search.
      */
-    protected function afterSave()
+    protected function afterSave($args)
     {
         if (!$this->public) {
             $this->setSearchTextPrivate();

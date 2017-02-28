@@ -23,7 +23,7 @@ class Omeka_Controller_Plugin_Ssl extends Zend_Controller_Plugin_Abstract
 
     private $_auth;
 
-    public function __construct($sslConfig, 
+    public function __construct($sslConfig,
                                 $redirector,
                                 Zend_Auth $auth)
     {
@@ -63,10 +63,10 @@ class Omeka_Controller_Plugin_Ssl extends Zend_Controller_Plugin_Abstract
             return false;
         }
 
-        // It remains an open question as to whether this should be interpreted 
-        // as the 'universal' login action for all plugin modules (not just 
+        // It remains an open question as to whether this should be interpreted
+        // as the 'universal' login action for all plugin modules (not just
         // default).
-        return ($request->getActionName() == 'login') 
+        return ($request->getActionName() == 'login')
             && ($request->getControllerName() == 'users');
     }
 
@@ -80,7 +80,7 @@ class Omeka_Controller_Plugin_Ssl extends Zend_Controller_Plugin_Abstract
             return false;
         }
 
-        return (boolean)$this->_auth->getStorage()->read();
+        return (boolean) $this->_auth->getStorage()->read();
     }
 
     private function _isSslRequest($request)
@@ -91,7 +91,7 @@ class Omeka_Controller_Plugin_Ssl extends Zend_Controller_Plugin_Abstract
     private function _redirect($request)
     {
         $_SERVER['HTTPS'] = 'on';
-        $secureUrl = $request->getScheme() . '://' 
+        $secureUrl = $request->getScheme() . '://'
                    . $request->getHttpHost() . $request->getRequestUri();
         return $this->_redirector->gotoUrl($secureUrl);
     }

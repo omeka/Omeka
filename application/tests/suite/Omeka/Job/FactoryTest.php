@@ -87,7 +87,7 @@ class Omeka_Job_FactoryTest extends PHPUnit_Framework_TestCase
         $factory = new Omeka_Job_Factory(array('foo' => true));
         $job = $factory->build(
             array(
-                'className' => 'Omeka_Job_Mock', 
+                'className' => 'Omeka_Job_Mock',
                 'bar' => false,
             )
         );
@@ -99,15 +99,15 @@ class Omeka_Job_FactoryTest extends PHPUnit_Framework_TestCase
         $factory = new Omeka_Job_Factory(array('foo' => true));
         $job = $factory->build(
             array(
-                'className' => 'Omeka_Job_Mock', 
+                'className' => 'Omeka_Job_Mock',
                 'options' => array('bar' => false),
             )
         );
         $this->assertEquals(
             array(
-                'foo' => true, 
+                'foo' => true,
                 'bar' => false,
-            ), 
+            ),
             $job->getMiscOptions()
         );
     }

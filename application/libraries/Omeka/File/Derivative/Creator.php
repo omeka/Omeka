@@ -29,55 +29,55 @@ class Omeka_File_Derivative_Creator
      * @var array|null
      */
     private $_typeWhitelist;
-    
+
     /**
      * Create all the derivatives requested with addDerivative().
      * 
      * @param string $sourcePath
      * @param string $derivFilename
      * @param string $mimeType
-     * @return boolean
+     * @return bool
      */
     public function create($sourcePath, $derivFilename, $mimeType)
     {
         if (!$this->_strategy) {
             throw new Omeka_File_Derivative_Exception('No strategy has been configured.');
         }
-        
+
         if (empty($derivFilename) || !is_string($derivFilename)) {
             throw new InvalidArgumentException("Invalid derivative filename.");
         }
-        
+
         if (!is_readable($sourcePath)) {
             throw new RuntimeException("File at '$sourcePath' is not readable.");
         }
-        
+
         if (!$this->_isDerivable($sourcePath, $mimeType)) {
             return false;
         }
-        
+
         // If we have no derivative images to generate, signal nothing was done.
         if (empty($this->_derivatives)) {
             return false;
         }
-                
+
         $workingDir = dirname($sourcePath);
         if (empty($workingDir) || !is_string($workingDir)) {
             throw new InvalidArgumentException("Invalid derivative working path.");
         }
-        
+
         if (!(is_dir($workingDir) && is_writable($workingDir))) {
             throw new RuntimeException("Derivative working directory '$workingDir' is not writable.");
         }
 
         foreach ($this->_derivatives as $type => $sizeConstraint) {
-            $destPath = rtrim($workingDir, DIRECTORY_SEPARATOR ) 
+            $destPath = rtrim($workingDir, DIRECTORY_SEPARATOR)
                          . DIRECTORY_SEPARATOR . $type . '_' . $derivFilename;
             if (!$this->_strategy->createImage($sourcePath, $destPath, $type, $sizeConstraint, $mimeType)) {
                 return false;
             }
         }
-        
+
         return true;
     }
 
@@ -85,7 +85,7 @@ class Omeka_File_Derivative_Creator
      * Add a derivative image to be created.
      * 
      * @param string $storageType
-     * @param integer $size The size constraint for the image, meaning it will
+     * @param int $size The size constraint for the image, meaning it will
      * have that maximum width or height, depending on whether the image is
      *  landscape or portrait.
      */
@@ -153,11 +153,11 @@ class Omeka_File_Derivative_Creator
      * 
      * @param string $filePath
      * @param string $mimeType
-     * @return boolean
+     * @return bool
      */
     private function _isDerivable($filePath, $mimeType)
     {
-        return (is_readable($filePath) 
+        return (is_readable($filePath)
                 && $this->_passesBlacklist($mimeType)
                 && $this->_passesWhitelist($mimeType));
     }

@@ -21,7 +21,7 @@ interface Omeka_Storage_Adapter_AdapterInterface
      *
      * @param array $options
      */
-    function __construct(array $options = null);
+    public function __construct(array $options = array());
 
     /**
      * Follow any necessary steps to set up storage prior to use.
@@ -32,23 +32,23 @@ interface Omeka_Storage_Adapter_AdapterInterface
      *
      * @throws Omeka_Storage_Exception
      */
-    function setUp();
+    public function setUp();
 
     /**
      * Check whether the adapter is set up correctly to be able to store
      * files.
      *
-     * @return boolean
+     * @return bool
      */
-    function canStore();
-    
+    public function canStore();
+
     /**
      * Move a local file to "storage."
      *
      * @param string $source Local filesystem path to file.
      * @param string $dest Destination path.
      */
-    function store($source, $dest);
+    public function store($source, $dest);
 
     /**
      * Move a file between two storage locations.
@@ -56,14 +56,14 @@ interface Omeka_Storage_Adapter_AdapterInterface
      * @param string $source Original storage path.
      * @param string $dest Destination storage path.
      */
-    function move($source, $dest);
+    public function move($source, $dest);
 
     /**
      * Remove a "stored" file.
      *
      * @param string $path
      */
-    function delete($path);
+    public function delete($path);
 
     /**
      * Get a URI for a "stored" file.
@@ -71,5 +71,5 @@ interface Omeka_Storage_Adapter_AdapterInterface
      * @param string $path
      * @return string URI
      */
-    function getUri($path);
+    public function getUri($path);
 }

@@ -38,7 +38,7 @@ class Omeka_Session_SaveHandler_DbTable extends Zend_Session_SaveHandler_DbTable
                 'PRIMARY' => true,
                 'PRIMARY_POSITION' => 1,
                 'IDENTITY' => false,
-            ),    
+            ),
             'modified' => array(
                 'SCHEMA_NAME' => null,
                 'TABLE_NAME' => $tableName,
@@ -88,5 +88,20 @@ class Omeka_Session_SaveHandler_DbTable extends Zend_Session_SaveHandler_DbTable
                 'IDENTITY' => false,
             )
         );
+    }
+
+    /**
+     * Write session data
+     *
+     * @param string $id
+     * @param string $data
+     * @return bool
+     */
+    public function write($id, $data)
+    {
+        parent::write($id, $data);
+
+        // Discard parent's return value and return true (PHP 7 actually cares about this)
+        return true;
     }
 }

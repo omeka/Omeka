@@ -13,8 +13,7 @@
  *
  * @package Omeka\File\Derivative\Strategy
  */
-class Omeka_File_Derivative_Strategy_Imagick
-    extends Omeka_File_Derivative_AbstractStrategy
+class Omeka_File_Derivative_Strategy_Imagick extends Omeka_File_Derivative_AbstractStrategy
 {
     /**
      * Check for the imagick extension at creation.
@@ -41,17 +40,23 @@ class Omeka_File_Derivative_Strategy_Imagick
             return false;
         }
 
+        if ($this->getOption('autoOrient', false)) {
+            $this->_autoOrient($imagick);
+        }
+
+        $origX = $imagick->getImageWidth();
+        $origY = $imagick->getImageHeight();
+
+        $imagick->setImagePage($origX, $origY, 0, 0);
         $imagick->setBackgroundColor('white');
-        $imagick->mergeImageLayers(Imagick::LAYERMETHOD_FLATTEN);
+        $imagick->setImageBackgroundColor('white');
+        $imagick = $imagick->mergeImageLayers(Imagick::LAYERMETHOD_FLATTEN);
 
         if ($type != 'square_thumbnail') {
             $imagick->thumbnailImage($sizeConstraint, $sizeConstraint, true);
         } else {
             // We could use cropThumbnailImage here but it lacks support for
             // the gravity setting
-            $origX = $imagick->getImageWidth();
-            $origY = $imagick->getImageHeight();
-
             if ($origX < $origY) {
                 $newX = $sizeConstraint;
                 $newY = $origY * ($sizeConstraint / $origX);
@@ -133,6 +138,41 @@ class Omeka_File_Derivative_Strategy_Imagick
             case 'east':
             default:
                 return (int) (($resizedY - $sizeConstraint) / 2);
+        }
+    }
+
+    protected function _autoOrient($imagick)
+    {
+        $orientation = $imagick->getImageOrientation();
+        $white = new ImagickPixel('#fff');
+        switch ($orientation) {
+            case Imagick::ORIENTATION_RIGHTTOP:
+                $imagick->rotateImage($white, 90);
+                break;
+            case Imagick::ORIENTATION_BOTTOMRIGHT:
+                $imagick->rotateImage($white, 180);
+                break;
+            case Imagick::ORIENTATION_LEFTBOTTOM:
+                $imagick->rotateImage($white, 270);
+                break;
+            case Imagick::ORIENTATION_TOPRIGHT:
+                $imagick->flopImage();
+                break;
+            case Imagick::ORIENTATION_RIGHTBOTTOM:
+                $imagick->flopImage();
+                $imagick->rotateImage($white, 90);
+                break;
+            case Imagick::ORIENTATION_BOTTOMLEFT:
+                $imagick->flopImage();
+                $imagick->rotateImage($white, 180);
+                break;
+            case Imagick::ORIENTATION_LEFTTOP:
+                $imagick->flopImage();
+                $imagick->rotateImage($white, 270);
+                break;
+            case Imagick::ORIENTATION_TOPLEFT:
+            default:
+                break;
         }
     }
 }

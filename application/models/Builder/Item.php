@@ -22,35 +22,35 @@ class Builder_Item extends Omeka_Record_Builder_AbstractBuilder
     const ITEM_TYPE_ID = 'item_type_id';
     const COLLECTION_ID = 'collection_id';
     const OVERWRITE_ELEMENT_TEXTS = 'overwriteElementTexts';
-    
+
     /**
      * @internal Constant could not be called 'PUBLIC' because it is a reserved
      * keyword.
      */
     const IS_PUBLIC = 'public';
     const IS_FEATURED = 'featured';
-    
+
     protected $_recordClass = 'Item';
     protected $_settableProperties = array(
-        self::ITEM_TYPE_ID, 
-        self::COLLECTION_ID, 
-        self::IS_PUBLIC, 
+        self::ITEM_TYPE_ID,
+        self::COLLECTION_ID,
+        self::IS_PUBLIC,
         self::IS_FEATURED
     );
-    
+
     private $_elementTexts = array();
     private $_fileMetadata = array();
-    
+
     /**
      * Set the element texts for the item.
      * 
      * @param array $elementTexts
-     */    
+     */
     public function setElementTexts(array $elementTexts)
     {
         $this->_elementTexts = $elementTexts;
     }
-    
+
     /**
      * Set the file metadata for the item.
      * 
@@ -60,41 +60,40 @@ class Builder_Item extends Omeka_Record_Builder_AbstractBuilder
     {
         $this->_fileMetadata = $fileMetadata;
     }
-    
+
     /**
      * Overrides setRecordMetadata() to allow setting the item type by name
      * instead of ID.
      * 
      * @param array $metadata
-     * @return void
      */
     public function setRecordMetadata(array $metadata)
     {
         // Determine the Item Type ID from the name.
         if (array_key_exists(self::ITEM_TYPE_NAME, $metadata)) {
             $itemType = $this->_db->getTable('ItemType')
-                                  ->findBySql('name = ?', 
-                                              array($metadata[self::ITEM_TYPE_NAME]), 
+                                  ->findBySql('name = ?',
+                                              array($metadata[self::ITEM_TYPE_NAME]),
                                               true);
-            if(!$itemType) {
-                throw new Omeka_Record_Builder_Exception( "Invalid type named {$metadata[self::ITEM_TYPE_NAME]} provided!");
-            }            
+            if (!$itemType) {
+                throw new Omeka_Record_Builder_Exception("Invalid type named {$metadata[self::ITEM_TYPE_NAME]} provided!");
+            }
             $metadata[self::ITEM_TYPE_ID] = $itemType->id;
         }
         return parent::setRecordMetadata($metadata);
     }
-    
+
     /**
      * Add element texts to a record.
-     */            
+     */
     private function _addElementTexts()
     {
         return $this->_record->addElementTextsByArray($this->_elementTexts);
-    }    
-    
+    }
+
     /**
      * Replace all the element texts for existing element texts.
-     */    
+     */
     private function _replaceElementTexts()
     {
         $item = $this->_record;
@@ -113,7 +112,7 @@ class Builder_Item extends Omeka_Record_Builder_AbstractBuilder
                         $etRecord->html = $textAttr['html'];
                         $etRecord->save();
                     } else {
-                        // Otherwise we should just append the new text to the 
+                        // Otherwise we should just append the new text to the
                         // pre-existing ones.
                         $elementRecord = $item->getElement($elementSetName, $elementName);
                         $item->addTextForElement($elementRecord, $textAttr['text'], $textAttr['html']);
@@ -122,7 +121,7 @@ class Builder_Item extends Omeka_Record_Builder_AbstractBuilder
             }
         }
     }
-    
+
     /**
      * Add tags to an item (must exist in database).
      */
@@ -131,7 +130,7 @@ class Builder_Item extends Omeka_Record_Builder_AbstractBuilder
         $metadata = $this->getRecordMetadata();
         $this->_record->addTags($metadata[self::TAGS]);
     }
-    
+
     /**
      * Add files to an item.
      * 
@@ -182,7 +181,7 @@ class Builder_Item extends Omeka_Record_Builder_AbstractBuilder
      * were ingested.
      */
     public function addFiles($transferStrategy, $files, array $options = array())
-    {        
+    {
         if ($transferStrategy instanceof Omeka_File_Ingest_AbstractIngest) {
             $ingester = $transferStrategy;
             $ingester->setItem($this->_record);
@@ -196,17 +195,17 @@ class Builder_Item extends Omeka_Record_Builder_AbstractBuilder
         }
 
         $this->_addIngestValidators($ingester);
-                
+
         $fileRecords = $ingester->ingest($files);
-        
+
         // If we are attaching files to a pre-existing item, only save the files.
         if ($this->_record->exists()) {
             $this->_record->saveFiles();
         }
-        
+
         return $fileRecords;
     }
-    
+
     /**
      * Add the default validators for ingested files.  
      * 
@@ -220,29 +219,28 @@ class Builder_Item extends Omeka_Record_Builder_AbstractBuilder
      * filter.
      * 
      * @param Omeka_File_Ingest_AbstractIngest $ingester
-     * @return void
      */
     protected function _addIngestValidators(Omeka_File_Ingest_AbstractIngest $ingester)
-    {    
-        $validators = get_option(File::DISABLE_DEFAULT_VALIDATION_OPTION) 
+    {
+        $validators = get_option(File::DISABLE_DEFAULT_VALIDATION_OPTION)
                     ? array()
                     : array(
-                        'extension whitelist'=> new Omeka_Validate_File_Extension,
-                        'MIME type whitelist'=> new Omeka_Validate_File_MimeType);
-        
+                        'extension whitelist' => new Omeka_Validate_File_Extension,
+                        'MIME type whitelist' => new Omeka_Validate_File_MimeType);
+
         $validators = apply_filters(self::FILE_INGEST_VALIDATORS_FILTER, $validators);
-        
+
         // Build the default validators.
         foreach ($validators as $validator) {
             $ingester->addValidator($validator);
         }
     }
-    
+
     protected function _beforeBuild(Omeka_Record_AbstractRecord $record)
     {
         $metadata = $this->getRecordMetadata();
 
-        if ($this->_record->exists() 
+        if ($this->_record->exists()
             && array_key_exists(self::OVERWRITE_ELEMENT_TEXTS, $metadata)) {
             $this->_replaceElementTexts();
         } else {
@@ -253,19 +251,19 @@ class Builder_Item extends Omeka_Record_Builder_AbstractBuilder
         if (array_key_exists(self::TAGS, $metadata) && !empty($metadata[self::TAGS])) {
             $this->_addTags();
         }
-        
-        // Files are ingested before the item is saved.  That way, ingest 
+
+        // Files are ingested before the item is saved.  That way, ingest
         // exceptions that bubble up will prevent the item from being saved.  On
-        // the other hand, if 'ignore_invalid_files' is set to true, then the 
+        // the other hand, if 'ignore_invalid_files' is set to true, then the
         // item will be saved as normally.
         if (array_key_exists(self::FILES, $this->_fileMetadata)) {
             if (!array_key_exists(self::FILE_TRANSFER_TYPE, $this->_fileMetadata)) {
                 throw new Omeka_Record_Builder_Exception(__("Must specify a file transfer type when attaching files to an item!"));
             }
             $this->addFiles(
-                $this->_fileMetadata[self::FILE_TRANSFER_TYPE], 
-                $this->_fileMetadata[self::FILES], 
-                (array)$this->_fileMetadata[self::FILE_INGEST_OPTIONS]);
+                $this->_fileMetadata[self::FILE_TRANSFER_TYPE],
+                $this->_fileMetadata[self::FILES],
+                (array) $this->_fileMetadata[self::FILE_INGEST_OPTIONS]);
         }
     }
 }

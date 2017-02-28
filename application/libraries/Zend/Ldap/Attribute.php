@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Ldap
- * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -24,12 +24,15 @@
  */
 require_once 'Zend/Ldap/Converter.php';
 
+/** @see Zend_Crypt_Math */
+require_once 'Zend/Crypt/Math.php';
+
 /**
  * Zend_Ldap_Attribute is a collection of LDAP attribute related functions.
  *
  * @category   Zend
  * @package    Zend_Ldap
- * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Ldap_Attribute
@@ -311,7 +314,7 @@ class Zend_Ldap_Attribute
                 }
                 return $password;
             case self::PASSWORD_HASH_SSHA:
-                $salt    = substr(sha1(uniqid(mt_rand(), true), true), 0, 4);
+                $salt    = Zend_Crypt_Math::randBytes(4);
                 $rawHash = sha1($password . $salt, true) . $salt;
                 $method  = '{SSHA}';
                 break;
@@ -320,7 +323,7 @@ class Zend_Ldap_Attribute
                 $method  = '{SHA}';
                 break;
             case self::PASSWORD_HASH_SMD5:
-                $salt    = substr(sha1(uniqid(mt_rand(), true), true), 0, 4);
+                $salt    = Zend_Crypt_Math::randBytes(4);
                 $rawHash = md5($password . $salt, true) . $salt;
                 $method  = '{SMD5}';
                 break;

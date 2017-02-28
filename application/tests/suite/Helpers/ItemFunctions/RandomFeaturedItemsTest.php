@@ -10,7 +10,7 @@
  * in helpers/ItemFunctions.php
  *
  * @package Omeka
- */ 
+ */
 class Omeka_Helper_RandomFeaturedItemsTest extends Omeka_Test_AppTestCase
 {
     public function setUp()
@@ -18,20 +18,20 @@ class Omeka_Helper_RandomFeaturedItemsTest extends Omeka_Test_AppTestCase
         parent::setUp();
         $this->_createFeaturedItems();
     }
-    
+
     public function testRandomFeaturedItems()
-    {   
+    {
         $randomFeaturedItems = get_random_featured_items();
         $this->assertEquals(5, count($randomFeaturedItems));
-        
+
         $randomFeaturedItemsWithImages = get_random_featured_items('5', true);
         $this->assertEquals(5, count($randomFeaturedItemsWithImages));
-        
+
         foreach ($randomFeaturedItemsWithImages as $randomItem) {
             $this->assertTrue(metadata($randomItem, 'has files'));
         }
     }
-    
+
     /**
      * Creates some feature items for use in our tests. Specifically, it creates
      * 10 public featured items without images, 10 public non-featured items
@@ -40,27 +40,27 @@ class Omeka_Helper_RandomFeaturedItemsTest extends Omeka_Test_AppTestCase
     protected function _createFeaturedItems()
     {
         $db = $this->db;
-        
-        for ($i=0; $i < 10; $i++) { 
+
+        for ($i = 0; $i < 10; $i++) {
             $item = new Item;
             $item->featured = 1;
             $item->public = 1;
             $item->save();
         }
-        
-        for ($i=0; $i < 10; $i++) { 
+
+        for ($i = 0; $i < 10; $i++) {
             $item = new Item;
             $item->featured = 0;
             $item->public = 1;
             $item->save();
         }
-        
-        for ($i=0; $i < 10; $i++) {
+
+        for ($i = 0; $i < 10; $i++) {
             $item = new Item;
             $item->featured = 1;
             $item->public = 1;
             $item->save();
-            
+
             $db->insert('File', array(
                 'has_derivative_image' => '1',
                 'filename' => 'file'.$i,

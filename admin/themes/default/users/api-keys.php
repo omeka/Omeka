@@ -1,5 +1,5 @@
 <?php
-$userTitle = strip_formatting($user->username);
+$userTitle = $user->username;
 if ($userTitle != '') {
     $userTitle = ': &quot;' . html_escape($userTitle) . '&quot; ';
 } else {
@@ -57,7 +57,7 @@ echo flash();
     </tbody>
 </table>
 <?php endif; ?>
-<?php echo $this->formSubmit('update_api_keys', 'Update API Keys'); ?>
+<?php echo $this->formSubmit('update_api_keys', __('Update API Keys')); ?>
 </form>
 
 <?php echo foot();?>
