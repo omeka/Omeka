@@ -29,7 +29,7 @@ class TagsController extends Omeka_Controller_AbstractActionController
     }
 
     /**
-     *
+     * Browse, filter and search tags
      */
     public function browseAction()
     {
@@ -46,13 +46,9 @@ class TagsController extends Omeka_Controller_AbstractActionController
         } else {
             $browse_for = 'All';
             $this->setParam('type', null);
-            // by default include all tags, even without any records
+            // by default include all tags, even without any relations to records
             $this->setParam('include_zero', 1);
         }
-
-        /* OMEKA, WHAT IS THIS???? if ($record = $this->_getParam('record')) {
-            $filter['record'] = $record;
-        }*/
 
         parent::browseAction();
 
