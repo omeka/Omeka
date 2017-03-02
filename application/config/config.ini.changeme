@@ -106,7 +106,7 @@ log.sql = false
 ;
 ; Omeka uses Zend Framework's session handling. A full list of
 ; available session configuration options can be found here:
-; http://framework.zend.com/manual/en/zend.session.global_session_management.html#zend.session.global_session_management.configuration_options
+; https://framework.zend.com/manual/1.12/en/zend.session.global_session_management.html
 ;
 ; Some options that are often useful for Omeka sites are included here.
 
