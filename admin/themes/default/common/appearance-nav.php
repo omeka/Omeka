@@ -16,6 +16,6 @@
             'uri' => url('appearance/edit-settings')
         ),
     );
-    echo nav($navArray, 'admin_navigation_settings');
+    echo nav($navArray, 'admin_navigation_appearance');
 ?>
 </nav>
