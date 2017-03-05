@@ -193,7 +193,7 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
             $this->assertEquals(3, count($item->getTags()));
         }
 
-        $this->assertRedirectTo('/items/browse');
+        $this->assertRedirectTo('/items/browse?range='.urlencode(implode(',', $itemIds)));
         $flash = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger');
         $messages = $flash->getCurrentMessages();
         $this->assertContains("The items were successfully changed!", $messages['success']);
@@ -221,7 +221,7 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
             $this->assertEquals(3, count($item->getTags()));
         }
 
-        $this->assertRedirectTo('/items/browse');
+        $this->assertRedirectTo('/items/browse?range='.urlencode(implode(',', $itemIds)));
         $flash = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger');
         $messages = $flash->getCurrentMessages();
         $this->assertContains("The items were successfully changed!", $messages['success']);
@@ -255,7 +255,7 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
             $this->assertEquals(3, count($item->getTags()));
         }
 
-        $this->assertRedirectTo('/items/browse');
+        $this->assertRedirectTo('/items/browse?range='.urlencode(implode(',', $itemIds)));
         $flash = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger');
         $messages = $flash->getCurrentMessages();
         $this->assertContains("The items were successfully changed!", $messages['success']);
@@ -274,7 +274,7 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
         $this->_makePost();
 
         $this->dispatch('/items/batch-edit-save');
-        $this->assertRedirectTo('/items/browse');
+        $this->assertRedirectTo('/items/browse?range='.urlencode(implode(',', $itemIds)));
         $flash = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger');
         $messages = $flash->getCurrentMessages();
         $this->assertContains("User is not allowed", $messages['error'][0]);
@@ -303,7 +303,11 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
         $this->_authenticateUser($this->_users[$userRole]);
         $this->_makePost($post);
         $this->dispatch('/items/batch-edit-save');
-        $this->assertRedirectTo('/items/browse');
+        if ($succeeds) {
+            $this->assertRedirectTo('/items/browse');
+        } else {
+            $this->assertRedirectTo('/items/browse?range='.urlencode(implode(',', $itemIds)));
+        }
         $flash = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger');
         $messages = $flash->getCurrentMessages();
 
@@ -354,7 +358,7 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
             $this->assertFalse($item->isFeatured());
         }
 
-        $this->assertRedirectTo('/items/browse');
+        $this->assertRedirectTo('/items/browse?range='.urlencode(implode(',', $itemIds)));
         $flash = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger');
         $messages = $flash->getCurrentMessages();
         $this->assertContains("The items were successfully changed!", $messages['success']);
@@ -396,7 +400,7 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
             $this->assertNull($item->item_type_id);
         }
 
-        $this->assertRedirectTo('/items/browse');
+        $this->assertRedirectTo('/items/browse?range='.urlencode(implode(',', $itemIds)));
         $flash = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger');
         $messages = $flash->getCurrentMessages();
         $this->assertContains("The items were successfully changed!", $messages['success']);
