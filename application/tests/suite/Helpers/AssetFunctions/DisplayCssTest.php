@@ -59,9 +59,32 @@ class Omeka_Helper_DisplayCssTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('', $this->_getCssOutput());
     }
 
-    public function testQueueCssSingle()
+    public function testQueueCssSingleWithDefaultVersion()
     {
         queue_css_file('style');
+
+        $styles = array(
+            self::ASSET_PATH_ROOT . '/css/style.css?v='.OMEKA_VERSION
+        );
+
+        $this->_assertStylesheets($this->_getCssOutput(), $styles);
+    }
+
+    public function testQueueCssSingleWithSpecificVersion()
+    {
+        $version = '1.2x';
+        queue_css_file('style', 'all', false, 'css', $version);
+
+        $styles = array(
+            self::ASSET_PATH_ROOT . '/css/style.css?v='.$version
+        );
+
+        $this->_assertStylesheets($this->_getCssOutput(), $styles);
+    }
+
+    public function testQueueCssSingleWithNoVersion()
+    {
+        queue_css_file('style', 'all', false, 'css', null);
 
         $styles = array(
             self::ASSET_PATH_ROOT . '/css/style.css'
@@ -70,9 +93,21 @@ class Omeka_Helper_DisplayCssTest extends PHPUnit_Framework_TestCase
         $this->_assertStylesheets($this->_getCssOutput(), $styles);
     }
 
-    public function testQueueCssArray()
+    public function testQueueCssArrayWithDefaultVersion()
     {
         queue_css_file(array('style', 'jquery-ui'));
+
+        $styles = array(
+            self::ASSET_PATH_ROOT . '/css/style.css?v='.OMEKA_VERSION,
+            self::ASSET_PATH_ROOT . '/css/jquery-ui.css?v='.OMEKA_VERSION
+        );
+
+        $this->_assertStylesheets($this->_getCssOutput(), $styles);
+    }
+
+    public function testQueueCssArrayWithNoVersion()
+    {
+        queue_css_file(array('style', 'jquery-ui'), 'all', false, 'css', null);
 
         $styles = array(
             self::ASSET_PATH_ROOT . '/css/style.css',
@@ -82,9 +117,18 @@ class Omeka_Helper_DisplayCssTest extends PHPUnit_Framework_TestCase
         $this->_assertStylesheets($this->_getCssOutput(), $styles);
     }
 
-    public function testQueueCssWithMedia()
+    public function testQueueCssWithMediaAndDefaultVersion()
     {
         queue_css_file('style', 'screen');
+
+        $path = self::ASSET_PATH_ROOT . '/css/style.css?v='.OMEKA_VERSION;
+
+        $this->_assertStyleLink($this->_getCssOutput(), $path, 'screen');
+    }
+
+    public function testQueueCssWithMediaAndNoVersion()
+    {
+        queue_css_file('style', 'screen', false, 'css', null);
 
         $path = self::ASSET_PATH_ROOT . '/css/style.css';
 

@@ -57,9 +57,21 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('', $this->_getJsOutput(false));
     }
 
-    public function testQueueJs()
+    public function testQueueJsWithDefaultVersion()
     {
         queue_js_file(array('items-search', 'vendor/tiny_mce/tiny_mce'));
+
+        $scripts = array(
+            self::ASSET_PATH_ROOT . '/javascripts/items-search.js?v='.OMEKA_VERSION,
+            self::ASSET_PATH_ROOT . '/javascripts/vendor/tiny_mce/tiny_mce.js?v='.OMEKA_VERSION
+        );
+
+        $this->_assertScriptsIncluded($this->_getJsOutput(), $scripts);
+    }
+
+    public function testQueueJsWithNoVersion()
+    {
+        queue_js_file(array('items-search', 'vendor/tiny_mce/tiny_mce'), 'javascripts', array(), null);
 
         $scripts = array(
             self::ASSET_PATH_ROOT . '/javascripts/items-search.js',
