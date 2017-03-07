@@ -1019,17 +1019,18 @@ function format_date($date, $format = Zend_Date::DATE_MEDIUM)
  * @param string $dir Directory to search for the file. Keeping the default is
  * recommended.
  * @param array $options An array of options.
+ * @param mixed $version Version number. By default OMEKA_VERSION.
  */
-function queue_js_file($file, $dir = 'javascripts', $options = array())
+function queue_js_file($file, $dir = 'javascripts', $options = array(), $version = OMEKA_VERSION)
 {
     if (is_array($file)) {
         foreach ($file as $singleFile) {
-            queue_js_file($singleFile, $dir, $options);
+            queue_js_file($singleFile, $dir, $options, $version);
         }
         return;
     }
 
-    queue_js_url(src($file, $dir, 'js'), $options);
+    queue_js_url(src($file, $dir, 'js', $version), $options);
 }
 
 /**
@@ -1079,16 +1080,17 @@ function queue_js_string($string, $options = array())
  * to include IE-specific styles. Defaults to false.
  * @param string $dir Directory to search for the file.  Keeping the default is
  * recommended.
+ * @param mixed $version Version number. By default OMEKA_VERSION.
  */
-function queue_css_file($file, $media = 'all', $conditional = false, $dir = 'css')
+function queue_css_file($file, $media = 'all', $conditional = false, $dir = 'css', $version = OMEKA_VERSION)
 {
     if (is_array($file)) {
         foreach ($file as $singleFile) {
-            queue_css_file($singleFile, $media, $conditional, $dir);
+            queue_css_file($singleFile, $media, $conditional, $dir, $version);
         }
         return;
     }
-    queue_css_url(css_src($file, $dir), $media, $conditional);
+    queue_css_url(css_src($file, $dir, $version), $media, $conditional);
 }
 
 /**
@@ -1183,11 +1185,12 @@ function head_css()
  * @uses src()
  * @param string $file Should not include the .css extension
  * @param string $dir Defaults to 'css'
+ * @param mixed $version Version number. By default OMEKA_VERSION.
  * @return string
  */
-function css_src($file, $dir = 'css')
+function css_src($file, $dir = 'css', $version = OMEKA_VERSION)
 {
-    return src($file, $dir, 'css');
+    return src($file, $dir, 'css', $version);
 }
 
 /**
@@ -1213,11 +1216,12 @@ function img($file, $dir = 'images')
  * @param string $file The name of the file, without .js extension.
  * @param string $dir The directory in which to look for javascript files.
  * Recommended to leave the default value.
+ * @param mixed $version Version number. By default OMEKA_VERSION.
  * @return string
  */
-function js_tag($file, $dir = 'javascripts')
+function js_tag($file, $dir = 'javascripts', $version = OMEKA_VERSION)
 {
-    $href = src($file, $dir, 'js');
+    $href = src($file, $dir, 'js', $version);
     return '<script type="text/javascript" src="' . html_escape($href) . '" charset="utf-8"></script>';
 }
 
@@ -1229,9 +1233,10 @@ function js_tag($file, $dir = 'javascripts')
  * @param string $file The filename.
  * @param string|null $dir The file's directory.
  * @param string $ext The file's extension.
+ * @param mixed $version Optional version number.
  * @return string
  */
-function src($file, $dir = null, $ext = null)
+function src($file, $dir = null, $ext = null, $version = null)
 {
     if ($ext !== null) {
         $file .= '.' . $ext;
@@ -1239,7 +1244,7 @@ function src($file, $dir = null, $ext = null)
     if ($dir !== null) {
         $file = $dir . '/' . $file;
     }
-    return web_path_to($file);
+    return web_path_to($file) . ($version ? '?v='. $version : '');
 }
 
 /**
