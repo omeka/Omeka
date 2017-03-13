@@ -19,4 +19,6 @@ before_script:
   - sed -i 's/db.dbname = ""/db.dbname = "omeka_test"/' application/tests/config.ini
   - sed -i 's/paths.imagemagick = ""/paths.imagemagick = "\/usr\/bin\/"/' application/tests/config.ini
 
-script: composer install && cd application/tests && ../../vendor/bin/phpunit
+script:
+  - if [[ ${TRAVIS_PHP_VERSION:0:1} == "7" ]]; then composer install; fi;
+  - cd application/tests && if [[ ${TRAVIS_PHP_VERSION:0:1} == "7" ]]; then ../../vendor/bin/phpunit; else phpunit; fi;
