@@ -26,6 +26,7 @@
                 <exclude name="**/css/sass/**"/>
                 <exclude name="**/css/config.rb"/>
                 <exclude name="application/tests/**"/>
+                <exclude name="vendor/**"/>
             </zipfileset>
         </zip>
     </target>
@@ -51,7 +52,7 @@
     </target>
 
     <target name="test" description="Run automated tests.">
-        <exec executable="phpunit" dir="application/tests"
+        <exec executable="../../vendor/bin/phpunit" dir="application/tests"
             failonerror="true"/>
     </target>
 
