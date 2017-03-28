@@ -162,7 +162,7 @@ limitations under the License.
         var uuid = 0,
             keydownTimeoutDuration = 1000,
             keydownSearchString = "",
-            isTouch = typeof window.hasOwnProperty === "function" && !!window.hasOwnProperty("ontouchstart"),
+            isTouch = false,
             _getPlugin,
             _addUniqueId,
             _togglePanel,
