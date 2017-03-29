@@ -95,6 +95,8 @@ class SettingsController extends Omeka_Controller_AbstractActionController
         // Customize search record types.
         $csrf = new Omeka_Form_SessionCsrf;
 
+        $this->view->validQueryTypes = get_search_query_types();
+        $this->view->defaultQueryType = get_option('search_query_type') ?: 'keyword';
         $this->view->searchRecordTypes = get_search_record_types();
         $this->view->customSearchRecordTypes = get_custom_search_record_types();
         $this->view->csrf = $csrf;
@@ -105,6 +107,13 @@ class SettingsController extends Omeka_Controller_AbstractActionController
                 return;
             }
             if (isset($_POST['submit_save_changes'])) {
+                if (isset($_POST['search_query_type'])) {
+                    $option = trim($_POST['search_query_type']);
+                } else {
+                    $option = 'keyword';
+                }
+                set_option('search_query_type', $option);
+
                 if (isset($_POST['search_record_types'])) {
                     $option = serialize($_POST['search_record_types']);
                 } else {

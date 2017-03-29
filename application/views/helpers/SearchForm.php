@@ -24,12 +24,13 @@ class Omeka_View_Helper_SearchForm extends Zend_View_Helper_Abstract
      */
     public function searchForm(array $options = array())
     {
+        $defaultQueryType = get_option('search_query_type') ?: 'keyword';
         $validQueryTypes = get_search_query_types();
         $validRecordTypes = get_custom_search_record_types();
 
         $filters = array(
             'query' => apply_filters('search_form_default_query', ''),
-            'query_type' => apply_filters('search_form_default_query_type', 'keyword'),
+            'query_type' => apply_filters('search_form_default_query_type', $defaultQueryType),
             'record_types' => apply_filters('search_form_default_record_types',
                 array_keys($validRecordTypes))
         );
