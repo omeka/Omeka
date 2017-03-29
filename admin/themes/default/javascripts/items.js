@@ -257,6 +257,13 @@ Omeka.Items = {};
      */
     Omeka.Items.enableAddFiles = function (label) {
         var filesDiv = $('#files-metadata .files');
+        var fileInput = filesDiv.find('input');
+        // add mutliple file upload support only for browsers that support it
+        if ('multiple' in fileInput.get(0)) {
+            fileInput.attr({'multiple': '', 'name': 'file[]'});
+            $('#file-inputs').hide();
+            return;
+        }
 
         var link = $('<a href="#" id="add-file" class="add-file button">' + label + '</a>');
         link.click(function (event) {
