@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%files` (
   `id` int unsigned NOT NULL auto_increment,
   `item_id` int unsigned NOT NULL,
   `order` int(10) unsigned DEFAULT NULL,
-  `size` int unsigned NOT NULL,
+  `size` bigint unsigned NOT NULL,
   `has_derivative_image` tinyint(1) NOT NULL,
   `authentication` char(32) collate utf8_unicode_ci default NULL,
   `mime_type` varchar(255) collate utf8_unicode_ci default NULL,
