@@ -217,6 +217,12 @@ class Omeka_Db_Migration_Manager
      */
     private function _migrateUp($stopAt)
     {
+        // Override strict SQL mode for large version jumps (from pre-2.0)
+        $dbVersion = get_option(self::VERSION_OPTION_NAME);
+        if (version_compare($dbVersion, '2.0', '<')) {
+            $this->_db->query("SET SESSION sql_mode=''");
+        }
+
         $pending = $this->_getPendingMigrations($stopAt);
         foreach ($pending as $time => $filename) {
             $migration = $this->_loadMigration($filename);
