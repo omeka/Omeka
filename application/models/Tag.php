@@ -61,8 +61,21 @@ class Tag extends Omeka_Record_AbstractRecord
                          ->getTable('RecordsTags')
                          ->findBySql('tag_id = ?', array((int) $this->id));
 
+        $reindex = array();
         foreach ($taggings as $tagging) {
+            $reindex[$tagging->record_type][] = $tagging->record_id;
             $tagging->delete();
+        }
+
+        if (count($reindex)) {
+            // TODO - problem with MySQL TEXT data type (max. 65 535 chars)
+                // should we change `processes`.`args` to MEDIUMTEXT or even LONGTEXT??
+            // TODO - it's possible others have implemented batch-delete for tags that runs in background
+                // then this may open large amount of parallel processes and kill CPU/memory, is it safe??
+            Zend_Registry::get('bootstrap')->getResource('jobs')
+                ->sendLongRunning('Job_SearchTextIndex', array(
+                    'records' => $reindex
+                ));
         }
     }
 
