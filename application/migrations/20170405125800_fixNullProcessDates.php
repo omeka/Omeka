@@ -1,0 +1,20 @@
+<?php
+/**
+ * Omeka
+ *
+ * @copyright Copyright 2007-2017 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
+ */
+
+/**
+ * Clean up after removeZeroDates for process table
+ *
+ * @package Omeka\Db\Migration
+ */
+class fixNullProcessDates extends Omeka_Db_Migration_AbstractMigration
+{
+    public function up()
+    {
+        $this->db->query("UPDATE {$this->db->Process} SET `stopped` = NULL WHERE `stopped` = '2000-01-01 00:00:00'");
+    }
+}
