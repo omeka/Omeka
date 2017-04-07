@@ -3447,7 +3447,12 @@ function theme_header_background()
  */
 function is_allowed($resource, $privilege)
 {
-    $acl = Zend_Registry::get('bootstrap')->getResource('Acl');
+    $acl = get_acl();
+
+    if (!$acl) {
+        return true;
+    }
+
     $user = current_user();
 
     if (is_string($resource)) {
