@@ -19,11 +19,11 @@ class removeZeroDates extends Omeka_Db_Migration_AbstractMigration
 {
     public function up()
     {
-        $this->db->query("UPDATE {$this->db->Collection} SET `added` = '2000-01-01 00:00:00' WHERE `added` = '0000-00-00 00:00:00'");
-        $this->db->query("UPDATE {$this->db->Collection} SET `modified` = '2000-01-01 00:00:00' WHERE `modified` = '0000-00-00 00:00:00'");
-        $this->db->query("UPDATE {$this->db->File} SET `added` = '2000-01-01 00:00:00' WHERE `added` = '0000-00-00 00:00:00'");
-        $this->db->query("UPDATE {$this->db->Item} SET `added` = '2000-01-01 00:00:00' WHERE `added` = '0000-00-00 00:00:00'");
-        $this->db->query("UPDATE {$this->db->Process} SET `started` = '2000-01-01 00:00:00' WHERE `started` = '0000-00-00 00:00:00'");
-        $this->db->query("UPDATE {$this->db->Process} SET `stopped` = '2000-01-01 00:00:00' WHERE `stopped` = '0000-00-00 00:00:00'");
+        $this->db->query("UPDATE IGNORE {$this->db->Collection} SET `added` = '2000-01-01 00:00:00' WHERE `added` = '0000-00-00 00:00:00'");
+        $this->db->query("UPDATE IGNORE {$this->db->Collection} SET `modified` = '2000-01-01 00:00:00' WHERE `modified` = '0000-00-00 00:00:00'");
+        $this->db->query("UPDATE IGNORE {$this->db->File} SET `added` = '2000-01-01 00:00:00' WHERE `added` = '0000-00-00 00:00:00'");
+        $this->db->query("UPDATE IGNORE {$this->db->Item} SET `added` = '2000-01-01 00:00:00' WHERE `added` = '0000-00-00 00:00:00'");
+        $this->db->query("UPDATE IGNORE {$this->db->Process} SET `started` = '2000-01-01 00:00:00' WHERE `started` = '0000-00-00 00:00:00'");
+        $this->db->query("UPDATE IGNORE {$this->db->Process} SET `stopped` = '2000-01-01 00:00:00' WHERE `stopped` = '0000-00-00 00:00:00'");
     }
 }
