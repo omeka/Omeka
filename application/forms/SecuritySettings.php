@@ -48,16 +48,16 @@ class Omeka_Form_SecuritySettings extends Omeka_Form
 
         $this->addElement('text', Omeka_Captcha::PUBLIC_KEY_OPTION,
             array(
-                'label' => __('ReCaptcha Public Key'),
-                'description' => __('Enter public key from recaptcha.net. Both this and the private key must be filled in to secure public forms.'),
+                'label' => __('ReCaptcha Site Key'),
+                'description' => __('Use this in the HTML code your site serves to users (Omeka does this automatically).'),
                 'value' => get_option(Omeka_Captcha::PUBLIC_KEY_OPTION)
             )
         );
 
         $this->addElement('text', Omeka_Captcha::PRIVATE_KEY_OPTION,
             array(
-                'label' => __('ReCaptcha Private Key'),
-                'description' => __('Enter private key from recaptcha.net. Both this and the public key must be filled in to secure public forms.'),
+                'label' => __('ReCaptcha Secret Key'),
+                'description' => __('Use this for communication between your site and Google (Omeka does this automatically). Be sure to keep it a secret.'),
                 'value' => get_option(Omeka_Captcha::PRIVATE_KEY_OPTION)
             )
         );
