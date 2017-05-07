@@ -2881,7 +2881,8 @@ function snippet($text, $startPos, $endPos, $append = '…')
     // strip html tags from the text
     $text = strip_formatting($text);
 
-    $textLength = strlen($text);
+    $useMbString = extension_loaded('mbstring');
+    $textLength = $useMbString ? mb_strlen($text, 'UTF-8') : strlen($text);
 
     // Calculate the start position. Set to zero if the start position is
     // null or 0, OR if the start offset is greater than the length of the
@@ -2889,7 +2890,10 @@ function snippet($text, $startPos, $endPos, $append = '…')
     $startPosOffset = $startPos - $textLength;
     $startPos = !$startPos || $startPosOffset > $textLength
                 ? 0
-                : strrpos($text, ' ', $startPosOffset);
+                : ($useMbString 
+                    ? mb_strrpos($text, ' ', $startPosOffset, 'UTF-8') 
+                    : strrpos($text, ' ', $startPosOffset)
+                );
 
     // Calculate the end position. Set to the length of the text if the
     // end position is greater than or equal to the length of the original
@@ -2898,17 +2902,23 @@ function snippet($text, $startPos, $endPos, $append = '…')
     $endPosOffset = $endPos - $textLength;
     $endPos = $endPos >= $textLength || $endPosOffset > $textLength
               ? $textLength
-              : strrpos($text, ' ', $endPosOffset);
+              : ($useMbString 
+                    ? mb_strrpos($text, ' ', $endPosOffset, 'UTF-8')
+                    : strrpos($text, ' ', $endPosOffset)
+                );
 
     // Set the snippet by getting its substring.
-    $snippet = substr($text, $startPos, $endPos - $startPos);
+    $snippet = $useMbString 
+        ? mb_substr($text, $startPos, $endPos - $startPos, 'UTF-8')
+        : substr($text, $startPos, $endPos - $startPos);
 
     // Return the snippet without the append string if the text's original
     // length equals to 1) the length of the snippet, i.e. when the return
     // string is identical to the passed string; OR 2) the calculated
     // end position, i.e. when the return string ends at the same point as
     // the passed string.
-    return strlen($snippet) == $textLength || $endPos == $textLength
+    $snippetLength = $useMbString ? mb_strlen($snippet, 'UTF-8') : strlen($snippet);
+    return $snippetLength == $textLength || $endPos == $textLength
          ? $snippet
          : $snippet . $append;
 }
