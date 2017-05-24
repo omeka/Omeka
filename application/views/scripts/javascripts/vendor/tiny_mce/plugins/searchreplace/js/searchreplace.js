@@ -40,8 +40,9 @@ var SearchReplaceDialog = {
 	searchNext : function(a) {
 		var ed = tinyMCEPopup.editor, se = ed.selection, r = se.getRng(), f, m = this.lastMode, s, b, fl = 0, w = ed.getWin(), wm = ed.windowManager, fo = 0;
 
-		function createTextRange() {
-			return ed.getDoc().selection ? ed.getDoc().selection.createRange() : ed.getDoc().body.createTextRange();
+		if (tinymce.isIE11 && !window.find) {
+			ed.windowManager.alert("This feature is not available in IE 11+. Upgrade TinyMCE to 4.x to get this functionallity back.");
+			return;
 		}
 
 		// Get input
@@ -52,7 +53,7 @@ var SearchReplaceDialog = {
 		rs = f['replace_panel_replacestring'].value;
 
 		if (tinymce.isIE) {
-			r = createTextRange();
+			r = ed.getDoc().selection.createRange();
 		}
 
 		if (s == '')
@@ -82,7 +83,7 @@ var SearchReplaceDialog = {
 
 				if (tinymce.isIE) {
 					ed.focus();
-					r = createTextRange();
+					r = ed.getDoc().selection.createRange();
 
 					while (r.findText(s, b ? -1 : 1, fl)) {
 						r.scrollIntoView();
@@ -130,7 +131,7 @@ var SearchReplaceDialog = {
 
 		if (tinymce.isIE) {
 			ed.focus();
-			r = createTextRange();
+			r = ed.getDoc().selection.createRange();
 
 			if (r.findText(s, b ? -1 : 1, fl)) {
 				r.scrollIntoView();
