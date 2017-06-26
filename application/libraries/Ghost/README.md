@@ -79,9 +79,9 @@ Parameters are published inside 'script' tag, while the attributes referes to 'd
  * @var array
  */
 protected $_params = array(
-    'onload' => '',
+    'onload' => null,
     'render' => 'onload',
-    'hl'     => ''
+    'hl'     => null
 );
     
 /**
@@ -94,8 +94,8 @@ protected $_attributes = array(
     'theme'            => 'light',
     'type'             => 'image',
     'tabindex'         => 0,
-    'callback'         => '',
-    'expired-callback' => ''
+    'callback'         => null,
+    'expired-callback' => null
 );
 ```
 All attributes are rendered with htmlentities() function.

@@ -147,11 +147,11 @@ class Ghost_Captcha_ReCaptcha2 extends Zend_Captcha_Base
     public function setOption($key, $value)
     {
         $service = $this->getService();
-        if (isset($this->_serviceParams[$key])) {
+        if (array_key_exists($key, $this->_serviceParams)) {
             $service->setParam($key, $value);
             return $this;
         }
-        if (isset($this->_serviceAttributes[$key])) {
+        if (array_key_exists($key, $this->_serviceAttributes)) {
             $service->setAttribute($key, $value);
             return $this;
         }

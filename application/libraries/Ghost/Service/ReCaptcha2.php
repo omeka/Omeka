@@ -50,9 +50,9 @@ class Ghost_Service_ReCaptcha2 extends Zend_Service_Abstract
      * @var array
      */
     protected $_params = array(
-        'onload' => '',
+        'onload' => null,
         'render' => 'onload',
-        'hl'     => '' // by default browser's locale
+        'hl'     => null // by default browser's locale
     );
     
     /**
@@ -65,8 +65,8 @@ class Ghost_Service_ReCaptcha2 extends Zend_Service_Abstract
         'theme'            => 'light',
         'type'             => 'image',
         'tabindex'         => 0,
-        'callback'         => '',
-        'expired-callback' => ''
+        'callback'         => null,
+        'expired-callback' => null
     );
 
 
