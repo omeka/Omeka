@@ -54,8 +54,7 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
      * @see Omeka_Record_AbstractRecord::__get
      */
     protected $_related = array(
-        'Elements' => 'getElements',
-        'ElementTexts' => 'getElementText'
+        'ElementTexts' => 'getAllElementTexts'
     );
 
     /**

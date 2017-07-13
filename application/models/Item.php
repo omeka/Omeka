@@ -73,7 +73,6 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         'Type' => 'getItemType',
         'Tags' => 'getTags',
         'Files' => 'getFiles',
-        'Elements' => 'getElements',
         'ItemTypeElements' => 'getItemTypeElements',
         'ElementTexts' => 'getAllElementTexts'
     );
