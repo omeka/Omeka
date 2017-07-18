@@ -52,6 +52,16 @@ class SnippetTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('this is', snippet('<a href="url">this is some text', 0, 10, ''));
     }
 
+    public function testUtf8Snippet()
+    {
+        $snippet = snippet('dummy úůěš åöä', 0, 10);
+        if (extension_loaded('mbstring')) {
+            $this->assertEquals('dummy úůěš…', $snippet);
+        } else {
+            $this->assertEquals('dummy…', $snippet);
+        }
+    }
+
     public function tearDown()
     {
         error_reporting($this->reporting);
