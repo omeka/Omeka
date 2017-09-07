@@ -8,6 +8,8 @@ $collectionTitle = metadata('collection', 'display_title');
 
 <?php echo all_element_texts('collection'); ?>
 
+<?php echo pagination_links(); ?>
+
 <div id="collection-items">
     <h2><?php echo link_to_items_browse(__('Items in the %s Collection', $collectionTitle), array('collection' => metadata('collection', 'id'))); ?></h2>
     <?php if (metadata('collection', 'total_items') > 0): ?>
@@ -33,6 +35,8 @@ $collectionTitle = metadata('collection', 'display_title');
         <p><?php echo __("There are currently no items within this collection."); ?></p>
     <?php endif; ?>
 </div><!-- end collection-items -->
+
+<?php echo pagination_links(); ?>
 
 <?php fire_plugin_hook('public_collections_show', array('view' => $this, 'collection' => $collection)); ?>
 
