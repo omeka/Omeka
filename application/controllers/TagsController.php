@@ -31,7 +31,7 @@ class TagsController extends Omeka_Controller_AbstractActionController
      */
     public function browseAction()
     {
-        $params = $this->_getAllParams();
+        $params = $this->getAllParams();
 
         //Check to see whether it will be tags for exhibits or for items
         //Default is Item
@@ -92,10 +92,10 @@ class TagsController extends Omeka_Controller_AbstractActionController
         $csrf = new Omeka_Form_SessionCsrf;
         $oldTagId = $_POST['id'];
         $oldTag = $this->_helper->db->findById($oldTagId);
-        $oldName = $oldTag->name;
+        $oldName = trim($oldTag->name);
         $newName = trim($_POST['value']);
 
-        $oldTag->name = $newName;
+        $oldTag->setPostData(array('name' => $newName, 'nameChanged' => ($oldName != $newName)));
         $this->_helper->viewRenderer->setNoRender();
         if ($csrf->isValid($_POST) && $oldTag->save(false)) {
             $this->getResponse()->setBody($newName);

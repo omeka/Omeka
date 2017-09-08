@@ -31,6 +31,26 @@ class Tag extends Omeka_Record_AbstractRecord
     }
 
     /**
+     * Executes after the record is inserted.
+     */
+    protected function afterSave($args) {
+        // on tag name change/update, run SearchIndex for all record types using this tag
+        if (!empty($args['post']['nameChanged'])) {
+            $db = $this->getDb();
+            $sql = "
+                SELECT `record_type`, `record_id`
+                FROM `{$db->RecordsTags}`
+                WHERE `tag_id` = " . (int) $this->id;
+            // safer to pass SQL here, it's unclear how many records needs to be updated,
+            // and `args` column in `processes` table is only TEXT data type
+            Zend_Registry::get('bootstrap')->getResource('jobs')
+                ->sendLongRunning('Job_SearchTextIndex', array(
+                    'sql' => $sql
+                ));
+        }
+    }
+
+    /**
      * Delete handling for a tag.
      * 
      * Delete the taggings associated with this tag.
@@ -41,8 +61,21 @@ class Tag extends Omeka_Record_AbstractRecord
                          ->getTable('RecordsTags')
                          ->findBySql('tag_id = ?', array((int) $this->id));
 
+        $reindex = array();
         foreach ($taggings as $tagging) {
+            $reindex[$tagging->record_type][] = $tagging->record_id;
             $tagging->delete();
+        }
+
+        if (count($reindex)) {
+            // TODO - problem with MySQL TEXT data type (max. 65 535 chars)
+                // should we change `processes`.`args` to MEDIUMTEXT or even LONGTEXT??
+            // TODO - it's possible others have implemented batch-delete for tags that runs in background
+                // then this may open large amount of parallel processes and kill CPU/memory, is it safe??
+            Zend_Registry::get('bootstrap')->getResource('jobs')
+                ->sendLongRunning('Job_SearchTextIndex', array(
+                    'records' => $reindex
+                ));
         }
     }
 
