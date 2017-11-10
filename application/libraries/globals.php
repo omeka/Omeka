@@ -2307,7 +2307,7 @@ function recent_items($count = 10)
  * @package Omeka\Function\View\Item
  * @uses get_random_featured_items()
  * @param int $count Maximum number of items to show.
- * @param bool $withImage Whether or not the featured items must have
+ * @param bool $hasImage Whether or not the featured items must have
  * images associated. If null, as default, all featured items can appear,
  * whether or not they have files. If true, only items with files will appear,
  * and if false, only items without files will appear.
