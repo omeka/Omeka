@@ -27,12 +27,12 @@ class CollectionsController extends Omeka_Controller_AbstractActionController
      */
     public function browseAction()
     {
+        parent::browseAction();
+
         if (!$this->_getParam('sort_field')) {
             $this->_setParam('sort_field', 'added');
             $this->_setParam('sort_dir', 'd');
         }
-
-        parent::browseAction();
     }
 
     /**
