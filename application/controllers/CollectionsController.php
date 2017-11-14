@@ -23,19 +23,6 @@ class CollectionsController extends Omeka_Controller_AbstractActionController
     }
 
     /**
-     * The browse collections action.
-     */
-    public function browseAction()
-    {
-        parent::browseAction();
-
-        if (!$this->_getParam('sort_field')) {
-            $this->_setParam('sort_field', 'added');
-            $this->_setParam('sort_dir', 'd');
-        }
-    }
-
-    /**
      * The show collection action
      */
     public function showAction()
@@ -123,5 +110,10 @@ class CollectionsController extends Omeka_Controller_AbstractActionController
     protected function _getCollectionElementSets()
     {
         return $this->_helper->db->getTable('ElementSet')->findByRecordType('Collection');
+    }
+    
+    protected function _getBrowseDefaultSort()
+    {
+        return array('added', 'd');
     }
 }
