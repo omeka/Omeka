@@ -35,6 +35,9 @@ class Omeka_Form extends Zend_Form
     {
         $this->addElementPrefixPath('Omeka_', 'Omeka/');
         $this->addPrefixPath('Omeka_Form_Element', 'Omeka/Form/Element/', 'element');
+        // add paths for reCAPTCHA v2
+        $this->addElementPrefixPath('Ghost_', 'Ghost/');
+        $this->addPrefixPath('Ghost_Form_Decorator', 'Ghost/Form/Decorator', self::DECORATOR);
 
         // set the default element decorators
         $this->setElementDecorators($this->getDefaultElementDecorators());

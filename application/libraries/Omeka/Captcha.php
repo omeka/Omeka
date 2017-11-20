@@ -15,11 +15,12 @@ class Omeka_Captcha
 {
     const PUBLIC_KEY_OPTION = 'recaptcha_public_key';
     const PRIVATE_KEY_OPTION = 'recaptcha_private_key';
+    const VERSION_OPTION = 'recaptcha_version';
 
     /**
      * Get a captcha object implementing Zend's captcha API.
      *
-     * @internal Currently returns a Zend_Captcha_ReCaptcha object.
+     * @internal Currently returns a Zend_Captcha_ReCaptcha or Ghost_Captcha_Recaptcha2 object.
      *
      * @return Zend_Captcha_Adapter|null
      */
@@ -32,15 +33,29 @@ class Omeka_Captcha
             return null;
         }
 
-        $ssl = false;
-        if ($request = Zend_Controller_Front::getInstance()->getRequest()) {
-            $ssl = $request->isSecure();
-        }
+        $version = get_option(self::VERSION_OPTION);
 
-        $captcha = new Zend_Captcha_ReCaptcha(array(
-            'pubKey' => $publicKey,
-            'privKey' => $privateKey,
-            'ssl' => $ssl));
+        switch ($version) {
+            case 'v2':
+                $captcha = new Ghost_Captcha_ReCaptcha2(array(
+                    'pubKey' => $publicKey,
+                    'privKey' => $privateKey,
+                ));
+                break;
+
+            default:
+                // old, deprecated ReCaptcha v1 shipped with ZF
+                $ssl = false;
+                if ($request = Zend_Controller_Front::getInstance()->getRequest()) {
+                    $ssl = $request->isSecure();
+                }
+
+                $captcha = new Zend_Captcha_ReCaptcha(array(
+                    'pubKey' => $publicKey,
+                    'privKey' => $privateKey,
+                    'ssl' => $ssl));
+                break;
+        }
 
         return $captcha;
     }

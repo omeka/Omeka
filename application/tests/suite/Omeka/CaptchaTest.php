@@ -50,4 +50,18 @@ class Omeka_CaptchaTest extends PHPUnit_Framework_TestCase
         $this->assertNotNull($captcha);
         $this->assertInstanceOf('Zend_Captcha_Adapter', $captcha);
     }
+
+    public function testGetCaptchaVersion2()
+    {
+        $options = array(
+            Omeka_Captcha::PUBLIC_KEY_OPTION => 'public_key',
+            Omeka_Captcha::PRIVATE_KEY_OPTION => 'private_key',
+            Omeka_Captcha::VERSION_OPTION => 'v2'
+            );
+        $this->bootstrap->getContainer()->options = $options;
+
+        $captcha = Omeka_Captcha::getCaptcha();
+        $this->assertNotNull($captcha);
+        $this->assertInstanceOf('Ghost_Captcha_ReCaptcha2', $captcha);
+    }
 }
