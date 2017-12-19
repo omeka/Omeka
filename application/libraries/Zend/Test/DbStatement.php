@@ -140,7 +140,11 @@ class Zend_Test_DbStatement implements Zend_Db_Statement_Interface
      */
     public function append($row)
     {
-        $this->_columnCount = count($row);
+        if (is_array($row)) {
+            $this->_columnCount = count($row);
+        } else {
+            $this->_columnCount = 1;
+        }
         $this->_fetchStack[] = $row;
     }
 

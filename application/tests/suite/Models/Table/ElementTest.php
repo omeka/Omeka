@@ -22,14 +22,14 @@ class Models_Table_ElementTest extends Omeka_Test_AppTestCase
     public function testFindByElementSetNameAndElementName()
     {
         $this->assertNull($this->table->findByElementSetNameAndElementName('Foo', 'Bar'));
-        $this->assertEquals(1, count($this->table->findByElementSetNameAndElementName('Dublin Core', 'Title')));
+        $this->assertNotNull($this->table->findByElementSetNameAndElementName('Dublin Core', 'Title'));
     }
 
     public function testFindByElementSetNameAndElementNameCaseSensitive()
     {
-        $this->assertEquals(0, count($this->table->findByElementSetNameAndElementName('Dublin Core', 'title')),
+        $this->assertNull($this->table->findByElementSetNameAndElementName('Dublin Core', 'title'),
             "Should have been no results returned for lowercase 'title' element.");
-        $this->assertEquals(0, count($this->table->findByElementSetNameAndElementName('dublin Core', 'Title')),
+        $this->assertNull($this->table->findByElementSetNameAndElementName('dublin Core', 'Title'),
             "Should have been no results returned for lowercase 'dublin Core' element set.");
     }
 }
