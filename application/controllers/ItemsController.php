@@ -16,8 +16,8 @@ class ItemsController extends Omeka_Controller_AbstractActionController
     protected $_browseRecordsPerPage = self::RECORDS_PER_PAGE_SETTING;
 
     public $contexts = array(
-            'browse' => array('json', 'dcmes-xml', 'rss2', 'omeka-xml', 'omeka-json', 'atom'),
-            'show' => array('json', 'dcmes-xml', 'omeka-xml', 'omeka-json', 'atom')
+            'browse' => array('json', 'dcmes-xml', 'rss2', 'omeka-xml', 'atom'),
+            'show' => array('json', 'dcmes-xml', 'omeka-xml', 'atom')
     );
 
     private $_ajaxRequiredActions = array(

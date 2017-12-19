@@ -94,10 +94,6 @@ class Omeka_Application_Resource_Helpers extends Zend_Application_Resource_Resou
                 'suffix' => 'omeka-xml',
                 'headers' => array('Content-Type' => 'text/xml')
              ),
-             'omeka-json' => array(
-                'suffix' => 'omeka-json',
-                'headers' => array('Content-Type' => 'application/json')
-             ),
              'dcmes-xml' => array(
                  'suffix' => 'dcmes-xml',
                  'headers' => array('Content-Type' => 'application/rdf+xml; charset=utf-8')

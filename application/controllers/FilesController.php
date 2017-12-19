@@ -14,7 +14,7 @@ class FilesController extends Omeka_Controller_AbstractActionController
     protected $_autoCsrfProtection = true;
 
     public $contexts = array(
-        'show' => array('omeka-xml', 'omeka-json')
+        'show' => array('omeka-xml')
     );
 
     public function init()

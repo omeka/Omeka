@@ -13,7 +13,7 @@ class CollectionsController extends Omeka_Controller_AbstractActionController
 {
     protected $_autoCsrfProtection = true;
 
-    public $contexts = array('show' => array('omeka-xml', 'omeka-json'));
+    public $contexts = array('show' => array('omeka-xml'));
 
     protected $_browseRecordsPerPage = self::RECORDS_PER_PAGE_SETTING;
 

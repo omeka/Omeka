@@ -20,7 +20,6 @@ class Omeka_Helper_OutputFormatListTest extends Omeka_Test_AppTestCase
         $html .= '<li><a href="/items/browse?output=atom">atom</a></li>';
         $html .= '<li><a href="/items/browse?output=dcmes-xml">dcmes-xml</a></li>';
         $html .= '<li><a href="/items/browse?output=json">json</a></li>';
-        $html .= '<li><a href="/items/browse?output=omeka-json">omeka-json</a></li>';
         $html .= '<li><a href="/items/browse?output=omeka-xml">omeka-xml</a></li>';
         $html .= '<li><a href="/items/browse?output=rss2">rss2</a></li>';
         $html .= '</ul>';
@@ -37,8 +36,6 @@ class Omeka_Helper_OutputFormatListTest extends Omeka_Test_AppTestCase
         $html .= '<a href="/items/browse?output=dcmes-xml">dcmes-xml</a>';
         $html .= $delimiter;
         $html .= '<a href="/items/browse?output=json">json</a>';
-        $html .= $delimiter;
-        $html .= '<a href="/items/browse?output=omeka-json">omeka-json</a>';
         $html .= $delimiter;
         $html .= '<a href="/items/browse?output=omeka-xml">omeka-xml</a>';
         $html .= $delimiter;
@@ -57,8 +54,6 @@ class Omeka_Helper_OutputFormatListTest extends Omeka_Test_AppTestCase
         $html .= '<a href="/items/browse?output=dcmes-xml">dcmes-xml</a>';
         $html .= $delimiter;
         $html .= '<a href="/items/browse?output=json">json</a>';
-        $html .= $delimiter;
-        $html .= '<a href="/items/browse?output=omeka-json">omeka-json</a>';
         $html .= $delimiter;
         $html .= '<a href="/items/browse?output=omeka-xml">omeka-xml</a>';
         $html .= $delimiter;
