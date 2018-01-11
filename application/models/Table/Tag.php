@@ -89,8 +89,9 @@ class Table_Tag extends Omeka_Db_Table
         $select->reset(Zend_Db_Select::FROM)
                ->from(array('tags' => $db->Tag), array())
                ->joinLeft(array('records_tags' => $db->RecordsTags),
-                    "records_tags.tag_id = tags.id AND records_tags.record_type = $recordType",
-                    array());
+                    "records_tags.tag_id = tags.id",
+                    array())
+               ->where("records_tags.record_type = $recordType");
 
         //Showing tags related to items
         if ($type == 'Item') {
