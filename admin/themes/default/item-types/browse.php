@@ -10,6 +10,9 @@ echo flash();
     <?php echo link_to('item-types', 'add', __('Add an Item Type'), array('class'=>'add green button')); ?>
     <?php endif ?>
 </div>
+
+<?php echo pagination_links(); ?>
+
 <p class="without-item-type">
     <?php if ($totalItemsWithoutType):
         $withoutTypeMessage = __(plural('%s%d item%s has no type.', "%s%d items%s haven't a type.", $totalItemsWithoutType),
@@ -52,6 +55,9 @@ echo flash();
     <?php echo link_to('item-types', 'add', __('Add an Item Type'), array('class'=>'add green button')); ?>
     <?php endif ?>
 </div>
+
+<?php echo pagination_links(); ?>
+
 <p class="without-item-type"><?php echo $withoutTypeMessage; ?></p>
 
 <?php fire_plugin_hook('admin_item_types_browse', array('item_types' => $this->item_types, 'view' => $this)); ?>
