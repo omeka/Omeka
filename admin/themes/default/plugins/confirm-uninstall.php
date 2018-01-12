@@ -8,7 +8,7 @@ echo flash();
     <?php if ($message): ?>
     <?php echo __($message); ?>
     <?php else:?>
-    <p><?php echo __('All data associated with this plugin will be permanently deleted from the database.'); ?>
+    <p><?php echo __('Warning: data associated with this plugin may be permanently deleted from the database.'); ?>
     <?php endif; ?>
     <form action="<?php echo html_escape(url('plugins/uninstall')); ?>" method="post">
         <p><input type="checkbox" name="confirm" /> <?php echo __('Yes, I want to uninstall this plugin.'); ?></p>
