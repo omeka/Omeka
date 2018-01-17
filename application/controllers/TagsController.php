@@ -56,7 +56,10 @@ class TagsController extends Omeka_Controller_AbstractActionController
         $params = $this->getAllParams();
         unset($params['admin'], $params['module'], $params['controller'], $params['action'], $params['include_zero']);
 
-        $sort = array_intersect_key($params, array('sort_field' => '', 'sort_dir' => ''));
+        $sort = array(
+            'sort_field' => $this->getParam('sort_field'),
+            'sort_dir' => $this->getParam('sort_dir', 'a'),
+        );
 
         //dig up the record types for filtering
         $db = get_db();
