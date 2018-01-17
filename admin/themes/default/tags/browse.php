@@ -9,16 +9,31 @@ else:
     $pageTitle = __('Browse Tags');
 endif;
 
-$pageTitle .= ' ' .  __('(%s total)', $total_tags);
+$pageTitle .= ' ' . __('(%s total)', $total_results);
 echo head(array('title'=>$pageTitle,'bodyclass'=>'tags browse-tags'));
 echo flash();
 
 ?>
 <div id='search-filters'>
-    <ul><li><?php echo __('Record Type') . ': ' . $browse_for; ?></li></ul>
+    <ul>
+        <li><?php echo __('Record Type') . ': ' . __($browse_for); ?></li>
+        <?php if (!empty($params['like'])): ?><li><?php echo __('Name') .' '. __('contains') . ': "' . html_escape($params['like']) .'"'; ?></li><?php endif; ?>
+    </ul>
+    <?php if (!empty($params['like']) || !empty($params['type'])): ?><a href="<?php echo $this->url() ?>"><?php echo __('View All') ?></a><?php endif; ?>
 </div>
 
-<?php if ($total_tags): ?>
+<form id="search-tags" method="GET">
+    <button><?php echo __('Search tags'); ?></button><input type="text" name="like" aria-label="<?php echo __('Search tags'); ?>"/>
+    <input type="hidden" name="type" value="<?php echo isset($params['type']) ? $params['type'] : ''; ?>"/>
+</form>
+
+<?php if ($total_results): ?>
+    <div class="clearfix">
+    <?php
+        $paginationLinks = pagination_links();
+        echo $paginationLinks;
+    ?>
+    </div>
     <?php if ($canEdit): ?>
     <section class="three columns alpha">
         <h2><?php echo __('Editing Tags'); ?></h2>
@@ -36,15 +51,18 @@ echo flash();
         <div id="tags-nav">
             <?php
             $sortOptions = array(
-                __('Most') => array('sort_field' => 'count', 'sort_dir' => 'd'),
-                __('Least') => array('sort_field' => 'count','sort_dir' => 'a'),
-                __('Alphabetical') => array('sort_field' => 'name', 'sort_dir'=> 'a'),
-                __('Recent') => array('sort_field' => 'time', 'sort_dir' => 'd')
+                __('Count') => array('sort_field' => 'count', 'sort_dir' => ($params['sort_field'] == 'count' && $params['sort_dir'] == 'd') ? 'a' : 'd'),
+                __('Alphabetical') => array('sort_field' => 'name', 'sort_dir'=> ($params['sort_field'] == 'name' && $params['sort_dir'] == 'a') ? 'd' : 'a'),
+                __('Time') => array('sort_field' => 'time', 'sort_dir' => ($params['sort_field'] == 'time' && $params['sort_dir'] == 'a') ? 'd' : 'a')
             );
 
-            foreach ($sortOptions as $label => $params) {
-                $uri = html_escape(current_url($params));
-                $class = ($sort == $params) ? ' class="current"' : '';
+            foreach ($sortOptions as $label => $sortParams) {
+                $uri = html_escape(current_url($sortParams + $params));
+                $class = '';
+                if ($sort['sort_field'] == $sortParams['sort_field']) {
+                    $sortDirClass = $sort['sort_dir'] == 'd' ? 'desc' : 'asc';
+                    $class = ' class="current '. $sortDirClass .'"';
+                }
 
                 echo "<span $class><a href=\"$uri\">$label</a></span>";
             }
@@ -53,12 +71,13 @@ echo flash();
                 <li><a href="#"><?php echo __('Record Types'); ?></a>
                 <ul class="dropdown">
                     <li><span class="quick-filter-heading"><?php echo __('Record Types') ?></span></li>
+                    <li><a href="<?php echo $this->url(); ?>"><?php echo __('All'); ?></a></li>
                     <?php foreach($record_types as $record_type): ?>
-                    <li><a href="<?php echo url('tags', array('tagType' => $record_type)); ?>"><?php echo __($record_type); ?></a></li>
+                    <li><a href="<?php echo url('tags', array('type' => $record_type)); ?>"><?php echo __($record_type); ?></a></li>
                     <?php endforeach; ?>
                 </ul>
                 </li>
-            </ul>            
+            </ul>
         </div>
         <ul class="tag-list">
         <?php foreach ($tags as $tag): ?>
@@ -73,7 +92,7 @@ echo flash();
             <?php else: ?>
                 <span class="tag"><?php echo $tag->name; ?></span>
             <?php endif; ?>
-            <?php if ($canDelete): ?> 
+            <?php if ($canDelete): ?>
                 <span class="delete-tag"><?php echo link_to($tag, 'delete-confirm', 'delete', array('class' => 'delete-confirm')); ?></span>
             <?php endif; ?>
             </li>
@@ -81,6 +100,7 @@ echo flash();
         </ul>
         <?php fire_plugin_hook('admin_tags_browse', array('tags' => $tags, 'view' => $this)); ?>
     </section>
+    <?php echo $paginationLinks; ?>
 <?php else: ?>
     <p><?php echo __('There are no tags to display. You must first tag some items.'); ?></p>
 <?php endif; ?>
