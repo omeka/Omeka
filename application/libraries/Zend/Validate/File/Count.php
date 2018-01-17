@@ -87,7 +87,7 @@ class Zend_Validate_File_Count extends Zend_Validate_Abstract
      * Internal file array
      * @var array
      */
-    protected $_files;
+    protected $_files = array();
 
     /**
      * Sets validator options
