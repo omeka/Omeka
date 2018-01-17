@@ -54,7 +54,7 @@ class TagsController extends Omeka_Controller_AbstractActionController
 
         // get all params after the parent::browseAction() added some defaults, like sorting
         $params = $this->getAllParams();
-        unset($params['admin'], $params['module'], $params['controller'], $params['action']);
+        unset($params['admin'], $params['module'], $params['controller'], $params['action'], $params['include_zero']);
 
         $sort = array_intersect_key($params, array('sort_field' => '', 'sort_dir' => ''));
 
