@@ -1373,10 +1373,10 @@ header nav {
     text-align: left;
 }
 
-#login .submit {
+#login .submit,
+#login-links {
     clear: both;
 }
-
 
 
 /* Dashboard
