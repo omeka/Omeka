@@ -65,8 +65,8 @@ class Omeka_Form_SecuritySettings extends Omeka_Form
         $this->addElement('select', Omeka_Captcha::VERSION_OPTION,
             array(
                 'label' => __('ReCaptcha Version'),
-                'description' => __('Choose which ReCaptcha version you\'re using. If you\'re using keys for ReCaptcha v1, please consider %s to v2, before March 31, 2018', 
-                        '<a href="https://developers.google.com/recaptcha/docs/faq" target="_blank">upgrading</a>'),
+                'description' => __('Choose which ReCaptcha version you\'re using. If you\'re using keys for ReCaptcha v1, please consider upgrading to v2, before March 31, 2018: %s', 
+                        '<a href="https://developers.google.com/recaptcha/docs/faq" target="_blank">https://developers.google.com/recaptcha/docs/faq</a>'),
                 'value' => get_option(Omeka_Captcha::VERSION_OPTION) ?: 'v2',
                 'multiOptions' => array('v2' => 'ReCaptcha v2')
             )
