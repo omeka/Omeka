@@ -43,17 +43,13 @@ class Omeka_Captcha
                 ));
                 break;
 
-            default:
-                // old, deprecated ReCaptcha v1 shipped with ZF
-                $ssl = false;
-                if ($request = Zend_Controller_Front::getInstance()->getRequest()) {
-                    $ssl = $request->isSecure();
-                }
-
-                $captcha = new Zend_Captcha_ReCaptcha(array(
-                    'pubKey' => $publicKey,
-                    'privKey' => $privateKey,
-                    'ssl' => $ssl));
+            default:                
+                /*We should not use or support old reCaptcha. Any calls to the v1 API will not work after March 31, 2018
+                source: https://developers.google.com/recaptcha/docs/faq*/
+                $captcha = new Ghost_Captcha_ReCaptcha2(array(
+                'pubKey' => $publicKey,
+                'privKey' => $privateKey,
+                ));
                 break;
         }
 
