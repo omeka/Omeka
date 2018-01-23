@@ -40,7 +40,7 @@ echo flash();
     </section>
 </form>
 <script type="text/javascript" charset="utf-8">
-jQuery(window).load(function () {
+jQuery(document).ready(function () {
     Omeka.Tabs.initialize();
     Omeka.wysiwyg({
         selector: false,

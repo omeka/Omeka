@@ -2,8 +2,7 @@
 <?php echo js_tag('elements'); ?>
 <?php echo js_tag('tabs'); ?>
 <script type="text/javascript">
-// TinyMCE hates document.ready.
-jQuery(window).load(function () {
+jQuery(document).ready(function () {
     Omeka.Tabs.initialize();
     
     Omeka.wysiwyg({

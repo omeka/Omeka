@@ -55,9 +55,7 @@ Omeka.Themes = {};
                 fileInput.parent().siblings('.explanation').hide();
             }
         });
-    });
 
-    $(window).load(function () {
         Omeka.wysiwyg({
             selector: ".html-input",
             forced_root_block: false

@@ -3,9 +3,7 @@
 <?php echo js_tag('tabs'); ?>
 <?php echo js_tag('items'); ?>
 <script type="text/javascript" charset="utf-8">
-//<![CDATA[
-// TinyMCE hates document.ready.
-jQuery(window).load(function () {
+jQuery(document).ready(function () {
     Omeka.Tabs.initialize();
 
     Omeka.Items.tagDelimiter = <?php echo js_escape(get_option('tag_delimiter')); ?>;
@@ -30,7 +28,6 @@ jQuery(document).bind('omeka:elementformload', function (event) {
     Omeka.Elements.makeElementControls(event.target, <?php echo js_escape(url('elements/element-form')); ?>,'Item'<?php if ($id = metadata('item', 'id')) echo ', '.$id; ?>);
     Omeka.Elements.enableWysiwyg(event.target);
 });
-//]]>
 </script>
 
 <section class="seven columns alpha" id="edit-form">
