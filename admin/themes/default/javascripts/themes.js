@@ -59,9 +59,8 @@ Omeka.Themes = {};
 
     $(window).load(function () {
         Omeka.wysiwyg({
-            mode: "specific_textareas",
-            editor_selector: "html-input",
-            forced_root_block: ""
+            selector: ".html-input",
+            forced_root_block: false
         });
     });
 })(jQuery);

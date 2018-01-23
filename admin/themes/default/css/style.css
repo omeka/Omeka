@@ -526,6 +526,16 @@ img { border: 0; }
             color: #914E33;
         }
 
+        /* TinyMCE overrides
+        ================================================== */
+        .mce-tinymce button {
+            margin-bottom: 0;
+            box-shadow: none;
+            min-height: none;
+        }
+
+
+
 
 /* Global Navigation
 ================================================== */

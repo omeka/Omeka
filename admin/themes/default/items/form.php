@@ -1,4 +1,4 @@
-<?php echo js_tag('vendor/tiny_mce/tiny_mce'); ?>
+<?php echo js_tag('vendor/tinymce/tinymce.min'); ?>
 <?php echo js_tag('elements'); ?>
 <?php echo js_tag('tabs'); ?>
 <?php echo js_tag('items'); ?>
@@ -15,8 +15,8 @@ jQuery(window).load(function () {
     Omeka.Items.tagChoices('#tags', <?php echo js_escape(url(array('controller'=>'tags', 'action'=>'autocomplete'), 'default', array(), true)); ?>);
 
     Omeka.wysiwyg({
-        mode: "none",
-        forced_root_block: ""
+        selector: false,
+        forced_root_block: false
     });
 
     // Must run the element form scripts AFTER reseting textarea ids.

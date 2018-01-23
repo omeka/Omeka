@@ -78,7 +78,7 @@ Omeka.Items = {};
                     var form = $('#type-metadata-form');
                     form.hide();
                     form.find('textarea').each(function () {
-                        tinyMCE.execCommand('mceRemoveControl', true, this.id);
+                        tinyMCE.EditorManager.execCommand('mceRemoveEditor', true, this.id);
                     });
                     form.html(response);
                     form.trigger('omeka:elementformload');

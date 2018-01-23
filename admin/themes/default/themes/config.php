@@ -1,5 +1,5 @@
 <?php
-queue_js_file(array('vendor/tiny_mce/tiny_mce', 'themes'));
+queue_js_file(array('vendor/tinymce/tinymce.min', 'themes'));
 echo head(array('title'=> __('Appearance'), 'bodyclass' => 'themes theme-configuration'));
 echo common('appearance-nav');
 echo flash();
