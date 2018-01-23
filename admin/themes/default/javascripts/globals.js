@@ -14,21 +14,16 @@ if (!Omeka) {
         // Default parameters
         initParams = {
             convert_urls: false,
-            //mode: "textareas", // All textareas
             selector: "textarea",
             menubar: false,
             statusbar: false,
             toolbar_items_size: "small",
             toolbar: "bold italic underline | alignleft aligncenter alignright | bullist numlist | link formatselect code",
-            //theme_advanced_blockformats: "p,address,pre,h1,h2,h3,h4,h5,h6,blockquote,address,div",
             plugins: "lists,link,code,paste,media,autoresize",
-            //media_strict: false,
-            //width: "100%",
             autoresize_max_height: 500,
             entities: "160,nbsp,173,shy,8194,ensp,8195,emsp,8201,thinsp,8204,zwnj,8205,zwj,8206,lrm,8207,rlm",
             verify_html: false,
-            add_unload_trigger: false,
-            resize: 'both',
+            add_unload_trigger: false
         };
 
         tinymce.init($.extend(initParams, params));
