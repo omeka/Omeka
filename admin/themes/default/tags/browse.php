@@ -13,18 +13,20 @@ echo head(array('title'=>$pageTitle,'bodyclass'=>'tags browse-tags'));
 echo flash();
 
 ?>
-<div id='search-filters'>
+
+<form id="search-tags" method="GET" class="three columns alpha">
+    <input type="text" name="like" aria-label="<?php echo __('Search tags'); ?>"/>    <button><?php echo __('Search tags'); ?></button>
+    <input type="hidden" name="type" value="<?php echo isset($params['type']) ? $params['type'] : ''; ?>"/>
+</form>
+
+<div id="search-filters" class="seven columns omega">
     <ul>
         <li><?php echo __('Record Type') . ': ' . __($browse_for); ?></li>
         <?php if (!empty($params['like'])): ?><li><?php echo __('Name') .' '. __('contains') . ': "' . html_escape($params['like']) .'"'; ?></li><?php endif; ?>
     </ul>
-    <?php if (!empty($params['like']) || !empty($params['type'])): ?><a href="<?php echo $this->url() ?>"><?php echo __('View All') ?></a><?php endif; ?>
+    <?php if (!empty($params['like']) || !empty($params['type'])): ?><a href="<?php echo $this->url() ?>" class="blue button"><?php echo __('Reset results') ?></a><?php endif; ?>
 </div>
 
-<form id="search-tags" method="GET">
-    <button><?php echo __('Search tags'); ?></button><input type="text" name="like" aria-label="<?php echo __('Search tags'); ?>"/>
-    <input type="hidden" name="type" value="<?php echo isset($params['type']) ? $params['type'] : ''; ?>"/>
-</form>
 
 <?php if ($total_results): ?>
     <div class="clearfix">

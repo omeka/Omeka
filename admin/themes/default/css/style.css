@@ -2071,6 +2071,21 @@ header nav {
     margin: .25em 0 1em -1em;
 }
 
+.tags #search-tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.tags #search-tags button,
+.tags #search-tags input[type="text"] {
+    margin-bottom: 10px;
+}
+
+.tags .clearfix {
+    margin-bottom: 20px;
+}
+
 .edit-tag input {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
