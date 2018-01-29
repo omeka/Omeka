@@ -100,8 +100,8 @@ define('WEB_RELATIVE_VIEW_SCRIPTS', $base_path_root . '/application/views/script
 
 // WEB_ROOT is always the root of the site, whereas WEB_DIR depends on the 
 // bootstrap used (public/admin)
-define('WEB_ROOT', $base_url . $currentPath);
-define('WEB_DIR', $base_url);
+define('WEB_ROOT', $base_url . ($dir ? $base_path_root : ''));
+define('WEB_DIR', $base_url . $base_path);
 define('WEB_THEME', WEB_DIR . '/themes');
 define('WEB_PLUGIN', WEB_ROOT . '/plugins');
 define('WEB_FILES', WEB_ROOT . '/files');
