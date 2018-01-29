@@ -50,9 +50,9 @@ echo flash();
         <div id="tags-nav">
             <?php
             $sortOptions = array(
+                __('Name') => array('sort_field' => 'name', 'sort_dir'=> ($sort['sort_field'] == 'name' && $sort['sort_dir'] == 'a') ? 'd' : 'a'),
                 __('Count') => array('sort_field' => 'count', 'sort_dir' => ($sort['sort_field'] == 'count' && $sort['sort_dir'] == 'd') ? 'a' : 'd'),
-                __('Alphabetical') => array('sort_field' => 'name', 'sort_dir'=> ($sort['sort_field'] == 'name' && $sort['sort_dir'] == 'a') ? 'd' : 'a'),
-                __('Time') => array('sort_field' => 'time', 'sort_dir' => ($sort['sort_field'] == 'time' && $sort['sort_dir'] == 'a') ? 'd' : 'a')
+                __('Date created') => array('sort_field' => 'time', 'sort_dir' => ($sort['sort_field'] == 'time' && $sort['sort_dir'] == 'a') ? 'd' : 'a')
             );
 
             foreach ($sortOptions as $label => $sortParams) {
