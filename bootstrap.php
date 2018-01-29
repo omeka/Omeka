@@ -46,13 +46,12 @@ define('SCRIPTS_DIR', APP_DIR . '/scripts');
 // Define the web address constants.
 
 // Set the scheme.
+$base_root = 'http';
 if ((isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] === true))
     || (isset($_SERVER['HTTP_SCHEME']) && $_SERVER['HTTP_SCHEME'] == 'https')
     || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443)
 ) {
     $base_root = 'https';
-} else {
-    $base_root = 'http';
 }
 
 // Set the domain.
@@ -71,12 +70,11 @@ if (($base_root == 'http' && $port != '80') || ($base_root == 'https' && $port !
 }
 
 // Set the path.
+$base_path = '/';
 if ($dir = trim(dirname($_SERVER['SCRIPT_NAME']), '\,/')) {
     $base_path  = "/$dir";
     $base_url  .= $base_path;
     $base_path .= '/';
-} else {
-    $base_path = '/';
 }
 
 // Remove the '/admin' part of the URL by regex, if necessary.
@@ -103,13 +101,13 @@ $currentPath = !empty($dir) ? "/$dir" : '';
 define('ADMIN_WEB_DIR', 'admin');
 
 // This is how we determine whether or not we are in the admin bootstrap.
+$adminPath = "$currentPath/" . ADMIN_WEB_DIR;
+$publicPath = $currentPath;
+
 if (defined('ADMIN')) {
     $adminPath = $currentPath;
     // Strip off the admin directory to get the public dir.
     $publicPath = rtrim(preg_replace("/(.*)" . ADMIN_WEB_DIR . "$/", '$1', $currentPath, 1), '/');
-} else {
-    $adminPath = "$currentPath/" . ADMIN_WEB_DIR;
-    $publicPath = $currentPath;
 }
 
 if (defined('INSTALL')) {
