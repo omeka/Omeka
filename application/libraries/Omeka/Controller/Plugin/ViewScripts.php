@@ -124,7 +124,7 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
     {
         $view = $this->_getView();
         $physicalPath = PLUGIN_DIR . '/' . $scriptPath;
-        $webPath = WEB_PLUGIN . '/' . $scriptPath;
+        $webPath = WEB_RELATIVE_PLUGIN . '/' . $scriptPath;
         $view->addAssetPath($physicalPath, $webPath);
         $view->addScriptPath($physicalPath);
     }
@@ -156,7 +156,7 @@ class Omeka_Controller_Plugin_ViewScripts extends Zend_Controller_Plugin_Abstrac
         $view->addScriptPath(VIEW_SCRIPTS_DIR);
 
         //View scripts and shared directory get checked for assets
-        $view->addAssetPath(VIEW_SCRIPTS_DIR, WEB_VIEW_SCRIPTS);
+        $view->addAssetPath(VIEW_SCRIPTS_DIR, WEB_RELATIVE_VIEW_SCRIPTS);
     }
 
     /**

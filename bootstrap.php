@@ -74,7 +74,6 @@ if (($base_root == 'http' && $port != '80') || ($base_root == 'https' && $port !
 if ($dir = trim(dirname($_SERVER['SCRIPT_NAME']), '\,/')) {
     $base_path  = "/$dir";
     $base_url  .= $base_path;
-    $base_path .= '/';
 } else {
     $base_path = '/';
 }
@@ -85,6 +84,14 @@ if (defined('ADMIN')) {
     $dir = rtrim($dir, '/');
 }
 
+$base_path_root = "/$dir";
+
+define('WEB_RELATIVE_THEME', $base_path . '/themes');
+define('WEB_RELATIVE_PLUGIN', $base_path_root . '/plugins');
+define('WEB_RELATIVE_FILES', $base_path_root . '/files');
+define('WEB_RELATIVE_PUBLIC_THEME', $base_path_root . '/themes');
+define('WEB_RELATIVE_VIEW_SCRIPTS', $base_path_root . '/application/views/scripts');
+
 // WEB_ROOT is always the root of the site, whereas WEB_DIR depends on the 
 // bootstrap used (public/admin)
 define('WEB_ROOT', $base_root . (!empty($dir) ? '/' . $dir : '') );
@@ -94,6 +101,7 @@ define('WEB_PLUGIN', WEB_ROOT . '/plugins');
 define('WEB_FILES', WEB_ROOT . '/files');
 define('WEB_PUBLIC_THEME', WEB_ROOT . '/themes');
 define('WEB_VIEW_SCRIPTS', WEB_ROOT . '/application/views/scripts');
+
 
 // Get the directory that the bootstrap sits in.
 $dir = trim(dirname($_SERVER['SCRIPT_NAME']), '\,/');

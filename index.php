@@ -16,7 +16,7 @@ $application->getBootstrap()->setOptions(array(
     'resources' => array(
         'theme' => array(
             'basePath' => THEME_DIR,
-            'webBasePath' => WEB_THEME
+            'webBasePath' => WEB_RELATIVE_THEME
         )
     )
 ));

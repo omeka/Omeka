@@ -17,13 +17,13 @@ class Omeka_Helper_JsTest extends PHPUnit_Framework_TestCase
         Zend_Registry::set('view', $this->view);
 
         // Trick it into loading existing shared javascripts.
-        $this->view->addAssetPath(VIEW_SCRIPTS_DIR, 'http://fake.local/path/to/omeka');
+        $this->view->addAssetPath(VIEW_SCRIPTS_DIR, '/path/to/omeka');
     }
 
     public function testOutputsScriptTagWithHrefAndDefaultVersion()
     {
         // Test with Contains to avoid matching issues with newlines.
-        $this->assertContains('<script type="text/javascript" src="http://fake.local/path/to/omeka/javascripts/vendor/jquery.js?v='.OMEKA_VERSION.'" charset="utf-8"></script>',
+        $this->assertContains('<script type="text/javascript" src="/path/to/omeka/javascripts/vendor/jquery.js?v='.OMEKA_VERSION.'" charset="utf-8"></script>',
                             $this->_getJsTag());
     }
 
@@ -31,14 +31,14 @@ class Omeka_Helper_JsTest extends PHPUnit_Framework_TestCase
     {
         $version = '1.2x';
         // Test with Contains to avoid matching issues with newlines.
-        $this->assertContains('<script type="text/javascript" src="http://fake.local/path/to/omeka/javascripts/vendor/jquery.js?v='.$version.'" charset="utf-8"></script>',
+        $this->assertContains('<script type="text/javascript" src="/path/to/omeka/javascripts/vendor/jquery.js?v='.$version.'" charset="utf-8"></script>',
                             $this->_getJsTag($version));
     }
 
     public function testOutputsScriptTagWithHrefAndNoVersion()
     {
         // Test with Contains to avoid matching issues with newlines.
-        $this->assertContains('<script type="text/javascript" src="http://fake.local/path/to/omeka/javascripts/vendor/jquery.js" charset="utf-8"></script>',
+        $this->assertContains('<script type="text/javascript" src="/path/to/omeka/javascripts/vendor/jquery.js" charset="utf-8"></script>',
                             $this->_getJsTag(null));
     }
 

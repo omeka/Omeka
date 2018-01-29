@@ -13,7 +13,7 @@
  */
 class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
 {
-    const ASSET_PATH_ROOT = 'http://omeka-test/asset-path';
+    const ASSET_PATH_ROOT = '/omeka-test/asset-path';
 
     public $externalDefaults;
     public $internalDefaults;
