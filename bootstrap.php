@@ -50,25 +50,28 @@ if ((isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS']
     || (isset($_SERVER['HTTP_SCHEME']) && $_SERVER['HTTP_SCHEME'] == 'https')
     || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443)
 ) {
-    $base_root = 'https';
+    $scheme = 'https';
 } else {
-    $base_root = 'http';
+    $scheme = 'http';
 }
 
 // Set the domain.
 if (!isset($_SERVER['HTTP_HOST'])) {
     $_SERVER['HTTP_HOST'] = null;
 }
-$base_url = $base_root .= '://' . preg_replace('/[^a-z0-9-:._]/i', '', $_SERVER['HTTP_HOST']);
+$host = $_SERVER['HTTP_HOST'];
 
 // Set to port, if any.
 if (!isset($_SERVER['SERVER_PORT'])) {
     $_SERVER['SERVER_PORT'] = null;
 }
 $port = $_SERVER['SERVER_PORT'];
-if (($base_root == 'http' && $port != '80') || ($base_root == 'https' && $port != '443')) {
-    $base_url .= ":$port";
+
+$base_root = $scheme . '://' . preg_replace('/[^a-z0-9-:._]/i', '', $host);
+if (($scheme == 'http' && $port != '80') || ($scheme == 'https' && $port != '443')) {
+    $base_root .= ":$port";
 }
+$base_url = $base_root;
 
 // Set the path.
 if ($dir = trim(dirname($_SERVER['SCRIPT_NAME']), '\,/')) {
