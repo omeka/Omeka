@@ -2183,14 +2183,19 @@ header nav {
 }
 
 #tags-nav {
-    margin: 20px 0;
+    margin: 0 0 20px;
     text-shadow: -1px -1px 1px #ffffff;
+}
+
+#tags-nav span:last-of-type {
+    margin-right: 20px;
 }
 
 #tags-nav .quick-filter-wrapper {
     height: 27px;
     padding: 0 20px 0 0;
-    border-width: 1px 0 0 1px;
+    border-width: 1px 1px 0 1px;
+    margin-left: 0;
 }
 
 #tags-nav .quick-filter-wrapper .dropdown li {
@@ -2233,15 +2238,27 @@ header nav {
         -moz-box-shadow: 0px 0px 2px rgba(0,0,0,.1) inset, 1px 1px 2px rgba(0,0,0,.1);
         box-shadow: 0px 0px 2px rgba(0,0,0,.1) inset, 1px 1px 2px rgba(0,0,0,.1);
         text-shadow: none;
+        position: relative;
+        padding-right: 25px;
     }
     #tags-nav span.current a:after {
-        padding-left: 5px;
+        content: "";
+        position: absolute;
+        right: 7px;
+        top: 50%;
+        width: 0;
+        height: 0;
+        transform: translateY(-50%);
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
     }
+
     #tags-nav span.current.asc a:after {
-        content: '\25b2';/*&#9650;*/
+        border-bottom: 5px solid;
     }
+
     #tags-nav span.current.desc a:after {
-        content: '\25bc';/*&#9660;*/
+        border-top: 5px solid;
     }
 
 .tags div.two.columns { clear: both; }
