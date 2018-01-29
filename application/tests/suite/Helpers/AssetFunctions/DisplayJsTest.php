@@ -59,11 +59,11 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
 
     public function testQueueJsWithDefaultVersion()
     {
-        queue_js_file(array('items-search', 'vendor/tiny_mce/tiny_mce'));
+        queue_js_file(array('items-search', 'vendor/tinymce/tinymce.min'));
 
         $scripts = array(
             self::ASSET_PATH_ROOT . '/javascripts/items-search.js?v='.OMEKA_VERSION,
-            self::ASSET_PATH_ROOT . '/javascripts/vendor/tiny_mce/tiny_mce.js?v='.OMEKA_VERSION
+            self::ASSET_PATH_ROOT . '/javascripts/vendor/tinymce/tinymce.min.js?v='.OMEKA_VERSION
         );
 
         $this->_assertScriptsIncluded($this->_getJsOutput(), $scripts);
@@ -71,11 +71,11 @@ class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
 
     public function testQueueJsWithNoVersion()
     {
-        queue_js_file(array('items-search', 'vendor/tiny_mce/tiny_mce'), 'javascripts', array(), null);
+        queue_js_file(array('items-search', 'vendor/tinymce/tinymce.min'), 'javascripts', array(), null);
 
         $scripts = array(
             self::ASSET_PATH_ROOT . '/javascripts/items-search.js',
-            self::ASSET_PATH_ROOT . '/javascripts/vendor/tiny_mce/tiny_mce.js'
+            self::ASSET_PATH_ROOT . '/javascripts/vendor/tinymce/tinymce.min.js'
         );
 
         $this->_assertScriptsIncluded($this->_getJsOutput(), $scripts);

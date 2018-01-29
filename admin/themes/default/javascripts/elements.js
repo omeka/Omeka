@@ -49,7 +49,7 @@ Omeka.Elements = {};
             data: params,
             success: function (response) {
                 fieldDiv.find('textarea').each(function () {
-                    tinyMCE.execCommand('mceRemoveControl', false, this.id);
+                    tinyMCE.EditorManager.execCommand('mceRemoveEditor', false, this.id);
                 });
                 fieldDiv.html(response);
                 fieldDiv.trigger('omeka:elementformload');
@@ -113,7 +113,7 @@ Omeka.Elements = {};
 
             var inputBlock = removeButton.parents(inputBlockSelector);
             inputBlock.find('textarea').each(function () {
-                tinyMCE.execCommand('mceRemoveControl', false, this.id);
+                tinyMCE.EditorManager.execCommand('mceRemoveEditor', false, this.id);
             });
             inputBlock.remove();
 
@@ -140,9 +140,9 @@ Omeka.Elements = {};
                 var textareaId = textarea.attr('id');
                 var enableIfChecked = function () {
                     if (this.checked) {
-                        tinyMCE.execCommand("mceAddControl", false, textareaId);
+                        tinyMCE.EditorManager.execCommand("mceAddEditor", false, textareaId);
                     } else {
-                        tinyMCE.execCommand("mceRemoveControl", false, textareaId);
+                        tinyMCE.EditorManager.execCommand("mceRemoveEditor", false, textareaId);
                     }
                 };
 

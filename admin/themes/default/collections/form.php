@@ -1,14 +1,13 @@
-<?php echo js_tag('vendor/tiny_mce/tiny_mce'); ?>
+<?php echo js_tag('vendor/tinymce/tinymce.min'); ?>
 <?php echo js_tag('elements'); ?>
 <?php echo js_tag('tabs'); ?>
 <script type="text/javascript">
-// TinyMCE hates document.ready.
-jQuery(window).load(function () {
+jQuery(document).ready(function () {
     Omeka.Tabs.initialize();
     
     Omeka.wysiwyg({
-        mode: "none",
-        forced_root_block: ""
+        selector: false,
+        forced_root_block: false
     });
 
     // Must run the element form scripts AFTER reseting textarea ids.

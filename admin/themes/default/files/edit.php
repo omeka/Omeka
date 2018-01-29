@@ -7,7 +7,7 @@ if ($fileTitle != '') {
 }
 $fileTitle = __('Edit File #%s', metadata('file', 'id')) . $fileTitle;
 
-queue_js_file(array('vendor/tiny_mce/tiny_mce', 'elements', 'tabs'));
+queue_js_file(array('vendor/tinymce/tinymce.min', 'elements', 'tabs'));
 echo head(array('title' => $fileTitle, 'bodyclass' => 'files edit'));
 include 'form-tabs.php';
 echo flash();
@@ -40,11 +40,11 @@ echo flash();
     </section>
 </form>
 <script type="text/javascript" charset="utf-8">
-jQuery(window).load(function () {
+jQuery(document).ready(function () {
     Omeka.Tabs.initialize();
     Omeka.wysiwyg({
-        mode: "none",
-        forced_root_block: ""
+        selector: false,
+        forced_root_block: false
     });
 
     // Must run the element form scripts AFTER reseting textarea ids.
