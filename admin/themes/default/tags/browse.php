@@ -2,14 +2,13 @@
 $canEdit = is_allowed('Tags', 'edit');
 $canDelete = is_allowed('Tags', 'delete');
 
-if ($canEdit):
-    queue_js_file(array('vendor/jquery.jeditable', 'tags'));
-    $pageTitle = __('Edit Tags');
-else:
-    $pageTitle = __('Browse Tags');
-endif;
-
+$pageTitle = __('Browse Tags');
 $pageTitle .= ' ' . __('(%s total)', $total_results);
+
+if ($canEdit) {
+    queue_js_file(array('vendor/jquery.jeditable', 'tags'));
+}
+
 echo head(array('title'=>$pageTitle,'bodyclass'=>'tags browse-tags'));
 echo flash();
 
