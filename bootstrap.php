@@ -59,13 +59,12 @@ if ((isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS']
 if (!isset($_SERVER['HTTP_HOST'])) {
     $_SERVER['HTTP_HOST'] = null;
 }
-$base_url = $scheme . '://' . preg_replace('/[^a-z0-9-:._]/i', '', $_SERVER['HTTP_HOST']);
+$absoluteBase = $scheme . '://' . preg_replace('/[^a-z0-9-:._]/i', '', $_SERVER['HTTP_HOST']);
 
 // Set the path.
 $dir = trim(dirname($_SERVER['SCRIPT_NAME']), '\,/');
-$base_path = "/$dir";
 // current path should be empty and not a '/' if there is no directory path.
-$currentPath = $dir ? $base_path : '';
+$currentPath = $dir ? "/$dir" : '';
 
 define('ADMIN_WEB_DIR', 'admin');
 define('INSTALL_WEB_DIR', 'install');
@@ -90,18 +89,18 @@ if (defined('INSTALL')) {
 
 $installPath = "$publicPath/" . INSTALL_WEB_DIR;
 
-$base_path_root = "/$dir";
+$rootPath = $dir ? "/$dir" : '';
 
-define('WEB_RELATIVE_THEME', $base_path . '/themes');
-define('WEB_RELATIVE_PLUGIN', $base_path_root . '/plugins');
-define('WEB_RELATIVE_FILES', $base_path_root . '/files');
-define('WEB_RELATIVE_PUBLIC_THEME', $base_path_root . '/themes');
-define('WEB_RELATIVE_VIEW_SCRIPTS', $base_path_root . '/application/views/scripts');
+define('WEB_RELATIVE_THEME', $currentPath . '/themes');
+define('WEB_RELATIVE_PLUGIN', $rootPath . '/plugins');
+define('WEB_RELATIVE_FILES', $rootPath . '/files');
+define('WEB_RELATIVE_PUBLIC_THEME', $rootPath . '/themes');
+define('WEB_RELATIVE_VIEW_SCRIPTS', $rootPath . '/application/views/scripts');
 
 // WEB_ROOT is always the root of the site, whereas WEB_DIR depends on the 
 // bootstrap used (public/admin)
-define('WEB_ROOT', $base_url . ($dir ? $base_path_root : ''));
-define('WEB_DIR', $base_url . $base_path);
+define('WEB_ROOT', $absoluteBase . $rootPath);
+define('WEB_DIR', $absoluteBase . $currentPath);
 define('WEB_THEME', WEB_DIR . '/themes');
 define('WEB_PLUGIN', WEB_ROOT . '/plugins');
 define('WEB_FILES', WEB_ROOT . '/files');
