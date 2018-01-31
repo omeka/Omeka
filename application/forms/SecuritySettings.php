@@ -62,15 +62,6 @@ class Omeka_Form_SecuritySettings extends Omeka_Form
             )
         );
 
-        $this->addElement('select', Omeka_Captcha::VERSION_OPTION,
-            array(
-                'label' => __('ReCaptcha Version'),
-                'description' => __('Choose which ReCaptcha version you\'re using. Note that ReCaptcha v1 is deprecated and will not work after March 31, 2018.'),
-                'value' => get_option(Omeka_Captcha::VERSION_OPTION) ?: '',
-                'multiOptions' => array('' => 'ReCaptcha v1', 'v2' => 'ReCaptcha v2')
-            )
-        );
-
         $this->addElement('checkbox', 'html_purifier_is_enabled', array(
             'checked' => (boolean) get_option('html_purifier_is_enabled'),
             'description' => __('Check this field if you would like to filter HTML elements or attributes from form input.'),
@@ -110,7 +101,6 @@ class Omeka_Form_SecuritySettings extends Omeka_Form
             array(
                 Omeka_Captcha::PUBLIC_KEY_OPTION,
                 Omeka_Captcha::PRIVATE_KEY_OPTION,
-                Omeka_Captcha::VERSION_OPTION,
             ),
             'captcha', array('legend' => __('Captcha'))
         );
