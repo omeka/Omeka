@@ -20,7 +20,7 @@ class SiteController extends Omeka_Controller_AbstractActionController
     {
         $site = array(
             'omeka_url' => WEB_ROOT,
-            'omeka_version' => get_option('omeka_version'),
+            'omeka_version' => OMEKA_VERSION,
             'title' => get_option('site_title'),
             'description' => get_option('description'),
             'author' => get_option('author'),
