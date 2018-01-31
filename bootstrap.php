@@ -117,7 +117,7 @@ define('CURRENT_BASE_URL', $currentPath);
 date_default_timezone_set(@date_default_timezone_get());
 
 // Set the zlib config values if the extension has been loaded.
-if (extension_loaded('zlib')) {
+if (PHP_SAPI !== 'cli' && extension_loaded('zlib')) {
     ini_set('zlib.output_compression', true);
     ini_set('zlib.output_compression_level', '5');
 }
