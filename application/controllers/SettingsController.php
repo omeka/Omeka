@@ -76,7 +76,6 @@ class SettingsController extends Omeka_Controller_AbstractActionController
                     'html_purifier_allowed_html_attributes',
                     Omeka_Captcha::PUBLIC_KEY_OPTION,
                     Omeka_Captcha::PRIVATE_KEY_OPTION,
-                    Omeka_Captcha::VERSION_OPTION
                 );
                 foreach ($form->getValues() as $key => $value) {
                     if (in_array($key, $options)) {
