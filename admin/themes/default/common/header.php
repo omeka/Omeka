@@ -42,7 +42,11 @@
 <header role="banner">
     <div class="container">
         <div id="site-title" class="two columns">
-            <?php echo link_to_home_page(option('site_title'), array('target' => '_blank')); ?>
+            <?php
+                $menu_title = option('site_title');
+                $menu_title = (strlen($menu_title) > 50) ? substr($menu_title, 0, 40)."..." : $menu_title;
+                echo link_to_home_page($menu_title, array('target' => '_blank'));
+            ?>
         </div>
 
         <nav>
