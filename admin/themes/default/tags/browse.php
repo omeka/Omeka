@@ -16,7 +16,9 @@ echo flash();
 
 <form id="search-tags" method="GET" class="three columns alpha">
     <input type="text" name="like" aria-label="<?php echo __('Search tags'); ?>"/>    <button><?php echo __('Search tags'); ?></button>
-    <input type="hidden" name="type" value="<?php echo isset($params['type']) ? $params['type'] : ''; ?>"/>
+    <?php if(isset($params['type'])): ?>
+    <input type="hidden" name="type" value="<?php echo $params['type']; ?>"/>
+    <?php endif; ?>
 </form>
 
 <div id="search-filters" class="seven columns omega">
