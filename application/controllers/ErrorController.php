@@ -19,7 +19,7 @@ class ErrorController extends Omeka_Controller_AbstractActionController
         // Omeka_View::__construct()?
         if ($this->isInDebugMode()) {
             $this->view->setScriptPath(VIEW_SCRIPTS_DIR);
-            $this->view->setAssetPath(VIEW_SCRIPTS_DIR, WEB_VIEW_SCRIPTS);
+            $this->view->setAssetPath(VIEW_SCRIPTS_DIR, WEB_RELATIVE_VIEW_SCRIPTS);
         }
 
         $handler = $this->_getParam('error_handler');
