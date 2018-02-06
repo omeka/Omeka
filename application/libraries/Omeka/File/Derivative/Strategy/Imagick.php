@@ -40,7 +40,7 @@ class Omeka_File_Derivative_Strategy_Imagick extends Omeka_File_Derivative_Abstr
             return false;
         }
 
-        if ($this->getOption('autoOrient', false)) {
+        if ($this->getOption('autoOrient', true)) {
             $this->_autoOrient($imagick);
         }
 

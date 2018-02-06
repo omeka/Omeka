@@ -129,7 +129,7 @@ class Omeka_File_Derivative_Strategy_ExternalImageMagick extends Omeka_File_Deri
             }
         }
 
-        if ($this->getOption('autoOrient', false)) {
+        if ($this->getOption('autoOrient', true)) {
             array_unshift($args, '-auto-orient');
         }
         return join(' ', $args);
