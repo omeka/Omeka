@@ -15,7 +15,7 @@ echo flash();
 
 <p class="without-item-type">
     <?php if ($totalItemsWithoutType):
-        $withoutTypeMessage = __(plural('%s%d item%s has no type.', "%s%d items%s haven't a type.", $totalItemsWithoutType),
+        $withoutTypeMessage = __(plural('%s%d item%s has no type.', "%s%d items%s have no type.", $totalItemsWithoutType),
             '<a href="' . html_escape(url('items/browse?type=0')) . '">', $totalItemsWithoutType, '</a>');
     else:
         $withoutTypeMessage = __('All items have a type.');
