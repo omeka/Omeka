@@ -68,6 +68,12 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
             'class' => 'checkbox',
         ));
 
+        $this->addElement('checkbox', 'link_to_file_metadata', array(
+            'label' => __('Link to File Metadata'),
+            'description' => __('Have item files link to the file metadata instead of the file directly.'),
+            'class' => 'checkbox',
+        ));
+
         $adminThemes = Theme::getAllAdminThemes();
         if (count($adminThemes) > 1 && is_allowed('Themes', 'edit')) {
             foreach ($adminThemes as &$theme) {
@@ -93,7 +99,7 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
 
         $this->addDisplayGroup(
             array(
-                'use_square_thumbnail', 'per_page_admin', 'per_page_public',
+                'use_square_thumbnail', 'link_to_file_metadata', 'per_page_admin', 'per_page_public',
                 'show_empty_elements', 'show_element_set_headings',
             ),
             'display-settings', array('legend' => __('Display Settings'))
