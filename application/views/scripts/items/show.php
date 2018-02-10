@@ -1,6 +1,5 @@
 <?php
 $title = metadata('item', 'display_title');
-$linkToFileMetadata = (get_option('link_to_file_metadata')) ? true : false;
 echo head(array('title' => $title, 'bodyclass' => 'items show'));
 ?>
 
@@ -12,7 +11,7 @@ echo head(array('title' => $title, 'bodyclass' => 'items show'));
 <?php if (metadata('item', 'has files')): ?>
 <div id="itemfiles" class="element">
     <h3><?php echo __('Files'); ?></h3>
-    <div class="element-text"><?php echo files_for_item(array('linkToMetadata' => $linkToFileMetadata)); ?></div>
+    <div class="element-text"><?php echo files_for_item(); ?></div>
 </div>
 <?php endif; ?>
 

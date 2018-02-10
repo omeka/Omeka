@@ -2071,6 +2071,9 @@ function files_for_item($options = array(), $wrapperAttributes = array('class' =
     if (!$item) {
         $item = get_current_record('item');
     }
+    if (!isset($options['linkToMetadata']) && $linkToFileMetadata = get_option('link_to_file_metadata')) {
+        $options['linkToMetadata'] = true;
+    }
     return file_markup($item->Files, $options, $wrapperAttributes);
 }
 
@@ -2200,6 +2203,7 @@ function item_image_gallery($attrs = array(), $imageType = 'square_thumbnail', $
         'link' => array(),
         'image' => array()
     );
+    $filesShow = get_option('link_to_file_metadata');
     $attrs = array_merge($defaultAttrs, $attrs);
 
     $html = '';
