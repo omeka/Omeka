@@ -2071,8 +2071,8 @@ function files_for_item($options = array(), $wrapperAttributes = array('class' =
     if (!$item) {
         $item = get_current_record('item');
     }
-    if (!isset($options['linkToMetadata']) && $linkToFileMetadata = get_option('link_to_file_metadata')) {
-        $options['linkToMetadata'] = true;
+    if (!isset($options['linkToMetadata']) {
+        $options['linkToMetadata'] =  (bool) get_option('link_to_file_metadata');
     }
     return file_markup($item->Files, $options, $wrapperAttributes);
 }
@@ -2186,7 +2186,7 @@ function file_image($imageType, $props = array(), $file = null)
  * @param Item $item The Item to use, the current item if omitted.
  * @return string
  */
-function item_image_gallery($attrs = array(), $imageType = 'square_thumbnail', $filesShow = false, $item = null)
+function item_image_gallery($attrs = array(), $imageType = 'square_thumbnail', $filesShow = null, $item = null)
 {
     if (!$item) {
         $item = get_current_record('item');
@@ -2203,7 +2203,9 @@ function item_image_gallery($attrs = array(), $imageType = 'square_thumbnail', $
         'link' => array(),
         'image' => array()
     );
-    $filesShow = get_option('link_to_file_metadata');
+    if ($filesShow == null) {
+        $filesShow = get_option('link_to_file_metadata');
+    }
     $attrs = array_merge($defaultAttrs, $attrs);
 
     $html = '';
