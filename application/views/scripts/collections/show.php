@@ -9,7 +9,7 @@ $collectionTitle = metadata('collection', 'display_title');
 <?php echo all_element_texts('collection'); ?>
 
 <div id="collection-items">
-    <h2><?php echo link_to_items_browse(__('Collection Items'), array('collection' => metadata('collection', 'id'))); ?></h2>
+    <h2><?php echo __('Collection Items'); ?></h2>
     <?php if (metadata('collection', 'total_items') > 0): ?>
         <?php foreach (loop('items') as $item): ?>
         <?php $itemTitle = metadata('item', 'display_title'); ?>
@@ -29,6 +29,7 @@ $collectionTitle = metadata('collection', 'display_title');
             <?php endif; ?>
         </div>
         <?php endforeach; ?>
+        <?php echo link_to_items_browse(__('View all %s items', metadata('collection', 'total_items')), array('collection' => metadata('collection', 'id')), array('class' => 'view-all-items-link')); ?>
     <?php else: ?>
         <p><?php echo __("There are currently no items within this collection."); ?></p>
     <?php endif; ?>
