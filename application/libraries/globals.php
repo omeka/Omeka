@@ -2071,7 +2071,7 @@ function files_for_item($options = array(), $wrapperAttributes = array('class' =
     if (!$item) {
         $item = get_current_record('item');
     }
-    if (!isset($options['linkToMetadata']) {
+    if (!isset($options['linkToMetadata'])) {
         $options['linkToMetadata'] =  (bool) get_option('link_to_file_metadata');
     }
     return file_markup($item->Files, $options, $wrapperAttributes);
@@ -2182,7 +2182,7 @@ function file_image($imageType, $props = array(), $file = null)
  *  to null to omit it.
  * @param string $imageType The type of derivative image to display.
  * @param bool $filesShow Whether to link to the files/show. Defaults to
- *  false, links to the original file.
+ *  null, uses 'link to file metadata' appearance option.
  * @param Item $item The Item to use, the current item if omitted.
  * @return string
  */
@@ -2203,7 +2203,7 @@ function item_image_gallery($attrs = array(), $imageType = 'square_thumbnail', $
         'link' => array(),
         'image' => array()
     );
-    if ($filesShow == null) {
+    if ($filesShow === null) {
         $filesShow = get_option('link_to_file_metadata');
     }
     $attrs = array_merge($defaultAttrs, $attrs);
