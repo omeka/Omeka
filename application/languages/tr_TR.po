@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# mustafaulu@msn.com <Mustafaulu@msn.com>, 2014-2016
+# mustafaulu@msn.com <Mustafaulu@msn.com>, 2014-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2016-12-15 22:50+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2017-11-19 05:25+0000\n"
+"Last-Translator: mustafaulu@msn.com <Mustafaulu@msn.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/omeka/omeka/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -487,11 +487,11 @@ msgstr "(%s toplam)"
 #, php-format
 msgid "%sOne item%s has no collection."
 msgid_plural "%s%d items%s aren't in a collection."
-msgstr[0] ""
+msgstr[0] "%s %d itemler %s kolleksiyonde yer almıyor."
 
 #: admin/themes/default/collections/browse.php:19
 msgid "All items are in a collection."
-msgstr ""
+msgstr "Bütün itemler bir koleksiyon içerisinde bulunuyor."
 
 #: admin/themes/default/collections/browse.php:30
 #: admin/themes/default/collections/show.php:51
@@ -571,7 +571,7 @@ msgstr "#%s Koleksiyon Düzenle"
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Collection #%s"
-msgstr ""
+msgstr "Koleksiyon #%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
@@ -1090,21 +1090,21 @@ msgstr "Koleksiyon"
 
 #: admin/themes/default/items/batch-delete-all.php:2
 msgid "Batch Delete All Searched Items"
-msgstr ""
+msgstr "Bütün aranmış itemleri toplu olarak sil"
 
 #: admin/themes/default/items/batch-delete-all.php:18
 #, php-format
 msgid "All %d items matching the search filters above will be deleted."
-msgstr ""
+msgstr "Yukarıdaki arama filtreleri ile eşleşen bütün %d itemleri silinecektir."
 
 #: admin/themes/default/items/batch-delete-all.php:20
 #, php-format
 msgid "All %d items will be deleted."
-msgstr ""
+msgstr "Bütün %d itemleri silinecektir."
 
 #: admin/themes/default/items/batch-delete-all.php:25
 msgid "Deletions will be processed in the background item by item."
-msgstr ""
+msgstr "Silme işlemi, arkaplanda madde madde olarak yapılacaktır."
 
 #: admin/themes/default/items/batch-delete-all.php:36
 #: admin/themes/default/items/batch-delete.php:47
@@ -1127,22 +1127,22 @@ msgstr "İşaretlenen itemler silinecektir"
 
 #: admin/themes/default/items/batch-edit-all.php:2
 msgid "Batch Edit All Searched Items"
-msgstr ""
+msgstr "Aranmış bütün itemleri toplu olarak düzenle"
 
 #: admin/themes/default/items/batch-edit-all.php:20
 #, php-format
 msgid ""
 "Changes will be applied to all %d items matching the search filters above."
-msgstr ""
+msgstr "Değişiklikler, yukarıdaki arama filtreleri ile eşleşen bütün %d itemlerine uygulanacaktır."
 
 #: admin/themes/default/items/batch-edit-all.php:22
 #, php-format
 msgid "Changes will be applied to all %d items."
-msgstr ""
+msgstr "Değişiklikler bütün %d itemlerine uygulanacaktır."
 
 #: admin/themes/default/items/batch-edit-all.php:27
 msgid "Changes will be processed in the background item by item."
-msgstr ""
+msgstr "Değişiklikler arka planda madde madde işlenecektir."
 
 #: admin/themes/default/items/batch-edit-common.php:2
 msgid "Item Metadata"
@@ -1258,21 +1258,21 @@ msgstr "İtemleri Ara"
 #: admin/themes/default/items/browse.php:129
 #, php-format
 msgid "Select all %s results"
-msgstr ""
+msgstr "Bütün %s sonuçlarını seç"
 
 #: admin/themes/default/items/browse.php:27
 #: admin/themes/default/items/browse.php:130
 msgid "items selected"
-msgstr ""
+msgstr "İtemler seçildi"
 
 #: admin/themes/default/items/browse.php:43
 msgid "Select all rows"
-msgstr ""
+msgstr "Bütün satırları seç"
 
 #: admin/themes/default/items/browse.php:64
 #, php-format
 msgid "Select item \"%s\""
-msgstr ""
+msgstr "\"%s\" itemini seç"
 
 #: admin/themes/default/items/browse.php:109
 msgid "No Tags"
@@ -1378,19 +1378,19 @@ msgstr "Alan Ekle"
 #: admin/themes/default/items/search-form.php:54
 #: application/views/scripts/items/search-form.php:50
 msgid "Search Joiner"
-msgstr ""
+msgstr "Katılımcıyı ara"
 
 #: admin/themes/default/items/search-form.php:59
 #: application/views/helpers/ItemSearchFilters.php:108
 #: application/views/scripts/items/search-form.php:55
 msgid "AND"
-msgstr ""
+msgstr "VE"
 
 #: admin/themes/default/items/search-form.php:60
 #: application/views/helpers/ItemSearchFilters.php:106
 #: application/views/scripts/items/search-form.php:56
 msgid "OR"
-msgstr ""
+msgstr "VEYA"
 
 #: admin/themes/default/items/search-form.php:67
 #: application/views/scripts/items/search-form.php:63
@@ -1419,7 +1419,7 @@ msgstr "kesindir."
 
 #: admin/themes/default/items/search-form.php:88
 msgid "is not exactly"
-msgstr ""
+msgstr "tam olarak değil"
 
 #: admin/themes/default/items/search-form.php:89
 #: application/views/scripts/items/search-form.php:84
@@ -1434,20 +1434,20 @@ msgstr "boş değildir."
 #: admin/themes/default/items/search-form.php:91
 #: application/views/scripts/items/search-form.php:86
 msgid "starts with"
-msgstr ""
+msgstr "ile başla"
 
 #: admin/themes/default/items/search-form.php:92
 #: application/views/scripts/items/search-form.php:87
 msgid "ends with"
-msgstr ""
+msgstr "ile bitir"
 
 #: admin/themes/default/items/search-form.php:93
 msgid "matches"
-msgstr ""
+msgstr "eşleşme"
 
 #: admin/themes/default/items/search-form.php:94
 msgid "does not match"
-msgstr ""
+msgstr "eşleşmedi"
 
 #: admin/themes/default/items/search-form.php:102
 #: application/views/scripts/items/search-form.php:95
@@ -2070,7 +2070,7 @@ msgstr "Giriş"
 
 #: admin/themes/default/users/login.php:8
 msgid "Go to the public site"
-msgstr ""
+msgstr "kamu sitesine git"
 
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
@@ -2281,11 +2281,11 @@ msgstr "Bu işlem, #%s koleksiyonunu ve onunla ilişkili olan bütün üstverile
 #: application/controllers/ItemsController.php:376
 #: application/controllers/ItemsController.php:444
 msgid "No item to batch edit."
-msgstr ""
+msgstr "toplu olarak düzenlenecek item yok"
 
 #: application/controllers/ItemsController.php:248
 msgid "The deletion of all items is forbidden."
-msgstr ""
+msgstr "bütün itemlerin silinmesi yasaklanmış"
 
 #: application/controllers/ItemsController.php:265
 msgid "You must choose some items to batch edit."
@@ -2323,15 +2323,15 @@ msgstr "İtemler başaraıyla değiştirildi."
 
 #: application/controllers/ItemsController.php:436
 msgid "The items are checked and deleted one by one in the background."
-msgstr ""
+msgstr "İtemler, arkaplanda tek tek kontrol edildi ve silindi."
 
 #: application/controllers/ItemsController.php:438
 msgid "The items are checked and changed one by one in the background."
-msgstr ""
+msgstr "İtemler, arkaplanda tek tek kontrol edildi ve değiştirildi."
 
 #: application/controllers/ItemsController.php:440
 msgid "Check logs for success and errors."
-msgstr ""
+msgstr "Kayıtlardaki başarı ve hataları kontrol edin"
 
 #: application/controllers/PluginsController.php:45
 #, php-format
@@ -2612,13 +2612,13 @@ msgstr "Giriş bilgisi hatalı. Lütfen yeniden deneyin."
 
 #: application/forms/AppearanceSettings.php:22
 msgid "Use Square Thumbnails"
-msgstr ""
+msgstr "Kare küçük resim kullan"
 
 #: application/forms/AppearanceSettings.php:23
 msgid ""
 "Use square-cropped images by default wherever thumbnails appear in the "
 "public interface."
-msgstr ""
+msgstr "Küçük resimler kamu arayüzünde gösterildiğinde varsayılan olarak kare şeklinde küçültülmüş resimleri kullan."
 
 #: application/forms/AppearanceSettings.php:28
 #: application/forms/Install.php:128
@@ -2677,7 +2677,7 @@ msgstr "Öğe Seti Başlığını Göster"
 
 #: application/forms/AppearanceSettings.php:78
 msgid "Admin Theme"
-msgstr ""
+msgstr "Yönetici teması"
 
 #: application/forms/AppearanceSettings.php:92
 msgid "Derivative Size Constraints"
@@ -2689,7 +2689,7 @@ msgstr "Görüntüleme Ayarları"
 
 #: application/forms/AppearanceSettings.php:108
 msgid "Admin Themes"
-msgstr ""
+msgstr "Yönetici temaları"
 
 #: application/forms/ChangePassword.php:25
 msgid "Current Password"
@@ -3336,60 +3336,60 @@ msgstr "Geçersiz parametre. HasElement işlevi, itemin bir öğeye sahip olup o
 
 #: application/models/Job/ItemBatchEditAll.php:41
 msgid "Batch Edit All Items: No item matches the specified filters."
-msgstr ""
+msgstr "Bütün itemleri toplu olarak düzenle: seçilen filtrelere uygun item bulunamamıştır."
 
 #: application/models/Job/ItemBatchEditAll.php:48
 #, php-format
 msgid "Batch Edit: Starting processing 1 item."
 msgid_plural "Batch Edit: Starting processing %d items."
-msgstr[0] ""
+msgstr[0] "Toplu olarak düzenleme: %d numaralı itemle işlem başlatılıyor."
 
 #: application/models/Job/ItemBatchEditAll.php:67
 #, php-format
 msgid ""
 "Batch Edit: A total of %d errors occurred during the batch process of %d "
 "items."
-msgstr ""
+msgstr "Toplu olarak düzenle: %d itemlerinin toplu olarak işlenmesi esnasında %dhatalar meydana geldi."
 
 #: application/models/Job/ItemBatchEditAll.php:74
 #, php-format
 msgid "Batch Edit: The item has been processed successfully."
 msgid_plural "Batch Edit: All %d items have been processed successfully."
-msgstr[0] ""
+msgstr[0] "Toplu olarak düzenle: bütün %ditemleri başarıyla işlenmiştir."
 
 #: application/models/Job/ItemBatchEditAll.php:91
 msgid "Item does not exist: it may have been deleted before processing."
-msgstr ""
+msgstr "İtem mevcut değil: item işlemden önce silinmiştir."
 
 #: application/models/Job/ItemBatchEditAll.php:106
 msgid "User is not allowed to delete this item."
-msgstr ""
+msgstr "Kullanıcının itemi silmesine izin verilmedi."
 
 #: application/models/Job/ItemBatchEditAll.php:113
 msgid "User is not allowed to edit this item."
-msgstr ""
+msgstr "Kullanıcının itemi düzenlemesine izin verilmedi."
 
 #: application/models/Job/ItemBatchEditAll.php:119
 msgid "User is not allowed to tag this item."
-msgstr ""
+msgstr "Kullanıcının itemi etiketlemesine izin verilmedi."
 
 #: application/models/Job/ItemBatchEditAll.php:142
 msgid "The item was successfully deleted."
-msgstr ""
+msgstr "İtem başarıyla silinmiştir."
 
 #: application/models/Job/ItemBatchEditAll.php:154
 #, php-format
 msgid "An error occured when the item was updated: %s"
-msgstr ""
+msgstr "İtem güncellenirken bir hata oluştu: %s"
 
 #: application/models/Job/ItemBatchEditAll.php:159
 msgid "The item was successfully batch-edited."
-msgstr ""
+msgstr "İtem, toplu olarak başarıyla düzenlendi."
 
 #: application/models/Job/ItemBatchEditAll.php:178
 #, php-format
 msgid "Batch Edit Item #%d [%d/%d]: %s"
-msgstr ""
+msgstr "Toplu olarak düzenlenen itemler #%d [%d/%d]: %s"
 
 #: application/models/Mixin/ElementText.php:293
 #, php-format
@@ -3597,7 +3597,7 @@ msgstr "Kayıt dizisi döngü için uygun değil."
 #: application/views/helpers/MaxFileSize.php:44
 #, php-format
 msgid "%s MB"
-msgstr ""
+msgstr "%s Mb"
 
 #: application/views/helpers/RecordUrl.php:34
 msgid "Invalid record passed while getting record URL."

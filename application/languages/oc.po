@@ -3,15 +3,16 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
+# Cédric Valmary <cvalmary@yahoo.fr>, 2017
 # Cédric Valmary <cvalmary@yahoo.fr>, 2016
-# Cfpo Miègjorn-Pirenèus <formacion@cfpoc.net>, 2016
+# Cfpo Miègjorn-Pirenèus <inactive+cfpomp@transifex.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2016-12-15 22:50+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2017-09-23 18:08+0000\n"
+"Last-Translator: Cédric Valmary <cvalmary@yahoo.fr>\n"
 "Language-Team: Occitan (post 1500) (http://www.transifex.com/omeka/omeka/language/oc/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -488,12 +489,12 @@ msgstr "(%s total)"
 #, php-format
 msgid "%sOne item%s has no collection."
 msgid_plural "%s%d items%s aren't in a collection."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%sUn contengut%s a pas de colleccion."
+msgstr[1] "%s%d contenguts%s son pas dins una colleccion."
 
 #: admin/themes/default/collections/browse.php:19
 msgid "All items are in a collection."
-msgstr ""
+msgstr "L'ensemble dels elements son dins una colleccion."
 
 #: admin/themes/default/collections/browse.php:30
 #: admin/themes/default/collections/show.php:51
@@ -1097,7 +1098,7 @@ msgstr "Colleccion"
 
 #: admin/themes/default/items/batch-delete-all.php:2
 msgid "Batch Delete All Searched Items"
-msgstr ""
+msgstr "Suprimir per lòts totes los contenguts trobats"
 
 #: admin/themes/default/items/batch-delete-all.php:18
 #, php-format
@@ -1107,7 +1108,7 @@ msgstr ""
 #: admin/themes/default/items/batch-delete-all.php:20
 #, php-format
 msgid "All %d items will be deleted."
-msgstr ""
+msgstr "La totalitat dels %d va èsser suprimida."
 
 #: admin/themes/default/items/batch-delete-all.php:25
 msgid "Deletions will be processed in the background item by item."
@@ -1270,16 +1271,16 @@ msgstr ""
 #: admin/themes/default/items/browse.php:27
 #: admin/themes/default/items/browse.php:130
 msgid "items selected"
-msgstr ""
+msgstr "contenguts seleccionats"
 
 #: admin/themes/default/items/browse.php:43
 msgid "Select all rows"
-msgstr ""
+msgstr "Sleccionar totas las linhas"
 
 #: admin/themes/default/items/browse.php:64
 #, php-format
 msgid "Select item \"%s\""
-msgstr ""
+msgstr "Seleccionar lo contengut \"%s\""
 
 #: admin/themes/default/items/browse.php:109
 msgid "No Tags"
@@ -1386,19 +1387,19 @@ msgstr "Apondre un camp"
 #: admin/themes/default/items/search-form.php:54
 #: application/views/scripts/items/search-form.php:50
 msgid "Search Joiner"
-msgstr ""
+msgstr "Juntura de requèsta"
 
 #: admin/themes/default/items/search-form.php:59
 #: application/views/helpers/ItemSearchFilters.php:108
 #: application/views/scripts/items/search-form.php:55
 msgid "AND"
-msgstr ""
+msgstr "E"
 
 #: admin/themes/default/items/search-form.php:60
 #: application/views/helpers/ItemSearchFilters.php:106
 #: application/views/scripts/items/search-form.php:56
 msgid "OR"
-msgstr ""
+msgstr "O"
 
 #: admin/themes/default/items/search-form.php:67
 #: application/views/scripts/items/search-form.php:63
@@ -1427,7 +1428,7 @@ msgstr "es exactament"
 
 #: admin/themes/default/items/search-form.php:88
 msgid "is not exactly"
-msgstr ""
+msgstr "es pas exactament"
 
 #: admin/themes/default/items/search-form.php:89
 #: application/views/scripts/items/search-form.php:84
@@ -1442,20 +1443,20 @@ msgstr "es pas void"
 #: admin/themes/default/items/search-form.php:91
 #: application/views/scripts/items/search-form.php:86
 msgid "starts with"
-msgstr ""
+msgstr "comença per"
 
 #: admin/themes/default/items/search-form.php:92
 #: application/views/scripts/items/search-form.php:87
 msgid "ends with"
-msgstr ""
+msgstr "s'acaba amb"
 
 #: admin/themes/default/items/search-form.php:93
 msgid "matches"
-msgstr ""
+msgstr "correspond a"
 
 #: admin/themes/default/items/search-form.php:94
 msgid "does not match"
-msgstr ""
+msgstr "correspond pas a"
 
 #: admin/themes/default/items/search-form.php:102
 #: application/views/scripts/items/search-form.php:95
@@ -2078,7 +2079,7 @@ msgstr "Se Connectar"
 
 #: admin/themes/default/users/login.php:8
 msgid "Go to the public site"
-msgstr ""
+msgstr "Anar sul site public"
 
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
@@ -2685,7 +2686,7 @@ msgstr "Afichar las entèstas del jòc d'elements"
 
 #: application/forms/AppearanceSettings.php:78
 msgid "Admin Theme"
-msgstr ""
+msgstr "Tèma d'administracion"
 
 #: application/forms/AppearanceSettings.php:92
 msgid "Derivative Size Constraints"
@@ -2697,7 +2698,7 @@ msgstr "Reglatges de l'afichatge"
 
 #: application/forms/AppearanceSettings.php:108
 msgid "Admin Themes"
-msgstr ""
+msgstr " Tèmas d'administracion"
 
 #: application/forms/ChangePassword.php:25
 msgid "Current Password"

@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Andreas Sandlund <andreas.sandlund@gmail.com>, 2016
+# Andreas Sandlund <andreas.sandlund@gmail.com>, 2016-2017
 # Jonas Lindqvist <info@melvik.se>, 2013
 # Peter Krantz <peter.krantz@gmail.com>, 2014-2015
 # Sami Varjo <sami.varjo@vaasa.fi>, 2015
@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2016-12-15 22:50+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2017-09-19 15:17+0000\n"
+"Last-Translator: Andreas Sandlund <andreas.sandlund@gmail.com>\n"
 "Language-Team: Swedish (Sweden) (http://www.transifex.com/omeka/omeka/language/sv_SE/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -495,7 +495,7 @@ msgstr[1] ""
 
 #: admin/themes/default/collections/browse.php:19
 msgid "All items are in a collection."
-msgstr ""
+msgstr "Alla objekt ingår i en samling"
 
 #: admin/themes/default/collections/browse.php:30
 #: admin/themes/default/collections/show.php:51
@@ -575,7 +575,7 @@ msgstr "Redigera samling #%s"
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Collection #%s"
-msgstr ""
+msgstr "Samling #%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
@@ -1099,21 +1099,21 @@ msgstr "Samling"
 
 #: admin/themes/default/items/batch-delete-all.php:2
 msgid "Batch Delete All Searched Items"
-msgstr ""
+msgstr "Massradera alla sökta objekt"
 
 #: admin/themes/default/items/batch-delete-all.php:18
 #, php-format
 msgid "All %d items matching the search filters above will be deleted."
-msgstr ""
+msgstr "Samtliga %d objekt som matchar ovanstående sökfilter kommer att raderas."
 
 #: admin/themes/default/items/batch-delete-all.php:20
 #, php-format
 msgid "All %d items will be deleted."
-msgstr ""
+msgstr "Samtliga %d objekt kommer att raderas."
 
 #: admin/themes/default/items/batch-delete-all.php:25
 msgid "Deletions will be processed in the background item by item."
-msgstr ""
+msgstr "Raderingar behandlas i bakgrunden för ett objekt åt gången."
 
 #: admin/themes/default/items/batch-delete-all.php:36
 #: admin/themes/default/items/batch-delete.php:47
@@ -1136,22 +1136,22 @@ msgstr "Markerade objekt kommer att raderas."
 
 #: admin/themes/default/items/batch-edit-all.php:2
 msgid "Batch Edit All Searched Items"
-msgstr ""
+msgstr "Massredigera alla sökta objekt"
 
 #: admin/themes/default/items/batch-edit-all.php:20
 #, php-format
 msgid ""
 "Changes will be applied to all %d items matching the search filters above."
-msgstr ""
+msgstr "Samtliga %d objekt som matchar ovanstående sökfilter kommer att ändras."
 
 #: admin/themes/default/items/batch-edit-all.php:22
 #, php-format
 msgid "Changes will be applied to all %d items."
-msgstr ""
+msgstr "Samtliga %d objekt kommer att ändras."
 
 #: admin/themes/default/items/batch-edit-all.php:27
 msgid "Changes will be processed in the background item by item."
-msgstr ""
+msgstr "Ändringar behandlas i bakgrunden för ett objekt åt gången."
 
 #: admin/themes/default/items/batch-edit-common.php:2
 msgid "Item Metadata"
@@ -1207,7 +1207,7 @@ msgstr "Massredigera objekt"
 
 #: admin/themes/default/items/batch-edit.php:37
 msgid "Changes will be applied to checked items."
-msgstr "Förändringar blir genomförda på markerade objekt"
+msgstr "Förändringar kommer genomföras på markerade objekt"
 
 #: admin/themes/default/items/batch-edit.php:48
 msgid "Check if you wish to delete selected items."
@@ -1267,21 +1267,21 @@ msgstr "Sök objekt"
 #: admin/themes/default/items/browse.php:129
 #, php-format
 msgid "Select all %s results"
-msgstr ""
+msgstr "Välj alla %s resultat"
 
 #: admin/themes/default/items/browse.php:27
 #: admin/themes/default/items/browse.php:130
 msgid "items selected"
-msgstr ""
+msgstr "Valda objekt"
 
 #: admin/themes/default/items/browse.php:43
 msgid "Select all rows"
-msgstr ""
+msgstr "Markera alla rader"
 
 #: admin/themes/default/items/browse.php:64
 #, php-format
 msgid "Select item \"%s\""
-msgstr ""
+msgstr "Välj objekt \"%s\""
 
 #: admin/themes/default/items/browse.php:109
 msgid "No Tags"
@@ -1394,13 +1394,13 @@ msgstr ""
 #: application/views/helpers/ItemSearchFilters.php:108
 #: application/views/scripts/items/search-form.php:55
 msgid "AND"
-msgstr ""
+msgstr "AND"
 
 #: admin/themes/default/items/search-form.php:60
 #: application/views/helpers/ItemSearchFilters.php:106
 #: application/views/scripts/items/search-form.php:56
 msgid "OR"
-msgstr ""
+msgstr "OR"
 
 #: admin/themes/default/items/search-form.php:67
 #: application/views/scripts/items/search-form.php:63
@@ -1429,7 +1429,7 @@ msgstr "är exakt"
 
 #: admin/themes/default/items/search-form.php:88
 msgid "is not exactly"
-msgstr ""
+msgstr "är inte exakt"
 
 #: admin/themes/default/items/search-form.php:89
 #: application/views/scripts/items/search-form.php:84
@@ -1444,20 +1444,20 @@ msgstr "är ej tomt"
 #: admin/themes/default/items/search-form.php:91
 #: application/views/scripts/items/search-form.php:86
 msgid "starts with"
-msgstr ""
+msgstr "börjar med"
 
 #: admin/themes/default/items/search-form.php:92
 #: application/views/scripts/items/search-form.php:87
 msgid "ends with"
-msgstr ""
+msgstr "slutar med"
 
 #: admin/themes/default/items/search-form.php:93
 msgid "matches"
-msgstr ""
+msgstr "matchar"
 
 #: admin/themes/default/items/search-form.php:94
 msgid "does not match"
-msgstr ""
+msgstr "matchar inte"
 
 #: admin/themes/default/items/search-form.php:102
 #: application/views/scripts/items/search-form.php:95
@@ -1497,7 +1497,7 @@ msgstr "Sök taggar"
 #: admin/themes/default/items/search-form.php:195
 #: application/views/scripts/items/search-form.php:178
 msgid "Public/Non-Public"
-msgstr "Publik/Inte pubplik"
+msgstr "Publik/Inte publik"
 
 #: admin/themes/default/items/search-form.php:204
 #: application/views/scripts/items/search-form.php:186
@@ -2080,7 +2080,7 @@ msgstr "Logga in"
 
 #: admin/themes/default/users/login.php:8
 msgid "Go to the public site"
-msgstr ""
+msgstr "Visa publik sida"
 
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
@@ -2291,11 +2291,11 @@ msgstr "Detta kommer att radera objektet #%s och dess relaterade metadata. Alla 
 #: application/controllers/ItemsController.php:376
 #: application/controllers/ItemsController.php:444
 msgid "No item to batch edit."
-msgstr ""
+msgstr "Inga objekt att massändra."
 
 #: application/controllers/ItemsController.php:248
 msgid "The deletion of all items is forbidden."
-msgstr ""
+msgstr "Det är inte tillåtet att radera alla objekt."
 
 #: application/controllers/ItemsController.php:265
 msgid "You must choose some items to batch edit."
@@ -2333,15 +2333,15 @@ msgstr "Objekten ändrades!"
 
 #: application/controllers/ItemsController.php:436
 msgid "The items are checked and deleted one by one in the background."
-msgstr ""
+msgstr "Objekten markeras och raderas ett åt gången i bakgrunden."
 
 #: application/controllers/ItemsController.php:438
 msgid "The items are checked and changed one by one in the background."
-msgstr ""
+msgstr "Objekten markeras och redigeras ett åt gången i bakgrunden."
 
 #: application/controllers/ItemsController.php:440
 msgid "Check logs for success and errors."
-msgstr ""
+msgstr "Titta i loggarna efter status- och felmeddelanden."
 
 #: application/controllers/PluginsController.php:45
 #, php-format
@@ -2622,13 +2622,13 @@ msgstr "Inloggningsuppgifterna stämmer inte. Vänligen försök igen."
 
 #: application/forms/AppearanceSettings.php:22
 msgid "Use Square Thumbnails"
-msgstr ""
+msgstr "Använd fyrkantiga tumnaglar"
 
 #: application/forms/AppearanceSettings.php:23
 msgid ""
 "Use square-cropped images by default wherever thumbnails appear in the "
 "public interface."
-msgstr ""
+msgstr "Använd kvadratiskt beskurna bilder som standard för tumnaglar i det publika gränssnittet."
 
 #: application/forms/AppearanceSettings.php:28
 #: application/forms/Install.php:128
@@ -2687,7 +2687,7 @@ msgstr "Visa rubriker för elementsamlingar"
 
 #: application/forms/AppearanceSettings.php:78
 msgid "Admin Theme"
-msgstr ""
+msgstr "Administratörstema"
 
 #: application/forms/AppearanceSettings.php:92
 msgid "Derivative Size Constraints"
@@ -2699,7 +2699,7 @@ msgstr "Visningsinställningar"
 
 #: application/forms/AppearanceSettings.php:108
 msgid "Admin Themes"
-msgstr ""
+msgstr "Administratörsteman"
 
 #: application/forms/ChangePassword.php:25
 msgid "Current Password"
@@ -3346,7 +3346,7 @@ msgstr "Ogiltig parameter. hasElement-funktionen kräver antingen ett elementobj
 
 #: application/models/Job/ItemBatchEditAll.php:41
 msgid "Batch Edit All Items: No item matches the specified filters."
-msgstr ""
+msgstr "Massändra alla objekt: Inga objekt matchar angivna filter."
 
 #: application/models/Job/ItemBatchEditAll.php:48
 #, php-format
@@ -3360,7 +3360,7 @@ msgstr[1] ""
 msgid ""
 "Batch Edit: A total of %d errors occurred during the batch process of %d "
 "items."
-msgstr ""
+msgstr "Massändring: Totalt %d fel uppstod under behandlingen av %d objekt."
 
 #: application/models/Job/ItemBatchEditAll.php:74
 #, php-format
@@ -3371,37 +3371,37 @@ msgstr[1] ""
 
 #: application/models/Job/ItemBatchEditAll.php:91
 msgid "Item does not exist: it may have been deleted before processing."
-msgstr ""
+msgstr "Objektet finns inte: det kan ha raderats innan behandlingen påbörjades."
 
 #: application/models/Job/ItemBatchEditAll.php:106
 msgid "User is not allowed to delete this item."
-msgstr ""
+msgstr "Användaren saknar behörighet att radera detta objekt."
 
 #: application/models/Job/ItemBatchEditAll.php:113
 msgid "User is not allowed to edit this item."
-msgstr ""
+msgstr "Användaren saknar behörighet att ändra detta objekt."
 
 #: application/models/Job/ItemBatchEditAll.php:119
 msgid "User is not allowed to tag this item."
-msgstr ""
+msgstr "Användaren saknar behörighet att tagga detta objekt."
 
 #: application/models/Job/ItemBatchEditAll.php:142
 msgid "The item was successfully deleted."
-msgstr ""
+msgstr "Objektet raderades."
 
 #: application/models/Job/ItemBatchEditAll.php:154
 #, php-format
 msgid "An error occured when the item was updated: %s"
-msgstr ""
+msgstr "Ett fel inträffade när objektet ändrades: %s"
 
 #: application/models/Job/ItemBatchEditAll.php:159
 msgid "The item was successfully batch-edited."
-msgstr ""
+msgstr "Objektet har massändrats."
 
 #: application/models/Job/ItemBatchEditAll.php:178
 #, php-format
 msgid "Batch Edit Item #%d [%d/%d]: %s"
-msgstr ""
+msgstr "Massändra objekt #%d [%d/%d]: %s"
 
 #: application/models/Mixin/ElementText.php:293
 #, php-format
@@ -3609,7 +3609,7 @@ msgstr "En lista med poster är inte tillgänglig för loopen."
 #: application/views/helpers/MaxFileSize.php:44
 #, php-format
 msgid "%s MB"
-msgstr ""
+msgstr "%s MB"
 
 #: application/views/helpers/RecordUrl.php:34
 msgid "Invalid record passed while getting record URL."

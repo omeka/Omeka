@@ -6,7 +6,7 @@
 # Adam Véle <vele@centrum.cz>, 2012
 # Dana Léw <lew.dana@gmail.com>, 2011,2013
 # Jan Černý <cernyhonza@gmail.com>, 2011-2014
-# Jiří Vírava <appukonrad@gmail.com>, 2014-2015
+# Jiří Vírava <appukonrad@gmail.com>, 2014-2015,2017
 # MICHAL D. <black23@gmail.com>, 2013-2014
 # Adam Véle <vele@centrum.cz>, 2012
 msgid ""
@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2016-12-15 22:50+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2017-11-15 16:26+0000\n"
+"Last-Translator: Jiří Vírava <appukonrad@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/omeka/omeka/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -498,7 +498,7 @@ msgstr[2] ""
 
 #: admin/themes/default/collections/browse.php:19
 msgid "All items are in a collection."
-msgstr ""
+msgstr "Všechny položky jsou ve sbírce."
 
 #: admin/themes/default/collections/browse.php:30
 #: admin/themes/default/collections/show.php:51
@@ -578,7 +578,7 @@ msgstr "Upravit sbírku #%s"
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Collection #%s"
-msgstr ""
+msgstr "Sbírka #%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
@@ -947,37 +947,37 @@ msgstr "Vložená metadata"
 #: admin/themes/default/index.php:10
 msgid "item"
 msgid_plural "items"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "položka"
+msgstr[1] "položek"
+msgstr[2] "položky"
 
 #: admin/themes/default/index.php:11
 msgid "collection"
 msgid_plural "collections"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "sbírka"
+msgstr[1] "sbírek"
+msgstr[2] "sbírky"
 
 #: admin/themes/default/index.php:12
 msgid "tag"
 msgid_plural "tags"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "štítek"
+msgstr[1] "štítků"
+msgstr[2] "štítky"
 
 #: admin/themes/default/index.php:16
 msgid "plugin"
 msgid_plural "plugins"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "zásuvný modul"
+msgstr[1] "zásuvných modulů"
+msgstr[2] "zásuvné moduly"
 
 #: admin/themes/default/index.php:20
 msgid "user"
 msgid_plural "users"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "uživatel"
+msgstr[1] "uživatelů"
+msgstr[2] "uživatelé"
 
 #: admin/themes/default/index.php:24
 msgid "theme"
@@ -1107,7 +1107,7 @@ msgstr "Sbírka"
 
 #: admin/themes/default/items/batch-delete-all.php:2
 msgid "Batch Delete All Searched Items"
-msgstr ""
+msgstr "Dávkově vymazat všechny vyhledané položky"
 
 #: admin/themes/default/items/batch-delete-all.php:18
 #, php-format
@@ -1280,11 +1280,11 @@ msgstr ""
 #: admin/themes/default/items/browse.php:27
 #: admin/themes/default/items/browse.php:130
 msgid "items selected"
-msgstr ""
+msgstr "vybrané položky"
 
 #: admin/themes/default/items/browse.php:43
 msgid "Select all rows"
-msgstr ""
+msgstr "Vybrat všechny řádky"
 
 #: admin/themes/default/items/browse.php:64
 #, php-format
@@ -1403,13 +1403,13 @@ msgstr ""
 #: application/views/helpers/ItemSearchFilters.php:108
 #: application/views/scripts/items/search-form.php:55
 msgid "AND"
-msgstr ""
+msgstr "A"
 
 #: admin/themes/default/items/search-form.php:60
 #: application/views/helpers/ItemSearchFilters.php:106
 #: application/views/scripts/items/search-form.php:56
 msgid "OR"
-msgstr ""
+msgstr "NEBO"
 
 #: admin/themes/default/items/search-form.php:67
 #: application/views/scripts/items/search-form.php:63
@@ -1438,7 +1438,7 @@ msgstr "je právě"
 
 #: admin/themes/default/items/search-form.php:88
 msgid "is not exactly"
-msgstr ""
+msgstr "není přesně"
 
 #: admin/themes/default/items/search-form.php:89
 #: application/views/scripts/items/search-form.php:84
@@ -1453,20 +1453,20 @@ msgstr "není prázdný"
 #: admin/themes/default/items/search-form.php:91
 #: application/views/scripts/items/search-form.php:86
 msgid "starts with"
-msgstr ""
+msgstr "začíná na"
 
 #: admin/themes/default/items/search-form.php:92
 #: application/views/scripts/items/search-form.php:87
 msgid "ends with"
-msgstr ""
+msgstr "končí na"
 
 #: admin/themes/default/items/search-form.php:93
 msgid "matches"
-msgstr ""
+msgstr "shoduje se"
 
 #: admin/themes/default/items/search-form.php:94
 msgid "does not match"
-msgstr ""
+msgstr "neshoduje se"
 
 #: admin/themes/default/items/search-form.php:102
 #: application/views/scripts/items/search-form.php:95
@@ -2089,7 +2089,7 @@ msgstr "Přihlásit se"
 
 #: admin/themes/default/users/login.php:8
 msgid "Go to the public site"
-msgstr ""
+msgstr "Přejít na veřejné stránky"
 
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
@@ -2300,11 +2300,11 @@ msgstr "Tímto smažete položku #%s a s ní asociovaná metadata. Smazána budo
 #: application/controllers/ItemsController.php:376
 #: application/controllers/ItemsController.php:444
 msgid "No item to batch edit."
-msgstr ""
+msgstr "Žádné položky pro dávkovou úpravu."
 
 #: application/controllers/ItemsController.php:248
 msgid "The deletion of all items is forbidden."
-msgstr ""
+msgstr "Vymazání všech položek je zakázáno."
 
 #: application/controllers/ItemsController.php:265
 msgid "You must choose some items to batch edit."
@@ -2342,15 +2342,15 @@ msgstr "Položky byly úspěšně změněny!"
 
 #: application/controllers/ItemsController.php:436
 msgid "The items are checked and deleted one by one in the background."
-msgstr ""
+msgstr "Položky jsou kontrolovány a mazány jedena po druhé na pozadí."
 
 #: application/controllers/ItemsController.php:438
 msgid "The items are checked and changed one by one in the background."
-msgstr ""
+msgstr "Položky jsou kontrolovány a měněny jedena po druhé na pozadí."
 
 #: application/controllers/ItemsController.php:440
 msgid "Check logs for success and errors."
-msgstr ""
+msgstr "Zkontrolujte záznamy o úspěších a chybách."
 
 #: application/controllers/PluginsController.php:45
 #, php-format
@@ -2515,7 +2515,7 @@ msgstr "SQL chyba při migraci:"
 msgid ""
 "Omeka requires PHP version %1$s or higher, but this server is running PHP "
 "version %2$s. Please update the installed version of PHP and try again."
-msgstr ""
+msgstr "Omeka vyžaduje verzi PHP %1$s nebo vyšší, ale tento server používá verzi PHP %2$s. Prosím aktualizujte nainstalovanou verzi PHP a zkuste to znovu."
 
 #: application/controllers/UsersController.php:70
 msgid ""
@@ -2631,7 +2631,7 @@ msgstr "Nesprávné přihlašovací údaje. Prosím zkuste to znovu."
 
 #: application/forms/AppearanceSettings.php:22
 msgid "Use Square Thumbnails"
-msgstr ""
+msgstr "Použít čtvercové náhledy"
 
 #: application/forms/AppearanceSettings.php:23
 msgid ""
@@ -3386,19 +3386,19 @@ msgstr ""
 
 #: application/models/Job/ItemBatchEditAll.php:106
 msgid "User is not allowed to delete this item."
-msgstr ""
+msgstr "Uživatel nesmí smazat tuto položku."
 
 #: application/models/Job/ItemBatchEditAll.php:113
 msgid "User is not allowed to edit this item."
-msgstr ""
+msgstr "Uživatel nesmí upravovat tuto položku."
 
 #: application/models/Job/ItemBatchEditAll.php:119
 msgid "User is not allowed to tag this item."
-msgstr ""
+msgstr "Uživatel nemá oprávnění přidávat štítek k této položce.."
 
 #: application/models/Job/ItemBatchEditAll.php:142
 msgid "The item was successfully deleted."
-msgstr ""
+msgstr "Položka úspěšně smazána."
 
 #: application/models/Job/ItemBatchEditAll.php:154
 #, php-format
@@ -3620,7 +3620,7 @@ msgstr "Pole záznamů není použitelné pro cyklus."
 #: application/views/helpers/MaxFileSize.php:44
 #, php-format
 msgid "%s MB"
-msgstr ""
+msgstr "%s MB"
 
 #: application/views/helpers/RecordUrl.php:34
 msgid "Invalid record passed while getting record URL."

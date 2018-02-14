@@ -5,17 +5,18 @@
 # Translators:
 # Masaki Hidano <MasaGon@info-lounge.jp>, 2013
 # Masaki Hidano <MasaGon@info-lounge.jp>, 2013
+# かも なお, 2018
 # Takayuki Ako <ako.t.aa@m.titech.ac.jp>, 2016
 # あこたかゆき <inactive+akotaka@transifex.com>, 2014
-# YASUSHI INOUE <yasushi.inoue@gmail.com>, 2012
+# snowy <yasushi.inoue@gmail.com>, 2012
 # Yuki Shira <shirayuking@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2016-12-15 22:50+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2018-01-31 09:03+0000\n"
+"Last-Translator: かも なお\n"
 "Language-Team: Japanese (http://www.transifex.com/omeka/omeka/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -189,7 +190,7 @@ msgid ""
 "was included in the `files` table in previous versions of Omeka. These "
 "elements are common to all Omeka files. This set may be deprecated in future"
 " versions."
-msgstr ""
+msgstr "Dublin Core要素セットに加えて、以前のバージョンのOmekaの `files`テーブルに含まれていたメタデータ要素セット。 これらの要素はすべてのOmekaファイルに共通です。 このセットは、将来のバージョンで廃止される可能性があります。"
 
 #. Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
@@ -883,7 +884,7 @@ msgstr "サムネイル"
 
 #: admin/themes/default/files/show.php:46
 msgid "Square Thumbnail"
-msgstr ""
+msgstr "正方形のサムネイル"
 
 #: admin/themes/default/files/show.php:52
 #: application/views/scripts/files/show.php:22
@@ -908,7 +909,7 @@ msgstr "ファイルサイズ"
 #: application/views/scripts/files/show.php:30
 #, php-format
 msgid "%s bytes"
-msgstr ""
+msgstr "%s bytes"
 
 #: admin/themes/default/files/show.php:64
 msgid "File History"
@@ -931,7 +932,7 @@ msgstr ""
 #: admin/themes/default/files/show.php:78
 #: application/views/scripts/files/show.php:42
 msgid "Mime Type"
-msgstr ""
+msgstr "Mime Type"
 
 #: admin/themes/default/files/show.php:80
 #: application/views/scripts/files/show.php:46
@@ -1044,7 +1045,7 @@ msgstr "要素"
 #: admin/themes/default/items/tag-form.php:22
 #: admin/themes/default/settings/edit-item-type-elements.php:22
 msgid "Undo"
-msgstr ""
+msgstr "元に戻す"
 
 #: admin/themes/default/item-types/form.php:80
 #: admin/themes/default/item-types/form.php:87
@@ -1263,7 +1264,7 @@ msgstr "アイテムを検索"
 #: admin/themes/default/items/browse.php:129
 #, php-format
 msgid "Select all %s results"
-msgstr ""
+msgstr "%s個すべての結果を選択"
 
 #: admin/themes/default/items/browse.php:27
 #: admin/themes/default/items/browse.php:130
@@ -1389,13 +1390,13 @@ msgstr ""
 #: application/views/helpers/ItemSearchFilters.php:108
 #: application/views/scripts/items/search-form.php:55
 msgid "AND"
-msgstr ""
+msgstr "AND"
 
 #: admin/themes/default/items/search-form.php:60
 #: application/views/helpers/ItemSearchFilters.php:106
 #: application/views/scripts/items/search-form.php:56
 msgid "OR"
-msgstr ""
+msgstr "OR"
 
 #: admin/themes/default/items/search-form.php:67
 #: application/views/scripts/items/search-form.php:63

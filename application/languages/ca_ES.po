@@ -5,7 +5,7 @@
 # Translators:
 # Miquel Àngel <ma.serra@gmail.com>, 2013
 # Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>, 2013
-# Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>, 2013-2016
+# Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>, 2013-2017
 # Sergi Montes <sergi.blanes@gmail.com>, 2013
 # Sergi Montes <sergi.blanes@gmail.com>, 2013
 msgid ""
@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2016-12-15 22:50+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2017-09-23 18:41+0000\n"
+"Last-Translator: Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>\n"
 "Language-Team: Catalan (Spain) (http://www.transifex.com/omeka/omeka/language/ca_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -116,7 +116,7 @@ msgstr "Format"
 
 #. Dublin Core: Format element description
 msgid "The file format, physical medium, or dimensions of the resource"
-msgstr "El format del fitxer, medi físic o dimensions del recurs"
+msgstr "El format del fitxer, mitjà físic o dimensions del recurs"
 
 #. Dublin Core: Identifier element name
 msgid "Identifier"
@@ -416,7 +416,7 @@ msgstr "Visualitza la pàgina pública"
 #: admin/themes/default/users/edit.php:26
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:83
 msgid "Delete"
-msgstr "Esborra"
+msgstr "Suprimeix"
 
 #: admin/themes/default/appearance/reset-navigation-confirm.php:9
 #: admin/themes/default/common/delete-confirm.php:10
@@ -491,12 +491,12 @@ msgstr "(%s total)"
 #, php-format
 msgid "%sOne item%s has no collection."
 msgid_plural "%s%d items%s aren't in a collection."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%sUn ítem%s no té col·lecció"
+msgstr[1] "%s%d ítems%s no es troben en una col·lecció"
 
 #: admin/themes/default/collections/browse.php:19
 msgid "All items are in a collection."
-msgstr ""
+msgstr "Tots els ítems es troben dins d'una col·lecció."
 
 #: admin/themes/default/collections/browse.php:30
 #: admin/themes/default/collections/show.php:51
@@ -667,7 +667,7 @@ msgstr "Etiquetes"
 #: application/views/scripts/common/delete-confirm.php:3
 #, php-format
 msgid "Delete %s"
-msgstr "Esborra %s"
+msgstr "Suprimeix %s"
 
 #: admin/themes/default/common/footer.php:6
 #: admin/themes/default/common/login-footer.php:7
@@ -1100,59 +1100,59 @@ msgstr "Col·lecció"
 
 #: admin/themes/default/items/batch-delete-all.php:2
 msgid "Batch Delete All Searched Items"
-msgstr ""
+msgstr "Suprimeix en lot tots els ítems recuperats"
 
 #: admin/themes/default/items/batch-delete-all.php:18
 #, php-format
 msgid "All %d items matching the search filters above will be deleted."
-msgstr ""
+msgstr "Se suprimiran els %d ítems que coincideixen amb els filtres de cerca"
 
 #: admin/themes/default/items/batch-delete-all.php:20
 #, php-format
 msgid "All %d items will be deleted."
-msgstr ""
+msgstr "Els %d ítems se suprimiran."
 
 #: admin/themes/default/items/batch-delete-all.php:25
 msgid "Deletions will be processed in the background item by item."
-msgstr ""
+msgstr "Les supressions es processaran en segon pla ítem per ítem."
 
 #: admin/themes/default/items/batch-delete-all.php:36
 #: admin/themes/default/items/batch-delete.php:47
 #: admin/themes/default/items/batch-edit.php:47
 msgid "Delete Items"
-msgstr "Elimina els ítems"
+msgstr "Suprimeix els ítems"
 
 #: admin/themes/default/items/batch-delete.php:2
 msgid "Batch Delete Items"
-msgstr "Elimina els ítems en lot"
+msgstr "Suprimeix els ítems en lot"
 
 #: admin/themes/default/items/batch-delete.php:36
 msgid ""
 "Some items were excluded because you do not have permission to delete them."
-msgstr "Alguns ítems han estat exclosos perquè no teniu permisos per esborrar-los"
+msgstr "Alguns ítems s'han exclòs perquè no teniu permisos per suprimir-los"
 
 #: admin/themes/default/items/batch-delete.php:39
 msgid "Checked items will be deleted."
-msgstr "Els elements seleccionats seran eliminats."
+msgstr "Els elements seleccionats seran suprimits."
 
 #: admin/themes/default/items/batch-edit-all.php:2
 msgid "Batch Edit All Searched Items"
-msgstr ""
+msgstr "Editeu en lot tots els ítems recuperats"
 
 #: admin/themes/default/items/batch-edit-all.php:20
 #, php-format
 msgid ""
 "Changes will be applied to all %d items matching the search filters above."
-msgstr ""
+msgstr "Els canvis s'aplicaran als %d ítems que coincideixin amb els filtres anteriors."
 
 #: admin/themes/default/items/batch-edit-all.php:22
 #, php-format
 msgid "Changes will be applied to all %d items."
-msgstr ""
+msgstr "Els canvis s'aplicaran als %d ítems."
 
 #: admin/themes/default/items/batch-edit-all.php:27
 msgid "Changes will be processed in the background item by item."
-msgstr ""
+msgstr "Els canvis es processaran en segon pla ítem per ítem."
 
 #: admin/themes/default/items/batch-edit-common.php:2
 msgid "Item Metadata"
@@ -1212,7 +1212,7 @@ msgstr "Els canvis s'aplicaran als ítems seleccionats"
 
 #: admin/themes/default/items/batch-edit.php:48
 msgid "Check if you wish to delete selected items."
-msgstr "Marqueu-la si voleu eliminar els ítems seleccionats."
+msgstr "Marqueu-lo si voleu suprimir els ítems seleccionats."
 
 #: admin/themes/default/items/browse.php:3
 #: application/libraries/Omeka/Navigation.php:142
@@ -1268,21 +1268,21 @@ msgstr "Cerca ítems."
 #: admin/themes/default/items/browse.php:129
 #, php-format
 msgid "Select all %s results"
-msgstr ""
+msgstr "Selecciona els %s resultats"
 
 #: admin/themes/default/items/browse.php:27
 #: admin/themes/default/items/browse.php:130
 msgid "items selected"
-msgstr ""
+msgstr "Ítems seleccionats"
 
 #: admin/themes/default/items/browse.php:43
 msgid "Select all rows"
-msgstr ""
+msgstr "Selecciona totes les files"
 
 #: admin/themes/default/items/browse.php:64
 #, php-format
 msgid "Select item \"%s\""
-msgstr ""
+msgstr "Selecciona l'ítem \"%s\""
 
 #: admin/themes/default/items/browse.php:109
 msgid "No Tags"
@@ -1335,7 +1335,7 @@ msgstr "Feu clic i arrossegueu els fitxers en l'ordre de visualització desitjat
 
 #: admin/themes/default/items/files-form.php:13
 msgid "Delete "
-msgstr "Elimina"
+msgstr "Suprimeix"
 
 #: admin/themes/default/items/files-form.php:22
 msgid "Add New Files"
@@ -1389,19 +1389,19 @@ msgstr "Afegeix un camp"
 #: admin/themes/default/items/search-form.php:54
 #: application/views/scripts/items/search-form.php:50
 msgid "Search Joiner"
-msgstr ""
+msgstr "Search Joiner"
 
 #: admin/themes/default/items/search-form.php:59
 #: application/views/helpers/ItemSearchFilters.php:108
 #: application/views/scripts/items/search-form.php:55
 msgid "AND"
-msgstr ""
+msgstr "I"
 
 #: admin/themes/default/items/search-form.php:60
 #: application/views/helpers/ItemSearchFilters.php:106
 #: application/views/scripts/items/search-form.php:56
 msgid "OR"
-msgstr ""
+msgstr "O"
 
 #: admin/themes/default/items/search-form.php:67
 #: application/views/scripts/items/search-form.php:63
@@ -1430,7 +1430,7 @@ msgstr "es exactament"
 
 #: admin/themes/default/items/search-form.php:88
 msgid "is not exactly"
-msgstr ""
+msgstr "No és exactament"
 
 #: admin/themes/default/items/search-form.php:89
 #: application/views/scripts/items/search-form.php:84
@@ -1445,20 +1445,20 @@ msgstr "No està buit"
 #: admin/themes/default/items/search-form.php:91
 #: application/views/scripts/items/search-form.php:86
 msgid "starts with"
-msgstr ""
+msgstr "comença amb"
 
 #: admin/themes/default/items/search-form.php:92
 #: application/views/scripts/items/search-form.php:87
 msgid "ends with"
-msgstr ""
+msgstr "finalitza amb"
 
 #: admin/themes/default/items/search-form.php:93
 msgid "matches"
-msgstr ""
+msgstr "coincideix"
 
 #: admin/themes/default/items/search-form.php:94
 msgid "does not match"
-msgstr ""
+msgstr "no coincideix"
 
 #: admin/themes/default/items/search-form.php:102
 #: application/views/scripts/items/search-form.php:95
@@ -1721,7 +1721,7 @@ msgid ""
 "adding, editing, and deleting content, is protected and requires key "
 "authentication. Each key corresponds to, and has all permissions of, an "
 "existing Omeka user. You can create keys on each user's %sedit page%s."
-msgstr "Després d'habilitar l'API, les aplicacions poden mostrar, navegar, afegir, editar i eliminar els recursos del portal. Visualitzar contingut protegit, així com afegir, editar i eliminar contingut, està restringit i requereix l'autenticació amb la clau. Cada clau correspon a un usuari existent d'Omeka i té tots els permisos. Podeu crear claus per cada usuari a la %spàgina d'edició%s."
+msgstr "Després d'habilitar l'API, les aplicacions poden mostrar, navegar, afegir, editar i suprimir els recursos del portal. Visualitzar contingut protegit, així com afegir, editar i eliminar contingut, està restringit i requereix l'autenticació amb la clau. Cada clau correspon a un usuari existent d'Omeka i té tots els permisos. Podeu crear claus per cada usuari a la %spàgina d'edició%s."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:12
 msgid "edit a specific item type"
@@ -1735,14 +1735,14 @@ msgstr "Personalitza les descripcions dels elements a continuació. Per a reorde
 
 #: admin/themes/default/settings/edit-item-type-elements.php:43
 msgid "Confirm Delete"
-msgstr "Confirmeu que voleu eliminar"
+msgstr "Confirmeu que voleu suprimir"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:44
 msgid ""
 "Are you sure you want to delete the selected item type elements from the "
 "database? You will lose all text related to the selected elements. This "
 "cannot be undone."
-msgstr "Esteu segur que voleu eliminar els tipus d'ítems següents de la base de dades? Es perdrà tot aquell text relacionat amb els elements triats. Aquesta acció no es podrà desfer."
+msgstr "Esteu segur que voleu suprimir els tipus d'ítems següents de la base de dades? Es perdrà tot aquell text relacionat amb els elements triats. Aquesta acció no es podrà desfer."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:51
 msgid "Ok"
@@ -1820,7 +1820,7 @@ msgstr "Per editar el nom de l'etiqueta feu clic al nom i comenceu a editar-lo. 
 msgid ""
 "To delete a tag, click the X. Deleting a tag will not delete the tagged "
 "items."
-msgstr "Per esborrar una etiqueta feu clic a la X. Si s'esborra una etiqueta no s'esborren els ítems etiquetats amb aquesta."
+msgstr "Per suprimir una etiqueta feu clic a la X. Si se suprimeix una etiqueta, no se suprimeixen els ítems etiquetats amb aquesta."
 
 #: admin/themes/default/tags/browse.php:39
 msgid "Most"
@@ -2081,7 +2081,7 @@ msgstr "Entra"
 
 #: admin/themes/default/users/login.php:8
 msgid "Go to the public site"
-msgstr ""
+msgstr "Visita la interfície pública"
 
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
@@ -2146,12 +2146,12 @@ msgstr "La col·lecció \"%s\" s'ha modificat correctament!"
 #: application/controllers/CollectionsController.php:96
 #, php-format
 msgid "The collection \"%s\" was successfully deleted!"
-msgstr "La col·lecció \"%s\" s'ha eliminat correctament!"
+msgstr "La col·lecció \"%s\" s'ha suprimit correctament!"
 
 #: application/controllers/CollectionsController.php:98
 #, php-format
 msgid "The collection #%s was successfully deleted!"
-msgstr "La col·lecció \"%s\" s'ha eliminat correctament!"
+msgstr "La col·lecció #%s s'ha suprimit correctament!"
 
 #: application/controllers/CollectionsController.php:106
 #, php-format
@@ -2159,7 +2159,7 @@ msgid ""
 "This will delete the collection \"%s\" and its associated metadata. This "
 "will not delete any items in this collection, but will delete the reference "
 "to this collection in each item."
-msgstr "Això esborrarà la col·lecció \"%s\" i les metadades associades. Això no eliminarà els ítems que formen part de la col·lecció, però eliminarà qualsevol referència a aquesta col·lecció en cadascun dels ítems."
+msgstr "Això suprimirà la col·lecció \"%s\" i les metadades associades. Això no suprimirà els ítems que formen part de la col·lecció, però suprimirà qualsevol referència a aquesta col·lecció en cadascun dels ítems."
 
 #: application/controllers/CollectionsController.php:110
 #, php-format
@@ -2167,13 +2167,13 @@ msgid ""
 "This will delete the collection #%s and its associated metadata. This will "
 "not delete any items in this collection, but will delete the reference to "
 "this collection in each item."
-msgstr "Això esborrarà la col·lecció #%s i les metadades associades. Això no eliminarà els ítems que formen part de la col·lecció, però eliminarà qualsevol referència a aquesta col·lecció en cadascun dels ítems."
+msgstr "Això suprimirà la col·lecció #%s i les metadades associades. Això no suprimirà els ítems que formen part de la col·lecció, però suprimirà qualsevol referència a aquesta col·lecció en cadascun dels ítems."
 
 #: application/controllers/ElementSetsController.php:21
 msgid ""
 "This will delete the element set and all elements assigned to the element "
 "set. Items will lose all metadata that is specific to this element set."
-msgstr "Això eliminarà el conjunt d'elements i tots els elements assignats al conjunt d'elements. Els ítems perdran totes les metadades que són específiques d'aquest conjunt d'elements."
+msgstr "Això suprimirà el conjunt d'elements i tots els elements assignats al conjunt d'elements. Els ítems perdran totes les metadades que són específiques d'aquest conjunt d'elements."
 
 #: application/controllers/ElementSetsController.php:53
 #: application/controllers/PluginsController.php:51
@@ -2205,11 +2205,11 @@ msgstr "Accés denegat."
 
 #: application/controllers/FilesController.php:66
 msgid "This will delete the file and its associated metadata."
-msgstr "Això esborrarà el fitxer i les seves metadades associades."
+msgstr "Això suprimirà el fitxer i les seves metadades associades."
 
 #: application/controllers/FilesController.php:72
 msgid "The file was successfully deleted."
-msgstr "El fitxer s'ha esborrat correctament."
+msgstr "El fitxer s'ha suprimit correctament."
 
 #: application/controllers/ItemTypesController.php:28
 #, php-format
@@ -2227,7 +2227,7 @@ msgid ""
 "This will delete the \"%s\" item type but will not delete the elements "
 "assigned to the item type. Items that are assigned to this item type will "
 "lose all metadata that is specific to the item type."
-msgstr "Això esborrarà el tipus d'ítem \"%s\" però no esborrarà els elements assignats a aquest tipus d'ítem. Els ítems que tenen associat aquest tipus d'ítem perdran totes aquelles metadades específiques d'aquest tipus d'ítem."
+msgstr "Això suprimirà el tipus d'ítem \"%s\" però no suprimirà els elements assignats a aquest tipus d'ítem. Els ítems que tenen associat aquest tipus d'ítem perdran totes aquelles metadades específiques d'aquest tipus d'ítem."
 
 #: application/controllers/ItemTypesController.php:158
 #, php-format
@@ -2267,36 +2267,36 @@ msgstr "L'ítem #%s s'ha modificat correctament!"
 #: application/controllers/ItemsController.php:118
 #, php-format
 msgid "The item \"%s\" was successfully deleted!"
-msgstr "L'ítem \"%s\" s'ha eliminat correctament!"
+msgstr "L'ítem \"%s\" s'ha suprimit correctament!"
 
 #: application/controllers/ItemsController.php:120
 #, php-format
 msgid "The item #%s was successfully deleted!"
-msgstr "L'ítem #%s s'ha eliminat correctament!"
+msgstr "L'ítem #%s s'ha suprimit correctament!"
 
 #: application/controllers/ItemsController.php:128
 #, php-format
 msgid ""
 "This will delete the item \"%s\" and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr "Això eliminarà l'ítem \"%s\" i les metadades associades al mateix. També s'eliminaran tots els fitxers i les metadades dels fitxers associats a l'ítem."
+msgstr "Això suprimit l'ítem \"%s\" i les metadades associades al mateix. També se suprimiran tots els fitxers i les metadades dels fitxers associats a l'ítem."
 
 #: application/controllers/ItemsController.php:132
 #, php-format
 msgid ""
 "This will delete the item #%s and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr "Això esborrarà l'ítem #%s i les metadades associades al mateix. També s'esborraran tots els fitxers i les metadades dels fitxers associats a l'ítem."
+msgstr "Això suprimirà l'ítem #%s i les metadades associades al mateix. També se suprimiran tots els fitxers i les metadades dels fitxers associats a l'ítem."
 
 #: application/controllers/ItemsController.php:241
 #: application/controllers/ItemsController.php:376
 #: application/controllers/ItemsController.php:444
 msgid "No item to batch edit."
-msgstr ""
+msgstr "No hi ha cap ítem per editar en lot."
 
 #: application/controllers/ItemsController.php:248
 msgid "The deletion of all items is forbidden."
-msgstr ""
+msgstr "No es possible esborrar tots els ítems."
 
 #: application/controllers/ItemsController.php:265
 msgid "You must choose some items to batch edit."
@@ -2314,7 +2314,7 @@ msgstr "L'usuari no està autoritzat a modificar l'estat de destacat dels elemen
 
 #: application/controllers/ItemsController.php:326
 msgid "User is not allowed to delete selected items."
-msgstr "L'usuari no està autoritzat per esborrar els ítems seleccionats"
+msgstr "L'usuari no està autoritzat per suprimir els ítems seleccionats"
 
 #: application/controllers/ItemsController.php:332
 msgid "User is not allowed to edit selected items."
@@ -2326,7 +2326,7 @@ msgstr "L'usuari no està autoritzat per assignar etiquetes als ítems seleccion
 
 #: application/controllers/ItemsController.php:369
 msgid "The items were successfully deleted!"
-msgstr "Els ítems s'han eliminat correctament!"
+msgstr "Els ítems s'han suprimit correctament!"
 
 #: application/controllers/ItemsController.php:371
 msgid "The items were successfully changed!"
@@ -2334,15 +2334,15 @@ msgstr "Els ítems s'han modificat correctament!"
 
 #: application/controllers/ItemsController.php:436
 msgid "The items are checked and deleted one by one in the background."
-msgstr ""
+msgstr "Els ítems es comprovaran i suprimiran un per un en segon pla."
 
 #: application/controllers/ItemsController.php:438
 msgid "The items are checked and changed one by one in the background."
-msgstr ""
+msgstr "Els ítems es comprovaran i modificaran un per un en segon pla."
 
 #: application/controllers/ItemsController.php:440
 msgid "Check logs for success and errors."
-msgstr ""
+msgstr "Comproveu els registres per veure els processos correctes i els errors."
 
 #: application/controllers/PluginsController.php:45
 #, php-format
@@ -2591,7 +2591,7 @@ msgstr "Una clau d'API existent s'ha rescindit."
 #: application/controllers/UsersController.php:350
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
-msgstr "L'usuari \"%s\" s'ha eliminat correctament!"
+msgstr "L'usuari \"%s\" s'ha suprimit correctament!"
 
 #: application/controllers/UsersController.php:356
 #, php-format
@@ -2599,7 +2599,7 @@ msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
 "this user will remain in the system, but will no longer be associated with "
 "this user."
-msgstr "%s serà esborrat del sistema. Tots el ítems, col·leccions i etiquetes creades per aquest usuari romandran al sistema, però ja no estaran associades a aquest usuari."
+msgstr "%s serà suprimit del sistema. Tots el ítems, col·leccions i etiquetes creades per aquest usuari romandran al sistema, però ja no estaran associades a aquest usuari."
 
 #: application/controllers/UsersController.php:381
 msgid "Welcome!"
@@ -2623,13 +2623,13 @@ msgstr "Login incorrecte. Si us plau torneu a provar."
 
 #: application/forms/AppearanceSettings.php:22
 msgid "Use Square Thumbnails"
-msgstr ""
+msgstr "Utilitza miniatures quadrades"
 
 #: application/forms/AppearanceSettings.php:23
 msgid ""
 "Use square-cropped images by default wherever thumbnails appear in the "
 "public interface."
-msgstr ""
+msgstr "Utilitzeu  miniatures quadrades per defecte sempre que a la interfície pública es visualitzin miniatures."
 
 #: application/forms/AppearanceSettings.php:28
 #: application/forms/Install.php:128
@@ -2688,7 +2688,7 @@ msgstr "Mostra la capçalera del conjunt d'elements"
 
 #: application/forms/AppearanceSettings.php:78
 msgid "Admin Theme"
-msgstr ""
+msgstr "Plantilla de l'administració"
 
 #: application/forms/AppearanceSettings.php:92
 msgid "Derivative Size Constraints"
@@ -2700,7 +2700,7 @@ msgstr "Paràmetres de visualització"
 
 #: application/forms/AppearanceSettings.php:108
 msgid "Admin Themes"
-msgstr ""
+msgstr "Plantilles de l'administració"
 
 #: application/forms/ChangePassword.php:25
 msgid "Current Password"
@@ -2891,7 +2891,7 @@ msgstr "URI invàlid per l'enllaç \"%s\" de navegació: \"%s\""
 
 #: application/forms/Navigation.php:383
 msgid "Navigation links that have undeleteable sublinks cannot be deleted."
-msgstr "Els enllaços de navegació que tenen associats enllaços de nivell inferior no poden ser eliminats."
+msgstr "Els enllaços de navegació que tenen associats enllaços de nivell inferior no poden ser suprimits."
 
 #: application/forms/RecoverPassword.php:36
 msgid "Email address is required."
@@ -3347,62 +3347,62 @@ msgstr "Paràmetre invàlid. La funció hasElement requereix o bé un objecte de
 
 #: application/models/Job/ItemBatchEditAll.php:41
 msgid "Batch Edit All Items: No item matches the specified filters."
-msgstr ""
+msgstr "Edita en lot tots els ítems: cap ítem coincideix amb els filtres especificats."
 
 #: application/models/Job/ItemBatchEditAll.php:48
 #, php-format
 msgid "Batch Edit: Starting processing 1 item."
 msgid_plural "Batch Edit: Starting processing %d items."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Edicio en lot: començant el processament d'1 ítem."
+msgstr[1] "Edició en lot: començant el processament de %d ítems."
 
 #: application/models/Job/ItemBatchEditAll.php:67
 #, php-format
 msgid ""
 "Batch Edit: A total of %d errors occurred during the batch process of %d "
 "items."
-msgstr ""
+msgstr "Edició en lot: S'han trobat %d errors durant el processament en lot dels %d ítems"
 
 #: application/models/Job/ItemBatchEditAll.php:74
 #, php-format
 msgid "Batch Edit: The item has been processed successfully."
 msgid_plural "Batch Edit: All %d items have been processed successfully."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Edició en lot: L'ítem s'ha processat correctament."
+msgstr[1] "Edició en lot: Els %d ítems s'han processat correctament."
 
 #: application/models/Job/ItemBatchEditAll.php:91
 msgid "Item does not exist: it may have been deleted before processing."
-msgstr ""
+msgstr "L'ítem no existeix: potser l'heu suprimit abans de ser processat."
 
 #: application/models/Job/ItemBatchEditAll.php:106
 msgid "User is not allowed to delete this item."
-msgstr ""
+msgstr "L'usuari no té permís per suprimir aquest ítem."
 
 #: application/models/Job/ItemBatchEditAll.php:113
 msgid "User is not allowed to edit this item."
-msgstr ""
+msgstr "L'usuari no té permís per editar aquest ítem."
 
 #: application/models/Job/ItemBatchEditAll.php:119
 msgid "User is not allowed to tag this item."
-msgstr ""
+msgstr "L'usuari no té permís per etiquetar aquest ítem."
 
 #: application/models/Job/ItemBatchEditAll.php:142
 msgid "The item was successfully deleted."
-msgstr ""
+msgstr "L’ítem s’ha suprimit correctament."
 
 #: application/models/Job/ItemBatchEditAll.php:154
 #, php-format
 msgid "An error occured when the item was updated: %s"
-msgstr ""
+msgstr "Ha ocorregut un error en carregar el fitxer: %s"
 
 #: application/models/Job/ItemBatchEditAll.php:159
 msgid "The item was successfully batch-edited."
-msgstr ""
+msgstr "L’ítem s’ha editat en lot correctament."
 
 #: application/models/Job/ItemBatchEditAll.php:178
 #, php-format
 msgid "Batch Edit Item #%d [%d/%d]: %s"
-msgstr ""
+msgstr "Edició en lot ítem #%d [%d/%d]: %s"
 
 #: application/models/Mixin/ElementText.php:293
 #, php-format
@@ -3610,7 +3610,7 @@ msgstr "La matriu de registres no està disponible per aquesta iteració"
 #: application/views/helpers/MaxFileSize.php:44
 #, php-format
 msgid "%s MB"
-msgstr ""
+msgstr "%s MB"
 
 #: application/views/helpers/RecordUrl.php:34
 msgid "Invalid record passed while getting record URL."

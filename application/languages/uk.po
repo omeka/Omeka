@@ -6,14 +6,15 @@
 # evilinstone <evilinstone@gmail.com>, 2013
 # evilinstone <evilinstone@gmail.com>, 2013
 # Izoniz <izonizne@mail.ru>, 2013-2014
+# tanya chorna <tanya.chorna@gmail.com>, 2017
 # Yurii Kostiuk <kostyuk.yuiriy@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2016-12-15 22:50+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2017-09-19 14:53+0000\n"
+"Last-Translator: tanya chorna <tanya.chorna@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/omeka/omeka/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +27,7 @@ msgid ""
 "The Dublin Core metadata element set is common to all Omeka records, "
 "including items, files, and collections. For more information see, "
 "http://dublincore.org/documents/dces/."
-msgstr ""
+msgstr "Набір елементів метаданих Дублінського ядра загальний для всіх Omeka записів, включаючи елементи, файли та колекції. Детальніше дивитись http://dublincore.org/documents/dces/."
 
 #. Dublin Core: Title element name
 #: admin/themes/default/collections/browse.php:29
@@ -58,7 +59,7 @@ msgstr "Тема"
 
 #. Dublin Core: Subject element description
 msgid "The topic of the resource"
-msgstr ""
+msgstr "Тема ресурсу"
 
 #. Dublin Core: Description element name
 #: admin/themes/default/element-sets/browse.php:17
@@ -98,7 +99,7 @@ msgstr "Дата"
 msgid ""
 "A point or period of time associated with an event in the lifecycle of the "
 "resource"
-msgstr ""
+msgstr "Точка або період часу, що пов'язана з подією в життєвому циклі ресурсу"
 
 #. Dublin Core: Type element name
 #: admin/themes/default/items/browse.php:48
@@ -107,7 +108,7 @@ msgstr "Тип"
 
 #. Dublin Core: Type element description
 msgid "The nature or genre of the resource"
-msgstr ""
+msgstr "Природа або жанр ресурсу"
 
 #. Dublin Core: Format element name
 msgid "Format"
@@ -115,7 +116,7 @@ msgstr "Формат"
 
 #. Dublin Core: Format element description
 msgid "The file format, physical medium, or dimensions of the resource"
-msgstr ""
+msgstr "Формат файлу, фізичний носій чи розміри ресурсу"
 
 #. Dublin Core: Identifier element name
 msgid "Identifier"
@@ -139,7 +140,7 @@ msgstr "Мова"
 
 #. Dublin Core: Language element description
 msgid "A language of the resource"
-msgstr ""
+msgstr "Мова ресурсу"
 
 #. Dublin Core: Relation element name
 msgid "Relation"
@@ -147,7 +148,7 @@ msgstr "Зв'язки"
 
 #. Dublin Core: Relation element description
 msgid "A related resource"
-msgstr ""
+msgstr "Пов'язаний ресурс"
 
 #. Dublin Core: Coverage element name
 msgid "Coverage"
@@ -867,11 +868,11 @@ msgstr "Елемент"
 
 #: admin/themes/default/files/show.php:40
 msgid "Direct Links"
-msgstr ""
+msgstr "Прямі посилання"
 
 #: admin/themes/default/files/show.php:42
 msgid "Original"
-msgstr ""
+msgstr "Оригінал"
 
 #: admin/themes/default/files/show.php:44
 msgid "Fullsize"

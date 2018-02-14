@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2017-01-30 09:52+0000\n"
+"PO-Revision-Date: 2017-09-23 19:09+0000\n"
 "Last-Translator: Rivo Zängov <eraser@eraser.ee>\n"
 "Language-Team: Estonian (http://www.transifex.com/omeka/omeka/language/et/)\n"
 "MIME-Version: 1.0\n"
@@ -489,12 +489,12 @@ msgstr "(%s kokku)"
 #, php-format
 msgid "%sOne item%s has no collection."
 msgid_plural "%s%d items%s aren't in a collection."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%sÜks ühik%s pole üheski kogus."
+msgstr[1] "%s%d ühikut%s pole üheski kogus."
 
 #: admin/themes/default/collections/browse.php:19
 msgid "All items are in a collection."
-msgstr ""
+msgstr "Kõik ühikud on määratud kogudesse"
 
 #: admin/themes/default/collections/browse.php:30
 #: admin/themes/default/collections/show.php:51
@@ -574,7 +574,7 @@ msgstr "Redigeeri kogu #%s"
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Collection #%s"
-msgstr ""
+msgstr "Kogu #%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
@@ -1098,7 +1098,7 @@ msgstr "Kogu"
 
 #: admin/themes/default/items/batch-delete-all.php:2
 msgid "Batch Delete All Searched Items"
-msgstr ""
+msgstr "Kustuta korraga kõik leitud ühikud"
 
 #: admin/themes/default/items/batch-delete-all.php:18
 #, php-format
@@ -1108,11 +1108,11 @@ msgstr ""
 #: admin/themes/default/items/batch-delete-all.php:20
 #, php-format
 msgid "All %d items will be deleted."
-msgstr ""
+msgstr "Kõik %d ühikut kustutatakse."
 
 #: admin/themes/default/items/batch-delete-all.php:25
 msgid "Deletions will be processed in the background item by item."
-msgstr ""
+msgstr "Kustutamised tehakse taustal ükshaaval."
 
 #: admin/themes/default/items/batch-delete-all.php:36
 #: admin/themes/default/items/batch-delete.php:47
@@ -1135,7 +1135,7 @@ msgstr "Linnukesega märgitud ühikud kustutatakse."
 
 #: admin/themes/default/items/batch-edit-all.php:2
 msgid "Batch Edit All Searched Items"
-msgstr ""
+msgstr "Muuda korraga kõiki leitud ühikuid"
 
 #: admin/themes/default/items/batch-edit-all.php:20
 #, php-format
@@ -2340,7 +2340,7 @@ msgstr ""
 
 #: application/controllers/ItemsController.php:440
 msgid "Check logs for success and errors."
-msgstr ""
+msgstr "Kontrolli kordaminekute ja ebaõnnestumiste logi."
 
 #: application/controllers/PluginsController.php:45
 #, php-format

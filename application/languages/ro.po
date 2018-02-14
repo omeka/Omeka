@@ -5,14 +5,14 @@
 # Translators:
 # Doru  DEACONU <dumitrudeaconu@yahoo.com>, 2014
 # Doru  DEACONU <dumitrudeaconu@yahoo.com>, 2014
-# Nicolaie Constantinescu <kosson@gmail.com>, 2011-2015
+# Nicolaie Constantinescu <kosson@gmail.com>, 2011-2015,2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2016-12-15 22:50+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2017-09-23 18:07+0000\n"
+"Last-Translator: Nicolaie Constantinescu <kosson@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/omeka/omeka/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -495,7 +495,7 @@ msgstr[2] ""
 
 #: admin/themes/default/collections/browse.php:19
 msgid "All items are in a collection."
-msgstr ""
+msgstr "Toate elementele se află în colecție"
 
 #: admin/themes/default/collections/browse.php:30
 #: admin/themes/default/collections/show.php:51
@@ -575,7 +575,7 @@ msgstr "Editează colecția #%s"
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Collection #%s"
-msgstr ""
+msgstr "Colecția #%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
@@ -1104,21 +1104,21 @@ msgstr "Colecție"
 
 #: admin/themes/default/items/batch-delete-all.php:2
 msgid "Batch Delete All Searched Items"
-msgstr ""
+msgstr "Șterge toate resursele regăsite"
 
 #: admin/themes/default/items/batch-delete-all.php:18
 #, php-format
 msgid "All %d items matching the search filters above will be deleted."
-msgstr ""
+msgstr "Toate elementele %d care se potrivesc filtrelor de mai sus, vor fi șterse."
 
 #: admin/themes/default/items/batch-delete-all.php:20
 #, php-format
 msgid "All %d items will be deleted."
-msgstr ""
+msgstr "Toate resursele %d vor fi șterse."
 
 #: admin/themes/default/items/batch-delete-all.php:25
 msgid "Deletions will be processed in the background item by item."
-msgstr ""
+msgstr "Ștergerile vor fi procesate în fundal resursă cu resursă."
 
 #: admin/themes/default/items/batch-delete-all.php:36
 #: admin/themes/default/items/batch-delete.php:47
@@ -1141,22 +1141,22 @@ msgstr "Resursele verificate vor fi șterse."
 
 #: admin/themes/default/items/batch-edit-all.php:2
 msgid "Batch Edit All Searched Items"
-msgstr ""
+msgstr "Editează întreg setul de resurse găsite"
 
 #: admin/themes/default/items/batch-edit-all.php:20
 #, php-format
 msgid ""
 "Changes will be applied to all %d items matching the search filters above."
-msgstr ""
+msgstr "Modificările se vor aplica tuturor celor %d resurse care se potrivesc filtrelor de căutare de mai sus."
 
 #: admin/themes/default/items/batch-edit-all.php:22
 #, php-format
 msgid "Changes will be applied to all %d items."
-msgstr ""
+msgstr "Modificările se vor aplica tuturor celor %d resurse."
 
 #: admin/themes/default/items/batch-edit-all.php:27
 msgid "Changes will be processed in the background item by item."
-msgstr ""
+msgstr "Modificările vor fi procesate în fundal resursă cu resursă."
 
 #: admin/themes/default/items/batch-edit-common.php:2
 msgid "Item Metadata"
@@ -1272,21 +1272,21 @@ msgstr "Caută resurse"
 #: admin/themes/default/items/browse.php:129
 #, php-format
 msgid "Select all %s results"
-msgstr ""
+msgstr "Selectează toate cele %s rezultate"
 
 #: admin/themes/default/items/browse.php:27
 #: admin/themes/default/items/browse.php:130
 msgid "items selected"
-msgstr ""
+msgstr "resurse selectate"
 
 #: admin/themes/default/items/browse.php:43
 msgid "Select all rows"
-msgstr ""
+msgstr "Selectează toate rândurile"
 
 #: admin/themes/default/items/browse.php:64
 #, php-format
 msgid "Select item \"%s\""
-msgstr ""
+msgstr "Selectează resursa \"%s\""
 
 #: admin/themes/default/items/browse.php:109
 msgid "No Tags"
@@ -1394,19 +1394,19 @@ msgstr "Adaugă un câmp"
 #: admin/themes/default/items/search-form.php:54
 #: application/views/scripts/items/search-form.php:50
 msgid "Search Joiner"
-msgstr ""
+msgstr "Caută operator"
 
 #: admin/themes/default/items/search-form.php:59
 #: application/views/helpers/ItemSearchFilters.php:108
 #: application/views/scripts/items/search-form.php:55
 msgid "AND"
-msgstr ""
+msgstr "ȘI"
 
 #: admin/themes/default/items/search-form.php:60
 #: application/views/helpers/ItemSearchFilters.php:106
 #: application/views/scripts/items/search-form.php:56
 msgid "OR"
-msgstr ""
+msgstr "SAU"
 
 #: admin/themes/default/items/search-form.php:67
 #: application/views/scripts/items/search-form.php:63
@@ -1435,7 +1435,7 @@ msgstr "este exact"
 
 #: admin/themes/default/items/search-form.php:88
 msgid "is not exactly"
-msgstr ""
+msgstr "nu e chiar"
 
 #: admin/themes/default/items/search-form.php:89
 #: application/views/scripts/items/search-form.php:84
@@ -1450,20 +1450,20 @@ msgstr "nu este gol"
 #: admin/themes/default/items/search-form.php:91
 #: application/views/scripts/items/search-form.php:86
 msgid "starts with"
-msgstr ""
+msgstr "începe cu"
 
 #: admin/themes/default/items/search-form.php:92
 #: application/views/scripts/items/search-form.php:87
 msgid "ends with"
-msgstr ""
+msgstr "se încheie cu"
 
 #: admin/themes/default/items/search-form.php:93
 msgid "matches"
-msgstr ""
+msgstr "găsește"
 
 #: admin/themes/default/items/search-form.php:94
 msgid "does not match"
-msgstr ""
+msgstr "nu găsește"
 
 #: admin/themes/default/items/search-form.php:102
 #: application/views/scripts/items/search-form.php:95
@@ -2086,7 +2086,7 @@ msgstr "Login"
 
 #: admin/themes/default/users/login.php:8
 msgid "Go to the public site"
-msgstr ""
+msgstr "Mergi pe site-ul public"
 
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
@@ -2297,11 +2297,11 @@ msgstr "Acest lucru va șterge resursa  #%s și metadatele asociate. Va șterge 
 #: application/controllers/ItemsController.php:376
 #: application/controllers/ItemsController.php:444
 msgid "No item to batch edit."
-msgstr ""
+msgstr "Niciun element pentru editare la nivel de grup"
 
 #: application/controllers/ItemsController.php:248
 msgid "The deletion of all items is forbidden."
-msgstr ""
+msgstr "Ștergerea tuturor resurselor este interzisă."
 
 #: application/controllers/ItemsController.php:265
 msgid "You must choose some items to batch edit."
@@ -2339,15 +2339,15 @@ msgstr "Înregistrările au fost modificate cu succes!"
 
 #: application/controllers/ItemsController.php:436
 msgid "The items are checked and deleted one by one in the background."
-msgstr ""
+msgstr "Resursele sunt bifate și șterse una câte una în fundal."
 
 #: application/controllers/ItemsController.php:438
 msgid "The items are checked and changed one by one in the background."
-msgstr ""
+msgstr "Resursele sunt bifate și modificate una câte una în fundal."
 
 #: application/controllers/ItemsController.php:440
 msgid "Check logs for success and errors."
-msgstr ""
+msgstr "Verifică jurnalele pentru efori sau confirmări."
 
 #: application/controllers/PluginsController.php:45
 #, php-format
@@ -2512,7 +2512,7 @@ msgstr "Eroare SQL la migrare:"
 msgid ""
 "Omeka requires PHP version %1$s or higher, but this server is running PHP "
 "version %2$s. Please update the installed version of PHP and try again."
-msgstr ""
+msgstr "Omeka are nevoie de versiunea %1$s sau mai mare, dar serverul rulează versiunea %2$s de PHP. Actualizează versiunea de PHP instalată și încearcă din nou."
 
 #: application/controllers/UsersController.php:70
 msgid ""
@@ -2628,13 +2628,13 @@ msgstr "Informații incorecte la logare. Încearcă încă o dată."
 
 #: application/forms/AppearanceSettings.php:22
 msgid "Use Square Thumbnails"
-msgstr ""
+msgstr "Folosește pictograme pătrate"
 
 #: application/forms/AppearanceSettings.php:23
 msgid ""
 "Use square-cropped images by default wherever thumbnails appear in the "
 "public interface."
-msgstr ""
+msgstr "Folosește imagini tăiate pătrat de fiecare dată când pictogramele apar în interfața publică."
 
 #: application/forms/AppearanceSettings.php:28
 #: application/forms/Install.php:128
@@ -2693,7 +2693,7 @@ msgstr "Afișează titlurile Setului de Elemente"
 
 #: application/forms/AppearanceSettings.php:78
 msgid "Admin Theme"
-msgstr ""
+msgstr "Aspect vizual la administrare"
 
 #: application/forms/AppearanceSettings.php:92
 msgid "Derivative Size Constraints"
@@ -2705,7 +2705,7 @@ msgstr "Setări de afișate"
 
 #: application/forms/AppearanceSettings.php:108
 msgid "Admin Themes"
-msgstr ""
+msgstr "Teme vizuale pentru administrare"
 
 #: application/forms/ChangePassword.php:25
 msgid "Current Password"
@@ -3352,7 +3352,7 @@ msgstr "Parametru nevalid. Funcția hasElement necesită, fie un element obiect 
 
 #: application/models/Job/ItemBatchEditAll.php:41
 msgid "Batch Edit All Items: No item matches the specified filters."
-msgstr ""
+msgstr "Editează toate resursele. Nicio resursă nu a fost regăsită folosind filtrele."
 
 #: application/models/Job/ItemBatchEditAll.php:48
 #, php-format
@@ -3367,7 +3367,7 @@ msgstr[2] ""
 msgid ""
 "Batch Edit: A total of %d errors occurred during the batch process of %d "
 "items."
-msgstr ""
+msgstr "Editarea setului: Un număr total de %d erori au apărut în timpul procesării a %d resurse."
 
 #: application/models/Job/ItemBatchEditAll.php:74
 #, php-format
@@ -3379,37 +3379,37 @@ msgstr[2] ""
 
 #: application/models/Job/ItemBatchEditAll.php:91
 msgid "Item does not exist: it may have been deleted before processing."
-msgstr ""
+msgstr "Resursa nu există: e posibil să fi fost ștearsă înainte de a fi procesată."
 
 #: application/models/Job/ItemBatchEditAll.php:106
 msgid "User is not allowed to delete this item."
-msgstr ""
+msgstr "Utilizatorului nu-i este permisă ștergerea acestei resurse."
 
 #: application/models/Job/ItemBatchEditAll.php:113
 msgid "User is not allowed to edit this item."
-msgstr ""
+msgstr "Utilizatorului nu-i este permisă editarea acestei resurse."
 
 #: application/models/Job/ItemBatchEditAll.php:119
 msgid "User is not allowed to tag this item."
-msgstr ""
+msgstr "Utilizatorului nu-i este permisă etichetarea acestei resurse."
 
 #: application/models/Job/ItemBatchEditAll.php:142
 msgid "The item was successfully deleted."
-msgstr ""
+msgstr "Resursa a fost ștearsă fără probleme."
 
 #: application/models/Job/ItemBatchEditAll.php:154
 #, php-format
 msgid "An error occured when the item was updated: %s"
-msgstr ""
+msgstr "A apărut o eroare la actualizarea resursei %s"
 
 #: application/models/Job/ItemBatchEditAll.php:159
 msgid "The item was successfully batch-edited."
-msgstr ""
+msgstr "Resursa a fost editată ca set fără probleme."
 
 #: application/models/Job/ItemBatchEditAll.php:178
 #, php-format
 msgid "Batch Edit Item #%d [%d/%d]: %s"
-msgstr ""
+msgstr "Editează resursa ca set #%d [%d/%d]: %s"
 
 #: application/models/Mixin/ElementText.php:293
 #, php-format
@@ -3617,7 +3617,7 @@ msgstr "O matrice de resurse nu este disponibilă pentru buclă."
 #: application/views/helpers/MaxFileSize.php:44
 #, php-format
 msgid "%s MB"
-msgstr ""
+msgstr "%s MB"
 
 #: application/views/helpers/RecordUrl.php:34
 msgid "Invalid record passed while getting record URL."

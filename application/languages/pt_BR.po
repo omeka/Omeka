@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2017-01-25 12:22+0000\n"
+"PO-Revision-Date: 2017-09-23 18:07+0000\n"
 "Last-Translator: Carlos Eduardo Maciel <carlosmaciel1@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/omeka/omeka/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -1108,12 +1108,12 @@ msgstr "Apagar o todo lote dos itens procurados"
 #: admin/themes/default/items/batch-delete-all.php:18
 #, php-format
 msgid "All %d items matching the search filters above will be deleted."
-msgstr "Todos os itens %d que correspondem aos filtros de busca acima serão apagados."
+msgstr "Todos os%d itens  que correspondem aos filtros de busca acima serão apagados."
 
 #: admin/themes/default/items/batch-delete-all.php:20
 #, php-format
 msgid "All %d items will be deleted."
-msgstr "Todos os itens %d serão apagados."
+msgstr "Todos os%d itens serão apagados."
 
 #: admin/themes/default/items/batch-delete-all.php:25
 msgid "Deletions will be processed in the background item by item."
@@ -1146,12 +1146,12 @@ msgstr "Editar o lote de Todos os Itens Procurados"
 #, php-format
 msgid ""
 "Changes will be applied to all %d items matching the search filters above."
-msgstr "As mudanças serão aplicadas a todos os itens %d que correspondam aos critérios dos filtros de busca acima."
+msgstr "As mudanças serão aplicadas a todos os %d itens que correspondam aos critérios dos filtros de busca acima."
 
 #: admin/themes/default/items/batch-edit-all.php:22
 #, php-format
 msgid "Changes will be applied to all %d items."
-msgstr "As mudanças serão aplicadas a todos os itens %d."
+msgstr "As mudanças serão aplicadas a todos os %d itens."
 
 #: admin/themes/default/items/batch-edit-all.php:27
 msgid "Changes will be processed in the background item by item."
@@ -1271,7 +1271,7 @@ msgstr "Procurar itens"
 #: admin/themes/default/items/browse.php:129
 #, php-format
 msgid "Select all %s results"
-msgstr "Selecionar todos os resultados %s"
+msgstr "Selecionar todos os %s resultados "
 
 #: admin/themes/default/items/browse.php:27
 #: admin/themes/default/items/browse.php:130
@@ -1285,7 +1285,7 @@ msgstr "Selecionar todas as colunas"
 #: admin/themes/default/items/browse.php:64
 #, php-format
 msgid "Select item \"%s\""
-msgstr "Selecionar os itens \"%s\""
+msgstr "Selecionar os \"%s\" itens "
 
 #: admin/themes/default/items/browse.php:109
 msgid "No Tags"
@@ -3357,7 +3357,7 @@ msgstr "Editar Todos os Itens em Lote: Nenhum item corresponde aos filtros espec
 msgid "Batch Edit: Starting processing 1 item."
 msgid_plural "Batch Edit: Starting processing %d items."
 msgstr[0] "Editar Lote: Começando o processamento de 1 item."
-msgstr[1] "Editar Lote: Iniciando o processamento dos itens %d."
+msgstr[1] "Editar Lote: Iniciando o processamento dos %d itens."
 
 #: application/models/Job/ItemBatchEditAll.php:67
 #, php-format
@@ -3405,7 +3405,7 @@ msgstr "O item foi editado em lote com sucesso."
 #: application/models/Job/ItemBatchEditAll.php:178
 #, php-format
 msgid "Batch Edit Item #%d [%d/%d]: %s"
-msgstr "Editar Item em Lote #%d [%d/%d]: %s"
+msgstr "Editar Item #%d em Lote  [%d/%d]: %s"
 
 #: application/models/Mixin/ElementText.php:293
 #, php-format

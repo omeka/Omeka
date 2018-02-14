@@ -4,10 +4,11 @@
 # 
 # Translators:
 # Andrzej Kubicki <ankubicki@gmail.com>, 2014
+# Borys Wasiuk, 2017
 # Dominik Broniszewski <dominik@broniszewski.pl>, 2013
 # platanus <marcin.mielnicki@gmail.com>, 2013
-# miniol <michal.seweryniak@gmail.com>, 2012
-# miniol <michal.seweryniak@gmail.com>, 2012
+# Michał Seweryniak <michal.seweryniak@zafado.pl>, 2012
+# Michał Seweryniak <michal.seweryniak@zafado.pl>, 2012
 # mw <m@wilkowski.org>, 2015
 # p <inactive+poczciwiec@transifex.com>, 2012
 # platanus <marcin.mielnicki@gmail.com>, 2013
@@ -21,14 +22,14 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2016-12-15 22:50+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2017-10-26 13:11+0000\n"
+"Last-Translator: Borys Wasiuk\n"
 "Language-Team: Polish (http://www.transifex.com/omeka/omeka/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pl\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 #. Dublin Core description
 msgid ""
@@ -80,7 +81,7 @@ msgstr "Opis"
 
 #. Dublin Core: Description element description
 msgid "An account of the resource"
-msgstr "Temat zasobu"
+msgstr "Znaczenie zasobu"
 
 #. Dublin Core: Publisher element name
 msgid "Publisher"
@@ -88,7 +89,7 @@ msgstr "Wydawca"
 
 #. Dublin Core: Publisher element description
 msgid "An entity responsible for making the resource available"
-msgstr "Wydawca zasobu"
+msgstr "Osoba/Instytucja odpowiedzialna za udostępnienie zasobu"
 
 #. Dublin Core: Contributor element name
 #. User role: contributor
@@ -502,6 +503,7 @@ msgid_plural "%s%d items%s aren't in a collection."
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
+msgstr[3] ""
 
 #: admin/themes/default/collections/browse.php:19
 msgid "All items are in a collection."
@@ -957,6 +959,7 @@ msgid_plural "items"
 msgstr[0] "publikacja"
 msgstr[1] "publikacje"
 msgstr[2] "publikacje"
+msgstr[3] "publikacje"
 
 #: admin/themes/default/index.php:11
 msgid "collection"
@@ -964,6 +967,7 @@ msgid_plural "collections"
 msgstr[0] "kolekcja"
 msgstr[1] "kolekcje"
 msgstr[2] "kolekcje"
+msgstr[3] "kolekcje"
 
 #: admin/themes/default/index.php:12
 msgid "tag"
@@ -971,6 +975,7 @@ msgid_plural "tags"
 msgstr[0] "etykieta"
 msgstr[1] "etykiety"
 msgstr[2] "etykiety"
+msgstr[3] "etykiety"
 
 #: admin/themes/default/index.php:16
 msgid "plugin"
@@ -978,6 +983,7 @@ msgid_plural "plugins"
 msgstr[0] "wtyczka"
 msgstr[1] "wtyczki"
 msgstr[2] "wtyczki"
+msgstr[3] "wtyczki"
 
 #: admin/themes/default/index.php:20
 msgid "user"
@@ -985,6 +991,7 @@ msgid_plural "users"
 msgstr[0] "użytkownik"
 msgstr[1] "użytkownicy"
 msgstr[2] "użytkownicy"
+msgstr[3] "użytkownicy"
 
 #: admin/themes/default/index.php:24
 msgid "theme"
@@ -1329,6 +1336,7 @@ msgid_plural "The query searched %s items and returned no results."
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
+msgstr[3] ""
 
 #: admin/themes/default/items/browse.php:173
 msgid "refine your search"
@@ -3371,6 +3379,7 @@ msgid_plural "Batch Edit: Starting processing %d items."
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
+msgstr[3] ""
 
 #: application/models/Job/ItemBatchEditAll.php:67
 #, php-format
@@ -3386,6 +3395,7 @@ msgid_plural "Batch Edit: All %d items have been processed successfully."
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
+msgstr[3] ""
 
 #: application/models/Job/ItemBatchEditAll.php:91
 msgid "Item does not exist: it may have been deleted before processing."

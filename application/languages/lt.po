@@ -5,14 +5,16 @@
 # Translators:
 # pagavau13 <gintautas@charivari.lt>, 2013
 # pagavau13 <gintautas@charivari.lt>, 2012
+# Juozas Markauskas <juozas@dizi.lt>, 2017
+# Juozas Markauskas <juozas@dizi.lt>, 2017
 # pagavau13 <gintautas@charivari.lt>, 2012-2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2016-12-15 22:50+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2017-09-19 13:48+0000\n"
+"Last-Translator: Juozas Markauskas <juozas@dizi.lt>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/omeka/omeka/language/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1079,7 +1081,7 @@ msgstr ""
 
 #: admin/themes/default/item-types/show.php:39
 msgid "There are no recently added items."
-msgstr ""
+msgstr "Nėra pastaruoju metu pridėtų naujų objektų"
 
 #: admin/themes/default/items/add.php:2
 #: admin/themes/default/items/browse.php:19
@@ -1090,7 +1092,7 @@ msgstr ""
 
 #: admin/themes/default/items/add.php:12
 msgid "Add Item"
-msgstr ""
+msgstr "Pridėti objektą"
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit-common.php:48
@@ -2331,7 +2333,7 @@ msgstr ""
 
 #: application/controllers/ItemsController.php:369
 msgid "The items were successfully deleted!"
-msgstr "Elementai sėkmingai panaikintas!javascript:;"
+msgstr "Elementai sėkmingai panaikintas!"
 
 #: application/controllers/ItemsController.php:371
 msgid "The items were successfully changed!"

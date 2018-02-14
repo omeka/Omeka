@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Gabriel Radev <gabosss@gmail.com>, 2014-2015
+# Gabriel Radev <gabosss@gmail.com>, 2014-2015,2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2016-12-15 22:50+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2017-09-23 20:12+0000\n"
+"Last-Translator: Gabriel Radev <gabosss@gmail.com>\n"
 "Language-Team: Bulgarian (Bulgaria) (http://www.transifex.com/omeka/omeka/language/bg_BG/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -487,12 +487,12 @@ msgstr "(%s общо)"
 #, php-format
 msgid "%sOne item%s has no collection."
 msgid_plural "%s%d items%s aren't in a collection."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%sЕдин Документ%s не е в колекцията."
+msgstr[1] "%s%d Документи%s не са в колекцията."
 
 #: admin/themes/default/collections/browse.php:19
 msgid "All items are in a collection."
-msgstr ""
+msgstr "Всички документи са в колекцията"
 
 #: admin/themes/default/collections/browse.php:30
 #: admin/themes/default/collections/show.php:51
@@ -572,7 +572,7 @@ msgstr "Редактиране на Колекция #%s"
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Collection #%s"
-msgstr ""
+msgstr "Колекция #%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
@@ -941,32 +941,32 @@ msgstr "Вградени метаданни"
 #: admin/themes/default/index.php:10
 msgid "item"
 msgid_plural "items"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Документ"
+msgstr[1] "Документи"
 
 #: admin/themes/default/index.php:11
 msgid "collection"
 msgid_plural "collections"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "колекция"
+msgstr[1] "колекции"
 
 #: admin/themes/default/index.php:12
 msgid "tag"
 msgid_plural "tags"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "маркер"
+msgstr[1] "маркери"
 
 #: admin/themes/default/index.php:16
 msgid "plugin"
 msgid_plural "plugins"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "разширение"
+msgstr[1] "разширения"
 
 #: admin/themes/default/index.php:20
 msgid "user"
 msgid_plural "users"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "потребител"
+msgstr[1] "потребители"
 
 #: admin/themes/default/index.php:24
 msgid "theme"
@@ -1096,21 +1096,21 @@ msgstr "Колекция"
 
 #: admin/themes/default/items/batch-delete-all.php:2
 msgid "Batch Delete All Searched Items"
-msgstr ""
+msgstr "Пакетно Изтриване на всички търсени документи"
 
 #: admin/themes/default/items/batch-delete-all.php:18
 #, php-format
 msgid "All %d items matching the search filters above will be deleted."
-msgstr ""
+msgstr "Всички %d документи отговарящи на филтъра за търсене по-горе ще бъдат изтрити."
 
 #: admin/themes/default/items/batch-delete-all.php:20
 #, php-format
 msgid "All %d items will be deleted."
-msgstr ""
+msgstr "Всички %d документи ще бъдат изтрити."
 
 #: admin/themes/default/items/batch-delete-all.php:25
 msgid "Deletions will be processed in the background item by item."
-msgstr ""
+msgstr "Изтриването ще продължи на заден план документ по документ."
 
 #: admin/themes/default/items/batch-delete-all.php:36
 #: admin/themes/default/items/batch-delete.php:47
@@ -1133,22 +1133,22 @@ msgstr "Избраните елементи ще бъдат изтрити"
 
 #: admin/themes/default/items/batch-edit-all.php:2
 msgid "Batch Edit All Searched Items"
-msgstr ""
+msgstr "Пакетно редактиране на всички търсени документи."
 
 #: admin/themes/default/items/batch-edit-all.php:20
 #, php-format
 msgid ""
 "Changes will be applied to all %d items matching the search filters above."
-msgstr ""
+msgstr "Промените ще бъдат приложени към всички %d документи отговарящи на филтъра за търсене по-горе"
 
 #: admin/themes/default/items/batch-edit-all.php:22
 #, php-format
 msgid "Changes will be applied to all %d items."
-msgstr ""
+msgstr "Промените ще бъдат приложени към всички %d документи."
 
 #: admin/themes/default/items/batch-edit-all.php:27
 msgid "Changes will be processed in the background item by item."
-msgstr ""
+msgstr "Промените ще продължат на заден план документ по документ."
 
 #: admin/themes/default/items/batch-edit-common.php:2
 msgid "Item Metadata"
@@ -1264,21 +1264,21 @@ msgstr "Търсене на документи"
 #: admin/themes/default/items/browse.php:129
 #, php-format
 msgid "Select all %s results"
-msgstr ""
+msgstr "Изберете всички %s резултата"
 
 #: admin/themes/default/items/browse.php:27
 #: admin/themes/default/items/browse.php:130
 msgid "items selected"
-msgstr ""
+msgstr "Избрани документи"
 
 #: admin/themes/default/items/browse.php:43
 msgid "Select all rows"
-msgstr ""
+msgstr "Избор на всички редове"
 
 #: admin/themes/default/items/browse.php:64
 #, php-format
 msgid "Select item \"%s\""
-msgstr ""
+msgstr "Избор на документ \"%s\""
 
 #: admin/themes/default/items/browse.php:109
 msgid "No Tags"
@@ -1308,8 +1308,8 @@ msgstr "Започнете с добавяне на вашият първи до
 #, php-format
 msgid "The query searched 1 item and returned no results."
 msgid_plural "The query searched %s items and returned no results."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Заявката провери 1 документ и върна празен резултат"
+msgstr[1] "Заявката провери %s документа и върна празен резултат"
 
 #: admin/themes/default/items/browse.php:173
 msgid "refine your search"
@@ -1385,19 +1385,19 @@ msgstr "Добавяне на поле"
 #: admin/themes/default/items/search-form.php:54
 #: application/views/scripts/items/search-form.php:50
 msgid "Search Joiner"
-msgstr ""
+msgstr "Обединено търсене"
 
 #: admin/themes/default/items/search-form.php:59
 #: application/views/helpers/ItemSearchFilters.php:108
 #: application/views/scripts/items/search-form.php:55
 msgid "AND"
-msgstr ""
+msgstr "И"
 
 #: admin/themes/default/items/search-form.php:60
 #: application/views/helpers/ItemSearchFilters.php:106
 #: application/views/scripts/items/search-form.php:56
 msgid "OR"
-msgstr ""
+msgstr "ИЛИ"
 
 #: admin/themes/default/items/search-form.php:67
 #: application/views/scripts/items/search-form.php:63
@@ -1426,7 +1426,7 @@ msgstr "е точно"
 
 #: admin/themes/default/items/search-form.php:88
 msgid "is not exactly"
-msgstr ""
+msgstr "не е точно"
 
 #: admin/themes/default/items/search-form.php:89
 #: application/views/scripts/items/search-form.php:84
@@ -1441,20 +1441,20 @@ msgstr "не е празно"
 #: admin/themes/default/items/search-form.php:91
 #: application/views/scripts/items/search-form.php:86
 msgid "starts with"
-msgstr ""
+msgstr "започва с"
 
 #: admin/themes/default/items/search-form.php:92
 #: application/views/scripts/items/search-form.php:87
 msgid "ends with"
-msgstr ""
+msgstr "завършва на "
 
 #: admin/themes/default/items/search-form.php:93
 msgid "matches"
-msgstr ""
+msgstr "съвпадения"
 
 #: admin/themes/default/items/search-form.php:94
 msgid "does not match"
-msgstr ""
+msgstr "няма съвпадения"
 
 #: admin/themes/default/items/search-form.php:102
 #: application/views/scripts/items/search-form.php:95
@@ -2077,7 +2077,7 @@ msgstr "Вход"
 
 #: admin/themes/default/users/login.php:8
 msgid "Go to the public site"
-msgstr ""
+msgstr "Отиди на публичния сайт"
 
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
@@ -2288,11 +2288,11 @@ msgstr "Това ще изтрие документа  #%s  и неговите 
 #: application/controllers/ItemsController.php:376
 #: application/controllers/ItemsController.php:444
 msgid "No item to batch edit."
-msgstr ""
+msgstr "Няма документ за пакетно редактиране"
 
 #: application/controllers/ItemsController.php:248
 msgid "The deletion of all items is forbidden."
-msgstr ""
+msgstr "Изтриването на всички документи е забранено"
 
 #: application/controllers/ItemsController.php:265
 msgid "You must choose some items to batch edit."
@@ -2330,15 +2330,15 @@ msgstr "Документите са променени успешно!"
 
 #: application/controllers/ItemsController.php:436
 msgid "The items are checked and deleted one by one in the background."
-msgstr ""
+msgstr "Документите са отбелязани и изтрити един по един на заден план"
 
 #: application/controllers/ItemsController.php:438
 msgid "The items are checked and changed one by one in the background."
-msgstr ""
+msgstr "Документите са отбелязани и променени един по един на заден план"
 
 #: application/controllers/ItemsController.php:440
 msgid "Check logs for success and errors."
-msgstr ""
+msgstr "Проверете записите за грешки или успехи"
 
 #: application/controllers/PluginsController.php:45
 #, php-format
@@ -2503,7 +2503,7 @@ msgstr "SQL Грешка при преместването:"
 msgid ""
 "Omeka requires PHP version %1$s or higher, but this server is running PHP "
 "version %2$s. Please update the installed version of PHP and try again."
-msgstr ""
+msgstr "Омека изисква PHP версия  %1$s  или по-висока, но този сървър има стартирана PHP версия %2$s. Моля, инсталирайте по-нова версия и опитайте отново."
 
 #: application/controllers/UsersController.php:70
 msgid ""
@@ -2619,13 +2619,13 @@ msgstr "Информацията за влизане е некоректна. О
 
 #: application/forms/AppearanceSettings.php:22
 msgid "Use Square Thumbnails"
-msgstr ""
+msgstr "Използвайте правоъгълна умалена картинка."
 
 #: application/forms/AppearanceSettings.php:23
 msgid ""
 "Use square-cropped images by default wherever thumbnails appear in the "
 "public interface."
-msgstr ""
+msgstr "Използвайте квадратно изрязани изображения по подразбиране, където се използват в публичният интерфейс"
 
 #: application/forms/AppearanceSettings.php:28
 #: application/forms/Install.php:128
@@ -2684,7 +2684,7 @@ msgstr "Показване на елементите обозначени кат
 
 #: application/forms/AppearanceSettings.php:78
 msgid "Admin Theme"
-msgstr ""
+msgstr "Администраторска Тема"
 
 #: application/forms/AppearanceSettings.php:92
 msgid "Derivative Size Constraints"
@@ -2696,7 +2696,7 @@ msgstr "Настройки на показването"
 
 #: application/forms/AppearanceSettings.php:108
 msgid "Admin Themes"
-msgstr ""
+msgstr "Администраторски теми"
 
 #: application/forms/ChangePassword.php:25
 msgid "Current Password"
@@ -3343,62 +3343,62 @@ msgstr "Невалиден параметър. Функцията hasElement и�
 
 #: application/models/Job/ItemBatchEditAll.php:41
 msgid "Batch Edit All Items: No item matches the specified filters."
-msgstr ""
+msgstr "Пакетно редактиране на всички документи: Няма документ който да отговаря на избраните филтри"
 
 #: application/models/Job/ItemBatchEditAll.php:48
 #, php-format
 msgid "Batch Edit: Starting processing 1 item."
 msgid_plural "Batch Edit: Starting processing %d items."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Пакетно редактиране: Стартира обработката на 1 документ"
+msgstr[1] "Пакетно редактиране: Стартира обработката на %d документи."
 
 #: application/models/Job/ItemBatchEditAll.php:67
 #, php-format
 msgid ""
 "Batch Edit: A total of %d errors occurred during the batch process of %d "
 "items."
-msgstr ""
+msgstr "Пакетно редактиране: Всичко %d грешки да намерени докато бяха обработени %d документа."
 
 #: application/models/Job/ItemBatchEditAll.php:74
 #, php-format
 msgid "Batch Edit: The item has been processed successfully."
 msgid_plural "Batch Edit: All %d items have been processed successfully."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Пакетно редактиране:: Документа беше обработен успешно"
+msgstr[1] "Пакетно редактиране: Всички %d документа бяха обработени успешно."
 
 #: application/models/Job/ItemBatchEditAll.php:91
 msgid "Item does not exist: it may have been deleted before processing."
-msgstr ""
+msgstr "Документът не съществува: Може да е изтрит преди обработката."
 
 #: application/models/Job/ItemBatchEditAll.php:106
 msgid "User is not allowed to delete this item."
-msgstr ""
+msgstr "Потребителят няма права да изтрива документа."
 
 #: application/models/Job/ItemBatchEditAll.php:113
 msgid "User is not allowed to edit this item."
-msgstr ""
+msgstr "Потребителят няма права да редактира този документ."
 
 #: application/models/Job/ItemBatchEditAll.php:119
 msgid "User is not allowed to tag this item."
-msgstr ""
+msgstr "Потребителят няма права да слага маркер на този документ."
 
 #: application/models/Job/ItemBatchEditAll.php:142
 msgid "The item was successfully deleted."
-msgstr ""
+msgstr "Документът е успешно изтрит."
 
 #: application/models/Job/ItemBatchEditAll.php:154
 #, php-format
 msgid "An error occured when the item was updated: %s"
-msgstr ""
+msgstr "Възникна грешка докато документа се обновяваше: %s"
 
 #: application/models/Job/ItemBatchEditAll.php:159
 msgid "The item was successfully batch-edited."
-msgstr ""
+msgstr "Документа успешно беше пакетно редактиран"
 
 #: application/models/Job/ItemBatchEditAll.php:178
 #, php-format
 msgid "Batch Edit Item #%d [%d/%d]: %s"
-msgstr ""
+msgstr "Пакетно редактиране на документ #%d [%d/%d]: %s"
 
 #: application/models/Mixin/ElementText.php:293
 #, php-format
@@ -3606,7 +3606,7 @@ msgstr "Списъка от записи не е достъпен за повт�
 #: application/views/helpers/MaxFileSize.php:44
 #, php-format
 msgid "%s MB"
-msgstr ""
+msgstr "%s MB"
 
 #: application/views/helpers/RecordUrl.php:34
 msgid "Invalid record passed while getting record URL."
