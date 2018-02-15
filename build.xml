@@ -21,6 +21,9 @@
                 <exclude name="dist/**"/>
                 <exclude name="**/build.xml"/>
                 <exclude name=".travis.yml"/>
+                <exclude name=".php_cs"/>
+                <exclude name="composer.json"/>
+                <exclude name="composer.lock"/>
                 <exclude name="**/*.po"/>
                 <exclude name="**/*.pot"/>
                 <exclude name="**/css/sass/**"/>
