@@ -28,8 +28,22 @@ class CollectionsController extends Omeka_Controller_AbstractActionController
     public function showAction()
     {
         parent::showAction();
-        $this->view->items = $this->_helper->db->getTable('Item')->findBy(
-            array('collection' => $this->view->collection->id), $this->_getBrowseRecordsPerPage());
+        $currentPage = $this->getParam('page', 1);
+        $recordsPerPage = $this->_getBrowseRecordsPerPage('items');
+        $itemTable = $this->_helper->db->getTable('Item');
+        $params = array('collection' => $this->view->collection->id);
+        $items = $itemTable->findBy($params, $recordsPerPage, $currentPage);
+        $totalRecords = $itemTable->count($params);
+
+        if ($recordsPerPage) {
+            Zend_Registry::set('pagination', array(
+                'page' => $currentPage,
+                'per_page' => $recordsPerPage,
+                'total_results' => $totalRecords,
+            ));
+        }
+
+        $this->view->items = $items;
     }
 
     /**
