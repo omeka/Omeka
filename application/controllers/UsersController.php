@@ -300,11 +300,18 @@ class UsersController extends Omeka_Controller_AbstractActionController
         $user = $this->_helper->db->findById();
         $keyTable = $this->_helper->db->getTable('Key');
 
+        $csrf = new Omeka_Form_SessionCsrf;
+
         $this->view->user = $user;
         $this->view->currentUser = $this->getCurrentUser();
         $this->view->keys = $keyTable->findBy(array('user_id' => $user->id));
+        $this->view->csrf = $csrf;
 
         if ($this->getRequest()->isPost()) {
+            if (!$csrf->isValid($_POST)) {
+                $this->_helper->_flashMessenger(__('There was an error on the form. Please try again.'), 'error');
+                return;
+            }
             // Create a new API key.
             if ($this->getParam('api_key_label')) {
                 $key = new Key;

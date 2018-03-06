@@ -57,6 +57,7 @@ echo flash();
     </tbody>
 </table>
 <?php endif; ?>
+<?php echo $csrf; ?>
 <?php echo $this->formSubmit('update_api_keys', __('Update API Keys')); ?>
 </form>
 
