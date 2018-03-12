@@ -13,14 +13,13 @@ echo item_search_filters();
 
 <?php if ($total_results): ?>
     <?php echo pagination_links(); ?>
+    <?php if (is_allowed('Items', 'add')): ?>
+    <a href="<?php echo html_escape(url('items/add')); ?>" class="add button small green"><?php echo __('Add an Item'); ?></a>
+    <?php endif; ?>
+    <?php echo link_to_item_search(__('Search Items'), array('class' => 'small blue advanced-search-link button')); ?>
+    <?php echo common('quick-filters', array(), 'items'); ?>
 
     <form action="<?php echo html_escape(url('items/batch-edit')); ?>" method="post" accept-charset="utf-8">
-        <?php if (is_allowed('Items', 'add')): ?>
-        <a href="<?php echo html_escape(url('items/add')); ?>" class="add button small green"><?php echo __('Add an Item'); ?></a>
-        <?php endif; ?>
-        <?php echo link_to_item_search(__('Search Items'), array('class' => 'small blue advanced-search-link button')); ?>
-        <?php echo common('quick-filters', array(), 'items'); ?>
-
         <div class="table-actions batch-edit-option">
             <?php if (is_allowed('Items', 'edit') || is_allowed('Items', 'delete')): ?>
                 <button class="batch-all-toggle" type="button" data-records-count="<?php echo $total_results; ?>"><?php echo __('Select all %s results', $total_results); ?></button>
@@ -136,13 +135,14 @@ echo item_search_filters();
                 <?php endif; ?>
             <?php endif; ?>
         </div>
-        <?php echo pagination_links(); ?>
-        <?php if (is_allowed('Items', 'add')): ?>
-        <a href="<?php echo html_escape(url('items/add')); ?>" class="add button small green"><?php echo __('Add an Item'); ?></a>
-        <?php endif; ?>
-        <?php echo link_to_item_search(__('Search Items'), array('class' => 'small blue advanced-search-link button')); ?>
-        <?php echo common('quick-filters', array(), 'items'); ?>
     </form>
+
+    <?php echo pagination_links(); ?>
+    <?php if (is_allowed('Items', 'add')): ?>
+    <a href="<?php echo html_escape(url('items/add')); ?>" class="add button small green"><?php echo __('Add an Item'); ?></a>
+    <?php endif; ?>
+    <?php echo link_to_item_search(__('Search Items'), array('class' => 'small blue advanced-search-link button')); ?>
+    <?php echo common('quick-filters', array(), 'items'); ?>
 
 
     <div id="outputs">
