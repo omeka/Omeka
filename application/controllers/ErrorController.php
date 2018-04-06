@@ -118,6 +118,8 @@ class ErrorController extends Omeka_Controller_AbstractActionController
 
     protected function renderException(Exception $e)
     {
+        $this->getResponse()->setHttpResponseCode(500);
+
         $this->view->e = $e;
         $environment = $this->getInvokeArg('bootstrap')->getApplication()->getEnvironment();
 
