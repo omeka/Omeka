@@ -18,7 +18,7 @@
         <ul id="all-tags-list">
             <?php foreach( $tags as $tag ): ?>
                 <li>
-                    <?php echo '<span class="tag">' . $tag->name . '</span>'; 
+                    <?php echo '<span class="tag">' . html_escape($tag->name) . '</span>';
                           echo '<span class="undo-remove-tag"><a href="#">' . __('Undo') . '</a></span>';
                           echo '<span class="remove-tag"><a href="#">' . __('Remove') . '</a></span>'; ?>
                 </li>
