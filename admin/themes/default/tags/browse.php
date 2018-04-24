@@ -86,7 +86,7 @@ echo flash();
         <?php foreach ($tags as $tag): ?>
             <li>
             <?php if($browse_for == 'Item'):?>
-                <a href="<?php echo html_escape(url('items/browse', array('tags' => $tag->name)); ?>" class="count"><?php echo $tag['tagCount']; ?></a>
+                <a href="<?php echo html_escape(url('items/browse', array('tags' => $tag->name))); ?>" class="count"><?php echo $tag['tagCount']; ?></a>
             <?php else: ?>
                 <span class="count"><?php echo $tag['tagCount']; ?></span>
             <?php endif; ?>
