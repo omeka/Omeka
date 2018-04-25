@@ -11,10 +11,11 @@ Omeka.Tags = {};
     $.fn.poshytip = { defaults: null };
 
     Omeka.Tags.enableEditInPlace = function (editableURL,tagURLBase, csrfToken) {
-        $.fn.editable.defaults.mode = 'inline';
-        $.fn.editable.defaults.showbuttons = false;
         $('.edit-tag').editable({
             url: editableURL,
+            mode: 'inline',
+            type: 'text',
+            showButtons: false,
             params: function(params) {
                 params.csrf_token = csrfToken;
                 return params;
