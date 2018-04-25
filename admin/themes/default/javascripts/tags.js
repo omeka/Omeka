@@ -15,7 +15,7 @@ Omeka.Tags = {};
             url: editableURL,
             mode: 'inline',
             type: 'text',
-            showButtons: false,
+            showbuttons: false,
             params: function(params) {
                 params.csrf_token = csrfToken;
                 return params;
