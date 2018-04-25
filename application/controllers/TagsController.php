@@ -101,10 +101,11 @@ class TagsController extends Omeka_Controller_AbstractActionController
     public function renameAjaxAction()
     {
         $csrf = new Omeka_Form_SessionCsrf;
-        $oldTagId = $_POST['id'];
+        $oldTagId = $_POST['pk'];
         $oldTag = $this->_helper->db->findById($oldTagId);
         $oldName = $oldTag->name;
         $newName = trim($_POST['value']);
+        $error = __('Error occurred.');
 
         $oldTag->name = $newName;
         $this->_helper->viewRenderer->setNoRender();
@@ -112,7 +113,7 @@ class TagsController extends Omeka_Controller_AbstractActionController
             $this->getResponse()->setBody($newName);
         } else {
             $this->getResponse()->setHttpResponseCode(500);
-            $this->getResponse()->setBody($oldName);
+            $this->getResponse()->setBody($error);
         }
     }
 }
