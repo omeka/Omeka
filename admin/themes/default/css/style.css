@@ -2086,10 +2086,35 @@ header nav {
     margin-bottom: 20px;
 }
 
-.edit-tag input {
+.editable-inline div {
+    display: inline-block;
+}
+
+.editable-inline input {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    margin-bottom: 0;
+    padding: 0 6px !important;
+    height: 20px;
+}
+
+form.form-inline.editableform {
+    position: relative;
+}
+
+.editable-error-block.editable-error {
+    position: absolute;
+    top: 100%;
+    background-color: #fff;
+    text-shadow: none;
+    color: #914E33;
+    left: 0;
+    font-family: "Cabin", sans-serif;
+    padding: 3px 6px;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0px 3px 3px #cccccc;
 }
 
 .tag-list {

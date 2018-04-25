@@ -6,7 +6,7 @@ $pageTitle = __('Browse Tags');
 $pageTitle .= ' ' . __('(%s total)', $total_results);
 
 if ($canEdit) {
-    queue_js_file(array('vendor/jquery.jeditable', 'tags'));
+    queue_js_file(array('tags', 'vendor/jquery-editable-poshytip.min'));
 }
 
 echo head(array('title'=>$pageTitle,'bodyclass'=>'tags browse-tags'));
@@ -91,7 +91,7 @@ echo flash();
                 <span class="count"><?php echo $tag['tagCount']; ?></span>
             <?php endif; ?>
             <?php if ($canEdit): ?>
-                <span class="tag edit-tag" id="<?php echo $tag->id; ?>"><?php echo html_escape($tag->name); ?></span>
+                <span class="tag edit-tag" data-pk="<?php echo $tag->id; ?>" data-type="text" id="<?php echo $tag->id; ?>"><?php echo html_escape($tag->name); ?></span>
             <?php else: ?>
                 <span class="tag"><?php echo html_escape($tag->name); ?></span>
             <?php endif; ?>
