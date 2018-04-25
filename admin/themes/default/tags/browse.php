@@ -91,7 +91,7 @@ echo flash();
                 <span class="count"><?php echo $tag['tagCount']; ?></span>
             <?php endif; ?>
             <?php if ($canEdit): ?>
-                <span class="tag edit-tag" data-pk="<?php echo $tag->id; ?>" id="<?php echo $tag->id; ?>"><?php echo html_escape($tag->name); ?></span>
+                <span class="tag edit-tag" data-pk="<?php echo $tag->id; ?>"><?php echo html_escape($tag->name); ?></span>
             <?php else: ?>
                 <span class="tag"><?php echo html_escape($tag->name); ?></span>
             <?php endif; ?>
