@@ -531,7 +531,7 @@ img { border: 0; }
         .mce-tinymce button {
             margin-bottom: 0;
             box-shadow: none;
-            min-height: none;
+            min-height: 0;
         }
 
 
