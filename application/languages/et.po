@@ -5,13 +5,13 @@
 # Translators:
 # Kaisa Kulasalu <a71465@ut.ee>, 2013
 # Mari Sarv <mari@haldjas.folklore.ee>, 2013-2014
-# Rivo Zängov <eraser@eraser.ee>, 2015-2017
+# Rivo Zängov <eraser@eraser.ee>, 2015-2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2017-09-23 19:09+0000\n"
+"PO-Revision-Date: 2018-02-27 18:30+0000\n"
 "Last-Translator: Rivo Zängov <eraser@eraser.ee>\n"
 "Language-Team: Estonian (http://www.transifex.com/omeka/omeka/language/et/)\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgid ""
 msgstr "Dublin Core metaandmete loetelu on ühine kõigile Omeka kirjetele - ühikutele, failidele ja kogudele. Rohkem infot lehel http://dublincore.org/documents/dces/."
 
 #. Dublin Core: Title element name
-#: admin/themes/default/collections/browse.php:29
+#: admin/themes/default/collections/browse.php:30
 #: admin/themes/default/items/browse.php:46
 #: admin/themes/default/search/index.php:13
 #: application/views/scripts/collections/browse.php:10
@@ -61,7 +61,7 @@ msgstr "Inforessursi teema"
 
 #. Dublin Core: Description element name
 #: admin/themes/default/element-sets/browse.php:17
-#: admin/themes/default/item-types/browse.php:15
+#: admin/themes/default/item-types/browse.php:30
 #: admin/themes/default/item-types/show.php:14
 #: admin/themes/default/settings/edit-item-type-elements.php:27
 #: application/forms/ItemTypes.php:150
@@ -345,13 +345,13 @@ msgstr "Lisa link lingiribale."
 #: admin/themes/default/appearance/edit-navigation.php:21
 #: admin/themes/default/appearance/edit-navigation.php:41
 #: admin/themes/default/users/api-keys.php:40
-#: application/forms/Navigation.php:138
+#: application/forms/Navigation.php:134
 msgid "Label"
 msgstr "Märgend"
 
 #: admin/themes/default/appearance/edit-navigation.php:23
 #: admin/themes/default/appearance/edit-navigation.php:42
-#: application/forms/Navigation.php:139
+#: application/forms/Navigation.php:135
 msgid "URL"
 msgstr "URL"
 
@@ -376,7 +376,7 @@ msgstr "Lisa link"
 #: admin/themes/default/settings/edit-settings.php:15
 #: admin/themes/default/themes/config.php:16
 #: admin/themes/default/users/edit.php:21
-#: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:73
+#: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:66
 msgid "Save Changes"
 msgstr "Salvesta muutused"
 
@@ -391,7 +391,7 @@ msgstr "Nulli peamenüü"
 #: admin/themes/default/files/show.php:28
 #: admin/themes/default/items/edit.php:20
 #: admin/themes/default/items/show.php:45
-#: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:79
+#: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:72
 msgid "View Public Page"
 msgstr "Vaata tavakasutaja lehte"
 
@@ -412,7 +412,7 @@ msgstr "Vaata tavakasutaja lehte"
 #: admin/themes/default/settings/edit-item-type-elements.php:23
 #: admin/themes/default/users/browse.php:66
 #: admin/themes/default/users/edit.php:26
-#: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:83
+#: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:76
 msgid "Delete"
 msgstr "Kustuta"
 
@@ -430,8 +430,8 @@ msgstr "Kõik kohandamised lähevad kaduma. Järjekord ja sildid muudetakse Omek
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:12
-#: admin/themes/default/collections/browse.php:75
-#: admin/themes/default/collections/browse.php:85
+#: admin/themes/default/collections/browse.php:76
+#: admin/themes/default/collections/browse.php:86
 msgid "Add a Collection"
 msgstr "Lisa kogu"
 
@@ -476,7 +476,7 @@ msgstr "Sirvi kogusid"
 #: admin/themes/default/items/browse.php:3
 #: admin/themes/default/plugins/browse.php:2
 #: admin/themes/default/search/index.php:2
-#: admin/themes/default/tags/browse.php:12
+#: admin/themes/default/tags/browse.php:6
 #: admin/themes/default/users/browse.php:2
 #: application/views/scripts/collections/browse.php:6
 #: application/views/scripts/items/browse.php:6
@@ -487,22 +487,22 @@ msgstr "(%s kokku)"
 
 #: admin/themes/default/collections/browse.php:17
 #, php-format
-msgid "%sOne item%s has no collection."
+msgid "%s%d item%s has no collection."
 msgid_plural "%s%d items%s aren't in a collection."
-msgstr[0] "%sÜks ühik%s pole üheski kogus."
-msgstr[1] "%s%d ühikut%s pole üheski kogus."
+msgstr[0] ""
+msgstr[1] ""
 
-#: admin/themes/default/collections/browse.php:19
+#: admin/themes/default/collections/browse.php:20
 msgid "All items are in a collection."
 msgstr "Kõik ühikud on määratud kogudesse"
 
-#: admin/themes/default/collections/browse.php:30
+#: admin/themes/default/collections/browse.php:31
 #: admin/themes/default/collections/show.php:51
 #: application/views/scripts/collections/browse.php:35
 msgid "Contributors"
 msgstr "Kaastöölised"
 
-#: admin/themes/default/collections/browse.php:31
+#: admin/themes/default/collections/browse.php:32
 #: admin/themes/default/files/show.php:66
 #: admin/themes/default/items/browse.php:49
 #: application/views/scripts/collections/browse.php:11
@@ -510,24 +510,24 @@ msgstr "Kaastöölised"
 msgid "Date Added"
 msgstr "Lisamise aeg"
 
-#: admin/themes/default/collections/browse.php:32
+#: admin/themes/default/collections/browse.php:33
 #: admin/themes/default/collections/show.php:46
 #: admin/themes/default/item-types/show.php:42
 msgid "Total Number of Items"
 msgstr "Ühikute koguarv"
 
-#: admin/themes/default/collections/browse.php:47
+#: admin/themes/default/collections/browse.php:48
 #: admin/themes/default/items/browse.php:86
 msgid "(Private)"
 msgstr "(Privaatne)"
 
-#: admin/themes/default/collections/browse.php:50
+#: admin/themes/default/collections/browse.php:51
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:27
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
 #: admin/themes/default/files/show.php:26 admin/themes/default/index.php:60
 #: admin/themes/default/index.php:79
-#: admin/themes/default/item-types/browse.php:26
+#: admin/themes/default/item-types/browse.php:41
 #: admin/themes/default/item-types/show.php:51
 #: admin/themes/default/items/browse.php:31
 #: admin/themes/default/items/browse.php:91
@@ -538,30 +538,30 @@ msgstr "(Privaatne)"
 msgid "Edit"
 msgstr "Redigeeri"
 
-#: admin/themes/default/collections/browse.php:59
+#: admin/themes/default/collections/browse.php:60
 msgid "No contributors"
 msgstr "Kaastöölisi pole"
 
-#: admin/themes/default/collections/browse.php:79
+#: admin/themes/default/collections/browse.php:80
 msgid "There are no collections on this page."
 msgstr "Sellel lehel pole kogusid."
 
-#: admin/themes/default/collections/browse.php:79
+#: admin/themes/default/collections/browse.php:80
 msgid "View All Collections"
 msgstr "Vaata kõiki kogusid"
 
-#: admin/themes/default/collections/browse.php:82
+#: admin/themes/default/collections/browse.php:83
 msgid "You have no collections."
 msgstr "Sul pole kogusid"
 
-#: admin/themes/default/collections/browse.php:84
+#: admin/themes/default/collections/browse.php:85
 msgid "Get started by adding your first collection."
 msgstr "Tee algust ja lisa esimene kogu."
 
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/models/Mixin/ElementText.php:780
+#: application/models/Mixin/ElementText.php:779
 #: application/views/scripts/functions.php:22
 msgid "[Untitled]"
 msgstr "[Pealkirjata]"
@@ -707,7 +707,7 @@ msgstr "Kasutajad"
 
 #: admin/themes/default/common/header.php:11
 #: admin/themes/default/upgrade/index.php:6
-#: application/views/scripts/common/admin-bar.php:11
+#: application/views/scripts/common/admin-bar.php:10
 msgid "Omeka Admin"
 msgstr "Omeka haldaja"
 
@@ -717,13 +717,13 @@ msgid "Skip to main content"
 msgstr "Mine peamise sisu juurde"
 
 #: admin/themes/default/common/header.php:61
-#: application/views/scripts/common/admin-bar.php:7
+#: application/views/scripts/common/admin-bar.php:6
 #, php-format
 msgid "Welcome, %s"
 msgstr "Tere tulemast, %s"
 
 #: admin/themes/default/common/header.php:62
-#: application/views/scripts/common/admin-bar.php:15
+#: application/views/scripts/common/admin-bar.php:14
 msgid "Log Out"
 msgstr "Logi välja"
 
@@ -767,6 +767,8 @@ msgid "API Keys"
 msgstr "API võtmed"
 
 #: admin/themes/default/element-sets/browse.php:16
+#: admin/themes/default/tags/browse.php:27
+#: admin/themes/default/tags/browse.php:57
 #: admin/themes/default/users/browse.php:17
 #: application/forms/ItemTypes.php:141
 msgid "Name"
@@ -987,7 +989,7 @@ msgstr "Uuenda %sks."
 #: admin/themes/default/item-types/add-new-element.php:15
 #: admin/themes/default/item-types/form.php:43
 #: admin/themes/default/items/tag-form.php:23
-#: application/views/helpers/ElementInput.php:113
+#: application/views/helpers/ElementInput.php:112
 msgid "Remove"
 msgstr "Eemalda"
 
@@ -1008,16 +1010,27 @@ msgstr "Lisa ühikuliik"
 msgid "Browse Item Types"
 msgstr "Sirvi ühikuliike"
 
-#: admin/themes/default/item-types/browse.php:7
-#: admin/themes/default/item-types/browse.php:40
+#: admin/themes/default/item-types/browse.php:10
+#: admin/themes/default/item-types/browse.php:55
 msgid "Add an Item Type"
 msgstr "Lisa ühikuliik"
 
-#: admin/themes/default/item-types/browse.php:14
+#: admin/themes/default/item-types/browse.php:18
+#, php-format
+msgid "%s%d item%s has no type."
+msgid_plural "%s%d items%s have no type."
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/themes/default/item-types/browse.php:21
+msgid "All items have a type."
+msgstr ""
+
+#: admin/themes/default/item-types/browse.php:29
 msgid "Type Name"
 msgstr "Liigi nimi"
 
-#: admin/themes/default/item-types/browse.php:16
+#: admin/themes/default/item-types/browse.php:31
 msgid "Total Items"
 msgstr "Ühikuid kokku"
 
@@ -1256,8 +1269,8 @@ msgstr "Sirvi ühikuid"
 #: admin/themes/default/items/browse.php:21
 #: admin/themes/default/items/browse.php:143
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2400
-#: application/libraries/globals.php:2791
+#: application/libraries/globals.php:2411
+#: application/libraries/globals.php:2802
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Otsi ühikuid"
@@ -1348,7 +1361,7 @@ msgstr "Faili suurim lubatud suurus on %s."
 msgid "Find a File"
 msgstr "Leia fail"
 
-#: admin/themes/default/items/form.php:25
+#: admin/themes/default/items/form.php:23
 msgid "Add Another File"
 msgstr "Lisa teine fail"
 
@@ -1412,6 +1425,7 @@ msgid "Search Type"
 msgstr "Otsingu liik"
 
 #: admin/themes/default/items/search-form.php:85
+#: admin/themes/default/tags/browse.php:27
 #: application/views/scripts/items/search-form.php:81
 msgid "contains"
 msgstr "sisaldab"
@@ -1524,7 +1538,7 @@ msgid "Only Non-Featured Items"
 msgstr "Ainult esiletõsteta ühikud"
 
 #: admin/themes/default/items/search-form.php:233
-#: application/views/scripts/items/search-form.php:214
+#: application/views/scripts/items/search-form.php:215
 msgid "Search for items"
 msgstr "Otsi ühikuid"
 
@@ -1575,7 +1589,7 @@ msgid "Browse Items by Tag"
 msgstr "Sirvi ühikuid sildi alusel"
 
 #: admin/themes/default/items/tags.php:9
-#: admin/themes/default/tags/browse.php:85
+#: admin/themes/default/tags/browse.php:108
 msgid "There are no tags to display. You must first tag some items."
 msgstr "Kuvamiseks pole silte. Sa pead kõigepealt ühikutele silte lisama. "
 
@@ -1630,7 +1644,7 @@ msgid "Activate"
 msgstr "Aktiveeri"
 
 #: admin/themes/default/plugins/browse.php:118
-#: admin/themes/default/plugins/confirm-uninstall.php:16
+#: admin/themes/default/plugins/confirm-uninstall.php:18
 msgid "Uninstall"
 msgstr "Eemalda"
 
@@ -1660,21 +1674,27 @@ msgstr "Eemalda plugin: %s"
 msgid "Are you sure you want to uninstall %s?"
 msgstr "Kas sa oled kindel, et soovid eemaldada %s?"
 
-#: admin/themes/default/plugins/confirm-uninstall.php:12
+#: admin/themes/default/plugins/confirm-uninstall.php:11
+msgid ""
+"Warning: data associated with this plugin may be permanently deleted from "
+"the database."
+msgstr ""
+
+#: admin/themes/default/plugins/confirm-uninstall.php:14
 msgid "Yes, I want to uninstall this plugin."
 msgstr "Jah, ma soovin selle plugina eemaldada."
 
-#: admin/themes/default/plugins/confirm-uninstall.php:17
+#: admin/themes/default/plugins/confirm-uninstall.php:19
 msgid "or"
 msgstr "või"
 
-#: admin/themes/default/plugins/confirm-uninstall.php:17
+#: admin/themes/default/plugins/confirm-uninstall.php:19
 #: admin/themes/default/settings/edit-item-type-elements.php:51
 msgid "Cancel"
 msgstr "Tühista"
 
 #: admin/themes/default/search/index.php:12
-#: admin/themes/default/tags/browse.php:18
+#: admin/themes/default/tags/browse.php:26
 #: application/views/scripts/search/index.php:13
 msgid "Record Type"
 msgstr "Kirjetüüp"
@@ -1792,54 +1812,54 @@ msgstr "Taasta vaikeatribuudid"
 msgid "Test"
 msgstr "Test"
 
-#: admin/themes/default/tags/browse.php:7
-msgid "Edit Tags"
-msgstr "Redigeeri silte"
-
-#: admin/themes/default/tags/browse.php:9
+#: admin/themes/default/tags/browse.php:5
 msgid "Browse Tags"
 msgstr "Sirvi silte"
 
-#: admin/themes/default/tags/browse.php:24
+#: admin/themes/default/tags/browse.php:18
+msgid "Search tags"
+msgstr "Otsi silte"
+
+#: admin/themes/default/tags/browse.php:29
+msgid "Reset results"
+msgstr "Otsingutulemused"
+
+#: admin/themes/default/tags/browse.php:42
 msgid "Editing Tags"
 msgstr "Siltide redigeerimine"
 
-#: admin/themes/default/tags/browse.php:27
+#: admin/themes/default/tags/browse.php:45
 msgid "To view all items with a tag, click the number."
 msgstr "Et vaadata kõiki sildistatud ühikuid, klõpsa numbrile."
 
-#: admin/themes/default/tags/browse.php:28
+#: admin/themes/default/tags/browse.php:46
 msgid ""
 "To edit the tag name, click the name and begin editing, and hit \"enter\" to"
 " save. To cancel an edit, click the ESC key or click away from the tag."
 msgstr "Sildi nime redigeerimiseks kliki sildi nimele ja muuda seda; salvestamiseks vajuta enter-klahvi. Redigeerimise katkestamiseks vajuta esc-klahvi või kliki sildist väljaspool."
 
-#: admin/themes/default/tags/browse.php:29
+#: admin/themes/default/tags/browse.php:47
 msgid ""
 "To delete a tag, click the X. Deleting a tag will not delete the tagged "
 "items."
 msgstr "Et silt kustutada, klõpsa x-le. Sildi kustutamine ei kustutad sildistatud ühikuid."
 
-#: admin/themes/default/tags/browse.php:39
-msgid "Most"
-msgstr "Enim"
+#: admin/themes/default/tags/browse.php:58
+msgid "Count"
+msgstr "Arv"
 
-#: admin/themes/default/tags/browse.php:40
-msgid "Least"
-msgstr "Vähim"
+#: admin/themes/default/tags/browse.php:59
+msgid "Date created"
+msgstr "Loomise kuupäev"
 
-#: admin/themes/default/tags/browse.php:41
-msgid "Alphabetical"
-msgstr "Tähestikuline"
-
-#: admin/themes/default/tags/browse.php:42
-msgid "Recent"
-msgstr "Hiljutine"
-
-#: admin/themes/default/tags/browse.php:53
-#: admin/themes/default/tags/browse.php:55
+#: admin/themes/default/tags/browse.php:74
+#: admin/themes/default/tags/browse.php:76
 msgid "Record Types"
 msgstr "Kirjetüübid"
+
+#: admin/themes/default/tags/browse.php:77
+msgid "All"
+msgstr "Kõik"
 
 #: admin/themes/default/themes/browse.php:15
 #: admin/themes/default/themes/browse.php:44
@@ -2121,37 +2141,37 @@ msgstr "Lingiriba sätteid ei salvestatud puuduvate või ebakorrektsete väärtu
 msgid "The navigation settings have been reset."
 msgstr "Peamenüü seaded on nullitud."
 
-#: application/controllers/CollectionsController.php:76
+#: application/controllers/CollectionsController.php:59
 #, php-format
 msgid "The collection \"%s\" was successfully added!"
 msgstr "Kogu \"%s\" on edukalt lisatud!"
 
-#: application/controllers/CollectionsController.php:78
+#: application/controllers/CollectionsController.php:61
 #, php-format
 msgid "The collection #%s was successfully added!"
 msgstr "Kogu #%s on edukalt lisatud!"
 
-#: application/controllers/CollectionsController.php:86
+#: application/controllers/CollectionsController.php:69
 #, php-format
 msgid "The collection \"%s\" was successfully changed!"
 msgstr "Kogu \"%s\" on edukalt muudetud!"
 
-#: application/controllers/CollectionsController.php:88
+#: application/controllers/CollectionsController.php:71
 #, php-format
 msgid "The collection #%s was successfully changed!"
 msgstr "Kogu #%s on edukalt muudetud!"
 
-#: application/controllers/CollectionsController.php:96
+#: application/controllers/CollectionsController.php:79
 #, php-format
 msgid "The collection \"%s\" was successfully deleted!"
 msgstr "Kogu \"%s\" on edukalt kustutatud!"
 
-#: application/controllers/CollectionsController.php:98
+#: application/controllers/CollectionsController.php:81
 #, php-format
 msgid "The collection #%s was successfully deleted!"
 msgstr "Kogu #%s on edukalt kustutatud!"
 
-#: application/controllers/CollectionsController.php:106
+#: application/controllers/CollectionsController.php:89
 #, php-format
 msgid ""
 "This will delete the collection \"%s\" and its associated metadata. This "
@@ -2159,7 +2179,7 @@ msgid ""
 "to this collection in each item."
 msgstr "See kustutab kogu \"%s\" ja sellega seotud metaandmestiku. See ei kustuta sellesse kogusse kuulunud ühikuid, küll aga eemaldab viite sellele kogule kõigi ühikute juures."
 
-#: application/controllers/CollectionsController.php:110
+#: application/controllers/CollectionsController.php:93
 #, php-format
 msgid ""
 "This will delete the collection #%s and its associated metadata. This will "
@@ -2173,31 +2193,31 @@ msgid ""
 "set. Items will lose all metadata that is specific to this element set."
 msgstr "See kustutab tunnuste loetelu ja kõik sellesse loetelusse kuuluvad tunnused. Ühikud kaotavad sellesse tunnuste loetellu kuuluva metaandmestiku."
 
-#: application/controllers/ElementSetsController.php:53
-#: application/controllers/PluginsController.php:51
-#: application/controllers/PluginsController.php:79
-#: application/controllers/PluginsController.php:139
-#: application/controllers/PluginsController.php:190
-#: application/controllers/PluginsController.php:223
-#: application/controllers/PluginsController.php:331
+#: application/controllers/ElementSetsController.php:51
+#: application/controllers/PluginsController.php:49
+#: application/controllers/PluginsController.php:77
+#: application/controllers/PluginsController.php:135
+#: application/controllers/PluginsController.php:184
+#: application/controllers/PluginsController.php:217
+#: application/controllers/PluginsController.php:321
 #: application/controllers/SettingsController.php:104
 #: application/controllers/SettingsController.php:140
 #: application/controllers/SettingsController.php:177
-#: application/controllers/ThemesController.php:87
+#: application/controllers/ThemesController.php:85
 #: application/libraries/Omeka/Controller/AbstractActionController.php:183
 #: application/libraries/Omeka/Controller/AbstractActionController.php:224
 msgid "There was an error on the form. Please try again."
 msgstr "Vormil oli viga, Palun proovi uuesti."
 
-#: application/controllers/ElementSetsController.php:72
+#: application/controllers/ElementSetsController.php:70
 msgid "The element set was successfully changed!"
 msgstr "Tunnuste loetelu on edukalt muudetud!"
 
-#: application/controllers/ErrorController.php:64
+#: application/controllers/ErrorController.php:63
 msgid "Page not found."
 msgstr "Lehte ei leitud."
 
-#: application/controllers/ErrorController.php:79
+#: application/controllers/ErrorController.php:78
 msgid "Access denied."
 msgstr "Ligipääs keelatud."
 
@@ -2234,203 +2254,203 @@ msgid ""
 "your new item type."
 msgstr "Ühikuliik \"%s\" on edukalt lisatud! Sa saad nüüd lisada uuele ühikuliigile tunnuseid."
 
-#: application/controllers/ItemsController.php:89
-#: application/controllers/ItemsController.php:149
+#: application/controllers/ItemsController.php:86
+#: application/controllers/ItemsController.php:146
 msgid ""
 "The ImageMagick directory path has not been set. No derivative images will "
 "be created. If you would like Omeka to create derivative images, please set "
 "the path in Settings."
 msgstr "ImageMagick kataloogirada pole seadistatud. Tuletispilte ei looda. Tuletispiltide loomiseks on vajalik, et seadistaksid sätete all kataloogiraja."
 
-#: application/controllers/ItemsController.php:98
+#: application/controllers/ItemsController.php:95
 #, php-format
 msgid "The item \"%s\" was successfully added!"
 msgstr "Ühik \"%s\" on edukalt lisatud!"
 
-#: application/controllers/ItemsController.php:100
+#: application/controllers/ItemsController.php:97
 #, php-format
 msgid "The item #%s was successfully added!"
 msgstr "Ühik \"%s\" on edukalt lisatud!"
 
-#: application/controllers/ItemsController.php:108
+#: application/controllers/ItemsController.php:105
 #, php-format
 msgid "The item \"%s\" was successfully changed!"
 msgstr "Ühik \"%s\" on edukalt muudetud!"
 
-#: application/controllers/ItemsController.php:110
+#: application/controllers/ItemsController.php:107
 #, php-format
 msgid "The item #%s was successfully changed!"
 msgstr "Ühik \"%s\" on edukalt muudetud!"
 
-#: application/controllers/ItemsController.php:118
+#: application/controllers/ItemsController.php:115
 #, php-format
 msgid "The item \"%s\" was successfully deleted!"
 msgstr "Ühik \"%s\" on edukalt kustutatud!"
 
-#: application/controllers/ItemsController.php:120
+#: application/controllers/ItemsController.php:117
 #, php-format
 msgid "The item #%s was successfully deleted!"
 msgstr "Ühik \"%s\" on edukalt kustutatud!"
 
-#: application/controllers/ItemsController.php:128
+#: application/controllers/ItemsController.php:125
 #, php-format
 msgid ""
 "This will delete the item \"%s\" and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
 msgstr "See kustutab ühiku \"%s\" ja sellega seostuva metaandmestiku. See kustutab ka kõik ühikuga seotud failid ja failide metaandmestiku."
 
-#: application/controllers/ItemsController.php:132
+#: application/controllers/ItemsController.php:129
 #, php-format
 msgid ""
 "This will delete the item #%s and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
 msgstr "See kustutab ühiku #%s ja sellega seostuva metaandmestiku. See kustutab ka kõik ühikuga seotud failid ja failide metaandmestiku."
 
-#: application/controllers/ItemsController.php:241
-#: application/controllers/ItemsController.php:376
-#: application/controllers/ItemsController.php:444
+#: application/controllers/ItemsController.php:231
+#: application/controllers/ItemsController.php:364
+#: application/controllers/ItemsController.php:430
 msgid "No item to batch edit."
 msgstr "Pole ühtegi ühikut, mida hulgitöödelda."
 
-#: application/controllers/ItemsController.php:248
+#: application/controllers/ItemsController.php:238
 msgid "The deletion of all items is forbidden."
 msgstr "Kõikide ühikute kustutamine on keelatud."
 
-#: application/controllers/ItemsController.php:265
+#: application/controllers/ItemsController.php:255
 msgid "You must choose some items to batch edit."
 msgstr "Mitme ühiku korraga redigeerimiseks tuleb need märkida linnukesega."
 
-#: application/controllers/ItemsController.php:314
-#: application/controllers/ItemsController.php:412
+#: application/controllers/ItemsController.php:302
+#: application/controllers/ItemsController.php:398
 msgid "User is not allowed to modify visibility of items."
 msgstr "Kasutaja ei saa ühikute nähtavust muuta."
 
-#: application/controllers/ItemsController.php:319
-#: application/controllers/ItemsController.php:417
+#: application/controllers/ItemsController.php:307
+#: application/controllers/ItemsController.php:403
 msgid "User is not allowed to modify featured status of items."
 msgstr "Kasutaja ei saa muuta ühikute esiletõstu."
 
-#: application/controllers/ItemsController.php:326
+#: application/controllers/ItemsController.php:314
 msgid "User is not allowed to delete selected items."
 msgstr "Kasutaja ei saa valitud ühikuid kustutada."
 
-#: application/controllers/ItemsController.php:332
+#: application/controllers/ItemsController.php:320
 msgid "User is not allowed to edit selected items."
 msgstr "Kasutaja ei saa valitud ühikuid toimetada."
 
-#: application/controllers/ItemsController.php:337
+#: application/controllers/ItemsController.php:325
 msgid "User is not allowed to tag selected items."
 msgstr "Kasutaja ei saa valitud ühikuid sildistada."
 
-#: application/controllers/ItemsController.php:369
+#: application/controllers/ItemsController.php:357
 msgid "The items were successfully deleted!"
 msgstr "Ühikud on edukalt kustutatud!"
 
-#: application/controllers/ItemsController.php:371
+#: application/controllers/ItemsController.php:359
 msgid "The items were successfully changed!"
 msgstr "Ühikud on edukalt muudetud!"
 
-#: application/controllers/ItemsController.php:436
+#: application/controllers/ItemsController.php:422
 msgid "The items are checked and deleted one by one in the background."
-msgstr ""
+msgstr "Ühikuid kontrollitakse ja kustutatakse taustal ükshaaval."
 
-#: application/controllers/ItemsController.php:438
+#: application/controllers/ItemsController.php:424
 msgid "The items are checked and changed one by one in the background."
-msgstr ""
+msgstr "Ühikuid kontrollitakse ja muudetakse taustal ükshaaval."
 
-#: application/controllers/ItemsController.php:440
+#: application/controllers/ItemsController.php:426
 msgid "Check logs for success and errors."
 msgstr "Kontrolli kordaminekute ja ebaõnnestumiste logi."
 
-#: application/controllers/PluginsController.php:45
+#: application/controllers/PluginsController.php:43
 #, php-format
 msgid ""
 "Error in configuring plugin named \"%s\". Missing config and/or config_form "
 "hook(s)."
 msgstr "Viga plugina \"%s\" konfigureerimisel. Puudu on config ja/või config_form seos(ed)."
 
-#: application/controllers/PluginsController.php:59
+#: application/controllers/PluginsController.php:57
 #, php-format
 msgid "The %s plugin was successfully configured!"
 msgstr "%s plugin on edukalt konfigureeritud!"
 
-#: application/controllers/PluginsController.php:89
+#: application/controllers/PluginsController.php:87
 #, php-format
 msgid "The %s plugin has already been installed."
 msgstr "%s plugin on juba paigaldatud."
 
-#: application/controllers/PluginsController.php:99
+#: application/controllers/PluginsController.php:97
 #, php-format
 msgid "The %s plugin was successfully installed!"
 msgstr "%s on edukalt paigaldatud!"
 
-#: application/controllers/PluginsController.php:111
-#: application/controllers/PluginsController.php:116
+#: application/controllers/PluginsController.php:109
+#: application/controllers/PluginsController.php:114
 #, php-format
 msgid "The following error occurred while installing the %s plugin: "
 msgstr "%s plugina paigaldamisel tekkis järgnev viga:"
 
-#: application/controllers/PluginsController.php:154
+#: application/controllers/PluginsController.php:150
 #, php-format
 msgid "The following error occurred while activating the %s plugin: "
 msgstr "%s plugina aktiveerimisel tekkis järgnev viga:"
 
-#: application/controllers/PluginsController.php:164
+#: application/controllers/PluginsController.php:160
 #, php-format
 msgid "The %s plugin was successfully activated!"
 msgstr "%s plugin on edukalt aktiveeritud!"
 
-#: application/controllers/PluginsController.php:169
+#: application/controllers/PluginsController.php:165
 #, php-format
 msgid "The %s plugin was activated, but could not be loaded: "
 msgstr "%s plugin on aktiveeritud, kuid seda ei saanud laadida:"
 
-#: application/controllers/PluginsController.php:204
+#: application/controllers/PluginsController.php:198
 #, php-format
 msgid "The %s plugin was successfully deactivated!"
 msgstr "Plugin %s on edukalt deaktiveeritud!"
 
-#: application/controllers/PluginsController.php:209
+#: application/controllers/PluginsController.php:203
 #, php-format
 msgid "The following error occurred while deactivating the %s plugin: "
 msgstr "Plugina %s deaktiveerimisel tekkis järgmine viga:"
 
-#: application/controllers/PluginsController.php:239
+#: application/controllers/PluginsController.php:233
 #, php-format
 msgid "The %s plugin was successfully upgraded!"
 msgstr "Plugin %s on edukalt uuendatud!"
 
+#: application/controllers/PluginsController.php:242
 #: application/controllers/PluginsController.php:248
-#: application/controllers/PluginsController.php:254
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
 msgstr "Plugina %s uuendamisel tekkis järgnev viga:"
 
-#: application/controllers/PluginsController.php:305
+#: application/controllers/PluginsController.php:295
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
 msgstr "'%s' kataloogis seda pluginat ei leidunud!"
 
-#: application/controllers/PluginsController.php:318
+#: application/controllers/PluginsController.php:308
 msgid "You must confirm the uninstall before proceeding."
 msgstr "Enne jätkamist pead kinnitama eemaldamise."
 
-#: application/controllers/PluginsController.php:337
+#: application/controllers/PluginsController.php:327
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
 msgstr "Plugin %s on edukalt eemaldatud!"
 
-#: application/controllers/PluginsController.php:342
-#: application/controllers/PluginsController.php:347
+#: application/controllers/PluginsController.php:332
+#: application/controllers/PluginsController.php:337
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
 msgstr "Plugina %s eemaldamisel tekkis järgnev viga:"
 
-#: application/controllers/PluginsController.php:376
+#: application/controllers/PluginsController.php:366
 msgid "No plugin name given."
 msgstr "Pole antud plugina nime."
 
-#: application/controllers/PluginsController.php:389
+#: application/controllers/PluginsController.php:379
 #, php-format
 msgid "The plugin %s must be installed."
 msgstr "Tuleb paigaldada plugin %s."
@@ -2471,7 +2491,7 @@ msgstr "ImageMagick kataloogirada töötab."
 msgid "The ImageMagick directory path does not work."
 msgstr "ImageMagick kataloogirada ei tööta."
 
-#: application/controllers/TagsController.php:47
+#: application/controllers/TagsController.php:42
 msgid "Invalid tagType given."
 msgstr "Antud vale sildiLiik."
 
@@ -2492,106 +2512,106 @@ msgstr "Selle teema jaoks on vaja Omeka uuemat versiooni (%s)."
 msgid "The theme has been successfully changed."
 msgstr "Teema on edukalt muudetud."
 
-#: application/controllers/ThemesController.php:84
+#: application/controllers/ThemesController.php:82
 msgid "The theme settings were successfully saved!"
 msgstr "Teemasätted on edukalt salvestatud!"
 
-#: application/controllers/UpgradeController.php:56
+#: application/controllers/UpgradeController.php:53
 msgid "SQL error in migration: "
 msgstr "SQL viga andmete ülekandmisel:"
 
-#: application/controllers/UpgradeController.php:69
+#: application/controllers/UpgradeController.php:66
 #, php-format
 msgid ""
 "Omeka requires PHP version %1$s or higher, but this server is running PHP "
 "version %2$s. Please update the installed version of PHP and try again."
 msgstr "Omeka nõuab PHP versiooni %1$s või uuemat, aga selles serveris on  PHP versioon %2$s. Palun uuenda PHP versiooni ja proovi siis uuesti."
 
-#: application/controllers/UsersController.php:70
+#: application/controllers/UsersController.php:72
 msgid ""
 "Unable to reset password. Please verify that the information is correct and "
 "contact an administrator if necessary."
 msgstr "Salasõna ei saanud muuta. Palun kontrolli, kas info on õige, ning vajadusel võta ühendust haldajaga."
 
-#: application/controllers/UsersController.php:108
+#: application/controllers/UsersController.php:110
 msgid "Please follow this link to reset your password:"
 msgstr "Salasõna muutmiseks klõpsa sellele lingile."
 
-#: application/controllers/UsersController.php:110
-#: application/controllers/UsersController.php:113
-#: application/controllers/UsersController.php:385
+#: application/controllers/UsersController.php:112
+#: application/controllers/UsersController.php:115
+#: application/controllers/UsersController.php:383
 #, php-format
 msgid "%s Administrator"
 msgstr "%s haldaja."
 
-#: application/controllers/UsersController.php:114
+#: application/controllers/UsersController.php:116
 #, php-format
 msgid "[%s] Reset Your Password"
 msgstr "[%s] Lähtesta salasõna"
 
-#: application/controllers/UsersController.php:117
+#: application/controllers/UsersController.php:119
 msgid "Please check your email for a link to reset your password."
 msgstr "Link salasõna muutmiseks on saadetud e-posti aadressile."
 
-#: application/controllers/UsersController.php:126
+#: application/controllers/UsersController.php:128
 msgid "Invalid activation code given."
 msgstr "Antud on vale aktiveerimiskood."
 
-#: application/controllers/UsersController.php:135
+#: application/controllers/UsersController.php:137
 msgid "Password: The passwords do not match."
 msgstr "Salasõna: Salasõnad ei kattu."
 
-#: application/controllers/UsersController.php:143
+#: application/controllers/UsersController.php:145
 msgid "You may now log in to Omeka."
 msgstr "Sa saad nüüd Omekasse sisse logida."
 
-#: application/controllers/UsersController.php:168
-#: application/controllers/UsersController.php:236
-#: application/controllers/UsersController.php:287
+#: application/controllers/UsersController.php:169
+#: application/controllers/UsersController.php:235
+#: application/controllers/UsersController.php:286
 msgid "There was an invalid entry on the form. Please try again."
 msgstr "Vormil oli ebakorrektne sissekanne. Palun proovi uuesti."
 
-#: application/controllers/UsersController.php:176
+#: application/controllers/UsersController.php:177
 #, php-format
 msgid "The user \"%s\" was successfully added!"
 msgstr "Kasutaja \"%s\" on edukalt lisatud!"
 
-#: application/controllers/UsersController.php:180
+#: application/controllers/UsersController.php:181
 #, php-format
 msgid "The user \"%s\" was added, but the activation email could not be sent."
 msgstr "Kasutaja \"%s\" lisati, kuid aktiveerimiskirja saatmine ei õnnestunud."
 
-#: application/controllers/UsersController.php:218
+#: application/controllers/UsersController.php:217
 msgid "User activation email has been sent."
 msgstr "Kiri kasutaja aktiveerimiseks on saadetud."
 
-#: application/controllers/UsersController.php:220
+#: application/controllers/UsersController.php:219
 msgid "User activation email could not be sent."
 msgstr "Kirja kasutaja aktiveerimiseks ei õnnestunud saata."
 
-#: application/controllers/UsersController.php:258
+#: application/controllers/UsersController.php:257
 #, php-format
 msgid "The user %s was successfully changed!"
 msgstr "Kasutaja %s on edukalt muudetud!"
 
-#: application/controllers/UsersController.php:294
+#: application/controllers/UsersController.php:293
 msgid "Password changed!"
 msgstr "Salasõna on muudetud!"
 
-#: application/controllers/UsersController.php:316
+#: application/controllers/UsersController.php:315
 msgid "A new API key was successfully created."
 msgstr "Uus API võti on edukalt loodud."
 
-#: application/controllers/UsersController.php:323
+#: application/controllers/UsersController.php:322
 msgid "An existing API key was successfully rescinded."
 msgstr "Olemasolev API võti on edukalt tühistatud."
 
-#: application/controllers/UsersController.php:350
+#: application/controllers/UsersController.php:349
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
 msgstr "Kasutaja \"%s\" on edukalt kustutatud!"
 
-#: application/controllers/UsersController.php:356
+#: application/controllers/UsersController.php:355
 #, php-format
 msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
@@ -2599,104 +2619,113 @@ msgid ""
 "this user."
 msgstr "%s kustutatakse süsteemist. Selle kasutaja loodud ühikud, kogud ja sildid jäävad süsteemi alles, kuid need pole enam selle kasutajaga seostatud."
 
-#: application/controllers/UsersController.php:381
+#: application/controllers/UsersController.php:379
 msgid "Welcome!"
 msgstr "Tere tulemast!"
 
-#: application/controllers/UsersController.php:383
+#: application/controllers/UsersController.php:381
 #, php-format
 msgid ""
 "Your account for the %s repository has been created. Please click the "
 "following link to activate your account:"
 msgstr "Su konto repositooriumi %s jaoks on loodud, Konto aktiveerimiseks palun kliki järgneval lingil:"
 
-#: application/controllers/UsersController.php:386
+#: application/controllers/UsersController.php:384
 #, php-format
 msgid "Activate your account with the %s repository"
 msgstr "Aktiveeri oma konto %s repositooriumis."
 
-#: application/controllers/UsersController.php:481
+#: application/controllers/UsersController.php:479
 msgid "Login information incorrect. Please try again."
 msgstr "Sisselogimisinfo ei klapi. Palun proovi uuesti."
 
-#: application/forms/AppearanceSettings.php:22
+#: application/forms/AppearanceSettings.php:21
 msgid "Use Square Thumbnails"
 msgstr "Kasuta ruudukujulisi pisipilte"
 
-#: application/forms/AppearanceSettings.php:23
+#: application/forms/AppearanceSettings.php:22
 msgid ""
 "Use square-cropped images by default wherever thumbnails appear in the "
 "public interface."
 msgstr ""
 
-#: application/forms/AppearanceSettings.php:28
+#: application/forms/AppearanceSettings.php:27
 #: application/forms/Install.php:128
 msgid "Fullsize Image Size"
 msgstr "Täismahulise pildi suurus"
 
-#: application/forms/AppearanceSettings.php:29
+#: application/forms/AppearanceSettings.php:28
 msgid "Maximum fullsize image size constraint (in pixels)."
 msgstr "Täismahulise pildi suurim lubatud suurus (pikselites)."
 
-#: application/forms/AppearanceSettings.php:35
+#: application/forms/AppearanceSettings.php:34
 #: application/forms/Install.php:136
 msgid "Thumbnail Size"
 msgstr "Pisipildi suurus"
 
-#: application/forms/AppearanceSettings.php:36
+#: application/forms/AppearanceSettings.php:35
 msgid "Maximum thumbnail size constraint (in pixels)."
 msgstr "Pisipildi suurim lubatud suurus (pikselites)."
 
-#: application/forms/AppearanceSettings.php:42
+#: application/forms/AppearanceSettings.php:41
 #: application/forms/Install.php:144
 msgid "Square Thumbnail Size"
 msgstr "Ruudukujulise pisipildi suurus."
 
-#: application/forms/AppearanceSettings.php:43
+#: application/forms/AppearanceSettings.php:42
 msgid "Maximum square thumbnail size constraint (in pixels)."
 msgstr "Ruudukujulise pisipildi suurim lubatud suurus (pikselites)."
 
-#: application/forms/AppearanceSettings.php:49
+#: application/forms/AppearanceSettings.php:48
 msgid "Results Per Page (admin)"
 msgstr "Tulemusi lehel (haldaja)"
 
-#: application/forms/AppearanceSettings.php:50
+#: application/forms/AppearanceSettings.php:49
 msgid ""
 "Limit the number of results displayed per page in the administrative "
 "interface."
 msgstr "Piira lehel kuvatavate tulemuste arvu haldaja vaates."
 
-#: application/forms/AppearanceSettings.php:56
+#: application/forms/AppearanceSettings.php:55
 msgid "Results Per Page (public)"
 msgstr "Tulemusi lehel (tavakasutaja)"
 
-#: application/forms/AppearanceSettings.php:57
+#: application/forms/AppearanceSettings.php:56
 msgid ""
 "Limit the number of results displayed per page in the public interface."
 msgstr "Piira lehel kuvatavate tulemuste arvu tavakasutaja vaates."
 
-#: application/forms/AppearanceSettings.php:63
+#: application/forms/AppearanceSettings.php:62
 #: application/forms/Install.php:168
 msgid "Show Empty Elements"
 msgstr "Näita tühje tunnuseid"
 
-#: application/forms/AppearanceSettings.php:68
+#: application/forms/AppearanceSettings.php:67
 msgid "Show Element Set Headings"
 msgstr "Näita tunnuste loetelu pealkirju"
 
-#: application/forms/AppearanceSettings.php:78
+#: application/forms/AppearanceSettings.php:72
+msgid "Link to File Metadata"
+msgstr "Link faili metaandmetele"
+
+#: application/forms/AppearanceSettings.php:73
+msgid ""
+"Have item files link to the file metadata instead of the file directly."
+msgstr ""
+
+#: application/forms/AppearanceSettings.php:83
 msgid "Admin Theme"
 msgstr "Admini teema"
 
-#: application/forms/AppearanceSettings.php:92
+#: application/forms/AppearanceSettings.php:97
 msgid "Derivative Size Constraints"
 msgstr "Tuletispiltide mahupiirangud"
 
-#: application/forms/AppearanceSettings.php:100
+#: application/forms/AppearanceSettings.php:105
 msgid "Display Settings"
 msgstr "Kuvasätted"
 
-#: application/forms/AppearanceSettings.php:108
+#: application/forms/AppearanceSettings.php:113
 msgid "Admin Themes"
 msgstr "Admini teemad"
 
@@ -2773,7 +2802,7 @@ msgid "must be 30 characters or fewer with no whitespace"
 msgstr "kuni 30 tähemärki ilma tühikuteta"
 
 #: application/forms/Install.php:39 application/forms/User.php:46
-#: application/models/User.php:189
+#: application/models/User.php:188
 #, php-format
 msgid ""
 "Whitespace is not allowed. Only these special characters may be used: %s"
@@ -2862,32 +2891,32 @@ msgstr "Salasõna lahter ei või tühjaks jääda."
 msgid "Remember Me?"
 msgstr "Jäta salasõna meelde?"
 
-#: application/forms/Navigation.php:162
+#: application/forms/Navigation.php:157
 msgid "[Default]"
 msgstr "[Vaikimisi]"
 
-#: application/forms/Navigation.php:168
+#: application/forms/Navigation.php:163
 msgid "Select a Homepage"
 msgstr "Vali koduleht"
 
-#: application/forms/Navigation.php:250
+#: application/forms/Navigation.php:244
 msgid "Cannot find parent navigation page."
 msgstr "Ei suuda leida kõrgema taseme lehte."
 
-#: application/forms/Navigation.php:331
+#: application/forms/Navigation.php:324
 msgid "All navigation links must have URIs."
 msgstr "Kõigil lingiriba linkidel peavad olema URId."
 
-#: application/forms/Navigation.php:344
+#: application/forms/Navigation.php:337
 msgid "All navigation links must have different URIs."
 msgstr "Kõigil lingiriba linkidel peavad olema erinevad URId."
 
-#: application/forms/Navigation.php:350
+#: application/forms/Navigation.php:343
 #, php-format
 msgid "Invalid URI for \"%s\" navigation link:  \"%s\""
 msgstr "Vale URI \"%s\" lingiriba lingi jaoks:  \"%s\""
 
-#: application/forms/Navigation.php:383
+#: application/forms/Navigation.php:376
 msgid "Navigation links that have undeleteable sublinks cannot be deleted."
 msgstr "Ei saa kustutada lingiriba linke, millel on kustutamatud alalingid,"
 
@@ -2919,87 +2948,89 @@ msgstr "Salasõna on kohustuslik."
 msgid "Typed passwords do not match."
 msgstr "Salasõnad ei kattu."
 
-#: application/forms/SecuritySettings.php:24
+#: application/forms/SecuritySettings.php:23
 msgid "Disable File Upload Validation"
 msgstr "Üleslaetavate failitüüpide piiramise lõpetamine"
 
-#: application/forms/SecuritySettings.php:26
+#: application/forms/SecuritySettings.php:25
 msgid ""
 "Check this field if you would like to allow any file to be uploaded to "
 "Omeka."
 msgstr "Märgi see väli linnukesega kui soovid, et Omekasse saaks lisada igat laadi faile."
 
-#: application/forms/SecuritySettings.php:32
+#: application/forms/SecuritySettings.php:31
 msgid "Allowed File Extensions"
 msgstr "Lubatud failinime laiendid"
 
-#: application/forms/SecuritySettings.php:33
+#: application/forms/SecuritySettings.php:32
 msgid "List of allowed extensions for file uploads"
 msgstr "Failide üleslaadmisel lubatud faililaiendite loend"
 
-#: application/forms/SecuritySettings.php:42
+#: application/forms/SecuritySettings.php:41
 msgid "Allowed File Types"
 msgstr "Lubatud failitüübid"
 
-#: application/forms/SecuritySettings.php:43
+#: application/forms/SecuritySettings.php:42
 msgid "List of allowed MIME types for file uploads"
 msgstr "Nimekiri failide üleslaadimiseks lubatud MIME tüüpidest"
 
-#: application/forms/SecuritySettings.php:52
-msgid "ReCaptcha Public Key"
-msgstr "ReCaptcha avalik võti"
+#: application/forms/SecuritySettings.php:51
+msgid "reCAPTCHA Site Key"
+msgstr "reCAPTCHA saidi võti"
 
-#: application/forms/SecuritySettings.php:53
+#: application/forms/SecuritySettings.php:52
+#, php-format
 msgid ""
-"Enter public key from recaptcha.net. Both this and the private key must be "
-"filled in to secure public forms."
-msgstr "Sisesta avalik võti lehelt recaptcha.net. Avalike vormide turvamiseks tuleb sisestada nii avalik võti kui privaatvõti."
+"Enter site key from %s. Both this and the private key must be filled in to "
+"secure public forms."
+msgstr ""
+
+#: application/forms/SecuritySettings.php:59
+msgid "reCAPTCHA Secret Key"
+msgstr "reCAPTCHA sala võti"
 
 #: application/forms/SecuritySettings.php:60
-msgid "ReCaptcha Private Key"
-msgstr "ReCaptcha privaatvõti"
-
-#: application/forms/SecuritySettings.php:61
+#, php-format
 msgid ""
-"Enter private key from recaptcha.net. Both this and the public key must be "
-"filled in to secure public forms."
-msgstr "Sisesta privaatvõti lehelt recaptcha.net. Avalike vormide turvamiseks tuleb sisestada nii avalik võti kui privaatvõti"
+"Enter secret key from %s. Both this and the public key must be filled in to "
+"secure public forms."
+msgstr ""
 
-#: application/forms/SecuritySettings.php:68
+#: application/forms/SecuritySettings.php:67
 msgid ""
 "Check this field if you would like to filter HTML elements or attributes "
 "from form input."
 msgstr "Märgista see väli, kui soovid filtreerida HTML elemente või tunnuseid vormisisendilt."
 
-#: application/forms/SecuritySettings.php:69
+#: application/forms/SecuritySettings.php:68
 msgid "Enable HTML Filtering"
 msgstr "Võimalda HTML filtreerimine"
 
-#: application/forms/SecuritySettings.php:74
+#: application/forms/SecuritySettings.php:73
 msgid "Allowed HTML Elements"
 msgstr "Lubatud HTML elemendid"
 
-#: application/forms/SecuritySettings.php:75
+#: application/forms/SecuritySettings.php:74
 msgid "List of allowed HTML elements in form input"
 msgstr "Sisendvormil lubatud HTML elementide loend"
 
-#: application/forms/SecuritySettings.php:82
+#: application/forms/SecuritySettings.php:81
 msgid "Allowed HTML Attributes"
 msgstr "Lubatud HTML atribuudid"
 
-#: application/forms/SecuritySettings.php:83
+#: application/forms/SecuritySettings.php:82
 msgid "List of allowed HTML attributes in form input"
 msgstr "Sisendvormil lubatud HTML atribuutide loend"
 
-#: application/forms/SecuritySettings.php:98
+#: application/forms/SecuritySettings.php:97
 msgid "File Validation"
 msgstr "Faili õigsuse kontroll"
 
-#: application/forms/SecuritySettings.php:106
+#: application/forms/SecuritySettings.php:105
 msgid "Captcha"
 msgstr "Captcha"
 
-#: application/forms/SecuritySettings.php:115
+#: application/forms/SecuritySettings.php:114
 msgid "HTML Filtering"
 msgstr "HTML filtreerimine"
 
@@ -3027,7 +3058,7 @@ msgstr "Kasutajanimi on juba kasutusel."
 msgid "Name as it should be displayed on the site"
 msgstr "Nimi sel kujul, nagu see veebisaidil kuvatakse"
 
-#: application/forms/User.php:88 application/models/User.php:169
+#: application/forms/User.php:88 application/models/User.php:168
 msgid "Real Name is required."
 msgstr "Tegelik nimi on kohustuslik."
 
@@ -3080,11 +3111,11 @@ msgid ""
 "version (%s)"
 msgstr "Konfigureeritud PHP asukohaviide (%s) viitab PHP-CLI koodi ebasobivale versioonile (%s)"
 
-#: application/libraries/Omeka/Navigation.php:214
+#: application/libraries/Omeka/Navigation.php:213
 msgid "The page must be normalized and have a valid uid."
 msgstr "Leht peab vastama normaalkujule ning sellel peab olema kehtiv UID."
 
-#: application/libraries/Omeka/Navigation.php:226
+#: application/libraries/Omeka/Navigation.php:225
 msgid ""
 "The parent container must either be the navigation object or a descendant "
 "subpage of the navigation object."
@@ -3100,16 +3131,16 @@ msgstr "Omeka_Navigation_Page_Uri objekti jaoks sobimatu URI: %s"
 msgid "Path to plugin.ini for \"%s\" is not correct."
 msgstr "plugin.ini asukohaviide \"%s\" jaoks ei ole korrektne."
 
-#: application/libraries/Omeka/Plugin/Installer.php:79
+#: application/libraries/Omeka/Plugin/Installer.php:76
 #, php-format
 msgid "The \"%s\" plugin must be installed and have newer files to upgrade it."
 msgstr "Plugin \"%s\" peab olema installeeritud ning olemas peavad olema ka uuemad failid plugina värskendamiseks."
 
-#: application/libraries/Omeka/Plugin/Installer.php:116
+#: application/libraries/Omeka/Plugin/Installer.php:112
 msgid "Plugin must have a valid directory name before it can be installed."
 msgstr "Pluginal peab olema kehtiv katalooginimi enne selle paigaldamist."
 
-#: application/libraries/Omeka/Record/AbstractRecord.php:349
+#: application/libraries/Omeka/Record/AbstractRecord.php:351
 #, php-format
 msgid "'%s' is an invalid special value."
 msgstr "'%s' on sobimatu eriväärtus."
@@ -3134,101 +3165,101 @@ msgstr "Kahendmuutuja"
 msgid "Exact match"
 msgstr "Täpne vaste"
 
-#: application/libraries/globals.php:1263
-#: application/libraries/globals.php:1284
+#: application/libraries/globals.php:1267
+#: application/libraries/globals.php:1288
 #, php-format
 msgid "Could not find file %s!"
 msgstr "Ei leidnud faili %s!"
 
-#: application/libraries/globals.php:1301
+#: application/libraries/globals.php:1304
 msgid "No featured collections are available."
 msgstr "Esiletõstetud kogusid ei ole."
 
-#: application/libraries/globals.php:1598
+#: application/libraries/globals.php:1601
 msgid "Select Below "
 msgstr "Vali allpool"
 
-#: application/libraries/globals.php:1641
+#: application/libraries/globals.php:1644
 msgid "Omeka RSS Feed"
 msgstr "Omeka RSS kanal"
 
-#: application/libraries/globals.php:1642
+#: application/libraries/globals.php:1645
 msgid "Omeka Atom Feed"
 msgstr "Omeka Atom voog"
 
-#: application/libraries/globals.php:2297
+#: application/libraries/globals.php:2306
 msgid "No recent items available."
 msgstr "Pole hiljuti lisatud ühikuid."
 
-#: application/libraries/globals.php:2323
+#: application/libraries/globals.php:2332
 msgid "No featured items are available."
 msgstr "Esiletõstetud ühikuid ei ole."
 
-#: application/libraries/globals.php:2382
+#: application/libraries/globals.php:2393
 msgid "View"
 msgstr "Vaata"
 
-#: application/libraries/globals.php:2444
+#: application/libraries/globals.php:2455
 #: application/models/Table/Collection.php:87
 #: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
 msgstr "Kogu pole"
 
-#: application/libraries/globals.php:2563
+#: application/libraries/globals.php:2574
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2580
+#: application/libraries/globals.php:2591
 msgid "Next Item &rarr;"
 msgstr "Järgmine ühik &rarr;"
 
-#: application/libraries/globals.php:2600
+#: application/libraries/globals.php:2611
 msgid "&larr; Previous Item"
 msgstr "&larr; Eelmine ühik"
 
-#: application/libraries/globals.php:2781
+#: application/libraries/globals.php:2792
 msgid "Browse All"
 msgstr "Sirvi kõiki"
 
-#: application/libraries/globals.php:2786
+#: application/libraries/globals.php:2797
 msgid "Browse by Tag"
 msgstr "Sirvi sildi alusel"
 
-#: application/libraries/globals.php:3055
+#: application/libraries/globals.php:3076
 msgid "No tags are available."
 msgstr "Silte ei ole."
 
-#: application/models/Builder/Item.php:263
+#: application/models/Builder/Item.php:261
 msgid "Must specify a file transfer type when attaching files to an item!"
 msgstr "Enne faili sidumist ühikuga tuleb täpsustada faili edastustüüp."
 
-#: application/models/Collection.php:119
+#: application/models/Collection.php:118
 msgid "Cannot associate the collection with an unsaved user."
 msgstr "Kogu ei saa siduda salvestamata kasutajaga."
 
-#: application/models/Element.php:175
+#: application/models/Element.php:174
 msgid "The element name must not be empty."
 msgstr "Tunnuse nimi ei või tühjaks jääda."
 
-#: application/models/Element.php:179
+#: application/models/Element.php:178
 msgid "Invalid element set."
 msgstr "Ebakorrektne tunnuste loetelu."
 
-#: application/models/Element.php:185
+#: application/models/Element.php:184
 #, php-format
 msgid "An element named \"%s\" already exists for the \"%s\" element set."
 msgstr "Tunnus nimega \"%s\" on juba olemas \"%s\" tunnuste loetelus."
 
-#: application/models/Element.php:216
+#: application/models/Element.php:215
 #, php-format
 msgid "Cannot set element set ID: set named \"%s\" does not exist."
 msgstr "Tunnuste loendile ei saa seada IDd: loendit \"%s\" pole olemas."
 
-#: application/models/ElementSet.php:146
+#: application/models/ElementSet.php:144
 msgid "Name of element set must be unique."
 msgstr "Tunnuste loetelu nimi peab olema unikaalne."
 
-#: application/models/ElementSet.php:150
+#: application/models/ElementSet.php:148
 msgid "Name of element set must not be empty."
 msgstr "Tunnuste loetelu nimi ei või tühjaks jääda."
 
@@ -3253,40 +3284,40 @@ msgstr "Ei leia talletatud faili kohalikku asukohaviidet."
 msgid "\"%s\" is not a valid file derivative."
 msgstr "\"%s\" ei ole sobiv failituletis"
 
-#: application/models/Item.php:332
+#: application/models/Item.php:331
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
 msgstr "Faile ei saa siduda ühikuga, mis pole veel püsivalt andmebaasis!"
 
 #. / Chicago-style item citation: two authors
-#: application/models/Item.php:467
+#: application/models/Item.php:466
 #, php-format
 msgid "%1$s and %2$s"
 msgstr "%1$s ja %2$s"
 
 #. / Chicago-style item citation: three authors
-#: application/models/Item.php:471
+#: application/models/Item.php:470
 #, php-format
 msgid "%1$s, %2$s, and %3$s"
 msgstr "%1$s, %2$s ja %3$s"
 
 #. / Chicago-style item citation: more than three authors
-#: application/models/Item.php:475
+#: application/models/Item.php:474
 #, php-format
 msgid "%s et al."
 msgstr "%s jt."
 
 #. / Chicago-style item citation: access date and URL
-#: application/models/Item.php:493
+#: application/models/Item.php:492
 #, php-format
 msgid "accessed %1$s, %2$s."
 msgstr "vaadatud %1$s, %2$s."
 
-#: application/models/Item.php:510
+#: application/models/Item.php:509
 msgid "Cannot add an existing file to an item!"
 msgstr "Ühikule ei saa lisada olemasolevat faili!"
 
-#: application/models/Item.php:514
+#: application/models/Item.php:513
 msgid "File must be valid before it can be associated with an item!"
 msgstr "Failitüüp peab olema sobiv, et seda saaks ühikuga siduda!"
 
@@ -3343,85 +3374,85 @@ msgid ""
 " or an element id to determine if an item type has an element."
 msgstr "Vale parameeter. Funktsioon omab_tunnust nõuab, et tunnuseobjekt või tunnuse id määraks ära selle, kas ühikuliigil on tunnus."
 
-#: application/models/Job/ItemBatchEditAll.php:41
+#: application/models/Job/ItemBatchEditAll.php:40
 msgid "Batch Edit All Items: No item matches the specified filters."
 msgstr "Kõikide ühikute hulgitöötlemine: Määratud filtritele ei vasta ükski ühik."
 
-#: application/models/Job/ItemBatchEditAll.php:48
+#: application/models/Job/ItemBatchEditAll.php:47
 #, php-format
 msgid "Batch Edit: Starting processing 1 item."
 msgid_plural "Batch Edit: Starting processing %d items."
 msgstr[0] "Hulgitöötlus: 1 ühiku töötlemise alustamine."
 msgstr[1] "Hulgitöötlus: %d ühiku töötlemise alustamine."
 
-#: application/models/Job/ItemBatchEditAll.php:67
+#: application/models/Job/ItemBatchEditAll.php:66
 #, php-format
 msgid ""
 "Batch Edit: A total of %d errors occurred during the batch process of %d "
 "items."
 msgstr "Hulgitöötlus: Tekkis %d viga %d ühiku hulgitöötlemisel."
 
-#: application/models/Job/ItemBatchEditAll.php:74
+#: application/models/Job/ItemBatchEditAll.php:73
 #, php-format
 msgid "Batch Edit: The item has been processed successfully."
 msgid_plural "Batch Edit: All %d items have been processed successfully."
 msgstr[0] "Hulgitöötlus: Ühik on töödeldud."
 msgstr[1] "Hulgitöötlus: Kõik %d ühikut on töödeldud."
 
-#: application/models/Job/ItemBatchEditAll.php:91
+#: application/models/Job/ItemBatchEditAll.php:90
 msgid "Item does not exist: it may have been deleted before processing."
 msgstr ""
 
-#: application/models/Job/ItemBatchEditAll.php:106
+#: application/models/Job/ItemBatchEditAll.php:105
 msgid "User is not allowed to delete this item."
 msgstr "Kasutajal pole luba seda ühikut kustutada."
 
-#: application/models/Job/ItemBatchEditAll.php:113
+#: application/models/Job/ItemBatchEditAll.php:112
 msgid "User is not allowed to edit this item."
 msgstr "Kasutajal pole luba seda ühikut muuta."
 
-#: application/models/Job/ItemBatchEditAll.php:119
+#: application/models/Job/ItemBatchEditAll.php:118
 msgid "User is not allowed to tag this item."
 msgstr "Kasutajal pole luba seda ühikut sildistada."
 
-#: application/models/Job/ItemBatchEditAll.php:142
+#: application/models/Job/ItemBatchEditAll.php:141
 msgid "The item was successfully deleted."
 msgstr "Ühik on kustutatud."
 
-#: application/models/Job/ItemBatchEditAll.php:154
+#: application/models/Job/ItemBatchEditAll.php:153
 #, php-format
 msgid "An error occured when the item was updated: %s"
 msgstr "Ühiku uuendamisel tekkis tõrge: %s"
 
-#: application/models/Job/ItemBatchEditAll.php:159
+#: application/models/Job/ItemBatchEditAll.php:158
 msgid "The item was successfully batch-edited."
 msgstr "Ühikut muudeti hulgitöötlusega."
 
-#: application/models/Job/ItemBatchEditAll.php:178
+#: application/models/Job/ItemBatchEditAll.php:176
 #, php-format
 msgid "Batch Edit Item #%d [%d/%d]: %s"
 msgstr "Ühikute hulgitöötlemine #%d [%d/%d]: %s"
 
-#: application/models/Mixin/ElementText.php:293
+#: application/models/Mixin/ElementText.php:292
 #, php-format
 msgid "There is no element \"%1$s\", \"%2$s\"!"
 msgstr "Pole tunnust \"%1$s\", \"%2$s\"!"
 
-#: application/models/Mixin/ElementText.php:312
+#: application/models/Mixin/ElementText.php:311
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
 msgstr "Ei leia tunnust, mille ID-ks oleks '%s'!"
 
-#: application/models/Mixin/ElementText.php:431
+#: application/models/Mixin/ElementText.php:430
 msgid "Element texts are not formatted correctly!"
 msgstr "Tunnusetekstide vorming pole korrektne!"
 
-#: application/models/Mixin/ElementText.php:579
+#: application/models/Mixin/ElementText.php:578
 #, php-format
 msgid "The \"%s\" field has at least one invalid value!"
 msgstr "Väljal '%s' on vähemalt üks sobimatu väärtus!"
 
-#: application/models/Mixin/ElementText.php:649
+#: application/models/Mixin/ElementText.php:648
 msgid "Cannot save element text for records that are not yet persistent!"
 msgstr "Ei saa salvestada tunnuseteksti kirjetele, mis pole veel andmebaasis!"
 
@@ -3438,36 +3469,36 @@ msgstr "Pluginate nimed ei saa tühjaks jääda"
 msgid "[Untitled] #%s"
 msgstr "[Pealkirjata]  #%s"
 
-#: application/models/Table/Item.php:145
+#: application/models/Table/Item.php:144
 msgid "Invalid search type given!"
 msgstr "Sisestatud on sobimatu otsingutüüp!"
 
-#: application/models/Tag.php:56
+#: application/models/Tag.php:57
 msgid "Tags must be given a name."
 msgstr "Siltidele peab olema antud nimi."
 
-#: application/models/Tag.php:60
+#: application/models/Tag.php:61
 msgid "That name is already taken for this tag."
 msgstr "Selle sildi nimi on selle sildi jaoks juba kasutusel."
 
-#: application/models/User.php:110
+#: application/models/User.php:109
 msgid "User may not change permissions to super-user"
 msgstr "Kasutaja ei saa anda ülemhaldaja õigusi."
 
-#: application/models/User.php:113
+#: application/models/User.php:112
 msgid "User may not change roles."
 msgstr "Kasutaja ei saa rolle muuta."
 
-#: application/models/User.php:182 application/models/User.php:230
+#: application/models/User.php:181 application/models/User.php:229
 msgid "The user must be assigned a role."
 msgstr "Kasutajale peab olema omistatud roll."
 
-#: application/models/User.php:187
+#: application/models/User.php:186
 #, php-format
 msgid "The username \"%1$s\" must be between %2$s and %3$s characters."
 msgstr "Kasutajanimi \"%1$s\" peab olema %2$s kuni %3$s tähemärki pikk."
 
-#: application/models/User.php:191
+#: application/models/User.php:190
 #, php-format
 msgid "'%s' is already in use. Please choose another username."
 msgstr "'%s' on juba kasutusel. Palun vali teine kasutajanimi."
@@ -3480,7 +3511,7 @@ msgstr "Ei saa aktiveerida olematut kasutajat."
 msgid "This migration should have been run previously (should not run again)."
 msgstr "See andmete ülekanne peaks olema juba varem sooritatud (seda ei peaks uuesti käivitama)."
 
-#: application/tests/suite/Omeka/Db/Migration/_files/migrations/50000101120000_notRunYet.php:19
+#: application/tests/suite/Omeka/Db/Migration/_files/migrations/50000101120000_notRunYet.php:18
 msgid "This migration should not be run."
 msgstr "Seda andmete ülekandmist ei peaks käivitama."
 
@@ -3513,73 +3544,73 @@ msgstr "CHNM"
 
 #: application/tests/suite/Omeka/NavigationTest.php:982
 #: application/tests/suite/Omeka/NavigationTest.php:990
-#: application/tests/suite/Omeka/NavigationTest.php:1128
-#: application/tests/suite/Omeka/NavigationTest.php:1136
+#: application/tests/suite/Omeka/NavigationTest.php:1127
+#: application/tests/suite/Omeka/NavigationTest.php:1135
 msgid "Page "
 msgstr "Leht"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1009
-#: application/tests/suite/Omeka/NavigationTest.php:1013
-#: application/tests/suite/Omeka/NavigationTest.php:1071
-#: application/tests/suite/Omeka/NavigationTest.php:1076
-#: application/tests/suite/Omeka/NavigationTest.php:1156
-#: application/tests/suite/Omeka/NavigationTest.php:1256
+#: application/tests/suite/Omeka/NavigationTest.php:1008
+#: application/tests/suite/Omeka/NavigationTest.php:1012
+#: application/tests/suite/Omeka/NavigationTest.php:1070
+#: application/tests/suite/Omeka/NavigationTest.php:1075
+#: application/tests/suite/Omeka/NavigationTest.php:1155
+#: application/tests/suite/Omeka/NavigationTest.php:1255
 msgid "Page 1"
 msgstr "1. leht"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1016
-#: application/tests/suite/Omeka/NavigationTest.php:1022
-#: application/tests/suite/Omeka/NavigationTest.php:1079
-#: application/tests/suite/Omeka/NavigationTest.php:1082
-#: application/tests/suite/Omeka/NavigationTest.php:1163
-#: application/tests/suite/Omeka/NavigationTest.php:1182
-#: application/tests/suite/Omeka/NavigationTest.php:1200
-#: application/tests/suite/Omeka/NavigationTest.php:1232
+#: application/tests/suite/Omeka/NavigationTest.php:1015
+#: application/tests/suite/Omeka/NavigationTest.php:1021
+#: application/tests/suite/Omeka/NavigationTest.php:1078
+#: application/tests/suite/Omeka/NavigationTest.php:1081
+#: application/tests/suite/Omeka/NavigationTest.php:1162
+#: application/tests/suite/Omeka/NavigationTest.php:1181
+#: application/tests/suite/Omeka/NavigationTest.php:1199
+#: application/tests/suite/Omeka/NavigationTest.php:1231
 msgid "Page 2"
 msgstr "2. leht"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1025
-#: application/tests/suite/Omeka/NavigationTest.php:1029
-#: application/tests/suite/Omeka/NavigationTest.php:1085
-#: application/tests/suite/Omeka/NavigationTest.php:1089
-#: application/tests/suite/Omeka/NavigationTest.php:1164
-#: application/tests/suite/Omeka/NavigationTest.php:1183
-#: application/tests/suite/Omeka/NavigationTest.php:1193
-#: application/tests/suite/Omeka/NavigationTest.php:1255
+#: application/tests/suite/Omeka/NavigationTest.php:1024
+#: application/tests/suite/Omeka/NavigationTest.php:1028
+#: application/tests/suite/Omeka/NavigationTest.php:1084
+#: application/tests/suite/Omeka/NavigationTest.php:1088
+#: application/tests/suite/Omeka/NavigationTest.php:1163
+#: application/tests/suite/Omeka/NavigationTest.php:1182
+#: application/tests/suite/Omeka/NavigationTest.php:1192
+#: application/tests/suite/Omeka/NavigationTest.php:1254
 msgid "Page 3"
 msgstr "3. leht"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1032
-#: application/tests/suite/Omeka/NavigationTest.php:1041
-#: application/tests/suite/Omeka/NavigationTest.php:1092
-#: application/tests/suite/Omeka/NavigationTest.php:1096
-#: application/tests/suite/Omeka/NavigationTest.php:1165
-#: application/tests/suite/Omeka/NavigationTest.php:1184
-#: application/tests/suite/Omeka/NavigationTest.php:1201
-#: application/tests/suite/Omeka/NavigationTest.php:1222
-#: application/tests/suite/Omeka/NavigationTest.php:1240
-#: application/tests/suite/Omeka/NavigationTest.php:1250
+#: application/tests/suite/Omeka/NavigationTest.php:1031
+#: application/tests/suite/Omeka/NavigationTest.php:1040
+#: application/tests/suite/Omeka/NavigationTest.php:1091
+#: application/tests/suite/Omeka/NavigationTest.php:1095
+#: application/tests/suite/Omeka/NavigationTest.php:1164
+#: application/tests/suite/Omeka/NavigationTest.php:1183
+#: application/tests/suite/Omeka/NavigationTest.php:1200
+#: application/tests/suite/Omeka/NavigationTest.php:1221
+#: application/tests/suite/Omeka/NavigationTest.php:1239
+#: application/tests/suite/Omeka/NavigationTest.php:1249
 msgid "Page 4"
 msgstr "4. leht"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1044
-#: application/tests/suite/Omeka/NavigationTest.php:1048
-#: application/tests/suite/Omeka/NavigationTest.php:1099
-#: application/tests/suite/Omeka/NavigationTest.php:1103
-#: application/tests/suite/Omeka/NavigationTest.php:1166
-#: application/tests/suite/Omeka/NavigationTest.php:1175
-#: application/tests/suite/Omeka/NavigationTest.php:1223
-#: application/tests/suite/Omeka/NavigationTest.php:1241
+#: application/tests/suite/Omeka/NavigationTest.php:1043
+#: application/tests/suite/Omeka/NavigationTest.php:1047
+#: application/tests/suite/Omeka/NavigationTest.php:1098
+#: application/tests/suite/Omeka/NavigationTest.php:1102
+#: application/tests/suite/Omeka/NavigationTest.php:1165
+#: application/tests/suite/Omeka/NavigationTest.php:1174
+#: application/tests/suite/Omeka/NavigationTest.php:1222
+#: application/tests/suite/Omeka/NavigationTest.php:1240
 msgid "Page 5"
 msgstr "5. leht"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1051
-#: application/tests/suite/Omeka/NavigationTest.php:1055
-#: application/tests/suite/Omeka/NavigationTest.php:1215
+#: application/tests/suite/Omeka/NavigationTest.php:1050
+#: application/tests/suite/Omeka/NavigationTest.php:1054
+#: application/tests/suite/Omeka/NavigationTest.php:1214
 msgid "Page 6"
 msgstr "6. leht"
 
-#: application/views/helpers/AllElementTexts.php:108
+#: application/views/helpers/AllElementTexts.php:107
 msgid "[no text]"
 msgstr "[teksti pole]"
 
@@ -3587,7 +3618,7 @@ msgstr "[teksti pole]"
 msgid "Add Input"
 msgstr "Lisa sisend"
 
-#: application/views/helpers/ElementInput.php:131
+#: application/views/helpers/ElementInput.php:130
 msgid "Use HTML"
 msgstr "Kasuta HTML-i"
 
@@ -3632,12 +3663,18 @@ msgstr "Sorteerimisalus:"
 msgid "View the items in %s"
 msgstr "Vaata ühikuid %s-s."
 
-#: application/views/scripts/collections/show.php:12
-#, php-format
-msgid "Items in the %s Collection"
-msgstr "Ühikud kogus %s"
+#: application/views/scripts/collections/show.php:13
+msgid "Collection Items"
+msgstr "Kollektsiooni ühikud"
 
 #: application/views/scripts/collections/show.php:33
+#, php-format
+msgid "View item"
+msgid_plural "View all %s items"
+msgstr[0] "Vaata ühikut"
+msgstr[1] "Vaata kõiki %s ühikut"
+
+#: application/views/scripts/collections/show.php:35
 msgid "There are currently no items within this collection."
 msgstr "Selles kogus pole praegu ühikuid."
 
@@ -3706,9 +3743,9 @@ msgstr "Omekas on tekkinud viga"
 msgid ""
 "To learn how to see more detailed information about this error, see the "
 "Omeka Codex page on <a "
-"href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error "
-"messages</a>."
-msgstr "Et selle vea kohta rohkem infot leida, vaata Omeka dokumentatsioonist lehte <a href=\"http://omeka.org/codex/Retrieving_error_messages\">veateadete kuvamise</a> kohta."
+"href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">retrieving"
+" error messages</a>."
+msgstr ""
 
 #: application/views/scripts/index.php:10
 msgid "Featured Item"

@@ -6,14 +6,14 @@
 # evilinstone <evilinstone@gmail.com>, 2013
 # evilinstone <evilinstone@gmail.com>, 2013
 # Izoniz <izonizne@mail.ru>, 2013-2014
-# tanya chorna <tanya.chorna@gmail.com>, 2017
+# tanya chorna <tanya.chorna@gmail.com>, 2017-2018
 # Yurii Kostiuk <kostyuk.yuiriy@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2017-09-19 14:53+0000\n"
+"PO-Revision-Date: 2018-04-20 11:55+0000\n"
 "Last-Translator: tanya chorna <tanya.chorna@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/omeka/omeka/language/uk/)\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgid ""
 msgstr "Набір елементів метаданих Дублінського ядра загальний для всіх Omeka записів, включаючи елементи, файли та колекції. Детальніше дивитись http://dublincore.org/documents/dces/."
 
 #. Dublin Core: Title element name
-#: admin/themes/default/collections/browse.php:29
+#: admin/themes/default/collections/browse.php:30
 #: admin/themes/default/items/browse.php:46
 #: admin/themes/default/search/index.php:13
 #: application/views/scripts/collections/browse.php:10
@@ -41,7 +41,7 @@ msgstr "Назва"
 
 #. Dublin Core: Title element description
 msgid "A name given to the resource"
-msgstr "Назва, надана ресурсу"
+msgstr "Назва, визначена для ресурсу"
 
 #. Dublin Core: Creator element name
 #: admin/themes/default/items/browse.php:47
@@ -51,11 +51,11 @@ msgstr "Автор"
 
 #. Dublin Core: Creator element description
 msgid "An entity primarily responsible for making the resource"
-msgstr "Організація, відповідальна за підтримку ресурсу"
+msgstr "Організація, відповідальна за створення ресурсу"
 
 #. Dublin Core: Subject element name
 msgid "Subject"
-msgstr "Тема"
+msgstr "Тематика"
 
 #. Dublin Core: Subject element description
 msgid "The topic of the resource"
@@ -63,7 +63,7 @@ msgstr "Тема ресурсу"
 
 #. Dublin Core: Description element name
 #: admin/themes/default/element-sets/browse.php:17
-#: admin/themes/default/item-types/browse.php:15
+#: admin/themes/default/item-types/browse.php:30
 #: admin/themes/default/item-types/show.php:14
 #: admin/themes/default/settings/edit-item-type-elements.php:27
 #: application/forms/ItemTypes.php:150
@@ -72,7 +72,7 @@ msgstr "Опис"
 
 #. Dublin Core: Description element description
 msgid "An account of the resource"
-msgstr ""
+msgstr "Опис ресурсу"
 
 #. Dublin Core: Publisher element name
 msgid "Publisher"
@@ -80,16 +80,16 @@ msgstr "Видавець"
 
 #. Dublin Core: Publisher element description
 msgid "An entity responsible for making the resource available"
-msgstr ""
+msgstr "Організація, відповідальна за створення доступу до ресурсу"
 
 #. Dublin Core: Contributor element name
 #. User role: contributor
 msgid "Contributor"
-msgstr "Жертводавець"
+msgstr "Благодійник"
 
 #. Dublin Core: Contributor element description
 msgid "An entity responsible for making contributions to the resource"
-msgstr ""
+msgstr "Організація, відповідальна за благодійний внесок на створення ресурсу"
 
 #. Dublin Core: Date element name
 msgid "Date"
@@ -120,11 +120,11 @@ msgstr "Формат файлу, фізичний носій чи розміри
 
 #. Dublin Core: Identifier element name
 msgid "Identifier"
-msgstr "Код"
+msgstr "Ідентифікатор"
 
 #. Dublin Core: Identifier element description
 msgid "An unambiguous reference to the resource within a given context"
-msgstr ""
+msgstr "Посилання на ресурс в межах певного контексту, унікальний ідентифікатор ресурсу "
 
 #. Dublin Core: Source element name
 msgid "Source"
@@ -132,7 +132,7 @@ msgstr "Джерело"
 
 #. Dublin Core: Source element description
 msgid "A related resource from which the described resource is derived"
-msgstr ""
+msgstr "Пов'язаний ресурс, з якого походить описаний ресурс"
 
 #. Dublin Core: Language element name
 msgid "Language"
@@ -158,7 +158,7 @@ msgstr "Покриття"
 msgid ""
 "The spatial or temporal topic of the resource, the spatial applicability of "
 "the resource, or the jurisdiction under which the resource is relevant"
-msgstr ""
+msgstr "Просторова або тимчасова тема ресурсу, просторова придатність ресурсу або юрисдикція, якій відповідає ресурс."
 
 #. Dublin Core: Rights element name
 msgid "Rights"
@@ -166,17 +166,17 @@ msgstr "Права"
 
 #. Dublin Core: Rights element description
 msgid "Information about rights held in and over the resource"
-msgstr ""
+msgstr "Інформація про права, що зберігаються в ресурсі та за його межами"
 
 #. Item Type Metadata
 msgid "Item Type Metadata"
-msgstr "Метадата типу елементу"
+msgstr "Метадані типу елементу"
 
 #. Item Type Metadata description
 msgid ""
 "The item type metadata element set, consisting of all item type elements "
 "bundled with Omeka and all item type elements created by an administrator."
-msgstr "Метаданні типу елементів множини елементів, що складається з усіх типів елементи в комплекті з Omeka і всіх типів елементів створених адміністратором."
+msgstr "Метадані типу елемента набору елементів, що складаються з усіх типів елементів в Omeka і всіх типів елементів створених адміністратором."
 
 #. Omeka Legacy File
 msgid "Omeka Legacy File"
@@ -188,7 +188,7 @@ msgid ""
 "was included in the `files` table in previous versions of Omeka. These "
 "elements are common to all Omeka files. This set may be deprecated in future"
 " versions."
-msgstr "Метаданні елементів встановлених на додаток до елементів Dublin Core, були додані в `files` в попередніх версіях Omeka. Ці елементи є загальними для всіх файлів Omeka. Цей набір може бути виключено в майбутніх версіях."
+msgstr "Метаданні елементів встановлених як додаток до елементів Dublin Core, були додані в таблицю `files` в попередніх версіях Omeka. Ці елементи є загальними для всіх файлів Omeka. Цей набір може бути виключено в майбутніх версіях."
 
 #. Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
@@ -244,13 +244,13 @@ msgstr "Пост-обробка"
 
 #. Omeka Image File
 msgid "Omeka Image File"
-msgstr "Файл графічний Omeka"
+msgstr "Графічний файл Omeka"
 
 #. Omeka Image File description
 msgid ""
 "The metadata element set that was included in the `files_images` table in "
 "previous versions of Omeka. These elements are common to all image files."
-msgstr "Набір метаданих елементів, які були додані в `files_images` таблиці в попередніх версіях Omeka. Ці елементи є загальними для всіх графічних файлів."
+msgstr "Набір метаданих елементів, які були додані в таблицю `files_images` в попередніх версіях Omeka. Ці елементи є загальними для всіх графічних файлів."
 
 #. Omeka Image File: Width element
 msgid "Width"
@@ -286,13 +286,13 @@ msgstr "IPTC масив"
 
 #. Omeka Video File
 msgid "Omeka Video File"
-msgstr " Omeka відео документ"
+msgstr "Відео-файл Omeka"
 
 #. Omeka Video File description
 msgid ""
 "The metadata element set that was included in the `files_videos` table in "
 "previous versions of Omeka. These elements are common to all video files."
-msgstr "Набір метаданих елементів, які були додані в `files_videos` таблиці в попередніх версіях Omeka. Ці елементи є загальними для всіх відео-файлів."
+msgstr "Набір метаданих елементів, які були додані в таблицю `files_videos` в попередніх версіях Omeka. Ці елементи є загальними для всіх відео-файлів."
 
 #. Omeka Video File: Bitrate element
 msgid "Bitrate"
@@ -338,22 +338,22 @@ msgstr "Зовнішній вигляд"
 msgid ""
 "Check the links to display them in the main navigation. Click and drag the "
 "links into the preferred display order."
-msgstr ""
+msgstr "Перевірте посилання, щоб відобразити їх у головній навігації. Натисніть і перетягніть посилання в потрібному для відображення порядку."
 
 #: admin/themes/default/appearance/edit-navigation.php:19
 msgid "Add a Link to the Navigation"
-msgstr ""
+msgstr "Додати посилання до Навігації"
 
 #: admin/themes/default/appearance/edit-navigation.php:21
 #: admin/themes/default/appearance/edit-navigation.php:41
 #: admin/themes/default/users/api-keys.php:40
-#: application/forms/Navigation.php:138
+#: application/forms/Navigation.php:134
 msgid "Label"
 msgstr "Етикетка"
 
 #: admin/themes/default/appearance/edit-navigation.php:23
 #: admin/themes/default/appearance/edit-navigation.php:42
-#: application/forms/Navigation.php:139
+#: application/forms/Navigation.php:135
 msgid "URL"
 msgstr "Посилання"
 
@@ -378,14 +378,14 @@ msgstr "Додати посилання"
 #: admin/themes/default/settings/edit-settings.php:15
 #: admin/themes/default/themes/config.php:16
 #: admin/themes/default/users/edit.php:21
-#: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:73
+#: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:66
 msgid "Save Changes"
 msgstr "Записати зміни"
 
 #: admin/themes/default/appearance/edit-navigation.php:35
 #: admin/themes/default/appearance/reset-navigation-confirm.php:2
 msgid "Reset Navigation"
-msgstr ""
+msgstr "Початкові налаштування Навігації"
 
 #: admin/themes/default/appearance/edit-navigation.php:43
 #: admin/themes/default/collections/edit.php:23
@@ -393,7 +393,7 @@ msgstr ""
 #: admin/themes/default/files/show.php:28
 #: admin/themes/default/items/edit.php:20
 #: admin/themes/default/items/show.php:45
-#: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:79
+#: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:72
 msgid "View Public Page"
 msgstr "Переглянути загальнодоступну сторінку"
 
@@ -414,7 +414,7 @@ msgstr "Переглянути загальнодоступну сторінку
 #: admin/themes/default/settings/edit-item-type-elements.php:23
 #: admin/themes/default/users/browse.php:66
 #: admin/themes/default/users/edit.php:26
-#: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:83
+#: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:76
 msgid "Delete"
 msgstr "Видалити"
 
@@ -428,12 +428,12 @@ msgstr "Ви впевнені?"
 msgid ""
 "All customizations will be lost. Order and labels will revert to Omeka "
 "defaults. Custom links will be lost."
-msgstr ""
+msgstr "Всі налаштування будуть втрачені. Порядок та етикетки повертаються до стандартних налаштувань Omeka. Користувацькі посилання будуть втрачені."
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:12
-#: admin/themes/default/collections/browse.php:75
-#: admin/themes/default/collections/browse.php:85
+#: admin/themes/default/collections/browse.php:76
+#: admin/themes/default/collections/browse.php:86
 msgid "Add a Collection"
 msgstr "Додати колекцію"
 
@@ -478,7 +478,7 @@ msgstr "Переглянути колекції"
 #: admin/themes/default/items/browse.php:3
 #: admin/themes/default/plugins/browse.php:2
 #: admin/themes/default/search/index.php:2
-#: admin/themes/default/tags/browse.php:12
+#: admin/themes/default/tags/browse.php:6
 #: admin/themes/default/users/browse.php:2
 #: application/views/scripts/collections/browse.php:6
 #: application/views/scripts/items/browse.php:6
@@ -489,23 +489,23 @@ msgstr "(загалом %s)"
 
 #: admin/themes/default/collections/browse.php:17
 #, php-format
-msgid "%sOne item%s has no collection."
+msgid "%s%d item%s has no collection."
 msgid_plural "%s%d items%s aren't in a collection."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%s %d елемент %s не в колекції."
+msgstr[1] "%s %d елемент %s не належить жодній колекції."
+msgstr[2] "%s %d елементи %s не належать жодній колекції."
 
-#: admin/themes/default/collections/browse.php:19
+#: admin/themes/default/collections/browse.php:20
 msgid "All items are in a collection."
-msgstr ""
+msgstr "Всі елементи у колекції."
 
-#: admin/themes/default/collections/browse.php:30
+#: admin/themes/default/collections/browse.php:31
 #: admin/themes/default/collections/show.php:51
 #: application/views/scripts/collections/browse.php:35
 msgid "Contributors"
-msgstr "Жертводавці"
+msgstr "Благодійники"
 
-#: admin/themes/default/collections/browse.php:31
+#: admin/themes/default/collections/browse.php:32
 #: admin/themes/default/files/show.php:66
 #: admin/themes/default/items/browse.php:49
 #: application/views/scripts/collections/browse.php:11
@@ -513,24 +513,24 @@ msgstr "Жертводавці"
 msgid "Date Added"
 msgstr "Дата створення"
 
-#: admin/themes/default/collections/browse.php:32
+#: admin/themes/default/collections/browse.php:33
 #: admin/themes/default/collections/show.php:46
 #: admin/themes/default/item-types/show.php:42
 msgid "Total Number of Items"
 msgstr "Загальна кількість елементів"
 
-#: admin/themes/default/collections/browse.php:47
+#: admin/themes/default/collections/browse.php:48
 #: admin/themes/default/items/browse.php:86
 msgid "(Private)"
 msgstr "(Приватне)"
 
-#: admin/themes/default/collections/browse.php:50
+#: admin/themes/default/collections/browse.php:51
 #: admin/themes/default/collections/show.php:32
 #: admin/themes/default/element-sets/browse.php:27
 #: admin/themes/default/error/404.php:24 admin/themes/default/error/404.php:45
 #: admin/themes/default/files/show.php:26 admin/themes/default/index.php:60
 #: admin/themes/default/index.php:79
-#: admin/themes/default/item-types/browse.php:26
+#: admin/themes/default/item-types/browse.php:41
 #: admin/themes/default/item-types/show.php:51
 #: admin/themes/default/items/browse.php:31
 #: admin/themes/default/items/browse.php:91
@@ -541,30 +541,30 @@ msgstr "(Приватне)"
 msgid "Edit"
 msgstr "Редагувати"
 
-#: admin/themes/default/collections/browse.php:59
+#: admin/themes/default/collections/browse.php:60
 msgid "No contributors"
-msgstr "Жертводавці відсутні"
+msgstr "Благодійники відсутні"
 
-#: admin/themes/default/collections/browse.php:79
+#: admin/themes/default/collections/browse.php:80
 msgid "There are no collections on this page."
 msgstr "Колекції відсутні на цій сторінці."
 
-#: admin/themes/default/collections/browse.php:79
+#: admin/themes/default/collections/browse.php:80
 msgid "View All Collections"
 msgstr "Перегляд усіх колекцій"
 
-#: admin/themes/default/collections/browse.php:82
+#: admin/themes/default/collections/browse.php:83
 msgid "You have no collections."
 msgstr "У вас відсутні колекції."
 
-#: admin/themes/default/collections/browse.php:84
+#: admin/themes/default/collections/browse.php:85
 msgid "Get started by adding your first collection."
 msgstr "Розпочніть з додавання вашої першої колекції."
 
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/models/Mixin/ElementText.php:780
+#: application/models/Mixin/ElementText.php:779
 #: application/views/scripts/functions.php:22
 msgid "[Untitled]"
 msgstr "[Безіменний]"
@@ -577,7 +577,7 @@ msgstr "Редагувати колекцію #%s"
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Collection #%s"
-msgstr ""
+msgstr "Колекція #%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
@@ -603,7 +603,7 @@ msgstr "Ні"
 
 #: admin/themes/default/collections/show.php:56
 msgid "No contributors."
-msgstr "Жертводавці відсутні."
+msgstr "Благодійники відсутні."
 
 #: admin/themes/default/collections/show.php:62
 #: admin/themes/default/files/show.php:93
@@ -697,7 +697,7 @@ msgstr "Системна інформація"
 
 #: admin/themes/default/common/global-nav.php:1
 msgid "Manage Site"
-msgstr ""
+msgstr "Управління сайтом"
 
 #: admin/themes/default/common/global-nav.php:5
 #: admin/themes/default/plugins/browse.php:2
@@ -710,23 +710,23 @@ msgstr "Користувачі"
 
 #: admin/themes/default/common/header.php:11
 #: admin/themes/default/upgrade/index.php:6
-#: application/views/scripts/common/admin-bar.php:11
+#: application/views/scripts/common/admin-bar.php:10
 msgid "Omeka Admin"
 msgstr "Адміністратор Omeka"
 
 #: admin/themes/default/common/header.php:41
 #: application/views/scripts/common/header.php:32
 msgid "Skip to main content"
-msgstr ""
+msgstr "Перейти до головного змісту"
 
 #: admin/themes/default/common/header.php:61
-#: application/views/scripts/common/admin-bar.php:7
+#: application/views/scripts/common/admin-bar.php:6
 #, php-format
 msgid "Welcome, %s"
 msgstr "Ласкаво просимо, %s"
 
 #: admin/themes/default/common/header.php:62
-#: application/views/scripts/common/admin-bar.php:15
+#: application/views/scripts/common/admin-bar.php:14
 msgid "Log Out"
 msgstr "Вийти"
 
@@ -762,7 +762,7 @@ msgstr "API"
 #: admin/themes/default/common/users-nav.php:11
 #: application/forms/ChangePassword.php:80
 msgid "Change Password"
-msgstr "Змінити гасло"
+msgstr "Змінити пароль"
 
 #: admin/themes/default/common/users-nav.php:17
 #: admin/themes/default/users/api-keys.php:14
@@ -770,6 +770,8 @@ msgid "API Keys"
 msgstr "API ключі"
 
 #: admin/themes/default/element-sets/browse.php:16
+#: admin/themes/default/tags/browse.php:27
+#: admin/themes/default/tags/browse.php:57
 #: admin/themes/default/users/browse.php:17
 #: application/forms/ItemTypes.php:141
 msgid "Name"
@@ -777,13 +779,13 @@ msgstr "Назва"
 
 #: admin/themes/default/element-sets/edit.php:5
 msgid "Edit Element Set"
-msgstr ""
+msgstr "Редагувати набір елементів"
 
 #: admin/themes/default/element-sets/edit.php:17
 msgid ""
 "Click and drag the elements into the preferred display order. Click the "
 "right arrows to add customized comments to element descriptions."
-msgstr ""
+msgstr "Натисніть та перетягніть елементи у бажаний для перегляду порядок. Натисніть праву стрілочку для того, щоб додати коментарі до елементів опису."
 
 #: admin/themes/default/element-sets/edit.php:29
 msgid "Comment"
@@ -816,12 +818,12 @@ msgid ""
 "You&#8217;ve tried to access a page that does not seem to exist. Sometimes "
 "this happens. Below is a quick break-down of the items, collections, and "
 "exhibits on this site."
-msgstr ""
+msgstr "Ви намагалися отримати доступ до сторінки, якої не існує. Нижче наведено швидкий поділ предметів, колекцій та експонатів на цьому сайті."
 
 #: admin/themes/default/error/404.php:10
 #, php-format
 msgid "If this does not help, try contacting the %s."
-msgstr "Якщо це не допоможе, прошу контактувати %s."
+msgstr "Якщо це не допоможе, прошу звертатися %s."
 
 #: admin/themes/default/error/404.php:16 admin/themes/default/index.php:52
 msgid "Recent Items"
@@ -848,7 +850,7 @@ msgstr "405: Заборонений метод"
 msgid ""
 "You must use a different method to access this URL. If you reached this page"
 " by following a link or clicking a button in Omeka, please contact the %s."
-msgstr ""
+msgstr "Щоб отримати доступ до цієї URL-адреси, потрібно використовувати інший метод. Якщо ви потрапили на таку сторінку, натиснувши посилання або натиснувши кнопку в Omeka, будь ласка, зв'яжіться з %s."
 
 #: admin/themes/default/files/edit.php:8
 #, php-format
@@ -876,15 +878,15 @@ msgstr "Оригінал"
 
 #: admin/themes/default/files/show.php:44
 msgid "Fullsize"
-msgstr ""
+msgstr "Повнорозмірне"
 
 #: admin/themes/default/files/show.php:45
 msgid "Thumbnail"
-msgstr ""
+msgstr "Мініатюра"
 
 #: admin/themes/default/files/show.php:46
 msgid "Square Thumbnail"
-msgstr ""
+msgstr "Квадратна мініатюра"
 
 #: admin/themes/default/files/show.php:52
 #: application/views/scripts/files/show.php:22
@@ -946,37 +948,37 @@ msgstr "Вбудовані метадані"
 #: admin/themes/default/index.php:10
 msgid "item"
 msgid_plural "items"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "елемент"
+msgstr[1] "елемент"
+msgstr[2] "елементи"
 
 #: admin/themes/default/index.php:11
 msgid "collection"
 msgid_plural "collections"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "колекція"
+msgstr[1] "колекція"
+msgstr[2] "колекції"
 
 #: admin/themes/default/index.php:12
 msgid "tag"
 msgid_plural "tags"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "тег"
+msgstr[1] "тег"
+msgstr[2] "теги"
 
 #: admin/themes/default/index.php:16
 msgid "plugin"
 msgid_plural "plugins"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "плагін"
+msgstr[1] "плагін"
+msgstr[2] "плагіни"
 
 #: admin/themes/default/index.php:20
 msgid "user"
 msgid_plural "users"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "користувач"
+msgstr[1] "користувач"
+msgstr[2] "користувачі"
 
 #: admin/themes/default/index.php:24
 msgid "theme"
@@ -989,13 +991,13 @@ msgstr "Нова версія Omeka доступна до викачування
 #: admin/themes/default/index.php:36
 #, php-format
 msgid "Upgrade to %s"
-msgstr "Поновлення до %s"
+msgstr "Оновлення до %s"
 
 #: admin/themes/default/item-types/add-existing-element.php:22
 #: admin/themes/default/item-types/add-new-element.php:15
 #: admin/themes/default/item-types/form.php:43
 #: admin/themes/default/items/tag-form.php:23
-#: application/views/helpers/ElementInput.php:113
+#: application/views/helpers/ElementInput.php:112
 msgid "Remove"
 msgstr "Видалити"
 
@@ -1016,16 +1018,28 @@ msgstr "Додати тип елемента"
 msgid "Browse Item Types"
 msgstr "Переглянути типи елементу"
 
-#: admin/themes/default/item-types/browse.php:7
-#: admin/themes/default/item-types/browse.php:40
+#: admin/themes/default/item-types/browse.php:10
+#: admin/themes/default/item-types/browse.php:55
 msgid "Add an Item Type"
 msgstr "Додати тип елементу"
 
-#: admin/themes/default/item-types/browse.php:14
+#: admin/themes/default/item-types/browse.php:18
+#, php-format
+msgid "%s%d item%s has no type."
+msgid_plural "%s%d items%s have no type."
+msgstr[0] "%s %d елемент %s не має інформації про тип."
+msgstr[1] "%s %d елемент %s не має інформації про тип."
+msgstr[2] "%s %d елементи %sне мають інформації про тип. "
+
+#: admin/themes/default/item-types/browse.php:21
+msgid "All items have a type."
+msgstr "Всі елементи мають тип."
+
+#: admin/themes/default/item-types/browse.php:29
 msgid "Type Name"
 msgstr "Назви типу"
 
-#: admin/themes/default/item-types/browse.php:16
+#: admin/themes/default/item-types/browse.php:31
 msgid "Total Items"
 msgstr "Загальна кількість елементів"
 
@@ -1077,7 +1091,7 @@ msgstr "Тип елементу #%s"
 
 #: admin/themes/default/item-types/show.php:25
 msgid "There are no elements."
-msgstr "Елменти відсутні."
+msgstr "Елементи відсутні."
 
 #: admin/themes/default/item-types/show.php:39
 msgid "There are no recently added items."
@@ -1106,21 +1120,21 @@ msgstr "Колекція"
 
 #: admin/themes/default/items/batch-delete-all.php:2
 msgid "Batch Delete All Searched Items"
-msgstr ""
+msgstr " "
 
 #: admin/themes/default/items/batch-delete-all.php:18
 #, php-format
 msgid "All %d items matching the search filters above will be deleted."
-msgstr ""
+msgstr "Всі %d елементи за пошуковими фільтрами буде видалено."
 
 #: admin/themes/default/items/batch-delete-all.php:20
 #, php-format
 msgid "All %d items will be deleted."
-msgstr ""
+msgstr "Всі %d елементи буде видалено."
 
 #: admin/themes/default/items/batch-delete-all.php:25
 msgid "Deletions will be processed in the background item by item."
-msgstr ""
+msgstr "Видалення буде опрацьовано у фоновому режимі елемент за елементом."
 
 #: admin/themes/default/items/batch-delete-all.php:36
 #: admin/themes/default/items/batch-delete.php:47
@@ -1143,22 +1157,22 @@ msgstr "Вибрані елементи будуть видалені."
 
 #: admin/themes/default/items/batch-edit-all.php:2
 msgid "Batch Edit All Searched Items"
-msgstr ""
+msgstr "Пакетне редагування всіх пошукових елементів"
 
 #: admin/themes/default/items/batch-edit-all.php:20
 #, php-format
 msgid ""
 "Changes will be applied to all %d items matching the search filters above."
-msgstr ""
+msgstr "Зміни будуть застосовані до всіх %d елементів, що відповідають пошуковим фільтрам вище."
 
 #: admin/themes/default/items/batch-edit-all.php:22
 #, php-format
 msgid "Changes will be applied to all %d items."
-msgstr ""
+msgstr "Зміни будуть застосовані до всіх %d елементів."
 
 #: admin/themes/default/items/batch-edit-all.php:27
 msgid "Changes will be processed in the background item by item."
-msgstr ""
+msgstr "Зміни будуть опрацьовані у фоновому режимі елемент за елементом."
 
 #: admin/themes/default/items/batch-edit-common.php:2
 msgid "Item Metadata"
@@ -1264,8 +1278,8 @@ msgstr "Перегляд елементів"
 #: admin/themes/default/items/browse.php:21
 #: admin/themes/default/items/browse.php:143
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2400
-#: application/libraries/globals.php:2791
+#: application/libraries/globals.php:2411
+#: application/libraries/globals.php:2802
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Пошук елементів"
@@ -1274,21 +1288,21 @@ msgstr "Пошук елементів"
 #: admin/themes/default/items/browse.php:129
 #, php-format
 msgid "Select all %s results"
-msgstr ""
+msgstr "Вибрати всі %sрезультати"
 
 #: admin/themes/default/items/browse.php:27
 #: admin/themes/default/items/browse.php:130
 msgid "items selected"
-msgstr ""
+msgstr "Вибрані елементи"
 
 #: admin/themes/default/items/browse.php:43
 msgid "Select all rows"
-msgstr ""
+msgstr "Вибрати всі рядки"
 
 #: admin/themes/default/items/browse.php:64
 #, php-format
 msgid "Select item \"%s\""
-msgstr ""
+msgstr "Вибрати елемент \"%s\""
 
 #: admin/themes/default/items/browse.php:109
 msgid "No Tags"
@@ -1318,9 +1332,9 @@ msgstr "Розпочніть з додавання вашого першого �
 #, php-format
 msgid "The query searched 1 item and returned no results."
 msgid_plural "The query searched %s items and returned no results."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Пошуковий запит 1 елемента не дав результатів."
+msgstr[1] "Пошуковий запит  %s елемента не дав результатів."
+msgstr[2] "Пошуковий запит %s елементів не дав результатів."
 
 #: admin/themes/default/items/browse.php:173
 msgid "refine your search"
@@ -1357,7 +1371,7 @@ msgstr "Максимальний розмір документу %s."
 msgid "Find a File"
 msgstr "Знайти документ"
 
-#: admin/themes/default/items/form.php:25
+#: admin/themes/default/items/form.php:23
 msgid "Add Another File"
 msgstr "Додати інший документ"
 
@@ -1396,31 +1410,32 @@ msgstr "Додати поле"
 #: admin/themes/default/items/search-form.php:54
 #: application/views/scripts/items/search-form.php:50
 msgid "Search Joiner"
-msgstr ""
+msgstr "Поєднання в пошуку"
 
 #: admin/themes/default/items/search-form.php:59
 #: application/views/helpers/ItemSearchFilters.php:108
 #: application/views/scripts/items/search-form.php:55
 msgid "AND"
-msgstr ""
+msgstr "ТА"
 
 #: admin/themes/default/items/search-form.php:60
 #: application/views/helpers/ItemSearchFilters.php:106
 #: application/views/scripts/items/search-form.php:56
 msgid "OR"
-msgstr ""
+msgstr "ЧИ"
 
 #: admin/themes/default/items/search-form.php:67
 #: application/views/scripts/items/search-form.php:63
 msgid "Search Field"
-msgstr ""
+msgstr "Знайти поле"
 
 #: admin/themes/default/items/search-form.php:80
 #: application/views/scripts/items/search-form.php:76
 msgid "Search Type"
-msgstr ""
+msgstr "Знайти тип"
 
 #: admin/themes/default/items/search-form.php:85
+#: admin/themes/default/tags/browse.php:27
 #: application/views/scripts/items/search-form.php:81
 msgid "contains"
 msgstr "містить"
@@ -1437,7 +1452,7 @@ msgstr "відповідний"
 
 #: admin/themes/default/items/search-form.php:88
 msgid "is not exactly"
-msgstr ""
+msgstr "неточний"
 
 #: admin/themes/default/items/search-form.php:89
 #: application/views/scripts/items/search-form.php:84
@@ -1452,35 +1467,35 @@ msgstr "не порожнє"
 #: admin/themes/default/items/search-form.php:91
 #: application/views/scripts/items/search-form.php:86
 msgid "starts with"
-msgstr ""
+msgstr "почати з"
 
 #: admin/themes/default/items/search-form.php:92
 #: application/views/scripts/items/search-form.php:87
 msgid "ends with"
-msgstr ""
+msgstr "закінчити з"
 
 #: admin/themes/default/items/search-form.php:93
 msgid "matches"
-msgstr ""
+msgstr "відповідники"
 
 #: admin/themes/default/items/search-form.php:94
 msgid "does not match"
-msgstr ""
+msgstr "не відповідає"
 
 #: admin/themes/default/items/search-form.php:102
 #: application/views/scripts/items/search-form.php:95
 msgid "Search Terms"
-msgstr ""
+msgstr "Пошукові терміни"
 
 #: admin/themes/default/items/search-form.php:108
 #: application/views/scripts/items/search-form.php:101
 msgid "Remove field"
-msgstr ""
+msgstr "Видалити поле"
 
 #: admin/themes/default/items/search-form.php:116
 #: application/views/scripts/items/search-form.php:109
 msgid "Search by a range of ID#s (example: 1-4, 156, 79)"
-msgstr ""
+msgstr "Пошук за діапазоном ID (приклад: 1-4, 156, 79)"
 
 #: admin/themes/default/items/search-form.php:130
 #: application/views/scripts/items/search-form.php:120
@@ -1533,7 +1548,7 @@ msgid "Only Non-Featured Items"
 msgstr "Тільки не популярні елементи"
 
 #: admin/themes/default/items/search-form.php:233
-#: application/views/scripts/items/search-form.php:214
+#: application/views/scripts/items/search-form.php:215
 msgid "Search for items"
 msgstr "Пошук елементів"
 
@@ -1584,14 +1599,14 @@ msgid "Browse Items by Tag"
 msgstr "Перегляд елементи за мітками"
 
 #: admin/themes/default/items/tags.php:9
-#: admin/themes/default/tags/browse.php:85
+#: admin/themes/default/tags/browse.php:108
 msgid "There are no tags to display. You must first tag some items."
 msgstr "Відсутні мітки до відображення. Ви повинні для початку встановити мітки для елементів."
 
 #: admin/themes/default/plugins/browse.php:26
 #, php-format
 msgid "This version of %1$s requires at least Omeka %2$s."
-msgstr "Це версія %1$s вимагає Omeka не нижче %2$s."
+msgstr "Ця версія %1$s вимагає Omeka не нижче %2$s."
 
 #: admin/themes/default/plugins/browse.php:29
 #, php-format
@@ -1613,7 +1628,7 @@ msgstr "за %s"
 #: admin/themes/default/themes/browse.php:23
 #: admin/themes/default/themes/browse.php:50
 msgid "Get support"
-msgstr ""
+msgstr "Отримати допомогу"
 
 #: admin/themes/default/plugins/browse.php:69
 #, php-format
@@ -1639,7 +1654,7 @@ msgid "Activate"
 msgstr "Активувати"
 
 #: admin/themes/default/plugins/browse.php:118
-#: admin/themes/default/plugins/confirm-uninstall.php:16
+#: admin/themes/default/plugins/confirm-uninstall.php:18
 msgid "Uninstall"
 msgstr "Видалити"
 
@@ -1669,24 +1684,30 @@ msgstr "Видалити додаток: %s"
 msgid "Are you sure you want to uninstall %s?"
 msgstr "Ви впевнені, що бажаєте видалити %s?"
 
-#: admin/themes/default/plugins/confirm-uninstall.php:12
+#: admin/themes/default/plugins/confirm-uninstall.php:11
+msgid ""
+"Warning: data associated with this plugin may be permanently deleted from "
+"the database."
+msgstr "Застереження: дані, пов'язані з цим плагіном, можуть бути назавжди видалені з бази даних."
+
+#: admin/themes/default/plugins/confirm-uninstall.php:14
 msgid "Yes, I want to uninstall this plugin."
 msgstr "Так, я хочу видалити цей додаток."
 
-#: admin/themes/default/plugins/confirm-uninstall.php:17
+#: admin/themes/default/plugins/confirm-uninstall.php:19
 msgid "or"
 msgstr "або"
 
-#: admin/themes/default/plugins/confirm-uninstall.php:17
+#: admin/themes/default/plugins/confirm-uninstall.php:19
 #: admin/themes/default/settings/edit-item-type-elements.php:51
 msgid "Cancel"
 msgstr "Відмінити"
 
 #: admin/themes/default/search/index.php:12
-#: admin/themes/default/tags/browse.php:18
+#: admin/themes/default/tags/browse.php:26
 #: application/views/scripts/search/index.php:13
 msgid "Record Type"
-msgstr "Тип запусу"
+msgstr "Тип запису"
 
 #: admin/themes/default/search/index.php:39
 #: application/views/scripts/search/index.php:40
@@ -1695,30 +1716,30 @@ msgstr "Ваш запит не дав результатів."
 
 #: admin/themes/default/settings/edit-api.php:11
 msgid "Enable API"
-msgstr ""
+msgstr "Увімкнути API"
 
 #: admin/themes/default/settings/edit-api.php:15
 msgid "Enable or disable the API by checking or unchecking the box below."
-msgstr ""
+msgstr "Увімкнути чи вимкнути API, перевіривши чи не перевіривши наступне поле."
 
 #: admin/themes/default/settings/edit-api.php:22
 msgid "Filter Element Texts"
-msgstr ""
+msgstr "Фільтрувати елементи тексту"
 
 #: admin/themes/default/settings/edit-api.php:26
 msgid ""
 "Filter element texts by checking the box below. When checked, the API will "
 "respect the display element and element text filters when outputting element"
 " text representations."
-msgstr ""
+msgstr "Фільтрувати елементи тексту, встановивши прапорець нижче. Якщо позначено цей пункт, API буде зважати на елементи дисплею та елементи текстових фільтрів при виводі тексту."
 
 #: admin/themes/default/settings/edit-api.php:35
 msgid "Results per Page"
-msgstr ""
+msgstr "Результатів на сторінці"
 
 #: admin/themes/default/settings/edit-api.php:39
 msgid "Maximum number of API results displayed per page."
-msgstr ""
+msgstr "Максимальна кількість результатів API для відображення на сторінці."
 
 #: admin/themes/default/settings/edit-api.php:45
 #, php-format
@@ -1728,17 +1749,17 @@ msgid ""
 "adding, editing, and deleting content, is protected and requires key "
 "authentication. Each key corresponds to, and has all permissions of, an "
 "existing Omeka user. You can create keys on each user's %sedit page%s."
-msgstr ""
+msgstr "Після ввімкнення API додатки можуть бути доступні для показу, перегляду, додавання, редагування та видалення ресурсів сайту. Перегляд захищеного вмісту, а також додавання, редагування та видалення вмісту захищено та вимагає ключа автентифікації. Кожен ключ відповідає існуючому користувачеві Omeka і має всі дозволи. Ви можете створити ключі на кожній сторінці %s редагування користувача %s."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:12
 msgid "edit a specific item type"
-msgstr ""
+msgstr "редагувати певний тип елемента"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:11
 #, php-format
 msgid ""
 "Customize the element descriptions below. To re-order the elements, %s."
-msgstr ""
+msgstr "Налаштуйте опис елементів, що подаються нижче. Впорядкуйте елементи, %s."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:43
 msgid "Confirm Delete"
@@ -1749,7 +1770,7 @@ msgid ""
 "Are you sure you want to delete the selected item type elements from the "
 "database? You will lose all text related to the selected elements. This "
 "cannot be undone."
-msgstr ""
+msgstr "Ви впевнені, що хочете видалити вибрані елементи з бази даних? Ви втратите всі дані, пов'язані із вибраними елементами. Це не може бути скасовано."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:51
 msgid "Ok"
@@ -1757,11 +1778,11 @@ msgstr "Добре"
 
 #: admin/themes/default/settings/edit-search.php:10
 msgid "Search Record Types"
-msgstr ""
+msgstr "Пошук типів записів"
 
 #: admin/themes/default/settings/edit-search.php:13
 msgid "Customize which types of records will be searchable in Omeka."
-msgstr ""
+msgstr "Налаштуйте, які типи записів будуть доступні для пошуку в Omeka."
 
 #: admin/themes/default/settings/edit-search.php:23
 #: admin/themes/default/settings/edit-search.php:42
@@ -1770,7 +1791,7 @@ msgstr "Індексування записів"
 
 #: admin/themes/default/settings/edit-search.php:26
 msgid "Click on the \"Index Records\" button to re-index your records."
-msgstr ""
+msgstr "Натисніть кнопку \"Індексувати записи\", щоб переіндексувати свої записи."
 
 #: admin/themes/default/settings/edit-search.php:28
 msgid ""
@@ -1779,7 +1800,7 @@ msgid ""
 " are saved, but there are circumstances when your records are not indexed; "
 "for instance, when updating from an earlier version of Omeka or after you "
 "customize which records will be searchable."
-msgstr ""
+msgstr "Індексація означає збирання, аналіз та зберігання даних для швидкого та точного пошуку. Omeka автоматично індексує індивідуальні записи, коли вони зберігаються, але є випадки, коли записи не проіндексовані; наприклад, при оновленні з попередньої версії Omeka або після того, як ви налаштуєте, які записи будуть доступні для пошуку."
 
 #: admin/themes/default/settings/edit-security.php:23
 msgid "Restore Default Extensions"
@@ -1801,54 +1822,54 @@ msgstr "Відновити атрибути по-замовчуванню"
 msgid "Test"
 msgstr "Тест"
 
-#: admin/themes/default/tags/browse.php:7
-msgid "Edit Tags"
-msgstr "Редагувати мітки"
-
-#: admin/themes/default/tags/browse.php:9
+#: admin/themes/default/tags/browse.php:5
 msgid "Browse Tags"
-msgstr ""
+msgstr "Перегляд тегів"
 
-#: admin/themes/default/tags/browse.php:24
+#: admin/themes/default/tags/browse.php:18
+msgid "Search tags"
+msgstr "Пошук тегів"
+
+#: admin/themes/default/tags/browse.php:29
+msgid "Reset results"
+msgstr "Скинути результати"
+
+#: admin/themes/default/tags/browse.php:42
 msgid "Editing Tags"
 msgstr "Редагувати мітки"
 
-#: admin/themes/default/tags/browse.php:27
+#: admin/themes/default/tags/browse.php:45
 msgid "To view all items with a tag, click the number."
-msgstr ""
+msgstr "Щоб переглянути всі елементи з тегом, натисніть номер."
 
-#: admin/themes/default/tags/browse.php:28
+#: admin/themes/default/tags/browse.php:46
 msgid ""
 "To edit the tag name, click the name and begin editing, and hit \"enter\" to"
 " save. To cancel an edit, click the ESC key or click away from the tag."
-msgstr ""
+msgstr "Для того, щоб відредагувати назву тегу, натисніть назву та почніть редагувати, а потім натисніть \"Ввести\", щоб зберегти. Щоб скасувати редагування, натисніть клавішу ESC або клацніть далі від тегу."
 
-#: admin/themes/default/tags/browse.php:29
+#: admin/themes/default/tags/browse.php:47
 msgid ""
 "To delete a tag, click the X. Deleting a tag will not delete the tagged "
 "items."
-msgstr ""
+msgstr "Щоб видалити тег, натисніть X. Видалення тегу не призведе до видалення позначених елементів."
 
-#: admin/themes/default/tags/browse.php:39
-msgid "Most"
-msgstr "Більше"
+#: admin/themes/default/tags/browse.php:58
+msgid "Count"
+msgstr "Облік"
 
-#: admin/themes/default/tags/browse.php:40
-msgid "Least"
-msgstr "Менше"
+#: admin/themes/default/tags/browse.php:59
+msgid "Date created"
+msgstr "Дата створення"
 
-#: admin/themes/default/tags/browse.php:41
-msgid "Alphabetical"
-msgstr "За абеткою"
-
-#: admin/themes/default/tags/browse.php:42
-msgid "Recent"
-msgstr "Останні"
-
-#: admin/themes/default/tags/browse.php:53
-#: admin/themes/default/tags/browse.php:55
+#: admin/themes/default/tags/browse.php:74
+#: admin/themes/default/tags/browse.php:76
 msgid "Record Types"
 msgstr "Типи записів"
+
+#: admin/themes/default/tags/browse.php:77
+msgid "All"
+msgstr "Всі"
 
 #: admin/themes/default/themes/browse.php:15
 #: admin/themes/default/themes/browse.php:44
@@ -1876,7 +1897,7 @@ msgid ""
 "ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a "
 "href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" "
 "target=\"_blank\">design your own</a>!"
-msgstr ""
+msgstr "Додайте нові теми, завантаживши їх з <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\"> тематичного каталогу Omeka </a> або <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\"> створіть свій власний </a>!"
 
 #: admin/themes/default/themes/browse.php:46
 msgid "Use this theme"
@@ -1898,12 +1919,12 @@ msgstr "Поновлення бази даних Omeka"
 #: admin/themes/default/upgrade/index.php:34
 msgid ""
 "Your Omeka database is not compatible with your current version of Omeka."
-msgstr ""
+msgstr "База даних Omeka несумісна з вашою поточною версією Omeka."
 
 #: admin/themes/default/upgrade/index.php:35
 msgid ""
 "Please back up your existing database and then click the button to upgrade."
-msgstr ""
+msgstr "Будь ласка, створіть резервну копію існуючої бази даних та натисніть кнопку, щоб оновити її."
 
 #: admin/themes/default/upgrade/index.php:37
 msgid "Upgrade Database"
@@ -1915,7 +1936,7 @@ msgstr "Omeka успішно поновлена."
 
 #: admin/themes/default/upgrade/migrate.php:5
 msgid "Omeka encountered an error when upgrading your installation."
-msgstr ""
+msgstr "Під час оновлення Omeka сталася помилка."
 
 #: admin/themes/default/upgrade/migrate.php:24
 msgid "Return to Dashboard"
@@ -1923,37 +1944,37 @@ msgstr "Повернутись до панелі"
 
 #: admin/themes/default/upgrade/migrate.php:30
 msgid "Please restore from your database backup and try again."
-msgstr ""
+msgstr "Будь ласка, відновіть резервну копію з бази даних і спробуйте ще раз."
 
 #: admin/themes/default/upgrade/migrate.php:31
 msgid ""
 "If you have any questions please refer to <a "
 "href=\"http://omeka.org/codex\">Omeka documentation</a> or post a message on"
 " the <a href=\"http://omeka.org/forums\">Omeka forums</a>."
-msgstr ""
+msgstr "Якщо у вас виникли питання, будь ласка, зверніться до <a href=\"http://omeka.org/codex\"> документації Omeka </a> або надсилайте повідомлення на <a href=\"http://omeka.org/forums\"> форумах Omeka </a>."
 
 #: admin/themes/default/users/activate.php:2
 #: application/views/scripts/users/activate.php:2
 msgid "User Activation"
-msgstr "Ак"
+msgstr "Активація користувача"
 
 #: admin/themes/default/users/activate.php:12
 #: application/views/scripts/users/activate.php:8
 #, php-format
 msgid "Hello %s. Your username is %s"
-msgstr ""
+msgstr "Привіт %s. Логін %s"
 
 #: admin/themes/default/users/activate.php:17
 #: application/forms/ResetPassword.php:23
 #: application/views/scripts/users/activate.php:14
 msgid "Create a Password"
-msgstr "Створити гасло"
+msgstr "Створити пароль"
 
 #: admin/themes/default/users/activate.php:23 application/forms/Install.php:71
 #: application/forms/ResetPassword.php:44
 #: application/views/scripts/users/activate.php:20
 msgid "Re-type the Password"
-msgstr "Ще раз введіть гасло"
+msgstr "Повторити пароль"
 
 #: admin/themes/default/users/add.php:2
 msgid "Add New User"
@@ -1972,43 +1993,43 @@ msgstr "Редагувати користувача #%s"
 
 #: admin/themes/default/users/api-keys.php:17
 msgid "New key label"
-msgstr ""
+msgstr "Новий ключ"
 
 #: admin/themes/default/users/api-keys.php:21
 msgid ""
 "To create a new API key, enter a label for the key below. For example, "
 "describe for what purpose it will be used. This key will have all your "
 "permissions; treat it as you would your password."
-msgstr ""
+msgstr "Щоб створити новий ключ API, введіть мітку для наведеного нижче ключа. Наприклад, опишіть, з якою метою ключ буде використовуватися. Цей ключ буде мати всі ваші дозволи; це як ваш пароль."
 
 #: admin/themes/default/users/api-keys.php:31
 msgid "You have no API keys. Use the form above to create one."
-msgstr ""
+msgstr "У вас немає ключів API. Скористайтеся формою вище, щоб створити їх."
 
 #: admin/themes/default/users/api-keys.php:33
 #, php-format
 msgid "%s has no API keys. Use the form above to create one."
-msgstr ""
+msgstr "%sне має API ключів. Скористайтеся формою вище, щоб створити їх. "
 
 #: admin/themes/default/users/api-keys.php:41
 msgid "Key"
-msgstr ""
+msgstr "Ключ"
 
 #: admin/themes/default/users/api-keys.php:42
 msgid "Last IP"
-msgstr ""
+msgstr "Останній IP"
 
 #: admin/themes/default/users/api-keys.php:43
 msgid "Last accessed"
-msgstr ""
+msgstr "Останній доступ"
 
 #: admin/themes/default/users/api-keys.php:44
 msgid "Rescind"
-msgstr ""
+msgstr "Скасувати"
 
 #: admin/themes/default/users/api-keys.php:60
 msgid "Update API Keys"
-msgstr ""
+msgstr "Оновити API ключі"
 
 #: admin/themes/default/users/browse.php:2
 msgid "Browse Users"
@@ -2037,7 +2058,7 @@ msgstr "Електронна пошта"
 
 #: admin/themes/default/users/browse.php:35
 msgid "Search users"
-msgstr ""
+msgstr "Пошук користувачів"
 
 #: admin/themes/default/users/browse.php:37
 #: admin/themes/default/users/browse.php:48
@@ -2055,21 +2076,21 @@ msgstr "неактивне"
 
 #: admin/themes/default/users/change-password.php:20
 msgid "Save Password"
-msgstr "Записати гасло"
+msgstr "Запам'ятати пароль"
 
 #: admin/themes/default/users/edit.php:23
 msgid "Resend Activation Email"
-msgstr ""
+msgstr "Ще раз відправити лист активації"
 
 #: admin/themes/default/users/forgot-password.php:2
 #: application/views/scripts/users/forgot-password.php:2
 msgid "Forgot Password"
-msgstr "Забути гасло"
+msgstr "Забули пароль"
 
 #: admin/themes/default/users/forgot-password.php:11
 #: application/views/scripts/users/forgot-password.php:10
 msgid "Enter your email address to retrieve your password."
-msgstr "Введіть вашу електронну пошту для отримання вашого гасла."
+msgstr "Введіть вашу електронну пошту для отримання вашого паролю."
 
 #: admin/themes/default/users/forgot-password.php:21
 #: application/views/scripts/users/forgot-password.php:18
@@ -2088,11 +2109,11 @@ msgstr "Увійти"
 
 #: admin/themes/default/users/login.php:8
 msgid "Go to the public site"
-msgstr ""
+msgstr "Переглянути загальнодоступний сайт"
 
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
-msgstr "(Забули гасло?)"
+msgstr "(Забули пароль?)"
 
 #: admin/themes/default/users/show.php:8
 #, php-format
@@ -2124,99 +2145,99 @@ msgstr "Налаштування навігації поновлені."
 msgid ""
 "The navigation settings were not saved because of missing or invalid values."
 "  All changed values have been restored."
-msgstr ""
+msgstr "Параметри навігації не було збережено через відсутні або невірні значення. Всі змінені значення були відновлені."
 
 #: application/controllers/AppearanceController.php:97
 msgid "The navigation settings have been reset."
-msgstr ""
+msgstr "Налаштування навігації було скинуто."
 
-#: application/controllers/CollectionsController.php:76
+#: application/controllers/CollectionsController.php:59
 #, php-format
 msgid "The collection \"%s\" was successfully added!"
 msgstr "Колекція \"%s\" була успішно додана!"
 
-#: application/controllers/CollectionsController.php:78
+#: application/controllers/CollectionsController.php:61
 #, php-format
 msgid "The collection #%s was successfully added!"
-msgstr ""
+msgstr "Колекція #%s була успішно додана!"
 
-#: application/controllers/CollectionsController.php:86
+#: application/controllers/CollectionsController.php:69
 #, php-format
 msgid "The collection \"%s\" was successfully changed!"
 msgstr "Колекція \"%s\" успішно змінена!"
 
-#: application/controllers/CollectionsController.php:88
+#: application/controllers/CollectionsController.php:71
 #, php-format
 msgid "The collection #%s was successfully changed!"
-msgstr ""
+msgstr "Колекція #%s була успішно змінена!"
 
-#: application/controllers/CollectionsController.php:96
+#: application/controllers/CollectionsController.php:79
 #, php-format
 msgid "The collection \"%s\" was successfully deleted!"
 msgstr "Колекція \"%s\" успішно видалена!"
 
-#: application/controllers/CollectionsController.php:98
+#: application/controllers/CollectionsController.php:81
 #, php-format
 msgid "The collection #%s was successfully deleted!"
-msgstr "Колекція \"%s\" успішно видалена!"
+msgstr "Колекція #%s\" успішно видалена!"
 
-#: application/controllers/CollectionsController.php:106
+#: application/controllers/CollectionsController.php:89
 #, php-format
 msgid ""
 "This will delete the collection \"%s\" and its associated metadata. This "
 "will not delete any items in this collection, but will delete the reference "
 "to this collection in each item."
-msgstr ""
+msgstr "Це дозволить видалити колекцію \"%s\" та пов'язані з нею метадані. Це не призведе до видалення будь-яких елементів у цій колекції, але видаляє посилання на цю колекцію в кожному елементі."
 
-#: application/controllers/CollectionsController.php:110
+#: application/controllers/CollectionsController.php:93
 #, php-format
 msgid ""
 "This will delete the collection #%s and its associated metadata. This will "
 "not delete any items in this collection, but will delete the reference to "
 "this collection in each item."
-msgstr ""
+msgstr "Це дозволить видалити колекцію # %s та пов'язані з нею метадані. Це не призведе до видалення будь-яких елементів у цій колекції, але видалить посилання на цю колекцію в кожному елементі."
 
 #: application/controllers/ElementSetsController.php:21
 msgid ""
 "This will delete the element set and all elements assigned to the element "
 "set. Items will lose all metadata that is specific to this element set."
-msgstr ""
+msgstr "Це призведе до видалення набору елементів і всіх елементів, визначених для цього набору. Елементи втратять усі метадані, специфічні для цього елемента."
 
-#: application/controllers/ElementSetsController.php:53
-#: application/controllers/PluginsController.php:51
-#: application/controllers/PluginsController.php:79
-#: application/controllers/PluginsController.php:139
-#: application/controllers/PluginsController.php:190
-#: application/controllers/PluginsController.php:223
-#: application/controllers/PluginsController.php:331
+#: application/controllers/ElementSetsController.php:51
+#: application/controllers/PluginsController.php:49
+#: application/controllers/PluginsController.php:77
+#: application/controllers/PluginsController.php:135
+#: application/controllers/PluginsController.php:184
+#: application/controllers/PluginsController.php:217
+#: application/controllers/PluginsController.php:321
 #: application/controllers/SettingsController.php:104
 #: application/controllers/SettingsController.php:140
 #: application/controllers/SettingsController.php:177
-#: application/controllers/ThemesController.php:87
+#: application/controllers/ThemesController.php:85
 #: application/libraries/Omeka/Controller/AbstractActionController.php:183
 #: application/libraries/Omeka/Controller/AbstractActionController.php:224
 msgid "There was an error on the form. Please try again."
-msgstr ""
+msgstr "У формі з'явилася помилка. Будь ласка, спробуйте ще раз."
 
-#: application/controllers/ElementSetsController.php:72
+#: application/controllers/ElementSetsController.php:70
 msgid "The element set was successfully changed!"
-msgstr ""
+msgstr "Набір елементів було успішно змінено!"
 
-#: application/controllers/ErrorController.php:64
+#: application/controllers/ErrorController.php:63
 msgid "Page not found."
 msgstr "Сторінку не знайдено."
 
-#: application/controllers/ErrorController.php:79
+#: application/controllers/ErrorController.php:78
 msgid "Access denied."
 msgstr "У доступі відмовлено."
 
 #: application/controllers/FilesController.php:66
 msgid "This will delete the file and its associated metadata."
-msgstr ""
+msgstr "Це призведе до видалення файлу та пов'язаних з ним метаданих."
 
 #: application/controllers/FilesController.php:72
 msgid "The file was successfully deleted."
-msgstr ""
+msgstr "Файл було успішно видалено."
 
 #: application/controllers/ItemTypesController.php:28
 #, php-format
@@ -2234,212 +2255,212 @@ msgid ""
 "This will delete the \"%s\" item type but will not delete the elements "
 "assigned to the item type. Items that are assigned to this item type will "
 "lose all metadata that is specific to the item type."
-msgstr ""
+msgstr "Це видалить \"%s\" тип елемента, але не видалить елементи, призначені для типу елемента. Елементи, присвоєні цьому типу елемента, втратять усі метадані, характерні для типу елемента."
 
 #: application/controllers/ItemTypesController.php:158
 #, php-format
 msgid ""
 "The item type \"%s\" was successfully added!  You may now add elements to "
 "your new item type."
-msgstr ""
+msgstr "Тип елемента \"%s\" було успішно додано! Тепер ви можете додати елементи до нового типу елемента."
 
-#: application/controllers/ItemsController.php:89
-#: application/controllers/ItemsController.php:149
+#: application/controllers/ItemsController.php:86
+#: application/controllers/ItemsController.php:146
 msgid ""
 "The ImageMagick directory path has not been set. No derivative images will "
 "be created. If you would like Omeka to create derivative images, please set "
 "the path in Settings."
-msgstr ""
+msgstr "Шлях до каталогу ImageMagick не задано. Жодних зображень не буде створено. Якщо ви хочете, щоб Omeka створювала похідні зображення, встановіть шлях у Налаштуваннях."
 
-#: application/controllers/ItemsController.php:98
+#: application/controllers/ItemsController.php:95
 #, php-format
 msgid "The item \"%s\" was successfully added!"
 msgstr "Елемент \"%s\" успішно додано!"
 
-#: application/controllers/ItemsController.php:100
+#: application/controllers/ItemsController.php:97
 #, php-format
 msgid "The item #%s was successfully added!"
 msgstr "Елемент #%s успішно додано!"
 
-#: application/controllers/ItemsController.php:108
+#: application/controllers/ItemsController.php:105
 #, php-format
 msgid "The item \"%s\" was successfully changed!"
 msgstr "Елемент \"%s\" успішно змінено!"
 
-#: application/controllers/ItemsController.php:110
+#: application/controllers/ItemsController.php:107
 #, php-format
 msgid "The item #%s was successfully changed!"
 msgstr "Елемент #%s успішно змінено!"
 
-#: application/controllers/ItemsController.php:118
+#: application/controllers/ItemsController.php:115
 #, php-format
 msgid "The item \"%s\" was successfully deleted!"
 msgstr "Елемент \"%s\" успішно видалений!"
 
-#: application/controllers/ItemsController.php:120
+#: application/controllers/ItemsController.php:117
 #, php-format
 msgid "The item #%s was successfully deleted!"
 msgstr "Елемент #%s успішно видалений!"
 
-#: application/controllers/ItemsController.php:128
+#: application/controllers/ItemsController.php:125
 #, php-format
 msgid ""
 "This will delete the item \"%s\" and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr ""
+msgstr "Ця дія призведе до видалення елемента \"%s\" та пов'язаних з ним метаданих. Також буде видалено всі файли та метадані, пов'язані з цим елементом."
 
-#: application/controllers/ItemsController.php:132
+#: application/controllers/ItemsController.php:129
 #, php-format
 msgid ""
 "This will delete the item #%s and its associated metadata. It will also "
 "delete all files and file metadata associated with this item."
-msgstr ""
+msgstr "Це призведе до видалення елемента # %s та пов'язаних з ним метаданих. Також буде видалено всі файли та метадані, пов'язані з цим елементом."
 
-#: application/controllers/ItemsController.php:241
-#: application/controllers/ItemsController.php:376
-#: application/controllers/ItemsController.php:444
+#: application/controllers/ItemsController.php:231
+#: application/controllers/ItemsController.php:364
+#: application/controllers/ItemsController.php:430
 msgid "No item to batch edit."
-msgstr ""
+msgstr "Немає елементів для пакетного редагування."
 
-#: application/controllers/ItemsController.php:248
+#: application/controllers/ItemsController.php:238
 msgid "The deletion of all items is forbidden."
-msgstr ""
+msgstr "Видалення всіх елементів заборонено."
 
-#: application/controllers/ItemsController.php:265
+#: application/controllers/ItemsController.php:255
 msgid "You must choose some items to batch edit."
 msgstr "Ви повинні вибрати деякі пункти для пакетного редагування."
 
-#: application/controllers/ItemsController.php:314
-#: application/controllers/ItemsController.php:412
+#: application/controllers/ItemsController.php:302
+#: application/controllers/ItemsController.php:398
 msgid "User is not allowed to modify visibility of items."
 msgstr "Користувач не має права змінювати видимість елементів."
 
-#: application/controllers/ItemsController.php:319
-#: application/controllers/ItemsController.php:417
+#: application/controllers/ItemsController.php:307
+#: application/controllers/ItemsController.php:403
 msgid "User is not allowed to modify featured status of items."
 msgstr "Користувач не має права змінювати статус популярності елементів."
 
-#: application/controllers/ItemsController.php:326
+#: application/controllers/ItemsController.php:314
 msgid "User is not allowed to delete selected items."
 msgstr "Користувач не має права видаляти вибрані елементи."
 
-#: application/controllers/ItemsController.php:332
+#: application/controllers/ItemsController.php:320
 msgid "User is not allowed to edit selected items."
 msgstr "Користувач не має права редагувати вибрані елементи."
 
-#: application/controllers/ItemsController.php:337
+#: application/controllers/ItemsController.php:325
 msgid "User is not allowed to tag selected items."
 msgstr "Користувач не має права ставити мітки для вибраних елементів."
 
-#: application/controllers/ItemsController.php:369
+#: application/controllers/ItemsController.php:357
 msgid "The items were successfully deleted!"
 msgstr "Елементи успішно видалено!"
 
-#: application/controllers/ItemsController.php:371
+#: application/controllers/ItemsController.php:359
 msgid "The items were successfully changed!"
 msgstr "Елементи були успішно змінені!"
 
-#: application/controllers/ItemsController.php:436
+#: application/controllers/ItemsController.php:422
 msgid "The items are checked and deleted one by one in the background."
-msgstr ""
+msgstr "Елементи перевіряються і видаляються один за одним у фоновому режимі."
 
-#: application/controllers/ItemsController.php:438
+#: application/controllers/ItemsController.php:424
 msgid "The items are checked and changed one by one in the background."
-msgstr ""
+msgstr "Елементи перевіряються і змінюються один за одним у фоновому режимі."
 
-#: application/controllers/ItemsController.php:440
+#: application/controllers/ItemsController.php:426
 msgid "Check logs for success and errors."
-msgstr ""
+msgstr "Перевірте логи на успішність дій та помилки."
 
-#: application/controllers/PluginsController.php:45
+#: application/controllers/PluginsController.php:43
 #, php-format
 msgid ""
 "Error in configuring plugin named \"%s\". Missing config and/or config_form "
 "hook(s)."
 msgstr "Помилка в налаштуванні додатку \"%s\". Відсутній гак для налаштувань або/та форми налаштувань."
 
-#: application/controllers/PluginsController.php:59
+#: application/controllers/PluginsController.php:57
 #, php-format
 msgid "The %s plugin was successfully configured!"
 msgstr "Цей %s додаток успішно налаштований!"
 
-#: application/controllers/PluginsController.php:89
+#: application/controllers/PluginsController.php:87
 #, php-format
 msgid "The %s plugin has already been installed."
 msgstr "Цей %s додаток уже встановлений."
 
-#: application/controllers/PluginsController.php:99
+#: application/controllers/PluginsController.php:97
 #, php-format
 msgid "The %s plugin was successfully installed!"
 msgstr "Цей %s додаток успішно встановлений!"
 
-#: application/controllers/PluginsController.php:111
-#: application/controllers/PluginsController.php:116
+#: application/controllers/PluginsController.php:109
+#: application/controllers/PluginsController.php:114
 #, php-format
 msgid "The following error occurred while installing the %s plugin: "
 msgstr "Ця помилка виникла при встановленні %s додатку. "
 
-#: application/controllers/PluginsController.php:154
+#: application/controllers/PluginsController.php:150
 #, php-format
 msgid "The following error occurred while activating the %s plugin: "
 msgstr "Ця помилка виникла в процесі активації %s додатку:"
 
-#: application/controllers/PluginsController.php:164
+#: application/controllers/PluginsController.php:160
 #, php-format
 msgid "The %s plugin was successfully activated!"
 msgstr "Цей %s додаток успішно активований!"
 
-#: application/controllers/PluginsController.php:169
+#: application/controllers/PluginsController.php:165
 #, php-format
 msgid "The %s plugin was activated, but could not be loaded: "
 msgstr "Цей %s додаток був активований, але не може бути завантажений."
 
-#: application/controllers/PluginsController.php:204
+#: application/controllers/PluginsController.php:198
 #, php-format
 msgid "The %s plugin was successfully deactivated!"
 msgstr "Додаток %s успішно деактивований!"
 
-#: application/controllers/PluginsController.php:209
+#: application/controllers/PluginsController.php:203
 #, php-format
 msgid "The following error occurred while deactivating the %s plugin: "
 msgstr "Ця помилка виникла в процесі деактивації %s додатку:"
 
-#: application/controllers/PluginsController.php:239
+#: application/controllers/PluginsController.php:233
 #, php-format
 msgid "The %s plugin was successfully upgraded!"
 msgstr "Додаток %s успішно поновлений!"
 
+#: application/controllers/PluginsController.php:242
 #: application/controllers/PluginsController.php:248
-#: application/controllers/PluginsController.php:254
 #, php-format
 msgid "The following error occurred while upgrading the %s plugin: "
 msgstr "Ця помилка виникла в процесі поновлення %s додатку:"
 
-#: application/controllers/PluginsController.php:305
+#: application/controllers/PluginsController.php:295
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
-msgstr ""
+msgstr "Плагін не знайдено у \"%s\" каталозі!"
 
-#: application/controllers/PluginsController.php:318
+#: application/controllers/PluginsController.php:308
 msgid "You must confirm the uninstall before proceeding."
 msgstr "Перед тим як продовжити, Ви повинні підтвердити видалення."
 
-#: application/controllers/PluginsController.php:337
+#: application/controllers/PluginsController.php:327
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
 msgstr "Цей %s додаток успішно видалений!"
 
-#: application/controllers/PluginsController.php:342
-#: application/controllers/PluginsController.php:347
+#: application/controllers/PluginsController.php:332
+#: application/controllers/PluginsController.php:337
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
 msgstr "Ця помилка виникла в процесі видалення %s додатку:"
 
-#: application/controllers/PluginsController.php:376
+#: application/controllers/PluginsController.php:366
 msgid "No plugin name given."
 msgstr "Додатку не надано назву."
 
-#: application/controllers/PluginsController.php:389
+#: application/controllers/PluginsController.php:379
 #, php-format
 msgid "The plugin %s must be installed."
 msgstr "Необхідно встановити цей %s додаток."
@@ -2456,21 +2477,21 @@ msgstr "Налаштування безпеки поновлено."
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
-msgstr ""
+msgstr "Ви змінили записи, які можна знайти в Omeka. Будь ласка, переіндексуйте записи за допомогою форми нижче."
 
 #: application/controllers/SettingsController.php:121
 msgid ""
 "Indexing records. This may take a while. You may continue administering your"
 " site."
-msgstr ""
+msgstr "Індексація записів. Це може зайняти деякий час. Ви можете продовжити працювати з сайтом."
 
 #: application/controllers/SettingsController.php:156
 msgid "The item type elements were successfully changed!"
-msgstr ""
+msgstr "Тип елемента було успішно змінено!"
 
 #: application/controllers/SettingsController.php:183
 msgid "The API configuration was successfully changed!"
-msgstr ""
+msgstr "Конфігурацію API успішно змінено!"
 
 #: application/controllers/SettingsController.php:206
 msgid "The ImageMagick directory path works."
@@ -2480,9 +2501,9 @@ msgstr "Шлях до ImageMagick вірний."
 msgid "The ImageMagick directory path does not work."
 msgstr "Шлях до ImageMagick невірний."
 
-#: application/controllers/TagsController.php:47
+#: application/controllers/TagsController.php:42
 msgid "Invalid tagType given."
-msgstr ""
+msgstr "Неправильний тип тегу."
 
 #: application/controllers/ThemesController.php:28
 msgid "Invalid form submission."
@@ -2495,253 +2516,262 @@ msgstr "Ви обрали неправильну назву теми оформ�
 #: application/controllers/ThemesController.php:43
 #, php-format
 msgid "This theme requires a newer version of Omeka (%s)."
-msgstr ""
+msgstr "Для цієї теми потрібна нова версія Omeka (%s)."
 
 #: application/controllers/ThemesController.php:57
 msgid "The theme has been successfully changed."
 msgstr "Тема оформлення була успішно змінена."
 
-#: application/controllers/ThemesController.php:84
+#: application/controllers/ThemesController.php:82
 msgid "The theme settings were successfully saved!"
 msgstr "Налаштування теми оформлення були успішно збережені."
 
-#: application/controllers/UpgradeController.php:56
+#: application/controllers/UpgradeController.php:53
 msgid "SQL error in migration: "
 msgstr "Помилка SQL при мігруванні."
 
-#: application/controllers/UpgradeController.php:69
+#: application/controllers/UpgradeController.php:66
 #, php-format
 msgid ""
 "Omeka requires PHP version %1$s or higher, but this server is running PHP "
 "version %2$s. Please update the installed version of PHP and try again."
-msgstr ""
+msgstr "Omeka вимагає версії PHP %1$s або вище, але на цьому сервері працює версія PHP %2$s. Будь ласка, оновіть встановлену версію PHP і повторіть спробу."
 
-#: application/controllers/UsersController.php:70
+#: application/controllers/UsersController.php:72
 msgid ""
 "Unable to reset password. Please verify that the information is correct and "
 "contact an administrator if necessary."
-msgstr "Не можу відновити гасло. Прошу перевірити коректність інформації. При потребі зверніться до адміністратора."
-
-#: application/controllers/UsersController.php:108
-msgid "Please follow this link to reset your password:"
-msgstr "Прошу перейти за цим посиланням для відновлення гасла:"
+msgstr "Не можу відновити пароль. Прошу перевірити коректність інформації. При потребі зверніться до адміністратора."
 
 #: application/controllers/UsersController.php:110
-#: application/controllers/UsersController.php:113
-#: application/controllers/UsersController.php:385
+msgid "Please follow this link to reset your password:"
+msgstr "Прошу перейти за цим посиланням для відновлення паролю:"
+
+#: application/controllers/UsersController.php:112
+#: application/controllers/UsersController.php:115
+#: application/controllers/UsersController.php:383
 #, php-format
 msgid "%s Administrator"
 msgstr "%s Адміністратор"
 
-#: application/controllers/UsersController.php:114
+#: application/controllers/UsersController.php:116
 #, php-format
 msgid "[%s] Reset Your Password"
-msgstr "[%s] відновити ваше гасло"
+msgstr "[%s] відновити пароль"
 
-#: application/controllers/UsersController.php:117
+#: application/controllers/UsersController.php:119
 msgid "Please check your email for a link to reset your password."
-msgstr "Прошу перевірити електронну пошту на посилання для відновлення гасла."
+msgstr "Прошу перевірити електронну пошту на посилання для відновлення паролю."
 
-#: application/controllers/UsersController.php:126
+#: application/controllers/UsersController.php:128
 msgid "Invalid activation code given."
-msgstr ""
+msgstr "Не вказано код активації."
 
-#: application/controllers/UsersController.php:135
+#: application/controllers/UsersController.php:137
 msgid "Password: The passwords do not match."
-msgstr "Гасло: гасла не співпадають."
+msgstr "Пароль: паролі не співпадають."
 
-#: application/controllers/UsersController.php:143
+#: application/controllers/UsersController.php:145
 msgid "You may now log in to Omeka."
 msgstr "Тепер ви можете зайти в Omeka."
 
-#: application/controllers/UsersController.php:168
-#: application/controllers/UsersController.php:236
-#: application/controllers/UsersController.php:287
+#: application/controllers/UsersController.php:169
+#: application/controllers/UsersController.php:235
+#: application/controllers/UsersController.php:286
 msgid "There was an invalid entry on the form. Please try again."
-msgstr ""
+msgstr "У формі вказано недійсний запис. Будь ласка, спробуйте ще раз."
 
-#: application/controllers/UsersController.php:176
+#: application/controllers/UsersController.php:177
 #, php-format
 msgid "The user \"%s\" was successfully added!"
 msgstr "Користувач \"%s\" успішно створений!"
 
-#: application/controllers/UsersController.php:180
+#: application/controllers/UsersController.php:181
 #, php-format
 msgid "The user \"%s\" was added, but the activation email could not be sent."
-msgstr ""
+msgstr "Користувача \"%s\" додано, але електронне підтвердження активації не вдалося надіслати."
 
-#: application/controllers/UsersController.php:218
+#: application/controllers/UsersController.php:217
 msgid "User activation email has been sent."
-msgstr ""
+msgstr "Підтвердження активації було відправлено на е-пошту."
 
-#: application/controllers/UsersController.php:220
+#: application/controllers/UsersController.php:219
 msgid "User activation email could not be sent."
-msgstr ""
+msgstr "Не вдається надіслати підтвердження активації користувача."
 
-#: application/controllers/UsersController.php:258
+#: application/controllers/UsersController.php:257
 #, php-format
 msgid "The user %s was successfully changed!"
 msgstr "Користувач %s був успішно змінений!"
 
-#: application/controllers/UsersController.php:294
+#: application/controllers/UsersController.php:293
 msgid "Password changed!"
-msgstr "Гасло змінено!"
+msgstr "Пароль змінено!"
 
-#: application/controllers/UsersController.php:316
+#: application/controllers/UsersController.php:315
 msgid "A new API key was successfully created."
-msgstr ""
+msgstr "Новий ключ API було успішно створено."
 
-#: application/controllers/UsersController.php:323
+#: application/controllers/UsersController.php:322
 msgid "An existing API key was successfully rescinded."
-msgstr ""
+msgstr "Поточний ключ API було успішно скасовано."
 
-#: application/controllers/UsersController.php:350
+#: application/controllers/UsersController.php:349
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
 msgstr "Користувач \"%s\" успішно видаленний!"
 
-#: application/controllers/UsersController.php:356
+#: application/controllers/UsersController.php:355
 #, php-format
 msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
 "this user will remain in the system, but will no longer be associated with "
 "this user."
-msgstr ""
+msgstr "%s буде видалено з системи. Елементи, колекції та теги, створені цим користувачем, залишатимуться в системі, але більше не будуть пов'язані з цим користувачем."
 
-#: application/controllers/UsersController.php:381
+#: application/controllers/UsersController.php:379
 msgid "Welcome!"
 msgstr "Ласкаво просимо!"
 
-#: application/controllers/UsersController.php:383
+#: application/controllers/UsersController.php:381
 #, php-format
 msgid ""
 "Your account for the %s repository has been created. Please click the "
 "following link to activate your account:"
-msgstr ""
+msgstr "Ваш обліковий запис %s для сховища створено. Будь ласка, натисніть на це посилання, щоб активувати обліковий запис:"
 
-#: application/controllers/UsersController.php:386
+#: application/controllers/UsersController.php:384
 #, php-format
 msgid "Activate your account with the %s repository"
-msgstr ""
+msgstr "Активуйте свій обліковий запис %s у сховищі"
 
-#: application/controllers/UsersController.php:481
+#: application/controllers/UsersController.php:479
 msgid "Login information incorrect. Please try again."
-msgstr "Неправильне гасло або ім'я користувача. Прошу повторити."
+msgstr "Неправильний пароль або ім'я користувача. Прошу повторити."
+
+#: application/forms/AppearanceSettings.php:21
+msgid "Use Square Thumbnails"
+msgstr "Використати квадратне зображення"
 
 #: application/forms/AppearanceSettings.php:22
-msgid "Use Square Thumbnails"
-msgstr ""
-
-#: application/forms/AppearanceSettings.php:23
 msgid ""
 "Use square-cropped images by default wherever thumbnails appear in the "
 "public interface."
-msgstr ""
+msgstr "За замовчування використовуйте квадратні зображення, якщо мініатюри не відображаються у загальнодоступному інтерфейсі."
 
-#: application/forms/AppearanceSettings.php:28
+#: application/forms/AppearanceSettings.php:27
 #: application/forms/Install.php:128
 msgid "Fullsize Image Size"
 msgstr "Повний розмір малюнку"
 
-#: application/forms/AppearanceSettings.php:29
+#: application/forms/AppearanceSettings.php:28
 msgid "Maximum fullsize image size constraint (in pixels)."
 msgstr "Максимальний розмір повнорозмірного зображення (в пікселях)."
 
-#: application/forms/AppearanceSettings.php:35
+#: application/forms/AppearanceSettings.php:34
 #: application/forms/Install.php:136
 msgid "Thumbnail Size"
 msgstr "Розмір мініатюри"
 
-#: application/forms/AppearanceSettings.php:36
+#: application/forms/AppearanceSettings.php:35
 msgid "Maximum thumbnail size constraint (in pixels)."
 msgstr "Максимальне обмеження розміру мініатюр (у пікселях)."
 
-#: application/forms/AppearanceSettings.php:42
+#: application/forms/AppearanceSettings.php:41
 #: application/forms/Install.php:144
 msgid "Square Thumbnail Size"
 msgstr "Площа розміру мініатюр"
 
-#: application/forms/AppearanceSettings.php:43
+#: application/forms/AppearanceSettings.php:42
 msgid "Maximum square thumbnail size constraint (in pixels)."
 msgstr "Обмеження максимальної площи розміру мініатюр (у пікселях)."
 
-#: application/forms/AppearanceSettings.php:49
+#: application/forms/AppearanceSettings.php:48
 msgid "Results Per Page (admin)"
 msgstr "Результатів на сторінці (для адміністратора)"
 
-#: application/forms/AppearanceSettings.php:50
+#: application/forms/AppearanceSettings.php:49
 msgid ""
 "Limit the number of results displayed per page in the administrative "
 "interface."
-msgstr ""
+msgstr "Обмеження кількості результатів, що відображаються на сторінці в адміністративному інтерфейсі."
 
-#: application/forms/AppearanceSettings.php:56
+#: application/forms/AppearanceSettings.php:55
 msgid "Results Per Page (public)"
 msgstr "Результатів на сторінці (для загального доступу)"
 
-#: application/forms/AppearanceSettings.php:57
+#: application/forms/AppearanceSettings.php:56
 msgid ""
 "Limit the number of results displayed per page in the public interface."
-msgstr ""
+msgstr "Обмеження кількості результатів, що відображаються на сторінці в загальнодоступному інтерфейсі."
 
-#: application/forms/AppearanceSettings.php:63
+#: application/forms/AppearanceSettings.php:62
 #: application/forms/Install.php:168
 msgid "Show Empty Elements"
 msgstr "Показати порожні елементи"
 
-#: application/forms/AppearanceSettings.php:68
+#: application/forms/AppearanceSettings.php:67
 msgid "Show Element Set Headings"
-msgstr ""
+msgstr "Показати заголовки набору елементів"
 
-#: application/forms/AppearanceSettings.php:78
+#: application/forms/AppearanceSettings.php:72
+msgid "Link to File Metadata"
+msgstr "Посилання на файл метаданих"
+
+#: application/forms/AppearanceSettings.php:73
+msgid ""
+"Have item files link to the file metadata instead of the file directly."
+msgstr "Має файли елементу, що посилаються на файл метаданих, а не безпосередньо з файлу."
+
+#: application/forms/AppearanceSettings.php:83
 msgid "Admin Theme"
-msgstr ""
+msgstr "Тема для Адмін"
 
-#: application/forms/AppearanceSettings.php:92
+#: application/forms/AppearanceSettings.php:97
 msgid "Derivative Size Constraints"
-msgstr ""
+msgstr "Обмеження розміру зображень"
 
-#: application/forms/AppearanceSettings.php:100
+#: application/forms/AppearanceSettings.php:105
 msgid "Display Settings"
 msgstr "Параметри дисплею"
 
-#: application/forms/AppearanceSettings.php:108
+#: application/forms/AppearanceSettings.php:113
 msgid "Admin Themes"
-msgstr ""
+msgstr "Теми для Адмін"
 
 #: application/forms/ChangePassword.php:25
 msgid "Current Password"
-msgstr "Поточне гасло"
+msgstr "Поточний пароль"
 
 #: application/forms/ChangePassword.php:26
 #: application/forms/ChangePassword.php:36
 msgid "Password must be at least 6 characters long."
-msgstr ""
+msgstr "Пароль повинен містити мінімум 6 знаків."
 
 #: application/forms/ChangePassword.php:28
 msgid "Invalid current password"
-msgstr ""
+msgstr "Невірний поточний пароль"
 
 #: application/forms/ChangePassword.php:34
 msgid "New Password"
-msgstr "Нове гасло"
+msgstr "Новий пароль"
 
 #: application/forms/ChangePassword.php:41
 msgid "New password must be entered."
-msgstr ""
+msgstr "Необхідно ввести новий пароль."
 
 #: application/forms/ChangePassword.php:50
 #: application/forms/ChangePassword.php:70
 msgid "New password must be typed correctly twice."
-msgstr ""
+msgstr "Необхідно двічі ввести коректний пароль."
 
 #: application/forms/ChangePassword.php:59
 msgid "New password must be at least %min% characters long."
-msgstr ""
+msgstr "Новий пароль повинен містити мінімум %min% символів."
 
 #: application/forms/ChangePassword.php:68
 msgid "Repeat New Password"
-msgstr "Ввести повторно нове гасло"
+msgstr "Повторити новий пароль"
 
 #: application/forms/GeneralSettings.php:22 application/forms/Install.php:90
 msgid "Site Title"
@@ -2771,7 +2801,7 @@ msgstr "Розділювач для міток"
 msgid ""
 "Separate tags using this character or string. Be careful when changing this "
 "setting. You run the risk of splitting tags that contain the old delimiter."
-msgstr ""
+msgstr "Окремі теги використовують цей символ або рядок. Будьте обережні, коли змінюєте цей параметр. Ви ризикуєте розділити теги, які містять старий розділювач."
 
 #: application/forms/GeneralSettings.php:59 application/forms/Install.php:174
 msgid "ImageMagick Directory Path"
@@ -2779,26 +2809,26 @@ msgstr "Шлях до ImageMagick"
 
 #: application/forms/Install.php:31
 msgid "must be 30 characters or fewer with no whitespace"
-msgstr ""
+msgstr "повинно бути 30 або менше значень без використання пробілу"
 
 #: application/forms/Install.php:39 application/forms/User.php:46
-#: application/models/User.php:189
+#: application/models/User.php:188
 #, php-format
 msgid ""
 "Whitespace is not allowed. Only these special characters may be used: %s"
-msgstr ""
+msgstr "Пробіл не допускається. Можна використовувати лише спеціальні символи: %s"
 
 #: application/forms/Install.php:48 application/forms/Login.php:34
 msgid "Password"
-msgstr "Гасло"
+msgstr "Пароль"
 
 #: application/forms/Install.php:49
 msgid "must be at least 6 characters"
-msgstr ""
+msgstr "повинен містити мінімум 6 знаків"
 
 #: application/forms/Install.php:72
 msgid "Confirm your password."
-msgstr "Підтвердити ваше гасло."
+msgstr "Підтвердити ваш пароль."
 
 #: application/forms/Install.php:114
 msgid "Separate tags using this character or string."
@@ -2806,15 +2836,15 @@ msgstr "Розділяти мітки використовуючи цю літе
 
 #: application/forms/Install.php:129
 msgid "Maximum fullsize image size constraint (in pixels)"
-msgstr ""
+msgstr "Максимальне обмеження розміру зображення у повному розмірі (у пікселях)"
 
 #: application/forms/Install.php:137
 msgid "Maximum thumbnail size constraint (in pixels)"
-msgstr ""
+msgstr "Максимальне обмеження розміру ескізів (у пікселях)"
 
 #: application/forms/Install.php:145
 msgid "Maximum square thumbnail size constraint (in pixels)"
-msgstr ""
+msgstr "Максимальне обмеження розміру квадратних зображень (у пікселях)"
 
 #: application/forms/Install.php:152
 msgid "Items Per Page (admin)"
@@ -2836,11 +2866,11 @@ msgstr "Число елементів, що відображаються на с
 
 #: application/forms/Install.php:170
 msgid "Check box to show metadata elements with no text."
-msgstr ""
+msgstr "Проставте позначку для того, щоб показати елементи метаданих без тексту."
 
 #: application/forms/Install.php:185
 msgid "Default Superuser Account"
-msgstr "Гасло по-замовчуванню для суперкористувача"
+msgstr "Пароль за замовчуванням для суперкористувача"
 
 #: application/forms/Install.php:195
 msgid "Site Settings"
@@ -2848,16 +2878,16 @@ msgstr "Налаштування веб-сайту"
 
 #: application/forms/ItemTypes.php:142
 msgid "The name of the item type."
-msgstr ""
+msgstr "Назва типу елемента."
 
 #: application/forms/ItemTypes.php:151
 msgid "The description of the item type."
-msgstr ""
+msgstr "Опис типу елемента."
 
 #: application/forms/ItemTypes.php:173 application/forms/ItemTypes.php:182
 #, php-format
 msgid "The item type cannot have more than one \"%s\" element."
-msgstr ""
+msgstr "Тип елемента не може містити більше одного \"%s\" елемента."
 
 #: application/forms/Login.php:27
 msgid "Username cannot be empty."
@@ -2865,40 +2895,40 @@ msgstr "Необхідно ввести ім'я користувача"
 
 #: application/forms/Login.php:40
 msgid "Password cannot be empty."
-msgstr "Необхідно ввести гасло"
+msgstr "Необхідно ввести пароль"
 
 #: application/forms/Login.php:48
 msgid "Remember Me?"
-msgstr "Запам'ятати на цьому компутері?"
+msgstr "Запам'ятати на цьому комп'ютері?"
 
-#: application/forms/Navigation.php:162
+#: application/forms/Navigation.php:157
 msgid "[Default]"
-msgstr "[По замовчуванню]"
+msgstr "[За замовчуванням]"
 
-#: application/forms/Navigation.php:168
+#: application/forms/Navigation.php:163
 msgid "Select a Homepage"
 msgstr "Вибрати домашню сторінку"
 
-#: application/forms/Navigation.php:250
+#: application/forms/Navigation.php:244
 msgid "Cannot find parent navigation page."
 msgstr "Не можу знайти вихідну сторінку навігації."
 
-#: application/forms/Navigation.php:331
+#: application/forms/Navigation.php:324
 msgid "All navigation links must have URIs."
-msgstr ""
+msgstr "Усі навігаційні посилання мають бути з URI."
 
-#: application/forms/Navigation.php:344
+#: application/forms/Navigation.php:337
 msgid "All navigation links must have different URIs."
-msgstr ""
+msgstr "В усі навігаційних посиланнях мають бути різні URI."
 
-#: application/forms/Navigation.php:350
+#: application/forms/Navigation.php:343
 #, php-format
 msgid "Invalid URI for \"%s\" navigation link:  \"%s\""
-msgstr ""
+msgstr "Недійсний URI для посилання \"%s\" навігації: \"%s\""
 
-#: application/forms/Navigation.php:383
+#: application/forms/Navigation.php:376
 msgid "Navigation links that have undeleteable sublinks cannot be deleted."
-msgstr ""
+msgstr "Навігаційні посилання, які мають непідтримувані посилання на сайт, не можна видалити."
 
 #: application/forms/RecoverPassword.php:36
 msgid "Email address is required."
@@ -2922,99 +2952,101 @@ msgstr "Неправильна електронна пошта"
 
 #: application/forms/ResetPassword.php:27
 msgid "Password is required."
-msgstr "Вимагається гасло"
+msgstr "Вимагається пароль"
 
 #: application/forms/ResetPassword.php:33
 msgid "Typed passwords do not match."
-msgstr "Введені гасла не тотожні."
+msgstr "Введені паролі не співпадають."
 
-#: application/forms/SecuritySettings.php:24
+#: application/forms/SecuritySettings.php:23
 msgid "Disable File Upload Validation"
 msgstr "Вимкнути перевірку типу документів при завантажені"
 
-#: application/forms/SecuritySettings.php:26
+#: application/forms/SecuritySettings.php:25
 msgid ""
 "Check this field if you would like to allow any file to be uploaded to "
 "Omeka."
-msgstr ""
+msgstr "Позначте це поле, якщо ви хочете дозволити завантаження будь-якого файлу в Omeka."
 
-#: application/forms/SecuritySettings.php:32
+#: application/forms/SecuritySettings.php:31
 msgid "Allowed File Extensions"
 msgstr "Дозволені типи розширень"
 
-#: application/forms/SecuritySettings.php:33
+#: application/forms/SecuritySettings.php:32
 msgid "List of allowed extensions for file uploads"
-msgstr ""
+msgstr "Список дозволених розширень для завантаження файлів"
 
-#: application/forms/SecuritySettings.php:42
+#: application/forms/SecuritySettings.php:41
 msgid "Allowed File Types"
 msgstr "Дозволені типи документів"
 
-#: application/forms/SecuritySettings.php:43
+#: application/forms/SecuritySettings.php:42
 msgid "List of allowed MIME types for file uploads"
 msgstr "Список дозволених MIME типів документів для завантаження"
 
-#: application/forms/SecuritySettings.php:52
-msgid "ReCaptcha Public Key"
-msgstr "ReCaptcha загальнодоступний ключ"
+#: application/forms/SecuritySettings.php:51
+msgid "reCAPTCHA Site Key"
+msgstr "Ключ сайту reCAPTCHA"
 
-#: application/forms/SecuritySettings.php:53
+#: application/forms/SecuritySettings.php:52
+#, php-format
 msgid ""
-"Enter public key from recaptcha.net. Both this and the private key must be "
-"filled in to secure public forms."
-msgstr ""
+"Enter site key from %s. Both this and the private key must be filled in to "
+"secure public forms."
+msgstr "Введіть ключ сайту з %s. Обидва позиції особистого ключа необхідно заповнити, щоб убезпечити загальнодоступні форми."
+
+#: application/forms/SecuritySettings.php:59
+msgid "reCAPTCHA Secret Key"
+msgstr "Секретний ключ reCAPTCHA"
 
 #: application/forms/SecuritySettings.php:60
-msgid "ReCaptcha Private Key"
-msgstr "ReCaptcha приватний ключ"
-
-#: application/forms/SecuritySettings.php:61
+#, php-format
 msgid ""
-"Enter private key from recaptcha.net. Both this and the public key must be "
-"filled in to secure public forms."
-msgstr ""
+"Enter secret key from %s. Both this and the public key must be filled in to "
+"secure public forms."
+msgstr "Введіть секретний ключ з %s. Обидва позиції загальнодоступного ключа повинні бути заповнені, щоб убезпечити загальнодоступні форми."
 
-#: application/forms/SecuritySettings.php:68
+#: application/forms/SecuritySettings.php:67
 msgid ""
 "Check this field if you would like to filter HTML elements or attributes "
 "from form input."
-msgstr ""
+msgstr "Перевірте це поле, якщо ви хочете відфільтрувати елементи HTML або атрибути з введення форми."
 
-#: application/forms/SecuritySettings.php:69
+#: application/forms/SecuritySettings.php:68
 msgid "Enable HTML Filtering"
 msgstr "Увімкнути фільтрування HTML"
 
-#: application/forms/SecuritySettings.php:74
+#: application/forms/SecuritySettings.php:73
 msgid "Allowed HTML Elements"
 msgstr "Дозволені елементи HTML"
 
-#: application/forms/SecuritySettings.php:75
+#: application/forms/SecuritySettings.php:74
 msgid "List of allowed HTML elements in form input"
 msgstr "Список дозволених елементів HTML у формах внесення інформації"
 
-#: application/forms/SecuritySettings.php:82
+#: application/forms/SecuritySettings.php:81
 msgid "Allowed HTML Attributes"
 msgstr "Дозволені HTML атрибути"
 
-#: application/forms/SecuritySettings.php:83
+#: application/forms/SecuritySettings.php:82
 msgid "List of allowed HTML attributes in form input"
 msgstr "Список дозволених HTML атрибутів у формах внесення інформації"
 
-#: application/forms/SecuritySettings.php:98
+#: application/forms/SecuritySettings.php:97
 msgid "File Validation"
 msgstr "Перевірка документів"
 
-#: application/forms/SecuritySettings.php:106
+#: application/forms/SecuritySettings.php:105
 msgid "Captcha"
 msgstr "Каптча"
 
-#: application/forms/SecuritySettings.php:115
+#: application/forms/SecuritySettings.php:114
 msgid "HTML Filtering"
 msgstr "Фільтрування HTML"
 
 #: application/forms/User.php:30
 msgid "Username must be 30 characters or fewer. Whitespace is not allowed."
-msgstr ""
+msgstr "Ім'я користувача має містити не більше 30 символів. Пробіл не допускається."
 
 #: application/forms/User.php:37
 msgid "Username is required."
@@ -3026,7 +3058,7 @@ msgstr "Ім'я користувача має містити не менше я�
 
 #: application/forms/User.php:58
 msgid "Username must be at most %max% characters long."
-msgstr ""
+msgstr "Ім'я користувача повинно бути не більше %max% символів."
 
 #: application/forms/User.php:72
 msgid "This username is already in use."
@@ -3034,9 +3066,9 @@ msgstr "Це ім'я користувача вже використовуєть�
 
 #: application/forms/User.php:82
 msgid "Name as it should be displayed on the site"
-msgstr ""
+msgstr "Ім'я, яке буде відображатися на сайті"
 
-#: application/forms/User.php:88 application/models/User.php:169
+#: application/forms/User.php:88 application/models/User.php:168
 msgid "Real Name is required."
 msgstr "Вимагається справжнє ім'я."
 
@@ -3057,16 +3089,16 @@ msgid ""
 "Roles describe the permissions a user has. See <a "
 "href='http://omeka.org/codex/User_Roles' target='_blank'>documentation</a> "
 "for details."
-msgstr ""
+msgstr "Ролі описують дозволи, які має користувач. Детальніше у <a href='http://omeka.org/codex/User_Roles' target='_blank'> документації </a> ."
 
 #: application/forms/User.php:137
 msgid "Inactive users cannot log in to the site."
-msgstr ""
+msgstr "Неактивні користувачі не можуть увійти на сайт."
 
 #: application/forms/User.php:139
 #, php-format
 msgid "Activation has been pending since %s."
-msgstr ""
+msgstr "Активація очікує на затвердження з %s."
 
 #: application/forms/User.php:142
 msgid "Active?"
@@ -3080,52 +3112,52 @@ msgstr "Шлях до PHP (%s) у конфігурації невірний."
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:124
 #, php-format
 msgid "The configured PHP path (%s) does not point to a PHP-CLI binary."
-msgstr ""
+msgstr "Шлях налаштування PHP (%s) не вказує на бінарний PHP-CLI."
 
 #: application/libraries/Omeka/Job/Process/Dispatcher.php:126
 #, php-format
 msgid ""
 "The configured PHP path (%s) points to a PHP-CLI binary with an invalid "
 "version (%s)"
-msgstr ""
+msgstr "Шлях налаштування PHP (%s) вказує на бінарний PHP-CLI з недійсною версією (%s)"
 
-#: application/libraries/Omeka/Navigation.php:214
+#: application/libraries/Omeka/Navigation.php:213
 msgid "The page must be normalized and have a valid uid."
-msgstr ""
+msgstr "Сторінка повинна бути нормалізована та мати поточну версію."
 
-#: application/libraries/Omeka/Navigation.php:226
+#: application/libraries/Omeka/Navigation.php:225
 msgid ""
 "The parent container must either be the navigation object or a descendant "
 "subpage of the navigation object."
-msgstr ""
+msgstr "Батьківський контейнер повинен бути або об'єктом навігації, або підпунктом нащадків об'єкта навігації."
 
 #: application/libraries/Omeka/Navigation/Page/Uri.php:128
 #, php-format
 msgid "Invalid URI for Omeka_Navigation_Page_Uri object: %s"
-msgstr ""
+msgstr "Недійсний URI для Omeka_Navigation_Page_Uri об'єкта: %s"
 
 #: application/libraries/Omeka/Plugin/Ini.php:63
 #, php-format
 msgid "Path to plugin.ini for \"%s\" is not correct."
-msgstr ""
+msgstr "Некоректний шлях до plugin.ini \"%s\"."
 
-#: application/libraries/Omeka/Plugin/Installer.php:79
+#: application/libraries/Omeka/Plugin/Installer.php:76
 #, php-format
 msgid "The \"%s\" plugin must be installed and have newer files to upgrade it."
-msgstr ""
+msgstr "\"%s\" плагін повинен бути встановлений та мати новіші файли для його оновлення."
 
-#: application/libraries/Omeka/Plugin/Installer.php:116
+#: application/libraries/Omeka/Plugin/Installer.php:112
 msgid "Plugin must have a valid directory name before it can be installed."
-msgstr ""
+msgstr "Плагін повинен мати вірну назву директорії, перш ніж він може бути встановлений."
 
-#: application/libraries/Omeka/Record/AbstractRecord.php:349
+#: application/libraries/Omeka/Record/AbstractRecord.php:351
 #, php-format
 msgid "'%s' is an invalid special value."
 msgstr "'%s' неправильне спеціальне значення."
 
 #: application/libraries/Omeka/Record/Iterator.php:49
 msgid "An invalid value was detected during record iteration."
-msgstr ""
+msgstr "Було виявлено недійсне значення під час ітерації запису."
 
 #: application/libraries/globals.php:410
 msgid "File"
@@ -3143,101 +3175,101 @@ msgstr "Математичний вираз"
 msgid "Exact match"
 msgstr "Точне співпадіння"
 
-#: application/libraries/globals.php:1263
-#: application/libraries/globals.php:1284
+#: application/libraries/globals.php:1267
+#: application/libraries/globals.php:1288
 #, php-format
 msgid "Could not find file %s!"
 msgstr "Не можу знайти документ %s!"
 
-#: application/libraries/globals.php:1301
+#: application/libraries/globals.php:1304
 msgid "No featured collections are available."
 msgstr "Популярні колекції відсутні."
 
-#: application/libraries/globals.php:1598
+#: application/libraries/globals.php:1601
 msgid "Select Below "
 msgstr "Вибрати нижче"
 
-#: application/libraries/globals.php:1641
+#: application/libraries/globals.php:1644
 msgid "Omeka RSS Feed"
 msgstr "Omeka RSS стрічка новин"
 
-#: application/libraries/globals.php:1642
+#: application/libraries/globals.php:1645
 msgid "Omeka Atom Feed"
 msgstr "Omeka Atom стрічка новин"
 
-#: application/libraries/globals.php:2297
+#: application/libraries/globals.php:2306
 msgid "No recent items available."
 msgstr "Останні елементи відсутні."
 
-#: application/libraries/globals.php:2323
+#: application/libraries/globals.php:2332
 msgid "No featured items are available."
 msgstr "Популярні елементи відсутні."
 
-#: application/libraries/globals.php:2382
+#: application/libraries/globals.php:2393
 msgid "View"
 msgstr "Перегляд"
 
-#: application/libraries/globals.php:2444
+#: application/libraries/globals.php:2455
 #: application/models/Table/Collection.php:87
 #: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
 msgstr "Колекції відсутні"
 
-#: application/libraries/globals.php:2563
+#: application/libraries/globals.php:2574
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2580
+#: application/libraries/globals.php:2591
 msgid "Next Item &rarr;"
 msgstr "Наступний елемент &rarr;"
 
-#: application/libraries/globals.php:2600
+#: application/libraries/globals.php:2611
 msgid "&larr; Previous Item"
 msgstr "&larr; Наступний елемент"
 
-#: application/libraries/globals.php:2781
+#: application/libraries/globals.php:2792
 msgid "Browse All"
 msgstr "Перегляд усіх"
 
-#: application/libraries/globals.php:2786
+#: application/libraries/globals.php:2797
 msgid "Browse by Tag"
 msgstr "Перегляд за мітками"
 
-#: application/libraries/globals.php:3055
+#: application/libraries/globals.php:3076
 msgid "No tags are available."
 msgstr "Мітки відсутні"
 
-#: application/models/Builder/Item.php:263
+#: application/models/Builder/Item.php:261
 msgid "Must specify a file transfer type when attaching files to an item!"
-msgstr ""
+msgstr "Необхідно вказати тип передачі файлів при додаванні до елемента!"
 
-#: application/models/Collection.php:119
+#: application/models/Collection.php:118
 msgid "Cannot associate the collection with an unsaved user."
 msgstr "Не можна асоціювати колекцію з незбереженим користувачем."
 
-#: application/models/Element.php:175
+#: application/models/Element.php:174
 msgid "The element name must not be empty."
 msgstr "Ім'я елемента не повинно бути порожнім."
 
-#: application/models/Element.php:179
+#: application/models/Element.php:178
 msgid "Invalid element set."
-msgstr ""
+msgstr "Невірний набір елементів."
 
-#: application/models/Element.php:185
+#: application/models/Element.php:184
 #, php-format
 msgid "An element named \"%s\" already exists for the \"%s\" element set."
-msgstr ""
+msgstr "Назва елементу \"%s\" вже існує для \"%s\" набору елементів."
 
-#: application/models/Element.php:216
+#: application/models/Element.php:215
 #, php-format
 msgid "Cannot set element set ID: set named \"%s\" does not exist."
-msgstr ""
+msgstr "Неможливо встановити ID набору елементів: назва набору \"%s\" не існує."
 
-#: application/models/ElementSet.php:146
+#: application/models/ElementSet.php:144
 msgid "Name of element set must be unique."
 msgstr "Ім'я набору елемента повинно бути унікальним."
 
-#: application/models/ElementSet.php:150
+#: application/models/ElementSet.php:148
 msgid "Name of element set must not be empty."
 msgstr "Ім'я набору елемента не повинно бути порожнім."
 
@@ -3255,62 +3287,62 @@ msgstr "Невірний номер елемента."
 
 #: application/models/File.php:235
 msgid "Cannot get the local path for a stored file."
-msgstr ""
+msgstr "Неможливо отримати шлях для збереженого файлу."
 
 #: application/models/File.php:452
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
-msgstr ""
+msgstr "\"%s\" невірний файл."
 
-#: application/models/Item.php:332
+#: application/models/Item.php:331
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
-msgstr ""
+msgstr "Файли не можуть бути додані до елемента, який не є постійним у базі даних!"
 
 #. / Chicago-style item citation: two authors
-#: application/models/Item.php:467
+#: application/models/Item.php:466
 #, php-format
 msgid "%1$s and %2$s"
 msgstr "%1$s та %2$s"
 
 #. / Chicago-style item citation: three authors
-#: application/models/Item.php:471
+#: application/models/Item.php:470
 #, php-format
 msgid "%1$s, %2$s, and %3$s"
 msgstr "%1$s, %2$s, та %3$s"
 
 #. / Chicago-style item citation: more than three authors
-#: application/models/Item.php:475
+#: application/models/Item.php:474
 #, php-format
 msgid "%s et al."
-msgstr ""
+msgstr "%s і т.п."
 
 #. / Chicago-style item citation: access date and URL
-#: application/models/Item.php:493
+#: application/models/Item.php:492
 #, php-format
 msgid "accessed %1$s, %2$s."
-msgstr ""
+msgstr "доступний %1$s, %2$s."
 
-#: application/models/Item.php:510
+#: application/models/Item.php:509
 msgid "Cannot add an existing file to an item!"
-msgstr ""
+msgstr "Не вдається додати файл до елемента!"
 
-#: application/models/Item.php:514
+#: application/models/Item.php:513
 msgid "File must be valid before it can be associated with an item!"
-msgstr ""
+msgstr "Файл має бути перевірено, перш ніж він може бути пов'язаний з елементом!"
 
 #: application/models/Item.php:538
 msgid "Invalid item type."
-msgstr ""
+msgstr "Невірний тип елемента."
 
 #: application/models/Item.php:541
 msgid "Invalid collection."
-msgstr ""
+msgstr "Невірна колекція."
 
 #: application/models/ItemType.php:102
 #, php-format
 msgid "The item type name must have between %1$s and %2$s characters."
-msgstr ""
+msgstr "Назва типу елемента має містити значення між %1$s та %2$s."
 
 #: application/models/ItemType.php:106
 msgid "The item type name must be unique."
@@ -3318,182 +3350,182 @@ msgstr "Ім'я типу елемента повинно бути унікаль
 
 #: application/models/ItemType.php:183
 msgid "There are too many values in the element ordering array."
-msgstr ""
+msgstr "У елементі масиву дуже багато значень для впорядкування."
 
 #: application/models/ItemType.php:185
 msgid "There are too few values in the element ordering array."
-msgstr ""
+msgstr "У елементі масиву дуже мало значень для впорядкування."
 
 #: application/models/ItemType.php:222
 msgid ""
 "Invalid element data. To add elements, you must either pass an element "
 "objects or an array of element metadata."
-msgstr ""
+msgstr "Невірні дані елемента. Щоб додати елементи, потрібно передати або об'єкти елементів, або масив елементів метаданих."
 
 #: application/models/ItemType.php:286
 msgid ""
 "Cannot remove elements from an item type that is not persistent in the "
 "database!"
-msgstr ""
+msgstr "Неможливо видалити елементи з типу елементів, які не є постійними в базі даних!"
 
 #: application/models/ItemType.php:295
 #, php-format
 msgid "Cannot find element with ID %s!"
-msgstr ""
+msgstr "Не можливо знайти елемент з ID %s!"
 
 #: application/models/ItemType.php:336
 #, php-format
 msgid "Item type does not contain an element with the ID %s!"
-msgstr ""
+msgstr "Тип елемента не містить елемента з ідентифікатором %s!"
 
 #: application/models/ItemType.php:357
 msgid ""
 "Invalid parameter. The hasElement function requires either an element object"
 " or an element id to determine if an item type has an element."
-msgstr ""
+msgstr "Недійсні параметри. Функція hasElement вимагає чи об'єкт елемента, чи ідентифікатора елемента, щоб визначити, чи має елемент тип."
 
-#: application/models/Job/ItemBatchEditAll.php:41
+#: application/models/Job/ItemBatchEditAll.php:40
 msgid "Batch Edit All Items: No item matches the specified filters."
-msgstr ""
+msgstr "Пакетне редагування всі елементів: елементи не відповідають вказаним фільтрам."
 
-#: application/models/Job/ItemBatchEditAll.php:48
+#: application/models/Job/ItemBatchEditAll.php:47
 #, php-format
 msgid "Batch Edit: Starting processing 1 item."
 msgid_plural "Batch Edit: Starting processing %d items."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Пакетне редагування: Почалось опрацювання 1 елемента."
+msgstr[1] "Пакетне редагування: Почалось опрацювання %d елемента."
+msgstr[2] "Пакетне редагування: Почалось опрацювання %d елементів."
 
-#: application/models/Job/ItemBatchEditAll.php:67
+#: application/models/Job/ItemBatchEditAll.php:66
 #, php-format
 msgid ""
 "Batch Edit: A total of %d errors occurred during the batch process of %d "
 "items."
-msgstr ""
+msgstr "Пакетне редагування: загальна кількість %d помилок під час пакетного процесу %dелементів."
 
-#: application/models/Job/ItemBatchEditAll.php:74
+#: application/models/Job/ItemBatchEditAll.php:73
 #, php-format
 msgid "Batch Edit: The item has been processed successfully."
 msgid_plural "Batch Edit: All %d items have been processed successfully."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Пакетне редагування: Обробку елемента успішно завершено."
+msgstr[1] "Пакетне редагування: Всі %d елементи оброблені успішно."
+msgstr[2] "Пакетне редагування: Всі  %d елементи оброблено успішно."
 
-#: application/models/Job/ItemBatchEditAll.php:91
+#: application/models/Job/ItemBatchEditAll.php:90
 msgid "Item does not exist: it may have been deleted before processing."
-msgstr ""
+msgstr "Елемент не існує: він може бути видалений перед обробкою."
 
-#: application/models/Job/ItemBatchEditAll.php:106
+#: application/models/Job/ItemBatchEditAll.php:105
 msgid "User is not allowed to delete this item."
-msgstr ""
+msgstr "Користувач не має права видаляти цей елемент."
 
-#: application/models/Job/ItemBatchEditAll.php:113
+#: application/models/Job/ItemBatchEditAll.php:112
 msgid "User is not allowed to edit this item."
-msgstr ""
+msgstr "Користувач не має права редагувати цей елемент."
 
-#: application/models/Job/ItemBatchEditAll.php:119
+#: application/models/Job/ItemBatchEditAll.php:118
 msgid "User is not allowed to tag this item."
-msgstr ""
+msgstr "Користувач не має права позначати цей елемент."
 
-#: application/models/Job/ItemBatchEditAll.php:142
+#: application/models/Job/ItemBatchEditAll.php:141
 msgid "The item was successfully deleted."
-msgstr ""
+msgstr "Елемент успішно видалено."
 
-#: application/models/Job/ItemBatchEditAll.php:154
+#: application/models/Job/ItemBatchEditAll.php:153
 #, php-format
 msgid "An error occured when the item was updated: %s"
-msgstr ""
+msgstr "Під час оновлення елемента сталася помилка: %s"
 
-#: application/models/Job/ItemBatchEditAll.php:159
+#: application/models/Job/ItemBatchEditAll.php:158
 msgid "The item was successfully batch-edited."
-msgstr ""
+msgstr "Елемент пакетно редаговано успішно."
 
-#: application/models/Job/ItemBatchEditAll.php:178
+#: application/models/Job/ItemBatchEditAll.php:176
 #, php-format
 msgid "Batch Edit Item #%d [%d/%d]: %s"
-msgstr ""
+msgstr "Пакетне редагування елементу #%d [%d/%d]: %s "
 
-#: application/models/Mixin/ElementText.php:293
+#: application/models/Mixin/ElementText.php:292
 #, php-format
 msgid "There is no element \"%1$s\", \"%2$s\"!"
 msgstr "Немає елементів \"%1$s\", \"%2$s\"!"
 
-#: application/models/Mixin/ElementText.php:312
+#: application/models/Mixin/ElementText.php:311
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
 msgstr "Не можу знайти елемент за номером '%s'!"
 
-#: application/models/Mixin/ElementText.php:431
+#: application/models/Mixin/ElementText.php:430
 msgid "Element texts are not formatted correctly!"
 msgstr "Елемент текст оформлений неправильно!"
 
-#: application/models/Mixin/ElementText.php:579
+#: application/models/Mixin/ElementText.php:578
 #, php-format
 msgid "The \"%s\" field has at least one invalid value!"
 msgstr " \"%s\" поле містить не менше одного неправильного значення!"
 
-#: application/models/Mixin/ElementText.php:649
+#: application/models/Mixin/ElementText.php:648
 msgid "Cannot save element text for records that are not yet persistent!"
-msgstr ""
+msgstr "Не вдається зберегти текст елементу для записів, які ще не стійкі!"
 
 #: application/models/Option.php:50 application/models/Option.php:54
 msgid "Each option must have a unique name."
-msgstr ""
+msgstr "Кожен параметр повинен мати унікальне ім'я."
 
 #: application/models/Plugin.php:133
 msgid "Names of plugins must not be blank"
-msgstr ""
+msgstr "Назви плагінів не повинні бути порожніми"
 
 #: application/models/Table/Collection.php:80
 #, php-format
 msgid "[Untitled] #%s"
 msgstr "[Без назви] #%s"
 
-#: application/models/Table/Item.php:145
+#: application/models/Table/Item.php:144
 msgid "Invalid search type given!"
-msgstr ""
+msgstr "Неправильний тип пошуку!"
 
-#: application/models/Tag.php:56
+#: application/models/Tag.php:57
 msgid "Tags must be given a name."
-msgstr ""
+msgstr "Теги повинні мати назву."
 
-#: application/models/Tag.php:60
+#: application/models/Tag.php:61
 msgid "That name is already taken for this tag."
-msgstr ""
+msgstr "Ця назва вже використовується для цього тегу."
 
-#: application/models/User.php:110
+#: application/models/User.php:109
 msgid "User may not change permissions to super-user"
-msgstr ""
+msgstr "Користувач не може змінювати дозволи для суперкористувача"
 
-#: application/models/User.php:113
+#: application/models/User.php:112
 msgid "User may not change roles."
-msgstr ""
+msgstr "Користувач не може змінювати ролі."
 
-#: application/models/User.php:182 application/models/User.php:230
+#: application/models/User.php:181 application/models/User.php:229
 msgid "The user must be assigned a role."
-msgstr ""
+msgstr "Користувачу повинні бути визначені права."
 
-#: application/models/User.php:187
+#: application/models/User.php:186
 #, php-format
 msgid "The username \"%1$s\" must be between %2$s and %3$s characters."
-msgstr ""
+msgstr "Ім'я користувача \"%1$s\" має бути між %2$s та %3$s символами."
 
-#: application/models/User.php:191
+#: application/models/User.php:190
 #, php-format
 msgid "'%s' is already in use. Please choose another username."
 msgstr "'%s' вже використовується. Прошу обрати інше ім'я."
 
 #: application/models/UsersActivations.php:54
 msgid "Cannot create a user activation for non-existent user."
-msgstr "Активація не існуючого користувача не можлива."
+msgstr "Активація неіснуючого користувача не можлива."
 
 #: application/tests/suite/Omeka/Db/Migration/_files/migrations/20080717013526_foobar.php:18
 msgid "This migration should have been run previously (should not run again)."
 msgstr "Ця міграція повинна була виконана раніше (не слід запускати заново)."
 
-#: application/tests/suite/Omeka/Db/Migration/_files/migrations/50000101120000_notRunYet.php:19
+#: application/tests/suite/Omeka/Db/Migration/_files/migrations/50000101120000_notRunYet.php:18
 msgid "This migration should not be run."
-msgstr ""
+msgstr "Цю міграцію не слід запускати."
 
 #: application/tests/suite/Omeka/NavigationTest.php:752
 #: application/tests/suite/Omeka/NavigationTest.php:817
@@ -3524,73 +3556,73 @@ msgstr "CHNM"
 
 #: application/tests/suite/Omeka/NavigationTest.php:982
 #: application/tests/suite/Omeka/NavigationTest.php:990
-#: application/tests/suite/Omeka/NavigationTest.php:1128
-#: application/tests/suite/Omeka/NavigationTest.php:1136
+#: application/tests/suite/Omeka/NavigationTest.php:1127
+#: application/tests/suite/Omeka/NavigationTest.php:1135
 msgid "Page "
 msgstr "Сторінка"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1009
-#: application/tests/suite/Omeka/NavigationTest.php:1013
-#: application/tests/suite/Omeka/NavigationTest.php:1071
-#: application/tests/suite/Omeka/NavigationTest.php:1076
-#: application/tests/suite/Omeka/NavigationTest.php:1156
-#: application/tests/suite/Omeka/NavigationTest.php:1256
+#: application/tests/suite/Omeka/NavigationTest.php:1008
+#: application/tests/suite/Omeka/NavigationTest.php:1012
+#: application/tests/suite/Omeka/NavigationTest.php:1070
+#: application/tests/suite/Omeka/NavigationTest.php:1075
+#: application/tests/suite/Omeka/NavigationTest.php:1155
+#: application/tests/suite/Omeka/NavigationTest.php:1255
 msgid "Page 1"
 msgstr "Сторінка 1"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1016
-#: application/tests/suite/Omeka/NavigationTest.php:1022
-#: application/tests/suite/Omeka/NavigationTest.php:1079
-#: application/tests/suite/Omeka/NavigationTest.php:1082
-#: application/tests/suite/Omeka/NavigationTest.php:1163
-#: application/tests/suite/Omeka/NavigationTest.php:1182
-#: application/tests/suite/Omeka/NavigationTest.php:1200
-#: application/tests/suite/Omeka/NavigationTest.php:1232
+#: application/tests/suite/Omeka/NavigationTest.php:1015
+#: application/tests/suite/Omeka/NavigationTest.php:1021
+#: application/tests/suite/Omeka/NavigationTest.php:1078
+#: application/tests/suite/Omeka/NavigationTest.php:1081
+#: application/tests/suite/Omeka/NavigationTest.php:1162
+#: application/tests/suite/Omeka/NavigationTest.php:1181
+#: application/tests/suite/Omeka/NavigationTest.php:1199
+#: application/tests/suite/Omeka/NavigationTest.php:1231
 msgid "Page 2"
 msgstr "Сторінка 2"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1025
-#: application/tests/suite/Omeka/NavigationTest.php:1029
-#: application/tests/suite/Omeka/NavigationTest.php:1085
-#: application/tests/suite/Omeka/NavigationTest.php:1089
-#: application/tests/suite/Omeka/NavigationTest.php:1164
-#: application/tests/suite/Omeka/NavigationTest.php:1183
-#: application/tests/suite/Omeka/NavigationTest.php:1193
-#: application/tests/suite/Omeka/NavigationTest.php:1255
+#: application/tests/suite/Omeka/NavigationTest.php:1024
+#: application/tests/suite/Omeka/NavigationTest.php:1028
+#: application/tests/suite/Omeka/NavigationTest.php:1084
+#: application/tests/suite/Omeka/NavigationTest.php:1088
+#: application/tests/suite/Omeka/NavigationTest.php:1163
+#: application/tests/suite/Omeka/NavigationTest.php:1182
+#: application/tests/suite/Omeka/NavigationTest.php:1192
+#: application/tests/suite/Omeka/NavigationTest.php:1254
 msgid "Page 3"
 msgstr "Сторінка 3"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1032
-#: application/tests/suite/Omeka/NavigationTest.php:1041
-#: application/tests/suite/Omeka/NavigationTest.php:1092
-#: application/tests/suite/Omeka/NavigationTest.php:1096
-#: application/tests/suite/Omeka/NavigationTest.php:1165
-#: application/tests/suite/Omeka/NavigationTest.php:1184
-#: application/tests/suite/Omeka/NavigationTest.php:1201
-#: application/tests/suite/Omeka/NavigationTest.php:1222
-#: application/tests/suite/Omeka/NavigationTest.php:1240
-#: application/tests/suite/Omeka/NavigationTest.php:1250
+#: application/tests/suite/Omeka/NavigationTest.php:1031
+#: application/tests/suite/Omeka/NavigationTest.php:1040
+#: application/tests/suite/Omeka/NavigationTest.php:1091
+#: application/tests/suite/Omeka/NavigationTest.php:1095
+#: application/tests/suite/Omeka/NavigationTest.php:1164
+#: application/tests/suite/Omeka/NavigationTest.php:1183
+#: application/tests/suite/Omeka/NavigationTest.php:1200
+#: application/tests/suite/Omeka/NavigationTest.php:1221
+#: application/tests/suite/Omeka/NavigationTest.php:1239
+#: application/tests/suite/Omeka/NavigationTest.php:1249
 msgid "Page 4"
 msgstr "Сторінка 4"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1044
-#: application/tests/suite/Omeka/NavigationTest.php:1048
-#: application/tests/suite/Omeka/NavigationTest.php:1099
-#: application/tests/suite/Omeka/NavigationTest.php:1103
-#: application/tests/suite/Omeka/NavigationTest.php:1166
-#: application/tests/suite/Omeka/NavigationTest.php:1175
-#: application/tests/suite/Omeka/NavigationTest.php:1223
-#: application/tests/suite/Omeka/NavigationTest.php:1241
+#: application/tests/suite/Omeka/NavigationTest.php:1043
+#: application/tests/suite/Omeka/NavigationTest.php:1047
+#: application/tests/suite/Omeka/NavigationTest.php:1098
+#: application/tests/suite/Omeka/NavigationTest.php:1102
+#: application/tests/suite/Omeka/NavigationTest.php:1165
+#: application/tests/suite/Omeka/NavigationTest.php:1174
+#: application/tests/suite/Omeka/NavigationTest.php:1222
+#: application/tests/suite/Omeka/NavigationTest.php:1240
 msgid "Page 5"
 msgstr "Сторінка 5"
 
-#: application/tests/suite/Omeka/NavigationTest.php:1051
-#: application/tests/suite/Omeka/NavigationTest.php:1055
-#: application/tests/suite/Omeka/NavigationTest.php:1215
+#: application/tests/suite/Omeka/NavigationTest.php:1050
+#: application/tests/suite/Omeka/NavigationTest.php:1054
+#: application/tests/suite/Omeka/NavigationTest.php:1214
 msgid "Page 6"
 msgstr "Сторінка 6"
 
-#: application/views/helpers/AllElementTexts.php:108
+#: application/views/helpers/AllElementTexts.php:107
 msgid "[no text]"
 msgstr "[текст відсутній]"
 
@@ -3598,40 +3630,40 @@ msgstr "[текст відсутній]"
 msgid "Add Input"
 msgstr "Додати ввід"
 
-#: application/views/helpers/ElementInput.php:131
+#: application/views/helpers/ElementInput.php:130
 msgid "Use HTML"
 msgstr "Використовувати HTML"
 
 #: application/views/helpers/GetCurrentRecord.php:27
 #, php-format
 msgid "A current %s variable has not been set to this view."
-msgstr ""
+msgstr "Поточна змінна %s не вказана для цього представлення даних."
 
 #: application/views/helpers/GetLoopRecords.php:30
 #, php-format
 msgid "A loop %s variable has not been set to this view."
-msgstr ""
+msgstr "Змінну циклу %s для цього представлення не встановлено."
 
 #: application/views/helpers/Loop.php:27
 msgid "An array of records is not available for the loop."
-msgstr ""
+msgstr "Масив записів недоступний для циклу."
 
 #: application/views/helpers/MaxFileSize.php:44
 #, php-format
 msgid "%s MB"
-msgstr ""
+msgstr "%s MB "
 
 #: application/views/helpers/RecordUrl.php:34
 msgid "Invalid record passed while getting record URL."
-msgstr ""
+msgstr "Неправильний запис пройшов під час отримання URL-адреси запису."
 
 #: application/views/helpers/RecordUrl.php:44
 msgid "Invalid action passed while getting record URL."
-msgstr ""
+msgstr "Не вдалося виконати дію під час отримання URL-адреси запису."
 
 #: application/views/helpers/RecordUrl.php:75
 msgid "Invalid return value while getting record URL."
-msgstr ""
+msgstr "Недійсне значення при отриманні URL-адреси запису."
 
 #: application/views/scripts/collections/browse.php:14
 #: application/views/scripts/items/browse.php:24
@@ -3643,14 +3675,21 @@ msgstr "Сортувати за:"
 msgid "View the items in %s"
 msgstr "Перегляд елементів в %s"
 
-#: application/views/scripts/collections/show.php:12
-#, php-format
-msgid "Items in the %s Collection"
-msgstr "елементи в %s колекції"
+#: application/views/scripts/collections/show.php:13
+msgid "Collection Items"
+msgstr "Елементи колекції"
 
 #: application/views/scripts/collections/show.php:33
+#, php-format
+msgid "View item"
+msgid_plural "View all %s items"
+msgstr[0] "Перегляд елемента"
+msgstr[1] "Перегляд всіх %s елементів"
+msgstr[2] "Перегляд всіх %s елементів"
+
+#: application/views/scripts/collections/show.php:35
 msgid "There are currently no items within this collection."
-msgstr ""
+msgstr "В цій колекції немає елементів."
 
 #: application/views/scripts/common/footer.php:14
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
@@ -3658,15 +3697,15 @@ msgstr "Сайт працює на <a href=\"http://omeka.org\">Omeka</a>."
 
 #: application/views/scripts/common/pagination_control.php:5
 msgid "Pagination"
-msgstr ""
+msgstr "Пагінація"
 
 #: application/views/scripts/common/pagination_control.php:11
 msgid "Previous Page"
-msgstr ""
+msgstr "Попередня"
 
 #: application/views/scripts/common/pagination_control.php:36
 msgid "Current Page"
-msgstr ""
+msgstr "Поточна"
 
 #: application/views/scripts/common/pagination_control.php:39
 #, php-format
@@ -3675,7 +3714,7 @@ msgstr "%s з %s"
 
 #: application/views/scripts/common/pagination_control.php:48
 msgid "Next Page"
-msgstr ""
+msgstr "Наступна"
 
 #: application/views/scripts/error/403.php:2
 msgid "403 Page Forbidden"
@@ -3683,13 +3722,13 @@ msgstr "403 Заборонена сторінка"
 
 #: application/views/scripts/error/403.php:8
 msgid "You do not have permission to access this page."
-msgstr "Ви маєте права доступу до цієї сторінки."
+msgstr "Ви не маєте права доступу до цієї сторінки."
 
 #: application/views/scripts/error/404.dc.php:1
 #: application/views/scripts/error/404.php:2
 #: application/views/scripts/error/404.xml.php:1
 msgid "404 Page Not Found"
-msgstr "404 Сторінка не знайдена"
+msgstr "404 Сторінку не знайдено"
 
 #: application/views/scripts/error/404.php:6
 #, php-format
@@ -3707,7 +3746,7 @@ msgstr "405 Заборонений метод"
 #: application/views/scripts/error/405.php:6
 #, php-format
 msgid "The method used to access this URL (%s) is not valid."
-msgstr "Метод, що використовуваний для доступу до цього посилання (%s) є неприпустим."
+msgstr "Метод, що використовується для доступу до цього URL (%s) є неприпустим."
 
 #: application/views/scripts/error/index.php:4
 msgid "Omeka has encountered an error"
@@ -3717,9 +3756,9 @@ msgstr "В роботі Omeka трапилась помилка"
 msgid ""
 "To learn how to see more detailed information about this error, see the "
 "Omeka Codex page on <a "
-"href=\"http://omeka.org/codex/Retrieving_error_messages\">retrieving error "
-"messages</a>."
-msgstr "Для отримання детальної інформація про цю помилку, прошу перейти на сторінку Omeka Codex<a href=\"http://omeka.org/codex/Retrieving_error_messages\">отримування повідомлень про помилки</a>."
+"href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">retrieving"
+" error messages</a>."
+msgstr " "
 
 #: application/views/scripts/index.php:10
 msgid "Featured Item"
@@ -3763,7 +3802,7 @@ msgstr "Пошук тільки цих типів записів:"
 
 #: application/views/scripts/search/search-form.php:17
 msgid "Go to search settings to select record types to use."
-msgstr "Перейдіть до налаштувань пошуку, щоб вибрати типи записів до використання."
+msgstr "Перейдіть до налаштувань пошуку, щоб вибрати типи записів для використання."
 
 #: application/views/scripts/search/search-form.php:19
 msgid "Advanced Search (Items only)"
@@ -3775,11 +3814,11 @@ msgstr "Перейти на домашню сторінку"
 
 #: application/views/scripts/users/login.php:9
 msgid "Lost your password?"
-msgstr "Забули гасло?"
+msgstr "Забули пароль?"
 
 #: install/controllers/IndexController.php:25
 msgid "Could not load database resource!"
-msgstr "Не можу завантажити ресурси бази даних!"
+msgstr "Не можливо завантажити ресурси бази даних!"
 
 #: install/views/scripts/index/errors.phtml:1
 msgid "Installation Error"
@@ -3788,7 +3827,7 @@ msgstr "Помилка встановлення"
 #: install/views/scripts/index/errors.phtml:2
 msgid ""
 "Before installation can continue, the following errors must be resolved:"
-msgstr ""
+msgstr "Перед продовження інсталяції, необхідно вирішити наступні помилки:"
 
 #: install/views/scripts/index/fatal-error.phtml:1
 msgid "Fatal Error"
@@ -3802,7 +3841,7 @@ msgstr "Попередження при встановленні"
 msgid ""
 "The following issues will not affect installation, but they may negatively "
 "affect the behavior of Omeka:"
-msgstr ""
+msgstr "Наведені нижче проблеми не вплинуть на встановлення, але вони можуть негативно вплинути на роботу Omeka:"
 
 #: install/views/scripts/index/index.phtml:14
 msgid "Configure Your Site"
