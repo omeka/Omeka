@@ -26,7 +26,7 @@ msgstr ""
 
 #. Dublin Core: Title element name
 #: admin/themes/default/collections/browse.php:30
-#: admin/themes/default/items/browse.php:46
+#: admin/themes/default/items/browse.php:45
 #: admin/themes/default/search/index.php:13
 #: application/views/scripts/collections/browse.php:10
 #: application/views/scripts/items/browse.php:19
@@ -39,7 +39,7 @@ msgid "A name given to the resource"
 msgstr ""
 
 #. Dublin Core: Creator element name
-#: admin/themes/default/items/browse.php:47
+#: admin/themes/default/items/browse.php:46
 #: application/views/scripts/items/browse.php:20
 msgid "Creator"
 msgstr ""
@@ -97,7 +97,7 @@ msgid ""
 msgstr ""
 
 #. Dublin Core: Type element name
-#: admin/themes/default/items/browse.php:48
+#: admin/themes/default/items/browse.php:47
 msgid "Type"
 msgstr ""
 
@@ -401,9 +401,9 @@ msgstr ""
 #: admin/themes/default/item-types/edit.php:20
 #: admin/themes/default/item-types/show.php:54
 #: admin/themes/default/items/batch-edit.php:50
-#: admin/themes/default/items/browse.php:34
-#: admin/themes/default/items/browse.php:95
-#: admin/themes/default/items/browse.php:135
+#: admin/themes/default/items/browse.php:33
+#: admin/themes/default/items/browse.php:94
+#: admin/themes/default/items/browse.php:134
 #: admin/themes/default/items/edit.php:22
 #: admin/themes/default/items/show.php:47
 #: admin/themes/default/settings/edit-item-type-elements.php:23
@@ -501,7 +501,7 @@ msgstr ""
 
 #: admin/themes/default/collections/browse.php:32
 #: admin/themes/default/files/show.php:66
-#: admin/themes/default/items/browse.php:49
+#: admin/themes/default/items/browse.php:48
 #: application/views/scripts/collections/browse.php:11
 #: application/views/scripts/items/browse.php:21
 msgid "Date Added"
@@ -514,7 +514,7 @@ msgid "Total Number of Items"
 msgstr ""
 
 #: admin/themes/default/collections/browse.php:48
-#: admin/themes/default/items/browse.php:86
+#: admin/themes/default/items/browse.php:85
 msgid "(Private)"
 msgstr ""
 
@@ -526,9 +526,9 @@ msgstr ""
 #: admin/themes/default/index.php:79
 #: admin/themes/default/item-types/browse.php:41
 #: admin/themes/default/item-types/show.php:51
-#: admin/themes/default/items/browse.php:31
-#: admin/themes/default/items/browse.php:91
-#: admin/themes/default/items/browse.php:132
+#: admin/themes/default/items/browse.php:30
+#: admin/themes/default/items/browse.php:90
+#: admin/themes/default/items/browse.php:131
 #: admin/themes/default/items/files-form.php:12
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:63
@@ -651,7 +651,7 @@ msgid "Item Types"
 msgstr ""
 
 #: admin/themes/default/common/content-nav.php:21
-#: admin/themes/default/items/browse.php:108
+#: admin/themes/default/items/browse.php:107
 #: admin/themes/default/items/show.php:65
 #: application/views/scripts/items/browse.php:46
 #: application/views/scripts/items/show.php:29
@@ -1084,8 +1084,8 @@ msgid "There are no recently added items."
 msgstr ""
 
 #: admin/themes/default/items/add.php:2
-#: admin/themes/default/items/browse.php:19
-#: admin/themes/default/items/browse.php:141
+#: admin/themes/default/items/browse.php:17
+#: admin/themes/default/items/browse.php:142
 #: admin/themes/default/items/browse.php:168
 msgid "Add an Item"
 msgstr ""
@@ -1096,7 +1096,7 @@ msgstr ""
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit-common.php:48
-#: admin/themes/default/items/browse.php:104
+#: admin/themes/default/items/browse.php:103
 #: admin/themes/default/items/edit.php:43
 #: admin/themes/default/items/show.php:57 application/libraries/globals.php:411
 #: application/views/scripts/items/show.php:21
@@ -1260,8 +1260,8 @@ msgstr ""
 msgid "Browse Items"
 msgstr ""
 
-#: admin/themes/default/items/browse.php:21
-#: admin/themes/default/items/browse.php:143
+#: admin/themes/default/items/browse.php:19
+#: admin/themes/default/items/browse.php:144
 #: admin/themes/default/items/search.php:2
 #: application/libraries/globals.php:2411
 #: application/libraries/globals.php:2802
@@ -1269,27 +1269,27 @@ msgstr ""
 msgid "Search Items"
 msgstr ""
 
-#: admin/themes/default/items/browse.php:26
-#: admin/themes/default/items/browse.php:129
+#: admin/themes/default/items/browse.php:25
+#: admin/themes/default/items/browse.php:128
 #, php-format
 msgid "Select all %s results"
 msgstr ""
 
-#: admin/themes/default/items/browse.php:27
-#: admin/themes/default/items/browse.php:130
+#: admin/themes/default/items/browse.php:26
+#: admin/themes/default/items/browse.php:129
 msgid "items selected"
 msgstr ""
 
-#: admin/themes/default/items/browse.php:43
+#: admin/themes/default/items/browse.php:42
 msgid "Select all rows"
 msgstr ""
 
-#: admin/themes/default/items/browse.php:64
+#: admin/themes/default/items/browse.php:63
 #, php-format
 msgid "Select item \"%s\""
 msgstr ""
 
-#: admin/themes/default/items/browse.php:109
+#: admin/themes/default/items/browse.php:108
 msgid "No Tags"
 msgstr ""
 
@@ -2010,7 +2010,7 @@ msgstr ""
 msgid "Rescind"
 msgstr ""
 
-#: admin/themes/default/users/api-keys.php:60
+#: admin/themes/default/users/api-keys.php:61
 msgid "Update API Keys"
 msgstr ""
 
@@ -2197,6 +2197,7 @@ msgstr ""
 #: application/controllers/SettingsController.php:140
 #: application/controllers/SettingsController.php:177
 #: application/controllers/ThemesController.php:85
+#: application/controllers/UsersController.php:312
 #: application/libraries/Omeka/Controller/AbstractActionController.php:183
 #: application/libraries/Omeka/Controller/AbstractActionController.php:224
 msgid "There was an error on the form. Please try again."
@@ -2488,6 +2489,10 @@ msgstr ""
 msgid "Invalid tagType given."
 msgstr ""
 
+#: application/controllers/TagsController.php:108
+msgid "Error occurred."
+msgstr ""
+
 #: application/controllers/ThemesController.php:28
 msgid "Invalid form submission."
 msgstr ""
@@ -2532,7 +2537,7 @@ msgstr ""
 
 #: application/controllers/UsersController.php:112
 #: application/controllers/UsersController.php:115
-#: application/controllers/UsersController.php:383
+#: application/controllers/UsersController.php:390
 #, php-format
 msgid "%s Administrator"
 msgstr ""
@@ -2591,20 +2596,20 @@ msgstr ""
 msgid "Password changed!"
 msgstr ""
 
-#: application/controllers/UsersController.php:315
+#: application/controllers/UsersController.php:322
 msgid "A new API key was successfully created."
 msgstr ""
 
-#: application/controllers/UsersController.php:322
+#: application/controllers/UsersController.php:329
 msgid "An existing API key was successfully rescinded."
 msgstr ""
 
-#: application/controllers/UsersController.php:349
+#: application/controllers/UsersController.php:356
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
 msgstr ""
 
-#: application/controllers/UsersController.php:355
+#: application/controllers/UsersController.php:362
 #, php-format
 msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
@@ -2612,23 +2617,23 @@ msgid ""
 "this user."
 msgstr ""
 
-#: application/controllers/UsersController.php:379
+#: application/controllers/UsersController.php:386
 msgid "Welcome!"
 msgstr ""
 
-#: application/controllers/UsersController.php:381
+#: application/controllers/UsersController.php:388
 #, php-format
 msgid ""
 "Your account for the %s repository has been created. Please click the "
 "following link to activate your account:"
 msgstr ""
 
-#: application/controllers/UsersController.php:384
+#: application/controllers/UsersController.php:391
 #, php-format
 msgid "Activate your account with the %s repository"
 msgstr ""
 
-#: application/controllers/UsersController.php:479
+#: application/controllers/UsersController.php:486
 msgid "Login information incorrect. Please try again."
 msgstr ""
 
