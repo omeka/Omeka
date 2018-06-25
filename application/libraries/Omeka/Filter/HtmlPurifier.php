@@ -142,6 +142,13 @@ class Omeka_Filter_HtmlPurifier implements Zend_Filter_Interface
         $purifierConfig->set('HTML.AllowedElements', $allowedHtmlElements);
         $purifierConfig->set('HTML.AllowedAttributes', $allowedHtmlAttributes);
 
+        // allow plugins to inject HTMLPurifier config/definitions
+        $purifierConfig = apply_filters('html_purifier_config_setup', $purifierConfig, array(
+            'defaults' => self::$_purifierConfig,
+            'allowedHtmlElements' => $allowedHtmlElements,
+            'allowedHtmlAttributes' => $allowedHtmlAttributes
+        ));
+
         $purifier = HTMLPurifier::instance($purifierConfig);
         return $purifier;
     }
