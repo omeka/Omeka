@@ -100,9 +100,9 @@ Omeka.Items = {};
         var tagLi = $('<li/>');
         tagLi.after(" ");
 
+        $('<span></span>', {'class': 'tag', 'text': tag}).appendTo(tagLi);
         var undoButton = $('<span class="undo-remove-tag"><a href="#">Undo</a></span>').appendTo(tagLi);
         var deleteButton = $('<span class="remove-tag"><a href="#">Remove</a></span>').appendTo(tagLi);
-        $('<span></span>', {'class': 'tag', 'text': tag}).appendTo(tagLi);
 
         if($('#all-tags-list').length != 0) {
             $('#all-tags-list').append(tagLi);
