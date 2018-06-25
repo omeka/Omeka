@@ -126,7 +126,7 @@ Omeka.Items = {};
 
         // only add tags from the input box that are new
         var oldTags = $('.tag-list .tag').map(function () {
-            return $.trim(this.text);
+            return $.trim(this.textContent);
         });
 
         $.each(newTags, function () {
