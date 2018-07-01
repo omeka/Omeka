@@ -478,7 +478,7 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
 
         $title = metadata($this, 'display_title');
         if ($title) {
-            $citation .= "&#8220;$title,&#8221; ";
+            $citation .= "&#8220;$title&#8221;, ";
         }
 
         $siteTitle = option('site_title');
