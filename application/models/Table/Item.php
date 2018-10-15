@@ -22,7 +22,7 @@ class Table_Item extends Omeka_Db_Table
         //Apply the simple or advanced search
         if (isset($params['search']) || isset($params['advanced'])) {
             if ($simpleTerms = @$params['search']) {
-                $this->_simpleSearch($select, $simpleTerms);
+                $this->_simpleSearch($select, $simpleTerms, @$params['search_type']);
             }
             if ($advancedTerms = @$params['advanced']) {
                 $this->_advancedSearch($select, $advancedTerms);
@@ -41,9 +41,10 @@ class Table_Item extends Omeka_Db_Table
      * tagged items show up higher on the found results list for a given search.
      * 
      * @param Zend_Db_Select $select
-     * @param string $simpleTerms
+     * @param string $terms
+     * @param string $type
      */
-    protected function _simpleSearch($select, $terms)
+    protected function _simpleSearch($select, $terms, $type = 'exact_match')
     {
         $db = $this->getDb();
 
@@ -71,7 +72,16 @@ class Table_Item extends Omeka_Db_Table
             array()
         );
 
-        $whereCondition = $db->quoteInto('_simple_etx.text LIKE ?', '%' . $terms . '%')
+        // Set the where clause according to the search type.
+        if ($type == 'keyword') {
+            $where = 'MATCH (_simple_etx.text) AGAINST (?)';
+        } elseif ($type == 'boolean') {
+            $where = 'MATCH (_simple_etx.text) AGAINST (? IN BOOLEAN MODE)';
+        } else {
+            $where = '_simple_etx.text LIKE ?';
+            $terms = "%{$terms}%";
+        }
+        $whereCondition = $db->quoteInto($where, $terms)
                         . ' OR '
                         . $db->quoteInto('_simple_tags.name IN (?)', $tagList);
         $select->where($whereCondition);

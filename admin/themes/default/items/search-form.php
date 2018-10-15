@@ -21,6 +21,18 @@ $formAttributes['method'] = 'GET';
                 array('id' => 'keyword-search', 'size' => '40')
             );
         ?>
+            <span id="query-types">
+            <?php
+                $validQueryTypes = get_search_query_types();
+                if (isset($_REQUEST['search_type']) && isset($validQueryTypes[$_REQUEST['search_type']])) {
+                    $defaultQueryType = $_REQUEST['search_type'];
+                } else {
+                    // use same default query type as for global search
+                    $defaultQueryType = apply_filters('search_form_default_query_type', 'keyword');
+                }
+                echo $this->formRadio('search_type', $defaultQueryType, array(), $validQueryTypes, '');
+            ?>
+            </span>
         </div>
     </div>
     <div id="search-narrow-by-fields" class="field">

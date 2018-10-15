@@ -68,10 +68,20 @@ class Omeka_View_Helper_ItemSearchFilters extends Zend_View_Helper_Abstract
                         $displayValue = ($value == 1 ? __('Yes') : $displayValue = __('No'));
                         break;
 
-                    case 'search':
                     case 'tags':
                     case 'range':
                         $displayValue = $value;
+                        break;
+
+                    case 'search':
+                        $displayValue = $value;
+                        // we need to merge search & search_type into single criteria (if we want to remove it later)
+                        if (!empty($requestArray['search_type'])) {
+                            $validQueryTypes = get_search_query_types();
+                            if (isset($validQueryTypes[$requestArray['search_type']])) {
+                                $displayValue .= ' ('. __('Query type:') .' '. $validQueryTypes[$requestArray['search_type']] .')';
+                            }
+                        }
                         break;
                 }
                 if ($displayValue) {
