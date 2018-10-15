@@ -53,6 +53,7 @@ class Omeka_Db
     {
         $this->_adapter = $adapter;
         $this->prefix = (string) $prefix;
+        $this->_adapter->query($this->_getInitCommand());
     }
 
     /**
@@ -85,6 +86,7 @@ class Omeka_Db
             if (2006 == $e->getCode()) {
                 $this->_adapter->closeConnection();
                 $this->_adapter->getConnection();
+                $this->_adapter->query($this->_getInitCommand());
                 return call_user_func_array(array($this->_adapter, $m), $a);
             }
             throw $e;
@@ -304,5 +306,24 @@ class Omeka_Db
         $loadSql = file_get_contents($filePath);
         $subbedSql = str_replace('%PREFIX%', $this->prefix, $loadSql);
         $this->queryBlock($subbedSql, ";\n");
+    }
+
+    /**
+     * Get a command to be executed upon connecting.
+     *
+     * Currently sets the sql_mode for MySQL. The mode is depdendent on the
+     * version of the server, so we must wait until after connecting to
+     * determine what the command should be.
+     *
+     * @return string
+     */
+    private function _getInitCommand()
+    {
+        $version = $this->_adapter->getServerVersion();
+        if (version_compare($version, '8.0.11', '<')) {
+            return  "SET SESSION sql_mode='STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'";
+        } else {
+            return  "SET SESSION sql_mode='STRICT_ALL_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'";
+        }
     }
 }
