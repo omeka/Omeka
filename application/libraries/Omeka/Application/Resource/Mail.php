@@ -49,6 +49,12 @@ class Omeka_Application_Resource_Mail extends Zend_Application_Resource_Resource
 
         $this->_zendResource->setOptions($options);
         $transport = $this->_zendResource->init();
+
+        if (!empty($options['force_from'])) {
+            $wrappedTransport = new Omeka_Mail_TransportWrapper($transport, $options['force_from']);
+            Zend_Mail::setDefaultTransport($wrappedTransport);
+        }
+
         return new Zend_Mail;
     }
 }
