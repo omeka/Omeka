@@ -12,10 +12,16 @@ class Omeka_Mail_TransportWrapper extends Zend_Mail_Transport_Abstract
      */
     private $_from;
 
-    public function __construct(Zend_Mail_Transport_Abstract $transport, $from)
+    /**
+     * @var string The From "friendly" name to force for outgoing messages
+     */
+    private $_fromName;
+
+    public function __construct(Zend_Mail_Transport_Abstract $transport, $from, $fromName = null)
     {
         $this->_transport = $transport;
         $this->_from = $from;
+        $this->_fromName = $fromName;
     }
 
     /**
@@ -28,7 +34,7 @@ class Omeka_Mail_TransportWrapper extends Zend_Mail_Transport_Abstract
     {
         $originalFrom = $mail->getFrom();
         $mail->clearFrom();
-        $mail->setFrom($this->_from);
+        $mail->setFrom($this->_from, $this->_fromName);
         if (!$mail->getReplyTo()) {
             $mail->setReplyTo($originalFrom);
         }
