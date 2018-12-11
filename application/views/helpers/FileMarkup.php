@@ -628,6 +628,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
 
         $attrs = apply_filters('image_tag_attributes', $attrs, array(
             'record' => $record,
+            'file' => $file,
             'format' => $format,
         ));
         // Build the img tag
