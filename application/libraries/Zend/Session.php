@@ -366,22 +366,31 @@ class Zend_Session extends Zend_Session_Abstract
      */
     public static function rememberUntil($seconds = 0)
     {
+        // normally "rememberMe()" represents a security context change, so should use new session id
+        // omeka change: regenerate first so setcookie has correct session id
+        self::regenerateId();
+
         if (self::$_unitTestEnabled) {
-            self::regenerateId();
             return;
         }
 
-        $cookieParams = session_get_cookie_params();
+        if ($seconds) {
+            $expires = time() + $seconds;
+        } else {
+            $expires = 0;
+        }
 
-        session_set_cookie_params(
-            $seconds,
+        // omeka change: PHP 7.2 compat: can't call set_cookie_params with active session so
+        // change the cookie params directly with setcookie instead
+        $cookieParams = session_get_cookie_params();
+        setcookie(
+            session_name(),
+            session_id(),
+            $expires,
             $cookieParams['path'],
             $cookieParams['domain'],
             $cookieParams['secure']
-            );
-
-        // normally "rememberMe()" represents a security context change, so should use new session id
-        self::regenerateId();
+        );
     }
 
 
