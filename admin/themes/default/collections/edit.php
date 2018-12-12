@@ -14,7 +14,7 @@ include 'form-tabs.php';
 echo flash();
 ?>
 
-<form method="post">
+<form method="post" enctype="multipart/form-data" id="collection-form" action="">
     <?php include 'form.php'; ?>
 
     <section class="three columns omega">
