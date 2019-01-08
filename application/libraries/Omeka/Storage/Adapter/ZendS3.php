@@ -22,6 +22,7 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
     const ENDPOINT_OPTION = 'endpoint';
     const BUCKET_OPTION = 'bucket';
     const EXPIRATION_OPTION = 'expiration';
+    const FORCE_SSL = 'forceSSL';
 
     /**
      * @var Zend_Service_Amazon_S3
@@ -157,9 +158,13 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
     {
         $endpoint = $this->_s3->getEndpoint();
         $object = urlencode($this->_getObjectName($path));
-
+				
+		if( ($this->_getForceSSL()) && parse_url($endpoint, PHP_URL_SCHEME)=='http'){
+			$endpoint = 'https:' . substr("$endpoint", 5);
+		}
+		
         $uri = "$endpoint/$object";
-
+        
         if ($expiration = $this->_getExpiration()) {
             $date = new Zend_Date();
             $date->add($expiration, Zend_Date::MINUTE);
@@ -230,4 +235,15 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
         $expiration = (int) @$this->_options[self::EXPIRATION_OPTION];
         return $expiration > 0 ? $expiration : 0;
     }
+    
+    /**
+     * Get the value of the force_ssl option.
+     * 
+     * @return bool value
+     */
+    private function _getForceSSL()
+    {
+	    $force_ssl = (bool) $this->_options[self::FORCE_SSL];
+        return $force_ssl;
+    }    
 }
