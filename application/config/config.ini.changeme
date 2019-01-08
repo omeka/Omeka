@@ -198,7 +198,9 @@ mail.transport.type = "Sendmail"
 ; If the expiration option is set, files will be uploaded with "private"
 ; access, and Omeka will generate URLs that are only valid for a limited
 ; time.  If the expiration option is missing or left commented out,
-; uploaded files will always be publicly readable.
+; uploaded files will always be publicly readable. Leave the forceSSL  
+; option commented out unless site is served over HTTPS-only *and* the 
+; the web browser is issuing mixed-content warnings.
 ;
 ; storage.adapter = "Omeka_Storage_Adapter_ZendS3"
 ; storage.adapterOptions.accessKeyId =
@@ -206,6 +208,7 @@ mail.transport.type = "Sendmail"
 ; storage.adapterOptions.bucket =
 ; storage.adapterOptions.expiration = 10 ; URL expiration time (in minutes)
 ; storage.adapterOptions.endpoint = ; Custom S3 endpoint (optional)
+; storage.adapterOptions.forceSSL = 1 ; Any value (optional)
 
 ;;;;;;;;;;;;
 ; Security ;

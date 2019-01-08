@@ -22,6 +22,7 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
     const ENDPOINT_OPTION = 'endpoint';
     const BUCKET_OPTION = 'bucket';
     const EXPIRATION_OPTION = 'expiration';
+    const FORCE_SSL = 'forceSSL';
 
     /**
      * @var Zend_Service_Amazon_S3
@@ -63,6 +64,11 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
         if (!empty($options[self::ENDPOINT_OPTION])) {
             $this->_s3->setEndpoint($options[self::ENDPOINT_OPTION]);
         }
+        
+        if (isset($this->_options[self::FORCE_SSL]) && parse_url($this->_s3->getEndpoint(), PHP_URL_SCHEME)=='http'){
+            $endpoint = 'https:' . substr($this->_s3->getEndpoint(), 5);
+            $this->_s3->setEndpoint($endpoint);
+        }        
     }
 
     public function setUp()
