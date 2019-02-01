@@ -3295,7 +3295,10 @@ function items_output_url($output, $otherParams = array())
 
     // Provide additional query parameters if the current page is items/browse.
     $request = Zend_Controller_Front::getInstance()->getRequest();
-    if ('items' == $request->getControllerName() && 'browse' == $request->getActionName()) {
+    if ('items' == $request->getControllerName()
+        && 'browse' == $request->getActionName()
+        && 'default' == $request->getModuleName()
+    ) {
         $queryParams = $_GET;
         unset($queryParams['submit_search']);
         unset($queryParams['page']);
