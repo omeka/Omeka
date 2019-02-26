@@ -366,6 +366,10 @@ class Omeka_Db_Table
         foreach($columns as $column) {
             if(array_key_exists($column, $params)) {
                 if (is_array($params[$column])) {
+                    // empty IN() breaks SQL
+                    if (empty($params[$column])) {
+                        continue;
+                    }
                     $nullIndex = array_search(null, $params[$column], true);
                     $where = "`$alias`.`$column` IN (?)";
                     if ($nullIndex !== false) {
