@@ -1,4 +1,5 @@
-<?php 
+<?php
+queue_js_file('vendor/semver.min', 'javascripts');
 $pageTitle = __('Plugins') . ' ' . __('(%s total)', $plugin_count);
 echo head(array('title' => $pageTitle, 'bodyclass' => 'plugins browse'));
 echo flash();
@@ -76,6 +77,20 @@ echo flash();
                 <?php endforeach; ?>
                 </ul>
             <?php endif; ?>
+            <?php if ($plugin->isActive()): ?>
+                <div class="version-notification" style="display: none;"
+                    data-addon-id="<?php echo html_escape($pluginDirName); ?>"
+                    data-current-version="<?php echo html_escape($plugin->getIniVersion()); ?>">
+                    <?php echo sprintf(
+                        $this->translate('A new version of this plugin is available. %s'),
+                        sprintf(
+                            '<a href="%s">%s</a>',
+                            'https://omeka.org/classic/plugins/' . $pluginDirName,
+                            $this->translate('Get the new version.')
+                        )
+                    ); ?>
+                </div>
+            <?php endif; ?>
 
             </div>
             <div class="four columns omega">
@@ -144,3 +159,37 @@ echo flash();
 <?php endif; ?>
 <?php fire_plugin_hook('admin_plugins_browse', array('plugins' => $plugins, 'view' => $this)); ?>
 <?php echo foot(); ?>
+<script>
+jQuery.get('https://omeka.org/add-ons/json/classic_plugin.json')
+    .done(function(data) {
+        /**
+         * Normalize a plugin version by adding a PATCH version if none given.
+         *
+         * Plugins often don't include the PATCH version that's required by the
+         * semver specification. Semver's "loose" option does nothing here.
+         * Also, semver's JS does not include a way to coerce a version.
+         *
+         * @see https://semver.org/
+         * @param string version
+         */
+        var normalizeVersion = function(version) {
+            version = String(version);
+            if (1 === (version.split('.').length - 1)) {
+                version = version + '.0';
+            }
+            return version;
+        };
+        jQuery('.version-notification').each(function(index) {
+            var addon = jQuery(this);
+            var addonId = addon.data('addon-id');
+            if (addonId in data) {
+                if (semver.lt(
+                    normalizeVersion(addon.data('current-version')),
+                    normalizeVersion(data[addonId]['latest_version'])
+                )) {
+                    addon.show();
+                }
+            }
+        });
+    });
+</script>
