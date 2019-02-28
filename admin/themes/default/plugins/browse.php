@@ -160,36 +160,5 @@ echo flash();
 <?php fire_plugin_hook('admin_plugins_browse', array('plugins' => $plugins, 'view' => $this)); ?>
 <?php echo foot(); ?>
 <script>
-jQuery.get('https://omeka.org/add-ons/json/classic_plugin.json')
-    .done(function(data) {
-        /**
-         * Normalize a plugin version by adding a PATCH version if none given.
-         *
-         * Plugins often don't include the PATCH version that's required by the
-         * semver specification. Semver's "loose" option does nothing here.
-         * Also, semver's JS does not include a way to coerce a version.
-         *
-         * @see https://semver.org/
-         * @param string version
-         */
-        var normalizeVersion = function(version) {
-            version = String(version);
-            if (1 === (version.split('.').length - 1)) {
-                version = version + '.0';
-            }
-            return version;
-        };
-        jQuery('.version-notification').each(function(index) {
-            var addon = jQuery(this);
-            var addonId = addon.data('addon-id');
-            if (addonId in data) {
-                if (semver.lt(
-                    normalizeVersion(addon.data('current-version')),
-                    normalizeVersion(data[addonId]['latest_version'])
-                )) {
-                    addon.show();
-                }
-            }
-        });
-    });
+    Omeka.runVersionNotification('https://omeka.org/add-ons/json/classic_plugin.json');
 </script>
