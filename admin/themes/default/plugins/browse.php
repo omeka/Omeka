@@ -1,4 +1,5 @@
-<?php 
+<?php
+queue_js_file('vendor/semver.min', 'javascripts');
 $pageTitle = __('Plugins') . ' ' . __('(%s total)', $plugin_count);
 echo head(array('title' => $pageTitle, 'bodyclass' => 'plugins browse'));
 echo flash();
@@ -76,6 +77,20 @@ echo flash();
                 <?php endforeach; ?>
                 </ul>
             <?php endif; ?>
+            <?php if ($plugin->isActive()): ?>
+                <div class="version-notification" style="display: none;"
+                    data-addon-id="<?php echo html_escape($pluginDirName); ?>"
+                    data-current-version="<?php echo html_escape($plugin->getIniVersion()); ?>">
+                    <?php echo sprintf(
+                        $this->translate('A new version of this plugin is available. %s'),
+                        sprintf(
+                            '<a href="%s">%s</a>',
+                            'https://omeka.org/classic/plugins/' . $pluginDirName,
+                            $this->translate('Get the new version.')
+                        )
+                    ); ?>
+                </div>
+            <?php endif; ?>
 
             </div>
             <div class="four columns omega">
@@ -144,3 +159,6 @@ echo flash();
 <?php endif; ?>
 <?php fire_plugin_hook('admin_plugins_browse', array('plugins' => $plugins, 'view' => $this)); ?>
 <?php echo foot(); ?>
+<script>
+    Omeka.runVersionNotification('https://omeka.org/add-ons/json/classic_plugin.json');
+</script>

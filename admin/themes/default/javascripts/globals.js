@@ -207,4 +207,39 @@ if (!Omeka) {
         [Omeka.mediaFallback, null],
         [Omeka.warnIfUnsaved, null]
     ];
+
+    /**
+     * Run version notification for addons (active plugins & current theme).
+     *
+     * Normalizes addon versions by adding a PATCH version if none given. Addons
+     * often don't include the PATCH version that's required by the semver spec.
+     * Semver's JS doesn't include a way to coerce a version and the "loose"
+     * option doesn't apply here.
+     *
+     * @see https://semver.org/
+     * @param string endpoint
+     */
+    Omeka.runVersionNotification = function (endpoint) {
+        $.get(endpoint).done(function(data) {
+            var normalizeVersion = function(version) {
+                version = String(version);
+                if (1 === (version.split('.').length - 1)) {
+                    version = version + '.0';
+                }
+                return version;
+            };
+            $('.version-notification').each(function(index) {
+                var addon = $(this);
+                var addonId = addon.data('addon-id');
+                if (addonId in data) {
+                    if (semver.lt(
+                        normalizeVersion(addon.data('current-version')),
+                        normalizeVersion(data[addonId]['latest_version'])
+                    )) {
+                        addon.show();
+                    }
+                }
+            });
+        });
+    };
 })(jQuery);
