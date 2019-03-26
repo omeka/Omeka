@@ -257,6 +257,9 @@ class PluginsController extends Omeka_Controller_AbstractActionController
      */
     public function browseAction()
     {
+        $config = $this->getInvokeArg('bootstrap')->getResource('Config');
+        $versionNotifications = isset($config->versionNotifications) ? $config->versionNotifications : true;
+
         // Get installed plugins, includes active and inactive.
         $installedPlugins = $this->_pluginLoader->getPlugins();
 
@@ -277,6 +280,7 @@ class PluginsController extends Omeka_Controller_AbstractActionController
         $this->view->loader = $this->_pluginLoader;
         $this->view->plugin_count = count($allPlugins);
         $this->view->csrf = new Omeka_Form_SessionCsrf;
+        $this->view->versionNotifications = $versionNotifications;
     }
 
     /**

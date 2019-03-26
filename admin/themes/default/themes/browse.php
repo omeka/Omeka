@@ -1,5 +1,7 @@
 <?php
-queue_js_file('vendor/semver.min', 'javascripts');
+if ($versionNotifications):
+    queue_js_file('vendor/semver.min', 'javascripts');
+endif;
 echo head(array('title' => __('Appearance'), 'bodyclass' => 'themes'));
 echo common('appearance-nav');
 echo flash();
@@ -23,6 +25,7 @@ if ($current->image) {
         <p class="theme-description"><?php echo html_escape($current->description); ?></p>
         <p class="theme-support-link"><a href="<?php echo $current->support_link; ?>" target="_blank"><?php echo __('Get support');?></a></p>
     </div>
+    <?php if ($versionNotifications): ?>
     <div class="version-notification" style="display: none;"
         data-addon-id="<?php echo html_escape($current->directory); ?>"
         data-current-version="<?php echo html_escape($current->version); ?>">
@@ -35,6 +38,7 @@ if ($current->image) {
             )
         ); ?>
     </div>
+    <?php endif; ?>
 </div>
 
 <p class="managethemes"><?php echo __('Add new themes by downloading them from the <a href="http://omeka.org/add-ons/themes/" target="_blank">Omeka Theme Directory</a>, or <a href="http://omeka.org/codex/Theme_Writing_Best_Practices" target="_blank">design your own</a>!'); ?></p>
@@ -71,7 +75,9 @@ echo $csrf;
     </form>
 </div>
 <div style="clear:both"><?php fire_plugin_hook('admin_themes_browse', array('themes' => $themes, 'view' => $this)); ?></div>
-<?php echo foot(); ?>
+<?php if ($versionNotifications): ?>
 <script>
     Omeka.runVersionNotification('https://omeka.org/add-ons/json/classic_theme.json');
 </script>
+<?php endif; ?>
+<?php echo foot(); ?>

@@ -13,12 +13,16 @@ class ThemesController extends Omeka_Controller_AbstractActionController
 {
     public function browseAction()
     {
+        $config = $this->getInvokeArg('bootstrap')->getResource('Config');
+        $versionNotifications = isset($config->versionNotifications) ? $config->versionNotifications : true;
+
         $csrfForm = new Omeka_Form_SessionCsrf;
         $themes = apply_filters('browse_themes', Theme::getAllThemes());
         $public = get_option(Theme::PUBLIC_THEME_OPTION);
         $this->view->themes = $themes;
         $this->view->current = $themes[$public];
         $this->view->csrf = $csrfForm;
+        $this->view->versionNotifications = $versionNotifications;
     }
 
     public function switchAction()

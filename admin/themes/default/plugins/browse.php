@@ -1,5 +1,7 @@
 <?php
-queue_js_file('vendor/semver.min', 'javascripts');
+if ($versionNotifications):
+    queue_js_file('vendor/semver.min', 'javascripts');
+endif;
 $pageTitle = __('Plugins') . ' ' . __('(%s total)', $plugin_count);
 echo head(array('title' => $pageTitle, 'bodyclass' => 'plugins browse'));
 echo flash();
@@ -53,7 +55,7 @@ echo flash();
                 echo __('Version %s', html_escape($plugin->getIniVersion()));
             endif;
             ?>
-            <?php 
+            <?php
             if ($plugin->getAuthor()):
                 echo __('by %s', html_escape($plugin->getAuthor()));
             endif;
@@ -77,7 +79,7 @@ echo flash();
                 <?php endforeach; ?>
                 </ul>
             <?php endif; ?>
-            <?php if ($plugin->isActive()): ?>
+            <?php if ($versionNotifications && $plugin->isActive()): ?>
                 <div class="version-notification" style="display: none;"
                     data-addon-id="<?php echo html_escape($pluginDirName); ?>"
                     data-current-version="<?php echo html_escape($plugin->getIniVersion()); ?>">
@@ -158,7 +160,9 @@ echo flash();
     <p><?php echo __('You do not have any plugins installed. Add them to the plugins directory to see them listed here.'); ?></p>
 <?php endif; ?>
 <?php fire_plugin_hook('admin_plugins_browse', array('plugins' => $plugins, 'view' => $this)); ?>
-<?php echo foot(); ?>
+<?php if($versionNotifications): ?>
 <script>
     Omeka.runVersionNotification('https://omeka.org/add-ons/json/classic_plugin.json');
 </script>
+<?php endif; ?>
+<?php echo foot(); ?>
