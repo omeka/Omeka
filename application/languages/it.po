@@ -4,7 +4,7 @@
 # 
 # Translators:
 # Alessandro Leccese <alec.wiki@gmail.com>, 2012
-# Alessandro Leccese <alec.wiki@gmail.com>, 2012-2013,2015
+# Alessandro Leccese <alec.wiki@gmail.com>, 2012-2013,2015,2018
 # Alfio Squatrito <info@lswebagency.it>, 2014
 # armando serra <armando.serra@gmail.com>, 2017
 # Daniele Binaghi, 2018
@@ -22,8 +22,8 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2018-04-17 08:17+0000\n"
-"Last-Translator: Daniele Binaghi\n"
+"PO-Revision-Date: 2019-03-25 19:57+0000\n"
+"Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Italian (http://www.transifex.com/omeka/omeka/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,7 +40,7 @@ msgstr "L'insieme di metadati Dublin Core è comune a tutti i record Omeka, comp
 
 #. Dublin Core: Title element name
 #: admin/themes/default/collections/browse.php:30
-#: admin/themes/default/items/browse.php:46
+#: admin/themes/default/items/browse.php:45
 #: admin/themes/default/search/index.php:13
 #: application/views/scripts/collections/browse.php:10
 #: application/views/scripts/items/browse.php:19
@@ -53,14 +53,14 @@ msgid "A name given to the resource"
 msgstr "Un nome dato alla risorsa"
 
 #. Dublin Core: Creator element name
-#: admin/themes/default/items/browse.php:47
+#: admin/themes/default/items/browse.php:46
 #: application/views/scripts/items/browse.php:20
 msgid "Creator"
 msgstr "Autore"
 
 #. Dublin Core: Creator element description
 msgid "An entity primarily responsible for making the resource"
-msgstr "Un'entità all'origine della creazione della risorsa."
+msgstr "Un'entità all'origine della creazione della risorsa"
 
 #. Dublin Core: Subject element name
 msgid "Subject"
@@ -111,9 +111,9 @@ msgid ""
 msgstr "Un punto o un periodo di tempo associati ad un evento nel ciclo di vita della risorsa"
 
 #. Dublin Core: Type element name
-#: admin/themes/default/items/browse.php:48
+#: admin/themes/default/items/browse.php:47
 msgid "Type"
-msgstr "Tipo"
+msgstr "Tipologia"
 
 #. Dublin Core: Type element description
 msgid "The nature or genre of the resource"
@@ -179,13 +179,13 @@ msgstr "Informazioni sui diritti a cui è sottomessa la risorsa"
 
 #. Item Type Metadata
 msgid "Item Type Metadata"
-msgstr "Metadati \"Tipo documento\""
+msgstr "Metadati tipologia documento"
 
 #. Item Type Metadata description
 msgid ""
 "The item type metadata element set, consisting of all item type elements "
 "bundled with Omeka and all item type elements created by an administrator."
-msgstr "L'insieme dei metadati \"Tipo documento\", che consistono in tutti gli elementi \"Tipo documento\" direttamente collegati ad Omeka e tutti gli elementi \"Tipo documento\" creati da un amministratore"
+msgstr "L'insieme dei metadati \"tipologia documento\", che consistono in tutti gli elementi \"tipologia documento\" preesistenti in Omeka e in tutti gli elementi \"tipologia documento\" creati da un amministratore."
 
 #. Omeka Legacy File
 msgid "Omeka Legacy File"
@@ -338,7 +338,7 @@ msgstr "Ricercatore"
 #: admin/themes/default/appearance/edit-navigation.php:3
 #: admin/themes/default/appearance/edit-settings.php:2
 #: admin/themes/default/common/global-nav.php:11
-#: admin/themes/default/themes/browse.php:2
+#: admin/themes/default/themes/browse.php:3
 #: admin/themes/default/themes/config.php:3
 msgid "Appearance"
 msgstr "Aspetto"
@@ -415,9 +415,9 @@ msgstr "Vedi la pagina pubblica"
 #: admin/themes/default/item-types/edit.php:20
 #: admin/themes/default/item-types/show.php:54
 #: admin/themes/default/items/batch-edit.php:50
-#: admin/themes/default/items/browse.php:34
-#: admin/themes/default/items/browse.php:95
-#: admin/themes/default/items/browse.php:135
+#: admin/themes/default/items/browse.php:33
+#: admin/themes/default/items/browse.php:94
+#: admin/themes/default/items/browse.php:134
 #: admin/themes/default/items/edit.php:22
 #: admin/themes/default/items/show.php:47
 #: admin/themes/default/settings/edit-item-type-elements.php:23
@@ -480,12 +480,12 @@ msgstr "In evidenza"
 #: application/tests/suite/Omeka/NavigationTest.php:950
 #: application/views/scripts/collections/browse.php:2
 msgid "Browse Collections"
-msgstr "Collezioni"
+msgstr "Sfoglia collezioni"
 
 #: admin/themes/default/collections/browse.php:2
 #: admin/themes/default/item-types/browse.php:2
 #: admin/themes/default/items/browse.php:3
-#: admin/themes/default/plugins/browse.php:2
+#: admin/themes/default/plugins/browse.php:3
 #: admin/themes/default/search/index.php:2
 #: admin/themes/default/tags/browse.php:6
 #: admin/themes/default/users/browse.php:2
@@ -511,11 +511,11 @@ msgstr "Tutti i documenti sono riuniti in una collezione."
 #: admin/themes/default/collections/show.php:51
 #: application/views/scripts/collections/browse.php:35
 msgid "Contributors"
-msgstr "Contribuenti"
+msgstr "Collaboratori"
 
 #: admin/themes/default/collections/browse.php:32
 #: admin/themes/default/files/show.php:66
-#: admin/themes/default/items/browse.php:49
+#: admin/themes/default/items/browse.php:48
 #: application/views/scripts/collections/browse.php:11
 #: application/views/scripts/items/browse.php:21
 msgid "Date Added"
@@ -528,7 +528,7 @@ msgid "Total Number of Items"
 msgstr "Totale documenti"
 
 #: admin/themes/default/collections/browse.php:48
-#: admin/themes/default/items/browse.php:86
+#: admin/themes/default/items/browse.php:85
 msgid "(Private)"
 msgstr "(Privato)"
 
@@ -540,9 +540,9 @@ msgstr "(Privato)"
 #: admin/themes/default/index.php:79
 #: admin/themes/default/item-types/browse.php:41
 #: admin/themes/default/item-types/show.php:51
-#: admin/themes/default/items/browse.php:31
-#: admin/themes/default/items/browse.php:91
-#: admin/themes/default/items/browse.php:132
+#: admin/themes/default/items/browse.php:30
+#: admin/themes/default/items/browse.php:90
+#: admin/themes/default/items/browse.php:131
 #: admin/themes/default/items/files-form.php:12
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:63
@@ -551,7 +551,7 @@ msgstr "Modifica"
 
 #: admin/themes/default/collections/browse.php:60
 msgid "No contributors"
-msgstr "Nessun contribuente"
+msgstr "Nessun collaboratore"
 
 #: admin/themes/default/collections/browse.php:80
 msgid "There are no collections on this page."
@@ -611,7 +611,7 @@ msgstr "No"
 
 #: admin/themes/default/collections/show.php:56
 msgid "No contributors."
-msgstr "Nessun contribuente."
+msgstr "Nessun collaboratore."
 
 #: admin/themes/default/collections/show.php:62
 #: admin/themes/default/files/show.php:93
@@ -648,7 +648,7 @@ msgstr "Menù principale"
 #: admin/themes/default/common/content-nav.php:5
 #: admin/themes/default/index.php:2
 msgid "Dashboard"
-msgstr "Dashboard"
+msgstr "Pannello di controllo"
 
 #: admin/themes/default/common/content-nav.php:9
 #: admin/themes/default/items/batch-delete.php:15
@@ -662,15 +662,15 @@ msgstr "Collezioni"
 
 #: admin/themes/default/common/content-nav.php:17
 msgid "Item Types"
-msgstr "Tipi di documenti"
+msgstr "Tipologie documento"
 
 #: admin/themes/default/common/content-nav.php:21
-#: admin/themes/default/items/browse.php:108
+#: admin/themes/default/items/browse.php:107
 #: admin/themes/default/items/show.php:65
 #: application/views/scripts/items/browse.php:46
 #: application/views/scripts/items/show.php:29
 msgid "Tags"
-msgstr "Tag"
+msgstr "Etichette"
 
 #: admin/themes/default/common/delete-confirm.php:3
 #: application/views/scripts/common/delete-confirm.php:3
@@ -681,7 +681,7 @@ msgstr "Elimina %s"
 #: admin/themes/default/common/footer.php:6
 #: admin/themes/default/common/login-footer.php:7
 msgid "Powered by Omeka"
-msgstr "Powered by Omeka"
+msgstr "Tecnologia Omeka"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Documentation"
@@ -691,9 +691,13 @@ msgstr "Documentazione"
 msgid "Support Forums"
 msgstr "Forum di supporto"
 
+#: admin/themes/default/common/footer.php:6
+msgid "Back to top"
+msgstr ""
+
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
-#: admin/themes/default/plugins/browse.php:52
+#: admin/themes/default/plugins/browse.php:53
 #, php-format
 msgid "Version %s"
 msgstr "Versione %s"
@@ -708,7 +712,7 @@ msgid "Manage Site"
 msgstr "Gestisci il sito"
 
 #: admin/themes/default/common/global-nav.php:5
-#: admin/themes/default/plugins/browse.php:2
+#: admin/themes/default/plugins/browse.php:3
 msgid "Plugins"
 msgstr "Plugin"
 
@@ -761,7 +765,7 @@ msgstr "Insieme di elementi"
 
 #: admin/themes/default/common/settings-nav.php:26
 msgid "Item Type Elements"
-msgstr "Elementi \"Tipo documento\""
+msgstr "Elementi tipologia documento"
 
 #: admin/themes/default/common/settings-nav.php:32
 msgid "API"
@@ -919,7 +923,7 @@ msgstr "Dimensione del file"
 #: application/views/scripts/files/show.php:30
 #, php-format
 msgid "%s bytes"
-msgstr "%s bytes"
+msgstr "%s byte"
 
 #: admin/themes/default/files/show.php:64
 msgid "File History"
@@ -937,17 +941,17 @@ msgstr "Autenticazione"
 #: admin/themes/default/files/show.php:76
 #: application/views/scripts/files/show.php:40
 msgid "Type Metadata"
-msgstr "Metadati tipo"
+msgstr "Metadati tipologia"
 
 #: admin/themes/default/files/show.php:78
 #: application/views/scripts/files/show.php:42
 msgid "Mime Type"
-msgstr "Tipo MIME"
+msgstr "Tipologia MIME"
 
 #: admin/themes/default/files/show.php:80
 #: application/views/scripts/files/show.php:46
 msgid "File Type / OS"
-msgstr "File Type / OS"
+msgstr "Tipologia file / SO"
 
 #: admin/themes/default/files/show.php:87
 msgid "Embedded Metadata"
@@ -969,7 +973,7 @@ msgstr[1] "collezioni"
 msgid "tag"
 msgid_plural "tags"
 msgstr[0] "tag"
-msgstr[1] "tag"
+msgstr[1] "etichette"
 
 #: admin/themes/default/index.php:16
 msgid "plugin"
@@ -981,7 +985,7 @@ msgstr[1] "plugin"
 msgid "user"
 msgid_plural "users"
 msgstr[0] "utilizzatore"
-msgstr[1] "utilizzatori"
+msgstr[1] "utenti"
 
 #: admin/themes/default/index.php:24
 msgid "theme"
@@ -1015,16 +1019,16 @@ msgstr "Descrizione dell'elemento"
 #: admin/themes/default/item-types/add.php:2
 #: admin/themes/default/item-types/add.php:11
 msgid "Add Item Type"
-msgstr "Aggiungi un \"Tipo documento\""
+msgstr "Aggiungi tipologia documento"
 
 #: admin/themes/default/item-types/browse.php:2
 msgid "Browse Item Types"
-msgstr "\"Tipi documento\""
+msgstr "Sfoglia tipologie documento"
 
 #: admin/themes/default/item-types/browse.php:10
 #: admin/themes/default/item-types/browse.php:55
 msgid "Add an Item Type"
-msgstr "Aggiungi un \"Tipo documento\""
+msgstr "Aggiungi una tipologia documento"
 
 #: admin/themes/default/item-types/browse.php:18
 #, php-format
@@ -1039,7 +1043,7 @@ msgstr "Tutti i documenti hanno una tipologia."
 
 #: admin/themes/default/item-types/browse.php:29
 msgid "Type Name"
-msgstr "Nome del Tipo"
+msgstr "Nome della tipologia"
 
 #: admin/themes/default/item-types/browse.php:31
 msgid "Total Items"
@@ -1048,11 +1052,11 @@ msgstr "Totale documenti"
 #: admin/themes/default/item-types/edit.php:8
 #, php-format
 msgid "Edit Item Type #%s"
-msgstr "Modifica il \"Tipo documento\" #%s"
+msgstr "Modifica la tipologia documento #%s"
 
 #: admin/themes/default/item-types/form.php:14
 msgid "Item Type Information"
-msgstr "Informazione su \"Tipo documento\""
+msgstr "Informazione su tipologia documento"
 
 #: admin/themes/default/item-types/form.php:15
 #: admin/themes/default/users/add.php:7
@@ -1089,7 +1093,7 @@ msgstr "Nuovo"
 #: admin/themes/default/item-types/show.php:8
 #, php-format
 msgid "Item Type #%s"
-msgstr "Tipo documento #%s"
+msgstr "Tipologia documento #%s"
 
 #: admin/themes/default/item-types/show.php:25
 msgid "There are no elements."
@@ -1100,8 +1104,8 @@ msgid "There are no recently added items."
 msgstr "Non ci sono novità."
 
 #: admin/themes/default/items/add.php:2
-#: admin/themes/default/items/browse.php:19
-#: admin/themes/default/items/browse.php:141
+#: admin/themes/default/items/browse.php:17
+#: admin/themes/default/items/browse.php:142
 #: admin/themes/default/items/browse.php:168
 msgid "Add an Item"
 msgstr "Aggiungi un documento"
@@ -1112,7 +1116,7 @@ msgstr "Aggiungi il documento"
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit-common.php:48
-#: admin/themes/default/items/browse.php:104
+#: admin/themes/default/items/browse.php:103
 #: admin/themes/default/items/edit.php:43
 #: admin/themes/default/items/show.php:57
 #: application/libraries/globals.php:411
@@ -1159,7 +1163,7 @@ msgstr "I documenti selezionati saranno eliminati."
 
 #: admin/themes/default/items/batch-edit-all.php:2
 msgid "Batch Edit All Searched Items"
-msgstr "Editazione automatica di tutti i documenti selezionati"
+msgstr "Modifica automatica di tutti i documenti selezionati"
 
 #: admin/themes/default/items/batch-edit-all.php:20
 #, php-format
@@ -1206,7 +1210,7 @@ msgstr "Non in evidenza"
 #: admin/themes/default/items/batch-edit-common.php:33
 #: admin/themes/default/items/item-type-form.php:3
 msgid "Item Type"
-msgstr "Tipo documento"
+msgstr "Tipologia documento"
 
 #: admin/themes/default/items/batch-edit-common.php:42
 #: admin/themes/default/items/batch-edit-common.php:57
@@ -1217,12 +1221,12 @@ msgstr "Rimuovere?"
 #: admin/themes/default/items/tag-form.php:8
 #: admin/themes/default/items/tag-form.php:11
 msgid "Add Tags"
-msgstr "Aggiungi tag"
+msgstr "Aggiungi etichette"
 
 #: admin/themes/default/items/batch-edit-common.php:66
 #, php-format
 msgid "List of tags to add to all checked items, separated by %s."
-msgstr "Elenco dei tag da aggiungere a tutti gli oggetti selezionati, separati da %s."
+msgstr "Elenco delle etichette da aggiungere a tutti gli oggetti selezionati, separate da %s."
 
 #: admin/themes/default/items/batch-edit.php:2
 msgid "Batch Edit Items"
@@ -1275,10 +1279,10 @@ msgstr "Seleziona se vuoi cancellare gli oggetti selezionati"
 #: application/views/scripts/items/browse.php:2
 #: application/views/scripts/items/tags.php:2
 msgid "Browse Items"
-msgstr "Documenti"
+msgstr "Sfoglia documenti"
 
-#: admin/themes/default/items/browse.php:21
-#: admin/themes/default/items/browse.php:143
+#: admin/themes/default/items/browse.php:19
+#: admin/themes/default/items/browse.php:144
 #: admin/themes/default/items/search.php:2
 #: application/libraries/globals.php:2411
 #: application/libraries/globals.php:2802
@@ -1286,29 +1290,29 @@ msgstr "Documenti"
 msgid "Search Items"
 msgstr "Cerca fra i documenti"
 
-#: admin/themes/default/items/browse.php:26
-#: admin/themes/default/items/browse.php:129
+#: admin/themes/default/items/browse.php:25
+#: admin/themes/default/items/browse.php:128
 #, php-format
 msgid "Select all %s results"
 msgstr "Seleziona tutti %s i risultati"
 
-#: admin/themes/default/items/browse.php:27
-#: admin/themes/default/items/browse.php:130
+#: admin/themes/default/items/browse.php:26
+#: admin/themes/default/items/browse.php:129
 msgid "items selected"
 msgstr "Documenti selezionati"
 
-#: admin/themes/default/items/browse.php:43
+#: admin/themes/default/items/browse.php:42
 msgid "Select all rows"
 msgstr "Seleziona tutte le righe"
 
-#: admin/themes/default/items/browse.php:64
+#: admin/themes/default/items/browse.php:63
 #, php-format
 msgid "Select item \"%s\""
 msgstr "Seleziona il documento \"%s\""
 
-#: admin/themes/default/items/browse.php:109
+#: admin/themes/default/items/browse.php:108
 msgid "No Tags"
-msgstr "Nessun tag"
+msgstr "Nessuna etichetta"
 
 #: admin/themes/default/items/browse.php:155
 msgid "Details"
@@ -1378,7 +1382,7 @@ msgstr "Aggiungi un altro file"
 
 #: admin/themes/default/items/item-type-form.php:15
 msgid "Pick this type"
-msgstr "Scegli"
+msgstr "Scegli questa tipologia"
 
 #: admin/themes/default/items/quick-filters.php:2
 #: admin/themes/default/items/quick-filters.php:4
@@ -1433,7 +1437,7 @@ msgstr "Campo di ricerca"
 #: admin/themes/default/items/search-form.php:80
 #: application/views/scripts/items/search-form.php:76
 msgid "Search Type"
-msgstr "Tipo di ricerca"
+msgstr "Ricerca tipologia"
 
 #: admin/themes/default/items/search-form.php:85
 #: admin/themes/default/tags/browse.php:27
@@ -1506,7 +1510,7 @@ msgstr "Cerca per collezione"
 #: admin/themes/default/items/search-form.php:146
 #: application/views/scripts/items/search-form.php:134
 msgid "Search By Type"
-msgstr "Cerca per tipo"
+msgstr "Cerca per tipologia"
 
 #: admin/themes/default/items/search-form.php:163
 #: application/views/scripts/items/search-form.php:150
@@ -1516,7 +1520,7 @@ msgstr "Cerca per utente"
 #: admin/themes/default/items/search-form.php:180
 #: application/views/scripts/items/search-form.php:165
 msgid "Search By Tags"
-msgstr "Cerca per tag"
+msgstr "Cerca per etichetta"
 
 #: admin/themes/default/items/search-form.php:195
 #: application/views/scripts/items/search-form.php:178
@@ -1560,11 +1564,11 @@ msgstr "Documento #%s"
 
 #: admin/themes/default/items/show.php:28
 msgid "Prev Item"
-msgstr "Documento precedente"
+msgstr "Doc. precedente"
 
 #: admin/themes/default/items/show.php:33
 msgid "Next Item"
-msgstr "Documento successivo"
+msgstr "Doc. successivo"
 
 #: admin/themes/default/items/show.php:73
 msgid "File Metadata"
@@ -1589,82 +1593,82 @@ msgstr "Citazione bibliografica"
 #: admin/themes/default/items/tag-form.php:10
 #, php-format
 msgid "Separate tags with %s"
-msgstr "Separa i tag con %s"
+msgstr "Separa le etichette con %s"
 
 #: admin/themes/default/items/tag-form.php:15
 msgid "All Tags"
-msgstr "Tutti i tag"
+msgstr "Tutte le etichette"
 
 #: admin/themes/default/items/tags.php:2
 msgid "Browse Items by Tag"
-msgstr "Sfoglia i documenti per tag"
+msgstr "Sfoglia i documenti per etichetta"
 
 #: admin/themes/default/items/tags.php:9
 #: admin/themes/default/tags/browse.php:108
 msgid "There are no tags to display. You must first tag some items."
-msgstr "Nessun tag da visualizzare. Devi prima aggiungerne a qualche documento."
+msgstr "Nessuna etichetta da visualizzare. Devi prima aggiungerne a qualche documento."
 
-#: admin/themes/default/plugins/browse.php:26
+#: admin/themes/default/plugins/browse.php:27
 #, php-format
 msgid "This version of %1$s requires at least Omeka %2$s."
 msgstr "Questa versione di %1$s richiede almeno Omeka %2$s."
 
-#: admin/themes/default/plugins/browse.php:29
+#: admin/themes/default/plugins/browse.php:30
 #, php-format
 msgid ""
 "%1$s requires the following plugins to be installed, activated, and loaded: "
 "%2$s"
 msgstr "%1$s richiede che siano installati, attivati e caricati i seguenti plugin: %2$s"
 
-#: admin/themes/default/plugins/browse.php:32
+#: admin/themes/default/plugins/browse.php:33
 msgid "This is not a valid plugin."
 msgstr "Questo non è un plugin valido."
 
-#: admin/themes/default/plugins/browse.php:57
+#: admin/themes/default/plugins/browse.php:58
 #, php-format
 msgid "by %s"
-msgstr "per %s"
+msgstr "di %s"
 
-#: admin/themes/default/plugins/browse.php:65
-#: admin/themes/default/themes/browse.php:23
-#: admin/themes/default/themes/browse.php:50
+#: admin/themes/default/plugins/browse.php:66
+#: admin/themes/default/themes/browse.php:24
+#: admin/themes/default/themes/browse.php:63
 msgid "Get support"
 msgstr "Richiedi supporto"
 
-#: admin/themes/default/plugins/browse.php:69
+#: admin/themes/default/plugins/browse.php:70
 #, php-format
 msgid "You have a new version of %s. Please upgrade!"
 msgstr "Una nuova versione di %s è disponibile. Aggiorna!"
 
-#: admin/themes/default/plugins/browse.php:90
+#: admin/themes/default/plugins/browse.php:105
 msgid "Upgrade"
 msgstr "Aggiorna"
 
-#: admin/themes/default/plugins/browse.php:101
+#: admin/themes/default/plugins/browse.php:116
 msgid "Configure"
 msgstr "Configura"
 
-#: admin/themes/default/plugins/browse.php:107
+#: admin/themes/default/plugins/browse.php:122
 msgid "Deactivate"
 msgstr "Disattiva"
 
-#: admin/themes/default/plugins/browse.php:107
+#: admin/themes/default/plugins/browse.php:122
 #: admin/themes/default/users/activate.php:30
 #: application/views/scripts/users/activate.php:27
 msgid "Activate"
 msgstr "Attiva"
 
-#: admin/themes/default/plugins/browse.php:118
+#: admin/themes/default/plugins/browse.php:133
 #: admin/themes/default/plugins/confirm-uninstall.php:18
 msgid "Uninstall"
 msgstr "Disinstalla"
 
-#: admin/themes/default/plugins/browse.php:131
+#: admin/themes/default/plugins/browse.php:146
 #: application/forms/Install.php:178
 msgid "Install"
 msgstr "Installa"
 
-#: admin/themes/default/plugins/browse.php:143
+#: admin/themes/default/plugins/browse.php:158
 msgid ""
 "You do not have any plugins installed. Add them to the plugins directory to "
 "see them listed here."
@@ -1708,7 +1712,7 @@ msgstr "Annulla"
 #: admin/themes/default/tags/browse.php:26
 #: application/views/scripts/search/index.php:13
 msgid "Record Type"
-msgstr "Tipo di record"
+msgstr "Tipologia di record"
 
 #: admin/themes/default/search/index.php:39
 #: application/views/scripts/search/index.php:40
@@ -1736,7 +1740,7 @@ msgstr "Filtra gli elementi di  testo selezionando la casella seguente. Se selez
 
 #: admin/themes/default/settings/edit-api.php:35
 msgid "Results per Page"
-msgstr "Risultati per Pagina."
+msgstr "Risultati per pagina"
 
 #: admin/themes/default/settings/edit-api.php:39
 msgid "Maximum number of API results displayed per page."
@@ -1750,11 +1754,11 @@ msgid ""
 "adding, editing, and deleting content, is protected and requires key "
 "authentication. Each key corresponds to, and has all permissions of, an "
 "existing Omeka user. You can create keys on each user's %sedit page%s."
-msgstr "Dopo aver attivato l'API, le applicazioni sono abilitate a visualizzare, scorrere, aggiungere, modificare e cancellare le risorse del sito. La visualizzazione, così come l'inserimento, la modifica o cancellazione di contenuti è protetta e richiede una chiave di autenticazione. Ogni chiave corrisponde, ed ha le stesse autorizzazioni, di un utilizzatore Omeka esistente. Puoi creare una chiave per l'utilizzatore %s sulla pagina %s."
+msgstr "Dopo aver attivato l'API, le applicazioni sono abilitate a visualizzare, scorrere, aggiungere, modificare e cancellare le risorse del sito. La visualizzazione, così come l'inserimento, la modifica o cancellazione di contenuti è protetta e richiede una chiave di autenticazione. Ogni chiave corrisponde, ed ha le stesse autorizzazioni, di un utente Omeka esistente. Puoi creare una chiave per l'utente %s sulla pagina %s."
 
 #: admin/themes/default/settings/edit-item-type-elements.php:12
 msgid "edit a specific item type"
-msgstr "modifica uno specifico tipo di documento"
+msgstr "modifica una specifica tipologia di documento"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:11
 #, php-format
@@ -1788,11 +1792,11 @@ msgstr "Personalizza i tipi di record che saranno ricercabili in Omeka."
 #: admin/themes/default/settings/edit-search.php:23
 #: admin/themes/default/settings/edit-search.php:42
 msgid "Index Records"
-msgstr "Indicizza i records"
+msgstr "Indicizza record"
 
 #: admin/themes/default/settings/edit-search.php:26
 msgid "Click on the \"Index Records\" button to re-index your records."
-msgstr "Clicca sul bottone \"Index Records\" per indicizzare nuovamente i tuoi records."
+msgstr "Clicca sul bottone \"Indicizza record\" per indicizzare nuovamente i tuoi record."
 
 #: admin/themes/default/settings/edit-search.php:28
 msgid ""
@@ -1801,7 +1805,7 @@ msgid ""
 " are saved, but there are circumstances when your records are not indexed; "
 "for instance, when updating from an earlier version of Omeka or after you "
 "customize which records will be searchable."
-msgstr "Indicizzare equivale a raccogliere, analizzare e memorizzare dei dati per rendere una ricerca più veloce ed accurata. Omega indicizza automaticamente ogni record nel momento in cui viene salvato, ma in alcune circostanze i record non vengono indicizzati; ad esempio, quando aggiorni Omeka a partire da una precedente versione, oppure dopo che hai personalizzato i records che sono ricercabili. "
+msgstr "Indicizzare equivale a raccogliere, analizzare e memorizzare dei dati per rendere una ricerca più veloce ed accurata. Omeka indicizza automaticamente ogni record nel momento in cui viene salvato, ma in alcune circostanze i record non vengono indicizzati; ad esempio, quando aggiorni Omeka a partire da una precedente versione, oppure dopo che hai personalizzato i record che sono ricercabili. "
 
 #: admin/themes/default/settings/edit-security.php:23
 msgid "Restore Default Extensions"
@@ -1825,11 +1829,11 @@ msgstr "Test"
 
 #: admin/themes/default/tags/browse.php:5
 msgid "Browse Tags"
-msgstr "Esplora i Tag"
+msgstr "Sfoglia etichette"
 
 #: admin/themes/default/tags/browse.php:18
 msgid "Search tags"
-msgstr "Ricerca tag"
+msgstr "Cerca etichette"
 
 #: admin/themes/default/tags/browse.php:29
 msgid "Reset results"
@@ -1837,23 +1841,23 @@ msgstr "Azzera i risultati"
 
 #: admin/themes/default/tags/browse.php:42
 msgid "Editing Tags"
-msgstr "Modifica i Tag."
+msgstr "Modifica le etichette"
 
 #: admin/themes/default/tags/browse.php:45
 msgid "To view all items with a tag, click the number."
-msgstr "Per visualizzare tutti i documenti provvisti di Tag, clicca sul numero."
+msgstr "Per visualizzare tutti i documenti provvisti di etichetta, clicca sul numero."
 
 #: admin/themes/default/tags/browse.php:46
 msgid ""
 "To edit the tag name, click the name and begin editing, and hit \"enter\" to"
 " save. To cancel an edit, click the ESC key or click away from the tag."
-msgstr "Per modificare il nome del Tag, clicca su di esso ed inizia la modifica, poi premi \"Enter\" per salvare. Per interrompere la modifica premi il tasto ESC o clicca al di fuori del Tag."
+msgstr "Per modificare il nome dell'etichetta, clicca su di esso ed inizia la modifica, poi premi \"Enter\" per salvare. Per interrompere la modifica premi il tasto ESC o clicca al di fuori dell'etichetta."
 
 #: admin/themes/default/tags/browse.php:47
 msgid ""
 "To delete a tag, click the X. Deleting a tag will not delete the tagged "
 "items."
-msgstr "Per cancellare un Tag, clicca sulla X. Cancellare un Tag non cancellerà i documenti a cui è associato."
+msgstr "Per cancellare un'etichetta, clicca sulla X. Cancellare un'etichetta non cancellerà i documenti a cui è associata."
 
 #: admin/themes/default/tags/browse.php:58
 msgid "Count"
@@ -1872,27 +1876,27 @@ msgstr "Tipi di record"
 msgid "All"
 msgstr "Tutti"
 
-#: admin/themes/default/themes/browse.php:15
-#: admin/themes/default/themes/browse.php:44
+#: admin/themes/default/themes/browse.php:16
+#: admin/themes/default/themes/browse.php:57
 #, php-format
 msgid "Screenshot for %s Theme"
 msgstr "Screenshot del tema %s"
 
-#: admin/themes/default/themes/browse.php:16
+#: admin/themes/default/themes/browse.php:17
 msgid "Configure Theme"
 msgstr "Configura il tema"
 
-#: admin/themes/default/themes/browse.php:19
+#: admin/themes/default/themes/browse.php:20
 msgid "Current Theme"
 msgstr "Tema attuale"
 
-#: admin/themes/default/themes/browse.php:21
-#: admin/themes/default/themes/browse.php:49
+#: admin/themes/default/themes/browse.php:22
+#: admin/themes/default/themes/browse.php:62
 #, php-format
 msgid "By %s"
 msgstr "Da %s"
 
-#: admin/themes/default/themes/browse.php:27
+#: admin/themes/default/themes/browse.php:40
 msgid ""
 "Add new themes by downloading them from the <a href=\"http://omeka.org/add-"
 "ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a "
@@ -1900,7 +1904,7 @@ msgid ""
 "target=\"_blank\">design your own</a>!"
 msgstr "Ottieni nuovi temi scaricandoli dalla <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, oppure <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">crea il tuo</a>!"
 
-#: admin/themes/default/themes/browse.php:46
+#: admin/themes/default/themes/browse.php:59
 msgid "Use this theme"
 msgstr "Usa questo tema"
 
@@ -1941,7 +1945,7 @@ msgstr "Omeka ha riscontrato un errore durante l'aggiornamento della tua install
 
 #: admin/themes/default/upgrade/migrate.php:24
 msgid "Return to Dashboard"
-msgstr "Ritorna al Pannello di controllo"
+msgstr "Ritorna al pannello di controllo"
 
 #: admin/themes/default/upgrade/migrate.php:30
 msgid "Please restore from your database backup and try again."
@@ -2028,13 +2032,13 @@ msgstr "Ultimo accesso"
 msgid "Rescind"
 msgstr "Revoca"
 
-#: admin/themes/default/users/api-keys.php:60
+#: admin/themes/default/users/api-keys.php:61
 msgid "Update API Keys"
 msgstr "Aggiorna la chiave API"
 
 #: admin/themes/default/users/browse.php:2
 msgid "Browse Users"
-msgstr "Utenti"
+msgstr "Sfoglia utenti"
 
 #: admin/themes/default/users/browse.php:8
 msgid "Add a User"
@@ -2055,11 +2059,11 @@ msgstr "Nome utente"
 #: application/forms/RecoverPassword.php:27 application/forms/User.php:96
 #: application/views/scripts/users/forgot-password.php:14
 msgid "Email"
-msgstr "Email"
+msgstr "E-mail"
 
 #: admin/themes/default/users/browse.php:35
 msgid "Search users"
-msgstr "Cerca degli utenti"
+msgstr "Cerca utenti"
 
 #: admin/themes/default/users/browse.php:37
 #: admin/themes/default/users/browse.php:48
@@ -2091,7 +2095,7 @@ msgstr "Hai dimenticato la password?"
 #: admin/themes/default/users/forgot-password.php:11
 #: application/views/scripts/users/forgot-password.php:10
 msgid "Enter your email address to retrieve your password."
-msgstr "Inserisci il tuo indirizzo email per recuperare la password"
+msgstr "Inserisci il tuo indirizzo e-mail per recuperare la password"
 
 #: admin/themes/default/users/forgot-password.php:21
 #: application/views/scripts/users/forgot-password.php:18
@@ -2215,6 +2219,7 @@ msgstr "L'insieme di elementi e tutti gli elementi assegnati all'insieme saranno
 #: application/controllers/SettingsController.php:140
 #: application/controllers/SettingsController.php:177
 #: application/controllers/ThemesController.php:85
+#: application/controllers/UsersController.php:312
 #: application/libraries/Omeka/Controller/AbstractActionController.php:183
 #: application/libraries/Omeka/Controller/AbstractActionController.php:224
 msgid "There was an error on the form. Please try again."
@@ -2317,59 +2322,59 @@ msgid ""
 "delete all files and file metadata associated with this item."
 msgstr "Questo cancellerà il documento #%s e i metadati collegati ad esso. Cancellerà anche tutti i file e relativi metadati collegati a questo documento."
 
-#: application/controllers/ItemsController.php:231
-#: application/controllers/ItemsController.php:364
-#: application/controllers/ItemsController.php:430
+#: application/controllers/ItemsController.php:235
+#: application/controllers/ItemsController.php:368
+#: application/controllers/ItemsController.php:434
 msgid "No item to batch edit."
 msgstr "Nessun documento da editare in automatico."
 
-#: application/controllers/ItemsController.php:238
+#: application/controllers/ItemsController.php:242
 msgid "The deletion of all items is forbidden."
 msgstr "Non è permessa la cancellazione di tutti i documenti."
 
-#: application/controllers/ItemsController.php:255
+#: application/controllers/ItemsController.php:259
 msgid "You must choose some items to batch edit."
 msgstr "Devi prima scegliere dei documenti da modificare in blocco."
 
-#: application/controllers/ItemsController.php:302
-#: application/controllers/ItemsController.php:398
+#: application/controllers/ItemsController.php:306
+#: application/controllers/ItemsController.php:402
 msgid "User is not allowed to modify visibility of items."
 msgstr "L'utente non è autorizzato a modificare la visibilità dei documenti."
 
-#: application/controllers/ItemsController.php:307
-#: application/controllers/ItemsController.php:403
+#: application/controllers/ItemsController.php:311
+#: application/controllers/ItemsController.php:407
 msgid "User is not allowed to modify featured status of items."
 msgstr "L'utente non è autorizzato a modificare lo stato \"in evidenza\" dei documenti."
 
-#: application/controllers/ItemsController.php:314
+#: application/controllers/ItemsController.php:318
 msgid "User is not allowed to delete selected items."
 msgstr "L'utente non è autorizzato a eliminare i documenti selezionati."
 
-#: application/controllers/ItemsController.php:320
+#: application/controllers/ItemsController.php:324
 msgid "User is not allowed to edit selected items."
 msgstr "L'utente non è autorizzato a modificare i documenti selezionati."
 
-#: application/controllers/ItemsController.php:325
+#: application/controllers/ItemsController.php:329
 msgid "User is not allowed to tag selected items."
-msgstr "L'utente non ha i diritti per indicare un tag per i documenti selezionati."
+msgstr "L'utente non ha i diritti per etichettare i documenti selezionati."
 
-#: application/controllers/ItemsController.php:357
+#: application/controllers/ItemsController.php:361
 msgid "The items were successfully deleted!"
 msgstr "I documenti sono stati cancellati con successo!"
 
-#: application/controllers/ItemsController.php:359
+#: application/controllers/ItemsController.php:363
 msgid "The items were successfully changed!"
 msgstr "I documenti sono stati modificati correttamente!"
 
-#: application/controllers/ItemsController.php:422
+#: application/controllers/ItemsController.php:426
 msgid "The items are checked and deleted one by one in the background."
 msgstr "I documenti saranno selezionati e cancellati uno per uno in background."
 
-#: application/controllers/ItemsController.php:424
+#: application/controllers/ItemsController.php:428
 msgid "The items are checked and changed one by one in the background."
 msgstr "I documenti saranno selezionati e modificati uno per uno in background."
 
-#: application/controllers/ItemsController.php:426
+#: application/controllers/ItemsController.php:430
 msgid "Check logs for success and errors."
 msgstr "Controlla i log per verificare i risultati e gli errori."
 
@@ -2478,7 +2483,7 @@ msgstr "Le impostazioni di sicurezza sono state aggiornate."
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
-msgstr "Hai cambiato i records che Omega può utilizzare per la ricerca. Devi indicizzarli di nuovo usando il modulo sottostante."
+msgstr "Hai cambiato i record che Omeka può utilizzare per la ricerca. Devi indicizzarli di nuovo usando il modulo sottostante."
 
 #: application/controllers/SettingsController.php:121
 msgid ""
@@ -2504,7 +2509,11 @@ msgstr "Il percorso di ImageMagick non è corretto."
 
 #: application/controllers/TagsController.php:42
 msgid "Invalid tagType given."
-msgstr "Tipo Tag non valido."
+msgstr "Tipo etichetta non valido."
+
+#: application/controllers/TagsController.php:108
+msgid "Error occurred."
+msgstr "È capitato un errore."
 
 #: application/controllers/ThemesController.php:28
 msgid "Invalid form submission."
@@ -2550,7 +2559,7 @@ msgstr "Clicca sul collegamento per reimpostare la password:"
 
 #: application/controllers/UsersController.php:112
 #: application/controllers/UsersController.php:115
-#: application/controllers/UsersController.php:383
+#: application/controllers/UsersController.php:390
 #, php-format
 msgid "%s Administrator"
 msgstr "%s Amministratore"
@@ -2594,11 +2603,11 @@ msgstr "L'utente \"%s\" è stato creato, ma non è stato possibile inviare l'e-m
 
 #: application/controllers/UsersController.php:217
 msgid "User activation email has been sent."
-msgstr "L'e-mail di attivazione dell'utilizzatore è stata inviata."
+msgstr "L'e-mail di attivazione dell'utente è stata inviata."
 
 #: application/controllers/UsersController.php:219
 msgid "User activation email could not be sent."
-msgstr "L'e-mail di attivazione dell'utilizzatore non può essere inviata."
+msgstr "L'e-mail di attivazione dell'utente non può essere inviata."
 
 #: application/controllers/UsersController.php:257
 #, php-format
@@ -2609,44 +2618,44 @@ msgstr "L'utente \"%s\" è stato modificato!"
 msgid "Password changed!"
 msgstr "Password modificata!"
 
-#: application/controllers/UsersController.php:315
+#: application/controllers/UsersController.php:322
 msgid "A new API key was successfully created."
 msgstr "Una nuova chiave API è stata creata con successo."
 
-#: application/controllers/UsersController.php:322
+#: application/controllers/UsersController.php:329
 msgid "An existing API key was successfully rescinded."
 msgstr "Una chiave API già esistente è stata annullata correttamente."
 
-#: application/controllers/UsersController.php:349
+#: application/controllers/UsersController.php:356
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
 msgstr "L'utente \"%s\" è stato eliminato!"
 
-#: application/controllers/UsersController.php:355
+#: application/controllers/UsersController.php:362
 #, php-format
 msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
 "this user will remain in the system, but will no longer be associated with "
 "this user."
-msgstr "%s sarà cancellato dal sistema. I documenti, le collezioni, e i tag creati da questo utente resteranno nel sistema, ma non saranno più associati a questo utente."
+msgstr "%s sarà cancellato dal sistema. I documenti, le collezioni e le etichette creati da questo utente resteranno nel sistema, ma non saranno più associati a questo utente."
 
-#: application/controllers/UsersController.php:379
+#: application/controllers/UsersController.php:386
 msgid "Welcome!"
 msgstr "Benvenuto!"
 
-#: application/controllers/UsersController.php:381
+#: application/controllers/UsersController.php:388
 #, php-format
 msgid ""
 "Your account for the %s repository has been created. Please click the "
 "following link to activate your account:"
 msgstr "È stato creato un profilo personale per accedere al repository %s.  Per attivare il tuo profilo puoi adesso selezionare il link seguente:"
 
-#: application/controllers/UsersController.php:384
+#: application/controllers/UsersController.php:391
 #, php-format
 msgid "Activate your account with the %s repository"
 msgstr "Attiva il tuo profilo sul repository %s "
 
-#: application/controllers/UsersController.php:479
+#: application/controllers/UsersController.php:486
 msgid "Login information incorrect. Please try again."
 msgstr "Credenziali di login errate. Riprova."
 
@@ -2689,7 +2698,7 @@ msgstr "Limite massimo per la dimensione della miniatura quadrata (in pixel)."
 
 #: application/forms/AppearanceSettings.php:48
 msgid "Results Per Page (admin)"
-msgstr "Risultati Per Pagina (admin)"
+msgstr "Risultati per pagina (admin)"
 
 #: application/forms/AppearanceSettings.php:49
 msgid ""
@@ -2784,7 +2793,7 @@ msgstr "Descrizione del sito"
 
 #: application/forms/GeneralSettings.php:31 application/forms/Install.php:99
 msgid "Administrator Email"
-msgstr "Email dell'amministratore"
+msgstr "E-mail dell'amministratore"
 
 #: application/forms/GeneralSettings.php:37 application/forms/Install.php:105
 msgid "Site Copyright Information"
@@ -2796,13 +2805,13 @@ msgstr "Informazioni sull'autore del sito"
 
 #: application/forms/GeneralSettings.php:45 application/forms/Install.php:113
 msgid "Tag Delimiter"
-msgstr "Delimitatore dei tag"
+msgstr "Delimitatore delle etichette"
 
 #: application/forms/GeneralSettings.php:46
 msgid ""
 "Separate tags using this character or string. Be careful when changing this "
 "setting. You run the risk of splitting tags that contain the old delimiter."
-msgstr "Separa i tag con questo carattere o stringa di testo. Presta attenzione quando modifichi questa impostazione. C'è il rischio di separare tag che contengono il delimitatore usato in precedenza."
+msgstr "Separa le etichette con questo carattere o stringa di testo. Presta attenzione quando modifichi questa impostazione. C'è il rischio di separare etichette che contengono il delimitatore usato in precedenza."
 
 #: application/forms/GeneralSettings.php:59 application/forms/Install.php:174
 msgid "ImageMagick Directory Path"
@@ -2833,7 +2842,7 @@ msgstr "Conferma la tua password."
 
 #: application/forms/Install.php:114
 msgid "Separate tags using this character or string."
-msgstr "Separa i tag con questo carattere o stringa di testo."
+msgstr "Separa le etichette con questo carattere o stringa di testo."
 
 #: application/forms/Install.php:129
 msgid "Maximum fullsize image size constraint (in pixels)"
@@ -2933,23 +2942,23 @@ msgstr "I link della barra di navigazione che possiedono dei sotto-link non elim
 
 #: application/forms/RecoverPassword.php:36
 msgid "Email address is required."
-msgstr "L'indirizzo email è obbligatorio."
+msgstr "L'indirizzo e-mail è obbligatorio."
 
 #: application/forms/RecoverPassword.php:46
 msgid "Invalid email address given."
-msgstr "L'indirizzo email non è valido."
+msgstr "L'indirizzo e-mail non è valido."
 
 #: application/forms/RecoverPassword.php:48
 msgid "Invalid format given for email address."
-msgstr "Il formato dell'indirizzo email non è valido."
+msgstr "Il formato dell'indirizzo e-mail non è valido."
 
 #: application/forms/RecoverPassword.php:50
 msgid "Invalid hostname given for email address."
-msgstr "Il dominio dell'indirizzo email non è valido."
+msgstr "Il dominio dell'indirizzo e-mail non è valido."
 
 #: application/forms/RecoverPassword.php:66
 msgid "Invalid email address"
-msgstr "Indirizzo email non valido"
+msgstr "Indirizzo e-mail non valido"
 
 #: application/forms/ResetPassword.php:27
 msgid "Password is required."
@@ -3015,7 +3024,7 @@ msgstr "Seleziona questo campo se intendi filtrare elementi o attributi HTML dal
 
 #: application/forms/SecuritySettings.php:68
 msgid "Enable HTML Filtering"
-msgstr "Arriva il filtraggio HTML"
+msgstr "Attiva il filtraggio HTML"
 
 #: application/forms/SecuritySettings.php:73
 msgid "Allowed HTML Elements"
@@ -3075,15 +3084,15 @@ msgstr "È richiesto il nome vero."
 
 #: application/forms/User.php:94
 msgid "This email address is invalid."
-msgstr "L'indirizzo email non è valido"
+msgstr "L'indirizzo e-mail non è valido"
 
 #: application/forms/User.php:102
 msgid "Email is required."
-msgstr "L'email è obbligatoria."
+msgstr "L'e-mail è obbligatoria."
 
 #: application/forms/User.php:121
 msgid "This email address is already in use."
-msgstr "L'indirizzo email è già utilizzato."
+msgstr "Questo indirizzo e-mail è già utilizzato."
 
 #: application/forms/User.php:130
 msgid ""
@@ -3222,27 +3231,27 @@ msgstr "RSS"
 
 #: application/libraries/globals.php:2591
 msgid "Next Item &rarr;"
-msgstr "Successivo &rarr;"
+msgstr "Documento successivo &rarr;"
 
 #: application/libraries/globals.php:2611
 msgid "&larr; Previous Item"
-msgstr "&larr; Precedente"
+msgstr "&larr; Documento precedente"
 
 #: application/libraries/globals.php:2792
 msgid "Browse All"
-msgstr "Sfoglia"
+msgstr "Sfoglia tutto"
 
 #: application/libraries/globals.php:2797
 msgid "Browse by Tag"
-msgstr "Sfoglia per tag"
+msgstr "Sfoglia per etichetta"
 
 #: application/libraries/globals.php:3076
 msgid "No tags are available."
-msgstr "Nessun tag disponibile."
+msgstr "Nessuna etichetta disponibile."
 
 #: application/models/Builder/Item.php:261
 msgid "Must specify a file transfer type when attaching files to an item!"
-msgstr "Occorre specificare il tipo di file da trasferire quando lo si allega a un elemento!"
+msgstr "Occorre specificare la tipologia di file da trasferire quando lo si allega a un elemento!"
 
 #: application/models/Collection.php:118
 msgid "Cannot associate the collection with an unsaved user."
@@ -3280,7 +3289,7 @@ msgstr "ID del record non valido."
 
 #: application/models/ElementText.php:62
 msgid "All element texts must have a record type."
-msgstr "Tutti gli elementi testo devono avere un tipo record."
+msgstr "Tutti gli elementi testo devono avere una tipologia record."
 
 #: application/models/ElementText.php:65
 msgid "Invalid element ID."
@@ -3334,7 +3343,7 @@ msgstr "Il file deve essere valido prima di essere associato ad un oggetto."
 
 #: application/models/Item.php:538
 msgid "Invalid item type."
-msgstr "Tipo documento non valido."
+msgstr "Tipologia documento non valida."
 
 #: application/models/Item.php:541
 msgid "Invalid collection."
@@ -3343,31 +3352,31 @@ msgstr "Collezione non valida."
 #: application/models/ItemType.php:102
 #, php-format
 msgid "The item type name must have between %1$s and %2$s characters."
-msgstr "Il tipo documento deve avere tra %1$s e %2$s carratteri."
+msgstr "La tipologia documento deve contenere tra %1$s e %2$s caratteri."
 
 #: application/models/ItemType.php:106
 msgid "The item type name must be unique."
-msgstr "Il nome di tipo contenuto deve essere unico"
+msgstr "Il nome di tipologia documento deve essere univoco."
 
 #: application/models/ItemType.php:183
 msgid "There are too many values in the element ordering array."
-msgstr "Il numero di valori presenti nel vettore di ordinamento degli elementi supera la dimensione massima consentita."
+msgstr "Il numero di valori presenti nella matrice di ordinamento degli elementi supera la dimensione massima consentita."
 
 #: application/models/ItemType.php:185
 msgid "There are too few values in the element ordering array."
-msgstr "Non ci sono sufficienti valori nel vettore di ordinamento degli elementi."
+msgstr "Non ci sono sufficienti valori nella matrice di ordinamento degli elementi."
 
 #: application/models/ItemType.php:222
 msgid ""
 "Invalid element data. To add elements, you must either pass an element "
 "objects or an array of element metadata."
-msgstr "Dati elemento non validi. Per aggiungere elementi, è necessario inserire degli oggetti elemento specifici, o un vettore di metadati degli elementi."
+msgstr "Dati elemento non validi. Per aggiungere elementi, è necessario inserire degli oggetti elemento specifici, o una matrice di metadati degli elementi."
 
 #: application/models/ItemType.php:286
 msgid ""
 "Cannot remove elements from an item type that is not persistent in the "
 "database!"
-msgstr "Non si possono rimuovere elementi da un tipo di documento che non è presente nella base dati!"
+msgstr "Non si possono rimuovere elementi da una tipologia documento che non è presente nella base dati!"
 
 #: application/models/ItemType.php:295
 #, php-format
@@ -3377,17 +3386,17 @@ msgstr "Non è possibile trovare l'ekemento con ID %s!"
 #: application/models/ItemType.php:336
 #, php-format
 msgid "Item type does not contain an element with the ID %s!"
-msgstr "Il tipo di documento non può contenere un elemento con l'ID %s!"
+msgstr "La tipologia documento non può contenere un elemento con l'ID %s!"
 
 #: application/models/ItemType.php:357
 msgid ""
 "Invalid parameter. The hasElement function requires either an element object"
 " or an element id to determine if an item type has an element."
-msgstr "Parametro non valido. La funzione hasElement richiede un oggetto elemento o un id elemento per determinare se ad un tipo documento è associato almeno un elemento."
+msgstr "Parametro non valido. La funzione hasElement richiede un oggetto elemento o un id elemento per determinare se ad una tipologia documento è associato almeno un elemento."
 
 #: application/models/Job/ItemBatchEditAll.php:40
 msgid "Batch Edit All Items: No item matches the specified filters."
-msgstr "Editazione automatica di tutti gli items: Nessun item è stato selezionato dai filtri indicati."
+msgstr "Modifica automatica di tutti i documenti: nessun documento è stato selezionato dai filtri indicati."
 
 #: application/models/Job/ItemBatchEditAll.php:47
 #, php-format
@@ -3401,7 +3410,7 @@ msgstr[1] "Modifica automatica: iniziando la modifica di %d documenti."
 msgid ""
 "Batch Edit: A total of %d errors occurred during the batch process of %d "
 "items."
-msgstr "Editazione automatica:  Si sono verificati un totale di  %d errori durante l'elaborazione di %d documenti."
+msgstr "Modifica automatica:  si sono verificati un totale di  %d errori durante l'elaborazione di %d documenti."
 
 #: application/models/Job/ItemBatchEditAll.php:73
 #, php-format
@@ -3416,7 +3425,7 @@ msgstr "Il documento non esiste: potrebbe essere stato cancellato prima dell'ela
 
 #: application/models/Job/ItemBatchEditAll.php:105
 msgid "User is not allowed to delete this item."
-msgstr "L'utilizzatore non è abilitato a cancellare questo documento."
+msgstr "L'utente non è abilitato a cancellare questo documento."
 
 #: application/models/Job/ItemBatchEditAll.php:112
 msgid "User is not allowed to edit this item."
@@ -3424,7 +3433,7 @@ msgstr "L'utente non è autorizzato a modificare questo documento."
 
 #: application/models/Job/ItemBatchEditAll.php:118
 msgid "User is not allowed to tag this item."
-msgstr "L'utente non è autorizzato per marcare con tag questo documento."
+msgstr "L'utente non è autorizzato ad etichettare questo documento."
 
 #: application/models/Job/ItemBatchEditAll.php:141
 msgid "The item was successfully deleted."
@@ -3437,12 +3446,12 @@ msgstr "Si è verificato un errore quando il documento è stato aggiornato: %s"
 
 #: application/models/Job/ItemBatchEditAll.php:158
 msgid "The item was successfully batch-edited."
-msgstr "Il documento è stato correttamente editato in modalità automatica."
+msgstr "Il documento è stato correttamente modificato in modalità automatica."
 
 #: application/models/Job/ItemBatchEditAll.php:176
 #, php-format
 msgid "Batch Edit Item #%d [%d/%d]: %s"
-msgstr "Editazione automatica documento #%d [%d/%d]: %s"
+msgstr "Modifica automatica documento #%d [%d/%d]: %s"
 
 #: application/models/Mixin/ElementText.php:292
 #, php-format
@@ -3465,7 +3474,7 @@ msgstr "Il campo \"%s\" ha almeno un valore non valido!"
 
 #: application/models/Mixin/ElementText.php:648
 msgid "Cannot save element text for records that are not yet persistent!"
-msgstr "Non è possibile salvare elementi di testo per records che non sono ancora stato creati!"
+msgstr "Non è possibile salvare elementi di testo per record che non sono ancora stato creati!"
 
 #: application/models/Option.php:50 application/models/Option.php:54
 msgid "Each option must have a unique name."
@@ -3480,17 +3489,17 @@ msgstr "I nomi dei plugin non possono essere vuoti."
 msgid "[Untitled] #%s"
 msgstr "[Senza titolo] #%s"
 
-#: application/models/Table/Item.php:144
+#: application/models/Table/Item.php:143
 msgid "Invalid search type given!"
-msgstr "Tipo di ricerca non valida!"
+msgstr "Tipologia di ricerca non valida!"
 
 #: application/models/Tag.php:57
 msgid "Tags must be given a name."
-msgstr "I tag devono avere un nome."
+msgstr "Le etichette devono avere un nome."
 
 #: application/models/Tag.php:61
 msgid "That name is already taken for this tag."
-msgstr "Quel nome è già utilizzato per questo tag."
+msgstr "Quel nome è già utilizzato per questa etichetta."
 
 #: application/models/User.php:109
 msgid "User may not change permissions to super-user"
@@ -3627,7 +3636,7 @@ msgstr "[nessun testo]"
 
 #: application/views/helpers/ElementForm.php:65
 msgid "Add Input"
-msgstr "Inserisci input"
+msgstr "Aggiungi casella"
 
 #: application/views/helpers/ElementInput.php:130
 msgid "Use HTML"
@@ -3636,7 +3645,7 @@ msgstr "Usa HTML"
 #: application/views/helpers/GetCurrentRecord.php:27
 #, php-format
 msgid "A current %s variable has not been set to this view."
-msgstr "La corrente variabile: %s non è stata definita su questa vista."
+msgstr "La variabile %s non è stata definita per questa visualizzazione."
 
 #: application/views/helpers/GetLoopRecords.php:30
 #, php-format
@@ -3650,7 +3659,7 @@ msgstr "Un vettore di record non è disponibile per l'esecuzione del ciclo."
 #: application/views/helpers/MaxFileSize.php:44
 #, php-format
 msgid "%s MB"
-msgstr "%s MBytes"
+msgstr "%s MB"
 
 #: application/views/helpers/RecordUrl.php:34
 msgid "Invalid record passed while getting record URL."
@@ -3658,7 +3667,7 @@ msgstr "È stato passato un record non valido per l'accesso al record dell'URL."
 
 #: application/views/helpers/RecordUrl.php:44
 msgid "Invalid action passed while getting record URL."
-msgstr "È stata eseguita una azione non valida durante l'accesso al record dell'URL."
+msgstr "È stata eseguita un'azione non valida durante l'accesso all'URL del record."
 
 #: application/views/helpers/RecordUrl.php:75
 msgid "Invalid return value while getting record URL."
@@ -3687,11 +3696,11 @@ msgstr[1] "Mostra tutti i %s documenti"
 
 #: application/views/scripts/collections/show.php:35
 msgid "There are currently no items within this collection."
-msgstr "La collezione al momento non contiene documenti."
+msgstr "Al momento la collezione non contiene documenti."
 
 #: application/views/scripts/common/footer.php:14
 msgid "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
-msgstr "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
+msgstr "Tecnologia <a href=\"http://omeka.org\">Omeka</a>."
 
 #: application/views/scripts/common/pagination_control.php:5
 msgid "Pagination"
@@ -3699,11 +3708,11 @@ msgstr "Paginazione"
 
 #: application/views/scripts/common/pagination_control.php:11
 msgid "Previous Page"
-msgstr "Pagina Precedente"
+msgstr "Pagina precedente"
 
 #: application/views/scripts/common/pagination_control.php:36
 msgid "Current Page"
-msgstr "Pagina Corrente"
+msgstr "Pagina corrente"
 
 #: application/views/scripts/common/pagination_control.php:39
 #, php-format
@@ -3712,7 +3721,7 @@ msgstr "%s di %s"
 
 #: application/views/scripts/common/pagination_control.php:48
 msgid "Next Page"
-msgstr "Pagina Successiva"
+msgstr "Pagina successiva"
 
 #: application/views/scripts/error/403.php:2
 msgid "403 Page Forbidden"
@@ -3756,7 +3765,7 @@ msgid ""
 "Omeka Codex page on <a "
 "href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">retrieving"
 " error messages</a>."
-msgstr "Per sapere come vedere informazioni più dettagliate su questo errore, vedi la pagina del Codex Omega su <a href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">ottenere messaggi di errore</a>."
+msgstr "Per sapere come vedere informazioni più dettagliate su questo errore, vedi la pagina del Codex Omeka su <a href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">ottenere messaggi di errore</a>."
 
 #: application/views/scripts/index.php:10
 msgid "Featured Item"

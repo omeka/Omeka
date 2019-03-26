@@ -5,7 +5,8 @@
 # Translators:
 # Masaki Hidano <MasaGon@info-lounge.jp>, 2013
 # Masaki Hidano <MasaGon@info-lounge.jp>, 2013
-# かも なお, 2018
+# Naosuke Okamoto, 2018
+# Naosuke Okamoto, 2018
 # Takayuki Ako <ako.t.aa@m.titech.ac.jp>, 2016
 # あこたかゆき <inactive+akotaka@transifex.com>, 2014
 # snowy <yasushi.inoue@gmail.com>, 2012
@@ -15,8 +16,8 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2018-05-02 08:12+0000\n"
-"Last-Translator: かも なお\n"
+"PO-Revision-Date: 2019-03-25 19:57+0000\n"
+"Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Japanese (http://www.transifex.com/omeka/omeka/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,7 +34,7 @@ msgstr "Dublin Coreのメタ要素セットは全てのOmekaレコード（ア�
 
 #. Dublin Core: Title element name
 #: admin/themes/default/collections/browse.php:30
-#: admin/themes/default/items/browse.php:46
+#: admin/themes/default/items/browse.php:45
 #: admin/themes/default/search/index.php:13
 #: application/views/scripts/collections/browse.php:10
 #: application/views/scripts/items/browse.php:19
@@ -46,7 +47,7 @@ msgid "A name given to the resource"
 msgstr "リソースに与えられた名前"
 
 #. Dublin Core: Creator element name
-#: admin/themes/default/items/browse.php:47
+#: admin/themes/default/items/browse.php:46
 #: application/views/scripts/items/browse.php:20
 msgid "Creator"
 msgstr "制作者 (Creator)"
@@ -104,7 +105,7 @@ msgid ""
 msgstr "リソースのライフサイクルにおける出来事に関連する時もしくは期間"
 
 #. Dublin Core: Type element name
-#: admin/themes/default/items/browse.php:48
+#: admin/themes/default/items/browse.php:47
 msgid "Type"
 msgstr "タイプ (Type)"
 
@@ -294,7 +295,7 @@ msgstr "Omekaビデオファイル"
 msgid ""
 "The metadata element set that was included in the `files_videos` table in "
 "previous versions of Omeka. These elements are common to all video files."
-msgstr ""
+msgstr "以前のバージョンのOmekaの「files_videos」テーブルに含まれていたメタデータ要素セット。 これらの要素はすべてのビデオファイルに共通です。"
 
 #. Omeka Video File: Bitrate element
 msgid "Bitrate"
@@ -314,7 +315,7 @@ msgstr "コーデック"
 
 #. Format (Legacy) Metadata element set
 msgid "Format (Legacy) Metadata"
-msgstr ""
+msgstr "フォーマット（レガシー）メタデータ"
 
 #. User role: Super
 msgid "Super"
@@ -331,7 +332,7 @@ msgstr "調査者"
 #: admin/themes/default/appearance/edit-navigation.php:3
 #: admin/themes/default/appearance/edit-settings.php:2
 #: admin/themes/default/common/global-nav.php:11
-#: admin/themes/default/themes/browse.php:2
+#: admin/themes/default/themes/browse.php:3
 #: admin/themes/default/themes/config.php:3
 msgid "Appearance"
 msgstr "表示"
@@ -408,9 +409,9 @@ msgstr "公開ページを見る"
 #: admin/themes/default/item-types/edit.php:20
 #: admin/themes/default/item-types/show.php:54
 #: admin/themes/default/items/batch-edit.php:50
-#: admin/themes/default/items/browse.php:34
-#: admin/themes/default/items/browse.php:95
-#: admin/themes/default/items/browse.php:135
+#: admin/themes/default/items/browse.php:33
+#: admin/themes/default/items/browse.php:94
+#: admin/themes/default/items/browse.php:134
 #: admin/themes/default/items/edit.php:22
 #: admin/themes/default/items/show.php:47
 #: admin/themes/default/settings/edit-item-type-elements.php:23
@@ -430,7 +431,7 @@ msgstr "本当によろしいですか？"
 msgid ""
 "All customizations will be lost. Order and labels will revert to Omeka "
 "defaults. Custom links will be lost."
-msgstr ""
+msgstr "すべてのカスタマイズが失われます。 順序とラベルは、Omekaのデフォルトに戻ります。 カスタムリンクは失われます。"
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:12
@@ -478,7 +479,7 @@ msgstr "コレクションをブラウジング"
 #: admin/themes/default/collections/browse.php:2
 #: admin/themes/default/item-types/browse.php:2
 #: admin/themes/default/items/browse.php:3
-#: admin/themes/default/plugins/browse.php:2
+#: admin/themes/default/plugins/browse.php:3
 #: admin/themes/default/search/index.php:2
 #: admin/themes/default/tags/browse.php:6
 #: admin/themes/default/users/browse.php:2
@@ -493,7 +494,7 @@ msgstr "(合計 %s個)"
 #, php-format
 msgid "%s%d item%s has no collection."
 msgid_plural "%s%d items%s aren't in a collection."
-msgstr[0] ""
+msgstr[0] "%s%d アイテム %s はコレクションにありません。"
 
 #: admin/themes/default/collections/browse.php:20
 msgid "All items are in a collection."
@@ -507,7 +508,7 @@ msgstr "協力者 (Contributors)"
 
 #: admin/themes/default/collections/browse.php:32
 #: admin/themes/default/files/show.php:66
-#: admin/themes/default/items/browse.php:49
+#: admin/themes/default/items/browse.php:48
 #: application/views/scripts/collections/browse.php:11
 #: application/views/scripts/items/browse.php:21
 msgid "Date Added"
@@ -520,7 +521,7 @@ msgid "Total Number of Items"
 msgstr "アイテムの総数"
 
 #: admin/themes/default/collections/browse.php:48
-#: admin/themes/default/items/browse.php:86
+#: admin/themes/default/items/browse.php:85
 msgid "(Private)"
 msgstr "(非公開)"
 
@@ -532,9 +533,9 @@ msgstr "(非公開)"
 #: admin/themes/default/index.php:79
 #: admin/themes/default/item-types/browse.php:41
 #: admin/themes/default/item-types/show.php:51
-#: admin/themes/default/items/browse.php:31
-#: admin/themes/default/items/browse.php:91
-#: admin/themes/default/items/browse.php:132
+#: admin/themes/default/items/browse.php:30
+#: admin/themes/default/items/browse.php:90
+#: admin/themes/default/items/browse.php:131
 #: admin/themes/default/items/files-form.php:12
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:63
@@ -567,7 +568,7 @@ msgstr "最初のコレクションを追加して始めましょう。"
 #: application/models/Mixin/ElementText.php:779
 #: application/views/scripts/functions.php:22
 msgid "[Untitled]"
-msgstr "[Untitled]"
+msgstr "[タイトルなし]"
 
 #: admin/themes/default/collections/edit.php:8
 #, php-format
@@ -657,7 +658,7 @@ msgid "Item Types"
 msgstr "アイテムタイプ"
 
 #: admin/themes/default/common/content-nav.php:21
-#: admin/themes/default/items/browse.php:108
+#: admin/themes/default/items/browse.php:107
 #: admin/themes/default/items/show.php:65
 #: application/views/scripts/items/browse.php:46
 #: application/views/scripts/items/show.php:29
@@ -683,9 +684,13 @@ msgstr "ドキュメンテーション"
 msgid "Support Forums"
 msgstr "サポートフォーラム"
 
+#: admin/themes/default/common/footer.php:6
+msgid "Back to top"
+msgstr ""
+
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
-#: admin/themes/default/plugins/browse.php:52
+#: admin/themes/default/plugins/browse.php:53
 #, php-format
 msgid "Version %s"
 msgstr "バージョン %s"
@@ -697,10 +702,10 @@ msgstr "システム情報"
 
 #: admin/themes/default/common/global-nav.php:1
 msgid "Manage Site"
-msgstr ""
+msgstr "サイトの管理"
 
 #: admin/themes/default/common/global-nav.php:5
-#: admin/themes/default/plugins/browse.php:2
+#: admin/themes/default/plugins/browse.php:3
 msgid "Plugins"
 msgstr "プラグイン"
 
@@ -717,7 +722,7 @@ msgstr "Omeka Admin"
 #: admin/themes/default/common/header.php:41
 #: application/views/scripts/common/header.php:32
 msgid "Skip to main content"
-msgstr ""
+msgstr "メインコンテンツへスキップ"
 
 #: admin/themes/default/common/header.php:61
 #: application/views/scripts/common/admin-bar.php:6
@@ -818,7 +823,7 @@ msgid ""
 "You&#8217;ve tried to access a page that does not seem to exist. Sometimes "
 "this happens. Below is a quick break-down of the items, collections, and "
 "exhibits on this site."
-msgstr ""
+msgstr "存在していないページにアクセスしようとしました。 時にはこれが起こります。 以下は、このサイトのアイテム、コレクション、および展示の簡単な内訳です。"
 
 #: admin/themes/default/error/404.php:10
 #, php-format
@@ -874,7 +879,7 @@ msgstr "ダイレクトリンク"
 
 #: admin/themes/default/files/show.php:42
 msgid "Original"
-msgstr ""
+msgstr "Original"
 
 #: admin/themes/default/files/show.php:44
 msgid "Fullsize"
@@ -929,7 +934,7 @@ msgstr "認証"
 #: admin/themes/default/files/show.php:76
 #: application/views/scripts/files/show.php:40
 msgid "Type Metadata"
-msgstr ""
+msgstr "メタデータタイプ"
 
 #: admin/themes/default/files/show.php:78
 #: application/views/scripts/files/show.php:42
@@ -1017,11 +1022,11 @@ msgstr "アイテムタイプを追加"
 #, php-format
 msgid "%s%d item%s has no type."
 msgid_plural "%s%d items%s have no type."
-msgstr[0] ""
+msgstr[0] "%s%d アイテム%s はタイプがありません。"
 
 #: admin/themes/default/item-types/browse.php:21
 msgid "All items have a type."
-msgstr ""
+msgstr "すべてのアイテムにタイプがあります。"
 
 #: admin/themes/default/item-types/browse.php:29
 msgid "Type Name"
@@ -1086,8 +1091,8 @@ msgid "There are no recently added items."
 msgstr "最近追加されたアイテムはありません。"
 
 #: admin/themes/default/items/add.php:2
-#: admin/themes/default/items/browse.php:19
-#: admin/themes/default/items/browse.php:141
+#: admin/themes/default/items/browse.php:17
+#: admin/themes/default/items/browse.php:142
 #: admin/themes/default/items/browse.php:168
 msgid "Add an Item"
 msgstr "アイテムを追加"
@@ -1098,7 +1103,7 @@ msgstr "アイテムを追加"
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit-common.php:48
-#: admin/themes/default/items/browse.php:104
+#: admin/themes/default/items/browse.php:103
 #: admin/themes/default/items/edit.php:43
 #: admin/themes/default/items/show.php:57
 #: application/libraries/globals.php:411
@@ -1263,8 +1268,8 @@ msgstr "選択したアイテムを削除するか確認してください。"
 msgid "Browse Items"
 msgstr "アイテム"
 
-#: admin/themes/default/items/browse.php:21
-#: admin/themes/default/items/browse.php:143
+#: admin/themes/default/items/browse.php:19
+#: admin/themes/default/items/browse.php:144
 #: admin/themes/default/items/search.php:2
 #: application/libraries/globals.php:2411
 #: application/libraries/globals.php:2802
@@ -1272,27 +1277,27 @@ msgstr "アイテム"
 msgid "Search Items"
 msgstr "アイテムを検索"
 
-#: admin/themes/default/items/browse.php:26
-#: admin/themes/default/items/browse.php:129
+#: admin/themes/default/items/browse.php:25
+#: admin/themes/default/items/browse.php:128
 #, php-format
 msgid "Select all %s results"
 msgstr "%s個すべての結果を選択"
 
-#: admin/themes/default/items/browse.php:27
-#: admin/themes/default/items/browse.php:130
+#: admin/themes/default/items/browse.php:26
+#: admin/themes/default/items/browse.php:129
 msgid "items selected"
 msgstr "選択したアイテム"
 
-#: admin/themes/default/items/browse.php:43
+#: admin/themes/default/items/browse.php:42
 msgid "Select all rows"
 msgstr "すべての行を選択"
 
-#: admin/themes/default/items/browse.php:64
+#: admin/themes/default/items/browse.php:63
 #, php-format
 msgid "Select item \"%s\""
 msgstr "アイテム \"%s\" を選択"
 
-#: admin/themes/default/items/browse.php:109
+#: admin/themes/default/items/browse.php:108
 msgid "No Tags"
 msgstr "タグがありません"
 
@@ -1396,7 +1401,7 @@ msgstr "フィードを追加"
 #: admin/themes/default/items/search-form.php:54
 #: application/views/scripts/items/search-form.php:50
 msgid "Search Joiner"
-msgstr ""
+msgstr "Joinerを検索"
 
 #: admin/themes/default/items/search-form.php:59
 #: application/views/helpers/ItemSearchFilters.php:108
@@ -1438,7 +1443,7 @@ msgstr "完全一致"
 
 #: admin/themes/default/items/search-form.php:88
 msgid "is not exactly"
-msgstr ""
+msgstr "一致しない"
 
 #: admin/themes/default/items/search-form.php:89
 #: application/views/scripts/items/search-form.php:84
@@ -1462,16 +1467,16 @@ msgstr "〜で終わる"
 
 #: admin/themes/default/items/search-form.php:93
 msgid "matches"
-msgstr ""
+msgstr "一致"
 
 #: admin/themes/default/items/search-form.php:94
 msgid "does not match"
-msgstr ""
+msgstr "一致せず"
 
 #: admin/themes/default/items/search-form.php:102
 #: application/views/scripts/items/search-form.php:95
 msgid "Search Terms"
-msgstr ""
+msgstr "検索ワード"
 
 #: admin/themes/default/items/search-form.php:108
 #: application/views/scripts/items/search-form.php:101
@@ -1536,7 +1541,7 @@ msgstr "非注目アイテムのみ"
 #: admin/themes/default/items/search-form.php:233
 #: application/views/scripts/items/search-form.php:215
 msgid "Search for items"
-msgstr ""
+msgstr "アイテムを検索する"
 
 #: admin/themes/default/items/show.php:8
 #, php-format
@@ -1589,67 +1594,67 @@ msgstr "タグでアイテムを見る"
 msgid "There are no tags to display. You must first tag some items."
 msgstr "表示するタグがありません。はじめにアイテムにタグ付をしてください。"
 
-#: admin/themes/default/plugins/browse.php:26
+#: admin/themes/default/plugins/browse.php:27
 #, php-format
 msgid "This version of %1$s requires at least Omeka %2$s."
 msgstr "このバージョンの %1$s には、 Omeka %2$s以上が必要です。"
 
-#: admin/themes/default/plugins/browse.php:29
+#: admin/themes/default/plugins/browse.php:30
 #, php-format
 msgid ""
 "%1$s requires the following plugins to be installed, activated, and loaded: "
 "%2$s"
 msgstr "%1$sは次のプラグインをインストール、有効化、ロードする必要があります。: %2$s"
 
-#: admin/themes/default/plugins/browse.php:32
+#: admin/themes/default/plugins/browse.php:33
 msgid "This is not a valid plugin."
 msgstr "有効なプラグインではありません。"
 
-#: admin/themes/default/plugins/browse.php:57
+#: admin/themes/default/plugins/browse.php:58
 #, php-format
 msgid "by %s"
-msgstr ""
+msgstr "by %s"
 
-#: admin/themes/default/plugins/browse.php:65
-#: admin/themes/default/themes/browse.php:23
-#: admin/themes/default/themes/browse.php:50
+#: admin/themes/default/plugins/browse.php:66
+#: admin/themes/default/themes/browse.php:24
+#: admin/themes/default/themes/browse.php:63
 msgid "Get support"
 msgstr "サポートを得る"
 
-#: admin/themes/default/plugins/browse.php:69
+#: admin/themes/default/plugins/browse.php:70
 #, php-format
 msgid "You have a new version of %s. Please upgrade!"
 msgstr "新しいバージョンの%sがあります。アップグレードしてください。"
 
-#: admin/themes/default/plugins/browse.php:90
+#: admin/themes/default/plugins/browse.php:105
 msgid "Upgrade"
 msgstr "アップグレード"
 
-#: admin/themes/default/plugins/browse.php:101
+#: admin/themes/default/plugins/browse.php:116
 msgid "Configure"
 msgstr "設定"
 
-#: admin/themes/default/plugins/browse.php:107
+#: admin/themes/default/plugins/browse.php:122
 msgid "Deactivate"
 msgstr "停止"
 
-#: admin/themes/default/plugins/browse.php:107
+#: admin/themes/default/plugins/browse.php:122
 #: admin/themes/default/users/activate.php:30
 #: application/views/scripts/users/activate.php:27
 msgid "Activate"
 msgstr "有効化"
 
-#: admin/themes/default/plugins/browse.php:118
+#: admin/themes/default/plugins/browse.php:133
 #: admin/themes/default/plugins/confirm-uninstall.php:18
 msgid "Uninstall"
 msgstr "アンインストール"
 
-#: admin/themes/default/plugins/browse.php:131
+#: admin/themes/default/plugins/browse.php:146
 #: application/forms/Install.php:178
 msgid "Install"
 msgstr "インストール"
 
-#: admin/themes/default/plugins/browse.php:143
+#: admin/themes/default/plugins/browse.php:158
 msgid ""
 "You do not have any plugins installed. Add them to the plugins directory to "
 "see them listed here."
@@ -1735,7 +1740,7 @@ msgid ""
 "adding, editing, and deleting content, is protected and requires key "
 "authentication. Each key corresponds to, and has all permissions of, an "
 "existing Omeka user. You can create keys on each user's %sedit page%s."
-msgstr ""
+msgstr "APIを有効にすると、アプリケーションはサイトのリソースを表示、参照、追加、編集、および削除することができます。 保護されたコンテンツの表示、コンテンツの追加、編集、削除は保護されており、キー認証が必要です。 各キーは、既存のOmekaユーザーに対応し、すべての権限を持ちます。 各ユーザの %s 編集ページ %s でキーを作成することができます。"
 
 #: admin/themes/default/settings/edit-item-type-elements.php:12
 msgid "edit a specific item type"
@@ -1857,35 +1862,35 @@ msgstr "レコードのタイプ"
 msgid "All"
 msgstr "全て"
 
-#: admin/themes/default/themes/browse.php:15
-#: admin/themes/default/themes/browse.php:44
+#: admin/themes/default/themes/browse.php:16
+#: admin/themes/default/themes/browse.php:57
 #, php-format
 msgid "Screenshot for %s Theme"
 msgstr "テーマ「%s」のスクリーンショット"
 
-#: admin/themes/default/themes/browse.php:16
+#: admin/themes/default/themes/browse.php:17
 msgid "Configure Theme"
 msgstr "テーマの設定"
 
-#: admin/themes/default/themes/browse.php:19
+#: admin/themes/default/themes/browse.php:20
 msgid "Current Theme"
 msgstr "現在のテーマ"
 
-#: admin/themes/default/themes/browse.php:21
-#: admin/themes/default/themes/browse.php:49
+#: admin/themes/default/themes/browse.php:22
+#: admin/themes/default/themes/browse.php:62
 #, php-format
 msgid "By %s"
 msgstr "By %s"
 
-#: admin/themes/default/themes/browse.php:27
+#: admin/themes/default/themes/browse.php:40
 msgid ""
 "Add new themes by downloading them from the <a href=\"http://omeka.org/add-"
 "ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a "
 "href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" "
 "target=\"_blank\">design your own</a>!"
-msgstr ""
+msgstr "<a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Omeka テーマディレクトリ</a>から新しいテーマをダウンロードするか、 <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">自分でデザイン</a>してください！"
 
-#: admin/themes/default/themes/browse.php:46
+#: admin/themes/default/themes/browse.php:59
 msgid "Use this theme"
 msgstr "このテーマを使う"
 
@@ -1937,7 +1942,7 @@ msgid ""
 "If you have any questions please refer to <a "
 "href=\"http://omeka.org/codex\">Omeka documentation</a> or post a message on"
 " the <a href=\"http://omeka.org/forums\">Omeka forums</a>."
-msgstr ""
+msgstr "ご不明な点がございましたら、 <a href=\"http://omeka.org/codex\">Omekaのドキュメント</a>を参照するか、  <a href=\"http://omeka.org/forums\">Omekaフォーラム</a>にメッセージを投稿してください。"
 
 #: admin/themes/default/users/activate.php:2
 #: application/views/scripts/users/activate.php:2
@@ -1986,16 +1991,16 @@ msgid ""
 "To create a new API key, enter a label for the key below. For example, "
 "describe for what purpose it will be used. This key will have all your "
 "permissions; treat it as you would your password."
-msgstr ""
+msgstr "新しいAPIキーを作成するには、下のキーのラベルを入力します。 たとえば、どのような目的で使用されるかを記述します。 このキーにはすべての権限が与えられます。 あなたのパスワードと同じように扱います。"
 
 #: admin/themes/default/users/api-keys.php:31
 msgid "You have no API keys. Use the form above to create one."
-msgstr ""
+msgstr "APIキーがありません。 上記のフォームを使用して作成してください。"
 
 #: admin/themes/default/users/api-keys.php:33
 #, php-format
 msgid "%s has no API keys. Use the form above to create one."
-msgstr ""
+msgstr "%s にはAPIキーがありません。 上記のフォームを使用して作成してください。"
 
 #: admin/themes/default/users/api-keys.php:41
 msgid "Key"
@@ -2013,7 +2018,7 @@ msgstr "最終アクセス"
 msgid "Rescind"
 msgstr "無効にする"
 
-#: admin/themes/default/users/api-keys.php:60
+#: admin/themes/default/users/api-keys.php:61
 msgid "Update API Keys"
 msgstr "APIキーをアップデートする"
 
@@ -2095,7 +2100,7 @@ msgstr "ログイン"
 
 #: admin/themes/default/users/login.php:8
 msgid "Go to the public site"
-msgstr ""
+msgstr "公開サイトに移動する"
 
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
@@ -2200,6 +2205,7 @@ msgstr "この操作を行うと、この要素セットとそれに割り当て
 #: application/controllers/SettingsController.php:140
 #: application/controllers/SettingsController.php:177
 #: application/controllers/ThemesController.php:85
+#: application/controllers/UsersController.php:312
 #: application/libraries/Omeka/Controller/AbstractActionController.php:183
 #: application/libraries/Omeka/Controller/AbstractActionController.php:224
 msgid "There was an error on the form. Please try again."
@@ -2256,7 +2262,7 @@ msgid ""
 "The ImageMagick directory path has not been set. No derivative images will "
 "be created. If you would like Omeka to create derivative images, please set "
 "the path in Settings."
-msgstr ""
+msgstr "ImageMagickディレクトリパスが設定されていません。 派生画像は作成されません。 Omekaに派生画像を作成させたい場合は、設定でパスを設定してください。"
 
 #: application/controllers/ItemsController.php:95
 #, php-format
@@ -2302,59 +2308,59 @@ msgid ""
 "delete all files and file metadata associated with this item."
 msgstr "この操作を行うと、アイテム #%s と関連づけられたメタデータが削除されます。また、このアイテムに関連づけられた全てのファイルとファイルのメタデータも削除されます。"
 
-#: application/controllers/ItemsController.php:231
-#: application/controllers/ItemsController.php:364
-#: application/controllers/ItemsController.php:430
+#: application/controllers/ItemsController.php:235
+#: application/controllers/ItemsController.php:368
+#: application/controllers/ItemsController.php:434
 msgid "No item to batch edit."
 msgstr "一括編集する項目がありません。"
 
-#: application/controllers/ItemsController.php:238
+#: application/controllers/ItemsController.php:242
 msgid "The deletion of all items is forbidden."
 msgstr "すべてのアイテムの削除は禁止されています。"
 
-#: application/controllers/ItemsController.php:255
+#: application/controllers/ItemsController.php:259
 msgid "You must choose some items to batch edit."
 msgstr "バッチ編集にはアイテムを選択しなければいけません。"
 
-#: application/controllers/ItemsController.php:302
-#: application/controllers/ItemsController.php:398
+#: application/controllers/ItemsController.php:306
+#: application/controllers/ItemsController.php:402
 msgid "User is not allowed to modify visibility of items."
 msgstr "一般ユーザーはアイテムの表示を変更できません。"
 
-#: application/controllers/ItemsController.php:307
-#: application/controllers/ItemsController.php:403
+#: application/controllers/ItemsController.php:311
+#: application/controllers/ItemsController.php:407
 msgid "User is not allowed to modify featured status of items."
 msgstr "一般ユーザーは注目アイテムの状況を変更できません。"
 
-#: application/controllers/ItemsController.php:314
+#: application/controllers/ItemsController.php:318
 msgid "User is not allowed to delete selected items."
 msgstr "選択したアイテムを削除する権限がありません。"
 
-#: application/controllers/ItemsController.php:320
+#: application/controllers/ItemsController.php:324
 msgid "User is not allowed to edit selected items."
 msgstr "選択したアイテムを編集する権限がありません。"
 
-#: application/controllers/ItemsController.php:325
+#: application/controllers/ItemsController.php:329
 msgid "User is not allowed to tag selected items."
 msgstr "選択したアイテムにタグを付ける権限がありません。"
 
-#: application/controllers/ItemsController.php:357
+#: application/controllers/ItemsController.php:361
 msgid "The items were successfully deleted!"
 msgstr "このアイテムは無事削除されました！"
 
-#: application/controllers/ItemsController.php:359
+#: application/controllers/ItemsController.php:363
 msgid "The items were successfully changed!"
 msgstr "このアイテムは無事変更されました！"
 
-#: application/controllers/ItemsController.php:422
+#: application/controllers/ItemsController.php:426
 msgid "The items are checked and deleted one by one in the background."
 msgstr "アイテムは、バックグラウンドで1つずつチェックされ、削除されます。"
 
-#: application/controllers/ItemsController.php:424
+#: application/controllers/ItemsController.php:428
 msgid "The items are checked and changed one by one in the background."
 msgstr "アイテムは、バックグラウンドで1つずつチェックされ、変更されます。"
 
-#: application/controllers/ItemsController.php:426
+#: application/controllers/ItemsController.php:430
 msgid "Check logs for success and errors."
 msgstr "成功とエラーのログを確認します。"
 
@@ -2491,6 +2497,10 @@ msgstr "ImageMagickディレクトリパスは無効です。"
 msgid "Invalid tagType given."
 msgstr "指定されたタグタイプが無効です。"
 
+#: application/controllers/TagsController.php:108
+msgid "Error occurred."
+msgstr "エラーが発生しました。"
+
 #: application/controllers/ThemesController.php:28
 msgid "Invalid form submission."
 msgstr "フォームの送信が無効です。"
@@ -2521,7 +2531,7 @@ msgstr "マイグレーション中のSQLエラー"
 msgid ""
 "Omeka requires PHP version %1$s or higher, but this server is running PHP "
 "version %2$s. Please update the installed version of PHP and try again."
-msgstr ""
+msgstr "OmekaはPHPのバージョンが %1$s 以上である必要がありますが、このサーバはPHPのバージョン %2$sを使用しています。インストールされているPHPのバージョンを更新して、もう一度試してください。"
 
 #: application/controllers/UsersController.php:72
 msgid ""
@@ -2535,7 +2545,7 @@ msgstr "パスワードをリセットするためには、このリンクをた
 
 #: application/controllers/UsersController.php:112
 #: application/controllers/UsersController.php:115
-#: application/controllers/UsersController.php:383
+#: application/controllers/UsersController.php:390
 #, php-format
 msgid "%s Administrator"
 msgstr "%s 管理者"
@@ -2575,7 +2585,7 @@ msgstr "ユーザー\"%s\"の追加に成功しました。"
 #: application/controllers/UsersController.php:181
 #, php-format
 msgid "The user \"%s\" was added, but the activation email could not be sent."
-msgstr ""
+msgstr "\"%s\" ユーザーが追加されましたが、有効化電子メールを送信できませんでした。"
 
 #: application/controllers/UsersController.php:217
 msgid "User activation email has been sent."
@@ -2594,20 +2604,20 @@ msgstr "ユーザー\"%s\"の変更に成功しました。"
 msgid "Password changed!"
 msgstr "パスワードが変更されました！"
 
-#: application/controllers/UsersController.php:315
+#: application/controllers/UsersController.php:322
 msgid "A new API key was successfully created."
 msgstr "新しいAPIキーが作成に成功しました。"
 
-#: application/controllers/UsersController.php:322
+#: application/controllers/UsersController.php:329
 msgid "An existing API key was successfully rescinded."
 msgstr "既存のAPIキーを削除しました。"
 
-#: application/controllers/UsersController.php:349
+#: application/controllers/UsersController.php:356
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
 msgstr "ユーザー\"%s\"の削除に成功しました。"
 
-#: application/controllers/UsersController.php:355
+#: application/controllers/UsersController.php:362
 #, php-format
 msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
@@ -2615,23 +2625,23 @@ msgid ""
 "this user."
 msgstr "%s をシステムから削除します。このユーザーによって作成されたアイテム、コレクション、およびタグはシステムに残りますが、このユーザーに関連付けられなくなります。"
 
-#: application/controllers/UsersController.php:379
+#: application/controllers/UsersController.php:386
 msgid "Welcome!"
 msgstr "ようこそ！"
 
-#: application/controllers/UsersController.php:381
+#: application/controllers/UsersController.php:388
 #, php-format
 msgid ""
 "Your account for the %s repository has been created. Please click the "
 "following link to activate your account:"
-msgstr ""
+msgstr "%s リポジトリのアカウントが作成されました。 アカウントを有効にするには、次のリンクをクリックしてください："
 
-#: application/controllers/UsersController.php:384
+#: application/controllers/UsersController.php:391
 #, php-format
 msgid "Activate your account with the %s repository"
 msgstr " %s リポジトリでアカウントを有効にする"
 
-#: application/controllers/UsersController.php:479
+#: application/controllers/UsersController.php:486
 msgid "Login information incorrect. Please try again."
 msgstr "ログイン情報が間違っています。 もう一度お試しください。"
 
@@ -2715,7 +2725,7 @@ msgstr "管理テーマ"
 
 #: application/forms/AppearanceSettings.php:97
 msgid "Derivative Size Constraints"
-msgstr ""
+msgstr "派生画像サイズの制約"
 
 #: application/forms/AppearanceSettings.php:105
 msgid "Display Settings"
@@ -2972,7 +2982,7 @@ msgstr "ファイルアップロード時に許可されたMIMEタイプのリ�
 
 #: application/forms/SecuritySettings.php:51
 msgid "reCAPTCHA Site Key"
-msgstr ""
+msgstr "reCAPTCHAサイトキー"
 
 #: application/forms/SecuritySettings.php:52
 #, php-format
@@ -2983,20 +2993,20 @@ msgstr "%s からサイトキーを入力してください。 これと秘密�
 
 #: application/forms/SecuritySettings.php:59
 msgid "reCAPTCHA Secret Key"
-msgstr ""
+msgstr "reCAPTCHAシークレットキー"
 
 #: application/forms/SecuritySettings.php:60
 #, php-format
 msgid ""
 "Enter secret key from %s. Both this and the public key must be filled in to "
 "secure public forms."
-msgstr ""
+msgstr "%sの秘密鍵を入力してください。 公開書類を保護するためには、この鍵と公開鍵の両方を記入する必要があります。"
 
 #: application/forms/SecuritySettings.php:67
 msgid ""
 "Check this field if you would like to filter HTML elements or attributes "
 "from form input."
-msgstr ""
+msgstr "フォーム入力からHTML要素または属性をフィルタリングする場合は、このフィールドにチェックマークを付けます。"
 
 #: application/forms/SecuritySettings.php:68
 msgid "Enable HTML Filtering"
@@ -3084,7 +3094,7 @@ msgstr "無効なユーザーはこのサイトにログイン出来ません。
 #: application/forms/User.php:139
 #, php-format
 msgid "Activation has been pending since %s."
-msgstr ""
+msgstr "%s 以来、 有効化は保留中です。"
 
 #: application/forms/User.php:142
 msgid "Active?"
@@ -3244,12 +3254,12 @@ msgstr "無効な要素セットです"
 #: application/models/Element.php:184
 #, php-format
 msgid "An element named \"%s\" already exists for the \"%s\" element set."
-msgstr ""
+msgstr "\"%s\"要素セットには\"%s\" という名前の要素が既に存在します。"
 
 #: application/models/Element.php:215
 #, php-format
 msgid "Cannot set element set ID: set named \"%s\" does not exist."
-msgstr ""
+msgstr "要素セットIDを設定できません：\"%s\" という名前のセットは存在しません。"
 
 #: application/models/ElementSet.php:144
 msgid "Name of element set must be unique."
@@ -3261,7 +3271,7 @@ msgstr "要素セットの名前は空であってはいけません。"
 
 #: application/models/ElementText.php:59
 msgid "Invalid record ID."
-msgstr ""
+msgstr "無効なレコード ID"
 
 #: application/models/ElementText.php:62
 msgid "All element texts must have a record type."
@@ -3278,7 +3288,7 @@ msgstr "レコードIDが無効です。"
 #: application/models/File.php:452
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
-msgstr "\"%s\" は有効なファイルの派生物ではありません。"
+msgstr "\"%s\" は有効な派生画像ファイルではありません。"
 
 #: application/models/Item.php:331
 msgid ""
@@ -3301,13 +3311,13 @@ msgstr "%1$s, %2$s, と%3$s"
 #: application/models/Item.php:474
 #, php-format
 msgid "%s et al."
-msgstr ""
+msgstr "%s  およびその他の者。"
 
 #. / Chicago-style item citation: access date and URL
 #: application/models/Item.php:492
 #, php-format
 msgid "accessed %1$s, %2$s."
-msgstr ""
+msgstr "accessed %1$s, %2$s."
 
 #: application/models/Item.php:509
 msgid "Cannot add an existing file to an item!"
@@ -3328,7 +3338,7 @@ msgstr "無効なコレクションです"
 #: application/models/ItemType.php:102
 #, php-format
 msgid "The item type name must have between %1$s and %2$s characters."
-msgstr ""
+msgstr "アイテムタイプ名は %1$s から %2$s 文字である必要があります。"
 
 #: application/models/ItemType.php:106
 msgid "The item type name must be unique."
@@ -3346,96 +3356,96 @@ msgstr "要素順序配列に値が少なすぎます。"
 msgid ""
 "Invalid element data. To add elements, you must either pass an element "
 "objects or an array of element metadata."
-msgstr ""
+msgstr "無効な要素データです。 要素を追加するには、要素オブジェクトまたは要素メタデータの配列を渡す必要があります。"
 
 #: application/models/ItemType.php:286
 msgid ""
 "Cannot remove elements from an item type that is not persistent in the "
 "database!"
-msgstr ""
+msgstr "データベースの永続的ではないアイテムタイプから要素を削除することはできません！"
 
 #: application/models/ItemType.php:295
 #, php-format
 msgid "Cannot find element with ID %s!"
-msgstr ""
+msgstr "ID %sの要素が見つかりません！"
 
 #: application/models/ItemType.php:336
 #, php-format
 msgid "Item type does not contain an element with the ID %s!"
-msgstr ""
+msgstr "アイテムタイプにID %sを持つ要素が含まれていません！"
 
 #: application/models/ItemType.php:357
 msgid ""
 "Invalid parameter. The hasElement function requires either an element object"
 " or an element id to determine if an item type has an element."
-msgstr ""
+msgstr "無効なパラメーター。 hasElement関数では、アイテムタイプが要素を持つかどうかを判断するために、要素オブジェクトまたは要素IDが必要です。"
 
 #: application/models/Job/ItemBatchEditAll.php:40
 msgid "Batch Edit All Items: No item matches the specified filters."
-msgstr ""
+msgstr "すべての項目を一括編集：指定したフィルタと一致する項目はありません。"
 
 #: application/models/Job/ItemBatchEditAll.php:47
 #, php-format
 msgid "Batch Edit: Starting processing 1 item."
 msgid_plural "Batch Edit: Starting processing %d items."
-msgstr[0] ""
+msgstr[0] "一括編集： %dアイテムの処理を開始します。"
 
 #: application/models/Job/ItemBatchEditAll.php:66
 #, php-format
 msgid ""
 "Batch Edit: A total of %d errors occurred during the batch process of %d "
 "items."
-msgstr ""
+msgstr "一括編集： %d エラーが発生しました。一括編集 %dアイテムの処理中"
 
 #: application/models/Job/ItemBatchEditAll.php:73
 #, php-format
 msgid "Batch Edit: The item has been processed successfully."
 msgid_plural "Batch Edit: All %d items have been processed successfully."
-msgstr[0] ""
+msgstr[0] "一括編集：全 %d のアイテムが正常に処理されました。"
 
 #: application/models/Job/ItemBatchEditAll.php:90
 msgid "Item does not exist: it may have been deleted before processing."
-msgstr ""
+msgstr "アイテムが存在しません：処理前に削除されている可能性があります。"
 
 #: application/models/Job/ItemBatchEditAll.php:105
 msgid "User is not allowed to delete this item."
-msgstr ""
+msgstr "ユーザーはこのアイテムを削除できません。"
 
 #: application/models/Job/ItemBatchEditAll.php:112
 msgid "User is not allowed to edit this item."
-msgstr ""
+msgstr "ユーザーはこのアイテムを編集できません。"
 
 #: application/models/Job/ItemBatchEditAll.php:118
 msgid "User is not allowed to tag this item."
-msgstr ""
+msgstr "ユーザーはこのアイテムにタグを付けることはできません。"
 
 #: application/models/Job/ItemBatchEditAll.php:141
 msgid "The item was successfully deleted."
-msgstr ""
+msgstr "アイテムを削除しました。"
 
 #: application/models/Job/ItemBatchEditAll.php:153
 #, php-format
 msgid "An error occured when the item was updated: %s"
-msgstr ""
+msgstr "アイテムを更新したときにエラーが発生しました： %s"
 
 #: application/models/Job/ItemBatchEditAll.php:158
 msgid "The item was successfully batch-edited."
-msgstr ""
+msgstr "アイテムは正常に一括編集されました。"
 
 #: application/models/Job/ItemBatchEditAll.php:176
 #, php-format
 msgid "Batch Edit Item #%d [%d/%d]: %s"
-msgstr ""
+msgstr "一括編集アイテム #%d [%d/%d]: %s"
 
 #: application/models/Mixin/ElementText.php:292
 #, php-format
 msgid "There is no element \"%1$s\", \"%2$s\"!"
-msgstr ""
+msgstr "要素がありません！\"%1$s\", \"%2$s\""
 
 #: application/models/Mixin/ElementText.php:311
 #, php-format
 msgid "Cannot find an element with an ID of '%s'!"
-msgstr ""
+msgstr "ID %sの要素が見つかりません！"
 
 #: application/models/Mixin/ElementText.php:430
 msgid "Element texts are not formatted correctly!"
@@ -3444,7 +3454,7 @@ msgstr "エレメントのテキストが正しい形式ではありません。
 #: application/models/Mixin/ElementText.php:578
 #, php-format
 msgid "The \"%s\" field has at least one invalid value!"
-msgstr ""
+msgstr "「%s」フィールドには少なくとも1つの無効な値があります。"
 
 #: application/models/Mixin/ElementText.php:648
 msgid "Cannot save element text for records that are not yet persistent!"
@@ -3461,23 +3471,23 @@ msgstr "プラグイン名が空欄かもしれません。"
 #: application/models/Table/Collection.php:80
 #, php-format
 msgid "[Untitled] #%s"
-msgstr ""
+msgstr "[タイトルなし]＃%s"
 
-#: application/models/Table/Item.php:144
+#: application/models/Table/Item.php:143
 msgid "Invalid search type given!"
-msgstr ""
+msgstr "指定された検索タイプが無効です！"
 
 #: application/models/Tag.php:57
 msgid "Tags must be given a name."
-msgstr ""
+msgstr "タグには名前を付ける必要があります。"
 
 #: application/models/Tag.php:61
 msgid "That name is already taken for this tag."
-msgstr ""
+msgstr "その名前は既にタグに付けられています。"
 
 #: application/models/User.php:109
 msgid "User may not change permissions to super-user"
-msgstr ""
+msgstr "ユーザーはスーパーユーザーに権限を変更することはできません"
 
 #: application/models/User.php:112
 msgid "User may not change roles."
@@ -3485,7 +3495,7 @@ msgstr "ユーザーは役割を変更できません。"
 
 #: application/models/User.php:181 application/models/User.php:229
 msgid "The user must be assigned a role."
-msgstr ""
+msgstr "ユーザーにはロールを割り当てる必要があります。"
 
 #: application/models/User.php:186
 #, php-format
@@ -3499,15 +3509,15 @@ msgstr "'%s'はすでに使われています。 違う名前を付けてくだ�
 
 #: application/models/UsersActivations.php:54
 msgid "Cannot create a user activation for non-existent user."
-msgstr ""
+msgstr "存在しないユーザーのユーザー有効化はできません。"
 
 #: application/tests/suite/Omeka/Db/Migration/_files/migrations/20080717013526_foobar.php:18
 msgid "This migration should have been run previously (should not run again)."
-msgstr ""
+msgstr "この移行は以前に実行されたはずです（再度実行しないでください）。"
 
 #: application/tests/suite/Omeka/Db/Migration/_files/migrations/50000101120000_notRunYet.php:18
 msgid "This migration should not be run."
-msgstr ""
+msgstr "この移行は実行しないでください。"
 
 #: application/tests/suite/Omeka/NavigationTest.php:752
 #: application/tests/suite/Omeka/NavigationTest.php:817
@@ -3619,38 +3629,38 @@ msgstr "HTMLを使用"
 #: application/views/helpers/GetCurrentRecord.php:27
 #, php-format
 msgid "A current %s variable has not been set to this view."
-msgstr ""
+msgstr "現在の %s 変数がこのビューに設定されていません。"
 
 #: application/views/helpers/GetLoopRecords.php:30
 #, php-format
 msgid "A loop %s variable has not been set to this view."
-msgstr ""
+msgstr "ループ %s 変数がこのビューに設定されていません。"
 
 #: application/views/helpers/Loop.php:27
 msgid "An array of records is not available for the loop."
-msgstr ""
+msgstr "ループのレコードの配列は使用できません。"
 
 #: application/views/helpers/MaxFileSize.php:44
 #, php-format
 msgid "%s MB"
-msgstr ""
+msgstr "%s MB"
 
 #: application/views/helpers/RecordUrl.php:34
 msgid "Invalid record passed while getting record URL."
-msgstr ""
+msgstr "レコードURLの取得中に無効なレコードが渡されました。"
 
 #: application/views/helpers/RecordUrl.php:44
 msgid "Invalid action passed while getting record URL."
-msgstr ""
+msgstr "レコードURLの取得中に無効な操作が渡されました。"
 
 #: application/views/helpers/RecordUrl.php:75
 msgid "Invalid return value while getting record URL."
-msgstr ""
+msgstr "レコードURLを取得中に無効な戻り値が渡されました。"
 
 #: application/views/scripts/collections/browse.php:14
 #: application/views/scripts/items/browse.php:24
 msgid "Sort by: "
-msgstr ""
+msgstr "並び順："
 
 #: application/views/scripts/collections/browse.php:41
 #, php-format
@@ -3665,7 +3675,7 @@ msgstr "コレクションアイテム"
 #, php-format
 msgid "View item"
 msgid_plural "View all %s items"
-msgstr[0] ""
+msgstr[0] "全 %s アイテムを表示"
 
 #: application/views/scripts/collections/show.php:35
 msgid "There are currently no items within this collection."
@@ -3677,24 +3687,24 @@ msgstr "Proudly powered by <a href=\"http://omeka.org\">Omeka</a>."
 
 #: application/views/scripts/common/pagination_control.php:5
 msgid "Pagination"
-msgstr ""
+msgstr "ページ付け"
 
 #: application/views/scripts/common/pagination_control.php:11
 msgid "Previous Page"
-msgstr ""
+msgstr "前ページ"
 
 #: application/views/scripts/common/pagination_control.php:36
 msgid "Current Page"
-msgstr ""
+msgstr "現在のページ"
 
 #: application/views/scripts/common/pagination_control.php:39
 #, php-format
 msgid "%s of %s"
-msgstr ""
+msgstr "%s / %s"
 
 #: application/views/scripts/common/pagination_control.php:48
 msgid "Next Page"
-msgstr ""
+msgstr "次ページ"
 
 #: application/views/scripts/error/403.php:2
 msgid "403 Page Forbidden"
@@ -3726,7 +3736,7 @@ msgstr " 405 Method Not Allowed: 許可されていないメソッドです"
 #: application/views/scripts/error/405.php:6
 #, php-format
 msgid "The method used to access this URL (%s) is not valid."
-msgstr ""
+msgstr "このURL (%s) にアクセスするためのメソッドは無効です。"
 
 #: application/views/scripts/error/index.php:4
 msgid "Omeka has encountered an error"
@@ -3738,7 +3748,7 @@ msgid ""
 "Omeka Codex page on <a "
 "href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">retrieving"
 " error messages</a>."
-msgstr ""
+msgstr "このエラーの詳細情報の表示方法については、Omeka Codexの <a href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">エラーメッセージの取得に関するページ</a> を参照してください。"
 
 #: application/views/scripts/index.php:10
 msgid "Featured Item"
@@ -3762,15 +3772,15 @@ msgstr "引用"
 
 #: application/views/scripts/search/search-filters.php:3
 msgid "Query:"
-msgstr ""
+msgstr "クエリ："
 
 #: application/views/scripts/search/search-filters.php:4
 msgid "Query type:"
-msgstr ""
+msgstr "クエリタイプ："
 
 #: application/views/scripts/search/search-filters.php:5
 msgid "Record types:"
-msgstr ""
+msgstr "レコードタイプ："
 
 #: application/views/scripts/search/search-form.php:6
 msgid "Search using this query type:"
@@ -3798,7 +3808,7 @@ msgstr "パスワードを忘れましたか？"
 
 #: install/controllers/IndexController.php:25
 msgid "Could not load database resource!"
-msgstr ""
+msgstr "データベースリソースをロードできませんでした。"
 
 #: install/views/scripts/index/errors.phtml:1
 msgid "Installation Error"
@@ -3821,7 +3831,7 @@ msgstr "インストールエラー"
 msgid ""
 "The following issues will not affect installation, but they may negatively "
 "affect the behavior of Omeka:"
-msgstr ""
+msgstr "次の問題はインストールに影響しませんが、Omekaの動作に悪影響を与える可能性があります："
 
 #: install/views/scripts/index/index.phtml:14
 msgid "Configure Your Site"
@@ -3845,4 +3855,4 @@ msgstr "公開サイト"
 
 #: install/views/scripts/index/installed.phtml:3
 msgid "Admin Dashboard"
-msgstr ""
+msgstr "管理ダッシュボード"

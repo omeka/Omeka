@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
+# Furkan Kalkan <furkan.kalkan3@gmail.com>, 2018
 # mustafaulu@msn.com <Mustafaulu@msn.com>, 2014-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2018-02-14 21:39+0000\n"
+"PO-Revision-Date: 2019-03-25 19:57+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/omeka/omeka/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
@@ -27,7 +28,7 @@ msgstr "Dublin Core üstveri öğe seti, maddeleri, dosyaları ve koleksiyonlar�
 
 #. Dublin Core: Title element name
 #: admin/themes/default/collections/browse.php:30
-#: admin/themes/default/items/browse.php:46
+#: admin/themes/default/items/browse.php:45
 #: admin/themes/default/search/index.php:13
 #: application/views/scripts/collections/browse.php:10
 #: application/views/scripts/items/browse.php:19
@@ -40,7 +41,7 @@ msgid "A name given to the resource"
 msgstr "Kaynağa verilen isim"
 
 #. Dublin Core: Creator element name
-#: admin/themes/default/items/browse.php:47
+#: admin/themes/default/items/browse.php:46
 #: application/views/scripts/items/browse.php:20
 msgid "Creator"
 msgstr "Yazar"
@@ -98,7 +99,7 @@ msgid ""
 msgstr "Kaynağın oluşturulduğu dönem içindeki bir olayla ilgili bir zaman dönemi ya da belirli bir tarih"
 
 #. Dublin Core: Type element name
-#: admin/themes/default/items/browse.php:48
+#: admin/themes/default/items/browse.php:47
 msgid "Type"
 msgstr "Tür"
 
@@ -325,7 +326,7 @@ msgstr "Araştırmacı"
 #: admin/themes/default/appearance/edit-navigation.php:3
 #: admin/themes/default/appearance/edit-settings.php:2
 #: admin/themes/default/common/global-nav.php:11
-#: admin/themes/default/themes/browse.php:2
+#: admin/themes/default/themes/browse.php:3
 #: admin/themes/default/themes/config.php:3
 msgid "Appearance"
 msgstr "Görünüm"
@@ -402,9 +403,9 @@ msgstr "Kamu Sayfasına Bak"
 #: admin/themes/default/item-types/edit.php:20
 #: admin/themes/default/item-types/show.php:54
 #: admin/themes/default/items/batch-edit.php:50
-#: admin/themes/default/items/browse.php:34
-#: admin/themes/default/items/browse.php:95
-#: admin/themes/default/items/browse.php:135
+#: admin/themes/default/items/browse.php:33
+#: admin/themes/default/items/browse.php:94
+#: admin/themes/default/items/browse.php:134
 #: admin/themes/default/items/edit.php:22
 #: admin/themes/default/items/show.php:47
 #: admin/themes/default/settings/edit-item-type-elements.php:23
@@ -472,7 +473,7 @@ msgstr "Koleksiyonları Tara"
 #: admin/themes/default/collections/browse.php:2
 #: admin/themes/default/item-types/browse.php:2
 #: admin/themes/default/items/browse.php:3
-#: admin/themes/default/plugins/browse.php:2
+#: admin/themes/default/plugins/browse.php:3
 #: admin/themes/default/search/index.php:2
 #: admin/themes/default/tags/browse.php:6
 #: admin/themes/default/users/browse.php:2
@@ -502,7 +503,7 @@ msgstr "Katkıda bulunanlar"
 
 #: admin/themes/default/collections/browse.php:32
 #: admin/themes/default/files/show.php:66
-#: admin/themes/default/items/browse.php:49
+#: admin/themes/default/items/browse.php:48
 #: application/views/scripts/collections/browse.php:11
 #: application/views/scripts/items/browse.php:21
 msgid "Date Added"
@@ -515,7 +516,7 @@ msgid "Total Number of Items"
 msgstr "Toplam İtem Sayısı"
 
 #: admin/themes/default/collections/browse.php:48
-#: admin/themes/default/items/browse.php:86
+#: admin/themes/default/items/browse.php:85
 msgid "(Private)"
 msgstr "(Özel)"
 
@@ -527,9 +528,9 @@ msgstr "(Özel)"
 #: admin/themes/default/index.php:79
 #: admin/themes/default/item-types/browse.php:41
 #: admin/themes/default/item-types/show.php:51
-#: admin/themes/default/items/browse.php:31
-#: admin/themes/default/items/browse.php:91
-#: admin/themes/default/items/browse.php:132
+#: admin/themes/default/items/browse.php:30
+#: admin/themes/default/items/browse.php:90
+#: admin/themes/default/items/browse.php:131
 #: admin/themes/default/items/files-form.php:12
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:63
@@ -652,7 +653,7 @@ msgid "Item Types"
 msgstr "İtem Türleri"
 
 #: admin/themes/default/common/content-nav.php:21
-#: admin/themes/default/items/browse.php:108
+#: admin/themes/default/items/browse.php:107
 #: admin/themes/default/items/show.php:65
 #: application/views/scripts/items/browse.php:46
 #: application/views/scripts/items/show.php:29
@@ -678,9 +679,13 @@ msgstr "Belgelendirme"
 msgid "Support Forums"
 msgstr "Destek Forumları"
 
+#: admin/themes/default/common/footer.php:6
+msgid "Back to top"
+msgstr ""
+
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
-#: admin/themes/default/plugins/browse.php:52
+#: admin/themes/default/plugins/browse.php:53
 #, php-format
 msgid "Version %s"
 msgstr "Versiyon %s"
@@ -695,7 +700,7 @@ msgid "Manage Site"
 msgstr "Siteyi Yönet"
 
 #: admin/themes/default/common/global-nav.php:5
-#: admin/themes/default/plugins/browse.php:2
+#: admin/themes/default/plugins/browse.php:3
 msgid "Plugins"
 msgstr "Eklentiler"
 
@@ -1087,8 +1092,8 @@ msgid "There are no recently added items."
 msgstr "Son dönemde eklenen item bulunmamaktadır."
 
 #: admin/themes/default/items/add.php:2
-#: admin/themes/default/items/browse.php:19
-#: admin/themes/default/items/browse.php:141
+#: admin/themes/default/items/browse.php:17
+#: admin/themes/default/items/browse.php:142
 #: admin/themes/default/items/browse.php:168
 msgid "Add an Item"
 msgstr "İtem Ekle"
@@ -1099,7 +1104,7 @@ msgstr "İtem Ekle"
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit-common.php:48
-#: admin/themes/default/items/browse.php:104
+#: admin/themes/default/items/browse.php:103
 #: admin/themes/default/items/edit.php:43
 #: admin/themes/default/items/show.php:57
 #: application/libraries/globals.php:411
@@ -1264,8 +1269,8 @@ msgstr "Seçilen itemleri silmek istiyorsanız kontrol ediniz."
 msgid "Browse Items"
 msgstr "İtemleri Tara"
 
-#: admin/themes/default/items/browse.php:21
-#: admin/themes/default/items/browse.php:143
+#: admin/themes/default/items/browse.php:19
+#: admin/themes/default/items/browse.php:144
 #: admin/themes/default/items/search.php:2
 #: application/libraries/globals.php:2411
 #: application/libraries/globals.php:2802
@@ -1273,27 +1278,27 @@ msgstr "İtemleri Tara"
 msgid "Search Items"
 msgstr "İtemleri Ara"
 
-#: admin/themes/default/items/browse.php:26
-#: admin/themes/default/items/browse.php:129
+#: admin/themes/default/items/browse.php:25
+#: admin/themes/default/items/browse.php:128
 #, php-format
 msgid "Select all %s results"
 msgstr "Bütün %s sonuçlarını seç"
 
-#: admin/themes/default/items/browse.php:27
-#: admin/themes/default/items/browse.php:130
+#: admin/themes/default/items/browse.php:26
+#: admin/themes/default/items/browse.php:129
 msgid "items selected"
 msgstr "İtemler seçildi"
 
-#: admin/themes/default/items/browse.php:43
+#: admin/themes/default/items/browse.php:42
 msgid "Select all rows"
 msgstr "Bütün satırları seç"
 
-#: admin/themes/default/items/browse.php:64
+#: admin/themes/default/items/browse.php:63
 #, php-format
 msgid "Select item \"%s\""
 msgstr "\"%s\" itemini seç"
 
-#: admin/themes/default/items/browse.php:109
+#: admin/themes/default/items/browse.php:108
 msgid "No Tags"
 msgstr "Etiket Yok"
 
@@ -1591,67 +1596,67 @@ msgstr "İtemleri Etiketlere Göre Tara"
 msgid "There are no tags to display. You must first tag some items."
 msgstr "Görüntülenecek etiket bulunamamıştır. İlk olarak benzer itemleri etiketlemelisiniz."
 
-#: admin/themes/default/plugins/browse.php:26
+#: admin/themes/default/plugins/browse.php:27
 #, php-format
 msgid "This version of %1$s requires at least Omeka %2$s."
 msgstr "%1$s'in bu versiyonu en az Omeka %2$s gerektirmektedir."
 
-#: admin/themes/default/plugins/browse.php:29
+#: admin/themes/default/plugins/browse.php:30
 #, php-format
 msgid ""
 "%1$s requires the following plugins to be installed, activated, and loaded: "
 "%2$s"
 msgstr "%1$s, %2$s isimli eklentilerin yüklenmiş ve aktive edilmiş olmasını gerektirmektedir."
 
-#: admin/themes/default/plugins/browse.php:32
+#: admin/themes/default/plugins/browse.php:33
 msgid "This is not a valid plugin."
 msgstr "Bu geçerli bir eklenti değildir."
 
-#: admin/themes/default/plugins/browse.php:57
+#: admin/themes/default/plugins/browse.php:58
 #, php-format
 msgid "by %s"
 msgstr "%s tarafından"
 
-#: admin/themes/default/plugins/browse.php:65
-#: admin/themes/default/themes/browse.php:23
-#: admin/themes/default/themes/browse.php:50
+#: admin/themes/default/plugins/browse.php:66
+#: admin/themes/default/themes/browse.php:24
+#: admin/themes/default/themes/browse.php:63
 msgid "Get support"
 msgstr "Yardım alın"
 
-#: admin/themes/default/plugins/browse.php:69
+#: admin/themes/default/plugins/browse.php:70
 #, php-format
 msgid "You have a new version of %s. Please upgrade!"
 msgstr "%s'in yeni versiyonu çıkmıştır. Lütfen güncelleştiriniz."
 
-#: admin/themes/default/plugins/browse.php:90
+#: admin/themes/default/plugins/browse.php:105
 msgid "Upgrade"
 msgstr "Yükselt"
 
-#: admin/themes/default/plugins/browse.php:101
+#: admin/themes/default/plugins/browse.php:116
 msgid "Configure"
 msgstr "Ayarla"
 
-#: admin/themes/default/plugins/browse.php:107
+#: admin/themes/default/plugins/browse.php:122
 msgid "Deactivate"
 msgstr "Aktive Etme"
 
-#: admin/themes/default/plugins/browse.php:107
+#: admin/themes/default/plugins/browse.php:122
 #: admin/themes/default/users/activate.php:30
 #: application/views/scripts/users/activate.php:27
 msgid "Activate"
 msgstr "Aktive et"
 
-#: admin/themes/default/plugins/browse.php:118
+#: admin/themes/default/plugins/browse.php:133
 #: admin/themes/default/plugins/confirm-uninstall.php:18
 msgid "Uninstall"
 msgstr "Kaldır"
 
-#: admin/themes/default/plugins/browse.php:131
+#: admin/themes/default/plugins/browse.php:146
 #: application/forms/Install.php:178
 msgid "Install"
 msgstr "Yükle"
 
-#: admin/themes/default/plugins/browse.php:143
+#: admin/themes/default/plugins/browse.php:158
 msgid ""
 "You do not have any plugins installed. Add them to the plugins directory to "
 "see them listed here."
@@ -1816,11 +1821,11 @@ msgstr "Etiketleri Tara"
 
 #: admin/themes/default/tags/browse.php:18
 msgid "Search tags"
-msgstr ""
+msgstr "Etiketleri ara"
 
 #: admin/themes/default/tags/browse.php:29
 msgid "Reset results"
-msgstr ""
+msgstr "Souçları sıfırla"
 
 #: admin/themes/default/tags/browse.php:42
 msgid "Editing Tags"
@@ -1859,27 +1864,27 @@ msgstr "Kayıt Türleri"
 msgid "All"
 msgstr ""
 
-#: admin/themes/default/themes/browse.php:15
-#: admin/themes/default/themes/browse.php:44
+#: admin/themes/default/themes/browse.php:16
+#: admin/themes/default/themes/browse.php:57
 #, php-format
 msgid "Screenshot for %s Theme"
 msgstr "%s Tema İçin Ekran Görüntüsü"
 
-#: admin/themes/default/themes/browse.php:16
+#: admin/themes/default/themes/browse.php:17
 msgid "Configure Theme"
 msgstr "Temayı Düzenle"
 
-#: admin/themes/default/themes/browse.php:19
+#: admin/themes/default/themes/browse.php:20
 msgid "Current Theme"
 msgstr "Geçerli Tema"
 
-#: admin/themes/default/themes/browse.php:21
-#: admin/themes/default/themes/browse.php:49
+#: admin/themes/default/themes/browse.php:22
+#: admin/themes/default/themes/browse.php:62
 #, php-format
 msgid "By %s"
 msgstr "%s e Göre"
 
-#: admin/themes/default/themes/browse.php:27
+#: admin/themes/default/themes/browse.php:40
 msgid ""
 "Add new themes by downloading them from the <a href=\"http://omeka.org/add-"
 "ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a "
@@ -1887,7 +1892,7 @@ msgid ""
 "target=\"_blank\">design your own</a>!"
 msgstr "Yeni temaları <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\"> Omeka Tema Dizini</a> ya da <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">kendi temanı tasarla</a> adresinden indirerek yükle!"
 
-#: admin/themes/default/themes/browse.php:46
+#: admin/themes/default/themes/browse.php:59
 msgid "Use this theme"
 msgstr "Bu temayı kullan"
 
@@ -2015,7 +2020,7 @@ msgstr "En son erişim"
 msgid "Rescind"
 msgstr "İptal et"
 
-#: admin/themes/default/users/api-keys.php:60
+#: admin/themes/default/users/api-keys.php:61
 msgid "Update API Keys"
 msgstr "API anahtarlarını güncelleştir"
 
@@ -2202,6 +2207,7 @@ msgstr "Bu işlem, öğe setini ve onunla ilişkili olan bütün öğeleri silec
 #: application/controllers/SettingsController.php:140
 #: application/controllers/SettingsController.php:177
 #: application/controllers/ThemesController.php:85
+#: application/controllers/UsersController.php:312
 #: application/libraries/Omeka/Controller/AbstractActionController.php:183
 #: application/libraries/Omeka/Controller/AbstractActionController.php:224
 msgid "There was an error on the form. Please try again."
@@ -2304,59 +2310,59 @@ msgid ""
 "delete all files and file metadata associated with this item."
 msgstr "Bu işlem, #%s koleksiyonunu ve onunla ilişkili olan bütün üstverileri silecektir. Aynı zamanda bu işlem, bütün dosyalar ve itemlerle ilişkili olan bütün üstveri dosyalarını da silecektir."
 
-#: application/controllers/ItemsController.php:231
-#: application/controllers/ItemsController.php:364
-#: application/controllers/ItemsController.php:430
+#: application/controllers/ItemsController.php:235
+#: application/controllers/ItemsController.php:368
+#: application/controllers/ItemsController.php:434
 msgid "No item to batch edit."
 msgstr "toplu olarak düzenlenecek item yok"
 
-#: application/controllers/ItemsController.php:238
+#: application/controllers/ItemsController.php:242
 msgid "The deletion of all items is forbidden."
 msgstr "bütün itemlerin silinmesi yasaklanmış"
 
-#: application/controllers/ItemsController.php:255
+#: application/controllers/ItemsController.php:259
 msgid "You must choose some items to batch edit."
 msgstr "Toplu düzenleme yapabilmek için birkaç item seçmelisiniz."
 
-#: application/controllers/ItemsController.php:302
-#: application/controllers/ItemsController.php:398
+#: application/controllers/ItemsController.php:306
+#: application/controllers/ItemsController.php:402
 msgid "User is not allowed to modify visibility of items."
 msgstr "Kullanıcının itemin görünürlüğünde değişiklik yapmasına izin verilmedi."
 
-#: application/controllers/ItemsController.php:307
-#: application/controllers/ItemsController.php:403
+#: application/controllers/ItemsController.php:311
+#: application/controllers/ItemsController.php:407
 msgid "User is not allowed to modify featured status of items."
 msgstr "Kullanıcının itemin ayrıcalık durumunda değişiklik yapmasına izin verilmedi."
 
-#: application/controllers/ItemsController.php:314
+#: application/controllers/ItemsController.php:318
 msgid "User is not allowed to delete selected items."
 msgstr "Kullanıcının seçilen itemleri silmesine izin verilmedi."
 
-#: application/controllers/ItemsController.php:320
+#: application/controllers/ItemsController.php:324
 msgid "User is not allowed to edit selected items."
 msgstr "Kullanıcının seçilen itemleri düzenlemesine izin verilmedi."
 
-#: application/controllers/ItemsController.php:325
+#: application/controllers/ItemsController.php:329
 msgid "User is not allowed to tag selected items."
 msgstr "Kullanıcının seçilen itemleri etiketlemesine izin verilmedi."
 
-#: application/controllers/ItemsController.php:357
+#: application/controllers/ItemsController.php:361
 msgid "The items were successfully deleted!"
 msgstr "İtemler başarıyla silindi!"
 
-#: application/controllers/ItemsController.php:359
+#: application/controllers/ItemsController.php:363
 msgid "The items were successfully changed!"
 msgstr "İtemler başaraıyla değiştirildi."
 
-#: application/controllers/ItemsController.php:422
+#: application/controllers/ItemsController.php:426
 msgid "The items are checked and deleted one by one in the background."
 msgstr "İtemler, arkaplanda tek tek kontrol edildi ve silindi."
 
-#: application/controllers/ItemsController.php:424
+#: application/controllers/ItemsController.php:428
 msgid "The items are checked and changed one by one in the background."
 msgstr "İtemler, arkaplanda tek tek kontrol edildi ve değiştirildi."
 
-#: application/controllers/ItemsController.php:426
+#: application/controllers/ItemsController.php:430
 msgid "Check logs for success and errors."
 msgstr "Kayıtlardaki başarı ve hataları kontrol edin"
 
@@ -2493,6 +2499,10 @@ msgstr "ImageMagick dizin yolu çalışmıyor."
 msgid "Invalid tagType given."
 msgstr "Geçersiz Etiket Türü"
 
+#: application/controllers/TagsController.php:108
+msgid "Error occurred."
+msgstr ""
+
 #: application/controllers/ThemesController.php:28
 msgid "Invalid form submission."
 msgstr "Geçersiz form teslimi."
@@ -2537,7 +2547,7 @@ msgstr "Şifrenizi sıfırlamak için lütfen bu linki takip edin."
 
 #: application/controllers/UsersController.php:112
 #: application/controllers/UsersController.php:115
-#: application/controllers/UsersController.php:383
+#: application/controllers/UsersController.php:390
 #, php-format
 msgid "%s Administrator"
 msgstr "%s Yöneticisi"
@@ -2596,20 +2606,20 @@ msgstr "%s isimli kullanıcı başarıyla değiştirildi!"
 msgid "Password changed!"
 msgstr "Şifre değiştirildi!"
 
-#: application/controllers/UsersController.php:315
+#: application/controllers/UsersController.php:322
 msgid "A new API key was successfully created."
 msgstr "Yeni bir API anahtarı başarıyla oluşturuldu."
 
-#: application/controllers/UsersController.php:322
+#: application/controllers/UsersController.php:329
 msgid "An existing API key was successfully rescinded."
 msgstr "Mevcut olan API key başarıyla iptal edildi."
 
-#: application/controllers/UsersController.php:349
+#: application/controllers/UsersController.php:356
 #, php-format
 msgid "The user \"%s\" was successfully deleted!"
 msgstr "%s isimli kullanıcı başarıyla silindi!"
 
-#: application/controllers/UsersController.php:355
+#: application/controllers/UsersController.php:362
 #, php-format
 msgid ""
 "%s will be deleted from the system. Items, collections, and tags created by "
@@ -2617,23 +2627,23 @@ msgid ""
 "this user."
 msgstr "%s sistemden silinecektir. Kullanıcı tarafından oluşturulan itemler, koleksiyonlar ve etiketler sistemde kalacaktır fakat bundan sonra bu kullanıcı ile ilişkilendirilmeyecektir."
 
-#: application/controllers/UsersController.php:379
+#: application/controllers/UsersController.php:386
 msgid "Welcome!"
 msgstr "Hoşgeldiniz!"
 
-#: application/controllers/UsersController.php:381
+#: application/controllers/UsersController.php:388
 #, php-format
 msgid ""
 "Your account for the %s repository has been created. Please click the "
 "following link to activate your account:"
 msgstr "%s kaynağı için hesabınız oluşturulmuştur. Lütfen hesabınızı aktive etmek için sonraki linki tıklayınız."
 
-#: application/controllers/UsersController.php:384
+#: application/controllers/UsersController.php:391
 #, php-format
 msgid "Activate your account with the %s repository"
 msgstr "Hesabını %s  kaynağı ile aktive et."
 
-#: application/controllers/UsersController.php:479
+#: application/controllers/UsersController.php:486
 msgid "Login information incorrect. Please try again."
 msgstr "Giriş bilgisi hatalı. Lütfen yeniden deneyin."
 
@@ -3467,7 +3477,7 @@ msgstr "Eklenti isimleri boş bırakılamaz."
 msgid "[Untitled] #%s"
 msgstr "[İsimsiz] #%s"
 
-#: application/models/Table/Item.php:144
+#: application/models/Table/Item.php:143
 msgid "Invalid search type given!"
 msgstr "Geçersiz arama türü!"
 
