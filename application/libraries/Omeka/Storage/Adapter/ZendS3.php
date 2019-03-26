@@ -171,13 +171,15 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
         $uri = "$endpoint/$object";
 
         if ($expiration = $this->_getExpiration()) {
-            $date = new Zend_Date();
-            $date->add($expiration, Zend_Date::MINUTE);
+            $timestamp = time();
+            $expirationSeconds = $expiration * 60;
+            $expires = $timestamp + $expirationSeconds;
+            // "Chunk" expirations to allow browser caching
+            $expires = $expires + $expirationSeconds - ($expires % $expirationSeconds);
 
             $accessKeyId = $this->_options[self::AWS_KEY_OPTION];
             $secretKey = $this->_options[self::AWS_SECRET_KEY_OPTION];
 
-            $expires = $date->getTimestamp();
             $stringToSign = "GET\n\n\n$expires\n/$object";
 
             $signature = base64_encode(
