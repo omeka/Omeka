@@ -166,7 +166,7 @@ class Omeka_Storage_Adapter_ZendS3 implements Omeka_Storage_Adapter_AdapterInter
     public function getUri($path)
     {
         $endpoint = isset($this->_force_ssl_display_endpoint) ? $this->_force_ssl_display_endpoint : $this->_s3->getEndpoint();
-        $object = urlencode($this->_getObjectName($path));
+        $object = str_replace('%2F', '/', rawurlencode($this->_getObjectName($path)));
 
         $uri = "$endpoint/$object";
 
