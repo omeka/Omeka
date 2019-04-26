@@ -2074,7 +2074,9 @@ function files_for_item($options = array(), $wrapperAttributes = array('class' =
     if (!isset($options['linkToMetadata'])) {
         $options['linkToMetadata'] =  (bool) get_option('link_to_file_metadata');
     }
-    return file_markup($item->Files, $options, $wrapperAttributes);
+    $options['filesForItem'] = true;
+    $html = file_markup($item->Files, $options, $wrapperAttributes);
+    return apply_filters('files_for_item', $html, compact('item', 'options', 'wrapperAttributes'));
 }
 
 /**
