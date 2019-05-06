@@ -529,20 +529,21 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
      * displaying the file and by default wrap it in a <div class="item-file">.
      * 
      * @param File $file
-     * @param array $props Set of options passed by a theme writer to the
+     * @param array $options Set of options passed by a theme writer to the
      * customize the display of any given callback.
      * @param array $wrapperAttributes
      * @return string HTML
      */
-    public function fileMarkup($file, array $props = array(), $wrapperAttributes = array())
+    public function fileMarkup($file, array $options = array(), $wrapperAttributes = array())
     {
-        // There is a chance that $props passed in could modify the callback
+        $options = apply_filters('file_markup_options', $options, array('file' => $file));
+
+        // There is a chance that $options passed in could modify the callback
         // that is used.  Currently used to determine whether or not to display
         // an icon.
+        $callback = $this->getCallback($file, $options);
 
-        $callback = $this->getCallback($file, $props);
-
-        $options = array_merge($this->getDefaultOptions($callback), $props);
+        $options = array_merge($this->getDefaultOptions($callback), $options);
 
         $html = $this->getHtml($file, $callback, $options);
 

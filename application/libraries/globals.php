@@ -1410,13 +1410,13 @@ function max_file_size()
  * @package Omeka\Function\View\File
  * @uses Omeka_View_Helper_FileMarkup::fileMarkup()
  * @param File $files A file record or an array of File records to display.
- * @param array $props Properties to customize display for different file types.
+ * @param array $options Options to customize display for different file types.
  * @param array $wrapperAttributes Attributes HTML attributes for the div that
  * wraps each displayed file. If empty or null, this will not wrap the displayed
  * file in a div.
  * @return string HTML
  */
-function file_markup($files, array $props = array(), $wrapperAttributes = array('class' => 'item-file'))
+function file_markup($files, array $options = array(), $wrapperAttributes = array('class' => 'item-file'))
 {
     if (!is_array($files)) {
         $files = array($files);
@@ -1424,7 +1424,7 @@ function file_markup($files, array $props = array(), $wrapperAttributes = array(
     $helper = new Omeka_View_Helper_FileMarkup;
     $output = '';
     foreach ($files as $file) {
-        $output .= $helper->fileMarkup($file, $props, $wrapperAttributes);
+        $output .= $helper->fileMarkup($file, $options, $wrapperAttributes);
     }
     return $output;
 }
