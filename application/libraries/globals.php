@@ -1421,6 +1421,7 @@ function file_markup($files, array $options = array(), $wrapperAttributes = arra
     if (!is_array($files)) {
         $files = array($files);
     }
+    $files = apply_filters('file_markup_files', $files, array('options' => $options));
     $helper = new Omeka_View_Helper_FileMarkup;
     $output = '';
     foreach ($files as $file) {
