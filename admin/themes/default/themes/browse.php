@@ -24,21 +24,23 @@ if ($current->image) {
         <p class="author"><a href="<?php echo html_escape($current->website); ?>"><?php echo __('By %s', html_escape($current->author)); ?></a></p>
         <p class="theme-description"><?php echo html_escape($current->description); ?></p>
         <p class="theme-support-link"><a href="<?php echo $current->support_link; ?>" target="_blank"><?php echo __('Get support');?></a></p>
+        <?php if ($versionNotifications): ?>
+        <ul class="version-notification details"
+            data-addon-id="<?php echo html_escape($current->directory); ?>"
+            data-current-version="<?php echo html_escape($current->version); ?>">
+            <li class="success">
+            <?php echo sprintf(
+                $this->translate('A new version of this theme is available. %s'),
+                sprintf(
+                    '<a href="%s">%s</a>',
+                    'https://omeka.org/classic/themes/' . $current->directory,
+                    $this->translate('Get the new version.')
+                )
+            ); ?>
+            </li>
+        </ul>
+        <?php endif; ?>
     </div>
-    <?php if ($versionNotifications): ?>
-    <div class="version-notification" style="display: none;"
-        data-addon-id="<?php echo html_escape($current->directory); ?>"
-        data-current-version="<?php echo html_escape($current->version); ?>">
-        <?php echo sprintf(
-            $this->translate('A new version of this theme is available. %s'),
-            sprintf(
-                '<a href="%s">%s</a>',
-                'https://omeka.org/classic/themes/' . $current->directory,
-                $this->translate('Get the new version.')
-            )
-        ); ?>
-    </div>
-    <?php endif; ?>
 </div>
 
 <p class="managethemes"><?php echo __('Add new themes by downloading them from the <a href="http://omeka.org/add-ons/themes/" target="_blank">Omeka Theme Directory</a>, or <a href="http://omeka.org/codex/Theme_Writing_Best_Practices" target="_blank">design your own</a>!'); ?></p>

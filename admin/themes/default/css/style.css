@@ -1548,6 +1548,9 @@ header nav {
 
 .plugins.browse .upgrade { background-color: #E9FFC2; }
 
+.version-notification { display: none; }
+
+.version-notification.active { display: block; }
 
 /* Browse Items
 ================================================== */
@@ -2433,6 +2436,11 @@ button.remove_search {
 #current-theme ul {
     list-style-type: none;
     padding: 0;
+}
+
+#current-theme ul.details {
+    padding: .5em .5em .5em 10px;
+    list-style: none;
 }
 
 #current-theme-title {

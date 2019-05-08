@@ -236,7 +236,7 @@ if (!Omeka) {
                         normalizeVersion(addon.data('current-version')),
                         normalizeVersion(data[addonId]['latest_version'])
                     )) {
-                        addon.show();
+                        addon.addClass('active');
                     }
                 }
             });

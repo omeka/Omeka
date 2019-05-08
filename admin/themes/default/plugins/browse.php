@@ -80,9 +80,10 @@ echo flash();
                 </ul>
             <?php endif; ?>
             <?php if ($versionNotifications && $plugin->isActive()): ?>
-                <div class="version-notification" style="display: none;"
+                <ul class="version-notification details"
                     data-addon-id="<?php echo html_escape($pluginDirName); ?>"
                     data-current-version="<?php echo html_escape($plugin->getIniVersion()); ?>">
+                    <li class="success">
                     <?php echo sprintf(
                         $this->translate('A new version of this plugin is available. %s'),
                         sprintf(
@@ -91,7 +92,8 @@ echo flash();
                             $this->translate('Get the new version.')
                         )
                     ); ?>
-                </div>
+                    </li>
+                </ul>
             <?php endif; ?>
 
             </div>
