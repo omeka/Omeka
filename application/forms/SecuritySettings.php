@@ -49,7 +49,7 @@ class Omeka_Form_SecuritySettings extends Omeka_Form
         $this->addElement('text', Omeka_Captcha::PUBLIC_KEY_OPTION,
             array(
                 'label' => __('reCAPTCHA Site Key'),
-                'description' => __('Enter site key from %s. Both this and the private key must be filled in to secure public forms.', '<a href="https://developers.google.com/recaptcha/">https://developers.google.com/recaptcha/</a>'),
+                'description' => __('Enter site key from %s. Both this and the private key must be filled in to secure public forms. Keys must be for reCAPTCHA v2.', '<a href="https://developers.google.com/recaptcha/">https://developers.google.com/recaptcha/</a>'),
                 'value' => get_option(Omeka_Captcha::PUBLIC_KEY_OPTION)
             )
         );
@@ -57,7 +57,7 @@ class Omeka_Form_SecuritySettings extends Omeka_Form
         $this->addElement('text', Omeka_Captcha::PRIVATE_KEY_OPTION,
             array(
                 'label' => __('reCAPTCHA Secret Key'),
-                'description' => __('Enter secret key from %s. Both this and the public key must be filled in to secure public forms.', '<a href="https://developers.google.com/recaptcha/">https://developers.google.com/recaptcha/</a>'),
+                'description' => __('Enter secret key from %s. Both this and the public key must be filled in to secure public forms. Keys must be for reCAPTCHA v2.', '<a href="https://developers.google.com/recaptcha/">https://developers.google.com/recaptcha/</a>'),
                 'value' => get_option(Omeka_Captcha::PRIVATE_KEY_OPTION)
             )
         );
