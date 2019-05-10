@@ -62,12 +62,14 @@ class Omeka_Application_Resource_Frontcontroller extends Zend_Application_Resour
         // Action helpers
         $this->getBootstrap()->bootstrap('Helpers');
 
-        if ($sslConfig = $this->getBootstrap()->config->ssl) {
+        $config = $this->getBootstrap()->config;
+        if ($sslConfig = $config->ssl) {
             $redirector =
                 Zend_Controller_Action_HelperBroker::getStaticHelper('redirector');
             $auth = $this->getBootstrap()->bootstrap('Auth')->auth;
+            $trustProxyConfig = isset($config->sslTrustProxy) ? (bool) $config->sslTrustProxy : false;
             $front->registerPlugin(
-                new Omeka_Controller_Plugin_Ssl((string) $sslConfig, $redirector, $auth));
+                new Omeka_Controller_Plugin_Ssl((string) $sslConfig, $redirector, $auth, $trustProxyConfig));
         }
 
         // Add a default content-type fallback.

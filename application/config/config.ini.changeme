@@ -233,6 +233,17 @@ mail.transport.type = "Sendmail"
 ;
 ; ssl = "always"
 
+
+; sslTrustProxy
+; Whether the "ssl" setting should respect X-Forwarded-Proto headers.
+; default: false
+;
+; This only has an effect if the "ssl" setting is enabled.
+; Setting to true will cause Omeka to treat requests with the X-Fowarded-Proto
+; header set to "https" as secure (meaning they won't be redirected).
+;
+; sslTrustProxy = true
+
 ;;;;;;;;;;
 ; Upload ;
 ;;;;;;;;;;
