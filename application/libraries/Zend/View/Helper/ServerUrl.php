@@ -52,10 +52,12 @@ class Zend_View_Helper_ServerUrl
      */
     public function __construct()
     {
+        $isForwardedHttps = isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https';
         switch (true) {
             case (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] === true)):
             case (isset($_SERVER['HTTP_SCHEME']) && ($_SERVER['HTTP_SCHEME'] == 'https')):
             case (isset($_SERVER['SERVER_PORT']) && ($_SERVER['SERVER_PORT'] == 443)):
+            case $isForwardedHttps:
                 $scheme = 'https';
                 break;
             default:
@@ -68,6 +70,10 @@ class Zend_View_Helper_ServerUrl
         } else if (isset($_SERVER['SERVER_NAME'], $_SERVER['SERVER_PORT'])) {
             $name = $_SERVER['SERVER_NAME'];
             $port = $_SERVER['SERVER_PORT'];
+
+            if ($isForwardedHttps) {
+                $port = 443;
+            }
 
             if (($scheme == 'http' && $port == 80) ||
                 ($scheme == 'https' && $port == 443)) {
