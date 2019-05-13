@@ -192,6 +192,18 @@ mail.transport.type = "Sendmail"
 ; mail.transport.password = ""
 ; mail.transport.ssl = ""       ; For SSL support, set to "ssl" or "tls"
 
+; mail.force_from
+; Force all outgoing emails to have the configured From address
+; mail.force_from = ""
+
+; mail.force_from_name
+; If mail.force_from is set, use the configured friendly name in From
+; mail.force_from_name = ""
+
+;;;;;;;;;;;
+; Storage ;
+;;;;;;;;;;;
+
 ; Sample S3 cloud storage configuration
 ;
 ; The accessKeyId, secretAccessKey, and bucket options are all required.
@@ -299,3 +311,13 @@ mail.transport.type = "Sendmail"
 ; This entry can be specified multiple times, once for each type in the list.
 ;
 ;fileDerivatives.typeBlacklist[] = "image/jpeg"
+
+;;;;;;;;;;;
+; Updates ;
+;;;;;;;;;;;
+;
+; versionNotifications
+; Whether Omeka should prompt admin users about updates to plugins and themes
+; default: true
+;
+; versionNotifications = false
