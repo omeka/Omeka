@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2019-03-25 19:57+0000\n"
+"PO-Revision-Date: 2019-05-21 14:57+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Hungarian (Hungary) (http://www.transifex.com/omeka/omeka/language/hu_HU/)\n"
 "MIME-Version: 1.0\n"
@@ -336,7 +336,7 @@ msgstr "Kutató"
 #: admin/themes/default/appearance/edit-navigation.php:3
 #: admin/themes/default/appearance/edit-settings.php:2
 #: admin/themes/default/common/global-nav.php:11
-#: admin/themes/default/themes/browse.php:3
+#: admin/themes/default/themes/browse.php:5
 #: admin/themes/default/themes/config.php:3
 msgid "Appearance"
 msgstr "Megjelenés"
@@ -483,7 +483,7 @@ msgstr "Gyűjtemények böngészése"
 #: admin/themes/default/collections/browse.php:2
 #: admin/themes/default/item-types/browse.php:2
 #: admin/themes/default/items/browse.php:3
-#: admin/themes/default/plugins/browse.php:3
+#: admin/themes/default/plugins/browse.php:5
 #: admin/themes/default/search/index.php:2
 #: admin/themes/default/tags/browse.php:6
 #: admin/themes/default/users/browse.php:2
@@ -695,7 +695,7 @@ msgstr ""
 
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
-#: admin/themes/default/plugins/browse.php:53
+#: admin/themes/default/plugins/browse.php:55
 #, php-format
 msgid "Version %s"
 msgstr "Verzió %s"
@@ -710,7 +710,7 @@ msgid "Manage Site"
 msgstr "Az oldal kezelése"
 
 #: admin/themes/default/common/global-nav.php:5
-#: admin/themes/default/plugins/browse.php:3
+#: admin/themes/default/plugins/browse.php:5
 msgid "Plugins"
 msgstr "Bővítmények"
 
@@ -875,6 +875,7 @@ msgstr "Fájl #%s"
 
 #: admin/themes/default/files/show.php:35
 #: application/libraries/globals.php:409
+#: application/views/scripts/files/show.php:22
 msgid "Item"
 msgstr "Elem"
 
@@ -899,7 +900,7 @@ msgid "Square Thumbnail"
 msgstr "Négyzetes bélyegkép"
 
 #: admin/themes/default/files/show.php:52
-#: application/views/scripts/files/show.php:22
+#: application/views/scripts/files/show.php:27
 msgid "Format Metadata"
 msgstr "Metaadat formátum"
 
@@ -908,17 +909,17 @@ msgid "Filename"
 msgstr "Fájlnév"
 
 #: admin/themes/default/files/show.php:56
-#: application/views/scripts/files/show.php:24
+#: application/views/scripts/files/show.php:29
 msgid "Original Filename"
 msgstr "Eredeti fájlnév"
 
 #: admin/themes/default/files/show.php:58
-#: application/views/scripts/files/show.php:29
+#: application/views/scripts/files/show.php:34
 msgid "File Size"
 msgstr "Fájl mérete"
 
 #: admin/themes/default/files/show.php:59
-#: application/views/scripts/files/show.php:30
+#: application/views/scripts/files/show.php:35
 #, php-format
 msgid "%s bytes"
 msgstr "%s byte"
@@ -932,22 +933,22 @@ msgid "Date Modified"
 msgstr "Módosítás dátuma"
 
 #: admin/themes/default/files/show.php:70
-#: application/views/scripts/files/show.php:34
+#: application/views/scripts/files/show.php:39
 msgid "Authentication"
 msgstr "Hitelesítés"
 
 #: admin/themes/default/files/show.php:76
-#: application/views/scripts/files/show.php:40
+#: application/views/scripts/files/show.php:45
 msgid "Type Metadata"
 msgstr "Metaadat tipus"
 
 #: admin/themes/default/files/show.php:78
-#: application/views/scripts/files/show.php:42
+#: application/views/scripts/files/show.php:47
 msgid "Mime Type"
 msgstr "Mime Type"
 
 #: admin/themes/default/files/show.php:80
-#: application/views/scripts/files/show.php:46
+#: application/views/scripts/files/show.php:51
 msgid "File Type / OS"
 msgstr "Fájl tipus / Op.r"
 
@@ -1282,8 +1283,8 @@ msgstr "Elemek böngészése"
 #: admin/themes/default/items/browse.php:19
 #: admin/themes/default/items/browse.php:144
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2411
-#: application/libraries/globals.php:2802
+#: application/libraries/globals.php:2414
+#: application/libraries/globals.php:2805
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Elemek keresése"
@@ -1606,67 +1607,67 @@ msgstr "Elemek böngészése címkék alapján"
 msgid "There are no tags to display. You must first tag some items."
 msgstr "Nincsenek megjeleníthető címkék. Először címkézzen meg néhány elemet."
 
-#: admin/themes/default/plugins/browse.php:27
+#: admin/themes/default/plugins/browse.php:29
 #, php-format
 msgid "This version of %1$s requires at least Omeka %2$s."
 msgstr "%1$s eme verziójához legalább az Omeka %2$s szükséges."
 
-#: admin/themes/default/plugins/browse.php:30
+#: admin/themes/default/plugins/browse.php:32
 #, php-format
 msgid ""
 "%1$s requires the following plugins to be installed, activated, and loaded: "
 "%2$s"
 msgstr "%1$s bővítménynek szükséges, hogy a következő bővítmény telepítve, aktiválva és betöltve legyen: %2$s"
 
-#: admin/themes/default/plugins/browse.php:33
+#: admin/themes/default/plugins/browse.php:35
 msgid "This is not a valid plugin."
 msgstr "Érvénytelen bővítmény."
 
-#: admin/themes/default/plugins/browse.php:58
+#: admin/themes/default/plugins/browse.php:60
 #, php-format
 msgid "by %s"
 msgstr "%s által"
 
-#: admin/themes/default/plugins/browse.php:66
-#: admin/themes/default/themes/browse.php:24
-#: admin/themes/default/themes/browse.php:63
+#: admin/themes/default/plugins/browse.php:68
+#: admin/themes/default/themes/browse.php:26
+#: admin/themes/default/themes/browse.php:69
 msgid "Get support"
 msgstr ""
 
-#: admin/themes/default/plugins/browse.php:70
+#: admin/themes/default/plugins/browse.php:72
 #, php-format
 msgid "You have a new version of %s. Please upgrade!"
 msgstr "%s új verziója érhető el. Kérjük frissítse!"
 
-#: admin/themes/default/plugins/browse.php:105
+#: admin/themes/default/plugins/browse.php:109
 msgid "Upgrade"
 msgstr "Frissítés"
 
-#: admin/themes/default/plugins/browse.php:116
+#: admin/themes/default/plugins/browse.php:120
 msgid "Configure"
 msgstr "Konfigurálás"
 
-#: admin/themes/default/plugins/browse.php:122
+#: admin/themes/default/plugins/browse.php:126
 msgid "Deactivate"
 msgstr "Kikapcsolás"
 
-#: admin/themes/default/plugins/browse.php:122
+#: admin/themes/default/plugins/browse.php:126
 #: admin/themes/default/users/activate.php:30
 #: application/views/scripts/users/activate.php:27
 msgid "Activate"
 msgstr "Bekapcsolás"
 
-#: admin/themes/default/plugins/browse.php:133
+#: admin/themes/default/plugins/browse.php:137
 #: admin/themes/default/plugins/confirm-uninstall.php:18
 msgid "Uninstall"
 msgstr "Eltávolítás"
 
-#: admin/themes/default/plugins/browse.php:146
+#: admin/themes/default/plugins/browse.php:150
 #: application/forms/Install.php:178
 msgid "Install"
 msgstr "Telepítés"
 
-#: admin/themes/default/plugins/browse.php:158
+#: admin/themes/default/plugins/browse.php:162
 msgid ""
 "You do not have any plugins installed. Add them to the plugins directory to "
 "see them listed here."
@@ -1874,27 +1875,27 @@ msgstr "Rekord típusok"
 msgid "All"
 msgstr "Összes"
 
-#: admin/themes/default/themes/browse.php:16
-#: admin/themes/default/themes/browse.php:57
+#: admin/themes/default/themes/browse.php:18
+#: admin/themes/default/themes/browse.php:63
 #, php-format
 msgid "Screenshot for %s Theme"
 msgstr "Képernyőkép %s témához"
 
-#: admin/themes/default/themes/browse.php:17
+#: admin/themes/default/themes/browse.php:19
 msgid "Configure Theme"
 msgstr "Téma konfigurálása"
 
-#: admin/themes/default/themes/browse.php:20
+#: admin/themes/default/themes/browse.php:22
 msgid "Current Theme"
 msgstr "Aktuális téma"
 
-#: admin/themes/default/themes/browse.php:22
-#: admin/themes/default/themes/browse.php:62
+#: admin/themes/default/themes/browse.php:24
+#: admin/themes/default/themes/browse.php:68
 #, php-format
 msgid "By %s"
 msgstr "%sáltal"
 
-#: admin/themes/default/themes/browse.php:40
+#: admin/themes/default/themes/browse.php:46
 msgid ""
 "Add new themes by downloading them from the <a href=\"http://omeka.org/add-"
 "ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a "
@@ -1902,7 +1903,7 @@ msgid ""
 "target=\"_blank\">design your own</a>!"
 msgstr "Töltsön le új témákat az <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Omeka Theme Directory-ból </a>, vagy <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\"> hozzon létre sajátot </a>!"
 
-#: admin/themes/default/themes/browse.php:59
+#: admin/themes/default/themes/browse.php:65
 msgid "Use this theme"
 msgstr "Téma használata"
 
@@ -2212,11 +2213,11 @@ msgstr "Ezzel törli az elemkészletet és az elemkészlethez rendelt összes el
 #: application/controllers/PluginsController.php:135
 #: application/controllers/PluginsController.php:184
 #: application/controllers/PluginsController.php:217
-#: application/controllers/PluginsController.php:321
+#: application/controllers/PluginsController.php:325
 #: application/controllers/SettingsController.php:104
 #: application/controllers/SettingsController.php:140
 #: application/controllers/SettingsController.php:177
-#: application/controllers/ThemesController.php:85
+#: application/controllers/ThemesController.php:89
 #: application/controllers/UsersController.php:312
 #: application/libraries/Omeka/Controller/AbstractActionController.php:183
 #: application/libraries/Omeka/Controller/AbstractActionController.php:224
@@ -2440,31 +2441,31 @@ msgstr "%s bővítmény sikeresen frissítve!"
 msgid "The following error occurred while upgrading the %s plugin: "
 msgstr "%s bővítmény frissítése közben a következő hiba lépett fel: "
 
-#: application/controllers/PluginsController.php:295
+#: application/controllers/PluginsController.php:299
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
 msgstr "A bővítményt nem találtuk a '%s' mappában!"
 
-#: application/controllers/PluginsController.php:308
+#: application/controllers/PluginsController.php:312
 msgid "You must confirm the uninstall before proceeding."
 msgstr "A folytatáshoz meg kell erősítenie az eltávolítást."
 
-#: application/controllers/PluginsController.php:327
+#: application/controllers/PluginsController.php:331
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
 msgstr "%s bővítmény sikeresen eltávolítva!"
 
-#: application/controllers/PluginsController.php:332
-#: application/controllers/PluginsController.php:337
+#: application/controllers/PluginsController.php:336
+#: application/controllers/PluginsController.php:341
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
 msgstr "%s bővítmény eltávolítása közben a következő hiba lépett fel: "
 
-#: application/controllers/PluginsController.php:366
+#: application/controllers/PluginsController.php:370
 msgid "No plugin name given."
 msgstr "Nincs megadva a bővítmény neve."
 
-#: application/controllers/PluginsController.php:379
+#: application/controllers/PluginsController.php:383
 #, php-format
 msgid "The plugin %s must be installed."
 msgstr "%s bővítményt telepíteni kell."
@@ -2513,24 +2514,24 @@ msgstr "Érvénytelen címke típust adott meg."
 msgid "Error occurred."
 msgstr "Hiba történt."
 
-#: application/controllers/ThemesController.php:28
+#: application/controllers/ThemesController.php:32
 msgid "Invalid form submission."
 msgstr "Érvénytelen űrlap benyújtás."
 
-#: application/controllers/ThemesController.php:36
+#: application/controllers/ThemesController.php:40
 msgid "You have chosen an illegal theme name. Please select another theme."
 msgstr "Ön egy érvénytelen téma nevet választott. Kérjük válasszon másikat."
 
-#: application/controllers/ThemesController.php:43
+#: application/controllers/ThemesController.php:47
 #, php-format
 msgid "This theme requires a newer version of Omeka (%s)."
 msgstr "A téma alkalmazásához az Omeka egy újabb verziója szükséges (%s)."
 
-#: application/controllers/ThemesController.php:57
+#: application/controllers/ThemesController.php:61
 msgid "The theme has been successfully changed."
 msgstr "A téma sikeresen megváltoztatva."
 
-#: application/controllers/ThemesController.php:82
+#: application/controllers/ThemesController.php:86
 msgid "The theme settings were successfully saved!"
 msgstr "A téma beállításai sikeresen mentésre kerültek!"
 
@@ -3000,7 +3001,7 @@ msgstr "reCAPTCHA webhely kulcs"
 #, php-format
 msgid ""
 "Enter site key from %s. Both this and the private key must be filled in to "
-"secure public forms."
+"secure public forms. Keys must be for reCAPTCHA v2."
 msgstr ""
 
 #: application/forms/SecuritySettings.php:59
@@ -3011,7 +3012,7 @@ msgstr "reCAPTCHA titkos kulcs"
 #, php-format
 msgid ""
 "Enter secret key from %s. Both this and the public key must be filled in to "
-"secure public forms."
+"secure public forms. Keys must be for reCAPTCHA v2."
 msgstr ""
 
 #: application/forms/SecuritySettings.php:67
@@ -3193,57 +3194,57 @@ msgstr "Az %s állomány nem található!"
 msgid "No featured collections are available."
 msgstr "Nem található kiemelt gyűjtemény."
 
-#: application/libraries/globals.php:1601
+#: application/libraries/globals.php:1602
 msgid "Select Below "
 msgstr "Válasszon..."
 
-#: application/libraries/globals.php:1644
+#: application/libraries/globals.php:1645
 msgid "Omeka RSS Feed"
 msgstr "Omeka RSS Feed"
 
-#: application/libraries/globals.php:1645
+#: application/libraries/globals.php:1646
 msgid "Omeka Atom Feed"
 msgstr "Omeka Atom Feed"
 
-#: application/libraries/globals.php:2306
+#: application/libraries/globals.php:2309
 msgid "No recent items available."
 msgstr "Nem találhatóak újabb elemek."
 
-#: application/libraries/globals.php:2332
+#: application/libraries/globals.php:2335
 msgid "No featured items are available."
 msgstr "Nem találhatóak kiemelt elemek."
 
-#: application/libraries/globals.php:2393
+#: application/libraries/globals.php:2396
 msgid "View"
 msgstr "Megtekintés"
 
-#: application/libraries/globals.php:2455
+#: application/libraries/globals.php:2458
 #: application/models/Table/Collection.php:87
 #: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
 msgstr "Nincs gyűjteményben"
 
-#: application/libraries/globals.php:2574
+#: application/libraries/globals.php:2577
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2591
+#: application/libraries/globals.php:2594
 msgid "Next Item &rarr;"
 msgstr "Következő elem &rarr;"
 
-#: application/libraries/globals.php:2611
+#: application/libraries/globals.php:2614
 msgid "&larr; Previous Item"
 msgstr "&larr; Előző elem"
 
-#: application/libraries/globals.php:2792
+#: application/libraries/globals.php:2795
 msgid "Browse All"
 msgstr "Összes böngészése"
 
-#: application/libraries/globals.php:2797
+#: application/libraries/globals.php:2800
 msgid "Browse by Tag"
 msgstr "Keresés címke alapján"
 
-#: application/libraries/globals.php:3076
+#: application/libraries/globals.php:3079
 msgid "No tags are available."
 msgstr "Nincs elérhető címke."
 

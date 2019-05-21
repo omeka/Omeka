@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2019-03-25 19:57+0000\n"
+"PO-Revision-Date: 2019-05-21 14:57+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Swedish (Sweden) (http://www.transifex.com/omeka/omeka/language/sv_SE/)\n"
 "MIME-Version: 1.0\n"
@@ -328,7 +328,7 @@ msgstr "Forskare"
 #: admin/themes/default/appearance/edit-navigation.php:3
 #: admin/themes/default/appearance/edit-settings.php:2
 #: admin/themes/default/common/global-nav.php:11
-#: admin/themes/default/themes/browse.php:3
+#: admin/themes/default/themes/browse.php:5
 #: admin/themes/default/themes/config.php:3
 msgid "Appearance"
 msgstr "Utseende"
@@ -475,7 +475,7 @@ msgstr "Bläddra i samlingar"
 #: admin/themes/default/collections/browse.php:2
 #: admin/themes/default/item-types/browse.php:2
 #: admin/themes/default/items/browse.php:3
-#: admin/themes/default/plugins/browse.php:3
+#: admin/themes/default/plugins/browse.php:5
 #: admin/themes/default/search/index.php:2
 #: admin/themes/default/tags/browse.php:6
 #: admin/themes/default/users/browse.php:2
@@ -687,7 +687,7 @@ msgstr ""
 
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
-#: admin/themes/default/plugins/browse.php:53
+#: admin/themes/default/plugins/browse.php:55
 #, php-format
 msgid "Version %s"
 msgstr "Version %s"
@@ -702,7 +702,7 @@ msgid "Manage Site"
 msgstr "Administrera sajt"
 
 #: admin/themes/default/common/global-nav.php:5
-#: admin/themes/default/plugins/browse.php:3
+#: admin/themes/default/plugins/browse.php:5
 msgid "Plugins"
 msgstr "Tillägg"
 
@@ -867,6 +867,7 @@ msgstr "Fil #%s"
 
 #: admin/themes/default/files/show.php:35
 #: application/libraries/globals.php:409
+#: application/views/scripts/files/show.php:22
 msgid "Item"
 msgstr "Objekt"
 
@@ -891,7 +892,7 @@ msgid "Square Thumbnail"
 msgstr "Fyrkantig tumnagel"
 
 #: admin/themes/default/files/show.php:52
-#: application/views/scripts/files/show.php:22
+#: application/views/scripts/files/show.php:27
 msgid "Format Metadata"
 msgstr "Formatmetadata"
 
@@ -900,17 +901,17 @@ msgid "Filename"
 msgstr "Filnam"
 
 #: admin/themes/default/files/show.php:56
-#: application/views/scripts/files/show.php:24
+#: application/views/scripts/files/show.php:29
 msgid "Original Filename"
 msgstr "Ursprungligt filnamn"
 
 #: admin/themes/default/files/show.php:58
-#: application/views/scripts/files/show.php:29
+#: application/views/scripts/files/show.php:34
 msgid "File Size"
 msgstr "Filstorlek"
 
 #: admin/themes/default/files/show.php:59
-#: application/views/scripts/files/show.php:30
+#: application/views/scripts/files/show.php:35
 #, php-format
 msgid "%s bytes"
 msgstr "%s byte"
@@ -924,22 +925,22 @@ msgid "Date Modified"
 msgstr "Senast ändrad"
 
 #: admin/themes/default/files/show.php:70
-#: application/views/scripts/files/show.php:34
+#: application/views/scripts/files/show.php:39
 msgid "Authentication"
 msgstr "Autentisering"
 
 #: admin/themes/default/files/show.php:76
-#: application/views/scripts/files/show.php:40
+#: application/views/scripts/files/show.php:45
 msgid "Type Metadata"
 msgstr "Metadata för typ"
 
 #: admin/themes/default/files/show.php:78
-#: application/views/scripts/files/show.php:42
+#: application/views/scripts/files/show.php:47
 msgid "Mime Type"
 msgstr "Mimetyp"
 
 #: admin/themes/default/files/show.php:80
-#: application/views/scripts/files/show.php:46
+#: application/views/scripts/files/show.php:51
 msgid "File Type / OS"
 msgstr "Filtyp / Operativsystem"
 
@@ -1274,8 +1275,8 @@ msgstr "Bläddra bland objekt"
 #: admin/themes/default/items/browse.php:19
 #: admin/themes/default/items/browse.php:144
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2411
-#: application/libraries/globals.php:2802
+#: application/libraries/globals.php:2414
+#: application/libraries/globals.php:2805
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Sök objekt"
@@ -1598,67 +1599,67 @@ msgstr "Bläddra bland objekt via etikett/tagg"
 msgid "There are no tags to display. You must first tag some items."
 msgstr "Inga etiketter/taggar att visa. Du måste först sätta etiketter på objekt."
 
-#: admin/themes/default/plugins/browse.php:27
+#: admin/themes/default/plugins/browse.php:29
 #, php-format
 msgid "This version of %1$s requires at least Omeka %2$s."
 msgstr "Denna version av %1$s kräver minst Omeka %2$s."
 
-#: admin/themes/default/plugins/browse.php:30
+#: admin/themes/default/plugins/browse.php:32
 #, php-format
 msgid ""
 "%1$s requires the following plugins to be installed, activated, and loaded: "
 "%2$s"
 msgstr "%1$s kräver följande plugin installerad, aktiverad samt laddad: %2$s"
 
-#: admin/themes/default/plugins/browse.php:33
+#: admin/themes/default/plugins/browse.php:35
 msgid "This is not a valid plugin."
 msgstr "Detta är inte en giltig plugin."
 
-#: admin/themes/default/plugins/browse.php:58
+#: admin/themes/default/plugins/browse.php:60
 #, php-format
 msgid "by %s"
 msgstr "efter %s"
 
-#: admin/themes/default/plugins/browse.php:66
-#: admin/themes/default/themes/browse.php:24
-#: admin/themes/default/themes/browse.php:63
+#: admin/themes/default/plugins/browse.php:68
+#: admin/themes/default/themes/browse.php:26
+#: admin/themes/default/themes/browse.php:69
 msgid "Get support"
 msgstr "Få support"
 
-#: admin/themes/default/plugins/browse.php:70
+#: admin/themes/default/plugins/browse.php:72
 #, php-format
 msgid "You have a new version of %s. Please upgrade!"
 msgstr "Du har en ny version av %s. Vänligen uppgradera!"
 
-#: admin/themes/default/plugins/browse.php:105
+#: admin/themes/default/plugins/browse.php:109
 msgid "Upgrade"
 msgstr "Uppgradera"
 
-#: admin/themes/default/plugins/browse.php:116
+#: admin/themes/default/plugins/browse.php:120
 msgid "Configure"
 msgstr "Inställningar"
 
-#: admin/themes/default/plugins/browse.php:122
+#: admin/themes/default/plugins/browse.php:126
 msgid "Deactivate"
 msgstr "Avaktivera"
 
-#: admin/themes/default/plugins/browse.php:122
+#: admin/themes/default/plugins/browse.php:126
 #: admin/themes/default/users/activate.php:30
 #: application/views/scripts/users/activate.php:27
 msgid "Activate"
 msgstr "Aktivera"
 
-#: admin/themes/default/plugins/browse.php:133
+#: admin/themes/default/plugins/browse.php:137
 #: admin/themes/default/plugins/confirm-uninstall.php:18
 msgid "Uninstall"
 msgstr "Avinstallera"
 
-#: admin/themes/default/plugins/browse.php:146
+#: admin/themes/default/plugins/browse.php:150
 #: application/forms/Install.php:178
 msgid "Install"
 msgstr "Installera"
 
-#: admin/themes/default/plugins/browse.php:158
+#: admin/themes/default/plugins/browse.php:162
 msgid ""
 "You do not have any plugins installed. Add them to the plugins directory to "
 "see them listed here."
@@ -1866,27 +1867,27 @@ msgstr "Posttyper"
 msgid "All"
 msgstr ""
 
-#: admin/themes/default/themes/browse.php:16
-#: admin/themes/default/themes/browse.php:57
+#: admin/themes/default/themes/browse.php:18
+#: admin/themes/default/themes/browse.php:63
 #, php-format
 msgid "Screenshot for %s Theme"
 msgstr "Skärmdump for %s tema"
 
-#: admin/themes/default/themes/browse.php:17
+#: admin/themes/default/themes/browse.php:19
 msgid "Configure Theme"
 msgstr "Anpassa tema"
 
-#: admin/themes/default/themes/browse.php:20
+#: admin/themes/default/themes/browse.php:22
 msgid "Current Theme"
 msgstr "Nuvarande tema"
 
-#: admin/themes/default/themes/browse.php:22
-#: admin/themes/default/themes/browse.php:62
+#: admin/themes/default/themes/browse.php:24
+#: admin/themes/default/themes/browse.php:68
 #, php-format
 msgid "By %s"
 msgstr "Efter %s"
 
-#: admin/themes/default/themes/browse.php:40
+#: admin/themes/default/themes/browse.php:46
 msgid ""
 "Add new themes by downloading them from the <a href=\"http://omeka.org/add-"
 "ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a "
@@ -1894,7 +1895,7 @@ msgid ""
 "target=\"_blank\">design your own</a>!"
 msgstr "Lägg till nya teman genom att hämta dem från <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Omekas temakatalog</a>, eller <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">designa ditt eget tema</a>!"
 
-#: admin/themes/default/themes/browse.php:59
+#: admin/themes/default/themes/browse.php:65
 msgid "Use this theme"
 msgstr "Använd detta tema"
 
@@ -2204,11 +2205,11 @@ msgstr "Detta kommer att radera elementsamlingen och dess relaterade element. Ob
 #: application/controllers/PluginsController.php:135
 #: application/controllers/PluginsController.php:184
 #: application/controllers/PluginsController.php:217
-#: application/controllers/PluginsController.php:321
+#: application/controllers/PluginsController.php:325
 #: application/controllers/SettingsController.php:104
 #: application/controllers/SettingsController.php:140
 #: application/controllers/SettingsController.php:177
-#: application/controllers/ThemesController.php:85
+#: application/controllers/ThemesController.php:89
 #: application/controllers/UsersController.php:312
 #: application/libraries/Omeka/Controller/AbstractActionController.php:183
 #: application/libraries/Omeka/Controller/AbstractActionController.php:224
@@ -2432,31 +2433,31 @@ msgstr "Tillägget %s uppgraderades!"
 msgid "The following error occurred while upgrading the %s plugin: "
 msgstr "Följande fel uppstod när tillägget %s uppgraderades:"
 
-#: application/controllers/PluginsController.php:295
+#: application/controllers/PluginsController.php:299
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
 msgstr "Tillägget kunde inte hittas i katalogen '%s'!"
 
-#: application/controllers/PluginsController.php:308
+#: application/controllers/PluginsController.php:312
 msgid "You must confirm the uninstall before proceeding."
 msgstr "Du måste bekräfta avinstallationen innan processen går vidare."
 
-#: application/controllers/PluginsController.php:327
+#: application/controllers/PluginsController.php:331
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
 msgstr "%s pluginen avinstallerades med framgång!"
 
-#: application/controllers/PluginsController.php:332
-#: application/controllers/PluginsController.php:337
+#: application/controllers/PluginsController.php:336
+#: application/controllers/PluginsController.php:341
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
 msgstr "Under avinstallationen av plugin %s hände följande fel:"
 
-#: application/controllers/PluginsController.php:366
+#: application/controllers/PluginsController.php:370
 msgid "No plugin name given."
 msgstr "Inget plugin angivet."
 
-#: application/controllers/PluginsController.php:379
+#: application/controllers/PluginsController.php:383
 #, php-format
 msgid "The plugin %s must be installed."
 msgstr "Plugin %s måste installeras."
@@ -2505,24 +2506,24 @@ msgstr "Ogiltig tagType angiven."
 msgid "Error occurred."
 msgstr ""
 
-#: application/controllers/ThemesController.php:28
+#: application/controllers/ThemesController.php:32
 msgid "Invalid form submission."
 msgstr "Ogiltig formulärdata."
 
-#: application/controllers/ThemesController.php:36
+#: application/controllers/ThemesController.php:40
 msgid "You have chosen an illegal theme name. Please select another theme."
 msgstr "Du har valt ett otillåtet tema. Vänligen välj ett annat tema."
 
-#: application/controllers/ThemesController.php:43
+#: application/controllers/ThemesController.php:47
 #, php-format
 msgid "This theme requires a newer version of Omeka (%s)."
 msgstr "Detta tema kräver en nyare version av Omeka (%s)."
 
-#: application/controllers/ThemesController.php:57
+#: application/controllers/ThemesController.php:61
 msgid "The theme has been successfully changed."
 msgstr "Temat ändrades!"
 
-#: application/controllers/ThemesController.php:82
+#: application/controllers/ThemesController.php:86
 msgid "The theme settings were successfully saved!"
 msgstr "Inställningarna för temat sparades!"
 
@@ -2992,7 +2993,7 @@ msgstr ""
 #, php-format
 msgid ""
 "Enter site key from %s. Both this and the private key must be filled in to "
-"secure public forms."
+"secure public forms. Keys must be for reCAPTCHA v2."
 msgstr ""
 
 #: application/forms/SecuritySettings.php:59
@@ -3003,7 +3004,7 @@ msgstr ""
 #, php-format
 msgid ""
 "Enter secret key from %s. Both this and the public key must be filled in to "
-"secure public forms."
+"secure public forms. Keys must be for reCAPTCHA v2."
 msgstr ""
 
 #: application/forms/SecuritySettings.php:67
@@ -3185,57 +3186,57 @@ msgstr "Kunde inte hitta filen %s!"
 msgid "No featured collections are available."
 msgstr "Inga utvalda samlingar finns tillgängliga."
 
-#: application/libraries/globals.php:1601
+#: application/libraries/globals.php:1602
 msgid "Select Below "
 msgstr "Välj nedan"
 
-#: application/libraries/globals.php:1644
+#: application/libraries/globals.php:1645
 msgid "Omeka RSS Feed"
 msgstr "Omeka RSS-feed"
 
-#: application/libraries/globals.php:1645
+#: application/libraries/globals.php:1646
 msgid "Omeka Atom Feed"
 msgstr "Omeka Atom-feed"
 
-#: application/libraries/globals.php:2306
+#: application/libraries/globals.php:2309
 msgid "No recent items available."
 msgstr "Inga senaste objekt finns tillgängliga"
 
-#: application/libraries/globals.php:2332
+#: application/libraries/globals.php:2335
 msgid "No featured items are available."
 msgstr "Inga utvalda objekt finns tillgängliga."
 
-#: application/libraries/globals.php:2393
+#: application/libraries/globals.php:2396
 msgid "View"
 msgstr "Listvy"
 
-#: application/libraries/globals.php:2455
+#: application/libraries/globals.php:2458
 #: application/models/Table/Collection.php:87
 #: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
 msgstr "Inga samlingar"
 
-#: application/libraries/globals.php:2574
+#: application/libraries/globals.php:2577
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2591
+#: application/libraries/globals.php:2594
 msgid "Next Item &rarr;"
 msgstr "Nästa post &rarr;"
 
-#: application/libraries/globals.php:2611
+#: application/libraries/globals.php:2614
 msgid "&larr; Previous Item"
 msgstr "&larr; Föregående post"
 
-#: application/libraries/globals.php:2792
+#: application/libraries/globals.php:2795
 msgid "Browse All"
 msgstr "Visa alla"
 
-#: application/libraries/globals.php:2797
+#: application/libraries/globals.php:2800
 msgid "Browse by Tag"
 msgstr "Bläddra via taggar"
 
-#: application/libraries/globals.php:3076
+#: application/libraries/globals.php:3079
 msgid "No tags are available."
 msgstr "Inga taggar tillgängliga."
 

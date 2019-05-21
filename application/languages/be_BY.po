@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2019-03-25 19:57+0000\n"
+"PO-Revision-Date: 2019-05-21 14:57+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Belarusian (Belarus) (http://www.transifex.com/omeka/omeka/language/be_BY/)\n"
 "MIME-Version: 1.0\n"
@@ -325,7 +325,7 @@ msgstr "Даследчык"
 #: admin/themes/default/appearance/edit-navigation.php:3
 #: admin/themes/default/appearance/edit-settings.php:2
 #: admin/themes/default/common/global-nav.php:11
-#: admin/themes/default/themes/browse.php:3
+#: admin/themes/default/themes/browse.php:5
 #: admin/themes/default/themes/config.php:3
 msgid "Appearance"
 msgstr "Знешні выгляд"
@@ -472,7 +472,7 @@ msgstr "Прагляд калекцый"
 #: admin/themes/default/collections/browse.php:2
 #: admin/themes/default/item-types/browse.php:2
 #: admin/themes/default/items/browse.php:3
-#: admin/themes/default/plugins/browse.php:3
+#: admin/themes/default/plugins/browse.php:5
 #: admin/themes/default/search/index.php:2
 #: admin/themes/default/tags/browse.php:6
 #: admin/themes/default/users/browse.php:2
@@ -686,7 +686,7 @@ msgstr ""
 
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
-#: admin/themes/default/plugins/browse.php:53
+#: admin/themes/default/plugins/browse.php:55
 #, php-format
 msgid "Version %s"
 msgstr "Версія %s"
@@ -701,7 +701,7 @@ msgid "Manage Site"
 msgstr "Кіраванне сайтам"
 
 #: admin/themes/default/common/global-nav.php:5
-#: admin/themes/default/plugins/browse.php:3
+#: admin/themes/default/plugins/browse.php:5
 msgid "Plugins"
 msgstr "Плагіны"
 
@@ -866,6 +866,7 @@ msgstr "Файл #%s"
 
 #: admin/themes/default/files/show.php:35
 #: application/libraries/globals.php:409
+#: application/views/scripts/files/show.php:22
 msgid "Item"
 msgstr "Дакумент"
 
@@ -890,7 +891,7 @@ msgid "Square Thumbnail"
 msgstr "Прамавугольнік зменшанай растравай выявы"
 
 #: admin/themes/default/files/show.php:52
-#: application/views/scripts/files/show.php:22
+#: application/views/scripts/files/show.php:27
 msgid "Format Metadata"
 msgstr "Фармат метаданых"
 
@@ -899,17 +900,17 @@ msgid "Filename"
 msgstr "Імя файла"
 
 #: admin/themes/default/files/show.php:56
-#: application/views/scripts/files/show.php:24
+#: application/views/scripts/files/show.php:29
 msgid "Original Filename"
 msgstr "Зыходнае імя файла"
 
 #: admin/themes/default/files/show.php:58
-#: application/views/scripts/files/show.php:29
+#: application/views/scripts/files/show.php:34
 msgid "File Size"
 msgstr "Памер файла"
 
 #: admin/themes/default/files/show.php:59
-#: application/views/scripts/files/show.php:30
+#: application/views/scripts/files/show.php:35
 #, php-format
 msgid "%s bytes"
 msgstr "%s байт"
@@ -923,22 +924,22 @@ msgid "Date Modified"
 msgstr "Дата змены"
 
 #: admin/themes/default/files/show.php:70
-#: application/views/scripts/files/show.php:34
+#: application/views/scripts/files/show.php:39
 msgid "Authentication"
 msgstr "Аўтэнтыфікацыя"
 
 #: admin/themes/default/files/show.php:76
-#: application/views/scripts/files/show.php:40
+#: application/views/scripts/files/show.php:45
 msgid "Type Metadata"
 msgstr "Тып метаданых"
 
 #: admin/themes/default/files/show.php:78
-#: application/views/scripts/files/show.php:42
+#: application/views/scripts/files/show.php:47
 msgid "Mime Type"
 msgstr "Тып Mime"
 
 #: admin/themes/default/files/show.php:80
-#: application/views/scripts/files/show.php:46
+#: application/views/scripts/files/show.php:51
 msgid "File Type / OS"
 msgstr "Тып файла / OS"
 
@@ -1285,8 +1286,8 @@ msgstr "Прагляд дакументаў"
 #: admin/themes/default/items/browse.php:19
 #: admin/themes/default/items/browse.php:144
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2411
-#: application/libraries/globals.php:2802
+#: application/libraries/globals.php:2414
+#: application/libraries/globals.php:2805
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "Пошук дакументаў"
@@ -1611,67 +1612,67 @@ msgstr "Прагляд дакументаў па метках"
 msgid "There are no tags to display. You must first tag some items."
 msgstr "Няма метак для паказу. Спачатку вы павінны адзначыць некалькі дакументаў."
 
-#: admin/themes/default/plugins/browse.php:27
+#: admin/themes/default/plugins/browse.php:29
 #, php-format
 msgid "This version of %1$s requires at least Omeka %2$s."
 msgstr "Гэта версія %1$s патрабуе прынамсі Omeka %2$s"
 
-#: admin/themes/default/plugins/browse.php:30
+#: admin/themes/default/plugins/browse.php:32
 #, php-format
 msgid ""
 "%1$s requires the following plugins to be installed, activated, and loaded: "
 "%2$s"
 msgstr "%1$s патрабуе , каб наступныя плагіны былі ўсталяваны, актываваны і загружаны: %2$s"
 
-#: admin/themes/default/plugins/browse.php:33
+#: admin/themes/default/plugins/browse.php:35
 msgid "This is not a valid plugin."
 msgstr "Гэта недапушчальны плагін"
 
-#: admin/themes/default/plugins/browse.php:58
+#: admin/themes/default/plugins/browse.php:60
 #, php-format
 msgid "by %s"
 msgstr "па %s"
 
-#: admin/themes/default/plugins/browse.php:66
-#: admin/themes/default/themes/browse.php:24
-#: admin/themes/default/themes/browse.php:63
+#: admin/themes/default/plugins/browse.php:68
+#: admin/themes/default/themes/browse.php:26
+#: admin/themes/default/themes/browse.php:69
 msgid "Get support"
 msgstr "Атрымаць падтрымку"
 
-#: admin/themes/default/plugins/browse.php:70
+#: admin/themes/default/plugins/browse.php:72
 #, php-format
 msgid "You have a new version of %s. Please upgrade!"
 msgstr "Вы атрымалі новую версію %s. Калі ласка, абнавіце!"
 
-#: admin/themes/default/plugins/browse.php:105
+#: admin/themes/default/plugins/browse.php:109
 msgid "Upgrade"
 msgstr "Абнавіць"
 
-#: admin/themes/default/plugins/browse.php:116
+#: admin/themes/default/plugins/browse.php:120
 msgid "Configure"
 msgstr "Канфігураваць"
 
-#: admin/themes/default/plugins/browse.php:122
+#: admin/themes/default/plugins/browse.php:126
 msgid "Deactivate"
 msgstr "Адключыць"
 
-#: admin/themes/default/plugins/browse.php:122
+#: admin/themes/default/plugins/browse.php:126
 #: admin/themes/default/users/activate.php:30
 #: application/views/scripts/users/activate.php:27
 msgid "Activate"
 msgstr "Уключыць"
 
-#: admin/themes/default/plugins/browse.php:133
+#: admin/themes/default/plugins/browse.php:137
 #: admin/themes/default/plugins/confirm-uninstall.php:18
 msgid "Uninstall"
 msgstr "Выдаліць"
 
-#: admin/themes/default/plugins/browse.php:146
+#: admin/themes/default/plugins/browse.php:150
 #: application/forms/Install.php:178
 msgid "Install"
 msgstr "Усталяваць"
 
-#: admin/themes/default/plugins/browse.php:158
+#: admin/themes/default/plugins/browse.php:162
 msgid ""
 "You do not have any plugins installed. Add them to the plugins directory to "
 "see them listed here."
@@ -1879,27 +1880,27 @@ msgstr "Тыпы запісаў"
 msgid "All"
 msgstr ""
 
-#: admin/themes/default/themes/browse.php:16
-#: admin/themes/default/themes/browse.php:57
+#: admin/themes/default/themes/browse.php:18
+#: admin/themes/default/themes/browse.php:63
 #, php-format
 msgid "Screenshot for %s Theme"
 msgstr "Здымак экрана для %s тэмы"
 
-#: admin/themes/default/themes/browse.php:17
+#: admin/themes/default/themes/browse.php:19
 msgid "Configure Theme"
 msgstr "Канфігураваць тэму"
 
-#: admin/themes/default/themes/browse.php:20
+#: admin/themes/default/themes/browse.php:22
 msgid "Current Theme"
 msgstr "Бягучая тэма"
 
-#: admin/themes/default/themes/browse.php:22
-#: admin/themes/default/themes/browse.php:62
+#: admin/themes/default/themes/browse.php:24
+#: admin/themes/default/themes/browse.php:68
 #, php-format
 msgid "By %s"
 msgstr "Па %s"
 
-#: admin/themes/default/themes/browse.php:40
+#: admin/themes/default/themes/browse.php:46
 msgid ""
 "Add new themes by downloading them from the <a href=\"http://omeka.org/add-"
 "ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a "
@@ -1907,7 +1908,7 @@ msgid ""
 "target=\"_blank\">design your own</a>!"
 msgstr "Дадайце новыя тэмы, загрузіўшы іх з <a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Каталог тэм Omeka</a>, альбо <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\"> стварыце сваю ўласную </a>!"
 
-#: admin/themes/default/themes/browse.php:59
+#: admin/themes/default/themes/browse.php:65
 msgid "Use this theme"
 msgstr "Выкарыстоўвайце гэтую тэму"
 
@@ -2217,11 +2218,11 @@ msgstr "Гэта прывядзе да выдалення набору элем�
 #: application/controllers/PluginsController.php:135
 #: application/controllers/PluginsController.php:184
 #: application/controllers/PluginsController.php:217
-#: application/controllers/PluginsController.php:321
+#: application/controllers/PluginsController.php:325
 #: application/controllers/SettingsController.php:104
 #: application/controllers/SettingsController.php:140
 #: application/controllers/SettingsController.php:177
-#: application/controllers/ThemesController.php:85
+#: application/controllers/ThemesController.php:89
 #: application/controllers/UsersController.php:312
 #: application/libraries/Omeka/Controller/AbstractActionController.php:183
 #: application/libraries/Omeka/Controller/AbstractActionController.php:224
@@ -2445,31 +2446,31 @@ msgstr "%s плагін быў паспяхова абноўлены!"
 msgid "The following error occurred while upgrading the %s plugin: "
 msgstr "Адбылася наступная памылка пры абнаўленні %s плагіна:"
 
-#: application/controllers/PluginsController.php:295
+#: application/controllers/PluginsController.php:299
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
 msgstr "Не ўдаецца знайсці гэты плагін у '%s' каталозе!"
 
-#: application/controllers/PluginsController.php:308
+#: application/controllers/PluginsController.php:312
 msgid "You must confirm the uninstall before proceeding."
 msgstr "Перад працягам вы павінны пацвердзіць выдаленне ."
 
-#: application/controllers/PluginsController.php:327
+#: application/controllers/PluginsController.php:331
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
 msgstr "%s плагін быў паспяхова выдалены!"
 
-#: application/controllers/PluginsController.php:332
-#: application/controllers/PluginsController.php:337
+#: application/controllers/PluginsController.php:336
+#: application/controllers/PluginsController.php:341
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
 msgstr "Адбылася наступная памылка пры выдаленні %s плагіна :"
 
-#: application/controllers/PluginsController.php:366
+#: application/controllers/PluginsController.php:370
 msgid "No plugin name given."
 msgstr "Плагін без назвы"
 
-#: application/controllers/PluginsController.php:379
+#: application/controllers/PluginsController.php:383
 #, php-format
 msgid "The plugin %s must be installed."
 msgstr "Плагін %s павінен быць усталяваны."
@@ -2518,24 +2519,24 @@ msgstr "Дадзены недапушчальны тып тэга."
 msgid "Error occurred."
 msgstr ""
 
-#: application/controllers/ThemesController.php:28
+#: application/controllers/ThemesController.php:32
 msgid "Invalid form submission."
 msgstr "Прадастаўлена памылковая форма."
 
-#: application/controllers/ThemesController.php:36
+#: application/controllers/ThemesController.php:40
 msgid "You have chosen an illegal theme name. Please select another theme."
 msgstr "Вы абралі недапушчальную назву тэмы. Калі ласка, абярыце іншую тэму."
 
-#: application/controllers/ThemesController.php:43
+#: application/controllers/ThemesController.php:47
 #, php-format
 msgid "This theme requires a newer version of Omeka (%s)."
 msgstr "Гэтая тэма патрабуе больш новай версіі Omeka (%s)."
 
-#: application/controllers/ThemesController.php:57
+#: application/controllers/ThemesController.php:61
 msgid "The theme has been successfully changed."
 msgstr "Тэма была паспяхова змененая."
 
-#: application/controllers/ThemesController.php:82
+#: application/controllers/ThemesController.php:86
 msgid "The theme settings were successfully saved!"
 msgstr "Налады тэмы былі паспяхова захаваны!"
 
@@ -3005,7 +3006,7 @@ msgstr ""
 #, php-format
 msgid ""
 "Enter site key from %s. Both this and the private key must be filled in to "
-"secure public forms."
+"secure public forms. Keys must be for reCAPTCHA v2."
 msgstr ""
 
 #: application/forms/SecuritySettings.php:59
@@ -3016,7 +3017,7 @@ msgstr ""
 #, php-format
 msgid ""
 "Enter secret key from %s. Both this and the public key must be filled in to "
-"secure public forms."
+"secure public forms. Keys must be for reCAPTCHA v2."
 msgstr ""
 
 #: application/forms/SecuritySettings.php:67
@@ -3198,57 +3199,57 @@ msgstr "Не атрымалася знайсці файл %s!"
 msgid "No featured collections are available."
 msgstr "Адзначаныя калекцыі адсутнічаюць."
 
-#: application/libraries/globals.php:1601
+#: application/libraries/globals.php:1602
 msgid "Select Below "
 msgstr "Выберыце ніжэй"
 
-#: application/libraries/globals.php:1644
+#: application/libraries/globals.php:1645
 msgid "Omeka RSS Feed"
 msgstr "Стужка RSS Omega"
 
-#: application/libraries/globals.php:1645
+#: application/libraries/globals.php:1646
 msgid "Omeka Atom Feed"
 msgstr "Стужка Atom Omeka"
 
-#: application/libraries/globals.php:2306
+#: application/libraries/globals.php:2309
 msgid "No recent items available."
 msgstr "Няма нядаўніх даступных дакументаў."
 
-#: application/libraries/globals.php:2332
+#: application/libraries/globals.php:2335
 msgid "No featured items are available."
 msgstr "Адзначаныя дакументы адсутнічаюць."
 
-#: application/libraries/globals.php:2393
+#: application/libraries/globals.php:2396
 msgid "View"
 msgstr "Рэжым прагляду"
 
-#: application/libraries/globals.php:2455
+#: application/libraries/globals.php:2458
 #: application/models/Table/Collection.php:87
 #: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
 msgstr "Няма калекцыі"
 
-#: application/libraries/globals.php:2574
+#: application/libraries/globals.php:2577
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2591
+#: application/libraries/globals.php:2594
 msgid "Next Item &rarr;"
 msgstr "Наступны дакумент &rarr;"
 
-#: application/libraries/globals.php:2611
+#: application/libraries/globals.php:2614
 msgid "&larr; Previous Item"
 msgstr "&larr; папярэдні дакумент"
 
-#: application/libraries/globals.php:2792
+#: application/libraries/globals.php:2795
 msgid "Browse All"
 msgstr "Прагледзець усе"
 
-#: application/libraries/globals.php:2797
+#: application/libraries/globals.php:2800
 msgid "Browse by Tag"
 msgstr "Прагляд па метках"
 
-#: application/libraries/globals.php:3076
+#: application/libraries/globals.php:3079
 msgid "No tags are available."
 msgstr "Няма даступных метак."
 

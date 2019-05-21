@@ -5,7 +5,7 @@
 # Translators:
 # Masaki Hidano <MasaGon@info-lounge.jp>, 2013
 # Masaki Hidano <MasaGon@info-lounge.jp>, 2013
-# Naosuke Okamoto, 2018
+# Naosuke Okamoto, 2018-2019
 # Naosuke Okamoto, 2018
 # Takayuki Ako <ako.t.aa@m.titech.ac.jp>, 2016
 # あこたかゆき <inactive+akotaka@transifex.com>, 2014
@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2019-03-25 19:57+0000\n"
+"PO-Revision-Date: 2019-05-21 14:57+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Japanese (http://www.transifex.com/omeka/omeka/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -332,7 +332,7 @@ msgstr "調査者"
 #: admin/themes/default/appearance/edit-navigation.php:3
 #: admin/themes/default/appearance/edit-settings.php:2
 #: admin/themes/default/common/global-nav.php:11
-#: admin/themes/default/themes/browse.php:3
+#: admin/themes/default/themes/browse.php:5
 #: admin/themes/default/themes/config.php:3
 msgid "Appearance"
 msgstr "表示"
@@ -479,7 +479,7 @@ msgstr "コレクションをブラウジング"
 #: admin/themes/default/collections/browse.php:2
 #: admin/themes/default/item-types/browse.php:2
 #: admin/themes/default/items/browse.php:3
-#: admin/themes/default/plugins/browse.php:3
+#: admin/themes/default/plugins/browse.php:5
 #: admin/themes/default/search/index.php:2
 #: admin/themes/default/tags/browse.php:6
 #: admin/themes/default/users/browse.php:2
@@ -686,11 +686,11 @@ msgstr "サポートフォーラム"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Back to top"
-msgstr ""
+msgstr "トップに戻る"
 
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
-#: admin/themes/default/plugins/browse.php:53
+#: admin/themes/default/plugins/browse.php:55
 #, php-format
 msgid "Version %s"
 msgstr "バージョン %s"
@@ -705,7 +705,7 @@ msgid "Manage Site"
 msgstr "サイトの管理"
 
 #: admin/themes/default/common/global-nav.php:5
-#: admin/themes/default/plugins/browse.php:3
+#: admin/themes/default/plugins/browse.php:5
 msgid "Plugins"
 msgstr "プラグイン"
 
@@ -870,6 +870,7 @@ msgstr "ファイル#%s"
 
 #: admin/themes/default/files/show.php:35
 #: application/libraries/globals.php:409
+#: application/views/scripts/files/show.php:22
 msgid "Item"
 msgstr "アイテム"
 
@@ -894,7 +895,7 @@ msgid "Square Thumbnail"
 msgstr "正方形のサムネイル"
 
 #: admin/themes/default/files/show.php:52
-#: application/views/scripts/files/show.php:22
+#: application/views/scripts/files/show.php:27
 msgid "Format Metadata"
 msgstr "媒体のメタデータ"
 
@@ -903,17 +904,17 @@ msgid "Filename"
 msgstr "ファイル名"
 
 #: admin/themes/default/files/show.php:56
-#: application/views/scripts/files/show.php:24
+#: application/views/scripts/files/show.php:29
 msgid "Original Filename"
 msgstr "オリジナルのファイル名"
 
 #: admin/themes/default/files/show.php:58
-#: application/views/scripts/files/show.php:29
+#: application/views/scripts/files/show.php:34
 msgid "File Size"
 msgstr "ファイルサイズ"
 
 #: admin/themes/default/files/show.php:59
-#: application/views/scripts/files/show.php:30
+#: application/views/scripts/files/show.php:35
 #, php-format
 msgid "%s bytes"
 msgstr "%s bytes"
@@ -927,22 +928,22 @@ msgid "Date Modified"
 msgstr "更新日"
 
 #: admin/themes/default/files/show.php:70
-#: application/views/scripts/files/show.php:34
+#: application/views/scripts/files/show.php:39
 msgid "Authentication"
 msgstr "認証"
 
 #: admin/themes/default/files/show.php:76
-#: application/views/scripts/files/show.php:40
+#: application/views/scripts/files/show.php:45
 msgid "Type Metadata"
 msgstr "メタデータタイプ"
 
 #: admin/themes/default/files/show.php:78
-#: application/views/scripts/files/show.php:42
+#: application/views/scripts/files/show.php:47
 msgid "Mime Type"
 msgstr "Mime Type"
 
 #: admin/themes/default/files/show.php:80
-#: application/views/scripts/files/show.php:46
+#: application/views/scripts/files/show.php:51
 msgid "File Type / OS"
 msgstr "File Type / OS"
 
@@ -1271,8 +1272,8 @@ msgstr "アイテム"
 #: admin/themes/default/items/browse.php:19
 #: admin/themes/default/items/browse.php:144
 #: admin/themes/default/items/search.php:2
-#: application/libraries/globals.php:2411
-#: application/libraries/globals.php:2802
+#: application/libraries/globals.php:2414
+#: application/libraries/globals.php:2805
 #: application/views/scripts/items/search.php:2
 msgid "Search Items"
 msgstr "アイテムを検索"
@@ -1594,67 +1595,67 @@ msgstr "タグでアイテムを見る"
 msgid "There are no tags to display. You must first tag some items."
 msgstr "表示するタグがありません。はじめにアイテムにタグ付をしてください。"
 
-#: admin/themes/default/plugins/browse.php:27
+#: admin/themes/default/plugins/browse.php:29
 #, php-format
 msgid "This version of %1$s requires at least Omeka %2$s."
 msgstr "このバージョンの %1$s には、 Omeka %2$s以上が必要です。"
 
-#: admin/themes/default/plugins/browse.php:30
+#: admin/themes/default/plugins/browse.php:32
 #, php-format
 msgid ""
 "%1$s requires the following plugins to be installed, activated, and loaded: "
 "%2$s"
 msgstr "%1$sは次のプラグインをインストール、有効化、ロードする必要があります。: %2$s"
 
-#: admin/themes/default/plugins/browse.php:33
+#: admin/themes/default/plugins/browse.php:35
 msgid "This is not a valid plugin."
 msgstr "有効なプラグインではありません。"
 
-#: admin/themes/default/plugins/browse.php:58
+#: admin/themes/default/plugins/browse.php:60
 #, php-format
 msgid "by %s"
 msgstr "by %s"
 
-#: admin/themes/default/plugins/browse.php:66
-#: admin/themes/default/themes/browse.php:24
-#: admin/themes/default/themes/browse.php:63
+#: admin/themes/default/plugins/browse.php:68
+#: admin/themes/default/themes/browse.php:26
+#: admin/themes/default/themes/browse.php:69
 msgid "Get support"
 msgstr "サポートを得る"
 
-#: admin/themes/default/plugins/browse.php:70
+#: admin/themes/default/plugins/browse.php:72
 #, php-format
 msgid "You have a new version of %s. Please upgrade!"
 msgstr "新しいバージョンの%sがあります。アップグレードしてください。"
 
-#: admin/themes/default/plugins/browse.php:105
+#: admin/themes/default/plugins/browse.php:109
 msgid "Upgrade"
 msgstr "アップグレード"
 
-#: admin/themes/default/plugins/browse.php:116
+#: admin/themes/default/plugins/browse.php:120
 msgid "Configure"
 msgstr "設定"
 
-#: admin/themes/default/plugins/browse.php:122
+#: admin/themes/default/plugins/browse.php:126
 msgid "Deactivate"
 msgstr "停止"
 
-#: admin/themes/default/plugins/browse.php:122
+#: admin/themes/default/plugins/browse.php:126
 #: admin/themes/default/users/activate.php:30
 #: application/views/scripts/users/activate.php:27
 msgid "Activate"
 msgstr "有効化"
 
-#: admin/themes/default/plugins/browse.php:133
+#: admin/themes/default/plugins/browse.php:137
 #: admin/themes/default/plugins/confirm-uninstall.php:18
 msgid "Uninstall"
 msgstr "アンインストール"
 
-#: admin/themes/default/plugins/browse.php:146
+#: admin/themes/default/plugins/browse.php:150
 #: application/forms/Install.php:178
 msgid "Install"
 msgstr "インストール"
 
-#: admin/themes/default/plugins/browse.php:158
+#: admin/themes/default/plugins/browse.php:162
 msgid ""
 "You do not have any plugins installed. Add them to the plugins directory to "
 "see them listed here."
@@ -1862,27 +1863,27 @@ msgstr "レコードのタイプ"
 msgid "All"
 msgstr "全て"
 
-#: admin/themes/default/themes/browse.php:16
-#: admin/themes/default/themes/browse.php:57
+#: admin/themes/default/themes/browse.php:18
+#: admin/themes/default/themes/browse.php:63
 #, php-format
 msgid "Screenshot for %s Theme"
 msgstr "テーマ「%s」のスクリーンショット"
 
-#: admin/themes/default/themes/browse.php:17
+#: admin/themes/default/themes/browse.php:19
 msgid "Configure Theme"
 msgstr "テーマの設定"
 
-#: admin/themes/default/themes/browse.php:20
+#: admin/themes/default/themes/browse.php:22
 msgid "Current Theme"
 msgstr "現在のテーマ"
 
-#: admin/themes/default/themes/browse.php:22
-#: admin/themes/default/themes/browse.php:62
+#: admin/themes/default/themes/browse.php:24
+#: admin/themes/default/themes/browse.php:68
 #, php-format
 msgid "By %s"
 msgstr "By %s"
 
-#: admin/themes/default/themes/browse.php:40
+#: admin/themes/default/themes/browse.php:46
 msgid ""
 "Add new themes by downloading them from the <a href=\"http://omeka.org/add-"
 "ons/themes/\" target=\"_blank\">Omeka Theme Directory</a>, or <a "
@@ -1890,7 +1891,7 @@ msgid ""
 "target=\"_blank\">design your own</a>!"
 msgstr "<a href=\"http://omeka.org/add-ons/themes/\" target=\"_blank\">Omeka テーマディレクトリ</a>から新しいテーマをダウンロードするか、 <a href=\"http://omeka.org/codex/Theme_Writing_Best_Practices\" target=\"_blank\">自分でデザイン</a>してください！"
 
-#: admin/themes/default/themes/browse.php:59
+#: admin/themes/default/themes/browse.php:65
 msgid "Use this theme"
 msgstr "このテーマを使う"
 
@@ -2200,11 +2201,11 @@ msgstr "この操作を行うと、この要素セットとそれに割り当て
 #: application/controllers/PluginsController.php:135
 #: application/controllers/PluginsController.php:184
 #: application/controllers/PluginsController.php:217
-#: application/controllers/PluginsController.php:321
+#: application/controllers/PluginsController.php:325
 #: application/controllers/SettingsController.php:104
 #: application/controllers/SettingsController.php:140
 #: application/controllers/SettingsController.php:177
-#: application/controllers/ThemesController.php:85
+#: application/controllers/ThemesController.php:89
 #: application/controllers/UsersController.php:312
 #: application/libraries/Omeka/Controller/AbstractActionController.php:183
 #: application/libraries/Omeka/Controller/AbstractActionController.php:224
@@ -2428,31 +2429,31 @@ msgstr "プラグイン %s が無事アップグレードされました。"
 msgid "The following error occurred while upgrading the %s plugin: "
 msgstr "プラグイン %s をアップグレードする際に次のエラーが発生しました。"
 
-#: application/controllers/PluginsController.php:295
+#: application/controllers/PluginsController.php:299
 #, php-format
 msgid "The plugin could not be found in the '%s' directory!"
 msgstr "%s ディレクトリーにプラグイン見つかりません。"
 
-#: application/controllers/PluginsController.php:308
+#: application/controllers/PluginsController.php:312
 msgid "You must confirm the uninstall before proceeding."
 msgstr "次に進む前にアンインストールを確認して下さい。"
 
-#: application/controllers/PluginsController.php:327
+#: application/controllers/PluginsController.php:331
 #, php-format
 msgid "The %s plugin was successfully uninstalled!"
 msgstr "プラグイン %s が無事アンインストールされました。"
 
-#: application/controllers/PluginsController.php:332
-#: application/controllers/PluginsController.php:337
+#: application/controllers/PluginsController.php:336
+#: application/controllers/PluginsController.php:341
 #, php-format
 msgid "The following error occurred while uninstalling the %s plugin: "
 msgstr "プラグイン %s をインストール中に次のエラーが発生しました。"
 
-#: application/controllers/PluginsController.php:366
+#: application/controllers/PluginsController.php:370
 msgid "No plugin name given."
 msgstr "プラグインの名前がありません。"
 
-#: application/controllers/PluginsController.php:379
+#: application/controllers/PluginsController.php:383
 #, php-format
 msgid "The plugin %s must be installed."
 msgstr "プラグイン %s がインストールされている必要があります。"
@@ -2501,24 +2502,24 @@ msgstr "指定されたタグタイプが無効です。"
 msgid "Error occurred."
 msgstr "エラーが発生しました。"
 
-#: application/controllers/ThemesController.php:28
+#: application/controllers/ThemesController.php:32
 msgid "Invalid form submission."
 msgstr "フォームの送信が無効です。"
 
-#: application/controllers/ThemesController.php:36
+#: application/controllers/ThemesController.php:40
 msgid "You have chosen an illegal theme name. Please select another theme."
 msgstr "間違ったテーマを選択しました。他のテーマを選択してください。"
 
-#: application/controllers/ThemesController.php:43
+#: application/controllers/ThemesController.php:47
 #, php-format
 msgid "This theme requires a newer version of Omeka (%s)."
 msgstr "このテーマには、新しいバージョンのOmeka (%s) が必要です。"
 
-#: application/controllers/ThemesController.php:57
+#: application/controllers/ThemesController.php:61
 msgid "The theme has been successfully changed."
 msgstr "テーマの変更に成功しました！"
 
-#: application/controllers/ThemesController.php:82
+#: application/controllers/ThemesController.php:86
 msgid "The theme settings were successfully saved!"
 msgstr "テーマ設定の保存に成功しました。"
 
@@ -2988,8 +2989,8 @@ msgstr "reCAPTCHAサイトキー"
 #, php-format
 msgid ""
 "Enter site key from %s. Both this and the private key must be filled in to "
-"secure public forms."
-msgstr "%s からサイトキーを入力してください。 これと秘密鍵の両方は、公開されたフォームを保護するために記入する必要があります。"
+"secure public forms. Keys must be for reCAPTCHA v2."
+msgstr ""
 
 #: application/forms/SecuritySettings.php:59
 msgid "reCAPTCHA Secret Key"
@@ -2999,8 +3000,8 @@ msgstr "reCAPTCHAシークレットキー"
 #, php-format
 msgid ""
 "Enter secret key from %s. Both this and the public key must be filled in to "
-"secure public forms."
-msgstr "%sの秘密鍵を入力してください。 公開書類を保護するためには、この鍵と公開鍵の両方を記入する必要があります。"
+"secure public forms. Keys must be for reCAPTCHA v2."
+msgstr ""
 
 #: application/forms/SecuritySettings.php:67
 msgid ""
@@ -3181,57 +3182,57 @@ msgstr "ファイル %s が見つかりませんでした！"
 msgid "No featured collections are available."
 msgstr "特集コレクションはありません。"
 
-#: application/libraries/globals.php:1601
+#: application/libraries/globals.php:1602
 msgid "Select Below "
 msgstr "下記より選択"
 
-#: application/libraries/globals.php:1644
+#: application/libraries/globals.php:1645
 msgid "Omeka RSS Feed"
 msgstr "Omeka RSS フィード"
 
-#: application/libraries/globals.php:1645
+#: application/libraries/globals.php:1646
 msgid "Omeka Atom Feed"
 msgstr "Omeka Atom フィード"
 
-#: application/libraries/globals.php:2306
+#: application/libraries/globals.php:2309
 msgid "No recent items available."
 msgstr "最近のアイテムはありません。"
 
-#: application/libraries/globals.php:2332
+#: application/libraries/globals.php:2335
 msgid "No featured items are available."
 msgstr "注目アイテムはありません。"
 
-#: application/libraries/globals.php:2393
+#: application/libraries/globals.php:2396
 msgid "View"
 msgstr "見る"
 
-#: application/libraries/globals.php:2455
+#: application/libraries/globals.php:2458
 #: application/models/Table/Collection.php:87
 #: application/views/helpers/ItemSearchFilters.php:49
 msgid "No Collection"
 msgstr "コレクションがありません"
 
-#: application/libraries/globals.php:2574
+#: application/libraries/globals.php:2577
 msgid "RSS"
 msgstr "RSS"
 
-#: application/libraries/globals.php:2591
+#: application/libraries/globals.php:2594
 msgid "Next Item &rarr;"
 msgstr "次のアイテム &rarr;"
 
-#: application/libraries/globals.php:2611
+#: application/libraries/globals.php:2614
 msgid "&larr; Previous Item"
 msgstr "&larr; 前のアイテム"
 
-#: application/libraries/globals.php:2792
+#: application/libraries/globals.php:2795
 msgid "Browse All"
 msgstr "すべて"
 
-#: application/libraries/globals.php:2797
+#: application/libraries/globals.php:2800
 msgid "Browse by Tag"
 msgstr "タグ"
 
-#: application/libraries/globals.php:3076
+#: application/libraries/globals.php:3079
 msgid "No tags are available."
 msgstr "タグがありません。"
 
