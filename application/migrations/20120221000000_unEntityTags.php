@@ -24,7 +24,7 @@ class unEntityTags extends Omeka_Db_Migration_AbstractMigration
 DELETE t1 FROM `{$this->db->Taggings}` t1
 INNER JOIN `{$this->db->Taggings}` t2
 USING (relation_id, tag_id, type)
-WHERE t1.td > t2.id
+WHERE t1.id > t2.id
 SQL
 );
         $this->db->query(<<<SQL
