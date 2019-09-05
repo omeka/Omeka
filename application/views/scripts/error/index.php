@@ -30,7 +30,7 @@
                 <pre id="backtrace"><?php echo htmlspecialchars($e); ?></pre>
                 <?php endif; ?>
             <?php else: ?>
-                <p><?php echo __('To learn how to see more detailed information about this error, see the Omeka Codex page on <a href="http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/">retrieving error messages</a>.'); ?>
+                <p><?php echo __('To learn how to see more detailed information about this error, see the Omeka Classic User Manual page on <a href="http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/">retrieving error messages</a>.'); ?>
                 </p>
             <?php endif; ?>
         </div>
