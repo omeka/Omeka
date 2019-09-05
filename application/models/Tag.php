@@ -11,7 +11,7 @@
  * 
  * @package Omeka\Record
  */
-class Tag extends Omeka_Record_AbstractRecord
+class Tag extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Interface
 {
     /**
      * The tag text.
@@ -117,5 +117,17 @@ class Tag extends Omeka_Record_AbstractRecord
                 }
             }
         }
+    }
+
+    /**
+     * Identify Tag records as relating to the Tags ACL resource.
+     *
+     * Required by Zend_Acl_Resource_Interface.
+     *
+     * @return string
+     */
+    public function getResourceId()
+    {
+        return 'Tags';
     }
 }
