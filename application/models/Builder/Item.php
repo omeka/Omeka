@@ -166,6 +166,8 @@ class Builder_Item extends Omeka_Record_Builder_AbstractBuilder
      *          <li>'metadata' => OPTIONAL This could contain any metadata that needs to be
      * associated with the file.  This should be indexed in the same fashion
      * as for items.  See ActsAsElementText::addTextsByArray()</li>
+     *          <li>`order` => OPTIONAL The position of the file among the set of
+     * files for this item.</li>
      *      </ul></li>
      * </ul>
      * @param array $options OPTIONAL May contain the following flags where

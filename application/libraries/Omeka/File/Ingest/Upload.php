@@ -106,8 +106,18 @@ class Omeka_File_Ingest_Upload extends Omeka_File_Ingest_AbstractIngest
             $this->_buildAdapter();
         }
 
+        if (is_array($fileInfo) && array_key_exists('source', $fileInfo)) {
+            $fileKey = $fileInfo['source'];
+        } else {
+            $fileKey = $fileInfo;
+        }
+
+        if (!is_string($fileKey)) {
+            throw new Omeka_File_Ingest_Exception('File info is incorrectly formatted!');
+        }
+
         // Grab the info from $_FILES array (prior to receiving the files).
-        $fileInfoArray = $this->_adapter->getFileInfo($fileInfo);
+        $fileInfoArray = $this->_adapter->getFileInfo($fileKey);
 
         // Include the index of the form so that we can use that if necessary.
         foreach ($fileInfoArray as $index => $info) {
@@ -115,6 +125,17 @@ class Omeka_File_Ingest_Upload extends Omeka_File_Ingest_AbstractIngest
             // around (not the form index).
             $info['form_index'] = $index;
             $fileInfoArray[$index] = $info;
+        }
+
+        // Only if the upload represents a single file, pass along extra
+        // file data, if given
+        if (is_array($fileInfo) && count($fileInfoArray) === 1) {
+            if (array_key_exists('metadata', $fileInfo)) {
+                $fileInfoArray[$index]['metadata'] = $fileInfo['metadata'];
+            }
+            if (array_key_exists('order', $fileInfo)) {
+                $fileInfoArray[$index]['order'] = $fileInfo['order'];
+            }
         }
         return $fileInfoArray;
     }

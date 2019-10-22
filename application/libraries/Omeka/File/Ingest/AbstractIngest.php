@@ -179,7 +179,9 @@ abstract class Omeka_File_Ingest_AbstractIngest
                 if ($fileDestinationPath) {
                     $fileMetadata = isset($file['metadata'])
                         ? $file['metadata'] : array();
-                    $fileObjs[] = $this->_createFile($fileDestinationPath, $originalFileName, $fileMetadata);
+                    $fileOrder = isset($file['order'])
+                        ? $file['order'] : null;
+                    $fileObjs[] = $this->_createFile($fileDestinationPath, $originalFileName, $fileMetadata, $fileOrder);
                 }
             } catch (Omeka_File_Ingest_InvalidException $e) {
                 if ($this->_ignoreIngestErrors()) {
@@ -230,10 +232,11 @@ abstract class Omeka_File_Ingest_AbstractIngest
      * usually be displayed to the end user.
      * @param array $elementMetadata See ActsAsElementText::addElementTextsByArray()
      * for more information about the format of this array.
+     * @param int|null $order Position of the file among the item's set of files
      * @uses ActsAsElementText::addElementTextsByArray()
      * @return File
      */
-    private function _createFile($newFilePath, $oldFilename, $elementMetadata = array())
+    private function _createFile($newFilePath, $oldFilename, $elementMetadata = array(), $order = null)
     {
         // Normally, the MIME type validator sets the type to this class's
         // static $mimeType property during validation. If that validator has
@@ -256,6 +259,10 @@ abstract class Omeka_File_Ingest_AbstractIngest
 
             if ($elementMetadata) {
                 $file->addElementTextsByArray($elementMetadata);
+            }
+
+            if ($order) {
+                $file->order = $order;
             }
 
             fire_plugin_hook('after_ingest_file', array('file' => $file, 'item' => $this->_item));

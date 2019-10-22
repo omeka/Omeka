@@ -59,17 +59,19 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter implements Omeka_Record_Ap
     }
 
     /**
-     * Set element text data to a record.
-     * 
-     * The record must initialize the ElementText mixin.
-     * 
-     * @param Omeka_Record_AbstractRecord $record
-     * @param mixed $data
+     * Given input API-formatted element text data, convert it to a format
+     * suitable for addElementTextsByArray.
+     *
+     * If the element texts key is missing (rather than set to an empty array)
+     * then this method returns null.
+     *
+     * @param array $data
+     * @return array|null
      */
-    public function setElementTextData(Omeka_Record_AbstractRecord $record, $data)
+    public function extractElementTextData($data)
     {
         if (!isset($data->element_texts) || !is_array($data->element_texts)) {
-            return;
+            return null;
         }
         $elementTexts = array();
         foreach ($data->element_texts as $et) {
@@ -87,6 +89,23 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter implements Omeka_Record_Ap
                 $elementText['text'] = $et->text;
             }
             $elementTexts[] = $elementText;
+        }
+        return $elementTexts;
+    }
+
+    /**
+     * Set element text data to a record.
+     *
+     * The record must initialize the ElementText mixin.
+     *
+     * @param Omeka_Record_AbstractRecord $record
+     * @param mixed $data
+     */
+    public function setElementTextData(Omeka_Record_AbstractRecord $record, $data)
+    {
+        $elementTexts = $this->getElementTextDataFromPost($data);
+        if ($elementTexts === null) {
+            return;
         }
         $record->addElementTextsByArray($elementTexts);
         $record->setReplaceElementTexts();

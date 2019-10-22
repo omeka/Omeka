@@ -30,14 +30,7 @@ class FilesController extends ApiController
     public function postAction()
     {
         $bootstrap = Zend_Registry::get('bootstrap');
-
-        // To avoid race conditions when saving the file record, the default job
-        // dispatcher must be synchronous. Otherwise the data added by the api
-        // adapter may be overwritten by the asynchronous job process.
-        $defaultDispatcher = $bootstrap->config->jobs->dispatcher->default;
-        if ('Omeka_Job_Dispatcher_Adapter_Synchronous' != $defaultDispatcher) {
-            throw new Omeka_Controller_Exception_Api('Invalid request. The default job dispatcher must be synchronous.', 500);
-        }
+        $adapter = $this->_getRecordAdapter('File');
 
         // Check for valid file.
         if (!isset($_FILES[self::FILE_NAME]['name']) || is_array($_FILES[self::FILE_NAME]['name'])) {
@@ -69,21 +62,15 @@ class FilesController extends ApiController
 
         $builder = new Builder_Item($db);
         $builder->setRecord($item);
-        $files = $builder->addFiles('Upload', self::FILE_NAME);
+        $fileInfo['source'] = self::FILE_NAME;
+        $fileInfo['metadata'] = $adapter->extractElementTextData($data);
+        if (isset($data->order)) {
+            $fileInfo['order'] = $data->order;
+        }
+        $files = $builder->addFiles('Upload', $fileInfo);
         $record = $this->_helper->db->getTable('File')->find($files[0]->id);
 
-        // Set the POST data to the record using the record adapter.
-        $this->_getRecordAdapter('File')->setPostData($record, $data);
-        if (!$record->save(false)) {
-            throw new Omeka_Controller_Exception_Api('Error when saving record.',
-                400, $record->getErrors()->get());
-        }
-
-        $data = $this->_getRepresentation(
-            $this->_getRecordAdapter('File'),
-            $this->_helper->db->getTable('File')->find($record->id),
-            'files'
-        );
+        $data = $this->_getRepresentation($adapter, $record, 'files');
         $this->getResponse()->setHttpResponseCode(201);
         $this->getResponse()->setHeader('Location', $data['url']);
         $this->_helper->jsonApi($data);
