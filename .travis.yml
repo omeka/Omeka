@@ -21,6 +21,9 @@ matrix:
     - php: 7.4
       dist: bionic
 
+services:
+  - mysql
+
 sudo: false
 
 before_script:
@@ -33,5 +36,5 @@ before_script:
   - sed -i 's/paths.imagemagick = ""/paths.imagemagick = "\/usr\/bin\/"/' application/tests/config.ini
 
 script:
-  - if [[ ${TRAVIS_PHP_VERSION:0:1} == "7" ]]; then composer install; fi;
-  - cd application/tests && if [[ ${TRAVIS_PHP_VERSION:0:1} == "7" ]]; then ../../vendor/bin/phpunit; else phpunit; fi;
+  - composer install
+  - cd application/tests && ../../vendor/bin/phpunit
