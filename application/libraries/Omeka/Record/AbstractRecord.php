@@ -28,7 +28,7 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
      *
      * @var Omeka_Validate_Errors 
      */
-    private $_errors = array();
+    private $_errors;
 
     /**
      * An in-memory cache for related objects that have been retrieved
@@ -423,7 +423,7 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
         } else {
             // Only keep the first error that gets added, b/c subsequent
             // errors may be directly related or otherwise redundant
-            if (!array_key_exists($field, $this->_errors)) {
+            if (!$this->_errors->offsetExists($field)) {
                 $this->_errors[$field] = $msg;
             }
         }
@@ -748,7 +748,7 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
     {
         $post = new ArrayObject($this->filterPostData($post));
 
-        if (array_key_exists('id', $post)) {
+        if ($post->offsetExists('id')) {
             unset($post['id']);
         }
 
