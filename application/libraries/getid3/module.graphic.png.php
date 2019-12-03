@@ -1,11 +1,11 @@
 <?php
+
 /////////////////////////////////////////////////////////////////
 /// getID3() by James Heinrich <info@getid3.org>               //
-//  available at http://getid3.sourceforge.net                 //
-//            or http://www.getid3.org                         //
-//          also https://github.com/JamesHeinrich/getID3       //
-/////////////////////////////////////////////////////////////////
-// See readme.txt for more details                             //
+//  available at https://github.com/JamesHeinrich/getID3       //
+//            or https://www.getid3.org                        //
+//            or http://getid3.sourceforge.net                 //
+//  see readme.txt for more details                            //
 /////////////////////////////////////////////////////////////////
 //                                                             //
 // module.graphic.png.php                                      //
@@ -17,8 +17,17 @@
 
 class getid3_png extends getid3_handler
 {
-	public $max_data_bytes = 10000000; // if data chunk is larger than this do not read it completely (getID3 only needs the first few dozen bytes for parsing)
+	/**
+	 * If data chunk is larger than this do not read it completely (getID3 only needs the first
+	 * few dozen bytes for parsing).
+	 *
+	 * @var int
+	 */
+	public $max_data_bytes = 10000000;
 
+	/**
+	 * @return bool
+	 */
 	public function Analyze() {
 
 		$info = &$this->getid3->info;
@@ -39,7 +48,7 @@ class getid3_png extends getid3_handler
 		$offset += 8;
 
 		if ($PNGidentifier != "\x89\x50\x4E\x47\x0D\x0A\x1A\x0A") {
-			$info['error'][] = 'First 8 bytes of file ('.getid3_lib::PrintHexBytes($PNGidentifier).') did not match expected PNG identifier';
+			$this->error('First 8 bytes of file ('.getid3_lib::PrintHexBytes($PNGidentifier).') did not match expected PNG identifier');
 			unset($info['fileformat']);
 			return false;
 		}
@@ -47,7 +56,7 @@ class getid3_png extends getid3_handler
 		while ((($this->ftell() - (strlen($PNGfiledata) - $offset)) < $info['filesize'])) {
 			$chunk['data_length'] = getid3_lib::BigEndian2Int(substr($PNGfiledata, $offset, 4));
 			if ($chunk['data_length'] === false) {
-				$info['error'][] = 'Failed to read data_length at offset '.$offset;
+				$this->error('Failed to read data_length at offset '.$offset);
 				return false;
 			}
 			$offset += 4;
@@ -56,7 +65,7 @@ class getid3_png extends getid3_handler
 				if (strlen($PNGfiledata) < $this->max_data_bytes) {
 					$PNGfiledata .= $this->fread($this->getid3->fread_buffer_size());
 				} else {
-					$info['warning'][] = 'At offset '.$offset.' chunk "'.substr($PNGfiledata, $offset, 4).'" exceeded max_data_bytes value of '.$this->max_data_bytes.', data chunk will be truncated at '.(strlen($PNGfiledata) - 8).' bytes';
+					$this->warning('At offset '.$offset.' chunk "'.substr($PNGfiledata, $offset, 4).'" exceeded max_data_bytes value of '.$this->max_data_bytes.', data chunk will be truncated at '.(strlen($PNGfiledata) - 8).' bytes');
 					break;
 				}
 			}
@@ -137,10 +146,11 @@ class getid3_png extends getid3_handler
 
 						case 4:
 						case 6:
-							$info['error'][] = 'Invalid color_type in tRNS chunk: '.$thisfile_png['IHDR']['raw']['color_type'];
+							$this->error('Invalid color_type in tRNS chunk: '.$thisfile_png['IHDR']['raw']['color_type']);
+							break;
 
 						default:
-							$info['warning'][] = 'Unhandled color_type in tRNS chunk: '.$thisfile_png['IHDR']['raw']['color_type'];
+							$this->warning('Unhandled color_type in tRNS chunk: '.$thisfile_png['IHDR']['raw']['color_type']);
 							break;
 					}
 					break;
@@ -434,23 +444,69 @@ class getid3_png extends getid3_handler
 					$thisfile_png_chunk_type_text[$idatinformationfieldindex]['header'] = $chunk;
 					break;
 
-
 				case 'IEND': // Image Trailer
 					$thisfile_png_chunk_type_text['header'] = $chunk;
 					break;
 
+				case 'acTL': // Animation Control chunk
+					// https://wiki.mozilla.org/APNG_Specification#.60acTL.60:_The_Animation_Control_Chunk
+					$thisfile_png['animation']['num_frames'] = getid3_lib::BigEndian2Int(substr($chunk['data'], 0, 4)); // Number of frames
+					$thisfile_png['animation']['num_plays']  = getid3_lib::BigEndian2Int(substr($chunk['data'], 4, 4)); // Number of times to loop this APNG.  0 indicates infinite looping.
+
+					unset($chunk['data']);
+					$thisfile_png_chunk_type_text['header'] = $chunk;
+					break;
+
+				case 'fcTL': // Frame Control chunk
+					// https://wiki.mozilla.org/APNG_Specification#.60fcTL.60:_The_Frame_Control_Chunk
+					$fcTL = array();
+					$fcTL['sequence_number'] = getid3_lib::BigEndian2Int(substr($chunk['data'],  0, 4)); // Sequence number of the animation chunk, starting from 0
+					$fcTL['width']           = getid3_lib::BigEndian2Int(substr($chunk['data'],  4, 4)); // Width of the following frame
+					$fcTL['height']          = getid3_lib::BigEndian2Int(substr($chunk['data'],  8, 4)); // Height of the following frame
+					$fcTL['x_offset']        = getid3_lib::BigEndian2Int(substr($chunk['data'], 12, 4)); // X position at which to render the following frame
+					$fcTL['y_offset']        = getid3_lib::BigEndian2Int(substr($chunk['data'], 16, 4)); // Y position at which to render the following frame
+					$fcTL['delay_num']       = getid3_lib::BigEndian2Int(substr($chunk['data'], 20, 2)); // Frame delay fraction numerator
+					$fcTL['delay_den']       = getid3_lib::BigEndian2Int(substr($chunk['data'], 22, 2)); // Frame delay fraction numerator
+					$fcTL['dispose_op']      = getid3_lib::BigEndian2Int(substr($chunk['data'], 23, 1)); // Type of frame area disposal to be done after rendering this frame
+					$fcTL['blend_op']        = getid3_lib::BigEndian2Int(substr($chunk['data'], 23, 1)); // Type of frame area rendering for this frame
+					if ($fcTL['delay_den']) {
+						$fcTL['delay'] = $fcTL['delay_num'] / $fcTL['delay_den'];
+					}
+					$thisfile_png['animation']['fcTL'][$fcTL['sequence_number']] = $fcTL;
+
+					unset($chunk['data']);
+					$thisfile_png_chunk_type_text['header'] = $chunk;
+					break;
+
+				case 'fdAT': // Frame Data chunk
+					// https://wiki.mozilla.org/APNG_Specification#.60fcTL.60:_The_Frame_Control_Chunk
+					// "The `fdAT` chunk has the same purpose as an `IDAT` chunk. It has the same structure as an `IDAT` chunk, except preceded by a sequence number."
+					unset($chunk['data']);
+					$thisfile_png_chunk_type_text['header'] = $chunk;
+					break;
 
 				default:
 					//unset($chunk['data']);
 					$thisfile_png_chunk_type_text['header'] = $chunk;
-					$info['warning'][] = 'Unhandled chunk type: '.$chunk['type_text'];
+					$this->warning('Unhandled chunk type: '.$chunk['type_text']);
 					break;
 			}
 		}
-
+		if (!empty($thisfile_png['animation']['num_frames']) && !empty($thisfile_png['animation']['fcTL'])) {
+			$info['video']['dataformat'] = 'apng';
+			$info['playtime_seconds'] = 0;
+			foreach ($thisfile_png['animation']['fcTL'] as $seqno => $fcTL) {
+				$info['playtime_seconds'] += $fcTL['delay'];
+			}
+		}
 		return true;
 	}
 
+	/**
+	 * @param int $sRGB
+	 *
+	 * @return string
+	 */
 	public function PNGsRGBintentLookup($sRGB) {
 		static $PNGsRGBintentLookup = array(
 			0 => 'Perceptual',
@@ -461,6 +517,11 @@ class getid3_png extends getid3_handler
 		return (isset($PNGsRGBintentLookup[$sRGB]) ? $PNGsRGBintentLookup[$sRGB] : 'invalid');
 	}
 
+	/**
+	 * @param int $compressionmethod
+	 *
+	 * @return string
+	 */
 	public function PNGcompressionMethodLookup($compressionmethod) {
 		static $PNGcompressionMethodLookup = array(
 			0 => 'deflate/inflate'
@@ -468,6 +529,11 @@ class getid3_png extends getid3_handler
 		return (isset($PNGcompressionMethodLookup[$compressionmethod]) ? $PNGcompressionMethodLookup[$compressionmethod] : 'invalid');
 	}
 
+	/**
+	 * @param int $unitid
+	 *
+	 * @return string
+	 */
 	public function PNGpHYsUnitLookup($unitid) {
 		static $PNGpHYsUnitLookup = array(
 			0 => 'unknown',
@@ -476,6 +542,11 @@ class getid3_png extends getid3_handler
 		return (isset($PNGpHYsUnitLookup[$unitid]) ? $PNGpHYsUnitLookup[$unitid] : 'invalid');
 	}
 
+	/**
+	 * @param int $unitid
+	 *
+	 * @return string
+	 */
 	public function PNGoFFsUnitLookup($unitid) {
 		static $PNGoFFsUnitLookup = array(
 			0 => 'pixel',
@@ -484,6 +555,11 @@ class getid3_png extends getid3_handler
 		return (isset($PNGoFFsUnitLookup[$unitid]) ? $PNGoFFsUnitLookup[$unitid] : 'invalid');
 	}
 
+	/**
+	 * @param int $equationtype
+	 *
+	 * @return string
+	 */
 	public function PNGpCALequationTypeLookup($equationtype) {
 		static $PNGpCALequationTypeLookup = array(
 			0 => 'Linear mapping',
@@ -494,6 +570,11 @@ class getid3_png extends getid3_handler
 		return (isset($PNGpCALequationTypeLookup[$equationtype]) ? $PNGpCALequationTypeLookup[$equationtype] : 'invalid');
 	}
 
+	/**
+	 * @param int $unitid
+	 *
+	 * @return string
+	 */
 	public function PNGsCALUnitLookup($unitid) {
 		static $PNGsCALUnitLookup = array(
 			0 => 'meter',
@@ -502,6 +583,12 @@ class getid3_png extends getid3_handler
 		return (isset($PNGsCALUnitLookup[$unitid]) ? $PNGsCALUnitLookup[$unitid] : 'invalid');
 	}
 
+	/**
+	 * @param int $color_type
+	 * @param int $bit_depth
+	 *
+	 * @return int|false
+	 */
 	public function IHDRcalculateBitsPerSample($color_type, $bit_depth) {
 		switch ($color_type) {
 			case 0: // Each pixel is a grayscale sample.

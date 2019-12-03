@@ -1,11 +1,11 @@
 <?php
+
 /////////////////////////////////////////////////////////////////
 /// getID3() by James Heinrich <info@getid3.org>               //
-//  available at http://getid3.sourceforge.net                 //
-//            or http://www.getid3.org                         //
-//          also https://github.com/JamesHeinrich/getID3       //
-/////////////////////////////////////////////////////////////////
-// See readme.txt for more details                             //
+//  available at https://github.com/JamesHeinrich/getID3       //
+//            or https://www.getid3.org                        //
+//            or http://getid3.sourceforge.net                 //
+//  see readme.txt for more details                            //
 /////////////////////////////////////////////////////////////////
 //                                                             //
 // module.audio.aa.php                                         //
@@ -17,7 +17,9 @@
 
 class getid3_amr extends getid3_handler
 {
-
+	/**
+	 * @return bool
+	 */
 	public function Analyze() {
 		$info = &$this->getid3->info;
 
@@ -26,7 +28,7 @@ class getid3_amr extends getid3_handler
 
 		$magic = '#!AMR'."\x0A";
 		if (substr($AMRheader, 0, 6) != $magic) {
-			$info['error'][] = 'Expecting "'.getid3_lib::PrintHexBytes($magic).'" at offset '.$info['avdataoffset'].', found "'.getid3_lib::PrintHexBytes(substr($AMRheader, 0, 6)).'"';
+			$this->error('Expecting "'.getid3_lib::PrintHexBytes($magic).'" at offset '.$info['avdataoffset'].', found "'.getid3_lib::PrintHexBytes(substr($AMRheader, 0, 6)).'"');
 			return false;
 		}
 
@@ -50,7 +52,6 @@ class getid3_amr extends getid3_handler
 			$AMR_frame_header = ord(substr($buffer, 0, 1));
 			$codec_mode_request = ($AMR_frame_header & 0x78) >> 3; // The 2nd bit through 5th bit (counting the most significant bit as the first bit) comprise the CMR (Codec Mode Request), values 0-7 being valid for AMR. The top bit of the CMR can actually be ignored, though it is used when AMR forms RTP payloads. The lower 3-bits of the header are reserved and are not used. Viewing the header from most significant bit to least significant bit, the encoding is XCCCCXXX, where Xs are reserved (typically 0) and the Cs are the CMR.
 			if ($codec_mode_request > 7) {
-				$info['error'][] = '';
 				break;
 			}
 			$thisfile_amr['frame_mode_count'][$codec_mode_request]++;
@@ -64,7 +65,11 @@ class getid3_amr extends getid3_handler
 		return true;
 	}
 
-
+	/**
+	 * @param int $key
+	 *
+	 * @return int|false
+	 */
 	public function amr_mode_bitrate($key) {
 		static $amr_mode_bitrate = array(
 			0 =>  4750,
@@ -79,6 +84,11 @@ class getid3_amr extends getid3_handler
 		return (isset($amr_mode_bitrate[$key]) ? $amr_mode_bitrate[$key] : false);
 	}
 
+	/**
+	 * @param int $key
+	 *
+	 * @return int|false
+	 */
 	public function amr_mode_bytes_per_frame($key) {
 		static $amr_mode_bitrate = array(
 			0 =>  13, // 1-byte frame header +  95 bits [padded to: 12 bytes] audio data

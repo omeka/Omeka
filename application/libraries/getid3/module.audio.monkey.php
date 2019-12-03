@@ -1,11 +1,11 @@
 <?php
+
 /////////////////////////////////////////////////////////////////
 /// getID3() by James Heinrich <info@getid3.org>               //
-//  available at http://getid3.sourceforge.net                 //
-//            or http://www.getid3.org                         //
-//          also https://github.com/JamesHeinrich/getID3       //
-/////////////////////////////////////////////////////////////////
-// See readme.txt for more details                             //
+//  available at https://github.com/JamesHeinrich/getID3       //
+//            or https://www.getid3.org                        //
+//            or http://getid3.sourceforge.net                 //
+//  see readme.txt for more details                            //
 /////////////////////////////////////////////////////////////////
 //                                                             //
 // module.audio.monkey.php                                     //
@@ -17,7 +17,9 @@
 
 class getid3_monkey extends getid3_handler
 {
-
+	/**
+	 * @return bool
+	 */
 	public function Analyze() {
 		$info = &$this->getid3->info;
 
@@ -39,7 +41,7 @@ class getid3_monkey extends getid3_handler
 		$thisfile_monkeysaudio_raw['magic'] = substr($MACheaderData, 0, 4);
 		$magic = 'MAC ';
 		if ($thisfile_monkeysaudio_raw['magic'] != $magic) {
-			$info['error'][] = 'Expecting "'.getid3_lib::PrintHexBytes($magic).'" at offset '.$info['avdataoffset'].', found "'.getid3_lib::PrintHexBytes($thisfile_monkeysaudio_raw['magic']).'"';
+			$this->error('Expecting "'.getid3_lib::PrintHexBytes($magic).'" at offset '.$info['avdataoffset'].', found "'.getid3_lib::PrintHexBytes($thisfile_monkeysaudio_raw['magic']).'"');
 			unset($info['fileformat']);
 			return false;
 		}
@@ -112,7 +114,7 @@ class getid3_monkey extends getid3_handler
 		$info['audio']['channels']               = $thisfile_monkeysaudio['channels'];
 		$thisfile_monkeysaudio['sample_rate']            = $thisfile_monkeysaudio_raw['nSampleRate'];
 		if ($thisfile_monkeysaudio['sample_rate'] == 0) {
-			$info['error'][] = 'Corrupt MAC file: frequency == zero';
+			$this->error('Corrupt MAC file: frequency == zero');
 			return false;
 		}
 		$info['audio']['sample_rate']            = $thisfile_monkeysaudio['sample_rate'];
@@ -127,14 +129,14 @@ class getid3_monkey extends getid3_handler
 		}
 		$thisfile_monkeysaudio['playtime']               = $thisfile_monkeysaudio['samples'] / $thisfile_monkeysaudio['sample_rate'];
 		if ($thisfile_monkeysaudio['playtime'] == 0) {
-			$info['error'][] = 'Corrupt MAC file: playtime == zero';
+			$this->error('Corrupt MAC file: playtime == zero');
 			return false;
 		}
 		$info['playtime_seconds']                = $thisfile_monkeysaudio['playtime'];
 		$thisfile_monkeysaudio['compressed_size']        = $info['avdataend'] - $info['avdataoffset'];
 		$thisfile_monkeysaudio['uncompressed_size']      = $thisfile_monkeysaudio['samples'] * $thisfile_monkeysaudio['channels'] * ($thisfile_monkeysaudio['bits_per_sample'] / 8);
 		if ($thisfile_monkeysaudio['uncompressed_size'] == 0) {
-			$info['error'][] = 'Corrupt MAC file: uncompressed_size == zero';
+			$this->error('Corrupt MAC file: uncompressed_size == zero');
 			return false;
 		}
 		$thisfile_monkeysaudio['compression_ratio']      = $thisfile_monkeysaudio['compressed_size'] / ($thisfile_monkeysaudio['uncompressed_size'] + $thisfile_monkeysaudio_raw['nHeaderDataBytes']);
@@ -155,12 +157,12 @@ class getid3_monkey extends getid3_handler
 
 		if ($thisfile_monkeysaudio_raw['nVersion'] >= 3980) {
 			if ($thisfile_monkeysaudio_raw['cFileMD5'] === str_repeat("\x00", 16)) {
-				//$info['warning'][] = 'cFileMD5 is null';
+				//$this->warning('cFileMD5 is null');
 			} else {
 				$info['md5_data_source'] = '';
 				$md5 = $thisfile_monkeysaudio_raw['cFileMD5'];
 				for ($i = 0; $i < strlen($md5); $i++) {
-					$info['md5_data_source'] .= str_pad(dechex(ord($md5{$i})), 2, '00', STR_PAD_LEFT);
+					$info['md5_data_source'] .= str_pad(dechex(ord($md5[$i])), 2, '00', STR_PAD_LEFT);
 				}
 				if (!preg_match('/^[0-9a-f]{32}$/', $info['md5_data_source'])) {
 					unset($info['md5_data_source']);
@@ -177,6 +179,11 @@ class getid3_monkey extends getid3_handler
 		return true;
 	}
 
+	/**
+	 * @param int $compressionlevel
+	 *
+	 * @return string
+	 */
 	public function MonkeyCompressionLevelNameLookup($compressionlevel) {
 		static $MonkeyCompressionLevelNameLookup = array(
 			0     => 'unknown',
@@ -189,6 +196,12 @@ class getid3_monkey extends getid3_handler
 		return (isset($MonkeyCompressionLevelNameLookup[$compressionlevel]) ? $MonkeyCompressionLevelNameLookup[$compressionlevel] : 'invalid');
 	}
 
+	/**
+	 * @param int $versionid
+	 * @param int $compressionlevel
+	 *
+	 * @return int
+	 */
 	public function MonkeySamplesPerFrame($versionid, $compressionlevel) {
 		if ($versionid >= 3950) {
 			return 73728 * 4;

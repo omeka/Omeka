@@ -1,11 +1,11 @@
 <?php
+
 /////////////////////////////////////////////////////////////////
 /// getID3() by James Heinrich <info@getid3.org>               //
-//  available at http://getid3.sourceforge.net                 //
-//            or http://www.getid3.org                         //
-//          also https://github.com/JamesHeinrich/getID3       //
-/////////////////////////////////////////////////////////////////
-// See readme.txt for more details                             //
+//  available at https://github.com/JamesHeinrich/getID3       //
+//            or https://www.getid3.org                        //
+//            or http://getid3.sourceforge.net                 //
+//  see readme.txt for more details                            //
 /////////////////////////////////////////////////////////////////
 //                                                             //
 // module.audio.shorten.php                                    //
@@ -17,7 +17,9 @@
 
 class getid3_rkau extends getid3_handler
 {
-
+	/**
+	 * @return bool
+	 */
 	public function Analyze() {
 		$info = &$this->getid3->info;
 
@@ -25,7 +27,7 @@ class getid3_rkau extends getid3_handler
 		$RKAUHeader = $this->fread(20);
 		$magic = 'RKA';
 		if (substr($RKAUHeader, 0, 3) != $magic) {
-			$info['error'][] = 'Expecting "'.getid3_lib::PrintHexBytes($magic).'" at offset '.$info['avdataoffset'].', found "'.getid3_lib::PrintHexBytes(substr($RKAUHeader, 0, 3)).'"';
+			$this->error('Expecting "'.getid3_lib::PrintHexBytes($magic).'" at offset '.$info['avdataoffset'].', found "'.getid3_lib::PrintHexBytes(substr($RKAUHeader, 0, 3)).'"');
 			return false;
 		}
 
@@ -36,7 +38,7 @@ class getid3_rkau extends getid3_handler
 		$info['rkau']['raw']['version']   = getid3_lib::LittleEndian2Int(substr($RKAUHeader, 3, 1));
 		$info['rkau']['version']          = '1.'.str_pad($info['rkau']['raw']['version'] & 0x0F, 2, '0', STR_PAD_LEFT);
 		if (($info['rkau']['version'] > 1.07) || ($info['rkau']['version'] < 1.06)) {
-			$info['error'][] = 'This version of getID3() ['.$this->getid3->version().'] can only parse RKAU files v1.06 and 1.07 (this file is v'.$info['rkau']['version'].')';
+			$this->error('This version of getID3() ['.$this->getid3->version().'] can only parse RKAU files v1.06 and 1.07 (this file is v'.$info['rkau']['version'].')');
 			unset($info['rkau']);
 			return false;
 		}
@@ -50,7 +52,7 @@ class getid3_rkau extends getid3_handler
 		$this->RKAUqualityLookup($info['rkau']);
 
 		$info['rkau']['raw']['flags']            = getid3_lib::LittleEndian2Int(substr($RKAUHeader, 15, 1));
-		$info['rkau']['flags']['joint_stereo']   = (bool) (!($info['rkau']['raw']['flags'] & 0x01));
+		$info['rkau']['flags']['joint_stereo']   = !($info['rkau']['raw']['flags'] & 0x01);
 		$info['rkau']['flags']['streaming']      =  (bool)  ($info['rkau']['raw']['flags'] & 0x02);
 		$info['rkau']['flags']['vrq_lossy_mode'] =  (bool)  ($info['rkau']['raw']['flags'] & 0x04);
 
@@ -76,7 +78,11 @@ class getid3_rkau extends getid3_handler
 
 	}
 
-
+	/**
+	 * @param array $RKAUdata
+	 *
+	 * @return bool
+	 */
 	public function RKAUqualityLookup(&$RKAUdata) {
 		$level   = ($RKAUdata['raw']['quality'] & 0xF0) >> 4;
 		$quality =  $RKAUdata['raw']['quality'] & 0x0F;
