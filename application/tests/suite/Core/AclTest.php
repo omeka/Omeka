@@ -11,7 +11,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Core_AclTest extends PHPUnit_Framework_TestCase
+class Core_AclTest extends Omeka_Test_TestCase
 {
     private $_acl;
 

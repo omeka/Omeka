@@ -34,11 +34,6 @@ class Omeka_Acl_Assert_OwnershipTest extends Omeka_Test_AppTestCase
             'contributor' => $contributor,
             'researcher' => $researcher
         );
-
-        $this->_items = array(
-            'addedBySelf' => $this->_getMockItem(true),
-            'notAddedBySelf' => $this->_getMockItem(false),
-        );
     }
 
     public function tearDown()
@@ -60,7 +55,12 @@ class Omeka_Acl_Assert_OwnershipTest extends Omeka_Test_AppTestCase
     {
         $user = $this->_users[$userKey];
 
-        foreach ($this->_items as $itemKey => $item) {
+        $items = array(
+            'addedBySelf' => $this->_getMockItem(true),
+            'notAddedBySelf' => $this->_getMockItem(false),
+        );
+
+        foreach ($items as $itemKey => $item) {
             if ($itemKey == 'addedBySelf') {
                 $expectation = $whenOwner;
             } else {
@@ -102,7 +102,7 @@ class Omeka_Acl_Assert_OwnershipTest extends Omeka_Test_AppTestCase
      */
     private function _getMockItem($addedBySelf)
     {
-        $item = $this->getMock('Item', array('getResourceId', 'isOwnedBy'));
+        $item = $this->getMockBuilder('Item')->setMethods(array('getResourceId', 'isOwnedBy'))->getMock();
         $item->expects($this->any())
              ->method('getResourceId')
              ->will($this->returnValue('Items'));

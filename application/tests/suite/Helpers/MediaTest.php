@@ -9,7 +9,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
  */
-class Omeka_View_Helper_MediaTest extends PHPUnit_Framework_TestCase
+class Omeka_View_Helper_MediaTest extends Omeka_Test_TestCase
 {
     private $mimeTypeCallbackFired = false;
 

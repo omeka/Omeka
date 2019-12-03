@@ -1,5 +1,5 @@
 <?php 
-class SnippetTest extends PHPUnit_Framework_TestCase
+class SnippetTest extends Omeka_Test_TestCase
 {
     public function setUp()
     {

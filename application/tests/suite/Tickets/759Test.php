@@ -17,5 +17,10 @@ class Tickets_759Test extends Omeka_Test_AppTestCase
                 array('name' => 'Element Name', 'description' => 'Element Description')
             )
         );
+
+        $db = get_db();
+
+        $this->assertInstanceOf('ItemType', $db->getTable('ItemType')->findByName('Foobar'));
+        $this->assertInstanceOf('Element', $db->getTable('Element')->findByElementSetNameAndElementName('Foobar Element Set', 'Element Name'));
     }
 }

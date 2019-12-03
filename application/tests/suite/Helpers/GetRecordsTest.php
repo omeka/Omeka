@@ -14,7 +14,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Helpers_GetRecordsTest extends PHPUnit_Framework_TestCase
+class Helpers_GetRecordsTest extends Omeka_Test_TestCase
 {
     public function setUp()
     {

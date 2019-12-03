@@ -1,5 +1,5 @@
 <?php
-class Omeka_Job_Dispatcher_Adapter_BackgroundProcessTest extends PHPUnit_Framework_TestCase
+class Omeka_Job_Dispatcher_Adapter_BackgroundProcessTest extends Omeka_Test_TestCase
 {
     public $jobMetadata = array(
         'createdAt' => 'now',

@@ -10,7 +10,7 @@ require_once FORM_DIR . '/Install.php';
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Installer_DefaultTest extends PHPUnit_Framework_TestCase
+class Installer_DefaultTest extends Omeka_Test_TestCase
 {
     const DB_PREFIX = 'omeka_';
     const USER_ID = 1;
@@ -24,11 +24,6 @@ class Installer_DefaultTest extends PHPUnit_Framework_TestCase
         $this->form = new Omeka_Form_Install;
         $this->profilerHelper = new Omeka_Test_Helper_DbProfiler($this->dbAdapter->getProfiler(),
             $this);
-    }
-
-    public function testConstructor()
-    {
-        $installer = new Installer_Default($this->db);
     }
 
     /**

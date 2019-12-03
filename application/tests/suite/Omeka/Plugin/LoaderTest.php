@@ -9,7 +9,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
  */
-class Omeka_Plugin_LoaderTest extends PHPUnit_Framework_TestCase
+class Omeka_Plugin_LoaderTest extends Omeka_Test_TestCase
 {
     public function setUp()
     {
@@ -108,6 +108,8 @@ class Omeka_Plugin_LoaderTest extends PHPUnit_Framework_TestCase
 
         $this->loader->load($this->alreadyLoadedPlugin, true);
         $this->loader->load($this->pluginFoobar, true);
+        $this->assertTrue($this->alreadyLoadedPlugin->isLoaded());
+        $this->assertTrue($this->pluginFoobar->isLoaded());
     }
 
     public function testLoadPluginThatHasAnUpgradeAvailable()
@@ -126,44 +128,28 @@ class Omeka_Plugin_LoaderTest extends PHPUnit_Framework_TestCase
     public function testLoadPluginThatHasAnOptionalNotActivatedPluginUsingLoadPlugins()
     {
         $this->pluginFoobar->setOptionalPlugins(array('NotActivatedPlugin'));
-        try {
-            $this->loader->registerPlugin($this->notActivatedPlugin);
-            $this->loader->loadPlugins(array($this->pluginFoobar), true);
-        } catch (Omeka_Plugin_Loader_Exception $e) {
-            $this->fail("Should not have thrown an exception when it could not load the optional 'NotActivatedPlugin'.");
-        }
+        $this->loader->registerPlugin($this->notActivatedPlugin);
+        $this->loader->loadPlugins(array($this->pluginFoobar), true);
+        $this->assertTrue($this->pluginFoobar->isLoaded());
     }
 
     public function testLoadPluginThatHasAnOptionalNotActivatedPluginUsingLoad()
     {
         $this->pluginFoobar->setOptionalPlugins(array('NotActivatedPlugin'));
-        try {
-            $this->loader->registerPlugin($this->notActivatedPlugin);
-            $this->loader->load($this->pluginFoobar, true);
-        } catch (Omeka_Plugin_Loader_Exception $e) {
-            $this->fail("Should not have thrown an exception when it could not load the optional 'NotActivatedPlugin'.");
-        }
+        $this->loader->registerPlugin($this->notActivatedPlugin);
+        $this->loader->load($this->pluginFoobar, true);
+        $this->assertTrue($this->pluginFoobar->isLoaded());
     }
 
     public function testLoadedPluginIsRegistered()
     {
-        try {
-            $this->loader->loadPlugins(array($this->pluginFoobar), true);
-        } catch (Omeka_Plugin_Loader_Exception $e) {
-            $this->fail("Should not have thrown an exception when it could not load 'foobar' plugin.");
-        }
-
+        $this->loader->loadPlugins(array($this->pluginFoobar), true);
         $this->assertTrue($this->loader->isRegistered($this->pluginFoobar), "'foobar' plugin should be registered.");
     }
 
     public function testRegisteredPluginIsRegistered()
     {
-        try {
-            $this->loader->registerPlugin($this->pluginFoobar);
-        } catch (Omeka_Plugin_Loader_Exception $e) {
-            $this->fail("Should not have thrown an exception when it registered the unregistered 'foobar' plugin.");
-        }
-
+        $this->loader->registerPlugin($this->pluginFoobar);
         $this->assertTrue($this->loader->isRegistered($this->pluginFoobar), "'foobar' plugin should be registered.");
     }
 
@@ -174,18 +160,10 @@ class Omeka_Plugin_LoaderTest extends PHPUnit_Framework_TestCase
 
     public function testRegisterSamePluginObjectTwice()
     {
-        try {
-            $this->loader->registerPlugin($this->pluginFoobar);
-        } catch (Omeka_Plugin_Loader_Exception $e) {
-            $this->fail("Should not have thrown an exception when it tried to register the plugin.");
-        }
+        $this->loader->registerPlugin($this->pluginFoobar);
         $this->assertTrue($this->loader->isRegistered($this->pluginFoobar), "'foobar' plugin should be registered.");
 
-        try {
-            $this->loader->registerPlugin($this->pluginFoobar);
-        } catch (Omeka_Plugin_Loader_Exception $e) {
-            $this->fail("Should not have thrown an exception when it tried to register same plugin object again.");
-        }
+        $this->loader->registerPlugin($this->pluginFoobar);
         $this->assertTrue($this->loader->isRegistered($this->pluginFoobar), "'foobar' plugin should still be registered after registering the same plugin object again.");
     }
 
@@ -196,11 +174,7 @@ class Omeka_Plugin_LoaderTest extends PHPUnit_Framework_TestCase
         $this->pluginWithSameDir->setDirectoryName('foobar');
         $this->pluginWithSameDir->setActive(true);
 
-        try {
-            $this->loader->registerPlugin($this->pluginFoobar);
-        } catch (Omeka_Plugin_Loader_Exception $e) {
-            $this->fail("Should not have thrown an exception when it tried to register the plugin.");
-        }
+        $this->loader->registerPlugin($this->pluginFoobar);
         $this->assertTrue($this->loader->isRegistered($this->pluginFoobar), "'foobar' plugin should be registered.");
 
         $hasException = false;

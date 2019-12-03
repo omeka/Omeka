@@ -1,6 +1,6 @@
 <?php
 
-class Omeka_Job_Dispatcher_Adapter_BeanstalkTest extends PHPUnit_Framework_TestCase
+class Omeka_Job_Dispatcher_Adapter_BeanstalkTest extends Omeka_Test_TestCase
 {
     public function testPheanstalkRequiresHostOption()
     {
@@ -16,25 +16,25 @@ class Omeka_Job_Dispatcher_Adapter_BeanstalkTest extends PHPUnit_Framework_TestC
 
     /**
      * Test Pheanstalk is wired up because it will throw an exception when 
-     * given an invalid host. 
+     * given an invalid host.
+     * 
+     * @expectedException Pheanstalk_Exception_ConnectionException
      */
-    public function testSetQueueName()
+    public function testSetQueueNameWithInvalidHost()
     {
         $this->adapter = new Omeka_Job_Dispatcher_Adapter_Beanstalk(array('host' => 'example.test'));
-        try {
-            $this->adapter->setQueueName('foobar');
-            $this->fail("No exception was thrown.");
-        } catch (Pheanstalk_Exception_ConnectionException $e) {
-        }
+        $this->adapter->setQueueName('foobar');
     }
 
-    public function testSend()
+    /**
+     * Test Pheanstalk is wired up because it will throw an exception when 
+     * given an invalid host.
+     * 
+     * @expectedException Pheanstalk_Exception_ConnectionException
+     */
+    public function testSendWithInvalidHost()
     {
         $this->adapter = new Omeka_Job_Dispatcher_Adapter_Beanstalk(array('host' => 'example.test'));
-        try {
-            $this->adapter->send('foobar', array());
-            $this->fail("No exception was thrown.");
-        } catch (Pheanstalk_Exception_ConnectionException $e) {
-        }
+        $this->adapter->send('foobar', array());
     }
 }

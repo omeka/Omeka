@@ -29,12 +29,13 @@ class Omeka_Controller_UpgradeControllerTest extends Omeka_Test_AppTestCase
         $this->db->query("TRUNCATE omeka_schema_migrations");
 
         $this->dispatch('/upgrade');
-        $this->assertNotRedirectTo('/users/login');
+        $this->assertNotRedirect();
     }
 
     public function testCannotUpgradeWhenDatabaseIsUpToDate()
     {
         $this->dispatch('/upgrade');
+        $this->assertRedirect();
     }
 
     public function tearDown()

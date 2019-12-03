@@ -125,7 +125,7 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
                                  "Hashed password should not have changed.");
     }
 
-    private function _assertPasswordIs($pass, $msg = null)
+    private function _assertPasswordIs($pass, $msg = '')
     {
         $this->assertEquals($this->db->fetchOne("SELECT password FROM omeka_users WHERE id = 1"),
                             $this->user->hashPassword($pass),

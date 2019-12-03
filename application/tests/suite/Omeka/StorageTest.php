@@ -1,10 +1,11 @@
 <?php
 
-class Omeka_StorageTest extends PHPUnit_Framework_TestCase
+class Omeka_StorageTest extends Omeka_Test_TestCase
 {
     public function testNoOptions()
     {
-        new Omeka_Storage();
+        $storage = new Omeka_Storage();
+        $this->assertNull($storage->getAdapter());
     }
 
     /**

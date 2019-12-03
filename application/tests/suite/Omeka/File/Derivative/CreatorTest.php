@@ -10,7 +10,7 @@
  * @package Omeka
  * @copyright Center for History and New Media, 2007-2010
  **/
-class Omeka_File_Derivative_CreatorTest extends PHPUnit_Framework_TestCase
+class Omeka_File_Derivative_CreatorTest extends Omeka_Test_TestCase
 {
     public function setUp()
     {
@@ -48,9 +48,10 @@ class Omeka_File_Derivative_CreatorTest extends PHPUnit_Framework_TestCase
         $this->fail("create() should have failed when a derivative filename was not provided.");
     }
 
-    public function testCreate()
+    public function testCreateWithNoDerivatives()
     {
-        $this->creator->create($this->validFilePath, $this->derivativeFilename, $this->validMimeType);
+        $result = $this->creator->create($this->validFilePath, $this->derivativeFilename, $this->validMimeType);
+        $this->assertFalse($result);
     }
 
     public function testCreateWithInvalidOriginalFile()

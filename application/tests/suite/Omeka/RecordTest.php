@@ -9,7 +9,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Omeka_RecordTest extends PHPUnit_Framework_TestCase
+class Omeka_RecordTest extends Omeka_Test_TestCase
 {
     const VALIDATION_ERROR = "Do Not Set: Do Not Set property will automatically invalidate the record.";
 

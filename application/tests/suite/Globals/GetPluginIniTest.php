@@ -9,7 +9,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
  */
-class Globals_GetPluginIniTest extends PHPUnit_Framework_TestCase
+class Globals_GetPluginIniTest extends Omeka_Test_TestCase
 {
     public function testGetPluginIni()
     {

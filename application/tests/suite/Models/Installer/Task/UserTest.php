@@ -11,7 +11,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Installer_Task_UserTest extends PHPUnit_Framework_TestCase
+class Installer_Task_UserTest extends Omeka_Test_TestCase
 {
     const DB_PREFIX = 'test_';
     const USER_ID = 1;

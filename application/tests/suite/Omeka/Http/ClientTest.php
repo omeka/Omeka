@@ -11,7 +11,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2011
  */
-class Omeka_Http_ClientTest extends PHPUnit_Framework_TestCase
+class Omeka_Http_ClientTest extends Omeka_Test_TestCase
 {
     public function setUp()
     {

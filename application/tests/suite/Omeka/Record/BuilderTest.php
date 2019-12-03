@@ -9,7 +9,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Omeka_Record_BuilderTest extends PHPUnit_Framework_TestCase
+class Omeka_Record_BuilderTest extends Omeka_Test_TestCase
 {
     const DUMMY_RECORD_ID = 1;
 
@@ -130,7 +130,7 @@ class DummyRecordBuilder extends Omeka_Record_Builder_AbstractBuilder
 
     private $_test;
 
-    public function setTest(PHPUnit_Framework_TestCase $test)
+    public function setTest(Omeka_Test_TestCase $test)
     {
         $this->_test = $test;
     }

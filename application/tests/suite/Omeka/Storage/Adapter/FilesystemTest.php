@@ -1,6 +1,6 @@
 <?php
 
-class Omeka_Storage_Adapter_FilesystemTest extends PHPUnit_Framework_TestCase
+class Omeka_Storage_Adapter_FilesystemTest extends Omeka_Test_TestCase
 {
     private $_options = array(
         'localDir' => '/foo/bar',
@@ -76,6 +76,9 @@ class Omeka_Storage_Adapter_FilesystemTest extends PHPUnit_Framework_TestCase
      */
     public function testMove($localDir, $throwsException)
     {
+        if ($throwsException) {
+            $this->setExpectedException('Omeka_Storage_Exception');
+        }
         if (!$localDir) {
             $localDir = self::$tempDir;
         }
@@ -84,16 +87,9 @@ class Omeka_Storage_Adapter_FilesystemTest extends PHPUnit_Framework_TestCase
             'localDir' => $localDir,
         ));
         $testFile = tempnam(self::$tempDir, 'omeka_storage_filesystem_test');
-        try {
-            $storage->move(basename($testFile), 'foo.txt');
+        $storage->move(basename($testFile), 'foo.txt');
+        if (!$throwsException) {
             $this->assertTrue(file_exists("$localDir/foo.txt"));
-            if ($throwsException) {
-                $this->fail();
-            }
-        } catch (Omeka_Storage_Exception $e) {
-            if (!$throwsException) {
-                $this->fail($e->getMessage());
-            }
         }
     }
 
@@ -102,6 +98,9 @@ class Omeka_Storage_Adapter_FilesystemTest extends PHPUnit_Framework_TestCase
      */
     public function testStore($localDir, $throwsException)
     {
+        if ($throwsException) {
+            $this->setExpectedException('Omeka_Storage_Exception');
+        }
         if (!$localDir) {
             $localDir = self::$tempDir;
         }
@@ -110,16 +109,9 @@ class Omeka_Storage_Adapter_FilesystemTest extends PHPUnit_Framework_TestCase
             'localDir' => $localDir,
         ));
         $testFile = tempnam(self::$tempDir, 'omeka_storage_filesystem_test');
-        try {
-            $storage->store($testFile, 'foo.txt');
+        $storage->store($testFile, 'foo.txt');
+        if (!$throwsException) {
             $this->assertTrue(file_exists("$localDir/foo.txt"));
-            if ($throwsException) {
-                $this->fail();
-            }
-        } catch (Omeka_Storage_Exception $e) {
-            if (!$throwsException) {
-                $this->fail($e->getMessage());
-            }
         }
     }
 

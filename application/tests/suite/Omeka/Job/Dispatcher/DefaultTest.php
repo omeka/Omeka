@@ -1,5 +1,5 @@
 <?php
-class Omeka_Job_Dispatcher_DefaultTest extends PHPUnit_Framework_TestCase
+class Omeka_Job_Dispatcher_DefaultTest extends Omeka_Test_TestCase
 {
     public function setUp()
     {

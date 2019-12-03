@@ -17,13 +17,17 @@ class Models_Output_ItemAtomTest extends Omeka_Test_AppTestCase
     public function testNoContext()
     {
         $this->dispatch('items/browse');
-        $this->assertNotHeaderContains('Content-Type', 'application/atom+xml; charset=utf-8');
+        $response = $this->getResponse();
+        $headers = $response->sendHeaders();
+        $this->assertNotContains($headers['content-type'], 'Content-Type: application/atom+xml; charset=utf-8');
     }
 
     public function testAtomContext()
     {
         $this->dispatch('items/browse?output=atom');
-        $this->assertHeaderContains('Content-Type', 'application/atom+xml; charset=utf-8');
+        $response = $this->getResponse();
+        $headers = $response->sendHeaders();
+        $this->assertContains($headers['content-type'], 'Content-Type: application/atom+xml; charset=utf-8');
     }
     public function testGetFeedOnEmptyItem()
     {

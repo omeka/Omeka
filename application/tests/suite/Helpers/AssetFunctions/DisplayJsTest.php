@@ -11,7 +11,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2010
  */
-class Omeka_Helper_DisplayJsTest extends PHPUnit_Framework_TestCase
+class Omeka_Helper_DisplayJsTest extends Omeka_Test_TestCase
 {
     const ASSET_PATH_ROOT = '/omeka-test/asset-path';
 

@@ -99,7 +99,7 @@ class Models_CollectionAclTest extends Omeka_Test_AppTestCase
      */
     private function _getMockCollection($addedBySelf)
     {
-        $collection = $this->getMock('Collection', array('getResourceId', 'isOwnedBy'));
+        $collection = $this->getMockBuilder('Collection')->setMethods(array('getResourceId', 'isOwnedBy'))->getMock();
         $collection->expects($this->any())
              ->method('getResourceId')
              ->will($this->returnValue('Collections'));

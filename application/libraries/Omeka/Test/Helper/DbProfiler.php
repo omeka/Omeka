@@ -19,7 +19,7 @@ class Omeka_Test_Helper_DbProfiler
     private $_profiler;
 
     /**
-     * @var PHPUnit_Framework_TestCase
+     * @var \PHPUnit\Framework\TestCase
      */
     private $_test;
 

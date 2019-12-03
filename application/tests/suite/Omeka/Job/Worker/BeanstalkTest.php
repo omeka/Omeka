@@ -1,5 +1,5 @@
 <?php
-class Omeka_Job_Worker_BeanstalkTest extends PHPUnit_Framework_TestCase
+class Omeka_Job_Worker_BeanstalkTest extends Omeka_Test_TestCase
 {
     public function setUp()
     {

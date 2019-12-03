@@ -10,6 +10,9 @@
 # Composer vendor directory
 /vendor/
 
+# Composer lockfile
+/composer.lock
+
 # Config files
 /db.ini
 /application/config/config.ini

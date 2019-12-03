@@ -10,7 +10,7 @@
  *
  * @package Omeka
  */
-class Omeka_Helper_DisplayCssTest extends PHPUnit_Framework_TestCase
+class Omeka_Helper_DisplayCssTest extends Omeka_Test_TestCase
 {
     const ASSET_PATH_ROOT = '/omeka-test/asset-path';
 

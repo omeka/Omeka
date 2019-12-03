@@ -11,7 +11,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Models_UserTest extends PHPUnit_Framework_TestCase
+class Models_UserTest extends Omeka_Test_TestCase
 {
     public function setUp()
     {

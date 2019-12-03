@@ -9,7 +9,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
  */
-class Omeka_Helper_JsTest extends PHPUnit_Framework_TestCase
+class Omeka_Helper_JsTest extends Omeka_Test_TestCase
 {
     public function setUp()
     {

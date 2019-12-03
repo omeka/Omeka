@@ -11,7 +11,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Globals_SetThemeOptionTest extends PHPUnit_Framework_TestCase
+class Globals_SetThemeOptionTest extends Omeka_Test_TestCase
 {
     const THEME = 'foobar';
     const THEME_OPTIONS_OPTION = 'theme_foobar_options';

@@ -1,5 +1,5 @@
 <?php 
-class TagAttributesTest extends PHPUnit_Framework_TestCase
+class TagAttributesTest extends Omeka_Test_TestCase
 {
     public function setUp()
     {

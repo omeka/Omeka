@@ -102,7 +102,7 @@ class Omeka_Test_Helper_Db
             $tableNames = $this->getTableNames($this->getPrefix());
         }
         if ($tableNames) {
-            $dropSql = "DROP TABLE `" . join($tableNames, '`,`') . '`';
+            $dropSql = "DROP TABLE `" . implode('`,`', $tableNames) . '`';
             $this->_dbAdapter->query($dropSql);
         }
     }

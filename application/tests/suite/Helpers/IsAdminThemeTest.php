@@ -11,7 +11,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2009
  */
-class Omeka_Helpers_IsAdminThemeTest extends PHPUnit_Framework_TestCase
+class Omeka_Helpers_IsAdminThemeTest extends Omeka_Test_TestCase
 {
     private $_frontController;
 

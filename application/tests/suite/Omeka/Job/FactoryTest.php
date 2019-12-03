@@ -1,6 +1,6 @@
 <?php
 
-class Omeka_Job_FactoryTest extends PHPUnit_Framework_TestCase
+class Omeka_Job_FactoryTest extends Omeka_Test_TestCase
 {
     public function testBuildJobFromJson()
     {

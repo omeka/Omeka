@@ -1,5 +1,5 @@
 <?php
-class Omeka_Application_Resource_JobsTest extends PHPUnit_Framework_TestCase
+class Omeka_Application_Resource_JobsTest extends Omeka_Test_TestCase
 {
     /**
      * Warning: this code has been adapted from Zend Framework's 

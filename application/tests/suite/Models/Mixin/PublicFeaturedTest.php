@@ -27,7 +27,7 @@ class Models_Mixin_PublicFeaturedTest extends Omeka_Test_AppTestCase
         $mixin = new Mixin_PublicFeatured($item);
         $this->assertFalse($mixin->isPublic());
 
-        $mock = $this->getMock('stdClass', array('myCallBack'));
+        $mock = $this->getMockBuilder('stdClass')->setMethods(array('myCallBack'))->getMock();
         $mock->expects($this->once())
              ->method('myCallBack')
              ->will($this->returnValue(true));
@@ -48,7 +48,7 @@ class Models_Mixin_PublicFeaturedTest extends Omeka_Test_AppTestCase
         $mixin = new Mixin_PublicFeatured($item);
         $this->assertFalse($mixin->isFeatured());
 
-        $mock = $this->getMock('stdClass', array('myCallBack'));
+        $mock = $this->getMockBuilder('stdClass')->setMethods(array('myCallBack'))->getMock();
         $mock->expects($this->once())
              ->method('myCallBack')
              ->will($this->returnValue(true));
@@ -70,7 +70,7 @@ class Models_Mixin_PublicFeaturedTest extends Omeka_Test_AppTestCase
         $this->assertFalse($mixin->isPublic());
         $this->assertFalse($mixin->isFeatured());
 
-        $mockA = $this->getMock('stdClass', array('myCallBackA'));
+        $mockA = $this->getMockBuilder('stdClass')->setMethods(array('myCallBackA'))->getMock();
         $mockA->expects($this->once())
              ->method('myCallBackA')
              ->will($this->returnValue(true));
@@ -80,7 +80,7 @@ class Models_Mixin_PublicFeaturedTest extends Omeka_Test_AppTestCase
         $plugin = '__global__';
         get_plugin_broker()->addHook($hookName, $callback, $plugin);
 
-        $mockB = $this->getMock('stdClass', array('myCallBackB'));
+        $mockB = $this->getMockBuilder('stdClass')->setMethods(array('myCallBackB'))->getMock();
         $mockB->expects($this->once())
              ->method('myCallBackB')
              ->will($this->returnValue(true));
@@ -106,7 +106,7 @@ class Models_Mixin_PublicFeaturedTest extends Omeka_Test_AppTestCase
         $item->save();
         $this->assertTrue($mixin->isPublic());
 
-        $mock = $this->getMock('stdClass', array('myCallBack'));
+        $mock = $this->getMockBuilder('stdClass')->setMethods(array('myCallBack'))->getMock();
         $mock->expects($this->once())
              ->method('myCallBack')
              ->will($this->returnValue(true));
@@ -130,7 +130,7 @@ class Models_Mixin_PublicFeaturedTest extends Omeka_Test_AppTestCase
         $item->save();
         $this->assertTrue($mixin->isFeatured());
 
-        $mock = $this->getMock('stdClass', array('myCallBack'));
+        $mock = $this->getMockBuilder('stdClass')->setMethods(array('myCallBack'))->getMock();
         $mock->expects($this->once())
              ->method('myCallBack')
              ->will($this->returnValue(true));
@@ -157,7 +157,7 @@ class Models_Mixin_PublicFeaturedTest extends Omeka_Test_AppTestCase
         $this->assertTrue($mixin->isPublic());
         $this->assertTrue($mixin->isFeatured());
 
-        $mockA = $this->getMock('stdClass', array('myCallBackA'));
+        $mockA = $this->getMockBuilder('stdClass')->setMethods(array('myCallBackA'))->getMock();
         $mockA->expects($this->once())
               ->method('myCallBackA')
               ->will($this->returnValue(true));
@@ -167,7 +167,7 @@ class Models_Mixin_PublicFeaturedTest extends Omeka_Test_AppTestCase
         $plugin = '__global__';
         get_plugin_broker()->addHook($hookName, $callback, $plugin);
 
-        $mockB = $this->getMock('stdClass', array('myCallBackB'));
+        $mockB = $this->getMockBuilder('stdClass')->setMethods(array('myCallBackB'))->getMock();
         $mockB->expects($this->once())
               ->method('myCallBackB')
               ->will($this->returnValue(true));

@@ -11,7 +11,7 @@
  * @package Omeka
  * @copyright Roy Rosenzweig Center for History and New Media, 2007-2010
  */
-class Omeka_Db_Migration_ManagerTest extends PHPUnit_Framework_TestCase
+class Omeka_Db_Migration_ManagerTest extends Omeka_Test_TestCase
 {
     const FUTURE_MIGRATION = '50000101120000';
     const ALREADY_RUN_MIGRATION = '20080717013526';
@@ -19,7 +19,10 @@ class Omeka_Db_Migration_ManagerTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->db = $this->getMock('Omeka_Db', array('fetchCol', 'getAdapter', 'query'), array(), '', false);
+        $this->db = $this->getMockBuilder('Omeka_Db')
+            ->setMethods(array('fetchCol', 'getAdapter', 'query'))
+            ->disableOriginalConstructor()
+            ->getMock();
         $this->dbAdapter = $this->getMock('Zend_Db_Adapter_Mysqli', array('insert'), array(), '', false);
         $this->db->expects($this->any())
                  ->method('getAdapter')

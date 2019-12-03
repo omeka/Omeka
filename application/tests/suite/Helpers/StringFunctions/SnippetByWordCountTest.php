@@ -3,7 +3,7 @@
  * Tests snippet_by_word_count($phrase, $maxWords, $ellipsis)
  * in helpers/StringFunctions.php
  */
-class Helpers_StringFunctions_SnippetByWordCountTest extends PHPUnit_Framework_TestCase
+class Helpers_StringFunctions_SnippetByWordCountTest extends Omeka_Test_TestCase
 {
     public function setUp()
     {

@@ -2,7 +2,7 @@
 require_once 'Omeka/Db.php';
 require_once 'Omeka/Db/Table.php';
 require_once 'Inflector.php';
-class Omeka_DbTest extends PHPUnit_Framework_TestCase
+class Omeka_DbTest extends Omeka_Test_TestCase
 {
     protected $adapter;
 

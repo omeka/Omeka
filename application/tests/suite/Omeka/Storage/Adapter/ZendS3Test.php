@@ -1,6 +1,6 @@
 <?php
 
-class Omeka_Storage_Adapter_ZendS3Test extends PHPUnit_Framework_TestCase
+class Omeka_Storage_Adapter_ZendS3Test extends Omeka_Test_TestCase
 {
     private $_options = array(
         'accessKeyId' => 'accessKey',
@@ -10,7 +10,9 @@ class Omeka_Storage_Adapter_ZendS3Test extends PHPUnit_Framework_TestCase
 
     public function testAllOptions()
     {
-        new Omeka_Storage_Adapter_ZendS3($this->_options);
+        $adapter = new Omeka_Storage_Adapter_ZendS3($this->_options);
+        $s3 = $adapter->getS3Service();
+        $this->assertInstanceOf('Zend_Service_Amazon_S3', $s3);
     }
 
     /**
