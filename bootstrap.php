@@ -124,7 +124,7 @@ if (PHP_SAPI !== 'cli' && extension_loaded('zlib')) {
 }
 
 // Strip slashes from superglobals to avoid problems with PHP's magic_quotes.
-if (get_magic_quotes_gpc()) {
+if (PHP_VERSION_ID < 50400 && get_magic_quotes_gpc()) {
     $_GET = stripslashes_deep($_GET);
     $_POST = stripslashes_deep($_POST);
     $_COOKIE = stripslashes_deep($_COOKIE);
