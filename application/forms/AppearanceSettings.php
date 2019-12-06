@@ -60,11 +60,13 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
 
         $this->addElement('checkbox', 'show_empty_elements', array(
             'label' => __('Show Empty Elements'),
+            'description' => __('Include empty elements in show pages.'),
             'class' => 'checkbox',
         ));
 
         $this->addElement('checkbox', 'show_element_set_headings', array(
             'label' => __('Show Element Set Headings'),
+            'description' => __('Include element set headings in show pages and in drop-down lists.'),
             'class' => 'checkbox',
         ));
 
