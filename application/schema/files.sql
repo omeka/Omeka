@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%files` (
   `modified` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `added` timestamp NOT NULL DEFAULT '2000-01-01 00:00:00',
   `stored` tinyint(1) NOT NULL default '0',
-  `metadata` text collate utf8_unicode_ci NOT NULL,
+  `metadata` mediumtext collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`),
   KEY `item_id` (`item_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
