@@ -5,13 +5,14 @@
 # Translators:
 # wfan <fanw.scu@gmail.com>, 2012
 # Hong Zhang <zhangh@unlv.nevada.edu>, 2013,2018
+# John Flatness <john@zerocrates.org>, 2020
 # wfan <fanw.scu@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2019-05-21 14:57+0000\n"
+"PO-Revision-Date: 2020-01-28 17:57+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/omeka/omeka/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -561,7 +562,7 @@ msgstr "从添加您的第一个馆藏开始。"
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
 #: application/models/Mixin/ElementText.php:779
-#: application/views/scripts/functions.php:22
+#: application/views/scripts/functions.php:14
 msgid "[Untitled]"
 msgstr "[无标题]"
 
@@ -3741,10 +3742,10 @@ msgstr "Omeka遇到问题"
 #: application/views/scripts/error/index.php:33
 msgid ""
 "To learn how to see more detailed information about this error, see the "
-"Omeka Codex page on <a "
+"Omeka Classic User Manual page on <a "
 "href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">retrieving"
 " error messages</a>."
-msgstr "要了解如何看到有关该错误的更多细节，参见Omeka Codex页面<a href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">提取错误信息</a>。"
+msgstr "要了解如何看到有关该错误的更多细节，参见Omeka Classic User Manual页面<a href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">提取错误信息</a>。"
 
 #: application/views/scripts/index.php:10
 msgid "Featured Item"

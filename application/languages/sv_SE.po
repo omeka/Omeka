@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2019-05-21 14:57+0000\n"
+"PO-Revision-Date: 2020-01-28 17:28+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Swedish (Sweden) (http://www.transifex.com/omeka/omeka/language/sv_SE/)\n"
 "MIME-Version: 1.0\n"
@@ -563,7 +563,7 @@ msgstr "Börja genom att skapa din första samling"
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
 #: application/models/Mixin/ElementText.php:779
-#: application/views/scripts/functions.php:22
+#: application/views/scripts/functions.php:14
 msgid "[Untitled]"
 msgstr "[Obetitlad]"
 
@@ -3753,7 +3753,7 @@ msgstr "Ett fel har uppstått i Omeka"
 #: application/views/scripts/error/index.php:33
 msgid ""
 "To learn how to see more detailed information about this error, see the "
-"Omeka Codex page on <a "
+"Omeka Classic User Manual page on <a "
 "href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">retrieving"
 " error messages</a>."
 msgstr ""

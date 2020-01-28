@@ -7,12 +7,13 @@
 # Gjergj Sheldija <gjergj.sheldija@gmail.com>, 2012,2014
 # Gjergj Sheldija <inactive+gjergjsheldij8748763d3d714768@transifex.com>, 2011
 # Gjergj Sheldija <inactive+gjergjsheldij8748763d3d714768@transifex.com>, 2011
+# R Dakli, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2019-05-21 14:57+0000\n"
+"PO-Revision-Date: 2020-01-28 17:28+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Albanian (Albania) (http://www.transifex.com/omeka/omeka/language/sq_AL/)\n"
 "MIME-Version: 1.0\n"
@@ -40,7 +41,7 @@ msgstr "Titulli"
 
 #. Dublin Core: Title element description
 msgid "A name given to the resource"
-msgstr ""
+msgstr "Një emërtim që jepet burimit"
 
 #. Dublin Core: Creator element name
 #: admin/themes/default/items/browse.php:46
@@ -50,7 +51,7 @@ msgstr "Krijuesi"
 
 #. Dublin Core: Creator element description
 msgid "An entity primarily responsible for making the resource"
-msgstr ""
+msgstr "Një entitet përgjegjës për krijimin e materialit"
 
 #. Dublin Core: Subject element name
 msgid "Subject"
@@ -58,7 +59,7 @@ msgstr "Subjekti"
 
 #. Dublin Core: Subject element description
 msgid "The topic of the resource"
-msgstr ""
+msgstr "Tematika e materialit"
 
 #. Dublin Core: Description element name
 #: admin/themes/default/element-sets/browse.php:17
@@ -143,7 +144,7 @@ msgstr ""
 
 #. Dublin Core: Relation element name
 msgid "Relation"
-msgstr "Relacioni"
+msgstr "Lidhja"
 
 #. Dublin Core: Relation element description
 msgid "A related resource"
@@ -151,7 +152,7 @@ msgstr ""
 
 #. Dublin Core: Coverage element name
 msgid "Coverage"
-msgstr "Trajtim"
+msgstr "Mbulimi"
 
 #. Dublin Core: Coverage element description
 msgid ""
@@ -460,7 +461,7 @@ msgstr "Publik"
 #: admin/themes/default/items/quick-filters.php:8
 #: admin/themes/default/items/show.php:53
 msgid "Featured"
-msgstr ""
+msgstr "I përzgjedhur"
 
 #: admin/themes/default/collections/browse.php:2
 #: application/libraries/Omeka/Navigation.php:149
@@ -495,7 +496,7 @@ msgstr[1] ""
 
 #: admin/themes/default/collections/browse.php:20
 msgid "All items are in a collection."
-msgstr ""
+msgstr "Të gjithe artikujt janë një një koleksion."
 
 #: admin/themes/default/collections/browse.php:31
 #: admin/themes/default/collections/show.php:51
@@ -515,7 +516,7 @@ msgstr "Data e shtimit"
 #: admin/themes/default/collections/show.php:46
 #: admin/themes/default/item-types/show.php:42
 msgid "Total Number of Items"
-msgstr "Numri totali i elementeve"
+msgstr "Numri totali i materialeve"
 
 #: admin/themes/default/collections/browse.php:48
 #: admin/themes/default/items/browse.php:85
@@ -563,7 +564,7 @@ msgstr "Filloni duke shtuar koleksionin tuaj të parë."
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
 #: application/models/Mixin/ElementText.php:779
-#: application/views/scripts/functions.php:22
+#: application/views/scripts/functions.php:14
 msgid "[Untitled]"
 msgstr "[Pa Titull]"
 
@@ -575,13 +576,13 @@ msgstr "Ndrysho koleksionin #%s"
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Collection #%s"
-msgstr ""
+msgstr "Koleksion # 1%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
 #: application/views/scripts/index.php:40
 msgid "Recently Added Items"
-msgstr "Elementet e fundit"
+msgstr "Materialet e shtuara rishtas"
 
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/collections/show.php:42
@@ -618,7 +619,7 @@ msgstr "Temat"
 
 #: admin/themes/default/common/appearance-nav.php:11
 msgid "Navigation"
-msgstr ""
+msgstr "Navigimi"
 
 #: admin/themes/default/common/appearance-nav.php:15
 #: admin/themes/default/common/global-nav.php:23
@@ -633,7 +634,7 @@ msgstr "Konfigurimi"
 
 #: admin/themes/default/common/content-nav.php:1
 msgid "Main Menu"
-msgstr ""
+msgstr "Menuja kryesore"
 
 #: admin/themes/default/common/content-nav.php:5
 #: admin/themes/default/index.php:2
@@ -683,7 +684,7 @@ msgstr "Forumi i suportit"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Back to top"
-msgstr ""
+msgstr "Kthehu në fillim"
 
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
@@ -699,7 +700,7 @@ msgstr "Informacionet Sistemit"
 
 #: admin/themes/default/common/global-nav.php:1
 msgid "Manage Site"
-msgstr ""
+msgstr "Menaxho faqen"
 
 #: admin/themes/default/common/global-nav.php:5
 #: admin/themes/default/plugins/browse.php:5
@@ -708,7 +709,7 @@ msgstr "Plugins"
 
 #: admin/themes/default/common/global-nav.php:17
 msgid "Users"
-msgstr "Perdoruesit"
+msgstr "Përdoruesit"
 
 #: admin/themes/default/common/header.php:11
 #: admin/themes/default/upgrade/index.php:6
@@ -719,7 +720,7 @@ msgstr "Administrimi i Omeka"
 #: admin/themes/default/common/header.php:41
 #: application/views/scripts/common/header.php:32
 msgid "Skip to main content"
-msgstr ""
+msgstr "Kapërce në përmbajtjen kryesore"
 
 #: admin/themes/default/common/header.php:61
 #: application/views/scripts/common/admin-bar.php:6
@@ -735,7 +736,7 @@ msgstr "Dil"
 #: admin/themes/default/common/settings-nav.php:6
 #: admin/themes/default/common/users-nav.php:5
 msgid "General"
-msgstr "Pergjithshem"
+msgstr "I përgjithshem"
 
 #: admin/themes/default/common/settings-nav.php:10
 msgid "Security"
@@ -751,7 +752,7 @@ msgstr "Kërko"
 
 #: admin/themes/default/common/settings-nav.php:20
 msgid "Element Sets"
-msgstr "Setet e Elementeve"
+msgstr "Setet e Materialeve"
 
 #: admin/themes/default/common/settings-nav.php:26
 msgid "Item Type Elements"
@@ -759,7 +760,7 @@ msgstr ""
 
 #: admin/themes/default/common/settings-nav.php:32
 msgid "API"
-msgstr ""
+msgstr "API"
 
 #: admin/themes/default/common/users-nav.php:11
 #: application/forms/ChangePassword.php:80
@@ -769,7 +770,7 @@ msgstr "Ndrysho Fjalëkalimin"
 #: admin/themes/default/common/users-nav.php:17
 #: admin/themes/default/users/api-keys.php:14
 msgid "API Keys"
-msgstr ""
+msgstr "Çelësi API"
 
 #: admin/themes/default/element-sets/browse.php:16
 #: admin/themes/default/tags/browse.php:27
@@ -781,7 +782,7 @@ msgstr "Emri"
 
 #: admin/themes/default/element-sets/edit.php:5
 msgid "Edit Element Set"
-msgstr ""
+msgstr "Ndrysho grupin e elementëve"
 
 #: admin/themes/default/element-sets/edit.php:17
 msgid ""
@@ -873,7 +874,7 @@ msgstr "Artikuj"
 
 #: admin/themes/default/files/show.php:40
 msgid "Direct Links"
-msgstr ""
+msgstr "Lidhjet direkte"
 
 #: admin/themes/default/files/show.php:42
 msgid "Original"
@@ -881,7 +882,7 @@ msgstr ""
 
 #: admin/themes/default/files/show.php:44
 msgid "Fullsize"
-msgstr ""
+msgstr "Me madhësi të plotë"
 
 #: admin/themes/default/files/show.php:45
 msgid "Thumbnail"
@@ -898,7 +899,7 @@ msgstr "Format Metadata"
 
 #: admin/themes/default/files/show.php:54
 msgid "Filename"
-msgstr ""
+msgstr "Emri i dokumentit"
 
 #: admin/themes/default/files/show.php:56
 #: application/views/scripts/files/show.php:29
@@ -1192,11 +1193,11 @@ msgstr "Jo publik"
 
 #: admin/themes/default/items/batch-edit-common.php:20
 msgid "Featured?"
-msgstr "Ne faqe te pare ?"
+msgstr "I përzgjedhur?"
 
 #: admin/themes/default/items/batch-edit-common.php:25
 msgid "Not Featured"
-msgstr ""
+msgstr "Jo i përzgjedhur"
 
 #: admin/themes/default/items/batch-edit-common.php:33
 #: admin/themes/default/items/item-type-form.php:3
@@ -1531,17 +1532,17 @@ msgstr ""
 #: admin/themes/default/items/search-form.php:215
 #: application/views/scripts/items/search-form.php:196
 msgid "Featured/Non-Featured"
-msgstr ""
+msgstr "I përzgjedhur/jo i përzgjedhur"
 
 #: admin/themes/default/items/search-form.php:224
 #: application/views/scripts/items/search-form.php:204
 msgid "Only Featured Items"
-msgstr ""
+msgstr "Vetëm materiale të përzgjedhura"
 
 #: admin/themes/default/items/search-form.php:225
 #: application/views/scripts/items/search-form.php:205
 msgid "Only Non-Featured Items"
-msgstr ""
+msgstr "Vetëm materiale të jo të përzgjedhura"
 
 #: admin/themes/default/items/search-form.php:233
 #: application/views/scripts/items/search-form.php:215
@@ -3478,7 +3479,7 @@ msgstr ""
 #: application/models/Table/Collection.php:80
 #, php-format
 msgid "[Untitled] #%s"
-msgstr ""
+msgstr "[Pa Titull] # 1%s"
 
 #: application/models/Table/Item.php:143
 msgid "Invalid search type given!"
@@ -3753,7 +3754,7 @@ msgstr ""
 #: application/views/scripts/error/index.php:33
 msgid ""
 "To learn how to see more detailed information about this error, see the "
-"Omeka Codex page on <a "
+"Omeka Classic User Manual page on <a "
 "href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">retrieving"
 " error messages</a>."
 msgstr ""

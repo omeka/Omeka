@@ -5,6 +5,7 @@
 # Translators:
 # Daniel Berthereau <daniel.transifex@berthereau.net>, 2016
 # Daniel Bourrion <>, 2011
+# a270031086f2a0d3514bc0cb507b48f6, 2019
 # fiuzzy <fiuzzy1@gmail.com>, 2015-2016
 # John Flatness <john@zerocrates.org>, 2019
 # Julian Maurice <julian.maurice@biblibre.com>, 2016
@@ -27,7 +28,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2019-05-21 14:57+0000\n"
+"PO-Revision-Date: 2020-01-28 17:28+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: French (http://www.transifex.com/omeka/omeka/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -505,8 +506,8 @@ msgstr "(%s total)"
 #, php-format
 msgid "%s%d item%s has no collection."
 msgid_plural "%s%d items%s aren't in a collection."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s%d article%s n'a pas de collection."
+msgstr[1] "%s%d articles%s ne sont pas dans une collection."
 
 #: admin/themes/default/collections/browse.php:20
 msgid "All items are in a collection."
@@ -578,7 +579,7 @@ msgstr "Débuter par la création de votre première collection"
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
 #: application/models/Mixin/ElementText.php:779
-#: application/views/scripts/functions.php:22
+#: application/views/scripts/functions.php:14
 msgid "[Untitled]"
 msgstr "[SansTitre]"
 
@@ -1040,12 +1041,12 @@ msgstr "Ajouter un type de contenu"
 #, php-format
 msgid "%s%d item%s has no type."
 msgid_plural "%s%d items%s have no type."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s%d articles%s n'a pas de type."
+msgstr[1] "%s%d articles%s n'ont pas de type."
 
 #: admin/themes/default/item-types/browse.php:21
 msgid "All items have a type."
-msgstr ""
+msgstr "Tous les articles ont un type."
 
 #: admin/themes/default/item-types/browse.php:29
 msgid "Type Name"
@@ -1699,7 +1700,7 @@ msgstr "Êtes-vous sûr de vouloir désinstaller %s?"
 msgid ""
 "Warning: data associated with this plugin may be permanently deleted from "
 "the database."
-msgstr ""
+msgstr "Attention: les données associées à ce plugin peuvent être définitivement supprimées de la base de données."
 
 #: admin/themes/default/plugins/confirm-uninstall.php:14
 msgid "Yes, I want to uninstall this plugin."
@@ -1839,11 +1840,11 @@ msgstr "Parcourir les tags"
 
 #: admin/themes/default/tags/browse.php:18
 msgid "Search tags"
-msgstr ""
+msgstr "Balises de recherche"
 
 #: admin/themes/default/tags/browse.php:29
 msgid "Reset results"
-msgstr ""
+msgstr "Réinitialiser les résultats"
 
 #: admin/themes/default/tags/browse.php:42
 msgid "Editing Tags"
@@ -1867,11 +1868,11 @@ msgstr "Pour supprimer un mot-clé, cliquer la croix. La suppression d'un mot-cl
 
 #: admin/themes/default/tags/browse.php:58
 msgid "Count"
-msgstr ""
+msgstr "Compte"
 
 #: admin/themes/default/tags/browse.php:59
 msgid "Date created"
-msgstr ""
+msgstr "Date créée"
 
 #: admin/themes/default/tags/browse.php:74
 #: admin/themes/default/tags/browse.php:76
@@ -1880,7 +1881,7 @@ msgstr "Types d'enregistrement"
 
 #: admin/themes/default/tags/browse.php:77
 msgid "All"
-msgstr ""
+msgstr "Tous"
 
 #: admin/themes/default/themes/browse.php:18
 #: admin/themes/default/themes/browse.php:63
@@ -2519,7 +2520,7 @@ msgstr "Type de balise donné invalide"
 
 #: application/controllers/TagsController.php:108
 msgid "Error occurred."
-msgstr ""
+msgstr "Erreur est survenue."
 
 #: application/controllers/ThemesController.php:32
 msgid "Invalid form submission."
@@ -2732,12 +2733,12 @@ msgstr "Afficher les en-têtes du jeu d'éléments"
 
 #: application/forms/AppearanceSettings.php:72
 msgid "Link to File Metadata"
-msgstr ""
+msgstr "Lien vers les métadonnées de fichier"
 
 #: application/forms/AppearanceSettings.php:73
 msgid ""
 "Have item files link to the file metadata instead of the file directly."
-msgstr ""
+msgstr "Faites en sorte que les fichiers d'éléments soient liés aux métadonnées du fichier plutôt qu'au fichier."
 
 #: application/forms/AppearanceSettings.php:83
 msgid "Admin Theme"
@@ -3002,25 +3003,25 @@ msgstr "Liste des types MIME autorisés lors du transfert de fichiers. "
 
 #: application/forms/SecuritySettings.php:51
 msgid "reCAPTCHA Site Key"
-msgstr ""
+msgstr "Clé de site reCAPTCHA"
 
 #: application/forms/SecuritySettings.php:52
 #, php-format
 msgid ""
 "Enter site key from %s. Both this and the private key must be filled in to "
 "secure public forms. Keys must be for reCAPTCHA v2."
-msgstr ""
+msgstr "Entrez la clé du site à partir de %s. Cette clé et la clé privée doivent être renseignées pour sécuriser les formulaires publics. Les clés doivent être pour reCAPTCHA v2."
 
 #: application/forms/SecuritySettings.php:59
 msgid "reCAPTCHA Secret Key"
-msgstr ""
+msgstr "Clé secrète reCAPTCHA"
 
 #: application/forms/SecuritySettings.php:60
 #, php-format
 msgid ""
 "Enter secret key from %s. Both this and the public key must be filled in to "
 "secure public forms. Keys must be for reCAPTCHA v2."
-msgstr ""
+msgstr "Entrez la clé secrète de %s. Celles-ci et la clé publique doivent être renseignées pour sécuriser les formulaires publics. Les clés doivent être pour reCAPTCHA v2."
 
 #: application/forms/SecuritySettings.php:67
 msgid ""
@@ -3691,14 +3692,14 @@ msgstr "Voir les contenus dans %s"
 
 #: application/views/scripts/collections/show.php:13
 msgid "Collection Items"
-msgstr ""
+msgstr "Articles de collection"
 
 #: application/views/scripts/collections/show.php:33
 #, php-format
 msgid "View item"
 msgid_plural "View all %s items"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Regarder l'objet"
+msgstr[1] "Voir tout les %s articles"
 
 #: application/views/scripts/collections/show.php:35
 msgid "There are currently no items within this collection."
@@ -3768,7 +3769,7 @@ msgstr "Omeka a rencontré une erreur"
 #: application/views/scripts/error/index.php:33
 msgid ""
 "To learn how to see more detailed information about this error, see the "
-"Omeka Codex page on <a "
+"Omeka Classic User Manual page on <a "
 "href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">retrieving"
 " error messages</a>."
 msgstr ""

@@ -6,14 +6,15 @@
 # evilinstone <evilinstone@gmail.com>, 2013
 # evilinstone <evilinstone@gmail.com>, 2013
 # Izoniz <izonizne@mail.ru>, 2013-2014
-# tanya chorna <tanya.chorna@gmail.com>, 2017-2018
+# John Flatness <john@zerocrates.org>, 2020
+# tanya chorna <tanya.chorna@gmail.com>, 2017-2019
 # Yurii Kostiuk <kostyuk.yuiriy@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2019-05-21 14:57+0000\n"
+"PO-Revision-Date: 2020-01-28 17:56+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/omeka/omeka/language/uk/)\n"
 "MIME-Version: 1.0\n"
@@ -566,7 +567,7 @@ msgstr "Розпочніть з додавання вашої першої ко�
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
 #: application/models/Mixin/ElementText.php:779
-#: application/views/scripts/functions.php:22
+#: application/views/scripts/functions.php:14
 msgid "[Untitled]"
 msgstr "[Безіменний]"
 
@@ -686,7 +687,7 @@ msgstr "Форум підтримки"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Back to top"
-msgstr ""
+msgstr "Вверх"
 
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
@@ -3011,7 +3012,7 @@ msgstr "Ключ сайту reCAPTCHA"
 msgid ""
 "Enter site key from %s. Both this and the private key must be filled in to "
 "secure public forms. Keys must be for reCAPTCHA v2."
-msgstr ""
+msgstr "Введіть ключ сайту від %s. Щоб захистити загальнодоступні форми, потрібно заповнити і цей, і приватний ключ. Клавіші повинні бути для reCAPTCHA v2."
 
 #: application/forms/SecuritySettings.php:59
 msgid "reCAPTCHA Secret Key"
@@ -3022,7 +3023,7 @@ msgstr "Секретний ключ reCAPTCHA"
 msgid ""
 "Enter secret key from %s. Both this and the public key must be filled in to "
 "secure public forms. Keys must be for reCAPTCHA v2."
-msgstr ""
+msgstr "Введіть секретний ключ з %s. Обидва ключі мають бути зазначені у публічних формах безпеки. Ключі повинні бути для reCAPTCHA v2."
 
 #: application/forms/SecuritySettings.php:67
 msgid ""
@@ -3776,10 +3777,10 @@ msgstr "В роботі Omeka трапилась помилка"
 #: application/views/scripts/error/index.php:33
 msgid ""
 "To learn how to see more detailed information about this error, see the "
-"Omeka Codex page on <a "
+"Omeka Classic User Manual page on <a "
 "href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">retrieving"
 " error messages</a>."
-msgstr "Детальнішу інформацію про цю помилку можна дізнатись на сторінці Omeka Codex <a href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">retrieving error messages</a>."
+msgstr "Детальнішу інформацію про цю помилку можна дізнатись на сторінці Omeka Classic User Manual <a href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">retrieving error messages</a>."
 
 #: application/views/scripts/index.php:10
 msgid "Featured Item"

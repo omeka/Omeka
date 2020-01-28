@@ -5,9 +5,11 @@
 # Translators:
 # Antoanne Pontes <antoanne@gmail.com>, 2018
 # Carlos Eduardo Maciel <carlosmaciel1@gmail.com>, 2011-2017,2019
+# Deidson Rafael Trindade <drafael@usp.br>, 2019
 # Diego Ecker <eckerdiego@gmail.com>, 2014
 # Henrique B <henriquebeira@gmail.com>, 2013
 # Henrique B <henriquebeira@gmail.com>, 2013
+# John Flatness <john@zerocrates.org>, 2020
 # Ronnie Fagundes de Brito <ronniefbrito@gmail.com>, 2018
 # Tel, 2013
 # Tel, 2013
@@ -18,7 +20,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2019-05-21 14:57+0000\n"
+"PO-Revision-Date: 2020-01-28 17:52+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/omeka/omeka/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -569,7 +571,7 @@ msgstr "Comece adicionando a sua primeira coleção."
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
 #: application/models/Mixin/ElementText.php:779
-#: application/views/scripts/functions.php:22
+#: application/views/scripts/functions.php:14
 msgid "[Untitled]"
 msgstr "[Sem Título]"
 
@@ -689,7 +691,7 @@ msgstr "Fóruns de Suporte"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Back to top"
-msgstr ""
+msgstr "De volta ao topo"
 
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
@@ -3000,7 +3002,7 @@ msgstr "Chave do Sítio reCAPTCHA"
 msgid ""
 "Enter site key from %s. Both this and the private key must be filled in to "
 "secure public forms. Keys must be for reCAPTCHA v2."
-msgstr ""
+msgstr "Digite a chave do site em %s. Essa chave e a chave privada devem ser preenchidas para garantir formulários sejam públicos. As chaves devem ser para o reCAPTCHA v2."
 
 #: application/forms/SecuritySettings.php:59
 msgid "reCAPTCHA Secret Key"
@@ -3011,7 +3013,7 @@ msgstr "Chave Secreta reCAPTCHA"
 msgid ""
 "Enter secret key from %s. Both this and the public key must be filled in to "
 "secure public forms. Keys must be for reCAPTCHA v2."
-msgstr ""
+msgstr "Digite a chave secreta de %s. Tanto esta como a chave pública devem ser preenchidas para garantir formulários públicos. As chaves devem ser para o reCAPTCHA v2."
 
 #: application/forms/SecuritySettings.php:67
 msgid ""
@@ -3759,10 +3761,10 @@ msgstr "O Omeka encontrou um erro"
 #: application/views/scripts/error/index.php:33
 msgid ""
 "To learn how to see more detailed information about this error, see the "
-"Omeka Codex page on <a "
+"Omeka Classic User Manual page on <a "
 "href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">retrieving"
 " error messages</a>."
-msgstr "Para ver informações mais detalhadas sobre este erro, acesse a página do Omeka Codex em <a href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">retrieving error messages</a>."
+msgstr "Para ver informações mais detalhadas sobre este erro, acesse a página do Omeka Classic User Manual em <a href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">retrieving error messages</a>."
 
 #: application/views/scripts/index.php:10
 msgid "Featured Item"

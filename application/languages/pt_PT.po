@@ -5,13 +5,14 @@
 # Translators:
 # Daniel Alves <daniel_r_alves@hotmail.com>, 2011,2013-2016,2019
 # Filipe <llopes@museus.ul.pt>, 2013
+# John Flatness <john@zerocrates.org>, 2020
 # Vania Vicente <vv.25420@hotmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2019-05-21 14:57+0000\n"
+"PO-Revision-Date: 2020-01-28 17:54+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/omeka/omeka/language/pt_PT/)\n"
 "MIME-Version: 1.0\n"
@@ -562,7 +563,7 @@ msgstr "Comece por adicionar a sua primeira colecção."
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
 #: application/models/Mixin/ElementText.php:779
-#: application/views/scripts/functions.php:22
+#: application/views/scripts/functions.php:14
 msgid "[Untitled]"
 msgstr "[Sem Título]"
 
@@ -3752,10 +3753,10 @@ msgstr "Omeka encontrou um erro"
 #: application/views/scripts/error/index.php:33
 msgid ""
 "To learn how to see more detailed information about this error, see the "
-"Omeka Codex page on <a "
+"Omeka Classic User Manual page on <a "
 "href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">retrieving"
 " error messages</a>."
-msgstr "Para aprender a ver informações mais detalhadas sobre este erro, veja a página do Omeka Codex sobre <a href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">recuperação de mensagens de erro</a>."
+msgstr "Para aprender a ver informações mais detalhadas sobre este erro, veja a página do Omeka Classic User Manual sobre <a href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">recuperação de mensagens de erro</a>."
 
 #: application/views/scripts/index.php:10
 msgid "Featured Item"

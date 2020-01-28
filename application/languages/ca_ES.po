@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Fidel Bellmunt <fidel.bellmunt@gmail.com>, 2019
+# John Flatness <john@zerocrates.org>, 2020
 # Miquel Àngel <ma.serra@gmail.com>, 2013
 # Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>, 2013
 # Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>, 2013-2018
@@ -14,7 +15,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2019-05-21 14:57+0000\n"
+"PO-Revision-Date: 2020-01-28 17:41+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Catalan (Spain) (http://www.transifex.com/omeka/omeka/language/ca_ES/)\n"
 "MIME-Version: 1.0\n"
@@ -565,7 +566,7 @@ msgstr "Comenceu afegint la vostra primera col·lecció."
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
 #: application/models/Mixin/ElementText.php:779
-#: application/views/scripts/functions.php:22
+#: application/views/scripts/functions.php:14
 msgid "[Untitled]"
 msgstr "[Sense títol]"
 
@@ -685,7 +686,7 @@ msgstr "Fòrums de suport"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Back to top"
-msgstr ""
+msgstr "Torna a l'inici"
 
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
@@ -2996,7 +2997,7 @@ msgstr "Clau reCAPTCHA del lloc"
 msgid ""
 "Enter site key from %s. Both this and the private key must be filled in to "
 "secure public forms. Keys must be for reCAPTCHA v2."
-msgstr ""
+msgstr "Introduïu la clau del lloc des de%s. Tant aquesta com la clau privada s’han d’omplir per assegurar formularis públics. Les claus han de ser per a reCAPTCHA v2."
 
 #: application/forms/SecuritySettings.php:59
 msgid "reCAPTCHA Secret Key"
@@ -3007,7 +3008,7 @@ msgstr "Clau reCAPTCHA secreta"
 msgid ""
 "Enter secret key from %s. Both this and the public key must be filled in to "
 "secure public forms. Keys must be for reCAPTCHA v2."
-msgstr ""
+msgstr "Introduïu la clau secreta de %s. Tant aquesta com la clau pública s’han d’omplir per assegurar formularis públics. Les claus han de ser per a reCAPTCHA v2."
 
 #: application/forms/SecuritySettings.php:67
 msgid ""
@@ -3755,10 +3756,10 @@ msgstr "L'Omeka ha trobat un error"
 #: application/views/scripts/error/index.php:33
 msgid ""
 "To learn how to see more detailed information about this error, see the "
-"Omeka Codex page on <a "
+"Omeka Classic User Manual page on <a "
 "href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">retrieving"
 " error messages</a>."
-msgstr "Per obtenir informació detallada sobre aquest error, vegeu la documentació de l'Omeka sobre els <a href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">missatges d'error</a>. "
+msgstr "Per obtenir informació detallada sobre aquest error, vegeu la documentació de l'Omeka sobre els <a href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">missatges d'error</a>."
 
 #: application/views/scripts/index.php:10
 msgid "Featured Item"

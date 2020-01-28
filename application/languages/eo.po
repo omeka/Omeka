@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Daniele Binaghi, 2018
+# Daniele Binaghi, 2018-2019
+# John Flatness <john@zerocrates.org>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2019-05-21 14:57+0000\n"
+"PO-Revision-Date: 2020-01-28 17:42+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Esperanto (http://www.transifex.com/omeka/omeka/language/eo/)\n"
 "MIME-Version: 1.0\n"
@@ -51,7 +52,7 @@ msgstr "Estaĵo ĉefe respondeca por krei la risurcon"
 
 #. Dublin Core: Subject element name
 msgid "Subject"
-msgstr "Objekto"
+msgstr "Temo"
 
 #. Dublin Core: Subject element description
 msgid "The topic of the resource"
@@ -481,7 +482,7 @@ msgstr "Esplori kolektojn"
 #: application/views/scripts/search/index.php:2
 #, php-format
 msgid "(%s total)"
-msgstr "(%s totalo)"
+msgstr "(%s entute)"
 
 #: admin/themes/default/collections/browse.php:17
 #, php-format
@@ -560,7 +561,7 @@ msgstr "Komencu aldonante vian unuan kolekton."
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
 #: application/models/Mixin/ElementText.php:779
-#: application/views/scripts/functions.php:22
+#: application/views/scripts/functions.php:14
 msgid "[Untitled]"
 msgstr "[Sentitola]"
 
@@ -680,7 +681,7 @@ msgstr "Helpa forumo"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Back to top"
-msgstr ""
+msgstr "Supren"
 
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
@@ -1185,7 +1186,7 @@ msgstr "Elektu malsupre"
 
 #: admin/themes/default/items/batch-edit-common.php:11
 msgid "Not Public"
-msgstr "Malpublika"
+msgstr "Ne publika"
 
 #: admin/themes/default/items/batch-edit-common.php:20
 msgid "Featured?"
@@ -1493,27 +1494,27 @@ msgstr "Serĉi laŭ intervalo de ID#s (ekzemple: 1-4, 156, 79)"
 #: admin/themes/default/items/search-form.php:130
 #: application/views/scripts/items/search-form.php:120
 msgid "Search By Collection"
-msgstr "Serĉu laŭ kolekto"
+msgstr "Serĉi laŭ kolekto"
 
 #: admin/themes/default/items/search-form.php:146
 #: application/views/scripts/items/search-form.php:134
 msgid "Search By Type"
-msgstr "Serĉŭ laŭ tipo"
+msgstr "Serĉi laŭ tipo"
 
 #: admin/themes/default/items/search-form.php:163
 #: application/views/scripts/items/search-form.php:150
 msgid "Search By User"
-msgstr "Serĉu laŭ uzanto"
+msgstr "Serĉi laŭ uzanto"
 
 #: admin/themes/default/items/search-form.php:180
 #: application/views/scripts/items/search-form.php:165
 msgid "Search By Tags"
-msgstr "Serĉu laŭ etikedoj"
+msgstr "Serĉi laŭ etikedoj"
 
 #: admin/themes/default/items/search-form.php:195
 #: application/views/scripts/items/search-form.php:178
 msgid "Public/Non-Public"
-msgstr "Publika/Nepublika"
+msgstr "Publika/Ne publika"
 
 #: admin/themes/default/items/search-form.php:204
 #: application/views/scripts/items/search-form.php:186
@@ -2991,7 +2992,7 @@ msgstr "Reteja ŝlosilo reCAPTCHA"
 msgid ""
 "Enter site key from %s. Both this and the private key must be filled in to "
 "secure public forms. Keys must be for reCAPTCHA v2."
-msgstr ""
+msgstr "Enigu la retejan ŝlosilon de %s. Kaj tiu ĉi kaj la privata ŝlosilo devas esti donitaj por sekurigi la publikajn formularojn. Ŝlosiloj devas validi por reCAPTCHA v2."
 
 #: application/forms/SecuritySettings.php:59
 msgid "reCAPTCHA Secret Key"
@@ -3002,7 +3003,7 @@ msgstr "Sekreta ŝlosilo reCAPTCHA"
 msgid ""
 "Enter secret key from %s. Both this and the public key must be filled in to "
 "secure public forms. Keys must be for reCAPTCHA v2."
-msgstr ""
+msgstr "Enigu la sekretan ŝlosilon de %s. Kaj tiu ĉi kaj la publika ŝlosilo devas esti donitaj por sekurigi la publikajn formularojn. Ŝlosiloj devas validi por reCAPTCHA v2."
 
 #: application/forms/SecuritySettings.php:67
 msgid ""
@@ -3227,7 +3228,7 @@ msgstr "&larr; Antaŭa ero"
 
 #: application/libraries/globals.php:2795
 msgid "Browse All"
-msgstr "Esploru ĉiujn"
+msgstr "Esplori ĉiujn"
 
 #: application/libraries/globals.php:2800
 msgid "Browse by Tag"
@@ -3750,10 +3751,10 @@ msgstr "Omeka trafis en eraron"
 #: application/views/scripts/error/index.php:33
 msgid ""
 "To learn how to see more detailed information about this error, see the "
-"Omeka Codex page on <a "
+"Omeka Classic User Manual page on <a "
 "href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">retrieving"
 " error messages</a>."
-msgstr "Por lerni kiel vidi pli detalajn informojn pri tiu ĉi eraro, vidu la paĝo de Omeka Codex pri <a href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">ricevi erarmesaĝojn</a>."
+msgstr "Por lerni kiel vidi pli detalajn informojn pri tiu ĉi eraro, vidu la paĝo de Omeka Classic User Manual pri <a href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">ricevi erarmesaĝojn</a>."
 
 #: application/views/scripts/index.php:10
 msgid "Featured Item"

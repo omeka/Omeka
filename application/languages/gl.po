@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
+# John Flatness <john@zerocrates.org>, 2020
 # Nalma78 <nalonso@fervenzasxc.com>, 2012
 # Nalma78 <nalonso@fervenzasxc.com>, 2012
 # Tomás Vilariño <vifito@vifito.eu>, 2018
@@ -11,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2019-05-21 14:57+0000\n"
+"PO-Revision-Date: 2020-01-28 17:45+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Galician (http://www.transifex.com/omeka/omeka/language/gl/)\n"
 "MIME-Version: 1.0\n"
@@ -562,7 +563,7 @@ msgstr "Comenzar engadindo a túa primeira colección."
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
 #: application/models/Mixin/ElementText.php:779
-#: application/views/scripts/functions.php:22
+#: application/views/scripts/functions.php:14
 msgid "[Untitled]"
 msgstr "[Sen título]"
 
@@ -3752,10 +3753,10 @@ msgstr "Omeka atopou un erro"
 #: application/views/scripts/error/index.php:33
 msgid ""
 "To learn how to see more detailed information about this error, see the "
-"Omeka Codex page on <a "
+"Omeka Classic User Manual page on <a "
 "href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">retrieving"
 " error messages</a>."
-msgstr "Para saber como ver información máis detallada sobre este erro, consulte a páxina Omeka Codex en <a href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\"> recuperando mensaxes de erro </a>."
+msgstr "Para saber como ver información máis detallada sobre este erro, consulte a páxina Omeka Classic User Manual en <a href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">recuperando mensaxes de erro</a>."
 
 #: application/views/scripts/index.php:10
 msgid "Featured Item"

@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
+# John Flatness <john@zerocrates.org>, 2020
 # Masaki Hidano <MasaGon@info-lounge.jp>, 2013
 # Masaki Hidano <MasaGon@info-lounge.jp>, 2013
 # Naosuke Okamoto, 2018-2019
@@ -16,7 +17,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2019-05-21 14:57+0000\n"
+"PO-Revision-Date: 2020-01-28 17:51+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Japanese (http://www.transifex.com/omeka/omeka/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -566,7 +567,7 @@ msgstr "最初のコレクションを追加して始めましょう。"
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
 #: application/models/Mixin/ElementText.php:779
-#: application/views/scripts/functions.php:22
+#: application/views/scripts/functions.php:14
 msgid "[Untitled]"
 msgstr "[タイトルなし]"
 
@@ -2990,7 +2991,7 @@ msgstr "reCAPTCHAサイトキー"
 msgid ""
 "Enter site key from %s. Both this and the private key must be filled in to "
 "secure public forms. Keys must be for reCAPTCHA v2."
-msgstr ""
+msgstr "%sからサイトキーを入力してください。 公開鍵を保護するには、これと秘密鍵の両方を入力する必要があります。 キーはreCAPTCHA v2用でなければなりません。"
 
 #: application/forms/SecuritySettings.php:59
 msgid "reCAPTCHA Secret Key"
@@ -3001,7 +3002,7 @@ msgstr "reCAPTCHAシークレットキー"
 msgid ""
 "Enter secret key from %s. Both this and the public key must be filled in to "
 "secure public forms. Keys must be for reCAPTCHA v2."
-msgstr ""
+msgstr "%s から秘密鍵を入力してください。 これと公開鍵はどちらも、公開形式を保護するために記入する必要があります。 キーはreCAPTCHA v2用でなければなりません。"
 
 #: application/forms/SecuritySettings.php:67
 msgid ""
@@ -3746,10 +3747,10 @@ msgstr "Omekaにエラーが発生しました。"
 #: application/views/scripts/error/index.php:33
 msgid ""
 "To learn how to see more detailed information about this error, see the "
-"Omeka Codex page on <a "
+"Omeka Classic User Manual page on <a "
 "href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">retrieving"
 " error messages</a>."
-msgstr "このエラーの詳細情報の表示方法については、Omeka Codexの <a href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">エラーメッセージの取得に関するページ</a> を参照してください。"
+msgstr "このエラーの詳細情報の表示方法については、Omeka Classic User Manualの <a href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">エラーメッセージの取得に関するページ</a> を参照してください。"
 
 #: application/views/scripts/index.php:10
 msgid "Featured Item"
