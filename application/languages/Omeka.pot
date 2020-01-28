@@ -559,7 +559,7 @@ msgstr ""
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
 #: application/models/Mixin/ElementText.php:779
-#: application/views/scripts/functions.php:22
+#: application/views/scripts/functions.php:14
 msgid "[Untitled]"
 msgstr ""
 
@@ -3740,8 +3740,8 @@ msgstr ""
 #: application/views/scripts/error/index.php:33
 msgid ""
 "To learn how to see more detailed information about this error, see the "
-"Omeka Codex page on <a href=\"http://omeka.org/classic/docs/Troubleshooting/"
-"Retrieving_Error_Messages/\">retrieving error messages</a>."
+"Omeka Classic User Manual page on <a href=\"http://omeka.org/classic/docs/"
+"Troubleshooting/Retrieving_Error_Messages/\">retrieving error messages</a>."
 msgstr ""
 
 #: application/views/scripts/index.php:10
