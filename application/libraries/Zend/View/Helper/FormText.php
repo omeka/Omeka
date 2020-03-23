@@ -53,9 +53,9 @@ class Zend_View_Helper_FormText extends Zend_View_Helper_FormElement
      *
      * @return string The element XHTML.
      */
-    public function formText($name, $value = null, $attribs = null)
+    public function formText($name, $value = null, $attribs = null, $type = 'text')
     {
-        $info = $this->_getInfo($name, $value, $attribs);
+        $info = $this->_getInfo($name, $value, $attribs, $type);
         extract($info); // name, value, attribs, options, listsep, disable
 
         // build the element
@@ -65,7 +65,7 @@ class Zend_View_Helper_FormText extends Zend_View_Helper_FormElement
             $disabled = ' disabled="disabled"';
         }
 
-        $xhtml = '<input type="text"'
+        $xhtml = '<input type="' . $this->view->escape($type) . '"'
                 . ' name="' . $this->view->escape($name) . '"'
                 . ' id="' . $this->view->escape($id) . '"'
                 . ' value="' . $this->view->escape($value) . '"'
