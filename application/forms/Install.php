@@ -17,7 +17,7 @@ class Omeka_Form_Install extends Omeka_Form
     const DEFAULT_SQUARE_THUMBNAIL_CONSTRAINT = 200;
     const DEFAULT_PER_PAGE_ADMIN = 10;
     const DEFAULT_PER_PAGE_PUBLIC = 10;
-    const DEFAULT_SHOW_EMPTY_ELEMENTS = true;
+    const DEFAULT_SHOW_EMPTY_ELEMENTS = false;
     const DEFAULT_USER_NAME = 'Super User';
 
     public function init()
