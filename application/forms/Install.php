@@ -167,7 +167,8 @@ class Omeka_Form_Install extends Omeka_Form
         $this->addElement('checkbox', 'show_empty_elements', array(
             'label' => __('Show Empty Elements'),
             'class' => 'checkbox',
-            'description' => __('Check box to show metadata elements with no text.')
+            'description' => __('Check box to show metadata elements with no text.'),
+            'value' => self::DEFAULT_SHOW_EMPTY_ELEMENTS,
         ));
 
         $this->addElement('text', 'path_to_convert', array(
