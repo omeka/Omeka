@@ -562,6 +562,8 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
 
     /**
      * Delete the record.
+     *
+     * @return bool Whether the deletion succeeded.
      */
     public function delete()
     {
@@ -588,6 +590,8 @@ abstract class Omeka_Record_AbstractRecord implements ArrayAccess
 
         $this->runCallbacks('afterDelete');
         $this->id = null;
+
+        return true;
     }
 
     /**
