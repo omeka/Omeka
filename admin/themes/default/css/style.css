@@ -1330,35 +1330,18 @@ header nav {
 }
 
 #login h1 {
-    width: 300px;
-    background-image: url('../images/blue-banner.jpg');
     color: #ffffff;
     clear: both;
-    padding: 0;
-    height: 53px;
-    line-height: 53px;
+    padding: 12px;
     margin: 20px 0 0 0;
-    display: inline-block;
+    display: inline;
     text-shadow: 0 0 1px #000000;
+    background: linear-gradient(to bottom, #193f52, #133443);
+    line-height: 60px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    border-radius: 3px;
 }
-
-        #login h1:before {
-            height: 53px;
-            width: 27px;
-            background-image: url('../images/blue-banner_left.jpg');
-            content: "";
-            display: block;
-            float: left;
-        }
-
-        #login h1:after {
-            height: 53px;
-            width: 27px;
-            background-image: url('../images/blue-banner_right.jpg');
-            content: "";
-            display: block;
-            float: right;
-        }
 
 #login #content h2 {
     margin: 1em 0;
