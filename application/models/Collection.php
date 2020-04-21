@@ -225,10 +225,19 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
             'sort_field' => 'featured',
             'sort_dir' => 'd'
         ), 1);
-        if ($itemArray) {
-            return ($itemArray[0]->getFile());
-        } else {
-            return null;
-        }
-    }
+	if ($itemArray) {
+		return ($itemArray[0]->getFile());
+	} else {
+		// In case no Item with an image was found
+		$itemArray = $itemTable->findBy(array(
+			'collection' => $this->id,
+			'sort_field' => 'featured',
+			'sort_dir' => 'd'
+		), 1);
+		if ($itemArray) {
+			return ($itemArray[0]->getFile());
+		} else {
+			return null;
+		}
+	}
 }
