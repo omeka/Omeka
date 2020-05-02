@@ -87,6 +87,11 @@ class TagsController extends Omeka_Controller_AbstractActionController
     {
         return array('name', 'a');
     }
+    
+	protected function _getDeleteConfirmMessage($tag)
+    {
+        return __('This will delete the tag "%s" from all records associated to it.', $tag->name);
+    }
 
     public function autocompleteAction()
     {
