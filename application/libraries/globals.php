@@ -1486,6 +1486,7 @@ function tag_attributes($attributes)
         if (preg_match('/[^A-Za-z0-9_:.-]/', $key)) {
             continue;
         }
+        if (is_numeric($attribute)) $attribute = "$attribute";
         if (is_string($attribute)) {
             $attr[$key] = $key . '="' . html_escape($attribute) . '"';
         } elseif ($attribute === true) {
