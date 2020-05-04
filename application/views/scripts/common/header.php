@@ -2,6 +2,12 @@
 <html lang="<?php echo get_html_lang(); ?>">
 <head>
     <meta charset="utf-8">
+    <?php if ($author = option('author')): ?>
+    <meta name="author" content="<?php echo $author; ?>" />
+    <?php endif; ?>
+    <?php if ($copyright = option('copyright')): ?>
+    <meta name="copyright" content="<?php echo $copyright; ?>" />
+    <?php endif; ?>
     <?php if ($description = option('description')): ?>
     <meta name="description" content="<?php echo $description; ?>" />
     <?php endif; ?>
