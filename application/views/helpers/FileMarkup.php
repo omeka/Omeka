@@ -145,8 +145,15 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
             'linkAttributes' => array(),
             'imgAttributes' => array(),
             'filenameAttributes' => array()
-            )
-        );
+        )
+    );
+
+    /**
+     * Fallback image used when no other fallbacks are appropriate.
+     *
+     * @var string
+     */
+    const GENERIC_FALLBACK_IMAGE = 'fallback-file.png';
 
     /**
      * Images to show when a file has no derivative.
@@ -157,7 +164,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         'audio' => 'fallback-audio.png',
         'image' => 'fallback-image.png',
         'video' => 'fallback-video.png',
-        'generic' => 'fallback-file.png', // Fallback image used when no other fallbacks are appropriate.
+        '*'     => GENERIC_FALLBACK_IMAGE
     );
 
     /**
@@ -651,7 +658,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
             return self::$_fallbackImages[$mimePrefix];
         }
 
-        return self::$_fallbackImages['generic'];
+        return self::$_fallbackImages['*'];
     }
 
     /**
