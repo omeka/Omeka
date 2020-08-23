@@ -1,17 +1,23 @@
 <?php
+queue_js_file('collections-browse');
 $pageTitle = __('Browse Collections') . ' ' .  __('(%s total)', $total_results);
 $totalItemsWithoutCollection = get_db()->getTable('Item')->count(array('collection' => 0));
-echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections'));
+echo head(
+	array(
+		'title'=>$pageTitle, 
+		'bodyclass'=>'collections browse'
+	)
+);
 echo flash();
+echo item_search_filters();
 ?>
 
-<?php if (total_records('Collection') > 0): ?>
+<?php if ($total_results > 0): ?>
     <?php echo pagination_links(); ?>
     <?php if (is_allowed('Collections', 'add')): ?>
-        <a href="<?php echo html_escape(url('collections/add')); ?>" class="small green button">
-            <?php echo __('Add a Collection'); ?>
-        </a>
+    <a href="<?php echo html_escape(url('collections/add')); ?>" class="small green button collection-add"><?php echo __('Add a Collection'); ?></a>
     <?php endif; ?>
+	<?php echo common('quick-filters', array(), 'collections'); ?>
     <p class="not-in-collections">
     <?php if ($totalItemsWithoutCollection):
         $withoutCollectionMessage = __(plural('%s%d item%s has no collection.', "%s%d items%s aren't in a collection.",
@@ -46,16 +52,33 @@ echo flash();
                         <?php endif; ?>
                         <?php echo link_to_collection(); ?>
                         <?php if (!$collection->public) echo __('(Private)'); ?>
-                        <?php if (is_allowed($collection, 'edit')): ?>
-                        <ul class="action-links">
-                            <li><?php echo link_to_collection(__('Edit'), array('class'=>'edit'), 'edit'); ?></li>
-                        </ul>
-                        <?php endif; ?>
+                        <ul class="action-links group">
+							<?php if (is_allowed($collection, 'edit')): ?>
+							<li><?php echo link_to_collection(__('Edit'), array('class'=>'edit'), 'edit'); ?></li>
+							<?php endif; ?>
+
+							<?php if (is_allowed($collection, 'delete')): ?>
+							<li><?php echo link_to_collection(__('Delete'), array('class' => 'delete-confirm'), 'delete-confirm'); ?></li>
+							<?php endif; ?>
+						</ul>
+                        
                         <?php fire_plugin_hook('admin_collections_browse_each', array('collection' => $collection, 'view' => $this)); ?>
+						
+						<div class="details">
+							<p>
+								<strong><?php echo __('Description'); ?>:</strong>
+								<?php echo snippet_by_word_count(metadata('collection', array('Dublin Core', 'Description')), 40); ?>
+							</p>
+							<p>
+								<strong><?php echo __('Subject'); ?>:</strong>
+								<?php echo metadata('collection', array('Dublin Core', 'Subject'), array('all'=>true, 'delimiter'=>' | ')); ?>
+							</p>
+						</div>
+ 						
                     </td>
                     <td>
                         <?php if ($collection->hasContributor()): ?>
-                            <?php echo metadata('collection', array('Dublin Core', 'Contributor'), array('all'=>true, 'delimiter'=>'<br>')); ?>
+                            <?php echo metadata('collection', array('Dublin Core', 'Contributor'), array('all'=>true, 'delimiter'=>' | ')); ?>
                         <?php else: ?>
                             <?php echo __('No contributors'); ?>
                         <?php endif; ?>
@@ -73,13 +96,22 @@ echo flash();
 
         <?php echo pagination_links(); ?>
         <?php if (is_allowed('Collections', 'add')): ?>
-            <a href="<?php echo html_escape(url('collections/add')); ?>" class="small green button"><?php echo __('Add a Collection'); ?></a>
+        <a href="<?php echo html_escape(url('collections/add')); ?>" class="small green button collection-add"><?php echo __('Add a Collection'); ?></a>
         <?php endif; ?>
+		<?php echo common('quick-filters', array(), 'collections'); ?>
         <p class="not-in-collections"><?php echo $withoutCollectionMessage; ?></p>
     <?php else: ?>
         <p><?php echo __('There are no collections on this page.'); ?> <?php echo link_to('collections', null, __('View All Collections')); ?></p>
     <?php endif; ?>
-<?php else: ?>
+    <script type="text/javascript">
+    Omeka.addReadyCallback(Omeka.CollectionsBrowse.setupDetails, [
+        <?php echo js_escape(__('Details')); ?>,
+        <?php echo js_escape(__('Show Details')); ?>,
+        <?php echo js_escape(__('Hide Details')); ?>
+    ]);
+    </script>
+	
+	<?php else: ?>
     <h2><?php echo __('You have no collections.'); ?></h2>
     <?php if(is_allowed('Collections', 'add')): ?>
         <p><?php echo __('Get started by adding your first collection.'); ?></p>
