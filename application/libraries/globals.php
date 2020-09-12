@@ -3433,12 +3433,14 @@ function theme_logo()
  * @uses get_theme_option()
  * @return string|null
  */
-function theme_header_image($altText = '')
+function theme_header_image()
 {
     $headerImage = get_theme_option('Header Image');
+    $headerImageAlt = get_theme_option('header_image_alt');
     if ($headerImage) {
         $storage = Zend_Registry::get('storage');
         $headerImage = $storage->getUri($storage->getPathByType($headerImage, 'theme_uploads'));
+        $altText = ($headerImageAlt !== null) ? $headerImageAlt : '';
         return '<div id="header-image"><img src="' . $headerImage . '" alt="' . $altText . '"/></div>';
     }
 }
