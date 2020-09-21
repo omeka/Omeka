@@ -18,7 +18,7 @@ Omeka.ItemsBrowse = {};
             }
         });
 
-        var toggleList = '<a href="#" class="toggle-all-details small blue button">' + showDetailsText + '</a>';
+        var toggleList = '<a href="#" class="toggle-all-details full-width-mobile blue button">' + showDetailsText + '</a>';
 
         $('.advanced-search-link').before(toggleList);
 

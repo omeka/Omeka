@@ -1,0 +1,65 @@
+/* Table of Contents
+==================================================
+    #Global Navigation
+    #Content Navigation
+    #Content
+        #Show Items
+        #Login 
+        #Browse Themes */
+
+
+/* Global Navigation
+================================================== */
+
+body {
+    background-image: url('../../images/content_bg.jpg');
+    }
+
+header ul { 
+    margin: .375em 0 0 0; 
+    }
+
+
+/* Content Navigation 
+==================================================*/
+
+#content {
+    border: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    }
+
+#content-nav ul { display: none; }
+
+
+/* Content
+==================================================*/
+
+    /* Show Items
+    ==================================================*/
+
+    #item-images div:nth-of-type(2) { margin-right: 0; }
+    
+    #item-images div:nth-of-type(3) { margin-right: 20px; }
+
+    /* Login
+    ==================================================*/
+    
+    .login-content, .login-footer {
+        width: 100%;
+        }
+        
+        .login-content {
+            margin-top: 0;
+            }
+            
+
+    /* Browse Themes
+    ==================================================*/
+            
+    #current-image .crop { height: 175px; }
+
+    .themes .theme .crop { height: 186px; }
+
+    .themes .theme { margin-bottom: 40px; }

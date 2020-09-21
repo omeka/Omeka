@@ -1,0 +1,68 @@
+/* Table of Contents
+==================================================
+    #Content Navigation 
+    #Content
+        #Dashboard
+        #Browse Items
+        #Browse Themes 
+        #Browse Plugins
+*/
+
+
+/* Form Elements
+==================================================*/
+
+a.button.big, input[type=submit].big, button.big {
+    font-size: 1em;
+    }
+
+/* Content Navigation
+==================================================*/
+
+#content-nav { 
+    width: 100px;
+    font-size: .75em; 
+    }
+
+/* Content 
+==================================================*/
+
+
+.section-title { margin: 60px 0 10px 130px; }
+
+
+    /* Dashboard 
+    ================================================== */
+
+    #stats p { min-width: 1em; }
+    
+    /* Browse Items
+    ==================================================*/
+    
+    .item-actions, .pagination { font-size: .875em; }
+        
+    .pagination { 
+        clear: left;
+        margin: 0 0 20px 0; 
+    }
+    
+    .item-info { width: 40%; }
+    
+    #quick-filter { width: 80px; }
+        
+        
+    /* Browse Themes
+    ==================================================*/
+
+    #current-image .crop { height: 175px; }
+
+    .themes .theme .crop { height: 106px; }
+
+
+    /* Browse Themes
+    ==================================================*/
+    
+    .plugins.browse .container-twelve .plugin .columns {
+        width: 100%;
+        margin: 0;
+    }

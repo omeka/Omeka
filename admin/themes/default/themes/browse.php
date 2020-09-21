@@ -14,13 +14,12 @@ if ($current->image) {
 ?>
 
 <div id="current-theme" class="theme">
-    <div id="current-image" class="five columns alpha">
+    <div id="current-image" class="four columns alpha">
         <div class="crop"><img src="<?php echo $currentScreenshot; ?>" alt="<?php echo __('Screenshot for %s Theme', html_escape($current->title)); ?>" /></div>
-    <?php if($current->hasConfig): ?><a href="<?php echo html_escape(url('themes/config?name=' . $current->directory)); ?>" id="configure-button" class="blue button"><?php echo __('Configure Theme'); ?></a><?php endif; ?>
+    <?php if($current->hasConfig): ?><a href="<?php echo html_escape(url('themes/config?name=' . $current->directory)); ?>" id="configure-button" class="full-width blue button"><?php echo __('Configure Theme'); ?></a><?php endif; ?>
     </div>
-    <div id="current-info" class="five columns omega">
-        <h2 id="current-theme-title"><?php echo __('Current Theme'); ?></h2>
-        <h3><?php echo html_escape($current->title); ?></h3>
+    <div id="current-info" class="six columns omega">
+        <h2><?php echo html_escape($current->title); ?> <small class="current-theme-label"><?php echo __('Current Theme'); ?></small></h2>
         <p class="author"><a href="<?php echo html_escape($current->website); ?>"><?php echo __('By %s', html_escape($current->author)); ?></a></p>
         <p class="theme-description"><?php echo html_escape($current->description); ?></p>
         <p class="theme-support-link"><a href="<?php echo $current->support_link; ?>" target="_blank"><?php echo __('Get support');?></a></p>
