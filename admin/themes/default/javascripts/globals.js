@@ -145,6 +145,9 @@ if (!Omeka) {
         };
 
         var setOriginalData = function () {
+            if (window.tinyMCE) {
+                tinyMCE.triggerSave();
+            }
             $(this).data('omekaFormOriginalData', $(this).serialize());
         };
 
