@@ -1,0 +1,88 @@
+#login {
+	#content {
+	    margin-top: 10%;
+	    text-align: center;
+	    background: white;
+	    padding: 25px;
+	    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+	    
+	    @include screen-xs {
+		    max-width: 260px;
+	    }
+	}
+
+	.errors {
+	    list-style-type: none;
+	    margin: 0;
+	    padding: 0;
+	    text-align: left;
+	    
+		li {
+	        background-color: rgba(255, 255, 255, .5);
+	        border: 1px solid #E7E7E7;
+	        -webkit-border-radius: 3px;
+	        -moz-border-radius: 3px;
+	        border-radius: 3px;
+	        color: #914E33;
+	        margin: 0;
+	        padding: .5em;
+	    }
+	}
+
+	#forgotpassword {
+	    clear: both;
+	}
+
+	.field label {
+	    min-width: 0;
+	    padding: 0;
+	}
+
+	#flash {
+	    margin: 0 10px;
+	}
+
+	input[type=text], 
+	input[type=password] {
+	    width: 100%;
+	}
+
+	h1 {
+	    width: 100%;
+	    color: #ccc;
+	    clear: both;
+	    padding: 0;
+	    height: 53px;
+	    line-height: 53px;
+	    margin: 20px 0 0 0;
+	    display: inline-block;
+	}
+	h2 {
+	    margin: 1em 0;
+	}
+	label {
+	    text-align: left;
+	}
+
+	.login-footer {
+	    clear: both;
+	    padding: 10px 0;
+	    text-align: center;
+	}
+
+	#remember {
+	    display: inline-block;
+	    margin: 0;
+	}
+
+	#fieldset-login {
+	    text-align: left;
+	}
+
+	
+
+	.submit,
+	#login-links {
+	    clear: both;
+	}
+}

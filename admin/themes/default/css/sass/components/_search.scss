@@ -1,0 +1,224 @@
+#search-form {
+    width: 30%;
+    float: left;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    
+    @include screen-md {
+	    width: 40%;
+	}
+    @include screen-sm {
+	    width: 50%;
+	}
+    @include screen-xs {
+    	float: none;
+		width: 100%;
+		position: relative;
+		top: -50px;
+	}
+    
+    p {
+        clear: both;
+    }
+    
+    input[type=text] {
+        width: 100%;
+        padding-right: 36px;
+        height: 36px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
+    }
+    
+    &.with-advanced input[type=text] {
+        padding-right: 72px;
+    }
+    
+    button {
+        width: 36px;
+        height: 36px;
+        padding: 0 5px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        text-indent: -9999px;
+        transition: 0.5s all;
+        margin: 0;
+        
+        color: #E5B7B4;
+        background: #8C3E38;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+        text-shadow: none;
+        border-left: 1px solid #d8d8d8;
+        
+        &:after {
+            font-family: "FontAwesome";
+            content: "\f002";
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 36px;
+            width: 36px;
+            text-indent: 0;
+            text-align: center;
+            line-height: 32px;
+        }
+        &:hover {
+			background: #68302C;
+			color: white;
+		}
+    }
+}
+
+#advanced-search {
+    width: 36px;
+    height: 36px;
+    line-height: 16px;
+    text-indent: -9999px;
+    text-decoration: none;
+    position: absolute;
+    transition: 0.5s all;
+    top: 0;
+    right: 36px;
+    margin: 0;
+    
+    color: #E5B7B4;
+    background: #8C3E38;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    text-shadow: none;
+    border-left: 1px solid #d8d8d8;
+
+	&:after {
+	    content: "\f141";
+	    font-family: "FontAwesome";
+	    font-size: 16px;
+	    display: block;
+	    text-indent: 0;
+	    text-align: center;
+	    margin: -1em 0 0 -0.325em;
+	}
+	&:hover {
+		background: #68302C;
+		color: white;
+	}
+}
+
+
+#advanced-form {
+    display: none;
+    background-color: #fff;
+    overflow: auto;
+    clear: both;
+    z-index: 1001;
+    position: absolute;
+    top: 36px;
+    left: 0;
+    padding: 0 20px 1em 20px;
+    border: 1px solid #e7e7e7;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+
+
+    input[type=radio] { margin: 0 9px 0 0; }
+    input[type=checkbox] { margin-right: 5px; }
+
+    fieldset { margin: 20px 0; }
+
+    legend {
+        font-size: 16px;
+        margin: 20px 0 10px;
+    }
+}
+
+    
+#search-results {
+	td:first-of-type {
+    	width: 15%;
+    }
+}
+
+#search-filters {
+	ul {
+	    clear: both;
+	    list-style-type: none;
+	    display: inline;
+	    padding: 0;
+	    margin: 0;
+	    text-align: left;
+	}
+
+    li {
+        display: inline-block;
+        background: url('../images/search.png') no-repeat;
+        padding: 0 0 0 21px;
+        margin: 0 30px 20px 0;
+        background-position-y: 2px;
+    }
+
+    li ul li {
+        display: inline-block;
+        background: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    li ul li:after {
+      	content: ",";
+    }
+
+    li ul li:last-child:after {
+      	content: "";
+    }
+}
+
+.search-record-types ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+    .search-record-types input[type=checkbox] { margin-right: 5px;}
+
+#no-results {
+    clear: both;
+}
+
+.search-entry {
+	select {
+	    min-width: 0;
+	    width: 42.5%;
+	}
+
+	&:first-of-type select {
+	    width: 49.5%;
+	}
+
+	input[type=text] {
+	    margin-bottom: 10px;
+	}
+}
+
+#search-narrow-by-fields .search-entry:first-of-type .advanced-search-joiner {
+    display: none;
+}
+
+#search-narrow-by-fields .advanced-search-joiner {
+    width: 15%;
+}
+
+button.remove_search {
+    margin-bottom: 40px;
+}
+
+#submit_search_advanced {
+    clear: both;
+    margin: 20px 0;
+}

@@ -1,0 +1,39 @@
+footer {
+    clear: both;
+    font-size: 12px;
+    padding: 15px 0 !important;
+    
+    a {
+	    margin-right: 20px;
+	    font-size: 12px;
+	    
+	    @include screen-ltmd {
+			margin-right: 10px;   
+		}
+	    
+	    &:last-of-type {
+		    margin-right: 0;
+	    }
+    }
+    
+    p.left {
+	    font-size: 12px;
+	    
+	    @include screen-ltmd {
+		    float: none;
+			margin: 20px 0 10px;
+		}
+    }
+    p.right {
+	    font-size: 12px;
+	    
+	    @include screen-ltmd {
+			float: none;
+			margin: 0 0 20px;
+		}
+	    
+	    a {
+		    margin-left: 20px;
+	    }
+    }
+}

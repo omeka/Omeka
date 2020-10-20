@@ -1,0 +1,67 @@
+* {
+	font-family: "Lato", sans-serif;
+	font-size: 14px;
+	color: #232323;
+}
+
+h1,
+h1 a:link {
+	font-weight: 700;
+	font-size: 30px;
+	line-height: 36px;
+	text-decoration: none;
+}
+
+h2,
+h2 a:link { 
+	font-weight: 700;
+	font-size: 24px;
+	line-height: 30px;
+	text-decoration: none;
+}
+
+h3,
+h3 a:link {
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 20px;
+}
+
+h4 { 
+
+}
+
+h5 { 
+
+}
+
+a:link {
+    color: #003576;
+    text-decoration: underline;
+    transition: 0.5s all;
+}
+
+a:hover, 
+a:active,
+a:visited { 
+	color: darken(#003576, 20%);
+}
+
+p, 
+li {
+    line-height: 1.5em;
+}
+
+li:empty { 
+	display: none; 
+}
+
+.subhead {
+    position: relative;
+    
+	h1 {
+	    white-space: nowrap;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	}
+}

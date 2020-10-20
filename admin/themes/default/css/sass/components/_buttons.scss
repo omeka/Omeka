@@ -1,0 +1,128 @@
+span.button,
+a.button, 
+input[type=submit], 
+button {
+    -webkit-border-radius: 3;
+    -moz-border-radius: 3;
+    border-radius: 3px;
+    
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    -webkit-appearance: none;
+    
+    background: #f1f2f2;
+    border: 1px solid rgba(#232323, 0.25);
+    color: #232323;
+    
+    margin: 0 5px 20px 0;
+    min-height: 25px;
+    padding: 10px 18px;
+    line-height: 16px;
+    
+    text-align: center;
+    text-decoration: none;
+    white-space: normal;
+    transition: 0.5s all;
+    
+    &:hover,
+    &:focus {
+	    border-color: rgba(#232323, 0.65);
+	    background: darken(#f1f2f2, 5%);
+	    outline: none;
+    }
+    
+    &:disabled {
+        -moz-box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        cursor: default;
+        opacity: .35;
+    }
+    
+    &.full-width {
+	    width: 100%;
+    }
+    
+    &.full-width-mobile {
+	    @include screen-xs {
+		    width: 100%;
+		    margin-bottom: 10px;
+		}
+    }
+    
+    &.large {
+        display: block;
+        line-height: 1.75em;
+        margin: 10px auto;
+        padding: 14px 20px;
+		font-size: 115%;
+    }
+    &.small {
+        display: inline-block;
+        margin: 0 5px 20px 0;
+        padding: 5px 10px;
+    }
+    
+    &.blue {
+	    color: #003576;
+        background: #EEF3FA;
+        border: 1px solid rgba(#003576, 0.25);
+        
+        &:hover,
+        &:focus {
+	        border-color: rgba(#003576, 0.65);
+	        background: darken(#EEF3FA, 5%);
+	        outline: none;
+        }
+    }
+    &.red {
+	    color: #B00D00;
+        background: #F9E8E7;
+        border: 1px solid rgba(#B00D00, 0.25);
+        
+        &:hover,
+        &:focus {
+	        border-color: rgba(#B00D00, 0.65);
+	        background: darken(#F9E8E7, 5%);
+	        outline: none;
+        }
+    }
+    &.green {
+	    color: #519E00;
+        background: #EEF6E6;
+        border: 1px solid rgba(#519E00, 0.25);
+        
+        &:hover,
+        &:focus {
+	        border-color: rgba(#519E00, 0.65);
+	        background: darken(#EEF6E6, 5%);
+	        outline: none;
+        }
+    }
+}
+           
+
+/* jQuery UI overrides
+================================================== */
+
+button.ui-state-default {
+    background: #A4C637;
+    color: #fff !important;
+    border: 1px solid #749308 !important;
+    -webkit-border-radius: 3 !important;
+    -moz-border-radius: 3 !important;
+    border-radius: 3 !important;
+}
+
+button.ui-dialog-titlebar-close {
+    top: 40% !important;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border: 0 !important;
+    background-image: none !important;
+    background-color: transparent !important;
+}

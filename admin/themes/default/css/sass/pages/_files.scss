@@ -1,0 +1,22 @@
+.files dt, .files dd {
+    line-height: 1.5em;
+    margin: 0;
+    padding: 0;
+}
+
+.files dt {
+    font-weight: bold;
+}
+
+.files .item-file {
+    display: block;
+    margin: 0 0 20px 0;
+}
+
+.files dd {
+    margin-bottom: 1em;
+}
+
+.id3-property-name {
+  font-weight: bold;
+}

@@ -1,0 +1,205 @@
+.tags h3 { margin: 0; }
+
+.tags ol { padding: 0 0 0 1em;  li { margin-left: 5px; padding-left: 20px; }}
+
+.tags ol:before {
+    content: "";
+    display: inline-block;
+    width: 180px;
+    height: 75px;
+    background:url('../images/tag-desc.png') no-repeat;
+    background-size: cover;
+    margin: .25em 0 1em -1em;
+}
+
+.tags #search-tags {
+
+}
+
+.tags #search-tags button,
+.tags #search-tags input[type="text"] {
+
+}
+
+.tags .clearfix {
+
+}
+
+.editable-inline div {
+    display: inline-block;
+}
+
+.editable-inline input {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-bottom: 0;
+    padding: 0 6px !important;
+    height: 20px;
+}
+
+form.form-inline.editableform {
+    position: relative;
+}
+
+.editable-error-block.editable-error {
+    position: absolute;
+    top: 100%;
+    background-color: #fff;
+    text-shadow: none;
+    color: #914E33;
+    left: 0;
+    font-family: "Cabin", sans-serif;
+    padding: 3px 6px;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0px 3px 3px #cccccc;
+}
+
+.tag-list {
+    padding: 0;
+}
+
+.tag-list li {
+    height: 22px;
+    color: #519E00;
+    background: #EEF6E6;
+    border: 1px solid rgba(#519E00, 0.25);
+    
+    &:hover,
+    &:focus {
+        border-color: rgba(#519E00, 0.65);
+        background: darken(#EEF6E6, 5%);
+        outline: none;
+    }
+    
+    -webkit-border-radius: 3;
+    -moz-border-radius: 3;
+    border-radius: 3px;
+    
+    display: inline-block;
+    margin: 0 0 10px 0;
+    padding: 5px 10px;
+}
+
+.tag-list .count {
+    margin-right: 5px;
+    padding-right: 10px;
+    position: relative;
+}
+
+.tag-list li .count:after {
+    content: "";
+    width: 1px;
+    position: absolute;
+    background-color: rgba(#519E00, 0.25);
+    bottom: -5px;
+    top: -5px;
+    right: 0;
+}
+
+.tag-list li .tag, .tag-list li a, .tag-list li .count {
+    display: inline-block;
+    color: #519E00;
+}
+
+.tag-list li .delete-tag a, .tag-list li .remove-tag a, .tag-list li .undo-remove-tag a {
+    text-indent: -9999px;
+    width: 16px;
+    height: 16px;
+    margin-left: 8px;
+    position: relative;
+    top: 3px;
+}
+
+.tag-list li .delete-tag a:after, .tag-list li .remove-tag a:after, .undo-remove-tag a:after {
+    content: "\f067";
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
+    font-family: "FontAwesome";
+    height: 100%;
+    width: 100%;
+    background-color: rgba(#519E00, 1);
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    color:#EEF6E6;
+    display: block;
+    position: relative;
+    font-size: 10px;
+    top: 0;
+    float: left;
+    text-indent: 4px;
+    line-height: 17px;
+    text-shadow: none;
+}
+
+.undo-remove-tag a:after {
+    content: "\f112";
+    color: #BB8282;
+    font-size: 9px;
+    text-indent: 3px;
+    line-height: 18px;
+}
+
+#tags-nav {
+    margin: 0;
+}
+
+#tags-nav span:last-of-type {
+    margin-right: 20px;
+}
+
+#tags-nav .quick-filter-wrapper {
+    height: 27px;
+    padding: 0 20px 0 0;
+    border-width: 1px 1px 0 1px;
+    margin-left: 0;
+}
+
+#tags-nav .quick-filter-wrapper .dropdown li {
+    padding: 0 20px 0 0;
+}
+
+#tags-nav > span {
+	position: relative;
+}
+
+    #tags-nav > span:first-child {
+
+    }
+
+
+    #tags-nav span a:link, #tags-nav span a:visited {
+
+    }
+
+    #tags-nav span.current {
+        a {
+	        padding-right: 36px;
+    text-align: left;
+        }
+        
+    }
+    #tags-nav span.current a:after {
+        content: "";
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        width: 0;
+        height: 0;
+        transform: translateY(-50%);
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+    }
+
+    #tags-nav span.current.asc a:after {
+        border-bottom: 5px solid;
+    }
+
+    #tags-nav span.current.desc a:after {
+        border-top: 5px solid;
+    }
+
+.tags div.two.columns { clear: both; }

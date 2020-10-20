@@ -1,0 +1,149 @@
+.table-responsive {
+	display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    clear: both;
+    margin-bottom: 16px;
+}
+
+th {
+    background-color: rgba(200,200,200,0.5);
+    border: 1px solid #DCDCDC;
+    padding:  .25em .625em;
+    text-align: left;
+    font-weight: normal;
+
+	a:after {
+        width: 10px;
+        height: 10px;
+        content: url('../images/sort.png');
+        display: inline-block;
+        line-height: 10px;
+        margin: 0 0 0 5px;
+    }
+    a:link, 
+    a:visited { 
+	    color: #232323;
+	    opacity: 0.5;
+	    
+	    &:hover {
+		    opacity: 1;
+	    }
+	}
+	
+	&.sorting { 
+		a { 
+			color: #232323; 
+			opacity: 1;
+		}
+	}
+
+    &.desc a:after { content: url('../images/desc.png'); }
+    &.asc a:after { content: url('../images/asc.png'); }
+}
+
+tr { background-color: rgba(255,255,255,.5); }
+
+td {
+    border: 1px solid #DCDCDC;
+    padding: .625em;
+    vertical-align: top;
+    
+    .even & {
+        background-color: rgba(241,242,242,0.5);
+    }
+    .odd & {
+        background-color: #fff;
+    }
+}
+
+.action-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    a { color: #003576; }
+
+    li { 
+	    display: inline-block; 
+	    
+        &:after { content: ' \00b7'; margin-left: 3px; margin-right: 3px; }
+        &:last-child:after { content: ''; margin: 0; }
+    }
+}
+
+.batch-edit-heading {
+    width: 1%;
+    text-align: center;
+}
+
+h3.title {
+	margin: 0 0 5px;
+	
+	&.featured {
+		&:after {
+			font-family: "FontAwesome";
+			content: '\f005';
+			width: 24px;
+			height: 24px;
+			color: #82423B;
+			margin-left: 5px;
+		}
+	}
+	
+	small {
+		font-weight: 400;
+		color: gray;
+		margin-left: 5px;
+	}
+}
+
+.details {
+    background-color: rgb(255,255,255);
+    background-color: rgba(255,255,255,.5);
+    border: 1px solid #E4E5DE;
+    float: left;
+    margin-top: 10px;
+    padding: .5em;
+    clear: both;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+	p { margin: 0; 
+		
+		strong {
+			min-width: 80px;
+			display: inline-block;
+		}
+	}
+}
+
+ul.details {
+    margin-bottom: 0;
+    padding: .5em .5em .5em 2em;
+
+    li { margin-bottom: 1em; }
+    li:last-child { margin-bottom: 0; }
+
+}
+
+.inactive { opacity: .65; }
+
+.mobile {
+    max-width: 100%;
+    clear: both;
+    display: none;
+    word-break: break-word;
+
+	.mobile th { width: 20%; }
+}

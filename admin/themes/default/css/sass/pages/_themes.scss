@@ -1,0 +1,70 @@
+/* Browse Themes
+================================================== */
+
+#current-image {
+	.crop {
+	    height: 225px;
+	    overflow: hidden;
+	}
+
+	img { width: 100%; }
+}
+
+#current-theme {
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    float: left;
+
+	ul {
+	    list-style-type: none;
+	    padding: 0;
+	}
+
+	ul.details {
+	    padding: .5em .5em .5em 10px;
+	    list-style: none;
+	}
+}
+.current-theme-label {
+	color: #8C3E38;
+}
+
+
+.themes .group .theme { height: 300px; }
+
+.themes .theme .author {
+    font-style: italic;
+    margin: 0;
+}
+
+.theme-support-link {
+    margin: 0;
+}
+
+.themes .theme .crop {
+    height: 136px;
+    border: 1px solid #e7e7e7;
+    margin: 0 0 10px 0;
+    overflow: hidden;
+}
+
+.theme .current-theme { display: none; }
+
+.themes .theme img { width: 100%; }
+
+.type { font-weight: bold; }
+
+.use-theme {
+    width: 100%;
+    margin-bottom: 0px;
+}
+
+.theme-file img {
+    max-width: 100%;
+    clear: both;
+    display: block;
+}
+
+.theme-file .button { float: left; }

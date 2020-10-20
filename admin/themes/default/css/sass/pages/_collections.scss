@@ -1,0 +1,29 @@
+.without-item-type,
+.not-in-collections {
+    float: right;
+    padding: 7px 12px;
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    border-radius: 3px;
+    margin: 0 0 20px 0;
+    color: #856404;
+    
+    a {
+	    color: #856404;
+    }
+}
+
+.collections.show .recent-items {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+    .collections.show .recent-items li {
+        border-bottom: 1px solid #cccccc;
+        padding: 10px 0;
+    }
+
+        .collections.show .recent-items li:last-child {
+            border-bottom: 0;
+        }
