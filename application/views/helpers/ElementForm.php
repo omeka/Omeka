@@ -1,21 +1,21 @@
 <?php
 /**
  * Omeka
- * 
+ *
  * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
  * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
  * Generate the form markup for entering element text metadata.
- * 
+ *
  * @package Omeka\View\Helper
  */
 class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
 {
     /**
      * Displays a form for the record's element.
-     * 
+     *
      * The function applies filters that allow plugins to customize the display of element form components.
      * Here is an example of how a plugin may add and implement an element form filter:
      *
@@ -25,14 +25,14 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
      *
      *   // Where $components would looks like:
      *   //  array(
-     *   //      'label' => [...], 
-     *   //      'inputs' => [...], 
-     *   //      'description' => [...], 
-     *   //      'comment' => [...], 
-     *   //      'add_input' => [...], 
+     *   //      'label' => [...],
+     *   //      'inputs' => [...],
+     *   //      'description' => [...],
+     *   //      'comment' => [...],
+     *   //      'add_input' => [...],
      *   //  )
      *   // and $args looks like:
-     *   //  array(      
+     *   //  array(
      *   //      'record' => [...],
      *   //      'element' => [...],
      *   //      'options' => [...],

@@ -33,7 +33,7 @@ jQuery(document).bind('omeka:elementformload', function (event) {
 <section class="seven columns alpha" id="edit-form">
 
     <?php echo flash(); ?>
-    
+
     <div id="item-metadata">
     <?php foreach ($tabs as $tabName => $tabContent): ?>
         <?php if (!empty($tabContent)): ?>
@@ -41,9 +41,9 @@ jQuery(document).bind('omeka:elementformload', function (event) {
             <fieldset class="set">
               <legend class="visually-hidden"><?php echo html_escape(__($tabName)); ?></legend>
                 <h2><?php echo html_escape(__($tabName)); ?></h2>
-                <?php echo $tabContent; ?>        
+                <?php echo $tabContent; ?>
             </fieldset>
-            </div>     
+            </div>
         <?php endif; ?>
     <?php endforeach; ?>
     </div>

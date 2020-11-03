@@ -56,7 +56,7 @@ echo item_search_filters();
 	            <?php foreach (loop('Item') as $item): ?>
 	            <tr class="item <?php if(++$key%2==1) echo 'odd'; else echo 'even'; ?>">
 	                <?php $id = metadata('item', 'id'); ?>
-	
+
 	                <?php if (is_allowed($item, 'edit') || is_allowed($item, 'tag')): ?>
 	                <td class="batch-edit-check">
 	                    <input type="checkbox" name="items[]" value="<?php echo $id; ?>"
@@ -68,20 +68,20 @@ echo item_search_filters();
 	                    >
 	                </td>
 	                <?php endif; ?>
-	
+
 	                <?php if ($item->featured): ?>
 	                <td class="item-info featured">
 	                <?php else: ?>
 	                <td class="item-info">
 	                <?php endif; ?>
-	
+
 	                    <?php if (metadata('item', 'has files')): ?>
 	                    <?php echo link_to_item(item_image('square_thumbnail', array(), 0, $item), array('class' => 'item-thumbnail'), 'show', $item); ?>
 	                    <?php endif; ?>
-	
+
 	                    <h3 class="title <?php if ($item->featured): ?>featured<?php endif; ?>">
 	                    	<?php echo link_to_item(); ?>
-	
+
 		                    <?php if(!$item->public): ?>
 		                    	<small><?php echo __('(Private)'); ?></small>
 		                    <?php endif; ?>
@@ -90,14 +90,14 @@ echo item_search_filters();
 	                        <?php if (is_allowed($item, 'edit')): ?>
 	                        <li><?php echo link_to_item(__('Edit') . visually_hidden(metadata($item, "display_title")), array(), 'edit'); ?></li>
 	                        <?php endif; ?>
-	
+
 	                        <?php if (is_allowed($item, 'delete')): ?>
 	                        <li><?php echo link_to_item(__('Delete') . visually_hidden(metadata($item, "display_title")), array('class' => 'delete-confirm'), 'delete-confirm'); ?></li>
 	                        <?php endif; ?>
 	                    </ul>
-	
+
 	                    <?php fire_plugin_hook('admin_items_browse_simple_each', array('item' => $item, 'view' => $this)); ?>
-	
+
 	                    <div class="details">
 	                        <?php echo snippet_by_word_count(metadata('item', array('Dublin Core', 'Description')), 40); ?>
 	                        <p>

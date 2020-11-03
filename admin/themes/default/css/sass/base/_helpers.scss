@@ -1,21 +1,21 @@
 @-webkit-keyframes fadeIn {
   	0%    { opacity: 0; }
-  	100%  { opacity: 1; } 
+  	100%  { opacity: 1; }
 }
 @keyframes fadeIn {
   	0%    { opacity: 0; }
-  	100%  { opacity: 1; } 
+  	100%  { opacity: 1; }
 }
 
 @-webkit-keyframes fadeInOut {
   	0%    { opacity: 0; }
-  	100%  { opacity: 1; } 
+  	100%  { opacity: 1; }
 }
 @keyframes fadeInOut {
   	0%    { opacity: 0; }
-  	20%   { opacity: 1; } 
-  	80%   { opacity: 1; } 
-  	100%  { opacity: 0; } 
+  	20%   { opacity: 1; }
+  	80%   { opacity: 1; }
+  	100%  { opacity: 0; }
 }
 
 .fade {
@@ -41,7 +41,7 @@
     -webkit-animation-fill-mode: forwards;
     -webkit-animation-duration: 1s;
     -webkit-animation-iteration-count: 1;
-    
+
 	animation-name: fadeIn;
     animation-fill-mode: forwards;
     animation-duration: 1s;
@@ -53,7 +53,7 @@
     -webkit-animation-fill-mode: forwards;
     -webkit-animation-duration: 4s;
     -webkit-animation-iteration-count: 1;
-    
+
 	animation-name: fadeInOut;
     animation-fill-mode: forwards;
     animation-duration: 4s;
