@@ -88,7 +88,10 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
         }
 
         // Compose html for element form
-        $html = $divWrap ? '<div class="field" id="element-' . html_escape($element->id) . '">' : '';
+        $html = $divWrap ? '<div class="field" id="element-' . html_escape($element->id) . '" aria-live="polite">' : '';
+
+        $html .= '<fieldset>';
+        $html .= '<legend class="visually-hidden">' . $components['label'] . '</legend>';
 
         $html .= '<div class="two columns alpha">';
         $html .= $components['label'];
@@ -101,7 +104,9 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
         $html .= $components['inputs'];
         $html .= '</div>'; // Close 'inputs' div
 
-        $html .= $divWrap ? '</div>' : ''; // Close 'field' div
+        $html .= '</fieldset>';
+
+        $html .= $divWrap ? '</div>' : ''; // Close 'field' fieldset
 
         return $html;
     }

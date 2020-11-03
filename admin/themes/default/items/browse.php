@@ -88,11 +88,11 @@ echo item_search_filters();
 	                    </h3>
 	                    <ul class="action-links group">
 	                        <?php if (is_allowed($item, 'edit')): ?>
-	                        <li><?php echo link_to_item(__('Edit'), array(), 'edit'); ?></li>
+	                        <li><?php echo link_to_item(__('Edit') . visually_hidden(metadata($item, "display_title")), array(), 'edit'); ?></li>
 	                        <?php endif; ?>
 	
 	                        <?php if (is_allowed($item, 'delete')): ?>
-	                        <li><?php echo link_to_item(__('Delete'), array('class' => 'delete-confirm'), 'delete-confirm'); ?></li>
+	                        <li><?php echo link_to_item(__('Delete') . visually_hidden(metadata($item, "display_title")), array('class' => 'delete-confirm'), 'delete-confirm'); ?></li>
 	                        <?php endif; ?>
 	                    </ul>
 	

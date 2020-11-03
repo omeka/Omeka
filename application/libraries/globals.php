@@ -3505,3 +3505,13 @@ function add_shortcode($shortcodeName, $function)
 {
     return Omeka_View_Helper_Shortcodes::addShortcode($shortcodeName, $function);
 }
+
+/**
+ * Wrap text in a span with a "visually hidden tag"
+ * Used to hide page elements for sighted users, but to add specificity for screen readers.
+ * @param string $text The text to be wrapped in the visually hidden span
+ */
+function visually_hidden($text)
+{
+  return "<span class='visually-hidden'> " . $text . " </span>";
+}
