@@ -46,7 +46,7 @@ class Job_SearchTextIndex extends Omeka_Job_AbstractJob
                     // Save the record object, which indexes its search text.
                     try {
                         $recordObject->save();
-                    } catch (Omeka_Validate_Exception $e) {
+                    } catch (Exception $e) {
                         _log($e, Zend_Log::ERR);
                         _log(sprintf('Failed to index %s #%s',
                                 get_class($recordObject), $recordObject->id),
