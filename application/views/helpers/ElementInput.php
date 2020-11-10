@@ -1,14 +1,14 @@
 <?php
 /**
  * Omeka
- * 
+ *
  * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
  * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
  * Generate the form markup for entering one HTML input for an Element.
- * 
+ *
  * @package Omeka\View\Helper
  */
 class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
@@ -31,7 +31,7 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
      * Display one form input for an Element.
      *
      * @param Element $element The Element to display the input for.
-     * @param Omeka_Record_AbstractRecord $record The record to display the 
+     * @param Omeka_Record_AbstractRecord $record The record to display the
      * input for.
      * @param int $index The index of this input. (starting at zero).
      * @param string $value The default value of this input.
@@ -71,8 +71,17 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
             return strval($components['html']);
         }
 
+        $inputNameStemId = trim(strtr($inputNameStem,
+                                 array('[' => '-', ']' => '')), '-');
+
+        $displayIndex = $index + 1;
+
         $html = '<div class="input-block">'
               . '<div class="input">'
+              . "<label for='{$inputNameStemId}-text' class='visually-hidden'>"
+              . __('Text input')
+              . ' ' . $displayIndex
+              . '</label>'
               . $components['input']
               . '</div>'
               . $components['form_controls']
