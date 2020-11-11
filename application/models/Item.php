@@ -202,6 +202,8 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
                 return $this->getCitation();
             case 'display_title':
                 return $this->getDisplayTitle();
+            case 'rich_title':
+                return $this->getRichTitle();
             default:
                 return parent::getProperty($property);
         }

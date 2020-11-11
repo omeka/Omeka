@@ -2528,7 +2528,7 @@ function link_to_file_show($attributes = array(), $text = null, $file = null)
         $file = get_current_record('file');
     }
     if (!$text) {
-        $text = metadata($file, 'display_title');
+        $text = metadata($file, 'rich_title', array('no_escape' => true));
     }
     return link_to($file, 'show', $text, $attributes);
 }
@@ -2555,7 +2555,7 @@ function link_to_item($text = null, $props = array(), $action = 'show', $item = 
         $item = get_current_record('item');
     }
     if (empty($text)) {
-        $text = metadata($item, 'display_title');
+        $text = metadata($item, 'rich_title', array('no_escape' => true));
     }
     return link_to($item, $action, $text, $props);
 }
@@ -2642,7 +2642,7 @@ function link_to_collection($text = null, $props = array(), $action = 'show', $c
         $collectionObj = get_current_record('collection');
     }
 
-    $collectionTitle = metadata($collectionObj, array('Dublin Core', 'Title'));
+    $collectionTitle = metadata($collectionObj, 'rich_title', array('no_escape' => true));
     $text = !empty($text) ? $text : $collectionTitle;
     return link_to($collectionObj, $action, $text, $props);
 }

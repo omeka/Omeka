@@ -5,7 +5,7 @@ $totalItems = metadata('collection', 'total_items');
 
 <?php echo head(array('title' => $collectionTitle, 'bodyclass' => 'collections show')); ?>
 
-<h1><?php echo $collectionTitle; ?></h1>
+<h1><?php echo metadata('collection', 'rich_title', array('no_escape' => true)); ?></h1>
 
 <?php echo all_element_texts('collection'); ?>
 

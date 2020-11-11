@@ -305,7 +305,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
     protected function _linkToFile($file, $options, $html = null)
     {
         if ($html === null) {
-            $html = metadata($file, 'display_title');
+            $html = metadata($file, 'rich_title', array('no_escape' => true));
         }
 
         $linkAttributes = isset($options['linkAttributes'])
@@ -378,7 +378,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
             'loop' => (bool) $options['loop'],
         );
         $html = '<' . $type . ' ' . tag_attributes($attrs) . '>'
-            . '<a href="' . $escapedUrl . '">' . metadata($file, 'display_title') . '</a>'
+            . '<a href="' . $escapedUrl . '">' . metadata($file, 'rich_title', array('no_escape' => true)) . '</a>'
             . '</'. $type .'>';
         return $html;
     }

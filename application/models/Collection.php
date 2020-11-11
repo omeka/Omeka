@@ -90,6 +90,8 @@ class Collection extends Omeka_Record_AbstractRecord implements Zend_Acl_Resourc
                 return $this->totalItems();
             case 'display_title':
                 return $this->getDisplayTitle();
+            case 'rich_title':
+                return $this->getRichTitle();
             default:
                 return parent::getProperty($property);
         }

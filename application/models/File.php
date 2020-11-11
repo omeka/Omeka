@@ -147,6 +147,8 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
                 return absolute_url(array('controller' => 'files', 'action' => 'show', 'id' => $this->id));
             case 'display_title':
                 return $this->getDisplayTitle($this->original_filename);
+            case 'rich_title':
+                return $this->getRichTitle(html_escape($this->original_filename));
             default:
                 return parent::getProperty($property);
         }
