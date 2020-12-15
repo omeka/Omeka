@@ -13,9 +13,9 @@ class Omeka_Globals_PluginIsActiveTest extends Omeka_Test_AppTestCase
 {
     const PLUGIN_NAME = 'Foobar';
 
-    public function setUp()
+    public function setUpLegacy()
     {
-        parent::setUp();
+        parent::setUpLegacy();
         $plugin = $this->db->getTable('Plugin')->find(1);
         if ($plugin) {
             $plugin->delete();

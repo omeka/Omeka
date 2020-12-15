@@ -15,7 +15,7 @@ class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
 {
     const THEME = 'default';
 
-    public function setUp()
+    public function setUpLegacy()
     {
         $themeDir = PUBLIC_THEME_DIR . '/' . self::THEME;
         if (!is_dir($themeDir)
@@ -23,7 +23,7 @@ class Omeka_Controller_ThemesControllerTest extends Omeka_Test_AppTestCase
         ) {
             $this->markTestSkipped("Cannot test ThemesController without the '" . self::THEME . "' theme.");
         }
-        parent::setUp();
+        parent::setUpLegacy();
         $this->_authenticateUser($this->_getDefaultUser());
     }
 

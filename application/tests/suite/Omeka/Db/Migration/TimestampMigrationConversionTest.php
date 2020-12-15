@@ -11,7 +11,7 @@
  */
 class Omeka_Db_Migration_TimestampMigrationConversionTest extends Omeka_Test_AppTestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
         $this->application = new Omeka_Application('testing', array(
             'config' => CONFIG_DIR . '/' . 'application.ini'));
@@ -23,12 +23,12 @@ class Omeka_Db_Migration_TimestampMigrationConversionTest extends Omeka_Test_App
         $this->db->query("DROP TABLE omeka_schema_migrations");
     }
 
-    public function tearDown()
+    public function tearDownLegacy()
     {
         Omeka_Test_Resource_Db::$runInstaller = true;
     }
 
-    public function assertPreConditions()
+    public function assertPreConditionsLegacy()
     {
         $this->assertNotNull($this->db->fetchOne("SELECT value FROM omeka_options WHERE name = 'migration'"),
                              "There should be a 'migration' option in the database.");

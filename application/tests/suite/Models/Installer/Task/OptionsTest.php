@@ -13,7 +13,7 @@ class Installer_Task_OptionsTest extends Omeka_Test_TestCase
 {
     const DB_PREFIX = 'test_';
 
-    public function setUp()
+    public function setUpLegacy()
     {
         $this->dbAdapter = new Zend_Test_DbAdapter;
         $this->db = new Omeka_Db($this->dbAdapter, self::DB_PREFIX);
@@ -32,9 +32,9 @@ class Installer_Task_OptionsTest extends Omeka_Test_TestCase
             $task->install($this->db);
             $this->fail("Should have thrown an exception when missing specific options.");
         } catch (Installer_Task_Exception $e) {
-            $this->assertContains("Missing the following options", $e->getMessage());
-            $this->assertContains("copyright", $e->getMessage());
-            $this->assertNotContains("site_title", $e->getMessage());
+            $this->assertStringContainsString("Missing the following options", $e->getMessage());
+            $this->assertStringContainsString("copyright", $e->getMessage());
+            $this->assertStringNotContainsString("site_title", $e->getMessage());
         }
     }
 
@@ -77,9 +77,9 @@ class Installer_Task_OptionsTest extends Omeka_Test_TestCase
             $task->install($this->db);
             $this->fail("Should have thrown an exception when unknown options were given.");
         } catch (Installer_Task_Exception $e) {
-            $this->assertContains("Unknown options given:", $e->getMessage());
-            $this->assertContains("fake_option", $e->getMessage());
-            $this->assertNotContains("path_to_convert", $e->getMessage());
+            $this->assertStringContainsString("Unknown options given:", $e->getMessage());
+            $this->assertStringContainsString("fake_option", $e->getMessage());
+            $this->assertStringNotContainsString("path_to_convert", $e->getMessage());
         }
     }
 

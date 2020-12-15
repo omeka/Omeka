@@ -11,7 +11,7 @@
  */
 class Omeka_Plugin_IniTest extends Omeka_Test_TestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
         $this->basePath = TEST_DIR . '/_files/unit/plugin-loader';
         $this->iniReader = new Omeka_Plugin_Ini($this->basePath);
@@ -20,7 +20,7 @@ class Omeka_Plugin_IniTest extends Omeka_Test_TestCase
         $this->plugin->setDirectoryName('foobar');
     }
 
-    public function assertPreConditions()
+    public function assertPreConditionsLegacy()
     {
         $gettersShouldBeNull = array(
             'getAuthor',

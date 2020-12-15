@@ -17,22 +17,20 @@ class Omeka_RecordTest extends Omeka_Test_TestCase
 
     private static $_eventStack = array();
 
-    public function setUp()
+    public function setUpLegacy()
     {
         $this->dbAdapter = new Zend_Test_DbAdapter;
         $this->db = new Omeka_Db($this->dbAdapter);
         $this->pluginBroker = new Omeka_Plugin_Broker;
     }
 
-    /**
-     * @expectedException Omeka_Record_Exception
-     */
     public function testConstructorThrowsExceptionIfNoDatabasePresent()
     {
+        $this->setExpectedException('Omeka_Record_Exception');
         try {
             $record = new DummyRecord;
         } catch (Exception $e) {
-            $this->assertContains("Unable to retrieve database instance", $e->getMessage());
+            $this->assertStringContainsString("Unable to retrieve database instance", $e->getMessage());
             throw $e;
         }
     }
@@ -97,7 +95,7 @@ class Omeka_RecordTest extends Omeka_Test_TestCase
         $record->do_not_set = true;
         $this->assertFalse($record->isValid());
 
-        $this->assertContains(self::VALIDATION_ERROR,
+        $this->assertStringContainsString(self::VALIDATION_ERROR,
                               (string) $record->getErrors());
     }
 
@@ -113,32 +111,28 @@ class Omeka_RecordTest extends Omeka_Test_TestCase
         $this->assertFalse($record->exists());
     }
 
-    /**
-     * @expectedException Omeka_Record_Exception
-     */
     public function testSaveLockedRecord()
     {
+        $this->setExpectedException('Omeka_Record_Exception');
         $record = new DummyRecord($this->db);
         $record->lock();
         try {
             $record->save();
         } catch (Exception $e) {
-            $this->assertContains("Cannot save a locked record", $e->getMessage());
+            $this->assertStringContainsString("Cannot save a locked record", $e->getMessage());
             throw $e;
         }
     }
 
-    /**
-     * @expectedException Omeka_Record_Exception
-     */
     public function testDeleteLockedRecord()
     {
+        $this->setExpectedException('Omeka_Record_Exception');
         $record = new DummyRecord($this->db);
         $record->lock();
         try {
             $record->delete();
         } catch (Exception $e) {
-            $this->assertContains("Cannot delete a locked record", $e->getMessage());
+            $this->assertStringContainsString("Cannot delete a locked record", $e->getMessage());
             throw $e;
         }
     }
@@ -178,7 +172,7 @@ class Omeka_RecordTest extends Omeka_Test_TestCase
         $record->save();
         $queryProfile = $this->dbAdapter->getProfiler()->getLastQueryProfile();
         $this->assertNotNull($queryProfile);
-        $this->assertContains("INSERT INTO `dummy_records`", $queryProfile->getQuery());
+        $this->assertStringContainsString("INSERT INTO `dummy_records`", $queryProfile->getQuery());
         $this->assertTrue($record->exists());
         $this->assertEquals(5, $record->id);
     }
@@ -202,17 +196,15 @@ class Omeka_RecordTest extends Omeka_Test_TestCase
         ), $this->_simpleStack());
     }
 
-    /**
-     * @expectedException Omeka_Validate_Exception
-     */
     public function testForceSaveThrowsExceptionForUnsaveableRecord()
     {
+        $this->setExpectedException('Omeka_Validate_Exception');
         $record = new DummyRecord($this->db);
         $record->do_not_set = true;
         try {
             $record->save();
         } catch (Exception $e) {
-            $this->assertContains(self::VALIDATION_ERROR, $e->getMessage());
+            $this->assertStringContainsString(self::VALIDATION_ERROR, $e->getMessage());
             throw $e;
         }
     }
@@ -233,7 +225,7 @@ class Omeka_RecordTest extends Omeka_Test_TestCase
         $record->delete();
         $queryProfile = $this->dbAdapter->getProfiler()->getLastQueryProfile();
         $this->assertThat($queryProfile, $this->isInstanceOf('Zend_Db_Profiler_Query'));
-        $this->assertContains("DELETE FROM dummy_records WHERE (id = 2)", $queryProfile->getQuery());
+        $this->assertStringContainsString("DELETE FROM dummy_records WHERE (id = 2)", $queryProfile->getQuery());
         $this->assertFalse($record->exists());
         $this->assertNull($record->id);
     }
@@ -253,11 +245,9 @@ class Omeka_RecordTest extends Omeka_Test_TestCase
         $this->assertEquals('whatever', $record->do_not_set);
     }
 
-    /**
-     * @expectedException Omeka_Validate_Exception
-     */
     public function testSaveFormThrowsExceptionForInvalidPost()
     {
+        $this->setExpectedException('Omeka_Validate_Exception');
         $record = new DummyRecord($this->db);
         $post = array(
             'do_not_set' => 'foobar'
@@ -266,7 +256,7 @@ class Omeka_RecordTest extends Omeka_Test_TestCase
             $record->setPostData($post);
             $record->save();
         } catch (Exception $e) {
-            $this->assertContains(self::VALIDATION_ERROR, $e->getMessage());
+            $this->assertStringContainsString(self::VALIDATION_ERROR, $e->getMessage());
             throw $e;
         }
     }
@@ -282,7 +272,7 @@ class Omeka_RecordTest extends Omeka_Test_TestCase
         $this->assertNotEquals(2, $record->id);
     }
 
-    public function tearDown()
+    public function tearDownLegacy()
     {
         self::$_eventStack = array();
         Zend_Registry::_unsetInstance();

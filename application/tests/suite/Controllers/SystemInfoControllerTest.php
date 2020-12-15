@@ -16,9 +16,9 @@
  */
 class Omeka_Controllers_SystemInfoControllerTest extends Omeka_Test_AppTestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
-        parent::setUp();
+        parent::setUpLegacy();
         $this->_authenticateUser($this->_getDefaultUser());
     }
 

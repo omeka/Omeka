@@ -17,7 +17,7 @@ class Installer_DefaultTest extends Omeka_Test_TestCase
     const ENTITY_ID = 2;
     const USERS_PLANS_ID = 3;
 
-    public function setUp()
+    public function setUpLegacy()
     {
         $this->dbAdapter = new Zend_Test_DbAdapter;
         $this->db = new Omeka_Db($this->dbAdapter, self::DB_PREFIX);
@@ -26,16 +26,14 @@ class Installer_DefaultTest extends Omeka_Test_TestCase
             $this);
     }
 
-    /**
-     * @expectedException Installer_Exception
-     */
     public function testThrowsExceptionIfNoFormSet()
     {
+        $this->setExpectedException('Installer_Exception');
         $installer = new Installer_Default($this->db);
         try {
             $installer->install();
         } catch (Exception $e) {
-            $this->assertContains("Form was not set via setForm().", $e->getMessage());
+            $this->assertStringContainsString("Form was not set via setForm().", $e->getMessage());
             throw $e;
         }
     }

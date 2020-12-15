@@ -11,14 +11,14 @@
  */
 class Omeka_CaptchaTest extends Omeka_Test_TestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
         $this->bootstrap = new Omeka_Test_Bootstrap;
         $this->bootstrap->getContainer()->options = array();
         Zend_Registry::set('bootstrap', $this->bootstrap);
     }
 
-    public function tearDown()
+    public function tearDownLegacy()
     {
         Zend_Registry::_unsetInstance();
     }

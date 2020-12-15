@@ -15,9 +15,9 @@ class Omeka_Helpers_GetRecordsTagTest extends Omeka_Test_AppTestCase
     private $_defaultTagLimit;
     private $_itemToTag;
 
-    public function setUp()
+    public function setUpLegacy()
     {
-        parent::setUp();
+        parent::setUpLegacy();
         $this->_defaultTagLimit = 10;
 
         $this->_itemToTag = new Item;

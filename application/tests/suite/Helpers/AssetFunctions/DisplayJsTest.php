@@ -18,7 +18,7 @@ class Omeka_Helper_DisplayJsTest extends Omeka_Test_TestCase
     public $externalDefaults;
     public $internalDefaults;
 
-    public function setUp()
+    public function setUpLegacy()
     {
         // Load a view object to allow get_view() to work.
         $this->view = new Omeka_View;
@@ -31,7 +31,7 @@ class Omeka_Helper_DisplayJsTest extends Omeka_Test_TestCase
         Zend_Registry::set('bootstrap', $bootstrap);
     }
 
-    public function tearDown()
+    public function tearDownLegacy()
     {
         Zend_Registry::_unsetInstance();
     }
@@ -98,7 +98,7 @@ class Omeka_Helper_DisplayJsTest extends Omeka_Test_TestCase
         $result = $dom->queryXpath("//script[@type='text/javascript']");
 
         $this->assertCount(1, $result, "Script tag for inline script not found.");
-        $this->assertContains($script, $output);
+        $this->assertStringContainsString($script, $output);
     }
 
     public function testQueueJsConditional()
@@ -107,7 +107,7 @@ class Omeka_Helper_DisplayJsTest extends Omeka_Test_TestCase
 
         $output = $this->_getJsOutput(false);
 
-        $this->assertContains('<!--[if lt IE 9]>', $output);
+        $this->assertStringContainsString('<!--[if lt IE 9]>', $output);
     }
 
     public function testQueueJsStringConditional()
@@ -117,7 +117,7 @@ class Omeka_Helper_DisplayJsTest extends Omeka_Test_TestCase
 
         $output = $this->_getJsOutput(false);
 
-        $this->assertContains('<!--[if lt IE 9]>', $output);
-        $this->assertContains($script, $output);
+        $this->assertStringContainsString('<!--[if lt IE 9]>', $output);
+        $this->assertStringContainsString($script, $output);
     }
 }

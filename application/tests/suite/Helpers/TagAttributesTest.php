@@ -1,7 +1,7 @@
 <?php 
 class TagAttributesTest extends Omeka_Test_TestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
         $this->reporting = error_reporting();
         error_reporting(E_ALL);
@@ -59,7 +59,7 @@ class TagAttributesTest extends Omeka_Test_TestCase
         $this->assertEquals($html, tag_attributes($attributesWithMixedValues));
     }
 
-    public function tearDown()
+    public function tearDownLegacy()
     {
         error_reporting($this->reporting);
     }

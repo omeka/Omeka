@@ -18,9 +18,9 @@
  */
 class Omeka_Helper_LinkFunctions_LinkToItemTest extends Omeka_Test_AppTestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
-        parent::setUp();
+        parent::setUpLegacy();
         $this->item = $this->db->getTable('Item')->find(1);
     }
 

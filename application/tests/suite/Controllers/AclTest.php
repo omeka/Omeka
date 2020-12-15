@@ -19,13 +19,13 @@ class Controllers_AclTest extends Omeka_Test_AppTestCase
 {
     protected $_isAdminTest = false;
 
-    public function setUp()
+    public function setUpLegacy()
     {
-        parent::setUp();
+        parent::setUpLegacy();
         $this->aclHelper = Zend_Controller_Action_HelperBroker::getStaticHelper('acl');
     }
 
-    public function assertPreConditions()
+    public function assertPreConditionsLegacy()
     {
         $this->assertNull($this->application->getBootstrap()->getResource('Currentuser'));
         $this->assertEquals('Omeka_Controller_Action_Helper_Acl', get_class($this->aclHelper));

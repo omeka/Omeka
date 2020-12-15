@@ -6,13 +6,13 @@
  */
 class Globals_UpdateItemTest extends Omeka_Test_AppTestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
-        parent::setUp();
+        parent::setUpLegacy();
         $this->item = insert_item(array('public' => '0'));
     }
 
-    public function assertPreConditions()
+    public function assertPreConditionsLegacy()
     {
         $this->assertTrue($this->item->exists());
     }

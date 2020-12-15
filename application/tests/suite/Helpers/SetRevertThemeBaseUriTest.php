@@ -13,7 +13,7 @@ class Omeka_Helpers_SetRevertThemeBaseUriTest extends Omeka_Test_AppTestCase
 {
     protected $_isAdminTest = true;
 
-    public function assertPreConditions()
+    public function assertPreConditionsLegacy()
     {
         $this->assertTrue(function_exists('revert_theme_base_url'));
         $this->assertTrue(function_exists('set_theme_base_url'));

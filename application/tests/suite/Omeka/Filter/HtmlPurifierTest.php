@@ -12,7 +12,7 @@
  **/
 class Omeka_Filter_HtmlPurifierTest extends Omeka_Test_AppTestCase
 {
-    public function assertPreConditions()
+    public function assertPreConditionsLegacy()
     {
         $this->assertEquals(get_option('html_purifier_is_enabled'), '1');
         $this->assertEquals(get_option('html_purifier_allowed_html_elements'), implode(',', Omeka_Filter_HtmlPurifier::getDefaultAllowedHtmlElements()));

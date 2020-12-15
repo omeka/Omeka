@@ -10,9 +10,9 @@
  */
 class Omeka_View_Helper_RecordUrlTest extends Omeka_Test_AppTestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
-        parent::setUp();
+        parent::setUpLegacy();
 
         $view = new Omeka_View;
         $this->helper = $view->getHelper('RecordUrl');

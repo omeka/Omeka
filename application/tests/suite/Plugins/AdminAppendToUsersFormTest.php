@@ -14,9 +14,9 @@ class Omeka_Plugins_AdminAppendToUsersFormTest extends Omeka_Test_AppTestCase
 {
     protected $_isAdminTest = true;
 
-    public function setUp()
+    public function setUpLegacy()
     {
-        parent::setUp();
+        parent::setUpLegacy();
 
         // Set the ACL to allow access to users.
         $this->acl = $this->application->getBootstrap()->acl;
@@ -30,7 +30,7 @@ class Omeka_Plugins_AdminAppendToUsersFormTest extends Omeka_Test_AppTestCase
         $this->pluginbroker->setCurrentPluginDirName('__global__');
     }
 
-    public function assertPreConditions()
+    public function assertPreConditionsLegacy()
     {
         $this->assertTrue($this->acl->isAllowed($this->user, 'Users', 'edit'));
     }
@@ -41,7 +41,7 @@ class Omeka_Plugins_AdminAppendToUsersFormTest extends Omeka_Test_AppTestCase
 
         $this->dispatch('/users/edit/1');
         $this->assertNotRedirect();
-        $this->assertContains("TEST HOOK CONTENT", $this->getResponse()->sendResponse());
+        $this->assertStringContainsString("TEST HOOK CONTENT", $this->getResponse()->sendResponse());
         // var_dump($this->getResponse());exit;
     }
 

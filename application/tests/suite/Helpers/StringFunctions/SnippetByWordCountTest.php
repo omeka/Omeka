@@ -5,7 +5,7 @@
  */
 class Helpers_StringFunctions_SnippetByWordCountTest extends Omeka_Test_TestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
         $this->reporting = error_reporting();
         error_reporting(E_ALL);
@@ -105,7 +105,7 @@ class Helpers_StringFunctions_SnippetByWordCountTest extends Omeka_Test_TestCase
         $this->assertEquals($targetPhrase, snippet_by_word_count($phrase, $wordCount, $ellipsis));
     }
 
-    public function tearDown()
+    public function tearDownLegacy()
     {
         error_reporting($this->reporting);
     }

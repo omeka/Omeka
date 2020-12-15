@@ -508,7 +508,7 @@ abstract class Omeka_Test_AppTestCase extends Omeka_Test_TestCase
     /**
      * Bootstrap the application on each test run.
      */
-    public function setUp()
+    public function setUpLegacy()
     {
         $this->bootstrap = array($this, 'appBootstrap');
         $this->bootstrap();
@@ -574,7 +574,7 @@ abstract class Omeka_Test_AppTestCase extends Omeka_Test_TestCase
     /**
      * Reset objects that carry global state between test runs.
      */
-    public function tearDown()
+    public function tearDownLegacy()
     {
         // This fixes a "too many open files" error caused by hanging references
         // to the logger object somewhere in the code (could be anywhere).
@@ -592,7 +592,6 @@ abstract class Omeka_Test_AppTestCase extends Omeka_Test_TestCase
 
         unset($this->bootstrap);
         unset($this->application);
-        parent::tearDown();
     }
 
     /**
@@ -755,7 +754,7 @@ abstract class Omeka_Test_AppTestCase extends Omeka_Test_TestCase
     {
         $this->assertRedirect();
         $headers = $this->response->sendHeaders();
-        $this->assertContains($headers['location'], "Location: $url");
+        $this->assertStringContainsString($headers['location'], "Location: $url");
     }
 
     /**

@@ -15,7 +15,7 @@ class Models_Output_ItemRss2Test extends Omeka_Test_AppTestCase
 {
     protected $_isAdminTest = false;
 
-    public function assertPreConditions()
+    public function assertPreConditionsLegacy()
     {
         $this->assertEquals(1, $this->db->getTable('Item')->count(),
             "There should be one item in the database.");

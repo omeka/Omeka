@@ -13,7 +13,7 @@ class Omeka_View_Helper_MediaTest extends Omeka_Test_TestCase
 {
     private $mimeTypeCallbackFired = false;
 
-    public function setUp()
+    public function setUpLegacy()
     {
         $this->view = $this->getMock('Omeka_View', array(), array(), '', false);
         $this->helper = new Omeka_View_Helper_FileMarkup;

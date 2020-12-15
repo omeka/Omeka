@@ -11,7 +11,7 @@
  */
 class Omeka_View_Helper_UrlTest extends Omeka_Test_TestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
         $this->front = Zend_Controller_Front::getInstance();
         $this->front->getRouter()->addDefaultRoutes();
@@ -47,7 +47,7 @@ class Omeka_View_Helper_UrlTest extends Omeka_Test_TestCase
         $this->assertEquals("/items/browse", $url);
     }
 
-    public function tearDown()
+    public function tearDownLegacy()
     {
         $this->front->resetInstance();
     }

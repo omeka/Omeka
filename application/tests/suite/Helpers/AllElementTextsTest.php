@@ -34,7 +34,7 @@ class Omeka_Helpers_AllElementTextsTest extends Omeka_Test_AppTestCase
 
         $metadataOutput = all_element_texts($item, array('return_type' => 'array'));
 
-        $this->assertInternalType('array', $metadataOutput);
+        $this->assertTrue(is_array($metadataOutput));
         $this->assertArrayHasKey('Dublin Core', $metadataOutput);
 
         $this->assertEquals($title, $metadataOutput['Dublin Core']['Title'][0]);

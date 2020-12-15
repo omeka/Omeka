@@ -14,7 +14,7 @@ class Omeka_Helper_DisplayCssTest extends Omeka_Test_TestCase
 {
     const ASSET_PATH_ROOT = '/omeka-test/asset-path';
 
-    public function setUp()
+    public function setUpLegacy()
     {
         // Load a view object to allow get_view() to work.
         $this->view = new Omeka_View;
@@ -24,7 +24,7 @@ class Omeka_Helper_DisplayCssTest extends Omeka_Test_TestCase
         $this->view->addAssetPath(VIEW_SCRIPTS_DIR, self::ASSET_PATH_ROOT);
     }
 
-    public function tearDown()
+    public function tearDownLegacy()
     {
         Zend_Registry::_unsetInstance();
     }
@@ -153,6 +153,6 @@ class Omeka_Helper_DisplayCssTest extends Omeka_Test_TestCase
         $dom = new Zend_Dom_Query('<fake>' . $output . '</fake>');
         $result = $dom->queryXpath("//style[@type='text/css' and @media='screen']");
         $this->assertCount(1, $result, "Style tag for inline stylesheet not found.");
-        $this->assertContains($style, $output);
+        $this->assertStringContainsString($style, $output);
     }
 }

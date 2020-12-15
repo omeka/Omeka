@@ -22,7 +22,7 @@ class Globals_SetThemeOptionTest extends Omeka_Test_TestCase
         'show_description' => false
     );
 
-    public function setUp()
+    public function setUpLegacy()
     {
         $bootstrap = new Omeka_Test_Bootstrap;
         $bootstrap->getContainer()->options = array(
@@ -37,7 +37,7 @@ class Globals_SetThemeOptionTest extends Omeka_Test_TestCase
         Zend_Registry::set('bootstrap', $bootstrap);
     }
 
-    public function tearDown()
+    public function tearDownLegacy()
     {
         Zend_Registry::_unsetInstance();
     }
