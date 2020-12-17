@@ -3441,7 +3441,7 @@ function theme_header_image()
         $storage = Zend_Registry::get('storage');
         $headerImage = $storage->getUri($storage->getPathByType($headerImage, 'theme_uploads'));
         $altText = ($headerImageAlt !== null) ? $headerImageAlt : '';
-        return '<div id="header-image"><img src="' . $headerImage . '" alt="' . $altText . '"/></div>';
+        return '<div id="header-image"><img src="' . $headerImage . '" alt="' . html_escape($altText) . '"/></div>';
     }
 }
 
