@@ -29,7 +29,7 @@ class Globals_GetPluginIniTest extends Omeka_Test_TestCase
         $this->assertEquals('returned ini value', get_plugin_ini('foobar', 'foo'));
     }
 
-    public function tearDown()
+    public function tearDownLegacy()
     {
         Zend_Registry::_unsetInstance();
     }

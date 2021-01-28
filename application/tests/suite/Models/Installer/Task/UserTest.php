@@ -18,7 +18,7 @@ class Installer_Task_UserTest extends Omeka_Test_TestCase
     const ENTITY_ID = 2;
     const USERS_PLANS_ID = 3;
 
-    public function setUp()
+    public function setUpLegacy()
     {
         $this->dbAdapter = new Zend_Test_DbAdapter;
         $this->db = new Omeka_Db($this->dbAdapter, self::DB_PREFIX);
@@ -32,7 +32,7 @@ class Installer_Task_UserTest extends Omeka_Test_TestCase
             $task->install($this->db);
             $this->fail("Should have thrown an exception when required metadata not given.");
         } catch (Installer_Task_Exception $e) {
-            $this->assertContains("Required field", $e->getMessage());
+            $this->assertStringContainsString("Required field", $e->getMessage());
         }
     }
 
@@ -49,7 +49,7 @@ class Installer_Task_UserTest extends Omeka_Test_TestCase
             $task->install($this->db);
             $this->fail("Should have thrown an exception for invalid user.");
         } catch (Installer_Task_Exception $e) {
-            $this->assertContains("New user does not validate: Email: ", $e->getMessage());
+            $this->assertStringContainsString("New user does not validate: Email: ", $e->getMessage());
         }
     }
 
@@ -66,7 +66,7 @@ class Installer_Task_UserTest extends Omeka_Test_TestCase
         $task->setIsActive(true);
         $task->setRole('admin');
         $task->install($this->db);
-        $this->assertContains("INSERT INTO `test_users`",
+        $this->assertStringContainsString("INSERT INTO `test_users`",
             $this->profiler->getLastQueryProfile()->getQuery());
     }
 }

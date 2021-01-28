@@ -11,14 +11,14 @@
  */
 class InsertFilesForItemTest extends Omeka_Test_AppTestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
-        parent::setUp();
+        parent::setUpLegacy();
         $this->item = insert_item(array('public' => true));
         set_option('disable_default_file_validation', 1);
     }
 
-    public function assertPreConditions()
+    public function assertPreConditionsLegacy()
     {
         $this->assertThat($this->item, $this->isInstanceOf('Item'));
         $this->assertTrue($this->item->exists());

@@ -16,9 +16,9 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
     private $_users;
     private $_items;
 
-    public function setUp()
+    public function setUpLegacy()
     {
-        parent::setUp();
+        parent::setUpLegacy();
         $this->_authenticateUser($this->_getDefaultUser());
 
         $userRoles = array('admin', 'contributor', 'researcher');
@@ -51,11 +51,11 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
         $this->_authenticateUser($this->_getDefaultUser());
     }
 
-    public function tearDown()
+    public function tearDownLegacy()
     {
         release_object($this->_users);
         release_object($this->_items);
-        parent::tearDown();
+        parent::tearDownLegacy();
     }
 
     /**
@@ -95,11 +95,9 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
         $this->assertContains("You must choose some items to batch edit.", $messages['error']);
     }
 
-    /**
-     * @expectedException Omeka_Controller_Exception_403
-     */
     public function testBatchEditWithoutHash()
     {
+        $this->setExpectedException('Omeka_Controller_Exception_403');
         $post = array(
             'items' => array('2', '3'),
             'metadata' => array(
@@ -277,7 +275,7 @@ class Omeka_Controller_ItemsController_BatchEditTest extends Omeka_Test_AppTestC
         $this->assertRedirectTo('/items/browse');
         $flash = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger');
         $messages = $flash->getCurrentMessages();
-        $this->assertContains("User is not allowed", $messages['error'][0]);
+        $this->assertStringContainsString("User is not allowed", $messages['error'][0]);
     }
 
     /**

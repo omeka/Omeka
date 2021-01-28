@@ -15,9 +15,9 @@ class Models_CollectionAclTest extends Omeka_Test_AppTestCase
     private $_users;
     private $_collections;
 
-    public function setUp()
+    public function setUpLegacy()
     {
-        parent::setUp();
+        parent::setUpLegacy();
 
         $super = new User;
         $super->role = 'super';
@@ -41,10 +41,10 @@ class Models_CollectionAclTest extends Omeka_Test_AppTestCase
         );
     }
 
-    public function tearDown()
+    public function tearDownLegacy()
     {
         release_object($this->_users);
-        parent::tearDown();
+        parent::tearDownLegacy();
     }
 
     /**

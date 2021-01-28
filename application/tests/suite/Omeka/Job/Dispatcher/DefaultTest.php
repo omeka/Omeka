@@ -1,7 +1,7 @@
 <?php
 class Omeka_Job_Dispatcher_DefaultTest extends Omeka_Test_TestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
         $this->user = $this->getMock('User', array(), array(), '', false);
         $this->adapter = new Omeka_Job_Dispatcher_Adapter_Array();
@@ -26,7 +26,7 @@ class Omeka_Job_Dispatcher_DefaultTest extends Omeka_Test_TestCase
     {
         $this->dispatcher->send('Omeka_Job_Mock');
         $job = $this->adapter->getJob();
-        $this->assertInternalType('array', Zend_Json::decode($job['encoded']));
+        $this->assertTrue(is_array(Zend_Json::decode($job['encoded'])));
     }
 
     public static function metadataKeys()

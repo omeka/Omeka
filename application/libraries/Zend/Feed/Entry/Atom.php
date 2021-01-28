@@ -103,7 +103,8 @@ class Zend_Feed_Entry_Atom extends Zend_Feed_Entry_Abstract
                 // Redirect
                 case 3:
                     $deleteUri = $response->getHeader('Location');
-                    continue;
+                    // Omeka change: continue-inside-switch warning
+                    break;
                 // Error
                 default:
                     /**

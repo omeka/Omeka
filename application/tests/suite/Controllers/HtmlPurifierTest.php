@@ -14,9 +14,9 @@ class Omeka_Controllers_HtmlPurifierTest extends Omeka_Test_AppTestCase
 {
     protected $_isAdminTest = true;
 
-    public function setUp()
+    public function setUpLegacy()
     {
-        parent::setUp();
+        parent::setUpLegacy();
 
         // Set the ACL to allow access to collections
         $this->acl = $this->application->getBootstrap()->acl;
@@ -34,7 +34,7 @@ class Omeka_Controllers_HtmlPurifierTest extends Omeka_Test_AppTestCase
         $this->collection = $collection;
     }
 
-    public function assertPreConditions()
+    public function assertPreConditionsLegacy()
     {
         $this->assertTrue($this->collection->exists());
         $this->assertTrue($this->acl->isAllowed($this->user, 'Collections', 'edit'));

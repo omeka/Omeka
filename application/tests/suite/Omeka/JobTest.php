@@ -1,7 +1,7 @@
 <?php
 class Omeka_JobTest extends Omeka_Test_TestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
         $this->db = $this->getMock('Omeka_Db', array(), array(), '', false);
         $this->dispatcher = $this->getMock('Omeka_Job_Dispatcher_DispatcherInterface', array(), array(), '', false);

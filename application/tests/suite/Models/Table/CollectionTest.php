@@ -13,7 +13,7 @@
  */
 class Models_Table_CollectionTest extends Omeka_Test_TestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
         $this->dbAdapter = new Zend_Test_DbAdapter();
         $this->db = new Omeka_Db($this->dbAdapter, 'omeka_');
@@ -23,7 +23,7 @@ class Models_Table_CollectionTest extends Omeka_Test_TestCase
         $this->table = new Table_Collection('Collection', $this->db);
     }
 
-    public function tearDown()
+    public function tearDownLegacy()
     {
         Zend_Registry::_unsetInstance();
     }
@@ -40,7 +40,7 @@ class Models_Table_CollectionTest extends Omeka_Test_TestCase
         $acl->deny(null, 'Collections', 'showNotPublic');
         Zend_Registry::get('bootstrap')->getContainer()->acl = $acl;
 
-        $this->assertContains("WHERE (collections.public = 1)", (string) $this->table->getSelect());
+        $this->assertStringContainsString("WHERE (collections.public = 1)", (string) $this->table->getSelect());
     }
 
     public function testSearchFilters()
@@ -58,8 +58,8 @@ class Models_Table_CollectionTest extends Omeka_Test_TestCase
     {
         $featuredCollection = $this->table->findRandomFeatured();
         $query = $this->dbAdapter->getProfiler()->getLastQueryProfile()->getQuery();
-        $this->assertContains("SELECT collections.* FROM omeka_collections AS c", $query);
-        $this->assertContains("(collections.featured = 1)", $query);
-        $this->assertContains("ORDER BY RAND()", $query);
+        $this->assertStringContainsString("SELECT collections.* FROM omeka_collections AS c", $query);
+        $this->assertStringContainsString("(collections.featured = 1)", $query);
+        $this->assertStringContainsString("ORDER BY RAND()", $query);
     }
 }

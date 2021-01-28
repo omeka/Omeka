@@ -19,7 +19,7 @@ class Models_Output_ItemAtomTest extends Omeka_Test_AppTestCase
         $this->dispatch('items/browse');
         $response = $this->getResponse();
         $headers = $response->sendHeaders();
-        $this->assertNotContains($headers['content-type'], 'Content-Type: application/atom+xml; charset=utf-8');
+        $this->assertStringNotContainsString($headers['content-type'], 'Content-Type: application/atom+xml; charset=utf-8');
     }
 
     public function testAtomContext()
@@ -27,7 +27,7 @@ class Models_Output_ItemAtomTest extends Omeka_Test_AppTestCase
         $this->dispatch('items/browse?output=atom');
         $response = $this->getResponse();
         $headers = $response->sendHeaders();
-        $this->assertContains($headers['content-type'], 'Content-Type: application/atom+xml; charset=utf-8');
+        $this->assertStringContainsString($headers['content-type'], 'Content-Type: application/atom+xml; charset=utf-8');
     }
     public function testGetFeedOnEmptyItem()
     {

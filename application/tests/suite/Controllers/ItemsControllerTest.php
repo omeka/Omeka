@@ -15,9 +15,9 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
 {
     const XSS_QUERY_STRING = '"><script>alert(11639)</script>';
 
-    public function setUp()
+    public function setUpLegacy()
     {
-        parent::setUp();
+        parent::setUpLegacy();
         $this->_authenticateUser($this->_getDefaultUser());
     }
 
@@ -119,23 +119,6 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
         );
     }
 
-    /**
-     * Test that AJAX actions do not render html or body tags.
-     *
-     * @dataProvider ajaxPartials
-     */
-    //public function testAjaxActionsRenderPartials($url)
-    //{
-        //$this->_makeXmlHttpRequest();
-        //$this->dispatch($url);
-        //$dom = new DOMDocument();
-        //$dom->loadHTML($this->response->getBody());
-        //var_dump($dom->documentElement);exit;
-        ////$xml = new SimpleXmlElement($this->response->getBody());
-        //$this->assertNotQuery("form", $this->response->getBody());
-        ////$this->assertNotQuery("body");
-    //}
-
     public function testAdvancedSearchXSSInjection()
     {
         $url = '/items/search?' . http_build_query(array(
@@ -158,7 +141,7 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
         $this->dispatch($url);
         $this->assertController('items');
         $this->assertAction('search');
-        $this->assertNotContains(self::XSS_QUERY_STRING, $this->response->getBody());
+        $this->assertStringNotContainsString(self::XSS_QUERY_STRING, $this->response->getBody());
     }
 
     public function testBrowse()
@@ -179,11 +162,9 @@ class Omeka_Controller_ItemsControllerTest extends Omeka_Test_AppTestCase
         $this->assertRedirectTo('/items/browse');
     }
 
-    /**
-     * @expectedException Omeka_Controller_Exception_404
-     */
     public function testDeleteWithoutHash()
     {
+        $this->setExpectedException('Omeka_Controller_Exception_404');
         $this->request->setMethod('POST');
         $this->dispatch('/items/delete/1');
     }

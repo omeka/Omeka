@@ -13,7 +13,7 @@ class Installer_Task_MigrationsTest extends Omeka_Test_TestCase
 {
     const DB_PREFIX = 'test_';
 
-    public function setUp()
+    public function setUpLegacy()
     {
         $this->dbAdapter = new Zend_Test_DbAdapter;
         $this->db = new Omeka_Db($this->dbAdapter, self::DB_PREFIX);

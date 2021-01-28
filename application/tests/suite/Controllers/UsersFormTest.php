@@ -11,9 +11,9 @@
  */
 class Omeka_Controllers_UsersFormTest extends Omeka_Test_AppTestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
-        parent::setUp();
+        parent::setUpLegacy();
         $this->adminUser = $this->_addNewUserWithRole('admin');
         $this->superUser = $this->_addNewUserWithRole('super');
     }

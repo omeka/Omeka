@@ -15,13 +15,13 @@ class Omeka_Helpers_IsAdminThemeTest extends Omeka_Test_TestCase
 {
     private $_frontController;
 
-    public function setUp()
+    public function setUpLegacy()
     {
         $this->_frontController = Zend_Controller_Front::getInstance();
         $this->_frontController->resetInstance();
     }
 
-    public function assertPreConditions()
+    public function assertPreConditionsLegacy()
     {
         $this->assertNull($this->_frontController->getParam('admin'));
     }
@@ -44,7 +44,7 @@ class Omeka_Helpers_IsAdminThemeTest extends Omeka_Test_TestCase
         $this->assertTrue(is_admin_theme());
     }
 
-    public function tearDown()
+    public function tearDownLegacy()
     {
         $this->_frontController->resetInstance();
     }

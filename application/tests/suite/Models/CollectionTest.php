@@ -14,13 +14,13 @@ class Models_CollectionTest extends Omeka_Test_AppTestCase
     //const COLLECTION_ID = 1;
     const USER_ID = 5;
 
-    public function setUp()
+    public function setUpLegacy()
     {
-        parent::setUp();
+        parent::setUpLegacy();
         $this->collection = new Collection($this->db);
     }
 
-    public function tearDown()
+    public function tearDownLegacy()
     {
         Zend_Registry::_unsetInstance();
     }
@@ -197,15 +197,13 @@ class Models_CollectionTest extends Omeka_Test_AppTestCase
             "'modified' column should contain a valid date (signified by validity as constructor for Zend_Date)");
     }
 
-    /**
-     * @expectedException RuntimeException
-     */
     public function testSetAddedByFailsWithNonpersistedUser()
     {
+        $this->setExpectedException('RuntimeException');
         try {
             $this->collection->setAddedBy(new User($this->db));
         } catch (Exception $e) {
-            $this->assertContains("unsaved user", $e->getMessage());
+            $this->assertStringContainsString("unsaved user", $e->getMessage());
             throw $e;
         }
     }

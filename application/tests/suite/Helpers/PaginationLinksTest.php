@@ -28,7 +28,7 @@ class Omeka_Helper_PaginationLinksTest extends Omeka_Test_AppTestCase
           "link" => ""));
 
         $html = pagination_links();
-        $this->assertContains("href=\"$escapedUrl\"",
+        $this->assertStringContainsString("href=\"$escapedUrl\"",
                               $html,
                               'Should have escaped the pagination URLs to avoid XSS attack.');
     }

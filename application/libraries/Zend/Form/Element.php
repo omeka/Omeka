@@ -584,11 +584,12 @@ class Zend_Form_Element implements Zend_Validate_Interface
     /**
      * Filter a value
      *
+     * (Omeka change, php8, removed pass-by-reference for $key)
      * @param  string $value
      * @param  string $key
      * @return void
      */
-    protected function _filterValue(&$value, &$key)
+    protected function _filterValue(&$value, $key)
     {
         foreach ($this->getFilters() as $filter) {
             $value = $filter->filter($value);

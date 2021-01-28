@@ -275,7 +275,7 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             }
 
             // Save/delete the tags.
-            if (array_key_exists('tags-to-add', $post)) {
+            if (isset($post['tags-to-add'])) {
                 $this->addTags($post['tags-to-add']);
                 $this->deleteTags($post['tags-to-delete']);
             }

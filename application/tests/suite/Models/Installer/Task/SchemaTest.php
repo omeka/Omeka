@@ -13,7 +13,7 @@ class Installer_Task_SchemaTest extends Omeka_Test_TestCase
 {
     const DB_PREFIX = 'test_';
 
-    public function setUp()
+    public function setUpLegacy()
     {
         $this->dbAdapter = new Zend_Test_DbAdapter;
         $this->db = new Omeka_Db($this->dbAdapter, self::DB_PREFIX);
@@ -31,15 +31,13 @@ class Installer_Task_SchemaTest extends Omeka_Test_TestCase
         ), $this->schemaTask->getTables());
     }
 
-    /**
-     * @expectedException Installer_Task_Exception
-     */
     public function testAddNonExistentTable()
     {
+        $this->setExpectedException('Installer_Task_Exception');
         try {
             $this->schemaTask->addTable('foobar', '/fake/path/to/no/file.sql');
         } catch (Installer_Task_Exception $e) {
-            $this->assertContains("Invalid SQL file", $e->getMessage());
+            $this->assertStringContainsString("Invalid SQL file", $e->getMessage());
             throw $e;
         }
     }
@@ -110,7 +108,7 @@ class Installer_Task_SchemaTest extends Omeka_Test_TestCase
             $task->install($this->db);
             $this->fail("Task should have thrown an exception when not given a valid schema file.");
         } catch (Exception $e) {
-            $this->assertContains("No SQL files were given to create the schema.", $e->getMessage());
+            $this->assertStringContainsString("No SQL files were given to create the schema.", $e->getMessage());
         }
     }
 

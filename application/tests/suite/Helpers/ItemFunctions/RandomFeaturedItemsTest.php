@@ -13,9 +13,9 @@
  */
 class Omeka_Helper_RandomFeaturedItemsTest extends Omeka_Test_AppTestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
-        parent::setUp();
+        parent::setUpLegacy();
         $this->_createFeaturedItems();
     }
 

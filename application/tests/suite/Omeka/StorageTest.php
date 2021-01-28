@@ -11,55 +11,50 @@ class Omeka_StorageTest extends Omeka_Test_TestCase
     /**
      * Test passing an adapter class name that's not a defined class,
      * should throw Omeka_Storage_Exception.
-     * 
-     * @expectedException Omeka_Storage_Exception
      */
     public function testNonExistingAdapterName()
     {
+        $this->setExpectedException('Omeka_Storage_Exception');
         new Omeka_Storage(array('adapter' => 'NotAClass'));
     }
 
     /**
      * Test passing an adapter class name that's not an interface
      * implementer, should throw Omeka_Storage_Exception.
-     * 
-     * @expectedException Omeka_Storage_Exception
      */
     public function testBadAdapterName()
     {
+        $this->setExpectedException('Omeka_Storage_Exception');
         new Omeka_Storage(array('adapter' => 'stdClass'));
     }
 
     /**
      * Test passing an adapter class name that's not an interface
      * implementer, should throw Omeka_Storage_Exception.
-     * 
-     * @expectedException Omeka_Storage_Exception
      */
     public function testNullAdapter()
     {
+        $this->setExpectedException('Omeka_Storage_Exception');
         new Omeka_Storage(array('adapter' => null));
     }
 
     /**
      * Test passing an adapter class name that's not an interface
      * implementer, should throw Omeka_Storage_Exception.
-     * 
-     * @expectedException Omeka_Storage_Exception
      */
     public function testBadAdapter()
     {
+        $this->setExpectedException('Omeka_Storage_Exception');
         $class = new stdClass;
         new Omeka_Storage(array('adapter' => $class));
     }
 
     /**
      * Test using the magic calling for adapter methods with no adapter.
-     *
-     * @expectedException Omeka_Storage_Exception
      */
     public function testStoreWithNoAdapter()
     {
+        $this->setExpectedException('Omeka_Storage_Exception');
         $storage = new Omeka_Storage;
         $storage->store('path', 'destination');
     }

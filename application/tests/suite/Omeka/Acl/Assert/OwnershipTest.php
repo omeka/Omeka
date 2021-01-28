@@ -15,9 +15,9 @@ class Omeka_Acl_Assert_OwnershipTest extends Omeka_Test_AppTestCase
     private $_users;
     private $_items;
 
-    public function setUp()
+    public function setUpLegacy()
     {
-        parent::setUp();
+        parent::setUpLegacy();
 
         $super = new User;
         $super->role = 'super';
@@ -36,10 +36,10 @@ class Omeka_Acl_Assert_OwnershipTest extends Omeka_Test_AppTestCase
         );
     }
 
-    public function tearDown()
+    public function tearDownLegacy()
     {
         release_object($this->_users);
-        parent::tearDown();
+        parent::tearDownLegacy();
     }
 
     /**

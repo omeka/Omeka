@@ -21,7 +21,7 @@ class Globals_GetThemeOptionTest extends Omeka_Test_TestCase
         'show_description' => false
     );
 
-    public function setUp()
+    public function setUpLegacy()
     {
         // Configure the options so that get_theme_option() can automatically retrieve
         // options for the given theme.
@@ -33,7 +33,7 @@ class Globals_GetThemeOptionTest extends Omeka_Test_TestCase
         Zend_Registry::set('bootstrap', $bootstrap);
     }
 
-    public function tearDown()
+    public function tearDownLegacy()
     {
         Zend_Registry::_unsetInstance();
     }

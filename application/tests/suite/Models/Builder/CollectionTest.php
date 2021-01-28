@@ -13,13 +13,13 @@ class Models_Builder_CollectionTest extends Omeka_Test_AppTestCase
 {
     const USER_ID = 2;
 
-    public function setUp()
+    public function setUpLegacy()
     {
-        parent::setUp();
+        parent::setUpLegacy();
         $this->builder = new Builder_Collection($this->db);
     }
 
-    public function tearDown()
+    public function tearDownLegacy()
     {
         Zend_Registry::_unsetInstance();
     }

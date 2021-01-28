@@ -13,9 +13,9 @@
  */
 class Models_Table_ElementTest extends Omeka_Test_AppTestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
-        parent::setUp();
+        parent::setUpLegacy();
         $this->table = $this->db->getTable('Element');
     }
 

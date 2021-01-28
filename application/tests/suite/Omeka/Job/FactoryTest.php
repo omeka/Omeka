@@ -36,11 +36,9 @@ class Omeka_Job_FactoryTest extends Omeka_Test_TestCase
             $job->getMiscOptions());
     }
 
-    /**
-     * @expectedException Omeka_Job_Factory_MalformedJobException
-     */
     public function testErrorOnMissingJobClass()
     {
+        $this->setExpectedException('Omeka_Job_Factory_MalformedJobException');
         $factory = new Omeka_Job_Factory(array());
         $json = Zend_Json::encode(array(
             'options' => array('bar' => true)
@@ -48,11 +46,9 @@ class Omeka_Job_FactoryTest extends Omeka_Test_TestCase
         $job = $factory->from($json);
     }
 
-    /**
-     * @expectedException Omeka_Job_Factory_MissingClassException
-     */
     public function testErrorOnInvalidJobClass()
     {
+        $this->setExpectedException('Omeka_Job_Factory_MissingClassException');
         $factory = new Omeka_Job_Factory(array());
         $json = Zend_Json::encode(array(
             'className' => 'NonexistentJobClass_12345',
@@ -61,20 +57,16 @@ class Omeka_Job_FactoryTest extends Omeka_Test_TestCase
         $job = $factory->from($json);
     }
 
-    /**
-     * @expectedException Omeka_Job_Factory_MalformedJobException
-     */
     public function testErrorOnMalformedJson()
     {
+        $this->setExpectedException('Omeka_Job_Factory_MalformedJobException');
         $factory = new Omeka_Job_Factory(array());
         $factory->from("foobar_invalid_json");
     }
 
-    /**
-     * @expectedException Omeka_Job_Factory_MalformedJobException
-     */
     public function testErrorOnMissingOptions()
     {
+        $this->setExpectedException('Omeka_Job_Factory_MalformedJobException');
         $factory = new Omeka_Job_Factory(array());
         $json = Zend_Json::encode(array(
             'className' => 'Omeka_Job_Mock',

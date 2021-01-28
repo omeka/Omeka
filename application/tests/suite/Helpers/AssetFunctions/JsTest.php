@@ -11,7 +11,7 @@
  */
 class Omeka_Helper_JsTest extends Omeka_Test_TestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
         $this->view = new Omeka_View;
         Zend_Registry::set('view', $this->view);
@@ -23,7 +23,7 @@ class Omeka_Helper_JsTest extends Omeka_Test_TestCase
     public function testOutputsScriptTagWithHrefAndDefaultVersion()
     {
         // Test with Contains to avoid matching issues with newlines.
-        $this->assertContains('<script type="text/javascript" src="/path/to/omeka/javascripts/vendor/jquery.js?v='.OMEKA_VERSION.'" charset="utf-8"></script>',
+        $this->assertStringContainsString('<script type="text/javascript" src="/path/to/omeka/javascripts/vendor/jquery.js?v='.OMEKA_VERSION.'" charset="utf-8"></script>',
                             $this->_getJsTag());
     }
 
@@ -31,14 +31,14 @@ class Omeka_Helper_JsTest extends Omeka_Test_TestCase
     {
         $version = '1.2x';
         // Test with Contains to avoid matching issues with newlines.
-        $this->assertContains('<script type="text/javascript" src="/path/to/omeka/javascripts/vendor/jquery.js?v='.$version.'" charset="utf-8"></script>',
+        $this->assertStringContainsString('<script type="text/javascript" src="/path/to/omeka/javascripts/vendor/jquery.js?v='.$version.'" charset="utf-8"></script>',
                             $this->_getJsTag($version));
     }
 
     public function testOutputsScriptTagWithHrefAndNoVersion()
     {
         // Test with Contains to avoid matching issues with newlines.
-        $this->assertContains('<script type="text/javascript" src="/path/to/omeka/javascripts/vendor/jquery.js" charset="utf-8"></script>',
+        $this->assertStringContainsString('<script type="text/javascript" src="/path/to/omeka/javascripts/vendor/jquery.js" charset="utf-8"></script>',
                             $this->_getJsTag(null));
     }
 
@@ -48,7 +48,7 @@ class Omeka_Helper_JsTest extends Omeka_Test_TestCase
         return js_tag('vendor/jquery', $dir, $version);
     }
 
-    public function tearDown()
+    public function tearDownLegacy()
     {
         Zend_Registry::_unsetInstance();
     }
