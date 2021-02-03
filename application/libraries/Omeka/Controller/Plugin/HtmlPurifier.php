@@ -107,6 +107,24 @@ class Omeka_Controller_Plugin_HtmlPurifier extends Zend_Controller_Plugin_Abstra
     }
 
     /**
+     * Filter the Files form post, including the 'Elements' array of the POST.
+     *
+     * @param Zend_Controller_Request_Abstract $request
+     * @param Omeka_Filter_HtmlPurifier $htmlPurifierFilter
+     **/
+    public function filterFilesForm($request, $htmlPurifierFilter = null)
+    {
+        if ($htmlPurifierFilter === null) {
+            $htmlPurifierFilter = new Omeka_Filter_HtmlPurifier();
+        }
+
+        $post = $request->getPost();
+        $post = $this->_filterElementsFromPost($post, $htmlPurifierFilter);
+
+        $request->setPost($post);
+    }
+
+    /**
      * Purify all of the data in the theme settings
      *
      * @param Zend_Controller_Request_Abstract $request
