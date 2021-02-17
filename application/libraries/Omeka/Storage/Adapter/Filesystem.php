@@ -39,6 +39,13 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter_AdapterI
     protected $_webDir;
 
     /**
+     * Whether to use copy instead of rename when moving files to storage
+     *
+     * @var bool
+     */
+    protected $_useCopy;
+
+    /**
      * Set options for the storage adapter.
      *
      * @param array $options
@@ -53,6 +60,10 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter_AdapterI
 
                 case 'webDir':
                     $this->_webDir = $value;
+                    break;
+
+                case 'useCopy':
+                    $this->_useCopy = (bool) $value;
                     break;
 
                 default:
@@ -219,6 +230,15 @@ class Omeka_Storage_Adapter_Filesystem implements Omeka_Storage_Adapter_AdapterI
             throw new Omeka_Storage_Exception("Destination directory is not "
                 . "writable: '$destDir'.");
         }
-        return rename($source, $dest);
+        if ($this->_useCopy) {
+            $status = copy($source, $dest);
+            if ($status) {
+                unlink($source);
+            }
+            return $status;
+
+        } else {
+            return rename($source, $dest);
+        }
     }
 }
