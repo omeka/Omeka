@@ -14,6 +14,9 @@
 //                                                            ///
 /////////////////////////////////////////////////////////////////
 
+if (!defined('GETID3_INCLUDEPATH')) { // prevent path-exposing attacks that access modules directly on public webservers
+	exit;
+}
 
 // number of frames to scan to determine if MPEG-audio sequence is valid
 // Lower this number to 5-20 for faster scanning
@@ -485,7 +488,7 @@ class getid3_mp3 extends getid3_handler
 		if ($MPEGaudioHeaderValidCache[$head4_key]) {
 			$thisfile_mpeg_audio['raw'] = $MPEGheaderRawArray;
 		} else {
-			$this->error('Invalid MPEG audio header ('.getid3_lib::PrintHexBytes($head4).') at offset '.$offset);
+			$this->warning('Invalid MPEG audio header ('.getid3_lib::PrintHexBytes($head4).') at offset '.$offset);
 			return false;
 		}
 
@@ -719,8 +722,17 @@ class getid3_mp3 extends getid3_handler
 
 					$thisfile_mpeg_audio_lame['long_version']  = substr($headerstring, $VBRidOffset + 120, 20);
 					$thisfile_mpeg_audio_lame['short_version'] = substr($thisfile_mpeg_audio_lame['long_version'], 0, 9);
+					$thisfile_mpeg_audio_lame['numeric_version'] = str_replace('LAME', '', $thisfile_mpeg_audio_lame['short_version']);
+					if (preg_match('#^LAME([0-9\\.a-z]+)#', $thisfile_mpeg_audio_lame['long_version'], $matches)) {
+						$thisfile_mpeg_audio_lame['short_version']   = $matches[0];
+						$thisfile_mpeg_audio_lame['numeric_version'] = $matches[1];
+					}
+					foreach (explode('.', $thisfile_mpeg_audio_lame['numeric_version']) as $key => $number) {
+						$thisfile_mpeg_audio_lame['integer_version'][$key] = intval($number);
+					}
 
-					if ($thisfile_mpeg_audio_lame['short_version'] >= 'LAME3.90') {
+					//if ($thisfile_mpeg_audio_lame['short_version'] >= 'LAME3.90') {
+					if ((($thisfile_mpeg_audio_lame['integer_version'][0] * 1000) + $thisfile_mpeg_audio_lame['integer_version'][1]) >= 3090) { // cannot use string version compare, may have "LAME3.90" or "LAME3.100" -- see https://github.com/JamesHeinrich/getID3/issues/207
 
 						// extra 11 chars are not part of version string when LAMEtag present
 						unset($thisfile_mpeg_audio_lame['long_version']);
@@ -1324,12 +1336,12 @@ class getid3_mp3 extends getid3_handler
 						if ($MPEGaudioHeaderValidCache[$next4]) {
 							$this->fseek(-4, SEEK_CUR);
 
-							getid3_lib::safe_inc($Distribution['bitrate'][$LongMPEGbitrateLookup[$head4]]);
-							getid3_lib::safe_inc($Distribution['layer'][$LongMPEGlayerLookup[$head4]]);
-							getid3_lib::safe_inc($Distribution['version'][$LongMPEGversionLookup[$head4]]);
-							getid3_lib::safe_inc($Distribution['padding'][intval($LongMPEGpaddingLookup[$head4])]);
-							getid3_lib::safe_inc($Distribution['frequency'][$LongMPEGfrequencyLookup[$head4]]);
-							if ($max_frames_scan && (++$frames_scanned >= $max_frames_scan)) {
+							$Distribution['bitrate'][$LongMPEGbitrateLookup[$head4]] = isset($Distribution['bitrate'][$LongMPEGbitrateLookup[$head4]]) ? ++$Distribution['bitrate'][$LongMPEGbitrateLookup[$head4]] : 1;
+							$Distribution['layer'][$LongMPEGlayerLookup[$head4]] = isset($Distribution['layer'][$LongMPEGlayerLookup[$head4]]) ? ++$Distribution['layer'][$LongMPEGlayerLookup[$head4]] : 1;
+							$Distribution['version'][$LongMPEGversionLookup[$head4]] = isset($Distribution['version'][$LongMPEGversionLookup[$head4]]) ? ++$Distribution['version'][$LongMPEGversionLookup[$head4]] : 1;
+							$Distribution['padding'][intval($LongMPEGpaddingLookup[$head4])] = isset($Distribution['padding'][intval($LongMPEGpaddingLookup[$head4])]) ? ++$Distribution['padding'][intval($LongMPEGpaddingLookup[$head4])] : 1;
+							$Distribution['frequency'][$LongMPEGfrequencyLookup[$head4]] = isset($Distribution['frequency'][$LongMPEGfrequencyLookup[$head4]]) ? ++$Distribution['frequency'][$LongMPEGfrequencyLookup[$head4]] : 1;
+							if (++$frames_scanned >= $max_frames_scan) {
 								$pct_data_scanned = ($this->ftell() - $info['avdataoffset']) / ($info['avdataend'] - $info['avdataoffset']);
 								$this->warning('too many MPEG audio frames to scan, only scanned first '.$max_frames_scan.' frames ('.number_format($pct_data_scanned * 100, 1).'% of file) and extrapolated distribution, playtime and bitrate may be incorrect.');
 								foreach ($Distribution as $key1 => $value1) {
@@ -1421,6 +1433,8 @@ class getid3_mp3 extends getid3_handler
 		$header = $this->fread($sync_seek_buffer_size);
 		$sync_seek_buffer_size = strlen($header);
 		$SynchSeekOffset = 0;
+		$SyncSeekAttempts = 0;
+		$SyncSeekAttemptsMax = 1000;
 		while ($SynchSeekOffset < $sync_seek_buffer_size) {
 			if ((($avdataoffset + $SynchSeekOffset)  < $info['avdataend']) && !feof($this->getid3->fp)) {
 
@@ -1459,7 +1473,24 @@ class getid3_mp3 extends getid3_handler
 				return false;
 			}
 
-			if (($header[$SynchSeekOffset] == "\xFF") && ($header[($SynchSeekOffset + 1)] > "\xE0")) { // synch detected
+			if (($header[$SynchSeekOffset] == "\xFF") && ($header[($SynchSeekOffset + 1)] > "\xE0")) { // possible synch detected
+				if (++$SyncSeekAttempts >= $SyncSeekAttemptsMax) {
+					// https://github.com/JamesHeinrich/getID3/issues/286
+					// corrupt files claiming to be MP3, with a large number of 0xFF bytes near the beginning, can cause this loop to take a very long time
+					// should have escape condition to avoid spending too much time scanning a corrupt file
+					// if a synch's not found within the first 128k bytes, then give up
+					$this->error('Could not find valid MPEG audio synch after scanning '.$SyncSeekAttempts.' candidate offsets');
+					if (isset($info['audio']['bitrate'])) {
+						unset($info['audio']['bitrate']);
+					}
+					if (isset($info['mpeg']['audio'])) {
+						unset($info['mpeg']['audio']);
+					}
+					if (empty($info['mpeg'])) {
+						unset($info['mpeg']);
+					}
+					return false;
+				}
 				$FirstFrameAVDataOffset = null;
 				if (!isset($FirstFrameThisfileInfo) && !isset($info['mpeg']['audio'])) {
 					$FirstFrameThisfileInfo = $info;
@@ -1779,7 +1810,7 @@ class getid3_mp3 extends getid3_handler
 	 * @return bool
 	 */
 	public static function MPEGaudioHeaderValid($rawarray, $echoerrors=false, $allowBitrate15=false) {
-		if (($rawarray['synch'] & 0x0FFE) != 0x0FFE) {
+		if (!isset($rawarray['synch']) || ($rawarray['synch'] & 0x0FFE) != 0x0FFE) {
 			return false;
 		}
 

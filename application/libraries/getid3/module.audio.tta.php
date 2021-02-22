@@ -14,6 +14,9 @@
 //                                                            ///
 /////////////////////////////////////////////////////////////////
 
+if (!defined('GETID3_INCLUDEPATH')) { // prevent path-exposing attacks that access modules directly on public webservers
+	exit;
+}
 
 class getid3_tta extends getid3_handler
 {
@@ -94,7 +97,6 @@ class getid3_tta extends getid3_handler
 			default:
 				$this->error('This version of getID3() ['.$this->getid3->version().'] only knows how to handle TTA v1 and v2 - it may not work correctly with this file which appears to be TTA v'.$ttaheader[3]);
 				return false;
-				break;
 		}
 
 		$info['audio']['encoder']         = 'TTA v'.$info['tta']['major_version'];

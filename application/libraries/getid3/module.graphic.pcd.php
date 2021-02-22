@@ -14,7 +14,9 @@
 //                                                            ///
 /////////////////////////////////////////////////////////////////
 
-
+if (!defined('GETID3_INCLUDEPATH')) { // prevent path-exposing attacks that access modules directly on public webservers
+	exit;
+}
 class getid3_pcd extends getid3_handler
 {
 	public $ExtractData = 0;
@@ -48,6 +50,7 @@ class getid3_pcd extends getid3_handler
 		if ($this->ExtractData > 3) {
 
 			$this->error('Cannot extract PSD image data for detail levels above BASE (level-3) because encrypted with Kodak-proprietary compression/encryption.');
+			return false;
 
 		} elseif ($this->ExtractData > 0) {
 
@@ -100,6 +103,7 @@ class getid3_pcd extends getid3_handler
 
 		}
 
+		return false;
 	}
 
 	/**
