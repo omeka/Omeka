@@ -23,6 +23,13 @@
 class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
 {
     /**
+     * Fallback image used when no other fallbacks are appropriate.
+     *
+     * @var string
+     */
+    const GENERIC_FALLBACK_IMAGE = 'fallback-file.png';
+
+    /**
      * Array of MIME types and the callbacks that can process it.
      *
      * Example:
@@ -145,8 +152,8 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
             'linkAttributes' => array(),
             'imgAttributes' => array(),
             'filenameAttributes' => array()
-            )
-        );
+        )
+    );
 
     /**
      * Images to show when a file has no derivative.
@@ -157,14 +164,8 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
         'audio' => 'fallback-audio.png',
         'image' => 'fallback-image.png',
         'video' => 'fallback-video.png',
+        '*'     => self::GENERIC_FALLBACK_IMAGE
     );
-
-    /**
-     * Fallback image used when no other fallbacks are appropriate.
-     *
-     * @var string
-     */
-    const GENERIC_FALLBACK_IMAGE = 'fallback-file.png';
 
     /**
      * Add MIME types and/or file extensions and associated callbacks to the 
@@ -657,7 +658,7 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
             return self::$_fallbackImages[$mimePrefix];
         }
 
-        return self::GENERIC_FALLBACK_IMAGE;
+        return self::$_fallbackImages['*'];
     }
 
     /**
