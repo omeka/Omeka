@@ -46,7 +46,7 @@ if ($current->image) {
 <div class="themes group">
     <form method="post" id="themes-form" action="<?php echo $this->url(array('controller' => 'themes', 'action' => 'switch'), 'default'); ?>">
 <?php
-$i = 0;
+$i = 1;
 foreach ($themes as $theme):
     if ($theme == $current) {
         continue;
@@ -57,7 +57,7 @@ foreach ($themes as $theme):
         $themeScreenshot = img('fallback-theme.png');
     }
 ?>
-        <div class="theme three columns<?php if ($i++ % 3) echo ' alpha'; ?>">
+        <div class="theme three columns<?php if ($i % 3 == 1) echo ' alpha'; $i++; ?>">
             <div class="crop">
                 <img src="<?php echo $themeScreenshot; ?>" alt="<?php echo __('Screenshot for %s Theme', html_escape($theme->title)); ?>" />
             </div>

@@ -78,7 +78,7 @@ form.form-inline.editableform {
     border-radius: 3px;
     
     display: inline-block;
-    margin: 0 0 10px 0;
+    margin: 0 10px 10px 0;
     padding: 5px 10px;
 }
 
@@ -100,7 +100,7 @@ form.form-inline.editableform {
 
 .tag-list li .tag, .tag-list li a, .tag-list li .count {
     display: inline-block;
-    color: #519E00;
+    color: darken(#519E00, 15%);
 }
 
 .tag-list li .delete-tag a, .tag-list li .remove-tag a, .tag-list li .undo-remove-tag a {

@@ -273,3 +273,8 @@ img {
 	    margin: 0;
 	}
 }
+
+.ui-icon.ui-icon-closethick,
+.ui-icon.ui-icon-close {
+    filter: brightness(10);
+}

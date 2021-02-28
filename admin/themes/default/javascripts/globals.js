@@ -76,17 +76,25 @@ if (!Omeka) {
             topPadding = 62;
             
         if (document.getElementById("content-nav")) {
-            $window.scroll(function () {
-                if($window.scrollTop() > offset.top && $window.width() > 767 && ($window.height() - topPadding - 85) >  $sidebar.height()) {
-                    $sidebar.stop().animate({
-                        marginTop: $window.scrollTop() - offset.top + topPadding
-                        });
-                } else {
-                    $sidebar.stop().animate({
-                        marginTop: 0
-                    });
-                }
-            });
+	        if($window.width() > 767) {
+	            $window.scroll(function () {
+	                if($window.scrollTop() > offset.top && $window.width() > 767 && ($window.height() - topPadding - 85) >  $sidebar.height()) {
+	                    $sidebar.stop().animate({
+	                        marginTop: $window.scrollTop() - offset.top + topPadding
+	                        });
+	                } else {
+	                    $sidebar.stop().animate({
+	                        marginTop: 0
+	                    });
+	                }
+	            });
+            } else {
+	            $window.resize(function(){
+		            $sidebar.stop().animate({
+	                    marginTop: 0
+	                });
+	            })
+            }
         }
     };
 

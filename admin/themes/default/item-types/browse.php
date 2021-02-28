@@ -27,7 +27,7 @@ echo flash();
 	<table>
 	    <thead>
 	        <tr>
-	            <th><?php echo __('Type Name'); ?></th>
+	            <th width="200px"><?php echo __('Type Name'); ?></th>
 	            <th><?php echo __('Description'); ?></th>
 	            <th><?php echo __('Total Items'); ?></th>
 	        </tr>

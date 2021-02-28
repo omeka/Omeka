@@ -455,31 +455,21 @@
 }
 
 .tag-list li.tag-removed {
-    -webkit-box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 2px 2px 0px #d4d4d4;
-    -moz-box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 2px 2px 0px #d4d4d4;
-    box-shadow: 0px 1px 0px 0px #b87979 inset, 0px -1px 0px 0px #5e3030 inset, 0px 2px 2px 0px #d4d4d4;
-    border: 1px solid #7E432C;
-    background: #ad6345;
-    background: -webkit-linear-gradient(top, #ad6345, #7d422a);
-    background: -moz-linear-gradient(top, #ad6345, #7d422a);
-    background: -o-linear-gradient(top, #ad6345, #7d422a);
-    background: linear-gradient(to bottom, #ad6345, #7d422a);
-}
-
-    .tag-list li.tag-removed:after {
-        -webkit-box-shadow: 0px 1px 0px 0 #b87979 inset, 0 0 0 0 #ffffff inset, 2px -1px 2px 0px #d4d4d4;
-        -moz-box-shadow: 0px 1px 0px 0 #b87979 inset, 0 0 0 0 #ffffff inset, 2px -1px 2px 0px #d4d4d4;
-        box-shadow: 0px 1px 0px 0 #b87979 inset, 0 0 0 0 #ffffff inset, 2px -1px 2px 0px #d4d4d4;
+    color: #B00D00;
+    background: #F9E8E7;
+    border: 1px solid rgba(#B00D00, 0.25);
+    
+    &:hover,
+    &:focus {
+        border-color: rgba(#B00D00, 0.65);
+        background: darken(#F9E8E7, 5%);
+        outline: none;
     }
-
-.tag-list li.tag-removed:after {
-    background: #ad6354;
-    background: -webkit-linear-gradient(top, #ad6345, #7d422a);
-    background: -moz-linear-gradient(top, #ad6345, #7d422a);
-    background: -o-linear-gradient(top, #ad6345, #7d422a);
-    background: linear-gradient(to bottom, #ad6345, #7d422a);
-    border-top: 1px solid #7E432C;
-    border-right: 1px solid #7E432C;
+    
+    .undo-remove-tag a:after {
+	    background-color: #B00D00;
+	    color: white;  
+	}
 }
 
 .undo-remove-tag {
@@ -507,8 +497,9 @@
 .explanation {
     clear: both;
     margin: 0 0 10px 0;
-    color: gray;
+    color: #666;
     font-style: italic;
+    font-size: 16px;
 }
 
 #public-featured {
@@ -619,6 +610,10 @@
 
 .item-types #add-element {
     margin: 0;
+}
+
+.item-types table th:first-of-type {
+	min-width: 150px;
 }
 
 .delete-element {

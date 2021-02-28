@@ -29,7 +29,7 @@ Omeka.Settings = {};
                     'path-to-convert': imageMagickInput.val()
                 },
                 success: function (data) {
-                    $('#im-result').html(data);
+                    $('#im-result').addClass('success').html(data);
                 }
             });
         });

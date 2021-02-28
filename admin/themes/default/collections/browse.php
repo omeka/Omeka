@@ -45,10 +45,16 @@ echo flash();
 	                        <?php if ($collectionImage = record_image('collection', 'square_thumbnail')): ?>
 	                            <?php echo link_to_collection($collectionImage, array('class' => 'image')); ?>
 	                        <?php endif; ?>
-	                        <h3 class="title">
-		                        <?php echo link_to_collection(); ?>
-								<small><?php if (!$collection->public) echo __('(Private)'); ?></small>
-	                        </h3>
+	                        
+	                        
+	                        <h3 class="title <?php if ($collection->featured): ?>featured<?php endif; ?>">
+		                    	<?php echo link_to_collection(); ?>
+		
+			                    <?php if(!$collection->public): ?>
+			                    	<small><?php echo __('(Private)'); ?></small>
+			                    <?php endif; ?>
+		                    </h3>
+
 	                        <?php if (is_allowed($collection, 'edit')): ?>
 	                        <ul class="action-links">
 	                            <li><?php echo link_to_collection(__('Edit'), array('class'=>'edit'), 'edit'); ?></li>

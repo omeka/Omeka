@@ -139,6 +139,20 @@
     }
 }
 
+#advanced-search-form {
+	.advanced-search-terms {
+		margin-bottom: 10px;
+	}
+	@include screen-md {
+		.columns.two {
+			width: 100%;
+		}
+		.columns.five {
+			width: 100%;
+		}
+	}
+}
+
     
 #search-results {
 	td:first-of-type {
@@ -194,7 +208,7 @@
 .search-entry {
 	select {
 	    min-width: 0;
-	    width: 42.5%;
+	    width: 40%;
 	}
 
 	&:first-of-type select {
@@ -211,7 +225,7 @@
 }
 
 #search-narrow-by-fields .advanced-search-joiner {
-    width: 15%;
+    width: 20%;
 }
 
 button.remove_search {
