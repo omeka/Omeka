@@ -89,27 +89,31 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
     public function parseShortcodeAttributes($text)
     {
         $args = array();
+        if ($text === '') {
+            return $args;
+        }
+
         $pattern =
                         // Start by looking for attribute values in double quotes
-        '/(\w+)'        // Attribute key
+        '/(\w+)'        // Attribute key (1)
         . '\s*=\s*'     // Whitespace and =
-        . '"([^"]*)"'   // Attrbiute value
+        . '"([^"]*)"'   // Attrbiute value (2)
         . '(?:\s|$)'    // Space or end of string
         . '|'           // Or look for attribute values in single quotes
-        . '(\w+)'       // Attribute key
+        . '(\w+)'       // Attribute key (3)
         . '\s*=\s*'     // Whitespace and =
-        . '\'([^\']*)\''// Attribute value
+        . '\'([^\']*)\''// Attribute value (4)
         .'(?:\s|$)'     // Space or end of string
         . '|'           // Or look for attribute values without quotes
-        . '(\w+)'       // Attribute key
+        . '(\w+)'       // Attribute key (5)
         . '\s*=\s*'     // Whitespace and =
-        . '([^\s\'"]+)' // Attribute value
+        . '([^\s\'"]+)' // Attribute value (6)
         . '(?:\s|$)'    // Space or end of string
         . '|'           // Or look for single value
-        . '"([^"]*)"'   // Attribute value alone
+        . '"([^"]*)"'   // Attribute value alone (7)
         . '(?:\s|$)'    // Space or end of string
         . '|'           // Or look for single value
-        . '(\S+)'       // Attribute value alone
+        . '(\S+)'       // Attribute value alone (8)
         . '(?:\s|$)/';  // Space or end of string
 
         if (preg_match_all($pattern, $text, $match, PREG_SET_ORDER)) {
@@ -127,7 +131,7 @@ class Omeka_View_Helper_Shortcodes extends Zend_View_Helper_Abstract
                 }
             }
         } else {
-            $args = ltrim($text);
+            $args[] = ltrim($text);
         }
         return $args;
     }
