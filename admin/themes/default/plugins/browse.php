@@ -80,7 +80,7 @@ echo flash();
                 </ul>
             <?php endif; ?>
             <?php if ($versionNotifications && $plugin->isActive()): ?>
-                <ul class="version-notification active"
+                <ul class="version-notification"
                     data-addon-id="<?php echo html_escape($pluginDirName); ?>"
                     data-current-version="<?php echo html_escape($plugin->getIniVersion()); ?>">
                     <li class="flash success">
