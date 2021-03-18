@@ -17,6 +17,7 @@
 /db.ini
 /application/config/config.ini
 /application/tests/config.ini
+/application/tests/.phpunit.result.cache
 
 # Log files
 /application/logs/errors.log

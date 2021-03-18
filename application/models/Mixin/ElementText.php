@@ -760,18 +760,30 @@ SQL
      * If no title is present or the title contains no text, returns the passed $default value.
      * If no $default is given, returns the translated string [Untitled].
      *
-     * @pararm string|null $default Default value to return if no suitable Title element exists
+     * @param string|null $default Default value to return if no suitable Title element exists
+     * @param string $allowedTags Set of allowed HTML tags (see strip_formatting). If left blank
+     *  (as is default), the title is returned as plain text, with any tags stripped and HTML
+     *  entities decoded. If any tags are allowed, entities are left in place and the given tags
+     *  are preserved (and conversely plain text titles will be HTML-escaped).
      * @return string Raw (unescaped) title string for the record.
      */
-    public function getDisplayTitle($default = null)
+    public function getDisplayTitle($default = null, $allowedTags = '')
     {
+        $asHtml = ($allowedTags !== '');
+
         $title = '';
         $titles = $this->getElementTexts('Dublin Core', 'Title');
         if ($titles) {
             $title = $titles[0]->text;
             if ($titles[0]->html) {
-                $title = trim(html_entity_decode(strip_formatting($title), ENT_QUOTES, 'UTF-8'));
+                $title = strip_formatting($title, $allowedTags);
+                if (!$asHtml) {
+                    $title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
+                }
+            } elseif ($asHtml) {
+                $title = html_escape($title);
             }
+            $title = trim($title);
         }
 
         if ($title === '') {
@@ -781,5 +793,27 @@ SQL
             $title = $default;
         }
         return $title;
+    }
+
+    /**
+     * Return the title of this record for display/interface purposes,
+     * with limited HTML text styling preserved.
+     *
+     * The default getDisplayTitle strips all HTML tags, while this method
+     * allows em, strong, i, b, and u tags present in an HTML title to be
+     * retained in the output.
+     *
+     * Since its output can be HTML, this method is only suitable for use
+     * in contexts where HTML is expected. The value of $default here should
+     * also be treated as HTML, including escaping if necessary, as unlike
+     * getDisplayTitle, the output of getRichTitle will generally not be
+     * escaped on output.
+     *
+     * @param string|null $default Default value to return if no suitable Title element exists
+     * @return string HTML title string for the record
+     */
+    public function getRichTitle($default = null)
+    {
+        return $this->getDisplayTitle($default, '<em><strong><i><b><u>');
     }
 }

@@ -18,13 +18,13 @@ class Core_AclTest extends Omeka_Test_TestCase
     /**
      * Include the defined ACL, exactly the way Omeka loads it by default.
      */
-    public function setUp()
+    public function setUpLegacy()
     {
         $acl = new Omeka_Application_Resource_Acl;
         $this->_acl = $acl->getAcl();
     }
 
-    public function tearDown()
+    public function tearDownLegacy()
     {
         unset($this->_acl);
     }

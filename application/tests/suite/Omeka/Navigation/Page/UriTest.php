@@ -14,9 +14,9 @@ class Omeka_Navigation_UriTest extends Omeka_Test_AppTestCase
 {
     protected $_page;
 
-    public function setUp()
+    public function setUpLegacy()
     {
-        parent::setUp();
+        parent::setUpLegacy();
         $this->_page = new Omeka_Navigation_Page_Uri();
     }
 

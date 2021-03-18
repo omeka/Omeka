@@ -13,9 +13,9 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
 {
     const FORM_URL = '/users/change-password/1';
 
-    public function setUp()
+    public function setUpLegacy()
     {
-        parent::setUp();
+        parent::setUpLegacy();
 
         $this->user = $this->_getDefaultUser();
         $this->salt = $this->user->salt;
@@ -27,13 +27,13 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
         $this->user->save();
     }
 
-    public function assertPreConditions()
+    public function assertPreConditionsLegacy()
     {
         $this->assertNotNull($this->salt, "Salt not being set properly by installer.");
         $this->_assertPasswordNotChanged();
     }
 
-    public function assertPostConditions()
+    public function assertPostConditionsLegacy()
     {
         $this->_assertSaltNotChanged();
     }

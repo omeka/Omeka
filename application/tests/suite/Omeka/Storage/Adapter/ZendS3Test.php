@@ -15,39 +15,31 @@ class Omeka_Storage_Adapter_ZendS3Test extends Omeka_Test_TestCase
         $this->assertInstanceOf('Zend_Service_Amazon_S3', $s3);
     }
 
-    /**
-     * @expectedException Omeka_Storage_Exception
-     */
     public function testNoOptions()
     {
+        $this->setExpectedException('Omeka_Storage_Exception');
         new Omeka_Storage_Adapter_ZendS3;
     }
 
-    /**
-     * @expectedException Omeka_Storage_Exception
-     */
     public function testNoAccessKeyId()
     {
+        $this->setExpectedException('Omeka_Storage_Exception');
         $options = $this->_options;
         unset($options['accessKeyId']);
         new Omeka_Storage_Adapter_ZendS3($options);
     }
 
-    /**
-     * @expectedException Omeka_Storage_Exception
-     */
     public function testNoSecretKey()
     {
+        $this->setExpectedException('Omeka_Storage_Exception');
         $options = $this->_options;
         unset($options['secretAccessKey']);
         new Omeka_Storage_Adapter_ZendS3($options);
     }
 
-    /**
-     * @expectedException Omeka_Storage_Exception
-     */
     public function testNoBucket()
     {
+        $this->setExpectedException('Omeka_Storage_Exception');
         $options = $this->_options;
         unset($options['bucket']);
         new Omeka_Storage_Adapter_ZendS3($options);

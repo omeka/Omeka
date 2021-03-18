@@ -13,9 +13,9 @@
  */
 class Helpers_UserFunctions_HasPermissionTest extends Omeka_Test_AppTestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
-        parent::setUp();
+        parent::setUpLegacy();
 
         $acl = get_acl();
         $acl->addResource('TestResource');

@@ -1,7 +1,7 @@
 <?php
 class Omeka_Job_Worker_BeanstalkTest extends Omeka_Test_TestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
         $this->pheanstalk = $this->getMock('Pheanstalk_Pheanstalk', array(), array('0.0.0.0'));
         $this->jobFactory = $this->getMock('Omeka_Job_Factory');
@@ -35,11 +35,9 @@ class Omeka_Job_Worker_BeanstalkTest extends Omeka_Test_TestCase
         $this->worker->work($this->pheanJob);
     }
 
-    /**
-     * @expectedException UnderflowException
-     */
     public function testUnhandledExceptionBuriesJob()
     {
+        $this->setExpectedException('UnderflowException');
         $this->_expectDecode();
         $this->omekaJob->expects($this->once())
             ->method('perform')
@@ -50,11 +48,9 @@ class Omeka_Job_Worker_BeanstalkTest extends Omeka_Test_TestCase
         $this->worker->work($this->pheanJob);
     }
 
-    /**
-     * @expectedException Omeka_Job_Worker_InterruptException
-     */
     public function testInterruptDoesNotBury()
     {
+        $this->setExpectedException('Omeka_Job_Worker_InterruptException');
         $this->_expectDecode();
         $this->omekaJob->expects($this->once())
             ->method('perform')
@@ -64,11 +60,9 @@ class Omeka_Job_Worker_BeanstalkTest extends Omeka_Test_TestCase
         $this->worker->work($this->pheanJob);
     }
 
-    /**
-     * @expectedException Omeka_Job_Worker_InterruptException
-     */
     public function testRollbackOnInterrupt()
     {
+        $this->setExpectedException('Omeka_Job_Worker_InterruptException');
         $this->_expectDecode();
         $this->omekaJob->expects($this->once())
             ->method('perform')
@@ -78,11 +72,9 @@ class Omeka_Job_Worker_BeanstalkTest extends Omeka_Test_TestCase
         $this->worker->work($this->pheanJob);
     }
 
-    /**
-     * @expectedException Omeka_Job_Worker_InterruptException
-     */
     public function testInterruptClosesDbConnection()
     {
+        $this->setExpectedException('Omeka_Job_Worker_InterruptException');
         $this->_expectDecode();
         $this->omekaJob->expects($this->once())
             ->method('perform')
@@ -127,11 +119,9 @@ class Omeka_Job_Worker_BeanstalkTest extends Omeka_Test_TestCase
         }
     }
 
-    /**
-     * @expectedException Zend_Db_Statement_Mysqli_Exception
-     */
     public function testServerGoneAwayDoesNotBury()
     {
+        $this->setExpectedException('Zend_Db_Statement_Mysqli_Exception');
         $this->_expectDecode();
         $this->omekaJob->expects($this->once())
             ->method('perform')

@@ -5,7 +5,7 @@ class Omeka_Application_Resource_JobsTest extends Omeka_Test_TestCase
      * Warning: this code has been adapted from Zend Framework's 
      * Zend_Application_Resource_FrontcontrollerTest.
      */
-    public function setUp()
+    public function setUpLegacy()
     {
         Zend_Registry::_unsetInstance();
         $this->application = new Zend_Application('testing');
@@ -25,16 +25,14 @@ class Omeka_Application_Resource_JobsTest extends Omeka_Test_TestCase
         $this->bootstrap->setResource('db', $this->db);
     }
 
-    public function tearDown()
+    public function tearDownLegacy()
     {
         Zend_Registry::_unsetInstance();
     }
 
-    /**
-     * @expectedException Omeka_Application_Resource_Jobs_InvalidAdapterException
-     */
     public function testErrorOnInvalidAdapterClassName()
     {
+        $this->setExpectedException('Omeka_Application_Resource_Jobs_InvalidAdapterException');
         $resource = new Omeka_Application_Resource_Jobs();
         $resource->setBootstrap($this->bootstrap);
         $this->config->jobs->dispatcher->default = 'foobar';
@@ -52,11 +50,9 @@ class Omeka_Application_Resource_JobsTest extends Omeka_Test_TestCase
         $this->assertEquals('Omeka_Job_Dispatcher_Default', get_class($dispatcher));
     }
 
-    /**
-     * @expectedException Omeka_Application_Resource_Jobs_InvalidAdapterException
-     */
     public function testErrorOnMissingAdapterClassInterface()
     {
+        $this->setExpectedException('Omeka_Application_Resource_Jobs_InvalidAdapterException');
         $resource = new Omeka_Application_Resource_Jobs();
         $resource->setBootstrap($this->bootstrap);
         // A class name that exists but does not implement the correct

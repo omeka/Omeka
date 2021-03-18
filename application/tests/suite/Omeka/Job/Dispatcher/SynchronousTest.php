@@ -4,7 +4,7 @@
  */
 class Omeka_Job_Dispatcher_Adapter_SynchronousTest extends Omeka_Test_TestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
         Zend_Registry::_unsetInstance();
         $this->factory = new Omeka_Job_FactoryMock;
@@ -23,7 +23,7 @@ class Omeka_Job_Dispatcher_Adapter_SynchronousTest extends Omeka_Test_TestCase
         $this->assertFalse($this->adapter->setQueueName('foobar'));
     }
 
-    public function tearDown()
+    public function tearDownLegacy()
     {
         Zend_Registry::_unsetInstance();
     }

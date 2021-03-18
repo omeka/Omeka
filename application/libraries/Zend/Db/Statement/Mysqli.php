@@ -196,7 +196,8 @@ class Zend_Db_Statement_Mysqli extends Zend_Db_Statement
             array_unshift($params, str_repeat('s', count($params)));
             $stmtParams = array();
             foreach ($params as $k => &$value) {
-                $stmtParams[$k] = &$value;
+                // Omeka change, php8 fix: remove keys from stmtParams
+                $stmtParams[] = &$value;
             }
             call_user_func_array(
                 array($this->_stmt, 'bind_param'),

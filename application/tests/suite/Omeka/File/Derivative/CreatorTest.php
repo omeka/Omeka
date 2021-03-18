@@ -12,7 +12,7 @@
  **/
 class Omeka_File_Derivative_CreatorTest extends Omeka_Test_TestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
         $config = new Omeka_Test_Resource_Config;
         $configIni = $config->init();
@@ -42,7 +42,7 @@ class Omeka_File_Derivative_CreatorTest extends Omeka_Test_TestCase
         try {
             $this->creator->create($this->validFilePath, '', $this->validMimeType);
         } catch (InvalidArgumentException $e) {
-            $this->assertContains("Invalid derivative filename", $e->getMessage());
+            $this->assertStringContainsString("Invalid derivative filename", $e->getMessage());
             return;
         }
         $this->fail("create() should have failed when a derivative filename was not provided.");
@@ -59,7 +59,7 @@ class Omeka_File_Derivative_CreatorTest extends Omeka_Test_TestCase
         try {
             $this->creator->create($this->invalidFile, $this->derivativeFilename, $this->validMimeType);
         } catch (Exception $e) {
-            $this->assertContains("is not readable", $e->getMessage());
+            $this->assertStringContainsString("is not readable", $e->getMessage());
             return;
         }
         $this->fail("Failed to throw an exception when given an invalid original file.");
@@ -70,7 +70,7 @@ class Omeka_File_Derivative_CreatorTest extends Omeka_Test_TestCase
         try {
             $this->creator->addDerivative("/foo/bar/baz", 20);
         } catch (Exception $e) {
-            $this->assertContains("Invalid derivative type", $e->getMessage());
+            $this->assertStringContainsString("Invalid derivative type", $e->getMessage());
             return;
         }
         $this->fail("Failed to throw exception when given invalid type name for image derivatives.");
@@ -94,7 +94,7 @@ class Omeka_File_Derivative_CreatorTest extends Omeka_Test_TestCase
         try {
             $this->creator->create($this->validFilePath, $this->derivativeFilename, $this->validMimeType);
         } catch (Omeka_File_Derivative_Exception $e) {
-            $this->assertContains("invalid directory", $e->getMessage());
+            $this->assertStringContainsString("invalid directory", $e->getMessage());
             return;
         }
         $this->fail("Instantiating with a valid convert path failed to throw an exception.");

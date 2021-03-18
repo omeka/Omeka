@@ -103,7 +103,7 @@ abstract class Omeka_Record_Api_AbstractRecordAdapter implements Omeka_Record_Ap
      */
     public function setElementTextData(Omeka_Record_AbstractRecord $record, $data)
     {
-        $elementTexts = $this->getElementTextDataFromPost($data);
+        $elementTexts = $this->extractElementTextData($data);
         if ($elementTexts === null) {
             return;
         }

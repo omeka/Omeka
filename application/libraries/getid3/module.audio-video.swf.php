@@ -14,6 +14,9 @@
 //                                                            ///
 /////////////////////////////////////////////////////////////////
 
+if (!defined('GETID3_INCLUDEPATH')) { // prevent path-exposing attacks that access modules directly on public webservers
+	exit;
+}
 
 class getid3_swf extends getid3_handler
 {
@@ -49,7 +52,6 @@ class getid3_swf extends getid3_handler
 				unset($info['swf']);
 				unset($info['fileformat']);
 				return false;
-				break;
 		}
 		$info['swf']['header']['version'] = getid3_lib::LittleEndian2Int(substr($SWFfileData, 3, 1));
 		$info['swf']['header']['length']  = getid3_lib::LittleEndian2Int(substr($SWFfileData, 4, 4));

@@ -202,6 +202,8 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
                 return $this->getCitation();
             case 'display_title':
                 return $this->getDisplayTitle();
+            case 'rich_title':
+                return $this->getRichTitle();
             default:
                 return parent::getProperty($property);
         }
@@ -273,7 +275,7 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             }
 
             // Save/delete the tags.
-            if (array_key_exists('tags-to-add', $post)) {
+            if (isset($post['tags-to-add'])) {
                 $this->addTags($post['tags-to-add']);
                 $this->deleteTags($post['tags-to-delete']);
             }

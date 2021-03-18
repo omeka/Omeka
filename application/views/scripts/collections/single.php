@@ -1,6 +1,6 @@
 <div class="collection record">
     <?php
-    $title = metadata($collection, 'display_title');
+    $title = metadata($collection, 'rich_title', array('no_escape' => true));
     $description = metadata($collection, array('Dublin Core', 'Description'), array('snippet' => 150));
     ?>
     <h3><?php echo link_to($this->collection, 'show', $title); ?></h3>

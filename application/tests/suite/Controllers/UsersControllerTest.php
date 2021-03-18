@@ -11,9 +11,9 @@
  */
 class Omeka_Controller_UsersControllerTest extends Omeka_Test_AppTestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
-        parent::setUp();
+        parent::setUpLegacy();
 
         $this->mailHelper = Omeka_Test_Helper_Mail::factory();
         $this->email = 'user@example.com';

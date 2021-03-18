@@ -14,9 +14,9 @@ class Omeka_NavigationTest extends Omeka_Test_AppTestCase
 {
     protected $_nav;
 
-    public function setUp()
+    public function setUpLegacy()
     {
-        parent::setUp();
+        parent::setUpLegacy();
         $this->_nav = new Omeka_Navigation();
         $this->_beforePages = array();
     }

@@ -9,7 +9,7 @@ class Omeka_Storage_Adapter_FilesystemTest extends Omeka_Test_TestCase
 
     public static $tempDir;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClassLegacy()
     {
         $tempDirResource = new Omeka_Test_Resource_Tempdir;
         self::$tempDir = $tempDirResource->init();
@@ -43,11 +43,9 @@ class Omeka_Storage_Adapter_FilesystemTest extends Omeka_Test_TestCase
         $this->assertEquals($this->_options, $storage->getOptions());
     }
 
-    /**
-     * @expectedException Omeka_Storage_Exception
-     */
     public function testInvalidOption()
     {
+        $this->setExpectedException('Omeka_Storage_Exception');
         $storage = new Omeka_Storage_Adapter_Filesystem(array('foobar' => true));
     }
 
@@ -145,10 +143,10 @@ class Omeka_Storage_Adapter_FilesystemTest extends Omeka_Test_TestCase
 
     /**
      * @dataProvider notWritable
-     * @expectedException Omeka_Storage_Exception
      */
     public function testNotWritable($method, $args)
     {
+        $this->setExpectedException('Omeka_Storage_Exception');
         // Random directory should not exist, therefore not writable.
         $storage = new Omeka_Storage_Adapter_Filesystem(array(
             'localDir' => '/foo/bar' . mt_rand(),

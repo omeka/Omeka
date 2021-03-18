@@ -13,7 +13,7 @@ class Omeka_Record_BuilderTest extends Omeka_Test_TestCase
 {
     const DUMMY_RECORD_ID = 1;
 
-    public function setUp()
+    public function setUpLegacy()
     {
         $this->dbAdapter = new Zend_Test_DbAdapter;
         $this->db = new Omeka_Db($this->dbAdapter);
@@ -56,11 +56,9 @@ class Omeka_Record_BuilderTest extends Omeka_Test_TestCase
         $this->assertFalse($record->exists());
     }
 
-    /**
-     * @expectedException Omeka_Record_Builder_Exception
-     */
     public function testSetRecordRequiresCorrectRecordClass()
     {
+        $this->setExpectedException('Omeka_Record_Builder_Exception');
         $builder = new DummyRecordBuilder($this->db);
         $builder->setRecord(new Item($this->db));
     }

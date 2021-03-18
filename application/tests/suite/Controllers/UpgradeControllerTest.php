@@ -38,7 +38,7 @@ class Omeka_Controller_UpgradeControllerTest extends Omeka_Test_AppTestCase
         $this->assertRedirect();
     }
 
-    public function tearDown()
+    public function tearDownLegacy()
     {
         Omeka_Test_Resource_Db::$runInstaller = true;
     }

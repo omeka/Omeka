@@ -11,7 +11,7 @@
  */
 class Omeka_Plugin_LoaderTest extends Omeka_Test_TestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
         $this->broker = $this->getMock('Omeka_Plugin_Broker', array(), array(), '', false);
         $this->basePath = TEST_DIR . '/_files/unit/plugin-loader';
@@ -66,7 +66,7 @@ class Omeka_Plugin_LoaderTest extends Omeka_Test_TestCase
             $this->loader->load($this->pluginFoobar, true);
             $this->fail("Should have thrown an exception when could not load 'NonExistentPlugin'.");
         } catch (Omeka_Plugin_Loader_Exception $e) {
-            $this->assertContains("The required plugin 'NonExistentPlugin' could not be found.", $e->getMessage());
+            $this->assertStringContainsString("The required plugin 'NonExistentPlugin' could not be found.", $e->getMessage());
         }
     }
 
@@ -78,7 +78,7 @@ class Omeka_Plugin_LoaderTest extends Omeka_Test_TestCase
             $this->loader->loadPlugins(array($this->pluginFoobar, $this->notActivatedPlugin), true);
             $this->fail("Should have thrown an exception when could not load 'NotActivatedPlugin'.");
         } catch (Omeka_Plugin_Loader_Exception $e) {
-            $this->assertContains("'NotActivatedPlugin' has not been activated.", $e->getMessage());
+            $this->assertStringContainsString("'NotActivatedPlugin' has not been activated.", $e->getMessage());
         }
     }
 
@@ -121,7 +121,7 @@ class Omeka_Plugin_LoaderTest extends Omeka_Test_TestCase
             $this->loader->load($this->pluginFoobar, true);
             $this->fail("Should have thrown an exception when attempting to load a plugin that has an available upgrade.");
         } catch (Omeka_Plugin_Loader_Exception $e) {
-            $this->assertContains("'foobar' must be upgraded to the new version before it can be loaded.", $e->getMessage());
+            $this->assertStringContainsString("'foobar' must be upgraded to the new version before it can be loaded.", $e->getMessage());
         }
     }
 
@@ -182,7 +182,7 @@ class Omeka_Plugin_LoaderTest extends Omeka_Test_TestCase
             $this->loader->registerPlugin($this->pluginWithSameDir);
         } catch (Omeka_Plugin_Loader_Exception $e) {
             $hasException = true;
-            $this->assertContains("Plugin named 'foobar' has already been loaded/registered.", $e->getMessage());
+            $this->assertStringContainsString("Plugin named 'foobar' has already been loaded/registered.", $e->getMessage());
         }
         $this->assertTrue($hasException, "Should have thrown an exception when it tried to register another plugin object with the same directory.");
         $this->assertTrue($this->loader->isRegistered($this->pluginFoobar), "'foobar' plugin should still be registered after attempting to register another plugin object with same directory.");

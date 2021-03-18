@@ -1,6 +1,6 @@
 <div class="item record">
     <?php
-    $title = metadata($item, 'display_title');
+    $title = metadata($item, 'rich_title', array('no_escape' => true));
     $description = metadata($item, array('Dublin Core', 'Description'), array('snippet' => 150));
     ?>
     <h3><?php echo link_to($item, 'show', $title); ?></h3>

@@ -17,7 +17,7 @@ class Omeka_Db_Migration_ManagerTest extends Omeka_Test_TestCase
     const ALREADY_RUN_MIGRATION = '20080717013526';
     const TARGET_MIGRATION = '20100401120000';
 
-    public function setUp()
+    public function setUpLegacy()
     {
         $this->db = $this->getMockBuilder('Omeka_Db')
             ->setMethods(array('fetchCol', 'getAdapter', 'query'))
@@ -34,7 +34,7 @@ class Omeka_Db_Migration_ManagerTest extends Omeka_Test_TestCase
         Zend_Registry::set('bootstrap', $this->bootstrap);
     }
 
-    public function tearDown()
+    public function tearDownLegacy()
     {
         Zend_Registry::_unsetInstance();
     }

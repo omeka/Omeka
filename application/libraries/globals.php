@@ -1486,7 +1486,7 @@ function tag_attributes($attributes)
         if (preg_match('/[^A-Za-z0-9_:.-]/', $key)) {
             continue;
         }
-        if (is_string($attribute)) {
+        if (is_string($attribute) || is_int($attribute) || is_float($attribute)) {
             $attr[$key] = $key . '="' . html_escape($attribute) . '"';
         } elseif ($attribute === true) {
             $attr[$key] = $key;
@@ -2528,7 +2528,7 @@ function link_to_file_show($attributes = array(), $text = null, $file = null)
         $file = get_current_record('file');
     }
     if (!$text) {
-        $text = metadata($file, 'display_title');
+        $text = metadata($file, 'rich_title', array('no_escape' => true));
     }
     return link_to($file, 'show', $text, $attributes);
 }
@@ -2555,7 +2555,7 @@ function link_to_item($text = null, $props = array(), $action = 'show', $item = 
         $item = get_current_record('item');
     }
     if (empty($text)) {
-        $text = metadata($item, 'display_title');
+        $text = metadata($item, 'rich_title', array('no_escape' => true));
     }
     return link_to($item, $action, $text, $props);
 }
@@ -2642,7 +2642,7 @@ function link_to_collection($text = null, $props = array(), $action = 'show', $c
         $collectionObj = get_current_record('collection');
     }
 
-    $collectionTitle = metadata($collectionObj, array('Dublin Core', 'Title'));
+    $collectionTitle = metadata($collectionObj, 'rich_title', array('no_escape' => true));
     $text = !empty($text) ? $text : $collectionTitle;
     return link_to($collectionObj, $action, $text, $props);
 }
@@ -3441,7 +3441,7 @@ function theme_header_image()
         $storage = Zend_Registry::get('storage');
         $headerImage = $storage->getUri($storage->getPathByType($headerImage, 'theme_uploads'));
         $altText = ($headerImageAlt !== null) ? $headerImageAlt : '';
-        return '<div id="header-image"><img src="' . $headerImage . '" alt="' . $altText . '"/></div>';
+        return '<div id="header-image"><img src="' . $headerImage . '" alt="' . html_escape($altText) . '"/></div>';
     }
 }
 

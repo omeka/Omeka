@@ -13,7 +13,7 @@
  */
 class Omeka_Http_ClientTest extends Omeka_Test_TestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
         $this->uri = 'http://local.test';
         $this->client = new Omeka_Http_Client($this->uri);
@@ -26,11 +26,9 @@ class Omeka_Http_ClientTest extends Omeka_Test_TestCase
             ->getMock();
     }
 
-    /**
-     * @expectedException Zend_Http_Client_Adapter_Exception
-     */
     public function testNoRetryByDefault()
     {
+        $this->setExpectedException('Zend_Http_Client_Adapter_Exception');
         $this->exceptionAdapter->expects($this->any())
             ->method('connect')
             ->will($this->throwException($this->exception));
@@ -38,11 +36,9 @@ class Omeka_Http_ClientTest extends Omeka_Test_TestCase
         $response = $this->client->request('GET');
     }
 
-    /**
-     * @expectedException Zend_Http_Client_Adapter_Exception
-     */
     public function testExceedMaxRetries()
     {
+        $this->setExpectedException('Zend_Http_Client_Adapter_Exception');
         $this->exceptionAdapter->expects($this->exactly(6))
             ->method('connect')
             ->will($this->throwException($this->exception));

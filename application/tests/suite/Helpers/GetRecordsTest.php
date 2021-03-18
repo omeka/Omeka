@@ -16,7 +16,7 @@
  */
 class Helpers_GetRecordsTest extends Omeka_Test_TestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
         // Link a mock collections table to a mock database.
         $this->db = $this->getMock('Omeka_Db', array(), array(), '', false);
@@ -31,7 +31,7 @@ class Helpers_GetRecordsTest extends Omeka_Test_TestCase
         Zend_Registry::set('bootstrap', $bootstrap);
     }
 
-    public function tearDown()
+    public function tearDownLegacy()
     {
         Zend_Registry::_unsetInstance();
     }

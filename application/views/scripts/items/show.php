@@ -3,7 +3,7 @@ $title = metadata('item', 'display_title');
 echo head(array('title' => $title, 'bodyclass' => 'items show'));
 ?>
 
-<h1><?php echo metadata('item', 'display_title'); ?></h1>
+<h1><?php echo metadata('item', 'rich_title', array('no_escape' => true)); ?></h1>
 
 <?php echo all_element_texts('item'); ?>
 

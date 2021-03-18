@@ -2,9 +2,9 @@
 
 class Omeka_Acl_Assert_UserTest extends Omeka_Test_AppTestCase
 {
-    public function setUp()
+    public function setUpLegacy()
     {
-        parent::setUp();
+        parent::setUpLegacy();
 
         $this->super = new User();
         $this->super->role = 'super';
@@ -14,11 +14,11 @@ class Omeka_Acl_Assert_UserTest extends Omeka_Test_AppTestCase
         $this->admin->id = 2;
     }
 
-    public function tearDown()
+    public function tearDownLegacy()
     {
         release_object($this->super);
         release_object($this->admin);
-        parent::tearDown();
+        parent::tearDownLegacy();
     }
 
     public static function aclProvider()
