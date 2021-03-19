@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @-webkit-keyframes fadeIn {
   0% {
     opacity: 0; }
@@ -1565,7 +1564,7 @@ h3.title {
     margin-left: 5px; }
   h3.title small {
     font-weight: 400;
-    color: #767676;
+    color: gray;
     margin-left: 5px; }
 
 .details {
@@ -1965,10 +1964,10 @@ ul.details {
   display: inline-block;
   margin-right: 4px;
   font-style: italic;
-  color: #767676;
+  color: gray;
   padding: 10px 10px; }
   .items .table-actions .selected > span {
-    color: #767676; }
+    color: gray; }
 
 .items .table-actions > input[type="submit"].small {
   border-left: 1px solid #D8D8D8;
@@ -2112,7 +2111,7 @@ ul.details {
 .explanation {
   clear: both;
   margin: 0 0 10px 0;
-  color: #767676;
+  color: gray;
   font-style: italic; }
 
 #public-featured {

@@ -319,11 +319,11 @@
     display: inline-block;
     margin-right: 4px;
     font-style: italic;
-    color: $midgray;
+    color: gray;
     padding: 10px 10px;
 
     > span {
-	    color: $midgray;
+	    color: gray;
     }
 }
 
@@ -497,7 +497,7 @@
 .explanation {
     clear: both;
     margin: 0 0 10px 0;
-    color: $midgray;
+    color: gray;
     font-style: italic;
     font-size: 16px;
 }
