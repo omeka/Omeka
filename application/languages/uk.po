@@ -7,14 +7,14 @@
 # evilinstone <evilinstone@gmail.com>, 2013
 # Izoniz <izonizne@mail.ru>, 2013-2014
 # John Flatness <john@zerocrates.org>, 2020
-# tanya chorna <tanya.chorna@gmail.com>, 2017-2019
+# tanya chorna <tanya.chorna@gmail.com>, 2017-2020
 # Yurii Kostiuk <kostyuk.yuiriy@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2020-01-28 17:56+0000\n"
+"PO-Revision-Date: 2021-03-18 20:09+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/omeka/omeka/language/uk/)\n"
 "MIME-Version: 1.0\n"
@@ -86,11 +86,11 @@ msgstr "Установа, відповідальна за створення д�
 #. Dublin Core: Contributor element name
 #. User role: contributor
 msgid "Contributor"
-msgstr "Контрибутор"
+msgstr "Партнерство"
 
 #. Dublin Core: Contributor element description
 msgid "An entity responsible for making contributions to the resource"
-msgstr "Установа, відповідальна за благодійний внесок на створення ресурсу"
+msgstr "Партнер, установа, особа, що долучається і робить свій внесок"
 
 #. Dublin Core: Date element name
 msgid "Date"
@@ -145,7 +145,7 @@ msgstr "Мова ресурсу"
 
 #. Dublin Core: Relation element name
 msgid "Relation"
-msgstr "Зв'язки"
+msgstr "Зв'язок"
 
 #. Dublin Core: Relation element description
 msgid "A related resource"
@@ -237,7 +237,7 @@ msgstr "Шифрування"
 
 #. Omeka Legacy File: Compression element
 msgid "Compression"
-msgstr " Стискання"
+msgstr "Стискання"
 
 #. Omeka Legacy File: Post Processing element
 msgid "Post Processing"
@@ -356,7 +356,7 @@ msgstr "Етикетка"
 #: admin/themes/default/appearance/edit-navigation.php:42
 #: application/forms/Navigation.php:135
 msgid "URL"
-msgstr "Посилання"
+msgstr "URL"
 
 #: admin/themes/default/appearance/edit-navigation.php:25
 msgid "Add Link"
@@ -374,7 +374,7 @@ msgstr "Додати посилання"
 #: admin/themes/default/plugins/config.php:14
 #: admin/themes/default/settings/edit-api.php:82
 #: admin/themes/default/settings/edit-item-type-elements.php:39
-#: admin/themes/default/settings/edit-search.php:41
+#: admin/themes/default/settings/edit-search.php:50
 #: admin/themes/default/settings/edit-security.php:15
 #: admin/themes/default/settings/edit-settings.php:15
 #: admin/themes/default/themes/config.php:16
@@ -505,7 +505,7 @@ msgstr "Всі елементи у колекції."
 #: admin/themes/default/collections/show.php:51
 #: application/views/scripts/collections/browse.php:35
 msgid "Contributors"
-msgstr "Благодійники"
+msgstr "Партнери"
 
 #: admin/themes/default/collections/browse.php:32
 #: admin/themes/default/files/show.php:66
@@ -545,7 +545,7 @@ msgstr "Редагувати"
 
 #: admin/themes/default/collections/browse.php:60
 msgid "No contributors"
-msgstr "Благодійники відсутні"
+msgstr "Партнери відсутні"
 
 #: admin/themes/default/collections/browse.php:80
 msgid "There are no collections on this page."
@@ -566,7 +566,7 @@ msgstr "Розпочніть з додавання вашої першої ко�
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/models/Mixin/ElementText.php:779
+#: application/models/Mixin/ElementText.php:791
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
 msgstr "[Безіменний]"
@@ -605,7 +605,7 @@ msgstr "Ні"
 
 #: admin/themes/default/collections/show.php:56
 msgid "No contributors."
-msgstr "Благодійники відсутні."
+msgstr "Партнери відсутні."
 
 #: admin/themes/default/collections/show.php:62
 #: admin/themes/default/files/show.php:93
@@ -637,7 +637,7 @@ msgstr "Налаштування"
 
 #: admin/themes/default/common/content-nav.php:1
 msgid "Main Menu"
-msgstr "Головне Меню"
+msgstr "Головне меню"
 
 #: admin/themes/default/common/content-nav.php:5
 #: admin/themes/default/index.php:2
@@ -721,7 +721,7 @@ msgid "Omeka Admin"
 msgstr "Адміністратор"
 
 #: admin/themes/default/common/header.php:41
-#: application/views/scripts/common/header.php:32
+#: application/views/scripts/common/header.php:38
 msgid "Skip to main content"
 msgstr "Перейти до головного змісту"
 
@@ -747,7 +747,7 @@ msgstr "Безпека"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: admin/themes/default/search/index.php:2
-#: application/views/helpers/SearchForm.php:56
+#: application/views/helpers/SearchForm.php:57
 #: application/views/scripts/search/index.php:2
 #: application/views/scripts/search/search-form.php:2
 msgid "Search"
@@ -856,18 +856,18 @@ msgstr "405: Заборонений метод"
 msgid ""
 "You must use a different method to access this URL. If you reached this page"
 " by following a link or clicking a button in Omeka, please contact the %s."
-msgstr "Щоб отримати доступ до цієї URL-адреси, потрібно використовувати інший метод. Якщо ви потрапили на таку сторінку, натиснувши посилання або натиснувши кнопку в Omeka, будь ласка, зв'яжіться з %s."
+msgstr "Щоб отримати доступ до URL-адреси, потрібно використовувати інший метод. Якщо ви потрапили на таку сторінку, натиснувши посилання або натиснувши кнопку в Omeka, будь ласка, зв'яжіться з %s."
 
 #: admin/themes/default/files/edit.php:8
 #, php-format
 msgid "Edit File #%s"
-msgstr "Редагувати документ #%s"
+msgstr "Редагувати файл #%s"
 
 #: admin/themes/default/files/show.php:9
 #: application/views/scripts/files/show.php:9
 #, php-format
 msgid "File #%s"
-msgstr "Документ #%s"
+msgstr "Файл #%s"
 
 #: admin/themes/default/files/show.php:35
 #: application/libraries/globals.php:409
@@ -898,21 +898,21 @@ msgstr "Квадратна мініатюра"
 #: admin/themes/default/files/show.php:52
 #: application/views/scripts/files/show.php:27
 msgid "Format Metadata"
-msgstr "Формат метадати"
+msgstr "Формат метаданих"
 
 #: admin/themes/default/files/show.php:54
 msgid "Filename"
-msgstr "Назва документа"
+msgstr "Назва файла"
 
 #: admin/themes/default/files/show.php:56
 #: application/views/scripts/files/show.php:29
 msgid "Original Filename"
-msgstr "Вихідна назва документа"
+msgstr "Вихідна назва файла"
 
 #: admin/themes/default/files/show.php:58
 #: application/views/scripts/files/show.php:34
 msgid "File Size"
-msgstr "Розмір документа"
+msgstr "Розмір файла"
 
 #: admin/themes/default/files/show.php:59
 #: application/views/scripts/files/show.php:35
@@ -1050,7 +1050,7 @@ msgstr "Всі елементи мають тип."
 
 #: admin/themes/default/item-types/browse.php:29
 msgid "Type Name"
-msgstr "Назви типу"
+msgstr "Тип назви"
 
 #: admin/themes/default/item-types/browse.php:31
 msgid "Total Items"
@@ -1063,7 +1063,7 @@ msgstr " Редагувати тип елемента #%s"
 
 #: admin/themes/default/item-types/form.php:14
 msgid "Item Type Information"
-msgstr "Інформація про тип елементу"
+msgstr "Інформація про тип елемента"
 
 #: admin/themes/default/item-types/form.php:15
 #: admin/themes/default/users/add.php:7
@@ -1100,7 +1100,7 @@ msgstr "Новий"
 #: admin/themes/default/item-types/show.php:8
 #, php-format
 msgid "Item Type #%s"
-msgstr "Тип елементу #%s"
+msgstr "Тип елемента #%s"
 
 #: admin/themes/default/item-types/show.php:25
 msgid "There are no elements."
@@ -1133,7 +1133,7 @@ msgstr "Колекція"
 
 #: admin/themes/default/items/batch-delete-all.php:2
 msgid "Batch Delete All Searched Items"
-msgstr " Пакетне видалення всіх пошукових елементів"
+msgstr "Пакетне видалення всіх пошукових елементів"
 
 #: admin/themes/default/items/batch-delete-all.php:18
 #, php-format
@@ -1534,7 +1534,7 @@ msgstr "Пошук за міткою"
 #: admin/themes/default/items/search-form.php:195
 #: application/views/scripts/items/search-form.php:178
 msgid "Public/Non-Public"
-msgstr "Загальнодоступний/Незагальнодоступний"
+msgstr "Загальнодоступний/Не загальнодоступний"
 
 #: admin/themes/default/items/search-form.php:204
 #: application/views/scripts/items/search-form.php:186
@@ -1544,7 +1544,7 @@ msgstr "Тільки загальнодоступні елементи"
 #: admin/themes/default/items/search-form.php:205
 #: application/views/scripts/items/search-form.php:187
 msgid "Only Non-Public Items"
-msgstr "Тільки незагальнодоступні елементи"
+msgstr "Тільки не загальнодоступні елементи"
 
 #: admin/themes/default/items/search-form.php:215
 #: application/views/scripts/items/search-form.php:196
@@ -1647,11 +1647,11 @@ msgstr "Отримати допомогу"
 #: admin/themes/default/plugins/browse.php:72
 #, php-format
 msgid "You have a new version of %s. Please upgrade!"
-msgstr "Наявна нова версія %s. Будь-ласка, поновіть!"
+msgstr "Вийшла нова версія %s. Оновіть!"
 
 #: admin/themes/default/plugins/browse.php:109
 msgid "Upgrade"
-msgstr "Поновити"
+msgstr "Оновити"
 
 #: admin/themes/default/plugins/browse.php:120
 msgid "Configure"
@@ -1673,7 +1673,7 @@ msgid "Uninstall"
 msgstr "Видалити"
 
 #: admin/themes/default/plugins/browse.php:150
-#: application/forms/Install.php:178
+#: application/forms/Install.php:179
 msgid "Install"
 msgstr "Встановити"
 
@@ -1791,23 +1791,31 @@ msgid "Ok"
 msgstr "Добре"
 
 #: admin/themes/default/settings/edit-search.php:10
+msgid "Search Query Type"
+msgstr ""
+
+#: admin/themes/default/settings/edit-search.php:13
+msgid "Select the default query type used for simple search in Omeka."
+msgstr ""
+
+#: admin/themes/default/settings/edit-search.php:19
 msgid "Search Record Types"
 msgstr "Пошук типів записів"
 
-#: admin/themes/default/settings/edit-search.php:13
+#: admin/themes/default/settings/edit-search.php:22
 msgid "Customize which types of records will be searchable in Omeka."
 msgstr "Налаштуйте, які типи записів будуть доступні для пошуку в Omeka."
 
-#: admin/themes/default/settings/edit-search.php:23
-#: admin/themes/default/settings/edit-search.php:42
+#: admin/themes/default/settings/edit-search.php:32
+#: admin/themes/default/settings/edit-search.php:51
 msgid "Index Records"
 msgstr "Індексування записів"
 
-#: admin/themes/default/settings/edit-search.php:26
+#: admin/themes/default/settings/edit-search.php:35
 msgid "Click on the \"Index Records\" button to re-index your records."
 msgstr "Натисніть кнопку \"Індексувати записи\", щоб переіндексувати свої записи."
 
-#: admin/themes/default/settings/edit-search.php:28
+#: admin/themes/default/settings/edit-search.php:37
 msgid ""
 "Indexing means to collect, parse, and store data to facilitate fast and "
 "accurate searches. Omeka will automatically index individual records as they"
@@ -2224,9 +2232,9 @@ msgstr "Це призведе до видалення набору елемен�
 #: application/controllers/PluginsController.php:184
 #: application/controllers/PluginsController.php:217
 #: application/controllers/PluginsController.php:325
-#: application/controllers/SettingsController.php:104
-#: application/controllers/SettingsController.php:140
-#: application/controllers/SettingsController.php:177
+#: application/controllers/SettingsController.php:106
+#: application/controllers/SettingsController.php:149
+#: application/controllers/SettingsController.php:186
 #: application/controllers/ThemesController.php:89
 #: application/controllers/UsersController.php:312
 #: application/libraries/Omeka/Controller/AbstractActionController.php:183
@@ -2488,31 +2496,31 @@ msgstr "Основні налаштування поновлені."
 msgid "The security settings have been updated."
 msgstr "Налаштування безпеки поновлено."
 
-#: application/controllers/SettingsController.php:114
+#: application/controllers/SettingsController.php:123
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
 msgstr "Ви змінили записи, які можна знайти в Omeka. Будь ласка, переіндексуйте записи за допомогою форми нижче."
 
-#: application/controllers/SettingsController.php:121
+#: application/controllers/SettingsController.php:130
 msgid ""
 "Indexing records. This may take a while. You may continue administering your"
 " site."
 msgstr "Індексація записів. Це може зайняти деякий час. Ви можете продовжити працювати з сайтом."
 
-#: application/controllers/SettingsController.php:156
+#: application/controllers/SettingsController.php:165
 msgid "The item type elements were successfully changed!"
 msgstr "Тип елемента було успішно змінено!"
 
-#: application/controllers/SettingsController.php:183
+#: application/controllers/SettingsController.php:192
 msgid "The API configuration was successfully changed!"
 msgstr "Конфігурацію API успішно змінено!"
 
-#: application/controllers/SettingsController.php:206
+#: application/controllers/SettingsController.php:215
 msgid "The ImageMagick directory path works."
 msgstr "Шлях до ImageMagick вірний."
 
-#: application/controllers/SettingsController.php:207
+#: application/controllers/SettingsController.php:216
 msgid "The ImageMagick directory path does not work."
 msgstr "Шлях до ImageMagick невірний."
 
@@ -2822,7 +2830,7 @@ msgid ""
 "setting. You run the risk of splitting tags that contain the old delimiter."
 msgstr "Окремі теги використовують цей символ або рядок. Будьте обережні, коли змінюєте цей параметр. Ви ризикуєте розділити теги, які містять старий розділювач."
 
-#: application/forms/GeneralSettings.php:59 application/forms/Install.php:174
+#: application/forms/GeneralSettings.php:59 application/forms/Install.php:175
 msgid "ImageMagick Directory Path"
 msgstr "Шлях до ImageMagick"
 
@@ -2887,11 +2895,11 @@ msgstr "Число елементів, що відображаються на с
 msgid "Check box to show metadata elements with no text."
 msgstr "Проставте позначку для того, щоб показати елементи метаданих без тексту."
 
-#: application/forms/Install.php:185
+#: application/forms/Install.php:186
 msgid "Default Superuser Account"
 msgstr "Пароль за замовчуванням для суперкористувача"
 
-#: application/forms/Install.php:195
+#: application/forms/Install.php:196
 msgid "Site Settings"
 msgstr "Налаштування веб-сайту"
 
@@ -3258,11 +3266,11 @@ msgstr "Перегляд за тегами"
 msgid "No tags are available."
 msgstr "Теги відсутні"
 
-#: application/models/Builder/Item.php:261
+#: application/models/Builder/Item.php:263
 msgid "Must specify a file transfer type when attaching files to an item!"
 msgstr "Необхідно вказати тип передачі файлів при додаванні до елемента!"
 
-#: application/models/Collection.php:118
+#: application/models/Collection.php:120
 msgid "Cannot associate the collection with an unsaved user."
 msgstr "Не можна асоціювати колекцію з незбереженим користувачем."
 
@@ -3304,57 +3312,57 @@ msgstr "Всі тексти елемента повиненні мати тип 
 msgid "Invalid element ID."
 msgstr "Невірний номер елементу."
 
-#: application/models/File.php:235
+#: application/models/File.php:237
 msgid "Cannot get the local path for a stored file."
 msgstr "Неможливо отримати шлях для збереженого файлу."
 
-#: application/models/File.php:452
+#: application/models/File.php:454
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
 msgstr "\"%s\" невірний файл."
 
-#: application/models/Item.php:331
+#: application/models/Item.php:333
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
 msgstr "Файли не можуть бути додані до елемента, який не є постійним у базі даних!"
 
 #. / Chicago-style item citation: two authors
-#: application/models/Item.php:466
+#: application/models/Item.php:468
 #, php-format
 msgid "%1$s and %2$s"
 msgstr "%1$s та %2$s"
 
 #. / Chicago-style item citation: three authors
-#: application/models/Item.php:470
+#: application/models/Item.php:472
 #, php-format
 msgid "%1$s, %2$s, and %3$s"
 msgstr "%1$s, %2$s, та %3$s"
 
 #. / Chicago-style item citation: more than three authors
-#: application/models/Item.php:474
+#: application/models/Item.php:476
 #, php-format
 msgid "%s et al."
 msgstr "%s і т.п."
 
 #. / Chicago-style item citation: access date and URL
-#: application/models/Item.php:492
+#: application/models/Item.php:494
 #, php-format
 msgid "accessed %1$s, %2$s."
 msgstr "переглянуто: %1$s, %2$s."
 
-#: application/models/Item.php:509
+#: application/models/Item.php:511
 msgid "Cannot add an existing file to an item!"
 msgstr "Не вдається додати файл до елемента!"
 
-#: application/models/Item.php:513
+#: application/models/Item.php:515
 msgid "File must be valid before it can be associated with an item!"
 msgstr "Файл має бути перевірено, перш ніж він може бути пов'язаний з елементом!"
 
-#: application/models/Item.php:538
+#: application/models/Item.php:540
 msgid "Invalid item type."
 msgstr "Невірний тип елемента."
 
-#: application/models/Item.php:541
+#: application/models/Item.php:543
 msgid "Invalid collection."
 msgstr "Невірна колекція."
 

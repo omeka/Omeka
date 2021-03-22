@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2020-01-28 17:28+0000\n"
+"PO-Revision-Date: 2021-03-18 20:09+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Czech (http://www.transifex.com/omeka/omeka/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -375,7 +375,7 @@ msgstr "Přidat odkaz"
 #: admin/themes/default/plugins/config.php:14
 #: admin/themes/default/settings/edit-api.php:82
 #: admin/themes/default/settings/edit-item-type-elements.php:39
-#: admin/themes/default/settings/edit-search.php:41
+#: admin/themes/default/settings/edit-search.php:50
 #: admin/themes/default/settings/edit-security.php:15
 #: admin/themes/default/settings/edit-settings.php:15
 #: admin/themes/default/themes/config.php:16
@@ -567,7 +567,7 @@ msgstr "Začněte přidáním vaší první sbírky."
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/models/Mixin/ElementText.php:779
+#: application/models/Mixin/ElementText.php:791
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
 msgstr "[Beze jména]"
@@ -722,7 +722,7 @@ msgid "Omeka Admin"
 msgstr "Omeka admin"
 
 #: admin/themes/default/common/header.php:41
-#: application/views/scripts/common/header.php:32
+#: application/views/scripts/common/header.php:38
 msgid "Skip to main content"
 msgstr "Přejít k hlavnímu obsahu"
 
@@ -748,7 +748,7 @@ msgstr "Zabezpečení"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: admin/themes/default/search/index.php:2
-#: application/views/helpers/SearchForm.php:56
+#: application/views/helpers/SearchForm.php:57
 #: application/views/scripts/search/index.php:2
 #: application/views/scripts/search/search-form.php:2
 msgid "Search"
@@ -1674,7 +1674,7 @@ msgid "Uninstall"
 msgstr "Odinstalovat."
 
 #: admin/themes/default/plugins/browse.php:150
-#: application/forms/Install.php:178
+#: application/forms/Install.php:179
 msgid "Install"
 msgstr "Instalace"
 
@@ -1792,23 +1792,31 @@ msgid "Ok"
 msgstr "Budiž"
 
 #: admin/themes/default/settings/edit-search.php:10
+msgid "Search Query Type"
+msgstr ""
+
+#: admin/themes/default/settings/edit-search.php:13
+msgid "Select the default query type used for simple search in Omeka."
+msgstr ""
+
+#: admin/themes/default/settings/edit-search.php:19
 msgid "Search Record Types"
 msgstr "Hledat typy záznamů"
 
-#: admin/themes/default/settings/edit-search.php:13
+#: admin/themes/default/settings/edit-search.php:22
 msgid "Customize which types of records will be searchable in Omeka."
 msgstr "Nastavení typů záznamů vyhledávatelných v Omece."
 
-#: admin/themes/default/settings/edit-search.php:23
-#: admin/themes/default/settings/edit-search.php:42
+#: admin/themes/default/settings/edit-search.php:32
+#: admin/themes/default/settings/edit-search.php:51
 msgid "Index Records"
 msgstr "Indexovat záznamy"
 
-#: admin/themes/default/settings/edit-search.php:26
+#: admin/themes/default/settings/edit-search.php:35
 msgid "Click on the \"Index Records\" button to re-index your records."
 msgstr "Klikněte na tlačítko \"Indexovat záznamy\" pro indexování všech záznamů."
 
-#: admin/themes/default/settings/edit-search.php:28
+#: admin/themes/default/settings/edit-search.php:37
 msgid ""
 "Indexing means to collect, parse, and store data to facilitate fast and "
 "accurate searches. Omeka will automatically index individual records as they"
@@ -2225,9 +2233,9 @@ msgstr "Tímto smažete sadu prvků a všechny prvky přiřazené do této sady.
 #: application/controllers/PluginsController.php:184
 #: application/controllers/PluginsController.php:217
 #: application/controllers/PluginsController.php:325
-#: application/controllers/SettingsController.php:104
-#: application/controllers/SettingsController.php:140
-#: application/controllers/SettingsController.php:177
+#: application/controllers/SettingsController.php:106
+#: application/controllers/SettingsController.php:149
+#: application/controllers/SettingsController.php:186
 #: application/controllers/ThemesController.php:89
 #: application/controllers/UsersController.php:312
 #: application/libraries/Omeka/Controller/AbstractActionController.php:183
@@ -2489,31 +2497,31 @@ msgstr "Nastavení bylo aktualizováno."
 msgid "The security settings have been updated."
 msgstr "Bezpečnostní nastavení bylo aktualizováno."
 
-#: application/controllers/SettingsController.php:114
+#: application/controllers/SettingsController.php:123
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
 msgstr "Soubory prohledávané Omekou byly změněny. Prosím reindexujte záznamy pomocí formuláře dole."
 
-#: application/controllers/SettingsController.php:121
+#: application/controllers/SettingsController.php:130
 msgid ""
 "Indexing records. This may take a while. You may continue administering your"
 " site."
 msgstr "Indexování záznamů. Může to chvilku trvat. Zatím můžete pokračovat v administraci vaší stránky."
 
-#: application/controllers/SettingsController.php:156
+#: application/controllers/SettingsController.php:165
 msgid "The item type elements were successfully changed!"
 msgstr "Prvky položky typu byly úspěšně změněny!"
 
-#: application/controllers/SettingsController.php:183
+#: application/controllers/SettingsController.php:192
 msgid "The API configuration was successfully changed!"
 msgstr "Nastavení API bylo úspěšně změněno!"
 
-#: application/controllers/SettingsController.php:206
+#: application/controllers/SettingsController.php:215
 msgid "The ImageMagick directory path works."
 msgstr "ImageMagick adresářová cesta pracuje."
 
-#: application/controllers/SettingsController.php:207
+#: application/controllers/SettingsController.php:216
 msgid "The ImageMagick directory path does not work."
 msgstr "ImageMagick adresářová cesta nepracuje správně."
 
@@ -2823,7 +2831,7 @@ msgid ""
 "setting. You run the risk of splitting tags that contain the old delimiter."
 msgstr "Oddělte štítky s pomocí tohoto snaku nebo řetězce. Buďte opatrní při změně tohoto nastavení. Riskujete rozdělení štítků které obsahují starý oddělovač. "
 
-#: application/forms/GeneralSettings.php:59 application/forms/Install.php:174
+#: application/forms/GeneralSettings.php:59 application/forms/Install.php:175
 msgid "ImageMagick Directory Path"
 msgstr "Cesta k ImageMagick"
 
@@ -2888,11 +2896,11 @@ msgstr "Omezí počet položek zobrazených na stránce ve veřejném rozhraní.
 msgid "Check box to show metadata elements with no text."
 msgstr "Vyberte pro zobrazení prázdných metadata záznamů."
 
-#: application/forms/Install.php:185
+#: application/forms/Install.php:186
 msgid "Default Superuser Account"
 msgstr "Implicitní superuživatelský účet"
 
-#: application/forms/Install.php:195
+#: application/forms/Install.php:196
 msgid "Site Settings"
 msgstr "Nastavení depositáře"
 
@@ -3259,11 +3267,11 @@ msgstr "Procházení podle štítků"
 msgid "No tags are available."
 msgstr "Žádné štítky."
 
-#: application/models/Builder/Item.php:261
+#: application/models/Builder/Item.php:263
 msgid "Must specify a file transfer type when attaching files to an item!"
 msgstr "Je třeba zadat typ přenosu souboru při připojování souborů k položce!"
 
-#: application/models/Collection.php:118
+#: application/models/Collection.php:120
 msgid "Cannot associate the collection with an unsaved user."
 msgstr "Nelze přiřadit sbírku s neuloženým uživatelem."
 
@@ -3305,57 +3313,57 @@ msgstr "Všechny prvky musí mít typ záznamu."
 msgid "Invalid element ID."
 msgstr "Neplatné ID prvku."
 
-#: application/models/File.php:235
+#: application/models/File.php:237
 msgid "Cannot get the local path for a stored file."
 msgstr "Nelze uložit lokální cestu pro ukládaný soubor."
 
-#: application/models/File.php:452
+#: application/models/File.php:454
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
 msgstr "\"%s\" není platná odvozenina."
 
-#: application/models/Item.php:331
+#: application/models/Item.php:333
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
 msgstr "Soubory nemohou být připojeny k položce která není trvale zaznamenána v databázi!"
 
 #. / Chicago-style item citation: two authors
-#: application/models/Item.php:466
+#: application/models/Item.php:468
 #, php-format
 msgid "%1$s and %2$s"
 msgstr "%1$s a %2$s"
 
 #. / Chicago-style item citation: three authors
-#: application/models/Item.php:470
+#: application/models/Item.php:472
 #, php-format
 msgid "%1$s, %2$s, and %3$s"
 msgstr "%1$s, %2$s, a %3$s"
 
 #. / Chicago-style item citation: more than three authors
-#: application/models/Item.php:474
+#: application/models/Item.php:476
 #, php-format
 msgid "%s et al."
 msgstr "%s a další"
 
 #. / Chicago-style item citation: access date and URL
-#: application/models/Item.php:492
+#: application/models/Item.php:494
 #, php-format
 msgid "accessed %1$s, %2$s."
 msgstr "navštíveno %1$s, %2$s."
 
-#: application/models/Item.php:509
+#: application/models/Item.php:511
 msgid "Cannot add an existing file to an item!"
 msgstr "Nelze přidat existující soubor k položce!"
 
-#: application/models/Item.php:513
+#: application/models/Item.php:515
 msgid "File must be valid before it can be associated with an item!"
 msgstr "Soubor musí být nejprve platný a pak ho lze přidat k položce!"
 
-#: application/models/Item.php:538
+#: application/models/Item.php:540
 msgid "Invalid item type."
 msgstr "Neplatný typ položky."
 
-#: application/models/Item.php:541
+#: application/models/Item.php:543
 msgid "Invalid collection."
 msgstr "Neplatná kolekce."
 

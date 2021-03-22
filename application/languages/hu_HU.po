@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2020-01-28 17:50+0000\n"
+"PO-Revision-Date: 2021-03-18 20:09+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Hungarian (Hungary) (http://www.transifex.com/omeka/omeka/language/hu_HU/)\n"
 "MIME-Version: 1.0\n"
@@ -381,7 +381,7 @@ msgstr "Hivatkozás hozzáadása"
 #: admin/themes/default/plugins/config.php:14
 #: admin/themes/default/settings/edit-api.php:82
 #: admin/themes/default/settings/edit-item-type-elements.php:39
-#: admin/themes/default/settings/edit-search.php:41
+#: admin/themes/default/settings/edit-search.php:50
 #: admin/themes/default/settings/edit-security.php:15
 #: admin/themes/default/settings/edit-settings.php:15
 #: admin/themes/default/themes/config.php:16
@@ -571,7 +571,7 @@ msgstr "Első lépésként hozza létre első gyűjteményét."
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/models/Mixin/ElementText.php:779
+#: application/models/Mixin/ElementText.php:791
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
 msgstr "[Névtelen]"
@@ -726,7 +726,7 @@ msgid "Omeka Admin"
 msgstr "Omeka Adminja"
 
 #: admin/themes/default/common/header.php:41
-#: application/views/scripts/common/header.php:32
+#: application/views/scripts/common/header.php:38
 msgid "Skip to main content"
 msgstr "Ugrás a fő tartalomra"
 
@@ -752,7 +752,7 @@ msgstr "Biztonság"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: admin/themes/default/search/index.php:2
-#: application/views/helpers/SearchForm.php:56
+#: application/views/helpers/SearchForm.php:57
 #: application/views/scripts/search/index.php:2
 #: application/views/scripts/search/search-form.php:2
 msgid "Search"
@@ -1664,7 +1664,7 @@ msgid "Uninstall"
 msgstr "Eltávolítás"
 
 #: admin/themes/default/plugins/browse.php:150
-#: application/forms/Install.php:178
+#: application/forms/Install.php:179
 msgid "Install"
 msgstr "Telepítés"
 
@@ -1782,23 +1782,31 @@ msgid "Ok"
 msgstr "Rendben"
 
 #: admin/themes/default/settings/edit-search.php:10
+msgid "Search Query Type"
+msgstr ""
+
+#: admin/themes/default/settings/edit-search.php:13
+msgid "Select the default query type used for simple search in Omeka."
+msgstr ""
+
+#: admin/themes/default/settings/edit-search.php:19
 msgid "Search Record Types"
 msgstr "Rekord típusok keresése"
 
-#: admin/themes/default/settings/edit-search.php:13
+#: admin/themes/default/settings/edit-search.php:22
 msgid "Customize which types of records will be searchable in Omeka."
 msgstr "Szabja testre mely rekordtípusok legyenek kereshetőek Omeka-ban."
 
-#: admin/themes/default/settings/edit-search.php:23
-#: admin/themes/default/settings/edit-search.php:42
+#: admin/themes/default/settings/edit-search.php:32
+#: admin/themes/default/settings/edit-search.php:51
 msgid "Index Records"
 msgstr "Rekordok indexelése"
 
-#: admin/themes/default/settings/edit-search.php:26
+#: admin/themes/default/settings/edit-search.php:35
 msgid "Click on the \"Index Records\" button to re-index your records."
 msgstr "Kattintson a \"Rekordok indexelése\" gombra a rekordok újraindexeléséhez."
 
-#: admin/themes/default/settings/edit-search.php:28
+#: admin/themes/default/settings/edit-search.php:37
 msgid ""
 "Indexing means to collect, parse, and store data to facilitate fast and "
 "accurate searches. Omeka will automatically index individual records as they"
@@ -2215,9 +2223,9 @@ msgstr "Ezzel törli az elemkészletet és az elemkészlethez rendelt összes el
 #: application/controllers/PluginsController.php:184
 #: application/controllers/PluginsController.php:217
 #: application/controllers/PluginsController.php:325
-#: application/controllers/SettingsController.php:104
-#: application/controllers/SettingsController.php:140
-#: application/controllers/SettingsController.php:177
+#: application/controllers/SettingsController.php:106
+#: application/controllers/SettingsController.php:149
+#: application/controllers/SettingsController.php:186
 #: application/controllers/ThemesController.php:89
 #: application/controllers/UsersController.php:312
 #: application/libraries/Omeka/Controller/AbstractActionController.php:183
@@ -2479,31 +2487,31 @@ msgstr "Az általános beállítások frissítése kész."
 msgid "The security settings have been updated."
 msgstr "A biztonsági beállítások frissítése kész."
 
-#: application/controllers/SettingsController.php:114
+#: application/controllers/SettingsController.php:123
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
 msgstr "Megváltoztatta, hogy mely rekordok kereshetőek Omekában. Kérjük, indexelje újra a rekordokat az alábbi űrlap segítségével."
 
-#: application/controllers/SettingsController.php:121
+#: application/controllers/SettingsController.php:130
 msgid ""
 "Indexing records. This may take a while. You may continue administering your"
 " site."
 msgstr "Rekordok indexelése. Ez eltarthat egy ideig. Folytathatja webhelyének adminisztrációját."
 
-#: application/controllers/SettingsController.php:156
+#: application/controllers/SettingsController.php:165
 msgid "The item type elements were successfully changed!"
 msgstr "Az item type elemkészlet sikeresen megváltozott!"
 
-#: application/controllers/SettingsController.php:183
+#: application/controllers/SettingsController.php:192
 msgid "The API configuration was successfully changed!"
 msgstr "Az API konfiguráció sikeresen megváltozott!"
 
-#: application/controllers/SettingsController.php:206
+#: application/controllers/SettingsController.php:215
 msgid "The ImageMagick directory path works."
 msgstr "Az ImageMagick könyvtár elérési útja működik."
 
-#: application/controllers/SettingsController.php:207
+#: application/controllers/SettingsController.php:216
 msgid "The ImageMagick directory path does not work."
 msgstr "Az ImageMagick könyvtár elérési útja nem működik."
 
@@ -2813,7 +2821,7 @@ msgid ""
 "setting. You run the risk of splitting tags that contain the old delimiter."
 msgstr "Válasszon címkéket a karakter vagy a karakterlánc segítségével. Legyen óvatos a beállítás módosításakor. Fennáll annak a kockázata, hogy a korábbi határolót tartalmazó címkéket felbontja."
 
-#: application/forms/GeneralSettings.php:59 application/forms/Install.php:174
+#: application/forms/GeneralSettings.php:59 application/forms/Install.php:175
 msgid "ImageMagick Directory Path"
 msgstr "ImagMagick könyvtár elérési útja"
 
@@ -2878,11 +2886,11 @@ msgstr "Korlátozza az oldalanként megjelenített elemek számát a nyilvános 
 msgid "Check box to show metadata elements with no text."
 msgstr "Jelölje be a négyzetet a metaadat elemek szöveg nélküli megjelenítéséhez."
 
-#: application/forms/Install.php:185
+#: application/forms/Install.php:186
 msgid "Default Superuser Account"
 msgstr "Alapértelmezett Superuser fiók"
 
-#: application/forms/Install.php:195
+#: application/forms/Install.php:196
 msgid "Site Settings"
 msgstr "Oldal beállítás"
 
@@ -3249,11 +3257,11 @@ msgstr "Keresés címke alapján"
 msgid "No tags are available."
 msgstr "Nincs elérhető címke."
 
-#: application/models/Builder/Item.php:261
+#: application/models/Builder/Item.php:263
 msgid "Must specify a file transfer type when attaching files to an item!"
 msgstr "Meg kell adnia egy fájlátviteli típust, ha fájlokat csatol egy elemhez!"
 
-#: application/models/Collection.php:118
+#: application/models/Collection.php:120
 msgid "Cannot associate the collection with an unsaved user."
 msgstr "Nem lehet társítani a gyűjteményt egy nem megerősített felhasználóval."
 
@@ -3295,57 +3303,57 @@ msgstr "Minden elemszövegnek tartalmaznia kell egy rekord típust."
 msgid "Invalid element ID."
 msgstr "Érvénytelen elemazonosító."
 
-#: application/models/File.php:235
+#: application/models/File.php:237
 msgid "Cannot get the local path for a stored file."
 msgstr "A tárolt fájl helyi elérési útja nem elérhető."
 
-#: application/models/File.php:452
+#: application/models/File.php:454
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
 msgstr "\"%s\" nem egy érvényes fájlszármazék."
 
-#: application/models/Item.php:331
+#: application/models/Item.php:333
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
 msgstr "A fájlokat nem lehet olyan elemhez csatolni, amely nem állandó az adatbázisban!"
 
 #. / Chicago-style item citation: two authors
-#: application/models/Item.php:466
+#: application/models/Item.php:468
 #, php-format
 msgid "%1$s and %2$s"
 msgstr "%1$s és %2$s"
 
 #. / Chicago-style item citation: three authors
-#: application/models/Item.php:470
+#: application/models/Item.php:472
 #, php-format
 msgid "%1$s, %2$s, and %3$s"
 msgstr "%1$s, %2$s, és %3$s"
 
 #. / Chicago-style item citation: more than three authors
-#: application/models/Item.php:474
+#: application/models/Item.php:476
 #, php-format
 msgid "%s et al."
 msgstr "%s et al."
 
 #. / Chicago-style item citation: access date and URL
-#: application/models/Item.php:492
+#: application/models/Item.php:494
 #, php-format
 msgid "accessed %1$s, %2$s."
 msgstr "megtekintve: %1$s, %2$s."
 
-#: application/models/Item.php:509
+#: application/models/Item.php:511
 msgid "Cannot add an existing file to an item!"
 msgstr "Nem lehet egy meglévő fájlt hozzáadni egy elemhez!"
 
-#: application/models/Item.php:513
+#: application/models/Item.php:515
 msgid "File must be valid before it can be associated with an item!"
 msgstr "A fájlnak érvényesnek kell lennie, mielőtt egy elemhez társítjuk!"
 
-#: application/models/Item.php:538
+#: application/models/Item.php:540
 msgid "Invalid item type."
 msgstr "Érvénytelen elemtípus."
 
-#: application/models/Item.php:541
+#: application/models/Item.php:543
 msgid "Invalid collection."
 msgstr "Érvénytelen gyűjtemény."
 

@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2020-01-28 17:28+0000\n"
+"PO-Revision-Date: 2021-03-18 20:09+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Korean (Korea) (http://www.transifex.com/omeka/omeka/language/ko_KR/)\n"
 "MIME-Version: 1.0\n"
@@ -374,7 +374,7 @@ msgstr "링크 추가 등록"
 #: admin/themes/default/plugins/config.php:14
 #: admin/themes/default/settings/edit-api.php:82
 #: admin/themes/default/settings/edit-item-type-elements.php:39
-#: admin/themes/default/settings/edit-search.php:41
+#: admin/themes/default/settings/edit-search.php:50
 #: admin/themes/default/settings/edit-security.php:15
 #: admin/themes/default/settings/edit-settings.php:15
 #: admin/themes/default/themes/config.php:16
@@ -563,7 +563,7 @@ msgstr "첫 번째 컬렉션 추가를 시작합니다."
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/models/Mixin/ElementText.php:779
+#: application/models/Mixin/ElementText.php:791
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
 msgstr "[제목없음]"
@@ -718,7 +718,7 @@ msgid "Omeka Admin"
 msgstr "Omeka 관리자"
 
 #: admin/themes/default/common/header.php:41
-#: application/views/scripts/common/header.php:32
+#: application/views/scripts/common/header.php:38
 msgid "Skip to main content"
 msgstr ""
 
@@ -744,7 +744,7 @@ msgstr "보안"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: admin/themes/default/search/index.php:2
-#: application/views/helpers/SearchForm.php:56
+#: application/views/helpers/SearchForm.php:57
 #: application/views/scripts/search/index.php:2
 #: application/views/scripts/search/search-form.php:2
 msgid "Search"
@@ -1649,7 +1649,7 @@ msgid "Uninstall"
 msgstr "삭제하기"
 
 #: admin/themes/default/plugins/browse.php:150
-#: application/forms/Install.php:178
+#: application/forms/Install.php:179
 msgid "Install"
 msgstr "설치하기"
 
@@ -1767,23 +1767,31 @@ msgid "Ok"
 msgstr "예"
 
 #: admin/themes/default/settings/edit-search.php:10
+msgid "Search Query Type"
+msgstr ""
+
+#: admin/themes/default/settings/edit-search.php:13
+msgid "Select the default query type used for simple search in Omeka."
+msgstr ""
+
+#: admin/themes/default/settings/edit-search.php:19
 msgid "Search Record Types"
 msgstr "레코드 유형 검색"
 
-#: admin/themes/default/settings/edit-search.php:13
+#: admin/themes/default/settings/edit-search.php:22
 msgid "Customize which types of records will be searchable in Omeka."
 msgstr "Omeka에서 검색될 수 있는 레코드 유형을 설정하십시오."
 
-#: admin/themes/default/settings/edit-search.php:23
-#: admin/themes/default/settings/edit-search.php:42
+#: admin/themes/default/settings/edit-search.php:32
+#: admin/themes/default/settings/edit-search.php:51
 msgid "Index Records"
 msgstr "레코드 색인"
 
-#: admin/themes/default/settings/edit-search.php:26
+#: admin/themes/default/settings/edit-search.php:35
 msgid "Click on the \"Index Records\" button to re-index your records."
 msgstr "레코드를 다시 색인하려면 \"레코드 색인\" 버튼을 클릭하십시오."
 
-#: admin/themes/default/settings/edit-search.php:28
+#: admin/themes/default/settings/edit-search.php:37
 msgid ""
 "Indexing means to collect, parse, and store data to facilitate fast and "
 "accurate searches. Omeka will automatically index individual records as they"
@@ -2200,9 +2208,9 @@ msgstr "요소 세트와 요소 세트에 할당된 모든 요소들이 삭제�
 #: application/controllers/PluginsController.php:184
 #: application/controllers/PluginsController.php:217
 #: application/controllers/PluginsController.php:325
-#: application/controllers/SettingsController.php:104
-#: application/controllers/SettingsController.php:140
-#: application/controllers/SettingsController.php:177
+#: application/controllers/SettingsController.php:106
+#: application/controllers/SettingsController.php:149
+#: application/controllers/SettingsController.php:186
 #: application/controllers/ThemesController.php:89
 #: application/controllers/UsersController.php:312
 #: application/libraries/Omeka/Controller/AbstractActionController.php:183
@@ -2464,31 +2472,31 @@ msgstr "일반 설정이 업데이트되었습니다."
 msgid "The security settings have been updated."
 msgstr "보안 설정이 업데이트되었습니다."
 
-#: application/controllers/SettingsController.php:114
+#: application/controllers/SettingsController.php:123
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
 msgstr "Omeka에서 검색 가능한 레코드를 변경했습니다. 아래의 폼을 사용하여 레코드를 다시 색인해 주십시오. "
 
-#: application/controllers/SettingsController.php:121
+#: application/controllers/SettingsController.php:130
 msgid ""
 "Indexing records. This may take a while. You may continue administering your"
 " site."
 msgstr "레코드를 색인하고 있습니다. 이 작업은 시간이 조금 소요될 수 있습니다. 다른 사이트 관리 작업을 계속 진행할 수 있습니다."
 
-#: application/controllers/SettingsController.php:156
+#: application/controllers/SettingsController.php:165
 msgid "The item type elements were successfully changed!"
 msgstr "아이템 유형별 요소가 성공적으로 변경되었습니다!"
 
-#: application/controllers/SettingsController.php:183
+#: application/controllers/SettingsController.php:192
 msgid "The API configuration was successfully changed!"
 msgstr "API 구성이 성공적으로 변경되었습니다!"
 
-#: application/controllers/SettingsController.php:206
+#: application/controllers/SettingsController.php:215
 msgid "The ImageMagick directory path works."
 msgstr "ImageMagick 디렉토리 경로가 정상 작동합니다."
 
-#: application/controllers/SettingsController.php:207
+#: application/controllers/SettingsController.php:216
 msgid "The ImageMagick directory path does not work."
 msgstr "ImageMagick 디렉토리 경로가 제대로 작동하지 않습니다."
 
@@ -2798,7 +2806,7 @@ msgid ""
 "setting. You run the risk of splitting tags that contain the old delimiter."
 msgstr "이 문자 또는 문자열을 사용해서 태그를 구분하십시오. 이 설정을 변경할 때는 유의하십시오. 이전 구분기호를 포함하고 있는 태그를 쪼개버릴 위험이 있습니다."
 
-#: application/forms/GeneralSettings.php:59 application/forms/Install.php:174
+#: application/forms/GeneralSettings.php:59 application/forms/Install.php:175
 msgid "ImageMagick Directory Path"
 msgstr "ImageMagick 디렉토리 경로"
 
@@ -2863,11 +2871,11 @@ msgstr "공개용 인터페이스 화면에서 페이지 당 표시되는 결과
 msgid "Check box to show metadata elements with no text."
 msgstr "입력값이 없는 메타데이터 요소를 보려면 박스를 체크하십시오."
 
-#: application/forms/Install.php:185
+#: application/forms/Install.php:186
 msgid "Default Superuser Account"
 msgstr "디폴트 최고관리자 계정"
 
-#: application/forms/Install.php:195
+#: application/forms/Install.php:196
 msgid "Site Settings"
 msgstr "사이트 설정"
 
@@ -3234,11 +3242,11 @@ msgstr "태그별 보기"
 msgid "No tags are available."
 msgstr "사용 가능한 태그가 없습니다."
 
-#: application/models/Builder/Item.php:261
+#: application/models/Builder/Item.php:263
 msgid "Must specify a file transfer type when attaching files to an item!"
 msgstr "아이템에 파일을 첨부할때 파일 전송 유형(file transfer type)을 지정해야 합니다!"
 
-#: application/models/Collection.php:118
+#: application/models/Collection.php:120
 msgid "Cannot associate the collection with an unsaved user."
 msgstr "해당 컬렉션을 저장되지 않은 사용자와 연결할 수 없습니다."
 
@@ -3280,57 +3288,57 @@ msgstr "모든 요소 텍스트는 레코드 타입을 가져야 합니다."
 msgid "Invalid element ID."
 msgstr "요소 ID가 잘못되었습니다."
 
-#: application/models/File.php:235
+#: application/models/File.php:237
 msgid "Cannot get the local path for a stored file."
 msgstr "저장된 파일을 위한 로컬 경로를 얻을 수 없습니다."
 
-#: application/models/File.php:452
+#: application/models/File.php:454
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
 msgstr "\"%s\"는 잘못된 파생 파일입니다."
 
-#: application/models/Item.php:331
+#: application/models/Item.php:333
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
 msgstr "데이터베이스에서 지속 가능하지 않은 아이템에는 파일을 첨부할 수 없습니다. 파일을 아이템에 첨부할 수 없습니다."
 
 #. / Chicago-style item citation: two authors
-#: application/models/Item.php:466
+#: application/models/Item.php:468
 #, php-format
 msgid "%1$s and %2$s"
 msgstr "%1$s 와/과 %2$s"
 
 #. / Chicago-style item citation: three authors
-#: application/models/Item.php:470
+#: application/models/Item.php:472
 #, php-format
 msgid "%1$s, %2$s, and %3$s"
 msgstr "%1$s 와/과 %2$s, %3$s"
 
 #. / Chicago-style item citation: more than three authors
-#: application/models/Item.php:474
+#: application/models/Item.php:476
 #, php-format
 msgid "%s et al."
 msgstr "%s 등."
 
 #. / Chicago-style item citation: access date and URL
-#: application/models/Item.php:492
+#: application/models/Item.php:494
 #, php-format
 msgid "accessed %1$s, %2$s."
 msgstr "접근된 %1$s, %2$s."
 
-#: application/models/Item.php:509
+#: application/models/Item.php:511
 msgid "Cannot add an existing file to an item!"
 msgstr "아이템에 기존 파일을 추가할 수 없습니다!"
 
-#: application/models/Item.php:513
+#: application/models/Item.php:515
 msgid "File must be valid before it can be associated with an item!"
 msgstr "파일이 유효해야 아이템과 연결시킬 수 있습니다!"
 
-#: application/models/Item.php:538
+#: application/models/Item.php:540
 msgid "Invalid item type."
 msgstr "잘못된 아이템 유형입니다."
 
-#: application/models/Item.php:541
+#: application/models/Item.php:543
 msgid "Invalid collection."
 msgstr "잘못된 컬렉션입니다."
 

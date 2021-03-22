@@ -5,15 +5,15 @@
 # Translators:
 # fenril <spfenril@gmail.com>, 2015
 # iteau <songphan@gmail.com>, 2014
-# Somsak Sriborisutsakul <somsak.sr@chula.ac.th>, 2014
-# iteau <songphan@gmail.com>, 2014
+# 548f21fb6b3e8bfc7e445242048cdaf7_d2fdfff <30fe717c850c534deb7bd704b32011d4_207351>, 2014
+# iteau <songphan@gmail.com>, 2014,2020
 # fenril <spfenril@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2020-01-28 17:28+0000\n"
+"PO-Revision-Date: 2021-03-18 20:09+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Thai (http://www.transifex.com/omeka/omeka/language/th/)\n"
 "MIME-Version: 1.0\n"
@@ -124,7 +124,7 @@ msgstr "ตัวระบุ"
 
 #. Dublin Core: Identifier element description
 msgid "An unambiguous reference to the resource within a given context"
-msgstr ""
+msgstr "มีการอ้างอิงที่ไม่ชัดเจนไปยังทรัพยากรในบริบทที่กำหนด"
 
 #. Dublin Core: Source element name
 msgid "Source"
@@ -373,7 +373,7 @@ msgstr "เพิ่มลิ้งค์"
 #: admin/themes/default/plugins/config.php:14
 #: admin/themes/default/settings/edit-api.php:82
 #: admin/themes/default/settings/edit-item-type-elements.php:39
-#: admin/themes/default/settings/edit-search.php:41
+#: admin/themes/default/settings/edit-search.php:50
 #: admin/themes/default/settings/edit-security.php:15
 #: admin/themes/default/settings/edit-settings.php:15
 #: admin/themes/default/themes/config.php:16
@@ -495,7 +495,7 @@ msgstr[0] ""
 
 #: admin/themes/default/collections/browse.php:20
 msgid "All items are in a collection."
-msgstr ""
+msgstr "ทุกรายการอยู่ในคอลเลกชัน"
 
 #: admin/themes/default/collections/browse.php:31
 #: admin/themes/default/collections/show.php:51
@@ -562,7 +562,7 @@ msgstr "เริ่มด้วยการเพิ่มคอลเลกช
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/models/Mixin/ElementText.php:779
+#: application/models/Mixin/ElementText.php:791
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
 msgstr "[ไม่มีชื่อ]"
@@ -575,7 +575,7 @@ msgstr "แก้ไขคอลเลกชัน #%s"
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Collection #%s"
-msgstr ""
+msgstr "คอลเลกชัน #%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
@@ -633,7 +633,7 @@ msgstr "การตั้งค่า"
 
 #: admin/themes/default/common/content-nav.php:1
 msgid "Main Menu"
-msgstr ""
+msgstr "เมนูหลัก"
 
 #: admin/themes/default/common/content-nav.php:5
 #: admin/themes/default/index.php:2
@@ -683,7 +683,7 @@ msgstr "ฟอรั่มช่วยเหลือ"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Back to top"
-msgstr ""
+msgstr "กลับขึ้นไปข้างบน"
 
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
@@ -699,7 +699,7 @@ msgstr "ข้อมูลระบบ"
 
 #: admin/themes/default/common/global-nav.php:1
 msgid "Manage Site"
-msgstr ""
+msgstr "จัดการเว็บไซต์"
 
 #: admin/themes/default/common/global-nav.php:5
 #: admin/themes/default/plugins/browse.php:5
@@ -717,9 +717,9 @@ msgid "Omeka Admin"
 msgstr "ผู้ดูแล Omeka"
 
 #: admin/themes/default/common/header.php:41
-#: application/views/scripts/common/header.php:32
+#: application/views/scripts/common/header.php:38
 msgid "Skip to main content"
-msgstr ""
+msgstr "ข้ามไปยังเนื้อหาหลัก"
 
 #: admin/themes/default/common/header.php:61
 #: application/views/scripts/common/admin-bar.php:6
@@ -743,7 +743,7 @@ msgstr "ความปลอดภัย"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: admin/themes/default/search/index.php:2
-#: application/views/helpers/SearchForm.php:56
+#: application/views/helpers/SearchForm.php:57
 #: application/views/scripts/search/index.php:2
 #: application/views/scripts/search/search-form.php:2
 msgid "Search"
@@ -951,27 +951,27 @@ msgstr "เมทาดาทาแบบฝังตัว"
 #: admin/themes/default/index.php:10
 msgid "item"
 msgid_plural "items"
-msgstr[0] ""
+msgstr[0] "รายการ"
 
 #: admin/themes/default/index.php:11
 msgid "collection"
 msgid_plural "collections"
-msgstr[0] ""
+msgstr[0] "คอลเลกชัน"
 
 #: admin/themes/default/index.php:12
 msgid "tag"
 msgid_plural "tags"
-msgstr[0] ""
+msgstr[0] "ป้ายกำกับ"
 
 #: admin/themes/default/index.php:16
 msgid "plugin"
 msgid_plural "plugins"
-msgstr[0] ""
+msgstr[0] "ปลั๊กอิน"
 
 #: admin/themes/default/index.php:20
 msgid "user"
 msgid_plural "users"
-msgstr[0] ""
+msgstr[0] "ผู้ใช้"
 
 #: admin/themes/default/index.php:24
 msgid "theme"
@@ -984,7 +984,7 @@ msgstr "มี Omeka รุ่นใหม่ให้ดาวน์โหล�
 #: admin/themes/default/index.php:36
 #, php-format
 msgid "Upgrade to %s"
-msgstr ""
+msgstr "อัพเกรดไปยัง %s"
 
 #: admin/themes/default/item-types/add-existing-element.php:22
 #: admin/themes/default/item-types/add-new-element.php:15
@@ -1020,11 +1020,11 @@ msgstr "เพื่อรายการ"
 #, php-format
 msgid "%s%d item%s has no type."
 msgid_plural "%s%d items%s have no type."
-msgstr[0] ""
+msgstr[0] "%s%d รายการ%s ไม่ปรากฏประเภท"
 
 #: admin/themes/default/item-types/browse.php:21
 msgid "All items have a type."
-msgstr ""
+msgstr "ทุกรายการมีประเภท"
 
 #: admin/themes/default/item-types/browse.php:29
 msgid "Type Name"
@@ -1111,7 +1111,7 @@ msgstr "คอลเลกชัน"
 
 #: admin/themes/default/items/batch-delete-all.php:2
 msgid "Batch Delete All Searched Items"
-msgstr ""
+msgstr "ลบรายการที่ค้นทั้งหมด"
 
 #: admin/themes/default/items/batch-delete-all.php:18
 #, php-format
@@ -1648,7 +1648,7 @@ msgid "Uninstall"
 msgstr "ถอนการติดตั้ง"
 
 #: admin/themes/default/plugins/browse.php:150
-#: application/forms/Install.php:178
+#: application/forms/Install.php:179
 msgid "Install"
 msgstr "ติดตั้ง"
 
@@ -1766,23 +1766,31 @@ msgid "Ok"
 msgstr "ตกลง"
 
 #: admin/themes/default/settings/edit-search.php:10
+msgid "Search Query Type"
+msgstr ""
+
+#: admin/themes/default/settings/edit-search.php:13
+msgid "Select the default query type used for simple search in Omeka."
+msgstr ""
+
+#: admin/themes/default/settings/edit-search.php:19
 msgid "Search Record Types"
 msgstr "สืบค้นประเภทระเบียน"
 
-#: admin/themes/default/settings/edit-search.php:13
+#: admin/themes/default/settings/edit-search.php:22
 msgid "Customize which types of records will be searchable in Omeka."
 msgstr "ปรับแต่งประเภทของระเบียนที่สามารถสืบค้นได้ใน Omeka"
 
-#: admin/themes/default/settings/edit-search.php:23
-#: admin/themes/default/settings/edit-search.php:42
+#: admin/themes/default/settings/edit-search.php:32
+#: admin/themes/default/settings/edit-search.php:51
 msgid "Index Records"
 msgstr "ระเบียนดัชนี"
 
-#: admin/themes/default/settings/edit-search.php:26
+#: admin/themes/default/settings/edit-search.php:35
 msgid "Click on the \"Index Records\" button to re-index your records."
 msgstr "คลิกที่ปุ่ม \"ระเบียนดัชนี\" เพื่อจัดทำดัชนีให้กับระเบียนของคุณขึ้นมาใหม่"
 
-#: admin/themes/default/settings/edit-search.php:28
+#: admin/themes/default/settings/edit-search.php:37
 msgid ""
 "Indexing means to collect, parse, and store data to facilitate fast and "
 "accurate searches. Omeka will automatically index individual records as they"
@@ -2199,9 +2207,9 @@ msgstr "จากนี้จะลบชุดองค์ประกอบ �
 #: application/controllers/PluginsController.php:184
 #: application/controllers/PluginsController.php:217
 #: application/controllers/PluginsController.php:325
-#: application/controllers/SettingsController.php:104
-#: application/controllers/SettingsController.php:140
-#: application/controllers/SettingsController.php:177
+#: application/controllers/SettingsController.php:106
+#: application/controllers/SettingsController.php:149
+#: application/controllers/SettingsController.php:186
 #: application/controllers/ThemesController.php:89
 #: application/controllers/UsersController.php:312
 #: application/libraries/Omeka/Controller/AbstractActionController.php:183
@@ -2463,31 +2471,31 @@ msgstr "ปรับปรุงการตั้งค่าทั่วไป
 msgid "The security settings have been updated."
 msgstr "ปรับปรุงการตั้งค่าความปลอดภัยเรียบร้อยแล้ว"
 
-#: application/controllers/SettingsController.php:114
+#: application/controllers/SettingsController.php:123
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
 msgstr "คุณได้เปลี่ยนแปลงระเบียนข้อมูลที่สามารถสืบค้นได้ใน Omeka โปรดทำดรรชนีระเบียนเหล่านี้อีกครั้งโดยใช้แบบฟอร์มด้านล่าง"
 
-#: application/controllers/SettingsController.php:121
+#: application/controllers/SettingsController.php:130
 msgid ""
 "Indexing records. This may take a while. You may continue administering your"
 " site."
 msgstr ""
 
-#: application/controllers/SettingsController.php:156
+#: application/controllers/SettingsController.php:165
 msgid "The item type elements were successfully changed!"
 msgstr "องค์ประกอบประเภทรายการได้รับการเปลี่ยนแปลงเรียบร้อยแล้ว!"
 
-#: application/controllers/SettingsController.php:183
+#: application/controllers/SettingsController.php:192
 msgid "The API configuration was successfully changed!"
 msgstr "เปลี่ยนแปลงการตั้งค่า API เรียบร้อยแล้ว "
 
-#: application/controllers/SettingsController.php:206
+#: application/controllers/SettingsController.php:215
 msgid "The ImageMagick directory path works."
 msgstr ""
 
-#: application/controllers/SettingsController.php:207
+#: application/controllers/SettingsController.php:216
 msgid "The ImageMagick directory path does not work."
 msgstr ""
 
@@ -2797,7 +2805,7 @@ msgid ""
 "setting. You run the risk of splitting tags that contain the old delimiter."
 msgstr "แยกป้ายกำกับด้วยตัวอักษรหรือสายอักขระนี้ โปรดระวังเมื่อเปลี่ยนแปลงการตั้งค่านี้ คุณอาจแยกป้ายกำกับที่ใช้ตัวคั่นที่เคยใช้ก่อนหน้านี้"
 
-#: application/forms/GeneralSettings.php:59 application/forms/Install.php:174
+#: application/forms/GeneralSettings.php:59 application/forms/Install.php:175
 msgid "ImageMagick Directory Path"
 msgstr "วิถีสารบบอิเมจเมจิก"
 
@@ -2862,11 +2870,11 @@ msgstr "จำกัดจำนวนรายการต่อหน้าท
 msgid "Check box to show metadata elements with no text."
 msgstr ""
 
-#: application/forms/Install.php:185
+#: application/forms/Install.php:186
 msgid "Default Superuser Account"
 msgstr "บัญชีผู้ใช้ Superuser หลัก"
 
-#: application/forms/Install.php:195
+#: application/forms/Install.php:196
 msgid "Site Settings"
 msgstr "การตั้งค่าเว็บไซต์"
 
@@ -3233,11 +3241,11 @@ msgstr "เลือกดูตามป้ายกำกับ"
 msgid "No tags are available."
 msgstr "ไม่มีป้ายกำกับ"
 
-#: application/models/Builder/Item.php:261
+#: application/models/Builder/Item.php:263
 msgid "Must specify a file transfer type when attaching files to an item!"
 msgstr "ต้องระบุประเภทของการถ่ายโอนแฟ้มข้อมูล ขณะแนบไฟล์ไว้ในรายการสารสนเทศ!"
 
-#: application/models/Collection.php:118
+#: application/models/Collection.php:120
 msgid "Cannot associate the collection with an unsaved user."
 msgstr "ไม่สามารถเชื่อมโยงคอลเลกชันกับผู้ใช้ที่ไม่ได้บันทึก"
 
@@ -3279,57 +3287,57 @@ msgstr "ทุกข้อความในองค์ประกอบต้
 msgid "Invalid element ID."
 msgstr "รหัสองค์ประกอบไม่ถูกต้อง"
 
-#: application/models/File.php:235
+#: application/models/File.php:237
 msgid "Cannot get the local path for a stored file."
 msgstr "ไม่สามารถนำพาธเฉพาะสำหรับแฟ้มข้อมูลที่เก็บเอาไว้ได้"
 
-#: application/models/File.php:452
+#: application/models/File.php:454
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
 msgstr ""
 
-#: application/models/Item.php:331
+#: application/models/Item.php:333
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
 msgstr "ไม่สามารถแนบไฟล์กับรายการที่ไม่ถาวรในฐานข้อมูลนี้ได้!"
 
 #. / Chicago-style item citation: two authors
-#: application/models/Item.php:466
+#: application/models/Item.php:468
 #, php-format
 msgid "%1$s and %2$s"
 msgstr "%1$sและ%2$s"
 
 #. / Chicago-style item citation: three authors
-#: application/models/Item.php:470
+#: application/models/Item.php:472
 #, php-format
 msgid "%1$s, %2$s, and %3$s"
 msgstr "%1$s %2$sและ%3$s"
 
 #. / Chicago-style item citation: more than three authors
-#: application/models/Item.php:474
+#: application/models/Item.php:476
 #, php-format
 msgid "%s et al."
 msgstr "%s และอื่นๆ"
 
 #. / Chicago-style item citation: access date and URL
-#: application/models/Item.php:492
+#: application/models/Item.php:494
 #, php-format
 msgid "accessed %1$s, %2$s."
 msgstr "เข้าถึง %1$s, %2$s"
 
-#: application/models/Item.php:509
+#: application/models/Item.php:511
 msgid "Cannot add an existing file to an item!"
 msgstr "ไม่สามารถเพิ่มแฟ้มข้อมูลที่มีอยู่เดิมเข้าไปในรายการสารสนเทศใหม่ได้!"
 
-#: application/models/Item.php:513
+#: application/models/Item.php:515
 msgid "File must be valid before it can be associated with an item!"
 msgstr "ตรวจสอบแฟ้มข้อมูลให้ถูกต้องก่อนนำไปผนวกกับรายการสารสนเทศ!"
 
-#: application/models/Item.php:538
+#: application/models/Item.php:540
 msgid "Invalid item type."
 msgstr "ประเภทของรายการไม่ถูกต้อง"
 
-#: application/models/Item.php:541
+#: application/models/Item.php:543
 msgid "Invalid collection."
 msgstr "คอลเลกชันไม่ถูกต้อง"
 
