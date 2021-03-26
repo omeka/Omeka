@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Gabriel Radev <gabosss@gmail.com>, 2014-2015,2017
+# Gabriel Radev <gabosss@gmail.com>, 2014-2015,2017,2020
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2020-01-28 17:28+0000\n"
+"PO-Revision-Date: 2021-03-18 20:09+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Bulgarian (Bulgaria) (http://www.transifex.com/omeka/omeka/language/bg_BG/)\n"
 "MIME-Version: 1.0\n"
@@ -369,7 +369,7 @@ msgstr "Добавяне на връзка"
 #: admin/themes/default/plugins/config.php:14
 #: admin/themes/default/settings/edit-api.php:82
 #: admin/themes/default/settings/edit-item-type-elements.php:39
-#: admin/themes/default/settings/edit-search.php:41
+#: admin/themes/default/settings/edit-search.php:50
 #: admin/themes/default/settings/edit-security.php:15
 #: admin/themes/default/settings/edit-settings.php:15
 #: admin/themes/default/themes/config.php:16
@@ -487,8 +487,8 @@ msgstr "(%s общо)"
 #, php-format
 msgid "%s%d item%s has no collection."
 msgid_plural "%s%d items%s aren't in a collection."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s%d документ%s няма колекция"
+msgstr[1] "%s%d документа%s не са в колекция."
 
 #: admin/themes/default/collections/browse.php:20
 msgid "All items are in a collection."
@@ -559,7 +559,7 @@ msgstr "Започнете с добавяне на първата си коле
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/models/Mixin/ElementText.php:779
+#: application/models/Mixin/ElementText.php:791
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
 msgstr "[Безименен]"
@@ -680,7 +680,7 @@ msgstr "Форум за поддръжка"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Back to top"
-msgstr ""
+msgstr "Връщане в началото"
 
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
@@ -714,7 +714,7 @@ msgid "Omeka Admin"
 msgstr "Администрация"
 
 #: admin/themes/default/common/header.php:41
-#: application/views/scripts/common/header.php:32
+#: application/views/scripts/common/header.php:38
 msgid "Skip to main content"
 msgstr "Преминаване към основното съдържание"
 
@@ -740,7 +740,7 @@ msgstr "Сигурност"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: admin/themes/default/search/index.php:2
-#: application/views/helpers/SearchForm.php:56
+#: application/views/helpers/SearchForm.php:57
 #: application/views/scripts/search/index.php:2
 #: application/views/scripts/search/search-form.php:2
 msgid "Search"
@@ -1022,12 +1022,12 @@ msgstr "Добавяне на Тип Документ"
 #, php-format
 msgid "%s%d item%s has no type."
 msgid_plural "%s%d items%s have no type."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s%d документ%s няма тип"
+msgstr[1] "%s%d документи%s нямат тип"
 
 #: admin/themes/default/item-types/browse.php:21
 msgid "All items have a type."
-msgstr ""
+msgstr "Всички документи имат тип"
 
 #: admin/themes/default/item-types/browse.php:29
 msgid "Type Name"
@@ -1652,7 +1652,7 @@ msgid "Uninstall"
 msgstr "Деинсталиране"
 
 #: admin/themes/default/plugins/browse.php:150
-#: application/forms/Install.php:178
+#: application/forms/Install.php:179
 msgid "Install"
 msgstr "Инсталиране"
 
@@ -1681,7 +1681,7 @@ msgstr "Сигурни ли сте, че искате да деинсталир�
 msgid ""
 "Warning: data associated with this plugin may be permanently deleted from "
 "the database."
-msgstr ""
+msgstr "Предупреждение: данните, свързани с този плъгин, могат да бъдат изтрити за постоянно от базата данни."
 
 #: admin/themes/default/plugins/confirm-uninstall.php:14
 msgid "Yes, I want to uninstall this plugin."
@@ -1770,23 +1770,31 @@ msgid "Ok"
 msgstr "Да"
 
 #: admin/themes/default/settings/edit-search.php:10
+msgid "Search Query Type"
+msgstr ""
+
+#: admin/themes/default/settings/edit-search.php:13
+msgid "Select the default query type used for simple search in Omeka."
+msgstr ""
+
+#: admin/themes/default/settings/edit-search.php:19
 msgid "Search Record Types"
 msgstr "Търсене за тип запис"
 
-#: admin/themes/default/settings/edit-search.php:13
+#: admin/themes/default/settings/edit-search.php:22
 msgid "Customize which types of records will be searchable in Omeka."
 msgstr "Настройка кои типове записи могат да се търсят в Omeka"
 
-#: admin/themes/default/settings/edit-search.php:23
-#: admin/themes/default/settings/edit-search.php:42
+#: admin/themes/default/settings/edit-search.php:32
+#: admin/themes/default/settings/edit-search.php:51
 msgid "Index Records"
 msgstr "Индексиране на записите"
 
-#: admin/themes/default/settings/edit-search.php:26
+#: admin/themes/default/settings/edit-search.php:35
 msgid "Click on the \"Index Records\" button to re-index your records."
 msgstr "Щракнете на бутона \\\"Индексиране на записите\\\"  за преиндексиране на записите"
 
-#: admin/themes/default/settings/edit-search.php:28
+#: admin/themes/default/settings/edit-search.php:37
 msgid ""
 "Indexing means to collect, parse, and store data to facilitate fast and "
 "accurate searches. Omeka will automatically index individual records as they"
@@ -1821,11 +1829,11 @@ msgstr "Преглед на Маркерите"
 
 #: admin/themes/default/tags/browse.php:18
 msgid "Search tags"
-msgstr ""
+msgstr "Тагове за търсене"
 
 #: admin/themes/default/tags/browse.php:29
 msgid "Reset results"
-msgstr ""
+msgstr "Нулиране на резултатите"
 
 #: admin/themes/default/tags/browse.php:42
 msgid "Editing Tags"
@@ -1849,11 +1857,11 @@ msgstr "За да изтриете маркера, щракнете на Х. И�
 
 #: admin/themes/default/tags/browse.php:58
 msgid "Count"
-msgstr ""
+msgstr "Брояч"
 
 #: admin/themes/default/tags/browse.php:59
 msgid "Date created"
-msgstr ""
+msgstr "Дата на създаване"
 
 #: admin/themes/default/tags/browse.php:74
 #: admin/themes/default/tags/browse.php:76
@@ -1862,7 +1870,7 @@ msgstr "Типове записи"
 
 #: admin/themes/default/tags/browse.php:77
 msgid "All"
-msgstr ""
+msgstr "Всички"
 
 #: admin/themes/default/themes/browse.php:18
 #: admin/themes/default/themes/browse.php:63
@@ -2203,9 +2211,9 @@ msgstr "Това ще изтрие набора от елементи и вси�
 #: application/controllers/PluginsController.php:184
 #: application/controllers/PluginsController.php:217
 #: application/controllers/PluginsController.php:325
-#: application/controllers/SettingsController.php:104
-#: application/controllers/SettingsController.php:140
-#: application/controllers/SettingsController.php:177
+#: application/controllers/SettingsController.php:106
+#: application/controllers/SettingsController.php:149
+#: application/controllers/SettingsController.php:186
 #: application/controllers/ThemesController.php:89
 #: application/controllers/UsersController.php:312
 #: application/libraries/Omeka/Controller/AbstractActionController.php:183
@@ -2467,31 +2475,31 @@ msgstr "Главните настройки бяха обновени"
 msgid "The security settings have been updated."
 msgstr "Настройките за сигурност бяха обновени."
 
-#: application/controllers/SettingsController.php:114
+#: application/controllers/SettingsController.php:123
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
 msgstr "Променихте кои записи да възможни за търсене. Моля, преиндексирайте записите използвайки формата по-долу."
 
-#: application/controllers/SettingsController.php:121
+#: application/controllers/SettingsController.php:130
 msgid ""
 "Indexing records. This may take a while. You may continue administering your"
 " site."
 msgstr "Индексиране на записите. Това може да отнеме малко време, но можете да продължите да администрирате сайта."
 
-#: application/controllers/SettingsController.php:156
+#: application/controllers/SettingsController.php:165
 msgid "The item type elements were successfully changed!"
 msgstr "Елементите за тип на документ бяха променени успешно!"
 
-#: application/controllers/SettingsController.php:183
+#: application/controllers/SettingsController.php:192
 msgid "The API configuration was successfully changed!"
 msgstr "API настройките са променени успешно!"
 
-#: application/controllers/SettingsController.php:206
+#: application/controllers/SettingsController.php:215
 msgid "The ImageMagick directory path works."
 msgstr "Пътят към  ImageMagick  е валиден"
 
-#: application/controllers/SettingsController.php:207
+#: application/controllers/SettingsController.php:216
 msgid "The ImageMagick directory path does not work."
 msgstr "Пътят към ImageMagick не е валиден!"
 
@@ -2501,7 +2509,7 @@ msgstr "Зададен е Невалиден тип на маркера"
 
 #: application/controllers/TagsController.php:108
 msgid "Error occurred."
-msgstr ""
+msgstr "Възникна грешка."
 
 #: application/controllers/ThemesController.php:32
 msgid "Invalid form submission."
@@ -2714,12 +2722,12 @@ msgstr "Показване на елементите обозначени кат
 
 #: application/forms/AppearanceSettings.php:72
 msgid "Link to File Metadata"
-msgstr ""
+msgstr "Връзка към метаданните на файла"
 
 #: application/forms/AppearanceSettings.php:73
 msgid ""
 "Have item files link to the file metadata instead of the file directly."
-msgstr ""
+msgstr "Файловете на елементите да имат връзка към метаданните на файла вместо към файла директно."
 
 #: application/forms/AppearanceSettings.php:83
 msgid "Admin Theme"
@@ -2801,7 +2809,7 @@ msgid ""
 "setting. You run the risk of splitting tags that contain the old delimiter."
 msgstr "За разделяне на маркери, използвайки този символ или стринг. Бъдете внимателни при промяната на настройките, рискувате да премахнете маркерите които са правени при старите настройки."
 
-#: application/forms/GeneralSettings.php:59 application/forms/Install.php:174
+#: application/forms/GeneralSettings.php:59 application/forms/Install.php:175
 msgid "ImageMagick Directory Path"
 msgstr "Път до програмата ImageMagick "
 
@@ -2866,11 +2874,11 @@ msgstr "Ограничаване броя на документите показ
 msgid "Check box to show metadata elements with no text."
 msgstr "Сложете отметка за показване на метаданните на елементите без текст"
 
-#: application/forms/Install.php:185
+#: application/forms/Install.php:186
 msgid "Default Superuser Account"
 msgstr "СуперПотребителски акаунт по подразбиране"
 
-#: application/forms/Install.php:195
+#: application/forms/Install.php:196
 msgid "Site Settings"
 msgstr "Настройка на сайта"
 
@@ -2984,25 +2992,25 @@ msgstr "Списък на разрешените MIME типове за качв
 
 #: application/forms/SecuritySettings.php:51
 msgid "reCAPTCHA Site Key"
-msgstr ""
+msgstr "reCAPTCHA Ключ на Сайта"
 
 #: application/forms/SecuritySettings.php:52
 #, php-format
 msgid ""
 "Enter site key from %s. Both this and the private key must be filled in to "
 "secure public forms. Keys must be for reCAPTCHA v2."
-msgstr ""
+msgstr "Въведете ключа на сайта от %s. Заедно той и частният ключ трябва да са попълнени в сигурната публична форма. Ключовете трябва да са за reCAPTCHA v2."
 
 #: application/forms/SecuritySettings.php:59
 msgid "reCAPTCHA Secret Key"
-msgstr ""
+msgstr "reCAPTCHA Секретен ключ"
 
 #: application/forms/SecuritySettings.php:60
 #, php-format
 msgid ""
 "Enter secret key from %s. Both this and the public key must be filled in to "
 "secure public forms. Keys must be for reCAPTCHA v2."
-msgstr ""
+msgstr "Въведете секретният ключ от %s. Този и публичният ключ трябва да са попълнени в сигурната публична форма. Ключовете трябва да са за reCAPTCHA v2."
 
 #: application/forms/SecuritySettings.php:67
 msgid ""
@@ -3237,11 +3245,11 @@ msgstr "Преглед по маркери"
 msgid "No tags are available."
 msgstr "Няма достъпни маркери"
 
-#: application/models/Builder/Item.php:261
+#: application/models/Builder/Item.php:263
 msgid "Must specify a file transfer type when attaching files to an item!"
 msgstr "Трябва да укажете типа на файла за трансфер при прикрепянето му към документа"
 
-#: application/models/Collection.php:118
+#: application/models/Collection.php:120
 msgid "Cannot associate the collection with an unsaved user."
 msgstr "Не може да се асоциира колекция към незаписан потребител"
 
@@ -3283,57 +3291,57 @@ msgstr "Всички текстови елементи трябва да има�
 msgid "Invalid element ID."
 msgstr "Невалиден ID на елемента"
 
-#: application/models/File.php:235
+#: application/models/File.php:237
 msgid "Cannot get the local path for a stored file."
 msgstr "Не може да се определи локалният път за съхранение на файла"
 
-#: application/models/File.php:452
+#: application/models/File.php:454
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
 msgstr "\"%s\" недопустима модификация на файла"
 
-#: application/models/Item.php:331
+#: application/models/Item.php:333
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
 msgstr "Файла не може да бъде присъединен към документ който не присъства в базата данни"
 
 #. / Chicago-style item citation: two authors
-#: application/models/Item.php:466
+#: application/models/Item.php:468
 #, php-format
 msgid "%1$s and %2$s"
 msgstr "%1$s и %2$s"
 
 #. / Chicago-style item citation: three authors
-#: application/models/Item.php:470
+#: application/models/Item.php:472
 #, php-format
 msgid "%1$s, %2$s, and %3$s"
 msgstr "%1$s, %2$s, и %3$s"
 
 #. / Chicago-style item citation: more than three authors
-#: application/models/Item.php:474
+#: application/models/Item.php:476
 #, php-format
 msgid "%s et al."
 msgstr "%s и др."
 
 #. / Chicago-style item citation: access date and URL
-#: application/models/Item.php:492
+#: application/models/Item.php:494
 #, php-format
 msgid "accessed %1$s, %2$s."
 msgstr "достъпна от %1$s, %2$s"
 
-#: application/models/Item.php:509
+#: application/models/Item.php:511
 msgid "Cannot add an existing file to an item!"
 msgstr "Не може да се добави съществуващ файл към документа"
 
-#: application/models/Item.php:513
+#: application/models/Item.php:515
 msgid "File must be valid before it can be associated with an item!"
 msgstr "Файла трябва да е коректен, преди да бъде асоцииран с документа"
 
-#: application/models/Item.php:538
+#: application/models/Item.php:540
 msgid "Invalid item type."
 msgstr "Невалиден тип документ"
 
-#: application/models/Item.php:541
+#: application/models/Item.php:543
 msgid "Invalid collection."
 msgstr "Невалидна колекция"
 
@@ -3673,14 +3681,14 @@ msgstr "Всички публикации в %s"
 
 #: application/views/scripts/collections/show.php:13
 msgid "Collection Items"
-msgstr ""
+msgstr "Документи на Колекции"
 
 #: application/views/scripts/collections/show.php:33
 #, php-format
 msgid "View item"
 msgid_plural "View all %s items"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Преглед на документ"
+msgstr[1] "Преглед на всички %s документи"
 
 #: application/views/scripts/collections/show.php:35
 msgid "There are currently no items within this collection."
@@ -3753,7 +3761,7 @@ msgid ""
 "Omeka Classic User Manual page on <a "
 "href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">retrieving"
 " error messages</a>."
-msgstr ""
+msgstr "За да научите как да видите по-подробна информация за тази грешка, вижте страницата с ръководството за потребителя на Omeka Classic относно <a href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">извличането на съобщения за грешки.</a>"
 
 #: application/views/scripts/index.php:10
 msgid "Featured Item"

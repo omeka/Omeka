@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Andreas Sandlund <andreas.sandlund@gmail.com>, 2016-2017
+# Anna Svensson <anna.svensson@ub.gu.se>, 2020
 # Jonas Lindqvist <info@melvik.se>, 2013
 # Peter Krantz <peter.krantz@gmail.com>, 2014-2015
 # Sami Varjo <sami.varjo@vaasa.fi>, 2015
@@ -12,7 +13,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2020-01-28 17:28+0000\n"
+"PO-Revision-Date: 2021-03-18 20:09+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Swedish (Sweden) (http://www.transifex.com/omeka/omeka/language/sv_SE/)\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +47,7 @@ msgstr "Ett namn som givits åt resursen"
 #: admin/themes/default/items/browse.php:46
 #: application/views/scripts/items/browse.php:20
 msgid "Creator"
-msgstr "Upphovsman"
+msgstr "Upphovsperson"
 
 #. Dublin Core: Creator element description
 msgid "An entity primarily responsible for making the resource"
@@ -191,7 +192,7 @@ msgstr "Metadatauppsättning som inkluderades i `files`-tabellen i tidigare vers
 
 #. Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
-msgstr "Ytterligare upphovsman"
+msgstr "Ytterligare upphovsperson"
 
 #. Omeka Legacy File: Transcriber element
 msgid "Transcriber"
@@ -372,7 +373,7 @@ msgstr "Lägg till länk"
 #: admin/themes/default/plugins/config.php:14
 #: admin/themes/default/settings/edit-api.php:82
 #: admin/themes/default/settings/edit-item-type-elements.php:39
-#: admin/themes/default/settings/edit-search.php:41
+#: admin/themes/default/settings/edit-search.php:50
 #: admin/themes/default/settings/edit-security.php:15
 #: admin/themes/default/settings/edit-settings.php:15
 #: admin/themes/default/themes/config.php:16
@@ -562,7 +563,7 @@ msgstr "Börja genom att skapa din första samling"
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/models/Mixin/ElementText.php:779
+#: application/models/Mixin/ElementText.php:791
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
 msgstr "[Obetitlad]"
@@ -717,7 +718,7 @@ msgid "Omeka Admin"
 msgstr "Omeka Admin"
 
 #: admin/themes/default/common/header.php:41
-#: application/views/scripts/common/header.php:32
+#: application/views/scripts/common/header.php:38
 msgid "Skip to main content"
 msgstr "Hoppa till huvudinnehåll"
 
@@ -743,7 +744,7 @@ msgstr "Säkerhet"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: admin/themes/default/search/index.php:2
-#: application/views/helpers/SearchForm.php:56
+#: application/views/helpers/SearchForm.php:57
 #: application/views/scripts/search/index.php:2
 #: application/views/scripts/search/search-form.php:2
 msgid "Search"
@@ -1030,7 +1031,7 @@ msgstr[1] ""
 
 #: admin/themes/default/item-types/browse.php:21
 msgid "All items have a type."
-msgstr ""
+msgstr "Alla objekt tillhör en typ"
 
 #: admin/themes/default/item-types/browse.php:29
 msgid "Type Name"
@@ -1655,7 +1656,7 @@ msgid "Uninstall"
 msgstr "Avinstallera"
 
 #: admin/themes/default/plugins/browse.php:150
-#: application/forms/Install.php:178
+#: application/forms/Install.php:179
 msgid "Install"
 msgstr "Installera"
 
@@ -1773,23 +1774,31 @@ msgid "Ok"
 msgstr "Ok"
 
 #: admin/themes/default/settings/edit-search.php:10
+msgid "Search Query Type"
+msgstr ""
+
+#: admin/themes/default/settings/edit-search.php:13
+msgid "Select the default query type used for simple search in Omeka."
+msgstr ""
+
+#: admin/themes/default/settings/edit-search.php:19
 msgid "Search Record Types"
 msgstr "Sök posttyper"
 
-#: admin/themes/default/settings/edit-search.php:13
+#: admin/themes/default/settings/edit-search.php:22
 msgid "Customize which types of records will be searchable in Omeka."
 msgstr "Anpassa vilka typer av poster som ska gå att söka på i Omeka."
 
-#: admin/themes/default/settings/edit-search.php:23
-#: admin/themes/default/settings/edit-search.php:42
+#: admin/themes/default/settings/edit-search.php:32
+#: admin/themes/default/settings/edit-search.php:51
 msgid "Index Records"
 msgstr "Indexera poster"
 
-#: admin/themes/default/settings/edit-search.php:26
+#: admin/themes/default/settings/edit-search.php:35
 msgid "Click on the \"Index Records\" button to re-index your records."
 msgstr "Klicka på \"Indexera poster\" för att omindexera dina poster."
 
-#: admin/themes/default/settings/edit-search.php:28
+#: admin/themes/default/settings/edit-search.php:37
 msgid ""
 "Indexing means to collect, parse, and store data to facilitate fast and "
 "accurate searches. Omeka will automatically index individual records as they"
@@ -1820,15 +1829,15 @@ msgstr "Test"
 
 #: admin/themes/default/tags/browse.php:5
 msgid "Browse Tags"
-msgstr "Bläddra taggar"
+msgstr "Bläddra bland taggar"
 
 #: admin/themes/default/tags/browse.php:18
 msgid "Search tags"
-msgstr ""
+msgstr "Sök taggar"
 
 #: admin/themes/default/tags/browse.php:29
 msgid "Reset results"
-msgstr ""
+msgstr "Återställ resultat"
 
 #: admin/themes/default/tags/browse.php:42
 msgid "Editing Tags"
@@ -1856,7 +1865,7 @@ msgstr ""
 
 #: admin/themes/default/tags/browse.php:59
 msgid "Date created"
-msgstr ""
+msgstr "Tillkomstdatum"
 
 #: admin/themes/default/tags/browse.php:74
 #: admin/themes/default/tags/browse.php:76
@@ -1865,7 +1874,7 @@ msgstr "Posttyper"
 
 #: admin/themes/default/tags/browse.php:77
 msgid "All"
-msgstr ""
+msgstr "Alla"
 
 #: admin/themes/default/themes/browse.php:18
 #: admin/themes/default/themes/browse.php:63
@@ -2206,9 +2215,9 @@ msgstr "Detta kommer att radera elementsamlingen och dess relaterade element. Ob
 #: application/controllers/PluginsController.php:184
 #: application/controllers/PluginsController.php:217
 #: application/controllers/PluginsController.php:325
-#: application/controllers/SettingsController.php:104
-#: application/controllers/SettingsController.php:140
-#: application/controllers/SettingsController.php:177
+#: application/controllers/SettingsController.php:106
+#: application/controllers/SettingsController.php:149
+#: application/controllers/SettingsController.php:186
 #: application/controllers/ThemesController.php:89
 #: application/controllers/UsersController.php:312
 #: application/libraries/Omeka/Controller/AbstractActionController.php:183
@@ -2470,31 +2479,31 @@ msgstr "De allmänna inställningarna har redigerats."
 msgid "The security settings have been updated."
 msgstr "Säkerhetsinställningarna har uppdaterats."
 
-#: application/controllers/SettingsController.php:114
+#: application/controllers/SettingsController.php:123
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
 msgstr "Du har ändrat vilka uppgifter som är sökbara i Omeka. Vänligen använd nedanstående formulär för att göra en omindexering."
 
-#: application/controllers/SettingsController.php:121
+#: application/controllers/SettingsController.php:130
 msgid ""
 "Indexing records. This may take a while. You may continue administering your"
 " site."
 msgstr "Indexerar uppgifter. Detta kan ta ett tag. Du kan fortsätta administrera din sida under tiden."
 
-#: application/controllers/SettingsController.php:156
+#: application/controllers/SettingsController.php:165
 msgid "The item type elements were successfully changed!"
 msgstr "Elementen för objekttyper ändrades!"
 
-#: application/controllers/SettingsController.php:183
+#: application/controllers/SettingsController.php:192
 msgid "The API configuration was successfully changed!"
 msgstr "API:ets inställningar ändrades!"
 
-#: application/controllers/SettingsController.php:206
+#: application/controllers/SettingsController.php:215
 msgid "The ImageMagick directory path works."
 msgstr "Katalogsökvägen för ImageMagick stämmer."
 
-#: application/controllers/SettingsController.php:207
+#: application/controllers/SettingsController.php:216
 msgid "The ImageMagick directory path does not work."
 msgstr "Katalogsökvägen för ImageMagick stämmer inte."
 
@@ -2804,7 +2813,7 @@ msgid ""
 "setting. You run the risk of splitting tags that contain the old delimiter."
 msgstr "Separera taggar med detta tecken eller ord. Var försiktig när du ändrar denna inställning. Du riskerar att dela taggar som innehåller den tidigare avgränsaren."
 
-#: application/forms/GeneralSettings.php:59 application/forms/Install.php:174
+#: application/forms/GeneralSettings.php:59 application/forms/Install.php:175
 msgid "ImageMagick Directory Path"
 msgstr "Katalogsökväg för ImageMagick"
 
@@ -2869,11 +2878,11 @@ msgstr "Begränsa antalet objekt som visas per sida i det publika gränssnittet.
 msgid "Check box to show metadata elements with no text."
 msgstr "Markera för att visa metadataelement utan text."
 
-#: application/forms/Install.php:185
+#: application/forms/Install.php:186
 msgid "Default Superuser Account"
 msgstr "Standardkonto huvudadministratör"
 
-#: application/forms/Install.php:195
+#: application/forms/Install.php:196
 msgid "Site Settings"
 msgstr "Webbplatsinställningar"
 
@@ -3240,11 +3249,11 @@ msgstr "Bläddra via taggar"
 msgid "No tags are available."
 msgstr "Inga taggar tillgängliga."
 
-#: application/models/Builder/Item.php:261
+#: application/models/Builder/Item.php:263
 msgid "Must specify a file transfer type when attaching files to an item!"
 msgstr "En filöverföringstyp måste anges när filer läggs till ett objekt!"
 
-#: application/models/Collection.php:118
+#: application/models/Collection.php:120
 msgid "Cannot associate the collection with an unsaved user."
 msgstr "Samlingen kan inte kopplas till en ej sparad användare."
 
@@ -3286,57 +3295,57 @@ msgstr "Samtliga elementtexter måste ha en posttyp."
 msgid "Invalid element ID."
 msgstr "Ogiltigt element-id"
 
-#: application/models/File.php:235
+#: application/models/File.php:237
 msgid "Cannot get the local path for a stored file."
 msgstr "Den lokala sökvägen för en sparad fil kunde inte hämtas."
 
-#: application/models/File.php:452
+#: application/models/File.php:454
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
 msgstr "\"%s\" är inte ett giltigt filderivat"
 
-#: application/models/Item.php:331
+#: application/models/Item.php:333
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
 msgstr "Filer kan inte läggas till ett objekt som inte sparats i databasen!"
 
 #. / Chicago-style item citation: two authors
-#: application/models/Item.php:466
+#: application/models/Item.php:468
 #, php-format
 msgid "%1$s and %2$s"
 msgstr "%1$s och %2$s"
 
 #. / Chicago-style item citation: three authors
-#: application/models/Item.php:470
+#: application/models/Item.php:472
 #, php-format
 msgid "%1$s, %2$s, and %3$s"
 msgstr "%1$s, %2$s, och %3$s"
 
 #. / Chicago-style item citation: more than three authors
-#: application/models/Item.php:474
+#: application/models/Item.php:476
 #, php-format
 msgid "%s et al."
 msgstr "%s et al."
 
 #. / Chicago-style item citation: access date and URL
-#: application/models/Item.php:492
+#: application/models/Item.php:494
 #, php-format
 msgid "accessed %1$s, %2$s."
 msgstr "visades %1$s, %2$s."
 
-#: application/models/Item.php:509
+#: application/models/Item.php:511
 msgid "Cannot add an existing file to an item!"
 msgstr "En redan befintlig fil kan inte läggas till ett objekt!"
 
-#: application/models/Item.php:513
+#: application/models/Item.php:515
 msgid "File must be valid before it can be associated with an item!"
 msgstr "Filen måste vara giltig innan den kan läggas till ett objekt!"
 
-#: application/models/Item.php:538
+#: application/models/Item.php:540
 msgid "Invalid item type."
 msgstr "Ogiltig objekttyp."
 
-#: application/models/Item.php:541
+#: application/models/Item.php:543
 msgid "Invalid collection."
 msgstr "Ogiltig samling."
 
@@ -3776,7 +3785,7 @@ msgstr "Filer"
 
 #: application/views/scripts/items/show.php:36
 msgid "Citation"
-msgstr "Citat"
+msgstr "Citering"
 
 #: application/views/scripts/search/search-filters.php:3
 msgid "Query:"

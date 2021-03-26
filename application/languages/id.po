@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# irfan pradana <gondeaz@gmail.com>, 2018
+# irfan pradana <gondeaz@gmail.com>, 2018,2020
 # Sukma Budi <sukmabudi@yahoo.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2020-01-28 17:28+0000\n"
+"PO-Revision-Date: 2021-03-18 20:09+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Indonesian (http://www.transifex.com/omeka/omeka/language/id/)\n"
 "MIME-Version: 1.0\n"
@@ -370,7 +370,7 @@ msgstr "Tambah Tautan"
 #: admin/themes/default/plugins/config.php:14
 #: admin/themes/default/settings/edit-api.php:82
 #: admin/themes/default/settings/edit-item-type-elements.php:39
-#: admin/themes/default/settings/edit-search.php:41
+#: admin/themes/default/settings/edit-search.php:50
 #: admin/themes/default/settings/edit-security.php:15
 #: admin/themes/default/settings/edit-settings.php:15
 #: admin/themes/default/themes/config.php:16
@@ -559,7 +559,7 @@ msgstr "Mulailah dengan menambahkan koleksi pertama anda."
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
 #: admin/themes/default/items/edit.php:3 admin/themes/default/items/show.php:3
-#: application/models/Mixin/ElementText.php:779
+#: application/models/Mixin/ElementText.php:791
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
 msgstr "[Untitled]"
@@ -572,7 +572,7 @@ msgstr "Edit Koleksi #%s"
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Collection #%s"
-msgstr ""
+msgstr "Koleksi #%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
@@ -680,7 +680,7 @@ msgstr "Forum Dukungan"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Back to top"
-msgstr ""
+msgstr "Kembali ke bagian atas"
 
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
@@ -714,7 +714,7 @@ msgid "Omeka Admin"
 msgstr "Admin Omeka"
 
 #: admin/themes/default/common/header.php:41
-#: application/views/scripts/common/header.php:32
+#: application/views/scripts/common/header.php:38
 msgid "Skip to main content"
 msgstr "Lewati sampai ke konten utama"
 
@@ -740,7 +740,7 @@ msgstr "Keamanan"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: admin/themes/default/search/index.php:2
-#: application/views/helpers/SearchForm.php:56
+#: application/views/helpers/SearchForm.php:57
 #: application/views/scripts/search/index.php:2
 #: application/views/scripts/search/search-form.php:2
 msgid "Search"
@@ -756,7 +756,7 @@ msgstr "Elemen Tipe Item"
 
 #: admin/themes/default/common/settings-nav.php:32
 msgid "API"
-msgstr ""
+msgstr "API"
 
 #: admin/themes/default/common/users-nav.php:11
 #: application/forms/ChangePassword.php:80
@@ -766,7 +766,7 @@ msgstr "Ganti Password"
 #: admin/themes/default/common/users-nav.php:17
 #: admin/themes/default/users/api-keys.php:14
 msgid "API Keys"
-msgstr ""
+msgstr "Kunci API"
 
 #: admin/themes/default/element-sets/browse.php:16
 #: admin/themes/default/tags/browse.php:27
@@ -870,15 +870,15 @@ msgstr "Item"
 
 #: admin/themes/default/files/show.php:40
 msgid "Direct Links"
-msgstr ""
+msgstr "Tautan langsung"
 
 #: admin/themes/default/files/show.php:42
 msgid "Original"
-msgstr ""
+msgstr "Orisinil"
 
 #: admin/themes/default/files/show.php:44
 msgid "Fullsize"
-msgstr ""
+msgstr "Ukuran Penuh"
 
 #: admin/themes/default/files/show.php:45
 msgid "Thumbnail"
@@ -1017,11 +1017,11 @@ msgstr "Tambah Tipe Item"
 #, php-format
 msgid "%s%d item%s has no type."
 msgid_plural "%s%d items%s have no type."
-msgstr[0] ""
+msgstr[0] "%s%d items%s belum dimasukan ke tipe yang ada."
 
 #: admin/themes/default/item-types/browse.php:21
 msgid "All items have a type."
-msgstr ""
+msgstr "Semua item telah dimasukan ke tipe yang tersedia."
 
 #: admin/themes/default/item-types/browse.php:29
 msgid "Type Name"
@@ -1113,16 +1113,16 @@ msgstr "Hapus seluruh item yang dicari"
 #: admin/themes/default/items/batch-delete-all.php:18
 #, php-format
 msgid "All %d items matching the search filters above will be deleted."
-msgstr ""
+msgstr "semua %d items yang sesuai dengan parameter diatas akan dihapus."
 
 #: admin/themes/default/items/batch-delete-all.php:20
 #, php-format
 msgid "All %d items will be deleted."
-msgstr ""
+msgstr "All %d items akan dihapus."
 
 #: admin/themes/default/items/batch-delete-all.php:25
 msgid "Deletions will be processed in the background item by item."
-msgstr ""
+msgstr "Proses penghapusan akan dilakukan di latar belakang per item."
 
 #: admin/themes/default/items/batch-delete-all.php:36
 #: admin/themes/default/items/batch-delete.php:47
@@ -1145,22 +1145,22 @@ msgstr "Item terpilih akan dihapus."
 
 #: admin/themes/default/items/batch-edit-all.php:2
 msgid "Batch Edit All Searched Items"
-msgstr ""
+msgstr "Ubah masalh semua item yang dicari."
 
 #: admin/themes/default/items/batch-edit-all.php:20
 #, php-format
 msgid ""
 "Changes will be applied to all %d items matching the search filters above."
-msgstr ""
+msgstr "Perubahan akan diterapkan pada semua %d items sesuai dengan filter diatas."
 
 #: admin/themes/default/items/batch-edit-all.php:22
 #, php-format
 msgid "Changes will be applied to all %d items."
-msgstr ""
+msgstr "Perubahan akan diterapkan ke semua %d items."
 
 #: admin/themes/default/items/batch-edit-all.php:27
 msgid "Changes will be processed in the background item by item."
-msgstr ""
+msgstr "Proses perubahan akan dilakukan di latar belakang per item."
 
 #: admin/themes/default/items/batch-edit-common.php:2
 msgid "Item Metadata"
@@ -1276,21 +1276,21 @@ msgstr "Cari Item"
 #: admin/themes/default/items/browse.php:128
 #, php-format
 msgid "Select all %s results"
-msgstr ""
+msgstr "pilih semua %s hasil"
 
 #: admin/themes/default/items/browse.php:26
 #: admin/themes/default/items/browse.php:129
 msgid "items selected"
-msgstr ""
+msgstr "item terpilih"
 
 #: admin/themes/default/items/browse.php:42
 msgid "Select all rows"
-msgstr ""
+msgstr "Pilih semua baris"
 
 #: admin/themes/default/items/browse.php:63
 #, php-format
 msgid "Select item \"%s\""
-msgstr ""
+msgstr "Pilih item \"%s\""
 
 #: admin/themes/default/items/browse.php:108
 msgid "No Tags"
@@ -1320,7 +1320,7 @@ msgstr "Mulailah dengan menambah item pertama anda."
 #, php-format
 msgid "The query searched 1 item and returned no results."
 msgid_plural "The query searched %s items and returned no results."
-msgstr[0] ""
+msgstr[0] "Pencarian telah diselesaikan dengan query %s items dan tidak ditemukan hasil."
 
 #: admin/themes/default/items/browse.php:173
 msgid "refine your search"
@@ -1645,7 +1645,7 @@ msgid "Uninstall"
 msgstr "Cabut"
 
 #: admin/themes/default/plugins/browse.php:150
-#: application/forms/Install.php:178
+#: application/forms/Install.php:179
 msgid "Install"
 msgstr "Instalasikan"
 
@@ -1763,23 +1763,31 @@ msgid "Ok"
 msgstr "Ok"
 
 #: admin/themes/default/settings/edit-search.php:10
+msgid "Search Query Type"
+msgstr ""
+
+#: admin/themes/default/settings/edit-search.php:13
+msgid "Select the default query type used for simple search in Omeka."
+msgstr ""
+
+#: admin/themes/default/settings/edit-search.php:19
 msgid "Search Record Types"
 msgstr "Pencarian Tipe Rekod"
 
-#: admin/themes/default/settings/edit-search.php:13
+#: admin/themes/default/settings/edit-search.php:22
 msgid "Customize which types of records will be searchable in Omeka."
 msgstr "Sesuaikan tipe rekod mana yang akan dijadikan mudah dicari di Omeka."
 
-#: admin/themes/default/settings/edit-search.php:23
-#: admin/themes/default/settings/edit-search.php:42
+#: admin/themes/default/settings/edit-search.php:32
+#: admin/themes/default/settings/edit-search.php:51
 msgid "Index Records"
 msgstr "Indeks Rekod"
 
-#: admin/themes/default/settings/edit-search.php:26
+#: admin/themes/default/settings/edit-search.php:35
 msgid "Click on the \"Index Records\" button to re-index your records."
 msgstr "Klik pada tombol  \"Indeks Rekod\" indeks-ulang rekod anda."
 
-#: admin/themes/default/settings/edit-search.php:28
+#: admin/themes/default/settings/edit-search.php:37
 msgid ""
 "Indexing means to collect, parse, and store data to facilitate fast and "
 "accurate searches. Omeka will automatically index individual records as they"
@@ -2196,9 +2204,9 @@ msgstr "Ini akan menghapus kumpulan elemen dan semua elemen yang didelegasikan k
 #: application/controllers/PluginsController.php:184
 #: application/controllers/PluginsController.php:217
 #: application/controllers/PluginsController.php:325
-#: application/controllers/SettingsController.php:104
-#: application/controllers/SettingsController.php:140
-#: application/controllers/SettingsController.php:177
+#: application/controllers/SettingsController.php:106
+#: application/controllers/SettingsController.php:149
+#: application/controllers/SettingsController.php:186
 #: application/controllers/ThemesController.php:89
 #: application/controllers/UsersController.php:312
 #: application/libraries/Omeka/Controller/AbstractActionController.php:183
@@ -2460,31 +2468,31 @@ msgstr "Setelan umum telah diperbarui."
 msgid "The security settings have been updated."
 msgstr "Setelan keamanan telah diperbarui."
 
-#: application/controllers/SettingsController.php:114
+#: application/controllers/SettingsController.php:123
 msgid ""
 "You have changed which records are searchable in Omeka. Please re-index the "
 "records using the form below."
 msgstr "Anda telah mengubah rekod yang telah dijadikan dapat dicari dalam Omeka. Silahkan indeks-ulang rekod tersebut menggunakan formulir di bawah ini."
 
-#: application/controllers/SettingsController.php:121
+#: application/controllers/SettingsController.php:130
 msgid ""
 "Indexing records. This may take a while. You may continue administering your"
 " site."
 msgstr "Mengindeks rekod. Ini mungkin butuh waktu. Anda mungkin meneruskan mengelola situs anda."
 
-#: application/controllers/SettingsController.php:156
+#: application/controllers/SettingsController.php:165
 msgid "The item type elements were successfully changed!"
 msgstr "Elemen tipe item berhasil diubah!"
 
-#: application/controllers/SettingsController.php:183
+#: application/controllers/SettingsController.php:192
 msgid "The API configuration was successfully changed!"
 msgstr ""
 
-#: application/controllers/SettingsController.php:206
+#: application/controllers/SettingsController.php:215
 msgid "The ImageMagick directory path works."
 msgstr "Path direktori ImageMagick bekerja."
 
-#: application/controllers/SettingsController.php:207
+#: application/controllers/SettingsController.php:216
 msgid "The ImageMagick directory path does not work."
 msgstr "Path direktori ImageMagick tidak dapat bekerja."
 
@@ -2794,7 +2802,7 @@ msgid ""
 "setting. You run the risk of splitting tags that contain the old delimiter."
 msgstr "Pisahkan tag menggunakan karakter atau string ini. Berhati-hatilah saat mengganti setelan ini. Anda beresiko membagi tag yang mengandung pemisah lama."
 
-#: application/forms/GeneralSettings.php:59 application/forms/Install.php:174
+#: application/forms/GeneralSettings.php:59 application/forms/Install.php:175
 msgid "ImageMagick Directory Path"
 msgstr "Path Direktori ImageMagick"
 
@@ -2859,11 +2867,11 @@ msgstr "Batasi jumlah item yang ditampilkan per halaman pada antarmuka publik."
 msgid "Check box to show metadata elements with no text."
 msgstr "Centang kotak untuk menampilkan elemen tanpa teks."
 
-#: application/forms/Install.php:185
+#: application/forms/Install.php:186
 msgid "Default Superuser Account"
 msgstr "Akun Baku Superuser"
 
-#: application/forms/Install.php:195
+#: application/forms/Install.php:196
 msgid "Site Settings"
 msgstr "Setelan Situs"
 
@@ -3230,11 +3238,11 @@ msgstr "Ramban berdasarkan Tag"
 msgid "No tags are available."
 msgstr "Tidak ada tag tersedia."
 
-#: application/models/Builder/Item.php:261
+#: application/models/Builder/Item.php:263
 msgid "Must specify a file transfer type when attaching files to an item!"
 msgstr "Harus menspesifikasikan sebuah tipe transfer file ketika melampirkan file ke sebuah item!"
 
-#: application/models/Collection.php:118
+#: application/models/Collection.php:120
 msgid "Cannot associate the collection with an unsaved user."
 msgstr "Tidak dapat mengasosiasikan koleksi tersebut dengan sebuah pengguna yang belum tersimpan."
 
@@ -3276,57 +3284,57 @@ msgstr "Semua teks elemen harus memiliki sebuah tipe rekod."
 msgid "Invalid element ID."
 msgstr "ID elemen cacat."
 
-#: application/models/File.php:235
+#: application/models/File.php:237
 msgid "Cannot get the local path for a stored file."
 msgstr "Tidak dapat mengambil path lokal untuk menyimpan file."
 
-#: application/models/File.php:452
+#: application/models/File.php:454
 #, php-format
 msgid "\"%s\" is not a valid file derivative."
 msgstr "\"%s\" bukan turunan file yang valid."
 
-#: application/models/Item.php:331
+#: application/models/Item.php:333
 msgid ""
 "Files cannot be attached to an item that is not persistent in the database!"
 msgstr "File tidak dapat dilampirkan ke sebuah item yang tidak tetap di basisdata!"
 
 #. / Chicago-style item citation: two authors
-#: application/models/Item.php:466
+#: application/models/Item.php:468
 #, php-format
 msgid "%1$s and %2$s"
 msgstr ""
 
 #. / Chicago-style item citation: three authors
-#: application/models/Item.php:470
+#: application/models/Item.php:472
 #, php-format
 msgid "%1$s, %2$s, and %3$s"
 msgstr ""
 
 #. / Chicago-style item citation: more than three authors
-#: application/models/Item.php:474
+#: application/models/Item.php:476
 #, php-format
 msgid "%s et al."
 msgstr ""
 
 #. / Chicago-style item citation: access date and URL
-#: application/models/Item.php:492
+#: application/models/Item.php:494
 #, php-format
 msgid "accessed %1$s, %2$s."
 msgstr ""
 
-#: application/models/Item.php:509
+#: application/models/Item.php:511
 msgid "Cannot add an existing file to an item!"
 msgstr "Tidak dapat menambahkan file yang ada ke sebuah item!"
 
-#: application/models/Item.php:513
+#: application/models/Item.php:515
 msgid "File must be valid before it can be associated with an item!"
 msgstr "File harus valid sebelum ia diasosiasikan dengan sebuah item!"
 
-#: application/models/Item.php:538
+#: application/models/Item.php:540
 msgid "Invalid item type."
 msgstr ""
 
-#: application/models/Item.php:541
+#: application/models/Item.php:543
 msgid "Invalid collection."
 msgstr ""
 
