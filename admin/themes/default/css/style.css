@@ -304,7 +304,7 @@ img { border: 0; }
         }
 
 
-        .inputs input[type=text], .inputs input[type=password], .inputs textarea {
+        .inputs input[type=text], .inputs input[type=password], .inputs input[type=email], .inputs textarea {
             width: 100%;
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
