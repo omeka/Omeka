@@ -46,11 +46,12 @@ echo flash();
                         <?php endif; ?>
                         <?php echo link_to_collection(); ?>
                         <?php if (!$collection->public) echo __('(Private)'); ?>
-                        <?php if (is_allowed($collection, 'edit')): ?>
                         <ul class="action-links">
                             <li><?php echo link_to_collection(__('Edit'), array('class'=>'edit'), 'edit'); ?></li>
+							<?php if (is_allowed($collection, 'delete')): ?>
+								<li><?php echo link_to_collection(__('Delete'), array('class' => 'delete-confirm'), 'delete-confirm'); ?></li>
+							<?php endif; ?>
                         </ul>
-                        <?php endif; ?>
                         <?php fire_plugin_hook('admin_collections_browse_each', array('collection' => $collection, 'view' => $this)); ?>
                     </td>
                     <td>
