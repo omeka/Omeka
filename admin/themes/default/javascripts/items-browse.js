@@ -111,4 +111,15 @@ Omeka.ItemsBrowse = {};
             batchEditSubmit.prop('disabled', !checked);
         }
     };
+
+    Omeka.ItemsBrowse.quickFilter = function () {
+        var quickFilterSelect = $('select.quick-filter');
+        quickFilterSelect.change(function() {
+            var url = $(this).val();
+            if (url) {
+                window.location = url;
+            } 
+            return false;
+        });
+    }
 })(jQuery);

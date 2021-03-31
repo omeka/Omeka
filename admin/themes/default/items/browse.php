@@ -159,6 +159,7 @@ echo item_search_filters();
         <?php echo js_escape(__('Hide Details')); ?>
     ]);
     Omeka.addReadyCallback(Omeka.ItemsBrowse.setupBatchEdit);
+	Omeka.addReadyCallback(Omeka.ItemsBrowse.quickFilter);
     </script>
 
 <?php else: ?>
