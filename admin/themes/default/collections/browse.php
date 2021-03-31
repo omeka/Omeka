@@ -3,6 +3,7 @@ $pageTitle = __('Browse Collections') . ' ' .  __('(%s total)', $total_results);
 $totalItemsWithoutCollection = get_db()->getTable('Item')->count(array('collection' => 0));
 echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections'));
 echo flash();
+echo item_search_filters();
 ?>
 
 <?php if (total_records('Collection') > 0): ?>
@@ -12,6 +13,7 @@ echo flash();
             <?php echo __('Add a Collection'); ?>
         </a>
     <?php endif; ?>
+    <?php echo common('quick-filters', array(), 'collections'); ?>
     <p class="not-in-collections">
     <?php if ($totalItemsWithoutCollection):
         $withoutCollectionMessage = __(plural('%s%d item%s has no collection.', "%s%d items%s aren't in a collection.",
