@@ -91,7 +91,6 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
         $html = $divWrap ? '<div class="field" id="element-' . html_escape($element->id) . '" aria-live="polite">' : '';
 
         $html .= '<fieldset>';
-        $html .= '<legend class="visually-hidden">' . $components['label'] . '</legend>';
 
         $html .= '<div class="two columns alpha">';
         $html .= $components['label'];

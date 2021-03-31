@@ -78,7 +78,7 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
 
         $html = '<div class="input-block">'
               . '<div class="input">'
-              . "<label for='{$inputNameStemId}-text' class='visually-hidden'>"
+              . "<label for='{$inputNameStemId}-text'>"
               . __('Text input')
               . ' ' . $displayIndex
               . '</label>'

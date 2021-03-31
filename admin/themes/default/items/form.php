@@ -39,7 +39,7 @@ jQuery(document).bind('omeka:elementformload', function (event) {
         <?php if (!empty($tabContent)): ?>
             <div id="<?php echo text_to_id(html_escape($tabName)); ?>-metadata">
             <fieldset class="set">
-              <legend class="visually-hidden"><?php echo html_escape(__($tabName)); ?></legend>
+              <legend><?php echo html_escape(__($tabName)); ?></legend>
                 <h2><?php echo html_escape(__($tabName)); ?></h2>
                 <?php echo $tabContent; ?>
             </fieldset>
