@@ -2024,6 +2024,19 @@ function item_search_filters(array $params = null)
 }
 
 /**
+ * Get a list of the current search collection filters in use.
+ *
+ * @package Omeka\Function\Search
+ * @uses Omeka_View_Helper_SearchFilters::searchFilters()
+ * @params array $params Params to override the ones read from the request.
+ * @return string
+ */
+function collection_search_filters(array $params = null)
+{
+    return get_view()->collectionSearchFilters($params);
+}
+
+/**
  * Get metadata for a record.
  *
  * @package Omeka\Function\View
