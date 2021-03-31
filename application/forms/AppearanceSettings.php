@@ -46,7 +46,7 @@ class Omeka_Form_AppearanceSettings extends Omeka_Form
 
         $this->addElement('text', 'recent_admin', array(
             'label' => __('Recents Items/Collections (admin)'),
-            'description' => __('Limit the number of recent Items and Collections displayed in the administrative inteface dashboard.'),
+            'description' => __('Limit the number of recent Items and Collections displayed in the administrative inteface.'),
             'validators' => array('Digits'),
             'required' => true,
         ));
