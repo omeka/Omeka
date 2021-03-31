@@ -74,7 +74,7 @@ endif; ?>
     foreach (loop('collections') as $collection):
 ?>
     <div class="recent-row">
-        <p class="recent"><?php echo link_to_collection(); ?></p>
+        <p class="recent"><?php echo link_to_collection() . " (" . metadata($collection, 'total_items') . ")"; ?></p>
         <?php if (is_allowed($collection, 'edit')): ?>
         <p class="dash-edit"><?php echo link_to_collection(__('Edit'), array(), 'edit'); ?></p>
         <?php endif; ?>
