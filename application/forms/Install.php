@@ -15,6 +15,7 @@ class Omeka_Form_Install extends Omeka_Form
     const DEFAULT_FULLSIZE_CONSTRAINT = 800;
     const DEFAULT_THUMBNAIL_CONSTRAINT = 200;
     const DEFAULT_SQUARE_THUMBNAIL_CONSTRAINT = 200;
+    const DEFAULT_RECENT_ADMIN = 5;
     const DEFAULT_PER_PAGE_ADMIN = 10;
     const DEFAULT_PER_PAGE_PUBLIC = 10;
     const DEFAULT_SHOW_EMPTY_ELEMENTS = false;
@@ -148,6 +149,14 @@ class Omeka_Form_Install extends Omeka_Form
             'required' => true
         ));
 
+        $this->addElement('text', 'recent_admin', array(
+            'label' => __('Recent Items/Collections (admin)'),
+            'description' => __('Limit the number of recent Items and Collections displayed in the administrative inteface.'),
+            'value' => self::DEFAULT_RECENT_ADMIN,
+            'validators' => array('Digits'),
+            'required' => true
+        ));
+
         $this->addElement('text', 'per_page_admin', array(
             'label' => __('Items Per Page (admin)'),
             'description' => __('Limit the number of items displayed per page in the administrative interface.'),
@@ -190,8 +199,8 @@ class Omeka_Form_Install extends Omeka_Form
             array('administrator_email', 'site_title', 'description',
                   'copyright', 'author', 'tag_delimiter', 'fullsize_constraint',
                   'thumbnail_constraint', 'square_thumbnail_constraint',
-                  'per_page_admin', 'per_page_public', 'show_empty_elements',
-                  'path_to_convert'),
+                  'recent_admin', 'per_page_admin', 'per_page_public', 
+                  'show_empty_elements', 'path_to_convert'),
             'site_settings',
             array('legend' => __('Site Settings'))
         );
