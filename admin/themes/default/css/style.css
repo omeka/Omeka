@@ -246,7 +246,7 @@ img { border: 0; }
         font-family: monospace;
     }
 
-    input[type=text], input[type=password], input[type=email] { {
+    input[type=text], input[type=password], input[type=email] {
         height: 30px;
         border: 1px solid #d8d8d8;
         -webkit-border-radius: 0;
