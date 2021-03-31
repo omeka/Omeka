@@ -1,9 +1,10 @@
 <?php
+queue_js_file('collections-browse');
 $pageTitle = __('Browse Collections') . ' ' .  __('(%s total)', $total_results);
 $totalItemsWithoutCollection = get_db()->getTable('Item')->count(array('collection' => 0));
 echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections'));
 echo flash();
-echo item_search_filters();
+echo collection_search_filters();
 ?>
 
 <?php if (total_records('Collection') > 0): ?>
@@ -13,7 +14,7 @@ echo item_search_filters();
             <?php echo __('Add a Collection'); ?>
         </a>
     <?php endif; ?>
-    <?php echo common('quick-filters', array(), 'collections'); ?>
+	<?php echo common('quick-filters', array(), 'collections'); ?>
     <p class="not-in-collections">
     <?php if ($totalItemsWithoutCollection):
         $withoutCollectionMessage = __(plural('%s%d item%s has no collection.', "%s%d items%s aren't in a collection.",
@@ -48,13 +49,25 @@ echo item_search_filters();
                         <?php endif; ?>
                         <?php echo link_to_collection(); ?>
                         <?php if (!$collection->public) echo __('(Private)'); ?>
+                        <?php if (is_allowed($collection, 'edit')): ?>
                         <ul class="action-links">
                             <li><?php echo link_to_collection(__('Edit'), array('class'=>'edit'), 'edit'); ?></li>
-							<?php if (is_allowed($collection, 'delete')): ?>
-								<li><?php echo link_to_collection(__('Delete'), array('class' => 'delete-confirm'), 'delete-confirm'); ?></li>
-							<?php endif; ?>
+                            <?php if (is_allowed($collection, 'delete')): ?>
+                                <li><?php echo link_to_collection(__('Delete'), array('class' => 'delete-confirm'), 'delete-confirm'); ?></li>
+                            <?php endif; ?>
                         </ul>
+                        <?php endif; ?>
                         <?php fire_plugin_hook('admin_collections_browse_each', array('collection' => $collection, 'view' => $this)); ?>
+                        <div class="details">
+                            <p>
+                                <strong><?php echo __('Description'); ?>:</strong>
+                                <?php echo snippet_by_word_count(metadata('collection', array('Dublin Core', 'Description')), 40); ?>
+                            </p>
+                            <p>
+                                <strong><?php echo __('Subject'); ?>:</strong>
+                                <?php echo metadata('collection', array('Dublin Core', 'Subject'), array('all'=>true, 'delimiter'=>' | ')); ?>
+                            </p>
+                        </div>
                     </td>
                     <td>
                         <?php if ($collection->hasContributor()): ?>
@@ -78,7 +91,17 @@ echo item_search_filters();
         <?php if (is_allowed('Collections', 'add')): ?>
             <a href="<?php echo html_escape(url('collections/add')); ?>" class="small green button"><?php echo __('Add a Collection'); ?></a>
         <?php endif; ?>
+		<?php echo common('quick-filters', array(), 'collections'); ?>
         <p class="not-in-collections"><?php echo $withoutCollectionMessage; ?></p>
+
+    <script type="text/javascript">
+    Omeka.addReadyCallback(Omeka.CollectionsBrowse.setupDetails, [
+        <?php echo js_escape(__('Details')); ?>,
+        <?php echo js_escape(__('Show Details')); ?>,
+        <?php echo js_escape(__('Hide Details')); ?>
+    ]);
+    </script>
+
     <?php else: ?>
         <p><?php echo __('There are no collections on this page.'); ?> <?php echo link_to('collections', null, __('View All Collections')); ?></p>
     <?php endif; ?>
