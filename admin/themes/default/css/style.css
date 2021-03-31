@@ -1547,14 +1547,14 @@ header nav {
     margin-bottom: 20px;
 }
 
- #item-filters ul {
+ #item-filters ul, #collection-filters ul {
     clear: both;
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
-    #item-filters li {
+    #item-filters li, #collection-filters li {
         display: inline-block;
         background: url('../images/search.png') no-repeat;
         padding: 0 0 0 21px;
