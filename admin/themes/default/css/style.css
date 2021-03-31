@@ -1351,7 +1351,7 @@ header {
 button.remove_search {
   margin-bottom: 40px; }
 
-#submit_search_advanced {
+.panel #submit_search_advanced {
   clear: both;
   margin: 20px 0; }
 
