@@ -20,7 +20,7 @@ Omeka.CollectionsBrowse = {};
 
         var toggleList = '<a href="#" class="toggle-all-details small blue button">' + showDetailsText + '</a>';
 
-        $('.advanced-search-link').before(toggleList);
+        $('.quick-filter-wrapper').before(toggleList);
 
         // Toggle collection details.
         var detailsShown = false;
