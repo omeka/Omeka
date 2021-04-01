@@ -2450,8 +2450,9 @@ form.form-inline.editableform {
     list-style-type: none;
     padding: 0; }
   #current-theme ul.details {
-    padding: .5em .5em .5em 10px;
     list-style: none; }
+  #current-theme li {
+    padding: .5em .5em .5em 10px; }
 
 .current-theme-label {
   color: #8C3E38; }
