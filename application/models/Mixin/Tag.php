@@ -139,6 +139,14 @@ class Mixin_Tag extends Omeka_Record_Mixin_AbstractMixin
             $removed[] = $this->_tagTable->find($tagging->tag_id);
             $tagging->delete();
         }
+        
+        $db = $this->_record->getDb();
+		foreach ($tags as $tag) {
+			$count = $this->_joinTable->count(array('tag' => $tag));
+			if ($count == 0) {
+				$db->delete($db->Tags, array('name = ?' => $tag));
+			}
+		}
 
         $nameForHook = strtolower($this->_type);
         fire_plugin_hook("remove_{$nameForHook}_tag", array('record' => $this->_record, 'removed' => $removed));
