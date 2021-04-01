@@ -25,8 +25,6 @@
 		    text-align: center;
 			content: "\f047";
 			opacity: 0.5;
-			
-			top: -4px;
 			position: relative;
 			
 			#exhibit-page-form & {
@@ -107,6 +105,10 @@
     -moz-border-radius: 2px;
     border-radius: 2px;
     text-shadow: none;
+
+    * {
+        color: #fff;
+    }
 }
 .deleted a:link, 
 .deleted a:visited {
@@ -147,7 +149,7 @@
 .delete-element { display: inline-block; }
 .delete-element:after { content: "\f00d"; }
 
-.undo-delete { display: none; }
+.ui-sortable .sortable-item > a.undo-delete { display: none; }
 .undo-delete:after {
     content: "\f112";
     font-size: 12px;

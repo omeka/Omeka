@@ -616,7 +616,6 @@ button.ui-dialog-titlebar-close {
     text-align: center;
     content: "\f047";
     opacity: 0.5;
-    top: -4px;
     position: relative; }
     #exhibit-page-form .ui-sortable .sortable-item:before {
       top: 0px;
@@ -683,6 +682,8 @@ button.ui-dialog-titlebar-close {
   -moz-border-radius: 2px;
   border-radius: 2px;
   text-shadow: none; }
+  .deleted.sortable-item * {
+    color: #fff; }
 
 .deleted a:link,
 .deleted a:visited {
@@ -725,7 +726,7 @@ button.ui-dialog-titlebar-close {
 .delete-element:after {
   content: "\f00d"; }
 
-.undo-delete {
+.ui-sortable .sortable-item > a.undo-delete {
   display: none; }
 
 .undo-delete:after {
