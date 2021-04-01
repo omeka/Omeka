@@ -17,6 +17,10 @@
     margin-bottom: 20px;
     float: left;
 
+    h2 {
+        margin-bottom: 0;
+    }
+
 	ul {
 	    list-style-type: none;
 	    padding: 0;
@@ -34,8 +38,14 @@
 	color: #8C3E38;
 }
 
+.themes .group .theme { 
+    min-height: 300px; 
 
-.themes .group .theme { height: 300px; }
+    @include screen-sm {
+        min-height: 0;
+        margin-bottom: 40px;
+    }
+}
 
 .themes .theme .author {
     font-style: italic;
@@ -71,3 +81,16 @@
 }
 
 .theme-file .button { float: left; }
+
+.meta h3 {
+    margin-bottom: 0;
+}
+
+.themes .theme .crop,
+.use-theme {
+    @include screen-sm {
+        width: calc(50% - 5px);
+        float: left;
+        margin-right: 10px;    
+    }
+}

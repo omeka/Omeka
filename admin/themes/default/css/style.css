@@ -229,7 +229,8 @@ hr {
   .container .four.columns,
   .container .three.columns,
   .container .two.columns {
-    width: 100%; }
+    width: 100%;
+    margin: 0; }
     #login .container .six.columns, #login
     .container .five.columns, #login
     .container .four.columns, #login
@@ -2446,6 +2447,8 @@ form.form-inline.editableform {
   padding-bottom: 20px;
   margin-bottom: 20px;
   float: left; }
+  #current-theme h2 {
+    margin-bottom: 0; }
   #current-theme ul {
     list-style-type: none;
     padding: 0; }
@@ -2458,7 +2461,11 @@ form.form-inline.editableform {
   color: #8C3E38; }
 
 .themes .group .theme {
-  height: 300px; }
+  min-height: 300px; }
+  @media (min-width: 768px) and (max-width: 991px) {
+    .themes .group .theme {
+      min-height: 0;
+      margin-bottom: 40px; } }
 
 .themes .theme .author {
   font-style: italic;
@@ -2493,5 +2500,15 @@ form.form-inline.editableform {
 
 .theme-file .button {
   float: left; }
+
+.meta h3 {
+  margin-bottom: 0; }
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .themes .theme .crop,
+  .use-theme {
+    width: calc(50% - 5px);
+    float: left;
+    margin-right: 10px; } }
 
 /*# sourceMappingURL=style.css.map */
