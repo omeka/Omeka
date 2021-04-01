@@ -2267,6 +2267,9 @@ ul.details {
   .version-notification .flash {
     margin-bottom: 0; }
 
+.browse-tags .content-wrapper {
+  overflow: hidden; }
+
 .tags h3 {
   margin: 0; }
 

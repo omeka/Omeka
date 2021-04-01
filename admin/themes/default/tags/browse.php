@@ -14,27 +14,37 @@ echo flash();
 
 ?>
 
-<form id="search-tags" method="GET" class="ten columns alpha omega">
+<?php if ($canEdit): ?>
+<section class="three columns alpha">
+    <h2><?php echo __('Editing Tags'); ?></h2>
+    
+    <ol>
+        <li><?php echo __('To view all items with a tag, click the number.'); ?></li>
+        <li><?php echo __('To edit the tag name, click the name and begin editing, and hit "enter" to save. To cancel an edit, click the ESC key or click away from the tag.'); ?></li>
+        <li><?php echo __('To delete a tag, click the X. Deleting a tag will not delete the tagged items.'); ?></li>
+    </ol>
+</section>    
+<?php endif; ?>
+
+<?php $tagsSectionClass = ($canEdit) ? 'seven' : 'ten alpha'; ?> 
+
+<form id="search-tags" method="GET" class="<?php echo $tagsSectionClass; ?> columns omega">
     <input type="text" name="like" aria-label="<?php echo __('Search tags'); ?>"/> 
     <button class="green button"><?php echo __('Search tags'); ?></button>
     <?php if(isset($params['type'])): ?>
     <input type="hidden" name="type" value="<?php echo $params['type']; ?>"/>
     <?php endif; ?>
     
-    <ul class="quick-filter-wrapper">
-        <li><a href="#"><?php echo __('Record Types'); ?></a>
-        <ul class="dropdown">
-            <li><span class="quick-filter-heading"><?php echo __('Record Types') ?></span></li>
-            <li><a href="<?php echo $this->url(); ?>"><?php echo __('All'); ?></a></li>
-            <?php foreach($record_types as $record_type): ?>
-            <li><a href="<?php echo url('tags', array('type' => $record_type)); ?>"><?php echo __($record_type); ?></a></li>
-            <?php endforeach; ?>
-        </ul>
-        </li>
-    </ul>
+    <select class="quick-filter">
+        <option><?php echo __('Record Types'); ?></option>
+        <option value="<?php echo $this->url(); ?>"><?php echo __('All'); ?></option>
+        <?php foreach($record_types as $record_type): ?>
+        <option value="<?php echo url('tags', array('type' => $record_type)); ?>"><?php echo __($record_type); ?></option>
+        <?php endforeach; ?>
+        </select>
 </form>
 
-<div id="search-filters" class="ten columns alpha omega">
+<div id="search-filters" class="<?php echo $tagsSectionClass; ?> columns omega">
     <ul>
         <li><?php echo __('Record Type') . ': ' . __($browse_for); ?></li>
         <?php if (!empty($params['like'])): ?><li><?php echo __('Name') .' '. __('contains') . ': "' . html_escape($params['like']) .'"'; ?></li><?php endif; ?>
@@ -42,9 +52,7 @@ echo flash();
     <?php if (!empty($params['like']) || !empty($params['type'])): ?><a href="<?php echo $this->url() ?>" class="blue small button"><?php echo __('Reset results') ?></a><?php endif; ?>
 </div>
 
-<section class="ten columns alpha omega">
-	<h2><?php echo __('Tags'); ?></h2>
-</section>
+<section class="<?php echo $tagsSectionClass; ?> columns omega">
 
 <?php if ($total_results): ?>
 
@@ -96,35 +104,22 @@ echo flash();
         <?php endforeach; ?>
         </ul>
         <?php fire_plugin_hook('admin_tags_browse', array('tags' => $tags, 'view' => $this)); ?>
-    </section>
     <?php echo $paginationLinks; ?>
 <?php else: ?>
     <p><?php echo __('There are no tags to display. You must first tag some items.'); ?></p>
 <?php endif; ?>
+</section>
 
-<?php if ($canEdit): ?>
-<hr/>
-<section>
-    <h2><?php echo __('Editing Tags'); ?></h2>
-    
-    <ol>
-        <li><?php echo __('To view all items with a tag, click the number.'); ?></li>
-        <li><?php echo __('To edit the tag name, click the name and begin editing, and hit "enter" to save. To cancel an edit, click the ESC key or click away from the tag.'); ?></li>
-        <li><?php echo __('To delete a tag, click the X. Deleting a tag will not delete the tagged items.'); ?></li>
-    </ol>
-</section>    
-<?php endif; ?>
-
-
-<?php if($canEdit): ?>
 <script type="text/javascript">
 jQuery(document).ready(function () {
+    Omeka.addReadyCallback(Omeka.quickFilter);
+    <?php if($canEdit): ?>
     var editableURL = '<?php echo url('tags/rename-ajax'); ?>';
     var tagURLBase = '<?php echo url('items/browse?tags='); ?>';
     var csrfToken = <?php echo js_escape($csrfToken); ?>;
     Omeka.Tags.enableEditInPlace(editableURL, tagURLBase, csrfToken);
+    <?php endif; ?>
 });
 </script>
-<?php endif; ?>
 
 <?php echo foot(); ?>
