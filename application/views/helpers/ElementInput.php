@@ -45,6 +45,7 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
 
         $inputNameStem = "Elements[" . $this->_element->id . "][$index]";
         $inputNameStemId = "Elements-" . $this->_element->id . "-" . $index;
+        $displayIndex = $index + 1;
 
         $components = array(
             'input' => $this->_getInputComponent($inputNameStem, $inputNameStemId, $value),
@@ -75,7 +76,7 @@ class Omeka_View_Helper_ElementInput extends Zend_View_Helper_Abstract
         $html = '<div '
               . 'class="input-block" '
               . 'id="' . $inputNameStemId .'" '
-              . 'aria-label="' . $index+1 . '" '
+              . 'aria-label="' . $displayIndex . '" '
               . 'role="group" '
               . 'aria-labelledby="label_element_' . $this->_element->id . ' ' . $inputNameStemId . '">'
               . '<div class="input">'
