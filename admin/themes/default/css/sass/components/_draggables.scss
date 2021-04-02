@@ -40,11 +40,9 @@
 		    white-space: nowrap;
 		    overflow: hidden;
 		    text-overflow: ellipsis;
+            line-height: 1.5;
+            vertical-align: top;
 		}		
-		input {
-	        margin: 0;
-	    }
-	    input[type=text] { margin-bottom: 0; }
 	}
     
     .action-links {
@@ -70,6 +68,11 @@
     font-size: 14px;
     line-height: 1.5em;
     margin: 0;
+
+    input {
+        margin: 0;
+    }
+    input[type=text] { margin-bottom: 0; }
 }
 
 .ui-sortable-highlight:empty {

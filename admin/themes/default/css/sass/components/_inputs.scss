@@ -132,3 +132,16 @@ input[type="checkbox"] {
     box-shadow: none;
     min-height: 0;
 }
+
+.quick-filter,
+select {
+    -webkit-appearance: none;
+    appearance: none;
+    padding: 10px 36px 10px 9px;
+    border: 1px solid #DCDCDC;
+    border-radius: 3px;
+    line-height: 16px;
+    text-align: left;
+    background: url('../images/dropdown-arrow.png') no-repeat center right;
+    background-color: #fff;
+}

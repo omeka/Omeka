@@ -78,6 +78,10 @@ button {
 	        background: darken(#EEF3FA, 5%);
 	        outline: none;
         }
+
+        * {
+            color: #003576;
+        }
     }
     &.red {
 	    color: #B00D00;
@@ -90,6 +94,10 @@ button {
 	        background: darken(#F9E8E7, 5%);
 	        outline: none;
         }
+
+        * {
+            color: #B00D00;
+        }
     }
     &.green {
 	    color: darken(#519E00, 5%);
@@ -101,6 +109,10 @@ button {
 	        border-color: rgba(#519E00, 0.65);
 	        background: darken(#EEF6E6, 5%);
 	        outline: none;
+        }
+
+        * {
+            color: darken(#519E00, 5%);
         }
     }
 }

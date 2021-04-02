@@ -462,6 +462,11 @@ button {
       border-color: rgba(0, 53, 118, 0.65);
       background: #dae5f4;
       outline: none; }
+    span.button.blue *,
+    a.button.blue *,
+    input[type=submit].blue *,
+    button.blue * {
+      color: #003576; }
   span.button.red,
   a.button.red,
   input[type=submit].red,
@@ -479,6 +484,11 @@ button {
       border-color: rgba(176, 13, 0, 0.65);
       background: #f4d4d3;
       outline: none; }
+    span.button.red *,
+    a.button.red *,
+    input[type=submit].red *,
+    button.red * {
+      color: #B00D00; }
   span.button.green,
   a.button.green,
   input[type=submit].green,
@@ -496,6 +506,11 @@ button {
       border-color: rgba(81, 158, 0, 0.65);
       background: #e1efd3;
       outline: none; }
+    span.button.green *,
+    a.button.green *,
+    input[type=submit].green *,
+    button.green * {
+      color: #448500; }
 
 /* jQuery UI overrides
 ================================================== */
@@ -627,11 +642,9 @@ button.ui-dialog-titlebar-close {
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; }
-  .ui-sortable .sortable-item input {
-    margin: 0; }
-  .ui-sortable .sortable-item input[type=text] {
-    margin-bottom: 0; }
+    text-overflow: ellipsis;
+    line-height: 1.5;
+    vertical-align: top; }
 .ui-sortable .action-links {
   display: inline-block;
   float: right; }
@@ -651,6 +664,12 @@ button.ui-dialog-titlebar-close {
   font-size: 14px;
   line-height: 1.5em;
   margin: 0; }
+  .sortable-item input,
+  .add-new input {
+    margin: 0; }
+  .sortable-item input[type=text],
+  .add-new input[type=text] {
+    margin-bottom: 0; }
 
 .ui-sortable-highlight:empty {
   background: rgba(0, 0, 0, 0.04);
@@ -895,6 +914,18 @@ input[type="checkbox"] {
   margin-bottom: 0;
   box-shadow: none;
   min-height: 0; }
+
+.quick-filter,
+select {
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 10px 36px 10px 9px;
+  border: 1px solid #DCDCDC;
+  border-radius: 3px;
+  line-height: 16px;
+  text-align: left;
+  background: url("../images/dropdown-arrow.png") no-repeat center right;
+  background-color: #fff; }
 
 header {
   left: 0;
@@ -1772,16 +1803,6 @@ ul.details {
 #item-metadata .remove-element {
   display: none; }
 
-.quick-filter {
-  -webkit-appearance: none;
-  appearance: none;
-  padding: 10px 36px 10px 9px;
-  border: 1px solid #DCDCDC;
-  border-radius: 3px;
-  line-height: 16px;
-  text-align: left;
-  background: url("../images/dropdown-arrow.png") no-repeat center right; }
-
 .items .table-actions {
   background: #fff;
   border: 1px solid #D8D8D8;
@@ -1886,7 +1907,8 @@ ul.details {
   margin: 0 10px 0 0; }
 
 .item-file img {
-  max-width: 100%; }
+  max-width: 100%;
+  vertical-align: bottom; }
 
 #item-images img {
   vertical-align: bottom; }
