@@ -623,14 +623,15 @@ button.ui-dialog-titlebar-close {
   cursor: move; }
   .ui-sortable .sortable-item:before {
     display: inline-block;
-    font-family: "FontAwesome";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
     font-size: 16px;
     height: 20px;
     width: 20px;
     margin-right: 5px;
     text-indent: 0;
     text-align: center;
-    content: "\f047";
+    content: "\f0b2";
     opacity: 0.5;
     position: relative; }
     #exhibit-page-form .ui-sortable .sortable-item:before {
@@ -717,7 +718,8 @@ button.ui-dialog-titlebar-close {
 .delete-element:after,
 .undo-delete:after {
   display: inline-block;
-  font-family: "FontAwesome";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
   font-size: 16px;
   height: 20px;
   width: 20px;
@@ -1029,7 +1031,8 @@ header {
   text-indent: -9999px; }
   #mobile-navbar-toggle:after {
     content: "\f141";
-    font-family: "FontAwesome";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
     font-size: 21px;
     display: block;
     text-indent: 0;
@@ -1103,7 +1106,8 @@ header {
 
 .pagination_next a:after,
 .pagination_previous a:after {
-  font-family: "FontAwesome";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
   position: absolute;
   left: 0;
   padding: 9px 0;
@@ -1254,7 +1258,8 @@ header {
     text-shadow: none;
     border-left: 1px solid #d8d8d8; }
     #search-form button:after {
-      font-family: "FontAwesome";
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
       content: "\f002";
       position: absolute;
       left: 0;
@@ -1288,7 +1293,8 @@ header {
   border-left: 1px solid #d8d8d8; }
   #advanced-search:after {
     content: "\f141";
-    font-family: "FontAwesome";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
     font-size: 16px;
     display: block;
     text-indent: 0;
@@ -1479,7 +1485,8 @@ button.remove_search {
       transition: 0.5s all; }
       #content-nav-toggle:after {
         content: "\f0d7";
-        font-family: "FontAwesome";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
         font-size: 21px;
         display: block;
         text-indent: 0;
@@ -1589,7 +1596,8 @@ td {
 h3.title {
   margin: 0 0 5px; }
   h3.title.featured:after {
-    font-family: "FontAwesome";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
     content: '\f005';
     width: 24px;
     height: 24px;
@@ -2389,7 +2397,8 @@ form.form-inline.editableform {
   -webkit-transform: rotate(45deg);
   -moz-transform: rotate(45deg);
   transform: rotate(45deg);
-  font-family: "FontAwesome";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
   height: 100%;
   width: 100%;
   background-color: #519e00;

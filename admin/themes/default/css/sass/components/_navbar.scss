@@ -136,14 +136,15 @@ header {
     
     &:after {
         content: "\f141";
-	    font-family: "FontAwesome";
+	    font-family: "Font Awesome 5 Free";
+		font-weight: 900;
 	    font-size: 21px;
 	    display: block;
 	    text-indent: 0;
 	    text-align: center;
 	    margin: -0.75em 0 0 0em;;
 	}
-    
+
     @include screen-gtxs {
 	    display: none;
     }

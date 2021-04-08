@@ -57,7 +57,8 @@
         border-left: 1px solid #d8d8d8;
         
         &:after {
-            font-family: "FontAwesome";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
             content: "\f002";
             position: absolute;
             left: 0;
@@ -97,7 +98,8 @@
 
 	&:after {
 	    content: "\f141";
-	    font-family: "FontAwesome";
+	    font-family: "Font Awesome 5 Free";
+        font-weight: 900;
 	    font-size: 16px;
 	    display: block;
 	    text-indent: 0;

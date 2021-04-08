@@ -90,7 +90,8 @@ h3.title {
 	
 	&.featured {
 		&:after {
-			font-family: "FontAwesome";
+			font-family: "Font Awesome 5 Free";
+            font-weight: 900;
 			content: '\f005';
 			width: 24px;
 			height: 24px;
