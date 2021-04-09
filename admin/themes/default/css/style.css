@@ -752,7 +752,7 @@ button.ui-dialog-titlebar-close {
   display: none; }
 
 .undo-delete:after {
-  content: "\f112";
+  content: "\f0e2";
   font-size: 12px;
   line-height: 2em;
   color: #fff; }
