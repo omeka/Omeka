@@ -1,6 +1,6 @@
 <?php
-queue_js_file(array('vendor/jquery.ui.touch-punch', 'navigation'));
 queue_js_file(array('vendor/jquery.nestedSortable', 'navigation'));
+
 $pageTitle = __('Appearance');
 echo head(array('title'=>$pageTitle, 'bodyclass'=>'settings')); ?>
 

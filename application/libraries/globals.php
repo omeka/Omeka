@@ -1155,6 +1155,7 @@ function head_js($includeDefaults = true)
     if ($includeDefaults) {
         $dir = 'javascripts';
         $headScript->prependScript('jQuery.noConflict();')
+                   ->prependFile(src('vendor/jquery.ui.touch-punch.js', 'javascripts'))
                    ->prependScript('window.jQuery.ui || document.write(' . js_escape(js_tag('vendor/jquery-ui')) . ')')
                    ->prependFile('//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js')
                    ->prependScript('window.jQuery || document.write(' . js_escape(js_tag('vendor/jquery')) . ')')

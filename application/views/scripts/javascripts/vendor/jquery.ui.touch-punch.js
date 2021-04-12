@@ -69,13 +69,18 @@
       return;
     }
 
-    // Prevent "Ignored attempt to cancel a touchmove event with cancelable=false" errors
-    if (event.cancelable) {
-      event.preventDefault();
-    }
-
     var touch = event.originalEvent.changedTouches[0],
         simulatedEvent = document.createEvent('MouseEvents');
+
+    //Check if element is an input or a textarea
+    if ($(touch.target).is("input") || $(touch.target).is("textarea")) {
+      event.stopPropagation();
+    } else {
+      // Prevent "Ignored attempt to cancel a touchmove event with cancelable=false" errors
+      if (event.cancelable) {
+        event.preventDefault();
+      }
+    }
 
     // Initialize the simulated mouse event using the touch event's coordinates
     simulatedEvent.initMouseEvent(
