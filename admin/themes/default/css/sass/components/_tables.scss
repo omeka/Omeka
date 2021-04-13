@@ -31,18 +31,19 @@ th {
     }
     a:link, 
     a:visited { 
-	    color: #232323;
-	    opacity: 0.5;
+	    opacity: 0.75;
 	    
 	    &:hover {
 		    opacity: 1;
+            color: #000;
 	    }
 	}
 	
 	&.sorting { 
 		a { 
-			color: #232323; 
 			opacity: 1;
+            color: #000;
+            font-weight: bold;
 		}
 	}
 

@@ -72,14 +72,16 @@ input[type=text].small {
 .inputs {
     margin: 0 0 20px 0;
     
-
     .input-block {
         margin: 0 0 20px 0;
         float: left;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
         
         .remove-element {
 	        display: inline-block;
-			margin: 0 5px 20px 0;
+			margin: 10px 5px 20px 0;
 			padding: 5px 10px;
         }
     }

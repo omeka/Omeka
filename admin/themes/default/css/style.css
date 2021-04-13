@@ -874,10 +874,13 @@ input[type=text].small {
   margin: 0 0 20px 0; }
   .inputs .input-block {
     margin: 0 0 20px 0;
-    float: left; }
+    float: left;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; }
     .inputs .input-block .remove-element {
       display: inline-block;
-      margin: 0 5px 20px 0;
+      margin: 10px 5px 20px 0;
       padding: 5px 10px; }
   .inputs select {
     margin-top: 0; }
@@ -1548,14 +1551,15 @@ th {
     margin: 0 0 0 5px; }
   th a:link,
   th a:visited {
-    color: #232323;
-    opacity: 0.5; }
+    opacity: 0.75; }
     th a:link:hover,
     th a:visited:hover {
-      opacity: 1; }
+      opacity: 1;
+      color: #000; }
   th.sorting a {
-    color: #232323;
-    opacity: 1; }
+    opacity: 1;
+    color: #000;
+    font-weight: bold; }
   th.desc a:after {
     content: url("../images/desc.png"); }
   th.asc a:after {
@@ -2001,7 +2005,9 @@ ul.details {
   display: inline; }
 
 .controls {
-  float: left; }
+  float: left;
+  display: flex;
+  align-items: center; }
 
 .element-set-description {
   display: inline-block;
