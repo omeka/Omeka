@@ -90,7 +90,7 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
         // Compose html for element form
         $html = $divWrap ? '<div class="field" id="element-' . html_escape($element->id) . '">' : '';
 
-        $html .= '<div class="two columns alpha">';
+        $html .= '<div class="field-meta two columns alpha">';
         $html .= $components['label'];
         $html .= $components['add_input'];
         $html .= '</div>'; // Close div

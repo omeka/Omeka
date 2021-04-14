@@ -224,6 +224,7 @@ hr {
   .container .one.columns {
     width: 8%; } }
 @media (min-width: 768px) and (max-width: 991px) {
+  .container .seven.columns,
   .container .six.columns,
   .container .five.columns,
   .container .four.columns,
@@ -231,7 +232,8 @@ hr {
   .container .two.columns {
     width: 100%;
     margin: 0; }
-    #login .container .six.columns, #login
+    #login .container .seven.columns, #login
+    .container .six.columns, #login
     .container .five.columns, #login
     .container .four.columns, #login
     .container .three.columns, #login
@@ -870,18 +872,38 @@ input[type=text].small {
     padding: 10px;
     border: 1px solid #d8d8d8; }
 
+@media (min-width: 768px) and (max-width: 991px) {
+  .field-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between; }
+    .field-meta label {
+      font-size: 16px;
+      margin-bottom: 0; }
+    .field-meta button {
+      margin-bottom: 0;
+      padding: 5px 10px; } }
+
 .inputs {
   margin: 0 0 20px 0; }
   .inputs .input-block {
     margin: 0 0 20px 0;
-    float: left;
     display: flex;
     align-items: center;
     flex-wrap: wrap; }
+    @media (min-width: 768px) and (max-width: 991px) {
+      .inputs .input-block {
+        float: none; } }
     .inputs .input-block .remove-element {
       display: inline-block;
       margin: 10px 5px 20px 0;
       padding: 5px 10px; }
+      @media (min-width: 768px) and (max-width: 991px) {
+        .inputs .input-block .remove-element {
+          margin: 10px 5px 10px 0; } }
+  .inputs .input {
+    width: 100%; }
   .inputs select {
     margin-top: 0; }
   .inputs input[type=text],
@@ -895,6 +917,9 @@ input[type=text].small {
   .inputs input[type="submit"],
   .inputs button {
     margin-bottom: 10px; }
+  @media (min-width: 768px) and (max-width: 991px) {
+    .inputs label {
+      margin-bottom: 0; } }
 
 .required:after {
   content: "*"; }
@@ -2005,9 +2030,7 @@ ul.details {
   display: inline; }
 
 .controls {
-  float: left;
-  display: flex;
-  align-items: center; }
+  float: left; }
 
 .element-set-description {
   display: inline-block;

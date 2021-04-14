@@ -69,21 +69,51 @@ input[type=text].small {
     }
 }
 
+.field-meta {
+    @include screen-sm {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+
+        label {
+            font-size: 16px;
+            margin-bottom: 0;
+        }
+
+        button {
+            margin-bottom: 0;
+            padding: 5px 10px;
+        }
+    }
+}
+
 .inputs {
     margin: 0 0 20px 0;
     
     .input-block {
         margin: 0 0 20px 0;
-        float: left;
         display: flex;
         align-items: center;
         flex-wrap: wrap;
+
+        @include screen-sm {
+            float: none;
+        }
         
         .remove-element {
 	        display: inline-block;
 			margin: 10px 5px 20px 0;
 			padding: 5px 10px;
+
+            @include screen-sm {
+                margin: 10px 5px 10px 0;
+            }
         }
+    }
+
+    .input {
+        width: 100%;
     }
 
     select {
@@ -104,6 +134,12 @@ input[type=text].small {
     input[type="submit"], 
     button {
         margin-bottom: 10px;
+    }
+
+    label {
+        @include screen-sm {
+            margin-bottom: 0; 
+        }
     }
 }
 

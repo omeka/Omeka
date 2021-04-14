@@ -161,6 +161,7 @@ hr {
 	}
 	
 	@include screen-sm {
+		.seven.columns,
 		.six.columns,
 		.five.columns,
 		.four.columns,
