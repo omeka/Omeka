@@ -538,6 +538,23 @@ button.ui-dialog-titlebar-close {
   background-image: none !important;
   background-color: transparent !important; }
 
+/* tinyMCE overrides
+================================================== */
+.mce-btn {
+  border-radius: 3px !important; }
+
+.mce-primary {
+  background: #EEF6E6 !important; }
+  .mce-primary button {
+    color: #448500 !important;
+    border: 1px solid rgba(81, 158, 0, 0.25) !important; }
+    .mce-primary button:hover, .mce-primary button:focus {
+      border-color: rgba(81, 158, 0, 0.65);
+      background: #e1efd3;
+      outline: none; }
+    .mce-primary button * {
+      color: #448500; }
+
 #content {
   margin-top: 60px; }
   @media (max-width: 767px) {
@@ -961,6 +978,10 @@ select {
   text-align: left;
   background: url("../images/dropdown-arrow.png") no-repeat center right;
   background-color: #fff; }
+
+.mce-title:focus,
+.mce-textbox:focus {
+  border-color: #989898 !important; }
 
 header {
   left: 0;

@@ -183,3 +183,8 @@ select {
     background: url('../images/dropdown-arrow.png') no-repeat center right;
     background-color: #fff;
 }
+
+.mce-title:focus,
+.mce-textbox:focus {
+    border-color: darken(#d8d8d8, 25%) !important;
+}

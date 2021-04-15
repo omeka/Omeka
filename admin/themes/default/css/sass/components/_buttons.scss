@@ -139,3 +139,30 @@ button.ui-dialog-titlebar-close {
     background-image: none !important;
     background-color: transparent !important;
 }
+
+/* tinyMCE overrides
+================================================== */
+
+.mce-btn {
+    border-radius: 3px !important;
+}
+
+.mce-primary {
+    background: #EEF6E6 !important;
+    
+    button {
+        color: darken(#519E00, 5%) !important;
+        border: 1px solid rgba(#519E00, 0.25) !important;
+
+        &:hover,
+        &:focus {
+            border-color: rgba(#519E00, 0.65);
+            background: darken(#EEF6E6, 5%);
+            outline: none;
+        }
+    
+        * {
+            color: darken(#519E00, 5%);
+        }
+    }
+}
