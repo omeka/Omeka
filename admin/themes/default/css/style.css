@@ -1782,6 +1782,10 @@ ul.details {
   margin: 0 30px 20px 0;
   background-position-y: 2px; }
 
+.browse .batch-edit-heading input,
+.browse .batch-edit-check input {
+  transform: translate(0px); }
+
 .items.browse .input-block {
   overflow: auto;
   margin: 0 0 20px 0; }
