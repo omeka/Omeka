@@ -69,18 +69,15 @@ echo item_search_filters();
 	                </td>
 	                <?php endif; ?>
 	
-	                <?php if ($item->featured): ?>
-	                <td class="item-info featured">
-	                <?php else: ?>
 	                <td class="item-info">
-	                <?php endif; ?>
 	
 	                    <?php if (metadata('item', 'has files')): ?>
 	                    <?php echo link_to_item(item_image('square_thumbnail', array(), 0, $item), array('class' => 'item-thumbnail'), 'show', $item); ?>
 	                    <?php endif; ?>
 	
-	                    <h3 class="title <?php if ($item->featured): ?>featured<?php endif; ?>">
+	                    <h3 class="title">
 	                    	<?php echo link_to_item(); ?>
+							<?php if ($item->featured): ?><span class="featured" aria-label="<?php echo __('Featured'); ?>" title="<?php echo __('Featured'); ?>"></span><?php endif; ?>
 	
 		                    <?php if(!$item->public): ?>
 		                    	<small><?php echo __('(Private)'); ?></small>

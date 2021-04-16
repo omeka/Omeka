@@ -1650,18 +1650,18 @@ td {
 
 h3.title {
   margin: 0 0 5px; }
-  h3.title.featured:after {
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    content: '\f005';
-    width: 24px;
-    height: 24px;
-    color: #82423B;
-    margin-left: 5px; }
   h3.title small {
     font-weight: 400;
     color: gray;
     margin-left: 5px; }
+
+span.featured:after {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: '\f005';
+  width: 24px;
+  height: 24px;
+  color: #82423B; }
 
 .details {
   background-color: white;
