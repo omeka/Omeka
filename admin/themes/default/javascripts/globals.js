@@ -197,8 +197,6 @@ if (!Omeka) {
     Omeka.readyCallbacks = [
         [Omeka.deleteConfirm, null],
         [Omeka.saveScroll, null],
-        [Omeka.sidebarNavigationScroll, null],
-        [Omeka.stickyNav, null],
         [Omeka.toggleMobileMenu, null],
         [Omeka.showAdvancedForm, null],
         [Omeka.skipNav, null],
