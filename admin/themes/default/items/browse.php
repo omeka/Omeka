@@ -22,7 +22,7 @@ echo item_search_filters();
     <form action="<?php echo html_escape(url('items/batch-edit')); ?>" method="post" accept-charset="utf-8">
         <div class="table-actions batch-edit-option">
             <?php if (is_allowed('Items', 'edit') || is_allowed('Items', 'delete')): ?>
-                <button class="batch-all-toggle" type="button" data-records-count="<?php echo $total_results; ?>"><?php echo __('Select all %s results', $total_results); ?></button>
+                <button class="small button batch-all-toggle" type="button" data-records-count="<?php echo $total_results; ?>"><?php echo __('Select all %s results', $total_results); ?></button>
                 <div class="selected"><span class="count">0</span> <?php echo __('items selected'); ?></div>
                 <input type="hidden" name="batch-all" value="1" id="batch-all" disabled>
                 <?php echo $this->formHidden('params', json_encode(Zend_Controller_Front::getInstance()->getRequest()->getParams())); ?>
