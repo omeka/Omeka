@@ -1911,10 +1911,8 @@ ul.details {
     color: gray; }
 
 .items .table-actions > input[type="submit"].small {
-  border-left: 1px solid #D8D8D8;
   display: inline-block;
-  margin-right: 0;
-  border-radius: 0; }
+  margin-right: 0; }
 
 .items table + .table-actions {
   margin: -16px 0 20px;
