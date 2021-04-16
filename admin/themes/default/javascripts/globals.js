@@ -69,50 +69,6 @@ if (!Omeka) {
         }
     };
     
-    Omeka.sidebarNavigationScroll = function () {
-        var $sidebar   = $("#content-nav"),
-            $window = $(window),
-            offset  = $sidebar.offset(),
-            topPadding = 62;
-            
-        if (document.getElementById("content-nav")) {
-	        if($window.width() > 767) {
-	            $window.scroll(function () {
-	                if($window.scrollTop() > offset.top && $window.width() > 767 && ($window.height() - topPadding - 85) >  $sidebar.height()) {
-	                    $sidebar.stop().animate({
-	                        marginTop: $window.scrollTop() - offset.top + topPadding
-	                        });
-	                } else {
-	                    $sidebar.stop().animate({
-	                        marginTop: 0
-	                    });
-	                }
-	            });
-            } else {
-	            $window.resize(function(){
-		            $sidebar.stop().animate({
-	                    marginTop: 0
-	                });
-	            })
-            }
-        }
-    };
-
-    Omeka.stickyNav = function() {
-        var $nav    = $("#content-nav"),
-            $window = $(window);
-        if ($window.height() - 50 < $nav.height()) {
-            $nav.addClass("unfix");
-        }
-        $window.resize( function() {
-            if ($window.height() - 50 < $nav.height()) {
-                $nav.addClass("unfix");
-            } else {
-                $nav.removeClass("unfix");
-            }
-        });
-    };
-    
     Omeka.toggleMobileMenu = function() {
 	    $('.mobile-menu').click(function (event) {
 			var target = $(this).data('target');

@@ -64,7 +64,7 @@
 <div class="container container-twelve">
     <?php echo common('content-nav', array('title' => $title)); ?>
 
-    <div id="content" class="ten columns offset-by-two omega" role="main" aria-labelledby="content-heading">
+    <div id="content" class="ten columns omega" role="main" aria-labelledby="content-heading">
 	    <div class="subhead">
 	        <?php echo search_form(array('show_advanced' => true, 'form_attributes'=> array('role'=>'search'))); ?>
 	        <?php if (isset($title)) : ?>

@@ -1450,7 +1450,7 @@ button.remove_search {
 
 #content-nav {
   width: 160px;
-  position: absolute;
+  position: sticky;
   top: 50px;
   z-index: 10;
   left: 0; }
