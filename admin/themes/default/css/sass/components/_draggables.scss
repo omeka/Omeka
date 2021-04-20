@@ -43,6 +43,10 @@
 		    text-overflow: ellipsis;
             line-height: 1.5;
             vertical-align: top;
+
+            @include screen-xs {
+                max-width: 180px;
+            }
 		}		
 	}
     

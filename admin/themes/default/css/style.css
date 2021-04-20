@@ -670,6 +670,9 @@ button.ui-dialog-titlebar-close {
     text-overflow: ellipsis;
     line-height: 1.5;
     vertical-align: top; }
+    @media (max-width: 767px) {
+      .ui-sortable .sortable-item > a {
+        max-width: 180px; } }
 .ui-sortable .action-links {
   display: inline-block;
   float: right; }
