@@ -216,17 +216,20 @@ hr {
     border: 0;
     clip: rect(0, 0, 0, 0);
     height: 1px;
-    margin: -1px;
+    margin: $spacing-s auto;
     overflow: hidden;
     padding: 0;
     position: absolute;
     width: 1px;
-    
+	left: 50%;
+	transform: translateX(-25%);
+
     &:focus {
 	    top:0;
-	    z-index:9999;
+	    z-index:10000;
 	    clip:initial;
 	    height:auto;
+		color: #fff;
 	    width:auto;
 	    padding:.5em;
 	    border:1px blue dashed;
