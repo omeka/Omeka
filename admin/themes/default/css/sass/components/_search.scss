@@ -55,19 +55,17 @@
         box-shadow: none;
         text-shadow: none;
         border-left: 1px solid #d8d8d8;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
         
         &:after {
             font-family: "Font Awesome 5 Free";
+            display: block;
             font-weight: 900;
             content: "\f002";
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 36px;
-            width: 36px;
             text-indent: 0;
             text-align: center;
-            line-height: 32px;
         }
         &:hover {
 			background: #68302C;
@@ -95,6 +93,9 @@
     box-shadow: none;
     text-shadow: none;
     border-left: 1px solid #d8d8d8;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 
 	&:after {
 	    content: "\f141";
@@ -104,7 +105,6 @@
 	    display: block;
 	    text-indent: 0;
 	    text-align: center;
-	    margin: -1em 0 0 -0.325em;
 	}
 	&:hover {
 		background: #68302C;
