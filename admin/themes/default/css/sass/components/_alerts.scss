@@ -6,7 +6,7 @@
 
 ul.error {
     list-style-type: none;
-    margin-top: 20px;
+    margin-top: $spacing-l;
     padding: 0;
 }
 .inputs ul.error { margin-top: 0; }
@@ -20,7 +20,7 @@ ul.error li,
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
-    margin-bottom: 20px;
+    margin-bottom: $spacing-l;
     padding: .5em;
 }
 
@@ -28,7 +28,7 @@ ul.error li,
 
 li .flash {
     display: block;
-    margin: 10px 0 10px -.5em;
+    margin: $spacing-m 0 $spacing-m -.5em;
 }
 
 .success {

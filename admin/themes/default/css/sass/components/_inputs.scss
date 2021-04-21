@@ -28,7 +28,7 @@ input.color {
 input[type=text], 
 input[type=password] {
     height: 36px;
-    border: 1px solid #d8d8d8;
+    border: 1px solid $darkgrayborder;
     -webkit-border-radius: 0;
     -moz-box-radius: 0;
     border-radius: 0;
@@ -36,9 +36,9 @@ input[type=password] {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     color: #666666;
-    line-height: 20px;
-    margin: 0 0 10px 0;
-    padding: 5px 10px;
+    line-height: $spacing-l;
+    margin: 0 0 $spacing-m 0;
+    padding: $spacing-s $spacing-m;
 }
 
 input[type=text].big {
@@ -57,15 +57,15 @@ input[type=text].small {
         font-weight: bold;
         float: left;
         line-height: 1.5em;
-        margin: 0 0 10px 0;
+        margin: 0 0 $spacing-m 0;
         min-width: 120px;
     }
 
     select {
         width: 100%;
-        margin-bottom: 10px;
-        padding: 10px;
-        border: 1px solid #d8d8d8;
+        margin-bottom: $spacing-m;
+        padding: $spacing-m;
+        border: 1px solid $darkgrayborder;
     }
 }
 
@@ -83,16 +83,16 @@ input[type=text].small {
 
         button {
             margin-bottom: 0;
-            padding: 5px 10px;
+            padding: $spacing-s $spacing-m;
         }
     }
 }
 
 .inputs {
-    margin: 0 0 20px 0;
+    margin: 0 0 $spacing-l 0;
     
     .input-block {
-        margin: 0 0 20px 0;
+        margin: 0 0 $spacing-l 0;
         display: flex;
         align-items: center;
         flex-wrap: wrap;
@@ -103,11 +103,11 @@ input[type=text].small {
         
         .remove-element {
 	        display: inline-block;
-			margin: 10px 5px 20px 0;
-			padding: 5px 10px;
+			margin: $spacing-m $spacing-s $spacing-l 0;
+			padding: $spacing-s $spacing-m;
 
             @include screen-sm {
-                margin: 10px 5px 10px 0;
+                margin: $spacing-m $spacing-s $spacing-m 0;
             }
         }
     }
@@ -133,7 +133,7 @@ input[type=text].small {
     a.button, 
     input[type="submit"], 
     button {
-        margin-bottom: 10px;
+        margin-bottom: $spacing-m;
     }
 
     label {
@@ -149,7 +149,7 @@ input[type=text].small {
 
 textarea {
     width: 100%;
-    border: 1px solid #d8d8d8;
+    border: 1px solid $darkgrayborder;
     overflow: auto;
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
@@ -158,7 +158,7 @@ textarea {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     color: #666666;
-    padding: 5px 10px;
+    padding: $spacing-s $spacing-m;
 }
 
 input[type="checkbox"] {
@@ -175,8 +175,8 @@ input[type="checkbox"] {
 select {
     -webkit-appearance: none;
     appearance: none;
-    padding: 10px 36px 10px 9px;
-    border: 1px solid #DCDCDC;
+    padding: $spacing-m 36px $spacing-m 9px;
+    border: 1px solid $darkgrayborder;
     border-radius: 3px;
     line-height: 16px;
     text-align: left;
@@ -186,5 +186,5 @@ select {
 
 .mce-title:focus,
 .mce-textbox:focus {
-    border-color: darken(#d8d8d8, 25%) !important;
+    border-color: darken($darkgrayborder, 25%) !important;
 }

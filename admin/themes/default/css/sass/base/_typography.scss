@@ -1,7 +1,7 @@
 * {
 	font-family: "Lato", sans-serif;
 	font-size: 14px;
-	color: #232323;
+	color: $black;
 }
 
 h1,
@@ -36,7 +36,7 @@ h5 {
 }
 
 a:link {
-    color: #003576;
+    color: $blue;
     text-decoration: underline;
     transition: 0.5s all;
 }
@@ -44,7 +44,7 @@ a:link {
 a:hover, 
 a:active,
 a:visited { 
-	color: darken(#003576, 20%);
+	color: darken($blue, 20%);
 }
 
 p, 

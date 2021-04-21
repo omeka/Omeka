@@ -13,13 +13,13 @@ button {
     display: inline-block;
     -webkit-appearance: none;
     
-    background: #f1f2f2;
-    border: 1px solid rgba(#232323, 0.25);
-    color: #232323;
+    background: $lightgray;
+    border: 1px solid $darkgrayborder;
+    color: $black;
     
-    margin: 0 5px 20px 0;
+    margin: 0 $spacing-s $spacing-l 0;
     min-height: 25px;
-    padding: 10px 18px;
+    padding: $spacing-m ($spacing-l - 2px);
     line-height: 16px;
     
     font-weight: bold;
@@ -30,8 +30,8 @@ button {
     
     &:hover,
     &:focus {
-	    border-color: rgba(#232323, 0.65);
-	    background: darken(#f1f2f2, 5%);
+	    border-color: rgba($black, 0.65);
+	    background: darken($lightgray, 5%);
 	    outline: none;
     }
     
@@ -50,69 +50,69 @@ button {
     &.full-width-mobile {
 	    @include screen-xs {
 		    width: 100%;
-		    margin-bottom: 10px;
+		    margin-bottom: $spacing-m;
 		}
     }
     
     &.large {
         display: block;
         line-height: 1.75em;
-        margin: 10px auto;
-        padding: 14px 20px;
+        margin: $spacing-m auto;
+        padding: $spacing-m $spacing-l;
 		font-size: 115%;
     }
     &.small {
         display: inline-block;
-        margin: 0 5px 20px 0;
-        padding: 5px 10px;
+        margin: 0 $spacing-s $spacing-l 0;
+        padding: $spacing-s $spacing-m;
     }
     
     &.blue {
-	    color: #003576;
+	    color: $blue;
         background: #EEF3FA;
-        border: 1px solid rgba(#003576, 0.25);
+        border: 1px solid rgba($blue, 0.25);
         
         &:hover,
         &:focus {
-	        border-color: rgba(#003576, 0.65);
+	        border-color: rgba($blue, 0.65);
 	        background: darken(#EEF3FA, 5%);
 	        outline: none;
         }
 
         * {
-            color: #003576;
+            color: $blue;
         }
     }
     &.red {
-	    color: #B00D00;
+	    color: $red;
         background: #F9E8E7;
-        border: 1px solid rgba(#B00D00, 0.25);
+        border: 1px solid rgba($red, 0.25);
         
         &:hover,
         &:focus {
-	        border-color: rgba(#B00D00, 0.65);
+	        border-color: rgba($red, 0.65);
 	        background: darken(#F9E8E7, 5%);
 	        outline: none;
         }
 
         * {
-            color: #B00D00;
+            color: $red;
         }
     }
     &.green {
-	    color: darken(#519E00, 5%);
-        background: #EEF6E6;
-        border: 1px solid rgba(#519E00, 0.25);
+	    color: darken($green, 5%);
+        background: $lightgreen;
+        border: 1px solid rgba($green, 0.25);
         
         &:hover,
         &:focus {
-	        border-color: rgba(#519E00, 0.65);
-	        background: darken(#EEF6E6, 5%);
+	        border-color: rgba($green, 0.65);
+	        background: darken($lightgreen, 5%);
 	        outline: none;
         }
 
         * {
-            color: darken(#519E00, 5%);
+            color: darken($green, 5%);
         }
     }
 }
@@ -148,21 +148,21 @@ button.ui-dialog-titlebar-close {
 }
 
 .mce-primary {
-    background: #EEF6E6 !important;
+    background: $lightgreen !important;
     
     button {
-        color: darken(#519E00, 5%) !important;
-        border: 1px solid rgba(#519E00, 0.25) !important;
+        color: darken($green, 5%) !important;
+        border: 1px solid rgba($green, 0.25) !important;
 
         &:hover,
         &:focus {
-            border-color: rgba(#519E00, 0.65);
-            background: darken(#EEF6E6, 5%);
+            border-color: rgba($green, 0.65);
+            background: darken($lightgreen, 5%);
             outline: none;
         }
     
         * {
-            color: darken(#519E00, 5%);
+            color: darken($green, 5%);
         }
     }
 }

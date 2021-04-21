@@ -1,12 +1,23 @@
 // Colors
 $lightgray:         #f1f2f2;
-$midgray:           #808080;
-$black:             #231f20;
+$lightgrayborder:   #E4E5DE;
+$darkgrayborder:    #D6D5C2;
+$black:             #232323;
 
+$lightgreen:        #EEF6E6;
+$green:             #519E00;  
+$blue:              #003576;
+$red:               #B00D00;
+$darkred:           #82423B;
 
 // Typography
 $sans-serif:         'Lato', sans-serif;                      // Define your basic fonts here, for consistency
 
+// Grid
+
+$spacing-m: 10px;
+$spacing-l: 2 * $spacing-m;
+$spacing-s: .5 * $spacing-m;
 
 // Media Queries
 $screen-xxs:        'max-width: 480px';

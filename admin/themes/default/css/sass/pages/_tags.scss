@@ -4,7 +4,7 @@
 
 .tags h3 { margin: 0; }
 
-.tags ol { padding: 0 0 0 1em;  li { margin-left: 5px; padding-left: 20px; }}
+.tags ol { padding: 0 0 0 $spacing-m;  li { margin-left: $spacing-s; padding-left: $spacing-l; }}
 
 .tags ol:before {
     content: "";
@@ -13,7 +13,7 @@
     height: 75px;
     background:url('../images/tag-desc.png') no-repeat;
     background-size: cover;
-    margin: .25em 0 1em -1em;
+    margin: $spacing-s 0 $spacing-l -$spacing-l;
 }
 
 .tags #search-tags {
@@ -51,7 +51,7 @@ form.form-inline.editableform {
     top: 100%;
     background-color: #fff;
     text-shadow: none;
-    color: #914E33;
+    color: $darkred;
     left: 0;
     font-family: "Cabin", sans-serif;
     padding: 3px 6px;
@@ -66,14 +66,14 @@ form.form-inline.editableform {
 
 .tag-list li {
     height: 22px;
-    color: #519E00;
-    background: #EEF6E6;
-    border: 1px solid rgba(#519E00, 0.25);
+    color: $green;
+    background: $lightgreen;
+    border: 1px solid rgba($green, 0.25);
     
     &:hover,
     &:focus {
-        border-color: rgba(#519E00, 0.65);
-        background: darken(#EEF6E6, 5%);
+        border-color: rgba($green, 0.65);
+        background: darken($lightgreen, 5%);
         outline: none;
     }
     
@@ -82,13 +82,13 @@ form.form-inline.editableform {
     border-radius: 3px;
     
     display: inline-block;
-    margin: 0 10px 10px 0;
-    padding: 5px 10px;
+    margin: 0 $spacing-m $spacing-m 0;
+    padding: $spacing-s $spacing-m;
 }
 
 .tag-list .count {
-    margin-right: 5px;
-    padding-right: 10px;
+    margin-right: $spacing-s;
+    padding-right: $spacing-m;
     position: relative;
 }
 
@@ -96,15 +96,15 @@ form.form-inline.editableform {
     content: "";
     width: 1px;
     position: absolute;
-    background-color: rgba(#519E00, 0.25);
-    bottom: -5px;
-    top: -5px;
+    background-color: rgba($green, 0.25);
+    bottom: -$spacing-s;
+    top: -$spacing-s;
     right: 0;
 }
 
 .tag-list li .tag, .tag-list li a, .tag-list li .count {
     display: inline-block;
-    color: darken(#519E00, 15%);
+color: darken($green, 15%);
 }
 
 .tag-list li .delete-tag a, .tag-list li .remove-tag a, .tag-list li .undo-remove-tag a {
@@ -125,14 +125,14 @@ form.form-inline.editableform {
     font-weight: 900;
     height: 100%;
     width: 100%;
-    background-color: rgba(#519E00, 1);
+    background-color: rgba($green, 1);
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     border-radius: 20px;
-    color:#EEF6E6;
+    color:$lightgreen;
     display: block;
     position: relative;
-    font-size: 10px;
+    font-size: $spacing-m;
     top: 0;
     float: left;
     text-indent: 4px;
@@ -153,18 +153,18 @@ form.form-inline.editableform {
 }
 
 #tags-nav span:last-of-type {
-    margin-right: 20px;
+    margin-right: $spacing-l;
 }
 
 #tags-nav .quick-filter-wrapper {
     height: 27px;
-    padding: 0 20px 0 0;
+    padding: 0 $spacing-l 0 0;
     border-width: 1px 1px 0 1px;
     margin-left: 0;
 }
 
 #tags-nav .quick-filter-wrapper .dropdown li {
-    padding: 0 20px 0 0;
+    padding: 0 $spacing-l 0 0;
 }
 
 #tags-nav > span {
@@ -183,14 +183,14 @@ form.form-inline.editableform {
     #tags-nav span.current {
         a {
 	        padding-right: 36px;
-    text-align: left;
+            text-align: left;
         }
         
     }
     #tags-nav span.current a:after {
         content: "";
         position: absolute;
-        right: 20px;
+        right: $spacing-l;
         top: 50%;
         width: 0;
         height: 0;
@@ -200,11 +200,11 @@ form.form-inline.editableform {
     }
 
     #tags-nav span.current.asc a:after {
-        border-bottom: 5px solid;
+        border-bottom: $spacing-s solid;
     }
 
     #tags-nav span.current.desc a:after {
-        border-top: 5px solid;
+        border-top: $spacing-s solid;
     }
 
 .tags div.two.columns { clear: both; }

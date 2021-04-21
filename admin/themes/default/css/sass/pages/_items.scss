@@ -56,7 +56,7 @@
 
 .items.browse .item-thumbnail img {
     display: block;
-    border: 1px solid #E4E5DE;
+    border: 1px solid $lightgrayborder;
     width: 100%;
     margin: 0;
     float: left;
@@ -390,10 +390,10 @@
         display: inline-block;
         padding: 10px 16px;
         margin: 0 0 0 5px;
-		background: rgba(#f1f2f2, 0.8);
-		border-top: 1px solid darken(#f1f2f2, 10%);
-        border-left: 1px solid darken(#f1f2f2, 10%);
-        border-right: 1px solid darken(#f1f2f2, 10%);
+		background: rgba($lightgray, 0.8);
+		border-top: 1px solid darken($lightgray, 10%);
+        border-left: 1px solid darken($lightgray, 10%);
+        border-right: 1px solid darken($lightgray, 10%);
         text-decoration: none;
         box-shadow: 0 0 10px rgba(0,0,0,0.1);
         
@@ -415,7 +415,7 @@
     .current a,
     a.active {
         background-color: white;
-        color: #232323 !important;
+        color: $black !important;
         border-top: 1px solid #eee;
         border-left: 1px solid #eee;
         border-right: 1px solid #eee;
@@ -434,7 +434,7 @@
     width: auto;
     float: left;
     margin: -3px 10px 0 0;
-    border: 1px solid #D6D5C2;
+    border: 1px solid $darkgrayborder;
 }
 
 /* Edit Item Types

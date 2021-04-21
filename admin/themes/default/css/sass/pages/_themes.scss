@@ -13,8 +13,8 @@
 #current-theme {
     width: 100%;
     border-bottom: 1px solid #ddd;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
+    padding-bottom: $spacing-l;
+    margin-bottom: $spacing-l;
     float: left;
 
     h2 {
@@ -31,11 +31,11 @@
 	}
 
     li {
-        padding: .5em .5em .5em 10px;
+        padding: $spacing-s $spacing-s $spacing-s $spacing-m
     }
 }
 .current-theme-label {
-	color: #8C3E38;
+	color: $darkred;
 }
 
 .themes .group .theme { 
@@ -59,7 +59,7 @@
 .themes .theme .crop {
     height: 136px;
     border: 1px solid #e7e7e7;
-    margin: 0 0 10px 0;
+    margin: 0 0 $spacing-m 0;
     overflow: hidden;
 }
 
@@ -91,6 +91,6 @@
     @include screen-sm {
         width: calc(50% - 5px);
         float: left;
-        margin-right: 10px;    
+        margin-right: $spacing-m;    
     }
 }

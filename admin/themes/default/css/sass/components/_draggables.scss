@@ -19,9 +19,9 @@
 		    font-family: "Font Awesome 5 Free";
             font-weight: 900;
 		    font-size: 16px;
-		    height: 20px;
-		    width: 20px;
-		    margin-right: 5px;
+		    height: $spacing-l;
+		    width: $spacing-l;
+		    margin-right: $spacing-s;
 		    text-indent: 0;
 		    text-align: center;
 			content: "\f0b2";
@@ -63,9 +63,9 @@
 
 .sortable-item, 
 .add-new {
-    background: #f1f2f2;
-	box-shadow: 0 0 5px rgba(0,0,0,0.1);
-    border: 1px solid #D6D5C2;
+    background: $lightgray;
+	box-shadow: 0 0 $spacing-s rgba(0,0,0,0.1);
+    border: 1px solid $darkgrayborder;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
@@ -97,8 +97,8 @@
 .delete-element, 
 .undo-delete {
     float: right;
-    height: 20px;
-    width: 20px;
+    height: $spacing-l;
+    width: $spacing-l;
     cursor: pointer;
     text-indent: -9999px;
     font-size: 18px;
@@ -133,8 +133,8 @@
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     font-size: 16px;
-    height: 20px;
-    width: 20px;
+    height: $spacing-l;
+    width: $spacing-l;
     text-indent: 0;
     float: left;
     text-align: center;
@@ -168,12 +168,12 @@
 
 .drawer-contents {
     background: #fff;
-    border: 1px solid #D6D5C2;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    border: 1px solid $darkgrayborder;
+    box-shadow: 0 0 $spacing-s rgba(0,0,0,0.1);
     line-height: 1.5em;
     margin: -2px 0 2px 0;
     overflow: auto;
-    padding: 15px;
+    padding: $spacing-l;
     
     &:empty { display: none; padding: 0;}
 
@@ -195,6 +195,6 @@
     label {
         display: block;
         font-weight: bold;
-        padding-bottom: 10px;
+        padding-bottom: $spacing-m;
     }
 }

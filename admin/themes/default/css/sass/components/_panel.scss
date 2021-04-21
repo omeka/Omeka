@@ -4,12 +4,12 @@
 }
 
 #save {
-	box-shadow: 0 0 10px rgba(0,0,0,0.1);
+	box-shadow: 0 0 $spacing-m rgba(0,0,0,0.1);
 }
 
     #save .big, #edit .big {
         width: 100%;
-        margin: 0 auto 10px;
+        margin: 0 auto $spacing-m;
     }
 
         #save .big:first-child, #edit .big:first-child {
@@ -17,9 +17,9 @@
         }
 
     #save .field, #edit .field {
-        border-top: 1px solid #e7e7e7;
+        border-top: 1px solid $darkgrayborder;
         overflow: visible;
-        padding-top: 20px;
+        padding-top: $spacing-l;
     }
 
         #save .field:last-child, #edit .field:last-child {
@@ -40,7 +40,7 @@
     }
 
     #save .pagination li, #edit .pagination li {
-        margin: 0 0 10px 0;
+        margin: 0 0 $spacing-m 0;
     }
 
     #save #previous-item, #edit #previous-item {
@@ -53,17 +53,17 @@
 
     #save select, #edit select {
         width: 100%;
-        margin: 10px 0 0 0;
+        margin: $spacing-m 0 0 0;
     }
 
 #add-tags-explanation {
-    margin: 0 0 10px 0;
+    margin: 0 0 $spacing-m 0;
 }
 
 #edit .pagination { margin: 0; }
 
 #navigation-links {
-  margin-bottom: 20px;
+  margin-bottom: $spacing-l;
 }
 
 #navigation_main_list ul {
@@ -71,12 +71,12 @@
 }
 
 #save #fieldset-homepage_select_display {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: $spacing-l;
+  margin-bottom: $spacing-l;
 }
 
     .navigation_main_list_delete { float: right; }
 
     .navigation_main_list_visit { float: left;}
 
-#navigation_form input[type=checkbox] { margin-right: 10px; }
+#navigation_form input[type=checkbox] { margin-right: $spacing-m; }

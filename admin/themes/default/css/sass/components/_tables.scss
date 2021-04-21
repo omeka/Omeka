@@ -11,13 +11,13 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
     clear: both;
-    margin-bottom: 16px;
+    margin-bottom: $spacing-l;
 }
 
 th {
     background-color: rgba(200,200,200,0.5);
     border: 1px solid #DCDCDC;
-    padding:  .25em .625em;
+    padding: $spacing-s $spacing-m;
     text-align: left;
     font-weight: normal;
 
@@ -27,7 +27,7 @@ th {
         content: url('../images/sort.png');
         display: inline-block;
         line-height: 10px;
-        margin: 0 0 0 5px;
+        margin: 0 0 0 $spacing-s;
     }
     a:link, 
     a:visited { 
@@ -55,7 +55,7 @@ tr { background-color: rgba(255,255,255,.5); }
 
 td {
     border: 1px solid #DCDCDC;
-    padding: .625em;
+    padding: $spacing-m;
     vertical-align: top;
     
     .even & {
@@ -71,7 +71,7 @@ td {
     margin: 0;
     padding: 0;
 
-    a { color: #003576; }
+    a { color: $blue; }
 
     li { 
 	    display: inline-block; 
@@ -87,12 +87,12 @@ td {
 }
 
 h3.title {
-	margin: 0 0 5px;
+	margin: 0 0 $spacing-s;
 	
 	small {
 		font-weight: 400;
 		color: gray;
-		margin-left: 5px;
+		margin-left: $spacing-s;
 	}
 }
 
@@ -102,16 +102,16 @@ span.featured:after {
     content: '\f005';
     width: 24px;
     height: 24px;
-    color: #82423B;
+    color: $darkred;
 }
 
 .details {
-    background-color: rgb(255,255,255);
+    background-color: #fff;
     background-color: rgba(255,255,255,.5);
-    border: 1px solid #E4E5DE;
+    border: 1px solid $lightgrayborder;
     float: left;
-    margin-top: 10px;
-    padding: .5em;
+    margin-top: $spacing-m;
+    padding: $spacing-m;
     clear: both;
     width: 100%;
     -webkit-box-sizing: border-box;
@@ -130,9 +130,9 @@ span.featured:after {
 
 ul.details {
     margin-bottom: 0;
-    padding: .5em .5em .5em 2em;
+    padding: $spacing-m $spacing-m $spacing-m $spacing-l;
 
-    li { margin-bottom: 1em; }
+    li { margin-bottom: $spacing-m; }
     li:last-child { margin-bottom: 0; }
 
 }
