@@ -18,7 +18,10 @@ $formAttributes['method'] = 'GET';
             echo $this->formText(
                 'search',
                 @$_REQUEST['search'],
-                array('id' => 'keyword-search', 'size' => '40')
+                array(
+                    'id' => 'keyword-search', 
+                    'size' => '40'
+                    )
             );
         ?>
         </div>

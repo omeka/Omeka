@@ -418,6 +418,12 @@ button {
     border-color: rgba(35, 35, 35, 0.65);
     background: #e4e6e6;
     outline: none; }
+  span.button:focus,
+  a.button:focus,
+  input[type=submit]:focus,
+  button:focus {
+    box-shadow: 0 0 0 3px #C67F6F;
+    z-index: 9999; }
   span.button:disabled,
   a.button:disabled,
   input[type=submit]:disabled,
@@ -1310,13 +1316,11 @@ header {
     text-indent: -9999px;
     transition: 0.5s all;
     margin: 0;
-    color: #E5B7B4;
+    color: #fff;
     background: #82423B;
     border-radius: 0;
     border: none;
-    box-shadow: none;
     text-shadow: none;
-    border-left: 1px solid #d8d8d8;
     display: inline-flex;
     justify-content: center;
     align-items: center; }
@@ -1340,15 +1344,13 @@ header {
   position: absolute;
   transition: 0.5s all;
   top: 0;
-  right: 36px;
+  right: 37px;
   margin: 0;
-  color: #E5B7B4;
+  color: #fff;
   background: #82423B;
   border: none;
   border-radius: 0;
-  box-shadow: none;
   text-shadow: none;
-  border-left: 1px solid #d8d8d8;
   display: inline-flex;
   justify-content: center;
   align-items: center; }

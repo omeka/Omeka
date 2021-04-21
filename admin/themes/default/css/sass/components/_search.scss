@@ -48,13 +48,11 @@
         transition: 0.5s all;
         margin: 0;
         
-        color: #E5B7B4;
+        color: #fff;
         background: $darkred;
         border-radius: 0;
         border: none;
-        box-shadow: none;
         text-shadow: none;
-        border-left: 1px solid #d8d8d8;
         display: inline-flex;
         justify-content: center;
         align-items: center;
@@ -83,16 +81,14 @@
     position: absolute;
     transition: 0.5s all;
     top: 0;
-    right: 36px;
-    margin: 0;
+    right: 37px;
+    margin: 0;    
     
-    color: #E5B7B4;
+    color: #fff;
     background: $darkred;
     border: none;
     border-radius: 0;
-    box-shadow: none;
     text-shadow: none;
-    border-left: 1px solid #d8d8d8;
     display: inline-flex;
     justify-content: center;
     align-items: center;

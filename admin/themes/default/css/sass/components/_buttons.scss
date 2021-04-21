@@ -34,6 +34,11 @@ button {
 	    background: darken($lightgray, 5%);
 	    outline: none;
     }
+
+    &:focus {
+        box-shadow: 0 0 0 3px #C67F6F;
+        z-index: 9999;
+    }
     
     &:disabled {
         -moz-box-shadow: none !important;
