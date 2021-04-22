@@ -301,7 +301,7 @@ hr {
     border: 1px blue dashed;
     background: #000; }
 
-.sr-only {
+.sr-only, #fieldset-site_settings legend {
   position: absolute;
   left: -10000px;
   top: auto;
@@ -476,6 +476,12 @@ button {
     color: #003576;
     background: #EEF3FA;
     border: 1px solid rgba(0, 53, 118, 0.25); }
+    span.button.blue.ui-button,
+    a.button.blue.ui-button,
+    input[type=submit].blue.ui-button,
+    button.blue.ui-button {
+      background: #EEF3FA !important;
+      border: 1px solid rgba(0, 53, 118, 0.25) !important; }
     span.button.blue:hover, span.button.blue:focus,
     a.button.blue:hover,
     a.button.blue:focus,
@@ -498,6 +504,12 @@ button {
     color: #B00D00;
     background: #F9E8E7;
     border: 1px solid rgba(176, 13, 0, 0.25); }
+    span.button.red.ui-button,
+    a.button.red.ui-button,
+    input[type=submit].red.ui-button,
+    button.red.ui-button {
+      background: #F9E8E7 !important;
+      border: 1px solid rgba(176, 13, 0, 0.25) !important; }
     span.button.red:hover, span.button.red:focus,
     a.button.red:hover,
     a.button.red:focus,
@@ -520,6 +532,12 @@ button {
     color: #326200;
     background: #EEF6E6;
     border: 1px solid rgba(63, 123, 0, 0.25); }
+    span.button.green.ui-button,
+    a.button.green.ui-button,
+    input[type=submit].green.ui-button,
+    button.green.ui-button {
+      background: #EEF6E6 !important;
+      border: 1px solid rgba(63, 123, 0, 0.25) !important; }
     span.button.green:hover, span.button.green:focus,
     a.button.green:hover,
     a.button.green:focus,
@@ -652,7 +670,8 @@ button.ui-dialog-titlebar-close {
       color: white; }
 
 .ui-sortable,
-.sortable {
+.sortable,
+.drawers {
   list-style-type: none;
   margin: 0;
   padding: 0; }
@@ -690,13 +709,11 @@ button.ui-dialog-titlebar-close {
     @media (max-width: 767px) {
       .ui-sortable .sortable-item > a {
         max-width: 180px; } }
-.ui-sortable .action-links {
-  display: inline-block;
-  float: right; }
 .ui-sortable li {
   margin-bottom: 15px;
   list-style-type: none; }
 
+.drawer,
 .sortable-item,
 .add-new {
   background: #f1f2f2;
@@ -709,12 +726,19 @@ button.ui-dialog-titlebar-close {
   font-size: 14px;
   line-height: 1.5em;
   margin: 0; }
+  .drawer input,
   .sortable-item input,
   .add-new input {
     margin: 0; }
+  .drawer input[type=text],
   .sortable-item input[type=text],
   .add-new input[type=text] {
     margin-bottom: 0; }
+  .drawer .action-links,
+  .sortable-item .action-links,
+  .add-new .action-links {
+    display: inline-block;
+    float: right; }
 
 .ui-sortable-highlight:empty {
   background: rgba(0, 0, 0, 0.04);
@@ -728,7 +752,7 @@ button.ui-dialog-titlebar-close {
   -moz-border-radius: 2px;
   border-radius: 2px; }
 
-.drawer,
+.drawer-toggle,
 .delete-element,
 .undo-delete {
   float: right;
@@ -739,7 +763,8 @@ button.ui-dialog-titlebar-close {
   font-size: 18px;
   color: #4C3939; }
 
-.deleted.sortable-item {
+.deleted.sortable-item,
+.deleted.drawer {
   color: #FFF;
   border: 1px solid rgba(176, 13, 0, 0.65);
   background: rgba(176, 13, 0, 0.65);
@@ -747,7 +772,8 @@ button.ui-dialog-titlebar-close {
   -moz-border-radius: 2px;
   border-radius: 2px;
   text-shadow: none; }
-  .deleted.sortable-item * {
+  .deleted.sortable-item *,
+  .deleted.drawer * {
     color: #fff; }
 
 .deleted a:link,
@@ -758,7 +784,7 @@ button.ui-dialog-titlebar-close {
 .deleted .drawer {
   color: #fff; }
 
-.drawer:after,
+.drawer-toggle:after,
 .delete-element:after,
 .undo-delete:after {
   display: inline-block;
@@ -771,7 +797,7 @@ button.ui-dialog-titlebar-close {
   float: left;
   text-align: center; }
 
-.drawer:after {
+.drawer-toggle:after {
   content: "\f0da"; }
 
 .delete-element:link, .delete-element:active,
@@ -780,7 +806,7 @@ button.ui-dialog-titlebar-close {
 .undo-delete:hover, .undo-delete:visited {
   color: #4C3939; }
 
-.drawer.opened:after {
+.drawer-toggle.opened:after {
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
   -o-transform: rotate(90deg);
@@ -792,6 +818,7 @@ button.ui-dialog-titlebar-close {
 .delete-element:after {
   content: "\f00d"; }
 
+.drawer > a.undo-delete,
 .ui-sortable .sortable-item > a.undo-delete {
   display: none; }
 
@@ -1002,6 +1029,9 @@ select {
 .mce-title:focus,
 .mce-textbox:focus {
   border-color: #a3a176 !important; }
+
+.field label.checkbox-label {
+  font-weight: normal; }
 
 header {
   left: 0;
@@ -2199,7 +2229,7 @@ ul.details {
 
 /* Edit Item Type Metadata
 ================================================== */
-.item-type-metadata .drawer {
+.item-type-metadata .drawer-toggle {
   display: none; }
 
 .item-type-metadata .sortable-item {

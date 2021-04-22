@@ -76,6 +76,11 @@ button {
 	    color: $blue;
         background: #EEF3FA;
         border: 1px solid rgba($blue, 0.25);
+
+        &.ui-button {
+            background: #EEF3FA !important;
+            border: 1px solid rgba($blue, 0.25) !important;
+        }
         
         &:hover,
         &:focus {
@@ -92,6 +97,11 @@ button {
 	    color: $red;
         background: #F9E8E7;
         border: 1px solid rgba($red, 0.25);
+
+        &.ui-button {
+            background: #F9E8E7 !important;
+            border: 1px solid rgba($red, 0.25) !important;
+        }
         
         &:hover,
         &:focus {
@@ -108,7 +118,12 @@ button {
 	    color: darken($green, 5%);
         background: $lightgreen;
         border: 1px solid rgba($green, 0.25);
-        
+
+        &.ui-button {
+            background: $lightgreen !important;
+            border: 1px solid rgba($green, 0.25) !important;    
+        }
+
         &:hover,
         &:focus {
 	        border-color: rgba($green, 0.65);

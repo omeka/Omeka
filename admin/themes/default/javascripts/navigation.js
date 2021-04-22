@@ -48,8 +48,8 @@ Omeka.Navigation = {};
     Omeka.Navigation.updateHideButtons = function () {
         $('div.sortable-item').each(function () {
             var headerDiv = $(this); 
-            if (!headerDiv.find('.drawer').length) {
-                headerDiv.append('<div class="drawer"></div>');
+            if (!headerDiv.find('.drawer-toggle').length) {
+                headerDiv.append('<div class="drawer-toggle"></div>');
                 headerDiv.find('.drawer')
                     .click(function (event) {
                         event.preventDefault();

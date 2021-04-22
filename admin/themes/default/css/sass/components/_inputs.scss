@@ -188,3 +188,7 @@ select {
 .mce-textbox:focus {
     border-color: darken($darkgrayborder, 25%) !important;
 }
+
+.field label.checkbox-label {
+    font-weight: normal;
+}

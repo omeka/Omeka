@@ -1,5 +1,6 @@
 .ui-sortable, 
-.sortable {
+.sortable,
+.drawers {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -49,11 +50,6 @@
             }
 		}		
 	}
-    
-    .action-links {
-	    display: inline-block;
-	    float: right;
-	}
 	
 	li {
     	margin-bottom: 15px;
@@ -61,6 +57,7 @@
 	}
 }
 
+.drawer,
 .sortable-item, 
 .add-new {
     background: $lightgray;
@@ -78,6 +75,11 @@
         margin: 0;
     }
     input[type=text] { margin-bottom: 0; }
+        
+    .action-links {
+	    display: inline-block;
+	    float: right;
+	}
 }
 
 .ui-sortable-highlight:empty {
@@ -93,7 +95,7 @@
     border-radius: 2px;
 }
 
-.drawer, 
+.drawer-toggle,
 .delete-element, 
 .undo-delete {
     float: right;
@@ -105,7 +107,8 @@
     color: #4C3939;
 }
 
-.deleted.sortable-item {
+.deleted.sortable-item,
+.deleted.drawer {
     color: #FFF;
     border: 1px solid rgba(#B00D00, 0.65);
     background: rgba(#B00D00, 0.65);
@@ -126,7 +129,7 @@
 .deleted .drawer { color: #fff; }
 
 
-.drawer:after, 
+.drawer-toggle:after, 
 .delete-element:after, 
 .undo-delete:after {
     display: inline-block;
@@ -139,7 +142,7 @@
     float: left;
     text-align: center;
 }
-.drawer:after { content: "\f0da"; }
+.drawer-toggle:after { content: "\f0da"; }
 
 .delete-element:link, .delete-element:active,
 .delete-element:hover, .delete-element:visited,
@@ -148,7 +151,7 @@
     color: #4C3939;
 }
 
-.drawer.opened:after {
+.drawer-toggle.opened:after {
     -webkit-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
     -o-transform: rotate(90deg);
@@ -158,7 +161,9 @@
 .delete-element { display: inline-block; }
 .delete-element:after { content: "\f00d"; }
 
+.drawer > a.undo-delete,
 .ui-sortable .sortable-item > a.undo-delete { display: none; }
+
 .undo-delete:after {
     content: "\f0e2";
     font-size: 12px;
