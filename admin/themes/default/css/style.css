@@ -509,9 +509,9 @@ button {
   a.button.green,
   input[type=submit].green,
   button.green {
-    color: #448500;
+    color: #326200;
     background: #EEF6E6;
-    border: 1px solid rgba(81, 158, 0, 0.25); }
+    border: 1px solid rgba(63, 123, 0, 0.25); }
     span.button.green:hover, span.button.green:focus,
     a.button.green:hover,
     a.button.green:focus,
@@ -519,14 +519,14 @@ button {
     input[type=submit].green:focus,
     button.green:hover,
     button.green:focus {
-      border-color: rgba(81, 158, 0, 0.65);
+      border-color: rgba(63, 123, 0, 0.65);
       background: #e1efd3;
       outline: none; }
     span.button.green *,
     a.button.green *,
     input[type=submit].green *,
     button.green * {
-      color: #448500; }
+      color: #326200; }
 
 /* jQuery UI overrides
 ================================================== */
@@ -555,14 +555,14 @@ button.ui-dialog-titlebar-close {
 .mce-primary {
   background: #EEF6E6 !important; }
   .mce-primary button {
-    color: #448500 !important;
-    border: 1px solid rgba(81, 158, 0, 0.25) !important; }
+    color: #326200 !important;
+    border: 1px solid rgba(63, 123, 0, 0.25) !important; }
     .mce-primary button:hover, .mce-primary button:focus {
-      border-color: rgba(81, 158, 0, 0.65);
+      border-color: rgba(63, 123, 0, 0.65);
       background: #e1efd3;
       outline: none; }
     .mce-primary button * {
-      color: #448500; }
+      color: #326200; }
 
 #content {
   margin-top: 60px; }
@@ -2271,7 +2271,7 @@ ul.details {
   -moz-box-shadow: none;
   box-shadow: none;
   text-shadow: none;
-  color: #519E00;
+  color: #3f7b00;
   padding: 0;
   display: inline;
   margin: 0; }
@@ -2402,9 +2402,9 @@ form.form-inline.editableform {
 
 .tag-list li {
   height: 22px;
-  color: #519E00;
+  color: #3f7b00;
   background: #EEF6E6;
-  border: 1px solid rgba(81, 158, 0, 0.25);
+  border: 1px solid rgba(63, 123, 0, 0.25);
   -webkit-border-radius: 3;
   -moz-border-radius: 3;
   border-radius: 3px;
@@ -2412,7 +2412,7 @@ form.form-inline.editableform {
   margin: 0 10px 10px 0;
   padding: 5px 10px; }
   .tag-list li:hover, .tag-list li:focus {
-    border-color: rgba(81, 158, 0, 0.65);
+    border-color: rgba(63, 123, 0, 0.65);
     background: #e1efd3;
     outline: none; }
 
@@ -2425,14 +2425,14 @@ form.form-inline.editableform {
   content: "";
   width: 1px;
   position: absolute;
-  background-color: rgba(81, 158, 0, 0.25);
+  background-color: rgba(63, 123, 0, 0.25);
   bottom: -5px;
   top: -5px;
   right: 0; }
 
 .tag-list li .tag, .tag-list li a, .tag-list li .count {
   display: inline-block;
-  color: #2a5200; }
+  color: #182f00; }
 
 .tag-list li .delete-tag a, .tag-list li .remove-tag a, .tag-list li .undo-remove-tag a {
   text-indent: -9999px;
@@ -2451,7 +2451,7 @@ form.form-inline.editableform {
   font-weight: 900;
   height: 100%;
   width: 100%;
-  background-color: #519e00;
+  background-color: #3f7b00;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   border-radius: 20px;
