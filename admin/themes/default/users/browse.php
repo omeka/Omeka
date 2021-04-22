@@ -26,14 +26,20 @@ echo flash();
 </div>
 <?php endif; ?>
 
-<form id='search-users' method='GET'>
-	<?php if (is_allowed('Users', 'add')): ?>
+
+<?php if (is_allowed('Users', 'add')): ?>
 	    <?php echo link_to('users', 'add', __('Add a User'), array('class'=>'green button')); ?>
 	<?php endif; ?>
-	<button><?php echo __('Search users'); ?></button><input type='text' name='search' aria-label="<?php echo __('Search users'); ?>"/>
-	<label><input type='radio' name='search-type' value='username' checked='checked' /><?php echo __('Username'); ?></label>
-	<label><input type='radio' name='search-type' value='name' /><?php echo __('Display Name'); ?></label>
-	<label><input type='radio' name='search-type' value='email' /><?php echo __('Email'); ?></label>
+
+<form id='search-users' method='GET'>
+	<input type='text' name='search' aria-labelledby="search-users-button" />
+	<fieldset>
+		<legend class="sr-only"><?php echo __('Options'); ?></legend>
+		<label><input type='radio' name='search-type' value='username' checked='checked' /><?php echo __('Username'); ?></label>
+		<label><input type='radio' name='search-type' value='name' /><?php echo __('Display Name'); ?></label>
+		<label><input type='radio' name='search-type' value='email' /><?php echo __('Email'); ?></label>
+	</fieldset>
+	<button id="search-users-button"><?php echo __('Search users'); ?></button>
 </form>
 
 <?php echo pagination_links(); ?>

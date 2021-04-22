@@ -301,6 +301,14 @@ hr {
     border: 1px blue dashed;
     background: #000; }
 
+.sr-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden; }
+
 img {
   border: 0; }
 
@@ -2591,5 +2599,20 @@ form.form-inline.editableform {
     width: calc(50% - 5px);
     float: left;
     margin-right: 10px; } }
+
+#search-users {
+  float: right;
+  display: flex;
+  align-items: center; }
+
+#search-users input[type="text"] {
+  margin-bottom: 0; }
+
+#search-users fieldset {
+  display: inline-block;
+  padding: 8.5px 5px; }
+
+#search-users-button {
+  margin: 0 0 0 5px; }
 
 /*# sourceMappingURL=style.css.map */

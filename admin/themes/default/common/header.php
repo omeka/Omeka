@@ -68,7 +68,7 @@
 	    <div class="subhead">
 	        <?php echo search_form(array('show_advanced' => true, 'form_attributes'=> array('role'=>'search'))); ?>
 	        <?php if (isset($title)) : ?>
-	            <h1 id="content-heading" class="section-title" title="<?php echo $title; ?>"><?php echo $title ?></h1>
+	            <h1 id="content-heading" class="section-title"><?php echo $title ?></h1>
 	        <?php endif; ?>
 	    </div>
 	    <div class="content-wrapper">
