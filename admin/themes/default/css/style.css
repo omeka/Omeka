@@ -1602,7 +1602,7 @@ th {
   padding: 5px 10px;
   text-align: left;
   font-weight: normal; }
-  th a:after {
+  th a span:after {
     width: 10px;
     height: 10px;
     content: url("../images/sort.png");
@@ -1620,9 +1620,9 @@ th {
     opacity: 1;
     color: #000;
     font-weight: bold; }
-  th.desc a:after {
+  th.desc a span:after {
     content: url("../images/desc.png"); }
-  th.asc a:after {
+  th.asc a span:after {
     content: url("../images/asc.png"); }
 
 tr {

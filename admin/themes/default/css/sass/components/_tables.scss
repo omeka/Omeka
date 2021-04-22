@@ -21,7 +21,7 @@ th {
     text-align: left;
     font-weight: normal;
 
-	a:after {
+	a span:after {
         width: 10px;
         height: 10px;
         content: url('../images/sort.png');
@@ -47,8 +47,8 @@ th {
 		}
 	}
 
-    &.desc a:after { content: url('../images/desc.png'); }
-    &.asc a:after { content: url('../images/asc.png'); }
+    &.desc a span:after { content: url('../images/desc.png'); }
+    &.asc a span:after { content: url('../images/asc.png'); }
 }
 
 tr { background-color: rgba(255,255,255,.5); }
