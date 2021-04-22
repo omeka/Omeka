@@ -14,7 +14,7 @@ echo flash();
 <h2><?php echo __('API Keys'); ?></h2>
 <div class="field">
     <div class="two columns alpha">
-        <label for="search_record_types"><?php echo __('New key label'); ?></label>
+        <label for="api_key_label"><?php echo __('New key label'); ?></label>
     </div>
     <div class="inputs five columns omega">
         <p class="explanation"><?php echo __(
@@ -41,7 +41,7 @@ echo flash();
             <th><?php echo __('Key'); ?></th>
             <th><?php echo __('Last IP'); ?></th>
             <th><?php echo __('Last accessed'); ?></th>
-            <th><?php echo __('Rescind'); ?></th>
+            <th id="rescind"><?php echo __('Rescind'); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -51,7 +51,7 @@ echo flash();
             <td style="font-family: monospace;"><?php echo $key->key; ?></td>
             <td><?php echo $key->ip ? inet_ntop($key->ip) : ''; ?></td>
             <td><?php echo $key->accessed; ?></td>
-            <td><?php echo $this->formCheckbox('api_key_rescind[]', $key->id) ?></td>
+            <td><?php echo $this->formCheckbox('api_key_rescind[]', $key->id, array('aria-labelledby' => 'rescind')); ?></td>
         </tr>
         <?php endforeach; ?>
     </tbody>
