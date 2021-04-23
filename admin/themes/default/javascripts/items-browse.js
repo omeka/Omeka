@@ -39,8 +39,8 @@ Omeka.ItemsBrowse = {};
 
     Omeka.ItemsBrowse.setupBatchEdit = function () {
         var itemCheckboxes = $("table#items tbody input[type=checkbox]");
-        var globalCheckboxLabel = $('th.batch-edit-heading').text();
-        var globalCheckbox = $('th.batch-edit-heading').html('<input type="checkbox" aria-label="' + globalCheckboxLabel + '">').find('input');
+        var globalCheckboxLabel = $('th.batch-edit-heading label').text();
+        var globalCheckbox = $('th.batch-edit-heading').append('<input type="checkbox" name="batch-all-checkbox" id="batch-all-checkbox" title="' + globalCheckboxLabel + '">').find('input');
         var batchEditSubmit = $('.batch-edit-option input[type=submit]');
         var batchAllButton = $('.batch-all-toggle');
         var batchAllInput = $('#batch-all');

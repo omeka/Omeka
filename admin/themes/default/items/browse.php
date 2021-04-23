@@ -40,7 +40,7 @@ echo item_search_filters();
 	        <thead>
 	            <tr>
 	                <?php if (is_allowed('Items', 'edit')): ?>
-	                <th class="batch-edit-heading"><?php echo __('Select all rows'); ?></th>
+	                <th class="batch-edit-heading"><label for="batch-all-checkbox" class="sr-only"><?php echo __('Select all rows'); ?></label></th>
 	                <?php endif; ?>
 	                <?php
 	                $browseHeadings[__('Title')] = 'Dublin Core,Title';
