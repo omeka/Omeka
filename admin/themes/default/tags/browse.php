@@ -29,13 +29,13 @@ echo flash();
 <?php $tagsSectionClass = ($canEdit) ? 'seven' : 'ten alpha'; ?> 
 
 <form id="search-tags" method="GET" class="<?php echo $tagsSectionClass; ?> columns omega">
-    <input type="text" name="like" aria-label="<?php echo __('Search tags'); ?>"/> 
-    <button class="green button"><?php echo __('Search tags'); ?></button>
+    <input type="text" name="like" aria-labelledby="search-tags-button"/> 
+    <button class="green button" type="button" id="search-tags-button"><?php echo __('Search tags'); ?></button>
     <?php if(isset($params['type'])): ?>
     <input type="hidden" name="type" value="<?php echo $params['type']; ?>"/>
     <?php endif; ?>
     
-    <select class="quick-filter">
+    <select class="quick-filter" aria-label="<?php echo __('Record Types'); ?>">
         <option><?php echo __('Record Types'); ?></option>
         <option value="<?php echo $this->url(); ?>"><?php echo __('All'); ?></option>
         <?php foreach($record_types as $record_type): ?>
