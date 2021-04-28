@@ -75,14 +75,14 @@ echo item_search_filters();
 	                    <?php echo link_to_item(item_image('square_thumbnail', array(), 0, $item), array('class' => 'item-thumbnail'), 'show', $item); ?>
 	                    <?php endif; ?>
 	
-	                    <h3 class="title">
+	                    <span class="title">
 	                    	<?php echo link_to_item(); ?>
 							<?php if ($item->featured): ?><span class="featured" aria-label="<?php echo __('Featured'); ?>" title="<?php echo __('Featured'); ?>"></span><?php endif; ?>
 	
 		                    <?php if(!$item->public): ?>
 		                    	<small><?php echo __('(Private)'); ?></small>
 		                    <?php endif; ?>
-	                    </h3>
+							</span>
 	                    <ul class="action-links group">
 	                        <?php if (is_allowed($item, 'edit')): ?>
 	                        <li><?php echo link_to_item(__('Edit'), array('class' => 'edit'), 'edit'); ?></li>

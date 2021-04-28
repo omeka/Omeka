@@ -36,7 +36,7 @@ echo flash();
 	        <?php foreach (loop('ItemType') as $item_type): ?>
 	        <tr class="itemtype">
 	            <td class="itemtype-name">
-	                <h3 class="title"><a href="<?php echo html_escape(record_url($item_type, 'show', 'item-types')); ?>"><?php echo html_escape($item_type->name); ?></a></h3>
+	                <span class="title"><a href="<?php echo html_escape(record_url($item_type, 'show', 'item-types')); ?>"><?php echo html_escape($item_type->name); ?></a></span>
 	                <ul class="action-links group">
 	                <?php if (is_allowed('ItemTypes', 'edit')): ?>
 	                    <li><a class="edit" href="<?php echo html_escape(url('item-types/edit/' . $item_type->id)); ?>"><?php echo __('Edit'); ?></a></li>

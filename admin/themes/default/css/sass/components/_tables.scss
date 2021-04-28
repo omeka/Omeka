@@ -100,9 +100,12 @@ td {
     text-align: center;
 }
 
-h3.title {
+span.title {
 	margin: 0 0 $spacing-s;
-	
+    font-size: 16px;
+	font-weight: 700;
+	line-height: 20px;
+    	
 	small {
 		font-weight: 400;
 		color: gray;

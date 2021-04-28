@@ -47,13 +47,13 @@ echo flash();
 	                        <?php endif; ?>
 	                        
 	                        
-	                        <h3 class="title <?php if ($collection->featured): ?>featured<?php endif; ?>">
+	                        <span class="title <?php if ($collection->featured): ?>featured<?php endif; ?>">
 		                    	<?php echo link_to_collection(); ?>
 		
 			                    <?php if(!$collection->public): ?>
 			                    	<small><?php echo __('(Private)'); ?></small>
 			                    <?php endif; ?>
-		                    </h3>
+							</span>
 
 	                        <?php if (is_allowed($collection, 'edit')): ?>
 	                        <ul class="action-links">

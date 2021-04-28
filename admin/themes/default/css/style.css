@@ -1703,9 +1703,12 @@ td {
   width: 1%;
   text-align: center; }
 
-h3.title {
-  margin: 0 0 5px; }
-  h3.title small {
+span.title {
+  margin: 0 0 5px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px; }
+  span.title small {
     font-weight: 400;
     color: gray;
     margin-left: 5px; }
