@@ -1,7 +1,4 @@
-span.button,
-a.button, 
-input[type=submit], 
-button {
+@mixin button {
     -webkit-border-radius: 3;
     -moz-border-radius: 3;
     border-radius: 3px;
@@ -27,7 +24,21 @@ button {
     text-decoration: none;
     white-space: normal;
     transition: 0.5s all;
-    
+}
+
+@mixin large {
+    display: block;
+    line-height: 1.75em;
+    margin: $spacing-m auto;
+    padding: $spacing-m $spacing-l;
+    font-size: 115%;
+}
+
+@mixin small {
+    display: inline-block;
+    margin: 0 $spacing-s $spacing-l 0;
+    padding: $spacing-s $spacing-m;
+
     &:hover,
     &:focus {
 	    border-color: rgba($black, 0.65);
@@ -47,6 +58,79 @@ button {
         cursor: default;
         opacity: .35;
     }
+}
+
+@mixin blue {
+    color: $blue;
+    background: #EEF3FA;
+    border: 1px solid rgba($blue, 0.25);
+
+    &.ui-button {
+        background: #EEF3FA !important;
+        border: 1px solid rgba($blue, 0.25) !important;
+    }
+    
+    &:hover,
+    &:focus {
+        border-color: rgba($blue, 0.65);
+        background: darken(#EEF3FA, 5%);
+        outline: none;
+    }
+
+    * {
+        color: $blue;
+    }
+}
+
+@mixin red {
+    color: $red;
+    background: #F9E8E7;
+    border: 1px solid rgba($red, 0.25);
+
+    &.ui-button {
+        background: #F9E8E7 !important;
+        border: 1px solid rgba($red, 0.25) !important;
+    }
+    
+    &:hover,
+    &:focus {
+        border-color: rgba($red, 0.65);
+        background: darken(#F9E8E7, 5%);
+        outline: none;
+    }
+
+    * {
+        color: $red;
+    }
+}
+
+@mixin green {
+    color: darken($green, 5%);
+    background: $lightgreen;
+    border: 1px solid rgba($green, 0.25);
+
+    &.ui-button {
+        background: $lightgreen !important;
+        border: 1px solid rgba($green, 0.25) !important;    
+    }
+
+    &:hover,
+    &:focus {
+        border-color: rgba($green, 0.65);
+        background: darken($lightgreen, 5%);
+        outline: none;
+    }
+
+    * {
+        color: darken($green, 5%);
+    }
+}
+
+span.button,
+a.button, 
+input[type=submit], 
+button {
+    @include button;
     
     &.full-width {
 	    width: 100%;
@@ -60,80 +144,20 @@ button {
     }
     
     &.large {
-        display: block;
-        line-height: 1.75em;
-        margin: $spacing-m auto;
-        padding: $spacing-m $spacing-l;
-		font-size: 115%;
+        @include large;
     }
     &.small {
-        display: inline-block;
-        margin: 0 $spacing-s $spacing-l 0;
-        padding: $spacing-s $spacing-m;
+        @include small;
     }
     
     &.blue {
-	    color: $blue;
-        background: #EEF3FA;
-        border: 1px solid rgba($blue, 0.25);
-
-        &.ui-button {
-            background: #EEF3FA !important;
-            border: 1px solid rgba($blue, 0.25) !important;
-        }
-        
-        &:hover,
-        &:focus {
-	        border-color: rgba($blue, 0.65);
-	        background: darken(#EEF3FA, 5%);
-	        outline: none;
-        }
-
-        * {
-            color: $blue;
-        }
+        @include blue;
     }
     &.red {
-	    color: $red;
-        background: #F9E8E7;
-        border: 1px solid rgba($red, 0.25);
-
-        &.ui-button {
-            background: #F9E8E7 !important;
-            border: 1px solid rgba($red, 0.25) !important;
-        }
-        
-        &:hover,
-        &:focus {
-	        border-color: rgba($red, 0.65);
-	        background: darken(#F9E8E7, 5%);
-	        outline: none;
-        }
-
-        * {
-            color: $red;
-        }
+        @include red;
     }
     &.green {
-	    color: darken($green, 5%);
-        background: $lightgreen;
-        border: 1px solid rgba($green, 0.25);
-
-        &.ui-button {
-            background: $lightgreen !important;
-            border: 1px solid rgba($green, 0.25) !important;    
-        }
-
-        &:hover,
-        &:focus {
-	        border-color: rgba($green, 0.65);
-	        background: darken($lightgreen, 5%);
-	        outline: none;
-        }
-
-        * {
-            color: darken($green, 5%);
-        }
+        @include green;
     }
 }
            

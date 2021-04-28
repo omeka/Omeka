@@ -7,12 +7,13 @@ Omeka.ItemsBrowse = {};
 (function ($) {
     Omeka.ItemsBrowse.setupDetails = function (detailsText, showDetailsText, hideDetailsText) {
         $('.details').hide();
-        $('.action-links').prepend('<li class="details-link">' + detailsText + '</li> ');
+        $('.action-links').prepend('<li><a href="#" class="details-link">' + detailsText + '</a></li>');
 
         $('tr.item').each(function() {
             var itemDetails = $(this).find('.details');
             if ($.trim(itemDetails.html()) != '') {
-                $(this).find('.details-link').css({'color': '#4E7181', 'cursor': 'pointer'}).click(function() {
+                $(this).find('.details-link').click(function(e) {
+                    e.preventDefault();
                     itemDetails.slideToggle('fast');
                 });
             }

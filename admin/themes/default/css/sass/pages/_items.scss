@@ -88,6 +88,32 @@
         height: 25px;
     }
 
+.browse .edit {
+    @include screen-xs {
+        @include button;
+        @include small;
+        @include blue;
+        margin-bottom: 0;
+    }
+}
+
+.browse .delete-confirm {
+    @include screen-xs {
+        @include button;
+        @include small;
+        @include red;
+        margin-bottom: 0;
+    }
+}
+
+.browse .details-link {
+    @include screen-xs {
+        @include button;
+        @include small;
+        margin-bottom: 0;
+    }
+}
+
 #outputs {
     clear: both;
     line-height: 1.5em;

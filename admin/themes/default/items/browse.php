@@ -85,7 +85,7 @@ echo item_search_filters();
 	                    </h3>
 	                    <ul class="action-links group">
 	                        <?php if (is_allowed($item, 'edit')): ?>
-	                        <li><?php echo link_to_item(__('Edit'), array(), 'edit'); ?></li>
+	                        <li><?php echo link_to_item(__('Edit'), array('class' => 'edit'), 'edit'); ?></li>
 	                        <?php endif; ?>
 	
 	                        <?php if (is_allowed($item, 'delete')): ?>

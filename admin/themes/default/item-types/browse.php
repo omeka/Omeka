@@ -1,7 +1,7 @@
 <?php
 $pageTitle = __('Browse Item Types') . ' ' . __('(%s total)', $total_results);
 $totalItemsWithoutType = get_db()->getTable('Item')->count(array('item_type' => 0));
-echo head(array('title' => $pageTitle,'bodyclass' => 'item-types'));
+echo head(array('title' => $pageTitle,'bodyclass' => 'item-types browse'));
 echo flash();
 ?>
 

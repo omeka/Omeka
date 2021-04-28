@@ -1,7 +1,7 @@
 <?php
 $pageTitle = __('Browse Collections') . ' ' .  __('(%s total)', $total_results);
 $totalItemsWithoutCollection = get_db()->getTable('Item')->count(array('collection' => 0));
-echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections'));
+echo head(array('title'=>$pageTitle, 'bodyclass'=>'collections browse'));
 echo flash();
 ?>
 

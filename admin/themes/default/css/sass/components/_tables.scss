@@ -71,12 +71,26 @@ td {
     margin: 0;
     padding: 0;
 
+    @include screen-xs {
+        clear: both;
+        padding-top: $spacing-s;
+    }
+
     a { color: $blue; }
 
     li { 
 	    display: inline-block; 
 	    
-        &:after { content: ' \00b7'; margin-left: 3px; margin-right: 3px; }
+        &:after { 
+            content: ' \00b7'; 
+            margin-left: 3px; 
+            margin-right: 3px;
+            
+            @include screen-xs {
+                content: '';
+                margin: 0;
+            }
+        }
         &:last-child:after { content: ''; margin: 0; }
     }
 }
