@@ -50,7 +50,7 @@ Omeka.Navigation = {};
             var headerDiv = $(this); 
             if (!headerDiv.find('.drawer-toggle').length) {
                 headerDiv.append('<div class="drawer-toggle"></div>');
-                headerDiv.find('.drawer')
+                headerDiv.find('.drawer-toggle')
                     .click(function (event) {
                         event.preventDefault();
                         $(this).parent().next().toggle();
