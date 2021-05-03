@@ -14,7 +14,7 @@ echo flash();
         </p>
         <p><?php echo __($element_set->description); ?></p>
         <input type="hidden" name="elements-to-delete" id="elements-to-delete" value="" />
-        <ul class="ui-sortable item-type-metadata">
+        <ul class="sortable ui-sortable item-type-metadata">
         <?php foreach ($element_set->getElements() as $element): ?>
             <li class="element">
                 <div class="sortable-item">
@@ -36,7 +36,7 @@ echo flash();
     <?php echo $csrf; ?>
     <section class="three columns omega">
         <div id="save" class="panel">
-            <?php echo $this->formSubmit('submit_edit_item_type', __('Save Changes'), array('class' => 'big green button')); ?>
+            <?php echo $this->formSubmit('submit_edit_item_type', __('Save Changes'), array('class' => 'full-width green button')); ?>
         </div>
     </section>
 </form>

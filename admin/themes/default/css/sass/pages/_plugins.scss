@@ -1,0 +1,130 @@
+.plugins.browse {
+	
+	table form {
+	    display: inline-block;
+	}
+	
+	h2 { margin-bottom: 0; }
+	
+	h3:first-of-type {
+	    margin-top: 0;
+	}
+
+	table a.button,
+	table input[type=submit],
+	table button {
+	    background: none;
+	    border: 0;
+	    -webkit-box-shadow: none;
+	    -moz-box-shadow: none;
+	    box-shadow: none;
+	    text-shadow: none;
+	    color: #4E7181;
+	    padding: 0;
+	    display: inline;
+	    margin: 0;
+	}
+
+	table form:after {
+	    content: ' \00b7';
+	}
+
+	table form:last-child:after {
+	    content: '';
+	}
+
+	th:first-child {
+	    width: 30%;
+	}
+	
+	.action-links:after {
+	    content: "";
+	    display: block;
+	    width: 100%;
+	    height: 1px;
+	    clear: both;
+	}
+	
+	.plugin {
+	    overflow: hidden;
+	    border-bottom: 1px solid #E4E5DE;
+	    margin-left: -10px;
+	    width: 100%;
+	    padding: 20px 10px;
+	    
+	    &:last-child {
+		    border-bottom: none;
+	    }
+	}
+	
+	.details {
+	    list-style-type: none;
+	    padding-left: 10px;
+	}
+
+	.plugin-metadata {
+	    margin: 0;
+	    font-weight: bold;
+	}
+
+	.action-links li {
+	    display: inline-block;
+	    width: 32.3%;
+	    vertical-align: top;
+	    
+	    @include screen-xs {
+		    width: 100%;
+		    
+		    &:first-child {
+			    margin-top: 10px;
+		    }
+		}
+	}
+
+	button,
+	a.button,
+	input[type=submit] {
+	    width: 100%;
+	    margin-bottom: 10px;
+	}
+	
+	.action-links li:after { content: none; }
+	.cannotload { background-color: lighten(#FFE7E7, 2%); }
+	.upgrade { background-color: lighten(#E9FFC2, 2%); }
+
+}
+
+.plugin-row {
+    overflow: auto;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+
+    &:last-child {
+        border-bottom: 0;
+    }
+}
+
+.plugin-title {
+    clear: left;
+}
+
+.plugin-title, 
+.plugin-meta, 
+.plugin-description, 
+.plugin-support-link {
+    margin: 0;
+}
+
+.version-notification { 
+	display: none;
+	list-style: none;
+	margin: 10px 0;
+	padding: 0;
+
+	&.active { display: block; }
+	
+	.flash {
+		margin-bottom: 0;
+	}
+}

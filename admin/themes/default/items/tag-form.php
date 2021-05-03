@@ -8,7 +8,7 @@
         <label><?php echo __('Add Tags'); ?></label>           
         <input type="text" name="tags" size="20" id="tags" class="textinput" value="" />
         <p id="add-tags-explanation" class="explanation"><?php echo __('Separate tags with %s', option('tag_delimiter')); ?></p>
-        <input type="submit" name="add-tags-button" id="add-tags-button" class="green button" value="<?php echo __('Add Tags'); ?>" />
+        <input type="submit" name="add-tags-button" id="add-tags-button" class="button" value="<?php echo __('Add Tags'); ?>" />
     </div>
     <div id="all-tags">
     <?php if ($tags): ?>

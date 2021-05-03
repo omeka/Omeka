@@ -21,24 +21,24 @@ echo flash();
             <?php if (is_allowed($item, 'delete')): ?>
             <?php echo link_to_item(__('Delete'), array('class' => 'delete-confirm big red button'), 'delete-confirm'); ?>
             <?php endif; ?>
-            
+
             <?php fire_plugin_hook("admin_items_panel_buttons", array('view'=>$this, 'record'=>$item)); ?>
-            
+
             <div id="public-featured">
                 <?php if ( is_allowed('Items', 'makePublic') ): ?>
                     <div class="public">
-                        <label for="public"><?php echo __('Public'); ?>:</label> 
+                        <label for="public"><?php echo __('Public'); ?>:</label>
                         <?php echo $this->formCheckbox('public', $item->public, array(), array('1', '0')); ?>
                     </div>
                 <?php endif; ?>
                 <?php if ( is_allowed('Items', 'makeFeatured') ): ?>
                     <div class="featured">
-                        <label for="featured"><?php echo __('Featured'); ?>:</label> 
+                        <label for="featured"><?php echo __('Featured'); ?>:</label>
                         <?php echo $this->formCheckbox('featured', $item->featured, array(), array('1', '0')); ?>
                     </div>
                 <?php endif; ?>
             </div> <!-- end public-featured  div -->
-            
+
             <div id="collection-form" class="field">
                 <?php echo $this->formLabel('collection-id', __('Collection'));?>
                 <div class="inputs">

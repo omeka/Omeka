@@ -8,7 +8,7 @@ echo flash();
     <?php include 'form.php'; ?>
     <section class="three columns omega">
         <div id="save" class="panel">
-            <input type="submit" class="big green button" name="submit" value="<?php echo __('Add Collection'); ?>" />
+            <input type="submit" class="green full-width button" name="submit" value="<?php echo __('Add Collection'); ?>" />
 
             <?php fire_plugin_hook("admin_collections_panel_buttons", array('view'=>$this, 'record'=>$collection)); ?>
 

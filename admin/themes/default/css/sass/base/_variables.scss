@@ -1,0 +1,34 @@
+// Colors
+$lightgray:         #f1f2f2;
+$midgray:           #808080;
+$black:             #231f20;
+
+
+// Typography
+$sans-serif:         'Helvetica-Neue', sans-serif;                      // Define your basic fonts here, for consistency
+
+
+// Media Queries
+$screen-xxs:        'max-width: 480px';
+$screen-xs:         'max-width: 767px';
+$screen-sm:         'min-width: 768px) and (max-width: 991px';        // These are the precanned bootstrap queries, plus a few extras for fine tuning
+$screen-md:         'min-width: 992px) and (max-width: 1199px';
+$screen-lg:         'min-width: 1200px) and (max-width: 1439px';
+$screen-xl:         'min-width: 1440px';
+
+$screen-ltmd:       'max-width: 991px';                               // These are helpful for defining media queries for a range of sizes
+$screen-ltlg:       'max-width: 1199px';                              //   e.g. if you want everything above xs to have a certain style
+$screen-ltxl:       'max-width: 1439px';
+
+$screen-gtxs:       'min-width: 768px';
+$screen-gtsm:       'min-width: 992px';
+$screen-gtmd:       'min-width: 1200px';
+
+
+$screen-btwn-1200-1250: 	'min-width: 1200px) and (max-width: 1250px';
+$screen-btwn-992-1020: 		'min-width: 992px) and (max-width: 1020px';
+$screen-btwn-768-790: 		'min-width: 768px) and (max-width: 790px';
+
+
+// Transition
+$transition:        all 0.5s;                                           // For consistent transition animations, use this

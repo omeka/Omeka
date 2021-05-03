@@ -56,7 +56,7 @@ if (!Omeka) {
             $contentDiv = $("#content");
         if (document.getElementById("save")) {
             $window.scroll(function () {
-                if($window.scrollTop() > offset.top && $window.width() > 767 && ($window.height() - topPadding - 85) >  $save.height()) {
+                if($window.scrollTop() > offset.top && $window.width() > 991 && ($window.height() - topPadding - 85) >  $save.height()) {
                     $save.stop().animate({
                         marginTop: $window.scrollTop() - offset.top + topPadding
                         });
@@ -66,6 +66,35 @@ if (!Omeka) {
                     });
                 }
             });
+        }
+    };
+    
+    Omeka.sidebarNavigationScroll = function () {
+        var $sidebar   = $("#content-nav"),
+            $window = $(window),
+            offset  = $sidebar.offset(),
+            topPadding = 62;
+            
+        if (document.getElementById("content-nav")) {
+	        if($window.width() > 767) {
+	            $window.scroll(function () {
+	                if($window.scrollTop() > offset.top && $window.width() > 767 && ($window.height() - topPadding - 85) >  $sidebar.height()) {
+	                    $sidebar.stop().animate({
+	                        marginTop: $window.scrollTop() - offset.top + topPadding
+	                        });
+	                } else {
+	                    $sidebar.stop().animate({
+	                        marginTop: 0
+	                    });
+	                }
+	            });
+            } else {
+	            $window.resize(function(){
+		            $sidebar.stop().animate({
+	                    marginTop: 0
+	                });
+	            })
+            }
         }
     };
 
@@ -83,7 +112,18 @@ if (!Omeka) {
             }
         });
     };
-
+    
+    Omeka.toggleMobileMenu = function() {
+	    $('.mobile-menu').click(function (event) {
+			var target = $(this).data('target');
+			$(target).toggleClass('in');
+	    });
+    };
+    
+    Omeka.moveNavList = function () {
+        nav = $('.content-wrapper > .navigation');
+        nav.insertAfter(nav.parent().parent().find('.subhead'));
+    };
 
     Omeka.showAdvancedForm = function () {
         var advancedForm = $('#advanced-form');
@@ -201,9 +241,12 @@ if (!Omeka) {
     Omeka.readyCallbacks = [
         [Omeka.deleteConfirm, null],
         [Omeka.saveScroll, null],
+        [Omeka.sidebarNavigationScroll, null],
         [Omeka.stickyNav, null],
+        [Omeka.toggleMobileMenu, null],
         [Omeka.showAdvancedForm, null],
         [Omeka.skipNav, null],
+        [Omeka.moveNavList, null],
         [Omeka.mediaFallback, null],
         [Omeka.warnIfUnsaved, null]
     ];

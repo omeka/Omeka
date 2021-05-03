@@ -18,7 +18,7 @@ echo head(array('title'=>$pageTitle, 'bodyclass'=>'settings')); ?>
 
 <section class="three columns omega">
     <div id="save" class="panel">
-        <?php echo $this->formSubmit('appearance_submit', __('Save Changes'), array('class'=>'submit big green button')); ?>
+        <?php echo $this->formSubmit('appearance_submit', __('Save Changes'), array('class'=>'submit full-width green button')); ?>
     </div>
 </section>
 

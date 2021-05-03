@@ -49,37 +49,39 @@ echo flash();
         'You can create keys on each user\'s %sedit page%s.',
         '<a href="' . url('users') . '">', '</a>'
         ); ?></p>
-        <table>
-            <thead>
-            <tr>
-                <th><?php echo 'Resource'; ?></th>
-                <th><?php echo 'show'; ?></th>
-                <th><?php echo 'browse'; ?></th>
-                <th><?php echo 'add'; ?></th>
-                <th><?php echo 'edit'; ?></th>
-                <th><?php echo 'delete'; ?></th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($this->api_resources as $resourceName => $resourceInfo): ?>
-            <?php if (in_array($resourceName, array('site', 'resources'))): continue; endif; ?>
-            <tr>
-                <td><?php echo $resourceName; ?></td>
-                <td style="text-align: center;"><?php if (in_array('get', $resourceInfo['actions'])): echo '&#9679;'; endif; ?></td>
-                <td style="text-align: center;"><?php if (in_array('index', $resourceInfo['actions'])): echo '&#9679;'; endif; ?></td>
-                <td style="text-align: center;"><?php if (in_array('post', $resourceInfo['actions'])): echo '&#9679;'; endif; ?></td>
-                <td style="text-align: center;"><?php if (in_array('put', $resourceInfo['actions'])): echo '&#9679;'; endif; ?></td>
-                <td style="text-align: center;"><?php if (in_array('delete', $resourceInfo['actions'])): echo '&#9679;'; endif; ?></td>
-            </tr>
-            <?php endforeach; ?>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+	        <table>
+	            <thead>
+	            <tr>
+	                <th><?php echo 'Resource'; ?></th>
+	                <th><?php echo 'show'; ?></th>
+	                <th><?php echo 'browse'; ?></th>
+	                <th><?php echo 'add'; ?></th>
+	                <th><?php echo 'edit'; ?></th>
+	                <th><?php echo 'delete'; ?></th>
+	            </tr>
+	            </thead>
+	            <tbody>
+	            <?php foreach ($this->api_resources as $resourceName => $resourceInfo): ?>
+	            <?php if (in_array($resourceName, array('site', 'resources'))): continue; endif; ?>
+	            <tr>
+	                <td><?php echo $resourceName; ?></td>
+	                <td style="text-align: center;"><?php if (in_array('get', $resourceInfo['actions'])): echo '&#9679;'; endif; ?></td>
+	                <td style="text-align: center;"><?php if (in_array('index', $resourceInfo['actions'])): echo '&#9679;'; endif; ?></td>
+	                <td style="text-align: center;"><?php if (in_array('post', $resourceInfo['actions'])): echo '&#9679;'; endif; ?></td>
+	                <td style="text-align: center;"><?php if (in_array('put', $resourceInfo['actions'])): echo '&#9679;'; endif; ?></td>
+	                <td style="text-align: center;"><?php if (in_array('delete', $resourceInfo['actions'])): echo '&#9679;'; endif; ?></td>
+	            </tr>
+	            <?php endforeach; ?>
+	            </tbody>
+	        </table>
+        </div>
         <?php fire_plugin_hook('admin_settings_api_form', array('view' => $this)); ?>
     </section>
     <?php echo $csrf; ?>
     <section class="three columns omega">
         <div id="save" class="panel">
-            <?php echo $this->formSubmit('submit_save_changes', __('Save Changes'), array('class'=>'submit big green button')); ?>
+            <?php echo $this->formSubmit('submit_save_changes', __('Save Changes'), array('class'=>'submit full-width green button')); ?>
         </div>
     </section>
 </form>

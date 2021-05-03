@@ -105,7 +105,7 @@ $formAttributes['method'] = 'GET';
                     )
                 );
                 ?>
-                <button type="button" class="remove_search red button" disabled="disabled" style="display: none;"><?php echo __('Remove field'); ?></button>
+                <button type="button" class="remove_search small red button" disabled="disabled" style="display: none;"><?php echo __('Remove field'); ?></button>
             </div>
         <?php endforeach; ?>
         </div>

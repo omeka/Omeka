@@ -73,7 +73,7 @@ echo flash();
         <h4><?php echo __('File Metadata'); ?></h4>
         <div id="file-list">
             <?php if (!metadata('item', 'has files')):?>
-                <p><?php echo __('There are no files for this item yet.');?> <?php echo link_to_item(__('Add a File'), array(), 'edit'); ?>.</p>
+                <p><?php echo __('There are no files for this item yet.');?><br/><?php echo link_to_item(__('Add a File'), array(), 'edit'); ?>.</p>
             <?php else: ?>
                 <ul>
                     <?php foreach (loop('files', $this->item->Files) as $file): ?>

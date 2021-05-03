@@ -7,15 +7,6 @@ echo flash();
     <section class="seven columns alpha">
         <div class="field">
             <div class="two columns alpha">
-                <label for="search_query_type"><?php echo __('Search Query Type') ?></label>
-            </div>
-            <div class="inputs five columns omega">
-                <p class="explanation"><?php echo __('Select the default query type used for simple search in Omeka.'); ?></p>
-                <?php echo $this->formRadio('search_query_type', $this->defaultQueryType, array(), $this->validQueryTypes); ?>
-            </div>
-        </div>
-        <div class="field">
-            <div class="two columns alpha">
                 <label for="search_record_types"><?php echo __('Search Record Types'); ?></label>
             </div>
             <div class="inputs five columns omega">
@@ -47,8 +38,8 @@ echo flash();
     <?php echo $csrf; ?>
     <section class="three columns omega">
         <div id="save" class="panel">
-            <?php echo $this->formSubmit('submit_save_changes', __('Save Changes'), array('class'=>'submit big green button')); ?>
-            <?php echo $this->formSubmit('submit_index_records', __('Index Records'), array('class'=>'submit big blue button')); ?>
+            <?php echo $this->formSubmit('submit_save_changes', __('Save Changes'), array('class'=>'submit full-width green button')); ?>
+            <?php echo $this->formSubmit('submit_index_records', __('Index Records'), array('class'=>'submit full-width blue button')); ?>
         </div>
     </section>
 </form>

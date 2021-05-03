@@ -1,5 +1,5 @@
 <?php if (is_allowed('Settings', 'edit')): ?>
-<div id="section-nav" role="navigation">
+<div id="section-nav" role="navigation" class="navigation">
 <?php
     $navArray = array(
         array(

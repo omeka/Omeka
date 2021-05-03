@@ -1,4 +1,5 @@
 <nav id="content-nav" class="two columns" role="navigation" aria-label="<?php echo __('Main Menu'); ?>">
+	<a id="content-nav-toggle" class="mobile-menu" data-target=".navigation"><?php echo $title; ?></a>
     <?php
         $mainNav = array(
             array(
@@ -27,6 +28,7 @@
     ?>
 </nav>
 
+<!--
 <nav id="mobile-content-nav">
     <ul class="quick-filter-wrapper">
         <li><a href="#" tabindex="0"><?php echo $title; ?></a>
@@ -34,3 +36,4 @@
         </li>
     </ul>    
 </nav>
+-->

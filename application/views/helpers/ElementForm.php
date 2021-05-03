@@ -1,21 +1,21 @@
 <?php
 /**
  * Omeka
- * 
+ *
  * @copyright Copyright 2007-2012 Roy Rosenzweig Center for History and New Media
  * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
  */
 
 /**
  * Generate the form markup for entering element text metadata.
- * 
+ *
  * @package Omeka\View\Helper
  */
 class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
 {
     /**
      * Displays a form for the record's element.
-     * 
+     *
      * The function applies filters that allow plugins to customize the display of element form components.
      * Here is an example of how a plugin may add and implement an element form filter:
      *
@@ -25,14 +25,14 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
      *
      *   // Where $components would looks like:
      *   //  array(
-     *   //      'label' => [...], 
-     *   //      'inputs' => [...], 
-     *   //      'description' => [...], 
-     *   //      'comment' => [...], 
-     *   //      'add_input' => [...], 
+     *   //      'label' => [...],
+     *   //      'inputs' => [...],
+     *   //      'description' => [...],
+     *   //      'comment' => [...],
+     *   //      'add_input' => [...],
      *   //  )
      *   // and $args looks like:
-     *   //  array(      
+     *   //  array(
      *   //      'record' => [...],
      *   //      'element' => [...],
      *   //      'options' => [...],
@@ -61,8 +61,7 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
         $inputsComponent = $this->_getInputsComponent($extraFieldCount);
         $descriptionComponent = $this->_getDescriptionComponent();
         $commentComponent = $this->_getCommentComponent();
-        $addInputComponent = $this->view->formButton('add_element_' . $this->_element['id'],
-            __('Add Input'), array('class' => 'add-element'));
+        $addInputComponent = $this->_getAddInputComponent();
         $components = array(
             'label' => $labelComponent,
             'inputs' => $inputsComponent,
@@ -88,7 +87,7 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
         }
 
         // Compose html for element form
-        $html = $divWrap ? '<div class="field" id="element-' . html_escape($element->id) . '">' : '';
+        $html = $divWrap ? '<div class="field" id="element-' . html_escape($element->id) . '" aria-live="polite">' : '';
 
         $html .= '<div class="two columns alpha">';
         $html .= $components['label'];
@@ -101,7 +100,7 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
         $html .= $components['inputs'];
         $html .= '</div>'; // Close 'inputs' div
 
-        $html .= $divWrap ? '</div>' : ''; // Close 'field' div
+        $html .= $divWrap ? '</div>' : ''; // Close 'field' fieldset
 
         return $html;
     }
@@ -119,6 +118,11 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
     protected function _getFieldComment()
     {
         return html_escape($this->_element['comment']);
+    }
+
+    protected function _getFieldId()
+    {
+        return html_escape($this->_element['id']);
     }
 
     protected function _isPosted()
@@ -256,6 +260,23 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
 
     protected function _getLabelComponent()
     {
-        return '<label>' . __($this->_getFieldLabel()) . '</label>';
+        $elementLabelId = 'label_element_' . $this->_getFieldId();
+        return '<label id="' . $elementLabelId . '">' . __($this->_getFieldLabel()) . '</label>';
+    }
+
+    protected function _getAddInputComponent()
+    {
+        $elementLabelId = 'label_element_' . $this->_getFieldId();
+        $elementAddId = 'add_element_' . $this->_getFieldId();
+        $html = $this->view->formButton(
+          $elementAddId,
+          __('Add Input'),
+          array(
+            'class' => 'add-element',
+            'aria-labelledby' => join(' ', array($elementLabelId, $elementAddId))
+          )
+        );
+
+        return $html;
     }
 }

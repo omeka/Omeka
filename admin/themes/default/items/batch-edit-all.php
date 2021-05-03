@@ -13,7 +13,7 @@ endif;
 
 <form id="batch-edit-form" action="<?php echo html_escape(url('items/batch-edit-save')); ?>" method="post" accept-charset="utf-8">
     <section class="seven columns alpha">
-        <fieldset class="panel">
+        <fieldset class="flash">
             <?php
             $filters = item_search_filters($params);
             if ($filters):

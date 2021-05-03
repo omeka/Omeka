@@ -11,7 +11,7 @@ echo common('users-nav', array('user' => $user));
 echo flash();
 ?>
 <form method="post" action="">
-<h3><?php echo __('API Keys'); ?></h3>
+<h2><?php echo __('API Keys'); ?></h2>
 <div class="field">
     <div class="two columns alpha">
         <label for="search_record_types"><?php echo __('New key label'); ?></label>
