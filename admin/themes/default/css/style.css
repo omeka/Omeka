@@ -347,7 +347,12 @@ img {
 
 .ui-icon.ui-icon-closethick,
 .ui-icon.ui-icon-close {
-  filter: brightness(10); }
+  filter: brightness(10);
+  text-indent: 0; }
+  .ui-icon.ui-icon-closethick:before,
+  .ui-icon.ui-icon-close:before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f00d"; }
 
 #content #flash ul {
   list-style-type: none;
