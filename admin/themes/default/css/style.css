@@ -229,41 +229,28 @@ hr {
   .container .one.columns {
     width: 8%; } }
 @media (min-width: 768px) and (max-width: 991px) {
-  .container .seven.columns,
-  .container .six.columns,
-  .container .five.columns,
-  .container .four.columns,
-  .container .three.columns,
-  .container .two.columns {
+  .container .seven.columns, .container .six.columns, .container .five.columns, .container .four.columns, .container .three.columns, .container .two.columns {
     width: 100%;
     margin: 0; }
-    #login .container .seven.columns, #login
-    .container .six.columns, #login
-    .container .five.columns, #login
-    .container .four.columns, #login
-    .container .three.columns, #login
-    .container .two.columns {
+    #login .container .seven.columns,
+    #login .container .six.columns,
+    #login .container .five.columns,
+    #login .container .four.columns,
+    #login .container .three.columns,
+    #login .container .two.columns {
       width: 100% !important; } }
 @media (max-width: 767px) {
-  .container .ten.columns,
-  .container .nine.columns,
-  .container .eight.columns,
-  .container .seven.columns,
-  .container .six.columns,
-  .container .five.columns,
-  .container .four.columns,
-  .container .three.columns,
-  .container .two.columns {
+  .container .ten.columns, .container .nine.columns, .container .eight.columns, .container .seven.columns, .container .six.columns, .container .five.columns, .container .four.columns, .container .three.columns, .container .two.columns {
     width: 100%; }
-    #login .container .ten.columns, #login
-    .container .nine.columns, #login
-    .container .eight.columns, #login
-    .container .seven.columns, #login
-    .container .six.columns, #login
-    .container .five.columns, #login
-    .container .four.columns, #login
-    .container .three.columns, #login
-    .container .two.columns {
+    #login .container .ten.columns,
+    #login .container .nine.columns,
+    #login .container .eight.columns,
+    #login .container .seven.columns,
+    #login .container .six.columns,
+    #login .container .five.columns,
+    #login .container .four.columns,
+    #login .container .three.columns,
+    #login .container .two.columns {
       width: 100% !important; } }
 
 .section-title {
@@ -1518,7 +1505,13 @@ button.remove_search {
       top: 40px;
       left: 0;
       z-index: 1000;
-      position: fixed; } }
+      position: fixed; }
+      #content-nav.open {
+        bottom: 0;
+        overflow-y: scroll; }
+      #content-nav.open ~ #content {
+        height: 0;
+        overflow: hidden; } }
   #content-nav.unfix {
     position: absolute;
     top: -10px; }
@@ -1572,6 +1565,10 @@ button.remove_search {
       #content-nav .active:hover a:hover,
       #content-nav .active:hover a:active {
         background-color: transparent; }
+      @media (max-width: 767px) {
+        #content-nav .active a,
+        #content-nav .active:hover a {
+          background-color: #333; } }
 
 #content-nav-toggle {
   display: none; }
@@ -1581,14 +1578,16 @@ button.remove_search {
       background: #82423B;
       word-wrap: break-word;
       border-bottom: 1px solid rgba(236, 181, 179, 0.25);
-      height: 100%;
       color: white;
       display: block;
       line-height: 1.5em;
       padding: .625em .5em .625em 1em;
       font-size: 16px;
       text-decoration: none;
-      transition: 0.5s all; }
+      transition: 0.5s all;
+      position: sticky;
+      top: 0;
+      z-index: 999; }
       #content-nav-toggle:after {
         content: "\f0d7";
         font-family: "Font Awesome 5 Free";

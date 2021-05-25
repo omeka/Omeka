@@ -17,6 +17,16 @@
 		left: 0;
 		z-index: 1000;
 		position: fixed;
+
+		&.open {
+			bottom: 0;
+			overflow-y: scroll;	
+		}
+		
+		&.open ~ #content {
+			height: 0;
+			overflow: hidden;
+		}
 	}
 
 	&.unfix {
@@ -90,6 +100,10 @@
 	        &:active {
 				background-color: transparent;
     		}
+
+			@include screen-xs {
+				background-color: #333;
+			}
 	    }
 	}
 }
@@ -102,7 +116,6 @@
 		background: $darkred;
 		word-wrap: break-word;
 		border-bottom: 1px solid rgba(236, 181, 179, 0.25);
-		height: 100%;
 	    color: white;
 	    display: block;
 	    line-height: 1.5em;
@@ -110,6 +123,9 @@
 	    font-size: 16px;
 	    text-decoration: none;
 	    transition: 0.5s all;
+		position: sticky;
+		top: 0;
+		z-index: 999;
 	    
 	    &:after {
 		    content: "\f0d7";

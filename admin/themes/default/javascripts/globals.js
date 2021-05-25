@@ -23,7 +23,7 @@ if (!Omeka) {
             autoresize_max_height: 500,
             entities: "160,nbsp,173,shy,8194,ensp,8195,emsp,8201,thinsp,8204,zwnj,8205,zwj,8206,lrm,8207,rlm",
             verify_html: false,
-            add_unload_trigger: false
+            add_unload_trigger: false,
         };
 
         tinymce.init($.extend(initParams, params));
@@ -73,6 +73,7 @@ if (!Omeka) {
 	    $('.mobile-menu').click(function (event) {
 			var target = $(this).data('target');
 			$(target).toggleClass('in');
+            $(this).parent('nav').toggleClass('open');
 	    });
     };
     
