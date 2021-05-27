@@ -11,6 +11,10 @@
     a {
 	    color: #856404;
     }
+
+    @include screen-xs {
+        float: left;
+    }
 }
 
 .collections.show .recent-items {

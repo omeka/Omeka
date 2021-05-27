@@ -4,6 +4,27 @@
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar;
+    border: 1px solid #dcdcdc;
+    border-bottom: 0;
+    box-sizing: border-box;
+
+    table {
+        margin-bottom: 0;
+    }
+
+    th {
+        border-top: 0;
+    }
+
+    th:first-child,
+    td:first-child {
+        border-left: 0;
+    }
+
+    th:last-child,
+    td:last-child {
+        border-right: 0;
+    }
 }
 
 table {
@@ -91,6 +112,11 @@ td {
                 margin: 0;
             }
         }
+
+        @include screen-xs {
+            margin-bottom: $spacing-s;
+        }
+        
         &:last-child:after { content: ''; margin: 0; }
     }
 }
@@ -101,7 +127,7 @@ td {
 }
 
 span.title {
-	margin: 0 0 $spacing-s;
+	margin: 0 $spacing-s $spacing-s 0;
     font-size: 16px;
 	font-weight: 700;
 	line-height: 20px;
@@ -109,7 +135,6 @@ span.title {
 	small {
 		font-weight: 400;
 		color: gray;
-		margin-left: $spacing-s;
 	}
 }
 

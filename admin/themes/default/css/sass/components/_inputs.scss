@@ -184,6 +184,12 @@ select {
     background-color: #fff;
 }
 
+@include screen-xs {
+    .quick-filter {
+        margin-bottom: $spacing-m;
+    }
+}
+
 .mce-title:focus,
 .mce-textbox:focus {
     border-color: darken($darkgrayborder, 25%) !important;
