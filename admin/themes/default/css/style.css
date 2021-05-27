@@ -2824,16 +2824,31 @@ form.form-inline.editableform {
 #search-users {
   float: right;
   display: flex;
-  align-items: center; }
+  align-items: center;
+  flex-wrap: wrap; }
+  @media (max-width: 767px) {
+    #search-users {
+      float: none;
+      margin-bottom: 10px; } }
 
 #search-users input[type="text"] {
   margin-bottom: 0; }
+  @media (max-width: 767px) {
+    #search-users input[type="text"] {
+      margin-bottom: 5px; } }
 
 #search-users fieldset {
   display: inline-block;
-  padding: 8.5px 5px; }
+  padding: 8.5px 5px;
+  margin-right: 5px; }
+  @media (max-width: 767px) {
+    #search-users fieldset {
+      margin-bottom: 5px; } }
+
+#search-users label {
+  display: inline-block; }
 
 #search-users-button {
-  margin: 0 0 0 5px; }
+  margin: 0; }
 
 /*# sourceMappingURL=style.css.map */

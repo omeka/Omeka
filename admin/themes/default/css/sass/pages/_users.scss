@@ -2,17 +2,36 @@
     float: right;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+
+    @include screen-xs {
+        float: none;
+        margin-bottom: $spacing-m;
+    }
 }
 
 #search-users input[type="text"] {
     margin-bottom: 0;
+
+    @include screen-xs {
+        margin-bottom: $spacing-s;
+    }
 }
 
 #search-users fieldset {
     display: inline-block;
     padding: ($spacing-m - 1.5px) $spacing-s;
+    margin-right: $spacing-s;
+
+    @include screen-xs {
+        margin-bottom: $spacing-s;
+    }
+}
+
+#search-users label {
+    display: inline-block;
 }
 
 #search-users-button {
-    margin: 0 0 0 $spacing-s;
+    margin: 0;
 }
