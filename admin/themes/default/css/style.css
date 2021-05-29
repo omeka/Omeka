@@ -246,7 +246,7 @@ img { border: 0; }
         font-family: monospace;
     }
 
-    input[type=text], input[type=password] {
+    input[type=text], input[type=password], input[type=email] {
         height: 30px;
         border: 1px solid #d8d8d8;
         -webkit-border-radius: 0;
@@ -304,7 +304,7 @@ img { border: 0; }
         }
 
 
-        .inputs input[type=text], .inputs input[type=password], .inputs textarea {
+        .inputs input[type=text], .inputs input[type=password], .inputs input[type=email], .inputs textarea {
             width: 100%;
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
@@ -1547,14 +1547,14 @@ header nav {
     margin-bottom: 20px;
 }
 
- #item-filters ul {
+ #item-filters ul, #collection-filters ul {
     clear: both;
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
-    #item-filters li {
+    #item-filters li, #collection-filters li {
         display: inline-block;
         background: url('../images/search.png') no-repeat;
         padding: 0 0 0 21px;

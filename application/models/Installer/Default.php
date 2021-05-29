@@ -106,6 +106,7 @@ class Installer_Default implements Installer_InstallerInterface
             'thumbnail_constraint' => $this->_getValue('thumbnail_constraint'),
             'square_thumbnail_constraint' => $this->_getValue('square_thumbnail_constraint'),
             'fullsize_constraint' => $this->_getValue('fullsize_constraint'),
+            'recent_admin' => $this->_getValue('recent_admin'),
             'per_page_admin' => $this->_getValue('per_page_admin'),
             'per_page_public' => $this->_getValue('per_page_public'),
             'show_empty_elements' => $this->_getValue('show_empty_elements'),

@@ -22,6 +22,7 @@ class Installer_Task_Options implements Installer_TaskInterface
         'thumbnail_constraint',
         'square_thumbnail_constraint',
         'fullsize_constraint',
+        'recent_admin',
         'per_page_admin',
         'per_page_public',
         'show_empty_elements',

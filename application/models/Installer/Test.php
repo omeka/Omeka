@@ -24,6 +24,7 @@ class Installer_Test extends Installer_Default
         'thumbnail_constraint' => Omeka_Form_Install::DEFAULT_THUMBNAIL_CONSTRAINT,
         'square_thumbnail_constraint' => Omeka_Form_Install::DEFAULT_SQUARE_THUMBNAIL_CONSTRAINT,
         'fullsize_constraint' => Omeka_Form_Install::DEFAULT_FULLSIZE_CONSTRAINT,
+        'recent_admin' => Omeka_Form_Install::DEFAULT_RECENT_ADMIN,
         'per_page_admin' => Omeka_Form_Install::DEFAULT_PER_PAGE_ADMIN,
         'per_page_public' => Omeka_Form_Install::DEFAULT_PER_PAGE_PUBLIC,
         'show_empty_elements' => Omeka_Form_Install::DEFAULT_SHOW_EMPTY_ELEMENTS,
