@@ -847,6 +847,9 @@ button.ui-dialog-titlebar-close {
     font-weight: bold;
     padding-bottom: 10px; }
 
+.ui-widget-overlay {
+  background-color: rgba(0, 0, 0, 0.5); }
+
 footer {
   clear: both;
   font-size: 12px;
