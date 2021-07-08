@@ -900,6 +900,9 @@ a.button {
 input.color {
   font-family: monospace; }
 
+label input[type=radio] {
+  margin-right: 5px !important; }
+
 input[type=text],
 input[type=password] {
   height: 36px;
