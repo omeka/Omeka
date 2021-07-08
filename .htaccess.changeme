@@ -21,6 +21,8 @@ RewriteEngine on
 
 # If you know mod_rewrite is enabled, but you are still getting mod_rewrite
 # errors, uncomment the line below and replace "/" with your base directory.
+# Also be sure that this .htaccess file is used and that there's not an
+# "Allowoverride none" in your main apache configuration.
 #
 # RewriteBase /
 
