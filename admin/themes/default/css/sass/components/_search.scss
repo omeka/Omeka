@@ -205,6 +205,10 @@
 }
 
 .search-entry {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    
 	select {
 	    min-width: 0;
 	    width: 40%;

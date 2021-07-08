@@ -90,7 +90,7 @@
 	
 	.action-links li:after { content: none; }
 	.cannotload { background-color: lighten(#FFE7E7, 2%); }
-	.upgrade { background-color: lighten(#E9FFC2, 2%); }
+	.upgrade:not(button) { background-color: lighten($lightgreen, 6%); }
 
 }
 
