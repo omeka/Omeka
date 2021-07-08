@@ -1500,6 +1500,11 @@ button.remove_search {
   clear: both;
   margin: 20px 0; }
 
+@media (max-width: 767px) {
+  .add_search {
+    clear: both;
+    display: block;
+    margin-bottom: 10px; } }
 #content-nav {
   width: 160px;
   position: sticky;

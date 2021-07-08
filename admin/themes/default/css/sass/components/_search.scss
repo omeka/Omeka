@@ -239,3 +239,11 @@ button.remove_search {
     clear: both;
     margin: $spacing-l 0;
 }
+
+@include screen-xs {
+    .add_search {
+        clear: both;
+        display: block;
+        margin-bottom: 10px;
+    }
+}
