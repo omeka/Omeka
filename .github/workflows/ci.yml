@@ -16,6 +16,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   run:
+    name: PHP ${{ matrix.php-versions }}
     runs-on: ubuntu-18.04
     strategy:
       matrix:
@@ -42,8 +43,8 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ${{ steps.composer-cache.outputs.dir }}
-        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-        restore-keys: ${{ runner.os }}-composer-
+        key: ${{ matrix.php-versions }}-composer-${{ hashFiles('**/composer.json') }}
+        restore-keys: ${{ matrix.php-versions }}-composer-
         
     - name: Start MySQL
       run: sudo systemctl start mysql.service
