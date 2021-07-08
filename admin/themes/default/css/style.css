@@ -1506,6 +1506,9 @@ button.remove_search {
   top: 50px;
   z-index: 10;
   left: 0; }
+  @media (min-width: 768px) {
+    #content-nav {
+      padding-bottom: 20px; } }
   @media (min-width: 992px) and (max-width: 1199px) {
     #content-nav {
       width: 130px; } }
