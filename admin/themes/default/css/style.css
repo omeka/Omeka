@@ -231,7 +231,8 @@ hr {
 @media (min-width: 768px) and (max-width: 991px) {
   .container .seven.columns, .container .six.columns, .container .five.columns, .container .four.columns, .container .three.columns, .container .two.columns {
     width: 100%;
-    margin: 0; }
+    margin-left: 0;
+    margin-right: 0; }
     #login .container .seven.columns,
     #login .container .six.columns,
     #login .container .five.columns,
@@ -2263,7 +2264,7 @@ ul.details {
   margin: 0 5px 0 0; }
 
 #item-list ul {
-  margin: 0;
+  margin: 20px 0;
   padding: 0; }
 
 #item-list li {

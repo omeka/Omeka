@@ -173,7 +173,8 @@ hr {
 		.three.columns,
 		.two.columns {
 			width: 100%;
-			margin: 0;
+			margin-left: 0;
+			margin-right: 0;
 			
 			#login & {
 				width: 100% !important;
