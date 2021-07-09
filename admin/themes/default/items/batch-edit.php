@@ -14,28 +14,26 @@ endif;
 <form id="batch-edit-form" action="<?php echo html_escape(url('items/batch-edit-save')); ?>" method="post" accept-charset="utf-8">
     <section class="seven columns alpha">
         <fieldset id="item-list" class="panel">
-            <h2 class="two columns alpha"><?php echo __('Items'); ?></h2>
-            <div class="five columns omega">
-                <ul>
-                <?php 
-                $itemCheckboxes = array();
-                foreach ($itemIds as $id) {
-                    if (!($item = get_record_by_id('item', $id))) {
-                        continue;
-                    }
-        
-                    $showItemFields = true;
-                    if (!is_allowed($item, 'edit') || !is_allowed($item, 'delete')) {
-                        $showItemFields = false;
-                    }
-                    $itemCheckboxes[$id] = metadata($item, 'display_title', array('no_escape' => true));
-                    release_object($item);
+            <h2><?php echo __('Items'); ?></h2>
+            <ul>
+            <?php 
+            $itemCheckboxes = array();
+            foreach ($itemIds as $id) {
+                if (!($item = get_record_by_id('item', $id))) {
+                    continue;
                 }
-                echo '<li>' . $this->formMultiCheckbox('items[]', null, array('checked' => 'checked'), $itemCheckboxes, '</li><li>') . '</li>';
-                ?>
-                </ul>
-                <p class="explanation"><?php echo __('Changes will be applied to checked items.'); ?></p>
-            </div>
+    
+                $showItemFields = true;
+                if (!is_allowed($item, 'edit') || !is_allowed($item, 'delete')) {
+                    $showItemFields = false;
+                }
+                $itemCheckboxes[$id] = metadata($item, 'display_title', array('no_escape' => true));
+                release_object($item);
+            }
+            echo '<li>' . $this->formMultiCheckbox('items[]', null, array('checked' => 'checked'), $itemCheckboxes, '</li><li>') . '</li>';
+            ?>
+            </ul>
+            <p class="explanation"><?php echo __('Changes will be applied to checked items.'); ?></p>
         </fieldset>
 
         <?php echo common('batch-edit-common', array(), 'items'); ?>

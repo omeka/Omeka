@@ -188,6 +188,10 @@ select {
     background-color: #fff;
 }
 
+.quick-filter {
+    margin-bottom: 20px;
+}
+
 @include screen-xs {
     .quick-filter {
         margin-bottom: $spacing-m;
