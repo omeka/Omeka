@@ -4,13 +4,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta charset="utf-8">
     <title><?php echo option('site_title'); ?></title>
-    
+
     <!-- Stylesheets -->
-    <?php queue_css_file('style'); ?>
-    <?php queue_css_file('layout'); ?>
-    <?php queue_css_file('skeleton'); ?>
-    <?php echo head_css(); ?>
-    <link href='//fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic|Cabin:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <?php
+    queue_css_file('style');
+    queue_css_file('layout');
+    queue_css_file('skeleton');
+    if (!useInternalAssets()):
+        queue_css_url('//fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic|Cabin:400,700,400italic,700italic');
+    endif;
+    echo head_css();
+    ?>
 
     <!-- JavaScripts -->
     <?php
