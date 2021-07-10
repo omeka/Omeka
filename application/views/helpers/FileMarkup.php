@@ -445,7 +445,14 @@ class Omeka_View_Helper_FileMarkup extends Zend_View_Helper_Abstract
             null => 'thumb',
             'thumbnail' => 'thumb',
             'square_thumbnail' => 'thumb',
-            'fullsize' => 'full');
+            'fullsize' => 'full',
+            'original' => 'original',
+        );
+        $fileDerivatives = Zend_Registry::get('bootstrap')->getResource('Config')->fileDerivatives;
+        if (!empty($fileDerivatives) && !empty($fileDerivatives->classes)) {
+            $imgClasses = array_merge($imgClasses, $fileDerivatives->classes->toArray());
+        }
+
         $imageSize = $options['imageSize'];
 
         // If we can make an image from the given image size.

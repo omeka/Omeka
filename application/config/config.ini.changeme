@@ -274,6 +274,21 @@ mail.transport.type = "Sendmail"
 ; Derivative Images ;
 ;;;;;;;;;;;;;;;;;;;;;
 
+; fileDerivatives.paths
+; Set paths of specific derivative files types to be used with specific themes.
+; Examples:
+; fileDerivatives.paths.micro_thumbnail = "micro_thumbnails"
+; fileDerivatives.paths.square_mini = "square_mini"
+; fileDerivatives.paths.square_fullsize = "square_fullsize"
+
+; fileDerivatives.class
+; Set class of specific derivative files types to be used with specific themes
+; that use FileMarkup.
+; Examples:
+; fileDerivatives.classes.micro_thumbnail = "thumb"
+; fileDerivatives.classes.square_mini = "thumb"
+; fileDerivatives.classes.square_fullsize = "full"
+
 ; fileDerivatives.strategy
 ; Controls what method Omeka uses to create derivative images.
 ; default: Omeka_File_Derivative_Strategy_ExternalImageMagick
