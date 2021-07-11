@@ -64,7 +64,7 @@ class Omeka_Controller_Plugin_Api extends Zend_Controller_Plugin_Abstract
             'index_params' => array(
                 'collection', 'item_type', 'featured', 'public', 'added_since',
                 'modified_since', 'owner', 'tags', 'excludeTags', 'hasImage',
-                'range', 'search',
+                'range', 'search', 'advanced'
             ),
         ),
         'files' => array(
