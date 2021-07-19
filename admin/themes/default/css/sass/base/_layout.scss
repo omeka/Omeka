@@ -259,6 +259,14 @@ img {
 	}
 }
 
+dt {
+	margin-top: $spacing-l;
+}
+
+dd {
+	margin-top: $spacing-m;
+}
+
 .exhibit .image,
 .collection .image {
     -webkit-box-shadow: -6px -6px rgba(0, 0, 0, 0.1);

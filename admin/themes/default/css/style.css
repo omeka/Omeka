@@ -84,6 +84,9 @@ h3 a:link {
   font-weight: 700;
   line-height: 20px; }
 
+dt {
+  font-weight: bold; }
+
 a:link {
   color: #003576;
   text-decoration: underline;
@@ -309,6 +312,12 @@ img {
     width: 50px;
     height: auto;
     float: left; }
+
+dt {
+  margin-top: 20px; }
+
+dd {
+  margin-top: 10px; }
 
 .exhibit .image,
 .collection .image {
