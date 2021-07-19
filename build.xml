@@ -19,7 +19,7 @@
                 <exclude name="application/logs/errors.log.empty"/>
                 <exclude name="**/.tx/**"/>
                 <exclude name="dist/**"/>
-                <exclude name="**/build.xml"/>
+                <exclude name=".github/**"/>
                 <exclude name=".travis.yml"/>
                 <exclude name=".php_cs"/>
                 <exclude name="composer.json"/>
