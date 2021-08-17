@@ -1047,6 +1047,17 @@ select {
 .field label.checkbox-label {
   font-weight: normal; }
 
+.field legend {
+  font-size: 14px;
+  font-weight: bold; }
+
+.inputs label {
+  display: block;
+  font-weight: normal; }
+
+.inputs input[type="checkbox"] {
+  margin: 0 5px; }
+
 header {
   left: 0;
   right: 0;
