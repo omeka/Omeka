@@ -132,12 +132,13 @@ session.name = ""
 
 ; theme.useInternalAssets
 ; Whether Omeka should use locally-stored asset files.
-; default: false
+; default: true
 ;
 ; Omeka includes some asset files from external sources, such as Google by
 ; default. Set this to true if the Omeka installation does not have
-; web access, and Omeka will instead serve local copies of these files.
-theme.useInternalAssets = false
+; web access or if you want to preserve visitors' privacy, and Omeka will
+; instead serve local copies of these files.
+theme.useInternalAssets = true
 
 ;;;;;;;;;;;;;;;;;;;;;;
 ; Background Scripts ;
