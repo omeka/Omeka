@@ -1958,13 +1958,13 @@ ul.details {
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
-.items .table-actions {
+.table-actions {
   clear: left;
   float: left;
   width: 100%; }
-  .items .table-actions:first-child {
+  .table-actions:first-child {
     border-bottom: 0; }
-  .items .table-actions:last-child {
+  .table-actions:last-child {
     border-top: 0;
     margin-bottom: 20px; }
 
@@ -2149,7 +2149,7 @@ ul.details {
 #item-metadata .remove-element {
   display: none; }
 
-.items .table-actions {
+.table-actions {
   background: #fff;
   border: 1px solid #D8D8D8;
   width: 100%;
@@ -2159,17 +2159,17 @@ ul.details {
   box-sizing: border-box;
   text-align: right; }
 
-.items .table-actions > .batch-all-toggle,
-.items .table-actions > input[type="submit"].small {
+.table-actions > .batch-all-toggle,
+.table-actions > input[type="submit"].small {
   margin-bottom: 0; }
 
 @media (max-width: 767px) {
-  .items .table-actions > .batch-all-toggle {
+  .table-actions > .batch-all-toggle {
     margin-bottom: 5px; } }
-.items .table-actions button {
+.table-actions button {
   float: left; }
   @media (max-width: 767px) {
-    .items .table-actions button {
+    .table-actions button {
       display: block;
       float: none;
       border-bottom: 1px solid #d8d8d8 !important;
@@ -2177,20 +2177,20 @@ ul.details {
       width: 100%;
       margin-bottom: 0; } }
 
-.items .table-actions button:active,
-.items .table-actions button.active {
+.table-actions button:active,
+.table-actions button.active {
   background-color: #cecece;
   color: #545454 !important; }
 
-.items .table-actions .selected {
+.table-actions .selected {
   display: inline-block;
   margin-right: 4px;
   font-style: italic;
   color: gray; }
-  .items .table-actions .selected > span {
+  .table-actions .selected > span {
     color: gray; }
 
-.items .table-actions > input[type="submit"].small {
+.table-actions > input[type="submit"].small {
   display: inline-block;
   margin-right: 0; }
 

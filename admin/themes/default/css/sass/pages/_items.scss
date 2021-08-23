@@ -70,7 +70,7 @@
     box-sizing: border-box;
 }
 
-.items .table-actions {
+.table-actions {
     clear: left;
     float: left;
     width: 100%;
@@ -142,7 +142,7 @@
     display: none;
 }
 
-.items .table-actions {
+.table-actions {
     background: #fff;
     border: 1px solid #D8D8D8;
     width: 100%;
@@ -153,18 +153,18 @@
     text-align: right;
 }
 
-.items .table-actions > .batch-all-toggle,
-.items .table-actions > input[type="submit"].small {
+.table-actions > .batch-all-toggle,
+.table-actions > input[type="submit"].small {
     margin-bottom: 0;
 }
 
 @include screen-xs {
-    .items .table-actions > .batch-all-toggle {
+    .table-actions > .batch-all-toggle {
         margin-bottom: $spacing-s;
     }
 }
 
-.items .table-actions button {
+.table-actions button {
     float: left;
     
     @include screen-xs {
@@ -177,13 +177,13 @@
 	}
 }
 
-.items .table-actions button:active,
-.items .table-actions button.active {
+.table-actions button:active,
+.table-actions button.active {
     background-color: #cecece;
     color: #545454 !important;
 }
 
-.items .table-actions .selected {
+.table-actions .selected {
     display: inline-block;
     margin-right: 4px;
     font-style: italic;
@@ -194,7 +194,7 @@
     }
 }
 
-.items .table-actions > input[type="submit"].small {
+.table-actions > input[type="submit"].small {
     display: inline-block;
     margin-right: 0;
 }
