@@ -5,11 +5,9 @@ echo head(array('title' => $pageTitle,'bodyclass' => 'item-types browse'));
 echo flash();
 ?>
 
-<div class="table-actions">
-    <?php if (is_allowed('ItemTypes', 'add')): ?>
-    <?php echo link_to('item-types', 'add', __('Add an Item Type'), array('class'=>'add green button')); ?>
-    <?php endif ?>
-</div>
+<?php if (is_allowed('ItemTypes', 'add')): ?>
+<?php echo link_to('item-types', 'add', __('Add an Item Type'), array('class'=>'add green button')); ?>
+<?php endif ?>
 
 <?php echo pagination_links(); ?>
 
