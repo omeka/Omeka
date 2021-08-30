@@ -2468,21 +2468,25 @@ ul.details {
 .item-type-metadata .sortable-item {
   cursor: default; }
 
-#login #content {
+#login #content,
+#debug #content {
   margin-top: 10%;
   text-align: center;
   background: white;
   padding: 25px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); }
   @media (max-width: 767px) {
-    #login #content {
+    #login #content,
+    #debug #content {
       max-width: 260px; } }
-#login .errors {
+#login .errors,
+#debug .errors {
   list-style-type: none;
   margin: 0;
   padding: 0;
   text-align: left; }
-  #login .errors li {
+  #login .errors li,
+  #debug .errors li {
     background-color: rgba(255, 255, 255, 0.5);
     border: 1px solid #E7E7E7;
     -webkit-border-radius: 3px;
@@ -2491,40 +2495,53 @@ ul.details {
     color: #914E33;
     margin: 0;
     padding: .5em; }
-#login #forgotpassword {
+#login #forgotpassword,
+#debug #forgotpassword {
   clear: both; }
-#login .field label {
+#login .field label,
+#debug .field label {
   min-width: 0;
   padding: 0; }
-#login #flash {
+#login #flash,
+#debug #flash {
   margin: 0 10px; }
 #login input[type=text],
-#login input[type=password] {
+#login input[type=password],
+#debug input[type=text],
+#debug input[type=password] {
   width: 100%; }
-#login h1 {
+#login h1,
+#debug h1 {
   width: 100%;
-  color: #ccc;
+  color: #939393;
   clear: both;
   padding: 0;
   height: 53px;
   line-height: 53px;
   margin: 20px 0 0 0;
   display: inline-block; }
-#login h2 {
+#login h2,
+#debug h2 {
   margin: 1em 0; }
-#login label {
+#login label,
+#debug label {
   text-align: left; }
-#login .login-footer {
+#login .login-footer,
+#debug .login-footer {
   clear: both;
   padding: 10px 0;
   text-align: center; }
-#login #remember {
+#login #remember,
+#debug #remember {
   display: inline-block;
   margin: 0; }
-#login #fieldset-login {
+#login #fieldset-login,
+#debug #fieldset-login {
   text-align: left; }
 #login .submit,
-#login #login-links {
+#login #login-links,
+#debug .submit,
+#debug #login-links {
   clear: both; }
 
 .plugins.browse table form {
