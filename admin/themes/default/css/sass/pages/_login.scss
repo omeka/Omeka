@@ -80,10 +80,15 @@
 	    text-align: left;
 	}
 
-	
-
 	.submit,
 	#login-links {
 	    clear: both;
+	}
+
+	pre {
+		font-family: monospace;
+		padding: 1rem;
+		border: 1px solid $lightgrayborder;
+		overflow-x: scroll;
 	}
 }

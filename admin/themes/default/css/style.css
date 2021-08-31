@@ -2543,6 +2543,12 @@ ul.details {
 #debug .submit,
 #debug #login-links {
   clear: both; }
+#login pre,
+#debug pre {
+  font-family: monospace;
+  padding: 1rem;
+  border: 1px solid #E4E5DE;
+  overflow-x: scroll; }
 
 .plugins.browse table form {
   display: inline-block; }
