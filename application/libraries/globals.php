@@ -1963,11 +1963,11 @@ function browse_sort_links($links, $wrapperTags = array())
     }
 
     foreach ($links as $label => $column) {
+        $sortingLabel = __('Sort ascending');
         if ($column) {
             $urlParams = $_GET;
             $urlParams[$sortParam] = $column;
             $class = '';
-            $sortingLabel = __('Sort ascending');
 
             if ($currentSort && $currentSort == $column) {
                 if ($currentDir && $currentDir == 'd') {
