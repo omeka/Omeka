@@ -510,6 +510,7 @@ dd {
   font-family: monospace;
   padding: 1rem;
   border: 1px solid #E4E5DE;
-  overflow-x: scroll; }
+  overflow-x: scroll;
+  text-align: left; }
 
 /*# sourceMappingURL=style.css.map */
