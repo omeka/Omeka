@@ -946,7 +946,6 @@ input[type=text].small {
   .field select {
     width: 100%;
     margin-bottom: 10px;
-    padding: 10px;
     border: 1px solid #D6D5C2; }
 
 @media (min-width: 768px) and (max-width: 991px) {
