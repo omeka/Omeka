@@ -126,6 +126,10 @@ td {
     text-align: center;
 }
 
+.batch-edit-heading + th {
+    width: 50%;
+}
+
 span.title {
 	margin: 0 $spacing-s $spacing-s 0;
     font-size: 16px;
@@ -151,7 +155,6 @@ span.featured:after {
     background-color: #fff;
     background-color: rgba(255,255,255,.5);
     border: 1px solid $lightgrayborder;
-    float: left;
     margin-top: $spacing-m;
     padding: $spacing-m;
     clear: both;
@@ -159,14 +162,12 @@ span.featured:after {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    max-width: 400px;
+    display: inline-flex;
+    flex-wrap: wrap;
 
-	p { margin: 0; 
-		
-		strong {
-			min-width: 80px;
-			display: inline-block;
-		}
+	p { 
+        margin: 0 $spacing-l 0 0;
+        display: inline-block;
 	}
 }
 

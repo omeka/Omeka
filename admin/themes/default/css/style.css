@@ -1771,6 +1771,9 @@ td {
   width: 1%;
   text-align: center; }
 
+.batch-edit-heading + th {
+  width: 50%; }
+
 span.title {
   margin: 0 5px 5px 0;
   font-size: 16px;
@@ -1792,7 +1795,6 @@ span.featured:after {
   background-color: #fff;
   background-color: rgba(255, 255, 255, 0.5);
   border: 1px solid #E4E5DE;
-  float: left;
   margin-top: 10px;
   padding: 10px;
   clear: both;
@@ -1800,12 +1802,11 @@ span.featured:after {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  max-width: 400px; }
+  display: inline-flex;
+  flex-wrap: wrap; }
   .details p {
-    margin: 0; }
-    .details p strong {
-      min-width: 80px;
-      display: inline-block; }
+    margin: 0 20px 0 0;
+    display: inline-block; }
 
 ul.details {
   margin-bottom: 0;
@@ -2122,6 +2123,10 @@ ul.details {
       box-shadow: none !important;
       cursor: default;
       opacity: .35; } }
+
+.browse .details .description {
+  width: 100%;
+  margin-bottom: 5px; }
 
 #outputs {
   clear: both;

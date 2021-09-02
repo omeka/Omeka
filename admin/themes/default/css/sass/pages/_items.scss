@@ -119,6 +119,11 @@
     }
 }
 
+.browse .details .description {
+    width: 100%;
+    margin-bottom: $spacing-s;
+}
+
 #outputs {
     clear: both;
     line-height: 1.5em;
