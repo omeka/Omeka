@@ -1,6 +1,6 @@
 /*
  * jQuery UI Nested Sortable
- * v 2.1a / 2016-02-04
+ * v 2.0.0 / 2016-03-30 "Not April Fools"
  * https://github.com/ilikenwf/nestedSortable
  *
  * Depends on:
@@ -18,7 +18,7 @@
 		// AMD. Register as an anonymous module.
 		define([
 			"jquery",
-			"jquery-ui/ui/sortable"
+			"jquery-ui/sortable"
 		], factory );
 	} else {
 
@@ -338,7 +338,7 @@
 									.addClass(o.expandedClass);
 
 								self.refreshPositions();
-								self._trigger("expand", event, [self._uiHash(), itemElement]);
+								self._trigger("expand", event, self._uiHash());
 							}, o.expandOnHover);
 						}
 					}
@@ -772,7 +772,7 @@
 					depth--;
 				}
 
-				id = ($(item).attr(o.attribute || "id") || "").match(o.expression || (/(.+)[-=_](.+)/));
+				id = ($(item).attr(o.attribute || "id")).match(o.expression || (/(.+)[-=_](.+)/));
 
 				if (depth === sDepth) {
 					pid = o.rootID;
@@ -785,15 +785,15 @@
 				}
 
 				if (id) {
-					var data = $(item).children('div').data();
-					var itemObj = $.extend( data, {
-						"id":id[2],
-						"parent_id":pid,
-						"depth":depth,
-						"left":_left,
-						"right":right
-						} );
-					ret.push( itemObj );
+					        var name = $(item).data("name");
+						ret.push({
+							"id": id[2],
+							"parent_id": pid,
+							"depth": depth,
+							"left": _left,
+							"right": right,
+							"name":name
+						});
 				}
 
 				_left = right + 1;
@@ -813,7 +813,7 @@
 
 			var o = this.options,
 				childrenList = $(item).children(o.listType),
-				hasChildren = childrenList.has('li').length;
+				hasChildren = childrenList.is(':not(:empty)');
 
 			var doNotClear =
 				o.doNotClear ||
@@ -822,10 +822,13 @@
 
 			if (o.isTree) {
 				replaceClass(item, o.branchClass, o.leafClass, doNotClear);
+
+				if (doNotClear && hasChildren) {
+					replaceClass(item, o.collapsedClass, o.expandedClass);
+				}
 			}
 
 			if (!doNotClear) {
-				childrenList.parent().removeClass(o.expandedClass);
 				childrenList.remove();
 			}
 		},

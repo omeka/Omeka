@@ -152,7 +152,7 @@ Omeka.Navigation = {};
             $('#navigation_main_list li').each(function (index) {
                 $(this).attr('id', "list_" + index);
             });
-            var parentChildData = $("#navigation_main_list").nestedSortable('toArray', {startDepthCount: 0});
+            var parentChildData = $("#navigation_main_list").nestedSortable('toArray', {startDepthCount: 0, excludeRoot: true});
             
             // get link data
             var linkData = [];
@@ -179,8 +179,8 @@ Omeka.Navigation = {};
                 } else {
                     linkInfo.uri = hiddenInfo.uri;
                 }
-                linkInfo.id = parseInt(parentChildData[index + 1].item_id, 10);
-                linkInfo.parent_id = parseInt(parentChildData[index + 1].parent_id, 10);
+                linkInfo.id = parseInt(parentChildData[index].id, 10);
+                linkInfo.parent_id = parseInt(parentChildData[index].parent_id, 10);
                 
                 linkData.push(linkInfo);
             });
