@@ -56,12 +56,10 @@ echo flash();
 
 <?php if ($total_results): ?>
 
-	<div class="clearfix">
     <?php
         $paginationLinks = pagination_links();
         echo $paginationLinks;
     ?>
-    </div>
     
 	<section>
         <div id="tags-nav">
