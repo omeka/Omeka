@@ -127,7 +127,7 @@ echo item_search_filters();
 	    </div>
         <div class="table-actions batch-edit-option">
             <?php if (is_allowed('Items', 'edit') || is_allowed('Items', 'delete')): ?>
-                <button class="batch-all-toggle" type="button" data-records-count="<?php echo $total_results; ?>"><?php echo __('Select all %s results', $total_results); ?></button>
+                <button class="batch-all-toggle small button" type="button" data-records-count="<?php echo $total_results; ?>"><?php echo __('Select all %s results', $total_results); ?></button>
                 <div class="selected"><span class="count">0</span> <?php echo __('items selected'); ?></div>
                 <?php if (is_allowed('Items', 'edit')): ?>
                 <input type="submit" class="edit-items small batch-action button" name="submit-batch-edit" value="<?php echo __('Edit'); ?>" />
