@@ -80,7 +80,7 @@
     }
     &:last-child {
 	    border-top: 0;
-	    margin-bottom: 20px;
+	    margin: (-$spacing-l) 0 20px;
     }
 }
 .items.browse table#items {

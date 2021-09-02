@@ -1677,7 +1677,8 @@ button.remove_search {
   -ms-overflow-style: -ms-autohiding-scrollbar;
   border: 1px solid #dcdcdc;
   border-bottom: 0;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  margin-bottom: 20px; }
   .table-responsive table {
     margin-bottom: 0; }
   .table-responsive th {
@@ -1964,7 +1965,7 @@ ul.details {
     border-bottom: 0; }
   .table-actions:last-child {
     border-top: 0;
-    margin-bottom: 20px; }
+    margin: -20px 0 20px; }
 
 .items.browse table#items {
   margin-bottom: 0; }
