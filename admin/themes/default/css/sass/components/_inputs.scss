@@ -72,6 +72,14 @@ input[type=text].small {
     }
 }
 
+label {
+    input[type=checkbox],
+    input[type=radio],
+    input[type=text] {
+        margin: 0 $spacing-s;
+    }
+}
+
 .field-meta {
     @include screen-sm {
         display: flex;

@@ -948,6 +948,11 @@ input[type=text].small {
     margin-bottom: 10px;
     border: 1px solid #D6D5C2; }
 
+label input[type=checkbox],
+label input[type=radio],
+label input[type=text] {
+  margin: 0 5px; }
+
 @media (min-width: 768px) and (max-width: 991px) {
   .field-meta {
     display: flex;
