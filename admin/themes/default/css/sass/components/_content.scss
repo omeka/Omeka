@@ -105,3 +105,12 @@
 		}
 	}
 }
+
+.ui-autocomplete {
+    background-color: #fff;
+    border: 1px solid $lightgrayborder;
+}
+
+.ui-menu .ui-menu-item-wrapper.ui-state-active {
+    background-color: $lightgreen;
+}

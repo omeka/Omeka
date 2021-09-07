@@ -671,6 +671,13 @@ button.ui-dialog-titlebar-close {
     .ui-dialog .ui-dialog-titlebar * {
       color: white; }
 
+.ui-autocomplete {
+  background-color: #fff;
+  border: 1px solid #E4E5DE; }
+
+.ui-menu .ui-menu-item-wrapper.ui-state-active {
+  background-color: #eaf2e1; }
+
 .ui-sortable,
 .sortable,
 .drawers {
