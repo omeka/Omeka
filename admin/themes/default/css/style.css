@@ -848,7 +848,7 @@ button.ui-dialog-titlebar-close {
   .drawer-contents:empty {
     display: none;
     padding: 0; }
-  .drawer-contents *:only-child {
+  .drawer-contents > *:only-child {
     margin: 0; }
   .drawer-contents input[type=text] {
     width: 100%; }
@@ -856,6 +856,8 @@ button.ui-dialog-titlebar-close {
     margin-bottom: 0; }
   .drawer-contents > :first-child {
     margin-top: 0; }
+  .drawer-contents > :last-child {
+    margin-bottom: 0; }
   .drawer-contents textarea {
     margin: 0;
     vertical-align: bottom; }
@@ -898,7 +900,8 @@ form,
 fieldset {
   border: 0;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  min-width: 0; }
 
 legend {
   font-size: 21px;

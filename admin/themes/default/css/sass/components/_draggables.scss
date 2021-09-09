@@ -182,15 +182,19 @@
     
     &:empty { display: none; padding: 0;}
 
-    *:only-child { margin: 0; }
+    & > *:only-child { margin: 0; }
 
     input[type=text] { width: 100%; }
 
     .button { margin-bottom: 0; }
 
-    > :first-child {
+    & > :first-child {
         margin-top: 0;
     }
+
+    & > :last-child {
+        margin-bottom: 0;
+    } 
 
     textarea {
         margin: 0;
