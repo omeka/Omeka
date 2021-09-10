@@ -36,6 +36,7 @@
 <a href="#content" id="skipnav"><?php echo __('Skip to main content'); ?></a>
 
 <header role="banner">
+    <?php fire_plugin_hook('admin_header_top', array('view'=>$this)); ?>
     <div id="site-title" class="two columns">
         <?php echo link_to_home_page(option('site_title'), array('target' => '_blank')); ?>
     </div>
@@ -59,6 +60,7 @@
         <?php endif; ?>
         </ul>
     </nav>
+    <?php fire_plugin_hook('admin_header_bottom', array('view'=>$this)); ?>
 </header>
 
 <div class="container container-twelve">
