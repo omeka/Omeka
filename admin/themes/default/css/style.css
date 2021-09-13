@@ -1358,7 +1358,7 @@ header {
   position: absolute;
   top: 0;
   right: 0;
-  z-index: 100; }
+  z-index: 1001; }
   @media (min-width: 992px) and (max-width: 1199px) {
     #search-form {
       width: 40%; } }
