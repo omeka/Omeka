@@ -2908,11 +2908,11 @@ form.form-inline.editableform {
   float: right;
   display: flex;
   align-items: center;
-  flex-wrap: wrap; }
+  flex-wrap: wrap;
+  margin-bottom: 10px; }
   @media (max-width: 767px) {
     #search-users {
-      float: none;
-      margin-bottom: 10px; } }
+      float: none; } }
 
 #search-users input[type="text"] {
   margin-bottom: 0; }

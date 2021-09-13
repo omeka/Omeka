@@ -3,10 +3,10 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    margin-bottom: $spacing-m;
 
     @include screen-xs {
         float: none;
-        margin-bottom: $spacing-m;
     }
 }
 
