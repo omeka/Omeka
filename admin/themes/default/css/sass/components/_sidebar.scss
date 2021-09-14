@@ -1,27 +1,50 @@
+//scrollbar styling from https://css-tricks.com/the-current-state-of-styling-scrollbars/
+
+#content-nav::-webkit-scrollbar {
+	width: 11px;
+}
+
 #content-nav {
-    width: 160px;
-    position: sticky;
-    top: 50px;
+	scrollbar-width: thin;
+	scrollbar-color: $scrollbar $darkestred;
+}
+
+#content-nav::-webkit-scrollbar-track {
+	background: $darkestred;
+}
+
+#content-nav::-webkit-scrollbar-thumb {
+	background-color: $scrollbar ;
+	border-radius: 6px;
+	border: 3px solid $darkestred;
+}
+
+#content-nav {
+	background-color: $darkestred;
+    width: 200px;
+    position: fixed;
+    top: 20px;
     z-index: 10;
     left: 0;
+	bottom: 0;
+	margin: 0;
+	overflow-y: hidden;
 
-	@include screen-gtxs {
-		padding-bottom: $spacing-l;
+	&:hover {
+		overflow-y: auto;
 	}
 
     @include screen-md {
-	    width: 130px;
+	    width: 190px;
 	}
 	@include screen-sm {
-		width: 140px;
+		width: 200px;
 	}
 	@include screen-xs {
 		width: 100%;
 		top: 40px;
-		left: 0;
 		z-index: 1000;
-		position: fixed;
-
+		
 		&.open {
 			bottom: 0;
 			overflow-y: scroll;	
@@ -36,7 +59,7 @@
 	&.unfix {
 	    position: absolute;
 	    top: -$spacing-m;
-	}
+	} 
 
 	ul {
 	    width: 100%;
@@ -59,7 +82,6 @@
 	}
 
 	li {
-	    background: #68302C;
 	    word-wrap: break-word;
 	    z-index: 1000;
 	    transition: 0.5s all;
@@ -71,9 +93,6 @@
 	        a {
 		        color: white;
 	        }
-	    }
-	    &:last-of-type {
-		    border-bottom: none;
 	    }
 	    
 	    a {
