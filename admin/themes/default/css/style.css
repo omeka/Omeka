@@ -593,10 +593,10 @@ button.ui-dialog-titlebar-close {
       color: #326200; }
 
 #content {
-  margin-top: 60px; }
+  margin-top: 40px; }
   @media (max-width: 767px) {
     #content {
-      margin-top: 8.5 10px; } }
+      margin-top: 85px; } }
   #content h1:first-child,
   #content h2:first-child {
     margin-top: 0; }
@@ -1543,9 +1543,6 @@ button.remove_search {
     clear: both;
     display: block;
     margin-bottom: 10px; } }
-#content-nav::-webkit-scrollbar {
-  width: 11px; }
-
 #content-nav {
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.4) #68302C; }
@@ -1563,7 +1560,6 @@ button.remove_search {
   width: 200px;
   position: fixed;
   top: 20px;
-  z-index: 10;
   left: 0;
   bottom: 0;
   margin: 0;
@@ -1580,10 +1576,12 @@ button.remove_search {
     #content-nav {
       width: 100%;
       top: 40px;
-      z-index: 1000; }
+      background-color: transparent; }
       #content-nav.open {
         bottom: 0;
-        overflow-y: scroll; }
+        overflow-y: scroll;
+        z-index: 1010;
+        background-color: #68302C; }
       #content-nav.open ~ #content {
         height: 0;
         overflow: hidden; } }

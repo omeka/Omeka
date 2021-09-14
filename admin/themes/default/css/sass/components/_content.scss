@@ -1,8 +1,8 @@
 #content {
-    margin-top: 6 * $spacing-m;
+    margin-top: 4 * $spacing-m;
     
     @include screen-xs {
-    	margin-top: 8.5 $spacing-m;
+    	margin-top: 8.5 * $spacing-m;
     }
     
     h1:first-child,
