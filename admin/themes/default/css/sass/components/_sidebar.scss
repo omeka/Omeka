@@ -19,7 +19,7 @@
 	background-color: $darkestred;
     width: 200px;
     position: fixed;
-    top: 20px;
+    top: 40px;
     left: 0;
 	bottom: 0;
 	margin: 0;
@@ -63,10 +63,10 @@
 	ul {
 	    width: 100%;
 	    list-style-type: none;
-	    margin: $spacing-l 0 0;
 	    padding: 0;
 	    float: left;
 	    clear: left;
+		margin: 0;
 	    
 	    @include screen-xs {
 		 	margin-top: 0;
