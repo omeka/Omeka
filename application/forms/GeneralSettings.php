@@ -66,6 +66,6 @@ class Omeka_Form_GeneralSettings extends Omeka_Form
         $this->addDisplayGroup(
             array('administrator_email', 'site_title', 'description',
                   'copyright', 'author', 'tag_delimiter', 'path_to_convert'),
-            'site_settings');
+            'site_settings', array('legend' => __('General Settings')));
     }
 }

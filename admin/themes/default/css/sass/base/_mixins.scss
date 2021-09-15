@@ -1,0 +1,100 @@
+// Media Queries
+
+@mixin screen-xxs {
+  @media (#{$screen-xxs}) {
+    @content;
+  }
+}
+
+@mixin screen-xs {
+  @media (#{$screen-xs}) {
+    @content;
+  }
+}
+
+@mixin screen-sm {
+  @media (#{$screen-sm}) {
+    @content;
+  }
+}
+
+@mixin screen-md {
+  @media (#{$screen-md}) {
+    @content;
+  }
+}
+
+@mixin screen-lg {
+  @media (#{$screen-lg}) {
+    @content;
+  }
+}
+
+@mixin screen-xl {
+  @media (#{$screen-xl}) {
+    @content;
+  }
+}
+
+@mixin screen-ltmd  {
+  @media (#{$screen-ltmd}) {
+    @content;
+  }
+}
+
+@mixin screen-ltlg  {
+  @media (#{$screen-ltlg}) {
+    @content;
+  }
+}
+
+@mixin screen-ltxl  {
+  @media (#{$screen-ltxl}) {
+    @content;
+  }
+}
+
+@mixin screen-gtxs  {
+  @media (#{$screen-gtxs}) {
+    @content;
+  }
+}
+
+@mixin screen-gtsm  {
+  @media (#{$screen-gtsm}) {
+    @content;
+  }
+}
+
+@mixin screen-gtmd  {
+  @media (#{$screen-gtmd}) {
+    @content;
+  }
+}
+
+@mixin screen-btwn-1200-1250  {
+  @media (#{$screen-btwn-1200-1250}) {
+    @content;
+  }
+}
+
+@mixin screen-btwn-992-1020  {
+  @media (#{$screen-btwn-992-1020}) {
+    @content;
+  }
+}
+
+@mixin screen-btwn-768-790  {
+  @media (#{$screen-btwn-768-790}) {
+    @content;
+  }
+}
+
+@mixin sr-only {
+  position:absolute;
+	left:-10000px;
+	top:auto;
+	width:1px;
+	height:1px;
+	overflow:hidden;
+}

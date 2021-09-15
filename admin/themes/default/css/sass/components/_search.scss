@@ -1,0 +1,249 @@
+#search-form {
+    width: 30%;
+    float: left;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1001;
+    
+    @include screen-md {
+	    width: 40%;
+	}
+    @include screen-sm {
+	    width: 50%;
+	}
+    @include screen-xs {
+    	float: none;
+		width: 100%;
+		position: relative;
+		top: -50px;
+	}
+    
+    p {
+        clear: both;
+    }
+    
+    input[type=text] {
+        width: 100%;
+        padding-right: 36px;
+        height: 36px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
+    }
+    
+    &.with-advanced input[type=text] {
+        padding-right: 72px;
+    }
+    
+    button {
+        width: 36px;
+        height: 36px;
+        padding: 0 5px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        text-indent: -9999px;
+        transition: 0.5s all;
+        margin: 0;
+        
+        color: #fff;
+        background: $darkred;
+        border-radius: 0;
+        border: none;
+        text-shadow: none;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        
+        &:after {
+            font-family: "Font Awesome 5 Free";
+            display: block;
+            font-weight: 900;
+            content: "\f002";
+            text-indent: 0;
+            text-align: center;
+        }
+        &:hover {
+			background: $darkestred;
+			color: white;
+		}
+    }
+}
+
+#advanced-search {
+    width: 36px;
+    height: 36px;
+    line-height: 16px;
+    text-indent: -9999px;
+    text-decoration: none;
+    position: absolute;
+    transition: 0.5s all;
+    top: 0;
+    right: 37px;
+    margin: 0;    
+    
+    color: #fff;
+    background: $darkred;
+    border: none;
+    border-radius: 0;
+    text-shadow: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+	&:after {
+	    content: "\f141";
+	    font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+	    font-size: 16px;
+	    display: block;
+	    text-indent: 0;
+	    text-align: center;
+	}
+	&:hover {
+		background: $darkestred;
+		color: white;
+	}
+}
+
+
+#advanced-form {
+    display: none;
+    background-color: #fff;
+    overflow: auto;
+    clear: both;
+    z-index: 1001;
+    position: absolute;
+    top: 36px;
+    left: 0;
+    padding: 0 $spacing-l 1em $spacing-l;
+    border: 1px solid $darkgrayborder;
+    border-top: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+
+
+    input[type=radio] { margin: 0 9px 0 0; }
+    input[type=checkbox] { margin-right: 5px; }
+
+    fieldset { margin: $spacing-l 0; }
+
+    legend {
+        font-size: 16px;
+        margin: $spacing-l 0 $spacing-m;
+    }
+}
+
+#advanced-search-form {
+	.advanced-search-terms {
+		margin-bottom: $spacing-m;
+	}
+	@include screen-md {
+		.columns.two {
+			width: 100%;
+		}
+		.columns.five {
+			width: 100%;
+		}
+	}
+}
+
+    
+#search-results {
+	td:first-of-type {
+    	width: 15%;
+    }
+}
+
+#search-filters {
+	ul {
+	    clear: both;
+	    list-style-type: none;
+	    display: inline;
+	    padding: 0;
+	    margin: 0;
+	    text-align: left;
+	}
+
+    li {
+        display: inline-block;
+        background: url('../images/search.png') no-repeat;
+        padding: 0 0 0 $spacing-l;
+        margin: 0 30px $spacing-l 0;
+        background-position-y: 2px;
+    }
+
+    li ul li {
+        display: inline-block;
+        background: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    li ul li:after {
+      	content: ",";
+    }
+
+    li ul li:last-child:after {
+      	content: "";
+    }
+}
+
+.search-record-types ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+    .search-record-types input[type=checkbox] { margin-right: 5px;}
+
+#no-results {
+    clear: both;
+}
+
+.search-entry {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    
+	select {
+	    min-width: 0;
+	    width: 40%;
+	}
+
+	&:first-of-type select {
+	    width: 49.5%;
+	}
+
+	input[type=text] {
+	    margin-bottom: $spacing-m;
+	}
+}
+
+#search-narrow-by-fields .search-entry:first-of-type .advanced-search-joiner {
+    display: none;
+}
+
+#search-narrow-by-fields .advanced-search-joiner {
+    width: 20%;
+}
+
+button.remove_search {
+    margin-bottom: 40px;
+}
+
+.panel #submit_search_advanced {
+    clear: both;
+    margin: $spacing-l 0;
+}
+
+@include screen-xs {
+    .add_search {
+        clear: both;
+        display: block;
+        margin-bottom: 10px;
+    }
+}

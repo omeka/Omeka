@@ -16,15 +16,17 @@ echo flash();
         </div>
         <div class="field">
             <div class="two columns alpha">
-                <label for="search_record_types"><?php echo __('Search Record Types'); ?></label>
+                <label><?php echo __('Search Record Types'); ?></label>
             </div>
             <div class="inputs five columns omega">
-                <p class="explanation"><?php echo __('Customize which types of records '
-                . 'will be searchable in Omeka.'); ?></p>
-                <ul><?php foreach ($this->searchRecordTypes as $key => $value): ?>
-                <li><?php echo $this->formCheckbox("search_record_types[$key]", $key,
-                array('checked' => array_key_exists($key, $this->customSearchRecordTypes))); ?> <?php echo $value; ?></li>
-                <?php endforeach; ?></ul>
+                <fieldset>
+                <legend class="explanation"><?php echo __('Customize which types of records '
+                . 'will be searchable in Omeka.'); ?></legend>
+                <?php foreach ($this->searchRecordTypes as $key => $value): ?>
+                <label class="checkbox-label"><?php echo $this->formCheckbox("search_record_types[$key]", $key,
+                array('checked' => array_key_exists($key, $this->customSearchRecordTypes))); ?> <?php echo $value; ?></label>
+                <?php endforeach; ?>
+                </fieldset>
             </div>
         </div>
         <div class="field">
@@ -47,8 +49,8 @@ echo flash();
     <?php echo $csrf; ?>
     <section class="three columns omega">
         <div id="save" class="panel">
-            <?php echo $this->formSubmit('submit_save_changes', __('Save Changes'), array('class'=>'submit big green button')); ?>
-            <?php echo $this->formSubmit('submit_index_records', __('Index Records'), array('class'=>'submit big blue button')); ?>
+            <?php echo $this->formSubmit('submit_save_changes', __('Save Changes'), array('class'=>'submit full-width green button')); ?>
+            <?php echo $this->formSubmit('submit_index_records', __('Index Records'), array('class'=>'submit full-width blue button')); ?>
         </div>
     </section>
 </form>

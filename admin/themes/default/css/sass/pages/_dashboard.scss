@@ -1,0 +1,37 @@
+#stats {
+    text-align: center;
+    margin: auto;
+
+	.number {
+	    font-style: normal;
+	    
+	    a {
+		    text-decoration: none;
+			font-size: 30px;
+	    }
+	}
+
+	p {
+	    min-width: 3em;
+	    display: inline-block;
+	    text-align: center;
+	    margin: $spacing-l $spacing-m;
+	    text-transform: capitalize;
+	
+		&:first-child {
+	        margin-left: 0;
+	    }
+
+	    &:last-child {
+	        margin-right: 0;
+	    }
+	}
+}
+
+.index .alpha {
+    clear: left;
+}
+
+.index .omega {
+    clear: right;
+}

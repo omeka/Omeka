@@ -1,0 +1,30 @@
+.files dt, .files dd {
+    line-height: 1.5em;
+    margin: 0;
+    padding: 0;
+}
+
+.files dt {
+    font-weight: bold;
+}
+
+.files .item-file {
+    display: block;
+    margin: 0 0 $spacing-l 0;
+}
+
+.files dd {
+    margin-bottom: $spacing-l;
+}
+
+.id3-property-name {
+  font-weight: bold;
+}
+
+#files-metadata {
+	.files {
+		input {
+			margin-bottom: $spacing-m;
+		}
+	}
+}

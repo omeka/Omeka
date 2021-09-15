@@ -11,7 +11,7 @@ jQuery(document).ready(function () {
 
 <section class="seven columns alpha">
     <fieldset id="type-information">
-        <h2><?php echo __('Item Type Information'); ?></h2>
+        <legend><?php echo __('Item Type Information'); ?></legend>
         <p class='explanation'>* <?php echo __('required field'); ?></p>
             
         <div class="field">
@@ -22,7 +22,7 @@ jQuery(document).ready(function () {
         </div>
     </fieldset>
     <fieldset id="type-elements">
-        <h2><?php echo __('Elements'); ?></h2>
+        <legend><?php echo __('Elements'); ?></legend>
         <div id="element-list">
             <ul id="item-type-elements" class="sortable">
             <?php
@@ -81,8 +81,8 @@ jQuery(document).ready(function () {
                     </div>
                     <div class="drawer-contents">
                         <p>
-                            <input type="radio" name="add-element-type" value="existing" checked="checked" /><?php echo __('Existing'); ?>
-                            <input type="radio" name="add-element-type" value="new" /><?php echo __('New'); ?>
+                            <label><input type="radio" name="add-element-type" value="existing" checked="checked" /><?php echo __('Existing'); ?></label>
+                            <label><input type="radio" name="add-element-type" value="new" /><?php echo __('New'); ?></label>
                         </p>
                         <button id="add-element" name="add-element"><?php echo __('Add Element'); ?></button>
                     </div>

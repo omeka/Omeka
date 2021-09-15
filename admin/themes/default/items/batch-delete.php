@@ -24,7 +24,7 @@ endif;
                     }
 
                     if (is_allowed($item, 'delete')) {
-                        $itemCheckboxes[$id] = metadata($item, array('Dublin Core', 'Title'));
+                        $itemCheckboxes[$id] = metadata($item, 'display_title', array('no_escape' => true));
                     } else {
                         $excludedItems = true;
                     }

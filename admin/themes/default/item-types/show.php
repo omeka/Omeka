@@ -48,10 +48,10 @@ echo flash();
 <section class="three columns omega">
     <div id="edit" class="panel">
     <?php if ( is_allowed('ItemTypes','edit') ): ?>
-    <a class="edit big green button" href="<?php echo html_escape(record_url($item_type, 'edit', 'item-types')); ?>"><?php echo __('Edit'); ?></a>
+    <a class="edit full-width green button" href="<?php echo html_escape(record_url($item_type, 'edit', 'item-types')); ?>"><?php echo __('Edit'); ?></a>
     <?php endif; ?>
     <?php if ( is_allowed('ItemTypes','delete') ): ?>
-    <a class="edit big red button delete-confirm" href="<?php echo html_escape(record_url($item_type, 'delete-confirm', 'item-types')); ?>"><?php echo __('Delete'); ?></a>
+    <a class="edit full-width red button delete-confirm" href="<?php echo html_escape(record_url($item_type, 'delete-confirm', 'item-types')); ?>"><?php echo __('Delete'); ?></a>
     <?php endif; ?>
     </div>
 </section>

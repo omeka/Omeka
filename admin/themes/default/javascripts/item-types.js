@@ -34,9 +34,9 @@ Omeka.ItemTypes = {};
             }
         });
         $('div.sortable-item').each(function () {
-            $(this).append('<div class="drawer"></div>');
+            $(this).append('<div class="drawer-toggle"></div>');
         });
-        $('.drawer').click( function (event) {
+        $('.drawer-toggle').click( function (event) {
                 event.preventDefault();
                 $(event.target).parent().next().toggle();
                 $(this).toggleClass('opened');
