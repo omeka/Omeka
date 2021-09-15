@@ -62,7 +62,7 @@ endif; ?>
     </div>
 <?php endforeach; ?>
     <?php if (is_allowed('Items', 'add')): ?>
-    <div class="add-new-link"><p><a class="add-new-item" href="<?php echo html_escape(url('items/add')); ?>"><?php echo __('Add a new item'); ?></a></p></div>
+    <div class="add-new-link"><p><a class="add-new-item green button" href="<?php echo html_escape(url('items/add')); ?>"><?php echo __('Add a new item'); ?></a></p></div>
     <?php endif; ?>
 <?php $panels[] = ob_get_clean(); ?>
 
@@ -74,14 +74,14 @@ endif; ?>
     foreach (loop('collections') as $collection):
 ?>
     <div class="recent-row">
-        <p class="recent"><?php echo link_to_collection(); ?></p>
+        <p class="recent"><?php echo link_to_collection() . " (" . metadata($collection, 'total_items') . ")"; ?></p>
         <?php if (is_allowed($collection, 'edit')): ?>
         <p class="dash-edit"><?php echo link_to_collection(__('Edit'), array(), 'edit'); ?></p>
         <?php endif; ?>
     </div>
 <?php endforeach; ?>
     <?php if (is_allowed('Collections', 'add')): ?>
-    <div class="add-new-link"><p><a class="add-collection" href="<?php echo html_escape(url('collections/add')); ?>"><?php echo __('Add a new collection'); ?></a></p></div>
+    <div class="add-new-link"><p><a class="add-collection green button" href="<?php echo html_escape(url('collections/add')); ?>"><?php echo __('Add a new collection'); ?></a></p></div>
     <?php endif; ?>
 <?php $panels[] = ob_get_clean(); ?>
 
