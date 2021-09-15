@@ -100,7 +100,7 @@ class Omeka_View_Helper_ElementForm extends Zend_View_Helper_Abstract
         $html .= $components['inputs'];
         $html .= '</div>'; // Close 'inputs' div
 
-        $html .= $divWrap ? '</div>' : ''; // Close 'field' fieldset
+        $html .= $divWrap ? '</div>' : ''; // Close 'field' div
 
         return $html;
     }
