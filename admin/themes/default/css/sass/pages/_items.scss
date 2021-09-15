@@ -371,6 +371,10 @@
     color: #666;
     font-style: italic;
     font-size: 16px;
+
+    * {
+        font-size: 16px;
+    }
 }
 
 #public-featured {

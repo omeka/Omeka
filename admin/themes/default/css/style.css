@@ -732,8 +732,6 @@ button.ui-dialog-titlebar-close {
   -moz-border-radius: 2px;
   border-radius: 2px;
   padding: 15px;
-  font-size: 14px;
-  line-height: 1.5em;
   margin: 0; }
   .drawer input,
   .sortable-item input,
@@ -769,7 +767,6 @@ button.ui-dialog-titlebar-close {
   width: 20px;
   cursor: pointer;
   text-indent: -9999px;
-  font-size: 18px;
   color: #4C3939; }
 
 .deleted.sortable-item,
@@ -873,28 +870,25 @@ footer {
   clear: both;
   font-size: 12px;
   padding: 20px 0 !important; }
+  footer * {
+    font-size: 12px !important; }
   footer a {
-    margin-right: 20px;
-    font-size: 12px; }
+    margin-right: 20px; }
     @media (max-width: 991px) {
       footer a {
         margin-right: 5px; } }
     footer a:last-of-type {
       margin-right: 0; }
-  footer p.left {
-    font-size: 12px; }
-    @media (max-width: 991px) {
-      footer p.left {
-        float: none;
-        margin: 20px 0 5px; } }
-  footer p.right {
-    font-size: 12px; }
-    @media (max-width: 991px) {
-      footer p.right {
-        float: none;
-        margin: 0 0 20px; } }
-    footer p.right a {
-      margin-left: 20px; }
+  @media (max-width: 991px) {
+    footer p.left {
+      float: none;
+      margin: 20px 0 5px; } }
+  @media (max-width: 991px) {
+    footer p.right {
+      float: none;
+      margin: 0 0 20px; } }
+  footer p.right a {
+    margin-left: 20px; }
 
 form,
 fieldset {
@@ -2364,6 +2358,8 @@ ul.details {
   color: #666;
   font-style: italic;
   font-size: 16px; }
+  .explanation * {
+    font-size: 16px; }
 
 #public-featured {
   margin: 0 0 10px 0;

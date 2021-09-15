@@ -3,9 +3,12 @@ footer {
     font-size: 12px;
     padding: $spacing-l 0 !important;
     
+	* {
+		font-size: 12px !important;
+	}
+	
     a {
 	    margin-right:  $spacing-l;
-	    font-size: 12px;
 	    
 	    @include screen-ltmd {
 			margin-right:  $spacing-s;   
@@ -17,16 +20,12 @@ footer {
     }
     
     p.left {
-	    font-size: 12px;
-	    
 	    @include screen-ltmd {
 		    float: none;
 			margin:  $spacing-l 0  $spacing-s;
 		}
     }
     p.right {
-	    font-size: 12px;
-	    
 	    @include screen-ltmd {
 			float: none;
 			margin: 0 0  $spacing-l;
