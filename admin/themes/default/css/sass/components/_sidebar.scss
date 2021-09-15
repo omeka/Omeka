@@ -39,11 +39,13 @@
 		width: 100%;
 		top: 40px;
 		background-color: transparent;
+		height: 4.5 * $spacing-m;
+		z-index: 1010;
 		
 		&.open {
 			bottom: 0;
+			height: auto;
 			overflow-y: scroll;	
-			z-index: 1010;
 			background-color: $darkestred;
 		}
 		

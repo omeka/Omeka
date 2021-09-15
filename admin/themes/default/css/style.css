@@ -596,7 +596,7 @@ button.ui-dialog-titlebar-close {
   margin-top: 40px; }
   @media (max-width: 767px) {
     #content {
-      margin-top: 120px; } }
+      margin-top: 85px; } }
   #content h1:first-child,
   #content h2:first-child {
     margin-top: 0; }
@@ -1576,11 +1576,13 @@ button.remove_search {
     #content-nav {
       width: 100%;
       top: 40px;
-      background-color: transparent; }
+      background-color: transparent;
+      height: 45px;
+      z-index: 1010; }
       #content-nav.open {
         bottom: 0;
+        height: auto;
         overflow-y: scroll;
-        z-index: 1010;
         background-color: #68302C; }
       #content-nav.open ~ #content {
         height: 0;
