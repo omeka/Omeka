@@ -1377,65 +1377,46 @@ header {
     margin: 0; }
   #search-form.with-advanced input[type=text] {
     padding-right: 72px; }
-  #search-form button {
-    width: 36px;
-    height: 36px;
-    padding: 0 5px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    text-indent: -9999px;
-    transition: 0.5s all;
-    margin: 0;
-    color: #fff;
-    background: #82423B;
-    border-radius: 0;
-    border: none;
-    text-shadow: none;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center; }
-    #search-form button:after {
-      font-family: "Font Awesome 5 Free";
-      display: block;
-      font-weight: 900;
-      content: "\f002";
-      text-indent: 0;
-      text-align: center; }
-    #search-form button:hover {
-      background: #68302C;
-      color: white; }
 
-#advanced-search {
+#advanced-search,
+#search-form button {
   width: 36px;
   height: 36px;
-  line-height: 16px;
-  text-indent: -9999px;
-  text-decoration: none;
+  padding: 0 5px;
   position: absolute;
-  transition: 0.5s all;
   top: 0;
-  right: 37px;
+  right: 0;
+  text-indent: -9999px;
+  transition: 0.5s all;
   margin: 0;
   color: #fff;
   background: #82423B;
-  border: none;
   border-radius: 0;
+  border: none;
   text-shadow: none;
   display: inline-flex;
   justify-content: center;
   align-items: center; }
-  #advanced-search:after {
-    content: "\f141";
+  #advanced-search:after,
+  #search-form button:after {
     font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    font-size: 16px;
+    position: absolute;
     display: block;
+    font-weight: 900;
+    content: "\f002";
     text-indent: 0;
     text-align: center; }
-  #advanced-search:hover {
+  #advanced-search:hover,
+  #search-form button:hover {
     background: #68302C;
     color: white; }
+
+#advanced-search {
+  position: absolute;
+  top: 0;
+  right: 37px; }
+  #advanced-search:after {
+    content: "\f141"; }
 
 #advanced-form {
   display: none;
