@@ -902,6 +902,8 @@ legend {
   font-weight: normal;
   margin-bottom: 16px;
   padding: 0; }
+  legend h2 {
+    margin: 0; }
 
 input,
 select,
