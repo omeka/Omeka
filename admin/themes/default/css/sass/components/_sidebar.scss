@@ -1,7 +1,10 @@
 //scrollbar styling from https://css-tricks.com/the-current-state-of-styling-scrollbars/
 
+#content-nav::-webkit-scrollbar {
+	width: auto;
+  }
+
 #content-nav {
-	scrollbar-width: thin;
 	scrollbar-color: $scrollbar $darkestred;
 }
 
@@ -10,7 +13,7 @@
 }
 
 #content-nav::-webkit-scrollbar-thumb {
-	background-color: $scrollbar ;
+	background-color: $scrollbar;
 	border-radius: 6px;
 	border: 3px solid $darkestred;
 }
@@ -23,11 +26,7 @@
     left: 0;
 	bottom: 0;
 	margin: 0;
-	overflow-y: hidden;
-
-	&:hover {
-		overflow-y: auto;
-	}
+	overflow-y: auto;
 
     @include screen-md {
 	    width: 160px;
@@ -84,7 +83,6 @@
 	    word-wrap: break-word;
 	    z-index: 1000;
 	    transition: 0.5s all;
-	    border-bottom: 1px solid rgba(#ECB5B3, 0.25);
 
 	    &:hover {
 	        background: $darkred;
@@ -99,7 +97,7 @@
 	        color: white;
 	        display: block;
 	        line-height: 1.5em;
-	        padding: .625em .5em .625em 1em;
+	        padding: .5em .5em .5em 1em;
 	        font-size: 14px;
 	        text-decoration: none;
 	        transition: 0.5s all;

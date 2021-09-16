@@ -1523,8 +1523,10 @@ button.remove_search {
     clear: both;
     display: block;
     margin-bottom: 10px; } }
+#content-nav::-webkit-scrollbar {
+  width: auto; }
+
 #content-nav {
-  scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.4) #68302C; }
 
 #content-nav::-webkit-scrollbar-track {
@@ -1543,9 +1545,7 @@ button.remove_search {
   left: 0;
   bottom: 0;
   margin: 0;
-  overflow-y: hidden; }
-  #content-nav:hover {
-    overflow-y: auto; }
+  overflow-y: auto; }
   @media (min-width: 992px) and (max-width: 1199px) {
     #content-nav {
       width: 160px; } }
@@ -1588,8 +1588,7 @@ button.remove_search {
   #content-nav li {
     word-wrap: break-word;
     z-index: 1000;
-    transition: 0.5s all;
-    border-bottom: 1px solid rgba(236, 181, 179, 0.25); }
+    transition: 0.5s all; }
     #content-nav li:hover {
       background: #82423B; }
       #content-nav li:hover a {
@@ -1599,7 +1598,7 @@ button.remove_search {
       color: white;
       display: block;
       line-height: 1.5em;
-      padding: .625em .5em .625em 1em;
+      padding: .5em .5em .5em 1em;
       font-size: 14px;
       text-decoration: none;
       transition: 0.5s all; }
