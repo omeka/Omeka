@@ -104,6 +104,18 @@ label {
     }
 }
 
+.explanation {
+    clear: both;
+    margin: 0 0 10px 0;
+    color: #666;
+    font-style: italic;
+    font-size: 16px;
+
+    * {
+        font-size: 16px;
+    }
+}
+
 .inputs {
     margin: 0 0 $spacing-l 0;
     

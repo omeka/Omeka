@@ -1,3 +1,4 @@
+#install,
 #login, 
 #debug {
 	#content {
@@ -39,10 +40,23 @@
 	    padding: 0;
 	}
 
+	.inputs {
+		text-align: left;
+	}
+
 	#flash {
 	    margin: 0 10px;
 	}
 
+	fieldset {
+		border: 0;
+	}
+
+	legend {
+		width: 100%;
+		text-align: center;
+	}
+	
 	input[type=text], 
 	input[type=password] {
 	    width: 100%;
@@ -91,5 +105,9 @@
 		border: 1px solid $lightgrayborder;
 		overflow-x: scroll;
 		text-align: left;
+	}
+	
+	#required-note {
+		display: block;
 	}
 }

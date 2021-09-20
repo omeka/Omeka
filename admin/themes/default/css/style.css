@@ -972,6 +972,15 @@ label input[type=text] {
       margin-bottom: 0;
       padding: 5px 10px; } }
 
+.explanation {
+  clear: both;
+  margin: 0 0 10px 0;
+  color: #666;
+  font-style: italic;
+  font-size: 16px; }
+  .explanation * {
+    font-size: 16px; }
+
 .inputs {
   margin: 0 0 20px 0; }
   .inputs .input-block {
@@ -2337,15 +2346,6 @@ ul.details {
   display: inline-block;
   margin: 0 0 40px 0; }
 
-.explanation {
-  clear: both;
-  margin: 0 0 10px 0;
-  color: #666;
-  font-style: italic;
-  font-size: 16px; }
-  .explanation * {
-    font-size: 16px; }
-
 #public-featured {
   margin: 0 0 10px 0;
   padding: 0;
@@ -2479,6 +2479,7 @@ ul.details {
 .item-type-metadata .sortable-item {
   cursor: default; }
 
+#install #content,
 #login #content,
 #debug #content {
   margin-top: 10%;
@@ -2487,15 +2488,18 @@ ul.details {
   padding: 25px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); }
   @media (max-width: 767px) {
+    #install #content,
     #login #content,
     #debug #content {
       max-width: 260px; } }
+#install .errors,
 #login .errors,
 #debug .errors {
   list-style-type: none;
   margin: 0;
   padding: 0;
   text-align: left; }
+  #install .errors li,
   #login .errors li,
   #debug .errors li {
     background-color: rgba(255, 255, 255, 0.5);
@@ -2506,21 +2510,40 @@ ul.details {
     color: #914E33;
     margin: 0;
     padding: .5em; }
+#install #forgotpassword,
 #login #forgotpassword,
 #debug #forgotpassword {
   clear: both; }
+#install .field label,
 #login .field label,
 #debug .field label {
   min-width: 0;
   padding: 0; }
+#install .inputs,
+#login .inputs,
+#debug .inputs {
+  text-align: left; }
+#install #flash,
 #login #flash,
 #debug #flash {
   margin: 0 10px; }
+#install fieldset,
+#login fieldset,
+#debug fieldset {
+  border: 0; }
+#install legend,
+#login legend,
+#debug legend {
+  width: 100%;
+  text-align: center; }
+#install input[type=text],
+#install input[type=password],
 #login input[type=text],
 #login input[type=password],
 #debug input[type=text],
 #debug input[type=password] {
   width: 100%; }
+#install h1,
 #login h1,
 #debug h1 {
   width: 100%;
@@ -2531,29 +2554,37 @@ ul.details {
   line-height: 53px;
   margin: 20px 0 0 0;
   display: inline-block; }
+#install h2,
 #login h2,
 #debug h2 {
   margin: 1em 0; }
+#install label,
 #login label,
 #debug label {
   text-align: left; }
+#install .login-footer,
 #login .login-footer,
 #debug .login-footer {
   clear: both;
   padding: 10px 0;
   text-align: center; }
+#install #remember,
 #login #remember,
 #debug #remember {
   display: inline-block;
   margin: 0; }
+#install #fieldset-login,
 #login #fieldset-login,
 #debug #fieldset-login {
   text-align: left; }
+#install .submit,
+#install #login-links,
 #login .submit,
 #login #login-links,
 #debug .submit,
 #debug #login-links {
   clear: both; }
+#install pre,
 #login pre,
 #debug pre {
   font-family: monospace;
@@ -2561,6 +2592,10 @@ ul.details {
   border: 1px solid #E4E5DE;
   overflow-x: scroll;
   text-align: left; }
+#install #required-note,
+#login #required-note,
+#debug #required-note {
+  display: block; }
 
 .plugins.browse table form {
   display: inline-block; }
