@@ -139,13 +139,17 @@
 	    color: white;
 	    display: block;
 	    line-height: 1.5em;
-	    padding: .625em .5em .625em 1em;
+	    padding: .625em 3em .625em 1em;
 	    font-size: 16px;
 	    text-decoration: none;
 	    transition: 0.5s all;
 		position: sticky;
 		top: 0;
 		z-index: 999;
+		overflow: hidden;
+		height: 2.5 * $spacing-m;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	    
 	    &:after {
 		    content: "\f0d7";
