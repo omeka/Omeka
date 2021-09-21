@@ -832,13 +832,14 @@ button.ui-dialog-titlebar-close {
   margin-top: 10%;
   text-align: center;
   background: white;
-  padding: 25px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); }
+  padding: 25px 0;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; }
   @media (max-width: 767px) {
     #install #content,
     #login #content,
     #debug #content {
-      max-width: 260px; } }
+      padding: 25px; } }
 #install .errors,
 #login .errors,
 #debug .errors {
@@ -943,5 +944,9 @@ button.ui-dialog-titlebar-close {
 #login #required-note,
 #debug #required-note {
   display: block; }
+#install .columns,
+#login .columns,
+#debug .columns {
+  max-width: 100%; }
 
 /*# sourceMappingURL=screen.css.map */
