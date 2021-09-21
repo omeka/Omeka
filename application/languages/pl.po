@@ -6,12 +6,12 @@
 # Andrzej Kubicki <ankubicki@gmail.com>, 2014
 # Borys Wasiuk, 2017
 # Dominik Broniszewski <dominik@broniszewski.pl>, 2013
-# platanus <marcin.mielnicki@gmail.com>, 2013
+# 7001ae711c3ce2e9f7a64c69e343cdc3_ae0f8ad <6fb6395346f47c0fe301dfca70568ab2_48980>, 2013
 # Michał Seweryniak <michal.seweryniak@zafado.pl>, 2012
 # Michał Seweryniak <michal.seweryniak@zafado.pl>, 2012
 # mw <m@wilkowski.org>, 2015
 # c10516f0462e552b4c3672569f0745a7_cc5cca2 <841826256cd8f47d0e443806a8e56601_19204>, 2012
-# platanus <marcin.mielnicki@gmail.com>, 2013
+# 7001ae711c3ce2e9f7a64c69e343cdc3_ae0f8ad <6fb6395346f47c0fe301dfca70568ab2_48980>, 2013
 # c10516f0462e552b4c3672569f0745a7_cc5cca2 <841826256cd8f47d0e443806a8e56601_19204>, 2012
 # Sylwia Kucharska <sylvia@wroclaw.home.pl>, 2016
 # Tomasz Sopylo <tomasz@sopylo.pl>, 2015-2016
@@ -19,7 +19,7 @@
 # vortage <vortage@o2.pl>, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: Omeka\n"
+"Project-Id-Version: Omeka Classic\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
 "PO-Revision-Date: 2021-03-18 20:09+0000\n"

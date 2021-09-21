@@ -12,11 +12,11 @@
 # Sergi Montes <sergi.blanes@gmail.com>, 2013
 msgid ""
 msgstr ""
-"Project-Id-Version: Omeka\n"
+"Project-Id-Version: Omeka Classic\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2021-03-18 20:09+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2021-04-27 13:52+0000\n"
+"Last-Translator: Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>\n"
 "Language-Team: Catalan (Spain) (http://www.transifex.com/omeka/omeka/language/ca_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1777,11 +1777,11 @@ msgstr "Ok"
 
 #: admin/themes/default/settings/edit-search.php:10
 msgid "Search Query Type"
-msgstr ""
+msgstr "Tipus de cerca"
 
 #: admin/themes/default/settings/edit-search.php:13
 msgid "Select the default query type used for simple search in Omeka."
-msgstr ""
+msgstr "Seleccioneu el tipus de cerca per defecte per a la cerca simple."
 
 #: admin/themes/default/settings/edit-search.php:19
 msgid "Search Record Types"

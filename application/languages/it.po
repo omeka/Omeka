@@ -7,7 +7,7 @@
 # Alessandro Leccese <alec.wiki@gmail.com>, 2012-2013,2015,2018
 # Alfio Squatrito <info@lswebagency.it>, 2014
 # armando serra <armando.serra@gmail.com>, 2017
-# Daniele Binaghi, 2018-2020
+# Daniele Binaghi, 2018-2021
 # Donatella Mutti <donatella.mutti@unito.it>, 2012
 # fabio_t <fabio.tian@gmail.com>, 2013
 # fabio_t <fabio.tian@gmail.com>, 2013
@@ -19,11 +19,11 @@
 # Stefano Costa <steko@iosa.it>, 2012
 msgid ""
 msgstr ""
-"Project-Id-Version: Omeka\n"
+"Project-Id-Version: Omeka Classic\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2021-03-18 20:09+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2021-09-02 07:46+0000\n"
+"Last-Translator: Daniele Binaghi\n"
 "Language-Team: Italian (http://www.transifex.com/omeka/omeka/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -501,7 +501,7 @@ msgstr "(%s in totale)"
 msgid "%s%d item%s has no collection."
 msgid_plural "%s%d items%s aren't in a collection."
 msgstr[0] "%s%d documento %s non fa parte di una collezione."
-msgstr[1] "%s%d documenti %s non fanno parte di una collezione."
+msgstr[1] "%s%d documenti%s non fanno parte di una collezione."
 
 #: admin/themes/default/collections/browse.php:20
 msgid "All items are in a collection."
@@ -1784,11 +1784,11 @@ msgstr "Ok"
 
 #: admin/themes/default/settings/edit-search.php:10
 msgid "Search Query Type"
-msgstr ""
+msgstr "Tipologia di ricerca"
 
 #: admin/themes/default/settings/edit-search.php:13
 msgid "Select the default query type used for simple search in Omeka."
-msgstr ""
+msgstr "Seleziona la tipologia di ricerca predefinita per le ricerche semplici in Omeka."
 
 #: admin/themes/default/settings/edit-search.php:19
 msgid "Search Record Types"

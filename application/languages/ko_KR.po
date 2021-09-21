@@ -11,7 +11,7 @@
 # Seung-il, Lee <silee0523@gmail.com>, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: Omeka\n"
+"Project-Id-Version: Omeka Classic\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
 "PO-Revision-Date: 2021-03-18 20:09+0000\n"

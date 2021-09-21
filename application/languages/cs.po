@@ -7,16 +7,16 @@
 # Dana Léw <lew.dana@gmail.com>, 2011,2013
 # Jan Černý <cernyhonza@gmail.com>, 2011-2014
 # Jiří Vírava <appukonrad@gmail.com>, 2014-2015,2017
-# Martin Slavík <martin.d.slavik@gmail.com>, 2018
+# Martin Slavík <martin.d.slavik@gmail.com>, 2018,2021
 # MICHAL D. <black23@gmail.com>, 2013-2014
 # Adam Véle <vele@centrum.cz>, 2012
 msgid ""
 msgstr ""
-"Project-Id-Version: Omeka\n"
+"Project-Id-Version: Omeka Classic\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2021-03-18 20:09+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2021-07-04 18:49+0000\n"
+"Last-Translator: Martin Slavík <martin.d.slavik@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/omeka/omeka/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -688,7 +688,7 @@ msgstr "Fórum podpory"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Back to top"
-msgstr ""
+msgstr "Zpět na začátek"
 
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
@@ -1047,7 +1047,7 @@ msgstr[3] ""
 
 #: admin/themes/default/item-types/browse.php:21
 msgid "All items have a type."
-msgstr ""
+msgstr "Všechny prvky mají typ záznamu."
 
 #: admin/themes/default/item-types/browse.php:29
 msgid "Type Name"
@@ -1148,7 +1148,7 @@ msgstr "Všechny %d položky budou smazány."
 
 #: admin/themes/default/items/batch-delete-all.php:25
 msgid "Deletions will be processed in the background item by item."
-msgstr ""
+msgstr "Položky budou odstraněny jednotlivě na pozadí."
 
 #: admin/themes/default/items/batch-delete-all.php:36
 #: admin/themes/default/items/batch-delete.php:47
@@ -1739,14 +1739,14 @@ msgstr "Zapnutí nebo vypnutí API provedete zaškrtnutím nebo odšktrnutím po
 
 #: admin/themes/default/settings/edit-api.php:22
 msgid "Filter Element Texts"
-msgstr ""
+msgstr "Filtrovat texty prvků"
 
 #: admin/themes/default/settings/edit-api.php:26
 msgid ""
 "Filter element texts by checking the box below. When checked, the API will "
 "respect the display element and element text filters when outputting element"
 " text representations."
-msgstr ""
+msgstr "Filtrování textů prvků zaškrtnutím políčka níže. Při zaškrtnutí políčka, bude rozhraní API respektovat zobrazovací prvek a textové filtry prvku při výstupu textových reprezentací prvku."
 
 #: admin/themes/default/settings/edit-api.php:35
 msgid "Results per Page"
@@ -1793,7 +1793,7 @@ msgstr "Budiž"
 
 #: admin/themes/default/settings/edit-search.php:10
 msgid "Search Query Type"
-msgstr ""
+msgstr "Typ vyhledávacího dotazu"
 
 #: admin/themes/default/settings/edit-search.php:13
 msgid "Select the default query type used for simple search in Omeka."
@@ -2531,7 +2531,7 @@ msgstr "Zadán neplatný typ štítku."
 
 #: application/controllers/TagsController.php:108
 msgid "Error occurred."
-msgstr ""
+msgstr "Vyskytla se chyba."
 
 #: application/controllers/ThemesController.php:32
 msgid "Invalid form submission."
@@ -2744,7 +2744,7 @@ msgstr ""
 
 #: application/forms/AppearanceSettings.php:72
 msgid "Link to File Metadata"
-msgstr ""
+msgstr "Odkaz na metadata souboru"
 
 #: application/forms/AppearanceSettings.php:73
 msgid ""
@@ -3014,7 +3014,7 @@ msgstr "Seznam povolených MIME typů pro upload souborů."
 
 #: application/forms/SecuritySettings.php:51
 msgid "reCAPTCHA Site Key"
-msgstr ""
+msgstr "Klíč webu reCAPTCHA"
 
 #: application/forms/SecuritySettings.php:52
 #, php-format
@@ -3025,7 +3025,7 @@ msgstr ""
 
 #: application/forms/SecuritySettings.php:59
 msgid "reCAPTCHA Secret Key"
-msgstr ""
+msgstr "reCAPTCHA tajný klíč"
 
 #: application/forms/SecuritySettings.php:60
 #, php-format
@@ -3414,7 +3414,7 @@ msgstr "Neplatný parametr. Funkce hasElement vyžaduje buď objekt prvku nebo i
 
 #: application/models/Job/ItemBatchEditAll.php:40
 msgid "Batch Edit All Items: No item matches the specified filters."
-msgstr ""
+msgstr "Dávková úprava všech položek: Žádná položka neodpovídá zadaným filtrům."
 
 #: application/models/Job/ItemBatchEditAll.php:47
 #, php-format
@@ -3443,7 +3443,7 @@ msgstr[3] ""
 
 #: application/models/Job/ItemBatchEditAll.php:90
 msgid "Item does not exist: it may have been deleted before processing."
-msgstr ""
+msgstr "Položka neexistuje: pravděpodobně byla před zpracováním odstraněna."
 
 #: application/models/Job/ItemBatchEditAll.php:105
 msgid "User is not allowed to delete this item."
@@ -3468,7 +3468,7 @@ msgstr ""
 
 #: application/models/Job/ItemBatchEditAll.php:158
 msgid "The item was successfully batch-edited."
-msgstr ""
+msgstr "Položka byla úspěšně dávkově upravena."
 
 #: application/models/Job/ItemBatchEditAll.php:176
 #, php-format
@@ -3707,7 +3707,7 @@ msgstr "Zobrazit položku v %s."
 
 #: application/views/scripts/collections/show.php:13
 msgid "Collection Items"
-msgstr ""
+msgstr "Prvky sbírky"
 
 #: application/views/scripts/collections/show.php:33
 #, php-format
@@ -3789,7 +3789,7 @@ msgid ""
 "Omeka Classic User Manual page on <a "
 "href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">retrieving"
 " error messages</a>."
-msgstr ""
+msgstr "Podrobnější informace o této chybě se dozvíte v uživatelské příručce Omeka Classic na stránce <a href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\"> načítání zpráv o chybách </a>."
 
 #: application/views/scripts/index.php:10
 msgid "Featured Item"

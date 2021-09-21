@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
+# Kai Metsävainio <kai.metsavainio@gmail.com>, 2021
 # Matti Lassila <matti.lassila@gmail.com>, 2012-2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Omeka\n"
+"Project-Id-Version: Omeka Classic\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2021-03-18 20:09+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2021-09-19 18:18+0000\n"
+"Last-Translator: Kai Metsävainio <kai.metsavainio@gmail.com>\n"
 "Language-Team: Finnish (Finland) (http://www.transifex.com/omeka/omeka/language/fi_FI/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -487,12 +488,12 @@ msgstr "(yhteensä %s)"
 #, php-format
 msgid "%s%d item%s has no collection."
 msgid_plural "%s%d items%s aren't in a collection."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s%d aineisto%s ei ole kokoelmaa."
+msgstr[1] "%s%d aineistoa%s ei ole kokoelmassa."
 
 #: admin/themes/default/collections/browse.php:20
 msgid "All items are in a collection."
-msgstr ""
+msgstr "Kaikki aineistot ovat kokoelmassa."
 
 #: admin/themes/default/collections/browse.php:31
 #: admin/themes/default/collections/show.php:51
@@ -572,7 +573,7 @@ msgstr "Muokkaa kokoelmaa #%s"
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Collection #%s"
-msgstr ""
+msgstr "Kokoelma #%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
@@ -680,7 +681,7 @@ msgstr "Tukifoorumi"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Back to top"
-msgstr ""
+msgstr "Takaisin ylös"
 
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
@@ -948,26 +949,26 @@ msgstr "Upotettu metadata"
 #: admin/themes/default/index.php:10
 msgid "item"
 msgid_plural "items"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "aineisto"
+msgstr[1] "aineistot"
 
 #: admin/themes/default/index.php:11
 msgid "collection"
 msgid_plural "collections"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Kokoelman aineistot"
+msgstr[1] "kokoelmat"
 
 #: admin/themes/default/index.php:12
 msgid "tag"
 msgid_plural "tags"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "avainsana"
+msgstr[1] "avainsanat"
 
 #: admin/themes/default/index.php:16
 msgid "plugin"
 msgid_plural "plugins"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "lisäosa"
+msgstr[1] "lisäosat"
 
 #: admin/themes/default/index.php:20
 msgid "user"
@@ -1022,12 +1023,12 @@ msgstr "Luo aineistotyyppi"
 #, php-format
 msgid "%s%d item%s has no type."
 msgid_plural "%s%d items%s have no type."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s%d aineistolla%s ei ole tyyppiä."
+msgstr[1] "%s%daineistoilla%s ei ole tyyppiä."
 
 #: admin/themes/default/item-types/browse.php:21
 msgid "All items have a type."
-msgstr ""
+msgstr "Kaikilla aineistoilla on tyyppi."
 
 #: admin/themes/default/item-types/browse.php:29
 msgid "Type Name"
@@ -1114,21 +1115,21 @@ msgstr "Kokoelma"
 
 #: admin/themes/default/items/batch-delete-all.php:2
 msgid "Batch Delete All Searched Items"
-msgstr ""
+msgstr "Poista kaikki etsityt aineistot."
 
 #: admin/themes/default/items/batch-delete-all.php:18
 #, php-format
 msgid "All %d items matching the search filters above will be deleted."
-msgstr ""
+msgstr "Kaikki %d hakua vastaavaa aineistoa poistetaan."
 
 #: admin/themes/default/items/batch-delete-all.php:20
 #, php-format
 msgid "All %d items will be deleted."
-msgstr ""
+msgstr "Kaikki %d aineistoa poistetaan."
 
 #: admin/themes/default/items/batch-delete-all.php:25
 msgid "Deletions will be processed in the background item by item."
-msgstr ""
+msgstr "Aineistojen poistoprosessi suoritetaan taustalla."
 
 #: admin/themes/default/items/batch-delete-all.php:36
 #: admin/themes/default/items/batch-delete.php:47
@@ -1151,22 +1152,22 @@ msgstr "Valitut aineistot poistetaan."
 
 #: admin/themes/default/items/batch-edit-all.php:2
 msgid "Batch Edit All Searched Items"
-msgstr ""
+msgstr "Erämuokkaa kaikki etsityt aineistot"
 
 #: admin/themes/default/items/batch-edit-all.php:20
 #, php-format
 msgid ""
 "Changes will be applied to all %d items matching the search filters above."
-msgstr ""
+msgstr "Muutokset toteuteaan kaikkiin %d aineestoon, jotka vastaavat yllä olevia hakusuodattimia."
 
 #: admin/themes/default/items/batch-edit-all.php:22
 #, php-format
 msgid "Changes will be applied to all %d items."
-msgstr ""
+msgstr "Muutokset toteutetaan kaikkiin %daineistoon."
 
 #: admin/themes/default/items/batch-edit-all.php:27
 msgid "Changes will be processed in the background item by item."
-msgstr ""
+msgstr "Aineiston muutokset käsitellään taustalla."
 
 #: admin/themes/default/items/batch-edit-common.php:2
 msgid "Item Metadata"
@@ -1282,21 +1283,21 @@ msgstr "Hae aineistoja"
 #: admin/themes/default/items/browse.php:128
 #, php-format
 msgid "Select all %s results"
-msgstr ""
+msgstr "Valitse kaikki %s tulokset"
 
 #: admin/themes/default/items/browse.php:26
 #: admin/themes/default/items/browse.php:129
 msgid "items selected"
-msgstr ""
+msgstr "Aineistoa valittuna"
 
 #: admin/themes/default/items/browse.php:42
 msgid "Select all rows"
-msgstr ""
+msgstr "Valitse kaikki rivit"
 
 #: admin/themes/default/items/browse.php:63
 #, php-format
 msgid "Select item \"%s\""
-msgstr ""
+msgstr "Valitse aineisto \"%s\""
 
 #: admin/themes/default/items/browse.php:108
 msgid "No Tags"
@@ -1403,19 +1404,19 @@ msgstr "Lisää hakuehto"
 #: admin/themes/default/items/search-form.php:54
 #: application/views/scripts/items/search-form.php:50
 msgid "Search Joiner"
-msgstr ""
+msgstr "Hakujen yhdistäjä"
 
 #: admin/themes/default/items/search-form.php:59
 #: application/views/helpers/ItemSearchFilters.php:108
 #: application/views/scripts/items/search-form.php:55
 msgid "AND"
-msgstr ""
+msgstr "AND"
 
 #: admin/themes/default/items/search-form.php:60
 #: application/views/helpers/ItemSearchFilters.php:106
 #: application/views/scripts/items/search-form.php:56
 msgid "OR"
-msgstr ""
+msgstr "OR"
 
 #: admin/themes/default/items/search-form.php:67
 #: application/views/scripts/items/search-form.php:63
@@ -1445,7 +1446,7 @@ msgstr "on tarkasti"
 
 #: admin/themes/default/items/search-form.php:88
 msgid "is not exactly"
-msgstr ""
+msgstr "ei ole tarkalleen"
 
 #: admin/themes/default/items/search-form.php:89
 #: application/views/scripts/items/search-form.php:84
@@ -1460,20 +1461,20 @@ msgstr "ei ole tyhjä"
 #: admin/themes/default/items/search-form.php:91
 #: application/views/scripts/items/search-form.php:86
 msgid "starts with"
-msgstr ""
+msgstr "alkaa"
 
 #: admin/themes/default/items/search-form.php:92
 #: application/views/scripts/items/search-form.php:87
 msgid "ends with"
-msgstr ""
+msgstr "päättyy"
 
 #: admin/themes/default/items/search-form.php:93
 msgid "matches"
-msgstr ""
+msgstr "osumat"
 
 #: admin/themes/default/items/search-form.php:94
 msgid "does not match"
-msgstr ""
+msgstr "ei täsmää"
 
 #: admin/themes/default/items/search-form.php:102
 #: application/views/scripts/items/search-form.php:95
@@ -1681,7 +1682,7 @@ msgstr "Haluatko varmasti poistaa lisäosan %s?"
 msgid ""
 "Warning: data associated with this plugin may be permanently deleted from "
 "the database."
-msgstr ""
+msgstr "Varoitus: tähän laajennukseen liittyvät tiedot voidaan poistaa pysyvästi tietokannasta."
 
 #: admin/themes/default/plugins/confirm-uninstall.php:14
 msgid "Yes, I want to uninstall this plugin."
@@ -1771,11 +1772,11 @@ msgstr "OK"
 
 #: admin/themes/default/settings/edit-search.php:10
 msgid "Search Query Type"
-msgstr ""
+msgstr "Haun tyyppi"
 
 #: admin/themes/default/settings/edit-search.php:13
 msgid "Select the default query type used for simple search in Omeka."
-msgstr ""
+msgstr "Valitse oletushakutyyppi, jota käytetään Omekan yksinkertaisessa haussa."
 
 #: admin/themes/default/settings/edit-search.php:19
 msgid "Search Record Types"
@@ -1829,11 +1830,11 @@ msgstr "Selaa avainsanoja"
 
 #: admin/themes/default/tags/browse.php:18
 msgid "Search tags"
-msgstr ""
+msgstr "Hae avainsanoja"
 
 #: admin/themes/default/tags/browse.php:29
 msgid "Reset results"
-msgstr ""
+msgstr "Nollaa tulokset"
 
 #: admin/themes/default/tags/browse.php:42
 msgid "Editing Tags"
@@ -1857,11 +1858,11 @@ msgstr "Poista avainsana klikkaamalla X-painiketta. Avainsanan poistaminen ei po
 
 #: admin/themes/default/tags/browse.php:58
 msgid "Count"
-msgstr ""
+msgstr "Lukumäärä"
 
 #: admin/themes/default/tags/browse.php:59
 msgid "Date created"
-msgstr ""
+msgstr "Luontiajankohta"
 
 #: admin/themes/default/tags/browse.php:74
 #: admin/themes/default/tags/browse.php:76
@@ -1870,7 +1871,7 @@ msgstr "Aineistotyypit"
 
 #: admin/themes/default/tags/browse.php:77
 msgid "All"
-msgstr ""
+msgstr "Kaikki"
 
 #: admin/themes/default/themes/browse.php:18
 #: admin/themes/default/themes/browse.php:63
@@ -2110,7 +2111,7 @@ msgstr "Kirjaudu"
 
 #: admin/themes/default/users/login.php:8
 msgid "Go to the public site"
-msgstr ""
+msgstr "Mene julkiselle sivustolle"
 
 #: admin/themes/default/users/login.php:17
 msgid "(Lost your password?)"
@@ -2322,11 +2323,11 @@ msgstr "Olet poistamassa aineiston #%s ja sen metatiedot. Samalla poistetaan kai
 #: application/controllers/ItemsController.php:368
 #: application/controllers/ItemsController.php:434
 msgid "No item to batch edit."
-msgstr ""
+msgstr "Ei eräpäivitettäviä aineistoja."
 
 #: application/controllers/ItemsController.php:242
 msgid "The deletion of all items is forbidden."
-msgstr ""
+msgstr "Kaikkien aineistojen poisto on kielletty."
 
 #: application/controllers/ItemsController.php:259
 msgid "You must choose some items to batch edit."
@@ -2364,15 +2365,15 @@ msgstr "Tietojen muuttaminen onnistui."
 
 #: application/controllers/ItemsController.php:426
 msgid "The items are checked and deleted one by one in the background."
-msgstr ""
+msgstr "Aineistot on valittu ja poistetaan yksitellen taustalla."
 
 #: application/controllers/ItemsController.php:428
 msgid "The items are checked and changed one by one in the background."
-msgstr ""
+msgstr "Kohteet tarkistetaan ja muutetaan yksitellen taustalla."
 
 #: application/controllers/ItemsController.php:430
 msgid "Check logs for success and errors."
-msgstr ""
+msgstr "Tarkista lokit onnistumisesta ja virheistä."
 
 #: application/controllers/PluginsController.php:43
 #, php-format
@@ -2509,7 +2510,7 @@ msgstr "Virheellinen tagType."
 
 #: application/controllers/TagsController.php:108
 msgid "Error occurred."
-msgstr ""
+msgstr "Tapahtui virhe."
 
 #: application/controllers/ThemesController.php:32
 msgid "Invalid form submission."
@@ -2657,13 +2658,13 @@ msgstr "Väärä käyttäjätunnus tai salasana. Yritä uudelleen."
 
 #: application/forms/AppearanceSettings.php:21
 msgid "Use Square Thumbnails"
-msgstr ""
+msgstr "Käytä neliöityjä esikatselukuvia"
 
 #: application/forms/AppearanceSettings.php:22
 msgid ""
 "Use square-cropped images by default wherever thumbnails appear in the "
 "public interface."
-msgstr ""
+msgstr "Käytä neliömäisesti rajattuja kuvia oletuksena kaikkialla, missä pikkukuvat näkyvät julkisessa käyttöliittymässä."
 
 #: application/forms/AppearanceSettings.php:27
 #: application/forms/Install.php:128
@@ -2722,16 +2723,16 @@ msgstr "Näytä kenttäryhmien otsikot"
 
 #: application/forms/AppearanceSettings.php:72
 msgid "Link to File Metadata"
-msgstr ""
+msgstr "Linkki tiedoston metatietoihin"
 
 #: application/forms/AppearanceSettings.php:73
 msgid ""
 "Have item files link to the file metadata instead of the file directly."
-msgstr ""
+msgstr "Käytä aineistotiedostosta linkkiä erilliseen metatieto-tiedostoon suoran linkin sijaan."
 
 #: application/forms/AppearanceSettings.php:83
 msgid "Admin Theme"
-msgstr ""
+msgstr "Ylläpidon teema"
 
 #: application/forms/AppearanceSettings.php:97
 msgid "Derivative Size Constraints"
@@ -2743,7 +2744,7 @@ msgstr "Näyttöasetukset"
 
 #: application/forms/AppearanceSettings.php:113
 msgid "Admin Themes"
-msgstr ""
+msgstr "Ylläpidon teemat"
 
 #: application/forms/ChangePassword.php:25
 msgid "Current Password"
@@ -2992,25 +2993,25 @@ msgstr "Listaus sallituista MIME-tyypeistä"
 
 #: application/forms/SecuritySettings.php:51
 msgid "reCAPTCHA Site Key"
-msgstr ""
+msgstr "reCAPTCHA sivuston avain"
 
 #: application/forms/SecuritySettings.php:52
 #, php-format
 msgid ""
 "Enter site key from %s. Both this and the private key must be filled in to "
 "secure public forms. Keys must be for reCAPTCHA v2."
-msgstr ""
+msgstr "Anna sivuston avain %s -sivulta. Sekä tämä sekä salainen avain on täytettävä julkisten lomakkeiden suojaamiseksi. Avainten on oltava reCAPTCHA v2: ta varten."
 
 #: application/forms/SecuritySettings.php:59
 msgid "reCAPTCHA Secret Key"
-msgstr ""
+msgstr "reCAPTCHA:n salainen avain"
 
 #: application/forms/SecuritySettings.php:60
 #, php-format
 msgid ""
 "Enter secret key from %s. Both this and the public key must be filled in to "
 "secure public forms. Keys must be for reCAPTCHA v2."
-msgstr ""
+msgstr "Anna salainen avain %s -sivulta. Sekä tämä sekä julkinen avain on täytettävä julkisten lomakkeiden suojaamiseksi. Avainten on oltava reCAPTCHA v2: ta varten."
 
 #: application/forms/SecuritySettings.php:67
 msgid ""
@@ -3392,62 +3393,62 @@ msgstr "Invalid parameter. The hasElement function requires either an element ob
 
 #: application/models/Job/ItemBatchEditAll.php:40
 msgid "Batch Edit All Items: No item matches the specified filters."
-msgstr ""
+msgstr "Erämuokkaa kaikki nimikkeet: Yksikään aineisto ei vastaa määritettyjä suodattimia."
 
 #: application/models/Job/ItemBatchEditAll.php:47
 #, php-format
 msgid "Batch Edit: Starting processing 1 item."
 msgid_plural "Batch Edit: Starting processing %d items."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Erämuokkaus: aloitetaan yhden aineiston käsittely."
+msgstr[1] "Erämuokkaus: Aloitetaan käsittelemään %d aineistoa"
 
 #: application/models/Job/ItemBatchEditAll.php:66
 #, php-format
 msgid ""
 "Batch Edit: A total of %d errors occurred during the batch process of %d "
 "items."
-msgstr ""
+msgstr "Erämuokkaus: Ilmeni yhteensä %d virhettä kun erämuokattiin %d aineistoa."
 
 #: application/models/Job/ItemBatchEditAll.php:73
 #, php-format
 msgid "Batch Edit: The item has been processed successfully."
 msgid_plural "Batch Edit: All %d items have been processed successfully."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Erämuokkaus: aineisto käsiteltiin onnistuneesti."
+msgstr[1] "Erämuokkaus: Kaikki %d aineistoa käsiteltiin onnistuneesti."
 
 #: application/models/Job/ItemBatchEditAll.php:90
 msgid "Item does not exist: it may have been deleted before processing."
-msgstr ""
+msgstr "Aineistoa ei ole olemassa: se on voitu poistaa ennen prosessia."
 
 #: application/models/Job/ItemBatchEditAll.php:105
 msgid "User is not allowed to delete this item."
-msgstr ""
+msgstr "Käyttäjä ei voi poistaa tätä aineistoa."
 
 #: application/models/Job/ItemBatchEditAll.php:112
 msgid "User is not allowed to edit this item."
-msgstr ""
+msgstr "Käyttäjä ei saa muokata tätä aineistoa."
 
 #: application/models/Job/ItemBatchEditAll.php:118
 msgid "User is not allowed to tag this item."
-msgstr ""
+msgstr "Käyttäjä ei saa merkitä tätä kohdetta."
 
 #: application/models/Job/ItemBatchEditAll.php:141
 msgid "The item was successfully deleted."
-msgstr ""
+msgstr "Aineisto poistettiin onnistuneesti."
 
 #: application/models/Job/ItemBatchEditAll.php:153
 #, php-format
 msgid "An error occured when the item was updated: %s"
-msgstr ""
+msgstr "Tapahtui virhe aineiston päivityksessä: %s"
 
 #: application/models/Job/ItemBatchEditAll.php:158
 msgid "The item was successfully batch-edited."
-msgstr ""
+msgstr "Aineisto eräpäivitettiin onnistuneesti."
 
 #: application/models/Job/ItemBatchEditAll.php:176
 #, php-format
 msgid "Batch Edit Item #%d [%d/%d]: %s"
-msgstr ""
+msgstr "Erämuokkaa aineisto #%d [%d/%d]: %s"
 
 #: application/models/Mixin/ElementText.php:292
 #, php-format
@@ -3655,7 +3656,7 @@ msgstr "Listaa tietueista ei ole saatavissa."
 #: application/views/helpers/MaxFileSize.php:44
 #, php-format
 msgid "%s MB"
-msgstr ""
+msgstr "%s mt"
 
 #: application/views/helpers/RecordUrl.php:34
 msgid "Invalid record passed while getting record URL."
@@ -3681,14 +3682,14 @@ msgstr "Näytä kokoelman %s aineistot"
 
 #: application/views/scripts/collections/show.php:13
 msgid "Collection Items"
-msgstr ""
+msgstr "Kokoelman aineistot"
 
 #: application/views/scripts/collections/show.php:33
 #, php-format
 msgid "View item"
 msgid_plural "View all %s items"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Näytä aineisto"
+msgstr[1] "Näytä kaikki %s aineistoa"
 
 #: application/views/scripts/collections/show.php:35
 msgid "There are currently no items within this collection."
@@ -3761,7 +3762,7 @@ msgid ""
 "Omeka Classic User Manual page on <a "
 "href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">retrieving"
 " error messages</a>."
-msgstr ""
+msgstr "Ohjeita yksityiskohtaisten virhetietojen selvittämiseksi löytyy <a href=\"http://omeka.org/classic/docs/Troubleshooting/Retrieving_Error_Messages/\">Omeka Classic User Manual</a>-sivuilta."
 
 #: application/views/scripts/index.php:10
 msgid "Featured Item"

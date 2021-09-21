@@ -4,16 +4,16 @@
 # 
 # Translators:
 # wfan <fanw.scu@gmail.com>, 2012
-# Hong Zhang <zhangh@unlv.nevada.edu>, 2013,2018
+# Hong Zhang <zhangh@unlv.nevada.edu>, 2013,2018,2021
 # John Flatness <john@zerocrates.org>, 2020
 # wfan <fanw.scu@gmail.com>, 2012
 msgid ""
 msgstr ""
-"Project-Id-Version: Omeka\n"
+"Project-Id-Version: Omeka Classic\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2021-03-18 20:09+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2021-03-29 15:58+0000\n"
+"Last-Translator: Hong Zhang <zhangh@unlv.nevada.edu>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/omeka/omeka/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -564,7 +564,7 @@ msgstr "从添加您的第一个馆藏开始。"
 #: application/models/Mixin/ElementText.php:791
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
-msgstr "[无标题]"
+msgstr "【无标题】"
 
 #: admin/themes/default/collections/edit.php:8
 #, php-format
@@ -682,7 +682,7 @@ msgstr "技术支持论坛"
 
 #: admin/themes/default/common/footer.php:6
 msgid "Back to top"
-msgstr ""
+msgstr "回到顶部"
 
 #: admin/themes/default/common/footer.php:8
 #: admin/themes/default/common/login-footer.php:8
@@ -1766,11 +1766,11 @@ msgstr "可以"
 
 #: admin/themes/default/settings/edit-search.php:10
 msgid "Search Query Type"
-msgstr ""
+msgstr "搜索查询类型"
 
 #: admin/themes/default/settings/edit-search.php:13
 msgid "Select the default query type used for simple search in Omeka."
-msgstr ""
+msgstr "选择Omeka简单搜索的默认查询类型。"
 
 #: admin/themes/default/settings/edit-search.php:19
 msgid "Search Record Types"
@@ -2504,7 +2504,7 @@ msgstr "给定的tagType无效。"
 
 #: application/controllers/TagsController.php:108
 msgid "Error occurred."
-msgstr ""
+msgstr "产生了错误。"
 
 #: application/controllers/ThemesController.php:32
 msgid "Invalid form submission."
@@ -2994,7 +2994,7 @@ msgstr "reCAPTCHA网站密钥"
 msgid ""
 "Enter site key from %s. Both this and the private key must be filled in to "
 "secure public forms. Keys must be for reCAPTCHA v2."
-msgstr ""
+msgstr "从%s输入网站密钥。本密钥和私钥都必须填入以保护公共表单。密钥必须是reCAPTCHA v2。"
 
 #: application/forms/SecuritySettings.php:59
 msgid "reCAPTCHA Secret Key"
@@ -3005,7 +3005,7 @@ msgstr "reCAPTCHA密钥"
 msgid ""
 "Enter secret key from %s. Both this and the public key must be filled in to "
 "secure public forms. Keys must be for reCAPTCHA v2."
-msgstr ""
+msgstr "从%s输入网站密钥。本密钥和公钥都必须填入以保护公共表单。密钥必须是reCAPTCHA v2。"
 
 #: application/forms/SecuritySettings.php:67
 msgid ""
@@ -3015,7 +3015,7 @@ msgstr "如果您想过滤表单输入字段中的HTML元素或属性，请点�
 
 #: application/forms/SecuritySettings.php:68
 msgid "Enable HTML Filtering"
-msgstr "开启HTML过滤"
+msgstr "启用HTML过滤"
 
 #: application/forms/SecuritySettings.php:73
 msgid "Allowed HTML Elements"
