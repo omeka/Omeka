@@ -51,6 +51,13 @@ endif;
 </form>
 
 </div>
+<?php echo js_tag('items'); ?>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        Omeka.Items.tagDelimiter = <?php echo js_escape(get_option('tag_delimiter')); ?>;
+        Omeka.Items.tagChoices('#metadata-tags', <?php echo js_escape(url(array('controller'=>'tags', 'action'=>'autocomplete'), 'default', array(), true)); ?>);
+    });
+</script>
 <?php
 if (!$isPartial):
     echo foot();
