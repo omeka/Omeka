@@ -3510,3 +3510,20 @@ function add_shortcode($shortcodeName, $function)
 {
     return Omeka_View_Helper_Shortcodes::addShortcode($shortcodeName, $function);
 }
+
+/**
+ * Get the markup to display an SVG icon file.
+ *
+ * @since ?
+ * @package Omeka\Function\View\Asset
+ * @uses physical_path_to()
+ * @param string $name Name of icon sans variant suffix
+ * @param string $variant Variant suffix sans dash
+ * @param string $dir Directory to search for the icon file.
+ * @return string
+ */
+function icon($name, $variant=null, $dir='images/icons'){
+    $file = physical_path_to($dir.'/'.$name.($variant ? '-'.$variant : null).'.svg');
+    $svg = $file ? file_get_contents($file) : null;
+    return $svg ? '<span class="icon '.$name.' '.$variant.'">'.$svg.'</span>' : null;
+}
