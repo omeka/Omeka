@@ -16,6 +16,13 @@ class InsertFilesForItemTest extends Omeka_Test_AppTestCase
         parent::setUpLegacy();
         $this->item = insert_item(array('public' => true));
         set_option('disable_default_file_validation', 1);
+        // Add constraints if derivatives have been added in the config file.
+        $fileDerivatives = Zend_Registry::get('bootstrap')->getResource('Config')->fileDerivatives;
+        if (!empty($fileDerivatives) && !empty($fileDerivatives->paths)) {
+            foreach ($fileDerivatives->paths->toArray() as $type => $path) {
+                set_option($type . '_constraint', 1);
+            }
+        }
     }
 
     public function assertPreConditionsLegacy()

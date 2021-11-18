@@ -1,6 +1,6 @@
 <?php foreach ($elementsForDisplay as $setName => $setElements): ?>
 <div class="element-set">
-    <?php if ($showElementSetHeadings): ?>
+    <?php if (!empty($showElementSetHeadings)): ?>
     <h2><?php echo html_escape(__($setName)); ?></h2>
     <?php endif; ?>
     <?php foreach ($setElements as $elementName => $elementInfo): ?>
