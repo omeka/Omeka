@@ -27,6 +27,7 @@
 	bottom: 0;
 	margin: 0;
 	overflow-y: auto;
+	z-index: 1000;
 
     @include screen-md {
 	    width: 160px;

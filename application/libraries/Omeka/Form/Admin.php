@@ -26,9 +26,9 @@ class Omeka_Form_Admin extends Omeka_Form
 
     protected $_hasPublicPage = false;
 
-    protected $_editGroupCssClass = 'seven columns alpha';
+    protected $_editGroupCssClass = 'edit-group seven columns alpha';
 
-    protected $_saveGroupCssClass = 'three columns omega panel';
+    protected $_saveGroupCssClass = 'save-group three columns omega panel';
 
     public function init()
     {
