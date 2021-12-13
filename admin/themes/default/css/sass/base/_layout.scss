@@ -14,9 +14,6 @@ hr {
 	@include screen-xl {
 		width: 1240px;
 	}
-	@include screen-lg {
-		width: 1240px;	
-	}
 	@include screen-md {
 		width: 1000px;	
 	}
@@ -30,9 +27,6 @@ hr {
 		box-sizing: border-box;
 	}
 	
-	@include screen-btwn-1200-1250 {
-		width: 1160px;
-	}
 	@include screen-btwn-992-1020 {
 		width: 940px;
 	}
@@ -42,9 +36,6 @@ hr {
 
 	.ten.columns {
 		@include screen-xl {
-			width: 1040px;
-		}
-		@include screen-lg {
 			width: 1040px;
 		}
 		@include screen-md {
@@ -60,125 +51,10 @@ hr {
 		    margin-left: 170px;
 		}
 		@include screen-btwn-1200-1250 {
-			margin-left: 190px;
+			margin-left: 210px;
 		}
 		@include screen-btwn-992-1020 {
 			margin-left: 160px;
-		}
-	}
-	
-	@include screen-btwn-1200-1250 {
-		.ten.columns {
-			width: 930px;
-		}
-		.nine.columns {
-			width: 88%;
-		}
-		.eight.columns {
-			width: 78%;
-		}
-		.seven.columns {
-			width: 68%;
-		}
-		.six.columns {
-		    width: 58%;
-		}
-		.five.columns {
-			width: 48%;
-		}
-		.four.columns {
-		    width: 38%;
-		}
-		.three.columns {
-			width: 28%;
-		}
-		.two.columns {
-			width: 18%;
-		}
-		.one.columns {
-			width: 8%;
-		}		
-	}
-	
-	@include screen-btwn-992-1020 {
-		.ten.columns {
-			width: 780px;
-		}
-		.nine.columns {
-			width: 88%;
-		}
-		.eight.columns {
-			width: 78%;
-		}
-		.seven.columns {
-			width: 68%;
-		}
-		.six.columns {
-		    width: 58%;
-		}
-		.five.columns {
-			width: 48%;
-		}
-		.four.columns {
-		    width: 38%;
-		}
-		.three.columns {
-			width: 28%;
-		}
-		.two.columns {
-			width: 18%;
-		}
-		.one.columns {
-			width: 8%;
-		}		
-	}
-	@include screen-btwn-768-790 {
-		.ten.columns {
-			width: 540px;
-		}
-		.nine.columns {
-			width: 88%;
-		}
-		.eight.columns {
-			width: 78%;
-		}
-		.seven.columns {
-			width: 68%;
-		}
-		.six.columns {
-		    width: 58%;
-		}
-		.five.columns {
-			width: 48%;
-		}
-		.four.columns {
-		    width: 38%;
-		}
-		.three.columns {
-			width: 28%;
-		}
-		.two.columns {
-			width: 18%;
-		}
-		.one.columns {
-			width: 8%;
-		}
-	}
-	
-	@include screen-sm {
-		.seven.columns,
-		.six.columns,
-		.five.columns,
-		.four.columns,
-		.three.columns,
-		.two.columns {
-			width: 100%;
-			margin-left: 0;
-			margin-right: 0;
-			
-			#login & {
-				width: 100% !important;
-			}
 		}
 	}
 	
@@ -199,6 +75,58 @@ hr {
 			}
 		}	
 	}
+}
+
+.edit-group,
+.content-wrapper .seven.columns.alpha {
+	width: 70%;
+	margin-right: 0;
+	padding-right: $spacing-l;
+	box-sizing: border-box;
+
+	@include screen-xs {
+		width: 100%;
+		padding-right: 0;
+	}
+}
+
+.save-group,
+.content-wrapper .three.columns.omega {
+	width: 30%;
+	margin-left: 0;
+
+	@include screen-xs {
+		width: 100%;
+	}
+}
+
+.field .field-meta,
+.field .two.columns.alpha {
+	width: calc(2/7 * 100%);
+	margin-right: 0;
+	padding-right: $spacing-l;
+	box-sizing: border-box;
+
+	@include screen-xs {
+		width: 100%;
+		padding-right: 0;
+	}
+}
+
+.field .inputs,
+.field .five.columns.omega {
+	width: calc(5/7 * 100%);
+	margin-left: 0;
+
+	@include screen-xs {
+		width: 100%;
+	}
+}
+
+.panel .field .field-meta,
+.panel .field .two.columns.alpha {
+	width: 100%;
+	padding-right: 0;
 }
 
 .section-title { 
