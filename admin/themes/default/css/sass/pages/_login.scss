@@ -5,11 +5,12 @@
 	    margin-top: 10%;
 	    text-align: center;
 	    background: white;
-	    padding: 25px;
+	    padding: 25px 0;
 	    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+		box-sizing: border-box;
 	    
 	    @include screen-xs {
-		    max-width: 260px;
+		    padding: 25px;
 	    }
 	}
 
@@ -109,5 +110,9 @@
 	
 	#required-note {
 		display: block;
+	}
+
+	.columns {
+		max-width: 100%;
 	}
 }
