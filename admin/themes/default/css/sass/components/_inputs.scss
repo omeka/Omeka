@@ -67,7 +67,7 @@ input[type=text].small {
         float: left;
         line-height: 1.5em;
         margin: 0 0 $spacing-m 0;
-        min-width: 120px;
+        width: 100%;
     }
 
     select {
