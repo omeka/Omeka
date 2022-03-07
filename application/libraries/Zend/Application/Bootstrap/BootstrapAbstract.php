@@ -225,17 +225,7 @@ abstract class Zend_Application_Bootstrap_BootstrapAbstract
     public function getClassResources()
     {
         if (null === $this->_classResources) {
-            if (version_compare(PHP_VERSION, '5.2.6') === -1) {
-                $class        = new ReflectionObject($this);
-                $classMethods = $class->getMethods();
-                $methodNames  = array();
-
-                foreach ($classMethods as $method) {
-                    $methodNames[] = $method->getName();
-                }
-            } else {
-                $methodNames = get_class_methods($this);
-            }
+            $methodNames = get_class_methods($this);
 
             $this->_classResources = array();
             foreach ($methodNames as $method) {

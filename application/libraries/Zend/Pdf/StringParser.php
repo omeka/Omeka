@@ -264,12 +264,7 @@ class Zend_Pdf_StringParser
             }
         } else {
             $start = $this->offset;
-            $compare = '';
-            if( version_compare( phpversion(), '5.2.5' ) >= 0) {
-                $compare = "()<>[]{}/%\x00\t\n\f\r ";
-            } else {
-                $compare = "()<>[]{}/%\x00\t\n\r ";
-            }
+            $compare = "()<>[]{}/%\x00\t\n\f\r ";
 
             $this->offset += strcspn($this->data, $compare, $this->offset);
 

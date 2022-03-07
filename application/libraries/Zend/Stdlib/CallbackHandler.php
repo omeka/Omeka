@@ -184,9 +184,7 @@ class Zend_Stdlib_CallbackHandler
     {
         $callback = $this->getCallback();
 
-        $isPhp54 = version_compare(PHP_VERSION, '5.4.0rc1', '>=');
-
-        if ($isPhp54 && is_string($callback)) {
+        if (is_string($callback)) {
             $this->validateStringCallbackFor54($callback);
         }
 
@@ -194,30 +192,18 @@ class Zend_Stdlib_CallbackHandler
         // reached
         switch (count($args)) {
             case 0:
-                if ($isPhp54) {
-                    return $callback();
-                }
-                return call_user_func($callback);
+                return $callback();
             case 1:
-                if ($isPhp54) {
-                    return $callback(array_shift($args));
-                }
-                return call_user_func($callback, array_shift($args));
+                return $callback(array_shift($args));
             case 2:
                 $arg1 = array_shift($args);
                 $arg2 = array_shift($args);
-                if ($isPhp54) {
-                    return $callback($arg1, $arg2);
-                }
-                return call_user_func($callback, $arg1, $arg2);
+                return $callback($arg1, $arg2);
             case 3:
                 $arg1 = array_shift($args);
                 $arg2 = array_shift($args);
                 $arg3 = array_shift($args);
-                if ($isPhp54) {
-                    return $callback($arg1, $arg2, $arg3);
-                }
-                return call_user_func($callback, $arg1, $arg2, $arg3);
+                return $callback($arg1, $arg2, $arg3);
             default:
                 return call_user_func_array($callback, $args);
         }
