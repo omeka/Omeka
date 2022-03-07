@@ -180,7 +180,7 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
      */
     public function setDisplayName($name)
     {
-        $this->_displayName = trim($name);
+        $this->_displayName = trim((string) $name);
         return $this;
     }
 
@@ -202,7 +202,7 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
      */
     public function setAuthor($author)
     {
-        $this->_author = trim($author);
+        $this->_author = trim((string) $author);
         return $this;
     }
 
@@ -224,7 +224,7 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
      */
     public function setDescription($description)
     {
-        $this->_description = trim($description);
+        $this->_description = trim((string) $description);
         return $this;
     }
 
@@ -492,7 +492,7 @@ class Plugin extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_In
      */
     public function setIniVersion($version)
     {
-        $this->_iniVersion = trim($version);
+        $this->_iniVersion = trim((string) $version);
         return $this;
     }
 
