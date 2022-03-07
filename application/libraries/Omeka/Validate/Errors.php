@@ -38,6 +38,7 @@ class Omeka_Validate_Errors extends ArrayObject
      *
      * @param mixed $key Key into array.
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($key)
     {
         if (array_key_exists($key, $this->_errors)) {
@@ -52,6 +53,7 @@ class Omeka_Validate_Errors extends ArrayObject
      * @param mixed $key Key into array.
      * @param mixed $val Value to store.
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($key, $val)
     {
         $this->_errors[$key] = $val;
@@ -73,6 +75,7 @@ class Omeka_Validate_Errors extends ArrayObject
      *
      * @return int
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return count($this->_errors);
