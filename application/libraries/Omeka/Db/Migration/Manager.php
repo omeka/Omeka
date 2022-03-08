@@ -202,7 +202,7 @@ class Omeka_Db_Migration_Manager
             if ($entry->isFile()
                 && preg_match('/^(\d*)_.*\.php$/', $entry->getFilename(), $matches) === 1
             ) {
-                $fileList[$match[1]] = $match[0];
+                $fileList[$matches[1]] = $matches[0];
             }
         }
         return $fileList;
