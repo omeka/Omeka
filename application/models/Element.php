@@ -93,7 +93,7 @@ class Element extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_I
      */
     public function setName($name)
     {
-        $this->name = trim($name);
+        $this->name = trim((string) $name);
     }
 
     /**
@@ -103,7 +103,7 @@ class Element extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_I
      */
     public function setDescription($description)
     {
-        $this->description = (string) trim($description);
+        $this->description = trim((string) $description);
     }
 
     /**
@@ -113,7 +113,7 @@ class Element extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_I
      */
     public function setComment($comment)
     {
-        $this->comment = trim($comment);
+        $this->comment = trim((string) $comment);
     }
 
     /**

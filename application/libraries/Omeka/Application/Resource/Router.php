@@ -47,7 +47,7 @@ class Omeka_Application_Resource_Router extends Zend_Application_Resource_Router
             return;
         }
 
-        $homepageUri = trim(get_option(Omeka_Form_Navigation::HOMEPAGE_URI_OPTION_NAME));
+        $homepageUri = trim((string) get_option(Omeka_Form_Navigation::HOMEPAGE_URI_OPTION_NAME));
 
         if (strpos($homepageUri, ADMIN_BASE_URL) === 0) {
             // homepage uri is an admin link
