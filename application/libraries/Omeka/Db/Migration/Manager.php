@@ -99,7 +99,12 @@ class Omeka_Db_Migration_Manager
     {
         ini_set('max_execution_time', 0);
 
-        $stop = new DateTime($endTimestamp);
+        if ($endTimestamp === null) {
+            $stop = new DateTime;
+        } else {
+            $stop = new DateTime($endTimestamp);
+        }
+
         $direction = 'up';
 
         if ($direction == 'up') {

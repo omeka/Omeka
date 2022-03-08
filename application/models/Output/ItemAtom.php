@@ -143,7 +143,7 @@ class Output_ItemAtom
             }
 
             // feed/entry/updated
-            $feedEntryUpdated = $doc->createElement('updated', date(DATE_ATOM, strtotime(metadata($item, 'Modified'))));
+            $feedEntryUpdated = $doc->createElement('updated', date(DATE_ATOM, strtotime((string) metadata($item, 'Modified'))));
             $feedEntryElement->appendChild($feedEntryUpdated);
 
             // feed/entry/link[rel=alternate]

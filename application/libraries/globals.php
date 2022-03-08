@@ -1933,8 +1933,8 @@ function browse_sort_links($links, $wrapperTags = array())
     $sortParam = Omeka_Db_Table::SORT_PARAM;
     $sortDirParam = Omeka_Db_Table::SORT_DIR_PARAM;
     $req = Zend_Controller_Front::getInstance()->getRequest();
-    $currentSort = trim($req->getParam($sortParam));
-    $currentDir = trim($req->getParam($sortDirParam));
+    $currentSort = $req->getParam($sortParam);
+    $currentDir = $req->getParam($sortDirParam);
 
     $defaults = array(
         'link_tag' => 'li',
@@ -2979,6 +2979,7 @@ function snippet_by_word_count($text, $maxWords = 20, $ellipsis = '...')
  */
 function strip_formatting($str, $allowableTags = '', $fallbackStr = '')
 {
+    $str = (string) $str;
     // Strip the tags.
     $str = strip_tags($str, $allowableTags);
     // Remove non-breaking space html entities.
@@ -3257,7 +3258,7 @@ function current_url(array $params = array())
 function is_current_url($url)
 {
     $request = Zend_Controller_Front::getInstance()->getRequest();
-    $currentUrl = $request->getRequestUri();
+    $currentUrl = (string) $request->getRequestUri();
     $baseUrl = $request->getBaseUrl();
 
     // Strip out the protocol, host, base URL, and rightmost slash before

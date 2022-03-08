@@ -404,7 +404,7 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
                 && $_SERVER['UNENCODED_URL'] != ''
                 ) {
                 $requestUri = $_SERVER['UNENCODED_URL'];
-            } elseif (isset($_SERVER['REQUEST_URI'])) {
+            } elseif (isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] !== null) {
                 $requestUri = $_SERVER['REQUEST_URI'];
                 // Http proxy reqs setup request uri with scheme and host [and port] + the url path, only use url path
                 $schemeAndHttpHost = $this->getScheme() . '://' . $this->getHttpHost();
@@ -504,6 +504,12 @@ class Zend_Controller_Request_Http extends Zend_Controller_Request_Abstract
 
             // Does the baseUrl have anything in common with the request_uri?
             $requestUri = $this->getRequestUri();
+
+            // Don't even try if the request URI is null
+            if ($requestUri === null) {
+                $this->_baseUrl = '';
+                return $this;
+            }
 
             if (0 === strpos($requestUri, $baseUrl)) {
                 // full $baseUrl matches

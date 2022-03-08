@@ -81,7 +81,7 @@ class Omeka_View_Helper_Url extends Zend_View_Helper_Abstract
 
         // If it's a string, just append it.
         if (is_string($options)) {
-            $url = rtrim($front->getBaseUrl(), '/') . '/' . ltrim($options, '/');
+            $url = rtrim((string) $front->getBaseUrl(), '/') . '/' . ltrim($options, '/');
 
         // If it's an array, assemble the URL with Zend_View_Helper_Url.
         } elseif (is_array($options)) {
