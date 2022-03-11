@@ -1032,7 +1032,7 @@ class Zend_Http_Client
                    if (! empty($query)) {
                        $query .= '&';
                    }
-                $query .= http_build_query($this->paramsGet, null, '&');
+                $query .= http_build_query($this->paramsGet, '', '&');
                 if ($this->config['rfc3986_strict']) {
                     $query = str_replace('+', '%20', $query);
                 }
