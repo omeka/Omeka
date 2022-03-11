@@ -3027,7 +3027,7 @@ function text_to_id($text, $prepend = null, $delimiter = '-')
 function url_to_link($str)
 {
     $pattern = "#(\bhttps?://\S+\b)#";
-    return preg_replace_callback($pattern, 'url_to_link_callback', $str);
+    return preg_replace_callback($pattern, 'url_to_link_callback', (string) $str);
 }
 
 /**
