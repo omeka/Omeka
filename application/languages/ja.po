@@ -2984,7 +2984,7 @@ msgstr "ファイルアップロードのバリデーションを無効化"
 msgid ""
 "Check this field if you would like to allow any file to be uploaded to "
 "Omeka."
-msgstr "Omekaにどんなファイルのアップローも許可する場合は、このフィールドをチェックしてください。"
+msgstr "Omekaにどんなファイルのアップロードも許可する場合は、このフィールドをチェックしてください。"
 
 #: application/forms/SecuritySettings.php:31
 msgid "Allowed File Extensions"
