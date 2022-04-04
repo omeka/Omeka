@@ -149,6 +149,23 @@ abstract class Zend_Http_UserAgent_AbstractDevice
         $this->_restoreFromArray($spec);
     }
 
+    public function __serialize()
+    {
+        return array(
+            '_aFeatures'      => $this->_aFeatures,
+            '_aGroup'         => $this->_aGroup,
+            '_browser'        => $this->_browser,
+            '_browserVersion' => $this->_browserVersion,
+            '_userAgent'      => $this->_userAgent,
+            '_images'         => $this->_images,
+        );
+    }
+
+    public function __unserialize(array $spec)
+    {
+        $this->_restoreFromArray($spec);
+    }
+
     /**
      * Restore object state from array
      *
