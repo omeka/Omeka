@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
+# Jan, 2021
 # sloicra <sloicra@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka Classic\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2021-09-21 20:28+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2021-11-12 12:34+0000\n"
+"Last-Translator: Jan\n"
 "Language-Team: Slovenian (Slovenia) (http://www.transifex.com/omeka/omeka/language/sl_SI/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -64,7 +65,7 @@ msgstr ""
 #: admin/themes/default/settings/edit-item-type-elements.php:27
 #: application/forms/ItemTypes.php:150
 msgid "Description"
-msgstr ""
+msgstr "Vsebina"
 
 #. Dublin Core: Description element description
 msgid "An account of the resource"
@@ -144,7 +145,7 @@ msgstr "Odnos"
 
 #. Dublin Core: Relation element description
 msgid "A related resource"
-msgstr ""
+msgstr "Soroden vir"
 
 #. Dublin Core: Coverage element name
 msgid "Coverage"
@@ -158,7 +159,7 @@ msgstr ""
 
 #. Dublin Core: Rights element name
 msgid "Rights"
-msgstr "Avtorske pravice"
+msgstr "Pravice"
 
 #. Dublin Core: Rights element description
 msgid "Information about rights held in and over the resource"
@@ -468,7 +469,7 @@ msgstr "Priporočeno"
 #: application/tests/suite/Omeka/NavigationTest.php:950
 #: application/views/scripts/collections/browse.php:2
 msgid "Browse Collections"
-msgstr "Zbirke"
+msgstr "Brskaj po zbirkah"
 
 #: admin/themes/default/collections/browse.php:2
 #: admin/themes/default/item-types/browse.php:2
@@ -495,7 +496,7 @@ msgstr[3] ""
 
 #: admin/themes/default/collections/browse.php:20
 msgid "All items are in a collection."
-msgstr ""
+msgstr "Vsi dokumenti so v zbirki."
 
 #: admin/themes/default/collections/browse.php:32
 #: admin/themes/default/collections/show.php:51
@@ -565,7 +566,7 @@ msgstr ""
 #: application/models/Mixin/ElementText.php:791
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
-msgstr ""
+msgstr "[Brez naslova]"
 
 #: admin/themes/default/collections/edit.php:8
 #, php-format
@@ -747,7 +748,7 @@ msgstr ""
 #: application/views/scripts/search/index.php:2
 #: application/views/scripts/search/search-form.php:2
 msgid "Search"
-msgstr ""
+msgstr "Iskanje"
 
 #: admin/themes/default/common/settings-nav.php:20
 msgid "Element Sets"
@@ -833,7 +834,7 @@ msgstr "Nedavni dokumenti"
 
 #: admin/themes/default/error/404.php:29 admin/themes/default/index.php:65
 msgid "Add a new item"
-msgstr ""
+msgstr "Dodaj nov dokument"
 
 #: admin/themes/default/error/404.php:36 admin/themes/default/index.php:70
 msgid "Recent Collections"
@@ -869,7 +870,7 @@ msgstr "Datoteka #%s"
 #: application/libraries/globals.php:409
 #: application/views/scripts/files/show.php:22
 msgid "Item"
-msgstr ""
+msgstr "Dokument"
 
 #: admin/themes/default/files/show.php:40
 msgid "Direct Links"
@@ -1015,16 +1016,16 @@ msgstr ""
 
 #: admin/themes/default/item-types/add-new-element.php:22
 msgid "Element Description"
-msgstr ""
+msgstr "Opis elementa"
 
 #: admin/themes/default/item-types/add.php:2
 #: admin/themes/default/item-types/add.php:11
 msgid "Add Item Type"
-msgstr ""
+msgstr "Dodaj vrsto dokumenta"
 
 #: admin/themes/default/item-types/browse.php:2
 msgid "Browse Item Types"
-msgstr ""
+msgstr "Brskaj po vrstah dokumentov"
 
 #: admin/themes/default/item-types/browse.php:9
 #: admin/themes/default/item-types/browse.php:54
@@ -1050,7 +1051,7 @@ msgstr ""
 
 #: admin/themes/default/item-types/browse.php:30
 msgid "Total Items"
-msgstr ""
+msgstr "Vsi dokumenti"
 
 #: admin/themes/default/item-types/edit.php:8
 #, php-format
@@ -1213,7 +1214,7 @@ msgstr "Ni priporočeno"
 #: admin/themes/default/items/batch-edit-common.php:33
 #: admin/themes/default/items/item-type-form.php:3
 msgid "Item Type"
-msgstr ""
+msgstr "Vrsta dokumenta"
 
 #: admin/themes/default/items/batch-edit-common.php:42
 #: admin/themes/default/items/batch-edit-common.php:57
@@ -1282,7 +1283,7 @@ msgstr ""
 #: application/views/scripts/items/browse.php:2
 #: application/views/scripts/items/tags.php:2
 msgid "Browse Items"
-msgstr ""
+msgstr "Brskaj po dokumentih"
 
 #: admin/themes/default/items/browse.php:19
 #: admin/themes/default/items/browse.php:146
@@ -1593,7 +1594,7 @@ msgstr ""
 
 #: admin/themes/default/items/show.php:93
 msgid "Bibliographic Citation"
-msgstr ""
+msgstr "Bibliografsko citiranje"
 
 #: admin/themes/default/items/tag-form.php:10
 #, php-format
@@ -1606,7 +1607,7 @@ msgstr ""
 
 #: admin/themes/default/items/tags.php:2
 msgid "Browse Items by Tag"
-msgstr ""
+msgstr "Brskaj po dokumentih glede na oznake"
 
 #: admin/themes/default/items/tags.php:9
 #: admin/themes/default/tags/browse.php:107
@@ -1842,7 +1843,7 @@ msgstr ""
 
 #: admin/themes/default/tags/browse.php:5
 msgid "Browse Tags"
-msgstr ""
+msgstr "Brskaj po oznakah"
 
 #: admin/themes/default/tags/browse.php:19
 msgid "Editing Tags"
@@ -2041,7 +2042,7 @@ msgstr ""
 
 #: admin/themes/default/users/api-keys.php:45
 msgid "Last accessed"
-msgstr ""
+msgstr "Nazadnje dostopano"
 
 #: admin/themes/default/users/api-keys.php:46
 msgid "Rescind"
@@ -2808,7 +2809,7 @@ msgstr ""
 
 #: application/forms/GeneralSettings.php:26 application/forms/Install.php:120
 msgid "Site Description"
-msgstr ""
+msgstr "Opis strani"
 
 #: application/forms/GeneralSettings.php:31 application/forms/Install.php:129
 msgid "Administrator Email"
@@ -2915,7 +2916,7 @@ msgstr ""
 
 #: application/forms/ItemTypes.php:151
 msgid "The description of the item type."
-msgstr ""
+msgstr "Opis vrste dokumenta"
 
 #: application/forms/ItemTypes.php:173 application/forms/ItemTypes.php:182
 #, php-format
@@ -3274,7 +3275,7 @@ msgstr ""
 
 #: application/libraries/globals.php:2800
 msgid "Browse All"
-msgstr ""
+msgstr "Brskaj"
 
 #: application/libraries/globals.php:2805
 msgid "Browse by Tag"
@@ -3366,7 +3367,7 @@ msgstr ""
 #: application/models/Item.php:494
 #, php-format
 msgid "accessed %1$s, %2$s."
-msgstr ""
+msgstr "dostop %1$s%2$s"
 
 #: application/models/Item.php:511
 msgid "Cannot add an existing file to an item!"
@@ -3526,7 +3527,7 @@ msgstr ""
 #: application/models/Table/Collection.php:80
 #, php-format
 msgid "[Untitled] #%s"
-msgstr ""
+msgstr "[Brez naslova] #%s"
 
 #: application/models/Table/Item.php:143
 msgid "Invalid search type given!"
@@ -3830,7 +3831,7 @@ msgstr ""
 
 #: application/views/scripts/items/show.php:36
 msgid "Citation"
-msgstr ""
+msgstr "Citiranje"
 
 #: application/views/scripts/search/search-filters.php:3
 msgid "Query:"
