@@ -139,7 +139,7 @@ class Zend_Rest_Server implements Zend_Server_Interface
      * @param string $key
      * @return string Lower cased string
      */
-    public static function lowerCase(&$value, &$key)
+    public static function lowerCase(&$value, $key)
     {
         return $value = strtolower($value);
     }
