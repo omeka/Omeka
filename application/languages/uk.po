@@ -8,14 +8,15 @@
 # Izoniz <izonizne@mail.ru>, 2013-2014
 # John Flatness <john@zerocrates.org>, 2020
 # tanya chorna <tanya.chorna@gmail.com>, 2017-2020
+# Yuliya Ilchuk, 2022
 # Yurii Kostiuk <kostyuk.yuiriy@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka Classic\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2021-09-21 20:28+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
+"PO-Revision-Date: 2011-12-08 20:30+0000\n"
+"Last-Translator: Yuliya Ilchuk, 2022\n"
 "Language-Team: Ukrainian (http://www.transifex.com/omeka/omeka/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1793,11 +1794,11 @@ msgstr "Добре"
 
 #: admin/themes/default/settings/edit-search.php:10
 msgid "Search Query Type"
-msgstr ""
+msgstr "Тип пошукового запиту"
 
 #: admin/themes/default/settings/edit-search.php:13
 msgid "Select the default query type used for simple search in Omeka."
-msgstr ""
+msgstr "Оберіть тип запиту за замовчуванням, що був використаний під час простого пошуку в Omeka"
 
 #: admin/themes/default/settings/edit-search.php:19
 msgid "Search Record Types"
@@ -1857,7 +1858,7 @@ msgstr "Редагувати теги"
 msgid ""
 "This number counts all records associated with a tag. Filtering \"Record "
 "types\" to \"Items\" will provide links to all items containing the tag."
-msgstr ""
+msgstr "Це число рахує всі записи під згаданним тегом. Сортування \"Тип запису\" як \"одиниці\" надасть посилання до всіх одиниць, що містять тег"
 
 #: admin/themes/default/tags/browse.php:23
 msgid ""
@@ -1869,7 +1870,7 @@ msgstr "Для того, щоб відредагувати назву тегу, 
 msgid ""
 "To delete a tag, click the X. Deleting a tag will not delete the tagged "
 "records."
-msgstr ""
+msgstr "Щоб видалити тег, натисніть Х. Видалення тегу не вмдалить весь затегований запис"
 
 #: admin/themes/default/tags/browse.php:33
 msgid "Search tags"
@@ -2083,7 +2084,7 @@ msgstr "Додати користувача"
 
 #: admin/themes/default/users/browse.php:37
 msgid "Options"
-msgstr ""
+msgstr "Опції"
 
 #: admin/themes/default/users/browse.php:39
 #: admin/themes/default/users/browse.php:52
@@ -2843,7 +2844,7 @@ msgstr "Шлях до ImageMagick"
 
 #: application/forms/GeneralSettings.php:69
 msgid "General Settings"
-msgstr ""
+msgstr "Загальні налаштування"
 
 #: application/forms/Install.php:31
 msgid "must be 30 characters or fewer with no whitespace"
@@ -3237,15 +3238,15 @@ msgstr "Omeka Atom стрічка новин"
 
 #: application/libraries/globals.php:1966
 msgid "Sort ascending"
-msgstr ""
+msgstr "Сортувати за зростанням"
 
 #: application/libraries/globals.php:1976
 msgid "Sorting descending"
-msgstr ""
+msgstr "Сортування за спаданням"
 
 #: application/libraries/globals.php:1980
 msgid "Sorting ascending"
-msgstr ""
+msgstr "Сортування за зростанням"
 
 #: application/libraries/globals.php:2314
 msgid "No recent items available."
@@ -3758,7 +3759,7 @@ msgstr "Попередня"
 
 #: application/views/scripts/common/pagination_control.php:36
 msgid "Page"
-msgstr ""
+msgstr "Сторінка"
 
 #: application/views/scripts/common/pagination_control.php:38
 msgid "Current Page"
@@ -3851,7 +3852,7 @@ msgstr "Записи типу:"
 
 #: application/views/scripts/search/search-form.php:2
 msgid "submit_search"
-msgstr ""
+msgstr "подати_пошук"
 
 #: application/views/scripts/search/search-form.php:6
 msgid "Search using this query type:"

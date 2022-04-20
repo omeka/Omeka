@@ -3,15 +3,16 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Jan, 2021
+# Jan Ovnik, 2021
+# Jan Ovnik, 2022
 # sloicra <sloicra@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka Classic\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
-"PO-Revision-Date: 2021-11-12 12:34+0000\n"
-"Last-Translator: Jan\n"
+"PO-Revision-Date: 2011-12-08 20:30+0000\n"
+"Last-Translator: Jan Ovnik, 2022\n"
 "Language-Team: Slovenian (Slovenia) (http://www.transifex.com/omeka/omeka/language/sl_SI/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -101,7 +102,7 @@ msgstr ""
 #. Dublin Core: Type element name
 #: admin/themes/default/items/browse.php:48
 msgid "Type"
-msgstr "Zvrst"
+msgstr "Tip"
 
 #. Dublin Core: Type element description
 msgid "The nature or genre of the resource"
@@ -193,11 +194,11 @@ msgstr "Ostali avtorji"
 
 #. Omeka Legacy File: Transcriber element
 msgid "Transcriber"
-msgstr ""
+msgstr "Prepisovalec"
 
 #. Omeka Legacy File: Producer element
 msgid "Producer"
-msgstr ""
+msgstr "Producent"
 
 #. Omeka Legacy File: Render Device element
 msgid "Render Device"
@@ -217,7 +218,7 @@ msgstr "Naprava za zajem"
 
 #. Omeka Legacy File: Capture Details element
 msgid "Capture Details"
-msgstr ""
+msgstr "Zajem podrobnosti"
 
 #. Omeka Legacy File: Change History element
 msgid "Change History"
@@ -283,7 +284,7 @@ msgstr ""
 
 #. Omeka Video File
 msgid "Omeka Video File"
-msgstr ""
+msgstr "Omeka video datoteka"
 
 #. Omeka Video File description
 msgid ""
@@ -313,15 +314,15 @@ msgstr ""
 
 #. User role: Super
 msgid "Super"
-msgstr ""
+msgstr "Super"
 
 #. User role: Admin
 msgid "Admin"
-msgstr ""
+msgstr "Administrator"
 
 #. User role: Researcher
 msgid "Researcher"
-msgstr ""
+msgstr "Raziskovalec"
 
 #: admin/themes/default/appearance/edit-navigation.php:4
 #: admin/themes/default/appearance/edit-settings.php:2
@@ -329,7 +330,7 @@ msgstr ""
 #: admin/themes/default/themes/browse.php:5
 #: admin/themes/default/themes/config.php:3
 msgid "Appearance"
-msgstr ""
+msgstr "Prikaz"
 
 #: admin/themes/default/appearance/edit-navigation.php:15
 msgid ""
@@ -352,11 +353,11 @@ msgstr ""
 #: admin/themes/default/appearance/edit-navigation.php:43
 #: application/forms/Navigation.php:135
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: admin/themes/default/appearance/edit-navigation.php:26
 msgid "Add Link"
-msgstr ""
+msgstr "Dodaj povezavo"
 
 #: admin/themes/default/appearance/edit-navigation.php:32
 #: admin/themes/default/appearance/edit-settings.php:21
@@ -413,13 +414,13 @@ msgstr "Prikaži javno stran"
 #: admin/themes/default/users/edit.php:26
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:76
 msgid "Delete"
-msgstr "Zbriši"
+msgstr "Izbriši"
 
 #: admin/themes/default/appearance/reset-navigation-confirm.php:9
 #: admin/themes/default/common/delete-confirm.php:10
 #: application/views/scripts/common/delete-confirm.php:12
 msgid "Are you sure?"
-msgstr ""
+msgstr "Ali ste prepričani?"
 
 #: admin/themes/default/appearance/reset-navigation-confirm.php:10
 msgid ""
@@ -436,7 +437,7 @@ msgstr "Dodaj zbirko"
 
 #: admin/themes/default/collections/add.php:11
 msgid "Add Collection"
-msgstr ""
+msgstr "Dodaj zbriko"
 
 #: admin/themes/default/collections/add.php:16
 #: admin/themes/default/collections/edit.php:32
@@ -502,7 +503,7 @@ msgstr "Vsi dokumenti so v zbirki."
 #: admin/themes/default/collections/show.php:51
 #: application/views/scripts/collections/browse.php:35
 msgid "Contributors"
-msgstr ""
+msgstr "Sodelavci"
 
 #: admin/themes/default/collections/browse.php:33
 #: admin/themes/default/files/show.php:66
@@ -521,7 +522,7 @@ msgstr "Skupno število dokumentov"
 #: admin/themes/default/collections/browse.php:54
 #: admin/themes/default/items/browse.php:83
 msgid "(Private)"
-msgstr ""
+msgstr "(Zasebno)"
 
 #: admin/themes/default/collections/browse.php:60
 #: admin/themes/default/collections/show.php:32
@@ -542,7 +543,7 @@ msgstr "Uredi"
 
 #: admin/themes/default/collections/browse.php:69
 msgid "No contributors"
-msgstr ""
+msgstr "Ni sodelavcev"
 
 #: admin/themes/default/collections/browse.php:90
 msgid "There are no collections on this page."
@@ -554,7 +555,7 @@ msgstr "Prikaži vse zbirke"
 
 #: admin/themes/default/collections/browse.php:93
 msgid "You have no collections."
-msgstr ""
+msgstr "Nimate nobenih zbirk"
 
 #: admin/themes/default/collections/browse.php:95
 msgid "Get started by adding your first collection."
@@ -576,7 +577,7 @@ msgstr "Uredi zbirko #%s"
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Collection #%s"
-msgstr ""
+msgstr "Zbirka #%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
@@ -602,7 +603,7 @@ msgstr "Ne"
 
 #: admin/themes/default/collections/show.php:56
 msgid "No contributors."
-msgstr ""
+msgstr "Brez sodelavcev."
 
 #: admin/themes/default/collections/show.php:62
 #: admin/themes/default/files/show.php:93
@@ -667,7 +668,7 @@ msgstr "Označevalci"
 #: application/views/scripts/common/delete-confirm.php:3
 #, php-format
 msgid "Delete %s"
-msgstr ""
+msgstr "Izbriši 1%s"
 
 #: admin/themes/default/common/footer.php:9
 #: admin/themes/default/common/login-footer.php:6
@@ -684,7 +685,7 @@ msgstr "Podporni forumi"
 
 #: admin/themes/default/common/footer.php:12
 msgid "Back to top"
-msgstr ""
+msgstr "Nazaj na vrh"
 
 #: admin/themes/default/common/footer.php:16
 #: admin/themes/default/common/login-footer.php:8
@@ -696,7 +697,7 @@ msgstr "Različica %s"
 #: admin/themes/default/common/footer.php:18
 #: admin/themes/default/system-info/index.php:2
 msgid "System Information"
-msgstr ""
+msgstr "Sistemske informacije"
 
 #: admin/themes/default/common/global-nav.php:1
 msgid "Manage Site"
@@ -736,11 +737,11 @@ msgstr "Odjava"
 #: admin/themes/default/common/settings-nav.php:6
 #: admin/themes/default/common/users-nav.php:5
 msgid "General"
-msgstr ""
+msgstr "Splošno"
 
 #: admin/themes/default/common/settings-nav.php:10
 msgid "Security"
-msgstr ""
+msgstr "Varnost"
 
 #: admin/themes/default/common/settings-nav.php:16
 #: admin/themes/default/search/index.php:2
@@ -752,15 +753,15 @@ msgstr "Iskanje"
 
 #: admin/themes/default/common/settings-nav.php:20
 msgid "Element Sets"
-msgstr ""
+msgstr "Serije elementov"
 
 #: admin/themes/default/common/settings-nav.php:26
 msgid "Item Type Elements"
-msgstr ""
+msgstr "Elementi vrste dokumenta"
 
 #: admin/themes/default/common/settings-nav.php:32
 msgid "API"
-msgstr ""
+msgstr "API"
 
 #: admin/themes/default/common/users-nav.php:11
 #: application/forms/ChangePassword.php:80
@@ -770,7 +771,7 @@ msgstr ""
 #: admin/themes/default/common/users-nav.php:17
 #: admin/themes/default/users/api-keys.php:16
 msgid "API Keys"
-msgstr ""
+msgstr "API ključi"
 
 #: admin/themes/default/element-sets/browse.php:17
 #: admin/themes/default/tags/browse.php:50
@@ -1526,7 +1527,7 @@ msgstr ""
 #: admin/themes/default/items/search-form.php:183
 #: application/views/scripts/items/search-form.php:165
 msgid "Search By Tags"
-msgstr ""
+msgstr "Išči po označevalcih"
 
 #: admin/themes/default/items/search-form.php:198
 #: application/views/scripts/items/search-form.php:178
@@ -1603,7 +1604,7 @@ msgstr ""
 
 #: admin/themes/default/items/tag-form.php:15
 msgid "All Tags"
-msgstr ""
+msgstr "Vsi označevalci"
 
 #: admin/themes/default/items/tags.php:2
 msgid "Browse Items by Tag"
@@ -1727,7 +1728,7 @@ msgstr ""
 
 #: admin/themes/default/settings/edit-api.php:11
 msgid "Enable API"
-msgstr ""
+msgstr "Omogoči API"
 
 #: admin/themes/default/settings/edit-api.php:15
 msgid "Enable or disable the API by checking or unchecking the box below."
@@ -1869,7 +1870,7 @@ msgstr ""
 
 #: admin/themes/default/tags/browse.php:33
 msgid "Search tags"
-msgstr ""
+msgstr "Išči označevalce"
 
 #: admin/themes/default/tags/browse.php:38
 #: admin/themes/default/tags/browse.php:39

@@ -3,27 +3,27 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Imanol Ortiz <imanol.ortiz@gmail.com>, 2016
+# Vibiblio Library <vietbiblio@gmail.com>, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka Classic\n"
 "Report-Msgid-Bugs-To: omeka-dev@googlegroups.com\n"
 "POT-Creation-Date: 2012-11-26 14:33-0500\n"
 "PO-Revision-Date: 2011-12-08 20:30+0000\n"
-"Last-Translator: Imanol Ortiz <imanol.ortiz@gmail.com>, 2016\n"
-"Language-Team: Basque (http://www.transifex.com/omeka/omeka/language/eu/)\n"
+"Last-Translator: Vibiblio Library <vietbiblio@gmail.com>, 2022\n"
+"Language-Team: Vietnamese (http://www.transifex.com/omeka/omeka/language/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: eu\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: vi\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Dublin Core description
 msgid ""
 "The Dublin Core metadata element set is common to all Omeka records, "
 "including items, files, and collections. For more information see, "
 "http://dublincore.org/documents/dces/."
-msgstr ""
+msgstr "Tập hợp phần tử Metadata Dublin Core chung cho tất cả records, bao gồm cả tài liệu, files, bộ sưu tập. Xem thêm thông tin, http://dublincore.org/documents/dces/."
 
 #. Dublin Core: Title element name
 #: admin/themes/default/collections/browse.php:31
@@ -33,29 +33,29 @@ msgstr ""
 #: application/views/scripts/items/browse.php:19
 #: application/views/scripts/search/index.php:14
 msgid "Title"
-msgstr "Izenburu"
+msgstr "Tiêu đề"
 
 #. Dublin Core: Title element description
 msgid "A name given to the resource"
-msgstr "Izen bat baliabideei emateko"
+msgstr "Tên của nguồn thông tin"
 
 #. Dublin Core: Creator element name
 #: admin/themes/default/items/browse.php:47
 #: application/views/scripts/items/browse.php:20
 msgid "Creator"
-msgstr "Egile"
+msgstr "Người tạo lập"
 
 #. Dublin Core: Creator element description
 msgid "An entity primarily responsible for making the resource"
-msgstr "Erakunde bat, lehen arduraduna, baliabidea egiteko"
+msgstr "Thực thể chịu trách nhiệm chính tạo ra nguồn thông tin"
 
 #. Dublin Core: Subject element name
 msgid "Subject"
-msgstr "Gaia"
+msgstr "Chủ đề"
 
 #. Dublin Core: Subject element description
 msgid "The topic of the resource"
-msgstr "Baliabideko gaia"
+msgstr "Đề tài về nội dung của nguồn thông tin"
 
 #. Dublin Core: Description element name
 #: admin/themes/default/element-sets/browse.php:18
@@ -64,119 +64,119 @@ msgstr "Baliabideko gaia"
 #: admin/themes/default/settings/edit-item-type-elements.php:27
 #: application/forms/ItemTypes.php:150
 msgid "Description"
-msgstr "Deskribapena"
+msgstr "Bản mô tả"
 
 #. Dublin Core: Description element description
 msgid "An account of the resource"
-msgstr "Baliabidearen aurkezpena"
+msgstr "Mô tả về nguồn thông tin"
 
 #. Dublin Core: Publisher element name
 msgid "Publisher"
-msgstr "Editorea"
+msgstr "Nhà xuất bản"
 
 #. Dublin Core: Publisher element description
 msgid "An entity responsible for making the resource available"
-msgstr "Erakunde bat, baliabide erabilgarria egiteko"
+msgstr "Thực thể chịu trách nhiệm tạo ra nguồn thông tin sẵn có để sử dụng"
 
 #. Dublin Core: Contributor element name
 #. User role: contributor
 msgid "Contributor"
-msgstr "Laguntzaile"
+msgstr "Người cộng tác/ Người đóng góp"
 
 #. Dublin Core: Contributor element description
 msgid "An entity responsible for making contributions to the resource"
-msgstr "Erakunde bat, baliabideei laguntasunak emateko"
+msgstr "Thực thể chịu trách nhiệm đóng góp vào nội dung nguồn thông tin."
 
 #. Dublin Core: Date element name
 msgid "Date"
-msgstr "Data"
+msgstr "Ngày tháng"
 
 #. Dublin Core: Date element description
 msgid ""
 "A point or period of time associated with an event in the lifecycle of the "
 "resource"
-msgstr ""
+msgstr "Thời điểm hoặc thời kỳ có liên quan đến mặt sự kiện trong vòng đời của nguồn thông tin"
 
 #. Dublin Core: Type element name
 #: admin/themes/default/items/browse.php:48
 msgid "Type"
-msgstr "Mota"
+msgstr "Loại hình"
 
 #. Dublin Core: Type element description
 msgid "The nature or genre of the resource"
-msgstr "Baliabideko mota edo klase"
+msgstr "Bản chất hoặc loại nguồn thông tin"
 
 #. Dublin Core: Format element name
 msgid "Format"
-msgstr "Formatu"
+msgstr "Định dạng"
 
 #. Dublin Core: Format element description
 msgid "The file format, physical medium, or dimensions of the resource"
-msgstr "Artxiboko formatu, euskarri fisiko edo baliabideko tamaina"
+msgstr "Định dạng tệp, phương tiện vật lý hoặc kích thước của nguồn thông tin"
 
 #. Dublin Core: Identifier element name
 msgid "Identifier"
-msgstr "Identifikadore"
+msgstr "Yếu tố nhận dạng"
 
 #. Dublin Core: Identifier element description
 msgid "An unambiguous reference to the resource within a given context"
-msgstr "Baliabideei erreferentzi on bat testuinguruen barruan"
+msgstr "Tham chiếu rõ ràng đến một nguồn thông tin trong một ngữ cảnh cụ thể"
 
 #. Dublin Core: Source element name
 msgid "Source"
-msgstr "Iturri"
+msgstr "Nguồn"
 
 #. Dublin Core: Source element description
 msgid "A related resource from which the described resource is derived"
-msgstr ""
+msgstr "Nguồn thông tin liên quan mà từ đó tham chiếu tới nguồn thông tin được mô tả"
 
 #. Dublin Core: Language element name
 msgid "Language"
-msgstr "Hizkuntza"
+msgstr "Ngôn ngữ"
 
 #. Dublin Core: Language element description
 msgid "A language of the resource"
-msgstr "Balizabideko hizkuntza"
+msgstr "Ngôn ngữ của nguồn thông tin"
 
 #. Dublin Core: Relation element name
 msgid "Relation"
-msgstr "Erlazio"
+msgstr "Quan hệ"
 
 #. Dublin Core: Relation element description
 msgid "A related resource"
-msgstr "Erlazioko baliabidea"
+msgstr "Nguồn thông tin liên quan"
 
 #. Dublin Core: Coverage element name
 msgid "Coverage"
-msgstr "Estaldura"
+msgstr "Diện bao quát"
 
 #. Dublin Core: Coverage element description
 msgid ""
 "The spatial or temporal topic of the resource, the spatial applicability of "
 "the resource, or the jurisdiction under which the resource is relevant"
-msgstr ""
+msgstr "Đề tài của nguồn tin liên quan đến thời gian hoặc không gian, không gian có thể áp dụng nguồn thông tin hoặc khu vực pháp quyền mà nguồn thông tin liên quan"
 
 #. Dublin Core: Rights element name
 msgid "Rights"
-msgstr "Egile-eskubideak"
+msgstr "Các quyền"
 
 #. Dublin Core: Rights element description
 msgid "Information about rights held in and over the resource"
-msgstr ""
+msgstr "Thông tin về các quyền đối với nguồn tin"
 
 #. Item Type Metadata
 msgid "Item Type Metadata"
-msgstr "Item Type Metadata"
+msgstr "Metadata loại hình tài liệu"
 
 #. Item Type Metadata description
 msgid ""
 "The item type metadata element set, consisting of all item type elements "
 "bundled with Omeka and all item type elements created by an administrator."
-msgstr ""
+msgstr "Tập hợp Metadata loại hình tài liệu, bao gồm tất cả các loại hình tài liệu đi kèm với Omeka và tất cả các loại hình tài liệu do quản trị viên tạo ra."
 
 #. Omeka Legacy File
 msgid "Omeka Legacy File"
-msgstr "Omekako Legacy-ko artxiboa "
+msgstr "File kế thừa Omeka"
 
 #. Omeka Legacy File description
 msgid ""
@@ -184,143 +184,143 @@ msgid ""
 "was included in the `files` table in previous versions of Omeka. These "
 "elements are common to all Omeka files. This set may be deprecated in future"
 " versions."
-msgstr ""
+msgstr "Bộ phần tử siêu dữ liệu, ngoài bộ phần tử Dublin Core, đã được bao gồm trong bảng `files` trong các phiên bản trước của Omeka. Những yếu tố này là chung cho tất cả các tệp Omeka. Thiết lập này có thể không được dùng nữa trong các phiên bản trong tương lai."
 
 #. Omeka Legacy File: Additional Creator element
 msgid "Additional Creator"
-msgstr "Beste egile"
+msgstr "Thêm người tạo lập"
 
 #. Omeka Legacy File: Transcriber element
 msgid "Transcriber"
-msgstr "Transkribatzailea"
+msgstr "Người sao chép"
 
 #. Omeka Legacy File: Producer element
 msgid "Producer"
-msgstr "Produktorea"
+msgstr "Người sản xuất"
 
 #. Omeka Legacy File: Render Device element
 msgid "Render Device"
-msgstr "Render-eko tresna"
+msgstr "Thiết bị kết xuất"
 
 #. Omeka Legacy File: Render Details element
 msgid "Render Details"
-msgstr "Render xehetazunak"
+msgstr "Chi tiết kết xuất"
 
 #. Omeka Legacy File: Capture Date element
 msgid "Capture Date"
-msgstr "Grabaketako data"
+msgstr "Ngày ghi lại"
 
 #. Omeka Legacy File: Capture Device element
 msgid "Capture Device"
-msgstr "Grabaketako tresna"
+msgstr "Thiết bị ghi lại"
 
 #. Omeka Legacy File: Capture Details element
 msgid "Capture Details"
-msgstr "Grabaketako xehetazunak"
+msgstr "Cho tiết ghi lại"
 
 #. Omeka Legacy File: Change History element
 msgid "Change History"
-msgstr "Historia aldatu"
+msgstr "Nhật ký thay đổi"
 
 #. Omeka Legacy File: Watermark element
 msgid "Watermark"
-msgstr "Watemark"
+msgstr "Đánh dấu"
 
 #. Omeka Legacy File: Encryption element
 msgid "Encryption"
-msgstr "Zifratu"
+msgstr "Mã hóa"
 
 #. Omeka Legacy File: Compression element
 msgid "Compression"
-msgstr "Kompresio"
+msgstr "Nén"
 
 #. Omeka Legacy File: Post Processing element
 msgid "Post Processing"
-msgstr "Prozesatu gero"
+msgstr ""
 
 #. Omeka Image File
 msgid "Omeka Image File"
-msgstr "Omekako irudiko artxiboa"
+msgstr "File ảnh Omeka"
 
 #. Omeka Image File description
 msgid ""
 "The metadata element set that was included in the `files_images` table in "
 "previous versions of Omeka. These elements are common to all image files."
-msgstr ""
+msgstr "Bộ phần tử siêu dữ liệu dược chứa trong bảng `files_images` trong các phiên bản trước của Omeka. Các yếu tố này là chung cho tất cả các tệp hình ảnh."
 
 #. Omeka Image File: Width element
 msgid "Width"
-msgstr "Zabalera"
+msgstr "Chiều rộng"
 
 #. Omeka Image File: Height element
 msgid "Height"
-msgstr "Luzera"
+msgstr "Chiều cao"
 
 #. Omeka Image File: Bit Depth element
 msgid "Bit Depth"
-msgstr "Bit-eko sakontasuna"
+msgstr "Độ sâu bit ảnh"
 
 #. Omeka Image File: Channels element
 msgid "Channels"
-msgstr "Kanalak"
+msgstr "Kênh"
 
 #. Omeka Image File: Exif String element
 msgid "Exif String"
-msgstr "Exif-eko esaldi"
+msgstr "Chuỗi Exif"
 
 #. Omeka Image File: Exif Array element
 msgid "Exif Array"
-msgstr "Exif-eko array"
+msgstr "Mảng Exif"
 
 #. Omeka Image File: IPTC String element
 msgid "IPTC String"
-msgstr "IPTC-eko esaldi"
+msgstr "Chuỗi IPTC"
 
 #. Omeka Image File: IPTC Array element
 msgid "IPTC Array"
-msgstr "IPTC-eko array"
+msgstr "Mảng ITPC"
 
 #. Omeka Video File
 msgid "Omeka Video File"
-msgstr "Omekako bideoko artxiboa"
+msgstr "Tập tin Video Omeka"
 
 #. Omeka Video File description
 msgid ""
 "The metadata element set that was included in the `files_videos` table in "
 "previous versions of Omeka. These elements are common to all video files."
-msgstr ""
+msgstr "Bộ phần tử siêu dữ liệu dược chứa trong bảng `files_videos` trong các phiên bản trước của Omeka. Các yếu tố này là chung cho tất cả các tệp video."
 
 #. Omeka Video File: Bitrate element
 msgid "Bitrate"
-msgstr "Bitrate"
+msgstr ""
 
 # Omeka Video File: Duration element
 msgid "Duration"
-msgstr "Iraupena"
+msgstr "Thời lượng"
 
 #. Omeka Video File: Sample Rate element
 msgid "Sample Rate"
-msgstr "Sample Rate"
+msgstr "Tần số lấy mẫu"
 
 #. Omeka Video File: Codec element
 msgid "Codec"
-msgstr "Kodek"
+msgstr "Bộ giải mã"
 
 #. Format (Legacy) Metadata element set
 msgid "Format (Legacy) Metadata"
-msgstr "Formatu (Legacy) Metadata"
+msgstr "Định dạng (kế thừa) Metadata"
 
 #. User role: Super
 msgid "Super"
-msgstr "Nagusi"
+msgstr ""
 
 #. User role: Admin
 msgid "Admin"
-msgstr "Administrazailea"
+msgstr ""
 
 #. User role: Researcher
 msgid "Researcher"
-msgstr "Ikertzailea"
+msgstr "Nhà nghiên cứu"
 
 #: admin/themes/default/appearance/edit-navigation.php:4
 #: admin/themes/default/appearance/edit-settings.php:2
@@ -328,34 +328,34 @@ msgstr "Ikertzailea"
 #: admin/themes/default/themes/browse.php:5
 #: admin/themes/default/themes/config.php:3
 msgid "Appearance"
-msgstr "Itxura"
+msgstr "Hình dạng bên ngoài"
 
 #: admin/themes/default/appearance/edit-navigation.php:15
 msgid ""
 "Check the links to display them in the main navigation. Click and drag the "
 "links into the preferred display order."
-msgstr ""
+msgstr "Kiểm tra các liên kết để hiển thị chúng trong điều hướng chính. Nhấp và kéo các liên kết vào thứ tự hiển thị ưa thích."
 
 #: admin/themes/default/appearance/edit-navigation.php:20
 msgid "Add a Link to the Navigation"
-msgstr "Linka gehitu"
+msgstr "Thêm liên kết để điều hướng"
 
 #: admin/themes/default/appearance/edit-navigation.php:22
 #: admin/themes/default/appearance/edit-navigation.php:42
 #: admin/themes/default/users/api-keys.php:42
 #: application/forms/Navigation.php:134
 msgid "Label"
-msgstr "Etiketa"
+msgstr "Nhãn"
 
 #: admin/themes/default/appearance/edit-navigation.php:24
 #: admin/themes/default/appearance/edit-navigation.php:43
 #: application/forms/Navigation.php:135
 msgid "URL"
-msgstr "URL"
+msgstr ""
 
 #: admin/themes/default/appearance/edit-navigation.php:26
 msgid "Add Link"
-msgstr "Linka gehitu"
+msgstr "Thêm liên kết"
 
 #: admin/themes/default/appearance/edit-navigation.php:32
 #: admin/themes/default/appearance/edit-settings.php:21
@@ -376,12 +376,12 @@ msgstr "Linka gehitu"
 #: admin/themes/default/users/edit.php:21
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:66
 msgid "Save Changes"
-msgstr "Gorde aldaketak"
+msgstr "Lưu thay đổi"
 
 #: admin/themes/default/appearance/edit-navigation.php:36
 #: admin/themes/default/appearance/reset-navigation-confirm.php:2
 msgid "Reset Navigation"
-msgstr ""
+msgstr "Thiết lập lại điều hướng"
 
 #: admin/themes/default/appearance/edit-navigation.php:44
 #: admin/themes/default/collections/edit.php:23
@@ -391,7 +391,7 @@ msgstr ""
 #: admin/themes/default/items/show.php:45
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:72
 msgid "View Public Page"
-msgstr "Orrialde publiko ikusi"
+msgstr "Xem trang công khai"
 
 #: admin/themes/default/appearance/edit-navigation.php:45
 #: admin/themes/default/collections/edit.php:25
@@ -412,30 +412,30 @@ msgstr "Orrialde publiko ikusi"
 #: admin/themes/default/users/edit.php:26
 #: application/libraries/Omeka/Form/Decorator/SavePanelAction.php:76
 msgid "Delete"
-msgstr "Ezabatu"
+msgstr "Xóa"
 
 #: admin/themes/default/appearance/reset-navigation-confirm.php:9
 #: admin/themes/default/common/delete-confirm.php:10
 #: application/views/scripts/common/delete-confirm.php:12
 msgid "Are you sure?"
-msgstr "Zihur zaude?"
+msgstr "Bạn có chắc chắn?"
 
 #: admin/themes/default/appearance/reset-navigation-confirm.php:10
 msgid ""
 "All customizations will be lost. Order and labels will revert to Omeka "
 "defaults. Custom links will be lost."
-msgstr ""
+msgstr "Tất cả các tùy chỉnh sẽ bị mất. Thứ tự và nhãn sẽ hoàn nguyên về mặc định của Omeka. Các liên kết tùy chỉnh sẽ bị mất."
 
 #: admin/themes/default/collections/add.php:2
 #: admin/themes/default/collections/browse.php:12
 #: admin/themes/default/collections/browse.php:86
 #: admin/themes/default/collections/browse.php:96
 msgid "Add a Collection"
-msgstr "Sortari gehitu"
+msgstr "Thêm một bộ sưu tập"
 
 #: admin/themes/default/collections/add.php:11
 msgid "Add Collection"
-msgstr "Sorta bat gehitu"
+msgstr "Thêm bộ sưu tập"
 
 #: admin/themes/default/collections/add.php:16
 #: admin/themes/default/collections/edit.php:32
@@ -446,7 +446,7 @@ msgstr "Sorta bat gehitu"
 #: admin/themes/default/items/quick-filters.php:4
 #: admin/themes/default/items/show.php:52
 msgid "Public"
-msgstr "Publiko"
+msgstr "Công khai"
 
 #: admin/themes/default/collections/add.php:19
 #: admin/themes/default/collections/edit.php:37
@@ -458,7 +458,7 @@ msgstr "Publiko"
 #: admin/themes/default/items/quick-filters.php:6
 #: admin/themes/default/items/show.php:53
 msgid "Featured"
-msgstr "Nabarmena"
+msgstr ""
 
 #: admin/themes/default/collections/browse.php:2
 #: application/libraries/Omeka/Navigation.php:149
@@ -468,7 +468,7 @@ msgstr "Nabarmena"
 #: application/tests/suite/Omeka/NavigationTest.php:950
 #: application/views/scripts/collections/browse.php:2
 msgid "Browse Collections"
-msgstr "Sortari begirada"
+msgstr "Duyệt các bộ sưu tập"
 
 #: admin/themes/default/collections/browse.php:2
 #: admin/themes/default/item-types/browse.php:2
@@ -482,24 +482,23 @@ msgstr "Sortari begirada"
 #: application/views/scripts/search/index.php:2
 #, php-format
 msgid "(%s total)"
-msgstr "(%s Guztia)"
+msgstr ""
 
 #: admin/themes/default/collections/browse.php:17
 #, php-format
 msgid "%s%d item%s has no collection."
 msgid_plural "%s%d items%s aren't in a collection."
 msgstr[0] ""
-msgstr[1] ""
 
 #: admin/themes/default/collections/browse.php:20
 msgid "All items are in a collection."
-msgstr ""
+msgstr "Tất cả tài liệu có trong bộ sưu tập."
 
 #: admin/themes/default/collections/browse.php:32
 #: admin/themes/default/collections/show.php:51
 #: application/views/scripts/collections/browse.php:35
 msgid "Contributors"
-msgstr "Laguntzaileak"
+msgstr ""
 
 #: admin/themes/default/collections/browse.php:33
 #: admin/themes/default/files/show.php:66
@@ -507,18 +506,18 @@ msgstr "Laguntzaileak"
 #: application/views/scripts/collections/browse.php:11
 #: application/views/scripts/items/browse.php:21
 msgid "Date Added"
-msgstr "Data eranskin"
+msgstr "Ngày tạo lập"
 
 #: admin/themes/default/collections/browse.php:34
 #: admin/themes/default/collections/show.php:46
 #: admin/themes/default/item-types/show.php:42
 msgid "Total Number of Items"
-msgstr "Item-eko guztira"
+msgstr "Tổng số tài liệu"
 
 #: admin/themes/default/collections/browse.php:54
 #: admin/themes/default/items/browse.php:83
 msgid "(Private)"
-msgstr "(Pribatu)"
+msgstr "(Riêng tư)"
 
 #: admin/themes/default/collections/browse.php:60
 #: admin/themes/default/collections/show.php:32
@@ -535,27 +534,27 @@ msgstr "(Pribatu)"
 #: admin/themes/default/items/show.php:43
 #: admin/themes/default/users/browse.php:67
 msgid "Edit"
-msgstr "Editatu"
+msgstr "Sửa"
 
 #: admin/themes/default/collections/browse.php:69
 msgid "No contributors"
-msgstr "Laguntzaleak gabe"
+msgstr ""
 
 #: admin/themes/default/collections/browse.php:90
 msgid "There are no collections on this page."
-msgstr "Ez dago sortarik orrialde honetan"
+msgstr "Không có bộ sưu tập nào trên trang này."
 
 #: admin/themes/default/collections/browse.php:90
 msgid "View All Collections"
-msgstr "Sorta guztiak ikusi"
+msgstr "Xem tất cả các bộ sưu tập"
 
 #: admin/themes/default/collections/browse.php:93
 msgid "You have no collections."
-msgstr "Zuk ez daukazu sortarik"
+msgstr "Không có bộ sưu tập nào"
 
 #: admin/themes/default/collections/browse.php:95
 msgid "Get started by adding your first collection."
-msgstr "Hasi zure lehenengo sorta gehitzen"
+msgstr "Bắt đầu bằng cách thêm bộ sưu tập đầu tiên của bạn."
 
 #: admin/themes/default/collections/edit.php:3
 #: admin/themes/default/collections/show.php:3
@@ -563,23 +562,23 @@ msgstr "Hasi zure lehenengo sorta gehitzen"
 #: application/models/Mixin/ElementText.php:791
 #: application/views/scripts/functions.php:14
 msgid "[Untitled]"
-msgstr ""
+msgstr "[Không có tiêu đề]"
 
 #: admin/themes/default/collections/edit.php:8
 #, php-format
 msgid "Edit Collection #%s"
-msgstr "Sortako editatu #%s"
+msgstr "Sửa bộ sưu tập #%s"
 
 #: admin/themes/default/collections/show.php:8
 #, php-format
 msgid "Collection #%s"
-msgstr "Sortako #%s"
+msgstr "Bộ sưu tập #%s"
 
 #: admin/themes/default/collections/show.php:18
 #: admin/themes/default/item-types/show.php:30
 #: application/views/scripts/index.php:40
 msgid "Recently Added Items"
-msgstr "Duela gutxi Items-k gehitutakoak"
+msgstr "Tài liệu mới được thêm"
 
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/collections/show.php:42
@@ -587,7 +586,7 @@ msgstr "Duela gutxi Items-k gehitutakoak"
 #: admin/themes/default/items/show.php:53
 #: application/views/helpers/ItemSearchFilters.php:68
 msgid "Yes"
-msgstr "Bai"
+msgstr ""
 
 #: admin/themes/default/collections/show.php:41
 #: admin/themes/default/collections/show.php:42
@@ -595,11 +594,11 @@ msgstr "Bai"
 #: admin/themes/default/items/show.php:53
 #: application/views/helpers/ItemSearchFilters.php:68
 msgid "No"
-msgstr "Ez"
+msgstr ""
 
 #: admin/themes/default/collections/show.php:56
 msgid "No contributors."
-msgstr "Laguntzailearik gabe"
+msgstr ""
 
 #: admin/themes/default/collections/show.php:62
 #: admin/themes/default/files/show.php:93
@@ -608,15 +607,15 @@ msgstr "Laguntzailearik gabe"
 #: application/views/scripts/items/browse.php:60
 #: application/views/scripts/items/show.php:41
 msgid "Output Formats"
-msgstr "Formatuak irteera"
+msgstr "Định dạng đầu ra"
 
 #: admin/themes/default/common/appearance-nav.php:5
 msgid "Themes"
-msgstr "Gaiak"
+msgstr "Themes"
 
 #: admin/themes/default/common/appearance-nav.php:11
 msgid "Navigation"
-msgstr "Nabigazio"
+msgstr "Điều hướng"
 
 #: admin/themes/default/common/appearance-nav.php:15
 #: admin/themes/default/common/global-nav.php:23
@@ -627,30 +626,30 @@ msgstr "Nabigazio"
 #: admin/themes/default/settings/edit-security.php:3
 #: admin/themes/default/settings/edit-settings.php:3
 msgid "Settings"
-msgstr "Doikuntzak"
+msgstr "Thiết lập cấu hình"
 
 #: admin/themes/default/common/content-nav.php:1
 msgid "Main Menu"
-msgstr "Menu nagusi"
+msgstr "Menu chính"
 
 #: admin/themes/default/common/content-nav.php:6
 #: admin/themes/default/index.php:2
 msgid "Dashboard"
-msgstr "Taula"
+msgstr "Bảng điều khiển"
 
 #: admin/themes/default/common/content-nav.php:10
 #: admin/themes/default/items/batch-delete.php:15
 #: admin/themes/default/items/batch-edit.php:17
 msgid "Items"
-msgstr "Items-k"
+msgstr "Tài liệu"
 
 #: admin/themes/default/common/content-nav.php:14
 msgid "Collections"
-msgstr "Sortak"
+msgstr "Bộ sưu tập"
 
 #: admin/themes/default/common/content-nav.php:18
 msgid "Item Types"
-msgstr "Items-eko mota"
+msgstr "Loại hình tài liệu"
 
 #: admin/themes/default/common/content-nav.php:22
 #: admin/themes/default/items/browse.php:108
@@ -658,26 +657,26 @@ msgstr "Items-eko mota"
 #: application/views/scripts/items/browse.php:46
 #: application/views/scripts/items/show.php:29
 msgid "Tags"
-msgstr "Tags"
+msgstr "Thẻ"
 
 #: admin/themes/default/common/delete-confirm.php:3
 #: application/views/scripts/common/delete-confirm.php:3
 #, php-format
 msgid "Delete %s"
-msgstr "Ezabatu %s"
+msgstr "Xóa %s"
 
 #: admin/themes/default/common/footer.php:9
 #: admin/themes/default/common/login-footer.php:6
 msgid "Powered by Omeka"
-msgstr "Omekako ekintza"
+msgstr "Được cung cấp bởi Omeka"
 
 #: admin/themes/default/common/footer.php:10
 msgid "Documentation"
-msgstr "Dokumentazioa"
+msgstr ""
 
 #: admin/themes/default/common/footer.php:11
 msgid "Support Forums"
-msgstr "Euskarriko foroak"
+msgstr ""
 
 #: admin/themes/default/common/footer.php:12
 msgid "Back to top"
@@ -688,56 +687,56 @@ msgstr ""
 #: admin/themes/default/plugins/browse.php:55
 #, php-format
 msgid "Version %s"
-msgstr "Bertsio %s"
+msgstr ""
 
 #: admin/themes/default/common/footer.php:18
 #: admin/themes/default/system-info/index.php:2
 msgid "System Information"
-msgstr "Sistemako informazioa"
+msgstr ""
 
 #: admin/themes/default/common/global-nav.php:1
 msgid "Manage Site"
-msgstr "Lekua administratu"
+msgstr ""
 
 #: admin/themes/default/common/global-nav.php:5
 #: admin/themes/default/plugins/browse.php:5
 msgid "Plugins"
-msgstr "Plugins"
+msgstr ""
 
 #: admin/themes/default/common/global-nav.php:17
 msgid "Users"
-msgstr "Erabiltzaleak"
+msgstr ""
 
 #: admin/themes/default/common/header.php:11
 #: admin/themes/default/upgrade/index.php:6
 #: application/views/scripts/common/admin-bar.php:10
 msgid "Omeka Admin"
-msgstr "Omekako administratzailea"
+msgstr ""
 
 #: admin/themes/default/common/header.php:36
 #: application/views/scripts/common/header.php:38
 msgid "Skip to main content"
-msgstr "Leku nagusira joan"
+msgstr ""
 
 #: admin/themes/default/common/header.php:58
 #: application/views/scripts/common/admin-bar.php:6
 #, php-format
 msgid "Welcome, %s"
-msgstr "Ongi etorri, %s"
+msgstr ""
 
 #: admin/themes/default/common/header.php:59
 #: application/views/scripts/common/admin-bar.php:14
 msgid "Log Out"
-msgstr "Irten"
+msgstr ""
 
 #: admin/themes/default/common/settings-nav.php:6
 #: admin/themes/default/common/users-nav.php:5
 msgid "General"
-msgstr "Nagusi"
+msgstr ""
 
 #: admin/themes/default/common/settings-nav.php:10
 msgid "Security"
-msgstr "Segurtasuna"
+msgstr ""
 
 #: admin/themes/default/common/settings-nav.php:16
 #: admin/themes/default/search/index.php:2
@@ -745,29 +744,29 @@ msgstr "Segurtasuna"
 #: application/views/scripts/search/index.php:2
 #: application/views/scripts/search/search-form.php:2
 msgid "Search"
-msgstr "Bilatu"
+msgstr ""
 
 #: admin/themes/default/common/settings-nav.php:20
 msgid "Element Sets"
-msgstr "Osagaiko doikuntzak"
+msgstr ""
 
 #: admin/themes/default/common/settings-nav.php:26
 msgid "Item Type Elements"
-msgstr "Item Type Elements"
+msgstr ""
 
 #: admin/themes/default/common/settings-nav.php:32
 msgid "API"
-msgstr "API"
+msgstr ""
 
 #: admin/themes/default/common/users-nav.php:11
 #: application/forms/ChangePassword.php:80
 msgid "Change Password"
-msgstr "Pasahitza aldatu"
+msgstr ""
 
 #: admin/themes/default/common/users-nav.php:17
 #: admin/themes/default/users/api-keys.php:16
 msgid "API Keys"
-msgstr "API giltzak"
+msgstr ""
 
 #: admin/themes/default/element-sets/browse.php:17
 #: admin/themes/default/tags/browse.php:50
@@ -775,11 +774,11 @@ msgstr "API giltzak"
 #: admin/themes/default/users/browse.php:13
 #: application/forms/ItemTypes.php:141
 msgid "Name"
-msgstr "Izena"
+msgstr ""
 
 #: admin/themes/default/element-sets/edit.php:5
 msgid "Edit Element Set"
-msgstr "Elementu set editatu"
+msgstr ""
 
 #: admin/themes/default/element-sets/edit.php:17
 msgid ""
@@ -789,20 +788,20 @@ msgstr ""
 
 #: admin/themes/default/element-sets/edit.php:29
 msgid "Comment"
-msgstr "Komentario"
+msgstr ""
 
 #: admin/themes/default/error/403.php:2
 msgid "403: Forbidden"
-msgstr "403: Debekatuta"
+msgstr ""
 
 #: admin/themes/default/error/403.php:6
 msgid "Sorry, you do not have permission to access this page."
-msgstr "Barkatu, zuk ez daukazu baimenik horri honetara joateko"
+msgstr ""
 
 #: admin/themes/default/error/403.php:10 admin/themes/default/error/404.php:9
 #: admin/themes/default/error/405.php:8
 msgid "site administrator"
-msgstr "Administratzailea lekua"
+msgstr ""
 
 #: admin/themes/default/error/403.php:11
 #, php-format
@@ -811,7 +810,7 @@ msgstr ""
 
 #: admin/themes/default/error/404.php:2
 msgid "404: Page Not Found"
-msgstr "404: Horri bilatu gabe"
+msgstr ""
 
 #: admin/themes/default/error/404.php:6
 msgid ""
@@ -827,19 +826,19 @@ msgstr ""
 
 #: admin/themes/default/error/404.php:16 admin/themes/default/index.php:52
 msgid "Recent Items"
-msgstr "Item berriak"
+msgstr ""
 
 #: admin/themes/default/error/404.php:29 admin/themes/default/index.php:65
 msgid "Add a new item"
-msgstr "Item berri bat gehitu"
+msgstr ""
 
 #: admin/themes/default/error/404.php:36 admin/themes/default/index.php:70
 msgid "Recent Collections"
-msgstr "Sorta Berriak"
+msgstr ""
 
 #: admin/themes/default/error/404.php:50 admin/themes/default/index.php:84
 msgid "Add a new collection"
-msgstr "Sorta berri bat gehitu"
+msgstr ""
 
 #: admin/themes/default/error/405.php:2
 msgid "405: Method Not Allowed"
@@ -855,19 +854,19 @@ msgstr ""
 #: admin/themes/default/files/edit.php:8
 #, php-format
 msgid "Edit File #%s"
-msgstr "Fitxategia editatu #%s"
+msgstr ""
 
 #: admin/themes/default/files/show.php:9
 #: application/views/scripts/files/show.php:9
 #, php-format
 msgid "File #%s"
-msgstr "Fitxategi #%s"
+msgstr ""
 
 #: admin/themes/default/files/show.php:35
 #: application/libraries/globals.php:409
 #: application/views/scripts/files/show.php:22
 msgid "Item"
-msgstr "Item"
+msgstr ""
 
 #: admin/themes/default/files/show.php:40
 msgid "Direct Links"
@@ -875,11 +874,11 @@ msgstr ""
 
 #: admin/themes/default/files/show.php:42
 msgid "Original"
-msgstr "Originala"
+msgstr ""
 
 #: admin/themes/default/files/show.php:44
 msgid "Fullsize"
-msgstr "Neurri osoa"
+msgstr ""
 
 #: admin/themes/default/files/show.php:45
 msgid "Thumbnail"
@@ -896,31 +895,31 @@ msgstr ""
 
 #: admin/themes/default/files/show.php:54
 msgid "Filename"
-msgstr "Fitxategi izena"
+msgstr ""
 
 #: admin/themes/default/files/show.php:56
 #: application/views/scripts/files/show.php:29
 msgid "Original Filename"
-msgstr "Fitxategiaren izen originala"
+msgstr ""
 
 #: admin/themes/default/files/show.php:58
 #: application/views/scripts/files/show.php:34
 msgid "File Size"
-msgstr "Fitxategiaren neurria"
+msgstr ""
 
 #: admin/themes/default/files/show.php:59
 #: application/views/scripts/files/show.php:35
 #, php-format
 msgid "%s bytes"
-msgstr "%s bytes"
+msgstr ""
 
 #: admin/themes/default/files/show.php:64
 msgid "File History"
-msgstr "Fitxategiko historia"
+msgstr ""
 
 #: admin/themes/default/files/show.php:68
 msgid "Date Modified"
-msgstr "Aldatuta data"
+msgstr ""
 
 #: admin/themes/default/files/show.php:70
 #: application/views/scripts/files/show.php:39
@@ -935,7 +934,7 @@ msgstr ""
 #: admin/themes/default/files/show.php:78
 #: application/views/scripts/files/show.php:47
 msgid "Mime Type"
-msgstr "Mime mota"
+msgstr ""
 
 #: admin/themes/default/files/show.php:80
 #: application/views/scripts/files/show.php:51
@@ -950,31 +949,26 @@ msgstr ""
 msgid "item"
 msgid_plural "items"
 msgstr[0] ""
-msgstr[1] ""
 
 #: admin/themes/default/index.php:11
 msgid "collection"
 msgid_plural "collections"
-msgstr[0] "Sorta"
-msgstr[1] "Sortak"
+msgstr[0] ""
 
 #: admin/themes/default/index.php:12
 msgid "tag"
 msgid_plural "tags"
 msgstr[0] ""
-msgstr[1] ""
 
 #: admin/themes/default/index.php:16
 msgid "plugin"
 msgid_plural "plugins"
 msgstr[0] ""
-msgstr[1] ""
 
 #: admin/themes/default/index.php:20
 msgid "user"
 msgid_plural "users"
 msgstr[0] ""
-msgstr[1] ""
 
 #: admin/themes/default/index.php:24
 msgid "theme"
@@ -982,7 +976,7 @@ msgstr ""
 
 #: admin/themes/default/index.php:35
 msgid "A new version of Omeka is available for download."
-msgstr "Omekako bertsio bat dago deskargatuko"
+msgstr ""
 
 #: admin/themes/default/index.php:36
 #, php-format
@@ -995,20 +989,20 @@ msgstr ""
 #: admin/themes/default/items/tag-form.php:23
 #: application/views/helpers/ElementInput.php:124
 msgid "Remove"
-msgstr "Ezabatu"
+msgstr ""
 
 #: admin/themes/default/item-types/add-new-element.php:6
 msgid "Element Name"
-msgstr "Elementuaren izena"
+msgstr ""
 
 #: admin/themes/default/item-types/add-new-element.php:22
 msgid "Element Description"
-msgstr "Elementuaren describapena"
+msgstr ""
 
 #: admin/themes/default/item-types/add.php:2
 #: admin/themes/default/item-types/add.php:11
 msgid "Add Item Type"
-msgstr "Item-eko mota gehitu"
+msgstr ""
 
 #: admin/themes/default/item-types/browse.php:2
 msgid "Browse Item Types"
@@ -1024,7 +1018,6 @@ msgstr ""
 msgid "%s%d item%s has no type."
 msgid_plural "%s%d items%s have no type."
 msgstr[0] ""
-msgstr[1] ""
 
 #: admin/themes/default/item-types/browse.php:19
 msgid "All items have a type."
@@ -1032,11 +1025,11 @@ msgstr ""
 
 #: admin/themes/default/item-types/browse.php:28
 msgid "Type Name"
-msgstr "Motako izena"
+msgstr ""
 
 #: admin/themes/default/item-types/browse.php:30
 msgid "Total Items"
-msgstr "Item osoak"
+msgstr ""
 
 #: admin/themes/default/item-types/edit.php:8
 #, php-format
@@ -1058,18 +1051,18 @@ msgstr ""
 #: admin/themes/default/item-types/form.php:25
 #: admin/themes/default/item-types/show.php:16
 msgid "Elements"
-msgstr "Elementuak"
+msgstr ""
 
 #: admin/themes/default/item-types/form.php:42
 #: admin/themes/default/items/tag-form.php:22
 #: admin/themes/default/settings/edit-item-type-elements.php:22
 msgid "Undo"
-msgstr "atzera"
+msgstr ""
 
 #: admin/themes/default/item-types/form.php:80
 #: admin/themes/default/item-types/form.php:87
 msgid "Add Element"
-msgstr "elementu gehitu"
+msgstr ""
 
 #: admin/themes/default/item-types/form.php:84
 msgid "Existing"
@@ -1077,7 +1070,7 @@ msgstr ""
 
 #: admin/themes/default/item-types/form.php:85
 msgid "New"
-msgstr "berria"
+msgstr ""
 
 #: admin/themes/default/item-types/show.php:8
 #, php-format
@@ -1086,7 +1079,7 @@ msgstr ""
 
 #: admin/themes/default/item-types/show.php:25
 msgid "There are no elements."
-msgstr "Ez dago elementurik"
+msgstr ""
 
 #: admin/themes/default/item-types/show.php:39
 msgid "There are no recently added items."
@@ -1097,11 +1090,11 @@ msgstr ""
 #: admin/themes/default/items/browse.php:144
 #: admin/themes/default/items/browse.php:171
 msgid "Add an Item"
-msgstr "Item bat gehitu"
+msgstr ""
 
 #: admin/themes/default/items/add.php:12
 msgid "Add Item"
-msgstr "Item gehitu"
+msgstr ""
 
 #: admin/themes/default/items/add.php:32
 #: admin/themes/default/items/batch-edit-common.php:48
@@ -1111,7 +1104,7 @@ msgstr "Item gehitu"
 #: application/libraries/globals.php:411
 #: application/views/scripts/items/show.php:21
 msgid "Collection"
-msgstr "Sorta"
+msgstr ""
 
 #: admin/themes/default/items/batch-delete-all.php:2
 msgid "Batch Delete All Searched Items"
@@ -1135,7 +1128,7 @@ msgstr ""
 #: admin/themes/default/items/batch-delete.php:47
 #: admin/themes/default/items/batch-edit.php:45
 msgid "Delete Items"
-msgstr "Item ezabatu"
+msgstr ""
 
 #: admin/themes/default/items/batch-delete.php:2
 msgid "Batch Delete Items"
@@ -1175,36 +1168,36 @@ msgstr ""
 
 #: admin/themes/default/items/batch-edit-common.php:6
 msgid "Public?"
-msgstr "Publiko"
+msgstr ""
 
 #: admin/themes/default/items/batch-edit-common.php:9
 #: admin/themes/default/items/batch-edit-common.php:23
 #: admin/themes/default/items/batch-edit-common.php:37
 #: admin/themes/default/items/batch-edit-common.php:52
 msgid "Select Below"
-msgstr "Behera aukeratu"
+msgstr ""
 
 #: admin/themes/default/items/batch-edit-common.php:11
 msgid "Not Public"
-msgstr "Ez da publiko"
+msgstr ""
 
 #: admin/themes/default/items/batch-edit-common.php:20
 msgid "Featured?"
-msgstr "¿Nabarmena?"
+msgstr ""
 
 #: admin/themes/default/items/batch-edit-common.php:25
 msgid "Not Featured"
-msgstr "Ez da nabarmen"
+msgstr ""
 
 #: admin/themes/default/items/batch-edit-common.php:33
 #: admin/themes/default/items/item-type-form.php:3
 msgid "Item Type"
-msgstr "Item mota"
+msgstr ""
 
 #: admin/themes/default/items/batch-edit-common.php:42
 #: admin/themes/default/items/batch-edit-common.php:57
 msgid "Remove?"
-msgstr "¿Ezabatu?"
+msgstr ""
 
 #: admin/themes/default/items/batch-edit-common.php:63
 #: admin/themes/default/items/tag-form.php:8
@@ -1301,34 +1294,33 @@ msgstr ""
 
 #: admin/themes/default/items/browse.php:109
 msgid "No Tags"
-msgstr "Ez dago Tags"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:157
 msgid "Details"
-msgstr "Xehetasunak"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:158
 msgid "Show Details"
-msgstr "Xehetasunak erakutsi"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:159
 msgid "Hide Details"
-msgstr "Xehetasunak ezkutatu"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:168
 msgid "You have no items."
-msgstr "Zuk ez daukazu Item"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:170
 msgid "Get started by adding your first item."
-msgstr "Hasi lehen item gehitu"
+msgstr ""
 
 #: admin/themes/default/items/browse.php:175
 #, php-format
 msgid "The query searched 1 item and returned no results."
 msgid_plural "The query searched %s items and returned no results."
 msgstr[0] ""
-msgstr[1] ""
 
 #: admin/themes/default/items/browse.php:176
 msgid "refine your search"
@@ -1342,7 +1334,7 @@ msgstr ""
 #: admin/themes/default/items/edit.php:8
 #, php-format
 msgid "Edit Item #%s"
-msgstr "Item editatu #%s"
+msgstr ""
 
 #: admin/themes/default/items/files-form.php:2
 msgid "Click and drag the files into the preferred display order."
@@ -3422,7 +3414,6 @@ msgstr ""
 msgid "Batch Edit: Starting processing 1 item."
 msgid_plural "Batch Edit: Starting processing %d items."
 msgstr[0] ""
-msgstr[1] ""
 
 #: application/models/Job/ItemBatchEditAll.php:66
 #, php-format
@@ -3436,7 +3427,6 @@ msgstr ""
 msgid "Batch Edit: The item has been processed successfully."
 msgid_plural "Batch Edit: All %d items have been processed successfully."
 msgstr[0] ""
-msgstr[1] ""
 
 #: application/models/Job/ItemBatchEditAll.php:90
 msgid "Item does not exist: it may have been deleted before processing."
@@ -3711,7 +3701,6 @@ msgstr ""
 msgid "View item"
 msgid_plural "View all %s items"
 msgstr[0] ""
-msgstr[1] ""
 
 #: application/views/scripts/collections/show.php:35
 msgid "There are currently no items within this collection."
