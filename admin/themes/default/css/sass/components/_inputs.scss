@@ -212,6 +212,11 @@ select {
     background-color: #fff;
 }
 
+select[multiple="multiple"] {
+    background: none;
+    padding-right: 9px;
+}
+
 .quick-filter {
     margin-bottom: 20px;
 }
