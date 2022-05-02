@@ -21,7 +21,7 @@
     <?php else: ?>
         <?php echo $this->formHidden('query_type', $filters['query_type']); ?>
         <?php foreach ($filters['record_types'] as $type): ?>
-        <?php echo $this->formHidden('record_types[]', $type); ?>
+        <?php echo $this->formHidden('record_types[]', $type, array('id' => '')); ?>
         <?php endforeach; ?>
     <?php endif; ?>
     <?php echo $this->formButton('submit_search', $options['submit_value'], array('type' => 'submit')); ?>
