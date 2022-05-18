@@ -199,7 +199,8 @@ hr {
   width: calc(2/7 * 100%);
   margin-right: 0;
   padding-right: 20px;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  float: left; }
   @media (max-width: 767px) {
     .field .field-meta,
     .field .two.columns.alpha {
@@ -209,7 +210,8 @@ hr {
 .field .inputs,
 .field .five.columns.omega {
   width: calc(5/7 * 100%);
-  margin-left: 0; }
+  margin-left: 0;
+  float: left; }
   @media (max-width: 767px) {
     .field .inputs,
     .field .five.columns.omega {

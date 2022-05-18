@@ -106,6 +106,7 @@ hr {
 	margin-right: 0;
 	padding-right: $spacing-l;
 	box-sizing: border-box;
+	float: left;
 
 	@include screen-xs {
 		width: 100%;
@@ -117,6 +118,7 @@ hr {
 .field .five.columns.omega {
 	width: calc(5/7 * 100%);
 	margin-left: 0;
+	float: left;
 
 	@include screen-xs {
 		width: 100%;
