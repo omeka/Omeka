@@ -206,9 +206,21 @@ class User extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     public static function upgradeHashedPassword($username, $password)
     {
         $userTable = get_db()->getTable('User');
-        $user = $userTable->findBySql("username = ? AND salt IS NULL AND password = SHA1(?)",
-                                             array($username, $password), true);
+        $user = $userTable->findBySql("username = ?", array($username), true);
         if (!$user) {
+            return false;
+        }
+        // Check unsalted SHA1 password format (with match)
+        if (empty($user->salt) && $user->password != sha1($password)) {
+            return false;
+        }
+        // Check salted SHA1 password format (with match)
+        if (!empty($user->salt) && $user->salt != 'bcrypt' 
+            && $user->password != sha1($user->salt . $password)) {
+            return false;
+        }
+        // Check bcrypt password format
+        if (!empty($user->salt) && $user->salt == 'bcrypt') {
             return false;
         }
         $user->setPassword($password);
@@ -261,10 +273,8 @@ class User extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      */
     public function setPassword($password)
     {
-        if ($this->salt === null) {
-            $this->generateSalt();
-        }
         $this->password = $this->hashPassword($password);
+        $this->salt = 'bcrypt';
     }
 
     /**
@@ -275,6 +285,6 @@ class User extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      */
     public function hashPassword($password)
     {
-        return sha1($this->salt . $password);
+        return password_hash($password, PASSWORD_BCRYPT);
     }
 }
