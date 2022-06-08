@@ -210,8 +210,8 @@ class User extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         if (!$user) {
             return false;
         }
-        // Check unsalted SHA1 password format (with match)
-        if (empty($user->salt) && $user->password != sha1($password)) {
+        // Check bcrypt password format
+        if (!empty($user->salt) && $user->salt == 'bcrypt') {
             return false;
         }
         // Check salted SHA1 password format (with match)
@@ -219,8 +219,8 @@ class User extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
             && $user->password != sha1($user->salt . $password)) {
             return false;
         }
-        // Check bcrypt password format
-        if (!empty($user->salt) && $user->salt == 'bcrypt') {
+        // Check unsalted SHA1 password format (with match)
+        if (empty($user->salt) && $user->password != sha1($password)) {
             return false;
         }
         $user->setPassword($password);
