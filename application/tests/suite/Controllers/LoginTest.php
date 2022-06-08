@@ -30,9 +30,7 @@ class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
         $newUser = $dbAdapter->fetchRow("SELECT `salt`, `password` FROM omeka_users WHERE id = 1");
         $this->assertNotNull($newUser);
         $this->assertEquals($newUser['salt'], 'bcrypt');
-        $this->assertTrue((version_compare(PHP_VERSION, '5.5.0') >= 0) ?
-            password_verify('foobar', $newUser['password']) : 
-            (crypt('foobar', substr($newUser['password'], 0, 29).'$') == $newUser['password']));
+        $this->assertTrue(password_verify('foobar', $newUser['password']));
     }
 
     public function testUpgradingSaltedPasswordForUser()
@@ -52,9 +50,7 @@ class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
         $newUser = $dbAdapter->fetchRow("SELECT `salt`, `password` FROM omeka_users WHERE id = 1");
         $this->assertNotNull($newUser);
         $this->assertEquals($newUser['salt'], 'bcrypt');
-        $this->assertTrue((version_compare(PHP_VERSION, '5.5.0') >= 0) ?
-            password_verify('barbaz', $newUser['password']) : 
-            (crypt('barbaz', substr($newUser['password'], 0, 29).'$') == $newUser['password']));
+        $this->assertTrue(password_verify('barbaz', $newUser['password']));
     }
 
     public function testValidLogin()

@@ -285,6 +285,6 @@ class User extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      */
     public function hashPassword($password)
     {
-        return (version_compare(PHP_VERSION, '5.5.0') >= 0) ? password_hash($password, PASSWORD_BCRYPT) : crypt($password, '$2a$10$'.substr(base64_encode(sha1(mt_rand())), 0, 22).'$');
+        return password_hash($password, PASSWORD_BCRYPT);
     }
 }
