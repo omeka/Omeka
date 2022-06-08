@@ -130,8 +130,10 @@ class Omeka_Controllers_ChangePasswordTest extends Omeka_Test_AppTestCase
 
     private function _assertPasswordIs($pass, $msg = '')
     {
-        $this->assertTrue(password_verify($pass,
-            $this->db->fetchOne("SELECT password FROM omeka_users WHERE id = 1")),
+        $passHash = $this->db->fetchOne("SELECT password FROM omeka_users WHERE id = 1");
+        $this->assertTrue((version_compare(PHP_VERSION, '5.5.0') >= 0) ?
+            password_verify($pass, $passHash) : 
+            (crypt($pass, substr($passHash, 0, 29).'$') == $passHash),
             $msg);
     }
 

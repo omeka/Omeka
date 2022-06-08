@@ -42,7 +42,9 @@ class Omeka_Auth_Adapter_UserTable extends Zend_Auth_Adapter_DbTable
         $resultIdentities = parent::_authenticateQuerySelect($dbSelect);
         $correctResult = array();
         foreach ($resultIdentities as $identity) {
-            if (password_verify($this->_credential, $identity['password'])) {
+            if ((version_compare(PHP_VERSION, '5.5.0') >= 0) ? 
+                password_verify($this->_credential, $identity['password']) :
+                (crypt($this->_credential, substr($identity['password'], 0, 29).'$') == $identity['password'])) {
                 $identity['zend_auth_credential_match'] = 1;
                 $correctResult[] = $identity;
             }
