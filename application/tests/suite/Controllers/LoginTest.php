@@ -27,10 +27,10 @@ class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
         // that the user account was upgraded to use bcrypt.
         $this->_login('foobar123', 'foobar');
         $this->assertRedirectTo('/', $this->getResponse()->getBody());
-        $newUser = $dbAdapter->fetchOne("SELECT `salt`, `password` FROM omeka_users WHERE id = 1");
+        $newUser = $dbAdapter->fetchRow("SELECT `salt`, `password` FROM omeka_users WHERE id = 1");
         $this->assertNotNull($newUser);
         $this->assertEquals($newUser['salt'], 'bcrypt');
-        $this->assert(password_verify('foobar', $newUser['password']));
+        $this->assertTrue(password_verify('foobar', $newUser['password']));
     }
 
     public function testUpgradingSaltedPasswordForUser()
@@ -39,7 +39,7 @@ class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
         $dbAdapter = $this->db->getAdapter();
         // Reset the username/pass to the old style (SHA1 w/ salt).
         $dbAdapter->update('omeka_users',
-                            array('password' => sha1('0123456789abcdef', 'barbaz'),
+                            array('password' => sha1('0123456789abcdef' . 'barbaz'),
                                   'salt' => '0123456789abcdef'),
                            'id = 1');
 
@@ -47,10 +47,10 @@ class Omeka_Controller_LoginTest extends Omeka_Test_AppTestCase
         // that the user account was upgraded to use bcrypt.
         $this->_login('foobar123', 'barbaz');
         $this->assertRedirectTo('/', $this->getResponse()->getBody());
-        $newUser = $dbAdapter->fetchOne("SELECT `salt`, `password` FROM omeka_users WHERE id = 1");
+        $newUser = $dbAdapter->fetchRow("SELECT `salt`, `password` FROM omeka_users WHERE id = 1");
         $this->assertNotNull($newUser);
         $this->assertEquals($newUser['salt'], 'bcrypt');
-        $this->assert(password_verify('barbaz', $newUser['password']));
+        $this->assertTrue(password_verify('barbaz', $newUser['password']));
     }
 
     public function testValidLogin()
