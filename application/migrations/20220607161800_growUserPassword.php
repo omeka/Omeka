@@ -15,6 +15,6 @@ class growUserPassword extends Omeka_Db_Migration_AbstractMigration
 {
     public function up()
     {
-        $this->db->query("ALTER TABLE {$this->db->User} MODIFY `password` VARCHAR(64) NOT NULL");
+        $this->db->query("ALTER TABLE {$this->db->User} MODIFY `password` VARCHAR(255) NOT NULL");
     }
 }
