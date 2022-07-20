@@ -218,7 +218,9 @@ hr {
       width: 100%; } }
 
 .panel .field .field-meta,
-.panel .field .two.columns.alpha {
+.panel .field .inputs,
+.panel .field .two.columns.alpha,
+.panel .field .five.columns.omega {
   width: 100%;
   padding-right: 0; }
 
