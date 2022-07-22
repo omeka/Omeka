@@ -2841,6 +2841,14 @@ form.form-inline.editableform {
 #current-image .crop {
   height: 225px;
   overflow: hidden; }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #current-image .crop {
+      height: 136px; } }
+  @media (max-width: 767px) {
+    #current-image .crop {
+      width: 100%;
+      height: 0;
+      padding-bottom: 66.66%; } }
 #current-image img {
   width: 100%; }
 
@@ -2849,7 +2857,8 @@ form.form-inline.editableform {
   border-bottom: 1px solid #ddd;
   padding-bottom: 20px;
   margin-bottom: 20px;
-  float: left; }
+  float: left;
+  display: flex; }
   #current-theme h2 {
     margin-bottom: 0; }
   #current-theme ul {
@@ -2859,6 +2868,9 @@ form.form-inline.editableform {
     list-style: none; }
   #current-theme li {
     padding: 5px 5px 5px 10px; }
+  @media (max-width: 767px) {
+    #current-theme {
+      display: block; } }
 
 .current-theme-label {
   color: #82423B; }
@@ -2907,7 +2919,7 @@ form.form-inline.editableform {
 .meta h3 {
   margin-bottom: 0; }
 
-@media (min-width: 768px) and (max-width: 991px) {
+@media (max-width: 767px) {
   .themes .theme .crop,
   .use-theme {
     width: calc(50% - 5px);

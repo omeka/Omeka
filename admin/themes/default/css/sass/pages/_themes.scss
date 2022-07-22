@@ -5,6 +5,16 @@
 	.crop {
 	    height: 225px;
 	    overflow: hidden;
+
+        @include screen-sm {
+            height: 136px;
+        }
+
+        @include screen-xs {
+            width: 100%;
+            height: 0;
+            padding-bottom: 66.66%;
+        }
 	}
 
 	img { width: 100%; }
@@ -16,6 +26,7 @@
     padding-bottom: $spacing-l;
     margin-bottom: $spacing-l;
     float: left;
+    display: flex;
 
     h2 {
         margin-bottom: 0;
@@ -33,6 +44,10 @@
     li {
         padding: $spacing-s $spacing-s $spacing-s $spacing-m
     }
+
+    @include screen-xs {
+        display: block;
+    }
 }
 .current-theme-label {
 	color: $darkred;
@@ -46,6 +61,7 @@
         margin-bottom: 40px;
     }
 }
+
 
 .themes .theme .author {
     font-style: italic;
@@ -88,7 +104,7 @@
 
 .themes .theme .crop,
 .use-theme {
-    @include screen-sm {
+    @include screen-xs {
         width: calc(50% - 5px);
         float: left;
         margin-right: $spacing-m;    
