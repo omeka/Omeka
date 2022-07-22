@@ -2614,9 +2614,13 @@ ul.details {
   border-bottom: 1px solid #E4E5DE;
   margin-left: -10px;
   width: 100%;
-  padding: 20px 10px; }
+  padding: 20px 10px;
+  display: flex; }
   .plugins.browse .plugin:last-child {
     border-bottom: none; }
+  @media (max-width: 767px) {
+    .plugins.browse .plugin {
+      display: block; } }
 .plugins.browse .details {
   list-style-type: none;
   padding-left: 10px; }
@@ -2636,7 +2640,7 @@ ul.details {
 .plugins.browse a.button,
 .plugins.browse input[type=submit] {
   width: 100%;
-  margin-bottom: spacing-m; }
+  margin-bottom: 10px; }
 .plugins.browse .action-links li:after {
   content: none; }
 .plugins.browse .cannotload {
@@ -2652,6 +2656,16 @@ ul.details {
   .plugin-row:last-child {
     border-bottom: 0; }
 
+@media (max-width: 991px) {
+  .plugin {
+    flex-wrap: wrap; }
+
+  .container-twelve .plugin .columns {
+    width: 100%;
+    margin: 0; }
+
+  .plugin .four.columns .action-links li {
+    width: 100%; } }
 .plugin-title {
   clear: left; }
 

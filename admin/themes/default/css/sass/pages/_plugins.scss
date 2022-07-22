@@ -51,10 +51,15 @@
 	    margin-left: -$spacing-m;
 	    width: 100%;
 	    padding: $spacing-l $spacing-m;
+		display: flex;
 	    
 	    &:last-child {
 		    border-bottom: none;
 	    }
+
+		@include screen-xs {
+			display: block;
+		}
 	}
 	
 	.details {
@@ -85,7 +90,7 @@
 	a.button,
 	input[type=submit] {
 	    width: 100%;
-	    margin-bottom: spacing-m;
+	    margin-bottom: $spacing-m;
 	}
 	
 	.action-links li:after { content: none; }
@@ -103,6 +108,21 @@
     &:last-child {
         border-bottom: 0;
     }
+}
+
+@include screen-ltmd {
+	.plugin {
+		flex-wrap: wrap;
+	}
+
+	.container-twelve .plugin .columns {
+		width: 100%;
+		margin: 0;
+	}
+
+	.plugin .four.columns .action-links li {
+		width: 100%;
+	}
 }
 
 .plugin-title {
